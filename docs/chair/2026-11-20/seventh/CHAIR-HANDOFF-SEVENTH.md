@@ -142,6 +142,18 @@ parts of the whole check (at the close).
   cannot cover production: the read-only check of V10-8 and the two revokes need the owner's own hands on the
   database; no seat holds a production credential.
 
+- **2026-11-20, between the clock's readings of 01:50 and 01:53 UTC, the owner (verbatim):** "supabase secured now".
+  TAKEN AS: the two revokes of V10-8 (`surveyor_byok_get(uuid, text)`, `_surveyor_byok_secret()`) were run on
+  production by the owner's own hand. NOT VERIFIED BY ANY SEAT (nobody here holds a production credential). ASKED OF
+  THE OWNER in reply (recorded 01:55 UTC): what the read-only check printed BEFORE the revokes (true means the keys could
+  have been read: the API logs are then searched for `rpc/surveyor_byok_get` and `rpc/_surveyor_byok_secret`, and the
+  stored keys treated as seen); the count of stored keys; whether anything more was run. TOLD in the same reply: the
+  class is wider and PROBABLY STILL OPEN (the admin functions that let the caller name the actor, the premium
+  downgrade, the audit log's writer: found on local chains, not checked on production), with ONE read-only query
+  (every function of schema public that anon may execute) whose pasted result lets SEC-GRANTS match its script to
+  the real database; not to close the rest by hand (a wrong revoke breaks saving or sharing): the proven script
+  comes; never to paste a key or the secret into the chat.
+
 ## 2. Rulings of this chair (each vetoable by the owner)
 
 - **SV1 (00:05 UTC, 2026-11-20): THE VEIL'S LIST ON THREE MACHINES.** VEIL-19 owns 212, its rollback and the twin's
@@ -607,3 +619,55 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   `lane/review-veil-11-2026-11-20` from the veil lane's tip. TEN SEATS OPENED BY THIS CHAIR: running VEIL-19 (to its
   hand-back), VEIL-20, VEIL-VR17, VEIL-DOORS, SEC-GRANTS, REVIEW-VEIL-11, CI-FIT, GIT-DOOR; REVIEW-VEIL-10 past its
   mark, held for one read; VEIL-R1 done.
+- 01:55 UTC · **FIVE MESSAGES READ AT 01:47 UTC, ACTED ON BY 01:55 UTC.** (1) **THE SPLIT UNDER VR28, RUN BY REVIEW-VEIL-10**
+  (32432a0b1, `inversion2.probe.jsx`; 87 born towns with a hideable house, default veil, served on x212; control 96
+  with none): **TIER 1: `defence.scores.*`** (precise numbers; differ from their re-derivation in 76 of 87, control
+  0 of 96; internal served 2, re-derived from the served record 15): to VEIL-20, withheld on every non-owner read
+  (VR19), the registry's rows re-classed in the same commit. TIER 2, recorded: `defence.readiness.label` and
+  colours 8 of 87 (control 0 of 96); prosperity 29 of 86; safetyLabel 28 of 86. PASS: `defence.economicGates`,
+  legitimacy label and colours. The seven prose sentences fail as often with nothing hidden (32 to 63 of 87 against
+  38 to 77 of 96): not re-derivable from a served page, pass by VR26's first branch. INCONCLUSIVE:
+  `food.resilienceScore`, `storageMonths` (the reader's rebuild matched the stored value on only 47 and 44 of 87).
+  NOT RUN, now REVIEW-VEIL-11's: the controls for prosperity and the safety band, `power.conflicts`, the
+  composition rows, `founding.overcoming`, the two tile rows, the two food rows. Whether a band tells more than
+  "something is hidden" stays a FINAL question. The reader's hand-off is current at 551a35357.
+  (2) **VEIL-VR17 HANDED BACK "VR17 efca35fd6"** (`lane/veil-vr17-2026-11-20`, one commit on bedd5a392). THE
+  CHAIR'S READ: the product diff is 47 lines in `galleryVeil.js :: GROUPING_OPEN_EVIDENCE` / `isVeiled` and
+  `DefenseTab.jsx`'s one call, two manifest rows, two NEW tests; no existing test touched; 211, 212, the twin's
+  rule files and the switch untouched. Born test 4 failed | 1 passed at the base, 5 passed at the tip; the walker 6
+  passed with two plants each exactly one red; `tests/security` 157 files, 1,995 tests. ACCEPTED as the lane's
+  state; to REVIEW-VEIL-11 for a cold read; to VEIL-20 to merge AFTER B/C/D. Stored figure: the lighting census +2
+  files (titles +11 plausible).
+  **RULING VR29, THE EVIDENCE KEYS (vetoable):** the two keys a visitor's page now reads as proof that Defense's
+  criminal block is open (`economicState.safetyProfile.criminalInstitutions`, `.crimeTypes`) are ALSO registry
+  rows (`safety.criminalInstitutions`, `safety.crimeTypes`: withhold, house-hidden, per entry). So R3's
+  withholding of an entry leaves each key an ARRAY (empty where nothing is left); ONLY the shut grouping deletes the
+  keys; R3's born test holds both arms (grouping open with a house hidden whole: both arrays, no entry of the
+  hidden house, the block derived from the served document alone; grouping shut: keys absent, no block). WHY: a
+  builder who withheld the whole key would silently take the block off every shared page of a town with a hidden
+  house, and its absence would then tell a visitor that something is hidden.
+  **RULING VR30, VR17'S TWO QUESTIONS (vetoable):** (a) THE IMPORTER'S OWN COPY: not built stands: an import is the
+  importer's own record and its Defense block is derived from what the import carried, which is what the share
+  served; a shut grouping is the sharing DM's choice for the SHARED page; a house hidden whole never travels, so
+  tier 1 is untouched; no mark on a saved record. FOR THE OWNER'S LIST: a DM who shuts the criminal-structure block
+  on a share that allows import: the importer's copy can show that block again, computed from what was shared; to
+  keep it shut there needs a mark on the saved record (a persisted-shape change, after the deploy). (b) FAIL-CLOSED
+  on a visitor's page with no `safetyProfile`: accepted (the generator writes it on every town,
+  `economicState.js :: generateEconomicState`; an old or hand-made record loses the block on its shared page): a
+  loss for the owner's list.
+  VR17's seat is told to read its count: under 250,000 it takes V10-2 on its own branch ("Show all" opens only what
+  a hand on Curate can shut again), else a fresh machine is seated from its hand-back.
+  (3) **THE OPEN-FUNCTION CLASS IS WIDER (VEIL-DOORS, executed on its local chain, outside its lane, not touched):**
+  `handle_premium_downgrade(uuid)` (no caller check), the six `admin_*` that take a caller-supplied `p_actor`
+  (`has_role(p_actor, …)`: the visitor names the actor), `purge_expired_plan_inactive_settlements` and its assets
+  sibling: anon-executable under the default privileges, intended for the service role only. TO SEC-GRANTS for its
+  catalogue and, where proven, its emergency script; to the owner in plain words with a read-only query. DOORS's
+  walker (C) is drafted: 63 visitor-callable functions (13 door, 21 owner, 14 admin, 11 social, 4 system); its
+  allowlist and SEC-GRANTS's meet at the close, by full signature. The 01:41 rulings on placement and cost were
+  repeated to it (its 01:43 message crossed them).
+  (4) **REVIEW-VEIL-11'S OWN CHECK REFUSED ITS FIRST ACT** (the path checkout of its predecessors' files:
+  "Destructive or Unwanted Actions"). The refusal stands. THE CHAIR WITHDREW THE INSTRUCTION (the carry was a
+  convenience of the prompt, not a need: the predecessors' files stay on `lane/review-veil-10-2026-11-20`, cited by
+  branch and commit); its branch holds only its own new files; a refusal of that too is to be reported, with each
+  result sent to the chair in a message. It was told NOT to redo the split (its prompt's item 1 was overtaken) and
+  to read VR17 cold first. LESSON FOR THE NEXT PROMPT: never order a path checkout in a seat's first act.
