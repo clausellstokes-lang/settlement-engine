@@ -35,9 +35,9 @@ started on the line's tip `062504aa8`. A successor needs this file and the brief
 | unit | brief | builder branch | state |
 |---|---|---|---|
 | K0 | `briefs/K0.md` | `lane/kinds-1-2026-11-20-k0` @ 99a4a462e | MERGED (2565118b9). Calibration held. |
-| K1 | `briefs/K1.md` | `lane/kinds-1-2026-11-20-k1` | builder out (dispatched ~21:32 UTC) |
-| K2 | `briefs/K2.md` (draft) | — | waits on K1 |
-| K3 | (not yet written) | — | waits on K1/K2 |
+| K1 | `briefs/K1.md` | `lane/kinds-1-2026-11-20-k1` @ 6a5132049 | MERGED (4b6fada00). Dark: 525/720 identical, 0 differences. Lit A/B/B50 in `out/law2-compare.md`; sent to the chair ~22:4x. Moved `tensionByMemory` to `src/generators/history/`. The ONE born-with pin: `troubleLawWiring.test.js` "1. CREATE (dark)" (list it for the flip). |
+| K2 | `briefs/K2.md` | `lane/kinds-1-2026-11-20-k2` | builder out |
+| K3 | `briefs/K3.md` | — | waits on K2 (reds it cures: tuningRegister x4, proseWiringCensus x2, lighting census) |
 
 ## K0 BASELINE (visitor pool, 150 a size; `out/baseline.md`)
 guild / crime / commonest first / troubles 0-1-2-3+: thorp 0/11.3/scarcity 17.3/0-146-3-1; hamlet 0/5.3/scarcity
@@ -52,4 +52,7 @@ guild / crime / commonest first / troubles 0-1-2-3+: thorp 0/11.3/scarcity 17.3/
 None yet.
 
 ## RUNNING COST
-Worker bytes: not yet measured (K1's build).
+K1's build: first paint 1,177,726 / 374,679 / 314,569 (line 1,177,668 / 374,670 / 314,580: +58 raw, to be named at the two runs); worker 2,632,557 (line 2,631,236: +1,321); the leaf in its own chunk `trouble-law` (1,274 B), outside the entry closure.
+
+## FOR THE OWNER'S SIGNING
+`src/domain/trouble/troubleLaw.js :: TROUBLE_WEIGHT_TUNING` (DRAFT): crimeWave (the chair's choice of A / B / B50 pending), guildConflict 0.05→0.25 over 1→4 economy powers, smallPlaceCrime 0.50→0.90 over criminalEffective 15→60.
