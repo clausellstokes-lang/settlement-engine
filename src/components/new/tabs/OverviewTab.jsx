@@ -32,6 +32,7 @@ import { deriveMagicRelianceView, magicRowsGated } from '../../../domain/display
 import { magicMeasuresApartLine } from '../../../domain/display/magicMeasuresApart.js';
 import { prosperityInCrisisLine } from '../../../domain/display/prosperityInCrisis.js';
 import { foodWordShown } from '../../../domain/display/foodWordShown.js';
+import { tensionSidesShown } from '../../../domain/display/tensionShown.js'; // PAGE-9 SIDES: a tension's sides through the one reader
 
 import {NarrativeNote} from '../NarrativeNote';
 import SteadingsSection from './SteadingsSection.jsx';
@@ -497,8 +498,8 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
             <span style={{fontSize:FS.sm,flexShrink:0,marginTop:1,color:swatch['#B8860B']}}>▸</span>
             <div>
               <p style={{fontSize:proseFontSize(FS.md,mobile),color:swatch.inkMag2,lineHeight:1.45,margin:0}}>{typeof t==='object'?t.description:t}</p>
-              {t.factions?.length>0&&<div style={{display:'flex',gap:4,marginTop:3,flexWrap:'wrap'}}>
-                {t.factions.map((f,j)=><span key={j} style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'0 5px'}}>{f}</span>)}
+              {tensionSidesShown(r,t).length>0&&<div style={{display:'flex',gap:4,marginTop:3,flexWrap:'wrap'}}>
+                {tensionSidesShown(r,t).map((f,j)=><span key={j} style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'0 5px'}}>{f}</span>)}
               </div>}
             </div>
           </div>

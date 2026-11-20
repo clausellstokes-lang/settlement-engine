@@ -1,0 +1,16 @@
+CLOSURE-FILE raw   282823 gzip   95286 br   81095 coherence-lazy-CM3Q_te2.js
+CLOSURE-FILE raw     5362 gzip    2610 br    2244 content-identity-BiMB_uYV.js
+CLOSURE-FILE raw   156695 gzip   46206 br   37970 data-BkSMGMGf.js
+CLOSURE-FILE raw  1834893 gzip  475083 br  374886 data-lazy-lq9vbG3e.js
+CLOSURE-FILE raw   309752 gzip   99639 br   83884 engine-core-CbDpmfLl.js
+CLOSURE-FILE raw   489633 gzip  155274 br  128841 index-Dx4cI7x3.js
+CLOSURE-FILE raw     4722 gzip    2501 br    2263 kernel-BI0fDpJx.js
+CLOSURE-FILE raw      724 gzip     411 br     358 narrative-mutations-DySCruP0.js
+CLOSURE-FILE raw     3579 gzip    1472 br    1319 vendor-icons-aOW4IQH8.js
+CLOSURE-FILE raw   193176 gzip   60454 br   52076 vendor-react-DsScxBXT.js
+CLOSURE-FILE raw    17046 gzip    7106 br    6420 vendor-state-DXnjcO3h.js
+CLOSURE files 11 raw 3298405 gzip 946042 brotli 771356
+TABLE data/tensionSideMeanings.js marker "Those who profit from the muddle" in data-lazy-lq9vbG3e.js (IN FIRST PAINT), pdfRender.worker-hNwNtfui.js (lazy)
+TABLE data/tensionSidePower.js marker "solePowerNameOf" in no chunk (minified away or absent)
+TABLE data/tensionCauses.js marker "governedByTrade" in no chunk (minified away or absent)
+TABLE domain/display/tensionShown.js marker "tensionSidesShown" in no chunk (minified away or absent)

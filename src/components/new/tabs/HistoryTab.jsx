@@ -23,6 +23,8 @@ import { entityAnchor, eventIdFor } from '../../../domain/dossier/entityLinks.js
 import { useEntityFocus } from '../../dossier/useEntityFocus.js';
 import { MentionText } from '../../ProseParagraph.jsx';
 import { FLUSH } from '../../../design/flush.js';
+// PAGE-9 SIDES: a tension's sides are printed through the one reader, from the document this tab was given.
+import { tensionSidesShown } from '../../../domain/display/tensionShown.js';
 
 // Extended event type colors (EVENT_COLORS only covers 5 types)
 // ⛔ A CATEGORY WORD NAMES THE EVENT'S OWN TEMPLATE (R3-TABS, round three's cut #1104). Each of these
@@ -69,8 +71,9 @@ const eventTitle = (evt) => {
  * One current-tension row, extracted verbatim from the tab (BUILD-W2-SEARCH U2, no behaviour
  * change) so the dossier search mounts a tension through its own row.
  */
-export function TensionRow({t}) {
+export function TensionRow({t, settlement}) {
   const mobile = useIsMobile();
+  const sides = tensionSidesShown(settlement, t);
   // The table above names ten tension types and the engine writes more than ten
   // (the campaign path adds `external_threat` and its siblings), so the fallback
   // was printing the raw kind. A kind the table has not styled still reads as a
@@ -97,8 +100,8 @@ export function TensionRow({t}) {
       {/* Description. The tension's plot hooks live on the Plot Hooks tab (X-2). */}
       <p style={{fontSize:proseFontSize(FS.md, mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 6px'}}><MentionText text={typeof t==='object'?t.description||t.issue||t.type:String(t)}/></p>
       {/* Factions */}
-      {t.factions?.length>0&&<div style={{display:'flex',gap:4,flexWrap:'wrap'}}>
-        {t.factions.map((f,j)=><span key={j} style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'1px 6px'}}><MentionText text={f} structural/></span>)}
+      {sides.length>0&&<div style={{display:'flex',gap:4,flexWrap:'wrap'}}>
+        {sides.map((f,j)=><span key={j} style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'1px 6px'}}><MentionText text={f} structural/></span>)}
       </div>}
     </div>
   );
@@ -282,7 +285,7 @@ export function HistoryTab({settlement:r, narrativeNote, onReroll, publicDossier
       {/* ── CURRENT TENSIONS (most DM-relevant — first) ──────────────────── */}
       {currentTensions.length>0&&<Section title={`Current Tensions (${currentTensions.length})`} collapsible defaultOpen accent="#b8860b">
         <div style={{display:'flex',flexDirection:'column',gap:10}}>
-          {currentTensions.map((t,i)=><TensionRow key={i} t={t}/>)}
+          {currentTensions.map((t,i)=><TensionRow key={i} t={t} settlement={r}/>)}
         </div>
       </Section>}
 
