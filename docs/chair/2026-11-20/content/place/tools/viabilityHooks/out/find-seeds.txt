@@ -1,0 +1,496 @@
+r2r-thorp-4 (thorp): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2r-thorp-7 (thorp): 1 hook(s)
+   [Pressured / low] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2r-hamlet-0 (hamlet): 1 hook(s)
+   [Hoarded Food / high] No food comes in by trade now, and what is left here is in a few hands; those who hold it have quadrupled the 
+r2r-hamlet-2 (hamlet): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2r-village-4 (village): 1 hook(s)
+   [Strategic Resource / medium] The iron carts are three weeks late and the carters will not say why. What iron there is goes out in rations, 
+r2r-town-1 (town): 1 hook(s)
+   [Strategic Resource / medium] The iron carts are three weeks late and the carters will not say why. What iron there is goes out in rations, 
+r2r-town-3 (town): 2 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+   [River Control / high] A town upstream has dammed the river or turned it: the water is low here, the grain shipments are stuck, and t
+r2r-town-5 (town): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2r-town-7 (town): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2r-city-2 (city): 1 hook(s)
+   [Resource Conflict / medium] The timber rafts stopped coming a month ago, and the shipwrights and builders are bidding against each other f
+r2r-city-3 (city): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2r-city-4 (city): 1 hook(s)
+   [Resource Conflict / medium] The timber carts stopped coming a month ago, and the builders are bidding against each other for what is left 
+r2r-city-7 (city): 1 hook(s)
+   [Strategic Resource / medium] Iron has doubled in price this season, and tools are being mended with scrap. Work slows, and people are start
+r2r-metropolis-1 (metropolis): 1 hook(s)
+   [Strategic Resource / medium] Iron has doubled in price this season, and tools are being mended with scrap. Work slows, and people are start
+r2r-metropolis-2 (metropolis): 2 hook(s)
+   [Resource Conflict / medium] Timber is short this season, and the builders are bidding against each other for what is left in the yards.
+   [Strategic Resource / medium] The iron carts are three weeks late and the carters will not say why. What iron there is goes out in rations, 
+r2r-metropolis-3 (metropolis): 1 hook(s)
+   [Strategic Resource / medium] Iron has doubled in price this season, and tools are being mended with scrap. Work slows, and people are start
+r2r-metropolis-4 (metropolis): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2r-metropolis-6 (metropolis): 1 hook(s)
+   [Strategic Resource / medium] The iron carts are three weeks late and the carters will not say why. What iron there is goes out in rations, 
+r2r-metropolis-7 (metropolis): 2 hook(s)
+   [Resource Conflict / medium] The timber carts stopped coming a month ago, and the builders are bidding against each other for what is left 
+   [Strategic Resource / medium] Iron has doubled in price this season, and tools are being mended with scrap. Work slows, and people are start
+r2s-under_siege-thorp-0 (thorp, crisis under_siege): 1 hook(s)
+   [Hoarded Food / high] No food comes in by trade now, and what is left here is in a few hands; those who hold it have quadrupled the 
+r2s-under_siege-thorp-1 (thorp, crisis under_siege): 1 hook(s)
+   [Hoarded Food / high] No food comes in by trade now, and what is left here is in a few hands; those who hold it have quadrupled the 
+r2s-under_siege-thorp-2 (thorp, crisis under_siege): 1 hook(s)
+   [Survival Crisis / critical] The settlement is starving, and its hungriest steal what food they can find.
+r2s-under_siege-thorp-3 (thorp, crisis under_siege): 1 hook(s)
+   [Hoarded Food / high] No food comes in by trade now, and what is left here is in a few hands; those who hold it have quadrupled the 
+r2s-under_siege-hamlet-0 (hamlet, crisis under_siege): 1 hook(s)
+   [Survival Crisis / critical] The settlement is starving, and its hungriest steal what food they can find.
+r2s-under_siege-hamlet-1 (hamlet, crisis under_siege): 1 hook(s)
+   [Hoarded Food / high] No food comes in by trade now, and what is left here is in a few hands; those who hold it have quadrupled the 
+r2s-under_siege-hamlet-2 (hamlet, crisis under_siege): 2 hook(s)
+   [Scarce Food / medium] No food can be bought in from outside now, so the grain already here is all there is, and its price climbs eve
+   [Hoarded Food / high] No food comes in by trade now, and what is left here is in a few hands; those who hold it have quadrupled the 
+r2s-under_siege-hamlet-3 (hamlet, crisis under_siege): 1 hook(s)
+   [Survival Crisis / critical] The settlement is starving, and its hungriest steal what food they can find.
+r2s-under_siege-village-0 (village, crisis under_siege): 1 hook(s)
+   [Survival Crisis / critical] The settlement is starving, and its hungriest steal what food they can find.
+r2s-under_siege-village-1 (village, crisis under_siege): 2 hook(s)
+   [Scarce Food / medium] No food can be bought in from outside now, so the food already here is all there is, and its price climbs ever
+   [Hoarded Food / high] No food comes in by trade now, and what is left here is in a few hands; those who hold it have quadrupled the 
+r2s-under_siege-village-2 (village, crisis under_siege): 1 hook(s)
+   [Survival Crisis / critical] The settlement is starving, and its hungriest steal what food they can find.
+r2s-under_siege-village-3 (village, crisis under_siege): 1 hook(s)
+   [Hoarded Food / high] No food comes in by trade now, and what is left here is in a few hands; those who hold it have quadrupled the 
+r2s-under_siege-town-0 (town, crisis under_siege): 1 hook(s)
+   [Hoarded Food / high] No food comes in by trade now, and what is left here is in a few hands; those who hold it have quadrupled the 
+r2s-under_siege-town-2 (town, crisis under_siege): 1 hook(s)
+   [Trade Politics / medium] A poor harvest somewhere else has spiked the price of grain. The settlement must decide what it can still affo
+r2s-under_siege-city-0 (city, crisis under_siege): 3 hook(s)
+   [Trade Politics / medium] A poor harvest somewhere else has spiked the price of grain. The settlement must decide what it can still affo
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+   [Resource Conflict / medium] The timber rafts stopped coming a month ago, and the shipwrights and builders are bidding against each other f
+r2s-under_siege-city-2 (city, crisis under_siege): 1 hook(s)
+   [Strategic Resource / medium] War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tool
+r2s-under_siege-metropolis-1 (metropolis, crisis under_siege): 3 hook(s)
+   [Scarce Food / medium] No food can be bought in from outside now, so the grain already here is all there is, and its price climbs eve
+   [Hoarded Food / high] No food comes in by trade now, and what is left here is in a few hands; those who hold it have quadrupled the 
+   [Resource Conflict / medium] The timber rafts stopped coming a month ago, and the shipwrights and builders are bidding against each other f
+r2s-under_siege-metropolis-2 (metropolis, crisis under_siege): 1 hook(s)
+   [Scarce Food / medium] No food can be bought in from outside now, so the grain already here is all there is, and its price climbs eve
+r2s-under_siege-metropolis-3 (metropolis, crisis under_siege): 3 hook(s)
+   [Trade Politics / medium] A poor harvest somewhere else has spiked the price of grain. The settlement must decide what it can still affo
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+   [Strategic Resource / medium] War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tool
+r2s-famine-thorp-0 (thorp, crisis famine): 2 hook(s)
+   [Trade Politics / medium] The fishing failed here this year, and what food can still be bought from outside costs more every week. The s
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+r2s-famine-thorp-1 (thorp, crisis famine): 2 hook(s)
+   [Trade Politics / medium] The herds failed here this year, and what food can still be bought from outside costs more every week. The set
+   [Survival Crisis / critical] The settlement is starving. Its hungriest are turning to banditry, and a merchant has offered to supply food a
+r2s-famine-thorp-2 (thorp, crisis famine): 2 hook(s)
+   [Trade Politics / medium] The crops failed here this year, and what food can still be bought from outside costs more every week. The set
+   [Survival Crisis / critical] The settlement is starving. Its hungriest are turning to banditry, and a merchant has offered to supply food a
+r2s-famine-thorp-3 (thorp, crisis famine): 2 hook(s)
+   [Trade Politics / medium] The crops failed here this year, and what food can still be bought from outside costs more every week. The set
+   [Survival Crisis / critical] The settlement is starving. Its hungriest are turning to banditry, and a merchant has offered to supply food a
+r2s-famine-hamlet-0 (hamlet, crisis famine): 2 hook(s)
+   [Trade Politics / medium] The fishing failed here this year, and what food can still be bought from outside costs more every week. The s
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+r2s-famine-hamlet-1 (hamlet, crisis famine): 1 hook(s)
+   [Survival Crisis / critical] The settlement is starving, and its hungriest are turning to banditry.
+r2s-famine-hamlet-2 (hamlet, crisis famine): 1 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+r2s-famine-hamlet-3 (hamlet, crisis famine): 2 hook(s)
+   [Trade Politics / medium] The herds failed here this year, and what food can still be bought from outside costs more every week. The set
+   [Survival Crisis / critical] The settlement is starving. Its hungriest are turning to banditry, and a merchant has offered to supply food a
+r2s-famine-village-0 (village, crisis famine): 2 hook(s)
+   [Trade Politics / medium] The grain harvest failed here this year, and what food can still be bought from outside costs more every week.
+   [Survival Crisis / critical] The settlement is starving. Its hungriest are turning to banditry, and a merchant has offered to supply food a
+r2s-famine-village-1 (village, crisis famine): 2 hook(s)
+   [Trade Politics / medium] The fishing failed here this year, and what food can still be bought from outside costs more every week. The s
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+r2s-famine-village-2 (village, crisis famine): 2 hook(s)
+   [Trade Politics / medium] The grain harvest failed here this year, and what food can still be bought from outside costs more every week.
+   [Survival Crisis / critical] The settlement is starving. Its hungriest are turning to banditry, and a merchant has offered to supply food a
+r2s-famine-village-3 (village, crisis famine): 1 hook(s)
+   [Survival Crisis / critical] The settlement is starving, and its hungriest are turning to banditry.
+r2s-famine-town-0 (town, crisis famine): 2 hook(s)
+   [Trade Politics / medium] The crops failed here this year, and what food can still be bought from outside costs more every week. The set
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+r2s-famine-town-1 (town, crisis famine): 1 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+r2s-famine-town-2 (town, crisis famine): 2 hook(s)
+   [Trade Politics / medium] The crops failed here this year, and what food can still be bought from outside costs more every week. The set
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+r2s-famine-town-3 (town, crisis famine): 1 hook(s)
+   [Trade Politics / medium] The crops failed here this year, and what food can still be bought from outside costs more every week. The set
+r2s-famine-city-0 (city, crisis famine): 1 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+r2s-famine-city-1 (city, crisis famine): 2 hook(s)
+   [Trade Politics / medium] The crops failed here this year, and what food can still be bought from outside costs more every week. The set
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+r2s-famine-city-3 (city, crisis famine): 4 hook(s)
+   [Trade Politics / medium] The grain harvest failed here this year, and what food can still be bought from outside costs more every week.
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+   [Resource Conflict / medium] The timber carts stopped coming a month ago, and the builders are bidding against each other for what is left 
+   [Strategic Resource / medium] The iron carts are three weeks late and the carters will not say why. What iron there is goes out in rations, 
+r2s-famine-metropolis-1 (metropolis, crisis famine): 1 hook(s)
+   [Strategic Resource / medium] The iron carts are three weeks late and the carters will not say why. What iron there is goes out in rations, 
+r2s-famine-metropolis-2 (metropolis, crisis famine): 3 hook(s)
+   [Trade Politics / medium] The herds failed here this year, and what food can still be bought from outside costs more every week. The set
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+   [Strategic Resource / medium] The iron carts are three weeks late and the carters will not say why. What iron there is goes out in rations, 
+r2s-famine-metropolis-3 (metropolis, crisis famine): 2 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+   [Strategic Resource / medium] The iron carts are three weeks late and the carters will not say why. What iron there is goes out in rations, 
+r2s-occupied-thorp-1 (thorp, crisis occupied): 1 hook(s)
+   [Survival Crisis / critical] The settlement is starving, and its hungriest are turning to banditry.
+r2s-occupied-thorp-3 (thorp, crisis occupied): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-occupied-hamlet-0 (hamlet, crisis occupied): 1 hook(s)
+   [Survival Crisis / critical] The settlement is starving, and its hungriest are turning to banditry.
+r2s-occupied-hamlet-1 (hamlet, crisis occupied): 1 hook(s)
+   [Survival Crisis / critical] The settlement is starving, and its hungriest are turning to banditry.
+r2s-occupied-hamlet-3 (hamlet, crisis occupied): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-occupied-village-1 (village, crisis occupied): 1 hook(s)
+   [Trade Politics / medium] A poor harvest somewhere else has spiked the price of grain. The settlement must decide what it can still affo
+r2s-occupied-village-3 (village, crisis occupied): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-occupied-town-0 (town, crisis occupied): 1 hook(s)
+   [Pressured / low] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-occupied-town-1 (town, crisis occupied): 1 hook(s)
+   [River Control / high] A town upstream has dammed the river or turned it: the water is low here, the grain shipments are stuck, and t
+r2s-occupied-city-0 (city, crisis occupied): 2 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+   [Resource Conflict / medium] The timber carts stopped coming a month ago, and the builders are bidding against each other for what is left 
+r2s-occupied-city-1 (city, crisis occupied): 2 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+   [Resource Conflict / medium] The timber carts stopped coming a month ago, and the builders are bidding against each other for what is left 
+r2s-occupied-city-2 (city, crisis occupied): 1 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+r2s-occupied-city-3 (city, crisis occupied): 1 hook(s)
+   [Pressured / low] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-occupied-metropolis-0 (metropolis, crisis occupied): 1 hook(s)
+   [Pressured / low] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-occupied-metropolis-1 (metropolis, crisis occupied): 1 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+r2s-occupied-metropolis-3 (metropolis, crisis occupied): 1 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+r2s-politically_fractured-hamlet-0 (hamlet, crisis politically_fractured): 1 hook(s)
+   [Strategic Resource / medium] A new toll on the iron road has made metal dear. People blame whoever set it, and the tools still need mending
+r2s-politically_fractured-hamlet-1 (hamlet, crisis politically_fractured): 2 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+   [Strategic Resource / medium] The iron carts are three weeks late and the carters will not say why. What iron there is goes out in rations, 
+r2s-politically_fractured-town-1 (town, crisis politically_fractured): 1 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+r2s-politically_fractured-town-3 (town, crisis politically_fractured): 2 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+   [Strategic Resource / medium] A new toll on the iron road has made metal dear. People blame whoever set it, and the tools still need mending
+r2s-politically_fractured-city-3 (city, crisis politically_fractured): 1 hook(s)
+   [Strategic Resource / medium] The iron carts are three weeks late and the carters will not say why. What iron there is goes out in rations, 
+r2s-politically_fractured-metropolis-0 (metropolis, crisis politically_fractured): 2 hook(s)
+   [Resource Conflict / medium] The timber carts stopped coming a month ago, and the builders are bidding against each other for what is left 
+   [Strategic Resource / medium] A new toll on the iron road has made metal dear. People blame whoever set it, and the tools still need mending
+r2s-politically_fractured-metropolis-3 (metropolis, crisis politically_fractured): 1 hook(s)
+   [Resource Conflict / medium] The timber rafts stopped coming a month ago, and the shipwrights and builders are bidding against each other f
+r2s-indebted-hamlet-0 (hamlet, crisis indebted): 1 hook(s)
+   [Strategic Resource / medium] The iron carts are three weeks late and the carters will not say why. What iron there is goes out in rations, 
+r2s-indebted-town-1 (town, crisis indebted): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-indebted-city-0 (city, crisis indebted): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-indebted-metropolis-0 (metropolis, crisis indebted): 2 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+   [Resource Conflict / medium] The timber carts stopped coming a month ago, and the builders are bidding against each other for what is left 
+r2s-indebted-metropolis-1 (metropolis, crisis indebted): 2 hook(s)
+   [Resource Conflict / medium] The timber rafts stopped coming a month ago, and the shipwrights and builders are bidding against each other f
+   [Strategic Resource / medium] Iron has doubled in price this season, and tools are being mended with scrap. Work slows, and people are start
+r2s-indebted-metropolis-3 (metropolis, crisis indebted): 1 hook(s)
+   [Pressured / low] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-recently_betrayed-hamlet-0 (hamlet, crisis recently_betrayed): 1 hook(s)
+   [Strategic Resource / medium] The iron carts are three weeks late and the carters will not say why. What iron there is goes out in rations, 
+r2s-recently_betrayed-hamlet-2 (hamlet, crisis recently_betrayed): 2 hook(s)
+   [Scarce Food / medium] No food can be bought in from outside now, so the food already here is all there is, and its price climbs ever
+   [Survival Crisis / critical] The settlement is starving, and its hungriest are turning to banditry.
+r2s-recently_betrayed-village-3 (village, crisis recently_betrayed): 1 hook(s)
+   [Pressured / low] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-recently_betrayed-town-2 (town, crisis recently_betrayed): 1 hook(s)
+   [Strategic Resource / medium] Iron has doubled in price this season, and metal for tools and repairs is hard to come by. Work slows, and peo
+r2s-recently_betrayed-city-0 (city, crisis recently_betrayed): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-recently_betrayed-city-2 (city, crisis recently_betrayed): 1 hook(s)
+   [Strategic Resource / medium] Iron has doubled in price this season, and tools are being mended with scrap. Work slows, and people are start
+r2s-recently_betrayed-metropolis-3 (metropolis, crisis recently_betrayed): 2 hook(s)
+   [Resource Conflict / medium] The timber carts stopped coming a month ago, and the builders are bidding against each other for what is left 
+   [Strategic Resource / medium] The iron carts are three weeks late and the carters will not say why. What iron there is goes out in rations, 
+r2s-infiltrated-hamlet-1 (hamlet, crisis infiltrated): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-infiltrated-village-0 (village, crisis infiltrated): 1 hook(s)
+   [Resource Conflict / medium] The timber carts stopped coming a month ago, and the builders are bidding against each other for what is left 
+r2s-infiltrated-town-0 (town, crisis infiltrated): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-infiltrated-town-2 (town, crisis infiltrated): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-infiltrated-city-0 (city, crisis infiltrated): 1 hook(s)
+   [Strategic Resource / medium] The iron carts are three weeks late and the carters will not say why. What iron there is goes out in rations, 
+r2s-infiltrated-city-1 (city, crisis infiltrated): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-infiltrated-city-2 (city, crisis infiltrated): 1 hook(s)
+   [Strategic Resource / medium] Iron has doubled in price this season, and tools are being mended with scrap. Work slows, and people are start
+r2s-infiltrated-metropolis-0 (metropolis, crisis infiltrated): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-infiltrated-metropolis-2 (metropolis, crisis infiltrated): 1 hook(s)
+   [Strategic Resource / medium] The iron carts are three weeks late and the carters will not say why. What iron there is goes out in rations, 
+r2s-infiltrated-metropolis-3 (metropolis, crisis infiltrated): 1 hook(s)
+   [Strategic Resource / medium] Iron has doubled in price this season, and tools are being mended with scrap. Work slows, and people are start
+r2s-plague_onset-thorp-0 (thorp, crisis plague_onset): 2 hook(s)
+   [Trade Politics / medium] A poor harvest somewhere else has spiked the price of grain. The settlement must decide what it can still affo
+   [Import-Dependent / medium] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-plague_onset-hamlet-1 (hamlet, crisis plague_onset): 1 hook(s)
+   [Pressured / low] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-plague_onset-hamlet-2 (hamlet, crisis plague_onset): 1 hook(s)
+   [Pressured / low] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-plague_onset-hamlet-3 (hamlet, crisis plague_onset): 1 hook(s)
+   [Pressured / low] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-plague_onset-village-0 (village, crisis plague_onset): 1 hook(s)
+   [Pressured / low] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-plague_onset-village-2 (village, crisis plague_onset): 1 hook(s)
+   [Trade Politics / medium] A poor harvest somewhere else has spiked the price of grain. The settlement must decide what it can still affo
+r2s-plague_onset-village-3 (village, crisis plague_onset): 1 hook(s)
+   [Pressured / low] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-plague_onset-town-0 (town, crisis plague_onset): 2 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+   [River Control / high] A town upstream has dammed the river or turned it: the water is low here, the grain shipments are stuck, and t
+r2s-plague_onset-town-1 (town, crisis plague_onset): 3 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+   [River Control / high] A town upstream has dammed the river or turned it: the water is low here, the grain shipments are stuck, and t
+   [Strategic Resource / medium] Iron has doubled in price this season, and metal for tools and repairs is hard to come by. Work slows, and peo
+r2s-plague_onset-town-2 (town, crisis plague_onset): 2 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+   [River Control / high] A town upstream has dammed the river or turned it: the water is low here, the grain shipments are stuck, and t
+r2s-plague_onset-town-3 (town, crisis plague_onset): 1 hook(s)
+   [Pressured / low] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-plague_onset-city-0 (city, crisis plague_onset): 1 hook(s)
+   [Strategic Resource / medium] The iron carts are three weeks late and the carters will not say why. What iron there is goes out in rations, 
+r2s-plague_onset-city-1 (city, crisis plague_onset): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-plague_onset-city-2 (city, crisis plague_onset): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-plague_onset-city-3 (city, crisis plague_onset): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-plague_onset-metropolis-0 (metropolis, crisis plague_onset): 2 hook(s)
+   [Pressured / low] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+   [Strategic Resource / medium] The iron carts are three weeks late and the carters will not say why. What iron there is goes out in rations, 
+r2s-plague_onset-metropolis-1 (metropolis, crisis plague_onset): 1 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+r2s-plague_onset-metropolis-2 (metropolis, crisis plague_onset): 1 hook(s)
+   [Pressured / low] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-plague_onset-metropolis-3 (metropolis, crisis plague_onset): 2 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+   [Strategic Resource / medium] A new toll on the iron road has made metal dear. People blame whoever set it, and the tools still need mending
+r2s-succession_void-thorp-0 (thorp, crisis succession_void): 2 hook(s)
+   [Scarce Food / medium] No food can be bought in from outside now, so the food already here is all there is, and its price climbs ever
+   [Survival Crisis / critical] The settlement is starving, and its hungriest are turning to banditry.
+r2s-succession_void-thorp-1 (thorp, crisis succession_void): 1 hook(s)
+   [Survival Crisis / critical] The settlement is starving, and its hungriest are turning to banditry.
+r2s-succession_void-town-0 (town, crisis succession_void): 1 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+r2s-succession_void-town-1 (town, crisis succession_void): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-succession_void-town-2 (town, crisis succession_void): 1 hook(s)
+   [Pressured / low] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-succession_void-town-3 (town, crisis succession_void): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-succession_void-city-0 (city, crisis succession_void): 1 hook(s)
+   [Strategic Resource / medium] A new toll on the iron road has made metal dear. People blame whoever set it, and the tools still need mending
+r2s-succession_void-city-1 (city, crisis succession_void): 1 hook(s)
+   [Strategic Resource / medium] A new toll on the iron road has made metal dear. People blame whoever set it, and the tools still need mending
+r2s-succession_void-city-3 (city, crisis succession_void): 1 hook(s)
+   [Resource Conflict / medium] The timber carts stopped coming a month ago, and the builders are bidding against each other for what is left 
+r2s-succession_void-metropolis-0 (metropolis, crisis succession_void): 1 hook(s)
+   [Resource Conflict / medium] The timber rafts stopped coming a month ago, and the shipwrights and builders are bidding against each other f
+r2s-succession_void-metropolis-1 (metropolis, crisis succession_void): 1 hook(s)
+   [Pressured / low] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-succession_void-metropolis-2 (metropolis, crisis succession_void): 2 hook(s)
+   [Resource Conflict / medium] Timber is short this season, and the builders are bidding against each other for what is left in the yards.
+   [Strategic Resource / medium] The iron carts are three weeks late and the carters will not say why. What iron there is goes out in rations, 
+r2s-monster_pressure-hamlet-2 (hamlet, crisis monster_pressure): 1 hook(s)
+   [Strategic Resource / medium] A new toll on the iron road has made metal dear. People blame whoever set it, and the tools still need mending
+r2s-monster_pressure-village-0 (village, crisis monster_pressure): 2 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+   [Resource Conflict / medium] The timber carts stopped coming a month ago, and the builders are bidding against each other for what is left 
+r2s-monster_pressure-village-1 (village, crisis monster_pressure): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-monster_pressure-town-0 (town, crisis monster_pressure): 2 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+   [Strategic Resource / medium] A new toll on the iron road has made metal dear. People blame whoever set it, and the tools still need mending
+r2s-monster_pressure-town-2 (town, crisis monster_pressure): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-monster_pressure-city-3 (city, crisis monster_pressure): 1 hook(s)
+   [Strategic Resource / medium] The iron carts are three weeks late and the carters will not say why. What iron there is goes out in rations, 
+r2s-monster_pressure-metropolis-3 (metropolis, crisis monster_pressure): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-insurgency-hamlet-0 (hamlet, crisis insurgency): 1 hook(s)
+   [Survival Crisis / critical] The settlement is starving, and its hungriest are turning to banditry.
+r2s-insurgency-hamlet-2 (hamlet, crisis insurgency): 2 hook(s)
+   [Scarce Food / medium] No food can be bought in from outside now, so the food already here is all there is, and its price climbs ever
+   [Survival Crisis / critical] The settlement is starving, and its hungriest are turning to banditry.
+r2s-insurgency-village-2 (village, crisis insurgency): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-insurgency-village-3 (village, crisis insurgency): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-insurgency-town-0 (town, crisis insurgency): 1 hook(s)
+   [Strategic Resource / medium] The iron carts are three weeks late and the carters will not say why. What iron there is goes out in rations, 
+r2s-insurgency-city-1 (city, crisis insurgency): 1 hook(s)
+   [Strategic Resource / medium] The iron carts are three weeks late and the carters will not say why. What iron there is goes out in rations, 
+r2s-insurgency-city-2 (city, crisis insurgency): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-insurgency-city-3 (city, crisis insurgency): 1 hook(s)
+   [Resource Conflict / medium] Timber is short this season, and the builders are bidding against each other for what is left in the yards.
+r2s-insurgency-metropolis-0 (metropolis, crisis insurgency): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-insurgency-metropolis-3 (metropolis, crisis insurgency): 2 hook(s)
+   [Resource Conflict / medium] The timber carts stopped coming a month ago, and the builders are bidding against each other for what is left 
+   [Strategic Resource / medium] Iron has doubled in price this season, and tools are being mended with scrap. Work slows, and people are start
+r2s-religious_conversion-thorp-2 (thorp, crisis religious_conversion): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-religious_conversion-town-1 (town, crisis religious_conversion): 1 hook(s)
+   [Resource Conflict / medium] The timber rafts stopped coming a month ago, and the shipwrights and builders are bidding against each other f
+r2s-religious_conversion-town-2 (town, crisis religious_conversion): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-religious_conversion-town-3 (town, crisis religious_conversion): 1 hook(s)
+   [Strategic Resource / medium] A new toll on the iron road has made metal dear. Nobody will say who set it, and the tools still need mending.
+r2s-religious_conversion-city-2 (city, crisis religious_conversion): 1 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+r2s-religious_conversion-city-3 (city, crisis religious_conversion): 2 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+   [Strategic Resource / medium] Iron has doubled in price this season, and tools are being mended with scrap. Work slows, and people are start
+r2s-religious_conversion-metropolis-0 (metropolis, crisis religious_conversion): 1 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+r2s-religious_conversion-metropolis-1 (metropolis, crisis religious_conversion): 1 hook(s)
+   [Strategic Resource / medium] A new toll on the iron road has made metal dear. People blame whoever set it, and the tools still need mending
+r2s-religious_conversion-metropolis-2 (metropolis, crisis religious_conversion): 2 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+   [Resource Conflict / medium] The timber rafts stopped coming a month ago, and the shipwrights and builders are bidding against each other f
+r2s-religious_conversion-metropolis-3 (metropolis, crisis religious_conversion): 1 hook(s)
+   [Strategic Resource / medium] The iron carts are three weeks late and the carters will not say why. What iron there is goes out in rations, 
+r2s-slave_revolt-thorp-0 (thorp, crisis slave_revolt): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-slave_revolt-hamlet-1 (hamlet, crisis slave_revolt): 1 hook(s)
+   [Pressured / low] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-slave_revolt-hamlet-3 (hamlet, crisis slave_revolt): 2 hook(s)
+   [Trade Politics / medium] A poor harvest somewhere else has spiked the price of grain. The settlement must decide what it can still affo
+   [Import-Dependent / medium] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-slave_revolt-village-1 (village, crisis slave_revolt): 1 hook(s)
+   [Trade Politics / medium] A poor harvest somewhere else has spiked the price of grain. The settlement must decide what it can still affo
+r2s-slave_revolt-town-0 (town, crisis slave_revolt): 3 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+   [River Control / high] A town upstream has dammed the river or turned it: the water is low here, the grain shipments are stuck, and t
+   [Strategic Resource / medium] The iron carts are three weeks late and the carters will not say why. Broken tools stay broken, and work waits
+r2s-slave_revolt-town-1 (town, crisis slave_revolt): 2 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+   [River Control / high] A town upstream has dammed the river or turned it: the water is low here, the grain shipments are stuck, and t
+r2s-slave_revolt-town-2 (town, crisis slave_revolt): 2 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+   [River Control / high] A town upstream has dammed the river or turned it: the water is low here, the grain shipments are stuck, and t
+r2s-slave_revolt-town-3 (town, crisis slave_revolt): 2 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+   [River Control / high] A town upstream has dammed the river or turned it: the water is low here, the grain shipments are stuck, and t
+r2s-slave_revolt-city-0 (city, crisis slave_revolt): 2 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+   [Strategic Resource / medium] Iron has doubled in price this season, and tools are being mended with scrap. Work slows, and people are start
+r2s-slave_revolt-city-1 (city, crisis slave_revolt): 1 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+r2s-slave_revolt-city-2 (city, crisis slave_revolt): 1 hook(s)
+   [Pressured / low] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-slave_revolt-city-3 (city, crisis slave_revolt): 1 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+r2s-slave_revolt-metropolis-0 (metropolis, crisis slave_revolt): 2 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+   [Resource Conflict / medium] The timber carts stopped coming a month ago, and the builders are bidding against each other for what is left 
+r2s-slave_revolt-metropolis-1 (metropolis, crisis slave_revolt): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-slave_revolt-metropolis-2 (metropolis, crisis slave_revolt): 1 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+r2s-slave_revolt-metropolis-3 (metropolis, crisis slave_revolt): 1 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+r2s-wartime-thorp-0 (thorp, crisis wartime): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-wartime-thorp-2 (thorp, crisis wartime): 1 hook(s)
+   [Survival Crisis / critical] The settlement is starving, and its hungriest are turning to banditry.
+r2s-wartime-thorp-3 (thorp, crisis wartime): 1 hook(s)
+   [Scarce Food / medium] No food can be bought in from outside now, so the food already here is all there is, and its price climbs ever
+r2s-wartime-hamlet-0 (hamlet, crisis wartime): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-wartime-hamlet-1 (hamlet, crisis wartime): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-wartime-hamlet-3 (hamlet, crisis wartime): 1 hook(s)
+   [Survival Crisis / critical] The settlement is starving, and its hungriest are turning to banditry.
+r2s-wartime-village-0 (village, crisis wartime): 2 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+   [Strategic Resource / medium] War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tool
+r2s-wartime-village-1 (village, crisis wartime): 1 hook(s)
+   [Pressured / low] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-wartime-village-3 (village, crisis wartime): 1 hook(s)
+   [Pressured / low] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-wartime-town-0 (town, crisis wartime): 1 hook(s)
+   [Strategic Resource / medium] War has taken the iron: the metal suppliers sell to the armies first, and the iron for tools and repairs stops
+r2s-wartime-town-1 (town, crisis wartime): 1 hook(s)
+   [River Control / high] A town upstream has dammed the river or turned it: the water is low here, the grain shipments are stuck, and t
+r2s-wartime-town-2 (town, crisis wartime): 2 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+   [Strategic Resource / medium] War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tool
+r2s-wartime-town-3 (town, crisis wartime): 1 hook(s)
+   [River Control / high] A town upstream has dammed the river or turned it: the water is low here, the grain shipments are stuck, and t
+r2s-wartime-city-0 (city, crisis wartime): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-wartime-city-1 (city, crisis wartime): 1 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+r2s-wartime-city-2 (city, crisis wartime): 2 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+   [Strategic Resource / medium] War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tool
+r2s-wartime-city-3 (city, crisis wartime): 1 hook(s)
+   [Strategic Resource / medium] War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tool
+r2s-wartime-metropolis-0 (metropolis, crisis wartime): 1 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+r2s-wartime-metropolis-1 (metropolis, crisis wartime): 2 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+   [Strategic Resource / medium] War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tool
+r2s-wartime-metropolis-2 (metropolis, crisis wartime): 1 hook(s)
+   [Pressured / low] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-wartime-metropolis-3 (metropolis, crisis wartime): 1 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+r2s-mass_migration-hamlet-3 (hamlet, crisis mass_migration): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-mass_migration-village-1 (village, crisis mass_migration): 1 hook(s)
+   [Strategic Resource / medium] Iron has doubled in price this season, and tools are being mended with scrap. Work slows, and people are start
+r2s-mass_migration-village-2 (village, crisis mass_migration): 1 hook(s)
+   [Pressured / low] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-mass_migration-village-3 (village, crisis mass_migration): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-mass_migration-town-2 (town, crisis mass_migration): 1 hook(s)
+   [Trade Politics / medium] A poor harvest somewhere else has spiked the price of grain. The settlement must decide what it can still affo
+r2s-mass_migration-town-3 (town, crisis mass_migration): 1 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+r2s-mass_migration-city-0 (city, crisis mass_migration): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-mass_migration-city-1 (city, crisis mass_migration): 1 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+r2s-mass_migration-city-2 (city, crisis mass_migration): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-mass_migration-city-3 (city, crisis mass_migration): 1 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+r2s-mass_migration-metropolis-0 (metropolis, crisis mass_migration): 2 hook(s)
+   [Trade Monopoly / high] One importer now holds all the grain that comes in from outside and has quadrupled its price; the locals are a
+   [Strategic Resource / medium] The iron carts are three weeks late and the carters will not say why. What iron there is goes out in rations, 
+r2s-mass_migration-metropolis-1 (metropolis, crisis mass_migration): 1 hook(s)
+   [Survival Crisis / critical] The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price 
+r2s-mass_migration-metropolis-2 (metropolis, crisis mass_migration): 1 hook(s)
+   [Strategic Resource / medium] The iron carts are three weeks late and the carters will not say why. What iron there is goes out in rations, 
+r2s-mass_migration-metropolis-3 (metropolis, crisis mass_migration): 1 hook(s)
+   [Strategic Resource / medium] A new toll on the iron road has made metal dear. People blame whoever set it, and the tools still need mending
