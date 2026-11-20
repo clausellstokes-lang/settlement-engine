@@ -49,3 +49,35 @@ person, nothing the record does not hold. Check each against those lists by grep
 the counts the cure will move (unit 13's 137 of 1,232 calm, 82 of 1,256 visitor; owner and reader alike) and ONE paragraph of
 what a builder then does (the files: the table, the leaf's `compose`, the walker and domain tests, the census rows by their
 doors). Commit the file and this addendum by explicit paths, one commit. Never push.
+
+## ADDENDUM 2 — BUILD (the chair, 21:03 UTC: all sixteen lines APPROVED AS WRITTEN in `TRAD-5-U13-ALSO-GLOSSES.md`)
+Written 2026-11-20 21:04 UTC by TRAD-5. Read `TRAD-2-COMMON.md` first; it binds you (read "TRAD-2" as "TRAD-5").
+THE CURE: a rite whose ELEMENT an earlier rite of the AUDIENCE'S OWN SHOWN SET already holds takes its element's "also" gloss
+(the sixteen lines verbatim, one an element, each with the declaration the file gives; harvest's ONE line, `crisis: ['any']`,
+no twin). The first rite of an element, and a rite alone, read EXACTLY as today. A third rite of an element reads the same
+"also" line (S1 as a whole never repeats: the act differs). The "also" lines are NEVER a pick: a separate table
+(`ELEMENT_GLOSS_ALSO`, the `KEEPER_FRAMES_TOO` pattern), declared lines drawn through the one draw, so the walkers hold them.
+THE SECURITY CONDITION (the chair): the held elements a later rite reads are those of THE AUDIENCE'S OWN SHOWN SET
+(`shownTraditions.js :: descriptionSetOf` / `shownTraditionsOf` as each surface already passes it; unit 10's set), NEVER the
+owner's set carried to a reader. A reader whose shown set lacks the earlier rite reads the PLAIN gloss.
+`compose`'s `taken` holds sentences: carry the held elements beside it, in the same set-walk unit 10 built.
+RED FIRST: (1) a domain arm, a place whose two shown rites share an element: at base the later prints its plain gloss (the
+same honoured thing twice); after, "also". (2) THE PIN (the chair's): a set whose FIRST rite of an element is withheld from
+the reader: the reader's later rite prints the PRESENT gloss, the owner's prints "also". (3) the frames walker: the sixteen
+lines present, one an element, declared, none in the pick's domain, none holds a DRAMA, CAUSE, "kept"/"keeps" or "the town"
+word; the walker's COUNT pin moves by sixteen (named, before -> after).
+FILES: `src/data/traditionDescriptionTable.js`, `src/domain/traditions/traditionDescription.js`,
+`tests/domain/traditionDescription.test.js`, `tests/security/traditionDescriptionSharedPage.test.js` (the pin may live here
+if it reads the drawn rows), `tests/lint/traditionDescriptionFrames.walker.test.js`, `docs/DESIGN_POOL_CENSUS.md` and the
+census/line-register rows the house keeps for the table's pools (find them as unit 5 did: `git log -p 22be32bea --stat`);
+`docs/chair/2026-11-20/content/traditions/tools/measure2.mjs` for the after-count. Anything else: STOP and report.
+MEASURE on the 432 (the pool under scratchpad/u12-data): unit 13's same-subject count before -> after (places printing the
+same gloss twice: 0 expected; places with a repeated subject UNACKNOWLEDGED: 0 expected), descriptions moved (137 calm
+expected, owner and reader; say where they differ), 0 of 432 still print a sentence twice.
+GATES at your commit: your arms; every test file naming `traditionDescriptionTable` or `traditionDescription`;
+`npx eslint` on the touched files; `npm run typecheck:ratchet`; `npm run typecheck:domain:strict`. Through
+`sh /home/user/settlement-engine/scripts/gate-mutex.sh --run --` (one heavy gate at a time), each to a file, read by its
+count lines. NOT `tests/lint` whole (the integrator's). One commit per cause (the table+leaf+arms; the census rows), by
+explicit paths, receipts in each message. Never push.
+FOR THE VEIL'S READER (one line, in the commit body): what an "also" can and cannot tell a reader (it tells that an earlier
+SHOWN rite honours the same thing; it can tell nothing of a rite the reader is not shown).
