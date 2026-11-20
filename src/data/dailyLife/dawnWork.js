@@ -24,15 +24,23 @@
  * farming → `institution: farmland`; dwellings → `institution: dwellings`; common → `institution: commonGrazing`;
  * landing → `institution: fishingLanding`; elder → `ruler: elder`; small → `tier: ≤ village` (LINES-1b, from the tier).
  *
+ * DAILY-2's cures of 2026-11-20 (stricter needs, wordings unchanged; the presumed-things and presumption-classes walkers):
+ * W0 and B0 say "the watch", so they also declare `watch`; B26 says the boats go out, so it excludes a siege in force
+ * (`excludes: ['crisis: under_siege']`, as N11 of `gatheringPlaces.js`); S0 says the loads do not come, so it is scoped to
+ * a siege in force (`crisis: under_siege` as a need: the presumption-classes walker reads its `outside` word answered only
+ * by a crisis atom that closes the threat family, and an exclusion of one kind does not).
+ *
  * NOT BUILT: W12 ("With danger about in the country, …", needs `monster`): a monster_pressure threat has no fact home and
  * no atom (ruling 11; `dailyLifeAtoms.test.js :: NOT_GRANTED`), so the line cannot be declared. No line needs a hideable
  * house or a crime fact (`tests/domain/dailyLifeAtoms.test.js`, arm (c)).
  */
 
-/** @typedef {{ readonly id: string, readonly text: string, readonly needs: ReadonlyArray<string> }} DawnLine */
+/** @typedef {{ readonly id: string, readonly text: string, readonly needs: ReadonlyArray<string>, readonly excludes?: ReadonlyArray<string> }} DawnLine */
 
-/** @param {ReadonlyArray<{ id: string, text: string, needs: string[] }>} lines @returns {ReadonlyArray<DawnLine>} */
-const frozen = (lines) => Object.freeze(lines.map((l) => Object.freeze({ ...l, needs: Object.freeze([...l.needs]) })));
+/** @param {ReadonlyArray<{ id: string, text: string, needs: string[], excludes?: string[] }>} lines @returns {ReadonlyArray<DawnLine>} */
+const frozen = (lines) => Object.freeze(lines.map((l) => Object.freeze({
+  ...l, needs: Object.freeze([...l.needs]), ...(l.excludes ? { excludes: Object.freeze([...l.excludes]) } : {}),
+})));
 
 /** The pools by branch (the deriver's branch key → its lines). */
 export const DAWN_WORK = Object.freeze({
@@ -49,7 +57,7 @@ export const DAWN_WORK = Object.freeze({
 
   /** `defence`: the defence capacity is critical or collapsed, and a real outside threat stands at medium or above (ruling 8). */
   defence: frozen([
-    { id: 'W0', text: 'The walls claim the first hours: the watch musters thin at first light, and ordinary work waits until the rounds are walked.', needs: ['walls', 'guardPresence'] },
+    { id: 'W0', text: 'The walls claim the first hours: the watch musters thin at first light, and ordinary work waits until the rounds are walked.', needs: ['walls', 'guardPresence', 'watch'] },
     { id: 'W1', text: 'Before any other work, someone walks the length of the walls at first light and looks for gaps.', needs: ['walls'] },
     { id: 'W2', text: 'Those who keep guard are out at first light, and the rest wait for their word before going out to work.', needs: ['guardPresence'] },
     { id: 'W3', text: 'Those sworn to turn out in danger meet briefly at first light before going to their own work.', needs: ['militia'] },
@@ -74,7 +82,7 @@ export const DAWN_WORK = Object.freeze({
 
   /** `merchant_siege`: the merchant power is 30 or more, under a siege. */
   merchant_siege: frozen([
-    { id: 'S0', text: 'The merchants count their stock before light, and the porters wait for loads that do not come; dawn brings the smell of woodsmoke and grain.', needs: [] },
+    { id: 'S0', text: 'The merchants count their stock before light, and the porters wait for loads that do not come; dawn brings the smell of woodsmoke and grain.', needs: ['crisis: under_siege'] },
     { id: 'S1', text: 'The merchants are up before light, counting what is left and waiting for goods that cannot reach them.', needs: [] },
   ]),
 
@@ -91,7 +99,7 @@ export const DAWN_WORK = Object.freeze({
 
   /** `default`: the calm place (LINES-1b: B18 to B26 the calm small place's lines). */
   default: frozen([
-    { id: 'B0', text: 'Bakers light their ovens first, then the smiths; the watch changes as the gates open.', needs: ['institution: bakery', 'institution: smith', 'guardPresence', 'gate'] },
+    { id: 'B0', text: 'Bakers light their ovens first, then the smiths; the watch changes as the gates open.', needs: ['institution: bakery', 'institution: smith', 'guardPresence', 'watch', 'gate'] },
     { id: 'B1', text: 'The bakers have their ovens lit before first light, and the first bread is out as people wake.', needs: ['institution: bakery'] },
     { id: 'B2', text: 'The forge is lit early, and its hammering is the first sound of most mornings.', needs: ['institution: smith'] },
     { id: 'B3', text: 'The first grain of the day is carried to {mill} at first light.', needs: ['institution: mill'] },
@@ -117,6 +125,6 @@ export const DAWN_WORK = Object.freeze({
     { id: 'B23', text: 'The first water of the day is fetched at first light, before anything else is done.', needs: ['institution: waterSource', 'tier: ≤ village'] },
     { id: 'B24', text: 'The day begins with the walk out to the fields, and the work there runs on until midday.', needs: ['institution: farmland', 'tier: ≤ village'] },
     { id: 'B25', text: 'Some go out at first light to cut and carry wood, and the rest turn to the day\'s other work.', needs: ['timber at hand', 'tier: ≤ village'] },
-    { id: 'B26', text: 'The boats go out from the landing at first light, and the catch decides the rest of the day.', needs: ['institution: fishingLanding'] },
+    { id: 'B26', text: 'The boats go out from the landing at first light, and the catch decides the rest of the day.', needs: ['institution: fishingLanding'], excludes: ['crisis: under_siege'] },
   ]),
 });
