@@ -3429,3 +3429,18 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   whole 3,270 of 3,271: `tuningRegister`'s two named rows); CF12's brief (abeadbf23); C1's builder on `frame5-c1`;
   ITS ANSWER ON THE SIDES (section 2): the stored sides stay; S7 and S8 become display. PAGE-2's twelve goals
   explained (section 2). GOALS-2 seated and asked about the held-set filter.
+- 12:00 UTC · FORTUNE-1 "FORTUNE-PART 57a79cc2d, HANDED OVER" (407,448): FORTUNE-2 TOLD "THE LANE IS YOURS at 57a79cc2d" (12:00).
+  ONE BUILDER OUT: U1 (the law leaf), commit bc3c5cc8e, local in FORTUNE-1's container, UNREAD; its own warning: it
+  touches the two census files outside its manifest: FORTUNE-2 told to strip any census change at the merge and
+  re-take both by their doors. FORTUNE-1 relays U1 as `lane/fortune-1-2026-11-20-u1` when it returns.
+- 12:01 UTC · SEAT-3 "U2 GREEN 34d2d769a": the second cure (2b9706f5d) read line by line against the accepted design and merged
+  (e9d5c98b8): the view's 13 keys, order and values equal the old literal; the pin red by a plant; 110 governing
+  files 1,980 passed; `tests/lint` whole 220 of 220 (3,271); THE CONFINEMENT 8c4beb844 to 34d2d769a EQUAL
+  (36ee5bb0...); census titles 31,256 to 31,260. Pushed `lane/seat-3-2026-11-20` at f749245fb with its hand-back.
+  U3 (the holder leaf) RETURNED (b9bb5620e) and read whole: its pools match the proposal exactly (R2 365 and 213,
+  R3 96 and 243, R4 413 and 444, R5 26 and 60); its closure reaches neither `rulingPowerCoup` nor `powerStrata`;
+  merging next. TOLD: `dmLayerGoldenIsolation` A7 is a known red; BEFORE U12 THE LANE MERGES THE WORKING LINE (the
+  titles' final table is at 0c906948; the lane holds e356c94f) and U3's arm that pins `APPOINTED_SEAT_FORMS` to
+  the titles' appointed family is re-run. SEAT-4 SEATED BESIDE IT (session_019yED1RNL8TjjpR5HCcJ3yW; on
+  `lane/seat-3-2026-11-20` at f749245fb; outcome `lane/seat-4-2026-11-20`); the hand-over after U3's merge and
+  U4's dispatch, or at 380,000.
