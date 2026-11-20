@@ -55,17 +55,20 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
    grouping deletes the keys.
 10. VR39: a crime TYPE leaves by ATTRIBUTION (the house whose flags raise it is hidden whole), not by name. A shown house
     or a crisis keeps its types. **AND (08:01): crimeTypes FAILS CLOSED: an unknown type is withheld; a parity walker
-    holds the map equal to the engine's set of types.**
+    holds the map equal to the engine's set of types.** The ruling named TYPES, HOOKS AND THE RIVAL: the walker
+    `tests/lint/rosterChoicePools.walker.test.js` (R3's first cure; on `lane/veil-24-r3c2-2026-11-20`) holds all three, and
+    the operations labels, against the engine in both engines, with a TEETH arm (one key removed from each pool, each
+    engine, is named). Read at b907c75c9 by its test titles; its green is re-run by the seat before the R3 merge.
 11. THE POWER RULE (VR11, the chair's 03:15 and 07:31; for R3): with groupings open and every hideable house hidden, no
     served criminal power is one a hidden house raised, and the Defense label a visitor derives stays within the control
     pool. **A POWER A HIDDEN HOUSE RAISED IS NOT A SHOWN POWER AND IT LEAVES WHOLE: every copy the served document holds,
-    tested by SEARCH (the name and the id in no served string and as no key; both shapes, gallery and link, Reveal DM off
-    and on).** Structured copies are cured in R3; prose copies are named for R5 and cured there. R3 is not green while the
+    PROVED BY SEARCH, NEVER BY A LIST OF FIELDS (the name, its bare form and the id in no served string and as no key;
+    both shapes, gallery and link, Reveal DM off and on).** Structured copies are cured in R3; prose copies are named for R5 and cured there. R3 is not green while the
     search finds a hit outside R5's named list. VR42: the GOVERNING power's row is never removed while the government's
     name stays (a criminal-worded governing body is tier 2); the test says which rule took each town. power.entry's
     REACH (it withholds wherever ANY house is hidden) stands until measured. It is narrowed only if the per-town
-    counterfactual shows no observable difference AND the row's absence does not itself become a tell. The count goes in
-    section 5.
+    counterfactual shows no observable difference AND the row's absence does not itself become a tell. The count, WITH
+    ITS DENOMINATOR (of how many born pages), goes in section 5: OWED (the first cure counted 9 pages without one).
 12. VR36, THE COST LAW: the named rows, and the Reveal-DM gallery read of the largest born town, are bound by twice 211's
     Reveal-OFF read of the same town. Every stage that touches 212 times them, and E's cost run carries them.
 13. VR27 as amended: a helper 212 adds that is called only inside the definer reads is revoked from PUBLIC, anon and
@@ -96,7 +99,8 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
 18. VR47, THE HONORIFIC (08:01): the pick of a weighty title is a function of what every read serves: the person's NAME
     and TITLE (gender choosing only the gendered form), on EVERY page, the owner's included; never the card's id, never
     the institution key. One helper builds the seed. A stable per-person seed served for shared pages is REFUSED. Display
-    only: no stored byte, no generator figure moves.
+    only: no stored byte, no generator figure moves. RED FIRST: two reads of one town print the same honorific for every
+    card, and the owner's page and the shared page agree (MERGED df6809f9c: red 4 failed at 4d91d5c5f, green 61/61).
 19. VR44 (at the doors' merge): the tile's stability (the `get_gallery_dossier` column, the lists, the og card) is the
     BAND WORD ALONE on every non-owner read, marked or unmarked. Red first by the reader's probe.
 20. VR41's two narrowings (at the doors' merge): the chronicle's compare also folds the RAW target id; a power target counts
@@ -132,23 +136,35 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
 29. MESSAGES to the chair: at most 300 words; at once on a surprise; your token count from get_session in each (it has read
     0 for this seat: keep an estimate and add a third); one line after each stage merged green ("R3 <commit>"; for the
     doors: "DOORS-IN <commit>" with 212's sha256). THE MARK: 450,000 tokens; the chair seats a successor at 330,000.
-30. THE DERIVED KEY (the chair, 09:04, ruling 2 on R3): R3 IS NOT GREEN WHILE A VISITOR'S DERIVED DEFENSE KEY DIFFERS
-    FROM THE HOUSE-FREE COUNTERFACTUAL IN ANY TOWN (the chair's word is DIFFERS. VEIL-24's R3-CURE-2 brief let a LOWER key
-    pass with its cause named; at b907c75c9 13 of 92 towns are LOWER, each with a named cause. That leniency is the seat's,
-    NOT the chair's, and is put to the chair before the merge). EVERY SERVED FIELD THAT FEEDS A DERIVED KEY IS RE-DERIVED OVER
-    THE HOUSES THAT READ SERVES, OR WITHHELD; never served as stored beside a roster that no longer justifies it. Where the
-    feeding field is not yet attributed (the covert rung), ATTRIBUTE FIRST, per town. Acceptance: per-town equality on
-    both observables (the Defense key, "Magical crime"), zero towns higher, as a born arm.
+30. THE DERIVED KEY (the chair, 09:04, ruling 2 on R3; RE-WORDED BY THE CHAIR 10:28): EVERY SERVED FIELD THAT FEEDS A
+    DERIVED KEY IS RE-DERIVED OVER THE HOUSES THAT READ SERVES, OR WITHHELD; never served as stored beside a roster that
+    no longer justifies it. Where the feeding field is not yet attributed (the covert rung), ATTRIBUTE FIRST, per town.
+    A TOWN WHOSE DERIVED KEY READS HIGHER THAN ITS COUNTERFACTUAL BLOCKS. A town reading LOWER does NOT block the R3
+    merge, on three conditions: (1) each LOWER town is assigned to a named, RULED fail-closed rule (power.entry's reach;
+    crimeTypes failing closed; the goal rule; ...), not merely "a cause"; a LOWER whose cause is not such a rule BLOCKS
+    and goes to the chair; (2) the counts by rule, with the denominator (of 92), go into the owner's paragraph in plain
+    words; (3) THE TELL QUESTION goes to the security reader as a NAMED ATTACK with the LOWER towns listed: is each served
+    page one that some town with NOTHING hidden could show (the same served profile found in the born pools), or does the
+    combination betray that something was withheld? R3 merges "GREEN TOWARD WITHHOLDING, THE TELL QUESTION OPEN"; the
+    reader's verdict gates E, not the merge. At b907c75c9: HIGHER 0, EQUAL 79, LOWER 13 of 92; the 13's assignment to
+    rules is OWED (R3-CURE-3, unit D, or the seat before the merge).
+    THE ACCEPTANCE (ruling 37 (b)) WITH THE CHAIR'S 10:28 CONDITION: the REGENERATED counterfactual is built by a path
+    INDEPENDENT of the projection's re-derivation (the generator run with the houses cut at every step, never the same
+    helper called twice); PART 25 names the code that builds it once R3-CURE-3 returns (the differ's B,
+    `REVIEW-VEIL-9/differ.probe.jsx :: birth` with `onStep` cutting the houses, is the model).
 31. A GOAL NAMING A WITHHELD POWER (the chair, 09:04, ruling 3 on R3): leaves with the power, under Reveal DM too ("leaves
     whole" reaches every string). `galleryServerVeil`'s two guards that pinned such a goal are re-stated with that reason;
     their tooth: a goal aimed at a SHOWN power is still served on that read, byte for byte.
-32. THE BETRAYING WORD (the chair, 08:37; every lane that writes a reader's text): a rank word, a share word, a count, a
-    superlative or an "only" in a served sentence is computed over the rows THAT READ SERVES, or the sentence is withheld.
-    R5's brief takes a born arm by counterfactual (the same town with the withheld row truly absent prints the same
-    sentence on that read) over every composed or stored sentence of that kind, the six alias rows
-    `publicProse.blocks.economy:{daily_life,resources,services}.{incomeMix,criminalLine}` first. The reader's baseline for
-    R5: four differing rows (`faith.templeFraud`, `power:desk.structureFlag`, `economics.shadowEconomy`,
-    `economics.incomeWeight`) and `factions[].desc` (24 hits of a withheld power's name).
+32. THE BETRAYING WORD (the chair, 08:37; WIDENED 10:28; every lane that writes a reader's text): A WORD A SENTENCE
+    CHOOSES BY A RANK, A SHARE, A COUNT, A SUPERLATIVE OR AN "ONLY" COMPUTED OVER ROWS A READ CAN WITHHOLD is computed over
+    the rows THAT READ SERVES, or the sentence is withheld. R5's brief takes a born arm by counterfactual (the same town
+    with the withheld row truly absent prints the same sentence on that read) over every composed or stored sentence of
+    that kind. R5'S ORDER, RULED 10:28: FIRST a power's description that names a withheld power (a name in served prose:
+    TIER 1; ruling 36 (b): `powerStructure.factions[].desc`, 20 hits in 2 towns, and `factions[].desc`, 4, at the first
+    R3 cure; "E" is not sent while the search finds one); THEN the six alias rows
+    `publicProse.blocks.economy:{daily_life,resources,services}.{incomeMix,criminalLine}`; THEN the rank-word class. The
+    reader's baseline for R5: four differing rows (`faith.templeFraud`, `power:desk.structureFlag`,
+    `economics.shadowEconomy`, `economics.incomeWeight`) and `factions[].desc` (24 hits of a withheld power's name).
 33. VR48, A SERVED CARD CARRIES ITS GENDER (the chair, 09:02, on VEIL-24's measure): on every read that serves the card.
     The veil never withheld it (211 holds `gender` on the card's FLOOR); the old public allowlist does (since 033, no reason
     recorded), so shared pages print the masculine form for 119 women in 60 of 70 born towns ("Godi" for "Gydja",
@@ -248,10 +264,13 @@ run exit 0, 40 PASS (`out/v24/gender/accept.txt`).
   on players' pages and reveals nothing the page's own sentences do not already say ("she", "he": 46 such sentences a page).
 - THE BLACK MARKET'S SHARE under the default settings: never sent by the server; a page re-derives it only where the share
   carries no veil, else it is not drawn.
-- A CRIMINAL POWER'S ROW where no hidden house raised it: 9 born pages lose a "Thieves' Guild" row no hidden house raised
+- A CRIMINAL POWER'S ROW where no hidden house raised it (power.entry's reach): 9 born pages lose a "Thieves' Guild" row no hidden house raised
   (the first R3 cure's measure; the denominator is still owed: R3-CURE-2 did not re-run it). VR42 (the governing power
   kept while the government's name stays) is met by 0 of 140 born towns; a hand town serves its governing "Thieves' Guild"
   whole, share 60, and that arm is kept.
+- A CALMER CRIME PICTURE on some shared pages (ruling 30): where the veil withholds toward safety, the Defense reading a
+  visitor works out from the page can come out LOWER than the same town would show with the hidden houses truly gone: 13
+  of 92 generated towns at the second R3 cure; never HIGHER. The counts by rule are OWED with the R3 merge.
 - THE REASON AFTER "Unstable" on an old page's card: after the doors' merge, the card shows the band word alone ("Unstable")
   on every read that is not the owner's (VR44).
 
@@ -269,3 +288,4 @@ run exit 0, 40 PASS (`out/v24/gender/accept.txt`).
   R4-CURE-2 brief is written (`briefs/R4-CURE-2-BRIEF.md`, its base filled at launch); VEIL-25 staffs it, not this seat.
 - 10:20 PART 25 checked against the chair's list; ruling 30 restored to the chair's word (DIFFERS; the 13 LOWER towns put to it).
 - 10:21 the chair's rulings on R3-CURE-2 (ruling 37); relayed to R3-CURE-3 10:24. VEIL-25 seated (session_019yED1QCGsC1hjJ6rjiboyE).
+- 10:28 the chair re-worded ruling 30 (LOWER does not block, on three conditions) and the acceptance's independence; VEIL-25's five gaps cured 10:29.
