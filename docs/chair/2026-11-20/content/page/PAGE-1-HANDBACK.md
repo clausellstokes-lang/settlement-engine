@@ -43,9 +43,14 @@ file and the briefs only. The seat's prompt: `git show origin/lane/chair-2026-11
 | Unit | Brief | Builder's worktree and branch | State at 12:49 |
 |---|---|---|---|
 | CARD (S1, S2) | `briefs/BUILD.md` §CARD | pushed `lane/page-1-2026-11-20-card` at `c03e48972` (WIP `58fb388a5` before it) | DONE GREEN, UNMERGED; words in `words/PAGE-1-WORDS.md`, sent to the chair; awaiting its read (and its ruling on the NPCs tab's removed influence tally and filter) |
-| OUTPUT (S3) | `briefs/BUILD.md` §OUTPUT | pushed `lane/page-1-2026-11-20-output-wip` at `fe5837c95` | OUT, finishing |
+| OUTPUT (S3) | `briefs/BUILD.md` §OUTPUT | `page1-output-2026-11-20`, pushed `lane/page-1-2026-11-20-output-wip` at `f37a670a4` | OUT, finishing. Its builder reports a STOP on the drag clause (the tuning register refuses a mirror of the generator's weights); the share in words stands. The chair rules on the drag. |
 | SAFETY (S4) | `briefs/BUILD.md` §SAFETY plus the both-directions widening (ruling 4 above) | pushed `lane/page-1-2026-11-20-safety-wip` at `fd767aeac` | OUT, finishing |
-| MAGIC (S5) | `briefs/BUILD.md` §MAGIC | pushed `lane/page-1-2026-11-20-magic-wip` at `4f0448a50` | OUT, finishing |
+| MAGIC (S5) | `briefs/BUILD.md` §MAGIC | pushed `lane/page-1-2026-11-20-magic` at `dcb3b2744` (cure `4f0448a50`) | DONE GREEN, UNMERGED; words in `words/PAGE-1-WORDS.md`, sent to the chair; open question: the Overview line prints to every audience |
+
+HANDED OVER TO PAGE-4 at the commit that carries this line (the chair's point of 12:48/13:32: two units' words with the
+chair). PAGE-1 only relays after it. Known reds not ours in the builders' runs: `ledgerCitationIntegrity` (no
+`review-fixes-2026-07-08` ref in the clone), `sovereigntyLightingContract` 3707 vs 3706 (red at base), and load timeouts
+that pass when run singly.
 
 Each builder branch descends from `ff51769f7` (the build brief) on this lane: merge it with `git merge --no-ff`.
 CARD's report (whole) is the source of its words file row; its receipts are under `build/CARD/` on its branch.
