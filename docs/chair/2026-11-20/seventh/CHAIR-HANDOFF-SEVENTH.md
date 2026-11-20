@@ -1011,6 +1011,24 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   deploy, with its design (held lines kept in the list marked refused and resolved draw-free; the uncanny chance
   rolled always) and a second cross-card read it found (the uncanny roll is consumed only under the cap).
 
+- **R3, THE HUSK IS A CLASS (2026-11-20, 12:21 UTC; R3-CURE-4 returned NOT green at c5786c5ce):** the cause is the ORDER of two
+  passes: the hidden-name sweep (the twin's `withholdSecondHomes :: sweepHiddenNames`; 212's
+  `_gallery_veil_name_sweep`) runs before R3's copy pass and strips a row's sentence and target, so the copy pass
+  no longer recognises the row. Measured over 175,469 objects: husks are goals, memberships, conflict parties in
+  both lists, tensions and relation pairs. RULED: ANY ROW OF A LIST STRIPPED OF A WITHHELD NAME LEAVES WHOLE, cured
+  at the cause in both engines, red first. The Watch exemption cured by category (the name only where there is no
+  category; 0 of 1,478 born powers move). VR34(b) re-stated, green. KEY-LEVEL HUSKS (`contestsNiche` on a shown
+  power: 19 server, 5 twin; `factionAffiliation` on a served person: 6 and 2): MEASURED FIRST (how often
+  nothing-hidden towns lack the key, by holder kind and size); the chair rules after, between leaving the key off,
+  re-deriving it, and withholding the holder. R3-CURE-5 is out. VEIL-25 (332,388) hands over now; R3's merge is an
+  hour or more away.
+- **THE TRADITIONS' FLOOR EXCLUDES THE HIDEABLE CLASS (12:25 UTC, to TRAD-3):** the rows drawn for the shared page
+  admit by the floor over houses that are NOT of the hideable class (the security lane's one predicate), whether a
+  house is hidden or shown. The four kind phrases for the dead's cause APPROVED ("the siege", "the great fire",
+  "the flood", "the years of sickness"), with a totality guard. ITS NOTE PASSED TO THE SECURITY LANE AS A LEAD:
+  `brokerageLegalityOf` reads a house's own tags, so an illegal brokerage with its function eye hidden may stop
+  counting as hideable in the veil itself (VEIL-26: one plant when the lane is its own; a stage of its own if real).
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -3493,3 +3511,20 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   (373eac144); the thin pages' brief written (94d111a44), not dispatched: four of the eight daily-life slots can
   print as they are, four need their pools mended first. VEIL-25 (about 330,000): R3's re-runs match the receipts;
   five LOWER towns checked; the tell question re-stated (section 2).
+- 12:17 UTC · FRAME-6 SEATED BESIDE FRAME-5 (session_019yED1SrGRksHHo91AQFZ25; on `lane/frame-5-2026-11-20` at 48b84cb01;
+  outcome `lane/frame-6-2026-11-20`); the hand-over when P1b and CF12 are merged, or at 330,000 by FRAME-5's count.
+  SEATS WORKING NOW (owners): VEIL-25 (VEIL-26 beside), SEAT-3 (SEAT-4 beside), FRAME-5 (FRAME-6 beside), TRAD-3,
+  FORTUNE-2, NAMES-4, GOALS-2, PAGE-1, PAGE-2, REVIEW-VEIL-12 (waiting); relaying only: VEIL-24, SEAT-2, FRAME-3,
+  FRAME-4, TRAD-2, FORTUNE-1, GOALS-1, NAMES-3.
+- 12:26 UTC · NAMES-4 "4414f9e22. ONE RED OWED" (12:17): the cold read HOLDS; the swap test (98 of 101); three lint reds cured
+  (99aeecb59); `tests/lint` whole 3,271 of 3,271; the confinement in full 0 non-string; THE OWED RED: two census
+  tests (`census2dTables`, `census2eTables`): five declarations key `PRESSURE_SENTENCES` rows by text the
+  agreement changed. THE CHAIR IS LANDING IT AS POINT 82 through a helper in `/home/user/wt/line` (the merge, the
+  owed red's cure, `tests/lint` whole, the censuses by their doors, the landings row with the CI read of
+  0c906948): the helper does not push; the chair reads its report, then pushes. VEIL-25: "CURATE 7ddf4876f";
+  R3-CURE-4 not green (section 2); hand-over approved. TRAD-3 (about 265,000): unit 4 merged locally (reader
+  descriptions moved 432 of 1,232 on its pool; owner 0; drawn set smaller than the owner's in 0 towns); the kind
+  phrases approved; `prompts/TRAD-4.txt` WRITTEN, seated when TRAD-SHARE is pushed. SEAT-3: U3 merged (688d2b565;
+  registers 0d71eaa3b; 0 bytes added); the corrected keyword's ruling sent to it in words. FORTUNE-1's relay: U1 at
+  `lane/fortune-1-2026-11-20-u1` bc3c5cc8e (the builder retook the censuses itself: FORTUNE-2 told to drop those
+  hunks and re-take by the doors). FRAME-6 and VEIL-26 read in; their instruments reproduce.
