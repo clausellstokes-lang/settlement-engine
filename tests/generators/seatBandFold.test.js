@@ -24,6 +24,7 @@
  */
 import { createHash } from 'node:crypto';
 import { beforeAll, describe, expect, test } from 'vitest';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { powerBandOfRole } from '../../src/generators/npcGenerator.js';
 import { raiseToOfficeBand } from '../../src/generators/people/castPowers.js';
 import { POOL_BY_TITLE, POOL_BY_SHELF, SEAT_ROLE_BY_TIER } from '../../src/generators/people/poolMap.js';
@@ -131,11 +132,12 @@ describe('(3) the old law is byte-identical to the base', () => {
     expect(ROLES.length).toBe(RECORDED['roles']);
   });
   test('a town (uk-town-17) and a city (uk-city-5) born with the law absent, 1 or "2" equal the base, byte for byte', () => {
-    for (const [size, seed] of [['town', 'uk-town-17'], ['city', 'uk-city-5']]) {
-      for (const [label, law] of [['absent', {}], ['1', { _seatLawVersion: 1 }], ['"2"', { _seatLawVersion: '2' }]]) {
-        expect(sha(born(size, seed, law)), `${seed}:${label}`).toBe(RECORDED[`${seed}:${label}`]);
-      }
-    }
+    const CASES = [['town', 'uk-town-17'], ['city', 'uk-city-5']].flatMap(([size, seed]) => [['absent', {}], ['1', { _seatLawVersion: 1 }], ['"2"', { _seatLawVersion: '2' }]]
+      .map(([label, law]) => ({ size, seed, label, law })));
+    const failures = collectSeedFailures(CASES, ({ size, seed, label, law }) => {
+      expect(sha(born(size, seed, law)), `${seed}:${label}`).toBe(RECORDED[`${seed}:${label}`]);
+    });
+    expectNoSeedFailures(failures, 'every old-law birth equals the base\'s recorded digest');
   });
 });
 
