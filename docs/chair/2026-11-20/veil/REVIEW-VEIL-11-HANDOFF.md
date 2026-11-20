@@ -1,4 +1,4 @@
-# REVIEW-VEIL-11 — HAND-OFF (kept current at every push; last written 2026-11-20 03:08 UTC by date -u, before FINAL)
+# REVIEW-VEIL-11 — HAND-OFF (kept current at every push; last written 2026-11-20 03:15 UTC by date -u, before FINAL)
 
 The review: `REVIEW-VEIL-11.md` beside this file. Probes and outputs: `probes/REVIEW-VEIL-11/`. **No verdict; 212 is NOT
 cleared.** My predecessors' hand-offs stand whole and are read from origin only (`git show
@@ -60,6 +60,6 @@ Run any probe: `RV6_SRC=<tree> [RV10_GEN=<master tree>] RV10_TPL=<chain> RV10_N=
     restates `get_gallery_map`.
 14. `dlattice.probe.jsx` on both shapes and with `RV11_STRIPW=1` (sum 100, `weight` absent; add the map member read).
 15. `ct.probe.jsx` with `RV11_OPEN=1`: no served crime type that no hidden-free town of the pool holds ("Smuggling",
-    "Religious fraud", "Criminal governance"), the groupings open and the house hidden whole (section 3c).
+    "Religious fraud", "Criminal governance"), the groupings open and the house hidden whole (section 3c); `ct2.probe.jsx` with `RV11_OPEN=1` and its control: no served criminal power a hidden house raised (VR11 `power.entry`), the derived Defense label within the control's distribution (section 3f).
 16. The cures' own tests re-run red at their bases and green at FINAL: `galleryVeilSignalCopies.pglite.test.js` (VR17),
     `galleryVeilHandRows.pglite.test.js` (B/C/D), and DOORS's when it comes.

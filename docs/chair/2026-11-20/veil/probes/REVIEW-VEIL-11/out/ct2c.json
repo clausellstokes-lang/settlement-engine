@@ -1,0 +1,771 @@
+[
+ {
+  "seed": "rv10-inv-village-none-0-1",
+  "ct": true,
+  "goneN": 0,
+  "key": null,
+  "keyA": null,
+  "lab": null,
+  "servedCrim": 0,
+  "ctServed": [],
+  "ciServed": 0,
+  "ciNames": [],
+  "ciHidden": [],
+  "ctStored": [],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-village-none-0-1",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 4
+ },
+ {
+  "seed": "rv10-inv-village-none-0-2",
+  "ct": true,
+  "goneN": 0,
+  "key": null,
+  "keyA": null,
+  "lab": null,
+  "servedCrim": 0,
+  "ctServed": [],
+  "ciServed": 0,
+  "ciNames": [],
+  "ciHidden": [],
+  "ctStored": [],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-village-none-0-2",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 2
+ },
+ {
+  "seed": "rv10-inv-village-none-0-3",
+  "ct": true,
+  "goneN": 0,
+  "key": null,
+  "keyA": null,
+  "lab": null,
+  "servedCrim": 0,
+  "ctServed": [],
+  "ciServed": 0,
+  "ciNames": [],
+  "ciHidden": [],
+  "ctStored": [],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-village-none-0-3",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 5
+ },
+ {
+  "seed": "rv10-inv-village-infiltrated-0-4",
+  "ct": true,
+  "goneN": 0,
+  "key": null,
+  "keyA": null,
+  "lab": null,
+  "servedCrim": 0,
+  "ctServed": [],
+  "ciServed": 0,
+  "ciNames": [],
+  "ciHidden": [],
+  "ctStored": [],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-village-infiltrated-0-4",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 2
+ },
+ {
+  "seed": "rv10-inv-village-insurgency-0-5",
+  "ct": true,
+  "goneN": 0,
+  "key": "diffuse",
+  "keyA": "diffuse",
+  "lab": "{\"key\":\"diffuse\",\"label\":\"Diffuse Criminal Presence\",\"color\":\"#7a5010\",\"bg\":\"#faf8e0\",\"note\":\"Thieves, fences and bandits each work for themselves; there is no ",
+  "servedCrim": 0,
+  "ctServed": [
+   "Background crime",
+   "political violence",
+   "loyalty testing",
+   "information trade"
+  ],
+  "ciServed": 0,
+  "ciNames": [],
+  "ciHidden": [],
+  "ctStored": [
+   "Background crime",
+   "political violence",
+   "loyalty testing",
+   "information trade"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-village-insurgency-0-5",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 3
+ },
+ {
+  "seed": "rv10-inv-village-indebted-0-6",
+  "ct": true,
+  "goneN": 0,
+  "key": null,
+  "keyA": null,
+  "lab": null,
+  "servedCrim": 0,
+  "ctServed": [
+   "debt evasion"
+  ],
+  "ciServed": 0,
+  "ciNames": [],
+  "ciHidden": [],
+  "ctStored": [
+   "debt evasion"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-village-indebted-0-6",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 4
+ },
+ {
+  "seed": "rv10-inv-village-wartime-0-7",
+  "ct": true,
+  "goneN": 0,
+  "key": null,
+  "keyA": null,
+  "lab": null,
+  "servedCrim": 0,
+  "ctServed": [
+   "war profiteering",
+   "deserter networks",
+   "conscription fraud"
+  ],
+  "ciServed": 0,
+  "ciNames": [],
+  "ciHidden": [],
+  "ctStored": [
+   "war profiteering",
+   "deserter networks",
+   "conscription fraud"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-village-wartime-0-7",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 4
+ },
+ {
+  "seed": "rv10-inv-village-occupied-0-9",
+  "ct": true,
+  "goneN": 0,
+  "key": null,
+  "keyA": null,
+  "lab": null,
+  "servedCrim": 0,
+  "ctServed": [
+   "resistance activity",
+   "collaboration fraud"
+  ],
+  "ciServed": 0,
+  "ciNames": [],
+  "ciHidden": [],
+  "ctStored": [
+   "resistance activity",
+   "collaboration fraud"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-village-occupied-0-9",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 6
+ },
+ {
+  "seed": "rv10-inv-village-politically_fractured-0-10",
+  "ct": true,
+  "goneN": 0,
+  "key": null,
+  "keyA": null,
+  "lab": null,
+  "servedCrim": 0,
+  "ctServed": [],
+  "ciServed": 0,
+  "ciNames": [],
+  "ciHidden": [],
+  "ctStored": [],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-village-politically_fractured-0-10",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 2
+ },
+ {
+  "seed": "rv10-inv-town-none-0-12",
+  "ct": true,
+  "goneN": 0,
+  "key": null,
+  "keyA": "diffuse",
+  "lab": null,
+  "servedCrim": 0,
+  "ctServed": [
+   "Background crime"
+  ],
+  "ciServed": 0,
+  "ciNames": [],
+  "ciHidden": [],
+  "ctStored": [
+   "Background crime"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-town-none-0-12",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 5
+ },
+ {
+  "seed": "rv10-inv-town-none-0-13",
+  "ct": true,
+  "goneN": 0,
+  "key": null,
+  "keyA": null,
+  "lab": null,
+  "servedCrim": 0,
+  "ctServed": [],
+  "ciServed": 0,
+  "ciNames": [],
+  "ciHidden": [],
+  "ctStored": [],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-town-none-0-13",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 8
+ },
+ {
+  "seed": "rv10-inv-town-infiltrated-0-14",
+  "ct": true,
+  "goneN": 0,
+  "key": null,
+  "keyA": null,
+  "lab": null,
+  "servedCrim": 0,
+  "ctServed": [],
+  "ciServed": 0,
+  "ciNames": [],
+  "ciHidden": [],
+  "ctStored": [],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-town-infiltrated-0-14",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 9
+ },
+ {
+  "seed": "rv10-inv-town-indebted-0-16",
+  "ct": true,
+  "goneN": 0,
+  "key": "organized",
+  "keyA": "organized",
+  "lab": "{\"key\":\"organized\",\"label\":\"Organized Syndicate\",\"color\":\"#8b1a1a\",\"bg\":\"#fdf4f4\",\"note\":\"One criminal ring decides what crime is allowed here. Its rules are pr",
+  "servedCrim": 0,
+  "ctServed": [
+   "Survival crime",
+   "debt evasion"
+  ],
+  "ciServed": 0,
+  "ciNames": [],
+  "ciHidden": [],
+  "ctStored": [
+   "Survival crime",
+   "debt evasion"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-town-indebted-0-16",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 6
+ },
+ {
+  "seed": "rv10-inv-town-politically_fractured-0-20",
+  "ct": true,
+  "goneN": 0,
+  "key": null,
+  "keyA": null,
+  "lab": null,
+  "servedCrim": 0,
+  "ctServed": [],
+  "ciServed": 0,
+  "ciNames": [],
+  "ciHidden": [],
+  "ctStored": [],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-town-politically_fractured-0-20",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 8
+ },
+ {
+  "seed": "rv10-inv-town-none-0-22",
+  "ct": true,
+  "goneN": 0,
+  "key": "semi-organized",
+  "keyA": "semi-organized",
+  "lab": "{\"key\":\"semi-organized\",\"label\":\"Semi-Organized Networks\",\"color\":\"#8a3010\",\"bg\":\"#fdf0e8\",\"note\":\"Criminal activity is coordinated enough to maintain routes an",
+  "servedCrim": 0,
+  "ctServed": [
+   "Background crime"
+  ],
+  "ciServed": 1,
+  "ciNames": [
+   "Gambling Den"
+  ],
+  "ciHidden": [],
+  "ctStored": [
+   "Background crime"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-town-none-0-22",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 11
+ },
+ {
+  "seed": "rv10-inv-town-none-0-23",
+  "ct": true,
+  "goneN": 0,
+  "key": null,
+  "keyA": null,
+  "lab": null,
+  "servedCrim": 0,
+  "ctServed": [
+   "war profiteering",
+   "deserter networks",
+   "conscription fraud"
+  ],
+  "ciServed": 0,
+  "ciNames": [],
+  "ciHidden": [],
+  "ctStored": [
+   "war profiteering",
+   "deserter networks",
+   "conscription fraud"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-town-none-0-23",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 9
+ },
+ {
+  "seed": "rv10-inv-town-infiltrated-0-24",
+  "ct": true,
+  "goneN": 0,
+  "key": "semi-organized",
+  "keyA": "semi-organized",
+  "lab": "{\"key\":\"semi-organized\",\"label\":\"Semi-Organized Networks\",\"color\":\"#8a3010\",\"bg\":\"#fdf0e8\",\"note\":\"Criminal activity is coordinated enough to maintain routes an",
+  "servedCrim": 0,
+  "ctServed": [],
+  "ciServed": 1,
+  "ciNames": [
+   "Gambling Den"
+  ],
+  "ciHidden": [],
+  "ctStored": [],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-town-infiltrated-0-24",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 9
+ },
+ {
+  "seed": "rv10-inv-town-insurgency-0-25",
+  "ct": true,
+  "goneN": 0,
+  "key": "diffuse",
+  "keyA": "diffuse",
+  "lab": "{\"key\":\"diffuse\",\"label\":\"Diffuse Criminal Presence\",\"color\":\"#7a5010\",\"bg\":\"#faf8e0\",\"note\":\"Thieves, fences and bandits each work for themselves; there is no ",
+  "servedCrim": 0,
+  "ctServed": [
+   "political violence",
+   "loyalty testing",
+   "information trade"
+  ],
+  "ciServed": 0,
+  "ciNames": [],
+  "ciHidden": [],
+  "ctStored": [
+   "political violence",
+   "loyalty testing",
+   "information trade"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-town-insurgency-0-25",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 8
+ },
+ {
+  "seed": "rv10-inv-town-indebted-0-26",
+  "ct": true,
+  "goneN": 0,
+  "key": null,
+  "keyA": null,
+  "lab": null,
+  "servedCrim": 0,
+  "ctServed": [
+   "debt evasion"
+  ],
+  "ciServed": 0,
+  "ciNames": [],
+  "ciHidden": [],
+  "ctStored": [
+   "debt evasion"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-town-indebted-0-26",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 9
+ },
+ {
+  "seed": "rv10-inv-town-none-0-28",
+  "ct": true,
+  "goneN": 0,
+  "key": null,
+  "keyA": "diffuse",
+  "lab": null,
+  "servedCrim": 0,
+  "ctServed": [],
+  "ciServed": 0,
+  "ciNames": [],
+  "ciHidden": [],
+  "ctStored": [],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-town-none-0-28",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 8
+ },
+ {
+  "seed": "rv10-inv-town-occupied-0-29",
+  "ct": true,
+  "goneN": 0,
+  "key": null,
+  "keyA": null,
+  "lab": null,
+  "servedCrim": 0,
+  "ctServed": [
+   "resistance activity",
+   "collaboration fraud"
+  ],
+  "ciServed": 0,
+  "ciNames": [],
+  "ciHidden": [],
+  "ctStored": [
+   "resistance activity",
+   "collaboration fraud"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-town-occupied-0-29",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 4
+ },
+ {
+  "seed": "rv10-inv-city-none-0-43",
+  "ct": true,
+  "goneN": 0,
+  "key": "semi-organized",
+  "keyA": "semi-organized",
+  "lab": "{\"key\":\"semi-organized\",\"label\":\"Semi-Organized Networks\",\"color\":\"#8a3010\",\"bg\":\"#fdf0e8\",\"note\":\"Criminal activity is coordinated enough to maintain routes an",
+  "servedCrim": 0,
+  "ctServed": [],
+  "ciServed": 1,
+  "ciNames": [
+   "Gambling Halls"
+  ],
+  "ciHidden": [],
+  "ctStored": [],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-city-none-0-43",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 10
+ },
+ {
+  "seed": "rv10-inv-city-insurgency-0-45",
+  "ct": true,
+  "goneN": 0,
+  "key": "diffuse",
+  "keyA": "diffuse",
+  "lab": "{\"key\":\"diffuse\",\"label\":\"Diffuse Criminal Presence\",\"color\":\"#7a5010\",\"bg\":\"#faf8e0\",\"note\":\"Thieves, fences and bandits each work for themselves; there is no ",
+  "servedCrim": 0,
+  "ctServed": [
+   "political violence",
+   "loyalty testing",
+   "information trade"
+  ],
+  "ciServed": 0,
+  "ciNames": [],
+  "ciHidden": [],
+  "ctStored": [
+   "political violence",
+   "loyalty testing",
+   "information trade"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-city-insurgency-0-45",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 13
+ },
+ {
+  "seed": "rv10-inv-city-none-0-48",
+  "ct": true,
+  "goneN": 0,
+  "key": "semi-organized",
+  "keyA": "semi-organized",
+  "lab": "{\"key\":\"semi-organized\",\"label\":\"Semi-Organized Networks\",\"color\":\"#8a3010\",\"bg\":\"#fdf0e8\",\"note\":\"Criminal activity is coordinated enough to maintain routes an",
+  "servedCrim": 0,
+  "ctServed": [],
+  "ciServed": 1,
+  "ciNames": [
+   "Gambling Halls"
+  ],
+  "ciHidden": [],
+  "ctStored": [],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-city-none-0-48",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 9
+ },
+ {
+  "seed": "rv10-inv-metropolis-none-0-51",
+  "ct": true,
+  "goneN": 0,
+  "key": "semi-organized",
+  "keyA": "semi-organized",
+  "lab": "{\"key\":\"semi-organized\",\"label\":\"Semi-Organized Networks\",\"color\":\"#8a3010\",\"bg\":\"#fdf0e8\",\"note\":\"Criminal activity is coordinated enough to maintain routes an",
+  "servedCrim": 0,
+  "ctServed": [
+   "political violence",
+   "loyalty testing",
+   "information trade"
+  ],
+  "ciServed": 1,
+  "ciNames": [
+   "Gambling District"
+  ],
+  "ciHidden": [],
+  "ctStored": [
+   "political violence",
+   "loyalty testing",
+   "information trade"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-metropolis-none-0-51",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 11
+ }
+]

@@ -174,6 +174,18 @@ A FAULT OUTSIDE THE VEIL, FOR THE OWNER'S LIST (PLAUSIBLE: read, plus the guard'
 turns all five sections on by default, so a campaign map shared with its world sends a `chronicle` key and `publish_map`
 raises. The guard protects the veil here by accident: a cure that lets the chronicle through must veil its headlines first.
 
+## 3f. The chair's second VR17 attack: the derived Defense block with the groupings OPEN and every hideable house hidden (427ea0bed)
+
+`ct2.probe.jsx`, `xb212`: the three family groupings opened, every hideable house hidden whole by the default; the block a
+visitor derives from the SERVED document (`criminalStructureKeyOf`, `deriveCriminalStructure`). With (45 towns, no hideable
+house served): "Organized Syndicate" 17, "Semi-Organized Networks" 19, none 9. Control (25 towns without a hideable house,
+the same deltas): organized 1, semi-organized 5, diffuse 3, none 16. Attributed: all 17 "organized" are driven by a SERVED
+criminal POWER (16 "Thieves' Guild", 1 "Corrupt Council"), never by a served house; city-indebted-0-36 hides "Thieves' guild
+chapter" (and six more) and serves the power "Thieves' Guild". That is VR11's `power.entry`: registered, not built at this
+tip (212 has no `_gallery_veil_roster_choices`, the twin no `applyRosterChoices`). Semi-organized is driven by the served
+`criminalInstitutions` list (VR39, R3). FINAL ARM (added to step 15): with the groupings open and every hideable house hidden,
+no served criminal power is one a hidden house raised, and the derived label does not exceed the control's distribution.
+
 ## 4. THE RAW MEASURES, BOTH SHAPES, AT THIS TIP (`splitp.probe.jsx` on the new shape, 45 towns; `splitm` on master): every
 gallery read serves `economicState.compound.criminalEffective` (e.g. 82.84), `compound.militaryEffective` and
 `safetyProfile.safetyRatio` (45 of 45 new; 86 of 86 and 50 of 50 master), and `activeConditions[].severity` (32 of 45;

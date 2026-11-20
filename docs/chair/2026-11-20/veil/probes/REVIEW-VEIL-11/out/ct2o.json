@@ -1,0 +1,2430 @@
+[
+ {
+  "seed": "rv10-inv-village-none-0-8",
+  "ct": true,
+  "goneN": 1,
+  "key": null,
+  "keyA": "semi-organized",
+  "lab": null,
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Smuggling waypoint"
+   ],
+   "powers": [],
+   "houses": [],
+   "ci": 0,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "Criminal governance",
+   "Religious fraud",
+   "war profiteering",
+   "deserter networks",
+   "conscription fraud"
+  ],
+  "ciServed": 0,
+  "ciNames": [],
+  "ciHidden": [],
+  "ctStored": [
+   "Criminal governance",
+   "Religious fraud",
+   "war profiteering",
+   "deserter networks",
+   "conscription fraud"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-village-none-0-8",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 78,
+  "cand": "31 values 32..100",
+  "has100": true,
+  "k": 3
+ },
+ {
+  "seed": "rv10-inv-town-none-0-11",
+  "ct": true,
+  "goneN": 1,
+  "key": null,
+  "keyA": "semi-organized",
+  "lab": null,
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Smuggling operation"
+   ],
+   "powers": [],
+   "houses": [],
+   "ci": 0,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "Smuggling"
+  ],
+  "ciServed": 0,
+  "ciNames": [],
+  "ciHidden": [],
+  "ctStored": [
+   "Smuggling"
+  ],
+  "descHit": [
+   "{\"type\":\"Smuggling\"}"
+  ]
+ },
+ {
+  "seed": "rv10-inv-town-none-0-11",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 8
+ },
+ {
+  "seed": "rv10-inv-town-insurgency-0-15",
+  "ct": true,
+  "goneN": 2,
+  "key": "organized",
+  "keyA": "organized",
+  "lab": "{\"key\":\"organized\",\"label\":\"Organized Syndicate\",\"color\":\"#8b1a1a\",\"bg\":\"#fdf4f4\",\"note\":\"\"}",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Street gang",
+    "Smuggling operation"
+   ],
+   "powers": [
+    "Thieves' Guild"
+   ],
+   "houses": [],
+   "ci": 1,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "Smuggling",
+   "political violence",
+   "loyalty testing",
+   "information trade"
+  ],
+  "ciServed": 1,
+  "ciNames": [
+   "Gambling Den"
+  ],
+  "ciHidden": [],
+  "ctStored": [
+   "Smuggling",
+   "political violence",
+   "loyalty testing",
+   "information trade"
+  ],
+  "descHit": [
+   "{\"type\":\"Smuggling\"}"
+  ]
+ },
+ {
+  "seed": "rv10-inv-town-insurgency-0-15",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 63,
+  "cand": "20 values 44..100",
+  "has100": true,
+  "k": 6
+ },
+ {
+  "seed": "rv10-inv-town-wartime-0-17",
+  "ct": true,
+  "goneN": 1,
+  "key": null,
+  "keyA": "semi-organized",
+  "lab": null,
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Rookery"
+   ],
+   "powers": [],
+   "houses": [],
+   "ci": 0,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "war profiteering",
+   "deserter networks",
+   "conscription fraud"
+  ],
+  "ciServed": 0,
+  "ciNames": [],
+  "ciHidden": [],
+  "ctStored": [
+   "war profiteering",
+   "deserter networks",
+   "conscription fraud"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-town-wartime-0-17",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 8
+ },
+ {
+  "seed": "rv10-inv-town-none-0-18",
+  "ct": true,
+  "goneN": 2,
+  "key": null,
+  "keyA": "organized",
+  "lab": null,
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Front businesses",
+    "Street gang"
+   ],
+   "powers": [],
+   "houses": [],
+   "ci": 0,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "[object Object]"
+  ],
+  "ciServed": 0,
+  "ciNames": [],
+  "ciHidden": [],
+  "ctStored": [
+   "Street gang activity"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-town-none-0-18",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 11
+ },
+ {
+  "seed": "rv10-inv-town-occupied-0-19",
+  "ct": true,
+  "goneN": 2,
+  "key": "organized",
+  "keyA": "organized",
+  "lab": "{\"key\":\"organized\",\"label\":\"Organized Syndicate\",\"color\":\"#8b1a1a\",\"bg\":\"#fdf4f4\",\"note\":\"One criminal ring decides what crime is allowed here. Its rules are pr",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Street gang",
+    "Front businesses"
+   ],
+   "powers": [
+    "Corrupt Council"
+   ],
+   "houses": [],
+   "ci": 0,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "[object Object]",
+   "resistance activity",
+   "collaboration fraud"
+  ],
+  "ciServed": 0,
+  "ciNames": [],
+  "ciHidden": [],
+  "ctStored": [
+   "Street gang activity",
+   "resistance activity",
+   "collaboration fraud"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-town-occupied-0-19",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 87,
+  "cand": "22 values 45..100",
+  "has100": true,
+  "k": 6
+ },
+ {
+  "seed": "rv10-inv-town-none-0-21",
+  "ct": true,
+  "goneN": 2,
+  "key": null,
+  "keyA": "organized",
+  "lab": null,
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Front businesses",
+    "Street gang"
+   ],
+   "powers": [],
+   "houses": [],
+   "ci": 0,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "[object Object]"
+  ],
+  "ciServed": 0,
+  "ciNames": [],
+  "ciHidden": [],
+  "ctStored": [
+   "Street gang activity"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-town-none-0-21",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 8
+ },
+ {
+  "seed": "rv10-inv-town-wartime-0-27",
+  "ct": true,
+  "goneN": 5,
+  "key": "organized",
+  "keyA": "organized",
+  "lab": "{\"key\":\"organized\",\"label\":\"Organized Syndicate\",\"color\":\"#8b1a1a\",\"bg\":\"#fdf4f4\",\"note\":\"One criminal ring decides what crime is allowed here. Its rules are pr",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Fence (word of mouth)",
+    "Smuggling operation",
+    "Street gang",
+    "Rookery",
+    "Front businesses"
+   ],
+   "powers": [
+    "Thieves' Guild"
+   ],
+   "houses": [],
+   "ci": 0,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "Survival crime",
+   "Smuggling",
+   "war profiteering",
+   "deserter networks",
+   "conscription fraud"
+  ],
+  "ciServed": 0,
+  "ciNames": [],
+  "ciHidden": [],
+  "ctStored": [
+   "Survival crime",
+   "Smuggling",
+   "war profiteering",
+   "deserter networks",
+   "conscription fraud"
+  ],
+  "descHit": [
+   "{\"type\":\"Smuggling\"}"
+  ]
+ },
+ {
+  "seed": "rv10-inv-town-wartime-0-27",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 79,
+  "cand": "17 values 60..100",
+  "has100": true,
+  "k": 6
+ },
+ {
+  "seed": "rv10-inv-town-politically_fractured-0-30",
+  "ct": true,
+  "goneN": 2,
+  "key": null,
+  "keyA": "organized",
+  "lab": null,
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Front businesses",
+    "Street gang"
+   ],
+   "powers": [],
+   "houses": [],
+   "ci": 0,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "[object Object]"
+  ],
+  "ciServed": 0,
+  "ciNames": [],
+  "ciHidden": [],
+  "ctStored": [
+   "Street gang activity"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-town-politically_fractured-0-30",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 8
+ },
+ {
+  "seed": "rv10-inv-city-none-0-31",
+  "ct": true,
+  "goneN": 4,
+  "key": "organized",
+  "keyA": "semi-organized",
+  "lab": "{\"key\":\"organized\",\"label\":\"Organized Syndicate\",\"color\":\"#8b1a1a\",\"bg\":\"#fdf4f4\",\"note\":\"One criminal ring decides what crime is allowed here. Its rules are pr",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Smuggling network",
+    "Multiple criminal factions",
+    "Front businesses",
+    "Black market"
+   ],
+   "powers": [
+    "Thieves' Guild"
+   ],
+   "houses": [],
+   "ci": 2,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "[object Object]",
+   "Smuggling"
+  ],
+  "ciServed": 2,
+  "ciNames": [
+   "Rival Gangs",
+   "Gambling Halls"
+  ],
+  "ciHidden": [],
+  "ctStored": [
+   "Arcane black market",
+   "Smuggling"
+  ],
+  "descHit": [
+   "{\"desc\":\"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol sc"
+  ]
+ },
+ {
+  "seed": "rv10-inv-city-none-0-31",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 81,
+  "cand": "13 values 69..100",
+  "has100": true,
+  "k": 11
+ },
+ {
+  "seed": "rv10-inv-city-none-0-32",
+  "ct": true,
+  "goneN": 6,
+  "key": "organized",
+  "keyA": "semi-organized",
+  "lab": "{\"key\":\"organized\",\"label\":\"Organized Syndicate\",\"color\":\"#8b1a1a\",\"bg\":\"#fdf4f4\",\"note\":\"One criminal ring decides what crime is allowed here. Its rules are pr",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Smuggling network",
+    "Multiple criminal factions",
+    "Underground network",
+    "Whisper market",
+    "Black market",
+    "Front businesses"
+   ],
+   "powers": [
+    "Thieves' Guild"
+   ],
+   "houses": [],
+   "ci": 1,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "[object Object]",
+   "Commercial crime",
+   "Smuggling",
+   "debt evasion"
+  ],
+  "ciServed": 1,
+  "ciNames": [
+   "Rival Gangs"
+  ],
+  "ciHidden": [],
+  "ctStored": [
+   "Arcane black market",
+   "Commercial crime",
+   "Smuggling",
+   "debt evasion"
+  ],
+  "descHit": [
+   "{\"desc\":\"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol sc"
+  ]
+ },
+ {
+  "seed": "rv10-inv-city-none-0-32",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 75,
+  "cand": null,
+  "has100": null,
+  "k": 13
+ },
+ {
+  "seed": "rv10-inv-city-none-0-33",
+  "ct": true,
+  "goneN": 7,
+  "key": "semi-organized",
+  "keyA": "organized",
+  "lab": "{\"key\":\"semi-organized\",\"label\":\"Semi-Organized Networks\",\"color\":\"#8a3010\",\"bg\":\"#fdf0e8\",\"note\":\"Criminal activity is coordinated enough to maintain routes an",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Smuggling network",
+    "Thieves' guild chapter",
+    "Front businesses",
+    "Underground network",
+    "Whisper market",
+    "Black market",
+    "Contract killer"
+   ],
+   "powers": [],
+   "houses": [],
+   "ci": 2,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "Commercial crime",
+   "Smuggling"
+  ],
+  "ciServed": 2,
+  "ciNames": [
+   "Gambling Halls",
+   "Red Light District"
+  ],
+  "ciHidden": [],
+  "ctStored": [
+   "Commercial crime",
+   "Smuggling"
+  ],
+  "descHit": [
+   "{\"desc\":\"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol sc"
+  ]
+ },
+ {
+  "seed": "rv10-inv-city-none-0-33",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 87,
+  "cand": [
+   77,
+   86,
+   89,
+   93,
+   94,
+   96,
+   98,
+   99,
+   100
+  ],
+  "has100": true,
+  "k": 11
+ },
+ {
+  "seed": "rv10-inv-city-infiltrated-0-34",
+  "ct": true,
+  "goneN": 4,
+  "key": "semi-organized",
+  "keyA": "organized",
+  "lab": "{\"key\":\"semi-organized\",\"label\":\"Semi-Organized Networks\",\"color\":\"#8a3010\",\"bg\":\"#fdf0e8\",\"note\":\"Criminal activity is coordinated enough to maintain routes an",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Front businesses",
+    "Whisper market",
+    "Black market",
+    "Contract killer"
+   ],
+   "powers": [],
+   "houses": [],
+   "ci": 2,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "Background crime"
+  ],
+  "ciServed": 2,
+  "ciNames": [
+   "Gambling Halls",
+   "Red Light District"
+  ],
+  "ciHidden": [],
+  "ctStored": [
+   "Background crime"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-city-infiltrated-0-34",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 88,
+  "cand": [
+   63,
+   80,
+   84,
+   85,
+   87,
+   89,
+   90,
+   93,
+   97,
+   98,
+   99,
+   100
+  ],
+  "has100": true,
+  "k": 12
+ },
+ {
+  "seed": "rv10-inv-city-insurgency-0-35",
+  "ct": true,
+  "goneN": 1,
+  "key": "semi-organized",
+  "keyA": "organized",
+  "lab": "{\"key\":\"semi-organized\",\"label\":\"Semi-Organized Networks\",\"color\":\"#8a3010\",\"bg\":\"#fdf0e8\",\"note\":\"Criminal activity is coordinated enough to maintain routes an",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Front businesses"
+   ],
+   "powers": [],
+   "houses": [],
+   "ci": 1,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "political violence",
+   "loyalty testing",
+   "information trade"
+  ],
+  "ciServed": 1,
+  "ciNames": [
+   "Gambling Halls"
+  ],
+  "ciHidden": [],
+  "ctStored": [
+   "political violence",
+   "loyalty testing",
+   "information trade"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-city-insurgency-0-35",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 82,
+  "cand": [
+   71,
+   78,
+   87,
+   90,
+   91,
+   94,
+   95,
+   96,
+   97,
+   98,
+   99,
+   100
+  ],
+  "has100": true,
+  "k": 10
+ },
+ {
+  "seed": "rv10-inv-city-indebted-0-36",
+  "ct": true,
+  "goneN": 7,
+  "key": "organized",
+  "keyA": "organized",
+  "lab": "{\"key\":\"organized\",\"label\":\"Organized Syndicate\",\"color\":\"#8b1a1a\",\"bg\":\"#fdf4f4\",\"note\":\"One criminal ring decides what crime is allowed here. Its rules are pr",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Smuggling network",
+    "Thieves' guild chapter",
+    "Front businesses",
+    "Underground network",
+    "Black market",
+    "Contract killer",
+    "Whisper market"
+   ],
+   "powers": [
+    "Thieves' Guild"
+   ],
+   "houses": [],
+   "ci": 2,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "[object Object]",
+   "Commercial crime",
+   "Smuggling",
+   "debt evasion"
+  ],
+  "ciServed": 2,
+  "ciNames": [
+   "Gambling Halls",
+   "Red Light District"
+  ],
+  "ciHidden": [],
+  "ctStored": [
+   "Arcane black market",
+   "Commercial crime",
+   "Smuggling",
+   "debt evasion"
+  ],
+  "descHit": [
+   "{\"desc\":\"An active port-based smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol "
+  ]
+ },
+ {
+  "seed": "rv10-inv-city-indebted-0-36",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 75,
+  "cand": [
+   75,
+   78,
+   83,
+   88,
+   94,
+   95,
+   97,
+   98,
+   99,
+   100
+  ],
+  "has100": true,
+  "k": 12
+ },
+ {
+  "seed": "rv10-inv-city-wartime-0-37",
+  "ct": true,
+  "goneN": 3,
+  "key": null,
+  "keyA": "organized",
+  "lab": null,
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Front businesses",
+    "Contract killer",
+    "Black market"
+   ],
+   "powers": [],
+   "houses": [],
+   "ci": 0,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "war profiteering",
+   "deserter networks",
+   "conscription fraud"
+  ],
+  "ciServed": 0,
+  "ciNames": [],
+  "ciHidden": [],
+  "ctStored": [
+   "war profiteering",
+   "deserter networks",
+   "conscription fraud"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-city-wartime-0-37",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 88,
+  "cand": "14 values 74..100",
+  "has100": true,
+  "k": 11
+ },
+ {
+  "seed": "rv10-inv-city-none-0-38",
+  "ct": true,
+  "goneN": 2,
+  "key": "semi-organized",
+  "keyA": "organized",
+  "lab": "{\"key\":\"semi-organized\",\"label\":\"Semi-Organized Networks\",\"color\":\"#8a3010\",\"bg\":\"#fdf0e8\",\"note\":\"Criminal activity is coordinated enough to maintain routes an",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Front businesses",
+    "Black market"
+   ],
+   "powers": [],
+   "houses": [],
+   "ci": 2,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [],
+  "ciServed": 2,
+  "ciNames": [
+   "Gambling Halls",
+   "Red Light District"
+  ],
+  "ciHidden": [],
+  "ctStored": [],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-city-none-0-38",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 12
+ },
+ {
+  "seed": "rv10-inv-city-occupied-0-39",
+  "ct": true,
+  "goneN": 2,
+  "key": null,
+  "keyA": "organized",
+  "lab": null,
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Front businesses",
+    "Black market"
+   ],
+   "powers": [],
+   "houses": [],
+   "ci": 0,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "Commercial crime",
+   "resistance activity",
+   "collaboration fraud"
+  ],
+  "ciServed": 0,
+  "ciNames": [],
+  "ciHidden": [],
+  "ctStored": [
+   "Commercial crime",
+   "resistance activity",
+   "collaboration fraud"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-city-occupied-0-39",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 80,
+  "cand": "15 values 69..100",
+  "has100": true,
+  "k": 9
+ },
+ {
+  "seed": "rv10-inv-city-politically_fractured-0-40",
+  "ct": true,
+  "goneN": 5,
+  "key": "semi-organized",
+  "keyA": "semi-organized",
+  "lab": "{\"key\":\"semi-organized\",\"label\":\"Semi-Organized Networks\",\"color\":\"#8a3010\",\"bg\":\"#fdf0e8\",\"note\":\"Criminal activity is coordinated enough to maintain routes an",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Smuggling network",
+    "Multiple criminal factions",
+    "Front businesses",
+    "Rookery",
+    "Black market"
+   ],
+   "powers": [],
+   "houses": [],
+   "ci": 3,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "Magical crime",
+   "Smuggling"
+  ],
+  "ciServed": 3,
+  "ciNames": [
+   "Rival Gangs",
+   "Gambling Halls",
+   "Red Light District"
+  ],
+  "ciHidden": [],
+  "ctStored": [
+   "Magical crime",
+   "Smuggling"
+  ],
+  "descHit": [
+   "{\"desc\":\"An active port-based smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol "
+  ]
+ },
+ {
+  "seed": "rv10-inv-city-politically_fractured-0-40",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 84,
+  "cand": [
+   81,
+   82,
+   84,
+   88,
+   92,
+   93,
+   94,
+   96,
+   97,
+   98,
+   99,
+   100
+  ],
+  "has100": true,
+  "k": 11
+ },
+ {
+  "seed": "rv10-inv-city-none-0-41",
+  "ct": true,
+  "goneN": 2,
+  "key": "semi-organized",
+  "keyA": "organized",
+  "lab": "{\"key\":\"semi-organized\",\"label\":\"Semi-Organized Networks\",\"color\":\"#8a3010\",\"bg\":\"#fdf0e8\",\"note\":\"Criminal activity is coordinated enough to maintain routes an",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Black market",
+    "Front businesses"
+   ],
+   "powers": [],
+   "houses": [],
+   "ci": 2,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [],
+  "ciServed": 2,
+  "ciNames": [
+   "Gambling Halls",
+   "Red Light District"
+  ],
+  "ciHidden": [],
+  "ctStored": [],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-city-none-0-41",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 12
+ },
+ {
+  "seed": "rv10-inv-city-none-0-42",
+  "ct": true,
+  "goneN": 3,
+  "key": "organized",
+  "keyA": "semi-organized",
+  "lab": "{\"key\":\"organized\",\"label\":\"Organized Syndicate\",\"color\":\"#8b1a1a\",\"bg\":\"#fdf4f4\",\"note\":\"One criminal ring decides what crime is allowed here. Its rules are pr",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Multiple criminal factions",
+    "Front businesses",
+    "Black market"
+   ],
+   "powers": [
+    "Thieves' Guild"
+   ],
+   "houses": [],
+   "ci": 2,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "Street gang activity"
+  ],
+  "ciServed": 2,
+  "ciNames": [
+   "Rival Gangs",
+   "Gambling Halls"
+  ],
+  "ciHidden": [],
+  "ctStored": [
+   "Street gang activity"
+  ],
+  "descHit": [
+   "{\"desc\":\"Territorial gangs control specific districts, extorting local businesses and residents. Violence is episodic rather than constant: mostly enforcing ter"
+  ]
+ },
+ {
+  "seed": "rv10-inv-city-none-0-42",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 81,
+  "cand": "13 values 68..100",
+  "has100": true,
+  "k": 10
+ },
+ {
+  "seed": "rv10-inv-city-infiltrated-0-44",
+  "ct": true,
+  "goneN": 2,
+  "key": "semi-organized",
+  "keyA": "semi-organized",
+  "lab": "{\"key\":\"semi-organized\",\"label\":\"Semi-Organized Networks\",\"color\":\"#8a3010\",\"bg\":\"#fdf0e8\",\"note\":\"Criminal activity is coordinated enough to maintain routes an",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Smuggling network",
+    "Contract killer"
+   ],
+   "powers": [],
+   "houses": [],
+   "ci": 2,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "Smuggling"
+  ],
+  "ciServed": 2,
+  "ciNames": [
+   "Gambling Halls",
+   "Red Light District"
+  ],
+  "ciHidden": [],
+  "ctStored": [
+   "Smuggling"
+  ],
+  "descHit": [
+   "{\"desc\":\"An active port-based smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol "
+  ]
+ },
+ {
+  "seed": "rv10-inv-city-infiltrated-0-44",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 15
+ },
+ {
+  "seed": "rv10-inv-city-indebted-0-46",
+  "ct": true,
+  "goneN": 6,
+  "key": "organized",
+  "keyA": "semi-organized",
+  "lab": "{\"key\":\"organized\",\"label\":\"Organized Syndicate\",\"color\":\"#8b1a1a\",\"bg\":\"#fdf4f4\",\"note\":\"One criminal ring decides what crime is allowed here. Its rules are pr",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Smuggling network",
+    "Multiple criminal factions",
+    "Front businesses",
+    "Underground network",
+    "Whisper market",
+    "Black market"
+   ],
+   "powers": [
+    "Thieves' Guild"
+   ],
+   "houses": [],
+   "ci": 2,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "Smuggling",
+   "debt evasion"
+  ],
+  "ciServed": 2,
+  "ciNames": [
+   "Rival Gangs",
+   "Gambling Halls"
+  ],
+  "ciHidden": [],
+  "ctStored": [
+   "Smuggling",
+   "debt evasion"
+  ],
+  "descHit": [
+   "{\"desc\":\"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol sc"
+  ]
+ },
+ {
+  "seed": "rv10-inv-city-indebted-0-46",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 84,
+  "cand": "13 values 68..100",
+  "has100": true,
+  "k": 10
+ },
+ {
+  "seed": "rv10-inv-city-wartime-0-47",
+  "ct": true,
+  "goneN": 6,
+  "key": "semi-organized",
+  "keyA": "semi-organized",
+  "lab": "{\"key\":\"semi-organized\",\"label\":\"Semi-Organized Networks\",\"color\":\"#8a3010\",\"bg\":\"#fdf0e8\",\"note\":\"Criminal activity is coordinated enough to maintain routes an",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Smuggling network",
+    "Multiple criminal factions",
+    "Front businesses",
+    "Underground network",
+    "Whisper market",
+    "Black market"
+   ],
+   "powers": [],
+   "houses": [],
+   "ci": 3,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "[object Object]",
+   "Commercial crime",
+   "Smuggling",
+   "war profiteering",
+   "deserter networks",
+   "conscription fraud"
+  ],
+  "ciServed": 3,
+  "ciNames": [
+   "Rival Gangs",
+   "Gambling Halls",
+   "Red Light District"
+  ],
+  "ciHidden": [],
+  "ctStored": [
+   "Arcane black market",
+   "Commercial crime",
+   "Smuggling",
+   "war profiteering",
+   "deserter networks",
+   "conscription fraud"
+  ],
+  "descHit": [
+   "{\"desc\":\"An active port-based smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol "
+  ]
+ },
+ {
+  "seed": "rv10-inv-city-wartime-0-47",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 67,
+  "cand": null,
+  "has100": null,
+  "k": 13
+ },
+ {
+  "seed": "rv10-inv-city-occupied-0-49",
+  "ct": true,
+  "goneN": 3,
+  "key": null,
+  "keyA": "organized",
+  "lab": null,
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Smuggling network",
+    "Black market",
+    "Front businesses"
+   ],
+   "powers": [],
+   "houses": [],
+   "ci": 0,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "Smuggling",
+   "resistance activity",
+   "collaboration fraud"
+  ],
+  "ciServed": 0,
+  "ciNames": [],
+  "ciHidden": [],
+  "ctStored": [
+   "Smuggling",
+   "resistance activity",
+   "collaboration fraud"
+  ],
+  "descHit": [
+   "{\"desc\":\"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol sc"
+  ]
+ },
+ {
+  "seed": "rv10-inv-city-occupied-0-49",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 10
+ },
+ {
+  "seed": "rv10-inv-city-politically_fractured-0-50",
+  "ct": true,
+  "goneN": 6,
+  "key": "organized",
+  "keyA": "organized",
+  "lab": "{\"key\":\"organized\",\"label\":\"Organized Syndicate\",\"color\":\"#8b1a1a\",\"bg\":\"#fdf4f4\",\"note\":\"One criminal ring decides what crime is allowed here. Its rules are pr",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Smuggling network",
+    "Thieves' guild chapter",
+    "Front businesses",
+    "Whisper market",
+    "Black market",
+    "Contract killer"
+   ],
+   "powers": [
+    "Corrupt City Council",
+    "Thieves' Guild"
+   ],
+   "houses": [],
+   "ci": 2,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "Smuggling"
+  ],
+  "ciServed": 2,
+  "ciNames": [
+   "Gambling Halls",
+   "Red Light District"
+  ],
+  "ciHidden": [],
+  "ctStored": [
+   "Smuggling"
+  ],
+  "descHit": [
+   "{\"desc\":\"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol sc"
+  ]
+ },
+ {
+  "seed": "rv10-inv-city-politically_fractured-0-50",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 79,
+  "cand": "13 values 69..100",
+  "has100": true,
+  "k": 11
+ },
+ {
+  "seed": "rv10-inv-metropolis-none-0-52",
+  "ct": true,
+  "goneN": 2,
+  "key": "semi-organized",
+  "keyA": "semi-organized",
+  "lab": "{\"key\":\"semi-organized\",\"label\":\"Semi-Organized Networks\",\"color\":\"#8a3010\",\"bg\":\"#fdf0e8\",\"note\":\"Criminal activity is coordinated enough to maintain routes an",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Whisper market",
+    "Black market bazaar"
+   ],
+   "powers": [],
+   "houses": [],
+   "ci": 2,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "quarantine violation",
+   "plague profiteering"
+  ],
+  "ciServed": 2,
+  "ciNames": [
+   "Gambling District",
+   "Red Light District"
+  ],
+  "ciHidden": [],
+  "ctStored": [
+   "quarantine violation",
+   "plague profiteering"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-metropolis-none-0-52",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 12
+ },
+ {
+  "seed": "rv10-inv-metropolis-none-0-53",
+  "ct": true,
+  "goneN": 6,
+  "key": "semi-organized",
+  "keyA": "organized",
+  "lab": "{\"key\":\"semi-organized\",\"label\":\"Semi-Organized Networks\",\"color\":\"#8a3010\",\"bg\":\"#fdf0e8\",\"note\":\"Criminal activity is coordinated enough to maintain routes an",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Smuggling network",
+    "Thieves' guild (powerful)",
+    "Front businesses",
+    "Underground city",
+    "Whisper market",
+    "Assassins' guild"
+   ],
+   "powers": [],
+   "houses": [],
+   "ci": 1,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "Organized guild crime",
+   "Magical crime",
+   "Smuggling"
+  ],
+  "ciServed": 1,
+  "ciNames": [
+   "Gambling District"
+  ],
+  "ciHidden": [],
+  "ctStored": [
+   "Organized guild crime",
+   "Magical crime",
+   "Smuggling"
+  ],
+  "descHit": [
+   "{\"desc\":\"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol sc"
+  ]
+ },
+ {
+  "seed": "rv10-inv-metropolis-none-0-53",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 88,
+  "cand": [
+   66,
+   79,
+   84,
+   96,
+   97,
+   98,
+   99,
+   100
+  ],
+  "has100": true,
+  "k": 12
+ },
+ {
+  "seed": "rv10-inv-metropolis-infiltrated-0-54",
+  "ct": true,
+  "goneN": 5,
+  "key": "semi-organized",
+  "keyA": "semi-organized",
+  "lab": "{\"key\":\"semi-organized\",\"label\":\"Semi-Organized Networks\",\"color\":\"#8a3010\",\"bg\":\"#fdf0e8\",\"note\":\"Criminal activity is coordinated enough to maintain routes an",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Multiple criminal factions",
+    "Front businesses",
+    "Whisper market",
+    "Black market bazaar",
+    "Assassins' guild"
+   ],
+   "powers": [],
+   "houses": [],
+   "ci": 2,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "Street gang activity"
+  ],
+  "ciServed": 2,
+  "ciNames": [
+   "Rival Gangs",
+   "Gambling District"
+  ],
+  "ciHidden": [],
+  "ctStored": [
+   "Street gang activity"
+  ],
+  "descHit": [
+   "{\"desc\":\"Territorial gangs control specific districts, extorting local businesses and residents. Violence is episodic rather than constant: mostly enforcing ter"
+  ]
+ },
+ {
+  "seed": "rv10-inv-metropolis-infiltrated-0-54",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 10
+ },
+ {
+  "seed": "rv10-inv-metropolis-insurgency-0-55",
+  "ct": true,
+  "goneN": 5,
+  "key": "organized",
+  "keyA": "organized",
+  "lab": "{\"key\":\"organized\",\"label\":\"Organized Syndicate\",\"color\":\"#8b1a1a\",\"bg\":\"#fdf4f4\",\"note\":\"\"}",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Smuggling network",
+    "Thieves' guild (powerful)",
+    "Front businesses",
+    "Underground city",
+    "Whisper market"
+   ],
+   "powers": [
+    "Thieves' Guild"
+   ],
+   "houses": [],
+   "ci": 1,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "Survival crime",
+   "Magical crime",
+   "Smuggling",
+   "political violence",
+   "loyalty testing",
+   "information trade"
+  ],
+  "ciServed": 1,
+  "ciNames": [
+   "Gambling District"
+  ],
+  "ciHidden": [],
+  "ctStored": [
+   "Survival crime",
+   "Magical crime",
+   "Smuggling",
+   "political violence",
+   "loyalty testing",
+   "information trade"
+  ],
+  "descHit": [
+   "{\"desc\":\"An active port-based smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol "
+  ]
+ },
+ {
+  "seed": "rv10-inv-metropolis-insurgency-0-55",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 57,
+  "cand": null,
+  "has100": null,
+  "k": 13
+ },
+ {
+  "seed": "rv10-inv-metropolis-indebted-0-56",
+  "ct": true,
+  "goneN": 8,
+  "key": "organized",
+  "keyA": "organized",
+  "lab": "{\"key\":\"organized\",\"label\":\"Organized Syndicate\",\"color\":\"#8b1a1a\",\"bg\":\"#fdf4f4\",\"note\":\"One criminal ring decides what crime is allowed here. Its rules are pr",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Smuggling network",
+    "Multiple criminal factions",
+    "Front businesses",
+    "Underground network",
+    "Underground city",
+    "Whisper market",
+    "Black market bazaar",
+    "Assassins' guild"
+   ],
+   "powers": [
+    "Shadow Senate",
+    "Thieves' Guild",
+    "The Shadow Compact"
+   ],
+   "houses": [],
+   "ci": 2,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "Religious fraud",
+   "Commercial crime",
+   "Smuggling",
+   "debt evasion"
+  ],
+  "ciServed": 2,
+  "ciNames": [
+   "Rival Gangs",
+   "Gambling District"
+  ],
+  "ciHidden": [],
+  "ctStored": [
+   "Religious fraud",
+   "Commercial crime",
+   "Smuggling",
+   "debt evasion"
+  ],
+  "descHit": [
+   "{\"desc\":\"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol sc"
+  ]
+ },
+ {
+  "seed": "rv10-inv-metropolis-indebted-0-56",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 75,
+  "cand": "13 values 72..100",
+  "has100": true,
+  "k": 10
+ },
+ {
+  "seed": "rv10-inv-metropolis-wartime-0-57",
+  "ct": true,
+  "goneN": 8,
+  "key": "organized",
+  "keyA": "semi-organized",
+  "lab": "{\"key\":\"organized\",\"label\":\"Organized Syndicate\",\"color\":\"#8b1a1a\",\"bg\":\"#fdf4f4\",\"note\":\"One criminal ring decides what crime is allowed here. Its rules are pr",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Smuggling network",
+    "Multiple criminal factions",
+    "Front businesses",
+    "Underground network",
+    "Underground city",
+    "Black market bazaar",
+    "Assassins' guild",
+    "Rookery"
+   ],
+   "powers": [
+    "Thieves' Guild"
+   ],
+   "houses": [],
+   "ci": 3,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "Survival crime",
+   "Magical crime",
+   "Smuggling",
+   "deserter networks",
+   "conscription fraud"
+  ],
+  "ciServed": 3,
+  "ciNames": [
+   "Rival Gangs",
+   "Gambling District",
+   "Red Light District"
+  ],
+  "ciHidden": [],
+  "ctStored": [
+   "Survival crime",
+   "Magical crime",
+   "Smuggling",
+   "deserter networks",
+   "conscription fraud"
+  ],
+  "descHit": [
+   "{\"desc\":\"An active port-based smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol "
+  ]
+ },
+ {
+  "seed": "rv10-inv-metropolis-wartime-0-57",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 71,
+  "cand": [
+   73,
+   79,
+   83,
+   84,
+   85,
+   91,
+   95,
+   97,
+   98,
+   99,
+   100
+  ],
+  "has100": true,
+  "k": 11
+ },
+ {
+  "seed": "rv10-inv-metropolis-none-0-58",
+  "ct": true,
+  "goneN": 4,
+  "key": "semi-organized",
+  "keyA": "organized",
+  "lab": "{\"key\":\"semi-organized\",\"label\":\"Semi-Organized Networks\",\"color\":\"#8a3010\",\"bg\":\"#fdf0e8\",\"note\":\"Criminal activity is coordinated enough to maintain routes an",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Smuggling network",
+    "Front businesses",
+    "Underground city",
+    "Thieves' guild (powerful)"
+   ],
+   "powers": [],
+   "houses": [],
+   "ci": 1,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "Smuggling"
+  ],
+  "ciServed": 1,
+  "ciNames": [
+   "Gambling District"
+  ],
+  "ciHidden": [],
+  "ctStored": [
+   "Smuggling"
+  ],
+  "descHit": [
+   "{\"desc\":\"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol sc"
+  ]
+ },
+ {
+  "seed": "rv10-inv-metropolis-none-0-58",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 10
+ },
+ {
+  "seed": "rv10-inv-metropolis-occupied-0-59",
+  "ct": true,
+  "goneN": 8,
+  "key": "organized",
+  "keyA": "organized",
+  "lab": "{\"key\":\"organized\",\"label\":\"Organized Syndicate\",\"color\":\"#8b1a1a\",\"bg\":\"#fdf4f4\",\"note\":\"One criminal ring decides what crime is allowed here. Its rules are pr",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Smuggling network",
+    "Multiple criminal factions",
+    "Front businesses",
+    "Underground network",
+    "Underground city",
+    "Whisper market",
+    "Black market bazaar",
+    "Assassins' guild"
+   ],
+   "powers": [
+    "Shadow Senate",
+    "Thieves' Guild"
+   ],
+   "houses": [],
+   "ci": 2,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "Smuggling",
+   "resistance activity",
+   "collaboration fraud"
+  ],
+  "ciServed": 2,
+  "ciNames": [
+   "Rival Gangs",
+   "Gambling District"
+  ],
+  "ciHidden": [],
+  "ctStored": [
+   "Smuggling",
+   "resistance activity",
+   "collaboration fraud"
+  ],
+  "descHit": [
+   "{\"desc\":\"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol sc"
+  ]
+ },
+ {
+  "seed": "rv10-inv-metropolis-occupied-0-59",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 80,
+  "cand": [
+   80,
+   82,
+   92,
+   93,
+   94,
+   95,
+   96,
+   97,
+   98,
+   99,
+   100
+  ],
+  "has100": true,
+  "k": 10
+ },
+ {
+  "seed": "rv10-inv-metropolis-politically_fractured-0-60",
+  "ct": true,
+  "goneN": 7,
+  "key": "organized",
+  "keyA": "organized",
+  "lab": "{\"key\":\"organized\",\"label\":\"Organized Syndicate\",\"color\":\"#8b1a1a\",\"bg\":\"#fdf4f4\",\"note\":\"One criminal ring decides what crime is allowed here. Its rules are pr",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Smuggling network",
+    "Thieves' guild (powerful)",
+    "Front businesses",
+    "Underground network",
+    "Underground city",
+    "Whisper market",
+    "Assassins' guild"
+   ],
+   "powers": [
+    "Thieves' Guild"
+   ],
+   "houses": [],
+   "ci": 2,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "Smuggling"
+  ],
+  "ciServed": 2,
+  "ciNames": [
+   "Gambling District",
+   "Red Light District"
+  ],
+  "ciHidden": [],
+  "ctStored": [
+   "Smuggling"
+  ],
+  "descHit": [
+   "{\"desc\":\"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol sc"
+  ]
+ },
+ {
+  "seed": "rv10-inv-metropolis-politically_fractured-0-60",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 89,
+  "cand": [
+   86,
+   93,
+   95,
+   96,
+   97,
+   98,
+   99,
+   100
+  ],
+  "has100": true,
+  "k": 12
+ },
+ {
+  "seed": "rv10-inv-metropolis-none-0-61",
+  "ct": true,
+  "goneN": 6,
+  "key": "semi-organized",
+  "keyA": "semi-organized",
+  "lab": "{\"key\":\"semi-organized\",\"label\":\"Semi-Organized Networks\",\"color\":\"#8a3010\",\"bg\":\"#fdf0e8\",\"note\":\"Criminal activity is coordinated enough to maintain routes an",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Smuggling network",
+    "Multiple criminal factions",
+    "Underground city",
+    "Whisper market",
+    "Black market bazaar",
+    "Assassins' guild"
+   ],
+   "powers": [],
+   "houses": [],
+   "ci": 3,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "Smuggling"
+  ],
+  "ciServed": 3,
+  "ciNames": [
+   "Rival Gangs",
+   "Gambling District",
+   "Red Light District"
+  ],
+  "ciHidden": [],
+  "ctStored": [
+   "Smuggling"
+  ],
+  "descHit": [
+   "{\"desc\":\"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol sc"
+  ]
+ },
+ {
+  "seed": "rv10-inv-metropolis-none-0-61",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 14
+ },
+ {
+  "seed": "rv10-inv-metropolis-none-0-62",
+  "ct": true,
+  "goneN": 5,
+  "key": "semi-organized",
+  "keyA": "organized",
+  "lab": "{\"key\":\"semi-organized\",\"label\":\"Semi-Organized Networks\",\"color\":\"#8a3010\",\"bg\":\"#fdf0e8\",\"note\":\"Criminal activity is coordinated enough to maintain routes an",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Thieves' guild (powerful)",
+    "Front businesses",
+    "Underground city",
+    "Whisper market",
+    "Assassins' guild"
+   ],
+   "powers": [],
+   "houses": [],
+   "ci": 1,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [],
+  "ciServed": 1,
+  "ciNames": [
+   "Gambling District"
+  ],
+  "ciHidden": [],
+  "ctStored": [],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-metropolis-none-0-62",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 14
+ },
+ {
+  "seed": "rv10-inv-metropolis-none-0-63",
+  "ct": true,
+  "goneN": 3,
+  "key": "semi-organized",
+  "keyA": "semi-organized",
+  "lab": "{\"key\":\"semi-organized\",\"label\":\"Semi-Organized Networks\",\"color\":\"#8a3010\",\"bg\":\"#fdf0e8\",\"note\":\"Criminal activity is coordinated enough to maintain routes an",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Multiple criminal factions",
+    "Front businesses",
+    "Underground city"
+   ],
+   "powers": [],
+   "houses": [],
+   "ci": 3,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "Survival crime",
+   "Magical crime"
+  ],
+  "ciServed": 3,
+  "ciNames": [
+   "Rival Gangs",
+   "Gambling District",
+   "Red Light District"
+  ],
+  "ciHidden": [],
+  "ctStored": [
+   "Survival crime",
+   "Magical crime"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-metropolis-none-0-63",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 12
+ },
+ {
+  "seed": "rv10-inv-metropolis-infiltrated-0-64",
+  "ct": true,
+  "goneN": 7,
+  "key": "semi-organized",
+  "keyA": "organized",
+  "lab": "{\"key\":\"semi-organized\",\"label\":\"Semi-Organized Networks\",\"color\":\"#8a3010\",\"bg\":\"#fdf0e8\",\"note\":\"Criminal activity is coordinated enough to maintain routes an",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Smuggling network",
+    "Thieves' guild (powerful)",
+    "Front businesses",
+    "Underground network",
+    "Underground city",
+    "Whisper market",
+    "Assassins' guild"
+   ],
+   "powers": [],
+   "houses": [],
+   "ci": 2,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "Organized guild crime",
+   "Smuggling"
+  ],
+  "ciServed": 2,
+  "ciNames": [
+   "Gambling District",
+   "Red Light District"
+  ],
+  "ciHidden": [],
+  "ctStored": [
+   "Organized guild crime",
+   "Smuggling"
+  ],
+  "descHit": [
+   "{\"desc\":\"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol sc"
+  ]
+ },
+ {
+  "seed": "rv10-inv-metropolis-infiltrated-0-64",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 87,
+  "cand": "13 values 72..100",
+  "has100": true,
+  "k": 10
+ },
+ {
+  "seed": "rv10-inv-metropolis-insurgency-0-65",
+  "ct": true,
+  "goneN": 5,
+  "key": "organized",
+  "keyA": "organized",
+  "lab": "{\"key\":\"organized\",\"label\":\"Organized Syndicate\",\"color\":\"#8b1a1a\",\"bg\":\"#fdf4f4\",\"note\":\"\"}",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Smuggling network",
+    "Multiple criminal factions",
+    "Front businesses",
+    "Underground network",
+    "Contract killer"
+   ],
+   "powers": [
+    "Thieves' Guild",
+    "Shadow Senate",
+    "The Black Circle"
+   ],
+   "houses": [],
+   "ci": 2,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "Survival crime",
+   "Smuggling",
+   "political violence",
+   "loyalty testing",
+   "information trade"
+  ],
+  "ciServed": 2,
+  "ciNames": [
+   "Rival Gangs",
+   "Gambling District"
+  ],
+  "ciHidden": [],
+  "ctStored": [
+   "Survival crime",
+   "Smuggling",
+   "political violence",
+   "loyalty testing",
+   "information trade"
+  ],
+  "descHit": [
+   "{\"desc\":\"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol sc"
+  ]
+ },
+ {
+  "seed": "rv10-inv-metropolis-insurgency-0-65",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 63,
+  "cand": "14 values 36..100",
+  "has100": true,
+  "k": 8
+ },
+ {
+  "seed": "rv10-inv-metropolis-indebted-0-66",
+  "ct": true,
+  "goneN": 3,
+  "key": "semi-organized",
+  "keyA": "organized",
+  "lab": "{\"key\":\"semi-organized\",\"label\":\"Semi-Organized Networks\",\"color\":\"#8a3010\",\"bg\":\"#fdf0e8\",\"note\":\"Criminal activity is coordinated enough to maintain routes an",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Front businesses",
+    "Rookery",
+    "Thieves' guild (powerful)"
+   ],
+   "powers": [],
+   "houses": [],
+   "ci": 2,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "debt evasion"
+  ],
+  "ciServed": 2,
+  "ciNames": [
+   "Gambling District",
+   "Red Light District"
+  ],
+  "ciHidden": [],
+  "ctStored": [
+   "debt evasion"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-metropolis-indebted-0-66",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 10
+ },
+ {
+  "seed": "rv10-inv-metropolis-wartime-0-67",
+  "ct": true,
+  "goneN": 6,
+  "key": "semi-organized",
+  "keyA": "semi-organized",
+  "lab": "{\"key\":\"semi-organized\",\"label\":\"Semi-Organized Networks\",\"color\":\"#8a3010\",\"bg\":\"#fdf0e8\",\"note\":\"Criminal activity is coordinated enough to maintain routes an",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Smuggling network",
+    "Multiple criminal factions",
+    "Front businesses",
+    "Underground city",
+    "Rookery",
+    "Black market bazaar"
+   ],
+   "powers": [
+    "Thieves' Guild",
+    "The Underground"
+   ],
+   "houses": [],
+   "ci": 2,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "[object Object]",
+   "Religious fraud",
+   "Survival crime",
+   "Smuggling",
+   "war profiteering",
+   "deserter networks",
+   "conscription fraud"
+  ],
+  "ciServed": 2,
+  "ciNames": [
+   "Rival Gangs",
+   "Gambling District"
+  ],
+  "ciHidden": [],
+  "ctStored": [
+   "Arcane black market",
+   "Religious fraud",
+   "Survival crime",
+   "Smuggling",
+   "war profiteering",
+   "deserter networks",
+   "conscription fraud"
+  ],
+  "descHit": [
+   "{\"desc\":\"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol sc"
+  ]
+ },
+ {
+  "seed": "rv10-inv-metropolis-wartime-0-67",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 78,
+  "cand": [
+   67,
+   86,
+   92,
+   93,
+   94,
+   95,
+   96,
+   97,
+   98,
+   99,
+   100
+  ],
+  "has100": true,
+  "k": 12
+ },
+ {
+  "seed": "rv10-inv-metropolis-none-0-68",
+  "ct": true,
+  "goneN": 7,
+  "key": "organized",
+  "keyA": "semi-organized",
+  "lab": "{\"key\":\"organized\",\"label\":\"Organized Syndicate\",\"color\":\"#8b1a1a\",\"bg\":\"#fdf4f4\",\"note\":\"One criminal ring decides what crime is allowed here. Its rules are pr",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Smuggling network",
+    "Multiple criminal factions",
+    "Front businesses",
+    "Underground city",
+    "Whisper market",
+    "Assassins' guild",
+    "Underground network"
+   ],
+   "powers": [
+    "Thieves' Guild"
+   ],
+   "houses": [],
+   "ci": 3,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "Magical crime",
+   "Smuggling"
+  ],
+  "ciServed": 3,
+  "ciNames": [
+   "Rival Gangs",
+   "Gambling District",
+   "Red Light District"
+  ],
+  "ciHidden": [],
+  "ctStored": [
+   "Magical crime",
+   "Smuggling"
+  ],
+  "descHit": [
+   "{\"desc\":\"An active port-based smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol "
+  ]
+ },
+ {
+  "seed": "rv10-inv-metropolis-none-0-68",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 75,
+  "cand": "13 values 62..100",
+  "has100": true,
+  "k": 8
+ },
+ {
+  "seed": "rv10-inv-metropolis-occupied-0-69",
+  "ct": true,
+  "goneN": 7,
+  "key": "organized",
+  "keyA": "organized",
+  "lab": "{\"key\":\"organized\",\"label\":\"Organized Syndicate\",\"color\":\"#8b1a1a\",\"bg\":\"#fdf4f4\",\"note\":\"One criminal ring decides what crime is allowed here. Its rules are pr",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Smuggling network",
+    "Thieves' guild (powerful)",
+    "Front businesses",
+    "Underground network",
+    "Underground city",
+    "Whisper market",
+    "Assassins' guild"
+   ],
+   "powers": [
+    "Shadow Senate",
+    "Thieves' Guild"
+   ],
+   "houses": [],
+   "ci": 2,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [
+   "Smuggling",
+   "resistance activity",
+   "collaboration fraud"
+  ],
+  "ciServed": 2,
+  "ciNames": [
+   "Gambling District",
+   "Red Light District"
+  ],
+  "ciHidden": [],
+  "ctStored": [
+   "Smuggling",
+   "resistance activity",
+   "collaboration fraud"
+  ],
+  "descHit": [
+   "{\"desc\":\"An active port-based smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol "
+  ]
+ },
+ {
+  "seed": "rv10-inv-metropolis-occupied-0-69",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 83,
+  "cand": null,
+  "has100": null,
+  "k": 13
+ },
+ {
+  "seed": "rv10-inv-metropolis-politically_fractured-0-70",
+  "ct": true,
+  "goneN": 1,
+  "key": "semi-organized",
+  "keyA": "organized",
+  "lab": "{\"key\":\"semi-organized\",\"label\":\"Semi-Organized Networks\",\"color\":\"#8a3010\",\"bg\":\"#fdf0e8\",\"note\":\"Criminal activity is coordinated enough to maintain routes an",
+  "servedCrim": 0,
+  "drv": {
+   "gone": [
+    "Thieves' guild (powerful)"
+   ],
+   "powers": [],
+   "houses": [],
+   "ci": 1,
+   "chains": 0,
+   "covert": false
+  },
+  "ctServed": [],
+  "ciServed": 1,
+  "ciNames": [
+   "Gambling District"
+  ],
+  "ciHidden": [],
+  "ctStored": [],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-metropolis-politically_fractured-0-70",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 10
+ }
+]
