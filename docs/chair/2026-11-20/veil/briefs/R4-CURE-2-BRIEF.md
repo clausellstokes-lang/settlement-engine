@@ -63,7 +63,10 @@ first; a failure falls toward WITHHOLDING, never toward sending.
    `block:power.criminalUnderside`; a town with a person and no criminal content reads 'hidden' not 'none'). GREEN: the
    present sets equal d136940c3's on every copy. `criminalVeilSwitch.test.js` stays green; its 24 known
    `(b): safety blackMarketCapture` reds are re-checked against the base and named, not touched.
-5. PLAUSIBLE FROM THE FIRST CURE, MEASURED: a numeric-id holder's ties are caught by string match (folds into unit 1);
+5. THE READER'S LAST HIT AT R3 (4db8e4208; PART 25 ruling 36 (c)): "black marketeer" served with Reveal DM on, a holder
+   of the hidden Black market. Red first by the reader's probe; VR9's holder pass takes the holder whole with its ties,
+   Reveal DM on as off, by the fold (ruling 28).
+5b. PLAUSIBLE FROM THE FIRST CURE, MEASURED: a numeric-id holder's ties are caught by string match (folds into unit 1);
    the 14 unread acceptance diff rows (read each: differ only at re-keyed paths, or name the path).
 
 6. VR48, A SERVED CARD CARRIES ITS `gender` (the chair, 09:02; ITS OWN COMMIT, after units 1-5). The veil never withheld

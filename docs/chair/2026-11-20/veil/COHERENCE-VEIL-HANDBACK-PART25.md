@@ -165,6 +165,18 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
 35. ORDER (the chair, 09:04): R3 (its second cure; then "R3 <commit>") → R6's merge → the R4 second cure (the three stops;
     VR48 its own commit) → R5 (ruling 32) → R7 → stage L → the doors' merge → the stored figures once at the merged tree → E.
     One line to the chair as each lands.
+36. THE READER'S PRE-MEASURE OF THE R3 CURE (the chair, 09:18; REVIEW-VEIL-12 `probes/REVIEW-VEIL-12/out/rc-at-4db8e4208-*`):
+    (a) RULING 30 REACHES THE WHOLE OPERATIONS LIST: with nothing criminal served, `safety.criminalInstitutions` carried
+    "Rival Gangs" in 17 of 33 towns (control 0 of 28), "Gambling District" 14 (0), "Red Light District" 13 (2),
+    "Gambling Halls" 9 (2); the derived key semi-organized 29 of 35 against the control's 5 of 29. Every entry is
+    re-derived over the houses the read serves, or the list is withheld (VR29: still an array); the acceptance is the
+    per-town equality with the counterfactual AND the control's DISTRIBUTION. Relayed to the R3-CURE-2 builder 09:18.
+    (b) A SHOWN POWER'S `powerStructure.factions[].desc` NAMING A WITHHELD POWER ("…they play Thieves' Guild and City-State
+    Council against each other…", rv12-rc-metropolis-indebted-0-42, all four reads) is on R5's list, so R3 may be green
+    with it NAMED; IT IS TIER 1 UNTIL R5 CURES IT: R5's brief takes it FIRST (recompose over the powers served, or
+    withhold), and "E" is not sent while the search finds it.
+    (c) The reader's last hit at 4db8e4208: "black marketeer", Reveal DM on, a holder of the hidden Black market: VR9's
+    holder pass, in the R4 second cure (its unit 1 or a probe of its own).
 
 ## 2. The bytes (kept current)
 | File | sha256 |
@@ -229,3 +241,4 @@ run exit 0, 40 PASS (`out/v24/gender/accept.txt`).
   walkers (stage L ruled); the container rebooted ~08:53 (the cluster restarted).
 - 09:04 THE LANE IS YOURS at 4c753ec52; the branch fast-forwarded there; 211 proved. R3's source diff read line by line.
 - 09:07 R3-CURE-2 brief committed (14c81dc38); its builder launched in `/home/user/wt/r3c2`. PART 25 first written 09:09.
+- 09:18 the reader's two leads at 4db8e4208 (ruling 36); (a) relayed to the R3-CURE-2 builder 09:18.
