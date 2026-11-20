@@ -131,3 +131,63 @@ from `publicSafe.js :: publicVeilPass` and did not test it.
 **Not done: ADDENDUM 2's Step 1′.** Addendum 2 (14:47:15Z) landed in the brief while this section was being written. My dispatch says to
 build Step 2 only and to change nothing under `src/`. So Step 1′ (the one matcher, the frozen list of wordings, and its arms (a) and
 (c)) is not started. It is SEAT-5's to dispatch. Step 2's arm (10) is condition (4) of that ruling.
+
+## Step 1′ (Addendum 2, SEAT-5's dispatch after `4f0ba44b5`): built by builder B4e at `6fa7063fb`. Written 2026-11-20T15:06:26Z, read from `date -u`.
+
+**STATUS: (1), (2) and (a) are built and green. (c) STOPS on a WRONG power. That case is reported below. It is not pinned and not
+cured.** Nothing was pushed. No register, census or baseline was touched.
+
+**(1) One matcher.** `holderOfSeat.js :: transferSentenceSays(line, sentence, taker, form, wordings = TRANSFER_WORDINGS)` is exported.
+It matches the whole line. `{taker}` and `{form}` (lower case) must match exactly. `{from}` and `{cause}` match any text. Both of
+R1's reads go through it: the edge's `narrative` (`'edge'`) and the `recentConflict` tie-break (`'conflict'`). `takerLine` and
+`transferSays` are removed, so the leaf holds no other template and no other equality. `transferTakerOf` is now exported and takes
+the list as a parameter. `holderOf`'s API is unchanged. One behaviour narrows on purpose: the lawful line was matched with `includes`
+and is now matched whole, one row per wording. Every fixture and `seatContest.test.js` answer as before (71 of 71).
+
+**(2) The frozen list.** `holderOfSeat.js :: TRANSFER_WORDINGS` has four frozen rows: the edge sentence, the coup line, the lawful
+line, and the lawful line with the demotion clause. Arm (11) does three things:
+- It drives the real `transferRulingPower` on all 5 `RULING_POWER_CAUSES`, each with `demoteIncumbent` false and true. Both sentences
+  of every run must match the list.
+- It pins the list frozen, with 1 edge row and 3 conflict rows.
+- It puts a made-up new wording FIRST in the list. A town in the frozen wording still reads its taker (Merchant Guilds), and so does
+  arm (3)'s two-taker town (Coin Exchange). A town in the made-up wording reads its taker only through a list that holds it.
+
+**(3a)** A born military symbiotic/stable edge with no transfer (Town Council / Town Watch at town size, Elder Council / Military
+Party at hamlet size) gives no taker from `transferTakerOf`. Neither the owner nor the reader gets an R1 answer, on the record or
+served.
+
+**(3c) The DM's rename after a transfer.** The events registry and `src/domain/events/mutateWorld.js` hold no faction rename. The
+DM's path is `src/store/settlementRenameHelpers.js :: renameFactionImpl`, which calls
+`src/domain/factionRename.js :: applyFactionRenameToSettlement`. I ran it on a transferred town (cause `coup` and cause `election`):
+- **Renaming the TAKER** gives the right power. The cascade rewrites the pair, the edge narrative and `recentConflict`. Owner and
+  reader (served) both get R1 = the new name. This case is pinned.
+- **Renaming a BYSTANDER** gives the right power (R1 = the taker). This case is pinned.
+- **Renaming the SEAT gives a WRONG power. STOP.** The cascade rewrites `government`, `governingName`, the row and the edge's
+  `pair`. It does not rewrite the edge narrative's lower-case form ("…power behind the merchant city council…"). R1 therefore finds
+  no taker, and R3 answers the leading open power of the seat's kind. On a town where Coin Exchange (merchant, power 40) stands
+  beside the taker Merchant Guilds (31 after the transfer), both owner and reader get **R3 Coin Exchange**. Without a heavier
+  merchant power, R3 answers Merchant Guilds, which is right only by accident. The base leaf (`fbf77bfa2`, run in place on the same
+  probe) gives the same answer, so this is not a change made here. I did not pin it and did not cure it. The chair rules.
+
+**Red first.** On the base leaf, the test file does not load ("TypeError: TRANSFER_WORDINGS is not iterable"), so no test runs. Arm
+(11) has 9 tests. The plants, each run and restored:
+- P3 drops the demotion row. That gives 2 failed, 7 passed: "election, demoteIncumbent true: recentConflict: expected false to be
+  true", and the 3-row count.
+- P4 makes the matcher ignore its list (`return TRANSFER_WORDINGS.some(...)`). That gives 1 failed, 8 passed: "the list is live".
+
+Arms (a) and (c) pin behaviour that the base leaf already has.
+
+**Green.**
+- `holderOfSeat.test.js` and `seatContest.test.js`: 71 of 71. Arm (10) is still green.
+- The 18 test files that name `holderOfSeat` or `rulingPowerCoup`, plus `engineCoreLazyEdge`, `layerBoundaries` and
+  `densityCreateBoundary.walker`: 21 files, 551 of 551.
+- `typecheck:ratchet`: 167 of 167. `typecheck:domain:strict`: 1113 of 1113. `lint`: 0 errors, 38 warnings, none in a touched file.
+- `writerReach.walker` is red, as expected: 1 failed (the round-trip arm), 127 passed, with `tuningRegister.walker` run alongside.
+  Measured per identity through the walker's own `measure`, exactly 3 identities differ, and they are the three ruled ones:
+  `narrative on factionRelationships`, `recentConflict on powerStructure` and `priorityMilitary on config`.
+- `confine-two.sh fbf77bfa2 6fa7063fb`: base and tip both give
+  `all 36ee5bb0bea0bb3fcc6bd83f1e9e732b4dc643f09e0844545c64785798d8ce89 1245`. EQUAL.
+
+CONFIRMED (executed here): every count, hash and rename answer above. PLAUSIBLE: that no other DM path renames a power after a
+transfer. I grepped `src/domain/events/` and the callers of `applyFactionRenameToSettlement`. The other caller,
+`src/generators/power/factionLabelClose.js`, runs at birth.
