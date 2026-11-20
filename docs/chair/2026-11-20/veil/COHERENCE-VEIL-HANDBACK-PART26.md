@@ -259,6 +259,16 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
     lane as one more column of R3-CURE-4's gate if cheap (relayed to its builder 12:1x); else the reader builds its own.
     (3) R3 merges "GREEN TOWARD WITHHOLDING, THE TELL QUESTION OPEN" once R3-CURE-4 is in and green; its line names the seven.
     VEIL-26 is read in and has re-made the instruments.
+42. THE CHAIR, 12:21: (1) THE HUSK CLASS: ANY ROW OF A LIST the name sweep strips of a withheld name LEAVES WHOLE (a goal,
+    a membership, a conflict party in either list, a tension, a relation pair); a row with its naming fields gone and its
+    other fields left is a tell. Cured by its cause: the copy pass sees the row BEFORE the sweep empties it, or the sweep
+    removes the row, both engines, red first; the builder says which and why. (2) THE WATCH: approved as cured (category
+    decides; the name only where there is no category; 0 of 1,478 born powers move). (3) THE KEY-LEVEL HUSKS
+    (`contestsNiche` on a shown power, `factionAffiliation` on a served person): MEASURE FIRST, cure nothing: over
+    nothing-hidden towns by holder kind and size, how often the key is absent; for the cut towns, whether the holder without
+    the key is an ordinary shape at that size (the possible-world test); if the engine nearly always writes the key, BOTH
+    options with counts (re-derive over what is served; withhold the holder) for the chair to rule. (4) VEIL-25 HANDS OVER
+    NOW. All three relayed to R3-CURE-5 (12:2x).
 ## 2. The bytes (kept current)
 | File | sha256 |
 |---|---|
@@ -345,6 +355,7 @@ run exit 0, 40 PASS (`out/v24/gender/accept.txt`).
 - 11:55 the Curate notice merged 7ddf4876f (re-run: red 3/16, green 25/25).
 - 12:09 the chair: ruling 41; the tell column relayed to R3-CURE-4 (12:10). The seat's own check of five LOWER towns at 9b18835d1 matches D1 (`out/v25/lower-check-9b.txt`).
 - 12:4x R3-CURE-4 returned at its mark (c5786c5ce; units 1-2 uncommitted); its branch pushed; R3-CURE-5 brief written (12:20).
+- 12:21 the chair: ruling 42; HAND OVER NOW. 12:21 PART 26 made true for the hand-over (section 8).
 
 ## 7. THE JOIN (the chair's word in VEIL-25's prompt): what the join must re-prove on the joined document
 The working line (origin/lane/join-2026-11-14, at 0c906948 when this was written) and four content lanes ADD SERVED TEXT at
@@ -359,3 +370,27 @@ counterfactual over every new sentence that chooses a word by a rank, share, cou
 readings at UNREGISTERED 0 (ruling 25); and the render-twice and inversion harnesses. The line's walker
 `tests/lint/namesInSentences.walker.test.js` holds a COPY of the fold in `src/domain/display/gallerySecondHomes.js`: at the
 join it must import and call the lane's own function (`buildNameSearch` / the bare fold), never its copy.
+
+## 8. HANDED OVER (VEIL-25 to VEIL-26, at the chair's word of 12:21; written 12:21 UTC)
+THE LANE: `lane/veil-25-2026-11-20`, tip = the commit carrying this section (read it back from origin). MERGED BY VEIL-25: the
+Curate notice (7ddf4876f, `--no-ff`; display only). 212 on the lane is still `05b915ab…8f10` (R3 not merged). 211 proved at
+the cut 214c36dde and unchanged since (`git diff 214c36dde -- supabase/migrations/211* supabase/rollback/211*` empty).
+RUNNING, STARTED BY VEIL-25 (it relays its hand-back UNREAD to the chair): THE R3-CURE-5 BUILDER, in `/home/user/wt/r3c4`,
+branch `v25-r3c4`, brief `briefs/R3-CURE-5-BRIEF.md`, with rulings 41 and 42 relayed to it.
+STATE OF R3, PLAINLY: R3-CURE-4's branch `lane/veil-25-r3c4-2026-11-20` at c5786c5ce holds unit 1's RED arms (a9e2de44a,
+committed red) and unit 4 GREEN (5ef2a92b1). THE CURE OF UNITS 1 AND 2 IS UNCOMMITTED AND WAS RED at its last full run
+(`out/v25/r3c4/UNCOMMITTED-cure-units-1-2.patch`; a twin bug fixed after that run, not re-run). ONE MEMBERSHIP HUSK ON
+hand-raised (Reveal DM on, both engines) IS UNTRACED. Unit 3 (the gate instrument), the tell column (ruling 41) and the
+owner's counts are R3-CURE-5's.
+WHAT TO CHECK FIRST IN R3-CURE-5'S DIFF: (1) the pre-sweep rule in both engines (212 `_gallery_veil_copy_names`,
+`_gallery_veil_npc_copies`, the jsonb `@>` containment; the twin's `heldBy`): that it withholds no row of a SHOWN power (the
+exemption, ruling 37 (a)) and leaves no row naming a withheld one (ruling 42 (1)), with the husk arm's count at 0 outside the
+KEY_LEVEL list; (2) the power.entry category change (the Watch) against VR42 (the governing power) and VR39; (3) the new
+helpers revoked by name (VR27) and dropped in the rollback; (4) the gate's counterfactual independent of every veil helper,
+and its red with the re-derivation off (37 (b) (i)); (5) the twin = server at every path the husk pass touches. Then re-run
+its red and green, the acceptance run, the harnesses and the cost law, and merge R3 "GREEN TOWARD WITHHOLDING, THE TELL
+QUESTION OPEN", naming the seven `income.criminalRow` towns in the line to the chair.
+AFTER R3: R6 (re-run its MAIN arm), the R4 second cure (`briefs/R4-CURE-2-BRIEF.md`, fill its base; VR48 its own commit;
+RE-CHECK the Curate notice's condition if R3 narrowed power.entry's reach), R5 (ruling 32's order), R7, L, the doors, the
+stored figures, E (ruling 35).
+
