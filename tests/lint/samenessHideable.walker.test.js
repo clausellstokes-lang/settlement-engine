@@ -150,7 +150,11 @@ const NOT_CRIME_POOLS = Object.freeze({
   'DS-DEF-5::NO organized force at all': 'no organised defending force, not crime',
   'DS-POW-7::glue compromise (a corruption leash)': 'a bloc held by a secret over one member: no criminal house or crime state',
 });
-/** A key that reads like crime must be classed above. */
+/**
+ * A key that reads like crime must be classed above. In a hand pool, a key it takes puts its lines in a crime pool;
+ * `corrupt` stands in it: corruption IS a crime fact for this walker (the chair, 19:29 UTC 2026-11-20), so
+ * `GOAL_FAMILY_LINES::POWER::corrupted` stays banked by key.
+ */
 const CRIME_KEY_WORDS = /thie(?:f|ves)|gang|criminal|crime|smuggl|syndicate|racket|underworld|black ?market|shadow|capture|clandest|underground|organi[sz]ed|corrupt|operation role|off-book|off the books/i;
 
 /** @param {string} id */
@@ -608,6 +612,12 @@ describe(`the hideable-house walker of the sameness pools (base ${BASE})`, async
       expect(handReds([{ ref, value: { criminal: ['They owe the crew one favour more.'] } }]).map((r) => r.why)).toEqual(['crime pool']);
       expect(handReds([{ ref, value: { criminal: [{ text: 'They owe the crew one favour more.', marks: [COVERT] }] } }])).toEqual([]);
       expect(handReds([{ ref, value: { criminal: ['x'] } }], { [`${ref}::criminal`]: { class: 'withheld' } })).toEqual([]);
+    });
+
+    test('CORRUPTION IS A CRIME FACT (the chair, 19:29): a line under POWER::corrupted reds by key; dm-only, it passes', () => {
+      const ref = 'src/data/people/goalFamilies.js :: GOAL_FAMILY_LINES';
+      expect(handReds([{ ref, value: { POWER: { corrupted: { short: ['Keeps the magistrate sweet.'] } } } }]).map((r) => r.why)).toEqual(['crime pool']);
+      expect(handReds([{ ref, value: { POWER: { corrupted: { short: [{ text: 'Keeps the magistrate sweet.', marks: [COVERT] }] } } } }])).toEqual([]);
     });
 
     test('SENTENCE KEYS: a key that is a sentence is read by the free-text forms, not the key list', () => {
