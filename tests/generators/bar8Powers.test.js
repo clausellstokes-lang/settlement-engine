@@ -32,9 +32,9 @@ const TOWNS = Object.freeze({
   'bar0-village-famine-rand-46': ['14d'], // C44634
   'bar0-village-calm-rand-46': ['14d'],
   'r2r-village-45': ['14d'], // the noble power seated at the draw is not kept by the roster's trim
-  'bar0-thorp-calm-rand-47': ['15b'], // C31732: harbour, ship timber, ruins
+  'bar0-thorp-calm-rand-242': ['15b'], // C31732: harbour, ship timber, ruins (BUILD-CONFLICT, DEPTH-2: was bar0-thorp-calm-rand-47, the same grounds, which GRAZING's n2 now takes)
   'r2r-thorp-364': ['15b'], // marshlands, hot springs, iron (BUILD-CONFLICT, DEPTH-2: was r2r-thorp-3, marshlands, hot springs, a quarry, which the keyed quarrel now gives the river line)
-  'r2r-thorp-53': ['15b'], // fishing grounds, salt flats
+  'r2r-thorp-414': ['15b'], // fishing grounds, ship timber (BUILD-CONFLICT, DEPTH-2: was r2r-thorp-53, fishing grounds and salt flats, which GRAZING's n2 now takes; the twin over water access, as -53's)
   // BUILD-CONFLICT (DEPTH-2, 2026-11-20): the default rung now picks its quarrel by keyed hash, so each negative is a place whose
   // pick is the grazing quarrel: bar0-thorp-calm-rand-45 -> -399 (a foraging ground, no other ground of the land), -46 -> -85
   // (fishing and hunting grounds, hot springs, a quarry: -46's own), bar0-hamlet-calm-rand-45 -> -199 (common grazing; hunting
