@@ -822,3 +822,49 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   (265,212 tokens of its 300,000). Deliverable two is NOT started: `HANDOFF_213.md` (the line's chain 001..210 has
   the same open set as 203's; the script applies there cleanly) is for a fresh seat, SEC-GRANTS-2, seated when the
   emergency script is final.
+- 02:31 UTC · **THE EMERGENCY SCRIPT IS FINAL AND HANDED TO THE OWNER (02:29 UTC).** SEC-GRANTS's last commit 0024c8de0
+  (its message of 02:25 UTC): the reader's line added verbatim in its own block before the 157 (the three admin
+  doors revoked from PUBLIC and anon; authenticated keeps them), re-proved by the full run (anon denied; a plain
+  user "Only admins…"; a developer still curates; the 810-call diff: 0 expected denials missing, 0 other outcomes
+  changed; the flows byte-identical); EVERY DOOR CLASSED BY EXECUTION (all 85 called as anon with every uuid
+  argument filled in turn by a real town, map, comment and user: only the three acted before, none after); CHECK_B
+  gains a fourth count. THE CHAIR READ THE DELTA: against the commit the reader cleared (6c389a2e) the script's
+  only new STATEMENT is the reader's own line; 158 revokes, 157 grants, one transaction; sha256 of the file handed
+  over 7190e379…e5784a. GIVEN TO THE OWNER: the seven files (attached in the chat; also
+  `docs/chair/2026-11-20/security/` on `lane/sec-grants-2026-11-20`) and the steps in plain words (CHECK_C, CHECK_B,
+  the script once, CHECK_B and CHECK_A, a six-step smoke list, the one-function undo, CHECK_D for the secret, the
+  logs to search). WHAT STANDS BEHIND IT, as told: built and proven on a copy; one independent cold read; the
+  chair's own checks; production's first 100 names equal to the copy's. NOBODY BUT THE OWNER RUNS IT.
+  SEC-GRANTS is at its mark (deliverable two not started; `HANDOFF_213.md`). **SEAT SEC-GRANTS-2**
+  (`prompts/SEC-GRANTS-2.txt`; `lane/sec-grants-2-2026-11-20` from 0024c8de0): migration 213 (the revokes by name,
+  idempotent on both histories; the NULL-safe guards restated from net-current bodies; `account_is_active` by a
+  table of its callers first; the invoker helpers by proof; the default privileges PROPOSED, not built: the owner's
+  decision; a walker with a written allowlist by full signature), proven with the share veil in the chain too, read
+  cold before it lands at the close.
+- 02:31 UTC · **VEIL-19 HANDED BACK AT ITS MARK: "B/C/D e62fabb2e"** (its message of 02:24 UTC; `lane/veil-19-2026-11-20`;
+  B 906f9fc30, B2 8e35d5f28, C 33a9d2ca7, D 427ea0bed, the builder's commits cherry-picked and read line by line by
+  the seat). 212 at the tip: sha256 fec111c2…4acea3. B: on a share hiding a house whole the trace keeps only what a
+  listed house accounts for; a hidden house's allegiance receipt leaves whole. B2 (V10-6, VR21): the trace's `ts`
+  dense in served order (holes 216 to 0). C: every institution flag true only where a listed house raises it (one
+  table of 32 flags in both engines). D: the criminal income row withheld by either grouping or a criminal house
+  hidden whole; the shares re-derived to 100 by largest remainder (sums 75 to 89 became 100 on 128 of 128);
+  `weight` withheld on every non-owner read. ITS OWN RUN: the six guard files 127 of 127; **THE ACCEPTANCE RUN EXITS
+  0, 37 of 37, a07 and d06 PASS** (the lane's first). THE CHAIR'S READ: PART 20's row 2; the stat (212 +283; the twin
+  +241; `galleryVeil.js` 19; the hand-rows guard +247 with no line removed). TO VEIL-20 TO MERGE (it is now the one
+  writer of 212's data veil), then VR17 81dd06d7e; TO REVIEW-VEIL-11 FOR A COLD READ FIRST IN ITS QUEUE (attacks
+  named: the veil applied twice; 100 on the control; a trace entry's nested object; anything served that still
+  points at an old `ts`).
+  ITS FOUR QUESTIONS, RULED (each vetoable): (1) eight reds in the switch's own test (`criminalVeilSwitch.test.js`
+  VS1 (b), (c)) go to VEIL-V102 as its item 0: it merges B/C/D, re-keys (b) by identity, and MEASURES FIRST whether
+  the veil is idempotent on a served copy (a second pass that changes a served document would be D's fault, not the
+  test's). (2) **VR35, V10-5: THE POSITIVE ACCOUNT IS REFINED:** the measure (the cure would drop 186 strings on 36
+  of 68 reads, 156 of them the SHOWN power "Thieves' Guild") shows a served POWER must account for a name as a
+  served house does; re-measured by VEIL-20 before it is built. (3) **VR36, THE COST LAW'S ROWS:** the law holds on
+  its named rows (1.13, 1.87 to 1.93, 1.05); the Reveal-DM gallery read of the largest born town (499 KB) is 2.4
+  times 211 (181 ms to 457; 2.3 already at the base) ONLY because 211's Reveal-DM read does less than its
+  Reveal-off read (285 ms): that row joins the named rows, bound by twice 211's Reveal-OFF read of the same town
+  (570 ms on that box; now 1.6 times); every stage that touches 212 times it. FOR THE OWNER'S LIST: the largest
+  shared town's page data takes about a quarter of a second longer on a "DM view" share than before. (4)
+  `incomeWeight` is a sentence chosen from withhold-always numbers: R5's. VEIL-19's seat is done and released.
+- 02:31 UTC · **VEIL-V102 SEATED** (created 02:25:55 UTC): session_019yED1PqAczUBxrKy7Kt6dB, `lane/veil-v102-2026-11-20`
+  from 81dd06d7e (ruling VR34). POINT 75's CI RUN on pull request #75: run 44659169256, started 02:12:56 UTC.
