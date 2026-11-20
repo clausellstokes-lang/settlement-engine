@@ -14,6 +14,7 @@ import {
   deriveLevers, CRISIS_LEVERS, castReasonSentence,
 } from '../../src/domain/crisis/crisisCast.js';
 import { powerVerb } from '../../src/domain/display/powerSentenceName.js';
+import { stakeReasonKey } from '../../src/data/crisis/stakeReasonLines.js';
 import { isLiveInstitution } from '../../src/domain/institutions/institutionRoster.js';
 import { NPC_PERSONALITY_TRAITS } from '../../src/data/npcData.js';
 import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
@@ -158,9 +159,16 @@ describe('the eleven rules, each over a hand-built town', () => {
     for (const kind of Object.keys(CRISIS_NATURE)) {
       const stakes = deriveStakes(s, kind);
       expect(stakes.map((k) => k.factionId).sort()).toEqual(s.powerStructure.factions.map((f) => f.faction).sort());
-      // FRAME-6 · C2B (b) (the pin moves): the `loses` reason takes the stake's own power's number at birth ("their own people
-      // feel the crisis first" of a plural power); every other reason is a STAKE_REASONS literal
-      for (const k of stakes) expect([...Object.values(STAKE_REASONS), STAKE_REASONS.loses.replace(/^its\b/, powerVerb(k.factionId, 'its', 'their'))]).toContain(k.reason);
+      // FRAME-6 · C2B (b) (the pin moves): the `loses` reason takes the stake's own power's number at birth; FRAME-7 · SR1 (the
+      // pin moves): a `loses` or `split` reason is a wording of `STAKE_REASON_LINES` in its power's number. Every reason is
+      // a text of the closed set (`stakeReasonKey`), and a loss or a split says one of its own stake's
+      for (const k of stakes) {
+        const key = stakeReasonKey(k.reason);
+        expect(key, k.reason).not.toBe(null);
+        if (k.stake === 'loses') expect(['loses', 'losesSeat'], k.reason).toContain(key);
+        // anchored: the reason is asserted a member of the closed set (its key, not null) two lines above
+        if (k.stake === 'loses' && key === 'loses') expect(k.reason, k.factionId).not.toMatch(powerVerb(k.factionId, /\btheir\b|\bthey\b|\bthem\b/, /\bits\b|\bit\b/));
+      }
     }
     const famine = deriveStakes(s, 'famine');
     expect(stakeOf(famine, 'Grain Holders')).toBe('gains');

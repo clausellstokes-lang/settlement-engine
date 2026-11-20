@@ -62,7 +62,7 @@ const FALSE = [
 
 /** [seed, a true sibling that must still print] */
 const KEEP = [
-  ['r2s-famine-town-1', 'Merchant oligarchy loses · its own people feel the crisis first'], // a stake the record holds keeps its words
+  ['r2s-famine-town-1', 'Merchant oligarchy loses · its right to rule is what the crisis puts to the test'], // a stake the record holds keeps its words; FRAME-7 · SR1 (the pin moves): the loss said by its matched system (public_legitimacy)
   ['r2s-famine-city-0', 'Military/Guard gains · the military gains in a vacuum of governance'],
   ['r2r-town-1', 'A voice in the town’s affairs belongs to the Religious Authorities.'], // a Minor faith keeps its voice
 ];

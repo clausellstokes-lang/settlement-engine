@@ -10,7 +10,8 @@
  * (b) STORED, AT BIRTH ONLY: the `loses` reason said of a plural power takes the plural possessive by the names lane's own
  *     helper (`data/people/powerSentenceName.js :: fillAgreement`, the reason's agreement form `{power|its|their} own people…`): "The Merchant
  *     Guilds lose · their own people feel the crisis first". A singular power keeps "its". A saved town keeps its own
- *     string: the page reads the record, and there is no read-time rewrite.
+ *     string: the page reads the record, and there is no read-time rewrite. FRAME-7 · SR1 moved its born pin to the new
+ *     wordings (the loss said by its matched system, in the same agreement).
  *
  * (c) RENDER: an at-odds reason (`crisisPage.js :: stakeShown`, by the record's own quarrels) names the other power as a
  *     sentence names a power (`governanceAccount.js :: powerNameInProse`): "in its own quarrel with the Elder Council",
@@ -25,7 +26,6 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { STAKE_REASONS } from '../../src/domain/crisis/crisisCast.js';
 import { composeCrisisPage, CRISIS_PAGE_COPY, stakeOpening } from '../../src/domain/crisis/crisisPage.js';
-import { powerVerb } from '../../src/domain/display/powerSentenceName.js';
 import { powerNameInProse } from '../../src/domain/display/governanceAccount.js';
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { buildJournalPages } from '../../src/foundry/journalPages.js';
@@ -67,25 +67,26 @@ describe('C2B (a): the Foundry journal opens a Stakes row on the page\'s one com
 
 /** A born town of B7's pool whose stakes hold two plural powers and one singular power that lose (measured at the base). */
 const LOSES_SEED = 'b7-under_siege-town-1';
-/** The loses reason as a power's own number says it: "its" of one, "their" of many (the helper's choice, read here). @param {string} power */
-const losesSaid = (power) => STAKE_REASONS.loses.replace(/^its\b/, powerVerb(power, 'its', 'their'));
 
 describe('C2B (b): a plural power is born with the plural possessive in its loses reason', () => {
-  it(`${LOSES_SEED}: the Merchant Guilds and the Craft Guilds lose by "their own people"; the singular loser keeps "its"`, () => {
+  // FRAME-7 · SR1 (the pin moves, by its cause: SR1-RESULTS.md): a new birth says the loss by its matched system, in the
+  // stake's own power's number (`STAKE_REASON_LINES`, filled by `fillAgreement`); C2B (b)'s law, held here on the new words.
+  it(`${LOSES_SEED}: the Merchant Guilds and the Craft Guilds lose in their own number ("their", "they"); the singular loser says "it"`, () => {
     const s = generateSettlementPipeline({ settType: 'town', stressType: 'under_siege' }, null, { seed: LOSES_SEED, customContent: {} });
     const stakes = (Array.isArray(s.stress) ? s.stress : [s.stress]).filter(Boolean).flatMap((/** @type {any} */ e) => e.cast?.stakes || []).filter((/** @type {any} */ k) => k.stake === 'loses');
     const many = stakes.filter((/** @type {any} */ k) => ['Merchant Guilds', 'Craft Guilds'].includes(k.factionId));
     const one = stakes.filter((/** @type {any} */ k) => !['Merchant Guilds', 'Craft Guilds'].includes(k.factionId) && k.reason !== STAKE_REASONS.losesSeat);
     expect(many.map((/** @type {any} */ k) => k.factionId).sort()).toEqual(['Craft Guilds', 'Merchant Guilds']);
     expect(one.length).toBeGreaterThan(0);
-    for (const k of many) {
-      expectAbsentWithAnchor([k.reason], STAKE_REASONS.loses, losesSaid(k.factionId), `${LOSES_SEED} ${k.factionId}`);
-      expect(k.reason.startsWith('their ')).toBe(true);
-    }
-    for (const k of one) expect(k.reason, k.factionId).toBe(STAKE_REASONS.loses);
-    // the page prints the stored reason after its plural verb: "The Merchant Guilds lose · their own people feel the crisis first"
+    const said = Object.fromEntries(stakes.map((/** @type {any} */ k) => [k.factionId, k.reason]));
+    expectAbsentWithAnchor([said['Merchant Guilds']], 'its trade is the first thing the crisis cuts', 'their trade is the first thing the crisis cuts', `${LOSES_SEED} Merchant Guilds`);
+    expectAbsentWithAnchor([said['Craft Guilds']], 'it lives by trade, and trade is what suffers', 'they live by trade, and trade is what suffers', `${LOSES_SEED} Craft Guilds`);
+    // anchored: each plural reason is pinned present by the expectAbsentWithAnchor pair just above
+    for (const k of many) expect(k.reason, k.factionId).not.toMatch(/\bits?\b/);
+    expect(one.map((/** @type {any} */ k) => [k.factionId, k.reason])).toEqual([['Town Council', 'people look to it first for an answer']]);
+    // the page prints the stored reason after its plural verb: "The Merchant Guilds lose · their trade is the first thing the crisis cuts"
     const rows = composeCrisisPage(s, { audience: 'owner' }).flatMap((sec) => sec.stakes).filter((k) => k.factionId === 'Merchant Guilds');
-    expect(rows.map((k) => `${stakeOpening(k).subject} ${stakeOpening(k).verb} · ${k.reason}`)).toEqual([`The Merchant Guilds lose · ${losesSaid('Merchant Guilds')}`]);
+    expect(rows.map((k) => `${stakeOpening(k).subject} ${stakeOpening(k).verb} · ${k.reason}`)).toEqual(['The Merchant Guilds lose · their trade is the first thing the crisis cuts']);
   });
 
   it('a saved town keeps its own string: no read-time rewrite of a stored "its own people" after a plural power', () => {

@@ -19,7 +19,8 @@
 
 import { crisisHookFor } from './crisisHooks.js';
 import { crisisContainer } from '../facts/crisisKind.js';
-import { CAST_ABSENCES, CRISIS_ROLE_LABEL, RAISED_BY_CRISIS, STAKE_REASONS, castReasonShown, effectiveCastOf } from './crisisCast.js';
+import { CAST_ABSENCES, CRISIS_ROLE_LABEL, RAISED_BY_CRISIS, castReasonShown, effectiveCastOf } from './crisisCast.js';
+import { stakeReasonKey } from '../../data/crisis/stakeReasonLines.js';
 import { LODGING_HOUSE } from '../tension/sideArchetypes.js';
 import { isOfficeStandIn } from '../dossier/seatHolder.js';
 import { composeTonightSheet, TONIGHT_AUDIENCES } from '../summary/tonightSheet.js';
@@ -227,7 +228,7 @@ const andList = (names) => (names.length < 2 ? names.join('') : `${names.slice(0
  * @returns {{ stake: StakeShown, reason: string }}
  */
 function stakeShown(s, govName, k) {
-  if (!(k.stake === 'split' && k.reason === STAKE_REASONS.untouched)) return { stake: k.stake, reason: k.reason };
+  if (!(k.stake === 'split' && stakeReasonKey(k.reason) === 'untouched')) return { stake: k.stake, reason: k.reason }; // FRAME-7 · SR1: a key, never a sentence
   const many = pluralPowerName(k.factionId);
   if (govName && k.factionId === govName) return { stake: 'answers', reason: many ? 'they govern here' : 'it governs here' };
   const others = quarrelsOf(s, k.factionId);
