@@ -110,3 +110,47 @@ origin/lane/review-veil-9-2026-11-19) stands whole: its section 2 (VR4 to VR17),
 | economy.prosperity, safety.safetyLabel (section 5) | bands | 29 / 86, 28 / 86 | — (control not run for these two) | tier 2 residual by VR28 |
 
 Not run: power.conflicts, income/power composition (presence rows), history.founding.overcoming, tile.threat_level / government_type.
+
+## 6. FOR REVIEW-VEIL-11 (seated from 3b88e0297; this section added after, at the chair's ask of 01:40 UTC)
+
+**(1) RULING VR28, THE TIERS (the chair, ~01:35 UTC; it amends VR26; vetoable by the owner), as sent:** TIER 1,
+BLOCKING AT FINAL: no name, person, tie, sentence, crime-worded label or cause, sequence gap, door beside `data`, and no
+PRECISE figure carrying a hidden house's term (a number, a score, a share) reaches a non-owner read; for these the
+inversion test is blocking. TIER 2, RECORDED, NOT BLOCKING: a COARSE BAND every town shows from a closed, ordered
+vocabulary is sent as stored; the reader still runs the test on every band at FINAL and REPORTS each count as the
+known residual; its cure is a public face computed at sharing, the owner's decision after the deploy. A band that tells
+MORE than "something criminal is hidden" (its size, its kind, or which house), shown by an executed case, moves to tier 1.
+
+**(2) THE INVERSION PROBES, exactly** (from a worktree of the tip under test, the chain rebuilt from its migrations):
+```sh
+P=docs/chair/2026-11-20/veil/probes/REVIEW-VEIL-10
+RV6_SRC=<tip worktree> RV10_TPL=x212 RV10_N=2 RV10_OUT=/var/tmp/inv.json   $P/run.sh $P/inversion.probe.jsx  /var/tmp/inv.log
+RV6_SRC=<tip worktree> RV10_TPL=x212 RV10_N=2 RV10_OUT=/var/tmp/inv2.json  $P/run.sh $P/inversion2.probe.jsx /var/tmp/inv2.log
+RV10_CONTROL=1 RV6_SRC=<tip worktree> RV10_TPL=x212 RV10_N=4 RV10_OUT=/var/tmp/inv2c.json $P/run.sh $P/inversion2.probe.jsx /var/tmp/inv2c.log
+```
+(run.sh needs `/var/tmp/v16/pgmod` holding pg@8.13.1 and the cluster on `/var/tmp/rv7`.) Results at bedd5a392, 86 born
+towns with a hideable house, DEFAULT veil, served by get_gallery_dossier: `economy.prosperity` sanity 86/86, inversion
+FAILS 29/86; `safety.safetyLabel` sanity 86/86, FAILS 28/86; `legitimacy.score` passes. The split of the other rows
+(section 5b, pushed at 32432a0b1, after your seating commit): `defence.scores.*` 76/87 with, 0/96 control (TIER 1);
+readiness label 8/87, 0/96 (tier 2); economicGates and legitimacy pass; food inconclusive (my rebuild matches the stored
+value in about half); the seven prose sentences fail as often in the control (not re-derivable from a served page).
+
+**(3) THE FOUR CLASSES I WOULD ATTACK NEXT:**
+1. **A band that tells more than "hidden" (VR28's promotion test).** Prosperity drops exactly one band at
+   criminalEffective >= 65 (`prosperity.js :: labelFromBase`); the safety band has crime-specific words ("Dangerous —
+   Criminal Governance", `safetyProfile.js`). Measure, per band, whether the SIZE of the served-vs-re-derived gap, or the
+   band word itself, separates the hidden houses' count or kind (criminal vs clandestine vs brokerage). And run the
+   control for prosperity and the safety band (I ran it only for section 5b's rows).
+2. **The beside-`data` cures when built (VR20, VR21, VR22, VR23):** the chronicle's own veil (an entry that leaves must
+   leave no id, `appliedAt` or count gap; `event.cause` and `partyCaused` are free text; an unknown event type is
+   withheld); the tile computed under the row's veil, and every filter, facet and sort over it (list_gallery_dossiers'
+   `prosperity` filter and the publish-time `gallery_facet_*` columns written raw by ShareToGallery.jsx); the map member's
+   default veil, its chronicle, and `member_count`.
+3. **Re-derivation on the visitor's and the importer's side (VR19 `page: re-derive`):** a page that re-derives a
+   withheld value from the served document must not read any withheld field; and an IMPORT saves the served document as
+   the importer's own town, where the importer's app re-runs the generators: check that nothing re-derived there differs
+   from what the share showed (the import is a door that WRITES).
+4. **Every door's grants, beside SEC-GRANTS:** the veil's own helpers are executable by anon (`_gallery_veil_*`,
+   `_gallery_apply_member_overrides`, `_gallery_dm_full_json`, `_gallery_sanitize_public_json`): they take their input
+   from the caller, so measure that none reads a table; `_gallery_public_tile_rows()` (DEFINER) returns every public row's
+   raw tiles and `owner_id`; and existence probes keyed by a uuid (votes, reactions, comments) on rows that are not public.
