@@ -152,3 +152,7 @@ STAFFING CHOSEN (04:31 UTC): R3 and R4 IN PARALLEL from the R2-green tip (disjoi
 `applyRosterChoices` against `_gallery_veil_holders`, `_gallery_veil_rekey` / `withholdHolders`, `rekeyPeople`; each in
 its own 212 section and twin block plus ONE call line; merged R3 then R4). R5 AFTER R3 (its composed rules derive from
 R3's inputs). R6 (tests only) PREPARED NOW beside the R2 cure. Briefs: `briefs/R3-BRIEF.md`, `R4-BRIEF.md`, `R6-BRIEF.md`.
+
+THE HAND-OVER (the chair, 04:40 UTC): the successor VEIL-22 is seated beside this seat and writes nothing until the
+chair gives it the lane. This seat stays the one writer until R2 is merged green and pushed, then ONE message "R2
+<commit>" and hands over; it does NOT launch R3 and R4 (VEIL-22 does).
