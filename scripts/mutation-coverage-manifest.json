@@ -4691,6 +4691,10 @@
       "kind": "rationale",
       "rationale": "Introduced by PAGE-6's builder of S9 (S9-POST.md, the chair's ruling of 13:50, 2026-11-20). It pins that a card dealt a secret it is not admitted to (a role-free row whose holder tag, npcData.js :: CRIMINAL_SECRET_HOLDER_TAGS, does not name its class; a venal row on a principled card) holds, after the town's draw-free post-pass (npc/factionLeaderSecret.js :: settleMisfitSecrets, called from narrativeGenerator.js :: enrichNpcCoherence), the next admitted line of its noted pool that no card holds, and that a card that is no misfit keeps its secret byte for byte: on a clergy face's own stream (the misfit computed from the tag table, never quoted), on a principled face, and over four born towns. Red first at the lane commit eb5fedd13 (4 failed of 4). EXECUTED AT BUILD TIME: the pass call was removed from enrichNpcCoherence and restored from a cp backup taken before, verified byte-identical by cmp; the born-towns arm reddened on three named cards (hxd-city-3, hxd-metropolis-7, hxd-town-11). A sweep plant would re-plant the same call removal."
     },
+    "tests/generators/narrowVenalSecret.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by PAGE-8's builder of F5-NARROW (briefs/F5-NARROW.md, the chair's ruling of 18:26, 2026-11-20). It pins, on five seeds of the 300 chosen by computation, that the narrow walk (npc/factionLeaderSecret.js :: settleMisfitSecrets with narrow: true, appended to enrichNpcCoherence's rankPowers line) reads each card's final temperament (0 differ), that no card it moved ends with a secret on F5's venal list, that a narrow card with an admitted unheld row left holds a non-venal secret, and that every card not narrow is byte-identical to the base (the call a no-op). Red first at a614d7664 (3 failed of 4) and on the probe's placement and admits rebuilt (4 failed of 4). A sweep plant would move the call back before the yield."
+    },
     "tests/data/powerNumberAgreement.test.js": {
       "kind": "mutation",
       "label": "names/a crisis stake's verb takes its power's number"
