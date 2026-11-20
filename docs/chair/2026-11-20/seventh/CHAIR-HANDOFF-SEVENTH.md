@@ -738,3 +738,60 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   the correction of "scores.*" to "internal alone", went to VEIL-20 and the reader. FOR THE OWNER'S LIST, the
   residual in exact words: on 29 of 86 towns with a hidden criminal house a visitor who recomputes the prosperity
   band can tell that something criminal and strong is hidden; not which house, how many, or its name.
+- 02:17 UTC · **REVIEW-VEIL-10'S VERDICT ON THE EMERGENCY SCRIPT (its message of 02:06 UTC; record at 0baadd2b7,
+  `probes/REVIEW-VEIL-10/SEC-GRANTS-READ.md`): SAFE TO HAND OVER, WITH ONE LINE ADDED AND ONE WORD FIXED.** Executed
+  on its own chain of master 001..203: 157 of 157 signatures exist, all definer, all owned by postgres; twice exit 0;
+  the check after: no row. BREAKAGE: none found (no policy, trigger, default, view, constraint or index on any of
+  the 157; the one invoker-or-trigger caller, `handle_new_user`, is definer; no auth hook; all 169 rpc() sites are
+  service-role edge clients; pg_cron runs as the owner). **NOT CLOSED, ONE LINE ADDED, PROVEN:** `set_curated`,
+  `set_featured`, `set_featured_map` test `caller_role not in ('developer','admin')`; for anon the role is NULL,
+  the test is NULL, nothing raises: as anon AFTER the script another user's public town was curated and featured.
+  The line revokes the three from public and anon (authenticated keeps them: the admin's browser calls them; proven:
+  anon denied, a plain user "Only admins…", a developer still curates). The seat's catalogue had classed them a
+  deliberate door from one call on an empty table. TO SEC-GRANTS for "EMERGENCY-2" with the lesson (re-test as anon
+  every door whose guard a NULL can slip, on a chain that holds a row). WORST LEFT AFTER IT, for 213:
+  `account_is_active(uuid)` (an anon yes/no for any user id); `get_credit_balance`'s NULL-uid skip (no anon grant:
+  latent); the visitor-needed doors. REVIEW-VEIL-10's work is done; its seat is released.
+- 02:17 UTC · **VEIL-DOORS HANDED BACK PARTIAL AT ITS MARK: "DOORS cca49cb8d"** (build 04704a660;
+  `docs/chair/2026-11-20/veil/doors/VEIL-DOORS-HANDBACK.md`). BUILT in 212 and a twin
+  (`src/domain/display/galleryDoors.js`): the tiles (the stability band word alone; the prosperity band as stored
+  under VR28; a tile holding a hideable name NULL on a marked row; NULL beside the closed answer; the tile rows
+  revoked by name), the chronicle (unmarked as 032; closed null; an entry withheld whole if unclassed, covert under
+  a shut criminal grouping, or named by the search; the newest 50 of the served; no ids), `get_gallery_map` (an
+  unmarked member takes the default veil; its chronicle veiled), a walker over 63 visitor-callable functions. RED
+  AND GREEN: six arms red at bedd5a392; 7 of 7 and 6 of 6 at the tip. 212 at 04704a660: sha256 a79c2852…85c576, down
+  f8bcf542…6a019. THE CHAIR'S READ OF THE TWO RE-KEYED PINS: `galleryMapMemberCount`'s loader takes the new helpers
+  too; `galleryServerVeil`'s "the map member equals the listing" holds an UNMARKED member to the party link's page
+  (VR23), every marked one still to the listing's: an equality both ways, not loosened. NOT DONE: the one-row
+  dossier read and both cost conditions; the event-type table classed on purpose (IMPOSE_CORRUPTION covert, the other
+  43 target, unread); snapshot mode; the reader's repros; `tests/security` whole after the re-keys; the acceptance
+  run. NOT MERGED: a successor finishes it first.
+  **RULING VR27 IS AMENDED; ITS FIRST WORDING WAS WRONG (the chair's error, caught before anything was built on
+  it).** "No underscore helper executable by a visitor, all nine revoked" would have broken SAVING A MAP:
+  `_gallery_world_snapshot_is_safe` is run AS THE VISITOR by the saved_maps trigger
+  (`_saved_maps_world_snapshot_guard`, an invoker trigger; SEC-GRANTS's catalogue, executed). AS AMENDED: 212 revokes
+  by name only the helpers 211 and 212 themselves create and `_gallery_public_tile_rows()` (a definer: raw tiles and
+  owner ids); the eight older INVOKER helpers (they run with the caller's own rights and grant nothing) are NOT
+  212's: they go to SEC-GRANTS's 213 with its catalogue's proof; the walker's arm reads "executable by neither
+  visitor role, or on a written list naming the visitor context that needs it".
+  **RULING VR33, THE DEFENCE ROW, FINAL (vetoable; it replaces "scores.*" and "internal alone", each read off a
+  table of one shape):** REVIEW-VEIL-11 on MASTER'S STORED SHAPE, which is production's towns (86 and control 50;
+  its message of 02:06 UTC): ALL SIX scores fail (internal 78, economic 52, disaster 37, magical 33, military 31,
+  monster 28; control 0 each) and `economicGates` 38 and 0. So `defence.scores.*` and `defence.economicGates` are
+  withheld on every non-owner read on BOTH shapes, one rule, no shape test; the page re-derives them from the
+  served document. Also noted by the reader, both shapes, at the base: `compound.criminalEffective`,
+  `militaryEffective`, `safetyRatio` and `activeConditions[].severity` are served raw though registered
+  withhold-always (R2 is not built): FINAL blocks on any one of them served.
+  **VEIL-20: VR25 BUILT at db97168dd** (`src/domain/veil/importRederive.js :: rederiveServed`: the ten re-derived by
+  the engine's own functions from the served document, fidelity 72 of 72; a field kept only where every value of
+  an unserved input agrees; the cast "not known"; red 3 of 5 at the unwired import, green 5 of 5). ITS TWO WALKER
+  ROWS RULED: the ruin-filter exemption GRANTED in VR2's form (pin 116 to 117) with one measure owed (a born town
+  with a ruined house, imported: does any of the ten mis-draw; if so the field is left out); the observed-shape
+  scanner's three false positives cured BY OBSERVATION (its corpus is shown a served config that carries
+  `magicExists`), no raise of the frozen figure, no exemption.
+  **SEATED: VEIL-DOORS-2** (`prompts/VEIL-DOORS-2.txt`; `lane/veil-doors-2-2026-11-20` from cca49cb8d; the mark
+  400,000): the one-row read and the cost conditions; VR27 as amended with a map save as its arm; the map import's
+  real path under VR23 (the browser calls `get_gallery_map`; `import_gallery_map(text)` has no caller in `src/`);
+  the event-type table on purpose; snapshot mode; AND A DOOR NOBODY MEASURED: the world columns of a public map
+  (the census's rows 18 and 21: `world.snapshot`, `world.sections`, `realmArcSummary`, stored at publish,
+  governed by nothing): measure first, one message before building.
