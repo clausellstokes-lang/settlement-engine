@@ -1,0 +1,65 @@
+diff --git a/src/domain/display/galleryRosterChoices.js b/src/domain/display/galleryRosterChoices.js
+index 9d79b5a2c..3f591c1a6 100644
+--- a/src/domain/display/galleryRosterChoices.js
++++ b/src/domain/display/galleryRosterChoices.js
+@@ -376,7 +376,7 @@ function heldBy(a, b) {
+ /** R3-CURE-5: a person's id AS TEXT: a non-empty string as itself, a finite number or a boolean by its String() (212: the
+  * jsonb scalar's text, `->>`); anything else, the empty string included, '' (no id). @param {unknown} v @returns {string} */
+ function idKeyOf(v) {
+-  return typeof v === 'string' ? v : (typeof v === 'number' && Number.isFinite(v)) || typeof v === 'boolean' ? String(v) : '';
++  return typeof v === 'string' ? v : typeof v === 'number' && Number.isFinite(v) ? String(v) : ''; // SCRATCH (R3-CURE-7): a boolean read as '', as idText
+ }
+ 
+ /** An id as a string: a string as itself, a finite number by its String() (212: the JSON number's text). @param {unknown} v @returns {string} */
+=== the scratch run (never committed) ===
+[gate-tail] start:  15:43:14 up 46 min,  0 user,  load average: 6.72, 5.98, 4.10 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/r3c7
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js (25 tests | 1 failed | 24 skipped) 615938ms
+     × R3-CURE-7 (ruling 53, condition 1: THE TOOTH): a person whose id is `true`, one whose id is `false`, one whose id is the empty string: (a) no stripped goal or membership of the withheld guild survives for any of the three (no husk; a shown membership stays byte for byte); (b) the twin and 212 serve the SAME result for each (byte for byte, by name, presence included); every read, both shapes, Reveal DM off and on 77ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryRosterChoices.pglite.test.js > R3: the drawn conditional rows where a house is hidden whole (through the server; the twin beside it) > R3-CURE-7 (ruling 53, condition 1: THE TOOTH): a person whose id is `true`, one whose id is `false`, one whose id is the empty string: (a) no stripped goal or membership of the withheld guild survives for any of the three (no husk; a shown membership stays byte for byte); (b) the twin and 212 serve the SAME result for each (byte for byte, by name, presence included); every read, both shapes, Reveal DM off and on
+AssertionError: expected [ …(12) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "hand-ids open dm=true gallery: the true-id person differs from the twin: server [{\"id\":true,\"name\":\"Tam Verity\",\"role\":\"Netmaker\",\"memberships\":[{\"role\":\"member\",\"power\":\"Fishers\"}]}] | twin [{\"id\":true,\"name\":\"Tam Verity\",\"role\":\"Netmaker\",\"memberships\":[]}]",
++   "hand-ids open dm=true gallery: the false-id person differs from the twin: server [{\"id\":false,\"name\":\"Fay Falsen\",\"role\":\"Salter\",\"memberships\":[{\"role\":\"member\",\"power\":\"Fishers\"}]}] | twin [{\"id\":false,\"name\":\"Fay Falsen\",\"role\":\"Salter\",\"memberships\":[]}]",
++   "hand-ids open dm=true import: the true-id person differs from the twin: server [{\"id\":true,\"name\":\"Tam Verity\",\"role\":\"Netmaker\",\"memberships\":[{\"role\":\"member\",\"power\":\"Fishers\"}]}] | twin [{\"id\":true,\"name\":\"Tam Verity\",\"role\":\"Netmaker\",\"memberships\":[]}]",
++   "hand-ids open dm=true import: the false-id person differs from the twin: server [{\"id\":false,\"name\":\"Fay Falsen\",\"role\":\"Salter\",\"memberships\":[{\"role\":\"member\",\"power\":\"Fishers\"}]}] | twin [{\"id\":false,\"name\":\"Fay Falsen\",\"role\":\"Salter\",\"memberships\":[]}]",
++   "hand-ids open dm=true twin: the true-id person's memberships []",
++   "hand-ids open dm=true twin: the false-id person's memberships []",
++   "hand-ids openM dm=true gallery: the true-id person differs from the twin: server [{\"id\":true,\"name\":\"Tam Verity\",\"role\":\"Netmaker\",\"memberships\":[{\"role\":\"member\",\"power\":\"Fishers\"}]}] | twin [{\"id\":true,\"name\":\"Tam Verity\",\"role\":\"Netmaker\",\"memberships\":[]}]",
++   "hand-ids openM dm=true gallery: the false-id person differs from the twin: server [{\"id\":false,\"name\":\"Fay Falsen\",\"role\":\"Salter\",\"memberships\":[{\"role\":\"member\",\"power\":\"Fishers\"}]}] | twin [{\"id\":false,\"name\":\"Fay Falsen\",\"role\":\"Salter\",\"memberships\":[]}]",
++   "hand-ids openM dm=true import: the true-id person differs from the twin: server [{\"id\":true,\"name\":\"Tam Verity\",\"role\":\"Netmaker\",\"memberships\":[{\"role\":\"member\",\"power\":\"Fishers\"}]}] | twin [{\"id\":true,\"name\":\"Tam Verity\",\"role\":\"Netmaker\",\"memberships\":[]}]",
++   "hand-ids openM dm=true import: the false-id person differs from the twin: server [{\"id\":false,\"name\":\"Fay Falsen\",\"role\":\"Salter\",\"memberships\":[{\"role\":\"member\",\"power\":\"Fishers\"}]}] | twin [{\"id\":false,\"name\":\"Fay Falsen\",\"role\":\"Salter\",\"memberships\":[]}]",
++   "hand-ids openM dm=true twin: the true-id person's memberships []",
++   "hand-ids openM dm=true twin: the false-id person's memberships []",
++ ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:827:17
+    825|     expect(judged).toBeGreaterThan(0);
+    826|     expect(compared).toBeGreaterThan(0);
+    827|     expect(bad).toEqual([]);
+       |                 ^
+    828|   });
+    829|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 24 skipped (25)
+   Start at  15:43:16
+   Duration  616.42s (transform 4.17s, setup 41ms, import 285ms, tests 615.94s, environment 0ms)
+
+[gate-tail] end:  15:53:33 up 56 min,  0 user,  load average: 6.74, 6.81, 5.48
+[gate-tail] full log: /tmp/gate-tail.5747.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+exit 1
