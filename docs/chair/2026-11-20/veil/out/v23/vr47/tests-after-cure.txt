@@ -1,0 +1,17 @@
+The same set AFTER the cure, BEFORE the re-records (the new reds are the pins of a drawn title, re-recorded in the commit; then 8 files 62 tests green, see the handback):
+ FAIL  tests/components/dossierPhoneFloorAllViews.test.jsx > THE PHONE FLOORS — every dossier view > desktop is untouched — the SAME walk, pinned to DESKTOP_BASELINE
+ FAIL  tests/components/dossierPhoneFloorAllViews.test.jsx > THE PHONE FLOORS — every dossier view > every line in every tab clears its floor (prose 14px, chrome 12px) at phone width
+ FAIL  tests/components/people6InstitutionFaceLinks.test.jsx > 5. step 2: the honorific (the owner: "Pastor Robert Thomas" on the institution card; the name alone on the NPC card, the role on its own row) > the NPC card: the heading is the 
+ FAIL  tests/components/people6InstitutionFaceLinks.test.jsx > 5. step 2: the honorific (the owner: "Pastor Robert Thomas" on the institution card; the name alone on the NPC card, the role on its own row) > the institution card prints "Past
+ FAIL  tests/components/people6InstitutionFaceLinks.test.jsx > 5. step 2: the honorific (the owner: "Pastor Robert Thomas" on the institution card; the name alone on the NPC card, the role on its own row) > the resolvers: the registry form,
+ FAIL  tests/components/people6InstitutionFaceLinks.test.jsx > 5. step 2: the honorific (the owner: "Pastor Robert Thomas" on the institution card; the name alone on the NPC card, the role on its own row) > the veil and the public projectio
+ FAIL  tests/components/phoneChromeFloor.census.test.js > THE PHONE CHROME FLOOR — a census of the source, on every route the router declares > each surface matches its registry row, and an owned surface may only shrink
+ FAIL  tests/data/faceHonorifics.test.js > every culture-keyed honorific is pinned (item 14) > every (culture, title) reads exactly its pinned forms by gender, through the resolver and the card door
+ FAIL  tests/data/faceHonorificsHolder.test.js > TAIL-TITLES-2 KT1 · the honorific takes the holder's word (one face, one word) > KEEP (every row) seed · name (gender, face) prints the line it printed
+ FAIL  tests/data/faceHonorificsHolder.test.js > TAIL-TITLES-2 KT1 · the honorific takes the holder's word (one face, one word) > MOVE (every row) seed · name (gender, face): the line does not open on the old word
+ FAIL  tests/domain/bar4PeopleKinds.test.js > BAR4-PEOPLE · the read's rows (REVIEW-BAR-4), each red at 8aef8e7d46 > C18802 bar0-hamlet-calm-rand-23: Latifa al-Amin is no Landlord; she is the Landlady
+ FAIL  tests/lint/presumedThings.walker.test.js > ARM 1 — the source > ⛔ every source literal that names a thing declares it, or has its row
+ FAIL  tests/lint/presumptionClasses.walker.test.js > the tree against its register > no NEW undeclared line: every hit is banked (declare the line; the door never banks a new one)
+ FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the frozen register > the surfaceReach grammar round-trips: parse(format(reach)) equals reach for every LIT identity
+ Test Files  9 failed | 118 passed (127)
+      Tests  14 failed | 1766 passed | 28 skipped (1808)
