@@ -20,8 +20,9 @@ import { describe, it, expect } from 'vitest';
 import { createHash } from 'node:crypto';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { composeTonightSheet, TONIGHT_COPY } from '../../../src/domain/summary/tonightSheet.js';
-import { castTroubleFrame, troubleOfWeight } from '../../../src/domain/tension/troubleCast.js';
+import { castTroubleFrame, troubleOfWeight, HALL_TAKEN, WEIGHT_GRADES } from '../../../src/domain/tension/troubleCast.js';
 import { buildJournalPages } from '../../../src/foundry/journalPages.js';
+import { CAPTURE_LADDER } from '../../../src/domain/corruption.js';
 import { buildViewModel } from '../../../src/pdf/lib/viewModel.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
 
@@ -198,4 +199,83 @@ describe('a calm town with a trouble of weight opens on the trouble the order pi
     });
     expectNoSeedFailures(failures, 'a town with a trouble of weight opens on the trouble the order picks');
   }, 300000);
+});
+
+/**
+ * W4, A HALL IN CRIMINAL HANDS WITH A LIVE CRIME WAVE (FRAME-5 · CF12, the chair's CF11 amended; the owner, relayed
+ * 2026-11-20 11:15 UTC: "Do all of these, every last one predeploy"). Measured on the 330-town calm pool
+ * (docs/chair/2026-11-20/content/frame5/CF12-CAPTURED-HALL-RESULTS.md): six calm towns hold BOTH a power at
+ * `captureState` corrupted or capture AND a `crime_wave` among their tensions. Five held no trouble of weight before
+ * and now open on that crime wave (W4, the weakest row); city-14 is already framed by that same crime wave on W2, which
+ * outranks W4, so it keeps its sheet byte for byte (its pin, measured at the base 8991b83b2). Every other pin of this
+ * file stays as it was.
+ */
+const HALL_AND_CRIME_WAVE = Object.freeze({
+  'frame-calm-town-20': 'Town Mayor',
+  'frame-calm-town-80': 'Town Mayor',
+  'frame-calm-city-12': 'Merchant Guild Council',
+  'frame-calm-city-49': 'Merchant oligarchy',
+  'frame-calm-metropolis-51': 'Ducal Governorship',
+});
+const ALREADY_FRAMED_W2 = Object.freeze({ seed: 'frame-calm-city-14', hall: 'Merchant oligarchy', pin: 'd9c0870f07fe7c2a' });
+
+describe('W4: a hall in criminal hands with a live crime wave opens the owner\'s sheet on that crime wave (CF12)', () => {
+  const crimeWaveAt = (s) => s.history.currentTensions.findIndex((t) => t.type === 'crime_wave');
+  // the premise reads the ladder's two rungs as the record writes them (pinned to HALL_TAKEN below), not through the code under test
+  const takenHalls = (s) => s.powerStructure.factions.filter((f) => ['corrupted', 'capture'].includes(f.captureState)).map((f) => f.faction);
+
+  it('the grade is its own last row, the weakest; the rows above it are as they were; the rungs are corrupted and capture', () => {
+    expect(WEIGHT_GRADES.map((row) => [...row])).toEqual([
+      ['legitimacy-below-30', 'seat-ungated'], ['legitimacy-below-45'], ['high-conflict'],
+      ['food-below-secure', 'creditor-power', 'impaired-chain'], ['hall-captured'],
+    ]);
+    expect([...HALL_TAKEN]).toEqual(['corrupted', 'capture']);
+    // the ladder's own rungs at or above corrupted (corruption.js :: CAPTURE_LADDER), held as words in troubleCast.js
+    expect([...HALL_TAKEN]).toEqual(CAPTURE_LADDER.slice(CAPTURE_LADDER.indexOf('corrupted')));
+  });
+
+  it(`${Object.keys(HALL_AND_CRIME_WAVE).length} calm towns with both facts and no other trouble of weight open on their crime wave, its sides the people to voice`, () => {
+    const failures = collectSeedFailures(Object.keys(HALL_AND_CRIME_WAVE), (seed) => {
+      const s = born(seed);
+      const at = crimeWaveAt(s);
+      // the measure's premises, anchored on the record: the taken hall and the crime wave
+      expect(takenHalls(s), `${seed}: the hall at corrupted or capture`).toEqual([HALL_AND_CRIME_WAVE[seed]]);
+      expect(at, `${seed}: a crime wave among its tensions`).toBeGreaterThanOrEqual(0);
+      expect(troubleOfWeight(s), seed).toMatchObject({ at, tension: { type: 'crime_wave' }, strain: { strain: 'W4', grade: 'hall-captured' } });
+      const sheet = composeTonightSheet(s, OWNER);
+      expect(sheet.frame?.type, seed).toBe('crime_wave');
+      expect(sheet.frame?.line, seed).toBe(s.history.currentTensions[at].description.replace(/\s+/g, ' ').trim());
+      // the people to voice are the crime wave's own sides' faces, each on a side the record holds
+      const sides = sheet.frame.sides.map((d) => d.words);
+      expect(sheet.people.length, `${seed}: a side's face is voiced`).toBeGreaterThan(0);
+      for (const p of sheet.people) expect(sides, `${seed}: ${p.name} stands on a side of the crime wave`).toContain(p.side);
+      // the stranger keeps today's sheet (the audience gate, the first lock)
+      expect(composeTonightSheet(s).frame, `${seed} (a stranger)`).toBeUndefined();
+    });
+    expectNoSeedFailures(failures, 'a calm town with a taken hall and a crime wave opens on the crime wave for the owner');
+  }, 300000);
+
+  it(`${ALREADY_FRAMED_W2.seed}: framed by the same crime wave on W2, which outranks W4: it keeps its sheet byte for byte`, () => {
+    const s = born(ALREADY_FRAMED_W2.seed);
+    expect(takenHalls(s)).toEqual([ALREADY_FRAMED_W2.hall]);
+    expect(troubleOfWeight(s)).toMatchObject({ at: crimeWaveAt(s), tension: { type: 'crime_wave' }, strain: { strain: 'W2', grade: 'high-conflict' } });
+    const sheet = composeTonightSheet(s, OWNER);
+    expect(digest(JSON.stringify(sheet))).toBe(ALREADY_FRAMED_W2.pin);
+    // the chair's condition for keeping it (2026-11-20, 11:21 UTC): no side of the crime wave is missing from its people to voice
+    expect(sheet.people.map((p) => p.side)).toEqual(sheet.frame.sides.map((d) => d.words));
+  });
+
+  it('both facts, each needed: no taken hall, a hall below corrupted, or no crime wave, and there is no W4', () => {
+    const s = born('frame-calm-city-49');
+    const at = crimeWaveAt(s);
+    const withHall = (state) => ({ ...s, powerStructure: { ...s.powerStructure, factions: s.powerStructure.factions.map((f) => (f.captureState ? { ...f, captureState: state } : f)) } });
+    const noField = { ...s, powerStructure: { ...s.powerStructure, factions: s.powerStructure.factions.map(({ captureState: _drop, ...f }) => f) } };
+    for (const [label, town] of [['no captureState (the veil deletes it)', noField], ['none', withHall('none')], ['adversarial', withHall('adversarial')], ['equilibrium', withHall('equilibrium')]]) {
+      expect(troubleOfWeight(town), label).toBe(null);
+      expect(castTroubleFrame(town), label).toBe(null);
+    }
+    expect(troubleOfWeight(withHall('capture')), 'capture').toMatchObject({ at, strain: { strain: 'W4' } });
+    const tensions = s.history.currentTensions.map((t, i) => (i === at ? { ...t, type: 'guild_conflict' } : t));
+    expect(troubleOfWeight({ ...s, history: { ...s.history, currentTensions: tensions } }), 'the hall, but no crime wave').toBe(null);
+  });
 });

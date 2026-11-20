@@ -33,7 +33,7 @@
  * receipt runs never sees them, so no receipt moves. Pure: no clock, no seed, no draw.
  */
 
-import { composeTonightSheet, castWantOf, castWantFactsOf, hasOwnGoal, DAYS_PER_MONTH } from '../summary/tonightSheet.js';
+import { composeTonightSheet, castWantOf, castWantFactsOf, hasOwnGoal, DAYS_PER_MONTH, TONIGHT_AUDIENCES } from '../summary/tonightSheet.js';
 import { governingFactionOf } from '../rulingPower.js';
 
 /** A want compared in one form: lower-cased, unclosed, spaces folded. @param {unknown} v @returns {string} */
@@ -204,7 +204,11 @@ export function crisisCastSenseFindings(settlement, surfaces = {}) {
   };
 
   if (entries.length) {
-    const sheet = composeTonightSheet(settlement);
+    // THE OWNER'S SHEET (FRAME-5 · CF12, the chair's ruling: every reader of the sheet's facts states its audience): the
+    // check reads what only the owner's record carries (a cast person's own goal, a crisis secret: every shared projection
+    // strips both, display/publicSafe.js), over the DM's own birth, so the sheet it checks is the owner's. A town in
+    // crisis draws no frame for anyone, so the people it reads are the same for every reader.
+    const sheet = composeTonightSheet(settlement, { audience: TONIGHT_AUDIENCES.owner });
     // want_not_own / want_not_role: every cast-voiced person's want. ROUND THREE (the chair's ruling: one home for what
     // a person wants, the card's own goal): a person whose card carries a goal wants that goal, never a role's line
     // (want_not_own); a person with none wants their role's line, re-derived through the writer's own fill (the role,

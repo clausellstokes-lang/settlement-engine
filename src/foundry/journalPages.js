@@ -190,7 +190,9 @@ function crisisJournalPage(settlement) {
   // The two facts print once, on the Tonight page this page rides; every house keeps its own stake row
   // (the PDF's rules, pdf/lib/crisisPrint.js; veto 3). A cast row reads as the tab's does: "{name} · {reason}"
   // (SW-9b-B A13: the reason is a lower-case fragment, never a sentence after a full stop).
-  const printedFacts = composeTonightSheet(settlement).facts;
+  // THE OWNER'S SHEET (FRAME-5 · CF12, the chair's ruling: every reader of the sheet's facts states its audience): the
+  // facts printed on the Tonight page this page rides, which is the owner's (tonightPage, above)
+  const printedFacts = composeTonightSheet(settlement, { audience: TONIGHT_AUDIENCES.owner }).facts;
   return md(...sections.map(s => ({ ...s, stakeLines: stakeLines(s.stakes), seeFirst: unprintedFacts(s.seeFirst, printedFacts) })).map(s => md(
     '', `## ${esc(s.line)}`,
     s.summary ? esc(s.summary) : null,

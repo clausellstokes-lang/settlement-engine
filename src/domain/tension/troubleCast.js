@@ -11,7 +11,7 @@
  *
  *   THE TROUBLE (CF11): ONLY a TROUBLE OF WEIGHT, a tension of `history.currentTensions` ABOUT a graded strain the town
  *   holds (`troubleOfWeight`, below: the seat under real pressure, two powers in a high conflict, a material strain short
- *   of a crisis). Among those, the one whose strain has the highest grade, the record's own order breaking a tie. A town
+ *   of a crisis, a hall in criminal hands with a live crime wave). Among those, the one whose strain has the highest grade, the record's own order breaking a tie. A town
  *   with none casts NO frame and keeps today's sheet byte for byte. The tension's `severity` is not read (it is the
  *   template's list, FRAME-1 measured it).
  *
@@ -53,7 +53,7 @@ import { ARCHETYPE_LADDER, FRAME_TUNING, GENERATOR_REPLACED_SIDES, LODGING_HOUSE
  * @typedef {{ id?: unknown, name?: unknown, role?: unknown, title?: unknown, gender?: unknown, power?: unknown,
  *   category?: unknown, ousted?: unknown, temporary?: unknown, plotHooks?: unknown, secret?: unknown,
  *   institution?: unknown, memberships?: unknown }} FrameNpc
- * @typedef {{ faction?: unknown, category?: unknown, power?: unknown, isGoverning?: unknown }} FramePower
+ * @typedef {{ faction?: unknown, category?: unknown, power?: unknown, isGoverning?: unknown, captureState?: unknown }} FramePower
  * @typedef {{ type?: unknown, description?: unknown, factions?: unknown, plotHooks?: unknown }} FrameTension
  * @typedef {{ from?: unknown, to?: unknown, typeName?: unknown }} FrameTie
  * @typedef {{ _seed?: unknown, name?: unknown, npcs?: unknown, relationships?: unknown, stress?: unknown,
@@ -161,6 +161,9 @@ export function fillReason(text, npc, slots = {}) {
  *   - `high-conflict`: a row of `powerStructure.conflicts` at intensity `high` (never `moderate`, never a relationship).
  *   - `food-below-secure`, `creditor-power`, `impaired-chain`: food security below Secure, a creditor power on the roster,
  *     an `impaired` chain in `economicState.activeChains`. (The first two stay though no calm town holds them today.)
+ *   - `hall-captured` (FRAME-5 · CF12, the chair's CF11 amended): a power of the roster at `captureState` `corrupted` or
+ *     `capture` (`HALL_TAKEN`). Its OWN LAST ROW, the weakest: a town another strain already opens keeps that opening, and
+ *     every other town's grade ranks as before.
  * @type {ReadonlyArray<ReadonlyArray<string>>}
  */
 export const WEIGHT_GRADES = Object.freeze([
@@ -168,6 +171,7 @@ export const WEIGHT_GRADES = Object.freeze([
   Object.freeze(['legitimacy-below-45']),
   Object.freeze(['high-conflict']),
   Object.freeze(['food-below-secure', 'creditor-power', 'impaired-chain']),
+  Object.freeze(['hall-captured']),
 ]);
 
 /**
@@ -180,6 +184,9 @@ export const WEIGHT_GRADES = Object.freeze([
  *             is not read as one about it).
  *   material  the types about a material strain short of a crisis (W3); never `guild_conflict`, never
  *             `economic_disparity`.
+ *   hall      the types about a hall in criminal hands (W4, FRAME-5 · CF12): the crime wave alone. Its sides are the
+ *             watch, those who would take the law into their own hands, and the criminal power (sideArchetypes.js), and
+ *             the frame casts them as it casts every trouble's (the ladder, the hash, the caps; nothing new is drawn).
  * A tension is about a high conflict (W2) by its SIDES, not its type: BOTH of the row's two powers are sides of it (FRAME-2
  * · B9, the chair's ruling of 2026-11-20: "its sides are the powers of W2", read as written; a conflict over an unrelated
  * issue, with only one of its powers a side, carries no trouble).
@@ -188,7 +195,19 @@ export const WEIGHT_MATTER = Object.freeze({
   seat: Object.freeze(['legitimacy_crisis', 'succession_crisis', 'leadership_vacuum', 'tyranny', 'popular_uprising']),
   seatWhereItNamesTheRuler: Object.freeze(['corruption_scandal']),
   material: Object.freeze(['trade_collapse', 'trade_dispute', 'resource_scarcity', 'outside_debt', 'market_crash']),
+  hall: Object.freeze(['crime_wave']),
 });
+
+/**
+ * THE HALL IN CRIMINAL HANDS (W4): the rungs of the capture ladder at or above `corrupted` (corruption.js ::
+ * CAPTURE_LADDER, the ladder worldPulse/factionCapture.js climbs), read on `powerStructure.factions[].captureState`. Held
+ * here as the ladder's own words and pinned to it by tests/domain/tension/troubleWeight.test.js, so the sheet's closure
+ * does not reach corruption.js and its tuning tables. Every public projection deletes the field (display/publicSafe.js),
+ * so a public record holds no W4: a second lock, never the first (the audience gate, summary/tonightSheet.js, is the
+ * first; the DM layer of a shared read keeps the field, and there the missing seed is the second lock).
+ * @type {ReadonlyArray<string>}
+ */
+export const HALL_TAKEN = Object.freeze(['corrupted', 'capture']);
 
 /**
  * A creditor power as the record marks it: by its name, the only mark the record gives (the two powers the `indebted`
@@ -208,7 +227,8 @@ const gradeRank = (grade) => WEIGHT_GRADES.findIndex((row) => row.includes(grade
 
 /**
  * @typedef {Object} WeightStrain
- * @property {'W1' | 'W2' | 'W3'} strain  the seat under pressure, two powers in a high conflict, a material strain
+ * @property {'W1' | 'W2' | 'W3' | 'W4'} strain  the seat under pressure, two powers in a high conflict, a material strain,
+ *                                        a hall in criminal hands
  * @property {string} grade              one of WEIGHT_GRADES
  * @property {string[]} [powers]          for W2: the conflict's two powers, as the record names them
  */
@@ -240,6 +260,8 @@ export function troubleOfWeight(settlement) {
   const material = FOOD_BELOW_SECURE.includes(str(s.economicState?.foodSecurity?.label)) ? 'food-below-secure'
     : powersOf(s).some((f) => CREDITOR_POWER.test(powerName(f))) ? 'creditor-power'
       : arr(s.economicState?.activeChains).some((c) => /** @type {{ status?: unknown }} */ (c)?.status === 'impaired') ? 'impaired-chain' : '';
+  // W4: a hall in criminal hands
+  const hall = powersOf(s).some((f) => HALL_TAKEN.includes(str(f.captureState))) ? 'hall-captured' : '';
 
   /** @type {{ tension: FrameTension, at: number, strain: WeightStrain } | null} */
   let best = null;
@@ -254,6 +276,7 @@ export function troubleOfWeight(settlement) {
     const row = high.find((r) => arr(r.parties).every((p) => sides.includes(sideKey(p))));
     if (row) about.push({ strain: 'W2', grade: 'high-conflict', powers: arr(row.parties).map(str) });
     if (material && WEIGHT_MATTER.material.includes(type)) about.push({ strain: 'W3', grade: material });
+    if (hall && WEIGHT_MATTER.hall.includes(type)) about.push({ strain: 'W4', grade: hall });
     if (!about.length) continue;
     const strain = about.reduce((a, b) => (gradeRank(b.grade) < gradeRank(a.grade) ? b : a));
     if (!best || gradeRank(strain.grade) < gradeRank(best.strain.grade)) best = { tension, at, strain };

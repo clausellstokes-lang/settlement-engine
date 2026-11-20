@@ -110,7 +110,8 @@ describe('the trouble of weight (CF11)', () => {
     expect(troubleOfWeight(noSeat)).toMatchObject({ at: 1, strain: { grade: 'high-conflict' } });
     const sharper = { ...s, history: { currentTensions: s.history.currentTensions.map((t, i) => ({ ...t, severity: i === 0 ? ['catastrophic'] : ['minor'] })) } };
     expect(troubleOfWeight(sharper)?.at).toBe(2);
-    expect(WEIGHT_GRADES.flat()).toEqual(['legitimacy-below-30', 'seat-ungated', 'legitimacy-below-45', 'high-conflict', 'food-below-secure', 'creditor-power', 'impaired-chain']);
+    // FRAME-5 · CF12: W4's grade, the hall in criminal hands, is the table's own last row (troubleWeight.test.js pins its rows)
+    expect(WEIGHT_GRADES.flat()).toEqual(['legitimacy-below-30', 'seat-ungated', 'legitimacy-below-45', 'high-conflict', 'food-below-secure', 'creditor-power', 'impaired-chain', 'hall-captured']);
   });
 
   it('on born towns the cast opens on the trouble of weight, and no tension about a sharper grade (or an equal one earlier) is passed over', () => {
