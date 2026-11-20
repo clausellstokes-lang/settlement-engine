@@ -2,7 +2,7 @@
 
 Seat: VEIL-26 (session_019yED1PibyFgjeRN2dcF6qn), branch `lane/veil-26-2026-11-20`. Assignment:
 `lane/chair-2026-11-08 :: docs/chair/2026-11-20/seventh/prompts/VEIL-26.txt`. The chair: session_019yED1SUxGVHyjQnoqoFvQ8
-(send_message, Claude Code Remote MCP). Security reader: REVIEW-VEIL-12 (`lane/review-veil-12-2026-11-20`), reached THROUGH
+(send_message, Claude Code Remote MCP). Security reader: REVIEW-VEIL-13 (since 12:52; REVIEW-VEIL-12 before it), reached THROUGH
 THE CHAIR. Written 12:34 UTC (`date -u`); kept current at every push. Section 1 is PART 26's list, carried whole, with the
 rulings since (43 on). PART 26 (VEIL-25's) is on this branch beside it, unchanged: history.
 
@@ -280,6 +280,11 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
     8's five checks first; the key-level measure (ruling 42 (3)) goes to the chair for a ruling before anything is cured
     there; (4) R3's merge "GREEN TOWARD WITHHOLDING, THE TELL QUESTION OPEN", "R3 <commit>" to the chair NAMING THE SEVEN
     `income.criminalRow` TOWNS (ruling 41); then R6, R4's second cure, R5, R7, L, the doors, E.
+45. THE CHAIR, 12:52: ruling 43 CLOSED (NOT REAL, accepted; `out/v26/brok/summary.tsv` kept). THE SECURITY READER IS NOW
+    REVIEW-VEIL-13 (REVIEW-VEIL-12 stopped at 350,052); stage lines still go to the chair, which forwards them. WITH "R3
+    <commit>", IN THE SAME MESSAGE: the THIRTEEN LOWER towns BY NAME, each with the rule it is assigned to, the seven resting
+    on `income.criminalRow` marked (the reader's tell question starts from that list). THE SEAT'S COUNT: the chair reads this
+    seat's record (168,853 at 12:38); use the chair's figure plus the spend since.
 ## 2. The bytes (kept current)
 | File | sha256 |
 |---|---|
