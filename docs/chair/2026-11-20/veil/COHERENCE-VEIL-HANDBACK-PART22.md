@@ -103,3 +103,9 @@ Branch pushed as `lane/veil-21-side-2026-11-20` (tip ba820737c), read line by li
 - UNIT 2 (aa9bca75a, record only): `observedShapeReaders` 4 reproduced; the corpus's door
   (`scripts/lib/observed-shape-corpus.mjs`) is hash-bound to the schema-45 baseline: a served-config pass makes the gate
   refuse. TO THE CHAIR: a governed schema-46 rung, or the explained-writer row.
+
+THE CHAIR'S ANSWERS (03:29 UTC): (1) the pin STAYS 117, the seat's measure governs; (2) unit 3 taken, the no-config step
+"right: the band is a served value"; (3) the ruined-house measure taken, VR25's exemption unchanged; (4) THE
+OBSERVED-SHAPE SCANNER: THE EXPLAINED-WRITER ROWS NOW (one per "magicExists on config" finding, naming the writer and the
+measure 36 of 36; the count back to 1), THE GOVERNED SCHEMA-46 RUNG RECORDED AS DEBT for the first round after the deploy
+(it would also clear the 14 frozen rows of the same kind, PLAUSIBLE). The side builder resumed for unit 2 (03:39 UTC).
