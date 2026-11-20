@@ -26,6 +26,13 @@
  *       the gentle reserve lines passes over them; the same holder on a `mild` enemy tie takes them; no draw moves;
  *   (h) a sentence and its mirror are one: two cards whose drawn template and name values are one pair in either order,
  *       the later rotates and never stands as 'twice' (and the sharing law, everywhere: no wording two share is a mirror).
+ * GOALS-3, builder 7 (the chair's gate of 12:32 UTC and rulings of 13:17 UTC: no goal SENTENCE printed twice in one town):
+ *   (q) cause A, planted: X takes W at 'twice' while a later repeat Y drew W with X's names; Y does not print X's sentence
+ *       (on d3937c3f8: Y 'stands' on it);
+ *   (r) a name-free cell with one holder (a line that names no one IS its sentence; in the deal a name-free repeat is a
+ *       floor, since pass one's held texts refuse every other): the repeat takes the free reserve line (on d3937c3f8:
+ *       'twice', the same sentence), and with the reserve spent the next is 'exhausted', counted;
+ *   (s) the floor: a card whose families leave only its fully printed PERSONALITY cell takes that cell's reserve line.
  */
 import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import * as goalFamilies from '../../../src/data/people/goalFamilies.js';
@@ -87,7 +94,9 @@ function repeatsOf(holdings) {
 const namesOf = (h) => { const v = Object.entries(h.receipt[h.v]?.slots || {}).filter(([k]) => NAME_SLOTS.has(k)).map(([, x]) => String(x)).sort(); return v.length ? JSON.stringify(v) : ''; };
 
 /** The rungs whose holding shares its wording with an earlier holder (the chair's rulings of 10:28 UTC). */
-const SHARED_RUNGS = ['twice', 'twice-same-power', 'stands'];
+const SHARED_RUNGS = ['twice', 'twice-same-power', 'stands', 'exhausted'];
+/** The rungs whose holding stands beside two or more (GOALS-3: 'exhausted', a cell and its reserve all printed). */
+const STANDING_RUNGS = ['stands', 'exhausted'];
 
 /**
  * The sharing law, read on the outcome: a wording is held by three or more only where a holder of it STANDS; a wording two
@@ -104,7 +113,7 @@ function sharingViolations(holdings, cast, ties) {
   /** @type {Map<string, typeof holdings>} */ const byWording = new Map();
   for (const h of holdings) byWording.set(h.wording, [...(byWording.get(h.wording) || []), h]);
   for (const [wording, hs] of byWording) {
-    const sharing = hs.filter((h) => h.receipt.repeat?.[h.v] !== 'stands');
+    const sharing = hs.filter((h) => !STANDING_RUNGS.includes(h.receipt.repeat?.[h.v]));
     if (sharing.length > 2) out.push(`${wording}: held by ${sharing.length} without a standing repeat`);
     if (sharing.length !== 2) continue;
     const [a, b] = sharing.map((h) => byId.get(h.id));
@@ -222,9 +231,15 @@ describe('GR1 for goals: an exhausted kind shares, then repeats, and every repea
         expect(others.length >= 2 || near, `${h.id} stands though ${w} was open to it`).toBe(true);
       }
     }
-    // the floor (every family held for the long) is never rotated: its repeats are counted
+    // the floor (every family held for the long): GOALS-3 (d), a repeating floor walks its cluster's cell, then its reserve, to
+    // the first line nobody prints ('free', rotated); every line printed, it stands, 'exhausted'; every repeat is counted
     const long = holdingsOf(cast).filter((h) => h.v === 'long');
-    expect(long.every((h) => h.receipt.floor === true && !h.receipt.long.rotated)).toBe(true);
+    expect(long.every((h) => h.receipt.floor === true)).toBe(true);
+    const floorLines = (/** @type {string} */ k) => [...(/** @type {any} */ (goalFamilies.GOAL_FAMILY_LINES.PERSONALITY)[k]?.long || []), ...(/** @type {any} */ (goalFamilies).GOAL_RESERVE_LINES?.PERSONALITY?.[k]?.long || [])].length;
+    const lines = floorLines(long[0].receipt.long.kind);
+    expect(new Set(long.map((h) => h.text)).size, 'every line of the floor\'s cell and reserve is printed once before any twice').toBe(Math.min(lines, long.length));
+    expect(long.slice(0, lines).every((h) => !h.receipt.repeat?.long || (h.receipt.repeat.long === 'free' && h.receipt.long.rotated)), 'the first take the free lines').toBe(true);
+    expect(long.slice(lines).map((h) => h.receipt.repeat?.long), 'the rest stand, exhausted').toEqual(long.slice(lines).map(() => 'exhausted'));
     expect(long.filter((h) => SHARED_RUNGS.includes(h.receipt.repeat?.long)).length).toBe(repeatsOf(long).length);
     expect(repeatsOf(long).length, 'anti-vacuity: the floors repeat').toBeGreaterThan(0);
   });
@@ -362,5 +377,89 @@ describe('GR1 for goals: a sentence and its mirror are one (h)', () => {
     expect(b.wording, "b does not hold a's wording").not.toBe(a.wording);
     expect(SHARED_RUNGS.includes(b.receipt.repeat?.short) || b.receipt.repeat?.short === 'free', 'b is a counted repeat').toBe(true);
     expect(sharingViolations(short, cast, [])).toEqual([]);
+  });
+});
+
+/** The sentences a cast prints more than once (a vantage's texts, pooled), each with its holders' ids. @param {any[]} cast @param {readonly ('short' | 'long')[]} vs */
+const twiceIn = (cast, vs) => {
+  /** @type {Map<string, string[]>} */ const by = new Map();
+  for (const c of cast) for (const v of vs) if (c.goal?.[v]) by.set(c.goal[v], [...(by.get(c.goal[v]) || []), `${c.id}.${v}`]);
+  return [...by].filter(([, ids]) => ids.length > 1);
+};
+
+describe('GOALS-3: no goal sentence printed twice by the rotation (q)', () => {
+  it("(q) X takes W 'twice' while a later repeat Y drew W with X's names: Y does not print X's sentence", () => {
+    // four powers in two competing pairs, four firsts each (no RANK cell: a first with no second; no traits): every short goal is
+    // a POWER `competitive` line, filled only by (power, rival), so two firsts of one power fill a line with the same names
+    const POWERS = ['Elder Council', 'Merchant Guilds', 'Watch', 'Temple'];
+    const cards = POWERS.flatMap((power, p) => Array.from({ length: 4 }, (_, k) => ({ id: `p${p}m${k}`, name: `P${p}m${k}ra Holt`, goal: null, memberships: [{ power, rank: 1 }] })));
+    const powerStructure = { factions: POWERS.map((f) => ({ faction: f, power: 10 })),
+      factionRelationships: [{ pair: ['Elder Council', 'Merchant Guilds'], type: 'competitive' }, { pair: ['Watch', 'Temple'], type: 'competitive' }] };
+    const settlement = { name: 'Testholm', tier: 'village', institutions: [], powerStructure, config: { magicExists: false, priorityMagic: 0 } };
+    // seed searched once (goals3-causeA-0 … -199, four rosters) for the case on d3937c3f8: X = p2m1 rotated to W at 'twice' (W
+    // held once, by p0m1), Y = p2m3 drew W in pass one with X's names and 'stands' on it, printing X's sentence
+    const cast = dealGoals(settlement, cards, [], createPRNG('goals3-causeA-4'));
+    const short = holdingsOf(cast).filter((h) => h.v === 'short');
+    const [x, y, h] = ['p2m1', 'p2m3', 'p0m1'].map((id) => /** @type {any} */ (short.find((s) => s.id === id)));
+    for (const s of [x, y, h]) expect([s.receipt.short.family, s.receipt.short.kind], s.id).toEqual(['POWER', 'competitive']);
+    expect(x.receipt.repeat?.short, 'X is a repeat').toBeTruthy();
+    expect(y.receipt.repeat?.short, 'Y is a repeat').toBeTruthy();
+    expect(y.receipt.short.drawn, 'Y drew the wording p0m1 holds').toBe(h.wording);
+    expect(h.receipt.repeat?.short, 'p0m1 holds it from pass one').toBeUndefined();
+    expect(y.receipt.short.slots, "Y's names are X's (one power, one rival)").toEqual({ power: 'Watch', rival: 'Temple' });
+    expect(x.receipt.short.slots).toEqual({ power: 'Watch', rival: 'Temple' });
+    expect(y.text, "Y does not print X's sentence").not.toBe(x.text);
+    expect(twiceIn(cast, ['short']), 'no short sentence twice').toEqual([]);
+    expect(sharingViolations(short, cast, [])).toEqual([]);
+  });
+});
+
+describe('GOALS-3: a name-free repeat and the floor reach the reserve (r, s)', () => {
+  afterEach(() => { vi.doUnmock('../../../src/data/people/goalFamilies.js'); vi.resetModules(); });
+  const TRAIT = Object.keys(goalFamilies.PERSONALITY_CLUSTER_OF)[0];
+  const CLUSTER = /** @type {string} */ (/** @type {any} */ (goalFamilies.PERSONALITY_CLUSTER_OF)[TRAIT]);
+  /** n cards of one cluster with no other goal (no house, no power, no tie), dealt on the goals module with `plant` mocked in. @param {number} n @param {(real: any) => any} plant @param {string} seed */
+  const dealPlanted = async (n, plant, seed) => {
+    vi.resetModules();
+    vi.doMock('../../../src/data/people/goalFamilies.js', async (importOriginal) => { const real = /** @type {any} */ (await importOriginal()); return { ...real, ...plant(real) }; });
+    const fresh = await import('../../../src/generators/people/goals.js');
+    const cards = Array.from({ length: n }, (_, k) => ({ id: `c${k}`, name: `Card${k} Rowan`, goal: null, personality: { dominant: TRAIT } }));
+    const settlement = { name: 'Testholm', tier: 'village', institutions: [], config: { magicExists: false, priorityMagic: 0 } };
+    const cast = fresh.dealGoals(settlement, cards, [], createPRNG(seed));
+    const receipts = new Map(fresh.goalReceiptsOf(cast).map((r) => [r.id, r]));
+    return cast.map((c) => ({ id: String(c.id), text: c.goal.short, intent: c.goal.intent.short, receipt: /** @type {any} */ (receipts.get(String(c.id))) }));
+  };
+  /** The real PERSONALITY table with this cluster's short cell replaced. @param {any} real @param {string[]} lines */
+  const withCell = (real, lines) => ({ ...real.GOAL_FAMILY_LINES, PERSONALITY: { ...real.GOAL_FAMILY_LINES.PERSONALITY, [CLUSTER]: { ...real.GOAL_FAMILY_LINES.PERSONALITY[CLUSTER], short: lines } } });
+  /** The real reserve with this cluster's short reserve. @param {any} real @param {string[]} lines */
+  const withReserveLines = (real, lines) => ({ ...real.GOAL_RESERVE_LINES, PERSONALITY: { ...(real.GOAL_RESERVE_LINES.PERSONALITY || {}), [CLUSTER]: { short: lines } } });
+
+  it("(r) a one-line name-free cell with one holder: the repeat takes the free reserve line; the reserve spent, the next is 'exhausted'", async () => {
+    // anchored: both planted lines are this test's own invented fixture text, not a pool's sentence
+    const held = await dealPlanted(3, (real) => ({ GOAL_FAMILY_LINES: withCell(real, ['Plant cell line zq.']), GOAL_RESERVE_LINES: withReserveLines(real, ['Plant reserve line zq.']) }), 'goals3-namefree');
+    const [c0, c1, c2] = held;
+    for (const h of held) expect([h.intent.family, h.intent.kind], h.id).toEqual(['PERSONALITY', CLUSTER]);
+    expect(c0.text, 'the one holder of the cell').toBe('Plant cell line zq.');
+    expect(c0.receipt.repeat?.short).toBeUndefined();
+    expect(c1.receipt.floor, 'the repeat is a floor (pass one refused the held line)').toBe(true);
+    expect(c1.receipt.short.drawn, 'it drew the held line').toBe('Plant cell line zq.');
+    expect(c1.text, 'it takes the free reserve line').toBe('Plant reserve line zq.');
+    expect(c1.receipt.repeat?.short).toBe('free');
+    expect(c2.receipt.repeat?.short, 'the reserve spent: counted').toBe('exhausted');
+    expect(c2.text).toBe('Plant cell line zq.');
+    expect(held.filter((h) => h.text === 'Plant cell line zq.').map((h) => h.id), 'the one sentence twice is the exhausted one').toEqual(['c0', 'c2']);
+  });
+
+  it("(s) the floor: every line of the card's PERSONALITY cell printed, it takes the cell's reserve line", async () => {
+    const cell = /** @type {any[]} */ ((/** @type {any} */ (goalFamilies.GOAL_FAMILY_LINES.PERSONALITY))[CLUSTER].short).map((l) => (typeof l === 'string' ? l : l.line));
+    // anchored: the planted reserve line is this test's own invented fixture text
+    const held = await dealPlanted(cell.length + 1, (real) => ({ GOAL_RESERVE_LINES: withReserveLines(real, ['Plant reserve line zq.']) }), 'goals3-floor');
+    const last = /** @type {any} */ (held.at(-1));
+    expect(new Set(held.slice(0, cell.length).map((h) => h.text)), 'the cell is fully printed by the others').toEqual(new Set(cell));
+    expect(last.receipt.floor, 'the last card is a floor').toBe(true);
+    expect(cell, 'it drew a printed line').toContain(last.receipt.short.drawn);
+    expect(last.text, 'it takes the reserve line').toBe('Plant reserve line zq.');
+    expect(last.receipt.repeat?.short).toBe('free');
+    expect(twiceIn(held.map((h) => ({ id: h.id, goal: { short: h.text } })), ['short'])).toEqual([]);
   });
 });
