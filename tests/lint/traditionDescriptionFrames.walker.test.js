@@ -62,6 +62,8 @@ function rows() {
   table('economy', ECONOMY_FRAMES);
   // the keeper's "too" wordings (TRAD-4 unit 10, the chair's 17:55 ruling): reached only by the rotation, never a pick
   table('too', TABLE.KEEPER_FRAMES_TOO || {});
+  // a held element's "also" gloss (TRAD-5 unit 13, the chair's 21:03 approval): reached only by a later rite, never a pick
+  table('also', TABLE.ELEMENT_GLOSS_ALSO || {});
   return out;
 }
 
@@ -83,16 +85,19 @@ const dramaViolations = (strings) => strings.filter((s) => DRAMA_WORDS.test(s));
 /** A frame as a whole-sentence matcher: each {slot} matches any run of text. */
 const frameRe = (t) => new RegExp(`^${t.replace(/[.*+?^$()|[\]\\]/g, '\\$&').replace(/\{\w+\}/g, '.+?')}$`);
 
+/** Every gloss S1 may print after "that": the element's own, and a held element's "also" line (TRAD-5 unit 13). */
+const allGlosses = () => [...Object.values(ELEMENT_GLOSS), ...Object.values(TABLE.ELEMENT_GLOSS_ALSO || {})].flat().map(textOf);
+
 /** Every sentence shape the leaf may produce: S1 (lead × gloss, or the lead alone) and every S2/S3 frame. */
 function sentenceMatchers() {
   const res = [];
   const leads = Object.values(ACT_LEADS).flat().map((l) => l.text);
-  const glosses = Object.values(ELEMENT_GLOSS).flat().map((l) => l.text);
+  const glosses = allGlosses();
   for (const lead of leads) {
     res.push(frameRe(`${lead}.`));
     for (const gloss of glosses) res.push(frameRe(`${lead} that ${gloss}.`));
   }
-  for (const t of templates()) if (!t.home.startsWith('gloss.') && !t.home.startsWith('lead.')) res.push(frameRe(t.text));
+  for (const t of templates()) if (!['gloss.', 'lead.', 'also.'].some((h) => t.home.startsWith(h))) res.push(frameRe(t.text));
   return res;
 }
 /** The sentences of a composed text no frame produces. */
@@ -102,7 +107,8 @@ describe('traditionDescriptionFrames — the closed set', () => {
   it('THE COUNT: the authored template strings number exactly the pin (a new frame moves it on purpose)', () => {
     // 92 → 125 (TRAD-4 unit 5): every gloss pool raised to three lines, and harvest's two new thanks lines' twins
     // 125 → 143 (TRAD-4 unit 10, the chair's 17:55 ruling): two "too" wordings for each of the nine keeper frame kinds
-    expect(templates().length).toBe(143);
+    // 143 → 159 (TRAD-5 unit 13, the chair's 21:03 approval): one "also" gloss for each of the sixteen elements
+    expect(templates().length).toBe(159);
   });
 
   it('every frame slot is one of the slots the leaf fills', () => {
@@ -363,9 +369,9 @@ const keptTwice = (leads, glosses) => leads.flatMap((lead) => glosses
   .map((gloss) => `${lead} × ${gloss}`));
 
 describe('traditionDescriptionFrames — no first sentence says "kept" twice (TRAD-4 unit 9)', () => {
-  it('no lead joined to any gloss (every act\'s pool and every element\'s pool, twins included) holds a form of "keep" more than once', () => {
+  it('no lead joined to any gloss (every act\'s pool and every element\'s pool, twins included, and every "also" gloss) holds a form of "keep" more than once', () => {
     const leads = Object.values(ACT_LEADS).flat().map(textOf);
-    const glosses = Object.values(ELEMENT_GLOSS).flat().map(textOf);
+    const glosses = allGlosses();
     expect(leads.length * glosses.length).toBeGreaterThan(0);
     expect(keptTwice(leads, glosses)).toEqual([]);
   });
@@ -501,5 +507,74 @@ describe('traditionDescriptionFrames — the keeper\'s "too" wordings are never 
       }
     }
     expect(bad).toEqual([]);
+  });
+});
+
+/**
+ * A HELD ELEMENT'S "ALSO" GLOSS (TRAD-5 unit 13; the chair's ruling (B) of 20:56 UTC and approval of 21:03 UTC, the sixteen
+ * lines of docs/chair/2026-11-20/content/traditions/TRAD-5-U13-ALSO-GLOSSES.md verbatim): ELEMENT_GLOSS_ALSO holds, for every
+ * element of ELEMENT_GLOSS, ONE line, read only by a rite whose element an earlier rite of the audience's own shown set
+ * already holds (traditionDescription.js :: compose): never a pick (the KEEPER_FRAMES_TOO pattern), so none may stand in a
+ * gloss pool. Each is one of its element's present lines with "also" before it, declaring exactly what that line declares
+ * (it presumes nothing its element's lines do not); and none holds a drama, cause, outcome or keep word, "the town"/"a
+ * town", or a slot (no name can enter it).
+ */
+const ALSO = () => /** @type {Record<string, ReadonlyArray<{ text: string }>>} */ (TABLE.ELEMENT_GLOSS_ALSO || {});
+/** The "also" lines a pick could reach: any whose text stands in a gloss pool. */
+const alsoInReach = (also, glosses) => Object.entries(also).flatMap(([k, lines]) => lines
+  .filter((l) => Object.values(glosses).some((pool) => pool.some((g) => textOf(g) === l.text))).map((l) => `${k}: ${l.text}`));
+/** The "also" lines that are not "also " + a present line of their own element, declared as that line is. */
+const alsoAstray = (also, glosses) => Object.entries(also).flatMap(([k, lines]) => lines.filter((l) => {
+  const source = (glosses[k] || []).find((g) => `also ${textOf(g)}` === l.text);
+  return !source || JSON.stringify(atomsOf(declarationOf(l))) !== JSON.stringify(atomsOf(declarationOf(source))) || isColourLine(l) !== isColourLine(source);
+}).map((l) => `${k}: ${l.text}`));
+/** The lines holding a word no "also" gloss may hold. */
+const alsoLoud = (texts) => texts.filter((t) => DRAMA_WORDS.test(t) || CAUSE_WORDS.test(t) || OUTCOME_WORDS.test(t)
+  || /\b(kept|keep|keeps)\b/i.test(t) || /\b(the|a) town\b/i.test(t) || /\{/.test(t));
+
+describe('traditionDescriptionFrames — a held element\'s "also" gloss is never a pick (TRAD-5 unit 13)', () => {
+  it('the sixteen: one line for each element of ELEMENT_GLOSS, in its order, and no other key', () => {
+    expect(Object.keys(ALSO())).toEqual(Object.keys(ELEMENT_GLOSS));
+    for (const [k, lines] of Object.entries(ALSO())) expect(lines.length, k).toBe(1);
+    expect(Object.values(ALSO()).flat().map(textOf)).toEqual([
+      'also marks the founding', 'also honours the first boats to come ashore', 'also honours the charter',
+      'also honours hearth and household', 'also marks the gathering of the harvest', 'also honours the river',
+      'also honours the standing stones', 'also remembers the dead', 'also blesses the fields', 'also honours the forge',
+      'also honours the market', 'also honours the hunt', 'also marks midsummer', 'also honours the tide',
+      'also marks the coming of spring', 'also honours the stars',
+    ]);
+  });
+
+  it('each is declared (a frozen line row), and is one of its element\'s present lines with "also" before it, declaring what that line declares', () => {
+    const also = rows().filter((r) => r.home.startsWith('also.'));
+    expect(also.length).toBe(16);
+    expect(undeclaredIn(also)).toEqual([]);
+    expect(alsoAstray(ALSO(), ELEMENT_GLOSS)).toEqual([]);
+  });
+
+  it('harvest\'s line, in its crisis-scoped pool, says its stance (crisis: any) and needs no twin', () => {
+    const scoped = CRISIS_SCOPED_ELEMENTS.map((e) => [`also.${e}`, ALSO()[e] || []]);
+    expect(scoped.map(([p, lines]) => [p, lines.length])).toEqual([['also.harvest', 1]]);
+    expect(silentIn(scoped)).toEqual([]);
+    expect(untwinned(crisisMap(scoped))).toEqual([]);
+    expect(atomsOf(declarationOf(ALSO().harvest[0]))).toEqual(['crisis: any']);
+  });
+
+  it('none stands in a pool the pick reaches (ELEMENT_GLOSS)', () => {
+    expect(Object.keys(ALSO()).length).toBeGreaterThan(0); // not vacuous
+    expect(alsoInReach(ALSO(), ELEMENT_GLOSS)).toEqual([]);
+  });
+
+  it('none holds a drama, cause, outcome or keep word, "the town"/"a town", or a slot', () => {
+    expect(Object.values(ALSO()).flat().length).toBe(16); // not vacuous
+    expect(alsoLoud(Object.values(ALSO()).flat().map(textOf))).toEqual([]);
+  });
+
+  it('RED FIRST: an "also" line planted into a gloss pool, one that adds to its source, one declared wider than its source, and a loud one are each named', () => {
+    const planted = { ...ELEMENT_GLOSS, river: [...ELEMENT_GLOSS.river, Object.freeze({ text: 'also honours the river', needs: ['river'] })] };
+    expect(alsoInReach({ river: [{ text: 'also honours the river' }] }, planted)).toEqual(['river: also honours the river']);
+    expect(alsoAstray({ river: [Object.freeze({ text: 'also honours the river and the ford', needs: ['river'] })] }, ELEMENT_GLOSS)).toEqual(['river: also honours the river and the ford']);
+    expect(alsoAstray({ hunt: [Object.freeze({ text: 'also honours the hunt', needs: ['river'] })] }, ELEMENT_GLOSS)).toEqual(['hunt: also honours the hunt']);
+    expect(alsoLoud(['also honours the hunt', 'also keeps the old feud', 'also honours a town'])).toEqual(['also keeps the old feud', 'also honours a town']);
   });
 });

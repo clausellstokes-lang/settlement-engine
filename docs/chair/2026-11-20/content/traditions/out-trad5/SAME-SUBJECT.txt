@@ -1,0 +1,133 @@
+# TRAD-5 unit 13 — TWO RITES OF ONE PLACE THAT HONOUR THE SAME THING (a measure; nothing under src/ or tests/ changed)
+Written 2026-11-20T20:50:12Z (date -u) by a measurement builder seated by TRAD-5, on the brief briefs/TRAD-5-U13-SAME-SUBJECT.md; base lane/trad-5-2026-11-20 at 8067f7b0c.
+Pools: calm = the 432 calm pool born by unit 12 (u12-data/P/calm/pool.ndjson, tools/trad-pool.mjs; sha256 1c8df9aa8f229538…), read, not re-born.
+       visitor = 432 births of a SIGNED-OUT visitor (store/settlementGenerateAction.js :: baseConfig for an anonymous forge:
+       { ...DEFAULT_CONFIG, settType: 'town' }, config/tierFacts.js :: ANON_SIZES = ['town']; every dial random, stresses rolling),
+       seeds visitor-000…visitor-431, born 2026-11-20T20:47:42Z…20:48:33Z by a scratch script (generateSettlementPipeline(config, null,
+       { seed, customContent: {} }), as trad-pool.mjs calls it); sha256 f84c0af77f8adcef….
+Count: node tools/measure2.mjs <pool.ndjson> <out.txt> same   (measure2.mjs :: sameSubject, added by this unit), run 2026-11-20T20:49:16Z…20:49:27Z, exit 0 both.
+
+## 1. HOW A SUBJECT IS DRAWN (read only)
+- genesis.js :: deriveFoundingTraditions: rite 0 (the founding core) draws its element from the foundingFit candidates
+  (founding, first-landing, charter) by genesis.js :: foundingElementWeight ("let w = el.id === 'founding' ? 3 : el.id ===
+  'first-landing' ? 1.5 : 1; if (el.id === 'first-landing') w += 3;" — a water place's origin is most often its landfall).
+  Every LATER rite draws from the FULL pool, with replacement: "// Element (founding core: origin-era candidates; additions:
+  full pool, deduped)." The dedupe is of the MOTIF, not the element: "// Reroll a few times to avoid an identical
+  (element,act) motif already present." … "if (!usedMotifs.has(`${el.id}|${act.id}`)) break;" (5 attempts). No set of used
+  elements exists.
+- genesis.js :: elementWeight (the additions' weight): "let w = el.foundingFit ? 0.25 : 1; // origin elements rarely recur as
+  additions", then "+3" where the element's terrains hold the place's terrain, "+2" where its econ holds the place's econ.
+  traditionCorpus.js :: TRADITION_ELEMENTS gives first-landing terrains ['coastal','riverside'] and econ ['port','river'], so in
+  a coastal port the landfall weighs 0.25+3+2 = 5.25 as an ADDITION against 1 for an unfitted element.
+- VERDICT: a repeated ELEMENT is ALLOWED BY DESIGN (the code dedupes only element+act, and its own comment foresees an origin
+  element recurring as an addition, "rarely"); its RATE is chance shaped by the weighting, and the terrain/econ bonus outweighs
+  the 0.25 the comment calls "rarely" (first-landing is the most repeated element below). A repeated element+ACT is what the
+  design refuses (5 rerolls): 0 places in either pool.
+- THE GLOSS (what prints the subject): traditionDescription.js :: compose, S1 = "${lead} that ${glossText}.", with
+  "const glossText = draw(glossPool, seed, `${id}#gloss`, `gloss.${element}`, facts, CRISIS_SCOPED_ELEMENTS.includes(element));"
+  — a plain draw keyed on the rite alone, NOT drawTurn: unit 10's rotation (frame slots: owner, house, power, cause, payer)
+  never reaches S1. traditionDescriptionTable.js :: ELEMENT_GLOSS holds 3 wordings an element (harvest 5, 3 of them not twins),
+  so two rites of one element print the SAME gloss about one time in three. The whole S1 never repeats (the act's lead
+  differs: element+act never repeats), which is why unit 10's bar holds and the chair still read one honoured thing twice.
+
+## 2. COUNTS (places with a repeat / places of that size; over the set each audience is SHOWN, measure2.mjs :: shownFor)
+Columns: SAME ELEMENT = two or more shown rites share coreMotif.element; +same gloss = of those, two of one element print the
+identical gloss sentence-part; SAME ELEMENT+ACT and its +same gloss likewise; "cure moves (exhausted)" = rites a per-place
+gloss rotation would re-word (a later rite of a held element whose printed gloss an earlier rite of it in the set printed),
+and of those the ones whose element has no unprinted wording left; "later rites of a held element" = every rite after the
+first of its element in the set (what a "too" gloss would re-word).
+The reader's set: descriptionSetOf(…,'reader') = the drawn set the shared page serves; a visitor reading a shared page is
+shown exactly it (the reader's set IS the visitor's). A signed-out visitor's OWN forge shows the owner's set
+(TraditionsTab.jsx: audience = playerView ? 'reader' : 'owner'). Both are counted; on both pools owner and reader agree to the place.
+
+### calm pool (432: 72 a size)
+## audience=owner — places=432; set: shownFor (descriptionSetOf owner: shownTraditionsOf)
+size        rites  2+rites  SAME ELEMENT       +same gloss        SAME ELEMENT+ACT   +same gloss        cure moves (exhausted)  later rites of a held element
+thorp          81       24    1/72 (1.4%)    0/72 (0.0%)    0/72 (0.0%)    0/72 (0.0%)  0 (0)  1
+hamlet         78       17    1/72 (1.4%)    0/72 (0.0%)    0/72 (0.0%)    0/72 (0.0%)  0 (0)  1
+village       112       43    0/72 (0.0%)    0/72 (0.0%)    0/72 (0.0%)    0/72 (0.0%)  0 (0)  0
+town          203       72    7/72 (9.7%)    2/72 (2.8%)    0/72 (0.0%)    0/72 (0.0%)  2 (0)  8
+city          315       72   32/72 (44.4%)   15/72 (20.8%)    0/72 (0.0%)    0/72 (0.0%)  18 (0)  40
+metropolis    443       72   54/72 (75.0%)   26/72 (36.1%)    0/72 (0.0%)    0/72 (0.0%)  31 (3)  87
+ALL          1232      300   95/432 (22.0%)   43/432 (10.0%)    0/432 (0.0%)    0/432 (0.0%)  51 (3)  137  of 1232 rites
+elements repeated (place-element pairs): first-landing 27, forge 10, greening 10, stone 9, tide 9, market 8, field 6, harvest 6, river 6, charter 5, stars 5, founding 3, hearth 3, the-dead 3, hunt 1
+same gloss, first samples:
+  Bergbrekka (town) [forge]: The Great Fair "honours the smith's craft" | The Common Forge Contest "honours the smith's craft"
+  Eldthorpe (town) [stone]: The Offering of the Standing Stones "honours the standing stones" | The Vigil of the Standing Stones "honours the standing stones"
+  Eisenbrücke (city) [tide]: The Tide Contest "honours the sea and its tides" | The Procession of the Tide "honours the sea and its tides"
+  Goldholz (city) [first-landing]: The Bright Fair "honours the first boats to come ashore" | The Old Landfall Feast "honours the first boats to come ashore"
+  Althausen (city) [tide]: The Tide Vigil "honours the tide" | The Old Contest "honours the tide" | The Long Tide Fair "honours the tide"
+  Cerrocivitas (city) [market]: The Feast of the Market "honours the market" | The Lesser Market Vigil "honours the market"
+  Magnaoppidum (city) [stone]: The Standing Stone Contest "honours the standing stones" | The Fair of the Standing Stones "honours the standing stones" | The Standing Stone Feast "honours the standing stones"
+  Ribatkot (city) [stars]: The Lantern Offering "is held under the stars" | The Stars Feast "is held under the stars"
+
+## audience=reader — places=432; set: shownFor (descriptionSetOf reader: the drawn set, rows matched to rites)
+size        rites  2+rites  SAME ELEMENT       +same gloss        SAME ELEMENT+ACT   +same gloss        cure moves (exhausted)  later rites of a held element
+thorp          81       24    1/72 (1.4%)    0/72 (0.0%)    0/72 (0.0%)    0/72 (0.0%)  0 (0)  1
+hamlet         78       17    1/72 (1.4%)    0/72 (0.0%)    0/72 (0.0%)    0/72 (0.0%)  0 (0)  1
+village       112       43    0/72 (0.0%)    0/72 (0.0%)    0/72 (0.0%)    0/72 (0.0%)  0 (0)  0
+town          203       72    7/72 (9.7%)    2/72 (2.8%)    0/72 (0.0%)    0/72 (0.0%)  2 (0)  8
+city          315       72   32/72 (44.4%)   15/72 (20.8%)    0/72 (0.0%)    0/72 (0.0%)  18 (0)  40
+metropolis    443       72   54/72 (75.0%)   26/72 (36.1%)    0/72 (0.0%)    0/72 (0.0%)  31 (3)  87
+ALL          1232      300   95/432 (22.0%)   43/432 (10.0%)    0/432 (0.0%)    0/432 (0.0%)  51 (3)  137  of 1232 rites
+elements repeated (place-element pairs): first-landing 27, forge 10, greening 10, stone 9, tide 9, market 8, field 6, harvest 6, river 6, charter 5, stars 5, founding 3, hearth 3, the-dead 3, hunt 1
+same gloss, first samples:
+  Bergbrekka (town) [forge]: The Great Fair "honours the smith's craft" | The Common Forge Contest "honours the smith's craft"
+  Eldthorpe (town) [stone]: The Offering of the Standing Stones "honours the standing stones" | The Vigil of the Standing Stones "honours the standing stones"
+  Eisenbrücke (city) [tide]: The Tide Contest "honours the sea and its tides" | The Procession of the Tide "honours the sea and its tides"
+  Goldholz (city) [first-landing]: The Bright Fair "honours the first boats to come ashore" | The Old Landfall Feast "honours the first boats to come ashore"
+  Althausen (city) [tide]: The Tide Vigil "honours the tide" | The Old Contest "honours the tide" | The Long Tide Fair "honours the tide"
+  Cerrocivitas (city) [market]: The Feast of the Market "honours the market" | The Lesser Market Vigil "honours the market"
+  Magnaoppidum (city) [stone]: The Standing Stone Contest "honours the standing stones" | The Fair of the Standing Stones "honours the standing stones" | The Standing Stone Feast "honours the standing stones"
+  Ribatkot (city) [stars]: The Lantern Offering "is held under the stars" | The Stars Feast "is held under the stars"
+
+### visitor pool (432 towns, a signed-out visitor's births)
+## audience=owner — places=432; set: shownFor (descriptionSetOf owner: shownTraditionsOf)
+size        rites  2+rites  SAME ELEMENT       +same gloss        SAME ELEMENT+ACT   +same gloss        cure moves (exhausted)  later rites of a held element
+town         1256      432   81/432 (18.8%)   31/432 (7.2%)    0/432 (0.0%)    0/432 (0.0%)  31 (0)  82
+ALL          1256      432   81/432 (18.8%)   31/432 (7.2%)    0/432 (0.0%)    0/432 (0.0%)  31 (0)  82  of 1256 rites
+elements repeated (place-element pairs): first-landing 20, charter 11, market 8, stone 7, founding 6, harvest 6, field 5, greening 5, tide 3, river 2, forge 2, stars 2, hunt 2, the-dead 1, long-sun 1
+same gloss, first samples:
+  Tyrby (town) [river]: The Great Vigil "blesses the river" | The Offering of the River "blesses the river"
+  Breitenholz (town) [first-landing]: The Fair of the First Landing "marks the first landing" | The Offering of the First Landing "marks the first landing"
+  Albamagnum (town) [market]: The Old Market Contest "celebrates the market" | The Elder Feast "celebrates the market"
+  Deirpur (town) [first-landing]: The Quiet Fair "marks the first landing" | The Quiet Landfall Vigil "marks the first landing"
+  Olympanthi (town) [first-landing]: The Landfall Feast "honours the first boats to come ashore" | The Landfall Vigil "honours the first boats to come ashore"
+  Villacolonia (town) [greening]: The Vigil of the Greening "honours the first green of the year" | The Elder Offering "honours the first green of the year"
+  Altanovum (town) [founding]: The Procession of the Founding "remembers the founding days" | The Quiet Founding Vigil "remembers the founding days"
+  Ulfset (town) [harvest]: The Feast of the Harvest "gives thanks for what the fields have given" | The Harvest Fair "gives thanks for what the fields have given"
+
+## audience=reader — places=432; set: shownFor (descriptionSetOf reader: the drawn set, rows matched to rites)
+size        rites  2+rites  SAME ELEMENT       +same gloss        SAME ELEMENT+ACT   +same gloss        cure moves (exhausted)  later rites of a held element
+town         1256      432   81/432 (18.8%)   31/432 (7.2%)    0/432 (0.0%)    0/432 (0.0%)  31 (0)  82
+ALL          1256      432   81/432 (18.8%)   31/432 (7.2%)    0/432 (0.0%)    0/432 (0.0%)  31 (0)  82  of 1256 rites
+elements repeated (place-element pairs): first-landing 20, charter 11, market 8, stone 7, founding 6, harvest 6, field 5, greening 5, tide 3, river 2, forge 2, stars 2, hunt 2, the-dead 1, long-sun 1
+same gloss, first samples:
+  Tyrby (town) [river]: The Great Vigil "blesses the river" | The Offering of the River "blesses the river"
+  Breitenholz (town) [first-landing]: The Fair of the First Landing "marks the first landing" | The Offering of the First Landing "marks the first landing"
+  Albamagnum (town) [market]: The Old Market Contest "celebrates the market" | The Elder Feast "celebrates the market"
+  Deirpur (town) [first-landing]: The Quiet Fair "marks the first landing" | The Quiet Landfall Vigil "marks the first landing"
+  Olympanthi (town) [first-landing]: The Landfall Feast "honours the first boats to come ashore" | The Landfall Vigil "honours the first boats to come ashore"
+  Villacolonia (town) [greening]: The Vigil of the Greening "honours the first green of the year" | The Elder Offering "honours the first green of the year"
+  Altanovum (town) [founding]: The Procession of the Founding "remembers the founding days" | The Quiet Founding Vigil "remembers the founding days"
+  Ulfset (town) [harvest]: The Feast of the Harvest "gives thanks for what the fields have given" | The Harvest Fair "gives thanks for what the fields have given"
+
+## 3. PROPOSAL (more than 3 in 100 repeat a subject: town 9.7% calm / 18.8% visitor, city 44.4%, metropolis 75.0%;
+##    the SAME gloss printed: town 2.8% / 7.2%, city 20.8%, metropolis 36.1%) — PROPOSED, NOT BUILT
+THE SMALLEST CURE THAT KEEPS CTR3 (genesis unchanged; no rite, name or motif moves): in traditionDescription.js :: compose, draw
+S1's gloss by ROTATION over the audience's set as unit 10 does the frame slots — drawTurn(glossPool, seed, `${id}#gloss`,
+`gloss.${element}`, …) in place of draw: the first rite of an element keeps its pick; a later rite of a held element whose pick
+an earlier rite of the set already printed takes the first wording, going on from its pick, that none printed; where every
+wording is printed it keeps its pick (the gloss is never left out: S1 always says what is honoured). Keyed, no new draw,
+nothing stored; a rite alone reads as today.
+WHAT IT MOVES: calm 51 of 1232 descriptions, owner and reader alike (town 2, city 18, metropolis 31; none at thorp, hamlet,
+village); 3 of them (metropolis) find their element's 3 wordings all printed and keep the repeat. Visitor pool: 31 of 1256
+(owner and reader alike), none exhausted. Places still printing one gloss twice after it: calm at most 3 (all metropolis), visitor 0.
+WHAT IT DOES NOT CURE: the chair's finding is the SUBJECT, and a wording rotation leaves "The Landfall Procession … honours the
+first boats to come ashore" beside "The Long Landfall Contest …" in another wording of the first landing: one honoured thing twice in
+22.0% of calm places (95/432; metropolis 75.0%) and 18.8% of visitor towns. Inside CTR3 the only further step is to SAY the
+repeat is deliberate: a held element's later rite takes a "too" gloss (as the keepers' KEEPER_FRAMES_TOO: e.g. "that also
+honours the first boats to come ashore"), which moves 137 of 1232 calm descriptions (thorp 1, hamlet 1, town 8, city 40,
+metropolis 87) and 82 of 1256 visitor ones, owner and reader alike, and needs new table lines (a register: the chair's call).
+Fewer repeated subjects at all means changing genesis.js :: elementWeight or the element dedupe, which moves the traditions
+themselves (outside CTR3: the owner's).

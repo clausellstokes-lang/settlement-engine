@@ -879,3 +879,38 @@ describe('ONE TOWN, NO SENTENCE TWICE (TRAD-4 unit 10; the chair, reading the ow
     expect(printed).toBeGreaterThan(0);
   }, 120000);
 });
+
+describe('ONE HONOURED THING, SAID ONCE AND THEN "ALSO" (TRAD-5 unit 13; the chair\'s ruling (B) of 20:56 UTC, the sixteen lines approved 21:03 UTC)', () => {
+  /** S1's gloss: the first sentence after its lead's " that " (no lead or gloss holds a full stop or " that "). */
+  const glossOf = (d) => String(d?.text ?? '').slice(0, String(d?.text ?? '').indexOf('.')).split(' that ')[1] ?? null;
+  const present = (element) => ELEMENT_GLOSS[element].map((l) => l.text);
+
+  it('a place whose two shown rites share an element: the first reads its present gloss, the later one "also" (owner and reader), a third the same "also"; each alone reads as today', () => {
+    const t = town();
+    for (const [element, acts, also] of [
+      ['forge', ['feast', 'contest', 'vigil'], 'also honours the forge'],
+      ['harvest', ['feast', 'fair', 'procession'], 'also marks the gathering of the harvest'],
+    ]) {
+      const recs = acts.map((act, i) => rite(i + 1, element, act));
+      for (const audience of ['owner', 'reader']) {
+        const alone = recs.map((rec) => describeTradition(rec, t, { audience }));
+        const inSet = recs.map((rec) => describeTradition(rec, t, { audience, set: recs }));
+        // not vacuous: each rite alone prints a present gloss of its element
+        for (const d of alone) expect(present(element), `${element} ${audience} alone`).toContain(glossOf(d));
+        expect(inSet[0].text, `${element} ${audience}: the first`).toBe(alone[0].text);
+        expect(inSet.slice(1).map(glossOf), `${element} ${audience}: the later`).toEqual([also, also]);
+        // the lead stands: only the gloss moved, and S1 as a whole never repeats (the acts differ)
+        inSet.forEach((d, i) => expect(s1OfText(d.text)).toBe(s1OfText(alone[i].text)));
+      }
+    }
+  });
+
+  it('rites of different elements, and a rite alone or first of its element, never read "also"', () => {
+    const t = town();
+    const recs = [rite(1, 'forge', 'feast'), rite(2, 'harvest', 'feast'), rite(3, 'market', 'fair'), rite(4, 'the-dead', 'vigil')];
+    for (const audience of ['owner', 'reader']) {
+      const inSet = recs.map((rec) => describeTradition(rec, t, { audience, set: recs }));
+      inSet.forEach((d, i) => expect(present(recs[i].coreMotif.element), `${audience} ${recs[i].coreMotif.element}`).toContain(glossOf(d)));
+    }
+  });
+});
