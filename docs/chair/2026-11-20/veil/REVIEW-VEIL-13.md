@@ -52,3 +52,11 @@ mapped category takes its archetype from its hideable `description`: the keeper 
 HOLDS, executed on 4 towns only (`out/trad-smoke-at-1f3cdc135.txt`): rows equal with every hideable row removed; served rows
 byte-equal to the client's on gallery and link, lane chain and 212, nothing hidden / default / every Curate address
 hidden, Reveal off and on; a pre-change save serves none. NOT DONE: import (stub missing then); the 140-town round trip.
+
+## R. REBUILD (another account; one command each; paths relative to the repo root; R12=probes/REVIEW-VEIL-12, R13=probes/REVIEW-VEIL-13 under docs/chair/2026-11-20/veil)
+1. Cluster: `mkdir -p /var/tmp/rv7 /var/tmp/v16/pgdata /var/tmp/v16/rv12/nat && chown postgres /var/tmp/rv7 /var/tmp/v16/pgdata && su postgres -c "/usr/lib/postgresql/16/bin/initdb -D /var/tmp/v16/pgdata -U postgres -A trust" && printf "listen_addresses = ''\nunix_socket_directories = '/var/tmp/rv7'\nfsync = off\n" >> /var/tmp/v16/pgdata/postgresql.conf && touch /var/tmp/v16/pg.log && chown postgres /var/tmp/v16/pg.log && su postgres -c "/usr/lib/postgresql/16/bin/pg_ctl -D /var/tmp/v16/pgdata -l /var/tmp/v16/pg.log start"`
+2. Scaffold, seed, runner: `cp docs/chair/2026-11-13/veil-probe-5/native/scaffold.sql $R13/seed.sql /var/tmp/v16/rv12/nat/ && mkdir -p /var/tmp/v16/rv10 /var/tmp/v16/pgmod && cp $R12/vitest.config.mjs /var/tmp/v16/rv10/ && (cd /var/tmp/v16/pgmod && npm init -y && npm i pg@8)`
+3. A tree: `git worktree add --detach /var/tmp/v16/wt-<c> <c> && ln -s $PWD/node_modules /var/tmp/v16/wt-<c>/node_modules` (after `npm ci` in the checkout)
+4. A chain: `sh $R12/chain.sh <db> 212 /var/tmp/v16/wt-<c>/supabase/migrations && PGHOST=/var/tmp/rv7 psql -U postgres -qd <db> -f $R13/seed.sql`
+5. A probe: `env RV6_SRC=/var/tmp/v16/wt-<c> RV10_TPL=<db> RV10_OUT=<out> sh $R12/run.sh $R13/<probe>.probe.jsx <log>` (tell/r3: RV9_N=2 is the gate's pool; RV13_TOWNS=<tags> narrows tell)
+Chains used: x212 = 15567e597; pre212 = 302850b0b; r3c4 = c5786c5ce; trad = 1f3cdc135 (`chain.sh trad 999`).
