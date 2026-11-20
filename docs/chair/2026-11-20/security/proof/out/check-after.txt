@@ -1,0 +1,10 @@
+ sig | exists_here | anon_can | authenticated_can | service_role_can 
+-----+-------------+----------+-------------------+------------------
+(0 rows)
+
+         key_function         | anon_can | authenticated_can |                    grants                     
+------------------------------+----------+-------------------+-----------------------------------------------
+ _surveyor_byok_secret()      | f        | f                 | {postgres=X/postgres,service_role=X/postgres}
+ surveyor_byok_get(uuid,text) | f        | f                 | {postgres=X/postgres,service_role=X/postgres}
+(2 rows)
+

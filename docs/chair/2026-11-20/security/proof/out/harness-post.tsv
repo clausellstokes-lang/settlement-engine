@@ -1,0 +1,810 @@
+_assert_service_admin_actor(uuid)	anon	ERR permission denied for function _assert_service_admin_actor
+_assert_service_admin_actor(uuid)	authenticated	ERR permission denied for function _assert_service_admin_actor
+_assert_service_admin_actor(uuid)	service_role	ERR actor is not privileged
+_audit_action(uuid,uuid,text,jsonb,jsonb,text)	anon	ERR permission denied for function _audit_action
+_audit_action(uuid,uuid,text,jsonb,jsonb,text)	authenticated	ERR permission denied for function _audit_action
+_audit_action(uuid,uuid,text,jsonb,jsonb,text)	service_role	OK rows=1
+_buyback_payout_hold_days()	anon	ERR permission denied for function _buyback_payout_hold_days
+_buyback_payout_hold_days()	authenticated	ERR permission denied for function _buyback_payout_hold_days
+_buyback_payout_hold_days()	service_role	OK rows=1
+_civility_stem_hits(text)	anon	ERR permission denied for table civility_terms
+_civility_stem_hits(text)	authenticated	ERR permission denied for table civility_terms
+_civility_stem_hits(text)	service_role	OK rows=1
+_civility_token_hits(text)	anon	ERR permission denied for table civility_terms
+_civility_token_hits(text)	authenticated	ERR permission denied for table civility_terms
+_civility_token_hits(text)	service_role	OK rows=1
+_consume_action_rate_limit(uuid,text,integer)	anon	ERR permission denied for function _consume_action_rate_limit
+_consume_action_rate_limit(uuid,text,integer)	authenticated	ERR permission denied for function _consume_action_rate_limit
+_consume_action_rate_limit(uuid,text,integer)	service_role	OK rows=1
+_deity_chart_axes_valid(jsonb)	anon	OK rows=1
+_deity_chart_axes_valid(jsonb)	authenticated	OK rows=1
+_deity_chart_axes_valid(jsonb)	service_role	OK rows=1
+_founder_transfer_dial(text,integer)	anon	ERR permission denied for function _founder_transfer_dial
+_founder_transfer_dial(text,integer)	authenticated	ERR permission denied for function _founder_transfer_dial
+_founder_transfer_dial(text,integer)	service_role	OK rows=1
+_gallery_apply_member_overrides(jsonb,jsonb,jsonb,boolean,boolean,boolean)	anon	OK rows=1
+_gallery_apply_member_overrides(jsonb,jsonb,jsonb,boolean,boolean,boolean)	authenticated	OK rows=1
+_gallery_apply_member_overrides(jsonb,jsonb,jsonb,boolean,boolean,boolean)	service_role	OK rows=1
+_gallery_chronicle_entry(jsonb)	anon	OK rows=1
+_gallery_chronicle_entry(jsonb)	authenticated	OK rows=1
+_gallery_chronicle_entry(jsonb)	service_role	OK rows=1
+_gallery_chronicle_json(jsonb)	anon	OK rows=1
+_gallery_chronicle_json(jsonb)	authenticated	OK rows=1
+_gallery_chronicle_json(jsonb)	service_role	OK rows=1
+_gallery_dm_full_json(jsonb)	anon	OK rows=1
+_gallery_dm_full_json(jsonb)	authenticated	OK rows=1
+_gallery_dm_full_json(jsonb)	service_role	OK rows=1
+_gallery_map_backdrop(jsonb)	anon	OK rows=1
+_gallery_map_backdrop(jsonb)	authenticated	OK rows=1
+_gallery_map_backdrop(jsonb)	service_role	OK rows=1
+_gallery_npc_key(jsonb)	anon	OK rows=1
+_gallery_npc_key(jsonb)	authenticated	OK rows=1
+_gallery_npc_key(jsonb)	service_role	OK rows=1
+_gallery_public_tile_rows()	anon	ERR permission denied for function _gallery_public_tile_rows
+_gallery_public_tile_rows()	authenticated	ERR permission denied for function _gallery_public_tile_rows
+_gallery_public_tile_rows()	service_role	OK rows=1
+_gallery_sanitize_public_json(jsonb,text[])	anon	OK rows=1
+_gallery_sanitize_public_json(jsonb,text[])	authenticated	OK rows=1
+_gallery_sanitize_public_json(jsonb,text[])	service_role	OK rows=1
+_gallery_world_snapshot_is_safe(jsonb)	anon	OK rows=1
+_gallery_world_snapshot_is_safe(jsonb)	authenticated	OK rows=1
+_gallery_world_snapshot_is_safe(jsonb)	service_role	OK rows=1
+_gc_dim_sql(text)	anon	OK rows=1
+_gc_dim_sql(text)	authenticated	OK rows=1
+_gc_dim_sql(text)	service_role	OK rows=1
+_log_founder_transfer_event(uuid,text,text,jsonb)	anon	ERR permission denied for function _log_founder_transfer_event
+_log_founder_transfer_event(uuid,text,text,jsonb)	authenticated	ERR permission denied for function _log_founder_transfer_event
+_log_founder_transfer_event(uuid,text,text,jsonb)	service_role	ERR new row for relation "founder_transfer_events" violates check constraint "founder_transfer_events_actor_check"
+_make_public_slug()	anon	OK rows=1
+_make_public_slug()	authenticated	OK rows=1
+_make_public_slug()	service_role	OK rows=1
+_make_unlisted_slug()	anon	OK rows=1
+_make_unlisted_slug()	authenticated	OK rows=1
+_make_unlisted_slug()	service_role	OK rows=1
+_seat_buyback_cents()	anon	ERR permission denied for function _seat_buyback_cents
+_seat_buyback_cents()	authenticated	ERR permission denied for function _seat_buyback_cents
+_seat_buyback_cents()	service_role	OK rows=1
+_seat_holder_last_active(uuid)	anon	ERR permission denied for function _seat_holder_last_active
+_seat_holder_last_active(uuid)	authenticated	ERR permission denied for function _seat_holder_last_active
+_seat_holder_last_active(uuid)	service_role	OK rows=1
+_seat_stewardship_dial(text,integer)	anon	ERR permission denied for function _seat_stewardship_dial
+_seat_stewardship_dial(text,integer)	authenticated	ERR permission denied for function _seat_stewardship_dial
+_seat_stewardship_dial(text,integer)	service_role	OK rows=1
+_surveyor_byok_secret()	anon	ERR permission denied for function _surveyor_byok_secret
+_surveyor_byok_secret()	authenticated	ERR permission denied for function _surveyor_byok_secret
+_surveyor_byok_secret()	service_role	OK rows=1
+_trunc_unit(text)	anon	OK rows=1
+_trunc_unit(text)	authenticated	OK rows=1
+_trunc_unit(text)	service_role	OK rows=1
+account_is_active(uuid)	anon	OK rows=1
+account_is_active(uuid)	authenticated	OK rows=1
+account_is_active(uuid)	service_role	OK rows=1
+add_gallery_comment(uuid,text)	anon	ERR Sign in to comment
+add_gallery_comment(uuid,text)	authenticated	ERR Settlement is not public
+add_gallery_comment(uuid,text)	service_role	ERR Sign in to comment
+add_internal_note(uuid,uuid,text)	anon	ERR permission denied for function add_internal_note
+add_internal_note(uuid,uuid,text)	authenticated	ERR permission denied for function add_internal_note
+add_internal_note(uuid,uuid,text)	service_role	ERR not authorized
+admin_billing_summary(uuid,uuid)	anon	ERR permission denied for function admin_billing_summary
+admin_billing_summary(uuid,uuid)	authenticated	ERR permission denied for function admin_billing_summary
+admin_billing_summary(uuid,uuid)	service_role	ERR not authorized
+admin_diagnostic_bundle(uuid,uuid,boolean,text)	anon	ERR permission denied for function admin_diagnostic_bundle
+admin_diagnostic_bundle(uuid,uuid,boolean,text)	authenticated	ERR permission denied for function admin_diagnostic_bundle
+admin_diagnostic_bundle(uuid,uuid,boolean,text)	service_role	ERR not authorized
+admin_grant_credits(uuid,integer,text)	anon	ERR permission denied for function admin_grant_credits
+admin_grant_credits(uuid,integer,text)	authenticated	ERR permission denied for function admin_grant_credits
+admin_grant_credits(uuid,integer,text)	service_role	ERR not authorized
+admin_list_internal_notes(uuid)	anon	ERR permission denied for function admin_list_internal_notes
+admin_list_internal_notes(uuid)	authenticated	ERR permission denied for function admin_list_internal_notes
+admin_list_internal_notes(uuid)	service_role	ERR not authorized
+admin_list_warnings(uuid)	anon	ERR permission denied for function admin_list_warnings
+admin_list_warnings(uuid)	authenticated	ERR permission denied for function admin_list_warnings
+admin_list_warnings(uuid)	service_role	ERR not authorized
+admin_remove_gallery_item(uuid,uuid,text)	anon	ERR permission denied for function admin_remove_gallery_item
+admin_remove_gallery_item(uuid,uuid,text)	authenticated	ERR permission denied for function admin_remove_gallery_item
+admin_remove_gallery_item(uuid,uuid,text)	service_role	ERR not authorized
+admin_remove_gallery_map(uuid,uuid,text)	anon	ERR permission denied for function admin_remove_gallery_map
+admin_remove_gallery_map(uuid,uuid,text)	authenticated	ERR permission denied for function admin_remove_gallery_map
+admin_remove_gallery_map(uuid,uuid,text)	service_role	ERR not authorized
+admin_revoke_share_link(uuid,uuid,text)	anon	ERR permission denied for function admin_revoke_share_link
+admin_revoke_share_link(uuid,uuid,text)	authenticated	ERR permission denied for function admin_revoke_share_link
+admin_revoke_share_link(uuid,uuid,text)	service_role	ERR not authorized
+admin_set_content_banned(uuid,text,uuid,boolean,text)	anon	ERR permission denied for function admin_set_content_banned
+admin_set_content_banned(uuid,text,uuid,boolean,text)	authenticated	ERR permission denied for function admin_set_content_banned
+admin_set_content_banned(uuid,text,uuid,boolean,text)	service_role	ERR not authorized
+admin_set_role(uuid,text)	anon	ERR permission denied for function admin_set_role
+admin_set_role(uuid,text)	authenticated	ERR permission denied for function admin_set_role
+admin_set_role(uuid,text)	service_role	ERR not authorized
+admin_soft_delete_map(uuid,uuid,boolean,text)	anon	ERR permission denied for function admin_soft_delete_map
+admin_soft_delete_map(uuid,uuid,boolean,text)	authenticated	ERR permission denied for function admin_soft_delete_map
+admin_soft_delete_map(uuid,uuid,boolean,text)	service_role	ERR not authorized
+admin_soft_delete_settlement(uuid,uuid,boolean,text)	anon	ERR permission denied for function admin_soft_delete_settlement
+admin_soft_delete_settlement(uuid,uuid,boolean,text)	authenticated	ERR permission denied for function admin_soft_delete_settlement
+admin_soft_delete_settlement(uuid,uuid,boolean,text)	service_role	ERR not authorized
+admin_support_messages(text,integer)	anon	ERR permission denied for function admin_support_messages
+admin_support_messages(text,integer)	authenticated	ERR permission denied for function admin_support_messages
+admin_support_messages(text,integer)	service_role	ERR not authorized
+admin_user_full(uuid,text)	anon	ERR permission denied for function admin_user_full
+admin_user_full(uuid,text)	authenticated	ERR permission denied for function admin_user_full
+admin_user_full(uuid,text)	service_role	ERR not authorized: full PII requires admin or developer
+admin_user_summary(uuid)	anon	ERR permission denied for function admin_user_summary
+admin_user_summary(uuid)	authenticated	ERR permission denied for function admin_user_summary
+admin_user_summary(uuid)	service_role	ERR not authorized
+aggregate_ai_usage_stats(integer)	anon	ERR permission denied for function aggregate_ai_usage_stats
+aggregate_ai_usage_stats(integer)	authenticated	ERR permission denied for function aggregate_ai_usage_stats
+aggregate_ai_usage_stats(integer)	service_role	OK rows=1
+analytics_monthly_prune()	anon	ERR permission denied for function analytics_monthly_prune
+analytics_monthly_prune()	authenticated	ERR permission denied for function analytics_monthly_prune
+analytics_monthly_prune()	service_role	OK rows=1
+analytics_nightly_maintenance()	anon	ERR permission denied for function analytics_nightly_maintenance
+analytics_nightly_maintenance()	authenticated	ERR permission denied for function analytics_nightly_maintenance
+analytics_nightly_maintenance()	service_role	OK rows=1
+append_retention_cohorts(date)	anon	ERR permission denied for function append_retention_cohorts
+append_retention_cohorts(date)	authenticated	ERR permission denied for function append_retention_cohorts
+append_retention_cohorts(date)	service_role	OK rows=1
+apply_create_route_command(uuid,text,uuid,uuid,timestamp with time zone,jsonb,jsonb,jsonb,jsonb,jsonb,jsonb,jsonb,jsonb,jsonb)	anon	ERR permission denied for function apply_create_route_command
+apply_create_route_command(uuid,text,uuid,uuid,timestamp with time zone,jsonb,jsonb,jsonb,jsonb,jsonb,jsonb,jsonb,jsonb,jsonb)	authenticated	ERR a route needs two distinct settlements
+apply_create_route_command(uuid,text,uuid,uuid,timestamp with time zone,jsonb,jsonb,jsonb,jsonb,jsonb,jsonb,jsonb,jsonb,jsonb)	service_role	ERR not authenticated
+apply_custom_content_command(uuid,text,text,jsonb)	anon	ERR permission denied for function apply_custom_content_command
+apply_custom_content_command(uuid,text,text,jsonb)	authenticated	ERR invalid custom-content command envelope
+apply_custom_content_command(uuid,text,text,jsonb)	service_role	ERR not authenticated
+apply_cut_trade_route_command(uuid,text,uuid,timestamp with time zone,jsonb,jsonb,jsonb,jsonb,jsonb,jsonb,jsonb)	anon	ERR permission denied for function apply_cut_trade_route_command
+apply_cut_trade_route_command(uuid,text,uuid,timestamp with time zone,jsonb,jsonb,jsonb,jsonb,jsonb,jsonb,jsonb)	authenticated	ERR only CUT_TRADE_ROUTE is server-authoritative in this RPC
+apply_cut_trade_route_command(uuid,text,uuid,timestamp with time zone,jsonb,jsonb,jsonb,jsonb,jsonb,jsonb,jsonb)	service_role	ERR not authenticated
+apply_import_reconciliation_command(uuid,text,text,uuid,uuid,text,text,jsonb,jsonb)	anon	ERR permission denied for function apply_import_reconciliation_command
+apply_import_reconciliation_command(uuid,text,text,uuid,uuid,text,text,jsonb,jsonb)	authenticated	ERR invalid import reconciliation command
+apply_import_reconciliation_command(uuid,text,text,uuid,uuid,text,text,jsonb,jsonb)	service_role	ERR not authenticated
+apply_redemption(text)	anon	ERR permission denied for function apply_redemption
+apply_redemption(text)	authenticated	ERR permission denied for function apply_redemption
+apply_redemption(text)	service_role	OK rows=1
+apply_reviewed_supply_chain_command(uuid,text,text,jsonb)	anon	ERR permission denied for function apply_reviewed_supply_chain_command
+apply_reviewed_supply_chain_command(uuid,text,text,jsonb)	authenticated	ERR invalid reviewed supply-chain command envelope
+apply_reviewed_supply_chain_command(uuid,text,text,jsonb)	service_role	ERR not authenticated
+assert_current_session()	anon	ERR permission denied for function assert_current_session
+assert_current_session()	authenticated	ERR permission denied for function assert_current_session
+assert_current_session()	service_role	OK rows=1
+attach_ai_spend_to_claim(uuid,text,uuid)	anon	ERR permission denied for function attach_ai_spend_to_claim
+attach_ai_spend_to_claim(uuid,text,uuid)	authenticated	ERR permission denied for function attach_ai_spend_to_claim
+attach_ai_spend_to_claim(uuid,text,uuid)	service_role	OK rows=1
+bind_redemption_session(uuid,text)	anon	ERR permission denied for function bind_redemption_session
+bind_redemption_session(uuid,text)	authenticated	ERR permission denied for function bind_redemption_session
+bind_redemption_session(uuid,text)	service_role	OK rows=1
+bump_map_import(text)	anon	ERR permission denied for function bump_map_import
+bump_map_import(text)	authenticated	ERR permission denied for function bump_map_import
+bump_map_import(text)	service_role	OK rows=1
+bump_public_view(text,text)	anon	OK rows=1
+bump_public_view(text,text)	authenticated	OK rows=1
+bump_public_view(text,text)	service_role	OK rows=1
+cancel_stale_auto_reload_attempts()	anon	ERR permission denied for function cancel_stale_auto_reload_attempts
+cancel_stale_auto_reload_attempts()	authenticated	ERR permission denied for function cancel_stale_auto_reload_attempts
+cancel_stale_auto_reload_attempts()	service_role	OK rows=1
+civility_blocked(text)	anon	ERR permission denied for table civility_allow
+civility_blocked(text)	authenticated	ERR permission denied for table civility_allow
+civility_blocked(text)	service_role	OK rows=1
+civility_normalize(text)	anon	OK rows=1
+civility_normalize(text)	authenticated	OK rows=1
+civility_normalize(text)	service_role	OK rows=1
+claim_ai_request(uuid,text,integer)	anon	ERR permission denied for function claim_ai_request
+claim_ai_request(uuid,text,integer)	authenticated	ERR permission denied for function claim_ai_request
+claim_ai_request(uuid,text,integer)	service_role	OK rows=1
+claim_auto_reload_payment_intent(uuid,uuid,text,integer,integer)	anon	ERR permission denied for function claim_auto_reload_payment_intent
+claim_auto_reload_payment_intent(uuid,uuid,text,integer,integer)	authenticated	ERR permission denied for function claim_auto_reload_payment_intent
+claim_auto_reload_payment_intent(uuid,uuid,text,integer,integer)	service_role	OK rows=1
+claim_current_session(text)	anon	ERR not authenticated
+claim_current_session(text)	authenticated	OK rows=1
+claim_current_session(text)	service_role	ERR not authenticated
+claim_dossier_purchase_by_session(text,uuid,uuid)	anon	ERR permission denied for function claim_dossier_purchase_by_session
+claim_dossier_purchase_by_session(text,uuid,uuid)	authenticated	ERR permission denied for function claim_dossier_purchase_by_session
+claim_dossier_purchase_by_session(text,uuid,uuid)	service_role	OK rows=1
+claim_due_buyback_payout()	anon	ERR permission denied for function claim_due_buyback_payout
+claim_due_buyback_payout()	authenticated	ERR permission denied for function claim_due_buyback_payout
+claim_due_buyback_payout()	service_role	OK rows=1
+claim_due_transfer_payout()	anon	ERR permission denied for function claim_due_transfer_payout
+claim_due_transfer_payout()	authenticated	ERR permission denied for function claim_due_transfer_payout
+claim_due_transfer_payout()	service_role	OK rows=1
+claim_founder_seat_buyback(uuid,text)	anon	ERR permission denied for function claim_founder_seat_buyback
+claim_founder_seat_buyback(uuid,text)	authenticated	ERR permission denied for function claim_founder_seat_buyback
+claim_founder_seat_buyback(uuid,text)	service_role	OK rows=1
+claim_free_narrative(uuid)	anon	ERR permission denied for function claim_free_narrative
+claim_free_narrative(uuid)	authenticated	ERR permission denied for function claim_free_narrative
+claim_free_narrative(uuid)	service_role	OK rows=1
+claim_next_founder_seat(uuid)	anon	ERR permission denied for function claim_next_founder_seat
+claim_next_founder_seat(uuid)	authenticated	ERR permission denied for function claim_next_founder_seat
+claim_next_founder_seat(uuid)	service_role	OK rows=1
+claim_ticket(uuid,uuid)	anon	ERR permission denied for function claim_ticket
+claim_ticket(uuid,uuid)	authenticated	ERR permission denied for function claim_ticket
+claim_ticket(uuid,uuid)	service_role	ERR not authorized
+clawback_dossier_entitlement(text)	anon	ERR permission denied for function clawback_dossier_entitlement
+clawback_dossier_entitlement(text)	authenticated	ERR permission denied for function clawback_dossier_entitlement
+clawback_dossier_entitlement(text)	service_role	OK rows=1
+clawback_referral(text)	anon	ERR permission denied for function clawback_referral
+clawback_referral(text)	authenticated	ERR permission denied for function clawback_referral
+clawback_referral(text)	service_role	OK rows=1
+cleanup_ai_generate_rate_limits(integer)	anon	ERR permission denied for function cleanup_ai_generate_rate_limits
+cleanup_ai_generate_rate_limits(integer)	authenticated	ERR permission denied for function cleanup_ai_generate_rate_limits
+cleanup_ai_generate_rate_limits(integer)	service_role	OK rows=1
+cleanup_ai_spend_reservations(integer)	anon	ERR permission denied for function cleanup_ai_spend_reservations
+cleanup_ai_spend_reservations(integer)	authenticated	ERR permission denied for function cleanup_ai_spend_reservations
+cleanup_ai_spend_reservations(integer)	service_role	OK rows=1
+cleanup_dossier_verify_rate_limits(integer)	anon	ERR permission denied for function cleanup_dossier_verify_rate_limits
+cleanup_dossier_verify_rate_limits(integer)	authenticated	ERR permission denied for function cleanup_dossier_verify_rate_limits
+cleanup_dossier_verify_rate_limits(integer)	service_role	OK rows=1
+cleanup_email_rate_limits(integer)	anon	ERR permission denied for function cleanup_email_rate_limits
+cleanup_email_rate_limits(integer)	authenticated	ERR permission denied for function cleanup_email_rate_limits
+cleanup_email_rate_limits(integer)	service_role	OK rows=1
+cleanup_recovery_rate_limits(integer)	anon	ERR permission denied for function cleanup_recovery_rate_limits
+cleanup_recovery_rate_limits(integer)	authenticated	ERR permission denied for function cleanup_recovery_rate_limits
+cleanup_recovery_rate_limits(integer)	service_role	OK rows=1
+cleanup_token_buckets(integer)	anon	ERR permission denied for function cleanup_token_buckets
+cleanup_token_buckets(integer)	authenticated	ERR permission denied for function cleanup_token_buckets
+cleanup_token_buckets(integer)	service_role	OK rows=1
+cleanup_user_action_rate_limits(integer)	anon	ERR permission denied for function cleanup_user_action_rate_limits
+cleanup_user_action_rate_limits(integer)	authenticated	ERR permission denied for function cleanup_user_action_rate_limits
+cleanup_user_action_rate_limits(integer)	service_role	OK rows=1
+compare_and_swap_campaign_content_binding(uuid,text,text,uuid,text,jsonb,jsonb)	anon	ERR permission denied for function compare_and_swap_campaign_content_binding
+compare_and_swap_campaign_content_binding(uuid,text,text,uuid,text,jsonb,jsonb)	authenticated	ERR invalid campaign content binding command
+compare_and_swap_campaign_content_binding(uuid,text,text,uuid,text,jsonb,jsonb)	service_role	ERR not authenticated
+consume_ai_generate_rate_limit(uuid,integer,integer)	anon	ERR permission denied for function consume_ai_generate_rate_limit
+consume_ai_generate_rate_limit(uuid,integer,integer)	authenticated	ERR permission denied for function consume_ai_generate_rate_limit
+consume_ai_generate_rate_limit(uuid,integer,integer)	service_role	OK rows=1
+consume_dossier_verify_rate_limit(text,integer,integer)	anon	ERR permission denied for function consume_dossier_verify_rate_limit
+consume_dossier_verify_rate_limit(text,integer,integer)	authenticated	ERR permission denied for function consume_dossier_verify_rate_limit
+consume_dossier_verify_rate_limit(text,integer,integer)	service_role	OK rows=1
+consume_email_rate_limit(text,text,integer,integer,integer)	anon	ERR permission denied for function consume_email_rate_limit
+consume_email_rate_limit(text,text,integer,integer,integer)	authenticated	ERR permission denied for function consume_email_rate_limit
+consume_email_rate_limit(text,text,integer,integer,integer)	service_role	OK rows=1
+consume_recovery_rate_limit(text,text,integer,integer,integer)	anon	ERR permission denied for function consume_recovery_rate_limit
+consume_recovery_rate_limit(text,text,integer,integer,integer)	authenticated	ERR permission denied for function consume_recovery_rate_limit
+consume_recovery_rate_limit(text,text,integer,integer,integer)	service_role	OK rows=1
+consume_token_bucket(text,double precision,double precision,double precision)	anon	ERR permission denied for function consume_token_bucket
+consume_token_bucket(text,double precision,double precision,double precision)	authenticated	ERR permission denied for function consume_token_bucket
+consume_token_bucket(text,double precision,double precision,double precision)	service_role	OK rows=1
+current_user_has_premium_access()	anon	OK rows=1
+current_user_has_premium_access()	authenticated	OK rows=1
+current_user_has_premium_access()	service_role	OK rows=1
+current_user_has_role(text[])	anon	ERR permission denied for function current_user_has_role
+current_user_has_role(text[])	authenticated	ERR permission denied for function current_user_has_role
+current_user_has_role(text[])	service_role	OK rows=1
+current_user_is_highest()	anon	OK rows=1
+current_user_is_highest()	authenticated	OK rows=1
+current_user_is_highest()	service_role	OK rows=1
+current_user_is_privileged()	anon	OK rows=1
+current_user_is_privileged()	authenticated	OK rows=1
+current_user_is_privileged()	service_role	OK rows=1
+current_user_is_support_or_higher()	anon	OK rows=1
+current_user_is_support_or_higher()	authenticated	OK rows=1
+current_user_is_support_or_higher()	service_role	OK rows=1
+delete_gallery_comment(uuid)	anon	ERR not authenticated
+delete_gallery_comment(uuid)	authenticated	ERR Comment not found or not owned by caller
+delete_gallery_comment(uuid)	service_role	ERR not authenticated
+dismiss_operator_message(uuid)	anon	ERR permission denied for function dismiss_operator_message
+dismiss_operator_message(uuid)	authenticated	ERR permission denied for function dismiss_operator_message
+dismiss_operator_message(uuid)	service_role	ERR not authenticated
+email_has_active_transfer_lock(text)	anon	ERR permission denied for function email_has_active_transfer_lock
+email_has_active_transfer_lock(text)	authenticated	ERR permission denied for function email_has_active_transfer_lock
+email_has_active_transfer_lock(text)	service_role	OK rows=1
+expire_stale_transfer_cases()	anon	ERR permission denied for function expire_stale_transfer_cases
+expire_stale_transfer_cases()	authenticated	ERR permission denied for function expire_stale_transfer_cases
+expire_stale_transfer_cases()	service_role	OK rows=1
+export_custom_content_archive(uuid)	anon	ERR permission denied for function export_custom_content_archive
+export_custom_content_archive(uuid)	authenticated	OK rows=1
+export_custom_content_archive(uuid)	service_role	ERR not authenticated
+format_ticket_number(bigint)	anon	OK rows=1
+format_ticket_number(bigint)	authenticated	OK rows=1
+format_ticket_number(bigint)	service_role	OK rows=1
+founder_buyback_enabled()	anon	ERR permission denied for function founder_buyback_enabled
+founder_buyback_enabled()	authenticated	ERR permission denied for function founder_buyback_enabled
+founder_buyback_enabled()	service_role	OK rows=1
+founder_seats_taken()	anon	OK rows=1
+founder_seats_taken()	authenticated	OK rows=1
+founder_seats_taken()	service_role	OK rows=1
+founder_transfer_enabled()	anon	ERR permission denied for function founder_transfer_enabled
+founder_transfer_enabled()	authenticated	ERR permission denied for function founder_transfer_enabled
+founder_transfer_enabled()	service_role	OK rows=1
+founders_roll()	anon	OK rows=0
+founders_roll()	authenticated	OK rows=0
+founders_roll()	service_role	OK rows=0
+free_narrative_available(uuid)	anon	ERR permission denied for function free_narrative_available
+free_narrative_available(uuid)	authenticated	ERR permission denied for function free_narrative_available
+free_narrative_available(uuid)	service_role	OK rows=1
+gen_account_number()	anon	ERR permission denied for function gen_account_number
+gen_account_number()	authenticated	ERR permission denied for function gen_account_number
+gen_account_number()	service_role	OK rows=1
+gen_external_name()	anon	ERR permission denied for function gen_external_name
+gen_external_name()	authenticated	ERR permission denied for function gen_external_name
+gen_external_name()	service_role	OK rows=1
+get_ai_pricing()	anon	OK rows=1
+get_ai_pricing()	authenticated	OK rows=1
+get_ai_pricing()	service_role	OK rows=1
+get_credit_balance(uuid)	anon	ERR permission denied for function get_credit_balance
+get_credit_balance(uuid)	authenticated	OK rows=1
+get_credit_balance(uuid)	service_role	OK rows=1
+get_gallery_dossier(text)	anon	OK rows=0
+get_gallery_dossier(text)	authenticated	OK rows=0
+get_gallery_dossier(text)	service_role	OK rows=0
+get_gallery_map(text)	anon	OK rows=1
+get_gallery_map(text)	authenticated	OK rows=1
+get_gallery_map(text)	service_role	OK rows=1
+get_gallery_reaction_state(uuid)	anon	OK rows=0
+get_gallery_reaction_state(uuid)	authenticated	OK rows=0
+get_gallery_reaction_state(uuid)	service_role	OK rows=0
+get_gallery_vote_state(uuid)	anon	OK rows=1
+get_gallery_vote_state(uuid)	authenticated	OK rows=1
+get_gallery_vote_state(uuid)	service_role	OK rows=1
+get_my_email_preferences()	anon	ERR permission denied for function get_my_email_preferences
+get_my_email_preferences()	authenticated	OK rows=1
+get_my_email_preferences()	service_role	ERR not authenticated
+get_my_operator_message(uuid)	anon	ERR permission denied for function get_my_operator_message
+get_my_operator_message(uuid)	authenticated	ERR permission denied for function get_my_operator_message
+get_my_operator_message(uuid)	service_role	ERR not authenticated
+get_my_operator_service_export()	anon	ERR permission denied for function get_my_operator_service_export
+get_my_operator_service_export()	authenticated	OK rows=1
+get_my_operator_service_export()	service_role	ERR not authenticated
+get_my_operator_unread_count()	anon	ERR permission denied for function get_my_operator_unread_count
+get_my_operator_unread_count()	authenticated	OK rows=1
+get_my_operator_unread_count()	service_role	ERR not authenticated
+get_my_security_question_ids()	anon	OK rows=0
+get_my_security_question_ids()	authenticated	OK rows=0
+get_my_security_question_ids()	service_role	OK rows=0
+get_unlisted_dossier(text)	anon	OK rows=1
+get_unlisted_dossier(text)	authenticated	OK rows=1
+get_unlisted_dossier(text)	service_role	OK rows=1
+get_unlisted_map(text)	anon	OK rows=1
+get_unlisted_map(text)	authenticated	OK rows=1
+get_unlisted_map(text)	service_role	OK rows=1
+grant_dossier_entitlement(uuid,uuid,text,text)	anon	ERR permission denied for function grant_dossier_entitlement
+grant_dossier_entitlement(uuid,uuid,text,text)	authenticated	ERR permission denied for function grant_dossier_entitlement
+grant_dossier_entitlement(uuid,uuid,text,text)	service_role	OK rows=1
+grant_referral(uuid,text,integer)	anon	ERR permission denied for function grant_referral
+grant_referral(uuid,text,integer)	authenticated	ERR permission denied for function grant_referral
+grant_referral(uuid,text,integer)	service_role	OK rows=1
+handle_premium_downgrade(uuid)	anon	ERR permission denied for function handle_premium_downgrade
+handle_premium_downgrade(uuid)	authenticated	ERR permission denied for function handle_premium_downgrade
+handle_premium_downgrade(uuid)	service_role	OK rows=1
+has_active_transfer_lock(uuid)	anon	ERR permission denied for function has_active_transfer_lock
+has_active_transfer_lock(uuid)	authenticated	ERR permission denied for function has_active_transfer_lock
+has_active_transfer_lock(uuid)	service_role	OK rows=1
+has_dossier_entitlement(uuid)	anon	OK rows=1
+has_dossier_entitlement(uuid)	authenticated	OK rows=1
+has_dossier_entitlement(uuid)	service_role	OK rows=1
+has_role(uuid,text[])	anon	ERR permission denied for function has_role
+has_role(uuid,text[])	authenticated	ERR permission denied for function has_role
+has_role(uuid,text[])	service_role	OK rows=1
+has_surveyor_entitlement()	anon	OK rows=1
+has_surveyor_entitlement()	authenticated	OK rows=1
+has_surveyor_entitlement()	service_role	OK rows=1
+import_custom_content_archive(uuid,text,text,jsonb)	anon	ERR permission denied for function import_custom_content_archive
+import_custom_content_archive(uuid,text,text,jsonb)	authenticated	ERR invalid custom-content archive command
+import_custom_content_archive(uuid,text,text,jsonb)	service_role	ERR not authenticated
+import_gallery_dossier(text)	anon	OK rows=0
+import_gallery_dossier(text)	authenticated	OK rows=0
+import_gallery_dossier(text)	service_role	OK rows=0
+import_gallery_map(text)	anon	ERR permission denied for function import_gallery_map
+import_gallery_map(text)	authenticated	ERR permission denied for function import_gallery_map
+import_gallery_map(text)	service_role	OK rows=1
+ingest_check_rate(text,integer,integer)	anon	ERR permission denied for function ingest_check_rate
+ingest_check_rate(text,integer,integer)	authenticated	ERR permission denied for function ingest_check_rate
+ingest_check_rate(text,integer,integer)	service_role	OK rows=1
+is_allowed_email_category(text)	anon	OK rows=1
+is_allowed_email_category(text)	authenticated	OK rows=1
+is_allowed_email_category(text)	service_role	OK rows=1
+is_allowed_security_question_id(text)	anon	OK rows=1
+is_allowed_security_question_id(text)	authenticated	OK rows=1
+is_allowed_security_question_id(text)	service_role	OK rows=1
+is_current_session()	anon	OK rows=1
+is_current_session()	authenticated	OK rows=1
+is_current_session()	service_role	OK rows=1
+issue_buyback_challenge(uuid)	anon	ERR permission denied for function issue_buyback_challenge
+issue_buyback_challenge(uuid)	authenticated	ERR permission denied for function issue_buyback_challenge
+issue_buyback_challenge(uuid)	service_role	OK rows=1
+issue_transfer_challenge(uuid,text,text)	anon	ERR permission denied for function issue_transfer_challenge
+issue_transfer_challenge(uuid,text,text)	authenticated	ERR permission denied for function issue_transfer_challenge
+issue_transfer_challenge(uuid,text,text)	service_role	OK rows=1
+link_ticket_faq(uuid,uuid,text)	anon	ERR permission denied for function link_ticket_faq
+link_ticket_faq(uuid,uuid,text)	authenticated	ERR permission denied for function link_ticket_faq
+link_ticket_faq(uuid,uuid,text)	service_role	ERR not authorized
+list_curated_dossiers()	anon	OK rows=0
+list_curated_dossiers()	authenticated	OK rows=0
+list_curated_dossiers()	service_role	OK rows=0
+list_featured_dossiers()	anon	OK rows=0
+list_featured_dossiers()	authenticated	OK rows=0
+list_featured_dossiers()	service_role	OK rows=0
+list_featured_maps()	anon	OK rows=0
+list_featured_maps()	authenticated	OK rows=0
+list_featured_maps()	service_role	OK rows=0
+list_founder_seats_public()	anon	OK rows=30
+list_founder_seats_public()	authenticated	OK rows=30
+list_founder_seats_public()	service_role	OK rows=30
+list_gallery_comments(uuid)	anon	OK rows=0
+list_gallery_comments(uuid)	authenticated	OK rows=0
+list_gallery_comments(uuid)	service_role	OK rows=0
+list_gallery_dossiers(integer,integer,text,text,jsonb,boolean)	anon	OK rows=0
+list_gallery_dossiers(integer,integer,text,text,jsonb,boolean)	authenticated	OK rows=0
+list_gallery_dossiers(integer,integer,text,text,jsonb,boolean)	service_role	OK rows=0
+list_gallery_maps(integer,integer,text,text,jsonb)	anon	OK rows=0
+list_gallery_maps(integer,integer,text,text,jsonb)	authenticated	OK rows=0
+list_gallery_maps(integer,integer,text,text,jsonb)	service_role	OK rows=0
+list_gallery_more_by_creator(text,integer)	anon	OK rows=0
+list_gallery_more_by_creator(text,integer)	authenticated	OK rows=0
+list_gallery_more_by_creator(text,integer)	service_role	OK rows=0
+list_gallery_reports(text,integer)	anon	OK rows=0
+list_gallery_reports(text,integer)	authenticated	OK rows=0
+list_gallery_reports(text,integer)	service_role	OK rows=0
+list_my_gallery_dossiers()	anon	OK rows=0
+list_my_gallery_dossiers()	authenticated	OK rows=1
+list_my_gallery_dossiers()	service_role	OK rows=0
+list_my_operator_messages(integer,timestamp with time zone,uuid)	anon	ERR permission denied for function list_my_operator_messages
+list_my_operator_messages(integer,timestamp with time zone,uuid)	authenticated	OK rows=0
+list_my_operator_messages(integer,timestamp with time zone,uuid)	service_role	ERR not authenticated
+list_my_tickets()	anon	OK rows=0
+list_my_tickets()	authenticated	OK rows=0
+list_my_tickets()	service_role	OK rows=0
+list_my_unlisted_dossiers()	anon	OK rows=0
+list_my_unlisted_dossiers()	authenticated	OK rows=1
+list_my_unlisted_dossiers()	service_role	OK rows=0
+list_my_unlisted_maps()	anon	OK rows=0
+list_my_unlisted_maps()	authenticated	OK rows=0
+list_my_unlisted_maps()	service_role	OK rows=0
+list_open_report_targets()	anon	OK rows=0
+list_open_report_targets()	authenticated	OK rows=0
+list_open_report_targets()	service_role	OK rows=0
+list_ticket_pool(text,integer)	anon	ERR permission denied for function list_ticket_pool
+list_ticket_pool(text,integer)	authenticated	ERR permission denied for function list_ticket_pool
+list_ticket_pool(text,integer)	service_role	ERR not authorized
+list_ticket_thread(uuid)	anon	OK rows=0
+list_ticket_thread(uuid)	authenticated	OK rows=0
+list_ticket_thread(uuid)	service_role	OK rows=0
+load_sim_metrics(jsonb)	anon	ERR permission denied for function load_sim_metrics
+load_sim_metrics(jsonb)	authenticated	ERR permission denied for function load_sim_metrics
+load_sim_metrics(jsonb)	service_role	ERR load_sim_metrics expects a jsonb array of metric rows
+mark_low_balance_notified(uuid,text)	anon	ERR permission denied for function mark_low_balance_notified
+mark_low_balance_notified(uuid,text)	authenticated	ERR permission denied for function mark_low_balance_notified
+mark_low_balance_notified(uuid,text)	service_role	OK rows=1
+mark_operator_message_read(uuid)	anon	ERR permission denied for function mark_operator_message_read
+mark_operator_message_read(uuid)	authenticated	OK rows=0
+mark_operator_message_read(uuid)	service_role	ERR not authenticated
+market_k_min_campaigns()	anon	OK rows=1
+market_k_min_campaigns()	authenticated	OK rows=1
+market_k_min_campaigns()	service_role	OK rows=1
+market_k_min_users()	anon	OK rows=1
+market_k_min_users()	authenticated	OK rows=1
+market_k_min_users()	service_role	OK rows=1
+mask_email(text)	anon	OK rows=1
+mask_email(text)	authenticated	OK rows=1
+mask_email(text)	service_role	OK rows=1
+merge_neighbour_backlink(uuid,text,uuid,jsonb,jsonb)	anon	ERR permission denied for function merge_neighbour_backlink
+merge_neighbour_backlink(uuid,text,uuid,jsonb,jsonb)	authenticated	ERR permission denied for function merge_neighbour_backlink
+merge_neighbour_backlink(uuid,text,uuid,jsonb,jsonb)	service_role	ERR not authenticated
+mutate_settlement_batch(uuid,jsonb,uuid[],jsonb)	anon	ERR permission denied for function mutate_settlement_batch
+mutate_settlement_batch(uuid,jsonb,uuid[],jsonb)	authenticated	ERR updates must be an array
+mutate_settlement_batch(uuid,jsonb,uuid[],jsonb)	service_role	ERR permission denied for function mutate_settlement_batch
+my_transfer_case_status()	anon	OK rows=0
+my_transfer_case_status()	authenticated	OK rows=0
+my_transfer_case_status()	service_role	OK rows=0
+normalize_external_name(text)	anon	OK rows=1
+normalize_external_name(text)	authenticated	OK rows=1
+normalize_external_name(text)	service_role	OK rows=1
+persist_world_pulse_advance(uuid,jsonb,jsonb,bigint)	anon	ERR permission denied for function persist_world_pulse_advance
+persist_world_pulse_advance(uuid,jsonb,jsonb,bigint)	authenticated	ERR permission denied for function persist_world_pulse_advance
+persist_world_pulse_advance(uuid,jsonb,jsonb,bigint)	service_role	ERR not authenticated
+post_ticket_reply(uuid,uuid,text,text)	anon	ERR permission denied for function post_ticket_reply
+post_ticket_reply(uuid,uuid,text,text)	authenticated	ERR permission denied for function post_ticket_reply
+post_ticket_reply(uuid,uuid,text,text)	service_role	ERR ticket not found
+profile_has_premium_access(uuid)	anon	ERR permission denied for function profile_has_premium_access
+profile_has_premium_access(uuid)	authenticated	ERR permission denied for function profile_has_premium_access
+profile_has_premium_access(uuid)	service_role	OK rows=1
+publish_map(uuid,text,text,text[],boolean,text,text,boolean,jsonb,jsonb,text,jsonb)	anon	ERR not authenticated
+publish_map(uuid,text,text,text[],boolean,text,text,boolean,jsonb,jsonb,text,jsonb)	authenticated	ERR Not found or not owned by caller
+publish_map(uuid,text,text,text[],boolean,text,text,boolean,jsonb,jsonb,text,jsonb)	service_role	ERR not authenticated
+publish_settlement(uuid)	anon	ERR not authenticated
+publish_settlement(uuid)	authenticated	ERR Not found or not owned by caller
+publish_settlement(uuid)	service_role	ERR not authenticated
+purge_analytics_for_user(uuid)	anon	ERR permission denied for function purge_analytics_for_user
+purge_analytics_for_user(uuid)	authenticated	ERR permission denied for function purge_analytics_for_user
+purge_analytics_for_user(uuid)	service_role	OK rows=1
+purge_dossier_purchases(integer)	anon	ERR permission denied for function purge_dossier_purchases
+purge_dossier_purchases(integer)	authenticated	ERR permission denied for function purge_dossier_purchases
+purge_dossier_purchases(integer)	service_role	OK rows=1
+purge_expired_plan_inactive_assets()	anon	ERR permission denied for function purge_expired_plan_inactive_assets
+purge_expired_plan_inactive_assets()	authenticated	ERR permission denied for function purge_expired_plan_inactive_assets
+purge_expired_plan_inactive_assets()	service_role	OK rows=1
+purge_expired_plan_inactive_settlements()	anon	ERR permission denied for function purge_expired_plan_inactive_settlements
+purge_expired_plan_inactive_settlements()	authenticated	ERR permission denied for function purge_expired_plan_inactive_settlements
+purge_expired_plan_inactive_settlements()	service_role	OK rows=1
+reactivate_free_settlement(uuid)	anon	ERR not authenticated
+reactivate_free_settlement(uuid)	authenticated	ERR settlement not found
+reactivate_free_settlement(uuid)	service_role	ERR not authenticated
+record_referral_grant_detail(uuid,text,text,text)	anon	ERR permission denied for function record_referral_grant_detail
+record_referral_grant_detail(uuid,text,text,text)	authenticated	ERR permission denied for function record_referral_grant_detail
+record_referral_grant_detail(uuid,text,text,text)	service_role	ERR p_party must be referrer or referee (got: x)
+record_referral_intent(text)	anon	ERR not authenticated
+record_referral_intent(text)	authenticated	OK rows=1
+record_referral_intent(text)	service_role	ERR not authenticated
+reelect_transfer_payout(uuid,uuid)	anon	ERR permission denied for function reelect_transfer_payout
+reelect_transfer_payout(uuid,uuid)	authenticated	ERR permission denied for function reelect_transfer_payout
+reelect_transfer_payout(uuid,uuid)	service_role	OK rows=1
+release_ai_spend_reservation(uuid)	anon	ERR permission denied for function release_ai_spend_reservation
+release_ai_spend_reservation(uuid)	authenticated	ERR permission denied for function release_ai_spend_reservation
+release_ai_spend_reservation(uuid)	service_role	OK rows=1
+release_founder_seat_on_clawback(uuid)	anon	ERR permission denied for function release_founder_seat_on_clawback
+release_founder_seat_on_clawback(uuid)	authenticated	ERR permission denied for function release_founder_seat_on_clawback
+release_founder_seat_on_clawback(uuid)	service_role	OK rows=1
+release_free_narrative(uuid)	anon	ERR permission denied for function release_free_narrative
+release_free_narrative(uuid)	authenticated	ERR permission denied for function release_free_narrative
+release_free_narrative(uuid)	service_role	OK rows=1
+report_ai_usage(date,date)	anon	ERR permission denied for function report_ai_usage
+report_ai_usage(date,date)	authenticated	ERR permission denied for function report_ai_usage
+report_ai_usage(date,date)	service_role	OK rows=0
+report_channel_funnel(date,date)	anon	ERR permission denied for function report_channel_funnel
+report_channel_funnel(date,date)	authenticated	ERR permission denied for function report_channel_funnel
+report_channel_funnel(date,date)	service_role	OK rows=0
+report_client_error_alert()	anon	ERR permission denied for function report_client_error_alert
+report_client_error_alert()	authenticated	ERR permission denied for function report_client_error_alert
+report_client_error_alert()	service_role	OK rows=1
+report_client_errors(date,date)	anon	ERR permission denied for function report_client_errors
+report_client_errors(date,date)	authenticated	ERR permission denied for function report_client_errors
+report_client_errors(date,date)	service_role	OK rows=0
+report_config_variance(text,date,date)	anon	ERR permission denied for function report_config_variance
+report_config_variance(text,date,date)	authenticated	ERR permission denied for function report_config_variance
+report_config_variance(text,date,date)	service_role	ERR structure of query does not match function result type
+report_crosstab(text,text,date,date,integer)	anon	ERR permission denied for function report_crosstab
+report_crosstab(text,text,date,date,integer)	authenticated	ERR permission denied for function report_crosstab
+report_crosstab(text,text,date,date,integer)	service_role	ERR invalid row field: x
+report_distribution(text,date,date,text,integer)	anon	ERR permission denied for function report_distribution
+report_distribution(text,date,date,text,integer)	authenticated	ERR permission denied for function report_distribution
+report_distribution(text,date,date,text,integer)	service_role	ERR invalid field: x
+report_edit_heatmap(date,date)	anon	ERR permission denied for function report_edit_heatmap
+report_edit_heatmap(date,date)	authenticated	ERR permission denied for function report_edit_heatmap
+report_edit_heatmap(date,date)	service_role	OK rows=0
+report_funnel(date,date)	anon	ERR permission denied for function report_funnel
+report_funnel(date,date)	authenticated	ERR permission denied for function report_funnel
+report_funnel(date,date)	service_role	OK rows=0
+report_gallery_comment(uuid,text,text)	anon	ERR Sign in to report a comment
+report_gallery_comment(uuid,text,text)	authenticated	ERR Comment is not available
+report_gallery_comment(uuid,text,text)	service_role	ERR Sign in to report a comment
+report_gallery_dossier(uuid,text,text)	anon	ERR Sign in to report a dossier
+report_gallery_dossier(uuid,text,text)	authenticated	ERR Settlement is not public
+report_gallery_dossier(uuid,text,text)	service_role	ERR Sign in to report a dossier
+report_gallery_map(uuid,text,text)	anon	ERR permission denied for function report_gallery_map
+report_gallery_map(uuid,text,text)	authenticated	ERR permission denied for function report_gallery_map
+report_gallery_map(uuid,text,text)	service_role	ERR Sign in to report a map
+report_market_archetype_popularity(date,date)	anon	ERR permission denied for function report_market_archetype_popularity
+report_market_archetype_popularity(date,date)	authenticated	ERR permission denied for function report_market_archetype_popularity
+report_market_archetype_popularity(date,date)	service_role	OK rows=0
+report_market_preset_adoption(date,date)	anon	ERR permission denied for function report_market_preset_adoption
+report_market_preset_adoption(date,date)	authenticated	ERR permission denied for function report_market_preset_adoption
+report_market_preset_adoption(date,date)	service_role	OK rows=0
+report_npc_distribution(text,date,date)	anon	ERR permission denied for function report_npc_distribution
+report_npc_distribution(text,date,date)	authenticated	ERR permission denied for function report_npc_distribution
+report_npc_distribution(text,date,date)	service_role	ERR invalid npc field: x
+report_preferences(date,date)	anon	ERR permission denied for function report_preferences
+report_preferences(date,date)	authenticated	ERR permission denied for function report_preferences
+report_preferences(date,date)	service_role	OK rows=0
+report_proposal_decisions(date,date)	anon	ERR permission denied for function report_proposal_decisions
+report_proposal_decisions(date,date)	authenticated	ERR permission denied for function report_proposal_decisions
+report_proposal_decisions(date,date)	service_role	OK rows=0
+report_pulse_mutations(date,date)	anon	ERR permission denied for function report_pulse_mutations
+report_pulse_mutations(date,date)	authenticated	ERR permission denied for function report_pulse_mutations
+report_pulse_mutations(date,date)	service_role	OK rows=0
+report_referral_funnel(date,date)	anon	ERR permission denied for function report_referral_funnel
+report_referral_funnel(date,date)	authenticated	ERR permission denied for function report_referral_funnel
+report_referral_funnel(date,date)	service_role	OK rows=0
+report_regional_arcs(date,date)	anon	ERR permission denied for function report_regional_arcs
+report_regional_arcs(date,date)	authenticated	ERR permission denied for function report_regional_arcs
+report_regional_arcs(date,date)	service_role	OK rows=0
+report_regional_impacts(date,date)	anon	ERR permission denied for function report_regional_impacts
+report_regional_impacts(date,date)	authenticated	ERR permission denied for function report_regional_impacts
+report_regional_impacts(date,date)	service_role	OK rows=0
+report_regional_propagation(date,date)	anon	ERR permission denied for function report_regional_propagation
+report_regional_propagation(date,date)	authenticated	ERR permission denied for function report_regional_propagation
+report_regional_propagation(date,date)	service_role	OK rows=0
+report_retention()	anon	ERR permission denied for function report_retention
+report_retention()	authenticated	ERR permission denied for function report_retention
+report_retention()	service_role	OK rows=0
+report_stressor_genesis(date,date)	anon	ERR permission denied for function report_stressor_genesis
+report_stressor_genesis(date,date)	authenticated	ERR permission denied for function report_stressor_genesis
+report_stressor_genesis(date,date)	service_role	OK rows=0
+report_summary(date,date)	anon	ERR permission denied for function report_summary
+report_summary(date,date)	authenticated	ERR permission denied for function report_summary
+report_summary(date,date)	service_role	OK rows=16
+report_trend(text,text,date,date)	anon	ERR permission denied for function report_trend
+report_trend(text,text,date,date)	authenticated	ERR permission denied for function report_trend
+report_trend(text,text,date,date)	service_role	ERR invalid granularity: x
+reserve_ai_spend(uuid,numeric)	anon	ERR permission denied for function reserve_ai_spend
+reserve_ai_spend(uuid,numeric)	authenticated	ERR permission denied for function reserve_ai_spend
+reserve_ai_spend(uuid,numeric)	service_role	OK rows=1
+reserve_redemption(text,uuid,text)	anon	ERR permission denied for function reserve_redemption
+reserve_redemption(text,uuid,text)	authenticated	ERR permission denied for function reserve_redemption
+reserve_redemption(text,uuid,text)	service_role	OK rows=1
+resolve_gallery_report(uuid,text,text)	anon	ERR Only admins can resolve gallery reports
+resolve_gallery_report(uuid,text,text)	authenticated	ERR Only admins can resolve gallery reports
+resolve_gallery_report(uuid,text,text)	service_role	ERR Only admins can resolve gallery reports
+resolve_report_target(text,uuid,text,text)	anon	ERR Only admins can resolve reports
+resolve_report_target(text,uuid,text,text)	authenticated	ERR Only admins can resolve reports
+resolve_report_target(text,uuid,text,text)	service_role	ERR Only admins can resolve reports
+revert_redemption(text)	anon	ERR permission denied for function revert_redemption
+revert_redemption(text)	authenticated	ERR permission denied for function revert_redemption
+revert_redemption(text)	service_role	OK rows=1
+revoke_map_unlisted(uuid)	anon	ERR permission denied for function revoke_map_unlisted
+revoke_map_unlisted(uuid)	authenticated	ERR permission denied for function revoke_map_unlisted
+revoke_map_unlisted(uuid)	service_role	ERR not authenticated
+revoke_settlement_unlisted(uuid)	anon	ERR not authenticated
+revoke_settlement_unlisted(uuid)	authenticated	ERR Not found or not owned by caller
+revoke_settlement_unlisted(uuid)	service_role	ERR not authenticated
+revoke_surveyor_entitlement(uuid,text)	anon	ERR permission denied for function revoke_surveyor_entitlement
+revoke_surveyor_entitlement(uuid,text)	authenticated	ERR permission denied for function revoke_surveyor_entitlement
+revoke_surveyor_entitlement(uuid,text)	service_role	OK rows=1
+revoke_surveyor_entitlement_by_subscription(text)	anon	ERR permission denied for function revoke_surveyor_entitlement_by_subscription
+revoke_surveyor_entitlement_by_subscription(text)	authenticated	ERR permission denied for function revoke_surveyor_entitlement_by_subscription
+revoke_surveyor_entitlement_by_subscription(text)	service_role	OK rows=1
+rollup_analytics_daily(date)	anon	ERR permission denied for function rollup_analytics_daily
+rollup_analytics_daily(date)	authenticated	ERR permission denied for function rollup_analytics_daily
+rollup_analytics_daily(date)	service_role	OK rows=1
+rollup_analytics_v2_daily(date)	anon	ERR permission denied for function rollup_analytics_v2_daily
+rollup_analytics_v2_daily(date)	authenticated	ERR permission denied for function rollup_analytics_v2_daily
+rollup_analytics_v2_daily(date)	service_role	OK rows=1
+rollup_intent_atlas_daily(date)	anon	ERR permission denied for function rollup_intent_atlas_daily
+rollup_intent_atlas_daily(date)	authenticated	ERR permission denied for function rollup_intent_atlas_daily
+rollup_intent_atlas_daily(date)	service_role	OK rows=1
+rollup_sim_metrics(text)	anon	ERR permission denied for function rollup_sim_metrics
+rollup_sim_metrics(text)	authenticated	ERR permission denied for function rollup_sim_metrics
+rollup_sim_metrics(text)	service_role	OK rows=0
+rotate_map_unlisted_slug(uuid)	anon	ERR not authenticated
+rotate_map_unlisted_slug(uuid)	authenticated	ERR Not found or not owned by caller
+rotate_map_unlisted_slug(uuid)	service_role	ERR not authenticated
+rotate_settlement_unlisted_slug(uuid)	anon	ERR not authenticated
+rotate_settlement_unlisted_slug(uuid)	authenticated	ERR Not found or not owned by caller
+rotate_settlement_unlisted_slug(uuid)	service_role	ERR not authenticated
+service_adjust_credits(uuid,uuid,integer,text)	anon	ERR permission denied for function service_adjust_credits
+service_adjust_credits(uuid,uuid,integer,text)	authenticated	ERR permission denied for function service_adjust_credits
+service_adjust_credits(uuid,uuid,integer,text)	service_role	ERR actor is not privileged
+set_account_disabled(uuid,uuid,boolean,text)	anon	ERR permission denied for function set_account_disabled
+set_account_disabled(uuid,uuid,boolean,text)	authenticated	ERR permission denied for function set_account_disabled
+set_account_disabled(uuid,uuid,boolean,text)	service_role	ERR not authorized: disabling an account requires admin or developer
+set_auto_reload_settings(boolean,integer,integer,integer)	anon	ERR not authenticated
+set_auto_reload_settings(boolean,integer,integer,integer)	authenticated	ERR target_credits must be between 2 and 1000
+set_auto_reload_settings(boolean,integer,integer,integer)	service_role	ERR not authenticated
+set_curated(uuid,boolean,integer)	anon	ERR Settlement not found
+set_curated(uuid,boolean,integer)	authenticated	ERR Only admins can change curation status
+set_curated(uuid,boolean,integer)	service_role	ERR Settlement not found
+set_featured(uuid,boolean,integer)	anon	ERR Settlement not found
+set_featured(uuid,boolean,integer)	authenticated	ERR Only admins can change featured status
+set_featured(uuid,boolean,integer)	service_role	ERR Settlement not found
+set_featured_map(uuid,boolean,integer)	anon	ERR Map not found
+set_featured_map(uuid,boolean,integer)	authenticated	ERR Only admins can change featured status
+set_featured_map(uuid,boolean,integer)	service_role	ERR Map not found
+set_founder_credit_listed(boolean)	anon	ERR not authenticated
+set_founder_credit_listed(boolean)	authenticated	ERR only founders can list their name in the credits
+set_founder_credit_listed(boolean)	service_role	ERR not authenticated
+set_founder_display_optin(text,text)	anon	ERR permission denied for function set_founder_display_optin
+set_founder_display_optin(text,text)	authenticated	ERR permission denied for function set_founder_display_optin
+set_founder_display_optin(text,text)	service_role	ERR sign-in required
+set_gallery_comment_hidden(uuid,boolean,text,uuid)	anon	ERR permission denied for function set_gallery_comment_hidden
+set_gallery_comment_hidden(uuid,boolean,text,uuid)	authenticated	ERR permission denied for function set_gallery_comment_hidden
+set_gallery_comment_hidden(uuid,boolean,text,uuid)	service_role	OK rows=1
+set_my_email_preference(uuid,text,boolean)	anon	ERR permission denied for function set_my_email_preference
+set_my_email_preference(uuid,text,boolean)	authenticated	ERR unknown email category: x
+set_my_email_preference(uuid,text,boolean)	service_role	ERR not authenticated
+set_my_security_answers(text,text,text,text)	anon	ERR not authenticated
+set_my_security_answers(text,text,text,text)	authenticated	ERR unknown security question id
+set_my_security_answers(text,text,text,text)	service_role	ERR not authenticated
+set_my_telemetry_consent(uuid,jsonb,text)	anon	ERR permission denied for function set_my_telemetry_consent
+set_my_telemetry_consent(uuid,jsonb,text)	authenticated	ERR authenticated consent source must be account
+set_my_telemetry_consent(uuid,jsonb,text)	service_role	ERR not authenticated
+set_ticket_status(uuid,uuid,text,text)	anon	ERR permission denied for function set_ticket_status
+set_ticket_status(uuid,uuid,text,text)	authenticated	ERR permission denied for function set_ticket_status
+set_ticket_status(uuid,uuid,text,text)	service_role	ERR not authorized
+share_map_unlisted(uuid)	anon	ERR not authenticated
+share_map_unlisted(uuid)	authenticated	ERR Not found or not owned by caller
+share_map_unlisted(uuid)	service_role	ERR not authenticated
+share_settlement_unlisted(uuid)	anon	ERR not authenticated
+share_settlement_unlisted(uuid)	authenticated	ERR Not found or not owned by caller
+share_settlement_unlisted(uuid)	service_role	ERR not authenticated
+spend_credits(text,text,text)	anon	ERR not authenticated
+spend_credits(text,text,text)	authenticated	ERR unknown feature: x
+spend_credits(text,text,text)	service_role	ERR not authenticated
+surveyor_byok_clear(text)	anon	ERR not authenticated
+surveyor_byok_clear(text)	authenticated	OK rows=1
+surveyor_byok_clear(text)	service_role	ERR not authenticated
+surveyor_byok_get(uuid,text)	anon	ERR permission denied for function surveyor_byok_get
+surveyor_byok_get(uuid,text)	authenticated	ERR permission denied for function surveyor_byok_get
+surveyor_byok_get(uuid,text)	service_role	OK rows=1
+surveyor_byok_set(text,text)	anon	ERR not authenticated
+surveyor_byok_set(text,text)	authenticated	OK rows=1
+surveyor_byok_set(text,text)	service_role	ERR not authenticated
+surveyor_byok_set_health(uuid,text,text,text,boolean)	anon	ERR permission denied for function surveyor_byok_set_health
+surveyor_byok_set_health(uuid,text,text,text,boolean)	authenticated	ERR permission denied for function surveyor_byok_set_health
+surveyor_byok_set_health(uuid,text,text,text,boolean)	service_role	ERR invalid byok health class: x
+surveyor_byok_set_probe_tier(uuid,text,text,text,text,jsonb)	anon	ERR permission denied for function surveyor_byok_set_probe_tier
+surveyor_byok_set_probe_tier(uuid,text,text,text,text,jsonb)	authenticated	ERR permission denied for function surveyor_byok_set_probe_tier
+surveyor_byok_set_probe_tier(uuid,text,text,text,text,jsonb)	service_role	ERR invalid byok probe tier: x
+surveyor_byok_status(text)	anon	ERR not authenticated
+surveyor_byok_status(text)	authenticated	OK rows=0
+surveyor_byok_status(text)	service_role	ERR not authenticated
+surveyor_price_estimates()	anon	ERR not authenticated
+surveyor_price_estimates()	authenticated	OK rows=1
+surveyor_price_estimates()	service_role	ERR not authenticated
+surveyor_settings_get()	anon	ERR not authenticated
+surveyor_settings_get()	authenticated	OK rows=1
+surveyor_settings_get()	service_role	ERR not authenticated
+surveyor_settings_set(jsonb)	anon	ERR not authenticated
+surveyor_settings_set(jsonb)	authenticated	OK rows=1
+surveyor_settings_set(jsonb)	service_role	ERR not authenticated
+surveyor_stage_enabled(text)	anon	ERR permission denied for function surveyor_stage_enabled
+surveyor_stage_enabled(text)	authenticated	ERR permission denied for function surveyor_stage_enabled
+surveyor_stage_enabled(text)	service_role	OK rows=1
+surveyor_usage_precheck(uuid,text,text)	anon	ERR permission denied for function surveyor_usage_precheck
+surveyor_usage_precheck(uuid,text,text)	authenticated	ERR permission denied for function surveyor_usage_precheck
+surveyor_usage_precheck(uuid,text,text)	service_role	OK rows=1
+sweep_seat_abandonment()	anon	ERR permission denied for function sweep_seat_abandonment
+sweep_seat_abandonment()	authenticated	ERR permission denied for function sweep_seat_abandonment
+sweep_seat_abandonment()	service_role	OK rows=0
+sweep_seat_dormancy_nudges()	anon	ERR permission denied for function sweep_seat_dormancy_nudges
+sweep_seat_dormancy_nudges()	authenticated	ERR permission denied for function sweep_seat_dormancy_nudges
+sweep_seat_dormancy_nudges()	service_role	OK rows=0
+system_clawback_credits(text,text)	anon	ERR permission denied for function system_clawback_credits
+system_clawback_credits(text,text)	authenticated	ERR permission denied for function system_clawback_credits
+system_clawback_credits(text,text)	service_role	OK rows=1
+toggle_gallery_reaction(uuid,text)	anon	ERR Sign in to react
+toggle_gallery_reaction(uuid,text)	authenticated	ERR Unknown reaction
+toggle_gallery_reaction(uuid,text)	service_role	ERR Sign in to react
+toggle_gallery_vote(uuid)	anon	ERR Sign in to vote
+toggle_gallery_vote(uuid)	authenticated	ERR Settlement is not public
+toggle_gallery_vote(uuid)	service_role	ERR Sign in to vote
+transfer_case_abort(uuid,text,text)	anon	ERR permission denied for function transfer_case_abort
+transfer_case_abort(uuid,text,text)	authenticated	ERR permission denied for function transfer_case_abort
+transfer_case_abort(uuid,text,text)	service_role	OK rows=1
+transfer_case_bind_nominee(uuid,uuid)	anon	ERR permission denied for function transfer_case_bind_nominee
+transfer_case_bind_nominee(uuid,uuid)	authenticated	ERR permission denied for function transfer_case_bind_nominee
+transfer_case_bind_nominee(uuid,uuid)	service_role	OK rows=1
+transfer_case_finalize(uuid)	anon	ERR permission denied for function transfer_case_finalize
+transfer_case_finalize(uuid)	authenticated	ERR permission denied for function transfer_case_finalize
+transfer_case_finalize(uuid)	service_role	OK rows=1
+transfer_case_mark_awaiting_payment(uuid,text)	anon	ERR permission denied for function transfer_case_mark_awaiting_payment
+transfer_case_mark_awaiting_payment(uuid,text)	authenticated	ERR permission denied for function transfer_case_mark_awaiting_payment
+transfer_case_mark_awaiting_payment(uuid,text)	service_role	OK rows=1
+transfer_case_mark_paid(uuid,text,integer)	anon	ERR permission denied for function transfer_case_mark_paid
+transfer_case_mark_paid(uuid,text,integer)	authenticated	ERR permission denied for function transfer_case_mark_paid
+transfer_case_mark_paid(uuid,text,integer)	service_role	OK rows=1
+transfer_case_open(smallint,uuid,text,text)	anon	ERR permission denied for function transfer_case_open
+transfer_case_open(smallint,uuid,text,text)	authenticated	ERR permission denied for function transfer_case_open
+transfer_case_open(smallint,uuid,text,text)	service_role	OK rows=1
+transfer_case_regress_awaiting_payment(text)	anon	ERR permission denied for function transfer_case_regress_awaiting_payment
+transfer_case_regress_awaiting_payment(text)	authenticated	ERR permission denied for function transfer_case_regress_awaiting_payment
+transfer_case_regress_awaiting_payment(text)	service_role	OK rows=1
+transfer_case_reverse(uuid,text)	anon	ERR permission denied for function transfer_case_reverse
+transfer_case_reverse(uuid,text)	authenticated	ERR permission denied for function transfer_case_reverse
+transfer_case_reverse(uuid,text)	service_role	OK rows=1
+unpublish_map(uuid)	anon	ERR not authenticated
+unpublish_map(uuid)	authenticated	ERR Not found or not owned by caller
+unpublish_map(uuid)	service_role	ERR not authenticated
+unpublish_settlement(uuid)	anon	ERR not authenticated
+unpublish_settlement(uuid)	authenticated	ERR Not found or not owned by caller
+unpublish_settlement(uuid)	service_role	ERR not authenticated
+update_display_name(text)	anon	ERR not authenticated
+update_display_name(text)	authenticated	OK rows=1
+update_display_name(text)	service_role	ERR not authenticated
+update_external_name(text)	anon	ERR permission denied for function update_external_name
+update_external_name(text)	authenticated	ERR permission denied for function update_external_name
+update_external_name(text)	service_role	ERR not authenticated
+update_profile_names(text,text,text)	anon	ERR permission denied for function update_profile_names
+update_profile_names(text,text,text)	authenticated	ERR permission denied for function update_profile_names
+update_profile_names(text,text,text)	service_role	ERR not authenticated
+validate_redeem_code(text)	anon	ERR not authenticated
+validate_redeem_code(text)	authenticated	OK rows=1
+validate_redeem_code(text)	service_role	ERR not authenticated
+verify_buyback_challenge(uuid,text)	anon	ERR permission denied for function verify_buyback_challenge
+verify_buyback_challenge(uuid,text)	authenticated	ERR permission denied for function verify_buyback_challenge
+verify_buyback_challenge(uuid,text)	service_role	OK rows=1
+verify_transfer_challenge(uuid,text,text,text)	anon	ERR permission denied for function verify_transfer_challenge
+verify_transfer_challenge(uuid,text,text,text)	authenticated	ERR permission denied for function verify_transfer_challenge
+verify_transfer_challenge(uuid,text,text,text)	service_role	OK rows=1
+welcome_credit_available(uuid)	anon	OK rows=1
+welcome_credit_available(uuid)	authenticated	OK rows=1
+welcome_credit_available(uuid)	service_role	OK rows=1
+write_ai_operation_log(uuid,text,text,text,text,text[],text[],text,text,text,boolean,numeric,integer,boolean,uuid,boolean,text,text)	anon	ERR permission denied for function write_ai_operation_log
+write_ai_operation_log(uuid,text,text,text,text,text[],text[],text,text,text,boolean,numeric,integer,boolean,uuid,boolean,text,text)	authenticated	ERR permission denied for function write_ai_operation_log
+write_ai_operation_log(uuid,text,text,text,text,text[],text[],text,text,text,boolean,numeric,integer,boolean,uuid,boolean,text,text)	service_role	OK rows=1
+write_audit(text,uuid,text,text,text,jsonb,jsonb,boolean,boolean,boolean,uuid)	anon	ERR permission denied for function write_audit
+write_audit(text,uuid,text,text,text,jsonb,jsonb,boolean,boolean,boolean,uuid)	authenticated	ERR permission denied for function write_audit
+write_audit(text,uuid,text,text,text,jsonb,jsonb,boolean,boolean,boolean,uuid)	service_role	OK rows=1

@@ -1,0 +1,4 @@
+psql:/home/user/settlement-engine/docs/chair/2026-11-20/security/proof/reader.sql:7: ERROR:  permission denied for function _surveyor_byok_secret
+psql:/home/user/settlement-engine/docs/chair/2026-11-20/security/proof/reader.sql:10: ERROR:  permission denied for function surveyor_byok_get
+psql:/home/user/settlement-engine/docs/chair/2026-11-20/security/proof/reader.sql:13: ERROR:  permission denied for function _surveyor_byok_secret
+psql:/home/user/settlement-engine/docs/chair/2026-11-20/security/proof/reader.sql:16: ERROR:  permission denied for function surveyor_byok_get

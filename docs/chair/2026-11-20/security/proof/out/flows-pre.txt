@@ -1,0 +1,28 @@
+SAVE insert ok
+SAVE update ok
+SAVE read-own rows=1
+SHARE unlisted slug present=true
+SHARE anon get_unlisted_dossier name=Probe Town
+PUBLISH slug present=true
+PUBLISH importable set
+GALLERY anon list rows=1
+GALLERY anon dossier name=Probe Town
+GALLERY anon more-by-creator rows=0
+GALLERY anon bump_public_view ok
+GALLERY anon founders_roll rows=0
+GALLERY u1 vote=(1,t)
+GALLERY u1 comment ok
+GALLERY u1 comments rows=1
+IMPORT u1 rows=1 name=Probe Town
+MAP insert ok
+MAP publish slug present=true
+MAP anon list rows=1
+SELF credit balance=1
+SELF surveyor entitlement=true
+SELF byok status ok
+SELF byok set again=true
+SELF premium access=true
+SELF my tickets rows=0
+EDGE service byok_get={"key": "sk-FAKE-TEST-KEY-123", "probe_tier": null, "probe_model": null, "probe_profile": null, "probe_version": null}
+EDGE service usage_precheck ok
+EDGE service account_is_active=true
