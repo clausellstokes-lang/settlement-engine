@@ -115,16 +115,16 @@ export const ELEMENT_GLOSS = Object.freeze({
   hearth: Object.freeze([plain('honours hearth and household'), plain('blesses hearth and home'), plain('honours home and family')]),
   harvest: Object.freeze([
     line({ text: 'gives thanks for the harvest', excludes: NOT_HUNGRY }),
-    line({ text: 'is kept for the harvest', twinOf: 'gives thanks for the harvest', crisis: ANY }),
+    line({ text: 'is held for the harvest', twinOf: 'gives thanks for the harvest', crisis: ANY }),
     line({ text: 'marks the gathering of the harvest', crisis: ANY }),
     line({ text: 'gives thanks for what the fields have given', excludes: NOT_HUNGRY }),
-    line({ text: 'is kept for what the fields give', twinOf: 'gives thanks for what the fields have given', crisis: ANY }),
+    line({ text: 'is held for what the fields give', twinOf: 'gives thanks for what the fields have given', crisis: ANY }),
   ]),
   river: Object.freeze([
     line({ text: 'honours the river', needs: Object.freeze(['river']) }), line({ text: 'blesses the river', needs: Object.freeze(['river']) }),
     line({ text: 'honours the river and its waters', needs: Object.freeze(['river']) }),
   ]),
-  stone: Object.freeze([plain('honours the standing stones'), plain('honours the old standing stones'), plain('keeps faith with the standing stones')]),
+  stone: Object.freeze([plain('honours the standing stones'), plain('honours the old standing stones'), plain('stays true to the standing stones')]),
   'the-dead': Object.freeze([plain('remembers the dead'), plain('honours the dead'), plain('remembers those who came before')]),
   field: Object.freeze([plain('blesses the fields'), plain('honours the fields'), plain('blesses the furrows')]),
   forge: Object.freeze([
@@ -142,7 +142,7 @@ export const ELEMENT_GLOSS = Object.freeze({
     line({ text: 'honours the sea and its tides', needs: Object.freeze(['coast']) }),
   ]),
   greening: Object.freeze([plain("welcomes the year's new growth"), plain('marks the coming of spring'), plain('honours the first green of the year')]),
-  stars: Object.freeze([plain('is kept under the stars'), plain('honours the stars'), plain('marks the courses of the stars')]),
+  stars: Object.freeze([plain('is held under the stars'), plain('honours the stars'), plain('marks the courses of the stars')]),
 });
 /** The gloss pools that opted into the crisis dimension. */
 export const CRISIS_SCOPED_ELEMENTS = Object.freeze(['harvest']);
