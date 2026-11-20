@@ -1759,6 +1759,27 @@ export const tensionDescription = (tension, config) => {
  */
 export const historyDescVariantsOf = (type) => HISTORY_DESC_VARIANTS[type] || [];
 
+/**
+ * PAGE-2 T1 (2026-11-20; brief docs/chair/2026-11-20/content/page/briefs/T1.md): A TENSION'S SPARE WORDINGS, USED ALWAYS. A
+ * live tension's description (`tensionDescription`) where it is not its template's own canonical sentence (the memory
+ * words `historyGenerator.js :: tensionByMemory` set, a sentence the selection wrote for the town, a kind keyed by
+ * migration direction); where it IS the canonical, one of the canonical and its spares (historyDescVariants.js), chosen
+ * by `pickVariant` on `${config._seed}::tension::${type}`: ZERO draws, canonical-at-zero, a falsy seed keeps the
+ * canonical. The legitimacy tension keeps its canonical: the record reads that sentence against the seat by its words
+ * (`LEGITIMACY_HELD_TWINS`), and its spares have no twin. The chosen form takes the canonical's path after it
+ * (sizedHistoryText, substituteNames, renderHistoryTemplate, apartFromOwnEvent).
+ * @param {{type?: string, description: string, descriptionByDirection?: {arrivals: string, departures: string}}} tension
+ * @param {unknown} config @returns {string}
+ */
+export const tensionWording = (tension, config) => {
+  const said = tensionDescription(tension, config);
+  const type = String(tension?.type ?? '');
+  const canonical = HISTORICAL_EVENTS_DATA.find((e) => e.type === type)?.description;
+  const seed = /** @type {{_seed?: unknown} | null | undefined} */ (config)?._seed;
+  if (!seed || tension?.descriptionByDirection || said !== canonical || canonical in LEGITIMACY_HELD_TWINS) return said;
+  return pickVariant([canonical, ...historyDescVariantsOf(type)], `${seed}::tension::${type}`);
+};
+
 export const historyDescription = (eventTemplate, seed) => {
   const variants = HISTORY_DESC_VARIANTS[eventTemplate.type];
   return variants
