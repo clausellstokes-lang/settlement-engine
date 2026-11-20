@@ -59,3 +59,19 @@ Your own worktree and branch `lane/page-7-2026-11-20-causes`, cut from PAGE-7's 
 explicit paths with the receipts (red titles, green counts) in the message; author Claude <noreply@anthropic.com>. Never
 push, never merge. Reply at most 250 words: commits, red and green count lines, the measures' count lines, the key
 chosen and why, new fact homes, every disagreement.
+
+## ADDENDUM, 15:19 UTC (the chair, 15:18; binds where it differs from the above)
+- DISPATCHED NOW. Scope is NEW FILES ONLY: the data file, `tensionCauseHolds.js`, `tensionCause.js`, new fact homes AND
+  their naming lines in `src/domain/facts/factsOf.js` (that file's one permitted edit), their tests, the measures. No
+  other existing file: not `historyGenerator.js`, not the sides table's file (READ its fill and call it), not sim.mjs
+  on PAGE-5's lane (re-point a COPY under measures/page-7/).
+- crime_wave + guild_conflict: build from `lines/CAUSES-crime_wave-guild_conflict.md` at 19e7f7932 (this branch: the
+  chair's six rewordings applied). That file numbers wordings from 1; the data file's arrays keep its order.
+- THE LIVE ROSTER: every house predicate reads `institutionRoster.js :: liveInstitutions`, not the raw roster (a ruined,
+  removed or remnant house is no cause). A parity disagreement with sim.mjs that is ONLY this is LISTED with its town,
+  not cured.
+- A CUSTOM HOUSE IS NEVER MATCHED BY ITS NAME: a house test answers for the catalogue's houses by the home's own identity
+  test; where a home can only read names, a DM's own house is left out (the line falls toward plain). RED FIRST: a custom
+  house named "Black Market Tavern" does not print the black market's line.
+- HIDEABLE, crime/guild: the file's nine AND law_thin, no_force, force_unpaid_or_cut, guilds_rule, rival_power; the other
+  kinds by rule 5 above (every rival_power, merchants_rule, outranked: true).
