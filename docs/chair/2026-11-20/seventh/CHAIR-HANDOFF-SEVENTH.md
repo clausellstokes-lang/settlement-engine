@@ -2450,3 +2450,32 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   and its floor of 500 stays; THE STORED FIGURES NAMED, SIGNED BY NOBODY (the golden's 5 rows;
   `institutionBudgetPromise` 6 of 60 seeds; four pinned-mode A-arms on that one golden row): they join the owner's
   one signing at the close.
+- 08:24 UTC · **A CROSSING OF THE CHAIR'S OWN MAKING: THE VERB AGREEMENT WAS BUILT TWICE-OVER IN THE MAKING, AND THE LINE HOLDS A
+  RED THE LANDING DID NOT NAME.** NAMES-2 (session_019yED1QtZ3FpHeLyMj7RFWD) at 08:22: the chair's messages of 06:10
+  and 06:28 reached it at 07:30 and the one of 07:31 ("do not build item 5, push nothing more") at 08:22: ALL SENT
+  BEFORE THE CHAIR LEARNED TO SEND WITH `priority: "next"`. Acting on the last word it had ("BUILD IT"), it built the
+  verb agreement and pushed `lane/names-2-2026-11-20` to 6c38ecfaa: three commits on the 37b90e66b that was landed:
+  e174f2d47 (a test re-pin: `tests/generators/bar3People2Rows.test.js`, two sentences to the article form: "a
+  NAMES-1 red it did not list", RED AT 37b90e66b); 9157373d0 (the agreement: `pluralPowerName`'s body in the data
+  leaf, the display file keeping its name; its own receipts: red 6 of 6 to green; stored 5 to 0 of 1,724 and
+  rendered 139 to 0 of 2,705 by its reader; exactly 5 stored strings move, the golden's 525 untouched; gates green;
+  left, measured, not built: plural pronouns in five goal templates and four `dmPowerLines` lines); 6c38ecfaa (its
+  hand-back). It reads about 330,000 by its own estimate and has stopped.
+  CONFIRMED BY THE CHAIR ON THE LINE AT e356c94f: `bar3People2Rows` 2 FAILED OF 13: A RED THE LANDING OF POINT 77
+  PUT ON THE LINE UNNAMED. THE CHAIR'S CHECK AT THE MERGED TREE (the test files the two landings CHANGED, `tests/data`,
+  `tests/lint` whole) COULD NOT SEE IT: a landing that changes generated prose can red any test in the suite that
+  pins a sentence, changed or not. SAID TO THE OWNER (08:25): "red only on the named list" was wrong in at least
+  this one place. THE CURE: e174f2d47 cherry-picked on the chair's copy of the line (17a5dce6, local): 13 of 13
+  green; HELD UNPUSHED until this pull request's CI at e356c94f is read (about 08:40), so the FULL list of what the
+  names landing reddened is read once and cured in one landing.
+  THE DUPLICATE STOPPED: NAMES-3 had begun the same cure (the same shape). Sent to it with `priority: "now"`: stop the
+  cure, keep the measure; its assignment becomes (1) the shared confinement tool and the re-execution of point 77;
+  (2) AN INDEPENDENT VERDICT ON 9157373d0 (its diff line by line; its own tool between 37b90e66b and 6c38ecfaa; its
+  own reader's count of what is left): "NAMES-2-ITEM-5: SOUND" or the findings; (3) only then, on top of it, what
+  NAMES-2 left and what its reader still finds outside the generated pool. 9157373d0 lands after that verdict.
+  TWO LESSONS FOR THE NEXT CHAIR: (a) A SUCCESSOR FOR AN ITEM IS SEATED ONLY AFTER THE PREDECESSOR HAS ACKNOWLEDGED
+  THE STOP (or its branch is read back at the seating AND again before the successor's first build); a stop that has
+  not been acknowledged is not a stop. (b) A LANDING THAT CHANGES GENERATED OR RENDERED PROSE IS NOT CLEARED BY THE
+  CHANGED FILES: its seat runs the suite's shards that pin prose (or the whole sharded suite, as CI does) and NAMES
+  EVERY RED before the hand-back; the chair treats CI's first run after such a landing as part of the landing, read
+  by the failing tests' names, and lands the cures at once.
