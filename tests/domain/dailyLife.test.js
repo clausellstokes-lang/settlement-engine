@@ -153,10 +153,12 @@ describe('dawn_work behavior', () => {
 
 describe('gathering_places behavior', () => {
   it('cites religious + trade + inn institutions when present', () => {
+    // DAILY-2 B1b C3 (LINES-1 § gathering_places, the chair's rulings 7 and 12): the trade house a line names is a
+    // live market row (`Weekly market`); a market square is the `{square}` of its own lines, not the `{market}`.
     const s = deriveDailyLifeSlot('gathering_places', {
       institutions: [
         { id: 'i1', name: 'Temple of Light' },
-        { id: 'i2', name: 'Market Square' },
+        { id: 'i2', name: 'Weekly market' },
         { id: 'i3', name: 'The Black Hart Inn' },
       ],
     });
@@ -165,9 +167,11 @@ describe('gathering_places behavior', () => {
     expect(s.references.length).toBeGreaterThanOrEqual(2);
   });
 
-  it('falls back gracefully when no recognized institutions present', () => {
+  it('prints the EMPTY string when no recognized institutions present (ruling 3: no true line, no filler)', () => {
+    // DAILY-2 B1b C3: today's fallback "the well, the bridge, the open square" was printed with none of them held; the
+    // chair's ruling 3 (2026-11-20 18:19) makes a slot with no true line EMPTY (the page hides it).
     const s = deriveDailyLifeSlot('gathering_places', { institutions: [] });
-    expect(s.text.length).toBeGreaterThan(0);
+    expect(s.text).toBe('');
   });
 });
 
@@ -327,7 +331,10 @@ describe('deriveDailyLife()', () => {
       const s = life.slots[key];
       expect(s.key).toBe(key);
       expect(s.label).toBeTruthy();
-      expect(s.text.length).toBeGreaterThan(0);
+      // DAILY-2 B1b C3 (the chair's ruling 3, 2026-11-20 18:19): a slot with no true line is EMPTY. This record holds no
+      // house at all, so `gathering_places` has nothing true to say; every other slot still speaks.
+      if (key === 'gathering_places') expect(s.text).toBe('');
+      else expect(s.text.length).toBeGreaterThan(0);
       expect(typeof s.source).toBe('string');
       expect(Array.isArray(s.references)).toBe(true);
     }

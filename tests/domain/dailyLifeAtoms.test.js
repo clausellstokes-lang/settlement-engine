@@ -61,7 +61,7 @@ const NEED_ATOMS = Object.freeze({
   // LINES-1 / LINES-1b
   walls: ['walls'], gate: ['gate'], militia: ['militia'], guard: ['guardPresence'], sickHouse: ['sick house'],
   granary: ['institution: granary'], smith: ['institution: smith'], millHouse: ['institution: mill'], inn: ['institution: tavern'],
-  bathhouse: ['institution: bathhouse'], docks: ['docks'], sacred: ['sacredHouse'], church: ['church'], cathedral: ['temple'],
+  bathhouse: ['institution: bathhouse'], docks: ['docks'], sacred: ['sacredHouse'], church: ['church'], cathedral: ['church'],
   market: ['market'], square: ['market', 'institution: square'], guild: ['guild'], fishSource: ['fish'], gameSource: ['game'],
   livestockSource: ['livestock'], route: ['route open'], navigable: ['navigable'], timber: ['timber at hand'],
   notSmallPop: ['population: ≥ middling'], small: ['tier: ≤ village'], elder: ['ruler: elder'], appointedPost: ['appointed post'],
