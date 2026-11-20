@@ -27,3 +27,25 @@ come ashore." No sentence repeats (unit 10's bar holds), but the reader sees one
 
 Edit `tools/measure2.mjs` to add the count if that is the shortest way (no new tool file unless it is shorter). Commit
 by explicit paths, one commit, receipts in the message, the session trailers. Never push.
+
+## ADDENDUM 1 — THE CHAIR'S RULING (20:56 UTC): CURE (B). STEP ONE ONLY: THE SIXTEEN "ALSO" GLOSSES, IN A FILE FOR THE CHAIR'S EYE
+Written 2026-11-20 20:56 UTC by TRAD-5. RULED: a held element's LATER rite (a rite whose element an earlier rite of the place's shown set
+already holds) takes an "also" gloss, the keeper frames' pattern (`src/data/traditionDescriptionTable.js ::
+KEEPER_FRAMES_TOO`: never a pick, only for the later rite). (A) not taken; (C) is the owner's and not proposed.
+THIS STEP WRITES NO CODE: one file, `docs/chair/2026-11-20/content/traditions/TRAD-5-U13-ALSO-GLOSSES.md`, for the chair to read
+before any builder. In it, for EACH of the sixteen elements of `ELEMENT_GLOSS` (founding, first-landing, charter, hearth,
+harvest, river, stone, the-dead, field, forge, market, hunt, long-sun, tide, greening, stars):
+- the element's present gloss lines, verbatim, with their declarations (`needs`/`excludes`/`crisis`/`colour`), quoted from
+  the table;
+- ONE proposed "also" line beside them: the same honoured thing said with "also" (e.g. "that also honours the first boats to
+  come ashore"), shaped to follow the act leads exactly as the present glosses do (read `ACT_LEADS` and how `compose`
+  joins lead and gloss), and its proposed declaration: it presumes NOTHING its element's lines do not already presume (take the
+  NARROWEST declaration among the element's present lines' common ground; where they differ, say so and propose; a crisis-scoped
+  element (`CRISIS_SCOPED_ELEMENTS`: harvest) keeps its crisis twin rule: propose the "also" line's twin if one is needed).
+LAWS on every line: NO NEW FEELING, no drama (the owner: "Don't invent drama… We are not creating the campaign."; the frames
+walker's DRAMA_WORDS), no cause word (`tests/lint/traditionDescriptionFrames.walker.test.js :: CAUSE_WORDS`, now holding "goes
+back"), no "kept" or "keeps" (unit 9: no first sentence says "kept" twice), never "the town"/"a town", no name of a house or
+person, nothing the record does not hold. Check each against those lists by grep and say so in the file. Close the file with
+the counts the cure will move (unit 13's 137 of 1,232 calm, 82 of 1,256 visitor; owner and reader alike) and ONE paragraph of
+what a builder then does (the files: the table, the leaf's `compose`, the walker and domain tests, the census rows by their
+doors). Commit the file and this addendum by explicit paths, one commit. Never push.
