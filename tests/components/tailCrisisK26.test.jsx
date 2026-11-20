@@ -97,7 +97,8 @@ describe('K26: a stake row names its power by the one leaf, on the tab, the PDF 
       const word = CRISIS_PAGE_COPY.stake[reformed.stake];
       const said = powerSentenceName(reformed.factionId);
       // FRAME-6 · C2 (the pin moves): the tab and the PDF open the row on the page's one composition, the leaf's form with
-      // its article and the verb in its number ("The Guard split", "The Monster Hunters lose"); the journal is unchanged
+      // its article and the verb in its number ("The Guard split", "The Monster Hunters lose"); FRAME-6 · C2B (a) (the pin
+      // moves): the journal reads the same composition inside its own frame ("- **The Guard** split: …")
       const opens = stakeOpening(reformed);
       expect(opens.subject.endsWith(said.replace(/^The /, ''))).toBe(true);
       // the tab: "<name> <word> · <reason>"
@@ -105,9 +106,9 @@ describe('K26: a stake row names its power by the one leaf, on the tab, the PDF 
       // the PDF: one Line per row, "<name> <word> · <reason>"
       const pdf = strings(CrisisSections({ settlement: s }));
       expectAbsentWithAnchor(pdf, `${reformed.factionId} ${word} · ${reformed.reason}`, `${opens.subject} ${opens.verb} · ${reformed.reason}`, `${seed} pdf`);
-      // the journal: "- **<name>** <word>: <reason>."
+      // the journal: "- **<subject>** <verb>: <reason>."
       const journal = journalLines(s);
-      expectAbsentWithAnchor(journal, `- **${reformed.factionId}** ${word}: ${reformed.reason}.`, `- **${said}** ${word}: ${reformed.reason}.`, `${seed} journal`);
+      expectAbsentWithAnchor(journal, `- **${reformed.factionId}** ${word}: ${reformed.reason}.`, `- **${opens.subject}** ${opens.verb}: ${reformed.reason}.`, `${seed} journal`);
       // KEEP: where the same town prints a power already named, it prints under its own name on all three
       if (plain) {
         // FRAME-6 · C2 (the pin moves): on the tab and the PDF the name stands with its article ("The Elder Council loses")
@@ -116,7 +117,7 @@ describe('K26: a stake row names its power by the one leaf, on the tab, the PDF 
         const keep = `${kept.subject} ${kept.verb} · ${plain.reason}`;
         expect(tab, `${seed} tab keeps ${plain.factionId}`).toContain(keep);
         expect(pdf, `${seed} pdf keeps ${plain.factionId}`).toContain(keep);
-        expect(journal, `${seed} journal keeps ${plain.factionId}`).toContain(`- **${plain.factionId}** ${CRISIS_PAGE_COPY.stake[plain.stake]}: ${plain.reason}.`);
+        expect(journal, `${seed} journal keeps ${plain.factionId}`).toContain(`- **${kept.subject}** ${kept.verb}: ${plain.reason}.`);
       }
     });
     expectNoSeedFailures(failures, 'each town prints its re-formed stake row by the leaf on every surface');
