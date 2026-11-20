@@ -10,7 +10,6 @@
  *   - Phase 10 supply chain states (food + trade)
  *   - Phase 11 escalation clocks (recent / completed)
  *   - Phase 12 history beats (recentDisruption + unresolvedWound)
- *   - Phase 13 NPC profiles (dominant figures)
  *   - Phase 16 active conditions (current pressures)
  *   - Phase 17 substrate (14 system variables)
  *   - Phase 20 threats (typed pressures, visibility)
@@ -42,7 +41,6 @@ import { deriveAllActiveConditions } from './activeConditions.js';
 import { deriveAllThreatProfiles } from './threatProfile.js';
 import { deriveAllCapacities, CAPACITY_NAMES } from './capacityModel.js';
 import { deriveHistoryBeats } from './historyBeats.js';
-import { deriveAllNpcProfiles } from './npcProfile.js';
 import { deriveCausalState } from './causalState.js';
 import { powerPossessive } from './display/powerSentenceName.js';
 
@@ -50,7 +48,6 @@ import { powerPossessive } from './display/powerSentenceName.js';
 
 /** @typedef {import('./factionProfile.js').FactionProfile} FactionProfile */
 /** @typedef {import('./activeConditions.js').ActiveCondition} ActiveCondition */
-/** @typedef {import('./settlement.schema.js').NpcProfile} NpcProfile */
 /** @typedef {import('./supplyChainState.js').DerivedSupplyChainState} DerivedSupplyChainState */
 /** @typedef {import('./threatProfile.js').ThreatProfile} ThreatProfile */
 /** @typedef {import('./capacityModel.js').CapacityState} CapacityState */
@@ -101,7 +98,6 @@ import { powerPossessive } from './display/powerSentenceName.js';
  * @property {CapacityState} capacities
  * @property {CausalState} causal
  * @property {{recentDisruption?: HistoryBeatLike|null, unresolvedWound?: HistoryBeatLike|null}} history
- * @property {NpcProfile[]} npcs
  */
 
 // ── Canonical catalog ────────────────────────────────────────────────────
@@ -538,7 +534,8 @@ function buildContext(settlement) {
     capacities: deriveAllCapacities(settlement),
     causal:     deriveCausalState(settlement),
     history:    deriveHistoryBeats(settlement),
-    npcs:       deriveAllNpcProfiles(settlement),
+    // DAILY-1 (the chair's ruling of 2026-11-20 18:19): no `npcs` here. No slot reads a person, and the dead
+    // `deriveAllNpcProfiles` call (a read of every person's secret and plot hooks) is gone.
   };
 }
 
