@@ -78,5 +78,6 @@ export function pickQuarrel(baseline, { facts, noGrazing = null, fieldRotation =
   });
   const text = picked.line ? textOf(picked.line) : null;
   if (typeof text !== 'string') return baseline;
-  return picked.line === pool[0] && noGrazing ? noGrazing : text;
+  // the no-grazing twin stands in for GRAZING's index 0 only: it is read off every place, a town's included (the merge read of da16f2f4b)
+  return poolName === 'GRAZING' && picked.line === pool[0] && noGrazing ? noGrazing : text;
 }

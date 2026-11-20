@@ -29,6 +29,8 @@ import { factsOf } from '../../../src/domain/facts/factsOf.js';
 import { atomsOf, declarationAdmits, declarationOf, parseAtom } from '../../../src/domain/facts/factVocabulary.js';
 import { withPresumptionLedger } from '../../../src/domain/facts/presumptionLedger.js';
 import { clearActiveRng, getActiveRng, setActiveRng } from '../../../src/kernel/rngContext.js';
+import { pickVariantMixed } from '../../../src/kernel/proseHash.js';
+import { pickQuarrel } from '../../../src/generators/power/quarrelPick.js';
 
 /** @type {Readonly<Record<string, ReadonlyArray<{ id: string, text: string | null, needs: ReadonlyArray<string> }>>>} */
 const POOLS = /** @type {any} */ (SIBLINGS).QUARREL_POOLS ?? {};
@@ -114,6 +116,29 @@ describe('BUILD-CONFLICT · the recent conflict picks its everyday quarrel by ke
     }
     expect(getActiveRng()).toBe(null);
     expect(seen.size, 'the seed moves the quarrel (more than the three rung lines print)').toBeGreaterThan(3);
+  });
+
+  // THE MERGE READ OF da16f2f4b (the coordinator's defect): the no-grazing twin (`noGrazingQuarrelOf`, computed for EVERY
+  // place) stood in for index 0 of EVERY pool, so a town whose levies pick landed on l1 printed the water dispute.
+  it('(h) the no-grazing twin stands in for GRAZING\'s index 0 only: a LEVIES or MILITARY_COURT pick of index 0 prints its own line', () => {
+    const noGrazing = /** @type {any} */ (SIBLINGS).noGrazingQuarrelOf({ institutionNames: [], grounds: [] });
+    expect(typeof noGrazing, 'a place with no grazing carries the twin').toBe('string');
+    const rosters = /** @type {Record<string, string[]>} */ ({
+      LEVIES: ['Town hall', 'Market square', 'Granary', 'Mill', 'Tavern', 'Town walls', 'Town watch', 'Blacksmith'],
+      MILITARY_COURT: ['Town hall', 'Courthouse', 'Town watch', 'Garrison', 'Town walls', 'Town gate'],
+    });
+    for (const [name, names] of Object.entries(rosters)) {
+      const facts = factsOf({ institutions: names.map((n) => ({ name: n })), tier: 'town' });
+      const admitted = POOLS[name].filter((l) => declarationAdmits(declarationOf(l), /** @type {any} */ (facts)).admitted);
+      expect(admitted[0], `${name}: index 0 is admitted`).toBe(POOLS[name][0]);
+      expect(admitted.length, `${name}: the planted place admits more than index 0`).toBeGreaterThan(1);
+      // a seed whose mixed pick lands on index 0, found by computing the pick itself
+      const seed = Array.from({ length: 200 }, (_, i) => `hxd-plant-${i}`).find((s) => pickVariantMixed(admitted, `${s}::governanceNarrative:${name}`) === POOLS[name][0]);
+      expect(seed, `${name}: a seed that picks index 0`).toBeTruthy();
+      const { result, rolls } = underCountingStream(/** @type {string} */ (seed), () => pickQuarrel(POOLS[name][0].text, { facts: () => facts, noGrazing }));
+      expect(rolls).toBe(0);
+      expect(result, `${name} under ${seed}: index 0's own line, never the no-grazing twin`).toBe(POOLS[name][0].text);
+    }
   });
 
   it('(c) no active seed: the rung\'s own line prints, and nothing is picked or noted', () => {
