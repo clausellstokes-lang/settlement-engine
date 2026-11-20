@@ -71,7 +71,7 @@ const EXISTING_REL = 'tests/lint/samenessHideable.existingReds.json';
 const HOUSES_REL = 'tests/lint/samenessHideable.houseReadings.json';
 const HAND_REL = 'tests/lint/samenessHideable.handPools.json';
 /** Shrink-only: today's counts on the base. Lower them as rows go; never raise them. */
-const EXISTING_CEILING = 252; // 96 + 156 (SAME-2 brief H3: 151 + the granary reeve by its declared key (unit 1) + 4 existing lines the new forms hit (unit 2: a bribe by the hand form, a fence and the slave market's two "trafficked" by the derived forms); 147 by key, 6 by word, 3 by house, 0 by atom)
+const EXISTING_CEILING = 251; // 96 + 155 (SAME-2 brief H4, the chair's 20:31: the garden fence, "moving a fence", released, fence reds only as a person; 147 by key (1 declared), 6 by word, 2 by house, 0 by atom. H3 stood at 252: 151 + the granary reeve by its declared key + a bribe, that fence and the slave market's two "trafficked")
 const HAND_CEILING = 44; // 42 + 2 (SAME-2's unit 0, the join's point 84: GOALS' two key lists, read by `.includes`, on the hand list as TIER_ORDER is)
 const COVERT = 'dm-only';
 
@@ -331,8 +331,36 @@ export function derivedCrimeForms(catalog, hideable = isHideableHouse) {
   }
   return [...words, ...wholes].map(([label, { source, houses: hs }]) => ({ label, form: new RegExp(source, 'i'), houses: hs }));
 }
-/** The catalogue's derived forms, with the hand stems beside them. */
-const DERIVED_FORMS = Object.freeze([...derivedCrimeForms(institutionalCatalog),
+/**
+ * THE HOMONYMS OF THE COUNTRYSIDE (the chair's ruling of 20:31 UTC 2026-11-20; SAME-2 brief H4): a derived word that is
+ * also a plain noun or verb of the countryside (a field, a beast, a tool, a building, a farm act) counts only in its
+ * person or crime sense. A declared override: the derivation stays a function of the catalogue; each entry names the
+ * label the derivation gives, the sense kept (its new label) and the form that replaces the derived one. Every other use
+ * of the word goes to THE WATCH (`watch`, joined to `WATCH_WORDS`): listed when new, never red. Measured on this line,
+ * the derived words and whole names that are such homonyms are two: fence (a field's fence; to fence a field) and
+ * rookery (the rooks' nesting trees). The rest name no thing of the countryside (smuggl-, "thieves guild",
+ * "black market", and whole names such as "outlaw shelter", read only as the pair).
+ * @type {Readonly<Record<string, { ruling: string, kept: string, form: RegExp, watch: RegExp }>>}
+ */
+export const HOMONYM_SENSES = Object.freeze({
+  'fence-': {
+    ruling: '20:31',
+    kept: 'a person', // "a fence who / that buys or sells", "fenced goods", "the fence's"
+    form: /\bfences?\s+(?:(?:who|that)\s+(?:buys?|sells?|bought|sold)|buys?|sells?)\b|\bfenc(?:ed|es|ing)\s+(?:stolen\s+)?goods\b|\bthe fence's\b/i,
+    watch: /\bfenc(?:e|es|ed|ing)\b/i,
+  },
+  rookery: {
+    ruling: '20:31',
+    kept: 'the crime house', // the loft of message birds kept by people who file no returns: a rookery that carries word, word from the rookery
+    form: /\brooker(?:y|ies)\s+(?:(?:that|which|who)\s+)?(?:sells?|buys?|carr(?:y|ies)|trades?)\b|\b(?:word|news|messages?|letters?)\s+(?:from|through|by|via)\s+(?:the|a)\s+rookery\b/i,
+    watch: /\brooker(?:y|ies)\b/i,
+  },
+});
+/** The derived forms with the homonyms' sense forms in place of theirs. @param {DerivedForm[]} derived @param {typeof HOMONYM_SENSES} [senses] */
+export const withSenses = (derived, senses = HOMONYM_SENSES) => derived.map((d) => (Object.hasOwn(senses, d.label)
+  ? { ...d, label: `${d.label.replace(/-$/, '')} (${senses[d.label].kept})`, form: senses[d.label].form } : d));
+/** The catalogue's derived forms (the homonyms by their sense), with the hand stems beside them. */
+const DERIVED_FORMS = Object.freeze([...withSenses(derivedCrimeForms(institutionalCatalog)),
   ...Object.entries(HAND_HOUSE_STEMS).map(([stem, house]) => ({ label: `${stem}- (hand)`, form: new RegExp(String.raw`\b${stem}\w*`, 'i'), houses: [house] }))]);
 
 /**
@@ -510,12 +538,14 @@ export const handHouseReadings = (hand) => sortRows(readHandLines(hand, {}).flat
 
 /**
  * THE WATCH (SAME-2 brief H2 unit 5, the chair's 19:29): a NEW hand line that holds a bare crime word (crime,
- * criminal, thief, thieves, gang, smuggl, bribe, or a fence as a person: "a fence", "the fence", "fences stolen") OUTSIDE
+ * criminal, thief, thieves, gang, smuggl, bribe, or a homonym's word outside its kept sense: any fence, any rookery,
+ * the chair's 20:31, `HOMONYM_SENSES`) OUTSIDE
  * BOTH FORM SETS (the hand forms and the catalogue's derived forms: SAME-2 brief H3 unit 3) is LISTED as "watch" (a warn block on stderr, one line each) for a human to read at every landing; NEVER red. A line is
  * new when its text hash is neither in the bank nor in `watchBase`, the lines on BASE (43ab0f5eb, the walker's base: a
  * line is new when it is not on that commit) that hold such a word.
  */
-const WATCH_WORDS = /\b(?:crimes?|criminals?|thief|thieves|gangs?|smuggl\w*|brib\w*)\b|\b(?:a|the) fence\b|\bfences stolen\b/i;
+const WATCH_WORDS = new RegExp([String.raw`\b(?:crimes?|criminals?|thief|thieves|gangs?|smuggl\w*|brib\w*)\b`,
+  ...Object.values(HOMONYM_SENSES).map((h) => h.watch.source)].join('|'), 'i');
 const ANY_FORM = new RegExp([...Object.values(CRIME_TEXT_FORMS), ...DERIVED_FORMS.map((d) => d.form)].map((f) => `(?:${f.source})`).join('|'), 'gi');
 /** The bare crime word a text holds outside the free-text forms, or null. @param {string} text */
 export const watchWord = (text) => text.replace(ANY_FORM, ' ').match(WATCH_WORDS)?.[0]?.toLowerCase() ?? null;
@@ -842,15 +872,37 @@ describe(`the hideable-house walker of the sameness pools (base ${BASE})`, async
       const listed = watchRows(readHandLines(thief), new Set());
       expect(listed.map((w) => [w.pool, w.word])).toEqual([[`${ref}::famine`, 'thief']]);
       expect(watchRows(readHandLines(thief), new Set([listed[0].sha]))).toEqual([]);
-      // H2's plant, "A fence buys what the carters lose.", now REDS by the catalogue's fences (the chair, 19:58), unlisted
+      // H2's plant, "A fence buys what the carters lose.", REDS by the catalogue's fences in the person sense (the chair, 19:58, 20:31), unlisted
       const fence = [{ ref, value: { famine: ['A fence buys what the carters lose.'] } }];
-      expect(handReds(fence).map((r) => r.why)).toEqual(['crime house fence-']);
+      expect(handReds(fence).map((r) => r.why)).toEqual(['crime house fence (a person)']);
       expect(watchWord('A fence buys what the carters lose.')).toBeNull();
       expect(watchWord('A smuggler sells grain by the well.')).toBeNull();
       expect(watchWord('They overheard two people settle a bribe.')).toBeNull();
       expect(watchWord('A chapter of organised crime.')).toBeNull();
       expect(watchWord('Separate courts for trade, for crime, and for the church.')).toBe('crime');
       expect(watchWord('A stone quarry, its blocks dressed by a gang of quarrymen.')).toBe('gang');
+    });
+
+    test('THE HOMONYMS (the chair, 20:31): fence and rookery red only in their person or crime sense; every other use is watched when new, never red', () => {
+      const ref = 'src/data/narrativeData.js :: STRESS_NOTES';
+      /** @type {Array<[string, string, string, string]>} the word, its kept sense (reds), that red's why, its countryside use (watched) */
+      const pairs = [
+        ['fence', 'A fence buys what the carters lose.', 'crime house fence (a person)', 'They are moving a fence on the common.'],
+        ['rookery', 'Word from the rookery reaches the steward before the watch.', 'crime house rookery (the crime house)', 'The rooks are loud in the rookery above the barley.'],
+      ];
+      for (const [word, kept, why, plain] of pairs) {
+        expect(handReds([{ ref, value: { famine: [kept] } }]).map((r) => r.why), kept).toEqual([why]);
+        expect(watchWord(kept), kept).toBeNull();
+        const lines = readHandLines([{ ref, value: { famine: [plain] } }]);
+        expect(handReds([{ ref, value: { famine: [plain] } }]), plain).toEqual([]);
+        const listed = watchRows(lines, new Set());
+        expect(listed.map((w) => w.word), plain).toEqual([word]);
+        expect(watchRows(lines, new Set([listed[0].sha])), plain).toEqual([]); // seen (on the base, or banked): not listed
+      }
+      // the override names labels the derivation gives (it stays a function of the catalogue), each with its ruling
+      expect(Object.keys(HOMONYM_SENSES).filter((l) => !derivedCrimeForms(institutionalCatalog).some((d) => d.label === l))).toEqual([]);
+      for (const [l, h] of Object.entries(HOMONYM_SENSES)) expect(h.ruling, l).toBe('20:31');
+      expect(handReds([{ ref, value: { famine: ['They fenced goods off the carts.', 'An overnight stop inside a fenced yard.'] } }]).map((r) => r.why)).toEqual(['crime house fence (a person)']);
     });
 
     test('THE DERIVED FORMS (the chair, 19:58): "the smugglers\' landing" reds by the catalogue\'s smuggling houses', () => {

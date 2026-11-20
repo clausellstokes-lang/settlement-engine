@@ -218,3 +218,25 @@ Builder H2, on the same branch. Each unit was red first (a plant, then restored)
   3 by house and 0 by atom.
 - **The watch on the tree:** 0 lines.
 - **Daily Life's owner-only smuggler lines** wait for DAILY's arm (not now).
+
+## PHASE 3d (SAME-2 brief H4; the chair's ruling of 20:31)
+
+Builder H4, branch `lane/same-2-hideable-d-2026-11-20`. Commit ca9fb1b34. It was red first: the four plant lines were
+added, and "moving a fence on the common" and "the rooks … in the rookery" both red. Then it went green on the three
+receipts (29 + 10 + 15 tests). Bare eslint is clean.
+
+- **The override.** `HOMONYM_SENSES` names a label the derivation gives, its ruling (20:31), the sense kept and the
+  form that replaces the derived one. The derivation itself is unchanged and still a function of the catalogue. A test
+  checks that every override names a label the derivation gives.
+- **The homonyms:** fence: a person ("a fence who / that buys or sells", "fenced goods", "fences stolen goods", "the
+  fence's"); rookery: the crime house ("a rookery that sells / carries …", "word from the rookery"). No other derived
+  word or whole name is a plain word of the countryside.
+- **The watch** takes every other fence (fence, fences, fenced, fencing) and every rookery. Each plant pair holds: the
+  kept sense reds, and the plain use does not red and is listed when new.
+- **Released: 1.** "A neighbour has accused them of moving a fence" (NPC_FACTION_LOYALTY other), a garden fence. Its
+  line stays in `watchBase`. The Whisper market's two lines ("among the fences") stay banked by their crime pool
+  alone. No other row changed.
+- **The bank:** 96 rows + 155 hand rows = 251 = `EXISTING_CEILING`. The hand rows split 147 by key (1 declared), 6 by
+  word, 2 by house and 0 by atom.
+- **`watchBase` gains 1:** the base's "fenced yard" line (DESC_VARIANT_SIBLINGS). It is on 43ab0f5eb, so it is not new.
+- **The watch on the tree:** 0 lines.
