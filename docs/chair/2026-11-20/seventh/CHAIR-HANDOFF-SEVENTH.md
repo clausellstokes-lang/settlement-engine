@@ -2054,3 +2054,27 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   pool; a refused line to its twin, else the admitted argmax, else nothing; an atom with no reader listed, its line
   kept out); the pools crisis-scoped where their words can clash with a present crisis, a twin saying only what is
   kept, never what became of the rite this year; twelve samples from towns in crisis for the owner.
+- 06:54 UTC · **THE TITLES TABLE HANDED BACK AND ACCEPTED; A SOURCED SECOND PASS ORDERED; A RULING OF THE VEIL'S LANE OWNER LEFT TO STAND.**
+  **(1) TITLES-1: "TITLES 0fb18a574"** (`lane/titles-2026-11-20`; `src/data/cultureOfficeTitles.js`, new; hand-back with
+  the whole table as plain text): 13 families, all 58 government names mapped; 174 CULTURE CELLS AUTHORED, 552 OF 726
+  LEFT TO THE FALLBACK (66 of them the faith's row: no culture holds a word there), 24 base cells; the criminal side by
+  size only. Every culture has its ruler's ladder (germanic Graf, König, Kaiser; celtic Chieftain, King, High King;
+  slavic Knyaz, Grand Knyaz, Tsar; east_asian Daimyo; mesoamerican Tlatoani, Huey Tlatoani; south_asian Raja, Maharaja,
+  Samrat; steppe Khan, Khagan; greek Basileus; latin, arabic and norse as sampled). The interface agreed with SEAT-1
+  (`officeTitleOf`, `officeTitleIn`, `officeFamilyOfForm`, `officeWordInfo`, `crimeBossesHeading`). RED FIRST: its three
+  plants each seen red (a crown word in a council cell; a fallback that is not today's title; a sacred word in a
+  criminal cell); 17 of 17; `tests/lint` whole 219 of 219 at its tip; the census re-measured by its door (3702 to 3703).
+  **ACCEPTED; THE CHAIR LANDS IT with the names work** (new files only, called by nobody until SEAT's wiring unit).
+  THE WEAK SPOT, SAID TO THE OWNER PLAINLY WITH THE EIGHT CULTURES' LADDERS: about a quarter of the cells hold a
+  culture's word, and the gaps sit in the commonest seats (councils, elders, merchant bodies): a steppe city council's
+  first is still "Lord Mayor". **TITLES-2 ORDERED** (`prompts/TITLES-2.txt`; the middle tier at high effort;
+  `lane/titles-2-2026-11-20` from 0fb18a574): it fills the commonest fallback cells in a stated order of worth, EVERY
+  WORD WITH A SOURCE (by search; no text of this project in a search; a word from memory alone stays on the fallback),
+  the interface unchanged, the criminal side and the faith's seat not its own; its first twelve words with sources
+  come to the chair before the bulk.
+  **(2) VEIL-22:** VS1 at zero reds (b5cb22caf); R6 re-cut (060be8f46), its inversion green and its known tier-1 list
+  empty, waiting on R3 (a cast stake still names a served criminal power: `power.entry` cures it). **ITS RULING, NOT
+  VETOED, RECORDED AS VR45:** jsonb orders an object's keys by a rule over the key set alone, so key order carries no
+  document data: the twin-against-server and control comparisons compare objects without regard to key order; array
+  order stays exact (VR21); the arm proves by plants that a reordered array, a changed value AND an added or missing
+  key are each still caught.
