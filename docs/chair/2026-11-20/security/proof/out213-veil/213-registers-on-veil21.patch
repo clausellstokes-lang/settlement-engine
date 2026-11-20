@@ -1,0 +1,241 @@
+From 42766d6f0a89bddd815404faada890be6ebf0112 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Fri, 20 Nov 2026 03:19:20 +0000
+Subject: [PATCH] registers(213): the rehearsal wave, the migration head and
+ the doc counts for 213, written against the share veil's 211 and 212
+
+213's rows in every register a new migration owes, on top of 211's and 212's (veil lane at
+lane/veil-21-2026-11-20 d5323b8b8): scripts/ops/migrationRehearsalCore.mjs (repo head 213; the
+wave 'function-grants-default-deny', documented-manual-reversal by its own @rollback),
+tests/ops/migrationRehearsal.test.js (head 213, 92 pending from 121, the wave rows, the
+boundaries string, the snapshot counts, an assertion block for the wave), ARCHITECTURE.md
+(migrations 213), docs/CURRENT_STATE.md (contiguous to 213; 10 ahead of production's 203),
+docs/DEPLOY.md (head file 213 and its paragraph).
+
+Proven on the local composition (veil-21's tip + 213's commit + this one): tests/docs,
+tests/ops, migrationSequenceAll, migrationOrdering, the walker and the manifest test, 300 of
+300; check-migration-head: 213 files, contiguous.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_019yED1RVtJUCyQ9a24ZdmFx
+---
+ ARCHITECTURE.md                        |  2 +-
+ docs/CURRENT_STATE.md                  |  4 +--
+ docs/DEPLOY.md                         | 10 +++++++-
+ scripts/ops/migrationRehearsalCore.mjs | 35 +++++++++++++++++++++++++-
+ tests/ops/migrationRehearsal.test.js   | 28 +++++++++++++++------
+ 5 files changed, 66 insertions(+), 13 deletions(-)
+
+diff --git a/ARCHITECTURE.md b/ARCHITECTURE.md
+index 0da809e78..3cd519818 100644
+--- a/ARCHITECTURE.md
++++ b/ARCHITECTURE.md
+@@ -266,7 +266,7 @@ shows all visible items.
+ 
+ ## Backend (`supabase/`)
+ 
+-- **migrations/** (212) — prod applied head tracked in `supabase/applied-head.json`,
++- **migrations/** (213) — prod applied head tracked in `supabase/applied-head.json`,
+   ledger-checked by `npm run validate:migration-head`. Schema + RLS policies + credit ledger + gallery +
+   version history + save-limit + profile-security + auth/credit trust-boundary
+   repair (017) + account/billing models (018) + the community gallery —
+diff --git a/docs/CURRENT_STATE.md b/docs/CURRENT_STATE.md
+index 42ce8d3e1..790969c96 100644
+--- a/docs/CURRENT_STATE.md
++++ b/docs/CURRENT_STATE.md
+@@ -2,7 +2,7 @@
+ 
+ > **BANKED 2026-07-26 (THE BANKING FOLD).** Everything this document describes as
+ > "uncommitted integration" is now committed on claude/composite-r4 as 12 lane
+-> commits (b503fe05..7a6603de) plus follow-ups; migrations are contiguous to 212 at
++> commits (b503fe05..7a6603de) plus follow-ups; migrations are contiguous to 213 at
+ > HEAD. Governance home: the ledger branch (review-fixes-2026-07-08) — owner
+ > decisions live in ONE surface, `docs/OWNER_DECISION_QUEUE.md` there; the
+ > 2026-07-26 ledger rows carry the pivot ratification, the golden-regen
+@@ -76,7 +76,7 @@ evidence must be checked independently.
+ 
+ ## Current release blockers
+ 
+-1. **Migration train.** Working-tree migration head 212 is 9 migrations ahead
++1. **Migration train.** Working-tree migration head 213 is 10 migrations ahead
+    of the live-verified production head 203 (`supabase/applied-head.json`; the
+    owner applied 122–200 to production on 2026-09-16 and 201–203 on 2026-09-20:
+    201 — the staff unlock of ODQ §934.28 — 202 — design §12.4's gallery-scanner
+diff --git a/docs/DEPLOY.md b/docs/DEPLOY.md
+index 5d99fbb18..d8aef36d2 100644
+--- a/docs/DEPLOY.md
++++ b/docs/DEPLOY.md
+@@ -274,7 +274,7 @@ remembered number.** Migration numbers grow every release, so this guide
+ deliberately does NOT pin a "latest" number that would rot and cause an operator
+ to under-apply.
+ 
+-**Current migration head: `212_share_veil_later_cures.sql`** (this
++**Current migration head: `213_function_grants_default_deny.sql`** (this
+ filename is kept current by a freshness pin — `tests/docs/deployRunbookFreshness.test.js`
+ derives the head from `supabase/migrations/` and fails the gate if this line drifts).
+ <!-- @enforced-by tests/docs/deployRunbookFreshness.test.js -->
+@@ -302,6 +302,14 @@ description in the defence lists, a hidden house's name in the economy's chains)
+ custom-content library on a Reveal-DM share, and a person switched off in a power roster's copy. It
+ restates five functions and adds ten helpers; no table, column or row. Undo it before 211.
+ 
++`213_function_grants_default_deny.sql` (SEC-GRANTS-2, finding V10-8) closes by name what Supabase's
++default privileges left open to the visitor roles: the emergency script's 157 server-only functions
++(a no-op where the owner already ran `docs/chair/2026-11-20/security/EMERGENCY_REVOKE.sql`), the three
++admin doors and the ticket thread to anon, and 21 helpers no visitor context runs; and it makes five
++guards NULL-safe (set_curated, set_featured, set_featured_map, list_ticket_thread, get_credit_balance).
++No table, column, row or policy. Apply it after 212; read its preamble and run its one-row check
++(the chair's deploy document) after it. It is never reversed as a blanket down: see its `@rollback`.
++
+ **Read these preambles before the push, whatever the head number says.** Most
+ migrations are additive and need no separate reading; these are the pending ones whose
+ posture an operator has to know, and they stay listed here after they are applied
+diff --git a/scripts/ops/migrationRehearsalCore.mjs b/scripts/ops/migrationRehearsalCore.mjs
+index 18d026aac..c8d78c135 100644
+--- a/scripts/ops/migrationRehearsalCore.mjs
++++ b/scripts/ops/migrationRehearsalCore.mjs
+@@ -16,7 +16,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
+ import { basename, join } from 'node:path';
+ 
+ export const MIGRATION_TRAIN_BASE_HEAD = 121;
+-export const MIGRATION_TRAIN_REPO_HEAD = 212;
++export const MIGRATION_TRAIN_REPO_HEAD = 213;
+ 
+ const FORWARD_ONLY_REASON = [
+   'No automatic schema rollback is admitted for this wave.',
+@@ -907,6 +907,39 @@ export const MIGRATION_WAVES = Object.freeze([
+       Object.freeze({ kind: 'function', name: 'import_gallery_dossier' }),
+     ]),
+   }),
++  // 213 lands with its own lane's entry (SEC-GRANTS-2), written against 211's and 212's.
++  Object.freeze({
++    id: 'function-grants-default-deny',
++    from: 213,
++    to: 213,
++    purpose: '213 — FUNCTION GRANTS, DEFAULT DENY (finding V10-8, CRITICAL; lane SEC-GRANTS-2). Supabase\'s default '
++      + 'privileges grant EXECUTE on every new function of schema public to anon, authenticated and service_role, so a '
++      + 'migration that writes only `revoke … from public` left 157 server-only SECURITY DEFINER functions callable by '
++      + 'any visitor. 213 closes by name the emergency script\'s 157 (from public, anon, authenticated; service_role '
++      + 'granted: a no-op where the owner already ran docs/chair/2026-11-20/security/EMERGENCY_REVOKE.sql), the three '
++      + 'admin doors and list_ticket_thread to anon, and 21 invoker helpers no visitor context runs; and it re-states '
++      + 'five bodies with ONE guard line each made NULL-safe (set_curated, set_featured, set_featured_map, '
++      + 'list_ticket_thread, get_credit_balance). account_is_active is left as it stands (ruling VR38). No table, '
++      + 'column, constraint, policy or row. Its statements depend on no object 211 or 212 creates. DEPLOYMENT remains '
++      + 'the owner\'s manual act after 212 (`supabase db push` plus the applied-head bump in that same act), with the '
++      + 'one-row read-only check of the deploy document after it.',
++    rollback: Object.freeze({
++      mode: 'forward-only',
++      reason: [
++        FORWARD_ONLY_REASON,
++        'Its own @rollback annotation spells the reversal out: re-run the five bodies as they stood at 210 verbatim and '
++        + 're-grant the 21 invoker helpers — which is why 213 classifies as documented-manual-reversal rather than '
++        + 'taking the wave policy. The 157, the three admin doors\' and the ticket thread\'s revokes are NEVER reversed '
++        + 'as a blanket down: that re-opens V10-8 (a user\'s decrypted provider key, the BYOK master secret, the '
++        + 'actor-trusting admin functions). Nothing is destroyed on reversal: 213 creates no object and touches no row.',
++      ].join(' '),
++    }),
++    expectedObjects: Object.freeze([
++      Object.freeze({ kind: 'function', name: 'set_curated' }),
++      Object.freeze({ kind: 'function', name: 'list_ticket_thread' }),
++      Object.freeze({ kind: 'function', name: 'get_credit_balance' }),
++    ]),
++  }),
+ ]);
+ 
+ const MIGRATION_FILE = /^(\d+)_.*\.sql$/;
+diff --git a/tests/ops/migrationRehearsal.test.js b/tests/ops/migrationRehearsal.test.js
+index e5917e522..4d1154f1f 100644
+--- a/tests/ops/migrationRehearsal.test.js
++++ b/tests/ops/migrationRehearsal.test.js
+@@ -107,8 +107,8 @@ describe('bounded migration rehearsal plan', () => {
+     expect(plan.appliedHead).toBe(121);
+     // TIER-PARITY-FIX (2026-11-09): written for the MERGED chain — 207 (the allegiance cars) and
+     // 208 (the party link) land with their lanes; this lane adds 209 (the Surveyor premium only).
+-    expect(plan.repoHead).toBe(212); // STYLE-2-MERGE: 208 at SW-B7a's point, 209 at TIER-PARITY-FIX's, 210 at SW-B7b's; 211 at COHERENCE-VEIL's; 212 at COHERENCE-VEIL-7's (211 frozen)
+-    expect(plan.pendingCount).toBe(91);
++    expect(plan.repoHead).toBe(213); // STYLE-2-MERGE: 208 at SW-B7a's point, 209 at TIER-PARITY-FIX's, 210 at SW-B7b's; 211 at COHERENCE-VEIL's; 212 at COHERENCE-VEIL-7's (211 frozen); 213 at SEC-GRANTS-2's
++    expect(plan.pendingCount).toBe(92);
+     expect(plan.waves.map(({ from, to }) => [from, to])).toEqual([
+       [122, 136],
+       [137, 156],
+@@ -141,13 +141,14 @@ describe('bounded migration rehearsal plan', () => {
+       [210, 210],
+       [211, 211],
+       [212, 212],
++      [213, 213],
+     ]);
+     expect(MIGRATION_WAVES.at(-1).to).toBe(MIGRATION_TRAIN_REPO_HEAD);
+ 
+     const covered = plan.waves.flatMap((wave) =>
+       wave.migrations.map((migration) => migration.number));
+     expect(covered).toEqual(
+-      Array.from({ length: 91 }, (_, index) => 122 + index),
++      Array.from({ length: 92 }, (_, index) => 122 + index),
+     );
+     expect(new Set(covered).size).toBe(covered.length);
+ 
+@@ -492,6 +493,16 @@ describe('bounded migration rehearsal plan', () => {
+     const publicProseWave = plan.waves.flatMap((wave) => wave.migrations).find((migration) => migration.number === 210);
+     expect(publicProseWave.rollback).toMatchObject({ mode: 'documented-manual-reversal', source: 'migration-annotation' });
+     expect(publicProseWave.rollback.note).toMatch(/re-apply 207's body verbatim.*falls silent where the composed blocks stood/i);
++    // ⭐ THE GRANTS WAVE (213, SEC-GRANTS-2, finding V10-8): grants and five re-stated guards; no table, no column, no
++    // policy, no row. Its own @rollback annotation spells the reversal AND what is never reversed (the 157's revokes).
++    expect(plan.waves.find((wave) => wave.id === 'function-grants-default-deny')).toMatchObject({
++      id: 'function-grants-default-deny',
++      from: 213,
++      to: 213,
++    });
++    const grantsWave = plan.waves.flatMap((wave) => wave.migrations).find((migration) => migration.number === 213);
++    expect(grantsWave.rollback).toMatchObject({ mode: 'documented-manual-reversal', source: 'migration-annotation' });
++    expect(grantsWave.rollback.note).toMatch(/re-run the five §1 bodies as they stood at 210.*NOT to be reversed, deliberately/is);
+     // …and 199, like 197, takes its posture from its OWN annotation rather than the wave
+     // policy — but for the opposite reason: 197's data half is deliberately unscripted,
+     // while 199's whole reversal IS one scripted statement. Both are
+@@ -633,7 +644,7 @@ describe('bounded migration rehearsal plan', () => {
+       rollbackDirectory: ROLLBACK,
+       appliedHead: 200,
+     });
+-    expect(fromWave200).toMatchObject({ appliedHead: 200, repoHead: 212, pendingCount: 12 });
++    expect(fromWave200).toMatchObject({ appliedHead: 200, repoHead: 213, pendingCount: 13 });
+     expect(fromWave200.waves.map(({ id, from, to }) => [id, from, to])).toEqual([
+       ['staff-unlock-surveyor-entitlement', 201, 201],
+       ['edit-registry-public-denylist', 202, 202],
+@@ -647,6 +658,7 @@ describe('bounded migration rehearsal plan', () => {
+       ['public-prose-text-projection', 210, 210],
+       ['server-side-share-veil', 211, 211],
+       ['share-veil-later-cures', 212, 212],
++      ['function-grants-default-deny', 213, 213],
+     ]);
+     // ⭐⭐ THE LEDGER'S OWN HEAD IS ASSERTED RELATIONALLY AND MUST NEVER BE A LITERAL AGAIN.
+     // `supabase/applied-head.json` is bumped in the same act as the owner's `supabase db
+@@ -696,7 +708,7 @@ describe('bounded migration rehearsal plan', () => {
+       migrationDirectory: MIGRATIONS,
+       rollbackDirectory: ROLLBACK,
+       appliedHead: 150,
+-    })).toThrow(/wave boundaries are 121, 136, 156, .*200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, but the ledger says 150/);
++    })).toThrow(/wave boundaries are 121, 136, 156, .*200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, but the ledger says 150/);
+   });
+ 
+   it('stages no migration beyond the selected wave boundary', () => {
+@@ -706,8 +718,8 @@ describe('bounded migration rehearsal plan', () => {
+     const numbers = staged.copied.map((name) => Number(name.split('_')[0]));
+ 
+     expect(snapshot).toMatchObject({
+-      repoHead: 212,
+-      migrationCount: 212,
++      repoHead: 213,
++      migrationCount: 213,
+       configSha256: expect.stringMatching(/^[a-f0-9]{64}$/),
+       workspaceSourceSha256: expect.stringMatching(/^[a-f0-9]{64}$/),
+     });
+@@ -829,7 +841,7 @@ describe('clone admission is positive and source-bound', () => {
+     const liveAppliedHead = JSON.parse(readFileSync(join(ROOT, 'supabase', 'applied-head.json'), 'utf8')).appliedHead;
+     expect(JSON.parse(result.stdout)).toMatchObject({
+       appliedHead: liveAppliedHead,
+-      repoHead: 212,
++      repoHead: 213,
+     });
+   });
+ });
+-- 
+2.43.0
+

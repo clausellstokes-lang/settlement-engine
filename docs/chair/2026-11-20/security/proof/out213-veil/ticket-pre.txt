@@ -1,0 +1,4 @@
+anon list_ticket_thread -> rows=1 PRIVATE THREAD TEXT
+owner(2222) list_ticket_thread -> rows=1 PRIVATE THREAD TEXT
+other(1111) list_ticket_thread -> rows=0
+support agent(1111) list_ticket_thread -> rows=2 INTERNAL NOTE,PRIVATE THREAD TEXT
