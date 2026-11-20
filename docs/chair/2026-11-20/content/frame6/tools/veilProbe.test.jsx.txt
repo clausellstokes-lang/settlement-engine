@@ -1,0 +1,63 @@
+/** @vitest-environment jsdom */
+// FRAME-6 scratch probe (never committed): frameShareVeil.test.jsx's CF3 shared reads, verbatim, digests only, to VEIL_OUT.
+import { createHash } from 'node:crypto';
+import { appendFileSync } from 'node:fs';
+import { test, vi } from 'vitest';
+vi.mock('../../src/lib/supabase.js', () => ({
+  supabase: { from: vi.fn(), rpc: vi.fn(() => Promise.resolve({ data: [], error: null })) },
+  isConfigured: true,
+}));
+vi.mock('../../src/store/index.js', () => {
+  const data = {
+    auth: { tier: 'premium' }, isElevated: () => false, phase: 'draft', systemState: null, eventLog: [], campaigns: [], savedSettlements: [],
+    userPrefs: {}, setUserPref: (key, value) => { data.userPrefs = { ...data.userPrefs, [key]: value }; },
+  };
+  function useStore(selector) { return selector(data); }
+  useStore.getState = () => data;
+  useStore.subscribe = () => () => {};
+  return { useStore };
+});
+import { supabase } from '../../src/lib/supabase.js';
+import { fetchPublicDossier, fetchDossierForImport } from '../../src/lib/gallery.js';
+import { buildWorldExport } from '../../src/lib/worldExport.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+const BORN = [
+  ['frame-calm-hamlet-7', 'hamlet'], ['frame-calm-village-0', 'village'], ['frame-calm-village-76', 'village'],
+  ['frame-calm-town-1', 'town'], ['frame-calm-city-8', 'city'], ['frame-calm-metropolis-8', 'metropolis'],
+  ['frame-calm-metropolis-1', 'metropolis'], ['frame-calm-metropolis-5', 'metropolis'],
+];
+const digest = (v) => createHash('sha256').update(JSON.stringify(v)).digest('hex').slice(0, 16);
+const birth = (seed, tier) => generateSettlementPipeline({ settType: tier }, null, { seed, customContent: {} });
+const row = (s, extra = {}) => ({ id: `id-${s._seed}`, name: s.name, tier: s.tier, public_slug: 'a1b2c3d4e5f6', data: structuredClone(s), ...extra });
+
+/** Every shared read of one town, through the real client code (the server's RPC mocked to hand back the row). */
+async function sharedReadsOf(s) {
+  supabase.rpc
+    .mockResolvedValueOnce({ data: [row(s)], error: null })
+    .mockResolvedValueOnce({ data: null, error: null })
+    .mockResolvedValueOnce({ data: [{ net_votes: 0, voted: false }], error: null })
+    .mockResolvedValueOnce({ data: [], error: null })
+    .mockResolvedValueOnce({ data: [], error: null });
+  const gallery = await fetchPublicDossier('a1b2c3d4e5f6');
+  supabase.rpc
+    .mockResolvedValueOnce({ data: [row(s, { gallery_share_dm: true })], error: null })
+    .mockResolvedValueOnce({ data: null, error: null })
+    .mockResolvedValueOnce({ data: [{ net_votes: 0, voted: false }], error: null })
+    .mockResolvedValueOnce({ data: [], error: null })
+    .mockResolvedValueOnce({ data: [], error: null });
+  const galleryDmFull = await fetchPublicDossier('a1b2c3d4e5f6');
+  supabase.rpc
+    .mockResolvedValueOnce({ data: [], error: null })
+    .mockResolvedValueOnce({ data: { id: `id-${s._seed}`, name: s.name, tier: s.tier, slug: 'u1u2u3u4u5u6', dossier: structuredClone(s), author_name: 'A', is_owner: false }, error: null });
+  const partyLink = await fetchPublicDossier('u1u2u3u4u5u6');
+  supabase.rpc.mockResolvedValueOnce({ data: [row(s)], error: null });
+  const imported = await fetchDossierForImport('a1b2c3d4e5f6');
+  const worldPlayer = buildWorldExport({ name: 'Realm', settlements: [{ id: 'm1', name: s.name, settlement: structuredClone(s) }] }, { variant: 'player' });
+  return { gallery, galleryDmFull, partyLink, imported, worldPlayer };
+}
+test('probe', async () => {
+  for (const [seed, tier] of BORN) {
+    const reads = await sharedReadsOf(birth(seed, tier));
+    appendFileSync(process.env.VEIL_OUT, JSON.stringify([seed, Object.fromEntries(Object.entries(reads).map(([k, v]) => [k, digest(v)]))]) + '\n');
+  }
+}, 600000);
