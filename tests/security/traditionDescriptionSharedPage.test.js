@@ -816,7 +816,9 @@ describe('TRAD-4 UNIT 7 (1): the dead\'s event named by a hidden house\'s bare f
     for (const x of towns) {
       for (const p of x.plants) {
         const owner = deadRites(p.planted).map((r) => describeTradition(r, p.planted, { audience: 'owner' }).text).join(' ');
-        expect(owner, `${x.t.name} ${p.arm}`).toContain(`${p.eventName.replace(/^The /, 'the ')}, 2 years ago`);
+        // any of the three dead frames (the keyed pick; TRAD-4 unit 11's mixed pick reaches "… since then, 2 years ago")
+        const named = p.eventName.replace(/^The /, 'the ').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        expect(owner, `${x.t.name} ${p.arm}`).toMatch(new RegExp(`${named}(?: since then)?, 2 years ago`));
       }
     }
   }, 120000);

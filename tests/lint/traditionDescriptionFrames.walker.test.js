@@ -35,7 +35,9 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { institutionalCatalog, catalogIdForName } from '../../src/data/institutionalCatalog.js';
 import { isHideableHouse } from '../../src/domain/people/cardVeil.js';
 
-const CAUSE_WORDS = /\b(since|because|in memory of|founded|founding by|after|to mark|owing to|thanks to)\b/i;
+// "goes back" (TRAD-4 unit 11): the chair's third founding line asserts its cause by it ("It goes back {age} years, to the
+// founding of {town} by {foundedBy}."), with no other cause word; read as one, it is barred from every non-cause frame too.
+const CAUSE_WORDS = /\b(since|because|in memory of|founded|founding by|goes back|after|to mark|owing to|thanks to)\b/i;
 const DRAMA_WORDS = /\b(blood\w*|grim\w*|dread\w*|fear\w*|feud\w*|war\b|wars|curse\w*|doom\w*|troubl\w*|strife|terror\w*|haunt\w*|vengeance|bitter\w*|dark\w*|sinister|violen\w*|massacre\w*|slaughter\w*|tragic\w*|tragedy|sorrow\w*|grief|griev\w*|desperat\w*|ruin\w*|menac\w*|ominous|uneasy|tension\w*|secret\w*|rival\w*)\b/i;
 
 /** A line's text: a declared row's `text` (a bare string is itself, and is named undeclared by `undeclaredIn`). */
@@ -142,6 +144,38 @@ describe('traditionDescriptionFrames — the cause law (CTR2)', () => {
   it('RED FIRST: a cause word planted in a keeper frame is named', () => {
     const planted = [...templates(), { home: 'house.body.planted', text: 'It is kept by {house} because of {event}.', cause: false }];
     expect(causeViolations(planted)).toEqual(['house.body.planted']);
+  });
+});
+
+/**
+ * THE FOUNDER PHRASE ENDS THE SENTENCE (TRAD-4 unit 11; the chair, 18:16 UTC): a founder phrase may end on a verb ("a
+ * single extended family who came and never left"), so no age may follow it ("…never left, 120 years ago" reads as
+ * "never left 120 years ago"). The founding lines whose `{foundedBy}` is not their one last slot with only the full stop
+ * after it, by text.
+ * @param {ReadonlyArray<unknown>} lines
+ */
+const founderNotLast = (lines) => lines.map(textOf).filter((t) => (t.match(/\{foundedBy\}/g) || []).length !== 1 || !/\{foundedBy\}\.$/.test(t));
+
+describe('traditionDescriptionFrames — the founder phrase ends the founding sentence (TRAD-4 unit 11)', () => {
+  it('every founding line (CAUSE_FRAMES.founding) ends on {foundedBy}: its last slot, the full stop the only thing after it', () => {
+    expect(CAUSE_FRAMES.founding.length).toBe(3); // not vacuous: the three founding lines
+    expect(founderNotLast(CAUSE_FRAMES.founding)).toEqual([]);
+  });
+
+  it('the reader\'s founding (CAUSE_FRAMES.foundingBare, which never reads {foundedBy}) is untouched: its three lines, verbatim', () => {
+    expect(CAUSE_FRAMES.foundingBare.map(textOf)).toEqual([
+      'It has been kept since {town} was founded, {age} years ago.',
+      '{Town} has kept it since its founding, {age} years ago.',
+      'It goes back to the founding of {town}, {age} years ago, and has been kept since.',
+    ]);
+  });
+
+  it('RED FIRST: a founding line planted with the age after the founder phrase is named; one ending on it is not', () => {
+    expect(founderNotLast([
+      'It has been kept since {town} was founded by {foundedBy}, {age} years ago.',
+      'It goes back {age} years, to the founding of {town} by {foundedBy}.',
+      'It was founded by {foundedBy} and {foundedBy}.',
+    ])).toEqual(['It has been kept since {town} was founded by {foundedBy}, {age} years ago.', 'It was founded by {foundedBy} and {foundedBy}.']);
   });
 });
 

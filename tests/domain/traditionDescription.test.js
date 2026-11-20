@@ -18,6 +18,7 @@ import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { declarationAdmits, declarationOf } from '../../src/domain/facts/factVocabulary.js';
 import { ACT_LEADS, ELEMENT_GLOSS, CRISIS_SCOPED_ACTS, CRISIS_SCOPED_ELEMENTS } from '../../src/data/traditionDescriptionTable.js';
 import * as DESCRIPTION_TABLE from '../../src/data/traditionDescriptionTable.js';
+import { pickVariantMixed } from '../../src/kernel/proseHash.js';
 
 /** The keeper's "too" wordings (TRAD-4 unit 10, the chair's 17:55 ruling): read off the table's namespace, {} before it. */
 const KEEPER_FRAMES_TOO = /** @type {Record<string, Array<{ text: string }>>} */ (DESCRIPTION_TABLE.KEEPER_FRAMES_TOO || {});
@@ -86,7 +87,9 @@ function deepFreeze(v) {
 }
 
 const sentences = (text) => String(text).split(/(?<=\.)\s+/).filter(Boolean);
-const CAUSE_WORDS = /\b(since|because|in memory of|founded|founding by|after|to mark)\b/i;
+/** S1's lead: the first sentence up to its gloss (no lead holds a full stop or " that "). */
+const s1OfText = (text) => String(text).slice(0, String(text).indexOf('.')).split(' that ')[0];
+const CAUSE_WORDS = /\b(since|because|in memory of|founded|founding by|goes back|after|to mark)\b/i; // "goes back": TRAD-4 unit 11's third founding line
 
 describe('describeTradition — what is done (the short form), and nothing invented', () => {
   it('a rite whose element and act find no fitting fact says only what is done: one sentence', () => {
@@ -121,8 +124,29 @@ describe('describeTradition — what is done (the short form), and nothing inven
 describe('describeTradition — a cause only on the two marked pairings (CTR2)', () => {
   it('THE FOUNDING CORE carries the founding the record holds: its age and its founders, verbatim', () => {
     const d = describeTradition(rite(0, 'charter', 'feast'), town(), { audience: 'owner' });
-    expect(d.text).toMatch(/120 years ago/);
+    expect(d.text).toMatch(/120 years/); // not "120 years ago" (TRAD-4 unit 11): "It goes back 120 years, to the founding of …"
     expect(d.text).toContain('three or four families who agreed to try wintering together and never stopped');
+  });
+
+  it('THE FOUNDER PHRASE ENDS THE SENTENCE (TRAD-4 unit 11): a founder phrase ending on a verb never has the age hung on it ("…never left, 120 years ago"); the reader never reads the founder', () => {
+    const FOUNDER = 'a single extended family who came and never left';
+    const at = (i) => town({ _seed: `founder-${i}`, history: { ...town().history, founding: { age: 120, foundedBy: FOUNDER } } });
+    const hung = [];
+    const lines = new Set();
+    for (let i = 1; i <= 12; i += 1) {
+      const owner = describeTradition(rite(0, 'founding', 'feast'), at(i), { audience: 'owner' });
+      const s3 = sentences(owner.text).at(-1);
+      lines.add(s3);
+      expect(owner.parts.origin).toBe('cause');
+      expect(s3).toMatch(/120 years/);
+      if (!s3.endsWith(` by ${FOUNDER}.`) || /never left,? \d+ years ago/.test(owner.text)) hung.push(`founder-${i}: ${s3}`);
+      const reader = describeTradition(rite(0, 'founding', 'feast'), at(i), { audience: 'reader' });
+      expect(reader.parts.origin).toBe('cause');
+      // anchored: the owner's text of this same rite and town is asserted above to carry the founder; the reader's never does
+      expect(reader.text).not.toContain('never left');
+    }
+    expect(lines.size).toBe(3); // not vacuous: the twelve seeds reach all three founding lines
+    expect(hung).toEqual([]);
   });
 
   it('a founding-kind rite that is NOT the core carries no founding cause (the record holds no later charter)', () => {
@@ -602,6 +626,22 @@ describe('describeTradition — derived at render: pure, deterministic, writes n
     expect(byId.size).toBeGreaterThan(1);
   });
 
+  it('THE LEAF\'S PICK IS THE MIXED PICK (TRAD-4 unit 11 addendum; kernel/proseHash.js :: pickVariantMixed): a calm feast rite alone reads, over 24 town seeds, the lead pickVariantMixed takes on the leaf\'s key', () => {
+    const rec = rite(2, 'long-sun', 'feast');
+    const domain = ACT_LEADS.feast.filter((l) => !l.twinOf);
+    const off = [];
+    const leads = new Set();
+    for (let i = 0; i < 24; i += 1) {
+      const seed = `mixed-${i}`;
+      const lead = s1OfText(describeTradition(rec, town({ _seed: seed }), { audience: 'owner' }).text);
+      leads.add(lead);
+      const want = pickVariantMixed(domain, `${seed}::${rec.id}#done`).text;
+      if (lead !== want) off.push(`${seed}: read "${lead}", the mixed pick "${want}"`);
+    }
+    expect(leads.size).toBeGreaterThan(1); // not vacuous: the seeds reach more than one lead
+    expect(off).toEqual([]);
+  });
+
   it('total on garbage: no record, no town, an unknown motif', () => {
     expect(describeTradition(null, town(), { audience: 'owner' })).toBeNull();
     expect(describeTradition(rite(1, 'harvest', 'feast'), null, { audience: 'owner' })).toBeNull();
@@ -742,7 +782,9 @@ describe('ONE TOWN, NO SENTENCE TWICE (TRAD-4 unit 10; the chair, reading the ow
     expect(inSet.slice(0, 3).map((d) => d.parts.origin)).toEqual(['economy', 'economy', 'economy']);
     expect(new Set(inSet.slice(0, 3).map((d) => sentences(d.text).at(-1))).size).toBe(3);
     expect(inSet[3].parts.origin).toBeNull();
-    expect(twice(inSet.map((d) => d.text))).toEqual([]);
+    // the payer sentences (the slot this arm rotates): S1 is no rotated slot, and four rites of one motif may share a lead
+    // (TRAD-4 unit 11's mixed pick: these four keys take leads 1, 3, 0, 1; FNV's low bits had made them a permutation)
+    expect(twice(inSet.map((d) => (d.parts.origin === 'economy' ? sentences(d.text).at(-1) : '')))).toEqual([]);
   });
 
   it('A KEEPER SLOT THAT RUNS OUT (the chair, 17:55 UTC; Zhongmen\'s shape: one market, one power): the first three rites take the three frames, the fourth and fifth the two "too" wordings (KEEPER_FRAMES_TOO, the presider\'s clause dropped), and only the sixth leaves the keeper sentence out; the fourth payer is left out', () => {
