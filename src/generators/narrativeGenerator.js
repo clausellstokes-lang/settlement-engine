@@ -44,7 +44,7 @@ import { pickVariant } from '../kernel/proseHash.js';
 import { selectOriginBody, supportChannelsOf } from './narrative/settlementOriginProse.js'; import { FOUNDER_ADMITS, FOUNDING_REASON_ADMITS, NAMES_A_FOUNDER, admittedRow, foundingStateOf, founderForOrigin, oneFounderRow } from './narrative/foundingRowAdmits.js'; // R2-CODE-A-5: one line, so no cited line moves
 import { resolvePrimaryStress } from './stressPriority.js'; import { wartimeGoesWell } from './stressNarrative.js'; // BAR2-PLACES (PL6)
 import { migrationDirectionOfStress, migrationDirectionOfConfig } from '../domain/migrationDirection.js';
-import { pick, pickRandom, pickRandom2, random01 } from './helpers.js'; import { powerNameWithArticle } from '../domain/display/powerSentenceName.js'; // NAMES-1 (CN1, the seventh chair's ruling of 2026-11-20, vetoable by the owner): a coherence note names a power with its article; one line, so no cited line moves
+import { pick, pickRandom, pickRandom2, random01 } from './helpers.js'; import { powerNameWithArticle, withPowerVerb } from '../domain/display/powerSentenceName.js'; // NAMES-1 (CN1, the seventh chair's ruling of 2026-11-20, vetoable by the owner): a coherence note names a power with its article; one line, so no cited line moves
 import { resolveTerrain } from '../domain/resolveTerrain.js';
 import { deriveTradeCommodity } from './tradeCommodity.js'; import { defenseFactsOf } from '../domain/defense/defenseFacts.js'; // R2-CODE-A-7: the roster's courthouses (record 422), read from the defence home (R2-CODE-A-10)
 
@@ -858,7 +858,7 @@ export const generatePressureSentence = settlement => {
       const licensed = drawable.filter((t) => typeof textOf(t) !== 'string' || defenseWordsFindings(settlement, textOf(t)).length === 0), pool = licensed.length ? licensed : drawable, drawn = pickRandom2(pool), facts = factsOf(settlement), admitted = (/** @type {unknown} */ t) => declarationAdmits(declarationOf(t), /** @type {any} */ (facts)).admitted, at = pool.indexOf(drawn);
       const twinOfDrawn = twins.find((t) => /** @type {{twinOf: string}} */ (t).twinOf === textOf(drawn) && admitted(t));
       const template = textOf(admitted(drawn) ? drawn : ([...pool.slice(at + 1), ...pool.slice(0, at)].find(admitted) ?? twinOfDrawn ?? drawn)); // R2-CODE-A P1 (the chair's ruling (a)): a row's own `needs` are honoured after the one pick; a refused row resolves draw-free to the next admitted one
-      return typeof template === 'function' ? template(detail) : template;
+      const said = typeof template === 'function' ? template(detail) : template; return typeof said === 'string' ? withPowerVerb(said, detail.topFaction, 'controls', 'control') : said; // NAMES-2 (item 5): the leading power's verb takes its number ("the Merchant Guilds control one district"), after the draw
     }
   }
 
