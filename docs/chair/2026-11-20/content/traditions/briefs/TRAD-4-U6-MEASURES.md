@@ -1,8 +1,8 @@
 # TRAD-4 · UNIT 6 — THE MEASURES ON THE FINAL LEAF, AND THE OWNER'S SAMPLES (30 BY THE FAIR RULE, 12 FROM TOWNS IN CRISIS)
 
-Written 2026-11-20 13:5x UTC by TRAD-4 (DRAFT until unit 5 merges; the integrator stamps the base below at dispatch).
+Written 2026-11-20 13:5x UTC by TRAD-4; DISPATCHED at 34b71577f (units 7 and 5 merged).
 Read `TRAD-2-COMMON.md` first; it binds you (read "TRAD-2" there as "TRAD-4"). Base: `lane/trad-4-2026-11-20` at
-the commit TRAD-4 names when it dispatches you (unit 5 merged). THIS UNIT CHANGES NO SOURCE AND NO TEST.
+`34b71577f` (units 7 and 5 merged). Unit 8 is built beside you (tests/security only): path-disjoint. THIS UNIT CHANGES NO SOURCE AND NO TEST.
 
 ## Files you may change
 Under `docs/chair/2026-11-20/content/traditions/` only: `tools/measure2.mjs`, `tools/trad-pool.mjs`, `tools/samples.mjs`,
