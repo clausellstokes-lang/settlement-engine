@@ -448,6 +448,7 @@ describe('describeTradition — the kinds\' totality, fail-closed (TRAD-4 unit 5
       const reader = planted(rec, risen(), { audience: 'reader' });
       expect(reader.parts.origin).not.toBe('cause');
       expect(reader.named.events).toEqual([]);
+      // anchored: the owner's text above, from this same planted table and town, names the event and its years
       expect(reader.text).not.toMatch(/in memory of|undefined|null|Rising|Commons|years ago/);
       // and the reader's clause stands as soon as the kind has its phrase (the omission is the missing phrase's alone)
       const phrased = await leafOver((t) => ({
@@ -528,24 +529,29 @@ describe('describeTradition — THE CRISIS DIMENSION on born towns (TRAD-4 unit 
   const feastLeads = ACT_LEADS.feast.filter((l) => !l.twinOf).map((l) => l.text);
   const fairExcluded = ACT_LEADS.fair.filter((l) => (l.excludes || []).includes('crisis: threat')).map((l) => l.text);
 
-  it.each(CRISES)('born under %s: no excluded line is read, owner or reader (and the crisis is the record\'s own)', (crisis) => {
+  it('born under famine, under_siege, occupied, wartime and plague_onset: no excluded line is read, owner or reader (and the crisis is the record\'s own)', () => {
     const hits = [];
-    let scopedReads = 0;
-    for (const { settType, seed } of SEEDS) {
+    const unpinned = [];
+    /** @type {Record<string, number>} */
+    const scopedReads = {};
+    // seed-loop: collected — every crisis and seed runs; its misses go to `unpinned` and `hits`, each asserted whole after the loop
+    for (const crisis of CRISES) for (const { settType, seed } of SEEDS) {
+      scopedReads[crisis] ??= 0;
       const t = born(settType, seed, [crisis]);
-      expect(factsOf(t).crisis.has(crisis), `${seed} under ${crisis}`).toBe(true);
+      if (!factsOf(t).crisis.has(crisis)) unpinned.push(`${seed}: ${crisis} is not on the record`);
       const ex = excludedIn(t);
       // the vocabulary's families, pinned: hunger takes every feast lead (famine, siege); threat the two fair lines (siege, occupation)
-      if (crisis === 'famine' || crisis === 'under_siege') for (const l of feastLeads) expect(ex.lead.has(l), `${crisis}: ${l}`).toBe(true);
-      if (crisis === 'under_siege' || crisis === 'occupied') for (const l of fairExcluded) expect(ex.lead.has(l), `${crisis}: ${l}`).toBe(true);
+      if (crisis === 'famine' || crisis === 'under_siege') for (const l of feastLeads) if (!ex.lead.has(l)) unpinned.push(`${seed}: ${l}`);
+      if (crisis === 'under_siege' || crisis === 'occupied') for (const l of fairExcluded) if (!ex.lead.has(l)) unpinned.push(`${seed}: ${l}`);
       for (const r of readOf(t)) {
-        scopedReads += 1;
-        if (ex[r.k].has(r.text)) hits.push(`${t.name} (${seed}, ${r.audience}): ${r.k} "${r.text}"`);
+        scopedReads[crisis] += 1;
+        if (ex[r.k].has(r.text)) hits.push(`${t.name} (${seed} under ${crisis}, ${r.audience}): ${r.k} "${r.text}"`);
       }
     }
-    expect(scopedReads, crisis).toBeGreaterThan(0);
+    expect(unpinned).toEqual([]);
+    expect(CRISES.filter((c) => !(scopedReads[c] > 0))).toEqual([]);
     expect(hits).toEqual([]);
-  }, 120000);
+  }, 300000);
 
   it('NON-VACUITY: the same seeds born calm read the lines a crisis excludes (at least one, owner and reader)', () => {
     const union = { lead: new Set(), gloss: new Set() };
