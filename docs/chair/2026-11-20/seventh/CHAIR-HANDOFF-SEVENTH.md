@@ -1837,6 +1837,79 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   good, the import good. `activeConstraint` is NOT ruled: the rendered census finds its stored text on no surface;
   asked of SAME-1 and PEOPLE-1; its wordings are read when the card is shown printing it.
 
+### Rulings of 16:42 to 16:51 UTC (ten seat messages; each vetoable by the owner)
+
+- **VEIL RULING 54: THE POSSIBLE-WORLD RULE IS RE-STATED AS MEMBERSHIP, AND THE TWIN IS CURED FIRST.** R3-TELL unit 1
+  (`lane/veil-27-tell-2026-11-20` at a43bca3d1) measured two things. (1) THE CLIENT'S TWIN SENDS MORE THAN THE SERVER
+  on 10 of 92 towns (`availableServices.criminal` rows that carry no `institution` key). So **R3-CURE-8 comes first**:
+  the twin equals 212; every read that goes through the twin is named; a parity walker runs over every
+  `availableServices` family. (2) The rule as I worded it ("the served page must be one a town with no hidden house
+  could show") CANNOT BE A TEST: the regenerated twin town carries criminal content of its own in 81 of 92, so equality
+  with it is never reached. RE-STATED: the served criminal surface's SIGNATURE (each field present, absent or empty;
+  each family's rows none, one or several; the cross-field bits: a criminal power with no house shown, crime types
+  with no house, a services row with no house, shares that do not sum) must be a signature that a NOTHING-HIDDEN page
+  OF THE SAME SIZE shows under some setting of the switches. The pool of controls is widened to at least 300 a size; a
+  signature seen in fewer than two controls is not a member. The cure always moves toward WITHHOLDING (its limit is
+  the switch-off page). The tell column is gated at 0 non-members of 92, Reveal off and on. THE NINE towns:
+  `power.entry` is narrowed to the powers a HIDDEN house raised; a switch that hides a power's row is a named
+  survivor; Reveal DM (30 towns) takes the same rule. The cost (rows withheld that no hidden house raised) is
+  accepted and goes into the owner's paragraph with its count.
+- **WHO RULES.** U5 was already out when SEAT-6's three cures were approved: SEAT-5 relays the three to its builder B5
+  (the cures are added to the running unit, not a second unit). SEAT-6 was given the lane at 8bfabc080 ("THE LANE IS
+  YOURS"); SEAT-5 keeps only MEASURE-LIT and the relay of B5's return.
+- **FORTUNE-3's census of birth readers, three answers.** The late step is its OWN pipeline step, after
+  `assembleSettlement` and before `resolveCrisisCast`. W5 (`historyCoherence.js :: flavorOf`) is accepted as "never
+  contradicted" (it reads a flavour, not a grade). W1 is re-run by an IMPORT of `withCaptureRelations`; W2 by a sibling
+  in `power/rosterText.js`. No second copy of either.
+- **A TROUBLE'S SENTENCE, the third wordings (CAUSE-LINES-3 at 6bbcb221c): five reworded by the chair.** contested 2
+  "Many doubt the present rule's right to stand, and each of those who hope to lead next is gathering friends.";
+  crisis_band 2 "People here no longer believe those in charge have the right to rule, and nobody else has won their
+  trust either."; insurgency 2 "Some have risen against those in charge, and nobody can settle who has the right to
+  rule here."; river 3 "The river nearby floods, and people argue over whose hands and whose money should hold the
+  water back."; plain 4 "Flooding is the fear this place never forgets, and people argue over who should do the work
+  and who should pay." The rest as written.
+- **DISPLAY (PAGE-4).** The Magic line's audience unit is confirmed merged (dad2f377b). The sides table is unchanged.
+  SAFETY-MOUNT may run beside OUTPUT-FIX (they share no file). Every search of a rendered page is by CONTAINMENT.
+- **THE SAFETY LINE (PLACE-1, `safetyDesc-MEASURE.md` section D at d4e30cfec): 78 ROWS READ, APPROVED TO BUILD** with
+  the seat's four calls (watch row 4 dropped; no atom; the Unsafe city line in; the hash keyed on the step-qualified
+  seed, as `voiceOf` does) and ONE rewording: walls 4 "The walls keep the outside out; the trouble there is starts
+  within." Projected commonest sentence 67/64/69/73/58/67% to 14/9/13/12/13/14% (thorp to metropolis): re-measured on
+  the built tree before the merge. The viability text is dropped (nothing repeated prints). NEXT: `entrepotNote`,
+  then the economy's and the safety's own hooks.
+- **NO WORDING'S `needs` MAY BE A HIDEABLE FACT (a rule for every sameness pool, 16:51).** A pool chooses among the
+  wordings whose needs hold. If a need were a fact the owner can hide (`factLayers.js`), a shared page would learn of
+  the hidden house from WHICH sentence it got. Held by a walker over each pool's declared needs; each hand-back names
+  the reads that serve its field. Asked of SAME-1 whether its door can hold this for every pool with one walker.
+- **THE CARD'S CONSTRAINT (PEOPLE-1, `PROPOSAL-activeConstraint.md` at 01351d72d): PRINTED AFTER ALL, AND RULED.**
+  SAME-1 corrected its matcher at 16:36 (it had asked for equality; the card prints "Constraint: <text>"): by
+  containment the field prints wherever it is held, and its commonest sentence stands on 57/40/42/69/95/85% of places
+  (thorp to metropolis). RULED: option B (a constraint read from the person's own office and the place's own state),
+  ALL 14 pools in scope, 78 new wordings read by the chair. The three "weight" lines stay (walls' upkeep, drill,
+  hired companies: plain limits of a post). The atoms are the three already given to the position line. The variants
+  stay under `NPC_STRUCTURE.<key>` (ceilings only fall; no re-base). EIGHT REWORDINGS: holder 1 "Cannot act alone:
+  nothing is done here until the rest of the council agrees."; holder 8 "Rules by custom alone; a household that will
+  not listen must be talked round, not made to." (also excludes `court sits`); holder 11 "Does not judge the hard
+  cases itself; those go to the court, and the court decides them in its own way."; holder 14 "Cannot please everyone
+  at once; whatever the seat gives one side, another asks for next."; armed 5 "There is enough for the hands already
+  under arms and little over; a larger force would mean new dues."; faith 2 "Does not rule here; whatever the faith
+  wants of the council, it must ask for."; faith 4 "The priests under it answer in name, but each keeps their own
+  flock and their own ways."; casters 4 "Some people here will not buy a spell at any price, and no fair dealing
+  changes their minds." with no need (the record holds no quarrel between the faith and the casters: none is
+  invented). SIX CONDITIONS: (a) "no paid hands" only where no paid force of any kind stands; (b) the guild line never
+  where the guild's own power holds the seat, the shared-coin line never where the card's own house is the watch;
+  (c) every {house}, {export} and {import} wording names the kind of fill it fits, and the chair reads every distinct
+  fill inside its sentence over 600 places before the merge; (d) the old families' wordings only on a card whose
+  category IS `other` (a card that merely falls to that row keeps today's line); (e) the hideable rule above; (f) the
+  pick keyed `<_seed>::npcStructure.activeConstraint::<card id>`, a seedless record keeps index 0, two-tree 0
+  non-string differences, re-measured on the built tree. Projection: 46/35/39/70/94/87% to 10/13/11/15/14/13%.
+- **QUARTERS (PEOPLE-1, cb4a00de2): ruled but held.** R1 a seedless record keeps index 0. R2 truth outranks
+  canonical-at-zero (a false index 0 is replaced, its reader named). R3 the thorp's "Religious Quarter" gate moves
+  `quarters.length`, which keys the map: NOT built; a named survivor. R7 "pilgrims" only where the church, the
+  monastery and the sacred house all stand. NOTHING IS BUILT until a quarter's description is shown printed.
+- **THE STAKES' REASON IS A TARGET AGAIN** (`stress.cast.stakes[].reason`: printed on the Crisis page, Plot Hooks, the
+  PDF and the session sheet; commonest sentence 100/100/79/73/100/100%). Given to the session sheet's lane:
+  `prompts/FRAME-7.txt` now makes it that seat's measure-and-propose unit after P4a to P4b.
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -4811,3 +4884,13 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   seated). SEAT EACH WHEN ITS PREDECESSOR'S RECORD PASSES 360,000. Messages sent at 16:38 to 16:41: PAGE-6 (the
   secret on nearly every place's cards), PLACE-1 (the economy's and the safety's own hooks), PEOPLE-1 (the position
   line's verdict).
+- 16:53 UTC · TEN MESSAGES OF 16:42 RULED BY 16:51 (section 2, "Rulings of 16:42 to 16:51"). VEIL RULING 54 above all: the
+  possible-world rule re-stated as MEMBERSHIP, and the twin (found sending more than the server on 10 of 92 towns)
+  cured first as R3-CURE-8. THE CHAIR'S OVER-CORRECTION TO THE OWNER, to be undone in its next words to him: at 16:32
+  it told him the card's constraint line and the stakes' reasons were printed nowhere; SAME-1's matcher had asked for
+  equality; by containment BOTH PRINT and both are targets again (the constraint ruled to PEOPLE-1: 78 new wordings;
+  the stakes' reason written into `prompts/FRAME-7.txt`). The safety line's 78 rows approved to PLACE-1 with one
+  rewording. A new rule for every sameness pool: no wording's `needs` a hideable fact. STAMP SLIPS OF THE CHAIR, the
+  fifth: messages stamped 16:43 and 16:45 after clock reads of 16:42 and 16:44, and one stamped 16:47 with no read
+  before it (the clock read 16:48 after): each a minute off; from 16:51 every batch of messages follows its own read.
+  NET 15 (due 16:47) is being done now, late.
