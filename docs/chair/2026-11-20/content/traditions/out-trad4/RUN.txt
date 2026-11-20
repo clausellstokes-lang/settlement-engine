@@ -1,0 +1,14 @@
+TRAD-4 unit 6 — how these files were made (2026-11-20 16:37 UTC, at base cff266ef7; every command exit 0). The pools and rows
+(77 MB a pool, 1.4 MB a rows file) live outside the tree and are not committed: re-make them with these commands.
+T=docs/chair/2026-11-20/content/traditions; P=<poolsDir>; R=<rowsDir>
+1. the calm pool:     node $T/tools/trad-pool.mjs $P/calm
+   the crisis pools:  node $T/tools/trad-pool.mjs $P/<crisis> <crisis>   for famine under_siege occupied wartime plague_onset
+                      (all five are data/stressTypes.js :: STRESS_TYPE_MAP keys; every town of each pool held its crisis: 432 of 432)
+2. the measures:      node $T/tools/measure2.mjs $P/calm/pool.ndjson $T/out-trad4/measure-owner.txt owner
+                      node $T/tools/measure2.mjs $P/calm/pool.ndjson $T/out-trad4/measure-reader.txt reader
+3. the rows (owner):  node $T/tools/measure.mjs $P/calm/pool.ndjson $R/calm.txt owner
+                      node $T/tools/measure.mjs $P/<crisis>/pool.ndjson $R/<crisis>.txt owner <crisis>
+4. the thirty:        node $T/tools/samples.mjs $R/calm.rows.json $T/TRAD-4-SAMPLES-30.txt 5
+   the twelve:        node $T/tools/samples.mjs --crisis $R/calm.rows.json $T/TRAD-4-SAMPLES-CRISIS-12.txt \
+                        $R/famine.rows.json $R/under_siege.rows.json $R/occupied.rows.json $R/wartime.rows.json $R/plague_onset.rows.json
+Calm-pool towns holding a stress of their own (born with stress left random): 146 of 432.
