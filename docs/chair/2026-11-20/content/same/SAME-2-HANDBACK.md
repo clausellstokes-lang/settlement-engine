@@ -1,6 +1,6 @@
 # SAME-2 HAND-BACK (kept current at every push)
 
-Last written: 2026-11-20 20:57 UTC.
+Last written: 2026-11-20 21:04 UTC.
 
 SEAT: SAME-2 of the seventh chair (session_019yED1SUxGVHyjQnoqoFvQ8). Prompt: `git show origin/lane/chair-2026-11-08:docs/chair/2026-11-20/seventh/prompts/SAME-2.txt` (SAME-1.txt is the assignment, renamed). Seated 17:49 UTC beside SAME-1; THE LANE IS YOURS at 36c5214d0 (the chair, 18:52). Branch `lane/same-2-2026-11-20`. Read SAME-1-HANDBACK.md for everything before 18:52 (the standing orders hold).
 
@@ -40,3 +40,5 @@ THE CHAIR, 20:37: THE LINE MOVED to 062504aa8 (point 85: the arrival paragraph's
 THE CHAIR KEEPS: `docs/chair/2026-11-20/seventh/ci/LINE-NOW.md` (the line's tip, figures, known reds) beside `RED-AT-LINE.tsv`; THE RULES FOR EVERY LANE: `docs/chair/2026-11-20/seventh/prompts/COMMON-RULES.txt` (both on origin/lane/chair-2026-11-08). SAME-3: read COMMON-RULES.txt, then this hand-back whole.
 
 R UNIT 0 MERGED 90a3be26e (pushed): one hand house row added (ARRIVAL_SCENES::port, docks); RULE 1 and the bank unmoved; walkers green 80/80 on the tip with the line 062504aa8. THE CHAIR, 20:53: FINISH BEFORE STARTING (the weekly limit warns; resets 2026-11-24 15:00 UTC). HELD for the chair's word: R UNIT 1 (the register re-taken at 062504aa8, two renders, the arrival and secret rows before -> after; builder R stopped, worktree /home/user/same2-rm, brief `SAME-2-REMEASURE-BRIEF.md`). THE LANE IS AT REST.
+
+THE CHAIR, 21:03: R UNIT 1 IS NOT RUN. The register is re-taken ONCE, on the joined tree at the close, by the chair's helper with brief `SAME-2-REMEASURE-BRIEF.md` (unit 1). THE COMMAND LINE: move `scripts/census/sameness-census.register.json` aside; `node scripts/sameness-census.mjs --write --out=<dir>` (renders hxd and hxu, 150 a size; about 20 min each on four forks); then `node scripts/sameness-census.mjs --check --from=<dir>/hxd` (0 red); compare against the register at fb284e198 for the arrival (ARRIVAL_SCENES / arrival paragraph) and card secret (`npcs[].secret.*`) rows. SAME-2 then ran the lane's last receipts (build + VERIFY_DIST; `npm run test:ratchet`) and sent "SAME <commit>". SAME-2 IS DONE.
