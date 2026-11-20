@@ -1,4 +1,4 @@
-# PAGE-10's hand-back: THE TROUBLE HALF (kept current at every push; last written 2026-11-20 19:56 UTC by `date -u`)
+# PAGE-10's hand-back: THE TROUBLE HALF (kept current at every push; last written 2026-11-20 20:03 UTC by `date -u`)
 
 A successor reads THIS, then the briefs it names. PAGE-10 integrates; builders build (the Agent tool), each briefed by a
 committed file; a diff is read once, at the merge.
@@ -12,8 +12,11 @@ committed file; a diff is read once, at the merge.
 | unit | state | commit | next |
 |---|---|---|---|
 | causes (sentence) | MERGED by PAGE-7 | 3411c9c83 | the display seat (PAGE-9) wires it by merging 3411c9c83; PAGE-10 answers its questions |
-| hooks | PAGE-7's builder; `lane/page-7-2026-11-20-hooks-wip` on origin (1263731e7), unread | | on the lane: read once, red/green re-run, censuses by their doors, two-tree proof (0 non-string differences), measure 150 a size beside the projection |
+| hooks | BUILT at 1263731e7 (`-hooks-wip`), NOT merged; the chair ruled six wordings + one register row at 20:03 (three new lines of the chair's for the timeline's external-threat template, so the row comes under its ceiling); PAGE-7 merges, sends "HOOKS <commit>", hands over. Do NOT read the wip: read the MERGED diff once | | on the lane: read once, red/green re-run, censuses by their doors, two-tree proof (0 non-string differences), measure 150 a size beside the projection |
 | closing measure + owner's plain file | brief `briefs/CLOSE-MEASURE.md` written, NOT dispatched (waits for the hooks merge) | | dispatch with the AFTER commit |
+| (1) working line | merge the working line's tip (the chair names it; it holds `src/kernel/proseHash.js :: mix32`) into the lane | | first, when the lane is PAGE-10's |
+| (2) mixed key | `src/generators/history/troubleHooksOf.js`: the hooks' rank takes `mix32(fnv1a32(...))`; two-tree strings only; the bar re-measured beside PAGE-7's (top 14.0% city, 14.7% metropolis) | | brief to write |
+| (3) themes | `src/domain/hookThemes.js :: themeOfText` classifies by exact text; asked the chair at 20:06 what DEPTH-3's digest wants for the 86 hooks | | the answer |
 | lasting effects | PAGE-7's unit 5 (PDF only; strike every effect needing a hideable fact; lines to the chair first): NOT in PAGE-10's order | | ask the chair |
 
 ## 3. Rulings in force (every one vetoable by the owner)
@@ -24,10 +27,10 @@ committed file; a diff is read once, at the merge.
 5. No new line says "the town"/"a town" of the place; no variant carries a feeling or scheme its branch does not compute.
 6. No wording of a field a shared read serves is chosen by a hideable house (`src/domain/people/cardVeil.js :: isHideableHouse`) or any fact about crime unless withheld from every shared read that hides the house, and LISTED; every other house a wording needs is LISTED for the security reader.
 7. A rating low because a place is small is not a danger.
-8. WHAT A HOOK IS: a lead a DM can use tonight; it may propose a twist; never a question, a mood, or a house the place lacks. The hooks needing a hideable house are withheld on a read that hides the house (see PAGE-7-HANDBACK §4 for the list: it counts TWELVE, the chair's prompt said eleven: asked 19:55).
+8. WHAT A HOOK IS: a lead a DM can use tonight; it may propose a twist; never a question, a mood, or a house the place lacks. The hooks needing a hideable house are withheld on a read that hides the house (PAGE-7-HANDBACK §4's list governs: TWELVE, the chair 20:03, unless PAGE-7 settles it otherwise). AT THE MERGE PAGE-10 verifies each listed line's declaration in the data file: which house it needs, and that `cardVeil.js :: isHideableHouse` answers true; a line that needs a FACT not a house (legitimacy 9: "seat outranked") is NOT a withheld line: say which.
 9. THE GUILDLESS GUILD QUARREL is a named survivor (PAGE-7-HANDBACK §3): the page prints `guild_conflict.withoutItsHouse`.
 10. THE WALKER EDIT `tests/lint/presumptionClasses.shared.mjs :: CLASS_DIMS.outside` += 'house','entrepot' is LISTED for the join.
 11. There is NO hideable layer (`factLayers.js` is read layers); hideability is `isHideableHouse`.
 12. ONE heavy gate at a time (`scripts/gate-mutex.sh`); never a gate through a pipe; never the whole suite; fetch the ledger ref before `tests/lint`. Push only `refs/heads/lane/*`, plain, with hooks; `git ls-remote` before every push; never a pull request.
-13. Close of the lane: the closing measure (M and V pools), the owner's plain file, then ONE message "PAGE-TROUBLE <commit>" with `tests/lint` whole at that commit; when the chair names the landed line, MERGE it into the lane.
+13. Close of the lane (the chair, 20:03, units in order: working line, mixed key, themes, close): the closing measure (M and V pools), the owner's plain file, ONE BUILD's first-paint figures, then ONE message "PAGE-TROUBLE <commit>" with `tests/lint` whole at that commit; when the chair names the landed line, MERGE it into the lane.
 14. THE MARK: 450,000 used tokens by the chair's read; successor seated at 360,000.
