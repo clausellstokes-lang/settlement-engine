@@ -3377,3 +3377,24 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   MESSAGE WRONGLY EXPECTED THE LINE TO MOVE PINS; the lighting census re-taken (8b45003ef); C1's builder seated. A
   NOISE OF THE CHAIR'S OWN: it ran two pushes of its branch at once (11:25 and 11:27): the first carried both
   commits, the second was rejected ("cannot lock ref"): harmless; one push at a time.
+- 11:47 UTC · VEIL-26 SEATED BESIDE VEIL-25 (session_019yED1PibyFgjeRN2dcF6qn; on `lane/veil-25-2026-11-20` at eca0d655d; outcome
+  `lane/veil-26-2026-11-20`; the hand-over at R3's merge or when VEIL-25's record passes 380,000). NET 9 fires at
+  11:50.
+- 11:53 UTC · SAFETY NET 9's PASS (the counts read by `get_session` at 11:51): GOALS-1 421,584 AGAINST A MARK OF 250,000;
+  NAMES-4 272,822 AGAINST 220,000; FORTUNE-1 407,448 AGAINST 350,000 (its record now reads true); SEAT-3 291,758
+  (mark 400,000; a successor at 300,000). A FAULT OF THE CHAIR'S, AND A FALSE LINE IN THIS RECORD: the 11:07 entry
+  said "GOALS-1, NAMES-4, PAGE-1, FORTUNE-2, VEIL-25, TRAD-3 and SEAT-3 under 200,000" WITHOUT READING THEM: GOALS-1
+  and NAMES-4 were never read from 10:16 to 11:51. THE RULE IS NOT "ASSUME": every working seat's record is read
+  at each net, one `get_session` each, and the figure written beside the hour it was read. ORDERED AT 11:52:
+  GOALS-1 to land builder 4's unit if green and HAND OVER ("GOALS-PART <commit>, HANDED OVER");
+  `prompts/GOALS-2.txt` written (a small tail: any unmerged unit, the names seat's tip merged, the measure at the
+  merged tip, the file for the owner). FORTUNE-1 to finish its hand-back and HAND OVER NOW ("FORTUNE-PART <commit>,
+  HANDED OVER"); FORTUNE-2 is read in. NAMES-4 to finish its last fix and send "NAMES-4 <commit>" without widening.
+  `prompts/SEAT-4.txt` written (lean; CS21, CS22, the fortune law's effect on contests, one owner for
+  `factionDynamics.js`), seated beside SEAT-3 after this push. PAGE-2: the first design of the office secrets moved
+  145 other cards and the relationships of 117 towns (a draw swapped for one): STOPPED BEFORE A COMMIT AND
+  REDESIGNED (the draw as today; a draw-free pick from a new table): approved with a tooth (no two cards of a
+  town show the same office secret). PART K approved as one unit (11:48): THE WORLD'S PULSE READS A FACTION'S
+  INFLUENCE, NOT A CARD'S (the chair had told the owner the play simulation reads it: corrected to him); 2,754 of
+  3,357 moved ties touch no corrected card and move in prose only, through the town's rotation counter. VEIL-26's
+  first message: read in; R3-CURE-4's branch is not on origin until VEIL-25's builder returns.
