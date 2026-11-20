@@ -181,7 +181,7 @@ AT THE CUT'S PARENT f05daa74e, executed by this seat: `--check` exit 0; walker 1
 - 08:02 VR47 builder launched (brief 4d91d5c5f). 08:08 the successor VEIL-24 seated; the plan: this seat takes R3's cure return, merges it, then hands over.
 - 08:22 ruling 28 (the fold) relayed to the R3-CURE builder.
 - 08:47 VR47 returned, read, re-run, merged (df6809f9c); bundles rebuilt (e4cce485f).
-- 09:0x R3-CURE returned NOT GREEN at its mark (4db8e4208), pushed as transport; not merged.
+- 08:55 R3-CURE returned NOT GREEN at its mark (4db8e4208), pushed as transport; not merged.
 
 ## 7. HANDED OVER (to VEIL-24, on the chair's plan of 08:08 and 08:52 UTC)
 The lane `lane/veil-23-2026-11-20`: tip = the commit carrying this file. Merged since the cut: VR47 (df6809f9c, bundles
