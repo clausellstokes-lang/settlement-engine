@@ -122,7 +122,7 @@ const moved = (/** @type {any} */ o) => {
   if (!beside) return '';
   const b = beside[o.slot]; const marks = [];
   for (const s of SIZES) {
-    const a = o.sizes[s]; const x = b?.sizes?.[s];
+    const a = o.sizes[s]; const x = b?.sizes?.[s]; if (!a && !x) continue;
     const pa = a ? a.shareAll : 0; const px = x ? x.shareAll : 0; const n = (a || x).of || 150;
     const p = Math.min(Math.max(px, 0.5 / n), 1 - 0.5 / n); const se = Math.sqrt((p * (1 - p)) / n);
     if (Math.abs(pa - px) > 4 * se) marks.push(`${s} ${pc(px)}→${pc(pa)}`);
@@ -244,6 +244,15 @@ L.push(`| # | weight | ${SIZES.join(' | ')} | class | surface \\| position | att
 L.push(`|---|---|${SIZES.map(() => '---').join('|')}|---|---|---|---|---|${beside ? '---|---|' : ''}`);
 ranked.forEach((r, i) => L.push(`| ${i + 1} | ${r.w} | ${SIZES.map((s) => sizeCell(r.o.sizes[s])).join(' | ')} | ${r.o.cls} | \`${md(r.o.slot)}\` | ${md(attribution(r.o))} | ${md(cut(heaviest(r.o).sentence))} | ${md(r.lanes.join('; '))} |${beside ? ` ${besideRank.get(r.o.slot) ?? 'under the bar'} | ${moved(r.o)} |` : ''}`));
 L.push('');
+if (beside) {
+  const here = new Set(ranked.map((r) => r.o.slot));
+  const gone = [...besideRank].filter(([k]) => !here.has(k)).map(([k, i]) => ({ k, i, b: beside[k], o: slots[k] || { slot: k, sizes: {} } }));
+  L.push(`## OVER THE BAR BESIDE, UNDER IT HERE (${gone.length})`, '');
+  L.push('Each with the beside rank, its size cells there, the move (beside → here) and its commonest sentence there.', '');
+  L.push(`| beside # | ${SIZES.join(' | ')} | surface \\| position | moved | commonest sentence there (masked) |`, `|---|${SIZES.map(() => '---').join('|')}|---|---|---|`);
+  for (const g of gone) L.push(`| ${g.i} | ${SIZES.map((z) => sizeCell(g.b.sizes[z])).join(' | ')} | \`${md(g.k)}\` | ${moved(g.o) || 'within the noise'} | ${md(cut(heaviest(g.b).sentence))} |`);
+  L.push('');
+}
 L.push('## MANY-A-PLACE (meet is SEEN), ranked by SEEN against the 30% bar', '');
 L.push('A size cell: `SEEN (shareAll of the commonest sentence)`, **bold** over 30%; `top x%` where that size prints at most 1.5 sentences a place (its meet is shareAll).', '');
 L.push(`| # | top SEEN | ${SIZES.join(' | ')} | class | surface \\| position | attribution | commonest sentence (masked) | lane |`);

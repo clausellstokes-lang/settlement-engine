@@ -8,6 +8,10 @@
  *        births 50 places a size (`<prefix>-<size>-<i>`, the chair's stored census's birth), renders each through
  *        scripts/census/sameness-census.render.census.jsx (its own vitest config, <workers> forks) to `<out>/rows/`,
  *        then counts it;
+ *   node scripts/sameness-census.mjs --measure --plan=<file.json> [--text] [--workers=4] --out=<dir>
+ *        renders the caller's own births instead: rows `[{ seed, size, config }]`, each config passed to the birth as given
+ *        with the store's content runtime at rest (the renderer's birthOf; SAME-2 part 3, granted by the chair; no check
+ *        reads it); --text also writes <out>/text/<seed>.txt, UNMASKED, every surface's lines in page order under headings;
  *   node scripts/sameness-census.mjs --from=<dir> [--confirm=<dir>] [--docs=<dir>] [--commit=<sha>] [--wall=<text>]
  *        counts a rendered run; with --docs writes SAME-CENSUS.md and tables-<size>.txt (beside it, --confirm's run).
  *
@@ -538,9 +542,10 @@ function tablesText(size, c) {
  * Render a plan (`<prefix>-<size>-<i>`, n a size) through the renderer's own vitest config, <workers> forks, into
  * `<out>/rows/`. @param {string} prefix @param {number} n @param {number} workers @param {string} out @returns {Promise<string>} the wall time
  */
-async function renderRun(prefix, n, workers, out) {
-  const plan = SIZES.flatMap((size) => Array.from({ length: n }, (_, i) => ({ seed: `${prefix}-${size}-${i}`, size })));
+async function renderRun(prefix, n, workers, out, { plan: given = null, text = false } = {}) {
+  const plan = given || SIZES.flatMap((size) => Array.from({ length: n }, (_, i) => ({ seed: `${prefix}-${size}-${i}`, size })));
   mkdirSync(join(out, 'rows'), { recursive: true });
+  if (text) mkdirSync(join(out, 'text'), { recursive: true });
   writeFileSync(join(out, 'vitest.same-census.config.mjs'), `import react from '${join(ROOT, 'node_modules/@vitejs/plugin-react/dist/index.js')}';
 export default { root: '${ROOT}', plugins: [react()], test: { environment: 'node', include: ['${RENDER}'], testTimeout: 300000, pool: 'forks', fileParallelism: false, server: { deps: { inline: [/@testing-library\\//] } } } };
 `);
@@ -551,7 +556,7 @@ export default { root: '${ROOT}', plugins: [react()], test: { environment: 'node
     writeFileSync(part, JSON.stringify(plan.filter((_, i) => i % workers === w)));
     return new Promise((resolve) => {
       const child = spawn('npx', ['vitest', 'run', '--config', join(out, 'vitest.same-census.config.mjs')], {
-        cwd: ROOT, env: { ...process.env, SAME_CENSUS_OUT: join(out, 'rows'), SAME_CENSUS_PLAN: part }, stdio: ['ignore', 'pipe', 'pipe'],
+        cwd: ROOT, env: { ...process.env, SAME_CENSUS_OUT: join(out, 'rows'), SAME_CENSUS_PLAN: part, SAME_CENSUS_TEXT: text ? join(out, 'text') : '' }, stdio: ['ignore', 'pipe', 'pipe'],
       });
       /** @type {Buffer[]} */ const log = [];
       child.stdout.on('data', (d) => log.push(d)); child.stderr.on('data', (d) => log.push(d));
@@ -648,7 +653,8 @@ async function main() {
   const from = arg('from');
   if (!process.argv.includes('--measure') && !from) { console.error('sameness-census: --measure, --from=<dir>, --check, --write or --tighten'); process.exit(2); }
   const out = from || arg('out') || mkdtempSync(join(tmpdir(), 'same-census-'));
-  if (!from) await renderRun(prefix, n, workers, out);
+  const planFile = arg('plan');
+  if (!from) await renderRun(prefix, n, workers, out, { plan: planFile ? JSON.parse(readFileSync(planFile, 'utf8')) : null, text: process.argv.includes('--text') });
   const run = readRun(out);
   const total = Object.values(run).reduce((a, r) => a + r.length, 0);
   console.log(`sameness-census: ${total} places read from ${out}`);
