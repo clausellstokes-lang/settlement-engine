@@ -104,7 +104,11 @@ baseline file's _doc on a clean tree).
    `tests/build/vendorPdfLazy.test.js` and `tests/build/generationWorkerLazy.test.js` through the mutex; the three
    first-paint figures and the worker's size in the message beside the line's (1,177,668 / 374,676 / 314,472 at
    8196e5712; worker 2,617,934). A rise is cured on the lane (an eager file declares an atom BY NAME; the code that
-   answers it is imported only on the lazy side) or ruled by the chair (this lane's +945/+255/+278: ASKED, § 5b).
+   answers it is imported only on the lazy side) or ruled by the chair. RULED (20:18): engine-core +714 raw = "the Daily Life vocabulary: 714 bytes raw of first
+   paint", a RULED EXCEPTION for the owner's size sign-off at the close; kernel +231 = "kernel-mix only", a one-time
+   cost of the round; no lazy home for the kind patterns now. B2/B3 add pools only in lazy data files; re-measure at
+   each merge; a rise beyond these two named items goes to the chair BEFORE the merge. The worker's running total is
+   kept in § 5b (the chair owes the owner the sum by lane).
    A walker's class table is never widened without naming the row to the chair; every class-file edit is listed (§ 5b).
 22. (20:13) THE LANDING REQUEST before "DAILY <commit>": ONE `npm run test:ratchet` at the tip WITH THE LINE'S TIP
    MERGED IN (`scripts/check-test-ratchet.mjs`; exclusive mutex; to a log, never through a pipe; the ONE whole-suite run
@@ -153,7 +157,8 @@ market, trade route, smuggling. Final per-slot list written at each build's merg
   `generationWorkerLazy.test.js`): base 0eadcb032 = the line's 1,177,668 raw / 374,683 gzip / 314,537 Br, worker
   2,587,733; tip 4673cac4f 1,178,613 / 374,938 / 314,815 (+945 / +255 / +278), worker 2,589,009 (+1,276; each worker
   +1,276). Cause: engine-core +714 (the granted rows, eager by their home), kernel +231 (`pickVariantMixed` kept). No
-  lazy module pulled eager. RULING ASKED of the chair (recommend: accept as recorded cost). Re-measure at each merge.
+  lazy module pulled eager. RULED 20:18 (ruling 21): accepted as named. WORKER RUNNING TOTAL (generation.worker, vs
+  base 2,587,733): +1,276 after B1b.
 
 ## 6. Losses to look at again (for the owner)
 None yet.
