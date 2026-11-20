@@ -754,7 +754,7 @@ export function applyVeil(publicSettlement, veil) {
   }
 
   // V5-1: each second home goes with the eye that governs its source.
-  withholdSecondHomes(s, sources, goneHouses, cardsOf(s, 'institution').map(i => str(i.name)), houseEyes, goneBirths, goneLabels);
+  withholdSecondHomes(s, sources, goneHouses, cardsOf(s, 'institution').map(i => str(i.name)), houseEyes, goneBirths, goneLabels, goneIds.size > 0);
 
   // Groupings last (a tab remover sees the cards already trimmed).
   for (const g of groupings) GROUPING_REMOVERS[g](s);

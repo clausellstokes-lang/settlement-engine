@@ -1777,4 +1777,68 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
     expect(bad, `${bad.length} sends or losses`).toEqual([]);
     expect(paths).toEqual([]);
   }, ARM_TIMEOUT_MS);
+
+  // ── B, C, D (VEIL-19's builder; briefs/SUB-BRIEF-BCD.md): the trace by positive account, every flag by getInstFlags, the income row by its house ──
+  it('B THE TRACE BY POSITIVE ACCOUNT: on a share that hides any house whole, the trace keeps only what a native house still listed accounts for (an institution id whose fold is a listed house\'s catalogId or its name\'s fold): the reader\'s renamed hidden house (born Smuggling network, now The Velvet Hand; unstamped and stamped) leaves by its trace id as a target, a cause and an effect; an institution entry named bare or with no id leaves; an allegiance receipt whose house is hidden whole leaves whole (its handler and "The allegiance runs to the town\'s criminal power"), one that names no house leaves; what an open house accounts for stays (by its name\'s fold, by its catalogue identity under another name, the engine\'s capitalised spelling), and so does every entry that names no institution and an open house\'s allegiance receipt; a share that hides no house whole keeps its trace whole; every Reveal-DM read, server against twin 0 paths', async () => {
+    const bad = []; const paths = [];
+    const ALLY = (npc, house, power, handler) => ({ targetType: 'npc', targetId: npc, step: 'people-allegiance', result: 'allegiance',
+      causes: [{ source: 'allegiance.gate', effect: 'eligible', reason: 'A corruptible greed flaw.' }, { source: 'flaw.greed', effect: 'allegiance vector: bribe' }],
+      downstreamEffects: [...(house ? [{ target: house, effect: 'gains a hidden ally' }] : []),
+        { target: power, effect: 'holds a hidden allegiance', reason: `The allegiance runs to the town's criminal power (${power}).` },
+        { target: handler, effect: 'handles the agent', reason: 'One handler per allegiance, dealt by standing.' }] });
+    const TRACE = [
+      { targetType: 'institution', targetId: 'institution.smuggling_network', step: 'assembleInstitutions', result: 'selected', causes: [{ source: 'tier.town', reason: 'gtr1 smuggling network absorbed rivals' }] },
+      { targetType: 'institution', targetId: 'institution.fish_market', step: 'assembleInstitutions', result: 'selected',
+        causes: [{ source: 'tier.town', reason: 'kfish fish market grew' }, { source: 'institution.smuggling_network', reason: 'gtr2 a cause by the hidden id' }],
+        downstreamEffects: [{ target: 'publicOrder', effect: 'kpo improved' }, { target: 'institution.smuggling_network', effect: 'gtr3 an effect on the hidden id' }, { target: 'institution.Fish_market', effect: 'kcap the engine\'s capitalised spelling' }] },
+      { targetType: 'institution', targetId: 'Smuggling network', step: 'subsumptionPass', result: 'subsumed', causes: [{ source: 'tier.town', reason: 'gtr4 an institution entry named bare' }] },
+      { targetType: 'institution', step: 'subsumptionPass', result: 'subsumed', causes: [{ source: 'tier.town', reason: 'gtr5 an institution entry with no id' }] },
+      { targetType: 'institution', targetId: 'institution.mill', step: 'assembleInstitutions', result: 'selected', causes: [{ source: 'tier.town', reason: 'kmill an open house under its birth identity' }] },
+      { targetType: 'faction', targetId: 'faction.council', step: 'generatePower', result: 'seated', causes: [{ source: 'config.priorityMilitary', reason: 'kfac a power' }] },
+      { targetType: 'supply_chain', targetId: 'chain.fishing', step: 'economyReconcilePass', result: 'active', causes: [{ source: 'processor.fish_market', reason: 'kchain a chain' }] },
+      ALLY('npc.oro', 'Smuggling network', 'gpow1 the Night Court', 'npc_veiled_gh1'),
+      ALLY('npc.tam', 'The Velvet Hand', 'gpow2 the Night Court', 'npc_veiled_gh2'),
+      ALLY('npc.pell', null, 'gpow3 nobody named', 'npc_veiled_gh3'),
+      ALLY('npc.mira', 'Black market bazaar', 'kpow1 the Bazaar\'s friends', 'npc.kbroker'),
+    ];
+    const WANT = [
+      { targetId: 'institution.fish_market', causes: ['kfish fish market grew'], effects: ['kpo improved', 'kcap the engine\'s capitalised spelling'] },
+      { targetId: 'institution.mill' }, { targetId: 'faction.council' }, { targetId: 'chain.fishing' }, { targetId: 'npc.mira' },
+    ];
+    const ROWS = [
+      ['the reader\'s row: the hidden house unstamped, renamed', [{ id: 'inst-777', name: 'The Velvet Hand', category: 'Criminal', desc: 'Born the smuggling network.' }]],
+      ['the hidden house stamped (catalogId smuggling_network), renamed', [{ id: 'inst-777', name: 'The Velvet Hand', catalogId: 'smuggling_network', category: 'Criminal', desc: 'Born the smuggling network.' }]],
+    ];
+    for (const [what, hiddenHouses] of ROWS) {
+      const town = { name: 'Coldharbor', tier: 'town',
+        institutions: [...hiddenHouses, { id: 'inst-fish', name: 'Fish market', category: 'Economy', desc: 'Fish.' },
+          { id: 'inst-mill', name: 'Old Wheel', catalogId: 'mill', category: 'Economy', desc: 'Grain.' },
+          { id: 'inst-bmb', name: 'Black market bazaar', category: 'Economy', desc: 'A tolerated night market.' }],
+        npcs: [{ id: 'npc.mira', name: 'Mira Vane', role: 'Fence' }, { id: 'npc.oro', name: 'Oro Pell', role: 'Clerk' }, { id: 'npc.tam', name: 'Tam Reed', role: 'Smith' }, { id: 'npc.pell', name: 'Pell Ash', role: 'Carter' }],
+        simulationTrace: TRACE };
+      const r = await sharesOf(town, [...hide(hiddenHouses[0]), { address: `card:institution:${veil.CARD_KINDS.institution.idOf(town.institutions[3])}`, hidden: false }]);
+      paths.push(...enginePaths(what, r));
+      for (const { tag, doc } of everyRead(r)) {
+        if (!isRec(doc)) { bad.push(`${what}, ${tag}: no document`); continue; }
+        for (const n of ['smuggling_network', 'smuggling network', 'Velvet', 'gtr1', 'gtr2', 'gtr3', 'gtr4', 'gtr5', 'gpow1', 'gpow2', 'gpow3', 'npc_veiled_gh']) bad.push(...arrivals(doc, n).map(a => `${what}, ${tag}: ${a}`));
+        if (!tag.startsWith('dm/') || tag === 'dm/link') continue;
+        // KEEP: what an open house accounts for, every entry that names no institution, the open house's allegiance receipt
+        const got = (Array.isArray(doc.simulationTrace) ? doc.simulationTrace : []).map(e => ({ targetId: e.targetId,
+          ...(e.targetId === 'institution.fish_market' ? { causes: (e.causes || []).map(c => c.reason), effects: (e.downstreamEffects || []).map(x => x.effect) } : {}) }));
+        if (JSON.stringify(got) !== JSON.stringify(WANT)) bad.push(`${what}, ${tag}: the trace is ${JSON.stringify(got).slice(0, 300)}`);
+        const mira = (doc.simulationTrace || []).find(e => e.targetId === 'npc.mira');
+        if (differ(mira, TRACE[10]).length) bad.push(`${what}, ${tag}: the open house's allegiance receipt is ${JSON.stringify(mira).slice(0, 200)}`);
+      }
+    }
+    // KEEP: a share that hides no house whole keeps its trace whole (an id no house accounts for included)
+    const open = { name: 'Saltmere', tier: 'town', institutions: [{ id: 'inst-fish', name: 'Fish market', category: 'Economy', desc: 'Fish.' }],
+      simulationTrace: [{ targetType: 'institution', targetId: 'institution.foundling_home', step: 'assembleInstitutions', result: 'weighed', causes: [{ source: 'institution.rookery', reason: 'kopen weighed, not kept' }] }] };
+    const r0 = await sharesOf(open, [{ address: 'field:institution:inst-fish:description', hidden: true }]);
+    paths.push(...enginePaths('no house hidden whole', r0));
+    for (const tag of ['gallery', 'import', 'client']) {
+      if (differ(r0.dm[tag]?.simulationTrace, open.simulationTrace).length) bad.push(`no house hidden whole, dm/${tag}: the trace is ${JSON.stringify(r0.dm[tag]?.simulationTrace).slice(0, 200)}`);
+    }
+    expect(bad, `${bad.length} sends or losses`).toEqual([]);
+    expect(paths).toEqual([]);
+  }, ARM_TIMEOUT_MS);
 });

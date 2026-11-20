@@ -169,6 +169,18 @@
 --       follow as a dropped tie's do (ruling (5)'s rule): prominentRelationship whole where it is that tie's copy,
 --       pressureSentence where it names that tie's two ends or holds its words, both where such a tie's ends carry no
 --       names (_gallery_veil_second_homes; gallerySecondHomes.js :: withholdTiesOfTheSwept). No signature changes.
+--   (31) THE TRACE BY POSITIVE ACCOUNT (VEIL-19; REVIEW-VEIL-212-FINAL's V7-5, the reader's a07; with VR4 ii-12): a house hidden
+--       whole and renamed keeps nothing of its birth name but the trace's `institution.<snake>` (the record keeps no
+--       alias), so the trace sent it on a Reveal-DM read. On a share that hides any house whole the trace now keeps, as the
+--       two derived lists do (17), only what a NATIVE house still listed accounts for: an `institution.<id>` string of an
+--       entry, a cause or an effect (and an entry's targetId where its targetType is 'institution') is accounted for where
+--       the fold of the id (_gallery_veil_fold) is a listed native house's catalogId or the fold of its name; an entry
+--       that holds one no house accounts for leaves whole (an 'institution' entry with no string id: unsure), a cause or an
+--       effect leaves its list. By identity, with it: an allegiance receipt (step 'people-allegiance') stays only where
+--       its house (the target of each effect 'gains a hidden ally') is accounted for by the same rule, so the handler
+--       line and "The allegiance runs to the town's criminal power" of a hidden house's agent leave with the receipt
+--       (unsure, no house named: it leaves). _gallery_veil_apply hands _gallery_veil_second_homes `whole` (any house
+--       removed whole); gallerySecondHomes.js :: withholdTraceByAccount. No signature changes.
 --   (10) A PERSON HIDDEN BY THE PER-PERSON SWITCH IS NOT SENT IN A ROSTER COPY EITHER (COHERENCE-VEIL-6; the fifth
 --       review's V5-4, ruled by the chair): _gallery_apply_member_overrides now reduces each roster copy
 --       (factions[].members[], powerStructure.factions[].members[]) of a person the share does not reveal to the
@@ -1219,6 +1231,8 @@ declare
   cut jsonb;           -- and the ties that name one of them, which leave with them
   cut_unsure boolean;
   pr_cut boolean;
+  whole boolean := coalesce(src -> 'whole' = 'true'::jsonb, false);   -- VEIL-19 (B): this share hides some house whole
+  acc_ids text[];      -- VEIL-19 (B): the identities a listed native house accounts for (its catalogId, its name's fold)
 begin
   -- COHERENCE-VEIL-10 (V7-2): THE COMPOSED HOMES, BY IDENTITY (the section's header states each rule)
   if jsonb_array_length(ties) > 0 then
@@ -1334,7 +1348,7 @@ begin
          where not (jsonb_typeof(r) = 'object' and gone ? public._gallery_veil_str(r -> 'name'))), '[]'));
     end loop;
   end if;
-  if gone = '{}' and cardinality(births) = 0 and cardinality(labels) = 0 then return s; end if;
+  if gone = '{}' and cardinality(births) = 0 and cardinality(labels) = 0 and not whole then return s; end if;
   open_names := array(select public._gallery_veil_str(e -> 'name')
                         from jsonb_array_elements(case when jsonb_typeof(s -> 'institutions') = 'array' then s -> 'institutions' else '[]' end) e
                        where jsonb_typeof(e) = 'object');
@@ -1415,6 +1429,54 @@ begin
       end loop;
     end if;
   end loop;
+  -- VEIL-19 (item B; REVIEW-VEIL-212-FINAL's V7-5, the reader's a07): THE TRACE BY POSITIVE ACCOUNT. A renamed house hidden
+  -- whole keeps nothing of its birth name but the trace's `institution.<snake>` (its record keeps no alias), so the name
+  -- search cannot find it there. On a share that hides any house whole, the trace keeps what a NATIVE house still listed
+  -- accounts for, as the two lists do: an `institution.<id>` (any string of an entry, a cause or an effect that begins
+  -- so; an entry's targetId where its targetType is 'institution') is accounted for where the fold of the id
+  -- (_gallery_veil_fold, the engine's fold of a name into its identity) is a listed native house's catalogId or the fold
+  -- of its name. An entry that holds one no listed house accounts for leaves whole (and an 'institution' entry whose
+  -- targetId is not a string: unsure); a cause or an effect that holds one leaves its list. WITH IT (VR4 ii-12, by
+  -- identity): an allegiance receipt (step 'people-allegiance' or result 'allegiance': allegiance.js ::
+  -- leaveAllegianceReceipts) stays only where its house (each effect 'gains a hidden ally': its target, the house's name)
+  -- is accounted for by the same rule, so a hidden house's handler and the line "The allegiance runs to the town's
+  -- criminal power" leave with it; a receipt that names no house leaves (unsure). gallerySecondHomes.js ::
+  -- withholdTraceByAccount, rule for rule
+  if whole and jsonb_typeof(s -> 'simulationTrace') = 'array' then
+    acc_ids := array(select distinct x
+                       from jsonb_array_elements(case when jsonb_typeof(s -> 'institutions') = 'array' then s -> 'institutions' else '[]' end) e,
+                            unnest(array[case when jsonb_typeof(e -> 'catalogId') = 'string' then e ->> 'catalogId' end,
+                                         public._gallery_veil_fold(public._gallery_veil_str(e -> 'name'))]) x
+                      where jsonb_typeof(e) = 'object' and x is not null and x <> ''
+                        and not (coalesce(e -> 'isCustom' = 'true'::jsonb, false) or coalesce(e -> 'custom' = 'true'::jsonb, false)
+                                 or coalesce(e -> 'source' = '"custom"'::jsonb, false)
+                                 or jsonb_typeof(e -> 'customDefinitionId') is not distinct from 'string'
+                                 or jsonb_typeof(e -> 'customDefinitionCategory') is not distinct from 'string'));
+    s := jsonb_set(s, '{simulationTrace}', coalesce((
+      select jsonb_agg(case when jsonb_typeof(e) <> 'object' then e
+          else e || (select coalesce(jsonb_object_agg(kk, coalesce((
+                       select jsonb_agg(x order by xo) from jsonb_array_elements(e -> kk) with ordinality y(x, xo)
+                        where not exists (select 1 from (select x #>> '{}' as v where jsonb_typeof(x) = 'string'
+                                                         union all
+                                                         select z.value #>> '{}' from jsonb_each(case when jsonb_typeof(x) = 'object' then x else '{}' end) z
+                                                          where jsonb_typeof(z.value) = 'string') w
+                                           where left(w.v, 12) = 'institution.' and not (public._gallery_veil_fold(substr(w.v, 13)) = any(acc_ids)))), '[]')), '{}')
+                       from unnest(array['causes', 'downstreamEffects']) kk where jsonb_typeof(e -> kk) = 'array') end order by o)
+        from jsonb_array_elements(s -> 'simulationTrace') with ordinality x(e, o)
+       where not (jsonb_typeof(e) = 'object' and (
+               exists (select 1 from jsonb_each(e) z
+                        where z.key not in ('causes', 'downstreamEffects') and jsonb_typeof(z.value) = 'string'
+                          and (left(z.value #>> '{}', 12) = 'institution.' or (z.key = 'targetId' and coalesce(e -> 'targetType' = '"institution"'::jsonb, false)))
+                          and not (public._gallery_veil_fold(case when left(z.value #>> '{}', 12) = 'institution.' then substr(z.value #>> '{}', 13)
+                                                                  else z.value #>> '{}' end) = any(acc_ids)))
+               or (coalesce(e -> 'targetType' = '"institution"'::jsonb, false) and jsonb_typeof(e -> 'targetId') is distinct from 'string')
+               or ((coalesce(e -> 'step' = '"people-allegiance"'::jsonb, false) or coalesce(e -> 'result' = '"allegiance"'::jsonb, false))
+                   and not coalesce((select bool_and(jsonb_typeof(d -> 'target') = 'string'
+                                                     and public._gallery_veil_fold(case when left(d ->> 'target', 12) = 'institution.' then substr(d ->> 'target', 13)
+                                                                                        else d ->> 'target' end) = any(acc_ids))
+                                       from jsonb_array_elements(case when jsonb_typeof(e -> 'downstreamEffects') = 'array' then e -> 'downstreamEffects' else '[]' end) d
+                                      where jsonb_typeof(d) = 'object' and d -> 'effect' = '"gains a hidden ally"'::jsonb), false))))), '[]'));
+  end if;
   -- COHERENCE-VEIL-10 (V7-1, V7-6): THE WHOLE TEXT IS ASKED FIRST, once: the strings and keys of the projection that
   -- hold a hidden name (_gallery_veil_name_hits). None, and none of the three rules below nor the walk has anything to
   -- find (they only ever shorten the document), so none runs: a town that names no hidden house costs one search.
@@ -1628,7 +1690,7 @@ begin
   end if;
 
   -- V5-1: each second home goes with the eye that governs its source
-  s := public._gallery_veil_second_homes(s, src || jsonb_build_object('births', gone_births, 'labels', gone_labels), gone_houses);
+  s := public._gallery_veil_second_homes(s, src || jsonb_build_object('births', gone_births, 'labels', gone_labels, 'whole', gone_ids <> '{}'), gone_houses);
 
   -- groupings last
   foreach g in array groupings loop

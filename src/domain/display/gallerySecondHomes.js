@@ -788,8 +788,9 @@ function tiePieces(t, out) {
  * @param {Readonly<Record<string, ReadonlyArray<string>>>} houseFields the house's eyes and the keys each removes
  * @param {Set<string>} [births] the catalogue identities of the houses removed whole (COHERENCE-VEIL-9)
  * @param {Set<string>} [labels] the label of each house removed whole that has no name (COHERENCE-VEIL-10, V7-9)
+ * @param {boolean} [whole] this share hides some house whole (VEIL-19, item B: the trace by positive account)
  */
-export function withholdSecondHomes(s, src, gone, openNames, houseFields, births = new Set(), labels = new Set()) {
+export function withholdSecondHomes(s, src, gone, openNames, houseFields, births = new Set(), labels = new Set(), whole = gone.size > 0) {
   // COHERENCE-VEIL-10 (V7-2): THE COMPOSED HOMES, BY IDENTITY (the header states each rule)
   const ties = src.ties;
   if (ties.length) {
@@ -866,7 +867,7 @@ export function withholdSecondHomes(s, src, gone, openNames, houseFields, births
       });
     }
   }
-  if (!gone.size && !births.size && !labels.size) return;
+  if (!gone.size && !births.size && !labels.size && !whole) return;
   // COHERENCE-VEIL-9: the houses still listed that the engine read (native: priorityHelpers.js :: getInstitutionNames
   // stamps nativeSemanticNames, so a custom house is in neither list nor any flag), each with its identity
   const accountants = (Array.isArray(s.institutions) ? s.institutions : []).filter(isRec).filter(i => !isCustomHouse(i))
@@ -894,6 +895,13 @@ export function withholdSecondHomes(s, src, gone, openNames, houseFields, births
     for (const [flag, words] of Object.entries(HOUSE_FLAG_NAMES)) {
       if (inst[flag] === true && !listed.some(l => words.some(w => l.includes(w)))) inst[flag] = false;
     }
+  }
+  // VEIL-19 (item B; V7-5): THE TRACE BY POSITIVE ACCOUNT, and with it the allegiance receipts by their house (VR4 ii-12):
+  // on a share that hides any house whole, what no native house still listed accounts for (its catalogId, its name's fold)
+  // leaves the trace (withholdTraceByAccount). SQL twin: _gallery_veil_second_homes (`acc_ids`)
+  if (whole && Array.isArray(s.simulationTrace)) {
+    withholdTraceByAccount(s, new Set((Array.isArray(s.institutions) ? s.institutions : []).filter(isRec).filter(i => !isCustomHouse(i))
+      .flatMap(i => [typeof i.catalogId === 'string' ? i.catalogId : '', foldName(str(i.name))]).filter(x => x !== '')));
   }
   // A chain names a house by the ENGINE's processor match, not only by the card's name (computeActiveChains.js ::
   // fuzzyProcessorMatch: the lower-cased name holds the pattern's first processorPrefix characters), so a house
@@ -982,6 +990,48 @@ export function withholdSecondHomes(s, src, gone, openNames, houseFields, births
     withholdTiesOfTheSwept(s, search.hit);
     sweepHiddenNames(s, search);
   }
+}
+
+/** The trace's own spelling of a house's id (the engine's `institution.<snake>`). */
+const TRACE_HOUSE_ID = 'institution.';
+
+/**
+ * VEIL-19 (item B; REVIEW-VEIL-212-FINAL's V7-5): THE TRACE BY POSITIVE ACCOUNT (in place). A renamed house hidden whole keeps
+ * nothing of its birth name but the trace's `institution.<snake>`, so the name search cannot find it there. The trace keeps
+ * what a native house still listed accounts for, as the two derived lists do: an id that begins `institution.` (any string
+ * of an entry, of a cause or of an effect; an entry's targetId where its targetType is 'institution') is accounted for
+ * where the fold of the id after that prefix (foldName) is in `acc` (each listed native house's catalogId and its name's
+ * fold). An entry that holds one no house accounts for leaves whole, and an 'institution' entry whose targetId is not a
+ * string (unsure); a cause or an effect that holds one leaves its list. WITH IT (VR4 ii-12, by identity): an allegiance
+ * receipt (step 'people-allegiance' or result 'allegiance': allegiance.js :: leaveAllegianceReceipts) stays only where
+ * every effect 'gains a hidden ally' names, as its target, a house accounted for by the same rule, so a hidden house's
+ * handler line and "The allegiance runs to the town's criminal power" leave with it; a receipt that names no house leaves
+ * (unsure). SQL twin: _gallery_veil_second_homes (`acc_ids`), rule for rule.
+ * @param {Rec} s @param {Set<string>} acc
+ */
+function withholdTraceByAccount(s, acc) {
+  /** @param {string} v */
+  const accounted = (v) => acc.has(foldName(v.startsWith(TRACE_HOUSE_ID) ? v.slice(TRACE_HOUSE_ID.length) : v));
+  /** @param {unknown} x */
+  const holdsOther = (x) => (typeof x === 'string' ? [x] : isRec(x) ? Object.values(x).filter(v => typeof v === 'string') : [])
+    .some(v => v.startsWith(TRACE_HOUSE_ID) && !accounted(v));
+  const trace = /** @type {unknown[]} */ (s.simulationTrace);
+  s.simulationTrace = trace.flatMap((e) => {
+    if (!isRec(e)) return [e];
+    if (Object.entries(e).some(([k, v]) => k !== 'causes' && k !== 'downstreamEffects' && typeof v === 'string'
+      && (v.startsWith(TRACE_HOUSE_ID) || (k === 'targetId' && e.targetType === 'institution')) && !accounted(v))) return [];
+    if (e.targetType === 'institution' && typeof e.targetId !== 'string') return [];
+    if (e.step === 'people-allegiance' || e.result === 'allegiance') {
+      const allies = (Array.isArray(e.downstreamEffects) ? e.downstreamEffects : []).filter(d => isRec(d) && d.effect === 'gains a hidden ally');
+      if (!allies.length || !allies.every(d => typeof d.target === 'string' && accounted(d.target))) return [];
+    }
+    const next = { ...e };
+    for (const k of ['causes', 'downstreamEffects']) {
+      const list = e[k];
+      if (Array.isArray(list)) next[k] = list.filter(x => !holdsOther(x));
+    }
+    return [next];
+  });
 }
 
 /** The ends of a tie, in both stored shapes (from/to; master's npc1Id/npc2Id) and by name. */

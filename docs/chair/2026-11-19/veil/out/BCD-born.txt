@@ -1,0 +1,24 @@
+B, C, D ON BORN TOWNS (VEIL-19's builder). Two probes, base chain and twin against the tree's (each on a local chain of that
+tree's 001..212; the base is `git archive bedd5a392`):
+  r5-born  docs/chair/2026-11-14/veil-probe-13/measure/r5-born.probe.jsx R5_N=4 (48 births, both shapes, three shares: no veil
+           record, the default veil, the default veil with Reveal DM; gallery, link, import, twin), compared by
+           veil-probe-16/measure/born-cmp.mjs
+  bcd-born measure/bcd-born.probe.jsx R5_N=4 (the same 48 births, both shapes, the default veil and EVERY EYE THE CURATE MODEL
+           OFFERS SHUT, Reveal DM off and on, the four reads), compared by measure/bcd-born-cmp.mjs: what each item moves, and
+           that nothing else moves (the fingerprint outside the trace, the two flag copies, the income rows and the income
+           prose rungs)
+
+B (the trace by positive account, with VR4 ii-12):
+  r5-born: 1152 rows | 1152; rows whose fingerprint differs 102 (every one a Reveal-DM read of a town that hides a house
+           whole: 17 towns x 2 shapes x gallery, import, twin); reads that raise 0 | 0; server against twin 0 | 0
+  bcd-born, each veil (the default veil; every eye shut: the same answer): rows 768; differ 102; differ OUTSIDE the trace 0;
+           server-twin 0 | 0; reads that raise 0; rows that send what the base withheld 0.
+  WHAT B DROPS: on the 17 born towns that hide a house whole (of 48), per Reveal-DM read, summed over the towns: 213 trace
+           entries (178 `institution.<id>` entries no listed house accounts for, in 15 towns, 16 distinct ids: houses the
+           birth weighed and did not keep, foundling_home 22, wizard_s_tower 19, almshouse 18, hireling_hall 16,
+           caravan_masters_exchange 16, alchemist_quarter 14, assay_office 12, printing_house 12, rookery 10, hired_blades 8,
+           black_market_bazaar 8, ...; and the 35 allegiance receipts whose house is hidden whole, with their 35 handler and
+           10 power lines) and 275 effects whose target is an `institution.<kind>` no house is named for (42 distinct:
+           institution.market 16, smith 15, tanner 14, alchemist 12, weaver 12, church 11, ...). Causes left on kept
+           entries: 0 dropped (the 8 unaccounted causes sit in withheld entries). Over the 102 rows: 1278 entries (210
+           allegiance receipts, 270 power and handler lines), 1650 effects. A town that hides no house whole: its trace unmoved.

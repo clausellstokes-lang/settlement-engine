@@ -1,0 +1,9 @@
+B, C, D GREEN (VEIL-19's builder). Per commit: the item's arm, the six guard files through scripts/gate-mutex.sh (shared
+tier), the twin's tests (tests/domain/display/publicSafe*.test.js, tests/components/publicProseVeil*.test.js,
+tests/lib/gallery.test.js), the reader's acceptance run on the tree, the gates through scripts/gate-tail.sh. Every test,
+gate and probe run with the GIT_ variables stripped.
+
+B  the arm: 0 sends or losses, server against twin 0 paths (GREEN; 114 at the base). Six guard files 6 of 6, 124 of 124. The
+   twin's tests 5 files, 120 of 120. Acceptance at the tree: exit 1, d06 the only FAIL row, 36 of 37 (a07 PASS), the 15 hand
+   rows all equal. typecheck:domain:strict 1113 / ceiling 1113 (exit 0); typecheck:ratchet 167 / 167 (exit 0); eslint on
+   gallerySecondHomes.js, galleryVeil.js and the arm's file: exit 0.
