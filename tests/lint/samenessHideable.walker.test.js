@@ -39,8 +39,8 @@
  *   PHASE 3          (SAME-2 brief H; the chair's 17:45 order (2)) the hand-listed pools' LINES are read too
  *                    (`readHandLines`): a declared row (`needs` or `marks`) by its atoms, rule 1 and rule 2 as above;
  *                    every other line (a bare string, a function, a row that declares no need) by `CRIME_WORD`, a word
- *                    beginning with a stem of `CRIME_KEY_WORDS`; a line under a key `CRIME_KEY_WORDS` takes is in a
- *                    CRIME POOL. A function line is read from its own source (literals and template quasis), never
+ *                    beginning with a stem of `CRIME_KEY_WORDS` (PENDING: `FREE_TEXT_READ`, the chair's 19:12 word);
+ *                    a line under a key `CRIME_KEY_WORDS` takes is in a CRIME POOL. A function line is read from its own source (literals and template quasis), never
  *                    called. The reds standing on 1c9673e84 are the bank's `hand` rows (pool, text hash, why); the
  *                    houses are the readings' `hand` rows. A seat's hand row whose table is not on this line is skipped.
  *
@@ -66,7 +66,7 @@ const EXISTING_REL = 'tests/lint/samenessHideable.existingReds.json';
 const HOUSES_REL = 'tests/lint/samenessHideable.houseReadings.json';
 const HAND_REL = 'tests/lint/samenessHideable.handPools.json';
 /** Shrink-only: today's counts on the base. Lower them as rows go; never raise them. */
-const EXISTING_CEILING = 295; // 96 + 199 (SAME-2 brief H unit 1, raised ONCE: the hand pools' lines banked on 1c9673e84)
+const EXISTING_CEILING = 250; // 96 + 154 (SAME-2 brief H unit 1: the hand pools' lines red BY KEY on 1c9673e84; the free-text reds wait for the chair's precise list, 19:12)
 const HAND_CEILING = 44; // 42 + 2 (SAME-2's unit 0, the join's point 84: GOALS' two key lists, read by `.includes`, on the hand list as TIER_ORDER is)
 const COVERT = 'dm-only';
 
@@ -202,6 +202,12 @@ const CRIME_WORD = new RegExp(String.raw`\b(?:${CRIME_KEY_WORDS.source})`, 'i');
 const NOT_LINE_KEYS = new Set(['key', 'type', 'label', 'twinOf', 'needs', 'excludes', 'crisis', 'institutions', 'trade',
   'dominant', 'arcane', 'colour', 'marks']);
 const HOLE = '‹›';
+/**
+ * THE FREE-TEXT READING IS PENDING (the chair, 19:12 UTC 2026-11-20): the word list is made precise for free text
+ * (a phrase or a word-boundary form per word) before any free-text line is banked. Until the chair's word, a bare
+ * line is read by `CRIME_WORD` only where a caller asks (`words: true`), and the bank holds no free-text red.
+ */
+const FREE_TEXT_READ = false;
 
 /**
  * A function line's text, read from its OWN SOURCE: its string literals and template quasis in source order, each
@@ -254,9 +260,9 @@ export function poolLeaves(value) {
  * a crime or hideable atom, rule 2 lists its other houses. Every other line (a bare string, a function, a row that
  * declares no need) is read by `CRIME_WORD`. A line under a key `CRIME_KEY_WORDS` takes is in a CRIME POOL. A line
  * marked `dm-only`, or in a pool `EXEMPT` names, reds nowhere.
- * @param {HandPool[]} hand @param {Readonly<Record<string, unknown>>} exempt
+ * @param {HandPool[]} hand @param {Readonly<Record<string, unknown>>} [exempt] @param {boolean} [words] read bare lines by `CRIME_WORD`
  */
-export function readHandLines(hand, exempt = EXEMPT) {
+export function readHandLines(hand, exempt = EXEMPT, words = FREE_TEXT_READ) {
   /** @type {Array<{ pool: string, sha: string, text: string|null, why: string[], houses: string[], quiet: boolean }>} */ const out = [];
   for (const { ref, value } of hand) for (const { path, x } of poolLeaves(value)) {
     const pool = [ref, ...path].join('::');
@@ -267,7 +273,7 @@ export function readHandLines(hand, exempt = EXEMPT) {
     /** @type {string[]} */ const why = [];
     if (path.some((k) => CRIME_KEY_WORDS.test(k))) why.push('crime pool');
     if (declared) why.push(...atoms.filter((a) => ['crime', 'hideable'].includes(String(atomClass(a)))).map((a) => `needs ${a}`));
-    else if (text !== null && CRIME_WORD.test(text)) why.push(`crime word ${String(text.match(CRIME_WORD)?.[0]).toLowerCase()}`);
+    else if (words && text !== null && CRIME_WORD.test(text)) why.push(`crime word ${String(text.match(CRIME_WORD)?.[0]).toLowerCase()}`);
     if (text === null) why.push('unreadable');
     const quiet = (row.marks || []).includes(COVERT) || Object.hasOwn(exempt, pool) || Object.hasOwn(exempt, ref);
     out.push({ pool, sha: textSha(text), text, why, houses: atoms.filter((a) => atomClass(a) === 'house'), quiet });
@@ -275,8 +281,8 @@ export function readHandLines(hand, exempt = EXEMPT) {
   return out;
 }
 
-/** RULE 1 over the hand pools' lines. @param {HandPool[]} hand @param {Readonly<Record<string, unknown>>} [exempt] */
-export const handReds = (hand, exempt = EXEMPT) => sortRows(readHandLines(hand, exempt).filter((l) => l.why.length && !l.quiet)
+/** RULE 1 over the hand pools' lines. @param {HandPool[]} hand @param {Readonly<Record<string, unknown>>} [exempt] @param {boolean} [words] */
+export const handReds = (hand, exempt = EXEMPT, words = FREE_TEXT_READ) => sortRows(readHandLines(hand, exempt, words).filter((l) => l.why.length && !l.quiet)
   .map(({ pool, sha, why }) => ({ pool, sha, why: why.join('; ') })), ['pool', 'sha', 'why']);
 
 /** RULE 2 over the hand pools' declared lines. @param {HandPool[]} hand */
@@ -454,17 +460,18 @@ describe(`the hideable-house walker of the sameness pools (base ${BASE})`, async
 
     test('PHASE 3: a bare line with a crime word reds in a non-crime hand pool, a string or a function read by its source', () => {
       const ref = 'src/data/narrativeData.js :: STRESS_NOTES';
-      expect(handReds([{ ref, value: { famine: ['A smuggler sells grain by the well.'] } }]).map((r) => r.why)).toEqual(['crime word smuggl']);
-      expect(handReds([{ ref, value: { famine: [(/** @type {string} */ n) => `${n} has a gang at its gate.`] } }]).map((r) => r.why)).toEqual(['crime word gang']);
+      expect(handReds([{ ref, value: { famine: ['A smuggler sells grain by the well.'] } }], EXEMPT, true).map((r) => r.why)).toEqual(['crime word smuggl']);
+      expect(handReds([{ ref, value: { famine: ['A smuggler sells grain by the well.'] } }])).toEqual([]); // pending the chair's precise list (19:12)
+      expect(handReds([{ ref, value: { famine: [(/** @type {string} */ n) => `${n} has a gang at its gate.`] } }], EXEMPT, true).map((r) => r.why)).toEqual(['crime word gang']);
       expect(sourceText((/** @type {string} */ n) => `${n} waits.`)).toBe('‹› waits.');
-      expect(handReds([{ ref, value: { famine: ['An unorganised heap of sacks.', 'The fishers mend their nets.'] } }])).toEqual([]);
+      expect(handReds([{ ref, value: { famine: ['An unorganised heap of sacks.', 'The fishers mend their nets.'] } }], EXEMPT, true)).toEqual([]);
     });
 
     test('PHASE 3: a declared hand line is read by its atoms (a crime atom reds; a house is listed), not by its words', () => {
       const ref = 'src/data/narrativeData.js :: ARRIVAL_SCENES';
       expect(handReds([{ ref, value: { calm: [{ text: 'Somebody runs the trade.', needs: ['organised crime'] }] } }]).map((r) => r.why)).toEqual(['needs organised crime']);
       const walled = { text: 'A smuggler waits at the walls.', needs: ['walls'] };
-      expect(handReds([{ ref, value: { calm: [walled] } }])).toEqual([]);
+      expect(handReds([{ ref, value: { calm: [walled] } }], EXEMPT, true)).toEqual([]);
       expect(handHouseReadings([{ ref, value: { calm: [walled] } }]).map((r) => r.house)).toEqual(['walls']);
     });
 
