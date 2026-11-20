@@ -1631,6 +1631,35 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   `not-a-draw` row with its cause. R4 one reserve line reworded as GOALS-3 wrote it: "Leave the accounts of {house}
   so plain that whoever comes next could take them up." (was "the books of").
 
+- **THE RECENT CONFLICT'S SIXTEEN QUARRELS, READ AND RULED (16:08 UTC).** `lines/CONFLICT-LINES.md` at 106a104b4
+  (`lane/depth-2-2026-11-20`; the measure and a census of 31 readers in `depth/conflict/`): eight for the grazing
+  rungs (thorp, hamlet, village) and eight for the levies rung (town, city, metropolis), today's two kept at index
+  0 byte for byte; the pick is the argmax of a keyed hash over the lines whose needs hold, no roll. THE CHAIR READ
+  ALL SIXTEEN: THIRTEEN AS WRITTEN, THREE REWORDED because a line may not name a season the record does not hold:
+  g5 "…disagree over who may draw water first when the river runs low."; l3 "How much grain the granary should hold
+  back in reserve has been argued all season, and nothing is agreed."; l4 "Who should pay to mend the walls has been
+  argued for months, and every street says the next one should pay more." MEASURED ON ITS PROBE (the top share of
+  one sentence, 100 places a size): thorp 52 to 21, hamlet 49 to 32, village 44 to 18, town 58 to 11, city 52 to 19,
+  metropolis 52 to 11; two-tree 0 non-string; only `recentConflict` and the `pressureSentence` composed from it
+  move. THE FOUR ASKED: (1) thorp and hamlet miss the bar because no vocabulary atom answers the three houses every
+  small place names: ATOMS FOR "Water source", "Access to external mill" AND "Common grazing land" ARE ALLOWED BY
+  THE CHAIR'S LEAVE (a house the record already holds is not new capability), two or three more lines to the chair
+  first, target about 16%; (2) the military rung (city 19%) gets the same treatment in the same unit: four to six
+  more wordings of the same friction, lines first; (3) `config` passed into the site's `factsOf`, one argument, no
+  edit to `power/rulingStructure.js`; (4) `guardLineUnderTheLaw.js :: familiesHeldOf` and the page law read the
+  word "families": the builder measures by render; a display that moves comes to the chair. BUILD NOW.
+- **THE ATOMS RULE (16:10 UTC; for every seat of the sameness program).** `src/domain/facts/factVocabulary.js` stays
+  read-only to seats EXCEPT BY THE CHAIR'S LEAVE, ONE ATOM AT A TIME: for a fact the record already holds (a house
+  of the catalogue, a route kind, a terrain, a good the place makes), one line to the chair ("ATOM <key> : <home> :
+  <the wording>"), appended at the end of its list, nothing else in the file touched; the chair resolves the join.
+  NEVER an atom for what the record does not hold (season, climate, a count): such a line is rewritten to need none.
+  Sent to DEPTH-2, PLACE-1, PEOPLE-1 and PAGE-7.
+- **THE TRADITIONS' SHARED TEXT HOLDS (16:06 UTC, REVIEW-VEIL-13 on "TRAD-SHARE-2 3ba5ee73f").** Executed on 8 towns
+  with Reveal DM off and on: its plant and three sisters recalled a withheld fire in 16 of 16 reads at 1f3cdc135 and
+  in 0 of 16 at the tip, on two chains; the control "The Granary Fire" recalled in 8 of 16 (four towns hold a house
+  named with "granary": toward withholding). Its record 8ad885c38, section 4. Still owed by TRAD-4 for the reader:
+  the import path and the round trip on more than 4 towns.
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -4540,3 +4569,11 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   commonest kinds, each beside its need and its rate; at least three need-free lines a pool): approved. GOALS-3:
   builder 9 out on the wants' tranche, docs only (brief eed0a95f2); four rulings sent (section 2). The net-14
   trigger fired at 16:00; its pass was already done.
+- 16:09 UTC · FOUR MESSAGES READ AT 16:07, ANSWERED BY 16:10 (section 2: the sixteen quarrels; the atoms rule; the traditions'
+  text holds). FORTUNE-3: lane tip abae6ab7e; `briefs/U5-SAFETY.md` written to the 15:58 ruling (the leaf rows
+  `safetyCalmLadder` and `safetyUsualRange`; one line replaced in place in `computePublicLegitimacy`); two builders
+  out (the safety hunk on `-u5s-wip`; the census of birth readers on `-u5c-wip`); told the line's tip is still
+  43ab0f5eb. PEOPLE-1: started on 43ab0f5eb, branch 6e84a81a7; RE-RAN THE CENSUS: every count matched; M1
+  (activeConstraint, structuralPosition) and M2 (quarters) measuring; M3 and M4 queued. DEPTH-2 (about 240,000 by
+  its own figure): the hooks' nine reds sorted (eight its own: ceilings, a line-keyed site, four seed-pinned tests;
+  one the line's, `generationForkCensus` A1), builder curing.
