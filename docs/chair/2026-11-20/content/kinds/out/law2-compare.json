@@ -1,0 +1,901 @@
+{
+ "arms": [
+  {
+   "label": "baseline",
+   "path": "docs/chair/2026-11-20/content/kinds/out/baseline.jsonl",
+   "metas": [
+    {
+     "tree": "/home/user/kinds-k0",
+     "sha": "a6a60ef3b3f5b567a908809ff7b2d5bf8dabcce2",
+     "force": {},
+     "sizes": [
+      "thorp",
+      "hamlet",
+      "village",
+      "town",
+      "city",
+      "metropolis"
+     ],
+     "perSize": 150,
+     "hook": true,
+     "split": "4 node processes by size (thorp+hamlet+village | town | city | metropolis), rows concatenated",
+     "wallSeconds": 90
+    }
+   ]
+  },
+  {
+   "label": "A",
+   "path": "docs/chair/2026-11-20/content/kinds/out/law2.jsonl",
+   "metas": [
+    {
+     "tree": "/home/user/kinds-k1",
+     "sha": "707c5fed39f5abb49be5ea432d250882284ca016",
+     "force": {
+      "_troubleLawVersion": 2
+     },
+     "sizes": [
+      "thorp",
+      "hamlet",
+      "village"
+     ],
+     "perSize": 150,
+     "hook": true
+    }
+   ]
+  },
+  {
+   "label": "B",
+   "path": "docs/chair/2026-11-20/content/kinds/out/law2-B.jsonl",
+   "metas": [
+    {
+     "tree": "/home/user/kinds-k1 @707c5fed39f5abb49be5ea432d250882284ca016 (git archive, planted copy)",
+     "sha": "707c5fed39f5abb49be5ea432d250882284ca016",
+     "force": {
+      "_troubleLawVersion": 2
+     },
+     "sizes": [
+      "thorp",
+      "hamlet",
+      "village"
+     ],
+     "perSize": 150,
+     "hook": true,
+     "plant": {
+      "crimeWave": {
+       "floor": 0.05,
+       "ceiling": 0.55,
+       "readLow": 20,
+       "readHigh": 90
+      }
+     },
+     "plantReceipt": [
+      {
+       "row": "crimeWave",
+       "before": "crimeWave: Object.freeze({ read: 'criminalEffective', floor: 0.10, ceiling: 0.40, readLow: 20, readHigh: 100 }),",
+       "after": "crimeWave: Object.freeze({ read: 'criminalEffective', floor: 0.05, ceiling: 0.55, readLow: 20, readHigh: 90 }),"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "label": "B50",
+   "path": "docs/chair/2026-11-20/content/kinds/out/law2-B50.jsonl",
+   "metas": [
+    {
+     "tree": "/home/user/kinds-k1 @707c5fed39f5abb49be5ea432d250882284ca016 (git archive, planted copy)",
+     "sha": "707c5fed39f5abb49be5ea432d250882284ca016",
+     "force": {
+      "_troubleLawVersion": 2
+     },
+     "sizes": [
+      "thorp",
+      "hamlet",
+      "village"
+     ],
+     "perSize": 150,
+     "hook": true,
+     "plant": {
+      "crimeWave": {
+       "floor": 0.05,
+       "ceiling": 0.5,
+       "readLow": 20,
+       "readHigh": 90
+      }
+     },
+     "plantReceipt": [
+      {
+       "row": "crimeWave",
+       "before": "crimeWave: Object.freeze({ read: 'criminalEffective', floor: 0.10, ceiling: 0.40, readLow: 20, readHigh: 100 }),",
+       "after": "crimeWave: Object.freeze({ read: 'criminalEffective', floor: 0.05, ceiling: 0.5, readLow: 20, readHigh: 90 }),"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "bySize": {
+  "thorp": {
+   "baseline": {
+    "n": 150,
+    "guild": 0,
+    "crime": 11.333333333333334,
+    "kinds": [],
+    "topFirst": "resource_scarcity",
+    "topFirstShare": 17.333333333333332,
+    "crimeFirst": 10.666666666666666,
+    "distinct": 24,
+    "count": [
+     0,
+     146,
+     3,
+     1
+    ],
+    "crimeQ": {
+     "bottom": 5.2631578947368425,
+     "top": 8.108108108108109
+    },
+    "guildQ": {
+     "bottom": 0,
+     "top": 0
+    },
+    "moved": null,
+    "breaks": false
+   },
+   "A": {
+    "n": 150,
+    "guild": 0,
+    "crime": 9.333333333333334,
+    "kinds": [],
+    "topFirst": "resource_scarcity",
+    "topFirstShare": 17.333333333333332,
+    "crimeFirst": 9.333333333333334,
+    "distinct": 24,
+    "count": [
+     0,
+     146,
+     4,
+     0
+    ],
+    "crimeQ": {
+     "bottom": 5.2631578947368425,
+     "top": 5.405405405405405
+    },
+    "guildQ": {
+     "bottom": 0,
+     "top": 0
+    },
+    "moved": {
+     "down": 1,
+     "up": 0,
+     "upSeeds": []
+    },
+    "breaks": false
+   },
+   "B": {
+    "n": 150,
+    "guild": 0,
+    "crime": 9.333333333333334,
+    "kinds": [],
+    "topFirst": "resource_scarcity",
+    "topFirstShare": 17.333333333333332,
+    "crimeFirst": 8.666666666666666,
+    "distinct": 24,
+    "count": [
+     0,
+     147,
+     2,
+     1
+    ],
+    "crimeQ": {
+     "bottom": 5.2631578947368425,
+     "top": 8.108108108108109
+    },
+    "guildQ": {
+     "bottom": 0,
+     "top": 0
+    },
+    "moved": {
+     "down": 1,
+     "up": 0,
+     "upSeeds": []
+    },
+    "breaks": false
+   },
+   "B50": {
+    "n": 150,
+    "guild": 0,
+    "crime": 8.666666666666666,
+    "kinds": [],
+    "topFirst": "resource_scarcity",
+    "topFirstShare": 17.333333333333332,
+    "crimeFirst": 8.666666666666666,
+    "distinct": 24,
+    "count": [
+     0,
+     147,
+     3,
+     0
+    ],
+    "crimeQ": {
+     "bottom": 5.2631578947368425,
+     "top": 5.405405405405405
+    },
+    "guildQ": {
+     "bottom": 0,
+     "top": 0
+    },
+    "moved": {
+     "down": 2,
+     "up": 0,
+     "upSeeds": []
+    },
+    "breaks": false
+   }
+  },
+  "hamlet": {
+   "baseline": {
+    "n": 150,
+    "guild": 0,
+    "crime": 5.333333333333333,
+    "kinds": [],
+    "topFirst": "resource_scarcity",
+    "topFirstShare": 13.333333333333334,
+    "crimeFirst": 5.333333333333333,
+    "distinct": 23,
+    "count": [
+     0,
+     148,
+     2,
+     0
+    ],
+    "crimeQ": {
+     "bottom": 0,
+     "top": 10.81081081081081
+    },
+    "guildQ": {
+     "bottom": 0,
+     "top": 0
+    },
+    "moved": null,
+    "breaks": false
+   },
+   "A": {
+    "n": 150,
+    "guild": 0,
+    "crime": 2.6666666666666665,
+    "kinds": [],
+    "topFirst": "resource_scarcity",
+    "topFirstShare": 13.333333333333334,
+    "crimeFirst": 2.6666666666666665,
+    "distinct": 23,
+    "count": [
+     0,
+     148,
+     2,
+     0
+    ],
+    "crimeQ": {
+     "bottom": 0,
+     "top": 8.108108108108109
+    },
+    "guildQ": {
+     "bottom": 0,
+     "top": 0
+    },
+    "moved": {
+     "down": 0,
+     "up": 0,
+     "upSeeds": []
+    },
+    "breaks": false
+   },
+   "B": {
+    "n": 150,
+    "guild": 0,
+    "crime": 2.6666666666666665,
+    "kinds": [],
+    "topFirst": "resource_scarcity",
+    "topFirstShare": 13.333333333333334,
+    "crimeFirst": 2.6666666666666665,
+    "distinct": 23,
+    "count": [
+     0,
+     148,
+     2,
+     0
+    ],
+    "crimeQ": {
+     "bottom": 0,
+     "top": 8.108108108108109
+    },
+    "guildQ": {
+     "bottom": 0,
+     "top": 0
+    },
+    "moved": {
+     "down": 0,
+     "up": 0,
+     "upSeeds": []
+    },
+    "breaks": false
+   },
+   "B50": {
+    "n": 150,
+    "guild": 0,
+    "crime": 2.6666666666666665,
+    "kinds": [],
+    "topFirst": "resource_scarcity",
+    "topFirstShare": 13.333333333333334,
+    "crimeFirst": 2.6666666666666665,
+    "distinct": 23,
+    "count": [
+     0,
+     148,
+     2,
+     0
+    ],
+    "crimeQ": {
+     "bottom": 0,
+     "top": 8.108108108108109
+    },
+    "guildQ": {
+     "bottom": 0,
+     "top": 0
+    },
+    "moved": {
+     "down": 0,
+     "up": 0,
+     "upSeeds": []
+    },
+    "breaks": false
+   }
+  },
+  "village": {
+   "baseline": {
+    "n": 150,
+    "guild": 1.3333333333333333,
+    "crime": 7.333333333333333,
+    "kinds": [],
+    "topFirst": "resource_scarcity",
+    "topFirstShare": 17.333333333333332,
+    "crimeFirst": 7.333333333333333,
+    "distinct": 28,
+    "count": [
+     0,
+     66,
+     84,
+     0
+    ],
+    "crimeQ": {
+     "bottom": 0,
+     "top": 5.405405405405405
+    },
+    "guildQ": {
+     "bottom": 0,
+     "top": 5.405405405405405
+    },
+    "moved": null,
+    "breaks": false
+   },
+   "A": {
+    "n": 150,
+    "guild": 1.3333333333333333,
+    "crime": 4,
+    "kinds": [],
+    "topFirst": "resource_scarcity",
+    "topFirstShare": 17.333333333333332,
+    "crimeFirst": 4,
+    "distinct": 28,
+    "count": [
+     0,
+     68,
+     82,
+     0
+    ],
+    "crimeQ": {
+     "bottom": 0,
+     "top": 5.405405405405405
+    },
+    "guildQ": {
+     "bottom": 0,
+     "top": 5.405405405405405
+    },
+    "moved": {
+     "down": 2,
+     "up": 0,
+     "upSeeds": []
+    },
+    "breaks": false
+   },
+   "B": {
+    "n": 150,
+    "guild": 1.3333333333333333,
+    "crime": 4,
+    "kinds": [],
+    "topFirst": "resource_scarcity",
+    "topFirstShare": 17.333333333333332,
+    "crimeFirst": 4,
+    "distinct": 28,
+    "count": [
+     0,
+     68,
+     82,
+     0
+    ],
+    "crimeQ": {
+     "bottom": 0,
+     "top": 5.405405405405405
+    },
+    "guildQ": {
+     "bottom": 0,
+     "top": 5.405405405405405
+    },
+    "moved": {
+     "down": 2,
+     "up": 0,
+     "upSeeds": []
+    },
+    "breaks": false
+   },
+   "B50": {
+    "n": 150,
+    "guild": 1.3333333333333333,
+    "crime": 4,
+    "kinds": [],
+    "topFirst": "resource_scarcity",
+    "topFirstShare": 17.333333333333332,
+    "crimeFirst": 4,
+    "distinct": 28,
+    "count": [
+     0,
+     68,
+     82,
+     0
+    ],
+    "crimeQ": {
+     "bottom": 0,
+     "top": 5.405405405405405
+    },
+    "guildQ": {
+     "bottom": 0,
+     "top": 5.405405405405405
+    },
+    "moved": {
+     "down": 2,
+     "up": 0,
+     "upSeeds": []
+    },
+    "breaks": false
+   }
+  },
+  "town": {
+   "baseline": {
+    "n": 150,
+    "guild": 30.666666666666668,
+    "crime": 22,
+    "kinds": [
+     {
+      "kind": "guild_conflict",
+      "share": 30.666666666666668,
+      "over": false
+     }
+    ],
+    "topFirst": "crime_wave",
+    "topFirstShare": 21.333333333333332,
+    "crimeFirst": 21.333333333333332,
+    "distinct": 29,
+    "count": [
+     0,
+     70,
+     80,
+     0
+    ],
+    "crimeQ": {
+     "bottom": 5.2631578947368425,
+     "top": 51.351351351351354
+    },
+    "guildQ": {
+     "bottom": 36.8421052631579,
+     "top": 35.13513513513514
+    },
+    "moved": null,
+    "breaks": false
+   },
+   "A": {
+    "n": 150,
+    "guild": 16.666666666666668,
+    "crime": 12.666666666666666,
+    "kinds": [],
+    "topFirst": "crime_wave",
+    "topFirstShare": 12,
+    "crimeFirst": 12,
+    "distinct": 29,
+    "count": [
+     0,
+     72,
+     78,
+     0
+    ],
+    "crimeQ": {
+     "bottom": 2.6315789473684212,
+     "top": 29.72972972972973
+    },
+    "guildQ": {
+     "bottom": 18.42105263157895,
+     "top": 18.91891891891892
+    },
+    "moved": {
+     "down": 2,
+     "up": 0,
+     "upSeeds": []
+    },
+    "breaks": false
+   },
+   "B": {
+    "n": 150,
+    "guild": 16.666666666666668,
+    "crime": 14.666666666666666,
+    "kinds": [],
+    "topFirst": "crime_wave",
+    "topFirstShare": 14,
+    "crimeFirst": 14,
+    "distinct": 29,
+    "count": [
+     0,
+     71,
+     79,
+     0
+    ],
+    "crimeQ": {
+     "bottom": 2.6315789473684212,
+     "top": 37.83783783783784
+    },
+    "guildQ": {
+     "bottom": 18.42105263157895,
+     "top": 18.91891891891892
+    },
+    "moved": {
+     "down": 1,
+     "up": 0,
+     "upSeeds": []
+    },
+    "breaks": false
+   },
+   "B50": {
+    "n": 150,
+    "guild": 16.666666666666668,
+    "crime": 14,
+    "kinds": [],
+    "topFirst": "crime_wave",
+    "topFirstShare": 13.333333333333334,
+    "crimeFirst": 13.333333333333334,
+    "distinct": 29,
+    "count": [
+     0,
+     71,
+     79,
+     0
+    ],
+    "crimeQ": {
+     "bottom": 2.6315789473684212,
+     "top": 35.13513513513514
+    },
+    "guildQ": {
+     "bottom": 18.42105263157895,
+     "top": 18.91891891891892
+    },
+    "moved": {
+     "down": 1,
+     "up": 0,
+     "upSeeds": []
+    },
+    "breaks": false
+   }
+  },
+  "city": {
+   "baseline": {
+    "n": 150,
+    "guild": 50.666666666666664,
+    "crime": 48.666666666666664,
+    "kinds": [
+     {
+      "kind": "guild_conflict",
+      "share": 50.666666666666664,
+      "over": true
+     },
+     {
+      "kind": "crime_wave",
+      "share": 48.666666666666664,
+      "over": true
+     }
+    ],
+    "topFirst": "crime_wave",
+    "topFirstShare": 46,
+    "crimeFirst": 46,
+    "distinct": 29,
+    "count": [
+     0,
+     0,
+     76,
+     74
+    ],
+    "crimeQ": {
+     "bottom": 31.57894736842105,
+     "top": 51.351351351351354
+    },
+    "guildQ": {
+     "bottom": 50,
+     "top": 54.054054054054056
+    },
+    "moved": null,
+    "breaks": true
+   },
+   "A": {
+    "n": 150,
+    "guild": 32.666666666666664,
+    "crime": 20.666666666666668,
+    "kinds": [
+     {
+      "kind": "guild_conflict",
+      "share": 32.666666666666664,
+      "over": false
+     }
+    ],
+    "topFirst": "crime_wave",
+    "topFirstShare": 18.666666666666668,
+    "crimeFirst": 18.666666666666668,
+    "distinct": 29,
+    "count": [
+     0,
+     0,
+     77,
+     73
+    ],
+    "crimeQ": {
+     "bottom": 2.6315789473684212,
+     "top": 37.83783783783784
+    },
+    "guildQ": {
+     "bottom": 23.68421052631579,
+     "top": 43.24324324324324
+    },
+    "moved": {
+     "down": 1,
+     "up": 0,
+     "upSeeds": []
+    },
+    "breaks": false
+   },
+   "B": {
+    "n": 150,
+    "guild": 32.666666666666664,
+    "crime": 25.333333333333332,
+    "kinds": [
+     {
+      "kind": "guild_conflict",
+      "share": 32.666666666666664,
+      "over": false
+     }
+    ],
+    "topFirst": "crime_wave",
+    "topFirstShare": 23.333333333333332,
+    "crimeFirst": 23.333333333333332,
+    "distinct": 29,
+    "count": [
+     0,
+     0,
+     77,
+     73
+    ],
+    "crimeQ": {
+     "bottom": 2.6315789473684212,
+     "top": 51.351351351351354
+    },
+    "guildQ": {
+     "bottom": 23.68421052631579,
+     "top": 43.24324324324324
+    },
+    "moved": {
+     "down": 1,
+     "up": 0,
+     "upSeeds": []
+    },
+    "breaks": false
+   },
+   "B50": {
+    "n": 150,
+    "guild": 32.666666666666664,
+    "crime": 24,
+    "kinds": [
+     {
+      "kind": "guild_conflict",
+      "share": 32.666666666666664,
+      "over": false
+     }
+    ],
+    "topFirst": "crime_wave",
+    "topFirstShare": 22,
+    "crimeFirst": 22,
+    "distinct": 29,
+    "count": [
+     0,
+     0,
+     77,
+     73
+    ],
+    "crimeQ": {
+     "bottom": 2.6315789473684212,
+     "top": 48.648648648648646
+    },
+    "guildQ": {
+     "bottom": 23.68421052631579,
+     "top": 43.24324324324324
+    },
+    "moved": {
+     "down": 1,
+     "up": 0,
+     "upSeeds": []
+    },
+    "breaks": false
+   }
+  },
+  "metropolis": {
+   "baseline": {
+    "n": 150,
+    "guild": 50.666666666666664,
+    "crime": 45.333333333333336,
+    "kinds": [
+     {
+      "kind": "guild_conflict",
+      "share": 50.666666666666664,
+      "over": true
+     },
+     {
+      "kind": "crime_wave",
+      "share": 45.333333333333336,
+      "over": true
+     }
+    ],
+    "topFirst": "crime_wave",
+    "topFirstShare": 42,
+    "crimeFirst": 42,
+    "distinct": 29,
+    "count": [
+     0,
+     0,
+     74,
+     76
+    ],
+    "crimeQ": {
+     "bottom": 36.8421052631579,
+     "top": 40.54054054054054
+    },
+    "guildQ": {
+     "bottom": 36.8421052631579,
+     "top": 75.67567567567568
+    },
+    "moved": null,
+    "breaks": true
+   },
+   "A": {
+    "n": 150,
+    "guild": 31.333333333333332,
+    "crime": 26.666666666666668,
+    "kinds": [
+     {
+      "kind": "guild_conflict",
+      "share": 31.333333333333332,
+      "over": false
+     }
+    ],
+    "topFirst": "crime_wave",
+    "topFirstShare": 22.666666666666668,
+    "crimeFirst": 22.666666666666668,
+    "distinct": 29,
+    "count": [
+     0,
+     0,
+     75,
+     75
+    ],
+    "crimeQ": {
+     "bottom": 10.526315789473685,
+     "top": 32.432432432432435
+    },
+    "guildQ": {
+     "bottom": 15.789473684210526,
+     "top": 54.054054054054056
+    },
+    "moved": {
+     "down": 1,
+     "up": 0,
+     "upSeeds": []
+    },
+    "breaks": false
+   },
+   "B": {
+    "n": 150,
+    "guild": 30.666666666666668,
+    "crime": 34,
+    "kinds": [
+     {
+      "kind": "crime_wave",
+      "share": 34,
+      "over": true
+     },
+     {
+      "kind": "guild_conflict",
+      "share": 30.666666666666668,
+      "over": false
+     }
+    ],
+    "topFirst": "crime_wave",
+    "topFirstShare": 28.666666666666668,
+    "crimeFirst": 28.666666666666668,
+    "distinct": 29,
+    "count": [
+     0,
+     0,
+     74,
+     76
+    ],
+    "crimeQ": {
+     "bottom": 7.894736842105263,
+     "top": 48.648648648648646
+    },
+    "guildQ": {
+     "bottom": 13.157894736842104,
+     "top": 54.054054054054056
+    },
+    "moved": {
+     "down": 0,
+     "up": 0,
+     "upSeeds": []
+    },
+    "breaks": true
+   },
+   "B50": {
+    "n": 150,
+    "guild": 31.333333333333332,
+    "crime": 30,
+    "kinds": [
+     {
+      "kind": "guild_conflict",
+      "share": 31.333333333333332,
+      "over": false
+     },
+     {
+      "kind": "crime_wave",
+      "share": 30,
+      "over": false
+     }
+    ],
+    "topFirst": "crime_wave",
+    "topFirstShare": 25.333333333333332,
+    "crimeFirst": 25.333333333333332,
+    "distinct": 29,
+    "count": [
+     0,
+     0,
+     74,
+     76
+    ],
+    "crimeQ": {
+     "bottom": 7.894736842105263,
+     "top": 37.83783783783784
+    },
+    "guildQ": {
+     "bottom": 15.789473684210526,
+     "top": 54.054054054054056
+    },
+    "moved": {
+     "down": 0,
+     "up": 0,
+     "upSeeds": []
+    },
+    "breaks": true
+   }
+  }
+ }
+}

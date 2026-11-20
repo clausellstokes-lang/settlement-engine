@@ -54,6 +54,9 @@ const MINT_SYMBOLS = [
   'birthConfig',
   'newSettlementDensityLaw',
   'newSettlementLivingContentLaw',
+  // ⭐ The trouble law's mint (lane KINDS-1, unit K1), added in the act that wired it: its row lands
+  // WIRED, so the starred register arm does not watch it and these three per-caller arms do.
+  'newSettlementTroubleLaw',
 ];
 
 /** The create-boundary module and the law module behind it legitimately NAME the
@@ -75,6 +78,9 @@ const MINT_HOMES = Object.freeze([
   // DECLARES the mint, which is the one legitimate way to name it outside the
   // boundary and its BIRTH callers.
   'src/domain/content/livingContentLaw.js',
+  // The trouble law's own module (lane KINDS-1, unit K1), added with its mint symbol above: it
+  // DECLARES the mint, the one legitimate way to name it outside the boundary and its BIRTH callers.
+  'src/domain/trouble/troubleLaw.js',
 ]);
 
 /**

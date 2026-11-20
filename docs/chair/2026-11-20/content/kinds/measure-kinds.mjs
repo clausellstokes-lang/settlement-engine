@@ -14,9 +14,24 @@
  *          (after `generatePopulation`, i.e. the ctx `generateNarratives` hands to `generateHistory`, and again after
  *          `generateNarratives`). The record's sha256-16 is checked unchanged by the hook (see `--nohook`).
  *          `--sizes` only splits the run across processes; concatenate the rows after the one meta row.
+ *          `--plant '<json>'` (KINDS-1 K1, the chair's ruling of 21:33 UTC: THE TABLE IS A PARAMETER OF THE INSTRUMENT):
+ *          births from a SCRATCH COPY of the tree's commit (`git archive <--rev, default the tree's HEAD>` into a dir
+ *          under $TMPDIR, node_modules symlinked from the tree), with the named rows of `TROUBLE_WEIGHT_TUNING` in
+ *          `src/domain/trouble/troubleLaw.js` rewritten IN THAT COPY ONLY (each row's text must be found exactly once;
+ *          a receipt of the planted line is printed and kept in the meta row). Never a change under src/ of any
+ *          checkout. Shape: `{"crimeWave":{"floor":0.05,"ceiling":0.55,"readLow":20,"readHigh":90}}` (any subset of
+ *          a row's floor / ceiling / readLow / readHigh). The scratch copy is removed at the end.
  *   report <out.jsonl> [<other.jsonl>] [--table '<json>']
  *          Writes <name>.md and <name>.json beside the first jsonl; prints a short summary (<= 25 lines).
+ *   compare <base.jsonl> <label>=<arm.jsonl> ... --out <out.md>
+ *          (KINDS-1 K1) baseline | arm | arm ... side by side, six sizes: each kind over or near the bar (>= 30% of a
+ *          size), the commonest first trouble and its share, crime_wave as FIRST trouble, crime_wave's rate in the
+ *          bottom and top quarter of the crime read, guild_conflict's in the bottom and top quarter of the economy-power
+ *          read (g2, pre-trim), troubles a place 0/1/2/3+, distinct kinds, and places whose count moved against the
+ *          base (down / up, seeds for any up). Writes <out.md> and <out.json>; prints a short summary.
  */
+import { mkdtempSync, rmSync, symlinkSync, realpathSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { createHash } from 'node:crypto';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { execSync } from 'node:child_process';
@@ -45,13 +60,47 @@ function readsOf(institutions, economicState, factions) {
 }
 
 // ── birth ───────────────────────────────────────────────────────────────────────────────────────────────────────────
+// ── --plant: the table as a parameter, planted in a scratch copy only ───────────────────────────────────────────────
+const LEAF_REL = 'src/domain/trouble/troubleLaw.js';
+const PLANT_FIELDS = ['floor', 'ceiling', 'readLow', 'readHigh'];
+function plantedTree(tree, rev, plant) {
+  const sha = execSync(`git rev-parse --verify ${JSON.stringify(`${rev}^{commit}`)}`, { cwd: tree, stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim();
+  const dir = mkdtempSync(join(tmpdir(), 'measure-kinds-plant-'));
+  execSync(`git archive ${sha} | tar -x -C ${JSON.stringify(dir)}`, { cwd: tree, stdio: ['ignore', 'ignore', 'inherit'], shell: '/bin/sh' });
+  symlinkSync(realpathSync(join(tree, 'node_modules')), join(dir, 'node_modules'));
+  const leafPath = join(dir, LEAF_REL);
+  let text = readFileSync(leafPath, 'utf8');
+  const receipt = [];
+  for (const [name, values] of Object.entries(plant)) {
+    const re = new RegExp(`^(\\s*${name}: Object\\.freeze\\(\\{[^\\n]*\\}\\),)$`, 'gm');
+    const hits = text.match(re) || [];
+    if (hits.length !== 1) { rmSync(dir, { recursive: true, force: true }); fail(`--plant: the row ${name} was found ${hits.length} times in ${LEAF_REL} at ${sha} (want exactly 1)`); }
+    let line = hits[0];
+    for (const [field, value] of Object.entries(values)) {
+      if (!PLANT_FIELDS.includes(field) || typeof value !== 'number' || !Number.isFinite(value)) { rmSync(dir, { recursive: true, force: true }); fail(`--plant: ${name}.${field} = ${JSON.stringify(value)} is not a plantable figure`); }
+      const fre = new RegExp(`(\\b${field}: )(-?[0-9.]+)`);
+      if (!fre.test(line)) { rmSync(dir, { recursive: true, force: true }); fail(`--plant: ${name}.${field} not found on its row`); }
+      line = line.replace(fre, `$1${value}`);
+    }
+    text = text.replace(hits[0], line);
+    receipt.push({ row: name, before: hits[0].trim(), after: line.trim() });
+  }
+  writeFileSync(leafPath, text);
+  for (const r of receipt) console.log(`measure-kinds plant @${sha.slice(0, 9)}: ${r.row}\n  before: ${r.before}\n  after:  ${r.after}`);
+  return { dir, sha, receipt };
+}
+
 async function birth(args) {
   const forceJson = flag(args, '--force') ?? '{}';
+  const plantJson = flag(args, '--plant');
+  const revArg = flag(args, '--rev') ?? 'HEAD';
   const sizesCsv = flag(args, '--sizes');
   const noHook = args.includes('--nohook'); if (noHook) args.splice(args.indexOf('--nohook'), 1);
   const [treeArg, outPath] = args;
   if (!treeArg || !outPath) fail('usage: birth <tree> <out.jsonl> [--force json] [--sizes a,b]');
-  const T = resolve(treeArg);
+  const TREE = resolve(treeArg);
+  const planted = plantJson ? plantedTree(TREE, revArg, JSON.parse(plantJson)) : null;
+  const T = planted ? planted.dir : TREE;
   const imp = (p) => import(join(T, p));
   const { generateSettlementPipeline } = await imp('src/generators/generateSettlementPipeline.js');
   const { birthConfig, loadGenerationLawPayloads } = await imp('src/domain/density/densityCreateBoundary.js');
@@ -74,10 +123,10 @@ async function birth(args) {
     const runtime = settlementContentRuntimeOptions(st, contentRuntimeFromCampaignBinding, eligibleCustomContent);
     return { size, seed: `visitor-${size}-${i}`, config, options: runtime };
   };
-  let sha = null;
-  try { sha = execSync('git rev-parse HEAD', { cwd: T, stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim(); } catch { /* not a checkout */ }
+  let sha = planted ? planted.sha : null;
+  if (!planted) try { sha = execSync('git rev-parse HEAD', { cwd: T, stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim(); } catch { /* not a checkout */ }
   const sizes = sizesCsv ? sizesCsv.split(',') : SIZES;
-  const lines = [JSON.stringify({ meta: { tree: T, sha, force: FORCE, sizes, perSize: PER_SIZE, hook: !noHook } })];
+  const lines = [JSON.stringify({ meta: { tree: planted ? `${TREE} @${sha} (git archive, planted copy)` : T, sha, force: FORCE, sizes, perSize: PER_SIZE, hook: !noHook, ...(planted ? { plant: JSON.parse(plantJson), plantReceipt: planted.receipt } : {}) } })];
   const t0 = Date.now();
   for (const size of sizes) {
     for (let i = 0; i < PER_SIZE; i++) {
@@ -105,6 +154,7 @@ async function birth(args) {
     }
   }
   writeFileSync(outPath, lines.join('\n') + '\n');
+  if (planted) rmSync(planted.dir, { recursive: true, force: true });
   console.log(`measure-kinds birth: ${lines.length - 1} places (${sizes.join(',')}) in ${((Date.now() - t0) / 1000).toFixed(1)} s -> ${outPath}`);
 }
 
@@ -318,7 +368,61 @@ function report(args) {
   console.log(S.slice(0, 25).join('\n'));
 }
 
+// ── compare (KINDS-1 K1): baseline | arm | arm ... ──────────────────────────────────────────────────────────────────
+const BAR_KIND = 33; const NEAR_KIND = 30; const BAR_FIRST = 25;
+function compare(args) {
+  const out = flag(args, '--out');
+  const [basePath, ...armArgs] = args;
+  if (!basePath || !out || !armArgs.length) fail('usage: compare <base.jsonl> <label>=<arm.jsonl> ... --out <out.md>');
+  const arms = [{ label: 'baseline', ...load(basePath) }, ...armArgs.map((a) => { const i = a.indexOf('='); return { label: a.slice(0, i), ...load(a.slice(i + 1)) }; })];
+  for (const a of arms) a.sum = summarize(a.places);
+  const base = arms[0];
+  const baseBySeed = new Map(base.places.map((p) => [p.seed, p]));
+  const res = {};
+  for (const size of SIZES) {
+    res[size] = {};
+    for (const a of arms) {
+      const x = a.sum[size]; if (!x) continue;
+      const share = (k) => pct(x.kindsAny[k] || 0, x.n);
+      const kinds = Object.keys(x.kindsAny).filter((k) => share(k) >= NEAR_KIND).map((k) => ({ kind: k, share: share(k), over: share(k) > BAR_KIND }));
+      const q = (kind, read) => { const Q = x.byQuarter[kind][read]; return { bottom: pct(Q[0].hit, Q[0].n), top: pct(Q[3].hit, Q[3].n) }; };
+      const m = { down: 0, up: 0, upSeeds: [] };
+      if (a !== base) for (const p of a.places.filter((r) => r.size === size && !r.error)) { const b = baseBySeed.get(p.seed); if (!b || b.error) continue; if (p.tensions.length < b.tensions.length) m.down++; else if (p.tensions.length > b.tensions.length) { m.up++; m.upSeeds.push(`${p.seed} (${b.tensions.length}->${p.tensions.length}${b.calm ? ', calm' : ''})`); } }
+      res[size][a.label] = {
+        n: x.n, guild: share('guild_conflict'), crime: share('crime_wave'), kinds, topFirst: x.topFirst, topFirstShare: pct(x.topFirstN, x.n),
+        crimeFirst: pct(x.kindsFirst.crime_wave || 0, x.n), distinct: x.distinct, count: x.count,
+        crimeQ: q('crime_wave', 'crime'), guildQ: q('guild_conflict', 'g2'), moved: a === base ? null : m,
+        breaks: kinds.some((k) => k.over) || pct(x.topFirstN, x.n) > BAR_FIRST,
+      };
+    }
+  }
+  const labels = arms.map((a) => a.label);
+  const L = ['# KINDS-1 K1 — law 2 compared (the visitor\'s pool, 150 a size)', ''];
+  for (const a of arms) L.push(`- **${a.label}**: ${a.metas.map((m) => `sha \`${m.sha}\` force \`${JSON.stringify(m.force)}\`${m.plant ? ` plant \`${JSON.stringify(m.plant)}\`` : ''}`).join('; ')} (${a.path})`);
+  L.push('', `The bar (the chair's target): no kind on more than ~${BAR_KIND}% of a size; the commonest FIRST trouble on at most ~${BAR_FIRST}%. "Near" = ${NEAR_KIND}% or more. Quarters by rank of the history-step read within the size (K0's rule); crime = criminalEffective, g2 = economy powers on the pre-trim roster.`, '');
+  const head = `| size | ${labels.join(' | ')} |`; const sep = `|---|${labels.map(() => '---').join('|')}|`;
+  const sect = (title, f) => { L.push(`## ${title}`, '', head, sep); for (const s of SIZES) if (res[s][labels[0]]) L.push(`| ${s} | ${labels.map((l) => (res[s][l] ? f(res[s][l]) : '—')).join(' | ')} |`); L.push(''); };
+  sect('guild_conflict / crime_wave share of places (any position)', (r) => `${f1(r.guild)} / ${f1(r.crime)}`);
+  sect('kinds over (**bold**) or near the bar', (r) => r.kinds.map((k) => (k.over ? `**${k.kind} ${f1(k.share)}**` : `${k.kind} ${f1(k.share)}`)).join(', ') || '—');
+  sect('commonest FIRST trouble and its share; crime_wave as first', (r) => `${r.topFirst} ${f1(r.topFirstShare)}${r.topFirstShare > BAR_FIRST ? ' (over)' : ''}; crime first ${f1(r.crimeFirst)}`);
+  sect('crime_wave rate, bottom / top quarter of the crime read', (r) => `${f0(r.crimeQ.bottom)} / ${f0(r.crimeQ.top)}`);
+  sect('guild_conflict rate, bottom / top quarter of the economy-power read (g2)', (r) => `${f0(r.guildQ.bottom)} / ${f0(r.guildQ.top)}`);
+  sect('troubles a place 0/1/2/3+ (distinct kinds)', (r) => `${r.count.join('/')} (${r.distinct})`);
+  sect('places whose count moved against the baseline (down / up)', (r) => (r.moved ? `${r.moved.down} / ${r.moved.up}` : '—'));
+  const ups = []; for (const s of SIZES) for (const l of labels) if (res[s][l]?.moved?.upSeeds.length) ups.push(`- ${l} ${s}: ${res[s][l].moved.upSeeds.join('; ')}`);
+  L.push('## Places whose count went UP (a finding, by seed)', '', ...(ups.length ? ups : ['none']), '');
+  L.push('## Does an arm break the bar, by size', '');
+  for (const l of labels) L.push(`- ${l}: ${SIZES.filter((s) => res[s][l]?.breaks).join(', ') || 'none'}`);
+  writeFileSync(out, L.join('\n') + '\n');
+  writeFileSync(out.replace(/\.md$/, '') + '.json', JSON.stringify({ arms: arms.map((a) => ({ label: a.label, path: a.path, metas: a.metas })), bySize: res }, null, 1) + '\n');
+  const S = [`measure-kinds compare -> ${out}`];
+  for (const s of SIZES) if (res[s][labels[0]]) S.push(`${s}: ` + labels.map((l) => { const r = res[s][l]; return r ? `${l} g${f0(r.guild)} c${f0(r.crime)} 1st ${r.topFirst} ${f0(r.topFirstShare)}${r.moved ? ` mv ${r.moved.down}/${r.moved.up}` : ''}` : `${l} —`; }).join(' | '));
+  for (const l of labels) S.push(`breaks the bar (${l}): ${SIZES.filter((s) => res[s][l]?.breaks).join(', ') || 'none'}`);
+  console.log(S.join('\n'));
+}
+
 const [mode, ...rest] = process.argv.slice(2);
 if (mode === 'birth') await birth(rest);
 else if (mode === 'report') report(rest);
-else fail('usage: measure-kinds.mjs birth|report ...');
+else if (mode === 'compare') compare(rest);
+else fail('usage: measure-kinds.mjs birth|report|compare ...');

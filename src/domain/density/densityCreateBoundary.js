@@ -101,6 +101,11 @@ import { LIVING_CONTENT_LAW_CONFIG_KEY } from '../content/livingContentLawVersio
 // answered in one file. The seam is engine-side already (the pipeline imports it
 // statically), so this edge adds no module to any closure.
 import { loadLivingContentRoster } from '../content/livingContentSeam.js';
+// ⭐ THE TROUBLE LAW (lane KINDS-1, unit K1), WIRED HERE AND NOWHERE ELSE, AND DARK. Its module is a
+// zero-import leaf that declares the key, the dial, the reader and the mint in one file, so this one
+// edge brings all four and nothing behind them. Its dial sits at the default, so the mint is `{}` and a
+// birth's config is byte-identical; lighting it is the owner's word.
+import { TROUBLE_LAW_CONFIG_KEY, newSettlementTroubleLaw } from '../trouble/troubleLaw.js';
 
 /**
  * How a module that can reach `generateSettlementPipeline` is classified.
@@ -280,6 +285,11 @@ export const PIPELINE_REACHERS = Object.freeze({
  * default this writes not one config byte, because the key is simply absent from
  * every config the product produces.
  *
+ * ⛔ THE TROUBLE LAW'S MARKER IS CLAMPED THE SAME WAY, FOR THE SAME REASON (KINDS-1 K1). Its dial
+ * sits at the dark default, so its mint is `{}` and deletes nothing: without its own destructure, a
+ * weighted-trouble world's configuration loaded through the Library and regenerated would birth a NEW
+ * world under the weighted law on a build whose dial is dark.
+ *
  * @template {Record<string, unknown>} C
  * @param {C} config the config a birth is about to generate from
  * @returns {C} the same shape, carrying the laws a NEW world is born under
@@ -289,12 +299,14 @@ export function birthConfig(config) {
     // The underscore-prefixed binding IS the clamp (see the note above); the lint
     // config admits that name shape, so no disable directive is wanted here.
     [LIVING_CONTENT_LAW_CONFIG_KEY]: _incomingLivingContentLaw,
+    [TROUBLE_LAW_CONFIG_KEY]: _incomingTroubleLaw,
     ...carried
   } = /** @type {Record<string, unknown>} */ ({ ...(config || {}) });
   return /** @type {C} */ ({
     ...carried,
     ...newSettlementDensityLaw(),
     ...newSettlementLivingContentLaw(),
+    ...newSettlementTroubleLaw(),
   });
 }
 
@@ -525,5 +537,20 @@ export const GENERATION_LAWS = Object.freeze({
       + 'every classified BIRTH and no other byte of the world moves with it: measured on the '
       + 'golden 525 and the RATE 768, zero movers. This row read "the dial stays at the dormant '
       + 'default, so the mint still writes not one config byte" until that day.',
+  }),
+  trouble: Object.freeze({
+    mint: 'newSettlementTroubleLaw',
+    module: 'src/domain/trouble/troubleLaw.js',
+    dial: 'NEW_SETTLEMENT_TROUBLE_LAW_VERSION',
+    configKey: '_troubleLawVersion',
+    wiring: 'WIRED',
+    why: 'the trouble law (lane KINDS-1: which troubles a place is born with, the three fixed numbers '
+      + 'of buildHistoricalEvent turned into weights that read how much of the thing the place holds), '
+      + 'spread by birthConfig beside the others, with its incoming marker clamped off, so every '
+      + 'classified BIRTH mints it and no PREVIEW or re-derivation can. THE DIAL IS DARK: the mint '
+      + 'writes not one config byte, so no born world, golden or born fixture moves, and every proof '
+      + 'of law 2 sets _troubleLawVersion: 2 explicitly after birthConfig; lighting it is the owner\'s '
+      + 'word (the chair\'s one unit at the close). Its module is a zero-import leaf pinned to its own '
+      + 'chunk (trouble-law), so the edge brings nothing behind it and nothing enters first paint.',
   }),
 });
