@@ -297,6 +297,48 @@ describe('VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4
     expect(state.savedSettlements.map((e) => e.id)).toEqual(['import_1', 'import_2']);
   }, ARM_TIMEOUT_MS);
 
+  it('THE EVENT-TYPE TABLE ON PURPOSE (VEIL-DOORS-2, item 5; the surprise of 03:24 UTC): on a marked share a covert act (imposed OR exposed corruption), a crime stressor, a table note and every entry naming a house, person or power the served body does not show (removed since, or never in the copy) are withheld whole; open entries arrive; server equals twin', async () => {
+    const SHOWN = ['A new Mill was established.', 'A new Granary was established.', 'Famine pressure grips the settlement.', 'Vess took up Miller at the Mill.'];
+    const LOG5 = [
+      entry('ADD_INSTITUTION', 'A new Mill was established.', { targetId: 'institution.mill' }),
+      entry('ADD_INSTITUTION', 'A new Granary was established.', { targetId: 'institution.granary' }),
+      entry('EXPOSE_CORRUPTION', 'Corruption inside Mill has been publicly exposed.', { targetId: 'institution.mill' }),
+      entry('APPLY_STRESSOR', 'Criminal corridor grips the settlement.', { targetId: 'criminal_corridor', payload: { stressorType: 'criminal_corridor', label: 'Criminal corridor' } }),
+      entry('APPLY_STRESSOR', 'Famine pressure grips the settlement.', { targetId: 'famine', payload: { stressorType: 'famine', label: 'Famine pressure' } }),
+      { id: 'flavor.TABLE_INCIDENT.1.1', type: 'TABLE_INCIDENT', targetId: null, timestamp: '2026-11-01T11:00:00.000Z', source: 'table', narrativeSummary: 'The party paid off a fence at the docks.', flavor: true },
+      entry('ADD_INSTITUTION', 'A new Smugglers den was established.', { targetId: 'institution.smugglers_den' }),
+      entry('REMOVE_INSTITUTION', 'The Smugglers den closed or was dissolved.', { targetId: 'institution.smugglers_den' }),
+      entry('ADD_NPC', 'Rask arrived as Lookout at the Smugglers den.', { targetId: 'npc_vess', payload: { role: 'Lookout', institution: 'Smugglers den' } }),
+      entry('KILL_NPC', 'Old Gant is gone.', { targetId: 'npc_old_gant' }),
+      entry('ASSIGN_NPC_TO_ROLE', 'Vess took up Miller at the Mill.', { targetId: 'npc_vess', payload: { role: 'Miller', institution: 'Mill' } }),
+      entry('ADD_FACTION', 'A new power, The Quiet Hand, has formed.', { targetId: 'The Quiet Hand' }),
+      // one entry per type re-classed from 'target' (each red at the commit before: VEIL-DOORS-2-HANDBACK.md's table)
+      entry('DAMAGE_INSTITUTION', 'The Smugglers den was damaged.', { targetId: 'institution.smugglers_den' }),
+      entry('IMPAIR_INSTITUTION', 'Smugglers den suffered a capacity setback.', { targetId: 'institution.smugglers_den' }),
+      entry('RESTORE_INSTITUTION', 'Smugglers den recovered.', { targetId: 'institution.smugglers_den' }),
+      entry('KILL_LEADER', 'Old Gant (the settlement\'s leader) is gone.', { targetId: 'npc_old_gant' }),
+      entry('PROMOTE_NPC', 'Old Gant rises within their power, displacing a rival on the way up.', { targetId: 'npc_old_gant' }),
+      entry('DEMOTE_NPC', 'Old Gant is pushed down the ranks of their power.', { targetId: 'npc_old_gant' }),
+      entry('IMPAIR_FACTION', 'The Quiet Hand lost standing.', { targetId: 'The Quiet Hand' }),
+      entry('RESTORE_FACTION', 'The Quiet Hand recovered.', { targetId: 'The Quiet Hand' }),
+      entry('CHANGE_RULING_POWER', 'The Quiet Hand took power in Rookford by coup.', { targetId: 'The Quiet Hand', payload: { cause: 'coup' } }),
+      entry('ASSIGN_NPC_TO_ROLE', 'Rask took up Lookout at the Smugglers den.', { targetId: 'npc_vess', payload: { role: 'Lookout', institution: 'Smugglers den' } }),
+      entry('RESOLVE_STRESSOR', 'Criminal corridor no longer grips the settlement.', { targetId: 'criminal_corridor', payload: { stressorType: 'criminal_corridor', label: 'Criminal corridor' } }),
+    ];
+    const t = town({ institutions: [BLACK, MILL, { id: 'inst_gran', name: 'Granary', category: 'Economy', catalogId: 'granary' }] });
+    const row = await store(t, { overrides: VEIL(), log: LOG5 });
+    const g = await dossier(row.slug);
+    expect((g.chronicle || []).map((e) => e.narrativeSummary), 'what a visitor reads').toEqual(SHOWN);
+    const veil = await import('../../src/domain/display/galleryVeil.js');
+    const doors = await import('../../src/domain/display/galleryDoors.js');
+    const proj = veil.galleryPayloadFor(JSON.parse(JSON.stringify(t)), { shareDm: false, memberOverrides: VEIL() });
+    const twin = doors.veilChronicle(LOG5, { proj, body: g.data, groupings: g.gallery_member_overrides?.$veil?.groupings || [], src: t, shareDm: false });
+    expect(canon(twin), 'server equals twin').toBe(canon(g.chronicle));
+    // an unmarked listed page: as 032 sends it (VR23: R4's sparing untouched)
+    const unmarked = await store(t, { overrides: {}, log: LOG5 });
+    expect(((await dossier(unmarked.slug)).chronicle || []).length).toBe(LOG5.length);
+  }, ARM_TIMEOUT_MS);
+
   it('THE TILE ROWS ARE NO DOOR OF THEIR OWN: _gallery_public_tile_rows() is executable by neither anon nor authenticated (Supabase\'s default privileges)', async () => {
     const r = (await db.query(`select has_function_privilege('anon', 'public._gallery_public_tile_rows()', 'execute') as a,
       has_function_privilege('authenticated', 'public._gallery_public_tile_rows()', 'execute') as u`)).rows[0];

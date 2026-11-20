@@ -112,3 +112,75 @@ Each figure with its output file beside it (`docs/chair/2026-11-20/veil/doors/v2
   RED at bedd5a392 (`out/item4-red-at-bedd5a392.txt`: the unmarked member's record carried
   `$.institutions[0].name = "Black market"` and its `catalogId`); GREEN at this commit: the doors' file 9 of 9
   (`out/item4-green.txt`); eslint 0.
+
+## 6. Item 5 — the event-type table, on purpose (written 2026-11-20 03:34 UTC); with the surprise of 03:24 UTC cured
+THE SURPRISE (told to the chair at 03:24 UTC, executed at ebe9387a2): the chronicle's name search knew only the houses
+still in the projection, so on a marked share an entry naming a criminal house the town NO LONGER HAS ("A new Smugglers den
+was established.") passed, live or frozen (a house added after a freeze is in neither the copy nor its projection).
+THE CURE (my proposal, sent; built unless vetoed): the names the LOG ITSELF acts on (each house/person/power entry's target,
+as the registry narrates it; each house it places a person at, `payload.institution`/`criminalInstitution`) that the
+served body does not show (an open house's name, label or catalogue identity; a shown power's; a shown person's name or id;
+squeezed fold) join the withheld names, so every entry naming one is withheld whole. It fails toward withholding: a killed
+person's entries go, and so do a renamed house's under its old name.
+
+THE TABLE (43 types the app writes: the registry's 41 by `EVENT_TYPES`, the settlement row's RENAME_SETTLEMENT, the table
+ledger's TABLE_INCIDENT: 43 by the walker's own scan; the predecessor's "43 rows + 1 = 44" appears to count DESTROY_SETTLEMENT,
+a registry type it also listed as a row writer, twice; a type any other writer puts in the log is unclassed, so withheld). Every rule below applies on a MARKED share only; an unmarked listed page keeps 032's chronicle (VR23, R4).
+Every class also passes the name search (a withheld house, person or hidden power named anywhere in the entry's summary,
+targets or payload withholds it). The served entry is summary, time, partyCaused and type, never the payload.
+
+| Type | Class | Rule on a marked share | Why (the default veil's classes: secret, hooks, rumour/war truth, housekeeping, corruption) | Example summary |
+|---|---|---|---|---|
+| ADD_INSTITUTION | house | target must be shown | names a house; a criminal house is hidden whole | "A new Mill was established." |
+| REMOVE_INSTITUTION | house | target must be shown (a removed house is not: withheld) | as above; a gone house cannot be judged | "The Smugglers den closed or was dissolved." |
+| DAMAGE_INSTITUTION | house | target must be shown | as above | "The Mill was damaged." |
+| IMPAIR_INSTITUTION | house | target must be shown | as above | "Mill suffered a capacity setback." |
+| RESTORE_INSTITUTION | house | target must be shown | as above | "Mill recovered." |
+| ADD_NPC | person | target and the house it names must be shown | a person's house tie (people of a hidden house) | "Vess arrived as Miller at the Mill." |
+| KILL_NPC | person | target must be shown (a dead person is not: withheld) | a gone person cannot be judged (their house) | "Old Gant is gone." |
+| ASSIGN_NPC_TO_ROLE | person | target and its house must be shown | a role at a hidden house is membership | "Vess took up Miller at the Mill." |
+| KILL_LEADER | person | target must be shown | as KILL_NPC | "Old Gant (the settlement's leader) is gone." |
+| PROMOTE_NPC | person | target must be shown | names a person (no power: the registry's own rule) | "Vess rises within their power, ..." |
+| DEMOTE_NPC | person | target must be shown | as above | "Vess is pushed down the ranks of their power." |
+| IMPAIR_FACTION | power | target must be a shown power | a hidden power is withheld on a non-DM read | "The Millers lost standing." |
+| RESTORE_FACTION | power | as above | as above | "The Millers recovered." |
+| ADD_FACTION | power | as above | as above | "A new power, The Millers, has formed." |
+| CHANGE_RULING_POWER | power | as above | a hidden power taking power tells it | "The Millers took power in Rookford by coup." |
+| IMPOSE_CORRUPTION | covert | withheld under a shut criminal grouping (the default) | CORRUPTION: the underworld's own act | "Mill has been turned by the Smuggling network. ..." |
+| EXPOSE_CORRUPTION | covert | as above (RE-CLASSED from target) | CORRUPTION: exists only because a house was corrupt; it tells which | "Corruption inside Mill has been publicly exposed." |
+| APPLY_STRESSOR | stressor | withheld under a shut criminal grouping when its key is criminal_corridor, infiltration or infiltrated (RE-CLASSED) | a crime-worded label otherwise reaches the page | "Criminal corridor grips the settlement." / "Famine pressure grips the settlement." (served) |
+| RESOLVE_STRESSOR | stressor | as above (RE-CLASSED) | as above | "Criminal corridor no longer grips the settlement." |
+| TABLE_INCIDENT | withheld | never on a marked share (RE-CLASSED) | the DM's free text at the table (the session ledger's flavor): hooks, truths and secrets no rule can read | "The party paid off a fence at the docks." |
+| DEPLETE_RESOURCE | target | name search | a resource, no house/person/power | "Iron is no longer available." |
+| CUT_TRADE_ROUTE | target | name search | a road to a neighbour | "Trade route (Harrowgate) cut." |
+| CREATE_ROUTE | target | name search | a road | "A road to Harrowgate is chartered; ..." |
+| SETTLEMENT_DISPUTE | target | name search | a neighbour's public relation (served on the page; not the war's truth-vs-belief block) | "Relations with Harrowgate soured to rival." |
+| DESTROY_SETTLEMENT | target | name search | the town itself | "Rookford was destroyed by fire." |
+| REFUGEE_WAVE | target | name search | a neighbour | "A medium refugee wave arrived from Harrowgate." |
+| PLAGUE | target | name search | a disease | "A plague "red cough" is spreading." |
+| RAID_OR_MONSTER_ATTACK | target | name search | an outside attacker | "The settlement was attacked by wolves." |
+| REMOVED_THREAT | target | name search | an outside threat | "The threat (wolves) was neutralized." |
+| BROKERED_ALLIANCE | target | name search | a neighbour | "An alliance was brokered with Harrowgate." |
+| STARTED_RIOT | target | name search | a place | "A riot broke out in the docks." |
+| OPENED_TRADE_ROUTE | target | name search | a neighbour | "A trade partners trade route with Harrowgate has opened." |
+| RECOVERED_RESOURCE | target | name search | a resource | "The Iron has been recovered." |
+| ADD_TRADE_GOOD | target | name search | a good | "The settlement now exports Wool." |
+| REMOVE_TRADE_GOOD | target | name search | a good | "Wool no longer moves through the settlement's markets." |
+| ADD_RESOURCE | target | name search | a resource | "Iron is now worked near the settlement." |
+| SET_PRIMARY_DEITY | target | name search | a god (served on the page) | "Aster is proclaimed the settlement's patron deity." |
+| IMPOSE_CULT | target | name search | a god's cult (not hidden by the default veil) | "A cult of Vael takes root in the settlement, ..." |
+| SHIFT_TIER | target | name search | the tier | "The settlement swells to a larger tier, ..." |
+| REMOVE_RESOURCE | target | name search | a resource | "Iron is gone. No longer worked, no longer counted on." |
+| FORCE_RELIEF | target | name search | a neighbour | "Grain wagons rolled to Harrowgate: relief by decree." |
+| OFFER_CREDIT | target | name search | a neighbour | "A measure of grain went to Harrowgate: as a loan, not a gift." |
+| RENAME_SETTLEMENT | target | name search | the town's own name (a floor) | "Rookhold is now known as Rookford." |
+
+No type exists for a secret, a hook or a rumour's truth: none of those reaches `narrativeSummary` (ADD_NPC's `payload.secret` is
+never served). RE-CLASSED from the predecessor's table: EXPOSE_CORRUPTION, APPLY/RESOLVE_STRESSOR, TABLE_INCIDENT, and the 15
+house/person/power types (from target, now judged by what the body shows).
+
+RED AND GREEN. The arm THE EVENT-TYPE TABLE ON PURPOSE (galleryDoors.pglite): at f9f9b4c0c (the commit before) a visitor
+read 19 entries it must not, at least one of EVERY re-classed type (`out/item5-red-at-f9f9b4c0c.txt`); at this commit the four
+open entries alone, server equal to twin; the unmarked page keeps all 23 (032). Walker arm 5 re-keyed by identity to the
+seven classes (each with its rule in the SQL comment). Green: the doors' two files 18 of 18 (`out/item5-green.txt`), eslint 0.
+tests/security WHOLE at this commit's tree (`out/item5-tests-security.txt`): Test Files 158 passed | 1 skipped (159); Tests 2008 passed | 1 skipped (2009); exit 0. Bytes: 212 `a99f3ad4b1e6af6604c4c7dd7af7c822f0d4a12a49a1d9be7c577fcc4d39a91e`; down `f443aff7eb6b5ccce4794689fb610ca45136905af85ad9552dc7cb5cb528d086` (unchanged by this item).

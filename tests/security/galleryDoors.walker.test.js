@@ -27,7 +27,8 @@
  *     store's own rows: the `type:` literals of settlementSlice, settlementRenameHelpers and
  *     settlementPendingEditWriters, a ternary's fallback literal included; TABLE_EFFECTS' event kinds in
  *     pendingEditIntents) is classed by the SQL `_gallery_doors_chronicle_classes()` and by the JS CHRONICLE_CLASSES
- *     (src/domain/display/galleryDoors.js); the two tables are equal; every class is 'target' or 'covert'.
+ *     (src/domain/display/galleryDoors.js); the two tables are equal; every class is one of the seven (house, person,
+ *     power, target, covert, stressor, withheld: VEIL-DOORS-2's table on purpose).
  *   6 THE BAND TABLE IS ONE: labelBands' STABILITY_BANDS equals the array inside the SQL `_gallery_doors_band(text)`.
  *   7 VR27 AS AMENDED, THE CATALOGUE (VEIL-DOORS-2): every underscore function of the share's family (named `_gallery_*`
  *     or `_saved_maps_*`, or whose body names a town or a map) is executable by neither visitor role, OR stands on
@@ -466,8 +467,10 @@ describe('VR20 (C): every door beside data is registered (the walker)', () => {
     expect(written.filter((t) => !(t in (sqlClasses || {}))), 'written types the SQL table does not class').toEqual([]);
     expect(written.filter((t) => !(t in (jsClasses || {}))), 'written types CHRONICLE_CLASSES does not class').toEqual([]);
     expect(sqlClasses, 'the SQL and JS class tables differ').toEqual({ ...jsClasses });
-    const bad = (table, side) => Object.entries(table || {}).filter(([, c]) => c !== 'target' && c !== 'covert').map(([t, c]) => `${side} ${t}: ${c}`);
-    expect([...bad(sqlClasses, 'sql'), ...bad(jsClasses, 'js')], "a class other than 'target' or 'covert'").toEqual([]);
+    // VEIL-DOORS-2 (item 5): the classes, each with its rule in _gallery_doors_chronicle_classes' comment
+    const CLASSES = ['house', 'person', 'power', 'target', 'covert', 'stressor', 'withheld'];
+    const bad = (table, side) => Object.entries(table || {}).filter(([, c]) => !CLASSES.includes(c)).map(([t, c]) => `${side} ${t}: ${c}`);
+    expect([...bad(sqlClasses, 'sql'), ...bad(jsClasses, 'js')], `a class outside ${CLASSES.join(', ')}`).toEqual([]);
   }, ARM_TIMEOUT_MS);
 
   it('6 THE BAND TABLE IS ONE: STABILITY_BANDS equals the array inside _gallery_doors_band(text)', async () => {

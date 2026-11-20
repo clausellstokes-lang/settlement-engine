@@ -16,7 +16,6 @@ import { STABILITY_BANDS } from './labelBands.js';
 import { CARD_KINDS } from './galleryVeil.js';
 import { buildNameSearch, nameFold } from './gallerySecondHomes.js';
 import { isHideableHouse } from '../people/cardVeil.js';
-import { EVENT_TYPES } from '../events/registry.js';
 
 /** @typedef {Record<string, any>} Rec */
 /** @param {unknown} v @returns {v is Rec} */
@@ -98,13 +97,28 @@ export function tilesUnderVeil(doc) {
 }
 
 /**
- * THE CHRONICLE'S CLASSES (SQL twin: _gallery_doors_chronicle_classes): every registry type a target class, but the
- * covert act; the settlement-row writers' and the table ledger's rows. A type no class knows is withheld.
+ * THE CHRONICLE'S CLASSES (SQL twin: _gallery_doors_chronicle_classes, whose comment states each class; VEIL-DOORS-2's
+ * hand-back holds the table, type by type, with its rule, why and an example). Every type is classed ON PURPOSE; a type
+ * no class knows is withheld, and the walker reds on a written type this table omits.
  */
-export const CHRONICLE_CLASSES = Object.freeze(Object.fromEntries([
-  ...EVENT_TYPES.map(t => [t, t === 'IMPOSE_CORRUPTION' ? 'covert' : 'target']),
-  ['RENAME_SETTLEMENT', 'target'], ['TABLE_INCIDENT', 'target'],
-]));
+const CLASS_OF = Object.freeze({
+  house: ['ADD_INSTITUTION', 'REMOVE_INSTITUTION', 'DAMAGE_INSTITUTION', 'IMPAIR_INSTITUTION', 'RESTORE_INSTITUTION'],
+  person: ['ADD_NPC', 'KILL_NPC', 'ASSIGN_NPC_TO_ROLE', 'KILL_LEADER', 'PROMOTE_NPC', 'DEMOTE_NPC'],
+  power: ['IMPAIR_FACTION', 'RESTORE_FACTION', 'ADD_FACTION', 'CHANGE_RULING_POWER'],
+  covert: ['IMPOSE_CORRUPTION', 'EXPOSE_CORRUPTION'],
+  stressor: ['APPLY_STRESSOR', 'RESOLVE_STRESSOR'],
+  withheld: ['TABLE_INCIDENT'],
+  target: ['DEPLETE_RESOURCE', 'CUT_TRADE_ROUTE', 'CREATE_ROUTE', 'SETTLEMENT_DISPUTE', 'DESTROY_SETTLEMENT', 'REFUGEE_WAVE', 'PLAGUE',
+    'RAID_OR_MONSTER_ATTACK', 'REMOVED_THREAT', 'BROKERED_ALLIANCE', 'STARTED_RIOT', 'OPENED_TRADE_ROUTE', 'RECOVERED_RESOURCE',
+    'ADD_TRADE_GOOD', 'REMOVE_TRADE_GOOD', 'ADD_RESOURCE', 'SET_PRIMARY_DEITY', 'IMPOSE_CULT', 'SHIFT_TIER', 'REMOVE_RESOURCE',
+    'FORCE_RELIEF', 'OFFER_CREDIT', 'RENAME_SETTLEMENT'],
+});
+/** @type {Readonly<Record<string, string>>} */
+export const CHRONICLE_CLASSES = Object.freeze(Object.fromEntries(Object.entries(CLASS_OF).flatMap(([c, types]) => types.map(t => [t, c]))));
+/** A stressor whose key is a crime's (squeezed fold): withheld under a shut criminal grouping. */
+const CRIME_STRESSORS = Object.freeze(['criminalcorridor', 'infiltration', 'infiltrated']);
+/** The registry's label of a target (src/domain/events/registry.js :: labelOf, its case aside: every compare is folded). */
+const targetLabel = (/** @type {unknown} */ t) => str(t).replace(/^.*[.]/, '').replace(/_/g, ' ');
 const CRIMINAL_GROUPINGS = Object.freeze(['block:services.criminal', 'block:defense.criminalStructure', 'block:power.criminalUnderside']);
 
 /** The cards of a kind, by the veil's own lists. */
@@ -148,6 +162,23 @@ export function veilChronicle(log, { proj, body, groupings = [], src = null, sha
   /** @type {Rec[]} */
   const shown = isRec(body.powerStructure) && Array.isArray(body.powerStructure.factions) ? body.powerStructure.factions.filter(isRec).filter(f => f.hidden !== true) : [];
   const opens = [...bodyInsts.map(e => str(e.name) || str(e.label)), ...bodyInsts.map(e => str(e.catalogId)), ...shown.flatMap(f => [str(f.faction), str(f.name)])].filter(Boolean);
+  // (VEIL-DOORS-2) the log's own names the served body does not show: each house, person or power entry's target, each
+  // house it places a person at
+  /** @type {Rec[]} */
+  const bodyPeople = Array.isArray(body.npcs) ? body.npcs.filter(isRec) : [];
+  const shownFolds = new Set([...opens, ...bodyPeople.flatMap(n => [str(n.name), str(n.id)])].map(squeezedFold));
+  const typeOf = (/** @type {Rec} */ e) => (isRec(e.event) && str(e.event.type)) || str(e.type);
+  for (const e of log) {
+    if (!isRec(e)) continue;
+    const ev = isRec(e.event) ? e.event : null;
+    const cls = CHRONICLE_CLASSES[typeOf(e)];
+    const found = [];
+    if (cls === 'house' || cls === 'person' || cls === 'power') found.push(targetLabel((ev && str(ev.targetId)) || e.targetId));
+    for (const bag of [ev, isRec(e.payload) ? e.payload : null, ev && isRec(ev.payload) ? ev.payload : null]) {
+      if (bag) for (const k of ['institution', 'criminalInstitution']) found.push(str(bag[k]));
+    }
+    for (const x of found) if (squeezedFold(x) !== '' && !shownFolds.has(squeezedFold(x)) && !names.includes(x)) names.push(x);
+  }
   const search = names.length ? buildNameSearch(names, opens) : null;
   const truthy = (/** @type {unknown} */ v) => !!v;
   const served = [];
@@ -158,6 +189,9 @@ export function veilChronicle(log, { proj, body, groupings = [], src = null, sha
     const cls = type ? CHRONICLE_CLASSES[type] : undefined;
     if (!cls) continue;
     if (cls === 'covert' && shut) continue;
+    if (cls === 'withheld') continue;
+    if (cls === 'stressor' && shut
+      && CRIME_STRESSORS.includes(squeezedFold(str(ev && isRec(ev.payload) ? ev.payload.stressorType : '') || (ev && str(ev.targetId)) || str(e.targetId)))) continue;
     if (search && search.holds([e.narrativeSummary ?? null, e.targetId ?? null, ev ? ev.targetId ?? null : null, ev ? ev.payload ?? null : null, e.payload ?? null])) continue;
     /** @type {Rec} */
     const m = {};

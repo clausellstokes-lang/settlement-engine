@@ -1,0 +1,68 @@
+[run] start 2026-11-20T03:34:11Z at f9f9b4c0c 1 dirty paths
+[run] cmd: npx vitest run --reporter=verbose -t EVENT-TYPE TABLE tests/security/galleryDoors.pglite.test.js
+
+ RUN  v4.1.8 /var/tmp/vd2/wt-red
+
+ ↓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > V10-1 THE CHRONICLE DOOR: on a marked share an entry naming a house hidden whole (summary, target or payload), a covert act with a criminal grouping shut and an unclassed type are withheld whole, on the gallery read and a map's member; open entries arrive; no entry carries an id; an unmarked listed page keeps its chronicle as 032 sends it
+ ↓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > V10-1 / VR21 THE NEWEST FIFTY OF THE SERVED: a log of 70 entries whose newest five name the hidden house serves fifty, none of them withheld ones
+ ↓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > V10-3 THE TILE DOOR: on a marked share the stability tile is the band word alone (dossier column and list tile); prosperity is its stored band (VR28 tier 2); a tile holding a hideable house's name is sent by none; an unmarked listed page is unchanged
+ ↓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > V10-3 THE CLOSED ANSWER SENDS NO TILE: a share past the name search's bound (600 houses hidden whole of 145 characters) serves the name alone and no tile beside it
+ ↓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > V10-4 THE MAP MEMBER: a member with no veil of its own takes the default veil; a marked member its own
+ ↓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > THE ONE-ROW READ (the chair's condition (a), VEIL-DOORS-2): get_gallery_dossier takes its own row's tiles by the one tile rule, never every public row's; its row and tile columns equal the list's row for every share (unmarked, the default veil, a hand veil, Reveal DM, snapshot mode, votes and comments counted)
+ ↓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > VR23 ON THE BROWSER'S IMPORT PATH (VEIL-DOORS-2, item 4): importing a shared campaign map runs importGalleryMapWithCampaignImpl -> fetchGalleryMap -> get_gallery_map; a member with no veil of its own arrives in the importer's record default-veiled (its criminal house absent, its open house present), a marked member by its own veil
+ × tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > THE EVENT-TYPE TABLE ON PURPOSE (VEIL-DOORS-2, item 5; the surprise of 03:24 UTC): on a marked share a covert act (imposed OR exposed corruption), a crime stressor, a table note and every entry naming a house, person or power the served body does not show (removed since, or never in the copy) are withheld whole; open entries arrive; server equals twin 151ms
+   → what a visitor reads: expected [ Array(23) ] to deeply equal [ 'A new Mill was established.', …(3) ]
+ ↓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > THE TILE ROWS ARE NO DOOR OF THEIR OWN: _gallery_public_tile_rows() is executable by neither anon nor authenticated (Supabase's default privileges)
+ ↓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > THE TWIN: the server and src/domain/display/galleryDoors.js send the same chronicle and the same tiles (the default veil and a hand veil, Reveal DM off and on; the closed answer)
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > THE EVENT-TYPE TABLE ON PURPOSE (VEIL-DOORS-2, item 5; the surprise of 03:24 UTC): on a marked share a covert act (imposed OR exposed corruption), a crime stressor, a table note and every entry naming a house, person or power the served body does not show (removed since, or never in the copy) are withheld whole; open entries arrive; server equals twin
+AssertionError: what a visitor reads: expected [ Array(23) ] to deeply equal [ 'A new Mill was established.', …(3) ]
+
+- Expected
++ Received
+
+  [
+    "A new Mill was established.",
+    "A new Granary was established.",
++   "Corruption inside Mill has been publicly exposed.",
++   "Criminal corridor grips the settlement.",
+    "Famine pressure grips the settlement.",
++   "The party paid off a fence at the docks.",
++   "A new Smugglers den was established.",
++   "The Smugglers den closed or was dissolved.",
++   "Rask arrived as Lookout at the Smugglers den.",
++   "Old Gant is gone.",
+    "Vess took up Miller at the Mill.",
++   "A new power, The Quiet Hand, has formed.",
++   "The Smugglers den was damaged.",
++   "Smugglers den suffered a capacity setback.",
++   "Smugglers den recovered.",
++   "Old Gant (the settlement's leader) is gone.",
++   "Old Gant rises within their power, displacing a rival on the way up.",
++   "Old Gant is pushed down the ranks of their power.",
++   "The Quiet Hand lost standing.",
++   "The Quiet Hand recovered.",
++   "The Quiet Hand took power in Rookford by coup.",
++   "Rask took up Lookout at the Smugglers den.",
++   "Criminal corridor no longer grips the settlement.",
+  ]
+
+ ❯ tests/security/galleryDoors.pglite.test.js:331:88
+    329|     const row = await store(t, { overrides: VEIL(), log: LOG5 });
+    330|     const g = await dossier(row.slug);
+    331|     expect((g.chronicle || []).map((e) => e.narrativeSummary), 'what a…
+       |                                                                                        ^
+    332|     const veil = await import('../../src/domain/display/galleryVeil.js…
+    333|     const doors = await import('../../src/domain/display/galleryDoors.…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 9 skipped (10)
+   Start at  03:34:12
+   Duration  3.75s (transform 103ms, setup 37ms, import 116ms, tests 3.47s, environment 0ms)
+
+[run] end 2026-11-20T03:34:15Z exit 1

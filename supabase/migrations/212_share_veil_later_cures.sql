@@ -2105,25 +2105,37 @@ $$;
 revoke execute on function public._gallery_public_tile_rows() from public, anon, authenticated;
 
 -- [212: NEW, VEIL-DOORS] public._gallery_doors_chronicle_classes
--- THE CHRONICLE'S CLASSES: every event type the app writes to campaign_state.eventLog, by its class. 'target': the entry
--- names what it acts on (the 41 types of src/domain/events/registry.js :: EVENT_REGISTRY, the settlement-row writers'
--- RENAME_SETTLEMENT and DESTROY_SETTLEMENT, the table ledger's TABLE_INCIDENT); 'covert': the act itself is the
--- underworld's (IMPOSE_CORRUPTION: a house turned in the shadows), withheld wherever a criminal grouping is shut. A type
--- no class knows is withheld (tests/security/galleryDoors.walker.test.js reds on a type the app writes and this omits).
+-- THE CHRONICLE'S CLASSES (VEIL-DOORS-2, item 5: every type the app writes to campaign_state.eventLog classed ON PURPOSE
+-- against the default veil's classes; VEIL-DOORS-2-HANDBACK.md holds the table with each type's rule, why and example):
+--   'house' / 'person' / 'power': the entry acts on a house, a person or a power of the town (its target, and a house it
+--     places a person at); what it names the served body does not show is withheld like a removed house (below);
+--   'target': the entry acts on what is no house, person or power of the town (a road, a neighbour, a resource, a good,
+--     a god, the tier, a plague); the name search alone;
+--   'covert': the act is the underworld's or exists only because of crime (IMPOSE_CORRUPTION: a house turned in the
+--     shadows; EXPOSE_CORRUPTION: it tells that a house was corrupt): withheld wherever a criminal grouping is shut;
+--   'stressor': a crisis; withheld wherever a criminal grouping is shut when its key is a crime's (criminal_corridor,
+--     infiltration, infiltrated: "Criminal corridor grips the settlement.");
+--   'withheld': the DM's free text at the table (TABLE_INCIDENT: the session ledger's flavor, which no rule can read):
+--     never on a marked share.
+-- A type no class knows is withheld (tests/security/galleryDoors.walker.test.js reds on a type the app writes and this
+-- omits, and on a class outside these).
 create or replace function public._gallery_doors_chronicle_classes()
 returns jsonb language sql immutable as $$
   select '{
-    "ADD_INSTITUTION": "target", "REMOVE_INSTITUTION": "target", "DAMAGE_INSTITUTION": "target", "DEPLETE_RESOURCE": "target",
-    "CUT_TRADE_ROUTE": "target", "CREATE_ROUTE": "target", "SETTLEMENT_DISPUTE": "target", "DESTROY_SETTLEMENT": "target",
-    "ADD_NPC": "target", "KILL_NPC": "target", "ASSIGN_NPC_TO_ROLE": "target", "IMPAIR_INSTITUTION": "target",
-    "RESTORE_INSTITUTION": "target", "IMPAIR_FACTION": "target", "RESTORE_FACTION": "target", "ADD_FACTION": "target",
-    "KILL_LEADER": "target", "EXPOSE_CORRUPTION": "target", "IMPOSE_CORRUPTION": "covert", "REFUGEE_WAVE": "target",
-    "PLAGUE": "target", "RAID_OR_MONSTER_ATTACK": "target", "REMOVED_THREAT": "target", "BROKERED_ALLIANCE": "target",
-    "STARTED_RIOT": "target", "OPENED_TRADE_ROUTE": "target", "RECOVERED_RESOURCE": "target", "APPLY_STRESSOR": "target",
-    "CHANGE_RULING_POWER": "target", "RESOLVE_STRESSOR": "target", "ADD_TRADE_GOOD": "target", "REMOVE_TRADE_GOOD": "target",
-    "ADD_RESOURCE": "target", "SET_PRIMARY_DEITY": "target", "IMPOSE_CULT": "target", "SHIFT_TIER": "target",
-    "REMOVE_RESOURCE": "target", "FORCE_RELIEF": "target", "OFFER_CREDIT": "target", "PROMOTE_NPC": "target",
-    "DEMOTE_NPC": "target", "RENAME_SETTLEMENT": "target", "TABLE_INCIDENT": "target"
+    "ADD_INSTITUTION": "house", "REMOVE_INSTITUTION": "house", "DAMAGE_INSTITUTION": "house", "IMPAIR_INSTITUTION": "house",
+    "RESTORE_INSTITUTION": "house",
+    "ADD_NPC": "person", "KILL_NPC": "person", "ASSIGN_NPC_TO_ROLE": "person", "KILL_LEADER": "person", "PROMOTE_NPC": "person",
+    "DEMOTE_NPC": "person",
+    "IMPAIR_FACTION": "power", "RESTORE_FACTION": "power", "ADD_FACTION": "power", "CHANGE_RULING_POWER": "power",
+    "IMPOSE_CORRUPTION": "covert", "EXPOSE_CORRUPTION": "covert",
+    "APPLY_STRESSOR": "stressor", "RESOLVE_STRESSOR": "stressor",
+    "TABLE_INCIDENT": "withheld",
+    "DEPLETE_RESOURCE": "target", "CUT_TRADE_ROUTE": "target", "CREATE_ROUTE": "target", "SETTLEMENT_DISPUTE": "target",
+    "DESTROY_SETTLEMENT": "target", "REFUGEE_WAVE": "target", "PLAGUE": "target", "RAID_OR_MONSTER_ATTACK": "target",
+    "REMOVED_THREAT": "target", "BROKERED_ALLIANCE": "target", "STARTED_RIOT": "target", "OPENED_TRADE_ROUTE": "target",
+    "RECOVERED_RESOURCE": "target", "ADD_TRADE_GOOD": "target", "REMOVE_TRADE_GOOD": "target", "ADD_RESOURCE": "target",
+    "SET_PRIMARY_DEITY": "target", "IMPOSE_CULT": "target", "SHIFT_TIER": "target", "REMOVE_RESOURCE": "target",
+    "FORCE_RELIEF": "target", "OFFER_CREDIT": "target", "RENAME_SETTLEMENT": "target"
   }'::jsonb
 $$;
 
@@ -2135,11 +2147,18 @@ $$;
 --   THE CLOSED ANSWER (the body is the town's name alone): no chronicle.
 --   Else each entry (an object of the log) is WITHHELD WHOLE where
 --     its type (the event's, else the row's own) has no class (_gallery_doors_chronicle_classes);
---     its class is 'covert' and the share shuts a criminal grouping or removes a house whole;
+--     its class is 'covert' (or 'stressor' with a crime's key) and the share shuts a criminal grouping or removes a house
+--       whole; its class is 'withheld';
 --     the name search (_gallery_veil_name_search and _name_hits, VEIL-19's, called) finds in its summary, its target
 --       (the event's and the row's) or its payload a name the read withheld: every house the veil removed whole (in
 --       the projection and not in the body, by id: its name, its label, its catalogue identity), every person it
---       removed (by id: the name), and on a read the sanitiser projects every power flagged hidden (`faction`, `name`);
+--       removed (by id: the name), and on a read the sanitiser projects every power flagged hidden (`faction`, `name`),
+--       AND (VEIL-DOORS-2) every house, person or power THE LOG ITSELF acts on that the served body does not show: the
+--       target of each 'house', 'person' or 'power' entry (as the registry narrates it, src/domain/events/registry.js ::
+--       labelOf) and each house it places a person at (payload.institution, payload.criminalInstitution), unless, in the
+--       squeezed fold, it is an open house's name, label or catalogue identity, a shown power's, or a shown person's name
+--       or id (a house removed since, or added after a freeze, is no longer in the projection: the search asked of it alone
+--       let its name through, executed at ebe9387a2);
 --       the open houses and the shown powers are its cut-outs, as the veil's own search has them.
 --   Then THE NEWEST FIFTY OF WHAT IS SERVED (VR21: the window is taken after the removal, never before), in the log's
 --   order, each entry as a shared page draws it and no more: its summary, its time (the row's timestamp where truthy,
@@ -2192,6 +2211,30 @@ begin
                from jsonb_array_elements(case when jsonb_typeof(body #> '{powerStructure,factions}') = 'array' then body #> '{powerStructure,factions}' else '[]' end) f,
                     unnest(array['faction', 'name']) k
               where jsonb_typeof(f) = 'object' and not coalesce(f -> 'hidden' = 'true'::jsonb, false)) q where x <> '');
+  -- (VEIL-DOORS-2) the log's own names the served body does not show
+  nm := nm || array(
+    select distinct c.x from (
+      select case when ty.c in ('house', 'person', 'power')
+                  then replace(regexp_replace(coalesce(nullif(public._gallery_veil_str(e #> '{event,targetId}'), ''), public._gallery_veil_str(e -> 'targetId')), '^.*[.]', ''), '_', ' ') end as x
+        from jsonb_array_elements(log) e
+        cross join lateral (select public._gallery_doors_chronicle_classes() ->> coalesce(nullif(case when jsonb_typeof(e -> 'event') = 'object' then public._gallery_veil_str(e #> '{event,type}') end, ''),
+                                                                                       public._gallery_veil_str(e -> 'type')) as c) ty
+       where jsonb_typeof(e) = 'object'
+      union all
+      select public._gallery_veil_str(e #> array[w, k])
+        from jsonb_array_elements(log) e, unnest(array['event', 'payload']) w, unnest(array['institution', 'criminalInstitution']) k
+       where jsonb_typeof(e) = 'object'
+      union all
+      select public._gallery_veil_str(e #> array['event', 'payload', k])
+        from jsonb_array_elements(log) e, unnest(array['institution', 'criminalInstitution']) k
+       where jsonb_typeof(e) = 'object'
+    ) c
+    where c.x is not null and public._gallery_doors_squeeze(c.x) <> ''
+      and public._gallery_doors_squeeze(c.x) not in (
+        select public._gallery_doors_squeeze(o) from unnest(opens) o
+        union select public._gallery_doors_squeeze(public._gallery_veil_str(p -> k))
+                from jsonb_array_elements(case when jsonb_typeof(body -> 'npcs') = 'array' then body -> 'npcs' else '[]' end) p, unnest(array['name', 'id']) k
+               where jsonb_typeof(p) = 'object'));
   -- each entry's strings the rule asks (its summary, its targets, its payload), once, in one document
   doc := coalesce((select jsonb_agg(jsonb_build_array(e -> 'narrativeSummary', e -> 'targetId', e #> '{event,targetId}', e #> '{event,payload}', e -> 'payload') order by o)
                      from jsonb_array_elements(log) with ordinality x(e, o) where jsonb_typeof(e) = 'object'), '[]');
@@ -2216,6 +2259,12 @@ begin
                                                     nullif(public._gallery_veil_str(x.e -> 'type'), '')) as t offset 0) ty
                where public._gallery_doors_chronicle_classes() ? ty.t
                  and not (public._gallery_doors_chronicle_classes() ->> ty.t = 'covert' and shut)
+                 and public._gallery_doors_chronicle_classes() ->> ty.t <> 'withheld'
+                 and not (public._gallery_doors_chronicle_classes() ->> ty.t = 'stressor' and shut
+                          and public._gallery_doors_squeeze(coalesce(nullif(public._gallery_veil_str(x.e #> '{event,payload,stressorType}'), ''),
+                                                                     nullif(public._gallery_veil_str(x.e #> '{event,targetId}'), ''),
+                                                                     public._gallery_veil_str(x.e -> 'targetId')))
+                              in ('criminalcorridor', 'infiltration', 'infiltrated'))
                  and not (hits <> '{}' and public._gallery_veil_named(doc -> (x.n::int - 1), hits, srch -> 'blank', srch -> 'raw'))
             ) k order by k.o desc limit 50) w);
 end $$;
