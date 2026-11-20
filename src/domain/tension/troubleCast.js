@@ -101,10 +101,15 @@ export const FRAME_REASONS = Object.freeze({
   trade: 'because the trouble touches {their} trade',
   criminal: 'because {they} [heads|head] {power}, which works outside the law',
   criminalHouse: 'it works outside the law, and no one in it is named here',
-  outsider: 'not named here; {other} keeps {house}, where strangers lodge, and would know of them',
+  outsider: 'not named here; {other} keeps the {house}, where strangers lodge, and would know of them',
 });
 
-/** The tie's words after "{they} and {other}", by its archetype label (data/npcData.js); a tie not listed reads `tieDefault`. */
+/**
+ * The tie's words after "{they} and {other}", by its archetype label (data/npcData.js); a tie not listed reads `tieDefault`.
+ * FRAME-2 · B4 (CF9): `tieDefault` lives here, in the closed set, with the rest (it was a loose literal); "Mentor and
+ * Successor" reads "teacher and pupil", never "heir": the record names a successor only where the place can pass
+ * (npcData.js :: mentor_legacy, BAR4 TI1), and this rule reads the tie's label alone.
+ */
 export const FRAME_TIE_GLOSS = Object.freeze(/** @type {Record<string, string>} */ ({
   'Financial Dependence': 'are tied by money, one depending on the other',
   'Silent Partnership': 'are partners in something neither will name',
@@ -112,13 +117,13 @@ export const FRAME_TIE_GLOSS = Object.freeze(/** @type {Record<string, string>} 
   'Corrupt Arrangement': 'are in a crooked arrangement together',
   'Held Over Them': 'are bound by something one holds over the other',
   'Active Suppression': 'are at open odds, one working to shut the other down',
-  'Mentor and Successor': 'are teacher and heir',
+  'Mentor and Successor': 'are teacher and pupil',
   'Family Complication': 'are family, and it is not simple',
   'Professional Rivalry': 'are rivals, and neither gives the other ground',
   'Unresolved History': 'share a past neither has put behind them',
   'Outstanding Debt': 'are tied by a debt not yet paid',
+  tieDefault: 'are closely tied',
 }));
-const TIE_DEFAULT = 'are closely tied';
 
 /** @param {unknown} v @returns {string} */
 const str = (v) => (typeof v === 'string' ? v.replace(/\s+/g, ' ').trim() : '');
@@ -295,11 +300,10 @@ function tradeWordsOf(n) {
   return [str(n.role), str(n.title), str(inst.key), str(inst.family)].join(' | ');
 }
 
-/** The house a keeper keeps, in prose. @param {FrameNpc} n @returns {string} */
+/** The house a keeper keeps, as the record names it (its article is FRAME_REASONS.outsider's). @param {FrameNpc} n @returns {string} */
 function houseOf(n) {
   const inst = typeof n.institution === 'object' && n.institution ? /** @type {{ key?: unknown }} */ (n.institution) : {};
-  const key = str(inst.key).replace(/\s*\([^)]*\)\s*$/, '').toLowerCase();
-  return key ? `the ${key}` : '';
+  return str(inst.key).replace(/\s*\([^)]*\)\s*$/, '').toLowerCase();
 }
 
 /**
@@ -382,7 +386,7 @@ export function castTroubleFrame(settlement) {
             : archetype === 'profiteer' || archetype === 'creditor' ? [[to, from, 'tie', FRAME_REASONS.creditor]] : [])
           : [[from, to, 'tie', FRAME_REASONS.tie], [to, from, 'tie', FRAME_REASONS.tie]];
         for (const [who, other, rule, reason] of ends) {
-          if (free(who)) out.push({ npc: who, rule, slots: { other: str(other.name), gloss: FRAME_TIE_GLOSS[str(t.typeName)] || TIE_DEFAULT, reasonText: reason } });
+          if (free(who)) out.push({ npc: who, rule, slots: { other: str(other.name), gloss: FRAME_TIE_GLOSS[str(t.typeName)] || FRAME_TIE_GLOSS.tieDefault, reasonText: reason } });
         }
       }
       if (['payer', 'blamed', 'middle', 'challenger', 'reformer'].includes(archetype)) {
