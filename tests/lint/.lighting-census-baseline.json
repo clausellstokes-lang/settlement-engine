@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "379f63cb68650d548dbd66ccbf72f9a7f95c7586",
-  "measuredBy": "POINT-82",
+  "measuredAtSha": "030c62464d894437b145c38d5559ad45059bb1ce",
+  "measuredBy": "DEPTH-2",
   "date": "2026-11-20",
-  "note": "names-4 landed: the agreement work, its swap test and census cure",
-  "files": 3707,
+  "note": "DEPTH-2 hooks unit: tests/generators/depthHooksAppended.test.js added (the 60 approved hooks, the chair word of 2026-11-20 14:50 UTC)",
+  "files": 3708,
   "parked": 472,
-  "credited": 3235,
-  "titles": 31237,
-  "suiteTitles": 8651
+  "credited": 3236,
+  "titles": 31240,
+  "suiteTitles": 8653
 }
