@@ -18,8 +18,12 @@
  * client reads it, so a flag-off regeneration fetches no service chunk).
  *
  * ⭐ THE RE-DERIVATION HALF OF THE CREATE BOUNDARY LIVES HERE NOW. A section regeneration reads
- * the world's OWN config first (`settlement.config || config`) and mints no law
- * (`tests/lint/densityCreateBoundary.walker.test.js` holds this module to both facts).
+ * the world's OWN config first, in either stored shape (`settlement.config || settlement._config ||
+ * config`), and mints no law (`tests/lint/densityCreateBoundary.walker.test.js` holds this module
+ * to both facts).
+ * Widened by KINDS-1 K2 (the chair's ruling of 2026-11-20 22:23 UTC): a legacy save with a `_config`
+ * echo but no `config` used to regenerate under the FORM's config, so a lit form re-rolled a law-1
+ * place's history under the trouble law's law 2 (`troubleLawSavedTown.test.js` arm 5, shape 1).
  */
 
 import { makeActionResult } from './actionResult.js';
@@ -34,7 +38,7 @@ import {
 
 /**
  * The slice state this body reads and writes: a structural view (the store holds more).
- * @typedef {Record<string, unknown> & { config?: Record<string, unknown>, history?: unknown, _regenSeed?: unknown }} RegenSettlement
+ * @typedef {Record<string, unknown> & { config?: Record<string, unknown>, _config?: Record<string, unknown>, history?: unknown, _regenSeed?: unknown }} RegenSettlement
  * @typedef {{
  *   settlement: RegenSettlement | null,
  *   config: Record<string, unknown>,
@@ -177,7 +181,11 @@ export async function regenSectionAction(set, get, section, { remote = remoteFla
       }, { tier: state.auth?.tier });
     }).catch(() => { /* never block a regen */ });
   }
-  const cfg = settlement.config || config;
+  // The world's OWN config in either stored shape before the form's: `_config` is the raw
+  // pre-resolution config the generator spreads into the place, and
+  // `generators/factionRoles.js` already reads the pair in this order
+  // (`settlement.config || settlement._config`). A place with neither follows the form's config.
+  const cfg = settlement.config || settlement._config || config;
   // The local bag is loaded where the slice loaded it (before the analytics fire) and its
   // passes are called synchronously as they were, so a flag-off regeneration keeps its order of
   // effects; a flagged build loads no local bag and awaits the service instead.

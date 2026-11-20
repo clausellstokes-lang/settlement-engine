@@ -956,10 +956,14 @@ describe('generation-law register (which LAW a birth mints)', () => {
     const rel = 'src/store/settlementRegenAction.js';
     const code = stripCommentsAndStrings(readFileSync(join(process.cwd(), rel), 'utf-8'));
     const sliceCode = stripCommentsAndStrings(readFileSync(join(process.cwd(), SLICE), 'utf-8'));
+    // The world's own config in EITHER stored shape comes before the form's (widened by KINDS-1
+    // K2, the chair's ruling of 2026-11-20 22:23 UTC): a legacy save with a `_config` echo but no
+    // `config` regenerated under the form's config, so a lit form re-rolled a law-1 place's history
+    // under law 2 (`tests/domain/trouble/troubleLawSavedTown.test.js` arm 5, shape 1).
     expect(
-      /settlement\.config \|\| config/.test(code),
-      `${rel}'s re-derivation must read the settlement's own config FIRST — that is `
-      + `what makes a markerless v1 world regenerate as v1 after the dial flips`,
+      /settlement\.config \|\| settlement\._config \|\| config/.test(code),
+      `${rel}'s re-derivation must read the settlement's own config FIRST (its config, then its `
+      + `_config echo) — that is what makes a markerless v1 world regenerate as v1 after the dial flips`,
     ).toBe(true);
     expect(
       /\bconfig \|\| settlement\.config/.test(code),
