@@ -299,4 +299,5 @@ export function deriveLegacyAnnotations(history, settlement) {
   }
   return result;
 }
-import { UNRESOLVED_LEGACY_WORDINGS } from '../data/legacyUnresolvedWordings.js'; export { UNRESOLVED_LEGACY_WORDINGS }; // FORTUNE U5a (condition 4): the unresolved line's ONE list (a data leaf, read by the fortune merits too), at the END so no line moves
+import { UNRESOLVED_LEGACY_WORDINGS } from '../data/legacyUnresolvedWordings.js'; // FORTUNE U5a (condition 4): the unresolved line's ONE list (a data leaf, read by the fortune merits too), at the END so no line moves
+export { UNRESOLVED_LEGACY_WORDINGS };

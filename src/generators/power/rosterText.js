@@ -196,8 +196,9 @@ function hostByStanding(desc, before) {
  * seat's standing after the sentences were written at the birth's band, and the rank-1 line's coup reading reads the
  * band's multiplier; so each power's sentence is computed at the previous legitimacy and at the stored one, and where
  * they differ the old sentence at a description's end gives way to the new, exactly as `settleStandingToRoster` swaps
- * it. At the END of the file so no line the faction-reader register cites moves. Draw-free and pure (the input is never mutated); returns the same object where nothing moves, so a second run
- * (the stored legitimacy on both sides) moves nothing.
+ * it. At the END of the file so no line the faction-reader register cites moves. Draw-free and pure (the input is
+ * never mutated); returns the same object where nothing moves, so a second run (the stored legitimacy on both sides)
+ * moves nothing.
  * @template {{ factions?: Array<Record<string, any>>, publicLegitimacy?: unknown }} P
  * @param {P} powerStructure the roster, carrying the stored legitimacy @param {unknown} previousLegitimacy the
  * legitimacy the sentences were written at @param {{ institutions?: unknown } | null | undefined} record the record,
@@ -218,7 +219,15 @@ export function settleStandingToLegitimacy(powerStructure, previousLegitimacy, r
     const now = after.get(name);
     if (!old || !now || old.standing === now.standing) return f;
     const desc = String(f.desc || '');
-    const base = !old.standing ? desc : desc === old.standing ? '' : desc.endsWith(` ${old.standing}`) ? desc.slice(0, -old.standing.length - 1) : null;
+    /** @type {string | null} */
+    let base = null;
+    if (!old.standing) {
+      base = desc;
+    } else if (desc === old.standing) {
+      base = '';
+    } else if (desc.endsWith(` ${old.standing}`)) {
+      base = desc.slice(0, -old.standing.length - 1);
+    }
     if (base === null) return f;
     moved = true;
     return { ...f, desc: base && now.standing ? `${base} ${now.standing}` : (base || now.standing) };
