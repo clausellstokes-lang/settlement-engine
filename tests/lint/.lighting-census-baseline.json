@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "b632fe3bc51d2cf29f5d4da075aef94790effebc",
+  "measuredAtSha": "99eaeb518bca8d46312191d893112ed66604853b",
   "measuredBy": "FRAME-5",
   "date": "2026-11-20",
-  "note": "the merges of U0 (1ca50da42: crisisPageAudience.test.js, the veil test grows) and C1 (b632fe3bc: crisisDealerReason.test.js), re-taken at the merged tip",
-  "files": 3714,
+  "note": "the merge of P1b (99eaeb518: crisisOutsideHand.test.js; the veil test and crisisPageAudience grow), re-taken at the merged tip",
+  "files": 3715,
   "parked": 473,
-  "credited": 3241,
-  "titles": 31268,
-  "suiteTitles": 8661
+  "credited": 3242,
+  "titles": 31279,
+  "suiteTitles": 8663
 }
