@@ -561,5 +561,7 @@ merit itself is nearly absent (3 calm towns of 416 are Prosperous with any merit
 the ladder's order is a second figure (Wealthy 25, measured in the third column: it adds Endorsed wherever an economy
 dial makes a place Wealthy, town 25% -> 38%).
 
+RULED (the chair, 2026-11-20 10:48 UTC): KEEP 15. Measured and rejected: 24 does not restore a common top band at untouched settings and ranks Prosperous above Wealthy. No second figure.
+
 THE LEAF IS SHAPED FOR IT: the new law's standing points (the prosperity table, the defence points and ranges) live in
 the law's one tuning table, so either value changes before the signature with no second unit.
