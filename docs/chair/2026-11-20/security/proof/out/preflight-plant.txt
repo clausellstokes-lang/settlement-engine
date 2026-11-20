@@ -1,0 +1,4 @@
+-[ RECORD 1 ]-----------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+visitor_reference_count | 4
+visitor_references      | public.founder_transfer_enabled()  <-  rule _RETURN on view plant.v ;  public.gen_account_number()  <-  default value for column acct of table plant.t ;  public.handle_premium_downgrade(uuid)  <-  body of plant.invoker_caller(uuid) (invoker) ;  public.has_role(uuid,text[])  <-  policy plant_policy on table settlements
+

@@ -1,0 +1,4 @@
+-[ RECORD 1 ]-----------+--
+visitor_reference_count | 0
+visitor_references      | 
+

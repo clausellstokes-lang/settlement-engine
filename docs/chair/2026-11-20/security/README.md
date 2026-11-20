@@ -7,7 +7,7 @@ a hosted database; everything ran on a scratch PostgreSQL 16 in a cloud containe
 | file | what |
 |---|---|
 | `EMERGENCY_REVOKE.sql` | the script for the owner's hand: one transaction, 157 `revoke execute … from public, anon, authenticated` (the two BYOK key functions first), then the same 157 `grant execute … to service_role` (already held; keeps the edge's door if PUBLIC was its path). No drop, alter or data change. Idempotent (proved by running it twice). |
-| `EMERGENCY_CHECK.sql` | read-only (read-only transaction, rollback). Before: lists what the script will close and any signature production lacks. After: must return no row. Second query: the two key functions' grants. |
+| `CHECK_A_KEYS.sql` … `CHECK_E_ANON_CATALOGUE.sql` | read-only, ONE statement and ONE row each (Supabase's editor shows only the last result and cuts at 100 rows). A: the two key functions, four booleans. B: the 157 — still open / missing / service_role lacking, counts and lists (after: all 0). C: the pre-flight — anything (policy, default, constraint, view, trigger, index, an INVOKER body in any schema, a definer owned by another role) using one of the 157 as the visitor; must be 0; red by plant (`proof/preflight-plant.sql` → `out/preflight-plant.txt`: 4 of 4 caught). D: is the BYOK secret set (never printed) and how many keys are stored. E: every anon-executable function in one cell, the chair's shape. |
 | `OWNER_NOTE.md` | one page for the owner: what was open, the log search, what to rotate, what users will notice. |
 | `CATALOGUE.md` | all 283 functions anon or authenticated may execute on the chain, classed, with callers, caller check, reads/writes, and the anon outcome before. |
 | `proof/` | the scaffold, chain builder, plant, reader calls, product flows, call harness, `run.sh`; `inputs/` the caller lists and classification; `out/` the outputs of the run recorded here. |
@@ -50,7 +50,8 @@ Two databases from the same chain, `pre` (as production) and `post` (script appl
 fake key planted for user 2222.
 * `reader-pre.txt`: as anon and as authenticated(1111), `_surveyor_byok_secret()` returns the secret and
   `surveyor_byok_get(2222)` returns the decrypted key. `reader-post.txt`: all four calls `permission denied`.
-* `check-before.txt`: 157 rows. `check-after.txt`: no row; the key functions grant only postgres and service_role.
+* `check-before.txt` / `check-after.txt` (checks A–E): before, A all true, B still_open 157, C 0; after, A all false,
+  B 0/0/0, C 0, E 145 (299 before).
 * `flows-pre.txt` = `flows-post.txt`, byte for byte: save/edit (RLS and every settlements trigger as the visitor),
   unlisted share and anon read, publish, anon gallery list/page/more-by-creator/view bump/founders roll, vote,
   comment, import by another premium user, map save (its INVOKER trigger) and publish, credit balance, Surveyor
@@ -67,8 +68,8 @@ fake key planted for user 2222.
   all five are denied. Every function on this chain that takes a `p_actor` and is anon-executable (18) is in the
   script; none has a browser caller (the admin pages call the `admin-actions` edge function, which uses the service
   key). `_gallery_public_tile_rows`, `handle_premium_downgrade` and both `purge_expired_plan_inactive_*` are in it too.
-* `EMERGENCY_CHECK.sql`'s third query has the shape of the chair's production query (proname, identity arguments,
-  prosecdef, for anon). The chain's results are in `out/anon-catalogue-pre.txt` (299) and `-post.txt` (145). Both
+* `CHECK_E_ANON_CATALOGUE.sql` has the shape of the chair's production query (proname, identity arguments,
+  prosecdef, for anon), in one row. The chain's results are in `out/anon-catalogue-pre.txt` (299) and `-post.txt` (145). Both
   counts include pgcrypto's 36 functions, which this chain installs in `public`; Supabase puts them in `extensions`.
 
 ## Limits (what is executed and what is not)

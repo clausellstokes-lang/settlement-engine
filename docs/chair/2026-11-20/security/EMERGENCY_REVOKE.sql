@@ -3,8 +3,8 @@
 -- call but no browser code calls (finding V10-8). Written 2026-11-20 01:38 UTC by SEC-GRANTS against
 -- origin/master's migrations 001..203 (what production runs). FOR THE OWNER'S HAND ONLY.
 --
--- RUN ORDER: run EMERGENCY_CHECK.sql first (read-only), then this file once, then
--- EMERGENCY_CHECK.sql again: its first section must then return NO row.
+-- RUN ORDER (see OWNER_NOTE.md): CHECK_C_PREFLIGHT.sql and CHECK_B_REVOKE_LIST.sql first (read-only, one row
+-- each), then this file once, then CHECK_B_REVOKE_LIST.sql (all counts 0) and CHECK_A_KEYS.sql (all false).
 --
 -- WHAT IT DOES, in ONE transaction:
 --   1. For each of the 157 functions below: revoke EXECUTE from PUBLIC, anon and authenticated.
@@ -25,7 +25,7 @@
 --
 -- NO drop, NO alter, NO data change, NO change to row security. Idempotent: running it twice
 --   is the same as running it once. If any signature below does not exist on production the
---   whole transaction fails and NOTHING changes; EMERGENCY_CHECK.sql's second section lists
+--   whole transaction fails and NOTHING changes; CHECK_B_REVOKE_LIST.sql's missing_count lists
 --   such signatures in advance (it must be empty).
 --
 -- UNDO (only if something breaks): grant execute on function <signature> to anon, authenticated;

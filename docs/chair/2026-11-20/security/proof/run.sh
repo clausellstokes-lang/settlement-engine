@@ -12,10 +12,10 @@ for db in pre post; do
   psql -qXAt -d $db -f $P/plant2.sql | grep -vE "^f(\|f)?$"
 done
 psql -qXAt -d pre -f $P/calls.sql > $OUT/calls.tsv
-psql -qX -d pre -f $SEC/EMERGENCY_CHECK.sql > $OUT/check-before.txt 2>&1
+for c in A_KEYS B_REVOKE_LIST C_PREFLIGHT D_SECRET E_ANON_CATALOGUE; do psql -qX -x -d pre -f $SEC/CHECK_$c.sql; done > $OUT/check-before.txt 2>&1
 psql -qX -d post -v ON_ERROR_STOP=1 -f $SEC/EMERGENCY_REVOKE.sql > $OUT/revoke-1.txt 2>&1; echo "revoke run 1 exit=$?"
 psql -qX -d post -v ON_ERROR_STOP=1 -f $SEC/EMERGENCY_REVOKE.sql > $OUT/revoke-2.txt 2>&1; echo "revoke run 2 exit=$?"
-psql -qX -d post -f $SEC/EMERGENCY_CHECK.sql > $OUT/check-after.txt 2>&1
+for c in A_KEYS B_REVOKE_LIST C_PREFLIGHT D_SECRET E_ANON_CATALOGUE; do psql -qX -x -d post -f $SEC/CHECK_$c.sql; done > $OUT/check-after.txt 2>&1
 for db in pre post; do
   psql -qX -d $db -f $P/reader.sql 2>&1 | grep -vE "^f(\|f)?$" > $OUT/reader-$db.txt
   psql -qX -d $db -f $P/flows.sql 2>&1 | grep -vE "^f(\|f)?$" > $OUT/flows-$db.txt

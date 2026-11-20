@@ -1,20 +1,7 @@
--- ════════════════════════════════════════════════════════════════════════════════════════
--- EMERGENCY_CHECK.sql — READ-ONLY. Written 2026-11-20 01:38 UTC by SEC-GRANTS. Changes nothing (it runs in
--- a read-only transaction and ends in rollback).
---
--- Run it BEFORE EMERGENCY_REVOKE.sql: every row is a function the script will close
---   (anon_can / authenticated_can = true), or a signature production does not have
---   (exists_here = false: STOP and send the rows to the chair before running the script).
--- Run it AFTER EMERGENCY_REVOKE.sql: it must return NO ROW. Any row means a grant survived
---   (for instance one granted by another role than postgres): send the rows to the chair.
--- The second query (also read-only) answers the urgent question alone: can anon reach the
---   two BYOK key functions right now?
--- The third query lists EVERY function of schema public that anon may execute (proname, identity
---   arguments, prosecdef), the same shape as the chair's query, so production's result can be laid
---   beside the chain's (proof/out/anon-catalogue-pre.txt and -post.txt).
--- ════════════════════════════════════════════════════════════════════════════════════════
-begin transaction read only;
-
+-- CHECK_B_REVOKE_LIST.sql — READ-ONLY, one statement, one row. 2026-11-20 02:08 UTC, SEC-GRANTS.
+-- The 157 functions EMERGENCY_REVOKE.sql closes.
+-- BEFORE: still_open_count = how many it will close; missing_count MUST be 0 (else stop and send the row to the chair).
+-- AFTER:  still_open_count = 0, missing_count = 0, service_role_lacking_count = 0. Anything else: send the row.
 with fns(sig) as (values
   ('public._surveyor_byok_secret()'),
   ('public.surveyor_byok_get(uuid,text)'),
@@ -173,29 +160,13 @@ with fns(sig) as (values
   ('public.verify_transfer_challenge(uuid,text,text,text)'),
   ('public.write_ai_operation_log(uuid,text,text,text,text,text[],text[],text,text,text,boolean,numeric,integer,boolean,uuid,boolean,text,text)'),
   ('public.write_audit(text,uuid,text,text,text,jsonb,jsonb,boolean,boolean,boolean,uuid)')
-)
-select f.sig,
-       to_regprocedure(f.sig) is not null                                             as exists_here,
-       coalesce(has_function_privilege('anon',          to_regprocedure(f.sig), 'execute'), false) as anon_can,
-       coalesce(has_function_privilege('authenticated', to_regprocedure(f.sig), 'execute'), false) as authenticated_can,
-       coalesce(has_function_privilege('service_role',  to_regprocedure(f.sig), 'execute'), false) as service_role_can
-from fns f
-where to_regprocedure(f.sig) is null
-   or has_function_privilege('anon',          to_regprocedure(f.sig), 'execute')
-   or has_function_privilege('authenticated', to_regprocedure(f.sig), 'execute')
-   or not has_function_privilege('service_role', to_regprocedure(f.sig), 'execute')
-order by 1;
-
-select p.oid::regprocedure as key_function,
-       has_function_privilege('anon', p.oid, 'execute')          as anon_can,
-       has_function_privilege('authenticated', p.oid, 'execute') as authenticated_can,
-       p.proacl                                                   as grants
-from pg_proc p join pg_namespace n on n.oid = p.pronamespace
-where n.nspname = 'public' and p.proname in ('_surveyor_byok_secret', 'surveyor_byok_get');
-
-select p.proname, pg_get_function_identity_arguments(p.oid) as identity_arguments, p.prosecdef
-from pg_proc p join pg_namespace n on n.oid = p.pronamespace
-where n.nspname = 'public' and has_function_privilege('anon', p.oid, 'execute')
-order by 1, 2;
-
-rollback;
+), f as (select sig, to_regprocedure(sig) as oid from fns)
+select count(*) filter (where oid is not null and (has_function_privilege('anon', oid, 'execute')
+                                              or has_function_privilege('authenticated', oid, 'execute'))) as still_open_count,
+       string_agg(sig, ', ' order by sig) filter (where oid is not null and (has_function_privilege('anon', oid, 'execute')
+                                              or has_function_privilege('authenticated', oid, 'execute'))) as still_open,
+       count(*) filter (where oid is null)                                        as missing_count,
+       string_agg(sig, ', ' order by sig) filter (where oid is null)              as missing,
+       count(*) filter (where oid is not null and not has_function_privilege('service_role', oid, 'execute')) as service_role_lacking_count,
+       string_agg(sig, ', ' order by sig) filter (where oid is not null and not has_function_privilege('service_role', oid, 'execute')) as service_role_lacking
+from f;
