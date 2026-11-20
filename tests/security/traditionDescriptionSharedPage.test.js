@@ -853,6 +853,7 @@ describe('TRAD-4 UNIT 7 (2): a DM-made power with no mapped category whose descr
     for (const [, p] of PLANTS) expect(factionArchetype(noDescription(p))).toBe('other');
     const eyeKeys = Object.values(CARD_KINDS.faction.fields).flat();
     expect(eyeKeys).toContain('description');
+    // anchored: the line above asserts the same declaration's eye keys hold the description (the collection is live)
     for (const k of ['faction', 'name', 'category']) expect(eyeKeys).not.toContain(k);
     expect(isVeiledPower(PLANTS[0][1])).toBe(false);
   }, 120000);
