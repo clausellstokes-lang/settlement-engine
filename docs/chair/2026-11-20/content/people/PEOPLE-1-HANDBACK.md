@@ -1,4 +1,4 @@
-# PEOPLE-1 hand-back (kept current at every push; last written 2026-11-20T16:55Z)
+# PEOPLE-1 hand-back (kept current at every push; last written 2026-11-20T16:59Z)
 
 Seat: PEOPLE-1 of the seventh chair (chair session_019yED1SUxGVHyjQnoqoFvQ8). Assignment: `git show origin/lane/chair-2026-11-08:docs/chair/2026-11-20/seventh/prompts/PEOPLE-1.txt`.
 Branch: `lane/people-1-2026-11-20`, cut from the working line `lane/join-2026-11-14` at `43ab0f5eb`. Builder branches: `lane/people-1-m<N>-2026-11-20` (pushed as each returns; the integrator cherry-picks their commits).
@@ -11,8 +11,8 @@ Branch: `lane/people-1-2026-11-20`, cut from the working line `lane/join-2026-11
 | 3 | npcs[].structuralPosition | YES (people card) | M1 done | 01351d72d | APPROVED 16:41 UTC with four rulings and three atoms (quoted in briefs/B1) | B1 seated on c8c88cd4e |
 | 4 | settlementReason[] | YES (Overview, PDF) | M3 done (PROPOSAL-settlementReason.md; READ-M3-origins.md) | sent with 88ed4a8fb | lines now; one call line in narrativeGenerator.js | — |
 | 5 | history.founding.foundedBy / overcoming | PDF only | M3 done (PROPOSAL-founding.md) | NOT sent (last in order; noble/crown founder where no lord rules: put with its lines) | after the others | — |
-| — | npcs[].activeConstraint | YES: proven by render, 38 of 38 holders show "Constraint: <stored>" on World/NPCs (scratchpad receipt, reported 16:5x) | M1 done | 01351d72d | awaiting the chair | after B1, same builder, same file |
-| — | spatialLayout.quarters[].desc | printed NOWHERE | M2 done | cb4a00de2 | DROPPED by the chair (16:30); briefs/B2 is void | — |
+| — | npcs[].activeConstraint | YES: proven by render, 38 of 38 holders show "Constraint: <stored>" on World/NPCs (scratchpad receipt, reported 16:5x) | M1 done | 01351d72d | RULED 16:51 UTC: B, all 14 pools, eight rewordings, six conditions (briefs/B1b, verbatim) | B1's second unit, on top of its branch |
+| — | spatialLayout.quarters[].desc | printed NOWHERE (no page, PDF or Foundry surface since X-47; only the record, the share payload, the view model and districtProfile's unrendered sensoryIdentity) | M2 done | cb4a00de2 | R1, R2, R7 ruled 16:51; R3 a named survivor; NOTHING built until a print is shown: none exists | — |
 
 ## Rulings and rules in force
 - The chair, 16:10 UTC: `factVocabulary.js` is read-only; an atom the record holds is asked one at a time ("ATOM <key> : <home> : <wording>"), appended by the chair. The chair ALLOWED own house, export good and import good (16:41); B1 appends them, and their three lines go to the chair as added.
