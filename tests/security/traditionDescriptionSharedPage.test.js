@@ -16,7 +16,7 @@
  * seat, carried on a full-mode share (deepClone keeps `traditions`); the reader's description drops it.
  * This file edits no file of the security lane.
  */
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi, beforeAll } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { deriveFoundingTraditions } from '../../src/domain/traditions/genesis.js';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
@@ -873,5 +873,267 @@ describe('TRAD-4 UNIT 7 (2): a DM-made power with no mapped category whose descr
       }
     }
     expect(red).toEqual([]);
+  }, 120000);
+});
+
+// ── TRAD-4 UNIT 8: THE READER'S TRADITIONS ON THE IMPORT PATH, AND THE SAVE/SERVE ROUND TRIP ON MORE THAN FOUR TOWNS ──
+/*
+ * THE CHAIR'S WORD (16:08 UTC; REVIEW-VEIL-13 §3, "NOT DONE: import (stub missing then); the 140-town round trip"). A PROOF
+ * unit: arms only, no source changed.
+ * (1) THE ROUND TRIP, WIDENED: 140 born towns (every tier, seven cultures), each with a hideable house PLANTED to keep a
+ * rite (a criminal house of a keeper's kind put first on the roster; where no rite of the town takes a house, a lit mirror
+ * whose first rite the house owns). The rows the save draws (sharedTraditionRowsOf, under publicProse) stand byte for byte
+ * on the party link, under the default veil, and with every address the Curate screen can hide hidden (this tree's model
+ * and veil-22's, read by hand above); they come out of the server's net-current sanitizer (pglite, the real SQL) equal
+ * field for field and byte for byte in every value (jsonb orders an object's keys its own way); they name nothing hidden;
+ * their ids are dense.
+ * (2) THE IMPORT PATH: each town saved gallery_importable, read through the net-current import_gallery_dossier (pglite:
+ * 131's body over 210's sanitizer, 129's DM-full, 093's member splice and 024's premium gate, auth.uid() a settable stub),
+ * then cloned by importGallerySettlementImpl itself (its fetchDossierForImport is the real one, wrapped by vi.mock over a
+ * supabase.rpc that runs the pglite RPC; its saves.save captures the entry). (a) the clone's drawn rows are the rows the
+ * gallery served and name nothing hidden; (b) the IMPORTER's OWNER page for the clone names nothing the gallery's served
+ * document (the party link's composition under the default veil, this file's own definition of "served") lacked.
+ * MEASURED, NOT ASSERTED: how many towns show the importer the same set the gallery served (CTR9: the importer is an owner,
+ * whose set genesis derives from the clone, its seed scrubbed).
+ * (3) Each planted name is asserted absent only after a control proves it present on the owner's page of the source town.
+ */
+import { PGlite } from '@electric-sql/pglite';
+import { readFileSync, readdirSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { KEEPER_HOUSES } from '../../src/data/traditionDescriptionTable.js';
+import { importGallerySettlementImpl } from '../../src/store/galleryImportSettlement.js';
+import { fetchDossierForImport } from '../../src/lib/gallery.js';
+import { saves } from '../../src/lib/saves.js';
+import { supabase } from '../../src/lib/supabase.js';
+
+vi.mock('../../src/lib/supabase.js', () => ({ supabase: { from: vi.fn(), rpc: vi.fn() }, isConfigured: true }));
+// the real fetchDossierForImport (its confidential strip and its veilPublicPayload), wrapped so the arm sees it called
+vi.mock('../../src/lib/gallery.js', async (importOriginal) => {
+  const actual = await importOriginal();
+  return { ...actual, fetchDossierForImport: vi.fn(actual.fetchDossierForImport) };
+});
+vi.mock('../../src/lib/saves.js', async (importOriginal) => ({ ...(await importOriginal()), saves: { save: vi.fn() } }));
+
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+const ROUND_TRIP_TIMEOUT_MS = 600_000; // the pool's own hook: 140 born towns, their curate addresses and their imports
+const MIGRATIONS_DIR = resolve(process.cwd(), 'supabase', 'migrations');
+
+/** The LAST definition of a function across the migrations, in file order. @param {string} name */
+function netCurrentFn(name) {
+  const files = readdirSync(MIGRATIONS_DIR).filter((f) => /^\d.*\.sql$/.test(f)).sort();
+  const re = new RegExp(`^create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'igm');
+  let last = null;
+  for (const f of files) {
+    const matches = readFileSync(resolve(MIGRATIONS_DIR, f), 'utf-8').match(re);
+    if (matches && matches.length) last = matches[matches.length - 1];
+  }
+  return last;
+}
+
+/** A value's JSON with every object's keys sorted: jsonb keeps no key order, so the server's rows are compared by it. */
+const canon = (v) => JSON.stringify(v, (k, x) => (x && typeof x === 'object' && !Array.isArray(x)
+  ? Object.fromEntries(Object.keys(x).sort().map((key) => [key, x[key]])) : x));
+
+describe('TRAD-4 UNIT 8: 140 born towns, a hideable house planted to keep a rite, saved, served, sanitized and imported', () => {
+  const N = 140;
+  const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
+  const CULTURES = ['germanic', 'celtic', 'arabic', 'slavic', 'latin', 'norse', 'greek'];
+  const PLANT = 'Corvine Sanctum';
+  const IMPORTER = '11111111-1111-1111-1111-111111111111';
+  /** @type {any} */
+  let db;
+  /** @type {any[]} */
+  const pool = [];
+
+  /**
+   * The plant: a criminal house (the hideable class X-21e hides whole) of a keeper's kind (a rite's element's first kind,
+   * else its act's) for the first rite of the town's founding set whose keeper the owner's page then names (tagged a market
+   * where that alone admits the fairs a market-less town's set drops); else a lit mirror whose first rite the owner's page shows the house owns (as born, else tagged a market).
+   */
+  const plantOf = (t) => {
+    const house = { name: PLANT, category: 'Criminal', priorityCategory: 'criminal' };
+    const names = (s) => shownTraditionsOf(s, []).recs.some((r) => describeTradition(r, s, { audience: 'owner' })?.named.houses.includes(PLANT));
+    const derived = deriveFoundingTraditions(t);
+    for (const rec of derived) {
+      for (const rows of [KEEPER_HOUSES.element[rec.coreMotif?.element], KEEPER_HOUSES.act[rec.coreMotif?.act]]) {
+        if (!rows) continue;
+        // as born, else tagged a market (the fact a fair needs reads a house's own tags, else the catalogue's for its NAME)
+        for (const extra of [{}, { tags: ['market'] }]) {
+          const planted = { ...t, institutions: [{ ...house, catalogId: rows[0].ids[0], ...extra }, ...t.institutions] };
+          if (names(planted)) return { how: 'kind', planted };
+        }
+      }
+    }
+    for (const extra of [{}, { tags: ['market'] }]) {
+      for (const [k, rec] of derived.entries()) {
+        const planted = { ...t, institutions: [{ ...house, ...extra }, ...t.institutions],
+          traditions: derived.map((r, j) => (j === k ? { ...rec, ownerKey: 'institution:corvine_sanctum', ownerKind: 'institution', ownerLabel: PLANT } : r)) };
+        if (names(planted)) return { how: 'owner', planted };
+      }
+    }
+    return { how: 'none', planted: t };
+  };
+  /** The names the owner's page of a record gives (houses, persons, powers, events), with the founder its founding sentence prints. */
+  const ownerNames = (s) => shownTraditionsOf(s, []).recs.flatMap((rec) => {
+    const d = describeTradition(rec, s, { audience: 'owner' });
+    if (!d) return [];
+    const by = typeof s.history?.founding?.foundedBy === 'string' && d.text.includes(`by ${s.history.founding.foundedBy}`) ? [s.history.founding.foundedBy] : [];
+    return [...d.named.houses, ...d.named.persons, ...d.named.powers, ...d.named.events, ...by];
+  });
+  const plantIn = (rows) => (rows || []).filter((r) => String(r.text).toLowerCase().includes(PLANT.toLowerCase())).map((r) => r.name);
+
+  beforeAll(async () => {
+    db = new PGlite();
+    await db.exec(`
+      create schema if not exists public;
+      create schema if not exists auth;
+      create or replace function auth.uid() returns uuid language sql stable as $fn$
+        select nullif(current_setting('test.uid', true), '')::uuid
+      $fn$;
+      create table public.profiles (id uuid primary key, tier text, is_founder boolean not null default false, role text not null default 'user');
+      create table public.settlements (
+        id uuid primary key, name text, tier text, data jsonb, ai_data jsonb,
+        gallery_share_narrated boolean not null default false, gallery_share_dm boolean not null default false,
+        gallery_importable boolean not null default false, gallery_member_overrides jsonb not null default '{}'::jsonb,
+        is_public boolean not null default false, public_slug text
+      );
+    `);
+    for (const fn of ['_gallery_sanitize_public_json', '_gallery_dm_full_json', '_gallery_npc_key', '_gallery_apply_member_overrides',
+      'current_user_has_premium_access', 'import_gallery_dossier']) {
+      await db.exec(netCurrentFn(fn));
+    }
+    await db.exec(`insert into public.profiles (id, tier) values ('${IMPORTER}', 'premium'); set test.uid = '${IMPORTER}';`);
+  }, PGLITE_BOOT_TIMEOUT_MS);
+
+  beforeAll(async () => {
+    const started = Date.now();
+    supabase.rpc.mockImplementation(async (fn, args) => {
+      if (fn !== 'import_gallery_dossier') return { data: null, error: { message: `unexpected rpc ${fn}` } };
+      return { data: (await db.query('select * from public.import_gallery_dossier($1)', [args.dossier_slug])).rows, error: null };
+    });
+    const entries = [];
+    saves.save.mockImplementation(async (entry) => { entries.push(entry); return `import-${entries.length}`; });
+    for (let i = 0; i < N; i += 1) {
+      const tier = TIERS[i % TIERS.length];
+      const culture = CULTURES[Math.floor(i / TIERS.length) % CULTURES.length];
+      const t = born(tier, culture, `trad4-u8-${tier}-${culture}-${i}`);
+      const { how, planted } = plantOf(t);
+      const saved = withPublicProse(planted, composePublicProse(planted));
+      const pub = galleryPayloadFor(saved);
+      const all = [...new Set([...modelAddresses(pub), ...veil22Addresses(pub), ...veil22Addresses(planted)])];
+      const everything = resolveVeil(defaultVeilFor(pub), all.map((address) => ({ address, hidden: true })));
+      const slug = `trad4u8${String(i).padStart(4, '0')}`;
+      await db.query(`insert into public.settlements (id, name, tier, data, is_public, gallery_importable, public_slug)
+        values ($1, $2, $3, $4::jsonb, true, true, $5)`, [`00000000-0000-4000-8000-${String(i).padStart(12, '0')}`, saved.name, tier, JSON.stringify(saved), slug]);
+      const before = entries.length;
+      const newId = await importGallerySettlementImpl(
+        () => ({ auth: { user: { id: IMPORTER }, tier: 'premium' }, maxSaves: () => Infinity, savedSettlements: [] }),
+        (fn) => fn({ savedSettlements: [] }), slug,
+      );
+      pool.push({
+        i, tier, culture, how, planted, saved, pub, everything, slug, newId,
+        rows: publicProseOf(saved, 'traditions'),
+        served: (await db.query('select * from public.import_gallery_dossier($1)', [slug])).rows[0]?.data,
+        dossier: await fetchDossierForImport.mock.results.at(-1)?.value,
+        clone: entries.length === before + 1 ? entries.at(-1).settlement : null,
+      });
+    }
+    pool.ms = Date.now() - started;
+  }, ROUND_TRIP_TIMEOUT_MS);
+
+  it('NOT VACUOUS: 140 towns, every tier, at least six cultures, every town planted; every tier draws a row with a keeper or a cause', () => {
+    expect(pool.length).toBe(N);
+    expect(new Set(pool.map((x) => x.tier)).size).toBe(TIERS.length);
+    expect(new Set(pool.map((x) => x.culture)).size).toBeGreaterThanOrEqual(6);
+    expect(pool.filter((x) => x.how === 'kind').length).toBeGreaterThan(N / 2);
+    expect(pool.filter((x) => x.how === 'none').map((x) => `${x.tier} ${x.planted.name}`)).toEqual([]); // every town planted
+    for (const tier of TIERS) {
+      const carried = pool.filter((x) => x.tier === tier).flatMap((x) => shownTraditionsOf(x.planted, []).recs
+        .map((rec) => describeTradition(rec, x.planted, { audience: 'reader' }))
+        .filter((d) => d && (d.parts.keeper || d.parts.origin === 'cause') && (x.rows || []).some((r) => r.text === d.text)));
+      expect(carried.length, tier).toBeGreaterThan(0);
+    }
+  }, 120000);
+
+  it('CONTROL (arm 3): the OWNER\'s page of every planted source town names the planted house, by name, in its text', () => {
+    const missed = pool.filter((x) => !ownerNames(x.planted).includes(PLANT)
+      || !shownTraditionsOf(x.planted, []).recs.some((r) => describeTradition(r, x.planted, { audience: 'owner' })?.text.includes(PLANT)))
+      .map((x) => `${x.tier} ${x.planted.name} (${x.how})`);
+    expect(missed).toEqual([]);
+  }, 120000);
+
+  it('THE ROUND TRIP (client): the drawn rows are the save\'s, and stand byte for byte on the party link, under the default veil and with every Curate address hidden; ids dense', () => {
+    const red = [];
+    let drew = 0;
+    for (const x of pool) {
+      const rows = JSON.stringify(x.rows ?? null);
+      if (x.rows) drew += 1;
+      const where = `${x.tier} ${x.planted.name}`;
+      if (JSON.stringify(sharedTraditionRowsOf(x.planted)) !== rows) red.push(`${where}: drawn`);
+      if (JSON.stringify(publicProseOf(partyLink(x.saved), 'traditions') ?? null) !== rows) red.push(`${where}: party link`);
+      if (JSON.stringify(publicProseOf(applyVeil(x.pub, resolveVeil(defaultVeilFor(x.pub), [])), 'traditions') ?? null) !== rows) red.push(`${where}: default veil`);
+      if (JSON.stringify(publicProseOf(applyVeil(x.pub, x.everything), 'traditions') ?? null) !== rows) red.push(`${where}: everything hidden`);
+      if (JSON.stringify(sharedTraditionRowsOf(hiddenFrom(x.planted, x.everything))) !== rows) red.push(`${where}: drawn over the hidden record`);
+      if (x.rows && JSON.stringify(x.rows.map((r) => r.id)) !== JSON.stringify(x.rows.map((_, n) => `tradition.shared.${n}`))) red.push(`${where}: ids`);
+    }
+    expect(drew).toBeGreaterThan(N * 0.8);
+    expect(red).toEqual([]);
+  }, 300000);
+
+  it('THE ROUND TRIP (server): the saved record and the all-hidden document come out of the net-current sanitizer with the rows equal, value for value', async () => {
+    const red = [];
+    for (const x of pool.filter((p) => p.rows)) {
+      for (const [label, doc] of [['saved', x.saved], ['everything hidden', applyVeil(x.pub, x.everything)]]) {
+        const out = (await db.query('select public._gallery_sanitize_public_json($1::jsonb) as out', [JSON.stringify(doc)])).rows[0].out;
+        if (canon(out?.publicProse?.blocks?.traditions) !== canon(x.rows)) red.push(`${x.tier} ${x.planted.name}: ${label}`);
+      }
+    }
+    expect(red).toEqual([]);
+  }, 300000);
+
+  it('NAMES NOTHING HIDDEN: no drawn row names the planted house, a house hidden whole, a person, a veiled power or a phrase an address removed', () => {
+    const named = [];
+    let plantHidden = 0;
+    for (const x of pool) {
+      const hidden = hiddenNamesOf(x.planted, x.pub, applyVeil(x.pub, x.everything));
+      if (hidden.houses.includes(PLANT)) plantHidden += 1;
+      named.push(...namedHidden(x.rows || [], hidden).map((n) => `${x.planted.name}: ${n}`), ...plantIn(x.rows).map((n) => `${x.planted.name}: ${n} names the plant`));
+    }
+    expect(plantHidden).toBe(N); // the hide takes the plant whole in every town (the absence below is not vacuous)
+    expect(named).toEqual([]);
+  }, 300000);
+
+  it('THE IMPORT PATH (a): the importer drove the real transform, the RPC served every town, and the clone\'s drawn rows are the rows the gallery served, naming nothing hidden', () => {
+    const red = [];
+    for (const x of pool) {
+      const where = `${x.tier} ${x.planted.name}`;
+      if (!x.served || !x.clone || !x.newId) { red.push(`${where}: not imported`); continue; }
+      if (x.clone._seed !== undefined || x.clone.config?._seed !== undefined) red.push(`${where}: seed`);
+      if (canon(x.served.publicProse?.blocks?.traditions ?? null) !== canon(x.rows ?? null)) red.push(`${where}: served rows`);
+      if (JSON.stringify(publicProseOf(x.clone, 'traditions') ?? null) !== JSON.stringify(x.dossier.settlement.publicProse?.blocks?.traditions ?? null)) red.push(`${where}: clone vs dossier`);
+      if (canon(publicProseOf(x.clone, 'traditions') ?? null) !== canon(x.rows ?? null)) red.push(`${where}: clone rows`);
+      const hidden = hiddenNamesOf(x.planted, x.pub, applyVeil(x.pub, x.everything));
+      red.push(...namedHidden(publicProseOf(x.clone, 'traditions') || [], hidden).map((n) => `${where}: names ${n}`), ...plantIn(publicProseOf(x.clone, 'traditions')).map((n) => `${where}: ${n} names the plant`));
+    }
+    expect(fetchDossierForImport).toHaveBeenCalledTimes(N);
+    expect(red).toEqual([]);
+  }, 300000);
+
+  it('THE IMPORT PATH (b): the IMPORTER\'s OWNER page for the clone names no house, power, person, founder or event the gallery\'s served document lacked', () => {
+    const beyond = [];
+    for (const x of pool.filter((p) => p.clone)) {
+      const served = partyLink(x.saved); // the gallery's served document: the party link's composition, the default veil
+      for (const n of ownerNames(x.clone)) if (!holds(served, n)) beyond.push(`${x.tier} ${x.planted.name}: ${n}`);
+    }
+    expect(beyond).toEqual([]);
+  }, 300000);
+
+  it('MEASURED (CTR9, a finding for the chair, not a leak): how many clones show the importer the set the gallery served', () => {
+    const same = pool.filter((x) => x.clone && JSON.stringify(shownTraditionsOf(x.clone, []).recs.map((r) => r.name))
+      === JSON.stringify((x.rows || []).map((r) => r.name)));
+    const ids = pool.filter((x) => x.clone && x.clone.id === x.saved.id);
+    // the measure runs over every imported town; the figures are printed and reported, never pinned
+    expect(pool.filter((x) => x.clone).length).toBe(N);
+    process.stdout.write(`TRAD4-U8 MEASURE: same set ${same.length}/${N}; clone keeps the source id ${ids.length}/${N}; plants kind ${pool.filter((x) => x.how === 'kind').length} owner ${pool.filter((x) => x.how === 'owner').length}; pool ${pool.ms} ms\n`);
   }, 120000);
 });
