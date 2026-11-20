@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "f6028dde0281a4b38a475fa6f87311c8d196d74f",
+  "measuredAtSha": "96d4c7b226bbbd5e8bff6bf6cd8ca2c4f1b6c830",
   "measuredBy": "TRAD-5",
   "date": "2026-11-20",
-  "note": "TRAD-5 at the lane tip after unit 10 (9530bd22f: the 18 keeper \"too\" lines and their arms) and the kernel cherry-pick e32c9b27e (tests/kernel/proseHash.test.js parked by its describe-scope key loops, the chair cures it at the close)",
+  "note": "TRAD-5 after unit 11 (37b3f9dcd: the founder-last and mixed-pick arms) and unit 12 (docs only); parked 473 stays tests/kernel/proseHash.test.js from e32c9b27e, the chair cures it at the close",
   "files": 3711,
   "parked": 473,
   "credited": 3238,
-  "titles": 31363,
-  "suiteTitles": 8685
+  "titles": 31368,
+  "suiteTitles": 8686
 }
