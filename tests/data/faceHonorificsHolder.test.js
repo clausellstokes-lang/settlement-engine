@@ -6,7 +6,9 @@
  * "Headman", "Spokesman"; a man "Mother" (174 of the census's 720 at b30c1b7aa). K-C's law: ONE FACE, ONE WORD across the
  * title, the role and the honorific: where K-C gave a holder a word (data/holderTitleForms.js), the pool's form for that
  * holder is the same word. Display only: the pick (pickVariant over the card id and the house) and every pool's length
- * are unchanged, so no draw and no record byte moves.
+ * are unchanged, so no draw and no record byte moves. RE-RECORDED by VR47 (2026-11-20: the pick is seeded by the holder's
+ * name and the title, faceHonorifics.js :: honorificSeedOf, never the id or the house): MOVE [1] and [2] and KEEP [3] print
+ * the pool's other form under the new seed; each MOVE row still does not open on the old word.
  *
  * Births through the census's births (DEFAULT_CONFIG and the browser's dials; an r2s- seed adds its one stress). MOVE: the
  * line must NOT open on the old word; each names the line that prints instead. KEEP: a holder of the face's own sex, and a
@@ -48,8 +50,8 @@ function lineOf(seed, name) {
 /** [seed, name, gender, the face, the old word (must not open the line), the line that prints instead]. */
 const MOVE = Object.freeze([
   ['r2r-town-12', 'Shahd al-Kindi', 'female', 'the front man', 'Frontman', 'Nominal Owner Shahd al-Kindi'],
-  ['r2r-village-2', 'Cveta Klimov', 'female', 'the ferryman', 'Ferryman', 'Ferry Keeper Cveta Klimov'],
-  ['r2r-thorp-3', 'Borchigid Kiyad', 'female', 'the boat-headman', 'Headman', 'Boat-Master Borchigid Kiyad'],
+  ['r2r-village-2', 'Cveta Klimov', 'female', 'the ferryman', 'Ferryman', 'Ferry-Master Cveta Klimov'], // VR47: was 'Ferry Keeper'
+  ['r2r-thorp-3', 'Borchigid Kiyad', 'female', 'the boat-headman', 'Headman', 'Skipper Borchigid Kiyad'], // VR47: was 'Boat-Master'
   ['r2r-thorp-35', 'Messalina Maximus', 'female', 'the camp foreman', 'Foreman', 'Overseer Messalina Maximus'],
   ['r2s-insurgency-hamlet-0', 'Eirenika Comnenus', 'female', 'the headman', 'Headman', 'Chief Eirenika Comnenus'],
   ['r2s-mass_migration-hamlet-0', 'Plotina Varro', 'female', "the newcomers' spokesman", 'Spokesman', 'Speaker Plotina Varro'],
@@ -60,7 +62,7 @@ const KEEP = Object.freeze([
   ['r2r-town-11', 'Patrick MacNamara', 'male', 'the front man', 'Frontman Patrick MacNamara'],
   ['r2r-village-5', 'Jassim al-Farabi', 'male', 'the ferryman', 'Ferryman Jassim al-Farabi'],
   ['r2r-thorp-0', 'Cosij Chan', 'male', 'the boat-headman', 'Headman Cosij Chan'],
-  ['r2r-thorp-0', 'Cuauhtli Ahau', 'male', 'the camp foreman', 'Foreman Cuauhtli Ahau'],
+  ['r2r-thorp-0', 'Cuauhtli Ahau', 'male', 'the camp foreman', 'Camp Master Cuauhtli Ahau'], // VR47: was 'Foreman' (the pool's other, unsexed form now)
   ['r2r-town-10', 'Tamara al-Hassan', 'female', 'the foundling-mother', 'Mother Tamara al-Hassan'],
   ['r2r-hamlet-43', 'Indira Chatterjee', 'female', 'the headman', 'Mukhiya Indira Chatterjee'], // the culture's own word, unsexed
 ]);

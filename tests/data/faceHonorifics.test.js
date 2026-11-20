@@ -6,7 +6,7 @@
  * registry names no title that no face can carry. The owner's and the chair's named forms are pinned.
  */
 import { describe, it, expect } from 'vitest';
-import { FACE_HONORIFICS, FACE_HONORIFICS_BY_CULTURE, FACE_HONORIFICS_INLAND, honorificOfTitle } from '../../src/data/faceHonorifics.js';
+import { FACE_HONORIFICS, FACE_HONORIFICS_BY_CULTURE, FACE_HONORIFICS_INLAND, honorificOfTitle, honorificSeedOf } from '../../src/data/faceHonorifics.js';
 import { CULTURES } from '../../src/data/worldFactOptions.js';
 import { cardHonorificOf } from '../../src/domain/people/cardDoor.js';
 import { faceRows } from '../../src/data/institutionalCatalog.js';
@@ -232,7 +232,8 @@ describe('every culture-keyed honorific is pinned (item 14)', () => {
         expect(cardHonorificOf(card, { config: { culture }, institutions: [] }), at).toBe(female);
         // the same card on a settlement with no culture reads the registry's pool, never the culture's form
         const fallback = cardHonorificOf(card, { config: {}, institutions: [] });
-        expect(fallback, at).toBe(honorificOfTitle(title, 'female', 'npc_x::K'));
+        // re-recorded VR47: the card door's seed is the name and the title (honorificSeedOf), no longer `<id>::<house key>`
+        expect(fallback, at).toBe(honorificOfTitle(title, 'female', honorificSeedOf('A B', title)));
       }
     }
   });
