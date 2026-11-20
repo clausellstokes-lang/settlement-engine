@@ -1,0 +1,2 @@
+golden: ties changed 1331 · of them NOT a base repeat 0 · with a field other than description/tension/proseVariant 0 · prominentRelationship moved 18 (not traceable to a moved tie: 0)
+census: ties changed 2490 · of them NOT a base repeat 0 · with a field other than description/tension/proseVariant 0 · prominentRelationship moved 13 (not traceable to a moved tie: 0)

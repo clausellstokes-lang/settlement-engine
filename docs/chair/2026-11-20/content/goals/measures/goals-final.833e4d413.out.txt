@@ -1,0 +1,9 @@
+cards: 9012; elapsed 56.1s; tree /home/user/settlement-engine; 50/size; reserve exported; closed list 119 rows from /home/user/settlement-engine/docs/chair/2026-11-20/content/goals/measures/venal-betrayal-rows.closed-list.txt
+size         towns  cards identical mirror template>2 template=2 tieDesc tieTension tieIndex refusal  venal unmatched nocell
+thorp           50     65         0      0          0          0       0          0        0       1      7         0      1
+hamlet          50    170         0      0          0          0       0          0        0       1     15         0      2
+village         50    387         0      0          0          0       0          0        0       2     65         0      4
+town            50   1196         0      2          0         40       5          7        7       8    236         0      6
+city            50   3002        28     62         65        699     288        288      334      23    711         0      3
+metropolis      50   4192        64    158        272       1366     665        675      790      20   1001         0      7
+TOTAL          300   9012        92    222        337       2105     958        970     1131      55   2035         0     23

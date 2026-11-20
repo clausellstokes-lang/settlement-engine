@@ -1,3 +1,4 @@
+# SUPERSEDED by printed2.hxd.out (containment); this word-for-word reading missed label-prefixed lines.
 economicState.safetyProfile.safetyDesc	PRINTED	t:50/50 top72% h:50/50 top60% v:50/50 top72% t:50/50 top72% c:50/50 top66% mm:50/50 top74%	Systems/Defense
 economicState.safetyProfile.economicDragDesc	PRINTED	t:0/3 h:1/8 top100% v:0/8 t:3/28 top67% c:7/46 top57% mm:5/50 top60%	Systems/Economics
 economicViability.dependencies[].title	NOT PRINTED	t:0/0 h:0/0 v:0/9 t:0/10 c:0/50 mm:0/50	
