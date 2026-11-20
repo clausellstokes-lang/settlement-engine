@@ -10,7 +10,7 @@
 import { FS } from './theme.js';
 import useIsMobile from '../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../design/proseScale.js';
-import { TONIGHT_COPY, printsAsWant, secretLeadOf, sideReadOf } from '../domain/summary/tonightSheet.js';
+import { TONIGHT_COPY, printsAsWant, seatLineOf, secretLeadOf, sideReadOf } from '../domain/summary/tonightSheet.js';
 
 const serif = '"Crimson Text", Georgia, serif';
 
@@ -85,6 +85,12 @@ export default function TonightSheet({ sheet, palette }) {
               );
             })}
           </div>
+          {/* FRAME-7 · F5R: the seat's holder, where the holder stands on no side, in the sheet's one seat line */}
+          {sheet.seat && (
+            <div data-tonight-seat="" style={{ marginTop: 8, fontSize: proseFontSize(FS.sm, mobile), color: palette.body, lineHeight: 1.45 }}>
+              {seatLineOf(sheet.seat)}
+            </div>
+          )}
         </div>
       )}
 

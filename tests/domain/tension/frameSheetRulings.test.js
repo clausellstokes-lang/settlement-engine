@@ -16,10 +16,16 @@
  *        live person by rank whom no side holds, even one the record names by role (`isOfficeStandIn`) and even beyond
  *        `FRAME_TUNING.officeSidesMax`; she is printed by that name alone. Count: such sides 1 at the base, 2 after F1
  *        (village-75), -> 0.
+ *   F5R — the seat's holder is a printed line on every framed sheet (FRAME-7 · F5R, the chair's ruling (a) of 17:45 UTC;
+ *        brief frame6/F5R-SEAT-LINE.md): where the holder the calm sheet voices stands on no side, the owner's framed
+ *        sheet carries him in its own field `seat` (his name and his office, the calm sheet's own seat row's), printed by
+ *        the one line `seatLineOf`; the people to voice stay the sides' faces. Count: framed owner sheets whose holder is
+ *        printed nowhere (no face, no seat line), 32 at the base 90874e392 (W3 16, W2 12, W4 3, W1 1) -> 0. The
+ *        renderers are held in tests/components/tonightSeatLine.test.jsx.
  */
 import { describe, it, expect } from 'vitest';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
-import { composeTonightSheet } from '../../../src/domain/summary/tonightSheet.js';
+import { composeTonightSheet, seatLineOf, TONIGHT_COPY } from '../../../src/domain/summary/tonightSheet.js';
 import { castTroubleFrame, FRAME_REASONS, FRAME_STANDING_TIES } from '../../../src/domain/tension/troubleCast.js';
 import { FRAME_TUNING } from '../../../src/domain/tension/sideArchetypes.js';
 import { membersByRank } from '../../../src/domain/people/membership.js';
@@ -161,5 +167,77 @@ describe('F2: an empty side yields before the caps', () => {
     expect(FRAME_TUNING.officeSidesMax).toBe(1);
     const over = TOWNS.filter(({ s }) => (castTroubleFrame(s)?.sides || []).filter((x) => x.face?.kind === 'office').length > FRAME_TUNING.officeSidesMax).map((t) => t.seed);
     expect(over).toEqual(['frame-calm-hamlet-17', 'frame-calm-village-75']);
+  }, 300000);
+});
+
+/**
+ * The holder the calm sheet voices (the stranger's sheet is today's: its `seat` row), read here off that row, not through
+ * the code under test. @param {any} s
+ */
+const calmSeatRowOf = (s) => composeTonightSheet(s).people.find((p) => p.why === 'seat');
+
+/** The 32 framed owner sheets whose seat's holder stood on no side and so was printed nowhere at the base 90874e392. */
+const SEAT_UNPRINTED_AT_BASE = Object.freeze([
+  'frame-calm-hamlet-35', 'frame-calm-hamlet-49', 'frame-calm-village-20', 'frame-calm-village-58', 'frame-calm-town-1',
+  'frame-calm-town-20', 'frame-calm-town-33', 'frame-calm-town-56', 'frame-calm-town-68', 'frame-calm-town-74',
+  'frame-calm-town-80', 'frame-calm-city-8', 'frame-calm-city-14', 'frame-calm-city-22', 'frame-calm-city-25',
+  'frame-calm-city-27', 'frame-calm-city-33', 'frame-calm-city-35', 'frame-calm-city-45', 'frame-calm-city-52',
+  'frame-calm-city-57', 'frame-calm-metropolis-8', 'frame-calm-metropolis-19', 'frame-calm-metropolis-21',
+  'frame-calm-metropolis-22', 'frame-calm-metropolis-48', 'frame-calm-metropolis-51', 'frame-calm-metropolis-56',
+  'frame-calm-metropolis-57', 'frame-calm-metropolis-59', 'frame-calm-metropolis-64', 'frame-calm-metropolis-68',
+]);
+
+describe('F5R: the seat\'s holder is a printed line on every framed sheet', () => {
+  it('frame-calm-city-14: the holder, on no side of the crime wave, is the sheet\'s seat by name and office, in one line', () => {
+    const s = bySeed('frame-calm-city-14');
+    const row = calmSeatRowOf(s);
+    expect(row).toMatchObject({ name: 'Saoirse O\'Meara', role: 'First Magnate' });
+    const sheet = composeTonightSheet(s, OWNER);
+    expect(sheet.frame?.sides.map((x) => x.name).includes(row.name)).toBe(false);
+    expect(sheet.seat).toEqual({ name: row.name, role: row.role, sourcePath: row.sourcePath });
+    expect(seatLineOf(/** @type {any} */ (sheet.seat))).toBe('Holds the seat: Saoirse O\'Meara, First Magnate.');
+    // one hat: the office, never the house's trade the card also carries
+    const card = s.npcs[Number(row.sourcePath.match(/\d+/)[0])];
+    expect(card.title).toBe('the senior guild master');
+    expect(seatLineOf(/** @type {any} */ (sheet.seat)).includes(card.title)).toBe(false);
+    // the people to voice stay the sides' faces
+    expect(sheet.people.length).toBeGreaterThan(0);
+    expect(sheet.people.every((p) => p.why === 'side')).toBe(true);
+  });
+
+  it('over the 63: no framed owner sheet leaves the seat\'s holder unprinted (32 at the base -> 0)', () => {
+    const unprinted = TOWNS.filter(({ s }) => {
+      const row = calmSeatRowOf(s);
+      const sheet = composeTonightSheet(s, OWNER);
+      return !!row && !sheet.frame?.sides.some((x) => x.name === row.name) && sheet.seat?.name !== row.name;
+    }).map((t) => t.seed);
+    expect(unprinted).toEqual([]);
+  }, 300000);
+
+  it('over the 63: the holder is printed once: on his side where he is a face, else in the seat line, by the calm row\'s name and office', () => {
+    const failures = collectSeedFailures(TOWNS.map((t) => t.seed), (seed) => {
+      const s = bySeed(seed);
+      const row = calmSeatRowOf(s);
+      expect(row, `${seed}: the calm sheet voices a holder`).toBeTruthy();
+      const sheet = composeTonightSheet(s, OWNER);
+      const face = /** @type {any} */ (sheet.frame).sides.some((/** @type {any} */ x) => x.name === row.name);
+      if (face) expect('seat' in sheet, `${seed}: a face takes no seat line`).toBe(false);
+      else {
+        expect(sheet.seat, `${seed}: the calm row's name, office and source`).toEqual({ name: row.name, role: row.role, sourcePath: row.sourcePath });
+        expect(seatLineOf(/** @type {any} */ (sheet.seat)), `${seed}: the one line`).toBe(`${TONIGHT_COPY.seat}: ${[row.name, row.role].filter(Boolean).join(', ')}.`);
+      }
+      expect(sheet.people.every((p) => p.why === 'side'), `${seed}: the people to voice are the sides' faces`).toBe(true);
+    });
+    expectNoSeedFailures(failures, 'the seat\'s holder is printed once on every framed sheet');
+    expect(TOWNS.filter(({ s }) => 'seat' in composeTonightSheet(s, OWNER)).map((t) => t.seed)).toEqual(SEAT_UNPRINTED_AT_BASE);
+  }, 300000);
+
+  it('over the 63: the stranger\'s sheet is today\'s: no frame, no seat line, the holder among its people to voice', () => {
+    const failures = collectSeedFailures(TOWNS.map((t) => t.seed), (seed) => {
+      const sheet = composeTonightSheet(bySeed(seed));
+      expect(sheet.people.some((p) => p.why === 'seat'), `${seed}: the holder voiced`).toBe(true);
+      expect('seat' in sheet || 'frame' in sheet, `${seed}: no seat line, no frame`).toBe(false);
+    });
+    expectNoSeedFailures(failures, 'the stranger\'s sheet carries no seat line');
   }, 300000);
 });

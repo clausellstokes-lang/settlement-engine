@@ -311,11 +311,19 @@ const HOOK_COUNT = 3;
  * @property {string[]} hooks       the trouble's own hooks
  * @property {TonightSide[]} sides  its three sides, in the record's order
  *
+ * @typedef {Object} TonightSeat
+ * @property {string} name          the seat's holder, as the calm sheet's seat row names him
+ * @property {string} role          his office, as the calm sheet's seat row gives it (the card's `role`, where the office
+ *                                  table writes a dual-hat leader's office; the keeper of an empty seat by the keeper's form)
+ * @property {string} sourcePath
+ *
  * @typedef {Object} TonightSheet
  * @property {TonightCrisis | null} crisis
  * @property {TonightFrame} [frame]  a calm town's trouble of weight (FRAME-1; CF11); ABSENT (no key) where none is cast: a town
  *                                    in crisis, a calm town with no trouble of weight (it keeps today's sheet byte for byte),
  *                                    and every reader who is not the owner (FRAME-2 B3)
+ * @property {TonightSeat} [seat]    FRAME-7 · F5R: on a framed sheet, the seat's holder where he is a face of no side (the one
+ *                                    line `seatLineOf` prints); ABSENT (no key) on every other sheet
  * @property {string} opening       the first line: the crisis line, the trouble's sentence, or the pressure sentence
  * @property {TonightPerson[]} people
  * @property {TonightFact[]} facts
@@ -382,9 +390,11 @@ export function composeTonightSheet(settlement, options) {
   const forOwner = !!options && typeof options === 'object' && options.audience === TONIGHT_AUDIENCES.owner;
   const crisis = crisisOf(source);
   const frame = crisis || !forOwner ? null : frameOf(source);
+  const seat = frame ? frameSeatOf(source, frame) : null;
   return {
     crisis,
     ...(frame ? { frame } : {}),
+    ...(seat ? { seat } : {}),
     opening: crisis ? crisis.line : frame ? sentence(frame.line) : sentence(clean(source.pressureSentence)),
     people: frame ? framePeopleOf(frame) : peopleOf(source),
     facts: [foodFact(source), defenceFact(source)].filter(/** @returns {f is TonightFact} */ (f) => f !== null),
@@ -475,6 +485,31 @@ function framePeopleOf(frame) {
     line: side.line, says: side.says, sourcePath: /** @type {string} */ (side.sourcePath),
   }));
   return wantsOnce(out);
+}
+
+/**
+ * FRAME-7 · F5R (the chair's ruling (a) of 2026-11-20 17:45 UTC, vetoable by the owner): THE SEAT'S HOLDER IS A PRINTED
+ * LINE ON THE FRAMED SHEET. Where the holder the calm sheet voices (`peopleOf`'s own seat row: his name, and his office as
+ * that row gives it) stands on no side of the trouble, the framed sheet carries him in its own field, never among the
+ * people to voice: those are the sides' faces (and Session Mode's panel skips every name in them, so a holder there would
+ * leave its screen). Null where the calm sheet voices no holder, or where he is already a face.
+ * @param {TonightSource} source @param {TonightFrame} frame @returns {TonightSeat | null}
+ */
+function frameSeatOf(source, frame) {
+  const row = peopleOf(source).find((p) => p.why === 'seat');
+  if (!row || frame.sides.some((side) => side.name === row.name)) return null;
+  return { name: row.name, role: row.role, sourcePath: row.sourcePath };
+}
+
+/**
+ * THE SEAT LINE — ONE HOME for the three renderers (components/TonightSheet.jsx, which the Table View and Session Mode
+ * mount; pdf/sections/TonightAtTheTable.jsx; foundry/journalPages.js): the sheet's own label for the seat
+ * (TONIGHT_COPY.seat), then who holds it, by name and by his office ("Holds the seat: Saoirse O'Meara, First Magnate.").
+ * Only the office is named: the house's trade the card also carries (its `title`) is never a second hat here.
+ * @param {TonightSeat} seat @returns {string}
+ */
+export function seatLineOf(seat) {
+  return `${TONIGHT_COPY.seat}: ${[seat.name, seat.role].filter(Boolean).join(', ')}.`;
 }
 
 /**

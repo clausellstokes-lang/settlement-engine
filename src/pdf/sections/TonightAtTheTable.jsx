@@ -16,7 +16,7 @@ import { PageChrome } from '../primitives/PageChrome.jsx';
 import { ChapterBand, GoldRule, HairRule } from '../primitives/Dense.jsx';
 import { NotesField } from '../primitives/Editable.jsx';
 import { type, palette, space, pt } from '../theme.js';
-import { composeTonightSheet, printsAsWant, secretLeadOf, sideReadOf, TONIGHT_AUDIENCES, TONIGHT_COPY } from '../../domain/summary/tonightSheet.js';
+import { composeTonightSheet, printsAsWant, seatLineOf, secretLeadOf, sideReadOf, TONIGHT_AUDIENCES, TONIGHT_COPY } from '../../domain/summary/tonightSheet.js';
 import { CrisisSections } from './CrisisSections.jsx';
 
 /** @param {{ children: string, color: string }} props */
@@ -75,6 +75,8 @@ export function TonightAtTheTable({ settlement, narrativeMode }) {
               </View>
             );
           })}
+          {/* FRAME-7 · F5R: the seat's holder, where the holder stands on no side, in the sheet's one seat line */}
+          {sheet.seat ? <Text style={{ ...type.body, color: palette.second, fontSize: pt['9'], lineHeight: 1.3 }}>{seatLineOf(sheet.seat)}</Text> : null}
         </View>
       ) : null}
 

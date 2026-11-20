@@ -1,0 +1,165 @@
+FRAME-7 · F5R — the seat line on six framed owner sheets, for the chair's eye before the merge.
+BEFORE = the base 90874e392 (FRAME-7's lane tip, C2b merged). AFTER = the F5R tip, the commit that carries this file (branch frame7-f5r). Each town born fresh at each tree by that tree's own generator: generateSettlementPipeline({ settType: tier }, null, { seed, customContent: {} }).
+OWNER = composeTonightSheet(s, { audience: 'owner' }); STRANGER = composeTonightSheet(s). Digests: sha256 of the sheet's JSON, 16 hex.
+THE ONE LINE (tonightSheet.js :: seatLineOf): "Holds the seat: {name}, {office}." — the calm sheet's own seat row's name and office (its role), printed under the three sides on the Table View, Session Mode, the PDF and the journal; never among the people to voice.
+Framed owner sheets in the 330-town calm pool, by size: thorp 0, hamlet 8, village 15, town 7, city 14, metropolis 19. THE THORP HAS NONE: no calm thorp of the pool holds a trouble of weight, so no thorp sheet is framed and none carries the line.
+Five sheets below are one a size (hamlet to metropolis), each the first of its size by seed index whose holder stands on no side; the sixth is the first framed sheet whose holder IS a face, which prints no seat line.
+Format: each side is 'words: who — why. Wants…'; the people to voice are 'name · role [why]'; each hook ends with its source.
+
+=== frame-calm-hamlet-35 (hamlet) — W3 impaired-chain, opening on trade_collapse; the first hamlet by seed index whose framed sheet carries the seat line
+--- digests: owner before 844647cba3dcdd3c · owner after 56ae6ce67f547bbf · stranger before a95af19e9914bd3a · stranger after a95af19e9914bd3a (EQUAL)
+--- before -> after: the sheet gains its seat line and nothing else
+Opening: The overland trade that had made the settlement what it was collapsed, and the prosperity it once brought bled away over a handful of lean years.
+Its three sides:
+  - Displaced traders: Hilal ibn Ahmed · the brewster — Because he and Maryam al-Hassan are rivals, and neither gives the other ground. Secretly directs a fencing operation through a trusted intermediary.
+  - Workers left without wages: Maryam al-Hassan · the innkeeper — Because she and Hilal ibn Ahmed are rivals, and neither gives the other ground. Wants to look for a way to do more at the wayside inn with the same hands.
+  - Rivals who profited from the diversion: No one here is named for it.
+  >>> Holds the seat: Nasr al-Hassan, Elder.
+People to voice:
+  - Hilal ibn Ahmed · the brewster [side]
+  - Maryam al-Hassan · the innkeeper [side]
+Facts:
+  Food: Secure. No granary; about a month and a half in household stores.
+  Defence: No walls and no standing force.
+Hooks:
+  * They saw an accident that was no accident, and the person responsible knows they saw it. (Hilal ibn Ahmed)
+  * Someone left an item in their care and hasn't returned. The item is valuable. The absence is now suspicious. (Maryam al-Hassan)
+  * Their predecessor left something behind (in a place where it shouldn't have been), and they haven't reported finding it. (The Veteran Soldier)
+
+=== frame-calm-village-20 (village) — W3 impaired-chain, opening on resource_scarcity; the first village by seed index whose framed sheet carries the seat line
+--- digests: owner before d49362ceae4298f2 · owner after f68e2061da4599ac · stranger before ad73a0aee96160eb · stranger after ad73a0aee96160eb (EQUAL)
+--- before -> after: the sheet gains its seat line and nothing else
+Opening: A critical resource is running short, and some are hoarding it while others cannot pay the prices asked.
+Its three sides:
+  - Those hoarding what they can: Günji Olqunu'ud · the tanner — Because she and Tümer Merkit are rivals, and neither gives the other ground. Was present when Nomun Barlas did something they've never accounted for publicly. Neither has acknowledged the other was there.
+  - Those who cannot pay the prices: Tümer Merkit · the cobbler — Because he and Günji Olqunu'ud are rivals, and neither gives the other ground. Wants to pay every hand at the cobbler's shop in full and on time this season.
+  - Those who would fix a fair price: Jochi Olqunu'ud · the miller — Because the trouble touches his trade. Wants to take on the work in the Elected Reeve that no one else wants, and do it without complaint.
+  >>> Holds the seat: Nomun Barlas, Reeve.
+People to voice:
+  - Günji Olqunu'ud · the tanner [side]
+  - Tümer Merkit · the cobbler [side]
+  - Jochi Olqunu'ud · the miller [side]
+Facts:
+  Food: Secure. No granary; about a month and a half in household stores.
+  Defence: No walls and no standing force.
+Hooks:
+  * They overheard two people they know settle a bribe, and do not know whom to tell. (Jochi Olqunu'ud)
+  * Their son has been seen at night with people who do not work, and comes home with coin. (Günji Olqunu'ud)
+  * They lent their savings to a friend who has since left, and the friend's family says there was no loan. (Tümer Merkit)
+
+=== frame-calm-town-1 (town) — W3 impaired-chain, opening on outside_debt; the first town by seed index whose framed sheet carries the seat line
+--- digests: owner before f675c52edddcfaff · owner after 35cc382565611fa2 · stranger before fdec8504607aca7d · stranger after fdec8504607aca7d (EQUAL)
+--- before -> after: the sheet gains its seat line and nothing else
+Opening: The settlement owed a significant debt to an external power that was preparing to collect.
+Its three sides:
+  - Debtors who took the loans: Liutbirg Moser · the master butcher — Because she owes Manfred Werner a debt not yet paid. Wants to stop the Merchant Guilds from taking anything more from the Craft Guilds this season.
+  - Those who will bear the cost: Renate Pfeiffer · the watch captain — Because her own trouble is part of it. Wants to bring Salome Herrmann of the smuggling operation in before the season is out.
+  - Those who profited and escaped: Manfred Werner · the dean — Because Liutbirg Moser owes him a debt not yet paid. Wants to show Ulbrecht Wagner how far they have both come since the lessons ended.
+  >>> Holds the seat: Bonifaz Kaiser, Alderman.
+People to voice:
+  - Liutbirg Moser · the master butcher [side]
+  - Renate Pfeiffer · the watch captain [side]
+  - Manfred Werner · the dean [side]
+Facts:
+  Food: Secure. Stores: a granary, about six months of grain.
+  Defence: Citadel, Town walls, Town watch, Adventurers' charter hall.
+Hooks:
+  * The pay chest came up short again this month, and the only other key belongs to someone they trust. (Renate Pfeiffer)
+  * They married a couple in secret at one family's request, and the other family has just found out. (Manfred Werner)
+  * Their savings were hidden in a place only one other person knew, and the savings are gone. (Liutbirg Moser)
+
+=== frame-calm-city-8 (city) — W2 high-conflict, opening on crime_wave; the first city by seed index whose framed sheet carries the seat line
+--- digests: owner before 2c0611a57a0cf3c7 · owner after c3a512b3620acd1a · stranger before 7d949d57e4c56cef · stranger after 7d949d57e4c56cef (EQUAL)
+--- before -> after: the sheet gains its seat line and nothing else
+Opening: Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands.
+Its three sides:
+  - The Guard: Ixquil Ul · the garrison commander — Because she commands the Guard. Wants to prove what Ome Dzul answers to.
+  - Those who would take the law into their own hands: Acna Dzunum · the cooper — Because her own trouble is part of it. Wants to answer the next move by the Merchant Guilds against the Craft Guilds, quickly and in public.
+  - The Thieves' Guild: Venus Woman May · the rookery boss — Because she heads the Thieves' Guild, which works outside the law. Wants to win over one of Ixquil Ul's friends.
+  >>> Holds the seat: Ozomatli Zaz, the governor.
+People to voice:
+  - Ixquil Ul · the garrison commander [side]
+  - Acna Dzunum · the cooper [side]
+  - Venus Woman May · the rookery boss [side]
+Facts:
+  Food: Secure. Stores: a granary, about nine months of grain.
+  Defence: City walls and gates, Citadel, Garrison, Professional city watch, Mercenary quarter.
+Hooks:
+  * They are carrying out orders they believe are wrong. They have not yet decided at what point they stop carrying them out. (Ixquil Ul)
+  * They overheard two people they know settle a bribe, and do not know whom to tell. (Acna Dzunum)
+  * Someone in their own crew has been skimming, and the sum matches exactly what a rival is now spending. (Venus Woman May)
+
+=== frame-calm-metropolis-8 (metropolis) — W2 high-conflict, opening on crime_wave; the first metropolis by seed index whose framed sheet carries the seat line
+--- digests: owner before 57bbcb6d8d4b8095 · owner after 50b5b17f8a9afde6 · stranger before e3bbce176dce9078 · stranger after e3bbce176dce9078 (EQUAL)
+--- before -> after: the sheet gains its seat line and nothing else
+Opening: Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands.
+Its three sides:
+  - The Guard: Cyriak Adler · the garrison commander — Because he commands the Guard. Wants to learn what Udelhild Berger has been saying about them, and to whom.
+  - Those who would take the law into their own hands: Oskar Roth · the black marketeer — Because he and Margarete Maier are partners in something neither will name. Wants to learn what Vilbirg Noll has been saying about them, and to whom.
+  - The Thieves' Guild: Hadwige Maier · the network's head — Because she heads the Thieves' Guild, which works outside the law. Wants to get to whatever both the Thieves' Guild and the Guard want this season first.
+  >>> Holds the seat: Udelhild Berger, First Magnate.
+People to voice:
+  - Cyriak Adler · the garrison commander [side]
+  - Oskar Roth · the black marketeer [side]
+  - Hadwige Maier · the network's head [side]
+Facts:
+  Food: Secure. Stores: a granary, about 15 months of grain.
+  Defence: Massive walls and fortifications, Citadel, Multiple garrisons, Professional city watch, Mercenary quarter, Multiple adventurers' guilds.
+Hooks:
+  * They signed for supplies that never arrived, and the merchant who sold them is already spending the money. (Cyriak Adler)
+  * Someone in the government takes their money and someone else's, and they do not know which side will be sold first. (Oskar Roth)
+  * One of their people is talking to the guard. They don't know which one yet. They're watching. (Hadwige Maier)
+
+=== frame-calm-hamlet-7 (hamlet) — W3 impaired-chain, opening on trade_collapse; the first framed town of the pool whose holder IS a face: no seat line (his side names him)
+--- digests: owner before c227a0273731f9f4 · owner after c227a0273731f9f4 · stranger before e0581cae6d5b77b0 · stranger after e0581cae6d5b77b0 (EQUAL)
+--- before -> after: unchanged, byte for byte
+Opening: Whether the trade the settlement lives on is about to fail is the quarrel of the day: some see buyers going elsewhere, others see nothing but rumour.
+Its three sides:
+  - Traders who fear the buyers are going elsewhere: Zorica Sokolov · the quarry master — Because her own trouble is part of it. Wants to spend an evening with Slobodan Alexeyev this season and talk over the work as they once did.
+  - Workers afraid for their wages: Slobodan Alexeyev · the steward — Because his own trouble is part of it. Wants to give Vira Popov one task this season that will show whether they can be trusted.
+  - Rivals who would gain if the trade moved: Teodora Pavlov · the mine captain — Because Ezechiel Sidorov owes her a debt not yet paid. Wants to make do at the mine with what can be had, and waste none of it.
+People to voice:
+  - Zorica Sokolov · the quarry master [side]
+  - Slobodan Alexeyev · the steward [side]
+  - Teodora Pavlov · the mine captain [side]
+Facts:
+  Food: Secure. No granary; about a month and a half in household stores.
+  Defence: No walls and no standing force.
+Hooks:
+  * A rival has hired away their two best hands in one week, on wages the rival cannot afford for long. (Teodora Pavlov)
+  * Their sister has been taking gifts from people who need their signature, and they found out from the person who paid most. (Slobodan Alexeyev)
+  * Someone is buying up their debts. Quietly. They don't know who, or why, or when they plan to call them in. (Zorica Sokolov)
+
+##### ALL 32 SEAT LINES OF THE POOL (every framed owner sheet whose holder stands on no side), by size and seed
+  frame-calm-hamlet-35: Holds the seat: Nasr al-Hassan, Elder.
+  frame-calm-hamlet-49: Holds the seat: Ibrahim al-Basri, Headman.
+  frame-calm-village-20: Holds the seat: Nomun Barlas, Reeve.
+  frame-calm-village-58: Holds the seat: Aidan MacCarthy, Reeve.
+  frame-calm-town-1: Holds the seat: Bonifaz Kaiser, Alderman.
+  frame-calm-town-20: Holds the seat: Abu Said Mangghud, Mayor.
+  frame-calm-town-33: Holds the seat: Yves Farrell, Mayor.
+  frame-calm-town-56: Holds the seat: Svetlana Stepanov, the lord's appointee.
+  frame-calm-town-68: Holds the seat: Borte Bukhara, Mayor.
+  frame-calm-town-74: Holds the seat: Vita Pansa, Mayor.
+  frame-calm-town-80: Holds the seat: Pacuvius Celer, Mayor.
+  frame-calm-city-8: Holds the seat: Ozomatli Zaz, the governor.
+  frame-calm-city-14: Holds the seat: Saoirse O'Meara, First Magnate.
+  frame-calm-city-22: Holds the seat: Chagatai Jadaran, Master of the Guilds.
+  frame-calm-city-25: Holds the seat: Leontios Palaiolagos, Lord Mayor.
+  frame-calm-city-27: Holds the seat: Peadar MacBride, the monarch.
+  frame-calm-city-33: Holds the seat: Liam O'Meara, Master of the Guilds.
+  frame-calm-city-35: Holds the seat: Sophia Weber, Lord Mayor.
+  frame-calm-city-45: Holds the seat: Renuka Roy, First Magnate.
+  frame-calm-city-52: Holds the seat: Fang Tang, Master of the Guilds.
+  frame-calm-city-57: Holds the seat: Utzil Pech, First Magnate.
+  frame-calm-metropolis-8: Holds the seat: Udelhild Berger, First Magnate.
+  frame-calm-metropolis-19: Holds the seat: Laevinus Geta, Lord Mayor.
+  frame-calm-metropolis-21: Holds the seat: Pacuvius Ursus, the governor.
+  frame-calm-metropolis-22: Holds the seat: Dag Hrolfsson, the governor.
+  frame-calm-metropolis-48: Holds the seat: Tertia Crispus, Lord Mayor.
+  frame-calm-metropolis-51: Holds the seat: Alexandros Hexamilites, the governor.
+  frame-calm-metropolis-56: Holds the seat: Sabbas Chomatenos, the governor.
+  frame-calm-metropolis-57: Holds the seat: Hakon Grettisson, the governor.
+  frame-calm-metropolis-59: Holds the seat: Dagny Thorsson, First Magnate.
+  frame-calm-metropolis-64: Holds the seat: Asuka Im, Lord Mayor.
+  frame-calm-metropolis-68: Holds the seat: Zenobia Brutus, Master of the Guilds.
