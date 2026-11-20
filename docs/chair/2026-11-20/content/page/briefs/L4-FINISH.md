@@ -3,6 +3,11 @@
 Read `briefs/BUILDER-RULES.md` (its rules bind you; "PAGE-2" there means PAGE-6), then `briefs/S-v2.md` § L4 (the unit as
 designed), then the WIP commit f2957d5be's message (origin `lane/page-2-2026-11-20-s-wip`, base b302805bc). The rows are
 WRITTEN and read by the chair (`lines/L4-LINES-current-snapshot.md`, the seven in `lines/L4-SEVEN-TO-CHAIR.md`); you author none.
+THE CHAIR'S READ OF 14:37 ADDS A FOURTH ROW TO EACH TITLE, appended after the three: the nine mercy rows of
+`lines/L4-MERCY-TO-CHAIR.md` (eight as written, with their stakes; the dean's reworded by the chair to: "Allowed a burial in
+consecrated ground that the rule forbids, because the family begged for it." with its stakes as written). Shared row sets (the
+magistrate pair, the watch pair) share their fourth row as they share the three. So: 23 rows of batch 1 + the seven reworked +
+these nine.
 
 **THE UNIT, AS RULED.** The secret is drawn exactly as today; the held set receives the drawn text as today. THEN, draw-free, a
 card whose title has office rows takes one (`pickVariant` keyed by the card's drawn name and title, walking in row order past a
@@ -10,6 +15,11 @@ row any card of the town already holds; the taken text joins the held set; where
 two cards of one town show the same office secret. Other cards move ONLY by two town-level couplings, A COUNTED CLASS, named,
 never cured and never hidden by a new draw: `people/castPowers.js :: CarriedSecrets` (the mints) and
 `narrativeGenerator.js :: buildPoliticalNarrative`'s shared override pass.
+
+**S9 IS ON YOUR BASE.** The lane commit you are cut from holds S9's post-pass (pool-generic, with an `admits(row, card)`; its
+hand-back says how a pool is registered). REGISTER THE OFFICE ROWS INTO IT, so a principled holder whose office row is venal takes
+the next admitted office row (the mercy row) by S9's walk; MEASURE AND REPORT the count of principled office-holders who gain an
+office secret by the mercy rows (and those left with none).
 
 **YOUR TREE.** A worktree on a new branch `page6/l4` cut from THE LANE COMMIT in your dispatch message. f2957d5be holds L4 AND
 the old S9 (refused by the chair: its walk inside the draw moved 40 other cards through the held set). Carry ONLY L4:
