@@ -1504,6 +1504,36 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   DEPLOY, A NAMED SURVIVOR: sized siblings for the troubles' hooks at thorp and hamlet, and the kinds a thorp may
   draw (a generator change: born towns move).
 
+- **THE SESSION SHEET, FIVE RULINGS ON FRAME-6's ANSWERS (15:35 UTC; its counts a helper's on the pool's 63 framed of
+  330, not re-run: each rule's test pins its own).** F1 THE LADDER IS TAKEN IN ORDER, THE HASH ONLY WITHIN A RUNG: for a
+  side that is a power or names a house, its own free office-holder, then its own free member, then a person tied to
+  a member by a tie of standing with (never rivalry or leverage); a person with no membership and no such tie is
+  NEVER printed on a power's row (5 of 166 sides today; 11 of 166 voiced by a non-member; town-20's innkeeper stood
+  for "The Guard" while the watch captain was free: `castTroubleFrame` hashed across the rungs office, tie, trade).
+  F2 AN EMPTY SIDE YIELDS BEFORE THE CAPS: a live person of the side's power is cast, even one named by her role
+  (`seatHolder.js :: isOfficeStandIn`) and beyond `FRAME_TUNING.officeSidesMax` (2 of 21 empty sides today). F3 A W3
+  SHEET SAYS WHAT IS SHORT: a Facts line naming the impaired chain and its cause by the Economics tab's own reader (0
+  of 26 today; village-20's is leather, the hunting grounds depleted). F4 A W4 SHEET SAYS THE HALL IS HELD, on the
+  owner's sheet only, failing closed, in the Power tab's words (0 of 5 today); for the security reader. F5 THE SEAT'S
+  HOLDER STAYS on every framed sheet, last of People to voice (dropped in 33 of 63 today: W3 16/26, W2 12/13, W4 3/5,
+  W1 2/19). Then the six sheets again for the owner; the calm sheets stay byte for byte.
+- **L2's FOUR REWORDED ARRIVAL LINES, APPROVED AS PAGE-6 WROTE THEM (15:35 UTC)**, each to carry the word its content
+  law wants: port NEW[6] "The last stretch of road into {name} runs beside the sea, and the sound of the surf keeps
+  you company the whole way."; port NEW[8] "Boats ride at their moorings in the harbour below {name}, and the smell
+  of tar and rope comes up the road to meet you."; river NEW[6] "Trees lean over the river on the way into {name}, and
+  the first houses stand just above the line where the bank turns to mud."; river NEW[5] "You come into {name} along
+  the riverbank, where steps go down to the water and someone is filling a bucket at the bottom of them."
+  Declarations taken (fish NEW[6] to [8], arcane NEW[7] to [9] gain their siblings' needs); `colour: true` on
+  livestock NEW[7] only; the smiths' three left as their siblings, a named survivor. L2's 14 reds classified: 10
+  anchors to re-key by cause, 3 count or order pins, the rest content, cured (probe: bar4 A1 0 of 720;
+  narrativeArrival green; three in a row 14.2%).
+- **THE GUILDLESS GUILD QUARREL (15:35 UTC).** PAGE-7's count: 1 of 215 `guild_conflict` troubles on its 900 towns
+  (hxd-hamlet-29), `facts/guild.js :: guildOf` answering no; cause: `trueToRecordAt` tests the town mid-generation,
+  not the finished record (measure 1f7a6446a). RULED: the generator is NOT touched before the deploy (a named
+  survivor); the page never prints a guild the record lacks: in `tensionCauseSentenceOf` the kind's
+  `withoutItsHouse` wording is read before the ranks: "Traders here are fighting over who may sell what, and over a
+  say in how the place is run."; red first on that record.
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -4349,3 +4379,12 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   64db7ba3d": READ AND RULED (section 2); FORTUNE-3 told to write the brief (docs only). The chair's helper returned
   the smallest places' measure; the chair measured the recent-conflict sentence itself: both in section 2, files
   under `measures/`. DEPTH-2 given the second unit (measure and propose); PAGE-7 asked for one count.
+- 15:36 UTC · SEVEN MORE MESSAGES, FOUR RULINGS SENT (section 2: the sheet's F1 to F5; L2's four lines; the guildless line).
+  PAGE-4 at ad446c3ce: MAGIC merged fdec4d96f; CARD-SERVED merged cf997215b (a figureless power prints "first of
+  <power>"; a power the served roster lacks is never named); tests/lint 219 of 220: `observedShapeReaders` reds on
+  `magicHeadlineScope` reading the raw `config.magicExists`, cured by its builder now out (MAGIC-AUDIENCE, brief
+  65b324b5e); FOR THE SECURITY READER, pre-existing: `cardPowers.js :: cardPowerLine` names every power in a card's
+  memberships even where the served roster lacks it; its record is stale because its session was compacted. PAGE-7
+  merged PAGE-5's tip as a35dd28a5. DEPTH-2's measuring helper is out on `briefs/MEASURE-CONFLICT.md` (7fdc73bbb);
+  the hooks builder is in its tests. FORTUNE-3 has the seven conditions verbatim and is checking play-time `reBand`
+  read-only.
