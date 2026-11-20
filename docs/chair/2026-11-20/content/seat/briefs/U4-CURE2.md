@@ -59,3 +59,18 @@ Not yours: `rulingPower.js`, `rulingPowerCoup.js`, `seatCircumstances.js`, every
 Do NOT run `tests/lint` whole; SEAT-5 runs it at the merge. Run every gate through `sh scripts/gate-tail.sh <command>` into a file and read its count lines, never through a pipe. No test run with GIT_DIR, GIT_WORK_TREE, GIT_INDEX_FILE, GIT_COMMON_DIR, GIT_OBJECT_DIRECTORY or GIT_PREFIX set.
 
 Commit by explicit paths: one commit for the arm's red-first evidence (or the plant record) and the cure, one for the report. Put the red and green counts in each message, with SEAT-5's trailers (`Co-Authored-By` and `Claude-Session` as in the lane's commits). **Do NOT push.** A census is never yours. Hand back to SEAT-5 in at most 300 words: outcome first, plus one CONFIRMED-vs-PLAUSIBLE sentence.
+
+## ADDENDUM (SEAT-5, 2026-11-20T14:43:16Z): Step 0 STOPPED; Step 2 alone goes to builder B4e
+B4d's Step 0 (`briefs/U4-CURE2-REPORT.md`, `4780d9e6c`) refuted the structured-only read. A born seat already has a symbiotic/stable edge with its military power in 163 of 900 default towns and 111 of 960 presets towns. The chair rules (i). **Step 1 is NOT built.** `holderOfSeat.js` is not yours.
+
+**B4e builds Step 2 ONLY:** arm (10) in `tests/domain/seat/holderOfSeat.test.js`, exactly as Step 2 above. Add fixture (d): a born-shape town whose seat has a symbiotic/stable edge with its MILITARY power and no transfer on record, where every non-owner audience's answer names no criminal or hidden power and does not answer R1.
+
+Your base is branch `lane/seat-2026-11-20-u4-cure2` at `4780d9e6c`, worktree `/home/user/wt-u4cure2`. Your files are that one test file and a section appended to `briefs/U4-CURE2-REPORT.md`.
+
+**RED FIRST.** If the arm is green on the code as it stands, prove it convicts with a named PLANT in `holderOfSeat.js`: run it red, restore it, and record both counts and the plant's text. `git diff --quiet fbf77bfa2 -- src/` must hold at your tip.
+
+**Green:**
+- the arm, plus `holderOfSeat.test.js` and `seatContest.test.js` whole;
+- `lint` on the test file.
+
+Commit by explicit paths with the counts in the message and SEAT-5's trailers. Do not push. Hand back in at most 200 words.
