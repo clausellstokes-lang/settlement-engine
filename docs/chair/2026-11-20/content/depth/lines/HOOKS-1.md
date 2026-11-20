@@ -122,7 +122,7 @@ Groups: `other` 30, `government` 8.
    beside: [vanished_person] "A regular customer has stopped coming. The reason they've been given doesn't make sense."
    beside: [vanished_person] "Someone left an item in their care and hasn't returned. The item is valuable. The absence is now suspicious."
 
-30. NEW [corruption] "They were given a little extra to put in a good word for someone, and have not yet put the word in."
+30. NEW [hidden_debt] "They were asked to put in a good word for someone, said yes, and have not yet put the word in."
    beside: [corruption] "They've been offered money to not ask questions about something they hadn't even started asking about."
    beside: [hidden_debt] "A document they were asked to witness contained a clause they noticed at the time and said nothing about."
 
@@ -203,3 +203,5 @@ Groups: `other` 30, `government` 8.
 
 
 INTEGRATOR'S EDITS (DEPTH-1, read line by line before sending): "They agreed to look after a neighbour's animals in return for a loan, and have been doing it badly." -> "They took a loan from a neighbour on the promise of a hand at busy times, and keep finding reasons to be busy themselves."; "They got their post partly on the word of someone now out of favour, and have never said so." -> "They owe their place partly to the word of someone now out of favour, and have never said so.".
+
+THE CHAIR'S WORD (2026-11-20 14:50 UTC): 59 approved as written; `other` 30 REWORDED by the chair (a bribe taken can fall on a principled card): now [hidden_debt] "They were asked to put in a good word for someone, said yes, and have not yet put the word in." The theme tables above still count it under corruption: the built tag is hidden_debt.
