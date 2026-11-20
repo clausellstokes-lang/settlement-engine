@@ -25,6 +25,7 @@ import { composeCrisisPage } from '../../../src/domain/crisis/crisisPage.js';
 import { crisisHookFor, crisisHooksOf } from '../../../src/domain/crisis/crisisHooks.js';
 import { collectPlotHooks } from '../../../src/domain/dossier/plotHooks.js';
 import { composeTonightSheet } from '../../../src/domain/summary/tonightSheet.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const { CAST_REASONS, CAST_ABSENCES, STAKE_REASONS, CAST_REASON_SIBLINGS, CAST_CRISIS_SIBLINGS } = castModule;
@@ -109,13 +110,14 @@ describe('FRAME-5 · C1 (2) THE RENDER STRIP: a row saved before C1 prints witho
     for (const text of censusOfPrintableReasons()) expect(shown(text)).toBe(text);
   });
   it('a STORED OLD ROW composes byte for byte as the row without the tail: the crisis page, the hooks, the Tonight sheet', () => {
-    for (const [seed] of PASSED_OVER) {
+    const failures = collectSeedFailures(PASSED_OVER.map(([seed]) => seed), (seed) => {
       const old = plantOldRows(born[seed]);
       expect(JSON.stringify(old), seed).toContain(CLAUSE); // the plant took
       const printed = JSON.stringify(surfaces(old));
       expect(printed.includes(CLAUSE), `${seed}: a surface printed the dealer's clause`).toBe(false);
       expect(printed, seed).toBe(JSON.stringify(surfaces(born[seed])));
-    }
+    });
+    expectNoSeedFailures(failures, 'a stored old row composes as the row without the dealer\'s tail, on every surface');
   });
 });
 
