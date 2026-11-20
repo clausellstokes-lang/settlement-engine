@@ -249,7 +249,8 @@
   {"pool":"src/data/people/goalSecretRefusals.js :: GOAL_SECRET_REFUSAL_ROWS::criminal.any.economic_betrayal[2]","sha":"9fee8c36f8cd","why":"crime pool"},
   {"pool":"src/data/people/goalSecretRefusals.js :: GOAL_SECRET_REFUSAL_ROWS::criminal.any.personal[5]","sha":"dbdd6d763376","why":"crime pool"},
   {"pool":"src/data/people/goalSecretRefusals.js :: GOAL_SECRET_REFUSAL_ROWS::criminal.military.military[1]","sha":"80b4ee0421f5","why":"crime pool"},
-  {"pool":"src/data/people/goalSecretRefusals.js :: GOAL_SECRET_REFUSAL_ROWS::criminal.military.military[2]","sha":"e7500045fc81","why":"crime pool"}
+  {"pool":"src/data/people/goalSecretRefusals.js :: GOAL_SECRET_REFUSAL_ROWS::criminal.military.military[2]","sha":"e7500045fc81","why":"crime pool"},
+  {"pool":"src/data/people/goalSecretRefusals.js :: GOAL_SECRET_REFUSAL_ROWS::title:the granary reeve[1]","sha":"9497f5018dde","why":"crime key, declared"}
  ],
  "watchBase": [
   {"pool":"src/data/institutionDescVariants.js :: INSTITUTION_DESC_VARIANTS::city|Infrastructure|Multiple courthouses","sha":"30fa38b6315f","word":"crime"},

@@ -70,7 +70,7 @@ const EXISTING_REL = 'tests/lint/samenessHideable.existingReds.json';
 const HOUSES_REL = 'tests/lint/samenessHideable.houseReadings.json';
 const HAND_REL = 'tests/lint/samenessHideable.handPools.json';
 /** Shrink-only: today's counts on the base. Lower them as rows go; never raise them. */
-const EXISTING_CEILING = 247; // 96 + 151 (SAME-2 brief H2: the hand rows 154 - 8 un-banked sentence-key lines (unit 2) + 5 free-text reds by word (unit 4); 146 by key, 5 by word, 0 by atom)
+const EXISTING_CEILING = 248; // 96 + 152 (SAME-2 brief H3 unit 1: the granary reeve banked by its declared key, the chair's 19:58 ruling 1; 247 before)
 const HAND_CEILING = 44; // 42 + 2 (SAME-2's unit 0, the join's point 84: GOALS' two key lists, read by `.includes`, on the hand list as TIER_ORDER is)
 const COVERT = 'dm-only';
 
@@ -329,6 +329,29 @@ export function byConstructionFaults(refs, table, read) {
   return [...out, ...exemptionFaults(asExempt, read)];
 }
 
+/**
+ * THE DECLARED CRIME KEYS (the chair's 19:58 ruling 1; SAME-2 brief H3): a hand line's key path banked BY KEY, with
+ * its reason and the lines of code it stands on (each `path :: symbol`, found in its file, as the exemptions' lines
+ * are). A line under a declared key reds as `crime key, declared` and is banked like any red: not quiet, not exempt.
+ * @type {Readonly<Record<string, { reason: string, restates: string, withheldBy: string }>>}
+ */
+const HAND_CRIME_KEYS = Object.freeze({
+  'src/data/people/goalSecretRefusals.js :: GOAL_SECRET_REFUSAL_ROWS::title:the granary reeve[1]': {
+    reason: 'a KEY restating an existing secret\'s own sentence ("Takes a bribe from merchants…"); a card\'s `secret` is owner-only by construction: publicSafe strips it from every shared read and PRIVATE_KEY_RE names it',
+    restates: 'src/data/people/titleSecretsPresentations.js :: TITLE_SECRETS',
+    withheldBy: 'src/domain/display/publicSafe.js :: PRIVATE_KEY_RE',
+  },
+});
+
+/**
+ * The faults of the declared crime keys: a cited line (`restates`, `withheldBy`) whose file or symbol is not found.
+ * @param {Readonly<Record<string, { restates?: string, withheldBy?: string }>>} keys @param {(rel: string) => string|null} read
+ */
+export function crimeKeyFaults(keys, read) {
+  return Object.entries(keys).flatMap(([key, e]) => [...exemptionFaults({ [key]: { withheldBy: e.withheldBy } }, read),
+    ...exemptionFaults({ [key]: { withheldBy: e.restates } }, read).map((f) => f.replace('withheldBy', 'restates'))]);
+}
+
 /** @param {unknown} x */
 const isRow = (x) => !!x && typeof x === 'object' && !Array.isArray(x) && ('text' in x || 'line' in x);
 
@@ -366,8 +389,9 @@ export function poolLeaves(value) {
  * marked `dm-only`, or in a pool `EXEMPT` names, reds nowhere.
  * @param {HandPool[]} hand @param {Readonly<Record<string, unknown>>} [exempt] @param {boolean} [words] read bare lines by `CRIME_TEXT_FORMS`
  * @param {Readonly<Record<string, unknown>>} [dm] the tables dm-only by construction
+ * @param {Readonly<Record<string, unknown>>} [keys] the declared crime keys (`HAND_CRIME_KEYS`)
  */
-export function readHandLines(hand, exempt = EXEMPT, words = FREE_TEXT_READ, dm = DM_BY_CONSTRUCTION) {
+export function readHandLines(hand, exempt = EXEMPT, words = FREE_TEXT_READ, dm = DM_BY_CONSTRUCTION, keys = HAND_CRIME_KEYS) {
   /** @type {Array<{ pool: string, sha: string, text: string|null, why: string[], houses: string[], quiet: boolean }>} */ const out = [];
   for (const { ref, value } of hand) for (const { path, x } of poolLeaves(value)) {
     const pool = [ref, ...path].join('::');
@@ -377,6 +401,7 @@ export function readHandLines(hand, exempt = EXEMPT, words = FREE_TEXT_READ, dm 
     const text = lineText(x);
     /** @type {string[]} */ const why = [];
     if (path.some(isCrimeKey)) why.push('crime pool');
+    else if (Object.hasOwn(keys, pool)) why.push('crime key, declared');
     if (declared) why.push(...atoms.filter((a) => ['crime', 'hideable'].includes(String(atomClass(a)))).map((a) => `needs ${a}`));
     else if (words && text !== null && crimeTextForm(text)) why.push(`crime word ${crimeTextForm(text)}`);
     if (text === null) why.push('unreadable');
@@ -387,7 +412,7 @@ export function readHandLines(hand, exempt = EXEMPT, words = FREE_TEXT_READ, dm 
 }
 
 /** RULE 1 over the hand pools' lines. @param {HandPool[]} hand @param {Readonly<Record<string, unknown>>} [exempt] @param {boolean} [words] @param {Readonly<Record<string, unknown>>} [dm] */
-export const handReds = (hand, exempt = EXEMPT, words = FREE_TEXT_READ, dm = DM_BY_CONSTRUCTION) => sortRows(readHandLines(hand, exempt, words, dm).filter((l) => l.why.length && !l.quiet)
+export const handReds = (hand, exempt = EXEMPT, words = FREE_TEXT_READ, dm = DM_BY_CONSTRUCTION, keys = HAND_CRIME_KEYS) => sortRows(readHandLines(hand, exempt, words, dm, keys).filter((l) => l.why.length && !l.quiet)
   .map(({ pool, sha, why }) => ({ pool, sha, why: why.join('; ') })), ['pool', 'sha', 'why']);
 
 /** RULE 2 over the hand pools' declared lines. @param {HandPool[]} hand */
@@ -536,6 +561,13 @@ describe(`the hideable-house walker of the sameness pools (base ${BASE})`, async
     expect(exemptionFaults(EXEMPT, readRel)).toEqual([]);
   });
 
+  test('DECLARED CRIME KEYS: each names a hand line on this line, with its reason and the lines of code it cites', async () => {
+    expect(crimeKeyFaults(HAND_CRIME_KEYS, readRel)).toEqual([]);
+    const pools = new Set(readHandLines(await handPoolsOnLine(readJson(HAND_REL).rows)).map((l) => l.pool));
+    expect(Object.keys(HAND_CRIME_KEYS).filter((k) => !pools.has(k))).toEqual([]);
+    for (const [k, e] of Object.entries(HAND_CRIME_KEYS)) expect(e.reason.length, k).toBeGreaterThan(0);
+  });
+
   test('DM BY CONSTRUCTION: every dm-named hand table names its owner-only gate and its proof; every entry is one', () => {
     expect(byConstructionFaults(readJson(HAND_REL).rows.map((/** @type {{ pool: string }} */ r) => r.pool), DM_BY_CONSTRUCTION, readRel)).toEqual([]);
   });
@@ -642,6 +674,16 @@ describe(`the hideable-house walker of the sameness pools (base ${BASE})`, async
       expect(handReds([{ ref, value }], EXEMPT, true, table)).toEqual([]);
       expect(byConstructionFaults([ref], { [ref]: { gatedBy: 'src/domain/dailyLife.js :: deriveDailyLifeDm', provedBy: table[ref].provedBy } }, read)).toHaveLength(1);
       expect(byConstructionFaults(['src/data/npcData.js :: NPC_WANTS'], { 'src/data/npcData.js :: NPC_WANTS': table[ref] }, read)).toHaveLength(1);
+    });
+
+    test('DECLARED CRIME KEYS (the chair, 19:58): a line under a declared key reds by key; a cite not found faults', () => {
+      const ref = 'src/data/people/goalSecretRefusals.js :: GOAL_SECRET_REFUSAL_ROWS';
+      const value = { 'title:the granary reeve[1]': ['Takes a bribe from merchants to sell from the stores at low prices when grain is dear'] };
+      expect(handReds([{ ref, value }]).map((r) => r.why)[0]).toMatch(/^crime key, declared/);
+      expect(handReds([{ ref, value }], EXEMPT, true, DM_BY_CONSTRUCTION, {}).filter((r) => r.why.startsWith('crime key'))).toEqual([]);
+      const read = (/** @type {string} */ rel) => (rel === 'src/x.js' ? 'export const SECRETS = 1;' : null);
+      expect(crimeKeyFaults({ k: { restates: 'src/x.js :: SECRETS', withheldBy: 'src/x.js :: SECRETS' } }, read)).toEqual([]);
+      expect(crimeKeyFaults({ k: { restates: 'src/x.js :: SECRET_LINES', withheldBy: 'src/x.js :: SECRETS' } }, read)).toEqual(['k: restates not found (src/x.js :: SECRET_LINES)']);
     });
 
     test('PHASE 3: a new line in a hand-listed criminal key reds; dm-only, or in an exempt pool, it passes', () => {
