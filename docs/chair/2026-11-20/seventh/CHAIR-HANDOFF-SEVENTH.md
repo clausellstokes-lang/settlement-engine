@@ -5316,3 +5316,13 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   PAGE-8 seated and reading (it notes PAGE-6's hand-back was last written at 15:36: PAGE-6 was told at 17:51 to
   make it current). PROSE-1's BUILD-1 is out on `lane/prose-1-build-1-2026-11-20`; its hand-back (8de90368e) lists
   the chair's thirteen rulings since 17:00.
+- 18:01 UTC · "GOALS f721d11cd" ARRIVED AT 17:57 (tests/lint whole 220 files, 3,271 passed, 0 failed at the lane's tip; 59
+  commits; 25 files of src, tests and scripts). THE LANDING IS RUNNING in the chair's helper in /home/user/wt/line
+  (not pushed): POINT 83 = the mixed keyed pick (merge 0a4edcff3 of bd42d63c7); POINT 84 = the goals lane (merge
+  31a053445 of f721d11cd); then tests/lint whole, the registers by their doors, the landing rows with the CI read of
+  43ab0f5eb. The chair reads the result and pushes. A RE-DECISION UNDER RULE 10, TOLD TO THE OWNER AT 18:00: the
+  Outlook verdict's route was DECIDED on 2026-11-04 (a lane's self-vouch, pinned in
+  `tests/domain/generalStateProseDesk.test.js`); the chair re-decides it under the owner's deferral (the verdict
+  draws only on a real critical count); vetoable; not yet built. DEPTH-2's CONFLICT UNIT IS BUILT (da16f2f4b): the
+  commonest quarrel sentence 52/49/44/58/52/52% to 14/13/15/14/9/11%; mb1 reworded; the families display accepted
+  where it agrees with the seat. `prompts/DEPTH-3.txt` brought up to date; seated after this push.
