@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "46f918dfb5d8239b4ca38edc02670ebd69126bd5",
-  "measuredBy": "FORTUNE-3 U5s builder",
+  "measuredAtSha": "91708ca946953aa17094aa55b359fbfb938d9ba3",
+  "measuredBy": "FORTUNE-3 U4 builder",
   "date": "2026-11-20",
-  "note": "re-taken by the U5s builder at 46f918dfb: FORTUNE_LAW_TUNING.standing gains the DRAFT rows safetyCalmLadder and safetyUsualRange (U5s, the chair's ruling of 15:58 UTC); no existing value moved; no bare decimal added",
+  "note": "FS7 F1 (91708ca94): economyStateProse.js reads isSizeRelativeFortune from the fortune law leaf, so FORTUNE_LAW_TUNING gains a dependent; no value moved",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1248,7 +1248,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 452,
+      "line": 453,
       "spanDigest": "3812788e098c702a89d72a5b51c0007f969391069da9b98b2fdd4f2e789ff838",
       "leaves": {
         "value": 50
@@ -1262,7 +1262,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 453,
+      "line": 454,
       "spanDigest": "a6b1340215d65b0c4945f4b657854f6756ff2217a648606b9e467ee5ac00bbda",
       "leaves": {
         "value": 20
@@ -1516,6 +1516,7 @@
       },
       "dependents": [
         "src/domain/density/densityCreateBoundary.js",
+        "src/domain/display/stateProse/economyStateProse.js",
         "src/generators/economy/prosperity.js",
         "src/generators/factionDynamics.js",
         "src/generators/power/rulingStructure.js"

@@ -36,7 +36,7 @@ export const deriveEconomicSituationDesc = (
   institutions = [],
   foodSecurity = null,
   prosperityLabel = null,
-) => resolveSibling(situationDescOf(config, _tier, institutions, foodSecurity, prosperityLabel), PROSPERITY_LINE_SIBLINGS, {
+) => resolveSibling(situationDescOf(config, _tier, institutions, foodSecurity, prosperityLabel), isSizeRelativeFortune(config) ? FORTUNE_LAW_LINE_SIBLINGS : PROSPERITY_LINE_SIBLINGS, {
   facts: () => factsOf({ institutions }), poolId: 'prosperity:PROSPERITY_LINE_SIBLINGS', surface: 'economics', drawKind: 'T',
 });
 
@@ -70,6 +70,7 @@ export const tradeBandContradictsLabel = (band, label) => {
 export const TRADE_LINE_BANDS = Object.freeze([
   [/^Trade is what this settlement lives on\./, 'very_high'],
   [/^Trade is brisk, the guilds are well run/, 'high'],
+  [/^Trade is brisk, and the settlement's coffers fill steadily/, 'high'], // FS7 F2: the guild line's twin (law 2 only)
   [/^Commerce is sluggish;/, 'low'],
   [/^Little coin changes hands here/, 'very_low'],
   [/^Cut off as it is, the settlement runs itself well/, 'high'],
@@ -509,4 +510,23 @@ export const PROSPERITY_LINE_SIBLINGS = Object.freeze({
   'Commerce is sluggish; markets meet infrequently and many crafts are in decline.': marketSet(
     'Commerce is sluggish; markets meet infrequently and many crafts are in decline.',
     'Commerce is sluggish; little is bought or sold and many crafts are in decline.'),
+});
+
+/**
+ * FS7 F2 (FORTUNE-1's U4, THE FORTUNE LAW ONLY): the `high` trade line names the place's guilds, and the label picks it at a
+ * Prosperous place on a slow output band; under the law the small places that are Prosperous are many, and it printed at
+ * thorps, hamlets and villages that hold no guild (docs/chair/2026-11-20/content/fortune/FS7-INVENTORY.md 1.A). Here the
+ * line declares the guild it names (`facts/guild.js`: at this step the roster's guild house), and its twin is the same line
+ * without the guilds; the twin claims nothing of guilds, so it declares nothing. Read only where the town was born under
+ * the law (`deriveEconomicSituationDesc`); a law-1 world reads `PROSPERITY_LINE_SIBLINGS`, so its line is today's.
+ * ⚠ Not exported, so not yet a census channel (`scripts/lib/table-pools.mjs`): it is dark, and enrolling it is the
+ * integrator's at the light.
+ */
+const GUILD_TRADE_LINE = "Trade is brisk, the guilds are well run, and the settlement's coffers fill steadily.";
+const FORTUNE_LAW_LINE_SIBLINGS = Object.freeze({
+  ...PROSPERITY_LINE_SIBLINGS,
+  [GUILD_TRADE_LINE]: Object.freeze([
+    Object.freeze({ text: GUILD_TRADE_LINE, needs: Object.freeze(['guild']) }),
+    Object.freeze({ text: "Trade is brisk, and the settlement's coffers fill steadily.", twinOf: GUILD_TRADE_LINE }),
+  ]),
 });

@@ -2866,6 +2866,10 @@
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
     },
+    "tests/generators/fortuneLawTradeLine.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by FORTUNE-1 U4 (FS7 finding F2, FORTUNE-3's builder) on lane/fortune-3-u4-2026-11-20. It pins src/generators/economy/prosperity.js :: deriveEconomicSituationDesc under the fortune law (src/domain/fortune/fortuneLaw.js :: isSizeRelativeFortune): (a) where law 1 prints the high band's guild line at a law-2 small birth holding no guild, law 2 prints a line naming no guild that TRADE_LINE_BANDS still reads as the high band, and a place with a guild house keeps the line; (b) the same records' line recomputed without the marker, or with 1, is today's. Its red-first IS on record: before prosperity.js changed, (a) failed on Lipoev (thorp, Prosperous) printing the guild line. No planted regression has been run for it; a sweep plant is owed when the sweep next touches src/generators/economy/prosperity.js."
+    },
     "tests/generators/randomConfigReroll.test.js": {
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
