@@ -2862,6 +2862,10 @@
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
     },
+    "tests/generators/fortuneLawMerits.test.js": {
+      "kind": "rationale",
+      "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
+    },
     "tests/generators/fortuneLawSafety.test.js": {
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"

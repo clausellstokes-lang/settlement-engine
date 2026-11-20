@@ -505,7 +505,7 @@ registerStep('assembleSettlement', {
   // config + _config) that keeps a what-if regeneration from erasing what the
   // DM's events did. Order matters: re-promotion dedupes against the
   // GENERATION-stamped twins the stressor promotion just minted.
-  return { settlement: reapplyEventConditions(promoteStressorsToConditions(normalizeSettlement(settlement))) };
+  return { settlement: ((s) => (chooseOrPin(pins, 'powerStructure', () => UNPINNED) === UNPINNED ? settleMeritsOfRule(s, { bandFor: legitimacyBandFor, recapture: withCaptureRelations, restand: settleStandingToLegitimacy }) : s))(reapplyEventConditions(promoteStressorsToConditions(normalizeSettlement(settlement)))) }; // FORTUNE U5a (the chair's ruling (A), 18:38 UTC): the merits of rule, the step's TAIL, before resolveCrisisCast; law 2 only (law 1: the record untouched); a HELD powerStructure is the DM's and is not re-merited
 });
 import { keepOfRecord } from '../../domain/facts/keep.js'; // at the END on purpose: this file's writes are cited by LINE (COHERENCE-UPKEEP)
 import { settleFundingReasons } from '../structuralValidator.js'; import { keptGuardLine, purseWordOfBand } from '../safetyProfile.js'; import { economicSurvivalBandOf } from '../../domain/display/defenseScoreBands.js'; import { standingLabelOf } from '../../domain/facts/keep.js'; // at the END for the same reason (COHERENCE-UPKEEP-6)
@@ -556,3 +556,4 @@ function readHouseDescsLate(settlement) {
   }
 }
 import { DESC_LATE_SIBLINGS, DESC_VARIANT_SIBLINGS } from '../../data/institutionDescVariants.js'; import { speakTierNoun } from '../../domain/display/stateProse/stateProseKernel.js'; import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js'; // TAIL-HOUSES-5 (H20): at the END, as above (this file's writes are cited by LINE)
+import { settleMeritsOfRule } from '../../domain/fortune/fortuneMerits.js'; import { legitimacyBandFor, withCaptureRelations } from '../factionDynamics.js'; import { settleStandingToLegitimacy } from '../power/rosterText.js'; // FORTUNE U5a: at the END, as above (this file's writes are cited by LINE)
