@@ -19,6 +19,12 @@
  *       the TIES `ally` short cell holding five wordings: the two free wordings are taken first, then wordings are shared
  *       by two apart, and a wording that must be held a third time stands, counted;
  *   (d) a planted pair of one house: the later passes over its house-mate's wording for another holder's.
+ * GOALS-4 (builder 10, the wants' tranche): the planted casts and seeds of (c), (d), (e), (f), (g), (h) and (q) were searched
+ * against the cells as they stood; the tranche grew those cells (TIES ally short 5 → 21, rival_enemy long 5 → 34, POWER
+ * competitive short 6 → 14), so each is MOVED BY ITS OWN DOOR, the claim unchanged: (d), (e), (f), (g), (h) re-searched on
+ * the grown cells, each named beside it; (c) and (q), whose cases no deal on the grown cell shows (searched, named beside
+ * them), keep their seeds on the cell PLANTED BACK at the lines it held when they were searched (its first lines, the
+ * count read off `WANT-LINES-FINAL.md`'s header), through the data module, as (e), (r) and (s) plant theirs.
  * GOALS-1, builder 4 (the chair's approval of 10:48 UTC and rulings of 10:58 UTC):
  *   (f) with the real reserve (data/people/goalFamilies.js :: GOAL_RESERVE_LINES), the template repeats of the planted city
  *       of (a) and of a metropolis fall below their count on 84a8606b9 (no reserve), and (a)'s law holds on both;
@@ -34,6 +40,7 @@
  *       'twice', the same sentence), and with the reserve spent the next is 'exhausted', counted;
  *   (s) the floor: a card whose families leave only its fully printed PERSONALITY cell takes that cell's reserve line.
  */
+import { readFileSync } from 'node:fs';
 import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import * as goalFamilies from '../../../src/data/people/goalFamilies.js';
 import { dealGoals, goalReceiptsOf } from '../../../src/generators/people/goals.js';
@@ -71,9 +78,10 @@ function wordingOf(text) {
   return best.line.replace(/\{([^}]+)\}/g, (whole, slot) => (NAME_SLOTS.has(slot) ? '§' : slot.includes('|') ? whole : match[++g]));
 }
 
-/** The holdings of a dealt cast, in roster order, short then long, with each card's receipt. @param {any[]} cast */
-function holdingsOf(cast) {
-  const receipts = new Map(goalReceiptsOf(cast).map((r) => [r.id, r]));
+/** The holdings of a dealt cast, in roster order, short then long, with each card's receipt (read by the goals module that
+ * dealt it: a freshly imported one under a planted data module keeps its own). @param {any[]} cast @param {(cast: any[]) => any[]} [receiptsOf] */
+function holdingsOf(cast, receiptsOf = goalReceiptsOf) {
+  const receipts = new Map(receiptsOf(cast).map((r) => [r.id, r]));
   const out = [];
   for (const c of cast) {
     const r = receipts.get(String(c.id));
@@ -81,6 +89,24 @@ function holdingsOf(cast) {
     for (const v of /** @type {const} */ (['short', 'long'])) if (c.goal?.[v]) out.push({ id: String(c.id), v, text: c.goal[v], wording: wordingOf(c.goal[v]), receipt: r });
   }
   return out;
+}
+
+/** A drawn cell's count before GOALS-4's wants' tranche, read off the one source's cell header ("n → m"). @param {string} cell `FAMILY/sub/vantage` */
+const countBeforeTranche = (cell) => Number(new RegExp(`^### ${cell.replace(/\//g, '\\/')} · (\\d+) → `, 'm')
+  .exec(readFileSync(new URL('../../../docs/chair/2026-11-20/content/goals/wants/WANT-LINES-FINAL.md', import.meta.url), 'utf8'))?.[1]);
+/**
+ * The goals module dealt over the real data module with ONE cell planted back at its first `n` lines (GOALS-4: a case
+ * searched before the tranche grew its cell), and that cell's lines. @param {string} family @param {string} sub @param {'short' | 'long'} v @param {number} n
+ */
+async function dealerWithCellAt(family, sub, v, n) {
+  vi.resetModules();
+  vi.doMock('../../../src/data/people/goalFamilies.js', async (importOriginal) => {
+    const real = /** @type {any} */ (await importOriginal());
+    const cell = real.GOAL_FAMILY_LINES[family][sub];
+    return { ...real, GOAL_FAMILY_LINES: { ...real.GOAL_FAMILY_LINES, [family]: { ...real.GOAL_FAMILY_LINES[family], [sub]: { ...cell, [v]: cell[v].slice(0, n) } } } };
+  });
+  const fresh = await import('../../../src/generators/people/goals.js');
+  return { dealGoals: fresh.dealGoals, goalReceiptsOf: fresh.goalReceiptsOf, lines: /** @type {any} */ (goalFamilies.GOAL_FAMILY_LINES)[family][sub][v].slice(0, n) };
 }
 
 /** The holdings whose wording an earlier holding already holds. @param {ReturnType<typeof holdingsOf>} holdings */
@@ -132,12 +158,12 @@ const HOUSE = { kind: 'house', key: 'Traveling performers' }; // a house in no p
  * the only goal it can draw); `inHouse(k)` puts dealt card k in one house; `extraTies` tie dealt cards to each other
  * (covert, so they add no tie goal). @param {number} n @param {(k: number) => boolean} inHouse @param {any[]} extraTies @param {string} seed
  */
-function plantedCast(n, inHouse, extraTies, seed) {
+function plantedCast(n, inHouse, extraTies, seed, deal = dealGoals) {
   const kept = Array.from({ length: n }, (_, k) => ({ id: `k${k}`, name: `Keeper${k} Alder`, goal: null }));
   const allies = Array.from({ length: n }, (_, k) => ({ id: `s${k}`, name: `Spoke${k} Rowan`, goal: null, ...(inHouse(k) ? { institution: HOUSE } : {}) }));
   const ties = [...allies.map((c, k) => ({ from: c.id, to: kept[k].id, type: 'ally' })), ...extraTies];
   const settlement = { name: 'Testholm', tier: 'village', institutions: [], config: { magicExists: false, priorityMagic: 0 } };
-  const cast = dealGoals(settlement, [...kept, ...allies], ties, createPRNG(seed), { keep: new Set(kept.map((c) => c.id)) });
+  const cast = deal(settlement, [...kept, ...allies], ties, createPRNG(seed), { keep: new Set(kept.map((c) => c.id)) });
   return { cast, ties, dealt: cast.slice(n) };
 }
 
@@ -197,13 +223,20 @@ describe('GR1 for goals: no wording twice in one town', () => {
 });
 
 describe('GR1 for goals: an exhausted kind shares, then repeats, and every repeat is counted', () => {
-  it('(c) twelve allies, five ally wordings: free wordings first, then twice where apart, then the repeat stands, counted', () => {
+  afterEach(() => { vi.doUnmock('../../../src/data/people/goalFamilies.js'); vi.resetModules(); });
+  it('(c) twelve allies, five ally wordings: free wordings first, then twice where apart, then the repeat stands, counted', async () => {
     const covert = [{ from: 's6', to: 's7', type: 'ally', covert: true }, { from: 's8', to: 's9', type: 'ally', covert: true }];
-    // seed searched once (gr1-exhausted-0 … -299) for a pass one that leaves two wordings free, then shares and stands
-    const { cast, ties, dealt } = plantedCast(12, (k) => k < 6, covert, 'gr1-exhausted-34');
-    const cellSize = goalFamilies.GOAL_FAMILY_LINES.TIES.ally.short.length;
+    // seed searched once (gr1-exhausted-0 … -299) for a pass one that leaves two wordings free, then shares and stands.
+    // GOALS-4 (the wants' tranche: the ally short cell 5 → 21): on the grown cell the search re-run finds no such deal (44,
+    // 46, 48, 43 and 50 allies over gr1-exhausted-0 … -299: where two stay free, a 'twice' lands on a wording a LATER card
+    // holds, so the roster-order count below cannot hold), so the cell is planted back at its five lines and the seed stands
+    const five = countBeforeTranche('TIES/ally/short');
+    expect(five, 'the cell held five wordings before the tranche').toBe(5);
+    const dealer = await dealerWithCellAt('TIES', 'ally', 'short', five);
+    const { cast, ties, dealt } = plantedCast(12, (k) => k < 6, covert, 'gr1-exhausted-34', dealer.dealGoals);
+    const cellSize = dealer.lines.length;
     for (const c of dealt) expect([c.goal.intent.short.family, c.goal.intent.short.kind]).toEqual(['TIES', 'ally']);
-    const short = holdingsOf(cast).filter((h) => h.v === 'short');
+    const short = holdingsOf(cast, dealer.goalReceiptsOf).filter((h) => h.v === 'short');
     expect(short.length, 'anti-vacuity: twelve dealt').toBe(12);
     expect(cellSize * 2, 'the kind holds fewer than two wordings per holder').toBeLessThan(short.length);
     // the wordings pass one left free are taken first, by the first repeats in roster order; then every wording is held
@@ -233,7 +266,7 @@ describe('GR1 for goals: an exhausted kind shares, then repeats, and every repea
     }
     // the floor (every family held for the long): GOALS-3 (d), a repeating floor walks its cluster's cell, then its reserve, to
     // the first line nobody prints ('free', rotated); every line printed, it stands, 'exhausted'; every repeat is counted
-    const long = holdingsOf(cast).filter((h) => h.v === 'long');
+    const long = holdingsOf(cast, dealer.goalReceiptsOf).filter((h) => h.v === 'long');
     expect(long.every((h) => h.receipt.floor === true)).toBe(true);
     const floorLines = (/** @type {string} */ k) => [...(/** @type {any} */ (goalFamilies.GOAL_FAMILY_LINES.PERSONALITY)[k]?.long || []), ...(/** @type {any} */ (goalFamilies).GOAL_RESERVE_LINES?.PERSONALITY?.[k]?.long || [])].length;
     const lines = floorLines(long[0].receipt.long.kind);
@@ -245,8 +278,10 @@ describe('GR1 for goals: an exhausted kind shares, then repeats, and every repea
   });
 
   it('(d) a pair of one house: the later of the two passes over its house-mate\'s wording for another holder\'s', () => {
-    // seed searched once (gr1-pair-0 … gr1-pair-299) for the case: s1 drew s0's wording, every wording is held, and s1 shares
-    const { cast, ties, dealt } = plantedCast(8, (k) => k < 2, [], 'gr1-pair-16');
+    // seed searched once (gr1-pair-0 … gr1-pair-299) for the case: s1 drew s0's wording, every wording is held, and s1 shares.
+    // GOALS-4: the ally short cell 5 → 21 wordings, so the cast 8 → 48; the search re-run (gr1-pair-0 … -299 at 48): before
+    // gr1-pair-16 (8 allies), after gr1-pair-41
+    const { cast, ties, dealt } = plantedCast(48, (k) => k < 2, [], 'gr1-pair-41');
     const short = holdingsOf(cast).filter((h) => h.v === 'short');
     const [s0, s1] = ['s0', 's1'].map((id) => /** @type {any} */ (short.find((h) => h.id === id)));
     expect(dealt.slice(0, 2).every((c) => c.institution?.key === HOUSE.key), 'the pair is of one house').toBe(true);
@@ -275,7 +310,9 @@ describe('GR1 for goals: a reserve line is taken, never drawn', () => {
     const allies = Array.from({ length: 7 }, (_, k) => ({ id: `s${k}`, name: `Spoke${k} Rowan`, goal: null }));
     const ties = allies.map((c, k) => ({ from: c.id, to: kept[k].id, type: 'ally' }));
     const settlement = { name: 'Testholm', tier: 'village', institutions: [], config: { magicExists: false, priorityMagic: 0 } };
-    const cast = fresh.dealGoals(settlement, [...kept, ...allies], ties, createPRNG('gr1-reserve'), { keep: new Set(kept.map((c) => c.id)) });
+    // GOALS-4: the ally short cell 5 → 21 wordings; seed searched (gr1-reserve, then gr1-reserve-0 … -99) for a deal where one
+    // repeat's rotation runs off the cell's end onto the planted line: before gr1-reserve, after gr1-reserve-0
+    const cast = fresh.dealGoals(settlement, [...kept, ...allies], ties, createPRNG('gr1-reserve-0'), { keep: new Set(kept.map((c) => c.id)) });
     const receipts = fresh.goalReceiptsOf(cast);
     const cellSize = goalFamilies.GOAL_FAMILY_LINES.TIES.ally.short.length;
     // anchored: the planted line is this test's own invented fixture text, not a pool's sentence
@@ -292,8 +329,14 @@ describe('GR1 for goals: a reserve line is taken, never drawn', () => {
  * (f) THE COUNT ON THE BASE, read once by this file's own counter (`repeatsOf(holdingsOf(...)).length` over the deal of (a))
  * run against an archive copy of 84a8606b9, where the reserve is empty: gr1-city-1 held 5 repeated wordings there and
  * gr1-metropolis-0 held 29 (the metropolis seed searched once, gr1-metropolis-0 … -2: the first whose repeats fall).
+ * GOALS-4 (the wants' tranche): with the grown cells no rotation in those two towns reaches a reserve line, so the towns
+ * are MOVED BY THEIR OWN DOOR: searched (gr1-city-0 … -24, gr1-metropolis-0 … -24) for the first where a repeat takes a
+ * reserve line and (a)'s law holds, then counted ONCE by this file's own counter against an archive of 84a8606b9 (which
+ * re-reads the old two as 5 and 29): before { gr1-city-1: 5, gr1-metropolis-0: 29 }, after { gr1-city-11: 15,
+ * gr1-metropolis-3: 22 } (gr1-metropolis-1, the first found, holds one unmarked repeat already at the base, a POWER
+ * conflict line whose issue the masker keeps; it is not this file's to cure).
  */
-const REPEATS_AT_84A8606B9 = Object.freeze({ 'gr1-city-1': 5, 'gr1-metropolis-0': 29 });
+const REPEATS_AT_84A8606B9 = Object.freeze({ 'gr1-city-11': 15, 'gr1-metropolis-3': 22 });
 
 describe('GR1 for goals: the real reserve lowers the repeats (f)', () => {
   /** @type {Map<string, { town: any, cast: any[] }>} */ const towns = new Map();
@@ -327,15 +370,17 @@ describe('GR1 for goals: a gentle line is never held on a harsh tie (g)', () => 
   // the wordings refused on an enemy tie at `mortal`, derived from the map (a person slot masked as the rule masks it)
   const GENTLE = Object.entries(NOT_ON_TIES).filter(([, m]) => (m.enemy || []).includes('mortal')).map(([t]) => t.replace(/\{([^}]+)\}/g, '§'));
   const TRAIT = Object.keys(goalFamilies.PERSONALITY_CLUSTER_OF)[0];
-  /** 24 kept cards and 24 dealt, each the ENEMY of its own kept card at `strength` (TIES rival_enemy, or its cluster). @param {string} strength */
+  /** 120 kept cards and 120 dealt, each the ENEMY of its own kept card at `strength` (TIES rival_enemy, or its cluster). @param {string} strength */
   const enemies = (strength) => {
-    const n = 24;
+    const n = 120;
     const kept = Array.from({ length: n }, (_, k) => ({ id: `k${k}`, name: `Keeper${k} Alder`, goal: null }));
     const foes = Array.from({ length: n }, (_, k) => ({ id: `e${k}`, name: `Foe${k} Rowan`, goal: null, personality: { dominant: TRAIT } }));
     const ties = foes.map((c, k) => ({ from: c.id, to: kept[k].id, type: 'enemy', strength }));
     const settlement = { name: 'Testholm', tier: 'village', institutions: [], config: { magicExists: false, priorityMagic: 0 } };
-    // seed searched once (gr1-harsh-0 … -9) for a deal whose rotation on a mild tie reaches a gentle line
-    const cast = dealGoals(settlement, [...kept, ...foes], ties, createPRNG('gr1-harsh-1'), { keep: new Set(kept.map((c) => c.id)) });
+    // seed searched once (gr1-harsh-0 … -9) for a deal whose rotation on a mild tie reaches a gentle line. GOALS-4: the
+    // rival_enemy long cell 5 → 34 lines, so the gentle reserve lines lie past 34; the search re-run (24, 48, 72, 96 foes over
+    // gr1-harsh-0 … -9: none; 120 over gr1-harsh-0 … -29): before 24 foes on gr1-harsh-1, after 120 on gr1-harsh-23
+    const cast = dealGoals(settlement, [...kept, ...foes], ties, createPRNG('gr1-harsh-23'), { keep: new Set(kept.map((c) => c.id)) });
     return holdingsOf(cast).filter((h) => h.v === 'long');
   };
 
@@ -365,8 +410,10 @@ describe('GR1 for goals: a sentence and its mirror are one (h)', () => {
     const powerStructure = { factions: ['Elder Council', 'Merchant Guilds', 'Watch', 'Temple'].map((f) => ({ faction: f, power: 10 })),
       factionRelationships: [{ pair: ['Elder Council', 'Merchant Guilds'], type: 'competitive' }, { pair: ['Watch', 'Temple'], type: 'competitive' }] };
     const settlement = { name: 'Testholm', tier: 'village', institutions: [], powerStructure, config: { magicExists: false, priorityMagic: 0 } };
-    // seed searched once (gr1-mirror-0 … -59) for a deal where b draws a's line and, on 84a8606b9, stays on it as 'twice'
-    const cast = dealGoals(settlement, cards, [], createPRNG('gr1-mirror-25'));
+    // seed searched once (gr1-mirror-0 … -59) for a deal where b draws a's line and, on 84a8606b9, stays on it as 'twice'.
+    // GOALS-4: the POWER competitive short cell 6 → 14 lines; the search re-run on the grown cell (gr1-mirror-0 … -599) for
+    // the deal where b draws a's line in the other order and rotates: before gr1-mirror-25, after gr1-mirror-15
+    const cast = dealGoals(settlement, cards, [], createPRNG('gr1-mirror-15'));
     const short = holdingsOf(cast).filter((h) => h.v === 'short');
     const [a, b] = ['a', 'b'].map((id) => /** @type {any} */ (short.find((h) => h.id === id)));
     for (const h of [a, b]) expect([h.receipt.short.family, h.receipt.short.kind], h.id).toEqual(['POWER', 'competitive']);
@@ -388,7 +435,15 @@ const twiceIn = (cast, vs) => {
 };
 
 describe('GOALS-3: no goal sentence printed twice by the rotation (q)', () => {
-  it("(q) X takes W 'twice' while a later repeat Y drew W with X's names: Y does not print X's sentence", () => {
+  afterEach(() => { vi.doUnmock('../../../src/data/people/goalFamilies.js'); vi.resetModules(); });
+  it("(q) X takes W 'twice' while a later repeat Y drew W with X's names: Y does not print X's sentence", async () => {
+    // GOALS-4 (the wants' tranche): the case is d3937c3f8's deal on the POWER competitive short cell of six lines (X would take
+    // W at 'twice'), a case the cure leaves no trace of in the receipts, so it cannot be searched again on the grown cell
+    // (6 → 14). MOVED BY ITS OWN DOOR: the cell is planted back at the six lines the case was searched on (the cell's first
+    // six, the count read off WANT-LINES-FINAL.md's header), on the data module, and the seed stands
+    const six = countBeforeTranche('POWER/competitive/short');
+    expect(six, 'the cell held six lines before the tranche').toBe(6);
+    const fresh = await dealerWithCellAt('POWER', 'competitive', 'short', six);
     // four powers in two competing pairs, four firsts each (no RANK cell: a first with no second; no traits): every short goal is
     // a POWER `competitive` line, filled only by (power, rival), so two firsts of one power fill a line with the same names
     const POWERS = ['Elder Council', 'Merchant Guilds', 'Watch', 'Temple'];
@@ -398,8 +453,8 @@ describe('GOALS-3: no goal sentence printed twice by the rotation (q)', () => {
     const settlement = { name: 'Testholm', tier: 'village', institutions: [], powerStructure, config: { magicExists: false, priorityMagic: 0 } };
     // seed searched once (goals3-causeA-0 … -199, four rosters) for the case on d3937c3f8: X = p2m1 rotated to W at 'twice' (W
     // held once, by p0m1), Y = p2m3 drew W in pass one with X's names and 'stands' on it, printing X's sentence
-    const cast = dealGoals(settlement, cards, [], createPRNG('goals3-causeA-4'));
-    const short = holdingsOf(cast).filter((h) => h.v === 'short');
+    const cast = fresh.dealGoals(settlement, cards, [], createPRNG('goals3-causeA-4'));
+    const short = holdingsOf(cast, fresh.goalReceiptsOf).filter((h) => h.v === 'short');
     const [x, y, h] = ['p2m1', 'p2m3', 'p0m1'].map((id) => /** @type {any} */ (short.find((s) => s.id === id)));
     for (const s of [x, y, h]) expect([s.receipt.short.family, s.receipt.short.kind], s.id).toEqual(['POWER', 'competitive']);
     expect(x.receipt.repeat?.short, 'X is a repeat').toBeTruthy();

@@ -184,7 +184,9 @@ describe('BAR8 K-PEOPLE (14h) · "win two more people" in a power that holds the
     });
     expectNoSeedFailures(failures, 'two more people in a power that holds them');
   });
-  it('THE POSITIVE: the line is still dealt where the power holds four (r2r-hamlet-8)', () => {
-    expect((born('r2r-hamlet-8').npcs || []).some((/** @type {any} */ n) => wins(n).length > 0)).toBe(true);
+  // GOALS-4 (the wants' tranche: RANK climb short 6 → 17 lines): the town MOVED BY ITS OWN DOOR, searched (r2r-hamlet-0 … -59)
+  // for the first hamlet that deals the line: before r2r-hamlet-8, after r2r-hamlet-48
+  it('THE POSITIVE: the line is still dealt where the power holds four (r2r-hamlet-48)', () => {
+    expect((born('r2r-hamlet-48').npcs || []).some((/** @type {any} */ n) => wins(n).length > 0)).toBe(true);
   });
 });
