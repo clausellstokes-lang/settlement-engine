@@ -76,7 +76,7 @@ For the brief `docs/chair/2026-11-20/content/depth/briefs/WRITE-HOOKS-4.md`, und
    beside: [ambition] "They have been quietly saving toward something they have never told anyone they want."
    beside: [ambition] "They have been offered a better place somewhere else, and have told no one they are thinking of going."
 
-19. NEW [ambition] "They have been invited, for once, to a gathering of people well above their usual company, and mean to leave with a promise from one of them."
+19. NEW [ambition] "They have been invited to a gathering where they know almost no one, and mean to leave with a promise from one of the guests."
    beside: [ambition] "They want a say in something they have always been left out of, and have begun turning up wherever it is talked over."
    beside: [ambition] "Their apprentice has been talking to a rival, and came back with an offer to buy them out."
 
@@ -110,7 +110,7 @@ For the brief `docs/chair/2026-11-20/content/depth/briefs/WRITE-HOOKS-4.md`, und
    beside: [forbidden_knowledge] "They know of a promise their predecessor made that was never written down, and are deciding whether to keep it."
    beside: [forbidden_knowledge] "A sealed letter arrived for them three weeks ago. They haven't opened it. They won't say why."
 
-7. NEW [forbidden_knowledge] "They have been told, ahead of everyone, of a decision to be announced next week, and someone they owe a kindness has just asked them straight out whether it is coming."
+7. NEW [forbidden_knowledge] "They know, ahead of everyone, of a decision to be announced next week, and someone they owe a kindness has just asked them straight out whether it is coming."
    beside: [forbidden_knowledge] "A sealed letter arrived for them three weeks ago. They haven't opened it. They won't say why."
    beside: [forbidden_knowledge] "They know of a promise their predecessor made that was never written down, and are deciding whether to keep it."
 
@@ -118,7 +118,7 @@ For the brief `docs/chair/2026-11-20/content/depth/briefs/WRITE-HOOKS-4.md`, und
    beside: [old_wound] "They made a decision early in their post that they still think was wrong, and nobody else seems to remember it."
    beside: [old_wound] "They signed an order last month on bad information, and the family it ruined has learned whose seal is on it."
 
-9. NEW [old_wound] "Someone they once overruled has been asked to look over their old decisions, and begins tomorrow."
+9. NEW [old_wound] "Someone they once overruled has been going through their old decisions, one by one, and has asked to speak with them tomorrow."
    beside: [old_wound] "An old ruling of theirs is being used to take a widow's house, and they cannot undo it without admitting the mistake."
    beside: [old_wound] "They made a decision early in their post that they still think was wrong, and nobody else seems to remember it."
 
@@ -164,7 +164,7 @@ For the brief `docs/chair/2026-11-20/content/depth/briefs/WRITE-HOOKS-4.md`, und
    beside: [hidden_debt] "They still owe the person who set them up in trade for their first stock, and that person has never once asked."
    beside: [hidden_debt] "A partner died owing them money, and the partner's heir says the debt was paid in a letter nobody can find."
 
-8. NEW [rivalry] "A rival has asked to borrow one of their designs just this once, promising to credit them, and it is for the very buyer they hoped to win."
+8. NEW [rivalry] "A rival has asked them, just this once, for the name of their best supplier, and it is for the very buyer they hoped to win."
    beside: [rivalry] "Someone newly set up in the same trade asked them for advice, and they gave it, and are beginning to regret it."
    beside: [rivalry] "A rival keeps sending them the customers the rival cannot serve, and they cannot work out whether it is kindness."
 
@@ -354,3 +354,11 @@ religious 4 "…cared for before they took their vows…" -> "…cared for long 
 would frown on it." (vows are a fact the record may contradict). religious 9 "…knew them before they came to their faith…" -> "…knew them
 long before they served the faithful…" (a conversion the record may contradict). Watched, kept: other 10 (a warning, nothing happens);
 other 18 "by the next new moon" (a date, not a season); government 9 (a review of old decisions, not an inquiry into a crime).
+
+THE CHAIR'S VERDICT (18:39 UTC; applied in place at 18:38 UTC by `date -u`): ALL 60 APPROVED; the placement by theme stands; the integrator's four
+edits stand, except economy 8, which the chair rewords. Four reworded by the chair (a line must not presume a rank, an overseer or a trade the
+card may not have): other 19 "They have been invited to a gathering where they know almost no one, and mean to leave with a promise from one
+of the guests."; government 7 begins "They know, ahead of everyone, of a decision to be announced next week, ..."; government 9 "Someone they
+once overruled has been going through their old decisions, one by one, and has asked to speak with them tomorrow."; economy 8 "A rival has
+asked them, just this once, for the name of their best supplier, and it is for the very buyer they hoped to win." The economy/crime_ring
+single line stays as it is: a named survivor (about one point of a metropolis's repeats).
