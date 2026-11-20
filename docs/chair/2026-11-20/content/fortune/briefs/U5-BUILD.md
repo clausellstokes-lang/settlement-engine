@@ -76,10 +76,15 @@ for "BUILD U5a".
    right" wordings (today one, in `annotationBody`'s unresolved arm) and `annotationBody` reads it from that list, so its output is
    byte-identical (the confinement proves it). The matcher in `fortuneMerits.js` reads ONLY that list (no regex literal
    of its own). Matched by the annotation's `eventName` and `yearsAgo` against the event.
-5. THE LATE STEP: at the end of birth (after `generateNarratives`; the prototype's place in
-   `src/generators/generateSettlementPipeline.js`, just before `onComplete`), under law 2: if the score is below the
+5. THE LATE STEP, ITS PLACE RULED by the chair 16:45 UTC (the census's W4, option b): ITS OWN PIPELINE STEP, AFTER
+   `assembleSettlement` AND BEFORE `resolveCrisisCast` (registered the way `src/generators/steps/resolveCrisisCast.js`
+   is, `registerStep` and its row in `src/generators/steps/stepMetadata.js`), so the crisis cast and the tail's
+   `withConflictRelations` read the moved band and `src/domain/crisis/` is never touched. ⛔ FS5: under law 1 the step
+   must leave NO byte in a born town: if the step's mere registration is recorded in the document (a step trace, a
+   provenance receipt, a timing list), STOP and report before going further. Under law 2: if the score is below the
    Tolerated cut, or the ruler is troubled: nothing. Else the score rises by `meritPoints` a counted merit (clamped
-   0..100); the two-reason guard; the band re-stamped through `factionDynamics.js :: legitimacyBandFor` (read-only import;
+   0..100); the two-reason guard (a Tolerated place at 55 to 59 with two merits goes straight to Endorsed: within the
+   rule); the band re-stamped through `factionDynamics.js :: legitimacyBandFor` (read-only import;
    the returned tuple must equal play-time `reBand`'s for every score: a test); `breakdown.merits` = the points added
    (absent when 0, so a town with no merit is byte-identical to the ruled birth); and each WORD-writer of the census
    re-run here, or its both-bands proof in the test. Key order of `publicLegitimacy` unchanged; no new stored key but
@@ -87,8 +92,12 @@ for "BUILD U5a".
 
 MANIFEST U5a: `fortuneLaw.js` (the rows), NEW `src/domain/fortune/fortuneMerits.js`, `legitimacyBandFor`'s import only,
 `generateSettlementPipeline.js` (the step's call and import only), `legacyGenerator.js` (the exported list and its read in
-`annotationBody` only), (NOT `factionDynamics.js`: released), each census
-word-writer's re-run (a file outside this list is reported first), NEW `tests/generators/fortuneLawMerits.test.js`, NEW
+`annotationBody` only), (NOT `factionDynamics.js`: released; IMPORTS from it are allowed: `legitimacyBandFor` and, for
+the census's W1, `withCaptureRelations`), NEW `src/generators/steps/<the step>.js` and its row in `stepMetadata.js`,
+`src/generators/power/rosterText.js` (the census's W2: a sibling of `settleStandingToRoster`, nothing else), each other
+census word-writer's re-run (a file outside this list is reported first; ⛔ `power/rulingStructure.js` and
+`claimStanding.js` take ONE call line from another seat, PEOPLE-1: if U5a would reach either, FORTUNE-3 tells the chair
+FIRST), NEW `tests/generators/fortuneLawMerits.test.js`, NEW
 `tests/domain/fortuneMeritsPredicates.test.js`; registers keyed on these files that red, re-taken by their own doors.
 No census rows (the integrator takes both censuses).
 
@@ -125,3 +134,12 @@ condition 7's list for the security reader (`breakdown.merits` is a field a hidd
 depend on the capture rung): every place `breakdown.merits` is stored or carried (the born document;
 `publicSafe.js :: toPublicSafe` carries the breakdown: READ it, never edit it or `tests/security/`) and the fact that its
 presence implies the capture rung is neither `corrupted` nor `capture`; anything you stopped on. EXECUTED vs PLAUSIBLE.
+
+## THE CHAIR'S RULINGS ON THE CENSUS (2026-11-20 16:45 UTC, `U5-CENSUS.md` at aa0dc14c7)
+
+(1) W4: the late step is its own pipeline step after `assembleSettlement`, before `resolveCrisisCast` (item 5). RE-RUN THE
+PROOF AT THAT PLACE: the measure's figures (FS4; the contest; the capture rung) must hold for this placement, and the
+census's "stale" column shrinks: say both (U5a's first act: the prototype's step moved to that place in a scratch copy,
+`instruments/u5-run.sh`'s tables re-taken, before the build). (2) W5 (`historyCoherence.js :: flavorOf`): ACCEPTED as
+"never contradicted", with the census's test holding it (U5a's test (g)). (3) W1 by an import of `withCaptureRelations`
+from `factionDynamics.js` (an import is not a touch) and W2 by a sibling in `power/rosterText.js`: ALLOWED.
