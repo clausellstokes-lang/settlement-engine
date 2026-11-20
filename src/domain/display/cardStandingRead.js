@@ -11,11 +11,16 @@
  * share the Power tab orders its roster by): its place among the town's powers that carry a figure. A card in no power,
  * or first of none, has no line; a power the record holds no figure for has no weight (never a new fact).
  *
+ * ON A SERVED PAGE (PAGE-4 CARD-SERVED, the chair's condition (1) of 14:17 UTC, 2026-11-20): a power the document in hand
+ * HOLDS with no figure (a served page may withhold raw measures) is still the card's fact, printed "first of <power>" WITH
+ * NO WEIGHT, and is not counted in the ranking; a power the card's membership names that the document's roster does NOT
+ * hold (a withheld power) is FAIL CLOSED: never named here.
+ *
  * ONE READER for every surface that printed the band (the people card, the PDF's person card, the Foundry journal).
  * Pure, draw-free, total over any input; reads only what the record passed in holds (a public projection's powers are
  * its own, so a hidden power is neither counted nor named).
  */
-import { cardPowerParts, powersOf, powerNameOf, powerOrderOf } from '../people/cardPowers.js';
+import { cardPowerParts, powersOf, powerNameOf, powerNamesOf, powerOrderOf } from '../people/cardPowers.js';
 
 /** The ordinal words of the three strongest places. */
 const ORDINAL = Object.freeze(/** @type {Record<number, string>} */ ({ 1: '', 2: 'second ', 3: 'third ' }));
@@ -47,26 +52,28 @@ export function powerWeightHere(settlement, powerName) {
 
 /**
  * The powers the card stands first of, each with its weight here, in the card line's own order (cardPowers.js ::
- * cardPowerParts over the town's power order); a power with no weight is left out.
- * @param {unknown} card @param {unknown} settlement @returns {{ power: string, weightHere: string }[]}
+ * cardPowerParts over the town's power order). FAIL CLOSED: only a power the document's roster (`powersOf`) holds;
+ * cardPowerParts reads the card's memberships and only ORDERS by the roster, it filters nothing, so a withheld power is
+ * dropped here. A held power with no figure is kept with no weight (`weightHere: null`).
+ * @param {unknown} card @param {unknown} settlement @returns {{ power: string, weightHere: string | null }[]}
  */
 export function cardFirstOfWeights(card, settlement) {
-  /** @type {{ power: string, weightHere: string }[]} */
+  const held = new Set(powerNamesOf(settlement));
+  /** @type {{ power: string, weightHere: string | null }[]} */
   const out = [];
   for (const part of cardPowerParts(card, powerOrderOf(settlement))) {
-    if (part.rank !== 1) continue;
-    const weightHere = powerWeightHere(settlement, part.power);
-    if (weightHere) out.push({ power: part.power, weightHere });
+    if (part.rank !== 1 || !held.has(part.power)) continue;
+    out.push({ power: part.power, weightHere: powerWeightHere(settlement, part.power) });
   }
   return out;
 }
 
 /**
- * THE CARD'S STANDING LINE: "first of Council, the strongest power here" (a card first of two: both, by "; "), or null
- * for a card first of no power the record weighs.
+ * THE CARD'S STANDING LINE: "first of Council, the strongest power here" (a card first of two: both, by "; "); a power
+ * the document holds with no figure, "first of Temple" (no weight); null for a card first of no power the document holds.
  * @param {unknown} card @param {unknown} settlement @returns {string | null}
  */
 export function cardStandingLine(card, settlement) {
   const parts = cardFirstOfWeights(card, settlement);
-  return parts.length ? parts.map((p) => `first of ${p.power}, ${p.weightHere}`).join('; ') : null;
+  return parts.length ? parts.map((p) => (p.weightHere ? `first of ${p.power}, ${p.weightHere}` : `first of ${p.power}`)).join('; ') : null;
 }

@@ -1,0 +1,77 @@
+[gate-tail] start:  14:35:00 up 5 min,  0 user,  load average: 4.49, 1.93, 0.75 · cores: 4
+
+ RUN  v4.1.8 /home/user/settlement-engine/.claude/worktrees/agent-aa690e15dd237fc01
+
+ ❯ tests/components/npcCardStandingServed.test.jsx (6 tests | 3 failed) 408ms
+     × the reader: the part kept, with no weight; two parts mix 20ms
+     × THE CARD: the Standing row 253ms
+     × THE PDF and THE FOUNDRY JOURNAL: the view row's standingLine and firstOfLine, the journal's "First of" row 37ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/components/npcCardStandingServed.test.jsx > (a) a power the served document holds with no figure: "first of <power>", no weight > the reader: the part kept, with no weight; two parts mix
+AssertionError: expected null to be 'first of Temple' // Object.is equality
+
+- Expected:
+"first of Temple"
+
++ Received:
+null
+
+ ❯ tests/components/npcCardStandingServed.test.jsx:80:38
+     78|
+     79|   it('the reader: the part kept, with no weight; two parts mix', () =>…
+     80|     expect(cardStandingLine(tam, t)).toBe('first of Temple');
+       |                                      ^
+     81|     expect(cardFirstOfWeights(tam, t)).toEqual([{ power: 'Temple', wei…
+     82|     expect(cardStandingLine(una, t)).toBe('first of Council, the stron…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/components/npcCardStandingServed.test.jsx > (a) a power the served document holds with no figure: "first of <power>", no weight > THE CARD: the Standing row
+AssertionError: expected null to be 'Standing first of Temple' // Object.is equality
+
+- Expected:
+"Standing first of Temple"
+
++ Received:
+null
+
+ ❯ tests/components/npcCardStandingServed.test.jsx:88:35
+     86|   });
+     87|   it('THE CARD: the Standing row', () => {
+     88|     expect(standingRowOf(tam, t)).toBe('Standing first of Temple');
+       |                                   ^
+     89|     expect(standingRowOf(una, t)).toBe('Standing first of Council, the…
+     90|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/components/npcCardStandingServed.test.jsx > (a) a power the served document holds with no figure: "first of <power>", no weight > THE PDF and THE FOUNDRY JOURNAL: the view row's standingLine and firstOfLine, the journal's "First of" row
+AssertionError: expected null to be 'first of Temple' // Object.is equality
+
+- Expected:
+"first of Temple"
+
++ Received:
+null
+
+ ❯ tests/components/npcCardStandingServed.test.jsx:93:38
+     91|   it('THE PDF and THE FOUNDRY JOURNAL: the view row\'s standingLine an…
+     92|     const forTam = printedFor(t, 'Tam Vell');
+     93|     expect(forTam.row?.standingLine).toBe('first of Temple');
+       |                                      ^
+     94|     expect(forTam.row?.firstOfLine).toBe('Temple');
+     95|     expect(forTam.firstOfRows).toContain(`- **First of:** ${esc('Templ…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  3 failed | 11 passed (14)
+   Start at  14:35:01
+   Duration  6.45s (transform 3.67s, setup 117ms, import 5.15s, tests 412ms, environment 718ms)
+
+[gate-tail] end:  14:35:08 up 5 min,  0 user,  load average: 4.66, 2.04, 0.80
+[gate-tail] full log: /tmp/gate-tail.3808.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
