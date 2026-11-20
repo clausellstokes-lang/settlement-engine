@@ -19,6 +19,10 @@
  *       the seat's own card is, and `personRule` says so ('crown');
  *   (8) the leaf is a read: it writes nothing (a deep-frozen record) and answers the same twice; the R5 list is
  *       `representatives.js :: APPOINTED_GOVERNMENTS`, restated (that module is a generator), pinned equal here.
+ *   (9) U4-CURE (the chair, 13:50Z; brief U4-CURE.md, cure 2): the leaf's static import closure reaches no
+ *       `spatial/cohesionWeave.js`, so `rulingPowerCoup.js`'s import of it widens no surface's reach of the
+ *       "fear on candidates" identity (`writerReach.walker`); the veil read it uses instead of `cardVeil.js`
+ *       (`seatTable.js :: isVeiledRow`) answers `cardVeil.js :: isVeiledPower`'s answer on every row shape here.
  */
 import { describe, test, expect } from 'vitest';
 import { holderOf, APPOINTED_SEAT_FORMS, isCrownedForm } from '../../../src/domain/seat/holderOfSeat.js';
@@ -26,6 +30,9 @@ import { transferRulingPower } from '../../../src/domain/rulingPower.js';
 import { toPublicSafe } from '../../../src/domain/display/publicSafe.js';
 import { APPOINTED_GOVERNMENTS } from '../../../src/generators/people/representatives.js';
 import { GOVERNMENT_FAMILY } from '../../../src/data/cultureOfficeTitles.js';
+import { isVeiledRow } from '../../../src/domain/seat/seatTable.js';
+import { isVeiledPower } from '../../../src/domain/people/cardVeil.js';
+import { moduleClosure } from '../../../scripts/lib/module-closure.mjs';
 
 // ── fixtures ───────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -363,5 +370,32 @@ describe('(8) a pure read', () => {
   test('the R5 list is representatives.js :: APPOINTED_GOVERNMENTS, member for member, and the title table\'s appointed family', () => {
     expect([...APPOINTED_SEAT_FORMS]).toEqual([...APPOINTED_GOVERNMENTS]);
     expect(Object.keys(GOVERNMENT_FAMILY).filter((form) => GOVERNMENT_FAMILY[form] === 'appointed').sort()).toEqual([...APPOINTED_GOVERNMENTS].sort());
+  });
+});
+
+// ── (9) U4-CURE: the leaf's closure, and the veil read it holds ────────────────────────────────────────────
+
+describe('(9) the leaf reaches no cohesionWeave.js (writerReach), and its veil read is cardVeil.js\'s', () => {
+  test('the static import closure of seat/holderOfSeat.js holds no spatial/cohesionWeave.js', () => {
+    const entry = new URL('../../../src/domain/seat/holderOfSeat.js', import.meta.url).pathname;
+    const closure = [...moduleClosure(entry)];
+    expect(closure.length, 'the closure walk found the leaf\'s own imports').toBeGreaterThan(5);
+    expect(closure.filter((f) => f.endsWith('/src/domain/spatial/cohesionWeave.js'))).toEqual([]);
+    expect(closure.filter((f) => f.endsWith('/src/domain/people/cardVeil.js'))).toEqual([]);
+  });
+
+  test('seatTable.js :: isVeiledRow answers cardVeil.js :: isVeiledPower on every row shape the holder reads', () => {
+    const rows = [
+      ...civicTown({ extra: [
+        { faction: 'The Quiet Hand', category: 'criminal', power: 12, modifiers: [] },
+        { faction: 'The Shadow Ledger', category: 'CRIMINAL', power: 8, modifiers: [] },
+        { faction: 'Gilded Infiltrators', category: 'economy', power: 9, hidden: true, modifiers: [] },
+        { faction: 'Open Cutpurses', category: 'economy', power: 7, hidden: 'true', modifiers: [] },
+      ] }).powerStructure.factions,
+      null, undefined, 'Merchant Guilds', [], {}, { category: 7 },
+    ];
+    const differ = rows.filter((r) => isVeiledRow(r) !== isVeiledPower(r));
+    expect(differ).toEqual([]);
+    expect(rows.filter((r) => isVeiledRow(r)).length, 'the veiled rows are read veiled').toBe(3);
   });
 });
