@@ -259,6 +259,34 @@ export function sourceText(fn) {
   return parts.length ? parts.sort((a, b) => a[0] - b[0]).map((p) => p[1]).join(' ') : null;
 }
 
+/**
+ * DM-ONLY BY CONSTRUCTION (the chair's 18:38 forward; SAME-2's unit 4): a table whose name carries the owner-only mark
+ * (`_dm`, `Dm`, `_DM`: DAILY's `commoner_resentments_dm`) is not exempted by a row; its lines are quiet because the
+ * code DERIVES its slot only for the owner's audience. Each such hand table must name that gate (`gatedBy`, `path ::
+ * symbol`, found in the file) and the test that proves the slot absent on every `toPublicSafe` document (`provedBy`,
+ * `path :: title`, found in the file); a dm-named table without both is read as public and faults. Empty until the
+ * Daily Life seat names its data files ("DAILY <commit>"): the gate (`src/domain/dailyLife.js :: deriveDailyLife`,
+ * `audience === 'owner'`) and its proof are DAILY-2's B3 E1, not yet on any branch.
+ * @type {Readonly<Record<string, { gatedBy: string, provedBy: string }>>}
+ */
+const DM_BY_CONSTRUCTION = Object.freeze({});
+const DM_NAMED = /(?:_dm|Dm|_DM)$/;
+/** @param {string} ref `path :: symbol` */
+export const isDmNamed = (ref) => ref.split(' :: ').some((part) => DM_NAMED.test(part.replace(/\.[cm]?jsx?$/, '')));
+
+/**
+ * The faults of the by-construction arm: a dm-named hand table with no entry; an entry naming no dm-named hand table;
+ * an entry whose gate or proof is not found.
+ * @param {string[]} refs the hand list's tables @param {Readonly<Record<string, { gatedBy?: string, provedBy?: string }>>} table
+ * @param {(rel: string) => string|null} read
+ */
+export function byConstructionFaults(refs, table, read) {
+  const out = refs.filter((r) => isDmNamed(r) && !Object.hasOwn(table, r)).map((r) => `${r}: dm-named, no gate declared`);
+  out.push(...Object.keys(table).filter((r) => !refs.includes(r) || !isDmNamed(r)).map((r) => `${r}: not a dm-named hand table`));
+  const asExempt = Object.fromEntries(Object.entries(table).map(([r, e]) => [r, { withheldBy: e.gatedBy, provedBy: e.provedBy ?? '' }]));
+  return [...out, ...exemptionFaults(asExempt, read)];
+}
+
 /** @param {unknown} x */
 const isRow = (x) => !!x && typeof x === 'object' && !Array.isArray(x) && ('text' in x || 'line' in x);
 
@@ -295,8 +323,9 @@ export function poolLeaves(value) {
  * declares no need) is read by `CRIME_WORD`. A line under a key `CRIME_KEY_WORDS` takes is in a CRIME POOL. A line
  * marked `dm-only`, or in a pool `EXEMPT` names, reds nowhere.
  * @param {HandPool[]} hand @param {Readonly<Record<string, unknown>>} [exempt] @param {boolean} [words] read bare lines by `CRIME_WORD`
+ * @param {Readonly<Record<string, unknown>>} [dm] the tables dm-only by construction
  */
-export function readHandLines(hand, exempt = EXEMPT, words = FREE_TEXT_READ) {
+export function readHandLines(hand, exempt = EXEMPT, words = FREE_TEXT_READ, dm = DM_BY_CONSTRUCTION) {
   /** @type {Array<{ pool: string, sha: string, text: string|null, why: string[], houses: string[], quiet: boolean }>} */ const out = [];
   for (const { ref, value } of hand) for (const { path, x } of poolLeaves(value)) {
     const pool = [ref, ...path].join('::');
@@ -309,14 +338,14 @@ export function readHandLines(hand, exempt = EXEMPT, words = FREE_TEXT_READ) {
     if (declared) why.push(...atoms.filter((a) => ['crime', 'hideable'].includes(String(atomClass(a)))).map((a) => `needs ${a}`));
     else if (words && text !== null && CRIME_WORD.test(text)) why.push(`crime word ${String(text.match(CRIME_WORD)?.[0]).toLowerCase()}`);
     if (text === null) why.push('unreadable');
-    const quiet = (row.marks || []).includes(COVERT) || Object.hasOwn(exempt, pool) || Object.hasOwn(exempt, ref);
+    const quiet = (row.marks || []).includes(COVERT) || Object.hasOwn(exempt, pool) || Object.hasOwn(exempt, ref) || Object.hasOwn(dm, ref);
     out.push({ pool, sha: textSha(text), text, why, houses: atoms.filter((a) => atomClass(a) === 'house'), quiet });
   }
   return out;
 }
 
-/** RULE 1 over the hand pools' lines. @param {HandPool[]} hand @param {Readonly<Record<string, unknown>>} [exempt] @param {boolean} [words] */
-export const handReds = (hand, exempt = EXEMPT, words = FREE_TEXT_READ) => sortRows(readHandLines(hand, exempt, words).filter((l) => l.why.length && !l.quiet)
+/** RULE 1 over the hand pools' lines. @param {HandPool[]} hand @param {Readonly<Record<string, unknown>>} [exempt] @param {boolean} [words] @param {Readonly<Record<string, unknown>>} [dm] */
+export const handReds = (hand, exempt = EXEMPT, words = FREE_TEXT_READ, dm = DM_BY_CONSTRUCTION) => sortRows(readHandLines(hand, exempt, words, dm).filter((l) => l.why.length && !l.quiet)
   .map(({ pool, sha, why }) => ({ pool, sha, why: why.join('; ') })), ['pool', 'sha', 'why']);
 
 /** RULE 2 over the hand pools' declared lines. @param {HandPool[]} hand */
@@ -440,6 +469,10 @@ describe(`the hideable-house walker of the sameness pools (base ${BASE})`, async
     expect(exemptionFaults(EXEMPT, readRel)).toEqual([]);
   });
 
+  test('DM BY CONSTRUCTION: every dm-named hand table names its owner-only gate and its proof; every entry is one', () => {
+    expect(byConstructionFaults(readJson(HAND_REL).rows.map((/** @type {{ pool: string }} */ r) => r.pool), DM_BY_CONSTRUCTION, readRel)).toEqual([]);
+  });
+
   test('RULE 1: the reds equal the bank of the base exactly (a new red line reds; a cured one leaves the bank)', () => {
     const bank = readJson(EXISTING_REL).rows;
     expect(bank.length).toBeLessThanOrEqual(EXISTING_CEILING);
@@ -503,6 +536,22 @@ describe(`the hideable-house walker of the sameness pools (base ${BASE})`, async
       expect(exemptionFaults({ 'DS-X::a': { withheldBy: 'src/y.js :: hideIt' } }, read)).toHaveLength(1);
       expect(exemptionFaults({ 'DS-X::a': { withheldBy: 'src/x.js :: hideIt', provedBy: 'tests/x.test.js :: it shows' } }, read)).toHaveLength(1);
       expect(exemptionFaults({ 'DS-X::a': { withheldBy: 'src/x.js :: hideIt', provedBy: 'tests/x.test.js :: it hides' } }, read)).toEqual([]);
+    });
+
+    test('DM BY CONSTRUCTION: a dm-named table without its gate faults and reads as public; with gate and proof found, its lines are quiet', () => {
+      const ref = 'src/data/dailyLife/commonerResentmentsDm.js :: COMMONER_RESENTMENTS_DM';
+      const read = (/** @type {string} */ rel) => (rel === 'src/domain/dailyLife.js' ? "export function deriveDailyLife(r, { audience } = {}) { if (audience === 'owner') {} }"
+        : rel === 'tests/domain/dailyLifeDm.test.js' ? "test('absent on every toPublicSafe document', () => {})" : null);
+      expect(isDmNamed(ref)).toBe(true);
+      expect(isDmNamed('src/data/npcData.js :: NPC_WANTS')).toBe(false);
+      expect(byConstructionFaults([ref], {}, read)).toEqual([`${ref}: dm-named, no gate declared`]);
+      const value = { crime70: ['The smugglers pay no toll while honest carts queue.'] };
+      expect(handReds([{ ref, value }]).map((r) => r.why)).toEqual(['crime pool']);
+      const table = { [ref]: { gatedBy: 'src/domain/dailyLife.js :: deriveDailyLife', provedBy: 'tests/domain/dailyLifeDm.test.js :: absent on every toPublicSafe document' } };
+      expect(byConstructionFaults([ref], table, read)).toEqual([]);
+      expect(handReds([{ ref, value }], EXEMPT, true, table)).toEqual([]);
+      expect(byConstructionFaults([ref], { [ref]: { gatedBy: 'src/domain/dailyLife.js :: deriveDailyLifeDm', provedBy: table[ref].provedBy } }, read)).toHaveLength(1);
+      expect(byConstructionFaults(['src/data/npcData.js :: NPC_WANTS'], { 'src/data/npcData.js :: NPC_WANTS': table[ref] }, read)).toHaveLength(1);
     });
 
     test('PHASE 3: a new line in a hand-listed criminal key reds; dm-only, or in an exempt pool, it passes', () => {
