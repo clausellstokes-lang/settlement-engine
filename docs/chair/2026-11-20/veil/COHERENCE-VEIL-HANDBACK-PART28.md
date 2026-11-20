@@ -395,6 +395,31 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
     capture-none vid 2. On a shared read hiding the criminal houses: WITHHELD, RE-COMPOSED with the crime facts demoted, or
     SERVED AS STORED? One line a block, by execution (a helper launched 17:3x; `/var/tmp/v18/m27/r5q/`). The sameness seats
     write no new line needing a crime fact: these fourteen are this lane's and the reader's (R5, ruling 32's class).
+58. THE CHAIR, 18:21 (R3-TELL-2 unit 1, ea60f67fd, read whole), VERBATIM: "THE TELL'S GATE RESTATED; ruling 54 (c)'s premise
+    ("the switch-off page is always a member") is WITHDRAWN as false.
+    1. A MEMBER. read(T, s) is GATED only where s hides at least one house T holds (a page that hides nothing tells nothing:
+    allOpen is exempt). It is a member where its signature is that of read(T', s') for at least two distinct births T' of T's
+    size such that s' hides NOTHING T' holds. Your pool is PART A (T' holds no hideable house): right for every page that shows
+    no criminal house. PART B is owed for mixed settings: births that DO hold hideable houses, read under the settings that show
+    all they hold (no rejection, so cheap): 150 a size.
+    2. TWO GATES. One fine signature cannot be met at 300 births, and a coarse one alone would have hidden the tell you found
+    (an absent key inside a present block). GATE-1, FULL fineness, 0 of 92, every gated setting, both engines, Reveal off and
+    DM: EVERY SINGLE PART (each of the 87 fields, each family's count, each row-key state, each cross bit) holds a value seen in
+    at least two nothing-hidden births of the size. Controls 0 of 48 on it; a part where they are not is NAMED to me, never
+    dropped. GATE-2, the JOINT signature at the family level (your coarsening), calibrated by the controls: 0 of 48 at every
+    gated setting, else too fine; then 0 of 92. Own and off now; mixed when part B stands. REPORTED, never gated: the full fine
+    signature, hidden against controls, with the separating parts. If hidden exceeds controls beyond sampling (Fisher
+    p < 0.05): STOP, send me the parts.
+    3. THE CAUSES. (a) THE VEIL NEVER DELETES A KEY THAT NOTHING-HIDDEN PAGES ALWAYS CARRY: it serves the EMPTY form those pages
+    show ('' here); GATE-1 holds all 87 to it. AND a fifth cross bit now: the drag sentence's state against the SERVED market (a
+    no-market page with an empty drag sentence, where nothing-hidden no-market places print one, is a tell to anyone who knows
+    the generator). If '' fails that bit, R3's cure re-derives the sentence over what the read serves. (b) R4's parts (the
+    criminal-worded role, trace, ties, goals, memberships, cast) are STAGED: R3's gates run with them dropped AND LISTED RED as
+    R4's; gated at R4's second cure; E's gate holds everything. (c) THE POWER'S ROW, tier-free and toward withholding: a
+    criminal power's row is served only where no hidden house raised it AND the read still serves at least one criminal house;
+    otherwise withheld. Its count goes in the owner's paragraph; if it passes a handful at town and village, tell me.
+    4. BEFORE E, not now: both gates on every door that serves the veiled document (link, import, public) and on the old
+    stored shape."
 ## 2. The bytes (kept current)
 | File | sha256 |
 |---|---|
