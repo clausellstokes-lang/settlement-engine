@@ -83,3 +83,19 @@ exactly "Traders here are fighting over who may sell what, and over a say in how
 file as the kind's `withoutItsHouse` wording (`TENSION_CAUSES.guild_conflict.withoutItsHouse`), read BEFORE the ranks;
 the totality arm covers it. RED FIRST on hxd-hamlet-29's record (the one guildless guild quarrel of 900: measure
 1f7a6446a). The generator is not touched; the sides of that trouble are left as they are.
+
+## ADDENDUM 3, 16:32 UTC (the chair, 16:30): THE STOP RULED; ROUND 2 ON `lane/page-7-2026-11-20-causes`
+Accepted: the built projection, parity 0, the key on the place's name. NOW:
+1. DECLARED DRAW: every wording (and plain line, and withoutItsHouse) declares its `needs` atoms (implied by its cause's
+   predicate; true wherever it holds); `tensionCauseSentenceOf` draws through `src/domain/facts/drawDeclared.js` (read
+   only; call it), keyed as now. NO register row. presumedThings and presumptionClasses green.
+2. TWO ATOMS ALLOWED: `house:thieves_guild` and `house:smuggling`, answered by `facts/causeHouses.js`, APPENDED at the
+   end of their list in `factVocabulary.js`, nothing else in that file touched.
+3. THE HOME IS NAMED IN `factsOf` AND TAKES ITS `factLayers.js` ROW, in the layer of the houses it reads (hideable where it
+   reads a criminal or covert house); append the row. Quote the row and the two atom lines in your reply.
+4. THE {power} FILL: build ONE pure helper beside the sides table (new file; name it): exactly one power of the kind in the
+   document in hand gives its name as prose takes it (use the names lane's helper for prose naming: find it); else null.
+   tensionCauseSentenceOf uses it; merchants_rule then holds where it should. Red first: two economy powers → no hold.
+5. Re-run parity and the projection THROUGH THE BUILT FUNCTION; give mixed, three cities, and merchants_rule's rate.
+6. GREEN: tests/lint green but for ledgerCitationIntegrity (red at base) and the two censuses (PAGE-7's refreezes).
+(The cap's five third wordings come later as lines; leave the arrays as they are.)
