@@ -32,3 +32,25 @@ titles passes merged: 259 of 726 cells authored). For each town the family of it
 (east_asian). The unchanged towns are mostly the elders' family (73 of 134). NOT COUNTED: a sovereign's own seat (the
 count passes `sovereign: false`); the table is called by nobody on the line yet, so this is what the page WOULD
 print once the seat's lane wires it. Output: `titles-reach.out.txt`.
+
+## Added 2026-11-20 09:38 UTC: goal wordings against demand, and the four causes read in the code
+
+`goal-pools.mjs <line> 50` on the same 300 untouched towns: for each kind of goal (`goal.intent.<short|long>`:
+family/kind) the distinct wordings seen (names masked) against the most people of ONE town drawing that kind. SHORT
+GOALS: 57 kinds; 3 too thin for their busiest town (RANK/enter 12 wordings against 19 people; TIES/rival_enemy 8
+against 13; TIES/ally 5 against 10); repeats NO re-deal could avoid with today's wordings: 162 of 8,996 (1.8%),
+against the 17 to 23% of a city's people who repeat a wording today. So a draw without replacement inside one town
+removes about nine repeats in ten, and about 20 to 30 authored wordings the rest. A FLOOR: the wordings counted are
+those the 300 towns happened to draw; the true pools are at least as large. Output: `goal-pools.out.txt`.
+
+THE FOUR CAUSES, READ BY THE CHAIR FOR THE OWNER'S QUESTION OF 09:36 ("What are your solutions"):
+- fortune: `src/generators/economy/prosperity.js :: computeBaseProsperity`: a sum of the route's base, a TIER BONUS
+  (0, 0, 0, 1, 1, 2), a magic bonus scaled by tier, an income-diversity bonus (more sources at larger sizes), a
+  depth bonus against a tier expectation, threat and food: capped at Prosperous, where large places saturate.
+- standing: `src/generators/factionDynamics.js :: computePublicLegitimacy`: 50 + prosperity (-20 to +20, NOT scaled
+  by tier) + safety + defence and food (BOTH already scaled by tier, with the comment that a small place being
+  vulnerable "is NORMAL, not governance failure"); bands at 75, 60, 45, 30 (`src/data/bandLadders.js`).
+- named people: `src/domain/density/densityBands.js :: DENSITY_BANDS`: mass 1 to 2 at a thorp, 2 to 4 at a hamlet
+  ("the owner's historical scale"; a draft under signature).
+- the form of rule: projected from the strongest power (`src/domain/rulingPower.js :: GOVERNMENT_PREFERENCES` by
+  archetype and tier); it does not read the town's culture.
