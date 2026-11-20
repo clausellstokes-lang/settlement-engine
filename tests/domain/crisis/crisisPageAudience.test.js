@@ -30,8 +30,11 @@ const STRANGERS = [
   ["{ audience: 'Owner' }", [{ audience: 'Owner' }]], ["'owner' (not an options object)", ['owner']], ["{ audience: ['owner'] }", [{ audience: ['owner'] }]],
 ];
 const OWNER = ["{ audience: 'owner' }", [{ audience: TONIGHT_AUDIENCES.owner }]];
-/** FRAME-5 · P1B: the owner's page with its one owner-only clause cut (the outside hand's keeper, after the stored reason). */
-const withoutOwnerReach = (page) => page.map((x) => ({
+/**
+ * FRAME-5 · P1B: the owner's page with its owner-only clause cut (the outside hand's keeper, after the stored reason).
+ * FRAME-6 · P4A: and with its owner-only line cut (who the town owes: the debt crisis's section's `creditor` key).
+ */
+const withoutOwnerReach = (page) => page.map(({ creditor, ...x }) => ({
   ...x,
   absent: x.absent.map((a) => (a.role === 'instigator' && a.reason.startsWith(`${CAST_ABSENCES.outsideHand}; `) ? { ...a, reason: CAST_ABSENCES.outsideHand } : a)),
 }));
@@ -90,8 +93,9 @@ describe('U0: the crisis page is composed for an explicit reader', () => {
       if (inCrisis) expect(today.length, `${seed}: the page has its sections`).toBeGreaterThan(0);
       else { calm++; expect(today, `${seed}: a calm town has no page`).toEqual([]); }
       for (const [label, args] of STRANGERS) expect(composeCrisisPage(s, ...args), `${seed} ${label}: today's page`).toEqual(today);
-      // FRAME-5 · P1B: the owner's page is today's but for the one owner-only clause drawn behind the seam, the outside
-      // hand's keeper after the infiltration's absent instigator (tests/domain/crisis/crisisOutsideHand.test.js)
+      // FRAME-5 · P1B: the owner's page is today's but for the owner-only words drawn behind the seam, the outside
+      // hand's keeper after the infiltration's absent instigator (tests/domain/crisis/crisisOutsideHand.test.js), and
+      // (FRAME-6 · P4A) who the town owes on the debt crisis's section (tests/domain/crisis/crisisCreditorLine.test.js)
       expect(withoutOwnerReach(composeCrisisPage(s, ...OWNER[1])), `${seed} ${OWNER[0]}: today's page, less the owner's clause`).toEqual(today);
     });
     expectNoSeedFailures(failures, 'every reader of every town gets today\'s crisis page');

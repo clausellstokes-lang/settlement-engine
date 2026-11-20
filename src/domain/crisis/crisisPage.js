@@ -19,7 +19,7 @@
 
 import { crisisHookFor } from './crisisHooks.js';
 import { crisisContainer } from '../facts/crisisKind.js';
-import { CAST_ABSENCES, CRISIS_ROLE_LABEL, STAKE_REASONS, castReasonShown, effectiveCastOf } from './crisisCast.js';
+import { CAST_ABSENCES, CRISIS_ROLE_LABEL, RAISED_BY_CRISIS, STAKE_REASONS, castReasonShown, effectiveCastOf } from './crisisCast.js';
 import { LODGING_HOUSE } from '../tension/sideArchetypes.js';
 import { isOfficeStandIn } from '../dossier/seatHolder.js';
 import { composeTonightSheet, TONIGHT_AUDIENCES } from '../summary/tonightSheet.js';
@@ -123,6 +123,7 @@ export const CRISIS_PAGE_COPY = Object.freeze({
  * @property {CrisisPageLever[]} levers
  * @property {Array<{ id: string, label: string, text: string }>} seeFirst
  * @property {string} ifNothingIsDone
+ * @property {string} [creditor]  FRAME-6 · P4A: who the town owes, on a debt crisis's page, for the owner only; absent elsewhere
  *
  * @typedef {{ name?: unknown, id?: unknown }} PageNpc
  * @typedef {{ name?: unknown, id?: unknown }} PageInstitution
@@ -304,6 +305,89 @@ export function lodgingKeeperOf(s) {
   return keeper ? { keeper: str(keeper.name), house: houseOf(keeper) } : null;
 }
 
+/**
+ * WHO THE TOWN OWES (FRAME-6 · P4A; B7 §P4a, the chair's rulings of 2026-11-20, each vetoable by the owner): the closed set
+ * of the one line the OWNER's page adds to a debt crisis's section, never stored, never shown to another reader, outside
+ * the cast's role vocabulary (no cast row). `line` is keyed by the stake reason of the `RAISED_BY_CRISIS` row that marks the
+ * crisis's creditor power (`creditorOf`); a marked power with no sentence here draws nothing (the Crown Creditors'
+ * `holdsDebt`: the noble houses hold the crown's debt themselves, so "an outside lender, never named" would contradict the
+ * record). The lender is never named; `{face}` is the person holding rank 1 in the creditor power (named once, in full),
+ * `{title}` the record's own title for them. `tie` is the one clause an Outstanding Debt tie touching the face adds, in the
+ * tie's own direction (`from` owes `to`): `{other}` the other end, by title and name; `{face}` the face's second mention
+ * (the names rule: the pronoun of the face's own `gender` where the other end is not of that gender, else the face's
+ * title). CF9: each word is the record's ("Resident agent of the external creditor"; "it speaks for the creditor the town
+ * owes"; the tie's own debt).
+ */
+export const CRISIS_CREDITOR_LINE = Object.freeze({
+  line: Object.freeze({ creditorAgent: 'The town owes an outside lender, never named; {face}, {title}, speaks for them{tie}.' }),
+  tie: Object.freeze({ owedToFace: ', and {other} owes {face} besides', faceOwes: ', and {face} owes {other} besides' }),
+});
+
+/**
+ * @typedef {{ id?: unknown, name?: unknown, title?: unknown, gender?: unknown, memberships?: unknown }} CreditorNpc
+ * @typedef {{ faction?: unknown, name?: unknown, desc?: unknown }} CreditorPower
+ * @typedef {{ from?: unknown, to?: unknown, typeName?: unknown }} CreditorTie
+ */
+
+/**
+ * The creditor of a crisis, read from the record (FRAME-6 · P4A): the first of the entry's STORED stake rows whose power's
+ * `desc` opens with that crisis kind's `opens` text in `RAISED_BY_CRISIS` (the marker the power the crisis raised carries,
+ * whatever its display name), and only where `CRISIS_CREDITOR_LINE.line` holds a sentence for that row; its face, the
+ * first person of the roster holding rank 1 in that power, with a name and a title; and the first Outstanding Debt tie of
+ * the record touching the face whose other end is a named person of the roster. Rate 1 (facts of the record): no hash.
+ * Null where the record holds no such power or no such face.
+ * @param {PageSettlement} s @param {PageEntry} entry
+ * @returns {{ sentence: string, face: CreditorNpc, other: CreditorNpc | null, faceOwes: boolean } | null}
+ */
+function creditorOf(s, entry) {
+  const kind = str(entry.type);
+  const marks = RAISED_BY_CRISIS.filter(([k, , reason, how]) => k === kind && how === 'opens' && Object.hasOwn(CRISIS_CREDITOR_LINE.line, reason));
+  if (!marks.length) return null;
+  const powers = /** @type {CreditorPower[]} */ (Array.isArray(/** @type {{ powerStructure?: { factions?: unknown } }} */ (s).powerStructure?.factions) ? /** @type {{ powerStructure: { factions: CreditorPower[] } }} */ (s).powerStructure.factions : []);
+  const roster = /** @type {CreditorNpc[]} */ (Array.isArray(s.npcs) ? s.npcs : []).filter((n) => !!n && typeof n === 'object');
+  for (const k of entry.cast?.stakes || []) {
+    const power = powers.find((f) => !!f && (str(f.faction) || str(f.name)) === k.factionId);
+    const desc = power && typeof power.desc === 'string' ? power.desc : '';
+    const mark = marks.find(([, text]) => desc.startsWith(text));
+    if (!mark) continue;
+    const face = roster.find((n) => !!str(n.name) && !!str(n.title) && Array.isArray(n.memberships)
+      && n.memberships.some((m) => !!m && m.power === k.factionId && m.rank === 1));
+    if (!face) return null;
+    const fid = str(face.id) || str(face.name);
+    /** @param {unknown} id */
+    const personOf = (id) => roster.find((n) => (str(n.id) || str(n.name)) === str(id) && !!str(n.name)) || null;
+    const ties = /** @type {CreditorTie[]} */ (Array.isArray(/** @type {{ relationships?: unknown }} */ (s).relationships) ? /** @type {{ relationships: CreditorTie[] }} */ (s).relationships : []);
+    const tie = ties.find((t) => !!t && str(t.typeName) === 'Outstanding Debt' && (str(t.from) === fid || str(t.to) === fid)
+      && !!personOf(str(t.from) === fid ? t.to : t.from));
+    const faceOwes = !!tie && str(tie.from) === fid;
+    return { sentence: CRISIS_CREDITOR_LINE.line[/** @type {keyof typeof CRISIS_CREDITOR_LINE.line} */ (mark[2])], face, other: tie ? personOf(faceOwes ? tie.to : tie.from) : null, faceOwes };
+  }
+  return null;
+}
+
+/**
+ * The owner's creditor line of one section (FRAME-6 · P4A), or '' where the record does not hold it. The fixed sentence is
+ * spoken with the place's own noun BEFORE the record's names fill it, so no name is re-spoken.
+ * @param {PageSettlement} s @param {PageEntry} entry @param {(text: string) => string} speak
+ * @returns {string}
+ */
+function creditorLineOf(s, entry, speak) {
+  const c = creditorOf(s, entry);
+  if (!c) return '';
+  const gender = str(c.face.gender).toLowerCase();
+  const other = c.other;
+  /** @param {CreditorNpc} n */
+  const titled = (n) => (str(n.title) ? `${str(n.title)} ${str(n.name)}` : str(n.name));
+  // the face's second mention: its own pronoun where the other end is not of its gender, else its title
+  const pronoun = gender === 'female' ? (c.faceOwes ? 'she' : 'her') : gender === 'male' ? (c.faceOwes ? 'he' : 'him') : '';
+  const again = pronoun && other && str(other.gender).toLowerCase() !== gender ? pronoun : str(c.face.title);
+  const tie = other ? (c.faceOwes ? CRISIS_CREDITOR_LINE.tie.faceOwes : CRISIS_CREDITOR_LINE.tie.owedToFace) : '';
+  /** @type {Record<string, string>} */
+  const slots = { face: str(c.face.name), title: str(c.face.title) };
+  const head = speak(c.sentence).replace(/\{(face|title)\}/g, (_, k) => slots[k]);
+  return head.replace('{tie}', () => tie.replace(/\{(other|face)\}/g, (_, k) => (k === 'other' && other ? titled(other) : again)));
+}
+
 /** @typedef {import('../summary/tonightSheet.js').TonightOptions} CrisisPageOptions */
 
 /**
@@ -323,9 +407,10 @@ export function crisisPageForOwner(options) {
  * Compose the whole page: one section per active crisis, worst first.
  *
  * THE AUDIENCE (FRAME-4 · U0): every production caller says who reads the page (`{ audience }`, the closed set of
- * `crisisPageForOwner`). Owner-only content is composed only where `forOwner`: the one line drawn there (FRAME-5 · P1B) is
- * the outside hand's keeper, after the infiltration's absent instigator (`CRISIS_ABSENCE_REACH`); every other reader gets
- * today's page, byte for byte. The sheet's facts the page reads
+ * `crisisPageForOwner`). Owner-only content is composed only where `forOwner`: the lines drawn there are the outside hand's
+ * keeper, after the infiltration's absent instigator (FRAME-5 · P1B, `CRISIS_ABSENCE_REACH`), and who the town owes, on the
+ * debt crisis's section (FRAME-6 · P4A, `CRISIS_CREDITOR_LINE`, the section's `creditor`); every other reader gets today's
+ * page, byte for byte. The sheet's facts the page reads
  * are composed for the same reader (the sheet fails closed too; its facts are the same for every reader).
  * @param {PageSettlement | null | undefined} settlement
  * @param {CrisisPageOptions | null} [options]
@@ -408,6 +493,10 @@ export function composeCrisisPage(settlement, options) {
       seeFirst: (entry.cast?.playersSeeFirst || []).flatMap((id) => facts.filter((f) => f.id === id).map((f) => ({ id: f.id, label: f.label, text: f.text }))),
       ifNothingIsDone: str(entry.viabilityNote),
     };
+    // FRAME-6 · P4A (owner-only, behind U0's seam): who the town owes, on the debt crisis's page; the key is added only
+    // where the line is drawn, so every other page and every other reader's page is today's, byte for byte.
+    const creditor = forOwner ? creditorLineOf(s, entry, speak) : '';
+    if (creditor) section.creditor = creditor;
     return { section, rank: entry.cast?.rank || Number.MAX_SAFE_INTEGER };
   });
   return sections
