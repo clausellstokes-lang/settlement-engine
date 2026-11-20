@@ -1,4 +1,4 @@
-# FORTUNE-2 hand-back (kept current; last written 2026-11-20 15:31:16 UTC by `date -u`)
+# FORTUNE-2 hand-back (HANDED OVER to FORTUNE-3; last written 2026-11-20 15:53:59 UTC by `date -u`)
 
 For a successor (FORTUNE-3): this file and the briefs (`briefs/COMMON.md`, `U2.md` to `U4.md`) are all you need.
 Lane branch `lane/fortune-2-2026-11-20` (taken at 57a79cc2d, FORTUNE-1's hand-over). The chair is
@@ -32,12 +32,12 @@ at most 300 words, with your count (the chair reads the true one; your own runs 
 |---|---|---|---|
 | briefs corrected for FORTUNE-2 | DONE | lane/fortune-2-2026-11-20 | 1b050c590, b079b6a89 |
 | U1 law leaf, dark | MERGED, GREEN (chair accepted 13:17) | merge 2daa80771 of bc3c5cc8e; censuses re-taken 4822cff0b | pushed |
-| U2 fortune | MERGED (red re-run 7 failed/9 passed on 4822cff0b); gates running at b21a3a29d | merge 6279d0433 of c48db76b0+2c6835758 | pushed with the lane |
-| U3 standing + play-time guard | MERGED (red re-run 10 failed/24 passed on 4822cff0b); gates running at b21a3a29d; then send "factionDynamics released at <commit>" | merge 8ec9782f6 of df9e4c749 | pushed with the lane |
+| U2 fortune | MERGED, GREEN (sent "U2/U3 GREEN bb6b4257a") | merge 6279d0433 of c48db76b0+2c6835758 | pushed |
+| U3 standing + play-time guard | MERGED, GREEN; "factionDynamics released at bb6b4257a" SENT | merge 8ec9782f6 of df9e4c749 | pushed |
 | registers after U2+U3 | tuning inventory e5e48cd81 (the chair's ruling 5 done); lighting b21a3a29d (3710 files, 475 parked); wiring unchanged | — | — |
 | readerShapeResolver 260>256 | ANSWERED: the gate's long TMPDIR (see section 3); not U1's, not the line's | — | — |
 | U5 merits of rule (measure + propose) | APPROVED by the chair 15:30 UTC under seven conditions (section 6, verbatim); BUILT BY FORTUNE-3 after the hand-over | pushed as lane/fortune-2-2026-11-20-u5-wip (64db7ba3d on 4951522fd) | U5-PROPOSAL.md there |
-| U4 FS7 | after U2+U3 and the line's merge | lane/fortune-2-u4-2026-11-20 | — |
+| U4 FS7 | NEXT for FORTUNE-3: first merge the working line's 43ab0f5eb into the lane (ruling 6), then cut U4 | lane/fortune-2-u4-2026-11-20 | — |
 | re-measure forced on; owner's page re-check; confinement; final hand-back; "FORTUNE <commit>" | after U4 | — | — |
 
 The chair, 13:31 UTC (usage warning): nothing stays only in a container. Every builder branch is pushed as
@@ -71,6 +71,33 @@ tests/property/dmLayerGoldenIsolation (A7). tests/lint whole was 220/220 green a
   663fe111…, census 882694dc… both sides.
 - After the build, the forced-on arm on the REAL law: `measure.mjs` must set `_fortuneLawVersion: 2` AFTER `birthConfig`
   (owed with the re-measure); then re-check every figure on `FOR-THE-OWNER.md`: if one moves, tell the chair FIRST.
+
+## 4a. The gates at the U2/U3 tip (EXECUTED, default TMPDIR; tree b21a3a29d = bb6b4257a's source)
+
+tests/lint whole 220/220 (3271 tests); validate:tuning-bands, typecheck:ratchet 167/167, typecheck:domain:strict
+1113/1113, lint 0 errors, wiring-census --check: green. Governing (85 files naming prosperity, factionDynamics,
+computePublicLegitimacy, rulingStructure, fortuneLaw): 80 pass; 5 red, the SAME titles red at 4822cff0b (diffed
+identical), the line's stored fingerprints: worldFactRederive, pipelinePinnedChoosers, powerEconomyFreshness,
+espionageDormancyFence, generatorGoldenMaster. Confinement 0c9069489 -> bb6b4257a: 525/525 and 720/720 identical,
+sha256 golden 663fe111…, census 882694dc… on all three trees (0c9069489, 4822cff0b, bb6b4257a).
+
+## 4b. What FORTUNE-3 does, in order (the seat's prompt's list, from here)
+
+1. Merge the working line (43ab0f5eb or its newer tip, as the chair says) into the lane; re-take every register keyed on
+   a shared file by its own door on the merged tree (proposal section 14); the lighting and wiring censuses.
+2. U4 (FS7, `briefs/U4.md`, with the chair's rulings of 11:52 and 12:01 in it): one builder; cures under law 2 only.
+3. U5 (section 6, the chair's seven conditions): merge `lane/fortune-2-2026-11-20-u5-wip` (docs and instruments) first;
+   condition 3's census of band readers and the `reBand` check come BEFORE any build; condition 6's sentences go to the
+   chair first.
+4. The measure re-taken on the BUILT rule forced on (`measure.mjs` sets `_fortuneLawVersion: 2` AFTER `birthConfig`:
+   the owed one-line change), and `FOR-THE-OWNER.md` re-checked: if a figure moves, tell the chair FIRST with before
+   and after.
+5. The final confinement (0c9069489 -> the tip, 525 and 720 equal) and `tests/lint` whole green by its count line at the
+   last commit; the hand-back; "FORTUNE <commit>". THE FORTUNE LAW IS NEVER LIT BEFORE THE SEAT'S LAW (the leaf's header
+   says so).
+
+Builder worktrees of FORTUNE-2 (`scratchpad/wt-u2`, `wt-u3`, `wt-u5`, `wt-red`) live only in FORTUNE-2's container;
+everything in them is pushed (`-u2-wip`, `-u3-wip`, `-u5-wip`) or merged.
 
 ## 5. Executed vs plausible
 
