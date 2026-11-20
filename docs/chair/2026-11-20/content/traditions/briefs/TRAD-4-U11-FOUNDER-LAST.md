@@ -34,3 +34,12 @@ reader moved 0.
 Your arms; every test file naming `traditionDescriptionTable` or `traditionDescription`; `tests/lint` WHOLE (the
 lighting census may stay red by count for TRAD-4); `npm run typecheck:ratchet`, `npm run typecheck:domain:strict`,
 `npm run lint`.
+
+## ADDENDUM — A SECOND, SEPARATE COMMIT: THE KERNEL'S MIXED PICK (the chair, 17:18 and 17:32 UTC)
+`src/kernel/proseHash.js :: pickVariantMixed` is on this lane (cherry-picked `bd42d63c7` as `e32c9b27e`): the same FNV hash,
+then a 32-bit finalizer before the modulo; the same contract. In `src/domain/traditions/traditionDescription.js` replace
+`pickVariant` by `pickVariantMixed` at the leaf's pick (the one `draw` and the rotation's start in `drawTurn`: the SAME key,
+so the rotation's start stays the pick). Its own commit, AFTER unit 11's frames commit (one cause per commit). Files: that
+leaf only, plus any test whose pinned text moves because of it (name each, before → after). Measure on the 432: the feast
+pool's "A common feast" before refusals (171 of 309 at unit 6; the chair expects toward a quarter), descriptions moved
+(owner, reader), and the 0-of-432 repeated-sentence bar still held.
