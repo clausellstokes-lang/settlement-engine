@@ -386,6 +386,22 @@ parts of the whole check (at the close).
   shared page; the mark feeds no figure a visitor could recompute; the security reader tests it. TIME: inside work
   already ordered; the guess does not move.
 
+- **2026-11-20, about 06:20 UTC, THE OWNER (verbatim, the whole message):** "Lastly for the traditions card can you give
+  appropriate descriptions per tradition that draws from coherently the history, power, economy, institutions, etc?"
+  ANSWERED IN FULL THE SAME TURN, READ IN THE CODE FIRST: yes. TODAY (`src/domain/traditions/genesis.js`,
+  `src/components/new/tabs/TraditionsTab.jsx`): a town holds three founding traditions drawn from its seed, land,
+  culture and trade; the card shows a name, its element and when it is kept; NO DESCRIPTION; nothing ties a
+  tradition to the town's history, powers, economy or houses (16 elements, 6 acts). WHAT THE CHAIR PROPOSED: two or
+  three plain sentences under each: what is done; who keeps it (a house or group the town has); where it comes from
+  (an event of the town's own history, where one fits); who pays or presides. A HAND-WRITTEN EXAMPLE was given and
+  labelled as such, from facts the calm sample town records (parish churches, burial grounds, a siege 29 years ago).
+  THREE RULES SAID: nothing invented (a link only between a tradition's theme and a fact of the same kind; where
+  nothing fits the description is shorter; the withdrawn history lines named as the lesson); the traditions
+  themselves do not change and nothing new is saved (worked out when the page is drawn); safe on shared pages (a
+  visitor's page builds it from what that page is given). THE OWNER SEES TWO DOZEN REAL SAMPLES BEFORE IT IS BUILT.
+  TIMING SAID: treated as before the deploy, on its own seat, in parallel, off the longest job; "say after if you
+  would rather it wait".
+
 ## 2. Rulings of this chair (each vetoable by the owner)
 
 - **SV1 (00:05 UTC, 2026-11-20): THE VEIL'S LIST ON THREE MACHINES.** VEIL-19 owns 212, its rollback and the twin's
@@ -1898,3 +1914,18 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   **"BUILD U1, U2, U3 NOW"** (the law, the one table and the kind, the holder: disjoint from the content lanes); U4 and
   after wait for "BUILD-ON at <commit>" once the names are on the line. SEAT-1 is at about 290,000 tokens: **SEAT-2 is
   seated beside it** (`prompts/SEAT-2.txt`) and takes the lane at a clean boundary.
+- 06:19 UTC · **THE OWNER ASKED FOR DESCRIPTIONS ON THE TRADITIONS CARD; RULED (CTR1 to CTR8) AND A SEAT WRITTEN.** Section 1 holds
+  the words and the answer. THE RULINGS (in full in `prompts/TRAD-1.txt`): CTR1 two or three plain sentences per
+  tradition from the town's own record (what is done; who keeps it; where it comes from; who pays or presides), a
+  clause only where the record holds a fitting fact; CTR2 NOTHING INVENTED: links only through a closed authored
+  table of what fits what; a sentence asserts a cause only where the table marks the pairing as one the record can
+  carry; where nothing fits the description is shorter; CTR3 the traditions themselves do not change (`genesis.js`
+  not edited); CTR4 derived at render, nothing stored, one leaf; CTR5 the audience is an explicit argument and a
+  reader who is not the owner gets a description composed from the served document alone, proven born; CTR6 level
+  words, a closed set of frames held by a walker; CTR7 the house's laws for prose and the names rule; CTR8 the
+  measure the owner reads, sameness included. **TRAD-1** (the middle tier at high effort; `lane/trad-2026-11-20` from
+  the line; A PROPOSAL FIRST with TWENTY-FOUR DESCRIPTIONS as plain text for the owner, the short forms in their true
+  proportion). SEAT-2 is session_019yED1NCD6QogcvC9xk79dP (seated 06:16 UTC beside SEAT-1).
+  THE DEPLOY NOW WAITS ON: the share veil (stages 3 to 7 and FINAL); the names; the session sheet's frame; who rules
+  (two trains, the second card, the front, titles by size and culture); the traditions' descriptions; then the close
+  (213, the joined tree, the owner's signatures and yes).
