@@ -1,5 +1,9 @@
 # WANT-LINES-3 · the wants' tranche, file 3 of 7: 60 new DRAWN lines
 
+> **READ BY THE CHAIR 17:03 UTC:** of this file's 60 lines, 53 approved and 7 reworded by the chair, word for word, as they
+> now stand (2.1, 2.2, 2.4, 5.4, 7.3, 13.2, 22.1; numbered section.line). TIES/debtor 15.1 and 17.1 hung on a fact, settled
+> below them: the cell is drawn only at the debtor's end, so both stand.
+
 GOALS-3 · builder 9 · 2026-11-20. Docs only, for the chair's reading and the owner's veto. The cells and counts are lines
 121–180 of the build order in [`WANTS-PROPOSAL.md`](WANTS-PROPOSAL.md) (`wants-by-pool.out.txt`, "THE BUILD ORDER", file
 3). Each line is APPENDED to the END of its cell in `GOAL_FAMILY_LINES`, after files 1 and 2 (a drawn line, never the
@@ -49,10 +53,10 @@ Existing (two of six, verbatim):
 - Be given the secrets of {power} to keep, as well as {power|its|their} errands to run.
 
 New:
-1. Make {power} loved by the ordinary people here, not only obeyed.
-2. Be counted, at the end, among the most honest members {power} ever had.
+1. Make {power} well loved by the ordinary people here.
+2. Be counted, at the end, among the most trusted members {power} ever had.
 3. Leave {power} better at what {power|it does|they do} than when they joined.
-4. Serve {power} all their life without once taking a bribe.
+4. Serve {power} all their life, and never be the one who let {power|it|them} down.
 5. Spread the reach of {power} into one part of this place where {power|it has|they have} none.
 6. Be the member the young ones in {power} look up to.
 
@@ -98,7 +102,7 @@ New:
 1. Make sure {other} is never trusted with anything that matters here.
 2. Be first, all their life, wherever {other} wants to be first.
 3. Never lose a thing to {other}, as long as they live.
-4. Win so many friends that {other} can never turn the town against them.
+4. Win so many friends that {other} can never turn this place against them.
 
 ### 6 · INSTITUTION/solvency/short · +3 (cell 13 → 16)
 Holders: whoever answers for a house's money (whisper broker, midwife, outfitter, senior craft-guild master, banker,
@@ -124,7 +128,7 @@ Existing (two of six, verbatim):
 New:
 1. Pay every hand at {house} a share when the year is good.
 2. Always know to the last coin the money going in and out of {house}.
-3. Make {house} rich enough to help the town in a hard year.
+3. Make {house} rich enough to help this place in a hard year.
 
 ### 8 · TIES/ally/short · +3 (cell 11 → 14)
 Holders: either end of an alliance, a respect or a working patron-and-client tie (chief magistrate, scroll scribe,
@@ -196,7 +200,7 @@ Existing (two of six, verbatim):
 
 New:
 1. Win {house} the right to take on new hands without leave from anyone.
-2. Win {house} the right to set the prices for the work done there.
+2. Win {house} the right to set the terms for the work done there.
 
 ### 14 · TIES/mentor_student/long · +1 (cell 6 → 7)
 Holders: either end of a mentor-and-successor tie (guild archmage, scroll scribe, beast master, master fishmonger, mine
@@ -238,6 +242,18 @@ Existing (two of five, verbatim):
 
 New:
 1. Ask {other} for more time this season, and get it in writing.
+
+**THE FACT (the chair's 17:03 UTC question on 15.1 and 17.1): the TIES/debtor cell is drawn ONLY at the debtor's end, so both
+lines stand.** A TIES call takes its sub-kind from the tie's type AND the card's end of it,
+`src/generators/people/goals.js :: familyCandidates`:
+`const kind = rec(rec(/** @type {Rec} */ (TIE_TYPE_TO_GOAL_SUBKIND))[str(t.type)])[end];`
+and the one tie type that yields `debtor` yields it at the `from` end only, the other end taking `creditor`,
+`src/data/people/goalFamilies.js :: TIE_TYPE_TO_GOAL_SUBKIND`:
+`debtor_creditor: Object.freeze({ from: 'debtor', to: 'creditor' }),`
+(no other type maps to `debtor`; the post-pass `refuseWantsBesideSecrets` rebuilds candidates through the same
+`familyCandidates`). That `from` is the end that owes is the mapping's own reading ("the old-debt prose names the `from`
+card as the one who owes; PLAUSIBLE, car 4 confirms", the same file's comment above the map): if that reading ever
+falls, so do these lines, and the chair's replacements are ready.
 
 ### 18 · TIES/mentor_student/short · +1 (cell 6 → 7)
 Holders: either end (dean, lord, company captain, sage, scroll scribe, mine captain, miller).
@@ -289,7 +305,7 @@ Existing (two of four, verbatim):
 - Put someone who slighted them back in their place.
 
 New:
-1. Be put in charge of something this season, however small, and run it their way.
+1. Take charge of one new thing this season, however small, and run it their way.
 
 ### 23 · SUPPLY/expansion/long · +1 (cell 6 → 7)
 Holders: whoever runs a house whose work runs well (house boss, coaching-inn keeper, brewer, college master, miller,

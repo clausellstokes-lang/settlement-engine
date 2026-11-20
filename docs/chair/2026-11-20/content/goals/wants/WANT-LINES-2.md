@@ -1,5 +1,8 @@
 # WANT-LINES-2 · the wants' tranche, file 2 of 7: 60 new DRAWN lines
 
+> **READ BY THE CHAIR 17:03 UTC:** of this file's 60 lines, 51 approved and 9 reworded by the chair, word for word, as they
+> now stand (1.9, 2.4, 3.5, 4.2, 4.3, 5.1, 6.2, 7.3, 9.1; numbered section.line).
+
 GOALS-3 · builder 9 · 2026-11-20. Docs only, for the chair's reading and the owner's veto. The cells and counts are lines
 61–120 of the build order in [`WANTS-PROPOSAL.md`](WANTS-PROPOSAL.md) (`wants-by-pool.out.txt`, "THE BUILD ORDER", file
 2). Each line is APPENDED to the END of its cell in `GOAL_FAMILY_LINES`, after file 1's (a drawn line, never the
@@ -40,7 +43,7 @@ New:
 6. Keep a written account of every move {other} makes against them, ready for the day it is needed.
 7. Never owe {other} anything, not a coin and not a favour.
 8. Never sit at the same table as {other} again.
-9. Be the one {other} fears, instead of the one who fears {other}.
+9. Be the one {other} fears, and never the one who fears {other}.
 10. Grow stronger with every year that {other} stands against them.
 
 ### 2 · RANK/enter/short · +7 (cell 21 → 28)
@@ -55,7 +58,7 @@ New:
 1. Be at hand for every call to the members of {power} this season, without once failing to come.
 2. Help gather what is owed to {power} this season, without making enemies doing it.
 3. Learn the old quarrels inside {power} this season, before they stumble into one.
-4. Win over one member of {power} who has spoken against them.
+4. Win over one member of {power} who has no reason yet to speak for them.
 5. Set down one matter plainly in writing for those who lead {power}, and have it acted on.
 6. Get to know every member of {power} by name before the season ends.
 7. Raise a sum for {power} this season among friends of their own.
@@ -72,7 +75,7 @@ New:
 2. Make {power} answer to {power|its|their} ordinary members as well as to those who lead {power|it|them}.
 3. See {power} hold together through their lifetime, without a split.
 4. Rise in {power} without ever stepping on a friend to do it.
-5. Win {power} a name for honest dealing, and keep it.
+5. Win {power} a name for keeping {power|its|their} word, and keep it.
 6. Leave {power} one lasting gift of their own: a hall, a fund or a custom.
 7. Keep their place in {power} through every change of those who lead {power|it|them}.
 
@@ -86,8 +89,14 @@ Existing (two of six, verbatim):
 
 New:
 1. See that every coin taken at {house} this season is written down the same day.
-2. Raise the price of the work at {house} this season, and keep every customer.
-3. Get paid on delivery for everything that leaves {house} this season.
+2. Bring more money into {house} this season without losing anyone who pays now.
+3. Get paid at once, this season, for everything {house} does or sells.
+
+> **For the chair (builder 9): 4.3 as reworded fails the shape law the test enforces.** `tests/data/goalFamilies.test.js ::
+> shapeViolations` reds `"{house} does" must agree in number` ({house} may be plural, "the mills does"; the slot contract in
+> `goalFamilies.js`'s header: a house slot is never the subject of a verb that must agree). The chair's wording is kept here word
+> for word; a lawful form of the same want, for the chair's choice: "Get paid at once, this season, for all the work done or
+> sold at {house}." The build cannot land 4.3 as worded without that test going red.
 4. Count everything held at {house} this season, and find out whether anything has gone missing.
 5. Turn away one piece of work this season that would cost {house} more than it pays.
 
@@ -100,7 +109,7 @@ Existing (two of six, verbatim):
 - Leave more money at {house} than there was when they took charge.
 
 New:
-1. Never again go to anyone outside for money to keep {house} going.
+1. Never have to go to anyone outside for money to keep {house} going.
 2. Train someone at {house} to keep the money as carefully as they do.
 3. Spread the money of {house} over more than one kind of work, so one bad year cannot sink the house.
 4. Keep {house} in hands they trust, with no outsider owed a share of it.
@@ -115,7 +124,7 @@ Existing (two of five, verbatim):
 
 New:
 1. Make sure {other} knows they are being watched this season.
-2. Get those who govern here to look hard at the dealings of {other} this season.
+2. Get people who matter here to look hard at the dealings of {other} this season.
 3. Learn who {other} trusts most, and how far.
 4. Make sure {other} gets no credit for anything done here this season.
 
@@ -130,7 +139,7 @@ Existing (two of six, verbatim):
 New:
 1. Gather into one safe place every paper that touches the rights of {house}.
 2. Get those who govern to promise, before witnesses, to leave the rights of {house} alone this season.
-3. Learn which of those who govern would gladly cut the rights of {house}, and why.
+3. Learn whether any of those who govern would gladly cut the rights of {house}, and why.
 
 ### 8 · TIES/ally/short · +3 (cell 8 → 11)
 Holders: either end of an alliance, a respect or a working patron-and-client tie (chief magistrate, scroll scribe,
@@ -153,7 +162,7 @@ Existing (two of five, verbatim):
 - Turn the bargain with {other} into real trust over the years.
 
 New:
-1. Grow old as friends with {other}, whatever happens to their work.
+1. Stay friends with {other} to the end of their days, whatever happens to their work.
 2. Never let anyone come between them and {other}.
 3. Be the first person {other} turns to, and turn to {other} first in return.
 
