@@ -557,11 +557,32 @@ describe('(11) Step 1′: the transfer\'s sentences are read through ONE matcher
     expect(runs).toBe(RULING_POWER_CAUSES.length * 2);
   });
 
-  test('the list is frozen, and holds the edge sentence once and the transfer\'s own line in its three wordings', () => {
+  test('U5: the real transferRulingPower UNDER THE SEAT LAW (the form kept), on every cause with and without the demotion, writes only wordings the list holds', () => {
+    let runs = 0;
+    for (const cause of RULING_POWER_CAUSES) {
+      for (const demoteIncumbent of [false, true]) {
+        const s = transfer({ ...civicTown(), config: { [SEAT_LAW_CONFIG_KEY]: HOLDER_SEAT_LAW_VERSION } }, 'Merchant Guilds', { cause, demoteIncumbent });
+        const form = s.powerStructure.government;
+        const label = `law, ${cause}, demoteIncumbent ${demoteIncumbent}`;
+        expect(form, label).toBe('Town Council'); // kept: a civic seat taken by its merchants
+        expect(transferSentenceSays(edgeOf(s, 'Merchant Guilds').narrative, 'edge', 'Merchant Guilds', form), `${label}: the edge`).toBe(true);
+        expect(transferSentenceSays(s.powerStructure.recentConflict, 'conflict', 'Merchant Guilds', form), `${label}: recentConflict`).toBe(true);
+        expect(transferSentenceSays(s.powerStructure.recentConflict, 'conflict', 'Noble Houses', form), label).toBe(false);
+        expect(holderOf(s, OWNER)).toMatchObject({ rule: 'R1', holderName: 'Merchant Guilds' });
+        runs += 1;
+      }
+    }
+    expect(runs).toBe(RULING_POWER_CAUSES.length * 2);
+  });
+
+  test('the list is frozen, and holds the edge sentence once and the transfer\'s own line in its five wordings (U5 added the kept form\'s two)', () => {
     expect(Object.isFrozen(TRANSFER_WORDINGS)).toBe(true);
     expect(TRANSFER_WORDINGS.every((w) => Object.isFrozen(w))).toBe(true);
     expect(TRANSFER_WORDINGS.filter((w) => w.sentence === 'edge').length).toBe(1);
-    expect(TRANSFER_WORDINGS.filter((w) => w.sentence === 'conflict').length).toBe(3);
+    expect(TRANSFER_WORDINGS.filter((w) => w.sentence === 'conflict').length).toBe(5);
+    // the chair's cure (1), 16:43Z: the retired edge's ONE fixed wording, a class of its own, never an 'edge' row
+    expect(TRANSFER_WORDINGS.filter((w) => w.sentence === 'retired').length).toBe(1);
+    expect(TRANSFER_WORDINGS.length).toBe(7);
   });
 
   /** A made-up new wording, put FIRST in the list (a later rewording, added beside the frozen ones). */
