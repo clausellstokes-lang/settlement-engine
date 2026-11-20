@@ -139,3 +139,9 @@ name is on the event card's floor: confirm on veil-22); the search index (unit 2
 
 ## Updated
 (append below at each later commit, with `date -u`)
+
+- 2026-11-20 10:41 UTC — at `edaec9c85` (unit 1c picked): `tests/lint` whole 220/221 files, 3283/3284 tests; the one red was the
+  lighting census (titles 31274 → 31277, suiteTitles 8660 → 8661: unit 1c's three test titles; files 3710 unchanged),
+  re-taken by its door in the next commit; plain run 34/34. The fence test did not time out on this run. Unit 2 had not
+  returned at the hand-over: the chair's order is that TRAD-2 does not read it; it is pushed as
+  `lane/trad-2-2026-11-20-u2` when it returns, for the fresh owner to read cold.
