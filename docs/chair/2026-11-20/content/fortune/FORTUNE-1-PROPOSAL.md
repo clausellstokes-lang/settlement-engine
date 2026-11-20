@@ -519,3 +519,47 @@ merged tree by whoever lands second. FS2's unit asks the chair first ("factionDy
 
 The seat's U1 already moved `densityCreateBoundary.js`'s rows and the walker `tests/lint/densityCreateBoundary.walker.test.js`
 on its own branch; this lane's U1 adds one more row to each at the same lines (12.2).
+
+## 15. 5.1's second column (the chair's ruling 2 of 10:33Z; MEASURED, no build)
+
+The question: the smallest change of ONE figure of the new law's standing terms (not a cut) by which a calm place that
+is Prosperous for its size AND holds one further earned merit (a defence above its size's usual range, or safe streets)
+opens Endorsed at untouched settings.
+
+Worked first, then measured (`FORTUNE_PROSPEROUS`, `FORTUNE_WEALTHY` in `instruments/rule.mjs`): Prosperous and Safe
+streets is already 50 + 15 + 15 = 80 under the proposal's figures; the binding case is one band of defence above the
+usual range, worth round(4 x the size's scale) = +1 at a thorp, +2 at a hamlet and a village, +3 at a town, +4 at a city
+and a metropolis. So no value of the defence figure can carry a thorp (its weight 0.3 caps it at +3), and the only
+single figure that carries every size is THE PROSPEROUS POINTS: 15 -> 24 (75 - 50 - 1). At 21 it carries only cities
+and metropolises; at untouched settings that opened none.
+
+Calm standing rows, Legitimacy Crisis / Contested / Tolerated / Approved / Endorsed (EXECUTED, the proposal's rule with
+the one figure changed; 100 towns a size):
+
+```
+untouched (hxd)  proposal (15)           Prosperous 24                (24, and Wealthy 25 to keep its rank)
+thorp            4/11/56/29/0            4/11/56/26/3                 4/11/56/26/3
+hamlet           5/17/42/36/0            5/17/42/36/0                 5/17/42/36/0
+village          0/14/49/37/0            0/14/49/37/0                 0/14/49/37/0
+town             0/6/66/29/0             0/6/66/27/1                  0/6/66/27/1
+city             0/8/64/27/0             0/8/53/38/0                  0/8/53/38/0
+metropolis       0/0/81/19/0             0/0/81/19/0                  0/0/81/19/0
+every dial (hxr)
+thorp            3/23/47/26/2            3/23/47/23/5                 3/23/47/23/5
+hamlet           2/19/22/49/8            2/19/22/47/10                2/19/22/44/14
+village          0/14/41/34/10           0/14/41/33/11                0/14/41/27/17
+town             1/19/30/26/23           1/17/32/25/25                1/17/32/12/38
+city             0/14/48/22/16           0/14/46/24/16                0/14/44/24/17
+metropolis       0/15/47/25/14           0/15/45/26/14                0/15/45/18/22
+```
+
+Every calm town that is Prosperous with a merit opens Endorsed at 24: 3 of 3 at untouched settings, 27 of 27 with every
+dial random (at 15: 0 of 3 and 22 of 27). FS4 HOLDS in every arm: only a positive term rises, so the Legitimacy Crisis
+and Contested columns are those of the proposal. THE FINDING THE OWNER SHOULD HAVE WITH IT: at untouched settings the
+merit itself is nearly absent (3 calm towns of 416 are Prosperous with any merit), so the figure opens Endorsed in under
+1% of calm towns there; it does not bring back a common top band. And 24 ranks Prosperous above Wealthy (20); keeping
+the ladder's order is a second figure (Wealthy 25, measured in the third column: it adds Endorsed wherever an economy
+dial makes a place Wealthy, town 25% -> 38%).
+
+THE LEAF IS SHAPED FOR IT: the new law's standing points (the prosperity table, the defence points and ranges) live in
+the law's one tuning table, so either value changes before the signature with no second unit.

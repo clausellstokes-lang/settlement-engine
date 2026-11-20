@@ -6,6 +6,7 @@
 //   FORTUNE_FLAT=1     FS1's flat development figure (0 = the variant without it: the world deflates)
 //   FORTUNE_FLOOR=1    FS4's calm floor (0 = without it)
 //   FORTUNE_DEF=range  FS2's defence term: `range` (the size's usual range of bands) or `point` (one usual band)
+//   FORTUNE_PROSPEROUS=15, FORTUNE_WEALTHY=20  the standing term's Prosperous and Wealthy points (the chair's second column, 5.1)
 //   FORTUNE_DEPTH=ratio FS1's depth term: `ratio` (the code's own x0.75/x1.3 against each size's measured median) or `quantile` (the size's p20/p80)
 const P = 'src/generators/economy/prosperity.js';
 const F = 'src/generators/factionDynamics.js';
@@ -13,6 +14,8 @@ const FLAT = Number(process.env.FORTUNE_FLAT ?? 1);
 const FLOOR = (process.env.FORTUNE_FLOOR ?? '1') !== '0';
 const DEF = process.env.FORTUNE_DEF ?? 'range';
 const DEPTH = process.env.FORTUNE_DEPTH ?? 'ratio';
+const PROSPEROUS = Number(process.env.FORTUNE_PROSPEROUS ?? 15);
+const WEALTHY = Number(process.env.FORTUNE_WEALTHY ?? 20);
 const REQUIRED_ECONOMY = String.raw`/subsistence farming|access to external mill|farmland|town granary|weekly market|city granari|market square|district markets|state granary|inns and taverns \(district\)/i`;
 
 export const PATCHES = [
@@ -81,4 +84,10 @@ export const PATCHES = [
   const dContrib = Math.round(Math.max(-10, Math.min(10, 4 * _defOff)) * defScale);
 `,
   },
+  // ── 5.1's second column (measure only): the standing term's Prosperous and Wealthy points ──
+  ...(PROSPEROUS !== 15 || WEALTHY !== 20 ? [{
+    id: 'second-column', modes: ['proto'], file: F,
+    find: "  'Prosperous': +15,\n  'Wealthy':    +20,\n",
+    replace: `  'Prosperous': ${PROSPEROUS},\n  'Wealthy':    ${WEALTHY},\n`,
+  }] : []),
 ];
