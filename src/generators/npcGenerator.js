@@ -605,7 +605,7 @@ export const generateCrimeLevel = (npc, npcIndex, summary, allNpcs, held = null)
         stakes: 'The silence feels like patience, and it is not forgiveness',
       },
       {
-        what: `Has been reading ${otherNpc.name}'s correspondence through an intermediary. Nothing damaging yet. But they keep looking`,
+        what: qualifiedPossessives(`Has been reading ${otherNpc.name}'s correspondence through an intermediary. Nothing damaging yet. But they keep looking`, [otherNpc]), // NAMES-3 (item 3 (d)): a qualified name's possessive opens its bracket
         stakes: 'The intermediary has recently started asking for more money',
       },
     ], { draw: pickRandom2, facts: () => factsOf({ npcs: allNpcs }), ctx: { npc: npcIndex }, key: `${getActiveRng()?.seed ?? ''}::npcGenerator:CRIME_KNOWLEDGE`, poolId: 'npcGenerator:CRIME_KNOWLEDGE', surface: 'npcs', drawKind: 'R', held: heldFrames, heldKey: (s) => frameOf(s.what) }).line; // MERGE-R2: REVIEW-INTAKE-4's held secrets refused before the draw
