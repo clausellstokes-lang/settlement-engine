@@ -638,6 +638,7 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
 - 21:22 the arms re-run: RED at 95f2ddfb8 2 of 3 fail (units 2 and 4b; unit 3 passes), GREEN at b3b533027 3 of 3; 212 at the
   cure `707822e6…01ae`, 211 unchanged (`/var/tmp/v18/out/v29/t3/`).
 - 21:25 PART 30 opened; the tell's gates on the cure (verify, then tell2.sh with template t29tpl = v27x211 + the cure's 212) running.
+- 21:26 A SLIP, SAID: PART 30's first commit (3142d9784) was made with `-c core.hooksPath=.husky`, which skipped the configured `.husky/_` pre-commit wrapper (lint-staged). Its two globs (`*.{js,jsx,mjs,cjs}`, `docs/implementation/**`) match none of the commit's seven files (docs .md/.txt), so nothing was skipped in effect; every later commit runs with the configured hooks.
 
 ## 7. THE JOIN (the chair's word in VEIL-25's prompt): what the join must re-prove on the joined document
 The working line (origin/lane/join-2026-11-14, at 0c906948 when this was written) and four content lanes ADD SERVED TEXT at
