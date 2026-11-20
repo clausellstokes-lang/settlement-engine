@@ -1145,3 +1145,27 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   explicitly. THE CHAIR'S PLAN FOR THE OWNER: 213's walker already reds on any new function left open and not on
   its list, so the deploy does not need default-deny; default-deny is a second lock, proposed as its own migration
   AFTER the deploy (the owner's decision: it changes how every later migration is written).
+- 03:48 UTC · **VEIL-V102 HANDED BACK "V10-2 cabdfaa69"** (its message of 03:40 UTC; `lane/veil-v102-2026-11-20`;
+  `docs/chair/2026-11-20/veil/v102/VEIL-V102-HANDBACK.md`). THE CURE (97e51d7f6), under VR34: `galleryVeil.js ::
+  curateModelFor` reads each eye across EVERY copy of a card by its id and a house's People eye by `npcHouseOf`
+  (true in both stored shapes); the criminal switch's list is the family met with the addresses the model offers
+  (`criminalVeilSwitch.js :: offeredAddressesOf`); a click drops stale family deltas on unoffered addresses. ITEM
+  0 (the chair's): B/C/D merged into its branch with no conflict (4b33d1617); the eight reds reproduced; **THE VEIL
+  IS IDEMPOTENT ON A SERVED COPY (72 of 72)**: the second pass differed only because the test's own second veil
+  withholds the criminal row on the show copy; (b) re-keyed (the served income row is the raw row without
+  `weight`, and none carries one); (c) re-keyed (the shares compared apart). THE CHAIR'S CONDITION: untouched
+  shares byte-identical base against tip, 96 of 96 (marked and unmarked, the gallery read and the link, both
+  shapes, DM off and on). RED TO GREEN: 18 failed to 30 passed; `tests/security` 158 files, 2,013 passed. THE
+  CHAIR'S READ: the cure sits inside its file list (`curateModelFor` alone in `galleryVeil.js`); the item-0 re-keys
+  read line by line (the first asserts more than before); THE SWITCH'S OWN TEST FILE WAS LARGELY REWRITTEN for the
+  new argument: flagged to the reader for weakening. To REVIEW-VEIL-11 for a cold read; to VEIL-21 to merge at a
+  stage boundary. Moves: the lighting census +1 file; one manifest row.
+  **VEIL-21: THE OBSERVED-SHAPE FINDINGS, A THIRD TIME (03:42 UTC):** the explained-writer row cannot be written
+  honestly either (the exemption table is in a hash-locked detector file; a row keys by "<key> on <shape>" and
+  would sweep 14 frozen rows; a writer must really write the key). The seat offered (A) three known reds on the
+  lane or (B) the governed rung now. **RULED: NEITHER YET; (C) CURE THE CAUSE IN THE CODE:** `importRederive.js`
+  hands the engine's derivers a config through the SAME door a born town's config comes through (the canonical
+  default; only `src/store/configSlice.js` DEFAULT_CONFIG writes `magicExists`), so every key the derivers read
+  exists by construction and the scanner sees the known writer; fidelity must hold. WHY NOT (A): a red walker
+  cannot ship when the lane joins the line. If the scanner still reds, the governed rung becomes its own unit on
+  the line before the close.
