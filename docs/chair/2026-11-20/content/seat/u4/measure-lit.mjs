@@ -20,9 +20,17 @@
  *                                        as the chair's joint-measure.mjs and measure-u4.mjs --force-law do), read as
  *                                        born. Pools: `default` and `presets` are measure-holder.mjs's (900, 960);
  *                                        `chair600` is the chair's (`{ ...DEFAULT_CONFIG, settType }`, hxd-<size>-0..99).
- *   report <rows dir> <out dir> <seat sha> <fortune sha> [--calibration]
+ *                                        MEASURE-VISITOR (builder BMV, SEAT-6, brief `../briefs/MEASURE-VISITOR.md`)
+ *                                        adds two: `visitor`, born EXACTLY as `store/settlementGenerateAction.js ::
+ *                                        generateSettlementAction` births a visitor who touches no setting (see
+ *                                        `visitorJob`), 100 a size, seeds visitor-<size>-0..99; and `cause`, the
+ *                                        `default` pool (same seeds) with `tradeRouteAccess: 'random_trade'` and
+ *                                        `monsterThreat: 'random_threat'` added and nothing else changed.
+ *   report <rows dir> <out dir> <seat sha> <fortune sha> <cal seat sha> <cal fortune sha> [--calibration]
  *                                        the tables, `measure-lit.{md,json}`. With --calibration: the calibration only
  *                                        (exit 0 PASS, 1 FAIL; on FAIL the two tables are written to the md and json).
+ *                                        The calibration reads MEASURE-LIT's own commits (arm `arm0-cal` on the cal
+ *                                        seat, `both-D-cal` on the cal seat merged with the cal fortune).
  *
  * The readings are the chair's (joint-measure.mjs, joint-report.mjs): calm = `!t.stress`; contest =
  * `rulingPowerCoup.js :: coupContenders` + `coupRiskLabel`; contested = risk Contested or Critical; protected =
@@ -145,10 +153,36 @@ async function birth(treeArg, arm, forceJson, poolsCsv, outPath) {
   const FORCE = JSON.parse(forceJson);
   await loadGenerationLawPayloads();
   const PRESETS = ARCHETYPES.map((a) => a.key).filter((k) => k !== 'balanced');
+  // ── THE VISITOR (MEASURE-VISITOR) ── `generateSettlementAction`'s birth for a visitor who touches no setting:
+  //   baseConfig = canCustomize ? storedConfig : { ...DEFAULT_CONFIG, settType: ANON_FORGE_SIZE }   (storedConfig at
+  //   rest is `{ ...DEFAULT_CONFIG }`, configSlice.js); the four toggle bags are `{}` (the anonymous forge's, and the
+  //   toggle slice's rest state); `randomSliderMode` rests at true (configSlice.js), so the birth carries
+  //   `_randomizePriorities: true`; no imported neighbour. The size is the ONE setting the pool sets (100 a size): the
+  //   signed-in path with the size picked, whose `town` rows ARE the signed-out path (ANON_FORGE_SIZE = 'town').
+  //   The pipeline's options are the store's content runtime at rest (`settlementContentRuntimeOptions` over the
+  //   vanilla environment, read through the real slice), as `workers/generationRequest.js :: runSettlementOp` spreads them.
+  const { createCustomContentSlice } = await imp('src/store/customContentSlice.js');
+  const { settlementContentRuntimeOptions } = await imp('src/store/settlementContentRuntime.js');
+  const { eligibleCustomContent } = await imp('src/domain/customContentSchema.js');
+  const { contentRuntimeFromCampaignBinding } = await imp('src/domain/content/contentEnvironment.js');
+  const visitorJob = (size, i) => {
+    const config = {
+      ...DEFAULT_CONFIG, settType: size,
+      _institutionToggles: {}, _categoryToggles: {}, _goodsToggles: {}, _servicesToggles: {},
+      _randomizePriorities: true,
+    };
+    let st;
+    const slice = createCustomContentSlice(() => {}, () => st);
+    st = { ...slice, activeCampaignId: null, campaigns: [], config: { ...DEFAULT_CONFIG, settType: size }, configExplicitFields: {} };
+    const runtime = settlementContentRuntimeOptions(st, contentRuntimeFromCampaignBinding, eligibleCustomContent);
+    return { size, preset: null, seed: `visitor-${size}-${i}`, config, options: runtime };
+  };
   const POOLS = {
     default: () => SIZES.flatMap((tier) => Array.from({ length: 150 }, (_, i) => ({ size: tier, preset: null, seed: `seat-measure-${tier}-${i}`, config: { settType: tier } }))),
     presets: () => SIZES.flatMap((tier) => PRESETS.flatMap((preset) => Array.from({ length: 10 }, (_, i) => ({ size: tier, preset, seed: `seat-measure-${tier}-${preset}-${i}`, config: { settType: tier, ...archetypePatch(preset) } })))),
     chair600: () => SIZES.flatMap((size) => Array.from({ length: 100 }, (_, i) => ({ size, preset: null, seed: `hxd-${size}-${i}`, config: { ...DEFAULT_CONFIG, settType: size } }))),
+    visitor: () => SIZES.flatMap((size) => Array.from({ length: 100 }, (_, i) => visitorJob(size, i))),
+    cause: () => SIZES.flatMap((tier) => Array.from({ length: 150 }, (_, i) => ({ size: tier, preset: null, seed: `seat-measure-${tier}-${i}`, config: { settType: tier, tradeRouteAccess: 'random_trade', monsterThreat: 'random_threat' } }))),
   };
   const lines = [JSON.stringify({ meta: { arm, tree: T, force: FORCE, pools: poolsCsv, lit: SEAT_CONTEST_LIT, factors: SEAT_CIRCUMSTANCE_TUNING.factors, productCeiling: SEAT_CIRCUMSTANCE_TUNING.productCeiling } })];
   const t0 = Date.now();
@@ -158,11 +192,15 @@ async function birth(treeArg, arm, forceJson, poolsCsv, outPath) {
       const rec = { pool, seed: job.seed, size: job.size, preset: job.preset };
       let t;
       try {
-        t = generateSettlementPipeline({ ...birthConfig(job.config), ...FORCE }, null, { seed: job.seed, customContent: {} });
+        t = generateSettlementPipeline({ ...birthConfig(job.config), ...FORCE }, null, job.options ? { seed: job.seed, ...job.options } : { seed: job.seed, customContent: {} });
       } catch (e) { rec.error = `birth: ${String(e?.stack || e).split('\n').slice(0, 3).join(' | ')}`; lines.push(JSON.stringify(rec)); continue; }
       rec.hash = createHash('sha256').update(JSON.stringify(t)).digest('hex').slice(0, 16);
       rec.calm = !t.stress;
       rec.cfg = `seat=${t.config?._seatLawVersion ?? null} fortune=${t.config?._fortuneLawVersion ?? null}`;
+      // MEASURE-VISITOR receipts: the road and threat the place was born on (as resolved), and the rolled-priorities flag
+      rec.route = t.config?.tradeRouteAccess ?? null;
+      rec.threat = t.config?.monsterThreat ?? null;
+      rec.rp = t.config?._randomizePriorities === true;
       try {
         const gov = governingFactionOf(t);
         const rows = (t.powerStructure?.factions || []).filter((f) => f && f !== gov);
@@ -183,17 +221,25 @@ async function birth(treeArg, arm, forceJson, poolsCsv, outPath) {
 }
 
 // ── report ──────────────────────────────────────────────────────────────────────────────────────────────────────────
+// Fortune OFF = the arms on tree S (no fortune law forced); fortune ON = the arms on tree SF (S merged with the fortune
+// commit, `_fortuneLawVersion: 2` forced). Every fortune-off rate is under today's standing.
 const ARMS = [
-  { id: 'arm0', label: 'Arm 0, today (S, no law forced)', set: 'today', variant: 'D', force: {} },
-  { id: 'seat-D', label: 'seat law, D (dark)', set: 'seat', variant: 'D', force: { _seatLawVersion: 2 } },
-  { id: 'seat-L1', label: 'seat law, L1 (lit at 1)', set: 'seat', variant: 'L1', force: { _seatLawVersion: 2 } },
-  { id: 'seat-LP', label: 'seat law, LP (lit, proposed)', set: 'seat', variant: 'LP', force: { _seatLawVersion: 2 } },
-  { id: 'both-D', label: 'seat + fortune, D (dark)', set: 'both', variant: 'D', force: { _seatLawVersion: 2, _fortuneLawVersion: 2 } },
-  { id: 'both-L1', label: 'seat + fortune, L1 (lit at 1)', set: 'both', variant: 'L1', force: { _seatLawVersion: 2, _fortuneLawVersion: 2 } },
-  { id: 'both-LP', label: 'seat + fortune, LP (lit, proposed)', set: 'both', variant: 'LP', force: { _seatLawVersion: 2, _fortuneLawVersion: 2 } },
+  { id: 'arm0', label: 'Arm 0, today (S, no law forced; fortune off)', set: 'today', variant: 'D', force: {} },
+  { id: 'seat-D', label: 'seat law, D (dark); fortune off', set: 'seat', variant: 'D', force: { _seatLawVersion: 2 } },
+  { id: 'seat-L1', label: 'seat law, L1 (lit at 1); fortune off', set: 'seat', variant: 'L1', force: { _seatLawVersion: 2 } },
+  { id: 'seat-LP', label: 'seat law, LP (lit, proposed); fortune off', set: 'seat', variant: 'LP', force: { _seatLawVersion: 2 } },
+  { id: 'both-D', label: 'seat + fortune, D (dark); fortune on', set: 'both', variant: 'D', force: { _seatLawVersion: 2, _fortuneLawVersion: 2 } },
+  { id: 'both-L1', label: 'seat + fortune, L1 (lit at 1); fortune on', set: 'both', variant: 'L1', force: { _seatLawVersion: 2, _fortuneLawVersion: 2 } },
+  { id: 'both-LP', label: 'seat + fortune, LP (lit, proposed); fortune on', set: 'both', variant: 'LP', force: { _seatLawVersion: 2, _fortuneLawVersion: 2 } },
 ];
-const STANDING = (a) => (a.set === 'seat' ? ' *(under today\'s standing)*' : '');
-const POOL_ORDER = ['default', 'presets', 'chair600'];
+const STANDING = (a) => (a.set !== 'both' ? ' *(under today\'s standing)*' : '');
+const POOL_ORDER = ['visitor', 'chair600', 'default', 'cause'];
+const POOL_LABEL = {
+  visitor: 'THE VISITOR (the headline): born as `settlementGenerateAction.js` births a visitor who touches no setting, the size picked; `visitor-<size>-0..99`',
+  chair600: 'the chair\'s 600 (pool B): `{ ...birthConfig({ ...DEFAULT_CONFIG, settType }), ...force }`, `hxd-<size>-0..99`; no `_randomizePriorities`',
+  default: 'pool A (measure-holder.mjs\'s default, `birthConfig({ settType })`): NOT A VISITOR\'S WORLD (road and threat unset)',
+  cause: 'pool A\' (the cause arm: pool A with `tradeRouteAccess: \'random_trade\'`, `monsterThreat: \'random_threat\'` added, same seeds): NOT A VISITOR\'S WORLD',
+};
 const KINDS = ['noble', 'craft', 'merchant', 'military', 'religious', 'arcane', 'labor', 'outsider', 'criminal', 'occupation', 'government', 'other'];
 /** The chair's joint reading (report.txt (b)), calm places contested, % by size. */
 const CHAIR = {
@@ -229,6 +275,7 @@ function aggregate(rows) {
   const ok = rows.filter((r) => !r.error);
   const kinds = { present: {}, contends: {}, none: 0 };
   const ladder = {}; const crisisProtected = {}; const markers = {}; const circumstances = {};
+  const routes = {}; const threats = {}; let rolledPriorities = 0;
   for (const r of ok) {
     for (const k of r.present) bump(kinds.present, k);
     for (const k of new Set(r.top)) bump(kinds.contends, String(k));
@@ -236,6 +283,9 @@ function aggregate(rows) {
     const state = r.calm ? 'calm' : 'crisis';
     bump(((ladder[r.size] ||= {})[state] ||= {}), ladderKey(r.risk));
     bump(markers, r.cfg);
+    bump(routes, String(r.route));
+    bump(threats, String(r.threat));
+    if (r.rp) rolledPriorities += 1;
     for (const c of r.held) bump(circumstances, c);
     if (!r.held.length) bump(circumstances, '(none)');
   }
@@ -244,7 +294,7 @@ function aggregate(rows) {
     const n = crisis.filter((r) => r.protected).length;
     crisisProtected[size] = { n, d: crisis.length, pct: pct(n, crisis.length) };
   }
-  return { places: rows.length, errors: rows.filter((r) => r.error).map((r) => ({ seed: r.seed, error: r.error })), kinds, ladder, crisisProtected, markers, circumstances };
+  return { places: rows.length, errors: rows.filter((r) => r.error).map((r) => ({ seed: r.seed, error: r.error })), kinds, ladder, crisisProtected, markers, circumstances, routes, threats, rolledPriorities };
 }
 
 /** Pair two arms place by place: the places whose field or risk moved, and the kinds that enter or leave the top three. */
@@ -269,49 +319,67 @@ function pairArms(a, b) {
   return out;
 }
 
-function report(dir, outDir, seatSha, fortuneSha, calibrationOnly) {
+/** Two arms' records of one pool, whole born record hashed: how many are byte-identical; the others' contest reading. */
+function sameRecords(a, b) {
+  const r0 = new Map(a.map((r) => [r.seed, r]));
+  const differ = b.filter((r) => !r.hash || r0.get(r.seed)?.hash !== r.hash).map((r) => {
+    const o = r0.get(r.seed) || {};
+    return { seed: r.seed, calm: r.calm, contestReadingSame: o.risk === r.risk && o.field === r.field && o.calm === r.calm && o.protected === r.protected };
+  });
+  return { same: b.length - differ.length, of: b.length, differ };
+}
+const sameLine = (s) => `${s.same} of ${s.of} places byte-identical${s.differ.length
+  ? `; the others: ${s.differ.length} (${s.differ.filter((d) => d.contestReadingSame).length} with the contest reading identical, ${s.differ.filter((d) => !d.contestReadingSame).length} MOVED${s.differ.filter((d) => !d.contestReadingSame).length ? `: ${s.differ.filter((d) => !d.contestReadingSame).slice(0, 12).map((d) => `${d.seed} ${d.calm ? 'calm' : 'crisis-born'}`).join(', ')}` : ''})`
+  : ''}`;
+
+/**
+ * The gap between two pools' calm-contested figures, size by size: the difference in points and twice its standard
+ * error (pooled proportion, the two pools' calm n), and whether the difference stands beyond that noise.
+ */
+function gapOf(x, y) {
+  const sizes = SIZES.map((size, i) => {
+    const a = x[i]; const b = y[i];
+    if (!a.d || !b.d) return { size, diff: 0, twoSE: 0, beyond: false, empty: true }; // no calm place on a side: no gap read
+    const p1 = a.n / a.d; const p2 = b.n / b.d;
+    const pp = (a.n + b.n) / ((a.d + b.d) || 1);
+    const se = Math.sqrt(pp * (1 - pp) * (1 / (a.d || 1) + 1 / (b.d || 1)));
+    return { size, diff: Math.round(1000 * (p1 - p2)) / 10, twoSE: Math.round(2000 * se) / 10, beyond: Math.abs(p1 - p2) > 2 * se && p1 !== p2 };
+  });
+  return { sizes, sum: Math.round(10 * sizes.reduce((s, z) => s + Math.abs(z.diff), 0)) / 10, beyond: sizes.filter((z) => z.beyond).map((z) => z.size) };
+}
+
+function report(dir, outDir, seatSha, fortuneSha, calSeatSha, calFortuneSha, calibrationOnly) {
   const { byArm, metas } = loadRows(dir);
   const rowsOf = (id) => byArm[id] || [];
   const writtenAt = new Date().toISOString();
-  // the calibration (it can refute the instrument)
+  // the calibration (it can refute the instrument), at MEASURE-LIT's own commits
   const measured = {
-    arm0: calmContested(rowsOf('arm0'), 'chair600'),
-    'both-D': calmContested(rowsOf('both-D'), 'chair600'),
+    arm0: calmContested(rowsOf('arm0-cal'), 'chair600'),
+    'both-D': calmContested(rowsOf('both-D-cal'), 'chair600'),
   };
   const calibration = {
+    at: { seat: calSeatSha, fortune: calFortuneSha },
     arm0: { chair: CHAIR.arm0, measured: measured.arm0.map((x) => x.pct), calmN: measured.arm0.map((x) => x.d) },
     'both-D': { chair: CHAIR['both-D'], measured: measured['both-D'].map((x) => x.pct), calmN: measured['both-D'].map((x) => x.d) },
   };
   calibration.pass = ['arm0', 'both-D'].every((k) => JSON.stringify(calibration[k].chair) === JSON.stringify(calibration[k].measured));
-  // the both-laws-off sanity: SF with no law forced against S (arm 0), whole record hashed, chair600
-  const sfOff = rowsOf('sfoff');
-  if (sfOff.length) {
-    const r0 = new Map(rowsOf('arm0').filter((r) => r.pool === 'chair600').map((r) => [r.seed, r]));
-    const differ = sfOff.filter((r) => !r.hash || r0.get(r.seed)?.hash !== r.hash).map((r) => {
-      const o = r0.get(r.seed) || {};
-      return { seed: r.seed, calm: r.calm, contestReadingSame: o.risk === r.risk && o.field === r.field && o.calm === r.calm && o.protected === r.protected };
-    });
-    calibration.sfOffEqualsArm0 = { same: sfOff.length - differ.length, of: sfOff.length, differ };
-  }
+  if (rowsOf('sfoff-cal').length) calibration.sfOffEqualsArm0 = sameRecords(rowsOf('arm0-cal'), rowsOf('sfoff-cal'));
   const calLines = [
     '## THE CALIBRATION (done first; it can refute the instrument)', '',
-    'The chair\'s 600 places (`{ ...DEFAULT_CONFIG, settType }`, `hxd-<size>-0..99`), calm places whose seat reads contested (risk Contested or Critical), % by size (thorp · hamlet · village · town · city · metropolis):', '',
+    `At MEASURE-LIT's own commits: tree S = \`${calSeatSha}\`, tree SF = S merged with \`${calFortuneSha}\` (the same recipe). The chair's 600 places (\`{ ...DEFAULT_CONFIG, settType }\`, \`hxd-<size>-0..99\`), calm places whose seat reads contested (risk Contested or Critical), % by size (thorp · hamlet · village · town · city · metropolis):`, '',
     '| arm | the chair\'s joint reading | measured here | calm n | |', '|---|---|---|---|---|',
     `| Arm 0, today (S, no law) | ${CHAIR.arm0.join(' · ')} | ${calibration.arm0.measured.join(' · ')} | ${calibration.arm0.calmN.join(' · ')} | ${JSON.stringify(CHAIR.arm0) === JSON.stringify(calibration.arm0.measured) ? 'EQUAL' : 'DIFFERS'} |`,
     `| seat + fortune, D (SF) | ${CHAIR['both-D'].join(' · ')} | ${calibration['both-D'].measured.join(' · ')} | ${calibration['both-D'].calmN.join(' · ')} | ${JSON.stringify(CHAIR['both-D']) === JSON.stringify(calibration['both-D'].measured) ? 'EQUAL' : 'DIFFERS'} |`,
     '', `The chair's calm n: ${CHAIR.calmN.join(' · ')}. **CALIBRATION ${calibration.pass ? 'PASSES' : 'FAILS: STOPPED'}.**`,
   ];
-  if (calibration.sfOffEqualsArm0) calLines.push('', `Sanity (the chair's (e), widened): SF with no law forced, the whole born record hashed, against Arm 0 on S: ${calibration.sfOffEqualsArm0.same} of ${calibration.sfOffEqualsArm0.of} places byte-identical`
-    + (calibration.sfOffEqualsArm0.differ.length
-      ? `; the others (${calibration.sfOffEqualsArm0.differ.map((d) => `${d.seed} ${d.calm ? 'calm' : 'crisis-born'}, contest reading ${d.contestReadingSame ? 'identical' : 'MOVED'}`).join('; ')}) differ by the fortune commit's ungated prose (a builder's probe, read path by path: \`pressureSentence\` "the Merchant Guilds controls" -> "control", and an npc secret's text; S against itself 0 paths). The chair's (e) read seeds 0..19 only.`
-      : '.'));
+  if (calibration.sfOffEqualsArm0) calLines.push('', `Sanity (the chair's (e), widened), at those commits: SF with no law forced, the whole born record hashed, against Arm 0 on S: ${sameLine(calibration.sfOffEqualsArm0)}.`);
   const head = [
-    '# MEASURE-LIT: the contest measured LIT (a measure only; every rate of a seat-law-only arm is under today\'s standing)', '',
-    `One command: \`sh docs/chair/2026-11-20/content/seat/u4/measure-lit.sh [<seat tip>] [--fortune <fortune commit>]\`. Seat tip (tree S) \`${seatSha}\`; fortune \`${fortuneSha}\`; tree SF = S merged with the fortune commit in a detached scratch worktree, the six conflicts per the chair's joint reading (a). Written ${writtenAt}. Brief: \`../briefs/MEASURE-LIT.md\`.`, '',
+    '# MEASURE-VISITOR: the contest measured on a VISITOR\'s world (the MEASURE-LIT instrument, extended; a measure only; every fortune-off rate is under today\'s standing)', '',
+    `One command: \`sh docs/chair/2026-11-20/content/seat/u4/measure-lit.sh [<seat tip>] [--fortune <fortune commit>] [--cal-seat <c>] [--cal-fortune <c>]\`. Seat tip (tree S) \`${seatSha}\`; fortune \`${fortuneSha}\` (tree SF = S merged with it in a detached scratch worktree, the six conflicts per the chair's joint reading (a), MEASURE-LIT's recipe). The calibration at MEASURE-LIT's commits \`${calSeatSha}\` + \`${calFortuneSha}\`. Written ${writtenAt}. Briefs: \`../briefs/MEASURE-VISITOR.md\`, \`../briefs/MEASURE-LIT.md\`.`, '',
   ];
   if (calibrationOnly || !calibration.pass) {
     if (!calibration.pass) {
-      const json = { meta: { seatSha, fortuneSha, writtenAt, stopped: 'calibration' }, calibration, measuredCalibration: measured };
+      const json = { meta: { seatSha, fortuneSha, calSeatSha, calFortuneSha, writtenAt, stopped: 'calibration' }, calibration, measuredCalibration: measured };
       writeFileSync(join(outDir, 'measure-lit.json'), `${JSON.stringify(json, null, 1)}\n`);
       writeFileSync(join(outDir, 'measure-lit.md'), `${[...head, ...calLines].join('\n')}\n`);
     }
@@ -337,7 +405,11 @@ function report(dir, outDir, seatSha, fortuneSha, calibrationOnly) {
     const want = `seat=${a.force._seatLawVersion ?? null} fortune=${a.force._fortuneLawVersion ?? null}`;
     const bad = rowsOf(a.id).filter((r) => !r.error && r.cfg !== want).length;
     if (bad) fail(`${a.id}: ${bad} places do not carry ${want}`);
-    checks.push(`${a.id}: lit ${a.variant !== 'D'}, ${a.variant === 'LP' ? 'factors = the planted proposal' : 'every factor 1'}, every place's config ${want}`);
+    for (const pool of POOL_ORDER) if (!rowsOf(a.id).some((r) => r.pool === pool)) fail(`${a.id}: no ${pool} rows`);
+    // the visitor's priorities roll; no other pool's do
+    const rpBad = rowsOf(a.id).filter((r) => !r.error && r.rp !== (r.pool === 'visitor')).length;
+    if (rpBad) fail(`${a.id}: ${rpBad} places whose _randomizePriorities is not (pool === 'visitor')`);
+    checks.push(`${a.id}: lit ${a.variant !== 'D'}, ${a.variant === 'LP' ? 'factors = the planted proposal' : 'every factor 1'}, every place's config ${want}; \`_randomizePriorities: true\` on every visitor place and on no other`);
   }
 
   const R = {};
@@ -354,26 +426,81 @@ function report(dir, outDir, seatSha, fortuneSha, calibrationOnly) {
   }
   const totalErrors = POOL_ORDER.reduce((s, pool) => s + ARMS.reduce((t, a) => t + R[pool][a.id].errors.length, 0), 0);
   const totalPlaces = POOL_ORDER.reduce((s, pool) => s + ARMS.reduce((t, a) => t + R[pool][a.id].places, 0), 0);
+  // the same-source and fortune-off sanities at THIS run's commits
+  const sanity = {
+    arm0EqualsArm0Cal: sameRecords(rowsOf('arm0-cal'), rowsOf('arm0').filter((r) => r.pool === 'chair600')),
+    sfOffEqualsArm0: Object.fromEntries(['chair600', 'visitor'].map((pool) => [pool, sameRecords(rowsOf('arm0').filter((r) => r.pool === pool), rowsOf('sfoff').filter((r) => r.pool === pool))])),
+  };
+  // the cause arm: pool A, pool A' (random road and threat) and pool B, per arm
+  const cause = {};
+  for (const a of ARMS) {
+    const A = R.default[a.id].calmContested; const A2 = R.cause[a.id].calmContested; const B = R.chair600[a.id].calmContested; const V = R.visitor[a.id].calmContested;
+    const gA = gapOf(A, B); const gA2 = gapOf(A2, B); const gV = gapOf(V, B);
+    const reading = !gA.beyond.length ? 'no gap beyond noise to close'
+      : !gA2.beyond.length ? 'CLOSES (no size beyond noise)'
+        : gA2.sum <= gA.sum / 2 ? 'NARROWS (the summed gap at least halved; sizes beyond noise remain)' : 'DOES NOT CLOSE';
+    cause[a.id] = { A: gA, Aprime: gA2, visitor: gV, reading };
+  }
+  const cell = (x) => `${x.pct} (${x.n}/${x.d})`;
 
   const L = [...head, ...calLines, ''];
-  L.push('## THE COUNT THE OWNER WILL ASK FOR: calm places whose seat reads contested (risk Contested or Critical), by size', '',
+  L.push('## Same source, and fortune off (the sanities at this run\'s commits)', '',
+    `- Arm 0 on this run's S against Arm 0 at the calibration's S (the chair's 600, whole record hashed): ${sameLine(sanity.arm0EqualsArm0Cal)}.`,
+    ...Object.entries(sanity.sfOffEqualsArm0).map(([pool, s]) => `- Tree SF (fortune \`${fortuneSha.slice(0, 9)}\`) with NO law forced against Arm 0 on S, the ${pool} pool, whole record hashed: ${sameLine(s)}.`), '');
+
+  L.push('## THE HEADLINE: the visitor\'s world, calm places whose seat reads contested (risk Contested or Critical), by size', '',
+    'Fortune OFF (tree S) → fortune ON (tree SF, `_fortuneLawVersion: 2`) in each cell, % (contested / calm). D = dark as committed; L1 = `SEAT_CONTEST_LIT` lit, every factor 1; LP = lit with the proposed figures. Fortune-off rates are under today\'s standing.', '',
+    `| pool · arm | ${SIZES.join(' | ')} |`, `|---|${SIZES.map(() => '---').join('|')}|`);
+  for (const pool of ['visitor', 'chair600']) {
+    L.push(`| **${pool === 'visitor' ? 'VISITOR' : 'chair\'s 600'}** · Arm 0 (today, no law) | ${R[pool].arm0.calmContested.map(cell).join(' | ')} |`);
+    for (const v of ['D', 'L1', 'LP']) {
+      const off = R[pool][`seat-${v}`].calmContested; const on = R[pool][`both-${v}`].calmContested;
+      L.push(`| **${pool === 'visitor' ? 'VISITOR' : 'chair\'s 600'}** · seat law ${v}: off → on | ${SIZES.map((_, i) => `${off[i].pct} → ${on[i].pct} (${on[i].n}/${on[i].d})`).join(' | ')} |`);
+    }
+  }
+  L.push('');
+
+  L.push('## THE CAUSE ARM: pool A (road and frontier) against pool B, and pool A\' (random road and threat added, nothing else)', '',
+    'Pool A and pool A\' are NOT A VISITOR\'S WORLD; they are reported here only to test the cause. Calm places contested, % (n/calm), per arm; the gap is A − B (or A\' − B) in points, size by size, with twice its standard error; "beyond" = the difference stands beyond twice its standard error.', '');
+  L.push(`| arm | pool | ${SIZES.join(' | ')} | Σ abs. gap to B (points) | sizes beyond noise |`, `|---|---|${SIZES.map(() => '---').join('|')}|---|---|`);
+  for (const a of ARMS) {
+    const c = cause[a.id];
+    L.push(`| ${a.id} | A | ${R.default[a.id].calmContested.map(cell).join(' | ')} | ${c.A.sum} | ${c.A.beyond.join(', ') || 'none'} |`);
+    L.push(`| ${a.id} | A' | ${R.cause[a.id].calmContested.map(cell).join(' | ')} | ${c.Aprime.sum} | ${c.Aprime.beyond.join(', ') || 'none'} |`);
+    L.push(`| ${a.id} | B | ${R.chair600[a.id].calmContested.map(cell).join(' | ')} | | |`);
+    L.push(`| ${a.id} | visitor | ${R.visitor[a.id].calmContested.map(cell).join(' | ')} | ${c.visitor.sum} | ${c.visitor.beyond.join(', ') || 'none'} |`);
+  }
+  L.push('', 'The gap size by size (A − B · A\' − B, points; ±2 SE of the A\' gap):', '', `| arm | ${SIZES.join(' | ')} | reading |`, `|---|${SIZES.map(() => '---').join('|')}|---|`);
+  for (const a of ARMS) {
+    const c = cause[a.id];
+    L.push(`| ${a.id} | ${SIZES.map((_, i) => `${c.A.sizes[i].diff}${c.A.sizes[i].beyond ? '*' : ''} · ${c.Aprime.sizes[i].diff}${c.Aprime.sizes[i].beyond ? '*' : ''} (±${c.Aprime.sizes[i].twoSE})`).join(' | ')} | ${c.reading} |`);
+  }
+  L.push('', '`*` = beyond twice the standard error.', '', 'The road and threat each pool was born on (as the born config holds them; `null` = unset, which the generators read as `road` / `frontier` at their fallbacks), Arm 0:', '');
+  for (const pool of POOL_ORDER) {
+    const g = R[pool].arm0;
+    L.push(`- ${pool}: road ${Object.entries(g.routes).sort().map(([k, v]) => `${k} ${v}`).join(' · ')}; threat ${Object.entries(g.threats).sort().map(([k, v]) => `${k} ${v}`).join(' · ')}; priorities rolled in ${g.rolledPriorities} of ${g.places}.`);
+  }
+  L.push('');
+
+  L.push('## Calm places whose seat reads contested (risk Contested or Critical), by size, every arm × pool', '',
     'Each cell: % (contested / calm places). S = the seat tip; SF = S merged with fortune. D = dark as committed; L1 = `SEAT_CONTEST_LIT` lit, every factor 1; LP = lit with the proposed figures.', '');
   for (const pool of POOL_ORDER) {
-    L.push(`### ${pool} pool`, '', `| arm | ${SIZES.join(' | ')} |`, `|---|${SIZES.map(() => '---').join('|')}|`);
-    for (const a of ARMS) L.push(`| ${a.label}${STANDING(a)} | ${R[pool][a.id].calmContested.map((x) => `${x.pct} (${x.n}/${x.d})`).join(' | ')} |`);
+    L.push(`### ${POOL_LABEL[pool]}`, '', `| arm | ${SIZES.join(' | ')} |`, `|---|${SIZES.map(() => '---').join('|')}|`);
+    for (const a of ARMS) L.push(`| ${a.label}${STANDING(a)} | ${R[pool][a.id].calmContested.map(cell).join(' | ')} |`);
     L.push('');
   }
   L.push('## Crisis-born incumbents protected (`incumbent.gated`), % by size', '');
   for (const pool of POOL_ORDER) {
-    L.push(`### ${pool} pool`, '', `| arm | ${SIZES.join(' | ')} |`, `|---|${SIZES.map(() => '---').join('|')}|`);
-    for (const a of ARMS) L.push(`| ${a.label}${STANDING(a)} | ${SIZES.map((s) => { const x = R[pool][a.id].crisisProtected[s]; return `${x.pct} (${x.n}/${x.d})`; }).join(' | ')} |`);
+    L.push(`### ${POOL_LABEL[pool]}`, '', `| arm | ${SIZES.join(' | ')} |`, `|---|${SIZES.map(() => '---').join('|')}|`);
+    for (const a of ARMS) L.push(`| ${a.label}${STANDING(a)} | ${SIZES.map((s) => cell(R[pool][a.id].crisisProtected[s])).join(' | ')} |`);
     L.push('');
   }
-  L.push('## The contender table per kind (present · contending; columns by `contestKindOf`, as measure-u4.mjs prints it)', '');
+  L.push('## The contender table per kind (present · contending; columns by `contestKindOf`, as measure-u4.mjs prints it)', '',
+    'seat-* = fortune off (under today\'s standing); both-* = fortune on.', '');
   for (const pool of POOL_ORDER) {
     const seen = new Set(KINDS);
     for (const a of ARMS) for (const k of [...Object.keys(R[pool][a.id].kinds.present), ...Object.keys(R[pool][a.id].kinds.contends)]) seen.add(k);
-    L.push(`### ${pool} pool`, '', `| kind | ${ARMS.map((a) => a.id).join(' | ')} |`, `|---|${ARMS.map(() => '---').join('|')}|`);
+    L.push(`### ${POOL_LABEL[pool]}`, '', `| kind | ${ARMS.map((a) => a.id).join(' | ')} |`, `|---|${ARMS.map(() => '---').join('|')}|`);
     for (const k of seen) {
       const cells = ARMS.map((a) => [R[pool][a.id].kinds.present[k] || 0, R[pool][a.id].kinds.contends[k] || 0]);
       if (cells.every(([p, c]) => !p && !c)) continue;
@@ -383,7 +510,7 @@ function report(dir, outDir, seatSha, fortuneSha, calibrationOnly) {
   }
   L.push(`## The risk label by size, calm and crisis-born apart (${LADDER.join(' · ')})`, '');
   for (const pool of POOL_ORDER) {
-    L.push(`### ${pool} pool`, '', `| size | ${ARMS.map((a) => a.id).join(' | ')} |`, `|---|${ARMS.map(() => '---').join('|')}|`);
+    L.push(`### ${POOL_LABEL[pool]}`, '', `| size | ${ARMS.map((a) => a.id).join(' | ')} |`, `|---|${ARMS.map(() => '---').join('|')}|`);
     for (const size of SIZES) for (const state of ['calm', 'crisis']) {
       L.push(`| ${size} ${state} | ${ARMS.map((a) => LADDER.map((k) => R[pool][a.id].ladder[size]?.[state]?.[k] || 0).join(' · ')).join(' | ')} |`);
     }
@@ -392,24 +519,25 @@ function report(dir, outDir, seatSha, fortuneSha, calibrationOnly) {
   L.push('## LP: the circumstances held, and the kinds that enter or leave the top three against L1', '');
   const CIRC = ['craft_led', 'trade_wealth', 'strong_faith', 'martial_pressure', 'hunger', 'mandate', 'outside_debt', 'occupation', '(none)'];
   for (const pool of POOL_ORDER) {
-    L.push(`### ${pool} pool`, '');
+    L.push(`### ${POOL_LABEL[pool]}`, '');
     for (const set of ['seat', 'both']) {
       const lp = R[pool][`${set}-LP`]; const pr = R[pool][`${set}:L1->LP`]; const dl = R[pool][`${set}:D->L1`];
       const kinds = [...new Set([...Object.keys(pr.enter), ...Object.keys(pr.leave)])].sort();
-      L.push(`- **${set === 'seat' ? 'seat law (under today\'s standing)' : 'seat + fortune'}**: circumstances held (places): ${CIRC.map((c) => `${c} ${lp.circumstances[c] || 0}`).join(' · ')}.`,
+      L.push(`- **${set === 'seat' ? 'seat law, fortune off (under today\'s standing)' : 'seat + fortune'}**: circumstances held (places): ${CIRC.map((c) => `${c} ${lp.circumstances[c] || 0}`).join(' · ')}.`,
         `  L1 → LP: ${pr.topKindsMoved} of ${pr.paired} places change the kinds in their top three; ${kinds.length ? kinds.map((k) => `${k} +${pr.enter[k] || 0}/−${pr.leave[k] || 0}`).join(' · ') : 'no kind enters or leaves'}; field or risk moved in ${pr.fieldOrRiskMoved}; calm places that turn contested ${pr.calmContestedOn.length}, that stop ${pr.calmContestedOff.length}.`,
         `  (D → L1, for the record: field or risk moved in ${dl.fieldOrRiskMoved} of ${dl.paired}; top-three kinds moved in ${dl.topKindsMoved}: ${Object.keys({ ...dl.enter, ...dl.leave }).sort().map((k) => `${k} +${dl.enter[k] || 0}/−${dl.leave[k] || 0}`).join(' · ') || 'none'}; calm turning contested ${dl.calmContestedOn.length}, stopping ${dl.calmContestedOff.length}.)`);
     }
     L.push('');
   }
-  L.push('## Errors', '', `**${totalErrors} errors in ${totalPlaces} births** (thrown at birth or in a reader), all arms, all pools.`);
+  L.push('## Errors', '', `**${totalErrors} errors in ${totalPlaces} births** (thrown at birth or in a reader), all arms, all pools (the calibration's and the sanities' births beside them).`);
   for (const pool of POOL_ORDER) for (const a of ARMS) for (const e of R[pool][a.id].errors) L.push(`- ${pool} ${a.id} ${e.seed}: ${e.error}`);
+  for (const id of ['arm0-cal', 'both-D-cal', 'sfoff-cal', 'sfoff']) for (const r of rowsOf(id).filter((x) => x.error)) L.push(`- ${r.pool} ${id} ${r.seed}: ${r.error}`);
   L.push('', '## Receipts', '', ...checks.map((c) => `- ${c}`));
   for (const [k, p] of Object.entries(plants).sort()) L.push(`- plant ${k}: ${p.dial}${p.factors ? `; factors ${JSON.stringify(p.factors)}, productCeiling ${p.productCeiling} (read from the module's PROPOSED comments; the register note agrees: ${p.registerNoteAgrees})` : ''}`);
   L.push('- Laws forced AFTER `birthConfig` (`{ ...birthConfig(config), ...force }`), the contest read on the place as born; the plants live only in scratch copies, removed at the end.', '');
 
-  const json = { meta: { script: 'docs/chair/2026-11-20/content/seat/u4/measure-lit.sh', seatSha, fortuneSha, writtenAt, totalPlaces, totalErrors, standing: "seat-law-only arms are under today's standing" },
-    calibration, arms: ARMS, plants, checks, pools: R };
+  const json = { meta: { script: 'docs/chair/2026-11-20/content/seat/u4/measure-lit.sh', seatSha, fortuneSha, calSeatSha, calFortuneSha, writtenAt, totalPlaces, totalErrors, standing: "fortune-off arms are under today's standing" },
+    calibration, sanity, cause, arms: ARMS, plants, checks, pools: R };
   writeFileSync(join(outDir, 'measure-lit.json'), `${JSON.stringify(json, null, 1)}\n`);
   writeFileSync(join(outDir, 'measure-lit.md'), `${L.join('\n')}\n`);
   console.log(`measure-lit: calibration ${calibration.pass ? 'PASS' : 'FAIL'}; ${totalPlaces} births, ${totalErrors} errors; wrote measure-lit.{md,json}`);
@@ -418,5 +546,5 @@ function report(dir, outDir, seatSha, fortuneSha, calibrationOnly) {
 if (mode === 'resolve') resolveMerge(rest[0]);
 else if (mode === 'plant') plant(rest[0], rest[1]);
 else if (mode === 'birth') await birth(...rest);
-else if (mode === 'report') report(rest[0], rest[1], rest[2], rest[3], rest.includes('--calibration'));
+else if (mode === 'report') report(rest[0], rest[1], rest[2], rest[3], rest[4], rest[5], rest.includes('--calibration'));
 else fail(`unknown mode ${mode}`);
