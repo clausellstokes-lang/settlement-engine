@@ -186,6 +186,28 @@ export function preferredFormOf(kind, tier) {
   return Object.keys(seatRowOf(kind).bands[seatBandOf(tier)])[0];
 }
 
+/** The old `rulingPower.js :: GOVERNMENT_PREFERENCES` rebuilt from this table: its kinds in its own
+ *  key order (kinds, never forms), each band read through `preferredFormOf` at a tier of that band.
+ *  Everything is held inside the call, so nothing of it stays in first paint.
+ *  @returns {Readonly<Record<string, Readonly<Record<SeatBand, string>>>>} */
+function transferFormsView() {
+  const kinds = [A.MILITARY, A.RELIGIOUS, A.MERCHANT, A.NOBLE, A.ARCANE, A.CRAFT, A.LABOR,
+    A.CIVIC, A.GOVERNMENT, A.OUTSIDER, A.OCCUPATION, A.CRIMINAL, A.OTHER];
+  return Object.freeze(Object.fromEntries(kinds.map((kind) => [kind, Object.freeze({
+    small: preferredFormOf(kind, 'village'), town: preferredFormOf(kind, 'town'), large: preferredFormOf(kind, 'city'),
+  })])));
+}
+
+/**
+ * ⭐ THE OLD TRANSFER TABLE, AS A VIEW OF THIS ONE (the U2-CURE2, SEAT-2's red at the merge: the
+ * titles lane's test reads `rulingPower.js :: GOVERNMENT_PREFERENCES`). The old object's shape and
+ * values byte for byte, keys in its own order, each `{ small, town, large }` the transfer's own form
+ * of that kind and band; DERIVED, never a second spelling of a form, frozen to its leaves.
+ * `rulingPower.js` re-exports it under the old name. No app code reads it, so it is marked pure
+ * and leaves the first-paint closure.
+ */
+export const TRANSFER_FORMS_VIEW = /* @__PURE__ */ transferFormsView();
+
 /** The transfer's alternate form for a holder kind, or null.
  *  @param {string} kind @returns {string | null} */
 export function alternateFormOf(kind) {

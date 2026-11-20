@@ -28,6 +28,12 @@
  *   (c) that family is read off the power's OWN kind (`ownKindOf`), never its veil: a hidden
  *       non-criminal power keeps its own kind's family, a criminal power reads criminal;
  *   (d) born worlds at every tier, a town-size case among them.
+ *
+ * THE SECOND CURE (briefs/U2-CURE2.md, SEAT-2's red at the merge: the line's titles test reads
+ * `rulingPower.js :: GOVERNMENT_PREFERENCES`, which U2 removed):
+ *   (e) `rulingPower.js` exports `GOVERNMENT_PREFERENCES` again, as the one table's frozen VIEW
+ *       (`seatTable.js :: TRANSFER_FORMS_VIEW`, re-exported, never re-spelled): today's literal object,
+ *       key for key and in today's key order, each cell the transfer's own form, frozen to its leaves.
  */
 import { describe, test, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
@@ -38,8 +44,9 @@ import { expectAbsentWithAnchor } from '../../helpers/anchoredNegatives.js';
 import {
   SEAT_TABLE, SEAT_BANDS, SEAT_CIRCUMSTANCES, seatBandOf, seatRowOf, preferredFormOf, alternateFormOf,
   governmentFamilyOf, formKindOf, pairLicense, isVeiledRow, contestKindOf, ownKindOf, oldLawFamilyOf,
+  TRANSFER_FORMS_VIEW,
 } from '../../../src/domain/seat/seatTable.js';
-import { governmentLabelFor, transferRulingPower } from '../../../src/domain/rulingPower.js';
+import { governmentLabelFor, transferRulingPower, GOVERNMENT_PREFERENCES } from '../../../src/domain/rulingPower.js';
 import { ensureFactionStates } from '../../../src/domain/worldPulse/factionCompetition.js';
 import { FACTION_ARCHETYPES as A, factionArchetype } from '../../../src/domain/factionArchetypes.js';
 import { isVeiledPower } from '../../../src/domain/people/cardVeil.js';
@@ -183,6 +190,10 @@ const TODAY_ALT = Object.freeze({
   religious: 'Ecclesiastical Council', occupation: 'Martial Administration',
 });
 const BAND_OF_TIER = Object.freeze({ thorp: 'small', hamlet: 'small', village: 'small', town: 'town', city: 'large', metropolis: 'large' });
+/** The one line `rulingPower.js` may hold the old name on: the re-export of the one table's view. */
+const REEXPORT_RE = /export\s*\{\s*TRANSFER_FORMS_VIEW\s+as\s+GOVERNMENT_PREFERENCES\s*\}\s*from\s*'\.\/seat\/seatTable\.js'/;
+/** A second DECLARATION of the old name: a binding (`const|let|var|function|class`) or an assignment. */
+const DECLARATION_RE = /\b(?:const|let|var|function|class)\s+GOVERNMENT_PREFERENCES\b|\bGOVERNMENT_PREFERENCES\s*=(?!=)/;
 
 /** A seat whose new holder of `kind` finds its preferred form (and optionally its alternate) taken. */
 function crownedForm(kind, tier, { altTaken = false, law = null } = {}) {
@@ -239,7 +250,10 @@ describe('(2) under every law, the transfer reads today\'s strings', () => {
     expect(spelled).toEqual([]);
     // the one-table read is the live anchor: the code holds it, and holds neither old table
     expectAbsentWithAnchor(code, 'ALT_GOVERNMENT_LABELS', 'alternateFormOf(', 'rulingPower.js reads the alternate from the one table');
-    expectAbsentWithAnchor(code, 'GOVERNMENT_PREFERENCES', 'preferredFormOf(', 'rulingPower.js reads the form from the one table');
+    // U2-CURE2: the old name is EXPORTED again, as the one table's view re-exported, so this half
+    // forbids a second DECLARATION of the forms (a binding, an assignment) and no longer the name.
+    expect(code, 'rulingPower.js re-exports the one table\'s view').toMatch(REEXPORT_RE);
+    expect(code).not.toMatch(DECLARATION_RE); // anchored: REEXPORT_RE above proves this same source holds the name's one live line, the re-export
   });
 });
 
@@ -567,5 +581,34 @@ describe('(d) born worlds at every tier, a town-size case among them', () => {
         if (own !== 'criminal') expect(prefOf(law2, r.faction), `${at} ${r.faction}`).not.toBe('criminal_shadow_rule');
       }
     }
+  });
+});
+
+describe('(e) U2-CURE2: rulingPower.js :: GOVERNMENT_PREFERENCES is the one table\'s view, today\'s object byte for byte', () => {
+  test('it deep-equals today\'s literal object, key for key and in today\'s key order', () => {
+    expect(GOVERNMENT_PREFERENCES).toEqual(TODAY);
+    expect(JSON.stringify(GOVERNMENT_PREFERENCES)).toBe(JSON.stringify(TODAY));
+  });
+
+  test('it is the one table\'s own view, re-exported (one object, not a second spelling)', () => {
+    expect(TRANSFER_FORMS_VIEW).toBeDefined();
+    expect(GOVERNMENT_PREFERENCES).toBe(TRANSFER_FORMS_VIEW);
+    for (const [kind, bands] of Object.entries(GOVERNMENT_PREFERENCES)) {
+      for (const tier of TIERS) expect(`${kind}@${tier}: ${bands[BAND_OF_TIER[tier]]}`).toBe(`${kind}@${tier}: ${preferredFormOf(kind, tier)}`);
+    }
+  });
+
+  test('it is frozen to its leaves', () => {
+    expect(Object.isFrozen(GOVERNMENT_PREFERENCES)).toBe(true);
+    for (const [kind, bands] of Object.entries(GOVERNMENT_PREFERENCES)) expect(`${kind}: ${Object.isFrozen(bands)}`).toBe(`${kind}: true`);
+  });
+
+  test('the narrowed pin still reds on a second declaration of the forms', () => {
+    const planted = `export const GOVERNMENT_PREFERENCES = Object.freeze({ [A.MILITARY]: { small: 'Militia Command' } });`;
+    expect(planted).toMatch(DECLARATION_RE);
+    expect('GOVERNMENT_PREFERENCES = {};').toMatch(DECLARATION_RE);
+    expect(`export { TRANSFER_FORMS_VIEW as GOVERNMENT_PREFERENCES } from './seat/seatTable.js';`).toMatch(REEXPORT_RE);
+    expect(`export { TRANSFER_FORMS_VIEW as GOVERNMENT_PREFERENCES } from './seat/seatTable.js';`).not.toMatch(DECLARATION_RE); // anchored: the same literal matches REEXPORT_RE on the line above
+    expect(`if (x === GOVERNMENT_PREFERENCES) {}`).not.toMatch(DECLARATION_RE); // anchored: a literal built here; the two plants above prove DECLARATION_RE fires
   });
 });

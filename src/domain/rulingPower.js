@@ -43,6 +43,9 @@ import { factionArchetype, FACTION_ARCHETYPES } from './factionArchetypes.js';
 import { rollsRegisterVii } from './density/densityLaw.js';
 import { resolveSibling } from './facts/drawDeclared.js';
 import { alternateFormOf, preferredFormOf } from './seat/seatTable.js';
+// The old table's name, kept for its readers (the titles lane's test, U2-CURE2): the one table's
+// derived view, re-exported, never declared here.
+export { TRANSFER_FORMS_VIEW as GOVERNMENT_PREFERENCES } from './seat/seatTable.js';
 
 const A = FACTION_ARCHETYPES;
 
