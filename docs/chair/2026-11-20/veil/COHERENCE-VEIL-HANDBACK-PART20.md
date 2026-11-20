@@ -41,6 +41,14 @@ draws whose stored figure carries a hidden term and has no exact SQL twin keeps 
 crime-specific part is withheld by the server on EVERY non-owner read (the page may re-derive it from the served document
 with the engine's own function, else does not draw it); crime-only content stays conditional; FOR D: `incomeWeight` is a
 share: re-derived with the percentages or withheld, never left raw (relayed to the B/C/D builder at 00:45 UTC).
+00:53 UTC (the seventh chair): SV7, VR20 leaves this list for VEIL-DOORS (section 3, row 2b). V10-6 HIGH and RULING VR21,
+ORDER AND GAPS, JOIN B: after the veil removes a member of a sequence, no counter, index, id sequence or count taken
+before the removal reaches a non-owner read: re-derived over what is served (dense, in served order) or withheld where
+no shared page draws it, every reference following (`simulationTrace[].ts` holes on Reveal-DM gallery reads; repro seed
+`rv10-gap-town-none-0`, default veil, `gallery_share_dm`); B carries it in the same commit or the next; guard on born
+towns, both engines. V10-5 MED WITH B: a criminal house born without `catalogId`, renamed by name alone and hidden whole,
+leaves its birth name in its own chain and `situationDesc`; the cure by POSITIVE ACCOUNT (kept only where a served house
+accounts; a hideable catalogue name no served house bears withheld), measured on born towns before it is built.
 
 ## 1. The bytes (kept current)
 
@@ -76,7 +84,8 @@ THE RECEIPTS (the chair, 00:26 UTC: every figure this file quotes has its output
 |---|---|
 | 1. First act, measured | DONE (section 2) |
 | 2. B, C, D (`briefs/SUB-BRIEF-BCD.md`) | IN HAND |
-| 2b. VR20 (after B, C, D) | MEASURE IN HAND beside B, C, D (a read-only seat, `/var/tmp/v18/out/vr20/`); the mechanism goes to the chair before any build |
+| 2b. VR20 | LEFT THIS LIST (the chair's SV7, 00:53 UTC): the doors beside `data` go to the seat VEIL-DOORS (`lane/veil-doors-2026-11-20`); this seat's partial measure (stopped at the chair's word) is `out/v19/VR20-MEASURE-PARTIAL.md`, sent to the chair in one line. THE SPLIT OF 212: this seat owns everything inside the data veil (every `_gallery_veil*` helper, the name search, the read functions' bodies); DOORS owns `_gallery_public_tile_rows` and its lists, the chronicle's helpers and veil, `get_gallery_map`'s member expression, and in `get_gallery_dossier` ONLY the `chronicle` expression and the tile columns (its helpers in one new section at the END of 212); merged here on "DOORS <commit>" |
+| 2c. V10-6 (VR21, order and gaps) and V10-5 (no-catalogId birth names), JOINED B (00:53 UTC) | relayed to the B/C/D builder at 00:55 UTC |
 | 3. R2 under VR16 (after R1 is merged) | waiting on "R1 <commit>" |
 | 4. R3, R4, R5, R6 | not started |
 | 5. R7 (VR15 (b)) | not started |
