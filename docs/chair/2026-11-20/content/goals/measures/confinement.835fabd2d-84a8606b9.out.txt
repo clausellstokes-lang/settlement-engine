@@ -1,0 +1,10 @@
+trees.mjs: births at 84a8606b9
+names3 born: exit codes 0,0
+trees.mjs: 835fabd2d -> 84a8606b9
+## golden: documents 525 · identical 202 · with a non-string difference 0 · differing strings 3615 · of them passing the word check (number) 0 · other 3615
+| npcs[].goal.long | 1841 | 285 |
+| npcs[].goal.short | 1774 | 286 |
+## census: documents 720 · identical 292 · with a non-string difference 0 · differing strings 5740 · of them passing the word check (number) 0 · other 5740
+| npcs[].goal.short | 2876 | 390 |
+| npcs[].goal.long | 2864 | 391 |
+exit 0
