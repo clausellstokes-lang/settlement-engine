@@ -140,7 +140,7 @@ export const CULTURE_OFFICE_TITLES = Object.freeze({
   latin: Object.freeze({
     sovereign: ladder(null, null, null, 'Princeps', pair('Rex', 'Regina'), pair('Imperator', 'Imperatrix')),
     appointed: ladder(pair('Vilicus', 'Vilica'), pair('Vilicus', 'Vilica'), pair('Vilicus', 'Vilica'), 'Procurator', 'Legate', 'Proconsul'), // TITLES-2 below town: the estate's bailiff
-    headman: ladder(null, null, null, 'Podestà', 'Podestà', 'Podestà'), // TITLES-2: the commune's chief magistrate
+    headman: ladder(null, null, null, 'Praetor', 'Praetor', 'Praetor'), // TITLES-2: the town's chief magistrate
     council: ladder(null, null, null, 'Consul', 'Consul', 'First Consul'),
     assembly: ladder(null, null, null, 'Tribune of the People', 'Tribune of the People', 'Tribune of the People'),
     military: ladder(null, null, 'Decurion', 'Centurion', 'Dux', 'Dux'),
@@ -176,7 +176,7 @@ export const CULTURE_OFFICE_TITLES = Object.freeze({
     headman: ladder('Starosta', 'Starosta', 'Starosta', 'Posadnik', 'Posadnik', 'Posadnik'),
     council: ladder(null, null, null, 'Golova', 'Golova', 'Golova'), // TITLES-2: the city's head
     elders: ladder('Starosta', 'Starosta', 'Starosta', 'Starosta', 'Starosta', 'Starosta'),
-    merchant: ladder(null, null, null, 'Gost', 'Gost', 'Gost'), // TITLES-2: the great merchant
+    merchant: ladder(null, null, null, 'Gost', 'Gost', 'Gost'), // TITLES-2: first of the great merchants
     military: ladder(null, null, 'Voivode', 'Voivode', 'Voivode', 'Voivode'),
   }),
   east_asian: Object.freeze({

@@ -227,7 +227,7 @@ describe('TITLES-2 · the cells filled by research (each word\'s gloss and sourc
     ['germanic', 'guild', [null, null, null, 'Zunftmeister', 'Zunftmeister', 'Zunftmeister']],
     ['germanic', 'military', [null, null, null, null, 'Marschall', 'Marschall']],
     ['latin', 'appointed', ['Vilicus', 'Vilicus', 'Vilicus', 'Procurator', 'Legate', 'Proconsul']],
-    ['latin', 'headman', [null, null, null, 'Podestà', 'Podestà', 'Podestà']],
+    ['latin', 'headman', [null, null, null, 'Praetor', 'Praetor', 'Praetor']],
     ['celtic', 'appointed', ['Maer', 'Maer', 'Maer', 'Maer', null, null]],
     ['celtic', 'military', [null, null, 'Penteulu', 'Penteulu', 'Penteulu', 'Penteulu']],
     ['arabic', 'council', [null, null, null, "Ra'is", "Ra'is", "Ra'is"]],
@@ -273,6 +273,7 @@ describe('TITLES-2 · the cells filled by research (each word\'s gloss and sourc
     expect(officeWordInfo('Begim')).toEqual({ families: ['headman'], sovereign: false, crown: false, sex: 'female' });
     expect(officeWordInfo('Vilicus')).toEqual({ families: ['appointed'], sovereign: false, crown: false, sex: 'male' });
     expect(officeWordInfo('Amir al-Juyush')).toEqual({ families: ['military'], sovereign: false, crown: false, sex: null });
-    expect(officeWordInfo('podestà')).toEqual({ families: ['headman'], sovereign: false, crown: false, sex: null });
+    expect(officeWordInfo('praetor')).toEqual({ families: ['headman'], sovereign: false, crown: false, sex: null });
+    expect(officeWordInfo('Podestà')).toBeNull();
   });
 });
