@@ -1055,6 +1055,25 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   rite, no "saint"; the priest's "confession": said without the rite; the militia captain's second: it parsed two
   ways; the watch captain's "lock-up": a gaol the town may not have).
 
+- **THE OFFICE BAND IS READ FROM THE BASE OFFICE ROLE, NEVER FROM A CULTURE'S WORD (2026-11-20, 12:52 UTC, to SEAT-4, on
+  SEAT-3's finding at its hand-over):** `castPowers.js :: raiseToOfficeBand` reads `npcGenerator.js ::
+  powerBandOfRole` with the office WORD: once U12 wires the culture titles, a culture's word (Jarl) would miss the
+  keyword and drop the leader a band. RULED: the band comes from the base office role; a culture changes the word
+  a DM reads and nothing else (CS22's last clause). U12 owes a red arm: for every culture row of the titles' table
+  the leader's band under the culture word equals the band under the base word. NOTED FOR THE JOIN: PART K's
+  corrected keywords move the seat lane's U9 (criminal members ranked by influence) and its capture measure.
+- **THE ABSENCE LINE'S WORDING (P1b; 12:52 UTC, to FRAME-5):** merged green at 99eaeb518, owner-only (stored record
+  1,245 of 1,245 and non-owner pages 11,205 of 11,205 identical; the owner's pages move on the 126 predicted, by
+  the clause alone). THE MODEST WORDING RULED, the trouble frame's own: "an outside hand, unnamed; <keeper> keeps
+  the <house>, where strangers lodge, and would know of them": "where its people come and go" stated as a fact
+  something the record does not hold. `lodgingKeeperOf` stands as a second copy of troubleCast's outsider rule
+  ONLY WITH A PARITY TEST (the two name the same keeper over the lane's pools); one source at the join. It reads a
+  card's power: PART K may change the keeper in some new towns: re-measured on the joined tree.
+- **THE BROKERAGE LEAD: NOT REAL (12:46 UTC, VEIL-26, executed):** a hideable illegal brokerage with its function
+  eye hidden and its whole-house eye hidden is withheld exactly as with the whole-house eye alone (0 hits of 24
+  reads: two cities, a native and a planted brokerage, server and twin, the gallery with Reveal DM off and on, the
+  link): both engines judge hideability on the UNTRIMMED card before any eye removes tags. Closed.
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -3575,3 +3594,25 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   TRAD-SHARE). SEATED AFTER THIS PUSH: TRAD-4, PAGE-3, PAGE-4, GOALS-3, REVIEW-VEIL-13. REVIEW-VEIL-12 is not woken
   (its review file holds its instruments and its leads; a turn at 350,000 buys nothing). POINT 82: the helper's
   merge (ed9e140a8) and the census cure (379f63cb6) stand in `/home/user/wt/line`, UNPUSHED; its checks still run.
+- 12:54 UTC · SEATED AT 12:48 AND 12:52 (the push d8997a388 landed at 12:51): TRAD-4 session_019yED1RnYfDi9cdY4Djoc5Y (on
+  `lane/trad-3-2026-11-20`), PAGE-3 session_019yED1QsR5CgzseTy7AeDqZ (on `lane/page-2-2026-11-20`), PAGE-4
+  session_019yED1QJPUHGjH6C4jUJNMW (on `lane/page-1-2026-11-20`), GOALS-3 session_019yED1RVC8z87Yb1RHx576d (on
+  `lane/goals-2-2026-11-20`), REVIEW-VEIL-13 session_019yED1RimCUL1Q4txbQxDX9 (on
+  `lane/review-veil-12-2026-11-20`). ORDERED AT 12:48: TRAD-3 to hand over at the push with unit 4 and TRAD-SHARE,
+  or at 360,000; GOALS-2 to merge builder 6 if it returns by 13:15, write its hand-back and hand over; PAGE-1 to
+  hand over when S1 to S5 are merged with their words at the chair, or at 250,000. HAND-OVERS DONE: SEAT-3
+  "SEAT-PART 1cf452ac2, HANDED OVER" (324,853; U3 green at 0d71eaa3b: `tests/lint` whole 3,271; the confinement
+  equal; 0 bytes added; U4's builder out on `lane/seat-2026-11-20-u4`): SEAT-4 TOLD "THE LANE IS YOURS at
+  1cf452ac2" (12:52). PAGE-2 "PAGE-PART 6b82c8e4a, HANDED OVER": NOTHING IS MERGED AND NO CODE IS ON ITS LANE after
+  369,376 tokens; four builders out with LOCAL branches (S6 read and re-run by it; the sides table returned at
+  a89859e6f, unread; L4/S9 and L2 uncommitted); K ruled but not briefed; L1 not dispatched: PAGE-2 TOLD to push
+  each builder's branch to origin as it returns (`lane/page-2-2026-11-20-<unit>`) and relay; PAGE-3 TOLD "THE LANE
+  IS YOURS at 6b82c8e4a" with the order of merges (S6, the sides table, L2, L4/S9, L1, K last). FRAME-5 (about
+  300,000): P1b merged (section 2); CF12 building; the hand-over at its merge. PAGE-1: its hand-back written
+  (05bc9ca8f); none of its four builders has committed. VEIL-26: the brokerage lead closed (section 2). NET 11
+  armed for 13:38. POINT 82 in `/home/user/wt/line`: the merge equals the names seat's tip in every file (no
+  resolution); the census cure touches five declaration lines only; `tests/lint` whole 3,271 of 3,271 at the cure;
+  the typechecks and lint green; both censuses re-taken by their doors (bd49203fb: no figure moved); the helper's
+  last lint run and the landings row are still to come. A WART SEEN BY THE CHAIR IN THE CURE'S DIFF, a named
+  survivor for the close's sweep: the siege sentence says "<power> controls the rationing and the gates, which
+  means they control everything else too" (a singular verb, then "they") for a singular-named power.
