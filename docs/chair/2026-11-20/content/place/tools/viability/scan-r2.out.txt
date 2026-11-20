@@ -1,0 +1,4 @@
+76 Trade Dependencies | routed to the Outlook tab: false :: r2r-town-0,r2r-town-1,r2r-town-3,r2r-town-4
+4 Strong Magic Without Arcane Houses | routed to the Outlook tab: true :: r2r-town-9,r2r-town-13,r2r-town-26,r2r-town-29
+1 Locally Sustained Isolation | routed to the Outlook tab: true :: r2r-town-9
+1 Set on Arms Without Defences | routed to the Outlook tab: true :: r2r-town-33
