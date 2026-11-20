@@ -33,15 +33,15 @@ No row is marked HIDEABLE in this file.
 
 ### creditors_sit · rank 1 · not hideable · the crisis record holds the debt to an outside power (`t.stress` type `indebted`, label "Indebted to Outside Power") · raw 44.4% → 23.8%
 
-0. The place's debts sit heavy on the place, and the outside power it owes is moving to collect.
+0. Debt sits heavy here, and the outside power the place owes is moving to collect.
 1. Deep in debt, the place faces a creditor from beyond its bounds that means to be paid.
-2. What the place owes to a power outside is pressing on the place, and the lender is preparing to collect.
+2. What the place owes to a power outside is pressing hard, and the lender is preparing to collect.
 
 ### old_crash · rank 1 · not hideable · the timeline holds a market crash or a trade collapse (`history.historicalEvents[].templateType` is `'market_crash'` or `'trade_collapse'`) · raw 27.0% → 14.3%
 
 The crash and the debt are set side by side. Neither line says the crash made the debt (the record does not).
 
-0. The place's trade has crashed before, and now the place owes a heavy debt to an outside power that is preparing to collect.
+0. Trade here has crashed before, and now the place owes a heavy debt to an outside power that is preparing to collect.
 1. With a past ruin of its trade behind it, the place is deep in debt to a lender from outside who is moving to collect.
 
 ### hard_up · rank 1 · not hideable · the prosperity is Struggling or Poor (`economicState.prosperity`, read off the record, not through factsOf) · raw 22.2% → 14.3%
@@ -61,7 +61,7 @@ The crash and the debt are set side by side. Neither line says the crash made th
 
 ### through_trade · rank 2 · not hideable · the place is an entrepot (`economicState.isEntrepot`, read off the record; `tradeGoods.js :: deriveIsEntrepot`: a crossroads route, or a port with an international trade house or a warehouse district) · raw 27.0% → 6.3%
 
-0. Goods pass through the place on their way elsewhere, and the place owes a heavy debt to an outside power that is preparing to collect.
+0. Goods pass through here on their way elsewhere, and the place owes a heavy debt to an outside power that is preparing to collect.
 1. As a waypoint of passing trade, the place owes a great deal beyond its bounds, and the creditor is moving to collect.
 
 ### Plain (no cause holds) · raw → 20.6%
@@ -151,12 +151,12 @@ The crash and the debt are set side by side. Neither line says the crash made th
 
 ### coast · rank 2 · not hideable · the water is maritime (`factsOf(record).water.coast`, `water.js`: a coast, or a port route off a riverside) · raw 10.3% → 5.1%
 
-0. The place lies on the coast, where a flood from the sea is the standing fear, and who must guard against one and who pays is an open quarrel.
-1. With the sea at hand, the place dreads a great flood and quarrels over whose labour and whose purse must answer one.
+0. The place lies at the water's edge, where a flood is the standing fear, and who must guard against one and who pays is an open quarrel.
+1. With open water at hand, the place dreads a great flood and quarrels over whose labour and whose purse must answer one.
 
 ### river · rank 2 · not hideable · the water is a river (`factsOf(record).water.river`, `water.js`: a river route or a riverside) · raw 30.8% → 28.2%
 
-0. The place lies by a river, and the fear of a flood divides the place over who must keep the banks and who pays.
+0. The place lies by a river, and the fear of a flood divides it over who must keep the banks and who pays.
 1. With a river at hand, a great flood is the place's standing fear, and the work of guarding against one is a quarrel.
 2. A river runs by the place, and each wet season reopens the question of who must answer its floods and at whose cost.
 

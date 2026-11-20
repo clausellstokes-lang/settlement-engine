@@ -56,8 +56,8 @@ No row is marked HIDEABLE in this file: no predicate here names or implies a cri
 
 Both wordings hold for both fields: they say a source has failed OR is worked out.
 
-0. A source the place feeds itself from has failed or is worked out, and what remains is hoarded or priced beyond many.
-1. With one of its own food sources spent or failed, the place runs short, and the hoarders and the high prices follow.
+0. One of the place's own food sources has given out, and what remains is hoarded or priced beyond many.
+1. With one of its own food sources given out, the place runs short, and the hoarders and the high prices follow.
 
 ### old_scarcity · rank 1 · not hideable · the timeline holds a resource_scarcity event (`history.historicalEvents[].templateType === 'resource_scarcity'`) · raw 13.2% → 8.8%
 
@@ -92,7 +92,7 @@ Both wordings hold for both fields: they say a source has failed OR is worked ou
 
 ### war · rank 1 · not hideable · war is upon the place (`factsOf(record).warState` is `'at war'` or `'front'`, or `t.stress` holds `wartime`) · raw 32.9% → 24.1%
 
-0. War presses on the place, and the people are divided over whether to fight, bargain or flee.
+0. The war has come close, and the people are divided over whether to fight, bargain or flee.
 1. With war upon the place, the danger is close, and no one agrees how to meet it.
 2. The place stands in a time of war, and the argument over how to answer the danger sets neighbour against neighbour.
 
@@ -116,7 +116,7 @@ The label names raiders as well as beasts, so both wordings name both.
 
 ### open_road · rank 2 · not hideable · the trade route is a crossroads (`factsOf(record).route === 'crossroads'`) · raw 20.3% → 2.5%
 
-0. The place stands where roads cross, open to more than one road, and news of approaching danger splits the people over how to respond.
+0. The place stands where roads cross, and news of approaching danger splits the people over how to respond.
 1. At a meeting of roads, the place hears of danger approaching and cannot agree how to meet it.
 
 ### beasts_frontier · rank 2 · not hideable · the page itself prints the country's beasts as a threat (`factsOf(record).monsterFrontier`, `monsterFrontier.js :: monsterFrontierOf`: plagued country, or frontier country with a Weak or Critical Beasts & Monsters band) · raw 57.0% → 12.7%
@@ -148,14 +148,14 @@ The label names raiders as well as beasts, so both wordings name both.
 
 ### void · rank 1 · not hideable · the crisis record holds the succession void (`t.stress` type `succession_void`, label "Succession Void") · raw 37.8% → 20.3%
 
-0. The seat stands empty, and the would-be successors are each gathering support to fill the seat.
-1. With no one holding the seat, rival claimants are each building a following.
+0. The place awaits a new leader, and the would-be successors are each gathering support.
+1. Big decisions wait on a new leader, and rival claimants are each building a following.
 
 ### heir_house · rank 1 · not hideable · the ruler kind is lord (`factsOf(record).rulerKind === 'lord'`, `rulerKindLabel.js`: a noble, feudal, ducal or royal authority, or a steward or appointee) · raw 9.5% → 5.4%
 
 The kind covers stewards and appointees as well as lords, so neither wording says "heir" or "blood".
 
-0. The place is held under a lord's authority, and who will hold the place next is in open dispute among the would-be successors.
+0. The place is held under a lord's authority, and who holds it next is in open dispute among the would-be successors.
 1. Rule here passes through a lordly seat, and several who would take that seat are gathering backers.
 
 ### outranked · rank 1 · not hideable · a power that does not govern stands above the governing one (`factsOf(record).seatOutranked`, `seatOutranked.js :: seatOutrankedOf`) · raw 21.6% → 0.0%
