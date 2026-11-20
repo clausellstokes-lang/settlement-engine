@@ -21,7 +21,7 @@ import { resolveGenerationWorldLaw } from './generationContext.js';
 import { legacyMassRange } from '../domain/density/densityLaw.js'; import { defenceRoleGate } from '../domain/defense/defenseFacts.js'; import { crimeHasThievesGuild, crimeSignalOf, withoutCriminalGuild } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3): one line, so no cited line moves
 import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js'; import { drawDeclared, lineText, resolveSibling } from '../domain/facts/drawDeclared.js'; import { birthFactsOf, factsOf } from '../domain/facts/factsOf.js'; // F5, F10, CENSUS-1c, CENSUS-4f: one line, so no cited line moves
 import { CRAFTS_ROLES, NOBLE_ROLES } from './npc/factionRoleCatalog.js'; import { POWER_BANDS, titleLinesFor } from './people/poolMap.js'; // ITEM 15 (ALLEGIANCE-CAR4), one line so no cited line moves
-import { resolveGeneratedNpcTitle } from './npc/generatedNpcTitle.js';
+import { resolveGeneratedNpcTitle } from './npc/generatedNpcTitle.js'; import { seatsByHolder } from '../domain/seat/seatLaw.js'; // UK (SEAT-6, a): the seat law's one reader, for powerBandOfRole's fold; one line, so no cited line moves
 import { deriveThorpSecondRole } from './npc/thorpSecondRole.js'; // CENSUS-4 R9's guildTitleName and R3's tieArchetype left this line at MERGE-CAR (R9 superseded by the census titles and the honorific pools, R-P9; R3 read at people/ties.js); one line, so no cited line moves
 
 import { NAMING_DATA } from '../data/namingData.js';
@@ -56,7 +56,7 @@ const pickFromArray = r => ctxPick(r);
 // is the one it always described; the name it USED to wear has moved to the function that
 // actually generates the goal, twenty lines down (§759, the misleading-vocabulary risk: "each
 // new consumer that trusts a function name in that file risks wiring the wrong field").
-export const powerBandOfRole = role => { // COHERENCE-POWERS-5 (N2): the keyword band, draw-free, read by people/castPowers.js :: raiseToOfficeBand
+export const powerBandOfRole = (role, config) => { // COHERENCE-POWERS-5 (N2): the keyword band, draw-free, read by people/castPowers.js :: raiseToOfficeBand (no config: the old law); UK (a): `config` is the born config (or a settlement carrying it)
   const HIGH_POWER = [
     'mayor',
     'lord',
@@ -69,11 +69,11 @@ export const powerBandOfRole = role => { // COHERENCE-POWERS-5 (N2): the keyword
     'crime lord',
   ];
   const MID_POWER = ['council_member', 'priest', 'wealthy_merchant', 'wizard', 'knight', 'magister', 'sergeant'];
-  const r = String(role || '').toLowerCase();
-  return HIGH_POWER.some(kw => r.includes(kw)) ? 'high' : MID_POWER.some(kw => r.includes(kw)) ? 'moderate' : 'low';
+  const law = seatsByHolder(config), fold = s => String(s || '').toLowerCase().replace(/_/g, ' '), r = law ? fold(role) : String(role || '').toLowerCase(); // UK (a), PAGE-3 K1's fold (f4a434660) ONLY under the seat law: '_' and ' ' fold alike, both sides ('guild_master' meets 'Guild Master'); the old law reads as before, byte for byte
+  const has = kw => r.includes(law ? fold(kw) : kw); return HIGH_POWER.some(has) ? 'high' : MID_POWER.some(has) ? 'moderate' : 'low';
 };
-// one draw within the role's band (people/poolMap.js :: POWER_BANDS), as before: the same one `_rng()` call, the same values
-const generateNPCPowerLevel = role => { const band = POWER_BANDS[powerBandOfRole(role)]; return { level: band.level, power: band.floor + Math.floor(_rng() * band.span) }; };
+// one draw within the role's band (people/poolMap.js :: POWER_BANDS), as before: the same one `_rng()` call, the same values; UK (a): the band read under the card's born config
+const generateNPCPowerLevel = (role, config) => { const band = POWER_BANDS[powerBandOfRole(role, config)]; return { level: band.level, power: band.floor + Math.floor(_rng() * band.span) }; };
 
 // generateSingleNPC
 // `hookRegistry` — the settlement-scoped anti-repetition registry, created once
@@ -135,7 +135,7 @@ export const generateSingleNPC = ( // exported for people/representatives.js (th
   // hook is drawn by its birth seam on its own keyed fork, keyed by the face's title through the
   // pool map (people/representatives.js :: drawCardHooks), so that seam asks for none here.
   const plotHooks = options.hook === false ? [] : [drawPersonHook(category, config, hookRegistry, { worldLaw, institutions, tier })];
-  const powerLevel = generateNPCPowerLevel(role);
+  const powerLevel = generateNPCPowerLevel(role, config); // UK (a): the born config (every caller spreads it into its npcConfig) carries the seat law
   return {
     id: null,
     name: fullName,
