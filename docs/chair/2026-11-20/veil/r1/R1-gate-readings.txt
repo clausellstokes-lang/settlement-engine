@@ -1,0 +1,155 @@
+# VEIL-R1 · THE PROOF OF R1: the reader's gate (REVIEW-VEIL-9 differ-gate.mjs, origin/lane/review-veil-9-2026-11-19) over the
+# differ run THROUGH THE SERVER at the base bedd5a392 (chains of the base's own migrations; 212 dae0ae6c...19e247).
+# Re-read 2026-11-20 01:05 UTC after the chair's rulings VR19 and 1 to 11 (00:44 UTC). Runs (made 00:11 to 00:28 UTC): new shape N=2
+# (001..212), master's shape N=1 (master's generator db832c892, 203+211+212); every veil (default, hand, every eye shut;
+# Reveal DM off and on); the gallery read and the party link.
+# baseline = an empty registry and the reader's own rul-vr13.json (origin/lane/review-veil-9-2026-11-19 ::
+#   docs/chair/2026-11-19/veil/probes/REVIEW-VEIL-9/rul-vr13.json); committed = the two files of this commit (ruling 10:
+#   the VR13 rng rows built, so rulings.json carries them); every-row = scripts/veil/rosterChoiceRegistry.mjs --all (outside the tree).
+base-gallery | baseline: registered 0 | diffuse 0 | rng-only 20 | UNREGISTERED 124 (exit 1)
+base-gallery | committed: registered 0 | diffuse 0 | rng-only 13 | UNREGISTERED 131 (exit 1)
+base-gallery | every row: registered 108 | diffuse 23 | rng-only 13 | UNREGISTERED 0 (exit 0)
+base-link | baseline: registered 0 | diffuse 0 | rng-only 20 | UNREGISTERED 118 (exit 1)
+base-link | committed: registered 0 | diffuse 0 | rng-only 13 | UNREGISTERED 125 (exit 1)
+base-link | every row: registered 102 | diffuse 23 | rng-only 13 | UNREGISTERED 0 (exit 0)
+master-gallery | baseline: registered 0 | diffuse 0 | rng-only 20 | UNREGISTERED 135 (exit 1)
+master-gallery | committed: registered 0 | diffuse 0 | rng-only 10 | UNREGISTERED 145 (exit 1)
+master-gallery | every row: registered 120 | diffuse 25 | rng-only 10 | UNREGISTERED 0 (exit 0)
+master-link | baseline: registered 0 | diffuse 0 | rng-only 20 | UNREGISTERED 122 (exit 1)
+master-link | committed: registered 0 | diffuse 0 | rng-only 10 | UNREGISTERED 132 (exit 1)
+master-link | every row: registered 107 | diffuse 25 | rng-only 10 | UNREGISTERED 0 (exit 0)
+# the readers' own baselines (out/gate-baseline-tip.txt, -master.txt, at ad093c92c): 124/20 and 135/20, the SAME paths
+# as the baselines above (diffed path for path at the first reading, 00:33 UTC).
+
+## the committed reading's unregistered paths, new shape, gallery read
+activeConditions[].severity
+activeConditions[].severityBand
+defenseProfile.readiness.score
+defenseProfile.scores.disaster
+defenseProfile.scores.economic
+defenseProfile.scores.internal
+economicState.compound.criminalEffective
+economicState.compound.criminalPreStress
+economicState.compound.economyOutput
+economicState.compound.magicInfluence
+economicState.compound.militaryEffective
+economicState.compound.religionInfluence
+economicState.economicComplexity
+economicState.foodSecurity.foodRecord.storageMonths
+economicState.foodSecurity.resilienceScore
+economicState.foodSecurity.storageMonths
+economicState.foodSecurity.storageNote
+economicState.incomeSources[] (only in B)
+economicState.incomeSources[].weight
+economicState.prosperity
+economicState.prosperityStanding
+economicState.safetyProfile.compound.criminalEffective
+economicState.safetyProfile.compound.criminalPreStress
+economicState.safetyProfile.compound.economyOutput
+economicState.safetyProfile.compound.magicInfluence
+economicState.safetyProfile.compound.militaryEffective
+economicState.safetyProfile.compound.religionInfluence
+economicState.safetyProfile.economicDragDesc
+economicState.safetyProfile.flags.anyActive
+economicState.safetyProfile.flags.arcaneBlackMarket
+economicState.safetyProfile.flags.merchantArmy
+economicState.safetyProfile.flags.religiousFraud
+economicState.safetyProfile.guardEffectivenessDesc
+economicState.safetyProfile.safetyDesc
+economicState.safetyProfile.safetyLabel
+economicState.safetyProfile.safetyRatio
+economicState.situationDesc
+history.currentTensions[] (only in A)
+history.eventsTimeline[] (only in A)
+history.eventsTimeline[].anchored
+history.eventsTimeline[].year
+history.founding.overcoming
+history.historicalEvents[] (only in A)
+history.historicalEvents[].anchored
+history.legacyAnnotations[]
+history.legacyAnnotations[].annotation
+history.legacyAnnotations[].eventName
+history.legacyAnnotations[].eventType
+history.legacyAnnotations[].severity
+history.legacyAnnotations[].yearsAgo
+history.siegeNarrative
+institutions[].desc
+npcs[].memberships[].veiled
+npcs[].stressNote
+powerStructure.economyInputFingerprint
+powerStructure.factionRelationships[] (only in A)
+powerStructure.factionRelationships[] (only in B)
+powerStructure.factionRelationships[].dmNote
+powerStructure.factionRelationships[].ratio
+powerStructure.factions[] (only in A)
+powerStructure.factions[] (only in B)
+powerStructure.factions[].contestsNiche
+powerStructure.factions[].desc
+powerStructure.factions[].power
+powerStructure.factions[].powerLabel
+powerStructure.factions[].rawPower
+powerStructure.publicLegitimacy.bg
+powerStructure.publicLegitimacy.breakdown.prosperity
+powerStructure.publicLegitimacy.breakdown.safety
+powerStructure.publicLegitimacy.color
+powerStructure.publicLegitimacy.crimMultiplier
+powerStructure.publicLegitimacy.govMultiplier
+powerStructure.publicLegitimacy.isApproved
+powerStructure.publicLegitimacy.isContested
+powerStructure.publicLegitimacy.isEndorsed
+powerStructure.publicLegitimacy.isTolerated
+powerStructure.publicLegitimacy.label
+powerStructure.publicLegitimacy.score
+powerStructure.recentConflict
+powerStructure.stability
+publicProse.blocks.defense:posture.posture.field
+publicProse.blocks.defense:posture.prize.field
+publicProse.blocks.defense:posture.terrain.field
+publicProse.blocks.defense:state.firstSurvey.field
+publicProse.blocks.defense:state.publicOrder.beside
+publicProse.blocks.defense:state.publicOrder.field
+publicProse.blocks.defense:state.publicOrder.rung.glance
+publicProse.blocks.defense:state.publicOrder.rung.sentence
+publicProse.blocks.defense:threat.economic.sentence
+publicProse.blocks.defense:wall.rationale.sentence
+publicProse.blocks.economy:daily_life.incomeWeight
+publicProse.blocks.economy:daily_life.shadowEconomy
+publicProse.blocks.economy:economics.incomeMix.sentence
+publicProse.blocks.economy:economics.incomeWeight
+publicProse.blocks.economy:economics.prosperityHeader.detail[].value
+publicProse.blocks.economy:economics.prosperityHeader.glance
+publicProse.blocks.economy:economics.prosperityHeader.sentence
+publicProse.blocks.economy:economics.prosperityRung.glance
+publicProse.blocks.economy:economics.prosperityRung.sentence
+publicProse.blocks.economy:economics.shadowEconomy
+publicProse.blocks.economy:economics.shadowEconomy.sentence
+publicProse.blocks.economy:resources.incomeWeight
+publicProse.blocks.economy:resources.shadowEconomy
+publicProse.blocks.economy:services.incomeWeight
+publicProse.blocks.economy:services.shadowEconomy
+publicProse.blocks.general:history.legacyLines[] (only in A)
+publicProse.blocks.power:desk.legitimacyBanner.glance
+publicProse.blocks.power:desk.legitimacyLens
+publicProse.blocks.power:desk.stabilityHeader.glance
+publicProse.blocks.power:desk.structureFlag
+publicProse.blocks.power:desk.successionRisk.glance
+publicProse.blocks.stressors:overview.conditionSeverity.glance
+publicProse.blocks.stressors:overview.conditionSeverity.sentence
+publicProse.blocks.warFaith:faith.templeFraud
+relationships[].covert
+relationships[].handler
+spatialLayout.quarters[] (only in A)
+stress.cast.absent[]
+stress.cast.roles[].reason
+stress.cast.roles[].role
+stress.cast.stakes[]
+stress.cast.stakes[].factionId
+stress.cast.stakes[].reason
+stress.cast.stakes[].stake
+stressors.cast.absent[]
+stressors.cast.roles[].reason
+stressors.cast.roles[].role
+stressors.cast.stakes[]
+stressors.cast.stakes[].factionId
+stressors.cast.stakes[].reason
+stressors.cast.stakes[].stake

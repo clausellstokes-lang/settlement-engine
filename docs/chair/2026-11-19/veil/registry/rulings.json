@@ -1,0 +1,16 @@
+{
+  "diffuse": [],
+  "rng": [
+    "^history\\.currentTensions\\[\\] \\(only in B\\)$",
+    "^history\\.currentTensions\\[\\]\\.description$",
+    "^history\\.currentTensions\\[\\]\\.factions\\[\\] \\(only in [AB]\\)$",
+    "^history\\.(historicalEvents|eventsTimeline)\\[\\] \\(only in B\\)$",
+    "^history\\.eventsTimeline\\[\\]\\.yearsAgo$",
+    "^history\\.historicalCharacter$",
+    "^history\\.historicalEvents\\[\\]\\.description$",
+    "^history\\.historicalEvents\\[\\]\\.lastingEffects\\[\\] \\(only in [AB]\\)$",
+    "^history\\.historicalEvents\\[\\]\\.severity$",
+    "^history\\.historicalEvents\\[\\]\\.yearsAgo$",
+    "^publicProse\\.blocks\\.general:history\\.legacyLines\\[\\] \\(only in B\\)$"
+  ]
+}
