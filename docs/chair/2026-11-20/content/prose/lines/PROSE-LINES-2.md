@@ -13,8 +13,8 @@ Existing:
 2. `[ledger]` The charter hall at {settlement} keeps a book of the bounties the town has posted, and every unclaimed one is a danger still at large.
 
 New:
-3. `[visitor]` A stranger walking into {settlement}'s charter hall finds the town's paid work posted up where anyone can read it.
-4. `[counterforce]` The charter hall at {settlement} is where the town and those who take its contracts meet, and neither has to go looking for the other. *(PROSE-1: the draft's payment rule, "paid when the work is done and not before", was a new fact.)*
+3. `[visitor]` A stranger walking into {settlement}'s charter hall finds the place's paid work posted up where anyone can read it. *(CHAIR 17:28: the noun; no new line says "town")*
+4. `[counterforce]` The charter hall at {settlement} is where the place and those who take its contracts meet, and neither has to go looking for the other. *(PROSE-1: the draft's payment rule, "paid when the work is done and not before", was a new fact.)* *(CHAIR 17:28: the noun; no new line says "town")*
 5. `[unfolding]` Contracts go up at {settlement}'s charter hall and come down again as they are taken, and what is posted there is never the same for long.
 6. `[threshold]` The charter hall at {settlement} takes up only what is posted there; a trouble nobody posts is a trouble the hall never hears of.
 7. `[street]` What is posted at the charter hall is common talk at {settlement}, and people read the notices whether or not they mean to take any.
@@ -32,7 +32,7 @@ New:
 4. `[counterforce]` The alchemists at {settlement} hold no rank in its defence and stand no watch; they make, and the defenders take what is made.
 5. `[threshold]` {settlement}'s defenders can call on only as much alchemy as has already been made, and nothing alchemical is to hand that a workbench has not finished.
 6. `[unfolding]` Alchemy at {settlement} goes on at its own pace, and the defenders' share of it comes off the workbench as it is made.
-7. `[street]` People at {settlement} speak of the town's alchemists as part of its defence, though few could say what the alchemists make for it.
+7. `[street]` People at {settlement} speak of the place's alchemists as part of its defence, though few could say what the alchemists make for it. *(CHAIR 17:28: the noun; no new line says "town")*
 
 ## 3. DS-ECO-12 :: CRITICAL IMPORT: a house needs what the land lacks
 
@@ -46,10 +46,10 @@ Existing:
 
 New:
 5. `[street · no crisis: under_siege]` Everyone at {settlement} who works with {good} knows the country here does not give enough of it, and that the rest must come from outside.
-6. `[counterforce · no crisis: under_siege]` No amount of work in the country around {settlement} brings up enough {good} for what the town does with it: the shortfall is in the land, not in the hands.
-7. `[threshold · no crisis: under_siege]` Some of {settlement}'s work goes only as far as its {good} goes, and the country around the town cannot make it go far enough.
-8. `[unfolding · no crisis: under_siege · critical import brought in]` What {good} {settlement}'s work needs comes in from outside, because the country around the town cannot supply enough of it.
-9. `[ledger · no crisis: under_siege · critical import brought in]` {settlement}'s accounts carry {good} as a standing purchase: the work needs it, and the land around the town does not give it.
+6. `[counterforce · no crisis: under_siege]` No amount of work in the country around {settlement} brings up enough {good} for what the place does with it: the shortfall is in the land, not in the hands. *(CHAIR 17:28: the noun; no new line says "town")*
+7. `[threshold · no crisis: under_siege]` Some of {settlement}'s work goes only as far as its {good} goes, and the country around the place cannot make it go far enough. *(CHAIR 17:28: the noun; no new line says "town")*
+8. `[unfolding · no crisis: under_siege · critical import brought in]` What {good} {settlement}'s work needs comes in from outside, because the country around the place cannot supply enough of it. *(CHAIR 17:28: the noun; no new line says "town")*
+9. `[ledger · no crisis: under_siege · critical import brought in]` {settlement}'s accounts carry {good} as a standing purchase: the work needs it, and the land around the place does not give it. *(CHAIR 17:28: the noun; no new line says "town")*
 
 ## 4. DS-DEF-4 :: FIXTURE: black market
 
@@ -63,9 +63,9 @@ Existing:
 
 New:
 3. `[visitor · dm-only]` Nothing marks {settlement}'s black market to a stranger, yet the goods sold there are the kind no lawful stall would show.
-4. `[counterforce · dm-only]` Whatever the town's law forbids to be sold, {settlement}'s black market has not stopped selling.
-5. `[unfolding · dm-only]` Contraband and stolen goods keep changing hands at {settlement}'s black market, out of sight of the town's lawful trade.
-6. `[threshold · dm-only]` The black market at {settlement} sits just out of the law's sight: a known thing in the town, and not quite an open one.
+4. `[counterforce · dm-only]` Whatever the place's law forbids to be sold, {settlement}'s black market has not stopped selling. *(CHAIR 17:28: the noun; no new line says "town")*
+5. `[unfolding · dm-only]` Contraband and stolen goods keep changing hands at {settlement}'s black market, out of sight of the place's lawful trade. *(CHAIR 17:28: the noun; no new line says "town")*
+6. `[threshold · dm-only]` The black market at {settlement} sits just out of the law's sight: a known thing in the place, and not quite an open one. *(CHAIR 17:28: the noun; no new line says "town")*
 
 ## 5. DS-DEF-2 :: Internal Security: no legal infrastructure
 
@@ -77,9 +77,9 @@ Existing:
 3. `[visitor]` If you are wronged at {settlement}, there is no court to take it to, and no local is surprised.
 
 New:
-4. `[counterforce]` Nobody at {settlement} is set over a quarrel to decide it, and the town gets along without anybody being so.
+4. `[counterforce]` No court sits at {settlement} to decide a quarrel, and the place gets along without one. *(CHAIR 17:28: reworded word for word)*
 5. `[threshold]` {settlement} manages its quarrels without a court, so long as they stay small enough for the people in them to settle.
-6. `[unfolding]` Each quarrel at {settlement} is settled between the people in it, on the day, and the settling is the end of it.
+6. `[unfolding]` A quarrel at {settlement} is settled without a court, by the people in it or by whoever they both heed. *(CHAIR 17:28: reworded word for word)*
 7. `[ledger]` {settlement} spends nothing on judgement: it pays no one to hear a case and keeps nowhere to hold an offender.
 
 ## 6. DS-DEF-1 :: readiness WEAK
@@ -93,10 +93,10 @@ Existing:
 4. `[ledger · crisis: any · law: = collapsed]` {settlement} could not hold off a raid, and its brawls and thefts go unanswered as it is.
 
 New:
-5. `[street · crisis: any · no crisis: threat, unrest]` People at {settlement} do not count on the town's defences for much, and say so without alarm.
-6. `[counterforce · crisis: any · no crisis: threat, unrest]` There is no reserve behind {settlement}'s defence; what the town can field is all of it, and it is not much.
+5. `[street · crisis: any · no crisis: threat, unrest]` People at {settlement} do not count on the place's defences for much, and say so without alarm. *(CHAIR 17:28: the noun; no new line says "town")*
+6. `[counterforce · crisis: any · no crisis: threat, unrest]` There is no reserve behind {settlement}'s defence; what the place can field is all of it, and it is not much. *(CHAIR 17:28: the noun; no new line says "town")*
 7. `[threshold · crisis: any · no crisis: threat, unrest]` {settlement} is weakly defended rather than undefended: there is something to meet trouble with, and not much more than something.
-8. `[visitor · crisis: any · no crisis: threat, unrest]` A stranger sees little at {settlement} that is kept for fighting; the town looks after its ordinary business and not much else.
+8. `[visitor · crisis: any · no crisis: threat, unrest]` A stranger sees little at {settlement} that is kept for fighting; the place looks after its ordinary business and not much else. *(CHAIR 17:28: the noun; no new line says "town")*
 9. `[ledger · crisis: any · no crisis: threat, unrest]` Counted up, the people {settlement} could put under arms make a thin defence. *(PROSE-1: the draft, "too few to make a defence of", read as no defence, which is a rung below WEAK.)*
 
 ## 7. DS-ECO-12 :: INCOME WEIGHT: the practice of magic
@@ -108,9 +108,9 @@ Existing:
 2. `[street · colour]` Magic is reckoned with in {settlement}'s dealings, whatever it earns.
 
 New:
-3. `[visitor · colour]` A stranger trading at {settlement} soon finds that the town's dealers take magic into account as a matter of course.
+3. `[visitor · colour]` A stranger trading at {settlement} soon finds that the place's dealers take magic into account as a matter of course. *(CHAIR 17:28: the noun; no new line says "town")*
 4. `[counterforce · colour]` At {settlement} no large undertaking is reckoned up without asking what magic could add to it or take from it.
-5. `[threshold · colour]` Magic's weight at {settlement} lies in what it can do rather than in what it earns, and the town's dealings would look different without it.
+5. `[threshold · colour]` Magic's weight at {settlement} lies in what it can do rather than in what it earns, and the place's dealings would look different without it. *(CHAIR 17:28: the noun; no new line says "town")* *(CHAIR 17:28 check 5: the block's STATE-KEY and this pool's key are `compound.magicInfluence` high, an influence, not a weighty share of earnings; the line stands but for the noun.)*
 6. `[unfolding · colour]` In {settlement}'s dealings, the question of what magic can do comes up again with each new bargain.
 
 ## 8. DS-ECO-12 :: INCOME MIX: one source carries the town
@@ -123,11 +123,11 @@ Existing:
 3. `[threshold · no hunger · prosperity: ≥ moderate]` {settlement} lives largely on one source of income. It is doing well enough now, but if that source has a bad year, the whole town has a bad year.
 
 New:
-4. `[visitor · colour]` A visitor to {settlement} can tell within a day what the town lives on, because so much of it turns on the one thing.
-5. `[counterforce · colour]` {settlement} does not spread its living across many trades: one carries the town, and the rest are small beside it.
-6. `[unfolding · colour]` Whatever the one source brings in at {settlement} passes from hand to hand through the town, and most of what people earn there began as that.
-7. `[street · colour]` Ask at {settlement} what the town lives on and everyone gives the same answer.
-8. `[ledger · colour]` In {settlement}'s reckoning one source stands far above the rest, and the rest together come to less than it.
+4. `[visitor · colour]` A visitor to {settlement} can tell within a day what the place lives on, because so much of it turns on the one thing. *(CHAIR 17:28: the noun; no new line says "town")*
+5. `[counterforce · colour]` {settlement} does not spread its living across many trades: one carries the place, and the rest are small beside it. *(CHAIR 17:28: the noun; no new line says "town")*
+6. `[unfolding · colour]` Whatever the one source brings in at {settlement} passes from hand to hand through the place, and most of what people earn there began as that. *(CHAIR 17:28: the noun; no new line says "town")*
+7. `[street · colour]` Ask at {settlement} what the place lives on and everyone gives the same answer. *(CHAIR 17:28: the noun; no new line says "town")*
+8. `[ledger · colour]` In {settlement}'s reckoning one source stands far above the rest. *(CHAIR 17:28: reworded word for word; the tail dropped: `economyStateProse.js :: incomeMixPoolKey` keys this pool at a leader share `>= SOLE_EARNER_FROM` (50), so half, not more than half, is proved)*
 
 ## 9. DS-GEN-18 :: STALLED
 
@@ -140,10 +140,10 @@ Existing:
 4. `[unfolding · crisis: under_siege]` Some of the work at {settlement} needs goods that nothing here makes, and since the siege nothing comes in from outside.
 
 New:
-5. `[visitor · no crisis: under_siege]` A stranger at {settlement} may find a workshop ready to work and waiting on goods that no trade in the town makes.
+5. `[visitor · no crisis: under_siege]` A stranger at {settlement} may find a workshop ready to work and waiting on goods that no trade in the place makes. *(CHAIR 17:28: the noun; no new line says "town")*
 6. `[counterforce · no crisis: under_siege]` {settlement} has the hands for some of its work and not the goods that work starts from, and the hands alone cannot supply them.
 7. `[threshold · no crisis: under_siege]` Some of {settlement}'s work goes only as far as the goods it needs from elsewhere allow, and stops where they stop.
-8. `[unfolding · no crisis: under_siege]` Some of {settlement}'s work is held up for want of a supply that nothing in the town provides, and it stays held up until that supply is found.
+8. `[unfolding · no crisis: under_siege]` Some of {settlement}'s work is held up for want of a supply that nothing in the place provides, and it stays held up until that supply is found. *(CHAIR 17:28: the noun; no new line says "town")*
 
 ## 10. DS-ECO-12 :: CRITICAL IMPORT: the land cannot give it
 
@@ -155,9 +155,9 @@ Existing:
 3. `[ledger · no imports]` The country around {settlement} does not give the town enough {good}, so the town must look elsewhere for the rest.
 
 New:
-4. `[visitor · colour]` A stranger looking over the country around {settlement} sees little sign of the {good} the town needs.
-5. `[counterforce · colour]` However the people of {settlement} work their land, it does not yield the {good} the town needs in full.
-6. `[threshold · colour]` {settlement} is short of {good} by its own land alone; whether the town goes short in fact depends on what it brings in.
+4. `[visitor · colour]` A stranger looking over the country around {settlement} sees little sign of the {good} the place needs. *(CHAIR 17:28: the noun; no new line says "town")*
+5. `[counterforce · colour]` However the people of {settlement} work their land, it does not yield the {good} the place needs in full. *(CHAIR 17:28: the noun; no new line says "town")*
+6. `[threshold · colour]` {settlement} is short of {good} by its own land alone; whether the place goes short in fact depends on what it brings in. *(CHAIR 17:28: the noun; no new line says "town")*
 7. `[unfolding · colour]` {settlement}'s need for {good} keeps running ahead of what its own country yields.
 
 ## 11. DS-ECO-11 :: RESOURCE CONDITION: worked out, recovers in time
@@ -190,10 +190,10 @@ Existing:
 9. `[street · no gate · guardPresence · crisis: under_siege]` The people who keep order in {settlement} are spread along a wall with no gate in it, and the siege can try it anywhere.
 
 New:
-10. `[counterforce · gate · no crisis: under_siege]` The wall around {settlement} leaves no way in but by its gates, and no lane or gap gets round it.
+10. `[counterforce · gate · no crisis: under_siege]` The wall around {settlement} brings every road in through its gates. *(CHAIR 17:28: reworded word for word)*
 11. `[threshold · gate · no crisis: under_siege]` {settlement}'s wall is only as good as its gates, and its gates are only as good as whoever shuts them.
-12. `[ledger · gate · no crisis: under_siege]` The upkeep of {settlement}'s wall is a standing charge on the town, paid like any other.
-13. `[visitor · gate · no crisis: under_siege]` Coming up to {settlement}, a traveller sees the wall before the town behind it.
+12. `[ledger · gate · no crisis: under_siege]` The upkeep of {settlement}'s wall is a standing charge on the place. *(CHAIR 17:28: reworded word for word)*
+13. `[visitor · gate · no crisis: under_siege]` Coming up to {settlement}, a traveller sees the wall before anything behind it. *(CHAIR 17:28: reworded word for word)*
 
 ## 13. DS-POW-4 :: riskLabel: Holding
 
@@ -220,7 +220,7 @@ Existing:
 4. `[ledger · crisis: indebted]` {settlement} earns well, but much of what it earns goes to the outside power it owes.
 
 New:
-5. `[counterforce · crisis: any · no crisis: indebted]` {settlement} is neither out of the way nor poor: its approach serves it, and the town does well on it. *(PROSE-1: "approach" for the draft's "way in".)*
+5. `[counterforce · crisis: any · no crisis: indebted]` {settlement} is neither out of the way nor poor: its approach serves it, and the place does well on it. *(PROSE-1: "approach" for the draft's "way in".)* *(CHAIR 17:28: the noun; no new line says "town")*
 6. `[threshold · crisis: any · no crisis: indebted]` {settlement} does well enough that a lean year would cost it comfort rather than bread.
 7. `[unfolding · crisis: any · no crisis: indebted]` {settlement} goes on doing well, and nobody there counts the margin closely.
 
@@ -266,7 +266,7 @@ Existing:
 
 New:
 4. `[visitor · dm-only · no crisis: under_siege]` An honest trader at {settlement} pays dues that some of the goods on the next cart never paid.
-5. `[unfolding · dm-only · no crisis: under_siege]` Each cargo that comes into {settlement} under a false list leaves the town's dues a little shorter, and the shortfall runs on.
+5. `[unfolding · dm-only · no crisis: under_siege]` Each cargo that comes into {settlement} under a false list leaves the place's dues a little shorter, and the shortfall runs on. *(CHAIR 17:28: the noun; no new line says "town")*
 6. `[threshold · dm-only · no crisis: under_siege]` Untaxed goods at {settlement} travel in among the taxed, and the line between the two is wherever a cargo list says it is.
 7. `[street · dm-only · no crisis: under_siege]` People at {settlement} know some goods come in cheaper than their dues would allow, and do not ask why.
 
@@ -281,9 +281,9 @@ Existing:
 
 New:
 4. `[counterforce · colour]` {settlement} does not wait to raise its defenders when trouble comes: they are already standing.
-5. `[threshold · colour]` {settlement}'s standing force is ready for what it is sized for, and the town's defence beyond that rests on whatever else it keeps.
+5. `[threshold · colour]` {settlement}'s standing force is ready for what it is sized for, and the place's defence beyond that rests on whatever else it keeps. *(CHAIR 17:28: the noun; no new line says "town")*
 6. `[unfolding · colour]` The soldiers at {settlement} drill, stand their posts and are relieved in turn, day in and day out.
-7. `[visitor · colour]` A stranger at {settlement} can tell its soldiers from its townsfolk at a glance: soldiering is their whole work.
+7. `[visitor · colour]` A stranger at {settlement} can tell its soldiers from its other folk at a glance: soldiering is their whole work. *(CHAIR 17:28: the noun; no new line says "town")*
 
 ## 19. DS-ECO-2 :: FOOD: surplus
 
@@ -298,7 +298,7 @@ Existing:
 6. `[visitor · hunger]` What {settlement} raises still comes out ahead of what it eats, and this year every bit of the excess is wanted at home.
 
 New:
-7. `[counterforce · no hunger]` Nobody at {settlement} goes short of food, and the town has more than it needs besides.
+7. `[counterforce · no hunger]` Nobody at {settlement} goes short of food, and the place has more than it needs besides. *(CHAIR 17:28: the noun; no new line says "town")*
 8. `[threshold · no hunger]` {settlement} is past feeding itself, not merely level with its needs: what it raises leaves something over.
 9. `[unfolding · no hunger]` What {settlement} raises keeps coming in ahead of what it eats, and the spare goes into store or out to buyers.
 
@@ -312,10 +312,10 @@ Existing:
 3. `[visitor · colour]` Ask at {settlement} who runs things on the quiet and you get blank looks; either nobody does, or the town hides it very well.
 
 New:
-4. `[counterforce · colour]` Nobody at {settlement} pays to be left alone, so far as anyone will say.
-5. `[threshold · colour]` Crime at {settlement} goes no further than a single wrongdoer and a single wrong; past that, the town knows of nothing.
-6. `[unfolding · colour]` No ring that anyone can find has grown out of {settlement}'s small wrongs; they stay small and separate.
-7. `[visitor · colour]` A stranger at {settlement} is told whom to trust and whom to watch, but never whom to pay.
+4. `[counterforce · dm-only · colour]` Nobody at {settlement} pays to be left alone, so far as anyone will say. *(CHAIR 17:28: dm-only)*
+5. `[threshold · dm-only · colour]` Crime at {settlement} goes no further than a single wrongdoer and a single wrong; past that, the place knows of nothing. *(CHAIR 17:28: dm-only; the noun)*
+6. `[unfolding · dm-only · colour]` No ring that anyone can find has grown out of {settlement}'s small wrongs; they stay small and separate. *(CHAIR 17:28: dm-only)*
+7. `[visitor · dm-only · colour]` A stranger at {settlement} is told whom to trust and whom to watch, but never whom to pay. *(CHAIR 17:28: dm-only)*
 
 ---
 
