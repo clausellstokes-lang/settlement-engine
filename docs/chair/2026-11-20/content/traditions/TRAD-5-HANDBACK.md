@@ -68,19 +68,40 @@ chair's word "THE LANE IS YOURS at a7473f47c" (18:44 UTC). A successor needs THI
 ## 2. THE UNITS (earlier units: TRAD-4-HANDBACK §2)
 | unit | what | state | commit |
 |---|---|---|---|
-| 10 | no town prints a sentence twice | MERGED by TRAD-4 (`9530bd22f`); gates re-run by TRAD-5 at `a7473f47c` (§4) | `ea1e2ffaa` |
-| 11 | founder phrase last (commit 1); `pickVariantMixed` at the leaf's pick (commit 2) | builder out in TRAD-4's container (`trad4-u11`); waited for until 19:15 UTC, else re-staffed here | — |
-| 6' | unit 6's counts re-taken; the owner's files re-cut once | after unit 11 | — |
+| 10 | no town prints a sentence twice | MERGED by TRAD-4 (`9530bd22f`); its gates re-run by TRAD-5 at `a7473f47c`: module files 0, `tests/lint` 3303/3304 (census only), typechecks 0, eslint 0; census by its door `24a01c130`; then `tests/lint` WHOLE 221/221, 3304/3304 | `ea1e2ffaa` |
+| 11 | founder phrase last (`d32f044d6`); `pickVariantMixed` at the leaf's pick (`dbfca2aa1`); the table's header comment (`b328a9b5a`, TRAD-5's builder, brief `briefs/TRAD-5-U11-COMMENT.md`) | READ ONCE, red re-run at `e97a917b7`: 3 failed / 140 passed, exactly its three new arms; MERGED `37b3f9dcd`; gates there: module files 262/262, `tests/lint` 3306/3307 (census only), typechecks 0, eslint 0, confinement 1,245 identical | `lane/trad-5-2026-11-20-u11-wip` |
+| 12 | unit 6's measures re-taken on the final leaf; the owner's four files re-cut once from the same towns; HOUSES.txt (brief `briefs/TRAD-5-U12-RECUT.md`) | READ, MERGED `96d4c7b22` (docs and the lane's tools only); census by its door `624e5a9ba` | `lane/trad-5-2026-11-20-u12-wip` (`1a86ee712`) |
 
-## 3. NAMED SURVIVORS (not built now)
+## 3. FOR THE OWNER (plain text beside this file, re-cut once by unit 12 from the same towns as TRAD-4's first cut)
+`TRAD-5-SAMPLES-30.txt`, `TRAD-5-SAMPLES-CRISIS-12.txt`, `TRAD-5-MEASURES.txt`, `TRAD-5-FOR-THE-OWNER-SHARED-PAGE.txt`;
+each opens with one plain paragraph of what moved (no sentence twice in a town: 94 of 432 towns before; "kept"/"keeps"
+twice: 13 calm rites and 29 under famine before; the founding sentence ends on its founder: 387; "A common feast" picked
+55% -> 24%). `out-trad5/RUN.txt` re-makes every figure. The shared-page count (0 of 432) was NOT re-run (no tool computes it).
+
+## 3b. NAMED SURVIVORS (not built now)
 - An imported clone re-draws its traditions (the sanitizer drops `traditions`; 0 of 140 clones show the served set).
 - The PDF with a lit mirror prints a sentence twice in 2 towns (Silberwiese, Hisntappa: mirror rows the owner's set drops,
   described alone); the player tab 0. The PDF's and the player tab's rites outside the drawn set.
 - The dead `recordCleanOf` reader.
-- CTR11's "other direction" line for the owner: 17 of 1,232 rites (TRAD-4 unit 6).
+- CTR11's "other direction" line for the owner: 17 of 1,232 rites (re-taken by unit 12: still 17; the figures file's raw 34
+  compares a rite in its set with the same rite alone, so 17 is the like-for-like count).
+- The leaf rotates no S1 lead: a town whose two rites share an act and print no gloss could repeat a lead (0 of 432 do).
+- The owner's page only: the payer's rank counts a criminal income row (17 rites' rank word); a criminal power that is not
+  hidden could be named as an owner-page keeper (0 rites in the six pools).
+- `tests/kernel/proseHash.test.js` counts as parked in the lighting census (473) from the cherry-pick: the chair's, at the close.
 
 ## 4. EXECUTED vs PLAUSIBLE
+EXECUTED by TRAD-5: the confinement (`born.mjs`, base `441ec3b32` archive, sha `d70950941f33…a002a`) at `e97a917b7` (code
+equal to `a7473f47c`) and at `37b3f9dcd` (code equal to the final tip): 1,245 documents cmp-identical each time. The gates
+in §2. Unit 11's and 12's measures are the BUILDERS' (executed by them, receipts in their commits), not re-run by TRAD-5.
 
 ## 5. HOUSES THE POOLS NEED (for the security reader at the join)
+`out-trad5/HOUSES.txt` (by `tools/houses.mjs`, `isHideableHouse` CALLED): 57 houses, 0 hideable (catalogue at every tier,
+and 0 of 4,000 born in the calm pool). Atoms that read a house: `institution: smith`, `market`; atoms reading no house:
+`navigable`, `river`, `coast`. No wording reads a fact about crime: the leaf reads hideable houses, veiled powers and the
+criminal income only to leave them out of the reader's text.
 
 ## Updated (append at each later commit, with `date -u`)
+- 2026-11-20 19:48 UTC — the lane taken at `a7473f47c`; unit 10's gates re-run and the census by its door (`24a01c130`); unit 11 merged
+  (`37b3f9dcd`); unit 12 merged (`96d4c7b22`); the census by its door again (`624e5a9ba`). NEXT: `tests/lint` whole at the
+  final commit, then "TRAD <commit>".
