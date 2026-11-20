@@ -32,7 +32,7 @@ the owner 1 row, another user 0, a support agent 2). THE OTHER DOORS, BY EXECUTI
 uuid argument set in turn to a real row of each of 36 tables (a ticket, a reply, a redemption, a referral, a transfer
 case, a founder-seat transfer and buyback, custom content and its revisions, operator messages, comments, reports,
 users…; `proof/fill-rows.sql`, `fill-rows-2.sql`, `doors-anon-values.sh`, outputs `out213/wide-values-*.tsv`), on
-production's state (emergency script + the ticket lines) and after 213: no door acts or reads for anon beyond public
+a copy in production's likely state (emergency script, plus the ticket lines) and after 213: no door acts or reads for anon beyond public
 reads (the vote count and comments of a public town) and `account_is_active` (VR38). NOT FED A REAL ROW: doors whose
 arguments are not uuids (slugs: `get_gallery_dossier`, `get_unlisted_*`, `import_gallery_dossier`,
 `list_gallery_more_by_creator`, `bump_public_view`; codes: `validate_redeem_code`, `record_referral_intent`; no
@@ -117,9 +117,14 @@ no-op there), stops signed-out visitors calling the three admin buttons and the 
 refuse a caller with no account instead of letting it through. Every page, save, share, gallery read, import, map,
 ticket, credit and Surveyor path was run before and after: identical. **After it, run `CHECK_213.sql` once** (read-only,
 one statement, one row). Expected: `closed_still_open_count 0 · missing_count 0 · service_role_lacking_count 0 ·
-anon_doors_open 0 · signed_in_doors_closed 0 · guards_in_place 5 · unlisted_open_count 0`. On production's state before
-213 it reads 21 still open and 0 guards (measured on a copy). `unlisted_open` names any function a visitor may call
-that is not on the written list, including anything made by hand; anything else: send the row.
+anon_doors_open 0 · signed_in_doors_closed 0 · guards_in_place 5 · unlisted_open_count 0`. The two rows, in the
+check's column order (closed_still_open_count · missing_count · service_role_lacking_count · anon_doors_open ·
+signed_in_doors_closed · guards_in_place · unlisted_open_count), as the reader REVIEW-GRANTS-1 measured them:
+**BEFORE 213**, on a production where the emergency script ran: `21 · 0 · 0 · 1 · 0 · 0 · 21` if the ticket thread's
+two lines were NOT run by hand (`21 · 0 · 0 · 0 · 0 · 0 · 21` if they were). **AFTER 213: `0 · 0 · 0 · 0 · 0 · 5 · 0`.**
+The after-row is the one that decides. If the push stops before 213 has run, the owner runs nothing by hand and tells
+the chair. `unlisted_open` names any function a visitor may call that is not on the written list, including anything
+made by hand; any other after-row: send the row.
 
 ## Declared reds on this branch (by construction, the chair's ruling of 02:42 UTC)
 The gap at 211–212: `migrationContiguity`, `migrationSequenceAll` (gapless arm), `docCounts` and

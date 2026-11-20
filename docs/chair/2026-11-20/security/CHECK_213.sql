@@ -1,6 +1,10 @@
 -- CHECK_213.sql — READ-ONLY, one statement, one row. SEC-GRANTS-2, for the deploy document. Run AFTER migration 213.
 -- Expected: closed_still_open_count 0 · missing_count 0 · service_role_lacking_count 0 · anon_doors_open 0 ·
---           signed_in_doors_closed 0 · guards_in_place 5 · unlisted_open_count 0. Anything else: send the row.
+--           signed_in_doors_closed 0 · guards_in_place 5 · unlisted_open_count 0. THE AFTER-ROW DECIDES; anything else:
+--           send the row. The two rows in column order (the reader REVIEW-GRANTS-1's measure, counts columns only):
+--           BEFORE 213, emergency script run: 21 · 0 · 0 · 1 · 0 · 0 · 21 (anon_doors_open 0 if the ticket thread's two
+--           lines were run by hand). AFTER 213: 0 · 0 · 0 · 0 · 0 · 5 · 0. If the push stops before 213 has run, run
+--           nothing by hand: tell the chair.
 --   closed_*            the emergency script's 157 and 213's 21 invoker helpers: executable by anon or authenticated
 --   anon_doors_open     set_curated, set_featured, set_featured_map, list_ticket_thread executable by anon
 --   signed_in_doors_closed  the same four NOT executable by authenticated (the admin page and the ticket thread need it)

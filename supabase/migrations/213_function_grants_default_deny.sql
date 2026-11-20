@@ -86,9 +86,12 @@
 -- @rollback: re-run the five §1 bodies as they stood at 210, verbatim — set_curated from 011,
 --   set_featured and set_featured_map from 168, list_ticket_thread from 055, get_credit_balance from 110
 --   (each with 094/131's `set search_path = public, pg_temp` pin) — and re-grant the 21 §4 helpers to
---   anon and authenticated (they are SECURITY INVOKER: they run with the caller's own rights). That returns
---   the database to "001..210 plus the emergency script and the ticket thread's two lines", which is
---   production's state before 213. Nothing is destroyed on reversal: 213
+--   anon and authenticated (they are SECURITY INVOKER: they run with the caller's own rights). That
+--   reversal restores the five bodies and the 21 grants and leaves every revoke of the 157 and of the four
+--   doors standing, on every history (executed by the reader REVIEW-GRANTS-1 on ten histories and on the
+--   production order from 203); it does not restore any earlier state of production's grants. Those two
+--   steps, executable: docs/chair/2026-11-20/security/review/rollback-213.sql (the reader's, kept with its
+--   review). Nothing is destroyed on reversal: 213
 --   creates no object and touches no row. Like 202..210 this is re-stated functions plus grants, so it
 --   ships no .down.sql (a down script must drop something; 213 adds nothing to drop).
 --   NOT to be reversed, deliberately: the 157, the three admin doors' and list_ticket_thread's revokes
