@@ -1,6 +1,6 @@
 # PAGE-4's hand-back (the display lane after PAGE-1)
 
-Kept current at every push; last written 16:42 UTC 2026-11-20 (`date -u`). A successor needs THIS FILE and the briefs
+Kept current at every push; last written 17:00 UTC 2026-11-20 (`date -u`). A successor needs THIS FILE and the briefs
 under `docs/chair/2026-11-20/content/page/briefs/` only. The seat's prompt:
 `git show origin/lane/chair-2026-11-08:docs/chair/2026-11-20/seventh/prompts/PAGE-4.txt`. PAGE-1's hand-back
 (`PAGE-1-HANDBACK.md`, true at `a67e1b502`) holds the rulings 1-8 and the measures; this file adds what came after.
@@ -28,8 +28,15 @@ under `docs/chair/2026-11-20/content/page/briefs/` only. The seat's prompt:
 - OUT: SAFETY-MOUNT (brief at `f6d892a94`), beside OUTPUT-FIX (the chair 16:45: path-disjoint; the rule is ONE HEAVY GATE
   AT A TIME through `scripts/gate-mutex.sh --run`, not one builder). THIN's measure searches a stored sentence by
   CONTAINMENT, not equality (SAME-1's `tools/printed.mjs` on `origin/lane/same-1-2026-11-20`).
-- OUT: OUTPUT-FIX (brief `briefs/OUTPUT-FIX.md` at `07218f723`), cut from OUTPUT's `ac0ccdd80`; on its return OUTPUT merges
-  WITH it, and `dossierPhoneFloorAllViews` (hand-recorded on OUTPUT's branch) is re-taken by its door.
+- MERGED: OUTPUT (S3) with OUTPUT-FIX (`page-4-output-fix-2026-11-20` `b73ec574c` over OUTPUT `ac0ccdd80`; merge
+  `c01804e5d`): `outputInWords.js`; the three fractions reworded; ", held back by having no market." DECLARED
+  (`excludes: ['market']`, through `filterDeclared`) because `presumedThings` refuses an undeclared "market" (the builder's
+  choice under the walker's own rule: the chair's to overrule). Registers re-measured at the merge by their doors:
+  phoneChromeFloor 619/862/664; rawColorLiteral 1200; wiring `--check` 0; lighting 3714 (`127cf3949`).
+- FOUND AT THAT MERGE (`dossierPhoneFloorAllViews`, `safetyReaderBytes`: NOT in the six gates, so CARD's and MAGIC's
+  merges missed them): MAGIC's caption sits under the phone prose floor (12px < 14px), a DEFECT; World/NPCs 284 -> 293
+  (CARD) and Systems/Magic 3 -> 4 (MAGIC) owed; `pdf.vm` moved by OUTPUT. OUT: PIN-FIX (brief `ab01d4cc5`). FROM NOW ON
+  each merge also runs `tests/components/dossierPhoneFloorAllViews.test.jsx` and `tests/ui/safetyReaderBytes.test.jsx`.
 
 ## The rulings that came after PAGE-1's list (the chair's; each vetoable by the owner)
 
