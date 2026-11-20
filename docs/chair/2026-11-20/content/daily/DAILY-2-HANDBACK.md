@@ -130,6 +130,13 @@ baseline file's _doc on a clean tree).
    baseline never raised, `domainAnyCastBaseline` in every merge's green set. SUCCESSION: DAILY-3 seated at 360,000 by
    the chair's read (DAILY-2 at 286,558 by the chair at 20:25); hand over after B2's merge, or at 400,000 by DAILY-2's
    own estimate if first (then B2's branch up as `-wip`, one line through the chair).
+24. (20:37) THE WORKING LINE is `lane/join-2026-11-14` = 062504aa8; its tip, figures and known reds live in ONE file the
+   chair keeps current, `docs/chair/2026-11-20/seventh/ci/LINE-NOW.md` on `lane/chair-2026-11-08` (beside
+   `RED-AT-LINE.tsv`); the rules for every lane are `docs/chair/2026-11-20/seventh/prompts/COMMON-RULES.txt`. Its NEW
+   rule 2, A LITERAL HAS ONE HOME: an existing line is never COPIED into a pool file as index 0; the pool is composed at
+   the call site as [the existing line, ...new siblings]. This lane MOVES today's lines (gathering P0; dawn W0, B0, each
+   branch's index 0) out of `dailyLife.js` into the pool files (0 second homes in `src/`), said to the chair 20:3x; if
+   the chair reads rule 2 as "the line stays at its old call site", it is a unit for DAILY-3, not a stop for B2.
 19. THE LANE DOES NOT PRINT: nothing under `src/components/`, `src/pdf/`, `supabase/`, `tests/security/`; no file under
    `src/generators/` without one line to the chair first.
 
