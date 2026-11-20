@@ -178,3 +178,29 @@ aimed at another user's real data. None leaked a private row, and none changed a
 
 The rollback, if ever needed, does not reopen the 157. After the push, `CHECK_213.sql` should read
 `0 · 0 · 0 · 0 · 0 · 5 · 0`. **213 CLEAR at sha256 `c87283acce8223884e9ea973b9be2f2cd19a3fbebbffa48808171c5e3cd82bfb`.**
+
+## Addendum: re-clear by the diff (2026-11-20 05:12 UTC)
+
+The builder's commit is a18bf94bc on origin/lane/sec-grants-2-2026-11-20, which I fetched. I read the diff from
+fac781e7e. It touches only ,  and the hand-back.
+
+- **213.** Every changed line is a comment line (`-U0` diff). With comments stripped, the file is identical to
+  c87283ac. The new `@rollback` text is true:
+  - the reversal leaves every revoke of the 157 and of the four doors standing;
+  - it was executed on ten histories and on the order from 203;
+  - it does not restore an earlier state;
+  - it names `review/rollback-213.sql`.
+
+  The false sentence (production = 001..210 + ticket lines) is gone. The comment states no head, and it makes no
+  other claim about production.
+- **CHECK_213.sql.** Only header comment lines moved; the statement is byte-identical. I re-measured with it:
+
+  | state | reading |
+  |---|---|
+  | before 213, emergency script, no ticket lines | `21·0·0·1·0·0·21` |
+  | before 213, emergency script and ticket lines | `21·0·0·0·0·0·21` |
+  | after 213 | `0·0·0·0·0·5·0` |
+
+  These equal the header and the hand-back's note. The new 213 applies cleanly, and its after-row is the same.
+
+**213 CLEAR at sha256 `22f694366d65aa174f049a8f966321ae16aee3bec9ecd837be684d04240a740c`.**
