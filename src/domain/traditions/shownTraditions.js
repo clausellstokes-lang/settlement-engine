@@ -151,7 +151,7 @@ export function sharedTraditionRowsOf(settlement) {
     const described = describeTradition(rec, settlement, { audience: 'reader' });
     return {
       // THE DRAWN ROW'S ID (the chair's item 5, TRAD-3 unit 4): its place in the DRAWN set, dense, in the order served;
-      // never the genesis id (which holds the seed), so a rite the floor rule drops leaves no gap. The owner keeps his.
+      // never the genesis id (which holds the seed), so a rite the floor rule drops leaves no gap. The owner's page keeps the genesis ids.
       id: `${SHARED_ROW_ID}${i}`,
       name: String(rec.name ?? ''),
       element: String(rec?.coreMotif?.element ?? ''),
