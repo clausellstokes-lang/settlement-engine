@@ -1,0 +1,59 @@
+
+ RUN  v4.1.8 /var/tmp/vd2/wt-red
+
+ ❯ tests/lint/migrationSearchPathPin.test.js (5 tests | 2 failed) 18ms
+     × has no stale baseline entries (shrink-only — re-pinned functions must be removed) 11ms
+     × no definer authored AFTER the convention is bare, beyond the frozen ledger 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/migrationSearchPathPin.test.js > SECURITY DEFINER search_path pin — structural ratchet (backend-3) > has no stale baseline entries (shrink-only — re-pinned functions must be removed)
+AssertionError: These baseline entries are no longer bare (re-pinned, renamed, or dropped). The baseline only shrinks — remove them from tests/lint/.migration-searchpath-baseline.json:
+  public._gallery_public_tile_rows: expected [ 'public._gallery_public_tile_rows' ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "public._gallery_public_tile_rows",
++ ]
+
+ ❯ tests/lint/migrationSearchPathPin.test.js:188:7
+    186|           + stale.join('\n  ')
+    187|         : '',
+    188|     ).toEqual([]);
+       |       ^
+    189|   });
+    190|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/lint/migrationSearchPathPin.test.js > SECURITY DEFINER search_path pin — structural ratchet (backend-3) > no definer authored AFTER the convention is bare, beyond the frozen ledger
+AssertionError: These ledger rows are no longer bare (pinned, renamed or dropped). The ledger only shrinks — delete them from POST_CONVENTION_BARE:
+  public._gallery_public_tile_rows: expected [ 'public._gallery_public_tile_rows' ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "public._gallery_public_tile_rows",
++ ]
+
+ ❯ tests/lint/migrationSearchPathPin.test.js:239:7
+    237|           + `shrinks — delete them from POST_CONVENTION_BARE:\n  ${ban…
+    238|         : '',
+    239|     ).toEqual([]);
+       |       ^
+    240|
+    241|     // Provenance too, not just membership: a row whose net-current MO…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 3 passed (5)
+   Start at  03:16:56
+   Duration  206ms (transform 28ms, setup 34ms, import 39ms, tests 18ms, environment 0ms)
+

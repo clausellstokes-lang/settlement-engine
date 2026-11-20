@@ -1,0 +1,38 @@
+[run] start 2026-11-20T03:11:31Z at cca49cb8d 1 dirty paths
+[run] cmd: npx vitest run --reporter=verbose tests/security/galleryDoors.pglite.test.js
+
+ RUN  v4.1.8 /var/tmp/vd2/wt-red
+
+ ✓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > V10-1 THE CHRONICLE DOOR: on a marked share an entry naming a house hidden whole (summary, target or payload), a covert act with a criminal grouping shut and an unclassed type are withheld whole, on the gallery read and a map's member; open entries arrive; no entry carries an id; an unmarked listed page keeps its chronicle as 032 sends it 216ms
+ ✓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > V10-1 / VR21 THE NEWEST FIFTY OF THE SERVED: a log of 70 entries whose newest five name the hidden house serves fifty, none of them withheld ones 62ms
+ ✓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > V10-3 THE TILE DOOR: on a marked share the stability tile is the band word alone (dossier column and list tile); prosperity is its stored band (VR28 tier 2); a tile holding a hideable house's name is sent by none; an unmarked listed page is unchanged 76ms
+ ✓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > V10-3 THE CLOSED ANSWER SENDS NO TILE: a share past the name search's bound (600 houses hidden whole of 145 characters) serves the name alone and no tile beside it 570ms
+ ✓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > V10-4 THE MAP MEMBER: a member with no veil of its own takes the default veil; a marked member its own 14ms
+ × tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > THE ONE-ROW READ (the chair's condition (a), VEIL-DOORS-2): get_gallery_dossier takes its own row's tiles by the one tile rule, never every public row's; its row and tile columns equal the list's row for every share (unmarked, the default veil, a hand veil, Reveal DM, snapshot mode, votes and comments counted) 9ms
+   → the dossier read computes the tile rows of EVERY public row to read its one: expected true to be false // Object.is equality
+ ✓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > THE TILE ROWS ARE NO DOOR OF THEIR OWN: _gallery_public_tile_rows() is executable by neither anon nor authenticated (Supabase's default privileges) 1ms
+ ✓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > THE TWIN: the server and src/domain/display/galleryDoors.js send the same chronicle and the same tiles (the default veil and a hand veil, Reveal DM off and on; the closed answer) 2811ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > THE ONE-ROW READ (the chair's condition (a), VEIL-DOORS-2): get_gallery_dossier takes its own row's tiles by the one tile rule, never every public row's; its row and tile columns equal the list's row for every share (unmarked, the default veil, a hand veil, Reveal DM, snapshot mode, votes and comments counted)
+AssertionError: the dossier read computes the tile rows of EVERY public row to read its one: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/security/galleryDoors.pglite.test.js:229:131
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 7 passed (8)
+   Start at  03:11:32
+   Duration  7.17s (transform 1.05s, setup 35ms, import 109ms, tests 6.91s, environment 0ms)
+
+[run] end 2026-11-20T03:11:39Z exit 1

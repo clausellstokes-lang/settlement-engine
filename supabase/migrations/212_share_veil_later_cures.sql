@@ -1939,14 +1939,76 @@ returns text language sql immutable as $$
               else v end
 $$;
 
+-- [212: NEW, VEIL-DOORS] public._gallery_doors_tiles
+-- THE TILE RULE FOR ONE ROW ((1) above), the one statement both the tile rows (every public row) and get_gallery_dossier
+-- (its ONE row) read: given the row's own columns, its ten tile columns. A row with no veil marker: 147's columns exactly
+-- (the facet copies first, then the document). A marked row: the document is the read's own source (the frozen copy in
+-- snapshot mode, then the narration where narrated: the bytes the gallery read veils), each tile drawn from the town is
+-- read from it by 147's paths, stability is its band word, prosperity its stored band (VR28), and every tile is withheld
+-- where a name a share could hide lies inside it; the facet copies are not read. A plain SQL function of one SELECT, no
+-- definer and no SET, so the planner inlines it into each caller, and NO `offset 0` fence on the source document (a fence
+-- there cost an unmarked row 1.4 times its 147 cost in the list, measured): an unmarked row costs what 147's cost.
+create or replace function public._gallery_doors_tiles(p_data jsonb, p_overrides jsonb, p_narrated boolean, p_ai jsonb,
+                                                       p_culture text, p_prosperity text, p_deity text)
+returns table (
+  population integer,
+  terrain text,
+  government_type text,
+  magic_level text,
+  stability text,
+  primary_resource text,
+  threat_level text,
+  culture text,
+  prosperity text,
+  primary_deity text
+)
+language sql
+stable
+as $$
+  select
+    case when (t.d ->> 'population') ~ '^[0-9]+$' then (t.d ->> 'population')::integer else null end,
+    case when t.marked then public._gallery_doors_tile(t.terrain, t.names) else t.terrain end,
+    case when t.marked then public._gallery_doors_tile(t.government_type, t.names) else t.government_type end,
+    case when t.marked then public._gallery_doors_tile(t.magic_level, t.names) else t.magic_level end,
+    case when t.marked then public._gallery_doors_tile(public._gallery_doors_band(t.stability), t.names) else t.stability end,
+    case when t.marked then public._gallery_doors_tile(t.primary_resource, t.names) else t.primary_resource end,
+    case when t.marked then public._gallery_doors_tile(t.threat_level, t.names) else t.threat_level end,
+    case when t.marked then public._gallery_doors_tile(nullif(t.d #>> '{config,culture}', ''), t.names)
+         else coalesce(nullif(p_culture, ''), nullif(t.d #>> '{config,culture}', '')) end,
+    case when t.marked then public._gallery_doors_tile(nullif(t.d #>> '{economicState,prosperity}', ''), t.names)
+         else coalesce(nullif(p_prosperity, ''), nullif(t.d #>> '{economicState,prosperity}', '')) end,
+    case when t.marked then public._gallery_doors_tile(nullif(t.d #>> '{config,primaryDeitySnapshot,name}', ''), t.names)
+         else coalesce(nullif(p_deity, ''), nullif(t.d #>> '{config,primaryDeitySnapshot,name}', '')) end
+  from (
+    select mk.marked, d.d, x.names,
+      coalesce(nullif(d.d #>> '{config,terrainType}', ''), nullif(d.d #>> '{config,terrainOverride}', ''),
+               nullif(d.d #>> '{geography,terrain}', ''), nullif(d.d ->> 'terrain', '')) as terrain,
+      coalesce(nullif(d.d #>> '{powerStructure,government}', ''), nullif(d.d #>> '{powerStructure,governingName}', ''),
+               nullif(d.d #>> '{powerStructure,governmentType}', ''), nullif(d.d #>> '{government,type}', ''),
+               nullif(d.d ->> 'governmentType', '')) as government_type,
+      coalesce(nullif(d.d #>> '{config,magicLevel}', ''), nullif(d.d ->> 'magicLevel', '')) as magic_level,
+      coalesce(nullif(d.d #>> '{powerStructure,stability}', ''), nullif(d.d #>> '{viability,stability}', ''),
+               nullif(d.d #>> '{systemState,stability}', ''), nullif(d.d ->> 'stability', '')) as stability,
+      coalesce(nullif(d.d #>> '{config,nearbyResources,0}', ''), nullif(d.d #>> '{nearbyResources,0}', '')) as primary_resource,
+      coalesce(nullif(d.d #>> '{threatProfile,level}', ''), nullif(d.d #>> '{defense,threatLevel}', ''),
+               nullif(d.d ->> 'threatLevel', '')) as threat_level
+      -- the marker, read once; for a marked row the read's own source (the gallery read's `base` and `src` laterals)
+      from (select coalesce(jsonb_typeof(p_overrides -> '$veil') = 'object', false) as marked offset 0) mk
+      cross join lateral (select case
+              when not mk.marked then p_data
+              when p_overrides #>> '{$veil,mode}' = 'snapshot' and jsonb_typeof(p_overrides #> '{$veil,snapshot}') = 'object'
+                then p_overrides #> '{$veil,snapshot}'
+              when p_narrated and p_ai is not null and jsonb_typeof(p_ai -> 'aiSettlement') = 'object'
+                then p_ai -> 'aiSettlement'
+              else p_data end as d) d
+      cross join lateral (select case when mk.marked then public._gallery_doors_names(d.d -> 'institutions', d.d #> '{powerStructure,factions}') end as names offset 0) x
+  ) t
+$$;
+
 -- [212: RESTATED, VEIL-DOORS] public._gallery_public_tile_rows
--- 147's statement (every column, in its order), plus THE TILE RULE ((1) above) for a row whose share carries a veil marker:
--- the document is the read's own source (the narration where narrated, then the frozen copy in snapshot mode: the bytes
--- the gallery read veils), each tile drawn from the town is read from it by 147's paths, stability is its band word,
--- prosperity its stored band (VR28), and every tile is withheld where a name a share could hide lies inside it; the facet copies
--- (culture, prosperity, deity) are not read for a marked row. A row with no marker: 147's columns exactly. Every list,
--- filter, sort and count reads these rows, and get_gallery_dossier's top-level columns too. The pg_temp pin a recreated
--- definer takes. Called only by the reads (the grant below).
+-- 147's statement (every column, in its order), its ten tile columns by THE TILE RULE (_gallery_doors_tiles, (1) above).
+-- Every list, filter, sort and count reads these rows; get_gallery_dossier reads the same rule for its one row. The pg_temp
+-- pin a recreated definer takes. Called only by the reads (the grant below).
 create or replace function public._gallery_public_tile_rows()
 returns table (
   id uuid,
@@ -1997,19 +2059,16 @@ as $$
     s.gallery_image_url,
     s.gallery_image_alt,
     s.gallery_tags,
-    case when (t.d ->> 'population') ~ '^[0-9]+$' then (t.d ->> 'population')::integer else null end as population,
-    case when t.marked then public._gallery_doors_tile(t.terrain, t.names) else t.terrain end as terrain,
-    case when t.marked then public._gallery_doors_tile(t.government_type, t.names) else t.government_type end as government_type,
-    case when t.marked then public._gallery_doors_tile(t.magic_level, t.names) else t.magic_level end as magic_level,
-    case when t.marked then public._gallery_doors_tile(public._gallery_doors_band(t.stability), t.names) else t.stability end as stability,
-    case when t.marked then public._gallery_doors_tile(t.primary_resource, t.names) else t.primary_resource end as primary_resource,
-    case when t.marked then public._gallery_doors_tile(t.threat_level, t.names) else t.threat_level end as threat_level,
-    case when t.marked then public._gallery_doors_tile(nullif(t.d #>> '{config,culture}', ''), t.names)
-         else coalesce(nullif(s.gallery_facet_culture, ''), nullif(t.d #>> '{config,culture}', '')) end as culture,
-    case when t.marked then public._gallery_doors_tile(nullif(t.d #>> '{economicState,prosperity}', ''), t.names)
-         else coalesce(nullif(s.gallery_facet_prosperity, ''), nullif(t.d #>> '{economicState,prosperity}', '')) end as prosperity,
-    case when t.marked then public._gallery_doors_tile(nullif(t.d #>> '{config,primaryDeitySnapshot,name}', ''), t.names)
-         else coalesce(nullif(s.gallery_facet_deity, ''), nullif(t.d #>> '{config,primaryDeitySnapshot,name}', '')) end as primary_deity,
+    t.population,
+    t.terrain,
+    t.government_type,
+    t.magic_level,
+    t.stability,
+    t.primary_resource,
+    t.threat_level,
+    t.culture,
+    t.prosperity,
+    t.primary_deity,
     coalesce(s.gallery_facet_at_war, false) as at_war,
     coalesce(v.vote_count, 0)::integer as net_votes,
     coalesce(c.comment_count, 0)::integer as comment_count,
@@ -2018,32 +2077,8 @@ as $$
     s.gallery_facet_aliveness as aliveness,
     coalesce(rx.reactions, '{}'::jsonb) as reactions
   from public.settlements s
-  -- the marker, read once; for a marked row the read's own source (the gallery read's `base` and `src` laterals)
-  cross join lateral (
-    select coalesce(jsonb_typeof(s.gallery_member_overrides -> '$veil') = 'object', false) as marked offset 0
-  ) mk
-  cross join lateral (
-    select mk.marked, d.d, x.names,
-      coalesce(nullif(d.d #>> '{config,terrainType}', ''), nullif(d.d #>> '{config,terrainOverride}', ''),
-               nullif(d.d #>> '{geography,terrain}', ''), nullif(d.d ->> 'terrain', '')) as terrain,
-      coalesce(nullif(d.d #>> '{powerStructure,government}', ''), nullif(d.d #>> '{powerStructure,governingName}', ''),
-               nullif(d.d #>> '{powerStructure,governmentType}', ''), nullif(d.d #>> '{government,type}', ''),
-               nullif(d.d ->> 'governmentType', '')) as government_type,
-      coalesce(nullif(d.d #>> '{config,magicLevel}', ''), nullif(d.d ->> 'magicLevel', '')) as magic_level,
-      coalesce(nullif(d.d #>> '{powerStructure,stability}', ''), nullif(d.d #>> '{viability,stability}', ''),
-               nullif(d.d #>> '{systemState,stability}', ''), nullif(d.d ->> 'stability', '')) as stability,
-      coalesce(nullif(d.d #>> '{config,nearbyResources,0}', ''), nullif(d.d #>> '{nearbyResources,0}', '')) as primary_resource,
-      coalesce(nullif(d.d #>> '{threatProfile,level}', ''), nullif(d.d #>> '{defense,threatLevel}', ''),
-               nullif(d.d ->> 'threatLevel', '')) as threat_level
-      from (select case
-              when not mk.marked then s.data
-              when s.gallery_member_overrides #>> '{$veil,mode}' = 'snapshot' and jsonb_typeof(s.gallery_member_overrides #> '{$veil,snapshot}') = 'object'
-                then s.gallery_member_overrides #> '{$veil,snapshot}'
-              when s.gallery_share_narrated and s.ai_data is not null and jsonb_typeof(s.ai_data -> 'aiSettlement') = 'object'
-                then s.ai_data -> 'aiSettlement'
-              else s.data end as d offset 0) d
-      cross join lateral (select case when mk.marked then public._gallery_doors_names(d.d -> 'institutions', d.d #> '{powerStructure,factions}') end as names offset 0) x
-  ) t
+  cross join lateral public._gallery_doors_tiles(s.data, s.gallery_member_overrides, s.gallery_share_narrated, s.ai_data,
+                                                 s.gallery_facet_culture, s.gallery_facet_prosperity, s.gallery_facet_deity) t
   left join (
     select settlement_id, count(*)::integer as vote_count
     from public.gallery_votes
@@ -2373,7 +2408,20 @@ as $$
     ap.external_name as author_name,
     r.aliveness
   from public.settlements s
-  join public._gallery_public_tile_rows() r on r.id = s.id
+  -- VEIL-DOORS (the chair's condition (a)): the ONE row's columns, never every public row's: the tile rule
+  -- (_gallery_doors_tiles) for this row, and the row's own columns as the tile rows state them (galleryDoors.pglite pins
+  -- every one equal to the list's row)
+  cross join lateral (
+    select s.id, s.public_slug, coalesce(nullif(btrim(s.gallery_title), ''), s.name) as name, s.tier, s.published_at,
+           coalesce(s.gallery_updated_at, s.updated_at, s.published_at) as updated_at, s.view_count, s.is_curated,
+           s.gallery_description, s.gallery_image_url, s.gallery_image_alt, s.gallery_tags,
+           t.population, t.terrain, t.government_type, t.magic_level, t.stability, t.primary_resource, t.threat_level,
+           (select count(*)::integer from public.gallery_votes gv where gv.settlement_id = s.id) as net_votes,
+           (select count(*)::integer from public.gallery_comments gc where gc.settlement_id = s.id and gc.deleted_at is null) as comment_count,
+           s.gallery_facet_aliveness as aliveness
+      from public._gallery_doors_tiles(s.data, s.gallery_member_overrides, s.gallery_share_narrated, s.ai_data,
+                                       s.gallery_facet_culture, s.gallery_facet_prosperity, s.gallery_facet_deity) t
+  ) r
   left join public.profiles ap on ap.id = s.user_id
   cross join lateral (
     select case

@@ -430,11 +430,12 @@ drop function if exists public._gallery_veil_tie_pieces(jsonb);
 drop function if exists public._gallery_veil_tie_roles(jsonb, jsonb, jsonb, boolean, boolean, boolean);
 
 -- ── VEIL-DOORS (the seventh chair's seat, 2026-11-20): its block, last ────────────────────────────────────────────
--- 212's VEIL-DOORS section restated two functions and created seven helpers. Back: get_gallery_map at 211's statement
+-- 212's VEIL-DOORS section restated two functions and created eight helpers (the eighth, _gallery_doors_tiles, is
+-- VEIL-DOORS-2's: the one-row tile rule). Back: get_gallery_map at 211's statement
 -- (verbatim, its grant as 211 states it) and _gallery_public_tile_rows at 147's (verbatim; get_gallery_dossier, which
 -- calls the helpers, is already back at 211's above). The tile rows' revoke from anon and authenticated is NOT reversed:
 -- no client calls the helper, every read that does is a definer, and a down file never reopens a door (on a chain whose
--- scaffold grants nothing by default the catalogue is 211's exactly). Then the seven helpers, by signature.
+-- scaffold grants nothing by default the catalogue is 211's exactly). Then the eight helpers, by signature.
 
 -- [212 down: VEIL-DOORS, back to 211] public.get_gallery_map
 create or replace function public.get_gallery_map(p_slug text)
@@ -681,6 +682,7 @@ revoke execute on function public._gallery_public_tile_rows() from public;
 drop function if exists public._gallery_doors_chronicle(jsonb, jsonb, jsonb, jsonb, boolean);
 drop function if exists public._gallery_doors_chronicle_classes();
 drop function if exists public._gallery_doors_closed(jsonb);
+drop function if exists public._gallery_doors_tiles(jsonb, jsonb, boolean, jsonb, text, text, text);
 drop function if exists public._gallery_doors_tile(text, text[]);
 drop function if exists public._gallery_doors_names(jsonb, jsonb);
 drop function if exists public._gallery_doors_squeeze(text);

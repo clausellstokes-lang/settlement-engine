@@ -18,6 +18,9 @@
  *   V10-4 THE MAP MEMBER (VR23): a member with no veil of its own takes the default veil.
  *   THE TILE ROWS ARE NO DOOR OF THEIR OWN: with Supabase's default privileges, _gallery_public_tile_rows() is callable
  *         by no visitor.
+ *   THE ONE-ROW READ (VEIL-DOORS-2; the chair's condition (a), red at cca49cb8d): the dossier read takes its own row's
+ *         tiles by the one tile rule (_gallery_doors_tiles), never the tile rows of every public row; every row and tile
+ *         column it sends equals the list's row (the cost rows are in VEIL-DOORS-2-HANDBACK.md).
  */
 import { describe, it, expect, beforeAll, vi } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
@@ -219,6 +222,33 @@ describe('VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4
     const m = await mapOf([unmarked.id]);
     expect(arrivals(m.members[0].settlement, 'Black market'), 'unmarked member').toEqual([]);
     expect(arrivals(m.members[0].settlement, 'Mill').length, 'the open house stays').toBeGreaterThan(0);
+  }, ARM_TIMEOUT_MS);
+
+  it('THE ONE-ROW READ (the chair\'s condition (a), VEIL-DOORS-2): get_gallery_dossier takes its own row\'s tiles by the one tile rule, never every public row\'s; its row and tile columns equal the list\'s row for every share (unmarked, the default veil, a hand veil, Reveal DM, snapshot mode, votes and comments counted)', async () => {
+    const body = (await db.query(`select p.prosrc from pg_proc p where p.oid = to_regprocedure('public.get_gallery_dossier(text)')`)).rows[0].prosrc;
+    expect(/_gallery_public_tile_rows/.test(body), 'the dossier read computes the tile rows of EVERY public row to read its one').toBe(false);
+    expect(/_gallery_doors_tiles\s*\(/.test(body), 'the dossier read does not read the one tile rule').toBe(true);
+    const COLS = ['id', 'public_slug', 'name', 'tier', 'published_at', 'updated_at', 'view_count', 'is_curated', 'gallery_description',
+      'gallery_image_url', 'gallery_image_alt', 'gallery_tags', 'population', 'terrain', 'government_type', 'magic_level', 'stability',
+      'primary_resource', 'threat_level', 'net_votes', 'comment_count', 'aliveness'];
+    const shares = [
+      { overrides: {} }, { overrides: VEIL() }, { overrides: VEIL(), dm: true },
+      { overrides: VEIL([{ address: 'block:power.criminalUnderside', hidden: false }, { address: 'block:services.criminal', hidden: false }]) },
+      { overrides: { $veil: { ...VEIL().$veil, mode: 'snapshot', snapshot: town({ population: 999, powerStructure: { stability: 'Tense (a feud)', government: 'Council' } }) } } },
+    ];
+    const differs = [];
+    for (const share of shares) {
+      const row = await store(town(), share);
+      await db.query(`insert into public.gallery_votes (settlement_id, user_id) values ($1, $2)`, [row.id, READER]);
+      await db.query(`insert into public.gallery_comments (settlement_id, user_id, body) values ($1, $2, 'Fine town.'), ($1, $2, 'Gone.')`, [row.id, READER]);
+      await db.query(`update public.gallery_comments set deleted_at = now() where settlement_id = $1 and body = 'Gone.'`, [row.id]);
+      await db.query(`update public.settlements set gallery_title = 'Rookford of the River', gallery_facet_aliveness = 7 where id = $1`, [row.id]);
+      const g = await dossier(row.slug);
+      const l = (await listed()).find(r => r.public_slug === row.slug);
+      for (const c of COLS) if (canon(g[c]) !== canon(l[c])) differs.push(`${JSON.stringify(share).slice(0, 60)} ${c}: dossier ${canon(g[c])} | list ${canon(l[c])}`);
+      expect([g.net_votes, g.comment_count, g.name], 'the counts and the title are the row\'s own').toEqual([1, 1, 'Rookford of the River']);
+    }
+    expect(differs).toEqual([]);
   }, ARM_TIMEOUT_MS);
 
   it('THE TILE ROWS ARE NO DOOR OF THEIR OWN: _gallery_public_tile_rows() is executable by neither anon nor authenticated (Supabase\'s default privileges)', async () => {

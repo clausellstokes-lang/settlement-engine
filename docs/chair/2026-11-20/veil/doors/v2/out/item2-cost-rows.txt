@@ -1,0 +1,14 @@
+# cost rows: median of 9 after one warm-up, read as anon, native PG 16.15, 4 cores; started 2026-11-20T02:59:01Z
+{"db":"c_bedd","rows":50,"mode":"unmarked","dossier_ms":423.1,"list_ms":322,"list_filtered_ms":322.3}
+{"db":"c_bedd","rows":50,"mode":"marked","dossier_ms":435.7,"list_ms":323.3,"list_filtered_ms":320.4}
+{"db":"c_bedd","rows":500,"mode":"unmarked","dossier_ms":3468.3,"list_ms":3411.8,"list_filtered_ms":3369.3}
+{"db":"c_bedd","rows":500,"mode":"marked","dossier_ms":3482.3,"list_ms":3358.8,"list_filtered_ms":3420.9}
+{"db":"c_base","rows":50,"mode":"unmarked","dossier_ms":486.9,"list_ms":388.4,"list_filtered_ms":384.1}
+{"db":"c_base","rows":50,"mode":"marked","dossier_ms":599.2,"list_ms":461.1,"list_filtered_ms":459.3}
+{"db":"c_base","rows":500,"mode":"unmarked","dossier_ms":5012.9,"list_ms":4965.2,"list_filtered_ms":4931.3}
+{"db":"c_base","rows":500,"mode":"marked","dossier_ms":5230.9,"list_ms":5117.1,"list_filtered_ms":5174}
+{"db":"c_wip","rows":50,"mode":"unmarked","dossier_ms":116.3,"list_ms":329.9,"list_filtered_ms":336.7}
+{"db":"c_wip","rows":50,"mode":"marked","dossier_ms":135,"list_ms":407,"list_filtered_ms":397.1}
+{"db":"c_wip","rows":500,"mode":"unmarked","dossier_ms":102.9,"list_ms":3439,"list_filtered_ms":3388.7}
+{"db":"c_wip","rows":500,"mode":"marked","dossier_ms":124.7,"list_ms":4083.4,"list_filtered_ms":4158.9}
+# ended 2026-11-20T03:11:22Z

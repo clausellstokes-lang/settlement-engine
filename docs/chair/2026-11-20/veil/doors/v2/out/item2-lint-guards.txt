@@ -1,0 +1,62 @@
+[run] start 2026-11-20T03:16:46Z at 68b9c1690 7 dirty paths
+[run] cmd: npx vitest run tests/lint/migrationSearchPathPin.test.js tests/lint/migrationGrantPosturePin.test.js tests/lint/netCurrentExtractorAnchor.walker.test.js
+
+ RUN  v4.1.8 /home/user/settlement-engine
+
+ ❯ tests/lint/migrationSearchPathPin.test.js (5 tests | 2 failed) 27ms
+     × has no stale baseline entries (shrink-only — re-pinned functions must be removed) 17ms
+     × no definer authored AFTER the convention is bare, beyond the frozen ledger 2ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/migrationSearchPathPin.test.js > SECURITY DEFINER search_path pin — structural ratchet (backend-3) > has no stale baseline entries (shrink-only — re-pinned functions must be removed)
+AssertionError: These baseline entries are no longer bare (re-pinned, renamed, or dropped). The baseline only shrinks — remove them from tests/lint/.migration-searchpath-baseline.json:
+  public._gallery_public_tile_rows: expected [ 'public._gallery_public_tile_rows' ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "public._gallery_public_tile_rows",
++ ]
+
+ ❯ tests/lint/migrationSearchPathPin.test.js:188:7
+    186|           + stale.join('\n  ')
+    187|         : '',
+    188|     ).toEqual([]);
+       |       ^
+    189|   });
+    190|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/lint/migrationSearchPathPin.test.js > SECURITY DEFINER search_path pin — structural ratchet (backend-3) > no definer authored AFTER the convention is bare, beyond the frozen ledger
+AssertionError: These ledger rows are no longer bare (pinned, renamed or dropped). The ledger only shrinks — delete them from POST_CONVENTION_BARE:
+  public._gallery_public_tile_rows: expected [ 'public._gallery_public_tile_rows' ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "public._gallery_public_tile_rows",
++ ]
+
+ ❯ tests/lint/migrationSearchPathPin.test.js:239:7
+    237|           + `shrinks — delete them from POST_CONVENTION_BARE:\n  ${ban…
+    238|         : '',
+    239|     ).toEqual([]);
+       |       ^
+    240|
+    241|     // Provenance too, not just membership: a row whose net-current MO…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed | 2 passed (3)
+      Tests  2 failed | 13 passed (15)
+   Start at  03:16:47
+   Duration  2.18s (transform 76ms, setup 92ms, import 2.08s, tests 50ms, environment 0ms)
+
+[run] end 2026-11-20T03:16:49Z exit 1
