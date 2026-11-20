@@ -999,3 +999,27 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   `--local-env-vars` less its two config counters); the harness's variables are kept; GIT_NAMESPACE is KEPT (it
   namespaces refs inside the repository git opens and does not choose it): ruled, leave it; the chair's adding it
   to the seats' hazard line was caution, not a measure.
+- 02:56 UTC · **POINT 75's CI RUN CONCLUDED RED (run 44659169256 at 85fccf898, 02:50 UTC), FOR TWO SMALL CAUSES; THE TWO IT
+  WAS LANDED TO CURE ARE CURED.** CURED, CONFIRMED ON CI: the four budget expiries (none red); "Chromium end-to-end"
+  SUCCESS in 13m47s and "Production-build browser performance" in 1m53s, both in Playwright's image (the browser
+  step 2 seconds and 1 second). THE SHARDS: all six concluded (the shard step 13m50s, 19m34s, 26m25s and 36m04s for
+  shards 1, 3, 4, 6; shards 2 and 5 between); merged: 3,633 files, 41,666 tests, 1 failed. RED, the verdict job
+  "Gate / test ratchet" (and "Validate, test, build" after it): (a) **SHARD 4:**
+  `tests/lint/negativeAssertionAnchor.walker.test.js`: one NEW un-anchored negative assertion,
+  `tests/build/ensurePlaywrightBrowsers.test.js` line 67 (`expect(out).not.toMatch(/chromium did not launch/)`;
+  frozen ceiling 0): CI-FIT's own new test; reproduced by the chair at 85fccf898. (b) **SHARD 6:**
+  `tests/simulation/distributionEnvelopes.test.js`: "Hook timed out in 60000ms" (its beforeAll): no test measured,
+  8 skips against a ceiling of 1: the ratchet's scope sentinel. A FIFTH BUDGET EXPIRY, OF A HOOK: point 75 measured
+  test budgets only; hook budgets were the hole in its class.
+  **THE CHAIR'S OWN MISS, SAID PLAINLY:** at the merge of point 75 the chair re-ran eight files it chose by hand and
+  not the walkers that scan the whole test corpus; (a) would have shown there in 20 milliseconds. THE RULE FROM NOW:
+  a point that adds or changes a test file runs `tests/lint` WHOLE before its hand-back, and the chair runs it again
+  at the merge.
+  **TO GIT-DOOR (it holds six shard reports from its hooked run), three commits joined to its step, one point then
+  lands (76):** the anchor by the walker's own form and `tests/lint` whole at its merged tree; the hook's own budget
+  from the measure (a file's wall time less its tests', the runner factor 1.6, times 1.5) and THE CLASS of hooks
+  within three quarters of their budget, each its own budget, no suite-wide timeout; **THE SHARD CAP, RULED BY THE
+  HOUSE RULE:** shard 6 took 36m01s and 36m04s on two runs; times 1.5 is 54m06s: 45 becomes 60, the pin in
+  `tests/build/ciCheckParity.test.js` re-keyed by identity. If the seat nears its mark it says so and another
+  machine is seated. DEBT, after the deploy: the shards are split by a hash (13m50s against 36m04s); a split weighted
+  by measured duration would take the wall time to about 25 minutes.
