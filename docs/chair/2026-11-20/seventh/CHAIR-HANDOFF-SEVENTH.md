@@ -362,3 +362,27 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   bedd5a392 (ruling SV7). SEVEN SEATS RUN: VEIL-19, VEIL-R1, VEIL-VR17, VEIL-DOORS, REVIEW-VEIL-10, CI-FIT, GIT-DOOR.
   The rulings VR21 to VR24 went to the reader; V10-6 and V10-5 to VEIL-19 with item B, and the doors taken off its
   list; V10-2 to VEIL-VR17 as its next unit (the switch's two files are its own for that unit).
+- 01:01 UTC · **REVIEW-VEIL-10: PHASE 1B DONE at bedd5a392 (its messages of 00:49, 00:50 and 00:53 UTC). NO VERDICT; 212 IS
+  NOT CLEARED.** Its findings: V10-1, V10-3, V10-4, V10-6 HIGH; V10-2, V10-5 MED; V10-7 the timing (ruled VR24). WHAT
+  HELD, executed: V8-9's closed answer (17,000 code points and Han-weight names: `data` is the name alone, the name
+  nowhere, no visitor input reaches the search; only the tile columns ride beside it); "Hide all" stricter than the
+  hand (72 of 72); a criminal house new or renamed after "Show all" starts hidden (23 of 23); a stamped house renamed
+  by name alone leaves its birth name nowhere; no served number equals a shrunk list's length; row security on the
+  two tables owner-only; the import and the link carry neither chronicle nor tile. NOT REACHED: master's shape for
+  the new doors; the link's timing; the 720. ITS CENSUS OF DOORS (one table, ten rows) sent on to VEIL-DOORS, with
+  one more rule from it: IN SNAPSHOT MODE THE COLUMNS BESIDE THE BODY READ THE LIVE ROW, not the frozen copy: a
+  frozen share's tiles and chronicle are computed from the frozen copy under the veil, or withheld. VR21 at this tip
+  measured by it: the only hole in any served integer sequence is `simulationTrace[].ts` (V10-6); people, ties and
+  the chronicle become gap sources once rows leave them: re-run at FINAL.
+- 01:01 UTC · **THE READER'S OWN PERMISSION CHECK REFUSED `git add` OF ITS REVIEW FILES, TWICE: NOTHING OF ITS REVIEW,
+  HAND-OFF OR PROBES IS ON ORIGIN.** It stopped and reported, as its prompt says. THE CAUSE, MEASURED BY THE CHAIR: its
+  base (`lane/review-veil-9-2026-11-19`, cut from this lane) carries master's `CLAUDE.md`, which forbids staging
+  and committing without explicit authority; the working line's `CLAUDE.md` carries the owner's later sentence of
+  2026-11-18 ("I give the word", then "Do both": a session the chair has seated may commit and push its own work on
+  its own lane branch); the builders' bases hold that sentence (the veil lane was joined onto the line) and none of
+  them was refused. A MISS OF MINE: the reader was cut from a base without it. WHAT THE CHAIR DID, routing round
+  nothing: told the reader the fact and where to read the owner's sentence for itself, for its own check to weigh;
+  if its check refuses again the refusal stands, and the reader prints its files to the chair, which commits them on
+  the reader's branch byte for byte, as the owner's same word of 2026-11-18 had the sixth chair do; told to the
+  owner. FOR EVERY LATER SEAT: cut it from a base that holds the owner's sentence (the line, or a lane joined onto
+  it), or name the sentence's place in its prompt.
