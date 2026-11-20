@@ -13,17 +13,17 @@ The brief: `briefs/THEMES-DRAFT.md`. Source: `src/data/troubleHooks.js :: TROUBL
 |---|---|---|---|---|---|
 | crime_wave | 0 | The crime wave is coordinated. Someone is directing it to create a pretext | none | `crime_ring` | directed crimes; the pretext reads ambition |
 | crime_wave | 1 | A guard captain is on the payroll of the criminal network | `watch` + `organised crime` | `corruption` | per authored "paying their soldiers" |
-| crime_wave | 2 | Those who would take the law into their own hands have picked out a culprit on bad information | none | **ASK** | vigilantes scapegoat someone; no mob-justice theme |
+| crime_wave | 2 | Those who would take the law into their own hands have picked out a culprit on bad information | none | outsider_suspicion | misplaced suspicion is the beat (the chair, 21:12) |
 | crime_wave | 3 | A household woke to find its door forced and nothing taken, and wants to know what the thieves were looking for | none | `looming_threat` | per authored "robbed like a professional" |
 | crime_wave | 4 | A boy who runs errands for half the place has started carrying more coin than any errand pays | none | `crime_ring` | per authored "son comes home with coin" |
-| crime_wave | 5 | Those who talk of taking the law into their own hands meet tonight, and they want someone who can fight | none | **ASK** | vigilantes recruiting fighters; no mob-justice theme |
+| crime_wave | 5 | Those who talk of taking the law into their own hands meet tonight, and they want someone who can fight | none | looming_threat | the chair, 21:12 |
 | crime_wave | 6 | A household robbed in the night swears the robber knew which chest held the money | none | `betrayal` | inside knowledge, per authored "hidden savings" |
 | crime_wave | 7 | A stallholder at the market has stopped reporting thefts, and will not say why | `market` | `crime_ring` | silenced victim; blackmail close |
 | crime_wave | 8 | A watchman afraid of the night round is looking for someone to walk it with him, and will pay from his own purse | `watch` | `looming_threat` |  |
 | crime_wave | 9 | A shopkeeper has been told to close by the end of the week, by people who did not give their names | `organised crime` | `crime_ring` | a protection racket |
 | crime_wave | 10 | Two crews have been seen arguing over the same ground, and a fight between them looks a night away | `rival rings` | `rivalry` | two crews; crime_ring close |
-| crime_wave | 11 | A thief caught in the act is being held in a cellar by the household that caught him, and nobody knows what to do with him next | `law: ≤ critical` | **ASK** | household holds a thief; no self-justice theme |
-| crime_wave | 12 | A cart left loaded overnight was emptied before dawn, and the carter wants to know who was awake | none | **ASK** | one night theft, culprit unknown; no theft theme |
+| crime_wave | 11 | A thief caught in the act is being held in a cellar by the household that caught him, and nobody knows what to do with him next | `law: ≤ critical` | looming_threat | the chair, 21:12 |
+| crime_wave | 12 | A cart left loaded overnight was emptied before dawn, and the carter wants to know who was awake | none | crime_ring | per the authored "son comes home with coin" (the chair, 21:12) |
 | crime_wave | 13 | An old woman's savings have gone from under her floor, and only her family knew where they were kept | none | `betrayal` | only family knew, per authored "hidden savings" |
 | crime_wave | 14 | A pedlar is selling goods cheap that several households swear were taken from them | none | `smuggling` | fencing, per authored "stolen ring" line |
 | crime_wave | 15 | Chalk marks have appeared on several doors overnight, and the households behind them are frightened | none | `looming_threat` | per authored "name scratched into door" |
@@ -59,7 +59,7 @@ The brief: `briefs/THEMES-DRAFT.md`. Source: `src/data/troubleHooks.js :: TROUBL
 | external_threat | 4 | A family is packing to leave before dawn, and the neighbours are trying to stop them spreading panic | none | `looming_threat` |  |
 | external_threat | 5 | Someone nobody here knows has been asking about the paths in and out, and has asked for a bed for the night | none | `outsider_suspicion` | per authored "traveller asking which nights" |
 | external_threat | 6 | A stretch of the wall has been found crumbling, and mending it needs more hands than there are | `walls` | `looming_threat` | short of hands; scarcity_pressure close |
-| external_threat | 7 | Those who keep order are calling for volunteers, and the first to come forward is the last one anyone expected | `guardPresence` | **ASK** | an unexpected volunteer; no theme fits |
+| external_threat | 7 | Those who keep order are calling for volunteers, and the first to come forward is the last one anyone expected | `guardPresence` | secret_identity | a hidden side to a known person (the chair, 21:12) |
 | external_threat | 8 | Tracks of the beasts that press on this place have been found beside a well-used path, closer than ever | `crisis: monster_pressure` | `looming_threat` |  |
 | succession_crisis | 0 | A would-be heir approaches outsiders to investigate a rival's past | `ruler: lord` | `succession` | rivalry close |
 | succession_crisis | 1 | The ailing ruler wants a final errand completed before naming a successor | `!ruler: council` + `!ruler: elder` + `!crisis: succession_void` | `succession` |  |
@@ -133,3 +133,7 @@ The brief: `briefs/THEMES-DRAFT.md`. Source: `src/data/troubleHooks.js :: TROUBL
 
 Three of the ASKs (crime_wave 2, 5, 11) are one beat the closed set lacks: people taking the law into their own hands. Whether to amend
 `HOOK_THEMES` (J-HK-3, the owner's) or to answer them with a nearest member is the chair's to rule.
+
+
+## THE CHAIR'S RULING (21:12 UTC 2026-11-20)
+APPROVED AS PROPOSED; the five ASKs ruled by the nearest member (rows above). `HOOK_THEMES` is NOT amended (J-HK-3 is the owner's). A MOB-JUSTICE THEME IS A NAMED GAP FOR AFTER THE DEPLOY: crime_wave 2, 5 and 11 (people taking the law into their own hands) carry their nearest member until the owner rules on it. The count table above predates the ruling: ASK 0, outsider_suspicion +1, looming_threat +2, crime_ring +1, secret_identity +1.
