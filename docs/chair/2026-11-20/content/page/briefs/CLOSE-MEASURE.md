@@ -29,6 +29,11 @@ OUTPUT: `measures/page-10/close.mjs` (one command, its usage in its header); `cl
 `BAR <tree> <pool> <size> sentTop= sent2= sent3= row3= hookTop= hook2= hook3=` and `MIXED <tree> <pool> ...`; a
 `close.md` table. Every figure `n/d` and %.
 
+THE KINDS TABLE (the chair, 20:44; from the V births you already make, no second run): every current trouble's kind, by size,
+ranked by the share of places that carry it; mark the kinds with a cause table (\`src/data/tensionCauses.js :: TENSION_CAUSES\`)
+and give, per size, the share of places whose FIRST trouble's kind has one, and the fewest kinds (by rank) that would bring
+that share to nine places in ten at every size. Count lines \`KIND V <size> <kind> n/d %\` and \`COVER V <size> ...\`; a \`kinds.md\`.
+
 THE OWNER'S PLAIN FILE: `measures/page-10/owner-six.mjs` writing `OWNER-SIX.md`: the V pool's place 0 of each size
 (`visitor-<size>-0`), BEFORE then AFTER: the place's name and size, and per trouble its sentence, its named sides and its
 hooks as the DM reads them: plain text, no field names, no hashes. Nothing else.
