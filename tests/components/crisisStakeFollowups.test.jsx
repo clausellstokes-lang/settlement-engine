@@ -7,13 +7,26 @@
  *     PDF, inside its own frame: "- **The Religious Authorities** gain: the church gains while the seat struggles."
  *     Before C2B it composed its own opening on the bare leaf with a singular verb: "- **Religious Authorities** gains: …".
  *
- * THIS FILE REDS WHEN the journal prints a Stakes row whose opening is not `stakeOpening`'s.
+ * (b) STORED, AT BIRTH ONLY: the `loses` reason said of a plural power takes the plural possessive by the names lane's own
+ *     helper (`data/people/powerSentenceName.js :: fillAgreement`, the reason's agreement form `{power|its|their} own people…`): "The Merchant
+ *     Guilds lose · their own people feel the crisis first". A singular power keeps "its". A saved town keeps its own
+ *     string: the page reads the record, and there is no read-time rewrite.
+ *
+ * (c) RENDER: an at-odds reason (`crisisPage.js :: stakeShown`, by the record's own quarrels) names the other power as a
+ *     sentence names a power (`governanceAccount.js :: powerNameInProse`): "in its own quarrel with the Elder Council",
+ *     "… with the Guard", never the bare leaf ("with Elder Council", "with The Guard"). Nothing stored moves.
+ *
+ * THIS FILE REDS WHEN the journal prints a Stakes row whose opening is not `stakeOpening`'s; when a plural power is born
+ * with "its own people feel the crisis first" or a singular one without it; or when the page rewrites a saved reason; or
+ * when an at-odds reason names the other power without its article.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { STAKE_REASONS } from '../../src/domain/crisis/crisisCast.js';
 import { composeCrisisPage, CRISIS_PAGE_COPY, stakeOpening } from '../../src/domain/crisis/crisisPage.js';
+import { powerVerb } from '../../src/domain/display/powerSentenceName.js';
+import { powerNameInProse } from '../../src/domain/display/governanceAccount.js';
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { buildJournalPages } from '../../src/foundry/journalPages.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
@@ -49,5 +62,67 @@ describe('C2B (a): the Foundry journal opens a Stakes row on the page\'s one com
       const { subject, verb } = stakeOpening(k);
       expect(lines, `${k.factionId} ${k.stake}`).toContain(`- **${subject}** ${verb}: ${k.reason}.`);
     }
+  });
+});
+
+/** A born town of B7's pool whose stakes hold two plural powers and one singular power that lose (measured at the base). */
+const LOSES_SEED = 'b7-under_siege-town-1';
+/** The loses reason as a power's own number says it: "its" of one, "their" of many (the helper's choice, read here). @param {string} power */
+const losesSaid = (power) => STAKE_REASONS.loses.replace(/^its\b/, powerVerb(power, 'its', 'their'));
+
+describe('C2B (b): a plural power is born with the plural possessive in its loses reason', () => {
+  it(`${LOSES_SEED}: the Merchant Guilds and the Craft Guilds lose by "their own people"; the singular loser keeps "its"`, () => {
+    const s = generateSettlementPipeline({ settType: 'town', stressType: 'under_siege' }, null, { seed: LOSES_SEED, customContent: {} });
+    const stakes = (Array.isArray(s.stress) ? s.stress : [s.stress]).filter(Boolean).flatMap((/** @type {any} */ e) => e.cast?.stakes || []).filter((/** @type {any} */ k) => k.stake === 'loses');
+    const many = stakes.filter((/** @type {any} */ k) => ['Merchant Guilds', 'Craft Guilds'].includes(k.factionId));
+    const one = stakes.filter((/** @type {any} */ k) => !['Merchant Guilds', 'Craft Guilds'].includes(k.factionId) && k.reason !== STAKE_REASONS.losesSeat);
+    expect(many.map((/** @type {any} */ k) => k.factionId).sort()).toEqual(['Craft Guilds', 'Merchant Guilds']);
+    expect(one.length).toBeGreaterThan(0);
+    for (const k of many) {
+      expectAbsentWithAnchor([k.reason], STAKE_REASONS.loses, losesSaid(k.factionId), `${LOSES_SEED} ${k.factionId}`);
+      expect(k.reason.startsWith('their ')).toBe(true);
+    }
+    for (const k of one) expect(k.reason, k.factionId).toBe(STAKE_REASONS.loses);
+    // the page prints the stored reason after its plural verb: "The Merchant Guilds lose · their own people feel the crisis first"
+    const rows = composeCrisisPage(s, { audience: 'owner' }).flatMap((sec) => sec.stakes).filter((k) => k.factionId === 'Merchant Guilds');
+    expect(rows.map((k) => `${stakeOpening(k).subject} ${stakeOpening(k).verb} · ${k.reason}`)).toEqual([`The Merchant Guilds lose · ${losesSaid('Merchant Guilds')}`]);
+  });
+
+  it('a saved town keeps its own string: no read-time rewrite of a stored "its own people" after a plural power', () => {
+    const saved = { tier: 'town', name: 'Testholm', stress: [{ type: 'under_siege', label: 'Under Siege',
+      cast: { nature: 'military', roles: [], absent: [], levers: [], stakes: [{ factionId: 'Merchant Guilds', stake: 'loses', reason: STAKE_REASONS.loses }] } }] };
+    const rows = composeCrisisPage(/** @type {any} */ (saved), { audience: 'owner' }).flatMap((sec) => sec.stakes);
+    expect(rows.map((k) => k.reason)).toEqual([STAKE_REASONS.loses]);
+  });
+});
+
+/** The at-odds rows a page composes, as the tab and the PDF print them. @param {any} s */
+const atOddsRows = (s) => composeCrisisPage(s, { audience: 'owner' }).flatMap((sec) => sec.stakes)
+  .filter((k) => k.stake === 'atOdds' || k.stake === 'atOddsMany').map((k) => `${stakeOpening(k).subject} ${stakeOpening(k).verb} · ${k.reason}`);
+
+describe('C2B (c): an at-odds reason names the other power as a sentence names a power', () => {
+  it('b7-under_siege-village-3: "in its own quarrel with the Elder Council", never "with Elder Council"', () => {
+    const s = generateSettlementPipeline({ settType: 'village', stressType: 'under_siege' }, null, { seed: 'b7-under_siege-village-3', customContent: {} });
+    const rows = atOddsRows(s);
+    expectAbsentWithAnchor(rows, 'The Manor Household is already at odds · in its own quarrel with Elder Council',
+      `The Manor Household is already at odds · in its own quarrel with ${powerNameInProse('Elder Council')}`, 'b7-under_siege-village-3');
+  });
+
+  it('b7-famine-town-1: a name that carries its own article is lowered mid-sentence: "with the Guard", never "with The Guard"', () => {
+    const s = generateSettlementPipeline({ settType: 'town', stressType: 'famine' }, null, { seed: 'b7-famine-town-1', customContent: {} });
+    const rows = atOddsRows(s);
+    expectAbsentWithAnchor(rows, 'The Craft Guilds are already at odds · in their own quarrel with The Guard',
+      `The Craft Guilds are already at odds · in their own quarrel with ${powerNameInProse('Military/Guard')}`, 'b7-famine-town-1');
+  });
+
+  it('a crafted town: every power the quarrels name stands with its article, listed with "and"; the row itself is the record\'s', () => {
+    const town = { tier: 'town', name: 'Testholm',
+      powerStructure: { factions: [], conflicts: [{ parties: ['Manor Household', 'Elder Council'] }, { parties: ['Military/Guard', 'Manor Household'] }] },
+      stress: [{ type: 'famine', label: 'Famine', cast: { nature: 'natural', roles: [], absent: [], levers: [],
+        stakes: [{ factionId: 'Manor Household', stake: 'split', reason: STAKE_REASONS.untouched }] } }] };
+    expect(atOddsRows(town)).toEqual([`The Manor Household is already at odds · in its own quarrel with ${powerNameInProse('Elder Council')} and ${powerNameInProse('Military/Guard')}`]);
+    expect(atOddsRows(town)[0].endsWith('with the Elder Council and the Guard')).toBe(true);
+    // the stored stake is untouched: the page reads it
+    expect(town.stress[0].cast.stakes[0].reason).toBe(STAKE_REASONS.untouched);
   });
 });

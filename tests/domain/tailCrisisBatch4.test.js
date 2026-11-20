@@ -48,9 +48,9 @@ const page = (s) => [
 
 /** [seed, words that must NOT print, what prints in their place] (READ-ALL row ids) */
 const FALSE = [
-  ['r2s-famine-town-1', 'Merchant Guilds no stake yet', 'Merchant Guilds are already at odds · in their own quarrel with Merchant oligarchy'], // B12521
-  ['r2s-famine-city-0', 'Noble Families no stake yet', 'Noble Families are already at odds · in their own quarrel with Royal Authority'], // B13860
-  ['r2s-famine-metropolis-2', 'The Arcane Circle no stake yet', 'The Arcane Circle is already at odds · in its own quarrel with City-State Council'], // B18039
+  ['r2s-famine-town-1', 'Merchant Guilds no stake yet', 'Merchant Guilds are already at odds · in their own quarrel with the Merchant oligarchy'], // B12521; FRAME-6 · C2B (c) (the pin moves): the other power with its article (powerNameInProse)
+  ['r2s-famine-city-0', 'Noble Families no stake yet', 'Noble Families are already at odds · in their own quarrel with the Royal Authority'], // B13860; C2B (c)
+  ['r2s-famine-metropolis-2', 'The Arcane Circle no stake yet', 'The Arcane Circle is already at odds · in its own quarrel with the City-State Council'], // B18039; C2B (c)
   ['r2s-mass_migration-city-1', 'Merchant Guild Council no stake yet', 'Merchant Guild Council must answer for it · it governs here'], // 13199
   ['r2s-mass_migration-city-3', 'Democratic assembly no stake yet', 'Democratic assembly must answer for it · it governs here'], // 06464
   ['r2s-mass_migration-city-2', 'Merchant oligarchy no stake yet', 'Merchant oligarchy must answer for it · it governs here'], // 13370

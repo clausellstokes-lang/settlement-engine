@@ -40,7 +40,7 @@ import { CAST_EDIT_PATH, CAST_EDIT_SEPARATOR } from '../userEditLines.js';
 import { nativeSemanticName } from '../content/customContentSemanticAuthority.js';
 import { firstRankMembershipOf, membersByRank, membershipsOf, powerOrderOf } from '../people/membership.js';
 import { allegianceOf } from '../people/allegiance.js'; // ALLEGIANCE-CAR1: the hidden allegiance's one reader (J-1)
-import { isSeatVacant } from '../people/seatKeeper.js'; // ROUND THREE item 4: the empty seat's one home
+import { isSeatVacant } from '../people/seatKeeper.js'; import { fillAgreement } from '../display/powerSentenceName.js'; // ROUND THREE item 4: the empty seat's one home; FRAME-6 · C2B (b): the names lane's one agreement helper
 
 // ── The tuning (the owner's dials; docs/DESIGN_CRISIS_TAB.md "Open for the owner's veto") ──
 
@@ -663,7 +663,13 @@ export function deriveStakes(s, kind) {
     let stake;
     if (gains && (loses || losesSeat)) stake = { factionId: name, stake: 'split', reason: STAKE_REASONS.split };
     else if (gains) stake = { factionId: name, stake: 'gains', reason: gains };
-    else if (loses) stake = { factionId: name, stake: 'loses', reason: STAKE_REASONS.loses };
+    // A STAKE REASON SAID OF A PLURAL POWER TAKES ITS NUMBER, AT BIRTH (FRAME-6 · C2B (b), the chair's ruling of 2026-11-20
+    // 15:58 UTC, vetoable by the owner; C2 § found 2: "The Merchant Guilds lose · its own people feel the crisis first", 150
+    // rows on B7's pool): the `loses` reason in its agreement form, filled by the stake's own power through the names lane's
+    // helper (`data/people/powerSentenceName.js :: fillAgreement`): "their own people…" of the Merchant Guilds; of the Elder
+    // Council it is `STAKE_REASONS.loses` byte for byte (the string a saved town holds; the page reads the record and rewrites
+    // nothing). Only the `loses` reason: the chair's ruling names it. Draw-free. (One line: this file is at its size ceiling.)
+    else if (loses) stake = { factionId: name, stake: 'loses', reason: fillAgreement(`{power|its|their}${STAKE_REASONS.loses.slice('its'.length)}`, { power: name }) };
     else if (losesSeat) stake = { factionId: name, stake: 'loses', reason: STAKE_REASONS.losesSeat };
     else stake = { factionId: name, stake: 'split', reason: /** @type {Record<string, string>} */ (RAISED_TO_LEAD)[kind] === name ? STAKE_REASONS.leadsRevolt : (raisedReasonOf(kind, f, isGov) || STAKE_REASONS.untouched) };
     return stake;
