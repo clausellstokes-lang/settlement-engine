@@ -1,7 +1,51 @@
-# PAGE-3's hand-back (kept current at every push; last written 2026-11-20 13:54 UTC by `date -u`)
+# PAGE-3's hand-back (kept current at every push; last written 2026-11-20 14:01 UTC by `date -u`)
 
 Read this, then `PAGE-2-HANDBACK.md` (its section 1, the rulings in force, still governs where this file is silent),
 then `briefs/BUILDER-RULES.md` and the brief of the unit you take. PAGE-3 integrates; builders (the Agent tool) build.
+
+## 0. THE SPLIT (the chair, 13:59): PAGE-3 STOPS AT ITS SUCCESSOR POINT; THE LANE GOES TO TWO SEATS, both on PAGE-3's tip
+
+**PAGE-5, THE TROUBLE:** S6; the sides table's follow-up and merge; the causes (L1 re-cut, section 4b).
+- S6: `lane/page-2-2026-11-20-t1` at 532a74fa2 (PAGE-2's builder stopped; its gates never ran: no count lines; the merge
+  doors owed: the lighting census, the wiring census, the confinement, the measure after by size). Brief `briefs/T1.md`.
+- SIDES: a89859e6f READ by PAGE-3 line by line; red (module absent: 1 file failed) and green (10/10) re-run; merged with its
+  manifest row (a written rationale) at 00ec2d54e and the lighting census refrozen by its door (3707→3708 files,
+  31237→31247 titles) on local `page3/s7-merge`; tests/lint 220/220 files there (ledger file needs review-fixes fetched).
+  The follow-up (the chair's six changes of 13:22, verbatim in `briefs/S7-FOLLOWUP.md`, plus the 13:50 ruling quoted
+  below): PAGE-3's builder RESUMED on the ruling at 13:5x on `page3/s7-fix`; whatever it committed is pushed as
+  `lane/page-3-2026-11-20-s7-wip` (see section 0a). PAGE-5: read its diff once, re-run red/green, re-take the lighting
+  census (its new arm adds titles), merge into the lane, send the chair the data file's commit and `SIDE-READERS.md`'s
+  commit (837394d8f) in one line. Owed at the join: a parity test with the session sheet's `sideArchetypes.js`.
+- CAUSES: section 4b; not started.
+
+**PAGE-6, PEOPLE AND PLACE:** L2's 76 lines; L4 with the seven reworked lines; S9 as a post-pass; the guard (S3).
+- L2: `lane/page-2-2026-11-20-l2-wip` at 609c52c5d (76 lines; three forges sharing an arrival sentence 22.9%→14.2% by its
+  builder; four register reds owed at the doors). THE 76 LINES GO TO THE CHAIR AS A FILE BEFORE THE MERGE. Brief `briefs/L2.md`.
+- L4 + S9: `lane/page-2-2026-11-20-s-wip` at f2957d5be (the seven reworked lines are in it: SEND THEM TO THE CHAIR;
+  6 importer reds: three golden, three tests anchored on secrets L4 cured, to re-key by cause; the guard not started).
+  Briefs `briefs/S-v2.md`, `briefs/S.md`. S9 IS RE-CUT (section 4a, quoted).
+
+**K STOPS ON THIS LANE (the chair, 13:59, verbatim):** "K's TRIAL: A TRUE FINDING, AND K STOPS ON THIS LANE. (i) to (v)
+are NOT a sixth class: a card's band feeds which powers are strong and which quarrel at birth (34 towns lose their
+conflict; parties swap): that is the subject of the who-rules law, so the correction moves to that lane, to land only
+under its birth law, dark (SEAT-4 has your branch `-k-wip` and your output's path). You build nothing more for K." The
+trial's figures: section 2's K row and `measures/page-3/K-trial-f4a434660.out.txt`.
+
+## 0a. The chair's 13:50 ruling, VERBATIM (the sides; PAGE-2's stopped branches; S9)
+
+"YOUR STOP ON THE SIDES TABLE WAS RIGHT; THE RULING: (a) {power} FILLS FROM THE ROSTER BY `means`, never from the stored
+side: the ruler is the document's governing power; a power kind only where the document in hand holds EXACTLY ONE power
+of that kind (two or none: the row's own words). That uniqueness is the READER's test (the display seat has it as its
+rule 2); the data only carries `named`. (b) THE SENTENCE "a row without `named` is never named" IS RE-STATED: THE READER
+NEVER PUTS A NAME WHERE THE STORED SIDE IS THE TEMPLATE'S OWN WORDS unless that row carries `named`. A stored side that
+already IS a power's name (the seven slots `substituteNames` writes) is shown AS STORED under the header's rules 2 to 4:
+never un-named. So "Legitimate heir", "Corrupt officials", "Official guards" and "Power behind throne" need no `named`.
+(c) The case arm: a fixed generator row may match the case of its own words OR of the side it stands for: approved (the
+reader capitalises what it shows). Build the follow-up, merge, and send me the commit."
+"S9's 40 OTHER CARDS, RULED: NOT ACCEPTED AS A CLASS. S9 becomes a POST-PASS like the goals' refusal: the secrets are
+dealt exactly as today; THEN, draw-free, a card whose secret it is not admitted to takes its next admitted line that no
+card of the town holds; A CARD THAT IS NOT A MISFIT KEEPS ITS SECRET BYTE FOR BYTE. If a later draw of the same card
+makes that impossible, the builder says exactly which and stops."
 
 ## 1. State
 
@@ -81,7 +125,7 @@ mixed under 10%; three cities in a row under 25%. Not started by PAGE-3.
 ## 5. Open questions to the chair (asked, unanswered at this writing)
 
 - (answered 13:50: see 4a.)
-- 14:2x: K's OTHER (353/44 golden, 686/89 census): a sixth class, or K stops.
+- (answered 13:59: K stops on this lane; see section 0.)
 
 ## 6. Container facts (this container only; a successor re-makes them)
 
