@@ -3324,3 +3324,15 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   PULSE: a correction changes how a corrected card acts in play. TOLD (11:26): the titles are the union of both
   seats' lists; PART K's proposal must name every role that misses, every reader by birth or play time, what
   moves and what does not, and whether the stray `_rng()` is avoided; the chair rules; the owner signs at the close.
+- 11:30 UTC · GOALS-1, THREE MESSAGES: (1) its 23 against PAGE-1's 170: the 170 counts law wants beside a venal secret (about
+  120 watch cards: the allegiance design's own corrupt enforcer: NOT added), kindness wants (hypocrisy, not a flat
+  contradiction: not added but for rows that read flat), and any trade wrong: THE BUILD STAYS conviction and duty,
+  short and long, beside a closed list read row by row (119 of 184 candidate rows kept). Asked to check
+  `rareSecrets.js :: dealRareSecrets`, which runs after the wants are dealt. (2) UNIT 3 (the ties' frozen head,
+  94493d1fd): ties changed golden 252, census 1,075, every one a repeat at the base; A NON-STRING FIELD MOVES WITH
+  THEM: `relationships[].proseVariant`, the stored index a re-render reads: RULED IN SCOPE (GR4 amended: the
+  description, the tension and their index move together), with two proofs asked (a town saved before re-renders
+  as today; a reserve index resolves at every reader); `prominentRelationship`'s quoted strings in scope (golden 7
+  towns, census 11). (3) an approved new line named {other} twice and reds the names walker where two cards share a
+  name: reworded and APPROVED: "Quietly learn one thing this season from watching {other} at work." PAGE-1: four
+  builders on the display half (card, output, safety, magic), brief at ff51769f7.
