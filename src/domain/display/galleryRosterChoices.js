@@ -164,6 +164,18 @@ export function applyRosterChoices(s, pub, idOf) {
   // R3-CURE (unit 2; the chair's ruling of 07:39: "LEAVES WHOLE" MEANS EVERY COPY): the withheld powers (every power of
   // `pub`'s two lists that neither served list names) leave every STRUCTURED copy (withholdPowerCopies)
   withholdPowerCopies(s, pub, ps);
+  // R3-TELL-4 unit (i) (the chair's ruling 73 (2): WHAT NAMES OR DEPENDS ON A WITHHELD HOUSE IS SERVED AS THE HOUSE-FREE TWIN
+  // WOULD SERVE IT). registry: people.allegiance. A served person's `allegiance` stays only BY POSITIVE ACCOUNT: its `house` a
+  // house this read lists, its `power` null, absent or a power this read serves (both served lists); else THE KEY leaves, the
+  // open place's form (ruling 47: no husk; a husk the sweep left names no listed house). SQL twin: 212, the same rule
+  if (Array.isArray(s.npcs)) {
+    const listed = new Set(houses.map(h => str(h.name)).filter(v => v !== ''));
+    const powersServed = new Set([...objectsOf(ps?.factions), ...objectsOf(s.factions)].flatMap(powerNamesOf));
+    const accounted = (/** @type {unknown} */ a) => isRec(a) && typeof a.house === 'string' && listed.has(a.house)
+      && (a.power === null || a.power === undefined || (typeof a.power === 'string' && powersServed.has(a.power)));
+    s.npcs = s.npcs.map(n => (isRec(n) && Object.prototype.hasOwnProperty.call(n, 'allegiance') && !accounted(n.allegiance)
+      ? (({ allegiance: _a, ...rest }) => rest)(n) : n));
+  }
 
   const instOf = (/** @type {Rec} */ d) => recAt(recAt(recAt(recAt(d, 'economicState') || {}, 'safetyProfile') || {}, 'compound') || {}, 'inst')
     || recAt(recAt(recAt(d, 'economicState') || {}, 'compound') || {}, 'inst') || {};

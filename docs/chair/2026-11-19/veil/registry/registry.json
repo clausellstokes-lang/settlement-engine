@@ -240,6 +240,11 @@
     "by": "src/generators/narrativeGenerator.js :: genArrivalDetail"
   },
   {
+    "path": "^npcs\\[\\]\\.allegiance\\b",
+    "rule": "withhold",
+    "by": "src/domain/people/allegiance.js :: dealAllegiances"
+  },
+  {
     "path": "^powerStructure\\.economyInputFingerprint$",
     "rule": "withhold",
     "by": "src/generators/power/economyReconciliation.js :: fingerprintPowerEconomyInput"
