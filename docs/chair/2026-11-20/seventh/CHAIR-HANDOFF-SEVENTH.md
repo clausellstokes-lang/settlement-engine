@@ -98,6 +98,17 @@ parts of the whole check (at the close).
   for a digital-only campaign by one maker; the 100,000-dollar results came with print): a campaign as a launch
   event with a low goal, yes; as a way to fund development, not alone.
 
+- **2026-11-20, between the clock's readings of 00:30 and 00:36 UTC, the owner (verbatim), in answer to the chair's
+  report asking that the earlier accounts' sessions and scheduled task be paused before 09:00 UTC:** "the other two
+  are paused... they ran out of usage effectively". TAKEN AS THE OWNER'S ANSWER TO S133: nothing more is asked of the
+  owner on it. SAID ONCE IN REPLY, as the one gap: out of usage is not paused; a scheduled task fires when the
+  allowance returns (by the earlier chairs' records: 2026-11-20 09:00 UTC for the fifth chair's account,
+  2026-11-22 18:00 UTC for the sixth's; this chair cannot see either account). THE CHAIR'S OWN GUARDS, needing
+  nothing of the owner: every seat works on a branch of its own; git refuses a push that is not a fast-forward; the
+  safety net reads the earlier chairs' branches and the line for movement by another hand each time it fires; a
+  STOP line addressed to a woken chair or seat is appended at the end of the fifth and the sixth handoffs' own logs
+  (the first thing a woken chair re-reads).
+
 ## 2. Rulings of this chair (each vetoable by the owner)
 
 - **SV1 (00:05 UTC, 2026-11-20): THE VEIL'S LIST ON THREE MACHINES.** VEIL-19 owns 212, its rollback and the twin's
@@ -185,7 +196,8 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
 ## 4. Owed to the owner
 
 - One plain line at each landing; the answer first on every prompt.
-- SAID AGAIN (the sixth chair's S133, and now one account more): the sessions and scheduled tasks of the EARLIER
+- ANSWERED BY THE OWNER ON 2026-11-20 (section 1: "the other two are paused... they ran out of usage effectively"); KEPT
+  HERE AS THE RECORD OF WHAT WAS ASKED. (the sixth chair's S133, and now one account more): the sessions and scheduled tasks of the EARLIER
   ACCOUNTS should be paused or archived by the owner's hand. The fifth chair's account has a scheduled task that can
   wake on these branches when that account's allowance returns (the sixth chair's figure: 2026-11-20 09:00 UTC); the
   sixth chair's account holds a self-check armed for 10:13 UTC on 2026-11-19 and stopped seats that would write to
