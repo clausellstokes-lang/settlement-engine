@@ -1,0 +1,78 @@
+
+ruled-hxd.jsonl: calm towns by size: thorp 70, hamlet 66, village 70, town 70, city 73, metropolis 67
+ruler found (rank 1 of the governing power): 416 of 416
+                                                                                                  thorp hamlet villag   town   city metrop
+principled ruler (dominant trait in the straight family, no vice)                                   13%     5%     6%    11%    12%    13%
+principled ruler, any flaw (the chair's reading)                                                    17%     6%     7%    13%    14%    18%
+kindly ruler (dominant trait in the warm family, no vice)                                            9%    14%    16%     7%     8%    12%
+ruler with no flaw at all                                                                           27%    32%    31%    31%    26%    33%
+weathered catastrophe within 60 years (no trouble of its kind today, none "never put right")         9%    21%    16%    13%    16%    22%
+weathered catastrophe within 40 years                                                                3%    15%    13%     7%    10%    15%
+weathered catastrophe within 100 years                                                              11%    26%    21%    29%    32%    33%
+weathered catastrophe, any age                                                                      21%    26%    30%    39%    64%    78%
+weathered hardship major or worse, any age (the chair's reading)                                    76%    82%    91%    93%    99%   100%
+a legacy line "hit hard, and it has since recovered"                                                31%    35%    49%    57%    77%    61%
+a legacy line "the way it is ruled was settled then" (political drift)                              17%    12%    30%    50%    30%    43%
+founded "through sustained effort and reliable governance"                                          13%    14%    19%    11%    12%     6%
+a siege in the history (siegeNarrative)                                                             19%     9%     9%    10%     3%     0%
+every relation of the seat calm (none tense or competitive)                                          0%    18%    83%    93%    88%    88%
+faith and seat ALLIED (a relation of type allied)                                                    0%     0%     0%     0%     0%     0%
+previousGovernments present                                                                          0%     0%     0%     0%     0%     0%
+a neighbour relationship recorded                                                                    0%     0%     0%     0%     0%     0%
+CONDITION: no trouble of today concerns the ruler, no capture (U5's)                                77%    74%    67%    80%    64%    73%
+  of which: no tension of the ruler's kinds or naming the seat                                      77%    74%    67%    81%    66%    75%
+  of which: capture rung not corrupted or capture                                                  100%   100%   100%    99%    99%    94%
+rejected condition: also no HIGH conflict naming the seat                                           77%    73%    64%    59%    22%    28%
+the seat's relations by the other power's category/type (calm, all sizes): religious/dependent 237, economy/dependent 187, military/symbiotic 120, military/subordinate 61, noble/subordinate 47, noble/dependent 43, economy/subordinate 39, military/tense 21, religious/tense 8, noble/tense 5, economy/competitive 2, military/competitive 1
+
+ruled-hxr.jsonl: calm towns by size: thorp 62, hamlet 59, village 70, town 69, city 63, metropolis 73
+ruler found (rank 1 of the governing power): 396 of 396
+                                                                                                  thorp hamlet villag   town   city metrop
+principled ruler (dominant trait in the straight family, no vice)                                   10%     5%     9%    10%    11%     4%
+principled ruler, any flaw (the chair's reading)                                                    15%     5%    11%    12%    14%     5%
+kindly ruler (dominant trait in the warm family, no vice)                                            6%    14%    20%    14%    11%     5%
+ruler with no flaw at all                                                                           29%    29%    33%    35%    35%    22%
+weathered catastrophe within 60 years (no trouble of its kind today, none "never put right")         8%    20%    11%    17%     8%    18%
+weathered catastrophe within 40 years                                                                3%    17%     9%    12%     5%     8%
+weathered catastrophe within 100 years                                                              15%    24%    20%    23%    21%    30%
+weathered catastrophe, any age                                                                      27%    24%    30%    39%    63%    85%
+weathered hardship major or worse, any age (the chair's reading)                                    74%    75%    89%    91%    97%   100%
+a legacy line "hit hard, and it has since recovered"                                                31%    44%    49%    55%    56%    62%
+a legacy line "the way it is ruled was settled then" (political drift)                              23%     8%    30%    28%    41%    37%
+founded "through sustained effort and reliable governance"                                          16%     7%    10%     9%     5%     5%
+a siege in the history (siegeNarrative)                                                             19%    17%    16%    10%     0%     0%
+every relation of the seat calm (none tense or competitive)                                          0%    17%    71%    86%    76%    63%
+faith and seat ALLIED (a relation of type allied)                                                    0%     0%     0%     0%     0%     0%
+previousGovernments present                                                                          0%     0%     0%     0%     0%     0%
+a neighbour relationship recorded                                                                    0%     0%     0%     0%     0%     0%
+CONDITION: no trouble of today concerns the ruler, no capture (U5's)                                68%    81%    67%    58%    65%    63%
+  of which: no tension of the ruler's kinds or naming the seat                                      68%    81%    67%    70%    68%    70%
+  of which: capture rung not corrupted or capture                                                  100%   100%   100%    86%    97%    90%
+rejected condition: also no HIGH conflict naming the seat                                           68%    80%    64%    42%    29%    21%
+the seat's relations by the other power's category/type (calm, all sizes): economy/subordinate 114, military/subordinate 95, religious/dependent 83, economy/dependent 66, military/symbiotic 57, noble/subordinate 45, criminal/competitive 23, criminal/tense 19, noble/dependent 13, criminal/corrupted 12, noble/tense 4, military/tense 2
+
+ruled-hxu.jsonl: calm towns by size: thorp 125, hamlet 128, village 142, town 134, city 147, metropolis 130
+ruler found (rank 1 of the governing power): 806 of 806
+                                                                                                  thorp hamlet villag   town   city metrop
+principled ruler (dominant trait in the straight family, no vice)                                    6%     4%     6%     9%     8%     6%
+principled ruler, any flaw (the chair's reading)                                                    10%     8%    10%    13%    11%    12%
+kindly ruler (dominant trait in the warm family, no vice)                                           14%    11%    10%    11%     5%    10%
+ruler with no flaw at all                                                                           28%    32%    33%    33%    27%    32%
+weathered catastrophe within 60 years (no trouble of its kind today, none "never put right")         6%    14%    18%    19%    15%    15%
+weathered catastrophe within 40 years                                                                5%    12%    12%    13%     9%    11%
+weathered catastrophe within 100 years                                                              17%    16%    25%    30%    24%    25%
+weathered catastrophe, any age                                                                      28%    16%    33%    47%    58%    76%
+weathered hardship major or worse, any age (the chair's reading)                                    81%    76%    87%    93%    99%   100%
+a legacy line "hit hard, and it has since recovered"                                                42%    45%    48%    61%    67%    69%
+a legacy line "the way it is ruled was settled then" (political drift)                              18%    15%    31%    37%    37%    39%
+founded "through sustained effort and reliable governance"                                          14%    21%     8%     9%     7%    15%
+a siege in the history (siegeNarrative)                                                             15%    20%     8%     4%     3%     1%
+every relation of the seat calm (none tense or competitive)                                          0%    18%    83%    93%    89%    90%
+faith and seat ALLIED (a relation of type allied)                                                    0%     0%     0%     0%     0%     0%
+previousGovernments present                                                                          0%     0%     0%     0%     0%     0%
+a neighbour relationship recorded                                                                    0%     0%     0%     0%     0%     0%
+CONDITION: no trouble of today concerns the ruler, no capture (U5's)                                74%    74%    70%    84%    71%    71%
+  of which: no tension of the ruler's kinds or naming the seat                                      75%    74%    70%    85%    76%    78%
+  of which: capture rung not corrupted or capture                                                   99%   100%   100%    99%    94%    92%
+rejected condition: also no HIGH conflict naming the seat                                           74%    73%    68%    66%    35%    18%
+the seat's relations by the other power's category/type (calm, all sizes): religious/dependent 461, economy/dependent 375, military/symbiotic 217, military/subordinate 132, noble/subordinate 112, economy/subordinate 90, noble/dependent 62, military/tense 48, religious/tense 11, noble/tense 5, economy/competitive 4, criminal/competitive 1

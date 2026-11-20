@@ -1,0 +1,54 @@
+
+=== BORN UNDER NO CRISIS: standing, Legitimacy Crisis / Contested / Tolerated / Approved / Endorsed (% of the size's towns in the arm, each run's own arm)
+size                        today                 ruled               with U5   n (today, ruled, U5)
+thorp                 9/27/61/3/0          4/11/56/29/0          4/11/49/31/4   70, 70, 70
+hamlet               12/39/48/0/0          5/17/42/36/0          5/17/38/35/6   66, 66, 66
+village               3/66/30/1/0          0/14/49/37/0          0/14/44/37/4   70, 70, 70
+town                  0/4/59/37/0           0/6/66/29/0           0/6/54/36/4   70, 70, 70
+city                  0/0/0/59/41           0/8/64/27/0           0/3/42/53/1   73, 73, 73
+metropolis             0/0/0/9/91           0/0/81/19/0           0/0/61/37/1   67, 67, 67
+
+=== BORN UNDER A CRISIS: standing, Legitimacy Crisis / Contested / Tolerated / Approved / Endorsed (% of the size's towns in the arm, each run's own arm)
+size                        today                 ruled               with U5   n (today, ruled, U5)
+thorp                 63/33/3/0/0          37/37/27/0/0          37/37/27/0/0   30, 30, 30
+hamlet                76/21/3/0/0          41/35/21/3/0          41/35/21/3/0   34, 34, 34
+village               90/10/0/0/0          43/30/27/0/0          43/30/27/0/0   30, 30, 30
+town                 23/57/20/0/0          23/43/33/0/0          23/43/30/3/0   30, 30, 30
+city                  4/0/70/26/0          15/48/33/4/0          15/48/33/4/0   27, 27, 27
+metropolis           12/0/48/36/3          21/45/30/3/0          21/45/30/3/0   33, 33, 33
+
+=== FS4: the Legitimacy Crisis share, ruled -> with U5 (must not rise at any size), and the towns whose score FELL
+thorp      calm 3 -> 3 held | crisis-born 11 -> 11 held | score fell in 0 towns (calm or not)
+hamlet     calm 3 -> 3 held | crisis-born 14 -> 14 held | score fell in 0 towns (calm or not)
+village    calm 0 -> 0 held | crisis-born 13 -> 13 held | score fell in 0 towns (calm or not)
+town       calm 0 -> 0 held | crisis-born 7 -> 7 held | score fell in 0 towns (calm or not)
+city       calm 0 -> 0 held | crisis-born 4 -> 4 held | score fell in 0 towns (calm or not)
+metropolis calm 0 -> 0 held | crisis-born 7 -> 7 held | score fell in 0 towns (calm or not)
+
+=== REASONS: calm towns Endorsed with U5: 15; by reasons count: 2 reasons 14, 3 reasons 1; fewer than two: 0
+Endorsed with U5 (calm), by what carried it: principled+prosperity15 7; weathered+prosperity15 7; principled+prosperity15+defense1 1
+
+=== MERITS COUNTED with U5 (calm; a merit counts only at Tolerated or better with no trouble of the ruler), share of the size's calm towns
+                                thorp hamlet villag   town   city metrop
+principled                         9%     5%     3%    10%    11%    10%
+weathered                          3%     8%     6%     7%     7%    10%
+any merit                         11%    12%     9%    16%    18%    21%
+two merits                         0%     0%     0%     1%     0%     0%
+
+=== THE CONTEST'S FIGURES: today -> ruled -> with U5
+calm: the incumbent protected (rulingPowerCoup.js :: coupContenders().incumbent.gated) | capture rung equilibrium or worse | corrupted or capture | below 45 | score mean
+  thorp       protected 100% -> 100% -> 100% | eq+ 0% -> 0% -> 0%    | corr+ 0% -> 0% -> 0%  | <45 36% -> 16% -> 16% | 46.7 -> 54.6 -> 55.7
+  hamlet      protected 100% -> 100% -> 100% | eq+ 0% -> 0% -> 0%    | corr+ 0% -> 0% -> 0%  | <45 52% -> 21% -> 21% | 42.4 -> 54.5 -> 55.7
+  village     protected 100% -> 100% -> 100% | eq+ 1% -> 0% -> 0%    | corr+ 0% -> 0% -> 0%  | <45 69% -> 14% -> 14% | 41.2 -> 56.4 -> 57.2
+  town        protected 100% -> 100% -> 100% | eq+ 6% -> 4% -> 4%    | corr+ 1% -> 1% -> 1%  | <45 4% -> 6% -> 6%    | 56.5 -> 57.1 -> 58.8
+  city        protected 100% -> 100% -> 100% | eq+ 10% -> 12% -> 12% | corr+ 1% -> 1% -> 1%  | <45 0% -> 8% -> 3%    | 71.8 -> 56.3 -> 60.1
+  metropolis  protected 100% -> 100% -> 100% | eq+ 12% -> 18% -> 18% | corr+ 3% -> 6% -> 6%  | <45 0% -> 0% -> 0%    | 74.7 -> 58.3 -> 60.4
+crisis-born: the incumbent protected (rulingPowerCoup.js :: coupContenders().incumbent.gated) | capture rung equilibrium or worse | corrupted or capture | below 45 | score mean
+  thorp       protected 100% -> 100% -> 100% | eq+ 0% -> 0% -> 0%    | corr+ 0% -> 0% -> 0%  | <45 97% -> 73% -> 73% | 21.3 -> 28.1 -> 28.5
+  hamlet      protected 100% -> 100% -> 100% | eq+ 0% -> 0% -> 0%    | corr+ 0% -> 0% -> 0%  | <45 97% -> 76% -> 76% | 19.8 -> 31.2 -> 31.2
+  village     protected 100% -> 100% -> 100% | eq+ 0% -> 0% -> 0%    | corr+ 0% -> 0% -> 0%  | <45 100% -> 73% -> 73% | 17.4 -> 33.3 -> 33.3
+  town        protected 70% -> 77% -> 77%    | eq+ 10% -> 10% -> 10% | corr+ 0% -> 0% -> 0%  | <45 80% -> 67% -> 67% | 36.0 -> 36.8 -> 37.5
+  city        protected 81% -> 59% -> 59%    | eq+ 33% -> 37% -> 37% | corr+ 11% -> 11% -> 11% | <45 4% -> 63% -> 63%  | 54.4 -> 39.6 -> 39.6
+  metropolis  protected 82% -> 39% -> 39%    | eq+ 33% -> 45% -> 45% | corr+ 12% -> 12% -> 12% | <45 12% -> 67% -> 67% | 52.1 -> 36.7 -> 37.0
+
+THE BIRTH UNDER U5 vs THE RULED BIRTH: towns whose crisis, ruler's trait or history differ: 0 of 600; towns whose capture rung differs: 0; whose band differs: 71
