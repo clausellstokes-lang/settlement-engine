@@ -13,7 +13,9 @@
  * (`!atom` there is `excludes` here), every one an atom `factVocabulary.js` already holds; `needs: []` needs nothing.
  * Lines 1-3 of each kind are today's three stored hooks (guild_conflict 3 in its "both sides" spelling; external_threat 1-2
  * reworded by the chair's rulings of 20:03 UTC, with crime_wave 7, guild_conflict 14, external_threat 6 and
- * legitimacy_crisis 7). The timeline's
+ * legitimacy_crisis 7). legitimacy_crisis 9 (the envoy of the power above the governing one, `seat outranked`) is STRUCK
+ * (HOOKS-FINISH, the chair's ruling (iv), 20:49 UTC): its need held at the pick and was false on two final records
+ * (hxd-hamlet-36, hxd-metropolis-61); it returns when that fact is written before the pick. So that pool holds 8. The timeline's
  * own events still draw their template's list (`historyData.js :: HISTORICAL_EVENTS_DATA[].plotHooks`); this table is the
  * current tension's only. legitimacy_crisis 2 is the form an approved seat swaps for its twin
  * (`historyData.js :: LEGITIMACY_HELD_TWINS`, applied after the pick, so the pick never reads the seat).
@@ -115,7 +117,6 @@ export const TROUBLE_HOOKS = Object.freeze({
     { text: 'One of those who deny the mandate has been offered a post by those in charge, and has not yet answered', needs: [] },
     { text: 'Those risen against the authority have seized a store of supplies, and the keeper of it is missing', needs: ['crisis: insurgency'] },
     { text: 'A preacher of the new faith is telling crowds that those in charge rule without blessing', needs: ['crisis: religious_conversion'] },
-    { text: 'The power that stands above the governing one has sent an envoy to look into the question, and both sides are courting the envoy', needs: ['seat outranked'] },
   ]),
   corruption_scandal: Object.freeze([
     { text: 'The investigator who uncovered the corruption has received a death threat', needs: [] },

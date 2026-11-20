@@ -1213,9 +1213,7 @@ export const HISTORICAL_EVENTS_DATA = [
       { text: 'The threat is being exaggerated by someone who profits from wartime contracts', excludes: ['war: peace'] }, // TAIL-HISTORY batch 1 (the chair's Y1; READ-ALL 22261, 02538, B02462): a war's words, where a war is in force
       { text: 'A diplomatic channel exists that the war party is suppressing', excludes: ['war: peace'] }, // TAIL-HISTORY batch 1 (the chair's Y1; READ-ALL 22261, 02538, B02462): a war's words, where a war is in force
       'The threat has an agent already inside the settlement',
-      'Someone has been testing how quickly the place answers an alarm, and nobody ordered a drill', // HOOKS-BUILD (the chair, 20:03 UTC 2026-11-20): three more the timeline's event can say at peace, so four stand there (pool dominance)
-      'A map of the approaches drawn up at the time of the alarm has gone missing',
-      'One of those who brought the first news of the danger has come back, and tells it differently now',
+      'Someone has been testing how quickly the place answers an alarm, and nobody ordered a drill', // HOOKS-FINISH (the chair's ruling (i), 20:49 UTC 2026-11-20): ONE line the timeline's event can say at peace (pool dominance); the loop (generateEventNarrative) re-reads the list's length, so a fourth row adds no roll and a fifth would: no template's hook list grows past four rows
     ],
     // TAIL-HISTORY Y13 (the chair's ruling, 2026-11-15: Y5 widened to every type; READ-ALL's aftermath shape): the words where the timeline holds no event of this type (historyGenerator.js :: tensionByMemory): a live quarrel, present tense, no past event (VETOABLE wording, the owner's)
     byMemory: { unanchored: { description: 'News of approaching danger divides the community on how to respond' } },
