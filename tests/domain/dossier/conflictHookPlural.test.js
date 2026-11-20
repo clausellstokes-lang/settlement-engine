@@ -13,7 +13,7 @@ import { describe, expect, it } from 'vitest';
 
 import { HOOK_LINE_POOLS, createConflictHookDraw } from '../../../src/domain/dossier/hookLines.js';
 import { factsOf } from '../../../src/domain/facts/factsOf.js';
-import { powerSentenceName } from '../../../src/data/people/powerSentenceName.js';
+import { powerNameWithArticle } from '../../../src/data/people/powerSentenceName.js'; // NAMES-1 (CN1): the article
 
 const GUARDED = factsOf({ tier: 'town', institutions: [{ name: 'Town watch' }] });
 
@@ -39,7 +39,7 @@ function everyLine(family, a, b) {
 
 // a party as the SUBJECT of its clause: the sentence's head, after ", and ", or after the seat family's
 // bare "<issue> and" (a party named inside "between A and B" or "no part in A or B" is not a subject)
-const SINGULAR_AFTER = /(?:^|, and |seat and )(?:Religious Authorities|Merchant Guilds) (?:has|is|says|knows|benefits|does|agrees|owes|answers)\b|than (?:Religious Authorities|Merchant Guilds) does\b/;
+const SINGULAR_AFTER = /(?:^|, and |seat and )(?:[Tt]he )?(?:Religious Authorities|Merchant Guilds) (?:has|is|says|knows|benefits|does|agrees|owes|answers)\b|than (?:the )?(?:Religious Authorities|Merchant Guilds) does\b/; // NAMES-1 (CN1): the article
 const PARTY_PRONOUN = /\bits own\b|\bit (?:says|owes|will|no longer|answers)\b/;
 
 describe('the conflict hooks agree with a plural power', () => {
@@ -65,10 +65,10 @@ describe('the conflict hooks agree with a plural power', () => {
 
   it('a singular party reads the old sentence, byte for byte', () => {
     const lines = everyLine('property', 'Elder Council', "Thieves' Guild");
-    expect(lines).toContain("Elder Council has posted guards on what it says is its own, and Thieves' Guild says church land claims on guild property was never Elder Council's to hold.");
+    expect(lines).toContain("The Elder Council has posted guards on what it says is its own, and the Thieves' Guild says church land claims on guild property was never the Elder Council's to hold."); // NAMES-1 (CN1): the article
     // the head word decides: "Military/Guard" and "Thieves' Guild" are one body each. BAR6-POWERS (2026-11-16, LAW 10h): the
     // roster label prints in its prose form ("The Guard", `powerSentenceName`), and agrees in the singular
     const mixed = everyLine('licence', 'Military/Guard', 'Merchant Guilds');
-    expect(mixed).toContain(`${powerSentenceName('Military/Guard')} has begun issuing its own papers over control of the market licensing process, and Merchant Guilds are refusing to honour them.`);
+    expect(mixed).toContain(`${powerNameWithArticle('Military/Guard', true)} has begun issuing its own papers over control of the market licensing process, and the Merchant Guilds are refusing to honour them.`); // NAMES-1 (CN1): the article
   });
 });

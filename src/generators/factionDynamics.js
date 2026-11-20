@@ -15,7 +15,7 @@
  *   applyLegitimacyMultipliers → mutates faction array in place
  */
 
-import { LEGITIMACY_CUTS, legitimacyBandOf } from '../data/bandLadders.js'; import { STRESS_POWER_FACES } from '../data/stressPowerFaces.js'; import { powerSentenceName, powerPossessive } from '../domain/display/powerSentenceName.js'; import { pluralPowerName } from '../domain/display/governanceAccount.js'; /** TAIL-POWERS-B (P3 + the agreement law): a power in a relation line takes its prose form (`say`) and the verb its number (`verb`). @param {{faction?: string} | null | undefined} f */ const say = (f) => powerSentenceName(f?.faction); /** @param {{faction?: string}} f @param {string} one @param {string} many */ const verb = (f, one, many) => (pluralPowerName(say(f)) ? many : one); // one line: the holder census keys this file by line
+import { LEGITIMACY_CUTS, legitimacyBandOf } from '../data/bandLadders.js'; import { STRESS_POWER_FACES } from '../data/stressPowerFaces.js'; import { powerNameAfterArticle, powerNameWithArticle, powerPossessive } from '../domain/display/powerSentenceName.js'; import { pluralPowerName } from '../domain/display/governanceAccount.js'; /** TAIL-POWERS-B (P3 + the agreement law): a power in a relation line takes its prose form (`say`) and the verb its number (`verb`). NAMES-1 (CN1): the form with its article, "the Elder Council" (`opening` raises a sentence's first "the"), and its possessive "the Guard's" (`sayOf`). @param {{faction?: string} | null | undefined} f */ const say = (f) => powerNameWithArticle(f?.faction); /** @param {{faction?: string}} f @param {string} one @param {string} many */ const verb = (f, one, many) => (pluralPowerName(say(f)) ? many : one); /** @param {{faction?: string}} f */ const sayOf = (f) => `the ${powerPossessive(powerNameAfterArticle(f?.faction))}`; /** @param {unknown} t @returns {any} */ const opening = (t) => (typeof t === 'string' ? t.replace(/(^|[.!?]\s+)the /g, '$1The ') : t); // one line: the holder census keys this file by line
 // ── Public legitimacy contributions ──────────────────────────────────────────
 // Prosperity → ±20
 const PROSPERITY_CONTRIB = {
@@ -270,9 +270,9 @@ export function govCriminalRelation(gov, crim, crimCapture, publicLeg) {
             : 'stable';
 
   return { pair: [gov.faction, crim.faction], type, direction,
-    captureState: crimCapture, narrative,
+    captureState: crimCapture, narrative: opening(narrative),
     dmNote: crimCapture !== 'adversarial' && crimCapture !== 'none'
-      ? `Ask: which specific officials have arrangements with ${crim.faction}? The answer drives dozens of plot hooks.`
+      ? `Ask: which specific officials have arrangements with ${say(crim)}? The answer drives dozens of plot hooks.`
       : null };
 }
 
@@ -302,7 +302,7 @@ export function criminalMilitaryRelation(crim, mil, crimCapture, publicLeg) {
 
   direction = publicLeg.isContested || publicLeg.isLegitimacyCrisis ? 'escalating' : 'stable';
 
-  return { pair: [crim.faction, mil.faction], type, direction, captureState: crimCapture, narrative };
+  return { pair: [crim.faction, mil.faction], type, direction, captureState: crimCapture, narrative: opening(narrative) };
 }
 
 /**
@@ -354,7 +354,7 @@ export function withConflictRelations(powerStructure, conflicts) {
     // TAIL-POWERS-B-4 (the chair's P31 (3), vetoable by the owner): the merchants' and craftsmen's vote ("vote together whenever
     // trade is at stake") is false of a pair the conflicts hold at HIGH; it takes its twin, which names the quarrel
     const narrative = String(row.narrative || '');
-    if (narrative === MERCHANT_CRAFT_VOTE.sibling(row.pair[0], row.pair[1]) || narrative.startsWith(`${row.pair[0]} and ${row.pair[1]} vote together against `)) {
+    if (narrative === MERCHANT_CRAFT_VOTE.sibling(row.pair[0], row.pair[1]) || narrative.startsWith(`${powerNameWithArticle(row.pair[0], true)} and ${powerNameWithArticle(row.pair[1])} vote together against `)) {
       moved = true;
       return { ...row, direction: quarrel.intensity === 'high' ? 'escalating' : row.direction, narrative: MERCHANT_CRAFT_VOTE.atOdds(row.pair[0], row.pair[1], issue) };
     }
@@ -407,10 +407,11 @@ export function boycottReadsRelation(recentConflict, relations, seat) {
  */
 export const MERCHANT_CRAFT_VOTE = Object.freeze({
   needs: 'the landholding power it names',
-  against: (/** @type {string} */ merchants, /** @type {string} */ craft, /** @type {string} */ landholders) => `${merchants} and ${craft} vote together against ${landholders}, then fight over who keeps the profit.`,
-  sibling: (/** @type {string} */ merchants, /** @type {string} */ craft) => `${merchants} and ${craft} vote together whenever trade is at stake, then fight over who keeps the profit.`,
+  // NAMES-1 (CN1): each power by its article form, the first opening the sentence; the callers hand the roster's labels
+  against: (/** @type {string} */ merchants, /** @type {string} */ craft, /** @type {string} */ landholders) => `${powerNameWithArticle(merchants, true)} and ${powerNameWithArticle(craft)} vote together against ${powerNameWithArticle(landholders)}, then fight over who keeps the profit.`,
+  sibling: (/** @type {string} */ merchants, /** @type {string} */ craft) => `${powerNameWithArticle(merchants, true)} and ${powerNameWithArticle(craft)} vote together whenever trade is at stake, then fight over who keeps the profit.`,
   // TAIL-POWERS-B-4 (P31 (3)): the twin where the conflicts hold the pair at HIGH (withConflictRelations)
-  atOdds: (/** @type {string} */ merchants, /** @type {string} */ craft, /** @type {string} */ issue) => `${merchants} and ${craft} are at odds over ${issue}, and fight over who keeps the profit of the trade.`,
+  atOdds: (/** @type {string} */ merchants, /** @type {string} */ craft, /** @type {string} */ issue) => `${powerNameWithArticle(merchants, true)} and ${powerNameWithArticle(craft)} are at odds over ${issue}, and fight over who keeps the profit of the trade.`,
 });
 
 /** The seat-and-faith row's dependent line (computeFactionRelationships), in either of its seat forms: its parts, for the
@@ -438,7 +439,7 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
   // Guard: skip if pair would be self-referential
   const addRel = (obj) => {
     if (obj.pair?.[0] === obj.pair?.[1]) return; // skip self-relationships
-    rels.push(obj);
+    rels.push({ ...obj, narrative: opening(obj.narrative) }); // NAMES-1 (CN1): a sentence that opens on a power opens "The …"
   };
 
   const gov  = factions.find(f => f.isGoverning);
@@ -477,7 +478,7 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
       narrative = `${say(gov)} gives the orders and ${say(mil)} carries them out; each needs the other to stay strong.`;
     } else if (ratio <= 1.2) {
       type = 'tense';
-      narrative = `${say(mil)} is now about as strong as ${say(gov)}. The hall asks for ${powerPossessive(mil.faction)} agreement instead of giving orders, and less and less is decided without it.`;
+      narrative = `${say(mil)} is now about as strong as ${say(gov)}. The hall asks for ${sayOf(mil)} agreement instead of giving orders, and less and less is decided without it.`;
     } else {
       type = 'competitive';
       // R3-CODE-C-2 (ROUND-3-CUT-INCREMENT #pf-591): "makes the decisions that matter" only where the force is the
@@ -548,7 +549,7 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
       type = 'dependent';
       // TAIL-POWERS-B: the seat, not an order a siege, a famine, an insurgency or an occupation denies (was "keeps order")
       // TAIL-POWERS-B-4 (P31 (5)): under an occupation the occupier takes the levy; the seat is said held, and no taxes are said
-      narrative = `${say(gov)} holds the seat${stressed('occupied') ? '' : ' and collects the taxes'}; ${say(rel)} ${verb(rel, 'tells', 'tell')} people that ${powerPossessive(gov.faction)} rule is right and ordained. Each props up the other.`;
+      narrative = `${say(gov)} holds the seat${stressed('occupied') ? '' : ' and collects the taxes'}; ${say(rel)} ${verb(rel, 'tells', 'tell')} people that ${sayOf(gov)} rule is right and ordained. Each props up the other.`;
     } else {
       type = 'subordinate';
       narrative = `${rel.faction} answers to ${gov.faction}. Its priests look after their flocks and have no say in the hall.`;
