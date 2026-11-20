@@ -101,6 +101,13 @@ import { LIVING_CONTENT_LAW_CONFIG_KEY } from '../content/livingContentLawVersio
 // answered in one file. The seam is engine-side already (the pipeline imports it
 // statically), so this edge adds no module to any closure.
 import { loadLivingContentRoster } from '../content/livingContentSeam.js';
+// ⭐ THE THIRD GENERATION LAW, THE SEAT LAW (CS10, SEAT-1 train 1 unit U1), WIRED HERE AND
+// NOWHERE ELSE, AND DARK. Its module is a dependency-free leaf that declares the key, the dial,
+// the reader and the mint in one file, so this one edge brings all four and nothing behind them;
+// it lands on whichever side of first paint this module does (the lazy side, per the
+// living-content row below). Its dial sits at the default, so the mint is `{}` and a birth's
+// config is byte-identical; lighting it is the owner's word (U8).
+import { SEAT_LAW_CONFIG_KEY, newSettlementSeatLaw } from '../seat/seatLaw.js';
 
 /**
  * How a module that can reach `generateSettlementPipeline` is classified.
@@ -280,6 +287,11 @@ export const PIPELINE_REACHERS = Object.freeze({
  * default this writes not one config byte, because the key is simply absent from
  * every config the product produces.
  *
+ * ⛔ THE SEAT LAW'S MARKER IS CLAMPED THE SAME WAY, FOR THE SAME REASON (CS10, U1). Its dial
+ * sits at the dormant default, so its mint is `{}` and deletes nothing: without its own
+ * destructure, an imported seat-law world's configuration loaded through the Library and
+ * regenerated would birth a NEW world under the seat law on a build whose dial is dark.
+ *
  * @template {Record<string, unknown>} C
  * @param {C} config the config a birth is about to generate from
  * @returns {C} the same shape, carrying the laws a NEW world is born under
@@ -289,12 +301,14 @@ export function birthConfig(config) {
     // The underscore-prefixed binding IS the clamp (see the note above); the lint
     // config admits that name shape, so no disable directive is wanted here.
     [LIVING_CONTENT_LAW_CONFIG_KEY]: _incomingLivingContentLaw,
+    [SEAT_LAW_CONFIG_KEY]: _incomingSeatLaw,
     ...carried
   } = /** @type {Record<string, unknown>} */ ({ ...(config || {}) });
   return /** @type {C} */ ({
     ...carried,
     ...newSettlementDensityLaw(),
     ...newSettlementLivingContentLaw(),
+    ...newSettlementSeatLaw(),
   });
 }
 
@@ -525,5 +539,20 @@ export const GENERATION_LAWS = Object.freeze({
       + 'every classified BIRTH and no other byte of the world moves with it: measured on the '
       + 'golden 525 and the RATE 768, zero movers. This row read "the dial stays at the dormant '
       + 'default, so the mint still writes not one config byte" until that day.',
+  }),
+  seat: Object.freeze({
+    mint: 'newSettlementSeatLaw',
+    module: 'src/domain/seat/seatLaw.js',
+    dial: 'NEW_SETTLEMENT_SEAT_LAW_VERSION',
+    configKey: '_seatLawVersion',
+    wiring: 'WIRED',
+    why: 'the seat law (CS10: the form of government, the holder of the seat and the person in '
+      + 'it read apart), spread by birthConfig beside the other two, with its incoming marker '
+      + 'clamped off, so every classified BIRTH mints it and no PREVIEW or re-derivation can. THE '
+      + 'DIAL IS DARK, and that is the chair\'s ruling (a) of 2026-11-20, not an omission: the mint '
+      + 'writes not one config byte, so no born world, golden or born fixture moves while every '
+      + 'unit of the train proves itself on its own explicit _seatLawVersion: 2 arm; lighting it '
+      + 'is the last unit (U8), on the owner\'s word, the living-content precedent. Its module is '
+      + 'a zero-import leaf, so the edge brings nothing behind it.',
   }),
 });
