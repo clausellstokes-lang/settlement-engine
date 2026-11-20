@@ -5292,3 +5292,21 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   -wip); the order is PART 28's: "R3 <commit>" first, IMPORT-DOOR its own line after. A TRAP PASSED TO PROSE-1: its
   build brief's measure script hard-codes the main checkout as ROOT, so a builder's "after" would equal its
   "before". A STAMP SLIP: three messages stamped 17:51 on a read of 17:50.
+- 17:55 UTC · THE CI READ OF THE LINE AT 43ab0f5eb (point 82), by the chair's helper, READ from the run: run 44742902237
+  (pull_request), conclusion failure, by design. Ratchet: 3,639 files, 41,740 tests, 20 failed: THREE server-bundle
+  freshness (aiGroundingBundle.freshness; edgeSharedBundleReproducibility for aiGroundingBundle.meta and
+  engineBundle.meta) and SEVENTEEN stored fingerprints (editWorldFactResources A2 and A6; worldFactRederive A7;
+  generationForkCensus A1; institutionBudgetPromise; nameHeldThroughAssembly A1; pipelinePinnedChoosers A1;
+  pipelinePinnedMode EM-B2a2 A2, EM-P0 A1, EM-R1b A5; powerEconomyFreshness A4; rosterFinalUnderHeldRoster A1;
+  x46NpcBand; dmLayerGoldenIsolation A7; dossierProseManifest DRIFT ARM; espionageDormancyFence FENCE 1;
+  generatorGoldenMaster): the same count and classes as at 0c906948 (20: 3 and 17); the set by name was not
+  compared with that run. Jobs red beside the ratchet: build and dist (verify:dist's bundle and size tests only;
+  the build itself succeeded), the golden master under tr_TR, coverage floors, and the group that requires every
+  gate. Green: validation, lint, type ratchets, all six shards, Chromium end to end, browser performance, Edge
+  Deno. SIZE FIGURES: worker 2,587,733 against 2,579,708; engine chunk 913,178 against 909,928; first paint raw
+  1,177,668 against 1,175,492; gzip 374,681 against 373,999; Brotli 314,577 against 313,994. NOT READ: the golden
+  job's failing test name; coverage totals; the 20 failures' full messages. THIS GOES INTO THE LANDINGS ROW of the
+  next landing (the goals lane). ALSO RULED AT 17:53 (GOALS-4 read the final wants file against the chair's
+  reasons): PERSONALITY/greed/short 5 "Come out of one bargain this season with twice what they put in." (a king
+  keeps no shop); INSTITUTION/charter/long 11 "Win {house} freedom from the tolls and dues that others pay." (a
+  garrison does not trade); TIES/rival_enemy/short 7 stands.
