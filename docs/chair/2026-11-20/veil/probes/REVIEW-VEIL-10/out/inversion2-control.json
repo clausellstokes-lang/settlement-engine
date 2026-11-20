@@ -1,0 +1,114 @@
+{
+ "defence.readiness.label": {
+  "towns": 96,
+  "sane": 96,
+  "fails": 0,
+  "ex": []
+ },
+ "defence.readiness.colours": {
+  "towns": 96,
+  "sane": 96,
+  "fails": 0,
+  "ex": []
+ },
+ "defence.scores.*": {
+  "towns": 96,
+  "sane": 96,
+  "fails": 0,
+  "ex": []
+ },
+ "defence.economicGates": {
+  "towns": 96,
+  "sane": 96,
+  "fails": 0,
+  "ex": []
+ },
+ "food.resilienceScore": {
+  "towns": 96,
+  "sane": 50,
+  "fails": 0,
+  "ex": []
+ },
+ "food.record.storageMonths": {
+  "towns": 96,
+  "sane": 45,
+  "fails": 0,
+  "ex": []
+ },
+ "legitimacy.label+colours": {
+  "towns": 96,
+  "sane": 96,
+  "fails": 0,
+  "ex": []
+ },
+ "prose defense:state.publicOrder.beside": {
+  "towns": 96,
+  "sane": 96,
+  "fails": 67,
+  "ex": [
+   "rv10-inv-village-none-0-2: served \"Hagioakra has no watch; its neighbours notice anything out of place, and are quick to say | from served \"What trouble Hagioakra sees is mostly quarrels, and they seldom outlast the week.\"",
+   "rv10-inv-village-none-0-3: served \"Nobody at Eascombe is paid to keep order; what order the place has, its own people keep.\" | from served \"With no gaol at Eascombe, nobody who does wrong here can be locked away; most go on livin",
+   "rv10-inv-village-occupied-0-9: served \"There is a curfew at Uaxacbalam now, and checkpoints; ordinary theft has dropped, and peo | from served \"Only those holding the occupiers' passes may be out after dark at Uaxacbalam, and anyone "
+  ]
+ },
+ "prose defense:state.publicOrder.rung.sentence": {
+  "towns": 96,
+  "sane": 96,
+  "fails": 67,
+  "ex": [
+   "rv10-inv-village-none-0-2: served \"Hagioakra has no watch; its neighbours notice anything out of place, and are quick to say | from served \"What trouble Hagioakra sees is mostly quarrels, and they seldom outlast the week.\"",
+   "rv10-inv-village-none-0-3: served \"Nobody at Eascombe is paid to keep order; what order the place has, its own people keep.\" | from served \"With no gaol at Eascombe, nobody who does wrong here can be locked away; most go on livin",
+   "rv10-inv-village-occupied-0-9: served \"There is a curfew at Uaxacbalam now, and checkpoints; ordinary theft has dropped, and peo | from served \"Only those holding the occupiers' passes may be out after dark at Uaxacbalam, and anyone "
+  ]
+ },
+ "prose defense:threat.economic.sentence": {
+  "towns": 96,
+  "sane": 96,
+  "fails": 77,
+  "ex": [
+   "rv10-inv-village-none-0-1: served \"Chaltun can fund a short crisis. A long one begins eating reserves within a few months, a | from served \"Chaltun can pay for a crisis of the ordinary length; a few months into a longer one, the ",
+   "rv10-inv-village-none-0-2: served \"Hagioakra is always short of money for its defence: no money is laid by to pay for a long | from served \"Hagioakra's defence has been short of money for years, and each lean season leaves less t",
+   "rv10-inv-village-none-0-3: served \"Eascombe can pay for its own emergencies for a while, but every hard season brings the en | from served \"Eascombe can pay for its own emergencies for a while, but every hard season brings the en"
+  ]
+ },
+ "prose defense:wall.rationale.sentence": {
+  "towns": 96,
+  "sane": 96,
+  "fails": 61,
+  "ex": [
+   "rv10-inv-village-none-0-2: served \"Hagioakra keeps its palisade or earthworks in repair, and the only people who would stand | from served \"Hagioakra keeps its palisade or earthworks in repair, but fewer people turn out each seas",
+   "rv10-inv-village-none-0-3: served \"Fresh repairs show on Eascombe's palisade or earthworks; the village keeps its defences i | from served \"Nobody in Eascombe thinks of the palisade or earthworks as ornament; the village knows wh",
+   "rv10-inv-village-infiltrated-0-4: served \"Albacastra has no wall, and the beasts of the country around it come right up to the last | from served \"No wall marks where Albacastra ends; the last houses simply give way to open country.\""
+  ]
+ },
+ "prose economy:economics.prosperityHeader.sentence": {
+  "towns": 96,
+  "sane": 96,
+  "fails": 38,
+  "ex": [
+   "rv10-inv-village-none-0-1: served \"Nothing about Chaltun looks rich or poor: the road is busy enough, the market is open, an | from served \"Chaltun pays its way from year to year, and nobody here calls the village poor.\"",
+   "rv10-inv-village-none-0-2: served \"Little that comes past Hagioakra stops there. The village is poor, and its people say so  | from served \"Hagioakra sits on its road and stays poor all the same.\"",
+   "rv10-inv-village-insurgency-0-5: served \"Skaldaker sits on its river and stays poor all the same.\" | from served \"Little that comes past Skaldaker stops there. The village is poor, and its people say so "
+  ]
+ },
+ "prose economy:economics.prosperityRung.sentence": {
+  "towns": 96,
+  "sane": 96,
+  "fails": 73,
+  "ex": [
+   "rv10-inv-village-none-0-1: served \"Chaltun's purse closes every year ahead. The margin is not large but it is dependable, an | from served \"People here put things by, and can. That is the difference between this village and a poo",
+   "rv10-inv-village-none-0-2: served \"The village gets by. Nobody is going without bread and nobody is building anything either | from served \"Money is short in Hagioakra, and most households spend what they earn as soon as it comes",
+   "rv10-inv-village-insurgency-0-5: served \"Families in Skaldaker mend what they have and put off buying anything new.\" | from served \"A newcomer to Skaldaker soon learns that most people here are owed money and owe some too"
+  ]
+ },
+ "prose stressors:overview.conditionSeverity.sentence": {
+  "towns": 96,
+  "sane": 96,
+  "fails": 47,
+  "ex": [
+   "rv10-inv-village-infiltrated-0-4: served \"This is the first thing anyone in Albacastra will tell you about, and most of what is don | from served \"Above everything else, this is what the village is living through now.\"",
+   "rv10-inv-village-indebted-0-6: served \"Above everything else, this is what the village is living through now.\" | from served \"This is the first thing anyone in Niedermoor will tell you about, and most of what is don",
+   "rv10-inv-village-wartime-0-7: served \"The village is at its limit. There is no capacity left to absorb this, and nothing behind | from served \"Quirigco is at breaking point; one more blow and it will not recover as it was.\""
+  ]
+ }
+}

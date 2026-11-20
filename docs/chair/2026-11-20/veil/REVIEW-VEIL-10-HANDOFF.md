@@ -96,3 +96,17 @@ origin/lane/review-veil-9-2026-11-19) stands whole: its section 2 (VR4 to VR17),
   served labels). The rng rows: no seed on the gallery or link read (`_seed` and the receipt's seed are stored only).
 - (2) VR27: 27 underscore helpers executable by anon on x212 (27 on x211): `doors/helpers-x212.txt`; V10-8.
 - (3) VEIL-VR17's mechanism: waiting for its commit.
+
+### 5b. VR28's split of the other diffuse rows (`inversion2.probe.jsx`; 87 towns WITH a hideable house, CONTROL 96 towns WITHOUT)
+
+| Row | Kind | Fails (with) | Fails (control) | Reading |
+|---|---|---|---|---|
+| defence.scores.* | precise figures | 76 / 87 | 0 / 96 | TIER 1: e.g. internal 2 served, 15 re-derived from the served record |
+| defence.readiness.label (+ colours) | band | 8 / 87 | 0 / 96 | tier 2 residual (e.g. "Undefended" served, "Vulnerable" re-derived) |
+| defence.economicGates | precise figures | 0 / 87 | 0 / 96 | passes |
+| legitimacy.label + colours | band | 0 / 87 | 0 / 96 | passes (a function of served labels) |
+| food.resilienceScore, food.record.storageMonths | precise | 0 of the sane | 0 | INCONCLUSIVE: my reconstruction reproduces the stored value in only 47 and 44 of 87 |
+| prose: publicOrder.beside / rung, threat.economic, wall.rationale, prosperityHeader / Rung, conditionSeverity | sentences | 32–63 / 87 | 38–77 / 96 | NOT re-derivable from a served page (fails as often with nothing hidden): passes VR26 by its first branch, by this method |
+| economy.prosperity, safety.safetyLabel (section 5) | bands | 29 / 86, 28 / 86 | — (control not run for these two) | tier 2 residual by VR28 |
+
+Not run: power.conflicts, income/power composition (presence rows), history.founding.overcoming, tile.threat_level / government_type.
