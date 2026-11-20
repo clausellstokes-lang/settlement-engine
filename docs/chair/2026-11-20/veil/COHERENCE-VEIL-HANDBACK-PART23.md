@@ -117,3 +117,30 @@ R6'S RE-CUT (test-only builder, `v22-r6`, pushed as `lane/veil-22-r6-2026-11-20`
   (`out/v22/seat-vs1b-green-at-b5cb22caf.txt`). VS1's reds after V10-2: ZERO.
 - A SLIP, recorded: the first builder once ran vitest from this checkout (it wrote only vitest's cache under
   `node_modules/.vite`; no tracked file changed).
+
+## 6. VR45; R6 complete (waiting on R3); R4 not green, its cure
+
+**VR45 (the chair, 06:53 UTC, no veto, one arm added):** the twin-versus-server and CONTROL comparisons compare objects
+modulo key order (jsonb orders keys by a rule over the key set alone); ARRAY ORDER EXACT (VR21); plants prove (a) a
+reordered array, (b) a changed value, (c) an added or a missing key at any depth are still caught. APPLIED at **6978a8fc2**
+(`v22-r6`): CONTROL 8 red -> green; twin-versus-server 16 -> 0; plants (a) 2/2, (b) 2/2, (c) 2/2 and at the deepest object
+of 48 served documents (depth up to 6) 48/48 each (`out/v22/r6/counterfactual-keyorder-ruled.txt`).
+R6 (`lane/veil-22-r6-2026-11-20`, 7d9ebd078; NOT MERGED, waits on R3): MAIN red 50: `cast.stakes` @ city-famine-7 30
+lines (a stake naming a criminal power still served: R3's `power.entry`), `cast.roles` @ city-insurgency-3 20 lines (the
+reason's wording: R3/R5). `rosterChoiceInversion` ALIGNED, NOT RETIRED (7334bdf11): under VR32 its inverting list shrank
+6 -> 3 (tier 2; `prosperityStanding` still inverts on metropolis-insurgency-5); its tier-2 pin, not-re-derivable pin,
+TOTAL, FIDELITY and births have no other holder (the builder's table, `out/v22/r6/R6-HANDBACK.md`).
+THE CHAIR'S CONDITION ON `safety.blackMarketCapture`, PROVEN (7d9ebd078, `blackmarket-capture-condition.txt`): 12 towns
+(7 with a criminal house, 5 without), Reveal DM off and on: the server carries it on 0 of 96 reads; a marked share draws
+it on 0 towns; an unmarked gallery read draws it on 12 of 12, equal to the owner's figure 24 of 24; the party link draws it
+on 0; the overrides swapped between rows move the decision with them 48 of 48 (the served signal alone).
+
+R4 (dfa031f3e, pushed as `lane/veil-22-r4-2026-11-20`; 212 -> `ba7d8631…3a51c9`, rollback -> `786c8bd8…31b2`): NOT GREEN.
+Born test `galleryVeilPeople.pglite` red 4/7 -> green 7/7; walker 11/11; `--check` 0. Guards red by VR10's re-key:
+`galleryServerVeil` 10/17, `publicSafe` 7/56, `galleryVeilSignalCopies` 4/5, `criminalVeilSwitch` 1/9. THE SEAT'S READ OF
+ITS DIFF found `_gallery_veil` drawing `gen_random_uuid()` while declared IMMUTABLE (a cached plan with constant arguments
+could fold one salt for every read), and the twin's salt drawn once per page load. A CURE BUILDER from
+`briefs/R4-CURE-BRIEF.md` (lane 9894c75d8): the salt's volatility red first, the twin one salt a projection, each guard red
+read and re-stated under THE SEAT'S RULING (vetoable: modulo the read's person-id bijection, renamed by first appearance;
+teeth: a reference not following its card reds, any stored id served reds, a changed non-id byte reds), then R2-BRIEF's
+green list.
