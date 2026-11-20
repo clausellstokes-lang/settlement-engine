@@ -120,7 +120,11 @@ apply the veil, drop empty person cards, R3 `_gallery_veil_roster_choices`, R4 h
 27. KNOWN REDS, NOT THE LANE'S TO CURE: `observedShapeReaders.walker` violations 4 against frozen 1, and its register arm
     {2220, 1556, 448} against {2214, 1552, 444}: the governed schema-46 rung, a unit of the close. Migration 213 (the eight
     older helpers' revokes) joins at the close: two veil tests pin 212 as newest.
-28. MESSAGES to the chair: at most 300 words; at once on a surprise; one line after each stage merged green ("R3
+28. THE NAME SEARCH (the chair, 08:22, found by VEIL-24): in the engines AND in every test that proves a withholding, a
+    name is searched by the lane's own fold: itself AND its bare form without the bracketed qualifier
+    (`gallerySecondHomes.js` QUALIFIER; 212's "itself and itself without its bracketed qualifier"); an id is searched as a
+    string and as a key. No stage narrows it to the full label. Red first by a plant: a qualified power named by its bare form.
+29. MESSAGES to the chair: at most 300 words; at once on a surprise; one line after each stage merged green ("R3
     <commit>"; for the doors: "DOORS-IN <commit>" with 212's sha256). THE MARK: 450,000 tokens by `get_session` (no
     session_id: external_metadata.context_usage.used_tokens; it reads TRUE for this seat). At about 330,000, tell the chair.
 
@@ -153,6 +157,7 @@ apply the veil, drop empty person cards, R3 `_gallery_veil_roster_choices`, R4 h
 - The two harnesses: `sh scripts/gate-tail.sh npx vitest run tests/security/shareRenderTwice.pglite.test.jsx tests/security/rosterChoiceInversion.pglite.test.js`
 - The acceptance run: `cd /var/tmp/v18 && PGHOST=/var/tmp/rv7 RV6_PGMOD=/var/tmp/v18/pgmod sh lib/docs/chair/2026-11-13/probes/REVIEW-VEIL-7/run-all.sh <worktree> <outdir>` (must EXIT 0)
 - The gate through the server: `docs/chair/2026-11-20/veil/out/v22/gate/gate-queue.sh` (its invocation, the four readings)
+  NOT YET ONE COMMAND: `gate-queue.sh` hard-codes a tree export at d136940c3 and needs master's worktree `git worktree add --detach /home/user/wt/master db832c892 && cp -al node_modules /home/user/wt/master/node_modules`. VEIL-24 re-made both and writes the gate as one command in PART 25.
 AT THE CUT'S PARENT f05daa74e, executed by this seat: `--check` exit 0; walker 11 of 11; harnesses 8 of 8, 2 files
 (`out/v23/dry-*.txt`).
 
@@ -173,4 +178,5 @@ AT THE CUT'S PARENT f05daa74e, executed by this seat: `--check` exit 0; walker 1
   cures, all adopted (ruling 15 STOP 1 and ruling 20 carry them).
 - 07:31 THE LANE IS YOURS at c1b772e55; cut; 211 proved. R3 read; R3-CURE launched (brief a3df8e208).
 - 07:40 R4-CURE a4b89bf9d returned (relay); read whole; three STOPs sent; ruled 08:01 (rulings 15, 16, 18).
-- 08:02 VR47 builder launched (brief 4d91d5c5f).
+- 08:02 VR47 builder launched (brief 4d91d5c5f). 08:08 the successor VEIL-24 seated; the plan: this seat takes R3's cure return, merges it, then hands over.
+- 08:22 ruling 28 (the fold) relayed to the R3-CURE builder.
