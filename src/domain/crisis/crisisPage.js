@@ -346,7 +346,7 @@ function creditorOf(s, entry) {
   const powers = /** @type {CreditorPower[]} */ (Array.isArray(/** @type {{ powerStructure?: { factions?: unknown } }} */ (s).powerStructure?.factions) ? /** @type {{ powerStructure: { factions: CreditorPower[] } }} */ (s).powerStructure.factions : []);
   const roster = /** @type {CreditorNpc[]} */ (Array.isArray(s.npcs) ? s.npcs : []).filter((n) => !!n && typeof n === 'object');
   for (const k of entry.cast?.stakes || []) {
-    const power = powers.find((f) => !!f && (str(f.faction) || str(f.name)) === k.factionId);
+    const power = powers.find((f) => !!f && str(f.faction) === k.factionId);
     const desc = power && typeof power.desc === 'string' ? power.desc : '';
     const mark = marks.find(([, text]) => desc.startsWith(text));
     if (!mark) continue;
