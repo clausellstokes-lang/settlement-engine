@@ -23,12 +23,21 @@ import { hasInstitution } from '../facts/institutions.js';
 import { causeHouseStands } from '../facts/causeHouses.js';
 
 /** @typedef {ReturnType<typeof import('../facts/factsOf.js').factsOf>} Facts */
-/** @typedef {(record: any, facts: Facts) => boolean} CauseHolds */
+/**
+ * The record slice the predicates read off the document themselves (every other fact is its home's reading).
+ * @typedef {{
+ *   institutions?: unknown,
+ *   powerStructure?: { factions?: unknown, publicLegitimacy?: { label?: unknown } | null } | null,
+ *   history?: { historicalEvents?: unknown } | null,
+ *   economicState?: { isEntrepot?: unknown } | null,
+ * } | null | undefined} CauseRecord
+ */
+/** @typedef {(record: CauseRecord, facts: Facts) => boolean} CauseHolds */
 
-/** The timeline holds an event of one of these template kinds (`history.historicalEvents[].templateType`, else `.type`). @param {any} record @param {ReadonlyArray<string>} kinds */
+/** The timeline holds an event of one of these template kinds (`history.historicalEvents[].templateType`, else `.type`). @param {CauseRecord} record @param {ReadonlyArray<string>} kinds */
 const pastEventHolds = (record, kinds) => {
   const events = record?.history?.historicalEvents;
-  return Array.isArray(events) && events.some((e) => kinds.includes(String(e?.templateType || e?.type || '')));
+  return Array.isArray(events) && events.some((/** @type {{ templateType?: unknown, type?: unknown } | null | undefined} */ e) => kinds.includes(String(e?.templateType || e?.type || '')));
 };
 
 /** The crisis home holds this kind. @param {Facts} facts @param {string} kind */
@@ -37,13 +46,17 @@ const crisisHolds = (facts, kind) => facts.crisis.kinds.includes(kind);
 /** War is upon the place: the war-state home reads at war or the front. @param {Facts} facts */
 const warUpon = (facts) => facts.warState === 'at war' || facts.warState === 'front';
 
-/** The governing power is a power of trade (category economy). @param {any} record */
-const governedByTrade = (record) => /** @type {{ category?: unknown } | null} */ (governingFactionOf(record))?.category === 'economy';
+/** The governing power is a power of trade (category economy). @param {CauseRecord} record */
+const governedByTrade = (record) => /** @type {{ category?: unknown } | null} */ (
+  governingFactionOf(/** @type {import('../rulingPower.js').RulingPowerSettlement | null} */ (record)))?.category === 'economy';
 
 /** @type {Readonly<Record<string, CauseHolds>>} */
 export const TENSION_CAUSE_HOLDS = Object.freeze({
   // ── the powers ──
-  criminalPowerSeated: (record) => crimeSignalOf({ seats: record?.powerStructure?.factions }).seated,
+  criminalPowerSeated: (record) => {
+    const seats = record?.powerStructure?.factions;
+    return crimeSignalOf({ seats: Array.isArray(seats) ? seats : null }).seated;
+  },
   governedByTrade: (record) => governedByTrade(record),
   rivalPower: (record, facts) => facts.rivalPower === true,
   seatOutranked: (record, facts) => facts.seatOutranked === true,

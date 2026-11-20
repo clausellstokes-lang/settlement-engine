@@ -16,6 +16,8 @@ import { TENSION_CAUSES } from '../../../src/data/tensionCauses.js';
 import { TENSION_CAUSE_HOLDS } from '../../../src/domain/display/tensionCauseHolds.js';
 import { POWER_SLOT, tensionCauseSentenceOf } from '../../../src/domain/display/tensionCause.js';
 import { factsOf } from '../../../src/domain/facts/factsOf.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../../helpers/anchoredNegatives.js';
 
 const SIZES = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 /** @type {Array<[string, any]>} */ let births = [];
@@ -50,15 +52,16 @@ const sentencesOf = (record) => (record.history?.currentTensions || []).map((/**
 describe('the key: the town\'s name and the trouble\'s kind, never the seed', () => {
   it('the same document with its seed deleted prints the same sentences', () => {
     let tables = 0;
-    for (const [seed, record] of births) {
+    const failures = collectSeedFailures(births, ([seed, record]) => {
       const shared = structuredClone(record);
       delete shared._seed;
       delete shared._config;
       expect(shared._seed, seed).toBeUndefined();
       const own = sentencesOf(record);
       expect(sentencesOf(shared), seed).toEqual(own);
-      tables += own.filter((s) => s !== null).length;
-    }
+      tables += own.filter((/** @type {unknown} */ x) => x !== null).length;
+    });
+    expectNoSeedFailures(failures, 'seed deleted, same sentences');
     expect(tables).toBeGreaterThan(0);
   });
   it('a different seed under the same name and the same facts prints the same sentence', () => {
@@ -78,26 +81,28 @@ describe('a kind with no table', () => {
     expect(tensionCauseSentenceOf(record, { type: 'constructor' })).toBeNull();
   });
   it('every tension of a born town with a table prints a sentence of its kind; every other reads null', () => {
-    for (const [seed, record] of births) {
+    const failures = collectSeedFailures(births, ([seed, record]) => {
       for (const t of record.history?.currentTensions || []) {
         const s = tensionCauseSentenceOf(record, t);
         if (!Object.hasOwn(TENSION_CAUSES, t.type)) { expect(s, `${seed} ${t.type}`).toBeNull(); continue; }
         const own = [...TENSION_CAUSES[t.type].causes.flatMap((c) => c.wordings), ...TENSION_CAUSES[t.type].plain, /** @type {any} */ (TENSION_CAUSES[t.type]).withoutItsHouse];
         expect(own, `${seed} ${t.type}`).toContain(s);
       }
-    }
+    });
+    expectNoSeedFailures(failures, 'every tension prints its own kind\'s sentence');
   });
 });
 
 describe('the pick, as measured', () => {
   it('on every born town and every kind of the table, the sentence is the measure\'s pick', () => {
     let n = 0;
-    for (const [seed, record] of births) {
+    const failures = collectSeedFailures(births, ([seed, record]) => {
       for (const kind of Object.keys(TENSION_CAUSES)) {
         expect(tensionCauseSentenceOf(record, { type: kind }), `${seed} ${kind}`).toBe(expectedOf(record, kind).sentence);
         n++;
       }
-    }
+    });
+    expectNoSeedFailures(failures, 'the measure\'s pick');
     expect(n).toBe(births.length * 8);
   });
   it('rank 2 speaks only where no rank-1 cause holds; plain only where none holds', () => {
@@ -147,9 +152,9 @@ describe('{power}: filled only by the sides table\'s own fill', () => {
     expect(tensionCauseSentenceOf(record, { type: 'outside_debt' })).toBe(pickVariant(TENSION_CAUSES.outside_debt.plain, 'Ashford::cause::outside_debt'));
   });
   it('no sentence of any born town prints the slot', () => {
-    for (const [seed, record] of births) {
-      for (const kind of Object.keys(TENSION_CAUSES)) expect(String(tensionCauseSentenceOf(record, { type: kind })), `${seed} ${kind}`).not.toContain(POWER_SLOT);
-    }
+    const printed = births.flatMap(([, record]) => Object.keys(TENSION_CAUSES).map((kind) => String(tensionCauseSentenceOf(record, { type: kind }))));
+    expect(printed.length).toBe(births.length * 8);
+    expect(printed.filter((x) => x.includes(POWER_SLOT))).toEqual([]);
   });
 });
 
@@ -159,13 +164,17 @@ describe('a house is matched by its catalogue identity on the live roster, never
   it('a custom house named "Black Market Tavern" does not print the black market\'s line', () => {
     for (const extra of [{ isCustom: true }, { source: 'custom' }, {}]) {
       const record = { name: 'Ashford', institutions: [...force, { name: 'Black Market Tavern', ...extra }], powerStructure: { factions: [] } };
-      expect(blackMarketLines, JSON.stringify(extra)).not.toContain(tensionCauseSentenceOf(record, { type: 'crime_wave' }));
+      const said = tensionCauseSentenceOf(record, { type: 'crime_wave' });
+      expect(TENSION_CAUSES.crime_wave.plain, JSON.stringify(extra)).toContain(said);
+      expectAbsentWithAnchor(blackMarketLines, said, blackMarketLines[0], `custom house ${JSON.stringify(extra)}`);
     }
     const real = { name: 'Ashford', institutions: [...force, { name: 'Black market' }], powerStructure: { factions: [] } };
     expect(blackMarketLines).toContain(tensionCauseSentenceOf(real, { type: 'crime_wave' }));
   });
   it('a ruined black market does not print the black market\'s line', () => {
     const record = { name: 'Ashford', institutions: [...force, { name: 'Black market', status: 'ruined' }], powerStructure: { factions: [] } };
-    expect(blackMarketLines).not.toContain(tensionCauseSentenceOf(record, { type: 'crime_wave' }));
+    const said = tensionCauseSentenceOf(record, { type: 'crime_wave' });
+    expect(TENSION_CAUSES.crime_wave.plain).toContain(said);
+    expectAbsentWithAnchor(blackMarketLines, said, blackMarketLines[0], 'a ruined black market');
   });
 });

@@ -38,19 +38,19 @@ describe('each group is the catalogue\'s own houses, both ways', () => {
   it('the groups are the measured ones', () => {
     expect([...CAUSE_HOUSE_GROUPS].sort()).toEqual(Object.keys(MEASURED).sort());
   });
-  it.each(Object.keys(MEASURED))('%s', (group) => {
-    const expected = CATALOGUE_NAMES.filter((n) => MEASURED[group].test(n)).map((n) => n.toLowerCase()).sort();
-    expect(expected.length).toBeGreaterThan(0);
-    expect([...CAUSE_HOUSES[group]].sort()).toEqual(expected);
+  it('each group holds exactly the catalogue names its measured pattern finds', () => {
+    const expected = Object.fromEntries(Object.keys(MEASURED).map((g) => [g, CATALOGUE_NAMES.filter((n) => MEASURED[g].test(n)).map((n) => n.toLowerCase()).sort()]));
+    for (const g of Object.keys(MEASURED)) expect(expected[g].length, g).toBeGreaterThan(0);
+    expect(Object.fromEntries(Object.keys(MEASURED).map((g) => [g, [...CAUSE_HOUSES[g]].sort()]))).toEqual(expected);
   });
 });
 
 describe('the reader', () => {
-  it.each(Object.keys(MEASURED))('%s: each catalogue house of the group stands, in any case of its name', (group) => {
-    for (const n of CATALOGUE_NAMES.filter((x) => MEASURED[group].test(x))) {
-      expect(causeHouseStands({ institutions: [house(n)] }, group), n).toBe(true);
-      expect(causeHouseStands({ institutions: [house(n.toUpperCase())] }, group), n).toBe(true);
-    }
+  it('each catalogue house of each group stands, in any case of its name', () => {
+    const missed = Object.keys(MEASURED).flatMap((group) => CATALOGUE_NAMES.filter((x) => MEASURED[group].test(x))
+      .filter((n) => !causeHouseStands({ institutions: [house(n)] }, group) || !causeHouseStands({ institutions: [house(n.toUpperCase())] }, group))
+      .map((n) => `${group}: ${n}`));
+    expect(missed).toEqual([]);
   });
   it('the live roster: a ruined, removed, destroyed or remnant house is no cause', () => {
     expect(causeHouseStands({ institutions: [house('Black market')] }, 'blackMarket')).toBe(true);

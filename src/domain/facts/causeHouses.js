@@ -19,22 +19,29 @@
  */
 import { liveInstitutionNames } from './liveInstitutionNames.js';
 
-/** group → the catalogue's own names of its houses (lower case). @type {Readonly<Record<string, ReadonlySet<string>>>} */
-export const CAUSE_HOUSES = Object.freeze({
+/**
+ * group → the catalogue's own names of its houses (lower case), each a KEY of its row (a name, never a line).
+ * @type {Readonly<Record<string, Readonly<Record<string, true>>>>}
+ */
+const NAMES = Object.freeze({
   // the crime houses (HIDEABLE: the security reader's list, `data/tensionCauses.js`)
-  thievesGuild: Object.freeze(new Set(["thieves' guild chapter", "thieves' guild (powerful)"])),
-  smuggling: Object.freeze(new Set(['smuggling waypoint', 'smuggling operation', 'smuggling network'])),
-  underground: Object.freeze(new Set(['underground network', 'underground city'])),
-  assassins: Object.freeze(new Set(['contract killer', "assassins' guild"])),
-  blackMarket: Object.freeze(new Set(['black market', 'black market bazaar'])),
-  whisperMarket: Object.freeze(new Set(['whisper market'])),
-  outlaws: Object.freeze(new Set(['local fence', 'fence (word of mouth)', 'outlaw shelter', 'bandit affiliate'])),
+  thievesGuild: { "thieves' guild chapter": true, "thieves' guild (powerful)": true },
+  smuggling: { 'smuggling waypoint': true, 'smuggling operation': true, 'smuggling network': true },
+  underground: { 'underground network': true, 'underground city': true },
+  assassins: { 'contract killer': true, "assassins' guild": true },
+  blackMarket: { 'black market': true, 'black market bazaar': true },
+  whisperMarket: { 'whisper market': true },
+  outlaws: { 'local fence': true, 'fence (word of mouth)': true, 'outlaw shelter': true, 'bandit affiliate': true },
   // the houses where trade passes (the guild's quarrel)
-  caravans: Object.freeze(new Set(['caravanserai', "caravaneer's post", "caravan masters' exchange"])),
-  fair: Object.freeze(new Set(['annual fair', 'major annual fairs'])),
-  exchange: Object.freeze(new Set(['international trade center', 'auction house', 'money changers'])),
-  luxuryQuarter: Object.freeze(new Set(['luxury goods quarter'])),
+  caravans: { caravanserai: true, "caravaneer's post": true, "caravan masters' exchange": true },
+  fair: { 'annual fair': true, 'major annual fairs': true },
+  exchange: { 'international trade center': true, 'auction house': true, 'money changers': true },
+  luxuryQuarter: { 'luxury goods quarter': true },
 });
+
+/** group → the set of its houses' names. @type {Readonly<Record<string, ReadonlySet<string>>>} */
+export const CAUSE_HOUSES = Object.freeze(Object.fromEntries(
+  Object.entries(NAMES).map(([group, names]) => [group, Object.freeze(new Set(Object.keys(names)))])));
 
 /** The groups a reader may ask. @type {ReadonlyArray<string>} */
 export const CAUSE_HOUSE_GROUPS = Object.freeze(Object.keys(CAUSE_HOUSES));

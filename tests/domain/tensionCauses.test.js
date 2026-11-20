@@ -15,6 +15,7 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { TENSION_CAUSES } from '../../src/data/tensionCauses.js';
 import { TENSION_CAUSE_HOLDS } from '../../src/domain/display/tensionCauseHolds.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 /** The ruled tables, cause and rank, in order (`PAGE-5-HANDBACK.md` §5; `old_crime_wave` dropped by the chair, 14:33). */
 const RULED = Object.freeze({
@@ -43,10 +44,11 @@ const HIDEABLE = new Set(['crime_wave:criminal_power', 'crime_wave:law_thin', 'c
   'succession_crisis:rival_power', 'outside_debt:merchants_rule', 'legitimacy_crisis:outranked', 'legitimacy_crisis:rival_power']);
 /** The causes ruled to carry `{power}` (`CAUSES-LINES-B.md`: the governing power's name). */
 const POWER_CAUSES = new Set(['outside_debt:merchants_rule']);
-/** THE PIN: per kind, the wordings' count and the first 16 hex of the sha256 of its causes' ids and wordings and its plain. */
+/** THE PIN: per kind, the wordings' count and the first 16 hex of the sha256 of its causes' ids and wordings, its plain
+ * and (guild_conflict) its `withoutItsHouse`, the chair's sentence of 15:35. */
 const PINNED = Object.freeze({
   crime_wave: [28, 'de7d5b90d47f4378'],
-  guild_conflict: [24, 'aa3f46d815558843'],
+  guild_conflict: [25, '91eb3b6ba43399b8'],
   resource_scarcity: [16, 'ee322988e4898ca0'],
   external_threat: [17, 'fe4c91dd9696867a'],
   succession_crisis: [16, '3a5ed84ac78c5788'],
@@ -58,16 +60,14 @@ const PINNED = Object.freeze({
 const kinds = Object.keys(TENSION_CAUSES);
 const allCauses = kinds.flatMap((k) => TENSION_CAUSES[k].causes.map((c) => ({ kind: k, ...c })));
 const allWordings = [...kinds.flatMap((k) => [...TENSION_CAUSES[k].causes.flatMap((c) => c.wordings), ...TENSION_CAUSES[k].plain]),
-  TENSION_CAUSES.guild_conflict.withoutItsHouse];
-/** The chair's ruling of 15:35 (addendum 2): the guild quarrel's one sentence where the guild's home answers no. */
-const GUILDLESS = 'Traders here are fighting over who may sell what, and over a say in how the place is run.';
+  /** @type {string} */ (TENSION_CAUSES.guild_conflict.withoutItsHouse)];
 
 describe('the causes table: eight kinds, the ruled causes in the ruled order', () => {
   it('holds exactly the eight kinds', () => {
     expect(kinds).toEqual(Object.keys(RULED));
   });
-  it.each(Object.keys(RULED))('%s: the ruled causes and ranks, in order', (kind) => {
-    expect(TENSION_CAUSES[kind].causes.map((c) => [c.id, c.rank])).toEqual(RULED[kind]);
+  it('each kind: the ruled causes and ranks, in order', () => {
+    expect(Object.fromEntries(kinds.map((k) => [k, TENSION_CAUSES[k].causes.map((c) => [c.id, c.rank])]))).toEqual(RULED);
   });
   it('every holds key is a predicate, and every predicate is used', () => {
     const used = new Set(allCauses.map((c) => c.holds));
@@ -84,11 +84,14 @@ describe('the wordings', () => {
   it('plain: three a kind, great_flood four', () => {
     for (const k of kinds) expect(TENSION_CAUSES[k].plain.length, k).toBe(k === 'great_flood' ? 4 : 3);
   });
-  it.each(Object.keys(PINNED))('%s: pinned by count and content digest', (kind) => {
-    const t = TENSION_CAUSES[kind];
-    const body = JSON.stringify({ causes: t.causes.map((c) => [c.id, c.wordings]), plain: t.plain });
-    const count = t.causes.reduce((a, c) => a + c.wordings.length, 0) + t.plain.length;
-    expect([count, createHash('sha256').update(body).digest('hex').slice(0, 16)]).toEqual(PINNED[kind]);
+  it('each kind: pinned by count and content digest', () => {
+    const got = Object.fromEntries(kinds.map((kind) => {
+      const t = TENSION_CAUSES[kind];
+      const body = JSON.stringify({ causes: t.causes.map((c) => [c.id, c.wordings]), plain: t.plain, withoutItsHouse: t.withoutItsHouse });
+      const count = t.causes.reduce((a, c) => a + c.wordings.length, 0) + t.plain.length + (t.withoutItsHouse ? 1 : 0);
+      return [kind, [count, createHash('sha256').update(body).digest('hex').slice(0, 16)]];
+    }));
+    expect(got).toEqual(PINNED);
   });
   it('every wording is a sentence, none repeated within its kind', () => {
     for (const k of kinds) {
@@ -112,15 +115,16 @@ describe('the wordings', () => {
 });
 
 describe('the guild quarrel without its guild (addendum 2, the chair\'s 15:35)', () => {
-  it('guild_conflict carries withoutItsHouse, exactly the ruled sentence; no other kind carries one', () => {
-    expect(TENSION_CAUSES.guild_conflict.withoutItsHouse).toBe(GUILDLESS);
+  it('guild_conflict carries withoutItsHouse (its words pinned above); no other kind carries one', () => {
+    expect(typeof TENSION_CAUSES.guild_conflict.withoutItsHouse).toBe('string');
+    expect(TENSION_CAUSES.guild_conflict.withoutItsHouse).toMatch(/^[A-Z].*\.$/);
     for (const k of kinds.filter((x) => x !== 'guild_conflict')) expect(Object.hasOwn(TENSION_CAUSES[k], 'withoutItsHouse'), k).toBe(false);
     expect(Object.keys(TENSION_CAUSES.guild_conflict).sort()).toEqual(['causes', 'plain', 'withoutItsHouse']);
     for (const k of kinds.filter((x) => x !== 'guild_conflict')) expect(Object.keys(TENSION_CAUSES[k]).sort(), k).toEqual(['causes', 'plain']);
   });
   it('is no cause\'s and no plain wording', () => {
     const own = [...TENSION_CAUSES.guild_conflict.causes.flatMap((c) => c.wordings), ...TENSION_CAUSES.guild_conflict.plain];
-    expect(own).not.toContain(GUILDLESS);
+    expectAbsentWithAnchor(own, TENSION_CAUSES.guild_conflict.withoutItsHouse, TENSION_CAUSES.guild_conflict.plain[0], 'guild_conflict wordings');
   });
 });
 
@@ -148,7 +152,10 @@ describe('data only', () => {
     expect(bad(TENSION_CAUSES, 'TENSION_CAUSES')).toEqual([]);
     const code = readFileSync(new URL('../../src/data/tensionCauses.js', import.meta.url), 'utf8')
       .replace(/\/\*[\s\S]*?\*\//g, '').replace(/'(?:[^'\\]|\\.)*'|"(?:[^"\\]|\\.)*"/g, '""');
+    expect(code).toMatch(/export const TENSION_CAUSES = Object\.freeze\(\{/);
+    // anchored: the line above proves the scanned code is the data file's own, so an empty scan cannot pass these
     expect(code).not.toMatch(/=>|\bfunction\b|\bnew RegExp\b|\bimport\b/);
+    // anchored: the same live scan as the line above (the export proven present two lines up)
     expect(code).not.toMatch(/[(,=:[]\s*\/[^/*]/);
   });
   it('is frozen through', () => {

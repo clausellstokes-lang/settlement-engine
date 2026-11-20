@@ -69,7 +69,7 @@ export function tensionCauseSentenceOf(record, tension) {
   // addendum 2 (the chair's 15:35): the guild quarrel where the guild's home answers no takes its one sentence, before the ranks
   if (typeof table.withoutItsHouse === 'string' && facts.guild === false) return table.withoutItsHouse;
   const holding = (/** @type {1 | 2} */ rank) => table.causes.filter((c) => c.rank === rank
-    && TENSION_CAUSE_HOLDS[c.holds](record, facts)
+    && TENSION_CAUSE_HOLDS[c.holds](/** @type {import('./tensionCauseHolds.js').CauseRecord} */ (record), facts)
     && (!needsPower(c) || powerFillOf(record, c) !== null));
   const first = holding(1);
   const tier = first.length ? first : holding(2);
