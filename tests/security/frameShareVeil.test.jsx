@@ -3,7 +3,12 @@
  * tests/security/frameShareVeil.test.jsx — THE FRAME REACHES NO SHARED PAGE (FRAME-1, the seventh chair's CF3: "the frame
  * may name a criminal faction as a side; on a page players see, that gives away what the DM hid").
  *
- * Born towns of every tier, two of them with a frame that names the criminal power. On each:
+ * Born calm towns that carry a TROUBLE OF WEIGHT (FRAME-2 · B2, CF11: only such a town casts a frame), one or more of
+ * every tier that births one, hamlet to metropolis, three of them with a frame that names the criminal power (chosen by
+ * measuring the 330-town calm pool: docs/chair/2026-11-20/content/frame2/B2-WEIGHT-RESULTS.md). No calm thorp of the
+ * 330 holds a trouble of weight, so no thorp casts a frame to veil; the thorps' sheets are held byte-identical to the
+ * working line's by tests/domain/tension/troubleWeight.test.js. (FRAME-1's eight towns were re-seated at B2c: five of
+ * them no longer cast a frame under CF11.) On each:
  *   1. LIVENESS: the owner's own record casts a frame, and the Table View drawn from it prints the frame's lines (its
  *      sides' eyebrow and every face's reason). Without this the absences below would prove nothing.
  *   2. BYTE-IDENTITY: the gallery read (`fetchPublicDossier`, default and DM-full), the party link (its unlisted branch),
@@ -61,23 +66,31 @@ import PartyLinkView from '../../src/components/PartyLinkView.jsx';
 
 afterEach(() => { cleanup(); vi.clearAllMocks(); useStore.getState().userPrefs = {}; });
 
+// Each with its trouble of weight as measured: hamlet-7 trade_collapse (an impaired chain); village-0 tyranny (legitimacy
+// below 45); village-76 legitimacy_crisis (the incumbent ungated); town-1 outside_debt (an impaired chain); city-0
+// crime_wave, city-4 corruption_scandal and metropolis-1 crime_wave (a high conflict; the criminal power on a side);
+// metropolis-5 trade_dispute (an impaired chain).
 const BORN = [
-  ['frame-calm-thorp-0', 'thorp'], ['frame-calm-hamlet-0', 'hamlet'], ['frame-calm-village-0', 'village'],
-  ['frame-calm-town-0', 'town'], ['frame-calm-city-0', 'city'], ['frame-calm-city-1', 'city'],
-  ['frame-calm-metropolis-1', 'metropolis'], ['frame-calm-metropolis-3', 'metropolis'],
+  ['frame-calm-hamlet-7', 'hamlet'], ['frame-calm-village-0', 'village'], ['frame-calm-village-76', 'village'],
+  ['frame-calm-town-1', 'town'], ['frame-calm-city-0', 'city'], ['frame-calm-city-4', 'city'],
+  ['frame-calm-metropolis-1', 'metropolis'], ['frame-calm-metropolis-5', 'metropolis'],
 ];
-const WITH_CRIMINAL = new Set(['frame-calm-city-0', 'frame-calm-metropolis-1']);
+const WITH_CRIMINAL = new Set(['frame-calm-city-0', 'frame-calm-city-4', 'frame-calm-metropolis-1']);
 
-/** The digests of every shared read, per town, measured at the base 85fccf898 (FRAME_VEIL_PRINT=<file> writes them there). */
+/**
+ * The digests of every shared read, per town, measured at the base 85fccf898 (FRAME_VEIL_PRINT=<file> writes them there),
+ * in an archive of that commit (B2c, 2026-11-20). The three towns FRAME-1 measured and B2c kept (village-0, city-0,
+ * metropolis-1) re-measured to the same digests.
+ */
 const DIGESTS = Object.freeze({
-  'frame-calm-thorp-0': Object.freeze({ gallery: '138f0dab1824d809', galleryDmFull: 'fb3f9dbb3520bd77', partyLink: '79682b895f18217f', imported: '5e98227a073406bf', worldPlayer: '927e4033f02d4c21' }),
-  'frame-calm-hamlet-0': Object.freeze({ gallery: '73de0d4979c916bd', galleryDmFull: '6dd173337186a2f0', partyLink: '56ec5192aa5d5805', imported: '099e6b8946565f03', worldPlayer: '07d47ca833c1a332' }),
+  'frame-calm-hamlet-7': Object.freeze({ gallery: '425f457b84ff8f09', galleryDmFull: 'e1b3da222d69d822', partyLink: 'ea45285a255dfb69', imported: 'fc0bf6b13889181b', worldPlayer: 'be3ce76a071ba0ac' }),
   'frame-calm-village-0': Object.freeze({ gallery: 'd470028016c09694', galleryDmFull: '9a53d31e23c50da8', partyLink: 'd7f1a6e63736a50e', imported: '9de485b2443a6bc4', worldPlayer: '0ddf530540e158fd' }),
-  'frame-calm-town-0': Object.freeze({ gallery: '25b5a76edef99296', galleryDmFull: 'ab5bd3a795ff607e', partyLink: '3d89064da86105b3', imported: '1008fcacc62fb782', worldPlayer: '87e30bb713960100' }),
+  'frame-calm-village-76': Object.freeze({ gallery: '5240c67c4f709e8b', galleryDmFull: 'c908ae23e0befb09', partyLink: 'b5e4d2fa656316df', imported: 'c3b5fd6bddcb22a2', worldPlayer: '1a127e0552796ef1' }),
+  'frame-calm-town-1': Object.freeze({ gallery: '17633ffef387f078', galleryDmFull: '86a28cd09d196b03', partyLink: 'dcda3f34f9e5de2f', imported: '2b6634f6b9e71b9f', worldPlayer: '16d8725a2d2b5895' }),
   'frame-calm-city-0': Object.freeze({ gallery: 'aeeb73e7db33b8b8', galleryDmFull: '40d242b25526be71', partyLink: '30b797aacfb8bb8a', imported: 'a72da96e8fba7997', worldPlayer: '92e6443041d1f8b5' }),
-  'frame-calm-city-1': Object.freeze({ gallery: '8631ab6992ec1388', galleryDmFull: '3ecc0ce3536a6698', partyLink: 'c39c698d99df6396', imported: 'c9166bd9b29b3bbf', worldPlayer: 'c18e028156c419e4' }),
+  'frame-calm-city-4': Object.freeze({ gallery: 'c4706406f6a94029', galleryDmFull: 'd275cb4be9a46ab8', partyLink: '26139761df5166b3', imported: '622358e03b41cd7b', worldPlayer: '54414bbe5f4d20ad' }),
   'frame-calm-metropolis-1': Object.freeze({ gallery: 'ac7f4027a0717df2', galleryDmFull: 'ca467c3b3cca53f8', partyLink: '49e1a31363ecbe53', imported: '8438fd8061b17bd7', worldPlayer: '2023640a9e8e695d' }),
-  'frame-calm-metropolis-3': Object.freeze({ gallery: 'f1ed437fa7457497', galleryDmFull: '4444c6e88d43c0fe', partyLink: 'a59fa8e76015abc0', imported: 'e79de9f5d766643f', worldPlayer: '19df47c70a903538' }),
+  'frame-calm-metropolis-5': Object.freeze({ gallery: '0bc0e04a40d85bf1', galleryDmFull: '16ba2cb702d0bfd8', partyLink: '4f70db8e594204f7', imported: '6a23a61704614dad', worldPlayer: '614e9211cb574ccf' }),
 });
 
 const digest = (v) => createHash('sha256').update(JSON.stringify(v)).digest('hex').slice(0, 16);
@@ -149,7 +162,7 @@ describe('CF3: the frame reaches no shared page', () => {
       const shared = recordOf(key, read);
       expect(shared && typeof shared === 'object', `${key} hands the page a record`).toBe(true);
       expect(shared._seed, `${key} carries no seed`).toBeUndefined();
-      expect(composeTonightSheet(shared).frame, `${key}: no frame`).toBe(null);
+      expect(composeTonightSheet(shared).frame ?? null, `${key}: no frame`).toBe(null);
       expect(composeTonightSheet(shared, { audience: 'owner' }).frame ?? null, `${key}: no frame even for the owner (the second lock)`).toBe(null);
       const { text, drew } = tableOf(shared);
       expect(drew, `${key}: the Table View draws the sheet`).toBe(true);

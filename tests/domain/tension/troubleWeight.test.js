@@ -8,7 +8,9 @@
  * (`git archive 7e0c77ae2 | tar -x`, this checkout's `node_modules` linked beside it), over the same births: the
  * generators did not change between that commit and the frame's line, so a seed births the same town at both. Each pin is
  * the first 16 hex of the sha256 of `JSON.stringify(composeTonightSheet(s))` as composed (no key dropped), or of the
- * Foundry journal's Tonight page text.
+ * Foundry journal's Tonight page text. Since FRAME-2 · B3's audience gate, only the owner's sheet can carry a frame, so
+ * every sheet here is composed AS THE OWNER (`{ audience: 'owner' }`), and the stranger's sheet (no options) is held to
+ * the same pin.
  *
  * The calm towns were chosen by measuring the 330-town calm pool (`frame-calm-<tier>-<i>`, FRAME-1's pool script): the
  * first four of each tier that hold NO trouble of weight. The towns in crisis are the first birth of each tier, in the
@@ -23,6 +25,7 @@ import { buildJournalPages } from '../../../src/foundry/journalPages.js';
 import { buildViewModel } from '../../../src/pdf/lib/viewModel.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
 
+const OWNER = Object.freeze({ audience: 'owner' });
 const digest = (text) => createHash('sha256').update(text).digest('hex').slice(0, 16);
 const born = (seed) => generateSettlementPipeline({ settType: seed.split('-')[2] }, null, { seed, customContent: {} });
 const tonightPageOf = (s) => buildJournalPages(buildViewModel({ settlement: s }), { settlement: s }).find((p) => p.name === TONIGHT_COPY.title)?.markdown ?? '';
@@ -89,7 +92,8 @@ describe('a calm town without a trouble of weight keeps today\'s sheet, byte for
     const failures = collectSeedFailures(Object.keys(CALM_WITHOUT_WEIGHT), (seed) => {
       const s = born(seed);
       expect(castTroubleFrame(s), `${seed} casts no frame`).toBe(null);
-      expect(digest(JSON.stringify(composeTonightSheet(s))), seed).toBe(CALM_WITHOUT_WEIGHT[seed]);
+      expect(digest(JSON.stringify(composeTonightSheet(s, OWNER))), `${seed} (the owner)`).toBe(CALM_WITHOUT_WEIGHT[seed]);
+      expect(digest(JSON.stringify(composeTonightSheet(s))), `${seed} (a stranger)`).toBe(CALM_WITHOUT_WEIGHT[seed]);
     });
     expectNoSeedFailures(failures, 'a calm town without a trouble of weight keeps the sheet of 7e0c77ae2');
   }, 300000);
@@ -108,9 +112,10 @@ describe('a town in crisis keeps its crisis sheet, byte for byte', () => {
   it(`${Object.keys(IN_CRISIS).length} towns in crisis, one a tier: the sheet digests as at 7e0c77ae2`, () => {
     const failures = collectSeedFailures(Object.keys(IN_CRISIS), (seed) => {
       const s = born(seed);
-      const sheet = composeTonightSheet(s);
+      const sheet = composeTonightSheet(s, OWNER);
       expect(sheet.crisis, `${seed} is in crisis`).toBeTruthy();
-      expect(digest(JSON.stringify(sheet)), seed).toBe(IN_CRISIS[seed]);
+      expect(digest(JSON.stringify(sheet)), `${seed} (the owner)`).toBe(IN_CRISIS[seed]);
+      expect(digest(JSON.stringify(composeTonightSheet(s))), `${seed} (a stranger)`).toBe(IN_CRISIS[seed]);
     });
     expectNoSeedFailures(failures, 'a town in crisis keeps the sheet of 7e0c77ae2');
   }, 300000);
@@ -121,7 +126,7 @@ describe('a calm town with a trouble of weight opens on the trouble the order pi
     const failures = collectSeedFailures(WITH_WEIGHT, ({ seed, type, at, why }) => {
       const s = born(seed);
       expect(castTroubleFrame(s), `${seed}: ${why}`).toMatchObject({ type, at });
-      const sheet = composeTonightSheet(s);
+      const sheet = composeTonightSheet(s, OWNER);
       expect(sheet.frame?.type, seed).toBe(type);
       expect(sheet.frame?.line, seed).toBe(s.history.currentTensions[at].description.replace(/\s+/g, ' ').trim());
     });
