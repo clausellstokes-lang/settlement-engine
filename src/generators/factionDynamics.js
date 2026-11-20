@@ -354,7 +354,7 @@ export function withConflictRelations(powerStructure, conflicts) {
     // TAIL-POWERS-B-4 (the chair's P31 (3), vetoable by the owner): the merchants' and craftsmen's vote ("vote together whenever
     // trade is at stake") is false of a pair the conflicts hold at HIGH; it takes its twin, which names the quarrel
     const narrative = String(row.narrative || '');
-    if (narrative === MERCHANT_CRAFT_VOTE.sibling(row.pair[0], row.pair[1]) || narrative.startsWith(`${powerNameWithArticle(row.pair[0], true)} and ${powerNameWithArticle(row.pair[1])} vote together against `)) {
+    if (narrative === MERCHANT_CRAFT_VOTE.sibling(row.pair[0], row.pair[1]) || narrative.startsWith(`${powerNameWithArticle(row.pair[0], true)} and ${powerNameWithArticle(row.pair[1])} vote together against `) || (row.type === 'tense' && / who keeps the profit\b/.test(narrative) && !/ are at odds over /.test(narrative))) { // PEOPLE-2 B2: a stored vote variant (data/powerLineVariants.js, MC.vote / MC.vote-against, every wording keeping "who keeps the profit") is the vote
       moved = true;
       return { ...row, direction: quarrel.intensity === 'high' ? 'escalating' : row.direction, narrative: MERCHANT_CRAFT_VOTE.atOdds(row.pair[0], row.pair[1], issue) };
     }

@@ -26,6 +26,7 @@
  *    noblesAhead's line, never print; no struck clause appears in any new wording.
  * 4. THE HIDEABLE RULE: no wording needs a house `cardVeil.js :: isHideableHouse` marks, nor a fact about crime.
  */
+import { readFileSync } from 'node:fs';
 import { beforeAll, describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
@@ -181,6 +182,11 @@ describe('the wordings themselves', () => {
   it('no struck clause appears in any new wording', () => {
     expect(all().filter((r) => STRUCK.some((w) => r.text.toLowerCase().includes(w))).map((r) => r.id)).toEqual([]);
   });
+  it('the census declaration (docs/census/declarations/powerLineVariants.json) holds every wording, one row each, as the data file declares it', () => {
+    const ledger = JSON.parse(readFileSync(new URL('../../../docs/census/declarations/powerLineVariants.json', import.meta.url), 'utf8'));
+    const shape = (r) => ({ id: r.id, text: r.text, needs: [...(r.needs || [])], excludes: [...(r.excludes || [])], excludesLevel: r.excludesLevel === true });
+    expect(ledger.rows.map(shape)).toEqual(all().map(shape));
+  });
   it('every atom a wording declares is the vocabulary\'s', () => {
     expect(all().flatMap((r) => [...(r.needs || []), ...(r.excludes || [])]).filter((a) => !parseAtom(a))).toEqual([]);
   });
@@ -230,15 +236,18 @@ describe('a seedless record', () => {
     expect(JSON.stringify(seeded)).not.toBe(before);
   });
   it('where today\'s line is not eligible (closingGap; a tie) a seedless record takes the first eligible wording', () => {
-    const rec = { _seed: '', tier: 'city', institutions: [], powerStructure: { factions: [
+    const rec = { _seed: '', tier: 'city', population: 9000, institutions: [{ name: 'Parish church', category: 'Religious' }], powerStructure: { factions: [
       { faction: 'Merchant Guilds', power: 30, desc: 'Merchants.' },
       { faction: 'Noble Families', power: 25, desc: `Old families. ${CLOSING_GAP}` },
       { faction: 'Religious Authorities', power: 20, desc: "Clergy. The arcane orders are present but operate in the clergy's shadow. Questions of what is sanctioned magic and what is heresy remain deliberately unresolved." },
       { faction: 'Arcane Orders', power: 20, desc: 'Mages.' },
     ], factionRelationships: [] } };
     V.voicePowerLines(rec, standingLevelOf);
-    const closing = V.CODA_POOLS.find((c) => c.id === 'closingGap').rows[0].text;
-    const arcane = V.CODA_POOLS.find((c) => c.id === 'arcaneInShadow').rows[0].text;
+    // the first eligible: the pool's first wording the record admits and the tie does not refuse
+    const facts = factsOf(rec);
+    const first = (id, level) => V.CODA_POOLS.find((c) => c.id === id).rows.find((r) => declarationAdmits(declarationOf(r), facts).admitted && !(level && r.excludesLevel)).text;
+    const closing = first('closingGap', false);
+    const arcane = first('arcaneInShadow', true);
     expect(rec.powerStructure.factions[1].desc).toBe(`Old families. ${closing}`);
     expect(rec.powerStructure.factions[2].desc).toBe(`Clergy. ${arcane}`);
     // not level: today's line stays for a seedless record

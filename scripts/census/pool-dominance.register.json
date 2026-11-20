@@ -3,9 +3,9 @@
   "corpus": "[{\"tier\":\"thorp\",\"n\":150},{\"tier\":\"hamlet\",\"n\":200},{\"tier\":\"village\",\"n\":350},{\"tier\":\"town\",\"n\":550},{\"tier\":\"city\",\"n\":350},{\"tier\":\"metropolis\",\"n\":150},{\"tier\":\"village\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"under_siege\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"under_siege\"}]",
   "census": {
     "_note": "Figures for the second wave, never a red: re-written by every door.",
-    "pools": 960,
+    "pools": 1014,
     "printOneLine": 670,
-    "measuredUnder30Draws": 151,
+    "measuredUnder30Draws": 154,
     "highestSharesOver150Draws": [
       {
         "pool": "ledger:institutionDescVariants:DESC_VARIANT_SIBLINGS",
@@ -5911,6 +5911,330 @@
       "top5": 0.5724,
       "lines": 15,
       "reason": "banked BY ITS OWN ROW at the last close (LASTCLOSE-DOORS, 2026-11-19, the chair's ruling on its hand-back's §3 (1)), through the door's own bankNew narrowed to this pool (at the higher of the two corpora's readings), NOT --bank-new: point 68's imports list (FR24); 15 lines, top1 0.13, not lopsided; registered at the last close"
+    },
+    "ledger:powerLineVariants:CODA_POOLS.arcaneInShadow": {
+      "top1": 0.1163,
+      "top5": 0.471,
+      "lines": 13,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:CODA_POOLS.atTable": {
+      "top1": 0.0977,
+      "top5": 0.4468,
+      "lines": 13,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:CODA_POOLS.bodiesMinds": {
+      "top1": 0.1015,
+      "top5": 0.4646,
+      "lines": 13,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:CODA_POOLS.clergyAhead": {
+      "top1": 0.1244,
+      "top5": 0.5194,
+      "lines": 11,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:CODA_POOLS.closingGap": {
+      "top1": 0.2076,
+      "top5": 0.8076,
+      "lines": 7,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:CODA_POOLS.inShadow": {
+      "top1": 0.2844,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:CODA_POOLS.narrowGap": {
+      "top1": 0.285,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:CODA_POOLS.noblesAhead": {
+      "top1": 0.1558,
+      "top5": 0.6485,
+      "lines": 9,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:CODA_POOLS.outpaced": {
+      "top1": 0.1034,
+      "top5": 0.4815,
+      "lines": 12,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:CODA_POOLS.outvoted": {
+      "top1": 0.2662,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:DESC_POOLS.arcaneAdvisory": {
+      "top1": 0.1325,
+      "top5": 0.6225,
+      "lines": 9,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:DESC_POOLS.churchEmbedded": {
+      "top1": 0.2124,
+      "top5": 0.8142,
+      "lines": 7,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:DESC_POOLS.cityWatchGrowing": {
+      "top1": 0.1743,
+      "top5": 0.7791,
+      "lines": 7,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:DESC_POOLS.cityWatchStretched": {
+      "top1": 0.2471,
+      "top5": 1,
+      "lines": 5,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:DESC_POOLS.clergyMargins": {
+      "top1": 0.1374,
+      "top5": 0.639,
+      "lines": 10,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:DESC_POOLS.craftSecondary": {
+      "top1": 0.2551,
+      "top5": 1,
+      "lines": 5,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:DESC_POOLS.elders": {
+      "top1": 0.2373,
+      "top5": 0.8814,
+      "lines": 6,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:DESC_POOLS.eldersCrisis": {
+      "top1": 0.2762,
+      "top5": 1,
+      "lines": 5,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:DESC_POOLS.electedCouncil": {
+      "top1": 0.3261,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:DESC_POOLS.fullCouncil": {
+      "top1": 0.2648,
+      "top5": 1,
+      "lines": 5,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:DESC_POOLS.gmoSeat": {
+      "top1": 0.2381,
+      "top5": 0.8096,
+      "lines": 8,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:DESC_POOLS.grandConsortium": {
+      "top1": 0.4762,
+      "top5": 1,
+      "lines": 3,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:DESC_POOLS.grandCouncil": {
+      "top1": 0.5556,
+      "top5": 1,
+      "lines": 3,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:DESC_POOLS.guildConsortium": {
+      "top1": 0.3971,
+      "top5": 1,
+      "lines": 3,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:DESC_POOLS.guildsGovern": {
+      "top1": 0.3449,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:DESC_POOLS.hamletElders": {
+      "top1": 0.4131,
+      "top5": 1,
+      "lines": 3,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:DESC_POOLS.headman": {
+      "top1": 0.2942,
+      "top5": 1,
+      "lines": 5,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:DESC_POOLS.householdCouncil": {
+      "top1": 0.2914,
+      "top5": 1,
+      "lines": 5,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:DESC_POOLS.landedOutpaced": {
+      "top1": 0.17,
+      "top5": 0.7582,
+      "lines": 8,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:DESC_POOLS.localMerchants": {
+      "top1": 0.2217,
+      "top5": 0.8444,
+      "lines": 7,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:DESC_POOLS.mayor": {
+      "top1": 0.359,
+      "top5": 1,
+      "lines": 5,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:DESC_POOLS.merchantsCouncil": {
+      "top1": 0.3143,
+      "top5": 1,
+      "lines": 5,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:DESC_POOLS.merchantsHall": {
+      "top1": 0.2648,
+      "top5": 1,
+      "lines": 5,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:DESC_POOLS.minorLanded": {
+      "top1": 0.2723,
+      "top5": 1,
+      "lines": 5,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:DESC_POOLS.nobleCompetitive": {
+      "top1": 0.1735,
+      "top5": 0.7347,
+      "lines": 8,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:DESC_POOLS.reeve": {
+      "top1": 0.35,
+      "top5": 1,
+      "lines": 3,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:DESC_POOLS.townWatch": {
+      "top1": 0.1631,
+      "top5": 0.6979,
+      "lines": 8,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:DESC_POOLS.tradesMargins": {
+      "top1": 0.1964,
+      "top5": 0.8683,
+      "lines": 6,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:DESC_POOLS.villagePriest": {
+      "top1": 0.2639,
+      "top5": 0.8889,
+      "lines": 6,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:RELATION_POOLS.GE.dep": {
+      "top1": 0.1831,
+      "top5": 0.7449,
+      "lines": 8,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:RELATION_POOLS.GE.sub": {
+      "top1": 0.1959,
+      "top5": 0.8306,
+      "lines": 8,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:RELATION_POOLS.GM.sub": {
+      "top1": 0.3184,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:RELATION_POOLS.GM.sub+soldiers": {
+      "top1": 0.1772,
+      "top5": 0.7766,
+      "lines": 7,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:RELATION_POOLS.GM.sym": {
+      "top1": 0.269,
+      "top5": 0.8485,
+      "lines": 8,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:RELATION_POOLS.GM.tense": {
+      "top1": 0.3044,
+      "top5": 1,
+      "lines": 5,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:RELATION_POOLS.GR.dep": {
+      "top1": 0.1881,
+      "top5": 0.8618,
+      "lines": 7,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:RELATION_POOLS.GR.tense": {
+      "top1": 0.225,
+      "top5": 0.7941,
+      "lines": 8,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:RELATION_POOLS.MC.vote": {
+      "top1": 0.23,
+      "top5": 0.9229,
+      "lines": 6,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:RELATION_POOLS.MC.vote-against": {
+      "top1": 0.2017,
+      "top5": 0.7815,
+      "lines": 7,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:RELATION_POOLS.MR.dep": {
+      "top1": 0.1397,
+      "top5": 0.6065,
+      "lines": 11,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:RELATION_POOLS.MR.tense": {
+      "top1": 0.2581,
+      "top5": 1,
+      "lines": 5,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:RELATION_POOLS.NG.dep": {
+      "top1": 0.3089,
+      "top5": 1,
+      "lines": 5,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:RELATION_POOLS.NG.sub": {
+      "top1": 0.3394,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:powerLineVariants:RELATION_POOLS.NG.sub+merchant": {
+      "top1": 0.2015,
+      "top5": 0.8884,
+      "lines": 6,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
     }
   }
 }

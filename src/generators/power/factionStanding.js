@@ -142,8 +142,8 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }, 
             (gapAbove <= 5 && gapBelow <= 5
               ? (standing = topTwoGap <= 5 && levelCount >= 3
                   ? `Three powers stand almost level here, and no one leads; every ${seatIsCouncil(factions.find((x) => x.isGoverning)?.faction) ? 'council vote' : 'decision'} has to be bargained for.`.replace(/^Three/, LEVEL_COUNT_WORDS[Math.min(levelCount, LEVEL_COUNT_WORDS.length - 1)]) // TAIL-POWERS-B: a vote only where a council sits; TAIL-POWERS-B-4: their number
-                  : 'They are always at the table, but cannot set their own terms.')
-              : gapAbove <= 10
+                  : faction.isGoverning ? '' : 'They are always at the table, but cannot set their own terms.') // PEOPLE-2 B2 (the chair's F2, 18:14 UTC): the governing seat at rank 2 prints neither atTable nor worthBuying
+              : faction.isGoverning ? (standing = '') : gapAbove <= 10
                 ? (standing =
                     'Close enough to the two above that their support is worth buying; they play ' +
                     (higherNeighbor ? powerNameWithArticle(higherNeighbor.faction) : 'the second power') +
@@ -331,4 +331,19 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }, 
         if (rank > 0 && !faction.isGoverning && isAppointedOccupier(faction)) standing = occupierStanding(factions.find((f) => f.isGoverning)); // BAR2-PEOPLE (PP10)
         standing && (faction.desc = faction.desc ? faction.desc + ' ' + standing : standing);
       });
+};
+
+/**
+ * PEOPLE-2 B2 (the chair's F3, 18:14 UTC): THE TIE A STANDING BRANCH COMPUTES, handed by the pipeline to the pick
+ * (`data/powerLineVariants.js :: voicePowerLines`) as an eligibility flag. The faith's card over the arcane power
+ * (`religiousArcaneNote` above: the first arcane power at or below the faith) and the nobles' card over the merchants
+ * (`nobleMerchantNote`: the first merchant power at or below them) stand LEVEL where the two powers are equal.
+ * @param {ReadonlyArray<{ faction?: string, power?: number }>} factions @param {{ faction?: string, power?: number }} faction
+ * @param {string} codaId @returns {boolean}
+ */
+export const standingLevelOf = (factions, faction, codaId) => {
+  const rival = codaId === 'arcaneInShadow' ? factions.find((member) => String(member.faction ?? '').toLowerCase().includes('arcane'))
+    : codaId === 'noblesAhead' ? factions.find((member) => String(member.faction ?? '').includes('Merchant'))
+    : null;
+  return !!rival && rival !== faction && rival.power === faction.power;
 };

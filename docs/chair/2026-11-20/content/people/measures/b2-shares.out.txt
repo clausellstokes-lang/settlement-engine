@@ -1,0 +1,68 @@
+# BEFORE: the base d28a9bb15 (the working line 8196e5712 merged; src identical)
+tree d28a9bb15 · 150 places a size · voiced coda wordings 0
+TOP thorp openings: 57/150 38% | The oldest heads of the community decide things together; people follow them out of respect and custom, not law.
+TOP thorp codas: 0/150 0% | 
+TOP thorp relations: 3/150 2% | The # carries out what the # decides.
+TOP hamlet openings: 53/150 35% | The oldest heads of the community decide things together; people follow them out of respect and custom, not law.
+TOP hamlet codas: 7/150 5% | Behind the # by too much to challenge openly, so they get their way through petitions and procedure instead.
+TOP hamlet relations: 6/150 4% | The # carries out what the # decides.
+TOP village openings: 107/150 71% | The village priest is the most educated person for miles; moral authority and practical influence are inseparable at this scale.
+TOP village codas: 38/150 25% | A single shift in patronage, scandal, or armed muscle could swap their positions.
+TOP village relations: 90/150 60% | People take their marriages, inheritances and hard times to the #, not to the #, and the two do not agree on who decides what.
+TOP town openings: 123/150 82% | Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential.
+TOP town codas: 77/150 51% | They and the religious authorities both keep people in line.
+TOP town relations: 95/150 63% | The # holds the seat and collects the taxes; the # tell people that the #'s rule is right and ordained. Each props up the other.
+OVER-HALF town coda inShadow: places 95/150 63% · its top sentence 49/150 33% | They operate in the shadow of the #, close enough to matter and too far behind to lead.
+OVER-HALF town coda bodiesMinds: places 77/150 51% · its top sentence 77/150 51% | They and the religious authorities both keep people in line.
+OVER-HALF town coda worthBuying: places 77/150 51% · its top sentence 69/150 46% | Close enough to the two above that their support is worth buying; they play the # and the # against each other when they can.
+TOP city openings: 121/150 81% | Clergy are present but operate at the margins of civic life; their moral authority is real but their political leverage is limited.
+TOP city codas: 109/150 73% | They and the religious authorities both keep people in line.
+TOP city relations: 105/150 70% | The money of the # pays for the charity of the #, and the charity keeps the poor quiet. Each needs the other, and neither likes it.
+OVER-HALF city coda bodiesMinds: places 109/150 73% · its top sentence 109/150 73% | They and the religious authorities both keep people in line.
+OVER-HALF city coda atTable: places 109/150 73% · its top sentence 109/150 73% | They are always at the table, but cannot set their own terms.
+OVER-HALF city coda inShadow: places 86/150 57% · its top sentence 54/150 36% | They operate in the shadow of the governing council, close enough to matter and too far behind to lead.
+TOP metropolis openings: 145/150 97% | Magical practitioners are consulted but not formally empowered.
+TOP metropolis codas: 144/150 96% | The arcane orders are present but operate in the clergy's shadow.
+TOP metropolis relations: 136/150 91% | The money of the # pays for the charity of the #, and the charity keeps the poor quiet. Each needs the other, and neither likes it.
+OVER-HALF metropolis coda arcaneInShadow: places 144/150 96% · its top sentence 144/150 96% | The arcane orders are present but operate in the clergy's shadow.
+OVER-HALF metropolis coda bodiesMinds: places 138/150 92% · its top sentence 138/150 92% | They and the religious authorities both keep people in line.
+OVER-HALF metropolis coda atTable: places 138/150 92% · its top sentence 138/150 92% | They are always at the table, but cannot set their own terms.
+OVER-HALF metropolis coda clergyAhead: places 125/150 83% · its top sentence 125/150 83% | The clergy have more say in public affairs, so the arcane orders work around them and never challenge them openly.
+OVER-HALF metropolis coda inShadow: places 93/150 62% · its top sentence 62/150 41% | They operate in the shadow of the #, close enough to matter and too far behind to lead.
+OVER-HALF metropolis coda outpaced: places 86/150 57% · its top sentence 80/150 53% | The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants win more often than not.
+OVER-HALF metropolis coda outvoted: places 86/150 57% · its top sentence 82/150 55% | The merchants consistently outvote them on pricing and labour standards, so craft masters now win what they can by adding their own conditions to each deal.
+SEAT the governing seat at rank 2: 45 cards over 900 places · atTable 23 · worthBuying 20
+
+# AFTER: the cure (this branch's tip)
+tree the B2 tip · 150 places a size · voiced coda wordings 81
+TOP thorp openings: 14/150 9% | Respected elders guide the community; authority is moral and traditional rather than formal.
+TOP thorp codas: 0/150 0% | 
+TOP thorp relations: 3/150 2% | The # carries out what the # decides.
+TOP hamlet openings: 17/150 11% | A lord's steward administers the settlement; authority flows downward from the noble, not upward from residents.
+TOP hamlet codas: 7/150 5% | Behind the # by too much to challenge openly, so they get their way through petitions and procedure instead.
+TOP hamlet relations: 5/150 3% | The # carries out what the # decides.
+TOP village openings: 20/150 13% | People here look to the church for guidance on worldly matters as well as faith; at this scale its moral authority is practical influence too.
+TOP village codas: 19/150 13% | Close enough to the two above that their support is worth buying; they play the # and the # against each other when they can.
+TOP village relations: 16/150 11% | When times are hard, people here go to the # for help, not to the #; the two do not agree on who decides what.
+TOP town openings: 26/150 17% | Anyone seeking an office or a change in the law here soon learns to ask the church first; its opinion is usually influential.
+TOP town codas: 65/150 43% | Close enough to the two above that their support is worth buying; they play the # and the # against each other when they can.
+TOP town relations: 25/150 17% | The # makes the law, and the # tell people it is right to keep it. Each props up the other.
+OVER-HALF town coda inShadow: places 95/150 63% · its top sentence 15/150 10% | They operate in the shadow of the #, close enough to matter and too far behind to lead.
+OVER-HALF town coda bodiesMinds: places 77/150 51% · its top sentence 8/150 5% | They and the religious authorities both keep people in line.
+TOP city openings: 23/150 15% | Wealthy merchants hold exclusive power; political office is effectively purchased through commercial success.
+TOP city codas: 26/150 17% | Close enough to the two above that their support is worth buying; they play the # and the # against each other when they can.
+TOP city relations: 15/150 10% | What the # earn at the market pays for the charity of the #, and the charity keeps the poor off the merchants' doorsteps. Each needs the other.
+OVER-HALF city coda bodiesMinds: places 109/150 73% · its top sentence 15/150 10% | Between them, the garrison and the religious authorities keep people in line, the one by force and the other by conscience.
+OVER-HALF city coda atTable: places 108/150 72% · its top sentence 14/150 9% | Third in weight here, they are always heard, but the terms are set by others.
+OVER-HALF city coda inShadow: places 86/150 57% · its top sentence 16/150 11% | Close enough to the governing council to matter, not close enough to lead.
+TOP metropolis openings: 25/150 17% | People go to the practitioners for what only magic can do and pay their price, but give them no say beyond it.
+TOP metropolis codas: 25/150 17% | On prices and labour the merchants outvote them every time, so the craft masters bargain for what they can, deal by deal.
+TOP metropolis relations: 22/150 15% | In a place this size the Guard has many streets to keep, and keeps them on the #'s orders, not its own; the soldiers enforce the law, they do not make it.
+OVER-HALF metropolis coda arcaneInShadow: places 144/150 96% · its top sentence 16/150 11% | The arcane orders do not outweigh the clergy here.
+OVER-HALF metropolis coda bodiesMinds: places 138/150 92% · its top sentence 16/150 11% | Inside the walls the garrison keeps order by force, and the clergy keep it by conscience.
+OVER-HALF metropolis coda atTable: places 137/150 91% · its top sentence 14/150 9% | Third in weight here, they are always heard, but the terms are set by others.
+OVER-HALF metropolis coda clergyAhead: places 125/150 83% · its top sentence 17/150 11% | The clergy have more say in public affairs than the arcane orders do.
+OVER-HALF metropolis coda inShadow: places 93/150 62% · its top sentence 18/150 12% | They count for something here, but the # counts for more, and the gap is too wide to close.
+OVER-HALF metropolis coda outpaced: places 86/150 57% · its top sentence 15/150 10% | The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants win more often than not.
+OVER-HALF metropolis coda outvoted: places 86/150 57% · its top sentence 25/150 17% | On prices and labour the merchants outvote them every time, so the craft masters bargain for what they can, deal by deal.
+SEAT the governing seat at rank 2: 45 cards over 900 places · atTable 0 · worthBuying 0

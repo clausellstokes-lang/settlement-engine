@@ -25,6 +25,7 @@ import { describe, it, expect, beforeAll } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
+import { CODA_POOLS, RELATION_POOLS } from '../../src/data/powerLineVariants.js'; // PEOPLE-2 B2: the voiced lines' pools (rows 3, 8 (c) widened to them)
 import { courtHoldersOf, defenceOf } from '../../src/domain/facts/defence.js';
 import * as forceHours from '../../src/domain/facts/forceHours.js';
 import * as tradeAtWork from '../../src/domain/facts/tradeAtWork.js';
@@ -145,6 +146,10 @@ describe('2 · a gate held is a post, not a round by day; a levy at need walks n
   });
 });
 
+/** PEOPLE-2 B2: a pool wording as a pattern (`{…}` a power or a verb, `$n` a coda's carried words) @param {string} text */
+const wordingPattern = (text) => new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\\\{[^}]*\\\}/g, '.+?').replace(/\\\$\d/g, '[^.;:]+?'), 'i');
+const BODIES_MINDS = [/ They and the religious authorities both keep people in line\. /, ...(CODA_POOLS.find((c) => c.id === 'bodiesMinds')?.rows || []).map((r) => wordingPattern(r.text))];
+const NG_DEP = (RELATION_POOLS['NG.dep'] || []).map((r) => new RegExp(`^${wordingPattern(r.text).source}$`, 'i'));
 describe('3 · a power with no old standing takes the final roster\'s sentence (BR30 (3))', () => {
   /** @param {string} name */
   const power = (name) => (BORN.get('bar0-city-under_siege+famine-rand-31')?.powerStructure?.factions || []).find((/** @type {any} */ f) => f?.faction === name);
@@ -152,7 +157,8 @@ describe('3 · a power with no old standing takes the final roster\'s sentence (
     const guard = power('Military/Guard');
     expect(guard, 'premise: the guard power stands').toBeTruthy();
     expect(power('Religious Authorities'), 'premise: the religious authorities stand on the final roster').toBeTruthy();
-    expect(String(guard.desc)).toMatch(/ They and the religious authorities both keep people in line\. /);
+    // PEOPLE-2 B2 (widened to the variant pool): the bodiesMinds coda as written, or one of its pool's wordings
+    expect(BODIES_MINDS.some((re) => re.test(String(guard.desc)))).toBe(true);
   });
   it('NEGATIVE: the Garrison Bloc\'s twin (no standing of its own) takes no sentence', () => {
     const bloc = power('The Garrison Bloc');
@@ -380,14 +386,20 @@ describe('8 (c) · the standing names courts only where a court sits (FR25 (c))'
   it('POSITIVE: r2s-plague_onset-town-0 ("None") prints the twin, "courts" struck and nothing else changed', () => {
     const t = BORN.get('r2s-plague_onset-town-0');
     expect(courtHoldersOf(t).length).toBe(0);
-    const n = standings(t).find((x) => x.includes('keeps enough rights of its own'));
+    // PEOPLE-2 B2 (re-keyed by identity): the old families' dependent row, as written or voiced from NG.dep's pool
+    const n = standings(t).find((x) => x.includes('keeps enough rights of its own') || NG_DEP.some((re) => re.test(x)));
     expect(n, 'the standing stands').toBeTruthy();
-    expectAbsentWithAnchor(String(n), WITH, TWIN, 'the standing');
-    expect(String(n).replace(TWIN, WITH)).toMatch(/keeps enough rights of its own \(land, courts, levies\) to bargain, not simply obey\.$/);
+    if (String(n).includes('keeps enough rights of its own')) {
+      expectAbsentWithAnchor(String(n), WITH, TWIN, 'the standing');
+      expect(String(n).replace(TWIN, WITH)).toMatch(/keeps enough rights of its own \(land, courts, levies\) to bargain, not simply obey\.$/);
+    } else expect(String(n)).not.toMatch(/\bcourts?\b/);
   });
   it('NEGATIVE: beside a courthouse (bar0-metropolis-calm-rand-40) the standing keeps its courts', () => {
     const t = BORN.get('bar0-metropolis-calm-rand-40');
     expect(courtHoldersOf({ institutions: t.institutions }).length, 'premise: a courthouse on the roster').toBeGreaterThan(0);
-    expect(standings(t).some((x) => x.includes(WITH))).toBe(true);
+    // PEOPLE-2 B2 (re-keyed by identity): the dependent row keeps its courts as written, or prints a wording of NG.dep's
+    // pool; never the twin
+    expect(standings(t).some((x) => x.includes(WITH) || NG_DEP.some((re) => re.test(x)))).toBe(true);
+    expect(standings(t).some((x) => x.includes(TWIN))).toBe(false);
   });
 });

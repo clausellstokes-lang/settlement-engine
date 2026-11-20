@@ -1,5 +1,7 @@
 import { keepOneDominant, withConflictRelations } from './factionDynamics.js'; // RECORD-MEASURE-2 G1; P19
 import { settleArcaneToPractitioners, settleClergyToFinalRoster } from './power/claimStanding.js'; // TAIL-POWERS-B-4 P31 (1); TAIL-CONTENT-CLOSE-1
+import { voicePowerLines } from '../data/powerLineVariants.js'; // PEOPLE-2 B2: the powers' lines voiced on the final record
+import { standingLevelOf } from './power/factionStanding.js'; // PEOPLE-2 B2 (the chair's F3): the standing branch's own tie, handed to the pick
 /**
  * generateSettlementPipeline.js — Pipeline-based settlement generation.
  *
@@ -204,6 +206,7 @@ export function generateSettlementPipeline(config = {}, importedNeighbour = null
   settleArcaneToPractitioners(finalCtx.settlement?.powerStructure?.factions, finalCtx.settlement); // TAIL-CONTENT-CLOSE-1: practitioners named only where one works magic
   // TAIL-POWERS-B-2 (P19): a pair the conflicts hold at HIGH, called symbiotic or dependent, names the quarrel (draw-free)
   if (finalCtx.settlement?.powerStructure) finalCtx.settlement.powerStructure = withConflictRelations(finalCtx.settlement.powerStructure, finalCtx.settlement.conflicts);
+  voicePowerLines(finalCtx.settlement, standingLevelOf); // PEOPLE-2 B2: the powers' descriptions and relation rows voiced on the final record (data/powerLineVariants.js), draw-free
   if (typeof options.onComplete === 'function') {
     try { options.onComplete(finalCtx); } catch (e) { console.warn('[pipeline] onComplete threw:', e); }
   }
