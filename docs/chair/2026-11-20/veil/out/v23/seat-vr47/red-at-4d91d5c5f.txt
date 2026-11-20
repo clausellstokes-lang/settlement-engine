@@ -1,0 +1,43 @@
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/domain/people/honorificSeed.test.js > VR47: the honorific is picked by the name and the title, never the id or the institution key > every call of honorificOfTitle in src/ passes the one seed (honorificSeedOf)
+AssertionError: expected [ { …(3) }, { …(3) } ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   {
++     "at": "src/domain/people/cardDoor.js",
++     "call": "honorificOfTitle(inst.title, c.gender, `${String(c.id || c.name || '')}::${inst.name}`, place)",
++     "seeded": false,
++   },
++   {
++     "at": "src/domain/people/seatKeeper.js",
++     "call": "honorificOfTitle(inst.title, c.gender, `${String(c.id || c.name || '')}::${String(inst.key || '')}`, { culture })",
++     "seeded": false,
++   },
++ ]
+
+ ❯ tests/domain/people/honorificSeed.test.js:94:44
+     92|     }
+     93|     expect(calls.length).toBeGreaterThanOrEqual(2); // cardDoor.js and…
+     94|     expect(calls.filter((c) => !c.seeded)).toEqual([]);
+       |                                            ^
+     95|   });
+     96|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  4 failed | 5 passed (9)
+   Start at  08:44:12
+   Duration  165.33s (transform 9.48s, setup 92ms, import 4.45s, tests 165.04s, environment 694ms)
+
+[gate-tail] end:  08:46:57 up  1:17,  0 user,  load average: 2.15, 2.61, 3.54
+[gate-tail] full log: /tmp/gate-tail.17830.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+red exit 1

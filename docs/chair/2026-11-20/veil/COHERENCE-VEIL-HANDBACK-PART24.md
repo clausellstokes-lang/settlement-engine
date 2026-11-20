@@ -140,7 +140,7 @@ apply the veil, drop empty person cards, R3 `_gallery_veil_roster_choices`, R4 h
 | R1 registry, R2 withhold-always, V10-2 | merged (4ddf8c60c, d136940c3, b5cb22caf) | read cold: they hold |
 | R3 roster choices | `lane/veil-22-r3-2026-11-20` 9e082aa0a (VEIL-22's builder; 212 -> `04693646…`) | NOT GREEN. R3-CURE BUILDER RUNNING in `/home/user/wt/r3c` (`v23-r3c` = lane tip c1b772e55 + R3 cherry-picked as a3d54949b), brief `briefs/R3-CURE-BRIEF.md` + rulings 10, 11 relayed + the reader's two leads (the raised guild's name in people's goals and in 6 memberships, Reveal DM on; shares summing to 92 and 93 where a power left). The seat's read of R3's SQL: copies outside `powerStructure.factions` kept; unknown crime types kept (fails open); power.entry's reach; the rest sound. |
 | R4 the people | `lane/veil-22-r4-2026-11-20` a4b89bf9d (R4 dfa031f3e + VEIL-22's cure; 212 -> `e5b31073…a11a0`) | NOT GREEN: the three STOPs ruled (rulings 15, 16, 18). NEXT: an R4-CURE-2 builder AFTER R3's cure returns (one builder on 212): STOP 1, STOP 3, the switch's salt, the catalogue as the red. Its first R4 cure's receipts: `out/v22/r4cure/R4-CURE-HANDBACK.md` on that branch. |
-| VR47 the honorific | `/home/user/wt/vr47`, `v23-vr47` from 4d91d5c5f | BUILDER RUNNING (display only, beside R3's), brief `briefs/VR47-HONORIFIC-BRIEF.md` |
+| VR47 the honorific | `lane/veil-23-vr47-2026-11-20` e971c8ff2 | MERGED `--no-ff` df6809f9c, the edge bundles rebuilt by `npm run build:edge-shared` in the next commit (engineBundle.js moves only the seed; the rest are timestamps and hashes: the reproducibility guard asks every bundle from one run). The seat's re-run: RED at 4d91d5c5f 4 failed (the new guard), GREEN 7 files 61/61 incl. render-twice, reproducibility 34/34 (`out/v23/seat-vr47/`). Builder's receipts `out/v23/vr47/VR47-HANDBACK.md`: callers cardDoor, seatKeeper (+ the bundle's copy); no generator or stored byte moves (36 empty-seat births byte-equal). KNOWN, NOT A LEAK: owner vs shared page differ in the GENDERED form on one card per born town (the default veil withholds `gender`, so the masculine prints). Reds already at the tip, unchanged: `phoneChromeFloor.census`, `presumedThings.walker`, `presumptionClasses.walker`, `writerReach.walker` (stored figures at the merged tree). |
 | R6 tests | `lane/veil-22-r6-2026-11-20` 7d9ebd078 | COMPLETE, NOT MERGED; merge after R3 and re-run its MAIN arm (red 50 today: `cast.stakes` by R3's power, `cast.roles` wording by R3 or R5) |
 | R5 composed prose, R7 | not started | R5 after R3 (ruling 14); R7 after R6 |
 | DOORS 3e1115c81 | `lane/veil-doors-3-2026-11-20` (hand-back `docs/chair/2026-11-20/veil/doors/VEIL-DOORS-3-HANDBACK.md` there: read whole before the merge) | merge `--no-ff` after R3 and R4, every hunk read, the two inside `import_gallery_dossier` hardest; ONE builder: rulings 19, 20, the reader's repros, the acceptance run at the merged tree |
@@ -166,7 +166,7 @@ AT THE CUT'S PARENT f05daa74e, executed by this seat: `--check` exit 0; walker 1
   load only. A link to one person's card stops working after a reload, though the card is still there. Two imports of
   one town cannot be matched person to person by id. Names, roles and ties are unchanged.
 - THE WEIGHTY TITLE (VR47): on a town made before this change, some people's title changes once ("Master Apothecary" to
-  "Apothecary" or back): the same person, the same office. Count: [owed by the VR47 builder].
+  "Apothecary" or back): the same person, the same office. Count: 58 of 163 born-town cards print a different form. The owner's own example face, Robert Thomas the village priest, now reads "Father" for "Pastor" ("Pastor" stays the pool's canonical form).
 - THE BLACK MARKET'S SHARE under the default settings: never sent by the server; a page re-derives it only where the share
   carries no veil, else it is not drawn.
 - A CRIMINAL POWER'S ROW where no hidden house raised it: [count owed by the R3 cure, ruling 11].
@@ -180,3 +180,4 @@ AT THE CUT'S PARENT f05daa74e, executed by this seat: `--check` exit 0; walker 1
 - 07:40 R4-CURE a4b89bf9d returned (relay); read whole; three STOPs sent; ruled 08:01 (rulings 15, 16, 18).
 - 08:02 VR47 builder launched (brief 4d91d5c5f). 08:08 the successor VEIL-24 seated; the plan: this seat takes R3's cure return, merges it, then hands over.
 - 08:22 ruling 28 (the fold) relayed to the R3-CURE builder.
+- 08:47 VR47 returned, read, re-run, merged (df6809f9c); bundles rebuilt.
