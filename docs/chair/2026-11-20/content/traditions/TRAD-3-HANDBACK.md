@@ -39,22 +39,34 @@ only. TRAD-2's hand-back (`TRAD-2-HANDBACK.md`) stays as history; everything in 
 | unit | what | state | commit |
 |---|---|---|---|
 | TRAD-1, TRAD-2 1 and 1c | the leaf, the table, the reader's view (CTR11), houses and plural powers in prose | landed before the hand-over | see TRAD-2-HANDBACK §2; tip `441ec3b32` |
-| 2 | the curate-screen proof over every address; the public search composed with the view's audience | READ COLD by TRAD-3, reds re-run (search 6/8 red at 441ec3b32; security 2/20 red on the pre-CTR11 leaf), MERGED | `d820b9731` on `lane/trad-2-2026-11-20-u2`; merge `a0929a153` |
-| 4 | the chair's two plants: the reader reads no `foundedBy` and no function-eye field (brief `briefs/TRAD-3-U4-PLANTS.md`) | builder running, worktree `scratchpad/u4`, branch `trad3-u4` from `25d255c47` | — |
-| 5 | CTR10 finished (brief `briefs/TRAD-2-U3-POOLS.md`): floors and conditions by arms, the registers, the printed export | NOT dispatched (collides with unit 4 on the leaf) | — |
-| 6 | the measures and the owner's samples | NOT briefed | — |
+| 2 | the curate-screen proof over every address; the public search composed with the view's audience | READ COLD, reds re-run (search 6/8 at 441ec3b32; security 2/20 on the pre-CTR11 leaf), MERGED, PUSHED | `d820b9731`; merge `a0929a153` |
+| 4 | the chair's plants and items 3-5: the reader reads no `foundedBy`, no function-eye field (`tags`, `facets`, `serviceKeys`); names a dead's event by its KIND (`DEAD_EVENT_PHRASES`, approved), chosen only among events naming nothing the whole record holds; the drawn set admits by the floor (cure B); drawn rows numbered `tradition.shared.<n>` | read line by line, reds re-run (10/51 at `25d255c47`), MERGED, PUSHED | `a167f9175` (branch `trad3-u4`); merge `a303169ca`; comment `3d49049e4`; census `0979dc2c9` |
+| 4b | the chair (12:25): the drawn set's floor EXCLUDES the hideable class (`isHideableHouse`, read on the house whole); the kind phrases' totality (an eligible type without a phrase fails a test, the clause omitted) | BUILDER OUT (the unit 4 builder, resumed by message; its brief is the message quoted in §3 plus `briefs/TRAD-3-U4-PLANTS.md`), worktree `scratchpad/u4`, branch `trad3-u4`, told to `--ff-only` to `3d49049e4` first | — |
+| 5 | CTR10 finished: floors and conditions by arms, the registers, the printed export | brief `briefs/TRAD-2-U3-POOLS.md`, NOT dispatched (TRAD-4's) | — |
+| 6 | the measures (CTR8 on the final leaf, by element AND by size; pool-dominance per slot; the most repeated shape masked) and the owner's 30 + 12 samples | NOT briefed (TRAD-4's) | — |
 
 ## 3. OPEN, WITH THE CHAIR
 
-- PLANT 1 (foundedBy) executed RED at 441ec3b32: "…kept since Sanctavetum was founded by Smuggling network, 276 years
-  ago." (a hideable house's name planted). Unit 4 cures it (reader always the bare founding pool).
-- PLANT 2 (function-eye tags) executed RED as constructed (born 0): 42 rites of 40 pool towns. Unit 4 cures the
-  DESCRIPTION; the SET is also reached (`shownTraditions.js :: shownTraditionsOf` admits the market and fair rites by
-  the market fact over the whole record): sent to the chair as CTR9 vs CTR11, cures (A) one floor-only admission for both
-  pages (recommended) or (B) the drawn rows alone.
-- SAME CLASS, sent to the chair: the dead's cause prints `event.name` verbatim; veil-22's name sweep removes a whole
-  event whose name holds a hidden name. Born 0 of 2,183. Recommended: the reader names the event by its kind.
-- CTR11's "other direction" line for the owner (with its born count): open.
+- UNIT 4b's brief (sent by message 12:3x UTC, verbatim in substance): (1) THE FLOOR EXCLUDES THE HIDEABLE CLASS: the rows
+  drawn for the shared page (`shownTraditions.js :: sharedTraditionRowsOf`) admit by the floor over houses NOT of the
+  hideable class (`people/cardVeil.js :: isHideableHouse`, imported, read on the house whole before the function-eye
+  strip), hidden or shown. PLANT, red first: a DM-made house of the hideable class (category 'Criminal') NAMED like a
+  catalogue market, the town's only market, a market rite: on the base it admits the rite into the drawn rows; after the
+  cure the drawn rows hold no rite standing on it, byte-identical with the house hidden (`card:institution:<id>`) and
+  shown; the OWNER's set still admits it (control). Born count of drawn sets shrunk by it (expected 0 on the 432).
+  (2) TOTALITY: the walker arm "every event kind a rite of the dead may be kept in memory of has one authored phrase, and
+  nothing else does" fails when a type lacks a phrase, and the leaf omits the clause then (fail-closed); else an arm.
+- THEN "TRAD-SHARE <commit>" to the chair (the chair, 12:25), carrying: the proof over every hideable address (unit 2);
+  the plants (foundedBy, a house's own tags, a renamed event, the floor's hideable class, dense ids); the count of
+  shared sets smaller than the owner's (0 born); and, in plain words for the owner, WHAT A SHARED PAGE'S DESCRIPTION NO
+  LONGER SAYS: who founded the town ("founded by …" is the owner's page only); the event a rite of the dead remembers by
+  its own name (the shared page says "the siege", "the great fire", "the flood", "the years of sickness"); a rite that
+  stands only on a house's own DM-given function (a DM-made market) is not on the shared page; served rows carry
+  `tradition.shared.<n>`, not their genesis ids.
+- CTR11's "other direction" line for the owner (where a DM SHOWS the criminal income, the reader's sentence still ranks
+  without it), with its born count: OPEN (TRAD-4's).
+- The CTR9 amendment (the chair, 11:12): the shared page's set is the owner's set less any rite that stands only on a
+  fact a read can withhold; count it (born 0) and list it among what a shared page loses (above).
 
 ## 4. THE TOOLS, ONE COMMAND EACH
 
@@ -76,16 +88,26 @@ Pools: S1 leads at their floors (feast 8 with 4 twins, fair 6 with 2 twins, the 
 
 ## 6. EXECUTED vs PLAUSIBLE
 
-EXECUTED: unit 2's reds and greens (above); the changed modules' 10 test files at the merge, 610/610. PLAUSIBLE until
-its receipt lands here: `tests/lint` whole at the merge.
+EXECUTED by TRAD-3: unit 2's and unit 4's reds (re-run at their bases) and greens at each merge (counts in "Updated"
+below); the plant probes (foundedBy RED; tags RED as constructed; born 0 of 2,183 events hold a house or person name; 0
+of 432 towns hold a hideable house counting as a market). EXECUTED by the unit 4 builder, NOT re-run by TRAD-3: the
+reader/owner moved counts and the 1,245 confinement at `a167f9175` (re-run it at the lane's last commit:
+`tools/born.mjs` at base `441ec3b32` and tip, then `cmp`). PLAUSIBLE: the tooth's "hidden" models veil-22's sweep by
+hand (the event filtered by name); under this tree's applyVeil alone the event stays and the reader's choice is the same
+by construction (the choice excludes events naming any held name).
 
 ## 7. STORED FIGURES THAT MOVE (named, not signed)
 
-None yet on this branch beyond TRAD-2's (its §6); the lighting census is re-taken by its door after unit 2's merge.
+- `tests/lint/.lighting-census-baseline.json`, by its door: files 3710 → 3711, credited 3238 → 3239, titles 31277 →
+  31292 → 31310, suiteTitles 8661 → 8664 → 8670 (`8f758e067`, `0979dc2c9`).
+- `scripts/mutation-coverage-manifest.json`: the security file's rationale row rewritten to describe units 2 and 4.
+- Rendered only: reader descriptions 432 of 1,232 move at unit 4 (owner 0); the drawn rows' ids change to
+  `tradition.shared.<n>` (a page saved before this keeps its old ids until its next save).
 
 ## 8. WHAT A SECURITY READER SHOULD ATTACK
 
-The SET as well as the text (plant 2's finding); every non-floor STRING the leaf reads (veil-22's sweep takes any
+The SET as well as the text (cure B and 4b's hideable-class floor); `brokerageLegalityOf` reads a house's own tags (an
+illegal brokerage with its function eye hidden may stop counting as hideable in the VEIL; forwarded by the chair); every non-floor STRING the leaf reads (veil-22's sweep takes any
 string holding a hidden name: `foundedBy`, an event's `name`, a house's tags, catalogue ids, income `source`s,
 stress `type`s); the draw key (`String(_seed ?? id)`); the public search (unit 2).
 
