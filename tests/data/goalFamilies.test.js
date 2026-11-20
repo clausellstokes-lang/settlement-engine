@@ -410,7 +410,7 @@ const wantCellsOf = (md) => {
     const h = raw.match(/^### ([A-Z]+)\/([a-z_]+)\/(short|long) · (\d+) → (\d+) \(\+(\d+)\)$/);
     if (h) { cur = { family: h[1], sub: h[2], vantage: h[3], from: Number(h[4]), to: Number(h[5]), plus: Number(h[6]), lines: [] }; cells.push(cur); continue; }
     if (raw.startsWith('#')) { cur = null; continue; }
-    const m = raw.match(/^(\d+)\. (.+)  <sub>\d+:[\d.]+<\/sub>$/);
+    const m = raw.match(/^(\d+)\. (.+) {2}<sub>\d+:[\d.]+<\/sub>$/);
     if (m && cur) cur.lines.push({ n: Number(m[1]), line: m[2] });
   }
   return cells;
