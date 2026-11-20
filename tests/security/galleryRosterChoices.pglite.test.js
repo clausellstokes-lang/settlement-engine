@@ -172,11 +172,26 @@ function withheldOf(stored, d) {
  * object KEY that holds a token, by normalised path. A token that is not all digits is searched by THE LANE'S OWN FOLD
  * (gallerySecondHomes.js :: buildNameSearch: itself and its bare form, without its bracketed qualifier, folded, at the
  * name boundary); a number id (all digits) as its String(): a whole string value, a whole key, or a number at an `id`. */
-function searchHits(doc, tokens) {
+function searchHits(doc, tokens, exempted = null) {
   const out = [];
   const nums = new Set(tokens.filter((t) => /^\d+$/.test(t)));
-  const search = buildNameSearch(tokens.filter((t) => !nums.has(t)), []);
-  const hit = (t) => nums.has(t) || (!!search && search.hit(t));
+  // R3-CURE-5 (the chair's ruling 37 (a), the ONLY exemption): the served powers' and houses' names are the search's OPEN
+  // names, and the exemption is POSITIVE: a string the bare search hits and the open search does not is exempt only where
+  // the hit lies wholly inside a containing name this same document serves (cut that name out and the bare search finds
+  // nothing); the containing name is said (`exempted`). Anything else the bare search hits is a hit (it fails closed).
+  const opens = servedNamesOf(doc);
+  const words = tokens.filter((t) => !nums.has(t));
+  const bare = buildNameSearch(words, []);
+  const search = buildNameSearch(words, opens);
+  const hit = (t) => {
+    if (nums.has(t)) return true;
+    if (!bare || !bare.hit(t)) return false;
+    if (search && search.hit(t)) return true;
+    const holders = opens.filter((n) => t.includes(n) && bare.hit(n));
+    if (!holders.length || bare.hit(holders.reduce((x, n) => x.split(n).join(' '), t))) return true;
+    if (exempted) exempted.push({ text: t.slice(0, 80), holders });
+    return false;
+  };
   const stack = [[doc, '', '']];
   while (stack.length) {
     const [v, p, k0] = stack.pop();
@@ -191,10 +206,73 @@ function searchHits(doc, tokens) {
   }
   return out;
 }
+/** The names of the powers (either stored list: `faction`, `name`) and the houses (`institutions[].name`) a document serves,
+ * once each (R3-CURE-5: the search's open names; ruling 37 (a): "a power or house the SAME document serves"). */
+function servedNamesOf(doc) {
+  const powers = [...(Array.isArray(doc?.powerStructure?.factions) ? doc.powerStructure.factions : []), ...(Array.isArray(doc?.factions) ? doc.factions : [])].filter(isRec).flatMap((f) => [f.faction, f.name]);
+  const houses = (Array.isArray(doc?.institutions) ? doc.institutions : []).filter(isRec).map((h) => h.name);
+  return [...new Set([...powers, ...houses].filter((v) => typeof v === 'string' && v))];
+}
+/** R3-CURE-4 (VEIL-25's builder; the chair, 11:12 UTC: "a husk is a tell"): jsonb containment (`a @> b`) as PostgreSQL reads
+ * it below the top level: an object holds every key of `b` with a value that holds `b`'s; an array holds each element of `b`
+ * in some element of its own; a scalar is equal. `skip` names keys of `b` not read at this level. */
+function holdsJ(a, b, skip = []) {
+  // (R3-CURE-5: a skipped key is skipped only where its value is a NUMBER: a trace's `ts`, a power's re-derived share. A
+  // membership's `power` is a NAME: skipped, it paired the served { power: 'Fishers', role: 'member' } with the withheld
+  // { power: "Thieves' Guild", role: 'member' } beside it and read the served one as its husk: the hand-raised Reveal-DM
+  // "npcs[].memberships[].power" of R3-CURE-4, in both engines, was this instrument's pairing, not a served husk)
+  if (isRec(a) && isRec(b)) return Object.keys(b).every((k) => (skip.includes(k) && typeof b[k] === 'number') || (Object.prototype.hasOwnProperty.call(a, k) && holdsJ(a[k], b[k])));
+  if (Array.isArray(a) && Array.isArray(b)) return b.every((y) => a.some((x) => holdsJ(x, y)));
+  return !isRec(a) && !Array.isArray(a) && !isRec(b) && !Array.isArray(b) && a === b;
+}
+/** R3-CURE-4 unit 1, THE CLASS (the brief: "the search cannot see a husk because the name is gone, so compare the projection
+ * with the served body by path"): every served OBJECT whose counterpart in the PRE-SWEEP projection `pub` held, in one of its
+ * fields, a withheld power's name (the lane's fold, the served powers' names its open names) or id (a string, a number by its
+ * String()), and which is served with that field removed or blanked. Counterparts: a record by key; a person by `id`; any
+ * other list's element by containment (the served element held by an unused projection element, `ts` and `power` aside: the
+ * trace is renumbered and the shares re-derived). A field whose whole value IS the name or id (or an array holding it) is
+ * STRUCTURED; a sentence naming it is PROSE. Returns { compared, husks: [{ path, kind }] }. */
+function husksOf(pub, doc, withheld, opens) {
+  const nums = new Set(withheld.filter((t) => /^\d+$/.test(t)));
+  const ids = new Set(withheld);
+  const search = buildNameSearch(withheld.filter((t) => !nums.has(t)), opens);
+  const exact = (v) => (typeof v === 'number' && ids.has(String(v))) || (typeof v === 'string' && v !== '' && ids.has(v));
+  const named = (v) => exact(v) || (typeof v === 'string' && v !== '' && !!search && search.hit(v));
+  const out = { compared: 0, husks: [] };
+  const walk = (x, y, p) => {
+    if (isRec(x) && isRec(y)) {
+      out.compared += 1;
+      for (const k of Object.keys(x)) {
+        const v = x[k]; const at = p ? `${p}.${k}` : k;
+        if (typeof v === 'string' || typeof v === 'number') {
+          if (named(v) && !(Object.prototype.hasOwnProperty.call(y, k) && y[k] === v)) out.husks.push({ path: at, kind: exact(v) ? 'structured' : 'prose' });
+        } else if (Array.isArray(v) && v.some((e) => (typeof e === 'string' || typeof e === 'number') && named(e))) {
+          const yl = Array.isArray(y[k]) ? y[k] : null;
+          for (const e of v) if ((typeof e === 'string' || typeof e === 'number') && named(e) && !(yl && yl.includes(e))) out.husks.push({ path: `${at}[]`, kind: exact(e) ? 'structured' : 'prose' });
+        } else if (Object.prototype.hasOwnProperty.call(y, k)) walk(v, y[k], at);
+      }
+    } else if (Array.isArray(x) && Array.isArray(y)) {
+      const used = new Set();
+      for (const e of y) {
+        if (!isRec(e)) continue;
+        const i = typeof e.id === 'string' && /(^|\.)npcs$/.test(p)
+          ? x.findIndex((z, j) => !used.has(j) && isRec(z) && z.id === e.id)
+          : x.findIndex((z, j) => !used.has(j) && isRec(z) && holdsJ(z, e, ['ts', 'power']));
+        if (i < 0) continue;
+        used.add(i);
+        walk(x[i], e, `${p}[]`);
+      }
+    }
+  };
+  walk(pub, doc, '');
+  return out;
+}
 /** R5's, NAMED (the chair, 07:39 UTC): a withheld power's name inside a composed sentence of a SERVED power's description
  * (registry power.desc, R5's composed rows) and its top-level copy. Nothing else may hold one. */
 const R5_PROSE = Object.freeze(['powerStructure.factions[].desc', 'factions[].desc']);
-const crim = (f) => isRec(f) && (String(f.category || '').toLowerCase() === 'criminal' || /thie/i.test(String(f.faction ?? f.name ?? '')));
+// R3-CURE-4 (unit 2; the chair's ruling 37 (a)): power.entry's own test, as the engines now read it: the category; a thieves'
+// name only where the power carries no category string (the plant's civic "Old Thieves' Guild Watch" is not a criminal power)
+const crim = (f) => isRec(f) && (String(f.category || '').toLowerCase() === 'criminal' || (typeof f.category !== 'string' && /thie/i.test(String(f.faction ?? f.name ?? ''))));
 const spOf = (d) => d?.economicState?.safetyProfile || {};
 const R3_PATHS = [/^powerStructure\.factions\[\]\.(faction|power|category|isGoverning)$/, /^powerStructure\.factionRelationships\[\]\.(pair\[\]|type|direction)$/,
   /^economicState\.economicComplexity$/, /^economicState\.safetyProfile\.(economicDragDesc|guardEffectivenessDesc|safetyDesc)$/,
@@ -529,12 +607,13 @@ describe('R3: the drawn conditional rows where a house is hidden whole (through 
     const outside = [];
     const r5 = {};
     const rules = {};
+    const exempted = [];
     for (const r of cureReads()) {
       if (r.kind === 'open' && !r.dm) { const k = ruleOf(r); (rules[k] = rules[k] || []).push(r.t.seed); }
       for (const [read, d] of docsOf(r)) {
         const W = withheldOf(r.stored, d);
         if (!W.length) continue;
-        for (const h of searchHits(d, W)) {
+        for (const h of searchHits(d, W, exempted)) {
           if (R5_PROSE.includes(h.path)) { r5[h.path] = (r5[h.path] || 0) + 1; continue; }
           outside.push(`${r.t.seed} ${r.kind} dm=${r.dm} ${read}: ${h.path} = ${J(h.text)}`);
         }
@@ -543,6 +622,10 @@ describe('R3: the drawn conditional rows where a house is hidden whole (through 
     note('R3-CURE unit 2, the rule that took each town (lane shape, open veil, Reveal off):', Object.entries(rules).map(([k, v]) => `\n  ${k}: ${v.length} [${v.join(', ')}]`).join(''));
     note('R3-CURE unit 2, R5\'s named prose hits (path: count):', J(r5));
     note('R3-CURE unit 2, hits outside the named list:', outside.length, outside.length ? `\n  ${outside.slice(0, 400).join('\n  ')}` : '');
+    // R3-CURE-5: the ruled exemption, POSITIVELY: each exempt string with its containing served name (by containing name: count)
+    const byHolder = {};
+    for (const e of exempted) for (const n of e.holders) byHolder[n] = (byHolder[n] || 0) + 1;
+    note('R3-CURE-5, the exemption (ruling 37 (a)): strings exempt by a containing SERVED name:', exempted.length, J(byHolder));
     expect(rules['withheld (power.entry)']?.length || 0).toBeGreaterThan(0);
     expect(outside).toEqual([]);
   });
@@ -608,7 +691,8 @@ describe('R3: the drawn conditional rows where a house is hidden whole (through 
       for (const [read, d] of [...docsOf(r), ['twin', twin]]) {
         const tag = `hand-forms ${r.kind} dm=${r.dm} ${read}`;
         if (!withheldOf(r.stored, d).includes(TG)) bad.push(`${tag}: the power is not withheld ${J(withheldOf(r.stored, d))}`);
-        const served = [...(d.powerStructure?.factions || []), ...(d.factions || [])].flatMap((f) => [f?.faction, f?.name]).filter((v) => typeof v === 'string');
+        // (R3-CURE-5: once each: on master's shape the Watch is served in both lists, and the containing name is ONE name)
+        const served = [...new Set([...(d.powerStructure?.factions || []), ...(d.factions || [])].flatMap((f) => [f?.faction, f?.name]).filter((v) => typeof v === 'string'))];
         if (!served.includes(TG_WATCH)) bad.push(`${tag}: the Watch not served ${J(served)}`);
         const npc = (id) => (d.npcs || []).find((x) => x?.id === id);
         for (const [id, form] of Object.entries(FORMS)) {
@@ -633,6 +717,40 @@ describe('R3: the drawn conditional rows where a house is hidden whole (through 
     expect(tooth).toBeGreaterThan(0);
     expect(bad).toEqual([]);
   });
+
+  // KEY-LEVEL ON A SERVED HOLDER, NOT CURED HERE (STOPPED to the seat, R3C4-HANDBACK.md): R3-CURE's ruled rules take the KEY,
+  // not its holder: a SHOWN power's `contestsNiche` naming a withheld one, and a served person's affiliation key. To take the
+  // holder whole would withhold a shown power or a served person; that is a ruling, not a cure. Listed by path and count.
+  const KEY_LEVEL = /^(powerStructure\.)?factions\[\]\.contestsNiche$|^npcs\[\]\.(faction|factionAffiliation|affiliation|factionId)$/;
+  it('R3-CURE-4 unit 1, THE HUSK CLASS (the chair, 11:12: "a husk is a tell"): no served object whose pre-sweep counterpart held a withheld power\'s name or id as a STRUCTURED field is served with that field removed or blanked (it leaves whole); every read, both engines, both shapes, gallery, link, import and map, Reveal DM off and on; prose husks are listed by path and count (R5\'s)', () => {
+    const tally = { structured: {}, prose: {} };
+    let compared = 0; let judged = 0;
+    const bad = [];
+    for (const r of reads) {
+      const pub = veil.galleryPayloadFor(clone(r.stored), { shareDm: r.dm, memberOverrides: r.ov });
+      const twin = veil.projectShareVeil(clone(pub), r.ov);
+      for (const [read, d] of [...docsOf(r), ['twin', twin]]) {
+        const w = withheldOf(r.stored, d);
+        if (!w.length) continue;
+        judged += 1;
+        const opens = [...(d.powerStructure?.factions || []), ...(d.factions || [])].filter(isRec).flatMap((f) => [f.faction, f.name]).filter((v) => typeof v === 'string' && v);
+        const h = husksOf(pub, d, w, opens);
+        compared += h.compared;
+        for (const x of h.husks) {
+          const key = `${x.path} [${read === 'twin' ? 'twin' : 'server'}]`;
+          tally[x.kind][key] = (tally[x.kind][key] || 0) + 1;
+          if (x.kind === 'structured' && !KEY_LEVEL.test(x.path)) bad.push(`${r.t.seed} ${r.kind} dm=${r.dm} ${read}: ${x.path}`);
+        }
+      }
+    }
+    const lines = (o) => Object.entries(o).sort().map(([k, v]) => `\n  ${k}: ${v}`).join('');
+    note('R3-CURE-4 unit 1, THE HUSK CLASS: documents judged (a power withheld):', judged, '| objects compared:', compared);
+    note('R3-CURE-4 unit 1, STRUCTURED husks (path [engine]: count):', Object.keys(tally.structured).length ? lines(tally.structured) : 'none');
+    note('R3-CURE-4 unit 1, PROSE husks, R5\'s (path [engine]: count):', Object.keys(tally.prose).length ? lines(tally.prose) : 'none');
+    expect(judged).toBeGreaterThan(0);
+    expect(compared).toBeGreaterThan(0);
+    expect(bad.slice(0, 60)).toEqual([]);
+  }, ARM_TIMEOUT_MS);
 
   it('R3-CURE-2 unit 4 (ii): THE SHARE SUM is compared EXACTLY in both engines: shares whose decimal sum is 100 stay as stored (0.1, 64.1, 35.8), shares whose decimal sum is not are re-derived to 100 (the thirds), every read, the server and the twin alike', () => {
     const bad = [];

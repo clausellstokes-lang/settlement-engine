@@ -89,8 +89,13 @@ const ACCESS_TO = /^access to/i;
 const NPC_AFFILIATION_KEYS = Object.freeze(['faction', 'factionAffiliation', 'affiliation', 'factionId']);
 /** The name keys of a power (`faction`, `name`) that are strings. @param {Rec} f @returns {string[]} */
 const powerNamesOf = (f) => [f.faction, f.name].filter((v) => typeof v === 'string');
-/** Whether a power is withheld by power.entry (VR42: never the governing row). @param {Rec} f */
-const entryOut = (f) => f.isGoverning !== true && (asciiLowerOf(f.category) === 'criminal' || /thie/i.test(str(f.faction !== undefined ? f.faction : f.name)));
+/** Whether a power is withheld by power.entry (VR42: never the governing row): by its seat's mark (category 'criminal'); a
+ * thieves' name (factionDynamics.js's isCrim) only where the power carries NO category string (unsure: withheld). R3-CURE-4
+ * (unit 2; the chair's ruling 37 (a)): a power whose category says what it is (the plant's civic "Old Thieves' Guild Watch",
+ * raised by no house) is not taken by the words of its name; measured on the born pool (out/v25/r3c4/unit2-thie-census.json):
+ * 0 of 1,478 born powers read differently, every born "Thieves' Guild" carries category 'criminal'. @param {Rec} f */
+const entryOut = (f) => f.isGoverning !== true && (asciiLowerOf(f.category) === 'criminal'
+  || (typeof f.category !== 'string' && /thie/i.test(str(f.faction !== undefined ? f.faction : f.name))));
 const BENEATH_THE_WALLS = /smuggling (network|operation)|underground (network|city)/i;
 const GATES_BENEATH = / The ([^.]+) keeps? the gates, but smugglers have ways in beneath the walls\./;
 const VERY_SAFE_BENEATH = ' The guard keeps the gates, but smugglers have ways in beneath the walls.';
@@ -148,8 +153,11 @@ export function applyRosterChoices(s, pub, idOf) {
   // registry: power.relation.direction (VR37 (b): the word goes with its relation)
   if (ps && withheld && Array.isArray(ps.factionRelationships)) {
     const names = new Set(objectsOf(ps.factions).flatMap(f => [f.faction, f.name].filter(v => typeof v === 'string')));
-    ps.factionRelationships = ps.factionRelationships.filter(r => isRec(r) && Array.isArray(r.pair) && r.pair.length > 0
-      && r.pair.every(n => typeof n === 'string' && names.has(n)));
+    const unserved = (/** @type {Rec} */ r) => !Array.isArray(r.pair) || r.pair.length === 0 || !r.pair.every(n => typeof n === 'string' && names.has(n));
+    // (R3-CURE-4, unit 1: A HUSK IS A TELL: a relation whose PRE-SWEEP counterpart in `pub` named an unserved power leaves
+    // whole, though the name sweep took that name out of its pair: heldBy, the containment 212 reads as `@>`)
+    const rels0 = objectsOf(recAt(pub, 'powerStructure')?.factionRelationships).filter(unserved);
+    ps.factionRelationships = ps.factionRelationships.filter(r => isRec(r) && !unserved(r) && !rels0.some(r0 => heldBy(r0, r)));
   }
   if (!whole) return;
 
@@ -293,14 +301,35 @@ function withholdPowerCopies(s, pub, ps) {
   /** @param {unknown} v @returns {boolean} the value names a withheld power: an id by its String(), a name by the fold */
   const named = (v) => (typeof v === 'number' && wIds.has(idText(v))) || (typeof v === 'string' && v !== '' && (wIds.has(v) || (!!search && search.hit(v))));
   const recNames = (/** @type {Rec} */ x) => [x.faction, x.name, x.id].some(named);
-  for (const holder of [ps, s]) {
+  // R3-CURE-4 (unit 1; the chair, 11:12: "a goal naming a withheld power LEAVES WITH IT: the whole goal, every field of it; a
+  // husk is a tell"): each structured copy is judged on what it held BEFORE any pass stripped it. The hidden-house name sweep
+  // (withholdSecondHomes :: sweepHiddenNames, before this pass) takes the withheld power's name out of a goal's sentence and
+  // its target id, a conflict's parties, a tension's factions, a membership's `power`; the copy then names nothing and was
+  // served as a husk. So a served copy also leaves where its counterpart in `pub` (the projection the veil ran on) named a
+  // withheld power: a person's goal by the person's id; any other copy where a naming counterpart in the same place holds it
+  // (heldBy: jsonb containment, 212's `@>`; a remnant is held by what it was cut from)
+  const conflictNames = (/** @type {unknown} */ c) => isRec(c) && Array.isArray(c.parties) && c.parties.some(pn => named(pn) || (isRec(pn) && recNames(pn)));
+  const tensionNames = (/** @type {unknown} */ t) => isRec(t) && Array.isArray(t.factions) && t.factions.some(x => typeof x === 'string' && named(x));
+  const memberNames = (/** @type {unknown} */ m) => isRec(m) && [m.power, m.faction, m.name, m.id].some(named);
+  /** @param {unknown} g */
+  const goalNames = (g) => {
+    if (!isRec(g)) return false;
+    const intent = recAt(g, 'intent') || {};
+    const tid = (/** @type {string} */ k) => (recAt(recAt(intent, k) || {}, 'target') || {}).id;
+    return named(tid('short')) || named(tid('long')) || (!!search && (search.hit(str(g.short)) || search.hit(str(g.long))));
+  };
+  /** @param {unknown} list0 @param {(x: unknown) => boolean} names @param {unknown} e */
+  const husk = (list0, names, e) => isRec(e) && objectsOf(list0).some(z => names(z) && heldBy(z, e));
+  for (const [holder, holder0] of /** @type {Array<[Rec | null, Rec | null]>} */ ([[ps, recAt(pub, 'powerStructure')], [s, pub]])) {
     if (holder && Array.isArray(holder.conflicts)) {
-      holder.conflicts = holder.conflicts.filter(c => !(isRec(c) && Array.isArray(c.parties) && c.parties.some(pn => named(pn) || (isRec(pn) && recNames(pn)))));
+      const c0 = holder0 ? holder0.conflicts : null;
+      holder.conflicts = holder.conflicts.filter(c => !(conflictNames(c) || husk(c0, conflictNames, c)));
     }
   }
   const hist0 = recAt(s, 'history');
   if (hist0 && Array.isArray(hist0.currentTensions)) {
-    hist0.currentTensions = hist0.currentTensions.filter(t => !(isRec(t) && Array.isArray(t.factions) && t.factions.some(x => typeof x === 'string' && named(x))));
+    const t0 = recAt(pub, 'history')?.currentTensions;
+    hist0.currentTensions = hist0.currentTensions.filter(t => !(tensionNames(t) || husk(t0, tensionNames, t)));
   }
   for (const holder of [ps, s]) {
     if (holder && Array.isArray(holder.factions)) {
@@ -312,13 +341,13 @@ function withholdPowerCopies(s, pub, ps) {
       if (!isRec(n)) return n;
       const o = { ...n };
       for (const k of NPC_AFFILIATION_KEYS) if (typeof o[k] === 'string' && named(o[k])) delete o[k];
-      const g = o.goal;
-      if (isRec(g)) {
-        const intent = recAt(g, 'intent') || {};
-        const tid = (/** @type {string} */ k) => (recAt(recAt(intent, k) || {}, 'target') || {}).id;
-        if (named(tid('short')) || named(tid('long')) || (!!search && (search.hit(str(g.short)) || search.hit(str(g.long))))) delete o.goal;
+      // the same person before the sweep (by its id, a string): its goal and its memberships as the projection held them
+      const before = typeof o.id === 'string' ? objectsOf(pub.npcs).filter(q => q.id === o.id) : [];
+      if (isRec(o.goal) && (goalNames(o.goal) || before.some(q => goalNames(q.goal)))) delete o.goal;
+      if (Array.isArray(o.memberships)) {
+        const m0 = before.flatMap(q => objectsOf(q.memberships));
+        o.memberships = o.memberships.filter(m => !(memberNames(m) || husk(m0, memberNames, m)));
       }
-      if (Array.isArray(o.memberships)) o.memberships = o.memberships.filter(m => !(isRec(m) && [m.power, m.faction, m.name, m.id].some(named)));
       return o;
     });
   }
@@ -328,6 +357,15 @@ function withholdPowerCopies(s, pub, ps) {
     s.simulationTrace = kept;
     if (kept.length < nt) renumberTrace(s);
   }
+}
+
+/** R3-CURE-4: jsonb containment as 212 reads it (its containment operator) below the top level: an object holds every key of `b` with a value
+ * that holds `b`'s; an array holds each element of `b` in some element of its own; a scalar is equal (JSON's own values).
+ * @param {unknown} a @param {unknown} b @returns {boolean} */
+function heldBy(a, b) {
+  if (isRec(a) && isRec(b)) return Object.keys(b).every(k => Object.prototype.hasOwnProperty.call(a, k) && heldBy(a[k], b[k]));
+  if (Array.isArray(a) && Array.isArray(b)) return b.every(y => a.some(x => heldBy(x, y)));
+  return !isRec(a) && !Array.isArray(a) && !isRec(b) && !Array.isArray(b) && a === b;
 }
 
 /** An id as a string: a string as itself, a finite number by its String() (212: the JSON number's text). @param {unknown} v @returns {string} */
