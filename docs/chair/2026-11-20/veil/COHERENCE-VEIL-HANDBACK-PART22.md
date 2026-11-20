@@ -20,6 +20,7 @@ VR25's two owed rows, R5's law) governs where PART 21 or a brief differs. The la
 | `supabase/migrations/211_server_side_share_veil.sql` (FROZEN) | `eface6d093933170b9541fe630068c26e5bd41477e95e913ae7168e373be0b01` (proved at the first commit) |
 | `supabase/rollback/211_server_side_share_veil.down.sql` (FROZEN) | `ce8474ffc251b4c4bd6005d5a409d4a15bd20fef6b507534ef6338d3bd49712f` (proved at the first commit) |
 | 212 at the base 408f8e508 | `dae0ae6c344daab243af4136a6932ebd7da8cfceabce6df3d95bddf75e19e247` |
+| 212 after B/C/D (d262df16d) and VR17 (cfd77fdef) | `fec111c205018b3fa970945faa0038f471fea0cea86801dfbb9447dd3d4acea3` |
 
 ## 2. The base and the first act (02:2x to 02:49 UTC)
 
@@ -40,8 +41,27 @@ THE INSTRUMENTS RE-MADE (PART 21 section 6): the cluster; `pg@8.13.1` in `/var/t
 | Item | State |
 |---|---|
 | 1. First act | DONE (section 2) |
-| 2a. Merge "B/C/D e62fabb2e" | in hand |
-| 2b. Merge "VR17 81dd06d7e" | after 2a |
-| 3. R2 to R7, each by a builder | R2's brief written (`briefs/R2-BRIEF.md`); the test-only side brief (`briefs/VR25-OWED-BRIEF.md`) |
+| 2a. Merge "B/C/D e62fabb2e" | DONE: d262df16d (section 4) |
+| 2b. Merge "VR17 81dd06d7e" | DONE: cfd77fdef (section 4) |
+| 3. R2 to R7, each by a builder | R2's builder STARTED (worktree `/home/user/wt/r2`, branch `v21-r2`, brief `briefs/R2-BRIEF.md`); the test-only side builder STARTED beside it (`/home/user/wt/side`, `v21-side`, `briefs/VR25-OWED-BRIEF.md`: the ruined-house import measure, observedShapeReaders by observation, the import keeping the served prosperity band) |
 | 4. V10-2, DOORS, the stored figures | on the chair's word |
 | 5. E, then F and G | not started |
+
+## 4. The merges (item 2)
+
+B/C/D: `git merge --no-ff origin/lane/veil-19-2026-11-20` (e62fabb2e), no conflict: **d262df16d**. 212 reads
+`fec111c2…4acea3` as named. Proved on a scratch merge of the same parents (cc652712d; its tree differs from d262df16d
+only by this seat's eight docs files): the six guard files 6 of 6, **127 of 127**; the acceptance run **EXIT 0, 37 of
+37**, "(all 15 equal)" (`out/v21/bcd-guards-six-at-cc652712d.txt`, `bcd-acceptance-at-cc652712d.txt`). On the lane: the
+twin's tests, the switch, the import 7 files, 129 of 130: the ONE red is `criminalVeilSwitch.test.js` VS1 with its eight
+entries (b) "income 1" and (c), VEIL-V102's, not touched (`bcd-twin-tests.txt`).
+VR17: `git merge --no-ff origin/lane/veil-vr17-2026-11-20` (81dd06d7e): ONE conflict, a register,
+`scripts/mutation-coverage-manifest.json`: both sides' rows stand (this lane's `shareRenderTwice`/`rosterChoiceInversion`
+rows and VR17's `galleryVeilSignalCopies`/`veilCopySites` rows); `galleryVeil.js` merged itself; the merge's own diff is
+VR17's exactly (13 files, +1132 -6): **cfd77fdef**. At cfd77fdef: VR17's two files, the manifest test, the registry walker
+and the ruin-filter walker 5 files, 43 of 44 (`vr17-merged-tests.txt`).
+THE ONE RED, ATTRIBUTED (a stored figure, not touched): `tests/lint/ruinFilterRoster.walker.test.js` "exempt honesty":
+"`src/domain/display/gallerySecondHomes.js`: now routes through the ruin filter — delete its exempt row (the win is
+banked)". RED AT cc652712d already (`ruin-walker-at-cc652712d.txt`): B/C/D's C (`NOT_LIVE` over the houses) made the
+twin compliant; the ratchet asks the row deleted and the pin lowered. Sent to the chair; the door is the stored figures'
+(item 4) unless the chair says otherwise.
