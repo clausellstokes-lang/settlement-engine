@@ -1,0 +1,43 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 11606 after 16 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+  data-lazy-DYg4vhvG.js
+  narrative-mutations-DySCruP0.js
+Findings:
+  src/data/dossierStateProse/defense.generated.js: reached FIRST PAINT via data-lazy-DYg4vhvG.js
+  src/data/dossierStateProse/economy.generated.js: reached FIRST PAINT via data-lazy-DYg4vhvG.js
+  src/data/dossierStateProse/general.generated.js: reached FIRST PAINT via data-lazy-DYg4vhvG.js
+  src/data/dossierStateProse/power.generated.js: reached FIRST PAINT via data-lazy-DYg4vhvG.js
+  src/data/dossierStateProse/stressors.generated.js: reached FIRST PAINT via data-lazy-DYg4vhvG.js
+  src/data/dossierStateProse/warFaith.generated.js: reached FIRST PAINT via data-lazy-DYg4vhvG.js: expected [ …(6) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/data/dossierStateProse/defense.generated.js: reached FIRST PAINT via data-lazy-DYg4vhvG.js",
++   "src/data/dossierStateProse/economy.generated.js: reached FIRST PAINT via data-lazy-DYg4vhvG.js",
++   "src/data/dossierStateProse/general.generated.js: reached FIRST PAINT via data-lazy-DYg4vhvG.js",
++   "src/data/dossierStateProse/power.generated.js: reached FIRST PAINT via data-lazy-DYg4vhvG.js",
++   "src/data/dossierStateProse/stressors.generated.js: reached FIRST PAINT via data-lazy-DYg4vhvG.js",
++   "src/data/dossierStateProse/warFaith.generated.js: reached FIRST PAINT via data-lazy-DYg4vhvG.js",
++ ]
+
+ ❯ tests/build/vendorPdfLazy.test.js:2022:7
+    2020|       `a prose leaf reached no data-lazy chunk in a FRESH build. Closu…
+    2021|       + `Findings:\n  ${findings.join('\n  ')}`,
+    2022|     ).toEqual([]);
+       |       ^
+    2023|   });
+    2024|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/8]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  8 failed | 58 passed (66)
+   Start at  20:04:32
+   Duration  7.12s (transform 150ms, setup 82ms, import 1.34s, tests 6.26s, environment 0ms)
+
+[gate-tail] end:  20:04:39 up 36 min,  0 user,  load average: 1.35, 1.22, 1.37
+[gate-tail] full log: /tmp/gate-tail.13931.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

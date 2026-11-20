@@ -36,6 +36,7 @@ import { stressEffectsShown } from '../../domain/display/impairedListShown.js';
 import { rowMarkText } from '../../domain/display/crisisStoppedRow.js';
 import { summarizeMagic, deriveMagicProfile } from '../../domain/magicProfile.js';
 import { humanize } from './format.js';
+import { tensionSidesShown } from '../../domain/display/tensionShown.js'; // PAGE-9 SIDES: a tension's sides through the one reader
 import { buildPdfLiveWorld } from './liveWorld.js';
 import { directionalRelationshipLabel } from '../../domain/relationships/canonicalRelationship.js';
 import { cardTieLines } from '../../domain/relationships/cardTies.js';
@@ -350,7 +351,7 @@ function overviewSlice(active, ai, useAi) {
     type: t?.type,
     severity: normSeverity(t?.severity),
     description: t?.description,
-    parties: t?.factions || t?.parties || [],
+    parties: tensionSidesShown(active, t),
     hooks: cleanHooks(t?.plotHooks),
   }));
   const conflicts = (s?.conflicts || []).map(c => ({
@@ -513,7 +514,7 @@ function powerSlice(active) {
     label: t?.label || t?.type,
     severity: normSeverity(t?.severity),
     description: t?.description,
-    parties: t?.factions || t?.parties || [],
+    parties: tensionSidesShown(active, t),
     hooks: cleanHooks(t?.plotHooks),
   }));
 
@@ -707,7 +708,7 @@ function historySlice(active) {
       label: t?.label || t?.type,
       severity: t?.severity,
       description: t?.description,
-      parties: t?.factions || t?.parties || [],
+      parties: tensionSidesShown(active, t),
       hooks: t?.plotHooks || [],
     })),
     timeline: h?.eventsTimeline || [],

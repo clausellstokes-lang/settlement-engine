@@ -1,0 +1,42 @@
+
+ ❯ tests/domain/display/tensionShown.test.js (19 tests | 1 failed) 265ms
+     × every `.factions` read in the lane's files is a roster read pinned by file, or the reader's own 253ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/domain/display/tensionShown.test.js > THE GUARD: a tension's side is printed only through tensionShown.js > every `.factions` read in the lane's files is a roster read pinned by file, or the reader's own
+AssertionError: a tension's sides read outside the reader: expected [ …(7) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/components/new/tabs/HistoryTab.jsx:100 t.factions",
++   "src/components/new/tabs/HistoryTab.jsx:101 t.factions",
++   "src/components/new/tabs/OverviewTab.jsx:500 t.factions",
++   "src/components/new/tabs/OverviewTab.jsx:501 t.factions",
++   "src/pdf/lib/viewModel.js:353 t.factions",
++   "src/pdf/lib/viewModel.js:516 t.factions",
++   "src/pdf/lib/viewModel.js:710 t.factions",
++ ]
+
+ ❯ tests/domain/display/tensionShown.test.js:214:66
+    212|       });
+    213|     }
+    214|     expect(strays, 'a tension\'s sides read outside the reader').toEqu…
+       |                                                                  ^
+    215|     expect(readerReads).toBeGreaterThan(0);
+    216|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 18 passed (19)
+   Start at  20:06:41
+   Duration  1.40s (transform 744ms, setup 48ms, import 985ms, tests 265ms, environment 0ms)
+
+[gate-tail] end:  20:06:42 up 38 min,  0 user,  load average: 1.70, 1.36, 1.40
+[gate-tail] full log: /tmp/gate-tail.14268.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

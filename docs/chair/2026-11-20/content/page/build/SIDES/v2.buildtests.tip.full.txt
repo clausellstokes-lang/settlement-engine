@@ -1,0 +1,100 @@
+[gate-tail] start:  22:03:06 up  2:34,  0 user,  load average: 4.08, 4.46, 4.82 · cores: 4
+
+ RUN  v4.1.8 /home/user/settlement-engine/.claude/worktrees/agent-a0626ed37dea5cdc4
+
+ ❯ tests/build/generationWorkerLazy.test.js (11 tests | 1 failed) 160ms
+     × the generation worker bundle stays under its measured ceiling (monotone-down; WORKER_BUNDLE_CEILING_BYTES) 14ms
+ ❯ tests/build/vendorPdfLazy.test.js (55 tests | 4 failed) 2830ms
+     × the engine chunk still exists (lazy) and remains large 33ms
+     × entry static closure raw bytes stay under the first-paint budget (1175492) 4ms
+     × entry static closure gzip bytes stay under 373999 1613ms
+     × entry static closure Brotli bytes stay under 313994 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/build/generationWorkerLazy.test.js > generation worker — production boundary > the generation worker bundle stays under its measured ceiling (monotone-down; WORKER_BUNDLE_CEILING_BYTES)
+AssertionError: generation worker bundle generation.worker-G1RimfGO.js is 2589546 B; the ceiling is 2579708 B (re-recorded at the measured figure by the chair's ruling B3, 2026-11-15, the close of the round BAR3, as at the close of BAR2; before it WB1, ODQ §934.105). A RISE IS NEVER A LANE'S EDIT: buy the bytes back, or take the ruling.: expected 2589546 to be less than or equal to 2579708
+ ❯ tests/build/generationWorkerLazy.test.js:847:7
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > the engine chunk still exists (lazy) and remains large
+AssertionError: expected 911293 to be less than 909928
+ ❯ tests/build/vendorPdfLazy.test.js:1128:18
+    1126|     // follow-ups (68) +74; FAULTS-BIRTH (63) +72; FR25 (67) +64; J-IN…
+    1127|     // FAULTS-TOOLS, FAULTS-DESKS and point 71 +0.
+    1128|     expect(size).toBeLessThan(909_928);
+       |                  ^
+    1129|   });
+    1130|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > entry static closure raw bytes stay under the first-paint budget (1175492)
+AssertionError: first-paint static closure = 1178011 bytes (budget 1175492):
+       5362  content-identity-BiMB_uYV.js
+     156695  data-BkSMGMGf.js
+     308473  engine-core-BAa8Qgi6.js
+     488958  index-CUS19fMs.js
+       4722  kernel-BI0fDpJx.js
+       3579  vendor-icons-aOW4IQH8.js
+     193176  vendor-react-DsScxBXT.js
+      17046  vendor-state-DXnjcO3h.js: expected 1178011 to be less than or equal to 1175492
+ ❯ tests/build/vendorPdfLazy.test.js:1330:7
+    1328|       total,
+    1329|       `first-paint static closure = ${total} bytes (budget ${CLOSURE_B…
+    1330|     ).toBeLessThanOrEqual(CLOSURE_BUDGET_BYTES);
+       |       ^
+    1331|   });
+    1332|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > entry static closure gzip bytes stay under 373999
+AssertionError: first-paint gzip transfer = 374769 B (budget 373999):
+  gzip    2610  br    2244  content-identity-BiMB_uYV.js
+  gzip   46206  br   37970  data-BkSMGMGf.js
+  gzip   99153  br   83508  engine-core-BAa8Qgi6.js
+  gzip  155267  br  128849  index-CUS19fMs.js
+  gzip    2501  br    2263  kernel-BI0fDpJx.js
+  gzip    1472  br    1319  vendor-icons-aOW4IQH8.js
+  gzip   60454  br   52076  vendor-react-DsScxBXT.js
+  gzip    7106  br    6420  vendor-state-DXnjcO3h.js: expected 374769 to be less than or equal to 373999
+ ❯ tests/build/vendorPdfLazy.test.js:1340:9
+    1338|         gzipTotal,
+    1339|         `first-paint gzip transfer = ${gzipTotal} B (budget ${CLOSURE_…
+    1340|       ).toBeLessThanOrEqual(CLOSURE_GZIP_BUDGET_BYTES);
+       |         ^
+    1341|     },
+    1342|   );
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > entry static closure Brotli bytes stay under 313994
+AssertionError: first-paint Brotli transfer = 314649 B (budget 313994):
+  gzip    2610  br    2244  content-identity-BiMB_uYV.js
+  gzip   46206  br   37970  data-BkSMGMGf.js
+  gzip   99153  br   83508  engine-core-BAa8Qgi6.js
+  gzip  155267  br  128849  index-CUS19fMs.js
+  gzip    2501  br    2263  kernel-BI0fDpJx.js
+  gzip    1472  br    1319  vendor-icons-aOW4IQH8.js
+  gzip   60454  br   52076  vendor-react-DsScxBXT.js
+  gzip    7106  br    6420  vendor-state-DXnjcO3h.js: expected 314649 to be less than or equal to 313994
+ ❯ tests/build/vendorPdfLazy.test.js:1351:9
+    1349|         brotliTotal,
+    1350|         `first-paint Brotli transfer = ${brotliTotal} B (budget ${CLOS…
+    1351|       ).toBeLessThanOrEqual(CLOSURE_BROTLI_BUDGET_BYTES);
+       |         ^
+    1352|     },
+    1353|   );
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  5 failed | 61 passed (66)
+   Start at  22:03:06
+   Duration  3.78s (transform 203ms, setup 107ms, import 1.19s, tests 2.99s, environment 0ms)
+
+[gate-tail] end:  22:03:10 up  2:34,  0 user,  load average: 3.91, 4.42, 4.80

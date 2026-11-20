@@ -1,0 +1,1 @@
+[wiring-census] verified 861 pools / 3054 variants / 169 relation rows against 7 stamped files

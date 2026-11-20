@@ -1,0 +1,3 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 17071 after 8 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+page-census: rendering 12 dossiers (4 workers) into /tmp/claude-0/-home-user-settlement-engine/8643c655-49a3-5735-8945-4144a8cd33a1/scratchpad/pc-grid2
+page-census --grid: 0 fall(s)

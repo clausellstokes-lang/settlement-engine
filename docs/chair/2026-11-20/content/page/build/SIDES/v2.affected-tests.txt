@@ -1,0 +1,43 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 20407 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
++   "metropolis|mediterranean|forest|isolated|civilized|golden-master-v3",
++   "metropolis|mediterranean|riverside|river|civilized|golden-master-v3",
++   "metropolis|mediterranean|coastal|port|civilized|golden-master-v3",
++   "metropolis|mediterranean|mountain|road|civilized|golden-master-v3",
++   "metropolis|mediterranean|desert|road|civilized|golden-master-v3",
++   "town|germanic|plains|river|civilized|golden-master-v3",
++   "town|germanic|plains|port|civilized|golden-master-v3",
++   "town|germanic|plains|crossroads|civilized|golden-master-v3",
++   "town|germanic|plains|isolated|civilized|golden-master-v3",
++   "town|germanic|plains|mountain_pass|civilized|golden-master-v3",
++   "town|germanic|plains|none|civilized|golden-master-v3",
++   "town|germanic|mountain|mountain_pass|civilized|golden-master-v3",
++   "town|germanic|plains|road|safe|golden-master-v3",
++   "town|germanic|plains|road|frontier|golden-master-v3",
++   "town|germanic|plains|road|plagued|golden-master-v3",
++   "town|germanic|auto|random_trade|civilized|golden-master-v3",
++   "town|germanic|mountain|random_trade|civilized|golden-master-v3",
++   "town|germanic|auto|random_trade|civilized|gm-seed-a",
++   "town|germanic|mountain|random_trade|civilized|gm-seed-a",
++   "town|germanic|auto|random_trade|civilized|gm-seed-b",
++   "town|germanic|mountain|random_trade|civilized|gm-seed-b",
++   "town|germanic|auto|random_trade|civilized|gm-seed-c",
++   "town|germanic|mountain|random_trade|civilized|gm-seed-c",
++   "town|germanic|plains|road|civilized|gm-seed-a",
++   "town|germanic|plains|road|civilized|gm-seed-b",
++   "town|germanic|plains|road|civilized|gm-seed-c",
++ ]
+
+ ❯ tests/property/generatorGoldenMaster.test.js:1438:19
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 194 passed (195)
+      Tests  1 failed | 3039 passed (3040)
+   Start at  21:48:10
+   Duration  776.72s (transform 32.51s, setup 4.52s, import 257.38s, tests 1984.95s, environment 40.10s)
+
+[gate-tail] end:  22:01:07 up  2:32,  0 user,  load average: 4.28, 4.84, 4.98
+[gate-tail] full log: /tmp/gate-tail.20758.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

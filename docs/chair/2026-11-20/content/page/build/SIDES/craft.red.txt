@@ -1,0 +1,42 @@
+ ❯ tests/domain/display/tensionShown.test.js:99:76
+     97|     // the precondition the economy mark would have named: exactly one…
+     98|     expect(solePowerNameOf(doc, 'economy', true)).toBeTruthy();
+     99|     for (const { t, s, i } of crafts) expect(tensionSidesShown(doc, t)…
+       |                                                                            ^
+    100|   }, 120000);
+    101|   it('a made-up roster whose one economy power is a craft guild: still…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/domain/display/tensionShown.test.js > tensionSidesShown: THE CRAFT RULING (a craft side is never named by the economy mark) > a made-up roster whose one economy power is a craft guild: still the row's own words
+AssertionError: expected [ 'The Craft Guilds', …(2) ] to deeply equal [ 'Guild members', …(2) ]
+
+- Expected
++ Received
+
+  [
+-   "Guild members",
++   "The Craft Guilds",
+    "Those who would trade outside the guild",
+    "Non-guild workers",
+  ]
+
+ ❯ tests/domain/display/tensionShown.test.js:105:39
+    103|     const t = { type: 'guild_conflict', factions: ['Guild members', 'T…
+    104|     expect(solePowerNameOf(rec, 'economy', true)).toBeTruthy();
+    105|     expect(tensionSidesShown(rec, t)).toEqual(t.factions);
+       |                                       ^
+    106|   });
+    107| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 19 passed (23)
+   Start at  20:34:13
+   Duration  4.41s (transform 2.31s, setup 49ms, import 907ms, tests 3.35s, environment 0ms)
+
+[gate-tail] end:  20:34:17 up  1:06,  0 user,  load average: 5.98, 5.16, 4.08
+[gate-tail] full log: /tmp/gate-tail.27599.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

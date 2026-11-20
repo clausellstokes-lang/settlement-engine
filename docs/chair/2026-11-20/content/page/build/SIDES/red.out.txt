@@ -1,0 +1,29 @@
+[gate-tail] start:  20:05:30 up 37 min,  0 user,  load average: 1.31, 1.24, 1.37 · cores: 4
+
+ RUN  v4.1.8 /home/user/settlement-engine/.claude/worktrees/agent-a0626ed37dea5cdc4
+
+ ❯ tests/domain/display/tensionShown.test.js (0 test)
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/domain/display/tensionShown.test.js [ tests/domain/display/tensionShown.test.js ]
+Error: Cannot find module '../../../src/domain/display/tensionShown.js' imported from /home/user/settlement-engine/.claude/worktrees/agent-a0626ed37dea5cdc4/tests/domain/display/tensionShown.test.js
+ ❯ tests/domain/display/tensionShown.test.js:21:1
+     19| import { atomHolds } from '../../../src/domain/facts/factVocabulary.js…
+     20| import { toPublicSafe } from '../../../src/domain/display/publicSafe.j…
+     21| import { tensionSidesShown } from '../../../src/domain/display/tension…
+       | ^
+     22|
+     23| const M = TENSION_SIDE_MEANINGS;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  no tests
+   Start at  20:05:31
+   Duration  975ms (transform 628ms, setup 47ms, import 0ms, tests 0ms, environment 0ms)
+
+[gate-tail] end:  20:05:32 up 37 min,  0 user,  load average: 1.31, 1.24, 1.37
+[gate-tail] full log: /tmp/gate-tail.14148.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
