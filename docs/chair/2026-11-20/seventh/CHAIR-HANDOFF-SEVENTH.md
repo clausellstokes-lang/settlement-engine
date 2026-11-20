@@ -3256,3 +3256,24 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   `prompts/PAGE-2.txt` WRITTEN for the content half, seated after this push from the working line; GOALS-1 told to
   build the refusal after all (the owner overrules the chair's bar of 1 in 200); FRAME-5 given CF12. THE PRICE
   SAID TO THE OWNER: time, though the share veil and the who-rules train are still the longest jobs.
+- 11:20 UTC · PAGE-2 SEATED (session_019yED1P9yBtSHbbyFk3pH93; from the working line 0c906948; outcome
+  `lane/page-2-2026-11-20`; first message within 40 minutes: its measure for the tensions and the secrets, the
+  readers of `influence`, the lines it expects to author). SEATS WORKING NOW: VEIL-25, REVIEW-VEIL-12 (waiting),
+  SEAT-3, FRAME-5, TRAD-3, FORTUNE-1 with FORTUNE-2 beside it, NAMES-4, GOALS-1, PAGE-1, PAGE-2; relaying only:
+  VEIL-24, SEAT-2, FRAME-4, TRAD-2, FRAME-3.
+- 11:22 UTC · FIVE MESSAGES READ AT 11:20. FRAME-5 TOOK THE LANE at 9e23a094d (its count script reproduces 58 by size) AND ITS OWN
+  PERMISSION CHECK REFUSED THE LINE'S MERGE: THE CHAIR MADE IT in a scratch worktree (`/home/user/wt/framebase`) and
+  pushed the base branch `lane/frame-5-base-2026-11-20` at d6b847879 (parents 9e23a094d and 0c9069489; `--no-ff`,
+  hooks on; ONE conflict, the lighting census baseline: the line's side taken; the mutation manifest merged with no
+  conflict and parses); THE CHAIR RE-PINNED NOTHING: ruling 12 is amended for this merge only: the re-pins are
+  FRAME-5's next commit, each by its proof. CF12: 6 calm towns hold both facts (town 2, city 3, metropolis 1); one
+  (frame-calm-city-14) is already framed by that crime wave and keeps its sheet unless a side the record holds is
+  missing. VEIL-25 took the lane at 214c36dde (165,199 by its record), read both of R3's diffs line by line (they
+  hold as built; a renamed criminal house loses its label: toward withholding; the born arm ran on 14 seeds, not
+  92), explained pin 1 (a share set that does not sum to 100 is normalized on every read), launched R3-CURE-4
+  (`v25-r3c4`), and found the Curate screen is its lane's (`CurateMode.jsx :: CriminalSwitch`): THE NOTICE RUNS NOW
+  beside R3-CURE-4; its sentence comes to the chair first. TRAD-3 on (B): no betrayal of hiding; one observable (a
+  served row's genesis id leaves a gap): CLOSED IF CHEAP (the drawn rows numbered by their place in the drawn set,
+  if nothing else served refers to a rite by its genesis id). A FAULT OF THE CHAIR'S, RULE 29, AGAIN: its messages
+  to TRAD-3 and VEIL-25 were stamped 11:24 while the clock read about 11:21: guessed. The stamp is read from the
+  clock in the command before the message, every time.
