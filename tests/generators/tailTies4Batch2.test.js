@@ -44,7 +44,9 @@ const NOT = [
   ['r2r-city-45', 'needs a prisoner released', 'Garrison', 'needs a blind eye,'],
   ['r2r-city-17', 'commands the patrols and', "Veteran's lodge", "people go, and"],
   ['r2r-city-17', 'awkward questions about how few arrests are made', 'Mercenary quarter', "people never meet any trouble"],
-  ['r2r-town-26', 'arrest records against the coin', "Warden's Lodge", 'against what'],
+  // GOALS-4 builder 11 (2026-11-20, the chair's approved wording (C) of 21:30 UTC, re-keyed by cause): the reworded line was
+  // worded again, its second mention no longer a pronoun ("against what him is known to earn"); was 'against what'
+  ['r2r-town-26', 'arrest records against the coin', "Warden's Lodge", "against the household's known earnings"],
   ['r2r-city-1', 'is fought in raids, informants, and paperwork', 'Mercenary quarter', 'is fought with informants, threats and favours called in'],
   ['r2r-city-39', "command reports to", 'Garrison', "Someone among"],
   ['r2r-metropolis-12', 'operation street by street', 'Citadel', "operation out street by street"],
