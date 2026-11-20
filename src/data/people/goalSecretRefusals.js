@@ -5,8 +5,11 @@
  *
  * A card whose own secret says it TAKES money or goods by betraying its OWN office or trade does not want to "keep faith with
  * what they hold true" or to do its duty well: a want of a refused cluster (`GOAL_SECRET_REFUSED_CLUSTERS`) is refused for a
- * card whose secret is one of `GOAL_SECRET_REFUSAL_ROWS`. Read by `generators/people/goals.js` (`familyCandidates`' PERSONALITY
- * branch and `personalityFloor`), draw-free: the refused lines stay in the draw, marked refused.
+ * card whose secret is one of `GOAL_SECRET_REFUSAL_ROWS`. Read by `generators/people/goals.js :: refuseWantsBesideSecrets` (GOALS-2,
+ * the chair's rulings of 12:05 and 12:37 UTC), ONE draw-free POST-PASS after the deal and the rare deal, by each card's FINAL
+ * secret (the deal reads no row of this list, so no other card's draw moves): such a card, or one whose final secret is a rare
+ * row of `GOAL_SECRET_REFUSAL_RARE_KEYS`, takes the next admitted candidate no card of the town holds (else its floor's next
+ * cluster, `personalityFloor`).
  *
  * THE ROWS are the CLOSED LIST `docs/chair/2026-11-20/content/goals/measures/venal-betrayal-rows.closed-list.txt` (119 rows,
  * read by GOALS-1 one by one), keyed as the list keys them: `criminal.<holder>.<type>[i]` (`npcData.js ::
