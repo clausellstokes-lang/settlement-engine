@@ -2,8 +2,16 @@
 
 Read `briefs/BUILDER-RULES.md` first (its rules bind you; "PAGE-2" there means PAGE-6), then `briefs/L2.md` (the unit),
 then the WIP commit 609c52c5d's message (origin `lane/page-2-2026-11-20-l2-wip`). The 76 lines are WRITTEN and the chair has
-read them (`lines/L2-LINES-TO-CHAIR.md`); you do not author lines. If PAGE-6's dispatch message carries rewrites from the
-chair, apply exactly those, by index, and nothing else.
+read them (`lines/L2-LINES-TO-CHAIR.md`, 14:17 UTC): 73 approved as written, THREE CHANGES, which you apply exactly, by
+index, and nothing else (in the code, in your `L2-LINES.md`, and in any test that names them):
+- `ARRIVAL_SCENES.river` NEW [6] becomes: "Trees lean over the water on the way into {name}, and the first houses stand just
+  above the line where the bank turns to mud." (a species presumed a climate)
+- `ARRIVAL_SCENES.smoke` NEW [4] becomes: "Smoke on the skyline is all you see of {name} for the last hour of the road, and
+  then the roofs are suddenly there." (it presumed woodland)
+- `ARRIVAL_PEOPLE.norse` NEW [5] (the winter stores counted aloud) gains `excludes: ['crisis: hunger']`, written as its
+  siblings write it.
+You author no other line. Re-measure after the changes (the brief's three-forge share on the 300; fields other than
+`arrivalScene` moved: must be 0) and quote both.
 
 **YOUR TREE.** A worktree on a new branch `page6/l2` cut from THE LANE COMMIT named in your dispatch message. Then
 `git cherry-pick -x 609c52c5d` (its two data files are byte-identical at the lane commit to its own base; stop on any conflict).

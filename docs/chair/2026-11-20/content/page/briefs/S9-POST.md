@@ -2,7 +2,11 @@
 
 Read `briefs/BUILDER-RULES.md` (its rules bind you; "PAGE-2" there means PAGE-6), `briefs/S-v2.md` § S9 and § S3 (the design
 before the chair's re-cut), then THIS, which governs where they differ. Your tree: a worktree on a new branch `page6/s9` cut from
-the LANE COMMIT in your dispatch message (it holds L4 merged). Two commits: S9, then the guard.
+the LANE COMMIT in your dispatch message. THE CHAIR'S ORDER (14:17): S9 BEFORE L4. L4 (office rows settled after the draw,
+`src/data/people/officeSecrets.js`) is NOT on your base and lands after you; it will add, for each title, a row a principled
+holder can carry (a rule broken for mercy or conscience, never for gain). So write the pass POOL-GENERIC: it walks the pool the
+card's secret was taken from, with an `admits(row, card)` that L4 can extend by registering its office rows as one more pool
+(say in your hand-back exactly how L4 registers it). Two commits: S9, then the guard.
 
 ## Commit 1: S9 AS A POST-PASS (the chair's ruling of 13:50)
 THE REFUSED FIRST CUT (f2957d5be, origin `lane/page-2-2026-11-20-s-wip`): a walk INSIDE `generateFactionLeaderSecret` moved 40
@@ -25,7 +29,8 @@ justice, watch, and the rest: the share whose secret is another calling's wrong)
 (must be misfits only, and the fields that moved on them), OTHER cards moved (must be 0; any other: STOP), misfits left with no
 admitted line. RED FIRST: a test that a misfit card (computed, not quoted) holds an admitted line, red on the lane commit.
 
-## Commit 2: THE GUARD
+## Commit 2: THE GUARD (NOT NOW: built after L4 merges, on PAGE-6's word, from the lane commit then named; until L4 lands the
+dean, bishop, priest and abbots have no rows of their own and the guard would be red by design)
 A census with a test (its basename may carry "census": it IS a guard; add its mutation manifest row, a sibling's form): every
 title a card can carry (enumerate from `people/poolMap.js :: POOL_BY_TITLE` and whatever else assigns a title) has rows of its own
 (`TITLE_SECRETS` or `OFFICE_SECRETS`) or a class pool that admits it; and the role-free pool holds NO line that names a duty
