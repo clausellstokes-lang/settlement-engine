@@ -24,12 +24,12 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "8e253494530614efbdd32bcbcb4ec337792c348a",
-  "measuredBy": "DAILY-1",
+  "measuredAtSha": "b4083d31fcd0a690944f635567fc88b6fe0d216b",
+  "measuredBy": "DAILY-2",
   "date": "2026-11-20",
-  "note": "daily-1 B1 C1: tests/domain/dailyLifeNoPeople.test.js (the dead npc call parity arm)",
-  "files": 3708,
-  "parked": 473,
+  "note": "daily-2 B1b C2: tests/domain/dailyLifeAtoms.test.js (the 13 granted kinds, the granted atoms, the hideable-and-crime arm)",
+  "files": 3709,
+  "parked": 474,
   "credited": 3235,
   "titles": 31234,
   "suiteTitles": 8650
