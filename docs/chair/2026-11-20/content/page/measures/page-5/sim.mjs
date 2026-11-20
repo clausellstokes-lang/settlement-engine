@@ -13,79 +13,94 @@ const pw = (t, c) => (t.powerStructure?.factions || []).filter((f) => f.category
 const gov = (t) => (t.powerStructure?.factions || []).find((f) => f.isGoverning);
 const past = (t, k) => (t.history?.historicalEvents || []).some((e) => (e.templateType || e.type) === k);
 const stress = (t, k) => { const s = t.stress; const arr = Array.isArray(s) ? s : s ? [s] : []; return arr.some((x) => (x?.type || x) === k); };
+// [cause, rank (1: the trouble's own engine, this town's present or own past; 2: a standing feature), predicate]
 const T = {
   crime_wave: [
-    ['thieves_guild', (t) => pw(t, 'criminal').length > 0 || inst(t, /thieves'? guild/i)],
-    ['law_thin', (t, f) => ['critical', 'collapsed'].includes(f.lawBand)],
-    ['rival_rings', (t, f) => !!f.rivalRings],
-    ['contraband_water', (t, f) => inst(t, /smuggl/i) && !!f.water?.navigable],
-    ['underground', (t) => inst(t, /underground/i)],
-    ['assassins', (t) => inst(t, /assassin|contract killer/i)],
-    ['black_market', (t) => inst(t, /black market/i)],
-    ['whisper_market', (t) => inst(t, /whisper market/i)],
-    ['outlaws_near', (t) => inst(t, /fence|outlaw|bandit/i)],
+    ['criminal_power', 1, (t) => pw(t, 'criminal').length > 0],
+    ['law_thin', 1, (t, f) => ['critical', 'collapsed'].includes(f.lawBand)],
+    ['rival_rings', 1, (t, f) => !!f.rivalRings],
+    ['no_force', 1, (t, f) => !f.orderForce?.kept],
+    ['force_unpaid_or_cut', 1, (t, f) => !!f.orderForce?.kept && (!!f.orderForce?.volunteers || !!f.orderForce?.payCut || ['short', 'unpaid'].includes(f.orderForce?.pay))],
+    ['old_crime_wave', 1, (t) => past(t, 'crime_wave')],
+    ['thieves_house', 2, (t) => inst(t, /thieves'? guild/i)],
+    ['contraband_water', 2, (t, f) => inst(t, /smuggl/i) && !!f.water?.navigable],
+    ['underground', 2, (t) => inst(t, /underground/i)],
+    ['assassins', 2, (t) => inst(t, /assassin|contract killer/i)],
+    ['black_market', 2, (t) => inst(t, /black market/i)],
+    ['whisper_market', 2, (t) => inst(t, /whisper market/i)],
+    ['outlaws_near', 2, (t) => inst(t, /fence|outlaw|bandit/i)],
   ],
   guild_conflict: [
-    ['old_guild_war', (t) => past(t, 'guild_conflict')],
-    ['guilds_rule', (t) => gov(t)?.category === 'economy'],
-    ['caravans', (t) => inst(t, /caravan/i)],
-    ['ships', (t) => inst(t, /docks|port facilities|harbou?r/i)],
-    ['crossroads', (t, f) => f.route === 'crossroads'],
-    ['craft_vs_merchant', (t) => (t.powerStructure?.factions || []).some((x) => /craft/i.test(x.faction)) && (t.powerStructure?.factions || []).some((x) => /merchant/i.test(x.faction))],
-    ['fair', (t) => inst(t, /annual fair/i) && !inst(t, /major annual fairs/i)],
+    ['old_guild_war', 1, (t) => past(t, 'guild_conflict')],
+    ['guilds_rule', 1, (t) => gov(t)?.category === 'economy'],
+    ['rival_power', 1, (t, f) => !!f.rivalPower],
+    ['caravans', 2, (t) => inst(t, /caravan/i)],
+    ['ships', 2, (t) => inst(t, /docks|port facilities|harbou?r/i)],
+    ['crossroads', 2, (t, f) => f.route === 'crossroads'],
+    ['fair', 2, (t) => inst(t, /annual fair/i)],
+    ['trade_center', 2, (t) => inst(t, /international trade center|auction house|money changers/i)],
+    ['luxury_quarter', 2, (t) => inst(t, /luxury goods quarter/i)],
   ],
   resource_scarcity: [
-    ['famine', (t, f) => !!f.famine?.famine],
-    ['sickness', (t) => stress(t, 'plague_onset')],
-    ['war_levy', (t, f) => f.warState === 'at war' || f.warState === 'front'],
-    ['isolated', (t, f) => f.route === 'isolated'],
-    ['source_spent', (t, f) => !!f.leadingSourceSpent || !!f.failedSource],
+    ['famine', 1, (t, f) => !!f.famine?.famine],
+    ['sickness', 1, (t) => stress(t, 'plague_onset')],
+    ['war_levy', 1, (t, f) => f.warState === 'at war' || f.warState === 'front'],
+    ['source_spent', 1, (t, f) => !!f.leadingSourceSpent || !!f.failedSource],
+    ['old_scarcity', 1, (t) => past(t, 'resource_scarcity')],
+    ['isolated', 2, (t, f) => f.route === 'isolated'],
   ],
   external_threat: [
-    ['war', (t, f) => f.warState === 'at war' || f.warState === 'front' || stress(t, 'wartime')],
-    ['beasts_pressing', (t) => stress(t, 'monster_pressure')],
-    ['militia_only', (t, f) => !!f.defence?.militia && !f.defence?.garrison],
-    ['open_road', (t, f) => f.route === 'crossroads'],
-    ['beasts_frontier', (t, f) => !!f.monsterFrontier],
+    ['war', 1, (t, f) => f.warState === 'at war' || f.warState === 'front' || stress(t, 'wartime')],
+    ['beasts_pressing', 1, (t) => stress(t, 'monster_pressure')],
+    ['old_threat', 1, (t) => past(t, 'external_threat')],
+    ['militia_only', 2, (t, f) => !!f.defence?.militia && !f.defence?.garrison],
+    ['open_road', 2, (t, f) => f.route === 'crossroads'],
+    ['beasts_frontier', 2, (t, f) => !!f.monsterFrontier],
   ],
   succession_crisis: [
-    ['void', (t) => stress(t, 'succession_void')],
-    ['heir_house', (t, f) => f.rulerKind === 'lord'],
-    ['outranked', (t, f) => !!f.seatOutranked],
-    ['rival_power', (t, f) => !!f.rivalPower],
-    ['contested', (t) => /Contested/.test(t.powerStructure?.publicLegitimacy?.label || '')],
+    ['void', 1, (t) => stress(t, 'succession_void')],
+    ['heir_house', 1, (t, f) => f.rulerKind === 'lord'],
+    ['outranked', 1, (t, f) => !!f.seatOutranked],
+    ['rival_power', 1, (t, f) => !!f.rivalPower],
+    ['contested', 1, (t) => /Contested/.test(t.powerStructure?.publicLegitimacy?.label || '')],
+    ['old_succession', 1, (t) => past(t, 'succession_crisis')],
   ],
   outside_debt: [
-    ['creditors_sit', (t) => stress(t, 'indebted')],
-    ['old_crash', (t) => past(t, 'market_crash') || past(t, 'trade_collapse')],
-    ['hard_up', (t, f) => ['Struggling', 'Poor'].includes(t.economicState?.prosperity)],
-    ['merchants_rule', (t) => gov(t)?.category === 'economy'],
-    ['through_trade', (t) => !!t.economicState?.isEntrepot],
+    ['creditors_sit', 1, (t) => stress(t, 'indebted')],
+    ['old_crash', 1, (t) => past(t, 'market_crash') || past(t, 'trade_collapse')],
+    ['hard_up', 1, (t) => ['Struggling', 'Poor'].includes(t.economicState?.prosperity)],
+    ['merchants_rule', 1, (t) => gov(t)?.category === 'economy'],
+    ['old_debt', 1, (t) => past(t, 'outside_debt')],
+    ['through_trade', 2, (t) => !!t.economicState?.isEntrepot],
   ],
   great_flood: [
-    ['old_flood', (t) => past(t, 'great_flood')],
-    ['coast', (t, f) => !!f.water?.coast],
-    ['river', (t, f) => !!f.water?.river],
+    ['old_flood', 1, (t) => past(t, 'great_flood')],
+    ['coast', 2, (t, f) => !!f.water?.coast],
+    ['river', 2, (t, f) => !!f.water?.river],
   ],
   legitimacy_crisis: [
-    ['insurgency', (t) => stress(t, 'insurgency')],
-    ['creed', (t) => stress(t, 'religious_conversion')],
-    ['crisis_band', (t, f) => !!f.legitimacyCrisis],
-    ['outranked', (t, f) => !!f.seatOutranked],
-    ['lord', (t, f) => f.rulerKind === 'lord'],
-    ['rival_power', (t, f) => !!f.rivalPower],
+    ['insurgency', 1, (t) => stress(t, 'insurgency')],
+    ['creed', 1, (t) => stress(t, 'religious_conversion')],
+    ['crisis_band', 1, (t, f) => !!f.legitimacyCrisis],
+    ['outranked', 1, (t, f) => !!f.seatOutranked],
+    ['lord', 1, (t, f) => f.rulerKind === 'lord'],
+    ['rival_power', 1, (t, f) => !!f.rivalPower],
   ],
 };
+const PLAIN = { great_flood: 4 };
+const WORDS = { 'crime_wave:rival_rings': 3, 'guild_conflict:guilds_rule': 3, 'guild_conflict:rival_power': 3, 'guild_conflict:fair': 3, 'resource_scarcity:war_levy': 3, 'external_threat:old_threat': 3, 'external_threat:war': 3, 'legitimacy_crisis:rival_power': 3, 'outside_debt:creditors_sit': 3, 'great_flood:river': 3, 'succession_crisis:old_succession': 3 };
 const towns = [];
 for (const size of SIZES) for (let i = 0; i < +nA; i++) {
   const seed = `${prefix}-${size}-${i}`; const t = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: size }), null, { seed, customContent: {} });
   const f = factsOf(t); const shown = []; const assigned = [];
   for (const x of t.history?.currentTensions || []) {
     const tab = T[x.type]; if (!tab) { shown.push(x.description); continue; }
-    const hold = tab.filter(([, p]) => { try { return !!p(t, f); } catch { return false; } }).map(([k]) => k);
-    const cause = mode === 'priority' ? (hold[0] || 'plain') : (hold.length ? pickVariant(hold, `${seed}::held::${x.type}`) : 'plain');
-    assigned.push({ kind: x.type, cause, hold });
-    const forms = cause === 'plain' ? [0, 1, 2].map((j) => `${x.type}:plain:${j}`) : [0, 1].map((j) => `${x.type}:${cause}:${j}`);
+    const hold = tab.filter(([, , p]) => { try { return !!p(t, f); } catch { return false; } }).map(([k, r]) => [k, r]);
+    const r1 = hold.filter(([, r]) => r === 1).map(([k]) => k), r2 = hold.filter(([, r]) => r === 2).map(([k]) => k);
+    const tier = r1.length ? r1 : r2;
+    const cause = tier.length ? pickVariant(tier, `${seed}::held::${x.type}`) : 'plain';
+    assigned.push({ kind: x.type, cause, hold: hold.map(([k]) => k) });
+    const forms = cause === 'plain' ? [...Array(PLAIN[x.type] || 3).keys()].map((j) => `${x.type}:plain:${j}`) : [...Array(WORDS[`${x.type}:${cause}`] || 2).keys()].map((j) => `${x.type}:${cause}:${j}`);
     shown.push(pickVariant(forms, `${seed}::cause::${x.type}`));
   }
   towns.push({ seed, tier: t.tier, base: (t.history?.currentTensions || []).map((x) => x.description), shown, assigned });
@@ -94,8 +109,10 @@ const pct = (a, b) => b ? (100 * a / b).toFixed(1) + '%' : '-';
 for (const k of Object.keys(T)) {
   const rows = towns.flatMap((t) => t.assigned.filter((a) => a.kind === k)); const n = rows.length;
   const raw = Object.fromEntries(T[k].map(([c]) => [c, rows.filter((r) => r.hold.includes(c)).length]));
+  const wc = new Map(); for (const t of towns) for (let j = 0; j < t.shown.length; j++) if (t.shown[j].startsWith(k + ':')) wc.set(t.shown[j], (wc.get(t.shown[j]) || 0) + 1);
+  const top = [...wc].sort((a, b) => b[1] - a[1])[0];
   const asg = {}; for (const r of rows) asg[r.cause] = (asg[r.cause] || 0) + 1;
-  console.log(`${k} (${n}): ` + T[k].map(([c]) => `${c} raw ${pct(raw[c], n)} → ${pct(asg[c] || 0, n)}`).join(' · ') + ` · plain ${pct(asg.plain || 0, n)}`);
+  console.log(`${k} (${n}): ` + T[k].map(([c, rk]) => `${c}(r${rk}) raw ${pct(raw[c], n)} → ${pct(asg[c] || 0, n)}`).join(' · ') + ` · plain ${pct(asg.plain || 0, n)} · MAX WORDING ${top ? top[0].split(':').slice(1).join(':') + ' ' + pct(top[1], n) : '-'}`);
 }
 const metric = (key) => {
   const sh = (a, b) => { const s = new Set(a[key]); return b[key].some((d) => s.has(d)); };
