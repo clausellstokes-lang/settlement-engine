@@ -23,7 +23,11 @@ under `docs/chair/2026-11-20/content/page/briefs/` only. The seat's prompt:
   line; the raw `config.magicExists` read gone (observedShapeReaders green). The line takes NO audience: the builder
   measured that every audience's Magic tab prints the same names from the same document (424 of 1,020 born documents, for
   owner, player and public alike); the one break was a made-up relied-upon village with nothing supplying magic, now no
-  line. THE CHAIR TO CONFIRM that no audience parameter is right.
+  line. CONFIRMED by the chair 16:45: no audience parameter. The sides table is unchanged between `c5da1cfb3` and
+  PAGE-5's final `f7f5986b5` (the chair's diff, 16:45).
+- OUT: SAFETY-MOUNT (brief at `f6d892a94`), beside OUTPUT-FIX (the chair 16:45: path-disjoint; the rule is ONE HEAVY GATE
+  AT A TIME through `scripts/gate-mutex.sh --run`, not one builder). THIN's measure searches a stored sentence by
+  CONTAINMENT, not equality (SAME-1's `tools/printed.mjs` on `origin/lane/same-1-2026-11-20`).
 - OUT: OUTPUT-FIX (brief `briefs/OUTPUT-FIX.md` at `07218f723`), cut from OUTPUT's `ac0ccdd80`; on its return OUTPUT merges
   WITH it, and `dossierPhoneFloorAllViews` (hand-recorded on OUTPUT's branch) is re-taken by its door.
 
