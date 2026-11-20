@@ -6,7 +6,7 @@
 import { random as _rng } from '../../kernel/rngContext.js';
 import { pickRandom2, random01 } from '../helpers.js';
 import { pairSharesTrade, pairTradeKnown } from '../../data/npcData.js'; // BAR2-PEOPLE-2 (PP3b)
-
+import { powerNameAfterArticle, powerNameWithArticle, powerPossessive } from '../../domain/display/powerSentenceName.js'; // NAMES-1 (CN1, the seventh chair's ruling of 2026-11-20, vetoable by the owner): a power in a sentence takes its article; on the blank line, so no cited line moves
 // STRESS_FLAVOR
 export const STRESS_FLAVOR = {
   under_siege: ['debtor_creditor', 'enemy', 'patron_client'],
@@ -104,7 +104,7 @@ const sentenceStart = value => {
 // genSuccessionNarr — build a list of narrative sentences from a settlement
 // context object `ctx`, each gated on a tension/state condition.
 export const genSuccessionNarr = (ctx) => {
-  var issueMessage, stabilityUnstable, stabilityFractured, stabilityVolatile;
+  var issueMessage, stabilityUnstable, stabilityFractured, stabilityVolatile; ctx = { ...ctx, topFaction: ctx.topFaction ? powerNameWithArticle(ctx.topFaction) : ctx.topFaction, govFaction: ctx.govFaction ? powerNameWithArticle(ctx.govFaction) : ctx.govFaction }; // NAMES-1 (CN1): the two powers with their article ("the Corrupt Council"), lower-case, `sentenceStart` capitalising one that opens a sentence; the tier's own wording ("the town council") reads as before; read once, so the pair's dedup below compares them alike
   const narratives = [];
   if (ctx.topTension === 'succession_crisis')
     narratives.push(
@@ -164,7 +164,7 @@ export const genSuccessionNarr = (ctx) => {
     narratives.push(
       contestGov
         ? `${sentenceStart(contestTop)} and ${contestGov} are at odds in ${ctx.name}, more than they let outsiders see.`
-        : `${sentenceStart(contestTop)}'s hold on ${ctx.name} is weaker than it looks from outside.`
+        : `The ${powerPossessive(powerNameAfterArticle(contestTop))} hold on ${ctx.name} is weaker than it looks from outside.` // NAMES-1 (CN1): the possessive of the article form
     );
   }
   if (ctx.topTension === 'economic_disparity') {
@@ -221,7 +221,7 @@ export const genSuccessionNarr = (ctx) => {
     );
   if (ctx.topTension === 'occupation_legacy')
     narratives.push(
-      `${ctx.name} carries the memory of an occupation that officially ended. Collaborators and resisters still share the same streets, the same market, the same ${ctx.govFaction || 'council'}. The official position is that this is resolved.`
+      ((ctx) => `${ctx.name} carries the memory of an occupation that officially ended. Collaborators and resisters still share the same streets, the same market, the same ${ctx.govFaction || 'council'}. The official position is that this is resolved.`)({ ...ctx, govFaction: ctx.govFaction && `rule under ${ctx.govFaction}` }) // NAMES-2 (CN1): the value carries the power with its article ("the same rule under the Elder Council"; a tier's wording, "under the village elders"), so the banked line reads as it did
     );
   if (ctx.topTension === 'disputed_land')
     narratives.push(

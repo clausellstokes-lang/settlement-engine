@@ -19,8 +19,10 @@
  * ── THE SLOT CONTRACT (measured on the soak 1,000; the record §1) ──
  * Every slot fills as a COMPLETE NOUN PHRASE that reads mid-sentence, so a line never writes an
  * article before a slot and never begins with one:
- *   {power} {rival}          the power's name as the dossier prints it ("Elder Council",
- *                            "The Independent Bloc"); never "the {power}", never "{power}'s"
+ *   {power} {rival}          the power's name WITH ITS ARTICLE ("the Elder Council", "the
+ *                            Independent Bloc"; "The …" where the slot opens the line: NAMES-1, the
+ *                            seventh chair's ruling CN1 of 2026-11-20, goals.js :: cellCandidates fills
+ *                            it through powerNameWithArticle); never "the {power}", never "{power}'s"
  *                            (many names are plural: "Merchant Guilds", "Grain Holders").
  *   {house} {otherHouse}     the house as "the" + its display noun (`institutionDisplayName`),
  *   {front} {targetHouse}    lower-cased, any parenthetical stripped ("the fish market", "the

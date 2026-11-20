@@ -13,7 +13,7 @@
 import { describe, expect, it } from 'vitest';
 import { computeFactionRelationships } from '../../src/generators/factionDynamics.js';
 
-const LINE = 'Merchant Guild Council carries out what Occupation Authority decides.';
+const LINE = 'The Merchant Guild Council carries out what the Occupation Authority decides.'; // NAMES-1 (CN1): the article
 
 /** @param {number} occupierPower @param {string[]} stresses */
 const rowFor = (occupierPower, stresses = ['occupied']) => computeFactionRelationships([
@@ -37,7 +37,7 @@ describe('the occupier is never written as the hall\'s soldiers (ROUND-3-CUT #10
       { faction: 'Military Council', category: 'military', power: 20 },
     ], 'city', {}, {}, [], null).find((r) => r.pair.includes('Military Council'));
     expect(row.type).toBe('symbiotic');
-    expect(row.narrative).toBe('Merchant Guild Council gives the orders and Military Council carries them out; each needs the other to stay strong.');
+    expect(row.narrative).toBe('The Merchant Guild Council gives the orders and the Military Council carries them out; each needs the other to stay strong.'); // NAMES-1 (CN1): the article
   });
 });
 
@@ -50,15 +50,15 @@ describe('a relation row says only what the powers\' strengths hold', () => {
     const church = { faction: 'Church Council', category: 'government', isGoverning: true, power: 12 };
     const guard = { faction: 'Military/Guard', category: 'military', power: 19 };
     const religious = { faction: 'Religious Authorities', category: 'religious', power: 47 };
-    expect(row([church, guard, religious], 'Church Council', 'Military/Guard')).toBe('The Guard no longer takes orders from Church Council.');
+    expect(row([church, guard, religious], 'Church Council', 'Military/Guard')).toBe('The Guard no longer takes orders from the Church Council.'); // NAMES-1 (CN1): the article
     expect(row([church, guard], 'Church Council', 'Military/Guard'))
-      .toBe('The Guard no longer takes orders from Church Council. Church Council keeps the title; The Guard makes the decisions that matter.');
+      .toBe('The Guard no longer takes orders from the Church Council. The Church Council keeps the title; the Guard makes the decisions that matter.'); // NAMES-1 (CN1): the article
     const royal = { faction: 'Royal Authority', category: 'government', isGoverning: true, power: 40 };
     const nobles = { faction: 'Noble Families', category: 'noble', power: 10 };
     const craft = { faction: 'Craft Guilds', category: 'economy', power: 7 };
-    expect(row([royal, nobles, craft], 'Noble Families', 'Royal Authority')).toBe('Noble Families still have their titles, but the hall\'s offices have taken most of their power.');
+    expect(row([royal, nobles, craft], 'Noble Families', 'Royal Authority')).toBe('The Noble Families still have their titles, but the hall\'s offices have taken most of their power.'); // NAMES-1 (CN1): the article
     const merchants = { faction: 'Merchant Guilds', category: 'economy', power: 20 };
-    expect(row([royal, nobles, merchants], 'Noble Families', 'Royal Authority')).toBe('Noble Families still have their titles, but merchant money and the hall\'s offices have taken most of their power.');
+    expect(row([royal, nobles, merchants], 'Noble Families', 'Royal Authority')).toBe('The Noble Families still have their titles, but merchant money and the hall\'s offices have taken most of their power.'); // NAMES-1 (CN1): the article
     const same = row([religious, church], 'Church Council', 'Religious Authorities'); // the record orders its powers by strength
     expect([same].filter((n) => /same people/.test(String(n)))).toEqual([]);
     expect(typeof same).toBe('string');
