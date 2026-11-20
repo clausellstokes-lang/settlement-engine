@@ -152,6 +152,7 @@ MUTATED_FILES=(
   src/generators/people/poolMap.js
   src/data/institutionDescVariants.js
   src/generators/servicesGenerator.js
+  src/generators/npcGenerator.js
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -1832,6 +1833,14 @@ check_caught "faults-tools/the name slot claims no field" src/domain/prose/entry
 #      title_matches=1; restored byte-identically => 26 passed.
 perl -0pi -e 's/if \(svc\?\.name === \x27Holding cells\x27 && svc\.desc === HOLDING_CELLS_PENDING_TRIAL\) svc\.desc = HOLDING_CELLS_UNTIL_FINE;/if (0) svc.desc = HOLDING_CELLS_UNTIL_FINE;/' src/generators/servicesGenerator.js
 check_caught "faults-watch/the holding cells hold pending trial only where a court sits" src/generators/servicesGenerator.js "npx vitest run tests/generators/faultsWatch.test.js --no-file-parallelism" "every town of the guard that holds the row: the twin exactly where no court sits, the original exactly where one does"
+
+# 142. A CRISIS STAKE'S VERB TAKES ITS POWER'S NUMBER (NAMES-3 item 3, NAMES-4 brief 2; the seventh chair's CV1 and CV4). The
+#      stakes' fill hands its power to the agreement form under the slot the four stakes no longer name, so every one of them
+#      prints the singular verb for a plural power ("the Merchant Guilds is about to"); tests/data/powerNumberAgreement.test.js must red.
+#      Measured in this checkout (NAMES-4, 2026-11-20): clean => 18 passed; planted => 1 red, 17 passed, title_matches=1;
+#      restored byte-identically => 18 passed.
+perl -0pi -e 's/fillAgreement\(effect\.stakes, \{ power: govFaction \}\)/fillAgreement(effect.stakes, { faction: govFaction })/' src/generators/npcGenerator.js
+check_caught "names/a crisis stake's verb takes its power's number" src/generators/npcGenerator.js "npx vitest run tests/data/powerNumberAgreement.test.js --no-file-parallelism" "NAMES-4: the secrets as generateCrimeLevel deals them (its own \`{has}\`), in both numbers, differ only by number, the right way round"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"

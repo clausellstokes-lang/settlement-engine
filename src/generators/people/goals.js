@@ -37,7 +37,7 @@ import { GOAL_FAMILY_LINES, GOAL_LINE_MIN_MEMBERS, PERSONALITY_CLUSTER_OF, TIE_T
 import { familyOfInstitution, isLawEnforcementInstitution, isNoPowerInstitution } from '../../data/institutionalCatalog.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { chainPrintName } from '../../domain/display/chainPrintName.js';
-import { powerNameWithArticle } from '../../domain/display/powerSentenceName.js';
+import { fillAgreement, powerNameWithArticle } from '../../domain/display/powerSentenceName.js';
 import { secondMentions } from '../../data/people/personMention.js';
 import { filterDeclared, lineText, resolveSibling } from '../../domain/facts/drawDeclared.js';
 import { factsOf } from '../../domain/facts/factsOf.js';
@@ -397,7 +397,8 @@ function cellCandidates(family, kind, vantage, slots, ctx, held, extra = {}) {
   for (const line of cell) {
     const { result: kept, notes } = quiet(() => filterDeclared([line], { facts: ctx.facts, poolId, surface: 'npcs' }));
     if (!kept.length) continue;
-    const filled = fillLine(templateOf(line), said);
+    // NAMES-3 (CV7): a line's agreement forms (`{power|it|them}`) take their power's own number, from the record's name
+    const filled = fillLine(fillAgreement(templateOf(line), slots), said);
     if (!filled) continue;
     // NAMES-1 (CN2): a person's later mention in the line is a pronoun, a surname, a role or a given name
     const text = secondMentions(filled[0].toUpperCase() + filled.slice(1), people);
