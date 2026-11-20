@@ -1,0 +1,261 @@
+
+ RUN  v4.1.8 /tmp/claude-0/-home-user-settlement-engine/9598a386-b714-55b7-930f-7c97c14ec75e/scratchpad/fb
+
+fatal: not a git repository (or any of the parent directories): .git
+fatal: not a git repository (or any of the parent directories): .git
+fatal: not a git repository (or any of the parent directories): .git
+fatal: not a git repository (or any of the parent directories): .git
+ ❯ tests/lint/tuningRegister.walker.test.js (76 tests | 4 failed) 2716ms
+     × blank or placeholder provenance is refused 26ms
+     × growth is refused unless a DECLARED_GROWTH row attributes it to a real commit 5ms
+     × a signed digest cannot move without a signing record that names it 5ms
+     × a genesis is refused without a charter and refused again once a baseline exists 4ms
+ ❯ tests/lint/sovereigntyLightingContract.walker.test.js (34 tests | 1 failed) 5830ms
+     × THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed 77ms
+ ❯ tests/lint/writerReach.walker.test.js (52 tests | 1 failed) 85042ms
+     × the surfaceReach grammar round-trips: parse(format(reach)) equals reach for every LIT identity 33ms
+fatal: not a git repository (or any of the parent directories): .git
+ ❯ tests/lint/wiringCensusDeclared.walker.test.js (9 tests | 1 failed) 46ms
+     × every exported sibling set and text-keyed declaration column in src is a channel the walker reads, or ruled out by name 20ms
+ ❯ tests/lint/observedShapeReaders.walker.test.js (47 tests | 2 failed) 98770ms
+     × SHRINK-ONLY: no file exceeds its frozen ceiling, and no row has vanished 58ms
+     × A1/A7: schema-7 filters narrow ordinary noise while explained writers stay banked live 53ms
+ ❯ tests/lint/presumedThings.walker.test.js (43 tests | 1 failed) 61387ms
+     × ⛔ every source literal that names a thing declares it, or has its row 30ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 10 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/observedShapeReaders.walker.test.js > reader-with-no-writer ratchet: the live scan > SHRINK-ONLY: no file exceeds its frozen ceiling, and no row has vanished
+AssertionError: the live heuristic inventory must exactly match the frozen one. A lawful shrink is `node scripts/check-observed-shape-readers.mjs --write` on a clean tree — it re-derives inventory, total and identities together and refuses anything that is not a shrink. NEVER hand-edit a row: that throws "observed-shape baseline totals are inconsistent" out of validateLeafBaseline (scripts/lib/observed-shape-baseline.mjs).: expected { violations: 1, stale: +0 } to deeply equal { violations: +0, stale: +0 }
+
+- Expected
++ Received
+
+  {
+    "stale": 0,
+-   "violations": 0,
++   "violations": 1,
+  }
+
+ ❯ tests/lint/observedShapeReaders.walker.test.js:841:7
+    839|       + ' NEVER hand-edit a row: that throws "observed-shape baseline …
+    840|       + ' out of validateLeafBaseline (scripts/lib/observed-shape-base…
+    841|     ).toEqual({ violations: 0, stale: 0 });
+       |       ^
+    842|     expect(violations).toEqual([]);
+    843|     expect(stale).toEqual([]);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/10]⎯
+
+ FAIL  tests/lint/observedShapeReaders.walker.test.js > reader-with-no-writer ratchet: the live scan > A1/A7: schema-7 filters narrow ordinary noise while explained writers stay banked live
+AssertionError: expected { reads: 2215, identities: 1553, …(3) } to deeply equal { reads: 2214, identities: 1552, …(3) }
+
+- Expected
++ Received
+
+  {
+    "bankedReads": 78,
+-   "files": 444,
+-   "identities": 1552,
+-   "reads": 2214,
++   "files": 445,
++   "identities": 1553,
++   "reads": 2215,
+    "taggedRows": 52,
+  }
+
+ ❯ tests/lint/observedShapeReaders.walker.test.js:1652:8
+    1650|     // cure being written and being landed, and the register-read shap…
+    1651|     // next such move cost nothing. The two figures differ; the mechan…
+    1652|     }).toEqual(registerFigures());
+       |        ^
+    1653|     expect(Object.fromEntries(EXPLAINED_WRITER_EXEMPTIONS.map(({ ident…
+    1654|       const rows = taggedAddresses.filter((row) => row.identity === id…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/10]⎯
+
+ FAIL  tests/lint/presumedThings.walker.test.js > ARM 1 — the source > ⛔ every source literal that names a thing declares it, or has its row
+AssertionError: declare the thing on the line (needs or excludes, with its twin), never add a row: expected [ …(45) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/domain/display/criminalVeilSwitch.js :: market :: \"Criminal houses and services, the criminal architecture, the capture reading and its black-market income, criminal power\"",
++   "src/domain/display/gallerySecondHomes.js :: garrison :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: militia :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: watch :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: mercenary :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: docks :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: market :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: temple :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: shrine :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: prison :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: court :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: bank :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: guildhall :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: quarters :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: household levy :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: hedge wizard :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: adventurers' charter :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: cobbler :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: tailor :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: scribe :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: merchant guild :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: caravaneer's post :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: carriers' guild :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: shipyard :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: auction :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: cobbler's guild :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: tailor's guild :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: alchemist :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: guild governance :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: merchant oligarchy :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: citadel :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: wizard's tower :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: mages' guild :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: scroll scribe :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: hireling :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: smuggling :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: street gang :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: gambling den :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: warehouse :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: guild consortium :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: adventurers' guild :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: thieves' guild :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: gambling :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: academy :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: clergy :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++ ]
+
+ ❯ tests/lint/presumedThings.walker.test.js:444:92
+    442|     const fresh = hits.filter((h) => !banked.has(key(h.file, h.thing, …
+    443|     expect(fresh.map((h) => `${h.file} :: ${h.thing} :: ${JSON.stringi…
+    444|       'declare the thing on the line (needs or excludes, with its twin…
+       |                                                                                            ^
+    445|   });
+    446|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/10]⎯
+
+ FAIL  tests/lint/sovereigntyLightingContract.walker.test.js > the sovereignty lighting condition — a marker is EVIDENCE only in a live title > THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed
+AssertionError: the estate's file count moved — re-measure, do not re-word: expected 3709 to be 3705 // Object.is equality
+
+- Expected
++ Received
+
+- 3705
++ 3709
+
+ ❯ tests/lint/sovereigntyLightingContract.walker.test.js:7553:10
+    7551|     } else {
+    7552|       expect(TEST_FILES.length, 'the estate\'s file count moved — re-m…
+    7553|         .toBe(CENSUS.files);
+       |          ^
+    7554|       expect(parked.length, 'the parked-file count moved from SP-C\'s …
+    7555|         + ' a rule widened or narrowed, or a lane changed a file\'s sh…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/10]⎯
+
+ FAIL  tests/lint/tuningRegister.walker.test.js > tuning register — the refreeze ritual refuses > blank or placeholder provenance is refused
+Error: Command failed: git status --porcelain
+fatal: not a git repository (or any of the parent directories): .git
+
+ ❯ currentlyDirty tests/lint/tuningRegister.walker.test.js:1485:44
+    1483|   // NOT `gitOut`, which trims the whole output and eats the leading s…
+    1484|   // porcelain line — see the lib's `gitPorcelainPaths` for the refusa…
+    1485|   const currentlyDirty = () => execFileSync('git', ['status', '--porce…
+       |                                            ^
+    1486|     .split('\n').filter((line) => line.length > 3).map((line) => line.…
+    1487|
+ ❯ baseArgs tests/lint/tuningRegister.walker.test.js:1495:38
+ ❯ tests/lint/tuningRegister.walker.test.js:1499:41
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/10]⎯
+
+ FAIL  tests/lint/tuningRegister.walker.test.js > tuning register — the refreeze ritual refuses > growth is refused unless a DECLARED_GROWTH row attributes it to a real commit
+Error: Command failed: git status --porcelain
+fatal: not a git repository (or any of the parent directories): .git
+
+ ❯ currentlyDirty tests/lint/tuningRegister.walker.test.js:1485:44
+    1483|   // NOT `gitOut`, which trims the whole output and eats the leading s…
+    1484|   // porcelain line — see the lib's `gitPorcelainPaths` for the refusa…
+    1485|   const currentlyDirty = () => execFileSync('git', ['status', '--porce…
+       |                                            ^
+    1486|     .split('\n').filter((line) => line.length > 3).map((line) => line.…
+    1487|
+ ❯ baseArgs tests/lint/tuningRegister.walker.test.js:1495:38
+ ❯ tests/lint/tuningRegister.walker.test.js:1513:40
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/10]⎯
+
+ FAIL  tests/lint/tuningRegister.walker.test.js > tuning register — the refreeze ritual refuses > a signed digest cannot move without a signing record that names it
+Error: Command failed: git status --porcelain
+fatal: not a git repository (or any of the parent directories): .git
+
+ ❯ currentlyDirty tests/lint/tuningRegister.walker.test.js:1485:44
+    1483|   // NOT `gitOut`, which trims the whole output and eats the leading s…
+    1484|   // porcelain line — see the lib's `gitPorcelainPaths` for the refusa…
+    1485|   const currentlyDirty = () => execFileSync('git', ['status', '--porce…
+       |                                            ^
+    1486|     .split('\n').filter((line) => line.length > 3).map((line) => line.…
+    1487|
+ ❯ baseArgs tests/lint/tuningRegister.walker.test.js:1495:38
+ ❯ tests/lint/tuningRegister.walker.test.js:1570:44
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/10]⎯
+
+ FAIL  tests/lint/tuningRegister.walker.test.js > tuning register — the refreeze ritual refuses > a genesis is refused without a charter and refused again once a baseline exists
+Error: Command failed: git status --porcelain
+fatal: not a git repository (or any of the parent directories): .git
+
+ ❯ currentlyDirty tests/lint/tuningRegister.walker.test.js:1485:44
+    1483|   // NOT `gitOut`, which trims the whole output and eats the leading s…
+    1484|   // porcelain line — see the lib's `gitPorcelainPaths` for the refusa…
+    1485|   const currentlyDirty = () => execFileSync('git', ['status', '--porce…
+       |                                            ^
+    1486|     .split('\n').filter((line) => line.length > 3).map((line) => line.…
+    1487|
+ ❯ baseArgs tests/lint/tuningRegister.walker.test.js:1495:38
+ ❯ tests/lint/tuningRegister.walker.test.js:1648:47
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/10]⎯
+
+ FAIL  tests/lint/wiringCensusDeclared.walker.test.js > tablePools reads every declaration channel (CENSUS-1i unit 2) > every exported sibling set and text-keyed declaration column in src is a channel the walker reads, or ruled out by name
+Error: Command failed: git grep -hoE 'export const [A-Z_]*(SIBLINGS|DECLARATIONS)\b' -- src
+fatal: not a git repository (or any of the parent directories): .git
+
+ ❯ tests/lint/wiringCensusDeclared.walker.test.js:105:19
+    103|     const { DECLARATION_CHANNELS, NOT_TABLE_CHANNELS } = await import(…
+    104|     const { execSync } = await import('node:child_process');
+    105|     const found = execSync("git grep -hoE 'export const [A-Z_]*(SIBLIN…
+       |                   ^
+    106|     const held = [...DECLARATION_CHANNELS.map((c) => c.name), ...Objec…
+    107|     expect(held).toEqual(found);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/10]⎯
+
+ FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the frozen register > the surfaceReach grammar round-trips: parse(format(reach)) equals reach for every LIT identity
+AssertionError: weight on contenders is missing from the frozen surfaceReach: expected 'campaign-pdf=N dossier-pdf=N foundry=…' to be 'campaign-pdf=N dossier-pdf=N foundry=…' // Object.is equality
+
+Expected: "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N"
+Received: "campaign-pdf=N dossier-pdf=N foundry=N news=N web-transitive=N world-book=N"
+
+ ❯ tests/lint/writerReach.walker.test.js:358:95
+    356|       if (row.verdict === 'THIN') continue;
+    357|       const formatted = formatReach(row.reach);
+    358|       expect(frozen[row.identity], `${row.identity} is missing from th…
+       |                                                                                               ^
+    359|       expect(formatReach(parseReach(formatted)), `${row.identity} does…
+    360|       if (row.verdict === 'LIT') checked += 1;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/10]⎯
+
+
+ Test Files  6 failed (6)
+      Tests  10 failed | 251 passed (261)
+   Start at  03:29:57
+   Duration  114.80s (transform 14.50s, setup 309ms, import 51.65s, tests 253.79s, environment 1ms)
+
+exit 1

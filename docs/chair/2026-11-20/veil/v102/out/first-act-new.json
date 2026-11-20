@@ -1,0 +1,74 @@
+{
+ "gen": "/home/user/settlement-engine",
+ "chain": {
+  "files": 212,
+  "last": "212_share_veil_later_cures.sql",
+  "failed": []
+ },
+ "towns": 36,
+ "withParts": 72,
+ "written": {
+  "block:services.criminal": 72,
+  "block:defense.criminalStructure": 72,
+  "block:power.criminalUnderside": 72,
+  "card:institution:<id>": 216,
+  "field:institution:<id>:description": 216,
+  "field:institution:<id>:function": 216,
+  "field:institution:<id>:services": 216,
+  "field:institution:<id>:people": 216,
+  "class:npc:corruption": 20,
+  "field:faction:<id>:members": 16,
+  "field:faction:<id>:goals": 16,
+  "field:faction:<id>:conflicts": 16,
+  "field:faction:<id>:description": 16
+ },
+ "unreachable": {
+  "field:institution:<id>:services": 52,
+  "field:institution:<id>:people": 216,
+  "field:faction:<id>:members": 16,
+  "field:faction:<id>:goals": 16,
+  "field:faction:<id>:conflicts": 16
+ },
+ "offeredOfWritten": {
+  "block:services.criminal": 72,
+  "block:defense.criminalStructure": 72,
+  "block:power.criminalUnderside": 72,
+  "card:institution:<id>": 216,
+  "field:institution:<id>:description": 216,
+  "field:institution:<id>:function": 216,
+  "field:institution:<id>:services": 164,
+  "class:npc:corruption": 20,
+  "field:faction:<id>:description": 16
+ },
+ "people": {
+  "houses": 216,
+  "applierReach": 108,
+  "screenTest": 0,
+  "housesWithPeopleByIdentity": 108,
+  "housesWithPeopleByString": 0,
+  "npcInstitutionTypes": {
+   "object": 1895
+  }
+ },
+ "services": {
+  "written": 216,
+  "withRows": 164
+ },
+ "faction": {
+  "members data in powerStructure.factions/factions: -/-; offered false": 16,
+  "goals data in powerStructure.factions/factions: -/-; offered false": 16,
+  "conflicts data in powerStructure.factions/factions: -/-; offered false": 16,
+  "description data in powerStructure.factions/factions: ps/-; offered true": 16
+ },
+ "showVsHand": {
+  "gallery dm=true npcs[].institution": 108
+ },
+ "ex": {
+  "field:institution:<id>:services": "rv10-sw-village-indebted-5 dm=false field:institution:fence-word-of-mouth:services",
+  "field:institution:<id>:people": "rv10-sw-village-indebted-5 dm=false field:institution:fence-word-of-mouth:people",
+  "gallery dm=true npcs[].institution": "rv10-sw-village-indebted-5: SHOW={\"key\":\"Fence (word of mouth)\",\"kind\":\"house\",\"title\":\"the fence\",\"family\":\"Fence (word of mouth)\",\"veiled\":true} | HAND=undefined",
+  "field:faction:<id>:members": "rv10-sw-city-none-18 dm=false field:faction:faction.thieves_guild:members",
+  "field:faction:<id>:goals": "rv10-sw-city-none-18 dm=false field:faction:faction.thieves_guild:goals",
+  "field:faction:<id>:conflicts": "rv10-sw-city-none-18 dm=false field:faction:faction.thieves_guild:conflicts"
+ }
+}

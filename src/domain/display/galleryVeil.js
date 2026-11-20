@@ -1156,6 +1156,16 @@ export function toggleVeilDelta(deltas, address, defaults) {
  * marks "hidden by default" apart from "hidden by you". `lines` is the hidden-items list
  * (plain lines; a field hidden by its class switch or its card is said once, by the switch
  * or the card) and its length is the counter.
+ *
+ * BY IDENTITY WITH THE APPLIER (the seventh chair's ruling VR34, 2026-11-20, from the security
+ * reader's V10-2; vetoable by the owner): an eye is drawn exactly where applyVeil would remove
+ * something under it, in every stored shape. A card's eyes read EVERY copy of the card the
+ * applier reaches (cardsOf: each list of its kind, by its id; master's stored shape carries a
+ * power's roster on the top-level `factions[]` and none on `powerStructure.factions`), and a
+ * house's People eye reads the house each person belongs to as the applier reads it
+ * (npcHouseOf: the people car's `{ kind: 'house', key }`, else master's string). So every
+ * address the criminal switch writes can be seen and undone by a hand on this screen
+ * (criminalVeilSwitch.js :: offeredAddressesOf).
  * @param {unknown} publicSettlement  galleryPayloadFor's output (before the veil)
  * @param {ReadonlyArray<VeilDelta>|null|undefined} deltas
  */
@@ -1173,14 +1183,18 @@ export function curateModelFor(publicSettlement, deltas) {
 
   const services = recAt(s, 'availableServices') || {};
   const offered = new Set(Object.values(services).flatMap(rows => recs(rows).map(r => str(r.institution))).filter(Boolean));
-  const staffed = new Set(recs(s.npcs).map(n => str(n.institution)).filter(Boolean));
-  /** @param {Rec} card @param {string} kind @param {string} field @returns {unknown} */
-  const valueOf = (card, kind, field) => {
-    if (kind === 'institution' && field === 'services') return offered.has(str(card.name)) ? 'Its rows on the Services tab' : undefined;
-    if (kind === 'institution' && field === 'people') return staffed.has(str(card.name)) ? 'Its people on their cards' : undefined;
-    for (const key of CARD_KINDS[kind].fields[field] || []) {
-      const v = card[key];
-      if (v != null && !(Array.isArray(v) && !v.length) && v !== '') return v;
+  // VR34: the house each person belongs to, on every copy of every person, read as the applier reads it.
+  const staffed = new Set(cardsOf(s, 'npc').map(npcHouseOf).filter(Boolean));
+  /** @param {ReadonlyArray<Rec>} copies  every copy of one card, by its id @param {string} kind @param {string} field @returns {unknown} */
+  const valueOf = (copies, kind, field) => {
+    const name = str(copies[0].name);
+    if (kind === 'institution' && field === 'services') return offered.has(name) ? 'Its rows on the Services tab' : undefined;
+    if (kind === 'institution' && field === 'people') return staffed.has(name) ? 'Its people on their cards' : undefined;
+    for (const card of copies) {
+      for (const key of CARD_KINDS[kind].fields[field] || []) {
+        const v = card[key];
+        if (v != null && !(Array.isArray(v) && !v.length) && v !== '') return v;
+      }
     }
     return undefined;
   };
@@ -1195,17 +1209,22 @@ export function curateModelFor(publicSettlement, deltas) {
     const usable = new Set();
     const cards = sec.kinds.flatMap((kind) => {
       const k = CARD_KINDS[kind];
-      /** @type {Set<string>} */
-      const seen = new Set();
-      return listAt(s, k.lists[0]).flatMap((card) => {
-        const id = k.idOf(card);
-        if (!id || seen.has(id)) return [];
-        seen.add(id);
+      // VR34: every copy the applier reaches, grouped by id in reading order (the kind's first list first).
+      /** @type {Map<string, Rec[]>} */
+      const byId = new Map();
+      for (const copy of cardsOf(s, kind)) {
+        const id = k.idOf(copy);
+        if (!id) continue;
+        const group = byId.get(id);
+        if (group) group.push(copy); else byId.set(id, [copy]);
+      }
+      return [...byId].flatMap(([id, copies]) => {
+        const card = copies[0];
         const name = cardName(card, kind) || id;
         const whole = kind === 'institution' && isHideableHouse(card) ? eye(`card:institution:${id}`) : null;
         const eyes = Object.keys(k.fields).flatMap((field) => {
           if (GROUPING_OWNED_FIELDS.has(`${kind}:${field}`)) return [];
-          const v = valueOf(card, kind, field);
+          const v = valueOf(copies, kind, field);
           if (v === undefined) return [];
           usable.add(`class:${kind}:${field}`);
           return [{ ...eye(`field:${kind}:${id}:${field}`), field, label: FIELD_LABELS[field] || field, text: excerptOf(v) }];

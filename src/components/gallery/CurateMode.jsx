@@ -14,7 +14,10 @@
  * THE CRIMINAL SWITCH (the chair's ruling VS1, 2026-11-19): one switch above the sections,
  * "Hide everything criminal", reads its state from the draft (criminalVeilSwitch.js ::
  * criminalSwitchStateOf) and flips it exactly as clicking each criminal eye would
- * (flipCriminalVeil); like an eye it saves nothing by itself, Done hands the list back.
+ * (flipCriminalVeil); like an eye it saves nothing by itself, Done hands the list back. It
+ * reads and writes only the eyes THIS screen draws (the seventh chair's ruling VR34: a switch
+ * sets only what a hand can see and undo on that record): it is handed the same model the
+ * sections are drawn from.
  *
  * THE AFFORDANCE SLOT (X-23): wave three's shared slot primitive has not landed. The eye is
  * rendered by `CurateEye` at the slot's position, the trailing end of a card header or a
@@ -175,8 +178,9 @@ export default function CurateMode({ payload, deltas, onDone, onCancel }) {
   const toggle = (address) => setDraft(d => toggleVeilDelta(d, address, model.defaults));
   // The criminal groupings that cover something in this town (read once per payload).
   const present = useMemo(() => presentCriminalGroupings(payload), [payload]);
-  const criminal = criminalSwitchStateOf(model.defaults, draft, present);
-  const flipCriminal = () => setDraft(d => flipCriminalVeil(d, model.defaults, present));
+  // VR34: the switch covers only the eyes this model draws (its addresses do not depend on the draft).
+  const criminal = criminalSwitchStateOf(model.defaults, draft, present, model);
+  const flipCriminal = () => setDraft(d => flipCriminalVeil(d, model.defaults, present, model));
 
   return (
     <div role="region" aria-label="Curate for visitors" style={{
