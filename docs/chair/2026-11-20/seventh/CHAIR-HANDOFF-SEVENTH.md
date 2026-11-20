@@ -628,6 +628,22 @@ parts of the whole check (at the close).
   (C1) and the Stakes rows (C2); the crime wave's own people on a bought hall's sheet (CF12); the Curate screen's
   notice for the criminal switch.
 
+- **About 12:57 UTC, 2026-11-20 (the chair's estimate), THE OWNER (verbatim):** "So what are your comprehensive holistic
+  expectations of generated settlements now as designed? In terms of expectation?" ANSWERED THE SAME TURN, FROM THE
+  COUNTS (`measures/holistic/batch.out.txt`, `batch2.out.txt`, `crown3.out.txt`, `faces.out.txt`; the fortune file
+  sent to him; the page seat's measure), each point marked measured, designed or guessed: a settlement whose pages
+  agree, whose named people are each worth meeting, whose trouble comes only from what the place holds; strongest
+  from town size up; plain at thorp and hamlet; still showing repeated sentence shapes to someone who makes many.
+  THE SHORTFALLS SAID TO HIM: sameness between settlements shrinks but stays (three forges sharing a trouble's
+  sentence 32% today; the target under 10% is a simulation); three thin pages until he says build; Safety a floor
+  in three calm settlements in four; a thorp is a stop; no ruler born beloved at untouched settings once fortune is
+  lit. WHAT THE CHAIR SAID IT CANNOT VOUCH FOR: nobody has seen one settlement with every new rule on at once; the
+  contest for the seat and the king's rule have no measure yet; the risk watched most is the two dark laws
+  together (a great city's ruler only tolerated in 64% of calm cities and 81% of calm metropolises under the
+  fortune law, then met by the new contest). A CORRECTION THE CHAIR MADE TO ITS OWN DRAFT BEFORE SENDING: the
+  appointed seats (governor, steward, monarch) DO hold a named person today (`crown2.out.txt`): the first count's
+  "none" was its own rough match.
+
 ## 2. Rulings of this chair (each vetoable by the owner)
 
 - **SV1 (00:05 UTC, 2026-11-20): THE VEIL'S LIST ON THREE MACHINES.** VEIL-19 owns 212, its rollback and the twin's
@@ -1098,6 +1114,12 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   on branches of their own, so a woken seat cannot overwrite them; two chairs landing on one line is the risk.
 - At the close: the owner's plain yes on the stored reference files if the join moves the golden.
 - THE SCHEDULED TASK OF S133, by its id in the records: trig_01XAPp2Tvsunxp5QGqaqPgHx (the fifth chair's account).
+
+- PROMISED TO THE OWNER ON 2026-11-20 AT ABOUT 12:58 UTC, BEFORE HE SIGNS ANYTHING: ONE JOINT MEASURE with every dark
+  rule lit (fortune, the seat's law, CS21, CS22) on the joined tree, AND A DOZEN WHOLE SETTLEMENTS READ ON THE PAGE
+  with everything on (a thorp and a metropolis signed-in among them). THE THREE RESULTS THAT CHANGE THE CHAIR'S
+  ANSWER, said to him: trouble sentences repeating above about 15% in three forges; rulers in trouble with no cause
+  in the place's own record; a sentence still repeated inside one town.
 
 ## 5. Since this file was written (newest last; each hour read from the clock when written)
 
