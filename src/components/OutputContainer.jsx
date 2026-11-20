@@ -705,7 +705,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       // Traditions — the founding-traditions register (THE TRADITIONS wave, T-1).
       // Preview mode (view-time deriveFoundingTraditions) until the T-2 mover writes
       // the settlement.traditions mirror; then this same tab renders the live state.
-      case 'traditions': return <TraditionsTab settlement={s} saveId={saveId} />;
+      case 'traditions': return <TraditionsTab settlement={s} saveId={saveId} publicDossier={publicDossier} playerView={playerView} />;
       // The first-dossier teaching callouts and the Table View trigger moved here when the
       // DM Summary tab, which carried both, was removed (X-5). The callouts self-gate inside.
       case 'overview':   return <>{!readOnly && <Suspense fallback={null}><FirstDossierCallouts /></Suspense>}<OverviewTab settlement={s} narrativeNote={null} onNavigateTab={setActiveTab} publicDossier={publicDossier} playerView={playerView} worldState={owningWorldState} onOpenTableView={flag('tableView') ? () => useStore.getState().setUserPref?.('tableViewOpen', true) : undefined} /></>;

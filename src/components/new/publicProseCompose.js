@@ -39,6 +39,7 @@ import { populationTrendBand } from '../../domain/display/trendLens.js';
 import { computeChainSets } from './tabHelpers.js';
 import { isPhantomRecord } from '../../domain/edit/phantoms.js';
 import { publicVeiledRecordOf } from '../../domain/display/publicSafe.js';
+import { sharedTraditionRowsOf } from '../../domain/traditions/shownTraditions.js';
 
 
 /** @typedef {readonly [string, (settlement: any, publicDossier: boolean, ctx: {veiledRecord: any}) => any]} PublicProseSite */
@@ -122,6 +123,11 @@ export const PUBLIC_PROSE_SITES = Object.freeze(/** @type {PublicProseSite[]} */
   // `deriveViability`'s SEEDED verdict (viabilitySeed), shipped as `{summary}` text; behind
   // canonicalViewModel exactly as ViabilityTab reads it (off, the tab prints the record's datum).
   ['viewModel:viability', (s, publicDossier) => (flag('canonicalViewModel') ? viabilityVerdictRead(s, { publicDossier }) : null)],
+  // THE TRADITIONS TAB (TRAD-1, CTR9): the set the owner's tab shows (the lit mirror, else genesis's founding preview,
+  // which reads the seed and so can only be drawn here) as a LIST of text rows: name, element, chip, calendar line and
+  // THE READER'S description (shownTraditions.js :: sharedTraditionRowsOf). A list, as `power:ladder` is, so no row's
+  // text becomes a key and the alias pass leaves it whole. The DM's custom traditions are the owner's library: not shipped.
+  ['traditions', (s, publicDossier) => (publicDossier ? null : sharedTraditionRowsOf(s))],
 ]).map((entry) => /** @type {PublicProseSite} */ (Object.freeze(entry))));
 
 /**
