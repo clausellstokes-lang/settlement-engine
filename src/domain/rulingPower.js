@@ -615,7 +615,7 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
     // ⭐ THE RETIRED EDGE (U5, the seat law only): an edge on the seat (read on its pair as the transfer found it) whose
     // narrative is the "power behind" sentence for another power is that power's hold on the seat, now lost. It turns
     // competitive and says so, naming both powers, so it never answers R1 again (`holderOfSeat.js :: transferTakerOf`).
-    // Its ONE fixed wording is `holderOfSeat.js :: TRANSFER_WORDINGS`' `'retired'` row, never an `'edge'` one (the chair's
+    // Its ONE fixed wording is `holderOfSeat.js :: TRANSFER_WORDINGS`' `'retiredEdge'` row, never an `'edge'` one (the chair's
     // cure (1), 16:43Z): R1 must neither read the loser as a taker nor fall to Addendum 3's "nobody" on it.
     const other = law && rel.pair.includes(fromGovernment) && rel.pair.find(n => n !== fromGovernment);
     const said = String(rel.narrative);

@@ -32,10 +32,10 @@
  *       (`cultureOfficeTitles.js :: officeWordInfo(word).crown`) together with a house it keeps (rank 1) other than the
  *       seat's own, and the person `holderOf` names keeps none; the predicate reds on a planted keeper-king;
  *  (10) the chair's cure (1), its class word disambiguated by U5-CURE (the chair 17:32Z): `'retiredEdge'`;
- *  (11) U5-CURE (b): a Royal Authority city, trade wealth held, taken by Merchant Guilds through the WIRED caller's real
- *       path (the roster's `government_change`) keeps the form; the two paths NOT wired fall closed, each pinned with its
- *       stop: the DM's `CHANGE_RULING_POWER` (`mutateWorld.js :: changeRulingPower`: first paint) and the world pulse's
- *       power-transfer outcome (`applyWorldPulse.js`: at its size ceiling);
+ *  (11) U5-CURE (b): a Royal Authority city, trade wealth held, taken by Merchant Guilds through each WIRED caller's real
+ *       path (the roster's `government_change`; and, from U5-CURE2, the world pulse's power-transfer outcome in
+ *       `applyWorldPulse.js`, room made without a rise) keeps the form; the path NOT wired falls closed, pinned with its
+ *       stop: the DM's `CHANGE_RULING_POWER` (`mutateWorld.js :: changeRulingPower`: first paint);
  *  (12) U5-CURE (b): the law dark, the three paths byte-identical at play time (digests RECORDED at 9a05215bc before any
  *       caller was edited), with the negative control that the law-on digest differs.
  */
@@ -571,7 +571,9 @@ describe('(11) U5-CURE (b): under the law a merchant king keeps the Royal Author
   test('the fixture holds trade wealth (the licence\'s circumstance), read live', () => {
     expect(seatCircumstancesOf(crownTown(LAW))).toContain('trade_wealth');
   });
-  for (const key of ['rosterChange']) {
+  // pulseTransfer joined the wired paths at U5-CURE2 (the chair 19:19Z/19:34Z): the room was made without a rise
+  // (`applyWorldPulse.js`'s multi-line import of `rulingPower.js` collapsed to one line, 907 -> 902), then the one argument.
+  for (const key of ['rosterChange', 'pulseTransfer']) {
     test(`${key}: every cause it takes keeps the Royal Authority, and R1 names Merchant Guilds`, () => {
       for (const cause of PATHS[key].causes) {
         const s = PATHS[key].settled(PATHS[key].run(crownTown(LAW), cause));
@@ -580,12 +582,12 @@ describe('(11) U5-CURE (b): under the law a merchant king keeps the Royal Author
       }
     });
   }
-  // THE TWO STOPS, pinned (U5-CURE's report): each path is NOT wired and falls closed to the merchants' own form.
+  // THE ONE STOP, pinned (U5-CURE's report; the NAMED SURVIVOR at U5-CURE2): the path is NOT wired and falls closed to
+  // the merchants' own form.
   //   eventChange: `mutateWorld.js` is FIRST PAINT (main.jsx -> store/index.js -> store/settlementSlice.js ->
   //     events/mutate.js -> events/mutateWorld.js); the brief forbids its import of the lazy `seatCircumstances.js`.
-  //   pulseTransfer: `applyWorldPulse.js` stands AT its size ceiling (`scripts/.size-baseline.json`: 907, shrink-only,
-  //     raised only by a chair ruling); the wiring costs 3 counted lines (910). The lane's owner rules; then this pin moves.
-  for (const key of ['eventChange', 'pulseTransfer']) {
+  // (pulseTransfer's stop, the size ceiling, was cured at U5-CURE2 and moved up to the wired paths above.)
+  for (const key of ['eventChange']) {
     test(`the STOP, pinned: ${key} is NOT wired: under the law it falls closed to the merchants' own form`, () => {
       for (const cause of PATHS[key].causes) {
         const s = PATHS[key].settled(PATHS[key].run(crownTown(LAW), cause));
