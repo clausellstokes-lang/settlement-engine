@@ -406,6 +406,18 @@ run exit 0, 40 PASS (`out/v24/gender/accept.txt`).
   (git push origin lane/veil-26-2026-11-20 > $L 2>&1; echo "EXIT $?" >> $L) & P=$!; for i in $(seq 1 60); do sleep 10; grep -q
   "settlementforge@1.0.0 check$" $L && { pkill -P $P; kill $P; break; }; grep -q '^EXIT' $L && break; done`.
 
+- 14:17 the chair: R3-CURE-5 on origin as WIP (`lane/veil-25-r3c5-wip-2026-11-20` at 101fae14d: dbff7eeb3 the cure of units
+  1-2; c4e2b1ab2 the measures); read dbff7eeb3 now; the key-level table to the chair.
+- 14:28 THE KEY-LEVEL TABLE (c4e2b1ab2 `out/v25/r3c5/unit2-keylevel-table{,-master}.txt`, twin only) to the chair: new shape,
+  `contestsNiche` served on 0% of nothing-hidden powers (the veil never serves it); master's shape, 67-88% of nothing-hidden
+  powers lack it at every kind and size; person keys 0 everywhere; withholding the holder = 97/99 rows in 68/70 of 92 towns.
+  RECOMMENDED: leave the key off (today's behaviour); the server's side to be read before the merge. THE CHAIR RULES.
+- 14:40 dbff7eeb3 READ ONCE (212, rollback, twin, born test): holds on §8 checks (1)-(3). ONE GAP TOWARD SENDING, sent to the
+  chair for R3-CURE-5: the pre-sweep goal/membership match (and the husk arm) pairs people by id ONLY WHERE THE ID IS A
+  STRING; a number id or no id keeps a swept goal/membership as a husk. Cure: id as text, a numeric-id plant, red first.
+- 14:19 PART 27 current. NEXT: R3-CURE-5's final commits read as a difference; then R3's merge and "R3 <commit>" with the
+  thirteen LOWER towns by name and rule (ruling 45); the chair seats VEIL-27 when the merge begins.
+
 ## 7. THE JOIN (the chair's word in VEIL-25's prompt): what the join must re-prove on the joined document
 The working line (origin/lane/join-2026-11-14, at 0c906948 when this was written) and four content lanes ADD SERVED TEXT at
 the join: the traditions' descriptions (their text a function only of facts no act of the DM can hide), the session sheet's
