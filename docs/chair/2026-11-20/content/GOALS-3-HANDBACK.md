@@ -1,6 +1,6 @@
 # GOALS-3 hand-back (LIVE; the lane's owner since the chair's "THE LANE IS YOURS at 010a1150b", 13:17 UTC)
 
-Written 2026-11-20 13:22 UTC (clock read by `date -u`). Branch `lane/goals-3-2026-11-20`, fast-forwarded to GOALS-2's final tip **010a1150b**. Every claim is EXECUTED unless marked PLAUSIBLE. Read beside it ONLY: `GOALS-2-HANDBACK.md` (its §1 rulings and §2 units stand) and the open briefs named below.
+Updated 2026-11-20 13:35 UTC; first written 2026-11-20 13:22 UTC (clock read by `date -u`). Branch `lane/goals-3-2026-11-20`, fast-forwarded to GOALS-2's final tip **010a1150b**. Every claim is EXECUTED unless marked PLAUSIBLE. Read beside it ONLY: `GOALS-2-HANDBACK.md` (its §1 rulings and §2 units stand) and the open briefs named below.
 
 ## 0. The measure (one command, about a minute): `node docs/chair/2026-11-20/content/goals/measures/goals-final.mjs <tree> 50 <out>`
 | measure (300 towns) | base 835fabd2d | 833e4d413 | d3937c3f8 (units 4+6 and the line merged) |
@@ -21,9 +21,9 @@ Output: `goals/measures/goals-final.d3937c3f8.out.txt`.
 |---|---|
 | hand-over tip 010a1150b | fast-forwarded |
 | the line 43ab0f5eb | **merged d3937c3f8** (no conflict) |
-| builder 7, the gate's cure | **OUT** (brief `goals/briefs/GOALS-3-BUILDER-7-BRIEF.md`, 45d9faefd; worktree `/home/user/wt-b7`, branch `lane/goals-3-2026-11-20-b7` from d3937c3f8, local to GOALS-3's container); builds A and the PERSONALITY reserve mechanism, then waits for the approved lines |
-| the PERSONALITY reserve lines | being measured and drafted (shortfall by cell); to the chair before builder 7 adds them |
-| confinement 833e4d413 → 3ebec303a (units 4+6) | running (a helper) |
+| builder 7, the gate's cure | **OUT** (brief `goals/briefs/GOALS-3-BUILDER-7-BRIEF.md`, 45d9faefd; worktree `/home/user/wt-b7`, branch `lane/goals-3-2026-11-20-b7` from d3937c3f8). WIP PUSHED as `lane/goals-3-2026-11-20-b7-wip` at d3613f2bd ((a)–(d) in goals.js, PERSONALITY reserve empty; its own count: identical 3 on 300 towns, all 'exhausted' floors; tests not yet written). A successor resumes from that branch with the brief |
+| the PERSONALITY reserve lines | 16 lines for 13 exhausted cells, WITH THE CHAIR for reading: `goals/GOALS-3-PERSONALITY-RESERVE-DRAFT.md` (e6ca13524); builder 7 adds them word for word once returned |
+| confinement 833e4d413 → 3ebec303a (units 4+6) | **NOT CONFINED** (reported to the chair 13:35 UTC): only `npcs[].goal` moves (control identical), but beyond the repeats and the refused pairing 717 golden / 1,075 census holdings move; 59 golden / 56 census towns with neither moved; 39 golden / 95 census docs gain a `goal.intent.*.target` where it was null. Being attributed by cause (CN2 rewording, harsh-tie guard, the held-text cascade, the intent target, a pass-one change). Scratch outputs not yet in the repo |
 
 ## 3. Still owed
 1. Builder 7: the lines in, red/green re-run, read line by line, merged; the measure by size against the gate.
