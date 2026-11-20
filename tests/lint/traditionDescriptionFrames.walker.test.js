@@ -15,12 +15,19 @@
  *
  * RED FIRST, IN MEMORY: each law's predicate is driven over a PLANTED string and must name it (a drama word in a
  * lead; a cause word in a keeper frame; a sentence no frame produces), so no arm can pass by refusing nothing.
+ *
+ * CTR10 FINISHED (TRAD-4 unit 5, 2026-11-20): EVERY LINE A DECLARED LINE (a frozen `line()` row whose declaration is
+ * atoms of the closed vocabulary, a twin, or the colour mark "presumes nothing": the house's rule,
+ * tests/lint/declaredLineShape.test.js :: isDeclaredLine); THE FLOORS, counted off the table's own exports (twins not
+ * counted); THE CRISIS DIMENSION (every excluded line of a crisis-scoped pool has its twin, and the exclusions are the
+ * ones named); THE OUTCOME LAW (no line says what became of the rite this year); THE KINDS' TOTALITY, by a planted type.
  */
 import { describe, it, expect } from 'vitest';
 import {
   ACT_LEADS, ELEMENT_GLOSS, HOUSE_FRAMES, POWER_FRAMES, OWNER_FRAMES, CAUSE_FRAMES, ECONOMY_FRAMES, KEEPER_HOUSES, ECONOMY_FIT,
-  POWER_FRAME_VERBS, DEAD_EVENT_TYPES,
+  POWER_FRAME_VERBS, DEAD_EVENT_TYPES, DEAD_EVENT_PHRASES, CRISIS_SCOPED_ACTS, CRISIS_SCOPED_ELEMENTS,
 } from '../../src/data/traditionDescriptionTable.js';
+import { assertDeclarable, isColourLine, declarationOf, atomsOf, CRISIS_FAMILY_KINDS } from '../../src/domain/facts/factVocabulary.js';
 import * as TABLE from '../../src/data/traditionDescriptionTable.js';
 import { describeTradition } from '../../src/domain/traditions/traditionDescription.js';
 import { deriveFoundingTraditions } from '../../src/domain/traditions/genesis.js';
@@ -31,19 +38,32 @@ import { isHideableHouse } from '../../src/domain/people/cardVeil.js';
 const CAUSE_WORDS = /\b(since|because|in memory of|founded|founding by|after|to mark|owing to|thanks to)\b/i;
 const DRAMA_WORDS = /\b(blood\w*|grim\w*|dread\w*|fear\w*|feud\w*|war\b|wars|curse\w*|doom\w*|troubl\w*|strife|terror\w*|haunt\w*|vengeance|bitter\w*|dark\w*|sinister|violen\w*|massacre\w*|slaughter\w*|tragic\w*|tragedy|sorrow\w*|grief|griev\w*|desperat\w*|ruin\w*|menac\w*|ominous|uneasy|tension\w*|secret\w*|rival\w*)\b/i;
 
+/** A line's text: a declared row's `text` (a bare string is itself, and is named undeclared by `undeclaredIn`). */
+const textOf = (l) => (typeof l === 'string' ? l : l.text);
+
+/**
+ * Every authored line of the table AS THE TABLE HOLDS IT (a row, or a bare string), by its home, in its pool: S1's leads
+ * and glosses, and the five frame tables (house, power, owner, cause, economy). `pool` is the leaf's pool id.
+ */
+function rows() {
+  /** @type {Array<{ home: string, pool: string, line: unknown, cause: boolean }>} */
+  const out = [];
+  const table = (home, pools, cause = false) => {
+    for (const [k, pool] of Object.entries(pools)) pool.forEach((line, i) => out.push({ home: `${home}.${k}.${i}`, pool: `${home}.${k}`, line, cause }));
+  };
+  table('lead', ACT_LEADS);
+  table('gloss', ELEMENT_GLOSS);
+  table('house', HOUSE_FRAMES);
+  table('power', POWER_FRAMES);
+  OWNER_FRAMES.forEach((line, i) => out.push({ home: `owner.${i}`, pool: 'owner', line, cause: false }));
+  table('cause', CAUSE_FRAMES, true);
+  table('economy', ECONOMY_FRAMES);
+  return out;
+}
+
 /** Every authored template string, by its home. */
 function templates() {
-  /** @type {Array<{ home: string, text: string, cause: boolean }>} */
-  const out = [];
-  const add = (home, text, cause = false) => out.push({ home, text, cause });
-  for (const [act, pool] of Object.entries(ACT_LEADS)) pool.forEach((l, i) => add(`lead.${act}.${i}`, l.text));
-  for (const [el, pool] of Object.entries(ELEMENT_GLOSS)) pool.forEach((l, i) => add(`gloss.${el}.${i}`, l.text));
-  for (const [k, list] of Object.entries(HOUSE_FRAMES)) list.forEach((t, i) => add(`house.${k}.${i}`, t));
-  for (const [k, list] of Object.entries(POWER_FRAMES)) list.forEach((t, i) => add(`power.${k}.${i}`, t));
-  OWNER_FRAMES.forEach((t, i) => add(`owner.${i}`, t));
-  for (const [k, list] of Object.entries(CAUSE_FRAMES)) list.forEach((t, i) => add(`cause.${k}.${i}`, t, true));
-  for (const [k, list] of Object.entries(ECONOMY_FRAMES)) list.forEach((t, i) => add(`economy.${k}.${i}`, t));
-  return out;
+  return rows().map((r) => ({ home: r.home, text: textOf(r.line), cause: r.cause }));
 }
 
 /** Every authored prose FORM a frame's slot may take from the table itself (the income prose; the reader's event kinds). */
@@ -76,7 +96,8 @@ const strayIn = (text, matchers) => text.split(/(?<=\.)\s+(?=[A-Z])/).filter((s)
 
 describe('traditionDescriptionFrames — the closed set', () => {
   it('THE COUNT: the authored template strings number exactly the pin (a new frame moves it on purpose)', () => {
-    expect(templates().length).toBe(92);
+    // 92 → 125 (TRAD-4 unit 5): every gloss pool raised to three lines, and harvest's two new thanks lines' twins
+    expect(templates().length).toBe(125);
   });
 
   it('every frame slot is one of the slots the leaf fills', () => {
@@ -132,9 +153,24 @@ describe('traditionDescriptionFrames — the level law (CTR6, the owner\'s calm 
   });
 });
 
+/**
+ * THE KINDS' TOTALITY: the kinds that lack a phrase, and the phrases that name no kind (each list empty when the two
+ * tables agree). @param {ReadonlyArray<string>} types @param {Readonly<Record<string, string>>} phrases
+ */
+const kindsOutOfStep = (types, phrases) => ({
+  noPhrase: types.filter((t) => typeof phrases[t] !== 'string' || !phrases[t]),
+  noKind: Object.keys(phrases).filter((k) => !types.includes(k)),
+});
+
 describe('traditionDescriptionFrames — the reader\'s event kinds (TRAD-3 unit 4, the chair\'s item 3)', () => {
   it('every event kind a rite of the dead may be kept in memory of has one authored phrase, and nothing else does', () => {
     expect(Object.keys(TABLE.DEAD_EVENT_PHRASES || {}).sort()).toEqual([...DEAD_EVENT_TYPES].sort());
+    expect(kindsOutOfStep(DEAD_EVENT_TYPES, DEAD_EVENT_PHRASES)).toEqual({ noPhrase: [], noKind: [] });
+  });
+
+  it('RED FIRST (TRAD-4 unit 5, the chair 13:32): a type planted into DEAD_EVENT_TYPES with no phrase is named; a phrase with no kind is named', () => {
+    expect(kindsOutOfStep([...DEAD_EVENT_TYPES, 'popular_uprising'], DEAD_EVENT_PHRASES)).toEqual({ noPhrase: ['popular_uprising'], noKind: [] });
+    expect(kindsOutOfStep(DEAD_EVENT_TYPES.slice(1), DEAD_EVENT_PHRASES)).toEqual({ noPhrase: [], noKind: [DEAD_EVENT_TYPES[0]] });
   });
 
   it('each phrase is a plain lower-case noun phrase with its article: no drama word, no cause word, no slot', () => {
@@ -144,6 +180,150 @@ describe('traditionDescriptionFrames — the reader\'s event kinds (TRAD-3 unit 
       expect(p, p).toMatch(/^the [a-z]+(?: [a-z]+)*$/);
       expect(DRAMA_WORDS.test(p) || CAUSE_WORDS.test(p) || /\{/.test(p), p).toBe(false);
     }
+  });
+});
+
+/** The house's declaration keys (tests/lint/declaredLineShape.test.js :: isDeclaredLine): atoms, a twin, or colour. */
+const DECLARATION_KEYS = Object.freeze(['needs', 'excludes', 'crisis', 'twinOf', 'colour']);
+/**
+ * THE UNDECLARED-LINE PREDICATE: the homes of rows that are not a frozen `line()` row with a string `text` and a
+ * declaration (a bare string is the case it was written for).
+ */
+const undeclaredIn = (list) => list.filter(({ line }) => !(line && typeof line === 'object' && !Array.isArray(line)
+  && Object.isFrozen(line) && typeof line.text === 'string' && DECLARATION_KEYS.some((k) => Object.hasOwn(line, k)))).map((r) => r.home);
+
+describe('traditionDescriptionFrames — EVERY LINE A DECLARED LINE (CTR10; TRAD-4 unit 5 item 1)', () => {
+  it('every authored line of the table (leads, glosses and the five frame tables) is a declared row', () => {
+    expect(rows().length).toBe(templates().length);
+    expect(undeclaredIn(rows())).toEqual([]);
+  });
+
+  it('every declared atom is an atom of the closed vocabulary with a reader (assertDeclarable); a colour line declares nothing else (isColourLine)', () => {
+    const bad = [];
+    for (const { home, line } of rows()) {
+      if (!line || typeof line !== 'object') continue; // named by the arm above
+      try {
+        isColourLine(line);
+        for (const a of [...(line.needs || []), ...(line.excludes || [])]) assertDeclarable(a);
+        for (const c of line.crisis || []) assertDeclarable(`crisis: ${c}`);
+      } catch (e) { bad.push(`${home}: ${e.message}`); }
+    }
+    expect(bad).toEqual([]);
+  });
+
+  it('a twin names a line of its own pool, and is reached only from it', () => {
+    const stray = [];
+    for (const r of rows()) {
+      const twinOf = r.line && typeof r.line === 'object' ? r.line.twinOf : undefined;
+      if (typeof twinOf !== 'string') continue;
+      const original = rows().find((o) => o.pool === r.pool && o !== r && textOf(o.line) === twinOf && !o.line.twinOf);
+      if (!original) stray.push(r.home);
+    }
+    expect(stray).toEqual([]);
+  });
+
+  it('RED FIRST: a bare string planted in a frame table is named undeclared; so is a row with no declaration', () => {
+    const planted = [...rows(), { home: 'house.body.planted', line: 'It is kept by {house}.' }, { home: 'owner.planted', line: Object.freeze({ text: 'It is kept now by {owner}.' }) }];
+    expect(undeclaredIn(planted)).toEqual(['house.body.planted', 'owner.planted']);
+  });
+});
+
+/** The non-twin lines of a pool (a twin is reached only by resolution: it is not a line of the draw). */
+const drawable = (pool) => pool.filter((l) => !(l && typeof l === 'object' && typeof l.twinOf === 'string'));
+/** THE FLOORS (CTR10; TRAD-4 unit 5 item 2): every pool the leaf draws, by its slot, with its floor. */
+function floors() {
+  /** @type {Array<{ slot: string, size: number, floor: number }>} */
+  const out = [];
+  const each = (home, pools, floor) => { for (const [k, pool] of Object.entries(pools)) out.push({ slot: `${home}.${k}`, size: drawable(pool).length, floor }); };
+  each('lead', ACT_LEADS, 4);
+  each('gloss', ELEMENT_GLOSS, 3);
+  each('house', HOUSE_FRAMES, 3);
+  each('power', POWER_FRAMES, 3);
+  out.push({ slot: 'owner', size: drawable(OWNER_FRAMES).length, floor: 3 });
+  each('cause', CAUSE_FRAMES, 3);
+  each('economy', ECONOMY_FRAMES, 3);
+  return out;
+}
+/** The slots below their floor, by name and size. */
+const belowFloor = (list) => list.filter((f) => f.size < f.floor).map((f) => `${f.slot}: ${f.size} < ${f.floor}`);
+
+describe('traditionDescriptionFrames — THE FLOORS, counted off the table\'s own exports (TRAD-4 unit 5 item 2)', () => {
+  it('S1: four leads an act; every gloss pool three; every keeper frame kind three; the founding causes (both) and the dead\'s three; every economy band three (twins not counted)', () => {
+    const slots = floors().map((f) => f.slot);
+    // the floor list covers every pool the leaf draws (no pool escapes it by being absent)
+    for (const s of ['cause.founding', 'cause.foundingBare', 'cause.dead', 'economy.chief', 'economy.lesser', 'economy.only', 'owner',
+      'house.body', 'house.bodyPerson', 'house.place', 'house.placePerson', 'house.placePower', 'power.seat', 'power.religious', 'power.merchantry']) {
+      expect(slots, s).toContain(s);
+    }
+    expect(slots.filter((s) => s.startsWith('lead.')).length).toBe(6);
+    expect(slots.filter((s) => s.startsWith('gloss.')).length).toBe(16);
+    expect(belowFloor(floors())).toEqual([]);
+  });
+
+  it('RED FIRST: a pool planted below its floor is named with its size', () => {
+    expect(belowFloor([...floors(), { slot: 'gloss.planted', size: 2, floor: 3 }])).toEqual(['gloss.planted: 2 < 3']);
+  });
+});
+
+/** The crisis atoms a line excludes (`excludes: crisis: F`), as written. */
+const crisisExclusions = (line) => (line && typeof line === 'object' ? (line.excludes || []).filter((a) => /^crisis\b/.test(a)) : []);
+/** For each crisis-scoped pool: the excluded lines, each with its atoms and its twin's text (null: no twin). */
+function crisisMap(scoped) {
+  /** @type {Record<string, Array<{ text: string, excludes: string[], twin: string|null, twinAny: boolean }>>} */
+  const out = {};
+  for (const [pool, lines] of scoped) {
+    out[pool] = drawable(lines).filter((l) => crisisExclusions(l).length).map((l) => {
+      const twin = lines.find((t) => t && typeof t === 'object' && t.twinOf === l.text);
+      return { text: l.text, excludes: crisisExclusions(l), twin: twin ? twin.text : null, twinAny: !!twin && atomsOf(declarationOf(twin)).join() === 'crisis: any' };
+    });
+  }
+  return out;
+}
+const SCOPED = () => [...CRISIS_SCOPED_ACTS.map((a) => [`lead.${a}`, ACT_LEADS[a]]), ...CRISIS_SCOPED_ELEMENTS.map((e) => [`gloss.${e}`, ELEMENT_GLOSS[e]])];
+/** The excluded lines of a crisis-scoped pool that do not resolve to a twin saying only what is kept (`crisis: any`). */
+const untwinned = (map) => Object.entries(map).flatMap(([pool, list]) => list.filter((x) => !x.twin || !x.twinAny).map((x) => `${pool}: ${x.text}`));
+/** The lines of a crisis-scoped pool that are silent on the crisis (silence there reads as calm: a line says its stance). */
+const silentIn = (scoped) => scoped.flatMap(([pool, lines]) => lines.filter((l) => !(l && typeof l === 'object' && ((l.crisis || []).length || crisisExclusions(l).length))).map((l) => `${pool}: ${textOf(l)}`));
+
+describe('traditionDescriptionFrames — THE CRISIS DIMENSION (CTR10; TRAD-4 unit 5 item 3)', () => {
+  it('the crisis-scoped pools are the feast and fair leads and the harvest gloss, and the families that exclude their lines are the ones named', () => {
+    expect(SCOPED().map(([p]) => p)).toEqual(['lead.feast', 'lead.fair', 'gloss.harvest']);
+    const map = crisisMap(SCOPED());
+    const families = Object.fromEntries(Object.entries(map).map(([p, list]) => [p, [...new Set(list.flatMap((x) => x.excludes))]]));
+    // hunger: a feast eaten in common, and thanks given for the harvest, contradict a famine or a siege's want (and any
+    // crisis while the food record reads a deficit); threat: a fair of stalls and of traders from outside contradicts a
+    // siege, an occupation or the beasts at the door. Each family's kinds are the vocabulary's own (CRISIS_FAMILY_KINDS).
+    // Declaring no crisis value in a crisis-scoped pool, each excluded line is ALSO refused under any other active crisis
+    // (silence reads calm) and resolves to its twin: the family names the contradiction, not the whole of the refusal.
+    expect(families).toEqual({ 'lead.feast': ['crisis: hunger'], 'lead.fair': ['crisis: threat'], 'gloss.harvest': ['crisis: hunger'] });
+    expect([...CRISIS_FAMILY_KINDS.hunger]).toEqual(['famine', 'under_siege']);
+    expect([...CRISIS_FAMILY_KINDS.threat]).toEqual(['under_siege', 'occupied', 'monster_pressure']);
+    for (const [p, list] of Object.entries(map)) expect(list.length, p).toBeGreaterThan(0);
+  });
+
+  it('every excluded line resolves to a TWIN that says only what is kept (crisis: any), and no line of a scoped pool is silent', () => {
+    expect(untwinned(crisisMap(SCOPED()))).toEqual([]);
+    expect(silentIn(SCOPED())).toEqual([]);
+  });
+
+  it('RED FIRST: an excluded line planted with no twin is named; a silent line planted in a scoped pool is named', () => {
+    const planted = [...SCOPED(), ['lead.planted', [Object.freeze({ text: 'A feast of plenty', excludes: ['crisis: hunger'] }), Object.freeze({ text: 'A plain feast', colour: true })]]];
+    expect(untwinned(crisisMap(planted))).toEqual(['lead.planted: A feast of plenty']);
+    expect(silentIn(planted)).toEqual(['lead.planted: A plain feast']);
+  });
+});
+
+/** THE OUTCOME LAW: a word that says what became of a rite this year (the simulation's own record, `lastOutcome`). */
+const OUTCOME_WORDS = /\b(this year|last year|this season|triumph\w*|failure|failed|cancel\w*|set aside|troubled|well kept|modestly|was held|was kept|went well|went badly|lapsed|abandoned|no longer|not held)\b/i;
+const outcomeViolations = (strings) => strings.filter((s) => OUTCOME_WORDS.test(s));
+
+describe('traditionDescriptionFrames — the text never says what became of the rite this year (TRAD-4 unit 5 item 3)', () => {
+  it('no authored line or prose form states an outcome', () => {
+    expect(outcomeViolations([...templates().map((t) => t.text), ...proseForms()])).toEqual([]);
+  });
+
+  it('RED FIRST: an outcome planted in a frame is named', () => {
+    expect(outcomeViolations(['It is kept by {house}.', 'It was a triumph this year.', 'It was set aside.'])).toEqual(['It was a triumph this year.', 'It was set aside.']);
   });
 });
 

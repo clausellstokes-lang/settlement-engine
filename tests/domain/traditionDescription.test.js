@@ -9,8 +9,13 @@
  * Every arm is written against a hand-built record so the fact it reads is on the page; the born pool is the walker's
  * (tests/lint/traditionDescriptionFrames.walker.test.js) and the shared page's (tests/security/…SharedPage.test.js).
  */
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { describeTradition, holdsAName, HELD_NAME_STOP_WORDS } from '../../src/domain/traditions/traditionDescription.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { deriveFoundingTraditions } from '../../src/domain/traditions/genesis.js';
+import { factsOf } from '../../src/domain/facts/factsOf.js';
+import { declarationAdmits, declarationOf } from '../../src/domain/facts/factVocabulary.js';
+import { ACT_LEADS, ELEMENT_GLOSS, CRISIS_SCOPED_ACTS, CRISIS_SCOPED_ELEMENTS } from '../../src/data/traditionDescriptionTable.js';
 
 /** A rite as genesis writes it (`genesis.js :: assembleRec`'s shape, the fields the leaf reads). */
 function rite(index, element, act, extra = {}) {
@@ -405,6 +410,160 @@ describe('describeTradition — the audience (CTR5), fail-closed to the reader',
       expect(r.text).not.toMatch(/Edda Vogt|the priest/);
     }
   });
+});
+
+const TABLE_PATH = '../../src/data/traditionDescriptionTable.js';
+const LEAF_PATH = '../../src/domain/traditions/traditionDescription.js';
+/**
+ * The leaf re-imported over a table with `over` laid on it (a PLANTED table: the real one is frozen and never edited).
+ * @param {(t: Record<string, unknown>) => Record<string, unknown>} over
+ */
+async function leafOver(over) {
+  vi.resetModules();
+  vi.doMock(TABLE_PATH, async (importOriginal) => {
+    const t = /** @type {Record<string, unknown>} */ (await importOriginal());
+    return { ...t, ...over(t) };
+  });
+  try {
+    return (await import(LEAF_PATH)).describeTradition;
+  } finally {
+    vi.doUnmock(TABLE_PATH);
+  }
+}
+
+describe('describeTradition — the kinds\' totality, fail-closed (TRAD-4 unit 5 item 4; the chair 13:32)', () => {
+  /** a town whose record holds ONE graded event, of a kind planted into DEAD_EVENT_TYPES (a real history template type) */
+  const risen = () => town({ history: { ...town().history, historicalEvents: [
+    { name: 'The Rising of the Commons', templateType: 'popular_uprising', severity: 'major', yearsAgo: 30 },
+  ] } });
+
+  it('a rite of the dead whose only eligible event is of a type with NO phrase prints no cause clause for the reader (never "undefined", never the event\'s name); the owner\'s page keeps it', async () => {
+    const planted = await leafOver((t) => ({ DEAD_EVENT_TYPES: Object.freeze([.../** @type {string[]} */ (t.DEAD_EVENT_TYPES), 'popular_uprising']) }));
+    try {
+      const rec = rite(1, 'the-dead', 'offering');
+      const owner = planted(rec, risen(), { audience: 'owner' });
+      // anchored: the planted kind IS eligible: the owner's page keeps the rite in memory of the event, by its name
+      expect(owner.text).toMatch(/in memory of the Rising of the Commons(?: since then)?, 30 years ago/);
+      expect(owner.parts.origin).toBe('cause');
+      const reader = planted(rec, risen(), { audience: 'reader' });
+      expect(reader.parts.origin).not.toBe('cause');
+      expect(reader.named.events).toEqual([]);
+      // anchored: the owner's text above, from this same planted table and town, names the event and its years
+      expect(reader.text).not.toMatch(/in memory of|undefined|null|Rising|Commons|years ago/);
+      // and the reader's clause stands as soon as the kind has its phrase (the omission is the missing phrase's alone)
+      const phrased = await leafOver((t) => ({
+        DEAD_EVENT_TYPES: Object.freeze([.../** @type {string[]} */ (t.DEAD_EVENT_TYPES), 'popular_uprising']),
+        DEAD_EVENT_PHRASES: Object.freeze({ .../** @type {Record<string, string>} */ (t.DEAD_EVENT_PHRASES), popular_uprising: 'the rising' }),
+      }));
+      expect(phrased(rec, risen(), { audience: 'reader' }).text).toMatch(/in memory of the rising(?: since then)?, 30 years ago/);
+    } finally {
+      vi.resetModules();
+    }
+  });
+});
+
+describe('describeTradition — the text never says what became of the rite this year (TRAD-4 unit 5 item 3)', () => {
+  it('the record\'s lastOutcome and lastHeldYear move no byte of the description, owner or reader', () => {
+    const moved = [];
+    let compared = 0;
+    for (const [i, el, act] of [[0, 'founding', 'feast'], [1, 'harvest', 'feast'], [2, 'market', 'fair'], [3, 'the-dead', 'vigil'], [4, 'forge', 'contest']]) {
+      for (const audience of ['owner', 'reader']) {
+        const base = describeTradition(rite(i, el, act), town(), { audience }).text;
+        for (const lastOutcome of ['triumph', 'good', 'modest', 'troubled', 'failure', 'cancelled']) {
+          const d = describeTradition(rite(i, el, act, { lastOutcome, lastHeldYear: 119 }), town(), { audience }).text;
+          compared += 1;
+          if (d !== base) moved.push(`${el}/${act} ${audience} ${lastOutcome}: ${d}`);
+        }
+      }
+    }
+    expect(compared).toBe(60);
+    expect(moved).toEqual([]);
+  });
+});
+
+describe('describeTradition — THE CRISIS DIMENSION on born towns (TRAD-4 unit 5 item 3)', () => {
+  const CRISES = ['famine', 'under_siege', 'occupied', 'wartime', 'plague_onset'];
+  const SEEDS = ['village', 'town', 'city'].flatMap((settType) => [0, 1, 2].map((i) => ({ settType, seed: `trad4-u5-${settType}-${i}` })));
+  const births = new Map();
+  /** @param {string} settType @param {string} seed @param {string[]} selectedStresses (each birth once) */
+  const born = (settType, seed, selectedStresses) => {
+    const key = `${seed}|${selectedStresses.join()}`;
+    if (!births.has(key)) {
+      births.set(key, generateSettlementPipeline({
+        settType, culture: 'germanic', terrainOverride: 'auto', tradeRouteAccess: 'random_trade', monsterThreat: 'civilized',
+        selectedStressesRandom: false, selectedStresses,
+      }, null, { seed, customContent: {} }));
+    }
+    return births.get(key);
+  };
+  const SCOPED = [...CRISIS_SCOPED_ACTS.map((a) => ['lead', ACT_LEADS[a]]), ...CRISIS_SCOPED_ELEMENTS.map((e) => ['gloss', ELEMENT_GLOSS[e]])];
+  /** The lines of the crisis-scoped pools this record refuses (the vocabulary's one rule, `declarationAdmits`). */
+  const excludedIn = (t) => {
+    const f = factsOf(t);
+    /** @type {{ lead: Set<string>, gloss: Set<string> }} */
+    const out = { lead: new Set(), gloss: new Set() };
+    for (const [k, pool] of SCOPED) for (const l of pool) if (!declarationAdmits(declarationOf(l), f, { crisisScoped: true }).admitted) out[k].add(l.text);
+    return out;
+  };
+  /** S1's lead and gloss (no lead or gloss holds a full stop or " that "). */
+  const s1Of = (text) => {
+    const s = text.slice(0, text.indexOf('.'));
+    const i = s.indexOf(' that ');
+    return i < 0 ? { lead: s, gloss: null } : { lead: s.slice(0, i), gloss: s.slice(i + ' that '.length) };
+  };
+  /** Every S1 line a town's descriptions read, owner and reader, from the crisis-scoped pools. */
+  const readOf = (t) => {
+    const out = [];
+    for (const rec of deriveFoundingTraditions(t)) {
+      const { act, element } = rec.coreMotif;
+      for (const audience of ['owner', 'reader']) {
+        const d = describeTradition(rec, t, { audience });
+        if (!d) continue;
+        const { lead, gloss } = s1Of(d.text);
+        if (CRISIS_SCOPED_ACTS.includes(act)) out.push({ k: 'lead', text: lead, audience });
+        if (CRISIS_SCOPED_ELEMENTS.includes(element) && gloss) out.push({ k: 'gloss', text: gloss, audience });
+      }
+    }
+    return out;
+  };
+  const feastLeads = ACT_LEADS.feast.filter((l) => !l.twinOf).map((l) => l.text);
+  const fairExcluded = ACT_LEADS.fair.filter((l) => (l.excludes || []).includes('crisis: threat')).map((l) => l.text);
+
+  it('born under famine, under_siege, occupied, wartime and plague_onset: no excluded line is read, owner or reader (and the crisis is the record\'s own)', () => {
+    const hits = [];
+    const unpinned = [];
+    /** @type {Record<string, number>} */
+    const scopedReads = {};
+    // seed-loop: collected — every crisis and seed runs; its misses go to `unpinned` and `hits`, each asserted whole after the loop
+    for (const crisis of CRISES) for (const { settType, seed } of SEEDS) {
+      scopedReads[crisis] ??= 0;
+      const t = born(settType, seed, [crisis]);
+      if (!factsOf(t).crisis.has(crisis)) unpinned.push(`${seed}: ${crisis} is not on the record`);
+      const ex = excludedIn(t);
+      // the vocabulary's families, pinned: hunger takes every feast lead (famine, siege); threat the two fair lines (siege, occupation)
+      if (crisis === 'famine' || crisis === 'under_siege') for (const l of feastLeads) if (!ex.lead.has(l)) unpinned.push(`${seed}: ${l}`);
+      if (crisis === 'under_siege' || crisis === 'occupied') for (const l of fairExcluded) if (!ex.lead.has(l)) unpinned.push(`${seed}: ${l}`);
+      for (const r of readOf(t)) {
+        scopedReads[crisis] += 1;
+        if (ex[r.k].has(r.text)) hits.push(`${t.name} (${seed} under ${crisis}, ${r.audience}): ${r.k} "${r.text}"`);
+      }
+    }
+    expect(unpinned).toEqual([]);
+    expect(CRISES.filter((c) => !(scopedReads[c] > 0))).toEqual([]);
+    expect(hits).toEqual([]);
+  }, 300000);
+
+  it('NON-VACUITY: the same seeds born calm read the lines a crisis excludes (at least one, owner and reader)', () => {
+    const union = { lead: new Set(), gloss: new Set() };
+    for (const crisis of CRISES) for (const { settType, seed } of SEEDS) {
+      const ex = excludedIn(born(settType, seed, [crisis]));
+      for (const k of /** @type {const} */ (['lead', 'gloss'])) for (const x of ex[k]) union[k].add(x);
+    }
+    const read = { owner: 0, reader: 0 };
+    for (const { settType, seed } of SEEDS) for (const r of readOf(born(settType, seed, []))) if (union[r.k].has(r.text)) read[r.audience] += 1;
+    expect(read.owner).toBeGreaterThan(0);
+    expect(read.reader).toBeGreaterThan(0);
+  }, 120000);
 });
 
 describe('describeTradition — derived at render: pure, deterministic, writes nothing (CTR3, CTR4)', () => {
