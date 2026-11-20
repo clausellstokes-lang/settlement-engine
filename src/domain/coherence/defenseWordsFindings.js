@@ -86,8 +86,8 @@ const CUSTOMER_AFTER = /^,?\s+(?:and|or)\s+travell?ers?\b/i;
 /** GARRISON DUTY HIRED OUT: garrison duty or contracts as work a hired company sells. "Hire trained soldiers for military campaigns, garrison duty, and escorts.", "Offers caravan escort, garrison contracts, and short-term military hire". */
 const GARRISON_WORK_AFTER = /^\s+(?:duty|contracts?)\b/i;
 const HIRE_IN_SENTENCE = /\bhire\b/i;
-/** A HOSPITAL A HOUSE MAY KEEP: the catalogue's hedge about one house, not a hospital standing. "May operate hospital/school.", "It may keep a hospital or a school." */
-const HOSPITAL_HEDGE_BEFORE = /\bmay\s+(?:operate|keep)\s+(?:a\s+)?$/i;
+// No hospital reading (the chair's ruling of 18:46): "May operate hospital/school." and "It may keep a hospital or a
+// school." where no hospital stands are a real fault, cured in the data rows (WORDING-CURE), never excused here.
 
 /** The matched word itself: the adjective, the plural noun, the one soldier. */
 const WALLED_WORD = /^walled$/i;
@@ -111,7 +111,6 @@ const NOT_A_CLAIM = Object.freeze({
     || CUSTOMER_BEFORE.test(before) && CUSTOMER_AFTER.test(after)
   ),
   garrison: (_before, _word, after, sentence) => GARRISON_WORK_AFTER.test(after) && HIRE_IN_SENTENCE.test(sentence),
-  hospital: (before) => HOSPITAL_HEDGE_BEFORE.test(before),
 });
 
 /** @param {string} text @returns {string[]} */

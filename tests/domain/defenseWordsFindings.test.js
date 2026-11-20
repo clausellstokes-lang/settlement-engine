@@ -293,9 +293,13 @@ describe('MATCHER · a defence term is a finding only as a claim about this plac
   /**
    * The measured sentences the rule does NOT excuse (they stay findings): the foundling home's "within its walls" is
    * the building's own wall only because it stands in the building's own description, a thing the sentence alone does
-   * not say; the same words of the place ("Its walls are kept by the households in turn.") are a claim.
+   * not say; the same words of the place ("Its walls are kept by the households in turn.") are a claim. The monastery's
+   * hospital lines are a REAL fault where no hospital stands (the chair's ruling of 18:46): cured in the data rows by a
+   * later unit (WORDING-CURE), never excused by the checker.
    */
   const UNEXCUSED = new Set([
+    'May operate hospital/school.',
+    'It may keep a hospital or a school.',
     'Takes in abandoned infants and small children and keeps them in basic care until they are apprenticed, placed with families, or raised on within its walls.',
   ]);
 
@@ -314,20 +318,22 @@ describe('MATCHER · a defence term is a finding only as a claim about this plac
 
   // One registered test per half (a loop of `it` would park this file in the sovereignty walker's census); each
   // failing row is named in the list the assertion prints.
-  it('(a) every measured row the rule excuses is quiet (37 rows, 25 distinct sentences, 126 findings)', () => {
+  it('(a) every measured row the rule excuses is quiet (31 rows, 23 distinct sentences, 119 findings)', () => {
     const excused = MEASURED.filter((row) => !UNEXCUSED.has(row[4]));
-    expect(excused).toHaveLength(37);
-    expect(new Set(excused.map((row) => row[4])).size).toBe(25);
-    expect(excused.reduce((n, row) => n + row[3], 0)).toBe(126);
+    expect(excused).toHaveLength(31);
+    expect(new Set(excused.map((row) => row[4])).size).toBe(23);
+    expect(excused.reduce((n, row) => n + row[3], 0)).toBe(119);
     const stillFound = excused
       .filter(([, key, , , sentence]) => defenseWordsFindings(stubOf(key), sentence).length > 0)
       .map(([term, key, field, , sentence]) => `[${term} · ${key} · ${field}] ${sentence}`);
     expect(stillFound).toEqual([]);
   });
 
-  it('(a) the measured row the rule cannot read stays a finding (the foundling home\'s "within its walls")', () => {
+  it('(a) the measured rows the rule does not excuse stay findings (7 rows, 3 distinct sentences, 8 findings: the foundling home\'s "within its walls", the monastery\'s two hospital lines)', () => {
     const unexcused = MEASURED.filter((row) => UNEXCUSED.has(row[4]));
-    expect(unexcused).toHaveLength(1);
+    expect(unexcused).toHaveLength(7);
+    expect(new Set(unexcused.map((row) => row[4])).size).toBe(3);
+    expect(unexcused.reduce((n, row) => n + row[3], 0)).toBe(8);
     for (const [term, key, , , sentence] of unexcused) {
       expect(defenseWordsFindings(stubOf(key), sentence).map((f) => f.term)).toEqual([term]);
     }
