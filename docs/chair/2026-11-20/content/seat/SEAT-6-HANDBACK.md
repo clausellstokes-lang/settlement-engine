@@ -1,4 +1,4 @@
-# SEAT-6 — HAND-BACK (kept current at every push; last written 2026-11-20T19:31:52Z, read from `date -u`)
+# SEAT-6 — HAND-BACK (kept current at every push; last written 2026-11-20T19:37:35Z, read from `date -u`)
 
 **For the next owner of this lane: this file, `SEAT-5-HANDBACK.md` §1 to §3 (every ruling 1 to 52, the units' table, the instruments) and `briefs/` are all you need.** This file adds only what changed since SEAT-5's hand-over.
 
@@ -64,3 +64,15 @@ Branch `lane/seat-6-2026-11-20` (origin), fast-forwarded to `8bfabc080`: the cha
 > Order, pushes and the cherry-pick rule are unchanged.
 
 **What it changes in this hand-back:** "DARK" in items 9, 21, 42 and the briefs means OFF BY DEFAULT ON THE LANE, proved byte-identical, and READY TO LIGHT; the light is the chair's one unit at the close. Arm LP (`SEAT_CIRCUMSTANCE_TUNING`'s proposed figures) is NOT lit: a measured option only. Every measure's headline is the LIT world (seat law on, contest at L1 = today's figures) on the VISITOR pool. The section "TO LIGHT" follows (owed; §5).
+
+## 6. THE STATE AT THE HAND-OVER TO SEAT-7 (2026-11-20T19:37:35Z; the chair, 19:34Z: "Then hand over to SEAT-7")
+
+**FOR SEAT-7: read this file whole, then `SEAT-5-HANDBACK.md` §1 (items 1 to 52) and the open briefs below. Every ruling in force is SEAT-5's 1 to 52 plus this file's 53 to 68.**
+
+- **The lane's last green code tip: `c9e6ce45b`** (U5 + U5-CURE merged, registers re-taken, `tests/lint` whole 220/220, 3271/3271). After it, docs only.
+- **OUT, builder B5c, U5-CURE2** (`briefs/U5-CURE2.md` WITH its last section, the chair's newer ruling: NO MOVE; the `../rulingPower.js` import collapsed to one line; `applyWorldPulse.js` 902 → 903–904; `scripts/.size-baseline.json` LOWERED by its own door; relayed to B5c at 19:3xZ, before it had reported). Branch `lane/seat-2026-11-20-u5-cure2` from `c9e6ce45b`, in SEAT-6's container. Returns to SEAT-6, which pushes it (`-wip` if unfinished) and relays one line through the chair. AT ITS MERGE: check the move was NOT made (or was reverted in its own commit); arm (11) `pulseTransfer` stop → kept in the wiring's commit, `eventChange` still a pinned stop (item 65); arm (12)'s 22 dark digests unchanged; registers: the size baseline (lowered), the tuning inventory (`SEAT_CIRCUMSTANCE_TUNING`'s dependents gain `applyWorldPulse.js`), lighting census unchanged (no new file), observed-shape row NAMED.
+- **OUT, builder BUK2, UK** (`briefs/UK-BAND.md`, the chair's 19:34Z approval: ONE UNIT, TWO COMMITS, (a) the fold under the law, (b) 'wealthiest merchant', droppable). Branch `lane/seat-2026-11-20-uk` from `fb937f369`, in SEAT-6's container. Same return route. AT ITS MERGE: the 55 test files importing `npcGenerator.js`; `tests/lint` whole (`poolDominance`, `writerReach` must NOT move dark); confine-two EQUAL; the lit headline (`uk/measure-uk.sh`) reproduces SK/SKW and every move is under the law only; U9's capture measure and U12's band arm (item 39) re-read on the joined tree later.
+- **NEXT after both:** U6 (`factionDynamics.js` released at `1cd2e6d93`, item 58: merge FORTUNE-3's tip of that file first; the people lane adds one line there, named by the chair); then U7 … U12 by SEAT-5's item 20 order; CS21 + CS22 (b) beside U13. Every measure's headline: the LIT world on the VISITOR pool (item 67).
+- **The measures of record:** `u4/measure-lit.sh` (MEASURE-VISITOR, item 63), `uk/measure-uk.sh` (item 63's sibling), `u5/measure-u5.mjs`, `u4/measure-u4.mjs` (pool A: never in an owner's table, item 61).
+
+68. **U5-CURE2 RE-RULED (the chair 19:19Z to SEAT-7, forwarded 19:34Z):** no move; the multi-line `../rulingPower.js` import of `applyWorldPulse.js` collapsed to one line (survives `eslint --fix` byte-unchanged; no prettier); the file 902 → 903–904; the size baseline LOWERED by its own door. The keeper's move is NOT ruled (it would raise the primitives file's any-cast figure): a decomposition for after the deploy. **UK APPROVED (19:34Z):** one unit, two commits; ships LIT; the owner signs the moved stored figures at the close with the flip.
