@@ -42,10 +42,13 @@ file and the briefs only. The seat's prompt: `git show origin/lane/chair-2026-11
 
 | Unit | Brief | Builder's worktree and branch | State at 12:49 |
 |---|---|---|---|
-| CARD (S1, S2) | `briefs/BUILD.md` §CARD | `.claude/worktrees/agent-a14e0a85d3b9f8873`, `worktree-agent-a14e0a85d3b9f8873` | OUT, no commit |
-| OUTPUT (S3) | `briefs/BUILD.md` §OUTPUT | `.claude/worktrees/agent-a30251bfb579f8154`, `page1-output-2026-11-20` | OUT, no commit |
-| SAFETY (S4) | `briefs/BUILD.md` §SAFETY plus the both-directions widening (sent to it 11:2x; ruling 4 above) | `.claude/worktrees/agent-a1dcf6cf52e96eb72`, `page-1-safety-2026-11-20` | OUT, no commit |
-| MAGIC (S5) | `briefs/BUILD.md` §MAGIC | `.claude/worktrees/agent-acd084ff9ab06f12b`, `worktree-agent-acd084ff9ab06f12b` | OUT, no commit |
+| CARD (S1, S2) | `briefs/BUILD.md` §CARD | pushed `lane/page-1-2026-11-20-card` at `c03e48972` (WIP `58fb388a5` before it) | DONE GREEN, UNMERGED; words in `words/PAGE-1-WORDS.md`, sent to the chair; awaiting its read (and its ruling on the NPCs tab's removed influence tally and filter) |
+| OUTPUT (S3) | `briefs/BUILD.md` §OUTPUT | pushed `lane/page-1-2026-11-20-output-wip` at `fe5837c95` | OUT, finishing |
+| SAFETY (S4) | `briefs/BUILD.md` §SAFETY plus the both-directions widening (ruling 4 above) | pushed `lane/page-1-2026-11-20-safety-wip` at `fd767aeac` | OUT, finishing |
+| MAGIC (S5) | `briefs/BUILD.md` §MAGIC | pushed `lane/page-1-2026-11-20-magic-wip` at `4f0448a50` | OUT, finishing |
+
+Each builder branch descends from `ff51769f7` (the build brief) on this lane: merge it with `git merge --no-ff`.
+CARD's report (whole) is the source of its words file row; its receipts are under `build/CARD/` on its branch.
 | THE SIDES AS SHOWN | `briefs/SIDES.md` | none: PAGE-4's | waiting on PAGE-2's data file |
 | L5 THIN PAGES | `briefs/THIN.md` | none | waiting on the owner |
 
