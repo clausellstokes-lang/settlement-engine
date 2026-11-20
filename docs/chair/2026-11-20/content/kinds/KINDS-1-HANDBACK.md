@@ -15,7 +15,12 @@ started on the line's tip `062504aa8`. A successor needs this file and the brief
 4. The seat's proposed table (DRAFT, sent 21:31 UTC; the chair's word pending): crime coin on `criminalEffective`
    0.10→0.40 over 20→100; guild swap on the PRE-TRIM count of economy powers 0.05→0.25 over 1→4; small place on
    `criminalEffective` 0.50→0.90 over 15→60. Ceilings never above today's numbers.
-5. First paint: the leaf is excised from engine-core and pinned to its own `trouble-law` chunk (the fortune lane's U6
+5. THE CHAIR, 21:33 UTC: K0 good. (b) guild and (c) small place APPROVED AS DRAFT as proposed. (a) crime: TWO
+   candidates measured lit before the chair chooses: A (0.10→0.40 over 20→100) and B (0.05→0.55 over 20→90; the
+   chair's: "law 2 only lowers" is NOT the rule — where crime is strongest a wave may be MORE likely than today's coin);
+   if B breaks the bar only at the metropolis, also B with ceiling 0.50. The table is a PARAMETER of the instrument
+   (`--plant`, a scratch copy). Report A | B side by side, six sizes. The numbers stay a DRAFT row FOR THE OWNER'S SIGNING.
+6. First paint: the leaf is excised from engine-core and pinned to its own `trouble-law` chunk (the fortune lane's U6
    pattern); at the join the vite rows are a UNION with the fortune lane's.
 
 ## UNITS
