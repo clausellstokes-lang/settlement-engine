@@ -2078,3 +2078,37 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   document data: the twin-against-server and control comparisons compare objects without regard to key order; array
   order stays exact (VR21); the arm proves by plants that a reordered array, a changed value AND an added or missing
   key are each still caught.
+- 07:10 UTC · **THE VEIL'S LANE OWNER FOUND THE PER-READ SALT UNDER AN IMMUTABLE FUNCTION; VR46; ITS SUCCESSOR SEATED BESIDE IT; THE
+  SECOND TITLES SEAT'S STANDARD APPROVED.**
+  **(1) VEIL-22, at once on a surprise** (about 255,000 tokens): R4 is built (dfa031f3e, `lane/veil-22-r4-2026-11-20`) and
+  NOT GREEN: its born test red 4 of 7 then green 7 of 7 and the registry's walker passing, but VR10's re-key of person
+  ids turns four guards red that pin byte-stable ids (galleryServerVeil 10 of 17, publicSafe 7 of 56,
+  galleryVeilSignalCopies 4 of 5, criminalVeilSwitch 1 of 9). **THE FIND, read by the lane owner in its builder's diff:
+  `_gallery_veil` DRAWS THE PER-READ SALT WITH `gen_random_uuid()` WHILE DECLARED IMMUTABLE: a cached plan with
+  constant arguments could fold the call once and serve ONE SALT TO EVERY READ, breaking VR10 silently; the twin drew
+  its salt once per page load.** THE CURE, ordered as it briefs it with four things added by the chair: red first by
+  a prepared read executed at least seven times and once under a forced generic plan (every execution a different
+  salt); VOLATILE on every function that draws or carries the salt; THE FINAL CATALOGUE AS PROOF (`provolatile` of
+  every function 211 and 212 create or restate; what stands between byte-frozen 211 and 212 in one push said
+  plainly); THE COST LAW RE-MEASURED after the change; the twin one salt per projection.
+  **VR46 (the lane owner's ruling, not vetoed, two teeth added):** a guard that pinned a served person id byte for
+  byte is re-stated modulo that read's person-id bijection (ids renamed canonically by first appearance; every other
+  byte exact), with five teeth, each executed: a reference that does not follow its card reds; any original stored
+  id served reds; a changed non-id byte reds; a collision or a split of the mapping reds; two reads of one town
+  differ. FOR THE OWNER'S LIST: what a reader loses by the re-key (a link to one person's card after a reload), to be
+  said in plain words in the lane's hand-back.
+  ALSO FROM IT: R6 complete and waiting on R3 (VR45 applied at 6978a8fc2 with its three plants; `rosterChoiceInversion`
+  aligned, not retired: under VR32 its inverting list shrank from 6 to 3, all tier 2). THE BLACK MARKET'S CONDITION
+  PROVEN on 12 towns (7 with a criminal house), Reveal DM off and on: the server carries the figure on 0 of 96 reads;
+  a marked share and the party link draw it on none; an unmarked gallery read draws it on 12 of 12, equal to the
+  owner's. The reader is told of the salt, VR45 and VR46, with its attack list for R4.
+  **VEIL-23's PROMPT WRITTEN AND THE SEAT ORDERED** (`prompts/VEIL-23.txt`: every ruling since VEIL-22's prompt, the
+  doors' merge, the salt, the gate at E, the two content lanes that touch its surfaces): it reads only until "THE
+  LANE IS YOURS at <commit>".
+  **(2) TITLES-2** (session_019yED1NS8FP5PSv5THmo1yL): IT CAN SEARCH; its first twelve words came each with a gloss and
+  a source. APPROVED: Golova (the slavic council's first), Toshiyori (east_asian), Biy (the steppe council and
+  elders), Beg / Begim (the steppe headman), Amir al-Juyush, Zunftmeister, Jetthaka, Penteulu, Tlacateccatl (each
+  beside words of its own tongue already in the table). Ra'is for the arabic council's first shares the headman's
+  word there: allowed, to be said, a distinct sourced word preferred if one exists. Otona LEFT ON THE FALLBACK (its
+  beginning in a shrine parish touches a living faith). Prostates on the fallback until a source says so. Both the
+  page read and the work it rests on are recorded for each word.
