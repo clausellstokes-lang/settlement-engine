@@ -1,0 +1,9 @@
+
+ RUN  v4.1.8 /home/user/wt/v23
+
+
+ Test Files  4 passed (4)
+      Tests  38 passed (38)
+   Start at  09:07:13
+   Duration  24.96s (transform 6.39s, setup 118ms, import 9.83s, tests 27.21s, environment 0ms)
+

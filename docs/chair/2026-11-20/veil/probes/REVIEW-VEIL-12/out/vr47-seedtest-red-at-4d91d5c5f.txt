@@ -1,0 +1,89 @@
+
+ RUN  v4.1.8 /home/user/wt/vr47pre
+
+ ❯ tests/domain/people/honorificSeed.test.js (5 tests | 4 failed) 681ms
+     × the seed is the name and the title alone 5ms
+     × a card's honorific holds when its id and its institution key move (every multi-form title, 40 names) 1ms
+     × an empty seat's keeper prints the same caretaker's form when the ids are re-keyed or its institution key moves 466ms
+     × every call of honorificOfTitle in src/ passes the one seed (honorificSeedOf) 154ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/domain/people/honorificSeed.test.js > VR47: the honorific is picked by the name and the title, never the id or the institution key > the seed is the name and the title alone
+TypeError: honorificSeedOf is not a function
+ ❯ tests/domain/people/honorificSeed.test.js:40:27
+     38| describe('VR47: the honorific is picked by the name and the title, nev…
+     39|   it('the seed is the name and the title alone', () => {
+     40|     expect(honorificSeedOf('Robert Thomas', 'the priest')).toBe('Rober…
+       |                           ^
+     41|     expect(honorificSeedOf(' Robert Thomas ', ' the priest ')).toBe(ho…
+     42|     expect(honorificSeedOf(undefined, 'the priest')).toBe('::the pries…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/domain/people/honorificSeed.test.js > VR47: the honorific is picked by the name and the title, never the id or the institution key > a card's honorific holds when its id and its institution key move (every multi-form title, 40 names)
+TypeError: honorificSeedOf is not a function
+ ❯ tests/domain/people/honorificSeed.test.js:51:74
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/domain/people/honorificSeed.test.js > VR47: the honorific is picked by the name and the title, never the id or the institution key > an empty seat's keeper prints the same caretaker's form when the ids are re-keyed or its institution key moves
+AssertionError: town-1 B: expected { Object (k, shown, ...) } to deeply equal { k: '', shown: 'Printer', …(1) }
+
+- Expected
++ Received
+
+  {
+    "k": "",
+    "line": "Acting Mayor Jokull Bjarnarson, the printer, keeps the seat meanwhile.",
+-   "shown": "Printer",
++   "shown": "Master Printer",
+  }
+
+ ❯ tests/domain/people/honorificSeed.test.js:71:133
+     69|         const r = rekey(s, tag);
+     70|         const k = seatKeeperOf(r);
+     71|         expect({ k: keeperHonorificOf(k, r), shown: shownHonorificOf(k…
+       |                                                                                                                                     ^
+     72|       }
+     73|       const m = clone(s);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/domain/people/honorificSeed.test.js > VR47: the honorific is picked by the name and the title, never the id or the institution key > every call of honorificOfTitle in src/ passes the one seed (honorificSeedOf)
+AssertionError: expected [ { …(3) }, { …(3) } ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   {
++     "at": "src/domain/people/cardDoor.js",
++     "call": "honorificOfTitle(inst.title, c.gender, `${String(c.id || c.name || '')}::${inst.name}`, place)",
++     "seeded": false,
++   },
++   {
++     "at": "src/domain/people/seatKeeper.js",
++     "call": "honorificOfTitle(inst.title, c.gender, `${String(c.id || c.name || '')}::${String(inst.key || '')}`, { culture })",
++     "seeded": false,
++   },
++ ]
+
+ ❯ tests/domain/people/honorificSeed.test.js:94:44
+     92|     }
+     93|     expect(calls.length).toBeGreaterThanOrEqual(2); // cardDoor.js and…
+     94|     expect(calls.filter((c) => !c.seeded)).toEqual([]);
+       |                                            ^
+     95|   });
+     96|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 1 passed (5)
+   Start at  09:07:44
+   Duration  4.11s (transform 2.36s, setup 38ms, import 3.25s, tests 681ms, environment 0ms)
+

@@ -56,3 +56,22 @@ the same sentence on 183 prose keys. It differs on four keys, every one an R5 ro
 `economy:economics.shadowEconomy` ("small, but … somebody organises it" against "some petty theft": 10),
 `economy:economics.incomeWeight` (26). No rank word on an alias row differed at this tip. The probe runs again at R5 and
 at FINAL, with the groupings shut and opened (`RV12_OPEN=1`) and on a control pool.
+
+## 2. Cold read: "VR47 e4cce485f" (merge df6809f9c of e971c8ff2; lane origin/lane/veil-23-2026-11-20 at 4c753ec52). HOLDS.
+
+Executed 09:12 UTC. THE DIFF, line by line: one new helper `honorificSeedOf(name, title)` (name and title trimmed,
+joined by `::`); its two callers `cardDoor.js :: cardHonorificOf` and `seatKeeper.js :: keeperHonorificOf` pass it in
+place of `<id or name>::<institution name or key>`; nothing else in `src/` moves (the rest of the commit is tests, pins
+re-recorded and outputs). `honorificOfTitle` itself reads only the title, the gender, the seed, and the place's culture and
+coast; neither the culture nor the coast is a row the veil can withhold (no registry row, no 211/212 path names them).
+RED/GREEN: its own `honorificSeed.test.js` red at 4d91d5c5f (4 tests fail), green at 4c753ec52 with the three re-recorded
+pin files (38 of 38; `out/vr47-*`). THE EDGE BUNDLE: rebuilt by me at e4cce485f with `build-edge-shared.mjs`: every
+bundle byte-equal; only `generatedAt` and `builtFromCommit` differ (`out/edge-rebuild-at-e4cce485f.txt`).
+MY ATTACK (`hon.probe.jsx`; 24 born towns, unmarked and default veil, Reveal DM off and on; the gallery read through the
+tree's own client; 3,830 drawn cards with a house): the honorific the card prints and the Institutions tab's connection
+name, under six changes of fields a read withholds or re-keys (the card's id, its institution key, `institution.veiled`,
+every other card removed, every hideable house removed, every person id re-keyed): at the base 1,606 / 1,596 / 0 / 0 / 0 /
+1,594 moved; at the tip **0 on all six** (`out/hon-at-4d91d5c5f.txt`, `hon-at-4c753ec52.txt`). No drawn card carries a
+house record not stamped public, nor a hidden house's record, on a Reveal-DM-off page (0 of 1,884). Owner against visitor:
+78 of 3,830 cards print a different form, **every one a woman whose served card carries no gender** (0 of 2,858 otherwise;
+`hon-at-4c753ec52-bygender.txt`): that is VR48's field, read at R4.
