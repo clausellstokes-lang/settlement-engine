@@ -7,8 +7,15 @@
  * This file is the one home of the first two's correlation: which forms a holder of each kind may
  * hold, at each size, with what weight; which unusual pair needs which recorded circumstance to be
  * licensed ("the merchant guilds who installed a king of their own on the throne"); which
- * competition-layer family a kind prefers; and the two readers every unit of the train reads a kind
- * through (`contestKindOf` for a power, `formKindOf` for a form).
+ * competition-layer family a kind prefers, under the seat law and (`oldFamily`) under the old; and
+ * the readers every unit of the train reads a kind through (`contestKindOf` for a power in the
+ * contest, `ownKindOf` for a power's own kind, `formKindOf` for a form).
+ *
+ * ⭐ THE COMPETITION LAYER'S OLD TABLE LIVES HERE NOW TOO (the U2 cure, the chair's ruling of
+ * 2026-11-20 09:26Z): `oldFamily` is the id `factionCompetition.js :: GOVERNMENT_BY_ARCHETYPE` held
+ * for the archetype the competition layer folds each kind to (craft to merchant, occupation to
+ * military, government/civic/other to civic), byte for byte, and `ensureFactionStates` reads it from
+ * here under the old law. Under the seat law it reads `family`, of the power's OWN kind.
  *
  * ⭐ TODAY'S TRANSFER TABLE LIVES HERE NOW, BYTE FOR BYTE. The FIRST form of every kind and band is
  * the label `rulingPower.js :: governmentLabelFor` returned before this file existed, and `alt` is
@@ -53,6 +60,7 @@ import { factionArchetype, FACTION_ARCHETYPES as A } from '../factionArchetypes.
 /**
  * @typedef {Object} SeatRow
  * @property {string} family        the competition layer's government-preference id for the kind
+ * @property {string} oldFamily     the id the competition layer gave the kind before the seat law
  * @property {string | null} alt    the transfer's alternate form when its own is taken
  * @property {Readonly<Record<SeatBand, WeightedForms>>} bands  the forms by size band, weighted;
  *   the first of each band is the transfer's own form
@@ -75,13 +83,14 @@ export const SEAT_CIRCUMSTANCES = Object.freeze([
 export const SEAT_BANDS = Object.freeze(/** @type {SeatBand[]} */ (['small', 'town', 'large']));
 
 /**
- * @param {string} family @param {string | null} alt
+ * @param {string} family @param {string} oldFamily @param {string | null} alt
  * @param {Record<string, number>} small @param {Record<string, number>} town
  * @param {Record<string, number>} large @param {Record<string, string>} [licenses]
  * @returns {SeatRow}
  */
-const row = (family, alt, small, town, large, licenses = {}) => Object.freeze({
+const row = (family, oldFamily, alt, small, town, large, licenses = {}) => Object.freeze({
   family,
+  oldFamily,
   alt,
   bands: Object.freeze({ small: Object.freeze(small), town: Object.freeze(town), large: Object.freeze(large) }),
   licenses: Object.freeze(licenses),
@@ -95,51 +104,51 @@ const row = (family, alt, small, town, large, licenses = {}) => Object.freeze({
  * @type {Readonly<Record<string, SeatRow>>}
  */
 export const SEAT_TABLE = Object.freeze({
-  [A.GOVERNMENT]: row('council_rule', null,
+  [A.GOVERNMENT]: row('council_rule', 'council_rule', null,
     { 'Elder Council': 2, 'Household Council': 1, 'Free Elder Council': 1, 'Elder Consensus': 1, "Headman's Authority": 1, 'Elected Reeve': 1 },
     { 'Town Council': 2, 'Town Mayor': 1 },
     { 'City Council': 2, 'Grand Council': 1, 'Democratic assembly': 1, 'City-State Council': 1 }),
-  [A.NOBLE]: row('noble_patronage', 'Noble Regency',
+  [A.NOBLE]: row('noble_patronage', 'noble_patronage', 'Noble Regency',
     { 'Feudal Stewardship': 2 },
     { 'Ducal Governorship': 2, 'Feudal Appointee': 1 },
     { 'Royal Authority': 2, 'Noble Governorship': 1, 'Ducal Governorship': 1 }),
-  [A.MILITARY]: row('military_order', 'Garrison Command',
+  [A.MILITARY]: row('military_order', 'military_order', 'Garrison Command',
     { 'Militia Command': 2 },
     { 'Military Council': 2 },
     { 'Grand Military Council': 2, 'Military City Council': 1 }),
-  [A.MERCHANT]: row('merchant_charter', 'Merchant oligarchy',
+  [A.MERCHANT]: row('merchant_charter', 'merchant_charter', 'Merchant oligarchy',
     { 'Merchant Council': 2 },
     { 'Merchant City Council': 2, 'Merchant Council': 1, 'Merchant oligarchy': 1, 'Guild Council': 1 },
     { 'Grand Merchant Senate': 2, 'Merchant City Council': 1, 'Merchant oligarchy': 1, 'Grand Merchant Oligarchy': 1,
       'Merchant Guild Council': 1, 'Grand Guild Consortium': 1, 'Guild Authority': 1, 'Grand Guild Council': 1 },
     { 'Royal Authority': 'trade_wealth', 'Ducal Governorship': 'trade_wealth' }),
-  [A.RELIGIOUS]: row('temple_authority', 'Ecclesiastical Council',
+  [A.RELIGIOUS]: row('temple_authority', 'temple_authority', 'Ecclesiastical Council',
     { 'Church Council': 2, 'Priestly Guidance': 1 },
     { 'Theocratic Council': 2, 'Church Council': 1 },
     { 'High Theocratic Council': 2, 'Ecclesiastical Council': 1 }),
-  [A.ARCANE]: row('arcane_magocracy', null,
+  [A.ARCANE]: row('arcane_magocracy', 'arcane_magocracy', null,
     { 'Circle of Adepts': 2 },
     { 'Arcane Council': 2 },
     { 'Grand Arcane Council': 2, 'Arcane Council': 1, 'Arcane Senate': 1 }),
-  [A.CRAFT]: row('guild_charter', null,
+  [A.CRAFT]: row('guild_charter', 'merchant_charter', null,
     { "Guildmasters' Moot": 2 },
     { 'Guildhall Council': 2, 'Guild Council': 1 },
     { 'Grand Guild Assembly': 2, 'Guild Authority': 1, 'Grand Guild Council': 1 }),
-  [A.LABOR]: row('communal_assembly', null,
+  [A.LABOR]: row('communal_assembly', 'communal_assembly', null,
     { 'Commons Assembly': 2 },
     { "Workers' Assembly": 2 },
     { 'Grand Commons Assembly': 2 }),
-  [A.OUTSIDER]: row('foreign_administration', null,
+  [A.OUTSIDER]: row('foreign_administration', 'noble_patronage', null,
     { 'Foreign Stewardship': 2 },
     { 'Foreign Administration': 2 },
     { 'Foreign Administration': 2 }),
-  [A.OCCUPATION]: row('occupation_rule', 'Martial Administration',
+  [A.OCCUPATION]: row('occupation_rule', 'military_order', 'Martial Administration',
     { 'Occupation Authority': 2 },
     { 'Occupation Authority': 2 },
     { 'Occupation Authority': 2 }),
   // Criminal rule is never reached by the coup path (excluded from the field), but the DM can
   // install it via CHANGE_RULING_POWER; the forms are the birth's corrupt-government vocabulary.
-  [A.CRIMINAL]: row('criminal_shadow_rule', null,
+  [A.CRIMINAL]: row('criminal_shadow_rule', 'criminal_shadow_rule', null,
     { 'Corrupt Council': 2 },
     { 'Corrupt City Council': 2, 'Corrupt Council': 1 },
     { 'Shadow Senate': 2, 'Corrupt City Council': 1 }),
@@ -187,6 +196,13 @@ export function alternateFormOf(kind) {
  *  @param {string} kind @returns {string} */
 export function governmentFamilyOf(kind) {
   return seatRowOf(kind).family;
+}
+
+/** The id the competition layer gave a kind (or its own archetype) before the seat law: the old
+ *  `factionCompetition.js :: GOVERNMENT_BY_ARCHETYPE`, byte for byte (a test pins each literal).
+ *  @param {string} kind @returns {string} */
+export function oldLawFamilyOf(kind) {
+  return seatRowOf(kind).oldFamily;
 }
 
 /** A form's own name, without the transfer's " Ascendant" collision suffix.
@@ -238,13 +254,24 @@ export function isVeiledRow(power) {
 
 /**
  * THE KIND READER for the contest: a veiled or criminal power reads criminal FIRST, whatever its
- * name says (an "Artisans' Syndicate" is criminal, never craft); then craft off the name, as
- * `powerSupport.js :: backingArchetypeOf` reads it (the Craft Guilds carry the generator's `economy`
- * tag); then the canonical archetype, with civic folded into government.
+ * name says (an "Artisans' Syndicate" is criminal, never craft), which keeps a hidden power out of
+ * the field; then the power's own kind (`ownKindOf`). The veil step is the contest's alone.
  * @param {unknown} power a power's row (or its name) @returns {string}
  */
 export function contestKindOf(power) {
-  if (isVeiledRow(power)) return A.CRIMINAL;
+  return isVeiledRow(power) ? A.CRIMINAL : ownKindOf(power);
+}
+
+/**
+ * A POWER'S OWN KIND, without the contest's veil step (the U2 cure, SEAT-2's): a criminal power
+ * reads criminal (by its category or its name); then craft off the name, as `powerSupport.js ::
+ * backingArchetypeOf` reads it (the Craft Guilds carry the generator's `economy` tag); then the
+ * canonical archetype, with civic folded into government. A HIDDEN non-criminal power reads its own
+ * kind here: what a power states it wants is not the contest, and a power that is not criminal is
+ * never worded as one. `contestKindOf` is this read behind the veil step, and nothing else.
+ * @param {unknown} power a power's row (or its name) @returns {string}
+ */
+export function ownKindOf(power) {
   const kind = factionArchetype(/** @type {Object | string | null | undefined} */ (power));
   if (kind === A.CRIMINAL) return kind;
   // The name is `.faction`, the one every writer stamps (the generator; `addFaction` mints the

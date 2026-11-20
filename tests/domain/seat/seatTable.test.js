@@ -14,22 +14,30 @@
  *   (3) the three kinds the two old tables disagreed on (craft, outsider, occupation) take the
  *       table's family, and today's id stays pinned, per kind, in the competition layer's one writer
  *       of a NEW faction state (`factionCompetition.js :: ensureFactionStates`) under the old law.
- *       ⚠ HELD: the seat-law branch of that writer is not in this commit. `factionCompetition.js`
- *       sits at exactly its 800-line `max-lines` ceiling and the branch needs two import lines; the
- *       step and its seat-law arms wait for SEAT-2's ruling (briefs/U2-REPORT.md, "HELD");
+ *       The seat-law branch of that writer landed with the CURE, below;
  *   (4) the kind reader (criminal and veiled FIRST, then craft off the name, civic folded), with its
  *       veil read pinned equal to `cardVeil.js :: isVeiledPower` and its craft read to
  *       `powerSupport.js :: backingArchetypeOf` on every row of a born pool;
  *   (5) the pair check.
+ *
+ * THE CURE (briefs/U2-CURE.md: the chair's rulings of 09:26Z on U2's stops, and SEAT-2's own):
+ *   (a) the old law's competition id, per archetype, lives in the one table (`oldLawFamilyOf`), each
+ *       pinned as the literal `factionCompetition.js :: GOVERNMENT_BY_ARCHETYPE` held at 0ab034531;
+ *   (b) a NEW faction state's `governmentPreference`: today's id under the old law, the table's
+ *       family under the seat law, a stored preference first under both;
+ *   (c) that family is read off the power's OWN kind (`ownKindOf`), never its veil: a hidden
+ *       non-criminal power keeps its own kind's family, a criminal power reads criminal;
+ *   (d) born worlds at every tier, a town-size case among them.
  */
 import { describe, test, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { commentsOnly } from '../../helpers/codeOnlySource.js';
+import { expectAbsentWithAnchor } from '../../helpers/anchoredNegatives.js';
 import {
   SEAT_TABLE, SEAT_BANDS, SEAT_CIRCUMSTANCES, seatBandOf, seatRowOf, preferredFormOf, alternateFormOf,
-  governmentFamilyOf, formKindOf, pairLicense, isVeiledRow, contestKindOf,
+  governmentFamilyOf, formKindOf, pairLicense, isVeiledRow, contestKindOf, ownKindOf, oldLawFamilyOf,
 } from '../../../src/domain/seat/seatTable.js';
 import { governmentLabelFor, transferRulingPower } from '../../../src/domain/rulingPower.js';
 import { ensureFactionStates } from '../../../src/domain/worldPulse/factionCompetition.js';
@@ -229,7 +237,9 @@ describe('(2) under every law, the transfer reads today\'s strings', () => {
     const code = commentsOnly(source('src/domain/rulingPower.js'));
     const spelled = Object.keys(TRANSFER_FORMS).filter((form) => code.includes(`'${form}'`) || code.includes(`"${form}"`));
     expect(spelled).toEqual([]);
-    expect(code).not.toMatch(/\bALT_GOVERNMENT_LABELS\b|\bGOVERNMENT_PREFERENCES\b/);
+    // the one-table read is the live anchor: the code holds it, and holds neither old table
+    expectAbsentWithAnchor(code, 'ALT_GOVERNMENT_LABELS', 'alternateFormOf(', 'rulingPower.js reads the alternate from the one table');
+    expectAbsentWithAnchor(code, 'GOVERNMENT_PREFERENCES', 'preferredFormOf(', 'rulingPower.js reads the form from the one table');
   });
 });
 
@@ -293,17 +303,19 @@ describe('(3) the competition family: the table\'s under the seat law, today\'s 
 
 // ── (4) THE KIND READER ──────────────────────────────────────────────────────────────────────────
 
-/** A small born pool: every tier, plain and with the hidden infiltrator and a criminal priority. */
-const POOL = (() => {
-  const rows = [];
+/** A small born pool: every tier, plain and with the hidden infiltrator and a criminal priority.
+ *  BORN keeps each world whole (the cure's arm (d) reads them so); POOL is their rows. */
+const BORN = (() => {
+  const worlds = [];
   for (const tier of TIERS) {
     for (const [i, extra] of [{}, { stressTypes: ['infiltrated'], priorityCriminal: 85 }, { priorityEconomy: 80 }].entries()) {
       const s = generateSettlementPipeline({ settType: tier, culture: 'germanic', ...extra }, null, { seed: `u2-seat-table-${tier}-${i}`, customContent: {} });
-      rows.push(...(s?.powerStructure?.factions || []));
+      worlds.push({ tier, i, factions: s?.powerStructure?.factions || [] });
     }
   }
-  return rows;
+  return worlds;
 })();
+const POOL = BORN.flatMap((w) => w.factions);
 const EDGE_ROWS = [
   null, undefined, 'Merchant Guilds', 42, [], [{ hidden: true }], {},
   { faction: 'A', hidden: 'true' }, { faction: 'B', hidden: 1 }, { faction: 'C', hidden: true },
@@ -423,5 +435,137 @@ describe('(5) the pair check', () => {
     }
     for (const kind of ['civic', 'other', 'not-a-kind', 'toString']) expect(seatRowOf(kind)).toBe(SEAT_TABLE.government);
     expect(preferredFormOf('noble', 'city')).toBe('Royal Authority');
+  });
+});
+
+// ── THE CURE (briefs/U2-CURE.md) ─────────────────────────────────────────────────────────────────
+
+/** `factionCompetition.js :: GOVERNMENT_BY_ARCHETYPE` as it stood at U2 (0ab034531), copied as text:
+ *  keyed by the competition layer's own archetypes (`CANONICAL_TO_COMPETITION`'s values). */
+const OLD_LAW_IDS = Object.freeze({
+  noble: 'noble_patronage',
+  merchant: 'merchant_charter',
+  military: 'military_order',
+  religious: 'temple_authority',
+  criminal: 'criminal_shadow_rule',
+  civic: 'council_rule',
+  arcane: 'arcane_magocracy',
+  labor: 'communal_assembly',
+  outsider: 'noble_patronage',
+});
+const SEAT = Object.freeze({ _seatLawVersion: 2 });
+const prefsByName = (states) => Object.fromEntries(Object.values(states).map((s) => [s.name, s.governmentPreference]));
+const withoutPref = (states) => JSON.stringify(Object.values(states).map(({ governmentPreference: _p, ...rest }) => rest));
+
+describe('(a) the old law\'s competition id lives in the one table', () => {
+  test('every archetype: the old law\'s id read through the one table is the id GOVERNMENT_BY_ARCHETYPE held', () => {
+    for (const [archetype, id] of Object.entries(OLD_LAW_IDS)) {
+      expect(`${archetype}: ${oldLawFamilyOf?.(archetype)}`).toBe(`${archetype}: ${id}`);
+    }
+  });
+
+  test('every canonical kind reads the old id of the archetype the competition layer folds it to', () => {
+    for (const kind of KINDS) expect(`${kind}: ${oldLawFamilyOf?.(kind)}`).toBe(`${kind}: ${TODAY_FAMILY[kind]}`);
+  });
+
+  test('factionCompetition.js keeps no table of its own', () => {
+    const code = commentsOnly(source('src/domain/worldPulse/factionCompetition.js'));
+    expectAbsentWithAnchor(code, 'GOVERNMENT_BY_ARCHETYPE', 'oldLawFamilyOf(', 'factionCompetition.js reads the old id from the one table');
+  });
+});
+
+describe('(b) a NEW faction state\'s preference: today\'s id under the old law, the table\'s family under the seat law', () => {
+  const rows = KINDS.map((kind) => ({ faction: `Power of ${kind}`, category: kind, power: 10 }));
+
+  test('every kind under the seat law: the table\'s family', () => {
+    const law2 = mintedStates(rows, SEAT);
+    for (const kind of KINDS) expect(`${kind}: ${prefOf(law2, `Power of ${kind}`)}`).toBe(`${kind}: ${SEAT_FAMILY[kind]}`);
+  });
+
+  test('craft, outsider, occupation and the born Craft Guilds, under each law', () => {
+    const four = [
+      { faction: 'Power of craft', category: 'craft', power: 12 },
+      { faction: 'Power of outsider', category: 'outsider', power: 11 },
+      { faction: 'Power of occupation', category: 'occupation', power: 10 },
+      { faction: 'Craft Guilds', category: 'economy', power: 9 },
+    ];
+    expect(prefsByName(mintedStates(four, SEAT))).toEqual({
+      'Power of craft': 'guild_charter', 'Power of outsider': 'foreign_administration',
+      'Power of occupation': 'occupation_rule', 'Craft Guilds': 'guild_charter',
+    });
+    for (const config of [null, { _seatLawVersion: 1 }]) {
+      expect(prefsByName(mintedStates(four, config))).toEqual({
+        'Power of craft': 'merchant_charter', 'Power of outsider': 'noble_patronage',
+        'Power of occupation': 'military_order', 'Craft Guilds': 'merchant_charter',
+      });
+    }
+  });
+
+  test('a stored preference wins under both laws', () => {
+    const held = [{ faction: 'Craft Guilds', category: 'economy', power: 12, governmentPreference: 'council_rule' }];
+    for (const config of [null, { _seatLawVersion: 1 }, SEAT]) expect(prefOf(mintedStates(held, config), 'Craft Guilds')).toBe('council_rule');
+  });
+
+  test('the seat law moves the preference and nothing else on a minted state', () => {
+    expect(withoutPref(mintedStates(rows, SEAT))).toBe(withoutPref(mintedStates(rows, null)));
+  });
+});
+
+describe('(c) the stated preference reads the power\'s OWN kind, never its veil', () => {
+  test('ownKindOf: a hidden non-criminal power keeps its own kind; a criminal power reads criminal', () => {
+    expect(ownKindOf?.({ faction: 'Merchant Guilds', category: 'economy', hidden: true })).toBe('merchant');
+    expect(ownKindOf?.({ faction: 'Craft Guilds', category: 'economy', hidden: true })).toBe('craft');
+    expect(ownKindOf?.({ faction: 'The Independent Bloc', category: 'other', hidden: true })).toBe('other');
+    expect(ownKindOf?.({ faction: 'The Burghers', category: 'civic', hidden: true })).toBe('government');
+    expect(ownKindOf?.({ faction: "Thieves' Guild", category: 'criminal' })).toBe('criminal');
+    expect(ownKindOf?.({ faction: 'Merchant Guilds', category: 'criminal', hidden: true })).toBe('criminal');
+    expect(ownKindOf?.({ faction: "Artisans' Syndicate" })).toBe('criminal');
+  });
+
+  test('contestKindOf is the veil step over ownKindOf, on every row of the pool and every edge row', () => {
+    const differ = [...POOL, ...EDGE_ROWS].filter((r) => contestKindOf(r) !== (isVeiledRow(r) ? 'criminal' : ownKindOf?.(r)));
+    expect(differ).toEqual([]);
+  });
+
+  test('a minted state under the seat law: hidden non-criminal -> its own family; criminal and hidden-criminal -> criminal', () => {
+    const law2 = mintedStates([
+      { faction: 'Merchant Guilds', category: 'economy', hidden: true, power: 12 },
+      { faction: 'Temple of the Dawn', category: 'religious', hidden: true, power: 11 },
+      { faction: "Thieves' Guild", category: 'criminal', power: 10 },
+      { faction: 'Velvet Hand', category: 'criminal', hidden: true, power: 9 },
+    ], SEAT);
+    expect(prefsByName(law2)).toEqual({
+      'Merchant Guilds': 'merchant_charter', 'Temple of the Dawn': 'temple_authority',
+      "Thieves' Guild": 'criminal_shadow_rule', 'Velvet Hand': 'criminal_shadow_rule',
+    });
+  });
+});
+
+describe('(d) born worlds at every tier, a town-size case among them', () => {
+  test('the born infiltrated TOWN: today\'s ids under the old law; under the seat law the Craft Guilds move and the hidden bloc keeps its own', () => {
+    const town = BORN.find((w) => w.tier === 'town' && w.i === 1).factions;
+    expect(town.some((r) => r.hidden === true && r.category !== 'criminal'), 'the town holds a hidden non-criminal power').toBe(true);
+    const today = {
+      'Merchant oligarchy': 'merchant_charter', 'Merchant Guilds': 'merchant_charter', "Thieves' Guild": 'criminal_shadow_rule',
+      'Military/Guard': 'military_order', 'Religious Authorities': 'temple_authority', 'Craft Guilds': 'merchant_charter',
+      'The Independent Bloc': 'council_rule', 'Landed Gentry': 'noble_patronage',
+    };
+    expect(prefsByName(mintedStates(town, null))).toEqual(today);
+    expect(prefsByName(mintedStates(town, { _seatLawVersion: 1 }))).toEqual(today);
+    expect(prefsByName(mintedStates(town, SEAT))).toEqual({ ...today, 'Craft Guilds': 'guild_charter' });
+  });
+
+  test('every born world: the old law is no law, byte for byte; the seat law gives each power its own kind\'s family, and no non-criminal power the criminal one', () => {
+    for (const { tier, i, factions } of BORN) {
+      const at = `${tier}-${i}`;
+      expect(JSON.stringify(mintedStates(factions, { _seatLawVersion: 1 })), at).toBe(JSON.stringify(mintedStates(factions, null)));
+      const law2 = mintedStates(factions, SEAT);
+      expect(withoutPref(law2), at).toBe(withoutPref(mintedStates(factions, null)));
+      for (const r of factions) {
+        const own = ownKindOf?.(r);
+        expect(`${at} ${r.faction}: ${prefOf(law2, r.faction)}`).toBe(`${at} ${r.faction}: ${governmentFamilyOf(own)}`);
+        if (own !== 'criminal') expect(prefOf(law2, r.faction), `${at} ${r.faction}`).not.toBe('criminal_shadow_rule');
+      }
+    }
   });
 });
