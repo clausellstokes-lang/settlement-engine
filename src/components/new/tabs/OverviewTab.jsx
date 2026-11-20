@@ -29,6 +29,7 @@ import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
 import { safetyBandOf } from '../../../domain/display/labelBands.js';
 import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands.js';
 import { deriveMagicRelianceView, magicRowsGated } from '../../../domain/display/dossierViewModel.js';
+import { magicMeasuresApartLine } from '../../../domain/display/magicMeasuresApart.js';
 import { prosperityInCrisisLine } from '../../../domain/display/prosperityInCrisis.js';
 import { foodWordShown } from '../../../domain/display/foodWordShown.js';
 
@@ -114,7 +115,7 @@ function ScoreRow({ label, score }) {
   );
 }
 
-function StatusTag({ label, value, _color, accent, testId, note = null }) {
+function StatusTag({ label, value, _color, accent, testId, note = null, noteTestId = 'overview-prosperity-in-crisis' }) {
   const mobile = useIsMobile();
   return (
     <div data-testid={testId} style={{ flex: '1 1 130px', background: accent ? `${accent}0d` : '#faf8f4', ...edged(`1px solid ${accent ? `${accent}35` : '#e0d0b0'}`, `3px solid ${accent || '#c8b89a'}`), padding: '7px 10px', minWidth: 0 }}>
@@ -127,8 +128,9 @@ function StatusTag({ label, value, _color, accent, testId, note = null }) {
         * the four call sites, so the next StatusTag cannot repeat it. */}
       <div style={{ fontSize: FS.sm, fontWeight: 700, color: swatch.inkMag, lineHeight: 1.3 }}>{statusCase(value) || EMPTY_VALUE}</div>
       {/* The tag's own word, where a crisis in force lowered it, says what the place is in ordinary
-        * years: the one sentence (the chair's ruling 1(a), REVIEW-UPKEEP-2; prosperityInCrisis.js). */}
-      {note && <div data-testid="overview-prosperity-in-crisis" style={{ fontSize: proseFontSize(FS.sm, mobile), color: swatch.inkMag2, fontStyle: 'italic', lineHeight: 1.4, marginTop: 3 }}>{note}</div>}
+        * years: the one sentence (the chair's ruling 1(a), REVIEW-UPKEEP-2; prosperityInCrisis.js). The
+        * reliance tag's note is PAGE-1 MAGIC's line (magicMeasuresApart.js), under its own test id. */}
+      {note && <div data-testid={noteTestId} style={{ fontSize: proseFontSize(FS.sm, mobile), color: swatch.inkMag2, fontStyle: 'italic', lineHeight: 1.4, marginTop: 3 }}>{note}</div>}
     </div>
   );
 }
@@ -189,6 +191,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
   const dp = r.defenseProfile || {};
   const scores = dp.scores || {};
   const magicReliance = deriveMagicRelianceView(r);
+  const magicApart = magicMeasuresApartLine(r); // PAGE-1 MAGIC: what reliance and capability each count, where they sit apart
   const foodWord = foodWordShown(r); // the food word's one home (SURFACES-2 item 1)
   const prosperityInCrisis = prosperityInCrisisLine(r);
   const via = r.economicViability || {};
@@ -401,9 +404,11 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
               flag the defence generator sets only during a siege, famine or plague, so a city of
               mages read no reliance while its Magic tab read "integral". This tag prints the view
               model's one reading, in the word the Magic tab and Foundations print, and the shared
-              magic gate removes it where magic does not work. */}
+              magic gate removes it where magic does not work.
+              PAGE-1 MAGIC (F3c): where this word and the Magical Capability bar below sit on opposite
+              sides, the tag's note says what each counts (magicMeasuresApart.js; read only, both stay). */}
           {magicRowsGated(r, [{ key: 'magicReliance' }]).map(({ key }) => (
-            <StatusTag key={key} testId="overview-magic-reliance" label="Reliance on magic" value={magicReliance.word} accent={swatch.magic}/>
+            <StatusTag key={key} testId="overview-magic-reliance" label="Reliance on magic" value={magicReliance.word} accent={swatch.magic} note={magicApart} noteTestId="overview-magic-apart"/>
           ))}
         </div>
 
