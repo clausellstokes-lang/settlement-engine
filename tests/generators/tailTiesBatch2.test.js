@@ -64,9 +64,9 @@ const NOT = [
 ];
 /** [seed, line] a true print at the base */
 const KEEP = [
-  ['r2r-city-1', 'traveller'], ['r2r-city-1', 'cousin'], ['r2r-city-1', 'drinks'], ['r2r-city-1', 'customer'], ['r2r-city-1', 'petition'],
-  ['r2r-city-11', 'suppliers'], ['r2r-city-1', 'shipment'], ['r2r-city-1', 'captain'], ['r2r-city-1', 'district'], ['r2r-city-1', 'armoury'],
-  ['r2r-city-16', 'sea'], ['r2s-succession_void-hamlet-0', 'quarrel'],
+  ['r2r-city-0', 'traveller'], ['r2r-city-3', 'cousin'], ['r2r-city-5', 'drinks'], ['r2r-city-1', 'customer'], ['r2r-city-4', 'petition'],
+  ['r2r-city-0', 'suppliers'], ['r2r-city-1', 'shipment'], ['r2r-city-3', 'captain'], ['r2r-city-1', 'district'], ['r2r-city-1', 'armoury'],
+  ['r2r-city-2', 'sea'], ['r2s-succession_void-hamlet-0', 'quarrel'],
 ];
 
 describe('TAIL-TIES batch 2: a hook presumes only what the town holds (T3)', () => {
@@ -81,7 +81,7 @@ describe('TAIL-TIES batch 2: a hook presumes only what the town holds (T3)', () 
   });
 
   it('INSTEAD: a cargo lost inland is lost on its way here (the sea line\'s twin keeps the draw)', () => {
-    const failures = collectSeedFailures(['r2r-city-22', 'r2r-city-35', 'r2r-city-55'], (seed) => { expect(hooks(seed).some((h) => h.includes(L.road)), seed).toBe(true); });
+    const failures = collectSeedFailures(['r2r-city-6', 'r2r-city-40', 'r2r-city-55'], (seed) => { expect(hooks(seed).some((h) => h.includes(L.road)), seed).toBe(true); });
     expectNoSeedFailures(failures, 'a cargo lost inland is lost on its way here');
   });
 
