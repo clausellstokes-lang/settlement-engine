@@ -1660,6 +1660,24 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   named with "granary": toward withholding). Its record 8ad885c38, section 4. Still owed by TRAD-4 for the reader:
   the import path and the round trip on more than 4 towns.
 
+- **A TROUBLE'S HOOKS: WHAT A HOOK IS (16:19 UTC; PAGE-7's "TROUBLE-LINES a3d5657d3", `lines/TROUBLE-LINES-1.md`,
+  measured on its 900 towns).** FOUND BY ITS BUILDER: a current trouble stores its kind's WHOLE hook list (three, fewer
+  where a row is refused) with no draw, so two places with one kind share every hook; NO PAGE PRINTS A TROUBLE'S
+  `lastingEffects` (stored and veiled, never printed). Its draft replaced every hook by a QUESTION to the DM, judging
+  today's hooks "false to the record". RULED: (1) THE EFFECTS ARE NOT BUILT (a sentence nobody reads is not cured);
+  (2) THE QUESTION FORM IS REFUSED: a hook is a lead a DM can use tonight, small and concrete, done or hidden by the
+  kind of person or house the place holds; it MAY propose a twist the record does not hold (that is what a hook is,
+  what today's hooks and the people's approved hooks do); it may not name a house the place lacks (its need),
+  contradict the record, or state a past event as history; the rule "say what the record holds" binds the page's
+  STATEMENTS, not its hooks; the owner ordered more variety, not a change in what a hook is; today's three a kind
+  stay in the pool behind their needs; (3) 12 hooks for crime_wave and guild_conflict (each stands in half of all
+  cities), 9 for the other six kinds, at least four needing nothing, three kept by keyed ranking, the array's length
+  unchanged; THE BAR FOR A MANY-A-PLACE FIELD is the top share of one line among a size's places (about 15%) and the
+  share a second place repeats (under 30%); "three in a row share any line" is reported, not the bar (with three
+  kept of nine it stays at 76% for two places of one kind whatever is written); (4) a hook may need a hideable fact
+  only because hooks never reach a reader: an arm proves `currentTensions[].plotHooks` absent from the shared
+  projection and the served document; those hooks listed for the security reader. Owed: "TROUBLE-LINES-2 <commit>".
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -4589,3 +4607,9 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   PAGE-6 before its merge: by PAGE-1's own script, how many of the 1,014 remain after S9 and after L4 as briefed;
   whether L4 adds "principled" to the guard at `npcData.js:2548`; what would cure the rest and what it would move.
   TOLD TO THE OWNER the same turn: that item is unproven until measured.
+- 16:20 UTC · PAGE-7's first hooks draft read and sent back (section 2: what a hook is; the effects not built). PAGE-6 (16:11):
+  S9's place in `narrativeGenerator.js` is TWO appended fragments on existing lines (the import of
+  `settleMisfitSecrets` after `heldByOthers`'s import; the call after `landMemberships` in `enrichNpcCoherence`), so
+  no cited line moves: for the join with the goals lane; L4's brief does NOT add "principled" to the guard at
+  `npcData.js:2548` (it reads the temperament in S9's admits); a helper is running PAGE-1's own `f5.mjs` unchanged
+  on 79710682d and c727a4d17 with an L4 projection: the figures owed to the chair and then to the owner.
