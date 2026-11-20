@@ -1093,7 +1093,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger at {settlement} does not have to ask long before someone mentions the quarrel.",
+          "text": "A visitor at {settlement} does not have to ask long before someone mentions the quarrel.",
           "slots": [
             "settlement"
           ],
@@ -1101,7 +1101,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "The quarrel at {settlement} belongs to the place's present rather than to its history, and people speak of it that way.",
+          "text": "The quarrel at {settlement} belongs to the place's present, not to its history, and people speak of it that way.",
           "slots": [
             "settlement"
           ],
@@ -1730,7 +1730,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger at {settlement} hears more than one name spoken about the hall, and the one with the most weight behind it is {faction}.",
+          "text": "A visitor at {settlement} hears more than one name spoken about the hall, and the one with the most weight behind it is {faction}.",
           "slots": [
             "settlement",
             "faction"
@@ -2656,7 +2656,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger at {settlement} hears the {seat} named long before meeting anyone who speaks for it.",
+          "text": "A visitor at {settlement} hears the {seat} named long before meeting anyone who speaks for it.",
           "slots": [
             "settlement",
             "seat"
@@ -3713,7 +3713,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "dm-only",
             "no crisis: under_siege"
           ],
-          "text": "People at {settlement} know some goods come in cheaper than their dues would allow, and do not ask why.",
+          "text": "People at {settlement} know some wares sell cheaper than their dues would allow, and do not ask why.",
           "slots": [
             "settlement"
           ],

@@ -815,7 +815,7 @@ the access.
 3. `[street · no hunger]` Nobody here talks about the price of bread. The town is well off, and the talk is about what to build next.
 4. `[ledger · crisis: indebted]` {settlement} earns well, but much of what it earns goes to the outside power it owes.
 5. `[counterforce · crisis: any · no crisis: indebted]` {settlement} is neither out of the way nor poor: its approach serves it, and the place does well on it.
-6. `[threshold · crisis: any · no crisis: indebted]` {settlement} does well enough that a lean year would cost it comfort rather than bread.
+6. `[threshold · crisis: any · no crisis: indebted]` {settlement} does well enough that a lean year would cost it comfort, not bread.
 7. `[unfolding · crisis: any · no crisis: indebted]` {settlement} goes on doing well, and nobody there counts the margin closely.
 
 **COMBINATION C2: a high rung on a narrow approach (`isolated` / `mountain_pass`)**
@@ -880,7 +880,7 @@ wants a sentence.
 5. `[ledger · hunger]` On the count, {settlement} raises more than it eats; with the crisis on, the excess is being kept back, not sold.
 6. `[visitor · hunger]` What {settlement} raises still comes out ahead of what it eats, and this year every bit of the excess is wanted at home.
 7. `[counterforce · no hunger]` Nobody at {settlement} goes short of food, and the place has more than it needs besides.
-8. `[threshold · no hunger]` {settlement} is past feeding itself, not merely level with its needs: what it raises leaves something over.
+8. `[threshold · no hunger]` {settlement} does more than feed itself: what it raises leaves something over.
 9. `[unfolding · no hunger]` What {settlement} raises keeps coming in ahead of what it eats, and the spare goes into store or out to buyers.
 
 **FOOD: balanced**
@@ -1156,12 +1156,12 @@ register and stand as canonical-at-zero for the two lower tiers (R-DST-C).
 3. `[counterforce · dm-only · no organised crime]` What passes for a shadow economy here has never grown into one. There is unlicensed trade and nothing organised behind it.
 4. `[ledger · crime: ≥ organized]` Little of {settlement}'s trade goes unrecorded, but what does goes through the same organised hands each time.
 5. `[street · organised crime]` The shadow trade at {settlement} is small, but it is not casual: somebody organises it.
-6. `[visitor · dm-only · organised crime]` A stranger would hardly notice {settlement}'s quiet trade, which is small and kept out of sight by the people who run it.
-7. `[threshold · dm-only · organised crime]` {settlement}'s off-book trade sits at the small end of what any place carries, and it is organised rather than loose.
+6. `[visitor · dm-only · organised crime]` A visitor would hardly notice {settlement}'s quiet trade, which is small and kept out of sight by the people who run it.
+7. `[threshold · dm-only · organised crime]` {settlement}'s off-book trade sits at the small end of what any place carries, and it is organised, not loose.
 8. `[counterforce · dm-only · organised crime]` {settlement}'s shadow trade has not spread far, but neither is it scattered: what there is of it answers to someone.
-9. `[unfolding · dm-only · organised crime]` A little of {settlement}'s trade slips past the books week in and week out, and it slips past in an orderly way.
+9. `[unfolding · dm-only · organised crime]` A little of {settlement}'s trade slips past the accounts week in and week out, and it slips past in an orderly way.
 10. `[street · dm-only · organised crime]` People at {settlement} who want something without a duty on it know whom to ask, and the asking always goes to the same door.
-11. `[ledger · dm-only · organised crime]` On {settlement}'s books the gap is small: a little trade that never reaches them, and none of it missed by chance.
+11. `[ledger · dm-only · organised crime]` In {settlement}'s accounts the gap is small: a little trade that never reaches them, and none of it missed by chance.
 
 **FLAG: arcaneBlackMarket**
 1. `[ledger · dm-only · colour]` Spell components, charms and stolen scrolls change hands at {settlement} under the counter, sold by the same people who run the town's other quiet trade.
@@ -1499,7 +1499,7 @@ block reads the canonical status and supplies clauses any surface can attach.
 **UPSTREAM WEAK: a chain the town's work draws on is failing** *(`activeChains[].upstreamWeak`, the upstream chain named; R-W9: authored as a plain line in this block, the cause it names declared, mounted at `economics.upstreamSupply`)*
 1. `[ledger · colour]` Some of {settlement}'s work draws on its {chain}, which is in trouble itself, so the work that depends on it is at risk too.
 2. `[street · colour]` Trouble in {settlement}'s {chain} puts what depends on it at risk.
-3. `[visitor · colour]` A stranger asking after {settlement}'s trades hears the {chain} named as the worry.
+3. `[visitor · colour]` A visitor asking after {settlement}'s trades hears the {chain} named as the worry.
 4. `[unfolding · colour]` While its {chain} is failing, the work at {settlement} that draws on it stands exposed.
 5. `[counterforce · colour]` The fault is not in {settlement}'s own work: it lies upstream, in the {chain} that work draws on.
 6. `[threshold · colour]` Some of {settlement}'s work is still going, and it goes only as long as its {chain} can keep feeding it.
@@ -1728,7 +1728,7 @@ A composed page draws one of each grain, never two.
 3. `[visitor]` What {settlement} is for is legible within a day, because the town does a small number of things and does them visibly.
 4. `[counterforce]` {settlement} does not live by plain work alone; it has strengths of its own, and the place leans on them.
 5. `[threshold]` Each of {settlement}'s strengths stands on something its own country or its approach supplies, and holds for as long as that does.
-6. `[unfolding]` {settlement}'s strengths are in daily use, worked by the place's own hands rather than kept as a boast.
+6. `[unfolding]` {settlement}'s strengths are in daily use, worked by the place's own hands and not kept as a boast.
 
 **ECONOMIC STRENGTHS: none recorded**
 1. `[ledger]` Nothing about {settlement}'s ground or its trades stands out as a strength. The town works, and works at nothing in particular.
@@ -1783,7 +1783,7 @@ their surface does render.
 **RESOURCE CONDITION: worked out, recovers in time** *(`resourceConditions[]` with condition `depleted` and recoveryMode `natural`; `conditionNotes` holds the same fact as the generator's sentence)*
 1. `[ledger · colour]` {settlement} has worked out its {resource}. Left alone, the ground will come back in time; until it does, the town buys what it used to take, or goes without.
 2. `[street · colour]` Little is left worth taking from the {resource} at {settlement} this year, and it will be some seasons before there is more.
-3. `[visitor · colour]` A stranger finds little being taken from the {resource} around {settlement}: what was there has been worked out.
+3. `[visitor · colour]` A visitor finds little being taken from the {resource} around {settlement}: what was there has been worked out.
 4. `[unfolding · colour]` The {resource} at {settlement} is worked out and coming back on its own, at the ground's own pace.
 5. `[counterforce · colour]` Nobody at {settlement} needs to spend labour or money to bring the {resource} back; left alone, it returns.
 6. `[threshold · colour]` The {resource} at {settlement} is spent for the present and not for good: the ground still holds the means to give it again.
@@ -1858,8 +1858,8 @@ shape.
 2. `[street · colour]` Everybody here knows what leaves and what arrives, because the same carts do both.
 3. `[visitor · market]` The market at {settlement} carries the town's own goods and other towns' goods on the same stalls, and nobody tells a visitor which is which.
 4. `[ledger · colour]` What {settlement} sends out and what it brings in both show in its dealings, and neither side of the account stands empty.
-5. `[counterforce · colour]` {settlement} is not a place that only buys or only sells: goods leave it and goods reach it, and it lives by both.
-6. `[visitor · colour]` A stranger at {settlement} soon sees that the place both sells to the world beyond it and buys from it.
+5. `[counterforce · colour]` {settlement} is not a place that only buys or only sells: things go out of it and things come into it, and it lives by both.
+6. `[visitor · colour]` A visitor at {settlement} soon sees that the place both sells to the world beyond it and buys from it.
 7. `[unfolding · colour]` In the ordinary run of things, goods are leaving {settlement} and goods are arriving in it.
 8. `[street · colour]` People at {settlement} speak of trade as give and take: something goes out of the place, and something comes back for it.
 
@@ -1899,7 +1899,7 @@ shape.
 1. `[ledger · colour]` The country around {settlement} does not give the town enough {good} for what the town needs of it.
 2. `[street · colour]` Not enough of the {good} that {settlement} needs comes from the country here.
 3. `[ledger · no imports]` The country around {settlement} does not give the town enough {good}, so the town must look elsewhere for the rest.
-4. `[visitor · colour]` A stranger looking over the country around {settlement} sees little sign of the {good} the place needs.
+4. `[visitor · colour]` A visitor looking over the country around {settlement} sees little sign of the {good} the place needs.
 5. `[counterforce · colour]` However the people of {settlement} work their land, it does not yield the {good} the place needs in full.
 6. `[threshold · colour]` {settlement} is short of {good} by its own land alone; whether the place goes short in fact depends on what it brings in.
 7. `[unfolding · colour]` {settlement}'s need for {good} keeps running ahead of what its own country yields.
@@ -1913,9 +1913,9 @@ shape.
 **INCOME WEIGHT: the practice of magic** *(`compound.magicInfluence` high)*
 1. `[ledger · colour]` Magic carries real weight at {settlement}: what it can do is reckoned with in the town's dealings, whatever its own share of the town's money.
 2. `[street · colour]` Magic is reckoned with in {settlement}'s dealings, whatever it earns.
-3. `[visitor · colour]` A stranger trading at {settlement} soon finds that the place's dealers take magic into account as a matter of course.
+3. `[visitor · colour]` A visitor trading at {settlement} soon finds that the place's dealers take magic into account as a matter of course.
 4. `[counterforce · colour]` At {settlement} no large undertaking is reckoned up without asking what magic could add to it or take from it.
-5. `[threshold · colour]` Magic's weight at {settlement} lies in what it can do rather than in what it earns, and the place's dealings would look different without it.
+5. `[threshold · colour]` Magic's weight at {settlement} lies in what it can do, not in what it earns, and the place's dealings would look different without it.
 6. `[unfolding · colour]` In {settlement}'s dealings, the question of what magic can do comes up again with each new bargain.
 
 ---
@@ -2319,8 +2319,8 @@ causal clause; the stability string alone does not.
 1. `[elder]` {settlement} is still living with its recent quarrel, and the hall is run with it in mind.
 2. `[ledger]` The {seat} at {settlement} governs a town that recently fought over who should rule. The side that lost still lives here and still owes the {seat} its dues, and it pays them slowly.
 3. `[street]` Nobody at {settlement} needs the trouble explained to them; it is recent enough that the town simply refers to it and moves on.
-4. `[visitor]` A stranger at {settlement} does not have to ask long before someone mentions the quarrel.
-5. `[unfolding]` The quarrel at {settlement} belongs to the place's present rather than to its history, and people speak of it that way.
+4. `[visitor]` A visitor at {settlement} does not have to ask long before someone mentions the quarrel.
+5. `[unfolding]` The quarrel at {settlement} belongs to the place's present, not to its history, and people speak of it that way.
 6. `[counterforce]` Nobody at {settlement} treats the quarrel as somebody else's business; it is the place's own, whoever is at the heart of it.
 7. `[ledger]` Whoever decides things at {settlement} decides them with the quarrel in view.
 8. `[street]` Most people at {settlement} have something to say about the quarrel, whatever their own part in it.
@@ -2408,7 +2408,7 @@ did not die.
 1. `[ledger]` {faction} outweighs everyone at {settlement} who wants its place, and the whole town knows who they are. {faction} holds on, but has to watch them.
 2. `[street]` {settlement} has people who would take the hall if they could. For now they cannot, and everyone involved knows it.
 3. `[unfolding · no crisis: occupied · no seat outranked]` The {seat} at {settlement} holds because no rival yet outweighs {faction}, and the weighing is done again every season.
-4. `[visitor]` A stranger at {settlement} hears more than one name spoken about the hall, and the one with the most weight behind it is {faction}.
+4. `[visitor]` A visitor at {settlement} hears more than one name spoken about the hall, and the one with the most weight behind it is {faction}.
 5. `[counterforce]` Nobody at {settlement} has moved against {faction}, because nobody who wants the hall is heavy enough to take it.
 6. `[threshold]` Should a rival at {settlement} come to outweigh {faction}, the hall would be contested; none does.
 
@@ -2545,7 +2545,7 @@ and never an assertion that the feared thing is happening.
 4. `[counterforce]` The {seat} is what {settlement}'s government is called, no grander and no humbler than the place that keeps it.
 5. `[unfolding]` Official business at {settlement} is done in the name of the {seat}.
 6. `[threshold]` The {seat} is the one name {settlement}'s authority answers to; a petition addressed to any other has gone to the wrong door.
-7. `[visitor]` A stranger at {settlement} hears the {seat} named long before meeting anyone who speaks for it.
+7. `[visitor]` A visitor at {settlement} hears the {seat} named long before meeting anyone who speaks for it.
 
 **FLAG: stateCrime** *(WIRING W3 C2: `safetyProfile.flags.stateCrime`, intensity below the heavy band)*
 1. `[street · garrison]` The garrison keeps {settlement} quiet and takes its own cut for doing it: dues collected twice, goods taken without payment, and no complaint made where a soldier can hear.
@@ -2655,7 +2655,7 @@ own entailment and licenses nothing about who runs it.
 4. `[visitor · dm-only · no crisis: under_siege]` An honest trader at {settlement} pays dues that some of the goods on the next cart never paid.
 5. `[unfolding · dm-only · no crisis: under_siege]` Each cargo that comes into {settlement} under a false list leaves the place's dues a little shorter, and the shortfall runs on.
 6. `[threshold · dm-only · no crisis: under_siege]` Untaxed goods at {settlement} travel in among the taxed, and the line between the two is wherever a cargo list says it is.
-7. `[street · dm-only · no crisis: under_siege]` People at {settlement} know some goods come in cheaper than their dues would allow, and do not ask why.
+7. `[street · dm-only · no crisis: under_siege]` People at {settlement} know some wares sell cheaper than their dues would allow, and do not ask why.
 
 **operation role `unlicensed revenue`** {colour}
 1. `[ledger]` There is gambling at {settlement} that nobody licenses, and it funds a good deal more than itself.
@@ -2878,8 +2878,8 @@ margin *arm*. They are different fields on different rows and both are kept;
 4. `[ledger · crisis: any · law: = collapsed]` {settlement} could not hold off a raid, and its brawls and thefts go unanswered as it is.
 5. `[street · crisis: any · no crisis: threat, unrest]` People at {settlement} do not count on the place's defences for much, and say so without alarm.
 6. `[counterforce · crisis: any · no crisis: threat, unrest]` There is no reserve behind {settlement}'s defence; what the place can field is all of it, and it is not much.
-7. `[threshold · crisis: any · no crisis: threat, unrest]` {settlement} is weakly defended rather than undefended: there is something to meet trouble with, and not much more than something.
-8. `[visitor · crisis: any · no crisis: threat, unrest]` A stranger sees little at {settlement} that is kept for fighting; the place looks after its ordinary business and not much else.
+7. `[threshold · crisis: any · no crisis: threat, unrest]` {settlement} is weakly defended, not undefended: there is something to meet trouble with, and not much more than something.
+8. `[visitor · crisis: any · no crisis: threat, unrest]` A visitor sees little at {settlement} that is kept for fighting; the place looks after its ordinary business and not much else.
 9. `[ledger · crisis: any · no crisis: threat, unrest]` Counted up, the people {settlement} could put under arms make a thin defence.
 
 **readiness `CRITICAL`** {crisis-scoped}
@@ -3327,7 +3327,7 @@ the ledger).
 3. `[street]` What people at {settlement} say about their safety is what they tell someone new; they may say more to someone they know.
 4. `[counterforce]` Nothing in this reading of {settlement}'s safety has been tested by a long stay: it is what a first look could see, and no more.
 5. `[threshold]` This is {settlement}'s safety at first acquaintance, and a longer acquaintance could bear it out or overturn it.
-6. `[visitor]` A newcomer judges {settlement}'s streets by a few days in them, and this account is a newcomer's judgment.
+6. `[visitor]` A newcomer reads {settlement}'s safety from a few days in the place, and this account is a newcomer's reading.
 7. `[unfolding]` {settlement}'s safety is set down here as first found, and what later days bring is not part of it.
 
 ---
@@ -3386,7 +3386,7 @@ the leash is the state, not a fate.
 4. `[counterforce · dm-only · colour]` Nobody at {settlement} pays to be left alone, so far as anyone will say.
 5. `[threshold · dm-only · colour]` Crime at {settlement} goes no further than a single wrongdoer and a single wrong; past that, the place knows of nothing.
 6. `[unfolding · dm-only · colour]` No ring that anyone can find has grown out of {settlement}'s small wrongs; they stay small and separate.
-7. `[visitor · dm-only · colour]` A stranger at {settlement} is told whom to trust and whom to watch, but never whom to pay.
+7. `[visitor · dm-only · colour]` A visitor at {settlement} is told whom to trust and whom to watch, but never whom to pay.
 
 **capture `none`**
 1. `[ledger · colour]` No criminal's money appears in the {seat}'s accounts at {settlement}, so what the hall spends is spent on the town.
@@ -3423,7 +3423,7 @@ order: the black market, the thieves' guild, the smuggling network, the gangs (`
 **FIXTURE: black market** {colour}
 1. `[ledger]` Nothing sold at {settlement}'s black market reaches the toll book, so the town loses the dues on every load of contraband and stolen goods.
 2. `[street]` Anyone at {settlement} who knows whom to ask can buy contraband or stolen goods at the black market.
-3. `[visitor · dm-only]` Nothing marks {settlement}'s black market to a stranger, yet the goods sold there are the kind no lawful stall would show.
+3. `[visitor · dm-only]` Nothing marks {settlement}'s black market to a visitor, yet the goods sold there are the kind no lawful stall would show.
 4. `[counterforce · dm-only]` Whatever the place's law forbids to be sold, {settlement}'s black market has not stopped selling.
 5. `[unfolding · dm-only]` Contraband and stolen goods keep changing hands at {settlement}'s black market, out of sight of the place's lawful trade.
 6. `[threshold · dm-only]` The black market at {settlement} sits just out of the law's sight: a known thing in the place, and not quite an open one.
@@ -3488,8 +3488,8 @@ may not say the contract is failing unless the economic arm supplies that.
 3. `[visitor · gate · no crisis: under_siege]` Everyone who comes through {settlement}'s gate is counted there by a soldier whose job it is, and counted again on the way out.
 4. `[counterforce · colour]` {settlement} does not wait to raise its defenders when trouble comes: they are already standing.
 5. `[threshold · colour]` {settlement}'s standing force is ready for what it is sized for, and the place's defence beyond that rests on whatever else it keeps.
-6. `[unfolding · colour]` The soldiers at {settlement} drill, stand their posts and are relieved in turn, day in and day out.
-7. `[visitor · colour]` A stranger at {settlement} can tell its soldiers from its other folk at a glance: soldiering is their whole work.
+6. `[unfolding · colour]` The standing force at {settlement} drills, stands its posts and is relieved in turn, day in and day out.
+7. `[visitor · colour]` A visitor at {settlement} can tell its standing force from its other folk at a glance: soldiering is their whole work.
 
 **militia PRESENT (no garrison)** {colour}
 1. `[ledger]` {settlement}'s defense is its own people under arms. They know the ground, they can be raised, and raising them stops everything else the town was doing.
@@ -3533,7 +3533,7 @@ may not say the contract is failing unless the economic arm supplies that.
 1. `[ledger]` {settlement} has no arcane defense: what arrives unseen here goes undetected and therefore unanswered.
 2. `[street]` {settlement} keeps no defence against anything it cannot see.
 3. `[counterforce]` Anything unseen that came at {settlement} would find nothing to meet it: the town keeps no wards or seers to notice it.
-4. `[visitor]` Whatever defence {settlement} keeps, a stranger would find nothing arcane in it.
+4. `[visitor]` Whatever defence {settlement} keeps, a visitor would find nothing arcane in it.
 5. `[threshold]` {settlement}'s protection reaches as far as ordinary eyes and hands reach, and no further.
 6. `[street]` Ask at {settlement} who would answer a threat worked by magic, and the answer is that nobody would.
 7. `[ledger]` Whoever defends {settlement}, none of them works with magic.
@@ -3557,7 +3557,7 @@ lines.
 **FIXTURE: charter hall** {colour}
 1. `[street]` Adventurers at {settlement} take their contracts at the charter hall, and the town posts its worst problems there.
 2. `[ledger]` The charter hall at {settlement} keeps a book of the bounties the town has posted, and every unclaimed one is a danger still at large.
-3. `[visitor]` A stranger walking into {settlement}'s charter hall finds the place's paid work posted up where anyone can read it.
+3. `[visitor]` A visitor walking into {settlement}'s charter hall finds the place's paid work posted up where anyone can read it.
 4. `[counterforce]` The charter hall at {settlement} is where the place and those who take its contracts meet, and neither has to go looking for the other.
 5. `[unfolding]` Contracts go up at {settlement}'s charter hall and come down again as they are taken, and what is posted there is never the same for long.
 6. `[threshold]` The charter hall at {settlement} takes up only what is posted there; a trouble nobody posts is a trouble the hall never hears of.
@@ -3587,11 +3587,11 @@ print nowhere). Description position: plain lines.
 **ARCANE: alchemists** {colour}
 1. `[street]` Alchemy is practised at {settlement}, and some of what it makes goes to the town's defenders.
 2. `[ledger]` Alchemical preparations made at {settlement} are among what its defenders can call on.
-3. `[visitor]` Ask at {settlement} who makes for its defenders, and the alchemists are among the names given.
-4. `[counterforce]` The alchemists at {settlement} hold no rank in its defence and stand no watch; they make, and the defenders take what is made.
-5. `[threshold]` {settlement}'s defenders can call on only as much alchemy as has already been made, and nothing alchemical is to hand that a workbench has not finished.
-6. `[unfolding]` Alchemy at {settlement} goes on at its own pace, and the defenders' share of it comes off the workbench as it is made.
-7. `[street]` People at {settlement} speak of the place's alchemists as part of its defence, though few could say what the alchemists make for it.
+3. `[visitor]` Ask at {settlement} who makes for its defence, and those who practise alchemy are among the names given.
+4. `[counterforce]` Those who practise alchemy at {settlement} hold no rank in its defence and stand no watch; they make, and whoever defends the place takes what is made.
+5. `[threshold]` {settlement}'s defence can call on only as much alchemy as has already been made, and nothing alchemical is to hand that a workbench has not finished.
+6. `[unfolding]` Alchemy at {settlement} goes on at its own pace, and the share of it kept for the place's defence comes off the workbench as it is made.
+7. `[street]` People at {settlement} speak of the place's alchemy as part of its defence, though few could say what it supplies.
 
 **ARCANE: divine** {colour}
 1. `[street]` The clergy at {settlement} heal and ward by prayer, and the town counts them among its defences.
@@ -4005,7 +4005,7 @@ relied on by nothing.
 3. `[street · no magic supply]` The town would go on as it is if the arcane went away; nothing it lives by waits on a spell.
 4. `[ledger · magic supply]` {settlement}'s own work does not lean on magic, but no trade road reaches it, and some of what it lives on is brought in by magic.
 5. `[visitor · no magic supply]` A visitor may meet magic at {settlement}, but nothing the place needs in order to live is waiting on it.
-6. `[threshold · no magic supply]` Were every practitioner to leave {settlement}, the place would lose what they offer and keep its living.
+6. `[threshold · no magic supply]` Without any magic at all, {settlement} would still keep its living.
 7. `[unfolding · no magic supply]` The work that keeps {settlement} fed and busy is done by ordinary labour, whatever magic is about the place.
 8. `[ledger · no magic supply]` Set {settlement}'s trades against the help they draw on, and magic is not a thing any of them needs.
 
@@ -5078,7 +5078,7 @@ R-DST-G requires the good state to be a subject.
 2. `[street]` Nothing here is urgent. The town's difficulties are old ones, not emergencies, and it has the room to work on them.
 3. `[ledger]` There is no crisis on the books. Whatever strain the settlement carries, it carries at a weight it can hold.
 4. `[counterforce]` Nothing at {settlement} stands at the pitch of an emergency; whatever the place has to deal with, it deals with in the ordinary way.
-5. `[visitor]` A stranger at {settlement} sees none of the signs of an emergency: nothing rationed and nothing shut against trouble.
+5. `[visitor]` A visitor at {settlement} sees none of the signs of an emergency: nothing rationed and nothing shut against trouble.
 
 ---
 
@@ -7013,9 +7013,9 @@ unchanged.
 2. `[visitor]` What {settlement} says about itself does not match the rest in {band} of places.
 3. `[street]` A handful of things about this town cannot all be true at once, and everyone here has their own explanation.
 4. `[counterforce]` Not every account of {settlement} squares with every other, and the points on which they differ are not small ones.
-5. `[threshold]` {settlement}'s story does not merely have loose ends: on some points it contradicts itself outright.
+5. `[threshold]` {settlement}'s story has more than loose ends: on some points it contradicts itself outright.
 6. `[ledger]` Set side by side, the accounts of {settlement} disagree on points that matter, and no one of them settles the rest.
-7. `[visitor]` A stranger who asks about {settlement} in more than one place will come away with answers that do not fit together.
+7. `[visitor]` A visitor who asks about {settlement} in more than one place will come away with answers that do not fit together.
 
 *THE GOOD STATE LEAVES (STYLE-2 FIRST-IMPRESSIONS, 2026-11-09; STYLE-2-SURFACES B·#28, STYLE-RULINGS-2 B1(c) "the line reads the battery's verdict or leaves"). The `criticalIssueCount zero` pool — "Everything you hear about {settlement} holds up; its story is clean, with nothing contradicting anything else." · "Look as closely as you like at {settlement}: nothing about it fails to add up." · "{settlement} is under real pressure, yet its account of itself stays clean." — vouched for the record over a tab that lists its own By-Design Contradictions (Shangjin, 12 of 12 printing a coherence line): the battery passes a record whose by-design items are not battery findings, and no fact the desk reads names a by-design item. On a clean record the tab's header already says COHERENT, so the line restated it; beside a by-design list it was false. It is struck, for the owner's veto; a reader of the by-design list may bring a line back that names the oddity.*
 
@@ -7132,10 +7132,10 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 5. `[ledger · no market · crisis: under_siege]` With the road shut by the siege, what little trade {settlement} did with no market of its own has stopped.
 6. `[visitor · no market · crisis: under_siege]` With the siege across the road, nobody comes in to sell at {settlement}, which has no market to come to.
 7. `[ledger · no market · no crisis: under_siege]` {settlement} keeps no market of any kind, so no stall fee or market due is taken there.
-8. `[visitor · no market · no crisis: under_siege]` A stranger with goods to sell at {settlement} finds no stall to take and no market day to wait for; a buyer here is found by asking.
+8. `[visitor · no market · no crisis: under_siege]` A visitor with goods to sell at {settlement} finds no stall to take and no market day to wait for; a buyer here is found by asking.
 9. `[counterforce · no market · no crisis: under_siege]` No market day sets the rhythm of {settlement}'s week; buying and selling happen whenever one neighbour has something another wants.
 10. `[threshold · no market · no crisis: under_siege]` Trade at {settlement} goes as far as neighbours can carry it between themselves, and there is no market to take it beyond that.
-11. `[street · no market · no crisis: under_siege]` Nobody at {settlement} speaks of going to market here, for there is none to go to.
+11. `[street · no market · no crisis: under_siege]` {settlement} keeps no market, so nobody here speaks of going to one.
 12. `[unfolding · no market · no crisis: under_siege]` {settlement} trades in the small way of a place without a market: a sack here, a bundle there, and nothing set out for sale.
 
 **`COMMERCE: a bank`** *(the commercial houses on the live roster, `compound.inst`: `hasBank`)*
@@ -7553,7 +7553,7 @@ no compass word, no real-world place, no named analogy.*
 2. `[ledger · no crisis: under_siege]` Some of the work at {settlement} needs goods that nothing here makes.
 3. `[street · no crisis: under_siege]` No trade at {settlement} makes what some of its work needs, so that much must come from elsewhere or be done without.
 4. `[unfolding · crisis: under_siege]` Some of the work at {settlement} needs goods that nothing here makes, and since the siege nothing comes in from outside.
-5. `[visitor · no crisis: under_siege]` A stranger at {settlement} may find a workshop ready to work and waiting on goods that no trade in the place makes.
+5. `[visitor · no crisis: under_siege]` A visitor at {settlement} may find a workshop ready to work and waiting on goods that no trade in the place makes.
 6. `[counterforce · no crisis: under_siege]` {settlement} has the hands for some of its work and not the goods that work starts from, and the hands alone cannot supply them.
 7. `[threshold · no crisis: under_siege]` Some of {settlement}'s work goes only as far as the goods it needs from elsewhere allow, and stops where they stop.
 8. `[unfolding · no crisis: under_siege]` Some of {settlement}'s work is held up for want of a supply that nothing in the place provides, and it stays held up until that supply is found.

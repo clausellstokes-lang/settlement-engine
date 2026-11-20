@@ -245,7 +245,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "crisis: any",
             "no crisis: threat, unrest"
           ],
-          "text": "{settlement} is weakly defended rather than undefended: there is something to meet trouble with, and not much more than something.",
+          "text": "{settlement} is weakly defended, not undefended: there is something to meet trouble with, and not much more than something.",
           "slots": [
             "settlement"
           ],
@@ -257,7 +257,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "crisis: any",
             "no crisis: threat, unrest"
           ],
-          "text": "A stranger sees little at {settlement} that is kept for fighting; the place looks after its ordinary business and not much else.",
+          "text": "A visitor sees little at {settlement} that is kept for fighting; the place looks after its ordinary business and not much else.",
           "slots": [
             "settlement"
           ],
@@ -3874,7 +3874,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A newcomer judges {settlement}'s streets by a few days in them, and this account is a newcomer's judgment.",
+          "text": "A newcomer reads {settlement}'s safety from a few days in the place, and this account is a newcomer's reading.",
           "slots": [
             "settlement"
           ],
@@ -4640,7 +4640,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "dm-only",
             "colour"
           ],
-          "text": "A stranger at {settlement} is told whom to trust and whom to watch, but never whom to pay.",
+          "text": "A visitor at {settlement} is told whom to trust and whom to watch, but never whom to pay.",
           "slots": [
             "settlement"
           ],
@@ -4831,7 +4831,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "Nothing marks {settlement}'s black market to a stranger, yet the goods sold there are the kind no lawful stall would show.",
+          "text": "Nothing marks {settlement}'s black market to a visitor, yet the goods sold there are the kind no lawful stall would show.",
           "slots": [
             "settlement"
           ],
@@ -5434,7 +5434,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "The soldiers at {settlement} drill, stand their posts and are relieved in turn, day in and day out.",
+          "text": "The standing force at {settlement} drills, stands its posts and is relieved in turn, day in and day out.",
           "slots": [
             "settlement"
           ],
@@ -5445,7 +5445,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "A stranger at {settlement} can tell its soldiers from its other folk at a glance: soldiering is their whole work.",
+          "text": "A visitor at {settlement} can tell its standing force from its other folk at a glance: soldiering is their whole work.",
           "slots": [
             "settlement"
           ],
@@ -5737,7 +5737,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "Whatever defence {settlement} keeps, a stranger would find nothing arcane in it.",
+          "text": "Whatever defence {settlement} keeps, a visitor would find nothing arcane in it.",
           "slots": [
             "settlement"
           ],
@@ -5844,7 +5844,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger walking into {settlement}'s charter hall finds the place's paid work posted up where anyone can read it.",
+          "text": "A visitor walking into {settlement}'s charter hall finds the place's paid work posted up where anyone can read it.",
           "slots": [
             "settlement"
           ],
@@ -5956,7 +5956,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "Ask at {settlement} who makes for its defenders, and the alchemists are among the names given.",
+          "text": "Ask at {settlement} who makes for its defence, and those who practise alchemy are among the names given.",
           "slots": [
             "settlement"
           ],
@@ -5964,7 +5964,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "The alchemists at {settlement} hold no rank in its defence and stand no watch; they make, and the defenders take what is made.",
+          "text": "Those who practise alchemy at {settlement} hold no rank in its defence and stand no watch; they make, and whoever defends the place takes what is made.",
           "slots": [
             "settlement"
           ],
@@ -5972,7 +5972,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "{settlement}'s defenders can call on only as much alchemy as has already been made, and nothing alchemical is to hand that a workbench has not finished.",
+          "text": "{settlement}'s defence can call on only as much alchemy as has already been made, and nothing alchemical is to hand that a workbench has not finished.",
           "slots": [
             "settlement"
           ],
@@ -5980,7 +5980,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "Alchemy at {settlement} goes on at its own pace, and the defenders' share of it comes off the workbench as it is made.",
+          "text": "Alchemy at {settlement} goes on at its own pace, and the share of it kept for the place's defence comes off the workbench as it is made.",
           "slots": [
             "settlement"
           ],
@@ -5988,7 +5988,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "People at {settlement} speak of the place's alchemists as part of its defence, though few could say what the alchemists make for it.",
+          "text": "People at {settlement} speak of the place's alchemy as part of its defence, though few could say what it supplies.",
           "slots": [
             "settlement"
           ],
@@ -9250,7 +9250,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no magic supply"
           ],
-          "text": "Were every practitioner to leave {settlement}, the place would lose what they offer and keep its living.",
+          "text": "Without any magic at all, {settlement} would still keep its living.",
           "slots": [
             "settlement"
           ],

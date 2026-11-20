@@ -974,7 +974,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger at {settlement} sees none of the signs of an emergency: nothing rationed and nothing shut against trouble.",
+          "text": "A visitor at {settlement} sees none of the signs of an emergency: nothing rationed and nothing shut against trouble.",
           "slots": [
             "settlement"
           ],

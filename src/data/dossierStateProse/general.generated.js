@@ -9097,7 +9097,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "{settlement}'s story does not merely have loose ends: on some points it contradicts itself outright.",
+          "text": "{settlement}'s story has more than loose ends: on some points it contradicts itself outright.",
           "slots": [
             "settlement"
           ],
@@ -9113,7 +9113,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger who asks about {settlement} in more than one place will come away with answers that do not fit together.",
+          "text": "A visitor who asks about {settlement} in more than one place will come away with answers that do not fit together.",
           "slots": [
             "settlement"
           ],
@@ -9797,7 +9797,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
             "no market",
             "no crisis: under_siege"
           ],
-          "text": "A stranger with goods to sell at {settlement} finds no stall to take and no market day to wait for; a buyer here is found by asking.",
+          "text": "A visitor with goods to sell at {settlement} finds no stall to take and no market day to wait for; a buyer here is found by asking.",
           "slots": [
             "settlement"
           ],
@@ -9833,7 +9833,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
             "no market",
             "no crisis: under_siege"
           ],
-          "text": "Nobody at {settlement} speaks of going to market here, for there is none to go to.",
+          "text": "{settlement} keeps no market, so nobody here speaks of going to one.",
           "slots": [
             "settlement"
           ],
@@ -11929,7 +11929,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: under_siege"
           ],
-          "text": "A stranger at {settlement} may find a workshop ready to work and waiting on goods that no trade in the place makes.",
+          "text": "A visitor at {settlement} may find a workshop ready to work and waiting on goods that no trade in the place makes.",
           "slots": [
             "settlement"
           ],

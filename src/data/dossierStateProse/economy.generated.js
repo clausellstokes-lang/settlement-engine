@@ -76,7 +76,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
             "crisis: any",
             "no crisis: indebted"
           ],
-          "text": "{settlement} does well enough that a lean year would cost it comfort rather than bread.",
+          "text": "{settlement} does well enough that a lean year would cost it comfort, not bread.",
           "slots": [
             "settlement"
           ],
@@ -523,7 +523,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no hunger"
           ],
-          "text": "{settlement} is past feeding itself, not merely level with its needs: what it raises leaves something over.",
+          "text": "{settlement} does more than feed itself: what it raises leaves something over.",
           "slots": [
             "settlement"
           ],
@@ -2339,7 +2339,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
             "dm-only",
             "organised crime"
           ],
-          "text": "A stranger would hardly notice {settlement}'s quiet trade, which is small and kept out of sight by the people who run it.",
+          "text": "A visitor would hardly notice {settlement}'s quiet trade, which is small and kept out of sight by the people who run it.",
           "slots": [
             "settlement"
           ],
@@ -2351,7 +2351,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
             "dm-only",
             "organised crime"
           ],
-          "text": "{settlement}'s off-book trade sits at the small end of what any place carries, and it is organised rather than loose.",
+          "text": "{settlement}'s off-book trade sits at the small end of what any place carries, and it is organised, not loose.",
           "slots": [
             "settlement"
           ],
@@ -2375,7 +2375,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
             "dm-only",
             "organised crime"
           ],
-          "text": "A little of {settlement}'s trade slips past the books week in and week out, and it slips past in an orderly way.",
+          "text": "A little of {settlement}'s trade slips past the accounts week in and week out, and it slips past in an orderly way.",
           "slots": [
             "settlement"
           ],
@@ -2399,7 +2399,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
             "dm-only",
             "organised crime"
           ],
-          "text": "On {settlement}'s books the gap is small: a little trade that never reaches them, and none of it missed by chance.",
+          "text": "In {settlement}'s accounts the gap is small: a little trade that never reaches them, and none of it missed by chance.",
           "slots": [
             "settlement"
           ],
@@ -4890,7 +4890,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "A stranger asking after {settlement}'s trades hears the {chain} named as the worry.",
+          "text": "A visitor asking after {settlement}'s trades hears the {chain} named as the worry.",
           "slots": [
             "settlement",
             "chain"
@@ -6019,7 +6019,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
-          "text": "{settlement}'s strengths are in daily use, worked by the place's own hands rather than kept as a boast.",
+          "text": "{settlement}'s strengths are in daily use, worked by the place's own hands and not kept as a boast.",
           "slots": [
             "settlement"
           ],
@@ -6376,7 +6376,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "A stranger finds little being taken from the {resource} around {settlement}: what was there has been worked out.",
+          "text": "A visitor finds little being taken from the {resource} around {settlement}: what was there has been worked out.",
           "slots": [
             "resource",
             "settlement"
@@ -7068,7 +7068,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "{settlement} is not a place that only buys or only sells: goods leave it and goods reach it, and it lives by both.",
+          "text": "{settlement} is not a place that only buys or only sells: things go out of it and things come into it, and it lives by both.",
           "slots": [
             "settlement"
           ],
@@ -7079,7 +7079,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "A stranger at {settlement} soon sees that the place both sells to the world beyond it and buys from it.",
+          "text": "A visitor at {settlement} soon sees that the place both sells to the world beyond it and buys from it.",
           "slots": [
             "settlement"
           ],
@@ -7384,7 +7384,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "A stranger looking over the country around {settlement} sees little sign of the {good} the place needs.",
+          "text": "A visitor looking over the country around {settlement} sees little sign of the {good} the place needs.",
           "slots": [
             "settlement",
             "good"
@@ -7506,7 +7506,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "A stranger trading at {settlement} soon finds that the place's dealers take magic into account as a matter of course.",
+          "text": "A visitor trading at {settlement} soon finds that the place's dealers take magic into account as a matter of course.",
           "slots": [
             "settlement"
           ],
@@ -7528,7 +7528,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "marks": [
             "colour"
           ],
-          "text": "Magic's weight at {settlement} lies in what it can do rather than in what it earns, and the place's dealings would look different without it.",
+          "text": "Magic's weight at {settlement} lies in what it can do, not in what it earns, and the place's dealings would look different without it.",
           "slots": [
             "settlement"
           ],
