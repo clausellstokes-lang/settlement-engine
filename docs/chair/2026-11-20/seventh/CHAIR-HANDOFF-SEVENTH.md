@@ -1694,6 +1694,29 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   MEASURE of the two tranches together: a second city repeats 23.6% of a first's tie lines (62.8% today) and 25.5%
   of its hooks (46.5%); metropolis 32.2% and 35.0% (73.4%, 63.5%); to be said again on built towns.
 
+- **A FAULT OF THE CHAIR IN THE SAMENESS CENSUS, CORRECTED (16:25 UTC).** `economicState.situationDesc` ("Trade
+  proceeds at an ordinary pace for a settlement of this size.": 35 of 50 thorps, 45 towns, 44 cities) IS STORED BUT
+  PRINTED BY NO PAGE: SAME-1's rendered census of 600 places (300 hxd, 300 hxu) finds it on no surface (the web
+  dossier, the three PDF forms, the session sheet), and PLACE-1 found the same (since SW-B7b no page prints it on a
+  fresh birth; tests pin its absence from the Economics tab; the quick guide prints it only as a fallback for old
+  saves). THE CHAIR HAD CALLED IT PRINTED, AND "THE MOST REPEATED SENTENCE IN THE PRODUCT", FROM A SEARCH THAT FOUND
+  ITS NAME IN TWO COMMENTS, and told the owner so at 15:57: corrected to him at 16:26. RULED: `situationDesc` is NOT
+  built and not retired (a sentence nobody reads is not cured); PLACE-1's lines for it (da1579e8c) stay as a record.
+  THE RULE FROM NOW: A FIELD IS PROVED PRINTED BEFORE IT IS MEASURED OR WRITTEN FOR (rendered through the page
+  census's walker, the surface named); SAME-1 sends the chair the printed status of every stored path on the
+  program's list. Read by the chair itself in the page code: `activeConstraint` and `structuralPosition` are printed
+  on the person's card (`npcComponents.jsx`); `safetyDesc` reaches the Defense tab; `economicDragDesc` is read by
+  the Economics tab. ALSO FROM SAME-1: most places print the recent conflict from `pressureSentence` (the same text
+  stored twice): the depth lane's unit moves both.
+- **THE SAMENESS DOOR, RULED (16:25 UTC; SAME-1's proposal).** Measured: rendering one place on every surface takes
+  about 4.6 seconds; 300 places 5.8 minutes on four forks. (2) THE DOOR IS A SCRIPT (`scripts/sameness-census.mjs
+  --check`), run by SAME-1 at every unit merge and by the chair at each landing, NOT in `npm run check`; a row over
+  its ceiling is re-read on the second seed set and reds only if over on both. (3) In `npm run check`: only a light
+  walker with no render (the planted reds: a slot with no row, a rise on both readings, a write that would raise a
+  ceiling; the register's shape); ONE ROW may be appended to `scripts/mutation-coverage-manifest.json` for it, sent
+  to the chair. (4) A slot is keyed by surface and printed position, the stored path as attribution; zero identity
+  flips between the two seed sets, proved.
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -4640,3 +4663,10 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   outcome `lane/seat-6-2026-11-20`); SEAT-5 (about 330,000 by its own figure) goes on with U5 and hands over at a
   natural stop near 400,000. DEPTH-2 (about 290,000 by its own figure): verdicts sent (section 2); DEPTH-3's prompt
   is NOT written: write it at the next pass if its record reads past 330,000.
+- 16:27 UTC · FIVE MESSAGES READ AT 16:24. SAME-1: its rendered census reproduces the chair's stored census (961 rows, 0 differ) AND
+  FINDS `situationDesc` PRINTED NOWHERE (section 2: the chair's fault, corrected); its door proposal ruled; asked
+  for the printed status of every stored path on the program's list before its 17:25 file. PLACE-1: "PLACE-LINES
+  situationDesc da1579e8c" (projected top share 67/62/68/89/89/85 to 9/13/11/7/5/7): NOT BUILT; its side finding:
+  the economy's output never reaches 70 in 600 births, so every "busy" branch is dead: a named survivor. PEOPLE-1
+  and PLACE-1 told to prove each field prints before measuring it. SEAT-6 seated on 6e697f5db, re-making the lane's
+  measure (`measure-u4.mjs --force-law _seatLawVersion=2`).
