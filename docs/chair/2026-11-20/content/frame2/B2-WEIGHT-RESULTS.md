@@ -429,3 +429,195 @@ for (const v of ['built', 'both', 'issue']) {
   console.log(v, 'framed', framed, 'crime_wave opens', crime, `(${(100 * crime / framed).toFixed(1)}%)`, JSON.stringify(Object.entries(types).sort((a, b) => b[1] - a[1])));
 }
 ```
+
+## After B9 (both powers)
+
+Written 2026-11-20T09:25Z (`date -u`) by builder B9 of FRAME-3, on `frame3-b9` (from `4421fbf6c` on `lane/frame-3-2026-11-20`, the line merged at `e356c94f2`). The chair's ruling (W2 read as written): a high conflict gives a trouble weight only where BOTH of the row's powers are sides of the tension. The pool is the same: the FRAME-1 pool script, born at `4421fbf6c`, **tried 484, calm 330** (55 a tier); the seat's recount script (`FRAME3-CF11-RECOUNT.md`) run over it gives the seat's 56-town list byte for byte, so the pool is the seat's.
+
+**The build** (`troubleOfWeight`): the W2 row is found with `every` in place of `some` (each of the row's two powers equals a side, as `sideKey` compares them). Nothing else changes.
+
+### The count, with and without weight, by tier
+
+| measure | thorp | hamlet | village | town | city | metropolis | total |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| calm towns | 55 | 55 | 55 | 55 | 55 | 55 | 330 |
+| **with a trouble of weight (framed)** | 0 | 8 | 15 | 5 | 12 | 18 | 58 |
+| **without (today's sheet)** | 55 | 47 | 40 | 50 | 43 | 37 | 272 |
+| W1 held (seat: ungated, or legitimacy < 45) | 2 | 25 | 45 | 0 | 0 | 0 | 72 |
+| W1 with a tension about it | 0 | 5 | 14 | 0 | 0 | 0 | 19 |
+| W2 held (a conflicts row at intensity high) | 0 | 4 | 0 | 14 | 45 | 53 | 116 |
+| W2 with a tension about it (both powers its sides) | 0 | 0 | 0 | 0 | 7 | 6 | 13 |
+| W3 held (food < Secure, a creditor power, an impaired chain) | 2 | 4 | 8 | 39 | 39 | 53 | 145 |
+| W3 with a tension about it | 0 | 3 | 2 | 5 | 5 | 13 | 28 |
+| (cast null: must equal "without") | 55 | 47 | 40 | 50 | 43 | 37 | 272 |
+
+This is the seat's count, measured independently: 58 framed; thorp 0, hamlet 8, village 15, town 5, city 12, metropolis 18. Before B9 it was 93; 35 towns lose their frame, every one in hamlet (1), town (4), city (17) or metropolis (13). Script: B2's `cf11weight.mjs` with one change to its "W2 held" probe, which read one party as a side; it now hands both parties as sides of a probe tension (`cf11weight-b9.mjs`). At the base the changed probe prints B2's table unchanged; cast and weight disagree on 0 towns.
+
+**Town by town against the seat's list** (`listFramed.mjs`, "seed #place type grade" in the seat's notation, against the 56 rows of `FRAME3-CF11-RECOUNT.md`): the 56 towns agree in seed, place and type. Three lines differ, and none is a count difference:
+- `frame-calm-hamlet-19 #0 corruption_scandal` and `frame-calm-village-10 #0 corruption_scandal` are framed here and absent from the seat's strict list. They are the two towns the seat names as the difference between its strict 56 and the lane's 58: a scandal whose sides name the ruling power (`WEIGHT_MATTER.seatWhereItNamesTheRuler`), legitimacy below 45.
+- `frame-calm-village-76 #0 legitimacy_crisis` is grade 0 here and grade 1 in the seat's list. It is the same town and the same tension. The difference is the notation: the lane ranks the ungated incumbent with legitimacy below 30 (`WEIGHT_GRADES[0]`), while the seat's script gives grade 0 only to legitimacy below 30.
+
+### Each strain with its matched tensions, by tier
+
+A tension is listed under every strain it is about. Each strain is read alone.
+
+**W1: matched tensions by type and tier** (tensions)
+
+| type | thorp | hamlet | village | town | city | metropolis | total |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| succession_crisis | 0 | 2 | 7 | 0 | 0 | 0 | 9 |
+| popular_uprising | 0 | 1 | 2 | 0 | 0 | 0 | 3 |
+| tyranny | 0 | 1 | 2 | 0 | 0 | 0 | 3 |
+| legitimacy_crisis | 0 | 0 | 3 | 0 | 0 | 0 | 3 |
+| corruption_scandal | 0 | 1 | 1 | 0 | 0 | 0 | 2 |
+
+**W2: matched tensions by type and tier** (tensions)
+
+| type | thorp | hamlet | village | town | city | metropolis | total |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| crime_wave | 0 | 0 | 0 | 0 | 7 | 5 | 12 |
+| succession_crisis | 0 | 0 | 0 | 0 | 0 | 1 | 1 |
+
+**W3: matched tensions by type and tier** (tensions)
+
+| type | thorp | hamlet | village | town | city | metropolis | total |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| trade_dispute | 0 | 0 | 0 | 1 | 2 | 8 | 11 |
+| outside_debt | 0 | 0 | 0 | 1 | 4 | 2 | 7 |
+| trade_collapse | 0 | 2 | 0 | 3 | 0 | 0 | 5 |
+| resource_scarcity | 0 | 1 | 1 | 0 | 0 | 3 | 5 |
+| market_crash | 0 | 0 | 1 | 0 | 0 | 0 | 1 |
+
+
+### The opening trouble, by type
+
+**Of 58 framed towns**: crime_wave 12, succession_crisis 10, trade_dispute 10, outside_debt 6, trade_collapse 5, resource_scarcity 5, tyranny 3, legitimacy_crisis 3, corruption_scandal 2, popular_uprising 2. No type opens more than a third. **crime_wave opens 12 of 58 (20.7%), about a fifth**, as the ruling said; before B9 it opened 37 of 93 (39.8%).
+
+**By tier**: thorp: none · hamlet: trade_collapse 2, succession_crisis 2, corruption_scandal 1, resource_scarcity 1, popular_uprising 1, tyranny 1 · village: succession_crisis 7, legitimacy_crisis 3, tyranny 2, corruption_scandal 1, resource_scarcity 1, popular_uprising 1 · town: trade_collapse 3, outside_debt 1, trade_dispute 1 · city: crime_wave 7, outside_debt 3, trade_dispute 2 · metropolis: trade_dispute 7, crime_wave 5, resource_scarcity 3, outside_debt 2, succession_crisis 1
+
+**The opening strain's grade**: impaired-chain 26, legitimacy-below-45 18, high-conflict 13, seat-ungated 1.
+
+**What moved** (`diffFramed.mjs`, the base against the tip): 37 towns. 35 lose their frame. Two keep a frame on another tension: `frame-calm-metropolis-1` (crime_wave #0 → trade_dispute #2, an impaired chain) and `frame-calm-metropolis-21` (crime_wave #0 → outside_debt #2, an impaired chain). All 12 crime_wave openings that remain stand on the same row, the Military/Guard against the Thieves' Guild (`crimeAlt.mjs`): city 8, 14, 25, 33, 35, 45, 57 and metropolis 8, 19, 56, 64, 68. The rows' issues: "Blame for a costly failure last season" 3, "Stolen goods sold openly" 2, "A member held by the other side" 2, and five others once each. Only one of the 12 has another tension about a strain it holds (a trade_dispute).
+
+### The CF7 face table, on the framed towns (58 towns, 174 sides)
+
+B2's `cf7framed.mjs`, with one change: since B3's audience gate only the owner's sheet carries a frame, so the sheet is composed `{ audience: 'owner' }`. At the base the changed script gives B2's table unchanged (93 frames, 279 sides, the same kinds).
+
+- Faces by kind: a person by a tie 85, seat-holder 27, absent 21 (12.1%), the criminal power 17, a trade's master 12, a force's commander 9, a power's head 3. There are no outsiders on the 58.
+- Office (seat, commander, head) fills 39 of the 153 filled sides (25.5%; it was 22.5% before B9).
+- The "usual three": 153 named faces. The seat-holder is 28 of them, a guild head 5, a garrison commander 10. No town has all three of its faces from the usual three; 19 towns have none.
+- People to voice on the framed sheets: 153, every one a side's face.
+
+| archetype | faces |
+|---|---|
+| challenger | a person by a tie 31, absent 3, a power's head 2, a trade's master 1 |
+| authority | seat-holder 23, a person by a tie 10 |
+| profiteer | a person by a tie 16, absent 9, the criminal power 5, a trade's master 1 |
+| payer | a person by a tie 17, absent 4, a trade's master 3 |
+| establishment | a trade's master 6, seat-holder 4, a person by a tie 2, a power's head 1 |
+| enforcer | a force's commander 9, a person by a tie 3 |
+| criminal | the criminal power 12 |
+| reformer | a person by a tie 6, absent 3, a trade's master 1 |
+| middle | absent 2 |
+
+| tier | faces |
+|---|---|
+| hamlet | absent 13, a person by a tie 6, seat-holder 5 |
+| village | a person by a tie 23, seat-holder 12, absent 8, a trade's master 1, a power's head 1 |
+| town | a person by a tie 12, a trade's master 2, a power's head 1 |
+| city | a person by a tie 16, the criminal power 9, a force's commander 5, a trade's master 3, seat-holder 2, a power's head 1 |
+| metropolis | a person by a tie 28, seat-holder 8, the criminal power 8, a trade's master 6, a force's commander 4 |
+
+### What was re-seated, by measuring
+
+- **`troubleWeight.test.js`**: the red test is two towns measured on the pool. `frame-calm-hamlet-45` has one high row (Free Elder Council against the Military Party), and its crime_wave names only the Military Party. It holds no other strain, so it gets no frame and keeps today's sheet. `frame-calm-city-8` has the row Military/Guard against Thieves' Guild, and its crime_wave names both, so it opens there on W2. The liveness town `city-4` (corruption_scandal #2, which named one power) is replaced by `city-8` (crime_wave #0). Three calm towns that lose their frame now hold today's sheet in the byte-identity pins: `hamlet-45` (crime_wave), `city-0` (crime_wave) and `city-4` (corruption_scandal). They were measured in an archive of the line `e356c94f2`. Each is born there to the same record as at the tip, the line's sheet is the pin, and the tip composes it for the owner and for a stranger. The control `thorp-0` gave its existing pin again in the same run.
+- **`troubleCast.test.js`**: the pool is taken by the same measure as before, the first ten calm births of each tier that frame. At the base the measure gives the old literal exactly. At the tip, town 67, city 9, 19 and 21, and metropolis 2, 6, 13, 15 and 17 drop out, and town 134, city 27, 38 and 40, and metropolis 19, 25, 31, 41 and 44 come in. The hand-built W2 fixtures now name both powers. Two new lines hold one power as a side (either one) to no weight.
+- **`frameWordsLevel.test.jsx`** (in the tension gate, not named in the brief): its pool lost `city-19` and `metropolis-2`. `city-38` (crime_wave: a commander, a hook, the criminal power, the same three as city-19) and `metropolis-3` replace them, and every reason still fires.
+- **`frameShareVeil.test.jsx`**: `city-0` and `city-4` lose their frame, and `metropolis-1` now opens on a trade_dispute with no criminal side. BORN takes `city-8` and `metropolis-8` in their place. They are the first crime_wave opener of each tier that births one, and every one of the 12 has the criminal power on its third side. `WITH_CRIMINAL` is `{city-8, metropolis-8}`. Their shared-read digests come from the file's own FRAME_VEIL_PRINT door, in an archive of the line `e356c94f2`. The same run gave the six kept towns their pinned digests again, and the tip holds all eight equal.
+
+### Red and green
+
+- **RED** (the new test, before the build): 1 failed, 1 passed of 2. `hamlet-45`: `troubleOfWeight` returned the crime_wave, not null.
+- **GREEN**: `tests/domain/tension`: 4 files, 31 tests. The veil file: 6 of 6.
+
+### Gates (each run to a file, read by its count lines)
+
+| gate | result |
+|---|---|
+| `npx vitest run tests/domain/tension` | 4 files, 31 tests, green |
+| `tests/security/frameShareVeil.test.jsx` | 6 of 6, green |
+| the 33 test files that import `tonightSheet.js` or `troubleCast.js` (the veil file and the tension files among them) | 32 files green; 220 passed, 1 expected fail, **1 failed** (below) |
+| `npm run typecheck:ratchet` | exit 0 (167, ceiling 167) |
+| `npm run typecheck:domain:strict` | exit 0 (1113, ceiling 1113) |
+| `npm run lint` | exit 0 (0 errors; 38 warnings, none in my files) |
+
+**One figure my change moves, named and NOT re-seated:** `tests/domain/frame2NamesRule.test.js`, "reads every file's output (the pool is not empty)": `read.troubleCast` must be over 300. It reads **272** at the tip and **307** at the base (the file is green in an archive of `4421fbf6c`). The cause is B9. Its 120-town pool loses five frames: calm metropolis-2 and metropolis-3 (crime_wave), and crisis city-0, metropolis-0 and metropolis-9. Lowering the floor would weaken a non-vacuity assertion to fit a count, so I have not done it; the floor is the chair's to re-seat. The breach assertions over the strings that remain read green.
+
+### The scripts
+
+B2's scripts, with the two one-line changes named above, and these three. Run them as `node listFramed.mjs <pool.json> <src/>`, `node castPool.mjs <src/>` and `node pinsLine.mjs <line src/> <tip src/> <seed,seed,...>`.
+
+`listFramed.mjs`
+
+```js
+// The framed towns at a tree (argv[3]) over the pool (argv[2]): "seed #at type gN" in the seat's notation
+// (grade 1 seat, 2 high conflict, 3 material; 0 legitimacy < 30 or ungated); with argv[4], W2's powers and grade too.
+import fs from 'node:fs';
+const [POOL, R] = process.argv.slice(2, 4);
+const { troubleOfWeight } = await import(R + 'domain/tension/troubleCast.js');
+const { towns } = JSON.parse(fs.readFileSync(POOL, 'utf8'));
+const g = { 'legitimacy-below-30': 0, 'seat-ungated': 0, 'legitimacy-below-45': 1, 'high-conflict': 2, 'food-below-secure': 3, 'creditor-power': 3, 'impaired-chain': 3 };
+for (const { seed, s } of towns) {
+  const w = troubleOfWeight(s);
+  if (w) console.log(`${seed} #${w.at} ${w.tension.type} g${g[w.strain.grade]}${process.argv[4] ? ' ' + w.strain.grade + (w.strain.powers ? ' [' + w.strain.powers.join(' | ') + ']' : '') : ''}`);
+}
+```
+
+`castPool.mjs`
+
+```js
+// troubleCast.test.js's pool: the first ten CALM births `frame-cast-<tier>-<i>` of each tier that cast a frame at the
+// tree argv[2] (births at the tree argv[3], default the same). Prints the FRAMED literal and how many calm births each
+// tier took to fill.
+const R = process.argv[2];
+const G = process.argv[3] || R;
+const { generateSettlementPipeline } = await import(G + 'generators/generateSettlementPipeline.js');
+const { castTroubleFrame } = await import(R + 'domain/tension/troubleCast.js');
+const out = {};
+for (const tier of ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']) {
+  const got = []; let calm = 0; let i = 0;
+  for (; i < (tier === 'thorp' ? 40 : 200) && got.length < 10; i++) {
+    const seed = `frame-cast-${tier}-${i}`;
+    const s = generateSettlementPipeline({ settType: tier }, null, { seed, customContent: {} });
+    const st = Array.isArray(s.stress) ? s.stress : (s.stress ? [s.stress] : []);
+    if (st.length) continue;
+    calm++;
+    if (castTroubleFrame(s)) got.push(i);
+  }
+  out[tier] = got;
+  console.log(tier, JSON.stringify(got), 'calm births read', calm, 'last index', i - 1);
+}
+```
+
+`pinsLine.mjs`
+
+```js
+// New calm pins (FRAME-3 addendum 1): each seed born at the LINE (argv[2], an archive of e356c94f2, no frame code) and
+// at the TIP (argv[3]); the sheet composed at the line is the pin; the tip's owner and stranger sheets must equal it.
+import crypto from 'node:crypto';
+const [LINE, TIP] = process.argv.slice(2, 4);
+const seeds = process.argv[4].split(',');
+const L = { gen: await import(LINE + 'generators/generateSettlementPipeline.js'), sheet: await import(LINE + 'domain/summary/tonightSheet.js') };
+const T = { gen: await import(TIP + 'generators/generateSettlementPipeline.js'), sheet: await import(TIP + 'domain/summary/tonightSheet.js'), cast: await import(TIP + 'domain/tension/troubleCast.js') };
+const d = (x) => crypto.createHash('sha256').update(typeof x === 'string' ? x : JSON.stringify(x)).digest('hex').slice(0, 16);
+for (const seed of seeds) {
+  const tier = seed.split('-')[2];
+  const sl = L.gen.generateSettlementPipeline({ settType: tier }, null, { seed, customContent: {} });
+  const st = T.gen.generateSettlementPipeline({ settType: tier }, null, { seed, customContent: {} });
+  const sameBirth = JSON.stringify(sl) === JSON.stringify(st);
+  const pin = d(L.sheet.composeTonightSheet(sl));
+  const owner = d(T.sheet.composeTonightSheet(st, { audience: 'owner' }));
+  const stranger = d(T.sheet.composeTonightSheet(st));
+  console.log(JSON.stringify({ seed, sameBirth, pin, tipOwner: owner, tipStranger: stranger, equal: pin === owner && pin === stranger, tipFrame: T.cast.castTroubleFrame(st) }));
+}
+```
