@@ -74,3 +74,17 @@ Your base is branch `lane/seat-2026-11-20-u4-cure2` at `4780d9e6c`, worktree `/h
 - `lint` on the test file.
 
 Commit by explicit paths with the counts in the message and SEAT-5's trailers. Do not push. Hand back in at most 200 words.
+
+## ADDENDUM 2 (SEAT-5, 2026-11-20T14:47:15Z): THE CHAIR'S RULING ON (i), 14:44Z. Step 1 is replaced by Step 1′ below, for B4e after Step 2.
+**RULED:** (i) `narrative on factionRelationships` is RE-RECORDED WITH ITS CAUSE, like (ii) and (iii), on FOUR CONDITIONS, because a fact read from a sentence breaks the day the sentence is reworded. SEAT-5 re-records at the merge; you never do. Condition (4) is Step 2's arm. Step 1′ builds (1) to (3):
+
+1. **ONE MATCHER** for the transfer's own sentences. One exported function in `src/domain/seat/holderOfSeat.js` answers both what `transferTakerOf` compares today with `takerLine` (the edge's narrative) and what `transferSays` reads in `recentConflict`. There is no scattered equality and no second template anywhere in the leaf. Today's answers stay unchanged on every fixture, and `seatContest.test.js` stays green.
+2. **A FROZEN LIST OF WORDINGS** held beside the matcher: every wording those sentences have had under the seat's law, which today is one for the edge and two for `recentConflict` (coup; lawful passage, with and without the demotion clause). The matcher matches ANY wording in the list. A test drives the REAL `rulingPowerTransfer`'s output (`rulingPower.js :: transferRulingPower`, every cause) and pins it INTO the list, so a later change of wording reds until the old wording is ADDED, never replaced. A fixture town carrying the frozen wording still reads its holder when a made-up NEW wording is put first in the list (the matcher takes the list as a parameter, or the test builds one from the exported list).
+3. **THREE ARMS BY MEASURE:**
+   - (a) the seat's birth edge with its military power (symbiotic/stable, no transfer on record) names NOBODY as taker;
+   - (b) is U5's (no town reads two takers after U5; it is in U5's brief, not yours);
+   - (c) A POWER THE DM RENAMES AFTER A TRANSFER. Find the rename path (the events registry and `events/mutateWorld.js`; name it by `path :: symbol`), run it on a transferred town, and say what `holderOf` answers for the owner and the reader: the right power, or nobody. Pin THAT answer. If it answers a WRONG power, STOP and tell SEAT-5; do not cure it.
+
+**Files:** `src/domain/seat/holderOfSeat.js` (the matcher, the frozen list, `transferTakerOf`, `transferSays`, `takerLine`, the header comment), `tests/domain/seat/holderOfSeat.test.js`, and your report section.
+
+**Green:** as the brief's "Green before you hand back", with `writerReach.walker` expected red on exactly the three ruled identities (name them), and `confine-two.sh fbf77bfa2 <your tip>` EQUAL.
