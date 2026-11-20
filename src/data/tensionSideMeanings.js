@@ -23,7 +23,11 @@
  *             house and is true of such a town, in the side's own register and case; null where even that would be
  *             false, and the side is dropped from the display. Also (the chair's addition, relayed by PAGE-2 after the
  *             second cut) on a template side the generator writes over whose `means` is a power: the words to show where
- *             the side written there is no power of that kind (rule 2 below).
+ *             the side written there is no power of that kind (rule 2 below);
+ *   named     (S7 FOLLOW-UP, `briefs/S7-FOLLOWUP.md`: the chair's changes of 13:22 and ruling of 13:50) THE ONLY DOOR TO A
+ *             NAME: the wording that shows a power's name, `{power}` filled by the names helper; no finite verb agrees
+ *             with it. Only a row whose `means` is the ruler or a power carries one. A row without it is never named by
+ *             the reader, whatever its `means` (a camp or a part of a power is no power: its `means` is 'none').
  *
  * BY SLOT (the chair's addition): where the generator writes a power's NAME at a slot (succession_crisis 0 and 2,
  * economic_disparity 0, religious_tension 0, crime_wave 0 and 2 in both forms, corruption_scandal 0) the stored words
@@ -32,6 +36,13 @@
  * description only) carries its base sides: read it as `base`.
  *
  * THE RULE THE READER APPLIES (the display seat builds the one reader; nothing here reads a town):
+ *   0. NAMING (the chair, 13:50). THE READER NEVER PUTS A NAME WHERE THE STORED SIDE IS THE TEMPLATE'S OWN WORDS unless
+ *      that row carries `named`; then it shows `named` with `{power}` filled from the ROSTER by the row's `means`, never
+ *      from the stored side: 'ruler' is the document's governing power; a power kind only where the document holds
+ *      EXACTLY ONE power of that kind (two or none: the row's own words, under rule 1). That uniqueness is the reader's
+ *      test; this table only carries `named`. A stored side that already IS a power's name (the seven slots
+ *      `substituteNames` writes: "Legitimate heir", "Corrupt officials", "Official guards", "Power behind throne" carry
+ *      no `named`) is shown AS STORED under rules 2 to 4, never un-named.
  *   1. The stored side is the template's own words at its slot (`TENSION_SIDE_BY_SLOT` names that very key): show it,
  *      unless the row `presumes` a house the town lacks; then show its `without`, and drop the side where that is null.
  *   2. Otherwise the generator wrote over the slot, with a power's name or one of its fixed words. Take the slot's row
@@ -40,8 +51,10 @@
  *      word, written because the roster holds no such power), show the slot row's `without` (null: drop). Never show a
  *      power in another party's part (the chair's 11:36).
  *   3. Else, where the side is one of the generator's fixed words, read its own row: if its `means` is a power and the
- *      roster holds no power of that kind, or it `presumes` a house the town lacks, show its own `without` (null: drop).
- *      Succession's "the merchant class" (the second power's fallback) with no merchant power is shown so.
+ *      roster holds no power of that kind, or it `presumes` a house the town lacks, show the SLOT row's `without` first,
+ *      and the fixed word's own only where the slot row has none (null: drop). So "the merchant class" at the divide's
+ *      place with no merchant power shows "Those growing richer"; its own "those who pull the strings" is right only at
+ *      the succession's (the second power's fallback, whose slot row carries none).
  *   4. Else show the stored words unchanged. No stored side is ever rewritten (the chair's 11:58).
  *
  * Pure data. No draw.
@@ -64,6 +77,7 @@
  *   means: SideMeans,
  *   presumes: ReadonlyArray<string>,
  *   without?: string | null,
+ *   named?: string,
  *   standsFor?: ReadonlyArray<string>,
  * }} SideMeaning
  */
@@ -110,6 +124,13 @@ const presuming = (places, means, presumes, without) => Object.freeze({ at: plac
  */
 const standing = (row, standsFor) => Object.freeze({ ...row, standsFor: Object.freeze(standsFor) });
 
+/**
+ * A row the reader may name (the S7 follow-up's change 1): `{power}` filled from the roster by its `means`.
+ * @param {Readonly<SideMeaning>} row @param {string} wording
+ * @returns {Readonly<SideMeaning>}
+ */
+const named = (row, wording) => Object.freeze({ ...row, named: wording });
+
 /** @type {Readonly<Record<string, Readonly<SideMeaning>>>} */
 export const TENSION_SIDE_MEANINGS = Object.freeze({
   // succession_crisis
@@ -118,19 +139,19 @@ export const TENSION_SIDE_MEANINGS = Object.freeze({
   'Power behind throne': plain(at('succession_crisis/base/2'), 'none'),
   // economic_disparity (needs a market: HISTORY_TEMPLATE_RECORD_DECLARATIONS)
   // written over with `merchantRef` (any first non-governing power, or "the merchant class"): rule 2's words
-  'Wealthy merchants': presuming(at('economic_disparity/base/0'), 'merchant power', [], 'Those growing richer'),
+  'Wealthy merchants': named(presuming(at('economic_disparity/base/0'), 'merchant power', [], 'Those growing richer'), '{power}'),
   'Poor workers': plain(at('economic_disparity/base/1'), 'none'),
   'Moderate reformers': plain(at('economic_disparity/base/2'), 'none'),
   // religious_tension
   // written over with the religious power's name, or "the orthodox clergy": rule 2's words
-  'Orthodox believers': presuming(at('religious_tension/base/0'), 'faith power', [], 'The orthodox faithful'),
+  'Orthodox believers': named(presuming(at('religious_tension/base/0'), 'faith power', [], 'The orthodox faithful'), '{power}'),
   'Reformists': plain(at('religious_tension/base/1'), 'none'),
   'Secular camp': plain(at('religious_tension/base/2'), 'none'),
   // guild_conflict (needs a guild)
-  'Established guilds': plain(at('guild_conflict/base/0'), 'craft power'),
-  'Upstart guilds': plain(at('guild_conflict/base/1'), 'craft power'),
+  'Established guilds': plain(at('guild_conflict/base/0'), 'none'),
+  'Upstart guilds': plain(at('guild_conflict/base/1'), 'none'),
   'Non-guild workers': plain(at('guild_conflict/base/2', 'guild_conflict/unanchored/2'), 'none'),
-  'Guild members': plain(at('guild_conflict/unanchored/0'), 'craft power'),
+  'Guild members': named(plain(at('guild_conflict/unanchored/0'), 'craft power'), '{power}'),
   'Those who would trade outside the guild': plain(at('guild_conflict/unanchored/1'), 'none'),
   // external_threat
   'Prepare for war': plain(at('external_threat/base/0'), 'none'),
@@ -139,14 +160,15 @@ export const TENSION_SIDE_MEANINGS = Object.freeze({
   // resource_scarcity
   'Hoarders': plain(at('resource_scarcity/base/0'), 'none'),
   'Desperate poor': plain(at('resource_scarcity/base/1'), 'none'),
-  'Price regulators': presuming(at('resource_scarcity/base/2'), 'ruler', ['market'], null),
+  // the S7 follow-up (changes 2, 3): a camp, no power; where no market stands, the kind's own unanchored words (three sides stay three)
+  'Price regulators': presuming(at('resource_scarcity/base/2'), 'none', ['market'], 'Those who would fix a fair price'),
   'Those hoarding what they can': plain(at('resource_scarcity/unanchored/0'), 'none'),
   'Those who cannot pay the prices': plain(at('resource_scarcity/unanchored/1'), 'none'),
   'Those who would fix a fair price': plain(at('resource_scarcity/unanchored/2'), 'none'),
   // crime_wave
   'Official guards': presuming(at('crime_wave/base/0', 'crime_wave/unanchored/0'), 'watch', ['force: kept'], 'Those in charge'),
   'Vigilantes': plain(at('crime_wave/base/1'), 'none'),
-  'Criminal organisations': presuming(at('crime_wave/base/2', 'crime_wave/unanchored/2'), 'criminal power', ['organised crime'], 'Lawbreakers'),
+  'Criminal organisations': named(presuming(at('crime_wave/base/2', 'crime_wave/unanchored/2'), 'criminal power', ['organised crime'], 'Lawbreakers'), '{power}'),
   'Those who would take the law into their own hands': plain(at('crime_wave/unanchored/1'), 'none'),
   // magical_controversy
   'Pro-magic': plain(at('magical_controversy/base/0'), 'none'),
@@ -184,7 +206,7 @@ export const TENSION_SIDE_MEANINGS = Object.freeze({
   // population_friction
   'Old families': plain(at('population_friction/base/0'), 'none'),
   'Newcomers': plain(at('population_friction/base/1'), 'none'),
-  'Merchants who benefit from cheap newcomer labour': presuming(at('population_friction/base/2'), 'merchant power', ['market'], 'Those who benefit from cheap newcomer labour'),
+  'Merchants who benefit from cheap newcomer labour': named(presuming(at('population_friction/base/2'), 'merchant power', ['market'], 'Those who benefit from cheap newcomer labour'), '{power}, gaining from cheap newcomer labour'),
   // leadership_vacuum
   'Multiple weak claimants': plain(at('leadership_vacuum/base/0'), 'none'),
   'Pragmatists who want stability': plain(at('leadership_vacuum/base/1', 'leadership_vacuum/unanchored/1'), 'none'),
@@ -198,10 +220,10 @@ export const TENSION_SIDE_MEANINGS = Object.freeze({
   'Those buying as if prices can only rise': plain(at('market_crash/unanchored/0'), 'none'),
   'Those who have sold and are waiting': plain(at('market_crash/unanchored/2'), 'none'),
   // trade_collapse
-  'Displaced traders': plain(at('trade_collapse/base/0'), 'merchant power'),
+  'Displaced traders': plain(at('trade_collapse/base/0'), 'none'),
   'Workers left without wages': plain(at('trade_collapse/base/1'), 'none'),
   'Rivals who profited from the diversion': plain(at('trade_collapse/base/2'), 'none'),
-  'Traders who fear the buyers are going elsewhere': plain(at('trade_collapse/unanchored/0'), 'merchant power'),
+  'Traders who fear the buyers are going elsewhere': plain(at('trade_collapse/unanchored/0'), 'none'),
   'Workers afraid for their wages': plain(at('trade_collapse/unanchored/1'), 'none'),
   'Rivals who would gain if the trade moved': plain(at('trade_collapse/unanchored/2'), 'none'),
   // great_fire
@@ -229,20 +251,20 @@ export const TENSION_SIDE_MEANINGS = Object.freeze({
   // heresy_trial
   'The accusers': plain(at('heresy_trial/base/0', 'heresy_trial/unanchored/0'), 'none'),
   'The accused and their sympathizers': plain(at('heresy_trial/base/1', 'heresy_trial/unanchored/1'), 'none'),
-  'Authorities exploiting the rift': plain(at('heresy_trial/base/2'), 'ruler'),
-  'Those in authority who would exploit the rift': plain(at('heresy_trial/unanchored/2'), 'ruler'),
+  'Authorities exploiting the rift': named(plain(at('heresy_trial/base/2'), 'ruler'), '{power}, exploiting the rift'),
+  'Those in authority who would exploit the rift': named(plain(at('heresy_trial/unanchored/2'), 'ruler'), '{power}, who would exploit the rift'),
   // pilgrimage_surge (needs a temple)
-  'Temple beneficiaries': plain(at('pilgrimage_surge/base/0'), 'faith power'),
+  'Temple beneficiaries': plain(at('pilgrimage_surge/base/0'), 'none'),
   'Overwhelmed old residents': plain(at('pilgrimage_surge/base/1'), 'none'),
   'Sceptics who doubt the miracle': plain(at('pilgrimage_surge/base/2', 'pilgrimage_surge/unanchored/2'), 'none'),
   'Those who would proclaim the miracle': plain(at('pilgrimage_surge/unanchored/0'), 'none'),
   'Residents who want no crowds of strangers': plain(at('pilgrimage_surge/unanchored/1'), 'none'),
   // popular_uprising
   'Former rebels': plain(at('popular_uprising/base/0'), 'none'),
-  'The restored order': plain(at('popular_uprising/base/1'), 'ruler'),
+  'The restored order': named(plain(at('popular_uprising/base/1'), 'ruler'), '{power}'),
   'Those who changed sides at the right moment': plain(at('popular_uprising/base/2'), 'none'),
   'Those pressing their demands': plain(at('popular_uprising/unanchored/0'), 'none'),
-  'Those in charge, who will not give way': plain(at('popular_uprising/unanchored/1'), 'ruler'),
+  'Those in charge, who will not give way': named(plain(at('popular_uprising/unanchored/1'), 'ruler'), '{power}, who will not give way'),
   'Those waiting to see which side wins': plain(at('popular_uprising/unanchored/2'), 'none'),
   // tyranny
   'Old loyalists': plain(at('tyranny/base/0'), 'none'),
@@ -261,7 +283,7 @@ export const TENSION_SIDE_MEANINGS = Object.freeze({
   'Those touched by the flares': plain(at('wild_magic/unanchored/0'), 'none'),
   'Those who would study the flares': plain(at('wild_magic/unanchored/2'), 'none'),
   // legitimacy_crisis
-  'The sitting authority': plain(at('legitimacy_crisis/base/0'), 'ruler'),
+  'The sitting authority': named(plain(at('legitimacy_crisis/base/0'), 'ruler'), '{power}'),
   'Those who deny its mandate': plain(at('legitimacy_crisis/base/1'), 'none'),
   'Pragmatists who want any stable answer': plain(at('legitimacy_crisis/base/2'), 'none'),
   // demographic_pressure
@@ -269,18 +291,18 @@ export const TENSION_SIDE_MEANINGS = Object.freeze({
   'The newly arrived or departing': plain(at('demographic_pressure/base/1'), 'none'),
   'Those profiting from the churn': plain(at('demographic_pressure/base/2'), 'none'),
   // trade_dispute (needs a market)
-  'Merchants tied to the old partner': plain(at('trade_dispute/base/0'), 'merchant power'),
+  'Merchants tied to the old partner': plain(at('trade_dispute/base/0'), 'none'),
   'Those who want new partners': plain(at('trade_dispute/base/1', 'trade_dispute/unanchored/1'), 'none'),
-  'Authorities caught between them': plain(at('trade_dispute/base/2', 'trade_dispute/unanchored/2'), 'ruler'),
-  'Merchants who trade with the partner': plain(at('trade_dispute/unanchored/0'), 'merchant power'),
+  'Authorities caught between them': named(plain(at('trade_dispute/base/2', 'trade_dispute/unanchored/2'), 'ruler'), '{power}, caught between them'),
+  'Merchants who trade with the partner': plain(at('trade_dispute/unanchored/0'), 'none'),
 
   // ── the fixed words the generator writes in a template's place (historyGenerator.js :: buildHistoricalEvent) ──
   // `crimeFaction || 'the criminal network'`: written where the roster holds no criminal power, so rule 2 always shows
-  // the slot row's unnamed words ("Lawbreakers"); this row reads the fixed words themselves.
-  'the criminal network': standing(presuming(at('crime_wave/base/2', 'crime_wave/unanchored/2'), 'criminal power', ['organised crime'], 'the lawbreakers'), ['Criminal organisations']),
+  // the slot row's unnamed words ("Lawbreakers"); this row's own `without` is the same (the S7 follow-up's change 5).
+  'the criminal network': standing(presuming(at('crime_wave/base/2', 'crime_wave/unanchored/2'), 'criminal power', ['organised crime'], 'Lawbreakers'), ['Criminal organisations']),
   // `merchantRef`'s fallback, which `Power behind throne` also takes where the roster holds no second power. At the
-  // divide's place rule 2 answers first (with "Those growing richer"), so this row's `without` is read only at the
-  // succession's (rule 3: no merchant power, or no market).
+  // divide's place the slot row's `without` is read first ("Those growing richer"), so this row's own is read only at
+  // the succession's, whose slot row carries none (rule 3: no merchant power, or no market).
   'the merchant class': standing(presuming(at('economic_disparity/base/0', 'succession_crisis/base/2'), 'merchant power', ['market'], 'those who pull the strings'), ['Wealthy merchants', 'Power behind throne']),
   // `relFaction || 'the orthodox clergy'`: written where the roster holds no religious power.
   'the orthodox clergy': standing(presuming(at('religious_tension/base/0'), 'faith power', ['clergy'], 'the orthodox faithful'), ['Orthodox believers']),
@@ -318,7 +340,7 @@ export const TENSION_SIDE_BY_SLOT = (() => {
 })();
 
 /**
- * The table as plain text for the chair, one line a row: places · today's words · means · presumes · without. The
+ * The table as plain text for the chair, one line a row: places · today's words · means · presumes · without · named. The
  * committed copy (`docs/chair/2026-11-20/content/page/S7-TABLE.txt`) is these lines, so the two cannot differ.
  * @returns {string[]}
  */
@@ -328,4 +350,5 @@ export const TENSION_SIDE_TABLE_LINES = () => Object.entries(TENSION_SIDE_MEANIN
   r.means,
   r.presumes.length ? r.presumes.join(', ') : '-',
   r.without === undefined ? '-' : r.without === null ? 'null (drop the side)' : JSON.stringify(r.without),
+  r.named === undefined ? '-' : JSON.stringify(r.named),
 ].join(' · '));

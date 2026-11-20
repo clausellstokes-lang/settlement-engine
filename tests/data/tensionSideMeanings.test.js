@@ -126,7 +126,9 @@ describe('tensionSideMeanings (S7 second cut: what each tension side means, as d
       if (typeof r.without !== 'string') continue;
       expect(NAMES_A_POWER_OR_HOUSE.test(r.without), `${words} → ${r.without}`).toBe(false);
       const upper = (/** @type {string} */ s) => s[0] === s[0].toUpperCase();
-      expect(upper(r.without), `${words} → ${r.without}`).toBe(upper(words));
+      // S7 follow-up (the chair, 13:50): a fixed generator row may keep the case of its own words OR of the side it stands for
+      const cases = [words, ...(r.standsFor ?? [])].map(upper);
+      expect(cases, `${words} → ${r.without}`).toContain(upper(r.without));
     }
   });
 
@@ -155,6 +157,69 @@ describe('tensionSideMeanings (S7 second cut: what each tension side means, as d
       for (const p of row.at) expect(row.standsFor, `${words} at ${keyOf(p)}`).toContain(TENSION_SIDE_BY_SLOT[p.kind][p.form][p.slot]);
     }
     expect(Object.isFrozen(TENSION_SIDE_BY_SLOT) && Object.isFrozen(TENSION_SIDE_BY_SLOT.crime_wave.unanchored)).toBe(true);
+  });
+
+  // ── S7 FOLLOW-UP (`briefs/S7-FOLLOWUP.md`, the chair's six changes of 13:22 and the ruling of 13:50) ──
+  /** The chair's `named` wordings, verbatim (change 1): the only door to a power's name. */
+  const CHAIR_NAMED = {
+    'The sitting authority': '{power}',
+    'The restored order': '{power}',
+    'Those in charge, who will not give way': '{power}, who will not give way',
+    'Authorities exploiting the rift': '{power}, exploiting the rift',
+    'Those in authority who would exploit the rift': '{power}, who would exploit the rift',
+    'Authorities caught between them': '{power}, caught between them',
+    'Wealthy merchants': '{power}',
+    'Merchants who benefit from cheap newcomer labour': '{power}, gaining from cheap newcomer labour',
+    'Orthodox believers': '{power}',
+    'Guild members': '{power}',
+    'Criminal organisations': '{power}',
+  };
+
+  it('(follow-up 1) `named` is carried by exactly the chair\'s rows, each with one {power} slot', () => {
+    const named = Object.fromEntries(Object.entries(TENSION_SIDE_MEANINGS)
+      .filter(([, r]) => Object.hasOwn(r, 'named')).map(([w, r]) => [w, /** @type {any} */ (r).named]));
+    expect(named).toEqual(CHAIR_NAMED);
+    for (const [w, n] of Object.entries(named)) expect(n.split('{power}').length - 1, w).toBe(1);
+    // the chair's 13:50: a stored side that already IS a power's name is shown as stored, never given a `named`
+    expect(['Legitimate heir', 'Corrupt officials', 'Official guards', 'Power behind throne']
+      .filter((w) => Object.hasOwn(TENSION_SIDE_MEANINGS[w], 'named'))).toEqual([]);
+  });
+
+  it('(follow-up 6) every `named` row means the ruler or a power, and no kind and form names one party twice', () => {
+    const wrong = Object.entries(TENSION_SIDE_MEANINGS)
+      .filter(([, r]) => Object.hasOwn(r, 'named') && r.means !== 'ruler' && !POWER_MEANS.includes(r.means)).map(([w]) => w);
+    expect(wrong).toEqual([]);
+    expect(Object.values(TENSION_SIDE_MEANINGS).some((r) => Object.hasOwn(r, 'named'))).toBe(true);
+    /** @type {Map<string, string[]>} */
+    const byParty = new Map();
+    for (const [w, r] of Object.entries(TENSION_SIDE_MEANINGS)) {
+      if (!Object.hasOwn(r, 'named')) continue;
+      for (const p of r.at) {
+        const k = `${p.kind}/${p.form}/${r.means}`;
+        byParty.set(k, [...(byParty.get(k) ?? []), w]);
+      }
+    }
+    expect([...byParty].filter(([, ws]) => ws.length > 1)).toEqual([]);
+  });
+
+  it('(follow-up 2) a camp or a part of a power is no power: its `means` is none', () => {
+    const camps = ['Established guilds', 'Upstart guilds', 'Displaced traders', 'Traders who fear the buyers are going elsewhere',
+      'Merchants tied to the old partner', 'Merchants who trade with the partner', 'Temple beneficiaries', 'Price regulators'];
+    expect(camps.filter((w) => TENSION_SIDE_MEANINGS[w]?.means !== 'none')).toEqual([]);
+  });
+
+  it('(follow-up 3) "Price regulators" without a market shows the kind\'s own unanchored words, never dropped', () => {
+    const base = HISTORICAL_EVENTS_DATA.find((e) => e.type === 'resource_scarcity');
+    const slot = (base?.factions ?? []).indexOf('Price regulators');
+    const own = sidesOf(base, 'unanchored')[slot];
+    const row = TENSION_SIDE_MEANINGS['Price regulators'];
+    expect(row.presumes).toEqual(['market']);
+    expect(typeof own === 'string' && row.without === own).toBe(true);
+  });
+
+  it('(follow-up 5) the fixed word "the criminal network" shows its template row\'s own `without`', () => {
+    const row = TENSION_SIDE_MEANINGS['the criminal network'];
+    expect(row.without).toBe(TENSION_SIDE_MEANINGS[/** @type {string[]} */ (row.standsFor)[0]].without);
   });
 
   it('the chair\'s plain-text table is the file\'s own lines, so the two cannot differ', () => {
