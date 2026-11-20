@@ -1,0 +1,13 @@
+[gate-tail] start:  14:50:49 up 33 min,  0 user,  load average: 1.00, 1.19, 1.22 · cores: 4
+
+ RUN  v4.1.8 /home/user/settlement-engine
+
+
+ Test Files  3 passed (3)
+      Tests  26 passed (26)
+   Start at  14:50:50
+   Duration  9.64s (transform 3.90s, setup 83ms, import 3.03s, tests 9.34s, environment 0ms)
+
+[gate-tail] end:  14:50:59 up 33 min,  0 user,  load average: 1.22, 1.23, 1.23
+[gate-tail] full log: /tmp/gate-tail.2566.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)

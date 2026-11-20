@@ -330,6 +330,7 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
 |---|---|
 | 211 / its rollback (FROZEN) | `eface6d0…be0b01` / `ce8474ff…49712f`: proved at the cut 4c753ec52 |
 | 212 / rollback on the lane (after R2; VR47 touched neither) | `05b915ab119e2f9766a3cea47fdd9ec023fc2155f588f1b4127ea5b347118f10` / `1454f8f3fa53943130a22d412152e0eddcf3e05684b3cf01f62e77c069e2a66e` (`out/v24/seated/dry-sha.txt`) |
+| 212 / rollback on the lane AFTER THE R3 MERGE (aa4e3079e) | `70c6eb4582b4a9282d7ec1221c4214ae4143e514ad208f3e838eaa301220a124` / `8cbd7d1c7a6d60f609b7473b14b7fe2b2ca8a3b6f3081151c2ae49d82cded5b0`; 211 unchanged (`out/v26/r3merge/sha256.txt`) |
 | 212 on the R3 cure's branch (4db8e4208) | `de3efccbbf9905443e0444dc7976fd5200c82c2661536f5150999aea5b68eb9f`, rollback `653ae8b2…b2f4` |
 
 ## 3. The stages
@@ -340,7 +341,7 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
 | R3 roster choices | MERGED into the lane by VEIL-26 (`--no-ff` of `lane/veil-25-r3c5-2026-11-20` at 4661a1353: R3 411565ff9, cures 06e9e64b3, b907c75c9, 9b18835d1, R3-CURE-4 a9e2de44a/5ef2a92b1/c5786c5ce, R3-CURE-5 dbff7eeb3 (the cure, read once by VEIL-26) and c4e2b1ab2/101fae14d/4661a1353 (measures, docs: no code)); 212 `70c6eb45…220a124`, rollback `8cbd7d1c…ded5b0` | GREEN TOWARD WITHHOLDING, NOT SENT TO THE READER: R3-TELL (ruling 49), R3-CURE-6 (ruling 48) and the server's key-level table (ruling 51) are owed first (VEIL-27). Re-runs at the merged tree: section 6. R3-CURE-5's own report: `out/v25/r3c5/R3C5-HANDBACK.md`; its gate, one command: `sh docs/chair/2026-11-20/veil/out/v25/r3c5/measure/gate.sh <tree> <outdir> <template: createdb -T x211 then 212 applied> 2` (EXIT 1 on any HIGHER). |
 | CURATE notice (rulings 38 (c), 39, 40) | MERGED 7ddf4876f (`--no-ff` of `lane/veil-25-curate-2026-11-20` at 58f2fdf16: 1bd894613 + 58f2fdf16) | DONE: red 3/16 at 1bd894613's source, green 25/25 (`/var/tmp/v18/out/v25/curate/`); display only, 212 unchanged. Recorded, not cured: the notice reads `category` only (R3 also takes a /thie/ name: it can stay silent there) and does not exempt the governing power (VR42: it can over-warn there). RE-CHECK its condition if R3-CURE-4 narrows power.entry's reach. |
 | R6 tests | `lane/veil-22-r6-2026-11-20` 7d9ebd078 | COMPLETE, NOT MERGED; merge after R3 and re-run its MAIN arm (red 50 at R6's base: `cast.stakes` by R3's power, `cast.roles` wording by R3 or R5) |
-| R4 the people | `lane/veil-22-r4-2026-11-20` a4b89bf9d (R4 dfa031f3e + first cure) | NOT GREEN. NEXT after R3: the R4-CURE-2 builder (STOP 1, STOP 3, the switch's one salt, the catalogue as the red; VR48 its own commit). Draft brief at the seat; committed when launched. |
+| R4 the people | `lane/veil-22-r4-2026-11-20` a4b89bf9d (R4 dfa031f3e + first cure) | NOT GREEN. NEXT after R3-TELL and R3-CURE-6 (rulings 48, 49), then R6's merge: the R4-CURE-2 builder (STOP 1, STOP 3, the switch's one salt, the catalogue as the red; VR48 its own commit). Draft brief at the seat; committed when launched. |
 | R5 composed prose, R7 | not started | R5 after R4 (rulings 14, 28, 32); R7 after R6 |
 | L the four walkers | not started | ruling 34 |
 | DOORS 3e1115c81 | `lane/veil-doors-3-2026-11-20` (hand-back `docs/chair/2026-11-20/veil/doors/VEIL-DOORS-3-HANDBACK.md` there: read whole before the merge) | merge `--no-ff` after R3 and R4, every hunk read, the two inside `import_gallery_dossier` hardest; ONE builder: rulings 19, 20, the reader's repros, the acceptance run at the merged tree |
@@ -391,14 +392,17 @@ run exit 0, 40 PASS (`out/v24/gender/accept.txt`).
   carries no veil, else it is not drawn.
 - A CRIMINAL POWER'S ROW where no hidden house raised it (power.entry's reach): 9 born pages lose a "Thieves' Guild" row no hidden house raised
   (the first R3 cure's measure; the denominator is still owed: R3-CURE-2 did not re-run it). VR42 (the governing power
-  kept while the government's name stays) is met by 0 of 140 born towns; a hand town serves its governing "Thieves' Guild"
+  kept while the government's name stays) is met by 12 of 140 born towns ("Corrupt Council"; R3-CURE-5, ruling 52); a hand town serves its governing "Thieves' Guild"
   whole, share 60, and that arm is kept.
 - A CALMER CRIME PICTURE on some shared pages (ruling 30): where the veil withholds toward safety, the Defense reading a
   visitor works out from the page can come out LOWER than the same town would show with the hidden houses truly gone: 13
-  of 92 generated towns at the second R3 cure; never HIGHER. The counts by rule are OWED with the R3 merge.
+  of 92 generated towns at the R3 merge; never HIGHER (`out/v26/r3merge/gate-table.txt`). BY RULE: 8 rest on the criminal income
+  row (a row a hidden house raised is not served), 3 on power.entry's reach (the criminal power kept off), 2 on the covert
+  service. THE SECURITY READER'S QUESTION WAS ANSWERED BY THE LANE ITSELF: on all 13 the calmer page IS a tell today (ruling
+  49); the cure (R3-TELL) makes it equal to a page a house-free town shows under some setting of the owner's switches.
 - A RENAMED CRIMINAL HOUSE'S LINE in the criminal-operations list (seat's note on R3-CURE-2): where some criminal house is
   hidden, a SHOWN criminal house the DM renamed loses its line in the operations list on a shared page (the list is rebuilt
-  from catalogue names only). Toward withholding. COUNT: OWED (R3-CURE-4 or the seat).
+  from catalogue names only). Toward withholding. COUNT: 74 of 76 plants (R3-CURE-5, ruling 52).
 - AN OLD TOWN'S POWER SHARES (ruling 38 (e)): if an old stored town's power shares do not add up to 100, a shared page shows
   them rescaled to 100, even when nothing is hidden. The same powers, in the same order; only the numbers differ.
 - THE CRIMINAL POWERS KEPT OFF WHILE A CRIMINAL HOUSE IS HIDDEN (power.entry's reach): on a shared page the town's criminal
@@ -451,6 +455,16 @@ run exit 0, 40 PASS (`out/v24/gender/accept.txt`).
 - 14:19 PART 27 current. NEXT: R3-CURE-5's final commits read as a difference; then R3's merge and "R3 <commit>" with the
   thirteen LOWER towns by name and rule (ruling 45); the chair seats VEIL-27 when the merge begins.
 
+- 14:24 the chair: R3-CURE-5 finished (4661a1353); merge it; rulings 49-52. 14:33 the merge began: aa4e3079e (`--no-ff`).
+- 14:52 RE-RUN AT THE MERGED TREE (`out/v26/r3merge/`, every exit 0): the gate (template x211 + the tree's 212) HIGHER 0, EQUAL
+  79, LOWER 13 of 92, "Magical crime" above 0, server = twin, Reveal off = on; R3's born test 22/22; galleryServerVeil +
+  galleryVeilHandRows 43/43; the two walkers + criminalVeilSwitch 26/26; `--check` 0; acceptance exit 0, 40 PASS; sha256 as
+  section 2. THE THIRTEEN LOWER TOWNS AND THEIR RULES (the swap that alone closes each): `income.criminalRow` (8):
+  r3m-city-none-0-31, r3m-city-under_siege-1-118 (+covert service), r3m-town-insurgency-1-94, r3m-town-under_siege-0-18,
+  r3m-town-under_siege-0-28 (+covert), r3m-town-under_siege-1-88, r3m-town-under_siege-1-98 (+covert), r3m-town-wartime-0-29
+  (+covert); power.entry's reach (3): r3m-metropolis-insurgency-1-124, r3m-metropolis-wartime-0-59, r3m-town-none-0-23; the
+  covert service alone (2): r3m-town-none-0-17, r3m-town-none-1-91.
+
 ## 7. THE JOIN (the chair's word in VEIL-25's prompt): what the join must re-prove on the joined document
 The working line (origin/lane/join-2026-11-14, at 0c906948 when this was written) and four content lanes ADD SERVED TEXT at
 the join: the traditions' descriptions (their text a function only of facts no act of the DM can hide), the session sheet's
@@ -465,26 +479,18 @@ readings at UNREGISTERED 0 (ruling 25); and the render-twice and inversion harne
 `tests/lint/namesInSentences.walker.test.js` holds a COPY of the fold in `src/domain/display/gallerySecondHomes.js`: at the
 join it must import and call the lane's own function (`buildNameSearch` / the bare fold), never its copy.
 
-## 8. HANDED OVER (VEIL-25 to VEIL-26, at the chair's word of 12:21; written 12:21 UTC)
-THE LANE: `lane/veil-25-2026-11-20`, tip = the commit carrying this section (read it back from origin). MERGED BY VEIL-25: the
-Curate notice (7ddf4876f, `--no-ff`; display only). 212 on the lane is still `05b915ab…8f10` (R3 not merged). 211 proved at
-the cut 214c36dde and unchanged since (`git diff 214c36dde -- supabase/migrations/211* supabase/rollback/211*` empty).
-RUNNING, STARTED BY VEIL-25 (it relays its hand-back UNREAD to the chair): THE R3-CURE-5 BUILDER, in `/home/user/wt/r3c4`,
-branch `v25-r3c4`, brief `briefs/R3-CURE-5-BRIEF.md`, with rulings 41 and 42 relayed to it.
-STATE OF R3, PLAINLY: R3-CURE-4's branch `lane/veil-25-r3c4-2026-11-20` at c5786c5ce holds unit 1's RED arms (a9e2de44a,
-committed red) and unit 4 GREEN (5ef2a92b1). THE CURE OF UNITS 1 AND 2 IS UNCOMMITTED AND WAS RED at its last full run
-(`out/v25/r3c4/UNCOMMITTED-cure-units-1-2.patch`; a twin bug fixed after that run, not re-run). ONE MEMBERSHIP HUSK ON
-hand-raised (Reveal DM on, both engines) IS UNTRACED. Unit 3 (the gate instrument), the tell column (ruling 41) and the
-owner's counts are R3-CURE-5's.
-WHAT TO CHECK FIRST IN R3-CURE-5'S DIFF: (1) the pre-sweep rule in both engines (212 `_gallery_veil_copy_names`,
-`_gallery_veil_npc_copies`, the jsonb `@>` containment; the twin's `heldBy`): that it withholds no row of a SHOWN power (the
-exemption, ruling 37 (a)) and leaves no row naming a withheld one (ruling 42 (1)), with the husk arm's count at 0 outside the
-KEY_LEVEL list; (2) the power.entry category change (the Watch) against VR42 (the governing power) and VR39; (3) the new
-helpers revoked by name (VR27) and dropped in the rollback; (4) the gate's counterfactual independent of every veil helper,
-and its red with the re-derivation off (37 (b) (i)); (5) the twin = server at every path the husk pass touches. Then re-run
-its red and green, the acceptance run, the harnesses and the cost law, and merge R3 "GREEN TOWARD WITHHOLDING, THE TELL
-QUESTION OPEN", naming the seven `income.criminalRow` towns in the line to the chair.
-AFTER R3: R6 (re-run its MAIN arm), the R4 second cure (`briefs/R4-CURE-2-BRIEF.md`, fill its base; VR48 its own commit;
-RE-CHECK the Curate notice's condition if R3 narrowed power.entry's reach), R5 (ruling 32's order), R7, L, the doors, the
-stored figures, E (ruling 35).
-
+## 8. HANDED OVER (VEIL-26 to VEIL-27; written 14:52 UTC). PART 26's section 8 (VEIL-25 to VEIL-26) is history in PART 26.
+THE LANE: `lane/veil-26-2026-11-20`, tip = the commit carrying this section (read it back from origin). R3 IS MERGED
+(aa4e3079e) and GREEN TOWARD WITHHOLDING at the merged tree (section 6); 211 unchanged since 214c36dde. NOTHING RUNNING: no
+builder of this seat is out; R3-CURE-5's builder (VEIL-25's) has returned. Worktrees in this container (scratch, nothing
+uncommitted of value): `/home/user/wt/master` (the gate's master side), `/home/user/wt/r3c4read`, `/home/user/wt/brok`.
+VEIL-27's ORDER (the chair's, rulings 44, 48-52): (1) R3-TELL (ruling 49: the possible-world rule; the tell column GATED,
+YES everywhere, mixed switch settings tried; an empty list is not an absent field) and R3-CURE-6 (ruling 48: the person match
+by id as text, one helper shared with R4's STOP 1; plants with a numeric id and with none, red first), ONE BUILDER AT A
+TIME on 212 and the twin; the proof of ruling 50's reading (the served Defense key a function of the served page); the
+server's key-level table (rulings 47, 51). THEN "R3 <commit>" to the chair with the thirteen towns of section 6 by name and
+rule. THEN R6 (re-run its MAIN arm), R4-CURE-2 (`briefs/R4-CURE-2-BRIEF.md`, re-stamped: fill its base; units 7-8; VR48 its
+own commit; re-check the Curate notice's condition: R3 narrowed power.entry to category, which is what the notice reads), R5
+(ruling 32's order), R7, L, the doors, the stored figures, the cost rows on the largest town (ruling 52), E.
+THE PUSH RULES (ruling 46): never commit while a push is in flight; `git ls-remote` before each push, push only if it
+differs; the guarded push of section 6 kills any push whose log shows `npm run check`.
