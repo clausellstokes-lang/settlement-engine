@@ -132,6 +132,28 @@ const HAND_FORMS = Object.freeze({
     { id: 'npc.jon', name: 'Jon Pell', role: 'Cooper', goal: { short: 'Finish the barrels by the fair.', long: 'Train an apprentice.' } }],
   economicState: { safetyProfile: { crimeTypes: [] } },
 });
+// R3-CURE-5 (the chair's ruling of 14:21 UTC, from the lane's owner's read of dbff7eeb3: A GAP TOWARD SENDING): the pre-sweep
+// person was found by id ONLY WHERE THE ID IS A STRING. Two plants: a person whose id is a NUMBER and a person with NO id, each
+// with a goal aimed at and naming the withheld guild and a membership of it. The hidden house's catalogue name folds BARE to
+// the guild's ("Thieves' guild (powerful)" -> "Thieves' guild", as on metropolis-7), so the house sweep strips the guild's
+// name from the goal's sentence and target id and from the membership's `power`, BEFORE the copy pass: the husk to leave whole.
+const HAND_IDS = Object.freeze({
+  name: 'Tollhaven', tier: 'town',
+  institutions: [{ id: 'inst-tgp5', name: "Thieves' guild (powerful)", category: 'Criminal', desc: 'The guild house.' },
+    { id: 'inst-fish5', name: 'Fish market', category: 'Economy', desc: 'Fish.' }],
+  powerStructure: {
+    factions: [{ faction: 'Town Council', category: 'civic', power: 60, isGoverning: true, desc: 'The council sits weekly.' },
+      { faction: TG, category: 'criminal', power: 25, desc: 'The guild takes its cut.' },
+      { faction: 'Fishers', category: 'economic', power: 15, desc: 'The fishers keep the quay.' }],
+  },
+  npcs: [{ id: 41, name: 'Ida Numer', role: 'Fishwife', memberships: [{ power: TG, role: 'member' }, { power: 'Fishers', role: 'member' }],
+    goal: { short: `Pay off ${TG} by spring.`, long: 'Keep the stall.', intent: { short: { target: { id: TG, kind: 'power' } } } } },
+  { name: 'Nell Noid', role: 'Porter', memberships: [{ power: TG, role: 'fence' }],
+    goal: { short: `Run errands for ${TG}.`, long: 'Save a dowry.', intent: { short: { target: { id: TG, kind: 'power' } } } } },
+  { id: 'npc.ott', name: 'Ott Mere', role: 'Councillor', memberships: [{ power: 'Town Council', role: 'member' }],
+    goal: { short: 'Keep the tolls.', long: 'Hold the chair.', intent: { short: { target: { id: 'Town Council', kind: 'power' } } } } }],
+  economicState: { safetyProfile: { crimeTypes: [] } },
+});
 // R3-CURE-2 (unit 4 (ii)): THE SHARE SUM. Fractional shares whose exact decimal sum is 100 but whose double sum is not
 // (0.1 + 64.1 + 35.8), and thirds whose double sum is 100 but whose exact decimal sum is not: the exact comparison in
 // both engines (212: numeric; the twin: the decimal spelling). No hideable house; no power withheld.
@@ -232,6 +254,8 @@ function holdsJ(a, b, skip = []) {
  * other list's element by containment (the served element held by an unused projection element, `ts` and `power` aside: the
  * trace is renumbered and the shares re-derived). A field whose whole value IS the name or id (or an array holding it) is
  * STRUCTURED; a sentence naming it is PROSE. Returns { compared, husks: [{ path, kind }] }. */
+/** An id as text: a string as itself, a finite number or a boolean by its String(); anything else '' (no id). */
+const idKey = (v) => (typeof v === 'string' ? v : (typeof v === 'number' && Number.isFinite(v)) || typeof v === 'boolean' ? String(v) : '');
 function husksOf(pub, doc, withheld, opens) {
   const nums = new Set(withheld.filter((t) => /^\d+$/.test(t)));
   const ids = new Set(withheld);
@@ -255,8 +279,9 @@ function husksOf(pub, doc, withheld, opens) {
       const used = new Set();
       for (const e of y) {
         if (!isRec(e)) continue;
-        const i = typeof e.id === 'string' && /(^|\.)npcs$/.test(p)
-          ? x.findIndex((z, j) => !used.has(j) && isRec(z) && z.id === e.id)
+        // (R3-CURE-5, the chair 14:21: a person by its id AS TEXT for any scalar id; a person with none by containment)
+        const i = idKey(e.id) !== '' && /(^|\.)npcs$/.test(p)
+          ? x.findIndex((z, j) => !used.has(j) && isRec(z) && idKey(z.id) === idKey(e.id))
           : x.findIndex((z, j) => !used.has(j) && isRec(z) && holdsJ(z, e, ['ts', 'power']));
         if (i < 0) continue;
         used.add(i);
@@ -342,6 +367,8 @@ describe('R3: the drawn conditional rows where a house is hidden whole (through 
     for (const [seed, town] of [['hand-shares-a', HAND_SHARES_A], ['hand-shares-b', HAND_SHARES_B]]) towns.push({ seed, stored: clone(town), hideable: [], B: null });
     // R3-CURE-3 (the chair's ruling A): the name's forms in a goal sentence, and a served power whose name contains the withheld one
     towns.push({ seed: 'hand-forms', stored: clone(HAND_FORMS), hideable: HAND_FORMS.institutions.filter((h) => isHideableHouse(h)), B: null });
+    // R3-CURE-5 (the chair, 14:21): a person with a NUMBER id and a person with NO id, each holding a husk the sweep cuts
+    towns.push({ seed: 'hand-ids', stored: clone(HAND_IDS), hideable: HAND_IDS.institutions.filter((h) => isHideableHouse(h)), B: null });
     // THE HIDDEN-FREE POOL (VR39): the crime types of every town that holds no hideable house (the counterfactual births
     // and the born towns with none)
     pool = new Set(towns.flatMap((t) => [t.B, t.hideable.length ? null : t.stored]).filter(Boolean)
@@ -715,6 +742,33 @@ describe('R3: the drawn conditional rows where a house is hidden whole (through 
     note('R3-CURE-3 ruling A: the three forms judged on', judged, 'people-reads; the Watch goal served byte for byte on', tooth, 'reads');
     expect(judged).toBeGreaterThan(0);
     expect(tooth).toBeGreaterThan(0);
+    expect(bad).toEqual([]);
+  });
+
+  it('R3-CURE-5 (the chair, 14:21: A GAP TOWARD SENDING): a person whose id is a NUMBER, and a person with NO id, keep no husk: the goal aimed at and naming the withheld guild leaves WHOLE and the guild membership leaves WHOLE, both engines, both shapes, every read, Reveal DM off and on; a shown power\'s goal and membership stay byte for byte', () => {
+    const bad = [];
+    const rs = cureReads().filter((x) => x.t.seed === 'hand-ids');
+    expect(rs.length).toBe(4);
+    let judged = 0;
+    for (const r of rs) {
+      const twin = veil.projectShareVeil(veil.galleryPayloadFor(clone(r.stored), { shareDm: r.dm, memberOverrides: r.ov }), r.ov);
+      for (const [read, d] of [...docsOf(r), ['twin', twin]]) {
+        const tag = `hand-ids ${r.kind} dm=${r.dm} ${read}`;
+        if (!withheldOf(r.stored, d).includes(TG)) bad.push(`${tag}: the guild is not withheld`);
+        const ppl = (d.npcs || []).filter(isRec);
+        const ida = ppl.find((n) => n.name === 'Ida Numer'); const nell = ppl.find((n) => n.name === 'Nell Noid'); const ott = ppl.find((n) => n.name === 'Ott Mere');
+        for (const [who, n, keep] of [['the number-id person', ida, [{ power: 'Fishers', role: 'member' }]], ['the no-id person', nell, []]]) {
+          if (!n || !('memberships' in n || 'goal' in n)) continue;
+          judged += 1;
+          if ('goal' in n) bad.push(`${tag}: ${who}'s goal served as a husk ${J(n.goal)}`);
+          if (canon(n.memberships || []) !== canon(keep)) bad.push(`${tag}: ${who}'s memberships ${J(n.memberships)}`);
+        }
+        if (ott && 'goal' in ott && canon(ott.goal) !== canon(HAND_IDS.npcs[2].goal)) bad.push(`${tag}: the shown power's goal changed ${J(ott.goal)}`);
+        if (ott && 'memberships' in ott && canon(ott.memberships) !== canon(HAND_IDS.npcs[2].memberships)) bad.push(`${tag}: the shown power's membership changed`);
+      }
+    }
+    note('R3-CURE-5 (14:21): the number-id and no-id people judged on', judged, 'people-reads');
+    expect(judged).toBeGreaterThan(0);
     expect(bad).toEqual([]);
   });
 
