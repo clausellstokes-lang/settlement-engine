@@ -72,15 +72,15 @@ export const FAMILIES = [
     ['Was with # the day # said something cruel to a friend, and has never repeated it. Neither has raised it', 'The friend has heard part of it from someone else, and wants the rest'],
     ['Saw # weep after a meeting that everyone else thinks went well. Neither has let on', 'Another such meeting is coming, and they will both be in the room'],
     ['Was close by when # made a choice that cost someone else dearly, and kept still. Both have kept still since', 'The one who bore the cost has begun to wonder who else was there'],
-    ["Heard # tell a lie that settled a quarrel in #'s favour, and said nothing. The two of them have let it lie", 'The quarrel has started up again, and the lie will not hold a second time'],
+    ["Heard # tell a lie that settled a quarrel in #'s favour, and said nothing. The two of them have left it there", 'The quarrel has started up again, and the lie will not hold a second time'],
   ] },
   { key: 'K2 owes', re: /^Owes .+ a debt from before either of them held/, lines: [
     ['Owes # a debt from before either of them held their current position: one that # has never formally called in', 'The silence feels like patience, and it is not forgiveness'],
-    ["Owes # a debt for a winter's lodging, and # has never once mentioned it", 'Being let off so lightly sits worse with them every year'],
+    ['Owes # a debt for lodging given when they had nowhere to go, and # has never once mentioned it', 'Being let off so lightly sits worse with them every year'],
     ['Owes # a debt for a word put in at the right moment, and # has never asked for anything in return', 'A favour of that size is bound to be asked for one day'],
     ['Owes # a debt for keeping quiet about a mistake, and # has never said what it will cost', 'They have begun to dread the day # names a price'],
-    ['Owes # a debt from a bad season, when # carried them through, and # has never asked for it back', 'Others have noticed how readily they side with # on every question'],
-    ['Owes # a debt of a promise made in a hard hour, and # has let it lie', 'A promise left lying that long is only waiting for its moment'],
+    ['Owes # a debt from a bad year, when # carried them through, and # has never asked for it back', 'Others have noticed how readily they side with # on every question'],
+    ['Owes # a debt on a promise made in a hard hour, and # has never held them to it', 'A promise left lying that long is only waiting for its moment'],
     ['Owes # a debt that neither of them ever wrote down, and that # has never once raised', 'With nothing written, # may ask for whatever they please'],
     ['Owes # a debt for a loan made in friendship, and # has never asked for it back', 'The friendship has cooled, and the loan has not been forgotten'],
     ['Owes # a debt for taking their side when no one else would, and # has never said so aloud', 'If # ever needs someone to stand up for them, they will be expected to'],
@@ -93,7 +93,7 @@ export const FAMILIES = [
     ["Has been asking after #'s comings and goings through a friend of a friend. Little has turned up. They have not stopped asking", 'The friend of a friend has begun to wonder why'],
     ['Has been lingering within earshot whenever # thinks no one is near. Most of it is dull. They linger all the same', '# has started choosing quieter corners'],
     ["Has been piecing together #'s past from what visitors let slip. The pieces do not fit yet. They go on gathering them", 'One of those visitors has mentioned the questions to # directly'],
-    ['Has set someone to trail # on errands for a season. The reports are dull. They keep the trailing up', 'The one doing the trailing has grown fond of #, and may say something'],
+    ['Has set someone to trail # on errands for months. The reports are dull. They keep the trailing up', 'The one doing the trailing has grown fond of #, and may say something'],
     ['Has been reading the letters # leaves lying about, whenever the chance comes. There has been nothing worth having. They read on regardless', '# has begun to put the letters away'],
     ['Has been keeping count of the hours # spends away and where # says they went. The accounts mostly match. Mostly is not enough for them', '# has noticed that the questions always come from the same direction'],
     ["Has been making a friend of #'s closest friend in the hope of hearing something useful. Nothing useful yet. The friendship goes on", 'The friend has begun to repeat the questions to #'],
@@ -221,3 +221,8 @@ say('\n§6b THE COMMONEST FRAME SENTENCE (any wording), before -> after, by size
 const ALL_FRAME = new Set(FAMILIES.flatMap((f) => f.lines.flatMap(([w, s]) => [...sentences(w), ...sentences(s)])));
 const famMax = (tb) => new Map([...tb].map(([size, { n, per }]) => { const m = [...per].filter(([s]) => ALL_FRAME.has(s)).sort((a, b) => b[1] - a[1])[0]; return [size, m ? `${pct(m[1], n)} (${m[1]}/${n})` : '0']; }));
 for (const [label, b, a] of [['what', whatBefore, whatAfter], ['stakes', stakesBefore, stakesAfter]]) { const fb = famMax(b), fa = famMax(a); say(`  ${label.padEnd(6)} ${SIZES.map((s) => `${s} ${fb.get(s)} -> ${fa.get(s)}`).join(' | ')}`); }
+
+// ── SECRET-LINES-BUILD: on a cache forged from the BUILT tree, §3 is the bar measured; this reads the frames off it ───
+say('\n§7 THE COMMONEST FRAME SENTENCE (any wording, the drawn rows and their siblings) AS THIS CACHE WAS FORGED (forged on the built tree: MEASURED):');
+for (const [label, tb] of [['what', whatBefore], ['stakes', stakesBefore]]) { const fm = famMax(tb); say(`  ${label.padEnd(6)} ${SIZES.map((s) => `${s} ${fm.get(s)}`).join(' | ')}`); }
+say('  siblings on the record by size: ' + SIZES.map((size) => { const ts = towns.filter((t) => t.size === size); const mask = (t) => maskerOf(t); let sib = 0; for (const t of ts) { const m = mask(t); for (const n of t.npcs) if (n.what && FAMILIES.some((f) => f.lines.slice(1).some(([w]) => w === m(n.what)))) sib += 1; } return `${size} ${sib}`; }).join(' | '));

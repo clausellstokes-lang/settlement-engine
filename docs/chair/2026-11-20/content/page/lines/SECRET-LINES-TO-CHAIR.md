@@ -1,5 +1,11 @@
 # SECRET-LINES, to the chair: the secret on nearly every place's cards (PAGE-8; written 2026-11-20 19:30 UTC by `date -u`)
 
+> **APPROVED TO BUILD (the chair, 20:02): "40 APPROVED TO BUILD, with five cures (no season, no echo)".** The five cures are
+> applied below in place, each marked **[CURE n]**; the built table is `src/data/people/crimeKnowledgeSiblings.js ::
+> CRIME_KNOWLEDGE_WORDINGS`, indexed by the frame's index K0–K3 (COMMON-RULES rule 2 and the chair's word of 20:50: no table
+> keyed by a sentence), the pool composed at the site as [the drawn row, ...its ten siblings] and handed to `drawDeclared`
+> with the keyed pick as its draw (SECRET-LINES-BUILD).
+
 DRAFT LINES ONLY. Nothing under `src/` or `tests/` was written. Measured on the lane commit a614d7664 (L2 and S9 merged).
 Script: `docs/chair/2026-11-20/content/page/measures/page-8/secret/secretLines.mjs` (it holds the forge, the measure, the
 lines' lint and the projection, and the 40 lines below as data). From the tree's root:
@@ -161,17 +167,17 @@ It also checks that no sentence is shared by two lines. Result: 40 lines, 0 fail
 | 7 | Was with # the day # said something cruel to a friend, and has never repeated it. Neither has raised it | The friend has heard part of it from someone else, and wants the rest |
 | 8 | Saw # weep after a meeting that everyone else thinks went well. Neither has let on | Another such meeting is coming, and they will both be in the room |
 | 9 | Was close by when # made a choice that cost someone else dearly, and kept still. Both have kept still since | The one who bore the cost has begun to wonder who else was there |
-| 10 | Heard # tell a lie that settled a quarrel in #'s favour, and said nothing. The two of them have let it lie | The quarrel has started up again, and the lie will not hold a second time |
+| 10 | Heard # tell a lie that settled a quarrel in #'s favour, and said nothing. The two of them have left it there **[CURE 5, the chair 20:02: not "let it lie" after "tell a lie"]** | The quarrel has started up again, and the lie will not hold a second time |
 
 ### K2: beside "Owes # a debt from before either of them held their current position: one that # has never formally called in" / "The silence feels like patience, and it is not forgiveness"
 
 | # | what | stakes |
 |---|---|---|
-| 1 | Owes # a debt for a winter's lodging, and # has never once mentioned it | Being let off so lightly sits worse with them every year |
+| 1 | Owes # a debt for lodging given when they had nowhere to go, and # has never once mentioned it **[CURE 1, the chair 20:02: no season]** | Being let off so lightly sits worse with them every year |
 | 2 | Owes # a debt for a word put in at the right moment, and # has never asked for anything in return | A favour of that size is bound to be asked for one day |
 | 3 | Owes # a debt for keeping quiet about a mistake, and # has never said what it will cost | They have begun to dread the day # names a price |
-| 4 | Owes # a debt from a bad season, when # carried them through, and # has never asked for it back | Others have noticed how readily they side with # on every question |
-| 5 | Owes # a debt of a promise made in a hard hour, and # has let it lie | A promise left lying that long is only waiting for its moment |
+| 4 | Owes # a debt from a bad year, when # carried them through, and # has never asked for it back **[CURE 2: "a bad year", not "season"]** | Others have noticed how readily they side with # on every question |
+| 5 | Owes # a debt on a promise made in a hard hour, and # has never held them to it **[CURE 3, the chair 20:02: no echo]** | A promise left lying that long is only waiting for its moment |
 | 6 | Owes # a debt that neither of them ever wrote down, and that # has never once raised | With nothing written, # may ask for whatever they please |
 | 7 | Owes # a debt for a loan made in friendship, and # has never asked for it back | The friendship has cooled, and the loan has not been forgotten |
 | 8 | Owes # a debt for taking their side when no one else would, and # has never said so aloud | If # ever needs someone to stand up for them, they will be expected to |
@@ -186,7 +192,7 @@ It also checks that no sentence is shared by two lines. Result: 40 lines, 0 fail
 | 2 | Has been asking after #'s comings and goings through a friend of a friend. Little has turned up. They have not stopped asking | The friend of a friend has begun to wonder why |
 | 3 | Has been lingering within earshot whenever # thinks no one is near. Most of it is dull. They linger all the same | # has started choosing quieter corners |
 | 4 | Has been piecing together #'s past from what visitors let slip. The pieces do not fit yet. They go on gathering them | One of those visitors has mentioned the questions to # directly |
-| 5 | Has set someone to trail # on errands for a season. The reports are dull. They keep the trailing up | The one doing the trailing has grown fond of #, and may say something |
+| 5 | Has set someone to trail # on errands for months. The reports are dull. They keep the trailing up **[CURE 4: "for months", not "for a season"]** | The one doing the trailing has grown fond of #, and may say something |
 | 6 | Has been reading the letters # leaves lying about, whenever the chance comes. There has been nothing worth having. They read on regardless | # has begun to put the letters away |
 | 7 | Has been keeping count of the hours # spends away and where # says they went. The accounts mostly match. Mostly is not enough for them | # has noticed that the questions always come from the same direction |
 | 8 | Has been making a friend of #'s closest friend in the hope of hearing something useful. Nothing useful yet. The friendship goes on | The friend has begun to repeat the questions to # |
@@ -236,3 +242,28 @@ The builder's exact key will move these within the §4 band: k = 11 has a median
   the same share. A stakes sibling alone would not move the sentence bar.
 
 Those are the catch-all pools' and the title pools' faults. They need their own brief.
+
+## 8. BUILT (SECRET-LINES-BUILD), MEASURED on the built tree
+
+Forged on the built tree, 150 places a size (`secretLines.mjs forge`, then `measure` §7), beside the projection of §6.
+The commonest frame sentence, any wording, of `what` (the stakes ride with it and read the same):
+
+| size | before | projected (§6) | MEASURED |
+|---|---|---|---|
+| thorp | 4.0% | 1.3% | 1.3% (2/150) |
+| hamlet | 22.0% | 4.7% | 3.3% (5/150) |
+| village | 50.7% | 8.0% | 8.0% (12/150) |
+| town | 88.7% | 11.3% | 12.0% (18/150) |
+| city | 100.0% | 12.7% | 12.7% (19/150) |
+| metropolis | 99.3% | 13.3% | 18.0% (27/150) |
+
+The metropolis top is K0's tenth sibling ("Knows that # turned down help…"), 27/150. The next wording there stands at
+13.3%. The built key differs from the projection's key, and §4's band at k = 11 reaches 17.3% at its worst. The chair's
+COMMON-RULES rule 3 lets a top up to 20% pass as sampling.
+
+The records changed this way:
+- On the chair's 300, comparing the two trees, only `npcs[].secret.what` and `npcs[].secret.stakes` differ: 645 cards
+  in 219 places, and nothing that is not a string.
+- Every other secret sentence is as it was. §3d's counts outside the four frames are equal on both caches, except at
+  metropolis: what 259 → 260 and stakes 256 → 257. That one extra is the K0 sibling above, which §3d does not count as
+  a frame sentence.

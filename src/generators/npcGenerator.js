@@ -20,6 +20,7 @@ import { disambiguateNPCDisplayNames } from './npcDisplayNames.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
 import { legacyMassRange } from '../domain/density/densityLaw.js'; import { defenceRoleGate } from '../domain/defense/defenseFacts.js'; import { crimeHasThievesGuild, crimeSignalOf, withoutCriminalGuild } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3): one line, so no cited line moves
 import { generateFactionLeaderSecret, noteSecretSource, withoutMarketWords } from './npc/factionLeaderSecret.js'; import { drawDeclared, lineText, resolveSibling } from '../domain/facts/drawDeclared.js'; import { birthFactsOf, factsOf } from '../domain/facts/factsOf.js'; // F5, F10, CENSUS-1c, CENSUS-4f: one line, so no cited line moves
+import { CRIME_KNOWLEDGE_WORDINGS, crimeKnowledgeDealt, crimeKnowledgeWordingPick } from '../data/people/crimeKnowledgeSiblings.js'; // SECRET-LINES-BUILD (PAGE-8): the four frames' wordings
 import { CRAFTS_ROLES, NOBLE_ROLES } from './npc/factionRoleCatalog.js'; import { POWER_BANDS, titleLinesFor } from './people/poolMap.js'; // ITEM 15 (ALLEGIANCE-CAR4), one line so no cited line moves
 import { resolveGeneratedNpcTitle } from './npc/generatedNpcTitle.js';
 import { deriveThorpSecondRole } from './npc/thorpSecondRole.js'; // CENSUS-4 R9's guildTitleName and R3's tieArchetype left this line at MERGE-CAR (R9 superseded by the census titles and the honorific pools, R-P9; R3 read at people/ties.js); one line, so no cited line moves
@@ -587,11 +588,13 @@ export const generateCrimeLevel = (npc, npcIndex, summary, allNpcs, held = null)
 
   // 25% chance: NPC knows something compromising about another NPC
   if (random01(0.25) && allNpcs.length > 1) {
-    const otherNpc = pickRandom2(allNpcs.filter((_, idx) => idx !== npcIndex)), rosterNames = allNpcs.map((n) => n?.name).filter(Boolean).sort((x, y) => y.length - x.length), frameOf = rosterFramer(rosterNames), heldFrames = held && held.size ? new Set([...held].map(frameOf)) : held; // STYLE-2 SW-7 (B10(b)): the held key is the frame
+    const otherNpc = pickRandom2(allNpcs.filter((_, idx) => idx !== npcIndex)), rosterNames = allNpcs.map((n) => n?.name).filter(Boolean).sort((x, y) => y.length - x.length), frameOf = rosterFramer(rosterNames); // STYLE-2 SW-7 (B10(b)): the held key is the frame (a held sibling as its family's: crimeKnowledgeSiblings.js :: crimeKnowledgeHeldFrames)
     // STYLE-2 SW-7 (STYLE-RULINGS-2 B10(b)): NO FRAME TWICE IN ONE DOSSIER. The held refusal reads the FRAME,
     // every roster name masked, so a second figure cannot carry the same secret under another name (the twelve
     // at dc5684e66: one frame ten times in one town). Every frame held -> no roll, and the figure keeps its own.
-    return drawDeclared([
+    // SECRET-LINES-BUILD (PAGE-8, the chair's read of 20:02): the family is drawn as before (one roll); its WORDING is keyed,
+    // draw-free, through the one door over the pool composed here, [the drawn row (wording 0), ...its family's ten siblings].
+    return crimeKnowledgeDealt([
       {
         what: `Knows something about ${otherNpc.name} that ${otherNpc.name} believes no one else knows, and has been deciding for months whether to use it`,
         stakes: `${otherNpc.name} would move against them immediately if they suspected`,
@@ -607,8 +610,7 @@ export const generateCrimeLevel = (npc, npcIndex, summary, allNpcs, held = null)
       {
         what: `Has been reading ${otherNpc.name}'s correspondence through an intermediary. Nothing damaging yet. But they keep looking`,
         stakes: 'The intermediary has recently started asking for more money',
-      },
-    ], { draw: pickRandom2, facts: () => factsOf({ npcs: allNpcs }), ctx: { npc: npcIndex }, key: `${getActiveRng()?.seed ?? ''}::npcGenerator:CRIME_KNOWLEDGE`, poolId: 'npcGenerator:CRIME_KNOWLEDGE', surface: 'npcs', drawKind: 'R', held: heldFrames, heldKey: (s) => frameOf(s.what) }).line; // MERGE-R2: REVIEW-INTAKE-4's held secrets refused before the draw
+      }], held, frameOf, (rows, heldFrames) => drawDeclared(rows, { draw: pickRandom2, facts: () => factsOf({ npcs: allNpcs }), ctx: { npc: npcIndex }, key: `${getActiveRng()?.seed ?? ''}::npcGenerator:CRIME_KNOWLEDGE`, poolId: 'npcGenerator:CRIME_KNOWLEDGE', surface: 'npcs', drawKind: 'R', held: heldFrames, heldKey: (s) => frameOf(s.what) }).line, (drawn, family) => drawDeclared([drawn, ...CRIME_KNOWLEDGE_WORDINGS[family]], { draw: crimeKnowledgeWordingPick(`${getActiveRng()?.seed ?? ''}::npcGenerator:CRIME_KNOWLEDGE:${family}::${npcIndex}`), facts: () => factsOf({ npcs: allNpcs }), ctx: { npc: npcIndex }, key: `${getActiveRng()?.seed ?? ''}::npcGenerator:CRIME_KNOWLEDGE:${family}::${npcIndex}`, poolId: 'crimeKnowledgeSiblings:CRIME_KNOWLEDGE_WORDINGS', surface: 'npcs', drawKind: 'H' }).line, otherNpc.name); // MERGE-R2: REVIEW-INTAKE-4's held secrets refused before the draw
   }
 
   // 45% chance: stress-driven institutional secret
