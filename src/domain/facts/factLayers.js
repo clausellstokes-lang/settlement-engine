@@ -111,6 +111,9 @@ export const LEAVES = Object.freeze({
     note: 'it reads the live roster\'s drawn services (layer 2) and a defence-home atom, which bundles the economy as every defence atom does',
   }),
   appointedPost: home('appointedPost', 1, ['institutions']), // BAR5-THINGS (LAW 4): a post someone is named to (`appointedPost.js`)
+  waterSource: home('waterSource', 1, ['institutions']), // BUILD-CONFLICT (DEPTH-2): a water source row on the live roster (`rosterGrounds.js`)
+  externalMill: home('externalMill', 1, ['institutions']), // BUILD-CONFLICT (DEPTH-2): the access to an external mill (`rosterGrounds.js`)
+  commonGrazing: home('commonGrazing', 1, ['institutions']), // BUILD-CONFLICT (DEPTH-2): the common grazing land (`rosterGrounds.js`)
   migration: home('migration', 1, ['stress', 'stressors']),
   warState: home('warState', 1, ['stress', 'stressors', 'activeConditions', 'economicState'], {
     note: 'it reads the crisis home (`crisisOf`), so it carries the crisis leaf\'s bundle: the hunger family touches the economy',
