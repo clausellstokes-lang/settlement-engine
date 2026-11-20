@@ -2536,3 +2536,43 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   the veil test's shared reads: 8 of 8 towns re-printed by the test's own door. Told: its half ends at B10's merge;
   FRAME-4 (prompt written) is seated at its line-merge commit.
   THE SAFETY NET (7) is armed for 09:47 UTC (trig_01Pj2GUfWWQdLDYLn1ojS5mb); the CI read for 08:39.
+- 08:42 UTC · **CI AT THE NAMES LANDING, READ WHOLE BY NAME (run 44698707360 at e356c94f; 41,712 tests in 3,637 files; the verdict
+  job's own list rebuilt by a reading helper, all 22 names and messages recovered).** FIVE JOBS RED: "Golden master
+  under tr_TR + Chatham TZ"; "Gate / build and dist"; "Coverage floors (money / security)"; "Gate / test ratchet";
+  the aggregate "Validate, test, build". GREEN: e2e, validation, type ratchets, lint, edge tests, performance.
+  THE 22 FAILING TESTS, BY CLASS:
+  (S) A PINNED SENTENCE, 2: `tests/generators/bar3People2Rows.test.js` (KEEP r2r-village-24; r2s-famine-village-3).
+  THE LANDING'S MISS; CURED on the chair's copy of the line (17a5dce6, the seat's e174f2d47 cherry-picked; 13 of 13).
+  (B) THE SERVER'S BUNDLES STALE, 3: `tests/edgeFunctions/aiGroundingBundle.freshness.test.js`;
+  `tests/edgeFunctions/edgeSharedBundleReproducibility.test.js` (aiGroundingBundle.meta.json; engineBundle.meta.json).
+  With them, in the coverage job (no floor was missed: its own run had 7 failing tests in 2 files):
+  `tests/build/engineBundleReplay.test.js` (521 of 525 rows; 325 of 360 fence settlements; the bundle's birth 3 of
+  3) and `tests/build/engineServiceStoreParity.test.js` (derive; regenSection; 2 seeds); and in `verify:dist` the
+  same family beside the five size ceilings. REBUILT AT THE CLOSE (the last close's C1), never by a lane.
+  (G) A STORED FINGERPRINT OF GENERATED OR COMPOSED OUTPUT, 17: `tests/property/generatorGoldenMaster.test.js` (521
+  of 525); `tests/property/dmLayerGoldenIsolation.test.js` A7 (521); `tests/property/dossierProseManifest.test.js`
+  THE DRIFT ARM (1,050 rows of composed prose, both audiences); `tests/property/espionageDormancyFence.test.js`
+  FENCE 1 (the driven golden: ITS OWN MESSAGE SAYS "a STOP, not a re-record": its chain and its licence are read at
+  the close before anything is recorded); `tests/generators/generationForkCensus.test.js` A1;
+  `pipelinePinnedChoosers` A1; `pipelinePinnedMode` A1, A2 and A5; `powerEconomyFreshness` A4;
+  `rosterFinalUnderHeldRoster` A1; `nameHeldThroughAssembly` A1; `institutionBudgetPromise` (50 of 60 seeds);
+  `x46NpcBand` (55 of 60 dark digests); `tests/domain/worldFactRederive.test.js` A7;
+  `tests/domain/editWorldFactResources.test.js` A2 and A6. THE NAMES SEAT HAD NAMED 7 OF THESE 17; TEN WERE NAMED BY
+  NOBODY UNTIL CI. Two read by the chair in their source (`editWorldFactResources`, `nameHeldThroughAssembly`): both
+  compare against the committed golden manifest or digests re-captured with it. ALL 17 ARE THE CLASS THE CLOSE
+  RE-RECORDS THROUGH ITS DOORS (the golden door under the owner's yes); WHAT PROVES THAT ONLY PROSE MOVED IS THE
+  TWO-TREE CONFINEMENT (NAMES-3 re-executes it), not this classification by message.
+  SO: OF 22, TWO WERE A FAULT OF THE LANDING (cured), TWENTY ARE THE ORDINARY STATE BETWEEN CLOSES. THE CHAIR'S
+  WORD TO THE OWNER AT THE LANDING ("red only on a named list of stored fingerprints") WAS WRONG IN ITS LIST: seven
+  named of seventeen, the bundles and the size ceilings not named at all; corrected to the owner at 08:25, 08:28 and
+  now in full. THE RULE FROM IT: a seat's list of the stored figures it moves is a FLOOR; the inventory is CI's
+  first whole run after the landing, read by name and kept in the landings row; the close's doors seat starts from
+  that inventory. THIS LIST IS THE CLOSE'S INVENTORY AS OF POINT 78; every later landing adds its own.
+  THE PUSH OF THE SENTENCE CURE is batched with the next landing (the verb agreement after NAMES-3's verdict; the
+  titles' second and third passes): the cure is on origin already as the seat's commit e174f2d47.
+  ALSO: REVIEW-VEIL-12 (08:40) built the counterfactual probe for CTR11's class on the veil's served prose
+  (`rank.probe.jsx`, 6fdd61821): at the lane c1b772e55, the default veil, the gallery read, 21 towns with a hideable
+  house: 183 served prose keys equal the counterfactual, FOUR DIFFER, each a row R5 has registered and not yet
+  built (`faith.templeFraud`; `power:desk.structureFlag`; `economics.shadowEconomy`; `economics.incomeWeight`): R5
+  takes them to 0. SEAT-3 (08:41) read in lean (about 115,000 by its estimate plus a third) and re-ran the holder's
+  measure on 900 and 960 towns byte for byte; it waits for the lane.
