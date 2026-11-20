@@ -1,0 +1,259 @@
+{
+ "meta": {
+  "script": "docs/chair/2026-11-20/content/seat/u4/measure-u4.mjs",
+  "standing": "under today's standing",
+  "dialLit": false,
+  "forced": {
+   "_seatLawVersion": 2
+  },
+  "n": {
+   "default": 150,
+   "presets": 10
+  },
+  "seconds": 570
+ },
+ "pools": {
+  "default": {
+   "towns": 900,
+   "errors": 0,
+   "before": {
+    "present": {
+     "other": 41,
+     "government": 15,
+     "military": 452,
+     "noble": 252,
+     "merchant": 473,
+     "criminal": 28,
+     "religious": 545,
+     "craft": 161,
+     "arcane": 207
+    },
+    "contends": {
+     "other": 19,
+     "government": 7,
+     "military": 446,
+     "noble": 98,
+     "merchant": 450,
+     "criminal": 2,
+     "religious": 472,
+     "craft": 2,
+     "arcane": 29
+    },
+    "none": 240,
+    "ladder": {
+     "Stable": 240,
+     "Contested": 220,
+     "Holding": 407,
+     "Critical": 33
+    }
+   },
+   "law": {
+    "present": {
+     "other": 41,
+     "government": 15,
+     "military": 452,
+     "noble": 252,
+     "merchant": 473,
+     "criminal": 28,
+     "religious": 545,
+     "craft": 161,
+     "arcane": 207
+    },
+    "contends": {
+     "other": 25,
+     "government": 8,
+     "military": 444,
+     "noble": 115,
+     "merchant": 145,
+     "criminal": 2,
+     "religious": 525,
+     "craft": 37,
+     "arcane": 71
+    },
+    "none": 269,
+    "ladder": {
+     "Stable": 269,
+     "Contested": 205,
+     "Holding": 402,
+     "Critical": 24
+    }
+   },
+   "forced": {
+    "present": {
+     "other": 41,
+     "government": 15,
+     "military": 452,
+     "noble": 252,
+     "merchant": 473,
+     "criminal": 28,
+     "religious": 545,
+     "craft": 161,
+     "arcane": 207
+    },
+    "contends": {
+     "other": 25,
+     "government": 8,
+     "military": 444,
+     "noble": 115,
+     "merchant": 145,
+     "criminal": 2,
+     "religious": 525,
+     "craft": 37,
+     "arcane": 71
+    },
+    "none": 269,
+    "ladder": {
+     "Stable": 269,
+     "Contested": 205,
+     "Holding": 402,
+     "Critical": 24
+    }
+   },
+   "holderRules": {
+    "R4": 413,
+    "R5": 26,
+    "R2": 365,
+    "R3": 96
+   },
+   "circumstances": {
+    "(none)": 295,
+    "mandate": 329,
+    "martial_pressure": 103,
+    "outside_debt": 30,
+    "occupation": 10,
+    "hunger": 23,
+    "strong_faith": 23,
+    "craft_led": 9,
+    "trade_wealth": 228
+   },
+   "draftDiff": [],
+   "forcedBirthDiffers": [
+    "seat-measure-town-22",
+    "seat-measure-town-113"
+   ],
+   "forcedFieldDiffers": [],
+   "forcedErrors": 0
+  },
+  "presets": {
+   "towns": 960,
+   "errors": 0,
+   "before": {
+    "present": {
+     "other": 55,
+     "noble": 257,
+     "military": 411,
+     "merchant": 419,
+     "criminal": 90,
+     "government": 12,
+     "religious": 383,
+     "craft": 247,
+     "arcane": 203
+    },
+    "contends": {
+     "other": 39,
+     "noble": 220,
+     "military": 356,
+     "merchant": 345,
+     "criminal": 2,
+     "government": 6,
+     "religious": 290,
+     "craft": 147,
+     "arcane": 74
+    },
+    "none": 293,
+    "ladder": {
+     "Stable": 293,
+     "Contested": 150,
+     "Holding": 507,
+     "Critical": 10
+    }
+   },
+   "law": {
+    "present": {
+     "other": 55,
+     "noble": 257,
+     "military": 411,
+     "merchant": 419,
+     "criminal": 90,
+     "government": 12,
+     "religious": 383,
+     "craft": 247,
+     "arcane": 203
+    },
+    "contends": {
+     "other": 44,
+     "noble": 158,
+     "military": 339,
+     "merchant": 209,
+     "criminal": 3,
+     "government": 7,
+     "religious": 277,
+     "craft": 191,
+     "arcane": 103
+    },
+    "none": 313,
+    "ladder": {
+     "Stable": 313,
+     "Contested": 124,
+     "Holding": 517,
+     "Critical": 6
+    }
+   },
+   "forced": {
+    "present": {
+     "other": 55,
+     "noble": 257,
+     "military": 411,
+     "merchant": 419,
+     "criminal": 90,
+     "government": 12,
+     "religious": 383,
+     "craft": 247,
+     "arcane": 203
+    },
+    "contends": {
+     "other": 44,
+     "noble": 158,
+     "military": 339,
+     "merchant": 209,
+     "criminal": 3,
+     "government": 7,
+     "religious": 277,
+     "craft": 191,
+     "arcane": 103
+    },
+    "none": 313,
+    "ladder": {
+     "Stable": 313,
+     "Contested": 124,
+     "Holding": 517,
+     "Critical": 6
+    }
+   },
+   "holderRules": {
+    "R4": 444,
+    "R5": 60,
+    "R3": 243,
+    "R2": 213
+   },
+   "circumstances": {
+    "(none)": 164,
+    "mandate": 302,
+    "martial_pressure": 460,
+    "hunger": 31,
+    "outside_debt": 41,
+    "strong_faith": 247,
+    "occupation": 6,
+    "craft_led": 29,
+    "trade_wealth": 212
+   },
+   "draftDiff": [],
+   "forcedBirthDiffers": [
+    "seat-measure-town-lawless_frontier-8",
+    "seat-measure-city-theocracy-6"
+   ],
+   "forcedFieldDiffers": [],
+   "forcedErrors": 0
+  }
+ }
+}
