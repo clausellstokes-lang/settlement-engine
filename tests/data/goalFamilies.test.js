@@ -16,7 +16,8 @@
  *   - THE RESERVE (GOALS-1, builder 4; the chair's approval of 2026-11-20 10:48 UTC): `GOAL_RESERVE_LINES` is apart from the
  *     cells and their totals; every reserve cell names an existing family, sub-kind and vantage, holds its approved count,
  *     uses only its family's and sub-kind's slots, and repeats no line of the cells nor of the reserve; the harsh-tie map
- *     (`GOAL_LINE_NOT_ON_TIES`) names only reserve TIES lines, real tie types and their real strengths.
+ *     (`GOAL_LINE_NOT_ON_TIES`) names only reserve TIES lines, real tie types and their real strengths. GOALS-3 (builder 7; the
+ *     chair's approval of 13:32 UTC): PERSONALITY 16 reserve lines in 13 cells, keyed like the PERSONALITY cells, 41 in all.
  * The anchored negatives: a planted bad slot and a planted tic each red the checker (controls).
  */
 import { readFileSync } from 'node:fs';
@@ -51,12 +52,16 @@ const EXPECTED_CELLS = {
   UNCANNY: { haunting: SIX, components: SIX, commission: SIX, omen: SIX, bargain: SIX },
 };
 const EXPECTED_TOTALS = { RANK: 36, POWER: 48, INSTITUTION: 48, SUPPLY: 52, TIES: 60, PERSONALITY: 96, ALLEGIANCE: 128, UNCANNY: 60 };
-/** The reserve (GOALS-1, the chair's approval of 10:48 UTC), cell by cell: 25 lines, outside the totals above. */
+/** The reserve (GOALS-1, the chair's approval of 10:48 UTC; GOALS-3's PERSONALITY, its approval of 13:32 UTC), cell by cell: 41 lines, outside the totals above. */
 const EXPECTED_RESERVE = {
   RANK: { enter: { short: 4, long: 3 } },
   POWER: { tense: { short: 2, long: 3 } },
   INSTITUTION: { solvency: { short: 2, long: 4 }, charter: { long: 1 } },
   TIES: { rival_enemy: { short: 2, long: 4 } },
+  PERSONALITY: {
+    greed: { short: 1, long: 1 }, hunger_for_status: { long: 1 }, fear: { long: 1 }, forbidden_patron: { long: 2 }, kindness: { short: 1, long: 1 },
+    sway: { short: 1, long: 2 }, grudge: { short: 1, long: 2 }, impulse: { short: 1, long: 1 },
+  },
 };
 
 /** STYLE-RULINGS-2026-11-07 §2 law 3, verbatim, plus WIRING-RULINGS §7's named tic. */
@@ -329,11 +334,11 @@ const orphanReserveCells = (reserve) => Object.entries(reserve).flatMap(([f, sub
   .filter((v) => !Array.isArray(GOAL_FAMILY_LINES[f]?.[k]?.[v])).map((v) => `${f}.${k}.${v}`)));
 
 describe('goal families — the reserve lines (GOALS-1, apart from the cells)', () => {
-  test('the reserve holds its approved count, cell by cell, 25 in all, and none of it is in the cells\' totals', () => {
+  test('the reserve holds its approved count, cell by cell, 41 in all, and none of it is in the cells\' totals', () => {
     const actual = Object.fromEntries(Object.entries(GOAL_RESERVE_LINES).map(([f, subs]) => [f,
       Object.fromEntries(Object.entries(subs).map(([s, v]) => [s, Object.fromEntries(Object.entries(v).map(([k, lines]) => [k, lines.length]))]))]));
     expect(actual).toEqual(EXPECTED_RESERVE);
-    expect(Object.values(GOAL_RESERVE_LINES).reduce((n, subs) => n + count(subs), 0)).toBe(25);
+    expect(Object.values(GOAL_RESERVE_LINES).reduce((n, subs) => n + count(subs), 0)).toBe(41);
     const totals = Object.fromEntries(Object.entries(GOAL_FAMILY_LINES).map(([f, subs]) => [f, count(subs)]));
     expect(totals).toEqual(EXPECTED_TOTALS);
   });

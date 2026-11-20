@@ -58,8 +58,9 @@ import { rareRowOf } from './rareSecrets.js'; // AMENDMENT 3 (item 8): the rare 
 /** @typedef {'short' | 'long'} Vantage */
 /** @typedef {{ kind: 'npc' | 'power' | 'house' | 'chain', id: string }} GoalTarget */
 /**
- * @typedef {{ family: string, kind: string, text: string, target: GoalTarget | null, slots: Rec, refs: string[], crisisNote?: string | null, notes?: Rec[], refused?: boolean, wording: string, call?: number }} Candidate
- * `wording`: the line's WORDING with the town's names masked (GR1, `wordingOf`); `call`: the `cellCandidates` call that built it (its rotation group).
+ * @typedef {{ family: string, kind: string, text: string, target: GoalTarget | null, slots: Rec, refs: string[], crisisNote?: string | null, notes?: Rec[], refused?: boolean, wording: string, call?: number, floor?: boolean, exhausted?: boolean }} Candidate
+ * `wording`: the line's WORDING with the town's names masked (GR1, `wordingOf`); `call`: the `cellCandidates` call that built it (its rotation group);
+ * `floor`: a floor's line (`personalityFloor`); `exhausted`: that floor found its cell and its reserve all printed (GOALS-3 (d)).
  */
 
 /** The keyed fork family the goals draw under (declared in the fork census). */
@@ -751,8 +752,14 @@ const VANTAGES = /** @type {const} */ (['short', 'long']);
  * first held once by someone neither of its house nor tied to it ('twice-same-power'); else (iv) the drawn wording
  * stands ('stands'). A SENTENCE AND ITS MIRROR ARE ONE (the chair's ruling of 10:58 UTC): rungs (ii) and (iii) never take
  * a wording whose one holder filled its name slots with the same values as this card's, in either order (`namesOf`).
+ * GOALS-3 (builder 7; the chair's gate of 12:32 UTC and rulings of 13:17 UTC): NO GOAL SENTENCE PRINTED TWICE IN ONE TOWN.
+ * (a) rungs (ii)/(iii) and the mirror see EVERY holder of the wording (each holding placed so far, and each later repeat
+ * whose pass-one wording it still is), and never take a candidate whose filled text the town prints; (b) rung (iv) stands
+ * on the drawn wording only where its text is nobody's, else takes the first in rotation order whose text nobody prints
+ * (still 'stands', rotated), else the drawn wording stands as 'exhausted'; (d) a floor that repeats walks its cluster's
+ * cell, then its reserve, to the first line nobody prints ('free', rotated: indices in that walk), else 'exhausted'.
  * The receipt names the rung (`receipt.repeat[vantage]`), the pass-one wording (`drawn`) and any
- * move (`rotated: { from, to }`, indices in the group). The floor is never rotated. The presumption ledger records
+ * move (`rotated: { from, to }`, indices in the group). The presumption ledger records
  * each card's FINAL lines, after pass two, in card order, short then long.
  * @param {Rec} settlement the settlement-shaped object at the seam
  * @param {Rec[]} cards the final cast (ranks, allegiances and handlers written)
@@ -845,37 +852,65 @@ export function dealGoals(settlement, cards, relationships, rng, options = {}) {
   });
 
   // PASS TWO (GR1): repeat status from pass one alone; the holders of each wording counted; each repeat takes its rung
-  /** @type {Map<string, Rec[]>} */ const holders = new Map();
-  /** the name values each holder of a wording filled, beside `holders` (a keeper's are unknown: '') @type {Map<string, string[]>} */ const heldNames = new Map();
-  const hold = (/** @type {string} */ key, /** @type {Rec} */ card, /** @type {Candidate | null} */ cand) => {
-    const h = holders.get(key); if (h) h.push(card); else holders.set(key, [card]);
-    const n = heldNames.get(key); if (n) n.push(namesOf(cand)); else heldNames.set(key, [namesOf(cand)]);
-  };
+  /** @typedef {{ card: Rec, names: string, text: string }} Holding a holder of a wording: its card, the name values it filled (a keeper's are unknown: ''), its text */
+  /** the holdings placed so far, by wording @type {Map<string, Holding[]>} */ const holders = new Map();
+  /** GOALS-3 (a): every LATER repeat whose pass-one wording it still is, by wording @type {Map<string, Holding[]>} */ const pending = new Map();
+  /** GOALS-3 (b): every text the town prints now (each placed holding, each repeat still on its pass-one text), counted @type {Map<string, number>} */ const printed = new Map();
+  const add = (/** @type {Map<string, Holding[]>} */ m, /** @type {string} */ key, /** @type {Holding} */ h) => { const l = m.get(key); if (l) l.push(h); else m.set(key, [h]); };
+  const print = (/** @type {string} */ text, /** @type {number} */ n) => { const k = (printed.get(text) || 0) + n; if (k > 0) printed.set(text, k); else printed.delete(text); };
+  const holdingOf = (/** @type {Rec} */ card, /** @type {Candidate | null} */ cand, /** @type {string} */ text) => ({ card, names: namesOf(cand), text });
+  const hold = (/** @type {string} */ key, /** @type {Rec} */ card, /** @type {Candidate | null} */ cand, /** @type {string} */ text) => { add(holders, key, holdingOf(card, cand, text)); print(text, 1); };
   /** @type {Set<string>} */ const prior = new Set();
-  for (const c of cards) if (c && keep.has(String(c.id))) for (const v of VANTAGES) { const t = c.goal?.[v]; if (t) { const key = String(t).trim(); prior.add(key); hold(key, c, null); } }
-  /** @type {Array<{ d: Dealt, v: Vantage }>} */ const repeats = [];
+  for (const c of cards) if (c && keep.has(String(c.id))) for (const v of VANTAGES) { const t = c.goal?.[v]; if (t) { const key = String(t).trim(); prior.add(key); hold(key, c, null, key); } }
+  /** @type {Array<{ d: Dealt, v: Vantage, h: Holding }>} */ const repeats = [];
   for (const d of dealt) if (d) for (const v of VANTAGES) {
     const c = d[v]; if (!c) continue;
-    if (prior.has(c.wording)) repeats.push({ d, v }); else hold(c.wording, d.card, c);
+    if (prior.has(c.wording)) { const h = holdingOf(d.card, c, c.text); repeats.push({ d, v, h }); add(pending, c.wording, h); print(c.text, 1); } else hold(c.wording, d.card, c, c.text);
     prior.add(c.wording);
   }
   const apart = apartIn(ctx);
-  for (const { d, v } of repeats) {
+  /** GOALS-3 (b): a text some card of the town prints now @param {string} text */
+  const isPrinted = (text) => printed.has(text);
+  for (const { d, v, h: mine } of repeats) {
     const drawn = /** @type {Candidate} */ (d[v]);
-    const group = d.groups[v].length ? d.groups[v] : [drawn];
-    const at = Math.max(0, group.indexOf(drawn));
-    const order = group.map((_, k) => group[(at + k) % group.length]).filter((x) => !x.refused);
-    const count = (/** @type {Candidate} */ x) => (holders.get(x.wording) || []).length;
-    // the mirror (10:58 UTC): the one holder filled the name slots with this card's values, in either order
-    const mirror = (/** @type {Candidate} */ x) => { const n = namesOf(x); return !!n && n === /** @type {string[]} */ (heldNames.get(x.wording))[0]; };
-    const once = (/** @type {Candidate} */ x, /** @type {boolean} */ power) => count(x) === 1 && apart(/** @type {Rec[]} */ (holders.get(x.wording))[0], d.card, power) && !mirror(x);
-    /** @type {[string, Candidate | undefined][]} */
-    const rungs = [['free', order.find((x) => count(x) === 0)], ['twice', order.find((x) => once(x, true))], ['twice-same-power', order.find((x) => once(x, false))]];
-    const [rung, taken] = rungs.find(([, x]) => x) || ['stands', drawn];
-    const took = /** @type {Candidate} */ (taken);
-    hold(took.wording, d.card, took);
+    // this repeat leaves the waiting holders: its own pass-one text is no other card's
+    const waiting = /** @type {Holding[]} */ (pending.get(drawn.wording)); waiting.splice(waiting.indexOf(mine), 1);
+    print(drawn.text, -1);
+    /** @type {[string, Candidate]} */ let pick;
+    /** @type {{ from: number, to: number } | null} */ let rotated = null;
+    if (drawn.floor) {
+      // GOALS-3 (d): the floor walks its cluster's cell, then its reserve, to the first line nobody prints; 'exhausted' when none
+      const floor = /** @type {Candidate} */ (personalityFloor(d.card, v, false, isPrinted));
+      const stays = !!floor.exhausted || floor.text === drawn.text;
+      pick = [floor.exhausted ? 'exhausted' : stays ? 'stands' : 'free', stays ? drawn : floor];
+      if (!stays) { const lines = floorLinesOf(d.card, v, false); rotated = { from: Math.max(0, lines.indexOf(drawn.text)), to: lines.indexOf(floor.text) }; }
+    } else {
+      const group = d.groups[v].length ? d.groups[v] : [drawn];
+      const at = Math.max(0, group.indexOf(drawn));
+      const order = group.map((_, k) => group[(at + k) % group.length]).filter((x) => !x.refused);
+      const count = (/** @type {Candidate} */ x) => (holders.get(x.wording) || []).length;
+      // GOALS-3 (a): rungs (ii)/(iii) and the mirror see EVERY holder of the wording, the later repeats still on it included
+      const every = (/** @type {Candidate} */ x) => [...(holders.get(x.wording) || []), ...(pending.get(x.wording) || [])];
+      // the mirror (10:58 UTC): a holder filled the name slots with this card's values, in either order
+      const mirror = (/** @type {Candidate} */ x, /** @type {Holding[]} */ hs) => { const n = namesOf(x); return !!n && hs.some((h) => h.names === n); };
+      // GOALS-3 (a): never a candidate whose filled text a holder prints (a line that names no one IS its sentence; the mirror's
+      // `!!n` let it through), read on the town's printed texts, which hold every holder's
+      const once = (/** @type {Candidate} */ x, /** @type {boolean} */ power) => {
+        const hs = every(x);
+        return hs.length === 1 && apart(hs[0].card, d.card, power) && !mirror(x, hs) && !isPrinted(x.text);
+      };
+      /** @type {[string, Candidate | undefined][]} */
+      const rungs = [['free', order.find((x) => count(x) === 0)], ['twice', order.find((x) => once(x, true))], ['twice-same-power', order.find((x) => once(x, false))]];
+      // GOALS-3 (b): rung (iv) stands on the drawn wording only where its text is nobody's; else the first in rotation order whose
+      // text nobody prints; none: the drawn wording stands, 'exhausted'
+      const walked = isPrinted(drawn.text) ? order.find((x) => !isPrinted(x.text)) : drawn;
+      pick = /** @type {[string, Candidate]} */ (rungs.find(([, x]) => x) || (walked ? ['stands', walked] : ['exhausted', drawn]));
+      if (pick[1] !== drawn) rotated = { from: at, to: group.indexOf(pick[1]) };
+    }
+    const [rung, took] = pick;
+    hold(took.wording, d.card, took, took.text);
     (d.receipt.repeat ??= {})[v] = rung;
-    if (took !== drawn) { d[v] = took; d.rotated[v] = { from: at, to: group.indexOf(took) }; }
+    if (rotated) { d[v] = took; d.rotated[v] = rotated; }
   }
 
   const out = cards.map((card, i) => {
@@ -917,7 +952,9 @@ export function dealGoals(settlement, cards, relationships, rng, options = {}) {
  * `groupOf` orders a rotation group. THE RUNGS, on the WORDING (`receipt[v].wording`, from `goalReceiptsOf`; a keeper's is
  * its text): (i) the first whose wording no card of the town holds; else (ii) the first held once by a card not of its
  * house, not tied to it, sharing no power, and not its mirror (`namesOf`); else (iii) the same with a power shared; else (iv)
- * the first in walk order. None at all: the floor's next cluster (`personalityFloor(card, v, true)`). The intent follows the
+ * the first in walk order whose text nobody prints, else the first, its receipt's rung 'exhausted' (GOALS-3: (ii)/(iii) never
+ * take a text the town prints). None at all: the floor's next cluster (`personalityFloor(card, v, true, printed)`, walking its
+ * cell and its reserve). The intent follows the
  * text; a CRISIS line's note goes to `stressNote` as the deal writes it; the moved card's receipt names the new holding and
  * `refusedBy` ('secret' or 'rare-secret'). The receipts are read from `options.receiptsOf` (the array `dealGoals` returned:
  * the rare deal returns a new array, which carries none), else from `cast`; the returned array carries them, the moved
@@ -961,6 +998,7 @@ export function refuseWantsBesideSecrets(settlement, cast, relationships, option
       const held = new Set(out.filter((x, k) => k !== i && x?.goal?.[v]).map((x) => String(x.goal[v]).trim()));
       // the town's holdings by wording (every card's both vantages, this holding left out), with the name values each filled
       /** @type {Map<string, Array<{ card: Rec, names: string }>>} */ const holders = new Map();
+      /** GOALS-3 (b): every text the town prints, this holding left out @type {Set<string>} */ const printed = new Set();
       out.forEach((x, k) => {
         for (const w of VANTAGES) {
           const t = k === i ? goal[w] : x?.goal?.[w];
@@ -968,6 +1006,7 @@ export function refuseWantsBesideSecrets(settlement, cast, relationships, option
           const rv = rec(rec(receipts[receiptAt.get(String(x.id)) ?? -1])[w]);
           const key = typeof rv.wording === 'string' ? rv.wording : String(t).trim();
           const h = { card: k === i ? card : rec(x), names: rv.slots ? namesOf(/** @type {any} */ ({ slots: rv.slots })) : '' };
+          printed.add(String(t));
           const list = holders.get(key); if (list) list.push(h); else holders.set(key, [h]);
         }
       });
@@ -985,11 +1024,16 @@ export function refuseWantsBesideSecrets(settlement, cast, relationships, option
         walk = walk.some(sameTarget) ? walk.filter(sameTarget) : walk.filter((c) => !aimsAtNamed(c));
       }
       const count = (/** @type {Candidate} */ c) => (holders.get(c.wording) || []).length;
+      // GOALS-3 (a): never a candidate whose filled text the town prints (a line that names no one IS its sentence)
       const once = (/** @type {Candidate} */ c, /** @type {boolean} */ power) => {
         const h = holders.get(c.wording);
-        return !!h && h.length === 1 && apart(h[0].card, card, power) && !(namesOf(c) && namesOf(c) === h[0].names);
+        return !!h && h.length === 1 && apart(h[0].card, card, power) && !(namesOf(c) && namesOf(c) === h[0].names) && !printed.has(c.text);
       };
-      const took = walk.find((c) => count(c) === 0) || walk.find((c) => once(c, true)) || walk.find((c) => once(c, false)) || walk[0] || personalityFloor(card, v, true);
+      // GOALS-3 (b): the fallback is the first in walk order whose text nobody prints; only where none is, the first, 'exhausted';
+      // no walk at all: the floor's next cluster, walking its cell and its reserve (`personalityFloor`)
+      const isPrinted = (/** @type {string} */ t) => printed.has(t);
+      const fallback = walk.find((c) => !isPrinted(c.text)) || (walk[0] ? { ...walk[0], exhausted: true } : null) || personalityFloor(card, v, true, isPrinted);
+      const took = walk.find((c) => count(c) === 0) || walk.find((c) => once(c, true)) || walk.find((c) => once(c, false)) || fallback;
       if (!took) continue;
       noteDrawn(took);
       goal[v] = took.text;
@@ -997,7 +1041,9 @@ export function refuseWantsBesideSecrets(settlement, cast, relationships, option
       if (v === 'short' && took.family === 'CRISIS' && took.crisisNote) note = took.crisisNote; // as the deal writes it
       const k = receiptAt.get(id);
       const prev = k == null ? { id, refs: [] } : rec(receipts[k]);
-      const next = { ...prev, refs: [...arr(prev.refs), ...took.refs], [v]: { family: took.family, kind: took.kind, slots: took.slots, wording: took.wording, refusedBy: hit.rare ? 'rare-secret' : 'secret' } };
+      // GOALS-3: the rung names the new holding: 'exhausted' where it prints a text the town prints, else no rung of the deal's
+      const repeat = { ...rec(prev.repeat) }; if (took.exhausted) repeat[v] = 'exhausted'; else if (repeat[v] === 'exhausted') delete repeat[v];
+      const next = { ...prev, refs: [...arr(prev.refs), ...took.refs], ...(Object.keys(repeat).length || prev.repeat ? { repeat } : {}), [v]: { family: took.family, kind: took.kind, slots: took.slots, wording: took.wording, refusedBy: hit.rare ? 'rare-secret' : 'secret' } };
       if (k == null) { receiptAt.set(id, receipts.length); receipts.push(next); } else receipts[k] = next;
     }
     out[i] = { ...card, goal, ...(note ? { stressNote: note } : {}) };
@@ -1033,15 +1079,34 @@ function uncannyCandidates(kind, ctx, held) {
   return cellCandidates('UNCANNY', kind, String(GOAL_FAMILY_TUNING.uncanny.vantage) === 'long' ? 'long' : 'short', slots, ctx, held);
 }
 
+/** The floor's cluster: the card's own (flaw, dominant, modifier), a refused one skipped where `refuse`, else `caution`. @param {Rec} card @param {boolean} refuse */
+const floorClusterOf = (card, refuse) => {
+  const p = rec(card.personality);
+  return [p.flaw, p.dominant, p.modifier].map((w) => /** @type {Rec} */ (PERSONALITY_CLUSTER_OF)[str(w).toLowerCase()]).find((c) => c && !(refuse && refusedCluster(c))) || 'caution';
+};
+
+/**
+ * GOALS-3 (d): the floor's lines in walk order: its cluster's cell, then that cell's reserve (`GOAL_RESERVE_LINES.PERSONALITY`,
+ * never drawn). @param {Rec} card @param {Vantage} vantage @param {boolean} refuse @returns {string[]}
+ */
+function floorLinesOf(card, vantage, refuse) {
+  const cluster = floorClusterOf(card, refuse);
+  const of = (/** @type {unknown} */ table) => arr(rec(rec(rec(table).PERSONALITY)[cluster])[vantage]).map(templateOf).filter(Boolean);
+  return [...of(GOAL_FAMILY_LINES), ...of(GOAL_RESERVE_LINES)];
+}
+
 /**
  * The floor: the card's own cluster's first line (no draw), held or not. GOALS-1 item 6: where the card's secret refuses its
  * cluster (`refuse`), the next of its clusters in the order the deal reads them (flaw, dominant, modifier), else `caution`.
- * @param {Rec} card @param {Vantage} vantage @param {boolean} [refuse] @returns {Candidate | null}
+ * GOALS-3 (d): given `printed` (whether some card of the town prints a text), the first line of the cell, then of its
+ * reserve, that nobody prints; only where every one is printed, the first line, marked `exhausted`. Every floor is `floor`.
+ * @param {Rec} card @param {Vantage} vantage @param {boolean} [refuse] @param {((text: string) => boolean) | null} [printed]
+ * @returns {Candidate | null}
  */
-function personalityFloor(card, vantage, refuse = false) {
-  const p = rec(card.personality);
-  const cluster = [p.flaw, p.dominant, p.modifier].map((w) => /** @type {Rec} */ (PERSONALITY_CLUSTER_OF)[str(w).toLowerCase()]).find((c) => c && !(refuse && refusedCluster(c))) || 'caution';
-  const cell = arr(rec(rec(GOAL_FAMILY_LINES.PERSONALITY)[cluster])[vantage]);
-  const text = cell.length ? templateOf(cell[0]) : '';
-  return text ? { family: 'PERSONALITY', kind: cluster, text, target: null, slots: {}, refs: [], wording: text } : null;
+function personalityFloor(card, vantage, refuse = false, printed = null) {
+  const lines = floorLinesOf(card, vantage, refuse);
+  if (!lines.length) return null;
+  const free = printed ? lines.find((t) => !printed(t)) : lines[0];
+  const text = free ?? lines[0];
+  return { family: 'PERSONALITY', kind: floorClusterOf(card, refuse), text, target: null, slots: {}, refs: [], wording: text, floor: true, ...(free == null ? { exhausted: true } : {}) };
 }
