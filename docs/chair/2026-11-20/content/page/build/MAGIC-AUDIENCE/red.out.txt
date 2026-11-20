@@ -1,0 +1,41 @@
+[gate-tail] start:  15:19:13 up 49 min,  0 user,  load average: 2.79, 2.97, 3.55 · cores: 4
+
+ RUN  v4.1.8 /home/user/settlement-engine/.claude/worktrees/agent-ae39baf5753ae0b54
+
+ ❯ tests/components/magicAudience.test.jsx (4 tests | 1 failed) 90239ms
+     × made-up documents: a relied-upon village, the same with no house to supply it, a village relying on nothing 472ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/components/magicAudience.test.jsx > (b) for each audience, the chains the line names are printed by that audience's Magic tab > made-up documents: a relied-upon village, the same with no house to supply it, a village relying on nothing
+AssertionError: expected [ …(3) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "made-up, unsupplied [owner]: the Overview names \"Divine & Magical Healing\", the Magic tab prints \"\"",
++   "made-up, unsupplied [player]: the Overview names \"Divine & Magical Healing\", the Magic tab prints \"\"",
++   "made-up, unsupplied [public]: the Overview names \"Divine & Magical Healing\", the Magic tab prints \"\"",
++ ]
+
+ ❯ tests/components/magicAudience.test.jsx:146:22
+    144|     checkAudiences('made-up, unsupplied', madeUpUnsupplied(), failures…
+    145|     checkAudiences('made-up, strong', madeUpStrong(), failures);
+    146|     expect(failures).toEqual([]);
+       |                      ^
+    147|     // The liveness anchor: the supplied village's line names its heal…
+    148|     expect(named).toBe(3);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 3 passed (4)
+   Start at  15:19:14
+   Duration  96.00s (transform 3.79s, setup 53ms, import 5.04s, tests 90.24s, environment 556ms)
+
+[gate-tail] end:  15:20:50 up 50 min,  0 user,  load average: 2.91, 2.98, 3.50
+[gate-tail] full log: /tmp/gate-tail.20080.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

@@ -113,7 +113,9 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
   // supply as the Economics tab's food row names it ("by divine provision"). Only where the word says magic is relied on.
   // PAGE-1 MAGIC: the names are read from one leaf (`magicMeasuresApart.js :: magicRelyNames`), which the Overview's
   // line under the reliance word reads too, so the two pages name what the town leans on in the same words.
-  const relyFor = spokenList(magicRelyNames(settlement));
+  // PAGE-4 MAGIC-AUDIENCE: through the one gate both read (`magicRelyNamesPrinted`, the gates this line already sits
+  // under), so the Overview never names what this tab does not print, for any audience.
+  const relyFor = spokenList(magicRelyNamesPrinted(settlement));
   // PAGE-1 MAGIC (F3c): the headline word is the dial's band (the magic around the town), so a caption says so.
   const headlineScope = magicHeadlineScope(settlement);
   // THE PUBLIC BRANCH (STYLE-RULINGS-2 B10(a), SW-B7b): a shared page prints the lens the
@@ -229,4 +231,4 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
 import { chainPrintName } from '../../../domain/display/chainPrintName.js'; // COHERENCE-AGREE-6 (F1): what a chain prints under
 import { religiousAcceptanceUnderHeresy } from '../../../domain/facts/heresyStance.js'; // HR2 (BAR6-CULTURE): the row reads the heresy flag the Faith tab's line reads
 import { magicNoteShown, magicRoleBandShown, magicRoleHeld, religiousAcceptanceShown } from '../../../domain/display/magicProvisionShown.js'; // X3 (TAIL-DISPLAY-ECON): the card's own note, one home
-import { magicHeadlineScope, magicRelyNames, spokenList } from '../../../domain/display/magicMeasuresApart.js'; // PAGE-1 MAGIC: the reliance names and the headline caption, one home
+import { magicHeadlineScope, magicRelyNamesPrinted, spokenList } from '../../../domain/display/magicMeasuresApart.js'; // PAGE-1 MAGIC: the reliance names and the headline caption, one home
