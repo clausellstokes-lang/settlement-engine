@@ -25,3 +25,16 @@ never `git stash`, no census, never the whole suite, no GIT_* variable in a test
 `sh scripts/gate-tail.sh`, one test process at a time. GREEN AT YOUR TIP: `tests/architecture` whole; every test under tests/ naming
 `vite.config`, `ENGINE_SHARED_DOMAIN` or `FIRSTPAINT2_LAZY_DOMAIN`; `npx eslint` on touched files.
 ANSWER (at most 200 words): the module and the edge, by execution; the cure; shas; red-first receipts; count lines.
+
+THE CHAIR'S GO AND RULINGS (19:54 UTC; recorded 19:56 UTC by `date -u`; they govern where they differ above):
+(R1) `src/domain/facts/rosterGrounds.js` is NOT reached from engine-core: the eager vocabulary (`factVocabulary.js`, `registeredWords.js`,
+`factLayers.js`) declares the three atoms BY NAME only; the code that ANSWERS them (it needs `liveInstitutionNames`) is imported only where
+`factsOf` answers, on the lazy side; `liveInstitutionNames.js` STAYS pinned where it is. (DEPTH-3's read: those three name rosterGrounds only
+in comments and `factsOf.js` is its one importer, so establish by execution how it reaches engine-core and cure THAT; if the cure needs a
+source edit, it moves no behaviour; you may then edit those three and `factsOf.js`/`rosterGrounds.js` only as far as the edge requires.)
+(R2) RED FIRST TWICE: DEPTH-3's build (FIX-B2 and "no prose leaf" red at 2582075ed, green after; beside the line's 1,177,668 / 374,676 /
+314,472 at 8196e5712), and `engineCoreLazyEdge.test.js` WIDENED so its derivation sees this edge: red at 2582075ed, green after. Write in
+your commit message and answer ONE SENTENCE saying what the derivation missed (the chair carries the widened test to the line).
+(R3) No draw moves (DEPTH-3's two-tree proof: 0 non-string differences). (R4) The conflict unit's own tests green at your tip:
+`tests/generators/power/conflictQuarrelPick.test.js`, `tests/domain/facts/factVocabulary.test.js`, `tests/generators/governanceNarrative.test.js`,
+and every test file naming `rosterGrounds`, `factsOf` or `factVocabulary`; tell DEPTH-3 if a test title moved (the lighting census is DEPTH-3's).
