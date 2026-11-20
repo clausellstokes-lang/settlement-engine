@@ -1,4 +1,4 @@
-# FORTUNE-2 hand-back (kept current; last written 2026-11-20 14:01:51 UTC by `date -u`)
+# FORTUNE-2 hand-back (kept current; last written 2026-11-20 15:22:02 UTC by `date -u`)
 
 For a successor (FORTUNE-3): this file and the briefs (`briefs/COMMON.md`, `U2.md` to `U4.md`) are all you need.
 Lane branch `lane/fortune-2-2026-11-20` (taken at 57a79cc2d, FORTUNE-1's hand-over). The chair is
@@ -32,10 +32,11 @@ at most 300 words, with your count (the chair reads the true one; your own runs 
 |---|---|---|---|
 | briefs corrected for FORTUNE-2 | DONE | lane/fortune-2-2026-11-20 | 1b050c590, b079b6a89 |
 | U1 law leaf, dark | MERGED, GREEN (chair accepted 13:17) | merge 2daa80771 of bc3c5cc8e; censuses re-taken 4822cff0b | pushed |
-| U2 fortune | BUILDER OUT (seated ~12:15); WIP = its red test only, prosperity.js not yet changed | local lane/fortune-2-u2-2026-11-20, PUSHED as lane/fortune-2-2026-11-20-u2-wip | d0b3fc4ea (wip) |
-| U3 standing + play-time guard | BUILDER OUT (seated ~12:15); WIP = source edits and both tests, its gates running | local lane/fortune-2-u3-2026-11-20, PUSHED as lane/fortune-2-2026-11-20-u3-wip | 383903a85 (wip) |
+| U2 fortune | MERGED (red re-run 7 failed/9 passed on 4822cff0b); gates running at b21a3a29d | merge 6279d0433 of c48db76b0+2c6835758 | pushed with the lane |
+| U3 standing + play-time guard | MERGED (red re-run 10 failed/24 passed on 4822cff0b); gates running at b21a3a29d; then send "factionDynamics released at <commit>" | merge 8ec9782f6 of df9e4c749 | pushed with the lane |
+| registers after U2+U3 | tuning inventory e5e48cd81 (the chair's ruling 5 done); lighting b21a3a29d (3710 files, 475 parked); wiring unchanged | — | — |
 | readerShapeResolver 260>256 | ANSWERED: the gate's long TMPDIR (see section 3); not U1's, not the line's | — | — |
-| U5 merits of rule (measure + propose) | BUILDER OUT (seated ~14:05) | local lane/fortune-2-u5-2026-11-20 (from f20b80b0a); push as lane/fortune-2-2026-11-20-u5-wip | — |
+| U5 merits of rule (measure + propose) | PROPOSED, sent to the chair ("U5-PROPOSAL 64db7ba3d"); awaiting ruling; build nothing | pushed as lane/fortune-2-2026-11-20-u5-wip (64db7ba3d on 4951522fd) | U5-PROPOSAL.md there |
 | U4 FS7 | after U2+U3 and the line's merge | lane/fortune-2-u4-2026-11-20 | — |
 | re-measure forced on; owner's page re-check; confinement; final hand-back; "FORTUNE <commit>" | after U4 | — | — |
 
