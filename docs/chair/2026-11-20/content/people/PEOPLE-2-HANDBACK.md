@@ -1,4 +1,4 @@
-# PEOPLE-2 hand-back (kept current at every push; last written 2026-11-20T17:27Z)
+# PEOPLE-2 hand-back (kept current at every push; last written 2026-11-20T18:04Z)
 
 Seat: PEOPLE-2 of the seventh chair (chair session_019yED1SUxGVHyjQnoqoFvQ8; this seat session_019yED1QfbBhtLaDuWfGxc42). Assignment: `git show origin/lane/chair-2026-11-08:docs/chair/2026-11-20/seventh/prompts/PEOPLE-2.txt` (it binds `PEOPLE-1.txt` with my names). Branch: `lane/people-2-2026-11-20`, started on c71e403f4, fast-forwarded to PEOPLE-1's docs tip 2783260be (src identical to the working line 43ab0f5eb). Builder branches: `lane/people-2-<unit>-2026-11-20`.
 
@@ -13,6 +13,13 @@ PEOPLE-1 keeps B1 (structuralPosition, then activeConstraint: `npcStructure.js`,
 | factions[].desc + factionRelationships[].narrative | PROPOSAL-factions-desc.md, PROPOSAL-factionRelationships-narrative.md (760384abf) | APPROVED 17:21 with changes | B2 brief `briefs/P2-B2-powerLines-BUILD.md`, cut at THE LANE IS YOURS (after merging kernel-mix and picking M6's scripts); second tranche: M6 (`briefs/P2-M6-power-tranche2-AUTHOR.md`, 686d62e9d) on `lane/people-2-m6-2026-11-20`, lines to the chair, then a later unit |
 | settlementReason[] | PROPOSAL-settlementReason.md | APPROVED 17:21 with changes | B3 brief `briefs/P2-B3-settlementReason-BUILD.md`, cut at THE LANE IS YOURS; `narrativeGenerator.js` is the goals lane's: build on the commit the chair names |
 | founding (foundedBy, overcoming) | PROPOSAL-founding.md (M3), not sent | IN SCOPE (prints through the traditions card); noble founder where no lord rules: LEAVE IT | M5 measure (`briefs/P2-M5-founding-MEASURE.md`, 9110b9861) on `lane/people-2-m5-2026-11-20` |
+
+## Since 17:31 (newest last)
+- 17:33 kernel-mix MERGED at 8b0618de7 on the chair's word of 17:32 (proseHash 11/11 green).
+- 17:38 the chair: BUILD B2 FIRST; B3 on the working line after the goals lane lands (named by the chair), else 43ab0f5eb's text once B2 merges; B3's argument on its own line.
+- M6 returned: e44ab2711, picked as 6a137f274 (LINES-power-tranche2.md; 78 wordings; §F four faults in ruled lines). Sent "PEOPLE-LINES power-tranche2 6a137f274" 17:58.
+- M5 returned: a8dd55a0f, picked as 72ddf15a4 (PROPOSAL-founding.md §0; the rite lives only on lane/trad-4 7955e5304; 20 founder lines reworded for grammar). Sent "PEOPLE-LINES founding 72ddf15a4" 17:58.
+- B2 CUT at a37dde2ce on lane/people-2-b2-2026-11-20 (worktree scratchpad/wt-b2), with five ruled wordings HELD OUT (closingGap 1-2, arcaneInShadow 2-3, clergyAhead 2) until the chair rules; relay the ruling to the builder by message.
 
 ## Next
 1. THE LANE IS YOURS: merge `lane/kernel-mix-2026-11-20` (bd42d63c7) into my lane; pick M6's scripts; cut B2 and B3 (two builders, path-disjoint; one heavy gate at a time).
