@@ -1185,3 +1185,11 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   whether `publish_map` with the editor's defaults SUCCEEDS and stores the chronicle or RAISES (the reader executed
   the guard as refusing any key matching `.*chronicle.*`); it decides what the owner is told about production
   today. Item 5 (the event-type table, with the chronicle's cure inside) is at eafece56a.
+- 03:55 UTC · **REVIEW-VEIL-11: THE COLD READ OF "V10-2 cabdfaa69" HOLDS** (its message of 03:53 UTC; `v102a.probe.jsx`): the
+  src diff read; its own red (18 failed, 12 passed at 81dd06d7e) and green (30 of 30); the rewritten switch test is
+  NOT weaker ((e) opens by hand, to a fixed point, every family eye the screen offers; (g) is new; (b) and (c) as
+  re-keyed); ITS ATTACK proves what the tests took for granted: every family candidate the screen does not offer
+  (292 on the new shape, 389 on master's; 96 copies each, DM off and on), flipped alone under Show-all and under
+  Hide-all, changes the applier's output for 0; every offered part is hidden after Hide-all (1,296 and 1,237). No
+  stored Show-all delta can exist on production (master holds no switch). VEIL-21 merges it at a stage boundary.
+  THE READER'S COLD READS SO FAR, ALL HOLDING: B/C/D; VR17; DOORS as built; V10-2.
