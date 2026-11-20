@@ -1,9 +1,10 @@
 // goalHashes.mjs — THE BORN TOWNS' GOALS, HASHED (GOALS-3, builder 7, 2026-11-20; the chair's test (u)): per card of the goal
 // measure's 300 towns (seeds `hxd-<size>-<i>`, i < 50, every size of `tests/components/pageCensusWalk.shared.mjs :: SIZES`, born
 // through the pipeline at the default settings after `loadGenerationLawPayloads()`), a hash of each vantage's (text, intent).
-// Read by tests/generators/people/goalSentencesOnceInTown.test.js (u) against `goal-hashes-d3937c3f8.json`, which this
-// script wrote ONCE, run against an archive of d3937c3f8 (node_modules linked):
-//   node tests/fixtures/goalHashes.mjs <tree> tests/fixtures/goal-hashes-d3937c3f8.json
+// Read by tests/generators/people/goalSentencesOnceInTown.test.js (u) against `goal-hashes-d8b174237.json` (GOALS-4, builder
+// 10: re-taken at the wants' build's base by the test's own door), which this script wrote ONCE, run against an archive of
+// d8b174237 (node_modules linked); `goal-hashes-d3937c3f8.json` (GOALS-3, builder 7) stays as the record of the cure's base:
+//   node tests/fixtures/goalHashes.mjs <tree> tests/fixtures/goal-hashes-d8b174237.json d8b174237
 import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
