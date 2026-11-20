@@ -1952,3 +1952,51 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   its prompt file), SEAT-2 and TITLES-1. TRAD-1 is session_019yED1RRHjF81TqPh6Hu42b (seated 06:22 UTC).
   FROM HERE THE CHAIR DECIDES AND TELLS; the owner's own acts (the signatures and the light, the merge, the deploy)
   are asked once, at the close.
+- 06:29 UTC · **FOUR REPORTS RULED: A LIVE FAULT ON SHARED PAGES (TRADITIONS); THE NAMES' CONFINEMENT PROVEN; THE CRISIS CAST'S
+  COUNTERPARTS ORDERED; TWO BUILD TRAPS CAUGHT IN THE SEAT'S BRIEFS.**
+  **(1) TRAD-1's SURPRISE, EXECUTED ON 20 BORN TOWNS: ON A SHARED PAGE THE TRADITIONS TAB SHOWS A DIFFERENT SET THAN THE
+  OWNER'S (0 of 20 equal).** `traditions/genesis.js :: deriveFoundingTraditions` seeds from `_seed ?? id ??
+  identity.seed`; `publicSafe.js :: toPublicSafe` strips `_seed`; the stored mirror `traditions` is not on the
+  top-level allowlist; the reader's tab (`OutputContainer` shows it under the player view, no gate) re-derives from
+  `id`. A WRONG SET, NOT A LEAK; live on master. Its corrections of the brief stand (no `src/domain/veil/` on the
+  line; the veil lives in `display/galleryVeil.js` and `people/cardVeil.js`). **CTR9 RULED:** by migration 210's own
+  precedent (`display/publicProse.js`: drawn owner-side at every save, the seed never travels) THE OWNER SIDE DRAWS
+  THE SET INTO `publicProse` AS TEXT (each rite's name, element, window line and a READER'S description; in a campaign
+  the stored mirror is the source where the record holds one); THE READER'S TAB READS THAT TEXT AND NEVER DERIVES FROM
+  `id`; a page saved before this shows no set at all. NO SQL (read in 210: `publicProse` is on the top-level
+  allowlist; deeper levels keep the recursive private-token denylist, so the new keys must match no private token:
+  the round trip through the server's sanitizer proven in a born test). THE READER'S DESCRIPTION NEVER NAMES, BY CLASS
+  AND WHATEVER IS HIDDEN, a house of the hideable class, a criminal or hidden power, or a person of either: so no byte
+  of the drawn text depends on what a DM hides: proven born by inversion. It may edit `publicProse.js`,
+  `publicProseCompose.js` and the reader branch of `TraditionsTab.jsx`; never `publicSafe.js`, `galleryVeil.js`,
+  `cardVeil.js` or `supabase/`. VEIL-22 and REVIEW-VEIL-11 are told (the joined tree's gate must show the new
+  sub-path as not differing; the reader has its attack list). TOLD TO THE OWNER IN PLAIN WORDS THE SAME TURN.
+  FOR THE OWNER'S LIST: an old shared page shows no festivals until it is saved again.
+  **(2) NAMES-2:** item 2 done in its tree (both presumption walkers 59 of 59 from 4 red; three source lines restored
+  byte-identical, the article carried in the value). **THE CONFINEMENT CHECK, EXECUTED, NO FINDING: between the base
+  85fccf898 and its tree, on the 525 golden and the 720 census documents: 0 non-string differences (no number, id,
+  name, key, key order or list length); 46,738 changed strings in 19 prose fields, each differing only by names,
+  articles, pronouns and roles (a planted control flags 98 per cent); rendered, 2,852 changed lines, all names-only, no
+  view's line count moved; the moved hall line does not reproduce and the variant draws never key on text.** THE
+  LANDING IS DECIDED: yes, once its list is done. The verb agreement measured (5 of 1,724 stored subject readings; 24
+  of 460 rendered) and ORDERED BUILT through the existing `pluralPowerName`. One more stored figure named
+  (`espionageDormancyFence` FENCE 1's driven golden). It had not committed, still believing itself blocked: told
+  again that the merge is withdrawn and its own commits and pushes are its to make.
+  **(3) FRAME-2: the audience gate merged green (bf7193572); weight building. CF10's PROPOSAL** (e200ef2dc; 360 towns
+  in crisis, 24 of each of 15 kinds): 9 kinds are thin (the occupier's governor is the face in 24 of 24; a commander
+  instigates a slave revolt in 21 of 24; the usual three hold 94, 78 and 68 per cent of the named people in wartime,
+  monster pressure and siege; the instigator is absent in half of four kinds; the debt's cast never names the
+  creditor). **RULED:** the two render-only cures (the infiltration's outside hand reached through an innkeeper,
+  never named; the creditor named on the crisis page) built in its lane; AND THE STORED ONES THAT ARE THE OWNER'S OWN
+  EXAMPLES BUILT BEFORE THE DEPLOY, each one cause, one commit, after its core list: P1 the occupier's face is
+  sometimes another foreigner or the record-keeper; P2 a trade's master treats in a siege or a debt; P3 the revolt's
+  own leader instigates and defence gaps are filled from the record; P4b the criminal power as the creditor where the
+  record holds one of weight. Every face from the record with its reason; no new draw that moves another town or
+  role; a town not in that crisis byte-identical. P5 and P6 (instigators, profiteers) after the deploy. For the
+  security reader: the new kinds of holder a stored cast role can carry, listed in its hand-back.
+  **(4) SEAT-2's SECOND READ OF THE BRIEFS (read in the code): two cures, forwarded to SEAT-1 before U2 and U3
+  dispatch:** `seat/seatTable.js` is imported by first-paint `rulingPower.js`, so it stays data with zero-import reads
+  (an import of `cardVeil.js` closes a module cycle; of `powerSupport.js` pulls a lazy module into first paint); the
+  holder leaf reads `seatHolder.js :: seatCandidatesOf` and filters `ousted` itself (through `powerStrata.js` it
+  would close a cycle once the contest imports the holder), and the two new leaves are pinned in
+  `vite.config.js :: FIRSTPAINT2_LAZY_DOMAIN`. The resolver's agreed name is `officeTitleOf`.
