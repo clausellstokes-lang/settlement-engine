@@ -1,4 +1,23 @@
-# FORTUNE close worklist: items (b), (c), (d) — read-only reading
+# FORTUNE close worklist (the flip's): current status first, then FORTUNE-3's reading of (b), (c), (d)
+
+## STATUS (FORTUNE-4, last written 2026-11-20 20:22:15 UTC by `date -u`)
+
+THE OWNER (~19:13 UTC): the law SHIPS LIT. The flip of the default is ONE unit of the CHAIR'S, at the close, on the joined
+tree, with the re-signing of the stored figures (the owner's hand). No seat flips a default. Each item below says who owes it.
+
+| item | state | owed by |
+|---|---|---|
+| (a) the merits on a shared read | CLOSED by the chair's 19:33 and 19:38 rulings: THE MERITS DO NOT DEPEND ON THE RUNG; every input served unchanged on every shared read; the principled ruler GOES. Why no key on a list could have veiled a rung-dependent merit: the record invariant `V-LEGIT-SUM` (`src/domain/edit/recordInvariants.js`) holds score = neutral base + Σ breakdown, so the points ride the score, the band, the multipliers and every word read from them. Nothing owed by the veil lane for the merits. | U5a (its red first: a captured and an uncaptured place, equal in every served band, carry the same merits and score) |
+| the veil's three gates, for the record | EXECUTED (FORTUNE-4's census, a49838e67): a planted `breakdown.merits` passes `src/domain/display/publicSafe.js :: publicVeilPass` (and `toPublicSafe`), its SQL twin `_gallery_sanitize_public_json` (net-current migration 210) and `src/domain/display/galleryVeil.js` (a curatable layer that skips unmarked shares). Safe only because of (a). The briefs' old paths (`src/domain/veil/`, `src/domain/publicSafe.js`) do not exist. | — |
+| (b) the 74 reds, the 11 that change meaning, the 7 registers | LISTED below (FORTUNE-3); the ~429 unrun `birthConfig` files are counted ONCE, on the joined tree, by the chair's flipped whole-suite run (the chair, 20:03). FORTUNE-4's census adds: the page census moves 12 of 12 births lit (EXECUTED). | the close (the chair) |
+| (b) THE GOLDEN MASTER pins law 1 and nothing pins law 2 | RULED (20:03): a LIT corpus (births through `birthConfig`) is added BESIDE the old one at the close and signed by the owner with the rest; the old corpus stays as the saved towns' control. The same holds for the corpora built from `goldenCorpus` (B2.5) and for the confinement's 525/720 (they birth law 1 unless the instrument goes through `birthConfig`). | the close |
+| (c) a saved town keeps its law | RULED (20:03): THE LANE'S, NOW, not the flip's: unit SAVED-TOWN (`briefs/SAVED-TOWN.md`, the twin of the who-rules lane's SAVED-SEAT; the two fold into one test over `GENERATION_LAWS` at the join). "Apply Saved Configuration & Regenerate" and the full reroll are BIRTHS, PINNED AS BIRTHS, not cured; the surveyor's unminted preview stays law 1, pinned as ruled; a path that re-stamps a saved town without being a birth is a FINDING (STOP). THE LEGACY EDGE has TWO shapes, both measured by the unit: a record with NO `config` at all, and one with `_config` but no `config` (each falls back to the store's form config in `regenSectionAction`). | FORTUNE-4 (SAVED-TOWN, builder seated 20:2x UTC) |
+| (d) the one new public key | `config._fortuneLawVersion` (until U5a: then also `publicLegitimacy.breakdown.merits`, rung-free by (a)); everything else shifts values on existing keys. | listed |
+| FIRST PAINT | `fortuneLaw.js` rode eager engine-core by `vite.config.js :: computeEngineSharedDomain`, by no import chain; RULED (19:44) U6 = excise AND pin to its own chunk (probe C: first paint raw -1,493). The lane's size account: `FORTUNE-4-HANDBACK.md` section 3. | FORTUNE-4 (U6, builder seated) |
+
+---
+
+## FORTUNE-3's READING (as committed at 86673adc1)
 
 Tree: /home/user/settlement-engine, branch `lane/fortune-3-2026-11-20`, tip 1649752f8. No repo file was touched.
 How the flip was measured: a scratch vitest config and setup file (scratchpad `lit.config.mjs` and
