@@ -313,6 +313,33 @@ describe('traditionDescriptionFrames — THE CRISIS DIMENSION (CTR10; TRAD-4 uni
   });
 });
 
+/** A form of "keep" (kept, keep, keeps), counted by occurrence. */
+const KEEP_FORMS = /\b(kept|keep|keeps)\b/gi;
+/**
+ * THE FIRST SENTENCE SAYS "KEPT" ONCE (TRAD-4 unit 9, unit 6's finding): every lead × every gloss the table can join
+ * (twins included on both sides, since a twin is printed), named "lead × gloss" where the joined sentence holds a form
+ * of "keep" more than once ("A feast day kept by custom that is kept for what the fields give.").
+ * @param {ReadonlyArray<string>} leads @param {ReadonlyArray<string>} glosses
+ */
+const keptTwice = (leads, glosses) => leads.flatMap((lead) => glosses
+  .filter((gloss) => (`${lead} that ${gloss}.`.match(KEEP_FORMS) || []).length > 1)
+  .map((gloss) => `${lead} × ${gloss}`));
+
+describe('traditionDescriptionFrames — no first sentence says "kept" twice (TRAD-4 unit 9)', () => {
+  it('no lead joined to any gloss (every act\'s pool and every element\'s pool, twins included) holds a form of "keep" more than once', () => {
+    const leads = Object.values(ACT_LEADS).flat().map(textOf);
+    const glosses = Object.values(ELEMENT_GLOSS).flat().map(textOf);
+    expect(leads.length * glosses.length).toBeGreaterThan(0);
+    expect(keptTwice(leads, glosses)).toEqual([]);
+  });
+
+  it('RED FIRST: a clashing pair planted is named; a lead or gloss with one "kept" alone is not', () => {
+    expect(keptTwice(['A feast day kept by custom', 'A vigil'], ['is kept for what the fields give', 'honours the river', 'keeps faith with the old ways']))
+      .toEqual(['A feast day kept by custom × is kept for what the fields give', 'A feast day kept by custom × keeps faith with the old ways']);
+    expect(keptTwice(['A vigil'], ['is kept under the stars'])).toEqual([]);
+  });
+});
+
 /** THE OUTCOME LAW: a word that says what became of a rite this year (the simulation's own record, `lastOutcome`). */
 const OUTCOME_WORDS = /\b(this year|last year|this season|triumph\w*|failure|failed|cancel\w*|set aside|troubled|well kept|modestly|was held|was kept|went well|went badly|lapsed|abandoned|no longer|not held)\b/i;
 const outcomeViolations = (strings) => strings.filter((s) => OUTCOME_WORDS.test(s));
