@@ -5597,10 +5597,10 @@
       "lines": 6
     },
     "ledger:npcData:NPC_FACTION_LOYALTY": {
-      "top1": 0.15,
-      "top5": 0.3109,
+      "top1": 0.0955,
+      "top5": 0.2277,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
-      "lines": 40
+      "lines": 70
     },
     "ledger:npcData:NPC_HOOK_SIBLINGS": {
       "top1": 0.8771,

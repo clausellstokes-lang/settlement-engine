@@ -99,10 +99,16 @@ describe("FAULTS-PEOPLE 14e · a trade's hook is not dealt to a card that keeps 
   }, 600_000);
 
   it('NEGATIVE (C5328, C5358): a castellan and a watch commander on the merchant oligarchy keep their trade lines', () => {
-    const s = born('bar0-city-under_siege+famine-rand-47');
+    // 2026-11-20 (DEPTH-2 hooks, the chair's word of 14:50 UTC): re-keyed bar0-city-under_siege+famine-rand-47 -> -62 (the
+    // economy pool grew 24 -> 38, so 47's castellan now draws a line true of any holder); 62 is the one city of rand-0..99 at
+    // this tip whose castellan and watch commander, of a standing force's house on a seat of trade, both hold a trade line
+    // beside a garrison commander. The expected lines are computed from the pool (its rows 25 and 30), never quoted.
+    const s = born('bar0-city-under_siege+famine-rand-62');
     const hookOf = (/** @type {string} */ role) => plotHookText(s.npcs.find((n) => n.role === role)?.plotHooks?.[0]).trim();
-    expect(hookOf('the castellan')).toBe("A business rival has offered them a partnership with terms so good it must be a trap. They can't find the trap.");
-    expect(hookOf('the watch commander')).toBe('A buyer has paid them in advance for a whole season of goods, far above the price, and will not say what the goods are for.');
+    const economyRow = (/** @type {number} */ i) => plotHookText(NPC_DATA.NPC_FACTION_LOYALTY.economy[i]).trim();
+    expect(tradeLines().has(economyRow(25)) && tradeLines().has(economyRow(30)), 'anchored: both expected rows are trade lines').toBe(true);
+    expect(hookOf('the castellan')).toBe(economyRow(25));
+    expect(hookOf('the watch commander')).toBe(economyRow(30));
     // C5296 beside them: the garrison commander (one seat, the Garrison Bloc) no longer holds the market's price-fixing
     expect(hookOf('the garrison commander'), 'the garrison commander keeps one hook').not.toBe('');
     expect(hookOf('the garrison commander')).not.toMatch(/price-fixing/); // anchored: the card's one hook is pinned non-empty on the line above, beside its two siblings printed in full
