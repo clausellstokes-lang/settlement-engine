@@ -1,6 +1,6 @@
 # SAME-2 HAND-BACK (kept current at every push)
 
-Last written: 2026-11-20 20:52 UTC.
+Last written: 2026-11-20 20:57 UTC.
 
 SEAT: SAME-2 of the seventh chair (session_019yED1SUxGVHyjQnoqoFvQ8). Prompt: `git show origin/lane/chair-2026-11-08:docs/chair/2026-11-20/seventh/prompts/SAME-2.txt` (SAME-1.txt is the assignment, renamed). Seated 17:49 UTC beside SAME-1; THE LANE IS YOURS at 36c5214d0 (the chair, 18:52). Branch `lane/same-2-2026-11-20`. Read SAME-1-HANDBACK.md for everything before 18:52 (the standing orders hold).
 
@@ -38,3 +38,5 @@ OPEN FOR THE SUCCESSOR: (a) CAUSES 3411c9c83 (lane/page-7-2026-11-20) by the doo
 
 THE CHAIR, 20:37: THE LINE MOVED to 062504aa8 (point 85: the arrival paragraph's deepened pools; a secret that fits its holder): MERGED here at a966c0bf9 (one manifest conflict: all rows kept; no src file differs from the line). ON THE MERGED TREE the hideable walker reds ONE arm (RULE 2: a new ARRIVAL_SCENES::port line needs `docks`, unlisted): brief R (`SAME-2-REMEASURE-BRIEF.md`, 2badb528f), builder on `lane/same-2-remeasure-2026-11-20` (/home/user/same2-rm): unit 0 the house list re-taken; unit 1 the register re-taken at this tree, the arrival and secret rows before -> after (the door's first landed proof) to the chair, one line each. THIS LANE IS NOT PUSHED past fb284e198's hand-back until R's unit 0 is merged.
 THE CHAIR KEEPS: `docs/chair/2026-11-20/seventh/ci/LINE-NOW.md` (the line's tip, figures, known reds) beside `RED-AT-LINE.tsv`; THE RULES FOR EVERY LANE: `docs/chair/2026-11-20/seventh/prompts/COMMON-RULES.txt` (both on origin/lane/chair-2026-11-08). SAME-3: read COMMON-RULES.txt, then this hand-back whole.
+
+R UNIT 0 MERGED 90a3be26e (pushed): one hand house row added (ARRIVAL_SCENES::port, docks); RULE 1 and the bank unmoved; walkers green 80/80 on the tip with the line 062504aa8. THE CHAIR, 20:53: FINISH BEFORE STARTING (the weekly limit warns; resets 2026-11-24 15:00 UTC). HELD for the chair's word: R UNIT 1 (the register re-taken at 062504aa8, two renders, the arrival and secret rows before -> after; builder R stopped, worktree /home/user/same2-rm, brief `SAME-2-REMEASURE-BRIEF.md`). THE LANE IS AT REST.
