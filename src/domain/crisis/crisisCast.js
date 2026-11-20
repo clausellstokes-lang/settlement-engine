@@ -460,6 +460,7 @@ export const CRISIS_LINKS = Object.freeze([
  * @property {string=} id
  * @property {string=} name
  * @property {string=} role
+ * @property {unknown=} gender the person's own (FRAME-2 · B10: a person's reason says "her", "his", else "their", never "its")
  * @property {unknown=} power
  * @property {Array<{ power: string, rank: 1 | 2 | 3 | null, share?: number }>=} memberships
  * @property {{ kind?: string, key?: string, title?: string } | null=} institution
@@ -568,9 +569,15 @@ function memberOfAny(n, powers) {
   return membershipsOf(n).some((m) => powers.has(m.power));
 }
 
-/** @param {CastNpc} n @param {CrisisRole} role @param {string} reason @returns {CastRow} */
-function npcRow(n, role, reason) {
-  return { role, kind: 'npc', id: str(n.id) || str(n.name), name: str(n.name), reason, temporary: !!n.temporary };
+/**
+ * A row held by a PERSON. FRAME-2 · B10: a reason whose vocabulary key is of `HOLDER_ITS_REASONS` says the person's own
+ * possessive where the vocabulary says "its" (`personReason`); every other reason is stored as the vocabulary has it.
+ * @param {CastNpc} n @param {CrisisRole} role @param {string} reason
+ * @param {string} [key] the vocabulary sentence the reason was resolved from (a declared sibling's original); the reason itself by default
+ * @returns {CastRow}
+ */
+function npcRow(n, role, reason, key = reason) {
+  return { role, kind: 'npc', id: str(n.id) || str(n.name), name: str(n.name), reason: personReason(reason, n, key), temporary: !!n.temporary };
 }
 /** @param {CastFaction} f @param {CrisisRole} role @param {string} reason @returns {CastRow} */
 function factionRow(f, role, reason) {
@@ -701,7 +708,8 @@ export function bruntCandidates(s, kind, stakes) {
       const members = membersOf(s, factionName(f)).reverse(); // the least powerful first
       const least = leastSayOf(members);
       const touching = members.filter((n) => base.role.test(str(n.role)));
-      for (const n of touching) out.push(npcRow(n, 'brunt', resolveSibling(CAST_REASONS.bruntBase[sys] || least, BRUNT_SIBLINGS, defence)));
+      const said = CAST_REASONS.bruntBase[sys] || least;
+      for (const n of touching) out.push(npcRow(n, 'brunt', resolveSibling(said, BRUNT_SIBLINGS, defence), said));
       for (const n of members) if (!touching.includes(n)) out.push(npcRow(n, 'brunt', least));
       out.push(factionRow(f, 'brunt', resolveSibling(CAST_REASONS.bruntBase[sys] || CAST_REASONS.bruntLeast, BRUNT_SIBLINGS, defence)));
     }
@@ -1349,6 +1357,42 @@ export const CAST_CRISIS_SIBLINGS = Object.freeze({
 
 /** The brunt draw's sibling sets: the defence sets and the crisis ones. */
 const BRUNT_SIBLINGS = Object.freeze({ ...CAST_REASON_SIBLINGS, ...CAST_CRISIS_SIBLINGS });
+
+/**
+ * ⭐ A PERSON IS NEVER "IT" (FRAME-2 · B10; the chair's ruling of 2026-11-20: "a person takes the pronoun of that person's
+ * own `gender`, else 'they'; nothing else in those lines moves"). THE CLOSED FORM: the vocabulary's sentences whose one
+ * "its" is the HOLDER's, and so the sentences a row held by a person may carry that would call the person "it":
+ *   - the waverer's `waverer` ("its power could go either way"), cast only on a person (wavererCandidates);
+ *   - the instigator's `instigatorGains` ("its power gains from the crisis"), on a power's member as on the power;
+ *   - every brunt sentence of `bruntBase`, on a member as on the power; its declared sibling (BRUNT_SIBLINGS: "its people
+ *     stand guard", "the strain falls first on its people", "its houses are where the crisis is felt first") is read by
+ *     the key it was drawn from (npcRow's `key`), so no pool is unwrapped here (the strip ban).
+ * NOT `bruntBase.public_legitimacy`: its "its" is the house's, which the sentence names first (SW-6, B3). Nor any sentence
+ * whose "it" is the seat, the crisis or the occupation, each named in the sentence itself.
+ * Each sentence, and each sibling, holds "its" once. On a person's row (npcRow) that "its" is the person's own
+ * possessive, filled where the row is written: "her" for `gender` female, "his" for male, else "their" (a possessive, so
+ * no verb moves). A row held by
+ * a POWER or a house keeps "its" (factionRow; the institution rows). The words are the vocabulary's own: no new sentence,
+ * no draw, and a reason no rename reaches (factionRename.js's law) still names nobody.
+ * @type {ReadonlySet<string>}
+ */
+const HOLDER_ITS_REASONS = new Set([
+  CAST_REASONS.waverer,
+  CAST_REASONS.instigatorGains,
+  ...Object.values(CAST_REASONS.bruntBase).filter((text) => text !== CAST_REASONS.bruntBase.public_legitimacy),
+]);
+
+/**
+ * The reason as a person's row stores it: a reason drawn from a sentence of the closed form says the person's own
+ * possessive for the holder's "its"; any other is returned unchanged.
+ * @param {string} reason @param {CastNpc} n @param {string} key the vocabulary sentence it was drawn from
+ * @returns {string}
+ */
+function personReason(reason, n, key) {
+  if (!HOLDER_ITS_REASONS.has(key)) return reason;
+  const g = str(n.gender).toLowerCase();
+  return reason.replace(/\bits\b/, g === 'female' ? 'her' : g === 'male' ? 'his' : 'their');
+}
 
 /**
  * The resolution options for a cast reason: the record's facts (the defence home), the ledger's
