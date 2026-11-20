@@ -2307,3 +2307,51 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   ALMOST WHOLLY (a calm village's ruler Contested in 72%, a calm metropolis's Endorsed in 92%), so W1 of the session
   sheet's weight is nearly always "on" in a village and nearly never in a city: FRAME-3's count by tier (0, 8, 15, 5,
   12, 18) already holds that effect; it is a tuning matter for after the deploy, with the owner's signature.
+- 08:04 UTC · **SEVEN MESSAGES READ LATE (they queued while the chair answered the owner), EACH ACTED ON; NAMES-3 SEATED; VEIL-24's
+  PROMPT.** NAMES-3 SEATED 08:01 (session_019yED1RrghGsaftCXrqjUeh; `lane/names-3-2026-11-20` from the line at
+  e356c94f; `prompts/NAMES-3.txt`). "BUILD-ON at e356c94f" sent to SEAT-2 with the known reds by name and the law
+  that follows from them (the golden is red already, so every unit proves its confinement between its base and its
+  tip; while the seat's law is dark: zero differences). The line's move told to FRAME-3, TRAD-2, TITLES-2.
+  TRADITIONS: TRAD-1 "TRAD-WIP 2cc20afb1, HANDED OVER" (most of CTR10 in; six of eight lint cures; strict, ratchet,
+  eslint 0; `tests/lint` 218 of 220, two reds named: `observedShapeReaders` and the lighting census). To TRAD-2
+  (08:00): "THE LANE IS YOURS at 2cc20afb1"; its first duty is to read what TRAD-1 changed in the SHARED mechanism
+  (`src/domain/facts/drawDeclared.js`, `factVocabulary.js`) and prove no existing caller's result moves.
+  THE SECURITY READER (REVIEW-VEIL-12, 07:39 and 07:58): instruments re-made on its own chain (PostgreSQL 16 on a
+  unix socket; three chains: the lane, R2's base, the unmerged R4), pushed at 484474c3f then 6ce1f59f0; THE BITE
+  PROVEN (its predecessor's probe red at R2's base: eight raw measures served 24 of 24; green at the lane: 0 of 24);
+  the tile's stability still red at the lane (21 of 24), as expected until the doors' merge (VR44). ITS OWN NEW
+  INSTRUMENTS: a TRANSITIVE volatility catalogue (red at dfa031f3e on `_gallery_veil` and three public readers) and a
+  re-key probe through named prepared statements. ITS PRE-MEASURES: (1) at R4's branch a card with a NUMBER id and a
+  tie to it is served as itself, 64 of 64; (2) TEN PREPARED READS DIFFERED EVEN WITH THE FUNCTION IMMUTABLE: the
+  prepared path cannot be made to red: THE CHAIR'S RULING ON THE SALT IS AMENDED: THE CATALOGUE IS THE PROOF AND THE
+  RED (a function that draws randomness, and every function reaching it, is VOLATILE); the prepared executions stay
+  as a guard; (3) at the lane before R3 the guild hidden houses raised is served in 6 of 6 such towns, its name also
+  in people's goals and six memberships with Reveal DM on; shares 92 and 93 where a power left.
+  THE VEIL'S OWNER (VEIL-23, 07:40) ON THE R4 CURE (a4b89bf9d): the salt cured (twelve functions, none immutable or
+  stable); numeric ids re-keyed; the cost bound holds (468 against 501 ms). ITS THREE STOPS, RULED 08:02: (1) AS IT
+  RULED: ids inside a card's own ties re-keyed in both engines, red first, a plant with per-card ties; (2) VR47, THE
+  HONORIFIC: the pick ("Master Apothecary" or "Apothecary", `src/data/faceHonorifics.js`, seeded today by the card's
+  id and its institution key) changed with every read once ids are re-keyed. READ IN THE CODE BY THE CHAIR: display
+  only; every form of a pool means the same office; the header states the owner's intent of 2026-11-07 ("one card
+  reads one form on every surface"). RULED: THE PICK IS A FUNCTION OF WHAT EVERY READ SERVES (name and title; gender
+  for the gendered form) ON EVERY PAGE, THE OWNER'S INCLUDED; never the id, never the institution key (a hidden tie
+  would shade the pick); one helper; a served per-person seed REFUSED. FOR THE OWNER'S LIST: on an older town some
+  people's weighty title changes once; (3) AS IT RULED: the page does not re-key a served body; `galleryServerVeil`
+  re-stated under VR46; the switch one salt. VEIL-23 READS 279,325 TOKENS AT 08:01 (47 minutes old; it was told to
+  write PART 24 so that a successor needs it and the briefs only). `prompts/VEIL-24.txt` WRITTEN; seated at once.
+  A JOIN HAZARD CHECKED AND CLOSED FOR NOW: the names work writes a hideable house without its bracketed qualifier
+  ("the Fence" for "Fence (word of mouth)"); the veil's name search on the lane folds a name AND its bare form
+  (`gallerySecondHomes.js`, the bare fold: READ by the chair), so the search finds the short form. BUT the line's
+  walker `namesInSentences.walker` holds a COPY of that fold. FOR THE CLOSE'S LIST: at the join the walker reads the
+  lane's own function (one home), and the reader's name probes run on the joined generator.
+  THE SESSION SHEET (FRAME-3, 07:39 and 07:54): W2 AT FRAME-2's TIP IS ONE-SIDED (`.some`): 93 TOWNS FRAMED, NOT 58:
+  the rule "both powers" is only a brief (B9) until FRAME-3 builds it (`.every`: 58, its own count town by town).
+  THE CHAIR'S RECORD OF 07:15 ("weight merged and tightened: 58 of 330") WAS AHEAD OF THE CODE: the count is the
+  rule's; the build follows. RULED: B9 is FRAME-3's first unit; "THE 18" becomes ONE CAUSE (every `CAST_REASONS`
+  string an `npcRow` can carry that says "it" or "its" of its holder: the waverer 57, the instigator 19, the brunt 15
+  on the 360 crisis towns); `tests/lint` whole at every merge on that lane (a moved `proseNumerics` row showed it
+  had not been run since B3). B4 (the opening off the alarm accent) merged a7fd4cf91, read sound by FRAME-3.
+  TITLES-2 "2b8d1146b": 71 cells, 23 sourced words (authored 174 to 245 of 726). RULED: Vilicus KEPT; Podestà and
+  Gost each take ONE verifying search for a better-fitting word the chair recalls but has not verified (Praetor as a
+  Latin town's chief magistrate; Tysyatsky as the head of Novgorod's merchants' court): the better word takes the
+  cells, the other goes to the unsure list. It lands with the next landing.
