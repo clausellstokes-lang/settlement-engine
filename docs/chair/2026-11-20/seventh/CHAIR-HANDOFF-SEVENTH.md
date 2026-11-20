@@ -324,3 +324,37 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   import measure. 9 the rows' form accepted. 10 the VR13 rng rows are marked built now. 11 the readers' rng file IS
   on origin (the seat had not found it). OWED IN ITS HAND-BACK: one table of what a shared page loses, on every share
   and only where a house is hidden: THE OWNER'S VETO LIST TAKES IT.
+- 00:53 UTC · **THREE MORE HIGH FROM REVIEW-VEIL-10 (its messages of 00:41 and 00:47 UTC), ONE CLASS WITH V10-1, AND A SEAT
+  OF ITS OWN.** **V10-3, THE TILE DOOR:** `_gallery_public_tile_rows` (last defined in 147; 211 and 212 never touch
+  it) reads stability, prosperity, threat_level and government_type RAW from `settlements.data`; it feeds the
+  gallery's lists and `get_gallery_dossier`'s top-level columns, so even a closed read sends "Unstable (pervasive
+  organized crime)" beside the town's name; the card and the social card draw it; 140 births, 89 with a hideable
+  house, the default veil: stability differs with the hidden houses in 11 towns and with ordinary houses in 0;
+  prosperity in 34 and 2, and prosperity is a list filter (an oracle). **V10-4, THE MAP'S NEVER-LISTED MEMBER:**
+  `get_gallery_map` serves a member with no `$veil` through the sanitiser only: its criminal house whole to
+  anon. **V10-6, THE TRACE'S NUMBERING:** on Reveal-DM gallery reads the withheld trace steps leave a hole each in
+  the `ts` counter: holes in 24 of 30 born towns, exactly the hidden houses' own steps, placed by their neighbours
+  in the catalogue's Criminal slot: a visitor learns that houses were withheld, how many, and that they are criminal.
+  ALSO: V10-2 MED (the switch's "Show all" opens eyes no hand can reach: 108 people's `institution` on Reveal DM);
+  V10-5 MED (a criminal house born WITHOUT catalogId, 9 of 182, renamed by name alone and hidden whole leaves its
+  birth name in its chain and situationDesc); a TIMING measure (a read of a town with default-hidden houses is 1.41
+  to 1.69 times slower than the same town born without).
+  **RULINGS (each vetoable):** **VR21, ORDER AND GAPS:** after the veil removes a member of a sequence, no counter,
+  index, id sequence or count taken before the removal reaches a non-owner read: re-derived over what is served or
+  withheld, every reference following; V10-6 is its first row and joins item B on VEIL-19's list. **VR22, THE
+  TILES:** each tile computed under the row's own veil by VR19 (the stability band word alone, the cause never; a
+  band stays only where a visitor cannot recompute its no-hidden-house value from the served document); a tile that
+  cannot be sent lawfully is NULL for every marked row and no filter, facet, sort or count reads its raw value; the
+  closed answer sends no tile. **VR23, THE MAP MEMBER:** a member with no `$veil` takes the DEFAULT VEIL on the
+  map read, as the party link's unmarked share does (R4 of 2026-11-10: the readers are players); R4's sparing of an
+  unmarked LISTED page is not touched (that flip stays the owner's own pending decision); the count of maps already
+  public goes to the deploy document. **VR24, TIMING IS OUT OF THE CLEARANCE'S SCOPE, RECORDED:** the cost law bounds
+  it at twice; told to the owner as a known residual signal, with a uniform floor as the cure if the owner wants one.
+  V10-5: by positive account, with B (a chain and a mention are kept only where a served house accounts for them;
+  the catalogue's hideable names not on the served roster are withheld); the birth-time cure (every born house
+  carries its catalogId) is a generation change for the first content round after the deploy. V10-2: to VEIL-VR17 as
+  its next unit. **RULING SV7: THE DOORS BESIDE `data` GET A SEAT OF THEIR OWN, VEIL-DOORS**
+  (`prompts/VEIL-DOORS.txt`; `lane/veil-doors-2026-11-20` from bedd5a392): the tiles, the chronicle, the map
+  member and the column walker; it owns those functions in 212 and a new section at its end, VEIL-19 owns the data
+  veil; it proposes its mechanisms to the chair before building; VEIL-19 merges "DOORS <commit>". This replaces the
+  placement of VR20 on VEIL-19's own list.
