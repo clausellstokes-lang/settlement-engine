@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "9a3cfadd17e7c69d6b1893d7948fb548e8700371",
-  "measuredBy": "SEAT-2",
+  "measuredAtSha": "e9d5c98b896c4c7d3f68901376d93eded28be0cb",
+  "measuredBy": "SEAT-3",
   "date": "2026-11-20",
-  "note": "U2 and its cure merged (9a3cfadd1): +1 src file (src/domain/seat/seatTable.js), +1 test file (tests/domain/seat/seatTable.test.js)",
+  "note": "after U2-CURE2 (B2d) merged at e9d5c98b8",
   "files": 3707,
   "parked": 472,
   "credited": 3235,
-  "titles": 31256,
-  "suiteTitles": 8648
+  "titles": 31260,
+  "suiteTitles": 8649
 }
