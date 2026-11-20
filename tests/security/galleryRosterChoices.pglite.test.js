@@ -19,7 +19,7 @@
  * sends at every R3 path. RED at R3's base (d136940c3): docs/chair/2026-11-20/veil/out/v21/r3/red.txt.
  */
 import { describe, it, expect, beforeAll } from 'vitest';
-import { appendFileSync } from 'node:fs';
+import { appendFileSync, readFileSync } from 'node:fs';
 import { PGlite } from '@electric-sql/pglite';
 import { pgcrypto } from '@electric-sql/pglite/contrib/pgcrypto';
 import { bootChain, BIRTH_DIALS, OWNER } from './veilChain.shared.mjs';
@@ -151,9 +151,24 @@ const HAND_IDS = Object.freeze({
   { name: 'Nell Noid', role: 'Porter', memberships: [{ power: TG, role: 'fence' }],
     goal: { short: `Run errands for ${TG}.`, long: 'Save a dowry.', intent: { short: { target: { id: TG, kind: 'power' } } } } },
   { id: 'npc.ott', name: 'Ott Mere', role: 'Councillor', memberships: [{ power: 'Town Council', role: 'member' }],
-    goal: { short: 'Keep the tolls.', long: 'Hold the chair.', intent: { short: { target: { id: 'Town Council', kind: 'power' } } } } }],
+    goal: { short: 'Keep the tolls.', long: 'Hold the chair.', intent: { short: { target: { id: 'Town Council', kind: 'power' } } } } },
+  // R3-CURE-7 (ruling 53, condition 1: THE TOOTH): three more people, whose ids are `true`, `false` and the empty string, each
+  // with a goal aimed at and naming the withheld guild and a membership of it (the sweep strips the husk first, as above). The
+  // two boolean-id people also hold a SHOWN membership of the Fishers; the empty-id person holds a Fishers membership recorded
+  // under the guild's id (the sweep drops it whole): a judgment by containment against every person (the no-id rule) would
+  // take the boolean people's Fishers membership with it, a judgment by the id as text keeps it, so the twin and 212 part
+  // wherever one engine reads a boolean id as no id and the other as its text
+  { id: true, name: 'Tam Verity', role: 'Netmaker', memberships: [{ power: TG, role: 'member' }, { power: 'Fishers', role: 'member' }],
+    goal: { short: `Win a place in ${TG}.`, long: 'Mend the nets.', intent: { short: { target: { id: TG, kind: 'power' } } } } },
+  { id: false, name: 'Fay Falsen', role: 'Salter', memberships: [{ power: TG, role: 'lookout' }, { power: 'Fishers', role: 'member' }],
+    goal: { short: `Keep watch for ${TG}.`, long: 'Salt the catch.', intent: { short: { target: { id: TG, kind: 'power' } } } } },
+  { id: '', name: 'Em Blank', role: 'Carter', memberships: [{ power: TG, role: 'runner' }, { power: 'Fishers', role: 'member', id: TG }],
+    goal: { short: `Carry the takings to ${TG}.`, long: 'Buy a mule.', intent: { short: { target: { id: TG, kind: 'power' } } } } }],
   economicState: { safetyProfile: { crimeTypes: [] } },
 });
+/** R3-CURE-7: the three people of the tooth, by name, with the memberships each keeps (a shown one, byte for byte). */
+const HAND_IDS_TOOTH = Object.freeze([['the true-id person', 'Tam Verity', [{ power: 'Fishers', role: 'member' }]],
+  ['the false-id person', 'Fay Falsen', [{ power: 'Fishers', role: 'member' }]], ['the empty-id person', 'Em Blank', []]]);
 // R3-CURE-2 (unit 4 (ii)): THE SHARE SUM. Fractional shares whose exact decimal sum is 100 but whose double sum is not
 // (0.1 + 64.1 + 35.8), and thirds whose double sum is 100 but whose exact decimal sum is not: the exact comparison in
 // both engines (212: numeric; the twin: the decimal spelling). No hideable house; no power withheld.
@@ -772,6 +787,46 @@ describe('R3: the drawn conditional rows where a house is hidden whole (through 
     expect(bad).toEqual([]);
   });
 
+  it('R3-CURE-7 (ruling 53, condition 1: THE TOOTH): a person whose id is `true`, one whose id is `false`, one whose id is the empty string: (a) no stripped goal or membership of the withheld guild survives for any of the three (no husk; a shown membership stays byte for byte); (b) the twin and 212 serve the SAME result for each (byte for byte, by name, presence included); every read, both shapes, Reveal DM off and on', () => {
+    const bad = [];
+    const rs = cureReads().filter((x) => x.t.seed === 'hand-ids');
+    expect(rs.length).toBe(4);
+    let judged = 0; let compared = 0;
+    for (const r of rs) {
+      const twinOf = (dm) => veil.projectShareVeil(veil.galleryPayloadFor(clone(r.stored), { shareDm: dm, memberOverrides: r.ov }), r.ov);
+      const twin = twinOf(r.dm);
+      // (the campaign map's member is read with Reveal DM OFF whatever the share says: 211 :: get_gallery_map calls
+      // _gallery_veil(pub.j, overrides, false); its twin is the Reveal-off projection. tooth-first.txt: the first run compared
+      // the map's Reveal-off people with the Reveal-on twin, 6 of 6 faults there, an instrument fault, not the engines')
+      const twinOff = twinOf(false);
+      const byName = (d, name) => (Array.isArray(d?.npcs) ? d.npcs : []).filter((n) => isRec(n) && n.name === name);
+      for (const [read, d] of [...docsOf(r), ['twin', twin]]) {
+        const tag = `hand-ids ${r.kind} dm=${r.dm} ${read}`;
+        if (!withheldOf(r.stored, d).includes(TG)) bad.push(`${tag}: the guild is not withheld`);
+        for (const [who, name, keep] of HAND_IDS_TOOTH) {
+          const ns = byName(d, name);
+          // (b) THE TWIN AND 212 AGREE: each server read's copy of the person against the twin's, by name, presence included
+          if (read !== 'twin') {
+            compared += 1;
+            const tw = byName(read === 'map' ? twinOff : twin, name);
+            if (canon(ns) !== canon(tw)) bad.push(`${tag}: ${who} differs from the twin: server ${J(ns)} | twin ${J(tw)}`);
+          }
+          // (a) NO HUSK: no goal (it named and aimed at the guild), no membership but the shown one
+          for (const n of ns) {
+            if (!('memberships' in n || 'goal' in n)) continue;
+            judged += 1;
+            if ('goal' in n) bad.push(`${tag}: ${who}'s goal served as a husk ${J(n.goal)}`);
+            if (canon(n.memberships || []) !== canon(keep)) bad.push(`${tag}: ${who}'s memberships ${J(n.memberships)}`);
+          }
+        }
+      }
+    }
+    note('R3-CURE-7 (ruling 53): the true-, false- and empty-id people judged on', judged, 'people-reads; compared with the twin on', compared, 'person-reads');
+    expect(judged).toBeGreaterThan(0);
+    expect(compared).toBeGreaterThan(0);
+    expect(bad).toEqual([]);
+  });
+
   // KEY-LEVEL ON A SERVED HOLDER, NOT CURED HERE (STOPPED to the seat, R3C4-HANDBACK.md): R3-CURE's ruled rules take the KEY,
   // not its holder: a SHOWN power's `contestsNiche` naming a withheld one, and a served person's affiliation key. To take the
   // holder whole would withhold a shown power or a served person; that is a ruling, not a cure. Listed by path and count.
@@ -884,4 +939,36 @@ describe('R3: the drawn conditional rows where a house is hidden whole (through 
     }
     expect(differ).toEqual([]);
   }, ARM_TIMEOUT_MS);
+});
+
+// ── R3-CURE-7 (ruling 53, condition 2: THE WALKER) ───────────────────────────────────────────────────────────────────────
+// Until the fold owed in R4-CURE-2 (one id-as-text helper in 212, revoked by name, the six sites repointed), 212 writes "a
+// person's id as text" INLINE, six times, in _gallery_veil_roster_choices's people pass (R3-CURE-5). This walker reads 212's
+// own text, finds every expression of the shape
+//   coalesce(case when jsonb_typeof(<x> -> 'id') <...> then <x> ->> 'id' end, '')
+// (any body between `jsonb_typeof(<x> -> 'id')` and `end, ''`, so a drifted occurrence is found and compared, not missed),
+// normalizes <x> and the whitespace, and holds EXACTLY SIX occurrences, all ONE text, that text the scalar's own. Its own
+// describe: it needs no database, so it runs without the pglite boot above.
+const MIGRATION_212_URL = new URL('../../supabase/migrations/212_share_veil_later_cures.sql', import.meta.url);
+const ID_TEXT_SHAPE = /coalesce\(\s*case\s+when\s+jsonb_typeof\(\s*([a-z_][a-z0-9_]*)\s*->\s*'id'\s*\)([\s\S]*?)\bend\s*,\s*''\s*\)/gi;
+const ID_TEXT_ONE = "coalesce(case when jsonb_typeof(<x> -> 'id') in ('string', 'number', 'boolean') then <x> ->> 'id' end, '')";
+/** Every inline id-as-text expression of a SQL text, normalized: { at: line, x, text }. */
+function idTextSitesOf(sql) {
+  return [...sql.matchAll(ID_TEXT_SHAPE)].map((m) => {
+    const x = m[1];
+    const text = m[0].replace(/\s+/g, ' ').replace(/\(\s+/g, '(').replace(/\s+\)/g, ')')
+      .replace(new RegExp(`\\b${x}\\b(?=\\s*-)`, 'g'), '<x>');
+    return { at: sql.slice(0, m.index).split('\n').length, x, text };
+  });
+}
+describe('R3-CURE-7 (ruling 53, condition 2): THE WALKER over 212\'s inline id-as-text expressions', () => {
+  it('212 writes a person\'s id as text EXACTLY SIX times, all ONE text (ruling 53: one helper owed; the fold owed in R4-CURE-2 retires this walker)', () => {
+    const sql = readFileSync(MIGRATION_212_URL, 'utf8');
+    const sites = idTextSitesOf(sql);
+    const texts = [...new Set(sites.map((s) => s.text))];
+    const said = `ruling 53 (the chair, 15:10): until the fold owed in R4-CURE-2 retires this walker (one id-as-text helper in 212, the six sites repointed), 212's inline id-as-text expressions are six and ONE text; found ${sites.length}: ${J(sites.map((s) => `line ${s.at} (${s.x}): ${s.text}`))}`;
+    note('R3-CURE-7 walker (ruling 53): inline id-as-text expressions in 212:', sites.length, J(sites.map((s) => `${s.at}:${s.x}`)), '| texts:', texts.length);
+    expect(sites.length, said).toBe(6);
+    expect(texts, said).toEqual([ID_TEXT_ONE]);
+  });
 });
