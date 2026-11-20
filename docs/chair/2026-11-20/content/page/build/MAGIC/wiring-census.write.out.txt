@@ -1,0 +1,1 @@
+[wiring-census] wrote docs/content/wiring-census.json — 861 pools, 169 relation rows, 7 stamped files

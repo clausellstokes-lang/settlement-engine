@@ -1,0 +1,5 @@
+[wiring-census --dry] the committed register is STALE; nothing was written
+  bytes committed 2652777 · fresh 2652777 · delta 0
+  sections that would move: stamp
+  stamped shas that would move: (none) · candidate leaves unmoved
+  ROWS that would move: 0

@@ -1,0 +1,2 @@
+page-census: rendering 12 dossiers (4 workers) into /tmp/page-census-BTsaHG
+page-census --grid: 0 fall(s)
