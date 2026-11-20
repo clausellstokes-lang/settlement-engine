@@ -228,3 +228,17 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
 - 00:22 UTC · **REVIEW-VEIL-10 SEATED** (created 00:22:08 UTC): session_019yED1QR3Kx6to96YVauwV8,
   `lane/review-veil-10-2026-11-20` from the sixth chair's reader's 7696a0cdc (ruling SV6). SIX SEATS RUN. The desk's
   rulings SD1 to SD9 are in section 2.
+- 00:26 UTC · THE SEATS' FIRST PUSHES READ. **VEIL-19** 42c273535 (PART 20 begun: the base's three readings reproduced at
+  bedd5a392, the same figures as PART 19: 35 of 37 with a07 and d06; the class 130; through the server 124 unregistered
+  and 20 rng-only); told to commit each reading's output file beside the figure it quotes (`out/v19/`). **CI-FIT**
+  45ba3b70f (part B): THE CAUSE OF THE 43 MINUTES IS APT, NOT THE BROWSERS, read from the job's log ("Fetched 123 MB in
+  42min 30s (48.2 kB/s)" from the runner's package mirror; the browsers' own download took 11 s), so a browser cache
+  would not have cured it; the cure: both browser jobs run in Playwright's own image at the lockfile's version, the
+  install step a launch probe that falls back to the old install; a pin in `tests/build/ciCheckParity.test.js`, red
+  first. Plausible until the pull request's CI runs it: the image's pull time and the two suites inside the container.
+- 00:26 UTC · PULL REQUEST #75'S ACTIVITY COULD NOT BE SUBSCRIBED from this session (an earlier session holds it): CI is
+  read by the chair after each landing and by the safety net.
+- 00:26 UTC · THE CLOSE'S LIST GAINS (the intake rule): (a) `docs/HANDOFF_CURRENT.md` on the line takes a top block that
+  points a new account's session to this lane's handoffs (master's copy stops at 2026-11-06: this chair lost its first
+  minutes to it, as every successor will until the pull request merges); (b) SD8's script; (c) pull request #74 placed
+  once GIT-DOOR's point is on the line.
