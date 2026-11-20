@@ -1,0 +1,406 @@
+RE-RUN: node docs/chair/2026-11-20/content/daily/measures/M1/measure.m1.mjs > docs/chair/2026-11-20/content/daily/measures/M1/m1.out.txt 2>&1
+births: 900 (150 a size) in 96s
+derived in 2s; MIRROR mismatches (branch named vs text printed): 0
+
+════ 1. BRANCHES — share by size (places taking the branch / 150, %); TOP = the slot's top single text share over all 150; DISTINCT = distinct texts
+
+[dawn_work]
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| dawn_work:food-critical | 6 | 5 | 1 | 3 | 12 | 19 |
+| dawn_work:defense-critical | 94 | 81 | 81 | 42 | 0 | 0 |
+| dawn_work:craft-power>=25 | 0 | 0 | 0 | 0 | 0 | 0 |
+| dawn_work:merchant>=30+siege | 0 | 0 | 0 | 0 | 0 | 0 |
+| dawn_work:merchant-power>=30 | 0 | 2 | 3 | 18 | 11 | 1 |
+| dawn_work:default(bakers) | 0 | 13 | 14 | 37 | 77 | 80 |
+| dawn_work: TOP text % | 94 | 81 | 81 | 42 | 77 | 80 |
+| dawn_work: DISTINCT texts | 2 | 4 | 4 | 4 | 3 | 3 |
+  top thorp: (141) "The walls claim the first hours: the watch musters thin at first light, and ordinary work waits until the rounds are walked."
+  top hamlet: (121) "The walls claim the first hours: the watch musters thin at first light, and ordinary work waits until the rounds are walked."
+  top village: (122) "The walls claim the first hours: the watch musters thin at first light, and ordinary work waits until the rounds are walked."
+  top town: (63) "The walls claim the first hours: the watch musters thin at first light, and ordinary work waits until the rounds are walked."
+  top city: (116) "Bakers light their ovens first, then the smiths; the watch changes as the gates open."
+  top metropolis: (120) "Bakers light their ovens first, then the smiths; the watch changes as the gates open."
+
+[gathering_places]
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| gathering_places:named:religious | 19 | 17 | 7 | 21 | 17 | 97 |
+| gathering_places:named:trade | 0 | 6 | 31 | 100 | 100 | 100 |
+| gathering_places:named:inn/hall | 0 | 21 | 25 | 100 | 100 | 100 |
+| gathering_places:fallback(well,bridge,square) | 81 | 65 | 53 | 0 | 0 | 0 |
+| gathering_places: TOP text % | 81 | 65 | 53 | 45 | 70 | 96 |
+| gathering_places: DISTINCT texts | 2 | 10 | 14 | 4 | 4 | 3 |
+  top thorp: (122) "People gather where they can: the well, the bridge, the open square."
+  top hamlet: (97) "People gather where they can: the well, the bridge, the open square."
+  top village: (80) "People gather where they can: the well, the bridge, the open square."
+  top town: (68) "By midday people are gathered at the weekly market, the inn (multiple): talking, trading, and watching."
+  top city: (105) "By midday people are gathered at the fish market, the inns and taverns (district): talking, trading, and watching."
+  top metropolis: (144) "By midday people are gathered at the steps of Great cathedral, the fish market, the inns and taverns (district): talking, trading, and watch"
+
+[child_warnings]
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| child_warnings:fallback(no threat) | 0 | 0 | 0 | 1 | 29 | 27 |
+| child_warnings:threat:monster_pressure | 66 | 59 | 60 | 67 | 67 | 68 |
+| child_warnings:threat:bandit_raids | 0 | 0 | 0 | 0 | 0 | 0 |
+| child_warnings:threat:siege | 1 | 0 | 0 | 0 | 1 | 3 |
+| child_warnings:threat:rival_neighbor | 0 | 0 | 0 | 0 | 0 | 0 |
+| child_warnings:threat:plague | 3 | 5 | 5 | 3 | 2 | 1 |
+| child_warnings:threat:famine | 1 | 2 | 0 | 0 | 0 | 0 |
+| child_warnings:threat:corruption | 0 | 0 | 0 | 0 | 0 | 0 |
+| child_warnings:threat:unrest | 100 | 99 | 99 | 91 | 7 | 7 |
+| child_warnings:threat:arcane_instability | 0 | 0 | 0 | 0 | 0 | 0 |
+| child_warnings:threat:cult | 0 | 0 | 0 | 0 | 0 | 0 |
+| child_warnings:threat:economic_collapse | 85 | 89 | 76 | 3 | 0 | 0 |
+| child_warnings: TOP text % | 36 | 32 | 29 | 35 | 61 | 63 |
+| child_warnings: DISTINCT texts | 15 | 17 | 17 | 11 | 7 | 7 |
+  top thorp: (54) "Children are warned about crowds that gather quickly; the empty stalls in the trade quarter; the road past sundown."
+  top hamlet: (48) "Children are warned about crowds that gather quickly; the empty stalls in the trade quarter."
+  top village: (44) "Children are warned about crowds that gather quickly; the empty stalls in the trade quarter."
+  top town: (53) "Children are warned about the road past sundown; crowds that gather quickly."
+  top city: (92) "Children are warned about the road past sundown."
+  top metropolis: (94) "Children are warned about the road past sundown."
+
+[food_culture]
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| food_culture:surplus+famine/siege | 0 | 0 | 0 | 0 | 0 | 0 |
+| food_culture:surplus+stable-chain | 20 | 31 | 39 | 13 | 8 | 1 |
+| food_culture:surplus | 0 | 2 | 7 | 0 | 0 | 0 |
+| food_culture:adequate | 65 | 46 | 45 | 51 | 33 | 28 |
+| food_culture:strained+disrupted-chain | 6 | 14 | 5 | 25 | 35 | 49 |
+| food_culture:strained | 3 | 2 | 2 | 8 | 13 | 2 |
+| food_culture:critical+disrupted-chain | 3 | 4 | 1 | 3 | 12 | 19 |
+| food_culture:critical | 3 | 1 | 0 | 0 | 0 | 0 |
+| food_culture:collapsed(default) | 0 | 0 | 0 | 0 | 0 | 1 |
+| food_culture: TOP text % | 65 | 46 | 45 | 51 | 33 | 28 |
+| food_culture: DISTINCT texts | 9 | 17 | 14 | 24 | 29 | 21 |
+  top thorp: (98) "Hearty grain bread and turnip-and-onion stews dominate the table; meat appears at festivals and on the wealthier streets."
+  top hamlet: (69) "Hearty grain bread and turnip-and-onion stews dominate the table; meat appears at festivals and on the wealthier streets."
+  top village: (68) "Hearty grain bread and turnip-and-onion stews dominate the table; meat appears at festivals and on the wealthier streets."
+  top town: (76) "Hearty grain bread and turnip-and-onion stews dominate the table; meat appears at festivals and on the wealthier streets."
+  top city: (49) "Hearty grain bread and turnip-and-onion stews dominate the table; meat appears at festivals and on the wealthier streets."
+  top metropolis: (42) "Hearty grain bread and turnip-and-onion stews dominate the table; meat appears at festivals and on the wealthier streets."
+
+[commoner_resentments]
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| commoner_resentments:fallback(any town) | 20 | 8 | 8 | 35 | 34 | 25 |
+| commoner_resentments:criminal_opportunity>=70 | 0 | 0 | 0 | 1 | 0 | 0 |
+| commoner_resentments:criminal_opportunity>=55 | 7 | 7 | 2 | 7 | 17 | 17 |
+| commoner_resentments:food-strained+ | 15 | 21 | 8 | 36 | 59 | 71 |
+| commoner_resentments:legitimacy-strained+ | 80 | 91 | 91 | 46 | 15 | 13 |
+| commoner_resentments:corruption_exposed | 0 | 0 | 0 | 0 | 0 | 0 |
+| commoner_resentments: TOP text % | 65 | 69 | 83 | 35 | 43 | 55 |
+| commoner_resentments: DISTINCT texts | 5 | 6 | 6 | 8 | 8 | 8 |
+  top thorp: (97) "Commoners resent the council's indifference to ordinary complaints."
+  top hamlet: (103) "Commoners resent the council's indifference to ordinary complaints."
+  top village: (125) "Commoners resent the council's indifference to ordinary complaints."
+  top town: (53) "Commoners voice the small grievances of any town: the gate fee, the rain on market day, the council's favorite tavern."
+  top city: (65) "Commoners resent rising bread prices and merchants who claim they cannot help it."
+  top metropolis: (82) "Commoners resent rising bread prices and merchants who claim they cannot help it."
+
+[outsider_impressions]
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| outsider_impressions:fallback(ordinary) | 0 | 0 | 0 | 0 | 0 | 0 |
+| outsider_impressions:dominant-power | 100 | 100 | 100 | 100 | 100 | 100 |
+| outsider_impressions:top-threat>low | 100 | 100 | 100 | 95 | 69 | 69 |
+| outsider_impressions:strained-caps>=3 | 99 | 97 | 100 | 99 | 36 | 19 |
+| outsider_impressions: TOP text % | 43 | 38 | 44 | 13 | 9 | 11 |
+| outsider_impressions: DISTINCT texts | 16 | 23 | 17 | 33 | 48 | 42 |
+  top thorp: (65) "Outsiders notice Elder Council's mark is on every door that matters; civic stability at risk is the obvious unspoken weight; several civic s"
+  top hamlet: (57) "Outsiders notice Elder Council's mark is on every door that matters; civic stability at risk is the obvious unspoken weight; several civic s"
+  top village: (66) "Outsiders notice Religious Authorities' mark is on every door that matters; civic stability at risk is the obvious unspoken weight; several "
+  top town: (19) "Outsiders notice Town Mayor's mark is on every door that matters; civic stability at risk is the obvious unspoken weight; several civic serv"
+  top city: (14) "Outsiders notice City Council's mark is on every door that matters."
+  top metropolis: (16) "Outsiders notice Grand Council's mark is on every door that matters; frontier monster pressure is the obvious unspoken weight."
+
+[unspoken_topics]
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| unspoken_topics:hidden/rumored-threat | 0 | 0 | 0 | 0 | 0 | 0 |
+| unspoken_topics:unresolvedWound | 100 | 100 | 100 | 100 | 100 | 100 |
+| unspoken_topics:corruption_exposed | 0 | 0 | 0 | 0 | 0 | 0 |
+| unspoken_topics:fallback(happy to discuss) | 0 | 0 | 0 | 0 | 0 | 0 |
+| unspoken_topics: TOP text % | 100 | 100 | 100 | 100 | 100 | 100 |
+| unspoken_topics: DISTINCT texts | 1 | 1 | 1 | 1 | 1 | 1 |
+  top thorp: (150) "Locals will not openly discuss the matter referenced as "the wound"."
+  top hamlet: (150) "Locals will not openly discuss the matter referenced as "the wound"."
+  top village: (150) "Locals will not openly discuss the matter referenced as "the wound"."
+  top town: (150) "Locals will not openly discuss the matter referenced as "the wound"."
+  top city: (150) "Locals will not openly discuss the matter referenced as "the wound"."
+  top metropolis: (150) "Locals will not openly discuss the matter referenced as "the wound"."
+
+[recent_changes]
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| recent_changes:recentDisruption | 63 | 81 | 81 | 79 | 66 | 73 |
+| recent_changes:new-condition(<2 ticks) | 35 | 34 | 31 | 29 | 27 | 32 |
+| recent_changes:acute-threat(imminent/realized) | 98 | 99 | 99 | 29 | 24 | 17 |
+| recent_changes:fallback(usual course) | 0 | 0 | 1 | 14 | 19 | 16 |
+| recent_changes: TOP text % | 17 | 8 | 5 | 14 | 19 | 16 |
+| recent_changes: DISTINCT texts | 108 | 131 | 135 | 126 | 109 | 119 |
+  top thorp: (25) "Civic stability at risk has come to a head."
+  top hamlet: (12) "Civic stability at risk has come to a head."
+  top village: (8) "Civic stability at risk has come to a head."
+  top town: (21) "The last few seasons have run their usual course. No notable shifts in the rhythm of the place."
+  top city: (28) "The last few seasons have run their usual course. No notable shifts in the rhythm of the place."
+  top metropolis: (24) "The last few seasons have run their usual course. No notable shifts in the rhythm of the place."
+
+════ 2. FALSE LINES — places by size printing the clause while the record test says FALSE (count of 150); example place id
+| dawn_work:food-critical "the granary queue" — no granary: hasInstitution(r,"granary") | 9 | 7 | 2 | 0 | 0 | 0 | e.g. hxd-thorp-7
+| dawn_work:defense-critical "The walls claim" — no walls: defenceOf(r).walls | 103 | 106 | 114 | 42 | 0 | 0 | e.g. hxd-thorp-0
+| dawn_work:defense-critical "the watch musters" — no guard force: factsOf(r).guardPresence | 112 | 105 | 112 | 0 | 0 | 0 | e.g. hxd-thorp-0
+| dawn_work:craft-power>=25 "Smithy fires" — no smithy: hasInstitution(r,"smith") | 0 | 0 | 0 | 0 | 0 | 0 | e.g. —
+| dawn_work:craft-power>=25 "guild-callers" — no guild: factsOf(r).guild | 0 | 0 | 0 | 0 | 0 | 0 | e.g. —
+| dawn_work:merchant-power>=30 "Merchant caravans roll" — no trade route: tradeRouteOf(r) in ""/isolated/none | 0 | 0 | 0 | 0 | 0 | 0 | e.g. —
+| dawn_work:merchant-power>=30 "queue at the warehouses" — no warehouse: live house /warehouse|storehouse/ (no home) | 0 | 3 | 5 | 21 | 0 | 0 | e.g. hxd-hamlet-0
+| dawn_work:default(bakers) "Bakers light their ovens" — no bakery: live house /baker(y)|bakehouse/ (no home) | 0 | 19 | 21 | 28 | 17 | 9 | e.g. hxd-hamlet-7
+| dawn_work:default(bakers) "then the smiths" — no smithy: hasInstitution(r,"smith") | 0 | 15 | 13 | 28 | 12 | 3 | e.g. hxd-hamlet-7
+| dawn_work:default(bakers) "the watch changes" — no guard force: factsOf(r).guardPresence | 0 | 2 | 3 | 0 | 0 | 0 | e.g. hxd-hamlet-74
+| dawn_work:default(bakers) "as the gates open" — no gate: defenceOf(r).gate | 0 | 19 | 21 | 7 | 0 | 0 | e.g. hxd-hamlet-7
+| gathering_places:fallback(well,bridge,square) "the well" — no well/water source: live house or quarter landmark /well|water source|aqueduct…/ (no home) | 0 | 0 | 0 | 0 | 0 | 0 | e.g. —
+| gathering_places:fallback(well,bridge,square) "the bridge" — no bridge: live house or quarter landmark /bridge/ (no home) | 122 | 97 | 71 | 0 | 0 | 0 | e.g. hxd-thorp-0
+| gathering_places:fallback(well,bridge,square) "the open square" — no square: live house, quarter or landmark /square|plaza|green/ (no home; a common is not one) | 122 | 97 | 80 | 0 | 0 | 0 | e.g. hxd-thorp-0
+| gathering_places:named:* a named house — the named row is not live or is access-only: isLiveInstitution / ACCESS_ONLY | 0 | 0 | 0 | 0 | 0 | 0 | e.g. —
+| child_warnings:fallback(no threat) "the deep well" — no well (as above) | 0 | 0 | 0 | 0 | 0 | 0 | e.g. —
+| child_warnings:fallback(no threat) "the woods at twilight" — no timber of its own: factsOf(r).timberAtHand (nearest; no woodland home) | 0 | 0 | 0 | 2 | 26 | 25 | e.g. hxd-town-21
+| child_warnings:threat:bandit_raids "linger at the gates" — no gate: defenceOf(r).gate | 0 | 0 | 0 | 0 | 0 | 0 | e.g. —
+| child_warnings:threat:economic_collapse "the trade quarter" — no quarters at all: spatialLayout.quarters | 13 | 0 | 0 | 0 | 0 | 0 | e.g. hxd-thorp-6
+| child_warnings:threat:economic_collapse "the trade quarter" — no trade-kind quarter: a quarter named /market|trade|merchant|bazaar|commerc/ | 128 | 133 | 102 | 0 | 0 | 0 | e.g. hxd-thorp-0
+| child_warnings:threat:economic_collapse "the empty stalls" — no market: marketOf(r) | 128 | 128 | 93 | 0 | 0 | 0 | e.g. hxd-thorp-0
+| child_warnings:threat:plague "the sick-house" — no hospital or healer: defenceOf(r).hospital|healer | 5 | 8 | 7 | 2 | 0 | 0 | e.g. hxd-thorp-17
+| child_warnings:threat:siege "when the bells ring" — no sacred house: factsOf(r).sacredHouse (nearest for a bell) | 1 | 0 | 0 | 0 | 0 | 0 | e.g. hxd-thorp-103
+| child_warnings:threat:rival_neighbor "the neighbour" — no neighbour: record.neighborRelationship | 0 | 0 | 0 | 0 | 0 | 0 | e.g. —
+| child_warnings:threat:corruption "officials" — no appointed post: factsOf(r).appointedPost | 0 | 0 | 0 | 0 | 0 | 0 | e.g. —
+| food_culture:surplus+stable-chain "markets close their stalls" — no market: marketOf(r) | 30 | 44 | 37 | 0 | 0 | 0 | e.g. hxd-thorp-5
+| food_culture:adequate "the wealthier streets" — a thorp or hamlet: record.tier | 98 | 69 | 0 | 0 | 0 | 0 | e.g. hxd-thorp-0
+| food_culture:collapsed(default) "temple kitchens" — no sacred house: factsOf(r).sacredHouse | 0 | 0 | 0 | 0 | 0 | 0 | e.g. —
+| food_culture:collapsed(default) "caravans that never arrived" — no trade route (as above) | 0 | 0 | 0 | 0 | 0 | 0 | e.g. —
+| commoner_resentments:criminal_opportunity>=70 "the watch turning a blind eye" — no guard force: factsOf(r).guardPresence | 0 | 0 | 0 | 0 | 0 | 0 | e.g. —
+| commoner_resentments:food-strained+ "merchants who claim" — no market: marketOf(r) | 22 | 28 | 10 | 0 | 0 | 0 | e.g. hxd-thorp-7
+| commoner_resentments:legitimacy-strained+ "the council's indifference" — not a council: rulingBodyOf(r) !== true | 10 | 46 | 39 | 34 | 3 | 5 | e.g. hxd-thorp-52
+| commoner_resentments:corruption_exposed "officials who keep their posts" — no appointed post: factsOf(r).appointedPost | 0 | 0 | 0 | 0 | 0 | 0 | e.g. —
+| commoner_resentments:fallback(any town) "of any town" — not a town: factsOf(r).populationBand === "small" | 30 | 12 | 7 | 4 | 0 | 0 | e.g. hxd-thorp-0
+| commoner_resentments:fallback(any town) "the gate fee" — no gate: defenceOf(r).gate | 30 | 12 | 12 | 18 | 0 | 0 | e.g. hxd-thorp-0
+| commoner_resentments:fallback(any town) "market day" — no market: marketOf(r) | 30 | 10 | 4 | 0 | 0 | 0 | e.g. hxd-thorp-0
+| commoner_resentments:fallback(any town) "the council's" — not a council: rulingBodyOf(r) !== true | 5 | 2 | 3 | 24 | 8 | 10 | e.g. hxd-thorp-78
+| commoner_resentments:fallback(any town) "favorite tavern" — no tavern/inn: hasInstitution(r,"tavern") | 30 | 2 | 6 | 0 | 0 | 0 | e.g. hxd-thorp-0
+| outsider_impressions:fallback(ordinary) "Quiet streets" — a thorp or hamlet: record.tier | 0 | 0 | 0 | 0 | 0 | 0 | e.g. —
+| outsider_impressions:fallback(ordinary) "predictable bells" — no sacred house: factsOf(r).sacredHouse (nearest) | 0 | 0 | 0 | 0 | 0 | 0 | e.g. —
+| unspoken_topics:corruption_exposed "market stalls" — no market: marketOf(r) | 0 | 0 | 0 | 0 | 0 | 0 | e.g. —
+
+  places with AT LEAST ONE false clause, by slot:
+| dawn_work: any false | 130 | 136 | 144 | 108 | 27 | 12 |
+| gathering_places: any false | 122 | 97 | 80 | 0 | 0 | 0 |
+| child_warnings: any false | 128 | 133 | 111 | 4 | 26 | 25 |
+| food_culture: any false | 128 | 113 | 37 | 0 | 0 | 0 |
+| commoner_resentments: any false | 61 | 76 | 58 | 70 | 11 | 15 |
+| outsider_impressions: any false | 0 | 0 | 0 | 0 | 0 | 0 |
+| unspoken_topics: any false | 0 | 0 | 0 | 0 | 0 | 0 |
+| recent_changes: any false | 0 | 0 | 0 | 0 | 0 | 0 |
+  UNTESTABLE (no record test; why):
+  dawn_work "before the ovens are warm" — household hearths are not a house kind the record holds;
+  dawn_work:craft "apprentices haul water before the bell" — no record of a bell; merchant+siege "porters wait for loads" — no record of porters;
+  child_warnings "the strangers' road", "the road past sundown" — every place has a road; no home answers "a road";
+  child_warnings "masked strangers", "shimmering air", "crowds", "bread is short" — the threat itself is the fact (true by construction);
+  commoner_resentments:criminal_opportunity>=55 "smugglers ... honest carts queue" — a crime score, no carts/tax record;
+  outsider_impressions:strained-caps>=3 "missing watch, slow service, or shuttered shops" — says what is ABSENT; "faces that don't yet know yours" — no record;
+  outsider_impressions:dominant-power "mark is on every door that matters" — a power's reach, no record of doors (see 7 for the veil);
+  unspoken_topics "the matter referenced as \"the wound\"" — the beat's own fact; recent_changes:* — the history beat's own text, a condition's label, a threat's label ("has come to a head" fits both imminent and realized stages).
+
+════ 3. FACT REACH — share of the 150 places by size holding each fact (%). H = a house the fact counts is hideable (cardVeil.js :: isHideableHouse) on >=1 place; C = a crime fact
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| walls (defenceOf.walls) | 27 | 25 | 18 | 63 | 100 | 100 |
+| watch (defenceOf.watch) | 0 | 0 | 3 | 100 | 100 | 100 |
+| guard force (factsOf.guardPresence) | 21 | 26 | 21 | 100 | 100 | 100 |
+| gates (defenceOf.gate) | 0 | 0 | 0 | 63 | 100 | 100 |
+| temple/church/shrine (hasInstitution temple) | 19 | 17 | 100 | 100 | 100 | 100 |
+| sacred house (factsOf.sacredHouse) | 19 | 17 | 100 | 100 | 100 | 100 |
+| dailyLife RELIGIOUS pattern match (any row) | 19 | 17 | 7 | 21 | 17 | 97 |
+| market (marketOf) | 0 | 6 | 31 | 100 | 100 | 100 |
+|   market kind: market (periodic/weekly/daily/district) | 0 | 6 | 31 | 100 | 100 | 100 |
+|   market kind: market square | 0 | 0 | 0 | 100 | 100 | 100 |
+|   market kind: fish market | 0 | 0 | 17 | 44 | 90 | 100 |
+|   market kind: fair | 0 | 0 | 0 | 36 | 81 | 97 |
+|   market kind: trading house (guild+trade tags) | 0 | 0 | 0 | 82 | 97 | 100 |
+| dailyLife TRADE pattern match (any row) H | 0 | 6 | 31 | 100 | 100 | 100 |
+| inn/tavern (hasInstitution tavern) | 0 | 31 | 31 | 100 | 100 | 100 |
+| dailyLife INN pattern match (inn|tavern|hall) | 0 | 21 | 25 | 100 | 100 | 100 |
+| guild/guildhall (factsOf.guild) H | 0 | 3 | 25 | 100 | 100 | 100 |
+| well/water source (nearest: names, landmarks) | 100 | 100 | 100 | 100 | 100 | 100 |
+| navigable water (waterOf.navigable) | 37 | 34 | 46 | 36 | 47 | 43 |
+| mill (hasInstitution mill) | 0 | 0 | 100 | 100 | 100 | 100 |
+| bridge (nearest: names, landmarks) | 0 | 0 | 15 | 78 | 99 | 100 |
+| square (nearest: names, quarters, landmarks; not 'common') | 0 | 0 | 0 | 100 | 100 | 100 |
+| bakery (nearest: names) | 0 | 0 | 0 | 39 | 84 | 92 |
+| smithy (hasInstitution smith) | 0 | 17 | 27 | 41 | 89 | 97 |
+| granary (hasInstitution granary) | 0 | 0 | 0 | 100 | 100 | 100 |
+| hospital or healer (defenceOf) | 0 | 0 | 2 | 33 | 71 | 99 |
+| warehouse (nearest: names) | 0 | 0 | 0 | 44 | 100 | 100 |
+| quarters (spatialLayout.quarters) | 90 | 100 | 100 | 100 | 100 | 100 |
+| trade-kind quarter (quarter name) | 0 | 0 | 10 | 100 | 98 | 100 |
+| trade route none/isolated (tradeRouteOf) | 14 | 18 | 11 | 0 | 0 | 0 |
+| imports listed (factsOf.imports) | 55 | 82 | 99 | 100 | 100 | 100 |
+| ruling body of more than one (rulingBodyOf) | 90 | 68 | 71 | 53 | 85 | 77 |
+| appointed post (factsOf.appointedPost) | 76 | 100 | 100 | 100 | 100 | 100 |
+| history.recentDisruption (deriveHistoryBeats) | 63 | 81 | 81 | 79 | 66 | 73 |
+| history.unresolvedWound (deriveHistoryBeats) | 100 | 100 | 100 | 100 | 100 | 100 |
+| condition corruption_exposed (deriveAllActiveConditions) C | 0 | 0 | 0 | 0 | 0 | 0 |
+| criminal_opportunity >= 55 (deriveCausalState.scores) C | 7 | 7 | 2 | 8 | 17 | 17 |
+| criminal_opportunity >= 70 C | 0 | 0 | 0 | 1 | 0 | 0 |
+| a crime structure (factsOf.crime !== none) C | 10 | 15 | 8 | 69 | 99 | 100 |
+| any threat hidden or rumored (threat.visibility) | 0 | 0 | 0 | 0 | 0 | 0 |
+| food source (economicState.foodSecurity.foodRecord.foodSources; factsOf.foodSources) = fish | 35 | 30 | 38 | 23 | 43 | 43 |
+| food source (economicState.foodSecurity.foodRecord.foodSources; factsOf.foodSources) = game | 15 | 19 | 18 | 0 | 0 | 0 |
+| food source (economicState.foodSecurity.foodRecord.foodSources; factsOf.foodSources) = grain | 16 | 11 | 13 | 25 | 26 | 14 |
+| food source (economicState.foodSecurity.foodRecord.foodSources; factsOf.foodSources) = livestock | 11 | 13 | 18 | 23 | 21 | 11 |
+| food source (economicState.foodSecurity.foodRecord.foodSources; factsOf.foodSources) = mill | 0 | 0 | 5 | 4 | 9 | 9 |
+| food band (capacity.food_production, the slot's read) = adequate | 65 | 46 | 45 | 51 | 33 | 28 |
+| food band (capacity.food_production, the slot's read) = collapsed | 0 | 0 | 0 | 0 | 0 | 1 |
+| food band (capacity.food_production, the slot's read) = critical | 6 | 5 | 1 | 3 | 12 | 19 |
+| food band (capacity.food_production, the slot's read) = strained | 9 | 16 | 7 | 33 | 47 | 51 |
+| food band (capacity.food_production, the slot's read) = surplus | 20 | 33 | 47 | 13 | 8 | 1 |
+| prosperity band (factsOf.prosperity; prosperityRank.js :: prosperityLabelOf) = comfortable | 21 | 9 | 9 | 37 | 19 | 19 |
+| prosperity band (factsOf.prosperity; prosperityRank.js :: prosperityLabelOf) = moderate | 31 | 29 | 24 | 28 | 2 | 1 |
+| prosperity band (factsOf.prosperity; prosperityRank.js :: prosperityLabelOf) = poor | 27 | 41 | 48 | 9 | 1 | 0 |
+| prosperity band (factsOf.prosperity; prosperityRank.js :: prosperityLabelOf) = prosperous | 3 | 0 | 1 | 25 | 78 | 77 |
+| prosperity band (factsOf.prosperity; prosperityRank.js :: prosperityLabelOf) = struggling | 17 | 22 | 19 | 1 | 1 | 3 |
+| ruler kind (rulerKindOf) = council | 0 | 0 | 0 | 53 | 85 | 77 |
+| ruler kind (rulerKindOf) = elder | 90 | 87 | 79 | 0 | 0 | 0 |
+| ruler kind (rulerKindOf) = lord | 10 | 13 | 7 | 9 | 15 | 23 |
+| ruler kind (rulerKindOf) = mayor | 0 | 0 | 14 | 37 | 0 | 0 |
+| public legitimacy band (deriveCausalState.bands) = adequate | 20 | 9 | 9 | 54 | 55 | 22 |
+| public legitimacy band (deriveCausalState.bands) = collapsed | 19 | 20 | 25 | 5 | 1 | 3 |
+| public legitimacy band (deriveCausalState.bands) = critical | 17 | 20 | 7 | 10 | 1 | 0 |
+| public legitimacy band (deriveCausalState.bands) = strained | 44 | 51 | 59 | 31 | 14 | 10 |
+| public legitimacy band (deriveCausalState.bands) = surplus | 0 | 0 | 0 | 0 | 29 | 65 |
+| trade route (tradeRouteOf) = crossroads | 18 | 19 | 16 | 19 | 19 | 15 |
+| trade route (tradeRouteOf) = isolated | 14 | 18 | 11 | 0 | 0 | 0 |
+| trade route (tradeRouteOf) = port | 9 | 11 | 10 | 11 | 14 | 13 |
+| trade route (tradeRouteOf) = river | 21 | 20 | 23 | 18 | 28 | 24 |
+| trade route (tradeRouteOf) = road | 37 | 33 | 40 | 51 | 39 | 47 |
+| threat kind (deriveAllThreatProfiles.type) = (none) | 0 | 0 | 0 | 1 | 29 | 27 |
+| threat kind (deriveAllThreatProfiles.type) = economic_collapse | 85 | 90 | 77 | 3 | 0 | 0 |
+| threat kind (deriveAllThreatProfiles.type) = famine | 7 | 5 | 1 | 1 | 0 | 0 |
+| threat kind (deriveAllThreatProfiles.type) = monster_pressure | 69 | 64 | 63 | 67 | 67 | 68 |
+| threat kind (deriveAllThreatProfiles.type) = plague | 3 | 5 | 5 | 3 | 2 | 1 |
+| threat kind (deriveAllThreatProfiles.type) = siege | 3 | 1 | 1 | 0 | 1 | 3 |
+| threat kind (deriveAllThreatProfiles.type) = unrest | 100 | 100 | 100 | 91 | 7 | 7 |
+| threat visibility = (none) | 0 | 0 | 0 | 1 | 29 | 27 |
+| threat visibility = open | 100 | 100 | 100 | 99 | 71 | 73 |
+  hideable houses seen on the roster (isHideableHouse), names: Outlaw shelter; Local fence; Bandit affiliate; Fence (word of mouth); Smuggling waypoint; Underground network; Rookery; Smuggling operation; Street gang; Front businesses; Black market; Smuggling network; Multiple criminal factions; Whisper market; Thieves' guild chapter; Contract killer; Thieves' guild (powerful); Underground city; Assassins' guild; Black market bazaar
+
+════ 4. WHO READS THE SLOTS (grep of src/ and supabase/functions, EXECUTED at run time)
+  src/domain/regenerationDelta.js:32:import { deriveDailyLife, compareDailyLife } from './dailyLife.js';
+  src/domain/regenerationDelta.js:209:  const dailyLifeShifts = compareDailyLife(deriveDailyLife(before), deriveDailyLife(after));
+  src/domain/causalViews.js:28:import { deriveDailyLife } from './dailyLife.js';
+  src/domain/causalViews.js:59:  const daily = deriveDailyLife(settlement);
+  src/domain/counterfactual.js:54:import { deriveDailyLife, compareDailyLife } from './dailyLife.js';
+  src/domain/counterfactual.js:207:  const beforeDailyLife   = deriveDailyLife(settlement);
+  src/domain/counterfactual.js:240:  const afterDailyLife   = deriveDailyLife(nextSettlement);
+  src/domain/counterfactual.js:254:    dailyLife:            compareDailyLife(beforeDailyLife, afterDailyLife),
+  src/domain/aiGrounding.js:62:import { deriveDailyLife } from './dailyLife.js';
+  src/domain/aiGrounding.js:456:    dailyLife:       deriveDailyLife(settlement),
+  born records carrying a top-level dailyLife field: 0/900
+  edge bundle supabase/functions/_shared/aiGroundingBundle.js: Source hash: 75588c2bee4c0f74; deriveDailyLife inlined: true
+  text pins of slot sentences in tests/lint registers: tests/lint/presumptionClasses.register.json, tests/lint/presumedThings.widened.register.json
+
+════ 5. THE KEY (EXECUTED over all 900)
+  toPublicSafe keeps name: 900/900; strips _seed (default): 900/900; strips _seed (full): 900/900
+  IF deriveDailyLife ran on toPublicSafe(record): all 8 slots equal on 900/900; slots that differ: {}
+  places whose slot references name an npc: 0/900
+
+════ 7. THE HIDEABLE READS (EXECUTED): places by size
+| gathering_places names a hideable house (isHideableHouse of the row picked) | 0 | 0 | 0 | 0 | 0 | 0 | e.g. —
+| outsider_impressions names a veiled power (isVeiledPower of the dominant power) | 0 | 0 | 0 | 1 | 0 | 0 | e.g. hxd-town-105
+| outsider_impressions prints a hidden/rumored threat label | 0 | 0 | 0 | 0 | 0 | 0 | e.g. —
+| child_warnings prints a hidden/rumored threat label | 0 | 0 | 0 | 0 | 0 | 0 | e.g. —
+| child_warnings takes threat:corruption or threat:cult | 0 | 0 | 0 | 0 | 0 | 0 | e.g. —
+| recent_changes prints a hidden/rumored threat label | 0 | 0 | 0 | 0 | 0 | 0 | e.g. —
+| unspoken_topics prints a hidden/rumored threat label | 0 | 0 | 0 | 0 | 0 | 0 | e.g. —
+| commoner_resentments reads criminal_opportunity >= 55 | 10 | 11 | 3 | 12 | 25 | 25 | e.g. hxd-thorp-18
+| commoner_resentments or unspoken_topics read corruption_exposed | 0 | 0 | 0 | 0 | 0 | 0 | e.g. —
+  hideable names picked by gathering_places: none
+  dailyLife.js:340: const crimScore = causalState.scores.criminal_opportunity ?? 50;
+  dailyLife.js:363: const corruption = ctx.conditions.find(c => c.archetype === 'corruption_exposed');
+  dailyLife.js:421: const hidden = ctx.threats.filter(t => t.visibility === 'hidden' || t.visibility === 'rumored');
+  dailyLife.js:260: const trade = institutionByPattern(s, TRADE_PATTERN);
+  dailyLife.js:261: const inns = institutionByPattern(s, INN_PATTERN);
+  dailyLife.js:386: .sort((a, b) => (b.power || 0) - (a.power || 0))[0];
+  dailyLife.js:319: case 'corruption':          return 'talking to officials they don\'t know';
+  dailyLife.js:322: case 'cult':                return 'masked strangers offering sweets';
+  dailyLife.js:397: parts.push(`${top.label.toLowerCase()} is the obvious unspoken weight`);
+  dailyLife.js:477: changes.push(`${t.label.toLowerCase()} has come to a head`);
+  dailyLife.js:541: npcs:       deriveAllNpcProfiles(settlement),
+
+════ 8. THE COHERENCE BATTERY — generators/recordBatteryFindings.js :: recordBatteryJudgment (the receipt's record_coherence_battery judgment)
+  stored judgment findings count == recomputed recordBatteryFindings(record): 888/900
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| marked needs_review (record_coherence_battery) | 65 | 99 | 38 | 83 | 5 | 5 |
+| receipt.status needs_review (the receipt's own) | 1 | 1 | 0 | 0 | 0 | 0 |
+| born records with a stored dailyLife field | 0 | 0 | 0 | 0 | 0 | 0 |
+| flagged BECAUSE OF dawn_work text (quote in the slot, in NO stored string) | 0 | 0 | 0 | 0 | 0 | 0 |
+| flagged BECAUSE OF gathering_places text (quote in the slot, in NO stored string) | 0 | 0 | 0 | 0 | 0 | 0 |
+| flagged BECAUSE OF child_warnings text (quote in the slot, in NO stored string) | 0 | 0 | 0 | 0 | 0 | 0 |
+| flagged BECAUSE OF food_culture text (quote in the slot, in NO stored string) | 0 | 0 | 0 | 0 | 0 | 0 |
+| flagged BECAUSE OF commoner_resentments text (quote in the slot, in NO stored string) | 0 | 0 | 0 | 0 | 0 | 0 |
+| flagged BECAUSE OF outsider_impressions text (quote in the slot, in NO stored string) | 0 | 0 | 0 | 0 | 0 | 0 |
+| flagged BECAUSE OF unspoken_topics text (quote in the slot, in NO stored string) | 0 | 0 | 0 | 0 | 0 | 0 |
+| flagged BECAUSE OF recent_changes text (quote in the slot, in NO stored string) | 0 | 0 | 0 | 0 | 0 | 0 |
+  finding rows whose quote sits in no stored string: 12
+| dawn_work text CONTAINS a flagged quote (carried, the cause is the stored string) | 0 | 0 | 0 | 0 | 0 | 0 |
+| gathering_places text CONTAINS a flagged quote (carried, the cause is the stored string) | 0 | 0 | 0 | 0 | 0 | 0 |
+| child_warnings text CONTAINS a flagged quote (carried, the cause is the stored string) | 0 | 0 | 0 | 0 | 0 | 0 |
+| food_culture text CONTAINS a flagged quote (carried, the cause is the stored string) | 0 | 0 | 0 | 0 | 0 | 0 |
+| commoner_resentments text CONTAINS a flagged quote (carried, the cause is the stored string) | 0 | 0 | 0 | 0 | 0 | 0 |
+| outsider_impressions text CONTAINS a flagged quote (carried, the cause is the stored string) | 0 | 0 | 0 | 0 | 0 | 0 |
+| unspoken_topics text CONTAINS a flagged quote (carried, the cause is the stored string) | 0 | 0 | 0 | 0 | 0 | 0 |
+| recent_changes text CONTAINS a flagged quote (carried, the cause is the stored string) | 0 | 0 | 0 | 2 | 0 | 0 |
+
+  causes (finding rows, all 900), by check — detail, count, example:
+     222  battery.defense-words — walls without walls, a palisade or earthworks  e.g. hxd-thorp-4: "Stone-walled holdings climbing a south-facing hillside"
+     126  battery.defense-words — soldiers without a garrison or a hired company  e.g. hxd-thorp-0: "a discharged soldier who liked the view and had nowhere better to be"
+      28  battery.defense-words — hospital without a hospital  e.g. hxd-town-9: "May operate hospital/school."
+      20  battery.defense-words — garrison without a garrison  e.g. hxd-town-43: "They hire out by the day for escort, garrison duty, and brief campaign"
+      13  battery.tier-noun — "town" for a hamlet  e.g. hxd-hamlet-2: "rst; paid guards are added only when a threat lasts and the town can p"
+      13  battery.tier-noun — "town" for a metropolis  e.g. hxd-metropolis-4: "rst; paid guards are added only when a threat lasts and the town can p"
+       8  battery.tier-noun — "town" for a thorp  e.g. hxd-thorp-28: "rst; paid guards are added only when a threat lasts and the town can p"
+       8  battery.tier-noun — "town" for a village  e.g. hxd-village-32: "ssessment before enforcement it speaks for the creditor the town owes"
+       8  battery.tier-noun — "town" for a city  e.g. hxd-city-2: "rst; paid guards are added only when a threat lasts and the town can p"
+  causes by size (finding rows):
+| battery.defense-words | 77 | 114 | 63 | 142 | 0 | 0 |
+| battery.tier-noun | 8 | 13 | 8 | 0 | 8 | 13 |
+  the stored field holding each finding's quote (record path, 3 segments; a quote may sit in several):
+     164  institutions[].desc
+      52  culturalIdentity.builtForm
+      52  culturalNotes
+      47  history.founding.foundedBy
+      38  culturalIdentity.defensePattern
+      33  npcs[].physical.clothes
+      19  spatialLayout.layout
+      13  availableServices.equipment[].desc
+      12  history.historicalEvents[].lastingEffects[]
+      11  npcs[].presentation.impression
+      10  culturalIdentity.architecturalDetail
+      10  availableServices.employment[].desc
+       8  arrivalScene
+       7  history.legacyAnnotations[].annotation
+       5  history.founding.reason
+       3  history.currentTensions[].lastingEffects[]
+       2  npcs[].secret.what
+  HYPOTHETICAL — places the battery WOULD flag on a slot's own text were it stored (findings quoting the slot text):
+| dawn_work | 103 | 106 | 114 | 42 | 0 | 0 | defense-words: walls without walls, a palisade or earthworks (365)
+| gathering_places | 0 | 0 | 0 | 0 | 0 | 0 | 
+| child_warnings | 0 | 0 | 0 | 0 | 0 | 0 | 
+| food_culture | 98 | 69 | 68 | 73 | 47 | 42 | food-words: source_not_held: The place has no grain or livestock source. (274); food-words: source_not_held: The place has no livestock source. (57); food-words: source_not_held: The place has no grain source. (66)
+| commoner_resentments | 30 | 12 | 12 | 0 | 51 | 37 | tier-noun: "town" for a thorp (30); tier-noun: "town" for a hamlet (12); tier-noun: "town" for a village (12); tier-noun: "town" for a city (51); tier-noun: "town" for a metropolis (37)
+| outsider_impressions | 0 | 0 | 0 | 0 | 0 | 0 | 
+| unspoken_topics | 0 | 0 | 0 | 0 | 0 | 0 | 
+| recent_changes | 0 | 0 | 0 | 2 | 0 | 0 | defense-words: walls without walls, a palisade or earthworks (2)
+
+done in 199s
