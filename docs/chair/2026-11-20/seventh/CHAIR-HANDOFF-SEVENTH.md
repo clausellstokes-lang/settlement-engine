@@ -2159,6 +2159,49 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   share; the sheet rounds to whole months): a town with a granary and a mill reads six. THE WORDS ARE TRUE; varying
   them would be invention. A NAMED SURVIVOR: the sameness is in the generator's storage table.
 
+### Rulings of 17:37 to 17:42 UTC (eight notifications read at 17:38; each ruling vetoable by the owner)
+
+- **WANTS: ALL 380 LINES OF THE TRANCHE ARE READ.** Files 6 and 7 (GOALS-3, 9ca4eb58f and 7ff821309): 80 lines; 76
+  as written, 4 reworded (6: 8.2 "Make {power} strong enough to deal gently with {rival}, and still be safe."; 20.1
+  "Tell {other} plainly this season when what is owed will be paid."; 7: 11.1 "Be the one who decides, in the end,
+  how their dealings with {other} are remembered."; 16.1 "Learn who outside {power} leans toward {rival}, this
+  season."). FOUR PERSONALITY REPLACEMENTS TAKEN (each restated a reserve line of its cell): 2:11.2 "Outdo, in every
+  way they can, the person they have envied longest."; 4:21.1 "Keep their anger hidden until the day it can be
+  used."; 5:12.2 "Make every newcomer here learn quickly whose word counts."; 5:26.1 "Live among neighbours who would
+  stand by them if trouble came." THE BUILD (one build) is GOALS-4's after the hand-over.
+- **THE ECONOMY'S OWN HOOKS (PLACE-1, `viabilityHooks-MEASURE.md` at bc5ed1792): 25 rows read, APPROVED AS WRITTEN**
+  (the food gap's twelve; the peacetime iron's thirteen, six of them today's). Top share of ALL places
+  11/10/12/19/15/16 to 5/3/3/8/11/12 by projection. The iron pool is in scope; today's text stays drawable. A
+  SURVIVOR OR A CURE, on one answer: the merchant line is graded "Survival Crisis / critical" in 56 of its 78 places
+  while the page shows Pressured: if the grade PRINTS anywhere it is cured in this unit (it reads the band the page
+  shows).
+- **THE STATE SENTENCES (PROSE-1).** (1) THE FAITH TEASER'S LICENCE IS WIDENED BY EXACTLY FOUR WORDS (are, marks,
+  turn, gather): verbs that carry no fact about the faith; one line of `tests/lint/faithTeaserLicence`; LISTED for
+  the security reader at the join. The pool for a place that fills only {observance} then holds seven lines. (2)
+  DS-POW-2 #1 ("the hall is run the way it is because of who won it") is FALSE over an open dispute and no fact can
+  gate it: TRUTH OUTRANKS CANONICAL-AT-ZERO: the ONE existing line of the corpus the chair changes: "{settlement} is
+  still living with its recent quarrel, and the hall is run with it in mind." (3) #2's {seat} stays unfilled, as the
+  desk decided. PROSE-1's dm-only marks on the two crime pools: right.
+- **THE THIN PAGES CANNOT PRINT AS THEY STAND (PAGE-9's THIN-MEASURE at 9faaba042; the chair's decision of 15:42 that
+  their first half goes in before the deploy rested on a premise the measure refutes).** The eight Daily Life slots
+  no page prints are mostly one sentence shared by most places, and FALSE at the small sizes: "The walls claim the
+  first hours: the watch musters thin at first light..." on 94% of THORPS; "the empty stalls in the trade quarter"
+  at thorps; four texts for `dawn_work` in 300 places; one text for `unspoken_topics`; the Outlook's warning title
+  one text; the Magic reasons 100%; and the one slot under the share bar (`recent_changes`) reads "...civic
+  stability at risk has come to a head" in 154 of 300 (the engine's working). RULED: NO THIN BUILDER NOW; A NEW SEAT,
+  DAILY-1 (`prompts/DAILY-1.txt`; a new lane on the line, `lane/daily-1-2026-11-20`), makes the slots TRUE AND
+  VARIED by the one pattern, truth first, the falsest slots first; PAGE-9 prints them when "DAILY <commit>" comes.
+  `commoner_resentments` and the Magic reasons reach people's secrets and hooks through `deriveAllNpcProfiles`:
+  OWNER'S PAGE ONLY until a parity arm proves otherwise (the audience fails closed).
+- **PEOPLE-2's one question:** B2 (the power pair) first; B3 (`settlementReason`) on the line's commit after the
+  goals lane lands, or on 43ab0f5eb's text if B2 is merged first.
+- **THE JOINT TABLE WITH FORTUNE'S SAFETY HUNK (FORTUNE-3; 4,800 births, 0 crashes; the control reproduces the
+  chair's joint reading).** Calm places contested with both laws: thorp 0, hamlet 1.5, village 17.1, town 8.6, CITY
+  16.4 to 11.0 (12 to 8 cities: the four that leave all have Unsafe streets), metropolis 10.4. Calm city standing:
+  Contested 8.2 to 2.7%, Tolerated 64.4 to 58.9%, Approved 27.4 to 38.4%. The 8 cities and 7 metropolises still
+  contested all have Moderate streets (the merits' turn). ON THE CHAIR'S 600 (no randomised priorities): the
+  VISITOR pool is still owed (SEAT-6).
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -5194,3 +5237,8 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   294,290; PLACE-1 291,799. NEW SEATS, by their own counts with a half added: FRAME-7 112,000; PAGE-9 70,000;
   PEOPLE-2 150,000; SEAT-6 280,000. Fourteen notifications read at 17:31 and ruled (section 2, "Rulings of 17:32
   to 17:35").
+- 17:41 UTC · TWO MORE SUCCESSORS SEATED: PROSE-2 at 17:38 (session_019yED1SBLcLDUaP6noY5EGu, beside PROSE-1 at 352,319);
+  VEIL-28 at 17:39 (session_019yED1RHPyJjcAv7S8VwM5m, beside VEIL-27 at 334,481: seated EARLY because the veil is
+  the long pole of the deploy). `prompts/DAILY-1.txt` WRITTEN (a new lane for the Daily Life slots; seated after
+  this push). Eight notifications read at 17:38 and ruled (section 2, "Rulings of 17:37 to 17:42"). The net-16
+  trigger fired at 17:35 after the pass was done; net 17 is set 45 minutes on.
