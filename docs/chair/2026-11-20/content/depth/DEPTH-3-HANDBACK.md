@@ -1,4 +1,4 @@
-# DEPTH-3 hand-back (kept current at every push; last written 2026-11-20T20:21Z by `date -u`)
+# DEPTH-3 hand-back (kept current at every push; last written 2026-11-20T21:01Z by `date -u`)
 
 Branch `lane/depth-3-2026-11-20` (lane given at 461272505, 19:33 UTC; merged as 2582075ed). Prompts: origin/lane/chair-2026-11-08
 `docs/chair/2026-11-20/seventh/prompts/DEPTH-3.txt` (+ DEPTH-1/2.txt). Chair: session_019yED1SUxGVHyjQnoqoFvQ8. Successor DEPTH-4 seated
@@ -35,15 +35,30 @@ Branch `lane/depth-3-2026-11-20` (lane given at 461272505, 19:33 UTC; merged as 
    there (it postdates your prompt; rule 2, A LITERAL HAS ONE HOME: an existing line is never copied into a pool file as its index 0).
 10. Hand-over (20:21): under 400,000 read/merge; past it push `-wip`, relay a line, hand over by 420,000.
 
-## Open builders (each returns to DEPTH-3 while it holds the lane; to DEPTH-4 after)
-- CURE: branch `lane/depth-3-2026-11-20-firstpaint` from 2582075ed, worktree scratchpad/wt-firstpaint, brief CURE-FIRSTPAINT.md;
-  resumed 20:2x with the both-shapes requirement and the 634bb257b trial. Not returned.
-- THEMES: branch `lane/depth-3-2026-11-20-themes` from 2582075ed, worktree scratchpad/wt-themes, brief BUILD-THEMES.md. Not returned.
-- AT EACH MERGE (the integrator's): read the diff once; re-run its red and green; `npm run build` then
-  `VERIFY_DIST=1 sh scripts/gate-mutex.sh --run -- env VERIFY_DIST=1 npx vitest run tests/build/vendorPdfLazy.test.js tests/build/generationWorkerLazy.test.js --reporter=verbose`
-  (the budgets skip without VERIFY_DIST; read "first-paint static closure =", "gzip transfer =", "Brotli transfer =", "worker-… is");
-  two-tree: `node <scratchpad>/conf/trees.mjs 2582075ed <merge> <scratchpad>/two-tree --words=none` (base births cached; self-run 0/0);
-  censuses by their doors (lighting if a title moved; wiring `node scripts/wiring-census.mjs --check`).
+## Units (state at the hand-over)
+- CURE: MERGED 81a8ce258 (branch `lane/depth-3-2026-11-20-firstpaint` 9d19d16d8, pushed; diff READ). `rosterGrounds.js` pinned in
+  FIRSTPAINT2_LAZY_DOMAIN beside factsOf.js (no source line moved). By execution: factsOf.js is rosterGrounds' ONLY importer (the eager
+  vocabulary names it in comments only: the chair's belief was false); it imports liveInstitutionNames.js, EXCISED but UNPINNED, absorbed
+  by Rollup into coherence-lazy (its other pinned reachers ride there). Guard red re-run by DEPTH-3: 3 failed | 5 passed (8) at 2582075ed,
+  8 passed (8) at the tip; the builder: 634bb257b also 3 failed (causeHouses.js -> liveInstitutionNames; entrepot.js not flagged).
+  WHAT THE DERIVATION MISSED: it read every unpinned target as safe, but Rollup puts an unpinned module in the chunk of its first pinned
+  reacher. WHAT THE WIDENED GUARD SEES AND DOES NOT: it MODELS Rollup's absorption (no build): both shapes (a module eager by first-paint
+  reach, and one seated through a lazy pin) are what manualChunks routes to engine-core, so every case reads both; plus the honest net (no
+  engine-core module reaches an excised-but-unpinned module, read from ENGINE_SHARED_DOMAIN_EXCISIONS); it cannot see alias/glob/plugin
+  rewrites or the order among lazily loaded modules; THE BUILD (vendorPdfLazy) IS THE FINAL WORD. Build at 81a8ce258: 1,190,556 raw /
+  378,756 gzip / 317,693 Brotli (worker 2,617,219): FIX-B2 and "no prose leaf" GREEN; red: the three budgets, the engine chunk size and
+  the worker ceiling (the same five as at 15b13325e). Two-tree 2582075ed -> 81a8ce258: golden 525/525 and census 720/720 identical, 0 and 0.
+  The builder's required set: 3 reds identical at base (generationForkCensus A1/A3e, dmLayerGoldenIsolation A7).
+- THEMES: built, NOT merged: `lane/depth-3-2026-11-20-themes` pushed as `-themes-wip` (5bce72593 base fixture + corpus scan taken before
+  any edit; a097ee662 the change). Red first: hookTextOneHome 1 failed at 2582075ed (all 270 lines in two modules), green after; totality
+  walker 10/10; four planted drifts each red (and the door's --check exit 1); answers fixture 3/3 at base and tip; corpus scan 1,895 texts,
+  0 answers moved, 0 shared hashes, 1,625 texts in no pool untyped before and after. Registers shrank: presumptionClasses -7 (1785->1778),
+  presumedThings.widened -13 (all hookThemes.js rows). Digest 270 hashes, 2,317 B; hookThemes.js minified 35,127 -> 3,791 B. ONE OPEN
+  CALL FOR THE CHAIR: generationForkCensus A6 counts fnv1a32 calls from outside its module: 55 -> 1,065 (+1,010, all themeOfText lookups
+  hashing a text). Raising `generationForkRegistry.js :: fnv1a32External` and the test's constant is a stored figure; or themeOfText
+  could hash through a module-local copy. NOT DONE BY DEPTH-3: the diff read, its re-run red/green, the merge, its build proof, its two-tree.
+- NEXT (DEPTH-4): rule A6 with the chair; read a097ee662 once; merge; build (first paint expected BELOW the line's 1,177,668); two-tree;
+  merge the line 062504aa8; tests/lint WHOLE; test:ratchet by name; "DEPTH <commit>" with the three figures; then rulings 9 onward.
 
 ## Figures (fresh builds; vendorPdfLazy with VERIFY_DIST=1)
 | tree | first paint raw / gzip / Brotli | worker |
