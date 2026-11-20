@@ -26,7 +26,9 @@ restated; this file adds what came after.
 | 5 | CTR10 finished: every frame a declared line (70 bare → 0), floors by arms, gloss pools raised to 3 (+32 lines), crisis arms, the totality arm, census rows (Appendix B), the printed export | READ WHOLE, reds re-run 6/66 at `c38ba7886`, MERGED | `22be32bea`; merge `89311c175` |
 | 6 | the measures and the owner's 30 + 12 samples, the plain-words file | MERGED (docs and tools only) | `a39c93689`; merge `5f49c7779` |
 | 8 | the import path and the round trip > 4 towns (brief `briefs/TRAD-4-U8-IMPORT-ROUNDTRIP.md`) | CLOSED (the chair, 17:00): round trip green on 140; the import door handed to the veil lane (VEIL RULING 55, VEIL-27). See §7 | `14f16760b` on `lane/trad-4-2026-11-20-u8-wip` (not merged) |
-| 9 | no first sentence says "kept" twice (brief `briefs/TRAD-4-U9-KEPT-TWICE.md`) | builder out, worktree scratchpad/u9 | — |
+| 9 | no first sentence says "kept" twice (brief `briefs/TRAD-4-U9-KEPT-TWICE.md`) | READ WHOLE, red re-run 1/29 at `d003f7be8`, MERGED | `992df7da9`; merge `7955e5304` |
+| 10 | no town prints the same sentence in two of its rites (the chair 17:04; brief `briefs/TRAD-4-U10-ONE-TOWN-ROTATION.md`: measure first, then the rotation; bar 0 of 432) | builder out, worktree scratchpad/u10, branch `trad4-u10` from `833a20e13` | — |
+| — | ONE call line: take the kernel's mixed pick (`pickVariant`'s finalizer) when the chair names its commit; unit 6's count re-taken | waits on the chair | — |
 | — | CTR11's "other direction" line for the owner (where a DM SHOWS the criminal income, the reader still ranks without it), with its born count | open | — |
 
 ## 3. FOR THE OWNER (plain text beside this file)
@@ -110,3 +112,10 @@ closed. The cure is the veil lane's (VEIL-27, seeded with `14f16760b`); THIS LAN
   (unit 9), and `kernel/proseHash.js :: pickVariant`'s `% 4` lean (not ours). UNIT 8 stopped at a red on the import path
   (above): the chair rules which document is "served" to an importer and the cure (not this lane's files).
 - 2026-11-20 17:01 UTC — UNIT 8 CLOSED by the chair (§7). Left: unit 9; then ONE call line taking the kernel's mixed pick when the chair names its commit (unit 6's count re-taken).
+- 2026-11-20 17:22 UTC — UNIT 9 MERGED (`7955e5304`): four glosses re-worded ("is held for the harvest", "is held for what the fields
+  give", "stays true to the standing stones", "is held under the stars"); clashes 13 → 0 calm, 29 → 0 under famine; 59 owner
+  descriptions move (S1). At the merge: `tests/lint` 220/221 (census by count), the four traditions module files 107/107,
+  typechecks 0; confinement 1,245 identical; the lighting census by its door titles 31352 → 31354, suiteTitles 8683 →
+  8684 (plain 34/34). Not checked (builder): a harvest rite at a granary may now read "held" in two sentences in a row.
+  The chair (17:04): the owner's four files are with the owner. UNIT 10 out. The kernel's mixed pick: the chair asked the
+  key shape; sent (`${seed}::${id}#done`, one `draw` call site for every slot).
