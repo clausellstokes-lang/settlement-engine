@@ -65,3 +65,20 @@ page is unchanged.
 ## Report also, for the join (TRAD-4's hand-back)
 One paragraph naming the PARITY ARM owed on the joined tree (when the chair joins the security lane): every event the
 security lane's own sweep withholds is one this leaf skips. Do not write it; describe its inputs.
+
+## ADDENDUM 1 — THE WORD RULE RE-STATED (the chair, 15:10 UTC, on TRAD-4's recommendation; supersedes "cut into runs of letters")
+The rule as first written lost 34 reader dead-causes on the 432 (31 by the held word "s" a possessive leaves). One normal form:
+(a) A WORD is a maximal run of letters and apostrophes (U+0027, U+2019 and U+02BC all read as the apostrophe), case-folded:
+    an apostrophe never splits a word.
+(b) A HELD word: apostrophes at its ends dropped, then a trailing possessive ('s) dropped, then every apostrophe left inside
+    deleted ("Cobbler's" → cobbler; "Smiths'" → smiths; "O'Brien's" → obrien).
+(c) An EVENT word: every apostrophe deleted, nothing dropped ("Cobbler's" → cobblers; "O'Brien's" → obriens).
+(d) The stop list and the prefix rule stand on these forms: an event word BEGINNING WITH a held word counts.
+(e) THE WHOLE-NAME TEST (full and bare form) STAYS BESIDE THE WORD RULE as a floor, so a held name made only of stop words
+    is still caught.
+PLANTS, RED FIRST (against your current commit where it lets them through, else against the base; say which): a possessive
+held name against the bare event ("Cobbler's guild" / "The Cobbler Riots"); the reverse ("Cobbler" / "The Cobbler's Fall");
+a plural possessive ("Smiths' Hall" / "Smith's Fire"); a curly apostrophe; an inner apostrophe. A CONTROL THAT MUST KEEP ITS
+CAUSE (red at your current commit): a held possessive against an event that only begins with s ("People's Council" /
+"The Siege"). "great" on "The Great Fire" is right by the rule (lost, toward withholding).
+Re-run the measure: reader dead-causes lost on the 432 (the 3 by "great" expected), each with its event and held word.
