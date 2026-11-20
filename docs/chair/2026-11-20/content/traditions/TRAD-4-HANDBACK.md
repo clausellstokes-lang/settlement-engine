@@ -23,8 +23,9 @@ restated; this file adds what came after.
 |---|---|---|---|
 | 1, 1c, 2, 4, 4b | see TRAD-3-HANDBACK §2 | landed before the hand-over; "TRAD-SHARE 1f3cdc135" with the security reader (REVIEW-VEIL-13) | `1f3cdc135` |
 | 7 | REVIEW-VEIL-13's hole: the reader's dead-cause by the chair's word rule (re-stated 15:10, ADDENDUM 1); no power archetype from a hideable field | READ WHOLE, reds re-run 16/90 at `ef605266f`, greens 90/90, MERGED; "TRAD-SHARE-2" sent | `edfeb052d`; merge `18414593c` |
-| 5 | CTR10 finished: every frame a declared line (70 bare → 0), floors by arms, gloss pools raised to 3 (+32 lines), crisis arms, the totality arm, census rows (Appendix B), the printed export | BUILT, NOT YET READ OR MERGED; merges AFTER unit 7 (same leaf). Brief `briefs/TRAD-4-U5-POOLS.md` | `4cee71146`, `e03aedc92` on `lane/trad-4-2026-11-20-u5-wip` |
-| 6 | the measures (CTR8 by element and by size; pool dominance per slot; the most repeated shape masked) and the owner's 30 + 12 samples | not briefed | — |
+| 5 | CTR10 finished: every frame a declared line (70 bare → 0), floors by arms, gloss pools raised to 3 (+32 lines), crisis arms, the totality arm, census rows (Appendix B), the printed export | READ WHOLE, reds re-run 6/66 at `c38ba7886`, MERGED | `22be32bea`; merge `89311c175` |
+| 6 | the measures (CTR8 by element and by size; pool dominance per slot; the most repeated shape masked) and the owner's 30 + 12 samples | brief `briefs/TRAD-4-U6-MEASURES.md` (DRAFT: stamp the base at dispatch) | — |
+| 8 | the reader's import path and the save/serve round trip on more than 4 towns (REVIEW-VEIL-13 §3 "NOT DONE"; the chair 16:08) | not briefed | — |
 | — | CTR11's "other direction" line for the owner (where a DM SHOWS the criminal income, the reader still ranks without it), with its born count | open | — |
 
 ## 3. FOR THE OWNER (plain text beside this file)
@@ -77,3 +78,9 @@ and reader reproduce TRAD-3-HANDBACK §5 exactly (1,232 rites; SHORT 8.7%; top s
   documents cmp-identical. Not chased (builder): the whole-name floor matches at a word's start only, so a held name of
   stop words alone ("At") also catches "The Attack" (toward withholding). NEXT: unit 5's merge (read whole by TRAD-4;
   third commit `22be32bea` the comment correction, TRAD-4's ruling: keep the base's calmest crisis behaviour).
+- 2026-11-20 16:20 UTC — "TRAD-SHARE-2 3ba5ee73f": the security reader's verdict HOLDS (8 towns, Reveal off and on; its record `8ad885c38`
+  on `lane/review-veil-13-2026-11-20` §4). UNIT 5 MERGED (`89311c175`; one import-block conflict resolved as the union).
+  At the merge: the 7 module test files exit 0; `tests/lint` whole 220/221 (the census by count); typecheck:ratchet 0,
+  typecheck:domain:strict 0, eslint 0; confinement 1,245 cmp-identical. Registers by their doors: writer-reach
+  (shrink-only `--write`) cohort 1385 → 1368 (`a commit before this`); the lighting census titles 31334 → 31352,
+  suiteTitles 8675 → 8683 (plain 34/34). NEXT: unit 8 (import path, round trip > 4 towns), unit 6 (the owner's samples).
