@@ -241,6 +241,28 @@ parts of the whole check (at the close).
   examples; if a part is not proven in time the owner is told before a choice is made (holding the deploy for it
   is the owner's call); and one part left for after the deploy: re-dealing each person's own stored hook.
 
+- **2026-11-20, between the clock's readings of 04:11 and 04:17 UTC, THE OWNER (verbatim), three things:** "And
+  appropriate counterparts for other appropriate crises / A calm town should be as it currently is. Just a
+  collection of people without a central issue if there is none. Don't invent drama capitalize on what's already
+  there if it's there. Sometimes a calm place is precisely what's needed. Don't assume that we are trying to
+  maximize drama or make every place exciting. We are not creating the campaign. / Also i seem to notice that power
+  groups like nobles, craftsmen, etc are never able to compete for leadership? Why is that? / Every power group
+  should be able to compete for leadership or the seat given the right circumstances." TAKEN AS: (1) THE CHAIR'S
+  CF1 WAS WRONG ("every town opens on its sharpest trouble"): the frame exists ONLY where the record already holds
+  a trouble of weight; a town with none keeps today's sheet byte for byte; no word raises the pitch; a standing
+  disagreement is not headed "urgent" and does not borrow the crisis's role words; said to the owner as a
+  correction of the chair's own proposal; sent to FRAME-1 before it built (CF1 amended, CF9, CF10). (2) Counterparts
+  for every kind of trouble: CF10. (3) THE QUESTION ANSWERED FROM THE CODE: who rules a new town is chosen from the
+  town's top priority among FIVE categories only (military, religion, economy, criminal, magic) or from a governance
+  institution's label (`src/generators/power/rulingStructure.js`): no ruling body exists for craftsmen, labourers,
+  outsiders, or nobles as a class; only THREE powers contest the seat, the heaviest by power times a factor by kind
+  (`src/domain/rulingPowerCoup.js :: coupContenders`, `COUP_COERCION`: military 1.25, noble 1.1, arcane 1.05,
+  merchant 0.95, craft and labour 0.85), criminal powers excluded by rule. NOT COUNTED over a pool yet: said so.
+  THE OWNER'S RULE IS TAKEN AS THE DESIGN (every kind a ruling form of its own, reached when it is clearly the
+  strongest; the town's circumstances shift the weights). THE CHAIR'S RECOMMENDATION ON TIMING, said plainly:
+  measure and design now, BUILD AFTER THE DEPLOY (it moves who rules in every new town, every reference town, and
+  the powers pages the security lane is finishing); the owner may order it before.
+
 ## 2. Rulings of this chair (each vetoable by the owner)
 
 - **SV1 (00:05 UTC, 2026-11-20): THE VEIL'S LIST ON THREE MACHINES.** VEIL-19 owns 212, its rollback and the twin's
@@ -1248,3 +1270,16 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   **NAMES-1**, session_019yED1Qe8sEJHqPB2SewHRM, `lane/names-2026-11-20`; both from the line's tip (85fccf898 when
   seated). SIXTEEN SEATS OPENED BY THIS CHAIR; working now: VEIL-21, VEIL-DOORS-2, SEC-GRANTS-2, GIT-DOOR, FRAME-1,
   NAMES-1; REVIEW-VEIL-11 waiting for a cure's commit; the other nine done.
+- 04:17 UTC · **THE OWNER'S THREE POINTS ACTED ON.** FRAME-1's brief amended by message before it built: **CF1 AS AMENDED**
+  (the frame only where the record holds a trouble of weight; a town with none keeps today's sheet byte for byte, a
+  born test holding it; the chair's "sharpest trouble for every town" withdrawn); **CF9, NO DRAMA ADDED** (every
+  sentence the record's own; a level heading and level words for who stands where, held to a closed vocabulary; not
+  "What is urgent", not the crisis's role words); **CF10, COUNTERPARTS FOR EVERY KIND** (the archetype table shown
+  whole); its measure gains a column the owner reads first: how many calm towns hold a trouble of weight, a light
+  one, none. **WHO MAY RULE AND WHO MAY CONTEST (the owner's rule):** read from the code (the entry of the owner's
+  words above has the three rules); **SEAT-MEASURE** (`prompts/SEAT-MEASURE.txt`; `lane/seat-measure-2026-11-20`
+  from the line; the middle tier at medium effort; IT BUILDS NOTHING): the count over born towns of every tier (each
+  kind of power: present, rules, contests; how far below the cut; which ruling bodies are ever born) and the map of
+  what depends on the ruling body and the contender list (generation, display, the simulation, the share veil's
+  registry, the stored figures), then options. The chair designs from it; the build is recommended for after the
+  deploy.
