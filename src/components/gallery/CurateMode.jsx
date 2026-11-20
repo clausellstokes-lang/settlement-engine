@@ -17,7 +17,10 @@
  * (flipCriminalVeil); like an eye it saves nothing by itself, Done hands the list back. It
  * reads and writes only the eyes THIS screen draws (the seventh chair's ruling VR34: a switch
  * sets only what a hand can see and undo on that record): it is handed the same model the
- * sections are drawn from.
+ * sections are drawn from. Where it reads shown or partly while a criminal house is hidden whole
+ * on a town that has a criminal power (criminalHouseHiddenWhileShown, the seventh chair's ruling
+ * 38 (c) and its ruling on the notice), its group says that the town's criminal powers stay off the
+ * shared page while the house is hidden; the notice sets nothing.
  *
  * THE AFFORDANCE SLOT (X-23): wave three's shared slot primitive has not landed. The eye is
  * rendered by `CurateEye` at the slot's position, the trailing end of a card header or a
@@ -28,7 +31,7 @@
 import { useMemo, useState } from 'react';
 import Button from '../primitives/Button.jsx';
 import { curateModelFor, toggleVeilDelta } from '../../domain/display/galleryVeil.js';
-import { CRIMINAL_SWITCH_WORDS, criminalSwitchStateOf, flipCriminalVeil, presentCriminalGroupings } from '../../domain/display/criminalVeilSwitch.js';
+import { CRIMINAL_SWITCH_WORDS, criminalHouseHiddenWhileShown, criminalSwitchStateOf, flipCriminalVeil, presentCriminalGroupings } from '../../domain/display/criminalVeilSwitch.js';
 import { BORDER2, CARD, CARD_ALT, INK, BODY, MUTED, RED, sans, SP, FS } from '../theme.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
@@ -103,10 +106,11 @@ function Box({ card, preview, onToggle, mobile }) {
 /**
  * "Hide everything criminal": the label, the one line of what it covers, its state read from the
  * draft, and the one button. Disabled, with its words, on a town with no criminal part. It wraps
- * at phone width (the words take the row, the button drops under them).
- * @param {{ state: 'none'|'hidden'|'shown'|'partly', onFlip: () => void, mobile: boolean }} props
+ * at phone width (the words take the row, the button drops under them). With `houseHidden` (a
+ * criminal house hidden while it reads shown or partly, on a town with a criminal power) it adds the notice.
+ * @param {{ state: 'none'|'hidden'|'shown'|'partly', onFlip: () => void, mobile: boolean, houseHidden?: boolean }} props
  */
-export function CriminalSwitch({ state, onFlip, mobile }) {
+export function CriminalSwitch({ state, onFlip, mobile, houseHidden = false }) {
   const W = CRIMINAL_SWITCH_WORDS;
   const none = state === 'none';
   const hidden = state === 'hidden';
@@ -120,6 +124,7 @@ export function CriminalSwitch({ state, onFlip, mobile }) {
         <div style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.sm, mobile), fontWeight: 800 }}>{W.label}</div>
         <div style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.4, overflowWrap: 'anywhere' }}>{W.covers}</div>
         <div aria-live="polite" style={{ color: hidden ? RED : MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700 }}>{words}</div>
+        {houseHidden && <div data-criminal-switch-notice="" style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.4, overflowWrap: 'anywhere' }}>{W.housesHidden}</div>}
       </div>
       <Button
         variant={hidden ? 'secondary' : 'ghost'}
@@ -181,6 +186,8 @@ export default function CurateMode({ payload, deltas, onDone, onCancel }) {
   // VR34: the switch covers only the eyes this model draws (its addresses do not depend on the draft).
   const criminal = criminalSwitchStateOf(model.defaults, draft, present, model);
   const flipCriminal = () => setDraft(d => flipCriminalVeil(d, model.defaults, present, model));
+  // Ruling 38 (c): the notice where a criminal house hidden whole keeps the town's criminal powers off the shared page.
+  const houseHidden = criminalHouseHiddenWhileShown(criminal, model, payload);
 
   return (
     <div role="region" aria-label="Curate for visitors" style={{
@@ -201,7 +208,7 @@ export default function CurateMode({ payload, deltas, onDone, onCancel }) {
       <p style={{ margin: 0, color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45 }}>
         Names, roles and categories always show. A criminal or clandestine house is the exception: it can be hidden whole.
       </p>
-      {!preview && <CriminalSwitch state={criminal} onFlip={flipCriminal} mobile={mobile} />}
+      {!preview && <CriminalSwitch state={criminal} onFlip={flipCriminal} mobile={mobile} houseHidden={houseHidden} />}
       {model.sections.map(sec => (
         <SectionBlock key={sec.id} section={sec} preview={preview} onToggle={toggle} mobile={mobile} />
       ))}

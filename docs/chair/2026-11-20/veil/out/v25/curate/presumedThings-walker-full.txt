@@ -1,0 +1,82 @@
+[gate-tail] start:  11:51:36 up 38 min,  0 user,  load average: 8.40, 7.21, 5.29 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/curate
+
+ ❯ tests/lint/presumedThings.walker.test.js (43 tests | 1 failed) 87100ms
+     × ⛔ every source literal that names a thing declares it, or has its row 39ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/presumedThings.walker.test.js > ARM 1 — the source > ⛔ every source literal that names a thing declares it, or has its row
+AssertionError: declare the thing on the line (needs or excludes, with its twin), never add a row: expected [ …(46) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/domain/display/criminalVeilSwitch.js :: market :: \"Criminal houses and services, the criminal architecture, the capture reading and its black-market income, criminal power\"",
++   "src/domain/display/gallerySecondHomes.js :: garrison :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: militia :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: watch :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: mercenary :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: docks :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: market :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: temple :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: shrine :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: prison :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: court :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: bank :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: guildhall :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: quarters :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: household levy :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: hedge wizard :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: adventurers' charter :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: cobbler :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: tailor :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: scribe :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: merchant guild :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: caravaneer's post :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: carriers' guild :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: shipyard :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: auction :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: cobbler's guild :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: tailor's guild :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: alchemist :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: guild governance :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: merchant oligarchy :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: citadel :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: wizard's tower :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: mages' guild :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: scroll scribe :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: hireling :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: smuggling :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: street gang :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: gambling den :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: warehouse :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: guild consortium :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: adventurers' guild :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: thieves' guild :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: gambling :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: house: academy :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/display/gallerySecondHomes.js :: clergy :: \"{\\n  \\\"hasMilitaryInst\\\": {\\\"kw\\\": [\\\"garrison\\\", \\\"barracks\\\", \\\"guard\\\", \\\"watch\\\", \\\"citadel\\\", \\\"walls\\\", \\\"militia\\\", \\\"mercenary\\\", \\\"na\"",
++   "src/domain/veil/rosterChoiceRegistry.js :: powersCount :: \"VR37 (b): DRAWN (Systems/Power, PowerStrata.jsx :: chipDirection). Not (a): it is chosen by the capture state and the le\"",
++ ]
+
+ ❯ tests/lint/presumedThings.walker.test.js:444:92
+    442|     const fresh = hits.filter((h) => !banked.has(key(h.file, h.thing, …
+    443|     expect(fresh.map((h) => `${h.file} :: ${h.thing} :: ${JSON.stringi…
+    444|       'declare the thing on the line (needs or excludes, with its twin…
+       |                                                                                            ^
+    445|   });
+    446|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 42 passed (43)
+   Start at  11:51:37
+   Duration  139.63s (transform 2.87s, setup 33ms, import 52.35s, tests 87.10s, environment 0ms)
+
+[gate-tail] end:  11:53:57 up 41 min,  0 user,  load average: 6.28, 6.85, 5.45
