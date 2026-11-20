@@ -1,0 +1,2 @@
+120 towns; candidates 73: {"rich-word in a poor town":38,"poor-word in a comfortable town":11,"disfavour-word under an approved ruler":24}
+120 towns; candidates 46: {"rich-word in a poor town":29,"disfavour-word under an approved ruler":7,"poor-word in a comfortable town":9,"favour-word under a contested ruler":1}
