@@ -11,12 +11,17 @@
  *     earlier one instead of repeating the phrase;
  *   - the MOTIF CHIP: the element, and the act only where the name does not already carry it.
  * And `sharedTraditionRowsOf`, the rows the owner's save writes as TEXT under `publicProse` (CTR9): the shared page's
- * Traditions tab prints these and never derives a set from `id` (the seed never travels, 099/121).
+ * Traditions tab prints these and never derives a set from `id` (the seed never travels, 099/121). THE DRAWN SET ADMITS BY
+ * THE FLOOR (TRAD-3 unit 4, the chair's cure B, 2026-11-20): the rows drawn for the shared page admit their motifs over
+ * the record with every house's `function`-eye fields stripped (traditionDescription.js :: withoutFunction: a house's
+ * NAME against the catalogue's tags, hidden or shown), so no later shut of a house's function eye could have moved the
+ * set; the owner's set (shownTraditionsOf) is unchanged and admits by the record it is handed.
  * Pure: no draw, no clock, no write.
  */
 import { deriveFoundingTraditions, describeTraditionWindow } from './genesis.js';
 import { mergeCustomFoundingTraditions } from './customFounding.js';
-import { describeTradition } from './traditionDescription.js';
+import { describeTradition, withoutFunction } from './traditionDescription.js';
+import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { TRADITION_ELEMENTS } from '../../data/traditionCorpus.js';
 import { filterDeclared } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
@@ -25,13 +30,17 @@ import { factsOf } from '../facts/factsOf.js';
 /** @typedef {{ id?: unknown, name?: unknown, coreMotif?: { element?: unknown, act?: unknown }|null, window?: { startWeekOfYear?: number, weeks?: number }|null } & Record<string, unknown>} AnyRec  a tradition row as the tab holds it (generated, lit or custom) */
 /**
  * @typedef {Object} SharedTraditionRow  one tradition as the shared page prints it: text, drawn owner-side at save
- * @property {string} id       the record's id (a React key; never a seed)
+ * @property {string} id       `tradition.shared.<n>`, its place in the drawn set (a React key and the search's key; never
+ *                             the genesis id, never a seed: TRAD-3 unit 4, the chair's item 5)
  * @property {string} name     the tradition's name
  * @property {string} element  its motif element id (the register glyph's key)
  * @property {string} chip     the motif chip as the card prints it
  * @property {string} when     the calendar line as the card prints it ("Kept in Harvest, the eighth week.")
  * @property {string} text     THE READER'S DESCRIPTION ('' where none is composed)
  */
+
+/** The drawn row's id: this prefix and the row's place in the drawn set (0..n-1, dense, in the order served). */
+const SHARED_ROW_ID = 'tradition.shared.';
 
 /** element id → the facts it declares (`traditionCorpus.js :: TRADITION_ELEMENTS`' `needs`). */
 const ELEMENT_NEEDS = new Map(TRADITION_ELEMENTS.filter((e) => Array.isArray(e.needs) && e.needs.length).map((e) => [e.id, e.needs]));
@@ -53,6 +62,16 @@ export function motifNeeds(rec) {
  * @returns {{ preview: boolean, recs: AnyRec[] }}
  */
 export function shownTraditionsOf(settlement, customTraditions) {
+  return shownOver(settlement, customTraditions, settlement);
+}
+
+/**
+ * The shown set, its motifs admitted over `admitOver` (the owner's tab: the record itself; the shared page's drawn rows:
+ * the record at its floor). The set itself (the lit mirror, else genesis's preview) is always the record's own.
+ * @param {AnyRec|null|undefined} settlement @param {unknown} customTraditions @param {AnyRec|null|undefined} admitOver
+ * @returns {{ preview: boolean, recs: AnyRec[] }}
+ */
+function shownOver(settlement, customTraditions, admitOver) {
   if (!settlement || typeof settlement !== 'object') return { preview: true, recs: [] };
   const mirror = Array.isArray(settlement.traditions) ? settlement.traditions : null;
   const preview = !mirror || mirror.length === 0;
@@ -68,7 +87,7 @@ export function shownTraditionsOf(settlement, customTraditions) {
       needs: String(rec?.id ?? '').startsWith('custom:') ? [] : motifNeeds(rec),
       rec,
     })),
-    { facts: () => factsOf(settlement), poolId: 'traditions:tab', surface: 'traditions', drawKind: 'A' },
+    { facts: () => factsOf(admitOver), poolId: 'traditions:tab', surface: 'traditions', drawKind: 'A' },
   ).map((row) => /** @type {AnyRec} */ (row.rec));
   return { preview, recs };
 }
@@ -119,14 +138,21 @@ export function calendarLineOf(rec, sameWindowAs) {
  * @param {AnyRec|null|undefined} settlement the owner's record @returns {SharedTraditionRow[]|null}
  */
 export function sharedTraditionRowsOf(settlement) {
-  const { recs } = shownTraditionsOf(settlement, []);
+  // the drawn set admits by the floor (the chair's cure B): every live house less its function-eye fields (the facts the
+  // admission reads, market and the smith, read the live roster only: facts/market.js, facts/institutions.js)
+  const floor = settlement && typeof settlement === 'object'
+    ? { ...settlement, institutions: liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement)).map(withoutFunction) }
+    : settlement;
+  const { recs } = shownOver(settlement, [], floor);
   if (!recs.length) return null;
   const plan = sameWindowPlan(recs);
-  return recs.map((rec) => {
+  return recs.map((rec, i) => {
     // composed whole by the leaf (its pools drawn through drawDeclared inside it), then read as the row's text
     const described = describeTradition(rec, settlement, { audience: 'reader' });
     return {
-      id: String(rec.id ?? ''),
+      // THE DRAWN ROW'S ID (the chair's item 5, TRAD-3 unit 4): its place in the DRAWN set, dense, in the order served;
+      // never the genesis id (which holds the seed), so a rite the floor rule drops leaves no gap. The owner keeps his.
+      id: `${SHARED_ROW_ID}${i}`,
       name: String(rec.name ?? ''),
       element: String(rec?.coreMotif?.element ?? ''),
       chip: motifChipOf(rec),
