@@ -63,6 +63,7 @@ import { PDF_VARIANTS } from '../../src/pdf/variants.js';
 import TableView from '../../src/components/TableView.jsx';
 import PublicDossierView from '../../src/components/PublicDossierView.jsx';
 import PartyLinkView from '../../src/components/PartyLinkView.jsx';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 afterEach(() => { cleanup(); vi.clearAllMocks(); useStore.getState().userPrefs = {}; });
 
@@ -152,42 +153,51 @@ const tableOf = (s, audience) => {
 
 describe('CF3: the frame reaches no shared page', () => {
   test(`${BORN.length} born towns: live on the owner's record; every shared read byte-identical to the base and frame-free`, async () => {
-   for (const [seed, tier] of BORN) {
-    const s = birth(seed, tier);
     if (process.env.FRAME_VEIL_PRINT) { // the measuring run (at the base, where no frame exists): the digests only
-      const reads = await sharedReadsOf(s);
-      appendFileSync(process.env.FRAME_VEIL_PRINT, `${JSON.stringify([seed, Object.fromEntries(Object.entries(reads).map(([k, v]) => [k, digest(v)]))])}\n`);
-      continue;
+      for (const [seed, tier] of BORN) {
+        const reads = await sharedReadsOf(birth(seed, tier));
+        appendFileSync(process.env.FRAME_VEIL_PRINT, `${JSON.stringify([seed, Object.fromEntries(Object.entries(reads).map(([k, v]) => [k, digest(v)]))])}\n`);
+      }
+      return;
     }
-    const own = composeTonightSheet(s, { audience: 'owner' });
-    // 1. liveness
-    expect(own.frame, 'the owner\'s record casts a frame').toBeTruthy();
-    if (WITH_CRIMINAL.has(seed)) expect(own.frame.sides.some((d) => d.kind === 'criminal'), 'a side names the criminal power').toBe(true);
-    const lines = frameLinesOf(own);
-    const ownText = tableOf(s, 'owner').text;
-    for (const line of lines) expect(ownText, `the owner's Table View prints "${line}"`).toContain(line[0].toUpperCase() + line.slice(1));
+    // every town's shared reads first (the reads are async; collectSeedFailures is synchronous), then every town is
+    // asserted and its failures collected, so a red reports every failing town, not the first (seedLoopTotality)
+    const towns = new Map();
+    for (const [seed, tier] of BORN) {
+      const s = birth(seed, tier);
+      towns.set(seed, { s, reads: await sharedReadsOf(s) });
+    }
+    const failures = collectSeedFailures([...towns.keys()], (seed) => {
+      const { s, reads } = towns.get(seed);
+      const own = composeTonightSheet(s, { audience: 'owner' });
+      // 1. liveness
+      expect(own.frame, 'the owner\'s record casts a frame').toBeTruthy();
+      if (WITH_CRIMINAL.has(seed)) expect(own.frame.sides.some((d) => d.kind === 'criminal'), 'a side names the criminal power').toBe(true);
+      const lines = frameLinesOf(own);
+      const ownText = tableOf(s, 'owner').text;
+      for (const line of lines) expect(ownText, `the owner's Table View prints "${line}"`).toContain(line[0].toUpperCase() + line.slice(1));
 
-    const reads = await sharedReadsOf(s);
-    // 2. byte-identity with the base
-    const got = Object.fromEntries(Object.entries(reads).map(([k, v]) => [k, digest(v)]));
-    expect(got).toEqual(DIGESTS[seed]);
-    // 3. absence
-    for (const [key, read] of Object.entries(reads)) {
-      const shared = recordOf(key, read);
-      expect(shared && typeof shared === 'object', `${key} hands the page a record`).toBe(true);
-      expect(shared._seed, `${key} carries no seed`).toBeUndefined();
-      expect(composeTonightSheet(shared).frame ?? null, `${key}: no frame`).toBe(null);
-      expect(composeTonightSheet(shared, { audience: 'owner' }).frame ?? null, `${key}: no frame even for the owner (the second lock)`).toBe(null);
-      const { text, drew } = tableOf(shared);
-      expect(drew, `${key}: the Table View draws the sheet`).toBe(true);
-      for (const line of lines) expect(text.includes(line[0].toUpperCase() + line.slice(1)), `${key} prints "${line}"`).toBe(false);
-      expect(text.includes(TONIGHT_COPY.sides), `${key} prints the sides' eyebrow`).toBe(false);
-    }
-   }
+      // 2. byte-identity with the base
+      const got = Object.fromEntries(Object.entries(reads).map(([k, v]) => [k, digest(v)]));
+      expect(got).toEqual(DIGESTS[seed]);
+      // 3. absence
+      for (const [key, read] of Object.entries(reads)) {
+        const shared = recordOf(key, read);
+        expect(shared && typeof shared === 'object', `${key} hands the page a record`).toBe(true);
+        expect(shared._seed, `${key} carries no seed`).toBeUndefined();
+        expect(composeTonightSheet(shared).frame ?? null, `${key}: no frame`).toBe(null);
+        expect(composeTonightSheet(shared, { audience: 'owner' }).frame ?? null, `${key}: no frame even for the owner (the second lock)`).toBe(null);
+        const { text, drew } = tableOf(shared);
+        expect(drew, `${key}: the Table View draws the sheet`).toBe(true);
+        for (const line of lines) expect(text.includes(line[0].toUpperCase() + line.slice(1)), `${key} prints "${line}"`).toBe(false);
+        expect(text.includes(TONIGHT_COPY.sides), `${key} prints the sides' eyebrow`).toBe(false);
+      }
+    });
+    expectNoSeedFailures(failures, 'every born town is live on the owner\'s record, and every shared read is byte-identical to the base and frame-free');
   }, 600000);
 
   test(`the gate is the FIRST lock: on the owner's own seeded record, a reader who is not the owner gets the no-frame sheet (${BORN.length} born towns)`, () => {
-    for (const [seed, tier] of BORN) {
+    const failures = collectSeedFailures(BORN, ([seed, tier]) => {
       const s = birth(seed, tier);
       expect(typeof s._seed === 'string' && s._seed.length > 0, `${seed}: the owner's record carries its seed`).toBe(true);
       // liveness: the owner casts the frame
@@ -210,7 +220,8 @@ describe('CF3: the frame reaches no shared page', () => {
         expect(sheet.frame ?? null, `${seed} ${label}: no frame`).toBe(null);
         expect(sheet, `${seed} ${label}: exactly the no-frame sheet`).toEqual(noFrame);
       }
-    }
+    });
+    expectNoSeedFailures(failures, 'on every born town\'s own seeded record, a reader who is not the owner gets the no-frame sheet');
   }, 600000);
 
   test('the audiences are a closed, frozen set; only the owner\'s draws the frame', () => {
@@ -223,9 +234,7 @@ describe('CF3: the frame reaches no shared page', () => {
     const towns = [];
     for (const [seed, tier] of BORN) {
       const s = birth(seed, tier);
-      const lines = frameLinesOf(composeTonightSheet(s, { audience: 'owner' }));
-      expect(lines.length, `${seed}: the owner's frame has lines to look for`).toBeGreaterThan(1);
-      towns.push({ seed, lines, reads: await sharedReadsOf(s) });
+      towns.push({ seed, lines: frameLinesOf(composeTonightSheet(s, { audience: 'owner' })), reads: await sharedReadsOf(s) });
     }
     /** Open the sheet on a rendered page as a viewer does: the Overview's "Open Tonight", then the page mounts the Table View. */
     const openSheetOn = async (element) => {
@@ -241,21 +250,40 @@ describe('CF3: the frame reaches no shared page', () => {
       useStore.getState().userPrefs = {};
       return out;
     };
+    // every page of every town opened (async), each page's outcome kept, its own error included (a page that fails to
+    // open is cleaned up and the next one opens); then every town asserted and its failures collected (seedLoopTotality)
+    const opened = new Map();
     for (const { seed, lines, reads } of towns) {
       const pages = [
         ['the gallery page', <PublicDossierView key="g" dossier={reads.gallery} />],
         ['the gallery page (DM content shared)', <PublicDossierView key="d" dossier={reads.galleryDmFull} />],
         ["the party link's page", <PartyLinkView key="p" dossier={reads.partyLink} auth={{ user: null }} onReport={() => {}} />],
       ];
+      const seen = [];
       for (const [where, element] of pages) {
-        const got = await openSheetOn(element);
+        try {
+          seen.push({ where, got: await openSheetOn(element) });
+        } catch (error) {
+          cleanup();
+          useStore.getState().userPrefs = {};
+          seen.push({ where, error });
+        }
+      }
+      opened.set(seed, { lines, seen });
+    }
+    const failures = collectSeedFailures([...opened.keys()], (seed) => {
+      const { lines, seen } = opened.get(seed);
+      expect(lines.length, `${seed}: the owner's frame has lines to look for`).toBeGreaterThan(1);
+      for (const { where, got, error } of seen) {
+        if (error) throw error;
         expect(got.sheet.length, `${seed} on ${where}: the sheet drew`).toBeGreaterThan(0);
         expect(got.sides, `${seed} on ${where}: no sides`).toBe(false);
         expect(got.sheet.includes(TONIGHT_COPY.trouble), `${seed} on ${where}: the sheet opens on no trouble`).toBe(false);
         expect(got.page.includes(TONIGHT_COPY.sides), `${seed} on ${where}: the sides' eyebrow`).toBe(false);
         for (const line of lines) expect(got.page.includes(line[0].toUpperCase() + line.slice(1)), `${seed} on ${where} prints "${line}"`).toBe(false);
       }
-    }
+    });
+    expectNoSeedFailures(failures, 'on every born town, the sheet opens on the gallery page and the party link, and the frame never rides it');
   }, 600000);
 
   test('one door: only the sheet\'s composer imports the trouble cast', () => {
