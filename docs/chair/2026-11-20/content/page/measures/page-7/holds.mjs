@@ -17,6 +17,7 @@ const { TENSION_CAUSES } = await import(`${L}/src/data/tensionCauses.js`);
 const { TENSION_CAUSE_HOLDS } = await import(`${L}/src/domain/display/tensionCauseHolds.js`);
 const { CAUSE_HOUSES } = await import(`${L}/src/domain/facts/causeHouses.js`);
 const { isLiveInstitution } = await import(`${L}/src/domain/institutions/institutionRoster.js`);
+const { declarationAdmits, declarationOf } = await import(`${L}/src/domain/facts/factVocabulary.js`);
 await loadGenerationLawPayloads();
 // ── sim.mjs's helpers and table, verbatim (old_crime_wave kept here only to show it is not built) ──
 const inst = (t, re) => (t.institutions || []).some((i) => re.test(i.name || ''));
@@ -104,6 +105,8 @@ const HOUSE_RE = { thieves_house: /thieves'? guild/i, contraband_water: /smuggl/
 const CATALOGUE_NAMES = new Set(Object.values(CAUSE_HOUSES).flatMap((s) => [...s]));
 const simOf = (kind, id) => T[kind].find(([c]) => c === id);
 let towns = 0, checks = 0, kindChecks = 0; const dis = []; const notBuilt = new Set();
+// addendum 3: every line a cause can print declares atoms its predicate implies; each declaration is checked where it can print
+let lineChecks = 0; const refused = [];
 const perCause = {};
 for (const size of SIZES) for (let i = 0; i < +nA; i++) {
   const seed = `${prefix}-${size}-${i}`;
@@ -115,6 +118,8 @@ for (const size of SIZES) for (let i = 0; i < +nA; i++) {
     const sim = simOf(kind, c.id); if (!sim) { dis.push({ seed, kind, id: c.id, cls: 'NO SIM ROW' }); continue; }
     let s; try { s = !!sim[2](t, f); } catch { s = false; }
     const b = !!TENSION_CAUSE_HOLDS[c.holds](t, f);
+    const guildless = !!table.withoutItsHouse && f.guild === false;
+    if (b && !guildless) for (const w of c.wordings) { lineChecks++; const v = declarationAdmits(declarationOf(w), f); if (!v.admitted) refused.push(`${seed} ${kind}:${c.id} "${w.text}" refused ${JSON.stringify(v.refused)}`); }
     checks++; const inKind = liveKinds.has(kind); if (inKind) kindChecks++;
     const pc = (perCause[`${kind}:${c.id}`] ||= { sim: 0, built: 0, dis: 0, simK: 0, builtK: 0, disK: 0 });
     pc.sim += s; pc.built += b; if (inKind) { pc.simK += s; pc.builtK += b; }
@@ -135,6 +140,8 @@ for (const size of SIZES) for (let i = 0; i < +nA; i++) {
     dis.push({ seed, kind, id: c.id, sim: s, built: b, inKind, cls, why });
   }
 }
+console.log(`DECLARED LINES: ${lineChecks} checks (every wording of every cause that holds, every town); REFUSED ${refused.length}`);
+for (const r of refused) console.log(`  [REFUSED] ${r}`);
 console.log(`TOWNS ${towns} · CHECKS ${checks} (every town × every built cause) · IN-KIND CHECKS ${kindChecks} (towns whose live tensions hold the kind)`);
 console.log(`NOT BUILT (sim.mjs rows with no built cause): ${[...notBuilt].join(', ') || 'none'}`);
 for (const [k, v] of Object.entries(perCause)) console.log(`  ${k.padEnd(36)} all towns: sim ${String(v.sim).padStart(3)} built ${String(v.built).padStart(3)} disagree ${String(v.dis).padStart(3)} · in kind: sim ${String(v.simK).padStart(3)} built ${String(v.builtK).padStart(3)} disagree ${String(v.disK).padStart(3)}`);

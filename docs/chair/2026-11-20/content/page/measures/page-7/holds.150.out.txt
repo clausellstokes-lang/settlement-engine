@@ -1,3 +1,4 @@
+DECLARED LINES: 19613 checks (every wording of every cause that holds, every town); REFUSED 0
 TOWNS 900 · CHECKS 48600 (every town × every built cause) · IN-KIND CHECKS 7152 (towns whose live tensions hold the kind)
 NOT BUILT (sim.mjs rows with no built cause): crime_wave:old_crime_wave
   crime_wave:criminal_power            all towns: sim  18 built  18 disagree   0 · in kind: sim  12 built  12 disagree   0

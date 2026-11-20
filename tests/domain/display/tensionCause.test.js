@@ -16,6 +16,8 @@ import { TENSION_CAUSES } from '../../../src/data/tensionCauses.js';
 import { TENSION_CAUSE_HOLDS } from '../../../src/domain/display/tensionCauseHolds.js';
 import { POWER_SLOT, tensionCauseSentenceOf } from '../../../src/domain/display/tensionCause.js';
 import { factsOf } from '../../../src/domain/facts/factsOf.js';
+import { declarationAdmits, declarationOf } from '../../../src/domain/facts/factVocabulary.js';
+import { solePowerNameOf } from '../../../src/data/tensionSidePower.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
 import { expectAbsentWithAnchor } from '../../helpers/anchoredNegatives.js';
 
@@ -37,13 +39,14 @@ beforeAll(async () => {
 const expectedOf = (record, kind) => {
   const table = TENSION_CAUSES[kind];
   const facts = factsOf(record);
-  if (kind === 'guild_conflict' && facts.guild === false) return { cause: 'withoutItsHouse', sentence: table.withoutItsHouse };
-  const held = table.causes.filter((c) => TENSION_CAUSE_HOLDS[c.holds](record, facts) && !c.wordings.some((w) => w.includes('{power}')));
+  if (kind === 'guild_conflict' && facts.guild === false) return { cause: 'withoutItsHouse', sentence: table.withoutItsHouse.text };
+  const held = table.causes.filter((c) => TENSION_CAUSE_HOLDS[c.holds](record, facts) && (!c.power || solePowerNameOf(record, c.power) !== null));
   const r1 = held.filter((c) => c.rank === 1);
   const tier = r1.length ? r1 : held.filter((c) => c.rank === 2);
   const name = String(record?.name ?? '');
   const cause = tier.length ? pickVariant(tier, `${name}::held::${kind}`) : undefined;
-  return { cause: cause ? cause.id : 'plain', sentence: pickVariant(cause ? cause.wordings : table.plain, `${name}::cause::${kind}`) };
+  const text = /** @type {any} */ (pickVariant(cause ? cause.wordings : table.plain, `${name}::cause::${kind}`)).text;
+  return { cause: cause ? cause.id : 'plain', sentence: cause?.power ? text.split('{power}').join(solePowerNameOf(record, cause.power, text.startsWith('{power}'))) : text };
 };
 
 /** @param {any} record */
@@ -71,6 +74,26 @@ describe('the key: the town\'s name and the trouble\'s kind, never the seed', ()
   });
 });
 
+describe('the declared draw (addendum 3): every line a cause can print is admitted wherever the cause holds', () => {
+  it('on every born town, every wording of every cause that holds, every guild line and withoutItsHouse, admits', () => {
+    let checked = 0;
+    const failures = collectSeedFailures(births, ([seed, record]) => {
+      const facts = factsOf(record);
+      const bad = [];
+      for (const [kind, table] of Object.entries(TENSION_CAUSES)) {
+        const held = table.causes.filter((c) => TENSION_CAUSE_HOLDS[c.holds](record, facts));
+        const lines = [...held.flatMap((c) => c.wordings), ...table.plain];
+        const t = /** @type {any} */ (table);
+        if (t.withoutItsHouse && facts.guild === false) lines.splice(0, lines.length, t.withoutItsHouse);
+        for (const l of lines) { checked++; const v = declarationAdmits(declarationOf(l), facts); if (!v.admitted) bad.push(`${kind}: ${l.text} — ${JSON.stringify(v.refused)}`); }
+      }
+      expect(bad, seed).toEqual([]);
+    });
+    expectNoSeedFailures(failures, 'declared lines admitted where they can print');
+    expect(checked).toBeGreaterThan(births.length * 8);
+  });
+});
+
 describe('a kind with no table', () => {
   it('reads null', () => {
     const record = births[0][1];
@@ -85,8 +108,8 @@ describe('a kind with no table', () => {
       for (const t of record.history?.currentTensions || []) {
         const s = tensionCauseSentenceOf(record, t);
         if (!Object.hasOwn(TENSION_CAUSES, t.type)) { expect(s, `${seed} ${t.type}`).toBeNull(); continue; }
-        const own = [...TENSION_CAUSES[t.type].causes.flatMap((c) => c.wordings), ...TENSION_CAUSES[t.type].plain, /** @type {any} */ (TENSION_CAUSES[t.type]).withoutItsHouse];
-        expect(own, `${seed} ${t.type}`).toContain(s);
+        const own = [...TENSION_CAUSES[t.type].causes.flatMap((c) => c.wordings), ...TENSION_CAUSES[t.type].plain, /** @type {any} */ (TENSION_CAUSES[t.type]).withoutItsHouse].filter(Boolean).map((l) => l.text);
+        expect(own.some((w) => w === s || (w.includes('{power}') && new RegExp(`^${w.split('{power}').map((x) => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('.+')}$`).test(String(s)))), `${seed} ${t.type}: ${s}`).toBe(true);
       }
     });
     expectNoSeedFailures(failures, 'every tension prints its own kind\'s sentence');
@@ -109,14 +132,14 @@ describe('the pick, as measured', () => {
     // a kept, paid force and no criminal power: crime_wave's rank 1 holds nothing
     const bare = { name: 'Ashford', institutions: [{ name: 'Town watch' }, { name: 'Garrison' }], powerStructure: { factions: [] } };
     expect(expectedOf(bare, 'crime_wave').cause).toBe('plain');
-    expect(tensionCauseSentenceOf(bare, { type: 'crime_wave' })).toBe(pickVariant(TENSION_CAUSES.crime_wave.plain, 'Ashford::cause::crime_wave'));
+    expect(tensionCauseSentenceOf(bare, { type: 'crime_wave' })).toBe(pickVariant(TENSION_CAUSES.crime_wave.plain, 'Ashford::cause::crime_wave')?.text);
     const market = { ...bare, institutions: [...bare.institutions, { name: 'Black market' }] };
     const bm = /** @type {any} */ (TENSION_CAUSES.crime_wave.causes.find((c) => c.id === 'black_market'));
-    expect(tensionCauseSentenceOf(market, { type: 'crime_wave' })).toBe(pickVariant(bm.wordings, 'Ashford::cause::crime_wave'));
+    expect(tensionCauseSentenceOf(market, { type: 'crime_wave' })).toBe(pickVariant(bm.wordings, 'Ashford::cause::crime_wave').text);
     // no force kept: rank 1 (no_force) speaks over the black market
     const noForce = { ...market, institutions: [{ name: 'Black market' }] };
     const nf = /** @type {any} */ (TENSION_CAUSES.crime_wave.causes.find((c) => c.id === 'no_force'));
-    expect(tensionCauseSentenceOf(noForce, { type: 'crime_wave' })).toBe(pickVariant(nf.wordings, 'Ashford::cause::crime_wave'));
+    expect(tensionCauseSentenceOf(noForce, { type: 'crime_wave' })).toBe(pickVariant(nf.wordings, 'Ashford::cause::crime_wave').text);
   });
 });
 
@@ -130,26 +153,33 @@ describe('the guild quarrel without its guild (addendum 2, the chair\'s 15:35): 
     const quarrel = (record.history?.currentTensions || []).find((/** @type {any} */ t) => t.type === 'guild_conflict');
     expect(quarrel).toBeTruthy();
     const table = /** @type {any} */ (TENSION_CAUSES.guild_conflict);
-    expect(typeof table.withoutItsHouse).toBe('string');
-    expect(tensionCauseSentenceOf(record, quarrel)).toBe(table.withoutItsHouse);
+    expect(typeof table.withoutItsHouse.text).toBe('string');
+    expect(tensionCauseSentenceOf(record, quarrel)).toBe(table.withoutItsHouse.text);
   });
   it('a guildless document never prints a guild cause or plain line, whatever holds; a guild restores the ranks', () => {
     const table = /** @type {any} */ (TENSION_CAUSES.guild_conflict);
     const guildless = { name: 'Ashford', institutions: [{ name: 'Annual fair' }, { name: 'Caravanserai' }], powerStructure: { factions: [{ faction: 'Merchant League', category: 'economy', isGoverning: true, powerLabel: 'Dominant' }] } };
     expect(factsOf(guildless).guild).toBe(false);
-    expect(tensionCauseSentenceOf(guildless, { type: 'guild_conflict' })).toBe(table.withoutItsHouse);
+    expect(tensionCauseSentenceOf(guildless, { type: 'guild_conflict' })).toBe(table.withoutItsHouse.text);
     const withGuild = { ...guildless, powerStructure: { factions: [...guildless.powerStructure.factions, { faction: 'Weavers Guild', category: 'economy', powerLabel: 'Minor' }] } };
     expect(factsOf(withGuild).guild).toBe(true);
     expect(tensionCauseSentenceOf(withGuild, { type: 'guild_conflict' })).toBe(expectedOf(withGuild, 'guild_conflict').sentence);
-    expect(tensionCauseSentenceOf(withGuild, { type: 'guild_conflict' })).not.toBe(table.withoutItsHouse);
+    expect(tensionCauseSentenceOf(withGuild, { type: 'guild_conflict' })).not.toBe(table.withoutItsHouse.text);
   });
 });
 
 describe('{power}: filled only by the sides table\'s own fill', () => {
-  it('merchants_rule does not hold while the fill is not built: the governing trade power alone prints plain', () => {
+  const mr = /** @type {any} */ (TENSION_CAUSES.outside_debt.causes.find((c) => c.id === 'merchants_rule'));
+  it('one economy power governing: merchants_rule holds and its slot takes that power\'s name as a sentence takes it', () => {
     const record = { name: 'Ashford', institutions: [], powerStructure: { factions: [{ faction: 'Merchant League', category: 'economy', isGoverning: true, powerLabel: 'Dominant' }] } };
     expect(TENSION_CAUSE_HOLDS.governedByTrade(record, factsOf(record))).toBe(true);
-    expect(tensionCauseSentenceOf(record, { type: 'outside_debt' })).toBe(pickVariant(TENSION_CAUSES.outside_debt.plain, 'Ashford::cause::outside_debt'));
+    const w = pickVariant(mr.wordings, 'Ashford::cause::outside_debt').text;
+    expect(tensionCauseSentenceOf(record, { type: 'outside_debt' })).toBe(w.split(POWER_SLOT).join(/** @type {string} */ (solePowerNameOf(record, 'economy'))));
+  });
+  it('two economy powers: merchants_rule does not hold (no one name), the plain line prints', () => {
+    const record = { name: 'Ashford', institutions: [], powerStructure: { factions: [{ faction: 'Merchant League', category: 'economy', isGoverning: true, powerLabel: 'Dominant' }, { faction: 'Weavers Guild', category: 'economy', powerLabel: 'Minor' }] } };
+    expect(TENSION_CAUSE_HOLDS.governedByTrade(record, factsOf(record))).toBe(true);
+    expect(tensionCauseSentenceOf(record, { type: 'outside_debt' })).toBe(pickVariant(TENSION_CAUSES.outside_debt.plain, 'Ashford::cause::outside_debt')?.text);
   });
   it('no sentence of any born town prints the slot', () => {
     const printed = births.flatMap(([, record]) => Object.keys(TENSION_CAUSES).map((kind) => String(tensionCauseSentenceOf(record, { type: kind }))));
@@ -160,12 +190,12 @@ describe('{power}: filled only by the sides table\'s own fill', () => {
 
 describe('a house is matched by its catalogue identity on the live roster, never by a custom name', () => {
   const force = [{ name: 'Town watch' }, { name: 'Garrison' }];
-  const blackMarketLines = /** @type {any} */ (TENSION_CAUSES.crime_wave.causes.find((c) => c.id === 'black_market')).wordings;
+  const blackMarketLines = /** @type {any} */ (TENSION_CAUSES.crime_wave.causes.find((c) => c.id === 'black_market')).wordings.map((/** @type {any} */ l) => l.text);
   it('a custom house named "Black Market Tavern" does not print the black market\'s line', () => {
     for (const extra of [{ isCustom: true }, { source: 'custom' }, {}]) {
       const record = { name: 'Ashford', institutions: [...force, { name: 'Black Market Tavern', ...extra }], powerStructure: { factions: [] } };
       const said = tensionCauseSentenceOf(record, { type: 'crime_wave' });
-      expect(TENSION_CAUSES.crime_wave.plain, JSON.stringify(extra)).toContain(said);
+      expect(TENSION_CAUSES.crime_wave.plain.map((l) => l.text), JSON.stringify(extra)).toContain(said);
       expectAbsentWithAnchor(blackMarketLines, said, blackMarketLines[0], `custom house ${JSON.stringify(extra)}`);
     }
     const real = { name: 'Ashford', institutions: [...force, { name: 'Black market' }], powerStructure: { factions: [] } };
@@ -174,7 +204,7 @@ describe('a house is matched by its catalogue identity on the live roster, never
   it('a ruined black market does not print the black market\'s line', () => {
     const record = { name: 'Ashford', institutions: [...force, { name: 'Black market', status: 'ruined' }], powerStructure: { factions: [] } };
     const said = tensionCauseSentenceOf(record, { type: 'crime_wave' });
-    expect(TENSION_CAUSES.crime_wave.plain).toContain(said);
+    expect(TENSION_CAUSES.crime_wave.plain.map((l) => l.text)).toContain(said);
     expectAbsentWithAnchor(blackMarketLines, said, blackMarketLines[0], 'a ruined black market');
   });
 });

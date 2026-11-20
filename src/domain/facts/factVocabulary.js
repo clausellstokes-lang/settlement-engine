@@ -568,6 +568,15 @@ export const FACT_DIMENSIONS = Object.freeze({
     reader: (/** @type {FactsLike} */ f, /** @type {string|null} */ key) => (f.orderForce && typeof f.orderForce === 'object' && key ? bool(/** @type {Record<string, unknown>} */ (f.orderForce)[key]) : undefined) }),
   // ── the crisis dimension (the inverse default) ──
   crisis: dim({ shape: 'crisis', home: 'crisis', reader: (f) => f.crisis }),
+  // PAGE-7 (CAUSES-DATA addendum 3, item 2: the chair's ruling of 16:30; vetoable by the owner, new vocabulary): `house:
+  // thieves_guild` and `house: smuggling` = a house of the group stands on the live roster by catalogue identity
+  // (`causeHouses.js :: causeHouseStands`): the troubles' causes that name a thieves' guild or smuggling presume one.
+  house: dim({ shape: 'presence', home: 'causeHouses', keys: ['thieves_guild', 'smuggling'],
+    reader: (/** @type {FactsLike} */ f, /** @type {string|null} */ key) => {
+      const houses = /** @type {Record<string, unknown>} */ (f).causeHouses;
+      const group = key === 'thieves_guild' ? 'thievesGuild' : key === 'smuggling' ? 'smuggling' : null;
+      return houses && typeof houses === 'object' && group ? bool(/** @type {Record<string, unknown>} */ (houses)[group]) : undefined;
+    } }),
 });
 
 /** The crisis dimension's legal values. */

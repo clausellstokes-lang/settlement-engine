@@ -18,33 +18,31 @@
  * to the DM and another to the player for the same document. The keys are `<name>::held::<kind>` (the cause) and
  * `<name>::cause::<kind>` (the wording); the same document with its seed deleted prints the same sentences.
  *
- * `{power}` (rule 6): filled only by the sides table's own fill (`data/tensionSideMeanings.js`, rule 0: the governing
- * power's name for 'ruler'), never a second fill here. THAT FILL IS NOT BUILT at 9e4ba24b6: the table carries `named` and
- * no module reads it. Until the display seat builds it and this module calls it, a cause whose wordings hold `{power}`
- * DOES NOT HOLD (its test cannot pass), so no slot is ever printed raw.
+ * THE DECLARED DRAW (addendum 3, item 1: the chair's ruling of 16:30). Every wording declares the atoms its cause's
+ * predicate implies (`needs`, `excludes`, `crisis` on its row in the data file), and the wording is drawn through the one
+ * door (`facts/drawDeclared.js :: drawDeclared`), the keyed hash as its `draw`: an admitted line is the hash's own pick,
+ * byte for byte; a refused one resolves as the door resolves it, and a cause with no admitted line falls to plain.
+ *
+ * `{power}` (rule 6; addendum 3, item 4): a cause carrying `power` (a power category: outside_debt's `merchants_rule`,
+ * `economy`) holds only where the document holds exactly one power of that category, and its slot is filled with that
+ * power's name as a sentence takes it, by the ONE helper beside the sides table (`data/tensionSidePower.js ::
+ * solePowerNameOf`); never a second fill. Two economy powers, or none: the cause does not hold.
  *
  * Pure: no randomness, no clock, no write.
  * @enforced-by tests/domain/display/tensionCause.test.js
  */
 import { pickVariant } from '../../kernel/proseHash.js';
 import { factsOf } from '../facts/factsOf.js';
+import { drawDeclared } from '../facts/drawDeclared.js';
 import { TENSION_CAUSES } from '../../data/tensionCauses.js';
+import { solePowerNameOf } from '../../data/tensionSidePower.js';
 import { TENSION_CAUSE_HOLDS } from './tensionCauseHolds.js';
 
 /** The power's slot. */
 export const POWER_SLOT = '{power}';
 
 /** @typedef {import('../../data/tensionCauses.js').TensionCause} TensionCause */
-
-/**
- * The sides table's fill of `{power}` for this cause in this document: NOT BUILT (see the header), so none.
- * @param {unknown} record @param {Readonly<TensionCause>} cause @returns {string | null}
- */
-// eslint-disable-next-line no-unused-vars
-const powerFillOf = (record, cause) => null;
-
-/** The cause's wordings hold the power's slot. @param {Readonly<TensionCause>} cause */
-const needsPower = (cause) => cause.wordings.some((w) => w.includes(POWER_SLOT));
+/** @typedef {import('../../data/tensionCauses.js').CauseLine} CauseLine */
 
 /**
  * The town's own key: its name, which every document the town is shown in carries.
@@ -66,16 +64,27 @@ export function tensionCauseSentenceOf(record, tension) {
   const table = Object.hasOwn(TENSION_CAUSES, kind) ? TENSION_CAUSES[kind] : null;
   if (!table) return null;
   const facts = factsOf(/** @type {{}} */ (record));
+  const town = townKeyOf(record);
+  // the town's identity (its name) and the kind: the wording's key, and the door's tie-break key
+  const identity = `${town}::cause::${kind}`;
+  const poolId = `tensionCauses.${kind}`;
+  /** the keyed hash, the door's draw @param {ReadonlyArray<Readonly<CauseLine>>} p */
+  const pick = (p) => pickVariant(p, identity);
   // addendum 2 (the chair's 15:35): the guild quarrel where the guild's home answers no takes its one sentence, before the ranks
-  if (typeof table.withoutItsHouse === 'string' && facts.guild === false) return table.withoutItsHouse;
+  if (table.withoutItsHouse && facts.guild === false) {
+    const alone = [table.withoutItsHouse];
+    return drawDeclared(alone, { facts, draw: pick, key: identity, poolId }).text ?? null;
+  }
   const holding = (/** @type {1 | 2} */ rank) => table.causes.filter((c) => c.rank === rank
     && TENSION_CAUSE_HOLDS[c.holds](/** @type {import('./tensionCauseHolds.js').CauseRecord} */ (record), facts)
-    && (!needsPower(c) || powerFillOf(record, c) !== null));
+    && (!c.power || solePowerNameOf(record, c.power) !== null));
   const first = holding(1);
   const tier = first.length ? first : holding(2);
-  const town = townKeyOf(record);
   const cause = tier.length ? pickVariant(tier, `${town}::held::${kind}`) : undefined;
-  const wording = /** @type {string} */ (pickVariant(cause ? cause.wordings : table.plain, `${town}::cause::${kind}`));
-  if (!cause || !needsPower(cause)) return wording;
-  return wording.split(POWER_SLOT).join(/** @type {string} */ (powerFillOf(record, cause)));
+  const line = (cause ? drawDeclared(cause.wordings, { facts, draw: pick, key: identity, poolId }).text : null)
+    ?? drawDeclared(table.plain, { facts, draw: pick, key: identity, poolId }).text;
+  if (!line) return null;
+  if (!cause?.power || !line.includes(POWER_SLOT)) return line;
+  const power = cause.power;
+  return line.split(POWER_SLOT).map((part, i) => (i === 0 ? part : `${solePowerNameOf(record, power, i === 1 && line.startsWith(POWER_SLOT))}${part}`)).join('');
 }

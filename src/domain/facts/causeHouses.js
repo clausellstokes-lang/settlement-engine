@@ -1,7 +1,8 @@
 /**
  * domain/facts/causeHouses.js — THE HOUSES A TROUBLE'S CAUSE NAMES STAND (PAGE-7, the brief CAUSES-DATA at 9e4ba24b6 and
- * the chair's rulings of 15:18; `docs/DESIGN_POOL_CENSUS.md` §1: ONE FACT, ONE HOME). A new leaf, named in no getter of
- * `factsOf` (its layer row is the facts' owners'); `display/tensionCauseHolds.js` reads it here.
+ * the chair's rulings of 15:18; `docs/DESIGN_POOL_CENSUS.md` §1: ONE FACT, ONE HOME). A leaf, named in the
+ * `factsOf` getter `causeHouses` (addendum 3; its layer row in `factLayers.js`); the vocabulary's `house: thieves_guild` and
+ * `house: smuggling` read it there, and `display/tensionCauseHolds.js` reads it here.
  *
  *   causeHouseStands(record, key)   a house of the group `key` stands on the LIVE roster (`institutionRoster.js ::
  *                                   liveInstitutions`: a ruined, removed, destroyed or remnant house is no cause), BY ITS
@@ -45,6 +46,15 @@ export const CAUSE_HOUSES = Object.freeze(Object.fromEntries(
 
 /** The groups a reader may ask. @type {ReadonlyArray<string>} */
 export const CAUSE_HOUSE_GROUPS = Object.freeze(Object.keys(CAUSE_HOUSES));
+
+/**
+ * Every group at once, for `factsOf(record).causeHouses` (the vocabulary's `house: <key>` reads its group here).
+ * @param {{ institutions?: unknown } | null | undefined} record
+ * @returns {Readonly<Record<string, boolean>>}
+ */
+export function causeHousesOf(record) {
+  return Object.freeze(Object.fromEntries(CAUSE_HOUSE_GROUPS.map((g) => [g, causeHouseStands(record, g)])));
+}
 
 /**
  * THE ONE READER.
