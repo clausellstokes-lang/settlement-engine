@@ -394,6 +394,31 @@ export const handReds = (hand, exempt = EXEMPT, words = FREE_TEXT_READ, dm = DM_
 export const handHouseReadings = (hand) => sortRows(readHandLines(hand, {}).flatMap(({ pool, sha, houses }) => houses.map((house) => ({ pool, sha, house }))),
   ['pool', 'sha', 'house']);
 
+/**
+ * THE WATCH (SAME-2 brief H2 unit 5, the chair's 19:29): a NEW hand line that holds a bare crime word OUTSIDE the forms
+ * (crime, criminal, thief, thieves, gang, smuggl, bribe, or a fence as a person: "a fence", "the fence", "fences stolen")
+ * is LISTED as "watch" (a warn block on stderr, one line each) for a human to read at every landing; NEVER red. A line is
+ * new when its text hash is neither in the bank nor in `watchBase`, the lines on BASE (43ab0f5eb, the walker's base: a
+ * line is new when it is not on that commit) that hold such a word.
+ */
+const WATCH_WORDS = /\b(?:crimes?|criminals?|thief|thieves|gangs?|smuggl\w*|brib\w*)\b|\b(?:a|the) fence\b|\bfences stolen\b/i;
+const ANY_FORM = new RegExp(Object.values(CRIME_TEXT_FORMS).map((f) => `(?:${f.source})`).join('|'), 'gi');
+/** The bare crime word a text holds outside the free-text forms, or null. @param {string} text */
+export const watchWord = (text) => text.replace(ANY_FORM, ' ').match(WATCH_WORDS)?.[0]?.toLowerCase() ?? null;
+/**
+ * The watch rows: each line not quiet, not seen, holding a bare crime word outside the forms.
+ * @param {ReturnType<typeof readHandLines>} lines @param {Set<string>} seen the bank's and the base's text hashes
+ * @returns {Array<{ pool: string, sha: string, word: string, text: string }>}
+ */
+export function watchRows(lines, seen) {
+  /** @type {Array<{ pool: string, sha: string, word: string, text: string }>} */ const out = [];
+  for (const { pool, sha, text, quiet } of lines) {
+    const word = !quiet && text !== null && !seen.has(sha) ? watchWord(text) : null;
+    if (word && text !== null) out.push({ pool, sha, word, text });
+  }
+  return sortRows(out, ['pool', 'sha']);
+}
+
 // ── THE TOTALITY ARM ────────────────────────────────────────────────────────────────────────────
 const DRAW_CALL = /\b(?:pick|drawDeclared|weightedPick|pickVariant|pickVariantMixed)\(/;
 const NAMED_IMPORT = /import\s*\{([^}]*)\}\s*from\s*['"]([^'"]+)['"]/g;
@@ -548,6 +573,19 @@ describe(`the hideable-house walker of the sameness pools (base ${BASE})`, async
     for (const ref of SENTENCE_KEYED) expect(taken.get(ref)?.[0], ref).toBe(taken.get(ref)?.[1]);
   });
 
+  test('THE WATCH: a new hand line with a bare crime word outside the forms is LISTED (a warn block), never red', async () => {
+    const bank = readJson(EXISTING_REL);
+    const seen = new Set([...bank.hand, ...bank.watchBase].map((/** @type {{ sha: string }} */ r) => r.sha));
+    const watch = watchRows(readHandLines(await handPoolsOnLine(readJson(HAND_REL).rows)), seen);
+    // The block goes to stderr directly: this suite's runner swallows a PASSING test's console.warn (measured, a probe),
+    // and the watch is read on green runs.
+    if (watch.length) {
+      process.stderr.write(`${[`THE WATCH (samenessHideable, SAME-2 H2 unit 5): ${watch.length} new hand line(s) with a bare crime word outside the forms. A human reads each; none reds.`,
+        ...watch.map((w) => `  watch  ${w.pool}  ${w.sha}  "${w.word}"  ${w.text}`)].join('\n')}\n`);
+    }
+    expect(watch.every((w) => w.word.length > 0)).toBe(true); // a listing: it never reds on its rows
+  });
+
   test('TOTALITY: every pool-shaped table a draw site reads is reached by corpusPools or on the hand list', async () => {
     const hand = readJson(HAND_REL).rows;
     expect(hand.length).toBeLessThanOrEqual(HAND_CEILING);
@@ -661,6 +699,20 @@ describe(`the hideable-house walker of the sameness pools (base ${BASE})`, async
       }
       expect(crimeTextForm('Several courts sitting at once, each to its province: commercial, criminal, appellate, ecclesiastical.')).toBeNull();
       expect(crimeTextForm('Holds debtors, criminals, and political prisoners alike.')).toBe('criminal'); // the plural is kept
+    });
+
+    test('THE WATCH: a new line "A fence buys what the carters lose." is listed, not red; seen, or a form\'s word, it is not listed', () => {
+      const ref = 'src/data/narrativeData.js :: STRESS_NOTES';
+      const fence = [{ ref, value: { famine: ['A fence buys what the carters lose.'] } }];
+      expect(handReds(fence)).toEqual([]);
+      const listed = watchRows(readHandLines(fence), new Set());
+      expect(listed.map((w) => [w.pool, w.word])).toEqual([[`${ref}::famine`, 'a fence']]);
+      expect(watchRows(readHandLines(fence), new Set([listed[0].sha]))).toEqual([]);
+      expect(watchWord('A smuggler sells grain by the well.')).toBe('smuggler');
+      expect(watchWord('They overheard two people settle a bribe.')).toBe('bribe');
+      expect(watchWord('A chapter of organised crime.')).toBeNull();
+      expect(watchWord('Rival gangs, forever disputing their turf.')).toBeNull();
+      expect(watchWord('The fence along the lane needs mending.')).toBe('the fence'); // a listing errs toward the human's eye
     });
 
     test('PHASE 3: a declared hand line is read by its atoms (a crime atom reds; a house is listed), not by its words', () => {

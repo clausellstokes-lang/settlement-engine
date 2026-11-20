@@ -1,5 +1,5 @@
 {
- "_doc": "SAME-1 brief 3 (the chair, 17:32 UTC 2026-11-20): RULE 1's reds standing on the base 43ab0f5eb (the join line), SHRINK-ONLY. Each row is a line (pool, vid, the first 12 hex of the sha256 of its text) that needs a crime fact or a hideable house, or stands public in a crime pool, and is not dm-only. tests/lint/samenessHideable.walker.test.js holds the reds equal to these rows: cure a line (mark it dm-only, or move it off the fact) and remove its row; a new red line reds. EXISTING_CEILING there only falls. PHASE 3 (SAME-2 brief H unit 1, the chair's 17:45 order (2)): \"hand\" banks the hand-listed pools' lines red on the merged line 1c9673e84 (pool = path :: symbol::key path, the line's text hash, why: crime pool or needs <atom>; or crime word <form>, a bare line read by the precise free-text forms the chair ruled at 19:29, SAME-2 brief H2; a key that is a sentence is read by those forms, not the key list); a hand line has no vid, so the hash is its identity. EXISTING_CEILING counts rows + hand.",
+ "_doc": "SAME-1 brief 3 (the chair, 17:32 UTC 2026-11-20): RULE 1's reds standing on the base 43ab0f5eb (the join line), SHRINK-ONLY. Each row is a line (pool, vid, the first 12 hex of the sha256 of its text) that needs a crime fact or a hideable house, or stands public in a crime pool, and is not dm-only. tests/lint/samenessHideable.walker.test.js holds the reds equal to these rows: cure a line (mark it dm-only, or move it off the fact) and remove its row; a new red line reds. EXISTING_CEILING there only falls. PHASE 3 (SAME-2 brief H unit 1, the chair's 17:45 order (2)): \"hand\" banks the hand-listed pools' lines red on the merged line 1c9673e84 (pool = path :: symbol::key path, the line's text hash, why: crime pool or needs <atom>; or crime word <form>, a bare line read by the precise free-text forms the chair ruled at 19:29, SAME-2 brief H2; a key that is a sentence is read by those forms, not the key list); a hand line has no vid, so the hash is its identity. EXISTING_CEILING counts rows + hand. THE WATCH (SAME-2 brief H2 unit 5): \"watchBase\" lists the hand lines on the base 43ab0f5eb (pool, text hash, word) that hold a bare crime word outside the free-text forms; a hand line whose hash is neither in \"hand\" nor here and that holds such a word is LISTED by the walker (a warn block on stderr), never red. watchBase is not counted by EXISTING_CEILING.",
  "rows": [
   {"pool":"DS-DEF-3::COMPOUND: criminal governance","vid":1,"sha":"9d0788086aa8","why":"crime pool"},
   {"pool":"DS-DEF-3::COMPOUND: criminal governance","vid":2,"sha":"e6929e3e7bdb","why":"crime pool"},
@@ -250,5 +250,16 @@
   {"pool":"src/data/people/goalSecretRefusals.js :: GOAL_SECRET_REFUSAL_ROWS::criminal.any.personal[5]","sha":"dbdd6d763376","why":"crime pool"},
   {"pool":"src/data/people/goalSecretRefusals.js :: GOAL_SECRET_REFUSAL_ROWS::criminal.military.military[1]","sha":"80b4ee0421f5","why":"crime pool"},
   {"pool":"src/data/people/goalSecretRefusals.js :: GOAL_SECRET_REFUSAL_ROWS::criminal.military.military[2]","sha":"e7500045fc81","why":"crime pool"}
+ ],
+ "watchBase": [
+  {"pool":"src/data/institutionDescVariants.js :: INSTITUTION_DESC_VARIANTS::city|Infrastructure|Multiple courthouses","sha":"30fa38b6315f","word":"crime"},
+  {"pool":"src/data/institutionDescVariants.js :: INSTITUTION_DESC_VARIANTS::city|Infrastructure|Multiple courthouses","sha":"8396a06c667e","word":"criminal"},
+  {"pool":"src/data/institutionDescVariants.js :: INSTITUTION_DESC_VARIANTS::hamlet|Economy|Stone quarry","sha":"18425e5e902f","word":"gang"},
+  {"pool":"src/data/institutionDescVariants.js :: INSTITUTION_DESC_VARIANTS::metropolis|Infrastructure|Multiple court buildings","sha":"7afe47323eef","word":"criminal"},
+  {"pool":"src/data/institutionDescVariants.js :: INSTITUTION_DESC_VARIANTS::metropolis|Infrastructure|Multiple court buildings","sha":"dc3ccafa6d79","word":"criminal"},
+  {"pool":"src/data/institutionDescVariants.js :: INSTITUTION_DESC_VARIANTS::thorp|Defense|Palisade","sha":"51f186aa40e1","word":"thief"},
+  {"pool":"src/data/npcData.js :: NPC_FACTION_LOYALTY::government","sha":"5d64369e9bd6","word":"crime"},
+  {"pool":"src/data/npcData.js :: NPC_FACTION_LOYALTY::other","sha":"0d7d9dec4d14","word":"a fence"},
+  {"pool":"src/data/npcData.js :: NPC_FACTION_LOYALTY::other","sha":"c5fdd49c4131","word":"bribe"}
  ]
 }
