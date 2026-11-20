@@ -55,6 +55,9 @@ const FRAME_COPY = Object.freeze({
 const PINNED_REASONS = Object.freeze({
   seat: 'because {they} [holds|hold] the seat',
   head: 'because {they} [heads|head] {power}',
+  // FRAME-6 · F1 (the chair, 2026-11-20 15:35): a power's own member, not its head, on that power's row (first met in
+  // this pool at frame-cast-village-65, "Because he is one of the Religious Authorities.")
+  member: 'because {they} [is|are] one of {power}',
   commander: 'because {they} [commands|command] {power}',
   debtor: 'because {they} [owes|owe] {other} a debt not yet paid',
   creditor: 'because {other} owes {them} a debt not yet paid',

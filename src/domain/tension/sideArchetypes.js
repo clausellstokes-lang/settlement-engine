@@ -21,8 +21,10 @@
 
 /**
  * The kinds of face a side can be filled with (CF4's ladder): (a) by office, (b) by a tie on the record that speaks of
- * the matter, (c) by trade, (d) an outsider reached through an existing person, (e) the criminal power or its house.
- * @typedef {'office' | 'tie' | 'trade' | 'outsider' | 'criminal'} FaceKind
+ * the matter, (c) by trade, (d) an outsider reached through an existing person, (e) the criminal power or its house;
+ * and, on a side that IS a power only (FRAME-6 · F1), (f) that power's own member who is not its head. No ladder lists
+ * `member`: a power's side takes its own rungs in order (troubleCast.js), and no rate reads it.
+ * @typedef {'office' | 'tie' | 'trade' | 'outsider' | 'criminal' | 'member'} FaceKind
  */
 
 /** @type {ReadonlyArray<SideArchetype>} */
@@ -32,7 +34,7 @@ export const SIDE_ARCHETYPES = Object.freeze(/** @type {SideArchetype[]} */ ([
 ]));
 
 /** @type {ReadonlyArray<FaceKind>} */
-export const FACE_KINDS = Object.freeze(/** @type {FaceKind[]} */ (['office', 'tie', 'trade', 'outsider', 'criminal']));
+export const FACE_KINDS = Object.freeze(/** @type {FaceKind[]} */ (['office', 'tie', 'trade', 'outsider', 'criminal', 'member']));
 
 /**
  * LABEL TO ARCHETYPE: every side label `HISTORICAL_EVENTS_DATA` can write, in any of its forms. Keyed by the template's
