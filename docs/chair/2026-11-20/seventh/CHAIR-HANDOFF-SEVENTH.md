@@ -4137,3 +4137,13 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   external_threat and succession_crisis, then outside_debt, legitimacy_crisis and great_flood; every file to the
   chair before the data file is built. DEPTH-1's proposal ruled (section 2). SEAT-5's stop on the taker ruled
   (section 2).
+- 14:52 UTC · DEPTH-1's LINES READ BY THE CHAIR, EVERY ONE (hooks at 09819a82e, tie pairs at f6fecab5f on `lane/depth-1-2026-11-20`):
+  THE SIXTY HOOKS: 59 approved as written; `other` 30 (a bribe taken, in the catch-all group, could fall on a
+  principled card) reworded to "They were asked to put in a good word for someone, said yes, and have not yet put
+  the word in.", tagged `hidden_debt`; a count asked for after the deploy: principled cards that hold a
+  `corruption` hook. THE EIGHTY TIE PAIRS (160 sentences: wary_alliance, peer_rivalry, old_debt, mutual_leverage
+  14 each; mentor_legacy, genuine_respect 12 each): ALL APPROVED AS WRITTEN (each tension a small thing that has
+  just happened between two named people; no house, office or event presumed; three pairs carry `trust: full`).
+  THE HOOKS MAY BE BUILT NOW; THE TIES ONLY ON THE COMMIT THE CHAIR NAMES WHEN THE GOALS WORK LANDS. DEPTH-1 is
+  past its successor point (about 245,000 by its own count): told to make its hand-back current and hand over;
+  `prompts/DEPTH-2.txt` WRITTEN (the builds are what is left), seated after this push.
