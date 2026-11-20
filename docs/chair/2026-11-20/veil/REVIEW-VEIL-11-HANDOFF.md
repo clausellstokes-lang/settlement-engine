@@ -1,4 +1,4 @@
-# REVIEW-VEIL-11 — HAND-OFF (kept current at every push; last written 2026-11-20 05:00 UTC by date -u, before FINAL)
+# REVIEW-VEIL-11 — HAND-OFF (kept current at every push; last written 2026-11-20 05:10 UTC by date -u, before FINAL)
 
 The review: `REVIEW-VEIL-11.md` beside this file. Probes and outputs: `probes/REVIEW-VEIL-11/`. **No verdict; 212 is NOT
 cleared.** My predecessors' hand-offs stand whole and are read from origin only (`git show
@@ -82,3 +82,7 @@ Run any probe: `RV6_SRC=<tree> [RV10_GEN=<master tree>] RV10_TPL=<chain> RV10_N=
 19. The governing body (section 3i): `gov.probe.jsx` at FINAL; the criminal-worded body's name is tier 2 by this reader's
     call (the chair to rule); `safetyProfile.economicDragDesc` must not be served where a criminal house is hidden; the
     governing power must survive `power.entry` wherever the government's name is served.
+    RULED VR42 (the chair, 05:10 UTC): the criminal-worded government's name is TIER 2, the town's public nature, on the
+    owner's list. Coming cold to a security reader before it lands (this one if there is room after FINAL): SEAT-1
+    (`lane/seat-2026-11-20`), who holds and contests the seat; no new stored key, the holder derived at render from the
+    served document and never naming a criminal or hidden power on a non-owner page; it moves stored prose on new towns.
