@@ -205,6 +205,22 @@ export function applyRosterChoices(s, pub, idOf) {
   if (svc && Array.isArray(svc.criminal)) {
     svc.criminal = svc.criminal.filter(x => !(isRec(x) && (!Object.prototype.hasOwnProperty.call(x, 'institution') || x.institution === COVERT)));
   }
+  // R3-TELL-3 unit 4b (ruling 60, R3-CURE-8's STOP 1; the chair's word of 20:03 UTC): (d) A NON-CRIMINAL SERVICES ROW WHOSE
+  // `institution` NAMED A HIDDEN HOUSE LEAVES WHOLE (a husk, ruling 42 (1)): the hidden-house name sweep takes the key only
+  // where its text names a hidden house in a spelling the fold finds ('(street gang)' beside the hidden "Street gang"), so a
+  // served row without the key whose pre-sweep counterpart in `pub` (the same family, heldBy: 212's `@>`) carried a string
+  // `institution` is such a row. A row born without the key, and a row whose `institution` named no hidden house (the sweep
+  // left it), stay as they are
+  if (svc) {
+    const svc0 = recAt(pub, 'availableServices') || {};
+    for (const fam of Object.keys(svc)) {
+      const list = svc[fam];
+      if (fam === 'criminal' || !Array.isArray(list)) continue;
+      const keyed0 = objectsOf(svc0[fam]).filter(z => typeof z.institution === 'string');
+      if (!keyed0.length) continue;
+      svc[fam] = list.filter(e => !(isRec(e) && !Object.prototype.hasOwnProperty.call(e, 'institution') && keyed0.some(z => heldBy(z, e))));
+    }
+  }
 
   // registry: economy.complexity ((a): prosperity.js :: deriveEconomicComplexity over the served rows; unreadable: withheld)
   if (es && 'economicComplexity' in es) {
@@ -232,8 +248,10 @@ export function applyRosterChoices(s, pub, idOf) {
   }
   const sp = es ? recAt(es, 'safetyProfile') : null;
   if (sp) {
-    // registry: safety.economicDragDesc ((b): where a hidden house raised hasCriminalInst or hasMarket, or carried an organised name; VR42)
-    if ('economicDragDesc' in sp && (raised.hasCriminalInst || raised.hasMarket || gone.some(g => ORGANISED_HOUSE_WORDS.some(w => g.includes(w))))) delete sp.economicDragDesc;
+    // registry: safety.economicDragDesc ((b): where a hidden house raised hasCriminalInst or hasMarket, or carried an organised name; VR42).
+    // R3-TELL-3 (ruling 62 (2)): SERVED AS null, the empty form nothing-hidden pages show (the generator writes null where the
+    // black-market share is low); the key is never deleted and never ''
+    if ('economicDragDesc' in sp && (raised.hasCriminalInst || raised.hasMarket || gone.some(g => ORGANISED_HOUSE_WORDS.some(w => g.includes(w))))) sp.economicDragDesc = null;
     // registry: safety.guardEffectivenessDesc ((a): the gates tail for the served houses, safetyLineTruth.js :: gatesSmugglersLine)
     if (!beneath && typeof sp.guardEffectivenessDesc === 'string') {
       sp.guardEffectivenessDesc = sp.guardEffectivenessDesc.replace(GATES_BENEATH, ' Everyone comes and goes by the gates, so smugglers have to get past the $1.');
