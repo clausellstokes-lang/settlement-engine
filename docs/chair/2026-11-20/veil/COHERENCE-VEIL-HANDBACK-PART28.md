@@ -337,6 +337,30 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
     line "R3 <commit>". THE CONDITIONAL TOOTH (the shown power's goal in R3-CURE-6's arm, which skips a shown person served
     without a goal): no unit of its own; R3-TELL's two-sided possible-world arm reds it; its builder makes it unconditional.
     THE MARK (the chair, 15:10): 450,000 tokens; the successor seated at 360,000; the chair's read is the true figure.
+54. THE CHAIR, 16:45 (R3-TELL unit 1, a43bca3d1, `out/v27/tell/TELL-HANDBACK.md`): THE TELL RULE RE-STATED. It REPLACES ruling
+    49's "equals, field for field, the page of the same town regenerated" (the regenerated town is another draw: criminal
+    content of its own in 81 of 92). WHAT IT PROTECTS IS UNCHANGED: A READER CANNOT TELL A PAGE WITH HOUSES HIDDEN FROM THE
+    PAGE OF A PLACE THAT NEVER HAD THEM. THE TEST IS MEMBERSHIP: the served criminal surface's SIGNATURE is one that a
+    NOTHING-HIDDEN page OF THE SAME SIZE shows under some setting of the owner's switch. (a) THE SIGNATURE: each field present,
+    absent or empty (an empty list and an absent field differ); each family's rows none, one or several; AND the cross-field
+    bits that carried the old tells: a criminal power with no criminal house shown; crime types with no house; a services row
+    with no house; shares that do not sum to their whole. (b) THE POOL WIDENED: at least 300 controls a size born with nothing
+    hidden, each read under every switch setting; A SIGNATURE SEEN IN FEWER THAN TWO OF A SIZE'S NOTHING-HIDDEN PAGES IS NOT A
+    MEMBER. (c) CURED TOWARD WITHHOLDING until every town is a member; the limit is the switch-off page, always a member.
+    (d) THE TELL COLUMN IS THIS TEST, GATED: 0 non-members of 92, Reveal off and on. THE NINE: power.entry NARROWED: it
+    withholds a power only where a HIDDEN house raised it (ruling 11's condition met); a criminal power that stands without
+    the hidden houses is served, as the place that never had them shows it; then membership decides (where "a criminal power
+    with no house shown" is not a member at that size, the page falls toward switch-off). A switch that hides a power's row is
+    NEW CAPABILITY for the owner: not now, a named survivor. REVEAL DM (the 30): the same rule. THE COST IS ACCEPTED, toward
+    withholding; reported after the cure: non-members by Reveal setting, the towns fallen to switch-off, rows lost (median and
+    worst), and one paragraph for the owner.
+55. THE CHAIR, 16:45 (R3-TELL unit 1, STOP 1): THE TWIN SENDS MORE (`availableServices.criminal` rows with no `institution`
+    key: "Fence (stolen goods)" 5 towns, "Muscle for hire" + "Protection racket" 5 towns; 212 drops or serves `[]`): every
+    read that projects through the twin leaks. R3-CURE-8 FIRST: red first on the ten towns, the twin serves what 212 serves
+    and no more; the builder NAMES every read that sends through the twin (surfaces, audiences); a PARITY WALKER over EVERY
+    `availableServices` family: a row with no `institution` key is treated alike by both engines.
+    ORDER (16:45): R3-CURE-7's merge; R3-CURE-8; the key-level table and the Defense-key proof; the tell's cure under ruling
+    54; then "R3 <commit>". The successor (VEIL-28) is seated at 360,000.
 ## 2. The bytes (kept current)
 | File | sha256 |
 |---|---|
