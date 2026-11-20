@@ -47,7 +47,10 @@ describe('A2 the towns, born in the census shape', () => {
       expect(hooks(born(seed)).some((h) => text.test(h)), `${seed}: the hook does not print`).toBe(false);
     }), 'guard town: the hook does not print');
   });
-  it('a town with a market keeps the merchant hook (r2r-town-1)', () => {
-    expect(hooks(born('r2r-town-1')).some((h) => MERCHANT.test(h))).toBe(true);
+  // 2026-11-20 (DEPTH-2 hooks tranche 2, the chair's words of 16:22 and 16:35 UTC; DEPTH-2's ruling): re-keyed r2r-town-1 ->
+  // r2r-town-3 (the second tranche grew `other` 70 -> 100 and `economy` 38 -> 44, so 1's cast no longer draws the merchant
+  // hook; 3, a town with a market, is the first of r2r-town-0.. at this tip whose cast does), found by a probe; the claim is unchanged.
+  it('a town with a market keeps the merchant hook (r2r-town-3)', () => {
+    expect(hooks(born('r2r-town-3')).some((h) => MERCHANT.test(h))).toBe(true);
   });
 });
