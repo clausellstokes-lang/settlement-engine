@@ -124,7 +124,9 @@ These hints are from the words' usual English renderings. They are a reading aid
 **Correction to my first message to the chair:** I offered **Geron** for greek elders. It is NOT used.
 - Geron means "old man", and it has no female form for the office (the gerousia was men only). It therefore fails CT4 on the same ground as TITLES-2's *aqsaqal*.
 - The Spartan gerontes also sat on a city's governing council, which breaks the small-word rule.
+- *Graia* (γραῖα, "old woman") is a plain word and was never an office, so a Geron / Graia pair would invent a title.
 - Planting it back is pinned red (§5).
+- **The chair's ruling (2026-11-20, 08:55 UTC):** the chair had first ruled Geron kept. It withdrew that ruling on this ground, which is the one on which aqsaqal was refused, and chose (c): the greek elders stay on "Elder".
 
 **greek elders, thorp to town (4): "Elder" stands.**
 - *Geron*: above.
@@ -218,7 +220,7 @@ All runs were on this branch, with none of GIT_DIR, GIT_WORK_TREE, GIT_INDEX_FIL
 - `npm run typecheck:domain:strict`: exit 0 (1113 errors, ceiling 1113).
 - `npm run lint`: exit 0 (0 errors; 38 warnings, all elsewhere). eslint on my two files alone is clean.
 
-**`tests/lint` whole at this hand-back's commit:** the count is in the closing message ("TITLES-3 <commit>"). It is run on that commit.
+**`tests/lint` whole at `a2d985282`** (the hand-back's first commit): **219 files, 3258/3258 green**, exit 0. Every later commit changes only this hand-back. Recorded 2026-11-20 09:08 UTC.
 
 **Commits:**
 - `0e7fe71eb`: the cells and the tests.
