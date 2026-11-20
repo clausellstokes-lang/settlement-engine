@@ -1,4 +1,4 @@
-# FORTUNE-2 hand-back (kept current; last written 2026-11-20 13:37:50 UTC by `date -u`)
+# FORTUNE-2 hand-back (kept current; last written 2026-11-20 13:41:10 UTC by `date -u`)
 
 For a successor (FORTUNE-3): this file and the briefs (`briefs/COMMON.md`, `U2.md` to `U4.md`) are all you need.
 Lane branch `lane/fortune-2-2026-11-20` (taken at 57a79cc2d, FORTUNE-1's hand-over). The chair is
@@ -29,7 +29,7 @@ at most 300 words, with your count (the chair reads the true one; your own runs 
 | U1 law leaf, dark | MERGED, GREEN (chair accepted 13:17) | merge 2daa80771 of bc3c5cc8e; censuses re-taken 4822cff0b | pushed |
 | U2 fortune | BUILDER OUT (seated ~12:15); WIP = its red test only, prosperity.js not yet changed | local lane/fortune-2-u2-2026-11-20, PUSHED as lane/fortune-2-2026-11-20-u2-wip | d0b3fc4ea (wip) |
 | U3 standing + play-time guard | BUILDER OUT (seated ~12:15); WIP = source edits and both tests, its gates running | local lane/fortune-2-u3-2026-11-20, PUSHED as lane/fortune-2-2026-11-20-u3-wip | 383903a85 (wip) |
-| readerShapeResolver 260>256 | OPEN (ruling 4) | — | — |
+| readerShapeResolver 260>256 | ANSWERED: the gate's long TMPDIR (see section 3); not U1's, not the line's | — | — |
 | U4 FS7 | after U2+U3 and the line's merge | lane/fortune-2-u4-2026-11-20 | — |
 | re-measure forced on; owner's page re-check; confinement; final hand-back; "FORTUNE <commit>" | after U4 | — | — |
 
@@ -46,7 +46,9 @@ commit the merge; then on the CLEAN tree re-take by their doors and commit "chor
 pre-unit tree. Gates (one script, each line `sh scripts/gate-mutex.sh --run -- sh scripts/gate-tail.sh …` to a file):
 `tests/lint` whole; every test file naming a changed module; `validate:tuning-bands`, `typecheck:ratchet`,
 `typecheck:domain:strict`, `lint`, `node scripts/wiring-census.mjs --check`. A red is the unit's only if it is green at
-the pre-unit tree.
+the pre-unit tree. ⛔ RUN THE GATES WITH THE DEFAULT TMPDIR (/tmp): `tests/lint/readerShapeResolver.test.js` encodes its
+mkdtemp path into a token capped at 256, so a ~95-char TMPDIR reds it at any commit (EXECUTED 13:5x: 260 at tip and base;
+149 under /tmp).
 
 KNOWN REDS AT THE BASE (b079b6a89), not ours: tests/build/engineBundleReplay (3), engineServiceCore (1),
 engineServiceStoreParity (4), tests/domain/editWorldFactResources (A2, A6), tests/generators/institutionBudgetPromise (1),
@@ -65,4 +67,4 @@ tests/property/dmLayerGoldenIsolation (A7). tests/lint whole was 220/220 green a
 
 ## 5. Executed vs plausible
 
-EXECUTED: U1's red and green, the merge, the censuses, the confinement, every gate count above. OPEN: readerShapeResolver.
+EXECUTED: U1's red and green, the merge, the censuses, the confinement, every gate count above, and the readerShapeResolver cause.
