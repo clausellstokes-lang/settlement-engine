@@ -56,6 +56,11 @@ origin/lane/review-veil-9-2026-11-19) stands whole: its section 2 (VR4 to VR17),
   and link reads in 8 towns where no hand can open that eye (V10-2, stronger on this shape); a new or renamed criminal
   house after Show-all starts hidden 23/23; Hide all state "hidden" 72/72. The gap probe's `factions[].members[].power`
   rows (5) are an artefact (index-aligned lists after a member leaves; `power` is not a counter).
+- THE LARGER CORPUS (new shape, x212): `tile.probe.jsx` RV10_N=10, 700 births, 452 with a hideable house, none sent:
+  `stability` A/B 49, A/C 2 (crime-worded label in 50 towns: "Unstable (pervasive organized crime)" 39, "…; monsters on
+  the roads" 7, "Unstable — criminal governance" 4); `prosperity` A/B 146, A/C 12 (`out/tile-720.json`).
+  `gaps.probe.jsx` RV10_N=4 over 7 sizes x 10 crises, 280 towns: `simulationTrace[].ts` holes in 189, both veils, Reveal-DM
+  gallery reads; no other numbering (`out/gaps-280.json`).
 
 ## 3. Instruments (re-made as the predecessor's section 4, plus)
 
