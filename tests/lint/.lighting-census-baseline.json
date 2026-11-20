@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "b27d5f17126733c96358030cb59b365b70afd538",
-  "measuredBy": "CI-FIT",
+  "measuredAtSha": "cbd97ff6385c71ade2f65c6ffb461e039efc1fea",
+  "measuredBy": "SEAT-2",
   "date": "2026-11-20",
-  "note": "CI-FIT point 75 (2026-11-20): one new test file, tests/build/ensurePlaywrightBrowsers.test.js (the browser jobs install probe, 7 arms), and one new arm in tests/build/ciCheckParity.test.js; the budget and ratchet-reader commits add no title",
-  "files": 3701,
+  "note": "U1 seat law: +1 src file (src/domain/seat/seatLaw.js), +1 test file (tests/domain/seatLawWiring.test.js), merged at cbd97ff63",
+  "files": 3702,
   "parked": 472,
-  "credited": 3229,
-  "titles": 31162,
-  "suiteTitles": 8627
+  "credited": 3230,
+  "titles": 31168,
+  "suiteTitles": 8628
 }
