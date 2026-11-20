@@ -420,6 +420,17 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
     otherwise withheld. Its count goes in the owner's paragraph; if it passes a handful at town and village, tell me.
     4. BEFORE E, not now: both gates on every door that serves the veiled document (link, import, public) and on the old
     stored shape."
+59. THE CHAIR, 18:44 (on ruling 57 (g)'s answer, 45ce337b3): A REGISTRY ROW THAT SAYS "WITHHOLD" WHILE BOTH ENGINES SERVE IS A
+    FALSE ASSURANCE, and the content lanes' exemptions rest on those rows (a wording that needs a hideable fact is allowed only
+    where its field is withheld from every shared read). RULED FOR R5'S BRIEF: (1) THE WALKER COMES FIRST, red first: for every
+    registry row, the rule it states (withhold, recompose, serve) IS what both engines do, proved on born towns and on plants
+    where no born town takes the row; its red list is R5's worklist, and it stays as a standing test. (2) The six blocks served
+    as stored (DS-ECO-6 v4, v5; DS-DEF-3 Safe v3, v8, Unsafe v5, curfew v2) come right after the factions' description; each is
+    WITHHELD in R5 unless a re-composition over what the read serves is proved a member by the tell's two gates (ruling 58;
+    re-composition is the exception that must earn its place). (3) The eight already withheld stay. HELD FOR THE JOIN: the
+    sameness lanes have added wordings since (the trouble half's eleven hooks with a hideable need; the place lane's smuggling
+    chain rows; the Daily Life owner-only slot `commoner_resentments_dm`): the walker of (1) covers the rows that withhold
+    them. When R3-CURE-8 returns: merge if green, then the tell's cure.
 ## 2. The bytes (kept current)
 | File | sha256 |
 |---|---|
