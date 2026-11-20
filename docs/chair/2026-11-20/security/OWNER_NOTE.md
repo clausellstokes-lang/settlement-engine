@@ -8,7 +8,9 @@ returns the BYOK master secret, and `surveyor_byok_get(user, 'anthropic')` retur
 key (user ids are visible to anyone through the public gallery). An anonymous caller who names an admin's user id as
 the "actor" (the admin functions trust that argument) soft-deleted another user's town, banned it, disabled an account
 and read billing on the copy; others downgrade any user's plan, purge a user's analytics, run the inactive-plan purge
-on demand, hide any comment, write fake audit rows, use up anyone's rate limits or AI budget, read the admin reports.
+on demand, hide any comment, write fake audit rows, use up anyone's rate limits or AI budget, read the admin reports; and three admin buttons
+(curate, feature a town, feature a map) let an outsider curate or feature any public town or map. The script closes
+those three to outsiders only; signed-in admins keep them.
 Production printed `true` for the key functions before your two revokes, and its function list matches the copy's
 so far; the other 155 are still open there until the script runs.
 
@@ -21,7 +23,7 @@ after your two). If either is not 0, stop and send the row to the chair.
 
 **Run.** `EMERGENCY_REVOKE.sql`, once (one transaction; all or nothing; repeating your two lines is harmless).
 
-**After.** `CHECK_B_REVOKE_LIST.sql`: all three counts **0**. `CHECK_A_KEYS.sql`: four `false`. Then, in the site:
+**After.** `CHECK_B_REVOKE_LIST.sql`: all four counts **0**. `CHECK_A_KEYS.sql`: four `false`. Then, in the site:
 1. sign out and in again (or sign up a test account);
 2. save a settlement, edit it, save again;
 3. share it by private link and open the link in a private window;

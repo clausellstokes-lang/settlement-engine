@@ -19,5 +19,7 @@ for c in A_KEYS B_REVOKE_LIST C_PREFLIGHT D_SECRET E_ANON_CATALOGUE; do psql -qX
 for db in pre post; do
   psql -qX -d $db -f $P/reader.sql 2>&1 | grep -vE "^f(\|f)?$" > $OUT/reader-$db.txt
   psql -qX -d $db -f $P/flows.sql 2>&1 | grep -vE "^f(\|f)?$" > $OUT/flows-$db.txt
+  psql -qX -d $db -f $P/admin-doors.sql 2>&1 | grep -vE "^f(\|f)?$" | sed 's#psql:[^ ]*admin-doors.sql:##' > $OUT/admin-doors-$db.txt
+  psql -qX -d $db -f $P/actor.sql 2>&1 | grep -vE "^f(\|f)?$" | sed 's#psql:[^ ]*actor.sql:##' > $OUT/actor-$db.txt
   sh $P/harness.sh $db $OUT/calls.tsv > $OUT/harness-$db.tsv
 done

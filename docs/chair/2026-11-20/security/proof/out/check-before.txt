@@ -11,6 +11,7 @@ missing_count              | 0
 missing                    | 
 service_role_lacking_count | 0
 service_role_lacking       | 
+admin_doors_open_to_anon   | 3
 
 -[ RECORD 1 ]-----------+--
 visitor_reference_count | 0

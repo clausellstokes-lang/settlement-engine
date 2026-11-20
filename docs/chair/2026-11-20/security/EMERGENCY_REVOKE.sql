@@ -7,6 +7,7 @@
 -- each), then this file once, then CHECK_B_REVOKE_LIST.sql (all counts 0) and CHECK_A_KEYS.sql (all false).
 --
 -- WHAT IT DOES, in ONE transaction:
+--   0. Three admin doors (set_curated, set_featured, set_featured_map): revoke EXECUTE from PUBLIC and anon only.
 --   1. For each of the 157 functions below: revoke EXECUTE from PUBLIC, anon and authenticated.
 --      PUBLIC is included because Postgres grants EXECUTE to PUBLIC on every new function, and
 --      anon/authenticated inherit PUBLIC: revoking only from anon/authenticated would leave
@@ -193,6 +194,12 @@ revoke execute on function public.verify_buyback_challenge(uuid,text) from publi
 revoke execute on function public.verify_transfer_challenge(uuid,text,text,text) from public, anon, authenticated;
 revoke execute on function public.write_ai_operation_log(uuid,text,text,text,text,text[],text[],text,text,text,boolean,numeric,integer,boolean,uuid,boolean,text,text) from public, anon, authenticated;
 revoke execute on function public.write_audit(text,uuid,text,text,text,jsonb,jsonb,boolean,boolean,boolean,uuid) from public, anon, authenticated;
+
+-- ── three ADMIN doors the browser calls as a signed-in admin, closed to anon only (found by REVIEW-VEIL-10) ─────
+-- Their guard is `caller_role not in ('developer','admin')`; for anon caller_role is NULL, the test is NULL and
+-- nothing raises: an outsider could curate or feature any public town or map. Signed-in users keep the call: a plain
+-- user still gets "Only admins…", an admin still curates.
+revoke execute on function public.set_curated(uuid,boolean,integer), public.set_featured(uuid,boolean,integer), public.set_featured_map(uuid,boolean,integer) from public, anon;
 
 -- ── keep the service role's door (already granted; see header point 2) ─────────────────────
 grant execute on function public._surveyor_byok_secret() to service_role;

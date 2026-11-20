@@ -14,6 +14,7 @@ rows, counts = [], {}
 for s, c in sorted(cat.items()):
     n = c['name']
     if s in revs: cl = 'INTERNAL — revoked now'
+    elif c['name'] in ('set_curated', 'set_featured', 'set_featured_map'): cl = 'ADMIN DOOR — anon closed now (NULL-slip guard)'
     elif n == 'account_is_active': cl = 'DOOR THAT TRUSTS A PARAMETER'
     elif c['browser'] or n in edgeuser: cl = 'DELIBERATE DOOR'
     elif c['k'] == 'TRIGGER': cl = 'TRIGGER — left alone'
@@ -38,7 +39,7 @@ for s, c in sorted(cat.items()):
                  '; '.join(callers) or '—', chk, ', '.join(c['writes'])[:90] or '—', ', '.join(c['reads'])[:90] or '—', a[:60]))
 esc = lambda x: str(x).replace('|', '\\|')
 now = subprocess.check_output(['date', '-u', '+%Y-%m-%d %H:%M UTC']).decode().strip()
-order = {'INTERNAL — revoked now': 0, 'DOOR THAT TRUSTS A PARAMETER': 1, 'DELIBERATE DOOR': 2,
+order = {'INTERNAL — revoked now': 0, 'ADMIN DOOR — anon closed now (NULL-slip guard)': 0.5, 'DOOR THAT TRUSTS A PARAMETER': 1, 'DELIBERATE DOOR': 2,
          'VISITOR-NEEDED — left alone': 3, 'INTERNAL — invoker helper, for 213': 4, 'TRIGGER — left alone': 5}
 with open(f'{H}/../CATALOGUE.md', 'w') as f:
     f.write(f"""# Function grants catalogue — chain 001..203 (origin/master), {now}
@@ -60,6 +61,11 @@ How each column was read (the catalogue of the chain, and the tree at origin/mas
   helper (`current_user_is_privileged`, `has_role`, `_assert_service_admin_actor`, …). "none" on a DEFINER function
   means nothing inside stops a caller who names any user or row.
 * **writes / reads**: tables named after `insert into` / `update` / `delete from`, and after `from` / `join` (text scan).
+* **doors** were re-classed BY EXECUTION on a chain that holds a public town, a map, a comment and a report
+  (`proof/doors-anon.sh`, `out/doors-anon-ok-pre.tsv` / `-post.tsv`): every door called as anon with each uuid argument set
+  to each real row. Before the script only `set_curated`, `set_featured`, `set_featured_map` acted for anon (their guard
+  `caller_role not in (...)` is NULL for anon; found by REVIEW-VEIL-10); after it none does. The other doors that
+  complete for anon are public reads, or answer false/null.
 * **anon before**: calling it as `anon` with placeholder arguments on the chain BEFORE the script (`proof/harness.sh`,
   each call rolled back). `OK` = it ran to completion as anon.
 

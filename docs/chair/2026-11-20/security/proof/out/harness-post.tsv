@@ -664,13 +664,13 @@ set_account_disabled(uuid,uuid,boolean,text)	service_role	ERR not authorized: di
 set_auto_reload_settings(boolean,integer,integer,integer)	anon	ERR not authenticated
 set_auto_reload_settings(boolean,integer,integer,integer)	authenticated	ERR target_credits must be between 2 and 1000
 set_auto_reload_settings(boolean,integer,integer,integer)	service_role	ERR not authenticated
-set_curated(uuid,boolean,integer)	anon	ERR Settlement not found
+set_curated(uuid,boolean,integer)	anon	ERR permission denied for function set_curated
 set_curated(uuid,boolean,integer)	authenticated	ERR Only admins can change curation status
 set_curated(uuid,boolean,integer)	service_role	ERR Settlement not found
-set_featured(uuid,boolean,integer)	anon	ERR Settlement not found
+set_featured(uuid,boolean,integer)	anon	ERR permission denied for function set_featured
 set_featured(uuid,boolean,integer)	authenticated	ERR Only admins can change featured status
 set_featured(uuid,boolean,integer)	service_role	ERR Settlement not found
-set_featured_map(uuid,boolean,integer)	anon	ERR Map not found
+set_featured_map(uuid,boolean,integer)	anon	ERR permission denied for function set_featured_map
 set_featured_map(uuid,boolean,integer)	authenticated	ERR Only admins can change featured status
 set_featured_map(uuid,boolean,integer)	service_role	ERR Map not found
 set_founder_credit_listed(boolean)	anon	ERR not authenticated

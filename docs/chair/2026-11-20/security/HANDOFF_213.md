@@ -8,7 +8,9 @@ left. Deliverable one is complete and pushed (`EMERGENCY-2`, 2669d6c2d). What th
   `EMERGENCY_REVOKE.sql` applies cleanly (exit 0), `CHECK_B` reads 0/0/0, and `CHECK_C` reads 0 (executed 2026-11-20).
   So 213's revokes are `proof/inputs/revoke_list.txt` (157 full signatures) as they stand, plus whatever 212 adds.
 * **The classes are in `CATALOGUE.md` and `proof/inputs/classified.json`.**
-  * 85 DELIBERATE DOOR: the allowlist's core. Every name and caller is listed. Meet VEIL-DOORS by full signature.
+  * 82 DELIBERATE DOOR plus 3 ADMIN DOORS (set_curated, set_featured, set_featured_map: authenticated only after the
+    emergency script; 213 should fix their NULL-slippable guard with `coalesce(caller_role, '') not in (...)` or
+    `is distinct from`). The allowlist's core. Meet VEIL-DOORS by full signature.
   * 1 DOOR THAT TRUSTS A PARAMETER: `account_is_active(uuid)`. RLS policies call it as `account_is_active(auth.uid())`,
     and the edge functions call it with the service key for any user. A caller check that keeps both:
     `p_uid = auth.uid() or auth.role() = 'service_role'`, else false. Verify `auth.role()` inside a definer on

@@ -1,10 +1,10 @@
-# Function grants catalogue — chain 001..203 (origin/master), 2026-11-20 01:45 UTC
+# Function grants catalogue — chain 001..203 (origin/master), 2026-11-20 02:21 UTC
 
 Every function of schema `public` that `anon` or `authenticated` may EXECUTE (`has_function_privilege`) on a scratch
 PostgreSQL 16 holding origin/master's migrations 001..203 (db832c892) under the Supabase-like scaffold
 (`proof/scaffold.sql`). Extension members (pgcrypto) are excluded. **283 functions.**
 
-Counts by class: **INTERNAL — revoked now** 157; **DOOR THAT TRUSTS A PARAMETER** 1; **DELIBERATE DOOR** 85; **VISITOR-NEEDED — left alone** 12; **INTERNAL — invoker helper, for 213** 15; **TRIGGER — left alone** 13.
+Counts by class: **INTERNAL — revoked now** 157; **ADMIN DOOR — anon closed now (NULL-slip guard)** 3; **DOOR THAT TRUSTS A PARAMETER** 1; **DELIBERATE DOOR** 82; **VISITOR-NEEDED — left alone** 12; **INTERNAL — invoker helper, for 213** 15; **TRIGGER — left alone** 13.
 
 How each column was read (the catalogue of the chain, and the tree at origin/master):
 * **callers**: `browser` = a `.rpc('name'` call in `src/` or `api/` (multi-line aware, `proof/inputs/browser_rpc_all.txt`);
@@ -17,6 +17,11 @@ How each column was read (the catalogue of the chain, and the tree at origin/mas
   helper (`current_user_is_privileged`, `has_role`, `_assert_service_admin_actor`, …). "none" on a DEFINER function
   means nothing inside stops a caller who names any user or row.
 * **writes / reads**: tables named after `insert into` / `update` / `delete from`, and after `from` / `join` (text scan).
+* **doors** were re-classed BY EXECUTION on a chain that holds a public town, a map, a comment and a report
+  (`proof/doors-anon.sh`, `out/doors-anon-ok-pre.tsv` / `-post.tsv`): every door called as anon with each uuid argument set
+  to each real row. Before the script only `set_curated`, `set_featured`, `set_featured_map` acted for anon (their guard
+  `caller_role not in (...)` is NULL for anon; found by REVIEW-VEIL-10); after it none does. The other doors that
+  complete for anon are public reads, or answer false/null.
 * **anon before**: calling it as `anon` with placeholder arguments on the chain BEFORE the script (`proof/harness.sh`,
   each call rolled back). `OK` = it ran to completion as anon.
 
@@ -179,6 +184,9 @@ How each column was read (the catalogue of the chain, and the tree at origin/mas
 | `verify_transfer_challenge(uuid,text,text,text)` | DEFINER | Y | Y | INTERNAL — revoked now | edge(service) | role/jwt | founder_transfer_challenges | founder_transfer_events | ERR verify_transfer_challenge is service-role only (got: ano |
 | `write_ai_operation_log(uuid,text,text,text,text,text[],text[],text,text,text,boolean,numeric,integer,boolean,uuid,boolean,text,text)` | DEFINER | Y | Y | INTERNAL — revoked now | edge(service) | none (trusts its parameters) | ai_operation_log | — | OK rows=1 |
 | `write_audit(text,uuid,text,text,text,jsonb,jsonb,boolean,boolean,boolean,uuid)` | DEFINER | Y | Y | INTERNAL — revoked now | edge(service); sql: acknowledge_operational_obligation[D],add_internal_note[D],admin_billing_summary | auth.uid() | audit_log | profiles | OK rows=1 |
+| `set_curated(uuid,boolean,integer)` | DEFINER | Y | Y | ADMIN DOOR — anon closed now (NULL-slip guard) | browser | auth.uid() | settlements | profiles | ERR Settlement not found |
+| `set_featured(uuid,boolean,integer)` | DEFINER | Y | Y | ADMIN DOOR — anon closed now (NULL-slip guard) | browser | auth.uid() | settlements | profiles | ERR Settlement not found |
+| `set_featured_map(uuid,boolean,integer)` | DEFINER | Y | Y | ADMIN DOOR — anon closed now (NULL-slip guard) | browser | auth.uid() | saved_maps | profiles | ERR Map not found |
 | `account_is_active(uuid)` | DEFINER | Y | Y | DOOR THAT TRUSTS A PARAMETER | edge(service); RLS policy; sql: _apply_custom_content_command_authorable[D],add_gallery_comment[D],apply_create_ | none (trusts its parameters) | — | profiles | OK rows=1 |
 | `add_gallery_comment(uuid,text)` | DEFINER | Y | Y | DELIBERATE DOOR | browser; scripts(service) | auth.uid() | gallery_comments | settlements | ERR Sign in to comment |
 | `apply_create_route_command(uuid,text,uuid,uuid,timestamp with time zone,jsonb,jsonb,jsonb,jsonb,jsonb,jsonb,jsonb,jsonb,jsonb)` | DEFINER | - | Y | DELIBERATE DOOR | browser; scripts(service) | auth.uid() | settlements | p_event, p_expected_ai_data, p_expected_campaign_state, p_expected_data, p_partner_expecte | ERR permission denied for function apply_create_route_comman |
@@ -242,9 +250,6 @@ How each column was read (the catalogue of the chain, and the tree at origin/mas
 | `rotate_map_unlisted_slug(uuid)` | DEFINER | Y | Y | DELIBERATE DOOR | browser | auth.uid() | saved_maps | — | ERR not authenticated |
 | `rotate_settlement_unlisted_slug(uuid)` | DEFINER | Y | Y | DELIBERATE DOOR | browser | auth.uid() | settlements | — | ERR not authenticated |
 | `set_auto_reload_settings(boolean,integer,integer,integer)` | DEFINER | Y | Y | DELIBERATE DOOR | browser | auth.uid() | credit_auto_reload_settings | — | ERR not authenticated |
-| `set_curated(uuid,boolean,integer)` | DEFINER | Y | Y | DELIBERATE DOOR | browser | auth.uid() | settlements | profiles | ERR Settlement not found |
-| `set_featured(uuid,boolean,integer)` | DEFINER | Y | Y | DELIBERATE DOOR | browser | auth.uid() | settlements | profiles | ERR Settlement not found |
-| `set_featured_map(uuid,boolean,integer)` | DEFINER | Y | Y | DELIBERATE DOOR | browser | auth.uid() | saved_maps | profiles | ERR Map not found |
 | `set_founder_credit_listed(boolean)` | DEFINER | Y | Y | DELIBERATE DOOR | browser | auth.uid() | profiles | — | ERR not authenticated |
 | `set_my_email_preference(uuid,text,boolean)` | DEFINER | - | Y | DELIBERATE DOOR | browser | auth.uid() | email_preferences | — | ERR permission denied for function set_my_email_preference |
 | `set_my_security_answers(text,text,text,text)` | DEFINER | Y | Y | DELIBERATE DOOR | browser | auth.uid() | security_answers | — | ERR not authenticated |

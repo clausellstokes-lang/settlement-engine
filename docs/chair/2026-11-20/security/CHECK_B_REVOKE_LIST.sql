@@ -1,7 +1,8 @@
 -- CHECK_B_REVOKE_LIST.sql — READ-ONLY, one statement, one row. 2026-11-20 02:08 UTC, SEC-GRANTS.
 -- The 157 functions EMERGENCY_REVOKE.sql closes.
 -- BEFORE: still_open_count = how many it will close; missing_count MUST be 0 (else stop and send the row to the chair).
--- AFTER:  still_open_count = 0, missing_count = 0, service_role_lacking_count = 0. Anything else: send the row.
+-- AFTER:  still_open_count = 0, missing_count = 0, service_role_lacking_count = 0, admin_doors_open_to_anon = 0.
+--         Anything else: send the row.
 with fns(sig) as (values
   ('public._surveyor_byok_secret()'),
   ('public.surveyor_byok_get(uuid,text)'),
@@ -168,5 +169,9 @@ select count(*) filter (where oid is not null and (has_function_privilege('anon'
        count(*) filter (where oid is null)                                        as missing_count,
        string_agg(sig, ', ' order by sig) filter (where oid is null)              as missing,
        count(*) filter (where oid is not null and not has_function_privilege('service_role', oid, 'execute')) as service_role_lacking_count,
-       string_agg(sig, ', ' order by sig) filter (where oid is not null and not has_function_privilege('service_role', oid, 'execute')) as service_role_lacking
+       string_agg(sig, ', ' order by sig) filter (where oid is not null and not has_function_privilege('service_role', oid, 'execute')) as service_role_lacking,
+       (select count(*) from unnest(array['public.set_curated(uuid,boolean,integer)', 'public.set_featured(uuid,boolean,integer)',
+                                          'public.set_featured_map(uuid,boolean,integer)']) a(sig)
+         where to_regprocedure(a.sig) is null or has_function_privilege('anon', to_regprocedure(a.sig), 'execute'))
+         as admin_doors_open_to_anon
 from f;
