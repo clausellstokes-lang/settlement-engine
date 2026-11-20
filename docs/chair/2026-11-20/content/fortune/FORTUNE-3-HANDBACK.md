@@ -1,4 +1,4 @@
-# FORTUNE-3 hand-back (kept current at every push; last written 2026-11-20 17:51:40 UTC by `date -u`)
+# FORTUNE-3 hand-back (kept current at every push; last written 2026-11-20 18:39:01 UTC by `date -u`)
 
 For a successor: this file and the briefs (`briefs/COMMON.md`, `U4.md`, `U5-BUILD.md`) are all you need.
 The chair is session_019yED1SUxGVHyjQnoqoFvQ8 (send_message, Claude Code Remote MCP server).
@@ -25,8 +25,17 @@ FORCED-ON ARM IN ONE COMMAND (the prototype today; the real law after U4): `sh d
 | U5s safety at birth | MERGED GREEN; "factionDynamics released at 1cd2e6d93" SENT; never touch that file again (imports only) | 46f918dfb + aa7db0ccf, merge f526c8e20, lighting 1cd2e6d93 |
 | the working line 43ab0f5eb | MERGED GREEN (one conflict: the lighting census, re-taken) | merge 6707e474b, lighting 9910adb03 |
 | U4 FS7 | BUILDER OUT on 9910adb03 (worktree `scratchpad/wt-u4`, pushes `lane/fortune-3-2026-11-20-u4-wip`) | — |
-| U5a the late step | after U4's inventory shows its files (path-disjoint check), then "BUILD U5a"; its first act: the prototype step moved after `assembleSettlement`, the tables re-taken | — |
+| U5a the late step | MEASURED at the ruled place (6b00d35a2 on -u5a-wip: 0 of 2,400 differ from end of birth; FS4, contest, capture hold; stale W1 0/2, W2-W4 0, W5 9/1; law-1 births 600/600 identical); BUILDER OUT under the chair's 18:38 rulings (A) to (C) below (worktree `scratchpad/wt-u5a`) | 6b00d35a2 (measure) |
 | U5b render reason | after U4 merged and the six sentences ruled | — |
+
+THE CHAIR'S RULINGS ON U5a, 18:38 UTC: (A) NO new pipeline step: the merits run as the TAIL of the `assembleSettlement`
+step (before `resolveCrisisCast`); no registry rows, nothing on the reveal rail; the proof says, with a test, that the
+step trace partition and the rail are byte-identical under law 1. (B) one `src/data` leaf holds the "never put right"
+list; `legacyGenerator.js` builds its line from it and re-exports it; `fortuneMerits.js` reads the leaf (the
+domain->generators boundary ratchet forbids the direct import); the pin and the made-up-wording red stand. (C) the step
+starts from `score - (breakdown.merits ?? 0)`; a twice-run test. F3 (`prosperity.js :: situationDescOf`'s "guilds have a
+hand in every craft" with no guild): the chair names it a SURVIVOR (prints on no page under the combinations).
+The six merit sentences go to the chair before U5b.
 
 U5s's receipts (EXECUTED): red on the pre-unit tree 36 failed | 45 passed (81); green 81/81; tests/lint 220/220 (3271);
 governing 69/73, the 4 reds the line's stored fingerprints (pipelinePinnedChoosers, powerEconomyFreshness,
@@ -61,3 +70,10 @@ The merits depend on the capture rung (a condition: none counts at `corrupted` o
 - THE MERGE OF THE TWO LANES: six conflicts: `src/domain/density/densityCreateBoundary.js` and its walker test (each lane
   adds a sibling row at one place: KEEP BOTH); four registers re-taken by their own doors (wiring census, lighting
   baseline, tuning inventory, tuning register).
+
+## 5. BEFORE LIGHTING (the chair, 18:38 UTC; also for the security reader at the join)
+
+`breakdown.merits` rides the public read and is present only where the capture rung is neither `corrupted` nor `capture`,
+so ITS ABSENCE SAYS SOMETHING. While the law is dark the key is absent everywhere and nothing is told. BEFORE THE LAW IS
+EVER LIT, THE VEIL'S GATE MUST HOLD THAT KEY AS ONE OF ITS PARTS: a page that hides criminal houses must show a merits
+shape that a nothing-hidden place of its size shows.
