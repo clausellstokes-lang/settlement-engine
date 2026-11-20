@@ -20,7 +20,13 @@ merged, markVeiled, veilGroupingsOf and isVeiled of `galleryVeil.js` stay as the
 (the lighting census, the writers' reach, the wiring census, the tuning inventory) are taken once by this seat at the
 merged tree.
 
-Rulings received by this seat (with their hour): none yet.
+Rulings received by this seat (with their hour, as received): 00:11 UTC, THE GIT HAZARD (the fifth chair's record of
+2026-11-15): tests run with git's variables in the environment can drive fixtures against the real repository
+(core.bare=true, a user "Fixture", unsigned commits); so never a push with nothing to send, never a non-fast-forward,
+never a ref but this lane; tests from a shell with `env | grep '^GIT_'` printing nothing (this container's harness sets
+11 `GIT_` variables: proxy and credential config, no `GIT_DIR`; every run is prefixed `env -u …` for all 11); the
+author of every commit read before a push; config checked (core.bare false, user Claude, at 00:21 UTC). Relayed to
+every builder as binding. 00:26 UTC: the receipts on origin (section 2).
 
 ## 1. The bytes (kept current)
 
@@ -44,6 +50,11 @@ files under `docs/chair/`). All three readings of PART 19 section 2 REPRODUCED o
 - THE SAME DIFFER THROUGH THE SERVER (`measure/differ/run-differ-server.sh`, a chain 001..212 of the base, the gallery
   read, 215 s): the reader's gate (empty registry, the VR13 rng ruling) **`registered 0 | diffuse 0 | rng-only 20 |
   UNREGISTERED 124`**.
+
+THE RECEIPTS (the chair, 00:26 UTC: every figure this file quotes has its output beside it): `out/v19/acceptance-at-bedd5a392.txt`,
+`out/v19/differ-twin-classes-all-at-bedd5a392.txt`, `out/v19/differ-twin-merge-all-at-bedd5a392.txt`,
+`out/v19/differ-twin-merge-default-at-bedd5a392.txt`, `out/v19/differS-gate-at-bedd5a392.txt` (all under
+`docs/chair/2026-11-20/veil/`).
 
 ## 3. The list (the assignment's, in order), as it stands
 
