@@ -1,0 +1,33 @@
+    229|   it('the corpus vocabulary is live and the census is not measuring an…
+       |     ^
+    230|     const { vocabulary: vocab, size } = vocabulary();
+    231|     expect(size, 'the corpus size moved — the axes are frozen literals…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the frozen register > the surfaceReach grammar round-trips: parse(format(reach)) equals reach for every LIT identity
+AssertionError: raw on compound is missing from the frozen surfaceReach: expected 'campaign-pdf=N dossier-pdf=R foundry=…' to be 'campaign-pdf=N dossier-pdf=R foundry=…' // Object.is equality
+
+Expected: "campaign-pdf=N dossier-pdf=R foundry=R json-export=N web-display=R web-transitive=N world-book=N"
+Received: "campaign-pdf=N dossier-pdf=R foundry=N json-export=N web-display=R web-transitive=N world-book=N"
+
+ ❯ tests/lint/writerReach.walker.test.js:358:95
+    356|       if (row.verdict === 'THIN') continue;
+    357|       const formatted = formatReach(row.reach);
+    358|       expect(frozen[row.identity], `${row.identity} is missing from th…
+       |                                                                                               ^
+    359|       expect(formatReach(parseReach(formatted)), `${row.identity} does…
+    360|       if (row.verdict === 'LIT') checked += 1;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  3 failed | 217 passed (220)
+      Tests  2 failed | 3259 passed (3261)
+   Start at  14:11:01
+   Duration  1944.29s (transform 33.55s, setup 7.96s, import 1245.94s, tests 2109.51s, environment 32ms)
+
+[gate-tail] end:  14:43:25 up  3:49,  0 user,  load average: 2.41, 3.79, 6.42
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/e39601df-bea0-5bb7-a071-cd1164f3a939/scratchpad/gate-tail.11584.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+exit 1

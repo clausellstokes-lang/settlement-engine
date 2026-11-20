@@ -1,0 +1,10 @@
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+ FAIL  tests/components/settlementWorkbenchMount.test.jsx > the entitled readOnly matrix > M1 — an entitled viewer on a readOnly dossier reviews staged work without regaining a staging lever
+ FAIL  tests/generators/coherenceAgreeCures.test.js > F9: the market readers follow the market home, and no answer moves > the old name lists and the home agree on every roster
+ FAIL  tests/generators/coherenceAgreeCures.test.js > STOP 2 (b): Court Fees and Gate Tolls read the home, and no answer moves > the old lists, the home and the printed lines agree on every roster
+ FAIL  tests/generators/coherenceAgreeCures.test.js > item 2: the court and the prison are the defence home's atoms > the home's prison answers what the safety writer's list answers, on every roster
+ FAIL  tests/property/dossierProseManifest.test.js > the composed-prose manifest — the DRIFT corpus, both audiences > ⭐ THE DRIFT ARM: no row added, no row removed, no row moved
+AssertionError: rows whose composed prose moved: expected [ …(1050) ] to deeply equal []
+    265|     expect(moved, 'rows whose composed prose moved').toEqual([]);
+ Test Files  3 failed | 3 passed (6)
+      Tests  5 failed | 90 passed (95)

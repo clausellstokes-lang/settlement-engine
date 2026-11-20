@@ -265,6 +265,9 @@ const CENSUS = (() => {
  * ⭐ BUILD-T3 (dossier consolidation, 2026-10-30): chair-ruled CUTS in the World group remove floored lines with their blocks, never a site that stopped being floored. U2+U3 (NPCs footer, per-group tally; Relationships intros, slider sentence, crossConns, Known Contacts, conflict desc/hooks): /create 750 -> 738, /settlements 991 -> 979, /gallery 794 -> 782. U4 (History count span, Recent Events, banner, legend mark, inline hooks): 738 -> 727, 979 -> 968, 782 -> 771. U5 (Rumors second sentence, Daily Life marketing line, Traditions footer and placeholders): 727 -> 725, 968 -> 966, 771 -> 769. U6 Faith (the patron-seat block and the niche block merged into FaithSection's patron line and one creed list): 725 -> 719, 966 -> 960, 769 -> 763. U6c War ROSE by one: the army's condition line moved into the units-abroad entry as its own floored row (W6): 719 -> 720, 960 -> 961, 763 -> 764. Glance rows (DS-REL-1 network line render removed): 720 -> 719, 961 -> 960, 764 -> 763.
  */
 const ROUTE_BASELINE = Object.freeze({
+  // RE-MEASURED 2026-11-20 (PAGE-1 OUTPUT, F3b), out of this census's own red run: the Economics header's Output chip
+  // (EconomicsGlance.jsx, its `chromeFontSize` label) leaves with its "n/100": /create 621 -> 620, /settlements 864 -> 863,
+  // /gallery 666 -> 665; `bare` holds. A surface only shrank.
   // ⭐ RE-MEASURED 2026-11-09 (SW-B7b fourth seat; the cause is f913f8b28, the faith desk's public branch): the
   // public prose composer (reached from the save path's lazy edge in the shell) imports the faith desk's one
   // caller, `tabs/WarFaithDesk.jsx`, whose two floored sites (`proseFontSize`, `chromeFontSize`) now count on
@@ -360,8 +363,8 @@ const ROUTE_BASELINE = Object.freeze({
   // `chromeFontSize` site) — `floored` +1 on /create, /settlements, /gallery, 621 -> 622, 864 -> 865, 666 -> 667; `bare`
   // unmoved; re-measured by this census at the build's tip.
   // 2026-11-20, PAGE-4's merge of CARD and MAGIC: -2 and +1 composed, 621 -> 620, 864 -> 863, 666 -> 665; re-measured by this
-  // census at the merged tree, never a sum.
-  '/create':                { roots: 1, files: 162, floored: 620, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
+  // census at the merged tree, never a sum. Then PAGE-4's merge of OUTPUT (-1, its Output chip): 620 -> 619, re-measured.
+  '/create':                { roots: 1, files: 162, floored: 619, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
   '/home':                  { roots: 1, files: 19, floored: 8, ruled: 4, bare: 19, owner: 'lane 28 — the landing' },
   // The Realm lazily mounts the create flow's ClerkNote for its one advisory
   // line, so lane 28's file lands on a route it does not own. One site.
@@ -417,7 +420,8 @@ const ROUTE_BASELINE = Object.freeze({
   // 2026-11-20, PAGE-1 MAGIC (F3c): MagicTab.jsx's headline caption (one `chromeFontSize` site) — `floored` 864 -> 865; `bare`
   // unmoved; re-measured by this census at the build's tip.
   // 2026-11-20, PAGE-4's merge of CARD (-2) and MAGIC (+1): 864 -> 863, re-measured by this census at the merged tree.
-  '/settlements':           { roots: 1, files: 206, floored: 863, ruled: 4, bare: 0 },
+  // 2026-11-20, PAGE-4's merge of OUTPUT (-1, its Output chip): 863 -> 862, re-measured by this census at the merged tree.
+  '/settlements':           { roots: 1, files: 206, floored: 862, ruled: 4, bare: 0 },
   // /compendium files 51 -> 50 with the same T6 cut: the size grid's one helper module left the
   // compendium's import closure when ConfigurationPanel stopped importing it; floored 211 -> 206.
   // floored 208 -> 206 (2026-11-10, COMPENDIUM-HUB H1, the owner's word "Rather than a horizontal
@@ -454,7 +458,8 @@ const ROUTE_BASELINE = Object.freeze({
   // 2026-11-20, PAGE-1 MAGIC (F3c): MagicTab.jsx's headline caption (one `chromeFontSize` site) — `floored` 666 -> 667; `bare`
   // unmoved; re-measured by this census at the build's tip.
   // 2026-11-20, PAGE-4's merge of CARD (-2) and MAGIC (+1): 666 -> 665, re-measured by this census at the merged tree.
-  '/gallery':               { roots: 1, files: 151, floored: 665, ruled: 4, bare: 0 },
+  // 2026-11-20, PAGE-4's merge of OUTPUT (-1, its Output chip): 665 -> 664, re-measured by this census at the merged tree.
+  '/gallery':               { roots: 1, files: 151, floored: 664, ruled: 4, bare: 0 },
   '/founders':              { roots: 1, files: 13, floored: 8, ruled: 1, bare: 0 },
   '/first-hundred':         { roots: 1, files: 6, floored: 4, ruled: 1, bare: 0 },
   '/roadmap':               { roots: 1, files: 6, floored: 3, ruled: 1, bare: 0 },

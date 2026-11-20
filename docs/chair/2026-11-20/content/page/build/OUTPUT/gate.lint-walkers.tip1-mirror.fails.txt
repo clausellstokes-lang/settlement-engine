@@ -1,0 +1,19 @@
+ FAIL  tests/lint/composeStateProseFence.test.js > the composer's import fence (ARCH §4.1, car 3a) > ⭐ EXACTLY THE ROUTED DESKS IMPORT A CANDIDATES LEAF, AND ONLY THEIR OWN
+ FAIL  tests/lint/domainAnyCastBaseline.test.js > domain any-cast ratchet — `--update` refuses to bank a declared overrun > ⛔ every LIVE declared row is refused against the LIVE register
+ FAIL  tests/lint/domainAnyCastBaseline.test.js > domain any-cast ratchet — frozen baseline governance > baseline exactly matches the tree (airtight against any drift mode)
+ FAIL  tests/lint/domainAnyCastBaseline.test.js > domain any-cast ratchet — frozen baseline governance > no file exceeds its baseline (new files get 0) — fix the types, do not widen
+ FAIL  tests/lint/domainAnyCastBaseline.test.js > domain any-cast ratchet — the declared-overrun ledger is honest > ⛔ no UNDECLARED file exceeds its baseline (the ledger is the only widening path)
+ FAIL  tests/lint/exportTokenCoverage.test.js > export-token coverage census (Wave 0 — predicate liveness, never correctness) > the corpus vocabulary is live and the census is not measuring an empty set
+ FAIL  tests/lint/ledgerCitationIntegrity.test.js [ tests/lint/ledgerCitationIntegrity.test.js ]
+ FAIL  tests/lint/negativeAssertionAnchor.walker.test.js > negative-assertion anchor walker (habitat removal) > no NEW un-anchored negative assertion anywhere in the test corpus
+ FAIL  tests/lint/presumedThings.walker.test.js > ARM 1 — the source > the admitted instruments: each reads EXACTLY its named counts, and only these two are admitted
+ FAIL  tests/lint/presumedThings.walker.test.js > ARM 1 — the source > ⛔ every source literal that names a thing declares it, or has its row
+ FAIL  tests/lint/proseWiringCensus.walker.test.js > SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SITTING §Q) > ⭐ THE DRY READ: both modes, and the one that writes is not among them
+ FAIL  tests/lint/proseWiringCensus.walker.test.js > car 0 — the committed JSON and its interlock > the committed census is byte-identical to a fresh build, and the stamp is live
+ FAIL  tests/lint/rawColorLiteral.test.js > raw-color-literal occurrence budget (A+ design-a11y.1) > raw-color literals match the committed budget exactly
+ FAIL  tests/lint/siteCoherenceRatchet.test.js > site-coherence contradiction ratchet (Wave 0 — inventory freezing, never correctness) > C5 anti-vacuity — the corpus is exactly 462 settlements with zero generation errors
+ FAIL  tests/lint/siteCoherenceRatchet.test.js > site-coherence contradiction ratchet (Wave 0 — inventory freezing, never correctness) > C5 — determinism: two scans in one run agree on rows, totals and vocabulary
+ FAIL  tests/lint/sovereigntyLightingContract.walker.test.js > the sovereignty lighting condition — a marker is EVIDENCE only in a live title > THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed
+ FAIL  tests/lint/tuningRegister.walker.test.js > tuning register — the inventory is frozen and honest > no file carries more bare decimals than the inventory banked
+ FAIL  tests/lint/tuningRegister.walker.test.js > tuning register — the inventory is frozen and honest > no file carries more unregistered named constants than the inventory banked
+ FAIL  tests/lint/tuningRegister.walker.test.js > tuning register — the inventory is frozen and honest > the six ceilings never rise

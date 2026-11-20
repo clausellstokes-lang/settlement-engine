@@ -81,7 +81,6 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
         stats={[
           { label: 'Prosperity', value: cap(e.prosperity) || '–' },
           { label: 'Complexity', value: cap(e.economicComplexity) || '–' },
-          { label: 'Output', value: smart(e.economyOutput) },
           { label: 'Trade', value: cap(e.tradeAccess) || '–' },
         ]}
       />
@@ -90,6 +89,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
       {e.prosperityInCrisis && (
         <Text style={{ ...type.italic, color: palette.second, fontSize: pt['9'], marginBottom: space.sm }}>{prosperityInCrisisLed(e.prosperityInCrisis)}</Text>
       )}
+      {e.outputInWords && <Text style={{ ...type.italic, color: palette.second, fontSize: pt['9'], marginBottom: space.sm }}>{e.outputInWords}</Text>/* PAGE-1 OUTPUT (F3b): the Output tile's figure left; the words from the tab's one reader */}
 
       {/* TAIL-EXPORTS-PDF-2 (rulings E3/E17): under a crisis an income share or a chain that lives on what it stops is
           marked by the tabs' one leaf (domain/display/crisisStoppedRow.js), and the chapter says so once. */}

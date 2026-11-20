@@ -1,0 +1,33 @@
+ ❯ tests/lint/presumedThings.walker.test.js:456:7
+    454|    * literal in either file, or one gone, moves its count and reds her…
+    455|    */
+    456|   test('the admitted instruments: each reads EXACTLY its named counts,…
+       |       ^
+    457|     expect(Object.keys(ARM1_INSTRUMENTS)).toEqual(['src/domain/coheren…
+    458|     const strips = stripTree(ROOT, { keepAdmitted: true });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/7]⎯
+
+ FAIL  tests/lint/siteCoherenceRatchet.test.js > site-coherence contradiction ratchet (Wave 0 — inventory freezing, never correctness) > C5 anti-vacuity — the corpus is exactly 462 settlements with zero generation errors
+Error: Test timed out in 240000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/lint/siteCoherenceRatchet.test.js:391:5
+    389|   }, CORPUS_BUDGET_MS);
+    390|
+    391|   it('C5 anti-vacuity — the corpus is exactly 462 settlements with zer…
+       |     ^
+    392|     const scan = corpus();
+    393|     expect(scan.errors, 'the corpus must build clean; a generation err…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/7]⎯
+
+
+ Test Files  6 failed | 214 passed (220)
+      Tests  6 failed | 3255 passed (3261)
+   Start at  11:32:21
+   Duration  2486.68s (transform 36.23s, setup 16.32s, import 2396.41s, tests 2849.03s, environment 30ms)
+
+[gate-tail] end:  12:13:49 up  1:19,  0 user,  load average: 12.77, 13.85, 13.45
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/e39601df-bea0-5bb7-a071-cd1164f3a939/scratchpad/gate-tail.9621.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+exit 1

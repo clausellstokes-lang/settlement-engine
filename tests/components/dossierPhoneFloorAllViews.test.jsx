@@ -645,6 +645,10 @@ const desktopShape = (perView) => Object.fromEntries(
 // that touches src/ from 600b7683a (each probe at its own tree): Services +1 at JOIN-16 point 6 (BAR5-CHAINS 027ead2b8), +2 at
 // JOIN-17 point 5 (BAR6-MARKS a010f4f9c, Institutions +1 there), Institutions -1 at point 8 (BAR6-PEOPLE 57a3bda67), then at
 // point 21 (BIRTH-1 edb5cae92) Institutions -2 and Services -4: the figures hold from there to the tip. No token moved.
+// ── RE-MEASURED 2026-11-20 (PAGE-1 OUTPUT, F3b), out of this walk's own red run: desktop Systems/Economics measured/sub14
+// 43 -> 44, mobile prose 37 -> 38. Cause: the Economics header's "n/100" Output chip (suppressed on this walk's town) leaves
+// and the one line saying the output in words (domain/display/outputInWords.js, proseFontSize) prints under the prosperity
+// word. Nothing else moved; no token moved; sub12 0.
 const DESKTOP_BASELINE = Object.freeze({
   // RE-MEASURED ONCE at MERGE-TRAIN's final tip (2026-11-09, the allegiance train; BRIEF-MERGE-TRAIN §0.3, GREEN-BASE §4.4's form),
   // the same walk: World/NPCs 220 -> 284, bisected on the desktop walk at the merge points' stages — 220 at the base, CAR1 +3
@@ -671,7 +675,7 @@ const DESKTOP_BASELINE = Object.freeze({
   // from the base's 47: the line's 47 -> 46 (point 47, COHERENCE-AGREE, e382be4b3) and the lane's 47 -> 48 -> 46 (R2-CODE-B-3
   // item 2a, the stores' span crosses the measured length; R2-CODE-B-SIDE items 1 and 2, 2ed36a430 and a245e05fb, the chain
   // card's upstream note and its "Import: <a chain's label>" From line left the card). Measured by this walk at the merged tip.
-  "Systems/Economics":   { measured: 43, sub14: 43 },
+  "Systems/Economics":   { measured: 44, sub14: 44 },
   // 28 -> 22 (2026-10-30, UX consolidation U5, T2-17..T2-19): Current Tensions, Active Conflicts and the
   // duplicate governing rows left the page; no token moved.
   "Systems/Power":       { measured: 33, sub14: 32 }, // 30 -> 29 OWNER-WORDS-DOSSIER item 3 (2026-11-09): the vignette line and the DS-POW-1/2 readings became one paragraph
@@ -830,6 +834,8 @@ const DESKTOP_BASELINE = Object.freeze({
 // 6e36000a and 56f73d7ec); Institutions and Services, TAIL-SERVICES S1/S5 (73291c8e: the ordinary-times and short lines);
 // Defense, R3-TABS-4 F2/F7 (2b7f6199) and the defence lines' families; Overview, History, Power, NPCs and Relationships: the
 // joins' births from JOIN-1 · 3 (e20a60e0) on. No token moved.
+// ── RE-MEASURED 2026-11-20 (PAGE-1 OUTPUT, F3b): Systems/Economics prose 37 -> 38, the output-in-words line (see
+// DESKTOP_BASELINE's note). Nothing else moved.
 const MOBILE_BASELINE = Object.freeze({
   // RE-MEASURED ONCE at MERGE-TRAIN's final tip (2026-11-09, the allegiance train; BRIEF-MERGE-TRAIN §0.3, GREEN-BASE §4.4's form),
   // the same walk: World/NPCs 219 -> 283, bisected on the desktop walk at the merge points' stages — 220 at the base, CAR1 +3
@@ -849,7 +855,7 @@ const MOBILE_BASELINE = Object.freeze({
   // chrome 7 -> 6, sub14 7 -> 6 (2026-11-14, R2-CODE-B-7, the merge 0aa0cce00), composed from the base's 39/8/8: the line's
   // chrome 8 -> 7 (point 47, e382be4b3) and the lane's prose 39 -> 40 -> 39, chrome 8 -> 7 (R2-CODE-B-3 item 2a, the stores
   // line; the side items 1 and 2: the upstream note (prose) and the "Import:" From line (chrome) left the card). sub12 holds 0.
-  "Systems/Economics":   { prose: 37, chrome: 6, sub14: 6, sub12: 0 },
+  "Systems/Economics":   { prose: 38, chrome: 6, sub14: 6, sub12: 0 },
   // prose 27 -> 21 (2026-10-30, UX consolidation U5): tensions, conflicts and the duplicate rows left.
   "Systems/Power":       { prose: 32, chrome: 1, sub14: 0, sub12: 0 }, // 29 -> 28 OWNER-WORDS-DOSSIER item 3 (2026-11-09): the governance block is one paragraph
   // prose 27 -> 25, chrome 1 -> 2 (2026-10-30, UX consolidation U6): the criminal faction is now one

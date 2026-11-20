@@ -1,0 +1,3 @@
+LEFT  src/components/new/tabs/EconomicsGlance.jsx|134|floatInterpolation|{ecoScore}
+baseline 185 -> live 184
+written

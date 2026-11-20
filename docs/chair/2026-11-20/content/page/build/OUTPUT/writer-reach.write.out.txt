@@ -1,0 +1,2 @@
+writer-reach WRITE — cohort 1385 → 1385; 0 stale folded out; 0 registered rows now lit.
+WRWALKER HOLD — judged 12726 · LIT 700 · LIT-NAME 10601 · DARK 1425 (reviewable 399) · pending-surface debt: none

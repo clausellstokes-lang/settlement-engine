@@ -1,0 +1,43 @@
++   "village|south_asian|hills|road|civilized|golden-master-v3::player",
++   "village|south_asian|mountain|road|civilized|golden-master-v3::dm",
++   "village|south_asian|mountain|road|civilized|golden-master-v3::player",
++   "village|south_asian|plains|road|civilized|golden-master-v3::dm",
++   "village|south_asian|plains|road|civilized|golden-master-v3::player",
++   "village|south_asian|riverside|river|civilized|golden-master-v3::dm",
++   "village|south_asian|riverside|river|civilized|golden-master-v3::player",
++   "village|steppe|coastal|port|civilized|golden-master-v3::dm",
++   "village|steppe|coastal|port|civilized|golden-master-v3::player",
++   "village|steppe|desert|road|civilized|golden-master-v3::dm",
++   "village|steppe|desert|road|civilized|golden-master-v3::player",
++   "village|steppe|forest|isolated|civilized|golden-master-v3::dm",
++   "village|steppe|forest|isolated|civilized|golden-master-v3::player",
++   "village|steppe|hills|road|civilized|golden-master-v3::dm",
++   "village|steppe|hills|road|civilized|golden-master-v3::player",
++   "village|steppe|mountain|road|civilized|golden-master-v3::dm",
++   "village|steppe|mountain|road|civilized|golden-master-v3::player",
++   "village|steppe|plains|road|civilized|golden-master-v3::dm",
++   "village|steppe|plains|road|civilized|golden-master-v3::player",
++   "village|steppe|riverside|river|civilized|golden-master-v3::dm",
++   "village|steppe|riverside|river|civilized|golden-master-v3::player",
++ ]
+
+ ❯ tests/property/dossierProseManifest.test.js:265:54
+    263|     expect(added, 'rows the corpus grew').toEqual([]);
+    264|     expect(removed, 'rows the corpus lost').toEqual([]);
+    265|     expect(moved, 'rows whose composed prose moved').toEqual([]);
+       |                                                      ^
+    266|     // AND THE BYTES, so a whitespace-only edit of the fixture convict…
+    267|     // file carries is fed back in, so this arm compares the ROWS and …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/12]⎯
+
+
+ Test Files  9 failed | 148 passed | 1 skipped (158)
+      Tests  11 failed | 1835 passed | 9 skipped (1855)
+   Start at  12:16:56
+   Duration  2302.36s (transform 97.52s, setup 24.34s, import 1086.84s, tests 5417.45s, environment 253.81s)
+
+[gate-tail] end:  12:55:20 up  2:00,  0 user,  load average: 14.77, 16.29, 16.05
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/e39601df-bea0-5bb7-a071-cd1164f3a939/scratchpad/gate-tail.26643.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+exit 1

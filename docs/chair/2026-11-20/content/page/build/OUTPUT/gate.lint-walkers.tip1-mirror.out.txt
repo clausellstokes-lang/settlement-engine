@@ -1,0 +1,33 @@
+Caused by: Error: Worker exited unexpectedly
+ ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BfdDOPPI.js:3012:33
+ ❯ ChildProcess.emit node:events:519:28
+ ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12
+
+
+⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯
+Error: [vitest-pool]: Worker forks emitted error.
+ ❯ EventEmitter.<anonymous> node_modules/vitest/dist/chunks/cli-api.BfdDOPPI.js:3446:22
+ ❯ EventEmitter.emit node:events:519:28
+ ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BfdDOPPI.js:3013:22
+ ❯ ChildProcess.emit node:events:519:28
+ ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12
+
+Caused by: Error: Worker exited unexpectedly
+ ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BfdDOPPI.js:3012:33
+ ❯ ChildProcess.emit node:events:519:28
+ ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+
+
+ Test Files  11 failed | 205 passed (220)
+      Tests  18 failed | 3119 passed (3244)
+     Errors  4 errors
+   Start at  13:06:29
+   Duration  2995.62s (transform 35.77s, setup 13.56s, import 900.46s, tests 2260.76s, environment 23ms)
+
+[vitest-pool]: Timeout terminating forks worker for test files /home/user/settlement-engine/.claude/worktrees/agent-a30251bfb579f8154/tests/lint/poolDominance.walker.test.js.
+[gate-tail] end:  13:56:35 up  3:02,  0 user,  load average: 18.57, 13.70, 14.68
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/e39601df-bea0-5bb7-a071-cd1164f3a939/scratchpad/gate-tail.12986.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+exit 1
