@@ -712,11 +712,12 @@ describe('ONE TOWN, NO SENTENCE TWICE (TRAD-4 unit 10; the chair, reading the ow
 
   it('RINGTHWAITE and BERGBREKKA, the owner\'s page (the tab\'s set) and the reader\'s drawn rows: no sentence printed in two rites', () => {
     const found = [];
+    // seed-loop: collected — every sample's every check pushes into `found`, asserted once after the loop
     for (const [name, settType, culture, seed] of SAMPLES) {
       const t = bornAt(settType, culture, seed);
-      expect(t.name).toBe(name);
+      if (t.name !== name) found.push(`${seed}: born ${t.name}, not ${name}`);
       const recs = shownTraditionsOf(t, []).recs;
-      expect(recs.length).toBeGreaterThan(1);
+      if (recs.length < 2) found.push(`${name}: ${recs.length} rite(s), not vacuous only with two or more`);
       const owner = recs.map((rec) => describeTradition(rec, t, { audience: 'owner', set: recs })?.text ?? '');
       const reader = (sharedTraditionRowsOf(t) || []).map((r) => r.text);
       for (const s of twice(owner)) found.push(`${name} owner: ${s}`);
