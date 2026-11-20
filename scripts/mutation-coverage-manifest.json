@@ -4677,7 +4677,7 @@
     },
     "tests/lint/samenessHideable.walker.test.js": {
       "kind": "rationale",
-      "rationale": "Introduced by SAME-1's brief 3 (the chair's rule of 17:13 and rulings of 17:25 and 17:32 UTC, 2026-11-20), on the base 43ab0f5eb. It holds over corpusPools that no line public on a shared read needs a crime fact or a hideable house or stands in a crime pool beyond the shrink-only bank of the base's 96, that rule 2's house readings equal their committed list, and that every pool-shaped src/data table a draw site reads is reached by corpusPools or on the shrink-only hand list. A sweep plant is redundant: the file carries its own planted reds on every run (a new public line in a crime pool reds and the same line marked dm-only passes; a wording needing a criminal house reds and passes once its pool is exempted by declaration; an unregistered drawn pool-shaped table reds and passes once listed; a stale join row reds), and at build time dropping one row from each of its three lists reddened three arms, restored byte-identical by sha256."
+      "rationale": "SAME-1 brief 3 (the chair, 2026-11-20; base 43ab0f5eb). Self-planting: every run reds a new public crime-pool line, a wording needing a criminal house, an unregistered drawn pool-shaped table and a stale join row, and passes the dm-only, exempted and listed twins; at build, dropping one row from each of its three lists reddened three arms, restored byte-identical by sha256."
     }
   },
   "meta": {
