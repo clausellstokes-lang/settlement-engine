@@ -97,3 +97,14 @@ stress `type`s); the draw key (`String(_seed ?? id)`); the public search (unit 2
   34/34. typecheck:ratchet 0, typecheck:domain:strict 0, eslint 0. The chair ruled the four plants at 11:12 UTC
   (foundedBy; tags; the event by its KIND, chosen among events naming nothing the record holds; the SET by (B): the
   owner's set unchanged, the drawn rows admit by the floor always): all four in unit 4.
+- 2026-11-20 12:46 UTC — UNIT 4 MERGED (`a167f9175`, branch `trad3-u4`; merge then `3d49049e4`, one comment reworded). Reds re-run by
+  TRAD-3 at its base `25d255c47`: 10 failed | 41 passed (51). The builder's measures (executed): reader descriptions
+  moved 432 of 1,232 on the 432 pool (387 founding sentences lose "by <foundedBy>"; 45 dead causes take the kind
+  phrase); owner 0; drawn set smaller than the owner's in 0 towns; confinement 1,245 cmp-identical. The chair APPROVED
+  the kind phrases (12:25 UTC): external_threat "the siege", great_fire "the great fire", great_flood "the flood",
+  plague_years "the years of sickness". Greens at the merge: 10 module files 212/212; 56 consumer files 1,284/1,284;
+  `tests/lint` whole 220/221 files, 3285/3286 tests, the one red the lighting census, re-taken by its door: titles
+  31292 → 31310, suiteTitles 8664 → 8670 (files 3711, credited 3239 unchanged); plain run 34/34; typecheck:ratchet 0,
+  typecheck:domain:strict 0, eslint 0. NEXT: unit 4b (the chair, 12:25: the drawn set's floor EXCLUDES the hideable
+  class; the kind phrases' totality), then TRAD-SHARE. Forwarded to the security lane by the chair: `brokerageLegalityOf`
+  reads a house's own tags (an illegal brokerage with its function eye hidden may stop counting as hideable in the veil).
