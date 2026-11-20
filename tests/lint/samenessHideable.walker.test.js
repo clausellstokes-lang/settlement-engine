@@ -153,10 +153,41 @@ const CRIME_KEY_WORDS = /thie(?:f|ves)|gang|criminal|crime|smuggl|syndicate|rack
 export const isCrimePool = (id) => Object.hasOwn(CRIME_POOLS, id) || Object.hasOwn(CRIME_BLOCKS, id.split('::')[0]);
 
 // ── EXEMPT, BY DECLARATION ONLY ─────────────────────────────────────────────────────────────────
-/** @type {Readonly<Record<string, { class: 'withheld' | 'trouble', reason: string }>>} */
+/**
+ * Each entry stands only WITH THE LINE OF CODE that withholds its block from every shared read (the chair, 17:45):
+ * `withheldBy` (`path :: symbol`, the symbol found in that file) and, where one exists, `provedBy` (`path :: test
+ * title`, the title found in that file). `exemptionFaults` reds an entry without them.
+ * @type {Readonly<Record<string, { class: 'withheld' | 'trouble', reason: string, withheldBy: string, provedBy?: string }>>}
+ */
 const EXEMPT = Object.freeze({
-  'DS-HK-1::clock smuggling_rise': { class: 'trouble', reason: 'the state a hook is framed from: the trouble half\'s hooks are dropped on a public page' },
+  'DS-HK-1::clock smuggling_rise': {
+    class: 'trouble',
+    reason: 'the state a hook is framed from: DS-HK-1 prints nowhere. Its desk position `plot_hooks.framing` is a GLANCE (dossierMounts.js; the chair\'s RULINGS-T1 of 2026-10-30), so the reader hands no surface a framing line, privately or publicly (print reads the same framingLines); a public dossier reads GENERAL_STATE_PROSE_SILENT and PUBLIC_SITE_GROUP ships no hooks group',
+    withheldBy: 'src/components/new/generalDeskRead.js :: generalDeskLines',
+    provedBy: 'tests/ui/generalDeskTabFlow.test.js :: no "Plot hooks" title and no DS-HK-1 framing, privately or publicly; the hooks keep their own words',
+  },
 });
+
+/**
+ * The faults of the exemptions: an entry with no `withheldBy`, or one whose file or symbol (or whose `provedBy` file
+ * or test title) is not found.
+ * @param {Readonly<Record<string, { withheldBy?: string, provedBy?: string }>>} exempt @param {(rel: string) => string|null} read
+ * @returns {string[]}
+ */
+export function exemptionFaults(exempt, read) {
+  /** @type {string[]} */ const out = [];
+  for (const [id, e] of Object.entries(exempt)) {
+    const [rel, symbol] = String(e.withheldBy ?? '').split(' :: ');
+    const code = rel ? read(rel) : null;
+    const name = symbol?.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    if (!symbol || code === null || !new RegExp(`\\b${name}\\b`).test(code)) out.push(`${id}: withheldBy not found (${e.withheldBy ?? 'none'})`);
+    if (e.provedBy === undefined) continue;
+    const [trel, ...title] = e.provedBy.split(' :: ');
+    const tests = read(trel);
+    if (tests === null || !title.length || !tests.includes(title.join(' :: '))) out.push(`${id}: provedBy not found (${e.provedBy})`);
+  }
+  return out;
+}
 
 /**
  * RULE 1 over pools: every line that reds, unless the line is `dm-only` or its pool is exempt.
@@ -359,6 +390,8 @@ const walk = (dir, out = []) => {
 };
 const treeFiles = () => walk(join(ROOT, 'src')).filter((p) => /\.(?:jsx?|mjs)$/.test(p))
   .map((p) => ({ rel: relative(ROOT, p).replace(/\\/g, '/'), text: readFileSync(p, 'utf8') }));
+/** A file of the tree, or null. @param {string} rel */
+const readRel = (rel) => (existsSync(join(ROOT, rel)) ? readFileSync(join(ROOT, rel), 'utf8') : null);
 /** The hand-listed tables on this line (a seat's row whose table is not on this line yet is skipped). @param {Array<{ pool: string }>} rows */
 const handPoolsOnLine = async (rows) => {
   /** @type {HandPool[]} */ const out = [];
@@ -393,6 +426,10 @@ describe(`the hideable-house walker of the sameness pools (base ${BASE})`, async
       expect(['withheld', 'trouble'], id).toContain(e.class);
       expect(e.reason.length, id).toBeGreaterThan(0);
     }
+  });
+
+  test('EXEMPT: every exemption carries the line of code that withholds it (and its proving test, where one exists)', () => {
+    expect(exemptionFaults(EXEMPT, readRel)).toEqual([]);
   });
 
   test('RULE 1: the reds equal the bank of the base exactly (a new red line reds; a cured one leaves the bank)', () => {
@@ -449,6 +486,15 @@ describe(`the hideable-house walker of the sameness pools (base ${BASE})`, async
       expect(ruleOneReds([pool], () => false, {}).map((r) => r.why)).toEqual(['needs organised crime']);
       expect(ruleOneReds([pool], () => false, { 'DS-ECO-1::FIXTURE': { class: 'withheld', reason: 'a fixture' } })).toEqual([]);
       expect(houseReadings([fixture('DS-ECO-1::FIXTURE', [{ vid: 1, text: 'x', marks: ['walls', 'organised crime'] }])])).toEqual([{ pool: 'DS-ECO-1::FIXTURE', vid: 1, house: 'walls' }]);
+    });
+
+    test('EXEMPT: an exemption without its withholding line reds; with a line found in its file, it passes', () => {
+      const read = (/** @type {string} */ rel) => (rel === 'src/x.js' ? 'export function hideIt() {}' : rel === 'tests/x.test.js' ? "test('it hides', () => {})" : null);
+      expect(exemptionFaults({ 'DS-X::a': {} }, read)).toEqual(['DS-X::a: withheldBy not found (none)']);
+      expect(exemptionFaults({ 'DS-X::a': { withheldBy: 'src/x.js :: showIt' } }, read)).toHaveLength(1);
+      expect(exemptionFaults({ 'DS-X::a': { withheldBy: 'src/y.js :: hideIt' } }, read)).toHaveLength(1);
+      expect(exemptionFaults({ 'DS-X::a': { withheldBy: 'src/x.js :: hideIt', provedBy: 'tests/x.test.js :: it shows' } }, read)).toHaveLength(1);
+      expect(exemptionFaults({ 'DS-X::a': { withheldBy: 'src/x.js :: hideIt', provedBy: 'tests/x.test.js :: it hides' } }, read)).toEqual([]);
     });
 
     test('PHASE 3: a new line in a hand-listed criminal key reds; dm-only, or in an exempt pool, it passes', () => {
