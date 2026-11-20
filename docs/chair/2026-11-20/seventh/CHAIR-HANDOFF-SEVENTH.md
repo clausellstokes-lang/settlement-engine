@@ -983,3 +983,19 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   ACCEPTED. ONE STEP BEFORE IT LANDS AS POINT 76: point 75 moved the same stored figure (the lighting census), the
   only file both changed; the seat merges the line at 85fccf898 into its branch and re-takes the census by its door
   at the merged tree, then "GIT-DOOR-2 <commit>"; the chair merges with the tree equal to the seat's.
+- 02:51 UTC · **REVIEW-VEIL-11: A TIER-1 FINDING FOR R3, LIVE AT B/C/D (its message of 02:46 UTC; `vr29.probe.jsx`,
+  `ct.probe.jsx`).** With the three family groupings OPENED by the DM's hand and each criminal house still hidden
+  whole by the default, the gallery read serves `safetyProfile.crimeTypes` with a bare {"type":"Smuggling"} in 27
+  of 45 towns: the name search took the entry's `desc` and left its `type`. Over born towns "Smuggling" is in 107
+  of 184 with a hideable house and 0 of 96 without; "Religious fraud" 15 and 0; "Criminal governance" 4 and 0.
+  With the default veil (groupings shut) both keys are absent, 45 of 45. **RULING VR39, A CRIME TYPE LEAVES BY
+  ATTRIBUTION, NOT BY NAME (vetoable):** an entry of crimeTypes is withheld where the house that RAISES it by the
+  engine's own rule is hidden whole, whatever its text says; an entry a shown house or a crisis raises stays; R3's
+  born test holds the reader's arm (the grouping open, every hideable house hidden: no served crime type that no
+  town of the hidden-free pool ever has) and its control (a SHOWN criminal house keeps its types). To VEIL-21 for
+  R3's brief. **VR29 IS CONFIRMED BY MEASURE:** an empty array tells nothing (towns with no hideable house store
+  `criminalInstitutions` empty in 77 of 96 and `crimeTypes` empty in 44 of 96).
+  **GIT-DOOR's ADDENDUM (53b4f1d83):** the hook and the runner forget the same 13 variables (git's own
+  `--local-env-vars` less its two config counters); the harness's variables are kept; GIT_NAMESPACE is KEPT (it
+  namespaces refs inside the repository git opens and does not choose it): ruled, leave it; the chair's adding it
+  to the seats' hazard line was caution, not a measure.
