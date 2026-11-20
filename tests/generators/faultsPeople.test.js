@@ -103,12 +103,15 @@ describe("FAULTS-PEOPLE 14e · a trade's hook is not dealt to a card that keeps 
     // economy pool grew 24 -> 38, so 47's castellan now draws a line true of any holder); 62 is the one city of rand-0..99 at
     // this tip whose castellan and watch commander, of a standing force's house on a seat of trade, both hold a trade line
     // beside a garrison commander. The expected lines are computed from the pool (its rows 25 and 30), never quoted.
+    // 2026-11-20 (DEPTH-2 hooks tranche 2, the chair's words of 16:22 and 16:35 UTC): the economy pool grew 38 -> 44, so 62's
+    // castellan now draws row 28 and its watch commander row 36 (both trade lines); 62 still holds the claim (a probe of
+    // rand-0..99 at this tip), so the seed stays and only the computed rows moved: 25 -> 28, 30 -> 36.
     const s = born('bar0-city-under_siege+famine-rand-62');
     const hookOf = (/** @type {string} */ role) => plotHookText(s.npcs.find((n) => n.role === role)?.plotHooks?.[0]).trim();
     const economyRow = (/** @type {number} */ i) => plotHookText(NPC_DATA.NPC_FACTION_LOYALTY.economy[i]).trim();
-    expect(tradeLines().has(economyRow(25)) && tradeLines().has(economyRow(30)), 'anchored: both expected rows are trade lines').toBe(true);
-    expect(hookOf('the castellan')).toBe(economyRow(25));
-    expect(hookOf('the watch commander')).toBe(economyRow(30));
+    expect(tradeLines().has(economyRow(28)) && tradeLines().has(economyRow(36)), 'anchored: both expected rows are trade lines').toBe(true);
+    expect(hookOf('the castellan')).toBe(economyRow(28));
+    expect(hookOf('the watch commander')).toBe(economyRow(36));
     // C5296 beside them: the garrison commander (one seat, the Garrison Bloc) no longer holds the market's price-fixing
     expect(hookOf('the garrison commander'), 'the garrison commander keeps one hook').not.toBe('');
     expect(hookOf('the garrison commander')).not.toMatch(/price-fixing/); // anchored: the card's one hook is pinned non-empty on the line above, beside its two siblings printed in full
