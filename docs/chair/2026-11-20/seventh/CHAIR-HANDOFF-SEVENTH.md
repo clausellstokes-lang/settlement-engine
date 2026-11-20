@@ -844,6 +844,33 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   house's name written by a DM into `history.founding.foundedBy`; a DM-authored house whose tags differ from the
   catalogue's): by CTR11 the reader's text carries neither; the result to the chair at once, for the security lane.
 
+- **R3, FOUND BY ITS THIRD CURE AND RULED (2026-11-20, 11:12 UTC, to VEIL-25):** A GOAL HUSK IS A LEAK (two towns: a goal
+  aimed at the withheld guild served with its sentence and target id stripped but its INTENT left, both engines): a
+  goal naming a withheld power leaves WHOLE, every field. THE EXEMPTION is owed (a served power whose name
+  contains a withheld one, "Old Thieves' Guild Watch", was withheld whole: it stays served byte for byte). VR34(b):
+  THE BEHAVIOUR STANDS (the switch on: the criminal row is served; a criminal house hidden: it is withheld) and the
+  pin is re-stated in both arms; BUT A SWITCH THAT SILENTLY DOES NOTHING IS A FAULT OF THE OWNER'S SCREEN: owed
+  before the deploy: the Curate screen says in plain words that the grouping is not shown while one of its houses
+  is hidden. The gate's three conditions (able to fail; the gap measured inside each dial setting; the
+  counterfactual built independently) are still owed before the R3 merge.
+- **THE TRADITIONS' READER, FOUR WAYS A DM'S OWN EDIT COULD REACH IT, ALL RULED (11:12 UTC, to TRAD-3; found by plants,
+  born towns 0):** (1) `history.founding.foundedBy` is editable and the founding sentence was composed from it: THE
+  READER NEVER READS IT (the bare founding pool). (2) a house's own `tags` fed the market fact: the reader's view
+  strips them; the fact reads the catalogue's tags by name. (3) the dead's cause printed `event.name`: the reader
+  names an event by its KIND (an authored phrase for each template type, read by the chair before it merges) with
+  its years, and chooses only among events whose name holds no name the record holds, hidden or shown. (4) THE SET
+  ITSELF (`shownTraditions.js :: shownTraditionsOf` admits by facts a DM can hide): RULED (B), NOT THE SEAT'S (A):
+  THE OWNER'S SET STAYS AS IT IS (a DM's own houses with the tags the DM gave them are paid-for content that goes on
+  counting on the DM's page); THE ROWS DRAWN FOR THE SHARED PAGE ADMIT BY THE FLOOR ONLY, always; CTR9 IS AMENDED:
+  the shared page's set is the owner's set less any rite that stands only on a fact a read can withhold; counted
+  and put on the list of what a shared page loses. If (B) can be shown to betray from the shared page alone, back
+  to (A).
+- **A WANT AGAINST THE CARD'S OWN SECRET: COUNTED, NOTHING BUILT (11:12 UTC; GOALS-1's count at ef75f0105 over 9,012
+  cards of 300 towns):** a conviction want beside a secret of money taken: 9 cards (1 in 1,001; the classifier
+  overcounts); a duty want beside one: 14 (1 in about 640); under the chair's bar of 1 in 200. About one card in
+  400 in all: roughly one large place in six holds one, and it reads as a hypocrite, which is playable. THE OWNER
+  IS TOLD the chair does less here, as it said it would if the count was low.
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -3177,3 +3204,20 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   VEIL-24 335,815 at 10:20 by its own read; SEAT-2 462,127, relaying only; TRAD-2 344,138, handed over; FRAME-4
   about 265,000; FORTUNE-1 about 305,000 by the chair's rule; GOALS-1, NAMES-4, PAGE-1, FORTUNE-2, VEIL-25, TRAD-3
   and SEAT-3 under 200,000). NEXT NET in 45 minutes.
+- 11:10 UTC · FRAME-5 SEATED BESIDE FRAME-4 (session_019yED1PXkNXMRbzqKf3WPYH; on `lane/frame-4-2026-11-20` at 9e23a094d;
+  outcome `lane/frame-5-2026-11-20`). SAFETY NET 9 armed for 11:50 (trig_01V2LrxJVxiqUKDoFDYPsmTM); net 8's message
+  was due at 10:58 and is delivered when this turn ends: its pass is already recorded above.
+- 11:13 UTC · NINE MESSAGES READ AT 11:10, ANSWERED AT 11:12. VEIL-24 "HANDED OVER at 214c36dde" (375,094 at 10:33): VEIL-25
+  TOLD THE LANE IS ITS OWN; R3 NOT MERGED (`lane/veil-24-r3c2-2026-11-20` at 9b18835d1; both diffs unread by any
+  integrator): its first act is to read them; then R3-CURE-4 (section 2). FRAME-4 "FRAME 9e23a094d — the hand-over
+  point" (about 295,000; B9, N1, B6, B11 merged; U0's builder out on `frame4-u0`; `tests/lint` whole at be9032b02
+  1 red of 3,271: `tuningRegister`'s two named rows; the line's merge NOT done): FRAME-5 TOLD THE LANE IS ITS OWN
+  at 9e23a094d when it has read in; its first act the line's merge. TRAD-3 (169,401): unit 2 read cold and merged
+  (a0929a153); three plants red and a fourth finding (section 2); one builder for all four, then TRAD-SHARE.
+  SEAT-2's relay (B2d at `lane/seat-2-2026-11-20-u2-cure2` 2b9706f5d, cut from 663f27b56) forwarded to SEAT-3.
+  NAMES-4: `tests/lint` whole at its tip 3 reds of 3,271, all born by NAMES-3's 9ddfcaa5a (the retired word in four
+  agreement slots of `stressInstitutionEffects.js`; a test with no mutation-manifest entry; an un-anchored
+  negative assertion): a builder cures them, output byte-identical by the two-tree tool; its swap test kills 98 of
+  101 mutations (3 survivors are comments). GOALS-1: unit 1 (the rotation) pushed 84a8606b9: confinement 0
+  non-string; only goal strings differ (golden 3,615 in 323 towns; census 5,740 in 428); every changed holding was
+  a repeat at the base.
