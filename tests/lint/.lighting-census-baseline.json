@@ -24,10 +24,10 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "dc126c04803d0d84db69430012ea589bab8da144",
-  "measuredBy": "NAMES-4",
+  "measuredAtSha": "379f63cb68650d548dbd66ccbf72f9a7f95c7586",
+  "measuredBy": "POINT-82",
   "date": "2026-11-20",
-  "note": "re-taken at NAMES-4 dc126c048 on the line 0c9069489: NAMES-3 tests/data/powerNumberAgreement.test.js (one file) and NAMES-4 its titles",
+  "note": "names-4 landed: the agreement work, its swap test and census cure",
   "files": 3707,
   "parked": 472,
   "credited": 3235,
