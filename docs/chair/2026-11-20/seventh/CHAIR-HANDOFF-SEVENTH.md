@@ -4984,3 +4984,7 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   lines); files 4 to 7 started. The traditions' four files delivered to the owner. NEW UNITS ORDERED: TRAD unit 10
   (no sentence twice in one town); SAME-1's slot-key mend and the hideable walker. NET 16 is set for 17:35
   (trig_01557M3ZPwaV3T8JBeZmN6zK).
+- 17:09 UTC · `prompts/VEIL-28.txt` WRITTEN, NOT SEATED (source `lane/veil-27-2026-11-20`, outcome `lane/veil-28-2026-11-20`; it
+  carries rulings 53, 54 and 55 and the order from here; seat it when VEIL-27 passes 360,000: it read 303,476 at
+  16:53 and has the import door's measure added). The hash measure's script saved as `measures/lean.mjs`. The
+  kernel builder was in its red phase at 17:09 (the test file changed, the function not yet added).
