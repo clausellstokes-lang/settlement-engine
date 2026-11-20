@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "ddf458393dcabfea4ef68416f5d223278bc8e99c",
-  "measuredBy": "TITLES-1 (seventh chair, lane/titles-2026-11-20)",
+  "measuredAtSha": "b5ae4e1a31978ec16144974d6462ee4b753cf4d2",
+  "measuredBy": "the seventh chair (points 77 and 78 at the merged tree)",
   "date": "2026-11-20",
-  "note": "TITLES-1 (2026-11-20): one test file born, tests/data/cultureOfficeTitles.test.js (the office-title table by family, size and culture)",
-  "files": 3703,
+  "note": "the born tests of point 77 (the names walker and its siblings) and of point 78 (the titles table), re-taken at the tree that holds both; neither side figure",
+  "files": 3705,
   "parked": 472,
-  "credited": 3231,
-  "titles": 31188,
-  "suiteTitles": 8635
+  "credited": 3233,
+  "titles": 31209,
+  "suiteTitles": 8638
 }
