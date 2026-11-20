@@ -281,3 +281,46 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   owner's word); for the pack: "a grouping the DM opened is not drawn on the campaign map's member dossier". The seat
   also measures whether any OTHER mark keyed by the page model's identity is lost by the same rebuild. THE CLASS SENT
   TO REVIEW-VEIL-10 for its own pass: any transform on a non-owner path that rebuilds the page model after the veil.
+- 00:44 UTC · **V10-1, HIGH: THE CHRONICLE DOOR (REVIEW-VEIL-10's message of 00:31 UTC, ten minutes into its cold pass).**
+  `get_gallery_dossier` returns a column `chronicle` = `_gallery_chronicle_json(campaign_state->'eventLog')`
+  (migration 032) and `get_gallery_map` returns each member's the same way (046); neither passes the veil, and the
+  differ reads only `data`. The DM's own Make Changes events name the hidden house ("A new Black market was
+  established."; "… has been turned by the Smuggling network.", with `event.type` IMPOSE_CORRUPTION). Executed at
+  bedd5a392 on born towns, the default veil, Reveal DM off, live and snapshot, read as anon on a chain 001..212: 4 of
+  4 towns with a criminal house; 211 alone identical; `PublicDossierView` draws it; the party link is clean. A
+  second door of the same class is being measured: the tile columns (stability, prosperity, threat_level,
+  government_type) that the read and `list_gallery_dossiers` take raw from `settlements.data`
+  (`_gallery_public_tile_rows`, 019 and 063). SIXTEEN BUILDER SEATS AND NINE READERS LOOKED ONLY AT `data`.
+  **RULING VR20 (vetoable):** HIGH, in scope, it blocks the clearance. THE CLASS is every column a non-owner read
+  returns beside `data`. (A) A column copied or derived from `data` is computed from the VEILED document and takes
+  its source path's registry rule; a filter, facet, sort or search over a raw value is a door too. (B) The chronicle
+  takes its own veil: VEIL-19 measures first (every event type the app can write and what it carries; what the
+  helper emits; what a shared page draws) and proposes ONE mechanism to the chair before building; the chair's
+  expectation: an entry withheld whole where the name search hits any of its strings, or its event's class is one the
+  share hides, or it points at a withheld house or person; an unknown event type withheld; a walker red on an
+  unclassed event type. (C) A walker over every function a non-owner may call that touches a shared town: each
+  returned column registered, red on an unregistered one. Placed after B, C, D on VEIL-19's list. The reader sends
+  its whole census of doors at the phase end (filters, facets, sorts, search and counts included).
+- 00:44 UTC · **VEIL-R1'S ROWS ARE DONE AND ELEVEN CAME TO THE CHAIR (its message of 00:33 UTC).** Its base reproduced the
+  readers' paths exactly (the new shape 124 and 20, master's 135 and 20); 142 rows over the 214 in-class paths of the
+  four runs; with every row exported the gate reads 0 unregistered on both shapes, the gallery read and the link.
+  **RULING VR19 (vetoable), THE UNIVERSAL DRAWN VALUE**, on a gap in VR14 and VR16 that its rows 1, 2 and 5 show: a
+  value EVERY town's shared page draws (a chip, a label, a word) whose stored figure carries a hidden house's term
+  and has no exact SQL twin. Withheld only where a house is hidden, its absence tells; sent, it can be inverted from
+  the public formula. THE RULE: (a) its diffuse BAND stays where it has one (the stability word before its cause; the
+  safety band), cut by one exact rule in both engines; (b) its precise or crime-specific part (the economy output's
+  integer; the stability label's cause; any raw figure) is WITHHELD BY THE SERVER ON EVERY NON-OWNER READ; (c) THE
+  PAGE MAY GIVE IT BACK: a non-owner page may re-derive it from the SERVED document with the engine's own function
+  where that function reads served fields only (it then shows what the served town implies); else it is not drawn;
+  (d) content that exists only because of crime stays conditional (the share reads as a town without it). ON THE
+  ROWS: 1 economyOutput is (i) by VR14 (iv)'s own exception, not (iv). 2 the raw safetyRatio and blackMarketCapture
+  withheld always, accepted; the order words stay if they are a function of the safety band, else VR19; the
+  shadow-economy block, structureFlag and templeFraud are sent as stored only where their grouping is open and no
+  hideable house is hidden whole on that share (the seat had them withheld on EVERY share: refused: it would take a
+  section from every shared town whatever the DM chose). 3 a power a hidden house raised leaves with it (VR11).
+  4 paths only the counterfactual holds: diffuse. 5 stability: the band word stays, the cause is withheld on every
+  non-owner read. 6 incomeWeight is a share: it follows D, never diffuse. 7 a re-worded institution description is
+  rng only if the row shows its chooser reads no roster predicate. 8 the veiled-membership flag waits for R2's
+  import measure. 9 the rows' form accepted. 10 the VR13 rng rows are marked built now. 11 the readers' rng file IS
+  on origin (the seat had not found it). OWED IN ITS HAND-BACK: one table of what a shared page loses, on every share
+  and only where a house is hidden: THE OWNER'S VETO LIST TAKES IT.
