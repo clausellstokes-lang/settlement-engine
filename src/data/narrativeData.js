@@ -43,9 +43,9 @@ export const ARRIVAL_SCENES = {
     (r) =>
       `The road into ${r} follows the river for the last mile, and the settlement grows along the bank before it grows away from it.`,
     (r) =>
-      `You come into ${r} along the bank, where steps go down to the water and someone is filling a bucket at the bottom of them.`,
+      `You come into ${r} along the riverbank, where steps go down to the water and someone is filling a bucket at the bottom of them.`,
     (r) =>
-      `Trees lean over the water on the way into ${r}, and the first houses stand just above the line where the bank turns to mud.`,
+      `Trees lean over the river on the way into ${r}, and the first houses stand just above the line where the bank turns to mud.`,
     (r) =>
       `The river bends around ${r}, so that you see the settlement twice on the way in: once across the water, and once on arriving.`,
   ],
@@ -66,11 +66,11 @@ export const ARRIVAL_SCENES = {
       `${r} sits with its back to the land and its face to the open water, and the wind off the sea carries salt and weed a long way inland.`, needs: ['coast'] },
     // L2 (PAGE-2's lines, 2026-11-20): APPENDED; the shore's two declare the coast, the moorings the docks, as their siblings do
     { text: (r) =>
-      `The last stretch of road into ${r} runs along the shore, and the sound of the surf keeps you company the whole way.`, needs: ['coast'] },
+      `The last stretch of road into ${r} runs beside the sea, and the sound of the surf keeps you company the whole way.`, needs: ['coast'] },
     { text: (r) =>
       `Gulls ride the wind above ${r}, and the roofs nearest the water are crusted pale with salt.`, needs: ['coast'] },
     { text: (r) =>
-      `Boats ride at their moorings below ${r}, and the smell of tar and rope comes up the road to meet you.`, needs: ['docks'] },
+      `Boats ride at their moorings in the harbour below ${r}, and the smell of tar and rope comes up the road to meet you.`, needs: ['docks'] },
   ],
   smoke: [
     { text: (r) =>

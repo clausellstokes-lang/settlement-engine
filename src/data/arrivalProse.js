@@ -189,9 +189,9 @@ export const ARRIVAL_SENSES = Object.freeze([
       { text: () => 'Empty salt barrels stand stacked by the water, and even the gulls have given up on them.', twinOf: 'Barrels of salt fish stand stacked by the water, and the gulls have opinions about every one.', needs: ['navigable'] }, // TAIL-HISTORY-5 (Y17): its twin there
       // L2 (PAGE-2's lines, 2026-11-20): APPENDED. Each says the fish trade the exports name, and no catch, no water and no
       // stock today, so no state of the catch can make it false: nothing to declare, no twin
-      (n) => `Talk in ${n} turns to fish sooner or later, whatever it started on.`,
-      () => 'A gutting knife hangs by more than one doorway, its blade worn thin with use.',
-      () => 'Even the dogs here smell faintly of fish, and nobody but you seems to notice.',
+      { text: (n) => `Talk in ${n} turns to fish sooner or later, whatever it started on.`, needs: ['trade at work: fish'], excludes: ['crisis: hunger'] },
+      { text: () => 'A gutting knife hangs by more than one doorway, its blade worn thin with use.', needs: ['trade at work: fish'], excludes: ['crisis: hunger'] },
+      { text: () => 'Even the dogs here smell faintly of fish, and nobody but you seems to notice.', needs: ['trade at work: fish'], excludes: ['crisis: hunger'] },
     ] },
   { key: 'cloth',
     institutions: ['weaver', 'weavers', 'textile', 'fuller', 'dyer', 'tailor', 'clothier', 'draper'],
@@ -229,7 +229,7 @@ export const ARRIVAL_SENSES = Object.freeze([
       // road, so a siege or a failed herd leaves each true (`crisis: any`, as the byres')
       { text: () => 'Hoofprints and dung mark the lane, and you learn quickly to watch where you step.', crisis: ['any'] },
       { text: () => 'An animal bawls from a byre somewhere close, and another answers it.', crisis: ['any'] },
-      { text: () => 'Someone leads a single beast along the lane on a halter, talking to it the whole way.', crisis: ['any'] },
+      { text: () => 'Someone leads a single beast along the lane on a halter, talking to it the whole way.', colour: true },
     ],
     dominant: [
       { text: () => 'Drovers push their herds along the road, and the whole place smells of the pens.', excludes: ['crisis: under_siege', 'failed: livestock'], crisis: ['any'] }, // BAR4-SCENES (kind A1; REVIEW-BAR-4 C46725): no herds on the road where the famine failed them
@@ -392,9 +392,9 @@ export const ARRIVAL_SENSES = Object.freeze([
       { text: (n) => `Magic is still a trade in ${n}: the signs still offer it by the hour, but the work is slow and dear for want of what it takes.`, twinOf: 'Magic is a trade in {name} like any other: signs offer enchanting and identification by the hour.', needs: ['enchanting'], excludes: ['trade at work: arcane'] }, // BAR8-SCENES (BR23 (3), 2026-11-17; a TWIN given by name, VETOABLE wording): enchanting is offered and the arcane trade is not at work (impaired under the siege, or short): its original and the twin above were both refused (bar0-city-under_siege+famine-rand-47, r2r-metropolis-14, r2r-metropolis-31) // BAR8-SCENES-3 (BR25 (2), 2026-11-18; REWORDED BY NAME, VETOABLE): was "Signs in {name} still offer enchanting by the hour, …", false where the page's only arcane service is "Arcane identification" (the atom `enchanting` reads enchant OR identif: bar0-city-under_siege+famine-rand-47, -33, r2s-under_siege-town-1); it now names no service; the declaration is unchanged
       // L2 (PAGE-2's lines, 2026-11-20): APPENDED. Each says that magic is worked here at all (the key's own fact, where magic is
       // real), not that its materials are at hand today: nothing to declare, no twin
-      () => 'Sigils are scratched into door frames here and there, and not all of them are for show.',
-      (n) => `People in ${n} step around a chalked circle on the ground without looking down, the way people elsewhere step around a puddle.`,
-      (n) => `Snatches of talk in the lanes of ${n} are full of spellwork's own words, used as plainly as talk of the weather.`,
+      { text: () => 'Sigils are scratched into door frames here and there, and not all of them are for show.', needs: ['trade at work: arcane'] },
+      { text: (n) => `People in ${n} step around a chalked circle on the ground without looking down, the way people elsewhere step around a puddle.`, needs: ['trade at work: arcane'] },
+      { text: (n) => `Snatches of talk in the lanes of ${n} are full of spellwork's own words, used as plainly as talk of the weather.`, needs: ['trade at work: arcane'] },
     ] },
 ]);
 

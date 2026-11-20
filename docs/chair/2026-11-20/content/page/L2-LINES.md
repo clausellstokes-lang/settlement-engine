@@ -11,6 +11,8 @@ town's name; a HOOK line's "settlement" is spoken in the town's own tier noun by
 
 ## What was chosen, and why (the measure)
 
+THE CHAIR'S CURES (15:35, PAGE-6's proposal `p6-l2-reds.md`): fish dominant NEW [6]–[8] and arcane dominant NEW [7]–[9] declared as their siblings, livestock lines NEW [7] marked colour, four lines reworded (port [6], [8]; river [5], [6]); each noted at its line.
+
 THE CHAIR'S READ (14:17 UTC, `lines/L2-LINES-TO-CHAIR.md`): 73 lines approved as written, THREE CHANGED and applied in
 L2's finish (PAGE-6's builder, by `briefs/L2-FINISH.md`): `ARRIVAL_SCENES.river` NEW [6] and `ARRIVAL_SCENES.smoke`
 NEW [4] reworded by the chair, `ARRIVAL_PEOPLE.norse` NEW [5] given `excludes: ['crisis: hunger']`. Re-measured after
@@ -115,9 +117,11 @@ NEW:
 
 - **4: The road into {name} follows the river for the last mile, and the settlement grows along the bank before it grows away from it.** _[none]_
   - The road beside the river; presumes the river and its bank, as line 0 does (the route or the riverside port guarantee it).
-- **5: You come into {name} along the bank, where steps go down to the water and someone is filling a bucket at the bottom of them.** _[none]_
+- **5: You come into {name} along the riverbank, where steps go down to the water and someone is filling a bucket at the bottom of them.** _[none]_
+  - THE CHAIR'S CURE (15:35 word): was "along the bank"; a riverside port's arrival names the river (`narrativeArrival.test.js` reads `\briver|barge|waterfront|quay|dock\b`).
   - Steps to the water and a bucket: the bank "that people use every day" of line 0, shown.
-- **6: Trees lean over the water on the way into {name}, and the first houses stand just above the line where the bank turns to mud.** _[none]_
+- **6: Trees lean over the river on the way into {name}, and the first houses stand just above the line where the bank turns to mud.** _[none]_
+  - THE CHAIR'S CURE (15:35 word): was "over the water" (the same river word, `narrativeArrival.test.js`).
   - Trees and the mud line: landscape the engine does not track, the river only.
   - THE CHAIR'S CHANGE (14:17 read): was "Willows lean over the water …" (a species presumed a climate).
 - **7: The river bends around {name}, so that you see the settlement twice on the way in: once across the water, and once on arriving.** _[none]_
@@ -136,11 +140,13 @@ Beside them (the base, unchanged; index: text, declaration):
 
 NEW:
 
-- **6: The last stretch of road into {name} runs along the shore, and the sound of the surf keeps you company the whole way.** _[needs: coast]_
+- **6: The last stretch of road into {name} runs beside the sea, and the sound of the surf keeps you company the whole way.** _[needs: coast]_
+  - THE CHAIR'S CURE (15:35 word): was "runs along the shore"; a port arrival carries a maritime word (`narrativeArrival.test.js`: harbour, sea, salt, masts, gulls, quays, coast, port).
   - The shore and the surf: the coast rows' kind, declared `coast` as they are.
 - **7: Gulls ride the wind above {name}, and the roofs nearest the water are crusted pale with salt.** _[needs: coast]_
   - Gulls and salt on the roofs: the coast rows' wind and salt; `coast`. No quays (the harbour rows' word) and no harbour.
-- **8: Boats ride at their moorings below {name}, and the smell of tar and rope comes up the road to meet you.** _[needs: docks]_
+- **8: Boats ride at their moorings in the harbour below {name}, and the smell of tar and rope comes up the road to meet you.** _[needs: docks]_
+  - THE CHAIR'S CURE (15:35 word): was "at their moorings below"; a row that needs the docks names the harbour (`arrivalHarbourDocks.test.js`'s HARBOUR words).
   - Moorings, tar and rope: a harbour's, so `docks`, as the four harbour rows; `rope` is a goods word the docks answer.
 
 ## Batch 2: the other two scenes, and the CLOSING's plenty and poverty (15 lines)
@@ -241,11 +247,14 @@ Beside them (the base, unchanged; index: text, declaration):
 
 NEW:
 
-- **6: Talk in {name} turns to fish sooner or later, whatever it started on.** _[none]_
+- **6: Talk in {name} turns to fish sooner or later, whatever it started on.** _[needs: trade at work: fish; excludes: crisis: hunger]_
+  - THE CHAIR'S CURE (15:35 word): declared as line 4 ("Barrels of salt fish …") declares; the A1 guard (`bar4ScenePresumption.test.js`) found it where every fish house is stopped by the siege, short of fish or scarce in the famine.
   - Talk turns to fish (FIRST DRAFT "the fishing", which the presumed-things walker reads as a fishing house): the trade the exports name (the pool's key) and nothing about today's catch, so no state of the catch, the water or a siege makes it false; nothing declared.
-- **7: A gutting knife hangs by more than one doorway, its blade worn thin with use.** _[none]_
+- **7: A gutting knife hangs by more than one doorway, its blade worn thin with use.** _[needs: trade at work: fish; excludes: crisis: hunger]_
+  - THE CHAIR'S CURE (15:35 word): declared as line 4 ("Barrels of salt fish …") declares; the A1 guard (`bar4ScenePresumption.test.js`) found it where every fish house is stopped by the siege, short of fish or scarce in the famine.
   - A gutting knife worn thin: years of the trade, not today's catch; "more than one doorway", no count a hamlet would belie.
-- **8: Even the dogs here smell faintly of fish, and nobody but you seems to notice.** _[none]_
+- **8: Even the dogs here smell faintly of fish, and nobody but you seems to notice.** _[needs: trade at work: fish; excludes: crisis: hunger]_
+  - THE CHAIR'S CURE (15:35 word): declared as line 4 ("Barrels of salt fish …") declares; the A1 guard (`bar4ScenePresumption.test.js`) found it where every fish house is stopped by the siege, short of fish or scarce in the famine.
   - Even the dogs smell of fish: the trade's long presence; nothing declared.
 
 ### `ARRIVAL_SENSES.livestock.lines` (+3: 5 entries become 8)
@@ -264,7 +273,8 @@ NEW:
   - Hoofprints and dung in the lane: animals kept, as the byres' line; no kind named and no herd crossing now, so a siege or a failed herd leaves it true (`crisis: any`, as the byres'). FIRST DRAFT said "mark the road in": the presumption-classes walker reads "the road in" as goods arriving from outside; the lane is the place's own.
 - **6: An animal bawls from a byre somewhere close, and another answers it.** _[crisis: any]_
   - One animal bawling from a byre, another answering: the byres' line, heard. Even a failed herd leaves a beast or two.
-- **7: Someone leads a single beast along the lane on a halter, talking to it the whole way.** _[crisis: any]_
+- **7: Someone leads a single beast along the lane on a halter, talking to it the whole way.** _[colour]_
+  - THE CHAIR'S CURE (15:35 word): `colour: true` (read; presumes nothing), as "The smell of horses and hay comes from the stables."; was `crisis: any` (the pool is not crisis-scoped, so no reach moves). The A1 guard found it where the grazing is "Short of livestock." and no atom answers that mark.
   - One beast led on a halter along a lane: inside the place, not a herd on the road (the dog-and-herd line excludes a siege for that).
 
 ### `ARRIVAL_SENSES.smiths.dominant` (+3: 8 entries become 11)
@@ -303,11 +313,14 @@ Beside them (the base, unchanged; index: text, declaration):
 
 NEW:
 
-- **7: Sigils are scratched into door frames here and there, and not all of them are for show.** _[none]_
+- **7: Sigils are scratched into door frames here and there, and not all of them are for show.** _[needs: trade at work: arcane]_
+  - THE CHAIR'S CURE (15:35 word): declared as line 2 ("The air prickles faintly …") declares; the A1 guard found line 7 where the only arcane house is short of its materials.
   - Sigils on door frames, some not for show: magic worked here at all (the key's own fact, drawn only where magic is real), not its materials today; nothing declared, no twin.
-- **8: People in {name} step around a chalked circle on the ground without looking down, the way people elsewhere step around a puddle.** _[none]_
+- **8: People in {name} step around a chalked circle on the ground without looking down, the way people elsewhere step around a puddle.** _[needs: trade at work: arcane]_
+  - THE CHAIR'S CURE (15:35 word): declared as line 2 ("The air prickles faintly …") declares; the A1 guard found line 7 where the only arcane house is short of its materials.
   - A chalked circle stepped around like a puddle: magic as an ordinary part of the place, line 0's "a trade like any other" in other details.
-- **9: Snatches of talk in the lanes of {name} are full of spellwork's own words, used as plainly as talk of the weather.** _[none]_
+- **9: Snatches of talk in the lanes of {name} are full of spellwork's own words, used as plainly as talk of the weather.** _[needs: trade at work: arcane]_
+  - THE CHAIR'S CURE (15:35 word): declared as line 2 ("The air prickles faintly …") declares; the A1 guard found line 7 where the only arcane house is short of its materials.
   - Talk full of spellwork's words: the trade's presence, not its supply. FIRST DRAFT said "people who work magic for a living", which the presumed-things walker reads as a practitioner the roster must hold; the second, "which a stranger to it would not follow", which the style law strikes ("a stranger").
 
 ## Batch 4: the PEOPLE (germanic, latin, celtic, arabic, norse) (15 lines)

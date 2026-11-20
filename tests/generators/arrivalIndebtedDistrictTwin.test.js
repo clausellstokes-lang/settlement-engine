@@ -30,9 +30,12 @@ const TWIN = /^The best-kept street of (\S+) looks prosperous\. The rest of the 
 /** The base's scenes after the hook (560d1687c → 21032205a: the lane before this cure), beat for beat. */
 const REST = {
   // BAR2-PLACES (PL1, 2026-11-15; re-keyed by identity): the slavic oven line's reword, same slot
-  'rr3-village-indebted-port-0': 'Half of Vysokoka seems to be gutting, salting or selling fish. Smoke rises from a household oven, and a neighbour stops in to share its warmth.',
+  // RE-KEYED BY ITS TEXT 2026-11-20 (L2, the chair's word of 15:35): the arrival pools APPENDED moved the later beats' draws (the
+  // sense and the people line); the claim (the twin keeps the slot and spends no redraw) is unchanged, its beats read at the cure
+  'rr3-village-indebted-port-0': 'Barrels of salt fish stand stacked by the water, and the gulls have opinions about every one. People gather at the well, and the news of the whole place passes through it.',
   // re-keyed by its text (BAR3-PLACES, 2026-11-15: the cloth line claims the yards, not every yard)
-  'rr3x-village-indebted-mountain_pass-2': 'Bolts of cloth hang drying in long bright strips across the yards. The neighbours turn out together to sweep and mend their own street.',
+  // RE-KEYED BY ITS TEXT 2026-11-20 (L2): the people line's draw moved to an appended line; the cloth line stands
+  'rr3x-village-indebted-mountain_pass-2': 'Bolts of cloth hang drying in long bright strips across the yards. The scrape of a grinding stone comes from a doorway, where someone is making the day\'s maize dough.',
   // TAIL-HISTORY-3 (the chair's Y14; re-keyed by identity): r2r-village-47 is isolated, so its herb sacks no longer fill carts (the line's reword, same slot)
   // RE-KEYED BY IDENTITY (DEBT-1, 2026-11-17): BAR6-SCENES (LAW 6 rule 6b) made the herb sacks declare `trade at work: spice`;
   // r2r-village-47 holds none (no spice made, sold or brought in), so the same slot takes the line's declared twin (its Apothecary)
