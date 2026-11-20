@@ -15,7 +15,8 @@
  * Each line is `[text, heading path, TESTIDS, COMPONENTS]` (brief 2, the sameness door): where the page prints the line,
  * whatever it says — on the web the chain of `data-testid`s holding the whole line and the chain of named React components
  * that rendered it (below the panel's own); on the PDF the chain of named components holding it (both fields); on the
- * session sheet the leaf's key path (both fields). The door keys a slot by the components.
+ * session sheet the leaf's key path (both fields). The door keys a slot by the components, which are code and never
+ * masked (a place's name can spell a component's name).
  * Plus the STORED index: every string leaf of the stamped record (census.mjs's walk), masked and split to sentences,
  * masked sentence -> its paths (indices folded to `[]`). Lines are written MASKED (census.mjs's mask). Writes
  * `<out>/<seed>.json`.
@@ -209,6 +210,19 @@ function storedIndex(town, mask) {
 
 afterEach(cleanup);
 let ready = false;
+// THE WARM-UP (brief 2's flake proof): the dossier mounts lazy panels under <Suspense fallback={null}> (OutputContainer's
+// DeityAssignmentPanel among them); the first place a fork renders can be walked before their chunks load, so a place's
+// lines would depend on its place in the fork's plan. One discarded render of the plan's first row loads every chunk
+// before any row is written: a place prints the same whichever fork renders it, and in whatever order.
+test('warm-up (discarded)', async () => {
+  if (!PLAN.length) return;
+  await loadGenerationLawPayloads(); ready = true;
+  const town = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: PLAN[0].size }), null, { seed: PLAN[0].seed, customContent: {} });
+  const stamped = withPublicProse(town, composePublicProse(town));
+  mocks.store = storeFor(stamped, vi.fn);
+  const { container } = render(<OutputContainer settlement={stamped} />);
+  await walkDossier(container);
+}, 300000);
 for (const row of PLAN) {
   test(row.seed, async () => {
     if (!ready) { await loadGenerationLawPayloads(); ready = true; }
@@ -225,7 +239,7 @@ for (const row of PLAN) {
       try { surfaces[`pdf:${variant}`] = pdfLines(variant, town); } catch (e) { surfaces[`pdf:${variant}`] = [[`[PDF THREW] ${String(e?.message || e).slice(0, 200)}`, '']]; }
     }
     try { surfaces.session = sheetLines(composeTonightSheet(town)); } catch (e) { surfaces.session = [[`[SHEET THREW] ${String(e?.message || e).slice(0, 200)}`, '']]; }
-    const masked = Object.fromEntries(Object.entries(surfaces).map(([k, v]) => [k, v.map(([l, h, q, c]) => [mask(l), mask(h), mask(q || ''), mask(c || '')])]));
+    const masked = Object.fromEntries(Object.entries(surfaces).map(([k, v]) => [k, v.map(([l, h, q, c]) => [mask(l), mask(h), mask(q || ''), c || ''])]));
     writeFileSync(`${OUT}/${row.seed}.json`, JSON.stringify({ seed: row.seed, size: row.size, ms: Date.now() - t0, surfaces: masked, stored: storedIndex(town, mask) }));
   }, 300000);
 }
