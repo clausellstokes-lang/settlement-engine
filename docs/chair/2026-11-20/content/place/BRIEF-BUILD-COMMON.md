@@ -13,6 +13,8 @@ The owner, 2026-11-20: "So do what you can to comprehensively fix the sameness f
 5. **READERS FOLLOW.** Every reader the MEASURE's section B names that matches the field's WORDS is made to read the new wordings by their pool (never by a copied literal). A SAVED town keeps its stored sentence: nothing changes at render.
 6. **PINNED TESTS THAT MOVE**: re-record each one in the same commit as the change, naming it by file and title in the commit body with before and after; never weaken an assertion, never skip a test. Golden fingerprints (`tests/property/generatorGoldenMaster.test.js` and the manifests that read it) are NOT re-recorded: name which of them your change moves, with before and after, and sign none.
 
+5c. **NO HIDEABLE NEEDS (the chair, 16:51 UTC)**: a field that prints on a player or public page may not have a row whose `needs` or `excludes` is a hideable fact (`src/domain/facts/factLayers.js`): a shared page must never reveal a hidden house by which sentence it got. Held by an assertion in your own test over every row of the pool, with a planted control; name the hideable atoms found and the fact reads that serve the field.
+
 5b. **`src/domain/facts/factVocabulary.js` is READ-ONLY** (the chair, 16:10 UTC): only an atom the chair has granted by name, APPENDED at the end of its list, nothing else in the file touched.
 
 ## Green at your last commit (each run to a file, read by its count lines; `sh scripts/gate-tail.sh <command>`, never a pipe; heavy runs through `sh scripts/gate-mutex.sh --run -- <command>`)

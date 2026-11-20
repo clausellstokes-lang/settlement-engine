@@ -44,6 +44,8 @@ Builders build, I integrate: one builder a field, red first; I read its diff onc
 
 - 16:30 UTC: order: safetyDesc FIRST, entrepotNote SECOND; economicDragDesc, tradeDependencies, viability DROPPED (SAME-1's render of 300 places).
 - 16:38 UTC: two hook fields added after entrepotNote; THE RULE FOR A HOOK: a lead a DM can use tonight, may propose a twist, may not name a house the place lacks. `publicProse.blocks.*` are PROSE-1's, not mine.
+- 16:47 UTC: safetyDesc lines APPROVED (all 78 rows; my four calls; walls row 4 reworded "The walls keep the outside out; the trouble there is starts within."); re-measure on the built tree and give both.
+- 16:51 UTC: NO ROW MAY NEED A HIDEABLE FACT (`factLayers.js`) on a field a player or public page prints; say in the hand-back how it is held and which reads serve the field.
 
 ## Named survivors (found, not mine to build)
 - The economy's output never reaches 70 in 600 default births, so every busy-trade branch of `prosperity.js :: situationDescOf` (and the label bonus at 70) is dead (`situationDesc-MEASURE.md` §A). The chair: a named survivor, not the fortune lane's to build now.
