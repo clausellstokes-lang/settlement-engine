@@ -1,4 +1,4 @@
-# REVIEW-VEIL-11 — HAND-OFF (kept current at every push; last written 2026-11-20 04:31 UTC by date -u, before FINAL)
+# REVIEW-VEIL-11 — HAND-OFF (kept current at every push; last written 2026-11-20 04:50 UTC by date -u, before FINAL)
 
 The review: `REVIEW-VEIL-11.md` beside this file. Probes and outputs: `probes/REVIEW-VEIL-11/`. **No verdict; 212 is NOT
 cleared.** My predecessors' hand-offs stand whole and are read from origin only (`git show
@@ -72,3 +72,10 @@ Run any probe: `RV6_SRC=<tree> [RV10_GEN=<master tree>] RV10_TPL=<chain> RV10_N=
     target resolves to a card the served body shows; after a freeze, entries later than `$veil.at` withheld and `name`/`tier`
     from the frozen copy. Attack: a house added then removed (live), a house added after the freeze, a rename after the
     freeze, the map member's chronicle in both modes.
+18. THE SESSION SHEET ("Tonight"), from the chair at 04:50 UTC (found by a content seat; pre-existing): OutputContainer mounts
+    the Table View with no public gate, and the Overview's "Open Tonight" shows on PublicDossierView and PartyLinkView. It is
+    composed at render from the SERVED document (the crisis cast's people and stakes, the hooks, the people to voice with
+    their wants): no new byte, but it may DRAW served fields the tabs do not. When "R2" comes: open the sheet on the gallery
+    page and the party link, default veil and a hand veil, a town in crisis with a hidden house in its cast; the sheet must
+    draw no name, role or stake the tabs withhold. (The lane's owner adds it to the render-twice harness; REVIEW-GRANTS-1
+    reads migration 213, not this reader.)
