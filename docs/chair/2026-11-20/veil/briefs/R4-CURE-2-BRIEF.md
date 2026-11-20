@@ -46,7 +46,8 @@ first; a failure falls toward WITHHOLDING, never toward sending.
 ## THE UNITS, IN ORDER (each red first)
 1. STOP 1, CARDS' OWN TIES. `npcs[].relationships[].to` (and any other person reference inside a card's own ties) is
    re-keyed in BOTH engines. VR9's holder pass drops a tie that names a holder, matched AS A STRING so a numeric id is
-   caught. RED: the reader's probe (a card with the NUMBER id 90001 and a tie to it, served as itself 64 of 64 at
+   caught. THE ID AS TEXT IS ONE HELPER PER ENGINE, SHARED WITH R3's pre-sweep person match (PART 27
+   ruling 48; the twin's `galleryRosterChoices.js :: idText` as merged in R3): never a second spelling. RED: the reader's probe (a card with the NUMBER id 90001 and a tie to it, served as itself 64 of 64 at
    dfa031f3e; the first cure's `card-relationships-probe.txt`: Reveal-DM reads serve `"to": "n2"`). The born arm takes a
    PLANT with per-card ties (born towns carry none): string and number ids, a tie to a holder, Reveal DM off and on,
    marked and unmarked, gallery and link, both stored shapes.

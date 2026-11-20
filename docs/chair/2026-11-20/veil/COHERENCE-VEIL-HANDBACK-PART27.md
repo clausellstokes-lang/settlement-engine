@@ -292,6 +292,18 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
     PUSH `git ls-remote` AND PUSH ONLY IF THE REMOTE DIFFERS; a push log showing `npm run check` is killed at once. THIS
     REPOSITORY READ CLEAN at 13:47 (core.bare false; no local user.email; the lane's authors all Claude; no fixture commit
     outside old origin history).
+47. THE CHAIR, 14:21 (1): THE KEY-LEVEL HUSKS: LEAVE THE KEY OFF (a shown power's `contestsNiche`, a served person's
+    affiliation keys): the new shape serves `contestsNiche` on no nothing-hidden page; the old shape's powers mostly lack it
+    at every size; withholding the holder is the larger tell and loss. CONDITION BEFORE THE R3 MERGE: the same table FROM THE
+    SERVER, folded into the guard runs; a key the server serves where the twin does not is a PARITY FINDING AND STOPS THE
+    MERGE. The 14+ cuts removing a value that names a SERVED house: accepted as over-withholding, counted with their
+    denominator in the owner's paragraph (section 5).
+48. THE CHAIR, 14:21 (2): VEIL-26's gap in dbff7eeb3 RULED A LEAK: a person whose id is a NUMBER, or who has NO id, kept a
+    swept goal or membership as a husk. Cured in R3-CURE-5: the pre-sweep match by id AS TEXT for any scalar, both engines;
+    with no id, the goal or membership is withheld where any pre-sweep goal or membership naming a withheld power contains it;
+    red first by two plants (a numeric-id person whose goal names the withheld power; one with no id). THE SAME FAMILY AS
+    R4's STOP 1 (the number id 90001): R4's cure and this one SHARE ONE HELPER for "an id as text" in each engine (the twin's
+    `galleryRosterChoices.js :: idText` is the candidate; 212's jsonb scalar text), never two.
 ## 2. The bytes (kept current)
 | File | sha256 |
 |---|---|
