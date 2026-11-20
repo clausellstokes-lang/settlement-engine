@@ -4462,3 +4462,14 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   (`SAME-1.txt`, `PLACE-1.txt`, `PEOPLE-1.txt`), seated after this push; DEPTH-2, GOALS-3, PAGE-7 and PAGE-6 given
   their further units by message. Earlier the same hour: the owner asked again for the chair's expectations and was
   answered (section 1); the thin pages' first half ordered (section 2).
+- 15:57 UTC · THE SAMENESS PROGRAM'S THREE SEATS SEATED at 15:56 to 15:57 on the working line (`lane/join-2026-11-14`, 43ab0f5eb),
+  nobody before them, each free to work at once on its own branch: SAME-1 session_019yED1RGnWWxWpRPwCzR2qT
+  (`lane/same-1-2026-11-20`; owes "SAME-CENSUS <commit>" within 90 minutes: the rendered census of every sentence the
+  page prints; then the door); PLACE-1 session_019yED1NX69HWnBKvhixycGj (`lane/place-1-2026-11-20`; owes
+  "PLACE-LINES situationDesc <commit>" first); PEOPLE-1 session_019yED1Rzt4qD1sri7MHNbHp
+  (`lane/people-1-2026-11-20`; owes "PEOPLE-LINES <field> <commit>", the free files first). MESSAGES SENT AT 15:54:
+  DEPTH-2 (the recent conflict ordered built; 77 more tie pairs and 36 more hooks, lines only: "CONFLICT-LINES",
+  "DEPTH-LINES-2"); GOALS-3 (the wants' tranche after its landing; a line-writing builder may start now:
+  "WANT-LINES <n>"; "GOALS-2ND"); PAGE-7 (a trouble's hooks and lasting effects as need-gated pools:
+  "TROUBLE-LINES"); PAGE-6 (a second arrival tranche: "ARRIVAL-LINES-2"). EVERY UNIT'S COMMIT IS FORWARDED TO SAME-1.
+  THE MARKS: 450,000 by the chair's read for each. NET 14 (16:00) reads the three new seats with the others.
