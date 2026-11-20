@@ -1,4 +1,4 @@
-# PROSE-2 HAND-BACK (last written 2026-11-20T20:29Z; HANDED OVER to PROSE-3)
+# PROSE-2 HAND-BACK (last written 2026-11-20T20:33Z; HANDED OVER to PROSE-3)
 
 **Seat:** PROSE-2 of the seventh chair (chair: session_019yED1SUxGVHyjQnoqoFvQ8), seated 17:38 UTC. Assignment: `git show origin/lane/chair-2026-11-08:docs/chair/2026-11-20/seventh/prompts/PROSE-2.txt` (it names `PROSE-1.txt` as the assignment). Branch `lane/prose-2-2026-11-20`. The lane was mine from 18:34 UTC ("THE LANE IS YOURS at adc8b5251", merged at 5a052ffe2). `PROSE-1-HANDBACK.md` (its rulings 1-18, on `lane/prose-1-2026-11-20` at 0e2041778) governs where this file says less. **SUCCESSOR: PROSE-3** (session_019yED1SDVr5eEzT68FGjhf6), seated 20:21 UTC; handed over at the commit carrying this file.
 
@@ -15,7 +15,7 @@
 10. (19:38) **THE LEDGER REF CANNOT BE FETCHED ON THIS LANE**: the permission check refused it; the refusal stands. `ledgerCitationIntegrity` and every file needing that ref is "not run: the ledger ref is not fetchable here"; the chair's landing helper runs them. (BUILD-1's builder fetched it before the rule reached it; its lint run is evidence only under that caveat.)
 11. (19:30) A "town" line printed through a SPEAK PASS on every surface is not a fault; the count says, per line, which surface prints it raw.
 12. (19:59) EVERY UNIT LINE carries first paint: one `npm run build`, then `VERIFY_DIST=1` on `tests/build/vendorPdfLazy.test.js` and `tests/build/generationWorkerLazy.test.js` through the mutex; raw, gzip, Brotli and the worker beside the line's (1,177,668 / 374,676 / 314,472; worker 2,617,934 at 8196e5712). A rise is cured on the lane (an eager file declares an atom BY NAME; its answer imported only on the lazy side). Script: copy of mine is two lines (`npm run build` via gate-tail; then the two files via `gate-mutex --run`).
-13. (20:13) BEFORE EACH LANDING REQUEST: ONE `npm run test:ratchet` at the tip with the line's tip merged in (to a log; the one whole-suite run allowed), rows read BY NAME against `docs/chair/2026-11-20/seventh/ci/RED-AT-LINE.tsv` on the chair's branch (ABSENT at 20:2x: ask the chair by message; never route round a refusal). A row not on the list: a stored figure the wording moved (named by FILE with a count; re-recorded only by its own door, or left for the close) or a real red, cured on the lane.
+13. (20:13) BEFORE EACH LANDING REQUEST: ONE `npm run test:ratchet` at the tip with the line's tip merged in (to a log; the one whole-suite run allowed), rows read BY NAME against `docs/chair/2026-11-20/seventh/ci/RED-AT-LINE.tsv` on the chair's branch (there since 20:16 by the chair; my 20:1x fetch found it absent; never route round a refusal). A row not on the list: a stored figure the wording moved (named by FILE with a count; re-recorded only by its own door, or left for the close) or a real red, cured on the lane.
 14. (20:21) PROSE-3 seated; hand over by 420,000.
 
 ## UNITS AND BUILDERS
@@ -25,7 +25,7 @@
 | MEASURE-WORDING | `briefs/MEASURE-WORDING.md` | `lane/prose-2-2026-11-20-wording` 813778b4f | DONE (docs only, not merged; `map/wording/` holds its census, reused by WORDING-CURE: merge it or `git show` it) |
 | MATCHER | `briefs/MATCHER.md` | `-matcher-wip` 3502e867b; final b70212c1e | **MERGED** a68e215c9 + lighting census 4e1a1efb0; "MATCHER 4e1a1efb0" sent 20:2x. Gates: governing 304/306 (the two below), tests/lint 3271/3271, tc 167/167 and 1113/1113, eslint 0 errors; first paint raw 1,177,668 · gzip 374,666 · Brotli 314,413 · worker 2,588,690 (no rise). Re-take: needs_review 21 of 300; Outlook pool 31 (count>0 10, battery 20, both 1); every remaining battery finding is one of WORDING-CURE's three rows. |
 | BUILD-1 (LINES-1+2) | `briefs/BUILD-1-FINISH.md` + `-ADDENDUM.md` | `lane/prose-2-2026-11-20-build1` **13c57d9f6** (code tip 04fa578d9) | **RETURNED 20:2x, PUSHED, NOT READ, NOT MERGED.** Report `BUILD-1-REPORT.md` on that branch. See "BUILD-1 AT THE HAND-OVER" below. |
-| WORDING-CURE | `briefs/WORDING-CURE.md` | not cut | Cut after BUILD-1's merge. Its re-take gives ruling 3's GEN-11 line. It holds the re-key clause for `selfVouchReceipt` soak1k-8 (probably the greek line). |
+| WORDING-CURE | `briefs/WORDING-CURE.md` | NOT CUT (no branch exists; cut it from the lane tip AFTER BUILD-1's merge, naming that commit in the builder's prompt) | Cut after BUILD-1's merge. Its re-take gives ruling 3's GEN-11 line. It holds the re-key clause for `selfVouchReceipt` soak1k-8 (probably the greek line). |
 | BUILD-2 (LINES-3+4) | `briefs/BUILD-2.md` + `verdicts/CHAIR-VERDICT-LINES-3-4.md` | not cut | After BUILD-1. Write into its prompt: rulings 8, 10, 12, the ROOT trap (PROSE-1 ruling 16), and the lessons of BUILD-1 below (style law "a stranger", "rather than", "not merely"; presumedThings: "going to market" reads as naming a market). |
 | lines 5 on (the 14 uncovered pools) | none | none | Order by `map/OVER-BAR-RANKED-BUILD1.md` (below). |
 
@@ -42,8 +42,8 @@
 - **THE RANKED LIST** (`map/OVER-BAR-RANKED-BUILD1.md`): 56 pools over the bar are covered by LINES-3/4 (BUILD-2); 14 are COVERED BY NOTHING YET, heaviest DS-ECO-10 POSTURE: established (136), DS-DEF-1 terrain EXPOSED (121), DS-DEF-8 override active, viability intact (109), DS-ECO-11 RESOURCE CONDITION recovers only with work (86), DS-ECO-8 COMFORTABLE (75), DS-ECO-1 C4 (72). The heaviest pool of all is DS-ECO-6 minor shadow activity (314, 68%): BUILD-1 touched it but its new lines are dm-only, so the shared page cannot move (the veil lane's question).
 - MERGE RECIPE (PROSE-1's, unchanged): read `git diff 87f03395b..13c57d9f6` ONCE; re-run its reds and greens; the lighting and wiring censuses by their doors at the merge (yours, never a builder's); first paint (ruling 12); `git merge --no-ff`; push; "PROSE-BUILD <commit>".
 
-## STILL RED ON THE LANE TIP (4e1a1efb0), NAMED FOR THE CLOSE (signed by none)
-- `tests/generators/generationCertificationCorpus.test.js` `ADVISORY_FAILING`: 30 → 23 labels (MATCHER; a hand-kept shrink-only list with no door).
+## STILL RED ON THE LANE TIP, NAMED FOR THE CLOSE (signed by none)
+- (CURED, the chair's ruling of 20:31: a shrink-only list is shrunk by hand in the unit that cured it) `ADVISORY_FAILING` 30 → 23: removed criminal-crossroads-town-ember, isolated-arcane-town-dun, magical-desert-village-bracken, magical-desert-village-cinder, mercantile-seaport-town-alder, mercantile-seaport-town-ember, population-87 (they pass after MATCHER's repair); the test 13 of 13.
 - `tests/domain/worldFactRederive.test.js` A7: 7 stride misses (the golden master moved by MATCHER's receipt: 252 of 525 rows).
 - `tests/build/*` dist budgets: the line's own budgets, under the line's figures; no rise from this lane.
 
