@@ -1,43 +1,82 @@
-# SEAT-2 — HAND-BACK (kept current at every push; last written 2026-11-20T07:54Z, read from `date -u`)
+# SEAT-2 — HAND-BACK (kept current at every push; last written 2026-11-20T08:40Z, read from `date -u`)
 
-Branch `lane/seat-2-2026-11-20`, fast-forwarded to SEAT-1's final tip `a9923e761` when the chair said "THE LANE IS YOURS at a9923e761" (07:39Z). SEAT-1's record stays in `SEAT-1-HANDBACK.md` and `SEAT-1-PROPOSAL.md`; the rulings in `briefs/RULINGS.md`; my lane's working rules appended to `briefs/COMMON.md` ("SEAT-2's lane").
+**For the next owner of this lane: this file, `SEAT-1-PROPOSAL.md` and `briefs/` are all you need.** Everything in force is in §1; the state of every unit in §2; every instrument in one command each in §3.
 
-## The rulings as built
+Branch `lane/seat-2-2026-11-20` (origin). SEAT-1 (`lane/seat-2026-11-20`, final `a9923e761`) handed the lane to SEAT-2 on the chair's word "THE LANE IS YOURS at a9923e761" (07:39Z). The line (`origin/lane/join-2026-11-14`) at BUILD-ON `e356c94f` is ALREADY MERGED into this lane at `6ad3e03d1` (done 08:0xZ, before the chair's 08:36Z message assigning that merge to SEAT-3 arrived; nothing is left of it to do). Cut U4 from the lane's tip after U3 is merged.
+
+## 1. EVERY RULING IN FORCE (each the chair's, each vetoable by the owner)
+
+**The owner's words that bind the train** (2026-11-20, verbatim in `prompts/SEAT-1.txt` on the chair's branch `lane/chair-2026-11-08`): every power group can compete for the seat given the right circumstances; a guild council should represent the seat a guild leads, and form of government and ruling power differ but correlate (the merchant king); a calm town stays calm, nothing invented; the dual hat (`representatives.js :: dualHatHouseOf`, "unless appointed"); the second ruler card for a criminal-captured seat; "Crime Bosses" for a group; titles vary by tier and culture; the principal front (a legitimate head who is also, by his own choice, a criminal, answering to no one).
+
+1. **CS1 the model:** FORM (`powerStructure.government`), HOLDER (the power that holds the seat), PERSON (the seat-holder card). Correlated, never one thing.
+2. **CS2 the holder is READ, never stored** (no new key anywhere in the stored town; the one exception is CS10's law key). Order: R1 the taker of the last transfer; R2 the power whose first member (rank 1) is the seat-holder; R3 for a seat of a kind, the leading open power of that kind; R4 the office holds itself; R5 for `APPOINTED_GOVERNMENTS`, the appointer, named only as the record names it. **R2 before R5 stands** (77 of 103 appointed seats are held by the appointee's own noble house). The office keeps its own power figure; no share is re-dealt.
+3. **CS3 the holder never contests its own seat:** it leaves `rulingPowerCoup.js :: coupContenders`' challengers; the next heaviest takes the place. **The incumbent's weight is unchanged** (counting the holder's power on its side was measured, not adopted: the owner's tuning sitting).
+4. **CS4 one kind reader for the contest:** craft reads craft (Craft Guilds is born `category: economy`), a criminal or veiled row reads criminal FIRST whatever its name. Cure the reader, never the stored `category`.
+5. **CS5 circumstances:** one registered table, kind × circumstance, each factor in [1, 1.5], product clamped at 1.6, each circumstance a PURE READ of a non-hidden stored field (the closed list: craft-led economy, trade wealth, strong faith, martial pressure, hunger, questioned/vacant mandate, outside debt, occupation; fields and counts in the proposal §5). A contender's weight = power × `COUP_COERCION` (UNTOUCHED: the war layer reads it) × product. **Lands DARK** (every factor 1, figures written beside it for the owner's tuning signature); CS4's kind read lights WITH it under ONE dial.
+6. **CS6 one table** (form × holder kind × size, weighted; an unusual pair names the circumstance that licenses it: the merchant king = a merchant holder of Royal Authority / Ducal Governorship, licensed by trade wealth), replacing the two `GOVERNMENT_PREFERENCES` (`rulingPower.js`, `worldPulse/factionCompetition.js`); old law byte-identical.
+7. **CS7 the transfer** (U5): under the law the winner becomes the holder; the form is kept where the table lets the winner's kind hold it, else the winner's own form; **the old holder's "power behind" edge is retired to a competitive edge** (so R1 reads one taker); **the person after a coup is NAMED, NOT CURED** in train 1 (the page says who "held it before").
+8. **CS8, CS9 (train 2, ordered by CS14):** U13 the leader's house by weight and circumstance at birth; U14 born labour and outsider powers only where the record calls for them. Same law, same two tables.
+9. **CS10 the gate, DARK:** `_seatLawVersion` (`src/domain/seat/seatLaw.js`, LANDED in U1). Every unit proves itself on its own fixture arm with `_seatLawVersion: 2`; **U8 the light comes LAST, on the owner's word**, after a census of the born pins that move, each named.
+10. **CS11 the audience:** every holder/card read takes `audience` explicitly (`'owner' | 'reader'`, missing = reader). A reader's read derives from the SERVED document alone and never names a criminal, hidden or unserved power. No file of the security lane: nothing under `supabase/`, `src/domain/veil/`, `tests/security/`, no `src/domain/display/gallery*.js`, not `publicSafe.js`. A moved string names every power it speaks of in the same string.
+11. **CS12 the prose:** lines that set a seat against its own power become holder-and-office lines; a reason for an unusual pair cites a record fact; names through `governanceAccount.js :: powerNameInProse`; the house's prose laws bind.
+12. **CS13 the page:** the chain reads form, holder, person; contenders never list the holder; "no contender" said plainly.
+13. **CS15 (amended twice) the second ruler card:** shown only where `criminalCaptureState === 'capture'`; its people are the criminal power's OWN open members (`isCriminalFace`), by `influence`, never the lord or any member of the hall (a test holds it); ONE person (the underboss) or THREE ("Crime Bosses", with the fixed line **"No council: a few bosses held in a delicate balance, each keeping the others in check."**). **The choice table (draft, the owner signs):** Crime Bosses where criminal operations (`safetyProfile.criminalInstitutions.length`) ≥ 3 AND operations ÷ lawful effective income sources ≥ 0.75 AND `safetyProfile.blackMarketCapture` ≥ 20; else one underboss. Legitimacy stays the front's. Hidden with the criminal share things (non-owner: served document only).
+14. **CS16 the crime-worded forms retire under the law:** the ordinary front; the criminal house that would have ruled stands as a criminal power beside it; in such a town only, the hall's corruptible draw tries the lord first at a raised rate (a DRAFT figure on the tuning rows, DARK); U10 reports born captured / corrupted / clean on the 22 towns. The personality gate of 2026-11-08 stands.
+15. **CS17 narrowed:** a change of seat is written ONLY as the stated reason of a LICENSED unusual pair (citing its circumstance) and for a transfer the record holds (the hidden half where criminal). Never at a calm birth.
+16. **CS18 security:** this work adds NO new public difference between a captured town and its uncaptured twin (born pair, every non-owner read, served documents and rendered pages). Existing differences are the security lane's: name, never cure or hide.
+17. **CS19 titles by tier and culture** (U12): wired under the law through TITLES-1's resolver, landed on the line (`src/data/cultureOfficeTitles.js :: officeTitleOf`, `officeFamilyOfForm`, `officeWordInfo`, `crimeBossesHeading`; nobody calls it yet). Every matcher of an office word learns it ONLY through `officeWordInfo` (a second sourced pass, `lane/titles-2-2026-11-20`, will add words); the regent rule by `officeWordInfo(word).crown`. **The sovereign:** Royal Authority on a royal-seat house, with no war or occupation on record and no other crown, lord or governor among the powers or houses, is the sovereign's OWN seat (out of `APPOINTED_GOVERNMENTS` for that reading only); U12 measures the count. **Criminal titles vary by size only** (Addendum 5).
+18. **CS20 the principal front** (U11): the existing hidden allegiance `{ power: null, house: his own, vector: 'greed' | 'hunger_for_status', via: 'front', handler: null }`; `isPrincipalFront` the ONE predicate; J-1 amended (a principal's power is null), I-1 and the 2026-11-12 ruling amended (a principal in the seat IS capture, the capturing power himself); `assignHandlers` and its two other callers skip him. Gate: a criminal power stands, or black market share > 20. **Rate 0.0897 per eligible head (about 1 town in 50), a DRAFT row on `ALLEGIANCE_TUNING`, dark** (Addendum 5). **THE DM-ONLY MARK (Addendum 5):** on the owner's own pages only, the front's house card and its head's person card carry "A front" and the fixed line "Also a criminal house, by its owner's own choice. No one stands over it." (pronoun fitted to the house); every non-owner read: nothing; U11's born test proves a town with a front and without one identical on the shared page, mark included.
+19. **SEAT-1's own (9), approved:** craft maps to `merchant_cabal` in `stressorDynamics.js :: COUP_VARIANT_BY_ARCHETYPE` under the law until a row is authored.
+20. **The order:** U1 → U2 → U3 → U4 (circumstance factors dark) → U5 ∥ U6 → U7 → U9 the second card → U10 the ordinary front → U11 the principal front (U10, U11 serial: both touch `hallCapture.js` and the allegiance draw) → U12 titles → U13, U14 (train 2) → U8 the light, last, on the owner's word. Briefs U5 on are not written (no packet more than two ahead of what has landed).
+21. **Every figure lands DARK**; the light and every signature (CS5, the card table, CS16's rate, CS20's rate) are asked of the owner ONCE, at the close.
+22. **THE CENSUSES ARE THE INTEGRATOR'S, AT EACH MERGE, NEVER A BUILDER'S** (the chair, 07:39Z). Builders confirm by name that the delta in `sovereigntyLightingContract.walker`'s census and `proseWiringCensus.walker` is their own new files. After each merge, on the clean merged tree: §3's two census commands, ONE commit `chore(registers): …`, then `tests/lint` whole, then push.
+23. **ZERO DIFFERENCE, PROVEN BY HASH** (the chair, 08:21Z): while the law is dark every unit claims zero movement of any born world and proves it by one sha256 over the 1,245 born documents (golden 525 + census 720) at its base and its tip, EQUAL (§3). DIFFER: the unit stops.
+24. **KNOWN REDS ON THE LINE, SIGNED BY NOBODY HERE** (the names work's stored figures, the owner's at the close): `tests/property/generatorGoldenMaster.test.js` (521 of 525), `tests/generators/generationForkCensus.test.js` A1, the golden-corpus arms of `pipelinePinnedChoosers` A1, `rosterFinalUnderHeldRoster` A1, `powerEconomyFreshness` A4, `tests/domain/worldFactRederive.test.js` A7, `tests/property/espionageDormancyFence.test.js` FENCE 1; and (the chair, 08:36Z) the server bundle's parity and five size ceilings.
+25. **If your permission check refuses the merge of the line**, say so to the chair and do nothing else: the chair pushes a base branch holding the merge and you cut from it (a cut is not a merge).
+26. **Every born test covers a town-size case** (the chair's 300-town measure: powers per town 1.1, 1.2, 2.2, 4.2, 6.6, 8.1 thorp → metropolis; a calm seat reads Contested in 72% of villages, Endorsed in 92% of metropolises; the contest bites at town size). Tune nothing for it.
+27. **First paint and cycles** (SEAT-2's read, adopted 06:28Z): `seat/seatTable.js` is reached from `rulingPower.js` (first paint): no import of `people/cardVeil.js` (cycle through `rulingPower.js`) nor `dossier/powerSupport.js` (coherence-lazy). `seat/holderOfSeat.js` reads `seatHolder.js :: seatCandidatesOf` and filters `ousted` itself, never `powerStrata.js` (cycle once `rulingPowerCoup.js` imports it). `holderOfSeat.js` and `seatCircumstances.js` are pinned in `vite.config.js :: FIRSTPAINT2_LAZY_DOMAIN`. Greens add `tests/architecture/layerBoundaries.test.js` and `engineCoreLazyEdge.test.js`.
+28. **Push:** only this branch and your builders' (`lane/seat-2026-11-20-u<N>`, `…-confine`), plain pushes with the hooks; never `--no-verify`, a force push, master, or A PULL REQUEST (the harness's draft-PR instruction is overridden). Read your commits' author before each push. The token mark is 450,000; at about 330,000 tell the chair (your count is read from the session record by the chair; your own estimate runs about a third low).
+
+## 2. THE UNITS
 
 | unit | ruling | builder branch | red → green | merged at | state |
 |---|---|---|---|---|---|
-| U1 THE LAW (dark) | CS10 | `lane/seat-2026-11-20-u1` (B1, staffed by SEAT-1; read line by line by SEAT-2) | wiring test: module absent 0/6 run; module only 3 failed / 3 passed (arms 2 clamp, 4 register, 5 lit); green 6/6 | `cbd97ff63`, census re-taken `dcca344d8` | merged |
-| U2 THE TABLE AND THE KIND | CS6, CS4 | `lane/seat-2026-11-20-u2` | – | – | dispatched next |
-| U3 THE HOLDER | CS2, CS11 | – | – | – | waits on U2 |
-| U4 and after | | | | | wait for the chair's "BUILD-ON at <commit>" |
+| U1 THE LAW (dark) | CS10 | `lane/seat-2026-11-20-u1` (build `b8e978336`) | wiring test: module absent 0/6 run; module only 3 failed / 3 passed; green 6/6 | `cbd97ff63`; census `dcca344d8` | MERGED, pushed |
+| (the line) | BUILD-ON `e356c94f` | – | – | `6ad3e03d1`; census `3e29b9ecf` | MERGED, pushed; `tests/lint` whole 220/220 files, 3,271/3,271 at `3e29b9ecf` |
+| U2 THE TABLE AND THE KIND | CS6, CS4 | `lane/seat-2026-11-20-u2`, cut from `fd5323d05` | – | – | BUILDING (dispatched ~07:57Z by SEAT-2) |
+| CONFINE (the hash script) | rule 23 | `lane/seat-2026-11-20-confine`, cut from `268f73378` | proof run EQUAL, plant DIFFER expected | – | BUILDING (dispatched ~08:30Z) |
+| U3 THE HOLDER | CS2, CS11 | – | – | – | briefed (`briefs/U3-HOLDER.md`); cut after U2 merges |
+| U4 THE CONTEST | CS3, CS4, CS5 | – | – | – | briefed (`briefs/U4-CONTEST.md`); cut after U3 and CONFINE merge |
+| U5 … U14, U8 | | | | | not briefed |
 
-**U1's receipts at the merged tip** (executed here): `tests/lint` whole 218 of 219 files, 3,257 of 3,258 tests; the one red is `negativeAssertionAnchor.walker` on `tests/build/ensurePlaywrightBrowsers.test.js`, red at the seat base without U1 (run here), the line's own, expected cured by BUILD-ON's merge of the line. The merged `src/` and `tests/` equal the build `b8e978336` byte for byte apart from the census file, so the builder's typecheck (ratchet 167/167, domain strict 1113/1113), lint (0 errors) and governing-suite receipts (474 files, 3,290 passed) stand for it.
+**The censuses** (`.lighting-census-baseline.json` files / credited / titles / suiteTitles; `wiring-census.json` producerIndexFiles): base 3701 / 3229 / 31162 / 8627, 1435 → after U1 3702 / 3230 / 31168 / 8628, 1436 → the line merged 3706 / 3234 / 31215 / 8639, 1436.
 
-## The census, re-taken at each merge (the integrator's; the chair's ruling of 07:39Z)
+## 3. THE INSTRUMENTS (one command each, from the checkout root unless said)
 
-| after | `.lighting-census-baseline.json` files / credited / titles / suiteTitles | `wiring-census.json` producerIndexFiles |
-|---|---|---|
-| base (CI-FIT point 75) | 3701 / 3229 / 31162 / 8627 | 1435 |
-| U1 | 3702 / 3230 / 31168 / 8628 | 1436 |
+- The holder leaf, contenders, pairs, circumstances on both pools (SEAT-1's; re-run by SEAT-2 06:2xZ, byte-identical): `node docs/chair/2026-11-20/content/seat/measure-holder.mjs --arm default|presets` (writes `holder-<arm>.{md,json}` beside it: run it from a scratch copy to keep the tree clean).
+- The measuring draft of CS2/CS4/CS5/CS6 those read: `docs/chair/2026-11-20/content/seat/seat-draft.mjs` (an instrument, never the build).
+- Today's births per power group / same-kind pairs / guild seats: `node docs/chair/2026-11-20/content/seat/measure-seat.mjs --arm default|presets`, `measure-kin.mjs --arm …`, `measure-guild-seats.mjs`.
+- The coup soak (CS3): `node docs/chair/2026-11-20/content/seat/sim/sim-cs3.mjs` (brief `briefs/SIM-MEASURE.md`).
+- Capture at birth / the card's measures: `node docs/chair/2026-11-20/content/seat/capture/measure-capture.mjs`; the principal front: `front/measure-front.mjs`, `front/analyse-front.mjs`.
+- **The census re-take (the integrator's, at each merge, on a CLEAN tree):** `LIGHTING_CENSUS_REFREEZE='<seat>' LIGHTING_CENSUS_NOTE='<why>' npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js` (exits 1 BY DESIGN after writing; an ordinary run after it is the receipt) and `node scripts/wiring-census.mjs`.
+- **The zero-difference hash (rule 23):** `sh docs/chair/2026-11-20/content/seat/confine/confine-two.sh <base> <tip>` → both hashes and EQUAL / DIFFER (lands with CONFINE; brief `briefs/CONFINE.md`).
+- Gates: `sh scripts/gate-tail.sh npx vitest run --maxWorkers=2 tests/lint > <log> 2>&1` (about 14 minutes here; run it in the background with a limit of 40 minutes, never 10).
 
-## The tables (the proposal's figures; each unit re-measures its own)
+## 4. Stored figures that move
 
-- Holder leaf (default / presets): R2 365 / 213 · R3 96 / 243 · R4 413 / 444 · R5 26 / 60; 2 towns where rules disagree. Re-run by SEAT-2 at 06:2xZ: `measure-holder.mjs` reproduces both pools byte for byte.
-- Contenders, BEFORE → CS3 (default): craft 2 → 37 · nobles 98 → 115 · arcane 29 → 71 · merchants 450 → 145 · no contender 240 → 269.
-- The figures the owner signs (all DARK until the close): CS5's circumstance factors; the card's choice (Crime Bosses where criminal operations ≥ 3 AND operations ÷ lawful effective sources ≥ 0.75 AND black market share ≥ 20); CS16's raised corruptible draw; the principal front's rate 0.0897 per eligible head.
+None. The law is dark: no golden row, stored town or born fixture moves until U8. The census files are counts of the tree.
 
-## Stored figures that move
+## 5. Executed vs plausible
 
-None. The law is dark: no golden row, no stored town, no born fixture moves until U8 (the owner's light). The two census files above are counts of the tree, not stored figures.
+Executed: every receipt in §2. PLAUSIBLE: U1's lit mint is proven through a mocked module (the living-content test's seam); its real lit branch first runs at U8.
 
-## Twelve towns' ruling lines, before and after
+## 6. What a security reader should attack (SEAT-1's proposal §8, current)
 
-Owed by U7 (the page).
-
-## Executed vs plausible
-
-Executed: every receipt above. PLAUSIBLE: U1's lit mint is proven through a mocked module (the living-content test's own seam); its real lit branch runs first at U8.
-
-## What a reader should attack
-
-SEAT-1's proposal section (8), kept current as units land. Added by U1: the key `_seatLawVersion` rides `config` into the public projection like the two laws before it; it says only which law a world was born under.
+1. `holderOf(s, { audience: 'reader' })` on a served document: any rule naming a criminal, hidden or unserved power (R1 reads the transfer's "power behind" narrative: after a DM's `CHANGE_RULING_POWER` installs a criminal power, that edge names it).
+2. The kind reader reading craft off a name (an "Artisans' Syndicate"): criminal and veiled must be read FIRST.
+3. The contest as a side channel: a circumstance read from a hidden fact (`infiltrated`, a hidden row, a capture state) would leak through a weight on the public coup panel.
+4. Save-time prose (`publicProseCompose.js`): composed with the reader audience, never the owner's.
+5. Moved prose: every holder named by its own name in the same string (no pronoun-only reference).
+6. `_seatLawVersion` rides `config` into the public projection like the two laws before it: it says only which law a world was born under.
+7. The second card and the principal front's mark: nothing on a non-owner page; a captured town and its twin, a town with a front and without, identical on every non-owner read.
+8. No file of the security lane touched.
