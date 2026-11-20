@@ -1,0 +1,344 @@
+born 300 in 52s; runs=200
+
+unmatched source groups (share of draws, all 300 towns):
+  own hook: 1.1% of 8996
+  secret: 12.8% of 8996
+  in-town repeats, short goal: 1541 of 8996 draws
+  in-town repeats, long goal: 1516 of 8996 draws
+  in-town repeats, own hook: 0 of 8996 draws
+  in-town repeats, tie description: 11 of 8944 draws
+  in-town repeats, secret: 0 of 8996 draws
+
+===== (D) WHERE REPEATS COME FROM (all 2,450 ordered pairs per size; a repeat = a draw of B whose masked line stands among A's lines, charged to B's draw group) =====
+groups: goal = goal.intent.<short|long> family/kind; tie = relationships[].archetypeKey; hook = NPC_FACTION_LOYALTY pool matched by text (template slots as wildcards); secret = NPC_CRIMINAL_SECRETS_BY_HOLDER type (holder classes merged) or TITLE_SECRETS title, matched by text
+
+-- short goal @ town: groups drawn 48; repeats 11105; top ten: group · distinct lines seen (300 towns) · mean draws per town · share of repeats
+   RANK/enter                                         13    3.20   28.8%
+   POWER/tense                                        17    2.46   15.8%
+   TIES/rival_enemy                                    8    2.06   14.6%
+   INSTITUTION/solvency                              171    2.40    8.1%
+   RANK/climb                                         13    1.56    6.9%
+   INSTITUTION/charter                               160    1.96    6.8%
+   TIES/ally                                           5    1.18    5.0%
+   TIES/mentor_student                                 7    0.98    3.5%
+   PERSONALITY/grudge                                  4    0.58    1.7%
+   PERSONALITY/sway                                    4    0.56    1.6%
+
+-- short goal @ city: groups drawn 53; repeats 49756; top ten: group · distinct lines seen (300 towns) · mean draws per town · share of repeats
+   RANK/enter                                         13    8.46   32.2%
+   TIES/rival_enemy                                    8    5.16   15.3%
+   TIES/ally                                           5    3.68    9.6%
+   INSTITUTION/solvency                              171    6.16    9.1%
+   INSTITUTION/charter                               160    5.60    6.3%
+   RANK/climb                                         13    2.96    5.7%
+   PERSONALITY/sway                                    4    1.44    2.5%
+   TIES/mentor_student                                 7    1.88    2.5%
+   POWER/tense                                        17    2.16    2.3%
+   SUPPLY/expansion                                   70    3.00    2.2%
+
+-- short goal @ metropolis: groups drawn 54; repeats 91470; top ten: group · distinct lines seen (300 towns) · mean draws per town · share of repeats
+   RANK/enter                                         13   12.44   29.6%
+   TIES/rival_enemy                                    8    7.64   16.4%
+   INSTITUTION/solvency                              171    9.26   10.3%
+   POWER/tense                                        17    6.26   10.1%
+   TIES/ally                                           5    4.22    6.5%
+   INSTITUTION/charter                               160    7.08    5.4%
+   RANK/climb                                         13    3.36    3.7%
+   PERSONALITY/grudge                                  4    1.94    2.5%
+   PERSONALITY/sway                                    4    1.78    2.1%
+   TIES/mentor_student                                 7    2.34    2.0%
+
+-- long goal @ town: groups drawn 34; repeats 10229; top ten: group · distinct lines seen (300 towns) · mean draws per town · share of repeats
+   RANK/enter                                         20    2.90   25.6%
+   POWER/tense                                        17    2.40   16.9%
+   TIES/rival_enemy                                   10    1.66   10.6%
+   INSTITUTION/solvency                              196    2.58    9.6%
+   TIES/ally                                           7    1.44    8.1%
+   INSTITUTION/charter                               166    2.28    7.2%
+   RANK/climb                                         19    1.52    5.8%
+   TIES/mentor_student                                 8    0.96    3.7%
+   PERSONALITY/sway                                    4    0.64    2.4%
+   TIES/debtor                                         6    0.60    1.5%
+
+-- long goal @ city: groups drawn 38; repeats 51610; top ten: group · distinct lines seen (300 towns) · mean draws per town · share of repeats
+   RANK/enter                                         20    9.18   31.5%
+   TIES/rival_enemy                                   10    5.64   16.8%
+   TIES/ally                                           7    3.80    9.4%
+   INSTITUTION/solvency                              196    6.80    9.1%
+   INSTITUTION/charter                               166    5.50    6.4%
+   PERSONALITY/sway                                    4    1.92    4.3%
+   PERSONALITY/grudge                                  4    1.78    3.7%
+   SUPPLY/expansion                                   75    2.90    2.7%
+   RANK/climb                                         19    2.28    2.2%
+   TIES/debtor                                         6    1.58    1.9%
+
+-- long goal @ metropolis: groups drawn 41; repeats 93622; top ten: group · distinct lines seen (300 towns) · mean draws per town · share of repeats
+   RANK/enter                                         20   12.80   28.1%
+   TIES/rival_enemy                                   10    7.68   14.7%
+   INSTITUTION/solvency                              196    9.84   10.3%
+   POWER/tense                                        17    6.44   10.1%
+   TIES/ally                                           7    4.76    7.5%
+   INSTITUTION/charter                               166    7.84    6.7%
+   PERSONALITY/sway                                    4    2.56    4.3%
+   PERSONALITY/grudge                                  4    2.10    2.8%
+   TIES/mentor_student                                 8    2.60    2.7%
+   PERSONALITY/greed                                   4    1.70    1.9%
+
+-- own hook @ town: groups drawn 8; repeats 10038; top ten: group · distinct lines seen (300 towns) · mean draws per town · share of repeats
+   hook:other                                         92   11.54   57.8%
+   hook:economy                                       49    4.72   23.7%
+   hook:government                                    47    3.06    8.2%
+   hook:religious                                     20    1.54    6.2%
+   hook:military                                      26    1.52    2.4%
+   hook:criminal                                      33    1.22    1.5%
+   hook:magic                                         10    0.26    0.2%
+   hook:(unmatched)                                   33    0.06    0.1%
+
+-- own hook @ city: groups drawn 8; repeats 45586; top ten: group · distinct lines seen (300 towns) · mean draws per town · share of repeats
+   hook:other                                         92   25.80   51.2%
+   hook:economy                                       49   10.48   18.1%
+   hook:government                                    47    7.78    9.6%
+   hook:criminal                                      33    6.72    8.9%
+   hook:religious                                     20    2.54    4.9%
+   hook:magic                                         10    2.30    3.6%
+   hook:military                                      26    4.12    3.5%
+   hook:(unmatched)                                   33    0.30    0.2%
+
+-- own hook @ metropolis: groups drawn 8; repeats 86354; top ten: group · distinct lines seen (300 towns) · mean draws per town · share of repeats
+   hook:other                                         92   35.62   51.0%
+   hook:economy                                       49   14.82   17.8%
+   hook:government                                    47   12.00   12.2%
+   hook:criminal                                      33    7.94    6.7%
+   hook:religious                                     20    4.00    5.4%
+   hook:magic                                         10    3.54    4.4%
+   hook:military                                      26    4.36    2.2%
+   hook:(unmatched)                                   33    1.56    0.4%
+
+-- tie description @ town: groups drawn 13; repeats 9408; top ten: group · distinct lines seen (300 towns) · mean draws per town · share of repeats
+   tie:old_debt                                       28    4.76   25.0%
+   tie:mentor_legacy                                  33    4.36   21.6%
+   tie:wary_alliance                                  23    3.28   14.6%
+   tie:mutual_leverage                                47    3.70   14.1%
+   tie:peer_rivalry                                   29    3.36   13.1%
+   tie:genuine_respect                                24    2.30    6.5%
+   tie:bitter_history                                 13    1.04    3.4%
+   tie:family_complication                            11    0.72    1.6%
+   tie:handler_patron                                 12    0.08    0.1%
+   tie:mil_crim_corruption                            21    0.12    0.0%
+
+-- tie description @ city: groups drawn 16; repeats 53228; top ten: group · distinct lines seen (300 towns) · mean draws per town · share of repeats
+   tie:mutual_leverage                                47   10.52   18.7%
+   tie:peer_rivalry                                   29    9.30   17.5%
+   tie:old_debt                                       28    8.96   16.4%
+   tie:wary_alliance                                  23    8.36   15.9%
+   tie:mentor_legacy                                  33    8.00   12.6%
+   tie:genuine_respect                                24    6.14    8.3%
+   tie:family_complication                            11    3.08    5.5%
+   tie:bitter_history                                 13    2.92    4.6%
+   tie:handler_partnership                            16    0.92    0.4%
+   tie:mil_crim_suppression                           15    0.60    0.1%
+
+-- tie description @ metropolis: groups drawn 16; repeats 101095; top ten: group · distinct lines seen (300 towns) · mean draws per town · share of repeats
+   tie:old_debt                                       28   13.76   19.8%
+   tie:peer_rivalry                                   29   13.36   19.3%
+   tie:mutual_leverage                                47   14.04   16.7%
+   tie:mentor_legacy                                  33   11.00   12.8%
+   tie:wary_alliance                                  23   10.48   12.4%
+   tie:genuine_respect                                24    8.34    8.0%
+   tie:bitter_history                                 13    4.58    5.6%
+   tie:family_complication                            11    3.90    4.5%
+   tie:handler_partnership                            16    1.60    0.5%
+   tie:handler_patron                                 12    0.86    0.2%
+
+-- secret @ town: groups drawn 94; repeats 11528; top ten: group · distinct lines seen (300 towns) · mean draws per town · share of repeats
+   secret:(unmatched: crime-knowledge/stress/food pools)  195    5.48   64.0%
+   secret:title:the innkeeper                          5    0.68    3.4%
+   secret:title:the granary reeve                      3    0.70    3.4%
+   secret:type:religious                               6    0.52    3.4%
+   secret:title:the miller                             5    0.70    3.3%
+   secret:type:political                              10    0.68    1.5%
+   secret:title:the apothecary                         4    0.38    1.1%
+   secret:type:military                                6    0.40    1.0%
+   secret:title:the bowyer                             3    0.36    0.9%
+   secret:type:criminal                               10    0.60    0.9%
+
+-- secret @ city: groups drawn 101; repeats 35776; top ten: group · distinct lines seen (300 towns) · mean draws per town · share of repeats
+   secret:(unmatched: crime-knowledge/stress/food pools)  195    6.62   27.4%
+   secret:type:criminal                               10    1.84    3.0%
+   secret:type:personal                               11    1.88    2.7%
+   secret:type:magical                                 7    1.46    2.4%
+   secret:title:the watch commander                    4    0.98    2.0%
+   secret:type:religious                               6    0.68    2.0%
+   secret:title:the master baker                       3    0.86    1.7%
+   secret:title:the master weaver                      3    0.86    1.7%
+   secret:title:the master carpenter                   3    0.76    1.7%
+   secret:title:the bowyer                             3    0.84    1.7%
+
+-- secret @ metropolis: groups drawn 105; repeats 59600; top ten: group · distinct lines seen (300 towns) · mean draws per town · share of repeats
+   secret:(unmatched: crime-knowledge/stress/food pools)  195    6.76   15.9%
+   secret:type:personal                               11    2.52    3.1%
+   secret:type:criminal                               10    2.40    2.9%
+   secret:type:magical                                 7    2.06    2.8%
+   secret:type:political                              10    2.12    2.6%
+   secret:type:religious                               6    1.00    2.0%
+   secret:title:the master carpenter                   3    0.92    1.9%
+   secret:title:the chandler                           4    0.98    1.7%
+   secret:title:the brewer                             5    1.00    1.4%
+   secret:title:the house boss                         3    0.98    1.3%
+
+===== (E) THE BILL BY SIMULATION =====
+Model: each card keeps its group; groups NOT enlarged keep their observed lines; each enlarged group of observed size s (distinct masked lines seen over 300 towns) becomes ceil(m*s) lines and its cards re-draw uniformly from it. Within a town the re-draw is WITHOUT replacement (while the group has lines left) for pools whose observed in-town repeats are ~0 (the held-text registry), WITH replacement otherwise. Metric = mean over all ordered pairs of share of B's lines already among A's (measure A). Groups ranked by their repeats at that size.
+
+-- short goal @ city: observed share 34.0%; re-draw with replacement in town (in-town repeats 1541/8996)
+   control m=1, K=all (uniform re-draw at observed sizes):  21.0% (+0 in 53)
+   m \ K      5                     10                    20                    all                   
+   1.5         19.9% (+180 in 5)     16.8% (+237 in 10)    15.3% (+290 in 20)    15.0% (+463 in 53)   
+   2           17.9% (+357 in 5)     14.3% (+468 in 10)    12.4% (+573 in 20)    11.9% (+908 in 53)   
+   3           15.3% (+714 in 5)     11.3% (+936 in 10)     8.9% (+1146 in 20)    8.3% (+1816 in 53)  
+   5           13.1% (+1428 in 5)     8.6% (+1872 in 10)    5.9% (+2292 in 20)    5.1% (+3632 in 53)  
+   SKEW-KEPT model (a card keeps its observed line with chance s/ceil(m*s), else draws a NEW line uniformly): m \ K
+   1.5         25.1% (+180 in 5)     23.1% (+237 in 10)    21.8% (+290 in 20)    21.5% (+463 in 53)   
+   2           21.2% (+357 in 5)     18.2% (+468 in 10)    16.4% (+573 in 20)    15.9% (+908 in 53)   
+   3           16.9% (+714 in 5)     13.1% (+936 in 10)    10.8% (+1146 in 20)   10.2% (+1816 in 53)  
+   5           13.7% (+1428 in 5)     9.3% (+1872 in 10)    6.6% (+2292 in 20)    5.9% (+3632 in 53)  
+
+-- short goal @ metropolis: observed share 44.5%; re-draw with replacement in town (in-town repeats 1541/8996)
+   control m=1, K=all (uniform re-draw at observed sizes):  28.0% (+0 in 54)
+   m \ K      5                     10                    20                    all                   
+   1.5         27.2% (+109 in 5)     22.8% (+204 in 10)    20.8% (+268 in 20)    20.4% (+463 in 54)   
+   2           24.4% (+214 in 5)     19.4% (+402 in 10)    17.0% (+529 in 20)    16.4% (+906 in 54)   
+   3           20.9% (+428 in 5)     15.2% (+804 in 10)    12.3% (+1058 in 20)   11.6% (+1812 in 54)  
+   5           17.6% (+856 in 5)     11.5% (+1608 in 10)    8.1% (+2116 in 20)    7.3% (+3624 in 54)  
+   SKEW-KEPT model (a card keeps its observed line with chance s/ceil(m*s), else draws a NEW line uniformly): m \ K
+   1.5         34.3% (+109 in 5)     31.4% (+204 in 10)    29.9% (+268 in 20)    29.5% (+463 in 54)   
+   2           29.0% (+214 in 5)     24.9% (+402 in 10)    22.8% (+529 in 20)    22.2% (+906 in 54)   
+   3           23.2% (+428 in 5)     18.0% (+804 in 10)    15.2% (+1058 in 20)   14.5% (+1812 in 54)  
+   5           18.6% (+856 in 5)     12.6% (+1608 in 10)    9.3% (+2116 in 20)    8.4% (+3624 in 54)  
+
+-- long goal @ city: observed share 34.9%; re-draw with replacement in town (in-town repeats 1516/8996)
+   control m=1, K=all (uniform re-draw at observed sizes):  19.3% (+0 in 38)
+   m \ K      5                     10                    20                    all                   
+   1.5         18.5% (+200 in 5)     15.7% (+255 in 10)    14.0% (+294 in 20)    13.6% (+458 in 38)   
+   2           16.5% (+399 in 5)     13.2% (+507 in 10)    11.2% (+579 in 20)    10.7% (+899 in 38)   
+   3           14.4% (+798 in 5)     10.5% (+1014 in 10)    8.0% (+1158 in 20)    7.4% (+1798 in 38)  
+   5           12.5% (+1596 in 5)     8.1% (+2028 in 10)    5.2% (+2316 in 20)    4.5% (+3596 in 38)  
+   SKEW-KEPT model (a card keeps its observed line with chance s/ceil(m*s), else draws a NEW line uniformly): m \ K
+   1.5         25.2% (+200 in 5)     23.3% (+255 in 10)    21.9% (+294 in 20)    21.6% (+458 in 38)   
+   2           20.8% (+399 in 5)     17.8% (+507 in 10)    16.0% (+579 in 20)    15.5% (+899 in 38)   
+   3           16.4% (+798 in 5)     12.7% (+1014 in 10)   10.3% (+1158 in 20)    9.7% (+1798 in 38)  
+   5           13.3% (+1596 in 5)     8.9% (+2028 in 10)    6.1% (+2316 in 20)    5.4% (+3596 in 38)  
+
+-- long goal @ metropolis: observed share 45.6%; re-draw with replacement in town (in-town repeats 1516/8996)
+   control m=1, K=all (uniform re-draw at observed sizes):  25.8% (+0 in 41)
+   m \ K      5                     10                    20                    all                   
+   1.5         26.3% (+126 in 5)     21.2% (+219 in 10)    19.1% (+293 in 20)    18.5% (+461 in 41)   
+   2           23.6% (+250 in 5)     17.8% (+436 in 10)    15.3% (+578 in 20)    14.7% (+902 in 41)   
+   3           20.6% (+500 in 5)     14.0% (+872 in 10)    11.0% (+1156 in 20)   10.2% (+1804 in 41)  
+   5           17.9% (+1000 in 5)    10.6% (+1744 in 10)    7.2% (+2312 in 20)    6.4% (+3608 in 41)  
+   SKEW-KEPT model (a card keeps its observed line with chance s/ceil(m*s), else draws a NEW line uniformly): m \ K
+   1.5         34.8% (+126 in 5)     31.5% (+219 in 10)    29.9% (+293 in 20)    29.5% (+461 in 41)   
+   2           29.2% (+250 in 5)     24.4% (+436 in 10)    22.1% (+578 in 20)    21.5% (+902 in 41)   
+   3           23.4% (+500 in 5)     17.3% (+872 in 10)    14.4% (+1156 in 20)   13.7% (+1804 in 41)  
+   5           19.0% (+1000 in 5)    11.9% (+1744 in 10)    8.6% (+2312 in 20)    7.7% (+3608 in 41)  
+
+-- own hook @ city: observed share 31.1%; re-draw without replacement in town (in-town repeats 0/8996)
+   control m=1, K=all (uniform re-draw at observed sizes):  22.6% (+0 in 8)
+   m \ K      5                     10                    20                    all                   
+   1.5         15.9% (+122 in 5)     15.0% (+157 in 8)     15.0% (+157 in 8)     15.0% (+157 in 8)    
+   2           12.5% (+241 in 5)     11.3% (+310 in 8)     11.3% (+310 in 8)     11.3% (+310 in 8)    
+   3            9.1% (+482 in 5)      7.5% (+620 in 8)      7.5% (+620 in 8)      7.5% (+620 in 8)    
+   5            6.4% (+964 in 5)      4.5% (+1240 in 8)     4.5% (+1240 in 8)     4.5% (+1240 in 8)   
+   SKEW-KEPT model (a card keeps its observed line with chance s/ceil(m*s), else draws a NEW line uniformly): m \ K
+   1.5         19.6% (+122 in 5)     18.8% (+157 in 8)     18.8% (+157 in 8)     18.8% (+157 in 8)    
+   2           14.6% (+241 in 5)     13.4% (+310 in 8)     13.4% (+310 in 8)     13.4% (+310 in 8)    
+   3           10.0% (+482 in 5)      8.5% (+620 in 8)      8.5% (+620 in 8)      8.5% (+620 in 8)    
+   5            6.7% (+964 in 5)      4.9% (+1240 in 8)     4.9% (+1240 in 8)     4.9% (+1240 in 8)   
+
+-- own hook @ metropolis: observed share 42.1%; re-draw without replacement in town (in-town repeats 0/8996)
+   control m=1, K=all (uniform re-draw at observed sizes):  31.1% (+0 in 8)
+   m \ K      5                     10                    20                    all                   
+   1.5         21.9% (+122 in 5)     20.7% (+157 in 8)     20.7% (+157 in 8)     20.7% (+157 in 8)    
+   2           17.2% (+241 in 5)     15.5% (+310 in 8)     15.5% (+310 in 8)     15.5% (+310 in 8)    
+   3           12.4% (+482 in 5)     10.4% (+620 in 8)     10.4% (+620 in 8)     10.4% (+620 in 8)    
+   5            8.6% (+964 in 5)      6.2% (+1240 in 8)     6.2% (+1240 in 8)     6.2% (+1240 in 8)   
+   SKEW-KEPT model (a card keeps its observed line with chance s/ceil(m*s), else draws a NEW line uniformly): m \ K
+   1.5         26.6% (+122 in 5)     25.5% (+157 in 8)     25.5% (+157 in 8)     25.5% (+157 in 8)    
+   2           19.9% (+241 in 5)     18.3% (+310 in 8)     18.3% (+310 in 8)     18.3% (+310 in 8)    
+   3           13.6% (+482 in 5)     11.6% (+620 in 8)     11.6% (+620 in 8)     11.6% (+620 in 8)    
+   5            9.0% (+964 in 5)      6.7% (+1240 in 8)     6.7% (+1240 in 8)     6.7% (+1240 in 8)   
+
+-- tie description @ city: observed share 36.3%; re-draw without replacement in town (in-town repeats 11/8944)
+   control m=1, K=all (uniform re-draw at observed sizes):  27.3% (+0 in 16)
+   m \ K      5                     10                    20                    all                   
+   1.5         21.4% (+82 in 5)      18.0% (+123 in 10)    18.0% (+156 in 16)    18.0% (+156 in 16)   
+   2           17.9% (+160 in 5)     13.7% (+239 in 10)    13.6% (+303 in 16)    13.6% (+303 in 16)   
+   3           14.2% (+320 in 5)      9.1% (+478 in 10)     9.1% (+606 in 16)     9.1% (+606 in 16)   
+   5           11.3% (+640 in 5)      5.5% (+956 in 10)     5.5% (+1212 in 16)    5.5% (+1212 in 16)  
+   SKEW-KEPT model (a card keeps its observed line with chance s/ceil(m*s), else draws a NEW line uniformly): m \ K
+   1.5         24.7% (+82 in 5)      22.0% (+123 in 10)    22.0% (+156 in 16)    22.0% (+156 in 16)   
+   2           19.7% (+160 in 5)     15.9% (+239 in 10)    15.9% (+303 in 16)    15.9% (+303 in 16)   
+   3           15.0% (+320 in 5)     10.1% (+478 in 10)    10.1% (+606 in 16)    10.1% (+606 in 16)   
+   5           11.6% (+640 in 5)      5.9% (+956 in 10)     5.8% (+1212 in 16)    5.8% (+1212 in 16)  
+
+-- tie description @ metropolis: observed share 49.2%; re-draw without replacement in town (in-town repeats 11/8944)
+   control m=1, K=all (uniform re-draw at observed sizes):  37.8% (+0 in 16)
+   m \ K      5                     10                    20                    all                   
+   1.5         29.5% (+82 in 5)      25.0% (+121 in 10)    25.0% (+156 in 16)    25.0% (+156 in 16)   
+   2           24.5% (+160 in 5)     18.9% (+236 in 10)    18.9% (+303 in 16)    18.9% (+303 in 16)   
+   3           19.5% (+320 in 5)     12.6% (+472 in 10)    12.6% (+606 in 16)    12.6% (+606 in 16)   
+   5           15.4% (+640 in 5)      7.6% (+944 in 10)     7.6% (+1212 in 16)    7.6% (+1212 in 16)  
+   SKEW-KEPT model (a card keeps its observed line with chance s/ceil(m*s), else draws a NEW line uniformly): m \ K
+   1.5         33.6% (+82 in 5)      30.0% (+121 in 10)    30.0% (+156 in 16)    30.0% (+156 in 16)   
+   2           26.9% (+160 in 5)     21.8% (+236 in 10)    21.8% (+303 in 16)    21.8% (+303 in 16)   
+   3           20.5% (+320 in 5)     13.9% (+472 in 10)    13.9% (+606 in 16)    13.9% (+606 in 16)   
+   5           15.8% (+640 in 5)      8.1% (+944 in 10)     8.0% (+1212 in 16)    8.0% (+1212 in 16)  
+
+-- secret @ city: observed share 24.8%; re-draw without replacement in town (in-town repeats 0/8996)
+   control m=1, K=all (uniform re-draw at observed sizes):  14.5% (+0 in 101)
+   m \ K      5                     10                    20                    all                   
+   1.5         16.7% (+115 in 5)     15.5% (+126 in 10)    13.5% (+148 in 20)     9.2% (+330 in 101)  
+   2           16.3% (+227 in 5)     14.9% (+245 in 10)    12.6% (+285 in 20)     7.3% (+596 in 101)  
+   3           15.9% (+454 in 5)     14.3% (+490 in 10)    11.4% (+570 in 20)     4.8% (+1192 in 101) 
+   5           15.6% (+908 in 5)     13.7% (+980 in 10)    10.5% (+1140 in 20)    2.9% (+2384 in 101) 
+   SKEW-KEPT model (a card keeps its observed line with chance s/ceil(m*s), else draws a NEW line uniformly): m \ K
+   1.5         19.9% (+115 in 5)     18.9% (+126 in 10)    17.4% (+148 in 20)    13.7% (+330 in 101)  
+   2           18.1% (+227 in 5)     16.9% (+245 in 10)    14.8% (+285 in 20)     9.8% (+596 in 101)  
+   3           16.7% (+454 in 5)     15.1% (+490 in 10)    12.4% (+570 in 20)     6.0% (+1192 in 101) 
+   5           15.9% (+908 in 5)     14.0% (+980 in 10)    10.8% (+1140 in 20)    3.3% (+2384 in 101) 
+
+-- secret @ metropolis: observed share 29.1%; re-draw without replacement in town (in-town repeats 0/8996)
+   control m=1, K=all (uniform re-draw at observed sizes):  20.5% (+0 in 105)
+   m \ K      5                     10                    20                    all                   
+   1.5         23.0% (+118 in 5)     21.5% (+130 in 10)    19.9% (+150 in 20)    12.9% (+340 in 105)  
+   2           22.5% (+233 in 5)     20.9% (+254 in 10)    18.9% (+288 in 20)    10.2% (+611 in 105)  
+   3           22.1% (+466 in 5)     20.1% (+508 in 10)    17.6% (+576 in 20)     6.8% (+1222 in 105) 
+   5           21.7% (+932 in 5)     19.6% (+1016 in 10)   16.6% (+1152 in 20)    4.1% (+2444 in 105) 
+   SKEW-KEPT model (a card keeps its observed line with chance s/ceil(m*s), else draws a NEW line uniformly): m \ K
+   1.5         25.2% (+118 in 5)     24.2% (+130 in 10)    22.7% (+150 in 20)    16.6% (+340 in 105)  
+   2           23.8% (+233 in 5)     22.4% (+254 in 10)    20.5% (+288 in 20)    12.4% (+611 in 105)  
+   3           22.6% (+466 in 5)     20.8% (+508 in 10)    18.3% (+576 in 20)     7.8% (+1222 in 105) 
+   5           21.9% (+932 in 5)     19.8% (+1016 in 10)   16.8% (+1152 in 20)    4.4% (+2444 in 105) 
+
+SMALLEST BILL in the grid (city): pool · under 30% · under 20%  (new lines, groups touched, m, K, simulated share)
+ model: uniform
+  short goal       <30%: +180 lines in 5 groups (m=1.5, K=5, 19.9%)       <20%: +180 lines in 5 groups (m=1.5, K=5, 19.9%)   [uniform control 21.0%]
+  long goal        <30%: +200 lines in 5 groups (m=1.5, K=5, 18.5%)       <20%: +200 lines in 5 groups (m=1.5, K=5, 18.5%)   [uniform control 19.3%]
+  own hook         <30%: +122 lines in 5 groups (m=1.5, K=5, 15.9%)       <20%: +122 lines in 5 groups (m=1.5, K=5, 15.9%)   [uniform control 22.6%]
+  tie description  <30%: +82 lines in 5 groups (m=1.5, K=5, 21.4%)        <20%: +123 lines in 10 groups (m=1.5, K=10, 18.0%)   [uniform control 27.3%]
+  secret           <30%: +115 lines in 5 groups (m=1.5, K=5, 16.7%)       <20%: +115 lines in 5 groups (m=1.5, K=5, 16.7%)   [uniform control 14.5%]
+ model: skew
+  short goal       <30%: +180 lines in 5 groups (m=1.5, K=5, 25.1%)       <20%: +468 lines in 10 groups (m=2, K=10, 18.2%)   [uniform control 21.0%]
+  long goal        <30%: +200 lines in 5 groups (m=1.5, K=5, 25.2%)       <20%: +507 lines in 10 groups (m=2, K=10, 17.8%)   [uniform control 19.3%]
+  own hook         <30%: +122 lines in 5 groups (m=1.5, K=5, 19.6%)       <20%: +122 lines in 5 groups (m=1.5, K=5, 19.6%)   [uniform control 22.6%]
+  tie description  <30%: +82 lines in 5 groups (m=1.5, K=5, 24.7%)        <20%: +160 lines in 5 groups (m=2, K=5, 19.7%)   [uniform control 27.3%]
+  secret           <30%: +115 lines in 5 groups (m=1.5, K=5, 19.9%)       <20%: +115 lines in 5 groups (m=1.5, K=5, 19.9%)   [uniform control 14.5%]
+
+===== (F) SAME vs DIFFERENT CULTURE (culturalIdentity.key), all ordered pairs, share of B's lines among A's =====
+  city        short goal       same culture 35.0% (272 pairs)   different 33.9% (2178 pairs)
+  city        own hook         same culture 32.0% (272 pairs)   different 31.0% (2178 pairs)
+  city        tie description  same culture 37.7% (272 pairs)   different 36.2% (2178 pairs)
+  metropolis  short goal       same culture 44.6% (246 pairs)   different 44.5% (2204 pairs)
+  metropolis  own hook         same culture 43.0% (246 pairs)   different 42.0% (2204 pairs)
+  metropolis  tie description  same culture 48.7% (246 pairs)   different 49.3% (2204 pairs)
+
+done in 479s

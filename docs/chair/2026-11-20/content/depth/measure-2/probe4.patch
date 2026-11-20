@@ -1,0 +1,62 @@
+diff --git a/src/data/npcData.js b/src/data/npcData.js
+index 511d86956..4a4bbf48b 100644
+--- a/src/data/npcData.js
++++ b/src/data/npcData.js
+@@ -1,3 +1,4 @@
++import { tagProbe, themeOfText as themeOfTextProbe } from '../domain/hookThemes.js';
+ // npcData.js — NPC table data extracted from npcGenerator.js
+ // All constants exported for use by npcGenerator.js
+ 
+@@ -2610,3 +2611,37 @@ export function temperamentYieldsToSecret(card) {
+  * @type {ReadonlySet<string | { text: string }>}
+  */
+ export const ECONOMY_HOOKS_TRUE_OF_ANY_HOLDER = Object.freeze(new Set(NPC_FACTION_LOYALTY.economy.filter((l) => /^One of their most reliable suppliers has gone dark\.|^Someone is buying up their debts\.|^A contract they signed in difficult times |^A supplier is providing goods of uncertain provenance\.|^They have quietly stopped paying a supplier |^A crate came to them by mistake,/.test(typeof l === 'string' ? l : l.text))));
++
++// DEPTH-1 PROBE (never pushed): placeholder lines APPENDED in the proposed first tranche's placement.
++{
++  const TIE_ADD = { wary_alliance: 14, peer_rivalry: 14, old_debt: 14, mutual_leverage: 14, mentor_legacy: 12, genuine_respect: 12 };
++  for (const [k, n] of Object.entries(TIE_ADD)) {
++    const a = STRESS_ECONOMIC_EFFECTS[k]; const debt = k === 'old_debt';
++    const L = (i) => 'abcdefghijklmnopqrstuvwxyz'[i % 26] + 'qwxz'[Math.floor(i / 26)]; const add = (f) => Array.from({ length: n }, (_, i) => ({ line: (r, s) => `${r.name} and ${s.name} PROBE ${k} ${f} ${L(i)}.`, colour: true }));
++    a.desc = pairProse('d', [...a.desc.lines, ...add('d')], null, debt);
++    a.tension = pairProse('t', [...a.tension.lines, ...add('t')], null, debt);
++  }
++  const HOOK_ADD = { other: 30, economy: 14, criminal: 8, government: 8 };
++  for (const [k, n] of Object.entries(HOOK_ADD)) { const own = NPC_FACTION_LOYALTY[k].map((l) => themeOfTextProbe(typeof l === 'string' ? l : l.text)); for (let i = 0; i < n; i++) { const tx = `PROBE hook ${k} ${'abcdefghijklmnopqrstuvwxyz'[i % 26]}${'qwxz'[Math.floor(i / 26)]}.`; tagProbe(tx, own[i % own.length]); NPC_FACTION_LOYALTY[k].push(tx); } }
++  if (0) for (const [k, n] of Object.entries(HOOK_ADD)) for (let i = 0; i < n; i++) NPC_FACTION_LOYALTY[k].push(`PROBE hook ${k} ${'abcdefghijklmnopqrstuvwxyz'[i % 26]}${'qwxz'[Math.floor(i / 26)]}.`);
++}
++
++// DEPTH-2 PROBE 4 (never pushed): the SECOND tranche's placement, placeholders APPENDED after probe 3's; hooks tagged with
++// the themes the second tranche's real lines take (each a theme its pool already speaks, in about the pool's proportion).
++{
++  const TIE_ADD2 = { mutual_leverage: 17, peer_rivalry: 16, old_debt: 15, wary_alliance: 14, mentor_legacy: 10, genuine_respect: 5 };
++  const L2 = (i) => 'abcdefghijklmnopqrstuvwxyz'[i % 26] + 'qwxz'[Math.floor(i / 26)];
++  for (const [k, n] of Object.entries(TIE_ADD2)) {
++    const a = STRESS_ECONOMIC_EFFECTS[k]; const debt = k === 'old_debt';
++    const add = (f) => Array.from({ length: n }, (_, i) => ({ line: (r, s) => `${r.name} and ${s.name} PROBE second ${k} ${f} ${L2(i)}.`, colour: true }));
++    a.desc = pairProse('d', [...a.desc.lines, ...add('d')], null, debt);
++    a.tension = pairProse('t', [...a.tension.lines, ...add('t')], null, debt);
++  }
++  const HOOK_THEMES2 = {
++    other: ['hidden_debt', 'old_wound', 'betrayal', 'rivalry', 'forbidden_knowledge', 'outsider_suspicion', 'divided_loyalty', 'ambition', 'secret_identity', 'hidden_debt',
++      'old_wound', 'betrayal', 'rivalry', 'forbidden_knowledge', 'outsider_suspicion', 'divided_loyalty', 'ambition', 'secret_identity', 'hidden_debt', 'old_wound',
++      'ambition', 'rivalry', 'forbidden_knowledge', 'outsider_suspicion', 'divided_loyalty', 'vanished_person', 'looming_threat', 'hidden_debt', 'old_wound', 'secret_identity'],
++    economy: ['hidden_debt', 'rivalry', 'betrayal', 'ambition', 'scarcity_pressure', 'hidden_debt'],
++  };
++  for (const [k, themes] of Object.entries(HOOK_THEMES2)) themes.forEach((th, i) => { const tx = `PROBE second hook ${k} ${L2(i)}.`; tagProbe(tx, th); NPC_FACTION_LOYALTY[k].push(tx); });
++}
+diff --git a/src/domain/hookThemes.js b/src/domain/hookThemes.js
+index 26520dd87..add9e1920 100644
+--- a/src/domain/hookThemes.js
++++ b/src/domain/hookThemes.js
+@@ -347,7 +347,10 @@ export const THEME_OF_REL_ARCHETYPE = Object.freeze({
+ });
+ 
+ /** Built once at module init: folded key → theme. @type {Map<string, string>} */
++// DEPTH-1 PROBE: placeholders tagged with their own pool's themes, cycled in the pool's own order
++export const PROBE_THEMES = new Map();
+ const THEME_BY_KEY = new Map(AUTHORED_HOOK_THEMES.map(([template, theme]) => [hookThemeKey(template), theme]));
++export const tagProbe = (text, theme) => THEME_BY_KEY.set(hookThemeKey(text), theme);
+ 
+ /**
+  * The templates this module claims to tag, verbatim. Exported for the totality
