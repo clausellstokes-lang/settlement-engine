@@ -33,6 +33,9 @@ const HOMES = Object.freeze([
   'src/domain/facts/timberAtHand.js',
   'src/domain/facts/tradeAtWork.js',
   'src/domain/facts/sceneSupply.js',
+  // FIRSTPAINT-PIN (2026-11-20): factsOf.js's two cause leaves, pinned beside it in vite.config.js the same way.
+  'src/domain/facts/causeHouses.js',
+  'src/domain/facts/entrepot.js',
 ]);
 const TABLES = Object.freeze(['src/data/crisisDependence.js', 'src/data/institutionServices.js']);
 const FACTS_OF = 'src/domain/facts/factsOf.js';

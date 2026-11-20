@@ -1,4 +1,4 @@
-# PAGE-7's hand-back: THE TROUBLE (kept current at every push; last written 2026-11-20 15:37 UTC by `date -u`)
+# PAGE-7's hand-back: THE TROUBLE (kept current at every push; last written 2026-11-20 18:32 UTC by `date -u`)
 
 Read this, then `PAGE-5-HANDBACK.md` (§2 S6 row, §5 the ruled tables, §6 the crime/guild builder's notes),
 `briefs/BUILDER-RULES.md`, `briefs/CAUSES-DATA.md` (with its two addenda). PAGE-7 integrates; builders build.
@@ -13,7 +13,9 @@ Read this, then `PAGE-5-HANDBACK.md` (§2 S6 row, §5 the ruled tables, §6 the 
 | 1 sides table | MERGED by PAGE-5 (c5da1cfb3) | c5da1cfb3 | at the join: parity test with `sideArchetypes.js` |
 | 2 S6 | MERGED by PAGE-5 (464fc1b98) | 464fc1b98 | none |
 | 3 causes: lines | ALL EIGHT KINDS RULED by the chair: A+B (14:58, 14 reworded) at f8ee0ed50; crime/guild (15:18, 6 reworded) at 19e7f7932 | f8ee0ed50, 19e7f7932 | none |
-| 3 causes: data | BUILDING: one builder, branch `lane/page-7-2026-11-20-causes` (worktree /home/user/wt-causes) cut at 9e4ba24b6, brief CAUSES-DATA + addenda (fb7568fb6) | | read diff once, re-run red/green, censuses, merge onto the S6 tree, ONE line to the chair; then the projection through the built function (re-take the "before" at the merged tip) |
+| 3 causes: data | MERGED 01c2bbb99 (builder 558a7476e, 27b349d0e, 3bcd71ec6, c5541aa6f, d35204879; branch -wip on origin); red re-run 4/4 files failed, green 42/42, tests/lint 219/220, and the one red (ledgerCitationIntegrity) was NOT the base's: this clone lacked the ledger ref `review-fixes-2026-07-08` (the GREEN rule's fetch, which PAGE-7 skipped); fetched at 235efce1a, the test is 10/10 green, so tests/lint is 220/220 at 3411c9c83; wiring re-stamped 57c964ef3; lighting 3709->3713 files 3411c9c83 | 3411c9c83 | the chair may veto the presumptionClasses CLASS_DIMS edit and the 13 merchants sentences (merged before shown) |
+| 4 hooks | BUILT, NOT MERGED: 1263731e7 on `lane/page-7-2026-11-20-hooks-wip` (transport, pushed 19:5x UTC), from 3411c9c83, brief HOOKS-BUILD (32161f93f); read once. Bar on 150 a size: short 0/885, top city 14.0% / metropolis 14.7%, second <= 7.1%; mixed pick not taken (2.10x worst, 1.80x on the mixed key: sample noise). tests/lint 214/220: censuses (mine), poolDominance (the chair's door: external_threat timeline pool top1 0.81 > 0.67; two stale template rows), presumedThings (external 1-2 "war"), presumptionClasses (crime 7, external 6, guild 14, legitimacy 7), styleLaw ("a stranger"): rewordings proposed to the chair; legitimacy 9's late `seat outranked` (hamlet-36, metropolis-61) pinned, cure in rosterText.js, for the join | | the chair's rulings, then words applied, red/green, censuses, merge, "HOOKS <commit>" |
+| 5 lasting effects | AFTER the hooks: PDF only; drafted effects in TROUBLE-LINES-1; strike every effect needing a hideable fact; lines to the chair first | | |
 
 ## 3. Named survivors (not cured before the deploy, by the chair's ruling)
 - THE GUILDLESS GUILD QUARREL (the chair, 15:35): 1 of 215 guild_conflict troubles on 900 towns stands where
@@ -23,6 +25,8 @@ Read this, then `PAGE-5-HANDBACK.md` (§2 S6 row, §5 the ruled tables, §6 the 
   touched; the page prints `guild_conflict.withoutItsHouse` instead (CAUSES-DATA addendum 2); the trouble's sides stay.
 
 ## 4. Owed at the join (for the security reader and the display seat)
+- A WALKER FILE TOUCHED (accepted by the chair, 18:39, as the wiring of the granted atoms): `tests/lint/presumptionClasses.shared.mjs ::
+  CLASS_DIMS.outside` gains 'house' and 'entrepot'. The place lane and the people lane touch the same walker files: join with care.
 - THERE IS NO HIDEABLE LAYER (the chair, 17:32): `factLayers.js` is the table of READ layers (a leaf is one above the
   highest stratum it touches); `causeHouses` sits in layer 1. What makes the criminal houses hideable is
   `src/domain/people/cardVeil.js :: isHideableHouse`; the cause data's `hideable` list carries it, and the join tests the
@@ -36,4 +40,22 @@ Read this, then `PAGE-5-HANDBACK.md` (§2 S6 row, §5 the ruled tables, §6 the 
   toPublicSafe` drops `plotHooks` by default, 0 of 303; keep that arm): TROUBLE-LINES-2 numbering: crime_wave 2 (watch +
   organised crime), 9 (watch), 10 (organised crime), 11 (rival rings), 12 (law ≤ critical); guild_conflict 12;
   external_threat 8; succession_crisis 1, 2, 3, 8 (ruler, in doubt); legitimacy_crisis 9 (needs as in TROUBLE-LINES-2).
+  THE COUNT IS TWELVE, BY NAME (the chair asked, 20:03: eleven or twelve): crime_wave 5 (2, 9, 10, 11, 12) + guild_conflict 1
+  (12) + external_threat 1 (8) + succession_crisis 4 (1, 2, 3, 8) + legitimacy_crisis 1 (9) = 12. The chair's "eleven"
+  (16:35) is the same list miscounted, not a different one. The judgement lines, for the security reader: by
+  `cardVeil.js :: isHideableHouse` / `isVeiledPower` only the criminal, clandestine or illegal houses and the hidden or
+  criminal powers are hideable. So crime 2, 10, 11 and guild 12 (organised crime, rival rings) are certain. Crime 9 and
+  external 8 (the watch, guardPresence: a lawful force), crime 12 (the law band) and legitimacy 9 (seat outranked) are
+  counted because the causes' hideable rows count the force, the law and the outranking. Succession 1, 2, 3, 8 (the
+  ruler's kind) are counted only where in doubt. If the reader rules the ruler's kind public, the count is eight.
 - LASTING EFFECTS: printed in the PDF only; a later unit AFTER the hooks; every effect needing a hideable fact is struck.
+- FIRST PAINT, EVERY LANE (the chair's ruling, 19:59; DEPTH-3 found 2.1 MB put into first paint by an eager vocabulary
+  file reaching a lazy-pinned module through a new facts module; no lint test sees it; THIS lane granted `house` and
+  `entrepot` and added the tension-cause modules): before "PAGE-TROUBLE <commit>" (PAGE-7 or PAGE-10), ONE `npm run build`
+  at the tip, then `VERIFY_DIST=1` on `tests/build/vendorPdfLazy.test.js` and `tests/build/generationWorkerLazy.test.js`
+  through the mutex (`sh scripts/gate-mutex.sh --run -- ...`), and the message carries first paint's three figures beside
+  the line's (1,177,668 raw, 374,676 gzip, 314,472 Brotli at 8196e5712) and the worker's (2,617,934). A rise is cured on
+  the lane: an eager file declares an atom BY NAME; the code that answers it is imported only on the lazy side.
+- TEST RATCHET BEFORE EACH LANDING REQUEST (the chair, 20:13, every lane; PAGE-10 runs it): before "PAGE-TROUBLE <commit>", ONE `npm run test:ratchet` at the tip with the line's tip merged in (exclusive mutex, to a log), its verdict's rows read BY NAME against `docs/chair/2026-11-20/seventh/ci/RED-AT-LINE.tsv` on the chair's branch; a row not on that list is a stored figure or golden this lane's wording moved (named with its cause: the hooks' 350 golden-master rows in `currentTensions[].plotHooks`) or a real red, cured on the lane before the request. "HOOKS <commit>" needs only the named gates and the one build.
+- HAND-OVER (the chair, 19:59): PAGE-10 (session_019yED1STKYbiqSui8mWphr2) is seated beside PAGE-7. PAGE-7 merges the
+  hooks if its count allows; otherwise "PAGE-PART <commit>, HANDED OVER". By 420,000 PAGE-7 hands over in any case.
