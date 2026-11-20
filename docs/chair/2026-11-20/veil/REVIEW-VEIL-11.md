@@ -201,6 +201,27 @@ flipped alone under Show-all and under Hide-all: the twin's `applyVeil` output c
 after "Hide everything criminal" (1,296 of 1,296; 1,237 of 1,237). origin/master holds no `criminalVeilSwitch.js` and no
 `flipCriminalVeil` (read): no stored Show-all delta exists on production.
 
+## 3h. Read (2): the cold read of "DOORS" 4994ee371 (VEIL-DOORS-2; 212 `35c91700…`). HOLDS for what it hides.
+
+THE DIFF (212 by hunk): the event-type table on purpose (house 5, person 6, power 4, covert 2, stressor 2, withheld 1,
+target 23); `_gallery_doors_time` (never raises); THE LOG'S OWN NAMES: each house, person or power entry's `targetId` (to its
+last dot, underscores to spaces) and each payload's `institution` / `criminalInstitution` join the withheld names unless it
+is an open house's name, label or catalogue identity, a shown power's or a shown person's name or id; a stressor entry is
+withheld under a shut grouping for three crime keys; the 'withheld' class never served; a frozen share drops entries after
+`$veil.at` (an unreadable time drops), and a map member's name and tier come from its copy.
+RED AND GREEN, RE-RUN BY ME: `galleryDoors.pglite` and the walker on a scratch tree at cca49cb8d: 3 failed (the one-row read,
+the event table, snapshot mode), 16 passed; at 4994ee371: 19 of 19.
+MY ATTACKS (`d2a.probe.jsx`, `xd2`, 22 born towns, the default veil; a hidden house renamed "The Velvet Hand" with its
+catalogId kept, a second hideable house removed from the town): WITHHELD in 22 of 22 each: the renamed house by its old label
+and id, by its new name with the old id, by its new name and id, by "Velvet Hand's door" in a riot's free text; the removed
+house by its label, by its name in the summary under an OPAQUE id (`inst-7f3a9c`), by an attacker's free text. SERVED 22 of
+22: a SHORT FORM of a hidden house's name in a 'target' entry's free text ("Multiple crews rioted…" from "Multiple criminal
+factions"): the name search asks whole names; it is the DM's own wording, a residual for the owner's list. SERVED 22 of 22:
+a custom crisis "Gang war grips the settlement." under a shut grouping: the stress catalogue holds no other crime-worded key
+(read: `stressTypes.js`, `warStressorTypes.js`); a custom crisis's label is the DM's own and is served on the body as
+stored. The control "A new Bakery was established." (a house not shown) is withheld in 22 of 22: the loss the narrowing
+under measure is for.
+
 ## 4. THE RAW MEASURES, BOTH SHAPES, AT THIS TIP (`splitp.probe.jsx` on the new shape, 45 towns; `splitm` on master): every
 gallery read serves `economicState.compound.criminalEffective` (e.g. 82.84), `compound.militaryEffective` and
 `safetyProfile.safetyRatio` (45 of 45 new; 86 of 86 and 50 of 50 master), and `activeConditions[].severity` (32 of 45;

@@ -1,0 +1,8 @@
+     × THE ONE-ROW READ (the chair's condition (a), VEIL-DOORS-2): get_gallery_dossier takes its own row's tiles by the one tile rule, never every public row's; its row and tile columns equal the lis
+     × THE EVENT-TYPE TABLE ON PURPOSE (VEIL-DOORS-2, item 5; the surprise of 03:24 UTC): on a marked share a covert act (imposed OR exposed corruption), a crime stressor, a table note and every entr
+     × SNAPSHOT MODE (VEIL-DOORS-2, item 6): after a freeze the DM adds a criminal house and events, renames the town, shifts its tier and saves; the frozen share's chronicle, name, tier and time (do
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+ Test Files  1 failed | 1 passed (2)
+      Tests  3 failed | 16 passed (19)
+ Test Files  2 passed (2)
+      Tests  19 passed (19)

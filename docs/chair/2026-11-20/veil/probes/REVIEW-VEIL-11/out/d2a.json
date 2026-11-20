@@ -1,0 +1,53 @@
+{
+ "T": {
+  "rename: old label, old id": {
+   "n": 22,
+   "served": 0
+  },
+  "rename: new name, old id": {
+   "n": 22,
+   "served": 0
+  },
+  "rename: new name, new id": {
+   "n": 22,
+   "served": 0
+  },
+  "rename: short new name in free text (target class)": {
+   "n": 22,
+   "served": 0
+  },
+  "removed: label": {
+   "n": 22,
+   "served": 0
+  },
+  "removed: name only in summary, opaque id": {
+   "n": 22,
+   "served": 0
+  },
+  "removed: free text (target class)": {
+   "n": 22,
+   "served": 0
+  },
+  "short form of hidden name (target class)": {
+   "n": 22,
+   "served": 22
+  },
+  "custom stressor, crime-worded": {
+   "n": 22,
+   "served": 22
+  },
+  "custom stressor naming the hidden house loosely": {
+   "n": 22,
+   "served": 22
+  },
+  "control: ordinary house event": {
+   "n": 22,
+   "served": 0
+  }
+ },
+ "ex": {
+  "short form of hidden name (target class)": "rv11-d2-city-none-0-5: \"Multiple crews rioted in the lower town.\" (H shown false; birth name Multiple criminal factions, removed Front businesses)",
+  "custom stressor, crime-worded": "rv11-d2-city-none-0-5: \"Gang war grips the settlement.\" (H shown false; birth name Multiple criminal factions, removed Front businesses)",
+  "custom stressor naming the hidden house loosely": "rv11-d2-city-none-0-5: \"Multiple crackdown grips the settlement.\" (H shown false; birth name Multiple criminal factions, removed Front businesses)"
+ }
+}
