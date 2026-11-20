@@ -1,0 +1,2 @@
+import react from '/home/user/settlement-engine/node_modules/@vitejs/plugin-react/dist/index.js';
+export default { root: '/home/user/settlement-engine', plugins: [react()], test: { environment: 'node', include: ['/home/user/settlement-engine/docs/chair/2026-11-20/content/page/measures/B/render.b.jsx'], testTimeout: 3600000, pool: 'forks', fileParallelism: false, server: { deps: { inline: [/@testing-library\//] } } } };

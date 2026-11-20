@@ -1,0 +1,92 @@
+F4 — the machine's words on the people cards. 300 towns (thorp 50, hamlet 50, village 50, town 50, city 50, metropolis 50).
+
+cards: 9012
+
+§1 LABEL INVENTORY on the card (what each label prints, and its share of cards)
+  header dots (npcComponents.jsx:294 infDots on n.influence): ● 88.6% · ●●● 7.1% · ●● 4.3%
+  "Standing" (npcComponents.jsx:570, npcInteriorityRead.js:45 INFLUENCE_WORD on n.influence): marginal 88.6% · commanding 7.1% · established 4.3%
+  power line rank words (cardPowers.js:20 RANK_WORD, :22 UNRANKED_WORD): member 7131 · first 1167 · second 990 · third 859; cards with no power line 6.0%
+  tie header OWN (npcComponents.jsx:539 t.kind||'Tie'): cards with one 99.2%; kinds printed: Outstanding Debt 1495 · Mutual Leverage 1494 · Professional Rivalry 1387 · Mentor and Successor 1287 · Pragmatic Alliance 1176 · Genuine Respect 890 · Unresolved History 436 · Family Complication 401 · Silent Partnership 134 · Held Over Them 72 · The Patron No One Names 67 · Active Suppression 62 · Corrupt Arrangement 43
+  tie header "Called by" (npcComponents.jsx:539-540, cardTies.js:42): cards with one 59.9%; lines 8944; kinds after it: Outstanding Debt 1495 · Mutual Leverage 1494 · Professional Rivalry 1387 · Mentor and Successor 1287 · Pragmatic Alliance 1176 · Genuine Respect 890 · Unresolved History 436 · Family Complication 401 · Silent Partnership 134 · Held Over Them 72 · The Patron No One Names 67 · Active Suppression 62 · Corrupt Arrangement 43
+  "Disposition" (npcInteriorityRead.js:278-282: temperament, loyalty, fear): entries per card 1:5452 0:3560; words (top 12): wise 154 · gracious 140 · tenacious 139 · hospitable 136 · prudent 134 · level-headed 132 · fair-minded 130 · loyal 130 · protective 129 · astute 128 · forthright 127 · humble 127
+  trait chips (entityLinks.js:204 normalizeNpcTraits, before the card's want-filter): Goal 8996 · Flaw 6305 · Temperament 5452
+
+§2 THE WRITER OF n.influence (npcGenerator.js:59-76 powerBandOfRole/generateNPCPowerLevel, stored at :162): against the PRINTED role (a coincidence check only; §2b reads the role it was really drawn through)
+  equal 8440/9012 (93.7%); raised above the role band (castPowers.js:592-600 raiseToBand): 373; other: 199
+  by generatedAs: (birth)→low 7988 · (birth)→high 639 · (birth)→moderate 385
+  roles drawn at each band (top 10 each):
+    high: the garrison commander 109 · the company captain 75 · the guild archmage 69 · the watch captain 50 · the mine captain 47 · Elder 37 · the blade captain 31 · Lord Mayor 30 · Mayor 29 · the undercity boss 26
+    moderate: the dean 150 · the bishop 60 · the priest 50 · the chancellor 48 · the lord 30 · the lady 27 · the wizard 18 · the hedge wizard 1 · the watch sergeant 1
+    low: the miller 196 · the innkeeper 160 · the senior craft-guild master 146 · the apothecary 128 · the bowyer 127 · the master fishmonger 125 · the warehouse factor 117 · the brickmaker 111 · the master carpenter 111 · the master smith 110
+
+§2b THE BAND IS DRAWN FROM THE POOL ROW'S ROLE, NOT THE PRINTED ROLE: a house face is born through poolFor(title).role (representatives.js:502-503 -> npcGenerator.js:138 generateNPCPowerLevel(role)), then its role is overwritten with its title (representatives.js:513; castPowers.js:351).
+  house faces with a title row (poolMap.js:57 POOL_BY_TITLE): 8893; stored band == powerBandOfRole(pool role): 8701; raised above it (the dual hat / noble body, castPowers.js:437,668): 192
+  THE UNDERSCORE KEYWORDS (npcGenerator.js:65 'guild_master', :69 'council_member', 'wealthy_merchant') never match a pool role spelled with spaces: pool roles whose band would differ if '_' read ' ': Guild Master low->high · Council Member low->moderate · Thieves Guild Master low->high
+  cards affected (stored band equals the keyword band, which the spaced keyword would raise): 255
+  the pool roles behind every low band (top 25, cards):
+    Guild Master 221 · Miller 196 · Trade Factor 185 · Innkeeper 163 · Master Blacksmith 130 · Apothecary 128 · Bowyer 127 · Fishmonger 126 · Chief Magistrate 124 · Master Carpenter 123 · Horse Trader 118 · Warehouse Master 117 · Charter Master 112 · Bard/Chronicler 111 · Brickmaker 111 · Master Weaver 110 · Master Butcher 109 · Sawyer 109 · Cobbler 108 · Master Baker 107 · Master Potter 107 · Customs Inspector 103 · Tailor 103 · Cartographer 102 · Cooper 101
+
+§3 THE FIRST OF EACH POWER (membership rank 1: the card prints "first of <power>", cardPowers.js:60-66) and its Standing
+  first-of rows (a card first in two powers counts twice): 1167; Standing: commanding 516 (44.2%) · marginal 392 (33.6%) · established 259 (22.2%)
+  marginal, by size: thorp 52/52 100.0% | hamlet 52/59 88.1% | village 4/112 3.6% | town 48/209 23.0% | city 125/332 37.7% | metropolis 111/403 27.5%
+  marginal, by power category (powerStructure.factions[].category): economy 171/310 55.2% | government 98/228 43.0% | religious 25/208 12.0% | military 38/174 21.8% | noble 16/109 14.7% | magic 17/89 19.1% | other 22/44 50.0% | criminal 5/5 100.0%
+  marginal, governing power vs not: governing 96/300 32.0% | not 296/867 34.1%
+  marginal, by the power's own label (factions[].powerLabel): Minor 180/628 28.7% | Strong 21/159 13.2% | Significant 33/151 21.9% | Dominant 77/118 65.3% | Suppressed 81/111 73.0%
+  marginal, by the card's kind (institution.kind: a house face, a power's minted face): house 352/1061 33.2% | power 40/106 37.7%
+  powers with NO first: 5 of 1172 powers
+  marginal firsts: the role (and its keyword band) behind them, top 15:
+    64  the senior craft-guild master <- pool role Guild Master [band low; spaced high]
+    35  the senior guild master <- pool role Guild Master [band low; spaced high]
+    32  the watch commander <- pool role City Watch Chief [band low; spaced low]
+    24  Elder <- pool role Fisherman [band low; spaced low]
+    23  the innkeeper <- pool role Innkeeper [band low; spaced low]
+    21  Elder <- pool role Shepherd [band low; spaced low]
+    14  the bloc's speaker <- pool role (minted/none) [band ?; spaced ?]
+    12  the alchemist <- pool role Alchemist [band low; spaced low]
+    12  the master smith <- pool role Master Blacksmith [band low; spaced low]
+    12  the senior abbot <- pool role Abbot/Abbess [band low; spaced low]
+    11  the exchange master <- pool role Wealthiest Merchant [band low; spaced low]
+    9  the lord <- pool role (minted/none) [band ?; spaced ?]
+    9  the senior abbess <- pool role Abbot/Abbess [band low; spaced low]
+    8  the eldest <- pool role Elder [band low; spaced low]
+    7  Household Elder <- pool role Fisherman [band low; spaced low]
+    7  the lady <- pool role (minted/none) [band ?; spaced ?]
+    7  the network's head <- pool role Smuggler Chief [band low; spaced low]
+    7  the steward <- pool role House Steward [band low; spaced low]
+    5  Elder <- pool role Woodcutter [band low; spaced low]
+    5  the household elder <- pool role Elder [band low; spaced low]
+  marginal firsts that the spaced keywords would lift: 99/392; whose printed role (the title) holds a high/mid keyword the pool role lacks: 41/392
+  marginal firsts that are the seat's leader (role is the office: Elder, Headman, Household Elder, Eldest...): 96; their roles: Elder 58 · Household Elder 9 · the eldest 8 · Headman 7 · the steward 7 · the household elder 5 · the headman 2
+  marginal firsts: the power they are first of, top 15 (category):
+    70  Merchant Guilds (economy)
+    65  Craft Guilds (economy)
+    63  Elder Council (government)
+    35  Military/Guard (military)
+    14  The Independent Bloc (other)
+    13  The Trade Compact (economy)
+    11  Arcane Orders (magic)
+    10  The Merchant Bloc (economy)
+    9  Headman's Authority (government)
+    9  Household Council (government)
+    9  Noble Houses (noble)
+    9  The Commercial Circle (economy)
+    8  Free Elder Council (government)
+    8  The Holy Compact (religious)
+    7  Feudal Stewardship (government)
+
+§4 RELATIVE TO WHAT? The band is a keyword match on the pool row's role (or the seat's band, or the noble body's): no input reads the town, its size or the power. One printed role, one word, at every size:
+  roles: 196; roles seen with more than one band: 5 (Elder: low/high · Headman: low/high · the steward: low/high · the lady: low/moderate/high · the lord: moderate/low/high)
+  first-of rows: the first's Standing against the town's own ordering of its powers (rank of the power by factions[].power within its town, 1 = strongest):
+    power ranked 1 in its town: marginal 98/297 33.0%
+    power ranked 2 in its town: marginal 65/214 30.4%
+    power ranked 3 in its town: marginal 33/162 20.4%
+    power ranked 4+ in its town: marginal 196/494 39.7%
+  the strongest power in its town whose first reads "marginal", by size: 48/48 100.0% | 44/49 89.8% | 1/50 2.0% | 1/50 2.0% | 3/50 6.0% | 1/50 2.0%
+
+§5 EXAMPLES (first of the strongest power, Standing marginal), one per size where one exists:
+  hxd-thorp-0 Tailtiu Walsh: role "Elder", title "the boat-master", line "Elder, first of Elder Council", dots ●, Standing marginal; power Elder Council (government, Dominant, 100)
+  hxd-hamlet-0 Peter Bauer: role "Headman", title "the peat-reeve", line "Headman, first of Headman's Authority", dots ●, Standing marginal; power Headman's Authority (government, Strong, 56)
+  hxd-village-21 Iosif Karpov: role "the caravanserai keeper", title "the caravanserai keeper", line "first of Merchant Guilds", dots ●, Standing marginal; power Merchant Guilds (economy, Strong, 36)
+  hxd-town-7 Walid ibn Rushd: role "the castellan", title "the castellan", line "first of Military/Guard · member of Guild Council", dots ●, Standing marginal; power Military/Guard (military, Significant, 51)
+  hxd-city-23 Artem Kovalev: role "the senior craft-guild master", title "the senior craft-guild master", line "first of Merchant Guilds", dots ●, Standing marginal; power Merchant Guilds (economy, Minor, 25)
+  hxd-metropolis-43 Publicola Geminus: role "the castellan", title "the castellan", line "first of Military/Guard", dots ●, Standing marginal; power Military/Guard (military, Significant, 26)

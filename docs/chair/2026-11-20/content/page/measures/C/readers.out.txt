@@ -1,0 +1,126 @@
+
+n.influence (any object's .influence / influence: key): 44 lines
+  src/components/settlement/eventComposer/buildEvent.js:91  payload.influence  = influenceForImportance(imp);
+      -> STORED: an event composer sets it from importance
+  src/components/new/tabs/NPCsTab.jsx:63  const highCount = npcs.filter(n=>n.influence==='high').length;
+      -> DISPLAY: dots, Standing word, filter, sort, counts
+  src/components/new/tabs/NPCsTab.jsx:64  const modCount  = npcs.filter(n=>n.influence==='moderate').length;
+      -> DISPLAY: dots, Standing word, filter, sort, counts
+  src/components/new/SummaryTab.jsx:299  {v.influence==='high'&&<span style={{fontSize:chromeFontSize(FS.micro, isMobile),color:gold,fontWeight:700}}>●●
+      -> DISPLAY: dots, Standing word, filter, sort, counts
+  src/components/new/npcComponents.jsx:89  if (impFilter && impFilter !== 'all' && npc.influence !== impFilter) return false;
+      -> DISPLAY: dots, Standing word, filter, sort, counts
+  src/components/new/npcComponents.jsx:103  const ia = ord[a.influence]??2, ib = ord[b.influence]??2;
+      -> DISPLAY: dots, Standing word, filter, sort, counts
+  src/components/new/npcComponents.jsx:294  const infDots = npc.influence==='high' ? '●●●' : npc.influence==='moderate' ? '●●' : '●';
+      -> DISPLAY: dots, Standing word, filter, sort, counts
+  src/components/new/npcComponents.jsx:295  const infColor = npc.influence==='high' ? '#a0762a' : npc.influence==='moderate' ? '#6b5340' : '#9c8068';
+      -> DISPLAY: dots, Standing word, filter, sort, counts
+  src/generators/aiLayer.js:182  keyNPCs:      npcs.filter(n => n.influence === 'high').slice(0, 5).map(n => `${n.name} (${n.role})`),
+      -> BIRTH/AI: keyNPCs (high) handed to the narrative layer
+  src/generators/factionRoles.js:264  influence: def.importance === 'pillar' ? 'high' : def.importance === 'key' ? 'moderate' : 'low',
+      -> BIRTH writer: a synthesized structural leader, from importance
+  src/generators/npcGenerator.js:162  influence: powerLevel.level,
+      -> BIRTH writer: the band of the POOL role (generateNPCPowerLevel)
+  src/generators/npcStructure.js:552  const positionForStanding = (npc, position) => (npc?.influence === 'low' && typeof position === 'string' && LOW_ST
+      -> BIRTH reader: low -> the stable head row takes its LOW_STANDING_TWIN (structuralPosition prose)
+  src/generators/power/factionStanding.js:186  : 'Ahead of the merchant guilds in current influence: an unusual position they intend to hold.';
+      -> (not a card field: a faction's or event's own `influence`, or prose)
+  src/generators/steps/resolveCrisisCast.js:94  power: 1, influence: 'low', memberships,
+      -> BIRTH writer: a crisis cast face, low
+  src/generators/people/castPowers.js:594  const own = POWER_BANDS[/** @type {keyof typeof POWER_BANDS} */ (String(card?.influence || ''))];
+      -> BIRTH writer: raiseToBand, the dual hat / noble body / claimant raised to a band
+  src/generators/people/castPowers.js:598  card.influence = office.level;
+      -> BIRTH writer: raiseToBand, the dual hat / noble body / claimant raised to a band
+  src/data/npcData.js:1410  long: "Leverage money into influence: that's where security actually lives",
+      -> (not a card field: a faction's or event's own `influence`, or prose)
+  src/domain/npcProfile.js:582  influence: npc.influence ?? null,
+      -> STORED: copied into the npc profile
+  src/domain/dossier/dossierSearch.js:280  prominence: rankOf(INFLUENCE_RANK, npc.influence) * 1000 + asNumber(npc.power),
+      -> DISPLAY/ORDER: ranks or labels people by it
+  src/domain/dossier/plotHooks.js:527  npc.influence === 'high' ? 'High influence' : npc.influence === 'moderate' ? 'Moderate influence' : null,
+      -> DISPLAY/ORDER: ranks or labels people by it
+  src/domain/dossier/plotHooks.js:530  priority: npc.power || (npc.influence === 'high' ? 8 : 5),
+      -> DISPLAY/ORDER: ranks or labels people by it
+  src/domain/dossier/plotHooks.js:531  accent: npc.influence === 'high',
+      -> DISPLAY/ORDER: ranks or labels people by it
+  src/domain/worldPulse/supplyKernel.js:778  const v = factionPowerShare01(Number(f?.power ?? f?.strength ?? f?.influence ?? f?.legitimacy ?? 0)) ?? 0;
+      -> (not a card field: a faction's or event's own `influence`, or prose)
+  src/domain/worldPulse/supplyKernel.js:809  const v = factionPowerShare01(Number(f?.power ?? f?.strength ?? f?.influence ?? f?.legitimacy ?? 0)) ?? 0;
+      -> (not a card field: a faction's or event's own `influence`, or prose)
+  src/domain/worldPulse/warPoliticalLoop.js:44  return factionPowerShare01(Number(faction.power ?? faction.influence ?? faction.score ?? faction.weight)
+      -> (not a card field: a faction's or event's own `influence`, or prose)
+  src/domain/worldPulse/settlementPolitics.js:210  const raw = f?.power ?? f?.influence ?? f?.score ?? f?.weight;
+      -> (not a card field: a faction's or event's own `influence`, or prose)
+  src/domain/worldPulse/disposition.js:148  return factionPowerShare01(faction?.power ?? faction?.influence ?? faction?.score ?? faction?.weight) ?? 0.5
+      -> (not a card field: a faction's or event's own `influence`, or prose)
+  src/domain/worldPulse/successorNpc.js:57  influence: ousted.influence,
+      -> PULSE: a successor inherits the ousted card's band
+  src/domain/worldPulse/factionCompetition.js:146  const share = factionPowerShare01(faction.power ?? faction.influence ?? faction.score ?? faction.weig
+      -> (not a card field: a faction's or event's own `influence`, or prose)
+  src/domain/display/publicSafe.js:275  influence: npc.influence,
+      -> DISPLAY/PUBLIC: allow-listed onto the public projection
+  src/domain/display/warResolve.js:210  return INFLUENCE_RANK[String(n?.influence || '').toLowerCase()] || 0;
+      -> DISPLAY/ORDER: ranks or labels people by it
+  src/domain/display/npcInteriorityRead.js:290  const standing = (/** @type {Record<string, string>} */ (INFLUENCE_WORD))[String(n.influence)] || null;
+      -> DISPLAY: dots, Standing word, filter, sort, counts
+  src/domain/summary/settlementQuickGuide.js:1268  const influence = cleanText(npc.influence);
+      -> DISPLAY/ORDER: ranks or labels people by it
+  src/domain/summary/tonightAtTheTable.js:127  return (INFLUENCE_RANK[/** @type {keyof typeof INFLUENCE_RANK} */ (a.influence)] ?? 3) - (INFLUENCE_RANK[
+      -> DISPLAY/ORDER: ranks or labels people by it
+  src/domain/events/mutateEntities.js:507  influence:            event.payload?.influence,
+      -> STORED: an event payload writes it (DM edit / event)
+  src/domain/events/mutateEntities.js:594  influence: event.payload?.influence,
+      -> STORED: an event payload writes it (DM edit / event)
+  src/domain/entities/successors.js:135  if (typeof candidate.influence === 'number') score += Math.min(candidate.influence / 10, 10);
+      -> (not a card field: a faction's or event's own `influence`, or prose)
+  src/domain/entities/propagate.js:149  influence:      'public_support',
+      -> (not a card field: a faction's or event's own `influence`, or prose)
+  src/domain/entities/npcs.js:196  influence:               input.influence ?? null,
+      -> STORED: the entity record carries it
+  src/domain/entities/npcs.js:316  influence:  influence ?? npc?.influence,
+      -> STORED: the entity record carries it
+  src/utils/generateCampaignPDF.js:641  .filter(n => n.influence === 'high')
+      -> EXPORT: printed or filtered in an export
+  src/utils/generateWorldBook.js:137  npcs: npcs.map(n => ({ name: n?.name || '', role: n?.role || '', influence: player ? null : (n?.influence ?? null)
+      -> EXPORT: printed or filtered in an export
+  src/pdf/lib/viewModel.js:757  const inf = n?.influence;
+      -> EXPORT: printed or filtered in an export
+  src/pdf/lib/viewModel.js:801  influence: inf,
+      -> EXPORT: printed or filtered in an export
+
+the card's power number (npc|n|card|ousted|a|b).power: 17 lines
+  src/generators/power/relationshipArchetypes.js:13  powerDiff = factionA.power - factionB.power;
+      -> BIRTH reader of power: |powerDiff| >= 4 picks mentor_legacy/old_debt AND takes a _rng() (:42-43), so a moved band shifts the draw stream
+  src/generators/people/castPowers.js:597  const offset = Math.max(0, Math.min(office.span - 1, (Number(card.power) || own.floor) - own.floor));
+      -> BIRTH writer: raiseToBand, the dual hat / noble body / claimant raised to a band
+  src/generators/people/castPowers.js:599  card.power = office.floor + offset;
+      -> BIRTH writer: raiseToBand, the dual hat / noble body / claimant raised to a band
+  src/domain/npcProfile.js:581  power:     npc.power     ?? null,
+      -> STORED: copied into the npc profile
+  src/domain/dossier/dossierSearch.js:280  prominence: rankOf(INFLUENCE_RANK, npc.influence) * 1000 + asNumber(npc.power),
+      -> DISPLAY/ORDER: ranks or labels people by it
+  src/domain/dossier/plotHooks.js:530  priority: npc.power || (npc.influence === 'high' ? 8 : 5),
+      -> DISPLAY/ORDER: ranks or labels people by it
+  src/domain/worldPulse/successorNpc.js:56  power: ousted.power,
+      -> PULSE: a successor inherits the ousted card's band
+  src/domain/crisis/crisisCast.js:888  pool.sort((a, b) => (grade(a.n) - grade(b.n)) || (numOf(b.n.power) - numOf(a.n.power)) || (a.at - b.at));
+      -> DISPLAY/ORDER: ranks or labels people by it
+  src/domain/crisis/crisisCast.js:1002  return (am(a.n) - am(b.n)) || (numOf(b.n.power) - numOf(a.n.power)) || (a.at - b.at);
+      -> DISPLAY/ORDER: ranks or labels people by it
+  src/pdf/sections/NotableNPCs.jsx:75  const p = npc.power || 0;
+      -> EXPORT: printed or filtered in an export
+  src/pdf/sections/NotableNPCs.jsx:184  <Pill tone="gold">PWR {npc.power}</Pill>
+      -> EXPORT: printed or filtered in an export
+  src/pdf/sections/NotableNPCs.jsx:339  {npc.power}
+      -> EXPORT: printed or filtered in an export
+  src/pdf/sections/NotableNPCs.jsx:392  <Pill tone="gold">PWR {npc.power}</Pill>
+      -> EXPORT: printed or filtered in an export
+  src/pdf/sections/NPCQuickRef.jsx:78  <Pill tone={powerTone(npc.power)}>{npc.power || 0}</Pill>
+      -> EXPORT: printed or filtered in an export
+  src/pdf/lib/viewModel.js:270  power: npc.power || 0,
+      -> EXPORT: printed or filtered in an export
+  src/foundry/journalPages.js:211  npcs.map(n => `| ${esc(n.name)} | ${esc(n.title || '')} | ${n.factionLabel ? esc(n.factionLabel) : '—'} | ${esc(n.pow
+      -> EXPORT: printed or filtered in an export
+  src/foundry/journalPages.js:226  kv('Power', n.power),
+      -> EXPORT: printed or filtered in an export

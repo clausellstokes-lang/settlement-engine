@@ -1,0 +1,509 @@
+F5 — secrets or wants that contradict their holder. 300 towns (thorp 50, hamlet 50, village 50, town 50, city 50, metropolis 50).
+
+§0 THE SECRET POOLS (INFERRED from the code; sizes EXECUTED from the data):
+  npcData.js:843 NPC_CRIMINAL_SECRETS_BY_HOLDER: any {criminal 8, personal 8, political 6, magical 6, religious 1, family 5, historical 7, military 2, economic_betrayal 5, identity 5} · clergy {religious 5} · military {military 4} — drawn by factionLeaderSecret.js:71 for a face with no title lines; holder class from classOfRole(POOL role) (factionLeaderSecret.js:112); 'any' rows are admitted for EVERY class.
+  titleSecretsPresentations.js:2271 TITLE_SECRETS: 147 titles × 3 — drawn by the title alone (npcGenerator.js:120-122). No clergy, magistrate, or watch title but "the watch commander", "the watch sergeant", "the prison warden", "the gaoler", "the warden", "the castellan" has a row: the priest:no the bishop:no the dean:no the senior abbot:no the chief magistrate:no the magistrate:no the watch captain:no the watch commander:yes the watch sergeant:yes the garrison commander:no the militia captain:no the castellan:yes the prison warden:yes the gaoler:yes the warden:yes
+  stressInstitutionEffects.js:41 STRESS_INSTITUTION_EFFECTS: 15 crises; rareSecrets (data/rareSecrets.js:314) five families, keyed by holder words.
+
+§1 THE HOLDER GROUPS (by institution.title; the brief's CLERGY / JUSTICE / WATCH): titles, cards, the POOL role each is born through (poolMap.js:57) and its classOfRole (roleClass.js:77):
+  CLERGY: the dean 150 [High Priest -> clergy] · the bishop 60 [High Priest -> clergy] · the priest 50 [Priest -> clergy] · the senior abbot 74 [Abbot/Abbess -> clergy] · the abbot 7 [Abbot/Abbess -> clergy] · the grove elder 37 [Grove Elder -> other] · the almoner 16 [Almoner -> other] · the hospitaller 8 [Temple Healer -> clergy] · the archdruid 1 [Druid Elder -> arcane] · the hospital's master 74 [Temple Healer -> clergy] · the foundling-mother 14 [Foundling Mother -> other]
+  JUSTICE: the chief magistrate 100 [Chief Magistrate -> office] · the magistrate 24 [Chief Magistrate -> office]
+  WATCH: the watch commander 100 [City Watch Chief -> military] · the watch captain 50 [Guard Captain -> military] · the watch sergeant 1 [Watch Sergeant -> other] · the militia captain 19 [Guard Captain -> military] · the garrison commander 109 [Garrison Commander -> military] · the castellan 69 [Castellan -> other] · the warden 6 [Border Warden -> military] · the prison warden 83 [Prison Warden -> office] · the gaoler 6 [Prison Warden -> office]
+  (left out, arms for hire or not a keeper of the peace: the company captain, the blade captain, the lanista, the lodge master; the customs collector and toll-keeper are offices of the purse.)
+
+§2 THE GROUPS' SECRETS: share whose secret is another trade's wrong (the list above), by group and size; and the source pool of every secret:
+  CLERGY: cards 491; with a secret 491; ANOTHER TRADE'S WRONG 39/491 = 7.9%; venal secret 30.1%
+    by size: thorp 0/0 | hamlet 0/0 | village 5/51 | town 6/78 | city 13/141 | metropolis 15/221
+    which wrongs: 10 a market office: merchants they are supposed to serve (npcData.js criminal.any[5]) · 9 an inspector: inspection records (criminal.any[6]) · 7 a business-keeper: a legitimate business (criminal.any[7]) · 7 a seller of goods (economic_betrayal[1]) · 4 a promoter of ventures (economic_betrayal[0]) · 1 a business with a partner (economic_betrayal[4]) · 1 a business with competitors (economic_betrayal[3])
+    source pools: title:the hospital's master 74 · criminal.any.criminal 51 · criminal.any.personal 47 · criminal.any.political 38 · title:the grove elder 37 · criminal.any.magical 34 · criminal.clergy.religious 29 · criminal.any.family 28 · crimeKnowledge (npcGenerator.js:596-609) 24 · criminal.any.historical 24 · criminal.any.military 21 · title:the almoner 16 · criminal.any.identity 14 · title:the foundling-mother 14
+  JUSTICE: cards 124; with a secret 124; ANOTHER TRADE'S WRONG 18/124 = 14.5%; venal secret 19.4%
+    by size: thorp 0/0 | hamlet 0/0 | village 0/0 | town 3/24 | city 7/50 | metropolis 8/50
+    which wrongs: 5 a business with a partner (economic_betrayal[4]) · 4 a business-keeper: a legitimate business (criminal.any[7]) · 4 an inspector: inspection records (criminal.any[6]) · 2 a maker of a product (economic_betrayal[2]) · 2 a market office: merchants they are supposed to serve (npcData.js criminal.any[5]) · 1 a business with competitors (economic_betrayal[3])
+    source pools: criminal.any.personal 23 · criminal.any.political 19 · criminal.any.criminal 18 · criminal.any.magical 18 · criminal.any.identity 9 · criminal.any.economic_betrayal 8 · criminal.any.family 7 · criminal.any.historical 7 · criminal.any.military 5 · criminal.any.religious 4 · crimeKnowledge (npcGenerator.js:596-609) 3 · rare.deeds:arson 1 · rare.ties:highBirth 1 · stress:indebted 1
+  WATCH: cards 443; with a secret 443; ANOTHER TRADE'S WRONG 12/443 = 2.7%; venal secret 43.3%
+    by size: thorp 0/0 | hamlet 0/11 | village 1/9 | town 4/72 | city 6/165 | metropolis 1/186
+    which wrongs: 4 an inspector: inspection records (criminal.any[6]) · 2 a business-keeper: a legitimate business (criminal.any[7]) · 2 a maker of a product (economic_betrayal[2]) · 2 a market office: merchants they are supposed to serve (npcData.js criminal.any[5]) · 1 a business with a partner (economic_betrayal[4]) · 1 a business with competitors (economic_betrayal[3])
+    source pools: title:the watch commander 99 · title:the prison warden 80 · title:the castellan 69 · criminal.any.personal 25 · criminal.any.criminal 22 · criminal.any.magical 20 · criminal.any.political 20 · criminal.any.historical 15 · criminal.any.identity 14 · criminal.any.family 11 · criminal.any.religious 11 · crimeKnowledge (npcGenerator.js:596-609) 8 · criminal.military.military 8 · title:the warden 6
+
+§2b THE SAME LIST ON EVERY OTHER CARD (the base rate; for a trade keeper some of these are its own trade): 121/7954 = 1.5%; their categories: economy 50 · other 30 · criminal 14 · military 13 · magic 8 · government 6
+§2c CLERGY / JUSTICE / WATCH drawing the soldier's past (criminal.any.military, npcData.js "Was captured and released...", "...decisive victory...won through treachery"): CLERGY 21 · JUSTICE 5 · WATCH 5
+
+§3 THE CLASSIFICATION TABLES (explicit):
+  WANT (goal.intent.short; the card prints goal.short as its first want): PRINCIPLE = PERSONALITY/duty|kindness|conviction (goalFamilies.js:679,693,735); LAW = ALLEGIANCE/warrant|suspicion (goalFamilies.js:973,992); VENAL = PERSONALITY/greed|hunger_for_status|forbidden_patron, ALLEGIANCE/serve_*|keep_*|front_keep; NEUTRAL = every other (RANK, POWER, INSTITUTION, SUPPLY, TIES, the rest of PERSONALITY and ALLEGIANCE, UNCANNY, CRISIS).
+  SECRET VENAL = the secret's words match /embezzl|fencing|payroll|brib|protection scheme|for a fee|contraband|skim|selling|\bsells\b|betting against|exploitative labour|suppress a finding|been paid|paid to|is paid|for a share|pocket|keeping back|on the side|smuggl|overcharg|charges the families|cut of|kickback|monthly payment|for a purse|who pays? for it|families can pay|taking offerings|give generously|for money|for gold|for coin/i (crime for gain: money taken, goods moved, records sold or forged). Every distinct VENAL secret drawn on the 300 is listed in §6.
+  TEMPERAMENT OF PRINCIPLE (personality.dominant, the "Temperament" chip, entityLinks.js:214): PERSONALITY_CLUSTER_OF (goalFamilies.js:125) duty + kindness, and pious, idealistic, zealous: honest, brave, loyal, principled, protective, steadfast, incorruptible, forthright, candid, stalwart, dependable, conscientious, plain-dealing, fair-minded, equitable, tenacious, compassionate, generous, humble, optimistic, merciful, magnanimous, warm-hearted, gracious, courteous, good-humoured, hospitable, patient, pious, zealous, idealistic
+
+§4 WANT x SECRET on one card (printed want = short):
+  CLERGY  cards 491; venal secret 30.1%; want PRINCIPLE 9, LAW 0; PRINCIPLE/LAW want + VENAL secret: 4 (0.8% of the cards; 44.4% of the principled wants); long-vantage PRINCIPLE/LAW + venal: 4
+  JUSTICE cards 124; venal secret 19.4%; want PRINCIPLE 8, LAW 0; PRINCIPLE/LAW want + VENAL secret: 0 (0.0% of the cards; 0.0% of the principled wants); long-vantage PRINCIPLE/LAW + venal: 1
+  WATCH   cards 443; venal secret 43.3%; want PRINCIPLE 7, LAW 236; PRINCIPLE/LAW want + VENAL secret: 128 (28.9% of the cards; 52.7% of the principled wants); long-vantage PRINCIPLE/LAW + venal: 15
+  OTHER   cards 7954; venal secret 27.9%; want PRINCIPLE 164, LAW 0; PRINCIPLE/LAW want + VENAL secret: 38 (0.5% of the cards; 23.2% of the principled wants); long-vantage PRINCIPLE/LAW + venal: 64
+  ALL cards: 170/9012 = 1.9%; by size: thorp 2/65 | hamlet 0/170 | village 2/387 | town 10/1196 | city 67/3002 | metropolis 89/4192
+  examples (one per want class):
+    hxd-town-46 Emilia Bykov (the dean): Wants "Stand up for someone who cannot stand up for themselves." | Secret "The goods they sell as locally produced are sourced from somewhere with exploitative labour practices"
+    hxd-town-14 Fuad ibn Ahmed (the watch captain): Wants "Get enough on Umayma al-Suri to hold them, and make it stick." | Secret "Secretly directs a fencing operation through a trusted intermediary"
+
+§5 TEMPERAMENT x SECRET: a temperament of principle printed beside a venal secret
+  CLERGY  cards with a temperament 312; principled temperament + venal secret 68 (21.8%); words: tenacious 5 · hospitable 4 · loyal 4 · plain-dealing 4 · stalwart 4 · brave 3 · generous 3 · good-humoured 3 · humble 3 · magnanimous 3 · merciful 3 · principled 3 · candid 2 · compassionate 2 · dependable 2 · forthright 2 · gracious 2 · honest 2 · incorruptible 2 · optimistic 2 · patient 2 · steadfast 2 · conscientious 1 · courteous 1 · equitable 1 · fair-minded 1 · pious 1 · protective 1
+  JUSTICE cards with a temperament 85; principled temperament + venal secret 8 (9.4%); words: equitable 4 · courteous 1 · fair-minded 1 · stalwart 1 · warm-hearted 1
+  WATCH   cards with a temperament 288; principled temperament + venal secret 72 (25.0%); words: plain-dealing 6 · magnanimous 5 · principled 5 · warm-hearted 5 · dependable 4 · merciful 4 · patient 4 · tenacious 4 · conscientious 3 · equitable 3 · generous 3 · hospitable 3 · humble 3 · stalwart 3 · steadfast 3 · brave 2 · forthright 2 · gracious 2 · loyal 2 · optimistic 2 · protective 2 · compassionate 1 · honest 1
+  OTHER   cards with a temperament 4767; principled temperament + venal secret 866 (18.2%); words: magnanimous 37 · pious 37 · stalwart 37 · protective 36 · warm-hearted 35 · dependable 34 · fair-minded 34 · forthright 34 · gracious 33 · generous 32 · incorruptible 32 · honest 31 · optimistic 31 · hospitable 30 · brave 29 · compassionate 29 · principled 29 · conscientious 28 · humble 28 · patient 28 · candid 27 · equitable 27 · steadfast 27 · tenacious 27 · courteous 26 · plain-dealing 24 · merciful 23 · good-humoured 21 · loyal 20
+  ALL cards: 1014/5452; of which the existing guard (npcData.js:2548 SECRETS_DENIED_BY_TEMPERAMENT: incorruptible, honest, plain-dealing, candid, forthright) names the word: 169
+  "principled" + venal secret: 37; e.g. hxd-hamlet-41 Isamu Wang (the innkeeper): "Reads the letters guests leave in their rooms, and sells what is in them to whoever asks the right way"
+
+§6 EVERY DISTINCT SECRET DRAWN BY A CLERGY / JUSTICE / WATCH CARD, with its source pool, VENAL flag and other-trade flag (count):
+  CLERGY	30	VENAL	-	title:the hospital's master	Lets families who give generously jump the line for beds while the poor wait in the hall
+  CLERGY	24	VENAL	-	title:the hospital's master	Has been selling the hospital's medicines to an apothecary and treating the poor with cheaper ones
+  CLERGY	20	-	-	title:the hospital's master	Signed a death as fever that was poison, at the request of the dead man's heir
+  CLERGY	14	-	-	criminal.any.military	Was captured and released under terms they have never disclosed
+  CLERGY	13	-	-	title:the grove elder	Gave the grove's blessing to a marriage they knew was forced
+  CLERGY	13	-	-	title:the grove elder	Knows that the oldest tree in the grove is dying and has hidden it from everyone
+  CLERGY	11	-	-	criminal.any.magical	Has been using magic to alter memories of specific events
+  CLERGY	11	VENAL	-	title:the grove elder	Has been taking offerings left at the grove and selling them in the market
+  CLERGY	10	-	-	title:the foundling-mother	Knows who left one of the foundlings at the door, and it was someone important
+  CLERGY	10	VENAL	OTHER-TRADE	criminal.any.criminal	Runs a protection scheme targeting the very merchants they're supposed to serve
+  CLERGY	9	VENAL	OTHER-TRADE	criminal.any.criminal	Has been falsifying inspection records for a fee
+  CLERGY	9	VENAL	-	criminal.any.criminal	Secretly directs a fencing operation through a trusted intermediary
+  CLERGY	9	-	-	criminal.clergy.religious	Knows their religious order was founded on a historical lie
+  CLERGY	9	-	-	criminal.clergy.religious	Has been systematically falsifying miracle reports for decades
+  CLERGY	8	-	-	criminal.any.political	Knows the settlement's most important legal document was fraudulently created
+  CLERGY	8	-	-	criminal.any.personal	Has a second family elsewhere that neither family knows about
+  CLERGY	8	-	-	criminal.any.family	One of their children is not theirs biologically, and they know it
+  CLERGY	8	-	-	criminal.any.personal	Suffering from an illness they expect to kill them within two years
+  CLERGY	8	-	-	criminal.any.personal	Has been slowly poisoning a rival with something that looks like natural illness
+  CLERGY	8	-	-	criminal.any.political	Has agreed to hand over authority to an external power in exchange for personal safety
+  CLERGY	7	-	-	criminal.any.historical	The person who raised them was not their parent, and that parent is someone significant
+  CLERGY	7	-	-	criminal.any.political	Is the illegitimate heir to a title currently held by someone who doesn't know they exist
+  CLERGY	7	VENAL	OTHER-TRADE	criminal.any.economic_betrayal	The goods they sell as locally produced are sourced from somewhere with exploitative labour practices
+  CLERGY	7	-	-	criminal.any.historical	Was present at (and did nothing to prevent) an atrocity that is now history
+  CLERGY	7	-	-	criminal.any.military	Knows that the decisive victory everyone celebrates was won through treachery, not skill
+  CLERGY	7	-	-	criminal.any.family	Has been sending money to a disowned family member in secret for years
+  CLERGY	7	-	-	title:the almoner	Gives alms only to those who agree to report on their neighbours
+  CLERGY	7	-	-	criminal.any.magical	Knows the location of a sealed magical site that others have been searching for
+  CLERGY	7	VENAL	OTHER-TRADE	criminal.any.criminal	Their legitimate business is a front for moving contraband
+  CLERGY	6	VENAL	-	criminal.any.political	Has been feeding strategic intelligence to outsiders who pay for it
+  CLERGY	6	-	-	criminal.any.personal	Their celebrated achievement was stolen. They took credit for another's work
+  CLERGY	6	-	-	criminal.any.criminal	Ordered what was officially ruled an accident, and sleeps fine about it
+  CLERGY	6	-	-	criminal.any.personal	Was directly responsible for a death that was ruled an accident
+  CLERGY	6	-	-	criminal.any.magical	Is under a compulsion placed by someone who is now dead, and it's getting harder to resist
+  CLERGY	6	VENAL	-	criminal.any.criminal	Has been embezzling from the organisation they oversee for three years
+  CLERGY	6	-	-	criminal.any.magical	Possesses a magical ability they've hidden for their entire career
+  CLERGY	5	-	-	criminal.any.family	Knows their celebrated family history is fabricated, and helped fabricate it
+  CLERGY	5	-	-	criminal.any.political	Their appointment was secured through forged credentials
+  CLERGY	5	-	-	criminal.any.family	Owes a life-debt to someone whose interests directly conflict with their current role
+  CLERGY	5	-	-	criminal.clergy.religious	Lost their faith completely but maintains the role. It's just a job now
+  CLERGY	5	VENAL	-	title:the almoner	Has been keeping back part of the alms and spending it on their own comforts
+  CLERGY	5	-	-	criminal.any.personal	Deeply in debt to a creditor who owns the debt as leverage, not income
+  CLERGY	4	VENAL	OTHER-TRADE	criminal.any.economic_betrayal	Has been quietly betting against the ventures they talk their neighbours into, and profiting when they fail
+  CLERGY	4	-	-	criminal.any.religious	Secretly receives what they believe are genuine divine visions, which terrifies them
+  CLERGY	4	VENAL	-	criminal.any.personal	Has been funding a forbidden relationship with embezzled money
+  CLERGY	4	VENAL	-	title:the foundling-mother	Has been keeping back part of the home's gifts and feeding the children less
+  CLERGY	4	VENAL	-	title:the hospitaller	Lets the hospital's beds to travellers who are not sick, for coin, on the quiet nights
+  CLERGY	4	-	-	title:the almoner	Turned away a sick family who later died, because they had nothing to give
+  CLERGY	4	-	-	criminal.any.political	Has been delaying vital information from reaching the decision-makers
+  CLERGY	4	-	-	criminal.any.identity	Is a member of a group that faces serious persecution, and passes for something else entirely
+  CLERGY	4	-	-	criminal.any.magical	Made a binding pact with an entity they now cannot name without consequence
+  CLERGY	4	-	-	criminal.clergy.religious	Has been covering for a colleague's heretical activities out of personal loyalty
+  CLERGY	3	-	-	criminal.any.historical	Was the informant whose report triggered a purge that destroyed innocent lives
+  CLERGY	3	-	-	criminal.any.identity	Has been corresponding with someone they are publicly required to treat as an enemy
+  CLERGY	3	-	-	criminal.any.historical	Survived something everyone believes killed them, under a different name
+  CLERGY	3	-	-	criminal.any.family	Has been protecting a sibling's crime for years (a serious one)
+  CLERGY	3	-	-	criminal.any.identity	Is not who their documents say they are. The real person died years ago and they took the identity
+  CLERGY	3	VENAL	-	criminal.any.criminal	Has been systematically bribing multiple officials for preferential treatment
+  CLERGY	3	VENAL	-	criminal.any.criminal (reworded, npcGenerator.js:1023)	On the payroll of the local underworld as a silent informant
+  CLERGY	2	-	-	stress:plague_onset	Falsified the initial case count to prevent panic, and now the actual count is far higher than the official record
+  CLERGY	2	-	-	stress:monster_pressure	Their private property (inherited land beyond the last fields) is part of the territory being contested. They've been subtly steering the hu
+  CLERGY	2	-	-	criminal.any.historical	Possesses an original copy of a document that was officially declared destroyed
+  CLERGY	2	-	-	criminal.any.historical	Has been maintaining a cover-up of a past institutional failure that cost lives
+  CLERGY	2	-	-	title:the hospitaller	Takes a share of what the dying leave to the hospital before it is written down
+  CLERGY	2	-	-	criminal.clergy.religious	Possesses a relic that was officially declared destroyed, and kept it because they couldn't face destroying something real
+  CLERGY	2	-	-	criminal.any.personal	Their identity is fabricated. They fled a different life entirely
+  CLERGY	2	-	-	criminal.any.identity	Their celebrated origin story is a fabrication they created to escape an intolerable past
+  CLERGY	2	-	-	criminal.any.identity	Lives a second life under a different name in another part of the settlement or a nearby town
+  CLERGY	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Has been reading Radmila Egorov's correspondence through an intermediary. Nothing damaging yet. But they keep looking
+  CLERGY	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Knows something about Zheng Liu that Zheng Liu believes no one else knows, and has been deciding for months whether to use it
+  CLERGY	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Knows something about Sakura Liang that Sakura Liang believes no one else knows, and has been deciding for months whether to use it
+  CLERGY	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Knows something about Verdandi Finsson that Verdandi Finsson believes no one else knows, and has been deciding for months whether to use it
+  CLERGY	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Knows something about Jorunn Ragnarsson that Jorunn Ragnarsson believes no one else knows, and has been deciding for months whether to use i
+  CLERGY	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Owes Peter Köhler a debt from before either of them held their current position: one that Peter Köhler has never formally called in
+  CLERGY	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Has been reading Romanos Alexios's correspondence through an intermediary. Nothing damaging yet. But they keep looking
+  CLERGY	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Has been reading Regünjid Qatagin's correspondence through an intermediary. Nothing damaging yet. But they keep looking
+  CLERGY	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Was present when Tailtiu Nolan did something they've never accounted for publicly. Neither has acknowledged the other was there
+  CLERGY	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Has been reading Olga Sidorov's correspondence through an intermediary. Nothing damaging yet. But they keep looking
+  CLERGY	1	-	-	title:the archdruid	Turned a sick child away from the rites because the child's family had quarrelled with the circle
+  CLERGY	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Knows something about Chino-Ujin Jadaran that Chino-Ujin Jadaran believes no one else knows, and has been deciding for months whether to use
+  CLERGY	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Was present when Vranas Chrysoberges did something they've never accounted for publicly. Neither has acknowledged the other was there
+  CLERGY	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Was present when Yaocihuatl Kab did something they've never accounted for publicly. Neither has acknowledged the other was there
+  CLERGY	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Knows something about Njal Bjornsson that Njal Bjornsson believes no one else knows, and has been deciding for months whether to use it
+  CLERGY	1	-	-	stress:indebted (reworded)	Sold privileged commercial information to a foreign merchant house to cover an interest payment (information that the Religious Authorities 
+  CLERGY	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Knows something about Solongo Olqunu'ud that Solongo Olqunu'ud believes no one else knows, and has been deciding for months whether to use i
+  CLERGY	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Owes Noriko Liang a debt from before either of them held their current position: one that Noriko Liang has never formally called in
+  CLERGY	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Knows something about Angelina Chrysoberges that Angelina Chrysoberges believes no one else knows, and has been deciding for months whether 
+  CLERGY	1	VENAL	-	criminal.any.criminal (reworded)	Runs a protection scheme targeting the very households they're supposed to serve
+  CLERGY	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Was present when Night Itza did something they've never accounted for publicly. Neither has acknowledged the other was there
+  CLERGY	1	-	-	stress:succession_void	Knows the deceased's actual wishes regarding succession. They were told privately and have chosen not to share them
+  CLERGY	1	-	-	title:the hospitaller	Kept treating a fever with a remedy they had been warned against, and lost three patients in a week
+  CLERGY	1	-	-	stress:religious_conversion	Holds the deeds and endowments of the old religious institution, which they were meant to transfer, and has been quietly keeping them in the
+  CLERGY	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Owes Statius Brutus a debt from before either of them held their current position: one that Statius Brutus has never formally called in
+  CLERGY	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Was present when Sabine Naumann did something they've never accounted for publicly. Neither has acknowledged the other was there
+  CLERGY	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Was present when Olivera Novikov did something they've never accounted for publicly. Neither has acknowledged the other was there
+  CLERGY	1	-	-	rare.deeds:counterfeit	Clips and re-casts coin in a back room, a little at a time
+  CLERGY	1	-	-	stress:wartime	Took a private share of the war contracts that made the settlement rich, routed through a merchant house that does not exist on paper
+  CLERGY	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Owes Labeo Moderatus a debt from before either of them held their current position: one that Labeo Moderatus has never formally called in
+  CLERGY	1	-	OTHER-TRADE	criminal.any.economic_betrayal	Has information about a competitor that would ruin them, obtained through clearly illegal means
+  CLERGY	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Has been reading Mykola Babić's correspondence through an intermediary. Nothing damaging yet. But they keep looking
+  CLERGY	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Has been reading Gratidia Falco's correspondence through an intermediary. Nothing damaging yet. But they keep looking
+  CLERGY	1	-	OTHER-TRADE	criminal.any.economic_betrayal	Their business partner died of natural causes that weren't entirely natural
+  CLERGY	1	-	-	rare.ties:dragonBlood	Carries a dragon's blood, and it has begun to show
+  CLERGY	1	-	-	rare.ties:lostChild	Gave up a child at birth, and has watched for its face in every stranger since
+  CLERGY	1	VENAL	-	criminal.any.criminal	On the payroll of the thieves' guild as a silent informant
+  JUSTICE	8	-	-	criminal.any.magical	Is under a compulsion placed by someone who is now dead, and it's getting harder to resist
+  JUSTICE	5	VENAL	-	criminal.any.criminal	Secretly directs a fencing operation through a trusted intermediary
+  JUSTICE	5	-	OTHER-TRADE	criminal.any.economic_betrayal	Their business partner died of natural causes that weren't entirely natural
+  JUSTICE	5	-	-	criminal.any.personal	Their identity is fabricated. They fled a different life entirely
+  JUSTICE	4	VENAL	OTHER-TRADE	criminal.any.criminal	Has been falsifying inspection records for a fee
+  JUSTICE	4	-	-	criminal.any.religious	Secretly receives what they believe are genuine divine visions, which terrifies them
+  JUSTICE	4	-	-	criminal.any.political	Has agreed to hand over authority to an external power in exchange for personal safety
+  JUSTICE	4	-	-	criminal.any.personal	Has a second family elsewhere that neither family knows about
+  JUSTICE	4	VENAL	OTHER-TRADE	criminal.any.criminal	Their legitimate business is a front for moving contraband
+  JUSTICE	4	VENAL	-	criminal.any.political	Has been feeding strategic intelligence to outsiders who pay for it
+  JUSTICE	4	-	-	criminal.any.personal	Has been slowly poisoning a rival with something that looks like natural illness
+  JUSTICE	3	-	-	criminal.any.political	Has been delaying vital information from reaching the decision-makers
+  JUSTICE	3	-	-	criminal.any.political	Their appointment was secured through forged credentials
+  JUSTICE	3	-	-	criminal.any.personal	Was directly responsible for a death that was ruled an accident
+  JUSTICE	3	-	-	criminal.any.personal	Suffering from an illness they expect to kill them within two years
+  JUSTICE	3	-	-	criminal.any.military	Knows that the decisive victory everyone celebrates was won through treachery, not skill
+  JUSTICE	3	-	-	criminal.any.political	Knows the settlement's most important legal document was fraudulently created
+  JUSTICE	3	-	-	criminal.any.identity	Is a member of a group that faces serious persecution, and passes for something else entirely
+  JUSTICE	3	-	-	criminal.any.magical	Knows the location of a sealed magical site that others have been searching for
+  JUSTICE	3	-	-	criminal.any.magical	Possesses a magical ability they've hidden for their entire career
+  JUSTICE	2	-	-	criminal.any.identity	Lives a second life under a different name in another part of the settlement or a nearby town
+  JUSTICE	2	-	-	criminal.any.political	Is the illegitimate heir to a title currently held by someone who doesn't know they exist
+  JUSTICE	2	-	-	criminal.any.family	Knows their celebrated family history is fabricated, and helped fabricate it
+  JUSTICE	2	-	-	criminal.any.identity	Their celebrated origin story is a fabrication they created to escape an intolerable past
+  JUSTICE	2	VENAL	OTHER-TRADE	criminal.any.economic_betrayal	Has been paying a health official to suppress a finding about their product
+  JUSTICE	2	VENAL	OTHER-TRADE	criminal.any.criminal	Runs a protection scheme targeting the very merchants they're supposed to serve
+  JUSTICE	2	-	-	criminal.any.family	Has been protecting a sibling's crime for years (a serious one)
+  JUSTICE	2	-	-	criminal.any.historical	Has been maintaining a cover-up of a past institutional failure that cost lives
+  JUSTICE	2	-	-	criminal.any.family	Has been sending money to a disowned family member in secret for years
+  JUSTICE	2	-	-	criminal.any.historical	Possesses an original copy of a document that was officially declared destroyed
+  JUSTICE	2	-	-	criminal.any.military	Was captured and released under terms they have never disclosed
+  JUSTICE	2	VENAL	-	criminal.any.personal	Has been funding a forbidden relationship with embezzled money
+  JUSTICE	2	-	-	criminal.any.criminal	Ordered what was officially ruled an accident, and sleeps fine about it
+  JUSTICE	2	-	-	criminal.any.magical	Made a binding pact with an entity they now cannot name without consequence
+  JUSTICE	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Was present when Markos Nikerites did something they've never accounted for publicly. Neither has acknowledged the other was there
+  JUSTICE	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Has been reading Opimius Geta's correspondence through an intermediary. Nothing damaging yet. But they keep looking
+  JUSTICE	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Knows something about Secunda Flavius that Secunda Flavius believes no one else knows, and has been deciding for months whether to use it
+  JUSTICE	1	-	-	criminal.any.identity	Has been corresponding with someone they are publicly required to treat as an enemy
+  JUSTICE	1	-	-	rare.ties:highBirth	Is of far higher birth than they let on, and left it behind on purpose
+  JUSTICE	1	-	-	rare.deeds:arson	Set the fire that everyone here calls an accident
+  JUSTICE	1	-	-	criminal.any.historical	Was the informant whose report triggered a purge that destroyed innocent lives
+  JUSTICE	1	-	-	criminal.any.family	Owes a life-debt to someone whose interests directly conflict with their current role
+  JUSTICE	1	-	-	criminal.any.personal	Their celebrated achievement was stolen. They took credit for another's work
+  JUSTICE	1	-	-	criminal.any.magical	Has been studying a forbidden school of magic under a false research pretext
+  JUSTICE	1	VENAL	-	criminal.any.criminal	On the payroll of the thieves' guild as a silent informant
+  JUSTICE	1	-	-	criminal.any.historical	Was present at (and did nothing to prevent) an atrocity that is now history
+  JUSTICE	1	-	-	criminal.any.identity	Is not who their documents say they are. The real person died years ago and they took the identity
+  JUSTICE	1	-	-	stress:indebted	The debt was not authorised by the council. They signed alone under pressure and have been hiding it for two years
+  JUSTICE	1	-	-	criminal.any.personal	Deeply in debt to a creditor who owns the debt as leverage, not income
+  JUSTICE	1	-	-	criminal.any.historical	The person who raised them was not their parent, and that parent is someone significant
+  JUSTICE	1	-	OTHER-TRADE	criminal.any.economic_betrayal	Has information about a competitor that would ruin them, obtained through clearly illegal means
+  JUSTICE	1	-	-	criminal.any.magical	Has been using magic to alter memories of specific events
+  WATCH	36	-	-	title:the watch commander	Has been arresting the people who complain the loudest about the watch, on charges that do not hold
+  WATCH	33	VENAL	-	title:the watch commander	Takes a monthly payment to keep patrols away from certain streets on certain nights
+  WATCH	31	VENAL	-	title:the prison warden	Sells better food, letters and visits to the prisoners whose families can pay, and lets the rest go hungry
+  WATCH	30	-	-	title:the watch commander	Lied about the death of a prisoner who died in the cells after a beating ordered from above
+  WATCH	29	VENAL	-	title:the prison warden	Keeps a prisoner in the cells long after their sentence ended, at the request of someone who pays for it
+  WATCH	26	-	-	title:the castellan	Ran from a fight years ago and let another officer take the blame, and was promoted for it
+  WATCH	25	VENAL	-	title:the castellan	Pocketed the money that was granted for the wall repairs, and buried the survey that said where they were needed
+  WATCH	20	VENAL	-	title:the prison warden	Let a prisoner walk out one night for a purse of gold and reported an escape the next morning
+  WATCH	18	VENAL	-	title:the castellan	Has been selling stores from the citadel's armoury and writing them off as rusted and broken
+  WATCH	11	-	-	criminal.any.religious	Secretly receives what they believe are genuine divine visions, which terrifies them
+  WATCH	7	-	-	criminal.any.personal	Their celebrated achievement was stolen. They took credit for another's work
+  WATCH	6	-	-	criminal.any.magical	Knows the location of a sealed magical site that others have been searching for
+  WATCH	5	-	-	criminal.any.political	Knows the settlement's most important legal document was fraudulently created
+  WATCH	5	-	-	criminal.any.identity	Their celebrated origin story is a fabrication they created to escape an intolerable past
+  WATCH	5	-	-	criminal.any.magical	Has been studying a forbidden school of magic under a false research pretext
+  WATCH	5	-	-	criminal.any.historical	Was the informant whose report triggered a purge that destroyed innocent lives
+  WATCH	4	-	-	criminal.any.magical	Possesses a magical ability they've hidden for their entire career
+  WATCH	4	-	-	title:the warden	Has been reporting fewer patrols than were made and keeping the pay for the rest
+  WATCH	4	-	-	criminal.any.political	Their appointment was secured through forged credentials
+  WATCH	4	VENAL	-	criminal.any.criminal	Secretly directs a fencing operation through a trusted intermediary
+  WATCH	4	-	-	criminal.any.personal	Has been slowly poisoning a rival with something that looks like natural illness
+  WATCH	4	VENAL	OTHER-TRADE	criminal.any.criminal	Has been falsifying inspection records for a fee
+  WATCH	4	-	-	criminal.any.personal	Their identity is fabricated. They fled a different life entirely
+  WATCH	4	VENAL	-	criminal.any.criminal	Has been systematically bribing multiple officials for preferential treatment
+  WATCH	4	-	-	criminal.any.family	Knows their celebrated family history is fabricated, and helped fabricate it
+  WATCH	3	VENAL	-	criminal.any.political	Has been feeding strategic intelligence to outsiders who pay for it
+  WATCH	3	-	-	criminal.any.family	Owes a life-debt to someone whose interests directly conflict with their current role
+  WATCH	3	-	-	criminal.any.identity	Lives a second life under a different name in another part of the settlement or a nearby town
+  WATCH	3	-	-	criminal.any.political	Has been delaying vital information from reaching the decision-makers
+  WATCH	3	-	-	criminal.any.criminal	Ordered what was officially ruled an accident, and sleeps fine about it
+  WATCH	3	VENAL	-	criminal.military.military	Has been selling patrol routes and schedules to someone outside the settlement
+  WATCH	3	VENAL	-	criminal.any.personal	Has been funding a forbidden relationship with embezzled money
+  WATCH	3	-	-	criminal.any.military	Was captured and released under terms they have never disclosed
+  WATCH	3	-	-	criminal.any.historical	Was present at (and did nothing to prevent) an atrocity that is now history
+  WATCH	3	VENAL	-	criminal.any.criminal	Has been embezzling from the organisation they oversee for three years
+  WATCH	3	-	-	criminal.any.political	Has agreed to hand over authority to an external power in exchange for personal safety
+  WATCH	2	-	-	criminal.any.identity	Is not who their documents say they are. The real person died years ago and they took the identity
+  WATCH	2	-	-	stress:monster_pressure	The work they authorised six months ago disturbed a nesting site. The attacks started three weeks later
+  WATCH	2	-	-	criminal.military.military	Gave an order during a battle that caused friendly casualties. It was covered up as enemy action
+  WATCH	2	-	-	criminal.any.magical	Is under a compulsion placed by someone who is now dead, and it's getting harder to resist
+  WATCH	2	-	-	criminal.any.historical	Possesses an original copy of a document that was officially declared destroyed
+  WATCH	2	-	-	criminal.any.personal	Has a second family elsewhere that neither family knows about
+  WATCH	2	-	-	criminal.any.historical	Knows the actual truth behind a founding event that the settlement reveres
+  WATCH	2	-	-	criminal.any.identity	Has been corresponding with someone they are publicly required to treat as an enemy
+  WATCH	2	-	-	title:the gaoler	Lends the cell keys for an hour to anyone who wants a word with a prisoner in private
+  WATCH	2	-	-	criminal.any.personal	Was directly responsible for a death that was ruled an accident
+  WATCH	2	-	-	criminal.military.military	Was ordered to commit an atrocity and complied, and has since risen in the organisation that ordered it
+  WATCH	2	-	-	criminal.any.political	Is the illegitimate heir to a title currently held by someone who doesn't know they exist
+  WATCH	2	VENAL	OTHER-TRADE	criminal.any.criminal	Their legitimate business is a front for moving contraband
+  WATCH	2	-	-	criminal.any.magical	Has been using magic to alter memories of specific events
+  WATCH	2	-	-	criminal.any.identity	Is a member of a group that faces serious persecution, and passes for something else entirely
+  WATCH	2	VENAL	OTHER-TRADE	criminal.any.criminal	Runs a protection scheme targeting the very merchants they're supposed to serve
+  WATCH	2	-	-	criminal.any.family	One of their children is not theirs biologically, and they know it
+  WATCH	2	VENAL	OTHER-TRADE	criminal.any.economic_betrayal	Has been paying a health official to suppress a finding about their product
+  WATCH	2	-	-	criminal.any.military	Knows that the decisive victory everyone celebrates was won through treachery, not skill
+  WATCH	2	-	-	criminal.any.family	Has been protecting a sibling's crime for years (a serious one)
+  WATCH	2	-	-	criminal.any.historical	Has been maintaining a cover-up of a past institutional failure that cost lives
+  WATCH	2	-	-	criminal.any.personal	Deeply in debt to a creditor who owns the debt as leverage, not income
+  WATCH	1	-	-	stress:recently_betrayed	Knows who did it and has said nothing. The betrayer is someone they owe a significant debt to
+  WATCH	1	VENAL	-	stress:plague_onset	Has been selling access to unquarantined routes for cash. The price goes up as the desperation increases
+  WATCH	1	-	-	(unmatched)	Controls a hidden cache of food reserves that could feed the settlement for two more weeks
+  WATCH	1	VENAL	-	criminal.any.criminal (reworded)	Runs a protection scheme targeting the very households they're supposed to serve
+  WATCH	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Has been reading Eleni Dalassenos's correspondence through an intermediary. Nothing damaging yet. But they keep looking
+  WATCH	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Owes Wen Gao a debt from before either of them held their current position: one that Wen Gao has never formally called in
+  WATCH	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Has been reading Tae Liu's correspondence through an intermediary. Nothing damaging yet. But they keep looking
+  WATCH	1	-	OTHER-TRADE	criminal.any.economic_betrayal	Their business partner died of natural causes that weren't entirely natural
+  WATCH	1	-	-	stress:religious_conversion	Knows the conversion was arranged for reasons that had nothing to do with faith (a debt, a marriage, a foreign hand) and holds the correspon
+  WATCH	1	-	-	criminal.any.magical	Made a binding pact with an entity they now cannot name without consequence
+  WATCH	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Knows something about Kan Chi that Kan Chi believes no one else knows, and has been deciding for months whether to use it
+  WATCH	1	VENAL	-	stress:wartime (reworded)	Has been under-declaring the settlement's stores to the requisition officers and selling the concealed food to both armies
+  WATCH	1	-	-	title:the watch sergeant	Takes a coin to look the other way when certain neighbours break the peace
+  WATCH	1	-	-	stress:succession_void	Has already committed to supporting a specific claimant in private, while publicly presenting as neutral
+  WATCH	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Owes Walid ibn Rushd a debt from before either of them held their current position: one that Walid ibn Rushd has never formally called in
+  WATCH	1	-	-	criminal.any.personal	Suffering from an illness they expect to kill them within two years
+  WATCH	1	-	-	rare.deeds:raisedDead	Raised something from a grave, once, and could not put it back
+  WATCH	1	-	-	title:the gaoler	Lets a debtor out to work by day and keeps half the wages
+  WATCH	1	-	-	stress:religious_conversion	Has been forging records to erase the old faith's marriages, oaths, and legitimacies, retroactively unmaking inheritances and alliances
+  WATCH	1	-	-	stress:monster_pressure	The attacks are not random. They sent a party into that territory three weeks ago and provoked something. No one came back. They filed a fal
+  WATCH	1	-	-	stress:wartime	Authorised the seizure of a rival's property as a 'war measure', on evidence they invented
+  WATCH	1	-	-	stress:mass_migration	Signed the order closing the settlement to further arrivals, then made a paid exception for one group now already settled inside
+  WATCH	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Was present when Lucius Fronto did something they've never accounted for publicly. Neither has acknowledged the other was there
+  WATCH	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Owes Plinius Moderatus a debt from before either of them held their current position: one that Plinius Moderatus has never formally called i
+  WATCH	1	-	OTHER-TRADE	criminal.any.economic_betrayal	Has information about a competitor that would ruin them, obtained through clearly illegal means
+  WATCH	1	-	-	stress:recently_betrayed	Participated in the original betrayal in a minor capacity and has been helping frame someone else ever since
+  WATCH	1	-	-	crimeKnowledge (npcGenerator.js:596-609)	Has been reading Eadgyth Wenzel's correspondence through an intermediary. Nothing damaging yet. But they keep looking
+  WATCH	1	VENAL	-	title:the warden	Lets certain travellers cross the border paths without being stopped, for a fee
+  WATCH	1	-	-	title:the gaoler	Lost a prisoner to a fever months ago and has gone on drawing the prisoner's bread
+  WATCH	1	-	-	title:the warden	Let a raiding party through once to save their own patrol, and told no one
+  WATCH	1	VENAL	-	criminal.any.criminal (reworded, npcGenerator.js:1023)	On the payroll of the local underworld as a silent informant
+  WATCH	1	-	-	rare.deeds:paysDebts	Has been quietly paying off someone else's debts for years, and will not say why
+  WATCH	1	-	-	rare.deeds:gaveCredit	Pulled three children from a flood years ago and let another take the credit
+  WATCH	1	-	-	rare.natures:cannotRefuse	Cannot say no to anyone, and has promised the same thing to three people
+  WATCH	1	-	-	criminal.any.historical	The person who raised them was not their parent, and that parent is someone significant
+  WATCH	1	VENAL	-	criminal.military.military	Has been skimming from military supply budgets for years through a trusted subordinate
+  WATCH	1	-	-	rare.ties:harem	Belongs to a harem kept out of sight, and has been told to find it one more
+  WATCH	1	-	-	rare.deeds:spouse	Has been giving their own spouse a little poison each week, and is patient about it
+
+§7 EVERY DISTINCT VENAL SECRET ON THE 300 (all cards; count, source pool): the classification table for "venal"
+  59	title:the miller	Sets the mill's toll by who is asking, and charges the families who owe money far more than the rest
+  52	title:the master fishmonger	Sells yesterday's fish as this morning's, washed and packed in fresh ice, and has made people sick more than once
+  44	title:the innkeeper	Reads the letters guests leave in their rooms, and sells what is in them to whoever asks the right way
+  44	title:the apothecary	Sells a few drops of something stronger to anyone who asks quietly and pays in silver
+  42	criminal.any.criminal	Their legitimate business is a front for moving contraband
+  42	title:the cobbler	Ran up gambling debts and has been quietly selling the tools of the shop one by one to pay them
+  42	title:the master weaver	Has been taking work from the weavers' wives at half the rate and selling the cloth as their own shop's
+  41	title:the miller	Has been keeping back a handful from every sack brought to the mill for grinding, and selling the extra flour on the side
+  41	title:the bowyer	Has been selling bows and arrows to people who have no right to hunt and every reason to want them quietly
+  40	criminal.any.criminal	Secretly directs a fencing operation through a trusted intermediary
+  39	title:the sawyer	A sawyer's boy lost an arm at the blade, and the family was paid to say it happened somewhere else
+  38	title:the potter	Has been selling pots bought in from another workshop as their own throwing, at their own prices
+  35	title:the master smith	Has been buying cheap iron and selling the work as good steel, and the blades break where it matters
+  34	criminal.any.criminal	Has been falsifying inspection records for a fee
+  33	title:the smelt master	Has been mixing cheap metal into the bars and selling them as pure
+  33	title:the watch commander	Takes a monthly payment to keep patrols away from certain streets on certain nights
+  32	criminal.any.political	Has been feeding strategic intelligence to outsiders who pay for it
+  32	criminal.any.criminal	Has been systematically bribing multiple officials for preferential treatment
+  32	title:the sawyer	Sells green planks as seasoned and the buildings made from them warp within a year
+  31	criminal.any.criminal	Runs a protection scheme targeting the very merchants they're supposed to serve
+  31	title:the ropemaker	Has been twisting short fibre into the heart of the rope and selling it as full strength
+  31	title:the potter	Sells glazed ware with lead in the glaze, cheaper to make and bad for anyone who eats from it often
+  31	title:the master weaver	Sells cloth woven with short thread as full measure, and the bolts come up an arm short
+  31	title:the master butcher	Sells the meat of animals that died of sickness, cut so the signs do not show
+  31	title:the house boss	Has the dice and the cards fixed on the high tables, and the people who win big are paid to play
+  31	title:the prison warden	Sells better food, letters and visits to the prisoners whose families can pay, and lets the rest go hungry
+  31	title:the master metalworker	Has been making locks and selling copies of their keys to someone who pays for each one
+  30	criminal.any.criminal	Has been embezzling from the organisation they oversee for three years
+  30	title:the dyer	Sells cheap colours as costly ones, and they wash out at the first rain
+  30	title:the dyer	Has been dyeing cloth for a buyer who sells it with a famous mark that is not theirs to use
+  30	title:the hospital's master	Lets families who give generously jump the line for beds while the poor wait in the hall
+  30	title:the college master	Sells the college's places to the children of rich families who cannot sing a note
+  29	title:the cartographer	Copied a survey that was meant to stay secret and has been selling copies to anyone with the coin
+  29	title:the customs collector	Waves through certain carts without inspection in return for a share of what they carry
+  29	title:the warehouse factor	Has been reporting goods as spoiled or lost and selling them on through a buyer in another market
+  29	title:the front man	Skims a little from the money that passes through the shop before it reaches its real owners
+  29	title:the black marketeer	Has been selling poisons to a buyer who uses them on people
+  29	title:the prison warden	Keeps a prisoner in the cells long after their sentence ended, at the request of someone who pays for it
+  28	criminal.any.personal	Has been funding a forbidden relationship with embezzled money
+  28	title:the master carpenter	Charges every job for more wood than it used and sells the difference on the side
+  28	title:the glassmaker	Sells cheap coloured glass as cut gems to buyers who never think to test it
+  27	title:the master baker	Bakes loaves under weight and sells them at full price, a little lighter every month
+  27	title:the chandler	Sells candles made with cheap tallow as fine wax ones, and the smoke gives them away to anyone who knows
+  26	title:the coaching-inn keeper	Changes tired horses for fresh ones and sells the good ones on, giving travellers the worst of the stable
+  26	title:the glassmaker	Has been copying a famous workshop's mark and selling ordinary glass as theirs
+  26	title:the enchanter	Sells charms that do nothing, to buyers who cannot tell the difference
+  26	title:the theatre manager	Has been putting on plays that mock powerful people by name, and sells the best seats to their enemies
+  26	title:the outfitter	Sells rope, lamps and rations that are cheaper than they look, and some of them fail underground
+  25	title:the fuller	Has been stretching cloth on the tenters past its true size and selling the extra length
+  25	title:the castellan	Pocketed the money that was granted for the wall repairs, and buried the survey that said where they were needed
+  25	title:the toll-keeper	Has let the crossing fall into disrepair and pocketed the money for the repairs
+  25	title:the house boss	Skims from the house's takings before the money reaches the people who really own the den
+  24	title:the woodcarver	Sells cheap carvings as old work from a famous hand
+  24	title:the beast master	Sells trained animals to buyers who use them for fighting, and the training is cruel
+  24	title:the outfitter	Sells used gear taken from the bodies of dead delvers as new, after a scrub and a polish
+  24	title:the hospital's master	Has been selling the hospital's medicines to an apothecary and treating the poor with cheaper ones
+  23	title:the master of granaries	Has been selling grain from the stores to merchants in another market and writing it down as spoiled
+  22	title:the gang boss	Has been selling the gang's own people to the law, one at a time, to keep their own name off the lists
+  22	title:the mint master	Has been letting a worker carry out silver dust in his clothes, for a share of what he sells
+  22	title:the vintner	Sells cheap wine poured into the casks of a famous vintage
+  21	title:the scroll scribe	Sells scrolls with the last line of the spell copied wrong, so they fail when read
+  20	criminal.any.economic_betrayal	Has been quietly betting against the ventures they talk their neighbours into, and profiting when they fail
+  20	title:the master furrier	Sells dyed rabbit as costly fur to buyers who do not know the difference
+  20	title:the black marketeer	Is paid by someone in authority to report who buys what, and sells their own customers out
+  20	title:the prison warden	Let a prisoner walk out one night for a purse of gold and reported an escape the next morning
+  19	title:the tanner	Sells thin leather as thick by stretching it on the frame and selling it by the hide
+  19	title:the collier	Has been burning charcoal in woods that belong to someone else and selling it as their own
+  19	title:the customs collector	Seizes goods from merchants on small faults and sells them on to a friend at a fraction of their worth
+  19	title:the black marketeer	Sells goods seized by the officials, bought back from the officials who seized them
+  18	title:the beast master	Has been capturing animals from land where hunting is forbidden and selling them as bred in the yard
+  18	title:the workhouse master	Sells the food meant for the inmates and feeds them thin gruel instead
+  18	title:the college master	Has been taking credit for songs written by students and selling them as their own
+  18	title:the castellan	Has been selling stores from the citadel's armoury and writing them off as rusted and broken
+  17	title:the toll-keeper	Lets certain carts across at night without the toll, for a share of what they carry
+  17	title:the chancellor	Sells places at the academy to rich families whose children have no talent
+  16	criminal.any.criminal (reworded, npcGenerator.js:1023)	On the payroll of the local underworld as a silent informant
+  16	title:the master furrier	Has been storing a smuggler's goods among the furs in the back room
+  16	title:the librarian	Has been selling rare books from the library's stacks and replacing them with copies
+  15	title:the tanner	Has been taking in hides with the brands cut off and asking no questions
+  15	title:the chancellor	Lets forbidden research continue in the academy's lower rooms, for a share of what it earns
+  14	criminal.any.economic_betrayal	The goods they sell as locally produced are sourced from somewhere with exploitative labour practices
+  14	title:the auctioneer	Lets a favoured buyer see the lots and the reserves before the sale, for a share of the savings
+  14	title:the arena master	Has been selling the arena's best seats twice and keeping the second payment
+  13	title:the wharfinger	Lets cargo come ashore at night without the tally, for a share of its worth
+  13	criminal.any.economic_betrayal	Has been paying a health official to suppress a finding about their product
+  13	title:the whisper broker	Sells the same piece of news to both sides of a quarrel and lets them destroy each other
+  12	title:the salt master	Holds back salt in a good year to keep the price high, and sells it dear when the shortage comes
+  12	title:the ferryman	Overcharges travellers who do not know the fare, and keeps the difference
+  12	title:the harbour master	Closed the harbour to a rival's ships for a week on a false report of sickness, for a fee
+  12	title:the wharfinger	Has let the wharf's timbers rot and pocketed the money meant for repairs
+  11	title:the grove elder	Has been taking offerings left at the grove and selling them in the market
+  11	title:the printer	Prints pamphlets at night against powerful people, and sells them without a name on them
+  11	title:the exchange's steward	Sells word of which caravans carry the richest loads to someone who waits on the road
+  10	title:the granary reeve	Takes a bribe from merchants to sell from the stores at low prices when grain is dear
+  10	title:the network's spider	Is paid by two rival powers at once, and tells each what it wants to hear
+  10	criminal.any.criminal	On the payroll of the thieves' guild as a silent informant
+  9	title:the network's spider	Has been selling the network's own members to the authorities, one at a time, to stay out of reach
+  9	title:the guildmaster of thieves	Has been selling the guild's own thieves to the authorities to keep the guild's real business safe
+  8	title:the head shepherd	Knows of a path over the hills that no one else uses, and guides people across it for a fee
+  6	title:the head shepherd	Has been selling a few sheep from every flock each year and blaming wolves
+  5	title:the camp foreman	Has been cutting trees beyond the camp's bounds and selling the timber as their own
+  5	stress:monster_pressure	Has been selling information about who travels the roads and when to an outside party who claims to be a monster hunter, and may not be
+  5	title:the carriers' master	Has been keeping back part of the carriers' wages as fees they never agreed to
+  5	title:the jeweller	Keeps back a little gold from every piece and sells the gathered scraps
+  5	title:the assayer	Writes a higher purity on certain bars for a fee, and the buyers never test them again
+  5	title:the almoner	Has been keeping back part of the alms and spending it on their own comforts
+  5	title:the chandler	Has been buying stolen ship's stores at night and selling them in the shop the next morning
+  4	title:the fence	Is paid by someone in authority to report who brings in what
+  4	title:the fence	Has been selling some of the stolen goods back to their owners for a reward
+  4	stress:indebted	Has been embezzling from civic funds to make personal debt payments, using the same creditor network for both
+  4	title:the foundling-mother	Has been keeping back part of the home's gifts and feeding the children less
+  4	title:the hospitaller	Lets the hospital's beds to travellers who are not sick, for coin, on the quiet nights
+  4	title:the master shipwright	Sells the timber meant for one ship to the yard of a rival, and delays the first ship for a season
+  4	criminal.military.military	Has been selling patrol routes and schedules to someone outside the settlement
+  4	title:the exchange's steward	Lets favoured caravan masters see the posted contracts before anyone else, for a share of their profit
+  3	stress:plague_onset	Has been selling access to unquarantined routes for cash. The price goes up as the desperation increases
+  3	stress:wartime (reworded)	Has been under-declaring the settlement's stores to the requisition officers and selling the concealed food to both armies
+  3	title:the steward	Has been keeping back part of the rents and dues and writing them down as unpaid
+  3	title:the master of the hunt	Guides people through the woods who do not want to be found, for a fee
+  3	stress:wartime	Has been feeding the enemy's quartermasters the same false supply figures they feed their own, playing both requisitions for the skim
+  3	stress:wartime (reworded)	Has been under-declaring the settlement's stores to the requisition officers and selling the concealed grain to both armies
+  3	title:the assayer	Keeps a little of every sample brought in, and has been selling the gathered dust
+  2	stress:occupied	Is smuggling people out, but only those who can pay, and the price has been rising
+  2	criminal.any.criminal (reworded)	Runs a protection scheme targeting the very households they're supposed to serve
+  2	title:the beekeeper	Has been watering the honey and selling it at full price
+  2	title:the horse-coper	Sells old horses as young ones, with their teeth filed and their coats dyed
+  2	title:the waystation keeper	Has let the well go foul and sells water from a barrel at a price
+  2	criminal.military.military	Has been skimming from military supply budgets for years through a trusted subordinate
+  1	title:the household elder	Has been keeping back part of the household's harvest and trading it for things the others never see
+  1	stress:famine (reworded)	Has documentation proving the famine was made worse by decisions taken by the Elder Council, and has been paid to lose it
+  1	title:the bandit contact	Tells the band the rich travellers took the other road, and sells the warning to the travellers
+  1	title:the headman	Has been keeping back part of the dues the households pay and spending it on themselves
+  1	(unmatched)	Is receiving food shipments through a covert route and selling them at triple the official price after dark
+  1	title:the bandit contact	Has been selling the band's plans to the authorities to keep their own name off the lists
+  1	title:the horse-coper	Buys stolen horses and sells them on far from where they were taken
+  1	title:the maltster	Has been mixing spoiled grain into the malt and selling it at full price
+  1	title:the post's master	Sells the post's road news to one buyer a day before it is posted for everyone
+  1	stress:famine (reworded)	Has documentation proving the famine was made worse by decisions taken by the Religious Authorities, and has been paid to lose it
+  1	(unmatched)	Is receiving grain shipments through a covert route and selling them at triple the official price after dark
+  1	title:the warden	Lets certain travellers cross the border paths without being stopped, for a fee
+  1	title:the master of the hunt	Has been hunting on land that belongs to someone else and selling the game in the market
+  1	rare.deeds:blackmailer	Is bleeding Ashoka Jha for coin over a thing done long ago
+  1	title:the assayer	Tells one buyer what the others' samples showed, for a share of their profit
+  1	(unmatched)	Has been skimming from the grain reserves to pay a personal debt that predates the siege
+
+§7b THE NON-VENAL secrets that a reader might call venal were checked by eye in §6; the regex is the whole rule.
+
+§8 THE CATCH-ALL (factionLeaderSecret.js pools, npcData.js:843): lines that presume an office or trade, the categories they fit, and who drew them on the 300
+  "Has been embezzling from the organisation they oversee/…" presumes oversees an organisation; fits any face (every face keeps a house): drawn 30, MISFIT 0
+  "On the payroll of /…" presumes holds a post (stakes: "cost them their post"); fits government/military/religious: drawn 26, MISFIT 18 (the alchemist 5 · the lord 4 · the luxury merchant 3 · the exchange master 2 · the banker 1 · the guild archmage 1 · the senior craft-guild master 1 · the undercity boss 1)
+  "Has been systematically bribing multiple officials for pre…" presumes a trade that seeks favour; fits economy/crafts/other/criminal: drawn 32, MISFIT 14 (the garrison commander 3 · the company captain 2 · the dean 2 · the guild archmage 2 · the bloc's speaker 1 · the governor 1 · the monarch 1 · the senior abbot 1)
+  "Runs a protection scheme targeting the very merchants/…" presumes serves the merchants (a market office, a watch); fits government/military: drawn 31, MISFIT 24 (the dean 5 · the senior abbot 4 · the sage 3 · the alchemist 2 · the banker 2 · the lord 2 · the bishop 1 · the exchange master 1)
+  "Has been falsifying inspection records for a fee/…" presumes an inspector; fits government: drawn 34, MISFIT 29 (the dean 3 · the lord 3 · the luxury merchant 3 · the senior craft-guild master 3 · the senior guild master 3 · the bishop 2 · the garrison commander 2 · the network's head 2)
+  "Their legitimate business is a front/…" presumes keeps a business; fits economy/crafts/other/criminal: drawn 42, MISFIT 19 (the chief magistrate 4 · the company captain 4 · the dean 3 · the bishop 2 · the garrison commander 2 · the senior abbot 2 · the blade captain 1 · the governor 1)
+  "Their appointment was secured through forged credentials/…" presumes an appointed office; fits government/military/religious: drawn 36, MISFIT 23 (the senior craft-guild master 8 · the banker 2 · the lord 2 · the network's head 2 · the senior guild master 2 · the alchemist 1 · the alewife 1 · the guild archmage 1)
+  "Has been delaying vital information from reaching the deci…" presumes an official between the facts and the deciders; fits government/military: drawn 29, MISFIT 17 (the dean 3 · the network's head 3 · the sage 3 · the senior craft-guild master 2 · the alchemist 1 · the banker 1 · the bishop 1 · the guild archmage 1)
+  "Has agreed to hand over authority to an external power/…" presumes holds authority; fits government/military/noble: drawn 40, MISFIT 31 (the senior guild master 5 · the senior craft-guild master 4 · the dean 3 · the luxury merchant 3 · the network's head 3 · the sage 3 · the senior abbot 3 · the bishop 2)
+  "Has been quietly betting against the ventures|^The goods t…" presumes keeps a business (economic_betrayal); fits economy/crafts/other/criminal: drawn 83, MISFIT 39 (the chief magistrate 7 · the company captain 5 · the dean 5 · the bishop 3 · the guild archmage 3 · the priest 3 · the garrison commander 2 · the senior abbot 2)
+  "Was captured and released under terms/…" presumes a soldier's past; fits military: drawn 39, MISFIT 36 (the dean 8 · the lord 3 · the senior guild master 3 · the abbot 2 · the alchemist 2 · the banker 2 · the bishop 2 · the chief magistrate 2)
+  "Has been studying a forbidden school of magic under a fals…" presumes a scholar of magic; fits magic: drawn 26, MISFIT 24 (the luxury merchant 6 · the company captain 3 · the garrison commander 3 · the senior guild master 2 · the watch captain 2 · the banker 1 · the blade captain 1 · the chief magistrate 1)
+
+§8b CARDS FALLING TO THE CATCH-ALL, per title (institution.title; cards on the 300; catch-all share; whether the title has a TITLE_SECRETS row):
+  all cards: 1545/9012 = 17.1% from the catch-all
+   138/150  the dean [religious]
+   135/150  the senior craft-guild master [economy]
+   107/109  the garrison commander [military]
+    99/100  the chief magistrate [government]
+    82/129  the senior guild master [economy]
+    80/89   the luxury merchant [economy]
+    79/80   the lord [other]
+    77/79   the sage [other]
+    74/75   the company captain [military]
+    73/74   the senior abbot [religious]
+    72/73   the network's head [criminal]
+    66/69   the guild archmage [magic]
+    62/91   the banker [economy]
+    60/60   the bishop [religious]
+    41/50   the watch captain [military]
+    40/43   the alchemist [magic]
+    30/48   the exchange master [economy]
+    29/50   the priest [religious]
+    29/31   the blade captain [military]
+    26/50   the tavern keeper [other]
+    26/26   the undercity boss [criminal]
+    21/22   the governor [government]
+    19/24   the magistrate [government]
+    18/18   the wizard [magic]
+    14/14   the bloc's speaker [government]
+    12/22   the alewife [other]
+     9/19   the militia captain [military]
+     7/7    the abbot [religious]
+     7/7    the monarch [government]
+     4/4    the lord's appointee [government]
+     2/2    the occupying governor [government]
+     2/2    the creditor's agent [economy]
+     2/2    the neutrals' broker [government]
+     1/1    the commoners' tribune [government]
+     1/1    the investigator [government]
+     1/1    the alliance's convenor [government]
+  religious titles: the priest NO ROW 29/50 · the archdruid row 0/1 · the dean NO ROW 138/150 · the foundling-mother row 0/14 · the hospitaller row 0/8 · the abbot NO ROW 7/7 · the almoner row 0/16 · the grove elder row 0/37 · the senior abbot NO ROW 73/74 · the hospital's master row 0/74 · the bishop NO ROW 60/60

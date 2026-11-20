@@ -1,0 +1,154 @@
+F3 record-level, 300 towns (50 a size), stressed at birth: 91
+MAPS (0..4): {"SAFETY":{"Very Safe":4,"Safe":3,"Moderate":2,"Unsafe":1,"Dangerous":0,"Controlled":2,"Tense":2,"Quarantined":2,"Strained":1,"Restricted":1,"Suspicious":1,"Desperate":0,"Volatile":0,"Critical":0},"STABILITY":{"Ordered":4,"Stable":3,"Enforced Order":3,"Rigid":3,"Tense":2,"Vulnerable":2,"Fragile":2,"Strained":2,"Anxious":2,"Suppressed":1,"Shaken":1,"Unstable":1,"Fractured":1,"Volatile":1,"Desperate":1,"Critical":0},"CAUSAL":{"surplus":4,"adequate":3,"strained":2,"critical":1,"collapsed":0},"SCOREBAND":{"CRITICAL":0,"WEAK":1,"ADEQUATE":3,"STRONG":4},"PROSPERITY":{"Subsistence":0,"Struggling":0,"Poor":1,"Moderate":3,"Comfortable":3,"Prosperous":4,"Wealthy":4},"READINESS":{"Fortress":4,"Well-Defended":3,"Defensible":2,"Lightly Defended":2,"Vulnerable":1,"Undefended":0},"RELIANCE":{"none":0,"present":1,"relied-upon":3,"integral":4},"LEGIT":{"Revered":4,"Approved":3,"Tolerated":2,"Contested":1,"Legitimacy Crisis":0}}
+
+════ (a) SAFETY / LAW & ORDER / CRIMINAL OPPORTUNITY / STABILITY
+
+── PAIR a1 Overview Safety vs Foundations Law & order
+  2+ rungs apart: ALL 53/300 (18%) | thorp 0/50 (0%) · hamlet 1/50 (2%) · village 2/50 (4%) · town 3/50 (6%) · city 21/50 (42%) · metropolis 26/50 (52%)
+  cross-tab (A | B: towns, * = 2+ apart): Moderate | strained: 145 ; Moderate | surplus: 31* ; Moderate | adequate: 27 ; Dangerous | collapsed: 14 ; Strained | strained: 9 ; Tense | critical: 7 ; Strained | critical: 6 ; Tense | strained: 6 ; Volatile | critical: 5 ; Moderate | critical: 5 ; Dangerous | critical: 5 ; Volatile | strained: 5* ; Dangerous | strained: 4* ; Volatile | adequate: 4* ; Tense | collapsed: 3* ; Unsafe | strained: 3 ; Suspicious | collapsed: 2 ; Unsafe | collapsed: 2 ; Tense | adequate: 2 ; Suspicious | strained: 2 ; Unsafe | adequate: 2* ; Desperate | collapsed: 1 ; Restricted | critical: 1 ; Controlled | critical: 1 ; Strained | collapsed: 1 ; Volatile | collapsed: 1 ; Restricted | strained: 1 ; Controlled | adequate: 1 ; Dangerous | adequate: 1* ; Unsafe | surplus: 1* ; Suspicious | adequate: 1* ; Desperate | strained: 1*
+
+── PAIR a2 Overview Safety vs Foundations Criminal opportunity (word: Negligible/Contained/Elevated/Acute/Rampant = surplus..collapsed)
+  2+ rungs apart: ALL 44/300 (15%) | thorp 10/50 (20%) · hamlet 9/50 (18%) · village 8/50 (16%) · town 5/50 (10%) · city 3/50 (6%) · metropolis 9/50 (18%)
+  cross-tab (A | B: towns, * = 2+ apart): Moderate | adequate: 117 ; Moderate | strained: 91 ; Dangerous | strained: 22* ; Tense | strained: 18 ; Strained | strained: 12 ; Volatile | strained: 9* ; Unsafe | strained: 8 ; Volatile | adequate: 6* ; Suspicious | strained: 5 ; Strained | adequate: 4* ; Desperate | strained: 2* ; Restricted | strained: 2 ; Controlled | strained: 2 ; Dangerous | adequate: 1* ; Dangerous | critical: 1
+
+── PAIR a3 Overview Safety vs stability heading (Overview identity line, Power)
+  2+ rungs apart: ALL 38/300 (13%) | thorp 4/50 (8%) · hamlet 3/50 (6%) · village 3/50 (6%) · town 2/50 (4%) · city 19/50 (38%) · metropolis 7/50 (14%)
+  cross-tab (A | B: towns, * = 2+ apart): Moderate | Stable: 157 ; Moderate | Tense: 25 ; Moderate | Ordered: 20* ; Tense | Strained: 13 ; Volatile | Volatile: 8 ; Strained | Tense: 8 ; Dangerous | Desperate: 7 ; Volatile | Fractured: 7 ; Dangerous | Anxious: 6* ; Moderate | Vulnerable: 6 ; Unsafe | Stable: 6* ; Tense | Tense: 5 ; Dangerous | Tense: 5* ; Strained | Fractured: 5 ; Dangerous | Unstable: 5 ; Suspicious | Shaken: 4 ; Desperate | Critical: 2 ; Restricted | Anxious: 2 ; Unsafe | Desperate: 2 ; Controlled | Suppressed: 2 ; Dangerous | Stable: 1* ; Strained | Shaken: 1 ; Strained | Unstable: 1 ; Strained | Volatile: 1 ; Suspicious | Tense: 1
+
+── PAIR a4 Law & order vs Criminal opportunity (same Foundations panel)
+  2+ rungs apart: ALL 59/300 (20%) | thorp 8/50 (16%) · hamlet 12/50 (24%) · village 11/50 (22%) · town 0/50 (0%) · city 11/50 (22%) · metropolis 17/50 (34%)
+  cross-tab (A | B: towns, * = 2+ apart): strained | adequate: 99 ; strained | strained: 77 ; surplus | strained: 28* ; collapsed | strained: 22* ; critical | strained: 22 ; adequate | strained: 22 ; adequate | adequate: 16 ; critical | adequate: 8* ; surplus | adequate: 4 ; collapsed | adequate: 1* ; collapsed | critical: 1
+
+── PAIR a5 Law & order vs stability heading
+  2+ rungs apart: ALL 27/300 (9%) | thorp 3/50 (6%) · hamlet 4/50 (8%) · village 5/50 (10%) · town 0/50 (0%) · city 7/50 (14%) · metropolis 8/50 (16%)
+  cross-tab (A | B: towns, * = 2+ apart): strained | Stable: 115 ; strained | Tense: 27 ; adequate | Stable: 23 ; surplus | Stable: 23 ; critical | Tense: 11 ; collapsed | Desperate: 9 ; surplus | Ordered: 9 ; strained | Ordered: 8* ; strained | Fractured: 6 ; collapsed | Anxious: 5* ; critical | Strained: 5 ; strained | Strained: 5 ; strained | Volatile: 4 ; adequate | Tense: 4 ; strained | Vulnerable: 4 ; critical | Fractured: 3 ; critical | Stable: 3* ; critical | Volatile: 3 ; adequate | Ordered: 3 ; collapsed | Shaken: 2 ; collapsed | Tense: 2* ; collapsed | Unstable: 2 ; collapsed | Strained: 2* ; strained | Anxious: 2 ; strained | Shaken: 2 ; strained | Unstable: 2 ; adequate | Volatile: 2* ; adequate | Fractured: 2* ; collapsed | Critical: 1 ; critical | Shaken: 1 ; critical | Anxious: 1 ; critical | Suppressed: 1 ; critical | Unstable: 1 ; critical | Vulnerable: 1 ; collapsed | Fractured: 1 ; adequate | Vulnerable: 1 ; adequate | Suppressed: 1* ; adequate | Unstable: 1* ; adequate | Strained: 1 ; strained | Critical: 1*
+
+  "Unstable (pervasive organized crime)" towns: 0; their Safety: []; Law & order: []; Criminal opp.: []; by size []
+  of them: criminalEffective  | militaryEffective  | safetyRatio 
+  calm towns only (no stress at birth):
+
+── PAIR a1-calm Safety vs Law & order
+  2+ rungs apart: ALL 34/209 (16%) | thorp 0/37 (0%) · hamlet 0/30 (0%) · village 0/36 (0%) · town 0/35 (0%) · city 17/35 (49%) · metropolis 17/36 (47%)
+  cross-tab (A | B: towns, * = 2+ apart): Moderate | strained: 141 ; Moderate | surplus: 31* ; Moderate | adequate: 25 ; Moderate | critical: 4 ; Unsafe | strained: 3 ; Dangerous | critical: 2 ; Unsafe | adequate: 2* ; Unsafe | surplus: 1*
+
+  a1 CAUSE: law_order contributors, mean points per town (contributors.delta), 2+ apart (53): powerStructure.publicLegitimacy 5.0 (in 53) ; defenseProfile.scores.internal 6.3 (in 53) ; institutions 8.9 (in 53) ; safetyProfile.blackMarketCapture -2.6 (in 49)
+            the rest (247): powerStructure.publicLegitimacy -1.4 (in 229) ; defenseProfile.scores.internal -8.1 (in 245) ; institutions 0.1 (in 247) ; safetyProfile.blackMarketCapture -1.0 (in 111)
+  a1 2+ apart, Safety | Law & order | safetyRatio: Tense|collapsed|0.2 Tense|collapsed|0.3 Tense|collapsed|0.4 Volatile|strained|0.8 Dangerous|strained|0.8 Volatile|strained|0.8 Moderate|surplus|1.4 Moderate|surplus|1.9 Moderate|surplus|1.4 Moderate|surplus|1.4 Moderate|surplus|1.4 Moderate|surplus|1.4 Dangerous|adequate|0.9 Unsafe|surplus|0.8 Suspicious|adequate|0.8 Moderate|surplus|1.4 Moderate|surplus|0.8 Dangerous|strained|0.6 Moderate|surplus|1.4 Unsafe|adequate|0.8 Moderate|surplus|1 Unsafe|adequate|0.8 Moderate|surplus|1 Moderate|surplus|1.4 Dangerous|strained|0.6 Moderate|surplus|1 Moderate|surplus|1.4 Volatile|adequate|0.6 Volatile|strained|0.6 Moderate|surplus|0.8 Moderate|surplus|1 Moderate|surplus|1 Volatile|adequate|0.8 Moderate|surplus|1 Moderate|surplus|0.8 Moderate|surplus|1 Moderate|surplus|0.8 Moderate|surplus|1 Volatile|strained|0.6 Volatile|strained|0.6 Moderate|surplus|1 Moderate|surplus|1.4 Moderate|surplus|1 Moderate|surplus|1 Moderate|surplus|1.4 Volatile|adequate|0.8 Volatile|adequate|0.8 Dangerous|strained|0.6 Moderate|surplus|1 Desperate|strained|0.7 Moderate|surplus|1 Moderate|surplus|1.4 Moderate|surplus|1
+
+  SAFETY FLOOR (safetyProfile.js :88-110: effectiveSafety = max(safetyRatio, communityOrderBonus 1.25 thorp / 1.20 hamlet-town / 0.8 city / 0 metro when no criminal house, courtOrderFloor)):
+    thorp      calm 37: Safety [["Moderate",36],["Dangerous",1]]; Moderate with safetyRatio < 1.2 (held up by a floor) 36; safetyRatio range 0.4-0.7; a criminal house on the roster 1
+    hamlet     calm 30: Safety [["Moderate",29],["Dangerous",1]]; Moderate with safetyRatio < 1.2 (held up by a floor) 22; safetyRatio range 0.2-1.8; a criminal house on the roster 2
+    village    calm 36: Safety [["Moderate",36]]; Moderate with safetyRatio < 1.2 (held up by a floor) 29; safetyRatio range 0.4-1.8; a criminal house on the roster 0
+    town       calm 35: Safety [["Moderate",35]]; Moderate with safetyRatio < 1.2 (held up by a floor) 23; safetyRatio range 0.6-1.9; a criminal house on the roster 13
+    city       calm 35: Safety [["Moderate",29],["Unsafe",6]]; Moderate with safetyRatio < 1.2 (held up by a floor) 14; safetyRatio range 0.8-1.9; a criminal house on the roster 23
+    metropolis calm 36: Safety [["Moderate",36]]; Moderate with safetyRatio < 1.2 (held up by a floor) 29; safetyRatio range 0.8-1.4; a criminal house on the roster 36
+
+  a2 CAUSE: 2+ apart Safety|CrimOpp|stress: [["Dangerous|Elevated|plague_onset",6],["Dangerous|Elevated|insurgency",5],["Volatile|Elevated|succession_void",5],["Volatile|Elevated|politically_fractured",4],["Dangerous|Elevated|famine",3],["Volatile|Contained|politically_fractured",3],["Dangerous|Elevated|monster_pressure",3],["Volatile|Contained|succession_void",3],["Desperate|Elevated|under_siege",2],["Dangerous|Elevated|calm",2],["Strained|Contained|politically_fractured",2],["Dangerous|Elevated|famine+indebted",1],["Dangerous|Elevated|plague_onset+famine",1],["Dangerous|Contained|monster_pressure",1],["Dangerous|Elevated|indebted+famine",1],["Strained|Contained|monster_pressure",1],["Strained|Contained|succession_void",1]]
+  criminal_opportunity contributors (all 300): safetyProfile.blackMarketCapture 1.8 (in 300) ; condition.famine.rcw7xs 0.4 (in 9) ; condition.regional_criminal_pressure.nwpp7h 0.1 (in 8) ; faction.thieves_guild -0.0 (in 4)
+  Criminal opportunity SCORE (raw, before the lower-is-better inversion) by word: [["50->Contained",128],["53->Elevated",102],["52->Elevated",12],["50->Elevated",10],["54->Elevated",10],["51->Elevated",9],["56->Elevated",5],["66->Elevated",3],["65->Elevated",3],["57->Elevated",3],["55->Elevated",3],["63->Elevated",2],["59->Elevated",2],["60->Elevated",2],["58->Elevated",2],["64->Elevated",1],["72->Acute",1],["62->Elevated",1],["49->Elevated",1]]
+  Criminal opportunity word over all 300: [["Elevated",171],["Contained",128],["Acute",1]]; Law & order word: [["strained",176],["adequate",38],["surplus",32],["critical",30],["collapsed",24]]
+  a4 2+ apart Law|CrimOpp|stress: [["surplus|Elevated|calm",28],["collapsed|Elevated|plague_onset",5],["collapsed|Elevated|famine",5],["critical|Contained|politically_fractured",3],["critical|Contained|succession_void",3],["collapsed|Elevated|recently_betrayed",2],["critical|Contained|monster_pressure",2],["collapsed|Elevated|insurgency",2],["collapsed|Elevated|under_siege",1],["collapsed|Elevated|famine+indebted",1],["collapsed|Elevated|plague_onset+famine",1],["collapsed|Elevated|indebted+famine",1],["collapsed|Elevated|wartime",1],["collapsed|Elevated|religious_conversion",1],["collapsed|Contained|politically_fractured",1],["collapsed|Elevated|indebted",1],["collapsed|Elevated|mass_migration",1]]
+
+  (ii) HALL CAPTURE (powerStructure.criminalCaptureState, domain/people/hallCapture.js :48 ladder none/adversarial/equilibrium/corrupted/capture) x Safety: [["none | Moderate",196],["none | Dangerous",20],["none | Tense",16],["none | Strained",15],["none | Volatile",12],["equilibrium | Moderate",10],["none | Unsafe",7],["none | Suspicious",4],["equilibrium | Dangerous",3],["none | Desperate",2],["none | Restricted",2],["corrupted | Volatile",2],["corrupted | Moderate",2],["none | Controlled",1],["equilibrium | Tense",1],["equilibrium | Controlled",1],["equilibrium | Strained",1],["corrupted | Dangerous",1],["equilibrium | Unsafe",1],["equilibrium | Volatile",1],["equilibrium | Suspicious",1],["corrupted | Tense",1]]
+  hall corrupted/captured or a criminal power governing: 6/300; of them Safety Moderate or better: 3 ([["metropolis corrupted Moderate",2],["metropolis corrupted Tense",1]]); equilibrium (shared) 19, of them Moderate+ 12
+  governing power category: [["government",226],["economy",48],["other",22],["noble",4]]
+
+  (iii) WHAT SETS SAFETY (calm, 209 towns; replay agrees with the stored word in 209/209):
+    thorp      [["size floor -> Moderate",36],["ratio -> Dangerous",1]]; raw ratio would read [["Dangerous",32],["Unsafe",5]]
+    hamlet     [["size floor -> Moderate",22],["ratio -> Moderate",7],["ratio -> Dangerous",1]]; raw ratio would read [["Dangerous",23],["Moderate",7]]
+    village    [["size floor -> Moderate",29],["ratio -> Moderate",7]]; raw ratio would read [["Dangerous",29],["Moderate",7]]
+    town       [["ratio -> Moderate",12],["court floor -> Moderate",12],["size floor -> Moderate",11]]; raw ratio would read [["Unsafe",18],["Moderate",12],["Dangerous",5]]
+    city       [["ratio -> Moderate",15],["court floor -> Moderate",14],["size floor -> Unsafe",4],["ratio -> Unsafe",2]]; raw ratio would read [["Unsafe",20],["Moderate",15]]
+    metropolis [["court floor -> Moderate",29],["ratio -> Moderate",7]]; raw ratio would read [["Unsafe",29],["Moderate",7]]
+    court floor alone sets the word: 55/209 (26%); a size floor alone: 102/209 (49%); either floor: 75%
+
+════ (b) OUTPUT n/100 / PROSPERITY / ECONOMY PROSE
+
+── PAIR b1 Economics Output n/100 (raw score -> causal rung) vs prosperity word (Overview + Economics header)
+  2+ rungs apart: ALL 109/300 (36%) | thorp 3/50 (6%) · hamlet 9/50 (18%) · village 11/50 (22%) · town 9/50 (18%) · city 35/50 (70%) · metropolis 42/50 (84%)
+  cross-tab (A | B: towns, * = 2+ apart): 47 | Prosperous: 84* ; 38 | Moderate: 42 ; 38 | Poor: 35 ; 38 | Comfortable: 17 ; 50 | Prosperous: 13 ; 50 | Comfortable: 11 ; 50 | Moderate: 8 ; 38 | Struggling: 6* ; 47 | Comfortable: 6 ; 28 | Struggling: 5 ; 22 | Struggling: 5 ; 50 | Poor: 5* ; 33 | Struggling: 5* ; 40 | Comfortable: 5 ; 37 | Struggling: 4* ; 47 | Moderate: 4 ; 32 | Moderate: 3 ; 32 | Poor: 3 ; 44 | Comfortable: 3 ; 39 | Comfortable: 3 ; 33 | Moderate: 2 ; 18 | Struggling: 2 ; 33 | Poor: 2 ; 32 | Struggling: 2* ; 40 | Moderate: 2 ; 47 | Poor: 2 ; 45 | Moderate: 2 ; 41 | Comfortable: 2 ; 17 | Struggling: 1 ; 38 | Prosperous: 1* ; 16 | Struggling: 1 ; 33 | Comfortable: 1 ; 35 | Moderate: 1 ; 27 | Poor: 1 ; 40 | Poor: 1 ; 34 | Struggling: 1* ; 43 | Struggling: 1* ; 45 | Poor: 1 ; 37 | Moderate: 1 ; 26 | Struggling: 1 ; 46 | Moderate: 1 ; 35 | Poor: 1 ; 34 | Comfortable: 1 ; 46 | Comfortable: 1 ; 20 | Struggling: 1
+  of those 2+ apart, the Output chip STILL PRINTS (outputChipBesideWord true): 109/109; chip suppressed in all 300: 0
+
+── PAIR b1-printed Output (chip printed only) vs prosperity
+  2+ rungs apart: ALL 109/300 (36%) | thorp 3/50 (6%) · hamlet 9/50 (18%) · village 11/50 (22%) · town 9/50 (18%) · city 35/50 (70%) · metropolis 42/50 (84%)
+  cross-tab (A | B: towns, * = 2+ apart): 47 | Prosperous: 84* ; 38 | Moderate: 42 ; 38 | Poor: 35 ; 38 | Comfortable: 17 ; 50 | Prosperous: 13 ; 50 | Comfortable: 11 ; 50 | Moderate: 8 ; 38 | Struggling: 6* ; 47 | Comfortable: 6 ; 28 | Struggling: 5 ; 22 | Struggling: 5 ; 50 | Poor: 5* ; 33 | Struggling: 5* ; 40 | Comfortable: 5 ; 37 | Struggling: 4* ; 47 | Moderate: 4 ; 32 | Moderate: 3 ; 32 | Poor: 3 ; 44 | Comfortable: 3 ; 39 | Comfortable: 3 ; 33 | Moderate: 2 ; 18 | Struggling: 2 ; 33 | Poor: 2 ; 32 | Struggling: 2* ; 40 | Moderate: 2 ; 47 | Poor: 2 ; 45 | Moderate: 2 ; 41 | Comfortable: 2 ; 17 | Struggling: 1 ; 38 | Prosperous: 1* ; 16 | Struggling: 1 ; 33 | Comfortable: 1 ; 35 | Moderate: 1 ; 27 | Poor: 1 ; 40 | Poor: 1 ; 34 | Struggling: 1* ; 43 | Struggling: 1* ; 45 | Poor: 1 ; 37 | Moderate: 1 ; 26 | Struggling: 1 ; 46 | Moderate: 1 ; 35 | Poor: 1 ; 34 | Comfortable: 1 ; 46 | Comfortable: 1 ; 20 | Struggling: 1
+
+── PAIR b2 prosperity word vs Foundations Economic capacity
+  2+ rungs apart: ALL 35/300 (12%) | thorp 8/50 (16%) · hamlet 15/50 (30%) · village 9/50 (18%) · town 2/50 (4%) · city 0/50 (0%) · metropolis 1/50 (2%)
+  cross-tab (A | B: towns, * = 2+ apart): Prosperous | surplus: 95 ; Moderate | adequate: 64 ; Poor | strained: 51 ; Comfortable | adequate: 50 ; Struggling | strained: 35* ; Prosperous | adequate: 3 ; Moderate | strained: 2
+
+── PAIR b3 prosperity word vs Overview Economic Resilience bar
+  2+ rungs apart: ALL 64/300 (21%) | thorp 27/50 (54%) · hamlet 19/50 (38%) · village 11/50 (22%) · town 5/50 (10%) · city 1/50 (2%) · metropolis 1/50 (2%)
+  cross-tab (A | B: towns, * = 2+ apart): Prosperous | STRONG: 94 ; Moderate | WEAK: 44* ; Poor | WEAK: 42 ; Comfortable | STRONG: 28 ; Struggling | CRITICAL: 23 ; Comfortable | ADEQUATE: 15 ; Moderate | ADEQUATE: 11 ; Struggling | WEAK: 10 ; Poor | ADEQUATE: 8* ; Moderate | STRONG: 8 ; Comfortable | WEAK: 7* ; Prosperous | ADEQUATE: 4 ; Moderate | CRITICAL: 3* ; Struggling | ADEQUATE: 2* ; Poor | CRITICAL: 1
+
+── PAIR b4 Output n/100 vs Overview Economic Resilience bar
+  2+ rungs apart: ALL 131/300 (44%) | thorp 1/50 (2%) · hamlet 8/50 (16%) · village 10/50 (20%) · town 17/50 (34%) · city 45/50 (90%) · metropolis 50/50 (100%)
+  cross-tab (A | B: towns, * = 2+ apart): 47 | STRONG: 89* ; 38 | WEAK: 79 ; 50 | STRONG: 19 ; 38 | ADEQUATE: 12 ; 50 | ADEQUATE: 12 ; 38 | CRITICAL: 7* ; 47 | ADEQUATE: 7 ; 33 | WEAK: 6 ; 50 | WEAK: 6* ; 40 | STRONG: 6* ; 22 | CRITICAL: 5 ; 32 | WEAK: 5 ; 28 | CRITICAL: 4 ; 44 | STRONG: 3* ; 38 | STRONG: 3* ; 39 | STRONG: 3* ; 18 | CRITICAL: 2 ; 37 | CRITICAL: 2* ; 37 | WEAK: 2 ; 33 | ADEQUATE: 2 ; 32 | CRITICAL: 2* ; 33 | CRITICAL: 2* ; 45 | STRONG: 2* ; 46 | STRONG: 2* ; 17 | CRITICAL: 1 ; 32 | ADEQUATE: 1 ; 16 | CRITICAL: 1 ; 28 | WEAK: 1 ; 35 | WEAK: 1 ; 27 | CRITICAL: 1 ; 40 | WEAK: 1 ; 34 | WEAK: 1 ; 43 | ADEQUATE: 1 ; 45 | ADEQUATE: 1 ; 41 | ADEQUATE: 1 ; 37 | STRONG: 1* ; 40 | ADEQUATE: 1 ; 26 | WEAK: 1 ; 35 | ADEQUATE: 1 ; 41 | STRONG: 1* ; 34 | STRONG: 1* ; 20 | ADEQUATE: 1*
+
+  OUTPUT n/100 distribution by size (economicState.compound.economyOutput, priorityHelpers.js :428): thorp [[38,38],[32,4],[28,2],[33,2],[17,1],[22,1],[18,1],[16,1]] | hamlet [[38,31],[22,4],[33,3],[50,2],[37,2],[28,2],[32,2],[35,1],[27,1],[18,1],[40,1]] | village [[38,29],[50,10],[33,5],[37,2],[32,2],[34,1],[28,1]] | town [[50,21],[47,17],[45,3],[40,2],[44,2],[43,1],[41,1],[37,1],[26,1],[46,1]] | city [[47,36],[50,4],[40,3],[39,2],[35,1],[38,1],[41,1],[34,1],[44,1]] | metropolis [[47,43],[40,2],[38,2],[46,1],[39,1],[20,1]]
+  Output >= 60 (green chip) in 0/300; max 50
+  Prosperity by size: thorp [["Moderate",22],["Comfortable",12],["Struggling",8],["Poor",7],["Prosperous",1]] | hamlet [["Moderate",18],["Struggling",15],["Poor",15],["Comfortable",2]] | village [["Poor",24],["Moderate",13],["Struggling",9],["Comfortable",3],["Prosperous",1]] | town [["Comfortable",16],["Prosperous",15],["Moderate",13],["Poor",4],["Struggling",2]] | city [["Prosperous",39],["Comfortable",10],["Poor",1]] | metropolis [["Prosperous",42],["Comfortable",7],["Struggling",1]]
+
+  (iv) OUTPUT DRAGS: dial (compound.raw.economy) [[50,300]]; neighbour factor read back [["1.00",300]] (the code's values 0.88/0.93/0.97/1/1.05/1.08: a value outside them would be a misread)
+    the largest drag, by size: thorp [["market",46],["crisis",4]] | hamlet [["market",41],["crisis",7],["none",2]] | village [["market",39],["none",10],["crisis",1]] | town [["none",21],["crime",18],["crisis",11]] | city [["crime",37],["crisis",9],["none",4]] | metropolis [["crime",44],["crisis",6]]
+    the largest drag, all: [["market",126],["crime",99],["crisis",38],["none",37]]; share of the dial made (output/dial): median 0.80, min 0.32, max 1.01
+    no market (x0.75) in 136/300 (thorp 50 hamlet 47 village 39 town 0 city 0 metropolis 0); crime drag below 0.95 in 118; a crisis drag in 63
+
+  DS-ECO-1 header pool by prosperity (economyStateProse.js :: prosperityHeaderPoolKey): [["COMBINATION C1 Prosperous",98],["COMBINATION C3 Moderate",66],["COMBINATION C3 Comfortable",50],["COMBINATION C4 Poor",40],["COMBINATION C4 Struggling",21],["COMBINATION C5 Struggling",14],["COMBINATION C5 Poor",11]]
+  C3 towns ("nobody here calls the town poor" is C3 vid 2): 116; their Output: <35 (red chip) 7, 35-59 109, >=60 0; Economic Resilience [["WEAK",51],["STRONG",36],["ADEQUATE",26],["CRITICAL",3]]; Economic capacity [["adequate",114],["strained",2]]
+
+════ (c) RELIANCE ON MAGIC / MAGICAL CAPABILITY / MAGIC HEADLINE / MAGICAL STABILITY / ARCANE SUPPORT
+
+── PAIR c1 Reliance on magic vs Magical Capability (both as printed on Overview; capability gated by magicRowsGated)
+  2+ rungs apart: ALL 26/300 (9%) | thorp 0/50 (0%) · hamlet 0/50 (0%) · village 10/50 (20%) · town 9/50 (18%) · city 6/50 (12%) · metropolis 1/50 (2%)
+  cross-tab (A | B: towns, * = 2+ apart): none | CRITICAL: 140 ; none | WEAK: 42 ; relied-upon | STRONG: 35 ; integral | STRONG: 27 ; relied-upon | ADEQUATE: 23 ; relied-upon | CRITICAL: 9* ; relied-upon | WEAK: 9* ; none | ADEQUATE: 6* ; integral | ADEQUATE: 6 ; present | WEAK: 1 ; present | ADEQUATE: 1* ; present | STRONG: 1*
+  Magical Capability score by reliance: none n=188 median 0 max 46 | present n=3 median 41 max 70 | relied-upon n=76 median 63 max 80 | integral n=33 median 73 max 80
+  cross-tab Magic headline (Magic tab) | Reliance: [["Medium | None",188],["Medium | Relied upon",76],["Medium | Integral",33],["Medium | Present",3]]
+  cross-tab Magic headline | Magical Capability: [["Medium | CRITICAL",149],["Medium | STRONG",63],["Medium | WEAK",52],["Medium | ADEQUATE",36]]
+  c1 2+ apart: hxd-village-6 reliance relied-upon | capability CRITICAL (0) | dependents ["Divine & Magical Healing"] | practitioners [] | Arcane Support None
+  c1 2+ apart: hxd-village-10 reliance relied-upon | capability CRITICAL (0) | dependents ["Divine & Magical Healing"] | practitioners [] | Arcane Support None
+  c1 2+ apart: hxd-village-13 reliance relied-upon | capability CRITICAL (0) | dependents ["Divine & Magical Healing"] | practitioners [] | Arcane Support None
+  c1 2+ apart: hxd-village-20 reliance relied-upon | capability CRITICAL (0) | dependents ["Divine & Magical Healing"] | practitioners [] | Arcane Support None
+  c1 2+ apart: hxd-village-21 reliance relied-upon | capability WEAK (25) | dependents ["Food supply"] | practitioners [] | Arcane Support None
+  c1 2+ apart: hxd-village-22 reliance relied-upon | capability CRITICAL (0) | dependents ["River Fishing","Divine & Magical Healing"] | practitioners [] | Arcane Support None
+  c1 2+ apart: hxd-village-34 reliance relied-upon | capability CRITICAL (0) | dependents ["Livestock & Dairy","Divine & Magical Healing"] | practitioners [] | Arcane Support None
+  c1 2+ apart: hxd-village-39 reliance relied-upon | capability CRITICAL (0) | dependents ["Divine & Magical Healing"] | practitioners [] | Arcane Support None
+  c1 2+ apart: hxd-village-41 reliance relied-upon | capability CRITICAL (0) | dependents ["Divine & Magical Healing"] | practitioners [] | Arcane Support None
+  c1 2+ apart: hxd-village-43 reliance relied-upon | capability CRITICAL (0) | dependents ["Divine & Magical Healing"] | practitioners [] | Arcane Support None
+  c1 2+ apart: hxd-town-11 reliance present | capability ADEQUATE (41) | dependents [] | practitioners ["Scroll scribe"] | Arcane Support Present
+  c1 2+ apart: hxd-town-13 reliance relied-upon | capability WEAK (31) | dependents ["Divine & Magical Healing"] | practitioners [] | Arcane Support None
+  c1 2+ apart: hxd-town-22 reliance none | capability ADEQUATE (43) | dependents [] | practitioners [] | Arcane Support None
+  c1 2+ apart: hxd-town-25 reliance none | capability ADEQUATE (43) | dependents [] | practitioners [] | Arcane Support None
+  c1 2+ apart: hxd-town-27 reliance none | capability ADEQUATE (46) | dependents [] | practitioners [] | Arcane Support None
+  c1 2+ apart: hxd-town-29 reliance relied-upon | capability WEAK (28) | dependents ["Grain & Bread","River Fishing","Brewing & Malting","Divine & Magical Healing"] | practitioners [] | Arcane Support None
+  c1 2+ apart: hxd-town-40 reliance none | capability ADEQUATE (42) | dependents [] | practitioners [] | Arcane Support None
+  c1 2+ apart: hxd-town-44 reliance relied-upon | capability WEAK (36) | dependents ["Divine & Magical Healing"] | practitioners [] | Arcane Support None
+  c1 2+ apart: hxd-town-45 reliance relied-upon | capability WEAK (39) | dependents ["Herbalism & Remedies","Divine & Magical Healing"] | practitioners [] | Arcane Support None
+  c1 2+ apart: hxd-city-7 reliance none | capability ADEQUATE (46) | dependents [] | practitioners [] | Arcane Support None
+  c1 2+ apart: hxd-city-9 reliance relied-upon | capability WEAK (33) | dependents ["Divine & Magical Healing"] | practitioners [] | Arcane Support None
+  c1 2+ apart: hxd-city-12 reliance relied-upon | capability WEAK (39) | dependents ["Herbalism & Remedies"] | practitioners [] | Arcane Support None
+  c1 2+ apart: hxd-city-15 reliance relied-upon | capability WEAK (39) | dependents ["spellcasting","divine_healing"] | practitioners ["Mages' guild"] | Arcane Support Present
+  c1 2+ apart: hxd-city-21 reliance none | capability ADEQUATE (41) | dependents [] | practitioners [] | Arcane Support None
+  c1 2+ apart: hxd-city-39 reliance relied-upon | capability WEAK (39) | dependents ["spellcasting","divine_healing"] | practitioners ["Mages' guild"] | Arcane Support Present
+  c1 2+ apart: hxd-metropolis-14 reliance present | capability STRONG (70) | dependents [] | practitioners ["Academy of magic","Enchanter's shop"] | Arcane Support Present
+
+── PAIR c2 Magical Capability vs Foundations Magical stability
+  2+ rungs apart: ALL 201/300 (67%) | thorp 50/50 (100%) · hamlet 50/50 (100%) · village 50/50 (100%) · town 43/50 (86%) · city 8/50 (16%) · metropolis 0/50 (0%)
+  cross-tab (A | B: towns, * = 2+ apart): CRITICAL | adequate: 149* ; STRONG | adequate: 63 ; WEAK | adequate: 52* ; ADEQUATE | adequate: 36
+  cross-tab Reliance | Defense Arcane Support: [["None | None",188],["Relied upon | Present",57],["Integral | Present",33],["Relied upon | None",19],["Present | Present",3]]
+  cross-tab Magical Capability | Defense Arcane Support: [["CRITICAL | None",149],["STRONG | Present",63],["WEAK | None",49],["ADEQUATE | Present",27],["ADEQUATE | None",9],["WEAK | Present",3]]
+
+════ (d) FURTHER PAIRS ON THE SAME PAGES
+
+── PAIR d1 Overview Defense (readiness label) vs Foundations Defense readiness
+  2+ rungs apart: ALL 0/300 (0%) | thorp 0/50 (0%) · hamlet 0/50 (0%) · village 0/50 (0%) · town 0/50 (0%) · city 0/50 (0%) · metropolis 0/50 (0%)
+  cross-tab (A | B: towns, * = 2+ apart): Vulnerable | strained: 94 ; Fortress | surplus: 54 ; Vulnerable | critical: 36 ; Lightly Defended | strained: 29 ; Well-Defended | adequate: 29 ; Undefended | critical: 19 ; Fortress | adequate: 18 ; Defensible | strained: 12 ; Defensible | adequate: 7 ; Undefended | collapsed: 1 ; Lightly Defended | critical: 1
+
+── PAIR d2 stability heading vs Foundations Public legitimacy
+  2+ rungs apart: ALL 24/300 (8%) | thorp 2/50 (4%) · hamlet 4/50 (8%) · village 7/50 (14%) · town 2/50 (4%) · city 0/50 (0%) · metropolis 9/50 (18%)
+  cross-tab (A | B: towns, * = 2+ apart): Stable | strained: 71 ; Stable | adequate: 49 ; Stable | surplus: 44 ; Tense | strained: 22 ; Ordered | adequate: 15 ; Tense | critical: 14 ; Desperate | collapsed: 9 ; Anxious | collapsed: 6* ; Fractured | critical: 6 ; Tense | collapsed: 6* ; Strained | strained: 5 ; Vulnerable | adequate: 5 ; Ordered | surplus: 5 ; Volatile | adequate: 5* ; Strained | critical: 4 ; Shaken | collapsed: 3 ; Volatile | critical: 3 ; Unstable | collapsed: 3 ; Strained | collapsed: 3* ; Unstable | strained: 3 ; Fractured | strained: 3 ; Critical | collapsed: 2 ; Tense | adequate: 2 ; Fractured | adequate: 2* ; Suppressed | critical: 1 ; Volatile | strained: 1 ; Fractured | collapsed: 1 ; Anxious | critical: 1 ; Shaken | strained: 1 ; Suppressed | strained: 1 ; Anxious | strained: 1 ; Shaken | adequate: 1* ; Vulnerable | surplus: 1* ; Strained | adequate: 1
+  Public legitimacy word printed (Foundations) by stability: [["Stable | strained",71],["Stable | adequate",49],["Stable | surplus",44],["Tense | strained",22],["Ordered | adequate",15],["Tense | critical",14],["Desperate | collapsed",9],["Anxious | collapsed",6],["Fractured | critical",6],["Tense | collapsed",6],["Strained | strained",5],["Vulnerable | adequate",5],["Ordered | surplus",5],["Volatile | adequate",5],["Strained | critical",4],["Shaken | collapsed",3],["Volatile | critical",3],["Unstable | collapsed",3],["Strained | collapsed",3],["Unstable | strained",3],["Fractured | strained",3],["Critical | collapsed",2],["Tense | adequate",2],["Fractured | adequate",2],["Suppressed | critical",1],["Volatile | strained",1],["Fractured | collapsed",1],["Anxious | critical",1],["Shaken | strained",1],["Suppressed | strained",1],["Anxious | strained",1],["Shaken | adequate",1],["Vulnerable | surplus",1],["Strained | adequate",1]]
+
+════ RENDERED CHECK (views/: the page census walker, hxd-<size>-0..9)
+  rendered towns: 60; page word == record word: safety 60/60 · law 60/60 · crim 60/60 · stability 60/60 · prosperity 60/60 · output 60/60 · reliance 60/60 · magCap 60/60 · magLevel 60/60
+  2+ apart AS RENDERED (both words on the page): a1 Safety/Law 8/60 · a2 Safety/CrimOpp 9/60 · a3 Safety/Stability 3/60 · b1 Output(printed)/Prosperity 22/60 · c1 Reliance/MagCap 3/60
