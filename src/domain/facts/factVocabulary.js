@@ -568,6 +568,19 @@ export const FACT_DIMENSIONS = Object.freeze({
     reader: (/** @type {FactsLike} */ f, /** @type {string|null} */ key) => (f.orderForce && typeof f.orderForce === 'object' && key ? bool(/** @type {Record<string, unknown>} */ (f.orderForce)[key]) : undefined) }),
   // ── the crisis dimension (the inverse default) ──
   crisis: dim({ shape: 'crisis', home: 'crisis', reader: (f) => f.crisis }),
+  // PAGE-7 (CAUSES-DATA addendum 3, item 2: the chair's ruling of 16:30; addendum 4 adds `caravans`; vetoable by the owner,
+  // new vocabulary): `house: thieves_guild`, `house: smuggling` and `house: caravans` = a house of the group stands on the live roster by catalogue identity
+  // (`causeHouses.js :: causeHouseStands`): the troubles' causes that name a thieves' guild or smuggling presume one.
+  house: dim({ shape: 'presence', home: 'causeHouses', keys: ['thieves_guild', 'smuggling', 'caravans'],
+    reader: (/** @type {FactsLike} */ f, /** @type {string|null} */ key) => {
+      const houses = /** @type {Record<string, unknown>} */ (f).causeHouses;
+      const group = key === 'thieves_guild' ? 'thievesGuild' : key === 'smuggling' || key === 'caravans' ? key : null;
+      return houses && typeof houses === 'object' && group ? bool(/** @type {Record<string, unknown>} */ (houses)[group]) : undefined;
+    } }),
+  // PAGE-7 (CAUSES-DATA addendum 4: the chair's 17:32; vetoable by the owner, new vocabulary): `house: caravans` (above: a
+  // caravan house on the live roster, `causeHouses.js`) and `entrepot` = goods pass through here on their way elsewhere, the
+  // economy's stored mark (`entrepot.js`): a line that calls the place a waypoint of passing trade presumes it.
+  entrepot: dim({ shape: 'presence', home: 'entrepot', reader: (/** @type {FactsLike} */ f) => bool(/** @type {Record<string, unknown>} */ (f).entrepot) }),
 });
 
 /** The crisis dimension's legal values. */

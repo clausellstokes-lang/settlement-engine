@@ -498,7 +498,8 @@ const HOUSE_FAMILIES = (() => {
     const stem = new RegExp(key.split(' ').map((w) => w.replace(/'s$|s'$/, '').replace(/(?:ery|ers|er|ry|y)$/, '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('\\S*\\s+'), 'i');
     out[`house: ${key}`] = {
       kind: 'thing', layer: 'P', leaf: `institutions.js :: liveInstitutionNames, or a power of the name (a house named ${key}); its atom \`house: ${key}\` waits for a factsOf getter`,
-      words: re, atoms: [], absent: (_f, rosterNames, record) => !rosterHas(rosterNames, stem) && !powerNames(record).some((n) => stem.test(n)),
+      words: re, atoms: key === "thieves' guild" ? ['house: thieves_guild'] : key === 'smuggling' ? ['house: smuggling'] : [], // PAGE-7 (CAUSES-DATA addendum 4, item 1): the two atoms answered by `causeHouses.js`
+      absent: (_f, rosterNames, record) => !rosterHas(rosterNames, stem) && !powerNames(record).some((n) => stem.test(n)),
       pageWithdrawn: PAGE_WITHDRAWN.house,
     };
   }

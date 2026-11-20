@@ -251,6 +251,12 @@ export const LEAVES = Object.freeze({
     note: 'the stored capture climate, written at assembly from the cast (a back-write)' }),
   // ── layer 5 ──
   hallCapture: leaf({ layer: 5, module: 'domain/people/hallCapture.js', exported: 'hallCaptureOf', call: 'record', reads: ['npcs', 'powerStructure', 'powerStructure.criminalCaptureState'] }),
+  // ── appended ──
+  // PAGE-7 (CAUSES-DATA addendum 3): the houses a trouble's cause names, on the live roster by catalogue identity
+  // (`causeHouses.js`); layer 1, the roster's: a criminal or covert house the shared document hides is gone from it there
+  causeHouses: home('causeHouses', 1, ['institutions']),
+  // PAGE-7 (CAUSES-DATA addendum 4): goods pass through here, the economy's stored mark (`entrepot.js`; layer 2 over the economy)
+  entrepot: home('entrepot', 2, ['economicState']),
 });
 
 /**
