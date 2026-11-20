@@ -440,7 +440,7 @@ describe('FIX-G1 — the viability summary counts the list the record publishes'
     // FIX-FOOD-ISOLATION ratio under the measure (250 of 274; 220 of 241), and the offenders below stay 0: the invariant itself.
     expect(stating, 'no row stated a dependency count — the sweep judged nothing').toBeGreaterThan(220);
     expect(offenders, `\n${offenders.join('\n')}\n`).toEqual([]);
-  }, 120_000);
+  }, 180_000); // its own budget, carrying the measured figure (CI-FIT point 75, 2026-11-20): 59.9 s in its shard here / 50.6 s in the last close's serial check; about 95.8 s on a CI runner (the measured factor), within three quarters of its 120 s; x 1.5 -> 180 s
 });
 
 /**
@@ -493,7 +493,7 @@ describe('STOP-1 — the food writer and its view derive the per cent from the p
     expect(gaps, 'no golden row carries a food gap, so the sweep judged nothing').toBeGreaterThan(200);
     expect(smallNeed, 'no golden row has a need under 100 lb, so rounding is never tested').toBeGreaterThan(60);
     expect(offenders).toEqual({ writerSign: [], viewSign: [], viewShare: [] });
-  }, 120_000);
+  }, 180_000); // its own budget, carrying the measured figure (CI-FIT point 75, 2026-11-20): 57.1 s in its shard here / 48.3 s in the last close's serial check; about 91.3 s on a CI runner (the measured factor), within three quarters of its 120 s; x 1.5 -> 180 s
 });
 
 function generateSettlementViability(settlement) {
