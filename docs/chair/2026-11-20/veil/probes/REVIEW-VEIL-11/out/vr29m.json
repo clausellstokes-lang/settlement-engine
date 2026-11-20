@@ -1,0 +1,190 @@
+{
+ "clean": {
+  "n": 95,
+  "ciEmpty": 76,
+  "ctEmpty": 44,
+  "ctLen": {
+   "0": 44,
+   "1": 15,
+   "2": 12,
+   "3": 20,
+   "4": 4
+  }
+ },
+ "hidden": {
+  "n": 185,
+  "ciEmpty": 8,
+  "ciAllHidden": 45,
+  "ciLeftEmpty": 53,
+  "ctEmpty": 5,
+  "ctLeftEmpty": 18,
+  "ctNamed": 39,
+  "ctLen": {
+   "0": 5,
+   "1": 61,
+   "2": 34,
+   "3": 39,
+   "4": 23,
+   "5": 15,
+   "6": 6,
+   "7": 2
+  },
+  "ctLeftLen": {
+   "0": 18,
+   "1": 52,
+   "2": 39,
+   "3": 39,
+   "4": 17,
+   "5": 14,
+   "6": 4,
+   "7": 2
+  }
+ },
+ "ctTypes": {
+  "Background crime": {
+   "clean": 12,
+   "hidden": 1
+  },
+  "political violence": {
+   "clean": 12,
+   "hidden": 18
+  },
+  "loyalty testing": {
+   "clean": 12,
+   "hidden": 18
+  },
+  "information trade": {
+   "clean": 12,
+   "hidden": 18
+  },
+  "debt evasion": {
+   "clean": 12,
+   "hidden": 20
+  },
+  "war profiteering": {
+   "clean": 11,
+   "hidden": 20
+  },
+  "deserter networks": {
+   "clean": 11,
+   "hidden": 20
+  },
+  "conscription fraud": {
+   "clean": 11,
+   "hidden": 20
+  },
+  "Criminal governance": {
+   "clean": 0,
+   "hidden": 4
+  },
+  "Religious fraud": {
+   "clean": 0,
+   "hidden": 15
+  },
+  "resistance activity": {
+   "clean": 7,
+   "hidden": 21
+  },
+  "collaboration fraud": {
+   "clean": 7,
+   "hidden": 21
+  },
+  "Smuggling": {
+   "clean": 0,
+   "hidden": 111
+  },
+  "Survival crime": {
+   "clean": 2,
+   "hidden": 30
+  },
+  "Street gang activity": {
+   "clean": 0,
+   "hidden": 41
+  },
+  "Arcane black market": {
+   "clean": 0,
+   "hidden": 14
+  },
+  "Commercial crime": {
+   "clean": 0,
+   "hidden": 17
+  },
+  "Magical crime": {
+   "clean": 0,
+   "hidden": 27
+  },
+  "quarantine violation": {
+   "clean": 0,
+   "hidden": 2
+  },
+  "plague profiteering": {
+   "clean": 0,
+   "hidden": 2
+  },
+  "Organized guild crime": {
+   "clean": 0,
+   "hidden": 8
+  },
+  "desperation theft": {
+   "clean": 3,
+   "hidden": 1
+  },
+  "black market food": {
+   "clean": 3,
+   "hidden": 1
+  },
+  "underground worship": {
+   "clean": 0,
+   "hidden": 1
+  },
+  "religious fraud": {
+   "clean": 0,
+   "hidden": 1
+  },
+  "contested property": {
+   "clean": 0,
+   "hidden": 1
+  },
+  "informant networks": {
+   "clean": 0,
+   "hidden": 1
+  },
+  "displacement crime": {
+   "clean": 0,
+   "hidden": 3
+  },
+  "cultural friction": {
+   "clean": 0,
+   "hidden": 3
+  },
+  "black market passage": {
+   "clean": 0,
+   "hidden": 3
+  }
+ },
+ "ex": [
+  {
+   "seed": "rv10-inv-town-none-0-11",
+   "ct": "[{\"type\":\"Smuggling\",\"desc\":\"An active port-based smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol schedules. The lack of controlled entry points makes movement relatively easy; no gates to bribe and no checkpoints to a",
+   "hn": [
+    "smuggling operation"
+   ]
+  },
+  {
+   "seed": "rv10-inv-town-insurgency-0-15",
+   "ct": "[{\"type\":\"Smuggling\",\"desc\":\"An active port-based smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol schedules. The settlement's gates and walls are checkpoints that smugglers work around. Bribing officials, using hidden ",
+   "hn": [
+    "street gang",
+    "smuggling operation"
+   ]
+  },
+  {
+   "seed": "rv10-inv-town-none-0-18",
+   "ct": "[{\"type\":\"Street gang activity\",\"desc\":\"Territorial gangs control specific districts, extorting local businesses and residents. Violence is episodic rather than constant: mostly enforcing territorial boundaries. The watch responds to the worst incidents but cannot contest territorial control. Distri",
+   "hn": [
+    "front businesses",
+    "street gang"
+   ]
+  }
+ ]
+}

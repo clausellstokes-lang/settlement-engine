@@ -120,6 +120,21 @@ FINAL ITEMS: (1) the faction `power` shares still sum below 100 where a faction 
 025db2dae): `power.share`'s recompose is not in D. (2) `weight` on the campaign map's member and its import: that read is
 unmarked until VEIL-DOORS's VR23 default veil lands.
 
+## 3c. VR29's question, answered before R3 builds (executed 03:00–03:10 UTC at 427ea0bed, `xb212`)
+
+`vr29.probe.jsx` (births only, both shapes, 280 per shape) and `ct.probe.jsx` (served, 45 towns with a hideable house).
+(1) AN EMPTY EVIDENCE ARRAY TELLS NOTHING: towns with no hideable house store `criminalInstitutions` empty in 77 of 96
+(master 76 of 95) and `crimeTypes` empty in 44 of 96; towns with hideable houses, every entry naming one removed, are left
+empty in 49 of 184 and 28 of 184. (2) A NAME SEARCH IS NOT ENOUGH FOR `crimeTypes`: some types exist only because of a
+criminal house: "Smuggling" in 107 of 184 towns with a hideable house and 0 of 96 without; "Religious fraud" 15 and 0;
+"Criminal governance" 4 and 0 (master alike). LIVE AT 427ea0bed: with the three family groupings OPENED by the DM and each
+criminal house hidden whole by the default, the gallery read serves `crimeTypes` with a bare `{"type":"Smuggling"}` in 27
+of 45 towns (the name search took the desc, which named "smuggling operation", and left the type): a crime-worded label
+that exists only because of a house hidden whole, tier 1 by VR28. Registered (`safety.crimeTypes`, withhold where a house
+is hidden), not built: R3 must withhold an entry by ATTRIBUTION (the type a hidden house raises), not by name. The served
+`criminalInstitutions` held no hidden house's name (0 of 45). Under the default veil (groupings shut) both keys are
+absent in 45 of 45.
+
 ## 4. THE RAW MEASURES, BOTH SHAPES, AT THIS TIP (`splitp.probe.jsx` on the new shape, 45 towns; `splitm` on master): every
 gallery read serves `economicState.compound.criminalEffective` (e.g. 82.84), `compound.militaryEffective` and
 `safetyProfile.safetyRatio` (45 of 45 new; 86 of 86 and 50 of 50 master), and `activeConditions[].severity` (32 of 45;

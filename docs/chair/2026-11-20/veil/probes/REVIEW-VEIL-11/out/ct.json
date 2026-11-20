@@ -1,0 +1,1213 @@
+[
+ {
+  "seed": "rv10-inv-village-none-0-8",
+  "ct": true,
+  "goneN": 1,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Criminal governance",
+   "Religious fraud",
+   "war profiteering",
+   "deserter networks",
+   "conscription fraud"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-village-none-0-8",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 78,
+  "cand": "31 values 32..100",
+  "has100": true,
+  "k": 3
+ },
+ {
+  "seed": "rv10-inv-town-none-0-11",
+  "ct": true,
+  "goneN": 1,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Smuggling"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-town-none-0-11",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 8
+ },
+ {
+  "seed": "rv10-inv-town-insurgency-0-15",
+  "ct": true,
+  "goneN": 2,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Smuggling",
+   "political violence",
+   "loyalty testing",
+   "information trade"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-town-insurgency-0-15",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 63,
+  "cand": "20 values 44..100",
+  "has100": true,
+  "k": 6
+ },
+ {
+  "seed": "rv10-inv-town-wartime-0-17",
+  "ct": true,
+  "goneN": 1,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "war profiteering",
+   "deserter networks",
+   "conscription fraud"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-town-wartime-0-17",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 8
+ },
+ {
+  "seed": "rv10-inv-town-none-0-18",
+  "ct": true,
+  "goneN": 2,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Street gang activity"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-town-none-0-18",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 11
+ },
+ {
+  "seed": "rv10-inv-town-occupied-0-19",
+  "ct": true,
+  "goneN": 2,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Street gang activity",
+   "resistance activity",
+   "collaboration fraud"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-town-occupied-0-19",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 87,
+  "cand": "22 values 45..100",
+  "has100": true,
+  "k": 6
+ },
+ {
+  "seed": "rv10-inv-town-none-0-21",
+  "ct": true,
+  "goneN": 2,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Street gang activity"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-town-none-0-21",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 8
+ },
+ {
+  "seed": "rv10-inv-town-wartime-0-27",
+  "ct": true,
+  "goneN": 5,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Survival crime",
+   "Smuggling",
+   "war profiteering",
+   "deserter networks",
+   "conscription fraud"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-town-wartime-0-27",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 79,
+  "cand": "17 values 60..100",
+  "has100": true,
+  "k": 6
+ },
+ {
+  "seed": "rv10-inv-town-politically_fractured-0-30",
+  "ct": true,
+  "goneN": 2,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Street gang activity"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-town-politically_fractured-0-30",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 8
+ },
+ {
+  "seed": "rv10-inv-city-none-0-31",
+  "ct": true,
+  "goneN": 4,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Arcane black market",
+   "Smuggling"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-city-none-0-31",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 81,
+  "cand": "13 values 69..100",
+  "has100": true,
+  "k": 11
+ },
+ {
+  "seed": "rv10-inv-city-none-0-32",
+  "ct": true,
+  "goneN": 6,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Arcane black market",
+   "Commercial crime",
+   "Smuggling",
+   "debt evasion"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-city-none-0-32",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 75,
+  "cand": null,
+  "has100": null,
+  "k": 13
+ },
+ {
+  "seed": "rv10-inv-city-none-0-33",
+  "ct": true,
+  "goneN": 7,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Commercial crime",
+   "Smuggling"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-city-none-0-33",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 87,
+  "cand": [
+   77,
+   86,
+   89,
+   93,
+   94,
+   96,
+   98,
+   99,
+   100
+  ],
+  "has100": true,
+  "k": 11
+ },
+ {
+  "seed": "rv10-inv-city-infiltrated-0-34",
+  "ct": true,
+  "goneN": 4,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Background crime"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-city-infiltrated-0-34",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 88,
+  "cand": [
+   63,
+   80,
+   84,
+   85,
+   87,
+   89,
+   90,
+   93,
+   97,
+   98,
+   99,
+   100
+  ],
+  "has100": true,
+  "k": 12
+ },
+ {
+  "seed": "rv10-inv-city-insurgency-0-35",
+  "ct": true,
+  "goneN": 1,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "political violence",
+   "loyalty testing",
+   "information trade"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-city-insurgency-0-35",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 82,
+  "cand": [
+   71,
+   78,
+   87,
+   90,
+   91,
+   94,
+   95,
+   96,
+   97,
+   98,
+   99,
+   100
+  ],
+  "has100": true,
+  "k": 10
+ },
+ {
+  "seed": "rv10-inv-city-indebted-0-36",
+  "ct": true,
+  "goneN": 7,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Arcane black market",
+   "Commercial crime",
+   "Smuggling",
+   "debt evasion"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-city-indebted-0-36",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 75,
+  "cand": [
+   75,
+   78,
+   83,
+   88,
+   94,
+   95,
+   97,
+   98,
+   99,
+   100
+  ],
+  "has100": true,
+  "k": 12
+ },
+ {
+  "seed": "rv10-inv-city-wartime-0-37",
+  "ct": true,
+  "goneN": 3,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "war profiteering",
+   "deserter networks",
+   "conscription fraud"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-city-wartime-0-37",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 88,
+  "cand": "14 values 74..100",
+  "has100": true,
+  "k": 11
+ },
+ {
+  "seed": "rv10-inv-city-none-0-38",
+  "ct": true,
+  "goneN": 2,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-city-none-0-38",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 12
+ },
+ {
+  "seed": "rv10-inv-city-occupied-0-39",
+  "ct": true,
+  "goneN": 2,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Commercial crime",
+   "resistance activity",
+   "collaboration fraud"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-city-occupied-0-39",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 80,
+  "cand": "15 values 69..100",
+  "has100": true,
+  "k": 9
+ },
+ {
+  "seed": "rv10-inv-city-politically_fractured-0-40",
+  "ct": true,
+  "goneN": 5,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Magical crime",
+   "Smuggling"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-city-politically_fractured-0-40",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 84,
+  "cand": [
+   81,
+   82,
+   84,
+   88,
+   92,
+   93,
+   94,
+   96,
+   97,
+   98,
+   99,
+   100
+  ],
+  "has100": true,
+  "k": 11
+ },
+ {
+  "seed": "rv10-inv-city-none-0-41",
+  "ct": true,
+  "goneN": 2,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-city-none-0-41",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 12
+ },
+ {
+  "seed": "rv10-inv-city-none-0-42",
+  "ct": true,
+  "goneN": 3,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Street gang activity"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-city-none-0-42",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 81,
+  "cand": "13 values 68..100",
+  "has100": true,
+  "k": 10
+ },
+ {
+  "seed": "rv10-inv-city-infiltrated-0-44",
+  "ct": true,
+  "goneN": 2,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Smuggling"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-city-infiltrated-0-44",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 15
+ },
+ {
+  "seed": "rv10-inv-city-indebted-0-46",
+  "ct": true,
+  "goneN": 6,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Smuggling",
+   "debt evasion"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-city-indebted-0-46",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 84,
+  "cand": "13 values 68..100",
+  "has100": true,
+  "k": 10
+ },
+ {
+  "seed": "rv10-inv-city-wartime-0-47",
+  "ct": true,
+  "goneN": 6,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Arcane black market",
+   "Commercial crime",
+   "Smuggling",
+   "war profiteering",
+   "deserter networks",
+   "conscription fraud"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-city-wartime-0-47",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 67,
+  "cand": null,
+  "has100": null,
+  "k": 13
+ },
+ {
+  "seed": "rv10-inv-city-occupied-0-49",
+  "ct": true,
+  "goneN": 3,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Smuggling",
+   "resistance activity",
+   "collaboration fraud"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-city-occupied-0-49",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 10
+ },
+ {
+  "seed": "rv10-inv-city-politically_fractured-0-50",
+  "ct": true,
+  "goneN": 6,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Smuggling"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-city-politically_fractured-0-50",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 79,
+  "cand": "13 values 69..100",
+  "has100": true,
+  "k": 11
+ },
+ {
+  "seed": "rv10-inv-metropolis-none-0-52",
+  "ct": true,
+  "goneN": 2,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "quarantine violation",
+   "plague profiteering"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-metropolis-none-0-52",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 12
+ },
+ {
+  "seed": "rv10-inv-metropolis-none-0-53",
+  "ct": true,
+  "goneN": 6,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Organized guild crime",
+   "Magical crime",
+   "Smuggling"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-metropolis-none-0-53",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 88,
+  "cand": [
+   66,
+   79,
+   84,
+   96,
+   97,
+   98,
+   99,
+   100
+  ],
+  "has100": true,
+  "k": 12
+ },
+ {
+  "seed": "rv10-inv-metropolis-infiltrated-0-54",
+  "ct": true,
+  "goneN": 5,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Street gang activity"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-metropolis-infiltrated-0-54",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 10
+ },
+ {
+  "seed": "rv10-inv-metropolis-insurgency-0-55",
+  "ct": true,
+  "goneN": 5,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Survival crime",
+   "Magical crime",
+   "Smuggling",
+   "political violence",
+   "loyalty testing",
+   "information trade"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-metropolis-insurgency-0-55",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 57,
+  "cand": null,
+  "has100": null,
+  "k": 13
+ },
+ {
+  "seed": "rv10-inv-metropolis-indebted-0-56",
+  "ct": true,
+  "goneN": 8,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Religious fraud",
+   "Commercial crime",
+   "Smuggling",
+   "debt evasion"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-metropolis-indebted-0-56",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 75,
+  "cand": "13 values 72..100",
+  "has100": true,
+  "k": 10
+ },
+ {
+  "seed": "rv10-inv-metropolis-wartime-0-57",
+  "ct": true,
+  "goneN": 8,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Survival crime",
+   "Magical crime",
+   "Smuggling",
+   "deserter networks",
+   "conscription fraud"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-metropolis-wartime-0-57",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 71,
+  "cand": [
+   73,
+   79,
+   83,
+   84,
+   85,
+   91,
+   95,
+   97,
+   98,
+   99,
+   100
+  ],
+  "has100": true,
+  "k": 11
+ },
+ {
+  "seed": "rv10-inv-metropolis-none-0-58",
+  "ct": true,
+  "goneN": 4,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Smuggling"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-metropolis-none-0-58",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 10
+ },
+ {
+  "seed": "rv10-inv-metropolis-occupied-0-59",
+  "ct": true,
+  "goneN": 8,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Smuggling",
+   "resistance activity",
+   "collaboration fraud"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-metropolis-occupied-0-59",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 80,
+  "cand": [
+   80,
+   82,
+   92,
+   93,
+   94,
+   95,
+   96,
+   97,
+   98,
+   99,
+   100
+  ],
+  "has100": true,
+  "k": 10
+ },
+ {
+  "seed": "rv10-inv-metropolis-politically_fractured-0-60",
+  "ct": true,
+  "goneN": 7,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Smuggling"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-metropolis-politically_fractured-0-60",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 89,
+  "cand": [
+   86,
+   93,
+   95,
+   96,
+   97,
+   98,
+   99,
+   100
+  ],
+  "has100": true,
+  "k": 12
+ },
+ {
+  "seed": "rv10-inv-metropolis-none-0-61",
+  "ct": true,
+  "goneN": 6,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Smuggling"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-metropolis-none-0-61",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 14
+ },
+ {
+  "seed": "rv10-inv-metropolis-none-0-62",
+  "ct": true,
+  "goneN": 5,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-metropolis-none-0-62",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 14
+ },
+ {
+  "seed": "rv10-inv-metropolis-none-0-63",
+  "ct": true,
+  "goneN": 3,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Survival crime",
+   "Magical crime"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-metropolis-none-0-63",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 12
+ },
+ {
+  "seed": "rv10-inv-metropolis-infiltrated-0-64",
+  "ct": true,
+  "goneN": 7,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Organized guild crime",
+   "Smuggling"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-metropolis-infiltrated-0-64",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 87,
+  "cand": "13 values 72..100",
+  "has100": true,
+  "k": 10
+ },
+ {
+  "seed": "rv10-inv-metropolis-insurgency-0-65",
+  "ct": true,
+  "goneN": 5,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Survival crime",
+   "Smuggling",
+   "political violence",
+   "loyalty testing",
+   "information trade"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-metropolis-insurgency-0-65",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 63,
+  "cand": "14 values 36..100",
+  "has100": true,
+  "k": 8
+ },
+ {
+  "seed": "rv10-inv-metropolis-indebted-0-66",
+  "ct": true,
+  "goneN": 3,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "debt evasion"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-metropolis-indebted-0-66",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 10
+ },
+ {
+  "seed": "rv10-inv-metropolis-wartime-0-67",
+  "ct": true,
+  "goneN": 6,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Arcane black market",
+   "Religious fraud",
+   "Survival crime",
+   "Smuggling",
+   "war profiteering",
+   "deserter networks",
+   "conscription fraud"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-metropolis-wartime-0-67",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 78,
+  "cand": [
+   67,
+   86,
+   92,
+   93,
+   94,
+   95,
+   96,
+   97,
+   98,
+   99,
+   100
+  ],
+  "has100": true,
+  "k": 12
+ },
+ {
+  "seed": "rv10-inv-metropolis-none-0-68",
+  "ct": true,
+  "goneN": 7,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Magical crime",
+   "Smuggling"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-metropolis-none-0-68",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 75,
+  "cand": "13 values 62..100",
+  "has100": true,
+  "k": 8
+ },
+ {
+  "seed": "rv10-inv-metropolis-occupied-0-69",
+  "ct": true,
+  "goneN": 7,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [
+   "Smuggling",
+   "resistance activity",
+   "collaboration fraud"
+  ],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-metropolis-occupied-0-69",
+  "withheld": 1,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 83,
+  "cand": null,
+  "has100": null,
+  "k": 13
+ },
+ {
+  "seed": "rv10-inv-metropolis-politically_fractured-0-70",
+  "ct": true,
+  "goneN": 1,
+  "ctServed": "absent",
+  "ciServed": "absent",
+  "ctStored": [],
+  "descHit": []
+ },
+ {
+  "seed": "rv10-inv-metropolis-politically_fractured-0-70",
+  "withheld": 0,
+  "weightA": true,
+  "weightServed": false,
+  "sumS": 100,
+  "sumLink": 100,
+  "trueP": 100,
+  "cand": null,
+  "has100": null,
+  "k": 10
+ }
+]
