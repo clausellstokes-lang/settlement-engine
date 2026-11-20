@@ -3,9 +3,11 @@
 Lane `lane/daily-1-2026-11-20`; chair session_019yED1SUxGVHyjQnoqoFvQ8; assignment
 `origin/lane/chair-2026-11-08:docs/chair/2026-11-20/seventh/prompts/DAILY-1.txt`.
 
-## State (written 17:47 UTC)
+## State (written 18:40 UTC)
 - Base: 43ab0f5eb (the line) fast-forwarded to bd42d63c7 (`lane/kernel-mix-2026-11-20`, `pickVariantMixed`).
-- 6eef1daa0 brief M1; 8c6b0c85e M1 measure (measures/M1/SUMMARY.md); 3f5e12eb7 briefs LINES-COMMON, L1, L2 (builders running).
+- 6eef1daa0 brief M1; 8c6b0c85e M1 measure (measures/M1/SUMMARY.md); 3f5e12eb7 briefs LINES-COMMON, L1, L2; 13a4ae656 LINES-1 (lines/L1); 58632c368 LINES-2 (lines/L2, incl. the owner-only dm slot); f8d313591 B-BUILD-COMMON; next commit B1 brief.
+- RUNNING: L1's builder revising per the chair's 18:37 ruling into lines/L1/LINES-1b.md (+probe.1b), owed to the chair as "DAILY-LINES 1b <commit>"; builder B1 in worktree /home/user/wt-daily-b1, branch lane/daily-1-2026-11-20-b1 (C1 dead npc call + parity arm, C2 atoms + needs module + walker, C3 gathering_places). AWAITING the chair's read of LINES-2 (my four calls in the DAILY-LINES message: beat by event name, crime wound falls to next tension, recent_changes without ratings, drop index-0 time words).
+- NEXT: B2 dawn_work + child_warnings after LINES-1b is ruled; B3 the L2 slots + the owner-only dm slot (its four conditions above) after LINES-2 is ruled. Merge each builder branch into the lane after reading its diff once and re-running its red and green; the lighting and wiring censuses by their doors at each merge; then "DAILY <commit>" to the chair.
 
 ## Order still owed (the prompt's (a) to (f))
 (a) measure and propose, falsest first (dawn_work, gathering_places, child_warnings) → (b) "DAILY-LINES <slots> <commit>"
@@ -13,7 +15,7 @@ to the chair → (c) one builder a slot family, red first → (d) merge, censuse
 (f) on the chair's word: Outlook warnings/dependencies, Magic reasons.
 
 ## Houses a wording needs (for the security reader), slot by slot
-(none yet)
+See LINES-1 § THE HOUSES EACH SLOT NEEDS and LINES-2 § HOUSES EACH WORDING NEEDS; the owner-only `commoner_resentments_dm` needs watch, guard force, gate, market, trade route (LINES-2 §2b). Final per-slot list written here at the build's merge.
 
 ## Rulings received (chair; each vetoable by the owner) — recorded 18:27 UTC
 - 18:19: key = name + slot for all eight, accepted. The dead `deriveAllNpcProfiles` call in `buildContext` is removed,
@@ -27,3 +29,15 @@ to the chair → (c) one builder a slot family, red first → (d) merge, censuse
   `commoner_resentments` chosen by no crime fact (the needs walker reds on one); `regenerationDelta` and
   `aiGrounding` never receive it (call sites named); listed here for the security reader; PAGE-9 told it prints only
   in the owner's view. `corruption_exposed`: DEAD (0 of 900); nothing written for it.
+
+- 18:37: LINES-1 approved in shape. dawn_work's DEFENCE branch only on a real outside threat (siege, monster, bandits,
+  hostile neighbour); the calm small place falls to the default pool (>=7 eligible at thorp/hamlet). child_warnings: a
+  kind from a rating alone is not taken (unrest needs a held trouble; economic_collapse needs Struggling/Poor or a real
+  stress); `none` >=7 at a thorp; corruption/cult not branches (fall to D0). Fields/beasts/water-first lines need a
+  small place (F6, B7, B9, B10, B13, N17, N23, P5, P8). Rewordings N0, B9, siege S0, rival N0. ATOMS GRANTED (rows of
+  `facts/institutions.js :: INSTITUTION_KIND_PATTERNS`, LIST FOR THE JOIN): waterSource, dwellings, farmland,
+  commonGrazing, bridge, square, bakery, warehouse, theatre, fishingLanding, rootCellar, shepherd, craftGuild.
+  wellLandmark NOT granted: N26, N27, P12 cut.
+
+## Losses to look at again (for the owner)
+- None yet beyond the crime clauses, which moved to the owner-only slot rather than being lost.
