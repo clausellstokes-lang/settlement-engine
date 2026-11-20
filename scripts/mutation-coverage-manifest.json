@@ -4687,6 +4687,10 @@
       "kind": "mutation",
       "label": "faults-watch/the holding cells hold pending trial only where a court sits"
     },
+    "tests/generators/misfitSecretSettle.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by PAGE-6's builder of S9 (S9-POST.md, the chair's ruling of 13:50, 2026-11-20). It pins that a card dealt a secret it is not admitted to (a role-free row whose holder tag, npcData.js :: CRIMINAL_SECRET_HOLDER_TAGS, does not name its class; a venal row on a principled card) holds, after the town's draw-free post-pass (npc/factionLeaderSecret.js :: settleMisfitSecrets, called from narrativeGenerator.js :: enrichNpcCoherence), the next admitted line of its noted pool that no card holds, and that a card that is no misfit keeps its secret byte for byte: on a clergy face's own stream (the misfit computed from the tag table, never quoted), on a principled face, and over four born towns. Red first at the lane commit eb5fedd13 (4 failed of 4). EXECUTED AT BUILD TIME: the pass call was removed from enrichNpcCoherence and restored from a cp backup taken before, verified byte-identical by cmp; the born-towns arm reddened on three named cards (hxd-city-3, hxd-metropolis-7, hxd-town-11). A sweep plant would re-plant the same call removal."
+    },
     "tests/data/powerNumberAgreement.test.js": {
       "kind": "mutation",
       "label": "names/a crisis stake's verb takes its power's number"
@@ -4702,6 +4706,10 @@
     "tests/lint/samenessHideable.walker.test.js": {
       "kind": "rationale",
       "rationale": "SAME-1 brief 3 (the chair, 2026-11-20; base 43ab0f5eb). Self-planting: every run reds a new public crime-pool line, a wording needing a criminal house, an unregistered drawn pool-shaped table and a stale join row, and passes the dm-only, exempted and listed twins; at build, dropping one row from each of its three lists reddened three arms, restored byte-identical by sha256."
+    },
+    "tests/data/arrivalPoolsDeepened.test.js": {
+      "kind": "rationale",
+      "rationale": "THE ARRIVAL PARAGRAPH'S THIN POOLS DEEPENED (L2, PAGE-2/PAGE-6, 2026-11-20; docs/chair/2026-11-20/content/page/briefs/L2.md). Its catching power is EXECUTED in the test body, not asserted: it births the measure's own 300 towns (hxd-<size>-<i>, 50 a size, DEFAULT_CONFIG) through the real pipeline and reads the stored arrivalScene, and it reds three ways: when a deepened pool holds fewer entries than its base count plus the lines L2 appended (an appended line removed), when the exact chance that at least two of three distinct towns share an arrival sentence word for word is not below its stated target of 18% (the base read 22.9%), and when an appended line is printed where its own declaration is refused by the town's record through the real readers (factsOf, factVocabulary.js :: declarationAdmits), or no appended line is printed at all (the admission arm cannot pass vacuously). Every anchor is computed from the pool's own export, never quoted. All three arms were RED on the base data files (3 failed of 3) and green with the appended lines (the commit bodies name them)."
     }
   },
   "meta": {
