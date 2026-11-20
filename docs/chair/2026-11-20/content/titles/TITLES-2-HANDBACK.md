@@ -1,4 +1,4 @@
-# TITLES-2: HAND-BACK (written 2026-11-20 07:19 UTC, amended 2026-11-20 07:28 UTC on the chair's rulings; branch `lane/titles-2-2026-11-20`, cut at `0fb18a574`)
+# TITLES-2: HAND-BACK (written 2026-11-20 07:19 UTC, amended 2026-11-20 07:28 UTC on the chair's rulings and 2026-11-20 08:05 UTC on its second rulings; branch `lane/titles-2-2026-11-20`, cut at `0fb18a574`)
 
 This is the second pass on the office titles. It fills the commonest fallback cells with words read in a named source.
 
@@ -67,16 +67,17 @@ These counts were rendered by a script from the data file. The same script, run 
 - **south_asian guild, town to metropolis: Jetthaka**, "the craft guild's chief".
   - The office: *jyeṣṭhaka*, the chief of an artisans' shreni, as distinct from the shreshthi of a merchants' guild.
   - Sources: Wikipedia "Shreni"; Shah and Agrawal, "Sreni (Guilds)", Infinity Foundation Mandala.
-- **slavic merchant, town to metropolis: Gost**, "the great merchant".
+- **slavic merchant, town to metropolis: Gost**, "first of the great merchants" (the chair's second ruling: KEPT, see §3 on Tysyatsky).
   - The office: Muscovy's *gosti* (about thirty in the 17th century) stood at the top of the merchant hierarchy and served the state for privileges. The word means "guest".
   - Source: Encyclopedia of Russian History via Encyclopedia.com, "Gosti" and "Gostinaya Sotnya".
 - **Not filled:** merchant in eight cultures, guild in nine (see §3).
 
 **Priority 4: the headman**
-- **latin headman, town to metropolis: Podestà**, "the commune's chief magistrate".
-  - The office: the single chief magistrate of most north and central Italian communes from the late 12th century through the 13th, usually an outsider the commune hired.
-  - Sources: Britannica "podesta"; Wikipedia "Podestà".
-  - **A note on tongue:** this is Italian from the Latin *potestas*; latin's other cells are classical. The culture's tongue was never fixed, and the profile reads "stone towns … run by patrons and lawyers". The chair may veto.
+- **latin headman, town to metropolis: Praetor**, "the town's chief magistrate". (The chair's second ruling: it replaced Podestà, keeping latin's cells classical.)
+  - The office: in classical times, the highest magistrates of the Latin towns. Rome's own consuls were at first called praetors; Festus has "the praetors, who are now consuls", and the Twelve Tables appear to give them no other title.
+  - Sources: 1911 Encyclopaedia Britannica, "Praetor"; Wikipedia "Praetor", citing Festus and Livy.
+  - **A caveat:** one source says the Latin communities were presided over by TWO praetors, and some by a single dictator. The word is the chief magistrate's, often one of a pair.
+  - Podestà is moved to §3.
 - **steppe headman, village to metropolis: Beg / Begim**, "the clan's chief".
   - The office: the Turkic title for a chief, later a lord, equal to the Arabic and Persian amir. The feminine is *begim* ("lady, princess"; Mughal *begam*).
   - Sources: Encyclopaedia Iranica, "Beg"; Wikipedia "Bey".
@@ -133,7 +134,7 @@ These counts were rendered by a script from the data file. The same script, run 
 | Biy | BEE | Beg / Begim | BEG / beg-EEM |
 | Sarpanch | SAR-punch | Zunftmeister | TSOONFT-my-ster |
 | Jetthaka | JET-ta-ka | Gost | GOST |
-| Podestà | poh-deh-STAH | Marschall | MAR-shall |
+| Praetor | PREE-tor | Marschall | MAR-shall |
 | Penteulu | pen-TAY-lee | Kumigashira | koo-mee-gah-SHEE-rah |
 | Obangashira | oh-bahn-gah-SHEE-rah | Tlacateccatl | tlah-kah-TEK-kahtl |
 | Amir al-Juyush | ah-MEER al-joo-YOOSH | Stallari | STAHL-lah-ree |
@@ -142,7 +143,7 @@ These counts were rendered by a script from the data file. The same script, run 
 
 These hints are from the words' usual English renderings. They are not drawn from the sources and are not executed: they are a reading aid.
 
-**Sources: the page and the work it rests on.** Where a page names the work it rests on, both appear in §1, as they do for Ra'is, Tlacateccatl, Zunftmeister, Vilicus and Maer. For Biy, Gost, Tairo, Obangashira, Kumigashira, Stallari, Penteulu, Tiun, Podestà, Marschall, Amir al-Juyush, Golova, Beg and Jetthaka, the page read IS the reference work, or names none beyond itself. The pages are Wikipedia, Britannica, Encyclopedia of Ukraine, Iranica, and the Old Norse dictionary entry with its Heimskringla citations.
+**Sources: the page and the work it rests on.** Where a page names the work it rests on, both appear in §1, as they do for Ra'is, Tlacateccatl, Zunftmeister, Vilicus and Maer. For Biy, Gost, Tairo, Obangashira, Kumigashira, Stallari, Penteulu, Tiun, Praetor (and the works it cites), Marschall, Amir al-Juyush, Golova, Beg and Jetthaka, the page read IS the reference work, or names none beyond itself. The pages are Wikipedia, Britannica, Encyclopedia of Ukraine, Iranica, and the Old Norse dictionary entry with its Heimskringla citations.
 
 **Where sources disagreed.** They disagreed only on details, never on what the office was. On the machi-doshiyori, they disagreed on whether the holders were chosen or hereditary. On the tiun, they disagreed on his blood-price. On the date of Badr al-Jamali's rise, they disagreed by a year. So no cell was moved to the fallback on that ground.
 
@@ -165,7 +166,7 @@ These hints are from the words' usual English renderings. They are not drawn fro
   - **Vilica** is female; `officeWordInfo` gives `sex: 'female'`.
   - **Begim** is female; `officeWordInfo` gives `sex: 'female'`.
 - Ra'is, Toshiyori, Biy and Sarpanch now sit in two or three families each. `officeWordInfo` returns all of them, sorted.
-- **For the security lane:** one new non-ASCII letter, the à of Podestà, which is Latin-1.
+- **For the security lane:** every new word is plain ASCII (Podestà, the one accented word, was replaced by Praetor).
 
 ## 3. UNSURE: left to the fallback, with what would settle each
 
@@ -207,6 +208,15 @@ TITLES-1's §5 list stands except for the cells filled above.
 - **headman above village:** every candidate is a common surname today (Patel, Chaudhuri, Pradhan, Deshmukh) or a police office (Kotwal).
 
 **latin:**
+- **headman, town and up: Podestà** (the chair's second ruling). It is sourced (Britannica "podesta"; Wikipedia "Podestà": the single chief magistrate of the Italian communes, from the late 12th century through the 13th). It is listed here because it is later Latin, medieval Italian, beside the table's classical words. Praetor holds the cells.
+
+**slavic, merchant: Tysyatsky** (the chair's second ruling, one search).
+- What the sources say:
+  - the merchant court of Novgorod included the tysyatsky and two representatives of the merchants (Wikipedia "Ivan's Hundred"; "Foreign trade of medieval Novgorod");
+  - the tysyatsky's own court "probably" served as a commercial court (Encyclopedia.com, "Novgorod Judicial Charter");
+  - the office was elected from the boyars, and began as the militia's captain.
+- Why it is not used: no source says he presided, and his tie is to a court, not to the merchants' own seat. Gost stays.
+
 - **council and headman below town, merchant, guild:** as in TITLES-1 (*magister* collides with the arcane classifier). Medieval *consules mercatorum* is a four-word phrase that I did not confirm per city.
 
 **norse:**
@@ -247,7 +257,7 @@ GERMANIC
 LATIN
  sovereign  ·(Chieftain)            ·(Chieftain)            ·(Chieftain)            Princeps                Rex / Regina            Imperator / Imperatrix
  appointed  Vilicus / Vilica        Vilicus / Vilica        Vilicus / Vilica        Procurator              Legate                  Proconsul
- headman    ·                       ·                       ·                       Podestà                 Podestà                 Podestà
+ headman    ·                       ·                       ·                       Praetor                 Praetor                 Praetor
  council    ·                       ·                       ·                       Consul                  Consul                  First Consul
  assembly   ·                       ·                       ·                       Tribune of the People   Tribune of the People   Tribune of the People
  elders     ·                       ·                       ·                       ·                       ·                       ·
@@ -443,3 +453,14 @@ Written 2026-11-20 07:23 UTC.
   - a fallback that is not today's: **3/19** red;
   - Imam in a criminal cell: **2/19** red;
   - **Otona planted back** at east_asian elders, thorp: **1/19** red. The strike is pinned.
+
+**Re-run after the chair's second rulings (2026-11-20 08:05 UTC, code at `c81c11065`):**
+- the suite is 19/19 green;
+- the plants, each restored by `cmp`:
+  - crown word in a council cell: 4/19 red;
+  - a fallback that is not today's: 3/19 red;
+  - Imam in a criminal cell: 2/19 red;
+  - Podestà planted back at latin headman, city: 2/19 red (the pinned rows, and its officeWordInfo pin);
+- `tests/data`: 594/594 green.
+
+No test title moved (the two TITLES-2 tests keep their titles), so the census was not re-taken. `tests/lint` whole at this commit: see the closing message.
