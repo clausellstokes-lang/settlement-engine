@@ -1,0 +1,6 @@
+      Tests  2 failed | 3259 passed (3261)
+ FAIL  tests/lint/exportTokenCoverage.test.js > export-token coverage census (Wave 0 — predicate liveness, never correctness) > the corpus vocabulary is live and the census is not measuring an empty set
+ FAIL  tests/lint/ledgerCitationIntegrity.test.js [ tests/lint/ledgerCitationIntegrity.test.js ]
+ FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the frozen register > the surfaceReach grammar round-trips: parse(format(reach)) equals reach for every LIT identity
+ Test Files  3 failed | 217 passed (220)
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
