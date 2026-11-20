@@ -346,7 +346,7 @@ describe('B4 — one home per sentence inside one export (the keep-on rules)', (
   // RE-KEYED BY IDENTITY at SW-B4's merge point (STYLE-2-MERGE, 2026-11-09): THE OWNER'S VETO 3 struck the pointer line
   // ("In full in Plot Hooks (04):") and the prior state returned — the Tonight sheet prints each hook's own text.
   it('Tonight prints each hook\'s own text (the owner\'s veto 3: no pointer into chapter 04); Plot Hooks prints it too', () => {
-    const sheet = composeTonightSheet(settlement);
+    const sheet = composeTonightSheet(settlement, { audience: 'owner' }); // the PDF's audience (FRAME-2 B3)
     const placed = sheet.hooks.filter((h) => h.source && plotHookPlace(vm.hooks.all, h.text));
     expect(placed.length, 'fixture premise: the sheet carries a titled hook chapter 04 lists').toBeGreaterThan(0);
     const tonight = joined(TonightAtTheTable({ settlement, vm }));

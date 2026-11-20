@@ -30,7 +30,7 @@ import {
   prominentPair, prominentType, prominentProse,
 } from '../pdf/lib/format.js';
 import { gateFaithEvents } from '../domain/display/faithEventFilter.js';
-import { composeTonightSheet, printsAsWant, secretLeadOf, sideReadOf, TONIGHT_COPY } from '../domain/summary/tonightSheet.js';
+import { composeTonightSheet, printsAsWant, secretLeadOf, sideReadOf, TONIGHT_AUDIENCES, TONIGHT_COPY } from '../domain/summary/tonightSheet.js';
 import { composeCrisisPage, CRISIS_PAGE_COPY } from '../domain/crisis/crisisPage.js';
 // ⛔ ONE HOME PER SENTENCE (STYLE-0 §3's keep-on rules, applied by STYLE-RULINGS-2 B4, 2026-11-09):
 // the crisis page's two print rules are the PDF's, from one module.
@@ -157,7 +157,8 @@ function statePage(vm) {
  * as fed by two record shapes, which hides its reads from the observed-shape instrument.
  */
 function tonightPage(settlement) {
-  const sheet = composeTonightSheet(settlement);
+  // THE OWNER'S SHEET (FRAME-2 B3): the Foundry module is the DM's own export, built from their own record
+  const sheet = composeTonightSheet(settlement, { audience: TONIGHT_AUDIENCES.owner });
   // THE OWNER'S VETO 3 (no connective lines): each hook prints its own text here, as it does on the
   // Plot Hooks page; no line points from one page to the other.
   const hookLine = (h) => `- ${esc(h.text)}${h.source ? ` *(${esc(h.source)})*` : ''}`;

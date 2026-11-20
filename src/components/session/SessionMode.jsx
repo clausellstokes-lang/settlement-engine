@@ -36,7 +36,7 @@ import { isFaithEventEntry } from '../../domain/display/faithEventFilter.js';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
-import { composeTonightSheet, TONIGHT_COPY } from '../../domain/summary/tonightSheet.js';
+import { composeTonightSheet, TONIGHT_AUDIENCES, TONIGHT_COPY } from '../../domain/summary/tonightSheet.js';
 import TonightSheet from '../TonightSheet.jsx';
 import EconomyFreshnessNote from '../new/EconomyFreshnessNote.jsx';
 import { tokenCase } from '../new/labelLadder.js';
@@ -198,7 +198,9 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
   const elevated = useStore(s => (typeof s.isElevated === 'function' ? s.isElevated() : false));
   const isPremium = tier === 'premium' || elevated;
 
-  const sheet = useMemo(() => composeTonightSheet(settlement), [settlement]);
+  // THE OWNER'S SHEET (FRAME-2 B3): Session Mode is mounted only by SettlementDetail, the Library's dossier, over a
+  // save from the owner's own shelf (SettlementsPanel: useOwnerScopedSaves); no shared page mounts it.
+  const sheet = useMemo(() => composeTonightSheet(settlement, { audience: TONIGHT_AUDIENCES.owner }), [settlement]);
   // ONE FACT, ONE PLACE ON THIS SCREEN: the panels below skip the people and hooks the
   // Tonight sheet already printed.
   const hooks = useMemo(() => {

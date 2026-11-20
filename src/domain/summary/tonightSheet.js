@@ -312,7 +312,8 @@ const HOOK_COUNT = 3;
  *
  * @typedef {Object} TonightSheet
  * @property {TonightCrisis | null} crisis
- * @property {TonightFrame | null} frame  a calm town's sharpest standing trouble (FRAME-1); null in a town in crisis
+ * @property {TonightFrame | null} frame  a calm town's sharpest standing trouble (FRAME-1); null in a town in crisis, and for
+ *   every reader who is not the owner (FRAME-2 B3)
  * @property {string} opening       the first line: the crisis line, the trouble's sentence, or the pressure sentence
  * @property {TonightPerson[]} people
  * @property {TonightFact[]} facts
@@ -352,14 +353,33 @@ const HOOK_COUNT = 3;
  */
 
 /**
+ * THE AUDIENCES (FRAME-2 B3, the chair's ruling: "a reader who is not the owner gets today's sheet, never the frame;
+ * the missing seed stays a second lock, never the first"): who the sheet is composed for, a closed set. Only the
+ * OWNER's sheet draws the frame (the trouble's opening line, its sides and their people, its hook order); a player
+ * (the party link, the player view) and the gallery (a public dossier) get exactly the sheet a town with no frame gets.
+ */
+export const TONIGHT_AUDIENCES = Object.freeze(/** @type {const} */ ({ owner: 'owner', player: 'player', gallery: 'gallery' }));
+
+/**
+ * @typedef {typeof TONIGHT_AUDIENCES[keyof typeof TONIGHT_AUDIENCES]} TonightAudience
+ * @typedef {{ audience?: TonightAudience | string | null }} TonightOptions
+ */
+
+/**
  * Compose the one Tonight sheet.
+ *
+ * THE FIRST LOCK (FRAME-2 B3): the frame is composed ONLY when `options.audience` is exactly `'owner'`. Any other
+ * value, a missing `audience` or no options at all composes no frame: FAIL CLOSED. The record's seed, which every
+ * shared projection strips (castTroubleFrame's CF3 gate), stays the second lock.
  * @param {TonightSource | null | undefined} settlement
+ * @param {TonightOptions | null} [options]
  * @returns {TonightSheet}
  */
-export function composeTonightSheet(settlement) {
+export function composeTonightSheet(settlement, options) {
   const source = settlement && typeof settlement === 'object' ? settlement : {};
+  const forOwner = !!options && typeof options === 'object' && options.audience === TONIGHT_AUDIENCES.owner;
   const crisis = crisisOf(source);
-  const frame = crisis ? null : frameOf(source);
+  const frame = crisis || !forOwner ? null : frameOf(source);
   return {
     crisis,
     frame,

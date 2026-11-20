@@ -108,7 +108,7 @@ beforeAll(() => {
     const settlement = generateSettlementPipeline(config, null, { seed, customContent: {} });
     const surfaces = {};
     {
-      const { container } = render(<TableView settlement={settlement} onClose={() => {}} />);
+      const { container } = render(<TableView settlement={settlement} audience="owner" onClose={() => {}} />); // the owner's own birth (FRAME-2 B3)
       const sheets = [...container.querySelectorAll('[data-tonight-sheet]')];
       surfaces.table = { count: sheets.length, all: container.textContent, first: sheets[0]?.firstElementChild?.textContent || '' };
       cleanup();
@@ -129,7 +129,7 @@ beforeAll(() => {
     const journal = String(page?.markdown || '').replace(/&amp;/g, '&').replace(/&#39;|&#x27;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
       .replace(/\\([\\`*_{}[\]()#+\-.!|>~])/g, '$1');
     surfaces.journal = { count: page ? 1 : 0, all: journal, first: journal.split('\n').slice(0, 2).join(' ') };
-    ROWS.push({ seed, settlement, sheet: composeTonightSheet(settlement), surfaces });
+    ROWS.push({ seed, settlement, sheet: composeTonightSheet(settlement, { audience: 'owner' }), surfaces }); // the owner's, as every surface above
   }
 }, 600000);
 afterEach(cleanup);

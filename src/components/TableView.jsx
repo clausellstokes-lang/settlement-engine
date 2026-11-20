@@ -11,6 +11,8 @@
  * Presentational + a close affordance:
  *   props.settlement — the settlement to run (raw or AI-refined; caller picks)
  *   props.onClose    — () => dismiss the overlay
+ *   props.audience   — who reads it (tonightSheet.js :: TONIGHT_AUDIENCES): only 'owner' draws the
+ *                      frame (FRAME-2 B3); no prop composes as a reader who is not the owner (fail closed)
  *
  * Esc and backdrop-click both close. Self-gating (flag + the tableViewOpen
  * pref) is the caller's job — OutputContainer only mounts this when
@@ -60,7 +62,7 @@ const NIGHT_PALETTE = Object.freeze({
   alarm: LAMP_ACCENTS.RED, accent: LAMP_ACCENTS.HOOK,
 });
 
-export default function TableView({ settlement, onClose }) {
+export default function TableView({ settlement, onClose, audience }) {
   // Shared modal focus management (M12): focus-in on open, Tab/Shift+Tab cycling
   // trapped inside the panel, Escape-to-close, and focus restore on unmount.
   // Replaces the hand-rolled Escape-only listener — a full-screen aria-modal
@@ -98,7 +100,7 @@ export default function TableView({ settlement, onClose }) {
     };
   }, []);
 
-  const sheet = useMemo(() => composeTonightSheet(settlement), [settlement]);
+  const sheet = useMemo(() => composeTonightSheet(settlement, { audience }), [settlement, audience]);
   // components-dossier-library-3: prosperity is a STRING label, not a { tier }
   // object — the tolerant read is the SummaryTabV2 sibling.
   const prosperity = prosperityLabel(settlement?.economicState?.prosperity);

@@ -16,7 +16,7 @@ import { PageChrome } from '../primitives/PageChrome.jsx';
 import { ChapterBand, GoldRule, HairRule } from '../primitives/Dense.jsx';
 import { NotesField } from '../primitives/Editable.jsx';
 import { type, palette, space, pt } from '../theme.js';
-import { composeTonightSheet, printsAsWant, secretLeadOf, sideReadOf, TONIGHT_COPY } from '../../domain/summary/tonightSheet.js';
+import { composeTonightSheet, printsAsWant, secretLeadOf, sideReadOf, TONIGHT_AUDIENCES, TONIGHT_COPY } from '../../domain/summary/tonightSheet.js';
 import { CrisisSections } from './CrisisSections.jsx';
 
 /** @param {{ children: string, color: string }} props */
@@ -29,7 +29,8 @@ function Eyebrow({ children, color }) {
 }
 
 export function TonightAtTheTable({ settlement, narrativeMode }) {
-  const sheet = composeTonightSheet(settlement);
+  // THE OWNER'S SHEET (FRAME-2 B3): the PDF is the DM's own export, built from their own record (no player variant)
+  const sheet = composeTonightSheet(settlement, { audience: TONIGHT_AUDIENCES.owner });
   const why = { seat: TONIGHT_COPY.seat, secret: TONIGHT_COPY.secret, cleric: TONIGHT_COPY.cleric };
 
   return (

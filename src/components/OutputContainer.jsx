@@ -1049,6 +1049,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         <Suspense fallback={null}>
           <TableView
             settlement={activeSettlement}
+            audience={!publicDossier && !playerView ? 'owner' : playerView ? 'player' : 'gallery'}
             onClose={() => setUserPref && setUserPref('tableViewOpen', false)}
           />
         </Suspense>

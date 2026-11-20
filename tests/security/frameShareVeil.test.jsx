@@ -14,35 +14,52 @@
  *      which every projection strips), and the Table View drawn from it, the one sheet surface a shared page can open,
  *      prints none of the frame's lines.
  *   4. ONE DOOR: only the sheet's composer imports the cast, so no other surface can draw it.
+ *   5. THE FIRST LOCK (FRAME-2 B3, the chair's ruling: "a reader who is not the owner gets today's sheet, never the
+ *      frame; the missing seed stays a second lock, never the first"): the composer casts the frame only for the
+ *      audience 'owner'. The owner's own SEEDED record, handed to it with no options, `{}`, any other audience or an
+ *      undefined one, composes exactly the sheet a town with no frame composes.
+ *   6. ON THE PAGES: the real gallery page (PublicDossierView) and the party link's page (PartyLinkView), each fed the
+ *      town's shared read, open the Tonight sheet the way a viewer does (the Overview's "Open Tonight" sets the
+ *      persisted `tableViewOpen` preference, and the page mounts the Table View on it: the security lane's gap, which
+ *      this file does not cure); the sheet DRAWS there, and none of the frame's lines is on the page.
  * The PDF and the Foundry module carry no player variant (`PDF_VARIANTS`, pinned below: a new variant reds here and must
  * be classed before it ships).
  */
 import { createHash } from 'node:crypto';
 import { appendFileSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
+import { cloneElement } from 'react';
 import { afterEach, describe, expect, test, vi } from 'vitest';
-import { cleanup, render } from '@testing-library/react';
+import { cleanup, fireEvent, render, waitFor, within } from '@testing-library/react';
 
 vi.mock('../../src/lib/supabase.js', () => ({
   supabase: { from: vi.fn(), rpc: vi.fn(() => Promise.resolve({ data: [], error: null })) },
   isConfigured: true,
 }));
 vi.mock('../../src/store/index.js', () => {
-  const data = { auth: { tier: 'premium' }, isElevated: () => false, phase: 'draft', systemState: null, eventLog: [], campaigns: [], savedSettlements: [] };
+  const data = {
+    auth: { tier: 'premium' }, isElevated: () => false, phase: 'draft', systemState: null, eventLog: [], campaigns: [], savedSettlements: [],
+    // the persisted preference the Overview's "Open Tonight" writes and the page mounts the Table View on
+    userPrefs: {}, setUserPref: (key, value) => { data.userPrefs = { ...data.userPrefs, [key]: value }; },
+  };
   function useStore(selector) { return selector(data); }
   useStore.getState = () => data;
+  useStore.subscribe = () => () => {};
   return { useStore };
 });
 
 import { supabase } from '../../src/lib/supabase.js';
+import { useStore } from '../../src/store/index.js';
 import { fetchPublicDossier, fetchDossierForImport } from '../../src/lib/gallery.js';
 import { buildWorldExport } from '../../src/lib/worldExport.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
-import { composeTonightSheet, TONIGHT_COPY } from '../../src/domain/summary/tonightSheet.js';
+import { composeTonightSheet, TONIGHT_AUDIENCES, TONIGHT_COPY } from '../../src/domain/summary/tonightSheet.js';
 import { PDF_VARIANTS } from '../../src/pdf/variants.js';
 import TableView from '../../src/components/TableView.jsx';
+import PublicDossierView from '../../src/components/PublicDossierView.jsx';
+import PartyLinkView from '../../src/components/PartyLinkView.jsx';
 
-afterEach(() => { cleanup(); vi.clearAllMocks(); });
+afterEach(() => { cleanup(); vi.clearAllMocks(); useStore.getState().userPrefs = {}; });
 
 const BORN = [
   ['frame-calm-thorp-0', 'thorp'], ['frame-calm-hamlet-0', 'hamlet'], ['frame-calm-village-0', 'village'],
@@ -98,9 +115,9 @@ const recordOf = (key, read) => (key === 'worldPlayer' ? read.settlements[0].dos
 /** The frame's own lines on a sheet: the sides' eyebrow, every side's words with its reason, the absent side's words. */
 const frameLinesOf = (sheet) => (sheet.frame ? [TONIGHT_COPY.sides, ...sheet.frame.sides.filter((d) => d.kind).map((d) => d.reason)] : []);
 
-/** The Table View's text, and whether it drew the sheet at all (its `data-tonight-sheet` section). */
-const tableOf = (s) => {
-  const { container } = render(<TableView settlement={s} onClose={() => {}} />);
+/** The Table View's text, and whether it drew the sheet at all (its `data-tonight-sheet` section); no audience is a stranger. */
+const tableOf = (s, audience) => {
+  const { container } = render(<TableView settlement={s} audience={audience} onClose={() => {}} />);
   const out = { text: container.textContent || '', drew: !!container.querySelector('[data-tonight-sheet]') };
   cleanup();
   return out;
@@ -115,12 +132,12 @@ describe('CF3: the frame reaches no shared page', () => {
       appendFileSync(process.env.FRAME_VEIL_PRINT, `${JSON.stringify([seed, Object.fromEntries(Object.entries(reads).map(([k, v]) => [k, digest(v)]))])}\n`);
       continue;
     }
-    const own = composeTonightSheet(s);
+    const own = composeTonightSheet(s, { audience: 'owner' });
     // 1. liveness
     expect(own.frame, 'the owner\'s record casts a frame').toBeTruthy();
     if (WITH_CRIMINAL.has(seed)) expect(own.frame.sides.some((d) => d.kind === 'criminal'), 'a side names the criminal power').toBe(true);
     const lines = frameLinesOf(own);
-    const ownText = tableOf(s).text;
+    const ownText = tableOf(s, 'owner').text;
     for (const line of lines) expect(ownText, `the owner's Table View prints "${line}"`).toContain(line[0].toUpperCase() + line.slice(1));
 
     const reads = await sharedReadsOf(s);
@@ -133,12 +150,85 @@ describe('CF3: the frame reaches no shared page', () => {
       expect(shared && typeof shared === 'object', `${key} hands the page a record`).toBe(true);
       expect(shared._seed, `${key} carries no seed`).toBeUndefined();
       expect(composeTonightSheet(shared).frame, `${key}: no frame`).toBe(null);
+      expect(composeTonightSheet(shared, { audience: 'owner' }).frame ?? null, `${key}: no frame even for the owner (the second lock)`).toBe(null);
       const { text, drew } = tableOf(shared);
       expect(drew, `${key}: the Table View draws the sheet`).toBe(true);
       for (const line of lines) expect(text.includes(line[0].toUpperCase() + line.slice(1)), `${key} prints "${line}"`).toBe(false);
       expect(text.includes(TONIGHT_COPY.sides), `${key} prints the sides' eyebrow`).toBe(false);
     }
    }
+  }, 600000);
+
+  test(`the gate is the FIRST lock: on the owner's own seeded record, a reader who is not the owner gets the no-frame sheet (${BORN.length} born towns)`, () => {
+    for (const [seed, tier] of BORN) {
+      const s = birth(seed, tier);
+      expect(typeof s._seed === 'string' && s._seed.length > 0, `${seed}: the owner's record carries its seed`).toBe(true);
+      // liveness: the owner casts the frame
+      const owned = composeTonightSheet(s, { audience: 'owner' });
+      expect(owned.frame, `${seed}: the owner's record casts a frame for the owner`).toBeTruthy();
+      // the no-frame sheet: the same record without the seed (what a town with no frame composes today)
+      const { _seed, ...unseeded } = s;
+      const noFrame = composeTonightSheet(unseeded, { audience: 'owner' });
+      expect(noFrame.frame ?? null, `${seed}: the reference sheet carries no frame`).toBe(null);
+      expect(owned, `${seed}: the frame changes the sheet (else equality below proves nothing)`).not.toEqual(noFrame);
+      /** @type {Array<[string, any]>} */
+      const strangers = [
+        ['no options', composeTonightSheet(s)],
+        ['{}', composeTonightSheet(s, {})],
+        ["{ audience: 'player' }", composeTonightSheet(s, { audience: 'player' })],
+        ["{ audience: 'gallery' }", composeTonightSheet(s, { audience: 'gallery' })],
+        ['{ audience: undefined }', composeTonightSheet(s, { audience: undefined })],
+      ];
+      for (const [label, sheet] of strangers) {
+        expect(sheet.frame ?? null, `${seed} ${label}: no frame`).toBe(null);
+        expect(sheet, `${seed} ${label}: exactly the no-frame sheet`).toEqual(noFrame);
+      }
+    }
+  }, 600000);
+
+  test('the audiences are a closed, frozen set; only the owner\'s draws the frame', () => {
+    expect(Object.isFrozen(TONIGHT_AUDIENCES)).toBe(true);
+    expect(Object.values(TONIGHT_AUDIENCES).sort()).toEqual(['gallery', 'owner', 'player']);
+  });
+
+  test(`the sheet opens ON the gallery page and ON the party link (${BORN.length} born towns), and the frame never rides it`, async () => {
+    // every shared read first, so no page's own fetches can take a queued answer meant for a read
+    const towns = [];
+    for (const [seed, tier] of BORN) {
+      const s = birth(seed, tier);
+      const lines = frameLinesOf(composeTonightSheet(s, { audience: 'owner' }));
+      expect(lines.length, `${seed}: the owner's frame has lines to look for`).toBeGreaterThan(1);
+      towns.push({ seed, lines, reads: await sharedReadsOf(s) });
+    }
+    /** Open the sheet on a rendered page as a viewer does: the Overview's "Open Tonight", then the page mounts the Table View. */
+    const openSheetOn = async (element) => {
+      const view = render(element);
+      const open = await within(view.container).findByText(TONIGHT_COPY.open, {}, { timeout: 60000 });
+      fireEvent.click(open.closest('button') || open);
+      expect(useStore.getState().userPrefs.tableViewOpen, 'the button writes the persisted preference').toBe(true);
+      view.rerender(cloneElement(element)); // the store's notification (the mocked store does not subscribe): a fresh element re-renders the page
+      await waitFor(() => expect(view.container.querySelector('[data-tonight-sheet]')).toBeTruthy(), { timeout: 60000 });
+      const sheet = view.container.querySelector('[data-tonight-sheet]');
+      const out = { page: view.container.textContent || '', sheet: sheet.textContent || '', sides: !!sheet.querySelector('[data-tonight-sides]') };
+      cleanup();
+      useStore.getState().userPrefs = {};
+      return out;
+    };
+    for (const { seed, lines, reads } of towns) {
+      const pages = [
+        ['the gallery page', <PublicDossierView key="g" dossier={reads.gallery} />],
+        ['the gallery page (DM content shared)', <PublicDossierView key="d" dossier={reads.galleryDmFull} />],
+        ["the party link's page", <PartyLinkView key="p" dossier={reads.partyLink} auth={{ user: null }} onReport={() => {}} />],
+      ];
+      for (const [where, element] of pages) {
+        const got = await openSheetOn(element);
+        expect(got.sheet.length, `${seed} on ${where}: the sheet drew`).toBeGreaterThan(0);
+        expect(got.sides, `${seed} on ${where}: no sides`).toBe(false);
+        expect(got.sheet.includes(TONIGHT_COPY.trouble), `${seed} on ${where}: the sheet opens on no trouble`).toBe(false);
+        expect(got.page.includes(TONIGHT_COPY.sides), `${seed} on ${where}: the sides' eyebrow`).toBe(false);
+        for (const line of lines) expect(got.page.includes(line[0].toUpperCase() + line.slice(1)), `${seed} on ${where} prints "${line}"`).toBe(false);
+      }
+    }
   }, 600000);
 
   test('one door: only the sheet\'s composer imports the trouble cast', () => {
