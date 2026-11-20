@@ -5669,10 +5669,10 @@
       "lines": 8
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.mentor_legacy": {
-      "top1": 0.1269,
-      "top5": 0.63,
+      "top1": 0.1214,
+      "top5": 0.5994,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
-      "lines": 8
+      "lines": 10
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.mil_crim_corruption": {
       "top1": 0.1409,
@@ -5687,22 +5687,22 @@
       "lines": 8
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.mutual_leverage": {
-      "top1": 0.1437,
-      "top5": 0.7053,
+      "top1": 0.1394,
+      "top5": 0.594,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening; e0d38e6c4 / f00b248fe (TAIL-TIES T1/T2/T5, T6/T7) declared its council and vote lines off a town with no ruling body (needs: ruling body): top1 0.129 -> 0.1437 (confirm 0.1425), top5 0.6325 -> 0.7053 (confirm 0.6995); raised by the chair's ruling PD1 of 2026-11-15: variety owed after the release",
-      "lines": 8
+      "lines": 13
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.old_debt": {
-      "top1": 0.1293,
-      "top5": 0.6837,
+      "top1": 0.1286,
+      "top5": 0.6275,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening; e0d38e6c4 / f00b248fe (TAIL-TIES T1/T2/T5, T6/T7) declared its two vote lines off a town with no ruling body (needs: ruling body): top5 0.64 -> 0.6837 (the confirm corpus's higher reading; banked 0.6817); raised by the chair's ruling PD1 of 2026-11-15: variety owed after the release",
-      "lines": 8
+      "lines": 10
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.peer_rivalry": {
-      "top1": 0.13,
-      "top5": 0.6738,
+      "top1": 0.1266,
+      "top5": 0.6219,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening; e0d38e6c4 / f00b248fe (TAIL-TIES T1/T2/T5, T6/T7) declared its council-session and single-vote lines off a town with no ruling body (needs: ruling body): top5 0.6427 -> 0.6738 (confirm 0.6691); raised by the chair's ruling PD1 of 2026-11-15: variety owed after the release",
-      "lines": 8
+      "lines": 10
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.rel_crim_fraud": {
       "top1": 0.1747,
@@ -5717,10 +5717,10 @@
       "lines": 8
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.wary_alliance": {
-      "top1": 0.1592,
-      "top5": 0.7105,
+      "top1": 0.1447,
+      "top5": 0.6416,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening; e0d38e6c4 / f00b248fe (TAIL-TIES T1/T2/T5, T6/T7) declared its three vote lines off a town with no ruling body, and 21032205a (R2-CODE-A-14, ruling s1) its council-bloc line off a pair with no shared power: top1 0.1307 -> 0.1592 (confirm 0.1583), top5 0.6457 -> 0.7105 (confirm 0.7049); raised by the chair's ruling PD1 of 2026-11-15: variety owed after the release",
-      "lines": 8
+      "lines": 10
     },
     "ledger:npcGenerator:CRIME_KNOWLEDGE": {
       "top1": 0.2544,

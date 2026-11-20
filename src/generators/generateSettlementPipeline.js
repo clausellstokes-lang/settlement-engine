@@ -16,7 +16,7 @@ import { setActiveRng, clearActiveRng, getActiveRng } from '../kernel/rngContext
 import { runPipeline } from './pipeline.js';
 import { drawTies } from './people/ties.js';
 import { generateRepresentatives } from './people/representatives.js';
-import { dealGoals } from './people/goals.js';
+import { dealGoals, refuseWantsBesideSecrets } from './people/goals.js'; // GOALS-2: the want refused beside the secret, a post-pass (twice)
 import { dealRareSecrets } from './people/rareSecrets.js'; // SECRETS-1: the very rare secrets, beside the goals
 import { generateConflicts } from './powerGenerator.js';
 import { carryBornQuarrels } from './power/conflicts.js';
@@ -604,7 +604,10 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
     // ALLEGIANCE-CAR4 (A9, the design §2): the regenerated cast's goals, dealt over the FINAL roster and its ties on this
     // regen's own keyed family, as birth deals them (people/goals.js); a preserved keeper's goal is the user's and is kept.
     // SECRETS-1 (2026-11-17, ruling RS1): the very rare secrets beside the goals, on this regen's seed (no draw); a keeper keeps theirs
-    const goaledRoster = dealRareSecrets({ ...settlement, config, conflicts }, dealGoals({ ...settlement, config, conflicts }, roster, finalRelationships, getActiveRng(), { keep: new Set(preserved.map((p) => String(p.id))) }), finalRelationships, { seed, keep: new Set(preserved.map((p) => String(p.id))), worldLaw: generationContext });
+    // GOALS-2 (the chair's rulings of 12:05 and 12:37 UTC): the deal, the rare deal, then ONE post-pass by each card's final
+    // secret (the want refused beside the card's own secret, no other card touched; people/goals.js)
+    const dealtGoals = dealGoals({ ...settlement, config, conflicts }, roster, finalRelationships, getActiveRng(), { keep: new Set(preserved.map((p) => String(p.id))) });
+    const goaledRoster = refuseWantsBesideSecrets({ ...settlement, config, conflicts }, dealRareSecrets({ ...settlement, config, conflicts }, dealtGoals, finalRelationships, { seed, keep: new Set(preserved.map((p) => String(p.id))), worldLaw: generationContext }), finalRelationships, { keep: new Set(preserved.map((p) => String(p.id))), receiptsOf: dealtGoals });
     // FIX-SECTION-REGEN (2026-11-09; car 2's finding): the hall-capture state is DERIVED from the cast, so a new cast
     // re-derives it, and the record must hold it — the seam above derives it on this regen's private view, which is
     // dropped. It is re-derived here over the FINAL roster (the user's canon merged in) through the full generation's
