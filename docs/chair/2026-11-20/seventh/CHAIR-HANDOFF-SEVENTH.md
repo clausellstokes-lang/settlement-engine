@@ -2433,3 +2433,20 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   TOLD TO SEAT-2 (a correction of the "BUILD-ON" message): for a unit that claims ZERO differences the proof is
   TRAD-2's: the 1,245 born documents hashed at the base and at the tip, the two hashes in each unit's report; the
   generic two-tree tool is needed only where differences are expected (the law lit, U8).
+- 08:22 UTC · **A RULING FOUND BY THE VEIL'S SUCCESSOR ON ITS READ-IN: THE NAME SEARCH FOLDS A NAME AND ITS BARE FORM, IN THE
+  ENGINES AND IN EVERY TEST THAT PROVES A WITHHOLDING.** VEIL-24 (08:21; instruments re-made from PART 24, the gate
+  reproduced at UNREGISTERED 38 for the party link's new shape; nothing written) saw that the R3 cure's brief says
+  "search every string for each withheld power's name": a search for the FULL LABEL alone could pass while "the
+  Fence" or "the Thieves' guild" is still served for a power stored with a bracketed qualifier. RULED 08:23 and sent
+  to VEIL-23 for the R3 cure and PART 24's list: the search folds the name AND the name without its bracketed
+  qualifier (the lane's own fold in `gallerySecondHomes.js`; 212's "itself and itself without its bracketed
+  qualifier") and takes the id as a string and as a key; no stage narrows it; if the R3 cure's born arm matches a
+  literal label, the cure is owed inside R3, red first by a plant. (The line's names work makes this the difference
+  between a search that finds and one that passes blind at the join.) Also from VEIL-24: PART 24's gate line is not
+  one command (hard-coded tree export; a second checkout it does not name): one command in PART 25.
+  FRAME-3 (08:21) READ B10 LINE BY LINE AND ADOPTS IT (sound; the ruled cause; confinement on its 396 towns: calm 48
+  of 48, untouched crisis 263 of 263, the 85 that move differ only in those reasons). ITS CURES AT THE MERGE
+  APPROVED: two re-pins to the person form; `castDerived`'s matcher folds a person's possessive back to its sentence
+  and its floor of 500 stays; THE STORED FIGURES NAMED, SIGNED BY NOBODY (the golden's 5 rows;
+  `institutionBudgetPromise` 6 of 60 seeds; four pinned-mode A-arms on that one golden row): they join the owner's
+  one signing at the close.
