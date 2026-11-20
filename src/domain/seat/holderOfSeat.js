@@ -36,9 +36,21 @@
  * earlier taker's re-keyed edge reads true again. Then the transfer's own `powerStructure.recentConflict` sentence
  * decides (it names the last taker, as the transfer wrote it); where a later writer has replaced that sentence, the
  * last matching edge in the list does. U5 makes the read unambiguous by retiring the old holder's edge at a transfer.
+ * THE SENTENCE IS READ, AND THAT IS RULED (the chair 14:44Z, U4-CURE2 Addendum 2: `narrative on factionRelationships`
+ * re-recorded with its cause). A structured read (`type`/`direction`) is refuted: a born seat's edge with its military
+ * power already reads symbiotic/stable (U4-CURE2-REPORT, Step 0). So both sentences are read through ONE matcher,
+ * `transferSentenceSays`, against ONE frozen list, `TRANSFER_WORDINGS`: every wording `transferRulingPower` has
+ * written under the seat's law. A rewording ADDS a row and never replaces one, so a town written under the old
+ * wording still reads its holder (`holderOfSeat.test.js` pins the real transfer's output into the list).
  * The taker must stand as a row of the document; for the owner a taker with no row (a power since removed) is no
  * answer, and the next rule reads; for the reader it is refused (a served document drops a hidden row and masks its
  * name, and the reader cannot tell the two apart).
+ * A TRANSFER THE READ CANNOT ATTRIBUTE ANSWERS NOBODY (the chair 15:17Z, U4-CURE2 Addendum 3: fail closed inside the
+ * leaf). Where no edge matches the current form, but an edge on the current seat's pair matches a frozen edge wording
+ * written for ANOTHER form (the DM renamed the seat after a transfer: `factionRename.js` rewrites the pair, not the
+ * sentence's lower-case form), the record holds a transfer R1 cannot attribute. R1 then answers NOBODY, for both
+ * audiences (`rule` 'R1', no holder, `refused` false), and never falls through to R2 or R3: a wrong power named is
+ * worse than none. NOBODY IS AN OMISSION, NEVER A STATEMENT: the seat's form stands and no taker is named.
  *
  * THE PERSON (CS22 (c), the chair 10:28Z on the owner's word "a king does not wear a dual hat"). Where the holder is
  * the R1 taker of a CROWNED form (`isCrownedForm`), the keeper of that power's heaviest house (its rank-1 member) is
@@ -120,39 +132,84 @@ export function isCrownedForm(form, tier) {
   return word === null || officeWordInfo(word)?.crown === true;
 }
 
-/** The sentence `transferRulingPower` writes on the seat's edge with its taker. @param {string} taker @param {string} form */
-const takerLine = (taker, form) => `${taker} is the power behind the ${form.toLowerCase()}. The seat answers to them now.`;
+/** @typedef {'edge' | 'conflict'} TransferSentence */
+/**
+ * @typedef {Object} TransferWording
+ * @property {TransferSentence} sentence  `'edge'`: the seat's edge with its taker (`factionRelationships[].narrative`);
+ *   `'conflict'`: the transfer's own line (`powerStructure.recentConflict`)
+ * @property {string} wording  the sentence with its slots: `{taker}` (the taker's name, exact), `{form}` (the new form,
+ *   lower case, exact), and the free slots `{from}` (the outgoing form) and `{cause}` (the cause), which match any text
+ */
 
 /**
- * Does `recentConflict` say, in the transfer's own words, that `taker` took the seat as `form`? (The coup's
- * "<taker> overthrew the <old> and reshaped the government as a <form>." or a lawful passage's "Power passed to
- * <taker> by <cause>; the government now sits as a <form>…".)
- * @param {unknown} line @param {string} taker @param {string} form @returns {boolean}
+ * THE FROZEN LIST OF WORDINGS (the chair 14:44Z, condition 2): every wording `rulingPower.js :: transferRulingPower`
+ * has written under the seat's law. Today that is one edge sentence and the transfer's own line in two wordings, the
+ * coup's and the lawful passage's, the latter with and without the demotion clause (two rows). A change of wording ADDS
+ * a row here and never replaces one: `holderOfSeat.test.js` drives the real transfer on every cause and reds until the
+ * new wording is in the list.
+ * @type {ReadonlyArray<Readonly<TransferWording>>}
  */
-function transferSays(line, taker, form) {
-  if (typeof line !== 'string') return false;
-  const f = form.toLowerCase();
-  return (line.startsWith(`${taker} overthrew the `) && line.endsWith(` and reshaped the government as a ${f}.`))
-    || (line.startsWith(`Power passed to ${taker} by `) && line.includes(`; the government now sits as a ${f}`));
+export const TRANSFER_WORDINGS = Object.freeze([
+  Object.freeze({ sentence: /** @type {TransferSentence} */ ('edge'), wording: '{taker} is the power behind the {form}. The seat answers to them now.' }),
+  Object.freeze({ sentence: /** @type {TransferSentence} */ ('conflict'), wording: '{taker} overthrew the {from} and reshaped the government as a {form}.' }),
+  Object.freeze({ sentence: /** @type {TransferSentence} */ ('conflict'), wording: 'Power passed to {taker} by {cause}; the government now sits as a {form}.' }),
+  Object.freeze({ sentence: /** @type {TransferSentence} */ ('conflict'), wording: 'Power passed to {taker} by {cause}; the government now sits as a {form}, and the {from} keep their place among the powers.' }),
+]);
+
+/** A wording's slots, and one literal run escaped for a pattern. */
+const WORDING_SLOT = /(\{taker\}|\{form\}|\{from\}|\{cause\})/;
+/** @param {string} text @returns {string} */
+const literal = (text) => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+/**
+ * THE ONE MATCHER (the chair 14:44Z, condition 1): does `line` say, in one of the transfer's own wordings of that
+ * `sentence`, that `taker` took the seat as `form`? The whole line is matched; `{taker}` and `{form}` (lower case) are
+ * exact, `{from}` and `{cause}` match any text. R1's edge read and its `recentConflict` tie-break both ask here. A
+ * `form` of `null` asks whether the line is that wording for ANY form (Addendum 3's unattributed transfer).
+ * @param {unknown} line @param {TransferSentence} sentence @param {string} taker @param {string | null} form
+ * @param {ReadonlyArray<Readonly<TransferWording>>} [wordings] the list to read (the frozen list, unless a test hands one)
+ * @returns {boolean}
+ */
+export function transferSentenceSays(line, sentence, taker, form, wordings = TRANSFER_WORDINGS) {
+  if (typeof line !== 'string' || !taker || (form !== null && typeof form !== 'string')) return false;
+  const anyText = '[\\s\\S]*?';
+  /** @type {Record<string, string>} */
+  const slot = { '{taker}': literal(taker), '{form}': form === null ? anyText : literal(form.toLowerCase()), '{from}': anyText, '{cause}': anyText };
+  return wordings.some((w) => w.sentence === sentence
+    && new RegExp(`^${w.wording.split(WORDING_SLOT).map((part, i) => (i % 2 ? slot[part] : literal(part))).join('')}$`).test(line));
 }
 
 /**
  * R1's read: the name of the last transfer's taker, or null where the record holds no transfer onto the current form.
- * @param {SeatSettlement} settlement @param {string} form the governing row's name @returns {string | null}
+ * @param {SeatSettlement} settlement @param {string} form the governing row's name
+ * @param {ReadonlyArray<Readonly<TransferWording>>} [wordings] the list to read (the frozen list, unless a test hands one)
+ * @returns {string | null}
  */
-function transferTakerOf(settlement, form) {
+export function transferTakerOf(settlement, form, wordings = TRANSFER_WORDINGS) {
   const edges = settlement.powerStructure?.factionRelationships;
   /** @type {string[]} */
   const takers = [];
   for (const rel of Array.isArray(edges) ? edges : []) {
     if (!rel || !Array.isArray(rel.pair) || !rel.pair.includes(form)) continue;
     const taker = rel.pair.find((n) => n !== form);
-    if (typeof taker !== 'string' || !taker || rel.narrative !== takerLine(taker, form)) continue;
+    if (typeof taker !== 'string' || !taker || !transferSentenceSays(rel.narrative, 'edge', taker, form, wordings)) continue;
     if (!takers.includes(taker)) takers.push(taker);
   }
   if (takers.length < 2) return takers[0] ?? null;
-  const said = takers.filter((t) => transferSays(settlement.powerStructure?.recentConflict, t, form));
+  const said = takers.filter((t) => transferSentenceSays(settlement.powerStructure?.recentConflict, 'conflict', t, form, wordings));
   return said.length === 1 ? said[0] : takers[takers.length - 1];
+}
+
+/**
+ * Does the record hold a transfer onto this seat that R1 cannot attribute (Addendum 3)? An edge on the current seat's
+ * pair whose narrative is a frozen edge wording for its other power and SOME form. Asked only where `transferTakerOf`
+ * found no edge for the current form, so the wording it matches was written for another form.
+ * @param {SeatSettlement} settlement @param {string} form the governing row's name @returns {boolean}
+ */
+function unattributedTransferOn(settlement, form) {
+  const edges = settlement.powerStructure?.factionRelationships;
+  return (Array.isArray(edges) ? edges : []).some((rel) => !!rel && Array.isArray(rel.pair) && rel.pair.includes(form)
+    && rel.pair.some((n) => typeof n === 'string' && !!n && n !== form && transferSentenceSays(rel.narrative, 'edge', n, null)));
 }
 
 /**
@@ -203,6 +260,11 @@ export function holderOf(settlement, options) {
 
   // R1: the taker of the last transfer. A taker with no row is refused to the reader; the owner reads on.
   if (takerName !== null && (taker || reader)) return answer('R1', taker);
+
+  // R1, unattributed (Addendum 3): a transfer the read cannot attribute answers NOBODY, for both audiences; no R2, no R3.
+  if (takerName === null && unattributedTransferOn(settlement, form)) {
+    return { rule: 'R1', holder: null, holderName: null, person, kind: officeKind, refused: false, personRule };
+  }
 
   // R2: the power whose first member is the seat-holder (the dual hat).
   const head = person ? factions.find((f) => !!f && f !== governing && nameOf(f) !== form && rankIn(person, nameOf(f)) === 1) : undefined;

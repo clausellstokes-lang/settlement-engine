@@ -23,10 +23,33 @@
  *       `spatial/cohesionWeave.js`, so `rulingPowerCoup.js`'s import of it widens no surface's reach of the
  *       "fear on candidates" identity (`writerReach.walker`); the veil read it uses instead of `cardVeil.js`
  *       (`seatTable.js :: isVeiledRow`) answers `cardVeil.js :: isVeiledPower`'s answer on every row shape here.
+ *  (10) U4-CURE2 Step 2, as SEAT-5's addendum amends it (CS11): for every audience that is not the owner's ('reader',
+ *       missing, null, '', 'public', 'dm'), `holderOf` on a SERVED document (`publicSafe.js :: toPublicSafe`, read-only
+ *       use as in (4)) names no criminal and no hidden power anywhere in its answer (`holderName` and `person`
+ *       included). Town-size fixtures whose last transfer's taker is (a) criminal, (b) hidden, (c) open beside a
+ *       criminal power's symbiotic/stable edge on the same form; and (d) a born-shape town whose seat has a
+ *       symbiotic/stable edge with its military power and no transfer on record, which answers no R1.
+ *  (11) U4-CURE2 Step 1′ (the chair 14:44Z, Addendum 2): ONE matcher (`transferSentenceSays`) and ONE frozen list
+ *       (`TRANSFER_WORDINGS`) read both of the transfer's sentences; the real `transferRulingPower`, on every cause with
+ *       and without the demotion, writes only wordings the list holds; a town in the frozen wording still reads its
+ *       taker when a made-up new wording stands first in the list; (a) a born seat's symbiotic/stable edge with its
+ *       military power names no taker; (c) the DM's faction rename after a transfer
+ *       (`store/settlementRenameHelpers.js :: renameFactionImpl` -> `factionRename.js :: applyFactionRenameToSettlement`):
+ *       renaming the taker, or a bystander, leaves R1 the right power for the owner and the reader.
+ *  (12) U4-CURE2 Addendum 3 (the chair 15:17Z, FAIL CLOSED INSIDE THE LEAF): renaming the SEAT after a transfer leaves
+ *       an edge on the seat's pair in a frozen wording written for ANOTHER form, and no edge for the current one: R1
+ *       answers NOBODY, for the owner and the reader, with no fall-through to R2 or R3 (it answered R3 Coin Exchange for
+ *       Merchant Guilds before). Condition 1: "nobody" is an omission: `dossier/powerStrata.js :: derivePowerStrata`, on
+ *       the record and on the served document, names the seat's form, says nothing of a vacant seat, and lists the
+ *       contest's contenders with no holder removed.
  */
 import { describe, test, expect } from 'vitest';
-import { holderOf, APPOINTED_SEAT_FORMS, isCrownedForm } from '../../../src/domain/seat/holderOfSeat.js';
-import { transferRulingPower } from '../../../src/domain/rulingPower.js';
+import { holderOf, APPOINTED_SEAT_FORMS, isCrownedForm, TRANSFER_WORDINGS, transferSentenceSays, transferTakerOf } from '../../../src/domain/seat/holderOfSeat.js';
+import { transferRulingPower, RULING_POWER_CAUSES } from '../../../src/domain/rulingPower.js';
+import { applyFactionRenameToSettlement } from '../../../src/domain/factionRename.js';
+import { derivePowerStrata } from '../../../src/domain/dossier/powerStrata.js';
+import { coupContenders } from '../../../src/domain/rulingPowerCoup.js';
+import { SEAT_LAW_CONFIG_KEY, HOLDER_SEAT_LAW_VERSION } from '../../../src/domain/seat/seatLaw.js';
 import { toPublicSafe } from '../../../src/domain/display/publicSafe.js';
 import { APPOINTED_GOVERNMENTS } from '../../../src/generators/people/representatives.js';
 import { GOVERNMENT_FAMILY } from '../../../src/data/cultureOfficeTitles.js';
@@ -397,5 +420,264 @@ describe('(9) the leaf reaches no cohesionWeave.js (writerReach), and its veil r
     const differ = rows.filter((r) => isVeiledRow(r) !== isVeiledPower(r));
     expect(differ).toEqual([]);
     expect(rows.filter((r) => isVeiledRow(r)).length, 'the veiled rows are read veiled').toBe(3);
+  });
+});
+
+// ── (10) CS11 on the served document ───────────────────────────────────────────────────────────────────────
+
+describe('(10) CS11: on a SERVED document, no audience but the owner\'s is told a criminal or a hidden power', () => {
+  const CRIMINAL = 'The Shadow Hand';
+  const HIDDEN = 'Velvet Ledger';
+  /** Every audience that is not the owner's, as `holderOf` is handed it (an unknown or missing one reads as the reader). */
+  const NON_OWNER = [
+    ['\'reader\'', { audience: 'reader' }],
+    ['missing (no options)', undefined],
+    ['missing (empty options)', {}],
+    ['null', { audience: null }],
+    ['\'\'', { audience: '' }],
+    ['\'public\'', { audience: 'public' }],
+    ['\'dm\'', { audience: 'dm' }],
+  ];
+  /** The forbidden names, wherever they stand in the answer (`holderName` and `person` included). */
+  const named = (answer) => [CRIMINAL, HIDDEN].filter((name) => JSON.stringify(answer).includes(name));
+
+  /**
+   * A town (town size) with a criminal power and a hidden power beside its open ones; the seat's card holds a
+   * membership in each, stamped veiled as a born card's is (the served document drops both).
+   */
+  const town = (relationships = [], extra = []) => civicTown({
+    extra: [
+      { faction: CRIMINAL, category: 'criminal', power: 18, modifiers: [] },
+      { faction: HIDDEN, category: 'economy', power: 16, hidden: true, modifiers: [] },
+      ...extra,
+    ],
+    relationships,
+    npcs: [card('npc_mayor', 'Hilde Brandt', 'Mayor', [
+      { power: 'Town Council', rank: 1 }, { power: CRIMINAL, rank: 3, veiled: true }, { power: HIDDEN, rank: 2, veiled: true },
+    ])],
+  });
+  /** The criminal power's symbiotic/stable edge with the seat, as a born town may carry it. */
+  const criminalEdge = { pair: ['Town Council', CRIMINAL], type: 'symbiotic', direction: 'stable', narrative: 'The Town Council looks away and The Shadow Hand keeps the docks quiet; each needs the other.' };
+  /** The open taker's own edge with the seat, at the HEAD of the list, so a transfer rewrites it in place. */
+  const merchantEdge = { pair: ['Town Council', 'Merchant Guilds'], type: 'competitive', direction: 'stable', narrative: 'They haggle over the market dues.' };
+
+  /** Each non-owner audience on the served document: no forbidden name, and the answer `expected` asks for. */
+  const servedAnswersHold = (s, expected) => {
+    const served = toPublicSafe(s);
+    for (const [label, options] of NON_OWNER) {
+      const h = holderOf(served, options);
+      expect(named(h), `audience ${label}`).toEqual([]);
+      expected(h, label);
+    }
+  };
+
+  test('(a) the last transfer\'s taker is a criminal power', () => {
+    const s = transfer(town(), CRIMINAL);
+    // non-vacuous: the owner is told it on the record, and the served document still holds its row
+    expect(holderOf(s, OWNER)).toMatchObject({ rule: 'R1', holderName: CRIMINAL });
+    expect(toPublicSafe(s).powerStructure.factions.map((f) => f.faction)).toContain(CRIMINAL);
+    servedAnswersHold(s, (h, label) => expect(h, `audience ${label}`).toMatchObject({ rule: 'R1', holder: null, holderName: null, refused: true }));
+  });
+
+  test('(b) the last transfer\'s taker is a hidden power', () => {
+    const s = transfer(town(), HIDDEN);
+    expect(holderOf(s, OWNER)).toMatchObject({ rule: 'R1', holderName: HIDDEN });
+    servedAnswersHold(s, (h, label) => expect(h, `audience ${label}`).toMatchObject({ rule: 'R1', holder: null, holderName: null, refused: true }));
+  });
+
+  /** The served document's symbiotic/stable edges on the current form, by the other power (masked names as served). */
+  const symbioticOnForm = (s) => {
+    const served = toPublicSafe(s);
+    const form = served.powerStructure.government;
+    return served.powerStructure.factionRelationships
+      .filter((r) => r.pair.includes(form) && r.type === 'symbiotic' && r.direction === 'stable')
+      .map((r) => r.pair.find((n) => n !== form));
+  };
+  const toldTheMerchants = (h, label) => expect(h, `audience ${label}`).toMatchObject({ rule: 'R1', holderName: 'Merchant Guilds', refused: false });
+
+  test('(c) an open taker beside a criminal power\'s symbiotic/stable edge on the same form (born; the transfer\'s sentence stands)', () => {
+    const s = transfer(town([merchantEdge, criminalEdge]), 'Merchant Guilds');
+    expect(symbioticOnForm(s)).toEqual(['Merchant Guilds', CRIMINAL]);
+    servedAnswersHold(s, toldTheMerchants);
+  });
+
+  test('(c) the same, where a later writer has replaced the transfer\'s sentence', () => {
+    const s = transfer(town([merchantEdge, criminalEdge]), 'Merchant Guilds');
+    s.powerStructure.recentConflict = 'The river tolls are disputed again.';
+    expect(symbioticOnForm(s)).toEqual(['Merchant Guilds', CRIMINAL]);
+    servedAnswersHold(s, toldTheMerchants);
+  });
+
+  test('(c) the same, where the criminal power held the seat by the transfer before', () => {
+    const s = transfer(transfer(town(), CRIMINAL), 'Merchant Guilds');
+    expect(symbioticOnForm(s)).toEqual([CRIMINAL, 'Merchant Guilds']);
+    servedAnswersHold(s, toldTheMerchants);
+  });
+
+  test('(d) a born-shape town whose seat has a symbiotic/stable edge with its MILITARY power, and no transfer on record', () => {
+    const s = town(
+      [{ pair: ['Town Council', 'Town Watch'], type: 'symbiotic', direction: 'stable', narrative: 'The Town Council gives the orders and the Town Watch carries them out; each needs the other to stay strong.' }],
+      [{ faction: 'Town Watch', category: 'military', power: 22, modifiers: [] }],
+    );
+    expect(s.powerStructure.previousGovernments).toBeUndefined();
+    expect(s.powerStructure.recentConflict).toBeUndefined();
+    expect(symbioticOnForm(s)).toEqual(['Town Watch']);
+    // non-vacuous: on the record, the seat's person carries both forbidden names (the served document drops them)
+    expect(named(holderOf(s, OWNER))).toEqual([CRIMINAL, HIDDEN]);
+    servedAnswersHold(s, (h, label) => {
+      expect(h.rule, `audience ${label}`).not.toBe('R1');
+      expect(h, `audience ${label}`).toMatchObject({ rule: 'R4', holder: null, refused: false });
+      expect(h.person?.name, `audience ${label}`).toBe('Hilde Brandt');
+    });
+  });
+});
+
+// ── (11) Step 1′: one matcher, one frozen list ─────────────────────────────────────────────────────────────
+
+describe('(11) Step 1′: the transfer\'s sentences are read through ONE matcher against ONE frozen list of wordings', () => {
+  const edgeOf = (s, taker) => s.powerStructure.factionRelationships.find((r) => r.pair.includes(s.powerStructure.government) && r.pair.includes(taker));
+
+  test('the real transferRulingPower, on every cause with and without the demotion, writes only wordings the list holds', () => {
+    let runs = 0;
+    for (const cause of RULING_POWER_CAUSES) {
+      for (const demoteIncumbent of [false, true]) {
+        const s = transfer(civicTown(), 'Merchant Guilds', { cause, demoteIncumbent });
+        const form = s.powerStructure.government;
+        const label = `${cause}, demoteIncumbent ${demoteIncumbent}`;
+        expect(transferSentenceSays(edgeOf(s, 'Merchant Guilds').narrative, 'edge', 'Merchant Guilds', form), `${label}: the edge`).toBe(true);
+        expect(transferSentenceSays(s.powerStructure.recentConflict, 'conflict', 'Merchant Guilds', form), `${label}: recentConflict`).toBe(true);
+        // the matcher reads the taker, the form and the sentence: none of them is a wildcard
+        expect(transferSentenceSays(edgeOf(s, 'Merchant Guilds').narrative, 'edge', 'Noble Houses', form), label).toBe(false);
+        expect(transferSentenceSays(edgeOf(s, 'Merchant Guilds').narrative, 'edge', 'Merchant Guilds', 'Town Council'), label).toBe(false);
+        expect(transferSentenceSays(s.powerStructure.recentConflict, 'edge', 'Merchant Guilds', form), label).toBe(false);
+        expect(holderOf(s, OWNER)).toMatchObject({ rule: 'R1', holderName: 'Merchant Guilds' });
+        runs += 1;
+      }
+    }
+    expect(runs).toBe(RULING_POWER_CAUSES.length * 2);
+  });
+
+  test('the list is frozen, and holds the edge sentence once and the transfer\'s own line in its three wordings', () => {
+    expect(Object.isFrozen(TRANSFER_WORDINGS)).toBe(true);
+    expect(TRANSFER_WORDINGS.every((w) => Object.isFrozen(w))).toBe(true);
+    expect(TRANSFER_WORDINGS.filter((w) => w.sentence === 'edge').length).toBe(1);
+    expect(TRANSFER_WORDINGS.filter((w) => w.sentence === 'conflict').length).toBe(3);
+  });
+
+  /** A made-up new wording, put FIRST in the list (a later rewording, added beside the frozen ones). */
+  const NEW_FIRST = [
+    { sentence: 'edge', wording: '{taker} now steers the {form}; the seat bends to them.' },
+    { sentence: 'conflict', wording: '{taker} took the {form} from the {from}.' },
+    ...TRANSFER_WORDINGS,
+  ];
+
+  test('a town in the frozen wording still reads its taker when a made-up NEW wording stands first in the list', () => {
+    const once = transfer(civicTown(), 'Merchant Guilds');
+    expect(transferTakerOf(once, once.powerStructure.government, NEW_FIRST)).toBe('Merchant Guilds');
+    // the two-taker shape of arm (3): the tie-break (the transfer's own line) still reads through the longer list
+    const third = transfer(transfer(transfer(civicTown({
+      extra: [{ faction: 'Coin Exchange', category: 'merchant', power: 18, modifiers: [] }],
+      relationships: [{ pair: ['Town Council', 'Coin Exchange'], type: 'competitive', direction: 'stable', narrative: 'They haggle over the market dues.' }],
+    }), 'Merchant Guilds'), 'Noble Houses'), 'Coin Exchange');
+    expect(transferTakerOf(third, third.powerStructure.government, NEW_FIRST)).toBe('Coin Exchange');
+    expect(transferTakerOf(third, third.powerStructure.government)).toBe('Coin Exchange');
+  });
+
+  test('the list is live: a town in the made-up wording reads its taker only through a list that holds it', () => {
+    const s = structuredClone(transfer(civicTown(), 'Merchant Guilds'));
+    edgeOf(s, 'Merchant Guilds').narrative = 'Merchant Guilds now steers the merchant city council; the seat bends to them.';
+    expect(transferTakerOf(s, s.powerStructure.government)).toBeNull();
+    expect(transferTakerOf(s, s.powerStructure.government, NEW_FIRST)).toBe('Merchant Guilds');
+  });
+
+  test('(a) a born seat\'s symbiotic/stable edge with its military power, no transfer on record, names NOBODY as taker', () => {
+    for (const [tier, government, military] of [['town', 'Town Council', 'Town Watch'], ['hamlet', 'Elder Council', 'Military Party']]) {
+      const s = civicTown({
+        tier, government, mayor: [{ power: government, rank: 1 }],
+        extra: [{ faction: military, category: 'military', power: 22, modifiers: [] }],
+        relationships: [{ pair: [government, military], type: 'symbiotic', direction: 'stable', narrative: `The ${government} gives the orders and the ${military} carries them out; each needs the other to stay strong.` }],
+      });
+      expect(transferTakerOf(s, government), tier).toBeNull();
+      for (const options of [OWNER, READER]) expect(holderOf(s, options).rule, tier).not.toBe('R1');
+      expect(holderOf(toPublicSafe(s), READER).rule, tier).not.toBe('R1');
+    }
+  });
+
+  describe('(c) a power the DM renames after a transfer (store/settlementRenameHelpers.js :: renameFactionImpl -> factionRename.js :: applyFactionRenameToSettlement)', () => {
+    /** The rename, as the store's producer applies it (in place, on its own copy). */
+    const renamed = (s, oldName, newName) => {
+      const next = structuredClone(s);
+      expect(applyFactionRenameToSettlement(next, oldName, newName).changed).toBe(true);
+      return next;
+    };
+    for (const cause of ['coup', 'election']) {
+      test(`${cause}: renaming the TAKER: the owner and the reader are told the renamed taker (the right power)`, () => {
+        const s = renamed(transfer(civicTown(), 'Merchant Guilds', { cause, demoteIncumbent: false }), 'Merchant Guilds', 'The Gilded Compact');
+        expect(s.powerStructure.factions.map((f) => f.faction)).toContain('The Gilded Compact');
+        expect(holderOf(s, OWNER)).toMatchObject({ rule: 'R1', holderName: 'The Gilded Compact', refused: false });
+        expect(holderOf(toPublicSafe(s), READER)).toMatchObject({ rule: 'R1', holderName: 'The Gilded Compact', refused: false });
+      });
+
+      test(`${cause}: renaming a BYSTANDER: R1 stands on the taker`, () => {
+        const s = renamed(transfer(civicTown(), 'Merchant Guilds', { cause, demoteIncumbent: false }), 'Noble Houses', 'The Gilded Compact');
+        expect(holderOf(s, OWNER)).toMatchObject({ rule: 'R1', holderName: 'Merchant Guilds', refused: false });
+        expect(holderOf(toPublicSafe(s), READER)).toMatchObject({ rule: 'R1', holderName: 'Merchant Guilds', refused: false });
+      });
+    }
+  });
+});
+
+// ── (12) Addendum 3: a transfer the read cannot attribute answers nobody ───────────────────────────────────
+
+describe('(12) Addendum 3: renaming the SEAT after a transfer: R1 answers NOBODY, never a wrong power', () => {
+  /** Coin Exchange (merchant, 40) outweighs the taker Merchant Guilds (31 after the transfer): R3's wrong answer before. */
+  const renamedSeat = (cause) => {
+    const start = civicTown({ extra: [{ faction: 'Coin Exchange', category: 'merchant', power: 40, modifiers: [] }] });
+    const s = structuredClone(transfer(start, 'Merchant Guilds', { cause, demoteIncumbent: false }));
+    expect(holderOf(s, OWNER)).toMatchObject({ rule: 'R1', holderName: 'Merchant Guilds' });
+    expect(applyFactionRenameToSettlement(s, s.powerStructure.government, 'The Gilded Compact').changed).toBe(true);
+    expect(s.powerStructure.government).toBe('The Gilded Compact');
+    return s;
+  };
+  const NOBODY = { rule: 'R1', holder: null, holderName: null, refused: false };
+
+  for (const cause of ['coup', 'election']) {
+    test(`${cause}: the owner and the reader (record and served) are told nobody, not Coin Exchange`, () => {
+      const s = renamedSeat(cause);
+      expect(holderOf(s, OWNER)).toMatchObject(NOBODY);
+      expect(holderOf(s, READER)).toMatchObject(NOBODY);
+      expect(holderOf(toPublicSafe(s), READER)).toMatchObject(NOBODY);
+      expect(holderOf(toPublicSafe(s), OWNER)).toMatchObject(NOBODY);
+      // the office stands: its kind is the seat's own (the merchant form), never a power's
+      expect(holderOf(s, OWNER).kind).toBe('merchant');
+    });
+  }
+
+  test('control: the rule needs an edge in a transfer wording on the seat\'s pair (a born seat\'s edge never fires it)', () => {
+    const born = civicTown({
+      extra: [{ faction: 'Town Watch', category: 'military', power: 22, modifiers: [] }],
+      relationships: [{ pair: ['Town Council', 'Town Watch'], type: 'symbiotic', direction: 'stable', narrative: 'The Town Council gives the orders and the Town Watch carries them out; each needs the other to stay strong.' }],
+    });
+    expect(holderOf(born, OWNER).rule).toBe('R4');
+    // two transfers: the first taker's edge carries the old form's wording, but the current form's edge is there
+    const twice = transfer(transfer(civicTown(), 'Merchant Guilds'), 'Noble Houses');
+    expect(holderOf(twice, OWNER)).toMatchObject({ rule: 'R1', holderName: 'Noble Houses' });
+  });
+
+  test('condition 1: derivePowerStrata, on the record and served, names the seat\'s form, says no seat is vacant, and removes no holder', () => {
+    const s = renamedSeat('coup');
+    s.config = { [SEAT_LAW_CONFIG_KEY]: HOLDER_SEAT_LAW_VERSION };
+    const oldLaw = (doc) => ({ ...doc, config: {} });
+    for (const [label, doc] of [['record', s], ['served', toPublicSafe(s)]]) {
+      const strata = derivePowerStrata(doc);
+      expect(strata.powers[0], label).toMatchObject({ name: 'The Gilded Compact', role: 'ruler' });
+      const said = JSON.stringify(strata.powers) + JSON.stringify(strata.roster.map(({ faction: _f, ...row }) => row));
+      expect(said, label).not.toMatch(/vacant|empty|unheld|no one holds|nobody holds/i);
+      // the contest's contenders, no holder removed: the old law's list (which removes none)
+      const contenders = strata.powers.filter((p) => p.role === 'contender').map((p) => p.name);
+      expect(contenders, label).toEqual(coupContenders(oldLaw(doc)).challengers.map((c) => c.name));
+      expect(contenders, label).toContain('Coin Exchange');
+      expect(contenders, label).toContain('Merchant Guilds');
+    }
   });
 });
