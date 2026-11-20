@@ -3313,3 +3313,14 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   routing; GOALS-1 asked to reconcile 23 against 170; FRAME-4's relay of U0 forwarded to FRAME-5 with two rulings.
   OWED TO THE OWNER IN THE CHAIR'S NEXT WORDS: the four corrections; the arrival pools added; the thin pages put
   to him; Safety's floors named as a deeper fault for after the deploy.
+- 11:26 UTC · PAGE-2's FIRST MESSAGE (on 0c9069489; its own measure on the 300 towns agrees with PAGE-1's): kinds by share of
+  towns: crime_wave 25.7, guild_conflict 22.0, resource_scarcity 11.0, external_threat 8.7, succession_crisis 8.3,
+  outside_debt 7.7; crime_wave has ONE text in 77 towns; three forges of one size in a row share a tension's text
+  39.9% of the time (town 44%, city 83%, metropolis 81%), random triples 30.7%; a side the record lacks is shown in
+  8.3% of towns; misfit secrets: clergy 9.8%, justice 9.9%, watch 1.1%; clergy titles with no row: dean 150 cards,
+  bishop 60, priest 50, senior abbot 39, senior abbess 35, abbess 5. PART K IS WIDER: Guild Master (221 cards),
+  Thieves Guild Master (34), Council Member and the near miss Wealthiest Merchant (100) all miss their keyword;
+  the band also sets `power` (1 to 10) off the same draw; about 35 files read `influence`, EIGHT IN THE WORLD'S
+  PULSE: a correction changes how a corrected card acts in play. TOLD (11:26): the titles are the union of both
+  seats' lists; PART K's proposal must name every role that misses, every reader by birth or play time, what
+  moves and what does not, and whether the stray `_rng()` is avoided; the chair rules; the owner signs at the close.
