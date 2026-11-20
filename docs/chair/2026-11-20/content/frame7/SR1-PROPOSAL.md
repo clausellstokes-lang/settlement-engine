@@ -1,6 +1,6 @@
 # FRAME-7 · SR1 — the stakes' reason: the PROPOSAL (to the chair's eye before any builder is cut)
 
-Rests on `frame7/SR0-RESULTS.md` (measured at `d8c2219fc`; E executed, I inferred). Revised after the chair's answers of 19:12 and 19:30 UTC. Vetoable by the owner. NOTHING BUILT.
+Rests on `frame7/SR0-RESULTS.md` (measured at `d8c2219fc`; E executed, I inferred). Revised after the chair's answers of 19:12 and 19:30 UTC. APPROVED TO BUILD by the chair at 20:04 UTC with FOUR CURES (applied below: each removed a thing the record does not hold) and ONE MEASURE before the merge: for each matched system, the KINDS of power that reach it and the crisis kinds it comes from; if a power that arms no one reaches defense_readiness, or a crisis that is no danger of arms, in more than a trace, say so before merging ("sent to hold the line" and "those it arms" then need a `needs`). Vetoable by the owner. NOTHING BUILT.
 
 ## What the measure changed in the target
 
@@ -23,13 +23,13 @@ The shares are of the 543 CRISIS rows whose loss matched that system (SR0 §2; E
 
 | system | wordings (the keyed hash picks one) |
 |---|---|
-| public_legitimacy, by governing (235, 43%) | 1. "{power\|it governs\|they govern}, and the crisis is laid at {power\|its\|their} door" (the Elder Council loses · it governs, and the crisis is laid at its door) · 2. "{power\|its\|their} right to rule is what the crisis puts to the test" · 3. "people look to {power\|it\|them} for an answer {power\|it does\|they do} not yet have" · 4. "every day the crisis lasts is counted against {power\|it\|them}" |
-| defense_readiness (94, 17%) | 1. "{power\|its\|their} people are the ones sent to hold the line" · 2. "{power\|it has\|they have} to find the hands to man the walls" · 3. "the danger lands first on those {power\|it arms\|they arm}" |
-| trade_connectivity (86, 16%) | 1. "{power\|its\|their} trade is the first thing the crisis cuts" · 2. "{power\|its\|their} goods sit unsold while this lasts" · 3. "{power\|its\|their} routes and custom are both at risk" |
+| public_legitimacy, by governing (235, 43%) | 1. "{power\|it governs\|they govern}, and the crisis is laid at {power\|its\|their} door" (the Elder Council loses · it governs, and the crisis is laid at its door) · 2. "{power\|its\|their} right to rule is what the crisis puts to the test" · 3. "people look to {power\|it\|them} first for an answer" (the chair's cure 1) · 4. "every day the crisis lasts is counted against {power\|it\|them}" |
+| defense_readiness (94, 17%) | 1. "{power\|its\|their} people are the ones sent to hold the line" · 2. "{power\|it has\|they have} to find the hands to keep watch" (cure 2) · 3. "the danger lands first on those {power\|it arms\|they arm}" |
+| trade_connectivity (86, 16%) | 1. "{power\|its\|their} trade is the first thing the crisis cuts" · 2. "{power\|its\|their} goods sit unsold while this lasts" · 3. "{power\|it lives\|they live} by trade, and trade is what suffers" (cure 3) |
 | social_trust (64, 12%) | 1. "{power\|it holds\|they hold} people together, and that is what the crisis frays" · 2. "the neighbours {power\|it speaks\|they speak} for have stopped trusting each other" |
 | tax_revenue, by governing (48, 9%) | 1. "{power\|its\|their} coffers empty while the crisis drags on" · 2. "{power\|it cannot\|they cannot} collect what {power\|it is\|they are} owed while this lasts" |
 | law_order (12, 2%) | 1. "the disorder falls on those who keep the peace" · 2. "{power\|its\|their} people are stretched thin keeping order" |
-| healing_capacity (4, 1%) | 1. "{power\|its\|their} people tend the sick, and sicken in turn" |
+| healing_capacity (4, 1%) | 1. "the hurt and the sick are brought to {power\|it\|them} first" (cure 4) |
 | food_security, labor_capacity, housing_pressure, faction_stability (0 born; one each, same voice) | "{power\|its\|their} people go hungry first" · "{power\|its\|their} people are worked hardest" · "{power\|its\|their} people take in those with nowhere to go" · "{power\|its\|their} own ranks start to quarrel" |
 | an unknown system | the pre-SR1 line, "{power\|its\|their} own people feel the crisis first" |
 
