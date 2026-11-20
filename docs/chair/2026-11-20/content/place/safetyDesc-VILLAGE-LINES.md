@@ -59,6 +59,54 @@ Three things follow:
   of them needing nothing), and the metropolis, at 25 (MIXED_CORNERS row 1). On the test's 100 a size (`hxd-<size>-0..99`),
   both read under the bar (hamlet 12, metropolis 14). The 150 read is the chair's to weigh.
 
+## (A2) The two sizes still over the bar on 150 (the coordinator's order after the read of (A))
+
+These rows follow the same rules as (A), with two pool-specific ones:
+- TINY_MODERATE keeps a small place's calm, with the neighbours watching, and uses no "streets" or "quarters".
+- MIXED_CORNERS says that residents know where not to go.
+
+No row has `needs`. The classes lexicon (`classesOf`) finds no class word in any of them, and `thingsNamedIn` finds no named thing.
+
+### `TINY_MODERATE` (appended as rows 10–15; eligible at a thorp or hamlet: 14 of 16, against 8 of 10 before)
+
+| # | wording | needs |
+|---|---|---|
+| 10 | A wrong done here is a wrong done to neighbours, and it is not soon forgotten. | — |
+| 11 | Every household knows the others' business, which keeps most quarrels small. | — |
+| 12 | Little here goes unnoticed for long; the neighbours see to that. | — |
+| 13 | Trouble here is settled among neighbours, mostly before it grows. | — |
+| 14 | Folk here look in on one another, and what one household sees, the next soon hears. | — |
+| 15 | There are few places here to do wrong unseen. | — |
+
+### `MIXED_CORNERS` (appended as rows 8–12; eligible everywhere it prints: 13, against 8 before)
+
+| # | wording | needs |
+|---|---|---|
+| 8 | Locals can tell a newcomer which places to steer clear of. | — |
+| 9 | Those born here know which turnings to leave alone after dark. | — |
+| 10 | Residents keep to the places they know once night falls. | — |
+| 11 | Ask anyone who lives here, and they will name the spots to avoid. | — |
+| 12 | Long-time residents know the risky spots, and keep away from them. | — |
+
+### Re-projection, all six sizes, with every new row of (A) and (A2)
+
+The method is the same as above (150 places a size). Each cell gives the top count of any sentence, its share of all places,
+and its share among the places that print a composed line.
+
+| size | top count · share of all · share of printers | top sentence |
+|---|---|---|
+| thorp | 10 · 6.7% · 11.0% of 91 | "Strangers are noticed here, and so is anything that goes missing." |
+| hamlet | 12 · 8.0% · 12.5% of 96 | "The households look out for one another, and a quarrel or a theft is soon talked of." |
+| village | 15 · 10.0% · 14.6% of 103 | "Safety here depends on where you are, and when." |
+| town | 22 · 14.7% · 20.2% of 109 | "The watch keeps to the main streets; the side lanes after dark are another matter." (MIXED_FORCE.watch) |
+| city | 15 · 10.0% · 13.2% of 114 | "The walls keep the trouble inside, off the roads beyond." |
+| metropolis | 21 · 14.0% · 19.8% of 106 | "The garrison holds the gates and patrols the main streets; …" (MIXED_FORCE.garrison) |
+
+Every size is now at most 22 of 150. The town (22) and the metropolis (21) are still above the 18 margin. Their top
+sentences come from the force pools (watch, 7 rows; garrison, 8 rows), which this order did not open. A row or two more
+in each would give the margin, if the chair wants it. The Travelers line in this run: printed 13, refused 0 under
+`excludes: ['crisis: threat']`.
+
 ## (B) The presumption-classes walker
 
 I read both files whole: `tests/lint/presumptionClasses.walker.test.js` and its rule book, `tests/lint/presumptionClasses.shared.mjs`.
