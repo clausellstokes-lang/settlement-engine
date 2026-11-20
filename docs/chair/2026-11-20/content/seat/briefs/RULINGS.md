@@ -11,3 +11,10 @@ Builders read this beside `COMMON.md`. It governs where a brief written before i
 - (14) The card's choice table approved for the owner's signature: Crime Bosses where criminal operations >= 3 AND operations / lawful effective sources >= 0.75 AND black market share >= 20; else one underboss; the principal front always the single card.
 - (9) 2: at a transfer under the law the old holder's "power behind" edge is retired to a competitive edge; the PERSON after a coup is NAMED, NOT CURED in train 1 (the page says who "held it before"). 3: the incumbent's weight unchanged. 4: craft maps to `merchant_cabal` under the law until a row is authored. 5: R2 before R5 stands.
 - BUILD in two steps: U1, U2, U3 now; U4 and after wait for "BUILD-ON at <commit of the line>".
+
+## Addendum 5 (the chair under the owner's "Again I defer all decisions to you", received 06:23Z; vetoable by the owner)
+
+1. The principal front's rate: 0.0897 per eligible head (about 1 town in 50), a DRAFT row on `ALLEGIANCE_TUNING`, dark until the close.
+2. The DM-only mark: on the OWNER'S OWN PAGES ONLY, the front's house card and its head's person card carry a small mark in the criminal style: "A front", and under it the one fixed line "Also a criminal house, by its owner's own choice. No one stands over it." (the pronoun fitted to the house; the same words on every such card). On every read that is not the owner's: nothing, by the explicit audience argument; U11's born test proves the shared page of a town with a front and the same town without one are identical, the mark included. A read of `isPrincipalFront`; no key.
+3. The criminal titles: by size only, no culture words (final).
+4. Every figure lands dark; the light and the signatures are asked of the owner once, at the close.
