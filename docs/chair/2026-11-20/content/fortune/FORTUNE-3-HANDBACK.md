@@ -1,4 +1,4 @@
-# FORTUNE-3 hand-back (kept current at every push; last written 2026-11-20 19:15:35 UTC by `date -u`)
+# FORTUNE-3 hand-back (kept current at every push; last written 2026-11-20 19:26:04 UTC by `date -u`)
 
 For a successor: this file and the briefs (`briefs/COMMON.md`, `U4.md`, `U5-BUILD.md`) are all you need.
 The chair is session_019yED1SUxGVHyjQnoqoFvQ8 (send_message, Claude Code Remote MCP server).
@@ -25,7 +25,7 @@ FORCED-ON ARM IN ONE COMMAND (the prototype today; the real law after U4): `sh d
 | U5s safety at birth | MERGED GREEN; "factionDynamics released at 1cd2e6d93" SENT; never touch that file again (imports only) | 46f918dfb + aa7db0ccf, merge f526c8e20, lighting 1cd2e6d93 |
 | the working line 43ab0f5eb | MERGED GREEN (one conflict: the lighting census, re-taken) | merge 6707e474b, lighting 9910adb03 |
 | U5a the late step | MEASURED at the ruled place (6b00d35a2 on -u5a-wip: 0 of 2,400 differ from end of birth; FS4, contest, capture hold; stale W1 0/2, W2-W4 0, W5 9/1; law-1 births 600/600 identical); BUILDER OUT under the chair's 18:38 rulings (A) to (C) below (worktree `scratchpad/wt-u5a`) | 6b00d35a2 (measure) |
-| U4 FS7 | MERGED (3f500da51; censuses a49838e67; pushed): inventory 83df37b55 (240 lines, 3 findings, law-1 readings listed in its section 5); F1 91708ca94 (`economyStateProse.js`), F2 6ae967af2 (`prosperity.js`, its twin table NOT exported: enrol it in the census at the light); F3 a survivor; step 4 needs no cure (`governanceAccount.js :: legitimacyCausesOf` never names a term of 0). Red re-run on the pre-unit tree 2 failed / 5 passed (7). Gates and confinement at a49838e67: RUNNING at 19:1x (logs `scratchpad/f3logs/g3-*`, `scratchpad/conf3.log`) | 3f500da51, a49838e67 |
+| U4 FS7 | MERGED (3f500da51; censuses a49838e67; pushed): inventory 83df37b55 (240 lines, 3 findings, law-1 readings listed in its section 5); F1 91708ca94 (`economyStateProse.js`), F2 6ae967af2 (`prosperity.js`, its twin table NOT exported: enrol it in the census at the light); F3 a survivor; step 4 needs no cure (`governanceAccount.js :: legitimacyCausesOf` never names a term of 0). Red re-run on the pre-unit tree 2 failed / 5 passed (7). GREEN at a49838e67: tests/lint 220/220 (3271), ratchet, strict, lint, bands, wiring --check; governing 30/31, the 1 red `worldFactRederive` A7 (pre-existing at 9910adb03, the line's). CONFINEMENT: ⚠ THE BASE IS NOW THE LINE'S TIP 43ab0f5eb (the line's own names work moves prose against 0c9069489: 899 and 971 differing strings, 0 non-string): 43ab0f5eb -> a49838e67 525/525 and 720/720 identical, golden ab79158d..., census 9e9f4ffb... both sides | 3f500da51, a49838e67 |
 | U5b render reason | after U5a merged and the six sentences ruled (on six whole pages, the chair's 19:14) | — |
 
 THE CHAIR'S RULINGS ON U5a, 18:38 UTC: (A) NO new pipeline step: the merits run as the TAIL of the `assembleSettlement`
