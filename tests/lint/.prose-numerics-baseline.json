@@ -535,7 +535,7 @@
   },
   {
     "path": "src/components/session/SessionMode.jsx",
-    "line": 404,
+    "line": 406,
     "category": "floatInterpolation",
     "snippet": "{n?.power || 0}"
   },
