@@ -26,3 +26,16 @@ CONTROL, unmarked share: SERVER 1, TWIN 1 (the search bites). WHY (read): 212's 
 stored card before any eye trims it (its own V7-3 comment); the twin's `applyVeil` decides it on the public-safe copy,
 where tags survive. Not executed: R3-CURE-5's own re-derivation over a SHOWN house whose function eye is shut (it can
 only read that house as less criminal: toward withholding); re-run at the R3 read.
+
+## 2. R3 instruments ready (13:20 UTC; leads, not verdicts)
+
+`r3.probe.jsx` (the ruled search: case-blind, name and bare form, possessive/plural ending a boundary, strings AND keys, the
+only exemption a hit wholly inside a served name, named; ids whole/bounded/key; the HUSK by path: a served list row equal to
+a stored row of the same pattern with a naming field removed or emptied; key-level counts; VR31; VR42; gallery, link, twin,
+Reveal DM off/on). Smoke at c5786c5ce (`out/r3-smoke-at-c5786c5ce.txt`): it finds `factions[].desc` naming the guild
+(R5's named row) and `.relationships[]` ties of a hidden Black market's HOLDER served with the role "the black marketeer"
+nulled (VR9's holder pass: R4's, named there).
+`tell.probe.jsx` (my own counterfactual by onStep; the gate's pool recipe; the served page against its own house-free
+regeneration under all 16 switch settings, plus the possible-world signature by tier). AT THE PRE-R3 LANE 15567e597
+(`out/tell-at-15567e597.txt`): 92 towns with a hideable house (the gate's 92); my recompute of the gate, server: HIGHER
+21, EQUAL 65, LOWER 6 per Reveal arm; twin = server on every read. My gate CAN FAIL; at R3 it must read HIGHER 0.

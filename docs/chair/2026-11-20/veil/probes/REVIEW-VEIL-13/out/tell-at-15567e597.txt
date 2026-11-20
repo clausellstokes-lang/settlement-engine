@@ -1,0 +1,714 @@
+GATE (my recompute, server, the gate's setting, both dm): {"HIGHER":42,"EQUAL":130,"LOWER":12,"twinServerDiffer":0}
+village-politically_fractured-0-10 off EQUAL served=null cf=null | best setting SD-: no field differs | possible world (signature among house-free pages of tier village): FOUND
+village-politically_fractured-0-10 dm EQUAL served=null cf=null | best setting SDP: no field differs | possible world (signature among house-free pages of tier village): FOUND
+town-infiltrated-0-12 off EQUAL served=organized cf=organized | best setting SD-: no field differs | possible world (signature among house-free pages of tier town): FOUND
+town-infiltrated-0-12 dm EQUAL served=organized cf=organized | best setting SD-: TELL captureStates | possible world (signature among house-free pages of tier town): NOT FOUND {"key":"organized","ops":"some","types":"some","bmc":"absent","svc":"some","inc":"none","pow":"some","cap":"present","chains":"none"}
+    captureStates: served {"c":"corrupted","f":[["Corrupt Council","corrupted"]],"p":["corrupted","corrupted"]} | cf {"c":null,"f":[],"p":[]}
+town-insurgency-0-14 off EQUAL served=organized cf=organized | best setting -D-: TELL crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier town): FOUND
+    crimeTypes: served [{},{"desc":"Street-level confrontations between insurgent supporters and the watch. Officially categorised as riot and disorder.","type":"political violence"}, | cf [{"type":"Background crime","desc":"Petty theft, minor fraud, and opportunistic violence are persistent, driven by too many people with too little, and too few 
+    servicesCriminal: served [{"desc":"Rough up a target, intimidate a debtor, move a problem: informal, no contract.","name":"Muscle for hire"},{"desc":"Pay or have your premises damaged.  | cf null
+town-insurgency-0-14 dm EQUAL served=organized cf=organized | best setting -D-: TELL crimeTypes,servicesCriminal,captureStates | possible world (signature among house-free pages of tier town): NOT FOUND {"key":"organized","ops":"some","types":"some","bmc":"absent","svc":"some","inc":"none","pow":"some","cap":"present","chains":"none"}
+    crimeTypes: served [{},{"desc":"Street-level confrontations between insurgent supporters and the watch. Officially categorised as riot and disorder.","type":"political violence"}, | cf [{"type":"Background crime","desc":"Petty theft, minor fraud, and opportunistic violence are persistent, driven by too many people with too little, and too few 
+    servicesCriminal: served [{"desc":"Rough up a target, intimidate a debtor, move a problem: informal, no contract.","name":"Muscle for hire"},{"desc":"Pay or have your premises damaged.  | cf null
+    captureStates: served {"c":"corrupted","f":[["Corrupt Council","corrupted"]],"p":["corrupted"]} | cf {"c":null,"f":[],"p":[]}
+town-indebted-0-16 off HIGHER served=diffuse cf=null | best setting -D-: TELL key,covertHeld,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier town): FOUND
+    key: served "diffuse" | cf null
+    covertHeld: served true | cf false
+    crimeTypes: served [{"desc":"Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from organised theft.","type | cf [{"type":"debt evasion","desc":"Residents fleeing creditor obligations or transferring assets fraudulently to avoid collection."}]
+    servicesCriminal: served [{"desc":"No questions asked. Stolen goods move through back channels for a fraction of value.","name":"Fencing stolen goods","institution":"(covert)"}] | cf null
+town-indebted-0-16 dm HIGHER served=diffuse cf=null | best setting -DP: TELL key,covertHeld,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier town): FOUND
+    key: served "diffuse" | cf null
+    covertHeld: served true | cf false
+    crimeTypes: served [{"desc":"Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from organised theft.","type | cf [{"type":"debt evasion","desc":"Residents fleeing creditor obligations or transferring assets fraudulently to avoid collection."}]
+    servicesCriminal: served [{"desc":"No questions asked. Stolen goods move through back channels for a fraction of value.","name":"Fencing stolen goods","institution":"(covert)"}] | cf null
+town-none-0-17 off HIGHER served=organized cf=diffuse | best setting SD-: TELL key,crimeTypes,servicesCriminal,criminalPowers | possible world (signature among house-free pages of tier town): FOUND
+    key: served "organized" | cf "diffuse"
+    crimeTypes: served [{"desc":"Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from organised theft.","type | cf [{"type":"Background crime","desc":"Petty theft, minor fraud, and opportunistic violence are persistent. No single dominant organisation: just the steady pressu
+    servicesCriminal: served [{"desc":"No questions asked. Stolen goods move through back channels for a fraction of value.","name":"Fencing stolen goods","institution":"(covert)"}] | cf [{"name":"Fencing stolen goods","desc":"Ask around at the right tavern. Someone moves goods without questions.","institution":"(covert)"},{"name":"Protection (i
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf []
+town-none-0-17 dm HIGHER served=organized cf=diffuse | best setting SD-: TELL key,crimeTypes,servicesCriminal,criminalPowers,captureStates | possible world (signature among house-free pages of tier town): FOUND
+    key: served "organized" | cf "diffuse"
+    crimeTypes: served [{"desc":"Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from organised theft.","type | cf [{"type":"Background crime","desc":"Petty theft, minor fraud, and opportunistic violence are persistent. No single dominant organisation: just the steady pressu
+    servicesCriminal: served [{"desc":"No questions asked. Stolen goods move through back channels for a fraction of value.","name":"Fencing stolen goods","institution":"(covert)"}] | cf [{"name":"Fencing stolen goods","desc":"Ask around at the right tavern. Someone moves goods without questions.","institution":"(covert)"},{"name":"Protection (i
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf []
+    captureStates: served {"c":"equilibrium","f":[["Arcane Council","equilibrium"]],"p":["equilibrium"]} | cf {"c":null,"f":[],"p":[]}
+town-under_siege-0-18 off LOWER served=null cf=diffuse | best setting -D-: TELL crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier town): FOUND
+    crimeTypes: served [{},{"desc":"Hunger-driven theft of food, livestock, and stored goods. Enforcement struggles to distinguish survival crime from organised theft.","type":"desper | cf [{"type":"desperation theft","desc":"Hunger-driven theft of food, livestock, and stored goods. Enforcement struggles to distinguish survival crime from organise
+    servicesCriminal: served [{"desc":"Rough up a target, intimidate a debtor, move a problem: informal, no contract.","name":"Muscle for hire"},{"desc":"Pay or have your premises damaged.  | cf null
+town-under_siege-0-18 dm LOWER served=null cf=diffuse | best setting -D-: TELL crimeTypes,servicesCriminal,captureStates | possible world (signature among house-free pages of tier town): NOT FOUND {"key":null,"ops":"empty","types":"some","bmc":"absent","svc":"some","inc":"none","pow":"none","cap":"present","chains":"none"}
+    crimeTypes: served [{},{"desc":"Hunger-driven theft of food, livestock, and stored goods. Enforcement struggles to distinguish survival crime from organised theft.","type":"desper | cf [{"type":"desperation theft","desc":"Hunger-driven theft of food, livestock, and stored goods. Enforcement struggles to distinguish survival crime from organise
+    servicesCriminal: served [{"desc":"Rough up a target, intimidate a debtor, move a problem: informal, no contract.","name":"Muscle for hire"},{"desc":"Pay or have your premises damaged.  | cf null
+    captureStates: served {"c":"none","f":[],"p":[]} | cf {"c":null,"f":[],"p":[]}
+town-wartime-0-19 off HIGHER served=diffuse cf=null | best setting -D-: TELL key,covertHeld,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier town): FOUND
+    key: served "diffuse" | cf null
+    covertHeld: served true | cf false
+    crimeTypes: served [{"desc":"Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from organised theft.","type | cf [{"type":"war profiteering","desc":"Suppliers adulterating the grain and provisions sold to the army's contracts. Inspectors are overworked or bribed. The settl
+    servicesCriminal: served [{"desc":"No questions asked. Stolen goods move through back channels for a fraction of value.","name":"Fencing stolen goods","institution":"(covert)"}] | cf null
+town-wartime-0-19 dm HIGHER served=diffuse cf=null | best setting -DP: TELL key,covertHeld,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier town): FOUND
+    key: served "diffuse" | cf null
+    covertHeld: served true | cf false
+    crimeTypes: served [{"desc":"Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from organised theft.","type | cf [{"type":"war profiteering","desc":"Suppliers adulterating the grain and provisions sold to the army's contracts. Inspectors are overworked or bribed. The settl
+    servicesCriminal: served [{"desc":"No questions asked. Stolen goods move through back channels for a fraction of value.","name":"Fencing stolen goods","institution":"(covert)"}] | cf null
+town-none-0-21 off EQUAL served=organized cf=organized | best setting -D-: TELL crimeTypes,servicesCriminal,criminalPowers | possible world (signature among house-free pages of tier town): FOUND
+    crimeTypes: served [{}] | cf []
+    servicesCriminal: served [{"desc":"Rough up a target, intimidate a debtor, move a problem: informal, no contract.","name":"Muscle for hire"},{"desc":"Pay or have your premises damaged.  | cf null
+    criminalPowers: served [{"name":"Corrupt Council","category":"criminal","isGoverning":true},{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf [{"name":"Corrupt Council","category":"criminal","isGoverning":true}]
+town-none-0-21 dm EQUAL served=organized cf=organized | best setting -D-: TELL crimeTypes,servicesCriminal,criminalPowers,captureStates | possible world (signature among house-free pages of tier town): FOUND
+    crimeTypes: served [{}] | cf []
+    servicesCriminal: served [{"desc":"Rough up a target, intimidate a debtor, move a problem: informal, no contract.","name":"Muscle for hire"},{"desc":"Pay or have your premises damaged.  | cf null
+    criminalPowers: served [{"name":"Corrupt Council","category":"criminal","isGoverning":true},{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf [{"name":"Corrupt Council","category":"criminal","isGoverning":true}]
+    captureStates: served {"c":"corrupted","f":[["Corrupt Council","corrupted"]],"p":["corrupted","corrupted"]} | cf {"c":null,"f":[],"p":[]}
+town-infiltrated-0-22 off EQUAL served=null cf=null | best setting -D-: TELL crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier town): FOUND
+    crimeTypes: served [{}] | cf []
+    servicesCriminal: served [{"desc":"Rough up a target, intimidate a debtor, move a problem: informal, no contract.","name":"Muscle for hire"},{"desc":"Pay or have your premises damaged.  | cf null
+town-infiltrated-0-22 dm EQUAL served=null cf=null | best setting -DP: TELL crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier town): NOT FOUND {"key":null,"ops":"empty","types":"some","bmc":"absent","svc":"some","inc":"none","pow":"none","cap":"present","chains":"none"}
+    crimeTypes: served [{}] | cf []
+    servicesCriminal: served [{"desc":"Rough up a target, intimidate a debtor, move a problem: informal, no contract.","name":"Muscle for hire"},{"desc":"Pay or have your premises damaged.  | cf null
+town-none-0-23 off EQUAL served=organized cf=organized | best setting SD-: TELL crimeTypes | possible world (signature among house-free pages of tier town): FOUND
+    crimeTypes: served [{"desc":"Practitioners misuse magical ability for profit. Identity alteration, scrying, fraud, or targeted curses-for-hire.","type":"Magical crime"},{"type":"S | cf [{"type":"Magical crime","desc":"Practitioners misuse magical ability for profit. Identity alteration, scrying, fraud, or targeted curses-for-hire."}]
+town-none-0-23 dm EQUAL served=organized cf=organized | best setting SD-: TELL crimeTypes,captureStates | possible world (signature among house-free pages of tier town): NOT FOUND {"key":"organized","ops":"some","types":"some","bmc":"absent","svc":"some","inc":"none","pow":"some","cap":"present","chains":"none"}
+    crimeTypes: served [{"desc":"Practitioners misuse magical ability for profit. Identity alteration, scrying, fraud, or targeted curses-for-hire.","type":"Magical crime"},{"type":"S | cf [{"type":"Magical crime","desc":"Practitioners misuse magical ability for profit. Identity alteration, scrying, fraud, or targeted curses-for-hire."}]
+    captureStates: served {"c":"adversarial","f":[],"p":["adversarial"]} | cf {"c":null,"f":[],"p":[]}
+town-under_siege-0-28 off EQUAL served=diffuse cf=diffuse | best setting SD-: TELL crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier town): FOUND
+    crimeTypes: served [{"desc":"Hunger-driven theft of food, livestock, and stored goods. Enforcement struggles to distinguish survival crime from organised theft.","type":"Survival  | cf [{"type":"desperation theft","desc":"Hunger-driven theft of food, livestock, and stored goods. Enforcement struggles to distinguish survival crime from organise
+    servicesCriminal: served [{"desc":"No questions asked. Stolen goods move through back channels for a fraction of value.","name":"Fencing stolen goods","institution":"(covert)"}] | cf [{"name":"Fencing stolen goods","desc":"Ask around at the right tavern. Someone moves goods without questions.","institution":"(covert)"},{"name":"Hired muscle"
+town-under_siege-0-28 dm EQUAL served=diffuse cf=diffuse | best setting SD-: TELL crimeTypes,servicesCriminal,captureStates | possible world (signature among house-free pages of tier town): FOUND
+    crimeTypes: served [{"desc":"Hunger-driven theft of food, livestock, and stored goods. Enforcement struggles to distinguish survival crime from organised theft.","type":"Survival  | cf [{"type":"desperation theft","desc":"Hunger-driven theft of food, livestock, and stored goods. Enforcement struggles to distinguish survival crime from organise
+    servicesCriminal: served [{"desc":"No questions asked. Stolen goods move through back channels for a fraction of value.","name":"Fencing stolen goods","institution":"(covert)"}] | cf [{"name":"Fencing stolen goods","desc":"Ask around at the right tavern. Someone moves goods without questions.","institution":"(covert)"},{"name":"Hired muscle"
+    captureStates: served {"c":"corrupted","f":[["Military Council","corrupted"]],"p":[]} | cf {"c":null,"f":[],"p":[]}
+town-wartime-0-29 off HIGHER served=organized cf=diffuse | best setting SD-: TELL key,crimeTypes,servicesCriminal,criminalPowers | possible world (signature among house-free pages of tier town): FOUND
+    key: served "organized" | cf "diffuse"
+    crimeTypes: served [{"desc":"Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from organised theft.","type | cf [{"type":"war profiteering","desc":"Suppliers adulterating the grain and provisions sold to the army's contracts. Inspectors are overworked or bribed. The settl
+    servicesCriminal: served [{"desc":"No questions asked. Stolen goods move through back channels for a fraction of value.","name":"Fencing stolen goods","institution":"(covert)"}] | cf [{"name":"Fencing stolen goods","desc":"Ask around at the right tavern. Someone moves goods without questions.","institution":"(covert)"},{"name":"Hired muscle"
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf []
+town-wartime-0-29 dm HIGHER served=organized cf=diffuse | best setting SD-: TELL key,crimeTypes,servicesCriminal,criminalPowers,captureStates | possible world (signature among house-free pages of tier town): FOUND
+    key: served "organized" | cf "diffuse"
+    crimeTypes: served [{"desc":"Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from organised theft.","type | cf [{"type":"war profiteering","desc":"Suppliers adulterating the grain and provisions sold to the army's contracts. Inspectors are overworked or bribed. The settl
+    servicesCriminal: served [{"desc":"No questions asked. Stolen goods move through back channels for a fraction of value.","name":"Fencing stolen goods","institution":"(covert)"}] | cf [{"name":"Fencing stolen goods","desc":"Ask around at the right tavern. Someone moves goods without questions.","institution":"(covert)"},{"name":"Hired muscle"
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf []
+    captureStates: served {"c":"adversarial","f":[],"p":["adversarial"]} | cf {"c":null,"f":[],"p":[]}
+town-politically_fractured-0-30 off EQUAL served=null cf=null | best setting SD-: TELL crimeTypes | possible world (signature among house-free pages of tier town): FOUND
+    crimeTypes: served [{"type":"Smuggling"}] | cf []
+town-politically_fractured-0-30 dm EQUAL served=null cf=null | best setting SDP: TELL crimeTypes | possible world (signature among house-free pages of tier town): FOUND
+    crimeTypes: served [{"type":"Smuggling"}] | cf []
+city-none-0-31 off HIGHER served=semi-organized cf=diffuse | best setting ---: TELL key,ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier city): FOUND
+    key: served "semi-organized" | cf null
+    ops: served ["Rival Gangs"] | cf null
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+city-none-0-31 dm HIGHER served=semi-organized cf=diffuse | best setting --P: TELL key,ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier city): FOUND
+    key: served "semi-organized" | cf null
+    ops: served ["Rival Gangs"] | cf null
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+city-infiltrated-0-32 off EQUAL served=semi-organized cf=semi-organized | best setting -D-: TELL crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier city): FOUND
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf []
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+city-infiltrated-0-32 dm EQUAL served=semi-organized cf=semi-organized | best setting -DP: TELL crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier city): FOUND
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf []
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+city-none-0-33 off EQUAL served=semi-organized cf=semi-organized | best setting -D-: TELL covertHeld,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier city): FOUND
+    covertHeld: served true | cf false
+    crimeTypes: served [{"desc":"Petty theft, minor fraud, and opportunistic violence are persistent, driven by too many people with too little, and too few consequences for taking. W | cf []
+    servicesCriminal: served [{"desc":"Ask around at the right tavern. Someone moves goods without questions.","name":"Fencing stolen goods","institution":"(covert)"}] | cf null
+city-none-0-33 dm EQUAL served=semi-organized cf=semi-organized | best setting -DP: TELL covertHeld,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier city): FOUND
+    covertHeld: served true | cf false
+    crimeTypes: served [{"desc":"Petty theft, minor fraud, and opportunistic violence are persistent, driven by too many people with too little, and too few consequences for taking. W | cf []
+    servicesCriminal: served [{"desc":"Ask around at the right tavern. Someone moves goods without questions.","name":"Fencing stolen goods","institution":"(covert)"}] | cf null
+city-insurgency-0-34 off EQUAL served=semi-organized cf=semi-organized | best setting SD-: TELL crimeTypes | possible world (signature among house-free pages of tier city): FOUND
+    crimeTypes: served [{"desc":"Street-level confrontations between insurgent supporters and the watch. Officially categorised as riot and disorder.","type":"political violence"},{"d | cf [{"type":"political violence","desc":"Targeted intimidation and occasional violence against officials loyal to the current authority. Professionally executed."}
+city-insurgency-0-34 dm EQUAL served=semi-organized cf=semi-organized | best setting SD-: TELL crimeTypes,captureStates | possible world (signature among house-free pages of tier city): FOUND
+    crimeTypes: served [{"desc":"Street-level confrontations between insurgent supporters and the watch. Officially categorised as riot and disorder.","type":"political violence"},{"d | cf [{"type":"political violence","desc":"Targeted intimidation and occasional violence against officials loyal to the current authority. Professionally executed."}
+    captureStates: served {"c":"none","f":[],"p":[]} | cf {"c":null,"f":[],"p":[]}
+city-none-0-37 off HIGHER served=semi-organized cf=null | best setting ---: TELL key,ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier city): FOUND
+    key: served "semi-organized" | cf null
+    ops: served ["Rival Gangs"] | cf null
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+city-none-0-37 dm HIGHER served=semi-organized cf=null | best setting --P: TELL key,ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier city): FOUND
+    key: served "semi-organized" | cf null
+    ops: served ["Rival Gangs"] | cf null
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+city-wartime-0-39 off EQUAL served=semi-organized cf=semi-organized | best setting -D-: TELL covertHeld,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier city): FOUND
+    covertHeld: served true | cf false
+    crimeTypes: served [{"desc":"Alchemists and members of the mages' guild who operate outside legal channels supply a sophisticated underground market for forbidden components, ille | cf [{"type":"war profiteering","desc":"Suppliers adulterating the grain and provisions sold to the army's contracts. Inspectors are overworked or bribed. The settl
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf null
+city-wartime-0-39 dm EQUAL served=semi-organized cf=semi-organized | best setting -DP: TELL crimeTypes,servicesCriminal,incomeCriminalRows | possible world (signature among house-free pages of tier city): FOUND
+    crimeTypes: served [{"desc":"Alchemists and members of the mages' guild who operate outside legal channels supply a sophisticated underground market for forbidden components, ille | cf [{"type":"war profiteering","desc":"Suppliers adulterating the grain and provisions sold to the army's contracts. Inspectors are overworked or bribed. The settl
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf null
+    incomeCriminalRows: served [] | cf [{"source":"Black Market Revenue","percentage":11,"desc":"Untaxed trade, fencing and theft bring money in here, but it goes to the criminals who run them and th
+city-politically_fractured-0-40 off HIGHER served=organized cf=semi-organized | best setting ---: TELL key,ops,crimeTypes,servicesCriminal,criminalPowers | possible world (signature among house-free pages of tier city): FOUND
+    key: served "organized" | cf null
+    ops: served ["Rival Gangs","Red Light District"] | cf null
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf []
+city-politically_fractured-0-40 dm HIGHER served=organized cf=semi-organized | best setting ---: TELL key,ops,crimeTypes,servicesCriminal,criminalPowers,captureStates | possible world (signature among house-free pages of tier city): FOUND
+    key: served "organized" | cf null
+    ops: served ["Rival Gangs","Red Light District"] | cf null
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf []
+    captureStates: served {"c":"equilibrium","f":[["Merchant Guild Council","equilibrium"]],"p":["equilibrium","equilibrium"]} | cf {"c":null,"f":[],"p":[]}
+city-none-0-41 off EQUAL served=null cf=null | best setting SD-: no field differs | possible world (signature among house-free pages of tier city): FOUND
+city-none-0-41 dm EQUAL served=null cf=null | best setting SDP: no field differs | possible world (signature among house-free pages of tier city): FOUND
+city-infiltrated-0-42 off HIGHER served=organized cf=semi-organized | best setting -D-: TELL key,crimeTypes,servicesCriminal,criminalPowers | possible world (signature among house-free pages of tier city): FOUND
+    key: served "organized" | cf "semi-organized"
+    crimeTypes: served [{"type":"Organized guild crime"},{"desc":"Practitioners misuse alchemical knowledge for profit. Identity alteration, scrying, alchemical fraud, or targeted cur | cf [{"type":"Magical crime","desc":"Practitioners misuse alchemical knowledge for profit. Identity alteration, scrying, alchemical fraud, or targeted curses-for-hi
+    servicesCriminal: served [{"desc":"Magical practitioners outside guild oversight: identity work, scrying, targeted effects. Available if you know where to ask.","name":"Arcane services  | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf []
+city-infiltrated-0-42 dm HIGHER served=organized cf=semi-organized | best setting -D-: TELL key,crimeTypes,servicesCriminal,criminalPowers,captureStates | possible world (signature among house-free pages of tier city): FOUND
+    key: served "organized" | cf "semi-organized"
+    crimeTypes: served [{"type":"Organized guild crime"},{"desc":"Practitioners misuse alchemical knowledge for profit. Identity alteration, scrying, alchemical fraud, or targeted cur | cf [{"type":"Magical crime","desc":"Practitioners misuse alchemical knowledge for profit. Identity alteration, scrying, alchemical fraud, or targeted curses-for-hi
+    servicesCriminal: served [{"desc":"Magical practitioners outside guild oversight: identity work, scrying, targeted effects. Available if you know where to ask.","name":"Arcane services  | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf []
+    captureStates: served {"c":"equilibrium","f":[["Merchant Guild Council","equilibrium"]],"p":["equilibrium","equilibrium"]} | cf {"c":null,"f":[],"p":[]}
+city-none-0-43 off EQUAL served=semi-organized cf=semi-organized | best setting ---: TELL ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier city): FOUND
+    ops: served ["Rival Gangs","Gambling Halls"] | cf null
+    crimeTypes: served [{"desc":"Practitioners misuse magical ability for profit. Identity alteration, scrying, fraud, or targeted curses-for-hire.","type":"Magical crime"},{"desc":"A | cf null
+    servicesCriminal: served [{"desc":"Magical practitioners outside guild oversight: identity work, scrying, targeted effects. Available if you know where to ask.","name":"Arcane services  | cf null
+city-none-0-43 dm EQUAL served=semi-organized cf=semi-organized | best setting --P: TELL ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier city): FOUND
+    ops: served ["Rival Gangs","Gambling Halls"] | cf null
+    crimeTypes: served [{"desc":"Practitioners misuse magical ability for profit. Identity alteration, scrying, fraud, or targeted curses-for-hire.","type":"Magical crime"},{"desc":"A | cf null
+    servicesCriminal: served [{"desc":"Magical practitioners outside guild oversight: identity work, scrying, targeted effects. Available if you know where to ask.","name":"Arcane services  | cf null
+city-insurgency-0-44 off EQUAL served=semi-organized cf=semi-organized | best setting -D-: TELL crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier city): FOUND
+    crimeTypes: served [{"desc":"Practitioners misuse magical ability for profit. Identity alteration, scrying, fraud, or targeted curses-for-hire.","type":"Magical crime"},{"desc":"A | cf [{"type":"political violence","desc":"Targeted intimidation and occasional violence against officials loyal to the current authority. Professionally executed."}
+    servicesCriminal: served [{"desc":"Magical practitioners outside guild oversight: identity work, scrying, targeted effects. Available if you know where to ask.","name":"Arcane services  | cf null
+city-insurgency-0-44 dm EQUAL served=semi-organized cf=semi-organized | best setting -D-: TELL crimeTypes,servicesCriminal,captureStates | possible world (signature among house-free pages of tier city): FOUND
+    crimeTypes: served [{"desc":"Practitioners misuse magical ability for profit. Identity alteration, scrying, fraud, or targeted curses-for-hire.","type":"Magical crime"},{"desc":"A | cf [{"type":"political violence","desc":"Targeted intimidation and occasional violence against officials loyal to the current authority. Professionally executed."}
+    servicesCriminal: served [{"desc":"Magical practitioners outside guild oversight: identity work, scrying, targeted effects. Available if you know where to ask.","name":"Arcane services  | cf null
+    captureStates: served {"c":"none","f":[],"p":[]} | cf {"c":null,"f":[],"p":[]}
+city-occupied-0-45 off EQUAL served=semi-organized cf=semi-organized | best setting -D-: TELL ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier city): FOUND
+    ops: served ["Rival Gangs","Red Light District"] | cf ["Red Light District"]
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf [{"type":"resistance activity","desc":"Sabotage, information-passing, and low-level violence against occupation infrastructure. Officially classified as crimina
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+city-occupied-0-45 dm EQUAL served=semi-organized cf=semi-organized | best setting -DP: TELL ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier city): FOUND
+    ops: served ["Rival Gangs","Red Light District"] | cf ["Red Light District"]
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf [{"type":"resistance activity","desc":"Sabotage, information-passing, and low-level violence against occupation infrastructure. Officially classified as crimina
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+city-indebted-0-46 off HIGHER served=organized cf=semi-organized | best setting -D-: TELL key,covertHeld,crimeTypes,servicesCriminal,criminalPowers | possible world (signature among house-free pages of tier city): FOUND
+    key: served "organized" | cf "semi-organized"
+    covertHeld: served true | cf false
+    crimeTypes: served [{"desc":"Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from organised theft.","type | cf [{"type":"debt evasion","desc":"Residents fleeing creditor obligations or transferring assets fraudulently to avoid collection."}]
+    servicesCriminal: served [{"desc":"Magical practitioners outside guild oversight: identity work, scrying, targeted effects. Available if you know where to ask.","name":"Arcane services  | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf []
+city-indebted-0-46 dm HIGHER served=organized cf=semi-organized | best setting -D-: TELL key,covertHeld,crimeTypes,servicesCriminal,criminalPowers,captureStates | possible world (signature among house-free pages of tier city): FOUND
+    key: served "organized" | cf "semi-organized"
+    covertHeld: served true | cf false
+    crimeTypes: served [{"desc":"Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from organised theft.","type | cf [{"type":"debt evasion","desc":"Residents fleeing creditor obligations or transferring assets fraudulently to avoid collection."}]
+    servicesCriminal: served [{"desc":"Magical practitioners outside guild oversight: identity work, scrying, targeted effects. Available if you know where to ask.","name":"Arcane services  | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf []
+    captureStates: served {"c":"adversarial","f":[],"p":["adversarial"]} | cf {"c":null,"f":[],"p":[]}
+city-none-0-47 off EQUAL served=semi-organized cf=semi-organized | best setting SD-: no field differs | possible world (signature among house-free pages of tier city): FOUND
+city-none-0-47 dm EQUAL served=semi-organized cf=semi-organized | best setting SDP: no field differs | possible world (signature among house-free pages of tier city): FOUND
+city-under_siege-0-48 off EQUAL served=semi-organized cf=semi-organized | best setting ---: TELL ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier city): FOUND
+    ops: served ["Rival Gangs","Gambling Halls","Red Light District"] | cf null
+    crimeTypes: served [{"desc":"Practitioners misuse tower resources for profit. Identity alteration, scrying, alchemical fraud, or targeted curses-for-hire.","type":"Magical crime"} | cf null
+    servicesCriminal: served [{"desc":"Magical practitioners outside guild oversight: identity work, scrying, targeted effects. Available if you know where to ask.","name":"Arcane services  | cf null
+city-under_siege-0-48 dm EQUAL served=semi-organized cf=semi-organized | best setting --P: TELL ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier city): FOUND
+    ops: served ["Rival Gangs","Gambling Halls","Red Light District"] | cf null
+    crimeTypes: served [{"desc":"Practitioners misuse tower resources for profit. Identity alteration, scrying, alchemical fraud, or targeted curses-for-hire.","type":"Magical crime"} | cf null
+    servicesCriminal: served [{"desc":"Magical practitioners outside guild oversight: identity work, scrying, targeted effects. Available if you know where to ask.","name":"Arcane services  | cf null
+city-wartime-0-49 off HIGHER served=semi-organized cf=null | best setting ---: TELL key,ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier city): FOUND
+    key: served "semi-organized" | cf null
+    ops: served ["Rival Gangs"] | cf null
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+city-wartime-0-49 dm HIGHER served=semi-organized cf=null | best setting --P: TELL key,ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier city): FOUND
+    key: served "semi-organized" | cf null
+    ops: served ["Rival Gangs"] | cf null
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+metropolis-none-0-51 off EQUAL served=semi-organized cf=semi-organized | best setting ---: TELL ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    ops: served ["Rival Gangs","Gambling District"] | cf null
+    crimeTypes: served [{"desc":"An active port-based smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+metropolis-none-0-51 dm EQUAL served=semi-organized cf=semi-organized | best setting --P: TELL ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    ops: served ["Rival Gangs","Gambling District"] | cf null
+    crimeTypes: served [{"desc":"An active port-based smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+metropolis-infiltrated-0-52 off EQUAL served=semi-organized cf=semi-organized | best setting SD-: no field differs | possible world (signature among house-free pages of tier metropolis): FOUND
+metropolis-infiltrated-0-52 dm EQUAL served=semi-organized cf=semi-organized | best setting SDP: no field differs | possible world (signature among house-free pages of tier metropolis): FOUND
+metropolis-none-0-53 off EQUAL served=semi-organized cf=semi-organized | best setting ---: TELL ops,crimeTypes,servicesCriminal,criminalPowers | possible world (signature among house-free pages of tier metropolis): FOUND
+    ops: served ["Rival Gangs","Gambling District","Red Light District"] | cf null
+    crimeTypes: served [{"desc":"Magical practitioners who operate outside legal channels supply a sophisticated underground market for forbidden components, illegal rituals, and unde | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null},{"name":"The Underground","category":"criminal","isGoverning":false}] | cf []
+metropolis-none-0-53 dm EQUAL served=semi-organized cf=semi-organized | best setting ---: TELL ops,crimeTypes,servicesCriminal,criminalPowers,captureStates | possible world (signature among house-free pages of tier metropolis): FOUND
+    ops: served ["Rival Gangs","Gambling District","Red Light District"] | cf null
+    crimeTypes: served [{"desc":"Magical practitioners who operate outside legal channels supply a sophisticated underground market for forbidden components, illegal rituals, and unde | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null},{"name":"The Underground","category":"criminal","isGoverning":false}] | cf []
+    captureStates: served {"c":"adversarial","f":[],"p":["adversarial","adversarial"]} | cf {"c":null,"f":[],"p":[]}
+metropolis-occupied-0-55 off EQUAL served=semi-organized cf=semi-organized | best setting ---: TELL ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    ops: served ["Rival Gangs","Gambling District","Red Light District"] | cf null
+    crimeTypes: served [{"desc":"An active port-based smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+metropolis-occupied-0-55 dm EQUAL served=semi-organized cf=semi-organized | best setting --P: TELL ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    ops: served ["Rival Gangs","Gambling District","Red Light District"] | cf null
+    crimeTypes: served [{"desc":"An active port-based smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+metropolis-indebted-0-56 off HIGHER served=organized cf=semi-organized | best setting ---: TELL key,ops,crimeTypes,servicesCriminal,criminalPowers | possible world (signature among house-free pages of tier metropolis): FOUND
+    key: served "organized" | cf "semi-organized"
+    ops: served ["Rival Gangs","Gambling District"] | cf null
+    crimeTypes: served [{"desc":"Magical practitioners who operate outside legal channels supply a sophisticated underground market for forbidden components, illegal rituals, and unde | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf []
+metropolis-indebted-0-56 dm HIGHER served=organized cf=semi-organized | best setting ---: TELL key,ops,crimeTypes,servicesCriminal,criminalPowers,captureStates | possible world (signature among house-free pages of tier metropolis): NOT FOUND {"key":"organized","ops":"some","types":"some","bmc":"absent","svc":"some","inc":"none","pow":"some","cap":"present","chains":"none"}
+    key: served "organized" | cf "semi-organized"
+    ops: served ["Rival Gangs","Gambling District"] | cf null
+    crimeTypes: served [{"desc":"Magical practitioners who operate outside legal channels supply a sophisticated underground market for forbidden components, illegal rituals, and unde | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf []
+    captureStates: served {"c":"corrupted","f":[["Grand Merchant Oligarchy","corrupted"]],"p":["corrupted","corrupted"]} | cf {"c":null,"f":[],"p":[]}
+metropolis-none-0-57 off EQUAL served=semi-organized cf=semi-organized | best setting ---: TELL ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    ops: served ["Rival Gangs","Gambling District"] | cf null
+    crimeTypes: served [{"desc":"An active port-based smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+metropolis-none-0-57 dm EQUAL served=semi-organized cf=semi-organized | best setting --P: TELL ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    ops: served ["Rival Gangs","Gambling District"] | cf null
+    crimeTypes: served [{"desc":"An active port-based smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+metropolis-under_siege-0-58 off EQUAL served=semi-organized cf=semi-organized | best setting -D-: TELL crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    crimeTypes: served [{"desc":"Practitioners misuse magical ability for profit. Identity alteration, scrying, fraud, or targeted curses-for-hire.","type":"Magical crime"},{"desc":"T | cf [{"type":"Magical crime","desc":"Practitioners misuse magical ability for profit. Identity alteration, scrying, fraud, or targeted curses-for-hire."},{"type":"d
+    servicesCriminal: served [{"desc":"Magical practitioners outside guild oversight: identity work, scrying, targeted effects. Available if you know where to ask.","name":"Arcane services  | cf null
+metropolis-under_siege-0-58 dm EQUAL served=semi-organized cf=semi-organized | best setting -D-: TELL crimeTypes,servicesCriminal,captureStates | possible world (signature among house-free pages of tier metropolis): FOUND
+    crimeTypes: served [{"desc":"Practitioners misuse magical ability for profit. Identity alteration, scrying, fraud, or targeted curses-for-hire.","type":"Magical crime"},{"desc":"T | cf [{"type":"Magical crime","desc":"Practitioners misuse magical ability for profit. Identity alteration, scrying, fraud, or targeted curses-for-hire."},{"type":"d
+    servicesCriminal: served [{"desc":"Magical practitioners outside guild oversight: identity work, scrying, targeted effects. Available if you know where to ask.","name":"Arcane services  | cf null
+    captureStates: served {"c":"none","f":[],"p":[]} | cf {"c":null,"f":[],"p":[]}
+metropolis-wartime-0-59 off EQUAL served=organized cf=organized | best setting ---: TELL ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    ops: served ["Rival Gangs","Gambling District"] | cf null
+    crimeTypes: served [{"desc":"Magical practitioners who operate outside legal channels supply a sophisticated underground market for forbidden components, illegal rituals, and unde | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf null
+metropolis-wartime-0-59 dm EQUAL served=organized cf=organized | best setting --P: TELL ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): NOT FOUND {"key":"organized","ops":"some","types":"some","bmc":"absent","svc":"some","inc":"none","pow":"some","cap":"present","chains":"none"}
+    ops: served ["Rival Gangs","Gambling District"] | cf null
+    crimeTypes: served [{"desc":"Magical practitioners who operate outside legal channels supply a sophisticated underground market for forbidden components, illegal rituals, and unde | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf null
+metropolis-politically_fractured-0-60 off HIGHER served=organized cf=semi-organized | best setting -D-: TELL key,crimeTypes,servicesCriminal,criminalPowers | possible world (signature among house-free pages of tier metropolis): FOUND
+    key: served "organized" | cf "semi-organized"
+    crimeTypes: served [{"type":"Organized guild crime"},{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the op | cf []
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf []
+metropolis-politically_fractured-0-60 dm HIGHER served=organized cf=semi-organized | best setting -D-: TELL key,crimeTypes,servicesCriminal,criminalPowers,captureStates | possible world (signature among house-free pages of tier metropolis): NOT FOUND {"key":"organized","ops":"some","types":"some","bmc":"absent","svc":"some","inc":"none","pow":"some","cap":"present","chains":"none"}
+    key: served "organized" | cf "semi-organized"
+    crimeTypes: served [{"type":"Organized guild crime"},{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the op | cf []
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf []
+    captureStates: served {"c":"equilibrium","f":[["City-State Council","equilibrium"]],"p":["equilibrium","equilibrium"]} | cf {"c":null,"f":[],"p":[]}
+metropolis-none-0-61 off EQUAL served=semi-organized cf=semi-organized | best setting -D-: TELL crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf []
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+metropolis-none-0-61 dm EQUAL served=semi-organized cf=semi-organized | best setting -DP: TELL crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf []
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+metropolis-infiltrated-0-62 off EQUAL served=semi-organized cf=semi-organized | best setting ---: TELL ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    ops: served ["Rival Gangs","Gambling District"] | cf null
+    crimeTypes: served [{"desc":"Territorial gangs control specific districts, extorting local businesses and residents. Violence is episodic rather than constant: mostly enforcing te | cf null
+    servicesCriminal: served [{"desc":"Rough up a target, intimidate a debtor, move a problem: informal, no contract.","name":"Muscle for hire","institution":"(street gang)"},{"desc":"Pay o | cf null
+metropolis-infiltrated-0-62 dm EQUAL served=semi-organized cf=semi-organized | best setting --P: TELL ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    ops: served ["Rival Gangs","Gambling District"] | cf null
+    crimeTypes: served [{"desc":"Territorial gangs control specific districts, extorting local businesses and residents. Violence is episodic rather than constant: mostly enforcing te | cf null
+    servicesCriminal: served [{"desc":"Rough up a target, intimidate a debtor, move a problem: informal, no contract.","name":"Muscle for hire","institution":"(street gang)"},{"desc":"Pay o | cf null
+metropolis-none-0-63 off EQUAL served=semi-organized cf=semi-organized | best setting -D-: TELL crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf []
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+metropolis-none-0-63 dm EQUAL served=semi-organized cf=semi-organized | best setting -DP: TELL crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf []
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+metropolis-occupied-0-65 off HIGHER served=organized cf=semi-organized | best setting ---: TELL key,ops,crimeTypes,servicesCriminal,criminalPowers | possible world (signature among house-free pages of tier metropolis): FOUND
+    key: served "organized" | cf "semi-organized"
+    ops: served ["Rival Gangs","Gambling District"] | cf null
+    crimeTypes: served [{"desc":"Guild merchants and the criminals are often the same people; what separates them is a licence.","type":"Commercial crime"},{"desc":"An active port-bas | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf []
+metropolis-occupied-0-65 dm HIGHER served=organized cf=semi-organized | best setting ---: TELL key,ops,crimeTypes,servicesCriminal,criminalPowers,captureStates | possible world (signature among house-free pages of tier metropolis): NOT FOUND {"key":"organized","ops":"some","types":"some","bmc":"absent","svc":"some","inc":"none","pow":"some","cap":"present","chains":"none"}
+    key: served "organized" | cf "semi-organized"
+    ops: served ["Rival Gangs","Gambling District"] | cf null
+    crimeTypes: served [{"desc":"Guild merchants and the criminals are often the same people; what separates them is a licence.","type":"Commercial crime"},{"desc":"An active port-bas | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf []
+    captureStates: served {"c":"equilibrium","f":[["Grand Merchant Senate","equilibrium"]],"p":["equilibrium","equilibrium"]} | cf {"c":null,"f":[],"p":[]}
+metropolis-indebted-0-66 off HIGHER served=organized cf=semi-organized | best setting ---: TELL key,covertHeld,ops,crimeTypes,servicesCriminal,criminalPowers | possible world (signature among house-free pages of tier metropolis): FOUND
+    key: served "organized" | cf "semi-organized"
+    covertHeld: served true | cf false
+    ops: served ["Rival Gangs","Gambling District"] | cf null
+    crimeTypes: served [{"desc":"Magical practitioners who operate outside legal channels supply a sophisticated underground market for forbidden components, illegal rituals, and unde | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf [{"name":"Thieves' Guild","category":"criminal","isGoverning":null},{"name":"The Hidden Hand","category":"criminal","isGoverning":false}]
+metropolis-indebted-0-66 dm HIGHER served=organized cf=semi-organized | best setting ---: TELL key,covertHeld,ops,crimeTypes,servicesCriminal,criminalPowers,captureStates | possible world (signature among house-free pages of tier metropolis): NOT FOUND {"key":"organized","ops":"some","types":"some","bmc":"absent","svc":"some","inc":"none","pow":"some","cap":"present","chains":"none"}
+    key: served "organized" | cf "semi-organized"
+    covertHeld: served true | cf false
+    ops: served ["Rival Gangs","Gambling District"] | cf null
+    crimeTypes: served [{"desc":"Magical practitioners who operate outside legal channels supply a sophisticated underground market for forbidden components, illegal rituals, and unde | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf [{"name":"Thieves' Guild","category":"criminal","isGoverning":null},{"name":"The Hidden Hand","category":"criminal","isGoverning":false}]
+    captureStates: served {"c":"equilibrium","f":[["City-State Council","equilibrium"]],"p":["equilibrium","equilibrium"]} | cf {"c":null,"f":[],"p":[]}
+metropolis-none-0-67 off EQUAL served=semi-organized cf=semi-organized | best setting -D-: TELL crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf []
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+metropolis-none-0-67 dm EQUAL served=semi-organized cf=semi-organized | best setting -DP: TELL crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf []
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+metropolis-under_siege-0-68 off EQUAL served=semi-organized cf=semi-organized | best setting ---: TELL ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    ops: served ["Rival Gangs","Gambling District"] | cf null
+    crimeTypes: served [{"desc":"The siege has shut the roads, so what contraband is already inside is hoarded and sold dear by those who know the patrol schedules. Arrests do happen. | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+metropolis-under_siege-0-68 dm EQUAL served=semi-organized cf=semi-organized | best setting --P: TELL ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    ops: served ["Rival Gangs","Gambling District"] | cf null
+    crimeTypes: served [{"desc":"The siege has shut the roads, so what contraband is already inside is hoarded and sold dear by those who know the patrol schedules. Arrests do happen. | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+metropolis-wartime-0-69 off EQUAL served=semi-organized cf=semi-organized | best setting ---: TELL ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    ops: served ["Rival Gangs","Gambling District","Red Light District"] | cf null
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+metropolis-wartime-0-69 dm EQUAL served=semi-organized cf=semi-organized | best setting ---: TELL ops,crimeTypes,servicesCriminal,captureStates | possible world (signature among house-free pages of tier metropolis): FOUND
+    ops: served ["Rival Gangs","Gambling District","Red Light District"] | cf null
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+    captureStates: served {"c":"equilibrium","f":[["Ducal Governorship","equilibrium"]],"p":[]} | cf {"c":null,"f":[],"p":[]}
+metropolis-politically_fractured-0-70 off EQUAL served=semi-organized cf=semi-organized | best setting -D-: TELL crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    crimeTypes: served [{"type":"Organized guild crime"},{"desc":"Practitioners misuse magical ability for profit. Identity alteration, scrying, fraud, or targeted curses-for-hire."," | cf []
+    servicesCriminal: served [{"desc":"Magical practitioners outside guild oversight: identity work, scrying, targeted effects. Available if you know where to ask.","name":"Arcane services  | cf null
+metropolis-politically_fractured-0-70 dm EQUAL served=semi-organized cf=semi-organized | best setting -DP: TELL crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    crimeTypes: served [{"type":"Organized guild crime"},{"desc":"Practitioners misuse magical ability for profit. Identity alteration, scrying, fraud, or targeted curses-for-hire."," | cf []
+    servicesCriminal: served [{"desc":"Magical practitioners outside guild oversight: identity work, scrying, targeted effects. Available if you know where to ask.","name":"Arcane services  | cf null
+town-occupied-1-85 off EQUAL served=organized cf=organized | best setting -D-: TELL crimeTypes,servicesCriminal,criminalPowers | possible world (signature among house-free pages of tier town): NOT FOUND {"key":"organized","ops":"empty","types":"some","bmc":"absent","svc":"empty","inc":"none","pow":"some","cap":"absent","chains":"none"}
+    crimeTypes: served [{"type":"Smuggling"},{"desc":"Sabotage, information-passing, and low-level violence against occupation infrastructure. Officially classified as criminal; moral | cf [{"type":"resistance activity","desc":"Sabotage, information-passing, and low-level violence against occupation infrastructure. Officially classified as crimina
+    servicesCriminal: served [] | cf null
+    criminalPowers: served [{"name":"Corrupt Council","category":"criminal","isGoverning":true},{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf [{"name":"Corrupt Council","category":"criminal","isGoverning":true}]
+town-occupied-1-85 dm EQUAL served=organized cf=organized | best setting -D-: TELL crimeTypes,servicesCriminal,criminalPowers,captureStates | possible world (signature among house-free pages of tier town): NOT FOUND {"key":"organized","ops":"empty","types":"some","bmc":"absent","svc":"empty","inc":"none","pow":"some","cap":"present","chains":"none"}
+    crimeTypes: served [{"type":"Smuggling"},{"desc":"Sabotage, information-passing, and low-level violence against occupation infrastructure. Officially classified as criminal; moral | cf [{"type":"resistance activity","desc":"Sabotage, information-passing, and low-level violence against occupation infrastructure. Officially classified as crimina
+    servicesCriminal: served [] | cf null
+    criminalPowers: served [{"name":"Corrupt Council","category":"criminal","isGoverning":true},{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf [{"name":"Corrupt Council","category":"criminal","isGoverning":true}]
+    captureStates: served {"c":"corrupted","f":[["Corrupt Council","corrupted"]],"p":["corrupted","corrupted"]} | cf {"c":null,"f":[],"p":[]}
+town-under_siege-1-88 off LOWER served=null cf=diffuse | best setting -D-: TELL servicesCriminal | possible world (signature among house-free pages of tier town): FOUND
+    servicesCriminal: served [] | cf null
+town-under_siege-1-88 dm LOWER served=null cf=diffuse | best setting -D-: TELL servicesCriminal,captureStates | possible world (signature among house-free pages of tier town): FOUND
+    servicesCriminal: served [] | cf null
+    captureStates: served {"c":"none","f":[],"p":[]} | cf {"c":null,"f":[],"p":[]}
+town-none-1-91 off HIGHER served=organized cf=diffuse | best setting -D-: TELL key,crimeTypes,servicesCriminal,criminalPowers | possible world (signature among house-free pages of tier town): FOUND
+    key: served "organized" | cf null
+    crimeTypes: served [{"desc":"Guild merchants and the criminals are often the same people; what separates them is a licence.","type":"Commercial crime"}] | cf []
+    servicesCriminal: served [{"desc":"Establish a legitimate face for work that needs to look above board.","name":"Front company formation","institution":"(commercial crime)"},{"desc":"Le | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf []
+town-none-1-91 dm HIGHER served=organized cf=diffuse | best setting -D-: TELL key,crimeTypes,servicesCriminal,criminalPowers,captureStates | possible world (signature among house-free pages of tier town): FOUND
+    key: served "organized" | cf null
+    crimeTypes: served [{"desc":"Guild merchants and the criminals are often the same people; what separates them is a licence.","type":"Commercial crime"}] | cf []
+    servicesCriminal: served [{"desc":"Establish a legitimate face for work that needs to look above board.","name":"Front company formation","institution":"(commercial crime)"},{"desc":"Le | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf []
+    captureStates: served {"c":"adversarial","f":[],"p":["adversarial","adversarial"]} | cf {"c":null,"f":[],"p":[]}
+town-insurgency-1-94 off LOWER served=null cf=diffuse | best setting SD-: no field differs | possible world (signature among house-free pages of tier town): FOUND
+town-insurgency-1-94 dm LOWER served=null cf=diffuse | best setting SD-: TELL captureStates | possible world (signature among house-free pages of tier town): FOUND
+    captureStates: served {"c":"none","f":[],"p":[]} | cf {"c":null,"f":[],"p":[]}
+town-under_siege-1-98 off LOWER served=null cf=diffuse | best setting -D-: TELL crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier town): FOUND
+    crimeTypes: served [{},{"desc":"Hunger-driven theft of food, livestock, and stored goods. Enforcement struggles to distinguish survival crime from organised theft.","type":"desper | cf [{"type":"desperation theft","desc":"Hunger-driven theft of food, livestock, and stored goods. Enforcement struggles to distinguish survival crime from organise
+    servicesCriminal: served [{"desc":"Rough up a target, intimidate a debtor, move a problem: informal, no contract.","name":"Muscle for hire"},{"desc":"Pay or have your premises damaged.  | cf null
+town-under_siege-1-98 dm LOWER served=null cf=diffuse | best setting -D-: TELL crimeTypes,servicesCriminal,captureStates | possible world (signature among house-free pages of tier town): NOT FOUND {"key":null,"ops":"empty","types":"some","bmc":"absent","svc":"some","inc":"none","pow":"none","cap":"present","chains":"none"}
+    crimeTypes: served [{},{"desc":"Hunger-driven theft of food, livestock, and stored goods. Enforcement struggles to distinguish survival crime from organised theft.","type":"desper | cf [{"type":"desperation theft","desc":"Hunger-driven theft of food, livestock, and stored goods. Enforcement struggles to distinguish survival crime from organise
+    servicesCriminal: served [{"desc":"Rough up a target, intimidate a debtor, move a problem: informal, no contract.","name":"Muscle for hire"},{"desc":"Pay or have your premises damaged.  | cf null
+    captureStates: served {"c":"none","f":[],"p":[]} | cf {"c":null,"f":[],"p":[]}
+city-none-1-101 off EQUAL served=semi-organized cf=semi-organized | best setting ---: TELL ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier city): FOUND
+    ops: served ["Rival Gangs","Gambling Halls","Red Light District"] | cf null
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+city-none-1-101 dm EQUAL served=semi-organized cf=semi-organized | best setting --P: TELL ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier city): FOUND
+    ops: served ["Rival Gangs","Gambling Halls","Red Light District"] | cf null
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+city-infiltrated-1-102 off HIGHER served=organized cf=semi-organized | best setting -D-: TELL key,covertHeld,crimeTypes,servicesCriminal,criminalPowers | possible world (signature among house-free pages of tier city): FOUND
+    key: served "organized" | cf "semi-organized"
+    covertHeld: served true | cf false
+    crimeTypes: served [{"desc":"Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from organised theft.","type | cf [{"type":"Lawlessness","desc":"The watch is too thinly spread to maintain order. Disputes are settled by whoever is stronger. Property is kept only by those who
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf []
+city-infiltrated-1-102 dm HIGHER served=organized cf=semi-organized | best setting -D-: TELL key,covertHeld,crimeTypes,servicesCriminal,criminalPowers,captureStates | possible world (signature among house-free pages of tier city): FOUND
+    key: served "organized" | cf "semi-organized"
+    covertHeld: served true | cf false
+    crimeTypes: served [{"desc":"Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from organised theft.","type | cf [{"type":"Lawlessness","desc":"The watch is too thinly spread to maintain order. Disputes are settled by whoever is stronger. Property is kept only by those who
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf []
+    captureStates: served {"c":"equilibrium","f":[["City Council","equilibrium"]],"p":["equilibrium","equilibrium"]} | cf {"c":null,"f":[],"p":[]}
+city-none-1-103 off EQUAL served=semi-organized cf=semi-organized | best setting SD-: TELL crimeTypes | possible world (signature among house-free pages of tier city): FOUND
+    crimeTypes: served [{"desc":"Theft and petty fraud by new arrivals with no local ties and no established credit. The watch struggles to distinguish transients from residents.","ty | cf [{"type":"displacement crime","desc":"Theft and petty fraud by new arrivals with no local ties and no established credit. The watch struggles to distinguish tra
+city-none-1-103 dm EQUAL served=semi-organized cf=semi-organized | best setting SD-: TELL crimeTypes,captureStates | possible world (signature among house-free pages of tier city): FOUND
+    crimeTypes: served [{"desc":"Theft and petty fraud by new arrivals with no local ties and no established credit. The watch struggles to distinguish transients from residents.","ty | cf [{"type":"displacement crime","desc":"Theft and petty fraud by new arrivals with no local ties and no established credit. The watch struggles to distinguish tra
+    captureStates: served {"c":"none","f":[],"p":[]} | cf {"c":null,"f":[],"p":[]}
+city-insurgency-1-104 off EQUAL served=organized cf=organized | best setting SD-: TELL crimeTypes,servicesCriminal,criminalPowers | possible world (signature among house-free pages of tier city): FOUND
+    crimeTypes: served [{"desc":"Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from organised theft.","type | cf [{"type":"Survival crime","desc":"Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf [{"name":"Fencing stolen goods","desc":"No questions asked. Stolen goods move through back channels for a fraction of value.","institution":"(covert)"}]
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null},{"name":"Corrupt City Council","category":"criminal","isGoverning":true}] | cf [{"name":"Corrupt City Council","category":"criminal","isGoverning":true},{"name":"Thieves' Guild","category":"criminal","isGoverning":null},{"name":"The Black 
+city-insurgency-1-104 dm EQUAL served=organized cf=organized | best setting SD-: TELL crimeTypes,servicesCriminal,criminalPowers,captureStates | possible world (signature among house-free pages of tier city): FOUND
+    crimeTypes: served [{"desc":"Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from organised theft.","type | cf [{"type":"Survival crime","desc":"Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf [{"name":"Fencing stolen goods","desc":"No questions asked. Stolen goods move through back channels for a fraction of value.","institution":"(covert)"}]
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null},{"name":"Corrupt City Council","category":"criminal","isGoverning":true}] | cf [{"name":"Corrupt City Council","category":"criminal","isGoverning":true},{"name":"Thieves' Guild","category":"criminal","isGoverning":null},{"name":"The Black 
+    captureStates: served {"c":"corrupted","f":[["Corrupt City Council","corrupted"]],"p":["corrupted","corrupted"]} | cf {"c":null,"f":[],"p":[]}
+city-occupied-1-105 off EQUAL served=semi-organized cf=semi-organized | best setting SD-: no field differs | possible world (signature among house-free pages of tier city): FOUND
+city-occupied-1-105 dm EQUAL served=semi-organized cf=semi-organized | best setting SDP: no field differs | possible world (signature among house-free pages of tier city): FOUND
+city-indebted-1-106 off EQUAL served=organized cf=organized | best setting SD-: no field differs | possible world (signature among house-free pages of tier city): FOUND
+city-indebted-1-106 dm EQUAL served=organized cf=organized | best setting SD-: TELL captureStates | possible world (signature among house-free pages of tier city): FOUND
+    captureStates: served {"c":"corrupted","f":[["Corrupt City Council","corrupted"]],"p":[]} | cf {"c":null,"f":[],"p":[]}
+city-none-1-107 off HIGHER served=organized cf=semi-organized | best setting ---: TELL key,covertHeld,ops,crimeTypes,servicesCriminal,criminalPowers | possible world (signature among house-free pages of tier city): FOUND
+    key: served "organized" | cf "semi-organized"
+    covertHeld: served true | cf false
+    ops: served ["Rival Gangs","Gambling Halls"] | cf null
+    crimeTypes: served [{"desc":"Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from organised theft.","type | cf null
+    servicesCriminal: served [{"desc":"Magical practitioners outside guild oversight: identity work, scrying, targeted effects. Available if you know where to ask.","name":"Arcane services  | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf []
+city-none-1-107 dm HIGHER served=organized cf=semi-organized | best setting ---: TELL key,covertHeld,ops,crimeTypes,servicesCriminal,criminalPowers,captureStates | possible world (signature among house-free pages of tier city): FOUND
+    key: served "organized" | cf "semi-organized"
+    covertHeld: served true | cf false
+    ops: served ["Rival Gangs","Gambling Halls"] | cf null
+    crimeTypes: served [{"desc":"Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from organised theft.","type | cf null
+    servicesCriminal: served [{"desc":"Magical practitioners outside guild oversight: identity work, scrying, targeted effects. Available if you know where to ask.","name":"Arcane services  | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf []
+    captureStates: served {"c":"adversarial","f":[],"p":["adversarial"]} | cf {"c":null,"f":[],"p":[]}
+city-under_siege-1-108 off EQUAL served=organized cf=organized | best setting S--: TELL ops,crimeTypes,servicesCriminal,criminalPowers | possible world (signature among house-free pages of tier city): FOUND
+    ops: served ["Rival Gangs"] | cf null
+    crimeTypes: served [{"desc":"Hunger-driven theft of food, livestock, and stored goods. Enforcement struggles to distinguish survival crime from organised theft.","type":"Survival  | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf [{"name":"Fencing stolen goods","desc":"No questions asked. Stolen goods move through back channels for a fraction of value.","institution":"(covert)"},{"name":
+    criminalPowers: served [{"name":"Corrupt City Council","category":"criminal","isGoverning":true},{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf [{"name":"Corrupt City Council","category":"criminal","isGoverning":true}]
+city-under_siege-1-108 dm EQUAL served=organized cf=organized | best setting S--: TELL ops,crimeTypes,servicesCriminal,criminalPowers,captureStates | possible world (signature among house-free pages of tier city): FOUND
+    ops: served ["Rival Gangs"] | cf null
+    crimeTypes: served [{"desc":"Hunger-driven theft of food, livestock, and stored goods. Enforcement struggles to distinguish survival crime from organised theft.","type":"Survival  | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf [{"name":"Fencing stolen goods","desc":"No questions asked. Stolen goods move through back channels for a fraction of value.","institution":"(covert)"},{"name":
+    criminalPowers: served [{"name":"Corrupt City Council","category":"criminal","isGoverning":true},{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf [{"name":"Corrupt City Council","category":"criminal","isGoverning":true}]
+    captureStates: served {"c":"corrupted","f":[["Corrupt City Council","corrupted"]],"p":["corrupted","corrupted"]} | cf {"c":null,"f":[],"p":[]}
+city-wartime-1-109 off HIGHER served=organized cf=semi-organized | best setting -D-: TELL key,crimeTypes,servicesCriminal,criminalPowers | possible world (signature among house-free pages of tier city): FOUND
+    key: served "organized" | cf "semi-organized"
+    crimeTypes: served [{"desc":"Alchemists and members of the mages' guild who operate outside legal channels supply a sophisticated underground market for forbidden components, ille | cf [{"type":"Magical crime","desc":"Practitioners misuse alchemical knowledge for profit. Identity alteration, scrying, alchemical fraud, or targeted curses-for-hi
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf []
+city-wartime-1-109 dm HIGHER served=organized cf=semi-organized | best setting -D-: TELL key,crimeTypes,servicesCriminal,criminalPowers,captureStates | possible world (signature among house-free pages of tier city): FOUND
+    key: served "organized" | cf "semi-organized"
+    crimeTypes: served [{"desc":"Alchemists and members of the mages' guild who operate outside legal channels supply a sophisticated underground market for forbidden components, ille | cf [{"type":"Magical crime","desc":"Practitioners misuse alchemical knowledge for profit. Identity alteration, scrying, alchemical fraud, or targeted curses-for-hi
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf []
+    captureStates: served {"c":"adversarial","f":[],"p":["adversarial","adversarial"]} | cf {"c":null,"f":[],"p":[]}
+city-politically_fractured-1-110 off EQUAL served=semi-organized cf=semi-organized | best setting -D-: TELL crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier city): FOUND
+    crimeTypes: served [{"desc":"Practitioners misuse magical ability for profit. Identity alteration, scrying, fraud, or targeted curses-for-hire.","type":"Magical crime"},{"desc":"A | cf [{"type":"Magical crime","desc":"Practitioners misuse magical ability for profit. Identity alteration, scrying, fraud, or targeted curses-for-hire."}]
+    servicesCriminal: served [{"desc":"Magical practitioners outside guild oversight: identity work, scrying, targeted effects. Available if you know where to ask.","name":"Arcane services  | cf null
+city-politically_fractured-1-110 dm EQUAL served=semi-organized cf=semi-organized | best setting -DP: TELL crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier city): FOUND
+    crimeTypes: served [{"desc":"Practitioners misuse magical ability for profit. Identity alteration, scrying, fraud, or targeted curses-for-hire.","type":"Magical crime"},{"desc":"A | cf [{"type":"Magical crime","desc":"Practitioners misuse magical ability for profit. Identity alteration, scrying, fraud, or targeted curses-for-hire."}]
+    servicesCriminal: served [{"desc":"Magical practitioners outside guild oversight: identity work, scrying, targeted effects. Available if you know where to ask.","name":"Arcane services  | cf null
+city-none-1-111 off EQUAL served=semi-organized cf=semi-organized | best setting SD-: no field differs | possible world (signature among house-free pages of tier city): FOUND
+city-none-1-111 dm EQUAL served=semi-organized cf=semi-organized | best setting SDP: no field differs | possible world (signature among house-free pages of tier city): FOUND
+city-infiltrated-1-112 off EQUAL served=semi-organized cf=semi-organized | best setting -D-: TELL ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier city): FOUND
+    ops: served ["Rival Gangs","Red Light District"] | cf ["Red Light District"]
+    crimeTypes: served [{"desc":"Territorial gangs control specific districts, extorting local businesses and residents. Violence is episodic rather than constant: mostly enforcing te | cf []
+    servicesCriminal: served [{"desc":"Rough up a target, intimidate a debtor, move a problem: informal, no contract.","name":"Muscle for hire","institution":"(street gang)"},{"desc":"Pay o | cf null
+city-infiltrated-1-112 dm EQUAL served=semi-organized cf=semi-organized | best setting -DP: TELL ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier city): FOUND
+    ops: served ["Rival Gangs","Red Light District"] | cf ["Red Light District"]
+    crimeTypes: served [{"desc":"Territorial gangs control specific districts, extorting local businesses and residents. Violence is episodic rather than constant: mostly enforcing te | cf []
+    servicesCriminal: served [{"desc":"Rough up a target, intimidate a debtor, move a problem: informal, no contract.","name":"Muscle for hire","institution":"(street gang)"},{"desc":"Pay o | cf null
+city-none-1-113 off EQUAL served=semi-organized cf=semi-organized | best setting -D-: TELL crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier city): FOUND
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf []
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+city-none-1-113 dm EQUAL served=semi-organized cf=semi-organized | best setting -DP: TELL crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier city): FOUND
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf []
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+city-insurgency-1-114 off EQUAL served=organized cf=organized | best setting SD-: TELL crimeTypes,servicesCriminal,criminalPowers | possible world (signature among house-free pages of tier city): FOUND
+    crimeTypes: served [{"desc":"Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from organised theft.","type | cf [{"type":"Survival crime","desc":"Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf [{"name":"Fencing stolen goods","desc":"No questions asked. Stolen goods move through back channels for a fraction of value.","institution":"(covert)"}]
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null},{"name":"Corrupt City Council","category":"criminal","isGoverning":true},{"name":"The Underg | cf [{"name":"Corrupt City Council","category":"criminal","isGoverning":true},{"name":"Thieves' Guild","category":"criminal","isGoverning":null}]
+city-insurgency-1-114 dm EQUAL served=organized cf=organized | best setting SD-: TELL crimeTypes,servicesCriminal,criminalPowers,captureStates | possible world (signature among house-free pages of tier city): FOUND
+    crimeTypes: served [{"desc":"Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from organised theft.","type | cf [{"type":"Survival crime","desc":"Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf [{"name":"Fencing stolen goods","desc":"No questions asked. Stolen goods move through back channels for a fraction of value.","institution":"(covert)"}]
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null},{"name":"Corrupt City Council","category":"criminal","isGoverning":true},{"name":"The Underg | cf [{"name":"Corrupt City Council","category":"criminal","isGoverning":true},{"name":"Thieves' Guild","category":"criminal","isGoverning":null}]
+    captureStates: served {"c":"corrupted","f":[["Corrupt City Council","corrupted"]],"p":["corrupted"]} | cf {"c":null,"f":[],"p":[]}
+city-occupied-1-115 off EQUAL served=semi-organized cf=semi-organized | best setting -D-: TELL crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier city): FOUND
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf [{"type":"resistance activity","desc":"Sabotage, information-passing, and low-level violence against occupation infrastructure. Officially classified as crimina
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+city-occupied-1-115 dm EQUAL served=semi-organized cf=semi-organized | best setting -DP: TELL crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier city): FOUND
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf [{"type":"resistance activity","desc":"Sabotage, information-passing, and low-level violence against occupation infrastructure. Officially classified as crimina
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+city-indebted-1-116 off EQUAL served=semi-organized cf=semi-organized | best setting SD-: TELL crimeTypes | possible world (signature among house-free pages of tier city): FOUND
+    crimeTypes: served [{"desc":"Residents fleeing creditor obligations, transferring assets fraudulently, or using criminal networks to avoid collection.","type":"debt evasion"}] | cf [{"type":"debt evasion","desc":"Residents fleeing creditor obligations or transferring assets fraudulently to avoid collection."}]
+city-indebted-1-116 dm EQUAL served=semi-organized cf=semi-organized | best setting SDP: TELL crimeTypes | possible world (signature among house-free pages of tier city): FOUND
+    crimeTypes: served [{"desc":"Residents fleeing creditor obligations, transferring assets fraudulently, or using criminal networks to avoid collection.","type":"debt evasion"}] | cf [{"type":"debt evasion","desc":"Residents fleeing creditor obligations or transferring assets fraudulently to avoid collection."}]
+city-none-1-117 off EQUAL served=organized cf=organized | best setting SD-: TELL crimeTypes,servicesCriminal,criminalPowers | possible world (signature among house-free pages of tier city): FOUND
+    crimeTypes: served [{"desc":"Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from organised theft.","type | cf [{"type":"Survival crime","desc":"Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from
+    servicesCriminal: served [{"desc":"Magical practitioners outside guild oversight: identity work, scrying, targeted effects. Available if you know where to ask.","name":"Arcane services  | cf [{"name":"Arcane services (illicit)","desc":"Magical practitioners outside guild oversight: identity work, scrying, targeted effects. Available if you know wher
+    criminalPowers: served [{"name":"Corrupt City Council","category":"criminal","isGoverning":true},{"name":"Thieves' Guild","category":"criminal","isGoverning":null},{"name":"The Hidden | cf [{"name":"Corrupt City Council","category":"criminal","isGoverning":true}]
+city-none-1-117 dm EQUAL served=organized cf=organized | best setting SD-: TELL crimeTypes,servicesCriminal,criminalPowers,captureStates | possible world (signature among house-free pages of tier city): FOUND
+    crimeTypes: served [{"desc":"Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from organised theft.","type | cf [{"type":"Survival crime","desc":"Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from
+    servicesCriminal: served [{"desc":"Magical practitioners outside guild oversight: identity work, scrying, targeted effects. Available if you know where to ask.","name":"Arcane services  | cf [{"name":"Arcane services (illicit)","desc":"Magical practitioners outside guild oversight: identity work, scrying, targeted effects. Available if you know wher
+    criminalPowers: served [{"name":"Corrupt City Council","category":"criminal","isGoverning":true},{"name":"Thieves' Guild","category":"criminal","isGoverning":null},{"name":"The Hidden | cf [{"name":"Corrupt City Council","category":"criminal","isGoverning":true}]
+    captureStates: served {"c":"corrupted","f":[["Corrupt City Council","corrupted"]],"p":["corrupted","corrupted"]} | cf {"c":null,"f":[],"p":[]}
+city-under_siege-1-118 off LOWER served=null cf=diffuse | best setting -D-: TELL crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier city): NOT FOUND {"key":null,"ops":"empty","types":"some","bmc":"absent","svc":"some","inc":"none","pow":"none","cap":"absent","chains":"none"}
+    crimeTypes: served [{"desc":"Practitioners misuse magical ability for profit. Identity alteration, scrying, fraud, or targeted curses-for-hire.","type":"Magical crime"},{"desc":"H | cf [{"type":"Magical crime","desc":"Practitioners misuse magical ability for profit. Identity alteration, scrying, fraud, or targeted curses-for-hire."},{"type":"d
+    servicesCriminal: served [{"desc":"Magical practitioners outside guild oversight: identity work, scrying, targeted effects. Available if you know where to ask.","name":"Arcane services  | cf null
+city-under_siege-1-118 dm LOWER served=null cf=diffuse | best setting -D-: TELL crimeTypes,servicesCriminal,captureStates | possible world (signature among house-free pages of tier city): NOT FOUND {"key":null,"ops":"empty","types":"some","bmc":"absent","svc":"some","inc":"none","pow":"none","cap":"present","chains":"none"}
+    crimeTypes: served [{"desc":"Practitioners misuse magical ability for profit. Identity alteration, scrying, fraud, or targeted curses-for-hire.","type":"Magical crime"},{"desc":"H | cf [{"type":"Magical crime","desc":"Practitioners misuse magical ability for profit. Identity alteration, scrying, fraud, or targeted curses-for-hire."},{"type":"d
+    servicesCriminal: served [{"desc":"Magical practitioners outside guild oversight: identity work, scrying, targeted effects. Available if you know where to ask.","name":"Arcane services  | cf null
+    captureStates: served {"c":"none","f":[],"p":[]} | cf {"c":null,"f":[],"p":[]}
+city-wartime-1-119 off EQUAL served=null cf=null | best setting SD-: no field differs | possible world (signature among house-free pages of tier city): FOUND
+city-wartime-1-119 dm EQUAL served=null cf=null | best setting SDP: no field differs | possible world (signature among house-free pages of tier city): FOUND
+city-politically_fractured-1-120 off EQUAL served=organized cf=organized | best setting -D-: TELL covertHeld,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier city): FOUND
+    covertHeld: served true | cf false
+    crimeTypes: served [{"desc":"Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from organised theft.","type | cf []
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf null
+city-politically_fractured-1-120 dm EQUAL served=organized cf=organized | best setting -DP: TELL covertHeld,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier city): NOT FOUND {"key":"organized","ops":"empty","types":"some","bmc":"absent","svc":"some","inc":"none","pow":"some","cap":"present","chains":"none"}
+    covertHeld: served true | cf false
+    crimeTypes: served [{"desc":"Theft of food, livestock, and stored goods by people with too little. Enforcement struggles to distinguish survival crime from organised theft.","type | cf []
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf null
+metropolis-none-1-121 off EQUAL served=semi-organized cf=semi-organized | best setting ---: TELL covertHeld,ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    covertHeld: served true | cf false
+    ops: served ["Rival Gangs","Gambling District","Red Light District"] | cf null
+    crimeTypes: served [{"desc":"The church's moral authority provides cover for sophisticated fraud. Fake relics, forged dispensations, and corrupt clergy who treat their position as | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf null
+metropolis-none-1-121 dm EQUAL served=semi-organized cf=semi-organized | best setting --P: TELL covertHeld,ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    covertHeld: served true | cf false
+    ops: served ["Rival Gangs","Gambling District","Red Light District"] | cf null
+    crimeTypes: served [{"desc":"The church's moral authority provides cover for sophisticated fraud. Fake relics, forged dispensations, and corrupt clergy who treat their position as | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf null
+metropolis-infiltrated-1-122 off EQUAL served=semi-organized cf=semi-organized | best setting ---: TELL ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    ops: served ["Rival Gangs","Gambling District"] | cf null
+    crimeTypes: served [{"desc":"An active port-based smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+metropolis-infiltrated-1-122 dm EQUAL served=semi-organized cf=semi-organized | best setting --P: TELL ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    ops: served ["Rival Gangs","Gambling District"] | cf null
+    crimeTypes: served [{"desc":"An active port-based smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+metropolis-none-1-123 off EQUAL served=semi-organized cf=semi-organized | best setting -D-: TELL crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf []
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+metropolis-none-1-123 dm EQUAL served=semi-organized cf=semi-organized | best setting -DP: TELL crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf []
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+metropolis-insurgency-1-124 off LOWER served=semi-organized cf=organized | best setting -D-: TELL key,crimeTypes,servicesCriminal,criminalPowers | possible world (signature among house-free pages of tier metropolis): FOUND
+    key: served "semi-organized" | cf "organized"
+    crimeTypes: served [{"type":"Organized guild crime"},{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the op | cf [{"type":"Lawlessness","desc":"The watch is too thinly spread to maintain order. Disputes are settled by whoever is stronger. Property is kept only by those who
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null},{"name":"The Black Circle","category":"criminal","isGoverning":false}] | cf [{"name":"Thieves' Guild","category":"criminal","isGoverning":null}]
+metropolis-insurgency-1-124 dm LOWER served=semi-organized cf=organized | best setting -D-: TELL key,crimeTypes,servicesCriminal,criminalPowers,captureStates | possible world (signature among house-free pages of tier metropolis): FOUND
+    key: served "semi-organized" | cf "organized"
+    crimeTypes: served [{"type":"Organized guild crime"},{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the op | cf [{"type":"Lawlessness","desc":"The watch is too thinly spread to maintain order. Disputes are settled by whoever is stronger. Property is kept only by those who
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null},{"name":"The Black Circle","category":"criminal","isGoverning":false}] | cf [{"name":"Thieves' Guild","category":"criminal","isGoverning":null}]
+    captureStates: served {"c":"corrupted","f":[["Grand Merchant Senate","corrupted"]],"p":["corrupted"]} | cf {"c":null,"f":[],"p":[]}
+metropolis-occupied-1-125 off EQUAL served=semi-organized cf=semi-organized | best setting -D-: TELL crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    crimeTypes: served [{"desc":"An active port-based smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol | cf [{"type":"resistance activity","desc":"Sabotage, information-passing, and low-level violence against occupation infrastructure. Officially classified as crimina
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+metropolis-occupied-1-125 dm EQUAL served=semi-organized cf=semi-organized | best setting -DP: TELL crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    crimeTypes: served [{"desc":"An active port-based smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol | cf [{"type":"resistance activity","desc":"Sabotage, information-passing, and low-level violence against occupation infrastructure. Officially classified as crimina
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+metropolis-indebted-1-126 off EQUAL served=semi-organized cf=semi-organized | best setting ---: TELL ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    ops: served ["Rival Gangs","Gambling District","Red Light District"] | cf null
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+metropolis-indebted-1-126 dm EQUAL served=semi-organized cf=semi-organized | best setting --P: TELL ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    ops: served ["Rival Gangs","Gambling District","Red Light District"] | cf null
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+metropolis-none-1-127 off EQUAL served=semi-organized cf=semi-organized | best setting ---: TELL ops,crimeTypes,servicesCriminal,criminalPowers | possible world (signature among house-free pages of tier metropolis): FOUND
+    ops: served ["Rival Gangs","Gambling District"] | cf null
+    crimeTypes: served [{"desc":"Magical practitioners who operate outside legal channels supply a sophisticated underground market for forbidden components, illegal rituals, and unde | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null},{"name":"The Shadow Compact","category":"criminal","isGoverning":false}] | cf []
+metropolis-none-1-127 dm EQUAL served=semi-organized cf=semi-organized | best setting ---: TELL ops,crimeTypes,servicesCriminal,criminalPowers,captureStates | possible world (signature among house-free pages of tier metropolis): FOUND
+    ops: served ["Rival Gangs","Gambling District"] | cf null
+    crimeTypes: served [{"desc":"Magical practitioners who operate outside legal channels supply a sophisticated underground market for forbidden components, illegal rituals, and unde | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null},{"name":"The Shadow Compact","category":"criminal","isGoverning":false}] | cf []
+    captureStates: served {"c":"equilibrium","f":[["Democratic assembly","equilibrium"]],"p":["equilibrium","equilibrium"]} | cf {"c":null,"f":[],"p":[]}
+metropolis-under_siege-1-128 off EQUAL served=semi-organized cf=semi-organized | best setting -D-: TELL crimeTypes,servicesCriminal,criminalPowers | possible world (signature among house-free pages of tier metropolis): FOUND
+    crimeTypes: served [{"desc":"Practitioners misuse magical ability for profit. Identity alteration, scrying, fraud, or targeted curses-for-hire.","type":"Magical crime"},{"desc":"T | cf [{"type":"Magical crime","desc":"Practitioners misuse magical ability for profit. Identity alteration, scrying, fraud, or targeted curses-for-hire."},{"type":"d
+    servicesCriminal: served [{"desc":"Magical practitioners outside guild oversight: identity work, scrying, targeted effects. Available if you know where to ask.","name":"Arcane services  | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null},{"name":"The Underground","category":"criminal","isGoverning":false}] | cf []
+metropolis-under_siege-1-128 dm EQUAL served=semi-organized cf=semi-organized | best setting -D-: TELL crimeTypes,servicesCriminal,criminalPowers,captureStates | possible world (signature among house-free pages of tier metropolis): FOUND
+    crimeTypes: served [{"desc":"Practitioners misuse magical ability for profit. Identity alteration, scrying, fraud, or targeted curses-for-hire.","type":"Magical crime"},{"desc":"T | cf [{"type":"Magical crime","desc":"Practitioners misuse magical ability for profit. Identity alteration, scrying, fraud, or targeted curses-for-hire."},{"type":"d
+    servicesCriminal: served [{"desc":"Magical practitioners outside guild oversight: identity work, scrying, targeted effects. Available if you know where to ask.","name":"Arcane services  | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null},{"name":"The Underground","category":"criminal","isGoverning":false}] | cf []
+    captureStates: served {"c":"corrupted","f":[["Grand Merchant Oligarchy","corrupted"]],"p":["corrupted","corrupted"]} | cf {"c":null,"f":[],"p":[]}
+metropolis-wartime-1-129 off EQUAL served=semi-organized cf=semi-organized | best setting -D-: TELL crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf [{"type":"war profiteering","desc":"Suppliers adulterating the grain and provisions sold to the army's contracts. Inspectors are overworked or bribed. The settl
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+metropolis-wartime-1-129 dm EQUAL served=semi-organized cf=semi-organized | best setting -DP: TELL crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf [{"type":"war profiteering","desc":"Suppliers adulterating the grain and provisions sold to the army's contracts. Inspectors are overworked or bribed. The settl
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+metropolis-politically_fractured-1-130 off EQUAL served=semi-organized cf=semi-organized | best setting ---: TELL ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    ops: served ["Rival Gangs","Gambling District","Red Light District"] | cf null
+    crimeTypes: served [{"desc":"An active port-based smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+metropolis-politically_fractured-1-130 dm EQUAL served=semi-organized cf=semi-organized | best setting --P: TELL ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    ops: served ["Rival Gangs","Gambling District","Red Light District"] | cf null
+    crimeTypes: served [{"desc":"An active port-based smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+metropolis-none-1-131 off EQUAL served=semi-organized cf=semi-organized | best setting ---: TELL ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    ops: served ["Rival Gangs","Gambling District","Red Light District"] | cf null
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+metropolis-none-1-131 dm EQUAL served=semi-organized cf=semi-organized | best setting --P: TELL ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    ops: served ["Rival Gangs","Gambling District","Red Light District"] | cf null
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+metropolis-infiltrated-1-132 off EQUAL served=semi-organized cf=semi-organized | best setting SD-: no field differs | possible world (signature among house-free pages of tier metropolis): FOUND
+metropolis-infiltrated-1-132 dm EQUAL served=semi-organized cf=semi-organized | best setting SDP: no field differs | possible world (signature among house-free pages of tier metropolis): FOUND
+metropolis-none-1-133 off EQUAL served=semi-organized cf=semi-organized | best setting SD-: no field differs | possible world (signature among house-free pages of tier metropolis): FOUND
+metropolis-none-1-133 dm EQUAL served=semi-organized cf=semi-organized | best setting SDP: no field differs | possible world (signature among house-free pages of tier metropolis): FOUND
+metropolis-insurgency-1-134 off HIGHER served=organized cf=semi-organized | best setting -D-: TELL key,covertHeld,crimeTypes,servicesCriminal,criminalPowers | possible world (signature among house-free pages of tier metropolis): FOUND
+    key: served "organized" | cf "semi-organized"
+    covertHeld: served true | cf false
+    crimeTypes: served [{"desc":"The church's moral authority provides cover for sophisticated fraud. Fake relics, forged dispensations, and corrupt clergy who treat their position as | cf [{"type":"political violence","desc":"Targeted intimidation and occasional violence against officials loyal to the current authority. Professionally executed."}
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf []
+metropolis-insurgency-1-134 dm HIGHER served=organized cf=semi-organized | best setting -D-: TELL key,covertHeld,crimeTypes,servicesCriminal,criminalPowers,captureStates | possible world (signature among house-free pages of tier metropolis): NOT FOUND {"key":"organized","ops":"some","types":"some","bmc":"absent","svc":"some","inc":"none","pow":"some","cap":"present","chains":"none"}
+    key: served "organized" | cf "semi-organized"
+    covertHeld: served true | cf false
+    crimeTypes: served [{"desc":"The church's moral authority provides cover for sophisticated fraud. Fake relics, forged dispensations, and corrupt clergy who treat their position as | cf [{"type":"political violence","desc":"Targeted intimidation and occasional violence against officials loyal to the current authority. Professionally executed."}
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf []
+    captureStates: served {"c":"equilibrium","f":[["Royal Authority","equilibrium"]],"p":["equilibrium","equilibrium"]} | cf {"c":null,"f":[],"p":[]}
+metropolis-occupied-1-135 off EQUAL served=semi-organized cf=semi-organized | best setting -D-: TELL crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    crimeTypes: served [{"desc":"An active port-based smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol | cf [{"type":"resistance activity","desc":"Sabotage, information-passing, and low-level violence against occupation infrastructure. Officially classified as crimina
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+metropolis-occupied-1-135 dm EQUAL served=semi-organized cf=semi-organized | best setting -D-: TELL crimeTypes,servicesCriminal,captureStates | possible world (signature among house-free pages of tier metropolis): FOUND
+    crimeTypes: served [{"desc":"An active port-based smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol | cf [{"type":"resistance activity","desc":"Sabotage, information-passing, and low-level violence against occupation infrastructure. Officially classified as crimina
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+    captureStates: served {"c":"equilibrium","f":[["Ducal Governorship","equilibrium"]],"p":[]} | cf {"c":null,"f":[],"p":[]}
+metropolis-indebted-1-136 off EQUAL served=organized cf=organized | best setting ---: TELL ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    ops: served ["Rival Gangs","Gambling District"] | cf null
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+metropolis-indebted-1-136 dm EQUAL served=organized cf=organized | best setting --P: TELL ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): NOT FOUND {"key":"organized","ops":"some","types":"some","bmc":"absent","svc":"some","inc":"none","pow":"some","cap":"present","chains":"none"}
+    ops: served ["Rival Gangs","Gambling District"] | cf null
+    crimeTypes: served [{"desc":"An active overland smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol s | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"}] | cf null
+metropolis-none-1-137 off EQUAL served=semi-organized cf=semi-organized | best setting ---: TELL covertHeld,ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    covertHeld: served true | cf false
+    ops: served ["Rival Gangs","Gambling District"] | cf null
+    crimeTypes: served [{"desc":"The church's moral authority provides cover for sophisticated fraud. Fake relics, forged dispensations, and corrupt clergy who treat their position as | cf null
+    servicesCriminal: served [{"desc":"Magical practitioners outside guild oversight: identity work, scrying, targeted effects. Available if you know where to ask.","name":"Arcane services  | cf null
+metropolis-none-1-137 dm EQUAL served=semi-organized cf=semi-organized | best setting --P: TELL covertHeld,ops,crimeTypes,servicesCriminal | possible world (signature among house-free pages of tier metropolis): FOUND
+    covertHeld: served true | cf false
+    ops: served ["Rival Gangs","Gambling District"] | cf null
+    crimeTypes: served [{"desc":"The church's moral authority provides cover for sophisticated fraud. Fake relics, forged dispensations, and corrupt clergy who treat their position as | cf null
+    servicesCriminal: served [{"desc":"Magical practitioners outside guild oversight: identity work, scrying, targeted effects. Available if you know where to ask.","name":"Arcane services  | cf null
+metropolis-under_siege-1-138 off EQUAL served=semi-organized cf=semi-organized | best setting SD-: no field differs | possible world (signature among house-free pages of tier metropolis): FOUND
+metropolis-under_siege-1-138 dm EQUAL served=semi-organized cf=semi-organized | best setting SD-: TELL captureStates | possible world (signature among house-free pages of tier metropolis): FOUND
+    captureStates: served {"c":"none","f":[],"p":[]} | cf {"c":null,"f":[],"p":[]}
+metropolis-wartime-1-139 off HIGHER served=organized cf=semi-organized | best setting -D-: TELL key,crimeTypes,servicesCriminal,criminalPowers | possible world (signature among house-free pages of tier metropolis): FOUND
+    key: served "organized" | cf "semi-organized"
+    crimeTypes: served [{"desc":"Magical practitioners who operate outside legal channels supply a sophisticated underground market for forbidden components, illegal rituals, and unde | cf [{"type":"Background crime","desc":"Petty theft, minor fraud, and opportunistic violence are persistent. No single dominant organisation: just the steady pressu
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf []
+metropolis-wartime-1-139 dm HIGHER served=organized cf=semi-organized | best setting -D-: TELL key,crimeTypes,servicesCriminal,criminalPowers,captureStates | possible world (signature among house-free pages of tier metropolis): NOT FOUND {"key":"organized","ops":"some","types":"some","bmc":"absent","svc":"some","inc":"none","pow":"some","cap":"present","chains":"none"}
+    key: served "organized" | cf "semi-organized"
+    crimeTypes: served [{"desc":"Magical practitioners who operate outside legal channels supply a sophisticated underground market for forbidden components, illegal rituals, and unde | cf [{"type":"Background crime","desc":"Petty theft, minor fraud, and opportunistic violence are persistent. No single dominant organisation: just the steady pressu
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf []
+    captureStates: served {"c":"adversarial","f":[],"p":["adversarial","adversarial"]} | cf {"c":null,"f":[],"p":[]}
+metropolis-politically_fractured-1-140 off HIGHER served=organized cf=semi-organized | best setting ---: TELL key,ops,crimeTypes,servicesCriminal,criminalPowers | possible world (signature among house-free pages of tier metropolis): FOUND
+    key: served "organized" | cf "semi-organized"
+    ops: served ["Rival Gangs","Gambling District","Red Light District"] | cf null
+    crimeTypes: served [{"desc":"The church's moral authority provides cover for sophisticated fraud. Fake relics, forged dispensations, and corrupt clergy who treat their position as | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf []
+metropolis-politically_fractured-1-140 dm HIGHER served=organized cf=semi-organized | best setting ---: TELL key,ops,crimeTypes,servicesCriminal,criminalPowers,captureStates | possible world (signature among house-free pages of tier metropolis): NOT FOUND {"key":"organized","ops":"some","types":"some","bmc":"absent","svc":"some","inc":"none","pow":"some","cap":"present","chains":"none"}
+    key: served "organized" | cf "semi-organized"
+    ops: served ["Rival Gangs","Gambling District","Red Light District"] | cf null
+    crimeTypes: served [{"desc":"The church's moral authority provides cover for sophisticated fraud. Fake relics, forged dispensations, and corrupt clergy who treat their position as | cf null
+    servicesCriminal: served [{"desc":"Goods move past checkpoints. The routes exist; the operators know the schedules.","name":"Contraband transport","institution":"(smuggling)"},{"desc":" | cf null
+    criminalPowers: served [{"name":"Thieves' Guild","category":"criminal","isGoverning":null}] | cf []
+    captureStates: served {"c":"equilibrium","f":[["Grand Merchant Oligarchy","equilibrium"]],"p":["equilibrium","equilibrium"]} | cf {"c":null,"f":[],"p":[]}
