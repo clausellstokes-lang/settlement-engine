@@ -1,7 +1,7 @@
 {
  "about": "THE PRESUMPTION-CLASSES WALKER'S REGISTER (tests/lint/presumptionClasses.walker.test.js; BAR6-GUARD, the chair's ruling BG1 of 2026-11-16). TODAY'S DEBT, SHRINK-ONLY: one row a (file, class, line) that held a presumption-class word and declared nothing that answers it at the base. A row is [class, status at the base, the line's first 120 characters, literalHash(the whole line)]. Written ONLY by scripts/presumption-classes-door.mjs: --shrink removes the rows a cure leaves stale and lowers the ceiling; --bank debt-at-base banks only a line whose whole literal stood in its file at the base. A NEW line is never banked: it declares. No other seat edits this file or the walker (BG1); the round's close re-banks it through its door.",
  "base": "afa46d644",
- "ceiling": 1785,
+ "ceiling": 1778,
  "rows": {
   "src/components/dossier/EngineSections.jsx": [
    ["office","none","Besieged by a coalition (${warStatus.besiegedBy.map(nameFor).join(', ')}). The garrison is thinning under sustained assa","548678a29a9134ec"],
@@ -1719,15 +1719,6 @@
   "src/domain/hookEscalation.js": [
    ["office","none","{controller} takes in less, and so does the tax collector.","96d7e66796ee01e7"],
    ["size","none","Public order strains as the conflict spills into the streets.","c255facd6f94a11a"]
-  ],
-  "src/domain/hookThemes.js": [
-   ["goods","other","A weapons cache they were responsible for is smaller than it should be. They haven't reported it yet.","61afa79ac9fd0944"],
-   ["goods","other","Weapons from the armoury have been disappearing in small quantities for months. The inventory matches, somehow.","85a88f342c353071"],
-   ["office","other","The ambush that killed two of their best people wasn't random. Someone knew the patrol route.","372c08c18314abc0"],
-   ["office","other","Someone is paying their soldiers more than their salary. The soldiers aren't saying who.","f87cef04db634632"],
-   ["outside","one-kind","A traveller passed through asking which nights their door is left unbarred, and was gone by morning.","18494d86bbbd82c6"],
-   ["outside","any","They buried someone last season that they refer to only as 'the traveller'. They will not say more.","5c8cff42f200606f"],
-   ["outside","any","They agreed to hold a parcel for a traveller, and two different people have since come to collect it.","7abac3ed3053fe1b"]
   ],
   "src/domain/institutionRename.js": [
    ["size","none","districtProfile joins a house to a quarter through this landmark haystack, so a stale landmark silently un-homes a renam","d14e608c7b2ca940"]

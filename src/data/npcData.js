@@ -2712,3 +2712,103 @@ export function temperamentYieldsToSecret(card) {
  * @type {ReadonlySet<string | { text: string }>}
  */
 export const ECONOMY_HOOKS_TRUE_OF_ANY_HOLDER = Object.freeze(new Set(NPC_FACTION_LOYALTY.economy.filter((l) => /^One of their most reliable suppliers has gone dark\.|^Someone is buying up their debts\.|^A contract they signed in difficult times |^A supplier is providing goods of uncertain provenance\.|^They have quietly stopped paying a supplier |^A crate came to them by mistake,/.test(typeof l === 'string' ? l : l.text))));
+
+/**
+ * THE THEME OF EACH `NPC_FACTION_LOYALTY` LINE, IN ITS ONE HOME (BUILD-THEMES, DEPTH-3, 2026-11-20; the chair's order
+ * of 19:28 UTC). Per pool key, an array of `HOOK_THEMES` members (src/domain/hookThemes.js) INDEX-ALIGNED with
+ * `NPC_FACTION_LOYALTY[pool]`: pool key + index -> theme. It sits at the module's foot, not under the pools, so no
+ * line-addressed site in the module moves (tests/generators/generationForkCensus.test.js names one by its line). Each value moved unchanged from the old text-keyed table
+ * `hookThemes.js :: AUTHORED_HOOK_THEMES`, which shipped every line a second time in the first-paint chunk.
+ * A TRANCHE APPENDS A THEME WHERE IT APPENDS A LINE, then runs the door `node scripts/hook-theme-digest.mjs`, which
+ * regenerates first paint's `hookThemes.js :: THEME_DIGEST` (hashes, never text) from these two tables;
+ * tests/lint/hookThemeTotality.walker.test.js reds on an untagged line, a misaligned array, a theme outside the
+ * vocabulary, or a digest the door was not run for.
+ * @type {Readonly<Record<string, readonly string[]>>}
+ */
+export const NPC_FACTION_LOYALTY_THEMES = Object.freeze({
+  government: Object.freeze([
+    'forbidden_knowledge', 'corruption', 'old_wound', 'blackmail', // 0-3
+    'vanished_person', 'divided_loyalty', 'corruption', 'outsider_suspicion', // 4-7
+    'hidden_debt', 'betrayal', 'divided_loyalty', 'betrayal', // 8-11
+    'old_wound', 'rivalry', 'corruption', 'ambition', // 12-15
+    'old_wound', 'rivalry', 'corruption', 'corruption', // 16-19
+    'vanished_person', 'corruption', 'betrayal', 'hidden_debt', // 20-23
+    'corruption', 'old_wound', 'divided_loyalty', 'hidden_debt', // 24-27
+    'rivalry', 'ambition', 'forbidden_knowledge', 'betrayal', // 28-31
+  ]),
+  military: Object.freeze([
+    'vanished_person', 'smuggling', 'divided_loyalty', 'looming_threat', // 0-3
+    'outsider_suspicion', 'corruption', 'betrayal', 'betrayal', // 4-7
+    'rivalry', 'divided_loyalty', 'smuggling', 'rivalry', // 8-11
+    'divided_loyalty', 'corruption', 'betrayal', 'old_wound', // 12-15
+    'ambition', 'divided_loyalty', 'divided_loyalty', 'betrayal', // 16-19
+    'hidden_debt', 'looming_threat', 'looming_threat', 'hidden_debt', // 20-23
+  ]),
+  religious: Object.freeze([
+    'forbidden_knowledge', 'faith_crisis', 'looming_threat', 'secret_identity', // 0-3
+    'faith_crisis', 'faith_crisis', 'old_wound', 'betrayal', // 4-7
+    'blackmail', 'hidden_debt', 'succession', 'faith_crisis', // 8-11
+    'hidden_debt', 'rivalry', 'forbidden_love', 'faith_crisis', // 12-15
+    'faith_crisis', 'blackmail', // 16-17
+  ]),
+  economy: Object.freeze([
+    'smuggling', 'rivalry', 'smuggling', 'corruption', // 0-3
+    'crime_ring', 'hidden_debt', 'smuggling', 'betrayal', // 4-7
+    'hidden_debt', 'ambition', 'smuggling', 'smuggling', // 8-11
+    'betrayal', 'hidden_debt', 'corruption', 'rivalry', // 12-15
+    'scarcity_pressure', 'hidden_debt', 'corruption', 'rivalry', // 16-19
+    'rivalry', 'hidden_debt', 'smuggling', 'betrayal', // 20-23
+    'hidden_debt', 'hidden_debt', 'hidden_debt', 'hidden_debt', // 24-27
+    'rivalry', 'rivalry', 'rivalry', 'betrayal', // 28-31
+    'betrayal', 'ambition', 'ambition', 'scarcity_pressure', // 32-35
+    'scarcity_pressure', 'corruption', 'hidden_debt', 'rivalry', // 36-39
+    'betrayal', 'ambition', 'scarcity_pressure', 'hidden_debt', // 40-43
+  ]),
+  criminal: Object.freeze([
+    'betrayal', 'smuggling', 'corruption', 'betrayal', // 0-3
+    'divided_loyalty', 'outsider_suspicion', 'corruption', 'looming_threat', // 4-7
+    'ambition', 'hidden_debt', 'betrayal', 'crime_ring', // 8-11
+    'vanished_person', 'looming_threat', 'smuggling', 'rivalry', // 12-15
+    'betrayal', 'old_wound', 'hidden_debt', 'divided_loyalty', // 16-19
+    'old_wound', 'ambition', 'rivalry', 'betrayal', // 20-23
+    'betrayal', 'outsider_suspicion', // 24-25
+  ]),
+  magic: Object.freeze([
+    'forbidden_knowledge', 'forbidden_knowledge', 'looming_threat', 'blackmail', // 0-3
+    'vanished_person', 'betrayal', 'looming_threat', 'outsider_suspicion', // 4-7
+  ]),
+  other: Object.freeze([
+    'forbidden_knowledge', 'vanished_person', 'vanished_person', 'outsider_suspicion', // 0-3
+    'forbidden_knowledge', 'outsider_suspicion', 'old_wound', 'forbidden_knowledge', // 4-7
+    'betrayal', 'corruption', 'hidden_debt', 'old_wound', // 8-11
+    'rivalry', 'hidden_debt', 'blackmail', 'betrayal', // 12-15
+    'crime_ring', 'smuggling', 'looming_threat', 'hidden_debt', // 16-19
+    'blackmail', 'divided_loyalty', 'betrayal', 'old_wound', // 20-23
+    'hidden_debt', 'looming_threat', 'rivalry', 'old_wound', // 24-27
+    'hidden_debt', 'betrayal', 'vanished_person', 'smuggling', // 28-31
+    'old_wound', 'ambition', 'secret_identity', 'outsider_suspicion', // 32-35
+    'looming_threat', 'betrayal', 'rivalry', 'looming_threat', // 36-39
+    'hidden_debt', 'hidden_debt', 'hidden_debt', 'hidden_debt', // 40-43
+    'hidden_debt', 'old_wound', 'old_wound', 'old_wound', // 44-47
+    'old_wound', 'rivalry', 'rivalry', 'rivalry', // 48-51
+    'divided_loyalty', 'divided_loyalty', 'divided_loyalty', 'ambition', // 52-55
+    'ambition', 'ambition', 'forbidden_knowledge', 'forbidden_knowledge', // 56-59
+    'forbidden_knowledge', 'outsider_suspicion', 'outsider_suspicion', 'outsider_suspicion', // 60-63
+    'secret_identity', 'secret_identity', 'betrayal', 'betrayal', // 64-67
+    'vanished_person', 'hidden_debt', 'hidden_debt', 'old_wound', // 68-71
+    'betrayal', 'rivalry', 'forbidden_knowledge', 'outsider_suspicion', // 72-75
+    'divided_loyalty', 'ambition', 'secret_identity', 'hidden_debt', // 76-79
+    'old_wound', 'betrayal', 'rivalry', 'forbidden_knowledge', // 80-83
+    'outsider_suspicion', 'divided_loyalty', 'ambition', 'secret_identity', // 84-87
+    'hidden_debt', 'old_wound', 'ambition', 'rivalry', // 88-91
+    'forbidden_knowledge', 'outsider_suspicion', 'divided_loyalty', 'vanished_person', // 92-95
+    'looming_threat', 'hidden_debt', 'old_wound', 'secret_identity', // 96-99
+  ]),
+  small_settlement: Object.freeze([
+    'outsider_suspicion', 'forbidden_knowledge', 'old_wound', 'faith_crisis', // 0-3
+    'rivalry', 'vanished_person', 'looming_threat', 'grief', // 4-7
+    'rivalry', 'rivalry', 'rivalry', 'forbidden_love', // 8-11
+    'succession', 'vanished_person', 'scarcity_pressure', 'outsider_suspicion', // 12-15
+    'looming_threat', 'forbidden_knowledge', // 16-17
+  ]),
+});
