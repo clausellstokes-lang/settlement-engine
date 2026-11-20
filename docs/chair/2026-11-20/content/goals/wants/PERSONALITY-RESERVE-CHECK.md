@@ -8,14 +8,16 @@ reaches 0.50, so no near-copy of wording exists); the verdicts below are read by
 
 ## Files 1–5 (24 new PERSONALITY lines as first written)
 
-**Duplicates: none.** **Near-restatements found: 4, plus one borderline kept.**
+**Duplicates: none.** **Near-restatements found: 4, plus one borderline.** All five stand as the chair approved them (files 2–5
+were read by the chair before these findings reached it; my own replacements in files 4–5, commit 2b412c37a, are undone on
+the chair's word of 17:17 UTC); each is listed with a replacement for the chair's ruling.
 
 | file · section.line | cluster/vantage | new line (as first written) | the reserve line it restates | done |
 |---|---|---|---|---|
 | 2 · 11.2 | grudge/long | Live well enough that everyone who ever doubted them has to watch. | See the people who looked down on them come asking for their help. (long) | **NOT changed: the chair approved it at 17:03 UTC.** Offered for the chair's ruling: "Outdo, in every way they can, the person they have envied longest." |
-| 4 · 21.1 | grudge/long | Never forgive, and never let anyone see that they have not. | Never let a single wrong done to them be forgotten. (long) | replaced: "Keep their anger hidden until the day it can be used." |
-| 5 · 12.2 | sway/long | Never apologise to anyone, for anything. | Never once be seen to back down. (long) | replaced: "Make every newcomer here learn quickly whose word counts." |
-| 5 · 26.1 | fear/long | Never let anyone know enough about them to hurt them. | Never again owe anything to someone who could use it against them. (long) | replaced: "Live among neighbours who would stand by them if trouble came." |
+| 4 · 21.1 | grudge/long | Never forgive, and never let anyone see that they have not. | Never let a single wrong done to them be forgotten. (long) | **NOT changed: the chair read file 4 at 17:17 UTC and approved it.** Offered for the chair's ruling: "Keep their anger hidden until the day it can be used." |
+| 5 · 12.2 | sway/long | Never apologise to anyone, for anything. | Never once be seen to back down. (long) | **NOT changed: the chair read file 5 at 17:17 UTC and approved it.** Offered: "Make every newcomer here learn quickly whose word counts." |
+| 5 · 26.1 | fear/long | Never let anyone know enough about them to hurt them. | Never again owe anything to someone who could use it against them. (long) | **NOT changed (the chair, 17:17 UTC).** Offered: "Live among neighbours who would stand by them if trouble came." |
 | 3 · 20.1 (borderline) | grudge/long | Make sure their name stands higher here than the name of anyone who ever spoke against them. | See the people who looked down on them come asking for their help. (long) | kept (approved by the chair; a name above detractors, not detractors in need); listed for the chair |
 
 The other 19 read as different wants from every reserve line of their cluster (sway: following, being proved right,
@@ -33,6 +35,11 @@ last coin on something wonderful, and never regret it." (reserve: slipping away;
 every camp) · sway/long 28.1 "Be listened to here even by those who dislike them." (reserve: proved right; never backing
 down; a following). Each a different want.
 
-## File 7
+## File 7 (2 new PERSONALITY lines)
 
-Read at its writing; the verdicts are added below with it.
+**Duplicates: none. Near-restatements: none.** greed/short 3.1 "Ask a higher share this season of anything they have a
+hand in." (reserve: making others pay; half the people owing them money) · sway/short 9.1 "Set the rules for one game,
+contest or feast here this season." (reserve: proved right; never backing down; a following).
+
+## The tranche: 32 new PERSONALITY drawn lines read; 0 duplicates; 4 near-restatements and 1 borderline, all in files the
+chair had already read, all left as approved and offered above for its ruling.

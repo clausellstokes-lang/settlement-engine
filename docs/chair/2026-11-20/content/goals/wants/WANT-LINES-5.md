@@ -1,18 +1,9 @@
 # WANT-LINES-5 · the wants' tranche, file 5 of 7: 60 new DRAWN lines
 
-> **REVISED by builder 9 before it goes on (17:03 UTC, THE CHAIR'S RULES for files 4–7: no line names "the town"; no line
-> presumes customers, goods sent out, prices, a past debt, an age, a fear, a hostile governor or a standing; every {power} line
-> reads true of a criminal power; every PERSONALITY line reads true of a holder already in charge), and against the
-> PERSONALITY reserve (`PERSONALITY-RESERVE-CHECK.md`).** 9 lines changed (section.line: old → new, why):
-> - 2.1: "Never be ashamed of anything done in the name of {power}." → "Never do anything in the name of {power} that they would have to hide from {power|it|them}." (untrue of a criminal power (shame))
-> - 2.4: "Retire from the work with honour, and still be welcome at every gathering of {power}." → "Step back from the work one day with honour, and still be welcome at every gathering of {power}." ("retire" presumed an age)
-> - 5.3: "Answer one complaint against {house} before those who govern can act on it." → "Answer any complaint against {house} this season before those who govern act on it." (presumed a complaint)
-> - 12.1: "Have a hand in choosing whoever leads this place." → "Have their say heard in every choice that shapes this place." (untrue of a holder already in charge)
-> - 12.2: "Never apologise to anyone, for anything." → "Make every newcomer here learn quickly whose word counts." (near-restatement of the reserve's "Never once be seen to back down.")
-> - 13.2: "Win {house} one customer this season who always pays on the day." → "Plan the money of {house} a whole season ahead, week by week." (presumed customers)
-> - 14.2: "Laugh with {other} in their old age about all they came through together." → "Look back one day with {other} on all they came through together." ("old age" presumed an age)
-> - 20.1: "Charge one person this season for something they used to get free." → "Put one coin to work this season for every coin they spend." (presumed customers and prices)
-> - 26.1: "Never let anyone know enough about them to hurt them." → "Live among neighbours who would stand by them if trouble came." (near-restatement of the reserve's "Never again owe anything to someone who could use it against them.")
+> **READ BY THE CHAIR 17:17 UTC:** of this file's 60 lines, 51 approved and 9 reworded by the chair, word for word, as they
+> now stand (2.5, 5.3, 7.3, 8.1, 12.1, 13.1, 13.2, 14.2, 19.1; numbered section.line). Builder 9's own revision of this file
+> (2b412c37a) is UNDONE on the chair's word; only the chair's rewordings stand. The "Measured" block below is the file as first
+> written; the tranche measured with every file as it now stands is in WANT-LINES-7.md. 22.1 (TIES/debtor) stands.
 
 GOALS-3 · builder 9 · 2026-11-20. Docs only, for the chair's reading and the owner's veto. The cells and counts are lines
 241–300 of the build order in [`WANTS-PROPOSAL.md`](WANTS-PROPOSAL.md) (`wants-by-pool.out.txt`, "THE BUILD ORDER", file
@@ -25,16 +16,15 @@ leverage tie; TIES/mentor_student lines read true from either end; POWER/tense l
 pair, and none is another with {power} and {rival} swapped; the ALLEGIANCE/warrant line is the law's, about an open
 member of a criminal house; no refused cluster (conviction, duty).
 
-**Measured AFTER the revisions above, with files 1–3 as the chair reworded them and files 4–5 (revised) written, appended in memory, the 300 measure towns:**
-- a second city repeats 13.5% of a first city's short wants and 13.6% of its long (36.4% / 36.0% now); a metropolis
-  19.7% and 19.3% (47.3% / 47.2%) (`wants-verify.lines5.out.txt`);
+**Measured with files 1 (as amended by the chair) to 5 written, appended in memory, the 300 measure towns:**
+- a second city repeats 13.5% of a first city's short wants and 13.7% of its long (36.4% / 36.0% now); a metropolis
+  19.7% and 19.6% (47.3% / 47.2%) (`wants-verify.lines5.out.txt`);
 - THE LANE'S GATES (`goals-final.mjs`, unchanged, run by `wants-mirrors.mjs`; `wants-mirrors.lines5.out.txt`):
   **identical 0** in a town, **refusal 0**; **mirror 83 → 24** (files 1–4: 24), all 24 on EXISTING lines of
   POWER/competitive, a cell the tranche does not touch; none on a new line;
 - the moves: 13,068 of 17,992 holdings change text (9,235 onto a new line, 3,785 within their cell, 48 the cascade), in
   290 towns;
-- the checker over cells + reserve + files 1–5: this file's lines 0 violations; the one red in the run is file 2's 4.3 as the chair
-  reworded it ("{house} does", flagged in WANT-LINES-2.md with a lawful form) (`want-lines-check.out.txt`).
+- the checker over cells + reserve + files 1–5: 0 violations (`want-lines-check.out.txt`), first time.
 
 ---
 
@@ -62,11 +52,11 @@ Existing (two of six, verbatim):
 - Be given the secrets of {power} to keep, as well as {power|its|their} errands to run.
 
 New:
-1. Never do anything in the name of {power} that they would have to hide from {power|it|them}.
+1. Never be ashamed of anything done in the name of {power}.
 2. Win every member of {power} a fair hearing, high or low.
 3. Have a hand in every new rule made inside {power}.
-4. Step back from the work one day with honour, and still be welcome at every gathering of {power}.
-5. See {power} still standing and strong long after they are gone.
+4. Retire from the work with honour, and still be welcome at every gathering of {power}.
+5. Leave {power} standing and strong for long after they are gone.
 6. Be known in {power} as someone who never broke a confidence.
 
 ### 3 · TIES/rival_enemy/long · +4 (cell 26 → 30)
@@ -107,7 +97,7 @@ Existing (two of six, verbatim):
 New:
 1. Win {house} one friend among those who govern before the season is out.
 2. Find out what those who govern want from {house} in return for the rights of the house.
-3. Answer any complaint against {house} this season before those who govern act on it.
+3. Be ready to answer any complaint against {house} before those who govern can act on it.
 
 ### 6 · TIES/ally/short · +3 (cell 16 → 19)
 Holders: either end of an alliance, a respect or a working patron-and-client tie (chief magistrate, scroll scribe,
@@ -133,7 +123,7 @@ Existing (two of six, verbatim):
 New:
 1. Let no one at {house} spend a coin of the house's money without their leave.
 2. Make {house} able to take on a bigger piece of work without borrowing for it.
-3. Keep the money of {house} apart from their own, always, to the last coin.
+3. Keep the money of {house} counted apart from every other purse, to the last coin.
 
 ### 8 · POWER/tense/long · +3 (cell 17 → 20)
 Holders: members of a power in a tense relation with another, read from either end (apothecary, master weaver, master
@@ -144,7 +134,7 @@ Existing (two of six, verbatim):
 - End the bad blood between {power} and {rival} before the next generation inherits it.
 
 New:
-1. Make sure the quarrel with {rival} never costs {power} a member.
+1. Make sure the trouble with {rival} never costs {power} a member.
 2. Give {rival} a way to back down that leaves {power} the stronger.
 3. Be the one in {power} who knows {rival} best.
 
@@ -190,8 +180,8 @@ Existing (two of four, verbatim):
 - Be the person everyone here defers to.
 
 New:
-1. Have their say heard in every choice that shapes this place.
-2. Make every newcomer here learn quickly whose word counts.
+1. Have a hand in choosing whoever leads this place next.
+2. Never apologise to anyone, for anything.
 
 ### 13 · INSTITUTION/solvency/short · +2 (cell 19 → 21)
 Holders: as the long cell (whisper broker, midwife, outfitter, senior craft-guild master, banker, warehouse factor).
@@ -201,8 +191,8 @@ Existing (two of six, verbatim):
 - Keep the accounts of {house} balanced, and show them to anyone who asks.
 
 New:
-1. Make sure everyone at {house} knows what the work costs this season, and wastes less of it.
-2. Plan the money of {house} a whole season ahead, week by week.
+1. Make sure everyone at {house} knows what the work costs this season, and wastes less.
+2. See that whoever pays {house} this season pays on the day.
 
 ### 14 · TIES/ally/long · +2 (cell 18 → 20)
 Holders: as the short cell (customs collector, warehouse factor, midwife, brewer, fortune teller, master butcher).
@@ -213,7 +203,7 @@ Existing (two of five, verbatim):
 
 New:
 1. Be trusted by {other} to see their wishes carried out when they are gone.
-2. Look back one day with {other} on all they came through together.
+2. Laugh with {other}, years from now, about all they came through together.
 
 ### 15 · POWER/tense/short · +2 (cell 18 → 20)
 Holders: as the long cell (apothecary, potter, master weaver, bowyer, house boss, tailor).
@@ -267,7 +257,7 @@ Existing (two of six, verbatim):
 - Get enough on {target} to hold them, and make it stick.
 
 New:
-1. Find out who warns {targetHouse} whenever the law comes near.
+1. Find out whether anyone warns {targetHouse} when the law comes near, and who.
 
 ### 20 · PERSONALITY/greed/short · +1 (cell 5 → 6)
 Holders: a card whose flaw is a greed (lady, beast master, woodcarver, miller, glassmaker, luxury merchant).
@@ -277,7 +267,7 @@ Existing (two of four, verbatim):
 - Collect every coin they are owed, however small.
 
 New:
-1. Put one coin to work this season for every coin they spend.
+1. Charge one person this season for something they used to get free.
 
 ### 21 · PERSONALITY/grudge/long · +1 (cell 8 → 9)
 Holders: a card that wants scores settled or what others have (fortune teller, ropemaker, gang boss, workhouse master).
@@ -337,7 +327,7 @@ Existing (two of four, verbatim):
 - Grow old without ever having to look over their shoulder.
 
 New:
-1. Live among neighbours who would stand by them if trouble came.
+1. Never let anyone know enough about them to hurt them.
 
 ### 27 · PERSONALITY/sway/short · +1 (cell 7 → 8)
 Holders: a card that wants to be followed or deferred to (ropemaker, sawyer, senior charter master, fortune teller).
