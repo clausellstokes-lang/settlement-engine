@@ -484,6 +484,12 @@ THE LANE: `lane/veil-26-2026-11-20`, tip = the commit carrying this section (rea
 (aa4e3079e) and GREEN TOWARD WITHHOLDING at the merged tree (section 6); 211 unchanged since 214c36dde. NOTHING RUNNING: no
 builder of this seat is out; R3-CURE-5's builder (VEIL-25's) has returned. Worktrees in this container (scratch, nothing
 uncommitted of value): `/home/user/wt/master` (the gate's master side), `/home/user/wt/r3c4read`, `/home/user/wt/brok`.
+R3-CURE-5'S BRANCH MOVED PAST THE MERGE (the chair, 14:56): merged: through 4661a1353; on origin, unread and unmerged:
+dc6227ead and 8d5768ebc (`lane/veil-25-r3c5-2026-11-20`: dc6227ead the numeric-id red, the two plants each keeping a husk
+in both engines; 8d5768ebc the cure, the id matched as text for any scalar, no id checked against every pre-sweep person;
+born 23/23, serverVeil + handrows 43/43 by its builder's count; 212 then `6260803d…0218`). THIS IS R3-CURE-6's CONTENT
+(ruling 48): VEIL-27 reads the two commits ONCE, re-runs the guards, the harnesses, the acceptance run and the cost after
+them, and merges them; check that its "id as text" is ONE helper per engine for R4's STOP 1 to share.
 VEIL-27's ORDER (the chair's, rulings 44, 48-52): (1) R3-TELL (ruling 49: the possible-world rule; the tell column GATED,
 YES everywhere, mixed switch settings tried; an empty list is not an absent field) and R3-CURE-6 (ruling 48: the person match
 by id as text, one helper shared with R4's STOP 1; plants with a numeric id and with none, red first), ONE BUILDER AT A
