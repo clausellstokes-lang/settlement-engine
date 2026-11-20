@@ -1090,6 +1090,42 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   reads: two cities, a native and a planted brokerage, server and twin, the gallery with Reveal DM off and on, the
   link): both engines judge hideability on the UNTRIMMED card before any eye removes tags. Closed.
 
+- **U5's KEPT FORM AT A CHANGE OF HANDS (2026-11-20, 13:00 UTC, to SEAT-4; CS6 and CS7 read together): NOT VETOED:** own or
+  civic pair: the form is KEPT (no rename, no `previousGovernments` row); a licensed pair (the merchant king): kept
+  only where the licence's circumstance is held, read by U4's reader handed in by the coup path (absent = not
+  held); otherwise the winner's own form, today's path. U5 is cut after U4 merges. TWO CONDITIONS: where the kept
+  form is a sovereign's own seat the person is CS22's (of the winning power, keeping no house), the guard red first
+  in U5 if the holder leaf names a keeper of another house; and the change of hands stays readable to the DM.
+  SEAT-4's READ OF THE CODE (13:05): not a design gap: with the form kept the DM still reads the taker in
+  `recentConflict`, the "power behind" edge, the ascendant chip and the timeline's line; only the lineage of
+  previous governments goes silent, correctly. ONE FALSE LINE FOUND: today's coup sentence says "overthrew the
+  <form> and reshaped the government as a <form>": U5 rewrites it for a kept form.
+- **THE GOALS GATE'S TWO CAUSES RULED (13:17 UTC, to GOALS-3; identical sentences 7 after the refusal's merge, against
+  the base's 3):** A (4 of 7): the rotation checks only the first holder's names and not the later holders of pass
+  one: CURE APPROVED (every holder's names; a "stands" whose text is now held identically walks on, cell then
+  reserve). B (3 of 7; a name-free long want; the PERSONALITY cell exhausted with no reserve; the base's own
+  three): NEITHER LEFT STANDING NOR CURED BY A WALK TO ANOTHER CLUSTER (that changes what kind of want a person has
+  to cure a wording): RESERVE LINES FOR THE EXHAUSTED CELL (the busiest town's shortfall plus one), reached only
+  by the walk, read by the chair first. THE GATE THEN: at or below 3; the chair expects 0.
+- **THE SIDES TABLE READ ROW BY ROW BY THE CHAIR (13:22 UTC; `S7-TABLE.txt` at a89859e6f on
+  `lane/page-2-2026-11-20-s7`, 137 rows):** `presumes` and `without` HOLD with two changes; `means` was not safe for
+  the display seat's naming rule (it would cast a whole power as a camp of its own kind: "Established guilds" and
+  "Upstart guilds" both as the craft power; "Merchants tied to the old partner" as the whole merchant power). RULED:
+  (1) A NAME ONLY THROUGH A ROW'S `named` WORDING, a new optional field on ELEVEN rows, written by the chair, with
+  no finite verb that must agree: "The sitting authority", "The restored order", "Wealthy merchants", "Orthodox
+  believers", "Guild members", "Criminal organisations": "{power}"; "Those in charge, who will not give way":
+  "{power}, who will not give way"; "Authorities exploiting the rift": "{power}, exploiting the rift"; "Those in
+  authority who would exploit the rift": "{power}, who would exploit the rift"; "Authorities caught between them":
+  "{power}, caught between them"; "Merchants who benefit from cheap newcomer labour": "{power}, gaining from cheap
+  newcomer labour". (2) `means` becomes 'none' on eight camps and parts. (3) "Price regulators" with no market is
+  not dropped: "Those who would fix a fair price". (4) "the merchant class" standing for "Wealthy merchants" shows
+  the slot row's "Those growing richer". (5) "the criminal network" with no criminal power: "Lawbreakers". THE
+  READER (to PAGE-4, amending `briefs/SIDES.md`): a name only through `named`, only where the document in hand
+  holds EXACTLY ONE power of the kind meant, never the same power on two sides, `presumes` checked first, every
+  side as shown beginning with a capital; a served document that lacks a withheld power is to the reader a town
+  without that power. FOR THE JOIN: this table and the session sheet's `sideArchetypes.js` must agree (a parity
+  test on the joined tree).
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -1101,6 +1137,12 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
 6. After the deploy, by the owner's word: THE EIGHTH READ of thirty fresh towns (with the side-by-side of section 1).
 7. THE CHAIR'S DESK, beside all of it: the 2026-11-15 close's open questions ruled one by one and recorded; draft pull
    request #74 placed; the reminders of section 4.
+
+- ADDED 2026-11-20 13:24 UTC: AN EARLY JOINT READING OF THE TWO DARK LAWS, not left to the close: as soon as the
+  seat's contest unit (U4, `lane/seat-2026-11-20-u4`) is on origin beside the fortune law's leaf (merged dark on
+  `lane/fortune-2-2026-11-20` at 2daa80771), a helper merges the two in a scratch tree and runs the seat lane's
+  one-command measure with both laws forced: how often a calm great city's ruler, only tolerated under the fortune
+  law, is contested or unseated. The chair told the owner at 12:58 that this is the risk it watches most.
 
 ## 4. Owed to the owner
 
@@ -3638,3 +3680,32 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   last lint run and the landings row are still to come. A WART SEEN BY THE CHAIR IN THE CURE'S DIFF, a named
   survivor for the close's sweep: the siege sentence says "<power> controls the rationing and the gates, which
   means they control everything else too" (a singular verb, then "they") for a singular-named power.
+- 13:23 UTC · POINT 82 IS ON THE LINE: `lane/join-2026-11-14` pushed at 13:16, 0c9069489 to 43ab0f5eb (the merge ed9e140a8 of
+  `lane/names-4-2026-11-20` at 4414f9e22, equal to the names seat's tip in every file; the census cure 379f63cb6:
+  five declaration keys; the registers bd49203fb: no figure moved; the landings row 43ab0f5eb with the CI read of
+  0c906948). THE HELPER'S CHECKS, READ BY THE CHAIR FROM THE FILES: `tests/lint` whole 3,271 of 3,271 twice (at
+  the cure and after the registers); the two census tests red first (2 failed of 36) then 36 of 36; the type
+  ratchet, the strict-domain gate and lint green by their exit codes. ONE CHECK DID NOT FINISH: `tests/generators
+  tests/data` stopped at fifteen minutes with no count line; every red it printed is on the known list (checked
+  by name against the landings file). THE TWO STORED FIGURES THE ROW NAMES WERE NOT VERIFIED BY THE HELPER: THE
+  CHAIR RAN BOTH TESTS AT THE TIP: `generationForkCensus` A1 receives 26932f67..., `espionageDormancyFence` FENCE
+  1 receives bf6f92cd...: as the row says. A CI READING HELPER is waiting on the run at 43ab0f5eb (the known 20 by
+  name and by message; anything new named). HAND-OVERS DONE: GOALS-2 "GOALS-PART 010a1150b, HANDED OVER" (units 4
+  and 6 merged at 3ebec303a: the refusal moves 55 wants, all holding the pairing, 0 secrets; THE GATE NOT MET:
+  identical 7 against 3; mirror 80 against 306): GOALS-3 TOLD "THE LANE IS YOURS at 010a1150b" (13:17) with the
+  line's commit to merge first. FRAME-5 "FRAME-PART 5b7d57c70, HANDED OVER" (about 330,000 by its own estimate;
+  the lane holds the line's merge, U0, C1, P1b, CF12; THE OWNER's sheet frames 63 of the 330 calm towns, 58 before
+  CF12; every other reader 0 more; `tests/lint` whole 3,270 of 3,271: `tuningRegister` on three named rows,
+  unsigned): FRAME-6 TOLD "THE LANE IS YOURS at 5b7d57c70" (13:17) with P1b-F as its first unit (the chair's
+  wording ruling of 12:52 reached FRAME-5 only after its hand-over: THE WORDING IS RULED, NOT YET BUILT). SEAT-4
+  took its lane (154,798 at 13:00; pushed 197ec575f, then 1edf9ef64 with U5's brief). FORTUNE-2 "U1 GREEN
+  4822cff0b" (the law's leaf wired and dark; confinement 0 and 0): THREE NOTES SENT: its count is the chair's
+  213,027 at 12:38, not its own 135,000; `readerShapeResolver`'s red in the whole lint run (a token of 260
+  against 256) IS NOT CALLED A FLAKE ON ONE RUN: a helper finds the token before U2 or U3 merges; the tuning
+  inventory's `measuredAtSha` names a commit not on the lane: re-taken at its next merge. PAGE-3 took its lane
+  (K's brief 9f23b8a13; K's trial out as phase 1 only); S6 and the sides table are on origin
+  (`lane/page-2-2026-11-20-t1` 12dc0f96c, a follow-up owed; `-s7` a89859e6f): THE TABLE READ BY THE CHAIR
+  (section 2). REVIEW-VEIL-13: its chain re-made and its instruments bite (a predecessor's arm red at 302850b0b,
+  green at 15567e597); pushed 7eea3895e; waiting for "R3". THE OWNER'S QUESTION OF ABOUT 12:57 ANSWERED (section
+  1); the joint measure and the dozen settlements promised (section 4); an early joint reading of the two dark
+  laws queued (section 3).
