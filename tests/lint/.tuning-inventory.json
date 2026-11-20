@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "6279d04335ee44321d98a1f18f46c3c9d64a67b1",
-  "measuredBy": "FORTUNE-2 (U2+U3 merge)",
+  "measuredAtSha": "46f918dfb5d8239b4ca38edc02670ebd69126bd5",
+  "measuredBy": "FORTUNE-3 U5s builder",
   "date": "2026-11-20",
-  "note": "re-taken by the integrator at the merged tree of U2 and U3: FORTUNE_LAW_TUNING gains its dependents prosperity.js, factionDynamics.js, rulingStructure.js; no value moved; the stale measuredAtSha acf2c2180 (U1 builder pre-amend) replaced on the chair ruling of 13:17",
+  "note": "re-taken by the U5s builder at 46f918dfb: FORTUNE_LAW_TUNING.standing gains the DRAFT rows safetyCalmLadder and safetyUsualRange (U5s, the chair's ruling of 15:58 UTC); no existing value moved; no bare decimal added",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1464,8 +1464,8 @@
       "exported": true,
       "idiom": "literal",
       "keys": 4,
-      "line": 105,
-      "spanDigest": "14c06636def392886dac29c6d642d1b6fd08ad45fbdcb51a645c676c75571ba2",
+      "line": 111,
+      "spanDigest": "086d1631a7ca5049f4af6d6de021f64ca1d6c5ed43945fbd2dc6b74b1cf56008",
       "leaves": {
         "developmentFigure": 1,
         "magicScale": 0.6,
@@ -1495,7 +1495,24 @@
         "standing.defenceUsualRange.metropolis.0": "Well-Defended",
         "standing.defenceUsualRange.metropolis.1": "Fortress",
         "standing.defencePointsPerBand": 4,
-        "standing.defenceBound": 10
+        "standing.defenceBound": 10,
+        "standing.safetyCalmLadder.0": "Dangerous",
+        "standing.safetyCalmLadder.1": "Unsafe",
+        "standing.safetyCalmLadder.2": "Moderate",
+        "standing.safetyCalmLadder.3": "Safe",
+        "standing.safetyCalmLadder.4": "Very Safe",
+        "standing.safetyUsualRange.thorp.0": "Moderate",
+        "standing.safetyUsualRange.thorp.1": "Moderate",
+        "standing.safetyUsualRange.hamlet.0": "Moderate",
+        "standing.safetyUsualRange.hamlet.1": "Moderate",
+        "standing.safetyUsualRange.village.0": "Moderate",
+        "standing.safetyUsualRange.village.1": "Moderate",
+        "standing.safetyUsualRange.town.0": "Moderate",
+        "standing.safetyUsualRange.town.1": "Moderate",
+        "standing.safetyUsualRange.city.0": "Unsafe",
+        "standing.safetyUsualRange.city.1": "Moderate",
+        "standing.safetyUsualRange.metropolis.0": "Moderate",
+        "standing.safetyUsualRange.metropolis.1": "Moderate"
       },
       "dependents": [
         "src/domain/density/densityCreateBoundary.js",

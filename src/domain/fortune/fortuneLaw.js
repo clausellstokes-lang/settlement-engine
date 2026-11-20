@@ -101,6 +101,12 @@ export const NEW_SETTLEMENT_FORTUNE_LAW_VERSION = DEFAULT_FORTUNE_LAW_VERSION;
  *   standing.defencePointsPerBand — the points a band above or below that range is worth,
  *   standing.defenceBound         — within plus or minus this bound, before the size's existing
  *     scale (`legitimacyDefScale`, unchanged) weighs it.
+ *   standing.safetyCalmLadder   — the calm safety labels LOWEST FIRST (`safetyProfile.js`'s five
+ *     base labels; no exported list of them exists, so the leaf holds it, guarded by
+ *     `tests/generators/fortuneLawSafety.test.js`). A label off it keeps today's points.
+ *   standing.safetyUsualRange   — each size's usual [low, high] band of that ladder (p10 to p90,
+ *     hxe; U5-PROPOSAL section 3): inside it a label is worth 0, outside it its own points less
+ *     those of the range's nearest band (FORTUNE-3 U5s, the chair's ruling of 15:58 UTC).
  */
 export const FORTUNE_LAW_TUNING = Object.freeze({
   developmentFigure: 1,
@@ -120,6 +126,15 @@ export const FORTUNE_LAW_TUNING = Object.freeze({
     }),
     defencePointsPerBand: 4,
     defenceBound: 10,
+    safetyCalmLadder: Object.freeze(['Dangerous', 'Unsafe', 'Moderate', 'Safe', 'Very Safe']),
+    safetyUsualRange: Object.freeze({
+      thorp: Object.freeze(['Moderate', 'Moderate']),
+      hamlet: Object.freeze(['Moderate', 'Moderate']),
+      village: Object.freeze(['Moderate', 'Moderate']),
+      town: Object.freeze(['Moderate', 'Moderate']),
+      city: Object.freeze(['Unsafe', 'Moderate']),
+      metropolis: Object.freeze(['Moderate', 'Moderate']),
+    }),
   }),
 });
 
