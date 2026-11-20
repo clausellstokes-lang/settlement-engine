@@ -1,0 +1,95 @@
+F5 1019: NARROW 139, REST 880
+BY WORD (N = narrow):
+  45	magnanimous
+  45	stalwart
+  42	dependable
+  41	warm-hearted
+  39	gracious
+  39	protective
+  39	forthright
+  38	generous
+  38	pious
+  37	tenacious
+  36	fair-minded
+  36	plain-dealing	N
+  36	hospitable
+  35	equitable
+  35	honest	N
+  35	optimistic
+  34	brave
+  34	principled	N
+  34	patient
+  34	humble
+  34	incorruptible	N
+  32	steadfast
+  32	conscientious
+  32	compassionate
+  30	merciful
+  29	candid
+  28	courteous
+  26	loyal
+  24	good-humoured
+
+TEN NARROW CARDS (evenly spaced over the narrow list):
+  [hxd-hamlet-41] Isamu Wang — Temperament: principled — Title: the innkeeper — Role: the innkeeper
+      Secret: Reads the letters guests leave in their rooms, and sells what is in them to whoever asks the right way
+      Stakes: No traveller would sleep under that roof again, and some of the people named in those letters would come looking
+  [hxd-town-15] Honor O'Sullivan — Temperament: principled — Title: the dyer — Role: the dyer
+      Secret: Has been dyeing cloth for a buyer who sells it with a famous mark that is not theirs to use
+      Stakes: When the owners of that mark find out, they will go after the dyer as well as the seller
+  [hxd-city-1] Maize Moo — Temperament: incorruptible — Title: the miller — Role: the miller
+      Secret: Sets the mill's toll by who is asking, and charges the families who owe money far more than the rest
+      Stakes: The families who were overcharged would talk, and the mill's good name would go first
+  [hxd-city-16] Liangjie Chen — Temperament: incorruptible — Title: the ropemaker — Role: the ropemaker
+      Secret: Has been twisting short fibre into the heart of the rope and selling it as full strength
+      Stakes: When a rope breaks under a load, people are hurt, and every coil carries the maker's name
+  [hxd-city-32] Ehecatl Moo — Temperament: incorruptible — Title: the vintner — Role: the vintner
+      Secret: Sells cheap wine poured into the casks of a famous vintage
+      Stakes: The buyers who paid for the famous wine include people who would make the vintner pay for every cup
+  [hxd-city-48] Balarama Naidu — Temperament: principled — Title: the cartographer — Role: the cartographer
+      Secret: Copied a survey that was meant to stay secret and has been selling copies to anyone with the coin
+      Stakes: Whoever ordered that survey would want to know where every copy went, and would not ask politely
+  [hxd-metropolis-8] Aifric Roche — Temperament: plain-dealing — Title: the prison warden — Role: the prison warden
+      Secret: Sells better food, letters and visits to the prisoners whose families can pay, and lets the rest go hungry
+      Stakes: A prisoner who starved last winter had a family, and they know what the others were given
+  [hxd-metropolis-16] Áine O'Riordan — Temperament: plain-dealing — Title: the chandler — Role: the chandler
+      Secret: Sells candles made with cheap tallow as fine wax ones, and the smoke gives them away to anyone who knows
+      Stakes: The households that paid for wax would want their money back, and the shop's best customers are among them
+  [hxd-metropolis-23] Dietrich Ritter — Temperament: honest — Title: the miller — Role: the miller
+      Secret: Sets the mill's toll by who is asking, and charges the families who owe money far more than the rest
+      Stakes: The families who were overcharged would talk, and the mill's good name would go first
+  [hxd-metropolis-35] Xolotl Ku — Temperament: plain-dealing — Title: the glassmaker — Role: the glassmaker
+      Secret: Sells cheap coloured glass as cut gems to buyers who never think to test it
+      Stakes: One of the buyers has had a stone looked at by someone who knew, and has started asking where it came from
+
+TEN REST CARDS (evenly spaced over the rest):
+  [hxd-thorp-17] Bilal ibn Rashid — Temperament: brave — Title: the camp foreman — Role: Elder
+      Secret: Has been cutting trees beyond the camp's bounds and selling the timber as their own
+      Stakes: The owner of that wood has found the stumps
+  [hxd-town-27] Mahesh Patil — Temperament: generous — Title: the bowyer — Role: the bowyer
+      Secret: Has been selling bows and arrows to people who have no right to hunt and every reason to want them quietly
+      Stakes: If one of those bows is found where it should not be, the maker's mark on it leads straight back
+  [hxd-city-7] Vita Brutus — Temperament: fair-minded — Title: the master fishmonger — Role: the master fishmonger
+      Secret: Sells yesterday's fish as this morning's, washed and packed in fresh ice, and has made people sick more than once
+      Stakes: The market would close the stall, and the families of the sick would want more than a fine
+  [hxd-city-22] Yelena Ivanov — Temperament: forthright — Title: the apothecary — Role: the apothecary
+      Secret: Sells a few drops of something stronger to anyone who asks quietly and pays in silver
+      Stakes: One customer died last season of what was sold; if that came out, so would the list of who else buys it
+  [hxd-city-36] Scáthach Reilly — Temperament: generous — Title: the printer — Role: the printer
+      Secret: Prints pamphlets at night against powerful people, and sells them without a name on them
+      Stakes: The people named in those pamphlets would want to know who printed them, and the type can be matched
+  [hxd-city-49] Servilia Nero — Temperament: brave — Title: the beast master — Role: the beast master
+      Secret: Sells trained animals to buyers who use them for fighting, and the training is cruel
+      Stakes: The animals' scars would tell the story, and the buyers would turn on the trainer to save themselves
+  [hxd-metropolis-9] Bohdan Tarasov — Temperament: patient — Title: the luxury merchant — Role: the luxury merchant
+      Secret: Has been embezzling from the organisation they oversee for three years
+      Stakes: Exposure means disgrace, legal prosecution, and enemies who feel personally betrayed
+  [hxd-metropolis-19] Anton Bykov — Temperament: warm-hearted — Title: the network's head — Role: the network's head
+      Secret: Has been embezzling from the organisation they oversee for three years
+      Stakes: Exposure means disgrace, legal prosecution, and enemies who feel personally betrayed
+  [hxd-metropolis-28] Yelena Ursus — Temperament: optimistic — Title: the sawyer — Role: the sawyer
+      Secret: Sells green planks as seasoned and the buildings made from them warp within a year
+      Stakes: The builders who used the wood would want their losses back, and their customers would want them first
+  [hxd-metropolis-39] Hans Eisenberg — Temperament: compassionate — Title: the master weaver — Role: the master weaver
+      Secret: Sells cloth woven with short thread as full measure, and the bolts come up an arm short
+      Stakes: Every tailor and merchant who bought by the bolt would want the difference back
