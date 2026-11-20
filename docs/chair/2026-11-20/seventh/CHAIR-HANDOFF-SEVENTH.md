@@ -2112,3 +2112,28 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   word there: allowed, to be said, a distinct sourced word preferred if one exists. Otona LEFT ON THE FALLBACK (its
   beginning in a shrine parish touches a living faith). Prostates on the fallback until a source says so. Both the
   page read and the work it rests on are recorded for each word.
+- 07:15 UTC · **TRAD-1 PAST ITS MARK WITH THE FIRST HALF BUILT; A HAND-OVER ORDERED; TRAD-2's PROMPT; VEIL-23 SEATED.**
+  **(1) TRAD-1 (about 390,000 tokens against 350,000), status, not yet "TRAD-SHARE":** BUILT, UNCOMMITTED: CTR9 and
+  the leaf: `src/domain/traditions/shownTraditions.js` (the tab's set rule in one place; `sharedTraditionRowsOf` for
+  the save); a composer site `traditions` in `publicProseCompose.js`: A LIST of rows `{id, name, element, chip, when,
+  text}` (as `power:ladder` is a list, so the alias pass leaves it whole; no `PUBLIC_PROSE_VERSION` bump); the reader's
+  tab prints only the drawn rows and, where none is drawn, "No traditions are shared for X.", never a set from `id`.
+  GREEN ON ITS OWN (49 tests): the leaf's arms, the walker, the shared-page born test (the party link byte for byte;
+  a planted hideable row; a lit coup on a full share; THE INVERSION byte-identical over six born towns with real
+  hideable houses), the round trip through the server's own sanitizer in pglite. RED, NAMED: the strict-domain gate
+  +2 (its file) and eight `tests/lint` files (presumedThings: 14 table lines presume a smith, a market, a clergy
+  undeclared: CTR10's own work; 20 bare negatives; ruinFilterRoster; defenceFactReaders; writerReach;
+  proseWiringCensus; domainAnyCastBaseline; the lighting census).
+  **ITS CHANGE TO THE READER'S WALL, NOT VETOED (part of CTR9): THE READER'S TEXT NAMES NO PERSON AT ALL** (a card's tie
+  to its house is a field a DM can hide by hand while its name and title are floor: a named keeper could tie a face
+  to a house the DM hid). THE PROOF EXTENDED BY THE CHAIR for the successor: with every address the Curate screen can
+  hide hidden, not only every hideable house, the drawn text byte-identical and naming nothing hidden; and the
+  reader's text is drawn at save and served later, so it may name nothing any later act of the DM could hide.
+  **THE HAND-OVER ORDERED:** it cures only its strict +2 (the push hook will not pass otherwise), commits and pushes
+  what stands, writes "THE HAND-OVER" (each of the eight reds by name with its cause; what is not started), sends
+  "TRAD-WIP <commit>, HANDED OVER" and stops. **TRAD-2** (`prompts/TRAD-2.txt`; the middle tier at high effort; an
+  integrator with builders of its own; `lane/trad-2-2026-11-20` from that commit): the eight reds by cause; CTR10
+  (pools, declared lines, the crisis dimension); the rulings on the proposal still unbuilt; "TRAD-SHARE" as soon as
+  the shared-page part is green in `tests/lint` whole; the measures; thirty samples and twelve from towns in crisis.
+  **(2) VEIL-23 is session_019yED1SPikQqQKF16wCQQfC** (seated 07:13 UTC on VEIL-22's tip 9894c75d8; reads only);
+  VEIL-22 is told the hand-over's rule (a clean boundary, or 380,000 tokens).
