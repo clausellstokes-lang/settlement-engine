@@ -156,7 +156,8 @@ describe('U5a (c) — the arithmetic: only upward, the Tolerated gate, the two-r
           expect(next.score).toBeGreaterThanOrEqual(base);
           // the stored band IS the band of the stored score, the whole tuple, through the one band derivation
           const { score, breakdown, ...tuple } = next;
-          expect(tuple).toEqual((({ score: _s, breakdown: _b, ...rest }) => rest)(legitimacyAt(want)));
+          const { score: _s, breakdown: _b, ...wantTuple } = legitimacyAt(want);
+          expect(tuple).toEqual(wantTuple);
           expect(Object.keys(next)).toEqual(Object.keys(pl));
           if (want === base) expect(next).toBe(pl);
           else expect(breakdown).toEqual({ ...terms, merits: want - base });

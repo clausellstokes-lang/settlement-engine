@@ -81,7 +81,10 @@ const requestFor = (/** @type {any} */ fullConfig, /** @type {string} */ seed) =
 /** a town's bytes with the law's marker left out (the version-1 birth carries it; the unmarked one does not) */
 const bytesWithoutMarker = (/** @type {unknown} */ town) => JSON.stringify(town, (key, value) => (key === FORTUNE_LAW_CONFIG_KEY ? undefined : value));
 /** the band tuple of a legitimacy object (everything but the score and its terms) */
-const tupleOf = (/** @type {any} */ pl) => { const { score: _s, breakdown: _b, ...rest } = pl; return rest; };
+const tupleOf = (/** @type {any} */ pl) => {
+  const { score: _s, breakdown: _b, ...rest } = pl;
+  return rest;
+};
 /** the pre-merit legitimacy of a stored one: its base score, banded by the one derivation, its terms without `merits` */
 const preOf = (/** @type {any} */ pl) => {
   const { merits = 0, ...terms } = pl.breakdown || {};
@@ -233,7 +236,11 @@ describe('U5a (g) — the census\'s word-writers on every moved town, and condit
     /** @type {string[]} */
     const atoms = [];
     const walk = (/** @type {unknown} */ v) => {
-      if (typeof v === 'string') { if (/^law:/.test(v)) atoms.push(v); } else if (v && typeof v === 'object') Object.values(v).forEach(walk);
+      if (typeof v === 'string') {
+        if (/^law:/.test(v)) atoms.push(v);
+      } else if (v && typeof v === 'object') {
+        Object.values(v).forEach(walk);
+      }
     };
     walk(POLITICAL_FLAVOR);
     expect(atoms.length).toBeGreaterThan(0);
