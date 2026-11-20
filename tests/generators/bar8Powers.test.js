@@ -33,11 +33,15 @@ const TOWNS = Object.freeze({
   'bar0-village-calm-rand-46': ['14d'],
   'r2r-village-45': ['14d'], // the noble power seated at the draw is not kept by the roster's trim
   'bar0-thorp-calm-rand-47': ['15b'], // C31732: harbour, ship timber, ruins
-  'r2r-thorp-3': ['15b'], // marshlands, hot springs, a quarry
+  'r2r-thorp-364': ['15b'], // marshlands, hot springs, iron (BUILD-CONFLICT, DEPTH-2: was r2r-thorp-3, marshlands, hot springs, a quarry, which the keyed quarrel now gives the river line)
   'r2r-thorp-53': ['15b'], // fishing grounds, salt flats
-  'bar0-thorp-calm-rand-45': ['15b-'], // NEGATIVE C30951: a foraging or a hunting ground
-  'bar0-thorp-calm-rand-46': ['15b-'], // NEGATIVE C31349
-  'bar0-hamlet-calm-rand-45': ['15b-'], // NEGATIVE C16138: common grazing
+  // BUILD-CONFLICT (DEPTH-2, 2026-11-20): the default rung now picks its quarrel by keyed hash, so each negative is a place whose
+  // pick is the grazing quarrel: bar0-thorp-calm-rand-45 -> -399 (a foraging ground, no other ground of the land), -46 -> -85
+  // (fishing and hunting grounds, hot springs, a quarry: -46's own), bar0-hamlet-calm-rand-45 -> -199 (common grazing; hunting
+  // ground and grove, as -45's)
+  'bar0-thorp-calm-rand-399': ['15b-'], // NEGATIVE C30951: a foraging or a hunting ground
+  'bar0-thorp-calm-rand-85': ['15b-'], // NEGATIVE C31349
+  'bar0-hamlet-calm-rand-199': ['15b-'], // NEGATIVE C16138: common grazing
 });
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
