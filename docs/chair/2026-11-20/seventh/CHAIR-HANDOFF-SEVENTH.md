@@ -468,3 +468,35 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   a born test that finds a derived block by what each surface DRAWS; master's shape.
   THE READER'S COLD READS WHILE IT WAITS: the registry's 42 sent-as-stored rows against VR26; the whole catalogue
   against VR27; VEIL-VR17's commit when it comes.
+- 01:21 UTC · **THE SAFETY NET (1) FIRED (01:15 UTC), NOT EMPTY.** Seven seats: VEIL-19 running at 257,537 tokens (it holds
+  its mark for B, C, D, whose builder's commits exist only in its container); VEIL-R1 DONE (8943ce807); VEIL-VR17
+  running (its born test green, the security directory running); VEIL-DOORS running (its proposal sent and answered);
+  REVIEW-VEIL-10 running (Phase 1B done; three cold reads); CI-FIT idle on purpose at about 313,000 tokens (its
+  part B pushed, 45ba3b70f; it waits on a half-hour shard run before it commits the four budgets); GIT-DOOR running
+  (316901a9e). A platform pause at about 01:00 UTC restarted this session's worker and killed two seats' scratch
+  PostgreSQL: both recovered. THE EARLIER CHAIRS' BRANCHES: `lane/veil-18-2026-11-19` bedd5a392,
+  `lane/join-2026-11-14` 29ec255fe, this lane only this chair's commits: NO MOVEMENT BY ANOTHER HAND.
+- 01:21 UTC · **VEIL-DOORS'S PROPOSAL (01:12 UTC) APPROVED; IT BUILDS.** Its measure at bedd5a392 (140 births, 89 with a
+  hideable house): stability moves with the hidden houses in 11 towns and with ordinary ones in 1; prosperity 34 and
+  7; government 0 and 12; threat, terrain, magic, resource 0 and 0. (A) ONE restated tile helper for every list,
+  filter, sort, count and the read's top-level columns: an unmarked row unchanged; a marked row from the read's own
+  source (the frozen copy where frozen); the stability band word alone IF the band passes VR26, else NULL;
+  **PROSPERITY NULL ON A MARKED ROW** (its inputs ship: a visitor can recompute it); any tile NULL where a hideable
+  house's or a hidden power's name lies inside it; all tiles NULL beside the closed answer. THE GALLERY LOSES, for
+  marked rows: the stability cause, the prosperity chip and the prosperity filter (FOR THE OWNER'S VETO LIST). A FAULT
+  LIVE TODAY, found by it: the dossier read joins every public row's tiles (1.97 s at 500 public rows, 0.23 s at
+  50): cured there (the read takes its one row's tiles). (B) the chronicle by entry: withheld whole when its type is
+  unclassed, or the name search hits a removed house, a removed person or a hidden power; every one of the 44 event
+  types classed on purpose against the default veil's classes (the table comes in its hand-back, read by the chair
+  row by row); the newest 50 of what is served; ids dropped. (C) the walker over grants and bodies, with VR27's arm;
+  ALL NINE helpers VEIL-19 measured as executable by anon and authenticated are DOORS's to revoke (five gallery
+  helpers and four pure ones). (D) it restates `get_gallery_map` and `import_gallery_map`; the lane's owner
+  restates neither.
+- 01:21 UTC · **VEIL-19 AT ITS MARK; ITS SUCCESSOR SEATED BESIDE IT (ruling SV8).** VEIL-19 finishes B, C, D alone
+  (with V10-6 and V10-5), pushes, writes PART 20 and hands back "B/C/D <commit>". VEIL-20 (`prompts/VEIL-20.txt`;
+  `lane/veil-20-2026-11-20` from VEIL-19's pushed 72e8a855d) merges R1, reads it line by line, and prepares what
+  touches no file VEIL-19 holds (VR25's derivers on the importer's save; R2's render-twice harness; VR26's harness);
+  it opens 212 only after merging VEIL-19's final tip. **SV8: THE LANE OWNER'S MARK IS 450,000**, not the standard's
+  300,000: this lane's reading alone costs about 150,000 tokens (212 whole, the twin, the registry, PART 18 to 20);
+  the window is a million and the allowance is not a constraint (the standard's rule 23). If a seat past 300,000
+  makes a slip a fresh seat would not have made, the mark returns to 300,000.
