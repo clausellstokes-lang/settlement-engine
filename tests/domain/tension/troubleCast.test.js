@@ -14,6 +14,7 @@ import { castTroubleFrame, troubleOfWeight, fillReason, FRAME_REASONS, templateL
 import { LEGITIMACY_CUTS } from '../../../src/data/bandLadders.js';
 import { SIDE_ARCHETYPE } from '../../../src/domain/tension/sideArchetypes.js';
 import { rulingChainOf } from '../../../src/domain/dossier/powerStrata.js';
+import { membersByRank } from '../../../src/domain/people/membership.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
 
 /**
@@ -142,6 +143,10 @@ describe('three people on its three sides (CF4, CF6)', () => {
       const named = [];
       let office = 0;
       let seat = 0;
+      // FRAME-6 · F2 (the chair, 2026-11-20 15:35: "an empty side yields before the caps"): an office face beyond the cap
+      // is the head of the very power its side IS, where that side would otherwise stand empty (frame-cast-hamlet-42:
+      // "The Military Party", its one member the Veteran Soldier, named by role)
+      let officeOnOwnPower = 0;
       frame.sides.forEach((side, i) => {
         if (side.label !== templateLabelOf(frame.type, i, s.history.currentTensions[frame.at].factions[i])) throw new Error('label');
         if (SIDE_ARCHETYPE[side.label] !== side.archetype) throw new Error(`${side.label} is not classed ${side.archetype}`);
@@ -161,9 +166,12 @@ describe('three people on its three sides (CF4, CF6)', () => {
           if (f.name === seatName) seat += 1;
         } else if (f.rule !== 'criminalHouse') throw new Error('a face with no person that is not a house');
         if (f.kind === 'office') office += 1;
+        const raw = s.history.currentTensions[frame.at].factions[i];
+        if (f.kind === 'office' && (s.powerStructure?.factions || []).some((p) => p?.faction === raw)
+          && membersByRank(s.npcs, raw).some((m) => (m.id || m.name) === f.npcId)) officeOnOwnPower += 1;
       });
       if (new Set(named).size !== named.length) throw new Error('one person holds two sides');
-      if (office > 1) throw new Error(`${office} sides by office`);
+      if (office > 1 && officeOnOwnPower < office) throw new Error(`${office} sides by office`);
       if (seat > 1) throw new Error(`the seat-holder fronts ${seat} sides`);
     });
     expectNoSeedFailures(failures, 'the trouble cast over the calm towns');

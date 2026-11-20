@@ -584,6 +584,26 @@ export function castTroubleFrame(settlement) {
     out[side.i] = { words: side.words, label: side.label, archetype: side.archetype, face };
   }
 
+  // FRAME-6 · F2 (the chair, 2026-11-20 15:35): AN EMPTY SIDE YIELDS BEFORE THE CAPS. Once every side is cast, a side that
+  // IS a power and stands empty takes that power's first live person by rank whom no side and no crisis holds, even one
+  // the record names by role (an office stand-in, off the roster the rungs read) and even beyond `officeSidesMax`: the
+  // head by office (or as the criminal power's head), another by membership.
+  const alive = /** @type {FrameNpc[]} */ (arr(s.npcs)).filter((n) => !!n && typeof n === 'object' && !n.temporary && !n.ousted && !!str(n.name));
+  for (const side of castOrder) {
+    const f = side.named;
+    if (!f || out[side.i]?.face) continue;
+    const people = membersByRank(alive, powerName(f));
+    const who = people.find((n) => !used.has(idOf(n)) && !held.has(idOf(n)));
+    if (!who) continue;
+    const arch = factionArchetype(/** @type {never} */ (f));
+    const slots = { power: powerNameInProse(powerName(f)) };
+    /** @type {[FaceKind, SideFace['rule']]} */
+    const [kind, rule] = who !== people[0] ? ['member', 'member']
+      : arch === 'criminal' ? ['criminal', 'criminal']
+        : ['office', arch === 'military' ? 'commander' : seat && idOf(who) === idOf(seat) ? 'seat' : 'head'];
+    out[side.i] = { ...out[side.i], face: take({ npc: who, power: f, rule, slots }, kind) };
+  }
+
   return {
     type,
     at,

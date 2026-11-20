@@ -1,17 +1,19 @@
 # FRAME-6 · F1–F5 — the chair's rulings on the six sheets (results)
 
-Written 2026-11-20T16:15Z (`date -u`) by FRAME-6's builder of F1–F5 on `frame6-f` (cut at `038186160`). The brief is `F1-F5-SHEET-RULINGS.md`. Updated at each commit.
+Written 2026-11-20T16:15Z, last updated 2026-11-20T16:32Z (`date -u`) by FRAME-6's builder of F1–F5 on `frame6-f` (cut at `038186160`). The brief is `F1-F5-SHEET-RULINGS.md`. Updated at each commit.
 
 **Instruments** (in `frame6/tools/F/`): `measure.mjs <pool.json> <src/> <out.json>` composes the owner's and a stranger's sheet for every town of the 330-town calm pool (born at `4971555c3`'s generator, identical here), digests both (sha256 of the sheet's JSON, 16 hex) and prints the five counts; `cmp.mjs <a.json> <b.json>` compares two runs' digests (stranger, calm owner, framed owner); `faces.mjs <pool.json> <srcA/> <srcB/> <seed…>` prints each moved town's sides and people at two trees. BASE = an archive of `038186160`'s `src/`. Every number below is from these runs; the test (`tests/domain/tension/frameSheetRulings.test.js`) re-establishes each ruling's count on fresh births of the 63 framed towns.
 
 **The base, measured** (owner audience): 330 towns, 267 calm (no frame), 63 framed (W1 19, W2 13, W3 26, W4 5).
 
-| count | base | after F1 |
-|---|---:|---:|
-| F1: sides of a power voiced by a person with no membership and no tie of standing to a member | **9** (of 52 voiced power sides; 166 voiced sides in all) | **0** (of 51) |
-| F1: of those, with no membership at all | 11 | 3 (each by a tie of standing) |
-| F2: empty sides whose power holds a live person no side holds | 1 | 2 |
-| F5: framed owner sheets whose seat-holder is dropped | 33 | 32 |
+| count | base | after F1 | after F2 |
+|---|---:|---:|---:|
+| F1: sides of a power voiced by a person with no membership and no tie of standing to a member | **9** (of 52 voiced power sides; 166 voiced sides in all) | **0** (of 51) | 0 (of 53) |
+| F1: power sides voiced by a person with no membership at all | 11 | 3 (each by a tie of standing) | 3 |
+| F2: empty sides whose power holds a live person no side holds | **1** (of 21 empty sides) | 2 (of 22) | **0** (of 20) |
+| F3: W3 owner sheets naming the impaired resource (Q4's reading, Facts excluded) | 0 of 26 | 0 | 0 |
+| F4: W4 owner sheets printing the capture rung's words | 0 of 5 | 0 | 0 |
+| F5: framed owner sheets whose seat-holder is dropped | 33 of 63 (W3 16, W2 12, W4 3, W1 2) | 32 | 32 (W3 16, W2 12, W4 3, W1 1) |
 
 ## F1 — the ladder is taken in order on a power's side (commit 1)
 
@@ -32,3 +34,21 @@ Written 2026-11-20T16:15Z (`date -u`) by FRAME-6's builder of F1–F5 on `frame6
 **Gates (F1):** `tests/domain/tension` whole 5 files 40 passed; `tests/domain/summary` whole + frameShareVeil + crisisKeeperBothDoors + frame2NamesRule + noLegacyFactionReaders.walker: 9 files, 47 passed, 1 expected fail; the other owner-sheet tests (tonightSheetOnce, repeatOnceTonightTraditions, crisisDealerReason, crisisOutsideHand, crisisPageAudience, restoredSubsections): 6 files, 54 passed. `typecheck:ratchet` 167/167, `typecheck:domain:strict` 1113/1113, `lint` 0 errors (38 warnings, none in a changed file).
 
 **(d) for the security reader:** nothing new reaches a non-owner: the frame is composed only for `audience: 'owner'` and only from a record carrying its seed (frameShareVeil's arms green). New on the owner's sheet: the `member` reason, naming a power through `powerNameInProse`.
+
+## F2 — an empty side yields before the caps (commit 2)
+
+**Built.** `troubleCast.js :: castTroubleFrame`, after every side is cast: a side that IS a power and stands empty takes that power's first live person by rank (not temporary, not ousted, named; an office stand-in included) whom no side and no crisis holds, even beyond `FRAME_TUNING.officeSidesMax`: its head by office (rule `head`, `commander` for a military power, `seat` for the seat-holder; a criminal power's head by the `criminal` rule), anyone else by membership (`member`). `tonightSheet.js :: frameOf`: a face the record names by role (`isOfficeStandIn`) prints by that name alone (`role` empty), so "The Religious Authorities: The High Priestess", never "The High Priestess · High Priestess". The name keeps the record's own capital ("The High Priestess"); the brief's example wrote "the". She has no `gender` on the record, so her reason reads "because they head the Religious Authorities".
+
+**The cap's meaning (a DRAFT tuning row; no register re-recorded):** `officeSidesMax` (1) was "at most this many sides of one trouble are filled by office alone"; it is now "at most this many sides are filled by office by the ladder; a side that IS a power and would otherwise stand empty yields its own head beyond it". On the 63: 2 sheets carry two office sides (hamlet-17, village-75), pinned.
+
+**Count:** 1 at the base (hamlet-17) and 2 after F1 (village-75) -> **0**. The one empty power side left is hamlet-74 "The Military Party" (its one live member, Albina Brutus, holds another side: not a yield).
+
+**Proof (a), the digests, F1 against F2:** stranger 330/330; calm owner 267/267; framed owner 61/63 equal, **2 moved**: hamlet-17 ("The Religious Authorities: The High Priestess", now among the people to voice) and village-75 ("The Religious Authorities: Bayasgalan Geniges · the priest — because he heads the Religious Authorities"). Base against F2: stranger 330/330, calm owner 267/267, framed owner 49/63 equal, 14 moved (F1's 13 and hamlet-17).
+
+**Proof (b), red first:** the F2 describe against the F1 tree: 4 failed (hamlet-17, village-75, "over the 63… (1 at the base, 2 after F1 -> 0)" listing hamlet-17 and village-75, "the office cap's meaning…"), 5 passed (F1's). Green: 9 passed.
+
+**Proof (c), the pins.** Re-recorded by F2 (an owner's framed cast): `tests/domain/tension/troubleCast.test.js` "50 calm born towns: every face is on the record… the caps hold" — red on F2: "frame-cast-hamlet-42 — 2 sides by office" ("The Military Party" yields its one member, the Veteran Soldier, named by role); the cap check now admits office faces beyond the cap only where each office face stands on its own power's side as its member. Nothing else moved: frameWordsLevel (the stand-in passes the face check by the record's own name), troubleWeight, frameShareVeil, frame2NamesRule all green.
+
+**Gates (F2):** `tests/domain/tension` whole 5 files 44 passed; `tests/domain/summary` whole + every test file importing `tonightSheet.js` (36) + crisisKeeperBothDoors + noLegacyFactionReaders.walker: 44 files, before the troubleCast re-pin 1 failed (that pin) / 281 passed / 1 expected fail, after it the tension directory 44/44 green; `typecheck:ratchet` 167/167, `typecheck:domain:strict` 1113/1113, `lint` 0 errors (38 warnings, none in a changed file).
+
+**(d) for the security reader:** a stand-in ("The High Priestess") can now stand on the OWNER's frame and among the owner's people to voice; a stranger's sheet is today's (330/330). The `role` blanking is inside `frameOf`, which only the owner's composition reaches.

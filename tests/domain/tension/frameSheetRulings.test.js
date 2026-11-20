@@ -12,11 +12,16 @@
  *        then a person tied to one of its members by a tie of standing (FRAME_STANDING_TIES); the hash chooses only
  *        within a rung. A person with no membership and no such tie is never printed on a power's row. Count: such sides
  *        9 at the base -> 0.
+ *   F2 — an empty side yields before the caps: a side that IS a power and would stand empty takes that power's first
+ *        live person by rank whom no side holds, even one the record names by role (`isOfficeStandIn`) and even beyond
+ *        `FRAME_TUNING.officeSidesMax`; she is printed by that name alone. Count: such sides 1 at the base, 2 after F1
+ *        (village-75), -> 0.
  */
 import { describe, it, expect } from 'vitest';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { composeTonightSheet } from '../../../src/domain/summary/tonightSheet.js';
 import { castTroubleFrame, FRAME_REASONS, FRAME_STANDING_TIES } from '../../../src/domain/tension/troubleCast.js';
+import { FRAME_TUNING } from '../../../src/domain/tension/sideArchetypes.js';
 import { membersByRank } from '../../../src/domain/people/membership.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
 
@@ -116,5 +121,44 @@ describe('F1: the ladder is taken in order on a power\'s side; the hash chooses 
       }
     });
     expectNoSeedFailures(failures, 'a power\'s side takes its own rungs');
+  }, 300000);
+});
+
+/**
+ * F2's count over one town: the sides of a power that print no one while that power holds a live person (not temporary,
+ * not ousted, named; one named by role counts) whom no side holds.
+ * @param {any} s
+ */
+function emptyPowerSidesThatCouldYield(s) {
+  const cast = castTroubleFrame(s);
+  if (!cast) return [];
+  const npcs = (s.npcs || []).filter((n) => n && typeof n === 'object' && !n.temporary && !n.ousted && str(n.name));
+  const held = new Set(cast.sides.flatMap((x) => [x.face?.npcId, x.face?.viaId]).filter(Boolean));
+  return powerSidesOf(s).filter(({ side, power }) => !side.face && membersByRank(npcs, str(power.faction)).some((m) => !held.has(idOf(m))))
+    .map(({ side }) => side.words);
+}
+
+describe('F2: an empty side yields before the caps', () => {
+  it('frame-calm-hamlet-17: "The Religious Authorities" is fronted by its head, the High Priestess, printed by her role alone', () => {
+    const sheet = composeTonightSheet(bySeed('frame-calm-hamlet-17'), OWNER);
+    const side = sheet.frame?.sides.find((x) => x.words === 'The Religious Authorities');
+    expect(side).toMatchObject({ name: 'The High Priestess', role: '', kind: 'office', reason: 'because they head the Religious Authorities' });
+    expect(sheet.people.map((p) => p.name)).toEqual(['Mustafa al-Malik', 'The High Priestess']);
+  });
+
+  it('frame-calm-village-75: the side F1 left empty takes its head beyond the office cap', () => {
+    const side = composeTonightSheet(bySeed('frame-calm-village-75'), OWNER).frame?.sides.find((x) => x.words === 'The Religious Authorities');
+    expect(side).toMatchObject({ name: 'Bayasgalan Geniges', kind: 'office', reason: 'because he heads the Religious Authorities' });
+  });
+
+  it('over the 63: no side of a power prints no one while its power holds a live person no side holds (1 at the base, 2 after F1 -> 0)', () => {
+    const found = TOWNS.flatMap(({ seed, s }) => emptyPowerSidesThatCouldYield(s).map((w) => `${seed}: ${w}`));
+    expect(found).toEqual([]);
+  }, 300000);
+
+  it('the office cap\'s meaning: officeSidesMax holds on every sheet but where a side would stand empty (2 of the 63)', () => {
+    expect(FRAME_TUNING.officeSidesMax).toBe(1);
+    const over = TOWNS.filter(({ s }) => (castTroubleFrame(s)?.sides || []).filter((x) => x.face?.kind === 'office').length > FRAME_TUNING.officeSidesMax).map((t) => t.seed);
+    expect(over).toEqual(['frame-calm-hamlet-17', 'frame-calm-village-75']);
   }, 300000);
 });
