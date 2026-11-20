@@ -615,6 +615,19 @@ parts of the whole check (at the close).
   whether a bought hall with a crime wave should put the crime wave's own people on a calm town's sheet (6 calm
   towns of 330; today it does not); the chair leans yes and built nothing.
 
+- **About 11:14 UTC, 2026-11-20 (the chair's estimate), THE OWNER (verbatim):** "Do all of these, every last one
+  predeploy". WHAT IT ORDERS, AS THE CHAIR READS IT (said to the owner the same turn, for him to correct): EVERY
+  FIX OF THE FOUR FAULTS GOES IN BEFORE THE DEPLOY, the two the chair had held back among them (the misspelt
+  keyword behind "marginal", a stored field; the refusal of a want that contradicts the same card's secret, which
+  the chair had just said it would not build because the count was low) AND THE QUESTION THE CHAIR HAD LEFT HIM
+  (a bought hall with a crime wave on a calm town's sheet): YES. THE DEPLOY'S WAITING LIST GROWS BY: the safety
+  label's qualifier on the DM's page with its guard; the economy's output in words; "marginal" and "called by" off
+  the cards; the keyword's correction by its door; a tension said in more ways and in the town's own words (the
+  spare wordings always; about 30 new wordings; sides from the town); secrets that fit their holder (title rows
+  for priest, abbot, bishop and dean; office lines tagged); the refused want; the mirror rule; the cast's reason
+  (C1) and the Stakes rows (C2); the crime wave's own people on a bought hall's sheet (CF12); the Curate screen's
+  notice for the criminal switch.
+
 ## 2. Rulings of this chair (each vetoable by the owner)
 
 - **SV1 (00:05 UTC, 2026-11-20): THE VEIL'S LIST ON THREE MACHINES.** VEIL-19 owns 212, its rollback and the twin's
@@ -870,6 +883,24 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   overcounts); a duty want beside one: 14 (1 in about 640); under the chair's bar of 1 in 200. About one card in
   400 in all: roughly one large place in six holds one, and it reads as a hypocrite, which is playable. THE OWNER
   IS TOLD the chair does less here, as it said it would if the count was low.
+
+- **THE PAGE ROUND, ORDERED BY THE OWNER (2026-11-20, 11:15 UTC): WHO HAS WHAT.** PAGE-1 (display; render only; no
+  stored field moves): the safety qualifier through one reader that takes an audience and fails closed, with its
+  guard; output in words; "marginal" and "called by"; the magic pair measured; the thin pages measured and
+  proposed only (not ordered). PAGE-2 (`prompts/PAGE-2.txt`; content): PART T tensions (T1 the spare wordings
+  always; T2 about four new wordings for each of the commonest eight kinds, read by the chair; T3 sides from the
+  town AFTER A DESIGN NOTE, because the session sheet's lane composes sentences from a side's words); PART S
+  secrets (title rows for priest, abbot, bishop, dean; role-free lines that presume an office tagged to their
+  holders; a misfit takes its next admitted line, draw-free; a census with a guard); PART K the keyword behind
+  `influence` (every reader counted, its door proposed, then built). GOALS-1: the refusal of a conviction or duty
+  want to a card whose secret takes money or goods to betray its own office or trade (a closed, narrow list in a
+  leaf of its own; draw-free), with the mirror rule and the harsh-tie guard. FRAME-5: C1, C2 and CF12. VEIL-25: the
+  Curate screen's notice.
+- **CF12 (11:15 UTC; the owner's word amends CF11):** a hall in criminal hands WITH a live crime wave is already
+  there, and the OWNER's sheet says so: PEOPLE TO VOICE and the hooks draw from the crime wave's own sides as the
+  record holds them. THE OWNER'S AUDIENCE ONLY (capture is what the share veil hides): every reader's, shared,
+  public or printed-for-players path is today's byte for byte; no new draw; every calm town without both facts
+  keeps its sheet; the count (6 of 330) before and after as plain text for the owner.
 
 ## 3. The queue, in order
 
@@ -3221,3 +3252,7 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   101 mutations (3 survivors are comments). GOALS-1: unit 1 (the rotation) pushed 84a8606b9: confinement 0
   non-string; only goal strings differ (golden 3,615 in 323 towns; census 5,740 in 428); every changed holding was
   a repeat at the base.
+- 11:16 UTC · THE OWNER ORDERED THE WHOLE PAGE ROUND BEFORE THE DEPLOY (section 1): PAGE-1 told to build the display half now;
+  `prompts/PAGE-2.txt` WRITTEN for the content half, seated after this push from the working line; GOALS-1 told to
+  build the refusal after all (the owner overrules the chair's bar of 1 in 200); FRAME-5 given CF12. THE PRICE
+  SAID TO THE OWNER: time, though the share veil and the who-rules train are still the longest jobs.
