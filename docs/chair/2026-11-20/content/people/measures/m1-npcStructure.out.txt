@@ -1,0 +1,486 @@
+# M1 measure · base b53a665e7 · n 100 a size · seeds hxd-<size>-<i> · masked as the chair's instrument masks
+
+## thorp (100 places)
+### activeConstraint · branches (places · entries)
+branch thorp activeConstraint | government__stable__dominant · holder-row+house | 41 | 41
+branch thorp activeConstraint | government__governance_fractured__dominant · holder-row | 15 | 15
+branch thorp activeConstraint | government__economic_stress__dominant · holder-row+house | 11 | 11
+branch thorp activeConstraint | government__governance_fractured__dominant · holder-row+house | 10 | 10
+branch thorp activeConstraint | government__economic_stress__dominant · holder-row | 10 | 10
+branch thorp activeConstraint | government__contested__dominant · holder-row+house | 5 | 5
+branch thorp activeConstraint | government__stable__dominant · holder-row | 4 | 4
+branch thorp activeConstraint | government__contested__dominant · holder-row | 1 | 1
+### structuralPosition · branches (places · entries)
+branch thorp structuralPosition | government__stable__dominant · holder-row+house | 41 | 41
+branch thorp structuralPosition | government__governance_fractured__dominant · holder-row | 15 | 15
+branch thorp structuralPosition | government__economic_stress__dominant · holder-row+house | 11 | 11
+branch thorp structuralPosition | government__governance_fractured__dominant · holder-row+house | 10 | 10
+branch thorp structuralPosition | government__economic_stress__dominant · holder-row | 10 | 10
+branch thorp structuralPosition | government__contested__dominant · holder-row+house | 5 | 5
+branch thorp structuralPosition | government__stable__dominant · holder-row | 4 | 4
+branch thorp structuralPosition | HOLDS_THE_SEAT · HOLDS_THE_SEAT+house | 1 | 1
+branch thorp structuralPosition | government__contested__dominant · holder-row | 1 | 1
+share thorp activeConstraint today | top 45 of 97 places (46%) · distinct 4 | With nothing pressing, it is hard to win support for mending the weak spots before they break.
+  next thorp activeConstraint today | 25 of 97 (26%) | Cannot mend what is broken without bringing to light the quiet deals that keep the place running now.
+  next thorp activeConstraint today | 21 of 97 (22%) | Cannot pay for the repairs and relief people want without coin the place does not have.
+  next thorp activeConstraint today | 6 of 97 (6%) | Every hard move gives the doubters a new reason; every delay lets the doubt grow.
+share thorp activeConstraint A-holder | top 25 of 52 places (48%) · distinct 3 | Cannot mend what is broken without bringing to light the quiet deals that keep the place running now.
+  next thorp activeConstraint A-holder | 21 of 52 (40%) | Cannot pay for the repairs and relief people want without coin the place does not have.
+share thorp activeConstraint A-calm | top 25 of 52 places (48%) · distinct 3 | Cannot mend what is broken without bringing to light the quiet deals that keep the place running now.
+  next thorp activeConstraint A-calm | 21 of 52 (40%) | Cannot pay for the repairs and relief people want without coin the place does not have.
+share thorp activeConstraint B | top 10 of 97 places (10%) · distinct 19 | Cannot please every quarter at once; whatever the seat gives one, another asks for next.
+  next thorp activeConstraint B | 10 of 97 (10%) | Every order that goes unanswered makes the next one easier to ignore.
+  next thorp activeConstraint B | 8 of 97 (8%) | With nothing pressing, it is hard to win support for mending the weak spots before they break.
+  next thorp activeConstraint B | 8 of 97 (8%) | There is coin for the everyday work and little over; any new building or hire means asking the households for more.
+  next thorp activeConstraint B | 8 of 97 (8%) | Cannot pay for the repairs and relief people want without coin the place does not have.
+share thorp activeConstraint B-vocab | top 10 of 97 places (10%) · distinct 18 | Cannot please every quarter at once; whatever the seat gives one, another asks for next.
+  next thorp activeConstraint B-vocab | 10 of 97 (10%) | Every order that goes unanswered makes the next one easier to ignore.
+share thorp structuralPosition today | top 17 of 98 places (17%) · distinct 19 | Holds the seat, and people accept it; there is room to act, not just to hold on. Still the head shepherd as well.
+  next thorp structuralPosition today | 15 of 98 (15%) | Holds the seat in name, but fewer people come when called, and some orders go unanswered.
+  next thorp structuralPosition today | 11 of 98 (11%) | Holds the seat, and people accept it; there is room to act, not just to hold on. Still the boat-master as well.
+  next thorp structuralPosition today | 11 of 98 (11%) | Holds the seat, and people accept it; there is room to act, not just to hold on. Still the boat-headman as well.
+  next thorp structuralPosition today | 10 of 98 (10%) | Holds the seat while money is short, and people judge the seat by what it can no longer pay for.
+share thorp structuralPosition B | top 5 of 98 places (5%) · distinct 49 | Holds the seat in name; in a place this small everyone sees who no longer comes when called.
+  next thorp structuralPosition B | 5 of 98 (5%) | Holds the seat in name, but fewer people come when called, and some orders go unanswered.
+  next thorp structuralPosition B | 4 of 98 (4%) | Holds the seat, and in a place this small everyone knows it; most quarrels end at its door. Still the head shepherd as well.
+  next thorp structuralPosition B | 4 of 98 (4%) | Holds the seat, but many doubt its right to it, and the doubt has not gone away. Still the head shepherd as well.
+  next thorp structuralPosition B | 4 of 98 (4%) | Holds the seat, and people accept it; there is room to act, not just to hold on. Still the head shepherd as well.
+share thorp structuralPosition B-vocab | top 5 of 98 places (5%) · distinct 45 | Holds the seat, and people accept it; there is room to act, not just to hold on. Still the head shepherd as well.
+  next thorp structuralPosition B-vocab | 5 of 98 (5%) | Holds the seat with the council beside it; in quiet times the place lets them get on with it. Still the head shepherd as well.
+
+## hamlet (100 places)
+### activeConstraint · branches (places · entries)
+branch hamlet activeConstraint | government__stable__dominant · holder-row+house | 26 | 26
+branch hamlet activeConstraint | government__governance_fractured__dominant · holder-row+house | 20 | 20
+branch hamlet activeConstraint | government__economic_stress__dominant · holder-row+house | 16 | 16
+branch hamlet activeConstraint | government__governance_fractured__dominant · holder-row | 14 | 14
+branch hamlet activeConstraint | government__economic_stress__dominant · holder-row | 10 | 10
+branch hamlet activeConstraint | military__governance_fractured__subordinate · row | 9 | 9
+branch hamlet activeConstraint | military__economic_stress__subordinate · row | 6 | 6
+branch hamlet activeConstraint | government__stable__dominant · holder-row | 6 | 6
+branch hamlet activeConstraint | military__economic_stress__dominant · row | 3 | 3
+branch hamlet activeConstraint | government__contested__dominant · holder-row+house | 2 | 2
+branch hamlet activeConstraint | military__stable__dominant · row | 2 | 2
+branch hamlet activeConstraint | economy__contested__dominant · row | 1 | 1
+branch hamlet activeConstraint | military__contested__dominant · row | 1 | 1
+branch hamlet activeConstraint | economy__stable__subordinate · row | 1 | 1
+branch hamlet activeConstraint | military__contested__subordinate · row | 1 | 1
+branch hamlet activeConstraint | military__governance_fractured__dominant · row | 1 | 1
+branch hamlet activeConstraint | economy__economic_stress__dominant · row | 1 | 1
+branch hamlet activeConstraint | economy__economic_stress__subordinate · row | 1 | 1
+### structuralPosition · branches (places · entries)
+branch hamlet structuralPosition | government__stable__dominant · holder-row+house | 26 | 26
+branch hamlet structuralPosition | government__governance_fractured__dominant · holder-row+house | 20 | 20
+branch hamlet structuralPosition | government__economic_stress__dominant · holder-row+house | 16 | 16
+branch hamlet structuralPosition | government__governance_fractured__dominant · holder-row | 14 | 14
+branch hamlet structuralPosition | government__economic_stress__dominant · holder-row | 10 | 10
+branch hamlet structuralPosition | military__governance_fractured__subordinate · row | 9 | 9
+branch hamlet structuralPosition | military__economic_stress__subordinate · row | 6 | 6
+branch hamlet structuralPosition | government__stable__dominant · holder-row | 6 | 6
+branch hamlet structuralPosition | military__economic_stress__dominant · row | 3 | 3
+branch hamlet structuralPosition | government__contested__dominant · holder-row+house | 2 | 2
+branch hamlet structuralPosition | military__stable__dominant · row | 2 | 2
+branch hamlet structuralPosition | economy__contested__dominant · row | 1 | 1
+branch hamlet structuralPosition | HOLDS_THE_SEAT · HOLDS_THE_SEAT+house | 1 | 1
+branch hamlet structuralPosition | military__contested__dominant · row | 1 | 1
+branch hamlet structuralPosition | economy__stable__subordinate · row | 1 | 1
+branch hamlet structuralPosition | military__contested__subordinate · row | 1 | 1
+branch hamlet structuralPosition | military__governance_fractured__dominant · row | 1 | 1
+branch hamlet structuralPosition | economy__economic_stress__dominant · row | 1 | 1
+branch hamlet structuralPosition | economy__economic_stress__subordinate · row | 1 | 1
+share hamlet activeConstraint today | top 34 of 96 places (35%) · distinct 15 | Cannot mend what is broken without bringing to light the quiet deals that keep the place running now.
+  next hamlet activeConstraint today | 32 of 96 (33%) | With nothing pressing, it is hard to win support for mending the weak spots before they break.
+  next hamlet activeConstraint today | 26 of 96 (27%) | Cannot pay for the repairs and relief people want without coin the place does not have.
+  next hamlet activeConstraint today | 9 of 96 (9%) | Keeping the squad in hand takes quiet favours that no one can be told about.
+  next hamlet activeConstraint today | 6 of 96 (6%) | If anyone sees how thin the squad has worn, they will test it.
+share hamlet activeConstraint A-holder | top 34 of 67 places (51%) · distinct 14 | Cannot mend what is broken without bringing to light the quiet deals that keep the place running now.
+  next hamlet activeConstraint A-holder | 26 of 67 (39%) | Cannot pay for the repairs and relief people want without coin the place does not have.
+share hamlet activeConstraint A-calm | top 34 of 64 places (53%) · distinct 12 | Cannot mend what is broken without bringing to light the quiet deals that keep the place running now.
+  next hamlet activeConstraint A-calm | 26 of 64 (41%) | Cannot pay for the repairs and relief people want without coin the place does not have.
+share hamlet activeConstraint B | top 12 of 96 places (13%) · distinct 34 | In a place this small, every attempt to take charge again is watched and talked over by everyone.
+  next hamlet activeConstraint B | 9 of 96 (9%) | Keeping the squad in hand takes quiet favours that no one can be told about.
+  next hamlet activeConstraint B | 7 of 96 (7%) | Cannot get the council to agree on any remedy, and cannot act without it.
+  next hamlet activeConstraint B | 7 of 96 (7%) | Cannot please every quarter at once; whatever the seat gives one, another asks for next.
+  next hamlet activeConstraint B | 7 of 96 (7%) | There is coin for the everyday work and little over; any new building or hire means asking the households for more.
+share hamlet activeConstraint B-vocab | top 12 of 96 places (13%) · distinct 30 | In a place this small, every attempt to take charge again is watched and talked over by everyone.
+  next hamlet activeConstraint B-vocab | 9 of 96 (9%) | Keeping the squad in hand takes quiet favours that no one can be told about.
+share hamlet structuralPosition today | top 14 of 97 places (14%) · distinct 43 | Holds the seat in name, but fewer people come when called, and some orders go unanswered.
+  next hamlet structuralPosition today | 10 of 97 (10%) | Holds the seat while money is short, and people judge the seat by what it can no longer pay for.
+  next hamlet structuralPosition today | 9 of 97 (9%) | Leads a squad that now takes orders from more than one master.
+  next hamlet structuralPosition today | 8 of 97 (8%) | Holds the seat in name, but fewer people come when called, and some orders go unanswered. Still the boat-headman as well.
+  next hamlet structuralPosition today | 6 of 97 (6%) | Leads a squad that is short of pay, gear and hands.
+share hamlet structuralPosition B | top 9 of 97 places (9%) · distinct 82 | Leads a squad that now takes orders from more than one master.
+  next hamlet structuralPosition B | 7 of 97 (7%) | Holds the seat in name, but fewer people come when called, and some orders go unanswered.
+  next hamlet structuralPosition B | 6 of 97 (6%) | Leads a squad that is short of pay, gear and hands.
+  next hamlet structuralPosition B | 4 of 97 (4%) | Holds the seat while money is short, and people judge the seat by what it can no longer pay for.
+  next hamlet structuralPosition B | 3 of 97 (3%) | Holds the seat in name, but fewer people come when called, and some orders go unanswered. Still the boat-headman as well.
+share hamlet structuralPosition B-vocab | top 9 of 97 places (9%) · distinct 75 | Leads a squad that now takes orders from more than one master.
+  next hamlet structuralPosition B-vocab | 7 of 97 (7%) | Holds the seat in name, but fewer people come when called, and some orders go unanswered.
+
+## village (100 places)
+### activeConstraint · branches (places · entries)
+branch village activeConstraint | religious__economic_stress__dominant · row | 37 | 37
+branch village activeConstraint | government__economic_stress__dominant · holder-row+house | 36 | 36
+branch village activeConstraint | government__governance_fractured__dominant · holder-row+house | 25 | 25
+branch village activeConstraint | religious__governance_fractured__dominant · row | 23 | 23
+branch village activeConstraint | government__stable__dominant · holder-row+house | 22 | 22
+branch village activeConstraint | religious__stable__dominant · row | 17 | 17
+branch village activeConstraint | religious__contested__dominant · row | 9 | 9
+branch village activeConstraint | government__contested__dominant · holder-row+house | 8 | 8
+branch village activeConstraint | military__governance_fractured__dominant · row | 4 | 4
+branch village activeConstraint | economy__stable__subordinate · row | 4 | 4
+branch village activeConstraint | government__economic_stress__dominant · holder-row | 3 | 3
+branch village activeConstraint | government__governance_fractured__dominant · holder-row | 3 | 3
+branch village activeConstraint | military__economic_stress__subordinate · row | 2 | 2
+branch village activeConstraint | economy__economic_stress__subordinate · row | 2 | 2
+branch village activeConstraint | economy__governance_fractured__subordinate · row | 2 | 2
+branch village activeConstraint | military__stable__subordinate · row | 2 | 2
+branch village activeConstraint | government__governance_fractured__subordinate · row | 1 | 1
+branch village activeConstraint | economy__economic_stress__dominant · row | 1 | 1
+branch village activeConstraint | economy__governance_fractured__dominant · row | 1 | 1
+branch village activeConstraint | military__stable__dominant · row | 1 | 1
+branch village activeConstraint | religious__governance_fractured__subordinate · row | 1 | 1
+branch village activeConstraint | economy__contested__dominant · row | 1 | 1
+### structuralPosition · branches (places · entries)
+branch village structuralPosition | religious__economic_stress__dominant · row | 37 | 37
+branch village structuralPosition | government__economic_stress__dominant · holder-row+house | 36 | 36
+branch village structuralPosition | government__governance_fractured__dominant · holder-row+house | 25 | 25
+branch village structuralPosition | religious__governance_fractured__dominant · row | 23 | 23
+branch village structuralPosition | government__stable__dominant · holder-row+house | 22 | 22
+branch village structuralPosition | religious__stable__dominant · row | 17 | 17
+branch village structuralPosition | religious__contested__dominant · row | 9 | 9
+branch village structuralPosition | government__contested__dominant · holder-row+house | 8 | 8
+branch village structuralPosition | military__governance_fractured__dominant · row | 4 | 4
+branch village structuralPosition | economy__stable__subordinate · row | 4 | 4
+branch village structuralPosition | government__economic_stress__dominant · holder-row | 3 | 3
+branch village structuralPosition | government__governance_fractured__dominant · holder-row | 3 | 3
+branch village structuralPosition | military__economic_stress__subordinate · row | 2 | 2
+branch village structuralPosition | economy__economic_stress__subordinate · row | 2 | 2
+branch village structuralPosition | economy__governance_fractured__subordinate · row | 2 | 2
+branch village structuralPosition | military__stable__subordinate · row | 2 | 2
+branch village structuralPosition | government__governance_fractured__subordinate · row | 1 | 1
+branch village structuralPosition | economy__economic_stress__dominant · row | 1 | 1
+branch village structuralPosition | economy__governance_fractured__dominant · row | 1 | 1
+branch village structuralPosition | military__stable__dominant · row | 1 | 1
+branch village structuralPosition | religious__governance_fractured__subordinate · row | 1 | 1
+branch village structuralPosition | economy__contested__dominant · row | 1 | 1
+share village activeConstraint today | top 39 of 100 places (39%) · distinct 20 | Cannot pay for the repairs and relief people want without coin the place does not have.
+  next village activeConstraint today | 37 of 100 (37%) | Anything it does to guard its own wealth while people go short is seen by all.
+  next village activeConstraint today | 28 of 100 (28%) | Cannot mend what is broken without bringing to light the quiet deals that keep the place running now.
+  next village activeConstraint today | 23 of 100 (23%) | Whatever the faith takes on now, whoever next holds the seat firmly may resent and take back.
+  next village activeConstraint today | 22 of 100 (22%) | With nothing pressing, it is hard to win support for mending the weak spots before they break.
+share village activeConstraint A-holder | top 39 of 98 places (40%) · distinct 19 | Cannot pay for the repairs and relief people want without coin the place does not have.
+  next village activeConstraint A-holder | 37 of 98 (38%) | Anything it does to guard its own wealth while people go short is seen by all.
+share village activeConstraint A-calm | top 39 of 78 places (50%) · distinct 15 | Cannot pay for the repairs and relief people want without coin the place does not have.
+  next village activeConstraint A-calm | 37 of 78 (47%) | Anything it does to guard its own wealth while people go short is seen by all.
+share village activeConstraint B | top 11 of 100 places (11%) · distinct 58 | Cannot pay for the repairs and relief people want without coin the place does not have.
+  next village activeConstraint B | 10 of 100 (10%) | Can promise little and pay for less, and every refusal is remembered.
+  next village activeConstraint B | 9 of 100 (9%) | The church's roof and the poor box both want coin, and there is not enough for both.
+  next village activeConstraint B | 9 of 100 (9%) | In a place this small, everyone knows who the alms went to and who went without.
+  next village activeConstraint B | 9 of 100 (9%) | Has no hands to enforce anything it settles; its word holds only while people choose to keep it.
+share village activeConstraint B-vocab | top 14 of 100 places (14%) · distinct 49 | Anything it does to guard its own wealth while people go short is seen by all.
+  next village activeConstraint B-vocab | 13 of 100 (13%) | Cannot pay for the repairs and relief people want without coin the place does not have.
+share village structuralPosition today | top 37 of 100 places (37%) · distinct 56 | Leads the faith while money is short; its lands and alms are both a help and a target.
+  next village structuralPosition today | 23 of 100 (23%) | Leads the faith while the seat fails, and people bring it the quarrels the seat no longer settles.
+  next village structuralPosition today | 17 of 100 (17%) | Leads the faith in quiet times, whatever it thinks of the seat beside it.
+  next village structuralPosition today | 9 of 100 (9%) | Leads the faith while many doubt the seat's right, and the seat wants its blessing.
+  next village structuralPosition today | 8 of 100 (8%) | Holds the seat in name, but fewer people come when called, and some orders go unanswered. Still the boat-master as well.
+share village structuralPosition B | top 13 of 100 places (13%) · distinct 109 | Leads the faith through lean years, when people lean on it more and give it less.
+  next village structuralPosition B | 9 of 100 (9%) | Leads the faith from the house of worship while money is short, and more people come to its door for alms.
+  next village structuralPosition B | 9 of 100 (9%) | Leads the faith while the seat fails; more disputes now end at the house of worship than at the seat's door.
+  next village structuralPosition B | 8 of 100 (8%) | Leads the faith in a small place gone short of coin, where the priest knows which households are going without.
+  next village structuralPosition B | 7 of 100 (7%) | Leads the faith while money is short; its lands and alms are both a help and a target.
+share village structuralPosition B-vocab | top 17 of 100 places (17%) · distinct 102 | Leads the faith while money is short; its lands and alms are both a help and a target.
+  next village structuralPosition B-vocab | 12 of 100 (12%) | Leads the faith while the seat fails, and people bring it the quarrels the seat no longer settles.
+
+## town (100 places)
+### activeConstraint · branches (places · entries)
+branch town activeConstraint | religious__stable__dominant · row | 61 | 61
+branch town activeConstraint | government__stable__dominant · holder-row+house | 59 | 59
+branch town activeConstraint | military__stable__dominant · row | 46 | 46
+branch town activeConstraint | government__stable__subordinate · row | 41 | 44
+branch town activeConstraint | economy__stable__subordinate · row | 34 | 36
+branch town activeConstraint | religious__contested__dominant · row | 16 | 16
+branch town activeConstraint | government__contested__dominant · holder-row+house | 14 | 14
+branch town activeConstraint | military__stable__subordinate · row | 13 | 14
+branch town activeConstraint | economy__stable__dominant · row(low-standing twin) | 13 | 13
+branch town activeConstraint | military__contested__dominant · row | 8 | 8
+branch town activeConstraint | military__contested__subordinate · row | 8 | 8
+branch town activeConstraint | government__governance_fractured__dominant · holder-row+house | 7 | 7
+branch town activeConstraint | government__stable__dominant · holder-row | 7 | 7
+branch town activeConstraint | economy__contested__subordinate · row | 6 | 7
+branch town activeConstraint | military__governance_fractured__dominant · row | 5 | 5
+branch town activeConstraint | military__governance_fractured__subordinate · row | 5 | 6
+branch town activeConstraint | religious__governance_fractured__dominant · row | 4 | 4
+branch town activeConstraint | other__stable__subordinate · row | 3 | 4
+branch town activeConstraint | religious__stable__subordinate · row | 3 | 3
+branch town activeConstraint | economy__contested__dominant · row | 2 | 3
+branch town activeConstraint | military__economic_stress__dominant · row | 2 | 2
+branch town activeConstraint | government__economic_stress__dominant · holder-row | 2 | 2
+branch town activeConstraint | other__economic_stress__subordinate · row | 2 | 2
+branch town activeConstraint | criminal__contested__dominant · row | 2 | 2
+branch town activeConstraint | government__contested__subordinate · row | 2 | 2
+branch town activeConstraint | religious__contested__subordinate · row | 2 | 2
+branch town activeConstraint | government__economic_stress__dominant · holder-row+house | 1 | 1
+branch town activeConstraint | religious__economic_stress__dominant · row | 1 | 1
+branch town activeConstraint | economy__economic_stress__dominant · row | 1 | 1
+branch town activeConstraint | economy__economic_stress__subordinate · row | 1 | 1
+branch town activeConstraint | criminal__governance_fractured__dominant · row | 1 | 1
+branch town activeConstraint | economy__governance_fractured__dominant · row | 1 | 1
+branch town activeConstraint | economy__governance_fractured__subordinate · row | 1 | 1
+branch town activeConstraint | government__corruption__dominant · holder-row+house | 1 | 1
+branch town activeConstraint | military__corruption__dominant · row | 1 | 1
+branch town activeConstraint | economy__corruption__subordinate · row | 1 | 1
+branch town activeConstraint | religious__corruption__dominant · row | 1 | 1
+branch town activeConstraint | military__corruption__subordinate · row | 1 | 1
+branch town activeConstraint | military__economic_stress__subordinate · row | 1 | 2
+branch town activeConstraint | government__contested__dominant · holder-row | 1 | 1
+branch town activeConstraint | other__stable__dominant · row | 1 | 1
+### structuralPosition · branches (places · entries)
+branch town structuralPosition | religious__stable__dominant · row | 61 | 61
+branch town structuralPosition | government__stable__dominant · holder-row+house | 59 | 59
+branch town structuralPosition | military__stable__dominant · row | 46 | 46
+branch town structuralPosition | government__stable__subordinate · row | 41 | 44
+branch town structuralPosition | economy__stable__subordinate · row | 34 | 36
+branch town structuralPosition | religious__contested__dominant · row | 16 | 16
+branch town structuralPosition | government__contested__dominant · holder-row+house | 14 | 14
+branch town structuralPosition | military__stable__subordinate · row | 13 | 14
+branch town structuralPosition | economy__stable__dominant · row(low-standing twin) | 13 | 13
+branch town structuralPosition | military__contested__dominant · row | 8 | 8
+branch town structuralPosition | military__contested__subordinate · row | 8 | 8
+branch town structuralPosition | government__governance_fractured__dominant · holder-row+house | 7 | 7
+branch town structuralPosition | government__stable__dominant · holder-row | 7 | 7
+branch town structuralPosition | economy__contested__subordinate · row | 6 | 7
+branch town structuralPosition | military__governance_fractured__dominant · row | 5 | 5
+branch town structuralPosition | military__governance_fractured__subordinate · row | 5 | 6
+branch town structuralPosition | HOLDS_THE_SEAT · HOLDS_THE_SEAT+house | 5 | 5
+branch town structuralPosition | religious__governance_fractured__dominant · row | 4 | 4
+branch town structuralPosition | other__stable__subordinate · row | 3 | 4
+branch town structuralPosition | religious__stable__subordinate · row | 3 | 3
+branch town structuralPosition | economy__contested__dominant · row | 2 | 3
+branch town structuralPosition | military__economic_stress__dominant · row | 2 | 2
+branch town structuralPosition | government__economic_stress__dominant · holder-row | 2 | 2
+branch town structuralPosition | other__economic_stress__subordinate · row | 2 | 2
+branch town structuralPosition | criminal__contested__dominant · row | 2 | 2
+branch town structuralPosition | government__contested__subordinate · row | 2 | 2
+branch town structuralPosition | religious__contested__subordinate · row | 2 | 2
+branch town structuralPosition | government__economic_stress__dominant · holder-row+house | 1 | 1
+branch town structuralPosition | religious__economic_stress__dominant · row | 1 | 1
+branch town structuralPosition | economy__economic_stress__dominant · row | 1 | 1
+branch town structuralPosition | economy__economic_stress__subordinate · row | 1 | 1
+branch town structuralPosition | criminal__governance_fractured__dominant · row | 1 | 1
+branch town structuralPosition | economy__governance_fractured__dominant · row | 1 | 1
+branch town structuralPosition | economy__governance_fractured__subordinate · row | 1 | 1
+branch town structuralPosition | government__corruption__dominant · holder-row+house | 1 | 1
+branch town structuralPosition | military__corruption__dominant · row | 1 | 1
+branch town structuralPosition | economy__corruption__subordinate · row | 1 | 1
+branch town structuralPosition | religious__corruption__dominant · row | 1 | 1
+branch town structuralPosition | military__corruption__subordinate · row | 1 | 1
+branch town structuralPosition | HOLDS_THE_SEAT · HOLDS_THE_SEAT | 1 | 1
+branch town structuralPosition | military__economic_stress__subordinate · row | 1 | 2
+branch town structuralPosition | government__contested__dominant · holder-row | 1 | 1
+branch town structuralPosition | other__stable__dominant · row | 1 | 1
+share town activeConstraint today | top 66 of 94 places (70%) · distinct 37 | With nothing pressing, it is hard to win support for mending the weak spots before they break.
+  next town activeConstraint today | 61 of 94 (65%) | With nothing pressing, it is easy to grow comfortable and hard to argue for growing.
+  next town activeConstraint today | 46 of 94 (49%) | It is hard to win the coin and the say that would be needed if worse trouble came.
+  next town activeConstraint today | 41 of 94 (44%) | Good work is expected and goes unnoticed; a mistake is remembered.
+  next town activeConstraint today | 34 of 94 (36%) | Growing into the leading house's trade invites a reply; staying out of it means staying small.
+share town activeConstraint A-holder | top 61 of 94 places (65%) · distinct 36 | With nothing pressing, it is easy to grow comfortable and hard to argue for growing.
+  next town activeConstraint A-holder | 46 of 94 (49%) | It is hard to win the coin and the say that would be needed if worse trouble came.
+share town activeConstraint A-calm | top 16 of 28 places (57%) · distinct 28 | The longer it waits to bless the seat, the less the blessing will be worth.
+  next town activeConstraint A-calm | 15 of 28 (54%) | Every hard move gives the doubters a new reason; every delay lets the doubt grow.
+share town activeConstraint B | top 14 of 94 places (15%) · distinct 103 | Good work is expected and goes unnoticed; a mistake is remembered.
+  next town activeConstraint B | 13 of 94 (14%) | Steady work earns no notice; getting ahead takes a crisis or a patron.
+  next town activeConstraint B | 13 of 94 (14%) | It is hard to win the coin and the say that would be needed if worse trouble came.
+  next town activeConstraint B | 11 of 94 (12%) | Can do only what the seat has given the post to do; anything more must be asked for.
+  next town activeConstraint B | 10 of 94 (11%) | Must see to the faith's own people as well as its flock, and both expect the same patience.
+share town activeConstraint B-vocab | top 15 of 94 places (16%) · distinct 83 | With nothing pressing, it is easy to grow comfortable and hard to argue for growing.
+  next town activeConstraint B-vocab | 13 of 94 (14%) | Drill keeps hands ready but not keen; quiet years wear on discipline.
+share town structuralPosition today | top 61 of 100 places (61%) · distinct 61 | Leads the faith in quiet times, whatever it thinks of the seat beside it.
+  next town structuralPosition today | 46 of 100 (46%) | Commands those under arms in quiet times; the work is keeping trouble from starting.
+  next town structuralPosition today | 41 of 100 (41%) | Holds an office that runs from day to day, with no crisis to answer.
+  next town structuralPosition today | 34 of 100 (34%) | Runs a smaller house behind the leading one in quiet times.
+  next town structuralPosition today | 28 of 100 (28%) | Holds the seat, and people accept it; there is room to act, not just to hold on. Still the senior guild master as well.
+share town structuralPosition B | top 14 of 100 places (14%) · distinct 135 | Leads the faith in quiet times, whatever it thinks of the seat beside it.
+  next town structuralPosition B | 14 of 100 (14%) | Leads the faith from the houses of worship; in quiet times the work is the services, the feast days and the burials.
+  next town structuralPosition B | 13 of 100 (13%) | Leads a squad in quiet times, where the work is routine and the risks are low.
+  next town structuralPosition B | 11 of 100 (11%) | Holds an office that runs from day to day, with no crisis to answer.
+  next town structuralPosition B | 11 of 100 (11%) | Leads the faith while the place is at peace; the work is the round of services and the needs of the poor.
+share town structuralPosition B-vocab | top 15 of 100 places (15%) · distinct 111 | Leads the faith in a settled season, with no crisis to call the faithful together.
+  next town structuralPosition B-vocab | 13 of 100 (13%) | Leads a squad in quiet times, where the work is routine and the risks are low.
+
+## city (100 places)
+### activeConstraint · branches (places · entries)
+branch city activeConstraint | military__stable__dominant · row | 69 | 69
+branch city activeConstraint | religious__stable__dominant · row | 59 | 59
+branch city activeConstraint | government__stable__dominant · holder-row+house | 57 | 57
+branch city activeConstraint | economy__stable__subordinate · row | 47 | 52
+branch city activeConstraint | other__stable__dominant · row | 25 | 25
+branch city activeConstraint | economy__stable__dominant · row(low-standing twin) | 16 | 16
+branch city activeConstraint | government__stable__dominant · holder-row | 15 | 15
+branch city activeConstraint | magic__stable__dominant · row | 11 | 11
+branch city activeConstraint | military__stable__subordinate · row | 10 | 10
+branch city activeConstraint | government__stable__subordinate · row | 5 | 5
+branch city activeConstraint | magic__stable__dominant · row(low-standing twin) | 4 | 4
+branch city activeConstraint | military__corruption__dominant · row | 3 | 3
+branch city activeConstraint | government__corruption__dominant · holder-row+house | 3 | 3
+branch city activeConstraint | other__stable__subordinate · row | 2 | 2
+branch city activeConstraint | religious__corruption__dominant · row | 2 | 2
+branch city activeConstraint | economy__corruption__subordinate · row | 2 | 2
+branch city activeConstraint | economy__economic_stress__dominant · row | 1 | 1
+branch city activeConstraint | government__economic_stress__dominant · holder-row | 1 | 1
+branch city activeConstraint | magic__economic_stress__dominant · row | 1 | 1
+branch city activeConstraint | religious__economic_stress__dominant · row | 1 | 1
+branch city activeConstraint | economy__corruption__dominant · row | 1 | 1
+branch city activeConstraint | government__governance_fractured__dominant · holder-row+house | 1 | 1
+branch city activeConstraint | military__governance_fractured__dominant · row | 1 | 1
+branch city activeConstraint | religious__governance_fractured__dominant · row | 1 | 1
+branch city activeConstraint | magic__governance_fractured__dominant · row | 1 | 1
+### structuralPosition · branches (places · entries)
+branch city structuralPosition | military__stable__dominant · row | 69 | 69
+branch city structuralPosition | religious__stable__dominant · row | 59 | 59
+branch city structuralPosition | government__stable__dominant · holder-row+house | 57 | 57
+branch city structuralPosition | economy__stable__subordinate · row | 47 | 52
+branch city structuralPosition | other__stable__dominant · row | 25 | 25
+branch city structuralPosition | HOLDS_THE_SEAT · HOLDS_THE_SEAT+house | 18 | 18
+branch city structuralPosition | economy__stable__dominant · row(low-standing twin) | 16 | 16
+branch city structuralPosition | government__stable__dominant · holder-row | 15 | 15
+branch city structuralPosition | magic__stable__dominant · row | 11 | 11
+branch city structuralPosition | military__stable__subordinate · row | 10 | 10
+branch city structuralPosition | government__stable__subordinate · row | 5 | 5
+branch city structuralPosition | magic__stable__dominant · row(low-standing twin) | 4 | 4
+branch city structuralPosition | HOLDS_THE_SEAT · HOLDS_THE_SEAT | 4 | 4
+branch city structuralPosition | military__corruption__dominant · row | 3 | 3
+branch city structuralPosition | government__corruption__dominant · holder-row+house | 3 | 3
+branch city structuralPosition | other__stable__subordinate · row | 2 | 2
+branch city structuralPosition | religious__corruption__dominant · row | 2 | 2
+branch city structuralPosition | economy__corruption__subordinate · row | 2 | 2
+branch city structuralPosition | economy__economic_stress__dominant · row | 1 | 1
+branch city structuralPosition | government__economic_stress__dominant · holder-row | 1 | 1
+branch city structuralPosition | magic__economic_stress__dominant · row | 1 | 1
+branch city structuralPosition | religious__economic_stress__dominant · row | 1 | 1
+branch city structuralPosition | economy__corruption__dominant · row | 1 | 1
+branch city structuralPosition | government__governance_fractured__dominant · holder-row+house | 1 | 1
+branch city structuralPosition | military__governance_fractured__dominant · row | 1 | 1
+branch city structuralPosition | religious__governance_fractured__dominant · row | 1 | 1
+branch city structuralPosition | magic__governance_fractured__dominant · row | 1 | 1
+share city activeConstraint today | top 72 of 77 places (94%) · distinct 23 | With nothing pressing, it is hard to win support for mending the weak spots before they break.
+  next city activeConstraint today | 69 of 77 (90%) | It is hard to win the coin and the say that would be needed if worse trouble came.
+  next city activeConstraint today | 59 of 77 (77%) | With nothing pressing, it is easy to grow comfortable and hard to argue for growing.
+  next city activeConstraint today | 47 of 77 (61%) | Growing into the leading house's trade invites a reply; staying out of it means staying small.
+  next city activeConstraint today | 25 of 77 (32%) | The family's say slowly shrinks beside the offices that run things.
+share city activeConstraint A-holder | top 69 of 77 places (90%) · distinct 22 | It is hard to win the coin and the say that would be needed if worse trouble came.
+  next city activeConstraint A-holder | 59 of 77 (77%) | With nothing pressing, it is easy to grow comfortable and hard to argue for growing.
+share city activeConstraint A-calm | top 3 of 5 places (60%) · distinct 13 | Anyone sent to look into the payments is offered the same coin.
+  next city activeConstraint A-calm | 3 of 5 (60%) | Cannot move against the criminals without cutting off the payments the seat now runs on.
+share city activeConstraint B | top 11 of 77 places (14%) · distinct 77 | The place can afford its guard, but while nothing threatens, every extra hand must be argued for.
+  next city activeConstraint B | 11 of 77 (14%) | Cannot please every quarter at once; whatever the seat gives one, another asks for next.
+  next city activeConstraint B | 11 of 77 (14%) | Must keep to the guild's rules on prices and hands, rules the bigger houses had more say in writing.
+  next city activeConstraint B | 10 of 77 (13%) | In a place this large the seat sees little for itself; it must act on what its people bring it.
+  next city activeConstraint B | 10 of 77 (13%) | Steady work earns no notice; getting ahead takes a crisis or a patron.
+share city activeConstraint B-vocab | top 15 of 77 places (19%) · distinct 63 | The walls want upkeep every year; the coin for it has to be asked for, and in quiet years it comes slowly.
+  next city activeConstraint B-vocab | 11 of 77 (14%) | In good years there is custom enough for all, but the best of it goes to the leading house first.
+share city structuralPosition today | top 69 of 99 places (70%) · distinct 35 | Commands those under arms in quiet times; the work is keeping trouble from starting.
+  next city structuralPosition today | 59 of 99 (60%) | Leads the faith in quiet times, whatever it thinks of the seat beside it.
+  next city structuralPosition today | 47 of 99 (47%) | Runs a smaller house behind the leading one in quiet times.
+  next city structuralPosition today | 46 of 99 (46%) | Holds the seat, and people accept it; there is room to act, not just to hold on. Still the senior guild master as well.
+  next city structuralPosition today | 25 of 99 (25%) | Heads an old family while the seat's offices take up more of what the family once did.
+share city structuralPosition B | top 15 of 99 places (15%) · distinct 101 | Holds the seat. Still the senior guild master as well.
+  next city structuralPosition B | 11 of 99 (11%) | Leads the faith in a settled season, with no crisis to call the faithful together.
+  next city structuralPosition B | 11 of 99 (11%) | Commands those under arms in quiet times; the hard part is keeping idle hands sharp.
+  next city structuralPosition B | 11 of 99 (11%) | Heads an old family whose name is older than the seat itself.
+  next city structuralPosition B | 11 of 99 (11%) | Leads the faith in quiet times, whatever it thinks of the seat beside it.
+share city structuralPosition B-vocab | top 15 of 99 places (15%) · distinct 73 | Holds the seat. Still the senior guild master as well.
+  next city structuralPosition B-vocab | 15 of 99 (15%) | Leads the faith in a settled season, with no crisis to call the faithful together.
+
+## metropolis (100 places)
+### activeConstraint · branches (places · entries)
+branch metropolis activeConstraint | military__stable__dominant · row | 65 | 65
+branch metropolis activeConstraint | religious__stable__dominant · row | 63 | 63
+branch metropolis activeConstraint | government__stable__dominant · holder-row+house | 51 | 51
+branch metropolis activeConstraint | economy__stable__subordinate · row | 39 | 45
+branch metropolis activeConstraint | magic__stable__dominant · row | 36 | 36
+branch metropolis activeConstraint | economy__stable__dominant · row(low-standing twin) | 22 | 22
+branch metropolis activeConstraint | other__stable__dominant · row | 21 | 21
+branch metropolis activeConstraint | government__stable__dominant · holder-row | 14 | 14
+branch metropolis activeConstraint | religious__corruption__dominant · row | 5 | 5
+branch metropolis activeConstraint | economy__corruption__dominant · row | 4 | 4
+branch metropolis activeConstraint | magic__corruption__dominant · row | 4 | 4
+branch metropolis activeConstraint | military__corruption__dominant · row | 4 | 4
+branch metropolis activeConstraint | economy__corruption__subordinate · row | 4 | 5
+branch metropolis activeConstraint | military__governance_fractured__dominant · row | 4 | 4
+branch metropolis activeConstraint | religious__governance_fractured__dominant · row | 4 | 4
+branch metropolis activeConstraint | government__governance_fractured__dominant · holder-row+house | 4 | 4
+branch metropolis activeConstraint | government__corruption__dominant · holder-row+house | 3 | 3
+branch metropolis activeConstraint | magic__governance_fractured__dominant · row | 2 | 2
+branch metropolis activeConstraint | military__corruption__subordinate · row | 1 | 1
+branch metropolis activeConstraint | government__corruption__dominant · holder-row | 1 | 1
+branch metropolis activeConstraint | economy__governance_fractured__dominant · row | 1 | 1
+### structuralPosition · branches (places · entries)
+branch metropolis structuralPosition | military__stable__dominant · row | 65 | 65
+branch metropolis structuralPosition | religious__stable__dominant · row | 63 | 63
+branch metropolis structuralPosition | government__stable__dominant · holder-row+house | 51 | 51
+branch metropolis structuralPosition | economy__stable__subordinate · row | 39 | 45
+branch metropolis structuralPosition | magic__stable__dominant · row | 36 | 36
+branch metropolis structuralPosition | economy__stable__dominant · row(low-standing twin) | 22 | 22
+branch metropolis structuralPosition | other__stable__dominant · row | 21 | 21
+branch metropolis structuralPosition | HOLDS_THE_SEAT · HOLDS_THE_SEAT+house | 17 | 17
+branch metropolis structuralPosition | government__stable__dominant · holder-row | 14 | 14
+branch metropolis structuralPosition | religious__corruption__dominant · row | 5 | 5
+branch metropolis structuralPosition | economy__corruption__dominant · row | 4 | 4
+branch metropolis structuralPosition | magic__corruption__dominant · row | 4 | 4
+branch metropolis structuralPosition | military__corruption__dominant · row | 4 | 4
+branch metropolis structuralPosition | economy__corruption__subordinate · row | 4 | 5
+branch metropolis structuralPosition | military__governance_fractured__dominant · row | 4 | 4
+branch metropolis structuralPosition | religious__governance_fractured__dominant · row | 4 | 4
+branch metropolis structuralPosition | government__governance_fractured__dominant · holder-row+house | 4 | 4
+branch metropolis structuralPosition | HOLDS_THE_SEAT · HOLDS_THE_SEAT | 3 | 3
+branch metropolis structuralPosition | government__corruption__dominant · holder-row+house | 3 | 3
+branch metropolis structuralPosition | magic__governance_fractured__dominant · row | 2 | 2
+branch metropolis structuralPosition | military__corruption__subordinate · row | 1 | 1
+branch metropolis structuralPosition | government__corruption__dominant · holder-row | 1 | 1
+branch metropolis structuralPosition | economy__governance_fractured__dominant · row | 1 | 1
+share metropolis activeConstraint today | top 65 of 75 places (87%) · distinct 20 | With nothing pressing, it is hard to win support for mending the weak spots before they break.
+  next metropolis activeConstraint today | 65 of 75 (87%) | It is hard to win the coin and the say that would be needed if worse trouble came.
+  next metropolis activeConstraint today | 63 of 75 (84%) | With nothing pressing, it is easy to grow comfortable and hard to argue for growing.
+  next metropolis activeConstraint today | 38 of 75 (51%) | Growing into the leading house's trade invites a reply; staying out of it means staying small.
+  next metropolis activeConstraint today | 36 of 75 (48%) | In quiet times the seat slowly hems the casters in with rules; recognition comes with limits.
+share metropolis activeConstraint A-holder | top 65 of 75 places (87%) · distinct 19 | It is hard to win the coin and the say that would be needed if worse trouble came.
+  next metropolis activeConstraint A-holder | 63 of 75 (84%) | With nothing pressing, it is easy to grow comfortable and hard to argue for growing.
+share metropolis activeConstraint A-calm | top 5 of 10 places (50%) · distinct 12 | The faith still needs those same officials for its lands and its rights, so it cannot cut them off.
+  next metropolis activeConstraint A-calm | 4 of 10 (40%) | Some of the trade's own dealings lean on the same bought officials it must keep clear of.
+share metropolis activeConstraint B | top 10 of 75 places (13%) · distinct 78 | The walls want upkeep every year; the coin for it has to be asked for, and in quiet years it comes slowly.
+  next metropolis activeConstraint B | 10 of 75 (13%) | Many houses of worship answer to it in name, but each priest keeps their own flock and their own ways.
+  next metropolis activeConstraint B | 10 of 75 (13%) | The faithful watch what the casters do, and some will not buy a spell at any price.
+  next metropolis activeConstraint B | 9 of 75 (12%) | Oaths and marriages are the faith's to bless, but quarrels over them go before the court.
+  next metropolis activeConstraint B | 9 of 75 (12%) | With nothing pressing, it is hard to win support for mending the weak spots before they break.
+share metropolis activeConstraint B-vocab | top 12 of 75 places (16%) · distinct 63 | Sells on the same market days as the leading house, and buyers go to the bigger name first.
+  next metropolis activeConstraint B-vocab | 12 of 75 (16%) | Drill keeps hands ready but not keen; quiet years wear on discipline.
+share metropolis structuralPosition today | top 65 of 95 places (68%) · distinct 29 | Commands those under arms in quiet times; the work is keeping trouble from starting.
+  next metropolis structuralPosition today | 63 of 95 (66%) | Leads the faith in quiet times, whatever it thinks of the seat beside it.
+  next metropolis structuralPosition today | 44 of 95 (46%) | Holds the seat, and people accept it; there is room to act, not just to hold on. Still the exchange master as well.
+  next metropolis structuralPosition today | 38 of 95 (40%) | Runs a smaller house behind the leading one in quiet times.
+  next metropolis structuralPosition today | 36 of 95 (38%) | Heads the casters in quiet times; their place is secure and their spells are in demand.
+share metropolis structuralPosition B | top 14 of 95 places (15%) · distinct 95 | Holds the seat. Still the exchange master as well.
+  next metropolis structuralPosition B | 13 of 95 (14%) | Commands those under arms in quiet times; the walls are walked, and little more is asked.
+  next metropolis structuralPosition B | 12 of 95 (13%) | Commands those under arms in quiet times; most days the work is the market crowds and the odd brawl.
+  next metropolis structuralPosition B | 11 of 95 (12%) | Heads the casters in good years, when people can afford to pay for spellwork.
+  next metropolis structuralPosition B | 11 of 95 (12%) | Leads the faith while the place is at peace; the work is the round of services and the needs of the poor.
+share metropolis structuralPosition B-vocab | top 15 of 95 places (16%) · distinct 65 | Leads the faith across a large place, with many houses of worship and a priest for each.
+  next metropolis structuralPosition B-vocab | 14 of 95 (15%) | Holds the seat. Still the exchange master as well.
+
+## SUMMARY · top share by size (places printing the commonest masked sentence / places holding the field)
+row | thorp | hamlet | village | town | city | metropolis
+activeConstraint today | 45/97 46% | 34/96 35% | 39/100 39% | 66/94 70% | 72/77 94% | 65/75 87%
+activeConstraint A-holder | 25/52 48% | 34/67 51% | 39/98 40% | 61/94 65% | 69/77 90% | 65/75 87%
+activeConstraint A-calm | 25/52 48% | 34/64 53% | 39/78 50% | 16/28 57% | 3/5 60% | 5/10 50%
+activeConstraint B | 10/97 10% | 12/96 13% | 11/100 11% | 14/94 15% | 11/77 14% | 10/75 13%
+activeConstraint B-vocab | 10/97 10% | 12/96 13% | 14/100 14% | 15/94 16% | 15/77 19% | 12/75 16%
+structuralPosition today | 17/98 17% | 14/97 14% | 37/100 37% | 61/100 61% | 69/99 70% | 65/95 68%
+structuralPosition B | 5/98 5% | 9/97 9% | 13/100 13% | 14/100 14% | 15/99 15% | 14/95 15%
+structuralPosition B-vocab | 5/98 5% | 9/97 9% | 17/100 17% | 15/100 15% | 15/99 15% | 15/95 16%
+
+checks: unresolved positions 0 · constraint not its row's 0
+guards over the proposed wordings: 0 miss(es)
+proposed wordings: activeConstraint 78 in 14 pools · structuralPosition 61 in 14 pools (index 0, today's line, not counted)
+APPROXIMATIONS: (1) the facts are read on the FINAL record (factsOf at the end of the birth), where the writer reads factsOf on the record at the structural pass; a fact a later step changes would differ. (2) The pick is keyed on the record seed and the card id; the writer would read the same two (settlement._seed, npc.id) at enrichNPCsWithStructure. (3) A card whose row the projection changes keeps its goal, rank and condition: only the field's text is re-derived. (4) The atoms are read by m1-pools.mjs :: atomHolds over the cached facts, a stand-in for factVocabulary.js's readers (the same homes: rulingBody, guild, market, defence, paidWatch, courtSits, rivalPower, seatOutranked, faith.hasChurch, populationBand, prosperity). (5) B-vocab drops the wordings that need an atom the vocabulary lacks (own house, export good, import good).
