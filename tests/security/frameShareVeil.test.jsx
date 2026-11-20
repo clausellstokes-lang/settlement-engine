@@ -597,3 +597,95 @@ describe('CF12: a hall in criminal hands with a live crime wave draws for the ow
     expectNoSeedFailures(failures, 'on every W4 town, the owner\'s sheet opens on the crime wave and every other reader, read and page is today\'s');
   }, 900000);
 });
+
+/**
+ * FRAME-6 · P4A (B7 §P4a; the chair's rulings of 2026-11-20, each vetoable by the owner: the creditor's face named on the
+ * debt crisis's page FOR THE OWNER ONLY, behind U0's audience argument; the lender never named). Two of B7's forced debt
+ * crises whose record holds the creditor's face, one with an Outstanding Debt tie on it. The owner's live editor draws the
+ * line on its Crisis tab (liveness: red at the base); the gallery page (default and DM content shared) and the party link
+ * (Reveal DM off and on) offer no Crisis tab and print none of it; every reader who is not the owner, of the shared record
+ * and of the owner's own record, composes today's crisis page, without it.
+ */
+describe('P4A: the creditor\'s face is drawn for the owner only', () => {
+  const P4A_TOWNS = [
+    ['b7-indebted-city-1', 'city', "The city owes an outside lender, never named; Deepa Mishra, the creditor's agent, speaks for them, and the innkeeper Aarav Deshpande owes her besides."],
+    ['b7-indebted-town-2', 'town', "The town owes an outside lender, never named; Naoise Kennedy, the creditor's agent, speaks for them."],
+  ];
+  const STRANGER_OPTIONS = [undefined, null, {}, { audience: undefined }, { audience: TONIGHT_AUDIENCES.player }, { audience: TONIGHT_AUDIENCES.gallery }, { audience: 'Owner' }];
+  const creditorLine = (page) => page.find((x) => x.type === 'indebted')?.creditor;
+  /** The words of the line no other surface prints: from "an outside lender" to the face's name. */
+  const wordsOf = (line) => line.slice(line.indexOf('an outside lender'), line.indexOf(', the creditor'));
+
+  test(`the owner's Crisis tab names the creditor's face; no shared page and no other reader does (${P4A_TOWNS.length} born towns)`, async () => {
+    const towns = [];
+    for (const [seed, tier, line] of P4A_TOWNS) {
+      const s = generateSettlementPipeline({ settType: tier, stressType: 'indebted' }, null, { seed, customContent: {} });
+      towns.push({ seed, line, s, reads: await sharedReadsOf(s) });
+    }
+    /** Render a page, wait for its tab strip, open the Crisis tab where offered; the page's text. */
+    const visit = async (element) => {
+      crisisMounts.length = 0;
+      const view = render(element);
+      await within(view.container).findByRole('tab', { name: /Overview/ }, { timeout: 60000 });
+      const tab = view.container.querySelector('#sf-tab-crisis');
+      let creditor = [];
+      if (tab) {
+        fireEvent.click(tab);
+        await waitFor(() => expect(view.container.querySelector('[data-testid="crisis-tab"]')).toBeTruthy(), { timeout: 60000 });
+        creditor = [...view.container.querySelectorAll('[data-testid="crisis-creditor"]')].map((p) => p.textContent || '');
+      }
+      const out = { offered: !!tab, creditor, text: view.container.textContent || '', mounts: crisisMounts.slice() };
+      cleanup();
+      return out;
+    };
+    const seen = new Map();
+    for (const { seed, line, s, reads } of towns) {
+      const pages = [
+        ['owner', 'the live editor', <OutputContainer key="e" settlement={s} />],
+        ['stranger', 'the gallery page', <PublicDossierView key="g" dossier={reads.gallery} />],
+        ['stranger', 'the gallery page (DM content shared)', <PublicDossierView key="d" dossier={reads.galleryDmFull} />],
+        ['stranger', "the party link's page (Reveal DM off)", <PartyLinkView key="p" dossier={reads.partyLink} auth={{ user: null }} onReport={() => {}} />],
+        ['stranger', "the party link's page (Reveal DM on)", <PartyLinkView key="q" dossier={{ ...reads.partyLink, shareDm: true }} auth={{ user: null }} onReport={() => {}} />],
+      ];
+      const got = [];
+      for (const [who, where, element] of pages) {
+        try { got.push({ who, where, ...(await visit(element)) }); } catch (error) { cleanup(); got.push({ who, where, error }); }
+      }
+      seen.set(seed, { line, s, reads, got });
+    }
+    const failures = collectSeedFailures([...seen.keys()], (seed) => {
+      const { line, s, reads, got } = seen.get(seed);
+      const words = wordsOf(line);
+      expect(words.length, `${seed}: the line's own words to look for`).toBeGreaterThan(20);
+      // the owner's record: the line for the owner, today's page for every other reader
+      expect(creditorLine(composeCrisisPage(s, { audience: TONIGHT_AUDIENCES.owner })), `${seed}: the owner's line`).toBe(line);
+      for (const options of STRANGER_OPTIONS) {
+        expect(composeCrisisPage(s, options), `${seed} ${JSON.stringify(options)}: today's page on the owner's record`).toEqual(composeCrisisPage(s));
+      }
+      expect(creditorLine(composeCrisisPage(s)), `${seed}: today's page has no line`).toBeUndefined();
+      // every shared record: today's page for every reader who is not the owner, and none of the line
+      for (const key of ['gallery', 'galleryDmFull', 'partyLink']) {
+        const shared = reads[key].settlement;
+        expect(hasActiveCrisis(shared), `${seed} ${key}: the shared record holds the crisis`).toBe(true);
+        for (const options of STRANGER_OPTIONS) {
+          const page = composeCrisisPage(shared, options);
+          expect(page, `${seed} ${key} ${JSON.stringify(options)}: today's page`).toEqual(composeCrisisPage(shared));
+          expect(JSON.stringify(page).includes(words), `${seed} ${key} ${JSON.stringify(options)}: no creditor's line`).toBe(false);
+        }
+      }
+      for (const { who, where, offered, creditor, text, mounts, error } of got) {
+        if (error) throw error;
+        if (who === 'owner') {
+          expect(offered, `${seed} on ${where}: the Crisis tab is offered`).toBe(true);
+          for (const m of mounts) expect(m, `${seed} on ${where}: mounted for the owner`).toEqual({ said: true, audience: TONIGHT_AUDIENCES.owner });
+          expect(creditor, `${seed} on ${where}: the tab prints the owner's line`).toEqual([line]);
+        } else {
+          expect(offered, `${seed} on ${where}: no Crisis tab is offered`).toBe(false);
+          expect(mounts, `${seed} on ${where}: no Crisis tab is mounted`).toEqual([]);
+          expect(text.includes(words), `${seed} on ${where}: the page prints no creditor's line`).toBe(false);
+        }
+      }
+    });
+    expectNoSeedFailures(failures, 'on every debt crisis, the owner\'s Crisis tab names the creditor\'s face, and no shared page or other reader does');
+  }, 600000);
+});

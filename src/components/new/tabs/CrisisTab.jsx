@@ -147,7 +147,7 @@ export function CrisisSection({ section, canAuthor = false, roster = [] }) {
         )}
       </div>
 
-      {section.stakes.length > 0 && <Heading>{CRISIS_PAGE_COPY.stakes}</Heading>}
+      {(section.stakes.length > 0 || !!section.creditor) && <Heading>{CRISIS_PAGE_COPY.stakes}</Heading>}
       {/* TAIL-CRISIS-7 (K26): a stake row is a sentence. FRAME-6 · C2: its opening is the page's one composition
           (`stakeOpening`): the power with its article ("The Religious Authorities", "The Guard") and a verb in its number
           ("gain", "gains"); the door still opens the power, and shows the sentence's words, not the roster label. */}
@@ -158,6 +158,9 @@ export function CrisisSection({ section, canAuthor = false, roster = [] }) {
           <span style={{ color: FAINT }}> · {k.reason}</span>
         </p>
       ))}
+      {/* FRAME-6 · P4A: who the town owes, after the stakes (the creditor's own row among them); composed for the owner
+          only (`composeCrisisPage`'s audience), so no other reader's section carries it */}
+      {section.creditor && <p data-testid="crisis-creditor" style={prose}>{section.creditor}</p>}
 
       <Heading>{CRISIS_PAGE_COPY.levers}</Heading>
       {section.levers.map((l) => (

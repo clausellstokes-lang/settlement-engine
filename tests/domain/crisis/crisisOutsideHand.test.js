@@ -103,9 +103,12 @@ describe('P1B: the infiltration\'s outside hand, reached on the owner\'s page', 
       const tiers = TIERS.filter((t) => !gate || TIERS.indexOf(t) >= TIERS.indexOf(gate));
       return `b7-${kind}-${tiers[(i + 4) % tiers.length]}-0`;
     });
+    // FRAME-6 · P4A: a debt crisis's owner page also carries who the town owes (its section's `creditor`, pinned in
+    // tests/domain/crisis/crisisCreditorLine.test.js); it is cut here, so this arm holds P1b's words alone
+    const lessP4a = (page) => page.map(({ creditor, ...x }) => x);
     const failures = collectSeedFailures([...seeds, 'b7-natural-thorp-0', 'b7-natural-town-0'], (seed) => {
       const s = town(seed);
-      expect(composeCrisisPage(s, OWNER), `${seed}: today's page`).toEqual(composeCrisisPage(s));
+      expect(lessP4a(composeCrisisPage(s, OWNER)), `${seed}: today's page`).toEqual(composeCrisisPage(s));
     });
     expectNoSeedFailures(failures, 'no other kind and no calm town gains a word');
   }, 300000);
