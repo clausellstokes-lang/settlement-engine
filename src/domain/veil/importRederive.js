@@ -13,6 +13,8 @@
  *
  * HOW "NOT KNOWN" IS DECIDED: an input the served document cannot give (a Subsistence town's prosperity, which took a
  * birth draw) is tried at every value it could take; a value derived from it is kept only where every try agrees.
+ * The prosperity band itself is served as stored (VR28, tier 2): where the document carries it, it is kept and is the
+ * one value tried; the re-derivation runs only where it is absent.
  * A document with no config (the floor every share keeps) decides nothing: every field below is left out.
  *
  * Measured first (docs/chair/2026-11-20/veil/measure/vr25/derivers.probe.jsx; 72 born towns, the default veil, and
@@ -111,7 +113,7 @@ export function rederiveInPlace(s) {
   const legitimacy = recOf(recOf(s.powerStructure)?.publicLegitimacy);
   const layout = recOf(s.spatialLayout);
   if (!config) {
-    if (e) { delete e.compound; delete e.prosperity; }
+    if (e) delete e.compound; // the served prosperity band stays as served (VR28; step 4)
     if (sp) { delete sp.compound; delete sp.safetyRatio; }
     if (food) delete food.storageMonths;
     if (readiness) delete readiness.score;
@@ -140,8 +142,10 @@ export function rederiveInPlace(s) {
     else delete food.storageMonths;
   }
 
-  // 4. PROSPERITY (VR19): re-derived where the served document decides it; else not known.
-  const outcomes = servedProsperityOutcomes(s, config);
+  // 4. PROSPERITY: the band is SERVED as stored (VR28, tier 2): kept where the served document carries it, and then
+  //    the one outcome every step below reads; re-derived only where it is absent (else not known, as above).
+  const servedBand = e && typeof e.prosperity === 'string' && e.prosperity !== '' ? e.prosperity : null;
+  const outcomes = servedBand !== null ? [servedBand] : servedProsperityOutcomes(s, config);
   if (e) {
     if (outcomes.length === 1) e.prosperity = outcomes[0];
     else delete e.prosperity;
