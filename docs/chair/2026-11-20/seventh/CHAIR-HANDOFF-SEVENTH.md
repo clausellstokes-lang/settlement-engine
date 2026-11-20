@@ -516,6 +516,21 @@ parts of the whole check (at the close).
   UNDER THE OWNER'S STANDING DEFERRAL THE CHAIR PROCEEDS ON ITS RECOMMENDATION UNLESS VETOED: the goals seat's
   prompt is written now and seated at NAMES-3's hand-back.
 
+- **09:49 UTC, 2026-11-20, THE OWNER (verbatim):** "Do all of it predeploy. I have some questions: To number 3, isn't
+  this fixed because there is now a named NPC per appropriate institution regardless of size? To number 4, culture
+  only shifts the weight of RNG, never determines it by itself. It goes with the other considered factors."
+  WHAT IT ORDERS: THE STRUCTURAL FIXES GO IN BEFORE THE DEPLOY (the deploy's waiting list grows). ANSWERED THE SAME
+  TURN, FROM A COUNT (`measures/holistic/faces.mjs`, `faces2.mjs`): ON NUMBER 3 THE OWNER IS RIGHT AND THE CHAIR
+  WITHDRAWS IT: every place whose catalogue row carries a face has its named person at every size (thorp 1.6 faced
+  places and 1.3 people; village 9.0 and 7.7; city 61.0 and 60.0; where people are fewer, one person holds two
+  places); a thorp is thin because about 2 of its 8 places are of a kind that has a keeper: the design, not a
+  fault: NOTHING IS BUILT FOR IT. ON NUMBER 4 THE OWNER'S WORD IS A RULE (CS21 below): CULTURE ONLY SHIFTS THE WEIGHT
+  OF THE DRAW; IT NEVER DECIDES BY ITSELF; IT GOES WITH THE OTHER FACTORS. THE PLAN SAID TO THE OWNER: (1) fortune
+  and standing judged against a place's own size: seated now (FORTUNE-1), measure and a before-and-after table for
+  the owner first, landing dark; (2) no repeated wording inside one town: GOALS-1 at NAMES-3's hand-back; (4)
+  culture as a weight: a unit of the who-rules train. THE PRICE SAID: the deploy moves later; at the close the owner
+  signs three dark rules together, shown on towns born with all three lit.
+
 ## 2. Rulings of this chair (each vetoable by the owner)
 
 - **SV1 (00:05 UTC, 2026-11-20): THE VEIL'S LIST ON THREE MACHINES.** VEIL-19 owns 212, its rollback and the twin's
@@ -587,6 +602,17 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
 - **THE OWNER'S HAND ALONE:** S132 (apply 211; apply 212 only after the reader's CLEAR) · S133 (pause or archive the
   earlier accounts' scheduled task and stopped sessions: section 4) · S134 (adding usage: billing; probably overtaken
   by the moves to fresh accounts) · the next signing's plain yes if the join moves the stored reference files.
+
+- **CS21 (2026-11-20, 09:50 UTC; THE OWNER'S OWN RULE, verbatim: "culture only shifts the weight of RNG, never determines
+  it by itself. It goes with the other considered factors."):** in the seat's train a town's CULTURE is ONE
+  REGISTERED CIRCUMSTANCE of CS5's table: a weight beside the others on which house leads and so on which form of
+  rule a new town takes. NEVER A DETERMINANT: (a) in every culture every form family stays possible (a born arm:
+  no cell of culture by family at zero over the measured corpus where the family is possible without culture); (b)
+  no culture pushes one family past a ceiling the owner signs (a draft figure, dark); (c) the weights are written
+  to agree with what each culture's card already says of how it is governed (`culturalIdentity.civicPattern`:
+  read, not invented); (d) dark with the rest of the table until the owner signs; (e) the measure for the owner:
+  the governing kind by culture, before and after, at untouched settings (today three towns in four under a civic
+  body in every culture alike).
 
 ## 3. The queue, in order
 

@@ -54,3 +54,17 @@ THE FOUR CAUSES, READ BY THE CHAIR FOR THE OWNER'S QUESTION OF 09:36 ("What are 
   ("the owner's historical scale"; a draft under signature).
 - the form of rule: projected from the strongest power (`src/domain/rulingPower.js :: GOVERNMENT_PREFERENCES` by
   archetype and tier); it does not read the town's culture.
+
+## Added 2026-11-20 09:47 UTC: is there a named person for every place that should carry one? (the owner's question)
+
+`faces.mjs <line> 50` on the same 300 untouched towns: places a town holds; of them the places whose catalogue row
+carries a face (`src/data/institutionalCatalog.js :: faceOfInstitution`); named people. By size: thorp 8.0 places,
+1.6 with a face, 1.3 named people; hamlet 10.9 / 3.4 / 3.4; village 14.4 / 9.0 / 7.7; town 31.6 / 25.5 / 23.9; city
+68.3 / 61.0 / 60.0; metropolis 92.9 / 85.4 / 83.8. `faces2.mjs` prints two thorps and a village whole: WHERE THE
+PEOPLE ARE FEWER THAN THE FACED PLACES, ONE PERSON HOLDS TWO (the elder is the boat-master; the priest stands for the
+parish church and for the row "Priest (resident)": 50 of 50 villages hold that row and 50 hold a named priest). SO
+THE OWNER IS RIGHT: every appropriate place has its named person at every size; a thorp is thin because about 2 of
+its 8 places are of a kind that has a keeper. THE CHAIR'S PROPOSAL (3) OF 09:41 (a floor of two named people at a
+thorp) IS WITHDRAWN. The match in `faces.mjs` is by the person's own place key only, so its "without" column
+over-counts (it cannot see a second place held by the same person, or the seat's building held by the ruler).
+Output: `faces.out.txt`.
