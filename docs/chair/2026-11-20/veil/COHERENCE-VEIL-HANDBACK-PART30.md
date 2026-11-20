@@ -558,6 +558,11 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
     pool (server = twin, Reveal off = on) and ONE line to the chair with the two counts. The owner is told the veil needs about
     6-8 more hours before the security reader sits; until he says otherwise the bar is GATE-2 at 0 red. VEIL-30's prompt is
     written when this seat's record passes 330,000 by the chair's read.
+75. THE CHAIR, 22:12 (THE HAND-OVER): this seat's record read 410,912 by the chair's read (its own count, about 240,000, ran
+    far low: the pool's re-making and the whole reads cost more than it counted; a successor's own count is not to be trusted
+    either: ruling 70). PAST THE HAND-OVER LINE: no new unit; a builder out finishes its commit and its branch is pushed `-wip`
+    unread; PART 30 brought current in one commit; "VEIL-PART <commit>, HANDED OVER". VEIL-30 is seated on PART 30 alone, on
+    this lane's tip.
 
 ## 2. The bytes (kept current)
 | File | sha256 |
@@ -583,11 +588,22 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
 | L the four walkers | not started | ruling 34 |
 | DOORS 3e1115c81 | `lane/veil-doors-3-2026-11-20` (hand-back `docs/chair/2026-11-20/veil/doors/VEIL-DOORS-3-HANDBACK.md` there: read whole before the merge) | merge `--no-ff` after R3 and R4, every hunk read, the two inside `import_gallery_dossier` hardest; ONE builder: rulings 19, 20, the reader's repros, the acceptance run at the merged tree |
 | stored figures, E | not started | once at the merged tree; then E (ruling 25) |
-| R3-TELL-3 the tell's cure | `briefs/R3-TELL-3-BRIEF.md`; worktree `/home/user/wt/r3tell3`, branch `v28-r3tell3` (pushed as `lane/veil-28-r3tell3-2026-11-20` when it returns) | LAUNCHED 19:5x at 8508431da; unit 4b's cure GO (ruling 67 (2)), relayed. One builder on 212. |
+| R3-TELL-3 the tell's cure + R3-TELL-4 the joint tell's cure | `lane/veil-28-r3tell3-wip-2026-11-20` 08b2eb957; `lane/veil-29-r3tell4-wip-2026-11-20` (section 8) | NOT MERGED. R3-TELL-3 re-run green by VEIL-29 (GATE-1 4/92, GATE-2 34/40 red); R3-TELL-4 at unit (i), unread; merge together at GATE-1 0 AND GATE-2 0 (rulings 73, 74, 75); section 8 |
 | IMPORT-DOOR | `briefs/IMPORT-DOOR-BRIEF.md` (rulings 56, 57) | after the tell's cure (ruling 66); "IMPORT-DOOR <commit>" its own line |
 | CHAINS-ROW | brief to cut (ruling 64) | after R3; its PLAUSIBLE read first |
 
 ## 4. The instruments, one command each (a FRESH container)
+- VEIL-29'S RECIPE FROM A FRESH CONTAINER (EXECUTED 20:22-20:55 UTC, ~33 min wall in all), from the lane checkout, in this order:
+  (1) `sh docs/chair/2026-11-20/veil/out/v28/seated/make-instruments.sh <checkout> /var/tmp/v18/out/<seat>/seated` (cluster,
+  pg driver, readers' library, `npm ci`, sha256, `--check`, walker, harnesses, acceptance 40 PASS, templates `v27x211` and
+  `v28tpl`, the R3 gate: ~8 min); (2) `sh docs/chair/2026-11-20/veil/out/v27/tell2/measure/pool.sh <checkout>
+  /var/tmp/v18/t2/pool-t2sig-2 v28tpl` (part A fresh 13.1 min, part B 7.3 min wall, four shards; 1,200 + 608 births); (3) the
+  tell's gates at a tree: a template `createdb -T v27x211 <tpl>` + that tree's 212, then `measure/verify.sh <tree> <out>
+  /var/tmp/v18/t2/pool-t2sig-2 40` and `TELL_DB=<prefix> sh measure/tell2.sh <tree> <out> <tpl> /var/tmp/v18/t2/pool-t2sig-2`
+  (~5 min). (4) GATE-2's chance figures: the analyzer with its last line removed + `out/v29/t3/gate2-chance-append.mjs`, run as
+  `node an.mjs <pooldir> <towns outdir>`. (5) A green chain over a tree: `out/v29/t3/green-chain.sh` (edit W and the template;
+  ~35 min). AFTER A REBOOT (this container rebooted ~21:21 UTC; /var/tmp survives): `su postgres -c
+  "/usr/lib/postgresql/16/bin/pg_ctl -D /var/tmp/v18pg -l /var/tmp/v18log/pg.log -w start"`.
 - EVERYTHING (cluster, pg driver, readers' library, probes, R1 tools, `npm ci`, then sha256, `--check`, walker, harnesses,
   acceptance, the gate's template and the gate), ONE COMMAND, idempotent: `sh docs/chair/2026-11-20/veil/out/v28/seated/make-instruments.sh
   <checkout> [outdir]` (EXECUTED by VEIL-28 at 33d4ffbab, 17:56-18:0x UTC: every exit 0; acceptance 40 PASS; the gate HIGHER 0,
@@ -665,6 +681,7 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
 - 21:3x the chair: ruling 73 (GATE-2 a fault of the veil; the cure's list; 72 (a) approved; R3 now means GATE-1 0 AND GATE-2 0). 21:4x the families' twin forms and the count sent (about 8 units, 3 sittings, 6-8 hours).
 - 21:39 `briefs/R3-TELL-4-BRIEF.md` committed; its builder launched (section 8).
 - 22:08 R3-TELL-3's GREEN RE-RUN BY THIS SEAT at b3b533027 (`out/v29/t3/green-chain.sh`; every exit 0): galleryServerVeil + hand rows 43/43; harnesses (render-twice, inversion, criminalSwitchHandReach) 22/22; walkers 17/17; `--check` 0; eslint 0; the R3 gate HIGHER 0 / EQUAL 79 / LOWER 13 every engine and Reveal; R3's born test 37/37; the acceptance run EXIT 0, 40 PASS. The builder's report CONFIRMED by execution (its 212 read remains ruling 73 (1)'s, at the merge).
+- 22:12 the chair: THE HAND-OVER (ruling 75; this seat's record 410,912 by its read). No new unit; R3-TELL-4 told to stop after its commit in hand (it had unit (i)'s red, fff96514a); 22:13 PART 30 brought current in ONE commit (sections 3, 4, 8; rulings 72-75); R3-TELL-4's branch pushed `-wip` unread when it returns.
 
 ## 7. THE JOIN (the chair's word in VEIL-25's prompt): what the join must re-prove on the joined document
 The working line (origin/lane/join-2026-11-14, at 0c906948 when this was written) and four content lanes ADD SERVED TEXT at
@@ -687,17 +704,51 @@ lit and both gates run before the flip; the fortune and who-rules lanes' "TO LIG
 lane's red re-run on a served document (65). (d) Ruling 57 (g)'s fourteen: answered by execution (`out/v27/r5q/RESULT.txt`;
 DS-DEF-4 withheld; DS-ECO-6 v4-v5 and DS-DEF-3's four served as stored today, R5's under ruling 59).
 
-## 8. STATE (VEIL-29; kept current)
+## 8. STATE (VEIL-29; written at the hand-over, ruling 75)
 THE LANE: `lane/veil-29-2026-11-20`, tip = the commit carrying this section, cut by fast-forward at f93c35beb (VEIL-28's final
-tip). 212 `1c15e3ac…ebc7`, rollback `8cbd7d1c…ded5b0`, 211 unchanged.
-R3-TELL-3: `lane/veil-28-r3tell3-wip-2026-11-20` at 08b2eb957, NOT MERGED (records after b3b533027 only). Re-run by this seat:
-arms red 2/3 at 95f2ddfb8, green 3/3; the tell's gates equal the builder's (GATE-1 4/92, LOWER BY RULE 7, GATE-2 34/40); the
-green suites re-run (`/var/tmp/v18/out/v29/t3/green-chain.sh`; results into `out/v29/t3/` when done).
-R3-TELL-4 (ruling 73's cure list, 72 (a)'s singles, the tooth): `briefs/R3-TELL-4-BRIEF.md`; ONE builder, worktree
-`/home/user/wt/r3tell4`, branch `v29-r3tell4` from 08b2eb957; it extends R3-TELL-3 and is merged WITH it (the seat reads the
-whole diff 8508431da..its tip line by line, 212 and the registry whole beside it, ruling 73 (1)).
-THE POOL in this container: `/var/tmp/v18/t2/pool-t2sig-2` (built at bad42ff94; `out/v29/seated/pool-meta.txt`).
-NEXT, IN ORDER (rulings 67, 73): R3-TELL-4 to GATE-1 0 of 92 AND GATE-2 0 red; the merge; IMPORT-DOOR; "R3 <commit>" with the
-LOWER towns by rule and the IMPORT-DOOR line; CHAINS-ROW (64); R6; R4-CURE-2 (+ ruling 53's fold, the amendment in PART 29
-section 8); R5 (59's walker first); R7; L; the doors (+ 57 (d)'s test, 68); the stored figures; AT THE CLOSE the join's step
-one (69), 67 (3)'s arm, 65's red, 68; E (58 §4; 63 the lit pools before the flip).
+tip). NOTHING MERGED BY VEIL-29: 212 on the lane `1c15e3acf2d45ab71d59ffa31290de9faf4ce115b20a34c8b4b3250fd8a2ebc7`, rollback
+`8cbd7d1c…ded5b0`, 211 `eface6d0…0b01` / `ce8474ff…712f` unchanged.
+
+THE BRANCHES (every tip):
+- `lane/veil-28-r3tell3-wip-2026-11-20` at 08b2eb957: R3-TELL-3 (red 95f2ddfb8; cure efba72444: the drag key served as null,
+  ruling 60's non-criminal husk leaves whole; records b3b533027, 08b2eb957). 212 there `707822e672bc400c8edada1f2aee0b51c51a968728f312f874a9af67903c01ae`.
+  RE-RUN BY THIS SEAT (section 6): arms red 2/3 -> green 3/3; the tell's gates equal the builder's; every green suite exit 0.
+  Diff to b3b533027 read whole once by this seat; 08b2eb957's remainder is records only.
+- `lane/veil-29-r3tell4-wip-2026-11-20`: R3-TELL-4 (`briefs/R3-TELL-4-BRIEF.md`, the regrouping of ruling 74 relayed), cut from
+  08b2eb957, pushed `-wip` UNREAD at the hand-over (ruling 75); its tip is the one `git ls-remote origin refs/heads/lane/veil-29-r3tell4-wip-2026-11-20` reads (named in the "HANDED OVER" line to the chair). At the hand-over it
+  had unit (i) people.allegiance's RED committed (fff96514a) and its cure in progress; its hand-back
+  `out/v29/tell4/TELL4-HANDBACK.md` on that branch. NOT read, NOT re-run by any seat.
+- THE MERGE (ruling 73 (1)): R3-TELL-3 and R3-TELL-4 merge TOGETHER, after GATE-1 0 of 92 AND GATE-2 0 red; the seat reads the
+  whole diff 8508431da..the tip LINE BY LINE with migration 212 WHOLE and the registry `src/domain/veil/rosterChoiceRegistry.js`
+  WHOLE beside it (R3-TELL-3's builder read 212 only in part: ruled a fault); nothing is taken on a builder's report; red and
+  green re-run by the seat.
+
+THE COUNTS:
+- At this lane's tip (212 1c15e3ac; bad42ff94 = the same src): GATE-1 88 of 92 at every gated setting, both reads, both
+  engines; controls 0 of 48 (`out/v29/seated/tell2-table-bad42ff94.txt`, the old analyzer; the restated analyzer lives on the
+  R3-TELL-3 branch).
+- At R3-TELL-3's cure (b3b533027, the restated analyzer, this seat's pool): GATE-1 4 of 92 (safetyDesc 2, currentTensions 1,
+  imports.criminal 1), LOWER BY RULE 7, non-governing rows against the rule 0; GATE-2 34 of 40 cells red; controls against
+  controls 0 red in 2,000 splits (`out/v29/t3/`).
+- R3-TELL-4's counts after unit (i): on its branch, unread.
+
+THE JOINT TELL'S CURE (rulings 73, 74), in the chair's order, the twin value and its SQL shape as given to the chair (21:4x):
+| unit | family (hidden towns / pages) | the house-free twin's value | SQL shape | state at the hand-over |
+|---|---|---|---|---|
+| (i) | people.allegiance (69/138) | the person's `allegiance` key ABSENT where it names a withheld power or house (ruling 47: key-level husks left off) | a key delete under the lane's name fold, ids as text | RED committed fff96514a; cure in progress (unread) |
+| (ii) | svc.criminal (27/320), sp.ops (3), sp.crimeTypes (1) | `availableServices.criminal` / `criminalInstitutions` / `crimeTypes` as the empty form open places show (`[]`; VR29 arrays; VR39 binds) | empty array | not started |
+| (iii) | powers.capture (21/186) with powers.criminal (3) | the open place's capture form, MEASURED first; the 3 powers.criminal towns checked first for VR42 (then LOWER BY RULE) | key-form rewrite | not started |
+| (iv) | powers.relations (2) | the row withheld whole (ruling 42) | row delete | not started |
+| (v) | tensions (1), imports (1), safetyDesc (2): ruling 72 (a), approved | tensions: the commonest nothing-hidden crime_wave sides naming no power (measured; none: STOP); imports: 300 insurgency births, member if two show several, else the second withheld; safetyDesc: " Everyone comes in by the gates, where the guard sees them." | a fixed form; a row delete; the guard line's string precedent | not started |
+| (vi) | the tooth (72 (c), ruling 53) | a goal aimed at a SHOWN power served byte for byte, unconditionally | test only | not started |
+| proved | inst.criminal, chains.criminal (6/172 each), income (1): "0->+", the nearest member HAS them | nothing sent: expected to close as the others leave | none | to be PROVED by GATE-2's re-read |
+After EACH unit: GATE-1 and GATE-2 re-read on the pool, server = twin, Reveal off = on; one line to the chair with both counts.
+The chair's estimate given to the owner: about 6-8 hours (8 units, 3 sittings) before the security reader sits (ruling 74).
+
+THE POOL: `/var/tmp/v18/t2/pool-t2sig-2` IN VEIL-29'S CONTAINER ONLY (NOT IN GIT; built at bad42ff94; verified at b3b533027
+45 / 0 differ; `out/v29/seated/pool-meta.txt`). A new seat in a new container RE-MAKES IT by section 4's recipe (~33 min).
+NEXT, IN ORDER (rulings 67, 73, 74): R3-TELL-4 re-staffed from its `-wip` (units (i)-(vi), a line to the chair after each)
+to GATE-1 0 of 92 AND GATE-2 0 red; the merge (ruling 73 (1)); IMPORT-DOOR; "R3 <commit>" with the LOWER towns by rule and the
+IMPORT-DOOR line; CHAINS-ROW (64); R6; R4-CURE-2 (+ ruling 53's fold, PART 29 section 8's amendment); R5 (59's walker first);
+R7; L; the doors (+ 57 (d)'s test, 68); the stored figures; AT THE CLOSE the join's step one (69), 67 (3)'s arm, 65's red, 68;
+E (58 §4; 63 the lit pools before the flip).
