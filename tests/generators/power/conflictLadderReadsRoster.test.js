@@ -63,7 +63,9 @@ describe('POWERS-13 #291 · the conflict ladder names a market or a court only w
       ['r2r-village-133', LEVIES, 'A dispute over grazing rights and water access has run for two seasons'],
       ['r2r-hamlet-56', MURDERED, 'Someone has been stealing from the communal stores.'],
       ['r2r-hamlet-262', OUTBUYING, 'A dispute over grazing rights and water access has run for two seasons'],
-      ['r2r-village-8', COURTS, "The strongest armed household has started making decisions on everyone's behalf without asking."],
+      // under MILITARY_ARMED's mb1 (the chair's wording of 18:00 UTC): r2r-village-8 -> r2r-village-205 (no court, a charter hall,
+      // the military rung's else sub-branch; the strongest armed household picked)
+      ['r2r-village-205', COURTS, "The strongest armed household has started making decisions on everyone's behalf without asking."],
     ], ([seed, gone, now]) => {
       const s = born(seed);
       if (gone === COURTS) expect(court(s), `${seed}: the town lacks a court`).toBe(false);
