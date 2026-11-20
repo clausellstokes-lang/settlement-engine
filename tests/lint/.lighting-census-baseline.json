@@ -24,12 +24,12 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "2daa807713c5d7fcca5374265ad7c61ad22ecfca",
-  "measuredBy": "FORTUNE-2 (U1 merge)",
+  "measuredAtSha": "e5e48cd8106089590e839d7b7ff19c1b9caa2a36",
+  "measuredBy": "FORTUNE-2 (U2+U3 merge)",
   "date": "2026-11-20",
-  "note": "one new test file, tests/domain/fortuneLawWiring.test.js (the fortune law wired dark, FS5), re-taken by the integrator at the merged tree",
-  "files": 3707,
-  "parked": 472,
+  "note": "three new test files (fortuneLawFortune, fortuneLawStanding, fortuneLawPlayTime), re-taken by the integrator at the merged tree",
+  "files": 3710,
+  "parked": 475,
   "credited": 3235,
   "titles": 31227,
   "suiteTitles": 8645
