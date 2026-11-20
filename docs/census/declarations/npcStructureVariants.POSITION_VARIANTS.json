@@ -15,21 +15,11 @@
       "other__economic_stress__dominant": "other__stable__dominant",
       "other__contested__dominant": "other__stable__dominant"
     },
-    "lines": 73,
-    "declaring": 61,
-    "note": "PEOPLE-1 B1 (2026-11-20; the chair's ruling of 16:41 UTC on PROPOSAL-structuralPosition.md, as amended by READ-M1-npcStructure.md). Index 0 of every pool is the writer's own T line (npcStructure.T.json `<key>.position`), declared as its row is (the stable rows CALM_ONLY: excludes crisis). `own house`, `export good`, `import good` are the three atoms of the chair's ruling 4. Rows id `<T key>.position.<index>`; the aliases are T keys that read another key's pool."
+    "lines": 59,
+    "declaring": 53,
+    "note": "PEOPLE-1 B1 (2026-11-20; the chair's ruling of 16:41 UTC on PROPOSAL-structuralPosition.md, as amended by READ-M1-npcStructure.md). Index 0 of every pool is the writer's own T position line, and its one home is the writer's table (npcStructure.T.json `<key>.position`): PEOPLE-1 B1c (the chair's ruling of 20:30 UTC) took it out of the data pools, and pooledLineOf composes [the T row, ...the pool] for every key, so this ledger holds the siblings only, each keeping its composed index in its id. `own house`, `export good`, `import good` are the three atoms of the chair's ruling 4. Rows id `<T key>.position.<index>`; the aliases are T keys that read another key's pool."
   },
   "rows": [
-    {
-      "id": "government__stable__dominant.position.0",
-      "text": "Holds the seat, and people accept it; there is room to act, not just to hold on.",
-      "needs": [],
-      "excludes": [
-        "crisis"
-      ],
-      "crisis": [],
-      "colour": false
-    },
     {
       "id": "government__stable__dominant.position.1",
       "text": "Holds the seat with the council beside it; in quiet times the work is the ordinary business.",
@@ -125,16 +115,6 @@
       "colour": false
     },
     {
-      "id": "military__stable__dominant.position.0",
-      "text": "Commands those under arms in quiet times; the work is keeping trouble from starting.",
-      "needs": [],
-      "excludes": [
-        "crisis"
-      ],
-      "crisis": [],
-      "colour": false
-    },
-    {
       "id": "military__stable__dominant.position.1",
       "text": "Commands {house} in quiet times: the drill, the roster and the gear kept ready.",
       "needs": [
@@ -213,16 +193,6 @@
       "colour": false
     },
     {
-      "id": "religious__stable__dominant.position.0",
-      "text": "Leads the faith in quiet times, whatever it thinks of the seat beside it.",
-      "needs": [],
-      "excludes": [
-        "crisis"
-      ],
-      "crisis": [],
-      "colour": false
-    },
-    {
       "id": "religious__stable__dominant.position.1",
       "text": "Leads the faith from {house}; in quiet times the work is the services, the feast days and the burials.",
       "needs": [
@@ -283,16 +253,6 @@
     {
       "id": "religious__stable__dominant.position.6",
       "text": "Leads the faith in a settled season, with no crisis to call the faithful together.",
-      "needs": [],
-      "excludes": [
-        "crisis"
-      ],
-      "crisis": [],
-      "colour": false
-    },
-    {
-      "id": "economy__stable__subordinate.position.0",
-      "text": "Runs a smaller house behind the leading one in quiet times.",
       "needs": [],
       "excludes": [
         "crisis"
@@ -371,16 +331,6 @@
       "colour": false
     },
     {
-      "id": "economy__stable__dominant.position.0",
-      "text": "Heads the leading house in the trade in quiet times; its hold is secure and its say is real.",
-      "needs": [],
-      "excludes": [
-        "crisis"
-      ],
-      "crisis": [],
-      "colour": false
-    },
-    {
       "id": "economy__stable__dominant.position.1",
       "text": "Heads {house}, the leading house in the trade, in a steady season.",
       "needs": [
@@ -419,16 +369,6 @@
     {
       "id": "economy__stable__dominant.position.4",
       "text": "Heads the leading house in the trade while business is steady and no one presses it.",
-      "needs": [],
-      "excludes": [
-        "crisis"
-      ],
-      "crisis": [],
-      "colour": false
-    },
-    {
-      "id": "government__stable__subordinate.position.0",
-      "text": "Holds an office that runs from day to day, with no crisis to answer.",
       "needs": [],
       "excludes": [
         "crisis"
@@ -495,16 +435,6 @@
       "colour": false
     },
     {
-      "id": "magic__stable__dominant.position.0",
-      "text": "Heads the casters in quiet times; their place is secure and their spells are in demand.",
-      "needs": [],
-      "excludes": [
-        "crisis"
-      ],
-      "crisis": [],
-      "colour": false
-    },
-    {
       "id": "magic__stable__dominant.position.1",
       "text": "Heads {house} in quiet times; the work is the ordinary run of spellwork.",
       "needs": [
@@ -551,16 +481,6 @@
       "colour": false
     },
     {
-      "id": "other__stable__dominant.position.0",
-      "text": "Heads an old family while the seat's offices take up more of what the family once did.",
-      "needs": [],
-      "excludes": [
-        "crisis"
-      ],
-      "crisis": [],
-      "colour": false
-    },
-    {
       "id": "other__stable__dominant.position.1",
       "text": "Heads an old family whose name still opens doors here.",
       "needs": [],
@@ -579,14 +499,6 @@
       "excludes": [
         "crisis"
       ],
-      "crisis": [],
-      "colour": false
-    },
-    {
-      "id": "government__governance_fractured__dominant.position.0",
-      "text": "Holds the seat in name, but fewer people come when called, and some orders go unanswered.",
-      "needs": [],
-      "excludes": [],
       "crisis": [],
       "colour": false
     },
@@ -623,14 +535,6 @@
     {
       "id": "government__governance_fractured__dominant.position.4",
       "text": "Holds the seat, but its word now carries only as far as people choose to let it.",
-      "needs": [],
-      "excludes": [],
-      "crisis": [],
-      "colour": false
-    },
-    {
-      "id": "government__economic_stress__dominant.position.0",
-      "text": "Holds the seat while money is short, and people judge the seat by what it can no longer pay for.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -685,14 +589,6 @@
       "colour": false
     },
     {
-      "id": "religious__economic_stress__dominant.position.0",
-      "text": "Leads the faith while money is short; its lands and alms are both a help and a target.",
-      "needs": [],
-      "excludes": [],
-      "crisis": [],
-      "colour": false
-    },
-    {
       "id": "religious__economic_stress__dominant.position.1",
       "text": "Leads the faith from {house} while money is short, and more people come to its door for alms.",
       "needs": [
@@ -722,14 +618,6 @@
       "colour": false
     },
     {
-      "id": "religious__governance_fractured__dominant.position.0",
-      "text": "Leads the faith while the seat fails, and people bring it the quarrels the seat no longer settles.",
-      "needs": [],
-      "excludes": [],
-      "crisis": [],
-      "colour": false
-    },
-    {
       "id": "religious__governance_fractured__dominant.position.1",
       "text": "Leads the faith while the seat fails; more disputes now end at {house} than at the seat's door.",
       "needs": [
@@ -748,14 +636,6 @@
       "colour": false
     },
     {
-      "id": "religious__contested__dominant.position.0",
-      "text": "Leads the faith while many doubt the seat's right, and the seat wants its blessing.",
-      "needs": [],
-      "excludes": [],
-      "crisis": [],
-      "colour": false
-    },
-    {
       "id": "religious__contested__dominant.position.1",
       "text": "Leads the faith from {house} while many doubt the seat's right; both sides listen for what is said there.",
       "needs": [
@@ -768,14 +648,6 @@
     {
       "id": "religious__contested__dominant.position.2",
       "text": "Leads the faith while the seat's right is in doubt, and people wait to hear which way it leans.",
-      "needs": [],
-      "excludes": [],
-      "crisis": [],
-      "colour": false
-    },
-    {
-      "id": "government__contested__dominant.position.0",
-      "text": "Holds the seat, but many doubt its right to it, and the doubt has not gone away.",
       "needs": [],
       "excludes": [],
       "crisis": [],

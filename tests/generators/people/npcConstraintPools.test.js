@@ -30,15 +30,19 @@ import { partitionDefenseInstitutions } from '../../../src/domain/institutions/d
 const WRITER = readFileSync(new URL('../../../src/generators/npcStructure.js', import.meta.url), 'utf8');
 const cut = (/** @type {string} */ from, /** @type {string} */ to) => { const a = WRITER.indexOf(from); const b = WRITER.indexOf(to, a); if (a < 0 || b < 0) throw new Error(`slice ${from}`); return WRITER.slice(a, b); };
 const TABLE = [cut('const GOVERNANCE_FRACTURED', 'function getPrimaryCondition'), cut('const T = {};', '// ── Score NPCs'), 'export { T };'].join('\n');
+/** @type {Record<string, any>} the writer's own rows per `T` key */
+const { T } = await import(/* @vite-ignore */ `data:text/javascript;base64,${Buffer.from(TABLE).toString('base64')}`);
 /** @type {Record<string, string>} the writer's own constraint per `T` key */
-let T_CONSTRAINT = {};
-beforeAll(async () => {
-  const { T } = await import(/* @vite-ignore */ `data:text/javascript;base64,${Buffer.from(TABLE).toString('base64')}`);
-  T_CONSTRAINT = Object.fromEntries(Object.entries(T).map(([k, v]) => [k, /** @type {any} */ (v).constraint]));
-});
+const T_CONSTRAINT = Object.fromEntries(Object.entries(T).map(([k, v]) => [k, /** @type {any} */ (v).constraint]));
 
 const esc = (/** @type {string} */ s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-const ROWS = Object.entries(CONSTRAINT_VARIANTS).flatMap(([key, pool]) => pool.map((row, at) => ({
+/**
+ * Every row of every pool AS THE WRITER COMPOSES IT (PEOPLE-1 B1c: [the `T` row, ...the data pool]): index 0 is the `T` row's
+ * own constraint with the `T` row's own declaration (its `tags`), never retyped; a sibling's index is its composed index (the
+ * gates' `#n` keys).
+ */
+const composedOf = (/** @type {string} */ key) => [{ text: T_CONSTRAINT[key], ...declarationOf(T[key], { tagged: true }) }, ...CONSTRAINT_VARIANTS[key]];
+const ROWS = Object.keys(CONSTRAINT_VARIANTS).flatMap((key) => composedOf(key).map((row, at) => ({
   key, at, row, re: new RegExp(`^${esc(row.text).replace(/\\\{(?:house|export|import)\\\}/g, '(.+)')}$`),
 })));
 const VARIANTS = ROWS.filter((r) => r.at > 0);
@@ -69,11 +73,12 @@ const CRIME_HOMES = new Set(['crime', 'criminalIncome', 'rivalRings', 'crimeWave
 const CRIME_DIMENSIONS = Object.entries(FACT_DIMENSIONS).filter(([name, d]) => CRIME_HOMES.has(d.home) || /crim|clandestin|smuggl|thie|racket|black market/i.test(name)).map(([name]) => name);
 
 describe('PEOPLE-1 B1b · the constraint pools, canonical at zero', () => {
-  it('index 0 of every pool is the writer\'s own constraint; every alias names a pool of the same line', () => {
+  it('index 0 of every pool is the writer\'s own constraint (composed from the T row; the data pool holds the siblings only); every alias names a pool of the same line', () => {
     for (const [key, pool] of Object.entries(CONSTRAINT_VARIANTS)) {
       expect(T_CONSTRAINT[key], `${key} is a T row`).toBeDefined();
-      expect(pool[0].text, key).toBe(T_CONSTRAINT[key]);
-      expect(pool.length, `${key} is a pool`).toBeGreaterThan(1);
+      expect(composedOf(key)[0].text, key).toBe(T_CONSTRAINT[key]);
+      expect(pool.map((r) => r.text), `${key}: the data pool holds no copy of its T line`).not.toContain(T_CONSTRAINT[key]);
+      expect(composedOf(key).length, `${key} is a pool`).toBeGreaterThan(1);
     }
     for (const [alias, key] of Object.entries(POSITION_POOL_OF)) expect(T_CONSTRAINT[alias], alias).toBe(T_CONSTRAINT[key]);
     expect(VARIANTS.length, 'the ruling\'s 78 wordings').toBe(78);
@@ -85,7 +90,7 @@ describe('PEOPLE-1 B1b · the walker of (e) and the word guards', () => {
     expect(CRIME_DIMENSIONS, 'premise: the vocabulary names its crime facts').toEqual(expect.arrayContaining(['organised crime', 'criminal income', 'rival rings', 'crime', 'crime wave']));
     const bad = [];
     for (const [table, pools] of /** @type {const} */ ([['position', POSITION_VARIANTS], ['constraint', CONSTRAINT_VARIANTS]])) {
-      for (const [key, pool] of Object.entries(pools)) pool.forEach((row, at) => {
+      for (const [key, pool] of Object.entries(pools)) pool.forEach((row, i) => { const at = i + 1; // the composed index (B1c: index 0 is the T row)
         for (const a of row.needs) if (CRIME_DIMENSIONS.includes(/** @type {any} */ (parseAtom(a))?.dimension)) bad.push(`${table} ${key}#${at} needs ${a}`);
       });
     }
@@ -168,7 +173,7 @@ describe('PEOPLE-1 B1b · every printed constraint is the record\'s (100 places 
   it('a goods slot (both pools) agrees with no verb after it and never fills with a service or a work', () => {
     // the integrator's unit of 2026-11-20: "furs and pelts goes out", "what its river fish fetches"; "sends out spellcasting"
     const GOODS = [...Object.entries(POSITION_VARIANTS).map(([k, pool]) => ['structuralPosition', k, pool]), ...Object.entries(CONSTRAINT_VARIANTS).map(([k, pool]) => ['constraint', k, pool])]
-      .flatMap(([field, key, pool]) => /** @type {any[]} */ (pool).map((row, at) => ({ field, key, at, row })))
+      .flatMap(([field, key, pool]) => /** @type {any[]} */ (pool).map((row, i) => ({ field, key, at: i + 1, row })))
       .filter((r) => /\{(?:export|import)\}/.test(r.row.text))
       .map((r) => ({ ...r, re: new RegExp(`^${esc(r.row.text).replace(/\\\{(?:house|export|import)\\\}/g, '(.+)')}$`), slot: r.row.text.search(/\{(?:export|import)\}/) }));
     const misses = [];

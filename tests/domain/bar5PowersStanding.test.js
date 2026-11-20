@@ -15,6 +15,14 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { POSITION_VARIANTS } from '../../src/data/npcStructureVariants.js';
+import { readFileSync } from 'node:fs';
+
+// PEOPLE-1 B1c (the chair's ruling of 20:30 UTC): a pool's index 0 is the writer's own `T` row, its one home; read from the
+// writer's table, SLICED FROM ITS FILE and evaluated (`npcPositionPools.test.js`'s method; never retyped)
+const WRITER = readFileSync(new URL('../../src/generators/npcStructure.js', import.meta.url), 'utf8');
+const cutT = (/** @type {string} */ from, /** @type {string} */ to) => { const a = WRITER.indexOf(from); const b = WRITER.indexOf(to, a); if (a < 0 || b < 0) throw new Error(`slice ${from}`); return WRITER.slice(a, b); };
+/** @type {Record<string, { position: string, constraint: string }>} */
+const { T } = await import(/* @vite-ignore */ `data:text/javascript;base64,${Buffer.from([cutT('const GOVERNANCE_FRACTURED', 'function getPrimaryCondition'), cutT('const T = {};', '// ── Score NPCs'), 'export { T };'].join('\n')).toString('base64')}`);
 
 /** @param {string} s */
 const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -100,7 +108,8 @@ const KEEP = /** @type {Array<[string, RegExp]>} */ ([
   // RE-KEYED BY IDENTITY (PEOPLE-1 B1, 2026-11-20, the chair's ruling of 16:41 UTC): the casters' calm head row is pooled
   // (`data/npcStructureVariants.js`); a head of established standing prints a member of it (its index 0 the secure line), never
   // the low-standing twin, which is no member
-  ['bar0-metropolis-calm-rand-21', new RegExp(`^(?:${POSITION_VARIANTS.magic__stable__dominant.map((r) => r.text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\\\{house\\\}/g, '[^"]+')).join('|')})`)],
+  // (B1c: the pool as the writer composes it, [the T row's own line, ...the data pool])
+  ['bar0-metropolis-calm-rand-21', new RegExp(`^(?:${[{ text: T.magic__stable__dominant.position }, ...POSITION_VARIANTS.magic__stable__dominant].map((r) => r.text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\\\{house\\\}/g, '[^"]+')).join('|')})`)],
 ]);
 
 /** @type {Record<string, any>} */
@@ -177,7 +186,8 @@ describe('BAR5-POWERS · the read\'s rows (REVIEW-BAR-5), each red at 600b7683a'
   const resolved = (seed, line) => {
     if (!line.startsWith('@')) return line;
     const pool = POSITION_VARIANTS[line.slice(1)];
-    const res = [new RegExp(`^${esc(LOW_TWIN_TRADE)}$`), ...pool.slice(1).map((r) => new RegExp(`^${esc(r.text).replace(/\\\{(?:house|export|import)\\\}/g, '.+')}$`))];
+    // B1c: the data pool holds the members past index 0 only (index 0, the T row, is composed by the writer)
+    const res = [new RegExp(`^${esc(LOW_TWIN_TRADE)}$`), ...pool.map((r) => new RegExp(`^${esc(r.text).replace(/\\\{(?:house|export|import)\\\}/g, '.+')}$`))];
     const printed = (towns[seed].npcs || []).map((/** @type {any} */ n) => String(n.structuralPosition || ''));
     return printed.find((/** @type {string} */ p) => res.some((re) => re.test(p))) ?? `(no member of ${line.slice(1)} prints)`;
   };
