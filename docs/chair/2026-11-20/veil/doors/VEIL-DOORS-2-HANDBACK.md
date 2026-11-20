@@ -4,7 +4,7 @@ Seat: VEIL-DOORS-2, branch `lane/veil-doors-2-2026-11-20`, cut from origin/lane/
 back from origin first: equal). Assignment: `lane/chair-2026-11-08 :: docs/chair/2026-11-20/seventh/prompts/VEIL-DOORS-2.txt`,
 read at 6cb1e2003. Written 2026-11-20 02:37 UTC; kept current at every push. Every database local: a scratch PostgreSQL 16.15 in this
 container (unix socket `/var/tmp/vd2/sock`, `listen_addresses = ''`, read back empty), and in-process pglite. **TIP: the commit
-carrying this file.**
+carrying this file** (the last build is 3a57e3a0c; this file's commit adds docs only).
 
 ## 1. The bytes
 | File | sha256 |
@@ -204,3 +204,51 @@ RED at eafece56a (`out/item6-red-at-eafece56a.txt`): the gallery read of a froze
 Rookhold." and the tier shift, name "Rookhold", tier "city", and the live save time. GREEN: the doors' guards and the rollback
 arm, 4 files, 62 of 62; eslint 0.
 tests/security WHOLE at this commit's tree (`out/item6-tests-security.txt`): Test Files 158 passed | 1 skipped (159); Tests 2009 passed | 1 skipped (2010); exit 0. Bytes: 212 `35c91700e0c930e375a99c1ed7f0656b768fc7f2eb9a74b936018a4b98331ccc`; down `b5f15a7a25edf36ebb8298db42afcaef8e27b5775cd59cf5559273d2047a590c`.
+
+## 8. Item 7 — the world columns, MEASURED, NOT BUILT (the chair rules first; message sent 03:49 UTC)
+Evidence: `out/item7-world-measure.json`. 3 born campaign worlds x 6 member towns, the world pulse advanced 12 months
+(`advanceCampaignWorld`, pinned now), the share editor's own `serializeWorldSnapshotPublic` with all five sections on, and
+`buildRealmArcSummary`. Of 41 hideable houses and hidden powers: NO name reaches `world.snapshot`, `world.sections` (section
+keys only) or `realmArcSummary` (empty here: no war or deity arc formed in 12 months). BUT 31 CRIME-WORDED HEADLINES naming
+member towns reach `snapshot.chronicle`: "Thieves and racketeers are working Vysokoino's streets in the open.", "Criminal
+corridor is taking hold in Khankhel", "...protection rackets, smuggling habits and guard corruption." `_gallery_world_snapshot_is_safe`
+refuses KEYS only (the hard-deny ledger keys, any depth, case-folded), never a value. My reading and options are in the
+message; the same stored columns serve `get_unlisted_map`. EXECUTED (the measure); the ruling is the chair's.
+
+## 9. What a visitor's bytes held, before and after (this seat's items)
+Before (cca49cb8d): on a marked share the chronicle named a criminal house the town no longer had, or one added after a
+freeze; it served exposed corruption, a crime stressor's label, the DM's table notes, and every post-freeze entry; a frozen
+share's name, tier and save time followed the live row (dossier, list, map member, import). After (this tip): none of these
+(arms red at the commit before each cure, green here). Unchanged and stated: the world columns (item 7, awaiting the ruling);
+VR28's tier-2 residual (the prosperity band and the stability word as stored).
+
+## 10. What a card, a page and an import lose
+A card: nothing new (a frozen card shows its copy's name and tier, as its body already did). A page (marked shares only):
+chronicle entries of exposed or imposed corruption, crime stressors, table notes, and every entry that names a house, person
+or power the served page does not show (a removed or renamed house under its old name, a dead person); a frozen page's
+chronicle stops at its freeze. An import: a frozen share's record takes the copy's name and tier.
+
+## 11. Stored figures this change moves (not re-frozen here; the lane owner takes each door once at the merged tree)
+The lighting census (new test titles in galleryDoors.pglite: the one-row read, the import path, the event-type table,
+snapshot mode; walker arms 7 and 8); the wiring census and the writers' reach if they read galleryDoors.js's exports
+(`CHRONICLE_CLASSES` is now built from its own table, no longer from `EVENT_TYPES`); `scripts/mutation-coverage-manifest.json`
+(the walker's row extended, done here). A pin red, named, not touched: `tests/lint/migrationSearchPathPin.test.js` 2 of 5, red
+AT THE BASE already (section 3). No new top-level named numeric constant in `src/`.
+
+## 12. LEFT, said plainly (at the mark, 2026-11-20 04:11 UTC)
+1. ITEM 7's build, after the chair's ruling (my recommendation: cure at the source in `serializeWorldSnapshotPublic`, drop
+   crime-class outcomes; and a read-time drop of the chronicle section for maps published before).
+2. ITEM 8 NOT RUN: the reader's repros (`probes/REVIEW-VEIL-10`: chronicle, tile, gaps) red at bedd5a392 and green at this
+   tip, and the acceptance run. Staged for the next seat: the probes archived at `/var/tmp/vd2/rv10` with a runner on this
+   container's instruments (lost with the container: re-make by `git archive origin/lane/review-veil-10-2026-11-20
+   docs/chair/2026-11-20/veil/probes/REVIEW-VEIL-10`, `RV6_PGMOD` = a checkout with `node_modules/pg`, `PGHOST` the scratch
+   socket, `RV10_TPL` a chain database).
+3. The chair's veto points: the event-type classes and the log's-own-names rule (section 6), the VISITOR_LIST reading
+   (section 4), the two hunks in `import_gallery_dossier` (section 7).
+4. The three gates, read at 3a57e3a0c's push (the hook's own run, `out/push-gates-at-3a57e3a0c.txt`):
+   `typecheck:ratchet` OK (167 errors, ceiling 167); `typecheck:domain:strict` OK (1113, ceiling 1113); `lint` 0 errors
+   (38 warnings, none new in the files this seat touched by its eslint runs). This hand-back's own commit changes docs only.
+
+EXECUTED vs PLAUSIBLE: every red, green, cost row and measure above is executed here, with its output file. PLAUSIBLE only:
+production's default privileges (not read: no hosted database); whether other writers than the walker's scan put other
+types in a chronicle (any such type is unclassed, so withheld).
