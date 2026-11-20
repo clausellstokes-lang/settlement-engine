@@ -109,6 +109,31 @@ parts of the whole check (at the close).
   STOP line addressed to a woken chair or seat is appended at the end of the fifth and the sixth handoffs' own logs
   (the first thing a woken chair re-reads).
 
+- **2026-11-20, between the clock's readings of 01:04 and 01:07 UTC, the owner (verbatim):** "what are your holisitc
+  thoughts of the generator barring the simulator". ANSWERED FIRST, in two parts the same turn: at once, the view the
+  records give and the plain statement that it was second-hand (the chair had read no generated town); then, after
+  generating three fresh towns at the line's 29ec255fe (seeds rv2-calm-village-9002, rv2-calm-town-9001,
+  rv2-famine-city-9003, by `docs/chair/2026-11-13/probes/UPKEEP-6/read30/render30.mjs`) and reading the village
+  whole, the town's overview, power tab and Tonight sheet, and the city's overview and Tonight sheet: THE VIEW GIVEN.
+  The engine is the real thing and about four fifths of a great product; the missing fifth is editorial, not
+  structural. WHAT HOLDS: facts cohere across the whole page (the depleted woodland, the camp "Short of timber", its
+  overseer's card, the gaps list); the best lines are very good. WHERE A DM FEELS IT WAS GENERATED: (1) the voice at
+  the seams (names as bare slots: "no rival yet outweighs Feudal Appointee"; a full name three times in one
+  sentence; "They" hooks for a named person); (2) the page does not lead with the fire (a town whose first tension
+  is a creditor about to collect gets a mentor's saved favour as "What is urgent"; in the famine city the three
+  people to voice want things unrelated to the famine: the dramatic frame is excellent, the fill generic); (3)
+  things true to the record and odd to a person (a "Healing (3)" list of burial and two rites; a feudal appointee
+  whose "ruling three" holds a miller and a grove elder; one woman heading both the ruling power and its chief
+  contender; "Stable" beside a legitimacy "openly and widely questioned"; "Trade flows in, goods flow out" on a
+  village with no market; income "100% Harvest" beside five exports): about six in two towns; (4) length (2,839
+  words on the village's tabs, 6,776 on the town's, 12,741 on the city's), so the Tonight sheet and the overview
+  carry the product. SAMENESS NOT JUDGED (identical long sentences were 18 to 20 per cent of the smaller page, the
+  sampled ones interface text). THE STRATEGIC RISK NAMED: weight (48,412 lines of generator, 93,173 of content data,
+  about 3,700 test files; seven seats on security and checking tonight, none on content). RECOMMENDED: after the
+  deploy, ONE content round on the Tonight sheet and the overview alone (urgent is the first tension; wants and hooks
+  tied to the crisis; names with articles and pronouns), then real game masters. THE SLOT (the intake rule): these
+  rows go on the eighth read's list and the first content round after the deploy; S122's heading (SD4) is one of them.
+
 ## 2. Rulings of this chair (each vetoable by the owner)
 
 - **SV1 (00:05 UTC, 2026-11-20): THE VEIL'S LIST ON THREE MACHINES.** VEIL-19 owns 212, its rollback and the twin's
@@ -386,3 +411,15 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   the reader's branch byte for byte, as the owner's same word of 2026-11-18 had the sixth chair do; told to the
   owner. FOR EVERY LATER SEAT: cut it from a base that holds the owner's sentence (the line, or a lane joined onto
   it), or name the sentence's place in its prompt.
+- 01:08 UTC · **A CORRECTION OF MINE, SENT TO ALL SEVEN SEATS (01:08 UTC).** The standing mitigation said a test
+  runs only where `env | grep '^GIT_'` prints nothing. NEVER MEASURED BEFORE IT WAS WRITTEN: in these containers the
+  harness itself always sets eleven such variables (GIT_SSL_CAINFO, GIT_ASKPASS, GIT_EDITOR, GIT_TERMINAL_PROMPT,
+  GIT_CONFIG_COUNT and its KEY and VALUE pairs), all harmless. The hazard is git's REPOSITORY variables. THE CHECK
+  NOW: `env | grep -E '^GIT_(DIR|WORK_TREE|INDEX_FILE|COMMON_DIR|OBJECT_DIRECTORY|PREFIX|NAMESPACE)='` prints
+  nothing. GIT-DOOR is also asked to check that pull request #74's door forgets that set and leaves the harness's
+  own variables alone.
+- 01:08 UTC · **THE READER'S BRANCH IS ON ORIGIN** (`lane/review-veil-10-2026-11-20` at e53798cd1): having read the
+  owner's sentence on the line for itself, its own check allowed the commit and the push; nothing was routed round.
+  The builders are told to run its repros as their reds. While it waits for FINAL it takes what Phase 1B did not
+  reach (master's stored shape through the new doors; the 720 for the gap and tile probes) and a cold read of each
+  cure of its own findings as the builders push them.
