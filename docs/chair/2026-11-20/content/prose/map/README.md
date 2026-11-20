@@ -76,3 +76,15 @@ UNRESOLVED 1, UNKEYED 0, ONE-VARIANT 0. The DS-DEF-5 "100%" rows (arcane ABSENT,
 PRESENT) are SPREAD at the draw (3 eligible, ~35–42% top): in the 8 such rows where the row's vid is not the pool's
 top, SAME-1's holder count equals exactly the places that drew that one vid (12, 13, 10, 7, 9, 15, 12, 15), so the
 100% is made downstream of the draw (INFERRED: the sibling variants print under a different slot key), not by the pick.
+
+## Follow-up (PROSE-1's message): `stored`
+
+`map-draws.census.mjs` now adds `stored: true|false` to each record: whether the drawn template (each `{slot}` a lazy
+wildcard, `town`/`Town` also matching the size noun) matches any string under that place's composed
+`publicProse.blocks` (no-variant draws are `false`). Re-proved on the same 3 places (instrumented prose still
+byte-identical to the plain control). Re-ran the 300 places (4 workers, 56 s, 4 × 75 passed): the same 21,678 records;
+13,906 of 21,387 variant draws stored (65.0%). A probe of the zero-stored pools (DS-GEN-9 founding, DS-POW-7 DORMANT,
+DS-GEN-3 Secure, DS-REL-2) found no literal fragment of the drawn templates in the prose, so these are real
+non-prints, not regex misses (EXECUTED). `rank-excess-stored.mjs` is PROSE-1's `rank-excess.mjs` plus
+`if (!r.stored) continue;`; run as `node rank-excess-stored.mjs draws.hxd.jsonl 60 > RANK-EXCESS-STORED.md`
+(238 pools; total excess 7,619; top 60: 4,959).
