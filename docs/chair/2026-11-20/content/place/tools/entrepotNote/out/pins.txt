@@ -1,0 +1,12 @@
+r2r-city-0 (route road)
+   furs_north (carrier own; printed true): furs-own [argmax] "Many of the furs sold here are taken on its own hunting grounds."
+r2r-town-3 (route river)
+   salt (carrier transit; printed true): salt-bought [drawn] "Salt is bought and sold here in quantity, for preserving food and for selling on."
+   spices_dyes (carrier none; printed true): canonical [drawn] "Produced in distant lands. Crossroads and port settlements control distribution and take the markup."
+r2r-city-2 (route port)
+   salt (carrier transit; printed true): salt-transit [drawn] "No salt is taken here; it is brought in, and sold on or used to preserve food."
+   luxury_goods (carrier transit; printed false): lux-market [drawn] "Costly goods, jewellery and fine metalwork among them, are sold in the market here."
+   spices_dyes (carrier none; printed false): canonical [drawn] "Produced in distant lands. Crossroads and port settlements control distribution and take the markup."
+   silk_luxury_textiles (carrier none; printed false): silk-port [argmax] "Silk arrives by sea, and from here it is carried inland to be sold."
+   magical_goods (carrier transit; printed true): magic-transit [drawn] "Most enchanted goods sold here are brought in from elsewhere, at a high price."
+   furs_north (carrier transit; printed true): furs-transit [drawn] "None of these furs are taken here; they come from the hunting grounds and are traded on."

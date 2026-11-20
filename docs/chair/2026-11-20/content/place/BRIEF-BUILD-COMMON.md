@@ -13,6 +13,8 @@ The owner, 2026-11-20: "So do what you can to comprehensively fix the sameness f
 5. **READERS FOLLOW.** Every reader the MEASURE's section B names that matches the field's WORDS is made to read the new wordings by their pool (never by a copied literal). A SAVED town keeps its stored sentence: nothing changes at render.
 6. **PINNED TESTS THAT MOVE**: re-record each one in the same commit as the change, naming it by file and title in the commit body with before and after; never weaken an assertion, never skip a test. Golden fingerprints (`tests/property/generatorGoldenMaster.test.js` and the manifests that read it) are NOT re-recorded: name which of them your change moves, with before and after, and sign none.
 
+5c. **NO HIDEABLE NEEDS (the chair, 16:51 UTC, CORRECTED 17:13 UTC)**: on a field a player or public page prints, (1) no row may NEED or exclude a house of a hideable kind (`src/domain/people/cardVeil.js :: isHideableHouse`: criminal or clandestine), nor any fact about crime or a clandestine thing: held by an assertion in your own test over every row, with a planted control; (2) every OTHER house a row needs (watch, garrison, walls, tavern, bank, market…) is LISTED pool by pool in the final message (PLACE-1 copies it to the hand-back for the security reader at the join). `factLayers.js` is the table of read layers and holds no hideable rows.
+
 5b. **`src/domain/facts/factVocabulary.js` is READ-ONLY** (the chair, 16:10 UTC): only an atom the chair has granted by name, APPENDED at the end of its list, nothing else in the file touched.
 
 ## Green at your last commit (each run to a file, read by its count lines; `sh scripts/gate-tail.sh <command>`, never a pipe; heavy runs through `sh scripts/gate-mutex.sh --run -- <command>`)

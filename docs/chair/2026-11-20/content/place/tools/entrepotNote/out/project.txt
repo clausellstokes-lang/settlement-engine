@@ -1,0 +1,45 @@
+DROPPED ATOMS: none
+MASK: every stored note equals its masked form in all places; candidate rows hold no digit: true
+
+DRAW: drawn 708, argmax 407 (notes of 600 births)
+
+TOP SHARE BY SIZE: places of 100 holding the commonest note, BEFORE -> AFTER  (and of the size's holders)
+HELD     thorp        3 ->   1   (holders 3; distinct 1 -> 3)   after top: "Some cargo comes ashore here without being declared, and is sold on qu"
+HELD     hamlet       8 ->   3   (holders 12; distinct 3 -> 10)   after top: "The fur trade is steady here, in pelts and the leather made from them."
+HELD     village     13 ->   4   (holders 22; distinct 4 -> 15)   after top: "Much of the salt sold here is its own, taken from the salt flats nearb"
+HELD     town        31 ->   7   (holders 47; distinct 8 -> 37)   after top: "The spice and dye trade here is a trade in other places' goods, bought"
+HELD     city        81 ->  12   (holders 89; distinct 10 -> 84)   after top: "Fine goods are a small trade by weight but a large one by value, and s"
+HELD     metropolis  76 ->  13   (holders 86; distinct 10 -> 84)   after top: "The fur trade is steady here, in pelts and the leather made from them."
+
+PRINTED  thorp        3 ->   1   (holders 3; distinct 1 -> 3)   after top: "Some cargo comes ashore here without being declared, and is sold on qu"
+PRINTED  hamlet       8 ->   3   (holders 12; distinct 3 -> 10)   after top: "The fur trade is steady here, in pelts and the leather made from them."
+PRINTED  village     13 ->   4   (holders 22; distinct 4 -> 15)   after top: "Much of the salt sold here is its own, taken from the salt flats nearb"
+PRINTED  town        31 ->   7   (holders 47; distinct 6 -> 33)   after top: "The spice and dye trade here is a trade in other places' goods, bought"
+PRINTED  city        54 ->  11   (holders 87; distinct 9 -> 72)   after top: "Furs travel from the hunting grounds through trading posts, and the se"
+PRINTED  metropolis  76 ->  13   (holders 81; distinct 9 -> 52)   after top: "The fur trade is steady here, in pelts and the leather made from them."
+
+WORST AFTER: HELD metropolis 13/100. Its ten commonest after-sentences:
+   13  The fur trade is steady here, in pelts and the leather made from them.
+   11  None of these furs are taken here; they come from the hunting grounds and are traded on.
+   11  Most enchanted goods sold here are brought in from elsewhere, at a high price.
+   11  Furs and pelts are a regular part of the trade here.
+   11  Large loads need credit, and the lending here grows with the trade passing through.
+   11  Luxury goods are carried far, and part of what they earn on the way is earned here.
+   11  The trade in enchanted goods is small but valuable, and buyers come here for it.
+   11  Smuggling is the entrepôt trade run in the dark. Goods that cannot be taxed or declared flow through criminal networks.
+   11  Wine is bought in by the cask here, and much of it is sold on.
+   11  Wine is produced in specific vineyard regions and consumed everywhere. Port and river settlements profit from redistribution.
+
+PER CHAIN (all sizes, HELD): notes, distinct after, the commonest row's share of the chain's notes
+  salt                   notes  85  rows used  8 of 10  commonest canonical 19
+  furs_north             notes 155  rows used 11 of 11  commonest furs-steady 31
+  luxury_goods           notes 150  rows used 12 of 12  commonest lux-value 21
+  spices_dyes            notes 143  rows used  9 of 10  commonest spice-others 24
+  silk_luxury_textiles   notes 112  rows used 10 of 11  commonest canonical 16
+  wine_spirits           notes 108  rows used  8 of 9  commonest canonical 24
+  smuggling              notes  93  rows used  7 of 8  commonest smug-loads 20
+  magical_goods          notes  99  rows used  9 of 10  commonest magic-small 20
+  transit_finance        notes  96  rows used  8 of 9  commonest fin-lend 19
+  warehouse_logistics    notes  74  rows used  6 of 8  commonest store-others 21
+
+THE PRINT GATE IS UNCHANGED: the composer rewrites the text only; entrepot, dependency and status are not read or written.

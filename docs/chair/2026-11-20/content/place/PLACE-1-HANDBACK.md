@@ -1,6 +1,6 @@
 # PLACE-1 — hand-back (kept current at every push)
 
-Last written: 2026-11-20T16:39Z Seat: PLACE-1 of the seventh chair (session_019yED1SUxGVHyjQnoqoFvQ8). Prompt: `docs/chair/2026-11-20/seventh/prompts/PLACE-1.txt` on `origin/lane/chair-2026-11-08` (read it whole: it is the assignment). Branch: `lane/place-1-2026-11-20`, cut at 43ab0f5eb (the working line `lane/join-2026-11-14`).
+Last written: 2026-11-20T17:07Z Seat: PLACE-1 of the seventh chair (session_019yED1SUxGVHyjQnoqoFvQ8). Prompt: `docs/chair/2026-11-20/seventh/prompts/PLACE-1.txt` on `origin/lane/chair-2026-11-08` (read it whole: it is the assignment). Branch: `lane/place-1-2026-11-20`, cut at 43ab0f5eb (the working line `lane/join-2026-11-14`).
 
 ## How a successor resumes
 1. Read the prompt, then this file, then the briefs in this directory (`BRIEF-*.md`); nothing else is needed.
@@ -28,8 +28,8 @@ eS.activeChains[].entrepotNote               thorp - | hamle 8/12 | villa 13/22 
 | economicDragDesc | c33953282 | stopped unfinished (no commit) | — | — | DROPPED by the chair 16:30 (SAME-1: printed in 0–7 places a size) |
 | economicViability.dependencies[] + warnings[] + summary | c33953282 | 50384de85 (merged 6571cf474): NOTHING REPEATED PRINTS (Outlook tab and PDF drop severity `dependency`; the one warning hidden by its title; the pages print their own verdict, not `summary`) | DROPPED, reported | — | — | — |
 | tradeDependencies[].impact | c33953282 | — | — | — | DROPPED by the chair 16:30 (printed in 0–4 places a size) |
-| activeChains[].entrepotNote | c33953282 | running (place-1/entrepotNote-measure) | — | — | the chair's SECOND unit |
-| economicViability.plotHooks[].hook | f18e3c59c | — | — | — | added by the chair 16:38, after entrepotNote |
+| activeChains[].entrepotNote | c33953282 | 5ef59564a (merged 0899d93e6): PRINTS on Economics › Economic Flows cards (entrepot && !dependency) and the PDF; held top 3/8/13/31/81/76 → 1/3/4/7/12/13 WITH the carrier atom (metro 24 without) | sent as 0899d93e6 with ATOM carrier: own\|transit and six calls; WAITING | the chair's SECOND unit |
+| economicViability.plotHooks[].hook | f18e3c59c | first try stopped unfinished (seat limit) 16:4x; re-dispatched 17:0x (place-1/viabilityHooks-measure-2) | — | — | added by the chair 16:38, after entrepotNote |
 | safetyProfile.plotHooks[] | f18e3c59c | — | — | — | added by the chair 16:38, after entrepotNote |
 
 ## Laws I hold (from the prompt; short)
@@ -44,6 +44,12 @@ Builders build, I integrate: one builder a field, red first; I read its diff onc
 
 - 16:30 UTC: order: safetyDesc FIRST, entrepotNote SECOND; economicDragDesc, tradeDependencies, viability DROPPED (SAME-1's render of 300 places).
 - 16:38 UTC: two hook fields added after entrepotNote; THE RULE FOR A HOOK: a lead a DM can use tonight, may propose a twist, may not name a house the place lacks. `publicProse.blocks.*` are PROSE-1's, not mine.
+- 16:47 UTC: safetyDesc lines APPROVED (all 78 rows; my four calls; walls row 4 reworded "The walls keep the outside out; the trouble there is starts within."); re-measure on the built tree and give both.
+- 16:51 UTC: NO ROW MAY NEED A HIDEABLE FACT (`factLayers.js`) on a field a player or public page prints; say in the hand-back how it is held and which reads serve the field.
+- 17:13 UTC: the 16:51 condition CORRECTED: the test is `cardVeil.js :: isHideableHouse` (criminal or clandestine) or any crime/clandestine fact (red); every other house a row needs is LISTED here, pool by pool, for the security reader at the join (see 'Houses the pools need').
+
+## Houses the pools need (for the security reader at the join)
+(filled per unit at its merge)
 
 ## Named survivors (found, not mine to build)
 - The economy's output never reaches 70 in 600 default births, so every busy-trade branch of `prosperity.js :: situationDescOf` (and the label bonus at 70) is dead (`situationDesc-MEASURE.md` §A). The chair: a named survivor, not the fortune lane's to build now.

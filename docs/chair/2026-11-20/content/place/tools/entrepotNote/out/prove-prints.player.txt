@@ -1,0 +1,18 @@
+r2r-city-2: surfaces walked 20
+   salt (entrepot true, dependency false, status vulnerable): "Salt is among the most-traded commodities. Port and crossroads settlements profit from red…"
+      printed on: Systems/Economics
+   luxury_goods (entrepot true, dependency true, status vulnerable): "Luxury goods are the primary cargo of long-distance trade. Entrepôt cities profit enormous…"
+      printed on: NONE
+   spices_dyes (entrepot true, dependency true, status vulnerable): "Produced in distant lands. Crossroads and port settlements control distribution and take t…"
+      printed on: NONE
+   silk_luxury_textiles (entrepot true, dependency true, status vulnerable): "Silk is not produced locally anywhere. Port cities control import; crossroads cities contr…"
+      printed on: NONE
+   magical_goods (entrepot true, dependency false, status entrepot): "Magical items are among the highest-value trade goods. Cities near magical nodes become di…"
+      printed on: Systems/Economics
+   furs_north (entrepot true, dependency false, status entrepot): "Furs travel from the hunting grounds through trading posts, and the settlements along the …"
+      printed on: Systems/Economics
+r2r-town-3: surfaces walked 20
+   salt (entrepot true, dependency false, status entrepot): "Salt is among the most-traded commodities. Port and crossroads settlements profit from red…"
+      printed on: Systems/Economics
+   spices_dyes (entrepot true, dependency false, status entrepot): "Produced in distant lands. Crossroads and port settlements control distribution and take t…"
+      printed on: Systems/Economics
