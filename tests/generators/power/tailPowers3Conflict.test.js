@@ -40,7 +40,9 @@ describe("TAIL-POWERS-3 · batch 2: a conflict line about the seat's rival needs
     'r2r-metropolis-29': ['The commander-prelate has declared a heresy investigation', 'The merchant class is outbuying noble landholdings'],
     'r2r-city-20': ['The church is demanding veto power over council appointments', 'Ecclesiastical Council has been debating market levies'],
     'r2r-hamlet-41': ['The church is demanding veto power over council appointments', 'The most devout households want a say over who may trade and when'],
-    'r2r-city-6': ['The military commanders are pushing for expanded authority over civilian courts', 'Military City Council has been debating market levies'],
+    // BUILD-CONFLICT (DEPTH-2, 2026-11-20): the levies rung picks its quarrel by keyed hash; r2r-city-6 -> r2r-town-89 (a
+    // Military Council's own seat, its strong military presence printed: the commanders' rung yields to the levies, picked)
+    'r2r-town-89': ['The military commanders are pushing for expanded authority over civilian courts', 'Military Council has been debating market levies'],
     'r2r-metropolis-53': ['The military commanders are pushing for expanded authority over civilian courts', 'The church is demanding veto power over council appointments'],
     'r2r-metropolis-3': ['A hedge wizard was dragged before the ecclesiastical court', 'The military commanders are pushing for expanded authority over civilian courts'],
     'r2r-hamlet-55': ['The priest has summoned someone before the church court', 'The most devout households want a say over who may trade and when'],
