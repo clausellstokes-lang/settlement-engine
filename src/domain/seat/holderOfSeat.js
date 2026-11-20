@@ -12,8 +12,8 @@
  *       `powerStrata.js :: liveSeatCandidatesOf` adds, read here so this leaf never imports `powerStrata.js`, which
  *       imports `rulingPowerCoup.js`, which U4 makes import this leaf);
  *   R3  for a seat of a kind (its form read through `seatTable.js :: formKindOf`, else the governing row's own kind),
- *       the leading OPEN power of that kind (`seatTable.js :: contestKindOf`; open = `cardVeil.js :: isVeiledPower`
- *       false), by power, then name in codepoint order. A civic seat (`government`), an unplaced one (`other`) and a
+ *       the leading OPEN power of that kind (`seatTable.js :: contestKindOf`; open = `seatTable.js :: isVeiledRow`,
+ *       `cardVeil.js :: isVeiledPower`'s test, false), by power, then name in codepoint order. A civic seat (`government`), an unplaced one (`other`) and a
  *       criminal one are not seats of a kind: the office holds itself there, as the proposal measured (section (1));
  *   R4  nobody outside: the office holds itself; or
  *   R5  for a government in `APPOINTED_SEAT_FORMS` (`representatives.js :: APPOINTED_GOVERNMENTS`), the one who
@@ -49,6 +49,12 @@
  * NOT HERE: the seat law (the leaf is a read; its callers gate); RULINGS (c)'s sovereign reading (Royal Authority on a
  * royal-seat house read as the sovereign's own seat, out of R5 for that reading only): U12 measures and wires it.
  *
+ * THE VEIL READ (U4-CURE, the chair 13:50Z): a power's veil is read with `seatTable.js :: isVeiledRow`, the row twin of
+ * `cardVeil.js :: isVeiledPower` (`tests/domain/seat/seatTable.test.js` pins the two equal), never by importing
+ * `cardVeil.js`: that module imports `spatial/cohesionWeave.js`, and `rulingPowerCoup.js` imports this leaf, so the import
+ * would carry `cohesionWeave.js` into the campaign PDF's and the world book's closures (`writerReach.walker`'s frozen
+ * reach of "fear on candidates"). This leaf's closure must not reach it (`holderOfSeat.test.js`, arm (9)).
+ *
  * Pure: no RNG, no store, no wall clock, no write. Lazy: pinned in `vite.config.js :: FIRSTPAINT2_LAZY_DOMAIN`.
  *
  * @guarded-by tests/domain/seat/holderOfSeat.test.js
@@ -58,9 +64,8 @@ import { governingFactionOf, nameOf, num } from '../rulingPower.js';
 import { FACTION_ARCHETYPES as A } from '../factionArchetypes.js';
 import { seatCandidatesOf } from '../dossier/seatHolder.js';
 import { rankIn } from '../people/membership.js';
-import { isVeiledPower } from '../people/cardVeil.js';
 import { cardInstitutionVeilOf } from '../people/cardPowers.js';
-import { contestKindOf, formKindOf, ownKindOf } from './seatTable.js';
+import { contestKindOf, formKindOf, isVeiledRow, ownKindOf } from './seatTable.js';
 import { officeFamilyOfForm, officeTitleOf, officeWordInfo } from '../../data/cultureOfficeTitles.js';
 
 /** @typedef {import('../rulingPower.js').RulingFaction} RulingFaction */
@@ -151,11 +156,11 @@ function transferTakerOf(settlement, form) {
 }
 
 /**
- * May the reader be told this power holds the seat? Not a hidden or criminal power (`isVeiledPower`), and not one
+ * May the reader be told this power holds the seat? Not a hidden or criminal power (`isVeiledRow`), and not one
  * whose kind reads criminal by its name (`contestKindOf`).
  * @param {RulingFaction} row @returns {boolean}
  */
-const servable = (row) => !isVeiledPower(row) && contestKindOf(row) !== A.CRIMINAL;
+const servable = (row) => !isVeiledRow(row) && contestKindOf(row) !== A.CRIMINAL;
 
 /**
  * WHO HOLDS THIS SEAT.
@@ -206,7 +211,7 @@ export function holderOf(settlement, options) {
   // R3: a seat of a kind: the leading open power of that kind.
   if (!NO_SEAT_KIND.includes(officeKind)) {
     const same = factions
-      .filter((f) => !!f && f !== governing && !isVeiledPower(f) && contestKindOf(f) === officeKind)
+      .filter((f) => !!f && f !== governing && !isVeiledRow(f) && contestKindOf(f) === officeKind)
       .sort((a, b) => (num(b.power) - num(a.power)) || (nameOf(a) < nameOf(b) ? -1 : nameOf(a) > nameOf(b) ? 1 : 0));
     if (same.length) return answer('R3', same[0]);
   }
