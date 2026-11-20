@@ -1,0 +1,30 @@
+
+ RUN  v4.1.8 /tmp/claude-0/-home-user-settlement-engine/05270764-0413-5029-9d3e-568faa330047/scratchpad/wt-conflict
+
+ ❯ tests/property/espionageDormancyFence.test.js (21 tests | 1 failed) 118521ms
+     × THE DRIVEN GOLDEN: 360 settlements at this tip hash to the PRE-COUPLING corpus 109967ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/property/espionageDormancyFence.test.js > FENCE 1 (REPLACED) — the driven byte-identity golden, and the chain that terminates > THE DRIVEN GOLDEN: 360 settlements at this tip hash to the PRE-COUPLING corpus
+AssertionError: THE DRIVEN CORPUS MOVED. This is a STOP, not a re-record. The constant is re-recorded ONLY inside a NAMED CHARTERED WINDOW, and after the ENGINE-HYGIENE landing spent AGN's, T13 TRANS closed with zero movement (§883); exactly ONE remains: the LIGHTING WAVE (§881.4). Anything else moving this number is an unpriced same-seed shift in the world a player gets. FIND THE MOVER — and attribute it to zero residue — before touching this constant; see this file's golden header for how the last two windows did it.: expected 'bf6f92cd7dd2342277d51ff3516eba602bad0…' to be '9829e655d0ac9d9f3d9b16d12bd1a26ec1faa…' // Object.is equality
+
+Expected: "9829e655d0ac9d9f3d9b16d12bd1a26ec1faa1afbd7fe4573c06596b994b733b"
+Received: "bf6f92cd7dd2342277d51ff3516eba602bad03fad1e2f62dd9722547663ab992"
+
+ ❯ tests/property/espionageDormancyFence.test.js:1502:7
+    1500|       + ' touching this constant; see this file\'s golden header for h…
+    1501|       + ' windows did it.',
+    1502|     ).toBe(PRE_COUPLING_CORPUS_SHA);
+       |       ^
+    1503|   }, 120_000);
+    1504|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 8 passed (9)
+      Tests  1 failed | 141 passed (142)
+   Start at  15:57:01
+   Duration  189.84s (transform 11.93s, setup 491ms, import 102.53s, tests 331.80s, environment 1ms)
+

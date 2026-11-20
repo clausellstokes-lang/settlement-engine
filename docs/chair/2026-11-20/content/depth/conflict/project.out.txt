@@ -1,0 +1,24 @@
+thorp       before 52/100  after 24/100 (A dispute over grazing rights and water access has run for t) | next 10 (g4-road), 10 (Farms nearby have been abandoned after a)
+hamlet      before 49/100  after 33/100 (A dispute over grazing rights and water access has run for t) | next 12 (Monsters prowl near the outlying farms, ), 5 (The sick have been shut away under quara)
+village     before 44/100  after 13/100 (g2-rotation) | next 13 (g3-mill), 10 (A dispute over grazing rights and water )
+town        before 58/100  after 12/100 (l5-watch) | next 11 (l3-granary), 10 (l6-taverns)
+city        before 52/100  after 19/100 (The military commanders are pushing for expanded authority o) | next 16 (l2-millers), 10 (§ has been debating market levies for th)
+metropolis  before 52/100  after 11/100 (The military commanders are pushing for expanded authority o) | next 9 (l3-granary), 9 (l7-forges)
+
+eligibility within the branch (places where the line's needs hold at the site), by size:
+  g1-grazing     thorp 60  hamle 51  villa 61  town 0  city 0  metro 0
+  g2-rotation    thorp 0  hamle 0  villa 61  town 0  city 0  metro 0
+  g3-mill        thorp 0  hamle 0  villa 61  town 0  city 0  metro 0
+  g4-road        thorp 25  hamle 16  villa 22  town 0  city 0  metro 0
+  g5-river       thorp 18  hamle 7  villa 18  town 0  city 0  metro 0
+  g6-shore       thorp 8  hamle 8  villa 8  town 0  city 0  metro 0
+  g7-cows        thorp 19  hamle 12  villa 15  town 0  city 0  metro 0
+  g8-long-trip   thorp 9  hamle 9  villa 10  town 0  city 0  metro 0
+  l1-levies      thorp 0  hamle 0  villa 0  town 60  city 57  metro 57
+  l2-millers     thorp 0  hamle 0  villa 0  town 60  city 57  metro 57
+  l3-granary     thorp 0  hamle 0  villa 0  town 60  city 57  metro 57
+  l4-walls       thorp 0  hamle 0  villa 0  town 37  city 57  metro 57
+  l5-watch       thorp 0  hamle 0  villa 0  town 60  city 57  metro 57
+  l6-taverns     thorp 0  hamle 0  villa 0  town 60  city 57  metro 57
+  l7-forges      thorp 0  hamle 0  villa 0  town 27  city 50  metro 55
+  l8-dock-dues   thorp 0  hamle 0  villa 0  town 16  city 22  metro 24

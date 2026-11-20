@@ -1,0 +1,11 @@
+trees.mjs: births at 105ceb55f
+names3 born: exit codes 0,0
+trees.mjs: births at e0ce25807
+names3 born: exit codes 0,0
+trees.mjs: 105ceb55f -> e0ce25807
+## golden: documents 525 · identical 253 · with a non-string difference 0 · differing strings 278 · of them passing the word check (none) 278 · other 0
+| powerStructure.recentConflict | 272 | 272 |
+| pressureSentence | 6 | 6 |
+## census: documents 720 · identical 646 · with a non-string difference 0 · differing strings 111 · of them passing the word check (none) 111 · other 0
+| powerStructure.recentConflict | 74 | 74 |
+| pressureSentence | 37 | 37 |

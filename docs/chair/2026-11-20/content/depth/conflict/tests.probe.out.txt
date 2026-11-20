@@ -1,0 +1,236 @@
+0
+
+ RUN  v4.1.8 /tmp/claude-0/-home-user-settlement-engine/05270764-0413-5029-9d3e-568faa330047/scratchpad/wt-conflict
+
+ ❯ tests/generators/bar8Powers.test.js (5 tests | 1 failed) 8625ms
+     × 15b: no grazing quarrel where nothing grazes; the places that graze keep it 10ms
+ ❯ tests/generators/power/tailPowers3Conflict.test.js (11 tests | 1 failed) 5507ms
+     × r2r-city-6: the conflict reads "Military City Council has been debating market levies", not "The military commanders are pushing for expanded authority over civilian courts" 505ms
+ ❯ tests/generators/bar3PowersLines.test.js (17 tests | 2 failed) 4297ms
+     × C27440 r2r-town-2: "The merchants have stopped attending the sessions." refused; "The merchants have argued against every one of them, and nothing has been settled yet." prints instead 25ms
+     × KEEP C27440 r2r-town-20: "The merchants have stopped attending the sessions." still prints 6ms
+ ❯ tests/lint/presumptionClasses.walker.test.js (16 tests | 2 failed) 3926ms
+     × no NEW undeclared line: every hit is banked (declare the line; the door never banks a new one) 11ms
+     × no stale row: a cured line leaves the register (the close runs `node scripts/presumption-classes-door.mjs --shrink`) 3ms
+ ❯ tests/generators/power/conflictLadderReadsRoster.test.js (2 tests | 2 failed) 1809ms
+     × the guard towns: each line is gone where its market or court is not, and says what the ladder says next 937ms
+     × the twins: each line keeps its place where its market or court stands 859ms
+ ❯ tests/property/espionageDormancyFence.test.js (21 tests | 1 failed) 87661ms
+     × THE DRIVEN GOLDEN: 360 settlements at this tip hash to the PRE-COUPLING corpus 79825ms
+ ❯ tests/lint/presumedThings.walker.test.js (43 tests | 1 failed) 98699ms
+     × ⛔ every source literal that names a thing declares it, or has its row 36ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 10 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/generators/bar3PowersLines.test.js > BAR3-POWERS · a power line claims no more than the record bears (P3) > C27440 r2r-town-2: "The merchants have stopped attending the sessions." refused; "The merchants have argued against every one of them, and nothing has been settled yet." prints instead
+AssertionError: expected 'The millers have raised the charge fo…' to contain 'The merchants have argued against eve…'
+
+Expected: "The merchants have argued against every one of them, and nothing has been settled yet."
+Received: "The millers have raised the charge for grinding, and the households who bring their grain say the old charge was fair."
+
+ ❯ tests/generators/bar3PowersLines.test.js:80:20
+     78|     it(`${row} ${seed}: "${refused}" refused; "${instead}" prints inst…
+     79|       const said = read(towns[seed]);
+     80|       expect(said).toContain(instead);
+       |                    ^
+     81|       expect(said.includes(refused)).toBe(false);
+     82|     });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/10]⎯
+
+ FAIL  tests/generators/bar3PowersLines.test.js > BAR3-POWERS · a power line claims no more than the record bears (P3) > KEEP C27440 r2r-town-20: "The merchants have stopped attending the sessions." still prints
+AssertionError: expected 'Everyone agrees the watch must be pai…' to contain 'The merchants have stopped attending …'
+
+Expected: "The merchants have stopped attending the sessions."
+Received: "Everyone agrees the watch must be paid, but no one agrees how much each household should give."
+
+ ❯ tests/generators/bar3PowersLines.test.js:86:33
+     84|   for (const [row, seed, read, kept] of KEEP) {
+     85|     it(`KEEP ${row} ${seed}: "${kept}" still prints`, () => {
+     86|       expect(read(towns[seed])).toContain(kept);
+       |                                 ^
+     87|     });
+     88|   }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/10]⎯
+
+ FAIL  tests/generators/bar8Powers.test.js > BAR8-K-POWERS: a power's own words are true of that power and of the place > 15b: no grazing quarrel where nothing grazes; the places that graze keep it
+AssertionError: no grazing quarrel in a place with no grazing — 1 of 3 case(s) failed. This is the TRUE count: every case ran. A bare seed loop would have reported 1 and stopped at the first one.
+[1] {"seed":"r2r-thorp-3","town":{"name":"Gantulgaabad","tier":"thorp","population":12,"institutions":[{"category":"Econo... — r2r-thorp-3: the cascade's last quarrel still prints, over the place's own ground or water: expected 'The households nearest the river and …' to match /^A dispute over (rights on .+ and acc…/: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "[1] {\"seed\":\"r2r-thorp-3\",\"town\":{\"name\":\"Gantulgaabad\",\"tier\":\"thorp\",\"population\":12,\"institutions\":[{\"category\":\"Econo... — r2r-thorp-3: the cascade's last quarrel still prints, over the place's own ground or water: expected 'The households nearest the river and …' to match /^A dispute over (rights on .+ and acc…/",
++ ]
+
+ ❯ expectNoSeedFailures tests/helpers/seedFailures.js:147:26
+    145|   const header = `${label} — ${scale} case(s) failed. This is the TRUE…
+    146|     + ` A bare seed loop would have reported 1 and stopped at the firs…
+    147|   expect(roster, header).toEqual([]);
+       |                          ^
+    148| }
+    149|
+ ❯ tests/generators/bar8Powers.test.js:157:25
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/10]⎯
+
+ FAIL  tests/property/espionageDormancyFence.test.js > FENCE 1 (REPLACED) — the driven byte-identity golden, and the chain that terminates > THE DRIVEN GOLDEN: 360 settlements at this tip hash to the PRE-COUPLING corpus
+AssertionError: THE DRIVEN CORPUS MOVED. This is a STOP, not a re-record. The constant is re-recorded ONLY inside a NAMED CHARTERED WINDOW, and after the ENGINE-HYGIENE landing spent AGN's, T13 TRANS closed with zero movement (§883); exactly ONE remains: the LIGHTING WAVE (§881.4). Anything else moving this number is an unpriced same-seed shift in the world a player gets. FIND THE MOVER — and attribute it to zero residue — before touching this constant; see this file's golden header for how the last two windows did it.: expected '5f05faefa36a555bf4a6fcd68b6f06c682ea9…' to be '9829e655d0ac9d9f3d9b16d12bd1a26ec1faa…' // Object.is equality
+
+Expected: "9829e655d0ac9d9f3d9b16d12bd1a26ec1faa1afbd7fe4573c06596b994b733b"
+Received: "5f05faefa36a555bf4a6fcd68b6f06c682ea9ec9439c01ffbaf7f9513ceb2b0a"
+
+ ❯ tests/property/espionageDormancyFence.test.js:1502:7
+    1500|       + ' touching this constant; see this file\'s golden header for h…
+    1501|       + ' windows did it.',
+    1502|     ).toBe(PRE_COUPLING_CORPUS_SHA);
+       |       ^
+    1503|   }, 120_000);
+    1504|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/10]⎯
+
+ FAIL  tests/lint/presumedThings.walker.test.js > ARM 1 — the source > ⛔ every source literal that names a thing declares it, or has its row
+AssertionError: declare the thing on the line (needs or excludes, with its twin), never add a row: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/data/powerSiblings.js :: house: tavern :: \"The council wants the taverns closed earlier, and the tavern keepers say an earlier hour would ruin them.\"",
++ ]
+
+ ❯ tests/lint/presumedThings.walker.test.js:444:92
+    442|     const fresh = hits.filter((h) => !banked.has(key(h.file, h.thing, …
+    443|     expect(fresh.map((h) => `${h.file} :: ${h.thing} :: ${JSON.stringi…
+    444|       'declare the thing on the line (needs or excludes, with its twin…
+       |                                                                                            ^
+    445|   });
+    446|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/10]⎯
+
+ FAIL  tests/lint/presumptionClasses.walker.test.js > the tree against its register > no NEW undeclared line: every hit is banked (declare the line; the door never banks a new one)
+AssertionError: expected [ …(5) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/data/powerSiblings.js · office:none · Everyone agrees the watch must be paid, but no one agrees how much each household should give.",
++   "src/data/powerSiblings.js · resource:none · A dispute over field rotation and grazing rights has divided the village for most of this season.",
++   "src/generators/power/governanceNarrative.js · office:none · , surface: 'power', drawKind: 'H' }); const text = typeof r.text === 'string' ? r.text : pool[0].tex",
++   "src/generators/power/governanceNarrative.js · office:none · , factionCategories.js), not its name sniffed for \"garrison\"; measured equal over the 720
++     seatIs",
++   "src/generators/power/governanceNarrative.js · resource:none · , surface: 'power', drawKind: 'H' }); const text = typeof r.text === 'string' ? r.text : pool[0].tex",
++ ]
+
+ ❯ tests/lint/presumptionClasses.walker.test.js:170:19
+    168|     const banked = bankedKeys(register);
+    169|     const fresh = hits.filter((h) => !banked.has(h.key)).map((h) => `$…
+    170|     expect(fresh).toEqual([]);
+       |                   ^
+    171|   });
+    172|   test('no stale row: a cured line leaves the register (the close runs…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/10]⎯
+
+ FAIL  tests/lint/presumptionClasses.walker.test.js > the tree against its register > no stale row: a cured line leaves the register (the close runs `node scripts/presumption-classes-door.mjs --shrink`)
+AssertionError: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/generators/power/governanceNarrative.js	office	b20c525896500e37",
++ ]
+
+ ❯ tests/lint/presumptionClasses.walker.test.js:174:68
+    172|   test('no stale row: a cured line leaves the register (the close runs…
+    173|     const found = new Set(hits.map((h) => h.key));
+    174|     expect([...bankedKeys(register)].filter((k) => !found.has(k))).toE…
+       |                                                                    ^
+    175|   });
+    176|   test('every row is of the register\'s shape, unique, and the registe…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/10]⎯
+
+ FAIL  tests/generators/power/conflictLadderReadsRoster.test.js > POWERS-13 #291 · the conflict ladder names a market or a court only where it stands > the guard towns: each line is gone where its market or court is not, and says what the ladder says next
+AssertionError: each guard town prints the ladder's next line, not the line naming what it lacks — 3 of 5 case(s) failed. This is the TRUE count: every case ran. A bare seed loop would have reported 1 and stopped at the first one.
+[0] ["bar0-village-calm-rand-1","has been debating market levies for three months. The merchants have stopped attending t... — LIVENESS ANCHOR [bar0-village-calm-rand-1: the ladder's next line, not the line naming what it lacks]: the anchor sibling is missing from the collection, so the exclusion assertion below cannot dis...
+[1] ["r2r-village-4","has been debating market levies for three months. The merchants have stopped attending the sessions... — LIVENESS ANCHOR [r2r-village-4: the ladder's next line, not the line naming what it lacks]: the anchor sibling is missing from the collection, so the exclusion assertion below cannot distinguish "c...
+[3] ["r2r-hamlet-14","The merchant class is outbuying noble landholdings.","A dispute over grazing rights and water acces... — LIVENESS ANCHOR [r2r-hamlet-14: the ladder's next line, not the line naming what it lacks]: the anchor sibling is missing from the collection, so the exclusion assertion below cannot distinguish "c...: expected [ …(3) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "[0] [\"bar0-village-calm-rand-1\",\"has been debating market levies for three months. The merchants have stopped attending t... — LIVENESS ANCHOR [bar0-village-calm-rand-1: the ladder's next line, not the line naming what it lacks]: the anchor sibling is missing from the collection, so the exclusion assertion below cannot dis...",
++   "[1] [\"r2r-village-4\",\"has been debating market levies for three months. The merchants have stopped attending the sessions... — LIVENESS ANCHOR [r2r-village-4: the ladder's next line, not the line naming what it lacks]: the anchor sibling is missing from the collection, so the exclusion assertion below cannot distinguish \"c...",
++   "[3] [\"r2r-hamlet-14\",\"The merchant class is outbuying noble landholdings.\",\"A dispute over grazing rights and water acces... — LIVENESS ANCHOR [r2r-hamlet-14: the ladder's next line, not the line naming what it lacks]: the anchor sibling is missing from the collection, so the exclusion assertion below cannot distinguish \"c...",
++ ]
+
+ ❯ expectNoSeedFailures tests/helpers/seedFailures.js:147:26
+    145|   const header = `${label} — ${scale} case(s) failed. This is the TRUE…
+    146|     + ` A bare seed loop would have reported 1 and stopped at the firs…
+    147|   expect(roster, header).toEqual([]);
+       |                          ^
+    148| }
+    149|
+ ❯ tests/generators/power/conflictLadderReadsRoster.test.js:54:25
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/10]⎯
+
+ FAIL  tests/generators/power/conflictLadderReadsRoster.test.js > POWERS-13 #291 · the conflict ladder names a market or a court only where it stands > the twins: each line keeps its place where its market or court stands
+AssertionError: each twin keeps the line its market or court bears out — 1 of 4 case(s) failed. This is the TRUE count: every case ran. A bare seed loop would have reported 1 and stopped at the first one.
+[0] ["r2r-town-4","has been debating market levies for three months. The merchants have argued against every one of them,... — r2r-town-4: expected 'Everyone agrees the watch must be pai…' to contain 'has been debating market levies for t…': expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "[0] [\"r2r-town-4\",\"has been debating market levies for three months. The merchants have argued against every one of them,... — r2r-town-4: expected 'Everyone agrees the watch must be pai…' to contain 'has been debating market levies for t…'",
++ ]
+
+ ❯ expectNoSeedFailures tests/helpers/seedFailures.js:147:26
+    145|   const header = `${label} — ${scale} case(s) failed. This is the TRUE…
+    146|     + ` A bare seed loop would have reported 1 and stopped at the firs…
+    147|   expect(roster, header).toEqual([]);
+       |                          ^
+    148| }
+    149|
+ ❯ tests/generators/power/conflictLadderReadsRoster.test.js:68:25
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/10]⎯
+
+ FAIL  tests/generators/power/tailPowers3Conflict.test.js > TAIL-POWERS-3 · batch 2: a conflict line about the seat's rival needs the rival > r2r-city-6: the conflict reads "Military City Council has been debating market levies", not "The military commanders are pushing for expanded authority over civilian courts"
+AssertionError: LIVENESS ANCHOR [r2r-city-6]: the anchor sibling is missing from the collection, so the exclusion assertion below cannot distinguish "correctly excluded" from "the whole collection drifted away". Fix the collection or choose an anchor that still travels this path — do not delete the anchor to get green.: expected 'The smiths start their hammering befo…' to contain 'Military City Council has been debati…'
+
+Expected: "Military City Council has been debating market levies"
+Received: "The smiths start their hammering before dawn, and the households beside the forges want them moved further out."
+
+ ❯ expectAbsentWithAnchor tests/helpers/anchoredNegatives.js:127:5
+    125|     + ` collection drifted away". Fix the collection or choose an anch…
+    126|     + ` travels this path — do not delete the anchor to get green.`,
+    127|   ).toContain(anchor);
+       |     ^
+    128|   expect(
+    129|     collection,
+ ❯ tests/generators/power/tailPowers3Conflict.test.js:51:29
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/10]⎯
+
+
+ Test Files  7 failed | 2 passed (9)
+      Tests  10 failed | 132 passed (142)
+   Start at  15:54:05
+   Duration  158.50s (transform 8.56s, setup 273ms, import 74.80s, tests 260.58s, environment 1ms)
+

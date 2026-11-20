@@ -1,0 +1,39 @@
+thorp       before 52/100 distinct 19 | after 21/100 distinct 24: A dispute over grazing rights and water access has run for two seasons | next 12: The households nearest the river and tho | sentences moved 35
+hamlet      before 49/100 distinct 23 | after 32/100 distinct 27: A dispute over grazing rights and water access has run for two seasons | next 12: Monsters prowl near the outlying farms,  | sentences moved 20
+village     before 44/100 distinct 19 | after 18/100 distinct 24: A dispute over field rotation and grazing rights has divided the villa | next 17: A dispute over grazing rights and water  | sentences moved 42
+town        before 58/100 distinct 16 | after 11/100 distinct 23: How much grain the granary should hold back for the winter has been ar | next 10: Monsters prowl near the outlying farms,  | sentences moved 52
+city        before 52/100 distinct 20 | after 19/100 distinct 28: The military commanders are pushing for expanded authority over civili | next 10: § wants the taverns closed earlier, and  | sentences moved 47
+metropolis  before 52/100 distinct 19 | after 11/100 distinct 29: §s have raised the charge for grinding, and the households who bring t | next 11: Who should pay to mend the walls has bee | sentences moved 51
+
+every after-sentence printed by 6+ places (all sizes):
+  49 A dispute over grazing rights and water access has run for two seasons, and the families on each side no longe
+  33 The military commanders are pushing for expanded authority over civilian courts, and § is losing ground.
+  32 Monsters prowl near the outlying farms, and no one here can agree whether to raise a levy or pay others to dri
+  26 Everyone agrees the watch must be paid, but no one agrees how much each household should give.
+  24 The households along the road cannot agree who should fill the ruts outside their doors, so the work keeps bei
+  24 § has been debating market levies for three months. The merchants have argued against every one of them, and n
+  23 Who should pay to mend the walls has been argued since spring, and every street says the next one should pay m
+  22 How much grain the granary should hold back for the winter has been argued all season, and nothing is agreed.
+  22 §s have raised the charge for grinding, and the households who bring their grain say the old charge was fair.
+  21 A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer
+  21 The sick have been shut away under quarantine. Many ignore it, and two people who tried to enforce it were bea
+  20 The households nearest the river and those further off disagree over who may draw water first in the dry weeks
+  18 A dispute over field rotation and grazing rights has divided the village for most of this season.
+  16 The smiths start their hammering before dawn, and the households beside the forges want them moved further out
+  14 Farms nearby have been abandoned after attacks. The community cannot agree on whether to shelter in place, bui
+  14 Conscription has taken the workers, and every household is short-handed. Crown supply carts take what they nee
+  14 Two powers have stopped coming to §'s meetings. Each makes its own decisions now, and the others overturn them
+  14 § wants the taverns closed earlier, and the tavern keepers say an earlier hour would ruin them.
+  12 § wants a bigger share of each sack for the grinding, and the households who bring their grain say the old sha
+  11 Pamphlets against those in charge pass from hand to hand, and several who were expected stayed away from the l
+  11 The dock dues were raised at the start of the season, and the boat owners have complained of it ever since.
+   9 Two households graze their cows on the same patch of grass, and each says the other's beasts take more than th
+   9 The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point
+   9 With the nearest market days away, the households argue over whose turn it is to make the long trip.
+   9 More families arrived this week, and more the week before. The work they came for is not here, and every house
+   9 § wants § closed earlier, and §s say an earlier hour would ruin them.
+   8 The last harvest failed badly. What remains is being rationed by whoever holds the stores. Neighbours who shar
+   7 The settlement is under siege. Its stores and every able pair of hands now go to the defence, and nothing else
+   7 § has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the
+   6 Two candidates for the vacant position each held separate public assemblies on the same day. Both claimed the 
+   6 The investigation into the betrayal has been obstructed twice. The obstruction came from inside §. No one will

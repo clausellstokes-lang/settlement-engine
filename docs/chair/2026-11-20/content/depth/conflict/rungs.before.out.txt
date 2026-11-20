@@ -1,0 +1,67 @@
+== thorp (n=100) top masked sentence 52/100: A dispute over grazing rights and water access has run for two seasons, and those on each 
+   second 10: Farms nearby have been abandoned after attacks. The community cannot agree on whether to s | distinct 19
+    60  default: noGrazingQuarrel || grazing [GRAZING]
+    30  OVERRIDDEN by a primary stress narrative
+    10  monsterThreat === 'plagued'
+== hamlet (n=100) top masked sentence 49/100: A dispute over grazing rights and water access has run for two seasons, and the families o
+   second 12: Monsters prowl near the outlying farms, and no one here can agree whether to raise a levy  | distinct 23
+    49  default: noGrazingQuarrel || grazing [GRAZING]
+    33  OVERRIDDEN by a primary stress narrative
+    16  monsterThreat === 'plagued'
+     2  hasMarketInstitution [FIELD ROTATION]
+== village (n=100) top masked sentence 44/100: A dispute over grazing rights and water access has run for two seasons, and the families o
+   second 15: A dispute over field rotation and grazing rights has divided the village for most of this  | distinct 19
+    46  default: noGrazingQuarrel || grazing [GRAZING]
+    29  OVERRIDDEN by a primary stress narrative
+    15  hasMarketInstitution [FIELD ROTATION]
+    10  monsterThreat === 'plagued'
+== town (n=100) top masked sentence 58/100: § has been debating market levies for three months. The merchants have argued against ever
+   second 10: Monsters prowl near the outlying farms, and no one here can agree whether to raise a levy  | distinct 16
+    60  (hasCivicInstitution || hasUrbanCommerceInstitution) && hasLiveMarket [LEVIES]
+    27  OVERRIDDEN by a primary stress narrative
+    10  monsterThreat === 'plagued'
+     3  institutionFlags.militaryEffective > 68 && !seatIsMilitary
+== city (n=100) top masked sentence 52/100: § has been debating market levies for three months. The merchants have argued against ever
+   second 19: The military commanders are pushing for expanded authority over civilian courts, and § is  | distinct 20
+    57  (hasCivicInstitution || hasUrbanCommerceInstitution) && hasLiveMarket [LEVIES]
+    23  OVERRIDDEN by a primary stress narrative
+    20  institutionFlags.militaryEffective > 68 && !seatIsMilitary
+== metropolis (n=100) top masked sentence 52/100: § has been debating market levies for three months. The merchants have argued against ever
+   second 11: The military commanders are pushing for expanded authority over civilian courts, and § is  | distinct 19
+    57  (hasCivicInstitution || hasUrbanCommerceInstitution) && hasLiveMarket [LEVIES]
+    31  OVERRIDDEN by a primary stress narrative
+    12  institutionFlags.militaryEffective > 68 && !seatIsMilitary
+== overridden sentences (first 70 chars, all sizes)
+    21  The sick have been shut away under quarantine. Many ignore it, and two
+    14  Conscription has taken the workers, and every household is short-hande
+    14  Two powers have stopped coming to §'s meetings. Each makes its own dec
+    12  Pamphlets against those in charge pass from hand to hand, and several 
+     9  The creditor's agent has blocked the money for repairs. In public they
+     9  More families arrived this week, and more the week before. The work th
+     8  The last harvest failed badly. What remains is being rationed by whoev
+     8  A farmstead three miles out was destroyed last night. The farmer and h
+     7  The settlement is under siege. Its stores and every able pair of hands
+     7  § has blocked the money for repairs. In public they talk of prudence; 
+     6  Two candidates for the vacant position each held separate public assem
+     6  The investigation into the betrayal has been obstructed twice. The obs
+     5  The community is split. Two households are not speaking to each other 
+     5  A farmstead a short walk from here was destroyed last night. The famil
+     5  The elder who kept the peace is gone. No one has stepped forward to ta
+     4  An occupying officer arrested a local elder for "seditious speech". § 
+     4  An occupying officer arrested a local § for "seditious speech". § file
+     4  § who kept the peace is gone. No one has stepped forward to take that 
+     4  Someone talked. Information that should have stayed inside the settlem
+     3  Food is short, and every quarrel in the settlement has grown sharper f
+     3  The trouble is inside the government, not in the streets. Officials dr
+     3  Two candidates for the vacant position each § separate public assembli
+     2  The split is now open: two priests, two congregations, two registers o
+     1  The hunt failed badly this year. What remains is being rationed by who
+     1  The fishing failed badly this year. What remains is being rationed by 
+     1  The split is now open: two §s, two congregations, two registers of bir
+     1  The new faith does not yet have a building. It has kit§s, meeting room
+     1  A farmstead three miles out was destroyed last §. The farmer and his f
+     1  Two §s have stopped coming to §'s meetings. Each makes its own decisio
+     1  Two § are contesting the succession. Both have legal arguments. Both h
+     1  Two powers have stopped co§ to §'s meetings. Each makes its own decisi
+     1  The crown owes § more than it can repay. Three of its decisions this y
+     1  The new faith does not yet have a building. It has kitchens, meeting r

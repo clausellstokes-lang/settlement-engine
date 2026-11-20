@@ -1,0 +1,14 @@
+const L = process.argv[2];
+const { bornAll } = await import(`${L}/docs/chair/2026-11-20/content/depth/measure/born.mjs`);
+const { generateSettlementPipeline } = await import(`${L}/src/generators/generateSettlementPipeline.js`);
+const { birthConfig, loadGenerationLawPayloads } = await import(`${L}/src/domain/density/densityCreateBoundary.js`);
+const { DEFAULT_CONFIG } = await import(`${L}/src/store/configSlice.js`);
+await loadGenerationLawPayloads();
+const t0 = Date.now();
+const t = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: 'village' }), null, { seed: 'hxd-village-0', customContent: {} });
+console.log('ms', Date.now() - t0);
+console.log(Object.keys(t).join(' '));
+console.log(t.powerStructure.recentConflict);
+console.log(JSON.stringify(t.stress)?.slice(0,300));
+console.log(JSON.stringify(t.config)?.slice(0,600));
+console.log((t.institutions||[]).map(i=>i.name).join(' | '));

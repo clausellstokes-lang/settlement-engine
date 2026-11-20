@@ -1,0 +1,3 @@
+FAMILIES_NAMED               {"hamlet lost":18,"hamlet gained":1,"village lost":33,"village gained":5,"city lost":5}
+law15K grazing               {"thorp lost":31,"hamlet lost":18,"hamlet gained":1,"village lost":33,"village gained":5}
+BOYCOTT (factionDynamics)    {"town lost":52,"city lost":47,"metropolis lost":51}

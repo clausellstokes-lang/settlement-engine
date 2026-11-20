@@ -1,0 +1,201 @@
+
+### ALL 100: n = thorp 100, hamlet 100, village 100, town 100, city 100, metropolis 100  (percent of the group; site=power-step facts w/ config; |final if differs by >5)
+atom                           thorp     hamle     villa      town      city     metro
+institution: hospital              0         0         0        14        49        97
+institution: monastery             0         0         0        16        51        94
+institution: mill                  0         0       100       100       100       100
+institution: smith                 0        17        25        45        86        97
+institution: bathhouse             0         0         0        20        71        96
+institution: docks                 0         0         0        26        44        40
+institution: quarry                0        12         8        12        29        67
+institution: mine                  0        13         9         9        20        52
+institution: tavern                0        34        36       100       100       100
+institution: school                0         0         0         5        58        99
+institution: temple               21        16       100       100       100       100
+institution: granary               0         0         0       100       100       100
+institution: bank                  0         0         0         4        72        95
+walls                             26        25        16        64       100       100
+palisade                          26        25        16         0         0         0
+gate                               0         0         0        64       100       100
+watch                              0         0         4       100       100       100
+militia                           21        27        17         0         0         0
+garrison                           0         0         0        20       100       100
+guardPresence                     21        27        21       100       100       100
+court                              0         0         0       100       100       100
+market                             0         5        26       100       100       100
+guild                              0         0      0|21       100       100       100
+ruling body                     ?|91      ?|68      ?|67      ?|54      ?|80      ?|79
+river                             25        19        29        20        29        30
+coast                             14        17        16        14        21        15
+navigable                         39        36        45        34        50        45
+port                              12        12        11        11        16        14
+terrain: plains                   24        21        16        24        26        17
+terrain: hills                    17        17        11        15        14        16
+terrain: forest                   13        11        19        17        15        10
+terrain: riverside                18        12        19        13        16        21
+terrain: coastal                  14        17        16        14        21        15
+terrain: mountain                  8        10        10         7         5        12
+terrain: desert                    6        12         9        10         3         9
+route: road                       40        32        34        57        34        52
+route: river                      21        20        24        16        30        26
+route: port                       12        12        11        11        16        14
+route: crossroads                 13        19        16        16        20         8
+route: isolated                   14        17        15         0         0         0
+grain                           ?|15      ?|12      ?|17      ?|25      ?|24      ?|13
+livestock                        ?|9      ?|14      ?|16      ?|22      ?|21      ?|11
+fish                            ?|39      ?|34      ?|37      ?|23      ?|45      ?|45
+game                            ?|15      ?|18      ?|15         ?         ?         ?
+own plots                     100|85    100|88         0         0         0         0
+food surplus                    0|65      0|61      0|54      0|14         0         0
+stores: ≥ 3                        ?         ?         ?      ?|99     ?|100     ?|100
+imports                         0|52      0|83      0|98     0|100     0|100     0|100
+exports                         0|79      0|79      0|85     0|100     0|100     0|100
+church                             0         0       100       100       100       100
+sacredHouse                       21        16       100       100       100       100
+trade at work: dairy              35        27        21         0         0         0
+trade at work: cloth               0         0         6     14|38     23|88    14|100
+iron at hand                       0      0|20      0|26      0|97      0|99      0|98
+timber at hand                  ?|25      ?|35      ?|46      ?|33      ?|52      ?|40
+crisis: calm                  100|70    100|66    100|70    100|70    100|73    100|67
+name:well/water                  100       100       100       100         0         0
+name:bridge/ford                   0         0         4        21        59        86
+name:ferry                         0         0        30        22        26        29
+name:commons/pasture               0       100       100         0         0         0
+name:orchard/bees                  0         0         6         0         0         0
+name:smithy                        0        17        25        45        86        97
+name:mill                        100       100       100       100       100       100
+name:granary/stores                0         0         0       100       100       100
+name:walls                        26        25        16        64       100       100
+name:farmland                      0         0       100         0         0         0
+name:fishing                      38        34        47        45        91       100
+name:market                        0         5        26       100       100       100
+name:council/hall                 48        40        47       100       100       100
+
+### GRAZING+FIELD branch: n = thorp 60, hamlet 51, village 61, town 0, city 0, metropolis 0  (percent of the group; site=power-step facts w/ config; |final if differs by >5)
+atom                           thorp     hamle     villa      town      city     metro
+institution: mill                  0         0       100         -         -         -
+institution: smith                 0        16        28         -         -         -
+institution: quarry                0        18         8         -         -         -
+institution: mine                  0        14        10         -         -         -
+institution: tavern                0        33        38         -         -         -
+institution: temple               15        18       100         -         -         -
+walls                             15         0         2         -         -         -
+palisade                          15         0         2         -         -         -
+watch                              0         0         2         -         -         -
+militia                           12         2         2         -         -         -
+guardPresence                     12         2         3         -         -         -
+market                             0         4        25         -         -         -
+guild                              0         0      0|25         -         -         -
+ruling body                     ?|90      ?|75      ?|66         -         -         -
+river                             30        14        30         -         -         -
+coast                             13        16        13         -         -         -
+navigable                         43        29        43         -         -         -
+port                              12         8         8         -         -         -
+terrain: plains                   22        25        13         -         -         -
+terrain: hills                    15        25        15         -         -         -
+terrain: forest                   13         8        16         -         -         -
+terrain: riverside                22         8        21         -         -         -
+terrain: coastal                  13        16        13         -         -         -
+terrain: mountain                 10         8        10         -         -         -
+terrain: desert                    5        10        11         -         -         -
+route: road                       42        31        36         -         -         -
+route: river                      23        20        23         -         -         -
+route: port                       12         8         8         -         -         -
+route: crossroads                  8        24        16         -         -         -
+route: isolated                   15        18        16         -         -         -
+grain                           ?|18      ?|14      ?|16         -         -         -
+livestock                       ?|12      ?|14      ?|16         -         -         -
+fish                            ?|43      ?|27      ?|38         -         -         -
+game                             ?|8      ?|20      ?|16         -         -         -
+own plots                     100|82    100|86         0         -         -         -
+food surplus                    0|72      0|78      0|61         -         -         -
+stores: ≥ 3                        ?         ?         ?         -         -         -
+imports                         0|47      0|82      0|97         -         -         -
+exports                         0|80      0|80      0|84         -         -         -
+church                             0         0       100         -         -         -
+sacredHouse                       15        18       100         -         -         -
+trade at work: dairy              32     24|29        25         -         -         -
+trade at work: cloth               0         0         7         -         -         -
+iron at hand                       0      0|20      0|23         -         -         -
+timber at hand                  ?|23      ?|35      ?|43         -         -         -
+crisis: calm                     100       100       100         -         -         -
+name:well/water                  100       100       100         -         -         -
+name:bridge/ford                   0         0         3         -         -         -
+name:ferry                         0         0        23         -         -         -
+name:commons/pasture               0       100       100         -         -         -
+name:orchard/bees                  0         0         7         -         -         -
+name:smithy                        0        16        28         -         -         -
+name:mill                        100       100       100         -         -         -
+name:granary/stores                0         0         0         -         -         -
+name:walls                        15         0         2         -         -         -
+name:farmland                      0         0       100         -         -         -
+name:fishing                      43        27        49         -         -         -
+name:market                        0         4        25         -         -         -
+name:council/hall                 47        41        44         -         -         -
+
+### LEVIES branch: n = thorp 0, hamlet 0, village 0, town 60, city 57, metropolis 57  (percent of the group; site=power-step facts w/ config; |final if differs by >5)
+atom                           thorp     hamle     villa      town      city     metro
+institution: hospital              -         -         -        18        47        96
+institution: monastery             -         -         -        17        47        95
+institution: mill                  -         -         -       100       100       100
+institution: smith                 -         -         -        45        88        96
+institution: bathhouse             -         -         -        18        70        96
+institution: docks                 -         -         -        27        39        42
+institution: quarry                -         -         -        12        28        68
+institution: mine                  -         -         -        12        21        47
+institution: tavern                -         -         -       100       100       100
+institution: school                -         -         -         5        51        98
+institution: temple                -         -         -       100       100       100
+institution: granary               -         -         -       100       100       100
+institution: bank                  -         -         -         5        67        96
+walls                              -         -         -        62       100       100
+gate                               -         -         -        62       100       100
+watch                              -         -         -       100       100       100
+garrison                           -         -         -        17       100       100
+guardPresence                      -         -         -       100       100       100
+court                              -         -         -       100       100       100
+market                             -         -         -       100       100       100
+guild                              -         -         -       100       100       100
+ruling body                        -         -         -      ?|55      ?|82      ?|79
+river                              -         -         -        23        21        35
+coast                              -         -         -        15        26        12
+navigable                          -         -         -        38        47        47
+port                               -         -         -        10        19        11
+terrain: plains                    -         -         -        20        28        21
+terrain: hills                     -         -         -        15        16        14
+terrain: forest                    -         -         -        18        16         7
+terrain: riverside                 -         -         -        15         7        23
+terrain: coastal                   -         -         -        15        26        12
+terrain: mountain                  -         -         -         7         4        16
+terrain: desert                    -         -         -        10         4         7
+route: road                        -         -         -        60        42        51
+route: river                       -         -         -        18        23        32
+route: port                        -         -         -        10        19        11
+route: crossroads                  -         -         -        12        16         7
+grain                              -         -         -      ?|23      ?|18      ?|12
+livestock                          -         -         -      ?|23      ?|19      ?|12
+fish                               -         -         -      ?|27      ?|42      ?|47
+game                               -         -         -         ?         ?         ?
+food surplus                       -         -         -      0|15         0         0
+stores: ≥ 3                        -         -         -     ?|100     ?|100     ?|100
+imports                            -         -         -     0|100     0|100     0|100
+exports                            -         -         -     0|100     0|100     0|100
+church                             -         -         -       100       100       100
+sacredHouse                        -         -         -       100       100       100
+trade at work: cloth               -         -         -     15|35     19|88    16|100
+iron at hand                       -         -         -      0|97     0|100     0|100
+timber at hand                     -         -         -      ?|32      ?|51      ?|40
+crisis: calm                       -         -         -       100    100|95       100
+name:well/water                    -         -         -       100         0         0
+name:bridge/ford                   -         -         -        18        58        84
+name:ferry                         -         -         -        23        32        30
+name:commons/pasture               -         -         -         0         0         0
+name:orchard/bees                  -         -         -         0         0         0
+name:smithy                        -         -         -        45        88        96
+name:mill                          -         -         -       100       100       100
+name:granary/stores                -         -         -       100       100       100
+name:walls                         -         -         -        62       100       100
+name:farmland                      -         -         -         0         0         0
+name:fishing                       -         -         -        40        89       100
+name:market                        -         -         -       100       100       100
+name:council/hall                  -         -         -       100       100       100
