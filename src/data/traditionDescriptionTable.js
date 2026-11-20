@@ -22,8 +22,9 @@
  * THE CAUSE LAW (CTR2). Only CAUSE_FRAMES assert a cause, reached on exactly two pairings: the founding core (genesis's
  * index 0, foundedYear 1) with the founding the record holds; a rite of the dead with the most recent siege, fire,
  * flood or plague the record holds AND grades major or catastrophic (DEAD_EVENT_TYPES, DEAD_EVENT_SEVERITIES), by its
- * name and year, never who won or what it cost. tests/lint/traditionDescriptionFrames.walker.test.js holds the set, the
- * cause words and the level words (the owner's calm rule, CTR6).
+ * name and year for the owner, by its KIND and year for a reader (DEAD_EVENT_PHRASES), never who won or what it cost.
+ * tests/lint/traditionDescriptionFrames.walker.test.js holds the set, the cause words and the level words (the owner's
+ * calm rule, CTR6).
  *
  * Everything here is taste-adjacent and vetoable by the owner.
  */
@@ -217,6 +218,19 @@ export const CAUSE_FRAMES = Object.freeze({
 export const DEAD_EVENT_TYPES = Object.freeze(['great_fire', 'great_flood', 'plague_years', 'external_threat']);
 /** …and only one the record itself grades major or catastrophic (the chair's tightening, BUILD item 3). */
 export const DEAD_EVENT_SEVERITIES = Object.freeze(['major', 'catastrophic']);
+/**
+ * THE READER'S EVENT, BY ITS KIND (TRAD-3 unit 4, the chair's item 3, 2026-11-20): a reader's rite of the dead names the
+ * event by an authored phrase of its template type, never by the record's `event.name` (a field veil-22's name sweep can
+ * withhold whole). Each is the born event's own name in plain words ("The Great Fire" → "the great fire"), with its
+ * article; the frames walker holds them to the level law and to DEAD_EVENT_TYPES.
+ */
+export const DEAD_EVENT_PHRASES = Object.freeze({
+  great_fire: 'the great fire',
+  great_flood: 'the flood',
+  // not "the plague years": the vocabulary's `plague` names a plague IN FORCE (registeredWords.js), and this is a past one
+  plague_years: 'the years of sickness',
+  external_threat: 'the siege',
+});
 
 /** @param {string} source @param {string} prose @param {boolean} plural @returns {TraditionIncomeRow} */
 const income = (source, prose, plural) => Object.freeze({ source, prose, plural });

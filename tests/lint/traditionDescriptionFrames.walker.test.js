@@ -19,8 +19,9 @@
 import { describe, it, expect } from 'vitest';
 import {
   ACT_LEADS, ELEMENT_GLOSS, HOUSE_FRAMES, POWER_FRAMES, OWNER_FRAMES, CAUSE_FRAMES, ECONOMY_FRAMES, KEEPER_HOUSES, ECONOMY_FIT,
-  POWER_FRAME_VERBS,
+  POWER_FRAME_VERBS, DEAD_EVENT_TYPES,
 } from '../../src/data/traditionDescriptionTable.js';
+import * as TABLE from '../../src/data/traditionDescriptionTable.js';
 import { describeTradition } from '../../src/domain/traditions/traditionDescription.js';
 import { deriveFoundingTraditions } from '../../src/domain/traditions/genesis.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -45,9 +46,9 @@ function templates() {
   return out;
 }
 
-/** Every authored prose FORM a frame's slot may take from the table itself (the income prose). */
+/** Every authored prose FORM a frame's slot may take from the table itself (the income prose; the reader's event kinds). */
 function proseForms() {
-  return Object.values(ECONOMY_FIT).flatMap((rows) => rows.map((r) => r.prose));
+  return [...Object.values(ECONOMY_FIT).flatMap((rows) => rows.map((r) => r.prose)), ...Object.values(TABLE.DEAD_EVENT_PHRASES || {})];
 }
 
 /** The cause law's predicate: the homes of non-cause strings carrying a cause word. */
@@ -128,6 +129,21 @@ describe('traditionDescriptionFrames — the level law (CTR6, the owner\'s calm 
   it('RED FIRST: a drama word planted in a lead is named', () => {
     expect(dramaViolations(['A common feast', 'A grim feast', 'A vigil'])).toEqual(['A grim feast']);
     expect(dramaViolations(['A common feast'])).toEqual([]); // the anchor: the same predicate passes a calm lead
+  });
+});
+
+describe('traditionDescriptionFrames — the reader\'s event kinds (TRAD-3 unit 4, the chair\'s item 3)', () => {
+  it('every event kind a rite of the dead may be kept in memory of has one authored phrase, and nothing else does', () => {
+    expect(Object.keys(TABLE.DEAD_EVENT_PHRASES || {}).sort()).toEqual([...DEAD_EVENT_TYPES].sort());
+  });
+
+  it('each phrase is a plain lower-case noun phrase with its article: no drama word, no cause word, no slot', () => {
+    const phrases = Object.values(TABLE.DEAD_EVENT_PHRASES || {});
+    expect(phrases.length).toBe(DEAD_EVENT_TYPES.length);
+    for (const p of phrases) {
+      expect(p, p).toMatch(/^the [a-z]+(?: [a-z]+)*$/);
+      expect(DRAMA_WORDS.test(p) || CAUSE_WORDS.test(p) || /\{/.test(p), p).toBe(false);
+    }
   });
 });
 

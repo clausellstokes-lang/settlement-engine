@@ -198,6 +198,8 @@ describe('CTR9, PROVEN BORN BY INVERSION: the drawn traditions text does not dep
  * entry or its `type`: a generated stress entry carries no `id` or `name` for the sweep to take it by). The one eye that
  * touches a declared fact's input is a house's `function` eye (it removes the house's own `tags`): the arms below hide
  * it on every house and the drawn rows stand byte for byte (a born house's own tags are the catalogue's for its name).
+ * A DM-authored house's tags are not, and the reader's text read them: since TRAD-3 unit 4 the reader's view strips every
+ * function-eye field (PLANT 2 at the end of this file).
  *
  * WHO KEEPS IT: THE RECORD'S OWNER, A HOUSE. The owner is named only where the view holds it by that exact name; a house
  * is the first LIVE house of a fitting kind over the view's roster, which holds no house of the hideable class
@@ -215,7 +217,8 @@ describe('CTR9, PROVEN BORN BY INVERSION: the drawn traditions text does not dep
  * NO PERSON. The reader's text names no person at all (a card's tie to its house is the `ties` eye, card by card).
  *
  * THE FOUNDING CAUSE. `history.founding` (`age`, and whether `foundedBy` stands): no CARD_KINDS list reaches it and no
- * grouping remover touches it, on either tree.
+ * grouping remover touches it, on either tree. NOT SAFE, as written: veil-22's name sweep removes a `foundedBy` holding a
+ * hidden name, and the reader printed it; since TRAD-3 unit 4 the reader never reads `foundedBy` (PLANT 1 below).
  *
  * THE DEAD'S CAUSE. The most recent graded event (`templateType`, `severity`, `yearsAgo`, `name`) over
  * `history.historicalEvents`: all four are the event card's floor; the veil hides an event's description, lasting effects
@@ -480,4 +483,230 @@ describe('TRAD-2 UNIT 2, PROVEN BORN: with EVERY address the curate screen can h
       }
     }
   }, 240000);
+});
+
+// ── TRAD-3 UNIT 4: THE CHAIR'S TWO PLANTS (CTR11: the reader's text reads no field a later act of the DM can withhold) ──
+/*
+ * PLANT 1. `history.founding.foundedBy` is an editable field, and veil-22's name sweep (gallerySecondHomes.js ::
+ * sweepHiddenNames on origin/lane/veil-22-2026-11-20) removes it when it holds a hidden house's name; the reader's founding
+ * clause chose its pool by foundedBy's presence and printed it. The cure, by class: the reader's founding clause never
+ * reads foundedBy (the bare pool, always); the owner's page keeps "founded by …".
+ * PLANT 2. A house's `function` eye (galleryVeil.js :: CARD_KINDS.institution.fields.function) removes the house's own
+ * `tags`, which the `market` fact reads (facts/market.js :: isMarketInstitution: own tags, else the catalogue's for its
+ * NAME). The cure, by class: the reader's view strips every function-eye field from every house (read from the veil's own
+ * declaration), so every fact the reader's text admits by is read from a house's floor.
+ */
+import { isMarketInstitution } from '../../src/domain/facts/market.js';
+import { catalogIdForName } from '../../src/data/institutionalCatalog.js';
+
+describe('TRAD-3 UNIT 4, PLANT 1: a hideable house\'s name written into history.founding.foundedBy', () => {
+  const towns = ['town', 'city', 'metropolis'].flatMap((tier) => [0, 1, 2].map((j) => born(tier, 'latin', `trad-inversion-${tier === 'town' ? 'city' : tier}-${j}`)))
+    .filter((t) => (t.institutions || []).some((i) => isHideableHouse(i)) && typeof t.history?.founding?.foundedBy === 'string');
+  const withFoundedBy = (t, by) => {
+    const { foundedBy, ...rest } = t.history.founding;
+    return { ...t, history: { ...t.history, founding: by === undefined ? rest : { ...rest, foundedBy: by } } };
+  };
+  const plantOf = (t) => (t.institutions || []).find((i) => isHideableHouse(i)).name;
+  const core = (t) => shownTraditionsOf(t, []).recs.find((r) => /\.0$/.test(String(r.id)));
+
+  it('NOT VACUOUS: born towns hold a hideable house and a born foundedBy, and a drawn row carries the founding cause', () => {
+    expect(towns.length).toBeGreaterThan(1);
+    const causes = towns.filter((t) => (sharedTraditionRowsOf(t) || []).some((r) => r.text.includes(`${t.history.founding.age} years ago`)));
+    expect(causes.length).toBeGreaterThan(0);
+  }, 120000);
+
+  it('CONTROL: the OWNER\'s founding sentence names the planted value (the plant reaches the leaf)', () => {
+    let reached = 0;
+    for (const t of towns) {
+      const planted = withFoundedBy(t, plantOf(t));
+      const rec = core(planted);
+      if (!rec) continue;
+      const d = describeTradition(rec, planted, { audience: 'owner' });
+      if (d?.parts.origin === 'cause') { reached += 1; expect(d.text, t.name).toContain(`by ${plantOf(t)}`); }
+    }
+    expect(reached).toBeGreaterThan(0);
+  }, 120000);
+
+  it('the rows the save draws and every reader description name nothing of the planted house', () => {
+    const named = [];
+    for (const t of towns) {
+      const planted = withFoundedBy(t, plantOf(t));
+      const low = plantOf(t).toLowerCase();
+      for (const r of sharedTraditionRowsOf(planted) || []) if (r.text.toLowerCase().includes(low)) named.push(`${t.name} row ${r.name}: ${r.text}`);
+      for (const rec of shownTraditionsOf(planted, []).recs) {
+        const d = describeTradition(rec, planted, { audience: 'reader' });
+        if (d && d.text.toLowerCase().includes(low)) named.push(`${t.name} ${rec.name}: ${d.text}`);
+      }
+    }
+    expect(named).toEqual([]);
+  }, 120000);
+
+  it('the reader\'s rows are BYTE-IDENTICAL with foundedBy as born, deleted and planted (the pool does not choose by it)', () => {
+    for (const t of towns) {
+      const asBorn = JSON.stringify(sharedTraditionRowsOf(t));
+      expect(JSON.stringify(sharedTraditionRowsOf(withFoundedBy(t, undefined))), `${t.name}: deleted`).toBe(asBorn);
+      expect(JSON.stringify(sharedTraditionRowsOf(withFoundedBy(t, plantOf(t)))), `${t.name}: planted`).toBe(asBorn);
+    }
+  }, 120000);
+});
+
+describe('TRAD-3 UNIT 4, PLANT 2: a DM-authored house tagged market, the town\'s only market, its function eye hidden', () => {
+  const HOUSE = { name: 'The Lantern Exchange', category: 'Economy', tags: ['market'] };
+  const towns = [['town', 'latin', 'trad-plant2-town-latin-0'], ['village', 'arabic', 'trad-plant2-village-arabic-0']].map(([tier, culture, seed]) => {
+    const t = born(tier, culture, seed);
+    return { ...t, institutions: [...t.institutions.filter((i) => !isMarketInstitution(i)), { ...HOUSE }] };
+  });
+  const id = CARD_KINDS.institution.idOf(HOUSE);
+  const veiled = (t) => applyVeil(t, new Set([`field:institution:${id}:function`]));
+  const byHand = (t) => ({ ...t, institutions: t.institutions.map((i) => (i.name === HOUSE.name ? { name: HOUSE.name, category: HOUSE.category } : i)) });
+  const marketRites = (t) => shownTraditionsOf(t, []).recs.filter((r) => r.coreMotif?.element === 'market');
+  const texts = (t, s, audience) => JSON.stringify(shownTraditionsOf(t, []).recs.map((r) => describeTradition(r, s, { audience })?.text ?? ''));
+
+  it('NOT VACUOUS: the house is DM-authored (the catalogue does not know its name), the town\'s only market, and the town holds a market rite', () => {
+    expect(catalogIdForName(HOUSE.name)).toBeFalsy();
+    for (const t of towns) {
+      expect(t.institutions.filter((i) => isMarketInstitution(i)).map((i) => i.name), t.name).toEqual([HOUSE.name]);
+      expect(marketRites(t).length, t.name).toBeGreaterThan(0);
+      expect(veiled(t).institutions.find((i) => i.name === HOUSE.name).tags, t.name).toBeUndefined(); // the eye reaches the tags
+    }
+  }, 120000);
+
+  it('CONTROL: the OWNER\'s description does change with the function-eye fields removed (the plant reaches the fact)', () => {
+    for (const t of towns) expect(texts(t, byHand(t), 'owner'), t.name).not.toBe(texts(t, t, 'owner'));
+  }, 120000);
+
+  it('the reader\'s descriptions of the town\'s rites are byte-identical with the house\'s function-eye fields present, hidden by applyVeil, and removed by hand', () => {
+    for (const t of towns) {
+      expect(texts(t, veiled(t), 'reader'), `${t.name}: applyVeil`).toBe(texts(t, t, 'reader'));
+      expect(texts(t, byHand(t), 'reader'), `${t.name}: by hand`).toBe(texts(t, t, 'reader'));
+    }
+  }, 120000);
+});
+
+describe('TRAD-3 UNIT 4, THE SET (the chair\'s cure B): the rows drawn for the shared page admit by the floor only', () => {
+  // The OWNER's set (shownTraditions.js :: shownTraditionsOf: the tab, the owner's page) is unchanged and still admits by
+  // a house's own tags. The ROWS DRAWN FOR THE SHARED PAGE (sharedTraditionRowsOf) admit over the record with every
+  // house's function-eye fields stripped (a house's NAME against the catalogue's tags, hidden or shown), so the drawn set
+  // is no function of the function eye. (Before the cure this arm was the chair's pinned finding: the drawn set dropped
+  // the market/fair and tide/fair rites when the DM-authored market house's tags went.)
+  const t = (() => {
+    const b = born('town', 'latin', 'trad-plant2-town-latin-0');
+    return { ...b, institutions: [...b.institutions.filter((i) => !isMarketInstitution(i)), { name: 'The Lantern Exchange', category: 'Economy', tags: ['market'] }] };
+  })();
+  const stripped = { ...t, institutions: t.institutions.map((i) => (i.name === 'The Lantern Exchange' ? { name: i.name, category: i.category } : i)) };
+  const veiled = applyVeil(t, new Set([`field:institution:${CARD_KINDS.institution.idOf({ name: 'The Lantern Exchange' })}:function`]));
+  const motifs = (s) => shownTraditionsOf(s, []).recs.map((r) => `${r.coreMotif.element}/${r.coreMotif.act}`);
+
+  it('the OWNER\'s set is as it was: it admits the market rites by the house\'s own tags (genesis derives the same three rites either way)', () => {
+    expect(deriveFoundingTraditions(stripped).map((r) => r.id)).toEqual(deriveFoundingTraditions(t).map((r) => r.id));
+    expect(motifs(t)).toEqual(['first-landing/feast', 'market/fair', 'tide/fair']);
+    expect(motifs(stripped)).toEqual(['first-landing/feast']); // the owner's page reads the record it is handed
+  }, 120000);
+
+  it('the drawn rows are byte-identical with the house\'s tags present, hidden by applyVeil, and removed by hand', () => {
+    const rows = JSON.stringify(sharedTraditionRowsOf(t));
+    expect(JSON.stringify(sharedTraditionRowsOf(veiled)), 'applyVeil').toBe(rows);
+    expect(JSON.stringify(sharedTraditionRowsOf(stripped)), 'by hand').toBe(rows);
+  }, 120000);
+});
+
+describe('TRAD-3 UNIT 4, THE DEAD\'S CAUSE (the chair\'s item 3): the reader names the event by its KIND, never by its name', () => {
+  // The chair's ruling: for a reader, the event a rite of the dead is kept in memory of is named by an authored phrase of
+  // its template type (traditionDescriptionTable.js :: DEAD_EVENT_PHRASES), never by `event.name`, and is chosen only among
+  // events whose name holds no house, person or power name the WHOLE record holds (hidden or shown). THE TOOTH: an event
+  // renamed by a plant to hold a hideable house's name. "Hidden" is modelled as veil-22 serves it: the house goes whole
+  // (this tree's applyVeil, `card:institution:<id>`) and the event entry whose name holds it leaves its list
+  // (gallerySecondHomes.js :: sweepHiddenNames on origin/lane/veil-22-2026-11-20: an entry whose own `name` is taken).
+  const SPECS = [['city', 'arabic', 'trad-dead-city-arabic-0'], ['city', 'latin', 'trad-dead-city-latin-0'], ['metropolis', 'latin', 'trad-dead-metropolis-latin-0']];
+  const DEAD = ['great_fire', 'great_flood', 'plague_years', 'external_threat'];
+  const graded = (e) => DEAD.includes(e.templateType) && ['major', 'catastrophic'].includes(e.severity);
+  const towns = SPECS.map(([tier, culture, seed]) => {
+    const t = born(tier, culture, seed);
+    const house = t.institutions.find((i) => isHideableHouse(i));
+    const target = [...t.history.historicalEvents].filter(graded).sort((a, b) => a.yearsAgo - b.yearsAgo)[0];
+    const eventName = `The ${house.name} ${target.templateType === 'external_threat' ? 'Siege' : 'Disaster'}`;
+    const planted = { ...t, history: { ...t.history, historicalEvents: t.history.historicalEvents.map((e) => (e === target ? { ...e, name: eventName } : e)) } };
+    const veiled = applyVeil(planted, new Set([`card:institution:${CARD_KINDS.institution.idOf(house)}`]));
+    const swept = { ...veiled, history: { ...veiled.history, historicalEvents: veiled.history.historicalEvents.filter((e) => !String(e.name).toLowerCase().includes(house.name.toLowerCase())) } };
+    return { t, house, eventName, planted, hidden: swept };
+  });
+  const deadRites = (s) => shownTraditionsOf(s, []).recs.filter((r) => r.coreMotif?.element === 'the-dead');
+
+  it('NOT VACUOUS: each town holds a rite of the dead and a hideable house, and the hide takes the house and the planted event', () => {
+    for (const x of towns) {
+      expect(deadRites(x.planted).length, x.t.name).toBeGreaterThan(0);
+      expect(x.hidden.institutions.some((i) => i.name === x.house.name), x.t.name).toBe(false);
+      expect(x.hidden.history.historicalEvents.some((e) => e.name === x.eventName), x.t.name).toBe(false);
+    }
+  }, 120000);
+
+  it('CONTROL: the OWNER\'s description names the planted event (the plant reaches the leaf)', () => {
+    for (const x of towns) {
+      const texts = deadRites(x.planted).map((r) => describeTradition(r, x.planted, { audience: 'owner' }).text).join(' ');
+      expect(texts, x.t.name).toContain(x.eventName.replace(/^The /, 'the '));
+    }
+  }, 120000);
+
+  it('THE TOOTH: the reader\'s descriptions and the drawn rows are byte-identical with the house hidden and shown, and name nothing of it', () => {
+    for (const x of towns) {
+      const reader = (s) => JSON.stringify(deadRites(x.planted).map((r) => describeTradition(r, s, { audience: 'reader' }).text));
+      expect(reader(x.hidden), `${x.t.name}: descriptions`).toBe(reader(x.planted));
+      expect(JSON.stringify(sharedTraditionRowsOf(x.hidden)), `${x.t.name}: rows`).toBe(JSON.stringify(sharedTraditionRowsOf(x.planted)));
+      // anchored: the CONTROL arm asserts the owner's text over this same planted town names the event holding this house
+      expect(reader(x.planted).toLowerCase(), x.t.name).not.toContain(x.house.name.toLowerCase());
+    }
+  }, 120000);
+
+  it('the reader names a born event by its kind, never by its name; at least one born rite of the dead carries the cause', () => {
+    let causes = 0;
+    for (const x of towns) {
+      for (const r of deadRites(x.t)) {
+        const d = describeTradition(r, x.t, { audience: 'reader' });
+        if (/in memory of/.test(d.text)) causes += 1;
+        expect(d.named.events, x.t.name).toEqual([]);
+        // anchored: the owner names these same events by name (the CONTROL arm), and `causes` below counts the cause present
+        for (const e of x.t.history.historicalEvents) expect(d.text, x.t.name).not.toContain(String(e.name).replace(/^The /, 'the '));
+      }
+    }
+    expect(causes).toBeGreaterThan(0);
+  }, 120000);
+});
+
+describe('TRAD-3 UNIT 4, THE DRAWN ROWS ARE NUMBERED DENSE (the chair\'s item 5): a rite the floor rule drops leaves no gap', () => {
+  // The rows drawn for the shared page carry `tradition.shared.<n>`, n their place in the DRAWN set (0..n-1, in the order
+  // served), never the genesis id (which holds the seed) nor its index: a rite dropped by the floor rule would leave a
+  // gap that tells the reader a rite stood there. The owner's page keeps the genesis ids. The plant: plant 2's town with
+  // a lit mirror whose MIDDLE rite is the market fair (admitted by the DM-authored house's own tags on the owner's set,
+  // dropped by the floor on the drawn set) and whose last rite stands either way.
+  const b = born('town', 'latin', 'trad-plant2-town-latin-0');
+  const [first, market] = deriveFoundingTraditions(b).filter((r) => ['first-landing', 'market'].includes(r.coreMotif.element));
+  const harvest = { ...market, id: market.id.replace(/\.\d+$/, '.2'), name: 'The Harvest Feast', coreMotif: { element: 'harvest', act: 'feast' } };
+  const HOUSE = { name: 'The Lantern Exchange', category: 'Economy', tags: ['market'] };
+  const t = { ...b, institutions: [...b.institutions.filter((i) => !isMarketInstitution(i)), HOUSE], traditions: [first, market, harvest] };
+  const veiled = applyVeil(t, new Set([`field:institution:${CARD_KINDS.institution.idOf(HOUSE)}:function`]));
+  const stripped = { ...t, institutions: t.institutions.map((i) => (i.name === HOUSE.name ? { name: i.name, category: i.category } : i)) };
+
+  it('NOT VACUOUS: the owner\'s set holds the three rites; the floor drops the middle one from the drawn set', () => {
+    expect(shownTraditionsOf(t, []).recs.map((r) => r.id)).toEqual([first.id, market.id, harvest.id]);
+    expect(sharedTraditionRowsOf(t).map((r) => r.name)).toEqual([first.name, harvest.name]);
+  }, 120000);
+
+  it('the served ids are dense (tradition.shared.0..n-1), carry nothing of the genesis id or the seed, and are byte-identical with the house hidden and shown', () => {
+    const rows = sharedTraditionRowsOf(t);
+    const seedSlug = first.id.split('.')[1];
+    expect(seedSlug).toMatch(/plant2/); // the genesis id carries the seed
+    expect(rows.map((r) => r.id)).toEqual(rows.map((_, i) => `tradition.shared.${i}`));
+    for (const r of rows) {
+      // anchored: the seed's slug is read off the genesis id itself (asserted non-empty), and the line above asserts r.id
+      expect(r.id).not.toContain(seedSlug);
+      // anchored: the owner arm below asserts these three ids stand on the owner's set; the dense ids are asserted above
+      expect([first.id, market.id, harvest.id]).not.toContain(r.id);
+    }
+    expect(JSON.stringify(sharedTraditionRowsOf(veiled)), 'applyVeil').toBe(JSON.stringify(rows));
+    expect(JSON.stringify(sharedTraditionRowsOf(stripped)), 'by hand').toBe(JSON.stringify(rows));
+  }, 120000);
+
+  it('the OWNER\'s page keeps the genesis ids', () => {
+    expect(shownTraditionsOf(t, []).recs.map((r) => r.id)).toEqual([first.id, market.id, harvest.id]);
+  }, 120000);
 });

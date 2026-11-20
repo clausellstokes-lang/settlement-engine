@@ -23,7 +23,10 @@
  *   S1 lead and gloss   CHOOSE a line: `pickVariant` on the key (identity, not a row), then `drawDeclared`'s admission over
  *                       `factsOf(view)`. The table's needs read `market` and `institution: smith` (the view's live roster: no
  *                       hideable house), `navigable`/`river`/`coast` (geography) and the crisis families (the
- *                       stress record); none is a row the veil withholds once the view is taken.
+ *                       stress record); none is a row the veil withholds once the view is taken. `market` reads a house's
+ *                       own `tags`, else the catalogue's for its NAME (facts/market.js :: isMarketInstitution): the view
+ *                       strips every field the house's `function` eye can remove (TRAD-3 unit 4), so for a reader it reads
+ *                       the house's name only (its floor).
  *   S2 owner            CHOOSES nothing: the record's own owner, named only where the view holds it by that exact name (a
  *                       veiled power or hideable house is out of the view); absent, the keeper slot stays empty (no other
  *                       keeper stands in), so the text is the same whether the withheld owner's row is there or not.
@@ -33,11 +36,16 @@
  *                       flagged governing cannot stand ahead of the served seat) or the STRONGEST power of an archetype
  *                       (by `power`, over the view's powers: no isVeiledPower row can outrank the one named).
  *   S2 presider         none for a reader (a card's tie is a field the DM may hide card by card).
- *   S3 founding         CHOOSES between the two founding pools by whether the record holds `foundedBy`, and states the
- *                       founding's `age`: history.founding, which the veil does not withhold.
+ *   S3 founding         for the OWNER, CHOOSES between the two founding pools by whether the record holds `foundedBy`; for a
+ *                       READER, never reads `foundedBy` (always the bare pool: an editable field veil-22's name sweep
+ *                       removes when it holds a hidden name; TRAD-3 unit 4). Both state the founding's `age`.
  *   S3 the dead         CHOOSES the most recent graded event by `yearsAgo` over history.historicalEvents: the veil hides an
  *                       event's fields, never its row, and the fields read (name, templateType, severity, yearsAgo) are on
- *                       the event card's floor (galleryVeil.js :: CARD_KINDS.event).
+ *                       the event card's floor (galleryVeil.js :: CARD_KINDS.event). But veil-22's name sweep removes an
+ *                       event whole when its name holds a hidden name, so for a READER (TRAD-3 unit 4, the chair's item 3)
+ *                       the choice is only among events whose name holds no house, person or power name the WHOLE record
+ *                       holds (hidden or shown: heldNamesOf), and the event is named by its KIND (DEAD_EVENT_PHRASES),
+ *                       never by `event.name`.
  *   S3 economy          RANKS the fitting income (chief / lesser) and COUNTS the incomes ('only') over the view's
  *                       incomeSources: the criminal income row (`isCriminal: true`), the one row the veil withholds whole
  *                       (gallerySecondHomes.js :: withholdCriminalIncome, on the veil lane), is out of the view.
@@ -55,14 +63,15 @@ import { powerVerb } from '../../data/people/powerSentenceName.js';
 import { factionArchetype, FACTION_ARCHETYPES } from '../factionArchetypes.js';
 import { governingFactionOf, nameOf } from '../rulingPower.js';
 import { isHideableHouse, isVeiledPower } from '../people/cardVeil.js';
+import { CARD_KINDS } from '../display/galleryVeil.js';
 import { catalogIdForName } from '../../data/institutionalCatalog.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { drawDeclared, lineText } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
 import {
   ACT_LEADS, CRISIS_SCOPED_ACTS, ELEMENT_GLOSS, CRISIS_SCOPED_ELEMENTS, KEEPER_HOUSES, HOUSE_FRAMES, POWER_FRAMES,
-  OWNER_FRAMES, CAUSE_FRAMES, DEAD_EVENT_TYPES, DEAD_EVENT_SEVERITIES, ECONOMY_FIT, ECONOMY_FRAMES, ECONOMY_RANKS,
-  POWER_FRAME_VERBS,
+  OWNER_FRAMES, CAUSE_FRAMES, DEAD_EVENT_TYPES, DEAD_EVENT_SEVERITIES, DEAD_EVENT_PHRASES, ECONOMY_FIT, ECONOMY_FRAMES,
+  ECONOMY_RANKS, POWER_FRAME_VERBS,
 } from '../../data/traditionDescriptionTable.js';
 
 /** @typedef {import('./genesis.js').TraditionRec} TraditionRec */
@@ -105,12 +114,34 @@ const str = (v) => (typeof v === 'string' ? v : '');
 const cap = (s) => (s ? s[0].toUpperCase() + s.slice(1) : s);
 /** @param {string} template @param {Record<string, string>} slots @returns {string} */
 const fill = (template, slots) => template.replace(/\{(\w+)\}/g, (_, k) => slots[k] ?? '');
+/** The veil's card kind of a house (galleryVeil.js :: CARD_KINDS), addressed by its name as the veil addresses its kinds. */
+const HOUSE_CARD_KIND = 'institution';
+/** The keys a house's `function` eye removes, as the veil declares them. @type {ReadonlyArray<string>} */
+const FUNCTION_KEYS = CARD_KINDS[HOUSE_CARD_KIND].fields.function;
+/**
+ * A house less its function-eye fields (a copy; a house holding none is returned as it is): what a fact reads of a house
+ * once the DM's `function` eye may be shut, its floor. The reader's view (below) and the shared page's drawn set
+ * (shownTraditions.js :: sharedTraditionRowsOf) read houses through it.
+ * @param {unknown} i @returns {unknown}
+ */
+export function withoutFunction(i) {
+  const house = recordOf(i);
+  if (!FUNCTION_KEYS.some((k) => k in house)) return i;
+  /** @type {Rec} */
+  const out = { ...house };
+  for (const k of FUNCTION_KEYS) delete out[k];
+  return out;
+}
+
 /**
  * THE READER'S VIEW (CTR11): the record less every row of a withheld class, so no rank, count or choice the reader's text
  * makes can be shifted by a row a DM may hide: hideable houses (people/cardVeil.js :: isHideableHouse, the class the
  * gallery veil removes whole), veiled powers (cardVeil.js :: isVeiledPower, the reader's wall) and the criminal income row
- * (`isCriminal: true`, gallerySecondHomes.js :: withholdCriminalIncome's class). Everything else is the record's own.
- * A shallow copy: the record is never written.
+ * (`isCriminal: true`, gallerySecondHomes.js :: withholdCriminalIncome's class); and, from every house left, every field
+ * its `function` eye can remove (galleryVeil.js :: CARD_KINDS.institution.fields.function, the veil's own declaration,
+ * read here and never copied), so a fact the reader's text admits by reads a house's floor (TRAD-3 unit 4). The
+ * hideable class is read on the house whole, before the strip (an illegal brokerage is known by its own tags).
+ * Everything else is the record's own. A shallow copy: the record is never written.
  * @param {Rec} settlement @returns {Rec}
  */
 function readerView(settlement) {
@@ -119,10 +150,48 @@ function readerView(settlement) {
   return {
     ...settlement,
     // the live roster (institutions/institutionRoster.js): every reader of the roster here reads it live already
-    institutions: liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement)).filter((i) => !isHideableHouse(recordOf(i))),
+    institutions: liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement))
+      .filter((i) => !isHideableHouse(recordOf(i))).map(withoutFunction),
     powerStructure: { ...ps, factions: listOf(ps.factions).filter((f) => !isVeiledPower(f)) },
     economicState: { ...economy, incomeSources: listOf(economy.incomeSources).filter((r) => recordOf(r).isCriminal !== true) },
   };
+}
+
+/**
+ * Every name of a house, a person or a power the WHOLE record holds, hidden or shown (lower-cased): every copy of the
+ * gallery veil's institution, npc and faction kinds (galleryVeil.js :: CARD_KINDS[kind].lists, a `*` walking every
+ * owner), read on the owner's record and never on the reader's view, so the set is no function of what a DM hides.
+ * @param {Rec} whole @returns {string[]}
+ */
+function heldNamesOf(whole) {
+  /** @type {Set<string>} */
+  const names = new Set();
+  /** @param {unknown} v */
+  const add = (v) => { const n = str(v).trim().toLowerCase(); if (n) names.add(n); };
+  /** @param {unknown} root @param {ReadonlyArray<string>} path @returns {Rec[]} */
+  const at = (root, path) => {
+    const star = path.indexOf('*');
+    if (star >= 0) return at(root, path.slice(0, star)).flatMap((owner) => at(owner, path.slice(star + 1)));
+    let cur = root;
+    for (const seg of path) cur = recordOf(cur)[seg];
+    return listOf(cur).filter((x) => x && typeof x === 'object' && !Array.isArray(x)).map(recordOf);
+  };
+  for (const kind of ['institution', 'npc', 'faction']) {
+    for (const path of CARD_KINDS[kind].lists) for (const card of at(whole, path)) { add(card.name); add(card.faction); }
+  }
+  return [...names];
+}
+
+/**
+ * Does an event's name hold one of the names, at the start of a word (case aside; a plural or possessive after it still
+ * holds it)? @param {string} eventName @param {ReadonlyArray<string>} names @returns {boolean}
+ */
+function holdsAName(eventName, names) {
+  const text = eventName.toLowerCase();
+  return names.some((n) => {
+    for (let i = text.indexOf(n); i >= 0; i = text.indexOf(n, i + 1)) if (i === 0 || !/[\p{L}\p{N}]/u.test(text[i - 1])) return true;
+    return false;
+  });
 }
 
 /**
@@ -363,7 +432,9 @@ export function describeTradition(recIn, settlementIn, options = {}) {
   const founding = recordOf(history.founding);
   const age = Number(founding.age);
   if (core && town && Number.isFinite(age) && age > 0) {
-    const by = str(founding.foundedBy);
+    // CTR11 (TRAD-3 unit 4): the reader's founding never reads `foundedBy`, an editable field a later sweep can withhold
+    // (veil-22's name sweep removes it when it holds a hidden name): the bare pool always, its key and draw otherwise the same.
+    const by = reader ? '' : str(founding.foundedBy);
     // The founding frames are chosen by their table key, as every other slot's pool is. A literal `CAUSE_FRAMES.founding`
     // read named the corpus's single-home shape `founding` (history.founding) to the observed-shape scanner
     // (scripts/lib/legacy-reader-shape-scan.mjs :: makeResolver, the ungrounded single-home rule), which carried it through
@@ -375,16 +446,24 @@ export function describeTradition(recIn, settlementIn, options = {}) {
   } else if (element === 'the-dead') {
     /** @param {Rec} e @returns {boolean} */
     const graded = (e) => [e.severity].flat().some((v) => DEAD_EVENT_SEVERITIES.includes(str(v)));
+    // CTR11 (TRAD-3 unit 4, the chair's item 3): a reader chooses only among events whose name holds no house, person or
+    // power name of the WHOLE record (a name veil-22's sweep would take the event whole by), and names it by its kind.
+    const held = reader ? heldNamesOf(whole) : [];
     const event = listOf(history.historicalEvents).map(recordOf)
       .filter((e) => DEAD_EVENTS.has(str(e.templateType)) && graded(e) && str(e.name) && Number.isFinite(Number(e.yearsAgo)) && Number(e.yearsAgo) >= 1)
+      .filter((e) => !reader || !holdsAName(str(e.name), held))
       .sort((a, b) => Number(a.yearsAgo) - Number(b.yearsAgo))[0];
-    if (event && town) {
+    /** @type {Record<string, string>} */
+    const kinds = DEAD_EVENT_PHRASES;
+    const eventProse = !event ? '' : reader ? str(kinds[str(event.templateType)]) : str(event.name).replace(/^The /, 'the ');
+    if (event && eventProse && town) {
       const years = Number(event.yearsAgo);
       s3 = fill(draw(CAUSE_FRAMES.dead, seed, `${id}#origin`, 'cause.dead', facts), {
-        event: str(event.name).replace(/^The /, 'the '), when: years === 1 ? 'a year ago' : `${years} years ago`, Town: town,
+        event: eventProse, when: years === 1 ? 'a year ago' : `${years} years ago`, Town: town,
       });
       parts.origin = 'cause';
-      named.events.push(str(event.name));
+      // the reader's text names no event by its name: nothing is listed
+      if (!reader) named.events.push(str(event.name));
     }
   }
   if (!s3 && town) {
