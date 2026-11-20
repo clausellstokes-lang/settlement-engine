@@ -1023,3 +1023,19 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   `tests/build/ciCheckParity.test.js` re-keyed by identity. If the seat nears its mark it says so and another
   machine is seated. DEBT, after the deploy: the shards are split by a hash (13m50s against 36m04s); a split weighted
   by measured duration would take the wall time to about 25 minutes.
+- 03:00 UTC · **REVIEW-VEIL-11: THE COLD READ OF DOORS AS BUILT HOLDS** (cca49cb8d, build 04704a660; its message of 02:59
+  UTC): 212's 491 new lines read by hunk; its own red (7 of 7 at bedd5a392) and green (13 of 13); ITS ATTACK (the
+  name lists hold no power the veil removes because its HOUSE is hidden, only DM-flagged ones): 67 born towns with a
+  hideable house, the default veil, a log planted naming EVERY power: 7 entries naming a veil-removed power, 0
+  served; 435 of 443 naming served powers served; no withheld house name in any chronicle; 0 tiles holding a
+  withheld house's or power's name, 0 crime-worded tiles. NOT REACHED (VEIL-DOORS-2's list): the snapshot-mode
+  chronicle, the one-row read and its cost. Next for the reader: a public map's world columns.
+  **GIT-DOOR, POINT 76 IN THREE STEPS:** "GIT-DOOR-2 0b0e6bd83": the line merged into its branch (only the census
+  conflicted; re-taken by its ritual at the merged tree: files 3702, titles 31171, the sum of the two sides' own
+  measures), the guard 137 of 137. Commit (1) done (ddaf1e1af): the un-anchored assertion, red at 0b0e6bd83 and
+  green after. A SURPRISE ON (2): its six shard reports CANNOT measure hooks (a file's time in vitest's json report
+  equals the sum of its tests'; `distributionEnvelopes` reads 3.92 s though its beforeAll builds 300 settlements);
+  the instrument is the reporter API's hook events. RULED: the point is NOT held for the class: (2a) that one
+  hook measured directly and given its own budget, and (3) the cap, land now as point 76 ("GIT-DOOR-3"); (2b) the
+  class from a six-shard measuring run in a worktree of its own (about 100 minutes) follows as point 77
+  ("GIT-DOOR-4"), or one line that the class is empty.
