@@ -1717,6 +1717,68 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   to the chair. (4) A slot is keyed by surface and printed position, the stored path as attribution; zero identity
   flips between the two seed sets, proved.
 
+- **THE EARLY JOINT READING OF THE TWO DARK LAWS (16:28 UTC; the chair's helper; `measures/joint-reading/report.txt`,
+  `joint-measure.mjs`, `joint-report.mjs`).** The who-rules tip 6e697f5db merged with the fortune lane's c167b5f11
+  in a scratch tree (removed after); 600 places hxd-<size>-0..99 in four arms; `_fortuneLawVersion: 2` and
+  `_seatLawVersion: 2` set after `birthConfig` (the lanes' own switches); 0 errors in 2,400 births; with both laws
+  off the merged tree births byte-identical to the seat tip alone (120 of 120). SIX MERGE CONFLICTS FOR THE JOIN:
+  `densityCreateBoundary.js` and its walker test (each lane adds a sibling row at one place: keep both, a closing
+  `}),` between); four registers re-taken by their doors (wiring census, lighting baseline, tuning inventory,
+  tuning register). WHAT IT READS, CALM PLACES, the share whose seat's risk reads Contested or Critical
+  (`rulingPowerCoup.js :: coupContenders`, `coupRiskLabel`): TODAY (both off) thorp 0, hamlet 7.6, VILLAGE 70, town
+  8.6, city 0, metropolis 0%; fortune only 0, 1.5, 18.6, 12.9, 19.2, 10.4%; seat only 0, 7.6, 67.1, 5.7, 0, 0%; BOTH
+  0, 1.5, 17.1, 8.6, 16.4, 10.4%. THE FORTUNE LAW MOVES THE CONTESTED SEAT OUT OF THE VILLAGES AND INTO THE CITIES: a
+  calm city's ruler, now Tolerated (multiplier 1.0, where Approved gives 1.15 and Endorsed 1.30), is outweighed by
+  its Military/Guard (23.75 against 23 in hxd-city-10); all 14 contested calm cities and metropolises have
+  Military/Guard heading the field. EVERY CALM INCUMBENT STAYS PROTECTED in every arm; no birth writes a transfer in
+  any arm (a seat changes hands only in play). THE CROSS, both on, calm rulers standing Tolerated (tolerated /
+  contested): thorp 39/0, hamlet 28/1, village 34/3, town 46/2, city 47/7, metropolis 54/7 (seat only: no calm city
+  or metropolis ruler stands Tolerated at all). "A CALM SEAT CONTESTED WITH NO TROUBLE OF A RULER'S KIND AND A CLEAN
+  CAPTURE RUNG": 41 places today (hamlet 5, village 33, town 3) against 26 with both laws (hamlet 1, village 7,
+  town 4, city 9, metropolis 5): fewer in all, moved to the cities; in the ten listed the record does hold the
+  cause as a power outweighing the seat. CRISIS-BORN: metropolis protected 81.8% today, 48.5% with both; city 81.5%
+  and 66.7%; contested 45.5% to 84.8% and 48.1% to 74.1% (the fortune lane's known figures). NOT MEASURED: (1) the
+  contest's second switch `seatCircumstances.js :: SEAT_CONTEST_LIT` is a code constant, false, and neither lane's
+  measure forces it: ASKED OF SEAT-5 whether the contest has ever been measured lit and what lights it for the
+  owner (nothing is signed on that was never measured lit); (2) whether a contested calm city loses its seat in
+  play (the seat lane's U5 is not built); (3) the merits and the safety hunk (unbuilt): ASKED OF FORTUNE-3: the same
+  table with them on. THE CHAIR'S READING: the feared failure (calm great cities reading as cities in a coup) is
+  NOT what the counts show: one calm city in six and one calm metropolis in ten read a seat contested by a stronger
+  garrison, all protected; today seven calm villages in ten read so, and that falls to one in six.
+- **THE RENDERED CENSUS'S VERDICT ON THE PROGRAM'S FIELDS (16:26 UTC, SAME-1; 300 places; "printed" = the stored
+  sentence appears word for word on a surface).** NOT PRINTED ANYWHERE, SO DROPPED: `economicViability.dependencies[]`
+  and `warnings[].description`; `spatialLayout.quarters[].desc`; `stress.cast.stakes[].reason` (composed at display);
+  `situationDesc`; AND `npcs[].activeConstraint` (the card's code prints a field of that name, yet the stored text is
+  on no surface in 300 places: PEOPLE-1 finds out why before anything is written). PRINTED, WORST FIRST (the
+  commonest sentence's share, thorp to metropolis): `factions[].desc` 54/34/82/80/82/100% (Power, PDF);
+  `factionRelationships[].narrative` 66/76/76/98% from village up (Power); `settlementReason[]` 36/24/14/14/100/98%
+  (Overview, PDF); `structuralPosition` 56/39/42/66/76/74% (cards); `safetyDesc` 72/60/72/72/66/74% (Defense);
+  `entrepotNote` about 90% of cities and metropolises (Economics, PDF); a trouble's `plotHooks` 12/20/14/30/54/54%;
+  PDF ONLY: `founding.foundedBy` and `.overcoming` 28 to 46%, a trouble's `lastingEffects` (6 to 27 places a size).
+  RARELY PRINTED, no unit: `economicDragDesc` (0 to 7 places a size), `tradeDependencies[].impact` (0 to 4). RE-ROUTED:
+  PLACE-1: safetyDesc first, then entrepotNote; PEOPLE-1: THE HOLD IS LIFTED for `factions[].desc` and the relations'
+  narrative (a new data file and ONE call line in the file another lane holds; the line sent to the chair before the
+  merge), then structuralPosition, settlementReason, founding. PAGE-7: the effects as a later unit after the hooks,
+  no effect needing a hideable fact (effects reach a reader; hooks do not).
+- **THE CAUSES ARE BUILT, WITH ONE STOP RULED (16:30 UTC; PAGE-7, `lane/page-7-2026-11-20-causes-wip`, 558a7476e and
+  27b349d0e).** BUILT PROJECTION: mixed 7.8%, three cities in a row 14.2% (bars: under 10% and 25%); parity with the
+  measure 0 disagreements over 48,600 checks; the pick keyed on the place's NAME (shared documents strip `_seed`).
+  THE STOP: the presumption walkers red on 24 lines: RULED: every wording declares its `needs` atoms and the function
+  draws through `drawDeclared`; two atoms allowed (`house:thieves_guild`, `house:smuggling`, answered by
+  `facts/causeHouses.js`); REFUSED: "no factsOf getter (it would need a factLayers.js row)": the home is named in
+  `factsOf` and takes its `factLayers.js` row, declared hideable where it reads a criminal or covert house. THE
+  {power} FILL is built by PAGE-7 as the one helper beside the sides table (PAGE-4's sides reader calls it). Third
+  wordings for the five above 15% come to the chair ("CAUSE-LINES-3"). Then "CAUSES <commit>".
+- **THE WANTS' TRANCHE (16:33 UTC; GOALS-3's builder 9, `WANT-LINES-1.md` at cd5de3204 on
+  `lane/goals-3-2026-11-20-b9`).** A CORRECTION OF THE CHAIR'S BILL by executed births: the chair counted a
+  house-filled text as a line; BY LINES, 38 bring a second city under 30% and 129 a metropolis; the proposed 380 in
+  34 cells give about 12% at city size and 17% at metropolis (today 36.4% and 47.3% for short wants). THE CHAIR
+  READ ALL SIXTY OF FILE 1: 58 as written, 2 reworded (RANK/enter/short 11 "…any member of {power} who falls ill…";
+  RANK/enter/long 2 "See someone of their own choosing follow them into {power}…"). File 1 alone: city 25.0% and
+  26.1%, metropolis 36.4% and 37.0%; it moves 7,939 of 17,992 goals on the 300; identical 0, refusal 0. RULED: the
+  tranche is THE 380 (floor 129 if the close arrives first); the cell counts pinned by `goalFamilies.test.js` move
+  by its door (told to the owner); ONE build.
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -4670,3 +4732,10 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   the economy's output never reaches 70 in 600 births, so every "busy" branch is dead: a named survivor. PEOPLE-1
   and PLACE-1 told to prove each field prints before measuring it. SEAT-6 seated on 6e697f5db, re-making the lane's
   measure (`measure-u4.mjs --force-law _seatLawVersion=2`).
+- 16:32 UTC · THE JOINT READING RETURNED (section 2) and three more messages were ruled: SAME-1's table of what prints; PAGE-7's
+  causes built with a stop; GOALS-3's first sixty wants and its correction of the chair's bill. Sent on: the joint
+  reading's counts and two questions to SEAT-5; the same with a request to FORTUNE-3; the re-routing to PLACE-1 and
+  PEOPLE-1; the fill function's owner to PAGE-4. A SMALL INACCURACY OF THE CHAIR'S TO THE OWNER AT 16:27, corrected in
+  its next words: "the recent conflict was measured on what the page shows": it was measured on the STORED field;
+  the page code that prints it was read and the rendered census confirms it (the Overview: the commonest sentence in
+  24 of 33 thorps).
