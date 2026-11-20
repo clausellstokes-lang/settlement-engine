@@ -75,6 +75,7 @@ describe('textOf', () => {
     // 76 lines APPENDED to the arrival tables (docs/chair/2026-11-20/content/page/L2-LINES.md), 40 are declared objects, and the
     // chair's cures of 15:35 declare six bare ones (fish dominant [6]-[8] `trade at work: fish`, arcane dominant [7]-[9]
     // `trade at work: arcane`): 40 + 6 = 46. No existing row changed shape.
-    expect(rows.filter((r) => typeof r === 'object').length).toBe(290);
+    // 290 -> 293 (L2, the chair's three fish twins of 17:13; re-keyed by identity): the twins of fish dominant [6]-[8] join.
+    expect(rows.filter((r) => typeof r === 'object').length).toBe(293);
   });
 });

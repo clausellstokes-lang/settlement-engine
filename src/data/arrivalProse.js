@@ -187,11 +187,16 @@ export const ARRIVAL_SENSES = Object.freeze([
       { text: (n) => `Half of ${n} has worked fish all its life, and there is almost no fish to work.`, twinOf: 'Half of {name} seems to be gutting, salting or selling fish.', needs: ['fish'] }, // TAIL-HISTORY-5 (Y17): its twin there
       { text: () => 'Barrels of salt fish stand stacked by the water, and the gulls have opinions about every one.', needs: ['trade at work: fish', 'navigable'], excludes: ['crisis: hunger'] }, // TAIL-HISTORY batch 1 (the chair's Y4; READ-ALL 04287): "stacked for the carts" printed under a siege, when no cart leaves; reworded to name no carts, so no condition and no new line in the pool (VETOABLE wording, the owner's); TAIL-HISTORY-5 (Y17): no stacked salt fish where the food failed or is cut off (5 of 18 towns)
       { text: () => 'Empty salt barrels stand stacked by the water, and even the gulls have given up on them.', twinOf: 'Barrels of salt fish stand stacked by the water, and the gulls have opinions about every one.', needs: ['navigable'] }, // TAIL-HISTORY-5 (Y17): its twin there
-      // L2 (PAGE-2's lines, 2026-11-20): APPENDED. Each says the fish trade the exports name, and no catch, no water and no
-      // stock today, so no state of the catch can make it false: nothing to declare, no twin
+      // L2 (PAGE-2's lines, 2026-11-20): APPENDED. The chair's cures (15:35): each declares the fish at work and refuses the
+      // hunger, as the barrels above; its twin (the chair's text, 17:13) answers on the same slot where the fish is short
       { text: (n) => `Talk in ${n} turns to fish sooner or later, whatever it started on.`, needs: ['trade at work: fish'], excludes: ['crisis: hunger'] },
       { text: () => 'A gutting knife hangs by more than one doorway, its blade worn thin with use.', needs: ['trade at work: fish'], excludes: ['crisis: hunger'] },
       { text: () => 'Even the dogs here smell faintly of fish, and nobody but you seems to notice.', needs: ['trade at work: fish'], excludes: ['crisis: hunger'] },
+      // L2 (the chair's three fish twins, 2026-11-20 17:13): APPENDED, each the twin of an L2 line above (the fish-twin law,
+      // tailHistoryBatch6.test.js): its original's needs less the fish keys, so none
+      { text: (n) => `Talk in ${n} turns to fish sooner or later, and lately to how few there are.`, twinOf: 'Talk in {name} turns to fish sooner or later, whatever it started on.', needs: [] },
+      { text: () => 'A gutting knife hangs by more than one doorway, and few of them have seen much use of late.', twinOf: 'A gutting knife hangs by more than one doorway, its blade worn thin with use.', needs: [] },
+      { text: () => 'The dogs here still run to meet anyone coming up from the water, and get little for it these days.', twinOf: 'Even the dogs here smell faintly of fish, and nobody but you seems to notice.', needs: [] },
     ] },
   { key: 'cloth',
     institutions: ['weaver', 'weavers', 'textile', 'fuller', 'dyer', 'tailor', 'clothier', 'draper'],

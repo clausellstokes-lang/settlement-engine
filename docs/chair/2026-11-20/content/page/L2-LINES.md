@@ -11,6 +11,8 @@ town's name; a HOOK line's "settlement" is spoken in the town's own tier noun by
 
 ## What was chosen, and why (the measure)
 
+THE CHAIR'S TWINS (17:13): three fish twins appended to the fish dominant pool, one for each of NEW [6]-[8] (the fish-twin law).
+
 THE CHAIR'S CURES (15:35, PAGE-6's proposal `p6-l2-reds.md`): fish dominant NEW [6]–[8] and arcane dominant NEW [7]–[9] declared as their siblings, livestock lines NEW [7] marked colour, four lines reworded (port [6], [8]; river [5], [6]); each noted at its line.
 
 THE CHAIR'S READ (14:17 UTC, `lines/L2-LINES-TO-CHAIR.md`): 73 lines approved as written, THREE CHANGED and applied in
@@ -234,7 +236,7 @@ NEW:
 ## Batch 3: the SENSE (12 lines)
 
 
-### `ARRIVAL_SENSES.fish.dominant` (+3: 6 entries become 9)
+### `ARRIVAL_SENSES.fish.dominant` (+3, and the chair's three twins: 6 entries become 12)
 
 Beside them (the base, unchanged; index: text, declaration):
 
@@ -256,6 +258,12 @@ NEW:
 - **8: Even the dogs here smell faintly of fish, and nobody but you seems to notice.** _[needs: trade at work: fish; excludes: crisis: hunger]_
   - THE CHAIR'S CURE (15:35 word): declared as line 4 ("Barrels of salt fish …") declares; the A1 guard (`bar4ScenePresumption.test.js`) found it where every fish house is stopped by the siege, short of fish or scarce in the famine.
   - Even the dogs smell of fish: the trade's long presence; nothing declared.
+- **9 (TWIN of 6): Talk in {name} turns to fish sooner or later, and lately to how few there are.** _[TWIN; needs: none]_
+  - THE CHAIR'S TWIN (17:13): the fish-twin law (`tailHistoryBatch6.test.js`: every catch line refuses the hunger and has its twin, needing its original's needs less the fish keys); it answers on the same slot where the fish is short, and spends no redraw.
+- **10 (TWIN of 7): A gutting knife hangs by more than one doorway, and few of them have seen much use of late.** _[TWIN; needs: none]_
+  - THE CHAIR'S TWIN (17:13): the same.
+- **11 (TWIN of 8): The dogs here still run to meet anyone coming up from the water, and get little for it these days.** _[TWIN; needs: none]_
+  - THE CHAIR'S TWIN (17:13): the same.
 
 ### `ARRIVAL_SENSES.livestock.lines` (+3: 5 entries become 8)
 

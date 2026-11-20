@@ -64,10 +64,14 @@ const MUST_NOT = [
   // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): r2r-hamlet-16 -> r2s-famine-hamlet-2, a hamlet
   // whose fish failed in the famine, the slot taking the twin
   ['r2s-famine-hamlet-2', /seems to be gutting, salting or selling fish/, /has worked fish all its life, and there is almost no fish to work\./],
-  ['r2r-hamlet-28', /Barrels of salt fish stand stacked/, /Empty salt barrels stand stacked by the water, and even the gulls have given up on them\./],
+  // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's three fish twins of 17:13: a refused L2 fish line now keeps its slot with
+  // its twin, so the draws after it moved): r2r-hamlet-28 -> r2r-hamlet-10, a hamlet whose fish is short, the slot taking the twin
+  ['r2r-hamlet-10', /Barrels of salt fish stand stacked/, /Empty salt barrels stand stacked by the water, and even the gulls have given up on them\./],
   // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): r2r-thorp-58 -> r2s-under_siege-hamlet-0, a
   // besieged place whose fish house is stopped, the slot taking the twin
-  ['r2s-under_siege-hamlet-0', /Barrels of salt fish stand stacked/, /Empty salt barrels stand stacked by the water/],
+  // RE-KEYED BY IDENTITY 2026-11-20 (L2, the same): r2s-under_siege-hamlet-0 -> r2s-under_siege-village-13, a besieged place
+  // whose fish house is stopped, the slot taking the twin
+  ['r2s-under_siege-village-13', /Barrels of salt fish stand stacked/, /Empty salt barrels stand stacked by the water/],
   // BAR4-SCENES-2 (2026-11-16, re-keyed by identity): the slot's first draw here is the basket line, which now has its own twin (the chair's
   // ruling HW1: a twin keeps the slot and spends no redraw), so the redraw that reached the nets line is no longer spent; the false words stay out
   ['r2s-famine-thorp-0', /the smell of the catch follows you/, /An empty fish basket is carried past, back from the water with nothing in it\./],
