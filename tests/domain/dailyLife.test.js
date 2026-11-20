@@ -27,6 +27,7 @@ import {
   supportedDailyLifeSlots,
 } from '../../src/domain/dailyLife.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { DAWN_WORK } from '../../src/data/dailyLife/dawnWork.js';
 
 // ── Catalog ────────────────────────────────────────────────────────────
 
@@ -123,7 +124,10 @@ describe('dawn_work behavior', () => {
       ],
       config: { monsterThreat: 'plagued' },
     });
-    expect(besieged.text.toLowerCase()).toMatch(/(walls|watch musters|rounds)/);
+    // DAILY-2 B2 D1 (LINES-1 § dawn_work, ruling 8): the tone is the defence branch's (a plagued country is a real outside
+    // threat), but this record holds no walls and no watch, so it is told no walls, watch or rounds: the pin re-recorded to
+    // the meaning it guarded, the defence pool taken.
+    expect(DAWN_WORK.defence.map((l) => l.text)).toContain(besieged.text);
   });
 
   it('keys the guild flavor off craft faction power alone', () => {
@@ -138,7 +142,9 @@ describe('dawn_work behavior', () => {
         factions: [{ id: 'faction.artisans', faction: "Artisans' Guild", name: "Artisans' Guild", power: 60 }],
       },
     });
-    expect(guildTown.text.toLowerCase()).toMatch(/(smithy|guild-callers)/);
+    // DAILY-2 B2 D1 (LINES-1 § dawn_work): the craft branch by craft power alone; this record holds no smithy and no guild,
+    // so it is told neither: the pin re-recorded to the meaning it guarded, the craft pool taken.
+    expect(DAWN_WORK.craft.map((l) => l.text)).toContain(guildTown.text);
   });
 
   it('references the canonical food_production + defense lenses, never labor/craft', () => {
