@@ -2479,3 +2479,30 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   CHANGED FILES: its seat runs the suite's shards that pin prose (or the whole sharded suite, as CI does) and NAMES
   EVERY RED before the hand-back; the chair treats CI's first run after such a landing as part of the landing, read
   by the failing tests' names, and lands the cures at once.
+- 08:32 UTC · **THE SAFETY NET'S PASS (08:30) AND THE CI RUN AT THE NAMES LANDING, HALF READ.** TRUE COUNTS BY THE CHAIR'S READ:
+  VEIL-23 309,171 (its successor VEIL-24 is seated and idle; it takes R3's return, then hands over); SEAT-2 331,806
+  (ITS HAND-OVER LINE: `prompts/SEAT-3.txt` written, seated at once); FRAME-3 315,233 BEFORE ITS FIRST BUILD (its
+  read-in, a re-count, two line-by-line reads and a scratch merge): `prompts/FRAME-4.txt` written for THE SECOND HALF
+  (the owner's crisis-casting examples, the measures, the sheets), seated when FRAME-3 reports the line merged;
+  TRAD-2 141,515. A LESSON MADE A RULE OF EVERY NEW PROMPT: A SUCCESSOR READS LEAN (the standard, the owner's words,
+  the rulings since, the predecessor's SELF-CONTAINED hand-back and the open briefs: never the earlier seats' files
+  whole, never a diff it is not about to merge), and every hand-back is written so that a successor needs it and the
+  briefs only: three lanes spent about 300,000 tokens a seat on reading in.
+  CI AT e356c94f (run 44698707360; read 08:27; shards 5 and 6, coverage and the verdict still running): GREEN: the
+  e2e, validation, the type ratchets, lint, the edge tests, browser performance; shards 1 to 4 done (a shard records
+  its exit, the verdict is a later job). RED: "Golden master under tr_TR + Chatham TZ" (the named golden);
+  "Gate / build and dist" (`verify:dist`), BY ITS LINES: (a) THE SERVER'S ENGINE BUNDLE IS STALE: "521 of 525 rows
+  differ between supabase/functions/_shared/engineBundle.js and the in-process pipeline", 325 of 360 fence
+  settlements, the bundle's birth 3 of 3, its core 3 of 3, and three more of the same family; (b) FIVE SIZE
+  CEILINGS: the generation worker 2,583,761 against 2,579,708 (+4,053); a second chunk 910,841 against 909,928
+  (+913); first paint static 1,175,917 against 1,175,492 (+425), gzip 374,104 against 373,999 (+105), Brotli 314,109
+  against 313,994 (+115). The boot smoke is green. READ AGAINST THE LAST CLOSE'S RECORD (`git log
+  --grep=LASTCLOSE-SIGN` on the line): the edge bundles were rebuilt AT THE CLOSE (C1: `npm run build:edge-shared`,
+  three runs byte-equal) and the size ceilings re-recorded once AT THE CLOSE at the measured figures, "every rise
+  tallied by landing step" (C3: the chair's ruling). SO BOTH ARE THE ORDINARY STATE BETWEEN CLOSES, NOT A NEW FAULT;
+  BUT THE CHAIR'S LIST OF "RED BY DESIGN" TOLD TO THE OWNER AND WRITTEN IN ROW 77 NAMED ONLY THE STORED FIGURES:
+  INCOMPLETE. Said to the owner at 08:28 with the figures. THE TALLY FOR THE CLOSE BEGINS HERE: point 77: worker
+  +4,053, the second chunk +913, first paint +425 raw, +105 gzip, +115 Brotli (point 78 adds nothing: its table is
+  called by nobody). THE LAST CLOSE'S SEQUENCE IS THIS CLOSE'S CHECKLIST: the stored figures with a door (a seat);
+  then, under the owner's yes, the golden door; then the edit corpus ratchet, the edge bundles, the mutation
+  manifest's totality, the size ceilings, the lighting census, last.
