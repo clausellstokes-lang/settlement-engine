@@ -33,7 +33,7 @@
  * DM-only by construction: `npcs[].goal` (and so `intent`) never reaches a public page (design §6.3).
  */
 
-import { GOAL_FAMILY_LINES, GOAL_LINE_MIN_MEMBERS, GOAL_RESERVE_LINES, PERSONALITY_CLUSTER_OF, TIE_TYPE_TO_GOAL_SUBKIND } from '../../data/people/goalFamilies.js'; import { facesInPower } from '../../domain/people/cardPowers.js'; // BAR8 K-PEOPLE (14h): the power's members as the Power tab counts them
+import { GOAL_FAMILY_LINES, GOAL_LINE_MIN_MEMBERS, GOAL_LINE_NOT_ON_TIES, GOAL_RESERVE_LINES, PERSONALITY_CLUSTER_OF, TIE_TYPE_TO_GOAL_SUBKIND } from '../../data/people/goalFamilies.js'; import { facesInPower } from '../../domain/people/cardPowers.js'; // BAR8 K-PEOPLE (14h): the power's members as the Power tab counts them
 import { familyOfInstitution, isLawEnforcementInstitution, isNoPowerInstitution } from '../../data/institutionalCatalog.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { chainPrintName } from '../../domain/display/chainPrintName.js';
@@ -400,7 +400,7 @@ function personCardsOf(slots, ctx) {
  * its WORDING and this call's id (`call`, its rotation group); the reserve lines of the cell (`GOAL_RESERVE_LINES`) are
  * built the same way and filed on `ctx.reserve` under the call's id, OUT of the returned list, so no draw moves.
  * @param {string} family @param {string} kind @param {Vantage} vantage @param {Rec} slots @param {GoalContext} ctx
- * @param {Set<string>} held @param {{ target?: GoalTarget | null, refs?: string[], members?: number }} [extra] `members`: the power's members as the Power tab counts them (BAR8 K-PEOPLE 14h)
+ * @param {Set<string>} held @param {{ target?: GoalTarget | null, refs?: string[], members?: number, tie?: { type: string, strength: string } }} [extra] `members`: the power's members as the Power tab counts them (BAR8 K-PEOPLE 14h); `tie`: the tie a TIES call reads (GOALS-1, `GOAL_LINE_NOT_ON_TIES`)
  * @returns {Candidate[]}
  */
 function cellCandidates(family, kind, vantage, slots, ctx, held, extra = {}) {
@@ -431,7 +431,9 @@ function cellCandidates(family, kind, vantage, slots, ctx, held, extra = {}) {
       if (held.has(text)) { if (counted) ctx.refusals.n += 1; continue; }
       const used = Object.fromEntries(slotsIn(templateOf(line)).map((k) => [k, slots[k]]));
       const fewMembers = typeof extra.members === 'number' && (GOAL_LINE_MIN_MEMBERS[templateOf(line)] ?? 0) > extra.members; // BAR8 K-PEOPLE (14h)
-      out.push({ family, kind, text, target: extra.target ?? null, slots: used, refs: extra.refs ?? [], notes, ...(fewMembers ? { refused: true } : {}), wording: wordingOf(line, slots), call });
+      // GOALS-1 (the chair's check of 10:48 UTC): a gentle line on a harsh tie is refused, marked (never dropped), draw-free
+      const harshTie = !!extra.tie && arr(rec(/** @type {Rec} */ (GOAL_LINE_NOT_ON_TIES)[templateOf(line)])[extra.tie.type]).includes(extra.tie.strength);
+      out.push({ family, kind, text, target: extra.target ?? null, slots: used, refs: extra.refs ?? [], notes, ...(fewMembers || harshTie ? { refused: true } : {}), wording: wordingOf(line, slots), call });
     }
     return out;
   };
@@ -539,7 +541,7 @@ export function familyCandidates(card, cards, ctx, vantage, held, opts = {}) {
     const kind = rec(rec(/** @type {Rec} */ (TIE_TYPE_TO_GOAL_SUBKIND))[str(t.type)])[end];
     const other = ctx.byId.get(String(end === 'from' ? t.to : t.from));
     if (!kind || !other) continue;
-    push(cellCandidates('TIES', kind, vantage, { other: personName(other) }, ctx, held, { target: { kind: 'npc', id: String(other.id) }, refs: [String(other.id)] }));
+    push(cellCandidates('TIES', kind, vantage, { other: personName(other) }, ctx, held, { target: { kind: 'npc', id: String(other.id) }, refs: [String(other.id)], tie: { type: str(t.type), strength: str(t.strength) } }));
   }
 
   // PERSONALITY (always): the cluster of the flaw, else the temperament, else the modifier
@@ -678,6 +680,13 @@ function groupOf(chosen, pool, ctx) {
   return group.includes(chosen) ? group : [chosen];
 }
 
+/**
+ * The NAME values a candidate filled (the slots `wordingOf` masks), sorted, as one key: a sentence and its mirror share it
+ * (GOALS-1, the chair's ruling of 10:58 UTC); '' for a line that names no one (or a keeper's text, whose slots are not known).
+ * @param {Candidate | null} c @returns {string}
+ */
+const namesOf = (c) => { const v = Object.entries(c?.slots || {}).filter(([k]) => NAME_SLOTS.has(k)).map(([, x]) => String(x)).sort(); return v.length ? JSON.stringify(v) : ''; };
+
 /** The two vantages, in the order a card holds them. */
 const VANTAGES = /** @type {const} */ (['short', 'long']);
 
@@ -696,7 +705,9 @@ const VANTAGES = /** @type {const} */ (['short', 'long']);
  * candidate itself, a refused line skipped), NO NEW DRAW: (i) the first wording nobody holds ('free'); else (ii) the
  * first held once by someone not of its house, not tied to it and sharing no power with it ('twice'); else (iii) the
  * first held once by someone neither of its house nor tied to it ('twice-same-power'); else (iv) the drawn wording
- * stands ('stands'). The receipt names the rung (`receipt.repeat[vantage]`), the pass-one wording (`drawn`) and any
+ * stands ('stands'). A SENTENCE AND ITS MIRROR ARE ONE (the chair's ruling of 10:58 UTC): rungs (ii) and (iii) never take
+ * a wording whose one holder filled its name slots with the same values as this card's, in either order (`namesOf`).
+ * The receipt names the rung (`receipt.repeat[vantage]`), the pass-one wording (`drawn`) and any
  * move (`rotated: { from, to }`, indices in the group). The floor is never rotated. The presumption ledger records
  * each card's FINAL lines, after pass two, in card order, short then long.
  * @param {Rec} settlement the settlement-shaped object at the seam
@@ -791,13 +802,17 @@ export function dealGoals(settlement, cards, relationships, rng, options = {}) {
 
   // PASS TWO (GR1): repeat status from pass one alone; the holders of each wording counted; each repeat takes its rung
   /** @type {Map<string, Rec[]>} */ const holders = new Map();
-  const hold = (/** @type {string} */ key, /** @type {Rec} */ card) => { const h = holders.get(key); if (h) h.push(card); else holders.set(key, [card]); };
+  /** the name values each holder of a wording filled, beside `holders` (a keeper's are unknown: '') @type {Map<string, string[]>} */ const heldNames = new Map();
+  const hold = (/** @type {string} */ key, /** @type {Rec} */ card, /** @type {Candidate | null} */ cand) => {
+    const h = holders.get(key); if (h) h.push(card); else holders.set(key, [card]);
+    const n = heldNames.get(key); if (n) n.push(namesOf(cand)); else heldNames.set(key, [namesOf(cand)]);
+  };
   /** @type {Set<string>} */ const prior = new Set();
-  for (const c of cards) if (c && keep.has(String(c.id))) for (const v of VANTAGES) { const t = c.goal?.[v]; if (t) { const key = String(t).trim(); prior.add(key); hold(key, c); } }
+  for (const c of cards) if (c && keep.has(String(c.id))) for (const v of VANTAGES) { const t = c.goal?.[v]; if (t) { const key = String(t).trim(); prior.add(key); hold(key, c, null); } }
   /** @type {Array<{ d: Dealt, v: Vantage }>} */ const repeats = [];
   for (const d of dealt) if (d) for (const v of VANTAGES) {
     const c = d[v]; if (!c) continue;
-    if (prior.has(c.wording)) repeats.push({ d, v }); else hold(c.wording, d.card);
+    if (prior.has(c.wording)) repeats.push({ d, v }); else hold(c.wording, d.card, c);
     prior.add(c.wording);
   }
   const tied = new Set(ctx.ties.flatMap((t) => [`${t.from}\u0000${t.to}`, `${t.to}\u0000${t.from}`]));
@@ -810,12 +825,14 @@ export function dealGoals(settlement, cards, relationships, rng, options = {}) {
     const at = Math.max(0, group.indexOf(drawn));
     const order = group.map((_, k) => group[(at + k) % group.length]).filter((x) => !x.refused);
     const count = (/** @type {Candidate} */ x) => (holders.get(x.wording) || []).length;
-    const once = (/** @type {Candidate} */ x, /** @type {boolean} */ power) => count(x) === 1 && apart(/** @type {Rec[]} */ (holders.get(x.wording))[0], d.card, power);
+    // the mirror (10:58 UTC): the one holder filled the name slots with this card's values, in either order
+    const mirror = (/** @type {Candidate} */ x) => { const n = namesOf(x); return !!n && n === /** @type {string[]} */ (heldNames.get(x.wording))[0]; };
+    const once = (/** @type {Candidate} */ x, /** @type {boolean} */ power) => count(x) === 1 && apart(/** @type {Rec[]} */ (holders.get(x.wording))[0], d.card, power) && !mirror(x);
     /** @type {[string, Candidate | undefined][]} */
     const rungs = [['free', order.find((x) => count(x) === 0)], ['twice', order.find((x) => once(x, true))], ['twice-same-power', order.find((x) => once(x, false))]];
     const [rung, taken] = rungs.find(([, x]) => x) || ['stands', drawn];
     const took = /** @type {Candidate} */ (taken);
-    hold(took.wording, d.card);
+    hold(took.wording, d.card, took);
     (d.receipt.repeat ??= {})[v] = rung;
     if (took !== drawn) { d[v] = took; d.rotated[v] = { from: at, to: group.indexOf(took) }; }
   }
