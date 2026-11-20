@@ -692,7 +692,7 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
       if (!fresh.rows.some((row) => `${row.step}|${row.key}` === id)) differences.push(`${id}: declared but not measured`);
     }
     failOnDifference(differences, emitTier1Literal(fresh.rows));
-  }, 180_000);
+  }, 360_000); // its own budget, carrying the measured figure (CI-FIT point 75, 2026-11-20): 223.3 s on CI's ratchet shard 5 (run 44494042373, past its 180 s), 133.1 s alone here; 223.3 s x 1.5 -> 360 s
 
   it('A4 — both landing triples re-executed: the six varies rows, the sixteen disagreements, and zero differing landing paths', () => {
     const fresh = measure();

@@ -1119,7 +1119,7 @@ describe('DS-GEN-7 — the record disagreeing with itself, and five pools the pr
     // half of the same `&&` matches often — which is what makes it half-live and silent.
     expect(boomNamed, 'an event named Boom / Trade Route Opened appeared').toBe(0);
     expect(collapseNamed, 'the collapse half of the predicate also stopped matching').toBeGreaterThan(0);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT point 75, 2026-11-20): 9.7 s in the last close's serial check; about 17.9 s on a CI runner (the measured factor), within three quarters of the default 20 s; the house's corpus-walk form
 });
 
 /**

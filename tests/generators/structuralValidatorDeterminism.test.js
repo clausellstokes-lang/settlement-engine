@@ -160,7 +160,7 @@ describe('no-magic worlds suppress the magical_controversy tension (finding #12)
       if (types.includes('magical_controversy')) offenders.push(`no-magic-history-${i}`);
     }
     expect(offenders, `magical_controversy leaked into no-magic world(s): ${offenders.join(', ')}`).toEqual([]);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT point 75, 2026-11-20): 9.1 s in the last close's serial check; about 16.9 s on a CI runner (the measured factor), within three quarters of the default 20 s; the house's corpus-walk form
 
   test('the magical_controversy event CAN still appear when magic exists (test is not vacuous)', () => {
     // Without this the suppression test could pass simply because the event is

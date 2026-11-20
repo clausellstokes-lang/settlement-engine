@@ -232,7 +232,7 @@ describe('export-token coverage census (Wave 0 — predicate liveness, never cor
     expect(vocab.length, 'the corpus produced no export strings at all — the numerator is empty and every'
       + ' alternative below would read as inert').toBeGreaterThan(0);
     console.log(`[scw-0] distinct export vocabulary at this HEAD: ${vocab.length} strings`);
-  }, CORPUS_BUDGET_MS);
+  }, 180_000); // its own budget, carrying the measured figure (CI-FIT point 75, 2026-11-20): 62.3 s in its shard here / 53.9 s in the last close's serial check; about 99.7 s on a CI runner (the measured factor), within three quarters of its 120 s; x 1.5 -> 180 s
 
   it('every predicate alternative is exercised by the live vocabulary or quarantined in KNOWN_INERT', () => {
     const { vocabulary: vocab } = vocabulary();

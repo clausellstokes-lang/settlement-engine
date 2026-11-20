@@ -186,7 +186,7 @@ describe('G5 — a magic-free world certifies its own world-law magic check', ()
     }
     expect(druidRows, 'no faith row entered a magic-free world, so the certification proves nothing about them').toBeGreaterThan(5);
     expect(failed).toEqual([]);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT point 75, 2026-11-20): 9.8 s in its shard here / 8.2 s in the last close's serial check; about 15.7 s on a CI runner (the measured factor), within three quarters of the default 20 s; the house's corpus-walk form
 });
 
 // The two magic-free readings the world law admits (generationContext `magicEnabled`: the

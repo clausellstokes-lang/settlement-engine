@@ -1700,7 +1700,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // for `notability`, which is how its founding case was refuted.
     expect(authoredInputHistoryCommits('zzzNoSuchObservedShapeKeyEverzzz')).toEqual([]);
     expect(() => authoredInputHistoryCommits('two words')).toThrow(/whitespace-free key/);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT point 75, 2026-11-20): 9.0 s in the last close's serial check; about 16.7 s on a CI runner (the measured factor), within three quarters of the default 20 s; the house's corpus-walk form
 
   /**
    * ⭐⭐ THE SCHEMA-4 / SCHEMA-5 SPLIT. One envelope law, two numbers. Sharing the
