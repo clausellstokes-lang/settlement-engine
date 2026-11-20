@@ -1,0 +1,1 @@
+registered 107 | diffuse 25 | rng-only 10 | UNREGISTERED 0

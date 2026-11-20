@@ -63,8 +63,8 @@ WHAT THE READ FOUND FOR THE STAGES (no row is changed here; each is the stage's 
 | Item | State |
 |---|---|
 | 1. First act, measured | DONE (section 2) |
-| 2. Merge R1, read it, its gate | DONE at the new shape's gallery read (section 3); the link and master's shape RUNNING |
-| 3a. VR25, the import's derivers | MEASURING (section 5) |
+| 2. Merge R1, read it, its gate | DONE (section 3): all four runs reproduced |
+| 3a. VR25, the import's derivers | BUILT (section 5); two walker rows wait on the chair |
 | 3b. R2's render-twice harness | not started |
 | 3c. VR26's inversion harness | not started |
 | 4. "B/C/D <commit>" | waiting on the chair |
@@ -72,12 +72,52 @@ WHAT THE READ FOUND FOR THE STAGES (no row is changed here; each is the stage's 
 | 6. VR17, DOORS | waiting on the chair |
 | 7. E | not started |
 
-## 5. VR25, the import (in hand)
+## 5. VR25, the import (02:08 UTC)
 
-The probe `measure/vr25/derivers.probe.jsx`: for born towns under the default veil, every withhold-always path
-deleted (the 80 of the import measure and the VR19 additions), each candidate deriver (the engine's own function) is run
-on the served document under a recorder that notes every read of a withheld path; FIDELITY: the deriver on the full
-stored town equals the stored value. Results in this section when the full run is read.
+MEASURED FIRST (`measure/vr25/derivers.probe.jsx`; `out/v20/vr25/derivers-72-default-veil.json`, 72 born towns, 27
+with a hideable house, the default veil, every withhold-always path and prosperity deleted; and
+`derivers-36-magic-off.json`). Per field: a recorder notes every read of a withheld path; FIDELITY is the deriver on the
+full stored town against the stored value; SERVED-TOWN is the deriver on the served document of a town with nothing
+hidden against the stored value.
+
+| Field | Deriver (the engine's own) | Withheld reads | Fidelity | Served-town |
+|---|---|---|---|---|
+| compound (both copies) | `getInstFlags(config, institutions)` | 0 | 72/72 | 45/45 |
+| safetyRatio | `generateSafetyProfile`'s rule over that compound | 0 | 72/72 | 45/45 |
+| storageMonths | `foodSecurity.foodRecord.storageMonths` | 0 | 72/72 | 45/45 |
+| prosperity (VR19) | `computeBaseProsperity` + `deriveProsperityLabel` | 0 | 59/72 | 32/45: the 13 Subsistence bases take a birth draw (Struggling or Poor) |
+| readiness.score | `defenceExactOf` (the probe read it through `generateDefenseProfile`, whose economic cap reads prosperity) | 0 in the build | 72/72 | 45/45 |
+| conditions' severity | `promoteStressorsToConditions` | through prosperity only | 72/72 | 35/45: the 10 are Subsistence towns, and both outcomes give the same modifier |
+| legitimacy breakdown | `computePublicLegitimacy` | through prosperity only | 72/72 | 32/45 (prosperity's cause in the 13) |
+| quarters | `generateSpatialLayout` (draw-free) | 0 | 72/72 | 45/45 |
+| the cast's role and reason | none: the occasional roles take the seed | — | — | — |
+
+THE BUILD: `src/domain/veil/importRederive.js :: rederiveServed` (and `rederiveInPlace`), called by
+`src/store/galleryImportSettlement.js :: importGallerySettlementImpl` on the served document before the save. Each field
+re-derived from the served document; an input the document cannot give (a Subsistence town's prosperity) is tried at
+every value it can take and a field derived from it is kept only where all agree; else the field is left out: prosperity
+and its legitimacy cause in Subsistence towns; the crisis cast's roles, absences and stakes on every import (a name with
+no role would draw ": Name ·"). No config: every field left out.
+THE TEST `tests/store/galleryImportRederive.test.js` (nine born towns through the tree's own import, the share withheld
+by the registry's own withhold-always rows plus the chair's prosperity ruling): RED at the unwired import, 3 of 5 (the
+ten absent on the importer's record; `out/v20/vr25/test-red.txt`); GREEN 5 of 5 (`test-green.txt`); arm 2's power by a
+planted read of `blackMarketCapture`, red on every town, the file restored byte-identical (`test-plant-arm2.txt`).
+GATES: eslint 0; `typecheck:domain:strict` 1113 of 1113; `typecheck:ratchet` 167 of 167 (`typecheck.txt`); the registry
+walker 11 of 11; the import's neighbours 6 files, 46 of 46. THE `tests/lint` DIRECTORY (`lint-dir-summary.txt`): the
+base's ten reds as R1 named them, and five of mine: three cured (`deepCloneHotPath`: the clone seam; the any-cast
+baseline: zero `any` holes; `seedLoopTotality`: one loop asserting inline), TWO LEFT FOR THE CHAIR (`lint5-after-cures.txt`):
+1. `ruinFilterRoster`: the module reads the served `.institutions` raw, as the birth derivers read it (the stamped
+   roster, ruins included: `economicState.js`'s own note); proposed a `RUIN_AGNOSTIC_EXEMPT` row ("the import's
+   re-derivation hands the engine's birth derivers the roster they read at birth") and the pin 116 -> 117, VR2's form.
+2. `observedShapeReaders`: violations 1 at the cut (`osr-at-cut.txt`, criminalVeilSwitch's, not mine) -> 4
+   (`osr-at-vr25.txt`): "magicExists on config" in `prosperity.js`, `foodGenerator.js`, `priorityHelpers.js`, because the
+   scanner now grounds their `config` parameter from the import's call through the served document's config, which its
+   corpus never saw carry `magicExists`. MEASURED: born and served configs carry `magicExists` (true, and false with magic
+   off), and fidelity holds with magic off (36 of 36). A false finding of the heuristic; the inventory is never raised by a
+   seat: for the chair (an explained-writer row, or another ruling).
+THE SURPRISE SENT (02:0x UTC, before the build): the served `publicLegitimacy.score` gives back the withheld prosperity
+(one contribution class fits the score in 72 of 72 towns, always the stored label's; 9 towns where the hidden house moved
+prosperity told). Proposed: the score, label and colours re-classed under VR19 with prosperity. Awaiting the chair.
 
 ## 6. How the instruments are re-made
 

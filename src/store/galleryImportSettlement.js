@@ -26,6 +26,7 @@ import {
   scrubGalleryImportLivingContent, scrubImportedEditState,
 } from '../lib/importScrub.js';
 import { staffUnlocksPaidFeatures } from '../lib/staffEntitlements.js';
+import { rederiveServed } from '../domain/veil/importRederive.js';
 
 export async function importGallerySettlementImpl(get, set, slug) {
   const st = get();
@@ -44,7 +45,10 @@ export async function importGallerySettlementImpl(get, set, slug) {
   }
   const dossier = await fetchDossierForImport(slug);
   if (!dossier) throw new Error('That settlement is not available to import.');
-  const src = (dossier.settlement && typeof dossier.settlement === 'object') ? dossier.settlement : {};
+  // VR25 (the seventh chair, 2026-11-20; src/domain/veil/importRederive.js): the share withholds fields the importer's
+  // own app reads; the save puts each back from the SERVED document alone with the engine's own function, or leaves
+  // it out as not known. Never a hidden house's term, never a default.
+  const src = (dossier.settlement && typeof dossier.settlement === 'object') ? rederiveServed(dossier.settlement) : {};
   const importedAt = new Date().toISOString();
   const entry = {
     name: `${dossier.name || src.name || 'Imported settlement'} (imported)`,

@@ -56,6 +56,8 @@ function recorder(root) {
   return { rec: wrap(root, ''), hits };
 }
 const clone = (v) => JSON.parse(JSON.stringify(v));
+// RED: the importer's reader finds the field (or any leaf of it) absent on the served document
+const hasUndefined = (v) => v === undefined || (Array.isArray(v) ? v.some(hasUndefined) : isRec(v) ? Object.values(v).some(hasUndefined) : false);
 const eq = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 
 it('VR25 derivers', async () => {
@@ -113,7 +115,7 @@ it('VR25 derivers', async () => {
 
   const SIZES = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
   const CR = [null, 'infiltrated', 'insurgency', 'under_siege', null, 'occupied', 'famine', 'slave_revolt', null, 'politically_fractured', 'indebted', 'wartime', null, 'plague_onset', 'succession_void', 'recently_betrayed', null, 'monster_pressure', 'religious_conversion', 'mass_migration', null, 'infiltrated', 'under_siege', 'insurgency'];
-  const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
+  const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: process.env.VR25_MAGIC !== 'false', contentProfile: 'grounded' };
   const N = Number(process.env.VR25_N || 48);
   const mo = veil.writeShareVeil({}, []);
   const res = { withheld: WITHHELD.length, towns: [], per: {} };
@@ -130,7 +132,7 @@ it('VR25 derivers', async () => {
     const chain = clone(served);
     for (const D of DERIVERS) {
       const T = tally(D.f); T.towns += 1;
-      if (D.get(served) === undefined || (Array.isArray(D.get(served)) && D.get(served).some((x) => x[1] === undefined))) T.redAbsent += 1;
+      if (hasUndefined(D.get(served))) T.redAbsent += 1;
       const { rec, hits } = recorder(chain);
       let v; try { v = D.d(rec); } catch (e) { T.threw.push(`${seed}: ${String(e?.message || e).slice(0, 160)}`); continue; }
       for (const h of hits) T.withheldReads[h] = (T.withheldReads[h] || 0) + 1;
@@ -141,6 +143,22 @@ it('VR25 derivers', async () => {
       if (hidden === 0) { if (eq(v, D.get(full))) T.servedTownEq += 1; else { T.servedTownNe += 1; if (T.servedTownNeEx.length < 4) T.servedTownNeEx.push({ seed, derived: JSON.stringify(v)?.slice(0, 200), stored: JSON.stringify(D.get(full))?.slice(0, 200) }); } }
       else if (!eq(v, D.get(full))) T.hiddenTownMoved += 1;
       try { D.put(chain, clone(v)); } catch { /* a field with no home in this town */ }
+    }
+    // VR26 ARM (side measure): does the SERVED legitimacy score give back the withheld prosperity? For each prosperity
+    // label, the engine's own computePublicLegitimacy over the served document with that label; the labels whose score
+    // equals the served score. Identified = one contribution class remains; told = it is the stored label's class.
+    const ps = served.powerStructure?.publicLegitimacy?.score;
+    if (Number.isFinite(ps) && t.economicState?.prosperity) {
+      const LABELS = ['Struggling', 'Poor', 'Moderate', 'Comfortable', 'Prosperous', 'Wealthy'];
+      const fits = LABELS.filter((L) => computePublicLegitimacy({ ...chain.economicState, prosperity: L }, chain.defenseProfile?.readiness?.label, chain.tier).score === ps);
+      const trueFit = computePublicLegitimacy({ ...chain.economicState, prosperity: t.economicState.prosperity }, chain.defenseProfile?.readiness?.label, chain.tier).score === ps;
+      const inv = res.inversion = res.inversion || { towns: 0, storedScoreIsFormula: 0, oneClass: 0, oneClassIsTrue: 0, hiddenMovedProsperity: 0, hiddenMovedAndTold: 0, ex: [] };
+      inv.towns += 1; if (trueFit) inv.storedScoreIsFormula += 1;
+      const classes = new Set(fits.map((L) => ({ Struggling: -20, Poor: -10, Moderate: 0, Comfortable: 8, Prosperous: 15, Wealthy: 20 })[L]));
+      if (classes.size === 1) { inv.oneClass += 1; if (fits.includes(t.economicState.prosperity)) inv.oneClassIsTrue += 1; }
+      const derived = DERIVERS.find((D) => D.f === 'economicState.prosperity');
+      let dv = null; try { dv = derived.d(clone(served)); } catch { /* none */ }
+      if (hidden && typeof dv === 'string' && dv !== t.economicState.prosperity) { inv.hiddenMovedProsperity += 1; if (classes.size === 1 && fits.includes(t.economicState.prosperity)) { inv.hiddenMovedAndTold += 1; if (inv.ex.length < 4) inv.ex.push({ seed, stored: t.economicState.prosperity, servedTownImplies: dv, score: ps, fits }); } }
     }
     res.towns.push({ seed, hidden });
   }

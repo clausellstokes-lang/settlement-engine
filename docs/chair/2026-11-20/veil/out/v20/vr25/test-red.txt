@@ -1,0 +1,7 @@
+     × 1: the ten arrive on the importer's record, or are left out whole (no default, no blank row) 7ms
+     × 3: on a town with nothing hidden, every field the served document decides equals the value it was born with 2ms
+     × 4: where the veil removed a house, the compound is the engine's reading over the served houses, never the stored figure 1ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+ Test Files  1 failed (1)
+      Tests  3 failed | 2 passed (5)
+exit 1

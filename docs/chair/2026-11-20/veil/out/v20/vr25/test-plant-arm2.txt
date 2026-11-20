@@ -1,0 +1,12 @@
+     × 2: the re-derivation reads no withheld path 112ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
++   "town-calm-0: economicState.safetyProfile.blackMarketCapture",
++   "city-infiltrated-1: economicState.safetyProfile.blackMarketCapture",
++   "metropolis-calm-2: economicState.safetyProfile.blackMarketCapture",
++   "village-insurgency-3: economicState.safetyProfile.blackMarketCapture",
++   "city-indebted-4: economicState.safetyProfile.blackMarketCapture",
++   "hamlet-calm-5: economicState.safetyProfile.blackMarketCapture",
++   "thorp-calm-6: economicState.safetyProfile.blackMarketCapture",
++   "metropolis-occupied-7: economicState.safetyProfile.blackMarketCapture",
++   "town-famine-8: economicState.safetyProfile.blackMarketCapture",
+ Test Files  1 failed (1)

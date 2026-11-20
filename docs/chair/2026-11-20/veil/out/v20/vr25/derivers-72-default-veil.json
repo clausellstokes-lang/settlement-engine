@@ -1,0 +1,557 @@
+{
+ "withheld": 84,
+ "towns": [
+  {
+   "seed": "vr25-thorp-calm-0",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-hamlet-infiltrated-1",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-village-insurgency-2",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-town-under_siege-3",
+   "hidden": 2
+  },
+  {
+   "seed": "vr25-city-calm-4",
+   "hidden": 5
+  },
+  {
+   "seed": "vr25-metropolis-occupied-5",
+   "hidden": 5
+  },
+  {
+   "seed": "vr25-thorp-famine-6",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-hamlet-slave_revolt-7",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-village-calm-8",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-town-politically_fractured-9",
+   "hidden": 1
+  },
+  {
+   "seed": "vr25-city-indebted-10",
+   "hidden": 5
+  },
+  {
+   "seed": "vr25-metropolis-wartime-11",
+   "hidden": 8
+  },
+  {
+   "seed": "vr25-thorp-calm-12",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-hamlet-plague_onset-13",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-village-succession_void-14",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-town-recently_betrayed-15",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-city-calm-16",
+   "hidden": 1
+  },
+  {
+   "seed": "vr25-metropolis-monster_pressure-17",
+   "hidden": 4
+  },
+  {
+   "seed": "vr25-thorp-religious_conversion-18",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-hamlet-mass_migration-19",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-village-calm-20",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-town-infiltrated-21",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-city-under_siege-22",
+   "hidden": 6
+  },
+  {
+   "seed": "vr25-metropolis-insurgency-23",
+   "hidden": 8
+  },
+  {
+   "seed": "vr25-thorp-calm-24",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-hamlet-infiltrated-25",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-village-insurgency-26",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-town-under_siege-27",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-city-calm-28",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-metropolis-occupied-29",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-thorp-famine-30",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-hamlet-slave_revolt-31",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-village-calm-32",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-town-politically_fractured-33",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-city-indebted-34",
+   "hidden": 2
+  },
+  {
+   "seed": "vr25-metropolis-wartime-35",
+   "hidden": 3
+  },
+  {
+   "seed": "vr25-thorp-calm-36",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-hamlet-plague_onset-37",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-village-succession_void-38",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-town-recently_betrayed-39",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-city-calm-40",
+   "hidden": 7
+  },
+  {
+   "seed": "vr25-metropolis-monster_pressure-41",
+   "hidden": 6
+  },
+  {
+   "seed": "vr25-thorp-religious_conversion-42",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-hamlet-mass_migration-43",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-village-calm-44",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-town-infiltrated-45",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-city-under_siege-46",
+   "hidden": 5
+  },
+  {
+   "seed": "vr25-metropolis-insurgency-47",
+   "hidden": 2
+  },
+  {
+   "seed": "vr25-thorp-calm-48",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-hamlet-infiltrated-49",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-village-insurgency-50",
+   "hidden": 1
+  },
+  {
+   "seed": "vr25-town-under_siege-51",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-city-calm-52",
+   "hidden": 1
+  },
+  {
+   "seed": "vr25-metropolis-occupied-53",
+   "hidden": 7
+  },
+  {
+   "seed": "vr25-thorp-famine-54",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-hamlet-slave_revolt-55",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-village-calm-56",
+   "hidden": 1
+  },
+  {
+   "seed": "vr25-town-politically_fractured-57",
+   "hidden": 2
+  },
+  {
+   "seed": "vr25-city-indebted-58",
+   "hidden": 4
+  },
+  {
+   "seed": "vr25-metropolis-wartime-59",
+   "hidden": 8
+  },
+  {
+   "seed": "vr25-thorp-calm-60",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-hamlet-plague_onset-61",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-village-succession_void-62",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-town-recently_betrayed-63",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-city-calm-64",
+   "hidden": 6
+  },
+  {
+   "seed": "vr25-metropolis-monster_pressure-65",
+   "hidden": 8
+  },
+  {
+   "seed": "vr25-thorp-religious_conversion-66",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-hamlet-mass_migration-67",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-village-calm-68",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-town-infiltrated-69",
+   "hidden": 0
+  },
+  {
+   "seed": "vr25-city-under_siege-70",
+   "hidden": 5
+  },
+  {
+   "seed": "vr25-metropolis-insurgency-71",
+   "hidden": 1
+  }
+ ],
+ "per": {
+  "economicState.compound": {
+   "towns": 72,
+   "redAbsent": 72,
+   "withheldReads": {},
+   "notKnown": 0,
+   "threw": [],
+   "fidelityEq": 72,
+   "fidelityNe": 0,
+   "fidelityNeEx": [],
+   "servedTownEq": 45,
+   "servedTownNe": 0,
+   "servedTownNeEx": [],
+   "hiddenTownMoved": 24
+  },
+  "economicState.safetyProfile.compound": {
+   "towns": 72,
+   "redAbsent": 72,
+   "withheldReads": {},
+   "notKnown": 0,
+   "threw": [],
+   "fidelityEq": 72,
+   "fidelityNe": 0,
+   "fidelityNeEx": [],
+   "servedTownEq": 45,
+   "servedTownNe": 0,
+   "servedTownNeEx": [],
+   "hiddenTownMoved": 24
+  },
+  "economicState.safetyProfile.safetyRatio": {
+   "towns": 72,
+   "redAbsent": 72,
+   "withheldReads": {},
+   "notKnown": 0,
+   "threw": [],
+   "fidelityEq": 72,
+   "fidelityNe": 0,
+   "fidelityNeEx": [],
+   "servedTownEq": 45,
+   "servedTownNe": 0,
+   "servedTownNeEx": [],
+   "hiddenTownMoved": 21
+  },
+  "economicState.foodSecurity.storageMonths": {
+   "towns": 72,
+   "redAbsent": 72,
+   "withheldReads": {},
+   "notKnown": 0,
+   "threw": [],
+   "fidelityEq": 72,
+   "fidelityNe": 0,
+   "fidelityNeEx": [],
+   "servedTownEq": 45,
+   "servedTownNe": 0,
+   "servedTownNeEx": [],
+   "hiddenTownMoved": 0
+  },
+  "economicState.prosperity": {
+   "towns": 72,
+   "redAbsent": 72,
+   "withheldReads": {},
+   "notKnown": 13,
+   "threw": [],
+   "fidelityEq": 59,
+   "fidelityNe": 13,
+   "fidelityNeEx": [
+    {
+     "seed": "vr25-thorp-calm-0",
+     "derived": "{\"notKnown\":\"a Subsistence base takes the birth draw\"}",
+     "stored": "\"Struggling\""
+    },
+    {
+     "seed": "vr25-village-insurgency-2",
+     "derived": "{\"notKnown\":\"a Subsistence base takes the birth draw\"}",
+     "stored": "\"Struggling\""
+    },
+    {
+     "seed": "vr25-thorp-famine-6",
+     "derived": "{\"notKnown\":\"a Subsistence base takes the birth draw\"}",
+     "stored": "\"Struggling\""
+    },
+    {
+     "seed": "vr25-village-succession_void-14",
+     "derived": "{\"notKnown\":\"a Subsistence base takes the birth draw\"}",
+     "stored": "\"Struggling\""
+    }
+   ],
+   "servedTownEq": 32,
+   "servedTownNe": 13,
+   "servedTownNeEx": [
+    {
+     "seed": "vr25-thorp-calm-0",
+     "derived": "{\"notKnown\":\"a Subsistence base takes the birth draw\"}",
+     "stored": "\"Struggling\""
+    },
+    {
+     "seed": "vr25-village-insurgency-2",
+     "derived": "{\"notKnown\":\"a Subsistence base takes the birth draw\"}",
+     "stored": "\"Struggling\""
+    },
+    {
+     "seed": "vr25-thorp-famine-6",
+     "derived": "{\"notKnown\":\"a Subsistence base takes the birth draw\"}",
+     "stored": "\"Struggling\""
+    },
+    {
+     "seed": "vr25-village-succession_void-14",
+     "derived": "{\"notKnown\":\"a Subsistence base takes the birth draw\"}",
+     "stored": "\"Struggling\""
+    }
+   ],
+   "hiddenTownMoved": 9
+  },
+  "defenseProfile.readiness.score": {
+   "towns": 72,
+   "redAbsent": 72,
+   "withheldReads": {
+    "economicState.prosperity": 13
+   },
+   "notKnown": 0,
+   "threw": [],
+   "fidelityEq": 72,
+   "fidelityNe": 0,
+   "fidelityNeEx": [],
+   "servedTownEq": 45,
+   "servedTownNe": 0,
+   "servedTownNeEx": [],
+   "hiddenTownMoved": 16
+  },
+  "activeConditions.severity": {
+   "towns": 72,
+   "redAbsent": 59,
+   "withheldReads": {
+    "economicState.prosperity": 13
+   },
+   "notKnown": 0,
+   "threw": [],
+   "fidelityEq": 72,
+   "fidelityNe": 0,
+   "fidelityNeEx": [],
+   "servedTownEq": 35,
+   "servedTownNe": 10,
+   "servedTownNeEx": [
+    {
+     "seed": "vr25-village-insurgency-2",
+     "derived": "[[\"rebellion\",0.75]]",
+     "stored": "[[\"rebellion\",0.81]]"
+    },
+    {
+     "seed": "vr25-thorp-famine-6",
+     "derived": "[[\"famine\",0.75]]",
+     "stored": "[[\"famine\",0.81]]"
+    },
+    {
+     "seed": "vr25-village-succession_void-14",
+     "derived": "[[\"dominant_npc_removed\",0.57]]",
+     "stored": "[[\"dominant_npc_removed\",0.63]]"
+    },
+    {
+     "seed": "vr25-thorp-religious_conversion-18",
+     "derived": "[[\"regional_religious_pressure\",0.55]]",
+     "stored": "[[\"regional_religious_pressure\",0.61]]"
+    }
+   ],
+   "hiddenTownMoved": 2
+  },
+  "powerStructure.publicLegitimacy.breakdown": {
+   "towns": 72,
+   "redAbsent": 72,
+   "withheldReads": {
+    "economicState.prosperity": 13
+   },
+   "notKnown": 0,
+   "threw": [],
+   "fidelityEq": 72,
+   "fidelityNe": 0,
+   "fidelityNeEx": [],
+   "servedTownEq": 32,
+   "servedTownNe": 13,
+   "servedTownNeEx": [
+    {
+     "seed": "vr25-thorp-calm-0",
+     "derived": "{\"prosperity\":0,\"safety\":-20}",
+     "stored": "{\"prosperity\":-20,\"safety\":-20}"
+    },
+    {
+     "seed": "vr25-village-insurgency-2",
+     "derived": "{\"prosperity\":0,\"safety\":-12}",
+     "stored": "{\"prosperity\":-20,\"safety\":-12}"
+    },
+    {
+     "seed": "vr25-thorp-famine-6",
+     "derived": "{\"prosperity\":0,\"safety\":-20}",
+     "stored": "{\"prosperity\":-20,\"safety\":-20}"
+    },
+    {
+     "seed": "vr25-village-succession_void-14",
+     "derived": "{\"prosperity\":0,\"safety\":-12}",
+     "stored": "{\"prosperity\":-20,\"safety\":-12}"
+    }
+   ],
+   "hiddenTownMoved": 9
+  },
+  "spatialLayout.quarters": {
+   "towns": 72,
+   "redAbsent": 72,
+   "withheldReads": {},
+   "notKnown": 0,
+   "threw": [],
+   "fidelityEq": 72,
+   "fidelityNe": 0,
+   "fidelityNeEx": [],
+   "servedTownEq": 45,
+   "servedTownNe": 0,
+   "servedTownNeEx": [],
+   "hiddenTownMoved": 21
+  }
+ },
+ "inversion": {
+  "towns": 72,
+  "storedScoreIsFormula": 72,
+  "oneClass": 72,
+  "oneClassIsTrue": 72,
+  "hiddenMovedProsperity": 9,
+  "hiddenMovedAndTold": 9,
+  "ex": [
+   {
+    "seed": "vr25-city-indebted-10",
+    "stored": "Moderate",
+    "servedTownImplies": "Comfortable",
+    "score": 45,
+    "fits": [
+     "Moderate"
+    ]
+   },
+   {
+    "seed": "vr25-metropolis-insurgency-23",
+    "stored": "Moderate",
+    "servedTownImplies": "Comfortable",
+    "score": 40,
+    "fits": [
+     "Moderate"
+    ]
+   },
+   {
+    "seed": "vr25-city-calm-40",
+    "stored": "Comfortable",
+    "servedTownImplies": "Prosperous",
+    "score": 68,
+    "fits": [
+     "Comfortable"
+    ]
+   },
+   {
+    "seed": "vr25-metropolis-monster_pressure-41",
+    "stored": "Moderate",
+    "servedTownImplies": "Comfortable",
+    "score": 37,
+    "fits": [
+     "Moderate"
+    ]
+   }
+  ]
+ }
+}

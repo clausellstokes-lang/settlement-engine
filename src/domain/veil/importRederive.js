@@ -1,0 +1,194 @@
+// @ts-check
+/**
+ * importRederive.js — THE IMPORTER'S SAVE RE-DERIVES WHAT THE SHARE WITHHOLDS (the seventh chair's ruling VR25,
+ * 2026-11-20 01:15 UTC, vetoable by the owner; VR16 condition (2); VEIL-20, item 3a).
+ *
+ * THE LAW IT SERVES: an import never carries what a non-owner page withholds. The share withholds, on every non-owner
+ * read, fields no shared page draws (VR16) and the precise part of a value every page draws (VR19); the importer's own
+ * app reads some of them, and with them absent it drew wrong values (R2-IMPORT-MEASURE.md, outcome (c): a default
+ * readiness of 50, the hamlet floor for every district, ": Name ·" crisis rows, a wrong legitimacy cause). So the
+ * import's save puts each such field back FROM THE SERVED DOCUMENT ALONE, with the engine's own function: the importer
+ * gets what the served town implies, never a hidden house's term. Where no served field decides a value, the field
+ * reads as an ordinary "not known": it is left out, and so is any row that would draw it as a blank.
+ *
+ * HOW "NOT KNOWN" IS DECIDED: an input the served document cannot give (a Subsistence town's prosperity, which took a
+ * birth draw) is tried at every value it could take; a value derived from it is kept only where every try agrees.
+ * A document with no config (the floor every share keeps) decides nothing: every field below is left out.
+ *
+ * Measured first (docs/chair/2026-11-20/veil/measure/vr25/derivers.probe.jsx; 72 born towns, the default veil, and
+ * 36 with magic off): each deriver reads no withheld path and equals the stored value on the full town, and on every
+ * town with nothing hidden equals the stored value from the served document (prosperity: where its base is not a
+ * Subsistence base).
+ *
+ * NOTHING HERE RUNS ON AN OWNER'S OWN RECORD: it is called by the gallery import alone.
+ */
+import { deepClone } from '../clone.js';
+import { getInstFlags } from '../../generators/priorityHelpers.js';
+import { defenceExactOf } from '../../generators/defenseGenerator.js';
+import { promoteStressorsToConditions } from '../conditionPromotion.js';
+import { computePublicLegitimacy } from '../../generators/factionDynamics.js';
+import { generateSpatialLayout } from '../../generators/spatialGenerator.js';
+import { computeBaseProsperity, deriveProsperityLabel } from '../../generators/economy/prosperity.js';
+
+/** @typedef {Record<string, unknown>} Doc */
+
+/** The compound's figures the save re-derives (its `inst` flags are the served houses' own and stay as served). */
+export const REDERIVED_COMPOUND_KEYS = Object.freeze(['criminalEffective', 'criminalPreStress', 'militaryEffective', 'economyOutput', 'religionInfluence', 'magicInfluence', 'raw']);
+
+/** The labels a Subsistence base can end at: its birth draw picks one, capped at Poor (prosperity.js :: labelFromBase). */
+const SUBSISTENCE_OUTCOMES = Object.freeze(['Struggling', 'Poor']);
+
+/** @param {unknown} v @returns {v is Doc} */
+const isRec = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
+/** The record at `v`, or null. @param {unknown} v @returns {Doc | null} */
+const recOf = (v) => (isRec(v) ? v : null);
+/** @param {unknown[]} xs */
+const same = (xs) => xs.length > 0 && xs.every((x) => JSON.stringify(x) === JSON.stringify(xs[0]));
+/** @param {unknown} v @returns {unknown[]} */
+const listOf = (v) => (Array.isArray(v) ? v : []);
+
+/**
+ * The prosperity labels the served document allows: one where it decides the label, the Subsistence outcomes where the
+ * label took the birth draw.
+ * @param {Doc} s @param {Doc} config @returns {string[]}
+ */
+export function servedProsperityOutcomes(s, config) {
+  const e = recOf(s.economicState);
+  const houses = listOf(s.institutions);
+  const names = houses.map((i) => recOf(i)?.name);
+  const base = computeBaseProsperity(s.tier, config.tradeRouteAccess, houses, config, names, listOf(e?.incomeSources), /** @type {null} */ (/** @type {unknown} */ (recOf(e?.foodSecurity)))).label;
+  return base === 'Subsistence' ? [...SUBSISTENCE_OUTCOMES] : [deriveProsperityLabel(base, config, houses)];
+}
+
+/**
+ * Run `fn` on the document at each prosperity outcome; the answer where all agree, else `undefined`.
+ * @template T @param {Doc} s @param {string[]} outcomes @param {(r: Doc) => T} fn @returns {T | undefined}
+ */
+function underEachOutcome(s, outcomes, fn) {
+  const answers = outcomes.map((p) => fn({ ...s, economicState: { ...(recOf(s.economicState) ?? {}), prosperity: p } }));
+  return same(answers) ? answers[0] : undefined;
+}
+
+/** The crisis casts of both copies, either shape (one crisis or a list). @param {Doc} s @returns {Doc[]} */
+function castsOf(s) {
+  /** @type {Doc[]} */ const out = [];
+  for (const k of ['stress', 'stressors']) {
+    for (const x of Array.isArray(s[k]) ? s[k] : [s[k]]) {
+      const cast = recOf(recOf(x)?.cast);
+      if (cast) out.push(cast);
+    }
+  }
+  return out;
+}
+
+/** The crisis cast's rows are not known on the importer's record (step 9). @param {Doc} s */
+function castsNotKnown(s) {
+  for (const cast of castsOf(s)) for (const key of ['roles', 'absent', 'stakes']) if (Object.hasOwn(cast, key)) cast[key] = [];
+}
+
+/**
+ * The served document with every field VR25 names re-derived from it, or left out where it cannot be. Pure: the input
+ * is not changed.
+ * @template T
+ * @param {T} served the share's document as the import read received it
+ * @returns {T}
+ */
+export function rederiveServed(served) {
+  return isRec(served) ? /** @type {T} */ (/** @type {unknown} */ (rederiveInPlace(/** @type {Doc} */ (deepClone(served))))) : served;
+}
+
+/**
+ * The same, on the document itself (it is changed and returned): what `rederiveServed` runs on its copy. Exported so a
+ * test can run it under a recorder of every read.
+ * @param {Doc} s @returns {Doc}
+ */
+export function rederiveInPlace(s) {
+  const config = recOf(s.config);
+  const e = recOf(s.economicState);
+  const sp = recOf(e?.safetyProfile);
+  const food = recOf(e?.foodSecurity);
+  const readiness = recOf(recOf(s.defenseProfile)?.readiness);
+  const legitimacy = recOf(recOf(s.powerStructure)?.publicLegitimacy);
+  const layout = recOf(s.spatialLayout);
+  if (!config) {
+    if (e) { delete e.compound; delete e.prosperity; }
+    if (sp) { delete sp.compound; delete sp.safetyRatio; }
+    if (food) delete food.storageMonths;
+    if (readiness) delete readiness.score;
+    if (legitimacy) delete legitimacy.breakdown;
+    if (layout) delete layout.quarters;
+    if (Array.isArray(s.activeConditions)) s.activeConditions = [];
+    castsNotKnown(s);
+    return s;
+  }
+
+  // 1. THE COMPOUND, both copies: the engine's own reading over the served config and houses.
+  const flags = /** @type {Doc} */ (getInstFlags(config, listOf(s.institutions)));
+  /** @returns {Doc} */
+  const figures = () => Object.fromEntries(REDERIVED_COMPOUND_KEYS.map((k) => [k, deepClone(flags[k])]));
+  if (e) e.compound = { ...(recOf(e.compound) ?? {}), ...figures() };
+  if (sp) {
+    sp.compound = { ...(recOf(sp.compound) ?? {}), ...figures() };
+    // 2. THE SAFETY RATIO, from that compound (safetyProfile.js :: generateSafetyProfile's own rule).
+    sp.safetyRatio = Math.round((Number(flags.militaryEffective) / Math.max(8, Number(flags.criminalEffective))) * 10) / 10;
+  }
+
+  // 3. THE STORES: the food record's own months, which the record keeps beside the stores' figure.
+  if (food) {
+    const months = recOf(food.foodRecord)?.storageMonths;
+    if (typeof months === 'number' && Number.isFinite(months)) food.storageMonths = months;
+    else delete food.storageMonths;
+  }
+
+  // 4. PROSPERITY (VR19): re-derived where the served document decides it; else not known.
+  const outcomes = servedProsperityOutcomes(s, config);
+  if (e) {
+    if (outcomes.length === 1) e.prosperity = outcomes[0];
+    else delete e.prosperity;
+  }
+
+  // 5. THE READINESS SCORE: the defence arithmetic over the served document, the page's whole point.
+  if (readiness) {
+    const score = underEachOutcome(s, outcomes, (r) => Math.round(Math.round(Number(defenceExactOf(r).readiness) * 100) / 100));
+    if (typeof score === 'number' && Number.isFinite(score)) readiness.score = score;
+    else delete readiness.score;
+  }
+
+  // 6. THE CONDITIONS' SEVERITY: each condition as its stressor promotes it on the served document; a condition no
+  //    served stressor promotes, or whose severity the served document does not decide, is not known and is left out
+  //    (its band is recomputed from the severity by deriveActiveCondition).
+  if (Array.isArray(s.activeConditions)) {
+    const by = underEachOutcome(s, outcomes, (r) => Object.fromEntries(listOf(promoteStressorsToConditions({ ...r, activeConditions: [] }).activeConditions)
+      .map((c) => [String(recOf(c)?.archetype), recOf(c)?.severity])));
+    s.activeConditions = listOf(s.activeConditions).flatMap((c) => {
+      const cond = recOf(c);
+      const sev = cond && by ? by[String(cond.archetype)] : undefined;
+      if (!cond || typeof sev !== 'number' || !Number.isFinite(sev)) return [];
+      return [{ ...Object.fromEntries(Object.entries(cond).filter(([k]) => k !== 'severityBand')), severity: sev }];
+    });
+  }
+
+  // 7. THE LEGITIMACY BREAKDOWN: each withheld cause from the served labels; a cause the served document does not
+  //    decide is not known and is left out.
+  if (legitimacy) {
+    const b = recOf(legitimacy.breakdown) ?? {};
+    legitimacy.breakdown = b;
+    for (const key of ['prosperity', 'safety', 'defense']) {
+      const v = underEachOutcome(s, outcomes, (r) => {
+        const label = recOf(recOf(r.defenseProfile)?.readiness)?.label;
+        return /** @type {Doc} */ (computePublicLegitimacy(recOf(r.economicState) ?? {}, typeof label === 'string' ? label : '', String(r.tier)).breakdown)[key];
+      });
+      if (typeof v === 'number' && Number.isFinite(v)) b[key] = v;
+      else delete b[key];
+    }
+  }
+
+  // 8. THE QUARTERS: the town plan over the served houses (spatialGenerator.js, draw-free).
+  if (layout) layout.quarters = generateSpatialLayout(String(s.tier), listOf(s.institutions), /** @type {string} */ (config.tradeRouteAccess), /** @type {string | undefined} */ (config.terrainType)).quarters;
+
+  // 9. THE CRISIS CAST: no served field gives a role or a reason (the occasional roles take the seed, which never
+  //    ships), and the share withholds them on every read: the cast's roles, absences and stakes are not known on the
+  //    importer's record, and are left out whole (a row with a name and no role would draw as a blank).
+  castsNotKnown(s);
+  return s;
+}
