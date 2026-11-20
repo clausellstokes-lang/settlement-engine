@@ -428,6 +428,26 @@ parts of the whole check (at the close).
   trading" under siege: those lines take conditions and a neutral twin; the text never says what became of the rite
   this year. A SECOND SAMPLE SET, FROM TOWNS IN CRISIS, IS PROMISED TO THE OWNER. RULED AS CTR10.
 
+- **07:29 UTC, 2026-11-20, THE OWNER (verbatim):** "So what are your holistic thoughts on the design now?" ANSWERED
+  THE SAME TURN (07:30 UTC), IN PLAIN WORDS, AS A VIEW AND NOT A RULING: the design is more coherent than it was that
+  morning because every change of the day follows the owner's one rule (do not invent; read what the town already
+  holds): the sheet reads the town's own strain, the seat reads who its holder already is, the black-and-red card
+  reads a secret the record already tracks, traditions read the town's houses and history. SAID TO BE STRONG: the seat
+  in three parts (in the measured run coups got no commoner, the winners more varied); "calm stays calm" measured (272
+  of 330 calm towns untouched); crime as a hidden layer over an ordinary front. THE WORRIES, EACH NAMED TO THE OWNER:
+  (1) RARE BY CONSTRUCTION (no town born captured; about 16 kings in 900; a front in 1 town of 50 and almost never
+  born ruling: a DM of ten towns may never meet the second card, a king or a front); (2) THE RECORD IS THINNER THAN
+  ITS READINGS (more sentences quote the same small pools: the same founding story stood in two of twelve tradition
+  samples: deeper pools before new features); (3) SHARED PAGES ARE THE HARDEST PART (two live faults found that day;
+  the rule that is emerging: the DM's save makes a printed copy for players and the players' page works nothing out
+  itself; today the system is half that and half the other; make it wholly the first AFTER the deploy); (4) MANY NEW
+  NUMBERS ARE FIRST GUESSES (counts of born towns are known; how they feel at a table is inferred). THE CRUX AS SAID:
+  the owner chose a town one can trust over a town that surprises; the lever for more surprise is how often rare
+  things are born, not more features. WHAT WOULD CHANGE THE VIEW: DMs calling towns samey (pools first); never meeting
+  the rare things (raise the rates); a shared page disagreeing with the DM's again (the printed-copy rule moves up).
+  NOTHING WAS ASKED OF THE OWNER AND NOTHING WAS RULED BY IT. For after the deploy it names three things: the rates
+  of rare things, the depth of the pools, the printed-copy rule for shared pages.
+
 ## 2. Rulings of this chair (each vetoable by the owner)
 
 - **SV1 (00:05 UTC, 2026-11-20): THE VEIL'S LIST ON THREE MACHINES.** VEIL-19 owns 212, its rollback and the twin's
@@ -2181,3 +2201,59 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   case; REVIEW-VEIL-11 writes a hand-over note (its instruments, its arms for FINAL, what it attacked and how) and
   stops. TRAD-1 (its own estimate 390,000: by the same error it may be near 600,000) was already ordered to hand over.
   ALSO: TRAD-2 has read everything and re-ran TRAD-1's tools byte-identical (432 towns); it waits for the lane.
+- 07:41 UTC · **THE HOUR SINCE 07:15, BY LANE (hand-overs, three rulings, two security returns).**
+  SHARE VEIL. R3 came back BUILT AND NOT GREEN (9e082aa0a on `lane/veil-22-r3-2026-11-20`, unmerged; its 212 reads
+  04693646…): its one red was the old pin V8-4 meeting the roster observable. RULED: THE POWER OBSERVABLE GOVERNS: a
+  power that a HIDDEN house raised is not a shown power and LEAVES WHOLE (its row gone, never a nameless row); V8-4 is
+  re-recorded on a shown power no hidden house raises; VR42 stands beside it (the governing power's row is never
+  removed while the government's name stays). VEIL-22: "HANDED OVER at c1b772e55" (PART 23 section 8); to VEIL-23
+  (session_019yED1SPikQqQKF16wCQQfC; `lane/veil-23-2026-11-20`, its brief a3df8e208): "THE LANE IS YOURS at
+  c1b772e55". VEIL-23's OWN READ OF R3's DIFF (07:36): (a) `power.entry` removes the power ONLY from
+  `powerStructure.factions`: the top-level `factions[]`, people's affiliations, the cast's stakes and any ruling
+  pointer keep it; (b) `crimeTypes` FAILS OPEN for a type missing from the `raisers` map, in 212 and in the twin,
+  against its own comment; (c) `power.entry` withholds wherever ANY house is hidden, a non-criminal one too. RULED
+  (07:38): (a) "LEAVES WHOLE" MEANS EVERY COPY THE SERVED DOCUMENT HOLDS, proved by SEARCH and never by a list of
+  fields (the power's name and id in no served string and as no key: both stored shapes, the gallery read and the
+  party link, Reveal DM off and on); structured copies in the R3 cure, prose named for R5 and cured there; where VR42
+  takes the town the test says which rule took it; (b) fails closed, with a parity walker; (c) stands toward
+  withholding until measured; narrowed only if the per-town counterfactual shows no observable difference AND the
+  row's absence does not itself become the tell of a hidden house; the count goes to the owner's list either way.
+  VEIL-23 launched ONE R3-cure builder (seven units; it re-runs red, green and the measure itself before merging).
+  THE R4 CURE RETURNED (relayed by VEIL-22, 07:36): `lane/veil-22-r4-2026-11-20` at a4b89bf9d, UNREAD; its hand-back
+  names THREE STOPS, the first A STORED ID STILL SERVED ON A REVEAL-DM READ (VR46's second tooth). Forwarded to
+  VEIL-23: R4 does not merge while it stands; the three STOPs come to the chair in one message.
+  THE SECURITY READERS. REVIEW-VEIL-11: "HAND-OVER f230b526a"
+  (`docs/chair/2026-11-20/veil/probes/REVIEW-VEIL-11/HAND-OVER.md` on `lane/review-veil-11-2026-11-20`); it stopped.
+  REVIEW-VEIL-12 SEATED (session_019yED1QExLmg4yNy2VASZBj; `lane/review-veil-12-2026-11-20`; prompt
+  `prompts/REVIEW-VEIL-12.txt`): told where the note is (LEADS, NEVER PROOF), who owns the lane, and the two rulings
+  that meet at R3. Its first-hour message is owed (its instruments re-made; one probe red at its base, green at the
+  lane).
+  WHO RULES. SEAT-1 (07:37): "U1-UNREAD 17c8d629a (`lane/seat-2026-11-20-u1`; build b8e978336), HANDED OVER at
+  a9923e761"; it holds no builder and has stopped. SEAT-2 (session_019yED1NCD6QogcvC9xk79dP) had read U1 line by line
+  BEFORE the lane was its own: SOUND AND DARK (the law leaf imports nothing; its reader is closed and fails closed;
+  the mint returns {} while the dial is dark; `birthConfig(null)` byte-equal to the pinned value). To SEAT-2 (07:38):
+  "THE LANE IS YOURS at a9923e761". RULED WITH IT: THE TWO CENSUSES (`sovereigntyLightingContract.walker`'s, and
+  `proseWiringCensus.walker`'s `docs/content/wiring-census.json`) ARE THE INTEGRATOR'S: re-taken by their own doors on
+  the clean merged tree after EACH merge, one commit; never a builder's inside its unit (two units built side by side
+  would re-record the same two files and conflict by construction; the figure at a merge is neither side's). A unit
+  is green in `tests/lint` whole BUT FOR those two, whose delta its builder confirms by name. AND: where a seat's own
+  permission check refuses the merge of the line, THE CHAIR PUSHES A BASE BRANCH HOLDING THE MERGE and the seat cuts
+  its next branch from it (a cut is not a merge; the refusal is not routed round, the chair does the act that is the
+  chair's).
+  THE SESSION SHEET. FRAME-3 SEATED (session_019yED1ND6gHTMeBJ9Rqp2Gu; prompt `prompts/FRAME-3.txt`). ITS READ-IN:
+  origin's `lane/frame-2-2026-11-20` held only the audience gate (79db75eb2): FRAME-2 was told to push at its first
+  clean moment and after every merge (now 3b72e49b4 on origin). ITS INDEPENDENT RE-COUNT OF CF11: 58 calm towns of 330
+  with corruption_scandal read as a seat type where a side names the ruling power (the ruling's reading), 56 without;
+  by tier 0, 8, 15, 5, 12, 18; the opening by type: crime_wave 12, succession 10, trade_dispute 10, outside_debt 6,
+  none above a third; W2 thirteen towns, all city or metropolis. ITS CURE ADOPTED AS A RULING: EACH STORED CAST CHANGE
+  (P1, P2, P3, P4b) PROVES BYTE-IDENTITY ALSO ON A FORCED TWO-CRISIS POOL (`config.stressTypes`) pairing its kind
+  with every kind it links or contradicts (P1's face feeds `CRISIS_LINKS`; P3's instigator sits in a cross-crisis
+  contradictory pair). FRAME-2: 340,355 tokens by its record at 07:40; B5c merged; hand-back drafted; it waits on its
+  builders B4 and B10, then hands over.
+  TRADITIONS. TRAD-1's `context_usage` reads 0; its last turn's own usage reads about 526,000 tokens of context (mark:
+  400,000). By its own note most of CTR10 and five of the eight `tests/lint` reds are done. Told at 07:40: when the
+  gates it waits on return, cure nothing more; commit, name every red with its cause, push, hand over.
+  TITLES. `lane/titles-2-2026-11-20` moved to 2b8d1146b on origin; no message from TITLES-2 yet.
+  A LESSON FOR THE NEXT CHAIR: where `context_usage.used_tokens` reads 0, the true size is the newest assistant
+  event's `usage.cache_read_input_tokens`: read it with `list_events`, kinds ["assistant"], A LIMIT OF 3. NEVER A
+  LARGE PAGE: each event carries its whole tool input (a page of 30 cost this chair about 25,000 tokens).
