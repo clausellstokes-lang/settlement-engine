@@ -28,7 +28,10 @@ started on the line's tip `062504aa8`. A successor needs this file and the brief
 7. THE CHAIR, 22:01 UTC (every law lane): a dark-control TEST is a differential in one tree, never a stored digest of
    whole births; a test meaning "under law 1" forces law 1 in its own config; EXACTLY ONE test pins what a new place is
    born with (follows the dial) and is listed for the flip; the two-tree proof lives in the merge message, not a pin.
-8. First paint: the leaf is excised from engine-core and pinned to its own `trouble-law` chunk (the fortune lane's U6
+8. THE CHAIR, 22:10 UTC: THE CRIME ROW IS B50 (0.05→0.50 over 20→90). The draft table: crime B50; guild 0.05→0.25 over
+   1→4; small place 0.50→0.90 over 15→60. A DRAFT row FOR THE OWNER'S SIGNING with base/A/B/B50 kept beside it
+   (`FOR-THE-OWNER.md`). Name first paint's +58 raw before K2 (a chunk name in the entry, or code: code comes out).
+9. First paint: the leaf is excised from engine-core and pinned to its own `trouble-law` chunk (the fortune lane's U6
    pattern); at the join the vite rows are a UNION with the fortune lane's.
 
 ## UNITS
@@ -55,4 +58,4 @@ None yet.
 K1's build: first paint 1,177,726 / 374,679 / 314,569 (line 1,177,668 / 374,670 / 314,580: +58 raw, to be named at the two runs); worker 2,632,557 (line 2,631,236: +1,321); the leaf in its own chunk `trouble-law` (1,274 B), outside the entry closure.
 
 ## FOR THE OWNER'S SIGNING
-`src/domain/trouble/troubleLaw.js :: TROUBLE_WEIGHT_TUNING` (DRAFT): crimeWave (the chair's choice of A / B / B50 pending), guildConflict 0.05→0.25 over 1→4 economy powers, smallPlaceCrime 0.50→0.90 over criminalEffective 15→60.
+`src/domain/trouble/troubleLaw.js :: TROUBLE_WEIGHT_TUNING` (DRAFT): crimeWave 0.05→0.50 over criminalEffective 20→90 (B50, the chair's 22:10 choice; the leaf still holds A until K3 step 0), guildConflict 0.05→0.25 over 1→4 economy powers, smallPlaceCrime 0.50→0.90 over criminalEffective 15→60.
