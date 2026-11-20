@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "1058cad89cd5474150c62e831ed7ec9af09eaba0",
-  "measuredBy": "CI-SHARD",
-  "date": "2026-11-19",
-  "note": "CI-SHARD (2026-11-19): the sharded ratchet adds one test file, tests/lint/vitestShardMerge.test.js (the merge and shard scripts born tests), and two arms in tests/build/ciCheckParity.test.js",
-  "files": 3700,
+  "measuredAtSha": "228a8f1142205b533e24073204efe615c85d3472",
+  "measuredBy": "GIT-DOOR (seventh chair, lane/git-door-2026-11-20)",
+  "date": "2026-11-20",
+  "note": "GIT-DOOR (2026-11-20): pull request #74 carried onto the line; it adds one test file, tests/helpers/gitFixture.test.js (the guard of tests/helpers/gitFixture.js, one credited suite, nine titles); the converted suites, landingStageMeasure among them, kept every title",
+  "files": 3701,
   "parked": 472,
-  "credited": 3228,
-  "titles": 31154,
-  "suiteTitles": 8626
+  "credited": 3229,
+  "titles": 31163,
+  "suiteTitles": 8627
 }
