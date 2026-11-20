@@ -86,6 +86,12 @@ const JOURNAL_TONIGHT = Object.freeze({
  * b6150a0c2ee81edc, a5387ed63cd9cac4, 4243a02c390c9a6a, 385c00c79c91f40b, 4b26a1c208b3f083). RE-MEASURED at the merge of
  * the line (FRAME-3, the chair's ruling): in an archive of the line `e356c94f2` with only that crisisHooks diff applied;
  * city-24 and metropolis-0 moved (the line's names work in their generated prose), the other four are unchanged.
+ * RE-MEASURED AGAIN at the merge of the line 0c9069489 (FRAME-5, the chair's ruling 12 as amended for that merge): in an
+ * archive of the line `0c9069489` with B5's crisisHooks diff AND B11's crisisCast diff (`git diff 31922415e~1 31922415e --
+ * src/domain/crisis/crisisCast.js`) applied, all six equal the merged tree; without B11's diff metropolis-0 stays at
+ * 2d8e97beae5ef6d0. So metropolis-0's move is B11's (FRAME-3 ruling 9, a person is never "it": "In the migration, Liangjie
+ * Tang of the Religious Authorities takes the worst of it: its people" -> "his people"), not the line's; it was red on the
+ * lane from B11's merge (9c2be7882) and unnamed there. The other five are unchanged.
  */
 const IN_CRISIS = Object.freeze({
   'frame-calm-thorp-2': 'aa729268a7bb3546',
@@ -93,7 +99,7 @@ const IN_CRISIS = Object.freeze({
   'frame-calm-village-1': 'a4eed51cd6861887',
   'frame-calm-town-6': 'eae16131620269ec',
   'frame-calm-city-24': '4545a9abe27449f1',
-  'frame-calm-metropolis-0': '2d8e97beae5ef6d0',
+  'frame-calm-metropolis-0': 'e3bb76cf91977d0f',
 });
 
 /**
