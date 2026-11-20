@@ -1,117 +1,146 @@
-// tell2-an.mjs <pooldir> <townsdir>: R3-TELL-2 unit 1's tables and THE TELL COLUMN AS A GATED ARM (ruling 54 (d)).
-// MEMBERSHIP (ruling 54 (b)): a served page's signature (tell2-signature.mjs) is a MEMBER iff at least TWO distinct
-// nothing-hidden births of the pool, of the town's SIZE, show it under some criminal setting, read with the SAME Reveal DM
-// setting (a birth counts once however many of its settings show it; the Reveal read is part of what the reader holds).
-// THE GATE: exit 1 if any of the hidden-house towns' served pages (twin or server) is not a member, over GATE_SCOPE:
-// 'all' (default: every criminal setting read) or 'own' (the gate's setting alone). Exit 2 if an input is missing or a
-// shard threw. T2_DROP (optional, for the sensitivity table only; the gate never reads it): comma-separated signature
-// part prefixes dropped before matching (e.g. 'k,f.conflicts').
+// tell2-an.mjs <pooldir> <townsdir>: THE TELL'S TWO GATES as ruling 58 restates them (the chair, 18:21), and what it reports.
+// (Ruling 54's single-membership analyzer that wrote run1/ is at 580a5c9dd.)
+//
+// THE UNIVERSE U(size, Reveal): every page read(T', s') of the pool such that s' hides NOTHING T' holds: part A (T' holds no
+// hideable house: every setting) and part B (T' holds some: the settings that show all it holds). Pages are counted by
+// DISTINCT BIRTH (a birth counts once however many of its settings show a value), with the same Reveal setting.
+// GATED READS: read(T, s) of a town holding a hideable house where s hides at least one of them: own, the seven mixed
+// g:<bits>, off (every house is hidden by default under each). allOpen is EXEMPT (ruling 58 1; it is reported).
+// THE CONTROLS (the gate's 48 nothing-hidden births, outside the pool) are read under the same settings: the calibration.
+// R4'S PARTS (ruling 58 3 (b)): the criminal-worded role, trace, ties, goals, memberships, cast families: DROPPED from both
+// gates and LISTED RED as R4's.
+// GATE-1 (full fineness): every single part of the page (each of the 87 fields, each family's count, each row-key state,
+//   each of the FIVE cross bits; a part a page lacks reads '-') holds a value seen in at least two births of U. Controls must
+//   be 0 of 48; a part where one is not is NAMED.
+// GATE-2 (the joint signature at the family level): the families' counts and the five bits, jointly, seen in at least two
+//   births of U. Calibrated by the controls at three levels (L1 counts none/one/several + bits; L2 none/some + bits; L3
+//   none/some alone): the FINEST level with 0 of 48 controls at every gated setting is the gate; none: TOO FINE (exit 1).
+// REPORTED, NEVER GATED: the full fine signature (every part, R4's included) jointly, hidden against controls, with Fisher's
+//   exact p (one-sided: hidden non-members exceed the controls'); p < 0.05 is a STOP with the separating parts.
+// RULING 58 3 (c)'s COUNT: the criminal powers' rows the twin serves (governing ones apart: VR42) that the rule would withhold
+//   (served where the read serves no criminal house): on the gated reads of the 92 and on part A's pages.
+// EXIT: 1 if any gated read of a hidden-house town fails GATE-1 or GATE-2 (twin or server), or GATE-2 has no level; 2 on a
+// missing input; else 0.
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
-import { sigDiff } from './tell2-signature.mjs';
 const [poolDir, townsDir] = process.argv.slice(2);
-const GATE_SCOPE = process.env.GATE_SCOPE || 'all';
-const load = (dir, re) => readdirSync(dir).filter((f) => re.test(f)).sort().map((f) => JSON.parse(readFileSync(`${dir}/${f}`, 'utf8')));
-if (!existsSync(poolDir) || !existsSync(townsDir)) { console.log('MISSING INPUT'); process.exit(2); }
-const pool = load(poolDir, /^pool-shard\d+\.json$/); const towns = load(townsDir, /^towns-shard\d+\.json$/);
-if (pool.length !== 4 || towns.length !== 4) { console.log(`MISSING SHARDS: pool ${pool.length}/4, towns ${towns.length}/4`); process.exit(2); }
-const DROP = (process.env.T2_DROP || '').split(',').filter(Boolean);
-const coarse = (s) => { if (!DROP.length) return s; const o = JSON.parse(s);
-  for (const d of DROP) { const [part, ...rest] = d.split('.'); const key = rest.join('.'); if (!key) delete o[part]; else if (o[part]) delete o[part][key]; }
-  return JSON.stringify(o); };
-const SETS = ['own', 'g:110', 'g:101', 'g:011', 'g:100', 'g:010', 'g:001', 'g:000', 'allOpen', 'off'];
+const load = (dir, re) => (existsSync(dir) ? readdirSync(dir).filter((f) => re.test(f)).sort().map((f) => JSON.parse(readFileSync(`${dir}/${f}`, 'utf8'))) : []);
+const A = load(poolDir, /^pool-shard\d+\.json$/); const B = load(poolDir, /^poolb-shard\d+\.json$/); const TW = load(townsDir, /^towns-shard\d+\.json$/);
+if (A.length !== 4 || B.length !== 4 || TW.length !== 4) { console.log(`MISSING SHARDS: part A ${A.length}/4, part B ${B.length}/4, towns ${TW.length}/4`); process.exit(2); }
+const R4 = new Set(['r.people.roles', 'r.trace.criminal', 'r.ties.criminal', 'r.people.goals', 'r.people.memberships', 'r.cast.criminal']);
+const GATED = ['own', 'g:110', 'g:101', 'g:011', 'g:100', 'g:010', 'g:001', 'g:000', 'off'];
+const MIXED = GATED.filter((s) => s.startsWith('g:'));
 const READS = ['off', 'dm'];
-const med = (xs) => { if (!xs.length) return 0; const s = [...xs].sort((a, b) => a - b); return s[Math.floor(s.length / 2)]; };
+const flat = (shs, part) => shs.flatMap((sh) => sh.births.map((b) => ({ ...b, part, sigs: Object.fromEntries(Object.entries(b.sigs).map(([k, i]) => [k, sh.sigs[i]])),
+  srv: b.srv && Object.fromEntries(Object.entries(b.srv).map(([k, i]) => [k, sh.sigs[i]])) })));
+const pa = flat(A, 'A'); const pb = flat(B, 'B'); const towns = flat(TW, 'T');
+const hid = towns.filter((t) => t.hidden.length); const ctl = towns.filter((t) => !t.hidden.length);
+const parsedC = new Map();
+/** A signature as { part: value }: f.<path>, r.<family>, k.<family>.<key>, x.<bit>. */
+const partsOf = (s) => { if (parsedC.has(s)) return parsedC.get(s); const o = JSON.parse(s); const m = {};
+  for (const [k, v] of Object.entries(o.f || {})) m[`f.${k}`] = v; for (const [k, v] of Object.entries(o.r || {})) m[`r.${k}`] = v;
+  for (const [fam, ks] of Object.entries(o.k || {})) for (const [k, v] of Object.entries(ks)) m[`k.${fam}.${k}`] = v;
+  for (const [k, v] of Object.entries(o.x || {})) m[`x.${k}`] = v; parsedC.set(s, m); return m; };
+const universe = [...pa, ...pb];
+const SIZES = [...new Set(universe.map((b) => b.size))];
+// every part name, per size|read: the pool's and the towns'
+const PARTS = {};
+const addParts = (size, k, s) => { const set = (PARTS[`${size}|${k.split('|')[0]}`] ||= new Set()); for (const p of Object.keys(partsOf(s))) set.add(p); };
+for (const b of [...universe, ...towns]) for (const [k, s] of Object.entries(b.sigs)) addParts(b.size, k, s);
+for (const t of towns) for (const [k, s] of Object.entries(t.srv || {})) addParts(t.size, k, s);
+const valOf = (s, p) => partsOf(s)[p] ?? '-';
+// U's value counts (distinct births) per size|read: part -> value -> Set(seed)
+const VAL = {};
+for (const b of universe) for (const [k, s] of Object.entries(b.sigs)) { const key = `${b.size}|${k.split('|')[0]}`; const V = (VAL[key] ||= new Map());
+  for (const p of PARTS[key]) { const v = valOf(s, p); const m = V.get(p) || V.set(p, new Map()).get(p); (m.get(v) || m.set(v, new Set()).get(v)).add(b.seed); } }
+const seen = (size, rd, p, v) => VAL[`${size}|${rd}`]?.get(p)?.get(v)?.size || 0;
+/** GATE-1: the parts of a page (R4's alone when r4) whose value fewer than two births of U show. */
+const g1Fail = (size, rd, s, r4 = false) => [...PARTS[`${size}|${rd}`]].filter((p) => R4.has(p) === r4 && seen(size, rd, p, valOf(s, p)) < 2).map((p) => `${p}=${JSON.stringify(valOf(s, p))}`);
+// joint keys
+const famKey = (s, level) => { const m = partsOf(s); const r = Object.keys(m).filter((p) => p.startsWith('r.') && !R4.has(p)).sort().map((p) => `${p}=${level === 1 ? m[p] : m[p] === '0' ? '0' : '+'}`);
+  const x = level === 3 ? [] : Object.keys(m).filter((p) => p.startsWith('x.')).sort().map((p) => `${p}=${m[p]}`); return [...r, ...x].join(';'); };
+const JOINT = {}; // level|size|read -> key -> Set(seed)
+const addJ = (lvl, size, rd, key, seed) => { const J = (JOINT[`${lvl}|${size}|${rd}`] ||= new Map()); (J.get(key) || J.set(key, new Set()).get(key)).add(seed); };
+for (const b of universe) for (const [k, s] of Object.entries(b.sigs)) { const rd = k.split('|')[0]; for (const L of [1, 2, 3]) addJ(L, b.size, rd, famKey(s, L), b.seed); addJ('F', b.size, rd, s, b.seed); }
+const jMember = (L, size, rd, s) => (JOINT[`${L}|${size}|${rd}`]?.get(L === 'F' ? s : famKey(s, L))?.size || 0) >= 2;
+const sigAt = (t, eng, rd, set) => (eng === 'twin' ? t.sigs : t.srv)?.[`${rd}|${set}`];
 
-// ── THE POOL
-const births = pool.flatMap((sh) => sh.births.map((b) => ({ ...b, sigs: Object.fromEntries(Object.entries(b.sigs).map(([k, i]) => [k, coarse(sh.sigs[i])])),
-  srv: b.srv && Object.fromEntries(Object.entries(b.srv).map(([k, i]) => [k, coarse(sh.sigs[i])])) })));
-const SIZES = [...new Set(births.map((b) => b.size))];
-/** members[size|read]: sig -> Set(seed) */
-const members = {}; const pages = {};
-for (const b of births) for (const [k, s] of Object.entries(b.sigs)) { const [rd] = k.split('|'); const key = `${b.size}|${rd}`;
-  ((members[key] ||= new Map()).get(s) || members[key].set(s, new Set()).get(s)).add(b.seed);
-  ((pages[key] ||= new Map()).set(s, (pages[key].get(s) || 0) + 1)); }
-const countOf = (size, rd, s) => members[`${size}|${rd}`]?.get(s)?.size || 0;
-const isMember = (size, rd, s) => countOf(size, rd, s) >= 2;
-console.log(`R3-TELL-2 unit 1: THE TELL COLUMN (ruling 54), gate scope '${GATE_SCOPE}'${DROP.length ? `, SENSITIVITY: parts dropped ${DROP.join(',')}` : ''}`);
-console.log(`\nTHE POOL (${poolDir}): nothing-hidden births, each read by the twin under every setting, Reveal off and on`);
-console.log('size | tried | accepted (nothing hidden) | rejected early | CPU minutes (sum of shards) | distinct signatures off / dm | seen in one birth only off / dm | pool births whose OWN page is a member off / dm | whose OFF page is a member off / dm');
-for (const size of SIZES) {
-  const c = pool.map((sh) => sh.cost?.[size]).filter(Boolean); const tried = c.reduce((a, x) => a + x.tried, 0); const acc = c.reduce((a, x) => a + x.accepted, 0); const ms = c.reduce((a, x) => a + x.ms, 0);
-  const bs = births.filter((b) => b.size === size);
-  const cell = (rd, f) => f(members[`${size}|${rd}`] || new Map());
-  const self = (rd, set) => bs.filter((b) => isMember(size, rd, b.sigs[`${rd}|${set}`])).length;
-  console.log(`${size} | ${tried} | ${acc} | ${tried - acc} | ${(ms / 60000).toFixed(1)} | ${cell('off', (m) => m.size)} / ${cell('dm', (m) => m.size)} | ${cell('off', (m) => [...m.values()].filter((x) => x.size < 2).length)} / ${cell('dm', (m) => [...m.values()].filter((x) => x.size < 2).length)} | ${self('off', 'own')}/${bs.length} / ${self('dm', 'own')}/${bs.length} | ${self('off', 'off')}/${bs.length} / ${self('dm', 'off')}/${bs.length}`);
-}
-const audit = pool.flatMap((sh) => sh.audit || []);
-console.log(`early-rejection audit: ${audit.filter((a) => a.finalHasHouse).length} of ${audit.length} audited rejected births hold a hideable house at their end (a birth is rejected at the first step holding one)`);
-const rejAt = {}; for (const sh of pool) for (const [size, r] of Object.entries(sh.rejected || {})) for (const [st, n] of Object.entries(r.at)) rejAt[`${size}@${st}`] = (rejAt[`${size}@${st}`] || 0) + n;
-console.log(`rejected at: ${Object.entries(rejAt).map(([k, n]) => `${k} ${n}`).join('; ')}`);
-const srvS = births.filter((b) => b.srv); const srvBad = srvS.filter((b) => Object.keys(b.srv).some((k) => b.srv[k] !== b.sigs[k]));
-console.log(`server sample (own and off, Reveal off and on): ${srvS.length} births, signature differs from the twin's in ${srvBad.length}${srvBad.length ? `: ${srvBad.map((b) => b.seed).join(', ')}` : ''}`);
-const sums = births.map((b) => b.incSum).filter((x) => x !== null); console.log(`income shares on the pool's stored births: ${sums.length} with rows; summing to 100 (±0.5) ${sums.filter((x) => Math.abs(x - 100) <= 0.5).length}; else ${sums.filter((x) => Math.abs(x - 100) > 0.5).length}`);
+console.log(`R3-TELL-2: THE TELL'S TWO GATES (ruling 58). Pool ${poolDir}; towns ${townsDir}`);
+// ── the pool
+console.log('\nTHE POOL: part A (nothing hidden, every setting) and part B (houses held, the settings that hide none)');
+console.log('size | A births | B births (tried) | U distinct full signatures off / dm | B CPU min | A re-read CPU min');
+for (const size of SIZES) { const bc = B.map((sh) => sh.cost?.[size]).filter(Boolean); const ac = A.map((sh) => sh.cost?.[size]).filter(Boolean);
+  console.log(`${size} | ${pa.filter((b) => b.size === size).length} | ${pb.filter((b) => b.size === size).length} (${bc.reduce((a, x) => a + x.tried, 0)}) | ${JOINT[`F|${size}|off`]?.size} / ${JOINT[`F|${size}|dm`]?.size} | ${(bc.reduce((a, x) => a + x.ms, 0) / 60000).toFixed(1)} | ${(ac.reduce((a, x) => a + x.ms, 0) / 60000).toFixed(1)}`); }
+const srvS = pa.filter((b) => b.srv); console.log(`part A server sample (own, off; both reads): ${srvS.length} births, signature differs from the twin's in ${srvS.filter((b) => Object.keys(b.srv).some((k) => b.srv[k] !== b.sigs[k])).length}`);
 const meta = existsSync(`${poolDir}/meta.txt`) ? readFileSync(`${poolDir}/meta.txt`, 'utf8') : '';
-const st = /start (\S+)/.exec(meta)?.[1]; const en = /end (\S+)/.exec(meta)?.[1];
-if (st && en) console.log(`pool wall clock: ${((Date.parse(en) - Date.parse(st)) / 60000).toFixed(1)} minutes (${st} to ${en}, four shards)`);
+for (const part of ['A', 'B']) { const st = new RegExp(`${part} start (\\S+)`).exec(meta)?.[1]; const en = new RegExp(`${part} end (\\S+)`).exec(meta)?.[1]; if (st && en) console.log(`part ${part} wall clock: ${((Date.parse(en) - Date.parse(st)) / 60000).toFixed(1)} minutes (${st} to ${en}, four shards)`); }
 
-// ── THE TOWNS
-const all = towns.flatMap((sh) => sh.births.map((b) => ({ ...b, sigs: Object.fromEntries(Object.entries(b.sigs).map(([k, i]) => [k, coarse(sh.sigs[i])])),
-  srv: b.srv && Object.fromEntries(Object.entries(b.srv).map(([k, i]) => [k, coarse(sh.sigs[i])])) })));
-const hid = all.filter((t) => t.hidden.length); const ctl = all.filter((t) => !t.hidden.length);
-const sizesOf = [...new Set(hid.map((t) => t.size))];
-console.log(`\nTHE TOWNS (${townsDir}): ${all.length} gate births; ${hid.length} with a hidden house; ${ctl.length} controls`);
-const nonMem = (ts, eng, rd, set) => ts.filter((t) => { const s = (eng === 'twin' ? t.sigs : t.srv)?.[`${rd}|${set}`]; return s === undefined ? true : !isMember(t.size, rd, s); });
-for (const [set, what] of [['own', 'the owner\'s own setting (the gate\'s)'], ['off', 'the switch OFF (the limit)']]) {
-  console.log(`\nTHE TELL COLUMN, ${what}: NON-MEMBERS of the hidden-house towns, by size and Reveal (twin / server)`);
-  console.log(`size (towns) | Reveal off | Reveal DM`);
-  for (const size of [...sizesOf, 'ALL']) { const ts = size === 'ALL' ? hid : hid.filter((t) => t.size === size);
-    console.log(`${size} (${ts.length}) | ${nonMem(ts, 'twin', 'off', set).length} / ${nonMem(ts, 'server', 'off', set).length} | ${nonMem(ts, 'twin', 'dm', set).length} / ${nonMem(ts, 'server', 'dm', set).length}`); }
-}
-console.log('\nEVERY SETTING: non-members of the hidden-house towns (twin / server), Reveal off | Reveal DM; and the gate\'s CONTROLS (nothing hidden; twin): their non-members measure the pool\'s sparsity, not a tell');
-console.log('setting | hidden-house towns, off | hidden-house towns, DM | controls off | controls DM');
-for (const set of SETS) console.log(`${set} | ${nonMem(hid, 'twin', 'off', set).length} / ${nonMem(hid, 'server', 'off', set).length} | ${nonMem(hid, 'twin', 'dm', set).length} / ${nonMem(hid, 'server', 'dm', set).length} | ${nonMem(ctl, 'twin', 'off', set).length}/${ctl.length} | ${nonMem(ctl, 'twin', 'dm', set).length}/${ctl.length}`);
-const anyNon = (t, eng, rd) => SETS.some((set) => nonMem([t], eng, rd, set).length);
-console.log(`ANY SETTING: hidden-house towns with a non-member page: Reveal off ${hid.filter((t) => anyNon(t, 'twin', 'off') || anyNon(t, 'server', 'off')).length}, Reveal DM ${hid.filter((t) => anyNon(t, 'twin', 'dm') || anyNon(t, 'server', 'dm')).length} (twin or server)`);
-console.log(`THE LIMIT (ruling 54 (c): the switch-off page is always a member): hidden-house towns whose switch-off page is NOT a member: Reveal off ${nonMem(hid, 'twin', 'off', 'off').length} / ${nonMem(hid, 'server', 'off', 'off').length}, Reveal DM ${nonMem(hid, 'twin', 'dm', 'off').length} / ${nonMem(hid, 'server', 'dm', 'off').length} (twin / server)`);
+// ── GATE-1
+const g1 = (ts, eng, rd, set, r4 = false) => ts.filter((t) => { const s = sigAt(t, eng, rd, set); return s === undefined || g1Fail(t.size, rd, s, r4).length; });
+console.log(`\nGATE-1 (full fineness, R4's parts dropped): gated reads failing, hidden-house towns (of ${hid.length}) twin / server; controls (of ${ctl.length}) twin`);
+console.log('setting | hidden, Reveal off | hidden, Reveal DM | controls off | controls DM');
+for (const set of [...GATED, 'allOpen']) console.log(`${set}${set === 'allOpen' ? ' (exempt)' : ''} | ${g1(hid, 'twin', 'off', set).length} / ${g1(hid, 'server', 'off', set).length} | ${g1(hid, 'twin', 'dm', set).length} / ${g1(hid, 'server', 'dm', set).length} | ${g1(ctl, 'twin', 'off', set).length} | ${g1(ctl, 'twin', 'dm', set).length}`);
+const tallyFail = (ts, eng, sets, r4 = false) => { const out = {}; for (const rd of READS) for (const set of sets) for (const t of ts) { const s = sigAt(t, eng, rd, set); if (!s) continue; for (const l of g1Fail(t.size, rd, s, r4)) (out[`${rd}|${l}`] ||= new Set()).add(t.seed); } return out; };
+const show = (o, n = 40) => Object.entries(o).sort((a, b) => b[1].size - a[1].size).slice(0, n).map(([k, s]) => `  ${s.size} | ${k.slice(0, 200)} (e.g. ${[...s].slice(0, 2).join(', ')})`).join('\n');
+console.log('\nGATE-1, THE CONTROLS\' FAILING PARTS (NAMED, never dropped; every gated setting): controls | read|part=value');
+console.log(show(tallyFail(ctl, 'twin', GATED)) || '  none');
+console.log('\nGATE-1, THE HIDDEN-HOUSE TOWNS\' FAILING PARTS (every gated setting, twin): towns | read|part=value');
+console.log(show(tallyFail(hid, 'twin', GATED)));
+console.log('\nR4\'S PARTS, LISTED RED AS R4\'S (dropped from both gates; ruling 58 3 (b)): hidden-house towns whose gated reads hold an R4 part value fewer than two births of U show (twin / server), by setting');
+for (const set of ['own', 'off']) console.log(`  ${set}: Reveal off ${g1(hid, 'twin', 'off', set, true).length} / ${g1(hid, 'server', 'off', set, true).length}, Reveal DM ${g1(hid, 'twin', 'dm', set, true).length} / ${g1(hid, 'server', 'dm', set, true).length}`);
+console.log(`  mixed (any g:<bits>): Reveal off ${hid.filter((t) => MIXED.some((s) => g1([t], 'twin', 'off', s, true).length)).length}, Reveal DM ${hid.filter((t) => MIXED.some((s) => g1([t], 'twin', 'dm', s, true).length)).length} (twin)`);
+console.log(show(tallyFail(hid, 'twin', GATED, true), 12));
 
-// ── PARITY: the server's signature against the twin's, every town-read
-const par = []; for (const t of hid) for (const k of Object.keys(t.sigs)) if (t.srv && t.srv[k] !== t.sigs[k]) par.push({ t, k, d: sigDiff(t.srv[k], t.sigs[k]) });
-const parTowns = new Set(par.map((p) => p.t.seed));
-console.log(`\nPARITY: town-reads whose server signature differs from the twin's: ${par.length} (${parTowns.size} towns)`);
-const parBy = {}; for (const p of par) for (const l of p.d) (parBy[l] ||= new Set()).add(p.t.seed);
-for (const [l, s] of Object.entries(parBy).sort((a, b) => b[1].size - a[1].size).slice(0, 20)) console.log(`  server -> twin  ${l}: ${s.size} towns (e.g. ${[...s].slice(0, 3).join(', ')})`);
+// ── GATE-2
+const g2 = (L, ts, eng, rd, set) => ts.filter((t) => { const s = sigAt(t, eng, rd, set); return s === undefined || !jMember(L, t.size, rd, s); });
+console.log('\nGATE-2 (the joint family-level signature, R4\'s families dropped), CALIBRATION BY THE CONTROLS: per level, the worst gated setting\'s controls failing (of 48), Reveal off / DM');
+let LEVEL = null;
+for (const L of [1, 2, 3]) { const worst = (rd) => Math.max(...GATED.map((s) => g2(L, ctl, 'twin', rd, s).length)); const w = [worst('off'), worst('dm')];
+  console.log(`  L${L} (${L === 1 ? 'counts none/one/several + the five bits' : L === 2 ? 'counts none/some + the five bits' : 'counts none/some alone'}): ${w[0]} / ${w[1]}${w[0] + w[1] === 0 ? ' CALIBRATED' : ' too fine'}`);
+  if (LEVEL === null && w[0] + w[1] === 0) LEVEL = L; }
+console.log(`GATE-2 LEVEL: ${LEVEL === null ? 'NONE CALIBRATED (every level too fine: the chair is told)' : `L${LEVEL}`}`);
+console.log('THE CONTROLS GATE-2 FAILS, NAMED, per level: control, gated reads failing, its non-zero families and bits (own, Reveal off)');
+for (const L of [1, 2, 3]) for (const t of ctl) { const bad = READS.flatMap((rd) => GATED.filter((s) => g2(L, [t], 'twin', rd, s).length).map((s) => `${rd}|${s}`)); if (!bad.length) continue;
+  const m = partsOf(t.sigs['off|own']); console.log(`  L${L} ${t.seed}: ${bad.length} reads (${bad.slice(0, 4).join(' ')}${bad.length > 4 ? ' ...' : ''}); ${Object.entries(m).filter(([p, v]) => (p.startsWith('r.') && !R4.has(p) && v !== '0') || (p.startsWith('x.') && v !== '0')).map(([p, v]) => `${p}=${v}`).join(' ')}`); }
+console.log('THE DRAG\'S EMPTY FORM (ruling 58 3 (a)): x.dragMarket values in U by size (births, Reveal off), and of the towns whose gated pages lack the key, how many would pass the bit with each empty form');
+for (const size of SIZES) console.log(`  ${size}: ${[...(VAL[`${size}|off`]?.get('x.dragMarket') || new Map())].map(([v, s]) => `${v} ${s.size}`).join(', ')}`);
+{ const absent = hid.filter((t) => partsOf(t.sigs['off|own'])['f.economicState.safetyProfile.economicDragDesc'] === 'a');
+  for (const form of ['n', 'e']) console.log(`  served as ${form === 'n' ? 'null' : "''"}: ${absent.filter((t) => seen(t.size, 'off', 'x.dragMarket', `${form}:${partsOf(t.sigs['off|own'])['x.dragMarket'].split(':')[1]}`) >= 2 && seen(t.size, 'off', 'f.economicState.safetyProfile.economicDragDesc', form) >= 2).length} of ${absent.length} pass both the field and the bit (Reveal off, own)`); }
+for (const L of [1, 2, 3]) { console.log(`\nGATE-2 at L${L}${L === LEVEL ? ' (THE GATE)' : ' (reported)'}: gated reads failing, hidden-house towns twin / server; controls twin`);
+  console.log('setting | hidden, Reveal off | hidden, Reveal DM | controls off | controls DM');
+  for (const set of [...GATED, 'allOpen']) console.log(`${set}${set === 'allOpen' ? ' (exempt)' : ''} | ${g2(L, hid, 'twin', 'off', set).length} / ${g2(L, hid, 'server', 'off', set).length} | ${g2(L, hid, 'twin', 'dm', set).length} / ${g2(L, hid, 'server', 'dm', set).length} | ${g2(L, ctl, 'twin', 'off', set).length} | ${g2(L, ctl, 'twin', 'dm', set).length}`); }
 
-// ── WHY: each non-member's nearest MEMBER signature (fewest differing parts), the gate's setting
-const parsed = new Map(); const P = (s) => { if (!parsed.has(s)) parsed.set(s, JSON.parse(s)); return parsed.get(s); };
-const nearest = (size, rd, s) => { let best = null;
-  for (const [m, set] of members[`${size}|${rd}`] || []) { if (set.size < 2) continue; const d = sigDiff(P(s), P(m)); if (!best || d.length < best.d.length) best = { d, n: set.size }; }
-  return best; };
-const why = {};
-console.log('\nPER NON-MEMBER TOWN, the gate\'s setting (twin): the parts its signature differs in from the NEAREST member signature of its size and Reveal (page -> member; the member\'s births)');
-for (const rd of READS) for (const t of nonMem(hid, 'twin', rd, 'own').sort((a, b) => a.seed.localeCompare(b.seed))) {
-  const nb = nearest(t.size, rd, t.sigs[`${rd}|own`]);
-  console.log(`  ${t.seed} Reveal ${rd} (seen in ${countOf(t.size, rd, t.sigs[`${rd}|own`])} pool births): ${nb ? `${nb.d.length} parts from a member of ${nb.n}: ${nb.d.join('; ')}` : 'NO MEMBER AT THIS SIZE'}`);
-  for (const l of nb?.d || []) { const key = `${rd}|${l.replace(/: .*/, '')}`; (why[key] ||= new Set()).add(t.seed); } }
-console.log('\nTHE PARTS that most often separate a non-member from its nearest member (gate\'s setting, twin): towns');
-for (const [k, s] of Object.entries(why).sort((a, b) => b[1].size - a[1].size).slice(0, 30)) console.log(`  ${k}: ${s.size}`);
-// ── SINGLE-PART TELLS: a part's value that a hidden-house town's page shows and fewer than two pool births of its size
-// show under ANY setting (same Reveal): that value alone makes the page a non-member, whatever else it holds.
-const partVals = {}; // `${size}|${rd}` -> Map(`${part}.${key}=${value}` -> Set(seed))
-const linesOf = (s) => { const o = P(s); return ['f', 'k', 'r', 'x'].flatMap((p) => Object.entries(o[p] || {}).map(([k, v]) => `${p}.${k}=${JSON.stringify(v)}`)); };
-for (const b of births) for (const [k, s] of Object.entries(b.sigs)) { const key = `${b.size}|${k.split('|')[0]}`; const m = (partVals[key] ||= new Map());
-  for (const l of linesOf(s)) (m.get(l) || m.set(l, new Set()).get(l)).add(b.seed); }
-for (const set of ['own', 'off']) {
-  const tally = {};
-  for (const rd of READS) for (const t of hid) for (const l of linesOf(t.sigs[`${rd}|${set}`])) if ((partVals[`${t.size}|${rd}`]?.get(l)?.size || 0) < 2) (tally[`${rd}|${l}`] ||= new Set()).add(t.seed);
-  console.log(`\nSINGLE-PART TELLS, setting '${set}' (twin): a value the hidden-house town's page shows that fewer than two nothing-hidden births of its size show under any setting (towns of ${hid.length})`);
-  for (const [k, s] of Object.entries(tally).sort((a, b) => b[1].size - a[1].size).slice(0, 25)) console.log(`  ${s.size} | ${k.slice(0, 220)} (e.g. ${[...s].slice(0, 2).join(', ')})`);
-}
-// ── per town, every read
-console.log('\nPER TOWN: member (M) or not (-) per setting in SETS order [' + SETS.join(' ') + '], twin then server, Reveal off | DM');
-for (const t of [...hid].sort((a, b) => a.seed.localeCompare(b.seed))) {
-  const row = (eng, rd) => SETS.map((set) => (nonMem([t], eng, rd, set).length ? '-' : 'M')).join('');
-  console.log(`  ${t.seed} (${t.size}) | ${row('twin', 'off')} ${row('server', 'off')} | ${row('twin', 'dm')} ${row('server', 'dm')}`);
-}
-const failing = hid.filter((t) => READS.some((rd) => (GATE_SCOPE === 'own' ? ['own'] : SETS).some((set) => nonMem([t], 'twin', rd, set).length || nonMem([t], 'server', rd, set).length)));
-console.log(`\nGATE (${GATE_SCOPE}): ${failing.length} of ${hid.length} hidden-house towns hold a non-member page${failing.length ? ' -> RED (exit 1)' : ' -> GREEN (exit 0)'}`);
-process.exit(failing.length ? 1 : 0);
+// ── REPORTED: the full fine signature, hidden against controls, Fisher's exact p
+const lnF = (n) => { let s = 0; for (let i = 2; i <= n; i += 1) s += Math.log(i); return s; };
+const hyper = (k, K, n, N) => Math.exp(lnF(K) - lnF(k) - lnF(K - k) + lnF(N - K) - lnF(n - k) - lnF(N - K - n + k) - lnF(N) + lnF(n) + lnF(N - n));
+/** One-sided Fisher: P(hidden non-members >= a) given the margins. */
+const fisher = (a, n1, c, n2) => { const K = a + c; const N = n1 + n2; let p = 0; for (let k = a; k <= Math.min(K, n1); k += 1) p += hyper(k, K, n1, N); return Math.min(1, p); };
+console.log('\nREPORTED (never gated): THE FULL FINE SIGNATURE (every part, R4\'s included), jointly: non-members, hidden-house towns (twin) against controls, Fisher\'s exact p (one-sided)');
+console.log('setting | Reveal off: hidden / controls / p | Reveal DM: hidden / controls / p');
+let fisherStop = false;
+for (const set of GATED) { const cell = (rd) => { const a = g2('F', hid, 'twin', rd, set).length; const c = g2('F', ctl, 'twin', rd, set).length; const p = fisher(a, hid.length, c, ctl.length); if (p < 0.05) fisherStop = true; return `${a}/${hid.length} / ${c}/${ctl.length} / ${p.toExponential(2)}`; };
+  console.log(`${set} | ${cell('off')} | ${cell('dm')}`); }
+console.log(`FISHER: ${fisherStop ? 'p < 0.05 at some gated setting: STOP (the separating parts are GATE-1\'s hidden-house list above, R4\'s list included)' : 'no gated setting below 0.05'}`);
+
+// ── ruling 58 3 (c)'s count
+const pcSum = (xs) => xs.reduce((a, [r, g]) => [a[0] + r, a[1] + g], [0, 0]);
+const pcAt = (t, eng, k) => { const v = (eng === 'twin' ? t.pc : t.srvPc)?.[k]; return v ? v.split('/').map(Number) : null; };
+console.log('\nRULING 58 3 (c): THE CRIMINAL POWERS\' ROWS the rule would withhold (served where the read serves no criminal house). Hidden-house towns, gated reads (twin; server): towns / rows / of them GOVERNING (VR42 keeps a governing row today)');
+for (const set of ['own', 'off']) for (const rd of READS) { const row = (eng) => { const xs = hid.map((t) => pcAt(t, eng, `${rd}|${set}`)).filter(Boolean); const [r, g] = pcSum(xs); return `${xs.length} / ${r} / ${g}`; };
+  console.log(`  ${set}, Reveal ${rd}: ${row('twin')} ; server ${row('server')}`); }
+const anyPc = hid.filter((t) => GATED.some((s) => READS.some((rd) => pcAt(t, 'twin', `${rd}|${s}`))));
+console.log(`  any gated setting: towns ${anyPc.length} (${[...new Set(anyPc.map((t) => t.size))].map((z) => `${z} ${anyPc.filter((t) => t.size === z).length}`).join(', ')})`);
+console.log('PART A (nothing hidden: no read serves a criminal house, so EVERY criminal power row would be withheld): births with a criminal power row on some page / rows (the most a page serves, summed) / governing, by size');
+for (const size of SIZES) { const bs = pa.filter((b) => b.size === size && Object.keys(b.pc || {}).length); const mx = bs.map((b) => Object.values(b.pc).map((v) => v.split('/').map(Number)).reduce((a, x) => (x[0] > a[0] ? x : a), [0, 0]));
+  const [r, g] = pcSum(mx); console.log(`  ${size}: ${bs.length} of ${pa.filter((b) => b.size === size).length} births; ${r} rows; ${g} governing`); }
+console.log(`the gate's 48 controls likewise: ${ctl.filter((t) => Object.keys(t.pc || {}).length).map((t) => `${t.seed} ${Object.values(t.pc)[0]}`).join('; ') || 'none'}`);
+
+// ── per town
+console.log('\nPER TOWN: per gated setting [' + GATED.join(' ') + '], twin, Reveal off | DM: "." passes, "1" fails GATE-1, "2" fails GATE-2 at its level, "b" both');
+const mark = (t, rd, set) => { const s = sigAt(t, 'twin', rd, set); const a = !s || g1Fail(t.size, rd, s).length; const b = LEVEL !== null && (!s || !jMember(LEVEL, t.size, rd, s)); return a && b ? 'b' : a ? '1' : b ? '2' : '.'; };
+for (const t of [...hid].sort((x, y) => x.seed.localeCompare(y.seed))) console.log(`  ${t.seed} (${t.size}) | ${GATED.map((s) => mark(t, 'off', s)).join('')} | ${GATED.map((s) => mark(t, 'dm', s)).join('')}`);
+const fails = hid.filter((t) => READS.some((rd) => GATED.some((set) => ['twin', 'server'].some((eng) => { const s = sigAt(t, eng, rd, set); return !s || g1Fail(t.size, rd, s).length || LEVEL === null || !jMember(LEVEL, t.size, rd, s); }))));
+const by = (f) => READS.map((rd) => `${rd} ${hid.filter((t) => f(t, rd)).length}`).join(', ');
+console.log(`\nTODAY: GATE-1 own (${by((t, rd) => ['twin', 'server'].some((e) => g1([t], e, rd, 'own').length))}); off (${by((t, rd) => ['twin', 'server'].some((e) => g1([t], e, rd, 'off').length))}); mixed (${by((t, rd) => MIXED.some((s) => ['twin', 'server'].some((e) => g1([t], e, rd, s).length)))})`);
+if (LEVEL !== null) console.log(`TODAY: GATE-2 L${LEVEL} own (${by((t, rd) => ['twin', 'server'].some((e) => g2(LEVEL, [t], e, rd, 'own').length))}); off (${by((t, rd) => ['twin', 'server'].some((e) => g2(LEVEL, [t], e, rd, 'off').length))}); mixed (${by((t, rd) => MIXED.some((s) => ['twin', 'server'].some((e) => g2(LEVEL, [t], e, rd, s).length)))})`);
+console.log(`GATE: ${fails.length} of ${hid.length} hidden-house towns fail a gated read (GATE-1 or GATE-2${LEVEL === null ? ', uncalibrated' : ''}, twin or server) -> ${fails.length ? 'RED (exit 1)' : 'GREEN (exit 0)'}`);
+process.exit(fails.length ? 1 : 0);

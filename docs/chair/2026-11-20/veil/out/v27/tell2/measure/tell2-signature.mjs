@@ -7,8 +7,8 @@
 // power is criminal by what the page itself says of it (tell-surface.mjs :: namesOf over the page: a house criminal by its
 // category / priorityCategory or hideable by cardVeil.js :: isHideableHouse; a power criminal by its category). Its parts:
 //
-//   f  FIELDS: each field of the criminal surface present ('p'), absent ('a') or empty ('e': [], {}, '', null). AN EMPTY
-//      LIST AND AN ABSENT FIELD DIFFER. The fields are FIELDS below: every path R3-TELL's search found
+//   f  FIELDS: each field of the criminal surface present ('p'), absent ('a'), empty ('e': [], {}, '') or null ('n'). AN
+//      EMPTY LIST AND AN ABSENT FIELD DIFFER (t2sig-2: null is its own state; the drag sentence's empty form is null). The fields are FIELDS below: every path R3-TELL's search found
 //      (out/v27/tell/search/search-paths.txt) outside a list, tagged switch, house or key (not by a criminal word alone),
 //      plus the family lists' own containers.
 //   k  ROW KEYS of the criminal rows a reader can see whole (criminal services, criminal powers): per key the set of its
@@ -23,12 +23,17 @@
 //                      or a name not on the served roster);
 //      x.sharesOff     the served income shares do not sum to their whole (|sum of percentage - 100| > 0.5; rows with no
 //                      numeric percentage make it '?').
+//      x.dragMarket    (ruling 58 3 (a), the FIFTH bit) the drag sentence's state against the SERVED market:
+//                      '<drag>:<market>', drag = a (absent) / n (null) / e ('') / siege / stalls (the market line) / backrooms
+//                      (the no-market line) / low (the two lesser lines) / other; market = 1 where market.js ::
+//                      hasMarketInstitution holds on the SERVED houses, else 0. A stalls line beside no served market, or an
+//                      empty line where no-market places print one, is a value the controls decide.
 //
 // sig is the canonical JSON of { f, k, r, x } (keys sorted): two pages share a signature iff every part is equal.
 import { isRec } from '../../tell/measure/tell-common.mjs';
 import { makeSurface, namesOf } from '../../tell/measure/tell-surface.mjs';
 
-export const SIG_VERSION = 't2sig-1';
+export const SIG_VERSION = 't2sig-2';
 
 /** The criminal surface's fields outside any list (search-paths.txt, tagged switch / house / key), and the lists' containers. */
 export const FIELDS = Object.freeze([
@@ -75,7 +80,7 @@ export const FIELDS = Object.freeze([
 
 /** The path's segments: a block site ('defense:criminal') is one segment; '.' separates. */
 const at = (d, path) => path.split('.').reduce((v, k) => (isRec(v) ? v[k] : undefined), d);
-const state = (v) => (v === undefined ? 'a' : (v === null || v === '' || (Array.isArray(v) && !v.length) || (isRec(v) && !Object.keys(v).length)) ? 'e' : 'p');
+const state = (v) => (v === undefined ? 'a' : v === null ? 'n' : (v === '' || (Array.isArray(v) && !v.length) || (isRec(v) && !Object.keys(v).length)) ? 'e' : 'p');
 const bucket = (n) => (n === 0 ? '0' : n === 1 ? '1' : 'n');
 const recs = (v) => (Array.isArray(v) ? v.filter(isRec) : []);
 const canon = (v) => (Array.isArray(v) ? v.map(canon) : isRec(v) ? Object.fromEntries(Object.keys(v).sort().map((k) => [k, canon(v[k])])) : v);
@@ -83,6 +88,13 @@ const canon = (v) => (Array.isArray(v) ? v.map(canon) : isRec(v) ? Object.fromEn
 const isPresenceItem = (x) => x.startsWith('#') || x.startsWith('criminalCaptureState:');
 
 const surfaceC = makeSurface(() => ({}));
+
+/** The drag sentence's kind (safetyProfile.js's four lines, by their words). */
+function dragKind(v) {
+  if (v === undefined) return 'a'; if (v === null) return 'n'; if (v === '') return 'e'; if (typeof v !== 'string') return 'other';
+  if (/siege/i.test(v)) return 'siege'; if (/stalls/.test(v)) return 'stalls'; if (/back rooms/.test(v)) return 'backrooms';
+  if (/without a licence|between neighbours/.test(v)) return 'low'; return 'other';
+}
 
 /** Per key, the sorted set of its states (p / e / a) over the rows. */
 function rowKeys(rows) {
@@ -96,9 +108,10 @@ function rowKeys(rows) {
  * THE SIGNATURE (ruling 54 (a)) of a served page.
  * @param {unknown} page the served document (a non-owner read's `data`)
  * @param {(h: unknown) => boolean} isHideableHouse cardVeil.js :: isHideableHouse, of the tree under test
+ * @param {(houses: unknown[]) => boolean} hasMarketInstitution market.js :: hasMarketInstitution, of the tree under test
  * @returns {{ sig: string, parts: { f: Record<string,string>, k: Record<string,Record<string,string>>, r: Record<string,string>, x: Record<string,string> } }}
  */
-export function signatureOf(page, isHideableHouse) {
+export function signatureOf(page, isHideableHouse, hasMarketInstitution) {
   const d = isRec(page) ? page : {};
   const names = namesOf(isHideableHouse, d);
   const s = surfaceC(d, names);
@@ -122,6 +135,7 @@ export function signatureOf(page, isHideableHouse) {
     typesNoHouse: Array.isArray(types) && types.length && !crimHouses.length ? '1' : '0',
     svcNoHouse: svc.some((row) => typeof row.institution !== 'string' || !servedHouses.has(row.institution)) ? '1' : '0',
     sharesOff,
+    dragMarket: `${dragKind(at(d, 'economicState.safetyProfile.economicDragDesc'))}:${hasMarketInstitution(recs(d.institutions)) ? 1 : 0}`,
   };
   const parts = canon({ f, k, r, x });
   return { sig: JSON.stringify(parts), parts };

@@ -1,5 +1,73 @@
 # R3-TELL-2 HAND-BACK, UNIT 1 ONLY: THE INSTRUMENT (VEIL-27's builder; worktree `/home/user/wt/r3tell2`, branch `v27-r3tell2`, on 5f45144ae)
 
+# PART II: THE INSTRUMENT UNDER RULING 58 (the chair, 18:21; resumed by the seat's message). INSTRUMENT ONLY.
+
+No line of 212 or the twin. ONE COMMAND, unchanged in form: `sh measure/tell2.sh <worktree> <outdir> t2_tpl [pooldir]`, now
+default pool `/var/tmp/v18/t2/pool-t2sig-2` (parts A and B, cached; `measure/pool.sh`), the two gates (`measure/tell2-an.mjs`,
+rewritten; ruling 54's analyzer that wrote run1 is at 580a5c9dd). Today: `run2/tell2-table.txt`, EXIT 1 (RED).
+
+## STOPS (ruling 58)
+1. **STOP (Fisher, 2 (REPORTED)): the full fine signature separates hidden from controls far beyond sampling at every gated
+   setting:** own 92/92 vs 16/48 (Reveal off, p 5.8e-20) and 92/92 vs 26/48 (DM, p 1.1e-12); off 89/92 vs 6/48 (p 1.4e-25)
+   and 89/92 vs 9/48 (p 2.1e-22); every mixed setting p < 1e-14. THE SEPARATING PARTS are GATE-1's list (below), led by the
+   drag key.
+2. **STOP: GATE-2 IS UNCALIBRATED AT EVERY LEVEL** (controls must be 0 of 48 at every gated setting): L1 (counts
+   none/one/several + five bits) 5/48; L2 (none/some + bits) 2/48; L3 (none/some alone, no bits) 1/48. The controls failing,
+   NAMED: at L3 `r3m-town-infiltrated-1-92` alone (8 reads: conditions 1, criminal income 1, crime types 1, operations 1,
+   criminal services several, other criminal services several: a combination seen in fewer than two of 452 town births); at
+   L2 also `r3m-town-infiltrated-1-82` (a town showing a criminal power); at L1 also `r3m-town-indebted-1-96`,
+   `r3m-town-politically_fractured-1-100`, `r3m-town-wartime-1-89`. All five are TOWNS. The gate needs a coarser joint
+   signature, a larger town pool, or the chair's word; I did not invent a fourth level.
+3. **STOP (ruling 58 3 (c), "if it passes a handful at town and village, tell me"): IT DOES.** On nothing-hidden pages (part
+   A, no read serves a criminal house) the rule withholds EVERY criminal power row: town 29 of 300 births (31 rows, 23 of them
+   GOVERNING), village 4 of 300 (4 rows, 0 governing); city and metropolis 0 of 300. The gate's controls: 1
+   (`r3m-town-infiltrated-1-82`, its governing power). On the 92's gated reads: 11 towns (town 4, city 6, metropolis 1), 11
+   rows, ALL 11 GOVERNING, twin and server alike (own and off, both reads; the same 11 towns at every gated setting): §3 (c) "tier-free" withholds rows VR42 (ruling 11)
+   keeps ("the GOVERNING power's row is never removed while the government's name stays"). The two rules conflict on all 11;
+   the chair decides which governs.
+4. **allOpen is not a read that hides nothing in this instrument:** tell-common.mjs's allOpen re-hides every house ("Show
+   everything criminal", then each house card back to hidden whole), so it hides houses the town holds. Exempt as ruled;
+   reported in every table (Gate-1 88/88, the same as own). The setting that hides nothing is part B's `allShown`.
+5. **THE DRAG'S EMPTY FORM IS null, NOT ''** (ruling 58 3 (a) says '' "here"): the generator writes `null` where the
+   black-market share is low; of 1,200 + 608 pool births none shows `''`. Served as null, 86 of 86 drag-absent towns pass both
+   the field and the fifth bit (Reveal off, own); served as `''`, 0 of 86 pass. The empty form for the cure is `null`.
+
+## WHAT WAS BUILT
+- (1) PART B (`RV9_MODE=poolb`): 152 births a size that hold a hideable house (seeds `t2b-*`; tried village 2,336, town 424,
+  city 164, metropolis 154), each read under the settings that hide none of its houses: every house card shown, with own and
+  each g:<bits>, and `allShown` (the switch's "Show everything criminal", cards kept); Reveal off and on. 45.7 CPU-min, 11.9
+  min wall. PART A was RE-READ for the new signature (`RV9_MODE=reread`, the same 1,200 births, no rejection): 90.7 CPU-min,
+  23.4 min wall (the box shared). Server sample of part A (120 births): 0 signatures differ. Cache check (`verify.sh`, every
+  40th of A and B, 45 births): 0 differ.
+- THE SIGNATURE `t2sig-2`: null is its own field state (`'n'`); THE FIFTH BIT `x.dragMarket` = the drag sentence's kind
+  (absent / null / '' / siege / stalls / backrooms / low / other) against the SERVED market (`market.js ::
+  hasMarketInstitution` over the served houses).
+- (2) MEMBERSHIP as §1: the universe U is part A's pages (every setting) and part B's (settings hiding nothing held), by
+  distinct birth, same size and Reveal. GATED: own, the seven g:<bits>, off; allOpen exempt (STOP 4).
+- (3) GATE-1, every part (87 fields, 25 families, each row-key state, five bits; a missing part reads '-') seen in at least two
+  births of U. CONTROLS 0 of 48 at every gated setting, both reads: no part to name.
+- (4) GATE-2 at three levels, calibrated by the controls: none calibrates (STOP 2).
+- (5) R4's parts (roles, trace, ties, goals, memberships, cast) dropped from both gates and LISTED RED: with part B in U, one
+  town (`r3m-city-under_siege-1-108`, a single criminal-worded person, Reveal off, own and off and mixed); 0 under DM.
+- (6) the reported fine signature with Fisher's p (STOP 1). (7) the counts below and §3 (c)'s (STOP 3).
+
+## TODAY (run2; twin / server equal in every cell)
+
+| gate | own, Reveal off / DM | off, Reveal off / DM | mixed (each g:<bits>), off / DM | controls (of 48) |
+|---|---|---|---|---|
+| GATE-1 (R4 dropped) | 88 / 88 | 88 / 88 | 88 / 88 | 0 |
+| GATE-2 L3, coarsest, uncalibrated | 36 / 46 | 9 / 9 | 9-36 / 9-36 | 1 |
+| full fine (reported) | 92 / 92 | 89 / 89 | 89-92 / 89-92 | 16 / 26 (own), 6 / 9 (off) |
+| R4's parts (listed red) | 1 / 0 | 1 / 0 | 1 / 0 | - |
+
+GATE-1 passes 4 towns only: `r3m-city-none-0-41`, `r3m-town-insurgency-1-94`, `r3m-town-under_siege-1-88`,
+`r3m-village-politically_fractured-0-10`. Its failing parts (towns, both reads): the drag key ABSENT 86 and the fifth bit
+`a:1` 86 (the same towns); a criminal power with no house 7 (cities and metropolises); a criminal services row without its
+`institution` key 5 (R3-CURE-8's parity towns); a criminal power's `modifier` present 2; `safetyDesc` absent 2; criminal
+imports several 1; `currentTensions` empty 1.
+
+---
+
 No line of 212 or the twin was written (R3-CURE-8 owns the twin). 211 `eface6d0…0b01`, 212 `6260803d…0218`: unchanged.
 Units 2-5 wait for the seat's word and the base it names.
 
