@@ -95,6 +95,31 @@ as anon by `get_gallery_dossier` and the party link (`get_unlisted_dossier`), pa
 `sanitizeDossier`, then `isVeiled(…, { publicDossier: true })`: the new shape 320 reads, master's shape (xp212) 320
 reads: 0 shut read open, 0 open read shut.
 
+## 3b. Read (2): the cold read of "B/C/D", 427ea0bed (executed 02:35–03:00 UTC). HOLDS; two FINAL items.
+
+THE DIFF, 212's hunks line by line (the twin, `gallerySecondHomes.js`, by its rule names): (31) the trace by positive
+account wherever any house leaves whole, an allegiance receipt only where its house is accounted for, an unsure entry
+leaves; (31b) every served `ts` renumbered dense in served order on every read the veil runs; (32) all of
+`getInstFlags`' booleans from one literal table carried by both engines, a true flag kept only where a listed house
+raises it, a flag outside the table read false, never false to true; (33) the criminal income row withheld where either
+grouping is shut OR a criminal house is removed whole, the remaining shares re-derived to exactly 100 by largest
+remainder from `weight` (legacy rows: from the stored percentages), `incomeMix` and `criminalLine` leave with it, and
+`weight` stripped on every non-owner read, the unmarked share's gallery read and import included.
+
+RED AND GREEN, RE-RUN BY ME: `tests/security/galleryVeilHandRows.pglite.test.js` on a scratch tree at 025db2dae: 4 failed
+(B, B2, C, D), 21 passed; at 427ea0bed: 25 of 25.
+
+MY ATTACK on D (`dlattice.probe.jsx`): can the re-derived integers still pin the withheld share by their rounding? Born
+towns with the default veil on chains rebuilt from 427ea0bed (`xb212`, `xpb212`), the gallery read and the party link:
+the served shares sum to 100 in every town on both shapes (they summed below 100 in 50 of 86 at 025db2dae), `weight` is
+served in none. Master's born rows carry `weight` too, so the legacy branch was forced by stripping it before storing:
+still 100 everywhere; and since p = q is itself a solution, P = 100 is always among the visitor's candidates (9 to 31
+candidate sums per town): nothing is pinned.
+
+FINAL ITEMS: (1) the faction `power` shares still sum below 100 where a faction leaves (4 of 86, control 1 of 50, at
+025db2dae): `power.share`'s recompose is not in D. (2) `weight` on the campaign map's member and its import: that read is
+unmarked until VEIL-DOORS's VR23 default veil lands.
+
 ## 4. THE RAW MEASURES, BOTH SHAPES, AT THIS TIP (`splitp.probe.jsx` on the new shape, 45 towns; `splitm` on master): every
 gallery read serves `economicState.compound.criminalEffective` (e.g. 82.84), `compound.militaryEffective` and
 `safetyProfile.safetyRatio` (45 of 45 new; 86 of 86 and 50 of 50 master), and `activeConditions[].severity` (32 of 45;
