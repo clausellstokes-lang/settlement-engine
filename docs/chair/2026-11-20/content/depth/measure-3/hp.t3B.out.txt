@@ -1,0 +1,34 @@
+pools: government 46, military 24, religious 28, economy 54, criminal 34, magic 16, other 120, small_settlement 18
+
+town: own hook PAIR share 9.8% over 2450 pairs; hooks/town 23.9
+  other            draws/town  11.58  share of repeats  55.2%  repeat rate of its draws  11.2%
+  economy          draws/town   4.68  share of repeats  20.4%  repeat rate of its draws  10.3%
+  government       draws/town   3.06  share of repeats   9.6%  repeat rate of its draws   7.4%
+  religious        draws/town   1.56  share of repeats   8.0%  repeat rate of its draws  12.1%
+  military         draws/town   1.52  share of repeats   4.5%  repeat rate of its draws   6.9%
+  criminal         draws/town   1.22  share of repeats   2.2%  repeat rate of its draws   4.2%
+  magic            draws/town   0.26  share of repeats   0.1%  repeat rate of its draws   0.6%
+  unmatched        draws/town   0.04  share of repeats   0.0%  repeat rate of its draws   2.0%
+  top pool/theme repeat cells: economy/scarcity_pressure 7.0% · other/crime_ring 6.8% · other/secret_identity 6.3% · other/looming_threat 5.9% · other/blackmail 5.4% · other/vanished_person 5.0% · other/outsider_suspicion 4.2% · other/forbidden_knowledge 4.1% · economy/smuggling 3.2% · religious/succession 3.2% · other/divided_loyalty 3.1% · other/ambition 2.8%
+
+city: own hook PAIR share 20.1% over 2450 pairs; hooks/town 60.0
+  other            draws/town  25.74  share of repeats  46.7%  repeat rate of its draws  21.8%
+  economy          draws/town  10.46  share of repeats  17.7%  repeat rate of its draws  20.3%
+  criminal         draws/town   6.76  share of repeats  10.5%  repeat rate of its draws  18.6%
+  government       draws/town   7.82  share of repeats   9.9%  repeat rate of its draws  15.2%
+  religious        draws/town   2.60  share of repeats   6.6%  repeat rate of its draws  30.5%
+  military         draws/town   4.14  share of repeats   5.6%  repeat rate of its draws  16.2%
+  magic            draws/town   2.30  share of repeats   2.7%  repeat rate of its draws  14.2%
+  unmatched        draws/town   0.22  share of repeats   0.2%  repeat rate of its draws  13.4%
+  top pool/theme repeat cells: other/old_wound 5.6% · other/looming_threat 5.3% · other/forbidden_knowledge 4.8% · other/hidden_debt 4.8% · other/secret_identity 4.3% · other/outsider_suspicion 4.3% · other/blackmail 3.2% · religious/forbidden_love 3.2% · economy/scarcity_pressure 2.9% · other/betrayal 2.9% · other/vanished_person 2.8% · economy/crime_ring 2.6%
+
+metropolis: own hook PAIR share 27.9% over 2450 pairs; hooks/town 83.8
+  other            draws/town  35.28  share of repeats  43.8%  repeat rate of its draws  29.0%
+  economy          draws/town  14.92  share of repeats  18.2%  repeat rate of its draws  28.5%
+  government       draws/town  13.44  share of repeats  16.6%  repeat rate of its draws  28.9%
+  criminal         draws/town   8.04  share of repeats   7.8%  repeat rate of its draws  22.6%
+  religious        draws/town   4.00  share of repeats   7.2%  repeat rate of its draws  41.9%
+  military         draws/town   4.34  share of repeats   3.2%  repeat rate of its draws  17.4%
+  magic            draws/town   3.44  share of repeats   3.0%  repeat rate of its draws  20.7%
+  unmatched        draws/town   0.38  share of repeats   0.3%  repeat rate of its draws  15.7%
+  top pool/theme repeat cells: other/hidden_debt 5.5% · other/outsider_suspicion 5.2% · other/old_wound 4.9% · other/secret_identity 4.4% · other/forbidden_knowledge 3.8% · religious/succession 3.5% · other/rivalry 3.2% · other/betrayal 3.0% · economy/hidden_debt 3.0% · economy/smuggling 3.0% · other/looming_threat 2.9% · religious/forbidden_love 2.8%

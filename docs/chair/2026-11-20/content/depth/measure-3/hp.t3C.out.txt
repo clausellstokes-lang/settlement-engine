@@ -1,0 +1,97 @@
+pools: government 44, military 24, religious 28, economy 54, criminal 26, magic 16, other 110, small_settlement 18
+
+town: own hook PAIR share 11.3% over 2450 pairs; hooks/town 23.9
+  other            draws/town  11.56  share of repeats  61.6%  repeat rate of its draws  14.4%
+  economy          draws/town   4.68  share of repeats  19.2%  repeat rate of its draws  11.1%
+  government       draws/town   3.06  share of repeats   7.7%  repeat rate of its draws   6.7%
+  military         draws/town   1.56  share of repeats   4.8%  repeat rate of its draws   8.3%
+  religious        draws/town   1.50  share of repeats   4.2%  repeat rate of its draws   7.5%
+  criminal         draws/town   1.22  share of repeats   2.3%  repeat rate of its draws   5.1%
+  unmatched        draws/town   0.08  share of repeats   0.2%  repeat rate of its draws   6.1%
+  magic            draws/town   0.26  share of repeats   0.1%  repeat rate of its draws   0.6%
+  CELLS (pool/theme · lines · draws/town · draws per line · share of repeats):
+    other/blackmail                    2   0.80   0.40  11.6%
+    other/crime_ring                   1   0.48   0.48   8.4%
+    other/secret_identity              8   1.20   0.15   6.7%
+    economy/crime_ring                 1   0.38   0.38   5.2%
+    other/vanished_person              7   1.00   0.14   5.1%
+    other/outsider_suspicion          10   1.06   0.11   4.2%
+    other/old_wound                   13   1.14   0.09   4.0%
+    economy/scarcity_pressure          7   0.88   0.13   3.9%
+    other/looming_threat               7   0.82   0.12   3.8%
+    other/divided_loyalty             10   0.96   0.10   3.6%
+    economy/smuggling                  6   0.60   0.10   3.1%
+    other/forbidden_knowledge          9   0.88   0.10   2.9%
+    other/smuggling                    2   0.38   0.19   2.5%
+    other/corruption                   1   0.26   0.26   2.4%
+    other/hidden_debt                 15   0.90   0.06   2.0%
+    religious/faith_crisis             8   0.60   0.07   1.9%
+    economy/rivalry                   10   0.72   0.07   1.9%
+    other/betrayal                     9   0.62   0.07   1.8%
+    other/ambition                     7   0.56   0.08   1.5%
+    economy/corruption                 4   0.42   0.10   1.4%
+  top pool/theme repeat cells: other/blackmail 11.6% · other/crime_ring 8.4% · other/secret_identity 6.7% · economy/crime_ring 5.2% · other/vanished_person 5.1% · other/outsider_suspicion 4.2% · other/old_wound 4.0% · economy/scarcity_pressure 3.9% · other/looming_threat 3.8% · other/divided_loyalty 3.6% · economy/smuggling 3.1% · other/forbidden_knowledge 2.9%
+
+city: own hook PAIR share 21.0% over 2450 pairs; hooks/town 60.0
+  other            draws/town  25.76  share of repeats  47.8%  repeat rate of its draws  23.4%
+  economy          draws/town  10.46  share of repeats  19.3%  repeat rate of its draws  23.2%
+  criminal         draws/town   6.72  share of repeats  12.6%  repeat rate of its draws  23.7%
+  government       draws/town   7.80  share of repeats   9.4%  repeat rate of its draws  15.2%
+  military         draws/town   4.12  share of repeats   5.2%  repeat rate of its draws  16.0%
+  religious        draws/town   2.60  share of repeats   2.7%  repeat rate of its draws  12.9%
+  magic            draws/town   2.30  share of repeats   2.6%  repeat rate of its draws  14.1%
+  unmatched        draws/town   0.28  share of repeats   0.3%  repeat rate of its draws  13.1%
+  CELLS (pool/theme · lines · draws/town · draws per line · share of repeats):
+    economy/crime_ring                 1   0.88   0.88   6.1%
+    other/secret_identity              8   2.28   0.28   5.2%
+    other/hidden_debt                 15   3.04   0.20   4.9%
+    other/old_wound                   13   2.84   0.22   4.6%
+    other/outsider_suspicion          10   2.38   0.24   4.2%
+    other/betrayal                     9   2.26   0.25   4.2%
+    other/looming_threat               7   1.90   0.27   4.0%
+    other/forbidden_knowledge          9   2.04   0.23   3.6%
+    other/divided_loyalty             10   2.00   0.20   3.1%
+    other/blackmail                    2   0.88   0.44   3.0%
+    other/rivalry                      9   1.88   0.21   3.0%
+    criminal/betrayal                  6   1.50   0.25   2.9%
+    other/vanished_person              7   1.54   0.22   2.6%
+    other/ambition                     7   1.50   0.21   2.6%
+    economy/scarcity_pressure          7   1.60   0.23   2.4%
+    economy/rivalry                   10   1.72   0.17   2.2%
+    economy/corruption                 4   1.08   0.27   2.1%
+    other/smuggling                    2   0.70   0.35   1.9%
+    economy/smuggling                  6   1.16   0.19   1.9%
+    economy/hidden_debt               13   1.76   0.14   1.8%
+  top pool/theme repeat cells: economy/crime_ring 6.1% · other/secret_identity 5.2% · other/hidden_debt 4.9% · other/old_wound 4.6% · other/outsider_suspicion 4.2% · other/betrayal 4.2% · other/looming_threat 4.0% · other/forbidden_knowledge 3.6% · other/divided_loyalty 3.1% · other/blackmail 3.0% · other/rivalry 3.0% · criminal/betrayal 2.9%
+
+metropolis: own hook PAIR share 29.0% over 2450 pairs; hooks/town 83.8
+  other            draws/town  35.38  share of repeats  45.7%  repeat rate of its draws  31.4%
+  economy          draws/town  14.86  share of repeats  19.2%  repeat rate of its draws  31.3%
+  government       draws/town  13.38  share of repeats  16.3%  repeat rate of its draws  29.7%
+  criminal         draws/town   7.88  share of repeats   9.4%  repeat rate of its draws  28.9%
+  military         draws/town   4.34  share of repeats   3.1%  repeat rate of its draws  17.4%
+  religious        draws/town   4.00  share of repeats   3.1%  repeat rate of its draws  18.8%
+  magic            draws/town   3.44  share of repeats   2.9%  repeat rate of its draws  20.7%
+  unmatched        draws/town   0.56  share of repeats   0.3%  repeat rate of its draws  14.3%
+  CELLS (pool/theme · lines · draws/town · draws per line · share of repeats):
+    other/old_wound                   13   4.32   0.33   5.7%
+    other/hidden_debt                 15   4.26   0.28   4.9%
+    other/forbidden_knowledge          9   3.18   0.35   4.6%
+    other/divided_loyalty             10   3.22   0.32   4.1%
+    other/looming_threat               7   2.68   0.38   4.0%
+    economy/crime_ring                 1   0.98   0.98   3.9%
+    other/outsider_suspicion          10   3.04   0.30   3.6%
+    other/secret_identity              8   2.66   0.33   3.6%
+    other/betrayal                     9   2.76   0.31   3.4%
+    other/vanished_person              7   2.28   0.33   2.9%
+    other/rivalry                      9   2.56   0.28   2.8%
+    other/ambition                     7   2.18   0.31   2.6%
+    economy/hidden_debt               13   2.86   0.22   2.5%
+    government/divided_loyalty         6   1.94   0.32   2.5%
+    economy/betrayal                   7   1.92   0.27   2.4%
+    economy/scarcity_pressure          7   2.04   0.29   2.4%
+    government/old_wound               6   1.80   0.30   2.2%
+    economy/rivalry                   10   2.32   0.23   2.1%
+    criminal/betrayal                  6   1.78   0.30   2.1%
+    economy/ambition                   6   1.72   0.29   2.0%
+  top pool/theme repeat cells: other/old_wound 5.7% · other/hidden_debt 4.9% · other/forbidden_knowledge 4.6% · other/divided_loyalty 4.1% · other/looming_threat 4.0% · economy/crime_ring 3.9% · other/outsider_suspicion 3.6% · other/secret_identity 3.6% · other/betrayal 3.4% · other/vanished_person 2.9% · other/rivalry 2.8% · other/ambition 2.6%
