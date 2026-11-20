@@ -76,6 +76,44 @@ export function withPowerSentenceNames(text) {
   return out;
 }
 
+/**
+ * Whether a power's name reads as plural ("Religious Authorities", "Noble Houses"): its head noun, the last word of its
+ * prose form ("Third Bloc (Neutrals)" reads "The Neutrals"), ends in a single s ("Guild", "Gentry", "Circle" do not). The
+ * body of `domain/display/pluralPowerName.js :: pluralPowerName`, moved here verbatim (NAMES-2, item 5, the seventh
+ * chair's word of 2026-11-20) so a data-layer composer (`dmPowerLines.js`) reads it without a data -> engine-core edge;
+ * that home keeps its name and returns this.
+ * @param {unknown} name @returns {boolean}
+ */
+export function pluralPowerName(name) {
+  const raw = typeof name === 'string' ? name.trim() : '';
+  const words = (raw ? powerSentenceName(raw) : '').split(/[\s/]+/).filter(Boolean);
+  const head = (words[words.length - 1] || '').replace(/[^A-Za-z']/g, '');
+  return /[^s']s$/i.test(head);
+}
+
+/**
+ * A POWER'S VERB TAKES ITS NUMBER (NAMES-2, item 5): "the Merchant Guilds want", "the Elder Council wants". The template
+ * hands both forms; the name chooses. @param {unknown} name @param {string} one @param {string} many @returns {string}
+ */
+export function powerVerb(name, one, many) {
+  return pluralPowerName(name) ? many : one;
+}
+
+/**
+ * The same, for a composed sentence whose template text is held byte-identical (a banked or held-keyed literal): the verb
+ * that directly follows this power's article form ("the Merchant Guilds controls") takes the power's number. Only that
+ * power, only that verb, only where it follows the name; a singular power's text is returned as it is.
+ * @param {unknown} text @param {unknown} name @param {string} one @param {string} many @returns {string}
+ */
+export function withPowerVerb(text, name, one, many) {
+  const said = String(text ?? '');
+  if (!pluralPowerName(name)) return said;
+  const body = powerNameAfterArticle(name);
+  if (!body) return said;
+  const esc = (/** @type {string} */ v) => v.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return said.replace(new RegExp(`(\\b[Tt]he ${esc(body)}) ${esc(one)}\\b`, 'g'), `$1 ${many}`);
+}
+
 /** @param {unknown} name @returns {string} the sentence name with its possessive */
 export function powerPossessive(name) {
   const said = powerSentenceName(name);
