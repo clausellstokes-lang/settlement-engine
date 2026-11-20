@@ -16,7 +16,7 @@ import { pick, random01, randInt } from './helpers.js';
 import { random as _rng, getActiveRng } from '../kernel/rngContext.js';
 
 import { genArrivalDetail } from './narrativeGenerator.js';
-import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES, historyDescription, historyDescVariantsOf, tensionDescription, HISTORY_QUARTER_WORDS, HISTORY_DESC_SIBLINGS, tensionHeldByTimeline, placedTensionTokens, legitimacyHeldTensions, livelihoodLead, sizedResourceEvent } from '../data/historyData.js';
+import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES, historyDescription, historyDescVariantsOf, tensionWording, HISTORY_QUARTER_WORDS, HISTORY_DESC_SIBLINGS, tensionHeldByTimeline, placedTensionTokens, legitimacyHeldTensions, livelihoodLead, sizedResourceEvent } from '../data/historyData.js';
 import { resolveGenerationWorldLaw } from './generationContext.js'; import { defenseFactsOf } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3b): one line, so no cited line moves
 import {
   STRESS_TO_TENSION,
@@ -583,7 +583,7 @@ const buildHistoricalEvent = (
     .map((tmpl) => tensionByMemory(tmpl, timeline)).map(({ descriptionByDirection, ...tension }) => ({ // #20: the direction table is the template's, never the record's; URBAN-FIX D-1: so is the memory table
       ...tension,
       description: apartFromOwnEvent(renderHistoryTemplate(
-        substituteNames(sizedHistoryText(tensionDescription({ ...tension, descriptionByDirection }, config), hookFacts)), // #20: the migration's own direction; W2-FIX-DATA-5 (#331): its small-place twin
+        substituteNames(sizedHistoryText(tensionWording({ ...tension, descriptionByDirection }, config), hookFacts)), // #20: the migration's own direction; PAGE-2 T1: or a spare; W2-FIX-DATA-5 (#331): its small-place twin
         placedTensionTokens(tensionTokens, tension.type, timeline), // BAR4-HISTORY T1 (C24951): ONE EVENT, ONE PLACE (historyData.js); COHERENCE-PRESUME: never its own past event's sentence, word for word (apartFromOwnEvent)
       ), tension.type, timeline, (text) => renderHistoryTemplate(substituteNames(sizedHistoryText(text, hookFacts)), placedTensionTokens(tensionTokens, tension.type, timeline))),
       factions: (tension.factions || []).map(substituteNames),
