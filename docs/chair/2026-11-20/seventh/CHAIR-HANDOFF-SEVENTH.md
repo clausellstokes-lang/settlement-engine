@@ -1779,6 +1779,51 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   tranche is THE 380 (floor 129 if the close arrives first); the cell counts pinned by `goalFamilies.test.js` move
   by its door (told to the owner); ONE build.
 
+- **THE CONTEST HAS NEVER BEEN MEASURED LIT (16:31 UTC, SEAT-5's answer; the chair's order at 16:34).** The one lit
+  reading is a unit test on hand-built fixtures (`seatContest.test.js` arm 7, a mock of `seatCircumstances.js`);
+  `u4/measure-u4.mjs` only reports the constant; its `--force-law` sets born-config keys and cannot reach a module
+  constant. THREE THINGS LIGHT IT: `_seatLawVersion` on the born config; the constant `SEAT_CONTEST_LIT` (the kind
+  read `contestKindOf` and the circumstance factors together); the figures of `SEAT_CIRCUMSTANCE_TUNING` (landed at 1,
+  the proposed figures beside them as DRAFT). The owner would sign the law, the dial AND the figures. RULED: NOTHING
+  IS PUT TO THE OWNER FOR A SIGNATURE THAT WAS NEVER MEASURED LIT. "MEASURE-LIT": SEAT-5's last unit, measure only,
+  on its own branch: one command, a scratch copy planted, three arms (dial dark; lit with the factors at 1; lit with
+  the proposed figures), both pools, EACH ARM AGAIN WITH THE FORTUNE LAW FORCED (the merge of the two tips); the
+  contender table per kind, the risk label by size, calm and crisis-born apart: "MEASURE-LIT <commit>". THE HAND-OVER
+  IS ORDERED NOW (SEAT-5 about 345,000 by its own figure): on "SEAT-PART <commit>, HANDED OVER" SEAT-6 gets the lane.
+  SEAT-6's THREE CURES FOR U5's BRIEF, APPROVED (found while reading in): the retired edge's narrative never joins
+  `TRANSFER_WORDINGS` as an 'edge' wording (one fixed wording in a class of its own; an arm, red first, that it
+  matches no 'edge' wording for any form: else R1 would read a loser as a taker or fall to the fail-closed
+  "nobody"); an added acceptance count (after U5 the fail-closed rule fires in 0 towns after every transfer, both
+  pools); the stale names. SEAT-6 re-made `measure-u4.mjs --force-law _seatLawVersion=2` identical but for the
+  seconds; forced births differ in 2 of 900 and 2 of 960, as U4's report records.
+- **WHAT THE RENDERED CENSUS FOUND THAT NOBODY HAD LISTED (16:36 UTC; SAME-1's `OFF-LIST.md` and `SAME-CENSUS.md` at
+  84ee38b63, `lane/same-1-2026-11-20`).** THE LARGEST CLASS IS THE PAGE'S STATE SENTENCES (the stored
+  `publicProse.blocks.*`, projected from `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md` by
+  `scripts/generate-dossier-state-prose.mjs`): a place in a given state prints that state's sentence, and for many
+  states a size has ONE: the Outlook's "A handful of things about this <size> cannot all be true at once…" in 100%
+  of the thorps, hamlets, villages and towns that print it (25 to 35 of 50); the Defense tab's no-wards line 83 to
+  100%; "…would struggle to hold against anything more than a handful of raiders…" in half of all thorps and
+  hamlets; "Everyone who comes through #'s gate is counted there by a soldier…" in every city and metropolis that
+  prints it; the Power desk, the Economics income lines and the Magic reliance lines 38 to 48%. ROUTED: A NEW SEAT,
+  PROSE-1 (`prompts/PROSE-1.txt`): the map of every pool where a size has one eligible variant; three more variants
+  each for the worst thirty, in the source document's own form, the lines to the chair, the generated files by
+  their door; if the PICK is the fault it stops for a ruling. ALSO FOUND: ONE SECRET IS ON NEARLY EVERY PLACE'S
+  CARDS ("Was present when # did something they've never accounted for publicly. Neither has acknowledged the other
+  was there.": 91% of towns, 93% of villages): to PAGE-6 (which pool; how many lines); the viability's and the
+  safety's own hooks ("The settlement grows less food than it eats, and a merchant has offered…" 48 to 60% where
+  held; "A smuggled load went missing…" 35% of cities): to PLACE-1. Left: the PDF's headline template, the sheet's
+  fact lines (facts). SECRETS ARE PRINTED IN ITS RENDER, so the DM's fields were on; why the card's "Constraint:"
+  line is not found is asked of SAME-1 and PEOPLE-1; no field is dropped on it until they answer.
+- **LINES READ AT 16:35 UTC.** DEPTH-2's `HOOKS-3B.md` (b19924371): the eleven rewritten hooks ALL APPROVED as leads;
+  the second tranche is complete (77 tie pairs, 36 hooks). PAGE-7's `TROUBLE-LINES-2.md` (5d2dfcfc3): 78 hooks for
+  the eight commonest troubles (today's 24 behind their needs; 54 new): ALL 54 APPROVED AS WRITTEN; measured top
+  share of one hook, today to new: thorp 16.7 to 10.7, hamlet 17.3 to 11.3, village 14.0 to 8.0, town 32.7 to 14.7,
+  city 52.7 to 19.3, metropolis 58.7 to 19.3; the share a second place repeats: city 24.4 to 8.1, metropolis 27.1
+  to 8.8; RULED: sixteen lines for crime_wave and guild_conflict (eight more to the chair, "TROUBLE-LINES-3"), three
+  kept a place; `toPublicSafe` drops `plotHooks` unless the owner lifts the veil himself (0 of 303 by default).
+  PEOPLE-1's proposals for the card's two lines (01351d72d: activeConstraint 46/35/39/70/94/87% to about 10 to 15%;
+  structuralPosition 17/14/37/61/70/68% to 5 to 15%) ARE NOT YET READ BY THE CHAIR.
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -4739,3 +4784,8 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   its next words: "the recent conflict was measured on what the page shows": it was measured on the STORED field;
   the page code that prints it was read and the rendered census confirms it (the Overview: the commonest sentence in
   24 of 33 thorps).
+- 16:36 UTC · SEVEN MESSAGES READ AT 16:32 AND RULED BY 16:36 (section 2). TRAD-4: UNIT 5 MERGED (lane tip cff266ef7; red 6 of 66
+  at its base; tests/lint 220 of 221, the census re-taken; confinement 1,245 identical; writer-reach by its
+  shrink-only door 1385 to 1368); units 8 (the import path and the round trip on 24 towns or more) and 6 (the
+  owner's thirty and twelve samples) out. `prompts/PROSE-1.txt` WRITTEN, seated after this push. A FOURTH STAMP FAULT
+  OF THE CHAIR: two messages stamped "16:33" when the clock read 16:30 to 16:32; told to the owner.
