@@ -1,0 +1,1011 @@
+{
+ "towns": [
+  {
+   "seed": "town-infiltrated-0",
+   "hideable": [],
+   "control": null,
+   "reads": 0
+  },
+  {
+   "seed": "city-calm-1",
+   "hideable": [
+    "Multiple criminal factions",
+    "Black market",
+    "Front businesses"
+   ],
+   "control": [
+    "Furrier's district",
+    "Brothel (red light district)",
+    "Major annual fairs"
+   ],
+   "reads": 4
+  },
+  {
+   "seed": "metropolis-calm-2",
+   "hideable": [
+    "Multiple criminal factions"
+   ],
+   "control": [
+    "Furrier's district"
+   ],
+   "reads": 4
+  },
+  {
+   "seed": "city-insurgency-3",
+   "hideable": [
+    "Smuggling network",
+    "Rookery",
+    "Black market",
+    "Contract killer",
+    "Front businesses",
+    "Thieves' guild chapter"
+   ],
+   "control": [
+    "Furrier's district",
+    "Harbour master's office",
+    "Major annual fairs",
+    "Shipyard",
+    "Theaters",
+    "Merchant guilds (15-40)"
+   ],
+   "reads": 4
+  },
+  {
+   "seed": "town-calm-4",
+   "hideable": [
+    "Rookery"
+   ],
+   "control": [
+    "Shipyard"
+   ],
+   "reads": 4
+  },
+  {
+   "seed": "metropolis-indebted-5",
+   "hideable": [
+    "Whisper market",
+    "Contract killer"
+   ],
+   "control": [
+    "Furrier's district",
+    "Airship docking (high magic)"
+   ],
+   "reads": 4
+  },
+  {
+   "seed": "village-calm-6",
+   "hideable": [],
+   "control": null,
+   "reads": 0
+  },
+  {
+   "seed": "city-famine-7",
+   "hideable": [
+    "Smuggling network",
+    "Multiple criminal factions",
+    "Black market",
+    "Front businesses"
+   ],
+   "control": [
+    "Furrier's district",
+    "Barge and river transport company",
+    "Harbour master's office",
+    "Major annual fairs"
+   ],
+   "reads": 4
+  }
+ ],
+ "built": {
+  "a": [
+   "power.stability"
+  ],
+  "b": [
+   "conditions.severity",
+   "defence.readiness.score",
+   "defence.scores.disaster",
+   "defence.scores.economic",
+   "defence.scores.internal",
+   "defence.scores.magical",
+   "defence.scores.military",
+   "defence.scores.monster",
+   "defence.economicGates",
+   "compound.criminalEffective",
+   "compound.criminalPreStress",
+   "compound.economyOutput",
+   "compound.magicInfluence",
+   "compound.militaryEffective",
+   "compound.religionInfluence",
+   "safety.compound.criminalEffective",
+   "safety.compound.criminalPreStress",
+   "safety.compound.economyOutput",
+   "safety.compound.magicInfluence",
+   "safety.compound.militaryEffective",
+   "safety.compound.religionInfluence",
+   "food.storageMonths",
+   "food.storageNote",
+   "income.weight",
+   "economy.situationDesc",
+   "safety.blackMarketCapture",
+   "safety.flags.anyActive",
+   "safety.flags.arcaneBlackMarket",
+   "safety.flags.merchantArmy",
+   "safety.flags.religiousFraud",
+   "safety.flags.merchantCriminalBlur",
+   "safety.safetyRatio",
+   "history.timeline.anchored",
+   "history.timeline.year",
+   "history.event.anchored",
+   "history.legacy",
+   "history.siegeNarrative",
+   "npcs.memberships.veiled",
+   "npcs.stressNote",
+   "power.fingerprint",
+   "power.contestsNiche",
+   "power.rawPower",
+   "power.relation.ratio",
+   "legitimacy.breakdown",
+   "legitimacy.crimMultiplier",
+   "legitimacy.govMultiplier",
+   "legitimacy.flags",
+   "power.factions.legitimacyCrisis",
+   "prose.incomeWeight.alias",
+   "prose.shadowEconomy.alias",
+   "prose.prosperity.glance",
+   "prose.conditionSeverity.glance",
+   "spatial.quarters",
+   "cast.absent",
+   "cast.roles",
+   "cast.stakes"
+  ]
+ },
+ "perRow": {
+  "conditions.severity": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 40
+  },
+  "defence.readiness.score": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "defence.scores.disaster": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "defence.scores.economic": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "defence.scores.internal": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "defence.scores.magical": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "defence.scores.military": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "defence.scores.monster": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "defence.economicGates": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "compound.criminalEffective": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "compound.criminalPreStress": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "compound.economyOutput": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "compound.magicInfluence": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "compound.militaryEffective": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "compound.religionInfluence": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "safety.compound.criminalEffective": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "safety.compound.criminalPreStress": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "safety.compound.economyOutput": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "safety.compound.magicInfluence": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "safety.compound.militaryEffective": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "safety.compound.religionInfluence": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "food.storageMonths": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "food.storageNote": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "income.weight": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "economy.situationDesc": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "safety.blackMarketCapture": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "safety.flags.anyActive": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "safety.flags.arcaneBlackMarket": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "safety.flags.merchantArmy": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "safety.flags.religiousFraud": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "safety.flags.merchantCriminalBlur": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "safety.safetyRatio": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "history.timeline.anchored": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "history.timeline.year": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "history.event.anchored": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "history.legacy": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "history.siegeNarrative": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "npcs.memberships.veiled": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "npcs.stressNote": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 10
+  },
+  "power.fingerprint": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "power.contestsNiche": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 50
+  },
+  "power.rawPower": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "power.relation.ratio": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "legitimacy.breakdown": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "legitimacy.crimMultiplier": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "legitimacy.govMultiplier": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "legitimacy.flags": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "power.stability": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "power.factions.legitimacyCrisis": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 10
+  },
+  "prose.incomeWeight.alias": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "prose.shadowEconomy.alias": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "prose.prosperity.glance": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "prose.conditionSeverity.glance": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 40
+  },
+  "spatial.quarters": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 60
+  },
+  "cast.absent": {
+   "reads": 60,
+   "failing": 0,
+   "excused": 0,
+   "reached": 20
+  },
+  "cast.roles": {
+   "reads": 60,
+   "failing": 10,
+   "excused": 0,
+   "reached": 40
+  },
+  "cast.stakes": {
+   "reads": 60,
+   "failing": 10,
+   "excused": 20,
+   "reached": 40
+  }
+ },
+ "unreached": [],
+ "cannotYetJudge": {
+  "unbuilt": 54,
+  "rows": {
+   "compound.inst.flags": {
+    "rule": "recompose",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_second_homes",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "compound.inst.names": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_second_homes",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "economy.complexity": {
+    "rule": "recompose",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_roster_choices",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "income.criminalRow": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_apply",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "income.percentage": {
+    "rule": "recompose",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_apply",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 4
+   },
+   "income.desc": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_apply",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "safety.economicDragDesc": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_roster_choices",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "safety.guardEffectivenessDesc": {
+    "rule": "recompose",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_roster_choices",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 8
+   },
+   "safety.safetyDesc": {
+    "rule": "recompose",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_roster_choices",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 4
+   },
+   "safety.crimeTypes": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_roster_choices",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "safety.plotHooks": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_roster_choices",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "safety.criminalInstitutions": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_apply",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "history.tension.crimeWave": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_roster_choices",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 20
+   },
+   "history.event.crimeWave": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_roster_choices",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 4
+   },
+   "institutions.desc": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_roster_choices",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "ties.covertHandler": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_second_homes",
+    "reads": 24,
+    "reached": 12,
+    "wouldFail": 6
+   },
+   "trace.criminalAllegiance": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_second_homes",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 12
+   },
+   "power.entry": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_roster_choices",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 12
+   },
+   "power.desc": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 6
+   },
+   "power.share": {
+    "rule": "recompose",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_roster_choices",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 12
+   },
+   "power.label": {
+    "rule": "recompose",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 4
+   },
+   "power.relation.entry": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_roster_choices",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 2
+   },
+   "power.relation.dmNote": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 12,
+    "wouldFail": 0
+   },
+   "power.relation.direction": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_roster_choices",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 4
+   },
+   "power.recentConflict": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "prose.posture.posture": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "prose.posture.prize": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 12,
+    "wouldFail": 12
+   },
+   "prose.posture.terrain": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 8,
+    "wouldFail": 8
+   },
+   "prose.state.firstSurvey": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "prose.state.publicOrder.field": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "prose.state.publicOrder.rung.glance": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "prose.incomeWeight": {
+    "rule": "recompose",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_apply",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "prose.shadowEconomy": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 8
+   },
+   "prose.incomeMix": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "prose.prosperityHeader.detail": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "prose.legacyLines.a": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 4
+   },
+   "prose.legitimacyBanner": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "prose.legitimacyLens": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "prose.stabilityHeader": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "prose.structureFlag": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "prose.successionRisk": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 20,
+    "wouldFail": 20
+   },
+   "prose.templeFraud": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "prose.criminal": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_roster_choices",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "tile.stability": {
+    "rule": "recompose",
+    "when": "always",
+    "host": "public._gallery_veil_tile_columns",
+    "reads": 24,
+    "reached": 0,
+    "wouldFail": 0
+   },
+   "chronicle": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_chronicle",
+    "reads": 24,
+    "reached": 0,
+    "wouldFail": 0
+   },
+   "cast.roles.entry": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_holders",
+    "reads": 24,
+    "reached": 16,
+    "wouldFail": 8
+   },
+   "cast.levers.holder": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_holders",
+    "reads": 24,
+    "reached": 16,
+    "wouldFail": 4
+   },
+   "people.entry": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_holders",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "people.card": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_holders",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 12
+   },
+   "people.rosterCopy": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_holders",
+    "reads": 24,
+    "reached": 0,
+    "wouldFail": 0
+   },
+   "people.secret": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_holders",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "people.ties": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_holders",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "people.prominentRelationship": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_holders",
+    "reads": 24,
+    "reached": 16,
+    "wouldFail": 0
+   },
+   "people.pressureSentence": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_holders",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   }
+  }
+ },
+ "fails": [
+  "cast.roles @ city-insurgency-3 default server/gallery: stress.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
+  "cast.roles @ city-insurgency-3 default server/gallery: stressors.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
+  "cast.roles @ city-insurgency-3 default twin/gallery: stress.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
+  "cast.roles @ city-insurgency-3 default twin/gallery: stressors.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
+  "cast.roles @ city-insurgency-3 default server/link: stress.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
+  "cast.roles @ city-insurgency-3 default server/link: stressors.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
+  "cast.roles @ city-insurgency-3 shut server/gallery: stress.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
+  "cast.roles @ city-insurgency-3 shut server/gallery: stressors.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
+  "cast.roles @ city-insurgency-3 shut twin/gallery: stress.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
+  "cast.roles @ city-insurgency-3 shut twin/gallery: stressors.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
+  "cast.roles @ city-insurgency-3 shut server/link: stress.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
+  "cast.roles @ city-insurgency-3 shut server/link: stressors.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
+  "cast.roles @ city-insurgency-3 default +DM server/gallery: stress.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
+  "cast.roles @ city-insurgency-3 default +DM server/gallery: stressors.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
+  "cast.roles @ city-insurgency-3 default +DM twin/gallery: stress.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
+  "cast.roles @ city-insurgency-3 default +DM twin/gallery: stressors.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
+  "cast.roles @ city-insurgency-3 shut +DM server/gallery: stress.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
+  "cast.roles @ city-insurgency-3 shut +DM server/gallery: stressors.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
+  "cast.roles @ city-insurgency-3 shut +DM twin/gallery: stress.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
+  "cast.roles @ city-insurgency-3 shut +DM twin/gallery: stressors.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
+  "cast.stakes @ city-famine-7 default server/gallery: stress.cast.stakes[].stake: A=\"gains\" | counterfactual=\"split\"",
+  "cast.stakes @ city-famine-7 default server/gallery: stress.cast.stakes[].reason: A=\"crime gains from the disorder\" | counterfactual=\"it could side with either camp\"",
+  "cast.stakes @ city-famine-7 default server/gallery: stress.cast.stakes[].factionId: A=\"Thieves' Guild\" | counterfactual=\"Merchant Guilds\"",
+  "cast.stakes @ city-famine-7 default twin/gallery: stress.cast.stakes[].factionId: A=\"Thieves' Guild\" | counterfactual=\"Merchant Guilds\"",
+  "cast.stakes @ city-famine-7 default twin/gallery: stress.cast.stakes[].stake: A=\"gains\" | counterfactual=\"split\"",
+  "cast.stakes @ city-famine-7 default twin/gallery: stress.cast.stakes[].reason: A=\"crime gains from the disorder\" | counterfactual=\"it could side with either camp\"",
+  "cast.stakes @ city-famine-7 default server/link: stress.cast.stakes[].stake: A=\"gains\" | counterfactual=\"split\"",
+  "cast.stakes @ city-famine-7 default server/link: stress.cast.stakes[].reason: A=\"crime gains from the disorder\" | counterfactual=\"it could side with either camp\"",
+  "cast.stakes @ city-famine-7 default server/link: stress.cast.stakes[].factionId: A=\"Thieves' Guild\" | counterfactual=\"Merchant Guilds\"",
+  "cast.stakes @ city-famine-7 shut server/gallery: stress.cast.stakes[].stake: A=\"gains\" | counterfactual=\"split\"",
+  "cast.stakes @ city-famine-7 shut server/gallery: stress.cast.stakes[].reason: A=\"crime gains from the disorder\" | counterfactual=\"it could side with either camp\"",
+  "cast.stakes @ city-famine-7 shut server/gallery: stress.cast.stakes[].factionId: A=\"Thieves' Guild\" | counterfactual=\"Merchant Guilds\"",
+  "cast.stakes @ city-famine-7 shut twin/gallery: stress.cast.stakes[].factionId: A=\"Thieves' Guild\" | counterfactual=\"Merchant Guilds\"",
+  "cast.stakes @ city-famine-7 shut twin/gallery: stress.cast.stakes[].stake: A=\"gains\" | counterfactual=\"split\"",
+  "cast.stakes @ city-famine-7 shut twin/gallery: stress.cast.stakes[].reason: A=\"crime gains from the disorder\" | counterfactual=\"it could side with either camp\"",
+  "cast.stakes @ city-famine-7 shut server/link: stress.cast.stakes[].stake: A=\"gains\" | counterfactual=\"split\"",
+  "cast.stakes @ city-famine-7 shut server/link: stress.cast.stakes[].reason: A=\"crime gains from the disorder\" | counterfactual=\"it could side with either camp\"",
+  "cast.stakes @ city-famine-7 shut server/link: stress.cast.stakes[].factionId: A=\"Thieves' Guild\" | counterfactual=\"Merchant Guilds\"",
+  "cast.stakes @ city-famine-7 default +DM server/gallery: stress.cast.stakes[].stake: A=\"gains\" | counterfactual=\"split\"",
+  "cast.stakes @ city-famine-7 default +DM server/gallery: stress.cast.stakes[].reason: A=\"crime gains from the disorder\" | counterfactual=\"it could side with either camp\"",
+  "cast.stakes @ city-famine-7 default +DM server/gallery: stress.cast.stakes[].factionId: A=\"Thieves' Guild\" | counterfactual=\"Merchant Guilds\"",
+  "cast.stakes @ city-famine-7 default +DM twin/gallery: stress.cast.stakes[].factionId: A=\"Thieves' Guild\" | counterfactual=\"Merchant Guilds\"",
+  "cast.stakes @ city-famine-7 default +DM twin/gallery: stress.cast.stakes[].stake: A=\"gains\" | counterfactual=\"split\"",
+  "cast.stakes @ city-famine-7 default +DM twin/gallery: stress.cast.stakes[].reason: A=\"crime gains from the disorder\" | counterfactual=\"it could side with either camp\"",
+  "cast.stakes @ city-famine-7 shut +DM server/gallery: stress.cast.stakes[].stake: A=\"gains\" | counterfactual=\"split\"",
+  "cast.stakes @ city-famine-7 shut +DM server/gallery: stress.cast.stakes[].reason: A=\"crime gains from the disorder\" | counterfactual=\"it could side with either camp\"",
+  "cast.stakes @ city-famine-7 shut +DM server/gallery: stress.cast.stakes[].factionId: A=\"Thieves' Guild\" | counterfactual=\"Merchant Guilds\"",
+  "cast.stakes @ city-famine-7 shut +DM twin/gallery: stress.cast.stakes[].factionId: A=\"Thieves' Guild\" | counterfactual=\"Merchant Guilds\"",
+  "cast.stakes @ city-famine-7 shut +DM twin/gallery: stress.cast.stakes[].stake: A=\"gains\" | counterfactual=\"split\"",
+  "cast.stakes @ city-famine-7 shut +DM twin/gallery: stress.cast.stakes[].reason: A=\"crime gains from the disorder\" | counterfactual=\"it could side with either camp\"",
+  "cast.stakes @ city-calm-1 default: the twin serves otherwise than the server",
+  "cast.stakes @ city-calm-1 shut: the twin serves otherwise than the server",
+  "cast.stakes @ city-calm-1 default +DM: the twin serves otherwise than the server",
+  "cast.stakes @ city-calm-1 shut +DM: the twin serves otherwise than the server",
+  "cast.stakes @ city-insurgency-3 default: the twin serves otherwise than the server",
+  "cast.stakes @ city-insurgency-3 shut: the twin serves otherwise than the server",
+  "cast.stakes @ city-insurgency-3 default +DM: the twin serves otherwise than the server",
+  "cast.stakes @ city-insurgency-3 shut +DM: the twin serves otherwise than the server",
+  "cast.stakes @ metropolis-indebted-5 default: the twin serves otherwise than the server",
+  "cast.stakes @ metropolis-indebted-5 shut: the twin serves otherwise than the server",
+  "cast.stakes @ metropolis-indebted-5 default +DM: the twin serves otherwise than the server",
+  "cast.stakes @ metropolis-indebted-5 shut +DM: the twin serves otherwise than the server",
+  "cast.stakes @ city-famine-7 default: the twin serves otherwise than the server",
+  "cast.stakes @ city-famine-7 shut: the twin serves otherwise than the server",
+  "cast.stakes @ city-famine-7 default +DM: the twin serves otherwise than the server",
+  "cast.stakes @ city-famine-7 shut +DM: the twin serves otherwise than the server"
+ ]
+}

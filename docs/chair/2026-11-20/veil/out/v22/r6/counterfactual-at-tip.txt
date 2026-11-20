@@ -1,0 +1,135 @@
+[gate-tail] start:  06:32:09 up 39 min,  0 user,  load average: 4.99, 4.40, 3.18 · cores: 4
+gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.0.lock.shared as PID 18631 after 0 poll(s); 3 shared holder(s) live, worker cap <= 2.
+
+ RUN  v4.1.8 /home/user/wt/r6
+
+stdout | tests/security/rosterChoiceCounterfactual.pglite.test.js > VR4 G2: every built registry row holds on born towns against their counterfactual (through the server, the twin beside it) > MAIN: every built (a) row equals its counterfactual and every built (b) row is absent, on every town, veil, Reveal setting, read and engine; what cannot yet be judged is named
+R6 MAIN: built (a) 1, built (b) 56, judged on 6 towns x 10 views; failing 66; NOT JUDGEABLE: built but held by no born town 0 [], unbuilt 54 [compound.inst.flags, compound.inst.names, economy.complexity, income.criminalRow, income.percentage, income.desc, safety.economicDragDesc, safety.guardEffectivenessDesc, safety.safetyDesc, safety.crimeTypes, safety.plotHooks, safety.criminalInstitutions, history.tension.crimeWave, history.event.crimeWave, institutions.desc, ties.covertHandler, trace.criminalAllegiance, power.entry, power.desc, power.share, power.label, power.relation.entry, power.relation.dmNote, power.relation.direction, power.recentConflict, prose.posture.posture, prose.posture.prize, prose.posture.terrain, prose.state.firstSurvey, prose.state.publicOrder.field, prose.state.publicOrder.rung.glance, prose.incomeWeight, prose.shadowEconomy, prose.incomeMix, prose.prosperityHeader.detail, prose.legacyLines.a, prose.legitimacyBanner, prose.legitimacyLens, prose.stabilityHeader, prose.structureFlag, prose.successionRisk, prose.templeFraud, prose.criminal, tile.stability, chronicle, cast.roles.entry, cast.levers.holder, people.entry, people.card, people.rosterCopy, people.secret, people.ties, people.prominentRelationship, people.pressureSentence]; held by no born town at all: tile.stability, chronicle, people.rosterCopy
+
+ ❯ tests/security/rosterChoiceCounterfactual.pglite.test.js (4 tests | 2 failed) 219082ms
+     × CONTROL: a share hiding nothing sends the hideable houses (the default veil withholds them), and nothing moves there 3633ms
+     × MAIN: every built (a) row equals its counterfactual and every built (b) row is absent, on every town, veil, Reveal setting, read and engine; what cannot yet be judged is named 56080ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/rosterChoiceCounterfactual.pglite.test.js > VR4 G2: every built registry row holds on born towns against their counterfactual (through the server, the twin beside it) > CONTROL: a share hiding nothing sends the hideable houses (the default veil withholds them), and nothing moves there
+AssertionError: expected [ …(8) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "city-calm-1 dm=false server: cast.stakes moved on a share hiding nothing",
++   "city-calm-1 dm=true server: cast.stakes moved on a share hiding nothing",
++   "city-insurgency-3 dm=false server: cast.stakes moved on a share hiding nothing",
++   "city-insurgency-3 dm=true server: cast.stakes moved on a share hiding nothing",
++   "metropolis-indebted-5 dm=false server: cast.stakes moved on a share hiding nothing",
++   "metropolis-indebted-5 dm=true server: cast.stakes moved on a share hiding nothing",
++   "city-famine-7 dm=false server: cast.stakes moved on a share hiding nothing",
++   "city-famine-7 dm=true server: cast.stakes moved on a share hiding nothing",
++ ]
+
+ ❯ tests/security/rosterChoiceCounterfactual.pglite.test.js:311:17
+    309|       }
+    310|     }
+    311|     expect(bad).toEqual([]);
+       |                 ^
+    312|   });
+    313|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/security/rosterChoiceCounterfactual.pglite.test.js > VR4 G2: every built registry row holds on born towns against their counterfactual (through the server, the twin beside it) > MAIN: every built (a) row equals its counterfactual and every built (b) row is absent, on every town, veil, Reveal setting, read and engine; what cannot yet be judged is named
+AssertionError: expected [ …(66) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "cast.roles @ city-insurgency-3 default server/gallery: stress.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
++   "cast.roles @ city-insurgency-3 default server/gallery: stressors.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
++   "cast.roles @ city-insurgency-3 default twin/gallery: stress.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
++   "cast.roles @ city-insurgency-3 default twin/gallery: stressors.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
++   "cast.roles @ city-insurgency-3 default server/link: stress.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
++   "cast.roles @ city-insurgency-3 default server/link: stressors.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
++   "cast.roles @ city-insurgency-3 shut server/gallery: stress.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
++   "cast.roles @ city-insurgency-3 shut server/gallery: stressors.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
++   "cast.roles @ city-insurgency-3 shut twin/gallery: stress.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
++   "cast.roles @ city-insurgency-3 shut twin/gallery: stressors.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
++   "cast.roles @ city-insurgency-3 shut server/link: stress.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
++   "cast.roles @ city-insurgency-3 shut server/link: stressors.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
++   "cast.roles @ city-insurgency-3 default +DM server/gallery: stress.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
++   "cast.roles @ city-insurgency-3 default +DM server/gallery: stressors.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
++   "cast.roles @ city-insurgency-3 default +DM twin/gallery: stress.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
++   "cast.roles @ city-insurgency-3 default +DM twin/gallery: stressors.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
++   "cast.roles @ city-insurgency-3 shut +DM server/gallery: stress.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
++   "cast.roles @ city-insurgency-3 shut +DM server/gallery: stressors.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
++   "cast.roles @ city-insurgency-3 shut +DM twin/gallery: stress.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
++   "cast.roles @ city-insurgency-3 shut +DM twin/gallery: stressors.cast.roles[].reason: A=\"holds the seat, and the right to it is already in dispute\" | counterfactual=\"holds the seat\"",
++   "cast.stakes @ city-famine-7 default server/gallery: stress.cast.stakes[].stake: A=\"gains\" | counterfactual=\"split\"",
++   "cast.stakes @ city-famine-7 default server/gallery: stress.cast.stakes[].reason: A=\"crime gains from the disorder\" | counterfactual=\"it could side with either camp\"",
++   "cast.stakes @ city-famine-7 default server/gallery: stress.cast.stakes[].factionId: A=\"Thieves' Guild\" | counterfactual=\"Merchant Guilds\"",
++   "cast.stakes @ city-famine-7 default twin/gallery: stress.cast.stakes[].factionId: A=\"Thieves' Guild\" | counterfactual=\"Merchant Guilds\"",
++   "cast.stakes @ city-famine-7 default twin/gallery: stress.cast.stakes[].stake: A=\"gains\" | counterfactual=\"split\"",
++   "cast.stakes @ city-famine-7 default twin/gallery: stress.cast.stakes[].reason: A=\"crime gains from the disorder\" | counterfactual=\"it could side with either camp\"",
++   "cast.stakes @ city-famine-7 default server/link: stress.cast.stakes[].stake: A=\"gains\" | counterfactual=\"split\"",
++   "cast.stakes @ city-famine-7 default server/link: stress.cast.stakes[].reason: A=\"crime gains from the disorder\" | counterfactual=\"it could side with either camp\"",
++   "cast.stakes @ city-famine-7 default server/link: stress.cast.stakes[].factionId: A=\"Thieves' Guild\" | counterfactual=\"Merchant Guilds\"",
++   "cast.stakes @ city-famine-7 shut server/gallery: stress.cast.stakes[].stake: A=\"gains\" | counterfactual=\"split\"",
++   "cast.stakes @ city-famine-7 shut server/gallery: stress.cast.stakes[].reason: A=\"crime gains from the disorder\" | counterfactual=\"it could side with either camp\"",
++   "cast.stakes @ city-famine-7 shut server/gallery: stress.cast.stakes[].factionId: A=\"Thieves' Guild\" | counterfactual=\"Merchant Guilds\"",
++   "cast.stakes @ city-famine-7 shut twin/gallery: stress.cast.stakes[].factionId: A=\"Thieves' Guild\" | counterfactual=\"Merchant Guilds\"",
++   "cast.stakes @ city-famine-7 shut twin/gallery: stress.cast.stakes[].stake: A=\"gains\" | counterfactual=\"split\"",
++   "cast.stakes @ city-famine-7 shut twin/gallery: stress.cast.stakes[].reason: A=\"crime gains from the disorder\" | counterfactual=\"it could side with either camp\"",
++   "cast.stakes @ city-famine-7 shut server/link: stress.cast.stakes[].stake: A=\"gains\" | counterfactual=\"split\"",
++   "cast.stakes @ city-famine-7 shut server/link: stress.cast.stakes[].reason: A=\"crime gains from the disorder\" | counterfactual=\"it could side with either camp\"",
++   "cast.stakes @ city-famine-7 shut server/link: stress.cast.stakes[].factionId: A=\"Thieves' Guild\" | counterfactual=\"Merchant Guilds\"",
++   "cast.stakes @ city-famine-7 default +DM server/gallery: stress.cast.stakes[].stake: A=\"gains\" | counterfactual=\"split\"",
++   "cast.stakes @ city-famine-7 default +DM server/gallery: stress.cast.stakes[].reason: A=\"crime gains from the disorder\" | counterfactual=\"it could side with either camp\"",
++   "cast.stakes @ city-famine-7 default +DM server/gallery: stress.cast.stakes[].factionId: A=\"Thieves' Guild\" | counterfactual=\"Merchant Guilds\"",
++   "cast.stakes @ city-famine-7 default +DM twin/gallery: stress.cast.stakes[].factionId: A=\"Thieves' Guild\" | counterfactual=\"Merchant Guilds\"",
++   "cast.stakes @ city-famine-7 default +DM twin/gallery: stress.cast.stakes[].stake: A=\"gains\" | counterfactual=\"split\"",
++   "cast.stakes @ city-famine-7 default +DM twin/gallery: stress.cast.stakes[].reason: A=\"crime gains from the disorder\" | counterfactual=\"it could side with either camp\"",
++   "cast.stakes @ city-famine-7 shut +DM server/gallery: stress.cast.stakes[].stake: A=\"gains\" | counterfactual=\"split\"",
++   "cast.stakes @ city-famine-7 shut +DM server/gallery: stress.cast.stakes[].reason: A=\"crime gains from the disorder\" | counterfactual=\"it could side with either camp\"",
++   "cast.stakes @ city-famine-7 shut +DM server/gallery: stress.cast.stakes[].factionId: A=\"Thieves' Guild\" | counterfactual=\"Merchant Guilds\"",
++   "cast.stakes @ city-famine-7 shut +DM twin/gallery: stress.cast.stakes[].factionId: A=\"Thieves' Guild\" | counterfactual=\"Merchant Guilds\"",
++   "cast.stakes @ city-famine-7 shut +DM twin/gallery: stress.cast.stakes[].stake: A=\"gains\" | counterfactual=\"split\"",
++   "cast.stakes @ city-famine-7 shut +DM twin/gallery: stress.cast.stakes[].reason: A=\"crime gains from the disorder\" | counterfactual=\"it could side with either camp\"",
++   "cast.stakes @ city-calm-1 default: the twin serves otherwise than the server",
++   "cast.stakes @ city-calm-1 shut: the twin serves otherwise than the server",
++   "cast.stakes @ city-calm-1 default +DM: the twin serves otherwise than the server",
++   "cast.stakes @ city-calm-1 shut +DM: the twin serves otherwise than the server",
++   "cast.stakes @ city-insurgency-3 default: the twin serves otherwise than the server",
++   "cast.stakes @ city-insurgency-3 shut: the twin serves otherwise than the server",
++   "cast.stakes @ city-insurgency-3 default +DM: the twin serves otherwise than the server",
++   "cast.stakes @ city-insurgency-3 shut +DM: the twin serves otherwise than the server",
++   "cast.stakes @ metropolis-indebted-5 default: the twin serves otherwise than the server",
++   "cast.stakes @ metropolis-indebted-5 shut: the twin serves otherwise than the server",
++   "cast.stakes @ metropolis-indebted-5 default +DM: the twin serves otherwise than the server",
++   "cast.stakes @ metropolis-indebted-5 shut +DM: the twin serves otherwise than the server",
++   "cast.stakes @ city-famine-7 default: the twin serves otherwise than the server",
++   "cast.stakes @ city-famine-7 shut: the twin serves otherwise than the server",
++   "cast.stakes @ city-famine-7 default +DM: the twin serves otherwise than the server",
++   "cast.stakes @ city-famine-7 shut +DM: the twin serves otherwise than the server",
++ ]
+
+ ❯ tests/security/rosterChoiceCounterfactual.pglite.test.js:411:19
+    409|       + `${unbuilt.filter((r) => !preview[r.id].reached).map((r) => r.…
+    410|     expect(counterfactualTowns().length).toBeGreaterThan(2);
+    411|     expect(fails).toEqual([]);
+       |                   ^
+    412|   }, ARM_TIMEOUT_MS);
+    413|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 2 passed (4)
+   Start at  06:32:12
+   Duration  220.13s (transform 6.89s, setup 72ms, import 389ms, tests 219.08s, environment 0ms)
+
+[gate-tail] end:  06:35:52 up 42 min,  0 user,  load average: 8.27, 6.50, 4.28

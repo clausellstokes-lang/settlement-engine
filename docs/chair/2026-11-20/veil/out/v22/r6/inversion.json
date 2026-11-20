@@ -1,0 +1,185 @@
+{
+ "compared": 24,
+ "subsistence": 4,
+ "tier1": [],
+ "tier2": {
+  "count": 2,
+  "rows": [
+   "economy.prosperity",
+   "safety.safetyLabel"
+  ]
+ },
+ "notRederivable": [
+  "prose.conditionSeverity",
+  "prose.prosperity.sentence",
+  "prose.state.publicOrder.beside",
+  "prose.state.publicOrder.rung.sentence",
+  "prose.threat.economic",
+  "prose.wall.rationale"
+ ],
+ "notJudged": [
+  "conditions.severityBand",
+  "food.record.storageMonths",
+  "food.resilienceScore",
+  "income.composition",
+  "history.founding.overcoming",
+  "power.composition",
+  "power.relation.composition",
+  "power.conflicts",
+  "tile.prosperity",
+  "tile.threatLevel",
+  "tile.governmentType"
+ ],
+ "where": {
+  "prose.state.publicOrder.beside": {
+   "veiled": [
+    "city-calm-1",
+    "city-calm-1 +DM",
+    "metropolis-calm-2",
+    "metropolis-calm-2 +DM",
+    "metropolis-indebted-5",
+    "metropolis-indebted-5 +DM"
+   ],
+   "open": [
+    "town-infiltrated-0",
+    "town-infiltrated-0 +DM",
+    "city-calm-1",
+    "city-calm-1 +DM",
+    "metropolis-calm-2",
+    "metropolis-calm-2 +DM",
+    "metropolis-indebted-5",
+    "metropolis-indebted-5 +DM",
+    "village-calm-6",
+    "village-calm-6 +DM"
+   ]
+  },
+  "prose.state.publicOrder.rung.sentence": {
+   "veiled": [
+    "city-calm-1",
+    "city-calm-1 +DM",
+    "metropolis-calm-2",
+    "metropolis-calm-2 +DM",
+    "metropolis-indebted-5",
+    "metropolis-indebted-5 +DM"
+   ],
+   "open": [
+    "town-infiltrated-0",
+    "town-infiltrated-0 +DM",
+    "city-calm-1",
+    "city-calm-1 +DM",
+    "metropolis-calm-2",
+    "metropolis-calm-2 +DM",
+    "metropolis-indebted-5",
+    "metropolis-indebted-5 +DM",
+    "village-calm-6",
+    "village-calm-6 +DM"
+   ]
+  },
+  "prose.threat.economic": {
+   "veiled": [
+    "city-calm-1",
+    "city-calm-1 +DM",
+    "metropolis-calm-2",
+    "metropolis-calm-2 +DM",
+    "city-insurgency-3",
+    "city-insurgency-3 +DM",
+    "town-calm-4",
+    "town-calm-4 +DM",
+    "metropolis-indebted-5",
+    "metropolis-indebted-5 +DM"
+   ],
+   "open": [
+    "town-infiltrated-0",
+    "town-infiltrated-0 +DM",
+    "city-calm-1",
+    "city-calm-1 +DM",
+    "metropolis-calm-2",
+    "metropolis-calm-2 +DM",
+    "city-insurgency-3",
+    "city-insurgency-3 +DM",
+    "town-calm-4",
+    "town-calm-4 +DM",
+    "metropolis-indebted-5",
+    "metropolis-indebted-5 +DM",
+    "village-calm-6",
+    "village-calm-6 +DM"
+   ]
+  },
+  "prose.wall.rationale": {
+   "veiled": [
+    "city-calm-1",
+    "city-calm-1 +DM",
+    "metropolis-calm-2",
+    "metropolis-calm-2 +DM",
+    "city-insurgency-3",
+    "city-insurgency-3 +DM",
+    "metropolis-indebted-5",
+    "metropolis-indebted-5 +DM"
+   ],
+   "open": [
+    "town-infiltrated-0",
+    "town-infiltrated-0 +DM",
+    "city-calm-1",
+    "city-calm-1 +DM",
+    "metropolis-calm-2",
+    "metropolis-calm-2 +DM",
+    "city-insurgency-3",
+    "city-insurgency-3 +DM",
+    "metropolis-indebted-5",
+    "metropolis-indebted-5 +DM",
+    "village-calm-6",
+    "village-calm-6 +DM"
+   ]
+  },
+  "prose.prosperity.sentence": {
+   "veiled": [
+    "metropolis-calm-2",
+    "metropolis-calm-2 +DM"
+   ],
+   "open": [
+    "town-infiltrated-0",
+    "town-infiltrated-0 +DM",
+    "metropolis-calm-2",
+    "metropolis-calm-2 +DM"
+   ]
+  },
+  "prose.conditionSeverity": {
+   "veiled": [
+    "city-calm-1",
+    "city-calm-1 +DM",
+    "city-insurgency-3",
+    "city-insurgency-3 +DM",
+    "metropolis-indebted-5",
+    "metropolis-indebted-5 +DM"
+   ],
+   "open": [
+    "town-infiltrated-0",
+    "town-infiltrated-0 +DM",
+    "city-calm-1",
+    "city-calm-1 +DM",
+    "city-insurgency-3",
+    "city-insurgency-3 +DM",
+    "metropolis-indebted-5",
+    "metropolis-indebted-5 +DM"
+   ]
+  },
+  "safety.safetyLabel": {
+   "veiled": [
+    "city-calm-1",
+    "city-calm-1 +DM",
+    "metropolis-calm-2",
+    "metropolis-calm-2 +DM",
+    "city-insurgency-3",
+    "city-insurgency-3 +DM"
+   ],
+   "open": []
+  },
+  "economy.prosperity": {
+   "veiled": [
+    "city-insurgency-3",
+    "city-insurgency-3 +DM"
+   ],
+   "open": []
+  }
+ }
+}

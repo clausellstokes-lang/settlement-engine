@@ -1,0 +1,950 @@
+{
+ "towns": [
+  {
+   "seed": "town-infiltrated-0",
+   "hideable": [],
+   "control": null,
+   "reads": 0
+  },
+  {
+   "seed": "city-calm-1",
+   "hideable": [
+    "Multiple criminal factions",
+    "Black market",
+    "Front businesses"
+   ],
+   "control": [
+    "Furrier's district",
+    "Brothel (red light district)",
+    "Major annual fairs"
+   ],
+   "reads": 4
+  },
+  {
+   "seed": "metropolis-calm-2",
+   "hideable": [
+    "Multiple criminal factions"
+   ],
+   "control": [
+    "Furrier's district"
+   ],
+   "reads": 4
+  },
+  {
+   "seed": "city-insurgency-3",
+   "hideable": [
+    "Smuggling network",
+    "Rookery",
+    "Black market",
+    "Contract killer",
+    "Front businesses",
+    "Thieves' guild chapter"
+   ],
+   "control": [
+    "Furrier's district",
+    "Harbour master's office",
+    "Major annual fairs",
+    "Shipyard",
+    "Theaters",
+    "Merchant guilds (15-40)"
+   ],
+   "reads": 4
+  },
+  {
+   "seed": "town-calm-4",
+   "hideable": [
+    "Rookery"
+   ],
+   "control": [
+    "Shipyard"
+   ],
+   "reads": 4
+  },
+  {
+   "seed": "metropolis-indebted-5",
+   "hideable": [
+    "Whisper market",
+    "Contract killer"
+   ],
+   "control": [
+    "Furrier's district",
+    "Airship docking (high magic)"
+   ],
+   "reads": 4
+  },
+  {
+   "seed": "village-calm-6",
+   "hideable": [],
+   "control": null,
+   "reads": 0
+  },
+  {
+   "seed": "city-famine-7",
+   "hideable": [
+    "Smuggling network",
+    "Multiple criminal factions",
+    "Black market",
+    "Front businesses"
+   ],
+   "control": [
+    "Furrier's district",
+    "Barge and river transport company",
+    "Harbour master's office",
+    "Major annual fairs"
+   ],
+   "reads": 4
+  }
+ ],
+ "built": {
+  "a": [],
+  "b": []
+ },
+ "perRow": {},
+ "unreached": [],
+ "cannotYetJudge": {
+  "unbuilt": 105,
+  "rows": {
+   "conditions.severity": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 16,
+    "wouldFail": 16
+   },
+   "conditions.severityBand": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 16,
+    "wouldFail": 16
+   },
+   "defence.readiness.score": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "compound.criminalEffective": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "compound.criminalPreStress": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "compound.economyOutput": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "compound.magicInfluence": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "compound.militaryEffective": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "compound.religionInfluence": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "safety.compound.criminalEffective": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "safety.compound.criminalPreStress": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "safety.compound.economyOutput": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "safety.compound.magicInfluence": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "safety.compound.militaryEffective": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "safety.compound.religionInfluence": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "compound.inst.flags": {
+    "rule": "recompose",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_second_homes",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "compound.inst.names": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_second_homes",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "economy.complexity": {
+    "rule": "recompose",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_roster_choices",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "food.storageMonths": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "food.storageNote": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "income.criminalRow": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_apply",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "income.percentage": {
+    "rule": "recompose",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_apply",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 4
+   },
+   "income.weight": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "income.desc": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_apply",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "economy.situationDesc": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "safety.economicDragDesc": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_roster_choices",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "safety.blackMarketCapture": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "safety.flags.anyActive": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "safety.flags.arcaneBlackMarket": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "safety.flags.merchantArmy": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "safety.flags.religiousFraud": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "safety.flags.merchantCriminalBlur": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "safety.guardEffectivenessDesc": {
+    "rule": "recompose",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_roster_choices",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 8
+   },
+   "safety.safetyDesc": {
+    "rule": "recompose",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_roster_choices",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 4
+   },
+   "safety.safetyRatio": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "safety.crimeTypes": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_roster_choices",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "safety.plotHooks": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_roster_choices",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "safety.criminalInstitutions": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_apply",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "history.tension.crimeWave": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_roster_choices",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 20
+   },
+   "history.event.crimeWave": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_roster_choices",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 4
+   },
+   "history.timeline.anchored": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "history.timeline.year": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "history.event.anchored": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "history.legacy": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "history.siegeNarrative": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 12
+   },
+   "institutions.desc": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_roster_choices",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "npcs.memberships.veiled": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "npcs.stressNote": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 4,
+    "wouldFail": 1
+   },
+   "ties.covertHandler": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_second_homes",
+    "reads": 24,
+    "reached": 12,
+    "wouldFail": 6
+   },
+   "trace.criminalAllegiance": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_second_homes",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 12
+   },
+   "power.fingerprint": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "power.entry": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_roster_choices",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 12
+   },
+   "power.contestsNiche": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 20,
+    "wouldFail": 20
+   },
+   "power.desc": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 6
+   },
+   "power.share": {
+    "rule": "recompose",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_roster_choices",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 12
+   },
+   "power.label": {
+    "rule": "recompose",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 4
+   },
+   "power.rawPower": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "power.relation.entry": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_roster_choices",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 2
+   },
+   "power.relation.dmNote": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 12,
+    "wouldFail": 0
+   },
+   "power.relation.ratio": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "power.relation.direction": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "legitimacy.breakdown": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "legitimacy.crimMultiplier": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "legitimacy.govMultiplier": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "legitimacy.flags": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "power.recentConflict": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "power.stability": {
+    "rule": "recompose",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "power.factions.legitimacyCrisis": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 4,
+    "wouldFail": 4
+   },
+   "prose.posture.posture": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "prose.posture.prize": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 12,
+    "wouldFail": 12
+   },
+   "prose.posture.terrain": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 8,
+    "wouldFail": 8
+   },
+   "prose.state.firstSurvey": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "prose.state.publicOrder.field": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "prose.state.publicOrder.rung.glance": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "prose.incomeWeight": {
+    "rule": "recompose",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_apply",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "prose.incomeWeight.alias": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "prose.shadowEconomy": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 8
+   },
+   "prose.shadowEconomy.alias": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "prose.incomeMix": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "prose.prosperityHeader.detail": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "prose.prosperity.glance": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "prose.legacyLines.a": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 4
+   },
+   "prose.legitimacyBanner": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "prose.legitimacyLens": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "prose.stabilityHeader": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "prose.structureFlag": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "prose.successionRisk": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 20,
+    "wouldFail": 20
+   },
+   "prose.conditionSeverity.glance": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 16,
+    "wouldFail": 16
+   },
+   "prose.templeFraud": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_composed",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "prose.criminal": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_roster_choices",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "tile.stability": {
+    "rule": "recompose",
+    "when": "always",
+    "host": "public._gallery_veil_tile_columns",
+    "reads": 24,
+    "reached": 0,
+    "wouldFail": 0
+   },
+   "chronicle": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_chronicle",
+    "reads": 24,
+    "reached": 0,
+    "wouldFail": 0
+   },
+   "spatial.quarters": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "cast.absent": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 8,
+    "wouldFail": 8
+   },
+   "cast.roles": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 16,
+    "wouldFail": 16
+   },
+   "cast.stakes": {
+    "rule": "withhold",
+    "when": "always",
+    "host": "public._gallery_veil_withhold_always",
+    "reads": 24,
+    "reached": 16,
+    "wouldFail": 16
+   },
+   "cast.roles.entry": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_holders",
+    "reads": 24,
+    "reached": 16,
+    "wouldFail": 8
+   },
+   "cast.levers.holder": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_holders",
+    "reads": 24,
+    "reached": 16,
+    "wouldFail": 4
+   },
+   "people.entry": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_holders",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "people.card": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_holders",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 12
+   },
+   "people.rosterCopy": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_holders",
+    "reads": 24,
+    "reached": 0,
+    "wouldFail": 0
+   },
+   "people.secret": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_holders",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   },
+   "people.ties": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_holders",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 24
+   },
+   "people.prominentRelationship": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_holders",
+    "reads": 24,
+    "reached": 16,
+    "wouldFail": 0
+   },
+   "people.pressureSentence": {
+    "rule": "withhold",
+    "when": "house-hidden",
+    "host": "public._gallery_veil_holders",
+    "reads": 24,
+    "reached": 24,
+    "wouldFail": 0
+   }
+  }
+ },
+ "fails": []
+}
