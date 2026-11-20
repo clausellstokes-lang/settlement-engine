@@ -75,3 +75,11 @@ chosen and why, new fact homes, every disagreement.
   house named "Black Market Tavern" does not print the black market's line.
 - HIDEABLE, crime/guild: the file's nine AND law_thin, no_force, force_unpaid_or_cut, guilds_rule, rival_power; the other
   kinds by rule 5 above (every rival_power, merchants_rule, outranked: true).
+
+## ADDENDUM 2, 15:37 UTC (the chair, 15:35): THE PAGE NEVER PRINTS A GUILD THE RECORD LACKS
+In `tensionCauseSentenceOf`, where the kind is `guild_conflict` and the guild's home (`src/domain/facts/guild.js ::
+guildOf`, factsOf's `guild`) answers no on the document in hand, NO cause and NO plain line is used: the sentence is
+exactly "Traders here are fighting over who may sell what, and over a say in how the place is run." It lives in the data
+file as the kind's `withoutItsHouse` wording (`TENSION_CAUSES.guild_conflict.withoutItsHouse`), read BEFORE the ranks;
+the totality arm covers it. RED FIRST on hxd-hamlet-29's record (the one guildless guild quarrel of 900: measure
+1f7a6446a). The generator is not touched; the sides of that trouble are left as they are.
