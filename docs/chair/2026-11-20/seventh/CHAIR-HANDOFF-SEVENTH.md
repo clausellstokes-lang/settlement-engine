@@ -3952,3 +3952,31 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   `-k-wip` b2f8fe25e): told to add the chair's answers and the split to its hand-back and to send "PAGE-PART
   <commit>, HANDED OVER"; TRAD-4's surprise ruled (section 2). THE BILL FOR CROSS-TOWN REPEATS is still being
   measured by the helper (groups, a simulation of added lines, culture).
+- 14:17 UTC · SAFETY NET 12's PASS (every count read by `get_session` between 14:14 and 14:15; A FAULT OF THE CHAIR'S AGAIN: it stamped
+  a message to PAGE-6 "14:17" and FORTUNE-3's seating "14:18" without reading the clock; the clock read 14:15):
+  PAGE-1 244,461 (mark 250,000: handing over; its lane at bcac8ab77; the card's branch `-card` c03e48972 and three
+  `-wip` branches on origin); FORTUNE-2 258,071 (successor point 270,000): FORTUNE-3 SEATED BESIDE IT
+  (session_019yED1QzDrbPKPMdr9AEced; on `lane/fortune-2-2026-11-20`); VEIL-26 243,090, idle, waiting for
+  R3-CURE-5 (still `-wip` at 101fae14d in VEIL-25's container); GOALS-3 215,773 (successor point 230,000; MERGING
+  BUILDER 7 (`lane/goals-3-2026-11-20-b7` 145b26c3b): NO SUCCESSOR: it is nearer done than a read-in costs; it
+  finishes inside 300,000 or hands the rest to the chair's landing helper); SEAT-4 271,545 (successor point
+  300,000; U4 read line by line, red 15 of 25 at base and green 54 of 54; its cure builder out):
+  `prompts/SEAT-5.txt` WRITTEN, seated after this push; FRAME-6 225,497; TRAD-4 224,559 (it rose 79,000 in 45
+  minutes with two builders: read first at the next net); REVIEW-VEIL-13 360,202, idle (mark 400,000): IT CANNOT
+  READ R3: `prompts/REVIEW-VEIL-14.txt` WRITTEN (chain first, then WAIT for R3 and nothing wider), seated when
+  VEIL-26 starts R3-CURE-5's merge; REVIEW-VEIL-13 keeps the small re-read of "TRAD-SHARE-2". NOT READ THIS NET,
+  each for a stated reason: PAGE-5, PAGE-6 and DEPTH-1 (seated 14:04, 14:04 and 14:12: under fifteen minutes old)
+  and PAGE-4 (waiting read-only; 80,000 by its own estimate at 13:33): read at the next net or at a hand-over.
+  NEW SEATS SINCE 14:04: PAGE-5 session_019yED1RV9QRWsifGFgXVnqJ (the trouble; `lane/page-5-2026-11-20`; given the
+  lane at PAGE-3's final tip 79710682d; the sides follow-up is already built at 2f6b6a1db on `-s7-wip`: it reads
+  and merges it); PAGE-6 session_019yED1SC3XUZznHWtyEUfdb (people and place; `lane/page-6-2026-11-20`); DEPTH-1
+  session_019yED1Px2NXJkwdFd6abDke (tie lines and hooks; on the working line; measure and propose first). READ BY
+  THE CHAIR AT 14:14 (PAGE-6's files at 66eae364e on `lane/page-6-2026-11-20-lines`): THE 76 ARRIVAL LINES: 73
+  approved as written; "Willows lean" becomes "Trees lean" (a species presumes a climate); "Smoke above the trees"
+  becomes "Smoke on the skyline" (it presumed woodland); the Norse line of winter stores counted aloud excludes
+  the hunger crisis. THE SEVEN REWORKED OFFICE SECRETS: all approved. A GAP PAGE-6 FOUND, THE OWNER'S OWN EXAMPLE:
+  every office row of a dean is a money row, so a principled dean gets none: ORDERED: one row a title for a
+  principled holder (a rule broken for mercy or conscience, never for gain), to the chair before L4 merges.
+  PAGE-1's WORDS FOR THE CARD READ (`words/PAGE-1-WORDS.md` on bcac8ab77): APPROVED: the dots gone; "Standing:
+  first of <power>, <weight>" with eleven plain weights ("the strongest power here" … "one of the lesser powers
+  here"); the tie's header "<name> holds a tie to them: <kind>"; the people tab's tally and dots filter removed.
