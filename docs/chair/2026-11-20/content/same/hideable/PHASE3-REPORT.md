@@ -140,3 +140,41 @@ Under the proposed forms, the free-text reds outside K pools fall to:
 - 1: the protection racket.
 
 So 3 lines would be banked by word alone; every other kept hit is a K line, already banked by key.
+
+## PHASE 3b (SAME-2 brief H2; the chair's ruling of 19:29)
+
+Builder H2, branch `lane/same-2-hideable-b-2026-11-20`. Each unit was red first (a plant, then restored), then green on
+the three receipts. Bare eslint is clean.
+
+| Commit | Unit | What it does |
+|---|---|---|
+| 79647877a | 1 | `CRIME_TEXT_FORMS`, the precise forms as ruled, with one hit and one non-hit planted per form |
+| 6da138cdb | 2 | A sentence key is read by the forms, not the key list. The 8 false by-key lines leave the bank |
+| 0f45c616d | 3 | `POWER::corrupted` stays banked: corruption is a crime fact (a plant pins it) |
+| 7d9e5b811 | 4 | `FREE_TEXT_READ` true, the word reds banked, `EXISTING_CEILING` 250 -> 247 |
+| b8fe31f01 | 5 | The watch guard |
+
+- **The forms.** One difference from the table above: `criminal` skips a court's whole sentence, before the word as well as
+  after it. With the lookahead alone, "Several courts sitting at once, each to its province: commercial, criminal,
+  appellate…" was a hit.
+- **The flip moved to unit 4.** If unit 1 had flipped `FREE_TEXT_READ`, the bank would have held 255 rows, over the
+  ceiling of 250, before unit 2 un-banked the 8. So the flip goes in with the bank it opens.
+- **A sentence key** has five or more words and no `|`. Measured, the rule takes every key of five tables:
+  DESC_VARIANT_SIBLINGS (55), SERVICE_DESC_SIBLINGS (18), HISTORY_DESC_SIBLINGS (28), FOODWAYS_PRINT_SIBLINGS (4) and
+  NPC_HOOK_SIBLINGS (2). It takes no other table's key, and a live test pins that. Eight words would miss 3 + 4 keys of the
+  two named tables. The three extra tables are sentence-keyed too, and none of their keys hits a form.
+- **The 8 are un-banked.** These are the hired blades (2), the sellsword companies (2), the guild-organised cartographers
+  (2) and the organised road transport (2). None of them is a free-text hit, so none is banked by word.
+- **The bank:** 96 rows + 151 hand rows = 247 = `EXISTING_CEILING`. The hand rows split 146 by key, 5 by word and 0 by
+  atom; 22 crime-pool lines carry their word beside the key. The table above projected 3 by word; there are 5:
+  - BACKING_ARCHETYPES "criminal";
+  - the protection racket;
+  - "blames the thief";
+  - the city's Large prison, two lines ("Holds debtors, criminals, …" and "For debtors, for criminals, …"). These come from
+    the plural, which is kept as ruled.
+- **The watch.** `watchBase` holds the 9 lines on 43ab0f5eb that carry a bare crime word outside the forms. Its block goes
+  to stderr, because this runner swallows a passing test's `console.warn` (measured with a probe). **On the tree it lists 1
+  line**, which is new since 43ab0f5eb: GOALS-3's "Takes a bribe from merchants to sell from the stores at low prices
+  when grain is dear" (GOAL_SECRET_REFUSAL_ROWS, the granary reeve). Read against 1c9673e84, the line the hand bank
+  stands on, the list would be empty.
+- **No form and no watch:** "black market" has neither. It had no hit (see the table above).
