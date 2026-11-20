@@ -1,0 +1,96 @@
+cards: 9012 (thorp 65, hamlet 170, village 387, town 1196, city 3002, metropolis 4192)
+
+== conviction want + venal secret: 9 cards (1 in 1001); threshold 1 in 200 = 45.1 cards
+  thorp      1
+  hamlet     0
+  village    0
+  town       0
+  city       5
+  metropolis 3
+  e.g. thorp Dajiao: Bixia Zhao — the head shepherd | short: Keep faith with what they hold true, even when it costs them. | secret: Knows of a path over the hills that no one else uses, and guides people across it for a fee
+  e.g. city Oxteucan: Nicte Balam — the harbour master | long: See this place live by what they believe is right. | secret: Takes coin to let certain ships dock without inspection
+  e.g. city Sübeteitash: Qutula Besud — the black marketeer | long: See this place live by what they believe is right. | secret: Is paid by someone in authority to report who buys what, and sells their own customers out
+  e.g. city Mahagiri: Deepa Ahuja — the master butcher | short: Speak out for what they believe at the next gathering, whoever is listening. | secret: Sells the meat of animals that died of sickness, cut so the signs do not show
+  e.g. city Veliin: Aneta Vasilyev — the black marketeer | long: See this place live by what they believe is right. | secret: Is paid by someone in authority to report who buys what, and sells their own customers out
+  e.g. city Somabagh: Bhavana Sahni — the nominal owner | long: See this place live by what they believe is right. | secret: Skims a little from the money that passes through the shop before it reaches its real owners
+
+== cross-tab, PERSONALITY cluster × secret kind (holdings)
+cluster                  venal  violence faithless    coward
+caution                     11         6         0         0
+conviction                   9         6         0         1
+duty                        14         9         0         1
+fear                        10        13         0         0
+forbidden_patron            14         4         0         2
+greed                       17        11         0         0
+grudge                      29        23         0         4
+hunger_for_status            4         6         0         2
+impulse                     11        11         0         0
+kindness                    16        10         0         1
+mastery                     10        10         0         4
+sway                        30        15         1         2
+
+== examples for review (kindness/duty × violence; duty × venal; conviction × faithless; mastery × ...)
+-- kindness × violence: 10
+   Alexei Sokolov — the woodcarver | Look after someone who has no one else to do it. | Carved the hiding place in a respected family's house where they keep something they would kill to protect
+   Oc Coh — the apothecary | Give away something this season that they would sooner keep. | Knows exactly which household has been buying the poison sold as a cure for rats, and who it was really for
+   Sky Woman Kakupacal — the mine captain | See every child they know grow up fed and safe. | Covered up a cave-in that killed three men by sealing the gallery and reporting them as run off
+-- duty × venal: 14
+   Wolfhard Schmidt — the eldest | Do the right thing every time, and be known for it. | Has documentation proving the famine was made worse by decisions taken by the Elder Council, and has been paid to lose it
+   Bayarmaa Borjigin — the head shepherd | Stand up for someone who cannot stand up for themselves. | Knows of a path over the hills that no one else uses, and guides people across it for a fee
+   Josefine Wolf — the bloc's speaker | Leave a name that no one can say was ever bought. | Has been embezzling from the organisation they oversee for three years
+-- duty × violence: 9
+   Smoke Ahau — the bloc's speaker | Do the right thing every time, and be known for it. | Suffering from an illness they expect to kill them within two years
+   Ome Coh — the beast master | Do the right thing every time, and be known for it. | A dangerous animal got loose last year and killed a child, and the beast master said it was a wild one
+   Haruto Xiao — the apothecary | Be someone the people here can always count on. | Knows exactly which household has been buying the poison sold as a cure for rats, and who it was really for
+-- conviction × faithless: 0
+-- conviction × violence: 6
+   Kukulcan Zaz — the apothecary | Keep faith with what they hold true, even when it costs them. | Knows exactly which household has been buying the poison sold as a cure for rats, and who it was really for
+   Batu Ilkhan — the chief magistrate | Change the way this place thinks, one person at a time. | Has been slowly poisoning a rival with something that looks like natural illness
+   Matrona Attaleiates — the guild's master | Speak out for what they believe at the next gathering, whoever is listening. | Was hired to kill someone years ago and took the money without doing it; the target is still alive
+-- kindness × venal: 16
+   Klara Ivanov — the head shepherd | Be loved by the people here for the good they did. | Knows of a path over the hills that no one else uses, and guides people across it for a fee
+   Ivor Burke — the jeweller | Give away something this season that they would sooner keep. | Keeps back a little gold from every piece and sells the gathered scraps
+   Jade Chel — the master shipwright | Help one family through a hard week this season. | Sells the timber meant for one ship to the yard of a rival, and delays the first ship for a season
+
+== the venal secret rows found (text · cards)
+  39  A sawyer's boy lost an arm at the blade, and the family was paid to say it happened somewhere else
+  34  Has been falsifying inspection records for a fee
+  32  Has been systematically bribing multiple officials for preferential treatment
+  31  Sells the meat of animals that died of sickness, cut so the signs do not show
+  31  Has the dice and the cards fixed on the high tables, and the people who win big are paid to play
+  30  Has been embezzling from the organisation they oversee for three years
+  30  Sells the college's places to the children of rich families who cannot sing a note
+  29  Skims a little from the money that passes through the shop before it reaches its real owners
+  28  Has been funding a forbidden relationship with embezzled money
+  28  Charges every job for more wood than it used and sells the difference on the side
+  26  Changes tired horses for fresh ones and sells the good ones on, giving travellers the worst of the stable
+  26  Has been putting on plays that mock powerful people by name, and sells the best seats to their enemies
+  25  Pocketed the money that was granted for the wall repairs, and buried the survey that said where they were needed
+  25  Has let the crossing fall into disrepair and pocketed the money for the repairs
+  25  Skims from the house's takings before the money reaches the people who really own the den
+  23  Takes coin to leave certain notices unread, or to read them so quietly that no one hears
+  20  Is paid by someone in authority to report who buys what, and sells their own customers out
+  18  Sells the food meant for the inmates and feeds them thin gruel instead
+  17  Takes coin to let certain ships dock without inspection
+  16  On the payroll of the local underworld as a silent informant
+  13  Sells the same piece of news to both sides of a quarrel and lets them destroy each other
+  12  Closed the harbour to a rival's ships for a week on a false report of sickness, for a fee
+  12  Has let the wharf's timbers rot and pocketed the money meant for repairs
+  10  Takes a bribe from merchants to sell from the stores at low prices when grain is dear
+  10  On the payroll of the thieves' guild as a silent informant
+  8  Knows of a path over the hills that no one else uses, and guides people across it for a fee
+  5  Keeps back a little gold from every piece and sells the gathered scraps
+  5  Writes a higher purity on certain bars for a fee, and the buyers never test them again
+  4  Has been embezzling from civic funds to make personal debt payments, using the same creditor network for both
+  4  Lets the hospital's beds to travellers who are not sick, for coin, on the quiet nights
+  4  Sells the timber meant for one ship to the yard of a rival, and delays the first ship for a season
+  3  Guides people through the woods who do not want to be found, for a fee
+  3  Has been feeding the enemy's quartermasters the same false supply figures they feed their own, playing both requisitions for the skim
+  2  Has been skimming from military supply budgets for years through a trusted subordinate
+  1  Has documentation proving the famine was made worse by decisions taken by the Elder Council, and has been paid to lose it
+  1  Tells the band the rich travellers took the other road, and sells the warning to the travellers
+  1  Sells the post's road news to one buyer a day before it is posted for everyone
+  1  Has documentation proving the famine was made worse by decisions taken by the Religious Authorities, and has been paid to lose it
+  1  Lets certain travellers cross the border paths without being stopped, for a fee
+  1  Is bleeding Ashoka Jha for coin over a thing done long ago
+  1  Has been skimming from the grain reserves to pay a personal debt that predates the siege
