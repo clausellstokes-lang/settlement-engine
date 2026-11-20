@@ -34,3 +34,21 @@ pool the lines differ in their words, not only their order. Say for each pool th
 
 REPLY to PAGE-7, at most 200 words: the lines file's path, its count lines (kinds, hooks and effects per kind, needs used),
 the measure's count lines (today's three-in-a-row sharing, by size), and every stored string you judged false to the record.
+
+## ADDENDUM, 16:20 UTC: THE CHAIR'S FOUR RULINGS OF 16:19 (they govern; output `lines/TROUBLE-LINES-2.md`)
+1. LASTING EFFECTS ARE NOT BUILT (no page prints a trouble's `lastingEffects`); the stored field stays. Write no effects.
+2. NO QUESTION FORM. A HOOK IS A LEAD A DM CAN USE TONIGHT: something small and concrete that has happened or is about
+   to, done or hidden by the KIND of person or house this place holds. It MAY propose a twist the record does not hold
+   (that is what a hook is). It may NOT: name a house the place lacks (that is its NEED), contradict the record, or state a
+   past event as history. TODAY'S THREE A KIND STAY IN THE POOL, each behind its need (the guard captain's line needs a
+   watch AND organised crime). The "false to the record" judgments of TROUBLE-LINES-1 applied the page's STATEMENT rule to
+   hooks: withdrawn.
+3. NUMBERS: 12 hooks for crime_wave and guild_conflict, 9 for each of the other six; at least FOUR in each pool need
+   nothing; three kept by keyed ranking among those whose need holds; the stored array's length unchanged. THE BAR: the top
+   share of any one hook among a size's places about 15% or less, and the share of a place's hooks a second place also
+   prints under 30% (the chair's census: 22% at city size today); "three in a row share any" is reported, not the bar.
+   Re-run the pools measure on the new lines and give both bar figures by size.
+4. A HOOK MAY NEED A HIDEABLE FACT (organised crime, rival rings, criminal income...) ONLY BECAUSE HOOKS NEVER REACH A
+   READER: check (read only, name `path :: symbol`) whether `currentTensions[].plotHooks` is absent from the shared
+   projection and from the veil's served document; say what you find; LIST every hook whose need is hideable.
+THE FILE: the lines only, by kind, each beside its need (key and home) and its rate; the stored three marked.
