@@ -2355,3 +2355,36 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   Gost each take ONE verifying search for a better-fitting word the chair recalls but has not verified (Praetor as a
   Latin town's chief magistrate; Tysyatsky as the head of Novgorod's merchants' court): the better word takes the
   cells, the other goes to the unsure list. It lands with the next landing.
+- 08:09 UTC · **VEIL-24 SEATED (08:07; session_019yED1SVqrXxm7D27Cj7dv9; `lane/veil-24-2026-11-20`; `prompts/VEIL-24.txt`: it reads
+  PART 24 and the briefs ONLY). VEIL-23 at about 285,000 (08:03): PART 24 committed 56cad78c8, SELF-CONTAINED (28
+  rulings in one numbered list, every stage's state, each instrument in one command); it launched the VR47 builder
+  (brief 4d91d5c5f; display only; it must first prove no generator or stored path reads the seeded pick). THE
+  HAND-OVER PLAN TOLD TO IT: it takes the R3 cure's return itself ("R3 <commit>"), then "HANDED OVER at <commit>";
+  VEIL-24 writes the R4-CURE-2 brief and runs the rest; a builder that returns after the hand-over is relayed in one
+  line; if the chair reads VEIL-23 past 400,000 before R3's cure returns, it hands over at once.
+  SEAT-2 (07:58): "U1 cbd97ff63" merged on `lane/seat-2-2026-11-20` (tip fd5323d05; the censuses re-taken dcca344d8);
+  `tests/lint` whole 218 of 219, the one red its base's own (`negativeAssertionAnchor`, cured on the line at point
+  76: it leaves at the line's merge); U2 dispatched.
+  NAMES-3 (08:02): base read back e356c94f2. ITS FINDING: THE NAMES SEAT'S CONFINEMENT AND AGREEMENT TOOLS WERE NEVER
+  COMMITTED (the line holds the hand-back, the ten sentences and two page files; `lane/names-2-2026-11-20` holds no
+  script). THE CHAIR'S BRIEF SAID THEY WERE ON THE LINE: WRONG, written without reading for them; said to the seat.
+  WHAT FOLLOWS, RULED: (1) THE CONFINEMENT TOOL BECOMES A SHARED INSTRUMENT, built first and generic by NAMES-3 (two
+  trees; the golden's 525 and the census's 720; key by key; non-string differences; string leaves by field; a
+  planted control), at `docs/chair/2026-11-20/content/tools/confinement/`, "CONFINEMENT-TOOL <commit>" to the chair,
+  forwarded to SEAT-2, FRAME-3 and TRAD-2 (all three were told to prove confinement "by the names seat's method");
+  (2) ITS FIRST RUN RE-EXECUTES THE LANDING OF POINT 77 (7e0c77ae2 against e356c94f2; to reproduce: 4 and 76
+  identical, 0 non-string differences, 21,309 and 25,429 string leaves): the chair landed the names work on the
+  seat's word of an executed proof whose instruments are not in the repository: until NAMES-3's figures come, row
+  77's clearance is PLAUSIBLE, NOT RE-EXECUTED; (3) the agreement count is NAMES-3's own reader's, before and after.
+  FRAME-3 (08:00): THE SCRATCH MERGE of the line into FRAME-2's tip e374fed74: ONE conflict
+  (`scripts/mutation-coverage-manifest.json`: a union of both sides' rows); the lane calls the line's own
+  `powerNameInProse` (no copy); both names tests green; three reds, all re-pins by one cause (the names work changed
+  the born towns' prose): EVERY RED CALM TOWN'S MERGED DIGEST EQUALS THE LINE'S OWN AT e356c94f (so a calm sheet is
+  still today's line byte for byte). RULED: the three re-pins are the merge's own work, in the merge commit, each
+  with its proof (calm at the line; crisis at the line plus B5's diff alone; the veil test's shared reads at the
+  line); never by weakening an assertion.
+  TITLES-2's table of what stays on the fallback: 481 of 726; by its own word the small-size cells a DM meets most
+  (headman, council, elders at thorp to town) stay open mostly in mesoamerican, latin, germanic, celtic, greek and
+  norse. THE CHAIR WILL SEAT A THIRD PASS (TITLES-3) FOR EXACTLY THOSE CELLS after TITLES-2's final commit, with
+  candidate words to verify by source (the chair's recollection, not verified: Schultheiss for a German village;
+  Demarch and Komarch for a Greek town and village; Hersir for a Norse district; Magister for a Latin village).
