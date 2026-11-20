@@ -251,3 +251,86 @@ A0b (`tests/lint/proseComposed.walker.test.js :: A0b — the text claims every d
 
 EXECUTED: the register's reading, its red and its green; the declarations, the door and its check; both re-takes and their gates; every gate line above; the three-variant census at both trees; the mixed-pool re-statement at both trees and its per-pool table; the byte figures at both trees; A0b at both trees; the confinement.
 INFERRED (read, not run): why the five lines need no atom; that no test outside those grepped sweeps four-plus pools for reach; every row of the dm-only-slot table and the move plan; that DS-DEF-4's capture lens is printed nowhere.
+
+## BUILD-1-CURE ADDENDUM 1 (PROSE-3)
+
+On `lane/prose-3-2026-11-20-build1-cure` from 71702a768. Brief: `briefs/BUILD-1-CURE-ADDENDUM.md` at 8b7122937 (the chair's rulings of 21:39 UTC). Same rules: nothing pushed, no `--no-verify`, no pull request, heavy runs through the mutex, gates to files, the ledger ref not fetched, no shrink-only door raised.
+
+| commit | what |
+|---|---|
+| (none) | (b): STOPPED, see below. Nothing committed for it |
+| ef9ff3f27 | (c) the 18 dm-only lines out of the source and parked; the door; the manifest's mixed-pool pin back to 13 |
+| 488573535 | (c) the wiring census re-taken by its door |
+| d677d7425 | (c) the observed-shape baseline re-frozen by its door (provenance only) |
+| 61cfd8859 | (c) proseWiringCensus's counts re-keyed |
+| 3f42c1d36 | (c) proseComposed's corpus count re-keyed (A0b untouched) |
+| f9635365b | (c) proseEntryContradiction's counts re-keyed |
+| 74c95eb06 | (c) proseWaveGate's unit count re-keyed |
+| 6581c349c | (c) the shift register's five pins re-pinned (its `_pinIdiom`). THE CODE TIP |
+| (this section) | docs: this report |
+
+### (b) STOPPED: the existing thresholds do not hold over the widened class
+
+The addendum says: "the existing thresholds stand unless the widened class's measured figure exceeds them (then STOP and report the figure: a threshold is not raised)". Measured (EXECUTED: a scratch re-statement of both sweeps over every pool of three or more variants, the test's own 10,000 seeds / 2,000 append seeds, `drawVariant` from the tree, the test's `referenceHash` copied), at 71702a768 and again at 6581c349c:
+
+| the widened class | at 71702a768 | at 6581c349c | the existing threshold | holds? |
+|---|---|---|---|---|
+| pools of three or more | 782 (3: 484, 4: 150, 5: 43, 6: 40, 7: 37, 8: 8, 9: 7, 10: 6, 11: 3, 12: 2, 13: 2) | 781 | floor `>= 500` | yes |
+| per-pool deviation from 1/n, deepest (SE of 1/n) | 3.603 (DS-POW-5 theocracy slot 1, n=4) | 3.603 | `< 4.5` | yes |
+| a slot never reached | 0 | 0 | `[]` | yes |
+| pooled goodness of fit: chi-square over the slots, each slot's expectation the sum of N/n over the pools that have it (13 slots, df 12) | 17.361 | **19.721** | `< 13.816` (the df-2 critical value at p = 0.001) | **NO** |
+| deepest pooled departure, slot by slot, in points of the reads that could land there | 0.1494 | **0.1774** (slot 11) | `< 0.15` | **NO at the tip** |
+| append: share of reads that move | **21.858 %** | **21.907 %** (expected mean of 1/(n+1): 21.941) | `> 23` and `< 27` (25 % = 1/(3+1)) | **NO** |
+| append: movers that land on the new wording | all (0 between two old) | all (0 between two old) | `toBe(stableToNew)`, `betweenOld []` | yes |
+| modulus: share moved / share of movers to the new | 78.084 / 28.001 | 78.035 / 28.086 | `> 70`, `< 80` / `< 40` | yes |
+
+For comparison (EXECUTED): over the three-variant class alone the chi-square is 1.823 (at 71702a768) and 1.701 (at the tip). Grouped by n, each group's chi-square is under its own p = 0.001 critical value (n = 4: 5.629 against 16.266 ... n = 13: 11.181 against 32.909). That is a different threshold, so I did not adopt it. What failed is the literal form: a df-2 critical value, a 0.15-point band and a 23-27 % band, each sized for n = 3 only. The fix needs a ruling, which is the chair's. Nothing was committed for (b); the floors stay where BUILD-1 left them (`>= 484`) and the test is green there (38 passed). FACT CORRECTION: the brief's "about 501 pools" is the three-variant count at the base; three-or-more is 782 at 71702a768 and 781 at the tip (776 at the base).
+
+### (c) THE EIGHTEEN DM-ONLY LINES OUT; THE ARM 91 -> 0; MIXED POOLS 16 -> 13
+
+- THE FOUR POOLS CONFIRMED BY THE MARKS (EXECUTED: every `+` row of `git diff 87f03395b..71702a768` of the source carrying `dm-only`, 18 rows, 0 removed): DS-ECO-6 TIER: minor shadow activity (≥3) v6-v11 (6); DS-POW-6 operation role `duty evasion` v4-v7 (4); DS-DEF-4 structure `null` v4-v7 (4); DS-DEF-4 FIXTURE: black market v3-v6 (4). Each pool's last rows: no public row followed them, so nothing was renumbered and no existing row moved.
+- PARKED word for word in `docs/chair/2026-11-20/content/prose/lines/DM-ONLY-PARKED.md` (EXECUTED: its 18 rows `diff` against the source's 18 rows at 71702a768: identical; the removal's 18 `-` rows `diff` against the same: identical).
+- THE DOOR (EXECUTED): `npm run gen:dossier-prose` first REFUSED: "the numbering guard (FR7) refuses 18 move(s) against the baseline (the state leaves as committed)" (DROPPED v6 ... v11, ...). Its baseline is the leaves on disk, and those still held the 18 never-shipped rows. As BUILD-1's step 1 did ("THE NUMBERING BASELINE", above), I restored the six leaves to the base projection (87f03395b) and re-ran the door: "wrote 69 state blocks / 3176 variants" (3194 - 18); `-- --check` exit 0. The leaves' diff against 71702a768 removes the 18 variants and adds no text, only variant counts and vid lists. Pools: DS-ECO-6 12 -> 6, DS-POW-6 duty evasion 7 -> 3, DS-DEF-4 structure null 7 -> 3, black market 6 -> 2.
+- THE MANIFEST (EXECUTED): `tests/property/dossierProseManifest.test.js` restored to the base's line (`toBe(13)`; BUILD-1's 13 -> 16 comment gone; the file equals 87f03395b's). RED first, the pin restored before the removal: `the two controls no one-audience manifest can see > ⭐ THE MIXED-POOL AUDIENCE ARM: the two faces differ only where a pool is mixed`, "mixed pools in the shipped corpus: expected 16 to be 13" (at 71702a768 the same arm read "positions where the two faces draw differently: expected 91 to be +0"). GREEN after: the arm passes; the file "Tests 1 failed | 19 passed (20)", the one red THE DRIFT ARM's 1050 rows, which are red at the base too. Re-measured over the DRIFT corpus (the scratch re-statement of (c) above): mixed pools **16 -> 13**, positions where the faces differ **91 -> 0**, DM-only positions 214, player-only 0.
+- THE PINS THE REMOVAL MOVED, each by its door or re-keyed to the measured figure with its cause, one commit each (EXECUTED, before and after in each message):
+  - wiring census: variants 3194 -> 3176, the four rows; THIN 612 and COVERED 249 unchanged
+  - observed-shape baseline: provenance only; 2214 / 1552 / 444 unchanged
+  - proseWiringCensus: 3194 -> 3176 (x3); mean '3.71' -> '3.69'; histogram 2: 79 -> 80, 3: 484 -> 486, 7: 37 -> 35, 12: 2 -> 1
+  - proseComposed: corpus 3194 -> 3176
+  - proseEntryContradiction: 3662 -> 3644; 2954 -> 2936 (x2); trailing coordinate 393 -> 391 (DS-DEF-4 structure null v5 v6 leave the class)
+  - proseWaveGate: units 720 -> 712 (DS-DEF-4 -4 and -4)
+  - shift register: variant-count 3194 -> 3176 and its digest; face-count 3194 -> 3176 and its digest; the vids digest. FLAGGED, owner-gated classes
+  - NOT MOVED: census2DeclaredPools (10 passed, its BUILD-1 vid lists untouched); proseMoveGrammar (54 passed); the undeclared-lines register (8 passed; no count fell, since the parked lines were declared or sat in a `{colour}` pool).
+- NOT MINE, NAMED: `tests/domain/composeStateProse.test.js` reds "variants: expected 3176 to be 3054". It still pins the base's 3054, so it was red at 71702a768 too (3194). BUILD-1 never re-keyed it and it is outside this addendum's list, so I did not touch it (INFERRED for 71702a768 from the pin's literal and that tip's 3194 variants; EXECUTED at this tip).
+
+### (d) THE FIGURES AFTER (c) (EXECUTED)
+
+| | base 87f03395b | 71702a768 | 6581c349c |
+|---|---|---|---|
+| economy leaf raw | 196,627 | 216,267 | **213,968** |
+| economy leaf gzip (level 9) | 26,784 | 29,284 | **28,935** |
+| A0b under-claims (ceiling 2,103) | 2,103 | 2,336 | **2,322** |
+
+Still red BY NAME, raised by nobody: the byte ratchet's RAW arm (all six leaves over their committed rows; defense 299,885, power 139,927 now) and GZIP arm (defense 39,774, economy 28,935, general 39,521, power 19,222); A0b 2,322 > 2,103. Over-claims 19 (ceiling 19), implicit negations 13 (13).
+
+### THE GATES at the code tip 6581c349c (EXECUTED, each to a file through the mutex)
+
+| gate | count line | exit |
+|---|---|---|
+| `declarationRegisters.test.js` (the undeclared-lines test) | Tests 8 passed (8) | 0 |
+| `census2DeclaredPools.test.js` | Tests 10 passed (10) | 0 |
+| `stateProseKernel.test.js` | Tests 38 passed (38) | 0 |
+| `proseComposed.walker.test.js` | Tests 1 failed / 86 passed (87): A0b | 1 |
+| `proseEntryContradiction.walker.test.js` | Tests 29 passed (29) | 0 |
+| `proseMoveGrammar.walker.test.js` | Tests 54 passed (54) | 0 |
+| `proseWaveGate.walker.test.js` | Tests 44 passed (44) | 0 |
+| `proseWiringCensus.walker.test.js` | Tests 79 passed (79) | 0 |
+| `dossierProseManifest.test.js` | Tests 1 failed / 19 passed (20): THE DRIFT ARM (1050, red at the base) | 1 |
+| `dossierStateProseProjection.contract.test.js` (the shift register) | Tests 79 passed (79) | 0 |
+| `npx vitest run tests/lint` WHOLE | Test Files 3 failed / 217 passed (220); Tests 3 failed / 3258 passed (3261): proseCorpusBytes RAW and GZIP, proseComposed A0b; and `ledgerCitationIntegrity.test.js` fails to load: not run, the ledger ref is not fetchable here | 1 |
+| confinement `trees.mjs 87f03395b 6581c349c --words=none` | golden 525 · identical 525 · non-string differences **0**; census 720 · identical 720 · non-string differences **0** | 0 |
+
+### EXECUTED vs INFERRED (this addendum)
+
+EXECUTED: every figure in the (b) table; the four pools by their marks; the parked text's identity; the door's refusal and its re-run; the manifest's red and green; the arm's 91 -> 0 and 16 -> 13; every re-key's before and after; the (d) figures; every gate line; the confinement.
+INFERRED: that `composeStateProse.test.js` was red at 71702a768 (from its literal); that grouping by n is a different threshold, not the existing one (a reading of the test's own text).
