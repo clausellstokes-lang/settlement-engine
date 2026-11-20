@@ -89,7 +89,8 @@ export const NEW_SETTLEMENT_TROUBLE_LAW_VERSION = DEFAULT_TROUBLE_LAW_VERSION;
 
 /**
  * ⭐ THE TROUBLE LAW'S ONE TUNING TABLE. EVERY VALUE IS A DRAFT, signed by none (the seat KINDS-1's
- * figures, 2026-11-20). Read only under law 2; a law-1 world never reads it.
+ * figures, 2026-11-20; the crime row is the chair's choice B50 of 22:10 UTC). Read only under law 2; a
+ * law-1 world never reads it.
  *
  * A row's chance is `floor + (ceiling - floor) * clamp((read - readLow) / (readHigh - readLow), 0, 1)`;
  * a read that is not a finite number gives the row's midpoint `(floor + ceiling) / 2`.
@@ -104,7 +105,7 @@ export const NEW_SETTLEMENT_TROUBLE_LAW_VERSION = DEFAULT_TROUBLE_LAW_VERSION;
  * @type {Readonly<Record<'crimeWave'|'guildConflict'|'smallPlaceCrime', Readonly<{read: string, floor: number, ceiling: number, readLow: number, readHigh: number}>>>}
  */
 export const TROUBLE_WEIGHT_TUNING = Object.freeze({
-  crimeWave: Object.freeze({ read: 'criminalEffective', floor: 0.10, ceiling: 0.40, readLow: 20, readHigh: 100 }),
+  crimeWave: Object.freeze({ read: 'criminalEffective', floor: 0.05, ceiling: 0.50, readLow: 20, readHigh: 90 }),
   guildConflict: Object.freeze({ read: 'economyPowers', floor: 0.05, ceiling: 0.25, readLow: 1, readHigh: 4 }),
   smallPlaceCrime: Object.freeze({ read: 'criminalEffective', floor: 0.50, ceiling: 0.90, readLow: 15, readHigh: 60 }),
 });
