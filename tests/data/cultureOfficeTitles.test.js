@@ -238,7 +238,7 @@ describe('TITLES-2 · the cells filled by research (each word\'s gloss and sourc
     ['slavic', 'merchant', [null, null, null, 'Gost', 'Gost', 'Gost']],
     ['east_asian', 'headman', ['Nanushi', 'Nanushi', 'Nanushi', 'Toshiyori', 'Toshiyori', 'Toshiyori']],
     ['east_asian', 'council', [null, null, null, 'Toshiyori', 'Toshiyori', 'Tairo']],
-    ['east_asian', 'elders', ['Otona', 'Otona', 'Otona', 'Toshiyori', 'Toshiyori', 'Toshiyori']],
+    ['east_asian', 'elders', [null, null, null, 'Toshiyori', 'Toshiyori', 'Toshiyori']],
     ['east_asian', 'military', [null, null, 'Kumigashira', 'Obangashira', 'Obangashira', 'Obangashira']],
     ['mesoamerican', 'military', [null, null, null, 'Tlacateccatl', 'Tlacateccatl', 'Tlacateccatl']],
     ['south_asian', 'elders', ['Sarpanch', 'Sarpanch', 'Sarpanch', 'Sarpanch', null, null]],

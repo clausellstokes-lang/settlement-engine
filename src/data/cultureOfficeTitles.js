@@ -184,7 +184,7 @@ export const CULTURE_OFFICE_TITLES = Object.freeze({
     appointed: ladder(null, null, 'Daikan', 'Bugyo', 'Bugyo', 'Bugyo'),
     headman: ladder('Nanushi', 'Nanushi', 'Nanushi', 'Toshiyori', 'Toshiyori', 'Toshiyori'), // TITLES-2 at town and up: the town elder
     council: ladder(null, null, null, 'Toshiyori', 'Toshiyori', 'Tairo'), // TITLES-2: the town elder; the great elder
-    elders: ladder('Otona', 'Otona', 'Otona', 'Toshiyori', 'Toshiyori', 'Toshiyori'), // TITLES-2: the village elders; the town elder
+    elders: ladder(null, null, null, 'Toshiyori', 'Toshiyori', 'Toshiyori'), // TITLES-2: the town elder (Otona below town struck by the chair: shrine-parish origin)
     military: ladder(null, null, 'Kumigashira', 'Obangashira', 'Obangashira', 'Obangashira'), // TITLES-2: the squad's leader; captain of the guard
   }),
   mesoamerican: Object.freeze({

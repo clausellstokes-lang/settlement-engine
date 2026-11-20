@@ -1,4 +1,4 @@
-# TITLES-2: HAND-BACK (written 2026-11-20 07:19 UTC; branch `lane/titles-2-2026-11-20`, cut at `0fb18a574`)
+# TITLES-2: HAND-BACK (written 2026-11-20 07:19 UTC, amended 2026-11-20 07:28 UTC on the chair's rulings; branch `lane/titles-2-2026-11-20`, cut at `0fb18a574`)
 
 This is the second pass on the office titles. It fills the commonest fallback cells with words read in a named source.
 
@@ -11,16 +11,22 @@ This is the second pass on the office titles. It fills the commonest fallback ce
 
 **Search:** WebSearch worked all session. Every word below was read in the source named beside it, in this session. No cell rests on memory alone.
 
-## 1. The cells added: 74 cells, 24 words, 22 rows
+**The chair's rulings on the first twelve (received 07:27 UTC) are applied:**
+- Otona is struck. The three cells, east_asian elders at thorp to village, fall back to "Elder".
+- Ra'is is kept for two families, with the reason given in §1.
+- A say-it hint is added for each hard word (§1a).
+- Each source is recorded as the page read plus the named work it rests on.
+
+## 1. The cells added: 71 cells, 23 words, 22 rows
 
 **Counts:**
 
 | | before (TITLES-1) | now |
 |---|---|---|
-| culture cells authored | 174 | **248** (+74) |
-| left to the fallback | 552 | **478** (of 726; the faith row's 66 included) |
-| `CULTURE_OFFICE_WORDS` rows | 106 | **133** |
-| flagged words | — | **1** (Otona) |
+| culture cells authored | 174 | **245** (+71) |
+| left to the fallback | 552 | **481** (of 726; the faith row's 66 included) |
+| `CULTURE_OFFICE_WORDS` rows | 106 | **132** |
+| flagged words in the table | — | **0** (Otona was flagged, then struck by the chair) |
 | unsure cells still on the fallback | listed in §3 | |
 
 These counts were rendered by a script from the data file. The same script, run on `0fb18a574`'s file, gives TITLES-1's own 174, 552 and 106, which proves the renderer.
@@ -31,7 +37,9 @@ These counts were rendered by a script from the data file. The same script, run 
 - **arabic council, town to metropolis: Ra'is**, "head of the notables".
   - The office: the urban leader of the notables in tenth- to twelfth-century Aleppo and Syria (ra'is al-balad, the town head).
   - Sources: Wikipedia "Rais", citing the Encyclopaedia of Islam, 2nd ed., "Raʾīs"; the Toyo Bunko Memoirs 57 article on Syrian local society; the 2025 *Historical Research* article on the ra'is of Aleppo.
-  - Ra'is already serves the headman row at town and up (TITLES-1).
+  - **Ra'is is one word shared by two families (the chair's ruling).** TITLES-1 put it in the headman row at town and up; it is now in the council row at the same sizes.
+    - **Why the sources support both rows.** The works cited show the ra'is as a town's head; they also show him as the leader of its notables (Aleppo, 10th to 12th centuries); in Crusader-era Syria the same word named a village or community head with jurisdiction. A town's ra'is spoke for, and led, the body of its notables. One town has one form of government, so a DM never meets both rows in one place.
+    - **The alternatives.** I found no distinct sourced word for the first of a council of notables. Sheikh is excluded because the elders and the sovereign already use it.
 - **slavic council, town to metropolis: Golova**, "the city's head".
   - The office: the *gorodskoy golova*, elected head of the city duma and of the town council it presided over, under Catherine II's Charter to the Towns (1785) and the city statutes of 1870.
   - Sources: Wikipedia "City duma"; Britannica "Charters to the Nobility and the Towns".
@@ -45,7 +53,7 @@ These counts were rendered by a script from the data file. The same script, run 
 
 **Priority 2: the elders' first**
 - **steppe elders, every size: Biy** (as above: the biys were the judge-elders).
-- **east_asian elders: Otona at thorp to village, Toshiyori at town and up.** Otona is FLAGGED, see §2.
+- **east_asian elders: Toshiyori at town and up.** Otona at thorp to village was flagged and is STRUCK by the chair, so those three cells read "Elder". The source for Otona was:
   - Otona, "the village elders": the leaders of the self-governing *sō* villages of the 14th to 16th centuries. In Suganoura in the 15th century they were twenty elders chosen from the households. Sources: Japanese Wiki Corpus "Soson"; Tanaka (1995) and Nishiki (1994) via J-STAGE.
 - **south_asian elders, thorp to town: Sarpanch**, "head of the panchayat".
   - The office: the panchayat was traditionally a council of respected elders, and its leader was called sarpanch, mukhiya or pradhan.
@@ -116,10 +124,32 @@ These counts were rendered by a script from the data file. The same script, run 
 
 **The sovereign's ladder and TITLES-1's words:** I found no word wrong, so none is changed.
 
+## 1a. Say it: plain-letter hints for the owner (stress in capitals)
+
+| word | say it | word | say it |
+|---|---|---|---|
+| Ra'is | rah-EES | Golova | guh-luh-VAH |
+| Toshiyori | toh-shee-YOH-ree | Tairo | TIE-roh |
+| Biy | BEE | Beg / Begim | BEG / beg-EEM |
+| Sarpanch | SAR-punch | Zunftmeister | TSOONFT-my-ster |
+| Jetthaka | JET-ta-ka | Gost | GOST |
+| Podestà | poh-deh-STAH | Marschall | MAR-shall |
+| Penteulu | pen-TAY-lee | Kumigashira | koo-mee-gah-SHEE-rah |
+| Obangashira | oh-bahn-gah-SHEE-rah | Tlacateccatl | tlah-kah-TEK-kahtl |
+| Amir al-Juyush | ah-MEER al-joo-YOOSH | Stallari | STAHL-lah-ree |
+| Vilicus / Vilica | VIL-ih-kus / VIL-ih-ka | Maer | MIRE |
+| Tiun | tee-OON | | |
+
+These hints are from the words' usual English renderings. They are not drawn from the sources and are not executed: they are a reading aid.
+
+**Sources: the page and the work it rests on.** Where a page names the work it rests on, both appear in §1, as they do for Ra'is, Tlacateccatl, Zunftmeister, Vilicus and Maer. For Biy, Gost, Tairo, Obangashira, Kumigashira, Stallari, Penteulu, Tiun, Podestà, Marschall, Amir al-Juyush, Golova, Beg and Jetthaka, the page read IS the reference work, or names none beyond itself. The pages are Wikipedia, Britannica, Encyclopedia of Ukraine, Iranica, and the Old Norse dictionary entry with its Heimskringla citations.
+
+**Where sources disagreed.** They disagreed only on details, never on what the office was. On the machi-doshiyori, they disagreed on whether the holders were chosen or hereditary. On the tiun, they disagreed on his blood-price. On the date of Badr al-Jamali's rise, they disagreed by a year. So no cell was moved to the fallback on that ground.
+
 ## 2. Flagged, and notes for the chair
 
 **FLAGGED:**
-- **Otona** (east_asian elders, thorp to village). Its sense as an office is the elders of a self-governing medieval village. In origin it was the representative of a *miyaza*, a shrine-parishioners' body; Shinto is a living faith. Its first meaning today is "adult". It is in the table, as Wali is. The chair may strike it, and those three cells would fall back to "Elder".
+- **Otona: STRUCK by the chair (07:27 UTC).** It began as a shrine-parish (*miyaza*) representative, which touches a living faith, and "Elder" may stand. No flagged word remains in the table.
 
 **Notes (not sacred, no action needed):**
 - **Toshiyori** is also today's title of a sumo elder.
@@ -285,7 +315,7 @@ EAST_ASIAN
  headman    Nanushi                 Nanushi                 Nanushi                 Toshiyori               Toshiyori               Toshiyori
  council    ·                       ·                       ·                       Toshiyori               Toshiyori               Tairo
  assembly   ·                       ·                       ·                       ·                       ·                       ·
- elders     Otona                   Otona                   Otona                   Toshiyori               Toshiyori               Toshiyori
+ elders     ·                       ·                       ·                       Toshiyori               Toshiyori               Toshiyori
  merchant   ·                       ·                       ·                       ·                       ·                       ·
  guild      ·                       ·                       ·                       ·                       ·                       ·
  faith      ·                       ·                       ·                       ·                       ·                       ·
@@ -345,7 +375,7 @@ GREEK
  arcane     ·                       ·                       ·                       ·                       ·                       ·
  criminal   the BASE rows (underboss, crime_boss); heading "Crime Bosses"
 
-COUNTS: authored culture cells 248; culture cells left to the fallback 478 (of 726); base cells 24; CULTURE_OFFICE_WORDS rows 133
+COUNTS: authored culture cells 245; culture cells left to the fallback 481 (of 726); base cells 24; CULTURE_OFFICE_WORDS rows 132
 ```
 
 ## 5. Red and green, with counts
@@ -380,7 +410,8 @@ All runs were on this branch, with none of GIT_DIR, GIT_WORK_TREE, GIT_INDEX_FIL
 **Commits:**
 - `341e87336`: the cells and the tests.
 - `ec74bf071`: the census.
-- this hand-back.
+- `ce8afed84`: this hand-back.
+- The next commit: the chair's rulings. Otona struck in the data file and its pin; this file amended.
 
 ## 6. Executed versus plausible
 
@@ -388,7 +419,7 @@ All runs were on this branch, with none of GIT_DIR, GIT_WORK_TREE, GIT_INDEX_FIL
 - every count in §1 and §5;
 - the four plants and their restores;
 - every gate in §5;
-- the classifier measure: `roleToCategory`, `classOfRole` and `holdsOffice` over all 24 words, run in node;
+- the classifier measure: `roleToCategory`, `classOfRole` and `holdsOffice` over all 24 words (Otona since struck), run in node;
 - the civility grep;
 - the renderer's proof against TITLES-1's own counts;
 - each source was read this session, by WebSearch: the result pages' summaries and their named works.
@@ -404,3 +435,11 @@ All runs were on this branch, with none of GIT_DIR, GIT_WORK_TREE, GIT_INDEX_FIL
 Each cell is the owner's to veto. A struck cell falls back to today's title, and the fallback is pinned.
 
 Written 2026-11-20 07:23 UTC.
+
+**Re-run after the chair's rulings, on the amended table:**
+- the suite is 19/19 green;
+- the plants again, each restored by `cmp`:
+  - crown word in a council cell: **4/19** red;
+  - a fallback that is not today's: **3/19** red;
+  - Imam in a criminal cell: **2/19** red;
+  - **Otona planted back** at east_asian elders, thorp: **1/19** red. The strike is pinned.
