@@ -22,15 +22,15 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 import * as SIBLINGS from '../../../src/data/powerSiblings.js';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
-import { buildGovernanceLabels } from '../../../src/generators/power/governanceNarrative.js';
+import { FIELD_ROTATION_QUARREL, buildGovernanceLabels } from '../../../src/generators/power/governanceNarrative.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
 import { factsOf } from '../../../src/domain/facts/factsOf.js';
-import { atomsOf, declarationAdmits, declarationOf } from '../../../src/domain/facts/factVocabulary.js';
+import { atomsOf, declarationAdmits, declarationOf, parseAtom } from '../../../src/domain/facts/factVocabulary.js';
 import { withPresumptionLedger } from '../../../src/domain/facts/presumptionLedger.js';
 import { clearActiveRng, getActiveRng, setActiveRng } from '../../../src/kernel/rngContext.js';
 
-/** @type {Readonly<Record<string, ReadonlyArray<{ id: string, text: string, needs: ReadonlyArray<string> }>>>} */
+/** @type {Readonly<Record<string, ReadonlyArray<{ id: string, text: string | null, needs: ReadonlyArray<string> }>>>} */
 const POOLS = /** @type {any} */ (SIBLINGS).QUARREL_POOLS ?? {};
 const POOL_OF = (/** @type {string} */ ledgerPool) => ledgerPool.replace(/^governanceNarrative:/, '');
 const isQuarrelNote = (/** @type {{ pool?: unknown }} */ e) => typeof e?.pool === 'string' && /^governanceNarrative:(GRAZING|LEVIES)$/.test(e.pool);
@@ -43,8 +43,11 @@ function born(size, i) {
   return { seed, record: /** @type {any} */ (result), pick: notes.length ? notes[notes.length - 1] : null };
 }
 
-/** The pool line a ledger note names. @param {{ pool: string, lineId: string | number }} note */
-const lineOf = (note) => (POOLS[POOL_OF(note.pool)] || []).find((l) => l.id === note.lineId) ?? null;
+/** The pool line a ledger note names (the field rotation's row carries its text at the site). @param {{ pool: string, lineId: string | number }} note */
+const lineOf = (note) => {
+  const line = (POOLS[POOL_OF(note.pool)] || []).find((l) => l.id === note.lineId) ?? null;
+  return line && line.text === null ? { ...line, text: FIELD_ROTATION_QUARREL } : line;
+};
 
 const BASE = Object.freeze({
   factions: [{ faction: 'Elected Reeve', isGoverning: true }],
@@ -83,10 +86,13 @@ describe('BUILD-CONFLICT · the recent conflict picks its everyday quarrel by ke
 
   it('the pools: index 0 of each is the rung line it serves, and every line declares its needs in the vocabulary', () => {
     expect(Object.keys(POOLS).sort()).toEqual(['GRAZING', 'LEVIES']);
+    // the one row with no text is the field rotation's, whose literal stays at the site
+    expect(Object.values(POOLS).flat().filter((l) => l.text === null).map((l) => l.needs)).toEqual([['tier: village']]);
     for (const [name, pool] of Object.entries(POOLS)) {
       expect(new Set(pool.map((l) => l.id)).size, `${name}: ids are unique`).toBe(pool.length);
       expect(new Set(pool.map((l) => l.text)).size, `${name}: texts are unique`).toBe(pool.length);
       for (const line of pool.slice(1)) expect(line.needs.length, `${name} ${line.id} declares a need`).toBeGreaterThan(0);
+      for (const line of pool) for (const atom of line.needs) expect(parseAtom(atom), `${name} ${line.id}: ${atom} is an atom`).not.toBe(null);
     }
     expect(withPresumptionLedger(() => governance(RUNGS.default)).result).toBe(POOLS.GRAZING[0].text);
   });
@@ -110,8 +116,7 @@ describe('BUILD-CONFLICT · the recent conflict picks its everyday quarrel by ke
     const [grazing, rotation, levies] = noted.result;
     expect(noted.ledger.filter(isQuarrelNote)).toEqual([]);
     expect(grazing).toBe(POOLS.GRAZING[0].text);
-    const rotationLine = POOLS.GRAZING.find((l) => l.needs.includes('tier: village'));
-    expect(rotation).toBe(rotationLine?.text);
+    expect(rotation).toBe(FIELD_ROTATION_QUARREL);
     // the levies line opens with the council, which the rewriter names for the place; the rest is index 0's own words
     const tail = (/** @type {unknown} */ s) => String(s).slice(String(s).indexOf(' has been '));
     expect(tail(levies)).toBe(tail(POOLS.LEVIES[0].text));

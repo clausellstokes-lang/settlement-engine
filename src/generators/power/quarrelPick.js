@@ -6,7 +6,8 @@
  * Three rungs of `governanceNarrative.js :: deriveBaselineConflict` printed one sentence each in most places of their size.
  * Where such a rung's line PRINTS (the site's own rule: no primary-stress narrative overrides it, or the `infiltrated` one
  * carries it), the site hands it here, and the place's quarrel is chosen from the rung's pool
- * (`data/powerSiblings.js :: QUARREL_POOLS`, keyed by `QUARREL_POOL_OF_RUNG`): the argmax of
+ * (`data/powerSiblings.js :: QUARREL_POOLS`, keyed by `QUARREL_POOL_OF_RUNG`, and the field rotation the site hands in
+ * beside: its literal stays at the site, where the presumption-classes register banks it): the argmax of
  * `hashKey(<seed>::governanceNarrative:<POOL>::<id>)` over the lines whose needs the place holds.
  *
  * NO ROLL. The seed is read off the active stream and nothing is drawn from it (`safetyProfile.js :: voiceOf`'s idiom), so
@@ -33,7 +34,7 @@ import { declarationAdmits, declarationOf } from '../../domain/facts/factVocabul
 import { hashKey } from '../../domain/display/stateProse/stateProseKernel.js';
 import { getActiveRng } from '../../kernel/rngContext.js';
 
-/** @typedef {{ id: string, text: string, needs: ReadonlyArray<string> }} Quarrel */
+/** @typedef {{ id: string, text: string | null, needs: ReadonlyArray<string> }} Quarrel */
 
 /**
  * The admitted line with the highest `hashKey(key::id)`, or null when none is admitted.
@@ -58,17 +59,23 @@ function argmaxOf(lines, admitted, key) {
  * The place's everyday quarrel, where the ladder's line is a rung line of a pool.
  * @template T
  * @param {T} baseline the line the ladder chose, where it prints
- * @param {{ facts: () => object | null, noGrazing?: string | null }} site the site's facts (roster, tier and config) as a
- *   thunk, and the no-grazing twin the power step read off the place (`noGrazingQuarrelOf`), if any
+ * @param {{ facts: () => object | null, noGrazing?: string | null, fieldRotation?: string | null }} site the site's facts
+ *   (roster, tier and config) as a thunk; the no-grazing twin the power step read off the place (`noGrazingQuarrelOf`), if
+ *   any; and the field-rotation rung's own line (`governanceNarrative.js :: FIELD_ROTATION_QUARREL`), the text of GRAZING's
+ *   row that carries none
  * @returns {T | string} the picked quarrel's text; the baseline untouched where it is no rung line, or no seed is active
  */
-export function pickQuarrel(baseline, { facts, noGrazing = null }) {
+export function pickQuarrel(baseline, { facts, noGrazing = null, fieldRotation = null }) {
   if (typeof baseline !== 'string') return baseline;
   const rungPool = Object.prototype.hasOwnProperty.call(QUARREL_POOL_OF_RUNG, baseline) ? QUARREL_POOL_OF_RUNG[baseline] : null;
-  const poolName = rungPool ?? (noGrazing && baseline === noGrazing ? 'GRAZING' : null);
+  const grazingRung = (noGrazing && baseline === noGrazing) || (fieldRotation && baseline === fieldRotation);
+  const poolName = rungPool ?? (grazingRung ? 'GRAZING' : null);
   const seed = getActiveRng()?.seed;
   if (!poolName || !seed) return baseline;
   const pool = /** @type {ReadonlyArray<Quarrel>} */ (QUARREL_POOLS[/** @type {'GRAZING'|'LEVIES'} */ (poolName)]);
+  // a row with no text is the site's own line (the field rotation): it prints the text handed in, and with none it is
+  // never picked
+  const textOf = (/** @type {Quarrel} */ line) => (line.text === null ? fieldRotation : line.text);
   /** @type {object | null | undefined} */
   let held;
   const read = () => {
@@ -76,7 +83,8 @@ export function pickQuarrel(baseline, { facts, noGrazing = null }) {
     return held;
   };
   const key = `${seed}::governanceNarrative:${poolName}`;
-  const admitted = (/** @type {Quarrel} */ line) => declarationAdmits(declarationOf(line), /** @type {import('../../domain/facts/factVocabulary.js').FactsLike} */ (read())).admitted;
+  const admitted = (/** @type {Quarrel} */ line) => typeof textOf(line) === 'string'
+    && declarationAdmits(declarationOf(line), /** @type {import('../../domain/facts/factVocabulary.js').FactsLike} */ (read())).admitted;
   const picked = drawDeclared(pool, {
     draw: (lines) => argmaxOf(lines, admitted, key),
     facts: read,
@@ -85,6 +93,7 @@ export function pickQuarrel(baseline, { facts, noGrazing = null }) {
     surface: 'power',
     drawKind: 'H',
   });
-  if (typeof picked.text !== 'string') return baseline;
-  return picked.line === pool[0] && noGrazing ? noGrazing : picked.text;
+  const text = picked.line ? textOf(picked.line) : null;
+  if (typeof text !== 'string') return baseline;
+  return picked.line === pool[0] && noGrazing ? noGrazing : text;
 }
