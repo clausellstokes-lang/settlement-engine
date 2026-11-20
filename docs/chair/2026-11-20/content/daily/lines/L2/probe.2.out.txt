@@ -1,0 +1,287 @@
+RE-RUN: node docs/chair/2026-11-20/content/daily/lines/L2/probe.2.mjs > docs/chair/2026-11-20/content/daily/lines/L2/probe.2.out.txt 2>&1
+births: 900 (150 a size, M1's recipe) in 96s
+slots derived in 1s
+
+════ 1. SHARES by size (of 150, %): TOP TEXT = the top single non-empty slot text; TOP SENTENCE = the top sentence (places printing it); EMPTY = slot text ''
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| food_culture: TOP TEXT % | 9 | 9 | 9 | 7 | 7 | 8 |
+| food_culture: TOP SENTENCE % | 9 | 9 | 9 | 7 | 7 | 8 |
+| food_culture: DISTINCT texts | 31 | 31 | 32 | 38 | 35 | 33 |
+| food_culture: EMPTY % | 0 | 0 | 0 | 0 | 0 | 0 |
+| commoner_resentments: TOP TEXT % | 7 | 5 | 9 | 3 | 7 | 9 |
+| commoner_resentments: TOP SENTENCE % | 10 | 7 | 10 | 6 | 9 | 11 |
+| commoner_resentments: DISTINCT texts | 44 | 66 | 50 | 65 | 46 | 39 |
+| commoner_resentments: EMPTY % | 19 | 9 | 7 | 35 | 34 | 26 |
+| commoner_resentments_dm: TOP TEXT % | 4 | 3 | 1 | 2 | 5 | 5 |
+| commoner_resentments_dm: TOP SENTENCE % | 4 | 3 | 1 | 2 | 5 | 5 |
+| commoner_resentments_dm: DISTINCT texts | 3 | 3 | 3 | 7 | 6 | 6 |
+| commoner_resentments_dm: EMPTY % | 93 | 93 | 98 | 92 | 83 | 83 |
+| outsider_impressions: TOP TEXT % | 1 | 1 | 1 | 1 | 2 | 3 |
+| outsider_impressions: TOP SENTENCE % | 13 | 15 | 15 | 9 | 9 | 9 |
+| outsider_impressions: DISTINCT texts | 149 | 150 | 145 | 149 | 140 | 132 |
+| outsider_impressions: EMPTY % | 0 | 0 | 0 | 0 | 0 | 0 |
+| unspoken_topics: TOP TEXT % | 5 | 5 | 3 | 7 | 4 | 5 |
+| unspoken_topics: TOP SENTENCE % | 5 | 5 | 3 | 7 | 4 | 5 |
+| unspoken_topics: DISTINCT texts | 57 | 57 | 58 | 53 | 42 | 37 |
+| unspoken_topics: EMPTY % | 14 | 22 | 10 | 19 | 49 | 49 |
+| recent_changes: TOP TEXT % | 3 | 1 | 2 | 5 | 4 | 5 |
+| recent_changes: TOP SENTENCE % | 10 | 11 | 13 | 6 | 6 | 5 |
+| recent_changes: DISTINCT texts | 134 | 145 | 147 | 131 | 119 | 129 |
+| recent_changes: EMPTY % | 0 | 0 | 0 | 0 | 1 | 1 |
+  food_culture thorp: top sentences (14) "There is enough to eat, if nobody asks for much more than the day needs." · (13) "Most households eat simply, and they eat enough." · (13) "Food is steady rather than generous: enough for every household, with little to spare."
+  food_culture hamlet: top sentences (13) "There is more than enough to eat, and nobody here goes to bed hungry." · (12) "Meals are plain and filling, and little goes to waste." · (10) "Nobody here goes hungry, though few eat richly."
+  food_culture village: top sentences (14) "There is more than enough to eat, and nobody here goes to bed hungry." · (12) "Plain food is plentiful here, and second helpings are not begrudged." · (12) "The better-off eat well, and the rest eat plainly but enough."
+  food_culture town: top sentences (10) "A pot of stew over the fire is the usual supper, and there is usually enough to go round." · (10) "The better-off eat well, and the rest eat plainly but enough." · (9) "Food is steady rather than generous: enough for every household, with little to spare."
+  food_culture city: top sentences (11) "Food costs more than most people can comfortably pay, so they buy less of it." · (9) "Bread is eaten carefully, and not even the heel of the loaf is wasted." · (9) "Portions are small, and the stew is often thinner than anyone would like."
+  food_culture metropolis: top sentences (12) "Loaves shrink each month; householders stretch what they can." · (12) "Portions are small, and the stew is often thinner than anyone would like." · (12) "Even in comfortable households, the cooks count what goes into the pot."
+  commoner_resentments thorp: top sentences (15) "Few here would say that the Elder Council speaks for them." · (13) "People say the council is slow to listen and quick to decide without them." · (12) "There is open doubt here about whether the Elder Council has any right to decide for everyone."
+  commoner_resentments hamlet: top sentences (11) "Households that go short look hard at the ones that do not." · (11) "Many here feel that the Elder Council no longer listens to people like them." · (11) "Common folk say the elders decide among themselves and tell everyone else afterwards."
+  commoner_resentments village: top sentences (15) "Ordinary people grumble that the Elder Council looks after its own first." · (12) "Commoners resent the council's indifference to ordinary complaints." · (12) "There is open doubt here about whether the Elder Council has any right to decide for everyone."
+  commoner_resentments town: top sentences (9) "Households that go short look hard at the ones that do not." · (8) "People grumble that there is less food to go round than there ought to be." · (6) "Thin meals and short portions are the grievance nearly everyone shares."
+  commoner_resentments city: top sentences (13) "Thin meals and short portions are the grievance nearly everyone shares." · (12) "Many feel that those in charge should be doing more to see everyone fed." · (12) "People resent paying more for less, and they say so at the stalls."
+  commoner_resentments metropolis: top sentences (17) "The price of food is the first complaint on everyone's lips." · (16) "Nobody likes to see the pot so thin, and everyone has someone to blame for it." · (16) "Many feel that those in charge should be doing more to see everyone fed."
+  commoner_resentments_dm thorp: top sentences (6) "People resent that smugglers seem to prosper while those who keep the rules go without." · (3) "Commoners grumble that smugglers do well here while honest folk do not." · (1) "Honest carriers resent waiting their turn while smugglers come and go as they please."
+  commoner_resentments_dm hamlet: top sentences (5) "Commoners grumble that smugglers do well here while honest folk do not." · (4) "People resent that smugglers seem to prosper while those who keep the rules go without." · (2) "Honest carriers resent waiting their turn while smugglers come and go as they please."
+  commoner_resentments_dm village: top sentences (1) "Honest carriers resent waiting their turn while smugglers come and go as they please." · (1) "Commoners grumble that smugglers do well here while honest folk do not." · (1) "People resent that smugglers seem to prosper while those who keep the rules go without."
+  commoner_resentments_dm town: top sentences (3) "Honest carriers resent waiting their turn while smugglers come and go as they please." · (2) "Commoners resent the smugglers who slip goods past while honest traders pay their dues." · (2) "Commoners grumble that smugglers do well here while honest folk do not."
+  commoner_resentments_dm city: top sentences (7) "People grumble that smuggled goods undercut honest sellers at the market." · (5) "People resent that smugglers seem to prosper while those who keep the rules go without." · (4) "Honest carriers resent waiting their turn while smugglers come and go as they please."
+  commoner_resentments_dm metropolis: top sentences (8) "Honest carriers resent waiting their turn while smugglers come and go as they please." · (5) "Commoners grumble that smugglers do well here while honest folk do not." · (5) "Commoners resent the smugglers who slip goods past while honest traders pay their dues."
+  outsider_impressions thorp: top sentences (19) "Order here is kept lightly, and a stranger notices how little stands behind it." · (19) "A visitor gets the sense that order here is kept by habit rather than by force." · (17) "Keeping the peace here rests on goodwill more than on any force."
+  outsider_impressions hamlet: top sentences (22) "Order here is kept lightly, and a stranger notices how little stands behind it." · (16) "A visitor looks in vain for a watchman; there is none." · (15) "Order here depends on people keeping it among themselves."
+  outsider_impressions village: top sentences (23) "There is little here to keep order, and a visitor can see it." · (17) "A visitor who needs a ruling or a permission should expect to wait for it." · (16) "It does not take a visitor long to see who holds sway here: the Religious Authorities."
+  outsider_impressions town: top sentences (14) "Care for the sick is short here, and people know better than to fall ill." · (14) "Those who fall ill here cannot count on much care." · (12) "Order here is kept lightly, and a stranger notices how little stands behind it."
+  outsider_impressions city: top sentences (13) "Travellers here talk of beasts seen at the edge of the settled land." · (11) "The wild is not far off, and visitors hear stories of what comes out of it." · (10) "This is frontier country, and people speak of the wild beyond as close at hand."
+  outsider_impressions metropolis: top sentences (13) "Travellers here talk of beasts seen at the edge of the settled land." · (13) "The wild is not far off, and visitors hear stories of what comes out of it." · (13) "People here keep an eye on the wild country and mention it often."
+  unspoken_topics thorp: top sentences (8) "What is running short here is a sore subject, and visitors are not told much about it." · (5) "Nobody raises the succession in company; everyone already has a side." · (5) "Nobody asks a neighbour how they are managing for supplies; it is not a question to ask."
+  unspoken_topics hamlet: top sentences (8) "What the place is short of, and who is to blame for it, is not discussed with strangers." · (5) "The shortage is on everyone's mind and on nobody's tongue when a stranger is near." · (5) "People do not talk openly about the shortage, least of all with outsiders."
+  unspoken_topics village: top sentences (5) "Nobody here will tell a stranger what they think of the present authority." · (5) "What is running short here is a sore subject, and visitors are not told much about it." · (5) "The wild magic, and what it has done to the people it touched, is not spoken of with strangers."
+  unspoken_topics town: top sentences (11) "Nobody mentions the guilds' quarrel in company unless they want an argument." · (6) "What the place is short of, and who is to blame for it, is not discussed with strangers." · (6) "Traders here do not discuss the guild quarrel with customers, or with each other in public."
+  unspoken_topics city: top sentences (6) "Who may sell what, and who gets a say in how the place is run, is argued in private, not in public." · (5) "Nobody mentions the guilds' quarrel in company unless they want an argument." · (5) "People here do not talk about the water if they can help it."
+  unspoken_topics metropolis: top sentences (8) "The fight over trading rights is something people would rather a stranger did not hear about." · (7) "Who may sell what, and who gets a say in how the place is run, is argued in private, not in public." · (5) "Nobody mentions the guilds' quarrel in company unless they want an argument."
+  recent_changes thorp: top sentences (15) "There is not much to keep the peace with, and people know it." · (13) "Order is holding, but only just, and there is little to hold it with." · (12) "The peace here is fragile, and it would not take much to break it."
+  recent_changes hamlet: top sentences (16) "Those in charge have few means of keeping order, and everyone knows it." · (13) "Little stands ready to keep order if a quarrel turns ugly." · (13) "The peace here is fragile, and it would not take much to break it."
+  recent_changes village: top sentences (19) "Quarrels are settled, when they are settled at all, with nobody to stand between." · (15) "Order has frayed: there is next to nothing here to keep the peace." · (13) "There is no one to keep order here but the people themselves."
+  recent_changes town: top sentences (9) "People go out only in company now, for the beasts are everywhere." · (7) "Little has changed of late, and nobody is asking for it to." · (7) "What it left behind (two rival congregations still divide the settlement's faithful) is still part of the plac"
+  recent_changes city: top sentences (9) "Beasts now roam the country around, and people keep close to home." · (9) "People go out only in company now, for the beasts are everywhere." · (7) "The country around is overrun with beasts, and the roads are dangerous."
+  recent_changes metropolis: top sentences (7) "Life goes on as usual, and nobody can point to anything new." · (7) "Travel has become dangerous: the land around is thick with beasts." · (6) "People go out only in company now, for the beasts are everywhere."
+
+════ 2. BRANCHES — reach % · need = ceil(reach/0.15) · MIN eligible over the places taking it (SHORT where min < need)
+| commoner_resentments:food | 15·1·5 | 21·2·5 | 8·1·5 | 36·3·9 | 59·4·9 | 71·5·9 |
+| commoner_resentments:legitimacy | 80·6·8 | 91·7·8 | 91·7·8 | 46·4·7 | 15·2·7 | 13·1·7 |
+| commoner_resentments:uprising | 3·1·3 | 5·1·3 | 8·1·3 | 3·1·3 | 9·1·3 | 5·1·3 |
+| commoner_resentments_dm:crime55 | 7·1·2 | 7·1·2 | 2·1·3 | 7·1·5 | 17·2·6 | 17·2·6 |
+| commoner_resentments_dm:crime70 | — | — | — | 1·1·6 | — | — |
+| food_culture:adequate | 65·5·7 | 46·4·7 | 45·4·8 | 51·4·9 | 33·3·9 | 28·2·9 |
+| food_culture:collapsed | — | — | — | — | — | 1·1·4 |
+| food_culture:critical | 6·1·5 | 5·1·5 | 1·1·5 | 3·1·7 | 12·1·7 | 19·2·7 |
+| food_culture:strained | 9·1·7 | 16·2·7 | 7·1·6 | 33·3·9 | 47·4·9 | 51·4·9 |
+| food_culture:surplus | 20·2·4 | 33·3·5 | 47·4·5 | 13·1·5 | 8·1·7 | 1·1·7 |
+| outsider_impressions:power | 100·7·9 | 100·7·9 | 100·7·9 | 99·7·9 | 100·7·9 | 100·7·9 |
+| outsider_impressions:services.administrative | 21·2·7 | 39·3·7 | 75·5·7 | 15·2·7 | 7·1·7 | 15·2·7 |
+| outsider_impressions:services.defense | — | — | 3·1·1 | 10·1·2 | — | — |
+| outsider_impressions:services.food_production | — | — | 1·1·2 | 15·1·3 | 1·1·3 | — |
+| outsider_impressions:services.healing | 65·5·8 | 55·4·8 | 19·2·5 | 45·4·5 | 27·2·5 | 4·1·5 |
+| outsider_impressions:threat.economic_collapse.supply | 9·1·4 | 6·1·4 | 2·1·4 | — | — | — |
+| outsider_impressions:threat.monster_pressure.frontier | — | — | 1·1·7 | 27·2·7 | 42·3·7 | 51·4·7 |
+| outsider_impressions:threat.monster_pressure.overrun | 11·1·6 | 18·2·6 | 13·1·6 | 17·2·6 | 24·2·6 | 17·2·6 |
+| outsider_impressions:threat.plague.any | 1·1·3 | — | 1·1·3 | 2·1·3 | 2·1·4 | 1·1·4 |
+| outsider_impressions:threat.unrest.order | 79·6·7 | 76·6·7 | 83·6·7 | 50·4·9 | 1·1·9 | — |
+| recent_changes:calm | — | — | 1·1·8 | 14·1·8 | 19·2·8 | 16·2·8 |
+| recent_changes:condition.dominant_npc_removed | 3·1·3 | 4·1·3 | 3·1·3 | 2·1·3 | 1·1·3 | 7·1·3 |
+| recent_changes:condition.faction_challenge | 2·1·3 | 3·1·3 | 3·1·3 | 2·1·3 | 1·1·3 | 2·1·3 |
+| recent_changes:condition.famine | 7·1·3 | 5·1·3 | 1·1·3 | 1·1·3 | — | — |
+| recent_changes:condition.plague | 3·1·3 | 5·1·3 | 5·1·3 | 3·1·3 | 2·1·3 | 1·1·3 |
+| recent_changes:condition.rebellion | 4·1·3 | 3·1·3 | 3·1·3 | 2·1·3 | 2·1·3 | 1·1·3 |
+| recent_changes:condition.regional_authority_instability | 3·1·3 | 2·1·3 | 3·1·3 | 4·1·3 | 4·1·3 | 3·1·3 |
+| recent_changes:condition.regional_migration_pressure | 1·1·3 | 1·1·3 | 2·1·3 | 3·1·3 | 2·1·3 | 1·1·3 |
+| recent_changes:condition.regional_religious_pressure | 1·1·3 | 1·1·3 | 1·1·3 | 1·1·3 | 2·1·3 | 1·1·3 |
+| recent_changes:condition.regional_tax_revenue_disruption | 5·1·3 | 2·1·3 | 1·1·3 | 2·1·3 | 3·1·3 | 7·1·3 |
+| recent_changes:condition.vassal_extraction | 2·1·3 | 3·1·3 | 1·1·3 | 1·1·3 | 1·1·3 | — |
+| recent_changes:condition.war_pressure | 7·1·3 | 7·1·3 | 7·1·3 | 6·1·3 | 5·1·3 | 6·1·3 |
+| recent_changes:threat.economic_collapse.supply.imminent | 24·2·4 | 23·2·4 | 7·1·4 | 1·1·4 | — | — |
+| recent_changes:threat.economic_collapse.supply.realized | 11·1·3 | 13·1·3 | 8·1·3 | — | — | — |
+| recent_changes:threat.monster_pressure.overrun.realized | 11·1·5 | 20·2·5 | 14·1·5 | 17·2·5 | 24·2·5 | 17·2·5 |
+| recent_changes:threat.plague.any.imminent | 1·1·2 | 3·1·2 | 3·1·2 | 1·1·2 | — | 1·1·3 |
+| recent_changes:threat.unrest.order.imminent | 67·5·9 | 65·5·9 | 35·3·9 | 10·1·10 | — | — |
+| recent_changes:threat.unrest.order.realized | 26·2·5 | 25·2·5 | 58·4·5 | 3·1·6 | — | — |
+| unspoken_topics:wound.demographic_pressure | 1·1·2 | 1·1·2 | 1·1·2 | 1·1·2 | — | 1·1·2 |
+| unspoken_topics:wound.disputed_land | 1·1·3 | 3·1·3 | 3·1·3 | 3·1·3 | 1·1·3 | — |
+| unspoken_topics:wound.economic_disparity | — | — | 1·1·3 | 2·1·3 | 1·1·3 | 1·1·3 |
+| unspoken_topics:wound.external_threat | 6·1·3 | 5·1·3 | 6·1·3 | 5·1·3 | — | 2·1·3 |
+| unspoken_topics:wound.generational_divide | 3·1·3 | 3·1·3 | 1·1·3 | 2·1·3 | 1·1·3 | — |
+| unspoken_topics:wound.great_fire | 3·1·3 | 1·1·3 | 1·1·3 | 1·1·3 | 2·1·3 | 1·1·3 |
+| unspoken_topics:wound.great_flood | 5·1·3 | 1·1·3 | 1·1·3 | 2·1·3 | 4·1·3 | 1·1·3 |
+| unspoken_topics:wound.guild_conflict | — | 1·1·3 | 1·1·6 | 23·2·6 | 14·1·6 | 19·2·6 |
+| unspoken_topics:wound.heresy_trial | 2·1·3 | 1·1·3 | 2·1·3 | — | 1·1·3 | 1·1·3 |
+| unspoken_topics:wound.infiltration_fear | 1·1·3 | 2·1·3 | 3·1·3 | 1·1·3 | 1·1·3 | 2·1·3 |
+| unspoken_topics:wound.leadership_vacuum | 3·1·3 | 2·1·3 | 3·1·3 | 1·1·3 | 1·1·3 | 1·1·3 |
+| unspoken_topics:wound.legitimacy_crisis | 5·1·4 | 4·1·4 | 8·1·4 | 4·1·4 | 2·1·4 | 1·1·4 |
+| unspoken_topics:wound.magical_controversy | 3·1·3 | 2·1·3 | 4·1·3 | 4·1·3 | 1·1·3 | 1·1·3 |
+| unspoken_topics:wound.market_crash | — | — | 3·1·3 | — | — | — |
+| unspoken_topics:wound.occupation_legacy | — | 1·1·3 | 3·1·3 | — | 1·1·3 | 2·1·3 |
+| unspoken_topics:wound.outside_debt | 6·1·3 | 3·1·3 | 3·1·3 | 3·1·3 | 1·1·3 | 6·1·3 |
+| unspoken_topics:wound.pilgrimage_surge | 2·1·3 | — | 3·1·3 | — | — | 1·1·3 |
+| unspoken_topics:wound.plague_years | 4·1·3 | 4·1·3 | 2·1·3 | 3·1·3 | 1·1·3 | 1·1·3 |
+| unspoken_topics:wound.popular_uprising | 3·1·3 | 5·1·3 | 5·1·3 | 1·1·3 | 3·1·3 | 1·1·3 |
+| unspoken_topics:wound.population_friction | 2·1·3 | 2·1·3 | 1·1·3 | 1·1·3 | 1·1·3 | 1·1·3 |
+| unspoken_topics:wound.religious_tension | 1·1·3 | 4·1·3 | 2·1·3 | 1·1·3 | — | — |
+| unspoken_topics:wound.resource_scarcity | 17·2·5 | 17·2·5 | 13·1·5 | 10·1·5 | 7·1·5 | 5·1·5 |
+| unspoken_topics:wound.succession_crisis | 8·1·4 | 5·1·4 | 7·1·4 | 4·1·4 | 1·1·4 | 4·1·4 |
+| unspoken_topics:wound.trade_collapse | 2·1·2 | 5·1·2 | 3·1·2 | 1·1·2 | — | — |
+| unspoken_topics:wound.trade_dispute | — | — | 1·1·2 | 3·1·2 | 2·1·2 | 1·1·2 |
+| unspoken_topics:wound.tyranny | 2·1·3 | 3·1·3 | 3·1·3 | 1·1·3 | 3·1·3 | 1·1·3 |
+| unspoken_topics:wound.wild_magic | 5·1·3 | 4·1·3 | 4·1·3 | 3·1·3 | 1·1·3 | — |
+  branches SHORT of the bar (min eligible < need), size cells: 0; cells where a place had NO eligible wording: 0
+| food_culture: min (eligible - need) over branches | +2 | +2 | +1 | +4 | +5 | +3 |
+| commoner_resentments: min (eligible - need) over branches | +2 | +1 | +1 | +2 | +2 | +2 |
+| commoner_resentments_dm: min (eligible - need) over branches | +1 | +1 | +2 | +4 | +4 | +4 |
+| outsider_impressions: min (eligible - need) over branches | +1 | +1 | +0 | +1 | +2 | +2 |
+| unspoken_topics: min (eligible - need) over branches | +1 | +1 | +1 | +1 | +1 | +1 |
+| recent_changes: min (eligible - need) over branches | +1 | +1 | +1 | +1 | +2 | +2 |
+
+════ 3. FALSE LINES — places by size printing a clause the record test says is false (must be 0)
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| recent_changes: battery defense-words quoting the beat's own text (record text) | 0 | 0 | 0 | 2 | 0 | 0 | e.g. hxd-town-4: walls without walls, a palisade or earthworks :: What it left behind (the merchant quarter and the labourers' quarter re
+| recent_changes: the beat's own text carries a date or age (record text, rule 7) | 94 | 122 | 121 | 118 | 99 | 109 | e.g. hxd-thorp-0: The Great Fire (19 years ago) is still being felt: A fire out of the houses nearest the river spread from roof to roof b
+| recent_changes: the beat's own text names crime (record text) | 0 | 2 | 3 | 1 | 1 | 0 | e.g. hxd-hamlet-4: The Scandal (17 years ago) is still being felt: Corruption among officials has been exposed, but those in power are stif
+| food_culture: FALSE (my wordings, every test) | 0 | 0 | 0 | 0 | 0 | 0 |
+| commoner_resentments: FALSE (my wordings, every test) | 0 | 0 | 0 | 0 | 0 | 0 |
+| commoner_resentments_dm: FALSE (my wordings, every test) | 0 | 0 | 0 | 0 | 0 | 0 |
+| outsider_impressions: FALSE (my wordings, every test) | 0 | 0 | 0 | 0 | 0 | 0 |
+| unspoken_topics: FALSE (my wordings, every test) | 0 | 0 | 0 | 0 | 0 | 0 |
+| recent_changes: FALSE (my wordings, every test) | 0 | 0 | 0 | 0 | 0 | 0 |
+
+════ 4. WORDINGS: count, and any outside 8..30 words when printed (over every printed part)
+  food_culture: 6 branches, 59 wordings
+  commoner_resentments: 3 branches, 26 wordings
+  commoner_resentments_dm: 2 branches, 12 wordings
+  outsider_impressions: 22 branches, 96 wordings
+  unspoken_topics: 28 branches, 87 wordings
+  recent_changes: 75 branches, 190 wordings
+  printed parts outside 8..30 words: 0
+  wordings never printed on these 900 (rare branches or needs): 160
+
+════ 5. FEEDS (share of 150, %)
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| unspoken: a wound held (deriveHistoryBeats.unresolvedWound) | 100 | 100 | 100 | 100 | 100 | 100 |
+| unspoken: the wound is crime_wave or corruption_scandal (EMPTY by rule 6) | 14 | 22 | 10 | 19 | 49 | 49 |
+| unspoken: ALT EMPTY if a crime wound fell to the next sayable tension | 13 | 20 | 3 | 11 | 1 | 1 |
+| commoner: legitimacy strained+ / food strained+ / uprising | 80 | 91 | 91 | 46 | 15 | 13 |
+|   food strained+ | 15 | 21 | 8 | 36 | 59 | 71 |
+|   uprising (factsOf.uprising) | 3 | 5 | 8 | 3 | 9 | 5 |
+| commoner_dm (OWNER-ONLY): criminal_opportunity >= 70 / >= 55 | 0 | 0 | 0 | 1 | 0 | 0 |
+|   >= 55 (and < 70) | 7 | 7 | 2 | 7 | 17 | 17 |
+| outsider: power named / power veiled (no D) / threat said / service said | 100 | 100 | 100 | 99 | 100 | 100 |
+|   dominant power veiled or criminal: not named | 0 | 0 | 0 | 1 | 0 | 0 |
+|   threat said | 100 | 100 | 100 | 95 | 69 | 69 |
+|   service said (a VISIBLE lens among >=3 strained) | 86 | 93 | 97 | 85 | 36 | 19 |
+|   >=3 strained but no visible lens to say (internal-only: nothing said) | 13 | 4 | 3 | 14 | 0 | 0 |
+| recent: the beat / a new condition said / an acute threat said / calm | 63 | 81 | 81 | 79 | 66 | 73 |
+|   new condition said | 35 | 33 | 30 | 27 | 23 | 29 |
+|   acute threat said | 98 | 99 | 99 | 29 | 24 | 17 |
+|   calm pool | 0 | 0 | 1 | 14 | 19 | 16 |
+|   EMPTY (a source held, none sayable: crime condition etc.) | 0 | 0 | 0 | 0 | 1 | 1 |
+|   the beat text carries "(N years ago)" (record text, rule 7) | 63 | 81 | 81 | 79 | 66 | 73 |
+|   the beat text opens "As of the founding survey" (record text) | 31 | 21 | 32 | 27 | 19 | 23 |
+| food: a food source listed (factsOf.foodSources) | 63 | 61 | 66 | 57 | 69 | 57 |
+
+════ 6. EXAMPLES
+  hxd-thorp-0 (Rossleigh)
+    food_culture: The everyday fare is a simple stew and whatever else the day provides.
+    commoner_resentments: '' (EMPTY)
+    commoner_resentments_dm: '' (EMPTY)
+    outsider_impressions: The Elder Council carries the most weight here, and nobody pretends otherwise. Order here is kept lightly, and a stranger notices how little stands behind it. Care for the sick is short here, and people know better than to fall ill.
+    unspoken_topics: People here do not talk about the wild magic, and they do not like being asked.
+    recent_changes: The Great Fire (19 years ago) is still being felt: A fire out of the houses nearest the river spread from roof to roof before anyone could bring it under control. Keeping order now rests on too few shoulders, and people are aware of it.
+  hxd-thorp-1 (Langstadt)
+    food_culture: Most households eat simply, and they eat enough.
+    commoner_resentments: Ordinary people grumble that the Elder Council looks after its own first.
+    commoner_resentments_dm: '' (EMPTY)
+    outsider_impressions: Outsiders notice the Elder Council's mark is on every door that matters. The means of keeping order here are slight, and a visitor sees it soon enough. Those who fall ill here cannot count on much care.
+    unspoken_topics: The friction between the established folk and the newer arrivals is felt more than it is spoken of.
+    recent_changes: Keeping order now rests on too few shoulders, and people are aware of it.
+  hxd-hamlet-0 (Steinhausen)
+    food_culture: Food is steady rather than generous: enough for every household, with little to spare.
+    commoner_resentments: Many here feel that the Headman's Authority no longer listens to people like them.
+    commoner_resentments_dm: '' (EMPTY)
+    outsider_impressions: Ask who decides things here, and the answer is the Headman's Authority. Visitors are asked which way they came, and whether they met anything on the way.
+    unspoken_topics: How the place should answer the danger it has been warned of is argued in private, not before strangers.
+    recent_changes: As of the founding survey, the Flood (44 years ago) hit the settlement hard, and it has since recovered: the changes made to get through that crisis are still how the place works today. Beasts have overrun the country around, and nobody travels alone any more.
+  hxd-hamlet-1 (Steinfurt)
+    food_culture: Money is short, so meals are plain, but nobody goes without.
+    commoner_resentments: People do as the Elder Council says, but few of them think well of it.
+    commoner_resentments_dm: '' (EMPTY)
+    outsider_impressions: A visitor soon learns that little happens here without the Elder Council. Keeping the peace here rests on goodwill more than on any force. Those who fall ill here cannot count on much care.
+    unspoken_topics: '' (EMPTY)
+    recent_changes: The Religious Conflict (18 years ago) is still being felt: Different faiths or interpretations competed for influence and converts. A major power in the place has begun moving against the present rulers. Order has frayed: there is next to nothing here to keep the peace. There is little laid by, and a bad turn would be felt at once.
+  hxd-village-0 (Dobroki)
+    food_culture: Meals are plain and filling, and little goes to waste.
+    commoner_resentments: Ordinary people grumble that the Headman's Authority looks after its own first.
+    commoner_resentments_dm: '' (EMPTY)
+    outsider_impressions: The name a stranger hears most often in any dealing here is the Headman's Authority. A visitor gets the sense that order here is kept by habit rather than by force. Any business with the Headman's Authority means a long wait, and visitors are warned of it.
+    unspoken_topics: The old argument over fire, and who should bear the cost of preventing it, is not aired in company.
+    recent_changes: As of the founding survey, the Succession Crisis (14 years ago) left trouble that has never been put right: the quarrel over who should rule today is the same quarrel, never settled. What it left behind (succession now governed by a charter drafted in the aftermath) is still part of the place. Order now depends on each household minding its own.
+  hxd-village-1 (Yuan)
+    food_culture: Money is not plentiful here, but food is, and nobody goes short.
+    commoner_resentments: Talk among neighbours turns, sooner or later, to what the Feudal Stewardship has got wrong lately. Many here feel they have asked the Feudal Stewardship for fair treatment for long enough.
+    commoner_resentments_dm: '' (EMPTY)
+    outsider_impressions: Outsiders notice the Religious Authorities' mark is on every door that matters. There is little here to keep order, and a visitor can see it. Business with the Feudal Stewardship moves slowly; there are more matters than hands to deal with them.
+    unspoken_topics: Nobody talks openly about the people's grievances against those in charge, least of all to strangers.
+    recent_changes: The Religious Conflict (5 years ago) is still being felt: Different faiths or interpretations competed for influence and converts. Order here now hangs on people keeping their tempers.
+  hxd-town-0 (Petenmul)
+    food_culture: A pot of stew over the fire is the usual supper, and there is usually enough to go round.
+    commoner_resentments: '' (EMPTY)
+    commoner_resentments_dm: '' (EMPTY)
+    outsider_impressions: A visitor soon learns that little happens here without the Town Mayor. A visitor soon learns that the country beyond is not to be walked carelessly. Sickness is something people here deal with at home, as best they can.
+    unspoken_topics: '' (EMPTY)
+    recent_changes: The Religious Conflict (24 years ago) is still being felt: Rival faiths and doctrines contended for followers and standing in the community.
+  hxd-town-1 (Tallpara)
+    food_culture: The place eats well and can afford to; even an ordinary supper has something extra in it.
+    commoner_resentments: '' (EMPTY)
+    commoner_resentments_dm: '' (EMPTY)
+    outsider_impressions: A visitor soon learns that little happens here without the Town Council. The watch is stretched thin, and a visitor can tell.
+    unspoken_topics: How far magic should be allowed is a question people do not raise in company.
+    recent_changes: The Migration (19 years ago) is still being felt: A recently arrived group and the established population fell into sustained, low-level conflict.
+  hxd-city-0 (Petenhuitz)
+    food_culture: Food costs more than most people can comfortably pay, so they buy less of it.
+    commoner_resentments: Commoners resent rising bread prices and merchants who claim they cannot help it.
+    commoner_resentments_dm: People grumble that smuggled goods undercut honest sellers at the market.
+    outsider_impressions: The name a stranger hears most often in any dealing here is the Democratic assembly. The country around is overrun with beasts, and visitors are told so almost at once. Those who fall ill here cannot count on much care.
+    unspoken_topics: The shortage is on everyone's mind and on nobody's tongue when a stranger is near.
+    recent_changes: The Migration (20 years ago) is still being felt: A recently arrived group and the established population fell into sustained, low-level conflict. Beasts now roam the country around, and people keep close to home.
+  hxd-city-1 (Tikalhuitz)
+    food_culture: Food is short, and many households go to bed hungry.
+    commoner_resentments: Many here feel that the Royal Authority no longer listens to people like them. Commoners resent rising bread prices and merchants who claim they cannot help it.
+    commoner_resentments_dm: People grumble that smuggled goods undercut honest sellers at the market.
+    outsider_impressions: The Royal Authority carries the most weight here, and nobody pretends otherwise. Travellers here talk of beasts seen at the edge of the settled land. Those who fall ill here cannot count on much care.
+    unspoken_topics: The shortage is on everyone's mind and on nobody's tongue when a stranger is near.
+    recent_changes: The Succession Crisis (20 years ago) is still being felt: The one who led was failing in health, and rivals maneuvered quietly to take that place. More of what the place earns now goes to the power above it.
+  hxd-metropolis-0 (Shangjin)
+    food_culture: Most households eat less than they need, and the children are fed first.
+    commoner_resentments: Ordinary people grumble that the Ducal Governorship looks after its own first. People resent paying more for less, and they say so at the stalls.
+    commoner_resentments_dm: '' (EMPTY)
+    outsider_impressions: Outsiders notice the Guard's mark is on every door that matters. Frontier habits show here: people go out in company and come back before dark. Business with the Ducal Governorship moves slowly; there are more matters than hands to deal with them.
+    unspoken_topics: '' (EMPTY)
+    recent_changes: The Migration (24 years ago) is still being felt: A newly arrived community and the old population fell into steady friction, rarely violent and never resolved. The war has begun to change how the place trades and what it expects of those in charge.
+  hxd-metropolis-1 (Balburn)
+    food_culture: Loaves shrink each month; householders stretch what they can.
+    commoner_resentments: Nobody likes to see the pot so thin, and everyone has someone to blame for it.
+    commoner_resentments_dm: '' (EMPTY)
+    outsider_impressions: A visitor soon learns that little happens here without the Noble Houses.
+    unspoken_topics: Nobody raises the succession in company; everyone already has a side.
+    recent_changes: The place has lost a leading figure, and nobody has yet filled the gap.
+
+════ 7. SUMMARY BLOCK — top text % / top sentence % / empty % / distinct, by size; FALSE = my wordings' false lines, every test
+| slot | thorp | hamlet | village | town | city | metropolis | FALSE |
+|---|---|---|---|---|---|---|---:|
+| food_culture | 9/9/0/31 | 9/9/0/31 | 9/9/0/32 | 7/7/0/38 | 7/7/0/35 | 8/8/0/33 | 0 |
+| commoner_resentments | 7/10/19/44 | 5/7/9/66 | 9/10/7/50 | 3/6/35/65 | 7/9/34/46 | 9/11/26/39 | 0 |
+| commoner_resentments_dm | 4/4/93/3 | 3/3/93/3 | 1/1/98/3 | 2/2/92/7 | 5/5/83/6 | 5/5/83/6 | 0 |
+| outsider_impressions | 1/13/0/149 | 1/15/0/150 | 1/15/0/145 | 1/9/0/149 | 2/9/0/140 | 3/9/0/132 | 0 |
+| unspoken_topics | 5/5/14/57 | 5/5/22/57 | 3/3/10/58 | 7/7/19/53 | 4/4/49/42 | 5/5/49/37 | 0 |
+| recent_changes | 3/10/0/134 | 1/11/0/145 | 2/13/0/147 | 5/6/0/131 | 4/6/1/119 | 5/5/1/129 | 0 |
+
+done in 99s
