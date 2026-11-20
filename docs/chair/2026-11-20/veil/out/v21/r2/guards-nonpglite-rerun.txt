@@ -1,0 +1,43 @@
+gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.0.lock.shared as PID 21582 after 0 poll(s); 1 shared holder(s) live, worker cap <= 2.
++   "vs-hamlet-1 dm (b): safety blackMarketCapture",
++   "vs-village-0 (b): safety blackMarketCapture",
++   "vs-village-0 dm (b): safety blackMarketCapture",
++   "vs-village-2 (b): safety blackMarketCapture",
++   "vs-village-2 dm (b): safety blackMarketCapture",
++   "vs-town-0 (b): safety blackMarketCapture",
++   "vs-town-0 dm (b): safety blackMarketCapture",
++   "vs-town-2 (b): safety blackMarketCapture",
++   "vs-town-2 dm (b): safety blackMarketCapture",
++   "vs-city-0 (b): safety blackMarketCapture",
++   "vs-city-0 dm (b): safety blackMarketCapture",
++   "vs-city-1 (b): safety blackMarketCapture, income 1",
++   "vs-city-1 (c)",
++   "vs-city-1 dm (b): safety blackMarketCapture, income 1",
++   "vs-city-1 dm (c)",
++   "vs-metropolis-0 (b): safety blackMarketCapture",
++   "vs-metropolis-0 dm (b): safety blackMarketCapture",
++   "vs-metropolis-1 (b): safety blackMarketCapture, income 1",
++   "vs-metropolis-1 (c)",
++   "vs-metropolis-1 dm (b): safety blackMarketCapture, income 1",
++   "vs-metropolis-1 dm (c)",
++ ]
+
+ ❯ tests/domain/display/criminalVeilSwitch.test.js:225:22
+    223|       }
+    224|     }
+    225|     expect(failures).toEqual([]);
+       |                      ^
+    226|     expect(tally.copies).toBe(24);
+    227|     expect(tally.criminal, 'at least half the births carry a criminal …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  4 failed | 4 passed (8)
+      Tests  5 failed | 599 passed (604)
+   Start at  03:46:04
+   Duration  68.36s (transform 7.25s, setup 124ms, import 10.49s, tests 66.37s, environment 454ms)
+
+[gate-tail] end:  03:47:13 up  1:10,  0 user,  load average: 1.03, 2.41, 2.62
+[gate-tail] full log: /tmp/gate-tail.21589.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

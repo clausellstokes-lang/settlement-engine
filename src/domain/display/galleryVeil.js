@@ -71,6 +71,7 @@ import { cardHouseOf } from '../people/cardPowers.js';
 import { brokerageLegalityOf } from '../../data/informationBrokerageTuning.js';
 import { isCriminalInstitution, isClandestineInstitution, isHideableHouse } from '../people/cardVeil.js';
 import { rederiveIncomeShares, renumberTrace, secondHomeSources, withholdCovertCopies, withholdCriminalIncome, withholdImpression, withholdIncomeWeights, withholdSecondHomes } from './gallerySecondHomes.js';
+import { withholdAlways } from './galleryWithholdAlways.js';
 
 /** @typedef {Record<string, unknown>} Rec */
 /** @typedef {{ address: string, hidden: boolean }} VeilDelta */
@@ -772,6 +773,9 @@ export function applyVeil(publicSettlement, veil) {
   // THE VEIL ON STRINGS (STYLE-RULINGS-2 B10(a), SW-B7b item 2): a block hidden here drops the
   // rungs the owner's save shipped for it as TEXT, so the owner's later toggle needs no re-save.
   dropVeiledPublicProse(s, groupings);
+  // VEIL-21 (R2; VR16, VR33, VR37): last, what no non-owner read sends whatever the veil (212 :: _gallery_veil runs
+  // _gallery_veil_withhold_always on every body it returns)
+  withholdAlways(s);
 
   markVeiled(s, [...groupings].sort());
   return s;
@@ -1237,8 +1241,9 @@ export function curateModelFor(publicSettlement, deltas) {
  */
 export function projectShareVeil(publicSettlement, memberOverrides) {
   const { marked, deltas } = readShareVeil(memberOverrides);
-  // VEIL-19 (item D (4)): an unmarked share is served as before, but for each income row's `weight` (every non-owner read)
-  if (!marked) return withholdIncomeWeights(publicSettlement);
+  // VEIL-19 (item D (4)): an unmarked share is served as before, but for each income row's `weight` (every non-owner read);
+  // VEIL-21 (R2): and for what no non-owner read sends whatever the veil (212 :: _gallery_veil, the unmarked body)
+  if (!marked) return withholdAlways(/** @type {Rec} */ (deepClone(withholdIncomeWeights(publicSettlement))));
   return applyVeil(publicSettlement, resolveVeil(defaultVeilFor(publicSettlement), deltas));
 }
 

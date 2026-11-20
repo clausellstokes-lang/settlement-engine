@@ -49,13 +49,14 @@ const NOT_SERVED = Object.freeze({
   'tile.prosperity': 'a column beside data (VEIL-DOORS, SV7); a copy of economy.prosperity',
   'tile.threatLevel': 'a column beside data (VEIL-DOORS, SV7)',
   'tile.governmentType': 'a column beside data (VEIL-DOORS, SV7)',
+  'conditions.severityBand': 'a condition\'s band (VR37, tier 2): promoted from the stressors through the prosperity band (conditionPromotion.js); not re-derived here: R6',
 });
 /** Measured at this tip (VEIL-20, 2026-11-20 02:3x UTC, 8 born towns x Reveal DM off and on): rows whose deriver does
  * not reproduce the stored town. Shrink-only. */
 const KNOWN_UNFAITHFUL = Object.freeze(new Set([]));
 /** Measured at this tip: rows whose re-derivation differs from the served value ONLY in towns with a hidden house: a
  * visitor recovers the stored value's hidden term. Each is re-classed under VR19 by R3/R6 (shrink-only). */
-const KNOWN_INVERTING = Object.freeze(new Set(['defence.scores.internal', 'economy.prosperity', 'economy.prosperityStanding',
+const KNOWN_INVERTING = Object.freeze(new Set(['economy.prosperity', 'economy.prosperityStanding',
   'legitimacy.colours', 'legitimacy.label', 'legitimacy.score', 'safety.safetyLabel']));
 /** Measured at this tip: composed rows whose re-composition over the served document differs EVEN WHERE NOTHING IS
  * HIDDEN: the composer reads what the projection does not serve, so a visitor cannot re-derive them (VR26's first
@@ -114,6 +115,10 @@ describe('VR26: a value sent as stored either cannot be re-derived from the serv
       const standing = standingBaseProsperity(r.tier, cfg.tradeRouteAccess, inst, cfg, names, e.incomeSources || []);
       e.prosperity = outcomes[0];
       e.prosperityStanding = deriveProsperityLabels(base, standing, cfg, inst).prosperityStanding;
+      // R2 (VEIL-21): the stores' months are withheld on every read; the visitor reads them from the food record the share
+      // serves, as the page and the import's save do (pageRederive.js, importRederive.js step 3)
+      const months = e.foodSecurity?.foodRecord?.storageMonths;
+      if (isRec(e.foodSecurity) && Number.isFinite(months)) e.foodSecurity.storageMonths = months;
       const dp = generateDefenseProfile(r, keepOfRecord(e));
       r.defenseProfile = { ...(r.defenseProfile || {}), scores: dp.scores, readiness: dp.readiness, economicGates: dp.economicGates };
       if (isRec(e.safetyProfile)) e.safetyProfile.safetyLabel = generateSafetyProfile(cfg, r.tier, inst).safetyLabel;

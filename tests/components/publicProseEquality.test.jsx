@@ -23,6 +23,7 @@ import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 import { generalDeskLines } from '../../src/components/new/generalDeskRead.js';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 import { projectShareVeil } from '../../src/domain/display/galleryVeil.js';
+import { rederiveForPage } from '../../src/domain/veil/pageRederive.js';
 import { publicProseOf, withPublicProse } from '../../src/domain/display/publicProse.js';
 import { composePublicProse } from '../../src/components/new/publicProseCompose.js';
 import { EconomicsTab } from '../../src/components/new/tabs/EconomicsTab.jsx';
@@ -117,9 +118,16 @@ beforeAll(async () => {
   for (const i of TOWNS) {
     const owner = birth(i).settlement;
     const stamped = withPublicProse(owner, composePublicProse(owner));
+    // R2 (VEIL-21; the seventh chair's VR19 ruling 2, VR33): the shared page is the page's own read, the projection and the
+    // page's re-derivation (src/lib/gallery.js :: fetchPublicDossier); the black market's capture is withheld on every
+    // non-owner read and no served field re-derives it, so its panel (EconomicsTab, DefenseTab) is not drawn on a shared
+    // page: the owner's player view it is compared with is the owner's record less that one figure (`ownerSeen`)
+    const ownerSeen = structuredClone(owner);
+    if (ownerSeen.economicState?.safetyProfile) delete ownerSeen.economicState.safetyProfile.blackMarketCapture;
     towns[i] = {
       owner,
-      shared: projectShareVeil(toPublicSafe(stamped), null),
+      ownerSeen,
+      shared: rederiveForPage(projectShareVeil(toPublicSafe(stamped), null)),
       unstamped: projectShareVeil(toPublicSafe(owner), null),
     };
   }
@@ -138,7 +146,7 @@ function proseLines(element) {
 describe('the shared page prints the owner\'s player view, line for line', () => {
   for (const tab of COMPLETE) {
     it.each(TOWNS)(`${tab}, soak1k-%i: every owner player-view line is on the shared page`, (i) => {
-      const { owner, shared } = towns[i];
+      const { ownerSeen: owner, shared } = towns[i];
       const veiled = VEILED[tab] ?? (() => false);
       const a = proseLines(TABS[tab](owner, { playerView: true })).filter((line) => !veiled(line));
       const b = new Set(proseLines(TABS[tab](shared, { publicDossier: true, playerView: true })));
@@ -151,7 +159,7 @@ describe('the shared page prints the owner\'s player view, line for line', () =>
 describe('each lit family: what the owner\'s player view prints from it, the shared page prints', () => {
   for (const [tab, sites] of Object.entries(SITES)) {
     it.each(TOWNS)(`${tab} (${sites.join(', ')}), soak1k-%i`, (i) => {
-      const { owner, shared } = towns[i];
+      const { ownerSeen: owner, shared } = towns[i];
       const a = proseLines(TABS[tab](owner, { playerView: true })).join('\n');
       const b = proseLines(TABS[tab](shared, { publicDossier: true, playerView: true })).join('\n');
       const printed = sites.flatMap((site) => shippedStrings(shared, site)).filter((str) => a.includes(str));
@@ -162,7 +170,7 @@ describe('each lit family: what the owner\'s player view prints from it, the sha
     for (const [tab, sites] of Object.entries(SITES)) {
       for (const site of sites) {
         const hits = TOWNS.filter((i) => {
-          const a = proseLines(TABS[tab](towns[i].owner, { playerView: true })).join('\n');
+          const a = proseLines(TABS[tab](towns[i].ownerSeen, { playerView: true })).join('\n');
           return shippedStrings(towns[i].shared, site).some((str) => a.includes(str));
         });
         expect(hits.length, `${tab} :: ${site}`).toBeGreaterThan(0);

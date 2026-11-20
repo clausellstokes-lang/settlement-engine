@@ -24,7 +24,8 @@
  */
 import { deepClone } from '../clone.js';
 import { getInstFlags } from '../../generators/priorityHelpers.js';
-import { defenceExactOf } from '../../generators/defenseGenerator.js';
+import { defenceExactOf, generateDefenseProfile } from '../../generators/defenseGenerator.js';
+import { keepOfRecord } from '../facts/keep.js';
 import { promoteStressorsToConditions } from '../conditionPromotion.js';
 import { computePublicLegitimacy } from '../../generators/factionDynamics.js';
 import { generateSpatialLayout } from '../../generators/spatialGenerator.js';
@@ -34,6 +35,9 @@ import { computeBaseProsperity, deriveProsperityLabel } from '../../generators/e
 
 /** The compound's figures the save re-derives (its `inst` flags are the served houses' own and stay as served). */
 export const REDERIVED_COMPOUND_KEYS = Object.freeze(['criminalEffective', 'criminalPreStress', 'militaryEffective', 'economyOutput', 'religionInfluence', 'magicInfluence', 'raw']);
+
+/** The defence scores the share withholds on every read (VR33; 212 :: _gallery_veil_withhold_always), re-derived at the save. */
+export const REDERIVED_DEFENCE_SCORES = Object.freeze(['disaster', 'economic', 'internal', 'magical', 'military', 'monster']);
 
 /** The labels a Subsistence base can end at: its birth draw picks one, capped at Poor (prosperity.js :: labelFromBase). */
 const SUBSISTENCE_OUTCOMES = Object.freeze(['Struggling', 'Poor']);
@@ -107,7 +111,9 @@ export function rederiveInPlace(s) {
   const e = recOf(s.economicState);
   const sp = recOf(e?.safetyProfile);
   const food = recOf(e?.foodSecurity);
-  const readiness = recOf(recOf(s.defenseProfile)?.readiness);
+  const dp = recOf(s.defenseProfile);
+  const readiness = recOf(dp?.readiness);
+  const scores = recOf(dp?.scores);
   const legitimacy = recOf(recOf(s.powerStructure)?.publicLegitimacy);
   const layout = recOf(s.spatialLayout);
   if (!config) {
@@ -115,6 +121,8 @@ export function rederiveInPlace(s) {
     if (sp) { delete sp.compound; delete sp.safetyRatio; }
     if (food) delete food.storageMonths;
     if (readiness) delete readiness.score;
+    if (scores) for (const k of REDERIVED_DEFENCE_SCORES) delete scores[k];
+    if (dp) delete dp.economicGates;
     if (legitimacy) delete legitimacy.breakdown;
     if (layout) delete layout.quarters;
     if (Array.isArray(s.activeConditions)) s.activeConditions = [];
@@ -152,6 +160,25 @@ export function rederiveInPlace(s) {
     const score = underEachOutcome(s, outcomes, (r) => Math.round(Math.round(Number(defenceExactOf(r).readiness) * 100) / 100));
     if (typeof score === 'number' && Number.isFinite(score)) readiness.score = score;
     else delete readiness.score;
+  }
+
+  // 5b. THE DEFENCE SCORES AND GATES (VEIL-21, R2; VR33): the defence profile the engine generates over the served
+  //     document (the food record's own months, as step 3 keeps them); a score or gate the served document does not decide
+  //     (where the prosperity outcomes disagree) is not known and is left out.
+  if (dp) {
+    const prof = underEachOutcome(s, outcomes, (r) => {
+      const d = /** @type {Doc} */ (generateDefenseProfile(r, keepOfRecord(/** @type {any} */ (r.economicState))));
+      return { scores: Object.fromEntries(REDERIVED_DEFENCE_SCORES.map((k) => [k, recOf(d.scores)?.[k]])), gates: d.economicGates };
+    });
+    if (scores) {
+      for (const k of REDERIVED_DEFENCE_SCORES) {
+        const v = prof?.scores[k];
+        if (typeof v === 'number' && Number.isFinite(v)) scores[k] = v;
+        else delete scores[k];
+      }
+    }
+    if (prof && isRec(prof.gates)) dp.economicGates = prof.gates;
+    else delete dp.economicGates;
   }
 
   // 6. THE CONDITIONS' SEVERITY: each condition as its stressor promotes it on the served document; a condition no

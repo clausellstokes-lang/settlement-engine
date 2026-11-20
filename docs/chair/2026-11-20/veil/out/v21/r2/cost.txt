@@ -1,0 +1,7 @@
+tail: option used in invalid context -- 2
+h=5 hit=10000 cold=0 nl=1 :: MEDIAN ms x211 5395 | r2_base 6474 | r2_after 6157
+h=50 hit=500 cold=500 nl=1 :: MEDIAN ms x211 100 | r2_base 175 | r2_after 172
+depth=10 houses=200 strings=5000 dm=false :: MEDIAN ms x211 314 | r2_base 357 | r2_after 341
+depth=10 houses=600 strings=10000 dm=false :: MEDIAN ms x211 1111 | r2_base 1227 | r2_after 1198
+
+[exited with code 0]

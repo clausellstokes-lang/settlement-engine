@@ -1293,3 +1293,56 @@ export function withholdIncomeWeights(pub) {
   if (!econ || !Array.isArray(econ.incomeSources)) return pub;
   return { ...pub, economicState: { ...econ, incomeSources: econ.incomeSources.map(r => (isRec(r) && 'weight' in r ? withoutKey(r, 'weight') : r)) } };
 }
+
+
+// ── VEIL-21 (R2; VR37 (b), VR21): A CRISIS CAST'S STAKE AND ROLE ROWS GO PER ENTRY WITH WHAT THEY NAME. SQL twin: 212 ::
+// _gallery_veil_cast, run by _gallery_veil_withhold_always (twin: galleryWithholdAlways.js :: withholdAlways).
+/** A JSON string value, else null (the SQL twin reads a key only where it holds a string). @param {unknown} v @returns {string | null} */
+const strOrNull = (v) => (typeof v === 'string' ? v : null);
+/** The strings an entry list holds under `keys` (each entry an object). @param {unknown} list @param {ReadonlyArray<string>} keys @returns {string[]} */
+function namesOf(list, keys) {
+  /** @type {string[]} */ const out = [];
+  if (Array.isArray(list)) for (const e of list) if (isRec(e)) for (const k of keys) { const v = strOrNull(e[k]); if (v !== null) out.push(v); }
+  return out;
+}
+
+/**
+ * One crisis's cast judged (VR37 (b), VR21): `absent` withheld on every read; a stake stays only where its `factionId` names
+ * a served power; a role row only where it names a served person ('npc'), power ('faction') or, of any other kind, a served
+ * person, power or house, by its id or name; what is left stays dense, in order. In place. SQL twin: 212 :: _gallery_veil_cast.
+ * @param {unknown} c @param {Set<string>} powers @param {Set<string>} people @param {Set<string>} houses
+ */
+function castByServed(c, powers, people, houses) {
+  if (!isRec(c) || !isRec(c.cast)) return;
+  const cast = c.cast;
+  delete cast.absent;
+  if (Array.isArray(cast.stakes)) cast.stakes = cast.stakes.filter(e => isRec(e) && strOrNull(e.factionId) !== null && powers.has(/** @type {string} */ (e.factionId)));
+  if (Array.isArray(cast.roles)) {
+    cast.roles = cast.roles.filter((e) => {
+      if (!isRec(e)) return false;
+      const id = strOrNull(e.id); const nm = strOrNull(e.name); const kind = strOrNull(e.kind);
+      /** @param {Set<string>} set */
+      const named = (set) => (id !== null && set.has(id)) || (nm !== null && set.has(nm));
+      if (kind === 'npc') return named(people);
+      if (kind === 'faction') return named(powers);
+      return named(people) || named(powers) || named(houses);
+    });
+  }
+}
+
+/**
+ * Every crisis's cast of the served document judged by castByServed against the served powers, people and houses (in
+ * place). The names are read from the document as served (a name lookup: the house lists stand or lie ruined alike).
+ * @param {Rec} s
+ */
+export function withholdCastByServed(s) {
+  if (!('stress' in s || 'stressors' in s)) return;
+  const powers = new Set([...namesOf(recAt(s, 'powerStructure')?.factions, ['name', 'faction']), ...namesOf(s.factions, ['name', 'faction'])]);
+  const people = new Set(namesOf(s.npcs, ['id', 'name']));
+  const houses = new Set(namesOf(s.institutions, ['id', 'name']));
+  for (const k of ['stress', 'stressors']) {
+    const v = s[k];
+    if (isRec(v)) castByServed(v, powers, people, houses);
+    else if (Array.isArray(v)) for (const e of v) castByServed(e, powers, people, houses);
+  }
+}

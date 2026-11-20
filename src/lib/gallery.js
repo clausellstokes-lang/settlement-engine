@@ -16,6 +16,7 @@
 import { supabase, isConfigured } from './supabase.js';
 import { toPublicSafe, veilPublicPayload } from '../domain/display/publicSafe.js';
 import { projectServedVeil, isServedVeil, clampVeilDeltas, clampShareMode, readShareMode, readShareVeil, writeShareVeil, VEIL_OVERRIDE_KEY, VEIL_VERSION } from '../domain/display/galleryVeil.js';
+import { rederiveForPage } from '../domain/veil/pageRederive.js';
 import { sanitizeGalleryHtml } from './sanitizeGalleryHtml.js';
 import { getDeviceToken } from './deviceToken.js';
 import { track, EVENTS } from './analytics.js';
@@ -276,6 +277,10 @@ export async function fetchGalleryMap(slug) {
   if (!isConfigured || !slug) return null;
   const { data, error } = await supabase.rpc('get_gallery_map', { p_slug: slug });
   if (error) throw new Error(error.message || 'Could not load that map');
+  // VEIL-21 (R2; VR33, VR37): each member's page re-derives what it draws of a value the server withholds on every read,
+  // from the served document alone (src/domain/veil/pageRederive.js)
+  // (in place: the payload is this read's own)
+  if (data && Array.isArray(data.members)) for (const m of data.members) if (m && typeof m === 'object') rederiveForPage(m.settlement);
   return data || null;
 }
 
@@ -866,10 +871,13 @@ function sanitizeDossier(row, { partyLink = false } = {}) {
     // A served payload is not projected again: the projection reads a face's house to keep its
     // memberships, and a veiled house tie is already gone, so a second pass would hide more than
     // the DM chose while the response still carried it.
-    settlement:   projectServedVeil(served ? source : toPublicSafe(source, {
+    // VEIL-21 (R2; VR33, VR37): the page re-derives what it draws of a value the server withholds on every read (the
+    // defence scores, the readiness score, the economy's output, a condition's severity from its band), from the served
+    // document alone (src/domain/veil/pageRederive.js); a value it cannot decide is not drawn.
+    settlement:   rederiveForPage(projectServedVeil(served ? source : toPublicSafe(source, {
       full: dmFull,
       memberOverrides: partyLink ? null : overrides,
-    }), veilOverrides),
+    }), veilOverrides)),
     // Which mode the page is in, and when its frozen copy was taken (null for live).
     galleryMode:  share.mode || 'live',
     snapshotAt:   share.mode === 'snapshot' && (share.snapshot || served) ? share.at : null,
