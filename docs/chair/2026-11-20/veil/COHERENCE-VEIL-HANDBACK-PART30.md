@@ -550,6 +550,14 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
     WITH GATE-1 at 0 of 92 AND GATE-2 at 0 red, then IMPORT-DOOR; the chair seats the security reader on that. (5) FOR THE OWNER
     (the chair carries it; security posture is his): whether a withheld house may ship "not shown" before it is "not
     inferable"; the chair's advice: it may not.
+74. THE CHAIR, 21:39: GO on the twins' values and the count. THE UNITS GROUPED BY MECHANISM (relayed to R3-TELL-4 at 21:4x):
+    (i) people.allegiance alone; (ii) the empty arrays together (svc.criminal, sp.ops, crimeTypes); (iii) powers.capture with
+    powers.criminal (the open place's form measured first; the three VR42 towns checked first); (iv) relations; (v) the three
+    sent forms (tensions, imports, safetyDesc); (vi) the tooth. inst.criminal, chains.criminal and income are expected to close
+    as the others leave: PROVED by GATE-2's re-read, never assumed. After EACH unit GATE-1 and GATE-2 re-read on the seat's
+    pool (server = twin, Reveal off = on) and ONE line to the chair with the two counts. The owner is told the veil needs about
+    6-8 more hours before the security reader sits; until he says otherwise the bar is GATE-2 at 0 red. VEIL-30's prompt is
+    written when this seat's record passes 330,000 by the chair's read.
 
 ## 2. The bytes (kept current)
 | File | sha256 |
