@@ -672,6 +672,8 @@ describe('(12) Addendum 3: renaming the SEAT after a transfer: R1 answers NOBODY
       const strata = derivePowerStrata(doc);
       expect(strata.powers[0], label).toMatchObject({ name: 'The Gilded Compact', role: 'ruler' });
       const said = JSON.stringify(strata.powers) + JSON.stringify(strata.roster.map(({ faction: _f, ...row }) => row));
+      expect(said, label).toContain('The Gilded Compact');
+      // anchored: `said` is live, the line above proves it carries the seat's form, so the vacancy check reads real text
       expect(said, label).not.toMatch(/vacant|empty|unheld|no one holds|nobody holds/i);
       // the contest's contenders, no holder removed: the old law's list (which removes none)
       const contenders = strata.powers.filter((p) => p.role === 'contender').map((p) => p.name);
