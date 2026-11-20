@@ -7,6 +7,10 @@ import {
   curateModelFor, toggleVeilDelta, CURATE_SECTIONS, readShareMode, clampShareMode, galleryPayloadFor, VEIL_LIMITS, VEIL_MODES,
 } from '../../../src/domain/display/galleryVeil.js';
 import { SEARCH_TAB_ORDER } from '../../../src/domain/dossier/dossierSearch.js';
+// VR46, THE GUARD RULING (VEIL-22, R4-CURE 3; the chair's, no veto): VR10 re-keys every person id on every non-owner projection, so a
+// comparison that pinned a served person id byte-for-byte is read MODULO THE READ'S PERSON-ID BIJECTION and nothing else
+// (unkeyPeople: the served ids mapped back to the reference's by first appearance; it throws where a stored id is served).
+import { bijectionTeeth, unkeyPeople } from '../../security/personIdBijection.shared.mjs';
 
 describe('toPublicSafe (§1k)', () => {
   it('strips DM-private top-level blocks and denied keys', () => {
@@ -459,7 +463,7 @@ describe('galleryVeil — the model (X-21 / X-21b, W2-VEIL-A U1)', () => {
     const veil = resolveVeil([], [{ address: 'card:npc:npc_11', hidden: true }]);
     expect(veil.has('card:npc:npc_11')).toBe(false);
     expect(veil.has('field:npc:npc_11:secret')).toBe(true);
-    const out = applyVeil(town(), veil);
+    const out = unkeyPeople(applyVeil(town(), veil), town());
     expect(out.npcs).toHaveLength(2);
     const d = out.npcs.find(n => n.id === 'npc_11');
     for (const k of CARD_KINDS.npc.floor) expect(d[k]).toEqual(dalla()[k]);
@@ -479,7 +483,7 @@ describe('galleryVeil — the model (X-21 / X-21b, W2-VEIL-A U1)', () => {
     expect('desc' in smithy.institutions[0]).toBe(false);
     // The criminal house vanishes whole: the card, its service rows, and every NPC's
     // membership reference to it (the identity floor's one exception).
-    const out = applyVeil(src, resolveVeil([], [{ address: 'card:institution:underground-network', hidden: true }]));
+    const out = unkeyPeople(applyVeil(src, resolveVeil([], [{ address: 'card:institution:underground-network', hidden: true }])), src);
     expect(out.institutions.map(i => i.name)).toEqual(['Smithy']);
     expect(out.availableServices.equipment.map(r => r.name)).toEqual(['Tools']);
     expect(out.availableServices.criminal).toEqual([]);
@@ -501,7 +505,7 @@ describe('galleryVeil — the model (X-21 / X-21b, W2-VEIL-A U1)', () => {
       'field:npc:npc_11:name', 'field:settlement:s1:name', 'class:npc:role',
     ];
     const src = town();
-    const out = applyVeil(src, everything);
+    const out = unkeyPeople(applyVeil(src, everything), src);
     for (const k of SETTLEMENT_FLOOR) expect(out[k]).toEqual(src[k]);
     expect(out.npcs.map(n => n.name)).toEqual(['Dalla Njálsson', 'Ulf']);
     expect(out.institutions.map(i => [i.name, i.category])).toEqual([['Smithy', 'Crafts'], ['Underground network', 'Criminal']]);
@@ -520,7 +524,7 @@ describe('galleryVeil — the model (X-21 / X-21b, W2-VEIL-A U1)', () => {
   });
 
   it('an institution hides its services (its rows in every category) and its people (their link, never the person)', () => {
-    const out = applyVeil(town(), resolveVeil(['field:institution:underground-network:services', 'field:institution:smithy:people'], []));
+    const out = unkeyPeople(applyVeil(town(), resolveVeil(['field:institution:underground-network:services', 'field:institution:smithy:people'], [])), town());
     expect(out.availableServices.equipment.map(r => r.name)).toEqual(['Tools']);
     expect(out.availableServices.criminal).toEqual([]);
     const ulf = out.npcs.find(n => n.id === 'npc_2');
@@ -753,7 +757,7 @@ describe('galleryVeil — the one default set (X-21c / X-21d, W2-VEIL-A U2)', ()
 
   it('everything else is shown: a town with nothing to hide loses only its housekeeping and hooks', () => {
     const s = temurpolis();
-    const out = project(s);
+    const out = unkeyPeople(project(s), s);
     expect(out.institutions).toEqual(s.institutions);
     expect(out.npcs).toEqual(s.npcs);
     expect(out.availableServices.food).toEqual(s.availableServices.food);
@@ -825,7 +829,7 @@ describe('galleryVeil — the veil only removes (X-21 (d), W2-VEIL-A U4)', () =>
     for (let trial = 0; trial < 60; trial++) {
       const defaults = pool.filter(() => rand() < 0.5);
       const deltas = pool.filter(() => rand() < 0.3).map(address => ({ address, hidden: rand() < 0.5 }));
-      const out = applyVeil(projected, resolveVeil(defaults, deltas));
+      const out = unkeyPeople(applyVeil(projected, resolveVeil(defaults, deltas)), projected);
       for (const [path, value] of leaves(out)) {
         // A container emptied by removal reads '[]' / '{}' where the projection had children.
         if (value === '[]' && [...before.keys()].some(k => k.startsWith(`${path}[`))) continue;
@@ -908,7 +912,7 @@ describe('galleryVeil — the curate model and the share mode (W2-VEIL-B U2)', (
     expect(cards.find(c => c.id === 'n2').eyes.find(e => e.field === 'secret')).toMatchObject({ hidden: false, defaultHidden: true });
     // The switch is said once; the exception is not a hidden line.
     expect(after.lines.filter(l => /secret/i.test(l.text)).map(l => l.text)).toEqual(['Secrets: hidden for everyone']);
-    const out = projectShareVeil(pub, writeShareVeil({}, deltas));
+    const out = unkeyPeople(projectShareVeil(pub, writeShareVeil({}, deltas)), pub);
     expect(out.npcs.find(n => n.id === 'n1').secret).toBe(undefined);
     expect(out.npcs.find(n => n.id === 'n2').secret).toEqual({ what: 'embezzles tithes' });
   });
@@ -934,5 +938,26 @@ describe('galleryVeil — the curate model and the share mode (W2-VEIL-B U2)', (
     const ov = { n1: { revealDm: true } };
     expect(galleryPayloadFor(town(), { memberOverrides: ov })).toEqual(toPublicSafe(town(), { full: false, memberOverrides: ov }));
     expect(galleryPayloadFor(town(), { shareDm: true })).toEqual(toPublicSafe(town(), { full: true }));
+  });
+});
+
+// ── VR46 (VEIL-22, R4-CURE 3): THE GUARD RULING, the five teeth of the re-stated comparisons ─────────────────────
+describe('galleryVeil — the identity comparisons read modulo the read\'s person-id bijection keep their teeth (VR46; VEIL-22, R4-CURE 3)', () => {
+  it('(i) a reference that does not follow its card, (ii) a stored person id served, (iii) a changed non-id byte, (iv) two people under one id or one under two: each still reds; (v) two projections of one town differ in their person ids', () => {
+    const src = {
+      id: 's1', name: 'Vikhavn', tier: 'town',
+      npcs: [{ id: 'npc_11', name: 'Dalla Njálsson', role: 'Council Member' }, { id: 'npc_2', name: 'Ulf', role: 'Smith', personality: { flaw: 'proud' } }],
+      relationships: [{ id: 'tie_npc_11_npc_2', from: 'npc_11', to: 'npc_2', type: 'rival', description: 'Old grudge.' }],
+    };
+    const served = applyVeil(src, resolveVeil([], []));
+    // the re-stated equality of this file: the served cards and ties, mapped back by the bijection, are the projection's
+    const holds = (c) => {
+      const back = unkeyPeople(c, src);
+      expect(back.npcs).toEqual(src.npcs);
+      expect(back.relationships).toEqual(src.relationships);
+      return true;
+    };
+    expect(served.npcs[0].id, 'the served id is re-keyed').not.toBe('npc_11');
+    expect(bijectionTeeth(served, holds, { storedId: 'npc_11', again: applyVeil(src, resolveVeil([], [])) })).toEqual({ missed: [], absent: [] });
   });
 });

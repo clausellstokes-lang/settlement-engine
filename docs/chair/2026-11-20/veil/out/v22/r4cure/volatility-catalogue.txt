@@ -1,0 +1,96 @@
+Pager usage is off.
+                                  function                                  |      made_by      | volatility |                                              reason                                               
+----------------------------------------------------------------------------+-------------------+------------+---------------------------------------------------------------------------------------------------
+ _gallery_veil(jsonb,jsonb,boolean,boolean)                                 | 211, 212 restates | VOLATILE   | DRAWS the read's salt (gen_random_uuid()): VOLATILE, so no plan folds or caches it
+ _gallery_veil_rekey(jsonb,text)                                            | 212               | VOLATILE   | CARRIES the salt (argument salt): VOLATILE, so no plan folds a call of it with constant arguments
+ _gallery_veil_rekey_at(jsonb,text[],jsonb,text)                            | 212               | VOLATILE   | CARRIES the salt (argument salt): VOLATILE, so no plan folds a call of it with constant arguments
+ _gallery_veil_rekey_each(jsonb,text[],text[],jsonb,text)                   | 212               | VOLATILE   | CARRIES the salt (argument salt): VOLATILE, so no plan folds a call of it with constant arguments
+ _gallery_veil_rekey_id(text,text,text)                                     | 212               | VOLATILE   | CARRIES the salt (argument salt): VOLATILE, so no plan folds a call of it with constant arguments
+ _gallery_veil_rekey_ref(jsonb,jsonb,text)                                  | 212               | VOLATILE   | CARRIES the salt (argument salt): VOLATILE, so no plan folds a call of it with constant arguments
+ _gallery_veil_rekey_served(jsonb,jsonb,text)                               | 212               | VOLATILE   | CARRIES the salt (argument salt): VOLATILE, so no plan folds a call of it with constant arguments
+ get_gallery_dossier(text)                                                  | 211, 212 restates | VOLATILE   | REACHES the salt through _gallery_veil: VOLATILE
+ get_gallery_map(text)                                                      | 211               | VOLATILE   | REACHES the salt through _gallery_veil: VOLATILE
+ get_unlisted_dossier(text)                                                 | 211, 212 restates | VOLATILE   | REACHES the salt through _gallery_veil: VOLATILE
+ import_gallery_dossier(text)                                               | 211, 212 restates | VOLATILE   | REACHES the salt through _gallery_veil: VOLATILE
+ _gallery_apply_member_overrides(jsonb,jsonb,jsonb,boolean,boolean,boolean) | 211, 212 restates | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_apply(jsonb,jsonb)                                           | 211, 212 restates | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_card(text,jsonb,jsonb,jsonb,jsonb,jsonb)                     | 211, 212 restates | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_card_id(text,jsonb)                                          | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_cards(jsonb,text)                                            | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_case_fold(text)                                              | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_cast(jsonb,text[],text[],text[])                             | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_clandestine(jsonb)                                           | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_copy_bound()                                                 | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_criminal(jsonb)                                              | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_drop_hooks(jsonb)                                            | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_each_minus_at(jsonb,text[],text[])                           | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_embeds(jsonb,text[])                                         | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_facet(jsonb,text)                                            | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_fold(text)                                                   | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_grouping(jsonb,text)                                         | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_groupings()                                                  | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_hidden_name(jsonb,jsonb,text[],jsonb)                        | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_hideable(text)                                               | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_hideable_p(jsonb,text)                                       | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_holders(jsonb,jsonb,jsonb)                                   | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_house(jsonb)                                                 | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_illegal_brokerage(jsonb)                                     | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_inst_id(jsonb)                                               | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_join(jsonb,text)                                             | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_jslen(text)                                                  | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_jsstr(jsonb)                                                 | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_kind_order()                                                 | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_kinds()                                                      | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_lower(text)                                                  | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_map(jsonb,text,text,jsonb)                                   | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_map_list(jsonb,text,text,jsonb)                              | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_member_revealed(jsonb,jsonb,boolean,boolean,boolean)         | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_minus_at(jsonb,text[],text[])                                | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_name_bound()                                                 | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_name_case()                                                  | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_name_floor(jsonb,jsonb,text[])                               | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_name_fold(text)                                              | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_name_hit(text,jsonb,jsonb,jsonb)                             | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_name_hits(jsonb,jsonb)                                       | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_name_json(text)                                              | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_name_near(integer,integer,integer[])                         | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_name_needle(text,jsonb)                                      | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_name_pad(text)                                               | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_name_prep(text)                                              | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_name_ready(text,jsonb)                                       | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_name_search(text[],text[])                                   | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_name_sep(boolean)                                            | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_name_sweep(jsonb,jsonb,jsonb,jsonb)                          | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_name_taken(jsonb,jsonb,boolean,jsonb,jsonb,jsonb)            | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_name_tokens(jsonb)                                           | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_named(jsonb,jsonb,jsonb,jsonb)                               | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_npc_house(jsonb)                                             | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_npc_id(jsonb)                                                | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_npc_pass(jsonb,jsonb)                                        | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_num_inf(numeric)                                             | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_num_zero(numeric)                                            | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_numstr(text)                                                 | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_or(jsonb,jsonb,jsonb)                                        | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_own_id(jsonb,text,jsonb)                                     | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_parse(text)                                                  | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_pieces(jsonb)                                                | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_resolve(jsonb,jsonb,boolean,text[])                          | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_roster_members(jsonb,jsonb,boolean,boolean,boolean)          | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_roster_splice(jsonb,jsonb,boolean,boolean,boolean)           | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_runs(jsonb)                                                  | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_second_homes(jsonb,jsonb,jsonb)                              | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_served(jsonb,jsonb,jsonb,boolean)                            | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_slug(text)                                                   | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_snake(text)                                                  | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_sources(jsonb,jsonb,jsonb,jsonb)                             | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_str(jsonb)                                                   | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_tie_pieces(jsonb)                                            | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_tie_roles(jsonb,jsonb,jsonb,boolean,boolean,boolean)         | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_truthy(jsonb)                                                | 211               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+ _gallery_veil_withhold_always(jsonb)                                       | 212               | IMMUTABLE  | no salt: a pure function of its arguments (no table, no session state): IMMUTABLE as stated
+
+== THE PROOF: functions (of every public function) that draw, carry or reach the salt and are IMMUTABLE or STABLE (none wanted)
+ reaching_and_not_volatile | reaching_or_carrying |                                                                                                                                               each                                                                                                                                                
+---------------------------+----------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                         0 |                   12 | _gallery_veil=v, _gallery_veil_rekey=v, _gallery_veil_rekey_at=v, _gallery_veil_rekey_each=v, _gallery_veil_rekey_id=v, _gallery_veil_rekey_ref=v, _gallery_veil_rekey_served=v, get_gallery_dossier=v, get_gallery_map=v, get_unlisted_dossier=v, import_gallery_dossier=v, import_gallery_map=v
+

@@ -22,6 +22,7 @@
 import { describe, it, expect, beforeAll } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
 import { pgcrypto } from '@electric-sql/pglite/contrib/pgcrypto';
+import { writeFileSync } from 'node:fs';
 import { bootChain, BIRTH_DIALS, OWNER } from './veilChain.shared.mjs';
 
 const PGLITE_BOOT_TIMEOUT_MS = 900_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
@@ -43,6 +44,17 @@ function strings(doc) {
   };
   walk(doc, '');
   return out;
+}
+
+/**
+ * VR46 TOOTH (ii), SHARPENED (the seat, R4-CURE): every served string AND every key holding a stored person id AS A
+ * SUBSTRING (an id inside a sentence, an id used as a key), by path. `ids`: the stored person ids (strings).
+ */
+function storedIdHits(doc, ids) {
+  const list = [...ids].filter((x) => typeof x === 'string' && x.length >= 3);
+  if (!list.length) return [];
+  const re = new RegExp(list.sort((a, b) => b.length - a.length).map((x) => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|'));
+  return strings(doc).filter(([, v]) => re.test(v)).map(([p, v]) => `${p} holds ${v.match(re)[0]}`);
 }
 
 /** The crises of a document (an object or an array, both copies). */
@@ -143,7 +155,7 @@ describe('R4: the people — the holder withheld whole with its ties (VR9), ever
           await db.exec(`set test.uid = '${OWNER}';`);
           const own = (await db.query('select data from public.settlements where id = $1', [id])).rows[0]?.data;
           await db.exec(`set test.uid = '';`);
-          reads.push({ t, mark, dm, ov, docs, served, again: g2, own });
+          reads.push({ t, mark, dm, ov, docs, served, again: g2, own, row: g });
         }
       }
     }
@@ -199,10 +211,9 @@ describe('R4: the people — the holder withheld whole with its ties (VR9), ever
       for (const [read, d] of Object.entries(r.docs)) {
         if (!isRec(d)) { bad.push(`${r.t.seed} ${read}: no document`); continue; }
         const at = `${r.t.seed} ${r.t.shape} ${r.mark}${r.dm ? ' +DM' : ''} ${read}`;
-        for (const [p, v] of strings(d)) {
-          if (r.t.ids.has(v)) bad.push(`${at}: ${p} is a stored person id`);
-          else if (/npc_veiled_|npc_power_/.test(v)) bad.push(`${at}: ${p} holds an id form`);
-        }
+        // VR46 tooth (ii), sharpened: a stored id anywhere, as a substring of a string or of a key
+        for (const h of storedIdHits(d, r.t.ids)) bad.push(`${at}: ${h} (a stored person id)`);
+        for (const [p, v] of strings(d)) if (/npc_veiled_|npc_power_/.test(v)) bad.push(`${at}: ${p} holds an id form`);
         const ids = new Set();
         for (const p of (d.npcs || []).filter(isRec)) { if (!PERSON.test(String(p.id))) bad.push(`${at}: npcs[].id ${p.id} not re-keyed`); ids.add(p.id); }
         const ref = (p, v) => { if (v !== undefined && v !== null && !ids.has(v)) bad.push(`${at}: ${p} ${v} resolves to no served person`); };
@@ -218,6 +229,7 @@ describe('R4: the people — the holder withheld whole with its ties (VR9), ever
       }
       // the served member overrides: a person's key is the re-keyed id of a served person
       for (const [read, sv] of Object.entries(r.served)) {
+        for (const h of storedIdHits(sv, r.t.ids)) bad.push(`${r.t.seed} ${r.t.shape} ${r.mark} ${read} served marker: ${h} (a stored person id)`);
         const d = r.docs[read];
         const ids = new Set((d?.npcs || []).map((p) => p?.id));
         for (const k of Object.keys(isRec(sv) ? sv : {}).filter((x) => x !== '$veil')) {
@@ -228,6 +240,39 @@ describe('R4: the people — the holder withheld whole with its ties (VR9), ever
     }
     expect(bad.slice(0, 40)).toEqual([]);
     expect(bad.length).toBe(0);
+  }, ARM_TIMEOUT_MS);
+
+  it('VR46 tooth (ii), sharpened, has teeth: a stored id planted inside a sentence, and as a key, is each caught', () => {
+    const r = reads.find((x) => x.mark === 'marked' && isRec(x.docs.gallery) && (x.docs.gallery.npcs || []).length);
+    const id = [...r.t.ids][0];
+    expect(storedIdHits(r.docs.gallery, r.t.ids)).toEqual([]);
+    const inSentence = clone(r.docs.gallery); inSentence.npcs[0].role = `Keeps the ledger of ${id} by night`;
+    expect(storedIdHits(inSentence, r.t.ids)).toEqual([`npcs[].role holds ${id}`]);
+    const asKey = clone(r.docs.gallery); asKey.npcs[0].extra = { [id]: true };
+    expect(storedIdHits(asKey, r.t.ids)).toEqual([`npcs[].extra{key} holds ${id}`]);
+    const marker = { ...(isRec(r.served.gallery) ? r.served.gallery : {}), [id]: { revealDm: true } };
+    expect(storedIdHits(marker, r.t.ids)).toEqual([`{key} holds ${id}`]);
+  }, ARM_TIMEOUT_MS);
+
+  it('VR9 (the seat, R4-CURE 3): a withheld holder\'s NAME, searched in every served string of the whole gallery row (every column) and the served marker: no hit outside the rows R5 (_gallery_veil_composed) or the doors (the tile and chronicle columns) own', () => {
+    const hits = [];
+    const outside = [];
+    const DOORS = /^(chronicle|tile_[a-z_]*|aliveness|comment_count)\b/;
+    for (const r of reads.filter((x) => x.mark === 'marked' && x.t.holderNames.length)) {
+      const surfaces = { 'gallery row': r.row, 'gallery marker': r.served.gallery, 'link marker': r.served.link };
+      for (const [where, d] of Object.entries(surfaces)) {
+        if (d === undefined || d === null) continue;
+        for (const [p, v] of strings(d)) {
+          const nm = r.t.holderNames.find((x) => v.includes(x));
+          if (!nm) continue;
+          const at = `${r.t.seed} ${r.t.shape}${r.dm ? ' +DM' : ''} ${where}: ${p}`;
+          hits.push(at);
+          if (!(where === 'gallery row' && DOORS.test(p))) outside.push(`${at} names the holder ${nm}`);
+        }
+      }
+    }
+    if (process.env.R4_NAMES_OUT) writeFileSync(process.env.R4_NAMES_OUT, JSON.stringify({ hits, outside }, null, 1));
+    expect(outside.slice(0, 40)).toEqual([]);
   }, ARM_TIMEOUT_MS);
 
   it('VR10: one salt a read: two reads of one share spell every id differently, each consistent', () => {
@@ -264,4 +309,134 @@ describe('R4: the people — the holder withheld whole with its ties (VR9), ever
     }
     expect(lost).toEqual([]);
   }, ARM_TIMEOUT_MS);
+});
+
+/**
+ * R4-CURE (VEIL-22, the seat's cures 1 and 2): ONE SALT A READ, under a cached plan and in the twin.
+ * 1. THE SALT'S VOLATILITY: 212 :: _gallery_veil draws the read's salt (gen_random_uuid()). Declared IMMUTABLE, a call with
+ *    constant arguments is folded to a constant at planning, and a prepared (or any parameter-less, so generic) plan keeps
+ *    the constant: every execution, and every row of one statement, would serve ONE salt (VR10 broken silently). A
+ *    prepared statement of _gallery_veil with constant arguments, and of each read function as the page calls it,
+ *    executed EIGHT times (a generic plan is chosen after five custom ones) and once more under
+ *    `plan_cache_mode = force_generic_plan`, must serve a different person key on EVERY execution; so must two reads in
+ *    one statement (the chair's word; tooth (v) of VR46 on the server). Every function that draws or carries the salt,
+ *    and every one that reaches it through a call, is VOLATILE.
+ * 2. THE TWIN'S SALT: galleryVeil.js draws one salt per PROJECTION call (projectShareVeil, applyVeil, the unmarked path),
+ *    consistent within that payload; two projections of one share in one module load spell every id differently.
+ * RED at R4's dfa031f3e: out/v22/r4cure/red-*.txt.
+ */
+describe('R4-CURE: one salt a read, under a cached plan (212 :: _gallery_veil VOLATILE) and per projection in the twin', () => {
+  const TOWN = Object.freeze({ name: 'Saltby', tier: 'village',
+    npcs: [{ id: 'npc_salt_a', name: 'Ada', role: 'Smith' }, { id: 'npc_salt_b', name: 'Bo', role: 'Miller' }],
+    relationships: [{ id: 'tie_npc_salt_a_npc_salt_b', from: 'npc_salt_a', to: 'npc_salt_b', type: 'friend' }] });
+  const STORED = new Set(['npc_salt_a', 'npc_salt_b']);
+  let db;
+  let veil;
+
+  beforeAll(async () => {
+    db = new PGlite({ extensions: { pgcrypto } });
+    expect(await bootChain(db)).toEqual([]);
+    veil = await import('../../src/domain/display/galleryVeil.js');
+    await db.exec(`insert into auth.users (id) values ('${READER}') on conflict do nothing; insert into public.profiles (id) values ('${READER}') on conflict do nothing;
+      create or replace function public.current_user_has_premium_access() returns boolean language sql stable as $f$ select true $f$;`);
+    let n = 0;
+    for (const [mark, ov] of [['marked', veil.writeShareVeil({}, [])], ['unmarked', {}]]) {
+      n += 1;
+      const id = `5a170000-0000-0000-0000-${String(n).padStart(12, '0')}`;
+      await db.query(`insert into public.settlements (id,user_id,name,tier,data,is_public,public_slug,published_at,unlisted_slug,visibility,gallery_member_overrides,gallery_share_dm,gallery_importable)
+        values ($1,$2,'Saltby','village',$3::jsonb,true,$4,now(),$5,'unlisted',$6::jsonb,false,true)`, [id, OWNER, JSON.stringify(TOWN), `salt-${mark}`, `salt-${mark}-link`, JSON.stringify(ov)]);
+      await db.query(`insert into public.saved_maps (id, user_id, name, map_data, is_public, public_slug, unlisted_slug, visibility, share_kind, gallery_share_campaign, gallery_importable)
+        values (gen_random_uuid(), $1, 'm', $2, true, $3, $4, 'unlisted', 'map_with_campaign', true, true)`, [OWNER, JSON.stringify({ campaign: { settlementIds: [id] } }), `salt-${mark}-map`, `salt-${mark}-mapl`]);
+    }
+  }, PGLITE_BOOT_TIMEOUT_MS);
+
+  /** The first person's key of each execution; every one must be re-keyed and all must differ. */
+  const pair = async (sql, uid = '') => {
+    await db.exec(`set test.uid = '${uid}';`);
+    const res = await db.exec(sql);
+    await db.exec(`set test.uid = '';`);
+    return res.filter((r) => r.rows?.length).map((r) => r.rows[0]?.k);
+  };
+
+  it('1. a prepared statement of _gallery_veil (constant arguments), and of each read function as it is called, executed twice, serves different person keys; so do two reads in one statement', async () => {
+    const doc = JSON.stringify(TOWN).replace(/'/g, "''");
+    const same = [];
+    const check = (label, keys, n = 2) => {
+      if (keys.length !== n || keys.some((k) => !PERSON.test(String(k)) || STORED.has(k))) same.push(`${label}: not ${n} re-keyed keys (${keys.join(', ')})`);
+      else if (new Set(keys).size !== n) same.push(`${label}: a salt served twice (${keys.join(', ')})`);
+    };
+    let q = 0;
+    const EXECUTIONS = 8;
+    const prepared = async (label, body, uid) => {
+      q += 1;
+      const runs = Array.from({ length: EXECUTIONS }, () => `execute rc${q};`).join(' ');
+      check(label, await pair(`prepare rc${q} as ${body}; ${runs} set plan_cache_mode = force_generic_plan; execute rc${q}; reset plan_cache_mode; deallocate rc${q};`, uid), EXECUTIONS + 1);
+    };
+    for (const [mark, ov] of [['unmarked', '{}'], ['marked', JSON.stringify(veil.writeShareVeil({}, []))]]) {
+      await prepared(`_gallery_veil ${mark}`, `select public._gallery_veil('${doc}'::jsonb, '${ov}'::jsonb, false) #>> '{body,npcs,0,id}' as k`);
+      check(`two calls in one statement, ${mark}`, Object.values((await db.query(`select public._gallery_veil('${doc}'::jsonb, '${ov}'::jsonb, false) #>> '{body,npcs,0,id}' as a,
+        public._gallery_veil('${doc}'::jsonb, '${ov}'::jsonb, false) #>> '{body,npcs,0,id}' as b`)).rows[0]));
+      check(`one constant call over two rows, ${mark}`, (await db.query(`select public._gallery_veil('${doc}'::jsonb, '${ov}'::jsonb, false) #>> '{body,npcs,0,id}' as k
+        from generate_series(1, 2) g`)).rows.map((r) => r.k));
+      await prepared(`get_gallery_dossier ${mark}`, `select g.data #>> '{npcs,0,id}' as k from public.get_gallery_dossier('salt-${mark}') g`);
+      await prepared(`get_unlisted_dossier ${mark}`, `select public.get_unlisted_dossier('salt-${mark}-link') #>> '{dossier,npcs,0,id}' as k`);
+      await prepared(`import_gallery_dossier ${mark}`, `select g.data #>> '{npcs,0,id}' as k from public.import_gallery_dossier('salt-${mark}') g`, READER);
+      await prepared(`get_gallery_map ${mark}`, `select public.get_gallery_map('salt-${mark}-map') #>> '{members,0,settlement,npcs,0,id}' as k`);
+    }
+    expect(same).toEqual([]);
+  }, ARM_TIMEOUT_MS);
+
+  it('1. every function that draws the salt, carries it, or reaches it through a call is declared VOLATILE', async () => {
+    const rows = (await db.query(`with recursive f as (
+        select p.proname, p.provolatile, p.prosrc, coalesce(p.proargnames, '{}') as args from pg_proc p join pg_namespace n on n.oid = p.pronamespace where n.nspname = 'public'),
+      e as (select a.proname as caller, b.proname as callee from f a join f b on a.proname <> b.proname and a.prosrc ~ ('(^|[^a-z0-9_])' || b.proname || '\\s*\\(')),
+      r(proname) as (select proname from f where prosrc ilike '%gen_random_uuid%' and proname like '%gallery%' union select e.caller from e join r on e.callee = r.proname)
+      select distinct proname, provolatile from f where proname in (select proname from r) or 'salt' = any(args) order by 1`)).rows;
+    expect(rows.map((r) => r.proname)).toEqual(expect.arrayContaining(['_gallery_veil', '_gallery_veil_rekey', 'get_gallery_dossier', 'get_unlisted_dossier', 'import_gallery_dossier', 'get_gallery_map']));
+    expect(rows.filter((r) => r.provolatile !== 'v').map((r) => r.proname)).toEqual([]);
+  }, ARM_TIMEOUT_MS);
+
+  it('NUMERIC IDS (the seat, R4-CURE): a card whose id is a NUMBER is re-keyed like any other, its tie follows, its served-marker key follows it (server); the twin the same', async () => {
+    const NUM = { name: 'Numby', tier: 'village', npcs: [{ id: 7, name: 'Ada', role: 'Smith' }, { id: 'npc_num_b', name: 'Bo', role: 'Miller' }],
+      relationships: [{ id: 70, from: 7, to: 'npc_num_b', type: 'friend' }] };
+    const ov = veil.writeShareVeil({ 7: { revealDm: true } }, []);
+    await db.query(`insert into public.settlements (id,user_id,name,tier,data,is_public,public_slug,published_at,unlisted_slug,visibility,gallery_member_overrides,gallery_share_dm,gallery_importable)
+      values ('5a170000-0000-0000-0000-0000000000f7',$1,'Numby','village',$2::jsonb,true,'salt-num',now(),'salt-num-link','unlisted',$3::jsonb,false,true)`, [OWNER, JSON.stringify(NUM), JSON.stringify(ov)]);
+    await db.exec(`set test.uid = '';`);
+    const g = (await db.query('select to_jsonb(g) r from public.get_gallery_dossier($1) g', ['salt-num'])).rows[0]?.r;
+    const bad = [];
+    const look = (where, d, served) => {
+      const ada = (d?.npcs || []).find((p) => p?.name === 'Ada');
+      if (!ada || !PERSON.test(String(ada.id))) { bad.push(`${where}: the numeric id is served as ${JSON.stringify(ada?.id)}`); return; }
+      const tie = (d.relationships || [])[0];
+      if (!tie || tie.from !== ada.id || !/^tie_[0-9a-f]{16}$/.test(String(tie.id))) bad.push(`${where}: the tie does not follow (${JSON.stringify(tie)})`);
+      if (served !== undefined && !Object.prototype.hasOwnProperty.call(served || {}, ada.id)) bad.push(`${where}: the served-marker key of the numeric id does not follow its card (${Object.keys(served || {}).join(', ')})`);
+    };
+    look('server gallery read', g?.data, g?.gallery_member_overrides);
+    look('twin projection', veil.projectShareVeil(veil.galleryPayloadFor(clone(NUM), { shareDm: false, memberOverrides: ov }), ov));
+    expect(bad).toEqual([]);
+  }, ARM_TIMEOUT_MS);
+
+  it('2. the twin: two projections of one town in one page load (one module load) spell every id differently, each consistent within its payload (VR46 tooth (v))', () => {
+    const same = [];
+    const pub = veil.galleryPayloadFor(clone(TOWN), { shareDm: false, memberOverrides: {} });
+    const marked = veil.writeShareVeil({}, []);
+    const runs = {
+      'projectShareVeil unmarked': () => veil.projectShareVeil(pub, {}),
+      'projectShareVeil marked': () => veil.projectShareVeil(pub, marked),
+      'applyVeil': () => veil.applyVeil(pub, veil.resolveVeil(veil.defaultVeilFor(pub), [])),
+      'projectServedVeil unmarked': () => veil.projectServedVeil(pub, {}),
+    };
+    for (const [label, run] of Object.entries(runs)) {
+      const [a, b] = [run(), run()];
+      const ka = (a.npcs || []).map((p) => p?.id);
+      const kb = (b.npcs || []).map((p) => p?.id);
+      if (!ka.length || ka.some((k) => !PERSON.test(String(k)))) same.push(`${label}: not re-keyed (${ka.join(', ')})`);
+      else if (ka.some((k, i) => k === kb[i])) same.push(`${label}: ONE salt for both projections (${ka.join(', ')})`);
+      if (JSON.stringify(relabel(a)) !== JSON.stringify(relabel(b))) same.push(`${label}: the two projections differ beyond the ids`);
+      const tie = (a.relationships || [])[0];
+      if (!tie || tie.from !== ka[0] || tie.to !== ka[1]) same.push(`${label}: the tie does not follow its cards within the payload`);
+    }
+    expect(same).toEqual([]);
+  });
 });

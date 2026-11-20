@@ -1,0 +1,8 @@
+== at the tip (r4ctip, 212 sha256 e5b31073…11a0)
+== the prepared statement, unmarked: EXPLAIN VERBOSE (is the call folded to a constant at planning?) | keys 0 distinct 0
+== unmarked: eight executions of one prepared statement (a generic plan after five), then one under force_generic_plan | keys 9 distinct 9
+== marked: eight executions, then one under force_generic_plan | keys 9 distinct 9
+== plan_cache_mode = force_generic_plan (as any parameter-less statement is), unmarked, two executions | keys 2 distinct 2
+== two reads in one statement (unmarked; marked) | keys 2 distinct 2
+== the same constant call over two rows of one statement | keys 2 distinct 2
+== the read functions as the page calls them (a stored share, marked and unmarked): a prepared statement, eight executions and one under force_generic_plan | keys 45 distinct 45

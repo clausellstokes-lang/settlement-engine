@@ -1,0 +1,65 @@
+[gate-tail] start:  07:22:51 up  1:29,  0 user,  load average: 5.27, 6.75, 7.06 · cores: 4
+gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.0.lock.shared as PID 23182 after 0 poll(s); 2 shared holder(s) live, worker cap <= 2.
+ RUN  v4.1.8 /home/user/wt/r4
+ ❯ tests/domain/display/publicSafe.test.js (57 tests | 1 failed) 92ms
+     × PROPERTY: for any veil, every path and value in the output already sits at that path in the projection 11ms
+ ❯ tests/domain/display/criminalVeilSwitch.test.js (9 tests | 1 failed) 6931ms
+     × (a)-(e) hold on every birth, plain and DM-revealing 3081ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+ FAIL  tests/domain/display/criminalVeilSwitch.test.js > VS1 acceptance on the projection, over twelve births > (a)-(e) hold on every birth, plain and DM-revealing
+AssertionError: expected [ …(24) ] to deeply equal []
+- Expected
++ Received
+- []
++ [
++   "vs-thorp-0 (b): safety blackMarketCapture",
++   "vs-thorp-0 dm (b): safety blackMarketCapture",
++   "vs-thorp-3 (b): safety blackMarketCapture",
++   "vs-thorp-3 dm (b): safety blackMarketCapture",
++   "vs-hamlet-0 (b): safety blackMarketCapture",
++   "vs-hamlet-0 dm (b): safety blackMarketCapture",
++   "vs-hamlet-1 (b): safety blackMarketCapture",
++   "vs-hamlet-1 dm (b): safety blackMarketCapture",
++   "vs-village-0 (b): safety blackMarketCapture",
++   "vs-village-0 dm (b): safety blackMarketCapture",
++   "vs-village-2 (b): safety blackMarketCapture",
++   "vs-village-2 dm (b): safety blackMarketCapture",
++   "vs-town-0 (b): safety blackMarketCapture",
++   "vs-town-0 dm (b): safety blackMarketCapture",
++   "vs-town-2 (b): safety blackMarketCapture",
++   "vs-town-2 dm (b): safety blackMarketCapture",
++   "vs-city-0 (b): safety blackMarketCapture",
++   "vs-city-0 dm (b): safety blackMarketCapture",
++   "vs-city-1 (b): safety blackMarketCapture",
++   "vs-city-1 dm (b): safety blackMarketCapture",
++   "vs-metropolis-0 (b): safety blackMarketCapture",
++   "vs-metropolis-0 dm (b): safety blackMarketCapture",
++   "vs-metropolis-1 (b): safety blackMarketCapture",
++   "vs-metropolis-1 dm (b): safety blackMarketCapture",
++ ]
+ ❯ tests/domain/display/criminalVeilSwitch.test.js:363:22
+    361|     }
+    362|     expect(tally.teeth, 'the re-stated (c) kept its five teeth on one …
+    363|     expect(failures).toEqual([]);
+       |                      ^
+    364|     expect(tally.copies).toBe(24);
+    365|     expect(tally.criminal, 'at least half the births carry a criminal …
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+ FAIL  tests/domain/display/publicSafe.test.js > galleryVeil — the veil only removes (X-21 (d), W2-VEIL-A U4) > PROPERTY: for any veil, every path and value in the output already sits at that path in the projection
+Error: a stored person id is served (the re-key did not happen): .npcs[0].relationships[0].to = n2
+ ❯ unkeyPeople tests/security/personIdBijection.shared.mjs:121:28
+    119| export function unkeyPeople(served, reference) {
+    120|   const leaked = storedIdsServed(served, reference);
+    121|   if (leaked.length) throw new Error(`a stored person id is served (th…
+       |                            ^
+    122|   const twice = notBijective(served);
+    123|   if (twice.length) throw new Error(`the re-key is not a bijection wit…
+ ❯ tests/domain/display/publicSafe.test.js:832:30
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+ Test Files  2 failed | 9 passed (11)
+      Tests  2 failed | 163 passed (165)
+   Start at  07:22:52
+   Duration  76.14s (transform 3.78s, setup 151ms, import 19.66s, tests 55.31s, environment 1ms)
+[gate-tail] end:  07:24:08 up  1:31,  0 user,  load average: 3.54, 5.96, 6.76
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/4825dd68-b23b-5772-97a6-ec95d76b39f1/scratchpad/gate-tail.23178.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

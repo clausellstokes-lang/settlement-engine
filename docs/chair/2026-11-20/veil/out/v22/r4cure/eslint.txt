@@ -1,0 +1,4 @@
+[gate-tail] start:  07:20:50 up  1:27,  0 user,  load average: 5.76, 7.18, 7.21 · cores: 4
+[gate-tail] end:  07:20:52 up  1:27,  0 user,  load average: 5.76, 7.18, 7.21
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/4825dd68-b23b-5772-97a6-ec95d76b39f1/scratchpad/gate-tail.22233.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)

@@ -1,0 +1,63 @@
+[gate-tail] start:  07:14:27 up  1:21,  0 user,  load average: 8.07, 7.00, 7.03 · cores: 4
+gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.0.lock.shared as PID 16918 after 0 poll(s); 4 shared holder(s) live, worker cap <= 2.
+
+ RUN  v4.1.8 /home/user/wt/r4
+
+ ❯ tests/domain/display/criminalVeilSwitch.test.js (9 tests | 1 failed) 9261ms
+     × (a)-(e) hold on every birth, plain and DM-revealing 3699ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/domain/display/criminalVeilSwitch.test.js > VS1 acceptance on the projection, over twelve births > (a)-(e) hold on every birth, plain and DM-revealing
+AssertionError: expected [ …(24) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "vs-thorp-0 (b): safety blackMarketCapture",
++   "vs-thorp-0 dm (b): safety blackMarketCapture",
++   "vs-thorp-3 (b): safety blackMarketCapture",
++   "vs-thorp-3 dm (b): safety blackMarketCapture",
++   "vs-hamlet-0 (b): safety blackMarketCapture",
++   "vs-hamlet-0 dm (b): safety blackMarketCapture",
++   "vs-hamlet-1 (b): safety blackMarketCapture",
++   "vs-hamlet-1 dm (b): safety blackMarketCapture",
++   "vs-village-0 (b): safety blackMarketCapture",
++   "vs-village-0 dm (b): safety blackMarketCapture",
++   "vs-village-2 (b): safety blackMarketCapture",
++   "vs-village-2 dm (b): safety blackMarketCapture",
++   "vs-town-0 (b): safety blackMarketCapture",
++   "vs-town-0 dm (b): safety blackMarketCapture",
++   "vs-town-2 (b): safety blackMarketCapture",
++   "vs-town-2 dm (b): safety blackMarketCapture",
++   "vs-city-0 (b): safety blackMarketCapture",
++   "vs-city-0 dm (b): safety blackMarketCapture",
++   "vs-city-1 (b): safety blackMarketCapture",
++   "vs-city-1 dm (b): safety blackMarketCapture",
++   "vs-metropolis-0 (b): safety blackMarketCapture",
++   "vs-metropolis-0 dm (b): safety blackMarketCapture",
++   "vs-metropolis-1 (b): safety blackMarketCapture",
++   "vs-metropolis-1 dm (b): safety blackMarketCapture",
++ ]
+
+ ❯ tests/domain/display/criminalVeilSwitch.test.js:362:22
+    360|     }
+    361|     expect(tally.teeth, 'the re-stated (c) kept its three teeth on one…
+    362|     expect(failures).toEqual([]);
+       |                      ^
+    363|     expect(tally.copies).toBe(24);
+    364|     expect(tally.criminal, 'at least half the births carry a criminal …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 8 passed (9)
+   Start at  07:14:28
+   Duration  10.71s (transform 2.91s, setup 34ms, import 1.32s, tests 9.26s, environment 0ms)
+
+[gate-tail] end:  07:14:39 up  1:21,  0 user,  load average: 8.13, 7.05, 7.05
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/4825dd68-b23b-5772-97a6-ec95d76b39f1/scratchpad/gate-tail.16915.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

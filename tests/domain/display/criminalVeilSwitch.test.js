@@ -30,6 +30,10 @@ import {
 import {
   CRIMINAL_VEIL_CLASSES, NOT_CRIMINAL, criminalPartsOf, criminalSwitchStateOf, flipCriminalVeil, presentCriminalGroupings, setCriminalVeil,
 } from '../../../src/domain/display/criminalVeilSwitch.js';
+// VR46, THE GUARD RULING (VEIL-22, R4-CURE 3; the chair's, no veto): VR10 re-keys every person id on every projection (one salt a
+// projection call), so (b) and (c), which compared served copies byte-for-byte, read them MODULO THE PROJECTION'S PERSON-ID
+// BIJECTION and nothing else; a stored person id served anywhere still reds.
+import { bijectionTeeth, canonPeople, storedIdsServed, unkeyPeople } from '../../security/personIdBijection.shared.mjs';
 
 /** The births: two per tier. Seven carry a criminal house or faction (measured 2026-11-19 on 1f501779b). */
 const SEEDS = Object.freeze([
@@ -264,7 +268,7 @@ describe('VS1 acceptance on the projection, over twelve births', () => {
 
   it('(a)-(e) hold on every birth, plain and DM-revealing', () => {
     const failures = [];
-    const tally = { copies: 0, criminal: 0, corruption: 0, groupings: 0, people: 0, a: 0, b: 0, c: 0, d: 0, e: 0, g: 0 };
+    const tally = { copies: 0, criminal: 0, corruption: 0, groupings: 0, people: 0, a: 0, b: 0, c: 0, d: 0, e: 0, g: 0, teeth: 0 };
     for (const { seed, born } of births) {
       for (const shareDm of [false, true]) {
         const label = `${seed}${shareDm ? ' dm' : ''}`;
@@ -301,7 +305,7 @@ describe('VS1 acceptance on the projection, over twelve births', () => {
         // (b) everything of the family the unveiled projection carries reaches the visitor. An income row is served as the
         // projection's row WITHOUT its `weight`: the veil withholds `weight` on every non-owner read (VEIL-19 item D, ruling
         // VR19: a share is re-derived or withheld, never raw), so the served row is asserted as exactly that.
-        const shownContent = familyContent(S, defaults);
+        const shownContent = familyContent(unkeyPeople(S, pub), defaults);
         const servedAs = (k, v) => (k.startsWith('income ') && isRec(v) ? Object.fromEntries(Object.entries(v).filter(([key]) => key !== 'weight')) : v);
         const missing = Object.keys(raw).filter(k => JSON.stringify(shownContent[k]) !== JSON.stringify(servedAs(k, raw[k]))
           || (k.startsWith('income ') && isRec(shownContent[k]) && 'weight' in shownContent[k]));
@@ -314,17 +318,28 @@ describe('VS1 acceptance on the projection, over twelve births', () => {
         // the click showed, so it re-derives the other rows' shares, and from the stored percentages, since the served copy
         // already lost `weight` (VR19). So the income shares are compared apart: the show copy carries the projection's own
         // shares, every row present; the rest of every copy is byte-equal.
-        const mask = (copy) => JSON.stringify(applyVeil(copy, criminalPartsOf(defaults, hand, undefined, model)));
+        const mask = (copy) => JSON.stringify(canonPeople(applyVeil(copy, criminalPartsOf(defaults, hand, undefined, model))).doc);
         const noShares = (copy) => {
           const c = JSON.parse(mask(copy));
           if (Array.isArray(c.economicState?.incomeSources)) c.economicState.incomeSources = c.economicState.incomeSources.map(r => (isRec(r) ? { ...r, percentage: null } : r));
           return JSON.stringify(c);
         };
         const sharesOf = (copy) => JSON.stringify(recs(copy.economicState?.incomeSources).map(r => r.percentage));
-        const okC = mask(H) === mask(before) && noShares(S) === noShares(before)
+        const okC = [H, S, before].every(copy => storedIdsServed(copy, pub).length === 0)
+          && mask(H) === mask(before) && noShares(S) === noShares(before)
           && sharesOf(S) === sharesOf(pub)
           && ['tab:plot_hooks', 'block:rumors.dmTruth'].every(a => [hide, show].every(list => list.some(d => d.address === a && d.hidden === false)));
         if (!okC) failures.push(`${label} (c)`); else tally.c += 1;
+        // THE TEETH of the re-stated (c) on this copy (VR46; VEIL-22, R4-CURE 3): a reference moved off its card, a stored
+        // person id served, a changed non-id byte, two people under one id or one under two, each reds the comparison; a
+        // second projection of the same hide differs in every person id and still holds.
+        if (shareDm && !tally.teeth) {
+          const teeth = bijectionTeeth(H, (c) => storedIdsServed(c, pub).length === 0 && mask(c) === mask(H),
+            { storedId: recs(pub.npcs).map(n => n.id).find(id => typeof id === 'string'), again: view(hide) });
+          // (a copy with no reference cannot carry tooth (i): the next DM copy is tried; the tally asks for one copy with all)
+          if (teeth.missed.length) failures.push(`${label} teeth: missed ${teeth.missed.join('; ')}`);
+          else if (!teeth.absent.length) tally.teeth = 1;
+        }
 
         // (d) hide, show, hide is the first hide.
         const again = setCriminalVeil(setCriminalVeil(hide, defaults, false, present, model), defaults, true, present, model);
@@ -344,13 +359,14 @@ describe('VS1 acceptance on the projection, over twelve births', () => {
         if (unreachable.length) failures.push(`${label} (g): ${[...new Set(unreachable)].slice(0, 5).join(', ')}`); else tally.g += 1;
       }
     }
+    expect(tally.teeth, 'the re-stated (c) kept its five teeth on one DM copy (VR46; VEIL-22, R4-CURE 3)').toBe(1);
     expect(failures).toEqual([]);
     expect(tally.copies).toBe(24);
     expect(tally.criminal, 'at least half the births carry a criminal house or faction').toBeGreaterThanOrEqual(12);
     expect(tally.corruption, 'some DM-revealing copy carries people\'s corruption, or (a) on corruption proves nothing').toBeGreaterThan(0);
     expect(tally.groupings, 'some copy carries content under a criminal grouping').toBeGreaterThan(0);
     expect(tally.people, 'some DM-revealing copy offers a criminal house\'s People eye, or (g) on people proves nothing').toBeGreaterThan(0);
-    expect(tally).toMatchObject({ a: 24, b: 24, c: 24, d: 24, e: 24, g: 24 });
+    expect(tally).toMatchObject({ a: 24, b: 24, c: 24, d: 24, e: 24, g: 24, teeth: 1 });
     writeTally(tally);
   }, 600000);
 });

@@ -2206,3 +2206,19 @@ stderr | tests/security/galleryVeilSignalCopies.pglite.test.js > the shut groupi
      × server-veil-town-2 (master's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it 163768ms
      × server-veil-city-2 (current's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it 332563ms
      × server-veil-city-2 (master's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it 617034ms
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F4: a member key naming no person is worked on by no read; one naming a person still hides its depth
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5-4 (the review rows): a person hidden by the per-person switch is sent by no read in a roster copy, unmarked or marked; the person shown is sent as before; nothing else an old share serves changes
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5-4 (the review rows): a person hidden by the per-person switch is sent by no read in a roster copy, unmarked or marked; the person shown is sent as before; nothing else an old share serves changes
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5-4 (the review rows): a person hidden by the per-person switch is sent by no read in a roster copy, unmarked or marked; the person shown is sent as before; nothing else an old share serves changes
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+

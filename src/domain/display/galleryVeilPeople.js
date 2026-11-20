@@ -6,7 +6,7 @@
  * (src/domain/veil/rosterChoiceRegistry.js). Its own module beside the second homes' (gallerySecondHomes.js stands at
  * its layer's size ceiling), as R2's withhold-always twin is (galleryWithholdAlways.js).
  *
- * Pure but for the one salt a page load (READ_SALT); works in place on the caller's own clone only.
+ * Pure but for the one salt a read (readSalt: one a projection call); works in place on the caller's own clone only.
  */
 
 import { sha256Hex } from '../content/contentFingerprint.js';
@@ -37,11 +37,13 @@ const asciiLower = (t) => t.replace(/[A-Z]/g, c => String.fromCharCode(c.charCod
 // too. Fixed-path passes: no text of the document is scanned.
 
 /**
- * VEIL-22 (R4; VR10): ONE SALT A READ. The server's is drawn per read and never ships (212 :: _gallery_veil). The twin's
- * is drawn once per page load: one read of a page is one load, and within it two projections of one payload spell one
- * person's id alike, so a comparison of two projections (criminalVeilSwitch.js) still sees only what a veil changed.
+ * VEIL-22 (R4; VR10; R4-CURE 2, the seat's ruling): ONE SALT A READ. The server's is drawn per read and never ships
+ * (212 :: _gallery_veil, VOLATILE). The twin's is drawn per PROJECTION call (galleryVeil.js :: applyVeil, and
+ * projectShareVeil's unmarked path), one salt for the whole payload of that call: two projections of one share, even in one
+ * page load, spell every person's id differently, each consistent within its payload.
+ * @returns {string}
  */
-const READ_SALT = globalThis.crypto.randomUUID();
+const readSalt = () => globalThis.crypto.randomUUID();
 
 /** The person card lists (galleryVeil.js CARD_KINDS.npc.lists; 211 :: _gallery_veil_kinds). */
 const PEOPLE_LISTS = Object.freeze([['npcs'], ['powerStructure', 'factions', '*', 'members'], ['factions', '*', 'members']]);
@@ -87,9 +89,12 @@ function rekeyAt(x, paths, ids, salt) {
     let at = x;
     for (const k of keys.slice(0, -1)) at = isRec(at) ? at[k] : undefined;
     const leaf = keys[keys.length - 1];
-    if (!isRec(at) || typeof at[leaf] !== 'string') continue;
-    const v = /** @type {string} */ (at[leaf]);
-    if (ids.has(v) || v.startsWith('npc_')) at[leaf] = rekeyId('npc_', v, salt);
+    if (!isRec(at)) continue;
+    const raw = at[leaf];
+    // R4-CURE (the seat's cure 2): a NUMBER id is a person's id too, by its String() (212 :: _gallery_veil_jsstr)
+    if (typeof raw !== 'string' && typeof raw !== 'number') continue;
+    const v = String(raw);
+    if (ids.has(v) || (typeof raw === 'string' && v.startsWith('npc_'))) at[leaf] = rekeyId('npc_', v, salt);
   }
 }
 
@@ -104,16 +109,17 @@ function rekeyEach(arr, paths, ids, salt) {
  * to a person follows (the reference census of born towns through the server: out/v21/r4/measure). No stored id and no
  * form (`npc_veiled_`, `npc_power_`, `npc_<house slug>`) survives. In place on the caller's own clone; returns it.
  * 212 :: _gallery_veil_rekey, rule for rule.
- * @param {Rec} s @param {string} [salt] @returns {Rec}
+ * @param {Rec} s @param {string} [salt]  the read's salt; omitted, a fresh one (one a projection call)
+ * @returns {Rec}
  */
-export function rekeyPeople(s, salt = READ_SALT) {
+export function rekeyPeople(s, salt = readSalt()) {
   if (!isRec(s)) return s;
-  const ids = new Set(peopleCards(s).map(c => c.id).filter(v => typeof v === 'string'));
+  const ids = new Set(peopleCards(s).map(c => c.id).filter(v => typeof v === 'string' || typeof v === 'number').map(String));
   // registry: people.rekey (the cards: each id; a goal's targets; the handler)
   rekeyEach(s.npcs, ['id', 'goal.intent.short.target.id', 'goal.intent.long.target.id', 'allegiance.handler'], ids, salt);
   // registry: people.rekey (the ties: their ends, either shape; a tie's own id, which spells its ends', re-keyed whole)
   rekeyEach(s.relationships, ['from', 'to', 'npc1Id', 'npc2Id'], ids, salt);
-  if (Array.isArray(s.relationships)) for (const t of s.relationships) if (isRec(t) && typeof t.id === 'string') t.id = rekeyId('tie_', t.id, salt);
+  if (Array.isArray(s.relationships)) for (const t of s.relationships) if (isRec(t) && (typeof t.id === 'string' || typeof t.id === 'number')) t.id = rekeyId('tie_', String(t.id), salt);
   // registry: people.rekey (the crisis cast, both copies, one crisis or a list: a role's person, a lever's holder)
   for (const k of ['stress', 'stressors']) {
     const v = s[k];

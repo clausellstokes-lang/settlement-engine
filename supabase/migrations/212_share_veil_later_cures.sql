@@ -2082,36 +2082,44 @@ end $$;
 -- ids are re-keyed first), the re-key on an unmarked body too, and re-keys the served marker's person keys with the same
 -- salt. Fixed-path passes: no text of the document is scanned. Twin: galleryVeilPeople.js :: withholdHolders,
 -- rekeyPeople, rule for rule.
+-- VEIL-22 (R4-CURE 1, the chair's word): every function that DRAWS the salt (_gallery_veil) or CARRIES it (the six
+-- _gallery_veil_rekey* helpers below, each taking `salt`) is VOLATILE, and so is every read that reaches it through a
+-- call (get_gallery_dossier, get_unlisted_dossier, import_gallery_dossier as restated here; 211's get_gallery_map is
+-- VOLATILE already): no plan may fold or cache a salt. _gallery_veil_holders carries none and stays IMMUTABLE. The
+-- catalogue: out/v22/r4cure/volatility-catalogue.txt.
 
 -- [212: NEW] public._gallery_veil_rekey_id
 -- VEIL-22 (R4; VR10): an id re-keyed under the read's salt: `prefix` and the first 16 hex of sha256(salt '|' id), the
 -- text as UTF-8. One salt a read: one id is one key within a payload, another on the next read; the salt never ships,
 -- so a key cannot be hashed back to the slug of a house or a power. galleryVeilPeople.js :: rekeyId.
 create or replace function public._gallery_veil_rekey_id(prefix text, v text, salt text)
-returns text language sql immutable as $$
+returns text language sql volatile as $$
   select prefix || left(encode(sha256(convert_to(salt || '|' || v, 'UTF8')), 'hex'), 16)
 $$;
 
 -- [212: NEW] public._gallery_veil_rekey_ref
--- VEIL-22 (R4; VR10): a reference to a person: a string that is a person's id (`ids`, the document's) or spelled in a
--- person id's form (`npc_`: a person no longer served, so no form survives) is re-keyed; anything else as it was.
+-- VEIL-22 (R4; VR10): a reference to a person: a string or a number that is a person's id (`ids`, the document's, by
+-- the client's String() of it: _gallery_veil_jsstr) or a string spelled in a person id's form (`npc_`: a person no
+-- longer served, so no form survives) is re-keyed; anything else as it was. R4-CURE (the seat's cure 2): a NUMBER id is
+-- a person's id too (it was served as stored).
 create or replace function public._gallery_veil_rekey_ref(v jsonb, ids jsonb, salt text)
-returns jsonb language sql immutable as $$
-  select case when jsonb_typeof(v) = 'string' and (ids ? (v #>> '{}') or left(v #>> '{}', 4) = 'npc_')
-              then to_jsonb(public._gallery_veil_rekey_id('npc_', v #>> '{}', salt)) else v end
+returns jsonb language sql volatile as $$
+  select case when jsonb_typeof(v) in ('string', 'number')
+                   and (ids ? public._gallery_veil_jsstr(v) or (jsonb_typeof(v) = 'string' and left(v #>> '{}', 4) = 'npc_'))
+              then to_jsonb(public._gallery_veil_rekey_id('npc_', public._gallery_veil_jsstr(v), salt)) else v end
 $$;
 
 -- [212: NEW] public._gallery_veil_rekey_at
 -- VEIL-22 (R4; VR10): the reference at each of `paths` inside `x` re-keyed (a path that does not hold a string as it was).
 create or replace function public._gallery_veil_rekey_at(x jsonb, paths text[], ids jsonb, salt text)
-returns jsonb language plpgsql immutable as $$
+returns jsonb language plpgsql volatile as $$
 declare
   s jsonb := x;
   p text;
 begin
   if jsonb_typeof(s) is distinct from 'object' then return x; end if;
   foreach p in array paths loop
-    if jsonb_typeof(s #> string_to_array(p, '.')) = 'string' then
+    if jsonb_typeof(s #> string_to_array(p, '.')) in ('string', 'number') then
       s := jsonb_set(s, string_to_array(p, '.'), public._gallery_veil_rekey_ref(s #> string_to_array(p, '.'), ids, salt), false);
     end if;
   end loop;
@@ -2121,7 +2129,7 @@ end $$;
 -- [212: NEW] public._gallery_veil_rekey_each
 -- VEIL-22 (R4; VR10): each object of the array at `arr` with its references at `paths` re-keyed, in order.
 create or replace function public._gallery_veil_rekey_each(s jsonb, arr text[], paths text[], ids jsonb, salt text)
-returns jsonb language sql immutable as $$
+returns jsonb language sql volatile as $$
   select case when jsonb_typeof(s #> arr) = 'array' then jsonb_set(s, arr, (
       select coalesce(jsonb_agg(public._gallery_veil_rekey_at(e, paths, ids, salt) order by o), '[]')
         from jsonb_array_elements(s #> arr) with ordinality x(e, o))) else s end
@@ -2135,7 +2143,7 @@ $$;
 -- target, an allegiance's handler, the simulation trace's targets, and master's roster copies. No stored id and no form
 -- (`npc_veiled_`, `npc_power_`, `npc_<house slug>`) survives. galleryVeilPeople.js :: rekeyPeople.
 create or replace function public._gallery_veil_rekey(doc jsonb, salt text)
-returns jsonb language plpgsql immutable as $$
+returns jsonb language plpgsql volatile as $$
 declare
   s jsonb := doc;
   ids jsonb;
@@ -2143,15 +2151,15 @@ declare
   pth text[];
 begin
   if jsonb_typeof(s) is distinct from 'object' then return doc; end if;
-  ids := coalesce((select jsonb_object_agg(c.card ->> 'id', true) from public._gallery_veil_cards(s, 'npc') c
-                    where jsonb_typeof(c.card -> 'id') = 'string'), '{}');
+  ids := coalesce((select jsonb_object_agg(public._gallery_veil_jsstr(c.card -> 'id'), true) from public._gallery_veil_cards(s, 'npc') c
+                    where jsonb_typeof(c.card -> 'id') in ('string', 'number')), '{}');
   -- registry: people.rekey (the cards: each id; a goal's targets; the handler)
   s := public._gallery_veil_rekey_each(s, '{npcs}', array['id', 'goal.intent.short.target.id', 'goal.intent.long.target.id', 'allegiance.handler'], ids, salt);
   -- registry: people.rekey (the ties: their ends, either shape; a tie's own id, which spells its ends', re-keyed whole)
   s := public._gallery_veil_rekey_each(s, '{relationships}', array['from', 'to', 'npc1Id', 'npc2Id'], ids, salt);
   if jsonb_typeof(s -> 'relationships') = 'array' then
-    s := jsonb_set(s, '{relationships}', (select coalesce(jsonb_agg(case when jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'id') = 'string'
-        then jsonb_set(e, '{id}', to_jsonb(public._gallery_veil_rekey_id('tie_', e ->> 'id', salt))) else e end order by o), '[]')
+    s := jsonb_set(s, '{relationships}', (select coalesce(jsonb_agg(case when jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'id') in ('string', 'number')
+        then jsonb_set(e, '{id}', to_jsonb(public._gallery_veil_rekey_id('tie_', public._gallery_veil_jsstr(e -> 'id'), salt))) else e end order by o), '[]')
       from jsonb_array_elements(s -> 'relationships') with ordinality x(e, o)));
   end if;
   -- registry: people.rekey (the crisis cast, both copies, one crisis or a list: a role's person, a lever's holder)
@@ -2189,7 +2197,7 @@ end $$;
 -- (`npc.<name>`, a card with no id) as it was, and an entry kept only where its key names a person the body serves (the
 -- page looks a person's entry up by the served card; a withheld person's entry would name what the body does not).
 create or replace function public._gallery_veil_rekey_served(served jsonb, body jsonb, salt text)
-returns jsonb language sql immutable as $$
+returns jsonb language sql volatile as $$
   select case when jsonb_typeof(served) <> 'object' then served else
     coalesce((select jsonb_object_agg(q.k2, q.v) from (
         select case when k = '$veil' or left(k, 4) = 'npc.' then k else public._gallery_veil_rekey_id('npc_', k, salt) end as k2, v
@@ -2358,8 +2366,14 @@ revoke execute on function public._gallery_veil_holders(jsonb, jsonb, jsonb) fro
 -- that projection, returned as `body`, so the gallery read, the import and the campaign map's member (whose member
 -- expression takes `body` before its projection) send it too. The served marker is unchanged. Twin:
 -- galleryVeil.js :: projectShareVeil (the unmarked path) and applyVeil (last).
+-- VEIL-22 (R4-CURE 1): VOLATILE, not 211's IMMUTABLE: it draws the read's salt (gen_random_uuid()). An immutable call with
+-- constant arguments is folded to a constant at planning and a cached (generic) plan keeps it, so every execution of a
+-- prepared statement, and every row of one statement, would serve ONE salt (measured red: out/v22/r4cure). The reads
+-- (get_gallery_dossier, get_unlisted_dossier, import_gallery_dossier: STABLE SQL, security definer, never inlined;
+-- get_gallery_map: VOLATILE plpgsql) call it on a row's columns, never on constants: measured, no cached salt through them,
+-- so none of them changes. Its helpers take the salt as an argument and stay IMMUTABLE (the same salt, the same key).
 create or replace function public._gallery_veil(pub jsonb, overrides jsonb, link boolean, copy boolean default false)
-returns jsonb language plpgsql immutable as $$
+returns jsonb language plpgsql volatile as $$
 declare
   -- the stored overrides, decompressed ONCE: every later look at them is in memory (a stored object
   -- of any size is read once per read, never once per operator)
@@ -2632,8 +2646,9 @@ returns table (
   author_name text,
   aliveness integer
 )
+-- VEIL-22 (R4-CURE 1): VOLATILE, not 211's STABLE: it reaches the read's salt through _gallery_veil (no plan may cache it)
 language sql
-stable
+volatile
 security definer
 set search_path = public, pg_temp
 as $$
@@ -2723,9 +2738,10 @@ grant execute on function public.get_gallery_dossier(text) to authenticated, ano
 -- one spelling, here as on the gallery read and the import. The splice still takes every person from the projection
 -- alone (it reads dm_full only for npcs[], and those are the projection's): the link widens nothing. A live town that is
 -- not an object hands the projection itself, as 211 did.
+-- VEIL-22 (R4-CURE 1): VOLATILE, not 211's STABLE: it reaches the read's salt through _gallery_veil (no plan may cache it)
 create or replace function public.get_unlisted_dossier(p_slug text)
 returns jsonb
-language sql stable security definer set search_path = public, pg_temp
+language sql volatile security definer set search_path = public, pg_temp
 as $$
   select jsonb_build_object(
     'id', s.id,
@@ -2785,8 +2801,9 @@ returns table (
   tier text,
   data jsonb
 )
+-- VEIL-22 (R4-CURE 1): VOLATILE, not 211's STABLE: it reaches the read's salt through _gallery_veil (no plan may cache it)
 language sql
-stable
+volatile
 security definer
 set search_path = public, pg_temp
 as $$

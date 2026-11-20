@@ -1,0 +1,5 @@
+DELETE 2
+INSERT 0 2
+SET
+marked+DM gallery: [{"id": "npc_3a4d3fb7326d282e", "name": "Aldric", "role": "Reeve", "relationships": [{"to": "n2", "type": "rival"}]}, {"id": "npc_19035c302dad8664", "name": "Mara", "role": "Priest"}]
+unmarked+DM gallery: [{"id": "npc_e09775ab82ead376", "name": "Aldric", "role": "Reeve", "relationships": [{"to": "n2", "type": "rival"}]}, {"id": "npc_571926814956b5df", "name": "Mara", "role": "Priest"}]

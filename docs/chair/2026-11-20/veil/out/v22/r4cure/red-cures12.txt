@@ -1,0 +1,73 @@
+[gate-tail] start:  07:17:26 up  1:24,  0 user,  load average: 7.96, 7.56, 7.25 · cores: 4
+gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.0.lock.shared as PID 18161 after 0 poll(s); 4 shared holder(s) live, worker cap <= 2.
+ RUN  v4.1.8 /tmp/claude-0/-home-user-settlement-engine/4825dd68-b23b-5772-97a6-ec95d76b39f1/scratchpad/at-dfa031f3e
+ ❯ tests/security/galleryVeilPeople.pglite.test.js (10 tests | 3 failed | 7 skipped) 9025ms
+     × 1. a prepared statement of _gallery_veil (constant arguments), and of each read function as it is called, executed twice, serves different person keys; so do two reads in one statement 861ms
+     × 1. every function that draws the salt, carries it, or reaches it through a call is declared VOLATILE 127ms
+     × 2. the twin: two projections of one town in one page load (one module load) spell every id differently, each consistent within its payload (VR46 tooth (v)) 9ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+ FAIL  tests/security/galleryVeilPeople.pglite.test.js > R4-CURE: one salt a read, under a cached plan (212 :: _gallery_veil VOLATILE) and per projection in the twin > 1. a prepared statement of _gallery_veil (constant arguments), and of each read function as it is called, executed twice, serves different person keys; so do two reads in one statement
+AssertionError: expected [ …(4) ] to deeply equal []
+- Expected
++ Received
+- []
++ [
++   "_gallery_veil unmarked: a salt served twice (npc_cfd36754eded0dd2, npc_cfd36754eded0dd2, npc_cfd36754eded0dd2, npc_cfd36754eded0dd2, npc_cfd36754eded0dd2, npc_cfd36754eded0dd2, npc_cfd36754eded0dd2, npc_cfd36754eded0dd2, npc_cfd36754eded0dd2)",
++   "one constant call over two rows, unmarked: a salt served twice (npc_c60b2810efbc564a, npc_c60b2810efbc564a)",
++   "_gallery_veil marked: a salt served twice (npc_79f9f0147fa5c5da, npc_79f9f0147fa5c5da, npc_79f9f0147fa5c5da, npc_79f9f0147fa5c5da, npc_79f9f0147fa5c5da, npc_79f9f0147fa5c5da, npc_79f9f0147fa5c5da, npc_79f9f0147fa5c5da, npc_79f9f0147fa5c5da)",
++   "one constant call over two rows, marked: a salt served twice (npc_d404f0b33bda3645, npc_d404f0b33bda3645)",
++ ]
+ ❯ tests/security/galleryVeilPeople.pglite.test.js:341:18
+    339|       await prepared(`get_gallery_map ${mark}`, `select public.get_gal…
+    340|     }
+    341|     expect(same).toEqual([]);
+       |                  ^
+    342|   }, ARM_TIMEOUT_MS);
+    343|
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+ FAIL  tests/security/galleryVeilPeople.pglite.test.js > R4-CURE: one salt a read, under a cached plan (212 :: _gallery_veil VOLATILE) and per projection in the twin > 1. every function that draws the salt, carries it, or reaches it through a call is declared VOLATILE
+AssertionError: expected [ '_gallery_veil', …(9) ] to deeply equal []
+- Expected
++ Received
+- []
++ [
++   "_gallery_veil",
++   "_gallery_veil_rekey",
++   "_gallery_veil_rekey_at",
++   "_gallery_veil_rekey_each",
++   "_gallery_veil_rekey_id",
++   "_gallery_veil_rekey_ref",
++   "_gallery_veil_rekey_served",
++   "get_gallery_dossier",
++   "get_unlisted_dossier",
++   "import_gallery_dossier",
++ ]
+ ❯ tests/security/galleryVeilPeople.pglite.test.js:351:77
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+ FAIL  tests/security/galleryVeilPeople.pglite.test.js > R4-CURE: one salt a read, under a cached plan (212 :: _gallery_veil VOLATILE) and per projection in the twin > 2. the twin: two projections of one town in one page load (one module load) spell every id differently, each consistent within its payload (VR46 tooth (v))
+AssertionError: expected [ …(4) ] to deeply equal []
+- Expected
++ Received
+- []
++ [
++   "projectShareVeil unmarked: ONE salt for both projections (npc_7c7bc74dc6034e8a, npc_a707eafbb0098c66)",
++   "projectShareVeil marked: ONE salt for both projections (npc_7c7bc74dc6034e8a, npc_a707eafbb0098c66)",
++   "applyVeil: ONE salt for both projections (npc_7c7bc74dc6034e8a, npc_a707eafbb0098c66)",
++   "projectServedVeil unmarked: ONE salt for both projections (npc_7c7bc74dc6034e8a, npc_a707eafbb0098c66)",
++ ]
+ ❯ tests/security/galleryVeilPeople.pglite.test.js:374:18
+    372|       if (!tie || tie.from !== ka[0] || tie.to !== ka[1]) same.push(`$…
+    373|     }
+    374|     expect(same).toEqual([]);
+       |                  ^
+    375|   });
+    376| });
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+ Test Files  1 failed (1)
+      Tests  3 failed | 7 skipped (10)
+   Start at  07:17:27
+   Duration  9.30s (transform 1.09s, setup 25ms, import 75ms, tests 9.02s, environment 0ms)
+[gate-tail] end:  07:17:37 up  1:24,  0 user,  load average: 8.81, 7.75, 7.31
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/4825dd68-b23b-5772-97a6-ec95d76b39f1/scratchpad/gate-tail.18157.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+(run in an export of dfa031f3e with this commit's test file: git archive dfa031f3e)

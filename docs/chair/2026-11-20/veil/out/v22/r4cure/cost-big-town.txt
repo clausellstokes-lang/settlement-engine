@@ -1,0 +1,4 @@
+# VR36 after R4-CURE: the largest born town (Maghwick, 520,504 B, sha256 c7cc74f0...9eda6, R4's), bcd-big-cost.mjs's method (measure/big-cost.mjs), 9 rounds, medians, anon; chains: rc211 (001..211) | r4cred (001..212 at dfa031f3e: BEFORE) | r4cgreen (001..212 at this tip: AFTER); load:  07:20:08 up  1:27,  0 user,  load average: 6.70, 7.58, 7.33
+the largest born town, gallery off: x211 250.5 | base 451.4 | after 464.8 ms (after/x211 1.86)
+the largest born town, gallery dm: x211 169.5 | base 473.3 | after 468.1 ms (after/x211 2.76)
+the largest born town, link: x211 189.4 | base 414.9 | after 407.3 ms (after/x211 2.15)

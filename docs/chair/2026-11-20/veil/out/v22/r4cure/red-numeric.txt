@@ -1,0 +1,31 @@
+[gate-tail] start:  07:26:04 up  1:33,  0 user,  load average: 3.66, 5.13, 6.35 · cores: 4
+gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.0.lock.shared as PID 24048 after 0 poll(s); 3 shared holder(s) live, worker cap <= 2.
+ RUN  v4.1.8 /tmp/claude-0/-home-user-settlement-engine/4825dd68-b23b-5772-97a6-ec95d76b39f1/scratchpad/at-dfa031f3e
+ ❯ tests/security/galleryVeilPeople.pglite.test.js (13 tests | 1 failed | 12 skipped) 6337ms
+     × NUMERIC IDS (the seat, R4-CURE): a card whose id is a NUMBER is re-keyed like any other, its tie follows, its served-marker key follows it (server); the twin the same 119ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+ FAIL  tests/security/galleryVeilPeople.pglite.test.js > R4-CURE: one salt a read, under a cached plan (212 :: _gallery_veil VOLATILE) and per projection in the twin > NUMERIC IDS (the seat, R4-CURE): a card whose id is a NUMBER is re-keyed like any other, its tie follows, its served-marker key follows it (server); the twin the same
+AssertionError: expected [ …(2) ] to deeply equal []
+- Expected
++ Received
+- []
++ [
++   "server gallery read: the numeric id is served as 7",
++   "twin projection: the numeric id is served as 7",
++ ]
+ ❯ tests/security/galleryVeilPeople.pglite.test.js:417:17
+    415|     look('server gallery read', g?.data, g?.gallery_member_overrides);
+    416|     look('twin projection', veil.projectShareVeil(veil.galleryPayloadF…
+    417|     expect(bad).toEqual([]);
+       |                 ^
+    418|   }, ARM_TIMEOUT_MS);
+    419|
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+ Test Files  1 failed (1)
+      Tests  1 failed | 12 skipped (13)
+   Start at  07:26:04
+   Duration  6.54s (transform 1.02s, setup 29ms, import 75ms, tests 6.34s, environment 0ms)
+[gate-tail] end:  07:26:11 up  1:33,  0 user,  load average: 4.18, 5.19, 6.36
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/4825dd68-b23b-5772-97a6-ec95d76b39f1/scratchpad/gate-tail.24044.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+(run in an export of dfa031f3e with this commit's test file)

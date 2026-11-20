@@ -1,0 +1,212 @@
+{
+ "vs-thorp-0": {
+  "present": [
+   "block:defense.criminalStructure",
+   "block:services.criminal"
+  ],
+  "parts": 2,
+  "state": "hidden"
+ },
+ "vs-thorp-0 dm": {
+  "present": [
+   "block:defense.criminalStructure",
+   "block:power.criminalUnderside",
+   "block:services.criminal"
+  ],
+  "parts": 3,
+  "state": "hidden"
+ },
+ "vs-thorp-3": {
+  "present": [
+   "block:defense.criminalStructure",
+   "block:services.criminal"
+  ],
+  "parts": 6,
+  "state": "hidden"
+ },
+ "vs-thorp-3 dm": {
+  "present": [
+   "block:defense.criminalStructure",
+   "block:power.criminalUnderside",
+   "block:services.criminal"
+  ],
+  "parts": 8,
+  "state": "hidden"
+ },
+ "vs-hamlet-0": {
+  "present": [
+   "block:defense.criminalStructure",
+   "block:services.criminal"
+  ],
+  "parts": 2,
+  "state": "hidden"
+ },
+ "vs-hamlet-0 dm": {
+  "present": [
+   "block:defense.criminalStructure",
+   "block:power.criminalUnderside",
+   "block:services.criminal"
+  ],
+  "parts": 3,
+  "state": "hidden"
+ },
+ "vs-hamlet-1": {
+  "present": [
+   "block:defense.criminalStructure",
+   "block:services.criminal"
+  ],
+  "parts": 2,
+  "state": "hidden"
+ },
+ "vs-hamlet-1 dm": {
+  "present": [
+   "block:defense.criminalStructure",
+   "block:power.criminalUnderside",
+   "block:services.criminal"
+  ],
+  "parts": 3,
+  "state": "hidden"
+ },
+ "vs-village-0": {
+  "present": [
+   "block:defense.criminalStructure",
+   "block:services.criminal"
+  ],
+  "parts": 2,
+  "state": "hidden"
+ },
+ "vs-village-0 dm": {
+  "present": [
+   "block:defense.criminalStructure",
+   "block:power.criminalUnderside",
+   "block:services.criminal"
+  ],
+  "parts": 3,
+  "state": "hidden"
+ },
+ "vs-village-2": {
+  "present": [
+   "block:defense.criminalStructure",
+   "block:services.criminal"
+  ],
+  "parts": 6,
+  "state": "hidden"
+ },
+ "vs-village-2 dm": {
+  "present": [
+   "block:defense.criminalStructure",
+   "block:power.criminalUnderside",
+   "block:services.criminal"
+  ],
+  "parts": 8,
+  "state": "hidden"
+ },
+ "vs-town-0": {
+  "present": [
+   "block:defense.criminalStructure",
+   "block:services.criminal"
+  ],
+  "parts": 2,
+  "state": "hidden"
+ },
+ "vs-town-0 dm": {
+  "present": [
+   "block:defense.criminalStructure",
+   "block:power.criminalUnderside",
+   "block:services.criminal"
+  ],
+  "parts": 3,
+  "state": "hidden"
+ },
+ "vs-town-2": {
+  "present": [
+   "block:defense.criminalStructure",
+   "block:services.criminal"
+  ],
+  "parts": 5,
+  "state": "hidden"
+ },
+ "vs-town-2 dm": {
+  "present": [
+   "block:defense.criminalStructure",
+   "block:power.criminalUnderside",
+   "block:services.criminal"
+  ],
+  "parts": 8,
+  "state": "hidden"
+ },
+ "vs-city-0": {
+  "present": [
+   "block:defense.criminalStructure",
+   "block:services.criminal"
+  ],
+  "parts": 18,
+  "state": "hidden"
+ },
+ "vs-city-0 dm": {
+  "present": [
+   "block:defense.criminalStructure",
+   "block:power.criminalUnderside",
+   "block:services.criminal"
+  ],
+  "parts": 24,
+  "state": "hidden"
+ },
+ "vs-city-1": {
+  "present": [
+   "block:defense.criminalStructure",
+   "block:power.criminalUnderside",
+   "block:services.criminal"
+  ],
+  "parts": 29,
+  "state": "hidden"
+ },
+ "vs-city-1 dm": {
+  "present": [
+   "block:defense.criminalStructure",
+   "block:power.criminalUnderside",
+   "block:services.criminal"
+  ],
+  "parts": 36,
+  "state": "hidden"
+ },
+ "vs-metropolis-0": {
+  "present": [
+   "block:defense.criminalStructure",
+   "block:services.criminal"
+  ],
+  "parts": 15,
+  "state": "hidden"
+ },
+ "vs-metropolis-0 dm": {
+  "present": [
+   "block:defense.criminalStructure",
+   "block:power.criminalUnderside",
+   "block:services.criminal"
+  ],
+  "parts": 21,
+  "state": "hidden"
+ },
+ "vs-metropolis-1": {
+  "present": [
+   "block:defense.criminalStructure",
+   "block:power.criminalUnderside",
+   "block:services.criminal"
+  ],
+  "parts": 26,
+  "state": "hidden"
+ },
+ "vs-metropolis-1 dm": {
+  "present": [
+   "block:defense.criminalStructure",
+   "block:power.criminalUnderside",
+   "block:services.criminal"
+  ],
+  "parts": 33,
+  "state": "hidden"
+ },
+ "quietfordWithAPerson": {
+  "present": [],
+  "state": "none"
+ }
+}
