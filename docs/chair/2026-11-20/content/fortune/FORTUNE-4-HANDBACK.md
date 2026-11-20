@@ -1,4 +1,4 @@
-# FORTUNE-4 hand-back (kept current at every push; last written 2026-11-20 21:31:58 UTC by `date -u`)
+# FORTUNE-4 hand-back (HANDED OVER at about 400,000 by the chair's mark; kept current at every push; last written 2026-11-20 22:02:11 UTC by `date -u`)
 
 For a successor: this file, `FORTUNE-3-HANDBACK.md` section 0 (the chair's rulings to 20:03, verbatim), `LIGHTING-WORKLIST.md`
 and the open briefs (`briefs/COMMON.md`, `U5-BUILD.md`, `SAVED-TOWN.md`, `U6-FIRSTPAINT.md`). The chair is
@@ -33,8 +33,26 @@ world on a VISITOR'S pool, dark the control; recipe `docs/chair/2026-11-20/conte
 against `FOR-THE-OWNER.md` (a moved figure to the chair FIRST) and the joint table with the merits on; THE LANDING CHECK
 (rule 8 re-ruled 21:27, below); this file; "FORTUNE <commit>". At 400,000 by the chair's read: push, send
 "FORTUNE-PART <commit>, HANDED OVER" with what is still out.
-`tests/lint` whole at 007dcab81: running at the hand-back's writing (scratch log); the last whole green was 220/220 (3271)
-at a49838e67 (FORTUNE-3).
+`tests/lint` WHOLE at 007dcab81 (EXECUTED): 219/220 files, 3269/3271 tests; the 2 reds are exactly U5a-CURE's item 2
+(`observedShapeReaders.walker.test.js` > "reader-with-no-writer ratchet: the live scan" > "A1/A7: schema-7 filters ..." and
+"SHRINK-ONLY: no file exceeds its f..."). After U5a-CURE's merge: `tests/lint` whole must be 220/220.
+
+U5a-CURE's BUILDER returns to FORTUNE-4's session (it was seated there): FORTUNE-4 relays one line through the chair
+("U5a-CURE returned: lane/fortune-4-2026-11-20-u5acure-wip at <commit>, UNREAD"); the successor reads its diff ONCE,
+re-runs item 2's red/green, the merits' tests, `tests/lint` whole, the confinement 43ab0f5eb -> tip (EQUAL), and the
+registers by their doors (FORTUNE-2-HANDBACK.md section 3's routine; the lighting door REFUSES on a dirty tree: commit
+first).
+
+ONE CHECK BEFORE "FORTUNE <commit>" (the chair, 22:01 UTC), NOT STARTED: grep the lane's tests (U1 to U6, U5a, SAVED-TOWN)
+for (i) STORED WHOLE-BIRTH DIGESTS (a dark control must be a DIFFERENTIAL IN ONE TREE: born with the key absent deep-equals
+born with law 1 forced; never a stored digest of whole births): the answer should be 0, else name them for the chair's
+ruling; (ii) tests that mean "under law 1" but LEAN ON THE DEFAULT (no marker): make each law-explicit now if one line,
+else list it by title in `LIGHTING-WORKLIST.md`. Exactly ONE test pins what a new place is born with, and it is on the
+flip's worklist. Report both in the landing line.
+
+THE PUSH, A HAZARD MET 21:4x: a `git push` that finds nothing new to send hands the pre-push hook no ref, and the hook then
+runs the WHOLE `npm run check` (the hour-long ratchet, through the gate mutex). Push only when HEAD differs from
+`git ls-remote`, and never launch two pushes at once.
 
 ## 2. Confinement (the chair, 19:19 and 20:17 UTC)
 
