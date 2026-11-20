@@ -30,6 +30,7 @@ import {
 import {
   CRIMINAL_VEIL_CLASSES, NOT_CRIMINAL, criminalPartsOf, criminalSwitchStateOf, flipCriminalVeil, presentCriminalGroupings, setCriminalVeil,
 } from '../../../src/domain/display/criminalVeilSwitch.js';
+import { REGISTRY_ROWS } from '../../../src/domain/veil/rosterChoiceRegistry.js';
 
 /** The births: two per tier. Seven carry a criminal house or faction (measured 2026-11-19 on 1f501779b). */
 const SEEDS = Object.freeze([
@@ -45,6 +46,24 @@ const BROWSER = Object.freeze({ tradeRouteAccess: 'random_trade', culture: 'rand
 const HOUSE_CLASSES = new Set(['covert-brokerage', 'clandestine-institution', 'criminal-institution']);
 const FACTION_DEPTH_KEYS = ['desc', 'description', 'crisisNote', 'goals', 'goal', 'agenda', 'conflicts', 'members'];
 const CORRUPTION_KEYS = CARD_KINDS.npc.fields.corruption;
+
+/**
+ * WHAT THE VEIL WITHHOLDS ON EVERY NON-OWNER READ, whatever the veil (VEIL-21 R2, merged at 4ddf8c60c: the sixth chair's
+ * VR16 rule 1, the seventh chair's VR33; registry rows `income.weight` (item D) and `safety.blackMarketCapture` among
+ * them): the roster-choice registry's BUILT withhold-always rows, read live, never a hand list, so the (b) arm below
+ * expects exactly what they withhold and nothing else (a copy that withholds anything more still reds).
+ */
+const WITHHELD_ALWAYS = Object.freeze(REGISTRY_ROWS.filter(r => r.built && r.rule === 'withhold' && r.when === 'always').map(r => new RegExp(r.path)));
+/** A copy of `doc` without every node a withhold-always row's differ-normalised path matches (an array entry goes whole). */
+function minusWithheldAlways(doc) {
+  const hit = (p) => WITHHELD_ALWAYS.some(re => re.test(p));
+  const walk = (v, norm) => {
+    if (Array.isArray(v)) return hit(`${norm}[]`) ? [] : v.map(x => walk(x, `${norm}[]`));
+    if (!isRec(v)) return v;
+    return Object.fromEntries(Object.entries(v).map(([k, c]) => [k, norm ? `${norm}.${k}` : k, c]).filter(([, p]) => !hit(p)).map(([k, p, c]) => [k, walk(c, p)]));
+  };
+  return walk(doc, '');
+}
 
 /** The counts, for the hand-back (the runner's console is muted): only when VS_TALLY names a file. */
 const writeTally = (t) => { if (process.env.VS_TALLY) writeFileSync(process.env.VS_TALLY, JSON.stringify(t)); };
@@ -265,6 +284,7 @@ describe('VS1 acceptance on the projection, over twelve births', () => {
   it('(a)-(e) hold on every birth, plain and DM-revealing', () => {
     const failures = [];
     const tally = { copies: 0, criminal: 0, corruption: 0, groupings: 0, people: 0, a: 0, b: 0, c: 0, d: 0, e: 0, g: 0 };
+    const teeth = { capture: { tried: 0, caught: 0 }, other: { tried: 0, caught: 0 } };
     for (const { seed, born } of births) {
       for (const shareDm of [false, true]) {
         const label = `${seed}${shareDm ? ' dm' : ''}`;
@@ -298,14 +318,28 @@ describe('VS1 acceptance on the projection, over twelve births', () => {
         if (criminalSwitchStateOf(defaults, hide, present, model) !== (parts.length ? 'hidden' : 'none')) failures.push(`${label} (a): state ${criminalSwitchStateOf(defaults, hide, present, model)}`);
         if (parts.length && criminalSwitchStateOf(defaults, show, present, model) !== 'shown') failures.push(`${label} (b): state ${criminalSwitchStateOf(defaults, show, present, model)}`);
 
-        // (b) everything of the family the unveiled projection carries reaches the visitor. An income row is served as the
-        // projection's row WITHOUT its `weight`: the veil withholds `weight` on every non-owner read (VEIL-19 item D, ruling
-        // VR19: a share is re-derived or withheld, never raw), so the served row is asserted as exactly that.
-        const shownContent = familyContent(S, defaults);
-        const servedAs = (k, v) => (k.startsWith('income ') && isRec(v) ? Object.fromEntries(Object.entries(v).filter(([key]) => key !== 'weight')) : v);
-        const missing = Object.keys(raw).filter(k => JSON.stringify(shownContent[k]) !== JSON.stringify(servedAs(k, raw[k]))
-          || (k.startsWith('income ') && isRec(shownContent[k]) && 'weight' in shownContent[k]));
+        // (b) everything of the family the unveiled projection carries reaches the visitor, AS SERVED: what the veil withholds
+        // on every non-owner read is asserted withheld, read from the registry's built withhold-always rows (WITHHELD_ALWAYS):
+        // an income row without its `weight` (VEIL-19 item D, VR19) and, since R2 (VR16 rule 1, VR33: registry row
+        // `safety.blackMarketCapture`, withhold `always`), the safety profile without its `blackMarketCapture`. Every family
+        // key the projection carries is compared: a withheld value served back reds, and so does anything else withheld.
+        const servedAs = familyContent(minusWithheldAlways(pub), defaults);
+        const missingIn = (copy) => { const shown = familyContent(copy, defaults); return Object.keys(raw).filter(k => JSON.stringify(shown[k]) !== JSON.stringify(servedAs[k])); };
+        const missing = missingIn(S);
         if (missing.length) failures.push(`${label} (b): ${missing.slice(0, 5).join(', ')}`); else tally.b += 1;
+        // (b)'s teeth, on this copy: the withheld capture served back on the show copy is caught; so is a family value the
+        // registry does not withhold (the crime types) withheld on it.
+        const sp = S.economicState?.safetyProfile;
+        if (raw['safety blackMarketCapture'] !== undefined && isRec(sp)) {
+          teeth.capture.tried += 1;
+          const planted = JSON.parse(JSON.stringify(S)); planted.economicState.safetyProfile.blackMarketCapture = raw['safety blackMarketCapture'];
+          if (missingIn(planted).includes('safety blackMarketCapture')) teeth.capture.caught += 1; else failures.push(`${label} (b) teeth: a served blackMarketCapture passed`);
+        }
+        if (servedAs['safety crimeTypes'] !== undefined && isRec(sp)) {
+          teeth.other.tried += 1;
+          const less = JSON.parse(JSON.stringify(S)); delete less.economicState.safetyProfile.crimeTypes;
+          if (missingIn(less).includes('safety crimeTypes')) teeth.other.caught += 1; else failures.push(`${label} (b) teeth: a withheld crimeTypes passed`);
+        }
 
         // (c) every other part byte-equal to the copy before the click; the hand deltas survive. The test's own second veil
         // (the family's parts) is applied to each served copy: on the hide copy and the copy before the click it withholds
@@ -351,6 +385,11 @@ describe('VS1 acceptance on the projection, over twelve births', () => {
     expect(tally.groupings, 'some copy carries content under a criminal grouping').toBeGreaterThan(0);
     expect(tally.people, 'some DM-revealing copy offers a criminal house\'s People eye, or (g) on people proves nothing').toBeGreaterThan(0);
     expect(tally).toMatchObject({ a: 24, b: 24, c: 24, d: 24, e: 24, g: 24 });
-    writeTally(tally);
+    expect(WITHHELD_ALWAYS.length, 'the registry\'s withhold-always rows must be read, or (b) expects nothing withheld').toBeGreaterThan(0);
+    expect(teeth.capture.tried, 'some copy carries the capture, or its teeth prove nothing').toBeGreaterThan(0);
+    expect(teeth.other.tried, 'some copy carries the crime types, or the other teeth prove nothing').toBeGreaterThan(0);
+    expect(teeth.capture.caught).toBe(teeth.capture.tried);
+    expect(teeth.other.caught).toBe(teeth.other.tried);
+    writeTally({ ...tally, teeth });
   }, 600000);
 });

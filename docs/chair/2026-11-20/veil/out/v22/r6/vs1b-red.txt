@@ -1,0 +1,61 @@
+[gate-tail] start:  06:24:33 up 31 min,  0 user,  load average: 4.12, 2.83, 2.18 · cores: 4
+gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.0.lock.shared as PID 10612 after 0 poll(s); 3 shared holder(s) live, worker cap <= 2.
+
+ RUN  v4.1.8 /home/user/wt/r6
+
+ ❯ tests/domain/display/criminalVeilSwitch.test.js (9 tests | 1 failed) 10063ms
+     × (a)-(e) hold on every birth, plain and DM-revealing 3627ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/domain/display/criminalVeilSwitch.test.js > VS1 acceptance on the projection, over twelve births > (a)-(e) hold on every birth, plain and DM-revealing
+AssertionError: expected [ …(24) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "vs-thorp-0 (b): safety blackMarketCapture",
++   "vs-thorp-0 dm (b): safety blackMarketCapture",
++   "vs-thorp-3 (b): safety blackMarketCapture",
++   "vs-thorp-3 dm (b): safety blackMarketCapture",
++   "vs-hamlet-0 (b): safety blackMarketCapture",
++   "vs-hamlet-0 dm (b): safety blackMarketCapture",
++   "vs-hamlet-1 (b): safety blackMarketCapture",
++   "vs-hamlet-1 dm (b): safety blackMarketCapture",
++   "vs-village-0 (b): safety blackMarketCapture",
++   "vs-village-0 dm (b): safety blackMarketCapture",
++   "vs-village-2 (b): safety blackMarketCapture",
++   "vs-village-2 dm (b): safety blackMarketCapture",
++   "vs-town-0 (b): safety blackMarketCapture",
++   "vs-town-0 dm (b): safety blackMarketCapture",
++   "vs-town-2 (b): safety blackMarketCapture",
++   "vs-town-2 dm (b): safety blackMarketCapture",
++   "vs-city-0 (b): safety blackMarketCapture",
++   "vs-city-0 dm (b): safety blackMarketCapture",
++   "vs-city-1 (b): safety blackMarketCapture",
++   "vs-city-1 dm (b): safety blackMarketCapture",
++   "vs-metropolis-0 (b): safety blackMarketCapture",
++   "vs-metropolis-0 dm (b): safety blackMarketCapture",
++   "vs-metropolis-1 (b): safety blackMarketCapture",
++   "vs-metropolis-1 dm (b): safety blackMarketCapture",
++ ]
+
+ ❯ tests/domain/display/criminalVeilSwitch.test.js:347:22
+    345|       }
+    346|     }
+    347|     expect(failures).toEqual([]);
+       |                      ^
+    348|     expect(tally.copies).toBe(24);
+    349|     expect(tally.criminal, 'at least half the births carry a criminal …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 8 passed (9)
+   Start at  06:24:34
+   Duration  11.47s (transform 2.91s, setup 26ms, import 1.28s, tests 10.06s, environment 0ms)
+
+[gate-tail] end:  06:24:46 up 31 min,  0 user,  load average: 4.56, 2.96, 2.23
