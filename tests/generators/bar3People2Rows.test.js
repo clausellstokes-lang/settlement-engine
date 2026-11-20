@@ -40,13 +40,13 @@ const ROWS = /** @type {Array<[string, string, string]>} */ ([
   // BAR3-CLOSE-SWEEP-A (2026-11-15): re-keyed at the joined line (98363cb84) where two declared cures meet: the places
   // branch's b7bf413a7 (H1, BAR3-PLACES-HANDBACK: "made worse by decisions taken by {faction}") rewords the famine secret,
   // the people branch's a2f332ec (P4) fills its {faction} slot with the power's sentence name; both show here
-  ['r2s-famine-village-3', 'decisions taken by Military/Guard', 'decisions taken by The Guard'],
+  ['r2s-famine-village-3', 'decisions taken by Military/Guard', 'decisions taken by the Guard'], // NAMES-2 (CN1): the article (NAMES-1 moved the text; this pin was left)
 ]);
 /** KEEP: [town, a true line that must still print] */
 const KEEP = /** @type {Array<[string, string]>} */ ([
   ['r2r-village-29', "Lofn Halfdarson paid Thorstein Ljotsson's bail eleven years ago"], // the debtor's own secret agrees
   // BAR3-CLOSE-SWEEP-A (2026-11-15): the same famine secret in the places branch's b7bf413a7 words (H1), P4's sentence name
-  ['r2r-village-24', 'decisions taken by Elder Council'], // a name with no slash is its own sentence name
+  ['r2r-village-24', 'decisions taken by the Elder Council'], // a name with no slash is its own sentence name; NAMES-2 (CN1): the article (NAMES-1 moved the text; this pin was left)
 ]);
 /** P6: [town, card, the honorific refused, the honorific it takes] */
 const HONORIFICS = /** @type {Array<[string, string, string, string]>} */ ([
