@@ -12341,10 +12341,11 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "grain": 2,
         "institution: granary": 1
       },
-      "undeclared": 3,
+      "undeclared": 1,
       "crisisScoped": false
     },
     {
@@ -18194,8 +18195,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 6,
+      "lineDeclares": {
+        "colour": 3
+      },
+      "undeclared": 3,
       "crisisScoped": false
     },
     {
