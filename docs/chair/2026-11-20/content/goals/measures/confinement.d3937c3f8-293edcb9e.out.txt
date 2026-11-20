@@ -1,0 +1,11 @@
+trees.mjs: births at d3937c3f8
+names3 born: exit codes 0,0
+trees.mjs: births at 293edcb9e
+names3 born: exit codes 0,0
+trees.mjs: d3937c3f8 -> 293edcb9e
+## golden: documents 525 · identical 445 · with a non-string difference 0 · differing strings 223 · of them passing the word check (none) 223 · other 0
+| npcs[].goal.long | 221 | 79 |
+| npcs[].goal.short | 2 | 1 |
+## census: documents 720 · identical 567 · with a non-string difference 0 · differing strings 873 · of them passing the word check (none) 873 · other 0
+| npcs[].goal.short | 456 | 112 |
+| npcs[].goal.long | 417 | 111 |

@@ -533,6 +533,26 @@
       "kind": "rationale",
       "rationale": "THE GOAL FAMILIES' LINES (WRITE-GOALS 82796628e, merged by ALLEGIANCE-CAR4; owed at MERGE-TRAIN, 2026-11-09, where the integration side's enumeration rule reaches it). Its catching power is EXECUTED in the test body: six CONTROL arms plant a bad slot, a tic, a duplicate / article / possessive / agreement fault, an unknown tie type, a dropped type and a bad target, and an ungated line, and assert each check reds, so a disarmed check fails this file."
     },
+    "tests/data/goalSecretRefusals.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by GOALS-1 builder 4 (the chair's rulings of 2026-11-20 11:15, 11:24 and 11:32 UTC), merged at 3ebec303a. It pins data/people/goalSecretRefusals.js :: GOAL_SECRET_REFUSAL_ROWS against its three pools (npcData.js :: NPC_CRIMINAL_SECRETS_BY_HOLDER, titleSecretsPresentations.js :: TITLE_SECRETS, stressInstitutionEffects.js :: STRESS_INSTITUTION_EFFECTS): every one of the 119 rows stands at its key with its text, the refused clusters are PERSONALITY clusters, and every rare key is a row of rareSecrets.js :: RARE_SECRET_ROWS. Its catching power is EXECUTED in the test body: the arm '(i) CONTROL' plants a reworded row, a moved index and an unknown pool and asserts the reader reds each, so a disarmed reader fails this file."
+    },
+    "tests/generators/people/goalSecretRefusals.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by GOALS-1 builder 4 and GOALS-2 builder 6 (the chair's rulings of 2026-11-20 11:15 to 12:37 UTC), merged at 3ebec303a. It EXECUTES generators/people/goals.js :: refuseWantsBesideSecrets through the deal and the rare deal on planted casts and asserts what came back: (j) a listed secret refuses its conviction/duty wants while the same card off the list keeps them (the control half of the same arm), (k) a venal rare row replaces the want and the intent follows, (l) the tooth, planted through the data module, (m) every other card byte for byte against the emptied list, (n) the rungs, (o) the rare deal's output byte-identical with the refusal on and off. Each arm carries its own planted on/off pair, so a disarmed refusal reds here; a sweep plant would re-plant the same reverts."
+    },
+    "tests/generators/people/goalSentencesOnceInTown.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by GOALS-3 builder 7 (the chair's gate of 2026-11-20 12:32 UTC and rulings of 13:17 and 13:32 UTC), merged at 293edcb9e. It EXECUTES the pipeline over the lane measure's towns (seeds hxd-<size>-<i>, i < 50, every size) and asserts, from the deal's own receipts: (p) every goal sentence a town prints twice is held by an 'exhausted' card and the count per size is at or under the base's; (t) every PERSONALITY cell's draw modulus is d3937c3f8's 4, no pick holds a reserve line; (u) every card's goals are byte-identical to d3937c3f8's hashes (tests/fixtures/goal-hashes-d3937c3f8.json) except the movers the receipts name. Its subject is production output on 300+ births and the fixture pins the base byte for byte, so a regression in the rotation or the floor reds by town, sentence and card."
+    },
+    "tests/generators/people/goalsNoRepeatedWording.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by GOALS-1 builder 1 (GR1, the chair's rulings of 2026-11-20 10:28 UTC), commit 84a8606b9; widened by builders 4 and 7 (3ebec303a, 293edcb9e). It EXECUTES generators/people/goals.js :: dealGoals (pass two) on a planted city and metropolis and on planted casts, deriving every wording from the cells (never quoting a line), and asserts: (a) no two holdings share a wording except where a receipt marks the repeat, (b) an unrotated holding keeps its drawn wording, (c)/(d) the rungs on a planted exhausted kind and a house pair, (e) a reserve line planted through the data module is never drawn, (f) repeats fall below the reserve-less count, (g) the harsh-tie guard on a mortal and a mild tie (both halves), (h) a mirror is one sentence, (q)/(r)/(s) the gate's causes and the floor. Every arm is a planted case with its control beside it; a sweep plant would re-plant the same reverts."
+    },
+    "tests/generators/tieReserveHead.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by GOALS-1 builder 3 (GR3 for ties, the chair's rulings of 2026-11-20 10:28 UTC), commit 94493d1fd; its reserve arms by builder 5 (833e4d413). It EXECUTES npcData.js :: pairProse and power/relationshipArchetypes.js :: createTieProseDraw and the re-render (refreshRelationshipProjections) and asserts, with every expectation COMPUTED from the pool: (a) the frozen head deals the head-only cycle, (b) a repeat past the head takes the reserve's first free index then an index printed once by a tie sharing no card, never one sharing a card while another is free, (c) the trust guard and a saved head tie re-rendering as written, (d) a reserve index and its exchanged form resolve to the reserve's own line at every reader. The reserve arms were red at 94493d1fd (no reserve), the planted repeats are their own controls; a sweep plant would re-plant the same reverts."
+    },
     "tests/data/handlerTieLines.test.js": {
       "kind": "rationale",
       "rationale": "THE HANDLER TIE LINES (WRITE-PEOPLE's data, ALLEGIANCE-CAR1's tier-neutral rewording 61d065e9e; owed at MERGE-TRAIN, 2026-11-09, where the integration side's enumeration rule reaches it). Its catching power is EXECUTED in the test body: the arm 'a planted control reds the checks (one fault of each kind)' plants one fault per check (an unfilled slot, a struck tic, a repeat, a tier noun) and asserts each check reds, so a disarmed check fails this file."
@@ -4667,6 +4687,10 @@
       "kind": "mutation",
       "label": "faults-watch/the holding cells hold pending trial only where a court sits"
     },
+    "tests/generators/misfitSecretSettle.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by PAGE-6's builder of S9 (S9-POST.md, the chair's ruling of 13:50, 2026-11-20). It pins that a card dealt a secret it is not admitted to (a role-free row whose holder tag, npcData.js :: CRIMINAL_SECRET_HOLDER_TAGS, does not name its class; a venal row on a principled card) holds, after the town's draw-free post-pass (npc/factionLeaderSecret.js :: settleMisfitSecrets, called from narrativeGenerator.js :: enrichNpcCoherence), the next admitted line of its noted pool that no card holds, and that a card that is no misfit keeps its secret byte for byte: on a clergy face's own stream (the misfit computed from the tag table, never quoted), on a principled face, and over four born towns. Red first at the lane commit eb5fedd13 (4 failed of 4). EXECUTED AT BUILD TIME: the pass call was removed from enrichNpcCoherence and restored from a cp backup taken before, verified byte-identical by cmp; the born-towns arm reddened on three named cards (hxd-city-3, hxd-metropolis-7, hxd-town-11). A sweep plant would re-plant the same call removal."
+    },
     "tests/data/powerNumberAgreement.test.js": {
       "kind": "mutation",
       "label": "names/a crisis stake's verb takes its power's number"
@@ -4674,6 +4698,10 @@
     "tests/lint/namesInSentences.walker.test.js": {
       "kind": "rationale",
       "rationale": "Introduced by NAMES-1 (the seventh chair's rulings CN1-CN3 of 2026-11-20). It holds, over a born pool (every twentieth row of censusPlan('r2'), six tiers, calm and in crisis), that no stored prose sentence names a power by a bare label or a mid-sentence capital \"The\", that the prose form of every hideable power and house holds its name as the share veil folds it, that no full name stands twice in one sentence, and that no string speaks of a person by a gendered pronoun or half a name without naming them in full. Red first at the base 85fccf898 (852 bare labels, 109 mid-sentence capitals, 584 repeated names on the pool); its CONTROLS plant each defect and prove each detector reds; a sweep plant would re-plant the same reverts."
+    },
+    "tests/data/arrivalPoolsDeepened.test.js": {
+      "kind": "rationale",
+      "rationale": "THE ARRIVAL PARAGRAPH'S THIN POOLS DEEPENED (L2, PAGE-2/PAGE-6, 2026-11-20; docs/chair/2026-11-20/content/page/briefs/L2.md). Its catching power is EXECUTED in the test body, not asserted: it births the measure's own 300 towns (hxd-<size>-<i>, 50 a size, DEFAULT_CONFIG) through the real pipeline and reads the stored arrivalScene, and it reds three ways: when a deepened pool holds fewer entries than its base count plus the lines L2 appended (an appended line removed), when the exact chance that at least two of three distinct towns share an arrival sentence word for word is not below its stated target of 18% (the base read 22.9%), and when an appended line is printed where its own declaration is refused by the town's record through the real readers (factsOf, factVocabulary.js :: declarationAdmits), or no appended line is printed at all (the admission arm cannot pass vacuously). Every anchor is computed from the pool's own export, never quoted. All three arms were RED on the base data files (3 failed of 3) and green with the appended lines (the commit bodies name them)."
     }
   },
   "meta": {
