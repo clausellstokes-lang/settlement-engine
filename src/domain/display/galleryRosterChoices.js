@@ -324,8 +324,9 @@ function withholdPowerCopies(s, pub, ps) {
   }
   if (Array.isArray(s.simulationTrace)) {
     const nt = s.simulationTrace.length;
-    s.simulationTrace = s.simulationTrace.filter(e => !(isRec(e) && Object.values(e).some(v => typeof v === 'string' && named(v))));
-    if (s.simulationTrace.length < nt) renumberTrace(s);
+    const kept = s.simulationTrace.filter(e => !(isRec(e) && Object.values(e).some(v => typeof v === 'string' && named(v))));
+    s.simulationTrace = kept;
+    if (kept.length < nt) renumberTrace(s);
   }
 }
 

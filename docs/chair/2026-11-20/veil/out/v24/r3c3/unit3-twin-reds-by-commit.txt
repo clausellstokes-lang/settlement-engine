@@ -1,0 +1,27 @@
+=== 4c753ec52 (/tmp/claude-0/-home-user-settlement-engine/492b6dc9-c4af-5ca1-8fef-4386ff3f6ec2/scratchpad/at-4c753ec52)
+      Tests  65 passed (65)
+=== 411565ff9 (/tmp/claude-0/-home-user-settlement-engine/492b6dc9-c4af-5ca1-8fef-4386ff3f6ec2/scratchpad/at-411565ff9)
+     × criminal faction: members, goals, conflicts and description hidden; name, category and standing stay 21ms
+     × Defense's criminal architecture and Power's capture reading: their data goes and the groupings are listed 4ms
+     × with the door closed, flipping every eye to shown reveals no DM-only field 2ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+ FAIL  tests/domain/display/publicSafe.test.js > galleryVeil — the one default set (X-21c / X-21d, W2-VEIL-A U2) > criminal faction: members, goals, conflicts and description hidden; name, category and standing stay
+ FAIL  tests/domain/display/publicSafe.test.js > galleryVeil — the one default set (X-21c / X-21d, W2-VEIL-A U2) > Defense's criminal architecture and Power's capture reading: their data goes and the groupings are listed
+ FAIL  tests/domain/display/publicSafe.test.js > galleryVeil — the veil only removes (X-21 (d), W2-VEIL-A U4) > with the door closed, flipping every eye to shown reveals no DM-only field
+      Tests  3 failed | 62 passed (65)
+=== 06e9e64b3 (/tmp/claude-0/-home-user-settlement-engine/492b6dc9-c4af-5ca1-8fef-4386ff3f6ec2/scratchpad/basetree)
+     × criminal faction: members, goals, conflicts and description hidden; name, category and standing stay 24ms
+     × Defense's criminal architecture and Power's capture reading: their data goes and the groupings are listed 2ms
+     × with the door closed, flipping every eye to shown reveals no DM-only field 2ms
+     × VR34 (b): a power's members carried only on master's top-level list are offered and covered 15ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+ FAIL  tests/domain/display/criminalVeilSwitch.test.js > the switch over a hand-made town > VR34 (b): a power's members carried only on master's top-level list are offered and covered
+ FAIL  tests/domain/display/publicSafe.test.js > galleryVeil — the one default set (X-21c / X-21d, W2-VEIL-A U2) > criminal faction: members, goals, conflicts and description hidden; name, category and standing stay
+ FAIL  tests/domain/display/publicSafe.test.js > galleryVeil — the one default set (X-21c / X-21d, W2-VEIL-A U2) > Defense's criminal architecture and Power's capture reading: their data goes and the groupings are listed
+ FAIL  tests/domain/display/publicSafe.test.js > galleryVeil — the veil only removes (X-21 (d), W2-VEIL-A U4) > with the door closed, flipping every eye to shown reveals no DM-only field
+      Tests  4 failed | 61 passed (65)
+=== b907c75c9 (this worktree; publicSafe already carries this cure's re-statement, so only VR34 (b) is the base test here)
+     × VR34 (b): a power's members carried only on master's top-level list are offered and covered 22ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+ FAIL  tests/domain/display/criminalVeilSwitch.test.js > the switch over a hand-made town > VR34 (b): a power's members carried only on master's top-level list are offered and covered
+      Tests  1 failed | 67 passed (68)

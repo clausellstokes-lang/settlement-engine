@@ -1,0 +1,175 @@
+{
+ "defaults": [
+  "tab:plot_hooks",
+  "block:services.criminal",
+  "block:defense.criminalStructure",
+  "block:power.criminalUnderside",
+  "block:defense.vulnerabilities",
+  "block:rumors.dmTruth",
+  "block:war.truthVsBelief",
+  "block:housekeeping.structuralIssues",
+  "block:housekeeping.coherenceNotes",
+  "block:housekeeping.firstSurvey",
+  "block:housekeeping.receipt",
+  "block:housekeeping.decrees",
+  "card:institution:inst-den",
+  "field:institution:inst-den:description",
+  "field:institution:inst-den:function",
+  "field:institution:inst-den:services",
+  "field:institution:inst-den:people",
+  "field:faction:faction.red_hand:members",
+  "field:faction:faction.red_hand:goals",
+  "field:faction:faction.red_hand:conflicts",
+  "field:faction:faction.red_hand:description",
+  "class:npc:secret",
+  "class:npc:corruption"
+ ],
+ "switchOnDeltas": [
+  {
+   "address": "block:services.criminal",
+   "hidden": false
+  },
+  {
+   "address": "block:defense.criminalStructure",
+   "hidden": false
+  },
+  {
+   "address": "block:power.criminalUnderside",
+   "hidden": false
+  },
+  {
+   "address": "card:institution:inst-den",
+   "hidden": false
+  },
+  {
+   "address": "field:institution:inst-den:description",
+   "hidden": false
+  },
+  {
+   "address": "field:institution:inst-den:people",
+   "hidden": false
+  },
+  {
+   "address": "field:faction:faction.red_hand:members",
+   "hidden": false
+  },
+  {
+   "address": "field:faction:faction.red_hand:goals",
+   "hidden": false
+  },
+  {
+   "address": "class:npc:corruption",
+   "hidden": false
+  }
+ ],
+ "s0_default": {
+  "houses": [
+   "Mill"
+  ],
+  "powerStructure": [],
+  "factions": [],
+  "switch": "hidden"
+ },
+ "s1_switchOn": {
+  "houses": [
+   "Thieves' den",
+   "Mill"
+  ],
+  "powerStructure": [
+   {
+    "faction": "Red hand",
+    "name": "Red hand",
+    "category": "criminal",
+    "goals": "Docks."
+   }
+  ],
+  "factions": [
+   {
+    "name": "Red hand",
+    "dominantCategory": "criminal",
+    "members": [
+     {
+      "id": "n1",
+      "name": "Ada",
+      "role": "Fence"
+     }
+    ]
+   }
+  ],
+  "switch": "shown"
+ },
+ "s2_switchOn_millHidden": {
+  "houses": [
+   "Thieves' den",
+   "Mill"
+  ],
+  "powerStructure": [
+   {
+    "faction": "Red hand",
+    "name": "Red hand",
+    "category": "criminal",
+    "goals": "Docks."
+   }
+  ],
+  "factions": [
+   {
+    "name": "Red hand",
+    "dominantCategory": "criminal",
+    "members": [
+     {
+      "id": "n1",
+      "name": "Ada",
+      "role": "Fence"
+     }
+    ]
+   }
+  ],
+  "switch": "shown"
+ },
+ "s3_switchOn_denHidden": {
+  "houses": [
+   "Mill"
+  ],
+  "powerStructure": [],
+  "factions": [],
+  "switch": "partly"
+ },
+ "s4_cove_switchOn": {
+  "houses": [
+   "Thieves' den",
+   "Mill",
+   "Smugglers' cove"
+  ],
+  "powerStructure": [
+   {
+    "faction": "Red hand",
+    "name": "Red hand",
+    "category": "criminal",
+    "goals": "Docks."
+   }
+  ],
+  "factions": [
+   {
+    "name": "Red hand",
+    "dominantCategory": "criminal",
+    "members": [
+     {
+      "id": "n1",
+      "name": "Ada",
+      "role": "Fence"
+     }
+    ]
+   }
+  ],
+  "switch": "shown"
+ },
+ "s4_cove_switchOn_coveHidden": {
+  "houses": [
+   "Thieves' den",
+   "Mill"
+  ],
+  "powerStructure": [],
+  "factions": [],
+  "switch": "partly"
+ }
+}

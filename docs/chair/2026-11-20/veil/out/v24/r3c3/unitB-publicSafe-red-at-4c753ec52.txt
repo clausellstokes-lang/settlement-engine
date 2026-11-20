@@ -1,0 +1,11 @@
+# R3-CURE-3, ruling B: the re-stated publicSafe.test.js (this cure's) run over 4c753ec52's src (the lane tip WITHOUT R3): the new arms must be RED
+     × criminal faction: members, goals, conflicts and description hidden; name, category and standing stay 17ms
+     × criminal faction, R3 (the chair's ruling B): a house hidden whole that raised the power: its row leaves whole, proved by the search 4ms
+     × Defense's criminal architecture, R3 (the chair's ruling B): the house hidden whole: the withheld power's pair leaves whole, proved by the search 2ms
+     × with the door closed, R3 (the chair's ruling B): every eye shown but the Fence hidden whole: the crime-wave tension leaves whole, proved by the search 2ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+AssertionError: expected { faction: 'Thieves\' Guild', …(3) } to deeply equal { faction: 'Thieves\' Guild', …(3) }
+AssertionError: expected [ { …(4) }, { …(5) } ] to deeply equal [ Array(1) ]
+AssertionError: expected [ { pair: [ …(2) ], type: 'rivalry' } ] to deeply equal []
+AssertionError: expected [ { type: 'crime_wave', …(1) } ] to deeply equal []
+      Tests  4 failed | 55 passed (59)
