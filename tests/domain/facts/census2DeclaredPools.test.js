@@ -95,18 +95,21 @@ describe('the declarations do their work on the real pools', () => {
 
   it("DS-GEN-13's NO-MARKET lines (trade 'at the gate, at the inn') are refused where neither stands", () => {
     // vid 3 is unit 5's twin, which presumes neither
-    expect(read('DS-GEN-13', 'NO-MARKET', CALM)).toEqual([3]);
+    // BUILD-1-FINISH (2026-11-20, the chair's ruling of 18:46 UTC, measured at lane/prose-2-2026-11-20-build1 against the base 87f03395b): [3] -> [3, 7, 8, 9, 10, 11, 12], BUILD-1's six NO-MARKET lines (v7-v12, `no market · no crisis: under_siege`, PROSE-LINES-1 pool 1) presume neither gate nor inn either
+    expect(read('DS-GEN-13', 'NO-MARKET', CALM)).toEqual([3, 7, 8, 9, 10, 11, 12]);
     // W2-WRITE (2026-11-13), re-keyed by identity: [3] -> [4, 5, 6] at the fourth seat's 2f2aec623 (round two #325: v1-v3
     // "what trade the town does is done ... on the road" refused under a siege; v4-v6, the siege's own lines, added).
     expect(read('DS-GEN-13', 'NO-MARKET', SIEGE)).toEqual([4, 5, 6]);
     const gated = factsOf({ ...TOWN, institutions: [{ name: 'Town walls', category: 'Defense' }, { name: 'Tavern', category: 'Hospitality' }] });
     expect(gated.defence.gate && gated.hasInstitution('tavern')).toBe(true);
-    expect(read('DS-GEN-13', 'NO-MARKET', gated)).toEqual([1, 2, 3]);
+    // BUILD-1-FINISH (2026-11-20, the chair's ruling of 18:46 UTC, measured at lane/prose-2-2026-11-20-build1 against the base 87f03395b): [1, 2, 3] -> [1, 2, 3, 7, 8, 9, 10, 11, 12], BUILD-1's v7-v12 (no siege, no market) speak where gate and inn stand too
+    expect(read('DS-GEN-13', 'NO-MARKET', gated)).toEqual([1, 2, 3, 7, 8, 9, 10, 11, 12]);
   });
 
   it("DS-STR-1's calm framing (\"carries no emergency\") is refused under a siege and drawn in calm", () => {
     expect(read('DS-STR-1', "Overview's own section framing", SIEGE)).toEqual([]);
-    expect(read('DS-STR-1', "Overview's own section framing", CALM)).toEqual([1, 2, 3]);
+    // BUILD-1-FINISH (2026-11-20, the chair's ruling of 18:46 UTC, measured at lane/prose-2-2026-11-20-build1 against the base 87f03395b): [1, 2, 3] -> [1, 2, 3, 4, 5], BUILD-1's v4 and v5 (PROSE-LINES-1 pool 13), calm lines with no mark, drawn in calm
+    expect(read('DS-STR-1', "Overview's own section framing", CALM)).toEqual([1, 2, 3, 4, 5]);
   });
 
   it("DS-STR-2's resistance lines that state the occupation in the present need it (R-I): an insurgency whose occupation has resolved keeps only vid 1", () => {
@@ -126,7 +129,8 @@ describe('the declarations do their work on the real pools', () => {
 describe('the twins (unit 5; each the chair\'s ruling, share recorded in the lane doc)', () => {
   const OCCUPIED = factsOf({ ...TOWN, stress: [{ type: 'occupied' }], institutions: [{ name: 'Weekly market', category: 'Economy' }] });
   it("DS-GEN-13 NO-MARKET keeps a line where neither gate nor inn stands", () => {
-    expect(read('DS-GEN-13', 'NO-MARKET', CALM)).toEqual([3]);
+    // BUILD-1-FINISH (2026-11-20, the chair's ruling of 18:46 UTC, measured at lane/prose-2-2026-11-20-build1 against the base 87f03395b): [3] -> [3, 7, 8, 9, 10, 11, 12], BUILD-1's v7-v12 (as above)
+    expect(read('DS-GEN-13', 'NO-MARKET', CALM)).toEqual([3, 7, 8, 9, 10, 11, 12]);
   });
   it("DS-GEN-3's Secure/Controlled/Quarantined row speaks of a kept quiet under an occupation", () => {
     expect(read('DS-GEN-3', 'safetyProfile.safetyLabel: head word in {Secure, Controlled, Quarantined}', OCCUPIED)).toEqual([4]);
