@@ -1,0 +1,36 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 12223 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+ RUN  v4.1.8 /home/user/settlement-engine/.claude/worktrees/agent-a44384be88bcfd7d8
+
+ ✓ tests/lint/negativeAssertionAnchor.walker.test.js > negative-assertion anchor walker (habitat removal) > no NEW un-anchored negative assertion anywhere in the test corpus 2ms
+ ✓ tests/lint/negativeAssertionAnchor.walker.test.js > negative-assertion anchor walker (habitat removal) > inventory honesty: every frozen row still exists and still offends at its count 2ms
+ ✓ tests/lint/negativeAssertionAnchor.walker.test.js > negative-assertion anchor walker (habitat removal) > the scan is not vacuous (it walks the whole corpus and still sees the habitat) 1ms
+ ✓ tests/lint/negativeAssertionAnchor.walker.test.js > negative-assertion anchor walker (habitat removal) > the general roster may never launder a generation-facing file 1ms
+ ✓ tests/lint/negativeAssertionAnchor.walker.test.js > negative-assertion anchor walker (habitat removal) > the generation-facing quarantine is EXACT (a new, grown or unbanked offender reds) 1ms
+ ✓ tests/lint/negativeAssertionAnchor.walker.test.js > negative-assertion anchor walker (habitat removal) > the detector fires on every bare negative spelling 1ms
+ ✓ tests/lint/negativeAssertionAnchor.walker.test.js > negative-assertion anchor walker (habitat removal) > the detector stays silent on anchored forms 3ms
+ ✓ tests/lint/negativeAssertionAnchor.walker.test.js > negative-assertion anchor walker (habitat removal) > the detector ignores out-of-scope matchers and positive assertions 0ms
+ ✓ tests/lint/negativeAssertionAnchor.walker.test.js > negative-assertion anchor walker (habitat removal) > an annotation two lines above does NOT exempt (the escape hatch stays tight) 0ms
+ ✓ tests/components/safetyMount.test.jsx > (1) the Safety line's audience is read from the props AS PASSED: an omitted prop is a reader > a town with an owner's line exists among the chair's 300 1ms
+ ✓ tests/components/safetyMount.test.jsx > (1) the Safety line's audience is read from the props AS PASSED: an omitted prop is a reader > overview: both props passed as false (the owner's page) still prints the line 195ms
+ ✓ tests/components/safetyMount.test.jsx > (1) the Safety line's audience is read from the props AS PASSED: an omitted prop is a reader > overview: mounted with neither prints no owner's line 96ms
+ ✓ tests/components/safetyMount.test.jsx > (1) the Safety line's audience is read from the props AS PASSED: an omitted prop is a reader > overview: mounted with publicDossier only prints no owner's line 78ms
+ ✓ tests/components/safetyMount.test.jsx > (1) the Safety line's audience is read from the props AS PASSED: an omitted prop is a reader > overview: mounted with playerView only prints no owner's line 87ms
+ ✓ tests/components/safetyMount.test.jsx > (1) the Safety line's audience is read from the props AS PASSED: an omitted prop is a reader > defense: both props passed as false (the owner's page) still prints the line 95ms
+ ✓ tests/components/safetyMount.test.jsx > (1) the Safety line's audience is read from the props AS PASSED: an omitted prop is a reader > defense: mounted with neither prints no owner's line 123ms
+ ✓ tests/components/safetyMount.test.jsx > (1) the Safety line's audience is read from the props AS PASSED: an omitted prop is a reader > defense: mounted with publicDossier only prints no owner's line 97ms
+stdout | tests/components/safetyMount.test.jsx > (2) THE MOUNT CENSUS: every mount of OverviewTab and DefenseTab in src/ passes both props or is a reader page > the census finds the two tabs mounted, and every use of them is a JSX mount
+SAFETY MOUNT CENSUS: 2 mount(s)
+  src/components/OutputContainer.jsx <DefenseTab> passes [publicDossier, playerView] BOTH
+  src/components/OutputContainer.jsx <OverviewTab> passes [publicDossier, playerView] BOTH
+
+ ✓ tests/components/safetyMount.test.jsx > (1) the Safety line's audience is read from the props AS PASSED: an omitted prop is a reader > defense: mounted with playerView only prints no owner's line 78ms
+ ✓ tests/components/safetyMount.test.jsx > (2) THE MOUNT CENSUS: every mount of OverviewTab and DefenseTab in src/ passes both props or is a reader page > the census finds the two tabs mounted, and every use of them is a JSX mount 2ms
+ ✓ tests/components/safetyMount.test.jsx > (2) THE MOUNT CENSUS: every mount of OverviewTab and DefenseTab in src/ passes both props or is a reader page > no mount passes neither or one of publicDossier and playerView (unless it is a reader page) 0ms
+ ✓ tests/components/safetyMount.test.jsx > (2) THE MOUNT CENSUS: every mount of OverviewTab and DefenseTab in src/ passes both props or is a reader page > NEGATIVE CONTROLS: planted mounts with neither, one, a spread, and a component map are caught 1ms
+
+ Test Files  2 passed (2)
+      Tests  21 passed (21)
+   Start at  17:45:08
+   Duration  9.55s (transform 4.16s, setup 122ms, import 8.09s, tests 1.34s, environment 490ms)
+
