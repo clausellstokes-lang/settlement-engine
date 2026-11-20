@@ -70,10 +70,10 @@ WANT-LINES-3.md PERSONALITY/grudge/short #1: Beat someone they envy to something
   reserve  long  0.00   Never let a single wrong done to them be forgotten.
   nearest drawn line (short) 0.33: Learn the secret of someone they envy.
 
-WANT-LINES-4.md PERSONALITY/greed/short #1: Make one deal this season that doubles their money.
+WANT-LINES-4.md PERSONALITY/greed/short #1: Sell something this season for twice what it cost them.
   reserve =short 0.00   Spend nothing this season that someone else could be made to pay for.
-  reserve  long  0.25   Have half the people here owing them money.
-  nearest drawn line (short) 0.00: Put away more coin this season than last.
+  reserve  long  0.00   Have half the people here owing them money.
+  nearest drawn line (long) 0.25: Own something that earns while they sleep.
 
 WANT-LINES-4.md PERSONALITY/sway/long #1: Be the one whose word decides who is welcome here.
   reserve  short 0.00   Be proved right this season about something everyone else doubted.
@@ -81,11 +81,11 @@ WANT-LINES-4.md PERSONALITY/sway/long #1: Be the one whose word decides who is w
   reserve =long  0.00   Have a following who would go wherever they lead.
   nearest drawn line (short) 0.25: Have the last word in the next argument that matters.
 
-WANT-LINES-4.md PERSONALITY/grudge/long #1: Keep their anger hidden until the day it can be used.
+WANT-LINES-4.md PERSONALITY/grudge/long #1: Never forgive, and never let anyone see that they have not.
   reserve  short 0.00   Spoil one good thing this season for someone who once slighted them.
-  reserve =long  0.00   See the people who looked down on them come asking for their help.
-  reserve =long  0.00   Never let a single wrong done to them be forgotten.
-  nearest drawn line (short) 0.00: Pay someone back for a wrong done to them.
+  reserve =long  0.25   See the people who looked down on them come asking for their help.
+  reserve =long  0.25   Never let a single wrong done to them be forgotten.
+  nearest drawn line (long) 1.00: Have what others have, and more of it.
 
 WANT-LINES-4.md PERSONALITY/sway/short #1: Settle one dispute here this season by their word alone.
   reserve =short 0.00   Be proved right this season about something everyone else doubted.
@@ -93,22 +93,22 @@ WANT-LINES-4.md PERSONALITY/sway/short #1: Settle one dispute here this season b
   reserve  long  0.00   Have a following who would go wherever they lead.
   nearest drawn line (short) 0.25: Have the last word in the next argument that matters.
 
-WANT-LINES-4.md PERSONALITY/greed/long #1: Be the richest person this place has ever known.
-  reserve  short 0.00   Spend nothing this season that someone else could be made to pay for.
+WANT-LINES-4.md PERSONALITY/greed/long #1: Never pay full price for anything again.
+  reserve  short 0.20   Spend nothing this season that someone else could be made to pay for.
   reserve =long  0.00   Have half the people here owing them money.
-  nearest drawn line (long) 0.17: Grow rich enough that no one can ever tell them no.
+  nearest drawn line (long) 0.25: Never have to count coins again.
 
-WANT-LINES-5.md PERSONALITY/sway/long #1: Have their say heard in every choice that shapes this place.
+WANT-LINES-5.md PERSONALITY/sway/long #1: Have a hand in choosing whoever leads this place next.
   reserve  short 0.00   Be proved right this season about something everyone else doubted.
   reserve =long  0.00   Never once be seen to back down.
-  reserve =long  0.20   Have a following who would go wherever they lead.
-  nearest drawn line (long) 0.40: Have the final say in everything that touches them.
+  reserve =long  0.40   Have a following who would go wherever they lead.
+  nearest drawn line (short) 0.33: Have the last word in the next argument that matters.
 
-WANT-LINES-5.md PERSONALITY/sway/long #2: Make every newcomer here learn quickly whose word counts.
+WANT-LINES-5.md PERSONALITY/sway/long #2: Never apologise to anyone, for anything.
   reserve  short 0.00   Be proved right this season about something everyone else doubted.
   reserve =long  0.00   Never once be seen to back down.
   reserve =long  0.00   Have a following who would go wherever they lead.
-  nearest drawn line (short) 0.17: Have the last word in the next argument that matters.
+  nearest drawn line (short) 0.00: Have the last word in the next argument that matters.
 
 WANT-LINES-5.md PERSONALITY/grudge/short #1: Let someone they resent see them do well this season.
   reserve =short 0.00   Spoil one good thing this season for someone who once slighted them.
@@ -116,10 +116,10 @@ WANT-LINES-5.md PERSONALITY/grudge/short #1: Let someone they resent see them do
   reserve  long  0.25   Never let a single wrong done to them be forgotten.
   nearest drawn line (short) 0.25: See someone who wronged them lose face in public this season.
 
-WANT-LINES-5.md PERSONALITY/greed/short #1: Put one coin to work this season for every coin they spend.
-  reserve =short 0.25   Spend nothing this season that someone else could be made to pay for.
+WANT-LINES-5.md PERSONALITY/greed/short #1: Charge one person this season for something they used to get free.
+  reserve =short 0.00   Spend nothing this season that someone else could be made to pay for.
   reserve  long  0.00   Have half the people here owing them money.
-  nearest drawn line (short) 0.50: Put away more coin this season than last.
+  nearest drawn line (long) 0.25: Own something that earns while they sleep.
 
 WANT-LINES-5.md PERSONALITY/grudge/long #1: Win, in the end, every quarrel they ever started.
   reserve  short 0.00   Spoil one good thing this season for someone who once slighted them.
@@ -127,9 +127,9 @@ WANT-LINES-5.md PERSONALITY/grudge/long #1: Win, in the end, every quarrel they 
   reserve =long  0.00   Never let a single wrong done to them be forgotten.
   nearest drawn line (long) 0.25: Outlast every person who ever crossed them.
 
-WANT-LINES-5.md PERSONALITY/fear/long #1: Live among neighbours who would stand by them if trouble came.
+WANT-LINES-5.md PERSONALITY/fear/long #1: Never let anyone know enough about them to hurt them.
   reserve =long  0.00   Never again owe anything to someone who could use it against them.
-  nearest drawn line (long) 0.20: Live somewhere no one can reach them uninvited.
+  nearest drawn line (short) 0.20: Find out who has been asking about them, and why.
 
 WANT-LINES-5.md PERSONALITY/sway/short #1: Change one person's mind this season by argument alone.
   reserve =short 0.00   Be proved right this season about something everyone else doubted.
@@ -137,4 +137,48 @@ WANT-LINES-5.md PERSONALITY/sway/short #1: Change one person's mind this season 
   reserve  long  0.00   Have a following who would go wherever they lead.
   nearest drawn line (short) 0.20: Have the last word in the next argument that matters.
 
-24 new PERSONALITY lines; pairs with a word share >= 0.50 against the reserve: 0
+WANT-LINES-6.md PERSONALITY/grudge/short #1: Keep a careful watch this season on someone they cannot stand.
+  reserve =short 0.00   Spoil one good thing this season for someone who once slighted them.
+  reserve  long  0.00   See the people who looked down on them come asking for their help.
+  reserve  long  0.00   Never let a single wrong done to them be forgotten.
+  nearest drawn line (short) 0.00: Pay someone back for a wrong done to them.
+
+WANT-LINES-6.md PERSONALITY/grudge/long #1: Count among their friends no one who ever laughed at them.
+  reserve  short 0.00   Spoil one good thing this season for someone who once slighted them.
+  reserve =long  0.00   See the people who looked down on them come asking for their help.
+  reserve =long  0.00   Never let a single wrong done to them be forgotten.
+  nearest drawn line (long) 0.25: Outlast every person who ever crossed them.
+
+WANT-LINES-6.md PERSONALITY/greed/long #1: Turn every favour they ever do into money, sooner or later.
+  reserve  short 0.00   Spend nothing this season that someone else could be made to pay for.
+  reserve =long  0.20   Have half the people here owing them money.
+  nearest drawn line (long) 0.17: Grow rich enough that no one can ever tell them no.
+
+WANT-LINES-6.md PERSONALITY/impulse/long #1: Spend their last coin on something wonderful, and never regret it.
+  reserve  short 0.00   Slip away for a few days this season, and tell no one where.
+  reserve =long  0.00   Never do a day's work they do not feel like doing.
+  nearest drawn line (short) 0.50: Do something no one here expects of them.
+
+WANT-LINES-6.md PERSONALITY/forbidden_patron/long #1: Leave behind secrets that keep people guessing long after they are gone.
+  reserve =long  0.00   Be everyone's confidant, and no one's friend.
+  reserve =long  0.17   Keep a foot in every camp here, and let each camp think it is the only one.
+  nearest drawn line (short) 0.40: Learn one secret this season that someone would pay to keep.
+
+WANT-LINES-6.md PERSONALITY/sway/long #1: Be listened to here even by those who dislike them.
+  reserve  short 0.00   Be proved right this season about something everyone else doubted.
+  reserve =long  0.00   Never once be seen to back down.
+  reserve =long  0.00   Have a following who would go wherever they lead.
+  nearest drawn line (short) 0.00: Have the last word in the next argument that matters.
+
+WANT-LINES-7.md PERSONALITY/greed/short #1: Ask a higher share this season of anything they have a hand in.
+  reserve =short 0.00   Spend nothing this season that someone else could be made to pay for.
+  reserve  long  0.20   Have half the people here owing them money.
+  nearest drawn line (long) 0.25: Never have to count coins again.
+
+WANT-LINES-7.md PERSONALITY/sway/short #1: Set the rules for one game, contest or feast here this season.
+  reserve =short 0.00   Be proved right this season about something everyone else doubted.
+  reserve  long  0.00   Never once be seen to back down.
+  reserve  long  0.00   Have a following who would go wherever they lead.
+  nearest drawn line (short) 0.00: Have the last word in the next argument that matters.
+
+32 new PERSONALITY lines; pairs with a word share >= 0.50 against the reserve: 0

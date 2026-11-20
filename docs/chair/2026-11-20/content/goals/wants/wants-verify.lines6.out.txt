@@ -2,11 +2,11 @@ base /tmp/claude-0/-home-user-settlement-engine/1b606ed5-1f0a-5e1b-bf32-8b8b1c40
 
 size        vantage  before   after   (new lines held a town, after)
 town        short     19.9%    5.9%   13.34
-town        long      18.8%    5.5%   13.30
+town        long      18.8%    5.6%   13.30
 city        short     36.4%   12.4%   31.42
-city        long      36.0%   12.5%   33.24
+city        long      36.0%   12.6%   33.24
 metropolis  short     47.3%   18.2%   45.08
-metropolis  long      47.2%   18.0%   47.86
+metropolis  long      47.2%   18.1%   47.86
 
 THE MOVES over 300 towns: 13612 holdings changed text (293 towns touched): onto a new line 9830 · within an appended cell, to another of its lines 3748 · holdings of cells not appended (the cascade) 34
 by the holding's cell before (appended cells marked *): onto a new line · within cell · cascade

@@ -1,32 +1,33 @@
-tree /home/user/wt-b9; files WANT-LINES-1.md, WANT-LINES-2.md, WANT-LINES-3.md, WANT-LINES-4.md, WANT-LINES-5.md, WANT-LINES-6.md; new lines 360 in 34 cells
+tree /home/user/wt-b9; files WANT-LINES-1.md, WANT-LINES-2.md, WANT-LINES-3.md, WANT-LINES-4.md, WANT-LINES-5.md, WANT-LINES-6.md, WANT-LINES-7.md; new lines 380 in 35 cells
 lifted checker: tests/data/goalFamilies.test.js, 71 lines (const STRUCK_TICS … function shapeViolations)
-shapeViolations over cells + reserve + new lines: 1
+shapeViolations over cells + reserve + new lines: 2
   contract: "{house} does" must agree in number — INSTITUTION.solvency.short: Get paid at once, this season, for everything {house} does or sells.
-  RANK/enter/short: 6 → 51 (+45)
-  RANK/enter/long: 6 → 51 (+45)
-  TIES/rival_enemy/short: 5 → 33 (+28)
-  TIES/rival_enemy/long: 5 → 33 (+28)
+  contract: "{house} is" must agree in number — INSTITUTION.solvency.short: Look over everything {house} is paid for this season, and fix what loses money.
+  RANK/enter/short: 6 → 53 (+47)
+  RANK/enter/long: 6 → 54 (+48)
+  TIES/rival_enemy/short: 5 → 34 (+29)
+  TIES/rival_enemy/long: 5 → 34 (+29)
   TIES/ally/short: 5 → 21 (+16)
-  TIES/ally/long: 5 → 22 (+17)
-  INSTITUTION/solvency/short: 6 → 23 (+17)
-  INSTITUTION/solvency/long: 6 → 23 (+17)
-  INSTITUTION/charter/short: 6 → 18 (+12)
-  INSTITUTION/charter/long: 6 → 19 (+13)
-  RANK/climb/short: 6 → 16 (+10)
+  TIES/ally/long: 5 → 23 (+18)
+  INSTITUTION/solvency/short: 6 → 24 (+18)
+  INSTITUTION/solvency/long: 6 → 24 (+18)
+  INSTITUTION/charter/short: 6 → 19 (+13)
+  INSTITUTION/charter/long: 6 → 20 (+14)
+  RANK/climb/short: 6 → 17 (+11)
   PERSONALITY/sway/long: 4 → 12 (+8)
   PERSONALITY/grudge/long: 4 → 10 (+6)
   TIES/mentor_student/long: 5 → 11 (+6)
-  PERSONALITY/sway/short: 4 → 8 (+4)
-  TIES/mentor_student/short: 5 → 10 (+5)
+  PERSONALITY/sway/short: 4 → 9 (+5)
+  TIES/mentor_student/short: 5 → 11 (+6)
   PERSONALITY/grudge/short: 4 → 8 (+4)
-  POWER/tense/short: 6 → 22 (+16)
-  POWER/tense/long: 6 → 22 (+16)
+  POWER/tense/short: 6 → 23 (+17)
+  POWER/tense/long: 6 → 23 (+17)
   TIES/debtor/long: 5 → 9 (+4)
-  RANK/climb/long: 6 → 10 (+4)
+  RANK/climb/long: 6 → 11 (+5)
   TIES/debtor/short: 5 → 9 (+4)
   PERSONALITY/greed/long: 4 → 7 (+3)
   SUPPLY/expansion/long: 6 → 10 (+4)
-  PERSONALITY/greed/short: 4 → 6 (+2)
+  PERSONALITY/greed/short: 4 → 7 (+3)
   SUPPLY/expansion/short: 6 → 9 (+3)
   ALLEGIANCE/warrant/short: 6 → 8 (+2)
   PERSONALITY/fear/long: 4 → 5 (+1)
@@ -36,6 +37,7 @@ shapeViolations over cells + reserve + new lines: 1
   TIES/creditor/short: 5 → 6 (+1)
   PERSONALITY/impulse/long: 4 → 5 (+1)
   PERSONALITY/forbidden_patron/long: 4 → 5 (+1)
+  RANK/defend/short: 6 → 7 (+1)
 new-line slots outside the cell's own slot set: 0
-existing lines quoted: 268, not verbatim: 0
+existing lines quoted: 302, not verbatim: 0
 controls: a planted bad slot reds it true; a planted tic reds it true

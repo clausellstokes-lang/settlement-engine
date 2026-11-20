@@ -22,17 +22,18 @@ POWER/tense lines read true from either power of the pair, and none is another w
 TIES/rival_enemy lines hold on a mortal enemy, a bitter rival and a leverage tie; TIES/mentor_student lines read true from
 either end; every PERSONALITY line read against its cluster's reserve (`PERSONALITY-RESERVE-CHECK.md`).
 
-**Measured with files 1–6 written (files 2–3 as the chair reworded them, 4–5 as revised), appended in memory, the 300
+**Measured with files 1–6 written (files 2–5 as the chair reworded them), appended in memory, the 300
 measure towns:**
-- a second city repeats 12.4% of a first city's short wants and 12.5% of its long (36.4% / 36.0% now); a metropolis
-  18.2% and 18.0% (47.3% / 47.2%) (`wants-verify.lines6.out.txt`);
+- a second city repeats 12.4% of a first city's short wants and 12.6% of its long (36.4% / 36.0% now); a metropolis
+  18.2% and 18.1% (47.3% / 47.2%) (`wants-verify.lines6.out.txt`; re-born after the chair's 17:17 rewordings of files
+  4–5: 12.5% / 18.0% before);
 - THE LANE'S GATES (`goals-final.mjs`, unchanged, run by `wants-mirrors.mjs`; `wants-mirrors.lines6.out.txt`):
   **identical 0** in a town, **refusal 0**; **mirror 24 → 0** (83 at 363cea0ab): no mirror is left on any line, old or new;
 - the moves: 13,612 of 17,992 holdings change text (9,830 onto a new line, 3,748 within their cell, 34 the cascade), in
   293 towns;
 - the checker over cells + reserve + files 1–6: this file's lines 0 violations (three first-draft faults, "any {rival}",
-  "{rival} means" and "{rival} has", were rewritten before this commit); the one red in the run is file 2's 4.3 as the
-  chair reworded it (`want-lines-check.out.txt`);
+  "{rival} means" and "{rival} has", were rewritten before this commit); the run's reds are the chair's own rewordings,
+  file 2's 4.3 and file 4's 6.2, flagged in those files (`want-lines-check.out.txt`);
 - the PERSONALITY reserve: this file's six PERSONALITY lines read against their clusters' reserves: no duplicate, no
   near-restatement (`PERSONALITY-RESERVE-CHECK.md`).
 
