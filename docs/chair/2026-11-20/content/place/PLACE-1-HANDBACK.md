@@ -1,6 +1,6 @@
 # PLACE-1 — hand-back (kept current at every push)
 
-Last written: 2026-11-20T16:05Z. Seat: PLACE-1 of the seventh chair (session_019yED1SUxGVHyjQnoqoFvQ8). Prompt: `docs/chair/2026-11-20/seventh/prompts/PLACE-1.txt` on `origin/lane/chair-2026-11-08` (read it whole: it is the assignment). Branch: `lane/place-1-2026-11-20`, cut at 43ab0f5eb (the working line `lane/join-2026-11-14`).
+Last written: 2026-11-20T16:21Z Seat: PLACE-1 of the seventh chair (session_019yED1SUxGVHyjQnoqoFvQ8). Prompt: `docs/chair/2026-11-20/seventh/prompts/PLACE-1.txt` on `origin/lane/chair-2026-11-08` (read it whole: it is the assignment). Branch: `lane/place-1-2026-11-20`, cut at 43ab0f5eb (the working line `lane/join-2026-11-14`).
 
 ## How a successor resumes
 1. Read the prompt, then this file, then the briefs in this directory (`BRIEF-*.md`); nothing else is needed.
@@ -23,7 +23,7 @@ eS.activeChains[].entrepotNote               thorp - | hamle 8/12 | villa 13/22 
 ## State of each field
 | field | brief | measure | PLACE-LINES | builder | merged (PLACE line) |
 |---|---|---|---|---|---|
-| situationDesc | 948acb88e | running (builder branch place-1/situationDesc-measure) | — | — | — |
+| situationDesc | 948acb88e | 0bfd7e7b8 (merged da1579e8c): `situationDesc-MEASURE.md`; after 9/13/11/7/5/7 | sent as da1579e8c; WAITING on the chair (G1: no page prints the line; call line in steps/generateNarratives.js, prosperity.js zero lines) | — | — |
 | safetyDesc | df3b1f1a8 | running (builder branch place-1/safetyDesc-measure) | — | — | — |
 | economicDragDesc | — | — | — | — | — |
 | economicViability.dependencies[] + warnings[] | — | — | — | — | — |
@@ -32,3 +32,6 @@ eS.activeChains[].entrepotNote               thorp - | hamle 8/12 | villa 13/22 
 
 ## Laws I hold (from the prompt; short)
 Builders build, I integrate: one builder a field, red first; I read its diff once at the merge, re-run red and green, take the lighting and wiring censuses by their doors, prove confinement with `docs/chair/2026-11-20/content/tools/confinement/trees.mjs` (0 non-string differences), then send "PLACE <field> <commit>". Lines go to the chair as "PLACE-LINES <field> <commit>" BEFORE a builder is cut. `prosperity.js`: ONE call line, sent to the chair before the merge. Push: `git ls-remote` first, plain push, never while committing, never a PR.
+
+## Build brief
+`BRIEF-BUILD-COMMON.md` (the how for every builder). A field's build brief names its MEASURE and the lines the chair read.
