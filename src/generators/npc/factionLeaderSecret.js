@@ -8,12 +8,12 @@
  * load-bearing RNG sequence.
  */
 
-import { criminalSecretsForHolder } from '../../data/npcData.js';
+import { CRIMINAL_SECRET_HOLDER_TAGS, criminalSecretsForHolder, SECRETS_DENIED_BY_TEMPERAMENT } from '../../data/npcData.js'; // S9 (PAGE-2): the holder tags and the venal words, one line so no cited line moves
 import { classOfRole } from '../../domain/roles/roleClass.js';
 import { random as rng } from '../../kernel/rngContext.js';
 import { drawRefusingHeldThrough } from '../hookVariety.js';
 import { resolveGenerationWorldLaw } from '../generationContext.js';
-import { institutionCategoryFlags } from '../roleCategory.js';
+import { institutionCategoryFlags } from '../roleCategory.js'; import { OFFICE_SECRETS } from '../../data/people/officeSecrets.js'; import { pickVariant } from '../../kernel/proseHash.js'; // L4 (PAGE-2): one line, so no cited line moves
 
 const STRESS_SECRET_BOOSTS = Object.freeze({
   under_siege: { military: 3, political: 2, personal: 1.5, criminal: 0.5 },
@@ -74,6 +74,7 @@ export function generateFactionLeaderSecret(
   generationContext = null,
   holderRole = undefined,
   heldSecrets = null,
+  temperament = null,
 ) {
   const worldLaw = resolveGenerationWorldLaw(generationContext, config);
   const pri = {
@@ -145,6 +146,63 @@ export function generateFactionLeaderSecret(
   // The chosen bucket first, then (on the same roll) the personal bucket, the pool's own fallback.
   const chain = preferredPool.length ? [preferredPool, fallbackPool] : [fallbackPool];
   const drawn = drawRefusingHeldThrough(chain, heldSecrets, (row) => row.secret);
-  if (drawn) return drawn;
+  if (drawn && admitsSecretRow(drawn, holderClass, temperament)) return drawn;
+  // S9 (PAGE-2): a drawn row the holder is not admitted to (its tag, CRIMINAL_SECRET_HOLDER_TAGS; a venal row to a principled
+  // holder) takes the NEXT admitted, unheld row of its pool in order, wrapping, then the personal bucket's (from the drawn
+  // row's place in its pool), then the safe line: no new draw. The drawn text stays held (every later card's refusals are what they were).
+  if (drawn) {
+    heldSecrets?.add(String(drawn.secret).trim());
+    const free = (/** @type {{ secret: string }} */ row) => admitsSecretRow(row, holderClass, temperament) && !heldSecrets?.has(String(row.secret).trim());
+    const from = chain.findIndex((pool) => pool.includes(drawn));
+    const at = chain[from].indexOf(drawn);
+    for (let k = 1; k < chain[from].length; k += 1) { const row = chain[from][(at + k) % chain[from].length]; if (free(row)) return row; }
+    for (const pool of chain.slice(from + 1)) for (let k = 0; k < pool.length; k += 1) { const row = pool[(at + k) % pool.length]; if (free(row)) return row; } // from the drawn row's place
+  }
   return heldSecrets?.has(SAFE_SECRET_FALLBACK.secret) ? null : SAFE_SECRET_FALLBACK;
+}
+
+/**
+ * S9 (PAGE-2, 2026-11-20): is a secret row admitted to its holder? Refused: a row whose holder tag
+ * (`npcData.js :: CRIMINAL_SECRET_HOLDER_TAGS`) does not name the holder's role class, and a VENAL row (its money words: the
+ * `incorruptible` pattern of `npcData.js :: SECRETS_DENIED_BY_TEMPERAMENT`, read, not edited) to a holder whose drawn
+ * temperament is `principled`. No class (no role) reads no tag. Pure.
+ * @param {{ secret?: string } | null | undefined} row @param {string | null} holderClass @param {string | null | undefined} temperament
+ * @returns {boolean}
+ */
+export function admitsSecretRow(row, holderClass, temperament) {
+  const text = String(row?.secret ?? '');
+  const tag = Object.hasOwn(CRIMINAL_SECRET_HOLDER_TAGS, text) ? CRIMINAL_SECRET_HOLDER_TAGS[text] : null;
+  if (tag && holderClass !== null && !tag.includes(holderClass)) return false;
+  return !(temperament === 'principled' && SECRETS_DENIED_BY_TEMPERAMENT.incorruptible.test(text));
+}
+
+/**
+ * L4 (PAGE-2, 2026-11-20; docs/chair/2026-11-20/content/page/briefs/S-v2.md, with the chair's addition of the rotation):
+ * AN OFFICE FACE'S SECRET, SETTLED DRAW-FREE AFTER THE DRAW. The card has drawn its secret exactly as before
+ * (`generateFactionLeaderSecret`, the held set receiving the DRAWN text, so every later card's refusals are unchanged); a
+ * card whose title holds office rows (data/people/officeSecrets.js) then takes the row `pickVariant` names for its key,
+ * ROTATING in row order past a row the roster already holds (another card of the town shows it: the cards are born in
+ * roster order, each adding what it shows), and that text is held too. No draw.
+ * S9: a row not admitted to the card (a venal row, a principled holder: `admitsSecretRow`) is passed too.
+ * WHERE THE ROWS RUN OUT (two cards of one calling took them all, or S9 refused the rest): the card keeps its drawn secret (`null` here) where it
+ * drew one; with none drawn, the walk's LAST row stands, a repeat, and the answer says so (`repeated: true`) to be counted.
+ * @param {string | null | undefined} title the title the draw reads (the face's, before its gendered form)
+ * @param {string} key the card's stable key (its own drawn name; the title is joined to it)
+ * @param {Set<string> | null | undefined} heldSecrets the roster's held secrets
+ * @param {Readonly<{ secret?: string }> | null | undefined} [drawn] the secret the card drew (kept where every row is held)
+ * @param {string | null} [temperament] the card's drawn temperament (S9: a venal row is not admitted to a principled holder)
+ * @returns {Readonly<{ secret: string, stakes: string, repeated?: boolean }> | null} the office row, or null (the drawn secret stands)
+ */
+export function settleOfficeSecret(title, key, heldSecrets, drawn = null, temperament = null) {
+  const rows = typeof title === 'string' && Object.hasOwn(OFFICE_SECRETS, title) ? OFFICE_SECRETS[title] : null;
+  if (!rows || !rows.length) return null;
+  const at = rows.indexOf(/** @type {Readonly<{ secret: string, stakes: string }>} */ (pickVariant(rows, `${key}::officeSecret::${title}`)));
+  for (let k = 0; k < rows.length; k += 1) {
+    const row = rows[(at + k) % rows.length];
+    if (heldSecrets?.has(row.secret.trim()) || !admitsSecretRow(row, null, temperament)) continue;
+    heldSecrets?.add(row.secret.trim());
+    return row;
+  }
+  if (drawn?.secret) return null;
+  return Object.freeze({ ...rows[(at + rows.length - 1) % rows.length], repeated: true });
 }

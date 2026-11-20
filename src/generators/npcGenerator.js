@@ -19,7 +19,7 @@ import { themeOfText, UNTYPED } from '../domain/hookThemes.js';
 import { disambiguateNPCDisplayNames } from './npcDisplayNames.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
 import { legacyMassRange } from '../domain/density/densityLaw.js'; import { defenceRoleGate } from '../domain/defense/defenseFacts.js'; import { crimeHasThievesGuild, crimeSignalOf, withoutCriminalGuild } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3): one line, so no cited line moves
-import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js'; import { drawDeclared, lineText, resolveSibling } from '../domain/facts/drawDeclared.js'; import { birthFactsOf, factsOf } from '../domain/facts/factsOf.js'; // F5, F10, CENSUS-1c, CENSUS-4f: one line, so no cited line moves
+import { generateFactionLeaderSecret, settleOfficeSecret } from './npc/factionLeaderSecret.js'; import { drawDeclared, lineText, resolveSibling } from '../domain/facts/drawDeclared.js'; import { birthFactsOf, factsOf } from '../domain/facts/factsOf.js'; // F5, F10, CENSUS-1c, CENSUS-4f: one line, so no cited line moves
 import { CRAFTS_ROLES, NOBLE_ROLES } from './npc/factionRoleCatalog.js'; import { POWER_BANDS, titleLinesFor } from './people/poolMap.js'; // ITEM 15 (ALLEGIANCE-CAR4), one line so no cited line moves
 import { resolveGeneratedNpcTitle } from './npc/generatedNpcTitle.js';
 import { deriveThorpSecondRole } from './npc/thorpSecondRole.js'; // CENSUS-4 R9's guildTitleName and R3's tieArchetype left this line at MERGE-CAR (R9 superseded by the census titles and the honorific pools, R-P9; R3 read at people/ties.js); one line, so no cited line moves
@@ -127,9 +127,9 @@ export const generateSingleNPC = ( // exported for people/representatives.js (th
     config,
     institutions,
     worldLaw, role, // CENSUS-1i R-AX: the holder's role keys both rolls (the type and the row)
-    hookRegistry?.secrets, // REVIEW-INTAKE-4 (MERGE-R2: composed with the holder's keyed rows)
+    hookRegistry?.secrets, religion?.dominant ?? null, // REVIEW-INTAKE-4 (MERGE-R2: composed with the holder's keyed rows); S9 (PAGE-2): the drawn temperament, read by the row's admission
   );
-  if (secret?.secret) hookRegistry?.secrets?.add(String(secret.secret).trim()); // REVIEW-INTAKE-4; MERGE-R2: the drawn text (the held key) beside the text the figure carries
+  if (secret?.secret) hookRegistry?.secrets?.add(String(secret.secret).trim()); const office = settleOfficeSecret(options.title, fullName, hookRegistry?.secrets, secret, religion?.dominant ?? null); // REVIEW-INTAKE-4; MERGE-R2: the drawn text (the held key) beside the text the figure carries; L4 (PAGE-2): THEN an office face's own row, draw-free (npc/factionLeaderSecret.js :: settleOfficeSecret), held too
   // ONE PLOT HOOK PER PERSON (the owner, 2026-11-07: "one plot hook per NPC rather than multiple";
   // PEOPLE-3 HOOKS): the second hook (a coin-flip, μ 0.5 per card) is RETIRED. A representative's
   // hook is drawn by its birth seam on its own keyed fork, keyed by the face's title through the
@@ -157,7 +157,7 @@ export const generateSingleNPC = ( // exported for people/representatives.js (th
       clothes: appearance.clothes,
     },
     goal: null, // A9 deals it (people/goals.js :: dealGoals)
-    secret: secret ? { what: secret.secret, stakes: secret.stakes } : null,
+    secret: office ? { what: office.secret, stakes: office.stakes } : secret ? { what: secret.secret, stakes: secret.stakes } : null, // L4: the office row where the title has one
     plotHooks,
     influence: powerLevel.level,
     power: powerLevel.power,
