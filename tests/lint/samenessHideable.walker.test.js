@@ -509,9 +509,9 @@ export const handHouseReadings = (hand) => sortRows(readHandLines(hand, {}).flat
   ['pool', 'sha', 'house']);
 
 /**
- * THE WATCH (SAME-2 brief H2 unit 5, the chair's 19:29): a NEW hand line that holds a bare crime word OUTSIDE the forms
- * (crime, criminal, thief, thieves, gang, smuggl, bribe, or a fence as a person: "a fence", "the fence", "fences stolen")
- * is LISTED as "watch" (a warn block on stderr, one line each) for a human to read at every landing; NEVER red. A line is
+ * THE WATCH (SAME-2 brief H2 unit 5, the chair's 19:29): a NEW hand line that holds a bare crime word (crime,
+ * criminal, thief, thieves, gang, smuggl, bribe, or a fence as a person: "a fence", "the fence", "fences stolen") OUTSIDE
+ * BOTH FORM SETS (the hand forms and the catalogue's derived forms: SAME-2 brief H3 unit 3) is LISTED as "watch" (a warn block on stderr, one line each) for a human to read at every landing; NEVER red. A line is
  * new when its text hash is neither in the bank nor in `watchBase`, the lines on BASE (43ab0f5eb, the walker's base: a
  * line is new when it is not on that commit) that hold such a word.
  */
@@ -694,14 +694,14 @@ describe(`the hideable-house walker of the sameness pools (base ${BASE})`, async
     for (const ref of SENTENCE_KEYED) expect(taken.get(ref)?.[0], ref).toBe(taken.get(ref)?.[1]);
   });
 
-  test('THE WATCH: a new hand line with a bare crime word outside the forms is LISTED (a warn block), never red', async () => {
+  test('THE WATCH: a new hand line with a bare crime word outside both form sets is LISTED (a warn block), never red', async () => {
     const bank = readJson(EXISTING_REL);
     const seen = new Set([...bank.hand, ...bank.watchBase].map((/** @type {{ sha: string }} */ r) => r.sha));
     const watch = watchRows(readHandLines(await handPoolsOnLine(readJson(HAND_REL).rows)), seen);
     // The block goes to stderr directly: this suite's runner swallows a PASSING test's console.warn (measured, a probe),
     // and the watch is read on green runs.
     if (watch.length) {
-      process.stderr.write(`${[`THE WATCH (samenessHideable, SAME-2 H2 unit 5): ${watch.length} new hand line(s) with a bare crime word outside the forms. A human reads each; none reds.`,
+      process.stderr.write(`${[`THE WATCH (samenessHideable, SAME-2 H2 unit 5): ${watch.length} new hand line(s) with a bare crime word outside both form sets (the hand forms, the catalogue's derived forms). A human reads each; none reds.`,
         ...watch.map((w) => `  watch  ${w.pool}  ${w.sha}  "${w.word}"  ${w.text}`)].join('\n')}\n`);
     }
     expect(watch.every((w) => w.word.length > 0)).toBe(true); // a listing: it never reds on its rows
