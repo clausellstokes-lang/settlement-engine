@@ -345,6 +345,27 @@ parts of the whole check (at the close).
   alone; each keeps the others in check); one criminal house: one card for that house's boss under the house's own
   title. CS15 (b) amended (SEAT-1's ADDENDUM 2).
 
+- **2026-11-20, about 05:40 UTC, THE OWNER (verbatim, the whole message):** "Crime bosses (just the top three
+  influential of the criminal power) the same as though it would be for the underboss. I would say that the choice of
+  a sole underboss vs crime bosses depends on how much market capture criminals have, how much criminal market
+  diversity, and how that market capture and market diversity compares or is related to the official market capture
+  and market diversity. Lastly for all of the titles that you have made for official and criminal, there needs to be
+  appropriate variations according to both tier and culture. Like a jarl instead of a mayor for one example for a
+  village or town, that upgrades to a king or emperor for a city or metropolis." TAKEN AS THREE DIRECTIONS, each
+  answered the same turn from the code: (1) WHO IS ON THE CARD: the three most influential people of the criminal
+  power for "Crime Bosses", the one most influential for the underboss (the cast already carries `influence`; nobody
+  minted); (2) WHICH CARD: not "one house or two" (THE CHAIR'S EARLIER WORDING WITHDRAWN) but a read of the black
+  market's share of trade (`safetyProfile.blackMarketCapture` exists), the spread of the criminal trade
+  (`safetyProfile.crimeTypes`, `criminalInstitutions`) and both judged against the lawful market; the chair's rule in
+  words: Crime Bosses where the criminal trade is large and spread, one underboss where it is narrow or small beside
+  the lawful market; the lines come from a count shown to the owner; (3) TITLES BY SIZE AND CULTURE, official and
+  criminal: READ FIRST AND SAID: today an office's title depends on the government's name and the town's size only
+  (`data/officeTitles.js`); culture changes none; eleven cultures, six sizes; a table is drafted and the owner strikes
+  a sample page. ONE RULE THE CHAIR ADDED, said to the owner: king and emperor only for a ruler who answers to no one
+  (a council's first takes that culture's council word; a governor sent by a lord stays a governor); sacred titles
+  kept from criminals and from misuse. THE TIME GUESS MOVED AGAIN, said plainly: three to four days for all of who
+  rules; the titles table goes to a seat of its own so it is written in parallel.
+
 ## 2. Rulings of this chair (each vetoable by the owner)
 
 - **SV1 (00:05 UTC, 2026-11-20): THE VEIL'S LIST ON THREE MACHINES.** VEIL-19 owns 212, its rollback and the twin's
@@ -1656,3 +1677,16 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   any-cast ledger names BEFORE `tests/lint` whole, or two files read red by the clone alone.
   PLAUSIBLE UNTIL THIS PULL REQUEST'S CI HAS RUN at 7e0c77ae: the six shards under the 60-minute cap; the hook's
   budget on a runner.
+- 05:36 UTC · **THE OWNER'S THREE DIRECTIONS ON THE SECOND CARD AND ON TITLES, RULED AND SENT.** Section 1 holds the words and the
+  answer. RULINGS: CS15 AMENDED twice over (who is on the card: the top three of the criminal power by the cast's own
+  `influence`, or the top one; which card: a registered read of the black market's share, the criminal trade's
+  spread and the lawful market's, the lines proposed from a count and signed by the owner); CS19 TITLES BY SIZE AND
+  CULTURE: one table, office family by tier by culture, a missing cell falling back to today's title, sovereign words
+  only for a single ruler who answers to no one. SEAT-1 has ADDENDUM 3 (it wires the table under the seat law and
+  maps every reader of `OFFICE_WORDS`). **A NEW SEAT, TITLES-1** (the middle tier at high effort; `prompts/TITLES-1.txt`:
+  CT1 to CT6; `lane/titles-2026-11-20` from the line; NEW FILES ONLY: the table, one resolver, their tests): its
+  first act is a short proposal with A SAMPLE PAGE FOR THE OWNER (three cultures, norse among them, every family by
+  every size, both sides); the other eight cultures on the chair's "GO". ITS HARD RULES: never a living faith's sacred
+  or prophetic title, never a sacred title on a criminal, never a guessed word (an unsure cell is left to the fallback
+  and listed). WHY A SEAT OF ITS OWN: authored words across eleven cultures are the long pole of this addition and
+  touch no file SEAT-1 builds in.
