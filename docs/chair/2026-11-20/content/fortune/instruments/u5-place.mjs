@@ -29,6 +29,11 @@ const POINTS = Number(process.env.U5_POINTS ?? 10);
 const WINDOW = Number(process.env.U5_WINDOW ?? 40);
 const MERITS = (process.env.U5_MERITS ?? 'principled,weathered').split(',').filter(Boolean);
 const GATE = Number(process.env.U5_GATE ?? 45);
+// the chair's rulings of 19:33 and 19:38 UTC: a merit reads only what every shared read serves. U5_RUNG=off drops the
+// capture-rung clause of the condition; U5_SEAT=off drops the tension-names-the-seat clause (it reads which power
+// governs). With U5_MERITS=weathered the principled merit (a merit of probity, barred) is gone too.
+const RUNG = (process.env.U5_RUNG ?? 'on') !== 'off';
+const SEAT = (process.env.U5_SEAT ?? 'on') !== 'off';
 const RULER_TROUBLE = ['succession_crisis', 'corruption_scandal', 'tyranny', 'popular_uprising', 'legitimacy_crisis', 'leadership_vacuum'];
 const SIZES = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 
@@ -43,8 +48,7 @@ export function __u5Merits(settlement) {
   if (!pl || typeof pl !== 'object' || typeof pl.score !== 'number') return;
   const seat = ps.governingName;
   const h = settlement.history || {}; const tensions = Array.isArray(h.currentTensions) ? h.currentTensions : [];
-  const trouble = tensions.some((t) => ${JSON.stringify(RULER_TROUBLE)}.includes(t?.type) || (t?.factions || []).includes(seat))
-    || ['corrupted', 'capture'].includes(ps.criminalCaptureState);
+  const trouble = tensions.some((t) => ${JSON.stringify(RULER_TROUBLE)}.includes(t?.type)${SEAT ? ' || (t?.factions || []).includes(seat)' : ''})${RUNG ? " || ['corrupted', 'capture'].includes(ps.criminalCaptureState)" : ''};
   if (trouble || pl.score < ${GATE}) return;
   const ruler = (settlement.npcs || []).find((n) => (n?.memberships || []).some((m) => m?.power === seat && m?.rank === 1));
   const fam = (w) => (w ? __U5_FAMILY[w] ?? null : null);
@@ -114,7 +118,7 @@ function tree(line, outArg, place) {
     if (n !== 1) throw new Error(`patch ${p.file}: ${n} matches`);
     writeFileSync(f, src.replace(p.find, () => p.replace));
   }
-  console.log(`u5-place tree ${out} (${place}; U5_POINTS=${POINTS} U5_WINDOW=${WINDOW} U5_MERITS=${MERITS.join(',')} U5_GATE=${GATE})`);
+  console.log(`u5-place tree ${out} (${place}; U5_POINTS=${POINTS} U5_WINDOW=${WINDOW} U5_MERITS=${MERITS.join(',')} U5_GATE=${GATE} U5_RUNG=${RUNG ? 'on' : 'off'} U5_SEAT=${SEAT ? 'on' : 'off'})`);
 }
 
 async function engine(L) {
