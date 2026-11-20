@@ -62,8 +62,28 @@ pinning the behaviour before R2: aligned by the test-only builder (R6's re-cut),
 | V10-2 | MERGED d136940c3 (section 2) |
 | R3 (roster choices) | BUILDER STARTED (`/home/user/wt/r3`, `v22-r3`, from d136940c3; VR42 and the economicDragDesc measure in its launch) |
 | R4 (the people) | BUILDER STARTED (`/home/user/wt/r4`, `v22-r4`, from d136940c3; `cast.roles[].id` re-keyed before R2's step) |
-| R2's owed gate: the link and master's shape | queued at d136940c3 (`/var/tmp/v18/t-d1369`) |
+| R2's owed gate: the link and master's shape | DONE at d136940c3 (section 4) |
 | R6 | prepared at b47b7bbdb: re-cut by a test-only builder (KNOWN_TIER1 shrinks: R2 withholds `defence.scores.internal`; align or retire `rosterChoiceInversion`; VS1 (b) aligned; the blackMarketCapture condition measured) |
 | R5, R7 | after R3, after R6 |
 | DOORS 3e1115c81 | after R3 and R4, with its builder (section 0) |
 | the stored figures, E | not started |
+
+## 4. R2's owed gate, through the server (d136940c3; the committed export; the reader's differ, R1's runner, 2 shards)
+
+| Read | Before R2 (R1's committed export, `out/v20/`) | At d136940c3 (`out/v22/gate/`) |
+|---|---|---|
+| New shape, gallery (VEIL-21, at 7591663b4) | UNREGISTERED 131 (137 at 0d28ccf19) | 42 (`out/v21/seat-r2/`) |
+| New shape, party link (N=2) | 125 | **registered 13, diffuse 21, rng-only 13, UNREGISTERED 38** (`gate-link-new-at-d136940c3.txt`) |
+| Master's shape, gallery (N=1, master's generator db832c892, chain 203+211+212) | 145 | **registered 13, diffuse 15, rng-only 10, UNREGISTERED 66** (`gate-gallery-master-at-d136940c3.txt`) |
+| Master's shape, link (N=1) | 132 | **registered 13, diffuse 15, rng-only 10, UNREGISTERED 55** (`gate-link-master-at-d136940c3.txt`) |
+
+The runner's own invocation: `gate-queue.sh` beside them. THE UNION of the three readings' unregistered paths: 96 paths,
+each matched against EVERY registry row (built or not): R4's holders 52, R5's composed 22, R3's roster choices 12, second
+homes 2, apply 2, and **SIX WITH NO ROW AT ALL**: `publicProse.blocks.economy:{daily_life,resources,services}.{incomeMix,
+criminalLine}` (the three alias blocks of `economy:economics`, whose own `incomeMix`/`criminalLine` ARE registered): on 30 of
+30 reads the served town LACKS the key its house-free counterfactual carries (`{"@":"economy:economics"}`, `null`), and
+removing an ordinary house never moves it (C empty). Unregistered since R1 (present in the pre-R2 gate too). To the chair;
+proposed host: R5 (the composed prose, beside `prose.incomeWeight.alias`).
+The master-only unregistered paths are the people (`npcs[]`, `factions[].members[]`, `prominentRelationship`,
+`pressureSentence`, the levers' holders: R4), `powerStructure.factionRelationships[].direction` (R3), the cast roles (R4),
+`economicState.incomeSources[].desc` and `compound.inst.hasMercenary` (registered, unbuilt).
