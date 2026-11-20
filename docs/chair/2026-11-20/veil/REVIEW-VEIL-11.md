@@ -77,7 +77,7 @@ control 50.
 | income percentages: served sum below 100 | 50 | 6 | 50 / 6 | TIER 1 until item D, control included |
 | withheld house's name anywhere in the row | 0 | 0 | 0 | pass |
 
-## 3. Read (2): the cold read of "VR17", efca35fd6 (executed 02:12–02:35 UTC). HOLDS.
+## 3. Read (2): the cold read of "VR17", efca35fd6 (executed before its commit 37c7ab008 at 02:29 UTC). HOLDS.
 
 THE DIFF: `galleryVeil.js :: GROUPING_OPEN_EVIDENCE` (one row: Defense's criminal-architecture grouping reads OPEN on a
 visitor's page only where `safetyProfile.criminalInstitutions` and `crimeTypes` are both arrays, the pair 211 and the
@@ -95,7 +95,7 @@ as anon by `get_gallery_dossier` and the party link (`get_unlisted_dossier`), pa
 `sanitizeDossier`, then `isVeiled(…, { publicDossier: true })`: the new shape 320 reads, master's shape (xp212) 320
 reads: 0 shut read open, 0 open read shut.
 
-## 3b. Read (2): the cold read of "B/C/D", 427ea0bed (executed 02:35–03:00 UTC). HOLDS; two FINAL items.
+## 3b. Read (2): the cold read of "B/C/D", 427ea0bed (executed before its commit 5790bca81 at 02:37 UTC). HOLDS; two FINAL items.
 
 THE DIFF, 212's hunks line by line (the twin, `gallerySecondHomes.js`, by its rule names): (31) the trace by positive
 account wherever any house leaves whole, an allegiance receipt only where its house is accounted for, an unsure entry
@@ -120,7 +120,7 @@ FINAL ITEMS: (1) the faction `power` shares still sum below 100 where a faction 
 025db2dae): `power.share`'s recompose is not in D. (2) `weight` on the campaign map's member and its import: that read is
 unmarked until VEIL-DOORS's VR23 default veil lands.
 
-## 3c. VR29's question, answered before R3 builds (executed 03:00–03:10 UTC at 427ea0bed, `xb212`)
+## 3c. VR29's question, answered before R3 builds (executed at 427ea0bed, `xb212`, before its commit 9469e17bc at 02:46 UTC)
 
 `vr29.probe.jsx` (births only, both shapes, 280 per shape) and `ct.probe.jsx` (served, 45 towns with a hideable house).
 (1) AN EMPTY EVIDENCE ARRAY TELLS NOTHING: towns with no hideable house store `criminalInstitutions` empty in 77 of 96
