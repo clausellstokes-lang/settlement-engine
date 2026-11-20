@@ -3,7 +3,7 @@
   "corpus": "[{\"tier\":\"thorp\",\"n\":150},{\"tier\":\"hamlet\",\"n\":200},{\"tier\":\"village\",\"n\":350},{\"tier\":\"town\",\"n\":550},{\"tier\":\"city\",\"n\":350},{\"tier\":\"metropolis\",\"n\":150},{\"tier\":\"village\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"under_siege\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"under_siege\"}]",
   "census": {
     "_note": "Figures for the second wave, never a red: re-written by every door.",
-    "pools": 966,
+    "pools": 960,
     "printOneLine": 670,
     "measuredUnder30Draws": 151,
     "highestSharesOver150Draws": [
@@ -5911,54 +5911,6 @@
       "top5": 0.5724,
       "lines": 15,
       "reason": "banked BY ITS OWN ROW at the last close (LASTCLOSE-DOORS, 2026-11-19, the chair's ruling on its hand-back's §3 (1)), through the door's own bankNew narrowed to this pool (at the higher of the two corpora's readings), NOT --bank-new: point 68's imports list (FR24); 15 lines, top1 0.13, not lopsided; registered at the last close"
-    },
-    "ledger:troubleHooks:TROUBLE_HOOKS:corruption_scandal": {
-      "top1": 0.1581,
-      "top5": 0.7062,
-      "lines": 9,
-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
-    },
-    "ledger:troubleHooks:TROUBLE_HOOKS:crime_wave": {
-      "top1": 0.0843,
-      "top5": 0.3987,
-      "lines": 16,
-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
-    },
-    "ledger:troubleHooks:TROUBLE_HOOKS:external_threat": {
-      "top1": 0.1682,
-      "top5": 0.7293,
-      "lines": 9,
-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
-    },
-    "ledger:troubleHooks:TROUBLE_HOOKS:guild_conflict": {
-      "top1": 0.0824,
-      "top5": 0.3711,
-      "lines": 16,
-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
-    },
-    "ledger:troubleHooks:TROUBLE_HOOKS:legitimacy_crisis": {
-      "top1": 0.1804,
-      "top5": 0.7672,
-      "lines": 9,
-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
-    },
-    "ledger:troubleHooks:TROUBLE_HOOKS:outside_debt": {
-      "top1": 0.1737,
-      "top5": 0.7479,
-      "lines": 8,
-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
-    },
-    "ledger:troubleHooks:TROUBLE_HOOKS:resource_scarcity": {
-      "top1": 0.1749,
-      "top5": 0.8153,
-      "lines": 8,
-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
-    },
-    "ledger:troubleHooks:TROUBLE_HOOKS:succession_crisis": {
-      "top1": 0.2145,
-      "top5": 0.8861,
-      "lines": 9,
-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
     }
   }
 }
