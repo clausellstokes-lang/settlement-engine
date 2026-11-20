@@ -181,6 +181,11 @@
 --       line and "The allegiance runs to the town's criminal power" of a hidden house's agent leave with the receipt
 --       (unsure, no house named: it leaves). _gallery_veil_apply hands _gallery_veil_second_homes `whole` (any house
 --       removed whole); gallerySecondHomes.js :: withholdTraceByAccount. No signature changes.
+--   (31b) NO COUNTER TAKEN BEFORE A REMOVAL (VEIL-19; REVIEW-VEIL-10's V10-6, the chair's ruling VR21, with (31)): the trace's
+--       `ts` is the engine's sequence (0..n-1), so every entry the veil withheld left a hole that placed the hidden house's
+--       own selection steps on a Reveal-DM read. On every read the veil runs, each served trace entry that carries `ts`
+--       takes its place in the served list (dense, in served order); the trace holds no other counter
+--       (_gallery_veil_apply, last; gallerySecondHomes.js :: renumberTrace, applyVeil's last). No signature changes.
 --   (10) A PERSON HIDDEN BY THE PER-PERSON SWITCH IS NOT SENT IN A ROSTER COPY EITHER (COHERENCE-VEIL-6; the fifth
 --       review's V5-4, ruled by the chair): _gallery_apply_member_overrides now reduces each roster copy
 --       (factions[].members[], powerStructure.factions[].members[]) of a person the share does not reveal to the
@@ -1705,6 +1710,16 @@ begin
     s := jsonb_set(s, '{economicState,incomeSources}', coalesce((select jsonb_agg(e order by o)
       from jsonb_array_elements(s #> '{economicState,incomeSources}') with ordinality x(e, o)
      where not (jsonb_typeof(e) = 'object' and coalesce(e -> 'isCriminal' = 'true'::jsonb, false))), '[]'));
+  end if;
+  -- VEIL-19 (REVIEW-VEIL-10's V10-6, the chair's ruling VR21, with item B): NO COUNTER TAKEN BEFORE A REMOVAL. The trace's
+  -- `ts` is the engine's own sequence (trace.js :: recordTrace's clock from 0; tracePartition.js re-indexes it 0..n-1),
+  -- and an entry the veil withholds left a hole in it that placed the hidden house's own steps. Re-derived over what is
+  -- served: each served entry that carries `ts` takes its place in the served list (0, 1, 2, ...), on every read the veil
+  -- runs, whatever was withheld (a trace that lost nothing reads as it was stored). The trace holds no other counter (its
+  -- entries' only number is `ts`; causes and effects hold none). gallerySecondHomes.js :: renumberTrace
+  if jsonb_typeof(s -> 'simulationTrace') = 'array' then
+    s := jsonb_set(s, '{simulationTrace}', (select coalesce(jsonb_agg(case when jsonb_typeof(e) = 'object' and e ? 'ts' then jsonb_set(e, '{ts}', to_jsonb(o - 1)) else e end order by o), '[]')
+                                              from jsonb_array_elements(s -> 'simulationTrace') with ordinality x(e, o)));
   end if;
   return s;
 end $$;

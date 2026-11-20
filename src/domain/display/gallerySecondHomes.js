@@ -1034,6 +1034,18 @@ function withholdTraceByAccount(s, acc) {
   });
 }
 
+/**
+ * VEIL-19 (REVIEW-VEIL-10's V10-6, the chair's ruling VR21): NO COUNTER TAKEN BEFORE A REMOVAL (in place). The trace's `ts` is
+ * the engine's own sequence (trace.js :: recordTrace's clock from 0; tracePartition.js re-indexes it 0..n-1), and an entry
+ * the veil withholds left a hole that placed the hidden house's own steps. Each served entry that carries `ts` takes its
+ * place in the served list, dense, in served order, on every read the veil runs. SQL twin: _gallery_veil_apply, last.
+ * @param {Rec} s
+ */
+export function renumberTrace(s) {
+  if (!Array.isArray(s.simulationTrace)) return;
+  s.simulationTrace = s.simulationTrace.map((e, i) => (isRec(e) && Object.prototype.hasOwnProperty.call(e, 'ts') ? { ...e, ts: i } : e));
+}
+
 /** The ends of a tie, in both stored shapes (from/to; master's npc1Id/npc2Id) and by name. */
 const TIE_ENDS = Object.freeze(['from', 'to', 'npc1Id', 'npc2Id', 'npc1Name', 'npc2Name']);
 

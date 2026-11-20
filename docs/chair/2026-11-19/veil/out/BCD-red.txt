@@ -13,3 +13,11 @@ B  "B THE TRACE BY POSITIVE ACCOUNT": RED at the base, 114 sends or losses (the 
    base: on the 17 towns that hide a house whole, 35 allegiance receipts whose house is hidden whole reach every Reveal-DM read
    (gallery, import, twin; default veil and every eye shut alike), each with its handler line (35) and 10 with "The allegiance
    runs to the town's criminal power" (the house's own line and the gate's cause already went with the name search).
+
+B2 (the seventh chair's two additions to B, 00:53 UTC: V10-6 with RULING VR21, and V10-5), the NEXT commit after B:
+   V10-6 "B (V10-6, ruling VR21) NO COUNTER TAKEN BEFORE A REMOVAL": RED at the base's bytes, 3 holes (dm gallery, import, twin:
+   served ts [0, 2, 3, 4, 5, 6], the hidden house's own step 1 a hole). Born (measure/v106-born.probe.jsx, the 48 births and
+   the reader's repro seed rv10-gap-town-none-0, both shapes, the default veil and every eye shut, Reveal DM on; base chain and
+   twin): 216 of 216 reads that hide a house whole have a hole in the served `ts` (gallery 72, import 72, twin 72; 18 towns);
+   the reader's repro: 59 of 61 entries served, 21 holes in ts.
+   V10-5 MEASURED FIRST, NOT BUILT (out/V105-measure.txt): see BCD-born.txt.

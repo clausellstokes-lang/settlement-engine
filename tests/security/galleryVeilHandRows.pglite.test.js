@@ -1841,4 +1841,39 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
     expect(bad, `${bad.length} sends or losses`).toEqual([]);
     expect(paths).toEqual([]);
   }, ARM_TIMEOUT_MS);
+
+  it('B (V10-6, ruling VR21) NO COUNTER TAKEN BEFORE A REMOVAL: the trace\'s ts (the engine\'s sequence, 0..n-1) is dense in served order on every Reveal-DM read the veil runs, whatever it withheld (a hidden house\'s own steps by the name search, an entry no listed house accounts for, a hidden house\'s allegiance receipt): no hole places a withheld step; the entries keep their order; a trace that loses nothing keeps its stored ts; server against twin 0 paths', async () => {
+    const bad = []; const paths = [];
+    const step = (ts, targetId, extra = {}) => ({ targetType: 'institution', targetId, step: 'assembleInstitutions', result: 'selected', causes: [{ source: 'tier.town', reason: `step ${ts}` }], downstreamEffects: [], ts, ...extra });
+    const TRACE = [
+      step(0, 'institution.fish_market'),
+      step(1, 'institution.thieves_guild_powerful'),
+      step(2, 'institution.smuggling_network'),
+      step(3, 'institution.mill'),
+      { targetType: 'npc', targetId: 'npc.oro', step: 'people-allegiance', result: 'allegiance', causes: [], downstreamEffects: [{ target: "Thieves' guild (powerful)", effect: 'gains a hidden ally' }], ts: 4 },
+      step(5, 'institution.foundling_home'),
+      { targetType: 'faction', targetId: 'faction.council', step: 'generatePower', result: 'seated', causes: [], downstreamEffects: [], ts: 6 },
+    ];
+    const town = { name: 'Saltmere', tier: 'town',
+      institutions: [hiddenHouse('inst-tg', "Thieves' guild (powerful)"), { id: 'inst-fish', name: 'Fish market', category: 'Economy', desc: 'Fish.' },
+        { id: 'inst-mill', name: 'Old Wheel', catalogId: 'mill', category: 'Economy', desc: 'Grain.' }],
+      npcs: [{ id: 'npc.oro', name: 'Oro Pell', role: 'Clerk' }], simulationTrace: TRACE };
+    const r = await sharesOf(town, hide(town.institutions[0]));
+    paths.push(...enginePaths('V10-6', r));
+    for (const tag of ['gallery', 'import', 'client']) {
+      const tr = r.dm[tag]?.simulationTrace;
+      const got = (Array.isArray(tr) ? tr : []).map(e => [e.ts, e.targetId]);
+      const want = [[0, 'institution.fish_market'], [1, 'institution.mill'], [2, 'faction.council']];
+      if (JSON.stringify(got) !== JSON.stringify(want)) bad.push(`dm/${tag}: the served trace is ${JSON.stringify(got)}`);
+    }
+    // KEEP: a share that hides no house whole sends the trace with its stored ts
+    const open = { ...town, institutions: town.institutions.slice(1), simulationTrace: TRACE.filter(e => e.targetId !== 'institution.thieves_guild_powerful' && e.targetId !== 'npc.oro').map((e, i) => ({ ...e, ts: i })) };
+    const r0 = await sharesOf(open, [{ address: 'field:institution:inst-fish:description', hidden: true }]);
+    paths.push(...enginePaths('V10-6 KEEP', r0));
+    for (const tag of ['gallery', 'import', 'client']) {
+      if (differ(r0.dm[tag]?.simulationTrace, open.simulationTrace).length) bad.push(`KEEP dm/${tag}: the trace is ${JSON.stringify(r0.dm[tag]?.simulationTrace).slice(0, 200)}`);
+    }
+    expect(bad, `${bad.length} holes or losses`).toEqual([]);
+    expect(paths).toEqual([]);
+  }, ARM_TIMEOUT_MS);
 });

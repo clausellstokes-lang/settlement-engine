@@ -7,3 +7,7 @@ B  the arm: 0 sends or losses, server against twin 0 paths (GREEN; 114 at the ba
    twin's tests 5 files, 120 of 120. Acceptance at the tree: exit 1, d06 the only FAIL row, 36 of 37 (a07 PASS), the 15 hand
    rows all equal. typecheck:domain:strict 1113 / ceiling 1113 (exit 0); typecheck:ratchet 167 / 167 (exit 0); eslint on
    gallerySecondHomes.js, galleryVeil.js and the arm's file: exit 0.
+
+B2 (V10-6, ruling VR21): the arm 0 holes (GREEN; 3 at the base), server against twin 0 paths; KEEP (a trace that loses nothing
+   keeps its stored ts) holds. Six guard files 6 of 6, 125 of 125; the twin's tests 120 of 120; acceptance at the tree: exit 1, d06 the only FAIL
+   row, 36 of 37, the 15 hand rows equal; typecheck:domain:strict 1113/1113, typecheck:ratchet 167/167, eslint 0 (exit 0 each).
