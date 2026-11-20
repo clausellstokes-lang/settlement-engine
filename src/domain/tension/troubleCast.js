@@ -332,6 +332,25 @@ function houseOf(n) {
 }
 
 /**
+ * THE OUTSIDER RUNG (an outsider is never named, only reached through the keeper of a house where strangers lodge): the
+ * live roster's people whom `free` admits, strongest first and then roster order, whose role, title or house (key or
+ * family) names a house where strangers lodge (`LODGING_HOUSE`) and whose house the record names; each with the house in
+ * the record's own wording. The frame chooses among them by its hash, after its other sides have taken their people. The
+ * crisis page's copy (crisis/crisisPage.js :: lodgingKeeperOf, which may not import this module: the veil test's "one
+ * door") takes the first; tests/domain/crisis/crisisKeeperBothDoors.test.js holds the two together (FRAME-6 · P1BF).
+ * @param {FrameSettlement} s
+ * @param {(n: FrameNpc) => boolean} [free] who may stand; by default, nobody an active crisis's cast holds
+ * @returns {Array<{ npc: FrameNpc, keeper: string, house: string }>}
+ */
+export function lodgingKeepersOf(s, free) {
+  const held = free ? null : crisisHeld(s);
+  const may = free || ((/** @type {FrameNpc} */ n) => !(/** @type {Set<string>} */ (held)).has(idOf(n)));
+  return rosterOf(s).map((n, i) => ({ n, i })).sort((a, b) => (num(b.n.power) - num(a.n.power)) || (a.i - b.i)).map(({ n }) => n)
+    .filter((n) => may(n) && LODGING_HOUSE.test(tradeWordsOf(n)) && !!houseOf(n))
+    .map((n) => ({ npc: n, keeper: str(n.name), house: houseOf(n) }));
+}
+
+/**
  * @typedef {{ npc?: FrameNpc, power?: FramePower, via?: FrameNpc, rule: SideFace['rule'], slots?: Record<string, string> }} Candidate
  */
 
@@ -437,8 +456,8 @@ export function castTroubleFrame(settlement) {
       }).filter((c) => c.npc || !used.has(`power:${powerName(/** @type {FramePower} */ (c.power))}`));
     }
     // outsider: never named; reached through the keeper of a house where strangers lodge
-    return strongest(roster).filter((n) => free(n) && LODGING_HOUSE.test(tradeWordsOf(n)) && houseOf(n))
-      .map((n) => ({ via: n, rule: /** @type {SideFace['rule']} */ ('outsider'), slots: { other: str(n.name), house: houseOf(n) } }));
+    return lodgingKeepersOf(s, free)
+      .map((k) => ({ via: k.npc, rule: /** @type {SideFace['rule']} */ ('outsider'), slots: { other: k.keeper, house: k.house } }));
   };
 
   /** @param {Candidate} c @param {FaceKind} kind @returns {SideFace} */

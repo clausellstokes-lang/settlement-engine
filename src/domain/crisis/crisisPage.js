@@ -252,9 +252,11 @@ export const CRISIS_ABSENCE_REACH = Object.freeze({
  * that role), strongest first and then roster order, the first whose role, title or house (key or family) names a house
  * where strangers lodge (`LODGING_HOUSE`) and whose house the record names; the house in the record's own wording (its
  * key, less a trailing parenthesis, lower case). Rate 1 (a fact filling an absence): no hash. Null where none stands.
+ * Exported for one reader only, tests/domain/crisis/crisisKeeperBothDoors.test.js, which holds it to the rung it copies
+ * (troubleCast.js :: lodgingKeepersOf, the first of them) until one module serves both doors (FRAME-6 · P1BF).
  * @param {PageSettlement} s @returns {{ keeper: string, house: string } | null}
  */
-function lodgingKeeperOf(s) {
+export function lodgingKeeperOf(s) {
   const held = new Set(crisisContainer(s).flatMap((e) => {
     const roles = /** @type {{ cast?: { roles?: unknown } } | null} */ (e)?.cast?.roles;
     return Array.isArray(roles) ? roles : [];

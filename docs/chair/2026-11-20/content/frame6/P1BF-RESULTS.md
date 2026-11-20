@@ -145,3 +145,341 @@ for (const r of a) {
 }
 console.log(JSON.stringify({ towns: a.length, storedSame, strangerPages, strangerSame, ownerExpected, ownerMoved, clauseAlone, ownerSame, bad: bad.length, badRows: bad.slice(0, 10), examples }));
 ```
+
+## Commit 2 — one keeper rule at both doors (a test that holds the two copies together)
+
+### Measure first (taken before any edit for commit 2; it refuted nothing)
+
+**The instrument** is `parity.mjs` (below). It runs both rules on every town of a pool. Neither source file is edited: each
+module is copied into the scratch folder with its relative imports made absolute and one export line appended. The
+crisis rule is `crisisPage.js :: lodgingKeeperOf`, as written. The frame's rule is the outsider rung's own line
+(`troubleCast.js` line 440 at the base), run with troubleCast's own private helpers (`rosterOf`, `crisisHeld`,
+`tradeWordsOf`, `houseOf`, `idOf`) and with its `free` at the empty state: no side taken yet, the seat not yet used. The
+rung's first keeper is compared with the crisis page's keeper, person and house.
+
+**Sanity check of the instrument:** wherever the real module's owner page prints a keeper (5 crisis-pool towns, 120
+golden towns), the probe's keeper is the printed one (0 disagree).
+
+**The pools:**
+- **Calm:** B2's `pool.mjs 55`, the first 55 calm births a tier, `frame-calm-<tier>-<i>`.
+- **Crisis:** B7's crisis pool (`gen.mjs`'s seeds, 24 a kind).
+- **Golden:** the golden master's 525 rows.
+
+| pool | towns | agree, a keeper | agree, none | disagree | the two "free" sets differ | towns with more than one keeper |
+|---|---|---|---|---|---|---|
+| calm (B2's 330) | 330 | 218 | 112 | **0** | 0 | 157 |
+| B7's crisis pool | 360 | 223 | 137 | **0** | 0 | 159 |
+| golden master | 525 | 309 | 216 | **0** | 0 | 201 |
+| **all** | **1,215** | **750** | **465** | **0** | **0** | **517** |
+
+**What each rule takes as input, and what "free" means to each:**
+- **The live roster:** the same in both. No temporary person, nobody ousted, no office stand-in, a name.
+- **The order:** the same in both. Strongest by the card's `power`, then roster order.
+- **The trade words:** the same in both. Role, title, house key and family, tested against `LODGING_HOUSE`.
+- **The house word:** the same in both. The key less a trailing parenthesis, lower case.
+- **"Free" in the crisis copy:** nobody an active crisis's stored cast holds, read through `crisisContainer(s)`. Its
+  carrier order is `stressors`, then `stress`, then `stresses`.
+- **"Free" in the frame's rung:** the same "held" set, read through `crisisHeld(s)`, which reads `s.stress` alone. The
+  frame's `free` also excludes:
+  - the people its other sides have already taken (`used`);
+  - the seat, once used `FRAME_TUNING.seatSidesMax` times.
+
+  The two "held" sets were equal on all 1,215 towns. A born record keeps `stressors` and `stress` as one object. The
+  sets could differ only on a hand-built record that carries one alias and not the other.
+- **The pick differs, by design:**
+  - The frame chooses AMONG the rung's keepers by its hash (`castHash(seed, type, '<side>:outsider:who')`).
+  - The crisis page takes the first keeper (rate 1, no hash: B7 §P1b and P1B's brief).
+
+**A finding for the chair (not a refutation; nothing was changed for it).** Where the frame actually casts an outsider
+face, it can name a different keeper from the crisis page in the same town. Frames cast an outsider face twice in the
+calm pool, and never in the other pools (frames cast: calm 63, crisis 235, golden 172):
+- `frame-calm-town-20` names Hulegu Khwarezm (taverns), the crisis page's keeper.
+- `frame-calm-town-80` names Xenia Publicola (inn). The crisis rule names Junia Publicola (coaching inn).
+  - The keepers are Xenia (power 1), Accia Cicero (2) and Junia (3).
+  - Accia was already taken by the frame's "take the law into their own hands" side, through the trade rung (`used`).
+  - The hash 0.639 over the two left chose the second, Xenia.
+
+In production the two doors never open on the same town: the sheet composes no frame where a crisis is active, and the
+crisis page reaches the hand only in an infiltration. So the rule is the same; the frame's choice among its keepers is
+its own. If the chair wants the frame's FACE and the crisis keeper to be the same person, that is a change to a rule,
+and I made none.
+
+### What was built
+
+- **`src/domain/tension/troubleCast.js`:** the outsider rung becomes one named, exported function,
+  `lodgingKeepersOf(s, free?)`.
+  - It returns the eligible keepers, strongest first, each as `{ npc, keeper, house }`.
+  - `free` defaults to "nobody an active crisis's cast holds", which is the rung at the empty state.
+  - `castTroubleFrame`'s outsider rung now calls it with its own `free`. The frame's other code is untouched, so the
+    test holds the rung the frame really runs, not a third copy.
+- **`src/domain/crisis/crisisPage.js`:** `lodgingKeeperOf` gains `export` and two comment lines. It is otherwise
+  unchanged.
+- **`tests/domain/crisis/crisisKeeperBothDoors.test.js`** (the name avoids the mutation manifest's patterns under rule
+  39's addendum; it is not a walker), three tests:
+  - **One rule, four born towns:** on `frame-calm-town-80` (calm, framed, three keepers), `frame-calm-thorp-0` (calm,
+    none), `b7-infiltrated-town-0` (infiltrated, two keepers) and `b7-infiltrated-thorp-0` (infiltrated, none), the
+    crisis page's keeper equals the rung's first, person and house, or both are null. Each town's measured keeper count
+    is pinned. The set is asserted to hold calm and infiltrated towns, each with a keeper and with none. Uses
+    `collectSeedFailures`, so it satisfies `seedLoopTotality`.
+  - **The same FREE test:** with the first keeper put into the crisis cast, both rules pass over to the same second
+    keeper.
+  - **The same ORDER:** with the strongest keeper's `power` set to -1, the rung's first moves, and the crisis keeper
+    moves with it.
+- **The veil walker's "one door" still holds.** Its walk (`frameShareVeil.test.jsx`, "one door: only the sheet's
+  composer imports the trouble cast") reads `src/` alone, skips `src/domain/tension`, and expects exactly
+  `['src/domain/summary/tonightSheet.js']`. `crisisPage.js` still imports nothing from the trouble cast, and a test file
+  is not walked. Green in the lane gate.
+
+### Red first, then green
+
+- **RED on the tree without the exports** (`c2-red-base.txt`): exit 1, `Tests 3 failed (3)`. All three titles fail with
+  "lodgingKeepersOf is not a function".
+- **RED against a deliberately broken copy. Each plant was made in the worktree file, run, then restored by copying the
+  kept file back (`cmp` identical). No plant was committed. Plant 1 (`c2-plant-free.txt`):**
+  - The plant: the crisis copy's free test dropped.
+  - Result: exit 1, `Tests 1 failed | 2 passed (3)`.
+  - The failing title: "the same FREE test: a keeper an active crisis's cast holds is passed over by both rules, for the
+    same next keeper". On born towns no cast holds a keeper, as the measure found.
+- **Plant 2** (`c2-plant-order.txt`):
+  - The plant: the rung's order reversed, weakest first.
+  - Result: exit 1, `Tests 2 failed | 1 passed (3)`.
+  - The failing titles: "the two rules name the same keeper (person and house), or both none, on 4 born towns"
+    (frame-calm-town-80: Junia vs Xenia; b7-infiltrated-town-0: Peppo Schubert vs Diemoda Pfeiffer) and "the same ORDER:
+    strongest first, then roster order, at both doors (the strongest keeper weakened)".
+- **GREEN** (`c2-green.txt`): exit 0, `Tests 3 passed (3)`.
+
+### Byte-identity of commit 2 (`frames.mjs`, base = commit 1 `e4a5de61f` before the edit, tip = commit 2)
+
+Every town's stored record, its trouble frame (`castTroubleFrame`), the owner's Tonight sheet and the owner's crisis page
+were digested and compared (`framescmp.mjs`):
+
+| pool | towns | framed | stored | frame | owner's sheet | owner's crisis page |
+|---|---|---|---|---|---|---|
+| calm | 330 | 63 | 330 | 330 | 330 | 330 |
+| B7's crisis pool | 360 | 235 | 360 | 360 | 360 | 360 |
+| golden master | 525 | 172 | 525 | 525 | 525 | 525 |
+
+Every one of these is identical: 0 differ.
+
+### Gates at commit 2
+
+- **The lane gate** (`c2-lane.txt`: `tests/domain/crisis`, `tests/domain/tension` and
+  `tests/security/frameShareVeil.test.jsx`, all whole): `Test Files 29 passed (29)`, `Tests 225 passed (225)`.
+- **Importers and walkers** (`c2-importers.txt`, `c2-importers.json`; 82 files, `importers2.txt`). These are commit 1's
+  60, plus every test importing `tonightSheet.js` (the trouble cast's one importer), plus `frame2NamesRule.test.js`
+  (which imports `troubleCast.js`). Result: `Test Files 2 failed | 80 passed (82)`,
+  `Tests 2 failed | 831 passed | 1 expected fail (834)`.
+  - **Red, caused by me, left for the integrator's door:** `sovereigntyLightingContract.walker.test.js > … > THE CENSUS
+    IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed`. It reads "the estate's file count moved —
+    re-measure, do not re-word: expected 3717 to be 3716". My new test file is the 3717th. The baseline
+    (`tests/lint/.lighting-census-baseline.json`) is outside my manifest and is re-taken by its door at the merge, as
+    P1B's was.
+  - **Red, not mine:** `tuningRegister.walker.test.js`, on the same three known rows as at commit 1. The trouble cast
+    adds no row.
+- **Typecheck and lint:**
+  - `npm run typecheck:ratchet`: 167, ceiling 167.
+  - `npm run typecheck:domain:strict`: 1113, ceiling 1113.
+  - `npm run lint`: 0 errors (38 warnings). `eslint` on the three touched code files prints nothing.
+
+## For the join: the readers that break ties by a card's `power`
+
+**The line:** ties by a card's `power` are broken by:
+- `troubleCast.js :: strongest` (the trade and hook rungs; office orders by a POWER's power);
+- `troubleCast.js :: lodgingKeepersOf` (the outsider rung, now named; the same order);
+- `tonightSheet.js`'s people to voice;
+- `crisisCast.js`'s exploiter and collaborator (through `barred`);
+- `crisisPage.js :: lodgingKeeperOf`.
+
+**Which of my pins read one:**
+- The keeper lines in `crisisOutsideHand.test.js`'s `REACHED` and the veil test's `P1B_TOWNS` read `lodgingKeeperOf`.
+  The two-keeper towns `b7-infiltrated-town-0` and `town-1` pick by `power`. Every reached town's FREE set depends on
+  `crisisCast`'s collaborator.
+- The new test reads `lodgingKeeperOf` and `lodgingKeepersOf` on both sides. Its pinned keeper counts (3, 0, 2, 0) read
+  no power but read the crisis cast's free set. Its equality reads `power` identically at both doors.
+- The 126 owner pages of commit 1's byte-identity read `lodgingKeeperOf`.
+
+## For the security reader
+
+- **Commit 1:** no new holder or line. The owner's one existing line changes its words. A non-owner reader's page is
+  byte-identical, 11,205 of 11,205.
+- **Commit 2:** two exports, no new line on any surface. Every frame, sheet and page is byte-identical on 1,215 towns.
+  The trouble cast still has one importer in `src/`.
+
+## Judgment calls (each vetoable)
+
+- **Measured on the rule, not on the frame's face.** The parity is measured and pinned on the RULE: the rung's keepers in
+  order, with the shared free test. It is not measured on the frame's hash-chosen face, which differs in one framed town
+  of 63 (`frame-calm-town-80`, above). The brief's own test design (calm and infiltrated towns, with a keeper and with
+  none, most of them unframed) can only compare the rule.
+- **The rung extracted rather than mirrored.** The "smallest thing" exported from `troubleCast.js` is the rung itself
+  as a named function, which the frame now calls. A standalone copy for the test would have made a third copy and left
+  the frame's own line untested. The rung's sort is written inside the new function; the closure's `strongest`, which
+  the trade and hook rungs use, is untouched (same comparator).
+
+### `parity.mjs` (commit 2's measure; `node parity.mjs <worktree> <calm|crisis|golden> par-<pool>.json`)
+
+```js
+// FRAME-6 · P1BF — MEASURE FIRST for commit 2: crisisPage.js :: lodgingKeeperOf against troubleCast.js's outsider rung,
+// on every town of a pool. Neither source file is edited: each module is copied into this folder with its relative
+// imports made absolute and ONE export line appended (the private helpers), then imported from the copy.
+// argv: worktree root, pool (calm | crisis | golden), output path.
+import fs from 'node:fs';
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
+const ROOT = process.argv[2].replace(/\/?$/, '/');
+const POOL = process.argv[3];
+const out = process.argv[4];
+const HERE = path.dirname(new URL(import.meta.url).pathname);
+
+/** Copy a module with its relative imports made absolute and `extra` appended; import the copy. */
+async function probe(rel, extra) {
+  const file = ROOT + rel;
+  const dir = path.dirname(file);
+  const src = fs.readFileSync(file, 'utf8').replace(/(from\s+['"])(\.{1,2}\/[^'"]+)(['"])/g, (_, a, p, b) => a + pathToFileURL(path.resolve(dir, p)).href + b);
+  const copy = path.join(HERE, `probe-${path.basename(rel, '.js')}.mjs`);
+  fs.writeFileSync(copy, `${src}\n${extra}\n`);
+  return import(pathToFileURL(copy).href);
+}
+const page = await probe('src/domain/crisis/crisisPage.js', 'export { lodgingKeeperOf as __lodgingKeeperOf };');
+const trouble = await probe('src/domain/tension/troubleCast.js', 'export { rosterOf as __rosterOf, crisisHeld as __crisisHeld, tradeWordsOf as __tradeWordsOf, houseOf as __houseOf, idOf as __idOf };');
+const { LODGING_HOUSE } = await import(ROOT + 'src/domain/tension/sideArchetypes.js');
+const { crisisContainer } = await import(ROOT + 'src/domain/facts/crisisKind.js');
+const { generateSettlementPipeline } = await import(ROOT + 'src/generators/generateSettlementPipeline.js');
+const { STRESS_TYPE_MAP } = await import(ROOT + 'src/data/stressTypes.js');
+const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
+const str = (v) => (typeof v === 'string' ? v.replace(/\s+/g, ' ').trim() : '');
+const num = (v) => (typeof v === 'number' && Number.isFinite(v) ? v : 0);
+
+/** troubleCast's outsider rung, line 440 of the base, run with the frame's OWN helpers and its `free` at the empty state
+ *  (no side yet taken, the seat not yet used): the eligible keepers, strongest first. */
+function rungOf(s) {
+  const held = trouble.__crisisHeld(s);
+  const roster = trouble.__rosterOf(s);
+  const free = (n) => !!n && !held.has(trouble.__idOf(n));
+  const strongest = (list) => list.map((n, i) => ({ n, i })).sort((a, b) => (num(b.n.power) - num(a.n.power)) || (a.i - b.i)).map(({ n }) => n);
+  return strongest(roster).filter((n) => free(n) && LODGING_HOUSE.test(trouble.__tradeWordsOf(n)) && trouble.__houseOf(n))
+    .map((n) => ({ keeper: str(n.name), house: trouble.__houseOf(n), id: trouble.__idOf(n) }));
+}
+/** The frame's own outsider faces, as castTroubleFrame casts them (hash among the eligible, after the other sides). */
+function frameOutsiders(s) {
+  const f = trouble.castTroubleFrame(s);
+  if (!f) return { framed: false, faces: [] };
+  return { framed: true, faces: f.sides.filter((x) => x.face?.rule === 'outsider').map((x) => ({ keeper: x.face.viaName, house: (/keeps the (.+?), where strangers lodge/.exec(x.face.reason) || [])[1] || null, side: x.label })) };
+}
+const heldOfPage = (s) => new Set(crisisContainer(s).flatMap((e) => (Array.isArray(e?.cast?.roles) ? e.cast.roles : [])).filter((r) => r?.kind === 'npc').map((r) => str(r.id)));
+const sameSet = (a, b) => a.size === b.size && [...a].every((x) => b.has(x));
+
+function seeds() {
+  const list = [];
+  if (POOL === 'crisis') {
+    for (const kind of Object.keys(STRESS_TYPE_MAP)) {
+      const gate = STRESS_TYPE_MAP[kind].requiresTier;
+      const tiers = TIERS.filter((t) => !gate || TIERS.indexOf(t) >= TIERS.indexOf(gate));
+      const per = Math.ceil(24 / tiers.length);
+      for (const tier of tiers) for (let i = 0; i < per; i++) list.push({ seed: `b7-${kind}-${tier}-${i}`, cfg: { settType: tier, stressType: kind } });
+    }
+    return list;
+  }
+  if (POOL === 'golden') {
+    return null;
+  }
+  return 'calm';
+}
+let list = seeds();
+const rows = [];
+const one = (seed, cfg, at, s) => {
+  const crisis = page.__lodgingKeeperOf(s);
+  // sanity: the probe's keeper is the one the real module's owner page prints, wherever it prints one
+  const own = page.composeCrisisPage(s, { audience: 'owner' }).flatMap((x) => x.absent).map((a) => a.reason).find((r) => r.startsWith('an outside hand, unnamed; ')) || null;
+  const realKeeper = own ? own.slice('an outside hand, unnamed; '.length) : null;
+  const rung = rungOf(s);
+  const head = rung[0] || null;
+  const fr = frameOutsiders(s);
+  const agree = (!crisis && !head) || (!!crisis && !!head && crisis.keeper === head.keeper && crisis.house === head.house);
+  rows.push({
+    pool: POOL, seed, at: at ?? null, tier: cfg.settType, kind: [s.stress].flat().filter(Boolean).map((e) => e.type).join('+') || 'calm',
+    crisis, rungHead: head ? { keeper: head.keeper, house: head.house } : null, eligible: rung.length,
+    verdict: agree ? (crisis ? 'agree-keeper' : 'agree-none') : 'disagree',
+    printed: realKeeper, printedAgrees: !realKeeper || (!!crisis && realKeeper.startsWith(`${crisis.keeper} keeps the ${crisis.house}`)),
+    heldSame: sameSet(trouble.__crisisHeld(s), heldOfPage(s)),
+    framed: fr.framed, frameFaces: fr.faces,
+    frameAgree: fr.faces.map((f) => !!crisis && f.keeper === crisis.keeper && f.house === crisis.house),
+  });
+};
+if (list === 'calm') {
+  // B2's pool.mjs 55 (FRAME-1's): the first 55 calm births a tier, seeds frame-calm-<tier>-<i>
+  for (const tier of TIERS) {
+    let got = 0, i = 0;
+    while (got < 55) {
+      const seed = `frame-calm-${tier}-${i++}`;
+      const s = generateSettlementPipeline({ settType: tier }, null, { seed, customContent: {} });
+      const st = Array.isArray(s.stress) ? s.stress : (s.stress ? [s.stress] : []);
+      if (st.length) continue;
+      one(seed, { settType: tier }, null, s); got++;
+    }
+  }
+} else {
+  if (!list) {
+    const { manifestRows } = await import(ROOT + 'scripts/lib/golden-corpus-key.mjs');
+    const r = manifestRows(JSON.parse(fs.readFileSync(ROOT + 'tests/fixtures/generator-golden-master.json', 'utf8')));
+    list = r.map((config, at) => { const { _seed, ...cfg } = config; return { seed: _seed, cfg, at }; });
+  }
+  for (const { seed, cfg, at } of list) one(seed, cfg, at, generateSettlementPipeline(cfg, null, { seed, customContent: {} }));
+}
+fs.writeFileSync(out, JSON.stringify(rows));
+const c = (v) => rows.filter((r) => r.verdict === v).length;
+const faces = rows.flatMap((r) => r.frameAgree);
+console.log(JSON.stringify({
+  pool: POOL, towns: rows.length, agreeKeeper: c('agree-keeper'), agreeNone: c('agree-none'), disagree: c('disagree'),
+  printed: rows.filter((r) => r.printed).length, printedDisagrees: rows.filter((r) => !r.printedAgrees).length,
+  heldDiffers: rows.filter((r) => !r.heldSame).length, multiEligible: rows.filter((r) => r.eligible > 1).length,
+  framed: rows.filter((r) => r.framed).length, frameOutsiderFaces: faces.length, frameFaceIsCrisisKeeper: faces.filter(Boolean).length,
+  disagreeRows: rows.filter((r) => r.verdict === 'disagree').slice(0, 20).map((r) => [r.seed, r.crisis, r.rungHead]),
+}));
+```
+
+### `frames.mjs` and `framescmp.mjs` (commit 2's byte-identity)
+
+```js
+// FRAME-6 · P1BF — commit 2's byte-identity: every town's trouble frame (castTroubleFrame), the owner's Tonight sheet and
+// the owner's crisis page, digested. argv: worktree root, pool (calm | crisis | golden), output path.
+import fs from 'node:fs';
+import { createHash } from 'node:crypto';
+const ROOT = process.argv[2].replace(/\/?$/, '/');
+const POOL = process.argv[3];
+const out = process.argv[4];
+const { generateSettlementPipeline } = await import(ROOT + 'src/generators/generateSettlementPipeline.js');
+const { STRESS_TYPE_MAP } = await import(ROOT + 'src/data/stressTypes.js');
+const { castTroubleFrame } = await import(ROOT + 'src/domain/tension/troubleCast.js');
+const { composeTonightSheet } = await import(ROOT + 'src/domain/summary/tonightSheet.js');
+const { composeCrisisPage } = await import(ROOT + 'src/domain/crisis/crisisPage.js');
+const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
+const digest = (v) => createHash('sha256').update(JSON.stringify(v) ?? 'undefined').digest('hex').slice(0, 16);
+const rows = [];
+const one = (seed, at, s) => rows.push({ seed, at: at ?? null, stored: digest(s), frame: digest(castTroubleFrame(s)), sheet: digest(composeTonightSheet(s, { audience: 'owner' })), page: digest(composeCrisisPage(s, { audience: 'owner' })), framed: !!castTroubleFrame(s) });
+if (POOL === 'calm') {
+  for (const tier of TIERS) { let got = 0, i = 0; while (got < 55) { const seed = `frame-calm-${tier}-${i++}`; const s = generateSettlementPipeline({ settType: tier }, null, { seed, customContent: {} }); if ([s.stress].flat().filter(Boolean).length) continue; one(seed, null, s); got++; } }
+} else if (POOL === 'crisis') {
+  for (const kind of Object.keys(STRESS_TYPE_MAP)) {
+    const gate = STRESS_TYPE_MAP[kind].requiresTier;
+    const tiers = TIERS.filter((t) => !gate || TIERS.indexOf(t) >= TIERS.indexOf(gate));
+    const per = Math.ceil(24 / tiers.length);
+    for (const tier of tiers) for (let i = 0; i < per; i++) { const seed = `b7-${kind}-${tier}-${i}`; one(seed, null, generateSettlementPipeline({ settType: tier, stressType: kind }, null, { seed, customContent: {} })); }
+  }
+} else {
+  const { manifestRows } = await import(ROOT + 'scripts/lib/golden-corpus-key.mjs');
+  manifestRows(JSON.parse(fs.readFileSync(ROOT + 'tests/fixtures/generator-golden-master.json', 'utf8'))).forEach((config, at) => { const { _seed, ...cfg } = config; one(_seed, at, generateSettlementPipeline(cfg, null, { seed: _seed, customContent: {} })); });
+}
+fs.writeFileSync(out, JSON.stringify(rows));
+console.log(JSON.stringify({ pool: POOL, towns: rows.length, framed: rows.filter((r) => r.framed).length }));
+```
+
+```js
+// FRAME-6 · P1BF — base vs tip of frames.mjs. argv: base.json tip.json
+import fs from 'node:fs';
+const [a, b] = process.argv.slice(2).map((p) => JSON.parse(fs.readFileSync(p, 'utf8')));
+const k = (r) => `${r.seed}|${r.at}`; const m = new Map(b.map((r) => [k(r), r]));
+const c = { towns: a.length, stored: 0, frame: 0, sheet: 0, page: 0 }; const bad = [];
+for (const r of a) { const t = m.get(k(r)); for (const f of ['stored', 'frame', 'sheet', 'page']) { if (t && t[f] === r[f]) c[f]++; else bad.push([k(r), f]); } }
+console.log(JSON.stringify({ ...c, framed: a.filter((r) => r.framed).length, bad: bad.length, badRows: bad.slice(0, 10) }));
+```
