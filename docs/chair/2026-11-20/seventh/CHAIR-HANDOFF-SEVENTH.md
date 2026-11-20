@@ -1283,3 +1283,61 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   what depends on the ruling body and the contender list (generation, display, the simulation, the share veil's
   registry, the stored figures), then options. The chair designs from it; the build is recommended for after the
   deploy.
+- 04:24 UTC · **SEVEN MESSAGES READ AT 04:21 UTC.** **SEATED: SEAT-MEASURE** (created 04:21:00 UTC), session_019yED1RmLVT1AdmBMi8d5jx,
+  `lane/seat-measure-2026-11-20`. FRAME-1 and NAMES-1 seated on the line at 85fccf898, measuring first.
+  **(1) THE MAP-SHARING FAULT IS CONFIRMED BY EXECUTION ON MASTER'S CODE (VEIL-DOORS-2, 04:18 UTC):** on chains of
+  its tip (001..212) and of master (001..203) the snapshot the share editor builds with its default sections fails
+  the guard (`_gallery_world_snapshot_is_safe` false; true with `chronicle` removed) and a direct owner save into
+  saved_maps raises "World snapshot contains a forbidden private key and cannot be stored" (the trigger).
+  `publish_map` itself was not called (it runs the same guard). SO SHARING A CAMPAIGN MAP WITH ITS WORLD, WITH THE
+  EDITOR'S DEFAULTS, FAILS ON PRODUCTION TODAY (very likely: not seen there). TOLD TO THE OWNER AT ONCE with the
+  workaround (untick the chronicle section: should work, not clicked through) and the correction that the
+  crime-worded headlines could never be stored, so none was ever served (the seat's own correction of its 03:49
+  message). VR40's first part cures it.
+  **(2) VEIL-DOORS-2 HANDED BACK PARTIAL AT ITS MARK: "DOORS 4994ee371"** (its estimate about 380,000 tokens;
+  `docs/chair/2026-11-20/veil/doors/VEIL-DOORS-2-HANDBACK.md`; 212 there 35c91700…331ccc, down b5f15a7a…a590c).
+  BUILT, each red before and green after: the one-row dossier read (116 ms and 103 ms; an unmarked list row 1.01
+  times bedd5a392; a marked list 1.21); VR27 as amended (212 revokes none of the eight; walker arms for every door
+  as a visitor and a signed-in map save; THE CHAIR'S WITHDRAWN WORDING, PLANTED, FAILS THE SAVE: "permission denied
+  for function _gallery_world_snapshot_is_safe"); the browser's map import is `get_gallery_map`, proven under VR23
+  by a born arm, `import_gallery_map(text)` has no caller; ALL 43 EVENT TYPES CLASSED ON PURPOSE in seven classes
+  with the chronicle's cure (every name the log acts on that the served body does not show is withheld wherever it
+  appears: stronger than VR41 (a)); snapshot mode (the chronicle stops at `$veil.at`; name, tier and time from the
+  copy). `tests/security` whole: 158 files, 2,009 passed. **THE CHAIR READ THE EVENT-TYPE TABLE ROW BY ROW: IT
+  STANDS** (house, person and power entries by what the body shows; the two corruption types covert; the stressor
+  entries withheld for three criminal keys; the table's free text never on a marked share; the rest by the name
+  search; the served entry is summary, time, partyCaused and type, never the payload). ONE CHECK OWED: the WHOLE
+  stressor catalogue read for any other crime-worded key or label. NOT BUILT (its rulings arrived after the mark):
+  VR40's three parts; VR41 (a-ii) and the loss counts; item 8 (the reader's repros, the acceptance run). **SEAT
+  VEIL-DOORS-3** (`prompts/VEIL-DOORS-3.txt`; `lane/veil-doors-3-2026-11-20` from 4994ee371; the mark 350,000).
+  **(3) VEIL-21, R2 BUILT AND NOT GREEN (04:15 UTC; `lane/veil-21-r2-2026-11-20` at 12a371c0b, not merged, not for
+  the reader):** a withhold-always step at the veil's end in 212 (four helpers revoked by name; it runs on an
+  unmarked share too: MEASURED, a map's unmarked member also sent `income.weight`, which D did not cover), the
+  twin's mirror, the page re-deriving the scores, readiness, the gates and the severity's chips from the band
+  (new `src/domain/veil/pageRederive.js`), the import re-deriving scores and gates; 57 rows; 2,470 sends to 0; the
+  render-twice test with no drawn row left; the acceptance run at exit 0. VR37's classes as built: severity and the
+  readiness score (a); the cast's stakes and roles (b) per entry; the relation's direction (b) with its relation,
+  in R3. THREE REDS OF ITS OWN being cured (`galleryServerVeil` 11, `galleryVeilHandRows` V7-2 1,
+  `publicProseEquality` Defense: two lines missing on the shared page). ITS ASK: an exemption of the ruin-filter
+  walker for `pageRederive.js` (pin 117 to 118): GRANTED in VR2's form on the condition VR25's row carried: ONE
+  MEASURE (a born town with a ruined house, SHARED: do the page's re-derived figures equal the owner's page's;
+  where they do not the page does not draw that figure). Its estimate about 250,000 tokens.
+  **(4) THE OBSERVED-SHAPE SCANNER, SETTLED (04:04 UTC):** (C) does not clear it: the detector types a value by its
+  SHAPE TOKEN, never its writer (`scripts/lib/legacy-reader-shape-scan.mjs`), so any door that carries `s.config`
+  reads as the corpus shape. THE GOVERNED RUNG (schema 46 of the observed-shape baseline) IS A UNIT OF THE CLOSE, at
+  the joined tree (it needs the veil's import code beside the line's), with the walker's register arm (2,220 reads,
+  1,556 identities, 448 files against the frozen 2,214, 1,552, 444). On the close's list.
+  **(5) SEC-GRANTS-2 HANDED BACK "213 fac781e7e"** (04:21 UTC; `docs/chair/2026-11-20/security/
+  SEC-GRANTS-2-HANDBACK.md`): 213 = the 157 verbatim, the three admin doors and `list_ticket_thread` off anon (the
+  thread re-granted to authenticated and service_role), 21 INVOKER helpers revoked by the visitor closure, five
+  guards made NULL-safe (one line each), `account_is_active` untouched (VR38). PROOF on a scratch PostgreSQL 16:
+  FOUR HISTORIES (fresh; the emergency script; that and the ticket's two lines; the two key revokes alone) end in
+  identical grants and bodies (440 functions on 001..210; 511 with the veil lane's 211 and 212); the flows
+  byte-identical; the harness changed only the expected denials; a wide probe with real rows of 36 tables: no door
+  acts for anon; the walker 10 of 10, red first by three plants. IN COMPOSITION with the veil lane: registers 300
+  of 300; `tests/security` 2,015 of 2,017, the two reds being the VEIL's own pins that 212 is the head (cured by a
+  patch the seat wrote for the veil lane). ON ITS BRANCH the gap of 211 and 212 reds four files by construction,
+  declared. DEFAULT PRIVILEGES (for the owner, after the deploy): without `for role` they cover only what the role
+  that runs them creates (postgres: every migration and the SQL editor). **SEAT REVIEW-GRANTS-1**
+  (`prompts/REVIEW-GRANTS-1.txt`; a fresh reader; `lane/review-grants-1-2026-11-20` from fac781e7e): the 21 invoker
+  helpers above all; the four histories; the rollback; the walker; "213 CLEAR at <sha256>" or the findings.
