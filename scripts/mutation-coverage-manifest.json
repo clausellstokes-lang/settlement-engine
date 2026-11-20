@@ -1876,6 +1876,10 @@
       "kind": "rationale",
       "ref": "pglite-executed"
     },
+    "tests/security/galleryVeilPeople.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
     "tests/security/galleryVeilSignalCopies.pglite.test.js": {
       "kind": "rationale",
       "ref": "pglite-executed"

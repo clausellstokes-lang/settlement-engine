@@ -1,0 +1,205 @@
+gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.0.lock.shared as PID 6627 after 0 poll(s); 1 shared holder(s) live, worker cap <= 2.
+
+ RUN  v4.1.8 /home/user/wt/r4
+
+ ❯ tests/security/galleryVeilPeople.pglite.test.js (7 tests | 4 failed) 59988ms
+     × VR9: on a share hiding a house whole, its holder's card, ties and every copy leave every read (both shapes, Reveal DM off and on) 359ms
+     × VR10: on every non-owner read no stored person id, and no id form, survives; every id is re-keyed; every reference resolves within the payload 498ms
+     × VR10: one salt a read: two reads of one share spell every id differently, each consistent 113ms
+     × THE TWIN: 212 :: _gallery_veil_rekey and rekeyPeople byte-equal under one salt; the twin's projection equals the gallery read on the people's paths once each side's ids are relabelled 88ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryVeilPeople.pglite.test.js > R4: the people — the holder withheld whole with its ties (VR9), every id re-keyed per read (VR10), through the server > VR9: on a share hiding a house whole, its holder's card, ties and every copy leave every read (both shapes, Reveal DM off and on)
+AssertionError: expected [ …(40) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "city-infiltrated-1 new gallery: npcs[].goal.long names the holder Zhen Deng",
++   "city-infiltrated-1 new gallery: npcs[].name names the holder Zhen Deng",
++   "city-infiltrated-1 new gallery: npcs[].name names the holder Narae Kang",
++   "city-infiltrated-1 new gallery: npcs[].name names the holder Eun Lee",
++   "city-infiltrated-1 new gallery: npcs[].name names the holder Tianhao Song",
++   "city-infiltrated-1 new gallery: npcs[].name names the holder Minghao Ito",
++   "city-infiltrated-1 new gallery: npcs[].name names the holder Huilan Zhao",
++   "city-infiltrated-1 new gallery: stress.cast.roles[].name names the holder Narae Kang",
++   "city-infiltrated-1 new gallery: stressors.cast.roles[].name names the holder Narae Kang",
++   "city-infiltrated-1 new gallery: relationships[].tension names the holder Zhen Deng",
++   "city-infiltrated-1 new gallery: relationships[].npc1Name names the holder Zhen Deng",
++   "city-infiltrated-1 new gallery: relationships[].description names the holder Zhen Deng",
++   "city-infiltrated-1 new gallery: relationships[].tension names the holder Narae Kang",
++   "city-infiltrated-1 new gallery: relationships[].npc1Name names the holder Narae Kang",
++   "city-infiltrated-1 new gallery: relationships[].description names the holder Narae Kang",
++   "city-infiltrated-1 new gallery: relationships[].tension names the holder Tianhao Song",
++   "city-infiltrated-1 new gallery: relationships[].npc2Name names the holder Tianhao Song",
++   "city-infiltrated-1 new gallery: relationships[].description names the holder Tianhao Song",
++   "city-infiltrated-1 new gallery: relationships[].tension names the holder Eun Lee",
++   "city-infiltrated-1 new gallery: relationships[].npc1Name names the holder Eun Lee",
++   "city-infiltrated-1 new gallery: relationships[].description names the holder Eun Lee",
++   "city-infiltrated-1 new gallery: relationships[].tension names the holder Tianhao Song",
++   "city-infiltrated-1 new gallery: relationships[].npc1Name names the holder Tianhao Song",
++   "city-infiltrated-1 new gallery: relationships[].description names the holder Tianhao Song",
++   "city-infiltrated-1 new gallery: relationships[].tension names the holder Minghao Ito",
++   "city-infiltrated-1 new gallery: relationships[].npc2Name names the holder Minghao Ito",
++   "city-infiltrated-1 new gallery: relationships[].description names the holder Minghao Ito",
++   "city-infiltrated-1 new gallery: relationships[].tension names the holder Minghao Ito",
++   "city-infiltrated-1 new gallery: relationships[].npc1Name names the holder Minghao Ito",
++   "city-infiltrated-1 new gallery: relationships[].description names the holder Minghao Ito",
++   "city-infiltrated-1 new gallery: relationships[].tension names the holder Huilan Zhao",
++   "city-infiltrated-1 new gallery: relationships[].npc1Name names the holder Huilan Zhao",
++   "city-infiltrated-1 new gallery: relationships[].description names the holder Huilan Zhao",
++   "city-infiltrated-1 new gallery: relationships[].tension names the holder Narae Kang",
++   "city-infiltrated-1 new gallery: relationships[].npc2Name names the holder Narae Kang",
++   "city-infiltrated-1 new gallery: relationships[].description names the holder Narae Kang",
++   "city-infiltrated-1 new gallery: relationships[].tension names the holder Minghao Ito",
++   "city-infiltrated-1 new gallery: relationships[].npc2Name names the holder Minghao Ito",
++   "city-infiltrated-1 new gallery: relationships[].description names the holder Minghao Ito",
++   "city-infiltrated-1 new gallery: 6 holder cards",
++ ]
+
+ ❯ tests/security/galleryVeilPeople.pglite.test.js:170:31
+    168|       }
+    169|     }
+    170|     expect(sent.slice(0, 40)).toEqual([]);
+       |                               ^
+    171|     expect(sent.length).toBe(0);
+    172|   }, ARM_TIMEOUT_MS);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/security/galleryVeilPeople.pglite.test.js > R4: the people — the holder withheld whole with its ties (VR9), every id re-keyed per read (VR10), through the server > VR10: on every non-owner read no stored person id, and no id form, survives; every id is re-keyed; every reference resolves within the payload
+AssertionError: expected [ …(40) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "town-calm-0 new marked gallery: npcs[].id is a stored person id",
++   "town-calm-0 new marked gallery: npcs[].id is a stored person id",
++   "town-calm-0 new marked gallery: npcs[].id is a stored person id",
++   "town-calm-0 new marked gallery: npcs[].id is a stored person id",
++   "town-calm-0 new marked gallery: npcs[].id is a stored person id",
++   "town-calm-0 new marked gallery: npcs[].id is a stored person id",
++   "town-calm-0 new marked gallery: npcs[].id is a stored person id",
++   "town-calm-0 new marked gallery: npcs[].id is a stored person id",
++   "town-calm-0 new marked gallery: npcs[].id is a stored person id",
++   "town-calm-0 new marked gallery: npcs[].id is a stored person id",
++   "town-calm-0 new marked gallery: npcs[].id is a stored person id",
++   "town-calm-0 new marked gallery: npcs[].id is a stored person id",
++   "town-calm-0 new marked gallery: npcs[].id is a stored person id",
++   "town-calm-0 new marked gallery: npcs[].id is a stored person id",
++   "town-calm-0 new marked gallery: npcs[].id is a stored person id",
++   "town-calm-0 new marked gallery: npcs[].id is a stored person id",
++   "town-calm-0 new marked gallery: npcs[].id is a stored person id",
++   "town-calm-0 new marked gallery: npcs[].id is a stored person id",
++   "town-calm-0 new marked gallery: npcs[].id is a stored person id",
++   "town-calm-0 new marked gallery: npcs[].id is a stored person id",
++   "town-calm-0 new marked gallery: npcs[].id is a stored person id",
++   "town-calm-0 new marked gallery: npcs[].id is a stored person id",
++   "town-calm-0 new marked gallery: npcs[].id is a stored person id",
++   "town-calm-0 new marked gallery: npcs[].id is a stored person id",
++   "town-calm-0 new marked gallery: npcs[].id is a stored person id",
++   "town-calm-0 new marked gallery: npcs[].id is a stored person id",
++   "town-calm-0 new marked gallery: npcs[].id is a stored person id",
++   "town-calm-0 new marked gallery: relationships[].to is a stored person id",
++   "town-calm-0 new marked gallery: relationships[].from is a stored person id",
++   "town-calm-0 new marked gallery: relationships[].to is a stored person id",
++   "town-calm-0 new marked gallery: relationships[].from is a stored person id",
++   "town-calm-0 new marked gallery: relationships[].to is a stored person id",
++   "town-calm-0 new marked gallery: relationships[].from is a stored person id",
++   "town-calm-0 new marked gallery: relationships[].to is a stored person id",
++   "town-calm-0 new marked gallery: relationships[].from is a stored person id",
++   "town-calm-0 new marked gallery: relationships[].id holds an id form",
++   "town-calm-0 new marked gallery: relationships[].to is a stored person id",
++   "town-calm-0 new marked gallery: relationships[].from is a stored person id",
++   "town-calm-0 new marked gallery: relationships[].to is a stored person id",
++   "town-calm-0 new marked gallery: relationships[].from is a stored person id",
++ ]
+
+ ❯ tests/security/galleryVeilPeople.pglite.test.js:226:30
+    224|       }
+    225|     }
+    226|     expect(bad.slice(0, 40)).toEqual([]);
+       |                              ^
+    227|     expect(bad.length).toBe(0);
+    228|   }, ARM_TIMEOUT_MS);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/security/galleryVeilPeople.pglite.test.js > R4: the people — the holder withheld whole with its ties (VR9), every id re-keyed per read (VR10), through the server > VR10: one salt a read: two reads of one share spell every id differently, each consistent
+AssertionError: expected [ 'town-calm-0 new marked', …(31) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "town-calm-0 new marked",
++   "town-calm-0 new marked +DM",
++   "town-calm-0 new unmarked",
++   "town-calm-0 new unmarked +DM",
++   "town-calm-0 old marked",
++   "town-calm-0 old marked +DM",
++   "town-calm-0 old unmarked",
++   "town-calm-0 old unmarked +DM",
++   "city-infiltrated-1 new marked",
++   "city-infiltrated-1 new marked +DM",
++   "city-infiltrated-1 new unmarked",
++   "city-infiltrated-1 new unmarked +DM",
++   "city-infiltrated-1 old marked",
++   "city-infiltrated-1 old marked +DM",
++   "city-infiltrated-1 old unmarked",
++   "city-infiltrated-1 old unmarked +DM",
++   "metropolis-calm-2 new marked",
++   "metropolis-calm-2 new marked +DM",
++   "metropolis-calm-2 new unmarked",
++   "metropolis-calm-2 new unmarked +DM",
++   "metropolis-calm-2 old marked",
++   "metropolis-calm-2 old marked +DM",
++   "metropolis-calm-2 old unmarked",
++   "metropolis-calm-2 old unmarked +DM",
++   "city-under_siege-3 new marked",
++   "city-under_siege-3 new marked +DM",
++   "city-under_siege-3 new unmarked",
++   "city-under_siege-3 new unmarked +DM",
++   "city-under_siege-3 old marked",
++   "city-under_siege-3 old marked +DM",
++   "city-under_siege-3 old unmarked",
++   "city-under_siege-3 old unmarked +DM",
++ ]
+
+ ❯ tests/security/galleryVeilPeople.pglite.test.js:239:18
+    237|       expect(relabel(peopleOf(r.docs.gallery))).toEqual(relabel(people…
+    238|     }
+    239|     expect(same).toEqual([]);
+       |                  ^
+    240|   }, ARM_TIMEOUT_MS);
+    241|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/security/galleryVeilPeople.pglite.test.js > R4: the people — the holder withheld whole with its ties (VR9), every id re-keyed per read (VR10), through the server > THE TWIN: 212 :: _gallery_veil_rekey and rekeyPeople byte-equal under one salt; the twin's projection equals the gallery read on the people's paths once each side's ids are relabelled
+error: function public._gallery_veil_rekey(jsonb, unknown) does not exist
+ ❯ pe.Le node_modules/@electric-sql/pg-protocol/src/parser.ts:423:39
+ ❯ pe.Xe node_modules/@electric-sql/pg-protocol/src/parser.ts:208:8
+ ❯ pe.parse node_modules/@electric-sql/pg-protocol/src/parser.ts:99:38
+ ❯ node_modules/@electric-sql/pglite/src/pglite.ts:684:27
+ ❯ null.<anonymous> wasm:/wasm/0267bdc2:1:5922082
+ ❯ null.<anonymous> wasm:/wasm/0267bdc2:1:2616592
+ ❯ null.<anonymous> wasm:/wasm/0267bdc2:1:2649078
+ ❯ null.<anonymous> wasm:/wasm/0267bdc2:1:2649682
+ ❯ null.<anonymous> wasm:/wasm/0267bdc2:1:5570415
+ ❯ null.<anonymous> wasm:/wasm/0267bdc2:1:4097716
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 3 passed (7)
+   Start at  06:20:45
+   Duration  60.28s (transform 3.66s, setup 31ms, import 68ms, tests 59.99s, environment 0ms)
+

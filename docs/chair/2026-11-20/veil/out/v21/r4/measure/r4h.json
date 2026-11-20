@@ -1,0 +1,655 @@
+[
+ {
+  "town": "town-none",
+  "hidden": [
+   "undefined|Smuggling operation|Criminal"
+  ],
+  "defaultVeil": "[{\"address\":\"tab:plot_hooks\",\"cls\":\"plot-hooks\",\"reason\":\"X-21d: every plot hook is hidden by default\"},{\"address\":\"block:services.criminal\",\"cls\":\"criminal-services\",\"reason\":\"X-21c: the criminal services category\"},{\"address\":\"block:defense.criminalStructure\",\"cls\":\"defense-criminal-architecture\",",
+  "criminalPowers": [],
+  "people": [
+   {
+    "id": "npc_veiled_2aa228196c0fa942",
+    "name": "Polina Titov",
+    "role": "the smuggler",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Smuggling operation",
+     "family": "Smuggling waypoint",
+     "title": "the smuggler",
+     "veiled": true
+    },
+    "ms": [
+     "Merchant Guilds"
+    ]
+   },
+   {
+    "id": "npc_gambling_den",
+    "name": "Anastasia Sidorov",
+    "role": "the house boss",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Gambling den",
+     "family": "Gambling den",
+     "title": "the house boss",
+     "veiled": false
+    },
+    "ms": [
+     "Merchant Guilds"
+    ]
+   }
+  ]
+ },
+ {
+  "town": "city-infiltrated",
+  "hidden": [
+   "undefined|Underground network|Criminal",
+   "undefined|Whisper market|Criminal",
+   "undefined|Black market|Criminal",
+   "undefined|Contract killer|Criminal"
+  ],
+  "defaultVeil": "[{\"address\":\"tab:plot_hooks\",\"cls\":\"plot-hooks\",\"reason\":\"X-21d: every plot hook is hidden by default\"},{\"address\":\"block:services.criminal\",\"cls\":\"criminal-services\",\"reason\":\"X-21c: the criminal services category\"},{\"address\":\"block:defense.criminalStructure\",\"cls\":\"defense-criminal-architecture\",",
+  "criminalPowers": [],
+  "people": [
+   {
+    "id": "npc_veiled_9784ba76b6441b88",
+    "name": "Lucretia Falco",
+    "role": "the black marketeer",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Black market",
+     "family": "Black market",
+     "title": "the black marketeer",
+     "veiled": true
+    },
+    "ms": [
+     "Merchant Guilds"
+    ]
+   },
+   {
+    "id": "npc_brothel_red_light_district",
+    "name": "Julianus Strabo",
+    "role": "the keeper of the house",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Brothel (red light district)",
+     "family": "Brothel (red light district)",
+     "title": "the madam",
+     "veiled": false
+    },
+    "ms": [
+     "Arcane Council",
+     "Merchant Guilds"
+    ]
+   },
+   {
+    "id": "npc_veiled_e2aaa6f9c2a57ce0",
+    "name": "Corvus Geta",
+    "role": "the network's spider",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Underground network",
+     "family": "Underground network",
+     "title": "the network's spider",
+     "veiled": true
+    },
+    "ms": []
+   },
+   {
+    "id": "npc_veiled_2c4b9672fef83f5c",
+    "name": "Junia Publicola",
+    "role": "the whisper broker",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Whisper market",
+     "family": "Whisper market",
+     "title": "the whisper broker",
+     "veiled": true
+    },
+    "ms": []
+   },
+   {
+    "id": "npc_veiled_1e20736255158722",
+    "name": "Valeria Opimius",
+    "role": "the killer",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Contract killer",
+     "family": "Contract killer",
+     "title": "the killer",
+     "veiled": true
+    },
+    "ms": []
+   }
+  ]
+ },
+ {
+  "town": "metropolis-none",
+  "hidden": [
+   "undefined|Smuggling network|Criminal",
+   "undefined|Thieves' guild (powerful)|Criminal",
+   "undefined|Front businesses|Criminal",
+   "undefined|Underground network|Criminal",
+   "undefined|Underground city|Criminal",
+   "undefined|Whisper market|Criminal",
+   "undefined|Assassins' guild|Criminal"
+  ],
+  "defaultVeil": "[{\"address\":\"tab:plot_hooks\",\"cls\":\"plot-hooks\",\"reason\":\"X-21d: every plot hook is hidden by default\"},{\"address\":\"block:services.criminal\",\"cls\":\"criminal-services\",\"reason\":\"X-21c: the criminal services category\"},{\"address\":\"block:defense.criminalStructure\",\"cls\":\"defense-criminal-architecture\",",
+  "criminalPowers": [
+   "undefined|criminal|hidden=undefined"
+  ],
+  "people": [
+   {
+    "id": "npc_veiled_0351566293f5d806",
+    "name": "Hyun Xiao",
+    "role": "the network's head",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Smuggling network",
+     "family": "Smuggling waypoint",
+     "title": "the network's head",
+     "veiled": true
+    },
+    "ms": [
+     "Thieves' Guild(veiled)"
+    ]
+   },
+   {
+    "id": "npc_veiled_ae72259c41f6d2c8",
+    "name": "Zixuan Yang",
+    "role": "the guildmaster of thieves",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Thieves' guild (powerful)",
+     "family": "Thieves' guild chapter",
+     "title": "the guildmaster of thieves",
+     "veiled": true
+    },
+    "ms": [
+     "Thieves' Guild(veiled)"
+    ]
+   },
+   {
+    "id": "npc_veiled_5d40bf1d199c611e",
+    "name": "Sohee Wang",
+    "role": "the undercity boss",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Underground city",
+     "family": "Underground city",
+     "title": "the undercity boss",
+     "veiled": true
+    },
+    "ms": [
+     "Thieves' Guild(veiled)"
+    ]
+   },
+   {
+    "id": "npc_gambling_district",
+    "name": "Byung An",
+    "role": "the house boss",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Gambling district",
+     "family": "Gambling den",
+     "title": "the house boss",
+     "veiled": false
+    },
+    "ms": [
+     "Thieves' Guild(veiled)",
+     "Merchant Guilds"
+    ]
+   },
+   {
+    "id": "npc_veiled_6a2ce64862e2eb38",
+    "name": "Rui Zhou",
+    "role": "the front man",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Front businesses",
+     "family": "Front businesses",
+     "title": "the front man",
+     "veiled": true
+    },
+    "ms": [
+     "Thieves' Guild(veiled)",
+     "Merchant Guilds"
+    ]
+   },
+   {
+    "id": "npc_veiled_aa3a4072e7d6f544",
+    "name": "Qian Hayashi",
+    "role": "the network's spider",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Underground network",
+     "family": "Underground network",
+     "title": "the network's spider",
+     "veiled": true
+    },
+    "ms": [
+     "Thieves' Guild(veiled)"
+    ]
+   },
+   {
+    "id": "npc_veiled_64eeba343220d7a2",
+    "name": "Jae Song",
+    "role": "the whisper broker",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Whisper market",
+     "family": "Whisper market",
+     "title": "the whisper broker",
+     "veiled": true
+    },
+    "ms": [
+     "Thieves' Guild(veiled)"
+    ]
+   },
+   {
+    "id": "npc_veiled_56bfae9e93b7f2d4",
+    "name": "Zong Pan",
+    "role": "the guild's master",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Assassins' guild",
+     "family": "Assassins' guild",
+     "title": "the guild's master",
+     "veiled": true
+    },
+    "ms": [
+     "Thieves' Guild(veiled)"
+    ]
+   },
+   {
+    "id": "npc_brothel_red_light_district",
+    "name": "Zhi Tanaka",
+    "role": "the madam",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Brothel (red light district)",
+     "family": "Brothel (red light district)",
+     "title": "the madam",
+     "veiled": false
+    },
+    "ms": [
+     "Thieves' Guild(veiled)",
+     "Merchant Guilds"
+    ]
+   },
+   {
+    "id": "npc_fighting_pits",
+    "name": "Jong Tang",
+    "role": "the pit boss",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Fighting pits",
+     "family": "Fighting pits",
+     "title": "the pit boss",
+     "veiled": false
+    },
+    "ms": [
+     "Thieves' Guild(veiled)",
+     "Merchant Guilds"
+    ]
+   }
+  ]
+ },
+ {
+  "town": "town-indebted",
+  "hidden": [],
+  "defaultVeil": "[{\"address\":\"tab:plot_hooks\",\"cls\":\"plot-hooks\",\"reason\":\"X-21d: every plot hook is hidden by default\"},{\"address\":\"block:services.criminal\",\"cls\":\"criminal-services\",\"reason\":\"X-21c: the criminal services category\"},{\"address\":\"block:defense.criminalStructure\",\"cls\":\"defense-criminal-architecture\",",
+  "criminalPowers": [],
+  "people": [
+   {
+    "id": "npc_fighting_pits",
+    "name": "Quetzalxochitl Tut",
+    "role": "the pit boss",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Fighting pits",
+     "family": "Fighting pits",
+     "title": "the pit boss",
+     "veiled": false
+    },
+    "ms": [
+     "Merchant Guilds"
+    ]
+   }
+  ]
+ },
+ {
+  "town": "city-under_siege",
+  "hidden": [
+   "undefined|Smuggling network|Criminal",
+   "undefined|Thieves' guild chapter|Criminal",
+   "undefined|Front businesses|Criminal",
+   "undefined|Rookery|Criminal",
+   "undefined|Black market|Criminal",
+   "undefined|Contract killer|Criminal"
+  ],
+  "defaultVeil": "[{\"address\":\"tab:plot_hooks\",\"cls\":\"plot-hooks\",\"reason\":\"X-21d: every plot hook is hidden by default\"},{\"address\":\"block:services.criminal\",\"cls\":\"criminal-services\",\"reason\":\"X-21c: the criminal services category\"},{\"address\":\"block:defense.criminalStructure\",\"cls\":\"defense-criminal-architecture\",",
+  "criminalPowers": [
+   "undefined|criminal|hidden=undefined"
+  ],
+  "people": [
+   {
+    "id": "npc_veiled_05323adfd428b455",
+    "name": "Hrolf Sigvaldsson",
+    "role": "the network's head",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Smuggling network",
+     "family": "Smuggling waypoint",
+     "title": "the network's head",
+     "veiled": true
+    },
+    "ms": [
+     "Thieves' Guild(veiled)"
+    ]
+   },
+   {
+    "id": "npc_veiled_33cf258d4f20d90e",
+    "name": "Magnhild Torvaldsson",
+    "role": "the guildmaster of thieves",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Thieves' guild chapter",
+     "family": "Thieves' guild chapter",
+     "title": "the guildmaster of thieves",
+     "veiled": true
+    },
+    "ms": [
+     "Thieves' Guild(veiled)"
+    ]
+   },
+   {
+    "id": "npc_veiled_e43755efd5c0fba7",
+    "name": "Walpurga Karason",
+    "role": "the rookery boss",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Rookery",
+     "family": "Rookery",
+     "title": "the rookery boss",
+     "veiled": true
+    },
+    "ms": [
+     "Thieves' Guild(veiled)"
+    ]
+   },
+   {
+    "id": "npc_veiled_8e770b6be644c89d",
+    "name": "Dag Ragnarsson",
+    "role": "the front man",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Front businesses",
+     "family": "Front businesses",
+     "title": "the front man",
+     "veiled": true
+    },
+    "ms": [
+     "Thieves' Guild(veiled)",
+     "Merchant Guilds"
+    ]
+   },
+   {
+    "id": "npc_veiled_c46c095482483bf9",
+    "name": "Vidar Raudsson",
+    "role": "the black marketeer",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Black market",
+     "family": "Black market",
+     "title": "the black marketeer",
+     "veiled": true
+    },
+    "ms": [
+     "Thieves' Guild(veiled)"
+    ]
+   },
+   {
+    "id": "npc_veiled_8b4ef6f8cce54849",
+    "name": "Þorbjörg Illugason",
+    "role": "the killer",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Contract killer",
+     "family": "Contract killer",
+     "title": "the killer",
+     "veiled": true
+    },
+    "ms": [
+     "Thieves' Guild(veiled)"
+    ]
+   },
+   {
+    "id": "npc_red_light_district",
+    "name": "Nidud Olafsson",
+    "role": "the keeper of the houses",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Red light district",
+     "family": "Red light district",
+     "title": "the district madam",
+     "veiled": false
+    },
+    "ms": [
+     "Thieves' Guild(veiled)",
+     "Merchant Guilds"
+    ]
+   }
+  ]
+ },
+ {
+  "town": "metropolis-wartime",
+  "hidden": [
+   "undefined|Smuggling network|Criminal",
+   "undefined|Thieves' guild (powerful)|Criminal",
+   "undefined|Front businesses|Criminal",
+   "undefined|Whisper market|Criminal"
+  ],
+  "defaultVeil": "[{\"address\":\"tab:plot_hooks\",\"cls\":\"plot-hooks\",\"reason\":\"X-21d: every plot hook is hidden by default\"},{\"address\":\"block:services.criminal\",\"cls\":\"criminal-services\",\"reason\":\"X-21c: the criminal services category\"},{\"address\":\"block:defense.criminalStructure\",\"cls\":\"defense-criminal-architecture\",",
+  "criminalPowers": [],
+  "people": [
+   {
+    "id": "npc_veiled_ed77e3285119bb13",
+    "name": "Christo Lazić",
+    "role": "the network's head",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Smuggling network",
+     "family": "Smuggling waypoint",
+     "title": "the network's head",
+     "veiled": true
+    },
+    "ms": [
+     "Merchant Guilds"
+    ]
+   },
+   {
+    "id": "npc_red_light_district",
+    "name": "Ekaterina Marković",
+    "role": "the district madam",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Red light district",
+     "family": "Red light district",
+     "title": "the district madam",
+     "veiled": false
+    },
+    "ms": [
+     "Grand Merchant Senate",
+     "Merchant Guilds"
+    ]
+   },
+   {
+    "id": "npc_veiled_1a050bfee838285f",
+    "name": "Bohdan Krylov",
+    "role": "the front man",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Front businesses",
+     "family": "Front businesses",
+     "title": "the front man",
+     "veiled": true
+    },
+    "ms": [
+     "Merchant Guilds"
+    ]
+   },
+   {
+    "id": "npc_gambling_district",
+    "name": "Gleb Antonović",
+    "role": "the house boss",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Gambling district",
+     "family": "Gambling den",
+     "title": "the house boss",
+     "veiled": false
+    },
+    "ms": [
+     "Merchant Guilds"
+    ]
+   },
+   {
+    "id": "npc_fighting_pits",
+    "name": "Ljubica Korolev",
+    "role": "the pit boss",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Fighting pits",
+     "family": "Fighting pits",
+     "title": "the pit boss",
+     "veiled": false
+    },
+    "ms": [
+     "Merchant Guilds"
+    ]
+   },
+   {
+    "id": "npc_veiled_b94d5c6b44502987",
+    "name": "Rumena Horvat",
+    "role": "the guildmaster of thieves",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Thieves' guild (powerful)",
+     "family": "Thieves' guild chapter",
+     "title": "the guildmaster of thieves",
+     "veiled": true
+    },
+    "ms": []
+   },
+   {
+    "id": "npc_veiled_3d9a00ef9dd4f80f",
+    "name": "Bojana Vasić",
+    "role": "the whisper broker",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Whisper market",
+     "family": "Whisper market",
+     "title": "the whisper broker",
+     "veiled": true
+    },
+    "ms": []
+   }
+  ]
+ },
+ {
+  "town": "village-none",
+  "hidden": [],
+  "defaultVeil": "[{\"address\":\"tab:plot_hooks\",\"cls\":\"plot-hooks\",\"reason\":\"X-21d: every plot hook is hidden by default\"},{\"address\":\"block:services.criminal\",\"cls\":\"criminal-services\",\"reason\":\"X-21c: the criminal services category\"},{\"address\":\"block:defense.criminalStructure\",\"cls\":\"defense-criminal-architecture\",",
+  "criminalPowers": [],
+  "people": []
+ },
+ {
+  "town": "city-politically_fractured",
+  "hidden": [],
+  "defaultVeil": "[{\"address\":\"tab:plot_hooks\",\"cls\":\"plot-hooks\",\"reason\":\"X-21d: every plot hook is hidden by default\"},{\"address\":\"block:services.criminal\",\"cls\":\"criminal-services\",\"reason\":\"X-21c: the criminal services category\"},{\"address\":\"block:defense.criminalStructure\",\"cls\":\"defense-criminal-architecture\",",
+  "criminalPowers": [],
+  "people": [
+   {
+    "id": "npc_gambling_halls",
+    "name": "Midori Kato",
+    "role": "the house boss",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Gambling halls",
+     "family": "Gambling den",
+     "title": "the house boss",
+     "veiled": false
+    },
+    "ms": [
+     "Merchant Guilds"
+    ]
+   },
+   {
+    "id": "npc_fighting_pits",
+    "name": "Ukon Ma",
+    "role": "the pit boss",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Fighting pits",
+     "family": "Fighting pits",
+     "title": "the pit boss",
+     "veiled": false
+    },
+    "ms": [
+     "Merchant Guilds"
+    ]
+   },
+   {
+    "id": "npc_red_light_district",
+    "name": "Caihong Cho",
+    "role": "the district madam",
+    "cat": "criminal",
+    "inst": {
+     "kind": "house",
+     "key": "Red light district",
+     "family": "Red light district",
+     "title": "the district madam",
+     "veiled": false
+    },
+    "ms": [
+     "Merchant Guild Council",
+     "Merchant Guilds"
+    ]
+   }
+  ]
+ }
+]

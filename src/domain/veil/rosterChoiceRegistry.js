@@ -78,9 +78,9 @@ const H = Object.freeze({
   sChoice: 'public._gallery_veil_roster_choices',
   tChoice: 'src/domain/display/gallerySecondHomes.js :: applyRosterChoices',
   sPeople: 'public._gallery_veil_holders',
-  tPeople: 'src/domain/display/gallerySecondHomes.js :: withholdHolders',
+  tPeople: 'src/domain/display/galleryVeilPeople.js :: withholdHolders',
   sRekey: 'public._gallery_veil_rekey',
-  tRekey: 'src/domain/display/gallerySecondHomes.js :: rekeyPeople',
+  tRekey: 'src/domain/display/galleryVeilPeople.js :: rekeyPeople',
   sComposed: 'public._gallery_veil_composed',
   tComposed: 'src/domain/display/gallerySecondHomes.js :: withholdComposed',
   sHomes: 'public._gallery_veil_second_homes',
@@ -101,10 +101,10 @@ export const REGISTRY_HOSTS = Object.freeze({
   [H.tAlways]: { engine: 'twin', state: 'exists', stage: 'R2' },
   [H.sChoice]: { engine: 'server', state: 'planned', stage: 'R3 (the drawn conditional rows: (a) recompose, (b) withhold)' },
   [H.tChoice]: { engine: 'twin', state: 'planned', stage: 'R3' },
-  [H.sPeople]: { engine: 'server', state: 'planned', stage: 'R4 (VR9: the holder\'s card whole with its ties)' },
-  [H.tPeople]: { engine: 'twin', state: 'planned', stage: 'R4' },
-  [H.sRekey]: { engine: 'server', state: 'planned', stage: 'R4 (VR10: every person\'s id re-keyed per read)' },
-  [H.tRekey]: { engine: 'twin', state: 'planned', stage: 'R4' },
+  [H.sPeople]: { engine: 'server', state: 'exists', stage: 'R4 (VR9: the holder\'s card whole with its ties), in 212 by VEIL-22' },
+  [H.tPeople]: { engine: 'twin', state: 'exists', stage: 'R4' },
+  [H.sRekey]: { engine: 'server', state: 'exists', stage: 'R4 (VR10: every person\'s id re-keyed per read), in 212 by VEIL-22' },
+  [H.tRekey]: { engine: 'twin', state: 'exists', stage: 'R4' },
   [H.sComposed]: { engine: 'server', state: 'planned', stage: 'R5 (VR12: every composed block by its inputs)' },
   [H.tComposed]: { engine: 'twin', state: 'planned', stage: 'R5' },
   [H.sHomes]: { engine: 'server', state: 'exists', stage: 'B, C (SUB-BRIEF-BCD, in 212 by VEIL-19)' },
@@ -237,8 +237,8 @@ const rng = (/** @type {ShortSpec} */ o) => row({ drawn: 'yes', ...o, rule: 'rng
 const recompose = (/** @type {ShortSpec} */ o) => row({ drawn: 'yes', ...o, rule: 'recompose', when: 'house-hidden', server: H.sChoice, twin: H.tChoice });
 /** (b) a drawn field withheld where a house hidden whole could have chosen it (R3). */
 const choiceWithhold = (/** @type {ShortSpec} */ o) => row({ drawn: 'yes', ...o, rule: 'withhold', when: 'house-hidden', server: H.sChoice, twin: H.tChoice });
-/** VR9: the holder's card withheld whole with its ties; every copy of a tie follows (R4). */
-const holder = (/** @type {ShortSpec} */ o) => row({ drawn: 'yes', ...o, rule: 'withhold', when: 'house-hidden', server: H.sPeople, twin: H.tPeople });
+/** VR9: the holder's card withheld whole with its ties; every copy of a tie follows (R4, built by VEIL-22). */
+const holder = (/** @type {ShortSpec} */ o) => row({ drawn: 'yes', built: true, ...o, rule: 'withhold', when: 'house-hidden', server: H.sPeople, twin: H.tPeople });
 /** VR12: a composed path; its rule and `when` are derived from its inputs (R5). */
 const composed = (/** @type {ShortSpec & { inputs: string[], compose: 'recompose' | 'withhold' }} */ o) => row({ drawn: 'yes', ...o, server: H.sComposed, twin: H.tComposed });
 
@@ -474,10 +474,14 @@ const ROWS_SPEC = [
   holder({ id: 'people.rosterCopy', path: '^factions\\[\\]\\.members\\[\\]\\.(activeConstraint|category|goal\\.(short|long)|influence|personality\\.tell|physical\\.clothes|power|presentation\\.(behaviour|disposition|impression)|role|secondaryAffiliation|settlementCondition|structuralPosition|structuralRank)$', re: true, writer: W.roster, house: P.holder,
     scope: 'a roster copy of a person follows the person\'s own card (212 (10), ruling (5)); the holder\'s copy goes whole' }),
   holder({ id: 'people.secret', path: '^npcs\\[\\]\\.secret\\b', re: true, writer: W.roster, house: P.criminal,
-    scope: 'VR4 i-9: a secret whose wording a hidden house chose (crimeSignal.js :: crimeHasThievesGuild, withTownsOwnUnderworld); withheld by class:npc:secret today, SENT on Reveal DM' }),
+    scope: 'VR4 i-9: a secret whose wording a hidden house chose (crimeSignal.js :: crimeHasThievesGuild, withTownsOwnUnderworld); R4: where a criminal house is removed whole, a secret worded by a criminal guild or the underworld leaves (both Reveal settings); the holder\'s own secret goes with its card' }),
   holder({ id: 'people.ties', path: '^relationships\\[\\] \\(only in [AB]\\)$', re: true, writer: W.ties, house: P.holder, scope: 'a tie of a withheld card leaves whole (VR9, ruling (5)); every other tie is the roster\'s composition' }),
   holder({ id: 'people.prominentRelationship', path: '^prominentRelationship\\.(full|npc1|npc2|phrasing|tension|type)$', re: true, writer: W.ties, house: P.holder, scope: 'the copy of a withheld tie follows it whole (ruling (5))' }),
   holder({ id: 'people.pressureSentence', path: 'pressureSentence', writer: W.ties, house: P.holder, scope: 'where it names a withheld tie\'s two ends or holds its words (ruling (5))' }),
+  // VR10 (R4, VEIL-22): every person's id re-keyed on every non-owner read (one salt a read, never shipped), every reference following
+  row({ id: 'people.rekey', path: '^(npcs\\[\\]\\.(id|goal\\.intent\\.(short|long)\\.target\\.id|allegiance\\.handler)|relationships\\[\\]\\.(from|to|id|npc1Id|npc2Id)|(stress|stressors)(\\[\\])?\\.cast\\.(roles\\[\\]\\.id|levers\\[\\]\\.holderId)|simulationTrace\\[\\]\\.(targetId|downstreamEffects\\[\\]\\.target)|(powerStructure\\.)?factions\\[\\]\\.members\\[\\]\\.id)$', re: true,
+    writer: W.roster, house: P.any, rule: 'recompose', when: 'always', drawn: 'yes', server: H.sRekey, twin: H.tRekey, built: true,
+    scope: 'VR10: a person\'s id spells its house or power (npc_<house slug>, npc_power_, npc_veiled_); re-keyed per read under a salt that never ships, consistent within the payload (the reference census of born towns, out/v21/r4/measure), so the id tells nothing' }),
 ];
 
 /**

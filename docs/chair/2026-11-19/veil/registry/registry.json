@@ -283,5 +283,55 @@
     "path": "^(stress|stressors)\\.cast\\.stakes\\[\\](\\.(factionId|reason|stake))?$",
     "rule": "withhold",
     "by": "src/domain/crisis/crisisCast.js :: deriveStakes"
+  },
+  {
+    "path": "^(stress|stressors)\\.cast\\.roles\\[\\]( \\(only in [AB]\\)|\\.name)$",
+    "rule": "withhold",
+    "by": "src/domain/crisis/crisisCast.js :: deriveStakes"
+  },
+  {
+    "path": "^(stress|stressors)\\.cast\\.levers\\[\\]\\.(holderId|holderName)$",
+    "rule": "withhold",
+    "by": "src/domain/crisis/crisisCast.js :: deriveStakes"
+  },
+  {
+    "path": "^npcs\\[\\] \\(only in [AB]\\)$",
+    "rule": "withhold",
+    "by": "src/generators/npcGenerator.js :: mergeNPCLists"
+  },
+  {
+    "path": "^npcs\\[\\]\\.(name|role|title|category|gender|influence|power|secondaryAffiliation|goal\\.(short|long)|personality\\.(dominant|flaw|modifier|speech|tell)|physical\\.(age|build|clothes|feature)|presentation\\.(behaviour|disposition|impression))$",
+    "rule": "withhold",
+    "by": "src/generators/npcGenerator.js :: mergeNPCLists"
+  },
+  {
+    "path": "^factions\\[\\]\\.members\\[\\]\\.(activeConstraint|category|goal\\.(short|long)|influence|personality\\.tell|physical\\.clothes|power|presentation\\.(behaviour|disposition|impression)|role|secondaryAffiliation|settlementCondition|structuralPosition|structuralRank)$",
+    "rule": "withhold",
+    "by": "src/generators/npcGenerator.js :: mergeNPCLists"
+  },
+  {
+    "path": "^npcs\\[\\]\\.secret\\b",
+    "rule": "withhold",
+    "by": "src/generators/npcGenerator.js :: mergeNPCLists"
+  },
+  {
+    "path": "^relationships\\[\\] \\(only in [AB]\\)$",
+    "rule": "withhold",
+    "by": "src/generators/people/ties.js :: drawTies"
+  },
+  {
+    "path": "^prominentRelationship\\.(full|npc1|npc2|phrasing|tension|type)$",
+    "rule": "withhold",
+    "by": "src/generators/people/ties.js :: drawTies"
+  },
+  {
+    "path": "^pressureSentence$",
+    "rule": "withhold",
+    "by": "src/generators/people/ties.js :: drawTies"
+  },
+  {
+    "path": "^(npcs\\[\\]\\.(id|goal\\.intent\\.(short|long)\\.target\\.id|allegiance\\.handler)|relationships\\[\\]\\.(from|to|id|npc1Id|npc2Id)|(stress|stressors)(\\[\\])?\\.cast\\.(roles\\[\\]\\.id|levers\\[\\]\\.holderId)|simulationTrace\\[\\]\\.(targetId|downstreamEffects\\[\\]\\.target)|(powerStructure\\.)?factions\\[\\]\\.members\\[\\]\\.id)$",
+    "rule": "recompose",
+    "by": "src/generators/npcGenerator.js :: mergeNPCLists"
   }
 ]

@@ -19,6 +19,8 @@
 --
 -- VEIL-21 (R2): 212 also restates 211's _gallery_veil (it goes back here, verbatim, with the six) and creates four
 -- helpers (_gallery_veil_minus_at, _each_minus_at, _cast, _withhold_always), dropped in section 2.
+-- VEIL-22 (R4): 212 creates seven more (_gallery_veil_rekey_id, _rekey_ref, _rekey_at, _rekey_each, _rekey, _rekey_served,
+-- _holders), dropped in section 2 (_gallery_veil, which calls them, goes back to 211's statement in section 1 first).
 --
 -- NOT reversed, because there is nothing to: no stored row was written by 212.
 
@@ -429,6 +431,13 @@ begin
 end $$;
 
 -- ── 2. the helpers 212 created, by signature (thirty-one: COHERENCE-VEIL-10 replaced the eighth seat's sweep, _folded_name, _names and _sweep, by the name search's fourteen, _name_* and _named; COHERENCE-VEIL-11 added _case_fold; COHERENCE-VEIL-12 added _name_bound and _name_pad, and _clauses, which VEIL-15 replaced by _runs; VEIL-16 added _name_json and _name_tokens, and _name_near takes a range of tokens) ──
+drop function if exists public._gallery_veil_holders(jsonb, jsonb, jsonb);
+drop function if exists public._gallery_veil_rekey_served(jsonb, jsonb, text);
+drop function if exists public._gallery_veil_rekey(jsonb, text);
+drop function if exists public._gallery_veil_rekey_each(jsonb, text[], text[], jsonb, text);
+drop function if exists public._gallery_veil_rekey_at(jsonb, text[], jsonb, text);
+drop function if exists public._gallery_veil_rekey_ref(jsonb, jsonb, text);
+drop function if exists public._gallery_veil_rekey_id(text, text, text);
 drop function if exists public._gallery_veil_withhold_always(jsonb);
 drop function if exists public._gallery_veil_cast(jsonb, text[], text[], text[]);
 drop function if exists public._gallery_veil_each_minus_at(jsonb, text[], text[]);

@@ -1,0 +1,117 @@
+gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.0.lock.shared as PID 11926 after 0 poll(s); 2 shared holder(s) live, worker cap <= 2.
+
+ RUN  v4.1.8 /home/user/wt/r4
+
+ ❯ tests/lint/rosterChoiceRegistry.walker.test.js (11 tests | 1 failed) 288ms
+     × ARM D: a BUILT row's symbols exist and each rule names its row id 230ms
+ ❯ tests/security/galleryVeilPeople.pglite.test.js (7 tests | 2 failed) 80924ms
+     × VR9: on a share hiding a house whole, its holder's card, ties and every copy leave every read (both shapes, Reveal DM off and on) 398ms
+     × THE TWIN: 212 :: _gallery_veil_rekey and rekeyPeople byte-equal under one salt; the twin's projection equals the gallery read on the people's paths once each side's ids are relabelled 6260ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/rosterChoiceRegistry.walker.test.js > ARMS C and D: every row is bound to the server and the twin > ARM D: a BUILT row's symbols exist and each rule names its row id
+AssertionError: expected [ …(4) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "cast.levers.holder: public._gallery_veil_holders does not name it (-- registry: cast.levers.holder)",
++   "cast.levers.holder: src/domain/display/gallerySecondHomes.js :: withholdHolders does not name it (// registry: cast.levers.holder)",
++   "people.card: public._gallery_veil_holders does not name it (-- registry: people.card)",
++   "people.card: src/domain/display/gallerySecondHomes.js :: withholdHolders does not name it (// registry: people.card)",
++ ]
+
+ ❯ tests/lint/rosterChoiceRegistry.walker.test.js:242:17
+    240|       return out;
+    241|     });
+    242|     expect(bad).toEqual([]);
+       |                 ^
+    243|   });
+    244| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/security/galleryVeilPeople.pglite.test.js > R4: the people — the holder withheld whole with its ties (VR9), every id re-keyed per read (VR10), through the server > VR9: on a share hiding a house whole, its holder's card, ties and every copy leave every read (both shapes, Reveal DM off and on)
+AssertionError: expected [ …(8) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "metropolis-calm-2 new +DM gallery: npcs[].goal.short names the holder Mechthild Maier",
++   "metropolis-calm-2 new +DM gallery: npcs[].goal.short names the holder Ottilie Reich",
++   "metropolis-calm-2 new +DM import: npcs[].goal.short names the holder Mechthild Maier",
++   "metropolis-calm-2 new +DM import: npcs[].goal.short names the holder Ottilie Reich",
++   "metropolis-calm-2 old +DM gallery: npcs[].goal.short names the holder Mechthild Maier",
++   "metropolis-calm-2 old +DM gallery: npcs[].goal.short names the holder Ottilie Reich",
++   "metropolis-calm-2 old +DM import: npcs[].goal.short names the holder Mechthild Maier",
++   "metropolis-calm-2 old +DM import: npcs[].goal.short names the holder Ottilie Reich",
++ ]
+
+ ❯ tests/security/galleryVeilPeople.pglite.test.js:170:31
+    168|       }
+    169|     }
+    170|     expect(sent.slice(0, 40)).toEqual([]);
+       |                               ^
+    171|     expect(sent.length).toBe(0);
+    172|   }, ARM_TIMEOUT_MS);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/security/galleryVeilPeople.pglite.test.js > R4: the people — the holder withheld whole with its ties (VR9), every id re-keyed per read (VR10), through the server > THE TWIN: 212 :: _gallery_veil_rekey and rekeyPeople byte-equal under one salt; the twin's projection equals the gallery read on the people's paths once each side's ids are relabelled
+AssertionError: expected [ …(32) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "town-calm-0 new marked: the re-key differs",
++   "town-calm-0 new marked +DM: the re-key differs",
++   "town-calm-0 new unmarked: the re-key differs",
++   "town-calm-0 new unmarked +DM: the re-key differs",
++   "town-calm-0 old marked: the re-key differs",
++   "town-calm-0 old marked +DM: the re-key differs",
++   "town-calm-0 old unmarked: the re-key differs",
++   "town-calm-0 old unmarked +DM: the re-key differs",
++   "city-infiltrated-1 new marked: the re-key differs",
++   "city-infiltrated-1 new marked +DM: the re-key differs",
++   "city-infiltrated-1 new unmarked: the re-key differs",
++   "city-infiltrated-1 new unmarked +DM: the re-key differs",
++   "city-infiltrated-1 old marked: the re-key differs",
++   "city-infiltrated-1 old marked +DM: the re-key differs",
++   "city-infiltrated-1 old unmarked: the re-key differs",
++   "city-infiltrated-1 old unmarked +DM: the re-key differs",
++   "metropolis-calm-2 new marked: the re-key differs",
++   "metropolis-calm-2 new marked +DM: the re-key differs",
++   "metropolis-calm-2 new unmarked: the re-key differs",
++   "metropolis-calm-2 new unmarked +DM: the re-key differs",
++   "metropolis-calm-2 old marked: the re-key differs",
++   "metropolis-calm-2 old marked +DM: the re-key differs",
++   "metropolis-calm-2 old unmarked: the re-key differs",
++   "metropolis-calm-2 old unmarked +DM: the re-key differs",
++   "city-under_siege-3 new marked: the re-key differs",
++   "city-under_siege-3 new marked +DM: the re-key differs",
++   "city-under_siege-3 new unmarked: the re-key differs",
++   "city-under_siege-3 new unmarked +DM: the re-key differs",
++   "city-under_siege-3 old marked: the re-key differs",
++   "city-under_siege-3 old marked +DM: the re-key differs",
++   "city-under_siege-3 old unmarked: the re-key differs",
++   "city-under_siege-3 old unmarked +DM: the re-key differs",
++ ]
+
+ ❯ tests/security/galleryVeilPeople.pglite.test.js:253:20
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  3 failed | 15 passed (18)
+   Start at  06:28:03
+   Duration  81.17s (transform 4.41s, setup 55ms, import 1.40s, tests 81.21s, environment 0ms)
+

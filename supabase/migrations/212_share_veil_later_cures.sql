@@ -234,6 +234,8 @@
 --       reader and every importer of such a share received both.
 --
 -- VEIL-21 (R2): NEW, four more (_gallery_veil_minus_at, _each_minus_at, _cast, _withhold_always); RESTATED, _gallery_veil.
+-- VEIL-22 (R4): NEW, seven more (_gallery_veil_rekey_id, _rekey_ref, _rekey_at, _rekey_each, _rekey, _rekey_served,
+-- _holders: the section "R4: the people"); _gallery_veil (as R2 restated it) calls them.
 -- NEW: thirty-one helpers (_gallery_veil_pieces, _runs, _embeds, _case_fold, _fold, _hidden_name, _sources, _tie_pieces,
 -- _second_homes, _member_revealed, _roster_members, _tie_roles, _roster_splice; and the name search's eighteen: _name_sep, _name_bound,
 -- _name_pad, _name_case, _name_prep, _name_fold, _name_needle, _name_search, _name_ready, _name_json, _name_hits, _name_hit, _named,
@@ -2070,6 +2072,286 @@ begin
   return s;
 end $$;
 
+-- R4: the people ───────────────────────────────────────────────────────────────────────────────────────────────────
+-- VEIL-22 (R4; SUB-BRIEF-VR7 point 5, stage R4; the chair's VR9, VR10, VR21, each vetoable by the owner). Two hosts of
+-- the roster-choice registry (src/domain/veil/rosterChoiceRegistry.js), each rule naming its row: _gallery_veil_holders
+-- (VR9: where a house is hidden whole, the person who holds it is withheld WHOLE WITH ITS TIES, never blanked) and
+-- _gallery_veil_rekey (VR10: on every non-owner read every person's id is re-keyed under one salt a read, and every
+-- reference in the payload follows). _gallery_veil runs both on the veiled body immediately before
+-- _gallery_veil_withhold_always (whose crisis cast matches a role of kind 'npc' BY ID against the served people, so the
+-- ids are re-keyed first), the re-key on an unmarked body too, and re-keys the served marker's person keys with the same
+-- salt. Fixed-path passes: no text of the document is scanned. Twin: galleryVeilPeople.js :: withholdHolders,
+-- rekeyPeople, rule for rule.
+
+-- [212: NEW] public._gallery_veil_rekey_id
+-- VEIL-22 (R4; VR10): an id re-keyed under the read's salt: `prefix` and the first 16 hex of sha256(salt '|' id), the
+-- text as UTF-8. One salt a read: one id is one key within a payload, another on the next read; the salt never ships,
+-- so a key cannot be hashed back to the slug of a house or a power. galleryVeilPeople.js :: rekeyId.
+create or replace function public._gallery_veil_rekey_id(prefix text, v text, salt text)
+returns text language sql immutable as $$
+  select prefix || left(encode(sha256(convert_to(salt || '|' || v, 'UTF8')), 'hex'), 16)
+$$;
+
+-- [212: NEW] public._gallery_veil_rekey_ref
+-- VEIL-22 (R4; VR10): a reference to a person: a string that is a person's id (`ids`, the document's) or spelled in a
+-- person id's form (`npc_`: a person no longer served, so no form survives) is re-keyed; anything else as it was.
+create or replace function public._gallery_veil_rekey_ref(v jsonb, ids jsonb, salt text)
+returns jsonb language sql immutable as $$
+  select case when jsonb_typeof(v) = 'string' and (ids ? (v #>> '{}') or left(v #>> '{}', 4) = 'npc_')
+              then to_jsonb(public._gallery_veil_rekey_id('npc_', v #>> '{}', salt)) else v end
+$$;
+
+-- [212: NEW] public._gallery_veil_rekey_at
+-- VEIL-22 (R4; VR10): the reference at each of `paths` inside `x` re-keyed (a path that does not hold a string as it was).
+create or replace function public._gallery_veil_rekey_at(x jsonb, paths text[], ids jsonb, salt text)
+returns jsonb language plpgsql immutable as $$
+declare
+  s jsonb := x;
+  p text;
+begin
+  if jsonb_typeof(s) is distinct from 'object' then return x; end if;
+  foreach p in array paths loop
+    if jsonb_typeof(s #> string_to_array(p, '.')) = 'string' then
+      s := jsonb_set(s, string_to_array(p, '.'), public._gallery_veil_rekey_ref(s #> string_to_array(p, '.'), ids, salt), false);
+    end if;
+  end loop;
+  return s;
+end $$;
+
+-- [212: NEW] public._gallery_veil_rekey_each
+-- VEIL-22 (R4; VR10): each object of the array at `arr` with its references at `paths` re-keyed, in order.
+create or replace function public._gallery_veil_rekey_each(s jsonb, arr text[], paths text[], ids jsonb, salt text)
+returns jsonb language sql immutable as $$
+  select case when jsonb_typeof(s #> arr) = 'array' then jsonb_set(s, arr, (
+      select coalesce(jsonb_agg(public._gallery_veil_rekey_at(e, paths, ids, salt) order by o), '[]')
+        from jsonb_array_elements(s #> arr) with ordinality x(e, o))) else s end
+$$;
+
+-- [212: NEW] public._gallery_veil_rekey
+-- VEIL-22 (R4; the chair's VR10, MEASURED: no non-owner view needs a person id stable across reads, an import is always
+-- a new save): every person's id re-keyed under `salt`, and every reference the served payload holds to a person
+-- follows: the reference census of born towns through the server (both stored shapes, Reveal DM off and on; out/v21/r4/
+-- measure): ties' ends and their own ids (a tie's id spells its ends' ids), the crisis cast's roles and levers, a goal's
+-- target, an allegiance's handler, the simulation trace's targets, and master's roster copies. No stored id and no form
+-- (`npc_veiled_`, `npc_power_`, `npc_<house slug>`) survives. galleryVeilPeople.js :: rekeyPeople.
+create or replace function public._gallery_veil_rekey(doc jsonb, salt text)
+returns jsonb language plpgsql immutable as $$
+declare
+  s jsonb := doc;
+  ids jsonb;
+  k text;
+  pth text[];
+begin
+  if jsonb_typeof(s) is distinct from 'object' then return doc; end if;
+  ids := coalesce((select jsonb_object_agg(c.card ->> 'id', true) from public._gallery_veil_cards(s, 'npc') c
+                    where jsonb_typeof(c.card -> 'id') = 'string'), '{}');
+  -- registry: people.rekey (the cards: each id; a goal's targets; the handler)
+  s := public._gallery_veil_rekey_each(s, '{npcs}', array['id', 'goal.intent.short.target.id', 'goal.intent.long.target.id', 'allegiance.handler'], ids, salt);
+  -- registry: people.rekey (the ties: their ends, either shape; a tie's own id, which spells its ends', re-keyed whole)
+  s := public._gallery_veil_rekey_each(s, '{relationships}', array['from', 'to', 'npc1Id', 'npc2Id'], ids, salt);
+  if jsonb_typeof(s -> 'relationships') = 'array' then
+    s := jsonb_set(s, '{relationships}', (select coalesce(jsonb_agg(case when jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'id') = 'string'
+        then jsonb_set(e, '{id}', to_jsonb(public._gallery_veil_rekey_id('tie_', e ->> 'id', salt))) else e end order by o), '[]')
+      from jsonb_array_elements(s -> 'relationships') with ordinality x(e, o)));
+  end if;
+  -- registry: people.rekey (the crisis cast, both copies, one crisis or a list: a role's person, a lever's holder)
+  foreach k in array array['stress', 'stressors'] loop
+    if jsonb_typeof(s -> k) = 'object' then
+      s := jsonb_set(s, array[k], public._gallery_veil_rekey_each(public._gallery_veil_rekey_each(s -> k, '{cast,roles}', array['id'], ids, salt), '{cast,levers}', array['holderId'], ids, salt));
+    elsif jsonb_typeof(s -> k) = 'array' then
+      s := jsonb_set(s, array[k], (select coalesce(jsonb_agg(case when jsonb_typeof(e) = 'object'
+          then public._gallery_veil_rekey_each(public._gallery_veil_rekey_each(e, '{cast,roles}', array['id'], ids, salt), '{cast,levers}', array['holderId'], ids, salt)
+          else e end order by o), '[]') from jsonb_array_elements(s -> k) with ordinality x(e, o)));
+    end if;
+  end loop;
+  -- registry: people.rekey (the simulation trace's targets)
+  s := public._gallery_veil_rekey_each(s, '{simulationTrace}', array['targetId'], ids, salt);
+  if jsonb_typeof(s -> 'simulationTrace') = 'array' then
+    s := jsonb_set(s, '{simulationTrace}', (select coalesce(jsonb_agg(case when jsonb_typeof(e) = 'object'
+        then public._gallery_veil_rekey_each(e, '{downstreamEffects}', array['target'], ids, salt) else e end order by o), '[]')
+      from jsonb_array_elements(s -> 'simulationTrace') with ordinality x(e, o)));
+  end if;
+  -- registry: people.rekey (master's roster copies: a power's member by id, either list)
+  foreach k in array array['factions', 'powerStructure.factions'] loop
+    pth := string_to_array(k, '.');
+    if jsonb_typeof(s #> pth) = 'array' then
+      s := jsonb_set(s, pth, (select coalesce(jsonb_agg(case when jsonb_typeof(f) = 'object'
+          then public._gallery_veil_rekey_each(f, '{members}', array['id'], ids, salt) else f end order by o), '[]')
+        from jsonb_array_elements(s #> pth) with ordinality x(f, o)));
+    end if;
+  end loop;
+  return s;
+end $$;
+
+-- [212: NEW] public._gallery_veil_rekey_served
+-- VEIL-22 (R4; VR10): the served marker's person entries (a person's own revealDm / allowImport, keyed by the person's
+-- member key, _gallery_veil_served) under the read's salt: an id key re-keyed as the card's id is, a name key
+-- (`npc.<name>`, a card with no id) as it was, and an entry kept only where its key names a person the body serves (the
+-- page looks a person's entry up by the served card; a withheld person's entry would name what the body does not).
+create or replace function public._gallery_veil_rekey_served(served jsonb, body jsonb, salt text)
+returns jsonb language sql immutable as $$
+  select case when jsonb_typeof(served) <> 'object' then served else
+    coalesce((select jsonb_object_agg(q.k2, q.v) from (
+        select case when k = '$veil' or left(k, 4) = 'npc.' then k else public._gallery_veil_rekey_id('npc_', k, salt) end as k2, v
+          from jsonb_each(served) e(k, v)) q
+      where q.k2 = '$veil' or exists (select 1 from public._gallery_veil_cards(case when jsonb_typeof(body) = 'object' then body else '{}' end, 'npc') c
+                                       where public._gallery_veil_npc_id(c.card) = q.k2)), '{}') end
+$$;
+
+-- [212: NEW] public._gallery_veil_holders
+-- VEIL-22 (R4; the chair's VR9, MEASURED: 0 of 4,966 ordinary people are role-less on an unveiled page, so a blank is a
+-- tell): where a house is hidden whole on this read (`res`: the resolved veil, a card address the data puts in the class,
+-- as _gallery_veil_apply decides it), the person who HOLDS it is withheld WHOLE WITH ITS TIES, never blanked. A holder:
+-- a person (of `pub`, the projection before the veil) whose house identity (_gallery_veil_npc_house) names a house
+-- removed whole (its name, its catalogue identity, the label of a nameless one); where the identity cannot be read, or
+-- names no house still served, a card minted `npc_veiled_` or of category 'criminal' (where the veil cannot be sure, it
+-- withholds). With the card (its category with it) go: every tie it is an end of, by id or by name; every copy of such a
+-- tie (prominentRelationship naming it or holding a gone tie's words; pressureSentence naming it or holding them); its
+-- roster copies; a crisis cast's role and lever naming it; another person's goal aimed at it or naming it (the handler's
+-- serve-the-patron line), and an allegiance it handles. Where a criminal house is removed whole, a person's secret worded by a criminal guild or the underworld goes
+-- (registry: people.secret). What is left stays dense, in order (VR21). galleryVeilPeople.js :: withholdHolders.
+create or replace function public._gallery_veil_holders(doc jsonb, pub jsonb, res jsonb)
+returns jsonb language plpgsql immutable as $$
+declare
+  s jsonb := doc;
+  hides jsonb := coalesce(res -> 'cards', '{}');
+  gone text[];
+  opens text[];
+  crim boolean;
+  hids text[];
+  hnames text[];
+  words text[];
+  pr jsonb;
+  k text;
+  pth text[];
+begin
+  if jsonb_typeof(s) is distinct from 'object' or jsonb_typeof(hides) is distinct from 'object' or hides = '{}' then return doc; end if;
+  -- the houses removed whole (_gallery_veil_apply's decision, read again from the same projection) and those still served
+  with h as (
+    select c.card, coalesce((hides ? public._gallery_veil_inst_id(c.card)) and public._gallery_veil_house(c.card), false) as whole
+      from public._gallery_veil_cards(case when jsonb_typeof(pub) = 'object' then pub else '{}' end, 'institution') c
+  )
+  select array(select v from h, lateral (select public._gallery_veil_str(h.card -> 'name') union all select public._gallery_veil_str(h.card -> 'catalogId')
+                 union all select public._gallery_veil_str(h.card -> 'label') where public._gallery_veil_str(h.card -> 'name') = '') x(v) where h.whole and v <> ''),
+         array(select public._gallery_veil_str(h.card -> 'name') from h where not h.whole and public._gallery_veil_str(h.card -> 'name') <> ''),
+         coalesce((select bool_or(translate(public._gallery_veil_str(h.card -> 'category'), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'criminal'
+                    or translate(public._gallery_veil_str(h.card -> 'priorityCategory'), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'criminal') from h where h.whole), false)
+    into gone, opens, crim;
+  if cardinality(gone) = 0 and not crim then return doc; end if;
+  -- registry: people.entry
+  -- registry: people.card (the holders, read from the projection before the veil touched a card)
+  with p as (
+    select c.card, public._gallery_veil_npc_house(c.card) as house
+      from public._gallery_veil_cards(case when jsonb_typeof(pub) = 'object' then pub else '{}' end, 'npc') c
+  ), hp as (
+    select card from p
+     where coalesce(p.house, '') <> '' and p.house = any(gone)
+        or ((coalesce(p.house, '') = '' or not (p.house = any(opens)))
+            and (left(public._gallery_veil_str(card -> 'id'), 11) = 'npc_veiled_'
+                 or translate(public._gallery_veil_str(card -> 'category'), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'criminal'))
+  )
+  select array(select card ->> 'id' from hp where jsonb_typeof(card -> 'id') = 'string'),
+         array(select card ->> 'name' from hp where jsonb_typeof(card -> 'name') = 'string' and (card ->> 'name') <> '')
+    into hids, hnames;
+  if cardinality(hids) + cardinality(hnames) > 0 then
+    -- registry: people.entry
+    -- registry: people.card (the card whole, its category with it; a card with no id by its name)
+    if jsonb_typeof(s -> 'npcs') = 'array' then
+      s := jsonb_set(s, '{npcs}', (select coalesce(jsonb_agg(e order by o), '[]') from jsonb_array_elements(s -> 'npcs') with ordinality x(e, o)
+        where not (jsonb_typeof(e) = 'object' and (case when jsonb_typeof(e -> 'id') = 'string' then (e ->> 'id') = any(hids)
+                                                         else jsonb_typeof(e -> 'name') = 'string' and (e ->> 'name') = any(hnames) end))));
+    end if;
+    -- registry: people.ties (a tie the holder is an end of leaves whole, by id or by name, either shape); its words kept
+    -- for the copies below
+    if jsonb_typeof(s -> 'relationships') = 'array' then
+      select coalesce(array_agg(w) filter (where w <> ''), '{}') into words
+        from jsonb_array_elements(s -> 'relationships') e,
+             lateral (select public._gallery_veil_str(e -> 'description') union all select public._gallery_veil_str(e -> 'tension')) y(w)
+       where jsonb_typeof(e) = 'object' and (public._gallery_veil_str(e -> 'from') = any(hids) or public._gallery_veil_str(e -> 'to') = any(hids)
+              or public._gallery_veil_str(e -> 'npc1Id') = any(hids) or public._gallery_veil_str(e -> 'npc2Id') = any(hids)
+              or public._gallery_veil_str(e -> 'npc1Name') = any(hnames) or public._gallery_veil_str(e -> 'npc2Name') = any(hnames));
+      s := jsonb_set(s, '{relationships}', (select coalesce(jsonb_agg(e order by o), '[]') from jsonb_array_elements(s -> 'relationships') with ordinality x(e, o)
+        where not (jsonb_typeof(e) = 'object' and (public._gallery_veil_str(e -> 'from') = any(hids) or public._gallery_veil_str(e -> 'to') = any(hids)
+              or public._gallery_veil_str(e -> 'npc1Id') = any(hids) or public._gallery_veil_str(e -> 'npc2Id') = any(hids)
+              or public._gallery_veil_str(e -> 'npc1Name') = any(hnames) or public._gallery_veil_str(e -> 'npc2Name') = any(hnames)))));
+    end if;
+    words := coalesce(words, '{}');
+    -- registry: people.prominentRelationship (the copy of a gone tie leaves whole: it names the holder, or holds the tie's words)
+    pr := s -> 'prominentRelationship';
+    if jsonb_typeof(pr) = 'object' and (public._gallery_veil_str(pr -> 'npc1') = any(hnames) or public._gallery_veil_str(pr -> 'npc2') = any(hnames)
+        or public._gallery_veil_str(pr -> 'full') = any(words) or public._gallery_veil_str(pr -> 'tension') = any(words)) then
+      s := s - 'prominentRelationship';
+      words := words || array_remove(array[public._gallery_veil_str(pr -> 'full'), public._gallery_veil_str(pr -> 'tension'), public._gallery_veil_str(pr -> 'phrasing')], '');
+    end if;
+    -- registry: people.pressureSentence (it names a holder, or is a gone tie's words)
+    if jsonb_typeof(s -> 'pressureSentence') = 'string' and ((s ->> 'pressureSentence') = any(words)
+        or exists (select 1 from unnest(hnames) nm where position(nm in (s ->> 'pressureSentence')) > 0)) then
+      s := s - 'pressureSentence';
+    end if;
+    -- registry: people.rosterCopy (a power's member naming the holder, by id or by name, either list)
+    foreach k in array array['factions', 'powerStructure.factions'] loop
+      pth := string_to_array(k, '.');
+      if jsonb_typeof(s #> pth) = 'array' then
+        s := jsonb_set(s, pth, (select coalesce(jsonb_agg(case when jsonb_typeof(f) = 'object' and jsonb_typeof(f -> 'members') = 'array'
+            then jsonb_set(f, '{members}', (select coalesce(jsonb_agg(m order by mo), '[]') from jsonb_array_elements(f -> 'members') with ordinality y(m, mo)
+              where not (case when jsonb_typeof(m) = 'object' then public._gallery_veil_str(m -> 'id') = any(hids) or public._gallery_veil_str(m -> 'name') = any(hnames)
+                              when jsonb_typeof(m) = 'string' then (m #>> '{}') = any(hnames) else false end)))
+            else f end order by o), '[]') from jsonb_array_elements(s #> pth) with ordinality x(f, o)));
+      end if;
+    end loop;
+    -- registry: cast.roles.entry
+    -- registry: cast.levers.holder (a role or a lever naming the holder, by id or by name; both copies)
+    foreach k in array array['stress', 'stressors'] loop
+      if jsonb_typeof(s -> k) in ('object', 'array') then
+        s := jsonb_set(s, array[k], (select case when jsonb_typeof(s -> k) = 'object' then r -> 0 else r end from (
+          select coalesce(jsonb_agg(case when jsonb_typeof(c) = 'object' and jsonb_typeof(c -> 'cast') = 'object' then jsonb_set(c, '{cast}', (c -> 'cast')
+              || case when jsonb_typeof(c #> '{cast,roles}') = 'array' then jsonb_build_object('roles', (select coalesce(jsonb_agg(e order by o), '[]')
+                   from jsonb_array_elements(c #> '{cast,roles}') with ordinality y(e, o)
+                  where not (jsonb_typeof(e) = 'object' and (public._gallery_veil_str(e -> 'id') = any(hids) or public._gallery_veil_str(e -> 'name') = any(hnames))))) else '{}'::jsonb end
+              || case when jsonb_typeof(c #> '{cast,levers}') = 'array' then jsonb_build_object('levers', (select coalesce(jsonb_agg(e order by o), '[]')
+                   from jsonb_array_elements(c #> '{cast,levers}') with ordinality y(e, o)
+                  where not (jsonb_typeof(e) = 'object' and (public._gallery_veil_str(e -> 'holderId') = any(hids) or public._gallery_veil_str(e -> 'holderName') = any(hnames))))) else '{}'::jsonb end)
+            else c end order by o), '[]') as r
+            from jsonb_array_elements(case when jsonb_typeof(s -> k) = 'object' then jsonb_build_array(s -> k) else s -> k end) with ordinality x(c, o)) q));
+      end if;
+    end loop;
+    -- registry: people.ties (another person's goal aimed at the holder or naming it, side by side, its intent with it; an
+    -- allegiance the holder handles)
+    if jsonb_typeof(s -> 'npcs') = 'array' then
+      s := jsonb_set(s, '{npcs}', (select coalesce(jsonb_agg(case when jsonb_typeof(e) <> 'object' then e else (
+          select case when jsonb_typeof(n -> 'allegiance') = 'object' and public._gallery_veil_str(n #> '{allegiance,handler}') = any(hids) then n - 'allegiance' else n end
+            from (select case when jsonb_typeof(e -> 'goal') = 'object' and (a.sh or a.lo)
+                    then jsonb_set(e, '{goal}', (e -> 'goal') - case when a.sh then 'short' else '' end - case when a.lo then 'long' else '' end
+                      || case when jsonb_typeof(e #> '{goal,intent}') = 'object' then jsonb_build_object('intent', (e #> '{goal,intent}')
+                           - case when a.sh then 'short' else '' end - case when a.lo then 'long' else '' end) else '{}'::jsonb end)
+                    else e end as n
+                    from (select public._gallery_veil_str(e #> '{goal,intent,short,target,id}') = any(hids)
+                                 or exists (select 1 from unnest(hnames) nm where position(nm in public._gallery_veil_str(e #> '{goal,short}')) > 0) as sh,
+                                 public._gallery_veil_str(e #> '{goal,intent,long,target,id}') = any(hids)
+                                 or exists (select 1 from unnest(hnames) nm where position(nm in public._gallery_veil_str(e #> '{goal,long}')) > 0) as lo) a) g) end
+        order by o), '[]') from jsonb_array_elements(s -> 'npcs') with ordinality x(e, o)));
+    end if;
+  end if;
+  -- registry: people.secret (where a criminal house is removed whole: a secret worded by a criminal guild or the
+  -- underworld, crimeSignal.js :: withTownsOwnUnderworld's choice)
+  if crim and jsonb_typeof(s -> 'npcs') = 'array' then
+    s := jsonb_set(s, '{npcs}', (select coalesce(jsonb_agg(case when jsonb_typeof(e) = 'object' and (
+        (jsonb_typeof(e -> 'secret') = 'string' and (e ->> 'secret') ~* '(thieves[''’]?|criminal) guild|underworld')
+        or (jsonb_typeof(e #> '{secret,what}') = 'string' and (e #>> '{secret,what}') ~* '(thieves[''’]?|criminal) guild|underworld'))
+      then e - 'secret' else e end order by o), '[]') from jsonb_array_elements(s -> 'npcs') with ordinality x(e, o)));
+  end if;
+  return s;
+end $$;
+
+-- VR27 (as amended): a helper this lane adds, called only inside the definer reads, is revoked by name
+revoke execute on function public._gallery_veil_rekey_id(text, text, text) from public, anon, authenticated;
+revoke execute on function public._gallery_veil_rekey_ref(jsonb, jsonb, text) from public, anon, authenticated;
+revoke execute on function public._gallery_veil_rekey_at(jsonb, text[], jsonb, text) from public, anon, authenticated;
+revoke execute on function public._gallery_veil_rekey_each(jsonb, text[], text[], jsonb, text) from public, anon, authenticated;
+revoke execute on function public._gallery_veil_rekey(jsonb, text) from public, anon, authenticated;
+revoke execute on function public._gallery_veil_rekey_served(jsonb, jsonb, text) from public, anon, authenticated;
+revoke execute on function public._gallery_veil_holders(jsonb, jsonb, jsonb) from public, anon, authenticated;
+
 -- [212: RESTATED (211's statement, with the cure)] public._gallery_veil
 -- VEIL-21 (R2): 211's statement, and _gallery_veil_withhold_always run on every body it returns: last on the veiled body,
 -- and, where the share is unmarked (no veil: 211 returned no body and the reads served their projection as before), on
@@ -2087,15 +2369,19 @@ declare
   people text[] := array(select distinct public._gallery_veil_npc_id(c.card) from public._gallery_veil_cards(doc, 'npc') c);
   res jsonb;
   body jsonb;
+  -- VEIL-22 (R4; VR10): one salt a read, never shipped (_gallery_veil_rekey)
+  salt text := gen_random_uuid()::text;
 begin
   if jsonb_typeof(ov) <> 'object' then ov := '{}'; end if;
   res := public._gallery_veil_resolve(pub, ov, link, people);
   -- VEIL-21 (R2): an unmarked listing is served as before (the reads take `body` where it is given), but for what no
   -- non-owner read sends whatever the veil (_gallery_veil_withhold_always): the gallery read, the import and the campaign
   -- map's member (get_gallery_map serves `body` where there is one), each its own projection less those rows
+  -- VEIL-22 (R4; VR10): every person's id re-keyed there too, and the served marker's person keys with it
   if res is null then
-    return jsonb_build_object('served', public._gallery_veil_served(ov, null, to_jsonb(people), copy))
-      || case when jsonb_typeof(pub) = 'object' then jsonb_build_object('body', public._gallery_veil_withhold_always(pub)) else '{}'::jsonb end;
+    body := case when jsonb_typeof(pub) = 'object' then public._gallery_veil_withhold_always(public._gallery_veil_rekey(pub, salt)) end;
+    return jsonb_build_object('served', public._gallery_veil_rekey_served(public._gallery_veil_served(ov, null, to_jsonb(people), copy), body, salt))
+      || case when body is not null then jsonb_build_object('body', body) else '{}'::jsonb end;
   end if;
   body := public._gallery_veil_apply(pub, res);
   -- a person card with neither a name nor a role is dropped, as the client's projection drops it
@@ -2104,12 +2390,14 @@ begin
     body := jsonb_set(body, '{npcs}', coalesce((select jsonb_agg(e order by o) from jsonb_array_elements(body -> 'npcs') with ordinality x(e, o)
       where jsonb_typeof(e) <> 'object' or public._gallery_veil_truthy(e -> 'name') or public._gallery_veil_truthy(e -> 'role')), '[]'));
   end if;
+  -- VEIL-22 (R4; VR9, VR10): the holder of a house hidden whole withheld with its ties; every person's id re-keyed
+  body := public._gallery_veil_rekey(public._gallery_veil_holders(body, pub, res), salt);
   -- VEIL-21 (R2): last, what no non-owner read sends whatever the veil
   body := public._gallery_veil_withhold_always(body);
   return jsonb_build_object(
     'body', body,
     'groupings', res -> 'groupings',
-    'served', public._gallery_veil_served(ov, res -> 'groupings', to_jsonb(people), copy));
+    'served', public._gallery_veil_rekey_served(public._gallery_veil_served(ov, res -> 'groupings', to_jsonb(people), copy), body, salt));
 end $$;
 
 -- VR27 (as amended): a helper this lane adds, called only inside the definer reads, is revoked by name

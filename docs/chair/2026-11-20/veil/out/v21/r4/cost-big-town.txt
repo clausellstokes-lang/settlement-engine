@@ -1,0 +1,6 @@
+# VR36, the largest born town (R4, VEIL-22): bcd-big-cost.mjs's method (paths and chain names only changed: /tmp/claude-0/-home-user-settlement-engine/4825dd68-b23b-5772-97a6-ec95d76b39f1/scratchpad/r4-big-cost.mjs), 9 rounds, medians, anon, local scratch cluster; load during the run: load average: 11.75, 9.22, 6.78
+# town: metropolis/calm/4 Maghwick 520504 bytes; sha256 c7cc74f0c4983960dd2659585d3f0fb85b37e5201e2fb745a7cd607b85d9eda6 (the largest of 24 births: city and metropolis, calm and infiltrated, 6 each, at this tree; /tmp/claude-0/-home-user-settlement-engine/4825dd68-b23b-5772-97a6-ec95d76b39f1/scratchpad/r4big.probe.jsx)
+# chains: r4c211 (copy of x211: 211 frozen), r4cbase (copy of tplr4base: 001..212 at the base d136940c3, 212 sha 05b915ab...8f10), r4ctree (copy of tplr4tree: 001..212 at this tree)
+the largest born town, gallery off: x211 473.8 | base 966.6 | after 751.3 ms (after/x211 1.59)
+the largest born town, gallery dm: x211 307.8 | base 902.4 | after 837.7 ms (after/x211 2.72)
+the largest born town, link: x211 337.4 | base 639.1 | after 793.1 ms (after/x211 2.35)
