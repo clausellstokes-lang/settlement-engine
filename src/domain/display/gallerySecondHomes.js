@@ -1294,6 +1294,14 @@ export function withholdIncomeWeights(pub) {
   return { ...pub, economicState: { ...econ, incomeSources: econ.incomeSources.map(r => (isRec(r) && 'weight' in r ? withoutKey(r, 'weight') : r)) } };
 }
 
+// ── VEIL-22 (R3): the houses galleryRosterChoices.js :: applyRosterChoices reads (a name lookup, as the second homes').
+/** The served houses of `s` and the houses of `pub` it no longer lists (by `idOf`), each an object. SQL twin: 212 ::
+ * _gallery_veil_roster_choices. @param {Rec} s @param {Rec} pub @param {(card: Rec) => string} idOf @returns {{ served: Rec[], gone: Rec[] }} */
+export function rosterHouses(s, pub, idOf) {
+  const list = (/** @type {Rec} */ d) => (Array.isArray(d.institutions) ? d.institutions.filter(isRec) : []);
+  const ids = new Set(list(s).map(idOf));
+  return { served: list(s), gone: list(pub).filter(h => !ids.has(idOf(h))) };
+}
 
 // ── VEIL-21 (R2; VR37 (b), VR21): A CRISIS CAST'S STAKE AND ROLE ROWS GO PER ENTRY WITH WHAT THEY NAME. SQL twin: 212 ::
 // _gallery_veil_cast, run by _gallery_veil_withhold_always (twin: galleryWithholdAlways.js :: withholdAlways).
