@@ -971,4 +971,23 @@ describe('TRAD-4 UNIT 10: the drawn rows print no sentence twice, and the reader
     const procText = sharedTraditionRowsOf(t).find((r) => r.name === procession.name).text;
     expect(enumerateDossierObjects(t, { playerView: true }).objects.find((o) => o.raw.id === procession.id).meta.description).toBe(procText);
   }, 120000);
+
+  // THE PIN (TRAD-5 unit 13, the chair's security condition): a held element's later rite reads "also" only where an earlier
+  // rite of THE AUDIENCE'S OWN SHOWN SET holds the element. Here the charter fair (the procession's earlier rite of the same
+  // element) stands in the owner's set and is withheld from the reader's: the owner's procession says "also"; the reader's
+  // drawn row and player view print the present gloss, and are byte-identical with the house's function eye open or shut.
+  const CHARTER = ['honours the charter', 'marks the granting of the charter', 'remembers the charter'];
+  const s1 = (text) => String(text).slice(0, String(text).indexOf('.') + 1);
+  it('THE PIN: the owner\'s procession (its charter fair shown before it) prints "also"; the reader\'s, whose set withholds the fair, prints the present gloss', () => {
+    expect(fair.coreMotif.element).toBe(procession.coreMotif.element); // not vacuous: one element, two rites
+    const owner = describeTradition(procession, t, { audience: 'owner', set: descriptionSetOf(t, 'owner') }).text;
+    expect(s1(owner)).toMatch(/ that also honours the charter\.$/);
+    const row = sharedTraditionRowsOf(t).find((r) => r.name === procession.name).text;
+    const player = enumerateDossierObjects(t, { playerView: true }).objects.find((o) => o.raw.id === procession.id).meta.description;
+    for (const [where, text] of [['drawn row', row], ['player view', player], ['veiled', sharedTraditionRowsOf(veiled).find((r) => r.name === procession.name).text]]) {
+      // anchored: the owner's text of this same rite over the owner's set is asserted above to say "also"
+      expect(s1(text), where).not.toMatch(/\balso\b/);
+      expect(CHARTER.some((g) => s1(text).endsWith(` that ${g}.`)), `${where}: ${s1(text)}`).toBe(true);
+    }
+  }, 120000);
 });

@@ -28,6 +28,12 @@
 // TRAD-5 unit 12 (2026-11-20): the leaf's one pick is kernel/proseHash.js :: pickVariantMixed since unit 11 (the leaf's
 // draw and drawTurn); the re-derivation of the drawn line (drawnBefore) now reads it too, else every draw would count as a
 // disagreement or a turn. The figures are otherwise read as before.
+//
+// TRAD-5 unit 13 build (2026-11-20, the chair's 21:03 approval): a held element's later rite draws its "also" gloss
+// (traditionDescriptionTable.js :: ELEMENT_GLOSS_ALSO, poolId `also.<element>`, key `#gloss`), read here as the gloss slot.
+// The table is read through its namespace (absent before the build: {}), so this file also runs against the base tree.
+// `dump` writes each place's texts per audience (the owner's set described whole; the reader's drawn rows); `moved` compares
+// two dumps (before, after) and names every description that moved, and how.
 import { readFileSync, writeFileSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 import { descriptionSetOf, sharedTraditionRowsOf, shownTraditionsOf } from '../../../../../../src/domain/traditions/shownTraditions.js';
@@ -40,13 +46,17 @@ import { TRADITION_ELEMENTS } from '../../../../../../src/data/traditionCorpus.j
 import {
   ACT_LEADS, ELEMENT_GLOSS, OWNER_FRAMES, HOUSE_FRAMES, POWER_FRAMES, CAUSE_FRAMES, ECONOMY_FRAMES, KEEPER_FRAMES_TOO,
 } from '../../../../../../src/data/traditionDescriptionTable.js';
+import * as TABLE from '../../../../../../src/data/traditionDescriptionTable.js';
+
+/** TRAD-5 unit 13: a held element's "also" gloss pools ({} before the build). */
+const ALSO = TABLE.ELEMENT_GLOSS_ALSO || {};
 
 const PREFIX = 'traditionDescription:';
 /** a slot's pool, by the leaf's poolId (`lead.feast`, `house.placePower`, …), and the key suffix its draw uses */
 const SLOT = {
   lead: [(k) => ACT_LEADS[k], '#done'], gloss: [(k) => ELEMENT_GLOSS[k], '#gloss'], owner: [() => OWNER_FRAMES, '#owner'],
   house: [(k) => HOUSE_FRAMES[k], '#house'], power: [(k) => POWER_FRAMES[k], '#power'], cause: [(k) => CAUSE_FRAMES[k], '#origin'],
-  economy: [(k) => ECONOMY_FRAMES[k], '#economy'],
+  economy: [(k) => ECONOMY_FRAMES[k], '#economy'], also: [(k) => ALSO[k], '#gloss'],
 };
 const isTwin = (l) => !!l && typeof l === 'object' && typeof l.twinOf === 'string';
 const slotOf = (poolKey) => { const [kind, ...rest] = poolKey.split('.'); const [pool, suffix] = SLOT[kind] || []; return { kind, pool: pool ? pool(rest.join('.')) : null, suffix }; };
@@ -91,7 +101,7 @@ export function describeWithSlots(rec, town, audience) {
   }
   // the gloss is always drawn: no note of it is a refusal that resolved to nothing (the ledger notes no null line)
   const element = String(rec?.coreMotif?.element ?? ''); const glossKey = `gloss.${element}`;
-  if (ELEMENT_GLOSS[element] && !slots.some((s) => s.pool === glossKey)) {
+  if (ELEMENT_GLOSS[element] && !slots.some((s) => s.pool === glossKey || s.pool === `also.${element}`)) {
     slots.push({ pool: glossKey, kind: 'gloss', resolvedBy: 'none', drawn: drawnBefore(ELEMENT_GLOSS[element], seed, id, '#gloss'), printed: null });
   }
   // a keeper or an origin the parts say stands, with no note: a frame refused to nothing (no frame declares: never seen)
@@ -295,16 +305,17 @@ function main() {
  */
 export function sameSubject(towns, audience) {
   const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
-  const by = new Map(TIERS.map((k) => [k, { n: 0, two: 0, el: 0, elGloss: 0, ea: 0, eaGloss: 0, moved: 0, exhausted: 0, later: 0, rites: 0 }]));
+  const blank = () => ({ n: 0, two: 0, el: 0, elGloss: 0, ea: 0, eaGloss: 0, moved: 0, exhausted: 0, later: 0, rites: 0, plainTwice: 0, alsoTwice: 0, unack: 0, also: 0 });
+  const by = new Map(TIERS.map((k) => [k, blank()]));
   const els = new Map(); const samples = [];
   for (const t of towns) {
-    const o = by.get(t.tier) || by.set(t.tier, { n: 0, two: 0, el: 0, elGloss: 0, ea: 0, eaGloss: 0, moved: 0, exhausted: 0, later: 0, rites: 0 }).get(t.tier);
+    const o = by.get(t.tier) || by.set(t.tier, blank()).get(t.tier);
     o.n++;
     const rites = [];
     for (const { rec } of shownFor(t, audience)) {
       if (!rec) continue;
       const r = describeWithSlots(rec, t, audience);
-      const g = r ? r.slots.find((s) => s.kind === 'gloss') : null;
+      const g = r ? r.slots.find((s) => s.kind === 'gloss' || s.kind === 'also') : null;
       rites.push({ name: String(rec.name ?? ''), el: String(rec.coreMotif?.element ?? ''), act: String(rec.coreMotif?.act ?? ''), gloss: g ? g.printed : null });
     }
     o.rites += rites.length; if (rites.length >= 2) o.two++;
@@ -315,6 +326,13 @@ export function sameSubject(towns, audience) {
     if (eg.length && sameGloss(eg)) { o.elGloss++; if (samples.length < 8) { const v = eg.find((w) => sameGloss([w])); samples.push(`  ${t.name} (${t.tier}) [${v[0].el}]: ${v.map((x) => `${x.name} "${x.gloss}"`).join(' | ')}`); } }
     if (ag.length) o.ea++;
     if (ag.length && sameGloss(ag)) o.eaGloss++;
+    // unit 13 build: the same PRESENT gloss twice (a repeat unacknowledged), the same "also" line twice (a third rite), a
+    // later rite of a held element whose gloss does not say "also" (unacknowledged), and the "also" lines printed
+    const isAlso = (g) => typeof g === 'string' && g.startsWith('also ');
+    const twiceBy = (pred) => eg.some((v) => { const p = v.map((x) => x.gloss).filter(pred); return new Set(p).size < p.length; });
+    if (twiceBy((g) => !!g && !isAlso(g))) o.plainTwice++;
+    if (twiceBy(isAlso)) o.alsoTwice++;
+    { const first = new Set(); for (const x of rites) { if (first.has(x.el) && x.gloss && !isAlso(x.gloss)) o.unack++; if (isAlso(x.gloss)) o.also++; first.add(x.el); } }
     // the cure's reach: in set order, a later rite of a held element whose gloss is already printed there
     const seen = new Map();
     for (const x of rites) {
@@ -326,12 +344,13 @@ export function sameSubject(towns, audience) {
   const pc = (a, n) => `${String(a).padStart(3)}/${n} (${n ? (100 * a / n).toFixed(1) : '0.0'}%)`;
   const out = [`## audience=${audience} — places=${towns.length}; set: shownFor (descriptionSetOf ${audience === 'owner' ? "owner: shownTraditionsOf" : 'reader: the drawn set, rows matched to rites'})`,
     'size        rites  2+rites  SAME ELEMENT       +same gloss        SAME ELEMENT+ACT   +same gloss        cure moves (exhausted)  later rites of a held element'];
-  const all = { n: 0, two: 0, el: 0, elGloss: 0, ea: 0, eaGloss: 0, moved: 0, exhausted: 0, later: 0, rites: 0 };
+  const all = blank();
   for (const [k, o] of by) {
     if (!o.n) continue; for (const f of Object.keys(all)) all[f] += o[f];
     out.push(`${k.padEnd(11)} ${String(o.rites).padStart(5)}  ${String(o.two).padStart(7)}  ${pc(o.el, o.n)}  ${pc(o.elGloss, o.n)}  ${pc(o.ea, o.n)}  ${pc(o.eaGloss, o.n)}  ${o.moved} (${o.exhausted})  ${o.later}`);
   }
   const o = all; out.push(`${'ALL'.padEnd(11)} ${String(o.rites).padStart(5)}  ${String(o.two).padStart(7)}  ${pc(o.el, o.n)}  ${pc(o.elGloss, o.n)}  ${pc(o.ea, o.n)}  ${pc(o.eaGloss, o.n)}  ${o.moved} (${o.exhausted})  ${o.later}  of ${o.rites} rites`);
+  out.push(`unit 13 build — places printing one PRESENT gloss twice: ${all.plainTwice}; places printing one "also" line twice (a third rite of an element): ${all.alsoTwice}; later rites of a held element NOT saying "also" (unacknowledged): ${all.unack} of ${all.later}; "also" glosses printed: ${all.also}`);
   out.push(`elements repeated (place-element pairs): ${[...els].sort((a, b) => b[1] - a[1]).map(([e, n]) => `${e} ${n}`).join(', ') || 'none'}`);
   out.push('same gloss, first samples:', ...samples);
   return out;
@@ -339,7 +358,47 @@ export function sameSubject(towns, audience) {
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   // TRAD-5 unit 13: `node measure2.mjs <pool.ndjson> <out.txt> same` writes the same-subject count, owner and reader
-  if (process.argv[4] === 'same') {
+  if (process.argv[4] === 'dump') {
+    // unit 13: each place's texts, per audience, in set order (the owner's set described whole; the reader's drawn rows)
+    const towns = readFileSync(process.argv[2], 'utf8').trim().split('\n').map(JSON.parse);
+    const lines = towns.map((t) => {
+      const ownerSet = descriptionSetOf(t, 'owner', []);
+      const owner = describeTraditions(ownerSet, t, { audience: 'owner' }).map((d, i) => ({ name: String(ownerSet[i].name ?? ''), text: d ? d.text : '' }));
+      const reader = (sharedTraditionRowsOf(t) || []).map((r) => ({ name: r.name, text: r.text }));
+      return JSON.stringify({ seed: String(t._seed ?? t.id ?? ''), tier: t.tier, owner, reader });
+    });
+    writeFileSync(process.argv[3], `${lines.join('\n')}\n`);
+    console.log(`dump: towns=${towns.length} -> ${process.argv[3]}`);
+  } else if (process.argv[4] === 'moved') {
+    // unit 13: `node measure2.mjs <before.ndjson> <out.txt> moved <after.ndjson>`: the descriptions that moved, by audience
+    // and size; each must differ ONLY in S1's gloss, a present line become its element's "also" line
+    const read = (f) => new Map(readFileSync(f, 'utf8').trim().split('\n').map(JSON.parse).map((x) => [x.seed, x]));
+    const before = read(process.argv[2]); const after = read(process.argv[5]);
+    const alsoTexts = new Set(Object.values(ALSO).flat().map((l) => String(lineText(l) ?? '')));
+    const s1 = (text) => { const i = text.indexOf('.'); const head = text.slice(0, i); const j = head.indexOf(' that '); return { lead: j < 0 ? head : head.slice(0, j), gloss: j < 0 ? null : head.slice(j + 6), rest: text.slice(i + 1) }; };
+    const out = [`# unit 13 moved: before ${process.argv[2]} -> after ${process.argv[5]} (places ${after.size})`];
+    for (const audience of ['owner', 'reader']) {
+      const m = new Map(); let rites = 0; let moved = 0; let anomalies = 0; const twice = { before: 0, after: 0 }; const odd = [];
+      for (const [seed, a] of after) {
+        const b = before.get(seed); const tier = a.tier; const o = m.get(tier) || { moved: 0, rites: 0 }; m.set(tier, o);
+        for (const [k, x] of [['before', b], ['after', a]]) if (x && twiceIn(x[audience].map((r) => r.text)).length) twice[k]++;
+        if (!b || b[audience].length !== a[audience].length) { anomalies++; odd.push(`${seed} ${audience}: set differs`); continue; }
+        a[audience].forEach((r, i) => {
+          rites++; o.rites++; const was = b[audience][i];
+          if (was.name !== r.name) { anomalies++; odd.push(`${seed} ${audience} #${i}: name`); return; }
+          if (was.text === r.text) return;
+          moved++; o.moved++;
+          const p = s1(was.text); const q = s1(r.text);
+          if (p.lead !== q.lead || p.rest !== q.rest || !alsoTexts.has(String(q.gloss))) { anomalies++; if (odd.length < 8) odd.push(`${seed} ${audience} ${r.name}: "${was.text}" -> "${r.text}"`); }
+        });
+      }
+      out.push(`## ${audience}: descriptions moved ${moved} of ${rites}; moved otherwise than S1's gloss to an "also" line (or a set that differs): ${anomalies}; places printing a sentence twice: before ${twice.before}, after ${twice.after}`);
+      for (const [tier, o] of m) out.push(`  ${tier.padEnd(11)} moved ${o.moved} of ${o.rites}`);
+      out.push(...odd.map((x) => `  ! ${x}`));
+    }
+    writeFileSync(process.argv[3], `${out.join('\n')}\n`);
+    console.log(out.filter((x) => x.startsWith('##')).join('\n'));
+  } else if (process.argv[4] === 'same') {
     const towns = readFileSync(process.argv[2], 'utf8').trim().split('\n').map(JSON.parse);
     writeFileSync(process.argv[3], `${[...sameSubject(towns, 'owner'), '', ...sameSubject(towns, 'reader')].join('\n')}\n`);
     console.log(`same-subject: towns=${towns.length} -> ${process.argv[3]}`);

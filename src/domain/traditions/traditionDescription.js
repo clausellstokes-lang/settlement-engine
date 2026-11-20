@@ -68,6 +68,13 @@
  * left out (a rite need not say twice what the town lives on); a cause keeps its pick. Keyed, no new draw, no clock, nothing stored; a rite alone, or with no set,
  * reads exactly as before. THE READER'S SET (CTR11) is the drawn set (shownTraditions.js :: descriptionSetOf), never a
  * row a DM can hide, and the reader's rotation reads only the reader's own compositions of its rites.
+ * ONE HONOURED THING, THEN "ALSO" (TRAD-5 unit 13; the chair's ruling (B) of 20:56 UTC, approved 21:03 UTC; vetoable by the
+ * owner): genesis may give one place two rites of one element (it dedupes element+act only), so in the same set-walk a
+ * rite whose element an earlier rite of THE AUDIENCE'S OWN SET already printed takes its element's "also" gloss
+ * (ELEMENT_GLOSS_ALSO, never a pick) through the one draw; where that line is refused, its present gloss stands. The held
+ * elements are the set's own (`held`, beside `taken`): the reader's are those of the drawn set, never the owner's carried
+ * over, so a rite the reader is not shown makes no reader's rite say "also". A rite alone, or first of its element, reads
+ * as before.
  *
  * PURE, derived at render, nothing stored (CTR4): no draw (a frame is picked by kernel/proseHash.js :: pickVariantMixed on
  * a key of the settlement's identity and the record's stable id; TRAD-4 unit 11: the FNV hash mixed before the modulo, so
@@ -94,7 +101,7 @@ import { isColourLine } from '../facts/factVocabulary.js';
 import {
   ACT_LEADS, CRISIS_SCOPED_ACTS, ELEMENT_GLOSS, CRISIS_SCOPED_ELEMENTS, KEEPER_HOUSES, HOUSE_FRAMES, POWER_FRAMES,
   OWNER_FRAMES, CAUSE_FRAMES, DEAD_EVENT_TYPES, DEAD_EVENT_SEVERITIES, DEAD_EVENT_PHRASES, ECONOMY_FIT, ECONOMY_FRAMES,
-  ECONOMY_RANKS, POWER_FRAME_VERBS, KEEPER_FRAMES_TOO,
+  ECONOMY_RANKS, POWER_FRAME_VERBS, KEEPER_FRAMES_TOO, ELEMENT_GLOSS_ALSO,
 } from '../../data/traditionDescriptionTable.js';
 
 /** @typedef {import('./genesis.js').TraditionRec} TraditionRec */
@@ -466,15 +473,18 @@ export function describeTradition(recIn, settlementIn, options = {}) {
 export function describeTraditions(set, settlementIn, options = {}) {
   /** @type {Set<string>} */
   const taken = new Set();
-  return listOf(set).map((rec) => compose(/** @type {Rec|null|undefined} */ (rec), settlementIn, options.audience, taken));
+  /** @type {Set<string>} */
+  const held = new Set();
+  return listOf(set).map((rec) => compose(/** @type {Rec|null|undefined} */ (rec), settlementIn, options.audience, taken, held));
 }
 
 /**
- * One rite composed for one audience; `taken` (the set's rotation, or null alone) gathers the sentences it printed.
+ * One rite composed for one audience; `taken` (the set's rotation, or null alone) gathers the sentences it printed, and
+ * `held` (beside it, TRAD-5 unit 13; null alone) the elements whose gloss the set's rites printed.
  * @param {TraditionRec|Rec|null|undefined} recIn @param {Rec|null|undefined} settlementIn @param {unknown} audience
- * @param {Set<string>|null} taken @returns {TraditionDescription|null}
+ * @param {Set<string>|null} taken @param {Set<string>|null} [held] @returns {TraditionDescription|null}
  */
-function compose(recIn, settlementIn, audience, taken) {
+function compose(recIn, settlementIn, audience, taken, held = null) {
   if (!recIn || typeof recIn !== 'object' || !settlementIn || typeof settlementIn !== 'object') return null;
   const rec = recordOf(recIn);
   const reader = audience !== 'owner';
@@ -508,8 +518,15 @@ function compose(recIn, settlementIn, audience, taken) {
   // S1 WHAT IS DONE: a lead (by act) and a gloss (by element), each a declared pool; a refused gloss and no twin: no S1
   // gloss, and the lead stands with what the name already says ("A procession.").
   const lead = draw(leadPool, seed, `${id}#done`, `lead.${act}`, facts, CRISIS_SCOPED_ACTS.includes(act));
-  const glossText = draw(glossPool, seed, `${id}#gloss`, `gloss.${element}`, facts, CRISIS_SCOPED_ELEMENTS.includes(element));
+  // a held element (an earlier rite of this audience's set printed its gloss): its "also" line, through the one draw;
+  // refused, the present gloss stands (TRAD-5 unit 13)
+  const alsoPool = held && held.has(element)
+    ? /** @type {Record<string, ReadonlyArray<import('../../data/traditionDescriptionTable.js').TraditionLine>>} */ (ELEMENT_GLOSS_ALSO)[element]
+    : undefined;
+  const alsoText = alsoPool ? draw(alsoPool, seed, `${id}#gloss`, `also.${element}`, facts, CRISIS_SCOPED_ELEMENTS.includes(element)) : '';
+  const glossText = alsoText || draw(glossPool, seed, `${id}#gloss`, `gloss.${element}`, facts, CRISIS_SCOPED_ELEMENTS.includes(element));
   if (!lead) return null;
+  if (held && glossText) held.add(element);
   const s1 = glossText ? `${lead} that ${glossText}.` : `${lead}.`;
 
   // S2 WHO KEEPS IT

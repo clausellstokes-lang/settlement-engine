@@ -148,6 +148,34 @@ export const ELEMENT_GLOSS = Object.freeze({
 /** The gloss pools that opted into the crisis dimension. */
 export const CRISIS_SCOPED_ELEMENTS = Object.freeze(['harvest']);
 
+/**
+ * S1, A HELD ELEMENT'S GLOSS (TRAD-5 unit 13; the chair's ruling (B) of 20:56 UTC, the sixteen lines approved as written at
+ * 21:03 UTC, vetoable by the owner): for each element, ONE line, read by a rite whose element an earlier rite of the
+ * audience's own shown set already holds (traditionDescription.js :: compose), so a place that honours one thing twice says
+ * so ("A procession on foot that also honours the first boats to come ashore."). NEVER A PICK: held apart from
+ * ELEMENT_GLOSS (the KEEPER_FRAMES_TOO pattern), so no rite described alone, and no rite first of its element in the set,
+ * reads one. Each is one of its element's present lines with "also" before it, declaring what that line declares (it
+ * presumes nothing its element's lines do not); harvest's is its crisis-safe line, `crisis: any`, and needs no twin.
+ */
+export const ELEMENT_GLOSS_ALSO = Object.freeze({
+  founding: Object.freeze([plain('also marks the founding')]),
+  'first-landing': Object.freeze([line({ text: 'also honours the first boats to come ashore', needs: Object.freeze(['navigable']) })]),
+  charter: Object.freeze([plain('also honours the charter')]),
+  hearth: Object.freeze([plain('also honours hearth and household')]),
+  harvest: Object.freeze([line({ text: 'also marks the gathering of the harvest', crisis: ANY })]),
+  river: Object.freeze([line({ text: 'also honours the river', needs: Object.freeze(['river']) })]),
+  stone: Object.freeze([plain('also honours the standing stones')]),
+  'the-dead': Object.freeze([plain('also remembers the dead')]),
+  field: Object.freeze([plain('also blesses the fields')]),
+  forge: Object.freeze([line({ text: 'also honours the forge', needs: Object.freeze(['institution: smith']) })]),
+  market: Object.freeze([line({ text: 'also honours the market', needs: Object.freeze(['market']) })]),
+  hunt: Object.freeze([plain('also honours the hunt')]),
+  'long-sun': Object.freeze([plain('also marks midsummer')]),
+  tide: Object.freeze([line({ text: 'also honours the tide', needs: Object.freeze(['coast']) })]),
+  greening: Object.freeze([plain('also marks the coming of spring')]),
+  stars: Object.freeze([plain('also honours the stars')]),
+});
+
 /** @param {ReadonlyArray<string>} ids @returns {TraditionHouseRow} */
 const body = (ids) => Object.freeze({ ids: Object.freeze([...ids]), kind: /** @type {const} */ ('body') });
 /** @param {ReadonlyArray<string>} ids @returns {TraditionHouseRow} */
