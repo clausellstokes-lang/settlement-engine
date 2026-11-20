@@ -2812,3 +2812,32 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   of 35 against the control's 5 of 29: THE RULING'S REACH IS THE WHOLE LIST (sent to VEIL-24); and a shown power's
   `factions[].desc` still names a withheld guild in one town on all four reads: on R5's list, TIER 1 until R5 cures
   it. Confirmed cured there: the raised guild leaves whole; shares 100; VR42 0 of 8.
+- 09:52 UTC · **THE OWNER ORDERS THE STRUCTURAL FIXES BEFORE THE DEPLOY; FORTUNE-1 SEATED; THE 09:48 PASS: THREE SEATS PAST OR AT
+  THEIR LINES.** The owner's words of 09:36 and 09:49 and the chair's answers are in section 1; CS21 (culture is a
+  weight, never a determinant) is in section 2. THE DEPLOY'S WAITING LIST NOW ALSO HOLDS: (6) fortune and standing
+  judged against a place's own size (FORTUNE-1, seated 09:50: session_019yED1Sao1PoBPPS8GHf9C4;
+  `lane/fortune-1-2026-11-20` from the line at 0c906948; `prompts/FORTUNE-1.txt`: rulings FS1 to FS7: the measure
+  and a proposal with before-and-after tables for the owner FIRST, no build until the chair rules; a new birth
+  rule, DARK, read at birth and at play time; what the light would move in what other lanes read); (7) no goal or
+  tie wording twice in one town (`prompts/GOALS-1.txt`: GR1 to GR5: by rotation from the drawn index, no new draw;
+  the thin kinds deepened to their demand; seated after the names' agreement work, in the same files); (8) CS21 as
+  its own unit of the seat's second train (sent to SEAT-3). NUMBER 3 OF THE CHAIR'S FOUR (a thorp's people) IS
+  WITHDRAWN ON THE OWNER'S QUESTION AND A COUNT. AT THE CLOSE THE OWNER SIGNS THREE DARK RULES TOGETHER (the seat's
+  law with CS5's table and CS21; the fortune rule; and the earlier figures): THE CLOSE THEREFORE NEEDS A JOINT
+  MEASURE WITH ALL OF THEM LIT (the frame's count and the seat's rates are measured under today's standing: said to
+  SEAT-3 and FRAME-4) AND THE DOZEN WHOLE TOWNS BORN WITH ALL LIT.
+  THE CONTAINER RESTARTED AT ABOUT 09:34 (the second time today): the chair's push in flight was lost, nothing
+  else (the worktrees, the scratch folder and the line's push were whole): re-pushed.
+  THE SAFETY NET'S PASS (09:48), TRUE COUNTS BY THE CHAIR'S READ: NAMES-3 452,611 AGAINST A MARK OF 250,000 (THE
+  CHAIR HAD NOT READ IT FOR AN HOUR: its fault; it was building the possessive with its own hands; "12 stale rows"
+  shifting): ORDERED 09:52 TO HAND OVER AT ITS NEXT GREEN COMMIT with a self-contained hand-back and "NAMES-3
+  <commit>, HANDED OVER"; `prompts/NAMES-4.txt` written (what is left of item 3; builders build; mark 220,000).
+  FRAME-3 410,517 with both builders out: ORDERED 09:52 to write its hand-back and hand over NOW, relaying its
+  builders' returns one line each; FRAME-4 reads, re-runs and merges B9 and B11. TRAD-2 317,498, waiting on
+  `tests/lint` whole at its merged tip: `prompts/TRAD-3.txt` written (lean; CTR11; the names rules; the short
+  form by size), seated when TRAD-2 pushes that tip. SEAT-2 358,174 at 09:25, finishing U2 (three stops ruled), then
+  it hands over to SEAT-3. VEIL-24 says about 190,000 (its record reads 0); REVIEW-VEIL-12 about 175,000; FRAME-4
+  about 110,000; SEAT-3 about 115,000.
+  A RULE FROM THIS PASS: THE CHAIR READS EVERY WORKING SEAT'S COUNT AT LEAST EVERY 45 MINUTES, AND AT EVERY MESSAGE
+  FROM A SEAT WHOSE MARK IS 250,000 OR LESS; a seat that is found building with its own hands is told to staff it
+  or hand over in the same message.
