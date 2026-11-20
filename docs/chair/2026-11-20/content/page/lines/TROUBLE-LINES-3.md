@@ -20,7 +20,7 @@ source is `measures/page-7/hooks/pools.mjs` and `measure.pools.out.txt` (round 2
 |---|---|---|---|---|
 | 13 | An apprentice has run from one side of the quarrel to the other, and taken a master's tools along | none | 100% | 19.5% |
 | 14 | A cart of goods from outside has arrived for a trader who is not allowed to sell them, and the carter wants paying | none | 100% | 25.1% |
-| 15 | A trader at the market has been selling under the guild price, and a crowd is expected at the stall tomorrow | `market` (`market.js :: marketOf`) | 100% | 20.0% |
+| 15 | A trader at the market has been selling under the agreed price, and a crowd is expected at the stall tomorrow (the chair, 17:00) | `market` (`market.js :: marketOf`) | 100% | 20.0% |
 | 16 | A guild master has quietly bought from a trader outside the guild, and someone saw it happen | `guild` (`guild.js :: guildOf`) | 99.5% | 17.2% |
 
 ## The bar, by size, with all 16 lines in both pools
