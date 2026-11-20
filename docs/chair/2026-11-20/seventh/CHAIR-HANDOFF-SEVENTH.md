@@ -535,3 +535,36 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   close. NINE SEATS: eight running, VEIL-R1 done.
 - 01:30 UTC · The reader's permission check also refused installing the push hooks in its clone ("Undermining Oversight"):
   the refusal stands; its docs-only pushes go without hooks, none skipped.
+- 01:36 UTC · **THE READER RAN THE INVERSION TEST ON THE REGISTRY (its message of 01:33 UTC; its commit 3b88e0297,
+  `inversion.probe.jsx`: 86 born towns with a hideable house, the default veil, through the server, the engine's own
+  exports), AND THE CHAIR'S RULING VR26 DID NOT SURVIVE ITS OWN TEST AS WRITTEN.** Re-derived from the STORED town
+  each label equals the stored one in 86 of 86 (the method is exact). Re-derived from the SERVED document:
+  `economy.prosperity` differs from the served label in 29 of 86 (`prosperity.js :: labelFromBase` drops one band at
+  a criminal strength of 65 or more; `getInstFlags` over the served houses gives the lower figure), and
+  **`safety.safetyLabel` DIFFERS IN 28 OF 86**: VR8's condition (the raw terms withheld) does not make the band
+  uninvertible, because those terms are recomputable from the served config and houses. `legitimacy.score` passes.
+  The rng rows cannot be inverted (no seed is served). Not run: the other 27 diffuse rows; by its note any row whose
+  writer reads `getInstFlags` is a candidate. No path family wider than its writer among the 42.
+  **RULING VR28, THE TIERS (it AMENDS VR26 and TAKES BACK the chair's two rulings of the last hour that prosperity is
+  withheld and its tile NULL; vetoable by the owner; put to the owner in plain words with the numbers).** Held
+  strictly, the inversion test takes every band off every shared page and every chip and filter off the gallery, to
+  stop ONE inference: that something criminal is hidden in a town, not what, where 89 of the reader's 140 born towns
+  hide a criminal house anyway. That is not proportionate, and it contradicts VR8, which the sixth chair and its
+  reader agreed. **TIER 1, BLOCKING:** no name, person, tie, sentence, crime-worded label or cause, sequence gap, door
+  beside `data`, and no PRECISE figure carrying a hidden house's term (a number, a score, a share) reaches a
+  non-owner read; the inversion test is blocking for these. **TIER 2, RECORDED, NOT BLOCKING:** a COARSE BAND that
+  every town shows from a closed, ordered vocabulary (the safety band, the prosperity band, the stability word, a
+  readiness label) is sent as stored; the inversion test is still an arm of R6 and of FINAL, run on every band, and
+  its count is recorded as THE KNOWN RESIDUAL (first counts: safety 28 of 86, prosperity 29 of 86). A band that tells
+  more than "something criminal is hidden" (its size, its kind, which house) moves to tier 1 on the executed case.
+  **THE CURE FOR TIER 2 IS A PUBLIC FACE:** the owner's client computes each band from the VISIBLE houses when it
+  shares, and the server sends that in place of the stored band; it is a persisted-shape change, so the owner's
+  decision, placed AFTER the deploy; it would also give the gallery's cards lawful chips and filters with nothing
+  NULL. SO: prosperity and its tile keep their band and the filter stays; the stability tile keeps its band word and
+  never its cause; `compound.economyOutput` and every precise figure with a hidden term stay withheld. Sent to
+  VEIL-DOORS (before it built the NULL), VEIL-20, VEIL-19 (for PART 20) and the reader, which now splits the other 27
+  diffuse rows into precise figures that fail (tier 1) and bands.
+  WHY THE CHAIR CHANGED ITS RULING WITHIN THE HOUR: on evidence, not on cost alone. VR26 was written expecting a
+  handful of rows to move; the measure shows it re-classes the very band VR8 named diffuse. The honest statement of
+  the veil's promise is tier 1; tier 2 is what a determined person with the public code can still infer, said
+  plainly to the owner instead of being hidden behind the word "diffuse".
