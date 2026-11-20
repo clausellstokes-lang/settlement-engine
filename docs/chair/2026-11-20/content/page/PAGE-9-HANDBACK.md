@@ -38,3 +38,10 @@ size), counts, "PAGE-DISPLAY <commit>".
 
 ## Tooling in PAGE-9's container (scratchpad, not committed)
 `gates.sh <outdir>`: the six gates and both pins, each through the mutex and gate-tail, to files, with a summary line each.
+
+## FIRST PAINT, measured 20:13 UTC (`date -u`) on the chair's 19:59 order (fresh `npm run build`, `VERIFY_DIST=1` on the two lazy tests)
+- `dd46aa1af` (before CAUSES): raw 1,176,478 · gzip 374,383 · Brotli 314,395; 4 of 66 red (the three budgets within 1 KB and the worker ceiling).
+- `53bc3d7da` (after CAUSES; lane tip's src): raw 3,286,201 · gzip 942,892 · Brotli 769,600; 8 of 66 red (narrative-mutations
+  and a prose leaf reach first paint via data-lazy). THE EDGE: `facts/factsOf.js` (eager) -> `causeHouses.js` ->
+  `liveInstitutionNames.js` (lazy-pinned): PAGE-7's file. Put to the chair: (a) PAGE-7 cures and the lane merges the cure
+  before any unit merge (recommended), or (b) revert the CAUSES merge here. The builder's proof is a DELTA against 53bc3d7da.
