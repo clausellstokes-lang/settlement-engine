@@ -24,7 +24,7 @@ describe('COHERENCE-POWERS-8 #337 · the ruling issue reads whole', () => {
     const s = /** @type {any} */ (generateSettlementPipeline(cfg, null, { seed: 'rr2s-town-calm-rand-1', customContent: {} }));
     const q = (s.powerStructure?.conflicts || s.conflicts || []).find((c) => /refuses to obey/.test(c.issue));
     expect(q?.issue).toBe('A ruling that one power refuses to obey');
-    expect(q?.desc).toBe('Military Council and Merchant Guilds are in moderate conflict over a ruling that one power refuses to obey. The stakes are authority.');
+    expect(q?.desc).toBe('The Military Council and the Merchant Guilds are in moderate conflict over a ruling that one power refuses to obey. The stakes are authority.'); // NAMES-1 (CN1): the article
     expect(q?.plotHooks).toEqual(['The ruling was given in writing, and the copy that was posted is not the one that was signed.']);
   }, 60000);
 });

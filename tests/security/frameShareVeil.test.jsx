@@ -80,17 +80,20 @@ const WITH_CRIMINAL = new Set(['frame-calm-city-0', 'frame-calm-city-4', 'frame-
 /**
  * The digests of every shared read, per town, measured at the base 85fccf898 (FRAME_VEIL_PRINT=<file> writes them there),
  * in an archive of that commit (B2c, 2026-11-20). The three towns FRAME-1 measured and B2c kept (village-0, city-0,
- * metropolis-1) re-measured to the same digests.
+ * metropolis-1) re-measured to the same digests. RE-MEASURED at the merge of the line (FRAME-3, by the chair's ruling of
+ * 2026-11-20) by this file's own FRAME_VEIL_PRINT door in an archive of the line `e356c94f2`, which carries no frame code:
+ * the line's final names work (point 77) changes generated prose, so every shared read of every town moved; the base is
+ * now the line.
  */
 const DIGESTS = Object.freeze({
-  'frame-calm-hamlet-7': Object.freeze({ gallery: '425f457b84ff8f09', galleryDmFull: 'e1b3da222d69d822', partyLink: 'ea45285a255dfb69', imported: 'fc0bf6b13889181b', worldPlayer: 'be3ce76a071ba0ac' }),
-  'frame-calm-village-0': Object.freeze({ gallery: 'd470028016c09694', galleryDmFull: '9a53d31e23c50da8', partyLink: 'd7f1a6e63736a50e', imported: '9de485b2443a6bc4', worldPlayer: '0ddf530540e158fd' }),
-  'frame-calm-village-76': Object.freeze({ gallery: '5240c67c4f709e8b', galleryDmFull: 'c908ae23e0befb09', partyLink: 'b5e4d2fa656316df', imported: 'c3b5fd6bddcb22a2', worldPlayer: '1a127e0552796ef1' }),
-  'frame-calm-town-1': Object.freeze({ gallery: '17633ffef387f078', galleryDmFull: '86a28cd09d196b03', partyLink: 'dcda3f34f9e5de2f', imported: '2b6634f6b9e71b9f', worldPlayer: '16d8725a2d2b5895' }),
-  'frame-calm-city-0': Object.freeze({ gallery: 'aeeb73e7db33b8b8', galleryDmFull: '40d242b25526be71', partyLink: '30b797aacfb8bb8a', imported: 'a72da96e8fba7997', worldPlayer: '92e6443041d1f8b5' }),
-  'frame-calm-city-4': Object.freeze({ gallery: 'c4706406f6a94029', galleryDmFull: 'd275cb4be9a46ab8', partyLink: '26139761df5166b3', imported: '622358e03b41cd7b', worldPlayer: '54414bbe5f4d20ad' }),
-  'frame-calm-metropolis-1': Object.freeze({ gallery: 'ac7f4027a0717df2', galleryDmFull: 'ca467c3b3cca53f8', partyLink: '49e1a31363ecbe53', imported: '8438fd8061b17bd7', worldPlayer: '2023640a9e8e695d' }),
-  'frame-calm-metropolis-5': Object.freeze({ gallery: '0bc0e04a40d85bf1', galleryDmFull: '16ba2cb702d0bfd8', partyLink: '4f70db8e594204f7', imported: '6a23a61704614dad', worldPlayer: '614e9211cb574ccf' }),
+  'frame-calm-hamlet-7': Object.freeze({ gallery: '124ff33bddb5283d', galleryDmFull: '146bcb5d33de08d9', partyLink: '1113cb954bd598e1', imported: '5a349a1637786d2a', worldPlayer: '400ca8e595b27aef' }),
+  'frame-calm-village-0': Object.freeze({ gallery: '8d26ab7fb85b8e56', galleryDmFull: 'e125edffe9ec531e', partyLink: 'bb0173cd3a8168c3', imported: '75edf25721e4f9a5', worldPlayer: '5525cabd392986d1' }),
+  'frame-calm-village-76': Object.freeze({ gallery: '8f93b50759a87be4', galleryDmFull: 'bbba7ceceddba038', partyLink: '9321fd48ed18044f', imported: 'd5d0b750d328d55c', worldPlayer: 'ba7d857c7346fa23' }),
+  'frame-calm-town-1': Object.freeze({ gallery: '594c0f4e581e1503', galleryDmFull: '04129133b43dbb5a', partyLink: '29ad2c4bc13527c6', imported: '0cfd209c7c2f3231', worldPlayer: '524aa22612e6cfad' }),
+  'frame-calm-city-0': Object.freeze({ gallery: '5e53c32aec7c08bf', galleryDmFull: '380649863271c85c', partyLink: '636b4e4365f36f6e', imported: '171cc79c2f73193d', worldPlayer: '02df4b5c24d3741e' }),
+  'frame-calm-city-4': Object.freeze({ gallery: 'f96d64366e6369ae', galleryDmFull: '0e7f895a98a387e2', partyLink: '067c6ff8cf12eeb3', imported: 'cee1709e8a37a839', worldPlayer: 'de15499aed7e8230' }),
+  'frame-calm-metropolis-1': Object.freeze({ gallery: '34211488b2aab264', galleryDmFull: 'deccba4eb7587686', partyLink: 'a7aeb69a51aedfd8', imported: 'cca06e8dbce684fa', worldPlayer: '32a95948b1009748' }),
+  'frame-calm-metropolis-5': Object.freeze({ gallery: 'e2af948b1e6224d3', galleryDmFull: 'ff023d73c2d56d8c', partyLink: 'c023565c1009067d', imported: 'cfa6fe241eeccbab', worldPlayer: '33a85130672d749e' }),
 });
 
 const digest = (v) => createHash('sha256').update(JSON.stringify(v)).digest('hex').slice(0, 16);

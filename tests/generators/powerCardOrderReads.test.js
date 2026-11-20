@@ -20,6 +20,7 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 import { generatePowerStructure } from '../../src/generators/power/rulingStructure.js';
+import { powerNameWithArticle } from '../../src/domain/display/powerSentenceName.js';
 
 const MIXED = 'Power is distributed across multiple factions without a clear dominant authority.';
 // The three standing frames that name the power above (factionStanding.js, rank 1).
@@ -31,7 +32,7 @@ const FRAMES = [
 
 /** @param {any[]} factions @param {string} named */
 const resolveNamed = (factions, named) =>
-  named === 'the governing council' ? factions.find((f) => f.isGoverning) : factions.find((f) => f.faction === named);
+  named === 'the governing council' ? factions.find((f) => f.isGoverning) : factions.find((f) => powerNameWithArticle(f.faction) === named); // NAMES-1 (CN1): the article
 
 describe('SW-B1 · P51: a power card names a power above it only when that power stands above it', () => {
   /** @type {Record<number, any>} */

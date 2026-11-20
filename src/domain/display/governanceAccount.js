@@ -25,7 +25,7 @@
  * owner's to veto (docs/chair/2026-11-09/OWNER-WORDS-DOSSIER-2026-11-09.md).
  */
 import { rulingChainOf } from '../dossier/powerStrata.js';
-import { powerNameAfterArticle, powerSentenceName } from './powerSentenceName.js';
+import { powerNameWithArticle, powerSentenceName } from './powerSentenceName.js';
 import { seatKeeperOf } from '../people/seatKeeper.js';
 import { resolveDeclared } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
@@ -52,10 +52,10 @@ const text = (v) => (typeof v === 'string' ? v.trim() : '');
  */
 export function powerNameInProse(name, start = false) {
   // TAIL-DISPLAY-CIVIC-3 V1 (the chair's ruling of 2026-11-15): the name is the one leaf's prose form, its own "The"
-  // struck for the article this sentence sets ("Military/Guard" -> "the Guard", never "the Military/Guard")
-  const body = powerNameAfterArticle(text(name));
-  if (!body) return '';
-  return `${start ? 'The' : 'the'} ${body}`;
+  // struck for the article this sentence sets ("Military/Guard" -> "the Guard", never "the Military/Guard"). NAMES-1
+  // (the seventh chair's ruling CN1 of 2026-11-20): the body is the data leaf's, so every composer, the data layer's
+  // included, reads one article form (data/people/powerSentenceName.js :: powerNameWithArticle)
+  return powerNameWithArticle(text(name), start);
 }
 
 /** @param {string[]} items @returns {string} */
