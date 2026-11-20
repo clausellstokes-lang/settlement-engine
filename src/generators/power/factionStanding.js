@@ -79,7 +79,9 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }, 
           });
         },
         topFactionName = factions[0] ? factions[0].faction : null,
-        seatReading = seat ? coupContenders(/** @type {any} */ ({ powerStructure: { factions, publicLegitimacy: seat.publicLegitimacy } })) : null, // BAR4-HISTORY C14176 (FS2)
+        // SEAT-1 U4 (CS3): the partial settlement hands the law its seat carries (`seat.config`), or none, and then the coup's
+        // reader reads the OLD law (fail closed): under the seat law the power that holds the seat is no challenger of it.
+        seatReading = seat ? coupContenders(/** @type {any} */ ({ powerStructure: { factions, publicLegitimacy: seat.publicLegitimacy }, ...(seat.config ? { config: seat.config } : {}) })) : null, // BAR4-HISTORY C14176 (FS2)
         contestedBy = seatReading && coupRiskLabel(seatReading) === 'Contested' ? (seatReading.challengers[0]?.name ?? null) : null;
       // POWERS-16 (the chair's ruling (r2)): a power named in a standing sentence takes its prose form, from one leaf
       var topSaid = topFactionName ? powerNameWithArticle(topFactionName) : null;

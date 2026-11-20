@@ -21,6 +21,10 @@ import { clamp01 } from '../kernel/math.js';
 import { factionArchetype, FACTION_ARCHETYPES } from './factionArchetypes.js';
 import { governingFactionOf, num, round2, nameOf } from './rulingPower.js';
 import { ladderEffectivePowerFactor } from './townMap/ladderRead.js';
+import { seatsByHolder } from './seat/seatLaw.js';
+import { holderOf } from './seat/holderOfSeat.js';
+import { contestKindOf } from './seat/seatTable.js';
+import { SEAT_CONTEST_LIT, SEAT_CIRCUMSTANCE_TUNING, circumstanceFactorOf, seatCircumstancesOf } from './seat/seatCircumstances.js';
 
 /** @typedef {import('./rulingPower.js').RulingPowerSettlement} RulingPowerSettlement */
 
@@ -72,6 +76,15 @@ function byWeightDescThenName(a, b) {
  * amplified weight must match or beat the weakest challenger; a thinner
  * field always admits the incumbent (the pool is the top 3 by definition).
  *
+ * ⭐ UNDER THE SEAT LAW (SEAT-1 train 1, U4: CS3, CS4, CS5; `seat/seatLaw.js :: seatsByHolder`, read off the world's
+ * own config, so a partial settlement must hand its `config` or it reads the old law). The power that HOLDS the seat
+ * (`seat/holderOfSeat.js :: holderOf`, the owner's audience: the engine's own read) never contests its own seat: it
+ * leaves the challengers, and the next heaviest takes its place. The office row stays the incumbent with its own power
+ * figure, and its weight is unchanged; no share moves. Beside it, the contest's ONE dial
+ * (`seat/seatCircumstances.js :: SEAT_CONTEST_LIT`, DARK) lights the kind read (`seat/seatTable.js :: contestKindOf`)
+ * and the circumstance factors together; dark, the kind is read as before and every factor is 1. Under the old law
+ * (no marker, 1, or any foreign value) this function is byte-identical to the one before the seat law.
+ *
  * @param {RulingPowerSettlement | null | undefined} settlement
  * @returns {{ governing: Object|null,
  *            challengers: Array<{ name:string, archetype:string, power:number, weight:number }>,
@@ -83,11 +96,17 @@ export function coupContenders(settlement) {
   const factions = Array.isArray(ps.factions) ? ps.factions : [];
   const governing = governingFactionOf(settlement);
   const govMultiplier = num(ps.publicLegitimacy?.govMultiplier, 1);
+  // The seat law (U4). Old law: no holder leaves, today's kind read, no factor (byte-identical).
+  const law = seatsByHolder(settlement);
+  const holder = law ? holderOf(/** @type {import('./dossier/seatHolder.js').SeatSettlement} */ (/** @type {unknown} */ (settlement)), { audience: 'owner' }).holder : null;
+  const lit = law && SEAT_CONTEST_LIT;
+  const held = lit ? seatCircumstancesOf(/** @type {import('./seat/seatCircumstances.js').CircumstanceRecord} */ (/** @type {unknown} */ (settlement))) : null;
+  const kindOf = lit ? contestKindOf : factionArchetype;
 
   const challengers = factions
-    .filter(f => f && f !== governing)
+    .filter(f => f && f !== governing && f !== holder)
     .map(f => {
-      const archetype = factionArchetype(f);
+      const archetype = kindOf(f);
       // §8 read-side: effective power = base × the ladder's leadership/churn factor. The
       // factor is EXACTLY 1 when the ladder is dark (no npcLadder mirror) ⇒ byte-identical.
       const factor = ladderEffectivePowerFactor(/** @type {{ npcLadder?: unknown }} */ (/** @type {unknown} */ (settlement)), f);
@@ -96,7 +115,8 @@ export function coupContenders(settlement) {
         name: nameOf(f),
         archetype,
         power,
-        weight: round2(power * (COUP_COERCION[archetype] ?? COUP_COERCION[A.OTHER])),
+        weight: round2(power * (COUP_COERCION[archetype] ?? COUP_COERCION[A.OTHER])
+          * (held ? circumstanceFactorOf(archetype, held, SEAT_CIRCUMSTANCE_TUNING) : 1)),
       };
     })
     // Criminal factions never vie for power openly — the capture ladder is

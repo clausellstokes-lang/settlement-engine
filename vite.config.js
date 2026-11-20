@@ -378,6 +378,10 @@ export const FIRSTPAINT2_LAZY_DOMAIN = [
   // coherence-lazy edge. Pinned beside rulingPowerCoup.js, seatHolder.js and powerStrata.js before any generator reaches
   // it; its other imports ride engine-core and data-lazy, which this chunk already imports. Never left unpinned (FP-G11).
   '/src/domain/seat/holderOfSeat.js',
+  // SEAT-1 train 1, U4 (the contest's circumstances and its one dial, 2026-11-20; brief U4-CONTEST.md's CURE):
+  // seat/seatCircumstances.js joins engine-core like holderOfSeat.js (rulingPowerCoup.js reads it, and generators reach
+  // that). Pinned beside it before the derivation can place it; its imports ride engine-core. Never left unpinned (FP-G11).
+  '/src/domain/seat/seatCircumstances.js',
   '/src/domain/spatial/seaLanes.js',
   '/src/domain/spatial/spatialCost.js',
   '/src/domain/spatial/waterBodies.js',
