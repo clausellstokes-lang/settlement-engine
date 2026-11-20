@@ -131,6 +131,45 @@ parts of the whole check (at the close).
   `GIT_*` variable in the environment; the author read before every push). The history is not rewritten; S141 (what
   to do about the "Fixture" commits) is ruled with the other open entries.
 
+**THE DESK: THE 2026-11-15 CLOSE'S OPEN ENTRIES, RULED (00:22 UTC, 2026-11-20).** The veto list of that close
+(`docs/chair/2026-11-15/close/VETO-LIST.md` on the line, the short list's Part E, S112 to S147) left 23 entries
+open; the sixth chair counted 21 and ruled none. A read-only helper found the state of each (the evidence, entry by
+entry, with its citations: `desk/S-ITEMS-STATE.md` beside this file; the chair read it whole). ELEVEN ARE SETTLED
+SINCE by the owner's own words or a later ruling (S112, S113, S115, S117, S118, S123, S125, S128, S131, S140, S141);
+the sixth chair's own twelve questions to the owner are answered but two (they are S132 and S133). THE CHAIR'S
+RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
+- **SD1 · S119: THE PARKED SUPPLY-CHAIN ROWS STAY PARKED THROUGH THE DEPLOY** (the pilgrimage, blessed-stores and
+  divine-healing rows of ruling H4). They go on the eighth read's list. A change moves up to 72 towns' chain cards
+  and the stored figures days before a security clearance, and no later ruling asks for it.
+- **SD2 · S120: THE DRAGON TRIBUTE LINE STAYS.** It prints only where magic is on (`src/data/people/goalFamilies.js`,
+  the `commission` family: `needs: ['magic']`): the owner's design of 2026-11-08 (fantasy behind the magic gate) is
+  kept by the gate, not by striking; the owner's words of 2026-11-17 (RS1) ask for dragons "magic only".
+- **SD3 · S121 and S144: NO HOOK FOR A CRISIS STAND-IN NOW.** A hook is new text, which the owner's standing word
+  holds until the fixes are done; the exemption by identity stands. Listed for the first content round after the
+  deploy.
+- **SD4 · S122: THE HEADING "The ruling three of <power>" STAYS FOR THE DEPLOY.** It names the ruling power's three
+  ranked faces; a reader may take it for joint rule (a LOW, in the DM's text of about 107 of the 720 sample towns).
+  A reword moves two outside checks and the stored reference files, which would add a signing to the close for a
+  LOW. Listed for the first content round after the deploy, with the reword built once ("The first three of").
+- **SD5 · S124: THE 90 PER CENT RULE RATIFIED AS BUILT.** Its table is empty today
+  (`src/data/crisisDependence.js :: INPUT_GAP_HELD_EVERYWHERE`): no page moves either way.
+- **SD6 · S126: THE TITLE LAW RATIFIED AS BUILT**, with BR14 (b) and FR10 (the offices' one-string titles take no
+  female form; "Emira" built).
+- **SD7 · S143: A RUINED CRIMINAL HOUSE STILL COUNTS IN THE CRIME KEY THROUGH THE DEPLOY; MEASURE FIRST.** The key
+  (`src/domain/facts/criminalStructureKey.js`) feeds crime labels, ring notes, hooks and the veil's criminal
+  predicates: moving it now moves born towns under three builders and a reader in mid-clearance. At the eighth read:
+  count the towns keyed by a ruin alone, then rule. The house's own law elsewhere ("a ruined quarry quarries
+  nothing") points to "a ruin does not key": expected, not yet ruled.
+- **SD8 · S146: THE CLOSE IS WRITTEN DOWN AS A SCRIPT AS IT IS RUN.** The third close's seat records the exact
+  sequence it runs (the merges, each door's command, the parts of the whole check) as one resumable script in the
+  chair's tools: no separate build before the deploy. Fuller automation is tooling after the deploy; it is not the
+  code clean-up the owner tabled (S145).
+- **SD9 · S117 and S125 RATIFIED ON THE RECORD** (settled in substance by BR2 and BR4, and by the owner's words in
+  BR3 (3), "Rather than reworked"). **S141's cure was never built**: ruling SV5 and seat GIT-DOOR discharge it.
+- **THE OWNER'S HAND ALONE:** S132 (apply 211; apply 212 only after the reader's CLEAR) · S133 (pause or archive the
+  earlier accounts' scheduled task and stopped sessions: section 4) · S134 (adding usage: billing; probably overtaken
+  by the moves to fresh accounts) · the next signing's plain yes if the join moves the stored reference files.
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -153,6 +192,7 @@ parts of the whole check (at the close).
   `lane/veil-18-2026-11-19`, `lane/chair-2026-11-08` and the line when its allowance returns. This chair's seats work
   on branches of their own, so a woken seat cannot overwrite them; two chairs landing on one line is the risk.
 - At the close: the owner's plain yes on the stored reference files if the join moves the golden.
+- THE SCHEDULED TASK OF S133, by its id in the records: trig_01XAPp2Tvsunxp5QGqaqPgHx (the fifth chair's account).
 
 ## 5. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -185,3 +225,6 @@ parts of the whole check (at the close).
   other door onto a shared town: the gallery's list and cards, search, snapshots; what a non-owner can make the app
   write; the text around the page). PHASE 2 is FINAL at E's checksum, by the sixth chair's reader's own steps. Past
   450,000 tokens before FINAL, FINAL goes to a fresh reader from its hand-off.
+- 00:22 UTC · **REVIEW-VEIL-10 SEATED** (created 00:22:08 UTC): session_019yED1QR3Kx6to96YVauwV8,
+  `lane/review-veil-10-2026-11-20` from the sixth chair's reader's 7696a0cdc (ruling SV6). SIX SEATS RUN. The desk's
+  rulings SD1 to SD9 are in section 2.
