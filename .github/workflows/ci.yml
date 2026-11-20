@@ -133,8 +133,11 @@ jobs:
   # whole.sh on lane/chair-2026-11-08) splits the suite the same way, so a shard there and here
   # hold the same files.
   #
-  # THE SHARD CAP IS AN ESTIMATE until a shard concludes here, and is TIGHTENED by the house rule
-  # at the first concluded shard figure. The arithmetic: the local six shards ran 985 to 1,481 s
+  # THE SHARD CAP BY THE HOUSE RULE (point 76, 2026-11-20): the longest CONCLUDED shard here is shard 6,
+  # 36m04s in run 44659169256 at 85fccf898 (36m01s on the run before it; shards 1, 3 and 4 took 13m50s,
+  # 19m34s and 26m25s in the same run); × 1.5 = 54m06s → 60, rounded up to the next 15. The estimate it
+  # replaces stays below as history, because it was 45 and shard 6 concluded at 80% of it.
+  # THE ESTIMATE (CI-SHARD, before any shard had concluded here). The arithmetic: the local six shards ran 985 to 1,481 s
   # (docs/chair/2026-11-17/checks/candidate-e0242a12a/summary.tsv on lane/chair-2026-11-08), 7,748 s
   # in all, so the largest is 19.1% of the suite. The longest concluded serial step here is 132m33s
   # (run 44282875950); 19.1% of it is 25m20s, plus about 1 minute of the job's own set-up
@@ -143,7 +146,7 @@ jobs:
   check-tests-shard:  # deploy-gate: optional — required transitively: the `check-tests` verdict needs it and judges its reports
     name: Gate / test ratchet · shard ${{ matrix.shard }} of 6
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     strategy:
       fail-fast: false
       matrix:

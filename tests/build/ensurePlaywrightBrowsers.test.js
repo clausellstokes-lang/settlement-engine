@@ -8,6 +8,7 @@
  */
 import { describe, expect, it } from 'vitest';
 import { ensure, parseBrowsers, probe } from '../../scripts/ensure-playwright-browsers.mjs';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 /** A fake Playwright whose browsers launch only while `alive()` says so for that name. */
 function fakePlaywright(alive) {
@@ -64,7 +65,9 @@ describe('ensure-playwright-browsers: launch first, install only on a failed lau
     expect(h.installs).toEqual(['chromium webkit']);
     const out = h.lines.join('\n');
     expect(out).toMatch(/::warning title=Playwright browsers::webkit did not launch as served/);
-    expect(out).not.toMatch(/chromium did not launch/);
+    // The browser that launched is not reported as failed, anchored by its sibling's own warning on the same
+    // code path (the 'did not launch as served' line), so the absence cannot pass on an empty log.
+    expectAbsentWithAnchor(out, 'chromium did not launch', 'webkit did not launch as served', 'the fallback names only the browser that failed');
     expect(out).toMatch(/::notice title=Playwright browsers::chromium, webkit launched after the fallback install/);
   });
 
