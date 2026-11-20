@@ -1,0 +1,91 @@
+towns with a hideable house: 6
+1/6	SEARCH a withheld name in no served string or key (gallery dm=false)
+0/6	SEARCH a withheld id in no served string or key (gallery dm=false)
+3/6	HUSK no stripped row of a list (gallery dm=false)
+0/6	power shares sum 100 (gallery dm=false)
+0/6	VR42 governing row stays where its name is served (gallery dm=false)
+1/6	SEARCH a withheld name in no served string or key (link dm=false)
+0/6	SEARCH a withheld id in no served string or key (link dm=false)
+3/6	HUSK no stripped row of a list (link dm=false)
+0/6	power shares sum 100 (link dm=false)
+0/6	VR42 governing row stays where its name is served (link dm=false)
+1/6	SEARCH a withheld name in no served string or key (twin dm=false)
+0/6	SEARCH a withheld id in no served string or key (twin dm=false)
+3/6	HUSK no stripped row of a list (twin dm=false)
+0/6	power shares sum 100 (twin dm=false)
+0/6	VR42 governing row stays where its name is served (twin dm=false)
+1/6	SEARCH a withheld name in no served string or key (gallery dm=true)
+0/6	SEARCH a withheld id in no served string or key (gallery dm=true)
+1/6	HUSK no stripped row of a list (gallery dm=true)
+0/6	power shares sum 100 (gallery dm=true)
+0/6	VR42 governing row stays where its name is served (gallery dm=true)
+1/6	SEARCH a withheld name in no served string or key (link dm=true)
+0/6	SEARCH a withheld id in no served string or key (link dm=true)
+3/6	HUSK no stripped row of a list (link dm=true)
+0/6	power shares sum 100 (link dm=true)
+0/6	VR42 governing row stays where its name is served (link dm=true)
+1/6	SEARCH a withheld name in no served string or key (twin dm=true)
+0/6	SEARCH a withheld id in no served string or key (twin dm=true)
+1/6	HUSK no stripped row of a list (twin dm=true)
+0/6	power shares sum 100 (twin dm=true)
+0/6	VR42 governing row stays where its name is served (twin dm=true)
+
+EXAMPLES
+SEARCH (gallery dm=false)
+   town-insurgency-0-2 power "thieves' guild" at .powerStructure.factions[].desc: "heir support is worth buying; they play Thieves' Guild and Merchant Guilds against each other "
+SEARCH (link dm=false)
+   town-insurgency-0-2 power "thieves' guild" at .powerStructure.factions[].desc: "heir support is worth buying; they play Thieves' Guild and Merchant Guilds against each other "
+SEARCH (twin dm=false)
+   town-insurgency-0-2 power "thieves' guild" at .powerStructure.factions[].desc: "heir support is worth buying; they play Thieves' Guild and Merchant Guilds against each other "
+SEARCH (gallery dm=true)
+   town-insurgency-0-2 power "thieves' guild" at .powerStructure.factions[].desc: "heir support is worth buying; they play Thieves' Guild and Merchant Guilds against each other "
+SEARCH (link dm=true)
+   town-insurgency-0-2 power "thieves' guild" at .powerStructure.factions[].desc: "heir support is worth buying; they play Thieves' Guild and Merchant Guilds against each other "
+SEARCH (twin dm=true)
+   town-insurgency-0-2 power "thieves' guild" at .powerStructure.factions[].desc: "heir support is worth buying; they play Thieves' Guild and Merchant Guilds against each other "
+HUSK (gallery dm=false)
+   town-under_siege-0-3 .relationships[]: stripped npc1Role="the rookery boss"->null | kept id,to,from,type,tension,npc1Name,npc2Name,npc2Role,strength,typeName,flagDriven,description,archetypeKey,proseVariant
+   city-none-0-4 .relationships[]: stripped npc1Role="the black marketeer"->null | kept id,to,from,type,tension,npc1Name,npc2Name,npc2Role,strength,typeName,flagDriven,description,archetypeKey,proseVariant
+   city-insurgency-0-5 .relationships[]: stripped npc1Role="the black marketeer"->null | kept id,to,from,type,tension,npc1Name,npc2Name,npc2Role,strength,typeName,flagDriven,description,archetypeKey,proseVariant
+   city-insurgency-0-5 .relationships[]: stripped npc2Role="the black marketeer"->null | kept id,to,from,type,tension,npc1Name,npc1Role,npc2Name,strength,typeName,flagDriven,description,archetypeKey,proseVariant
+HUSK (link dm=false)
+   town-under_siege-0-3 .relationships[]: stripped npc1Role="the rookery boss"->null | kept id,to,from,type,tension,npc1Name,npc2Name,npc2Role,strength,typeName,flagDriven,description,archetypeKey,proseVariant
+   city-none-0-4 .relationships[]: stripped npc1Role="the black marketeer"->null | kept id,to,from,type,tension,npc1Name,npc2Name,npc2Role,strength,typeName,flagDriven,description,archetypeKey,proseVariant
+   city-insurgency-0-5 .relationships[]: stripped npc1Role="the black marketeer"->null | kept id,to,from,type,tension,npc1Name,npc2Name,npc2Role,strength,typeName,flagDriven,description,archetypeKey,proseVariant
+   city-insurgency-0-5 .relationships[]: stripped npc2Role="the black marketeer"->null | kept id,to,from,type,tension,npc1Name,npc1Role,npc2Name,strength,typeName,flagDriven,description,archetypeKey,proseVariant
+HUSK (twin dm=false)
+   town-under_siege-0-3 .relationships[]: stripped npc1Role="the rookery boss"->null | kept id,from,to,type,typeName,description,tension,strength,npc1Name,npc2Name,npc2Role,archetypeKey,proseVariant,flagDriven
+   city-none-0-4 .relationships[]: stripped npc1Role="the black marketeer"->null | kept id,from,to,type,typeName,description,tension,strength,npc1Name,npc2Name,npc2Role,archetypeKey,proseVariant,flagDriven
+   city-insurgency-0-5 .relationships[]: stripped npc1Role="the black marketeer"->null | kept id,from,to,type,typeName,description,tension,strength,npc1Name,npc2Name,npc2Role,archetypeKey,proseVariant,flagDriven
+   city-insurgency-0-5 .relationships[]: stripped npc2Role="the black marketeer"->null | kept id,from,to,type,typeName,description,tension,strength,npc1Name,npc2Name,npc1Role,archetypeKey,proseVariant,flagDriven
+HUSK (gallery dm=true)
+   town-under_siege-0-3 .relationships[]: stripped npc1Role="the rookery boss"->null | kept id,to,from,type,tension,npc1Name,npc2Name,npc2Role,strength,typeName,flagDriven,description,archetypeKey,proseVariant
+HUSK (link dm=true)
+   town-under_siege-0-3 .relationships[]: stripped npc1Role="the rookery boss"->null | kept id,to,from,type,tension,npc1Name,npc2Name,npc2Role,strength,typeName,flagDriven,description,archetypeKey,proseVariant
+   city-none-0-4 .relationships[]: stripped npc1Role="the black marketeer"->null | kept id,to,from,type,tension,npc1Name,npc2Name,npc2Role,strength,typeName,flagDriven,description,archetypeKey,proseVariant
+   city-insurgency-0-5 .relationships[]: stripped npc1Role="the black marketeer"->null | kept id,to,from,type,tension,npc1Name,npc2Name,npc2Role,strength,typeName,flagDriven,description,archetypeKey,proseVariant
+   city-insurgency-0-5 .relationships[]: stripped npc2Role="the black marketeer"->null | kept id,to,from,type,tension,npc1Name,npc1Role,npc2Name,strength,typeName,flagDriven,description,archetypeKey,proseVariant
+HUSK (twin dm=true)
+   town-under_siege-0-3 .relationships[]: stripped npc1Role="the rookery boss"->null | kept id,from,to,type,typeName,description,tension,strength,npc1Name,npc2Name,npc2Role,archetypeKey,proseVariant,flagDriven
+
+EXEMPTED (a hit wholly inside a served name)
+
+KEY-LEVEL (measured)
+24	contestsNiche not stored/not served (gallery dm=false)
+24	contestsNiche not stored/not served (gallery dm=true)
+24	contestsNiche not stored/not served (link dm=false)
+24	contestsNiche not stored/not served (link dm=true)
+24	contestsNiche not stored/not served (twin dm=false)
+24	contestsNiche not stored/not served (twin dm=true)
+2	contestsNiche stored/not served (gallery dm=false)
+2	contestsNiche stored/not served (gallery dm=true)
+2	contestsNiche stored/not served (link dm=false)
+2	contestsNiche stored/not served (link dm=true)
+2	contestsNiche stored/not served (twin dm=false)
+2	contestsNiche stored/not served (twin dm=true)
+280	factionAffiliation not stored/not served (gallery dm=false)
+280	factionAffiliation not stored/not served (gallery dm=true)
+280	factionAffiliation not stored/not served (link dm=false)
+280	factionAffiliation not stored/not served (link dm=true)
+280	factionAffiliation not stored/not served (twin dm=false)
+280	factionAffiliation not stored/not served (twin dm=true)
