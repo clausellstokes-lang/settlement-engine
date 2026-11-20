@@ -235,11 +235,11 @@ export const QUARREL_POOLS = Object.freeze({
     quarrel({ id: 'ma4-fines', text: "The watch has started setting fines on the spot, and the council says setting fines was never the watch's business.", needs: ['watch'] }),
     quarrel({ id: 'ma5-walls', text: "The garrison wants a larger share of the settlement's money for the walls, and the council is giving ground.", needs: ['garrison', 'walls'] }),
   ]),
-  // the else sub-branch (neither the commanders' nor the civic one, which keeps its one line). mb1 ("The militia want to
-  // decide who keeps the night watch, …", [militia]) is WITHHELD: both presumed-things arms read its "night watch" as
-  // the watch standing (`watch`), and the corpus prints it where none stands; the chair rules (reword, declare, or row)
+  // the else sub-branch (neither the commanders' nor the civic one, which keeps its one line). mb1 is the chair's wording
+  // of 18:00 UTC (the first, "… who keeps the night watch …", was withheld: the presumed-things walker read the watch)
   MILITARY_ARMED: Object.freeze([
     quarrel({ id: 'mb0-armed-household', text: "The strongest armed household has started making decisions on everyone's behalf without asking.", needs: [] }),
+    quarrel({ id: 'mb1-militia', text: 'The militia want to choose for themselves who stands guard at night, and the hall has not agreed.', needs: ['militia'] }),
   ]),
 });
 

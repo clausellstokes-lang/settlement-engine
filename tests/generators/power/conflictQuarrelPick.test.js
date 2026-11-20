@@ -234,5 +234,9 @@ describe('BUILD-CONFLICT · the recent conflict picks its everyday quarrel by ke
       (reached.get(note.lineId) ?? reached.set(note.lineId, new Set()).get(note.lineId))?.add(said);
     }
     for (const name of MILITARY) for (const line of POOLS[name] || []) expect(reached.has(line.id), `${name} ${line.id} printed and was read`).toBe(true);
+    // the chair's wording of 18:00 UTC: the else sub-branch's pool holds a quarrel needing the militia, and it prints whole
+    const militia = (POOLS.MILITARY_ARMED || []).filter((l) => l.needs.includes('militia'));
+    expect(militia.length, 'MILITARY_ARMED holds a quarrel needing militia').toBeGreaterThan(0);
+    for (const line of militia) expect(reached.get(line.id)?.size ?? 0, `${line.id} printed`).toBeGreaterThan(0);
   }, 600_000);
 });
