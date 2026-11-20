@@ -234,9 +234,13 @@ function stakeShown(s, govName, k) {
  * sentence: an infiltration's instigator absent as "an outside hand, unnamed" is reached through the keeper of a house
  * where strangers lodge. The hand is never named, nor the infiltrator power's face; `{keeper}` is a person on the record
  * (named once, in full) and `{house}` the record's own word for the house (`lodgingKeeperOf`).
+ * THE WORDS (FRAME-6 · P1BF; the chair's ruling of 2026-11-20, 12:52 UTC, the modest one, vetoable by the owner): the
+ * standing trouble's own words for the same keeper (troubleCast.js :: FRAME_REASONS.outsider). P1B's first sentence said
+ * the hand's people come and go through the house, which the record does not hold; this one says only that strangers
+ * lodge there and that its keeper would know of them (CF9: no more than the record holds).
  */
 export const CRISIS_ABSENCE_REACH = Object.freeze({
-  outsideHand: '{keeper} keeps the {house} where its people come and go',
+  outsideHand: '{keeper} keeps the {house}, where strangers lodge, and would know of them',
 });
 
 /** @typedef {{ id?: unknown, name?: unknown, role?: unknown, title?: unknown, power?: unknown, temporary?: unknown, ousted?: unknown, institution?: unknown }} KeeperNpc */
@@ -248,9 +252,11 @@ export const CRISIS_ABSENCE_REACH = Object.freeze({
  * that role), strongest first and then roster order, the first whose role, title or house (key or family) names a house
  * where strangers lodge (`LODGING_HOUSE`) and whose house the record names; the house in the record's own wording (its
  * key, less a trailing parenthesis, lower case). Rate 1 (a fact filling an absence): no hash. Null where none stands.
+ * Exported for one reader only, tests/domain/crisis/crisisKeeperBothDoors.test.js, which holds it to the rung it copies
+ * (troubleCast.js :: lodgingKeepersOf, the first of them) until one module serves both doors (FRAME-6 · P1BF).
  * @param {PageSettlement} s @returns {{ keeper: string, house: string } | null}
  */
-function lodgingKeeperOf(s) {
+export function lodgingKeeperOf(s) {
   const held = new Set(crisisContainer(s).flatMap((e) => {
     const roles = /** @type {{ cast?: { roles?: unknown } } | null} */ (e)?.cast?.roles;
     return Array.isArray(roles) ? roles : [];
