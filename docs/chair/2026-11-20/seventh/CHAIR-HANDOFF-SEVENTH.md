@@ -2626,3 +2626,41 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   stay "Elder"; Huehue and Ilama stand as an attested pair; Pencenedl kept; ITS CLASSIFIER CENSUS: all 127 words of
   the table through `roleToCategory`, `classOfRole` and `holdsOffice`: none misclassed (Magister and Archmagister
   read magic and sit in the arcane row). Its table is committed at a2d985282; `tests/lint` whole running.
+- 09:03 UTC · **VR48 (A SERVED CARD CARRIES ITS GENDER); CV7 (WHAT IS A FAULT OF AGREEMENT AND WHAT IS GOOD ENGLISH); THE WART'S
+  STYLE; FRAME-4 SEATED; THE SEAT'S LANE HOLDS ITS PROOF.** VEIL-24's READ-ONLY MEASURE (09:01; the lane's tip
+  e4cce485f; through the server; 70 born towns, 3,361 cards, every stored card gendered): (1) THE VEIL DOES NOT
+  WITHHOLD `gender`: 211 keeps it on the card's floor and 212 never names it; IT IS DROPPED BY THE OLD PUBLIC
+  ALLOWLIST (`publicSafe.js :: NPC_PUBLIC_KEYS` and its twin array in 210's sanitizer; since migration 033; no
+  reason recorded): served on the gallery read with Reveal DM on for 3,361 of 3,361, with Reveal DM off for 0, on
+  the party link for 0; (2) read on a shared page by `cardDoor.cardHonorificOf`, `seatKeeper.keeperHonorificOf` and
+  `styledTitleOf` through `patronage.js`; (3) 119 CARDS IN 60 OF 70 TOWNS PRINT THE MASCULINE FOR THAT CAUSE ALONE
+  ("Godi" for "Gydja", "Brewster" for "Alewife"; at most 6 a town); the owner's and the shared page differ on 298
+  cards in all (THE OTHER 179: asked, by cause); 46 served strings a read already say she/her/he/his, 39 beside a
+  served card's name; (4) PRODUCTION DOES THE SAME TODAY: 211 takes no correct word away. THE CHAIR'S WORD TO THE
+  OWNER OF 08:14 ("your page and the players' page always agree") WAS TOO STRONG: corrected to the owner at 09:03
+  with these figures. RULED, VR48: A SERVED CARD CARRIES ITS `gender` ON EVERY READ THAT SERVES THE CARD: in 212 and
+  the twin, never in 211; a registry row; red first by this measure (119 to 0); a born arm that a withheld card's
+  gender is served nowhere; built inside R4's second cure, its own commit; read cold with R4; said to the owner as
+  a field newly served. ALSO RULED: the lane's four red walkers become a stage before E (L): `presumedThings` (21
+  undeclared lines) and `presumptionClasses` (2) each DECLARED by the vocabulary's door, `writerReach`'s register
+  row with its cause, `phoneChromeFloor`'s count by its door.
+  NAMES-3 (08:56), before the line's commit: its pronoun measure by template, and A FINDING OUTSIDE THE SIX FILES:
+  `src/generators/power/factionStanding.js` writes every power's standing line with "they/their" whatever its
+  number (about 120 readings). RULED, CV7: A POWER IS A BODY OF PEOPLE: "THEY/THEM/THEIR" AFTER A SINGULAR-NAMED
+  POWER STAND EVERYWHERE (that file is not touched; about 1,471 raw readings counted and left); THE FAULTS ARE ONLY
+  (i) a verb whose subject is the power and whose number contradicts the power's name, in either direction and
+  after "and" too; (ii) "it/its/itself" said of a PLURAL-named power. THE 23 PUNCTUATION STRINGS: 6 harmless; 17
+  where a repeated "Name (the role)'s" was replaced; THE WART SURVIVES ON FIRST MENTIONS ("Tserenpuntsag Ongirad (the
+  miller)'s hours": 54 stored strings in 33 towns of the census, 8 in 5 of the golden; cause: a colliding card's
+  display name carries its role in a bracket). RULED AS A STYLE: the possessive of a qualified name opens the
+  bracket into an epithet ("Tserenpuntsag Ongirad the miller's hours"), in one place; the stored name and the
+  card's display name do not change (other readers fold a bracketed qualifier); the bare name still stands in every
+  changed string; it moves 8 golden strings again: named. Its order: the stored survivor; (i) and (ii); the earlier
+  seat's list where not inside them; the wart.
+  FRAME-3 (08:58): THE LINE MERGED INTO ITS LANE AND PUSHED: `lane/frame-3-2026-11-20` at 993865a02 (the manifest a
+  union; three re-pins by their proofs; the count identical town by town; `tests/lint` whole: only the five ruled
+  causes). FRAME-4 SEATED 08:59 ON IT (session_019yED1PrB8toGrEJtqXxojf; `prompts/FRAME-4.txt`); it re-ran the
+  count at that tip: 93 framed of 330 (0, 9, 15, 9, 29, 31), as expected until B9; it drafts P1b's and P4a's briefs
+  in its scratch folder. SEAT-2 (08:58): its hashing proof merged (ed3424f23; the 1,245 at 6ad3e03d1 and at the tip
+  hash to one value, 36ee5bb0…; the builder's plant read DIFFER): THE DARK LANE'S REFERENCE; `SEAT-2-HANDBACK.md`
+  rewritten for a successor (28 rulings in one list); tip 853b79890; U2 still building.
