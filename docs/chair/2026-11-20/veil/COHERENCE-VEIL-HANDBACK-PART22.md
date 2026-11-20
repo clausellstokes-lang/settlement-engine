@@ -147,3 +147,8 @@ unmarked member also sent income `weight`; R2's step covers it. (4) Stages whose
 once from the R2-green tip; R6 (tests only) may be prepared now; at ~330,000 tokens PART 22 current and the chair told.
 LATER MERGES: "DOORS" from `lane/veil-doors-3-2026-11-20` (two one-line hunks INSIDE `import_gallery_dossier`: read them
 hardest). Migration 213 joins at the close (two veil tests pin 212 as newest: the close's).
+
+STAFFING CHOSEN (04:31 UTC): R3 and R4 IN PARALLEL from the R2-green tip (disjoint hosts: `_gallery_veil_roster_choices` /
+`applyRosterChoices` against `_gallery_veil_holders`, `_gallery_veil_rekey` / `withholdHolders`, `rekeyPeople`; each in
+its own 212 section and twin block plus ONE call line; merged R3 then R4). R5 AFTER R3 (its composed rules derive from
+R3's inputs). R6 (tests only) PREPARED NOW beside the R2 cure. Briefs: `briefs/R3-BRIEF.md`, `R4-BRIEF.md`, `R6-BRIEF.md`.
