@@ -13,7 +13,7 @@ Read this, then `PAGE-5-HANDBACK.md` (§2 S6 row, §5 the ruled tables, §6 the 
 | 1 sides table | MERGED by PAGE-5 (c5da1cfb3) | c5da1cfb3 | at the join: parity test with `sideArchetypes.js` |
 | 2 S6 | MERGED by PAGE-5 (464fc1b98) | 464fc1b98 | none |
 | 3 causes: lines | ALL EIGHT KINDS RULED by the chair: A+B (14:58, 14 reworded) at f8ee0ed50; crime/guild (15:18, 6 reworded) at 19e7f7932 | f8ee0ed50, 19e7f7932 | none |
-| 3 causes: data | MERGED 01c2bbb99 (builder 558a7476e, 27b349d0e, 3bcd71ec6, c5541aa6f, d35204879; branch -wip on origin); red re-run 4/4 files failed, green 42/42, tests/lint 219/220 (ledgerCitationIntegrity, red at base); wiring re-stamped 57c964ef3; lighting 3709->3713 files 3411c9c83 | 3411c9c83 | the chair may veto the presumptionClasses CLASS_DIMS edit and the 13 merchants sentences (merged before shown) |
+| 3 causes: data | MERGED 01c2bbb99 (builder 558a7476e, 27b349d0e, 3bcd71ec6, c5541aa6f, d35204879; branch -wip on origin); red re-run 4/4 files failed, green 42/42, tests/lint 219/220, and the one red (ledgerCitationIntegrity) was NOT the base's: this clone lacked the ledger ref `review-fixes-2026-07-08` (the GREEN rule's fetch, which PAGE-7 skipped); fetched at 235efce1a, the test is 10/10 green, so tests/lint is 220/220 at 3411c9c83; wiring re-stamped 57c964ef3; lighting 3709->3713 files 3411c9c83 | 3411c9c83 | the chair may veto the presumptionClasses CLASS_DIMS edit and the 13 merchants sentences (merged before shown) |
 | 4 hooks | BUILDING: brief HOOKS-BUILD (32161f93f), branch `lane/page-7-2026-11-20-hooks` (/home/user/wt-hooks) from 3411c9c83 | | read once, red/green, censuses, merge, "HOOKS <commit>" |
 | 5 lasting effects | AFTER the hooks: PDF only; drafted effects in TROUBLE-LINES-1; strike every effect needing a hideable fact; lines to the chair first | | |
 
@@ -25,6 +25,8 @@ Read this, then `PAGE-5-HANDBACK.md` (§2 S6 row, §5 the ruled tables, §6 the 
   touched; the page prints `guild_conflict.withoutItsHouse` instead (CAUSES-DATA addendum 2); the trouble's sides stay.
 
 ## 4. Owed at the join (for the security reader and the display seat)
+- A WALKER FILE TOUCHED (accepted by the chair, 18:39, as the wiring of the granted atoms): `tests/lint/presumptionClasses.shared.mjs ::
+  CLASS_DIMS.outside` gains 'house' and 'entrepot'. The place lane and the people lane touch the same walker files: join with care.
 - THERE IS NO HIDEABLE LAYER (the chair, 17:32): `factLayers.js` is the table of READ layers (a leaf is one above the
   highest stratum it touches); `causeHouses` sits in layer 1. What makes the criminal houses hideable is
   `src/domain/people/cardVeil.js :: isHideableHouse`; the cause data's `hideable` list carries it, and the join tests the
