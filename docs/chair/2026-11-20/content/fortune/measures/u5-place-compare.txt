@@ -1,0 +1,30 @@
+late-hxd.jsonl vs end-hxd.jsonl (ruled: ruled-hxd.jsonl), 600 towns
+  towns the step moved (score differs from the ruled birth): late 64, end 64
+  score                differs late vs end in 0 towns
+  band                 differs late vs end in 0 towns
+  merits               differs late vs end in 0 towns
+  capture rung         differs late vs end in 0 towns
+  incumbent protected  differs late vs end in 0 towns
+  crisis-born          differs late vs end in 0 towns
+  ruler                differs late vs end in 0 towns
+  history              differs late vs end in 0 towns
+late-hxr.jsonl vs end-hxr.jsonl (ruled: ruled-hxr.jsonl), 600 towns
+  towns the step moved (score differs from the ruled birth): late 45, end 45
+  score                differs late vs end in 0 towns
+  band                 differs late vs end in 0 towns
+  merits               differs late vs end in 0 towns
+  capture rung         differs late vs end in 0 towns
+  incumbent protected  differs late vs end in 0 towns
+  crisis-born          differs late vs end in 0 towns
+  ruler                differs late vs end in 0 towns
+  history              differs late vs end in 0 towns
+late-hxu.jsonl vs end-hxu.jsonl (ruled: ruled-hxu.jsonl), 1200 towns
+  towns the step moved (score differs from the ruled birth): late 91, end 91
+  score                differs late vs end in 0 towns
+  band                 differs late vs end in 0 towns
+  merits               differs late vs end in 0 towns
+  capture rung         differs late vs end in 0 towns
+  incumbent protected  differs late vs end in 0 towns
+  crisis-born          differs late vs end in 0 towns
+  ruler                differs late vs end in 0 towns
+  history              differs late vs end in 0 towns

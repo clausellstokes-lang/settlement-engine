@@ -2,6 +2,8 @@
 // rule" read (the ruler's traits, the remembered hardships and today's troubles, the seat's relations), beside the
 // standing and the contest's figures. It changes no file; it reads a checkout or a `tree.mjs` / `u5-tree.mjs` copy.
 //   node u5-measure.mjs <tree> <out.jsonl> [perSize=100] [prefix=hxd] [extraConfigJson]
+// Knob U5_LAW (U5a, `u5-place.mjs`): when set, `_fortuneLawVersion: <U5_LAW>` is forced AFTER `birthConfig` (the fixture
+// arm of COMMON.md: `birthConfig` clamps an incoming marker away), for a tip that holds the rule under the fortune law.
 // The chair's recipe (measure.mjs): untouched settings `{ ...DEFAULT_CONFIG, settType }`, seeds `<prefix>-<size>-<i>`,
 // `birthConfig` then `generateSettlementPipeline`.
 import { writeFileSync } from 'node:fs';
@@ -24,7 +26,8 @@ const relOf = (text) => (/never been put right/.test(text) ? 'unresolved' : /has
 const lines = [];
 for (const size of SIZES) for (let i = 0; i < +nArg; i++) {
   const seed = `${prefix}-${size}-${i}`;
-  const t = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: size, ...extraCfg }), null, { seed, customContent: {} });
+  const born = birthConfig({ ...DEFAULT_CONFIG, settType: size, ...extraCfg });
+  const t = generateSettlementPipeline(process.env.U5_LAW ? { ...born, _fortuneLawVersion: Number(process.env.U5_LAW) } : born, null, { seed, customContent: {} });
   const ps = t.powerStructure || {}; const pl = ps.publicLegitimacy || {};
   let gated = null; try { gated = coupContenders(t).incumbent.gated; } catch { gated = 'err'; }
   const gov = (ps.factions || []).find((f) => f.isGoverning) || null;
