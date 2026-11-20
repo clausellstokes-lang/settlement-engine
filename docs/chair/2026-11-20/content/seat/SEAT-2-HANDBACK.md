@@ -1,4 +1,4 @@
-# SEAT-2 — HAND-BACK (kept current at every push; last written 2026-11-20T08:40Z, read from `date -u`)
+# SEAT-2 — HAND-BACK (kept current at every push; last written 2026-11-20T08:58Z, read from `date -u`)
 
 **For the next owner of this lane: this file, `SEAT-1-PROPOSAL.md` and `briefs/` are all you need.** Everything in force is in §1; the state of every unit in §2; every instrument in one command each in §3.
 
@@ -44,7 +44,7 @@ Branch `lane/seat-2-2026-11-20` (origin). SEAT-1 (`lane/seat-2026-11-20`, final 
 | U1 THE LAW (dark) | CS10 | `lane/seat-2026-11-20-u1` (build `b8e978336`) | wiring test: module absent 0/6 run; module only 3 failed / 3 passed; green 6/6 | `cbd97ff63`; census `dcca344d8` | MERGED, pushed |
 | (the line) | BUILD-ON `e356c94f` | – | – | `6ad3e03d1`; census `3e29b9ecf` | MERGED, pushed; `tests/lint` whole 220/220 files, 3,271/3,271 at `3e29b9ecf` |
 | U2 THE TABLE AND THE KIND | CS6, CS4 | `lane/seat-2026-11-20-u2`, cut from `fd5323d05` | – | – | BUILDING (dispatched ~07:57Z by SEAT-2) |
-| CONFINE (the hash script) | rule 23 | `lane/seat-2026-11-20-confine`, cut from `268f73378` | proof run EQUAL, plant DIFFER expected | – | BUILDING (dispatched ~08:30Z) |
+| CONFINE (the hash script) | rule 23 | `lane/seat-2026-11-20-confine` (`2a97bca10`) | proof EQUAL; plant (factionStanding.js rank-1 standing line, tip tree only) DIFFER | `ed3424f23` | MERGED, pushed. Re-run by SEAT-2 after the merge: `confine-two.sh 6ad3e03d1 ed3424f23` → all `36ee5bb0bea0bb3f…` 1245 on both, EQUAL (about 6 minutes). **The dark lane's reference hash is `36ee5bb0bea0bb3fcc6bd83f1e9e732b4dc643f09e0844545c64785798d8ce89`** |
 | U3 THE HOLDER | CS2, CS11 | – | – | – | briefed (`briefs/U3-HOLDER.md`); cut after U2 merges |
 | U4 THE CONTEST | CS3, CS4, CS5 | – | – | – | briefed (`briefs/U4-CONTEST.md`); cut after U3 and CONFINE merge |
 | U5 … U14, U8 | | | | | not briefed |
