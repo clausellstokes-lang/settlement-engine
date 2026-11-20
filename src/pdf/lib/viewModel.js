@@ -53,6 +53,7 @@ import { stressArray, foodCore, avgScore } from './viewModelPrimitives.js';
 import { crisisHookFor } from '../../domain/crisis/crisisHooks.js';
 import { crisisSummaryForSurface } from '../../domain/crisis/crisisSummaryVantage.js';
 import { dmPowerViewOf } from '../../domain/people/patronage.js';
+import { safetyShownOf } from '../../domain/display/safetyShown.js'; // PAGE-1 SAFETY (F3a): the label's one reader, and the owner's line
 
 // Human labels for the publicLegitimacy breakdown factors
 // (factionDynamics.computePublicLegitimacy emits { prosperity, safety, defense,
@@ -190,6 +191,10 @@ export function buildViewModel({
     aiAppendix:    useAi ? appendixSlice(ai) : null,
     // read from the canonical save (`raw`): the allegiance and the ranks are owner facts
     ...(dmView ? { dm: dmPowerViewOf(raw) } : {}),
+    // PAGE-1 SAFETY (F3a; the chair's ruling of 11:24): the owner's line beside the Safety label (the law two or more steps
+    // away, the ruling seat in criminal hands, a crime wave), read off the record the chapters print. ONLY in the DM's own
+    // document: the Foundry journal and every other caller leave `dmView` off, and their view model carries no such key.
+    ...(dmView ? { safetyQualifier: safetyShownOf(active, 'owner').qualifier } : {}),
   };
 }
 
@@ -279,7 +284,6 @@ function summarySlice(active, ai, useAi, aiDailyLife) {
 function identitySlice(s, canonical = s) {
   const ec = s?.economicState || {};
   const dp = s?.defenseProfile || {};
-  const sp = ec?.safetyProfile || {};
   // A+ P1.8: source food via the shared deriveFoodBalance (clamped, screen-parity),
   // not the raw unclamped metrics.foodBalance — the anchor mirrors DailyLifeTab, so
   // it must show the same number the screen + the PDF overview do (one source per fact).
@@ -309,7 +313,7 @@ function identitySlice(s, canonical = s) {
       governingName:  governing?.faction || governing?.name || null,
       prosperity:     ec?.prosperity || null,
       complexity:     complexityLabelShown(ec) || null,
-      safety:         sp?.safetyLabel || null,
+      safety:         safetyShownOf(s).label,
       // ⚠ AN UNCOMPUTED ECONOMY IS NOT A BALANCED ONE. deriveFoodBalance returns
       // `available:false` with 0/0 for a settlement whose economy was never
       // computed, and the raw `?? null` let those zeros through — so a threadbare
@@ -383,7 +387,7 @@ function overviewSlice(active, ai, useAi) {
     .sort((a, b) => b.count - a.count);
 
   const prosperity = ec?.prosperity || null;
-  const safety = sp?.safetyLabel || null;
+  const safety = safetyShownOf(s).label;
   return {
     thesis:             useAi ? (ai?.thesis || null) : null,
     arrivalScene:       useAi ? (ai?.arrivalScene || ai?.aiNarrative?.arrivalScene || null) : null,

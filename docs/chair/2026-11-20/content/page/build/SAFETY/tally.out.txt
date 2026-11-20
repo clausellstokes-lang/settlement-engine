@@ -1,0 +1,55 @@
+town300 (300): apart 53 (streets above the law 3, below 50); seat in criminal hands under a calm word 3; crime wave under a calm word 54; OWED 107; owner line printed 107; owed but no line 0; line but not owed 0; reader lines 0; reader label differs from the record 0
+  by size, apart: thorp 0/50 · hamlet 1/50 · village 2/50 · town 3/50 · city 21/50 · metropolis 26/50
+    49  Moderate on the streets; crime is rising faster than those in charge can answer it.
+    30  Moderate on the streets; the law is strong.
+     5  Volatile on the streets; the law is stretched but standing.
+     4  Dangerous on the streets; the law is stretched but standing.
+     4  Volatile on the streets; the law holds.
+     3  Tense on the streets; crime is rising faster than those in charge can answer it.
+     2  Tense on the streets; the law has broken down.
+     2  Unsafe on the streets; the law holds.
+     1  Tense on the streets; the law has broken down, and crime is rising faster than those in charge can answer it.
+     1  Dangerous on the streets; the law holds.
+     1  Unsafe on the streets; the law is strong.
+     1  Suspicious on the streets; the law holds.
+     1  Moderate on the streets; the law is strong, and the ruling seat is partly in criminal hands.
+     1  Moderate on the streets; the ruling seat is partly in criminal hands, and crime is rising faster than those in charge can answer it.
+     1  Tense on the streets; the ruling seat is partly in criminal hands.
+     1  Desperate on the streets; the law is stretched but standing.
+census720 (720): apart 145 (streets above the law 44, below 101); seat in criminal hands under a calm word 22; crime wave under a calm word 106; OWED 251; owner line printed 251; owed but no line 0; line but not owed 0; reader lines 0; reader label differs from the record 0
+  by size, apart: thorp 5/120 · hamlet 11/120 · village 20/120 · town 14/120 · city 40/120 · metropolis 55/120
+    45  Moderate on the streets; crime is rising faster than those in charge can answer it.
+    25  Tense on the streets; crime is rising faster than those in charge can answer it.
+    21  Dangerous on the streets; the law is stretched but standing.
+    18  Tense on the streets; the law has broken down.
+    14  Strained on the streets; the law holds.
+    14  Moderate on the streets; the law is strong.
+     9  Safe on the streets; crime is rising faster than those in charge can answer it.
+     9  Volatile on the streets; the law is stretched but standing.
+     8  Very safe on the streets; the law is stretched but standing.
+     8  Moderate on the streets; the ruling seat is partly in criminal hands, and crime is rising faster than those in charge can answer it.
+     8  Volatile on the streets; the law holds.
+     7  Very safe on the streets; the law is stretched but standing, and crime is rising faster than those in charge can answer it.
+     6  Controlled on the streets; the law has broken down.
+     6  Tense on the streets; the law is strong.
+     5  Dangerous on the streets; the law holds.
+     5  Strained on the streets; the law is strong.
+     5  Critical on the streets; the law is stretched but standing.
+     4  Controlled on the streets; crime is rising faster than those in charge can answer it.
+     4  Moderate on the streets; the ruling seat is partly in criminal hands.
+     4  Tense on the streets; the ruling seat is partly in criminal hands.
+     4  Suspicious on the streets; the law holds.
+     4  Desperate on the streets; the law is stretched but standing.
+     3  Unsafe on the streets; the law holds.
+     2  Tense on the streets; the ruling seat is partly in criminal hands, and crime is rising faster than those in charge can answer it.
+     2  Controlled on the streets; the ruling seat is partly in criminal hands, and crime is rising faster than those in charge can answer it.
+     2  Quarantined on the streets; crime is rising faster than those in charge can answer it.
+     1  Moderate on the streets; the law has broken down, and crime is rising faster than those in charge can answer it.
+     1  Tense on the streets; the law has broken down, and the ruling seat is partly in criminal hands.
+     1  Moderate on the streets; the ruling seat is run by the criminals.
+     1  Unsafe on the streets; the law is strong.
+     1  Desperate on the streets; the law holds.
+     1  Safe on the streets; the law is weak.
+     1  Very safe on the streets; the law is weak.
+     1  Critical on the streets; the law holds.
+     1  Tense on the streets; the law has broken down, and crime is rising faster than those in charge can answer it.

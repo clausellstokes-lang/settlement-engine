@@ -619,7 +619,7 @@ export function deriveProsperityPosture(settlement) {
  * @returns {{ label: string | null }}
  */
 export function deriveSafetyPosture(settlement) {
-  return { label: settlement?.economicState?.safetyProfile?.safetyLabel || null };
+  return { label: safetyShownOf(settlement).label }; // PAGE-1 SAFETY: the label's one reader (a reader's read: the label alone)
 }
 
 /**
@@ -795,6 +795,7 @@ export function magicRelianceDeskSettlement(settlement) {
 // The prosperity sentence's one writer (ruling 1(a)); imported here, not at the head, so the line-keyed
 // holder census's citations into this file stay put.
 import { prosperityInCrisisLine } from './prosperityInCrisis.js';
+import { safetyShownOf } from './safetyShown.js';
 
 // ── UPKEEP-8 (2026-11-13): the Outlook says only what the town's own pages say ──────────────────────────────
 // The round-three cut's #228 #253 #326 #379 and the increment's #ww-567 #ww-717 #ww-1541 (the chair's ruling: not

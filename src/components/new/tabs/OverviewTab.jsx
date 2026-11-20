@@ -26,7 +26,7 @@ import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 // Wave-2 M2: safety severity delegated to the total chokepoint. deriveFoodBalance
 // is NOT re-imported — the walk-lane fold removed the Food Deficit line that used it.
 import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
-import { safetyBandOf } from '../../../domain/display/labelBands.js';
+import { safetyShownOf, safetyAudienceOf } from '../../../domain/display/safetyShown.js'; // PAGE-1 SAFETY (F3a): the label, and the owner's line beside it
 import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands.js';
 import { deriveMagicRelianceView, magicRowsGated } from '../../../domain/display/dossierViewModel.js';
 import { prosperityInCrisisLine } from '../../../domain/display/prosperityInCrisis.js';
@@ -114,7 +114,7 @@ function ScoreRow({ label, score }) {
   );
 }
 
-function StatusTag({ label, value, _color, accent, testId, note = null }) {
+function StatusTag({ label, value, _color, accent, testId, note = null, noteTestId = 'overview-prosperity-in-crisis' }) {
   const mobile = useIsMobile();
   return (
     <div data-testid={testId} style={{ flex: '1 1 130px', background: accent ? `${accent}0d` : '#faf8f4', ...edged(`1px solid ${accent ? `${accent}35` : '#e0d0b0'}`, `3px solid ${accent || '#c8b89a'}`), padding: '7px 10px', minWidth: 0 }}>
@@ -127,8 +127,9 @@ function StatusTag({ label, value, _color, accent, testId, note = null }) {
         * the four call sites, so the next StatusTag cannot repeat it. */}
       <div style={{ fontSize: FS.sm, fontWeight: 700, color: swatch.inkMag, lineHeight: 1.3 }}>{statusCase(value) || EMPTY_VALUE}</div>
       {/* The tag's own word, where a crisis in force lowered it, says what the place is in ordinary
-        * years: the one sentence (the chair's ruling 1(a), REVIEW-UPKEEP-2; prosperityInCrisis.js). */}
-      {note && <div data-testid="overview-prosperity-in-crisis" style={{ fontSize: proseFontSize(FS.sm, mobile), color: swatch.inkMag2, fontStyle: 'italic', lineHeight: 1.4, marginTop: 3 }}>{note}</div>}
+        * years: the one sentence (the chair's ruling 1(a), REVIEW-UPKEEP-2; prosperityInCrisis.js). The Safety tag's
+        * note is the owner's line beside the law (PAGE-1 SAFETY; safetyShown.js), under its own test id. */}
+      {note && <div data-testid={noteTestId} style={{ fontSize: proseFontSize(FS.sm, mobile), color: swatch.inkMag2, fontStyle: 'italic', lineHeight: 1.4, marginTop: 3 }}>{note}</div>}
     </div>
   );
 }
@@ -193,6 +194,10 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
   const prosperityInCrisis = prosperityInCrisisLine(r);
   const via = r.economicViability || {};
   const sp = eco.safetyProfile || {};
+  // PAGE-1 SAFETY (F3a; the chair's ruling of 11:24): the Safety label as born, and ON THE OWNER'S PAGE ONLY the one line
+  // beside it where Foundations' Law & order stands two or more steps away, or the record holds what the label could not
+  // see. A gallery, shared or player page is a reader: the born label alone, byte for byte (safetyShown.js fails closed).
+  const safetyShown = safetyShownOf(r, safetyAudienceOf({ publicDossier, playerView }));
   const hist = r.history || {};
   const ra = r.resourceAnalysis || {};
   // THE IDENTITY LINE (SW-B7b): composed owner-side; a shared page prints the line shipped at
@@ -393,7 +398,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
         {/* Status tags row */}
         <div style={{display:'flex',gap:8,flexWrap:'wrap',marginBottom:14}}>
           <StatusTag label="Prosperity" value={eco.prosperity} accent={PROSPERITY_COLORS[eco.prosperity]} note={prosperityInCrisis}/>
-          <StatusTag label="Safety" value={safetyBandOf(sp.safetyLabel) ?? sp.safetyLabel} accent={safetySeverityOf(sp.safetyLabel).color}/>
+          <StatusTag label="Safety" value={safetyShown.band} accent={safetySeverityOf(sp.safetyLabel).color} note={safetyShown.qualifier} noteTestId="overview-safety-beside-law"/>
           <StatusTag label="Viability" value={via.viable===false?'Not Viable':via.viable===true?'Viable':EMPTY_VALUE} accent={via.viable===false?'#8b1a1a':via.viable===true?'#1a5a28':undefined}/>
           <StatusTag label="Defense" value={dp.readiness?.label} accent={dp.readiness?.color}/>
           {/* RELIANCE ON MAGIC — THE ONE READING (lane MAGIC, chair ruling 2, 2026-11-03). A

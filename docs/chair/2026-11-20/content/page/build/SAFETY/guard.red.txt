@@ -1,0 +1,42 @@
++   "r2s-mass_migration-city-0 cover",
++   "r2s-mass_migration-city-0 overview",
++   "r2s-mass_migration-city-0 defense",
++   "r2s-mass_migration-city-1 cover",
++   "r2s-mass_migration-city-1 overview",
++   "r2s-mass_migration-city-1 defense",
++   "r2s-mass_migration-city-3 cover",
++   "r2s-mass_migration-city-3 overview",
++   "r2s-mass_migration-city-3 defense",
++   "r2s-mass_migration-metropolis-0 cover",
++   "r2s-mass_migration-metropolis-0 overview",
++   "r2s-mass_migration-metropolis-0 defense",
++   "r2s-mass_migration-metropolis-1 cover",
++   "r2s-mass_migration-metropolis-1 overview",
++   "r2s-mass_migration-metropolis-1 defense",
++   "r2s-mass_migration-metropolis-2 cover",
++   "r2s-mass_migration-metropolis-2 overview",
++   "r2s-mass_migration-metropolis-2 defense",
++   "r2s-mass_migration-metropolis-3 cover",
++   "r2s-mass_migration-metropolis-3 overview",
++   "r2s-mass_migration-metropolis-3 defense",
++ ]
+
+ ❯ tests/ui/safetyOwnerGuard.test.jsx:130:21
+    128|     }
+    129|     console.log(`GUARD PRINT: ${missing.length} chapters without the l…
+    130|     expect(missing).toEqual([]);
+       |                     ^
+    131|   }, 1800000);
+    132|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 2 passed (4)
+   Start at  11:36:17
+   Duration  372.20s (transform 13.69s, setup 103ms, import 19.64s, tests 351.51s, environment 672ms)
+
+[gate-tail] end:  11:42:30 up 48 min,  0 user,  load average: 12.25, 9.81, 6.01
+[gate-tail] full log: /tmp/gate-tail.13028.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
