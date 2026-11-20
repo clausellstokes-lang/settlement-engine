@@ -135,6 +135,28 @@ is hidden), not built: R3 must withhold an entry by ATTRIBUTION (the type a hidd
 `criminalInstitutions` held no hidden house's name (0 of 45). Under the default veil (groupings shut) both keys are
 absent in 45 of 45.
 
+## 3d. Read (2): the cold read of "DOORS" cca49cb8d as built (04704a660). WHAT IS BUILT HOLDS.
+
+THE DIFF (212 +491, read by hunk): `_gallery_doors_band` (the stability band word); `_gallery_doors_names`, `_tile`,
+`_squeeze` (each hideable house's name, its name without the bracketed qualifier, its label and catalogue identity, and
+each DM-flagged hidden power, asked by containment in the squeezed fold); `_gallery_public_tile_rows` restated (an
+unmarked row as 147; a marked row from the read's own source, the narration then the frozen copy; facet copies unread;
+revoked from public, anon and authenticated); the chronicle's class table (43 'target', IMPOSE_CORRUPTION 'covert', an
+unknown type withheld) and `_gallery_doors_chronicle` (by identity: the houses and people the veil removed, and the hidden
+powers off Reveal-DM; the newest fifty after the removal; no id); the closed answer sends no tile and no chronicle;
+`get_gallery_map` gives an unmarked member the default veil.
+
+RED AND GREEN, RE-RUN BY ME: `galleryDoors.pglite.test.js` on a scratch tree at its base bedd5a392: 7 of 7 failed, each
+arm for its own finding (the twin arm because `galleryDoors.js` is absent there); at cca49cb8d the pglite test and the
+walker 13 of 13.
+
+MY ATTACK (`doorsa.probe.jsx`): the name lists hold no power the veil removes because its HOUSE is hidden (VR11), only the
+DM-flagged ones. 67 born towns with a hideable house, the default veil, `xd212` (chain from 04704a660's migrations), a log
+planted naming every power (IMPAIR_FACTION): 7 entries naming a veil-removed power, 0 served (the name search reaches
+them); 435 of 443 naming a served power served; no withheld house's name in any chronicle; no tile holding a withheld
+house's or power's name and no crime-worded tile. Not reached here (VEIL-DOORS-2's list): the snapshot-mode chronicle,
+the one-row read and its cost, the eight older helpers (SEC-GRANTS's 213).
+
 ## 4. THE RAW MEASURES, BOTH SHAPES, AT THIS TIP (`splitp.probe.jsx` on the new shape, 45 towns; `splitm` on master): every
 gallery read serves `economicState.compound.criminalEffective` (e.g. 82.84), `compound.militaryEffective` and
 `safetyProfile.safetyRatio` (45 of 45 new; 86 of 86 and 50 of 50 master), and `activeConditions[].severity` (32 of 45;

@@ -1,0 +1,12 @@
+     × V10-1 THE CHRONICLE DOOR: on a marked share an entry naming a house hidden whole (summary, target or payload), a covert act with a criminal grouping shut and an unclassed type are withheld who
+     × V10-1 / VR21 THE NEWEST FIFTY OF THE SERVED: a log of 70 entries whose newest five name the hidden house serves fifty, none of them withheld ones 51ms
+     × V10-3 THE TILE DOOR: on a marked share the stability tile is the band word alone (dossier column and list tile); prosperity is its stored band (VR28 tier 2); a tile holding a hideable house's 
+     × V10-3 THE CLOSED ANSWER SENDS NO TILE: a share past the name search's bound (600 houses hidden whole of 145 characters) serves the name alone and no tile beside it 901ms
+     × V10-4 THE MAP MEMBER: a member with no veil of its own takes the default veil; a marked member its own 18ms
+     × THE TILE ROWS ARE NO DOOR OF THEIR OWN: _gallery_public_tile_rows() is executable by neither anon nor authenticated (Supabase's default privileges) 3ms
+     × THE TWIN: the server and src/domain/display/galleryDoors.js send the same chronicle and the same tiles (the default veil and a hand veil, Reveal DM off and on; the closed answer) 10ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 7 ⎯⎯⎯⎯⎯⎯⎯
+ Test Files  1 failed (1)
+      Tests  7 failed (7)
+ Test Files  2 passed (2)
+      Tests  13 passed (13)
