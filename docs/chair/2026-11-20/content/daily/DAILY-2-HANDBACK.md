@@ -4,12 +4,21 @@ Lane `lane/daily-2-2026-11-20`; seat DAILY-2 (session_019yED1NEpr7XE73nDAxNLv2);
 Assignment: `origin/lane/chair-2026-11-08:docs/chair/2026-11-20/seventh/prompts/DAILY-2.txt` (it binds DAILY-1.txt's
 cure pattern, points 1 to 8). Predecessor's record: `DAILY-1-HANDBACK.md` (history; this file governs).
 
-## 1. State (written 19:03 UTC)
+## 1. State (written 19:43 UTC)
 - THE LANE WAS GIVEN at 0eadcb032 (chair, 19:03). Branch cut there.
-- Merged: B1 C1 (the dead profile call + parity arm) at 8e2534945; lighting census refrozen at 7ed8357ef.
-- RUNNING: builder B1b (brief `briefs/B1b-C2-C3-RESUME.md`), worktree `/home/user/wt-daily2-b1`, branch
-  `lane/daily-2-2026-11-20-b1`: C2 (13 kinds in both homes, every pool declared in the vocabulary's atoms, the lane's
-  hideable-and-crime arm) then C3 (`gathering_places`). Not merged.
+- Merged: B1 C1 (the dead profile call + parity arm) at 8e2534945; B1b C2 (2d7fa8399: the 13 kinds in both homes,
+  four granted atoms, the hideable-and-crime arm `tests/domain/dailyLifeAtoms.test.js`) at b4083d31f, red re-run
+  18 failed | 4 passed of 22, green re-run 65 files / 402 passed; wiring census exit 0; lighting census refrozen at
+  c4d5b14bb (files 3709, parked 474), walker 34 passed.
+- STOPPED, AWAITING THE CHAIR (asked 19:4x): B1b C3 (`gathering_places`) is BUILT and UNCOMMITTED in
+  `/home/user/wt-daily2-b1` (pools `src/data/dailyLife/gatheringPlaces.js`, `dailyLife.js`, the new
+  `tests/domain/dailyLifeGathering.test.js`, pins in `dailyLife.test.js`, `dailyLifeNoPeople.test.js`,
+  `dailyLifeAtoms.test.js`, the ruin walker's `dailyLife.js` exemption row deleted (115 -> 114),
+  `measures/B1/measure.b1.mjs` + `b1.out.txt`): top share 11/7/12/8/8/9%, EMPTY 0, false 0 on 900. One gate stops it:
+  `presumedThings.walker` ARM 1 (shrink-only; door `node scripts/presumed-things-door.mjs --check`) +4 hits. ASKED:
+  (1) `src/domain/facts/registeredWords.js :: HOUSE_FAMILIES` theatre <- institution:theatre, root cellar <-
+  institution:rootCellar (outside the manifest), N8 {bathhouse} cut; (2) N11 "When the boats come in" gains the
+  exclusion `crisis: under_siege`. On the chair's word a builder finishes C3 (the brief's B1b, resumed).
 - Lines: ALL READ AND RULED (LINES-1, 1b, 2, 2b). Nothing more goes to the chair's eye unless a builder must change a
   wording to pass a gate (then one line each).
 
@@ -93,8 +102,23 @@ baseline file's _doc on a clean tree).
 19. THE LANE DOES NOT PRINT: nothing under `src/components/`, `src/pdf/`, `supabase/`, `tests/security/`; no file under
    `src/generators/` without one line to the chair first.
 
-## 4. Atoms added (for the join; one line each, written at B1b C2's merge)
-(pending)
+## 4. Atoms added (for the join; one line each; merged at b4083d31f)
+- ATOM institution: waterSource · dwellings · farmland · commonGrazing · bridge · square · bakery · warehouse · theatre ·
+  fishingLanding · rootCellar · shepherd · craftGuild : `facts/institutions.js :: INSTITUTION_KIND_PATTERNS` + `facts/
+  factVocabulary.js :: INSTITUTION_WORDS` : the name tests of `lines/L1/probe.1.mjs :: NEEDS` (waterSource
+  /wells?|water source(s)|water system|water infrastructure|aqueduct/; dwellings /dwellings?|housing/; farmland
+  /farmland|subsistence farming/; commonGrazing /common grazing/; bridge /bridges?/; square /squares?/; bakery
+  /bak(er|ers|ery|eries|ehouse)/; warehouse /warehouse|storehouse/; theatre /theat(er|re)s?|opera house/;
+  fishingLanding /fisher'?s landing|fishing community/; rootCellar /root cellar/; shepherd /shepherd/; craftGuild
+  /craft guilds?/) : the house of that kind stands.
+- ATOM sick house : defence (`defenceOf`) : hospital or healer : a sick-house or a healer stands.
+- ATOM route open : route (`tradeRouteOf`) : not '', isolated, none : a road at all.
+- ATOM government named : rulerKind (`rulerKindOf`) : not null : the government named by its label.
+- ATOM grain imported : imports (`factsOf.imports`) : an import naming grain : grain brought in.
+- NOT GRANTED (reported; `NOT_GRANTED` in `tests/domain/dailyLifeAtoms.test.js`): millSource (the layer walker's READERS
+  arm, shrink-only), grainHeld (composite over two homes), legitimacyGrave, elders/headman/mayor/reeve/steward (label
+  name tests), smuggling (crime; owner-only slot), tradeQuarter, neighbour, monster, power.* (branch selectors).
+- Route chosen: `filterDeclared` → the house lookup → `pickVariantMixed` over the eligible lines.
 
 ## 5. Houses a wording needs (for the security reader)
 LINES-1 § THE HOUSES EACH SLOT NEEDS; LINES-2 § HOUSES EACH WORDING NEEDS; the dm slot: watch, guard force, gate,
