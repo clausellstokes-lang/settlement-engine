@@ -1,5 +1,5 @@
 RE-RUN: node docs/chair/2026-11-20/content/daily/measures/B1/measure.b1.mjs > docs/chair/2026-11-20/content/daily/measures/B1/b1.out.txt 2>&1
-births and slots: 900 (150 a size, M1's recipe) in 111s
+births and slots: 900 (150 a size, M1's recipe) in 118s
 
 | row | thorp | hamlet | village | town | city | metropolis |
 |---|---:|---:|---:|---:|---:|---:|
@@ -31,4 +31,4 @@ metropolis: 13/150 "People stop to talk on the toll bridge and at the fish marke
 hxd-thorp-0: "Where the water is drawn is where people meet and pass on their news."
 hxd-metropolis-0: "People gather on the steps of the great cathedral, where there is always someone to talk to."
 
-done in 111s
+done in 118s

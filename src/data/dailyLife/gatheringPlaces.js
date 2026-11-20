@@ -17,13 +17,16 @@
  * `institution: commonGrazing`; farming → `institution: farmland`; dwellings, landing (`fishingLanding`), rootCellar,
  * shepherd → their kinds; elder → `ruler: elder`; small → `tier: ≤ village` (LINES-1b, from the tier).
  *
- * No line needs a hideable house or a crime fact (`tests/domain/dailyLifeAtoms.test.js`, arm (c)).
+ * N11 also excludes a siege in force (`excludes: ['crisis: under_siege']`: no boats come in under a siege; the chair's ruling of
+ * 2026-11-20 19:41). No line needs a hideable house or a crime fact (`tests/domain/dailyLifeAtoms.test.js`, arm (c)).
  */
 
-/** @typedef {{ readonly id: string, readonly text: string, readonly needs: ReadonlyArray<string> }} GatheringLine */
+/** @typedef {{ readonly id: string, readonly text: string, readonly needs: ReadonlyArray<string>, readonly excludes?: ReadonlyArray<string> }} GatheringLine */
 
-/** @param {ReadonlyArray<{ id: string, text: string, needs: string[] }>} lines @returns {ReadonlyArray<GatheringLine>} */
-const frozen = (lines) => Object.freeze(lines.map((l) => Object.freeze({ ...l, needs: Object.freeze([...l.needs]) })));
+/** @param {ReadonlyArray<{ id: string, text: string, needs: string[], excludes?: string[] }>} lines @returns {ReadonlyArray<GatheringLine>} */
+const frozen = (lines) => Object.freeze(lines.map((l) => Object.freeze({
+  ...l, needs: Object.freeze([...l.needs]), ...(l.excludes ? { excludes: Object.freeze([...l.excludes]) } : {}),
+})));
 
 /** The `named` branch: the record holds a live sacred house, market or inn the line may name. */
 export const GATHERING_NAMED = frozen([
@@ -38,7 +41,7 @@ export const GATHERING_NAMED = frozen([
   { id: 'N8', text: 'Many go to {bathhouse} as much for the talk as for the water.', needs: ['institution: bathhouse'] },
   { id: 'N9', text: 'People meet while they wait their turn at {mill}, and again by {sacred}.', needs: ['institution: mill', 'sacredHouse'] },
   { id: 'N10', text: 'People stop to talk on {bridge} and at {market}, where most comings and goings pass.', needs: ['institution: bridge', 'market'] },
-  { id: 'N11', text: 'When the boats come in, people gather at {docks} to see what has been landed.', needs: ['docks'] },
+  { id: 'N11', text: 'When the boats come in, people gather at {docks} to see what has been landed.', needs: ['docks'], excludes: ['crisis: under_siege'] },
   { id: 'N12', text: 'In the evenings people gather at {theater}, and the talk carries on afterwards at {inn}.', needs: ['institution: theatre', 'institution: tavern'] },
   { id: 'N13', text: 'People gather on the steps of {cathedral}, where there is always someone to talk to.', needs: ['church'] },
   { id: 'N14', text: 'In the evenings people gather at {inn} or out on the common.', needs: ['institution: commonGrazing', 'institution: tavern'] },
