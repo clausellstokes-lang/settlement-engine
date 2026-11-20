@@ -1341,3 +1341,15 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   that runs them creates (postgres: every migration and the SQL editor). **SEAT REVIEW-GRANTS-1**
   (`prompts/REVIEW-GRANTS-1.txt`; a fresh reader; `lane/review-grants-1-2026-11-20` from fac781e7e): the 21 invoker
   helpers above all; the four histories; the rollback; the walker; "213 CLEAR at <sha256>" or the findings.
+- 04:28 UTC · **SEATED (both created 04:27 UTC): VEIL-DOORS-3**, session_019yED1S4KSGFPaKQm4Y2Mv8,
+  `lane/veil-doors-3-2026-11-20` from 4994ee371; **REVIEW-GRANTS-1**, session_019yED1PJSg4CafvWFNUXnn2,
+  `lane/review-grants-1-2026-11-20` from fac781e7e. NINETEEN SEATS OPENED BY THIS CHAIR. WORKING NOW (nine):
+  VEIL-21 (R2's cure), VEIL-DOORS-3, GIT-DOOR (the hook measure; owes "GIT-DOOR-3"), FRAME-1, NAMES-1,
+  SEAT-MEASURE, REVIEW-GRANTS-1, REVIEW-VEIL-11 (the cold read of DOORS-2's build, sent now), and none else; DONE:
+  VEIL-19, VEIL-20, VEIL-R1, VEIL-VR17, VEIL-V102, VEIL-DOORS, VEIL-DOORS-2, SEC-GRANTS, SEC-GRANTS-2, CI-FIT,
+  REVIEW-VEIL-10. TO VEIL-21: the page's ruin exemption granted with its measure; the scanner's rung placed at the
+  close; where two stages' helpers are disjoint their builders may run at the same time and be integrated in order
+  (its call, by reading); a successor is to be seated BEFORE it stops (it tells the chair at about 330,000).
+  **THE CLOSE'S LIST GAINS:** the governed rung of the observed-shape baseline (schema 46) at the joined tree; 213's
+  landing with its register rows and the patch for the veil's two head pins; the reader's name probes re-run on
+  the joined generator once NAMES lands.
