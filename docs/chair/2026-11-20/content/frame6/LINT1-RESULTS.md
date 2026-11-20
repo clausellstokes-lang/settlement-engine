@@ -70,3 +70,27 @@ Same call, same predicate, same order. No register moved.
 `tests/security/frameShareVeil.test.jsx`) 4 files, 35 passed and 1 expected fail, 0 failed (`importers2-run.txt`;
 `noLegacyFactionReaders`' core is a lint walker, run in the whole lint at the tip); `eslint troubleCast.js` 0;
 `typecheck:domain:strict` exit 0; `typecheck:ratchet` exit 0.
+
+## Cure 3 — `negativeAssertionAnchor`: the standing-ties negative goes through the repo's helper
+
+**The red** (`red3.txt`, the walker on the base file): 1 failed of 9 — "no NEW un-anchored negative assertion…":
+`tests/domain/tension/frameSheetRulings.test.js` line 93, ceiling 0:
+`for (const never of [...]) expect(FRAME_STANDING_TIES, never).not.toContain(never);`.
+
+**The cure**: the same loop now calls `expectAbsentWithAnchor(FRAME_STANDING_TIES, never, 'ally', never)` (and the file
+imports it from `tests/helpers/anchoredNegatives.js`). The meaning is kept: each of the four kinds is still asserted
+absent from the live constant, with its name as the context; the anchor `'ally'` is a member of the same constant (the
+first tie of standing), so the negative can no longer pass on an emptied or renamed collection. No other line moved.
+
+**Green**: the walker 9 of 9 (`green3.txt`); `tests/domain/tension` whole 5 files, 44 of 44 (`tension3.txt`);
+`eslint frameSheetRulings.test.js` 0; `typecheck:ratchet` exit 0.
+
+## `tests/lint` whole, at the tip's code (`lint-whole.txt`)
+
+Run once on the working tree holding all three cures (the tip's code; this results file is the only byte the commit
+adds after it): **219 of 220 files, 1 failed test of 3,271** (3,270 passed). The one red is `tuningRegister` ("the
+measured tree matches the committed inventory exactly"), its three rows exactly as in the integrator's log at
+`a170832e5` (`FRAME_TUNING` measured not in the inventory; `CRISIS_CAST_TUNING` and `WANT_MAX_WORDS` dependents moved):
+the lane's known rows, not LINT1's. `observedShapeReaders`, `factLayers` and `negativeAssertionAnchor` are green.
+
+Nothing stopped: no cure needed a signature or a register growth; no register was written.

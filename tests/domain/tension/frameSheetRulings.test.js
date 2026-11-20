@@ -24,6 +24,7 @@ import { castTroubleFrame, FRAME_REASONS, FRAME_STANDING_TIES } from '../../../s
 import { FRAME_TUNING } from '../../../src/domain/tension/sideArchetypes.js';
 import { membersByRank } from '../../../src/domain/people/membership.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../../helpers/anchoredNegatives.js';
 
 const OWNER = Object.freeze({ audience: 'owner' });
 
@@ -90,7 +91,7 @@ describe('the pool: 63 framed owner sheets', () => {
 describe('F1: the ladder is taken in order on a power\'s side; the hash chooses only within a rung', () => {
   it('the ties of standing are the record\'s own kinds that stand WITH a member: never a rivalry, an enmity, leverage or a debt', () => {
     expect([...FRAME_STANDING_TIES]).toEqual(['ally', 'respect', 'mentor_student', 'family', 'patron_client']);
-    for (const never of ['rival', 'enemy', 'political', 'debtor_creditor']) expect(FRAME_STANDING_TIES, never).not.toContain(never);
+    for (const never of ['rival', 'enemy', 'political', 'debtor_creditor']) expectAbsentWithAnchor(FRAME_STANDING_TIES, never, 'ally', never);
     expect(FRAME_REASONS.member).toBe('because {they} [is|are] one of {power}');
   });
 
