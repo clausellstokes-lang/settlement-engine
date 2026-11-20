@@ -1,0 +1,4 @@
+import fs from 'node:fs';
+const r = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
+const F = ['economicState.situationDesc','economicState.safetyProfile.safetyDesc','economicState.safetyProfile.economicDragDesc','economicViability.dependencies[].title','economicViability.dependencies[].description','economicViability.dependencies[].impact','economicViability.dependencies[].suggestedFixes[]','economicViability.warnings[].description','economicState.tradeDependencies[].impact','economicState.activeChains[].entrepotNote'];
+for (const f of F) { const cells = Object.keys(r).map((s) => { const x = r[s].find((y) => y.path === f); return x ? `${s.slice(0,5)} ${x.topN}/${x.holders}` : `${s.slice(0,5)} -`; }); console.log(f.replace('economicState.','eS.').replace('economicViability.','eV.').padEnd(44), cells.join(' | ')); }
