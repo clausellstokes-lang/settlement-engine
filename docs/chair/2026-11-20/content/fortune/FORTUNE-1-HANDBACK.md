@@ -1,4 +1,4 @@
-# FORTUNE-1 hand-back (kept current; last written 2026-11-20 10:48:44 UTC by `date -u`)
+# FORTUNE-1 hand-back (HANDED OVER to FORTUNE-2; last written 2026-11-20 11:53:24 UTC by `date -u`)
 
 For a successor (FORTUNE-2): this file and the briefs (`briefs/COMMON.md`, `U1.md` to `U4.md`) are all you need.
 Lane branch `lane/fortune-1-2026-11-20`, cut from the working line at `0c9069489`. The chair is
@@ -22,12 +22,14 @@ session_019yED1SUxGVHyjQnoqoFvQ8 (send_message, Claude Code Remote MCP server); 
    session sheet's count, the prototype forced on) are the chair's measure at the close: keep the forced-on arm
    runnable in one command (`instruments/run.sh`).
 6. The chair, 10:33: FS7 is EXHAUSTIVE for the four new combinations (U4's brief), plus the chair's finding of 10:48 on
-   the Power tab's reason clause (U4 step 4).
+   the Power tab's reason clauses (U4 step 4), plus the chair's rule of 11:52: a place AT its size's usual defence never
+   prints the defence clause (now in U4's brief, after step 4).
 7. The chair, 10:33 and 10:48: `src/generators/factionDynamics.js` is THIS lane's for U3 (only `computePublicLegitimacy`,
    its tables and helpers; never a relation line). Say "factionDynamics released at <commit>" when U3 is merged.
 8. The chair, 10:33: the mint is built exactly as the seat's U1; the collision with the seat's U1 in
    `densityCreateBoundary.js` is the chair's; our rows stay on lines of their own.
-9. The chair, 09:56: whoever lands second on a shared file re-takes every register keyed on it on the merged tree, by
+9. The chair, 10:33: the owner's page (`FOR-THE-OWNER.md`) is RE-MEASURED after the build, on the real law forced on.
+10. The chair, 09:56: whoever lands second on a shared file re-takes every register keyed on it on the merged tree, by
    its own door (proposal section 14).
 
 ## 2. The units
@@ -37,11 +39,21 @@ session_019yED1SUxGVHyjQnoqoFvQ8 (send_message, Claude Code Remote MCP server); 
 | proposal + instruments | DONE, ruled | lane/fortune-1-2026-11-20 | fe797ede1, 496c50dbc, 9edcc112e | — |
 | owner's page | DONE, relayed by the chair 10:48 | same | 9edcc112e | — |
 | briefs | DONE | same | 3e5c879e6 (+ U4 step 4 after) | briefs/ |
-| U1 law leaf, dark | BUILDING (builder seated 10:4x in worktree scratchpad/wt-u1) | lane/fortune-1-u1-2026-11-20 | — | U1.md |
+| U1 law leaf, dark | BUILDER OUT, UNREAD: committed, still running its own dependents' run at 11:53 | lane/fortune-1-u1-2026-11-20 (local, in the worktree `scratchpad/wt-u1`; relayed to the remote as `lane/fortune-1-2026-11-20-u1` when it returns) | bc3c5cc8e (author Claude <noreply@anthropic.com>) | U1.md |
 | U2 fortune | to cut after U1's merge, beside U3 | lane/fortune-1-u2-2026-11-20 | — | U2.md |
 | U3 standing + play-time guard | to cut after U1's merge, beside U2 | lane/fortune-1-u3-2026-11-20 | — | U3.md |
 | U4 FS7 | after U2 and U3 | lane/fortune-1-u4-2026-11-20 | — | U4.md |
 | re-measure forced on; confinement; final hand-back | after U4 | — | — | section 4 |
+
+THE BUILDER OUT, and WHAT TO CHECK FIRST IN ITS DIFF: one, the U1 builder (background Agent "Build FORTUNE-1 U1 law
+leaf"). Its commit `bc3c5cc8e` touches 8 files; the brief's manifest is 6. CHECK FIRST the two outside it:
+`docs/content/wiring-census.json` (2 lines) and `tests/lint/.lighting-census-baseline.json` (14 lines): the censuses are
+the integrator's, retaken by their own doors at the merge, never a builder's; read whether the builder's rows are what
+the doors would write, or drop them and retake. Then: `tests/lint/.tuning-inventory.json` (70 lines changed for one new
+table: read that only `fortuneLaw.js` rows were added and no other file's count moved); `densityCreateBoundary.js` (+28:
+the import, the clamp, the mint's spread and the `GENERATION_LAWS.fortune` row each on lines of their own, and
+`birthConfig` writing not one byte more while dark); the leaf's header (the never-before-the-seat sentence) and the
+table equal to section 10 of the proposal; the wiring test's dark arm.
 
 THE INTEGRATOR'S ROUTINE AT EACH MERGE: read the builder's diff line by line; re-run its red (check out the test alone
 on the pre-unit tree, see it fail) and its green; merge (`git merge --no-ff`) into the lane; run at the merged tip the
