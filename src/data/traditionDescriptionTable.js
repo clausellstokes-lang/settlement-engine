@@ -230,6 +230,29 @@ export const POWER_FRAME_VERBS = Object.freeze({
  *  of a verb (a house or a power may be plural: HOUSE_FRAMES). */
 export const OWNER_FRAMES = Object.freeze([plain('It is kept now by {owner}.'), plain('Its keeping falls now to {owner}.'), plain('It is in the keeping of {owner} now.')]);
 
+/**
+ * S2, WHO KEEPS IT, AGAIN (TRAD-4 unit 10; the chair's ruling of 17:55 UTC, vetoable by the owner): for each keeper frame
+ * kind, a fourth and a fifth wording, for a later rite of the SAME keeper in one town once the kind's three frames are
+ * taken (traditionDescription.js :: drawTurn's rotation). NEVER A PICK: held apart from HOUSE_FRAMES, POWER_FRAMES and
+ * OWNER_FRAMES, so no rite described alone, and no rite first to name its keeper, reads one. Each names the keeper (a
+ * place power: the place and the power) and drops the presider's clause (an earlier rite said it); no house is the
+ * subject of a verb; a power as subject takes its verb through a POWER_FRAME_VERBS slot. Beyond the fifth, the keeper
+ * sentence is left out.
+ */
+export const KEEPER_FRAMES_TOO = Object.freeze({
+  body: Object.freeze([plain('It too is in the keeping of {house}.'), plain('This one, too, is kept by {house}.')]),
+  bodyPerson: Object.freeze([plain('Its keeping, too, falls to {house}.'), plain('It, too, is kept by {house}.')]),
+  place: Object.freeze([plain('It too is held at {house}.'), plain('This one, too, is kept at {house}.')]),
+  placePerson: Object.freeze([plain('It too takes place at {house}.'), plain('This one, too, is held at {house}.')]),
+  placePower: Object.freeze([
+    plain('It too is held at {house}, in the keeping of {power}.'), plain('This one, too, is kept at {house} and falls to {power}.'),
+  ]),
+  seat: Object.freeze([plain('It too falls to {power}.'), plain('{Power} {oversees} this one as well.')]),
+  religious: Object.freeze([plain('It too is in the keeping of {power}.'), plain('{Power} {keeps} this one as well.')]),
+  merchantry: Object.freeze([plain('Its cost too is met by {power}.'), plain('{Power} {meets} the cost of this one as well.')]),
+  owner: Object.freeze([plain('It too is kept now by {owner}.'), plain('This one, too, falls now to {owner}.')]),
+});
+
 /** S3, WHERE IT COMES FROM: the only frames that assert a cause (CTR2). */
 export const CAUSE_FRAMES = Object.freeze({
   founding: Object.freeze([

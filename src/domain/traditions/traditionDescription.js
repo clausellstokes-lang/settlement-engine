@@ -63,8 +63,9 @@
  * caller that shows a SET of rites passes it (`options.set`, the set the surface shows, in its order), and inside it a
  * frame slot's wording is taken BY ROTATION (drawTurn): the first rite takes its pick as alone; a later rite whose pick
  * would print a sentence an earlier rite of the set printed takes the first wording, going on from its pick, that none
- * printed; where every wording is taken the PAYER sentence is left out (a rite need not say twice what the town lives
- * on) and any other slot keeps its pick. Keyed, no new draw, no clock, nothing stored; a rite alone, or with no set,
+ * printed; a KEEPER slot then goes on to its kind's two "too" wordings (KEEPER_FRAMES_TOO, never a pick; the chair,
+ * 17:55 UTC) and only beyond them is the keeper sentence left out; where every wording is taken the PAYER sentence is
+ * left out (a rite need not say twice what the town lives on); a cause keeps its pick. Keyed, no new draw, no clock, nothing stored; a rite alone, or with no set,
  * reads exactly as before. THE READER'S SET (CTR11) is the drawn set (shownTraditions.js :: descriptionSetOf), never a
  * row a DM can hide, and the reader's rotation reads only the reader's own compositions of its rites.
  *
@@ -92,7 +93,7 @@ import { isColourLine } from '../facts/factVocabulary.js';
 import {
   ACT_LEADS, CRISIS_SCOPED_ACTS, ELEMENT_GLOSS, CRISIS_SCOPED_ELEMENTS, KEEPER_HOUSES, HOUSE_FRAMES, POWER_FRAMES,
   OWNER_FRAMES, CAUSE_FRAMES, DEAD_EVENT_TYPES, DEAD_EVENT_SEVERITIES, DEAD_EVENT_PHRASES, ECONOMY_FIT, ECONOMY_FRAMES,
-  ECONOMY_RANKS, POWER_FRAME_VERBS,
+  ECONOMY_RANKS, POWER_FRAME_VERBS, KEEPER_FRAMES_TOO,
 } from '../../data/traditionDescriptionTable.js';
 
 /** @typedef {import('./genesis.js').TraditionRec} TraditionRec */
@@ -283,24 +284,28 @@ function draw(pool, seed, slot, poolId, facts, crisisScoped = false, turned = un
  * THE ROTATION (TRAD-4 unit 10): one frame slot's sentence, its wording taken by rotation inside the town's set. With no
  * sentence taken (a rite alone, or the first of its set) this is `render(draw(…))`, byte for byte. Otherwise, over a pool
  * of colour lines only (every frame table: a colour line is admitted everywhere, so the line taken is the line printed):
- * the first wording, going on from the pick (`pickVariant` on the same key, the pool's own order, wrapping), whose
- * sentence is not among `taken`, drawn through the one draw. Every wording taken: null where `leaveOut` (the payer: the
- * sentence is left out), else the pick as alone. A pool with a declared line or a twin is drawn as alone.
+ * the first wording, going on from the pick (`pickVariant` on the same key, the pool's own order, wrapping), then the
+ * `again` wordings in their order (a keeper's KEEPER_FRAMES_TOO: never in the pick's domain), whose sentence is not among
+ * `taken`, drawn through the one draw (over the pool and its `again` lines, so the ledger's line id indexes both). Every
+ * wording taken: null where `leaveOut` (the payer, and a keeper beyond its fifth: the sentence is left out), else the
+ * pick as alone. A pool with a declared line or a twin is drawn as alone.
  * @template L
  * @param {ReadonlyArray<L>} pool @param {string} seed @param {string} slot @param {string} poolId
  * @param {() => object|null} facts @param {(text: string) => string} render the frame filled with its slots
  * @param {Set<string>|null} taken the sentences the set's earlier rites printed @param {boolean} [leaveOut]
+ * @param {ReadonlyArray<L>} [again] the wordings after the pool's own (a keeper's "too" lines), reached only here
  * @returns {string|null}
  */
-function drawTurn(pool, seed, slot, poolId, facts, render, taken, leaveOut = false) {
-  if (taken && taken.size > 0 && pool.length > 1 && pool.every((l) => isColourLine(l))) {
+function drawTurn(pool, seed, slot, poolId, facts, render, taken, leaveOut = false, again = []) {
+  const all = [...pool, ...again];
+  if (taken && taken.size > 0 && all.length > 1 && all.every((l) => isColourLine(l))) {
     const start = pool.indexOf(/** @type {L} */ (pickVariant(pool, `${seed}::${slot}`)));
-    const free = [...pool.keys()].map((k) => pool[(start + k) % pool.length])
+    const free = [...pool.keys()].map((k) => pool[(start + k) % pool.length]).concat(again)
       .find((l) => !taken.has(render(String(lineText(l)))));
     if (free === undefined) {
       if (leaveOut) return null;
     } else if (free !== pool[start]) {
-      return render(draw(pool, seed, slot, poolId, facts, false, free));
+      return render(draw(all, seed, slot, poolId, facts, false, free));
     }
   }
   return render(draw(pool, seed, slot, poolId, facts));
@@ -511,9 +516,13 @@ function compose(recIn, settlementIn, audience, taken) {
   const want = wantedPower(rec, element, act, core);
   const owner = ownerFor(rec, settlement, reader);
   if (owner) {
-    s2 = drawTurn(OWNER_FRAMES, seed, `${id}#owner`, 'owner', facts, (x) => fill(x, { owner: owner.prose, Owner: cap(owner.prose) }), taken) ?? '';
-    parts.keeper = 'owner';
-    (owner.power ? named.powers : named.houses).push(owner.name);
+    // beyond the keeper's fifth wording in the set (TRAD-4 unit 10) the sentence is left out, and names nothing
+    s2 = drawTurn(OWNER_FRAMES, seed, `${id}#owner`, 'owner', facts, (x) => fill(x, { owner: owner.prose, Owner: cap(owner.prose) }),
+      taken, true, KEEPER_FRAMES_TOO.owner) ?? '';
+    if (s2) {
+      parts.keeper = 'owner';
+      (owner.power ? named.powers : named.houses).push(owner.name);
+    }
   } else if (!str(rec.ownerLabel)) {
     const house = want === 'seat' ? null
       : (houseFor(HOUSES_BY_ELEMENT[element], settlement, reader) || houseFor(HOUSES_BY_ACT[act], settlement, reader));
@@ -524,11 +533,14 @@ function compose(recIn, settlementIn, audience, taken) {
       s2 = drawTurn(HOUSE_FRAMES[key], seed, `${id}#house`, `house.${key}`, facts, (x) => fill(x, {
         house: house.prose, House: cap(house.prose), person: person ? person.name : '', title: person ? person.title : '',
         power: power ? powerNameInProse(power) : '',
-      }), taken) ?? '';
-      parts.keeper = 'house';
-      named.houses.push(house.name);
-      if (person) named.persons.push(person.name);
-      if (power) named.powers.push(power);
+      }), taken, true, KEEPER_FRAMES_TOO[key]) ?? '';
+      if (s2) {
+        parts.keeper = 'house';
+        named.houses.push(house.name);
+        // a "too" wording drops the presider's clause: the person is named only where the sentence names them
+        if (person && s2.includes(person.name)) named.persons.push(person.name);
+        if (power) named.powers.push(power);
+      }
     } else if (want) {
       const power = powerFor(want, settlement, reader);
       if (power) {
@@ -537,9 +549,11 @@ function compose(recIn, settlementIn, audience, taken) {
         const verbs = {};
         for (const [slot, [one, many]] of Object.entries(POWER_FRAME_VERBS)) verbs[slot] = powerVerb(power, one, many);
         s2 = drawTurn(POWER_FRAMES[want], seed, `${id}#power`, `power.${want}`, facts,
-          (x) => fill(x, { ...verbs, power: powerNameInProse(power), Power: powerNameInProse(power, true) }), taken) ?? '';
-        parts.keeper = 'power';
-        named.powers.push(power);
+          (x) => fill(x, { ...verbs, power: powerNameInProse(power), Power: powerNameInProse(power, true) }), taken, true, KEEPER_FRAMES_TOO[want]) ?? '';
+        if (s2) {
+          parts.keeper = 'power';
+          named.powers.push(power);
+        }
       }
     }
   }

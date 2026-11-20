@@ -58,6 +58,8 @@ function rows() {
   OWNER_FRAMES.forEach((line, i) => out.push({ home: `owner.${i}`, pool: 'owner', line, cause: false }));
   table('cause', CAUSE_FRAMES, true);
   table('economy', ECONOMY_FRAMES);
+  // the keeper's "too" wordings (TRAD-4 unit 10, the chair's 17:55 ruling): reached only by the rotation, never a pick
+  table('too', TABLE.KEEPER_FRAMES_TOO || {});
   return out;
 }
 
@@ -97,7 +99,8 @@ const strayIn = (text, matchers) => text.split(/(?<=\.)\s+(?=[A-Z])/).filter((s)
 describe('traditionDescriptionFrames — the closed set', () => {
   it('THE COUNT: the authored template strings number exactly the pin (a new frame moves it on purpose)', () => {
     // 92 → 125 (TRAD-4 unit 5): every gloss pool raised to three lines, and harvest's two new thanks lines' twins
-    expect(templates().length).toBe(125);
+    // 125 → 143 (TRAD-4 unit 10, the chair's 17:55 ruling): two "too" wordings for each of the nine keeper frame kinds
+    expect(templates().length).toBe(143);
   });
 
   it('every frame slot is one of the slots the leaf fills', () => {
@@ -416,5 +419,53 @@ describe('traditionDescriptionFrames — the born pool: every composed sentence 
   it('RED FIRST: a sentence no frame produces is named stray', () => {
     expect(strayIn('A common feast that honours the river. The river runs red with old grudges.', matchers))
       .toEqual(['The river runs red with old grudges.']);
+  });
+});
+
+/**
+ * THE KEEPER'S "TOO" WORDINGS (TRAD-4 unit 10; the chair, 17:55 UTC; TRAD-4's law): KEEPER_FRAMES_TOO holds, for every
+ * keeper frame kind (each kind of HOUSE_FRAMES and POWER_FRAMES, and the owner), a fourth and a fifth wording, reached
+ * ONLY by the rotation (traditionDescription.js :: drawTurn) after the kind's three frames are taken: never a pick. So
+ * none may stand in a pool the pick reaches (HOUSE_FRAMES, POWER_FRAMES, OWNER_FRAMES). Each names its keeper (the
+ * house, the power, or the owner; a place power both) and drops the presider's clause; none makes a house the subject of
+ * a verb; each says it is "too" or "as well".
+ */
+const TOO = () => /** @type {Record<string, ReadonlyArray<{ text: string }>>} */ (TABLE.KEEPER_FRAMES_TOO || {});
+/** The pools the pick reaches, by kind (the keeper frames). */
+const PICKED = () => ({ ...HOUSE_FRAMES, ...POWER_FRAMES, owner: OWNER_FRAMES });
+/** The "too" lines a pick could reach: any whose text stands in a picked pool. */
+const tooInReach = (too, picked) => Object.entries(too).flatMap(([k, lines]) => lines
+  .filter((l) => Object.values(picked).some((pool) => pool.some((p) => textOf(p) === l.text))).map((l) => `${k}: ${l.text}`));
+
+describe('traditionDescriptionFrames — the keeper\'s "too" wordings are never a pick (TRAD-4 unit 10)', () => {
+  it('every keeper frame kind has exactly two, and the table holds no other kind', () => {
+    expect(Object.keys(TOO()).sort()).toEqual(Object.keys(PICKED()).sort());
+    for (const [k, lines] of Object.entries(TOO())) expect(lines.length, k).toBe(2);
+  });
+
+  it('none stands in a pool the pick reaches', () => {
+    expect(Object.keys(TOO()).length).toBeGreaterThan(0); // not vacuous
+    expect(tooInReach(TOO(), PICKED())).toEqual([]);
+  });
+
+  it('RED FIRST: a "too" line planted into a picked pool is named', () => {
+    const planted = { ...PICKED(), seat: [...POWER_FRAMES.seat, TOO().seat[0]] };
+    expect(tooInReach(TOO(), planted)).toEqual([`seat: ${TOO().seat[0].text}`]);
+  });
+
+  it('each names its keeper, drops the presider (no {person}, no {title}), says "too" or "as well", and makes no house a subject', () => {
+    const KEEPER = { owner: /\{owner\}/, seat: /\{power\}|\{Power\}/, religious: /\{power\}|\{Power\}/, merchantry: /\{power\}|\{Power\}/ };
+    const bad = [];
+    for (const [k, lines] of Object.entries(TOO())) {
+      for (const l of lines) {
+        const keeperRe = KEEPER[k] || /\{house\}/;
+        if (!keeperRe.test(l.text)) bad.push(`${k}: no keeper: ${l.text}`);
+        if (k === 'placePower' && !/\{power\}/.test(l.text)) bad.push(`${k}: no power: ${l.text}`);
+        if (/\{person\}|\{title\}/.test(l.text)) bad.push(`${k}: a presider: ${l.text}`);
+        if (!/\btoo\b|\bas well\b/.test(l.text)) bad.push(`${k}: not "too": ${l.text}`);
+        if (/^\{[Hh]ouse\}/.test(l.text)) bad.push(`${k}: a house as subject: ${l.text}`);
+      }
+    }
+    expect(bad).toEqual([]);
   });
 });

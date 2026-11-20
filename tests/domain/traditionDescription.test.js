@@ -12,11 +12,15 @@
 import { describe, it, expect, vi } from 'vitest';
 import { describeTradition, holdsAName, HELD_NAME_STOP_WORDS } from '../../src/domain/traditions/traditionDescription.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
-import { shownTraditionsOf, sharedTraditionRowsOf } from '../../src/domain/traditions/shownTraditions.js';
+import { shownTraditionsOf, sharedTraditionRowsOf, descriptionSetOf } from '../../src/domain/traditions/shownTraditions.js';
 import { deriveFoundingTraditions } from '../../src/domain/traditions/genesis.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { declarationAdmits, declarationOf } from '../../src/domain/facts/factVocabulary.js';
 import { ACT_LEADS, ELEMENT_GLOSS, CRISIS_SCOPED_ACTS, CRISIS_SCOPED_ELEMENTS } from '../../src/data/traditionDescriptionTable.js';
+import * as DESCRIPTION_TABLE from '../../src/data/traditionDescriptionTable.js';
+
+/** The keeper's "too" wordings (TRAD-4 unit 10, the chair's 17:55 ruling): read off the table's namespace, {} before it. */
+const KEEPER_FRAMES_TOO = /** @type {Record<string, Array<{ text: string }>>} */ (DESCRIPTION_TABLE.KEEPER_FRAMES_TOO || {});
 
 /** A rite as genesis writes it (`genesis.js :: assembleRec`'s shape, the fields the leaf reads). */
 function rite(index, element, act, extra = {}) {
@@ -741,16 +745,34 @@ describe('ONE TOWN, NO SENTENCE TWICE (TRAD-4 unit 10; the chair, reading the ow
     expect(twice(inSet.map((d) => d.text))).toEqual([]);
   });
 
-  it('A KEEPER SLOT THAT RUNS OUT (Zhongmen\'s shape: four rites kept at one market by one power, three frames): the fourth keeps its own pick, nothing invented; its payer is left out', () => {
+  it('A KEEPER SLOT THAT RUNS OUT (the chair, 17:55 UTC; Zhongmen\'s shape: one market, one power): the first three rites take the three frames, the fourth and fifth the two "too" wordings (KEEPER_FRAMES_TOO, the presider\'s clause dropped), and only the sixth leaves the keeper sentence out; the fourth payer is left out', () => {
     const t = town({ institutions: [{ name: 'Weekly market', category: 'Economy' }], npcs: [], powerStructure: { factions: [{ faction: 'Merchant Guilds', category: 'economy', power: 18 }] } });
-    const recs = [1, 2, 3, 4].map((i) => rite(i, 'market', 'fair'));
-    const keeperOf = (d) => sentences(d.text)[1];
+    const recs = [1, 2, 3, 4, 5, 6].map((i) => rite(i, 'market', 'fair'));
+    const keeperOf = (d) => (d.parts.keeper ? sentences(d.text)[1] : null);
     const alone = recs.map((rec) => describeTradition(rec, t, { audience: 'owner' }));
     for (const d of alone) expect(d.parts.keeper).toBe('house'); // not vacuous: each alone is kept at the market, by the power
     const inSet = recs.map((rec) => describeTradition(rec, t, { audience: 'owner', set: recs }));
+    expect(inSet[0].text).toBe(alone[0].text);
+    const too = (KEEPER_FRAMES_TOO.placePower || []).map((l) => l.text.replace('{house}', 'the weekly market').replace('{power}', 'the Merchant Guilds'));
+    expect(too).toHaveLength(2);
     expect(new Set(inSet.slice(0, 3).map(keeperOf)).size).toBe(3);
-    expect(keeperOf(inSet[3])).toBe(keeperOf(alone[3]));
+    for (const d of inSet.slice(0, 3)) expect(too).not.toContain(keeperOf(d)); // the three frames first
+    expect(inSet.slice(3, 5).map(keeperOf)).toEqual(too);
+    expect(inSet[5].parts.keeper).toBeNull();
+    expect(inSet[5].named.houses).toEqual([]);
+    expect(inSet[5].named.powers).toEqual([]);
     expect(inSet[3].parts.origin).toBeNull();
+  });
+
+  it('A "TOO" WORDING DROPS THE PRESIDER: a fourth rite kept by a house with a presiding person names the house, not the person (the earlier rite said it)', () => {
+    const t = town({ institutions: [{ name: 'Parish church', category: 'Religious' }], powerStructure: { factions: [] } });
+    const recs = [1, 2, 3, 4].map((i) => rite(i, 'the-dead', 'offering'));
+    const inSet = recs.map((rec) => describeTradition(rec, t, { audience: 'owner', set: recs }));
+    for (const d of inSet.slice(0, 3)) expect(d.text).toContain('Edda Vogt'); // not vacuous: the frames name the priest
+    expect(inSet[3].parts.keeper).toBe('house');
+    expect(inSet[3].text).not.toContain('Edda Vogt');
+    expect(inSet[3].named.persons).toEqual([]);
+    expect(inSet[3].named.houses).toEqual(['Parish church']);
   });
 
   it('A RITE ALONE, OR NOT IN THE SET, READS EXACTLY AS WITHOUT ONE; the set is found by the same id when the objects differ', () => {
@@ -763,4 +785,53 @@ describe('ONE TOWN, NO SENTENCE TWICE (TRAD-4 unit 10; the chair, reading the ow
       recs.forEach((rec, i) => expect(describeTradition(copies[i], t, { audience, set: recs })).toEqual(describeTradition(rec, t, { audience, set: recs })));
     }
   });
+
+  // the eight towns of the 432 pool whose keeper slot ran out at the rotation's first cut (four rites, one keeper, three frames)
+  const EIGHT = [['Ravenvich', 'city', 'slavic', 'trad-f-city-slavic'], ['Pianoripa', 'metropolis', 'latin', 'trad-c-metropolis-latin'],
+    ['Castelcolonia', 'metropolis', 'latin', 'trad-f-metropolis-latin'], ['Ardthwaite', 'metropolis', 'celtic', 'trad-b-metropolis-celtic'],
+    ['Jabalabad', 'metropolis', 'arabic', 'trad-a-metropolis-arabic'], ['Zhongmen', 'metropolis', 'east_asian', 'trad-c-metropolis-east_asian'],
+    ['Bhagapuram', 'metropolis', 'south_asian', 'trad-d-metropolis-south_asian'], ['Collevetum', 'metropolis', 'mediterranean', 'trad-c-metropolis-mediterranean']];
+  const eightBorn = new Map();
+  const bornEight = ([, settType, culture, seed]) => { if (!eightBorn.has(seed)) eightBorn.set(seed, bornAt(settType, culture, seed)); return eightBorn.get(seed); };
+
+  it('THE EIGHT TOWNS whose keeper ran out (the chair, 17:55 UTC): the owner\'s page and the reader\'s drawn rows print no sentence twice', () => {
+    const found = [];
+    // seed-loop: collected — every town's every check pushes into `found`, asserted once after the loop
+    for (const sample of EIGHT) {
+      const t = bornEight(sample);
+      if (t.name !== sample[0]) found.push(`${sample[3]}: born ${t.name}, not ${sample[0]}`);
+      const recs = shownTraditionsOf(t, []).recs;
+      for (const s of twice(recs.map((rec) => describeTradition(rec, t, { audience: 'owner', set: recs })?.text ?? ''))) found.push(`${t.name} owner: ${s}`);
+      for (const s of twice((sharedTraditionRowsOf(t) || []).map((r) => r.text))) found.push(`${t.name} reader: ${s}`);
+    }
+    expect(found).toEqual([]);
+  }, 120000);
+
+  it('THE "TOO" WORDINGS ARE NEVER A PICK (TRAD-4\'s law): over the eight towns, no rite described alone, and no rite first in its set to name its keeper, prints one; and the eight do print one', () => {
+    const tooRe = Object.values(KEEPER_FRAMES_TOO).flat().map((l) => new RegExp(`^${l.text.replace(/[.*+?^$()|[\]\\]/g, '\\$&').replace(/\{\w+\}/g, '.+?')}$`));
+    const isToo = (s) => tooRe.some((re) => re.test(s));
+    const found = [];
+    let printed = 0;
+    // seed-loop: collected — every town's every check pushes into `found`, asserted once after the loop
+    for (const sample of EIGHT) {
+      const t = bornEight(sample);
+      for (const audience of ['owner', 'reader']) {
+        const set = descriptionSetOf(t, audience, []);
+        const seen = new Set();
+        for (const rec of set) {
+          const alone = describeTradition(rec, t, { audience });
+          const d = describeTradition(rec, t, { audience, set });
+          if (alone && sentences(alone.text).some(isToo)) found.push(`${t.name} ${audience} alone: ${rec.name}`);
+          if (!d) continue;
+          const keeper = JSON.stringify([d.parts.keeper, d.named.houses, d.named.powers]);
+          const tooHere = sentences(d.text).some(isToo);
+          if (tooHere) printed += 1;
+          if (tooHere && !seen.has(keeper)) found.push(`${t.name} ${audience} first of its keeper: ${rec.name}`);
+          seen.add(keeper);
+        }
+      }
+    }
+    expect(found).toEqual([]);
+    expect(printed).toBeGreaterThan(0);
+  }, 120000);
 });

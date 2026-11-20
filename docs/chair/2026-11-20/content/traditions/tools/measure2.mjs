@@ -26,14 +26,15 @@
 //   record less its criminal income rows (`isCriminal: true`, the class the reader's view drops) would print.
 import { readFileSync, writeFileSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
-import { descriptionSetOf, sharedTraditionRowsOf } from '../../../../../../src/domain/traditions/shownTraditions.js';
+import { descriptionSetOf, sharedTraditionRowsOf, shownTraditionsOf } from '../../../../../../src/domain/traditions/shownTraditions.js';
+import { deriveFoundingTraditions } from '../../../../../../src/domain/traditions/genesis.js';
 import { describeTradition, describeTraditions } from '../../../../../../src/domain/traditions/traditionDescription.js';
 import { withPresumptionLedger } from '../../../../../../src/domain/facts/presumptionLedger.js';
 import { lineText } from '../../../../../../src/domain/facts/drawDeclared.js';
 import { pickVariant } from '../../../../../../src/kernel/proseHash.js';
 import { TRADITION_ELEMENTS } from '../../../../../../src/data/traditionCorpus.js';
 import {
-  ACT_LEADS, ELEMENT_GLOSS, OWNER_FRAMES, HOUSE_FRAMES, POWER_FRAMES, CAUSE_FRAMES, ECONOMY_FRAMES,
+  ACT_LEADS, ELEMENT_GLOSS, OWNER_FRAMES, HOUSE_FRAMES, POWER_FRAMES, CAUSE_FRAMES, ECONOMY_FRAMES, KEEPER_FRAMES_TOO,
 } from '../../../../../../src/data/traditionDescriptionTable.js';
 
 const PREFIX = 'traditionDescription:';
@@ -45,6 +46,13 @@ const SLOT = {
 };
 const isTwin = (l) => !!l && typeof l === 'object' && typeof l.twinOf === 'string';
 const slotOf = (poolKey) => { const [kind, ...rest] = poolKey.split('.'); const [pool, suffix] = SLOT[kind] || []; return { kind, pool: pool ? pool(rest.join('.')) : null, suffix }; };
+/** unit 10 (the chair, 17:55): a keeper's "too" wordings follow its pool in the ledger's line ids (never in the pick's domain) */
+const tooOf = (kind, poolKey) => (kind === 'owner' ? KEEPER_FRAMES_TOO.owner : ['house', 'power'].includes(kind) ? KEEPER_FRAMES_TOO[poolKey.split('.')[1]] || [] : []);
+const TOO_RES = Object.values(KEEPER_FRAMES_TOO).flat().map((l) => new RegExp(`^${l.text.replace(/[.*+?^$()|[\]\\]/g, '\\$&').replace(/\{\w+\}/g, '.+?')}$`));
+/** does a text print a keeper's "too" wording? */
+const printsToo = (text) => String(text || '').split(/(?<=\.) (?=\p{Lu})/u).some((x) => TOO_RES.some((re) => re.test(x)));
+/** every sentence printed in two or more of the texts */
+const twiceIn = (texts) => { const m = new Map(); for (const t of texts) for (const x of String(t || '').split(/(?<=\.) (?=\p{Lu})/u).filter(Boolean)) m.set(x, (m.get(x) || 0) + 1); return [...m].filter(([, n]) => n >= 2); };
 /** the line the leaf's draw picks BEFORE resolution: pickVariant over the pool less its twins, on the leaf's key */
 const drawnBefore = (pool, seed, id, suffix) => {
   const domain = pool.some(isTwin) ? pool.filter((l) => !isTwin(l)) : pool;
@@ -71,7 +79,7 @@ export function describeWithSlots(rec, town, audience) {
     const pid = String(e.pool || ''); if (!pid.startsWith(PREFIX)) continue;
     const poolKey = pid.slice(PREFIX.length); const { kind, pool, suffix } = slotOf(poolKey);
     if (!pool) { slots.push({ pool: poolKey, kind, resolvedBy: e.resolvedBy, drawn: '(unknown pool)', printed: `#${e.lineId}` }); mismatch++; continue; }
-    const line = pool[Number(e.lineId)]; const printed = String(lineText(line) ?? '');
+    const line = [...pool, ...tooOf(kind, poolKey)][Number(e.lineId)]; const printed = String(lineText(line) ?? '');
     const drawn = drawnBefore(pool, seed, id, suffix);
     if (e.resolvedBy === 'drawn' && drawn !== printed) { if (moved) turned++; else mismatch++; }
     if (e.resolvedBy === 'twin' && !(isTwin(line) && line.twinOf === drawn)) mismatch++;
@@ -240,6 +248,34 @@ function main() {
   }
   for (const [s, o] of rep) if (!['lead+gloss', 'keeper house', 'keeper place', 'keeper power', 'owner', 'cause', 'payer'].includes(s)) out.push(`${s.padEnd(13)} towns=${o.towns.size} sentences=${o.sentences} pairs=${o.pairs}  (a sentence across slots)`);
   out.push(...samples);
+  // unit 10, the chair's 17:55 ruling and TRAD-4's law: the "too" wordings are never a pick; a keeper left out beyond its fifth
+  let tooPrinted = 0; let tooAlone = 0; let tooFirst = 0; let keeperOut = 0; const sixth = new Set(); let surfaceTwice = 0; const surfaceSamples = [];
+  for (const t of towns) {
+    const seen = new Set();
+    for (const { rec } of shownFor(t, audience)) {
+      if (!rec) continue;
+      const set = descriptionSetOf(t, audience, []);
+      const d = describeTradition(rec, t, { audience, set }); const alone = describeTradition(rec, t, { audience });
+      if (!d || !alone) continue;
+      const key = JSON.stringify([alone.parts.keeper, alone.named.houses, alone.named.powers]);
+      if (printsToo(alone.text)) tooAlone++;
+      if (printsToo(d.text)) { tooPrinted++; if (!seen.has(key)) tooFirst++; }
+      if (alone.parts.keeper && !d.parts.keeper) { keeperOut++; sixth.add(t._seed); }
+      seen.add(key);
+    }
+    // for the hand-back: the surfaces that print rites OUTSIDE the set they rotate over
+    const texts = audience === 'owner'
+      ? deriveFoundingTraditions(t).map((rec, _i, mirror) => describeTradition(rec, { ...t, traditions: mirror }, { audience: 'owner', set: descriptionSetOf({ ...t, traditions: mirror }, 'owner', []) })?.text ?? '')
+      : shownTraditionsOf(t, []).recs.map((rec) => describeTradition(rec, t, { audience: 'reader', set: descriptionSetOf(t, 'reader') })?.text ?? '');
+    const tw = twiceIn(texts); if (tw.length) { surfaceTwice++; if (surfaceSamples.length < 6) surfaceSamples.push(`  ${t.name}: ${tw.map(([x, n]) => `${n}x "${x}"`).join('; ')}`); }
+  }
+  out.push('', '## TRAD-4 unit 10, the keeper\'s "too" wordings (the chair, 17:55 UTC)');
+  out.push(`"too" wordings printed: ${tooPrinted}; in a rite described alone: ${tooAlone}; in a rite first in its set to name its keeper: ${tooFirst}`);
+  out.push(`keeper sentences left out (beyond the fifth): ${keeperOut}; towns reaching a sixth rite of one keeper: ${sixth.size} of ${towns.length}`);
+  out.push(audience === 'owner'
+    ? `THE PDF over a lit mirror (the founding set as the mirror, every row printed, a row the set drops described alone): towns printing a sentence twice: ${surfaceTwice}`
+    : `THE PLAYER TAB (the owner's set shown, the reader's description over the drawn set, a rite outside it described alone): towns printing a sentence twice: ${surfaceTwice}`);
+  out.push(...surfaceSamples);
   writeFileSync(outFile, `${out.join('\n')}\n`);
   console.log(out.slice(0, 4).join('\n'));
 }
