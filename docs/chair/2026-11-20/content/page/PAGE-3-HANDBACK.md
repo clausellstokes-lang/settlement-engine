@@ -10,8 +10,9 @@ then `briefs/BUILDER-RULES.md` and the brief of the unit you take. PAGE-3 integr
 - The lane's measure reproduces at the base (`measures/page-2/measure.mjs`, 50 a size): 39.9% three-forge (city 83.3%);
   it differs from `measure.before.out.txt` only in the two lacking-sides lines (the noted regex fix).
 - Two-tree base births: 0c9069489 and 6b82c8e4a identical (525/525, 720/720), cached in this container's scratchpad `cw/`.
-- Ruling note: PAGE-3's prompt says S6 mends 'overwhelms'; PAGE-2's ruling 1 says NOT mended. PAGE-3 follows ruling 1
-  unless the chair says otherwise (asked 13:1x).
+- RESOLVED (the chair, 12:55): the dead 'overwhelms' branch is NOT mended (PAGE-2's ruling 1 governs; the prompt's
+  clause was struck). L1's builder is cut only after S6 is on origin AND merged here; one builder at a time in
+  `historyGenerator.js` / `historyData.js`; K may run beside them.
 
 ## 2. Units
 
