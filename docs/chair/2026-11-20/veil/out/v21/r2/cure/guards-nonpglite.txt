@@ -1,0 +1,63 @@
+    508|   });
+    509|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/domain/display/criminalVeilSwitch.test.js > VS1 acceptance on the projection, over twelve births > (a)-(e) hold on every birth, plain and DM-revealing
+AssertionError: expected [ …(28) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "vs-thorp-0 (b): safety blackMarketCapture",
++   "vs-thorp-0 dm (b): safety blackMarketCapture",
++   "vs-thorp-3 (b): safety blackMarketCapture",
++   "vs-thorp-3 dm (b): safety blackMarketCapture",
++   "vs-hamlet-0 (b): safety blackMarketCapture",
++   "vs-hamlet-0 dm (b): safety blackMarketCapture",
++   "vs-hamlet-1 (b): safety blackMarketCapture",
++   "vs-hamlet-1 dm (b): safety blackMarketCapture",
++   "vs-village-0 (b): safety blackMarketCapture",
++   "vs-village-0 dm (b): safety blackMarketCapture",
++   "vs-village-2 (b): safety blackMarketCapture",
++   "vs-village-2 dm (b): safety blackMarketCapture",
++   "vs-town-0 (b): safety blackMarketCapture",
++   "vs-town-0 dm (b): safety blackMarketCapture",
++   "vs-town-2 (b): safety blackMarketCapture",
++   "vs-town-2 dm (b): safety blackMarketCapture",
++   "vs-city-0 (b): safety blackMarketCapture",
++   "vs-city-0 dm (b): safety blackMarketCapture",
++   "vs-city-1 (b): safety blackMarketCapture, income 1",
++   "vs-city-1 (c)",
++   "vs-city-1 dm (b): safety blackMarketCapture, income 1",
++   "vs-city-1 dm (c)",
++   "vs-metropolis-0 (b): safety blackMarketCapture",
++   "vs-metropolis-0 dm (b): safety blackMarketCapture",
++   "vs-metropolis-1 (b): safety blackMarketCapture, income 1",
++   "vs-metropolis-1 (c)",
++   "vs-metropolis-1 dm (b): safety blackMarketCapture, income 1",
++   "vs-metropolis-1 dm (c)",
++ ]
+
+ ❯ tests/domain/display/criminalVeilSwitch.test.js:225:22
+    223|       }
+    224|     }
+    225|     expect(failures).toEqual([]);
+       |                      ^
+    226|     expect(tally.copies).toBe(24);
+    227|     expect(tally.criminal, 'at least half the births carry a criminal …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed | 70 passed (72)
+      Tests  2 failed | 1175 passed (1177)
+   Start at  04:43:07
+   Duration  947.01s (transform 46.09s, setup 2.25s, import 91.88s, tests 1758.69s, environment 26.91s)
+
+[gate-tail] end:  04:58:54 up  2:22,  0 user,  load average: 7.42, 7.66, 6.68
+[gate-tail] full log: /tmp/gate-tail.9013.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+EXIT 1

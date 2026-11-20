@@ -119,6 +119,8 @@ const REGISTER = Object.freeze([
   // ── the veil itself (src/domain/display/galleryVeil.js) ──
   { key: 'src/domain/display/galleryVeil.js :: applyVeil :: deepClone', n: 1, verdict: 'before-veil',
     why: "applyVeil's own working copy of its input: the removal is made on it, and the page model is its output" },
+  { key: 'src/domain/display/galleryVeil.js :: projectShareVeil :: deepClone', n: 1, verdict: 'before-veil',
+    why: "VEIL-21 (R2): an unmarked share's working copy: withholdAlways removes on it (212 :: _gallery_veil's unmarked body), and the page model is its output" },
   { key: 'src/domain/display/galleryVeil.js :: galleryPayloadFor :: toPublicSafe', n: 1, verdict: 'before-veil',
     why: "the OWNER's frozen public copy (a snapshot share), stored before any veil; every read veils it, and the removal is made on the read" },
   // ── the drawing surfaces ──

@@ -78,7 +78,12 @@ const DRAWN_CONTROL = [/^economicState\.safetyProfile\.safetyLabel$/];
 /** MEASURED by this harness at its first run (VEIL-20, 2026-11-20; three born towns, the default veil, Reveal off, the
  * gallery read and the link, desktop and phone): rows the registry withholds on every read as UNDRAWN that a
  * non-owner page DRAWS. R2 re-classes each ((a) recompose or (b) withhold, VR16) and strikes it here. Shrink-only. */
-const KNOWN_DRAWN = Object.freeze(new Set(['cast.roles', 'cast.stakes', 'conditions.severity', 'defence.readiness.score', 'power.relation.direction']));
+const KNOWN_DRAWN = Object.freeze(new Set([]));
+/* STRUCK BY R2 (VEIL-21, 2026-11-20; the seventh chair's VR37), each with its class (rosterChoiceRegistry.js):
+ *   conditions.severity      withheld on every read; its band served (tier 2); the page draws the chips from the band
+ *   defence.readiness.score  withheld on every read; the label stays; the page re-derives the score (pageRederive.js)
+ *   cast.stakes, cast.roles  (b): per entry, with the power, person or house each names (212 :: _gallery_veil_cast)
+ *   power.relation.direction (b): with its relation, per entry (R3's power.relation.entry); a closed vocabulary */
 
 /** React's generated ids (useId) differ between mounts; nothing else may. */
 const normalise = (html) => html.replace(/:r[0-9a-z]+:/g, ':id:').replace(/«r[0-9a-z]+»/g, '«id»');

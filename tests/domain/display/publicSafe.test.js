@@ -694,7 +694,8 @@ describe('galleryVeil — the one default set (X-21c / X-21d, W2-VEIL-A U2)', ()
   it('criminal faction: members, goals, conflicts and description hidden; name, category and standing stay', () => {
     expect(rowsOf(bailthwaite(), 'criminal-faction')).toEqual(expect.arrayContaining(["field:faction:faction.thieves_guild:members"]));
     const f = project(bailthwaite()).powerStructure.factions;
-    expect(f[0]).toEqual({ faction: "Thieves' Guild", power: 5, rawPower: 4, powerLabel: 'Suppressed', category: 'criminal' });
+    // R2 (VEIL-21; VR16, VR14 (iii)): `rawPower` is drawn by no non-owner page and leaves every non-owner read, whatever the veil
+    expect(f[0]).toEqual({ faction: "Thieves' Guild", power: 5, powerLabel: 'Suppressed', category: 'criminal' });
     expect(f[1].desc).toBe('The trades.');
     expect(rowsOf(temurpolis(), 'criminal-faction')).toEqual([]);
   });

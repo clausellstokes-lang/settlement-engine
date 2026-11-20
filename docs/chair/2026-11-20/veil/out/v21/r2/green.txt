@@ -1,0 +1,14 @@
+gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.0.lock.shared as PID 18611 after 0 poll(s); 1 shared holder(s) live, worker cap <= 2.
+[gate-tail] start:  03:35:11 up 58 min,  0 user,  load average: 2.71, 2.42, 2.14 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/r2
+
+
+ Test Files  1 passed (1)
+      Tests  7 passed (7)
+   Start at  03:35:11
+   Duration  25.92s (transform 2.86s, setup 25ms, import 54ms, tests 25.73s, environment 0ms)
+
+[gate-tail] end:  03:35:37 up 58 min,  0 user,  load average: 2.38, 2.37, 2.13
+[gate-tail] full log: /tmp/gate-tail.18618.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)

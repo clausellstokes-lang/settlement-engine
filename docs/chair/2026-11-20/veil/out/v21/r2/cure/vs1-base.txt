@@ -1,0 +1,8 @@
+vs-city-1 (b): income 1
+vs-city-1 (c)
+vs-city-1 dm (b): income 1
+vs-city-1 dm (c)
+vs-metropolis-1 (b): income 1
+vs-metropolis-1 (c)
+vs-metropolis-1 dm (b): income 1
+vs-metropolis-1 dm (c)
