@@ -2451,7 +2451,10 @@ begin
   -- safetyProfile.js's CRIMINAL_INST_LABELS), an entry kept, in order, only as many times as served houses carry its label
   -- (the hidden "Multiple criminal factions" wrote "Rival Gangs", which holds no house's name); (b) a covert criminal service
   -- (`institution` '(covert)', the key's covert rung), drawn from the criminal climate the houses moved
-  -- (servicesGenerator.js), which no served field re-derives: withheld
+  -- (servicesGenerator.js), which no served field re-derives: withheld. R3-CURE-8 (ruling 55, the chair 16:45): (c) a
+  -- criminal service with NO `institution` key (born without one, or left without one by the hidden-house name sweep): no
+  -- served house accounts for it: withheld. Stated, not left to SQL's null: `e -> 'institution'` is null where the key is
+  -- absent, and a null condition already took the row; the twin (galleryRosterChoices.js) now does the same
   if jsonb_typeof(s #> '{economicState,safetyProfile,criminalInstitutions}') = 'array' then
     s := jsonb_set(s, '{economicState,safetyProfile,criminalInstitutions}', coalesce((select jsonb_agg(e order by o) from (
         select e, o, row_number() over (partition by e order by o) as k
@@ -2463,7 +2466,7 @@ begin
   end if;
   if jsonb_typeof(s #> '{availableServices,criminal}') = 'array' then
     s := jsonb_set(s, '{availableServices,criminal}', coalesce((select jsonb_agg(e order by o) from jsonb_array_elements(s #> '{availableServices,criminal}') with ordinality x(e, o)
-      where not (jsonb_typeof(e) = 'object' and e -> 'institution' = '"(covert)"'::jsonb)), '[]'));
+      where not (jsonb_typeof(e) = 'object' and (not (e ? 'institution') or e -> 'institution' = '"(covert)"'::jsonb))), '[]'));
   end if;
 
   -- registry: economy.complexity ((a): prosperity.js :: deriveEconomicComplexity over the SERVED rows: the tier, the income

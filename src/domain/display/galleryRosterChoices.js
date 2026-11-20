@@ -198,8 +198,13 @@ export function applyRosterChoices(s, pub, idOf) {
       return k > 0;
     });
   }
+  // R3-CURE-8 (ruling 55, the chair 16:45: THE TWIN SENT MORE): (c) a criminal service with NO `institution` key is withheld
+  // too (born without one, or left without one by the hidden-house name sweep, which took '(street gang)' or '(thieves guild)'
+  // out of it): no served house accounts for it. 212 withheld it already, by its own statement of this rule
   const svc = recAt(s, 'availableServices');
-  if (svc && Array.isArray(svc.criminal)) svc.criminal = svc.criminal.filter(x => !(isRec(x) && x.institution === COVERT));
+  if (svc && Array.isArray(svc.criminal)) {
+    svc.criminal = svc.criminal.filter(x => !(isRec(x) && (!Object.prototype.hasOwnProperty.call(x, 'institution') || x.institution === COVERT)));
+  }
 
   // registry: economy.complexity ((a): prosperity.js :: deriveEconomicComplexity over the served rows; unreadable: withheld)
   if (es && 'economicComplexity' in es) {

@@ -1,0 +1,14 @@
+r3m-town-under_siege-0-18 (own setting, Reveal off; 212 stage by stage on the twin's own projection)
+  projection: ["Muscle for hire|(street gang)","Protection racket|(street gang)"]
+  after _gallery_veil_apply: ["Muscle for hire|undefined","Protection racket|undefined"]
+  after _gallery_veil_roster_choices: []
+  after _gallery_veil_withhold_always: []
+  _gallery_veil body: []
+  the twin (projectShareVeil): ["Muscle for hire|undefined","Protection racket|undefined"]
+r3m-city-infiltrated-0-42 (own setting, Reveal off; 212 stage by stage on the twin's own projection)
+  projection: ["Arcane services (illicit)|(arcane underground)","Contraband delivery|Smuggling network","Contraband goods|Black market","Contraband transport|(smuggling)","Customs bypass|Smuggling network","Discreet passage|Underground network","Fence (stolen goods)|(thieves guild)","Money laundering|Front businesses","No-questions sales|Black market","Theft coordination|Thieves' guild chapter","Untaxed storage|Underground network"]
+  after _gallery_veil_apply: ["Arcane services (illicit)|(arcane underground)","Contraband transport|(smuggling)","Fence (stolen goods)|undefined"]
+  after _gallery_veil_roster_choices: ["Arcane services (illicit)|(arcane underground)","Contraband transport|(smuggling)"]
+  after _gallery_veil_withhold_always: ["Arcane services (illicit)|(arcane underground)","Contraband transport|(smuggling)"]
+  _gallery_veil body: ["Arcane services (illicit)|(arcane underground)","Contraband transport|(smuggling)"]
+  the twin (projectShareVeil): ["Arcane services (illicit)|(arcane underground)","Contraband transport|(smuggling)","Fence (stolen goods)|undefined"]
