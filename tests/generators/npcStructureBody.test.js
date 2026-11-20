@@ -15,6 +15,10 @@ import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailur
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { POSITION_VARIANTS } from '../../src/data/npcStructureVariants.js';
+
+/** PEOPLE-1 B1: a pooled row's member, by identity (a `{slot}` reads as any fill). @param {string} key @param {unknown} text */
+const memberOf = (key, text) => POSITION_VARIANTS[key].some((r) => new RegExp(`^${r.text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\\\{(?:house|export|import)\\\}/g, '.+')}$`).test(String(text)));
 
 /** @param {string} seed the readers' shape (rpf-/rw3-: DEFAULT_CONFIG, Random off for crises) */
 function born(seed) {
@@ -66,7 +70,9 @@ describe('POWERS-9 · a structural row of the card\'s own body', () => {
 
   it('THE GUARD: the true rows still print (the head of the town\'s one armed power; a noble body\'s lesser member)', () => {
     const calm = born('rpf-town-calm-13');
-    expect(calm.npcs.find((c) => c.name === 'Osterhild Gärtner')?.structuralPosition).toMatch(/^Commands those under arms in quiet times/);
+    // RE-KEYED BY IDENTITY (PEOPLE-1 B1, 2026-11-20, the chair's ruling of 16:41 UTC): the armed head's calm row is pooled
+    // (`data/npcStructureVariants.js :: POSITION_VARIANTS`); the head of the town's one armed power prints a member of it
+    expect(memberOf('military__stable__dominant', calm.npcs.find((c) => c.name === 'Osterhild Gärtner')?.structuralPosition), 'the armed head\'s row').toBe(true);
     // the census's 720 shape (SECOND-WAVE-CENSUS births: every random dial on)
     const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
       selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
