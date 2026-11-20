@@ -1244,3 +1244,7 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   LEFT FOR AFTER THE DEPLOY: re-dealing each person's stored hook to fit the trouble (it changes stored records that
   shared pages draw). AT THE CLOSE: both land on the line before the veil joins; the veil's born tests then run on
   the joined generator, and the reader re-runs its name probes there.
+- 04:11 UTC · **SEATED (both created 04:11 UTC): FRAME-1**, session_019yED1NiUkHZrqBw8c7yM1o, `lane/frame-2026-11-20`;
+  **NAMES-1**, session_019yED1Qe8sEJHqPB2SewHRM, `lane/names-2026-11-20`; both from the line's tip (85fccf898 when
+  seated). SIXTEEN SEATS OPENED BY THIS CHAIR; working now: VEIL-21, VEIL-DOORS-2, SEC-GRANTS-2, GIT-DOOR, FRAME-1,
+  NAMES-1; REVIEW-VEIL-11 waiting for a cure's commit; the other nine done.
