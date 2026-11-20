@@ -22,3 +22,13 @@ fit its holder" figure is one keyword family only (a floor; the true rate is unk
 (30 to 37 born under no stress): a share is good to about fifteen points; the gradient by size is far outside that.
 
 ALSO READ, WHOLE: `docs/chair/2026-11-20/content/NAMES-2-PAGE-AFTER.txt` on the line (one town's whole page).
+
+## Added 2026-11-20 09:26 UTC: how often a ruler's title becomes a culture word
+
+`titles-reach.mjs <line> 50` on the same 300 untouched towns, at the chair's copy of the line at `930459173` (the three
+titles passes merged: 259 of 726 cells authored). For each town the family of its form of government
+(`officeFamilyOfForm`), then `officeTitleIn` with the town's culture and with none: the word differs in 166 of 300
+(55%): thorp 40%, hamlet 46%, village 56%, town 66%, city 62%, metropolis 62%; by culture from 88% (slavic) to 32%
+(east_asian). The unchanged towns are mostly the elders' family (73 of 134). NOT COUNTED: a sovereign's own seat (the
+count passes `sovereign: false`); the table is called by nobody on the line yet, so this is what the page WOULD
+print once the seat's lane wires it. Output: `titles-reach.out.txt`.

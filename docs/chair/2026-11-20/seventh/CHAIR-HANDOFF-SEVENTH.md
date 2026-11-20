@@ -474,6 +474,25 @@ parts of the whole check (at the close).
   deeper pools for ties, goals and hooks; (3) one sentence that ties a past trouble to today's; (4) the rates of
   rare things. WHAT WOULD CHANGE IT: the owner or real DMs reading twenty whole towns.
 
+- **09:18 AND 09:22 UTC, 2026-11-20, THE OWNER (verbatim):** "Where are we at with everything?" and then "So what are
+  your thoughts expectant if the generated towns now?" ANSWERED EACH THE SAME TURN. THE FIRST: a table by item (the
+  share veil the long pole; names landed and re-checked; the session sheet at 93 framed by the code and 58 by the
+  rule; who rules 1 of 14 units, dark; titles 259 of 726 cells; traditions built in its lane; 213 cleared), CI red
+  as between every close, the chair's own misses of the day named, a guess of the time said as a guess, the rulings
+  the owner may want to veto, and what comes to the owner at the close. THE SECOND, FROM A FRESH COUNT (the chair's
+  copy of the line with the three titles passes merged; `measures/holistic/titles-reach.mjs`): a town will READ
+  noticeably better and be the SAME TOWN UNDERNEATH: 94% of towns have changed sentences, about 37 a town; ONCE THE
+  TITLES ARE WIRED THE CULTURE CHANGES THE RULER'S WORD IN 166 OF 300 TOWNS (55%: thorp 40%, hamlet 46%, village 56%,
+  town 66%, city 62%, metropolis 62%; slavic 88%, arabic 81%, steppe 78%, south_asian 67%, the other seven under
+  half; the unchanged towns mostly the elders' family); a description under every tradition; the sheet opening on a
+  real trouble in about 1 calm town of 6; who rules lands dark. WHAT DOES NOT CHANGE: fortune by size; repeated
+  goal sentences in cities; a thorp's one named person; three towns in four under a council or mayor at untouched
+  settings. PROMISED TO THE OWNER: before the sign-off is asked, A DOZEN WHOLE TOWNS ACROSS SIZES AND CULTURES BORN AT
+  THE JOINED TREE, READ END TO END BY THE CHAIR AND GIVEN TO THE OWNER AS PAGES; and the chair's position: the next
+  round is structure (judge each place against its own size; no repeated sentence inside one town; deeper pools),
+  not features. ALSO SAID (09:27): A SIZE RISE IS THE OWNER'S TO ACCEPT (rule 33): at the close a buy-back pass first,
+  then the remaining rise, tallied by landing, inside the one sign-off.
+
 ## 2. Rulings of this chair (each vetoable by the owner)
 
 - **SV1 (00:05 UTC, 2026-11-20): THE VEIL'S LIST ON THREE MACHINES.** VEIL-19 owns 212, its rollback and the twin's
@@ -2711,3 +2730,36 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   the walker 6 of 6; no title moved). NEITHER NAMES-2 NOR NAMES-3's VERDICT HAD RUN `tests/lint` WHOLE ON
   6c38ecfaa, AND THE CHAIR HAD NOT ASKED THE VERDICT FOR IT: whole lint is part of every verdict and of every
   hand-back that adds a test file. `tests/lint` whole is re-running at 82348360; then the rows and the push.
+- 09:33 UTC · **POINTS 79, 80 AND 81 PUSHED: THE LINE AT 0c906948 (09:32 UTC).** Point 79: the merge 313e3a6e of
+  `lane/names-2-2026-11-20` at 6c38ecfaa (the verb agreement; the pinned sentences), with the cure 82348360 of the
+  one lint red its new test raised. Point 80: the merge df06b81e of `lane/titles-2-2026-11-20` at da33bc58f. Point
+  81: the merge f2cbaedb of `lane/titles-3-2026-11-20` at 3c7191461 ("TITLES-3 3c7191461", 09:12: 14 of its 40
+  target cells, 6 sourced words: Bauermeister, Komarch, Pencenedl, Calpullec, Huehue and Ilama; 26 cells left on
+  "Elder" and "Headman", each pinned and listed; authored 259 of 726; the seat has stopped). The lighting census
+  re-taken by its door after each titles merge (6a773afd; 93045917: files 3,706, titles 31,219, suite titles
+  8,644). AT THE FINAL TREE (93045917): the changed test files and every file found to pin a sentence the agreement
+  touches: 11 of 11, 177 of 177; `tests/data`: 83 of 83, 596 of 596; `tests/lint` WHOLE: 220 of 220, 3,271 of 3,271
+  (the first whole run, before point 81, had read 219 of 220 on the agreement's own test: cured). The rows 79 to 81
+  and the amendment of row 77 (its clearance re-executed; its inventory from CI; the size tally) are in the line's
+  landings ledger (0c906948). The push's hooks green. CI is read at about 10:19 (trig_015ucseYuPoXKg5oQ8VRnAoN):
+  EXPECTED 20 failing tests (the 22 less the two pinned sentences) and the same three red jobs. "LINE at 0c906948"
+  sent to NAMES-3 (item 3 from it) and to TRAD-2 (one merge of the line, not two; a keeping power with a plural
+  name takes `powerVerb`).
+  SEAT-2 (09:25; 358,174 by its own read): U2 RETURNED WITH THREE STOPS (the build 0ab034531 on
+  `lane/seat-2026-11-20-u2`): RULED 09:27: (1) BYTES: recorded as OWED by ceiling in the hand-back (U2: first paint
+  raw +1,289, the worker +1,197), nothing re-recorded, one cumulative measure after U5 and one before the end; the
+  table keeps one home; RULE 33 READ IN THE STANDARD: the zero-slack rule stays and A RISE STAYS THE OWNER'S: at the
+  close a pass by the buy-back ledger first, then every lane's remaining rise to the owner in the one sign-off (the
+  chair had told the owner only "re-made at the close": completed at 09:27); (2) `factionCompetition.js` at its 800
+  lines: GOVERNMENT_BY_ARCHETYPE moves into the one table as the old law's ids (CS6's one home; the lane's hash
+  equal; the any-cast baseline lowered by one); (3) `writerReach` (the reach "hidden on factions" gains
+  campaign-pdf, because the one kind reader reads `hidden` to leave a hidden power out of the contest): re-recorded
+  at the merge by its door with the reason in the row, AND added to the security reader's attack list (no line of
+  the campaign PDF differs by a hidden power's presence other than by its absence); the PDF's audience asked. It
+  finishes U2, then "U2 <commit>, HANDED OVER at <tip>".
+  REVIEW-VEIL-12 (09:17), ITS PRE-MEASURE OF THE UNMERGED R3 CURE: with nothing criminal served the operations list
+  (`safety.criminalInstitutions`) still carries "Rival Gangs" in 17 of 33 towns (control 0 of 28), "Gambling
+  District" 14 (0), "Red Light District" 13 (2), "Gambling Halls" 9 (2); the derived key reads semi-organized in 29
+  of 35 against the control's 5 of 29: THE RULING'S REACH IS THE WHOLE LIST (sent to VEIL-24); and a shown power's
+  `factions[].desc` still names a withheld guild in one town on all four reads: on R5's list, TIER 1 until R5 cures
+  it. Confirmed cured there: the raised guild leaves whole; shares 100; VR42 0 of 8.
