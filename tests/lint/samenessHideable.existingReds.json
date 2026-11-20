@@ -1,5 +1,5 @@
 {
- "_doc": "SAME-1 brief 3 (the chair, 17:32 UTC 2026-11-20): RULE 1's reds standing on the base 43ab0f5eb (the join line), SHRINK-ONLY. Each row is a line (pool, vid, the first 12 hex of the sha256 of its text) that needs a crime fact or a hideable house, or stands public in a crime pool, and is not dm-only. tests/lint/samenessHideable.walker.test.js holds the reds equal to these rows: cure a line (mark it dm-only, or move it off the fact) and remove its row; a new red line reds. EXISTING_CEILING there only falls. PHASE 3 (SAME-2 brief H unit 1, the chair's 17:45 order (2)): \"hand\" banks the hand-listed pools' lines red on the merged line 1c9673e84 (pool = path :: symbol::key path, the line's text hash, why: crime pool or needs <atom>; or crime word <form>, a bare line read by the precise free-text forms the chair ruled at 19:29, SAME-2 brief H2; a key that is a sentence is read by those forms, not the key list); a hand line has no vid, so the hash is its identity. EXISTING_CEILING counts rows + hand. THE WATCH (SAME-2 brief H2 unit 5): \"watchBase\" lists the hand lines on the base 43ab0f5eb (pool, text hash, word) that hold a bare crime word outside the free-text forms; a hand line whose hash is neither in \"hand\" nor here and that holds such a word is LISTED by the walker (a warn block on stderr), never red. watchBase is not counted by EXISTING_CEILING.",
+ "_doc": "SAME-1 brief 3 (the chair, 17:32 UTC 2026-11-20): RULE 1's reds standing on the base 43ab0f5eb (the join line), SHRINK-ONLY. Each row is a line (pool, vid, the first 12 hex of the sha256 of its text) that needs a crime fact or a hideable house, or stands public in a crime pool, and is not dm-only. tests/lint/samenessHideable.walker.test.js holds the reds equal to these rows: cure a line (mark it dm-only, or move it off the fact) and remove its row; a new red line reds. EXISTING_CEILING there only falls. PHASE 3 (SAME-2 brief H unit 1, the chair's 17:45 order (2)): \"hand\" banks the hand-listed pools' lines red on the merged line 1c9673e84 (pool = path :: symbol::key path, the line's text hash, why: crime pool or needs <atom>; or crime word <form>, a bare line read by the precise free-text forms the chair ruled at 19:29, or crime house <label>, a form derived from the catalogue's hideable houses (the chair, 19:58, SAME-2 brief H3), or crime key, declared (HAND_CRIME_KEYS, with its reason), SAME-2 brief H2; a key that is a sentence is read by those forms, not the key list); a hand line has no vid, so the hash is its identity. EXISTING_CEILING counts rows + hand. THE WATCH (SAME-2 brief H2 unit 5): \"watchBase\" lists the hand lines on the base 43ab0f5eb (pool, text hash, word) that hold a bare crime word outside the free-text forms; a hand line whose hash is neither in \"hand\" nor here and that holds such a word is LISTED by the walker (a warn block on stderr), never red. watchBase is not counted by EXISTING_CEILING.",
  "rows": [
   {"pool":"DS-DEF-3::COMPOUND: criminal governance","vid":1,"sha":"9d0788086aa8","why":"crime pool"},
   {"pool":"DS-DEF-3::COMPOUND: criminal governance","vid":2,"sha":"e6929e3e7bdb","why":"crime pool"},
@@ -125,7 +125,7 @@
   {"pool":"src/data/institutionDescVariants.js :: INSTITUTION_DESC_VARIANTS::city|Criminal|Underground network","sha":"753c5be061b5","why":"crime pool"},
   {"pool":"src/data/institutionDescVariants.js :: INSTITUTION_DESC_VARIANTS::city|Criminal|Underground network","sha":"c03ff8b3d4d1","why":"crime pool"},
   {"pool":"src/data/institutionDescVariants.js :: INSTITUTION_DESC_VARIANTS::city|Criminal|Whisper market","sha":"7ec59c4839bb","why":"crime pool"},
-  {"pool":"src/data/institutionDescVariants.js :: INSTITUTION_DESC_VARIANTS::city|Criminal|Whisper market","sha":"e3fce9c20614","why":"crime pool"},
+  {"pool":"src/data/institutionDescVariants.js :: INSTITUTION_DESC_VARIANTS::city|Criminal|Whisper market","sha":"e3fce9c20614","why":"crime pool; crime house fence-"},
   {"pool":"src/data/institutionDescVariants.js :: INSTITUTION_DESC_VARIANTS::city|Infrastructure|Large prison","sha":"affa98e8ebbc","why":"crime word criminal"},
   {"pool":"src/data/institutionDescVariants.js :: INSTITUTION_DESC_VARIANTS::city|Infrastructure|Large prison","sha":"eeee9dc73ed1","why":"crime word criminal"},
   {"pool":"src/data/institutionDescVariants.js :: INSTITUTION_DESC_VARIANTS::hamlet|Criminal|Bandit affiliate","sha":"365df5c8f09a","why":"crime pool"},
@@ -159,7 +159,7 @@
   {"pool":"src/data/institutionDescVariants.js :: INSTITUTION_DESC_VARIANTS::metropolis|Criminal|Underground network","sha":"753c5be061b5","why":"crime pool"},
   {"pool":"src/data/institutionDescVariants.js :: INSTITUTION_DESC_VARIANTS::metropolis|Criminal|Underground network","sha":"c03ff8b3d4d1","why":"crime pool"},
   {"pool":"src/data/institutionDescVariants.js :: INSTITUTION_DESC_VARIANTS::metropolis|Criminal|Whisper market","sha":"7ec59c4839bb","why":"crime pool"},
-  {"pool":"src/data/institutionDescVariants.js :: INSTITUTION_DESC_VARIANTS::metropolis|Criminal|Whisper market","sha":"e3fce9c20614","why":"crime pool"},
+  {"pool":"src/data/institutionDescVariants.js :: INSTITUTION_DESC_VARIANTS::metropolis|Criminal|Whisper market","sha":"e3fce9c20614","why":"crime pool; crime house fence-"},
   {"pool":"src/data/institutionDescVariants.js :: INSTITUTION_DESC_VARIANTS::thorp|Criminal|Local fence","sha":"463860c752c5","why":"crime pool"},
   {"pool":"src/data/institutionDescVariants.js :: INSTITUTION_DESC_VARIANTS::thorp|Criminal|Local fence","sha":"f23d779d11d3","why":"crime pool"},
   {"pool":"src/data/institutionDescVariants.js :: INSTITUTION_DESC_VARIANTS::thorp|Criminal|Outlaw shelter","sha":"473ec7db7de4","why":"crime pool"},
@@ -176,6 +176,8 @@
   {"pool":"src/data/institutionDescVariants.js :: INSTITUTION_DESC_VARIANTS::town|Criminal|Street gang","sha":"d9c29a71b42d","why":"crime pool"},
   {"pool":"src/data/institutionDescVariants.js :: INSTITUTION_DESC_VARIANTS::town|Criminal|Underground network","sha":"a60d8f7d12ad","why":"crime pool"},
   {"pool":"src/data/institutionDescVariants.js :: INSTITUTION_DESC_VARIANTS::town|Criminal|Underground network","sha":"f0b977fa9175","why":"crime pool"},
+  {"pool":"src/data/institutionDescVariants.js :: INSTITUTION_DESC_VARIANTS::town|Economy|Slave market","sha":"73d6ed29bb02","why":"crime house traffick- (hand)"},
+  {"pool":"src/data/institutionDescVariants.js :: INSTITUTION_DESC_VARIANTS::town|Economy|Slave market","sha":"d075aa3a2bbb","why":"crime house traffick- (hand)"},
   {"pool":"src/data/institutionDescVariants.js :: INSTITUTION_DESC_VARIANTS::village|Criminal|Bandit affiliate","sha":"365df5c8f09a","why":"crime pool"},
   {"pool":"src/data/institutionDescVariants.js :: INSTITUTION_DESC_VARIANTS::village|Criminal|Bandit affiliate","sha":"d73a4ebb75f1","why":"crime pool"},
   {"pool":"src/data/institutionDescVariants.js :: INSTITUTION_DESC_VARIANTS::village|Criminal|Fence (word of mouth)","sha":"c10dc9a8367f","why":"crime pool"},
@@ -202,6 +204,8 @@
   {"pool":"src/data/npcData.js :: NPC_FACTION_LOYALTY::criminal","sha":"e66dcb3b76ce","why":"crime pool"},
   {"pool":"src/data/npcData.js :: NPC_FACTION_LOYALTY::criminal","sha":"e88e3cbdb0e5","why":"crime pool"},
   {"pool":"src/data/npcData.js :: NPC_FACTION_LOYALTY::criminal","sha":"f70576190dea","why":"crime pool"},
+  {"pool":"src/data/npcData.js :: NPC_FACTION_LOYALTY::other","sha":"0d7d9dec4d14","why":"crime house fence-"},
+  {"pool":"src/data/npcData.js :: NPC_FACTION_LOYALTY::other","sha":"c5fdd49c4131","why":"crime word bribe"},
   {"pool":"src/data/npcData.js :: NPC_WANTS::criminal","sha":"07cf4e16d047","why":"crime pool"},
   {"pool":"src/data/npcData.js :: NPC_WANTS::criminal","sha":"4eb4cc16bcc4","why":"crime pool"},
   {"pool":"src/data/npcData.js :: NPC_WANTS::criminal","sha":"811df5e63010","why":"crime pool"},
@@ -249,7 +253,8 @@
   {"pool":"src/data/people/goalSecretRefusals.js :: GOAL_SECRET_REFUSAL_ROWS::criminal.any.economic_betrayal[2]","sha":"9fee8c36f8cd","why":"crime pool"},
   {"pool":"src/data/people/goalSecretRefusals.js :: GOAL_SECRET_REFUSAL_ROWS::criminal.any.personal[5]","sha":"dbdd6d763376","why":"crime pool"},
   {"pool":"src/data/people/goalSecretRefusals.js :: GOAL_SECRET_REFUSAL_ROWS::criminal.military.military[1]","sha":"80b4ee0421f5","why":"crime pool"},
-  {"pool":"src/data/people/goalSecretRefusals.js :: GOAL_SECRET_REFUSAL_ROWS::criminal.military.military[2]","sha":"e7500045fc81","why":"crime pool"}
+  {"pool":"src/data/people/goalSecretRefusals.js :: GOAL_SECRET_REFUSAL_ROWS::criminal.military.military[2]","sha":"e7500045fc81","why":"crime pool"},
+  {"pool":"src/data/people/goalSecretRefusals.js :: GOAL_SECRET_REFUSAL_ROWS::title:the granary reeve[1]","sha":"9497f5018dde","why":"crime key, declared; crime word bribe"}
  ],
  "watchBase": [
   {"pool":"src/data/institutionDescVariants.js :: INSTITUTION_DESC_VARIANTS::city|Infrastructure|Multiple courthouses","sha":"30fa38b6315f","word":"crime"},

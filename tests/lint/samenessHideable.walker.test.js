@@ -63,6 +63,7 @@ import { CORPUS_LEAVES, ROOT, corpusPools, readJson } from './factLayers.shared.
 import { FACT_DIMENSIONS, declarationOfMarks, parseAtom } from '../../src/domain/facts/factVocabulary.js';
 import { variantFactDeclaration } from '../../src/domain/display/stateProse/stateProseKernel.js';
 import { isHideableHouse } from '../../src/domain/people/cardVeil.js';
+import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
 
 const BASE = '43ab0f5eb';
 const JOIN = 'lane/join-2026-11-14';
@@ -70,7 +71,7 @@ const EXISTING_REL = 'tests/lint/samenessHideable.existingReds.json';
 const HOUSES_REL = 'tests/lint/samenessHideable.houseReadings.json';
 const HAND_REL = 'tests/lint/samenessHideable.handPools.json';
 /** Shrink-only: today's counts on the base. Lower them as rows go; never raise them. */
-const EXISTING_CEILING = 247; // 96 + 151 (SAME-2 brief H2: the hand rows 154 - 8 un-banked sentence-key lines (unit 2) + 5 free-text reds by word (unit 4); 146 by key, 5 by word, 0 by atom)
+const EXISTING_CEILING = 252; // 96 + 156 (SAME-2 brief H3: 151 + the granary reeve by its declared key (unit 1) + 4 existing lines the new forms hit (unit 2: a bribe by the hand form, a fence and the slave market's two "trafficked" by the derived forms); 147 by key, 6 by word, 3 by house, 0 by atom)
 const HAND_CEILING = 44; // 42 + 2 (SAME-2's unit 0, the join's point 84: GOALS' two key lists, read by `.includes`, on the hand list as TIER_ORDER is)
 const COVERT = 'dm-only';
 
@@ -258,9 +259,93 @@ export const CRIME_TEXT_FORMS = Object.freeze({
   clandestine: /\bclandest\w*/i,
   syndicate: /\bsyndicate\w*/i,
   underworld: /\bunderworld\w*/i,
+  bribe: /\bbrib(?:e|es|ed|ing|ery)\b/i, // the chair, 19:58: an act that names no house
+  extort: /\bextort\w*/i, // the chair, 19:58: an act that names no house
 });
 /** The word whose form a text holds (the first, in the list's order), or null. @param {string} text */
 export const crimeTextForm = (text) => Object.entries(CRIME_TEXT_FORMS).find(([, form]) => form.test(text))?.[0] ?? null;
+
+// ── THE DERIVED FORMS: THE CATALOGUE'S HIDEABLE HOUSES (the chair's 19:58 ruling 2; SAME-2 brief H3) ──
+/** A name's words, lower case, its parenthetical dropped. @param {string} s */
+const wordsOfName = (s) => String(s).toLowerCase().replace(/\([^)]*\)/g, ' ').match(/[a-z]+/g) ?? [];
+/** A word's stem: its inflection cut (smuggling -> smuggl, thieves -> thiev). @param {string} w */
+const stemOf = (w) => w.replace(/(?:ing|ers|er|ies|es|s)$/, '');
+/** A word's plural cut, for a name read whole (businesses -> business, assassins -> assassin). @param {string} w */
+const pluralBase = (w) => w.replace(/sses$/, 'ss').replace(/ies$/, 'y').replace(/(?<!s)e?s$/, '');
+const INFLECTION = '(?:e|es|s|ed|er|ers|ing|ery)?';
+/** The hand forms' words, which keep their precise hand form (gang stays "dropped before of"). */
+const GOVERNED = Object.freeze(Object.keys(CRIME_TEXT_FORMS).map(stemOf));
+/**
+ * THE HAND STEMS (the chair's 19:58: only for a name the derivation gives no distinctive word). Each is the act the
+ * house is named for, and the catalogue holds it in that one house only, so nothing corroborates it.
+ * Not here: Bandit affiliate (bandit is ordinary: the catalogue's public houses name bandits as a threat); Front
+ * businesses, Whisper market, Rookery, Multiple criminal factions, Contract killer, Street gang, the Underground
+ * network and city (their name, read whole, is their form; criminal, gang and underground keep their hand forms).
+ */
+export const HAND_HOUSE_STEMS = Object.freeze({ assassin: "Assassins' guild", kidnap: 'Kidnapping ring', traffick: 'Human trafficking network', outlaw: 'Outlaw shelter' });
+
+/** @typedef {{ label: string, form: RegExp, houses: string[] }} DerivedForm */
+/**
+ * THE CRIME FORMS DERIVED FROM THE CATALOGUE. The catalogue is `src/data/institutionalCatalog.js ::
+ * institutionalCatalog` (tier -> shelf -> name -> row; a house is `{ category: shelf, name, ...row }`, as
+ * `assembleInstitutions` seats it). Every house `hideable` (`cardVeil.js :: isHideableHouse`) answers true for gives:
+ * - its DISTINCTIVE WORDS: a word of its name whose stem is in no other house's name, description or tags (a word common
+ *   to non-hideable houses, guild, market, house, network, is never distinctive alone), that another hideable house's
+ *   name, description or tags repeats (the catalogue corroborates it as the class's word), and that no hand form governs.
+ *   A word always followed in the hideable names by the same word is read as that pair ("black market").
+ * - its NAME read whole, when it gives no distinctive word.
+ * The function is the derivation; it is fed the catalogue (or a fixture) and edits nothing.
+ * @param {Record<string, Record<string, Record<string, Record<string, any>>>>} catalog
+ * @param {(house: Record<string, unknown>) => boolean} [hideable]
+ * @returns {DerivedForm[]}
+ */
+export function derivedCrimeForms(catalog, hideable = isHideableHouse) {
+  const ordinary = new Set();
+  /** @type {Map<string, string>} */ const houses = new Map();
+  for (const block of Object.values(catalog)) for (const [category, rows] of Object.entries(block)) for (const [name, row] of Object.entries(rows)) {
+    const text = `${name} ${row.desc ?? ''} ${(row.tags ?? []).join(' ')}`;
+    if (hideable({ category, name, ...row })) houses.set(name, `${houses.get(name) ?? ''} ${text}`);
+    else for (const w of wordsOfName(text)) ordinary.add(stemOf(w));
+  }
+  const names = [...houses.keys()];
+  /** @type {Map<string, { source: string, houses: string[] }>} */ const words = new Map();
+  /** @type {Map<string, { source: string, houses: string[] }>} */ const wholes = new Map();
+  /** @param {Map<string, { source: string, houses: string[] }>} m @param {string} label @param {string} source @param {string} house */
+  const add = (m, label, source, house) => { const e = m.get(label) ?? { source, houses: [] }; if (!e.houses.includes(house)) e.houses.push(house); m.set(label, e); };
+  for (const name of names) {
+    let distinctive = false;
+    for (const w of wordsOfName(name)) {
+      const s = stemOf(w);
+      if (ordinary.has(s) || GOVERNED.includes(s)) continue;
+      if (!names.some((m) => m !== name && wordsOfName(/** @type {string} */ (houses.get(m))).some((x) => stemOf(x) === s))) continue;
+      distinctive = true;
+      const nexts = new Set(names.map(wordsOfName).flatMap((n) => n.flatMap((x, j) => (stemOf(x) === s ? [n[j + 1] ?? ''] : []))));
+      const [next] = [...nexts];
+      if (nexts.size === 1 && next) add(words, `${w} ${next}`, String.raw`\b${s}${INFLECTION}'?[\s-]+${pluralBase(next)}(?:e?s)?'?(?![a-z])`, name);
+      else add(words, `${s}-`, String.raw`\b${s}${INFLECTION}(?![a-z])`, name);
+    }
+    if (!distinctive) {
+      const ws = wordsOfName(name);
+      add(wholes, ws.join(' '), String.raw`\b${ws.map((w) => `${pluralBase(w)}(?:e?s)?'?`).join(String.raw`[\s-]+`)}(?![a-z])`, name);
+    }
+  }
+  return [...words, ...wholes].map(([label, { source, houses: hs }]) => ({ label, form: new RegExp(source, 'i'), houses: hs }));
+}
+/** The catalogue's derived forms, with the hand stems beside them. */
+const DERIVED_FORMS = Object.freeze([...derivedCrimeForms(institutionalCatalog),
+  ...Object.entries(HAND_HOUSE_STEMS).map(([stem, house]) => ({ label: `${stem}- (hand)`, form: new RegExp(String.raw`\b${stem}\w*`, 'i'), houses: [house] }))]);
+
+/**
+ * A text's crime form, as its red reads: a hand form (`crime word <word>`) first, then a derived one (`crime house
+ * <label>`), or null.
+ * @param {string} text @param {readonly DerivedForm[]} [derived]
+ */
+export function crimeFormOf(text, derived = DERIVED_FORMS) {
+  const hand = crimeTextForm(text);
+  if (hand) return `crime word ${hand}`;
+  const d = derived.find((f) => f.form.test(text));
+  return d ? `crime house ${d.label}` : null;
+}
 /**
  * A SENTENCE KEY (SAME-2 brief H2 unit 2, the chair's 19:29): a key of FIVE OR MORE WORDS that holds no `|`. Measured on
  * this line, it takes every key of the five tables keyed by their base sentence (DESC_VARIANT_SIBLINGS 55,
@@ -271,7 +356,7 @@ export const crimeTextForm = (text) => Object.entries(CRIME_TEXT_FORMS).find(([,
  */
 export const isSentenceKey = (key) => !key.includes('|') && key.trim().split(/\s+/).length >= 5;
 /** A key that puts its lines in a CRIME POOL: a sentence key by its free-text form, any other by `CRIME_KEY_WORDS`. @param {string} key */
-export const isCrimeKey = (key) => (isSentenceKey(key) ? crimeTextForm(key) !== null : CRIME_KEY_WORDS.test(key));
+export const isCrimeKey = (key) => (isSentenceKey(key) ? crimeFormOf(key) !== null : CRIME_KEY_WORDS.test(key));
 /** The tables keyed by a sentence (the measure above): the sentence-key rule takes all their keys and no other table's. */
 const SENTENCE_KEYED = Object.freeze(['src/data/foodwaysPrintSiblings.js :: FOODWAYS_PRINT_SIBLINGS', 'src/data/historyData.js :: HISTORY_DESC_SIBLINGS',
   'src/data/institutionDescVariants.js :: DESC_VARIANT_SIBLINGS', 'src/data/institutionServices.js :: SERVICE_DESC_SIBLINGS', 'src/data/npcData.js :: NPC_HOOK_SIBLINGS']);
@@ -329,6 +414,29 @@ export function byConstructionFaults(refs, table, read) {
   return [...out, ...exemptionFaults(asExempt, read)];
 }
 
+/**
+ * THE DECLARED CRIME KEYS (the chair's 19:58 ruling 1; SAME-2 brief H3): a hand line's key path banked BY KEY, with
+ * its reason and the lines of code it stands on (each `path :: symbol`, found in its file, as the exemptions' lines
+ * are). A line under a declared key reds as `crime key, declared` and is banked like any red: not quiet, not exempt.
+ * @type {Readonly<Record<string, { reason: string, restates: string, withheldBy: string }>>}
+ */
+const HAND_CRIME_KEYS = Object.freeze({
+  'src/data/people/goalSecretRefusals.js :: GOAL_SECRET_REFUSAL_ROWS::title:the granary reeve[1]': {
+    reason: 'a KEY restating an existing secret\'s own sentence ("Takes a bribe from merchants…"); a card\'s `secret` is owner-only by construction: publicSafe strips it from every shared read and PRIVATE_KEY_RE names it',
+    restates: 'src/data/people/titleSecretsPresentations.js :: TITLE_SECRETS',
+    withheldBy: 'src/domain/display/publicSafe.js :: PRIVATE_KEY_RE',
+  },
+});
+
+/**
+ * The faults of the declared crime keys: a cited line (`restates`, `withheldBy`) whose file or symbol is not found.
+ * @param {Readonly<Record<string, { restates?: string, withheldBy?: string }>>} keys @param {(rel: string) => string|null} read
+ */
+export function crimeKeyFaults(keys, read) {
+  return Object.entries(keys).flatMap(([key, e]) => [...exemptionFaults({ [key]: { withheldBy: e.withheldBy } }, read),
+    ...exemptionFaults({ [key]: { withheldBy: e.restates } }, read).map((f) => f.replace('withheldBy', 'restates'))]);
+}
+
 /** @param {unknown} x */
 const isRow = (x) => !!x && typeof x === 'object' && !Array.isArray(x) && ('text' in x || 'line' in x);
 
@@ -366,8 +474,10 @@ export function poolLeaves(value) {
  * marked `dm-only`, or in a pool `EXEMPT` names, reds nowhere.
  * @param {HandPool[]} hand @param {Readonly<Record<string, unknown>>} [exempt] @param {boolean} [words] read bare lines by `CRIME_TEXT_FORMS`
  * @param {Readonly<Record<string, unknown>>} [dm] the tables dm-only by construction
+ * @param {Readonly<Record<string, unknown>>} [keys] the declared crime keys (`HAND_CRIME_KEYS`)
+ * @param {readonly DerivedForm[]} [derived] the derived forms (`DERIVED_FORMS`)
  */
-export function readHandLines(hand, exempt = EXEMPT, words = FREE_TEXT_READ, dm = DM_BY_CONSTRUCTION) {
+export function readHandLines(hand, exempt = EXEMPT, words = FREE_TEXT_READ, dm = DM_BY_CONSTRUCTION, keys = HAND_CRIME_KEYS, derived = DERIVED_FORMS) {
   /** @type {Array<{ pool: string, sha: string, text: string|null, why: string[], houses: string[], quiet: boolean }>} */ const out = [];
   for (const { ref, value } of hand) for (const { path, x } of poolLeaves(value)) {
     const pool = [ref, ...path].join('::');
@@ -377,8 +487,9 @@ export function readHandLines(hand, exempt = EXEMPT, words = FREE_TEXT_READ, dm 
     const text = lineText(x);
     /** @type {string[]} */ const why = [];
     if (path.some(isCrimeKey)) why.push('crime pool');
+    else if (Object.hasOwn(keys, pool)) why.push('crime key, declared');
     if (declared) why.push(...atoms.filter((a) => ['crime', 'hideable'].includes(String(atomClass(a)))).map((a) => `needs ${a}`));
-    else if (words && text !== null && crimeTextForm(text)) why.push(`crime word ${crimeTextForm(text)}`);
+    else if (words && text !== null && crimeFormOf(text, derived)) why.push(String(crimeFormOf(text, derived)));
     if (text === null) why.push('unreadable');
     const quiet = (row.marks || []).includes(COVERT) || Object.hasOwn(exempt, pool) || Object.hasOwn(exempt, ref) || Object.hasOwn(dm, ref);
     out.push({ pool, sha: textSha(text), text, why, houses: atoms.filter((a) => atomClass(a) === 'house'), quiet });
@@ -386,8 +497,11 @@ export function readHandLines(hand, exempt = EXEMPT, words = FREE_TEXT_READ, dm 
   return out;
 }
 
-/** RULE 1 over the hand pools' lines. @param {HandPool[]} hand @param {Readonly<Record<string, unknown>>} [exempt] @param {boolean} [words] @param {Readonly<Record<string, unknown>>} [dm] */
-export const handReds = (hand, exempt = EXEMPT, words = FREE_TEXT_READ, dm = DM_BY_CONSTRUCTION) => sortRows(readHandLines(hand, exempt, words, dm).filter((l) => l.why.length && !l.quiet)
+/**
+ * RULE 1 over the hand pools' lines. @param {HandPool[]} hand @param {Readonly<Record<string, unknown>>} [exempt] @param {boolean} [words]
+ * @param {Readonly<Record<string, unknown>>} [dm] @param {Readonly<Record<string, unknown>>} [keys] @param {readonly DerivedForm[]} [derived]
+ */
+export const handReds = (hand, exempt = EXEMPT, words = FREE_TEXT_READ, dm = DM_BY_CONSTRUCTION, keys = HAND_CRIME_KEYS, derived = DERIVED_FORMS) => sortRows(readHandLines(hand, exempt, words, dm, keys, derived).filter((l) => l.why.length && !l.quiet)
   .map(({ pool, sha, why }) => ({ pool, sha, why: why.join('; ') })), ['pool', 'sha', 'why']);
 
 /** RULE 2 over the hand pools' declared lines. @param {HandPool[]} hand */
@@ -395,14 +509,14 @@ export const handHouseReadings = (hand) => sortRows(readHandLines(hand, {}).flat
   ['pool', 'sha', 'house']);
 
 /**
- * THE WATCH (SAME-2 brief H2 unit 5, the chair's 19:29): a NEW hand line that holds a bare crime word OUTSIDE the forms
- * (crime, criminal, thief, thieves, gang, smuggl, bribe, or a fence as a person: "a fence", "the fence", "fences stolen")
- * is LISTED as "watch" (a warn block on stderr, one line each) for a human to read at every landing; NEVER red. A line is
+ * THE WATCH (SAME-2 brief H2 unit 5, the chair's 19:29): a NEW hand line that holds a bare crime word (crime,
+ * criminal, thief, thieves, gang, smuggl, bribe, or a fence as a person: "a fence", "the fence", "fences stolen") OUTSIDE
+ * BOTH FORM SETS (the hand forms and the catalogue's derived forms: SAME-2 brief H3 unit 3) is LISTED as "watch" (a warn block on stderr, one line each) for a human to read at every landing; NEVER red. A line is
  * new when its text hash is neither in the bank nor in `watchBase`, the lines on BASE (43ab0f5eb, the walker's base: a
  * line is new when it is not on that commit) that hold such a word.
  */
 const WATCH_WORDS = /\b(?:crimes?|criminals?|thief|thieves|gangs?|smuggl\w*|brib\w*)\b|\b(?:a|the) fence\b|\bfences stolen\b/i;
-const ANY_FORM = new RegExp(Object.values(CRIME_TEXT_FORMS).map((f) => `(?:${f.source})`).join('|'), 'gi');
+const ANY_FORM = new RegExp([...Object.values(CRIME_TEXT_FORMS), ...DERIVED_FORMS.map((d) => d.form)].map((f) => `(?:${f.source})`).join('|'), 'gi');
 /** The bare crime word a text holds outside the free-text forms, or null. @param {string} text */
 export const watchWord = (text) => text.replace(ANY_FORM, ' ').match(WATCH_WORDS)?.[0]?.toLowerCase() ?? null;
 /**
@@ -536,6 +650,13 @@ describe(`the hideable-house walker of the sameness pools (base ${BASE})`, async
     expect(exemptionFaults(EXEMPT, readRel)).toEqual([]);
   });
 
+  test('DECLARED CRIME KEYS: each names a hand line on this line, with its reason and the lines of code it cites', async () => {
+    expect(crimeKeyFaults(HAND_CRIME_KEYS, readRel)).toEqual([]);
+    const pools = new Set(readHandLines(await handPoolsOnLine(readJson(HAND_REL).rows)).map((l) => l.pool));
+    expect(Object.keys(HAND_CRIME_KEYS).filter((k) => !pools.has(k))).toEqual([]);
+    for (const [k, e] of Object.entries(HAND_CRIME_KEYS)) expect(e.reason.length, k).toBeGreaterThan(0);
+  });
+
   test('DM BY CONSTRUCTION: every dm-named hand table names its owner-only gate and its proof; every entry is one', () => {
     expect(byConstructionFaults(readJson(HAND_REL).rows.map((/** @type {{ pool: string }} */ r) => r.pool), DM_BY_CONSTRUCTION, readRel)).toEqual([]);
   });
@@ -573,14 +694,14 @@ describe(`the hideable-house walker of the sameness pools (base ${BASE})`, async
     for (const ref of SENTENCE_KEYED) expect(taken.get(ref)?.[0], ref).toBe(taken.get(ref)?.[1]);
   });
 
-  test('THE WATCH: a new hand line with a bare crime word outside the forms is LISTED (a warn block), never red', async () => {
+  test('THE WATCH: a new hand line with a bare crime word outside both form sets is LISTED (a warn block), never red', async () => {
     const bank = readJson(EXISTING_REL);
     const seen = new Set([...bank.hand, ...bank.watchBase].map((/** @type {{ sha: string }} */ r) => r.sha));
     const watch = watchRows(readHandLines(await handPoolsOnLine(readJson(HAND_REL).rows)), seen);
     // The block goes to stderr directly: this suite's runner swallows a PASSING test's console.warn (measured, a probe),
     // and the watch is read on green runs.
     if (watch.length) {
-      process.stderr.write(`${[`THE WATCH (samenessHideable, SAME-2 H2 unit 5): ${watch.length} new hand line(s) with a bare crime word outside the forms. A human reads each; none reds.`,
+      process.stderr.write(`${[`THE WATCH (samenessHideable, SAME-2 H2 unit 5): ${watch.length} new hand line(s) with a bare crime word outside both form sets (the hand forms, the catalogue's derived forms). A human reads each; none reds.`,
         ...watch.map((w) => `  watch  ${w.pool}  ${w.sha}  "${w.word}"  ${w.text}`)].join('\n')}\n`);
     }
     expect(watch.every((w) => w.word.length > 0)).toBe(true); // a listing: it never reds on its rows
@@ -636,12 +757,22 @@ describe(`the hideable-house walker of the sameness pools (base ${BASE})`, async
       expect(isDmNamed('src/data/npcData.js :: NPC_WANTS')).toBe(false);
       expect(byConstructionFaults([ref], {}, read)).toEqual([`${ref}: dm-named, no gate declared`]);
       const value = { crime70: ['The smugglers pay no toll while honest carts queue.'] };
-      expect(handReds([{ ref, value }]).map((r) => r.why)).toEqual(['crime pool']);
+      expect(handReds([{ ref, value }]).map((r) => r.why)).toEqual(['crime pool; crime house smuggl-']);
       const table = { [ref]: { gatedBy: 'src/domain/dailyLife.js :: deriveDailyLife', provedBy: 'tests/domain/dailyLifeDm.test.js :: absent on every toPublicSafe document' } };
       expect(byConstructionFaults([ref], table, read)).toEqual([]);
       expect(handReds([{ ref, value }], EXEMPT, true, table)).toEqual([]);
       expect(byConstructionFaults([ref], { [ref]: { gatedBy: 'src/domain/dailyLife.js :: deriveDailyLifeDm', provedBy: table[ref].provedBy } }, read)).toHaveLength(1);
       expect(byConstructionFaults(['src/data/npcData.js :: NPC_WANTS'], { 'src/data/npcData.js :: NPC_WANTS': table[ref] }, read)).toHaveLength(1);
+    });
+
+    test('DECLARED CRIME KEYS (the chair, 19:58): a line under a declared key reds by key; a cite not found faults', () => {
+      const ref = 'src/data/people/goalSecretRefusals.js :: GOAL_SECRET_REFUSAL_ROWS';
+      const value = { 'title:the granary reeve[1]': ['Takes a bribe from merchants to sell from the stores at low prices when grain is dear'] };
+      expect(handReds([{ ref, value }]).map((r) => r.why)[0]).toMatch(/^crime key, declared/);
+      expect(handReds([{ ref, value }], EXEMPT, true, DM_BY_CONSTRUCTION, {}).filter((r) => r.why.startsWith('crime key'))).toEqual([]);
+      const read = (/** @type {string} */ rel) => (rel === 'src/x.js' ? 'export const SECRETS = 1;' : null);
+      expect(crimeKeyFaults({ k: { restates: 'src/x.js :: SECRETS', withheldBy: 'src/x.js :: SECRETS' } }, read)).toEqual([]);
+      expect(crimeKeyFaults({ k: { restates: 'src/x.js :: SECRET_LINES', withheldBy: 'src/x.js :: SECRETS' } }, read)).toEqual(['k: restates not found (src/x.js :: SECRET_LINES)']);
     });
 
     test('PHASE 3: a new line in a hand-listed criminal key reds; dm-only, or in an exempt pool, it passes', () => {
@@ -672,7 +803,8 @@ describe(`the hideable-house walker of the sameness pools (base ${BASE})`, async
       expect(handReds([{ ref, value: { famine: ['Rival gangs, forever disputing their turf.'] } }], EXEMPT, true).map((r) => r.why)).toEqual(['crime word gang']);
       expect(handReds([{ ref, value: { famine: [(/** @type {string} */ n) => `${n} has a gang at its gate.`] } }], EXEMPT, true).map((r) => r.why)).toEqual(['crime word gang']);
       expect(sourceText((/** @type {string} */ n) => `${n} waits.`)).toBe('‹› waits.');
-      expect(handReds([{ ref, value: { famine: ['A smuggler sells grain by the well.', 'An unorganised heap of sacks.'] } }], EXEMPT, true)).toEqual([]); // smuggl has no form
+      expect(handReds([{ ref, value: { famine: ['An unorganised heap of sacks.', 'The fishers mend their nets.'] } }], EXEMPT, true)).toEqual([]);
+      expect(handReds([{ ref, value: { famine: ['A smuggler sells grain by the well.'] } }]).map((r) => r.why)).toEqual(['crime house smuggl-']); // smuggl reds (the chair, 19:58)
     });
 
     test('THE FREE-TEXT FORMS (the chair, 19:29): each form takes its hit and leaves its non-hit (the report\'s examples)', () => {
@@ -690,6 +822,8 @@ describe(`the hideable-house walker of the sameness pools (base ${BASE})`, async
         clandestine: ['An entirely clandestine trade in persons.', 'An open trade in persons.'],
         syndicate: ['The syndicate takes its cut.', 'The guild takes its cut.'],
         underworld: ['An underworld power the city has never rooted out.', 'A power the city has never rooted out.'],
+        bribe: ['They overheard two people settle a bribe.', 'A bright ribbon on the gate.'],
+        extort: ['The crew extorts the bakers weekly.', 'The crew exports the bakers\' bread.'],
       };
       expect(Object.keys(cases)).toEqual(Object.keys(CRIME_TEXT_FORMS));
       for (const [word, [hit, miss]] of Object.entries(cases)) {
@@ -701,18 +835,47 @@ describe(`the hideable-house walker of the sameness pools (base ${BASE})`, async
       expect(crimeTextForm('Holds debtors, criminals, and political prisoners alike.')).toBe('criminal'); // the plural is kept
     });
 
-    test('THE WATCH: a new line "A fence buys what the carters lose." is listed, not red; seen, or a form\'s word, it is not listed', () => {
+    test('THE WATCH: a new line with a bare crime word outside both form sets is listed, not red; seen, or a form\'s word, it is not listed', () => {
       const ref = 'src/data/narrativeData.js :: STRESS_NOTES';
+      const thief = [{ ref, value: { famine: ['A thief works the market crowd.'] } }];
+      expect(handReds(thief)).toEqual([]);
+      const listed = watchRows(readHandLines(thief), new Set());
+      expect(listed.map((w) => [w.pool, w.word])).toEqual([[`${ref}::famine`, 'thief']]);
+      expect(watchRows(readHandLines(thief), new Set([listed[0].sha]))).toEqual([]);
+      // H2's plant, "A fence buys what the carters lose.", now REDS by the catalogue's fences (the chair, 19:58), unlisted
       const fence = [{ ref, value: { famine: ['A fence buys what the carters lose.'] } }];
-      expect(handReds(fence)).toEqual([]);
-      const listed = watchRows(readHandLines(fence), new Set());
-      expect(listed.map((w) => [w.pool, w.word])).toEqual([[`${ref}::famine`, 'a fence']]);
-      expect(watchRows(readHandLines(fence), new Set([listed[0].sha]))).toEqual([]);
-      expect(watchWord('A smuggler sells grain by the well.')).toBe('smuggler');
-      expect(watchWord('They overheard two people settle a bribe.')).toBe('bribe');
+      expect(handReds(fence).map((r) => r.why)).toEqual(['crime house fence-']);
+      expect(watchWord('A fence buys what the carters lose.')).toBeNull();
+      expect(watchWord('A smuggler sells grain by the well.')).toBeNull();
+      expect(watchWord('They overheard two people settle a bribe.')).toBeNull();
       expect(watchWord('A chapter of organised crime.')).toBeNull();
-      expect(watchWord('Rival gangs, forever disputing their turf.')).toBeNull();
-      expect(watchWord('The fence along the lane needs mending.')).toBe('the fence'); // a listing errs toward the human's eye
+      expect(watchWord('Separate courts for trade, for crime, and for the church.')).toBe('crime');
+      expect(watchWord('A stone quarry, its blocks dressed by a gang of quarrymen.')).toBe('gang');
+    });
+
+    test('THE DERIVED FORMS (the chair, 19:58): "the smugglers\' landing" reds by the catalogue\'s smuggling houses', () => {
+      const ref = 'src/data/narrativeData.js :: STRESS_NOTES';
+      expect(handReds([{ ref, value: { famine: ['They meet at the smugglers\' landing.'] } }]).map((r) => r.why)).toEqual(['crime house smuggl-']);
+      expect(handReds([{ ref, value: { famine: ['They meet at the fishers\' landing.'] } }])).toEqual([]);
+      expect(DERIVED_FORMS.find((d) => d.label === 'smuggl-')?.houses).toEqual(['Smuggling waypoint', 'Smuggling operation', 'Smuggling network']);
+      expect(crimeFormOf('A black market under the bridge.')).toBe('crime house black market');
+      expect(crimeFormOf('A black cloak.')).toBeNull();
+    });
+
+    test('THE DERIVED FORMS are a function of the catalogue: a fixture\'s new hideable house reds a line naming it, with no edit to the walker', () => {
+      const fixture = {
+        town: {
+          Criminal: { 'Grave robbers': { desc: 'Digs up the new dead for the anatomists.', tags: ['criminal'] }, 'Body snatchers': { desc: 'Grave robbers by night.', tags: ['criminal'] } },
+          Religious: { 'Parish church': { desc: 'Bells and a ring of yews.', tags: ['religious'] } },
+        },
+      };
+      const derived = derivedCrimeForms(fixture);
+      expect(derived.map((d) => d.label)).toEqual(['grave robbers', 'robb-', 'body snatchers']);
+      const ref = 'src/data/narrativeData.js :: STRESS_NOTES';
+      const line = { famine: ['The robbers came for the miller\'s wife.'] };
+      expect(handReds([{ ref, value: line }], EXEMPT, true, DM_BY_CONSTRUCTION, HAND_CRIME_KEYS, derived).map((r) => r.why)).toEqual(['crime house robb-']);
+      expect(handReds([{ ref, value: line }], EXEMPT, true, DM_BY_CONSTRUCTION, HAND_CRIME_KEYS, [])).toEqual([]);
+      expect(handReds([{ ref, value: { famine: ['The body snatchers were seen.', 'The parish church rings at dusk.'] } }], EXEMPT, true, DM_BY_CONSTRUCTION, HAND_CRIME_KEYS, derived).map((r) => r.why)).toEqual(['crime house body snatchers']);
     });
 
     test('PHASE 3: a declared hand line is read by its atoms (a crime atom reds; a house is listed), not by its words', () => {
