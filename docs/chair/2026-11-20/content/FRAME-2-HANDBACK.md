@@ -26,6 +26,7 @@ The opening trouble by type today (93): crime_wave 37 (39.8%: over a third, ever
 | B2c | the veil test re-seated to towns with weight (hamlet-7, village-0, village-76, town-1, city-0, city-4, metropolis-1, metropolis-5; criminal sides city-0, city-4, metropolis-1); digests measured at the base 85fccf898 | fdb4faac4 | 3 failed → 6/6; 35 files 241/241 |
 | B5 | the names rule: `crisisHooks.js`'s 124 bare labels (111 bare, 13 "The" mid-sentence; three sites: `holderWords` 78, a power in a line role 2, `loserClause` 44) through `powerNameInProse`; no stored string changed | 8594e509d (merge 8df635b61) | names test 124 (A) → 0 |
 | B5c | names composed with weight: crisis-sheet pins re-measured at 7e0c77ae2 + the crisisHooks diff alone (the names cause alone moved them); the names test's read floor 100 → 90, figure and cause written | cff8c03f5 | 56 importer files 460 passed (1 expected fail) |
+| B4 | CF9: the frame's own words a closed set held by a walker (`tests/domain/tension/frameWordsLevel.test.jsx`: the set exact; no word of an alarm lexicon; every composed string is closed-set or the record's text); `tieDefault` moved into `FRAME_TIE_GLOSS`, the outsider's article into `FRAME_REASONS`; "teacher and heir" → "teacher and pupil" (the record names a successor only where the place can pass); a FRAMED opening under the neutral accent (`palette.accent`; the PDF's gold on goldBg); a crisis keeps the alarm; a calm unframed town and a player's sheet render byte-identical | 436c9cca3 (merge a7fd4cf91) | 4 failed/3 → 7/7; plants: "dire" in FRAME_REASONS reds (b), a new gloss reds (a), restored by cp, cmp |
 | CF10 | measured and proposed (B7); the chair ruled | e200ef2dc, 46ac09598 | — |
 
 Gates at the last green merge (`cff8c03f5`): typecheck:ratchet 167/167, typecheck:domain:strict 1113/1113, lint 0 errors (each builder's own run). `tests/lint` WHOLE and the lighting census by its door: NOT taken by this seat (FRAME-3's, at its final tree).
@@ -44,7 +45,10 @@ File: `docs/chair/2026-11-20/content/frame2/B7-CF10-PROPOSAL-RESULTS.md` (360 to
 2. `tests/components/phoneChromeFloor.census.test.js` ROUTE_BASELINE: /create 621 → 622, /settlements 864 → 865, /gallery 666 → 667 (floored +1), red since FRAME-1's renderer lines (measured red at 9d68605d3, before B3 and B5). THE CHAIR'S RULING: this lane's: read the census's door; at or above the floor re-record with the cause; below it cure the line. NOT DONE.
 3. The tuning register: FRAME_TUNING stays a DRAFT row (the owner signs); `troubleCast.js` now imports `rulingPowerCoup.js`, `governanceLedger.js`, `bandLadders.js` (dependents may move).
 4. `docs/content/wiring-census.json` stamp (`producerIndexFiles`) moves with any new src file.
-5. No golden: no stored string changed in any merged unit.
+5. `proseNumerics` (line-keyed register): a line of `SessionMode.jsx` moved 404 → 406 (B3's two comment lines): re-address by its door.
+6. No golden: no stored string changed in any merged unit (B10, if it lands, changes stored crisis-cast strings: see the hand-over).
+
+B4's item-5 doubts, for the seat (not cured): "{their} own trouble is part of it" fires on one matching word in a hook or secret; "where strangers lodge … would know of them" fires for taverns and the knowing is not on the record; "keeps the taverns" where the house key is a plural type; "neither gives the other ground" for every rivalry; the "Outstanding Debt" gloss is unreachable; the exports' trouble NAME ("Legitimacy crisis", "Trade collapse") is the record's type name, outside the level walker by design.
 
 ## For a security reader: what to attack
 
