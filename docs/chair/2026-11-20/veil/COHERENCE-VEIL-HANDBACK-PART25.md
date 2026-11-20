@@ -133,7 +133,9 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
     0 for this seat: keep an estimate and add a third); one line after each stage merged green ("R3 <commit>"; for the
     doors: "DOORS-IN <commit>" with 212's sha256). THE MARK: 450,000 tokens; the chair seats a successor at 330,000.
 30. THE DERIVED KEY (the chair, 09:04, ruling 2 on R3): R3 IS NOT GREEN WHILE A VISITOR'S DERIVED DEFENSE KEY DIFFERS
-    (HIGHER) FROM THE HOUSE-FREE COUNTERFACTUAL IN ANY TOWN. EVERY SERVED FIELD THAT FEEDS A DERIVED KEY IS RE-DERIVED OVER
+    FROM THE HOUSE-FREE COUNTERFACTUAL IN ANY TOWN (the chair's word is DIFFERS. VEIL-24's R3-CURE-2 brief let a LOWER key
+    pass with its cause named; at b907c75c9 13 of 92 towns are LOWER, each with a named cause. That leniency is the seat's,
+    NOT the chair's, and is put to the chair before the merge). EVERY SERVED FIELD THAT FEEDS A DERIVED KEY IS RE-DERIVED OVER
     THE HOUSES THAT READ SERVES, OR WITHHELD; never served as stored beside a roster that no longer justifies it. Where the
     feeding field is not yet attributed (the covert rung), ATTRIBUTE FIRST, per town. Acceptance: per-town equality on
     both observables (the Defense key, "Magical crime"), zero towns higher, as a born arm.
@@ -230,7 +232,9 @@ run exit 0, 40 PASS (`out/v24/gender/accept.txt`).
 - THE BLACK MARKET'S SHARE under the default settings: never sent by the server; a page re-derives it only where the share
   carries no veil, else it is not drawn.
 - A CRIMINAL POWER'S ROW where no hidden house raised it: 9 born pages lose a "Thieves' Guild" row no hidden house raised
-  (the first R3 cure's measure; the denominator is owed by the R3-CURE-2 builder, unit 6).
+  (the first R3 cure's measure; the denominator is still owed: R3-CURE-2 did not re-run it). VR42 (the governing power
+  kept while the government's name stays) is met by 0 of 140 born towns; a hand town serves its governing "Thieves' Guild"
+  whole, share 60, and that arm is kept.
 - THE REASON AFTER "Unstable" on an old page's card: after the doors' merge, the card shows the band word alone ("Unstable")
   on every read that is not the owner's (VR44).
 
@@ -243,3 +247,7 @@ run exit 0, 40 PASS (`out/v24/gender/accept.txt`).
 - 09:07 R3-CURE-2 brief committed (14c81dc38); its builder launched in `/home/user/wt/r3c2`. PART 25 first written 09:09.
 - 09:18 the reader's two leads at 4db8e4208 (ruling 36); (a) relayed to the R3-CURE-2 builder 09:18.
 - 10:16 R3-CURE-2 returned at its mark (b907c75c9), pushed; three open points to the chair; R3-CURE-3 launched.
+- 10:17 the chair: this seat's record read 335,815 tokens; VEIL-25 is seated beside it. THE HAND-OVER POINT: the R3 merge
+  or 400,000 tokens, whichever comes first; then "HANDED OVER at <commit>", and this seat only relays builders. The
+  R4-CURE-2 brief is written (`briefs/R4-CURE-2-BRIEF.md`, its base filled at launch); VEIL-25 staffs it, not this seat.
+- 10:20 PART 25 checked against the chair's list; ruling 30 restored to the chair's word (DIFFERS; the 13 LOWER towns put to it).
