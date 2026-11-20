@@ -226,6 +226,21 @@ parts of the whole check (at the close).
   over a pool of born towns; hooks last; then two towns, before and after, to real DMs. COST SAID: a content round
   of its own after the deploy; every change of text moves the reference towns, which need the owner's yes.
 
+- **2026-11-20, between the clock's readings of 03:59 and 04:08 UTC, THE OWNER (verbatim), on the chair's proposal for the
+  session sheet and the names:** "Do it pre deploy. I like it. But make sure there is variability of who is relevant
+  to a crisis where appropriate. Like the lords appointee is not always the one, it could be some other foreigner.
+  As just one example, same with the guild leader and the garrison commander. Maybe the creditor is the criminal
+  faction is some parts?" THIS CHANGES A STANDING DIRECTIVE: this content round lands BEFORE the deploy (the
+  earlier word put content rounds after it). TAKEN AS: (1) the frame for a calm town and the names fix are built
+  now, beside the share veil; (2) VARIETY is a requirement of the design: a side is filled through a ladder of
+  kinds of face (by office; by a tie on the record; by a trade; an outsider reached through someone in town; the
+  criminal power where one stands), the town's facts first, then its seed; at most one side by office alone; the
+  counts over a pool shown to the owner, the rates the owner's dials. SAID IN REPLY: three costs: the frame shows on
+  the DM's own pages only at the deploy (naming a criminal faction on a shared page would undo the security work),
+  proven; the names fix moves the reference towns, which need the owner's yes, brought with before-and-after
+  examples; if a part is not proven in time the owner is told before a choice is made (holding the deploy for it
+  is the owner's call); and one part left for after the deploy: re-dealing each person's own stored hook.
+
 ## 2. Rulings of this chair (each vetoable by the owner)
 
 - **SV1 (00:05 UTC, 2026-11-20): THE VEIL'S LIST ON THREE MACHINES.** VEIL-19 owns 212, its rollback and the twin's
@@ -1204,3 +1219,28 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   by another hand (`lane/veil-18-2026-11-19` bedd5a392; the line 85fccf898; master db832c892). THE OWNER: the two
   open answers (the app's smoke check; step 2's "all 0") and the two lines for the ticket thread are not yet
   reported. RE-ARMED: safety net (4) at 05:15 UTC (trig_01Dk8HjmtuRdbTCFo2SzENrZ).
+- 04:08 UTC · **THE CONTENT ROUND BEFORE THE DEPLOY, BY THE OWNER'S WORD: TWO SEATS, THEIR RULINGS IN THEIR PROMPTS**
+  (`prompts/FRAME-1.txt`, `prompts/NAMES-1.txt`; both cut from the line, both propose to the chair before
+  building). WHAT THE CHAIR READ FIRST: the session sheet is drawn by the Table View, Session Mode and
+  `TonightSheet.jsx`, and is not referenced by `PublicDossierView.jsx` or `PartyLinkView.jsx` (a grep, to be
+  proven born); `powerNameInProse` is used at 6 sites in 2 files; a person carries `gender` from birth.
+  **FRAME-1** (`lane/frame-2026-11-20`), rulings CF1 to CF8: CF1 the frame (no crisis: the sharpest standing
+  trouble first, three people on its three sides, the trouble's own hooks, then the cast's); CF2 DERIVED AT RENDER,
+  NOTHING STORED, no draw (so no stored town and no golden record moves); **CF3 THE DM'S OWN PAGES ONLY** (no
+  non-owner read, no shared page, no player variant of an export; proven born: the gallery read, the link and the
+  import byte-identical base against tip); **CF4 VARIETY** (the ladder: office, a tie on the record, a trade, an
+  unnamed outsider reached through an existing person, the criminal power where one stands; facts first, then a
+  seed hash against tuned rates in one frozen table; at most one side by office alone; the seat-holder fronts at
+  most one side); CF5 the 144 side labels classed into a small closed set of archetypes in a new table,
+  `historyData.js` untouched, a walker; CF6 every face carries its reason, an unmatched side is absent; CF7 the
+  measure the owner reads (at least 300 calm born towns: who fronts each side, before and after) and three sheets
+  before and after; CF8 the house's laws. **NAMES-1** (`lane/names-2026-11-20`), rulings CN1 to CN6: CN1 a power in
+  a SENTENCE takes its prose form with its article through the one helper (labels, chips, headings untouched); CN2 a
+  person's second mention in one sentence: a pronoun from their own gender, else the role or surname; **CN3 THE
+  VEIL'S NAME SEARCH MUST STILL FIND EVERY NAME:** a hideable power's or house's prose form contains its searched
+  name; a pronoun or role is never the ONLY reference in a stored string (the veil judges string by string); a
+  walker; measured before CN2 is built; CN4 generated text moves: the golden master and the reference corpus are
+  NAMED by the seat and signed by the owner; CN5 the census and the counts before and after; CN6 the house's laws.
+  LEFT FOR AFTER THE DEPLOY: re-dealing each person's stored hook to fit the trouble (it changes stored records that
+  shared pages draw). AT THE CLOSE: both land on the line before the veil joins; the veil's born tests then run on
+  the joined generator, and the reader re-runs its name probes there.
