@@ -1,0 +1,2764 @@
+{
+ "meta": {
+  "script": "docs/chair/2026-11-20/content/seat/uk/measure-uk.sh",
+  "seatSha": "50e47d621b631ecb31b9e775d51cc0417746b245",
+  "foldSha": "f4a434660502254b13e02fbeb4c481dcefecf7b3",
+  "writtenAt": "2026-11-20T19:11:38.615Z",
+  "runSeconds": 578,
+  "totalPlaces": 3600,
+  "totalErrors": 0,
+  "force": {
+   "_seatLawVersion": 2
+  },
+  "standing": "every rate is under today's standing"
+ },
+ "calibration": {
+  "trial": {
+   "towns": 300,
+   "cards": 9012,
+   "moved": {
+    "Guild Master": [
+     "low",
+     "high",
+     221
+    ],
+    "Thieves Guild Master": [
+     "low",
+     "high",
+     34
+    ],
+    "Council Member": [
+     "low",
+     "moderate",
+     18
+    ]
+   },
+   "movedCards": 273,
+   "movedTowns": 151,
+   "wealthiest": 100
+  },
+  "measured": {
+   "towns": 300,
+   "cards": 9012,
+   "moved": {
+    "Guild Master": [
+     "low",
+     "high",
+     221
+    ],
+    "Thieves Guild Master": [
+     "low",
+     "high",
+     34
+    ],
+    "Council Member": [
+     "low",
+     "moderate",
+     18
+    ]
+   },
+   "movedCards": 273,
+   "movedTowns": 151,
+   "unnamed": 0,
+   "unmatched": 0,
+   "wealthiest": 100,
+   "wealthiestOther": 0,
+   "wealthiestTowns": 90,
+   "poolRolesMoved": {
+    "Guild Master": "low -> high",
+    "Council Member": "low -> moderate",
+    "Thieves Guild Master": "low -> high"
+   },
+   "printedWords": {
+    "fold": {
+     "low -> moderate | the bloc's speaker": 14,
+     "low -> high | the senior craft-guild master": 146,
+     "low -> high | the senior guild master": 75,
+     "low -> high | the guildmaster of thieves": 34,
+     "low -> moderate | the commoners' tribune": 1,
+     "low -> moderate | the neutrals' broker": 2,
+     "low -> moderate | the alliance's convenor": 1
+    },
+    "arm": {
+     "low -> moderate | the luxury merchant": 89,
+     "low -> moderate | the exchange master": 11
+    }
+   }
+  },
+  "pass": true,
+  "kRoles": [
+   "roles: 350 (pool 159, printed 196)",
+   "roles whose band moves: 5",
+   "  Guild Master: low -> high (POOL_BY_TITLE, filterByGuild; printed cards 0)",
+   "  Council Member: low -> moderate (POOL_BY_TITLE, POOL_BY_SHELF; printed cards 0)",
+   "  Thieves Guild Master: low -> high (POOL_BY_TITLE; printed cards 0)",
+   "  the senior craft-guild master: low -> high (printed; printed cards 146)",
+   "  the senior guild master: low -> high (printed; printed cards 75)"
+  ]
+ },
+ "checks": [
+  "S: 1,200 places (100 a size a pool); every place's config `_seatLawVersion: 2`; the dial (`SEAT_CONTEST_LIT`) dark; `_randomizePriorities: true` on every visitor place and on no chair's-600 place; the tree's `powerBandOfRole`: Guild Master low, Thieves Guild Master low, Council Member low, Wealthiest Merchant low",
+  "SK: 1,200 places (100 a size a pool); every place's config `_seatLawVersion: 2`; the dial (`SEAT_CONTEST_LIT`) dark; `_randomizePriorities: true` on every visitor place and on no chair's-600 place; the tree's `powerBandOfRole`: Guild Master high, Thieves Guild Master high, Council Member moderate, Wealthiest Merchant low",
+  "SKW: 1,200 places (100 a size a pool); every place's config `_seatLawVersion: 2`; the dial (`SEAT_CONTEST_LIT`) dark; `_randomizePriorities: true` on every visitor place and on no chair's-600 place; the tree's `powerBandOfRole`: Guild Master high, Thieves Guild Master high, Council Member moderate, Wealthiest Merchant moderate"
+ ],
+ "aggregate": {
+  "visitor": {
+   "S": {
+    "places": 600,
+    "errors": [],
+    "kinds": {
+     "present": {
+      "merchant": 259,
+      "military": 233,
+      "craft": 151,
+      "arcane": 120,
+      "noble": 119,
+      "criminal": 90,
+      "religious": 253,
+      "other": 34,
+      "government": 7
+     },
+     "contends": {
+      "military": 204,
+      "merchant": 116,
+      "craft": 107,
+      "arcane": 75,
+      "noble": 68,
+      "religious": 221,
+      "other": 25,
+      "government": 5,
+      "criminal": 5
+     },
+     "none": 205
+    },
+    "ladder": {
+     "city": {
+      "calm": {
+       "Holding": 71,
+       "Stable": 1
+      },
+      "crisis": {
+       "Contested": 12,
+       "Holding": 13,
+       "Critical": 2,
+       "Stable": 1
+      }
+     },
+     "hamlet": {
+      "calm": {
+       "Stable": 60,
+       "Holding": 4,
+       "Contested": 1
+      },
+      "crisis": {
+       "Stable": 28,
+       "Contested": 6,
+       "Holding": 1
+      }
+     },
+     "metropolis": {
+      "crisis": {
+       "Holding": 18,
+       "Contested": 10,
+       "Critical": 4
+      },
+      "calm": {
+       "Holding": 68
+      }
+     },
+     "thorp": {
+      "calm": {
+       "Stable": 65
+      },
+      "crisis": {
+       "Stable": 31,
+       "Contested": 4
+      }
+     },
+     "town": {
+      "calm": {
+       "Holding": 66,
+       "Stable": 1,
+       "Contested": 2
+      },
+      "crisis": {
+       "Contested": 17,
+       "Holding": 12,
+       "Critical": 2
+      }
+     },
+     "village": {
+      "calm": {
+       "Contested": 17,
+       "Holding": 32,
+       "Stable": 14
+      },
+      "crisis": {
+       "Contested": 28,
+       "Holding": 5,
+       "Stable": 4
+      }
+     }
+    },
+    "contendsBySize": {
+     "city": {
+      "military": 68,
+      "merchant": 43,
+      "craft": 34,
+      "arcane": 25,
+      "noble": 21,
+      "religious": 56,
+      "other": 3,
+      "government": 1
+     },
+     "hamlet": {
+      "merchant": 1,
+      "criminal": 1,
+      "military": 8,
+      "other": 2
+     },
+     "metropolis": {
+      "religious": 58,
+      "military": 62,
+      "arcane": 50,
+      "craft": 30,
+      "merchant": 37,
+      "noble": 27
+     },
+     "thorp": {
+      "other": 3,
+      "government": 1
+     },
+     "town": {
+      "religious": 51,
+      "military": 47,
+      "noble": 16,
+      "craft": 39,
+      "merchant": 31,
+      "government": 2,
+      "other": 5,
+      "criminal": 3
+     },
+     "village": {
+      "religious": 56,
+      "military": 19,
+      "other": 12,
+      "craft": 4,
+      "criminal": 1,
+      "merchant": 4,
+      "noble": 4,
+      "government": 1
+     }
+    },
+    "noneBySize": {
+     "city": 2,
+     "hamlet": 88,
+     "thorp": 96,
+     "town": 1,
+     "village": 18
+    },
+    "first": {
+     "powers": 2172,
+     "low": 965,
+     "bySize": {
+      "city": {
+       "powers": 623,
+       "low": 314
+      },
+      "hamlet": {
+       "powers": 114,
+       "low": 95
+      },
+      "metropolis": {
+       "powers": 721,
+       "low": 274
+      },
+      "thorp": {
+       "powers": 103,
+       "low": 103
+      },
+      "town": {
+       "powers": 390,
+       "low": 142
+      },
+      "village": {
+       "powers": 221,
+       "low": 37
+      }
+     }
+    }
+   },
+   "SK": {
+    "places": 600,
+    "errors": [],
+    "kinds": {
+     "present": {
+      "merchant": 259,
+      "military": 233,
+      "craft": 151,
+      "arcane": 120,
+      "noble": 119,
+      "criminal": 90,
+      "religious": 253,
+      "other": 34,
+      "government": 7
+     },
+     "contends": {
+      "military": 204,
+      "merchant": 116,
+      "craft": 107,
+      "arcane": 75,
+      "noble": 68,
+      "religious": 221,
+      "other": 25,
+      "government": 5,
+      "criminal": 5
+     },
+     "none": 205
+    },
+    "ladder": {
+     "city": {
+      "calm": {
+       "Holding": 71,
+       "Stable": 1
+      },
+      "crisis": {
+       "Contested": 12,
+       "Holding": 13,
+       "Critical": 2,
+       "Stable": 1
+      }
+     },
+     "hamlet": {
+      "calm": {
+       "Stable": 60,
+       "Holding": 4,
+       "Contested": 1
+      },
+      "crisis": {
+       "Stable": 28,
+       "Contested": 6,
+       "Holding": 1
+      }
+     },
+     "metropolis": {
+      "crisis": {
+       "Holding": 18,
+       "Contested": 10,
+       "Critical": 4
+      },
+      "calm": {
+       "Holding": 68
+      }
+     },
+     "thorp": {
+      "calm": {
+       "Stable": 65
+      },
+      "crisis": {
+       "Stable": 31,
+       "Contested": 4
+      }
+     },
+     "town": {
+      "calm": {
+       "Holding": 66,
+       "Stable": 1,
+       "Contested": 2
+      },
+      "crisis": {
+       "Contested": 17,
+       "Holding": 12,
+       "Critical": 2
+      }
+     },
+     "village": {
+      "calm": {
+       "Contested": 17,
+       "Holding": 32,
+       "Stable": 14
+      },
+      "crisis": {
+       "Contested": 28,
+       "Holding": 5,
+       "Stable": 4
+      }
+     }
+    },
+    "contendsBySize": {
+     "city": {
+      "military": 68,
+      "merchant": 43,
+      "craft": 34,
+      "arcane": 25,
+      "noble": 21,
+      "religious": 56,
+      "other": 3,
+      "government": 1
+     },
+     "hamlet": {
+      "merchant": 1,
+      "criminal": 1,
+      "military": 8,
+      "other": 2
+     },
+     "metropolis": {
+      "religious": 58,
+      "military": 62,
+      "arcane": 50,
+      "craft": 30,
+      "merchant": 37,
+      "noble": 27
+     },
+     "thorp": {
+      "other": 3,
+      "government": 1
+     },
+     "town": {
+      "religious": 51,
+      "military": 47,
+      "noble": 16,
+      "craft": 39,
+      "merchant": 31,
+      "government": 2,
+      "other": 5,
+      "criminal": 3
+     },
+     "village": {
+      "religious": 56,
+      "military": 19,
+      "other": 12,
+      "craft": 4,
+      "criminal": 1,
+      "merchant": 4,
+      "noble": 4,
+      "government": 1
+     }
+    },
+    "noneBySize": {
+     "city": 2,
+     "hamlet": 88,
+     "thorp": 96,
+     "town": 1,
+     "village": 18
+    },
+    "first": {
+     "powers": 2172,
+     "low": 694,
+     "bySize": {
+      "city": {
+       "powers": 623,
+       "low": 212
+      },
+      "hamlet": {
+       "powers": 114,
+       "low": 92
+      },
+      "metropolis": {
+       "powers": 721,
+       "low": 168
+      },
+      "thorp": {
+       "powers": 103,
+       "low": 100
+      },
+      "town": {
+       "powers": 390,
+       "low": 94
+      },
+      "village": {
+       "powers": 221,
+       "low": 28
+      }
+     }
+    }
+   },
+   "SKW": {
+    "places": 600,
+    "errors": [],
+    "kinds": {
+     "present": {
+      "merchant": 259,
+      "military": 233,
+      "craft": 151,
+      "arcane": 120,
+      "noble": 119,
+      "criminal": 90,
+      "religious": 253,
+      "other": 34,
+      "government": 7
+     },
+     "contends": {
+      "military": 204,
+      "merchant": 116,
+      "craft": 107,
+      "arcane": 75,
+      "noble": 68,
+      "religious": 221,
+      "other": 25,
+      "government": 5,
+      "criminal": 5
+     },
+     "none": 205
+    },
+    "ladder": {
+     "city": {
+      "calm": {
+       "Holding": 71,
+       "Stable": 1
+      },
+      "crisis": {
+       "Contested": 12,
+       "Holding": 13,
+       "Critical": 2,
+       "Stable": 1
+      }
+     },
+     "hamlet": {
+      "calm": {
+       "Stable": 60,
+       "Holding": 4,
+       "Contested": 1
+      },
+      "crisis": {
+       "Stable": 28,
+       "Contested": 6,
+       "Holding": 1
+      }
+     },
+     "metropolis": {
+      "crisis": {
+       "Holding": 18,
+       "Contested": 10,
+       "Critical": 4
+      },
+      "calm": {
+       "Holding": 68
+      }
+     },
+     "thorp": {
+      "calm": {
+       "Stable": 65
+      },
+      "crisis": {
+       "Stable": 31,
+       "Contested": 4
+      }
+     },
+     "town": {
+      "calm": {
+       "Holding": 66,
+       "Stable": 1,
+       "Contested": 2
+      },
+      "crisis": {
+       "Contested": 17,
+       "Holding": 12,
+       "Critical": 2
+      }
+     },
+     "village": {
+      "calm": {
+       "Contested": 17,
+       "Holding": 32,
+       "Stable": 14
+      },
+      "crisis": {
+       "Contested": 28,
+       "Holding": 5,
+       "Stable": 4
+      }
+     }
+    },
+    "contendsBySize": {
+     "city": {
+      "military": 68,
+      "merchant": 43,
+      "craft": 34,
+      "arcane": 25,
+      "noble": 21,
+      "religious": 56,
+      "other": 3,
+      "government": 1
+     },
+     "hamlet": {
+      "merchant": 1,
+      "criminal": 1,
+      "military": 8,
+      "other": 2
+     },
+     "metropolis": {
+      "religious": 58,
+      "military": 62,
+      "arcane": 50,
+      "craft": 30,
+      "merchant": 37,
+      "noble": 27
+     },
+     "thorp": {
+      "other": 3,
+      "government": 1
+     },
+     "town": {
+      "religious": 51,
+      "military": 47,
+      "noble": 16,
+      "craft": 39,
+      "merchant": 31,
+      "government": 2,
+      "other": 5,
+      "criminal": 3
+     },
+     "village": {
+      "religious": 56,
+      "military": 19,
+      "other": 12,
+      "craft": 4,
+      "criminal": 1,
+      "merchant": 4,
+      "noble": 4,
+      "government": 1
+     }
+    },
+    "noneBySize": {
+     "city": 2,
+     "hamlet": 88,
+     "thorp": 96,
+     "town": 1,
+     "village": 18
+    },
+    "first": {
+     "powers": 2172,
+     "low": 664,
+     "bySize": {
+      "city": {
+       "powers": 623,
+       "low": 208
+      },
+      "hamlet": {
+       "powers": 114,
+       "low": 92
+      },
+      "metropolis": {
+       "powers": 721,
+       "low": 142
+      },
+      "thorp": {
+       "powers": 103,
+       "low": 100
+      },
+      "town": {
+       "powers": 390,
+       "low": 94
+      },
+      "village": {
+       "powers": 221,
+       "low": 28
+      }
+     }
+    }
+   }
+  },
+  "chair600": {
+   "S": {
+    "places": 600,
+    "errors": [],
+    "kinds": {
+     "present": {
+      "military": 282,
+      "merchant": 305,
+      "noble": 149,
+      "religious": 359,
+      "arcane": 140,
+      "craft": 122,
+      "other": 29,
+      "government": 13,
+      "criminal": 14
+     },
+     "contends": {
+      "military": 279,
+      "noble": 76,
+      "religious": 341,
+      "arcane": 55,
+      "merchant": 96,
+      "other": 22,
+      "craft": 33,
+      "criminal": 1,
+      "government": 6
+     },
+     "none": 177
+    },
+    "ladder": {
+     "city": {
+      "crisis": {
+       "Holding": 14,
+       "Contested": 9,
+       "Critical": 4
+      },
+      "calm": {
+       "Holding": 73
+      }
+     },
+     "hamlet": {
+      "calm": {
+       "Holding": 5,
+       "Stable": 56,
+       "Contested": 5
+      },
+      "crisis": {
+       "Stable": 22,
+       "Contested": 11,
+       "Holding": 1
+      }
+     },
+     "metropolis": {
+      "crisis": {
+       "Contested": 6,
+       "Holding": 21,
+       "Critical": 6
+      },
+      "calm": {
+       "Holding": 67
+      }
+     },
+     "thorp": {
+      "calm": {
+       "Stable": 70
+      },
+      "crisis": {
+       "Stable": 22,
+       "Contested": 8
+      }
+     },
+     "town": {
+      "calm": {
+       "Holding": 66,
+       "Contested": 4
+      },
+      "crisis": {
+       "Contested": 22,
+       "Critical": 5,
+       "Holding": 3
+      }
+     },
+     "village": {
+      "calm": {
+       "Contested": 47,
+       "Holding": 17,
+       "Stable": 6
+      },
+      "crisis": {
+       "Contested": 29,
+       "Stable": 1
+      }
+     }
+    },
+    "contendsBySize": {
+     "city": {
+      "military": 93,
+      "noble": 34,
+      "religious": 78,
+      "arcane": 17,
+      "merchant": 39,
+      "other": 6,
+      "craft": 1
+     },
+     "hamlet": {
+      "merchant": 3,
+      "military": 13,
+      "other": 3,
+      "criminal": 1,
+      "noble": 2
+     },
+     "metropolis": {
+      "military": 92,
+      "merchant": 29,
+      "religious": 88,
+      "arcane": 38,
+      "noble": 39,
+      "other": 1,
+      "craft": 2
+     },
+     "thorp": {
+      "other": 2,
+      "military": 3,
+      "merchant": 1,
+      "government": 2
+     },
+     "town": {
+      "military": 67,
+      "merchant": 21,
+      "religious": 89,
+      "craft": 30,
+      "other": 5,
+      "government": 3,
+      "noble": 1
+     },
+     "village": {
+      "religious": 86,
+      "other": 5,
+      "military": 11,
+      "merchant": 3,
+      "government": 1
+     }
+    },
+    "noneBySize": {
+     "hamlet": 78,
+     "thorp": 92,
+     "village": 7
+    },
+    "first": {
+     "powers": 2314,
+     "low": 762,
+     "bySize": {
+      "city": {
+       "powers": 645,
+       "low": 232
+      },
+      "hamlet": {
+       "powers": 125,
+       "low": 101
+      },
+      "metropolis": {
+       "powers": 808,
+       "low": 226
+      },
+      "thorp": {
+       "powers": 104,
+       "low": 102
+      },
+      "town": {
+       "powers": 408,
+       "low": 89
+      },
+      "village": {
+       "powers": 224,
+       "low": 12
+      }
+     }
+    }
+   },
+   "SK": {
+    "places": 600,
+    "errors": [],
+    "kinds": {
+     "present": {
+      "military": 282,
+      "merchant": 305,
+      "noble": 149,
+      "religious": 359,
+      "arcane": 140,
+      "craft": 122,
+      "other": 29,
+      "government": 13,
+      "criminal": 14
+     },
+     "contends": {
+      "military": 279,
+      "noble": 76,
+      "religious": 341,
+      "arcane": 55,
+      "merchant": 96,
+      "other": 22,
+      "craft": 33,
+      "criminal": 1,
+      "government": 6
+     },
+     "none": 177
+    },
+    "ladder": {
+     "city": {
+      "crisis": {
+       "Holding": 14,
+       "Contested": 9,
+       "Critical": 4
+      },
+      "calm": {
+       "Holding": 73
+      }
+     },
+     "hamlet": {
+      "calm": {
+       "Holding": 5,
+       "Stable": 56,
+       "Contested": 5
+      },
+      "crisis": {
+       "Stable": 22,
+       "Contested": 11,
+       "Holding": 1
+      }
+     },
+     "metropolis": {
+      "crisis": {
+       "Contested": 6,
+       "Holding": 21,
+       "Critical": 6
+      },
+      "calm": {
+       "Holding": 67
+      }
+     },
+     "thorp": {
+      "calm": {
+       "Stable": 70
+      },
+      "crisis": {
+       "Stable": 22,
+       "Contested": 8
+      }
+     },
+     "town": {
+      "calm": {
+       "Holding": 66,
+       "Contested": 4
+      },
+      "crisis": {
+       "Contested": 22,
+       "Critical": 5,
+       "Holding": 3
+      }
+     },
+     "village": {
+      "calm": {
+       "Contested": 47,
+       "Holding": 17,
+       "Stable": 6
+      },
+      "crisis": {
+       "Contested": 29,
+       "Stable": 1
+      }
+     }
+    },
+    "contendsBySize": {
+     "city": {
+      "military": 93,
+      "noble": 34,
+      "religious": 78,
+      "arcane": 17,
+      "merchant": 39,
+      "other": 6,
+      "craft": 1
+     },
+     "hamlet": {
+      "merchant": 3,
+      "military": 13,
+      "other": 3,
+      "criminal": 1,
+      "noble": 2
+     },
+     "metropolis": {
+      "military": 92,
+      "merchant": 29,
+      "religious": 88,
+      "arcane": 38,
+      "noble": 39,
+      "other": 1,
+      "craft": 2
+     },
+     "thorp": {
+      "other": 2,
+      "military": 3,
+      "merchant": 1,
+      "government": 2
+     },
+     "town": {
+      "military": 67,
+      "merchant": 21,
+      "religious": 89,
+      "craft": 30,
+      "other": 5,
+      "government": 3,
+      "noble": 1
+     },
+     "village": {
+      "religious": 86,
+      "other": 5,
+      "military": 11,
+      "merchant": 3,
+      "government": 1
+     }
+    },
+    "noneBySize": {
+     "hamlet": 78,
+     "thorp": 92,
+     "village": 7
+    },
+    "first": {
+     "powers": 2314,
+     "low": 539,
+     "bySize": {
+      "city": {
+       "powers": 645,
+       "low": 161
+      },
+      "hamlet": {
+       "powers": 125,
+       "low": 97
+      },
+      "metropolis": {
+       "powers": 808,
+       "low": 122
+      },
+      "thorp": {
+       "powers": 104,
+       "low": 100
+      },
+      "town": {
+       "powers": 408,
+       "low": 51
+      },
+      "village": {
+       "powers": 224,
+       "low": 8
+      }
+     }
+    }
+   },
+   "SKW": {
+    "places": 600,
+    "errors": [],
+    "kinds": {
+     "present": {
+      "military": 282,
+      "merchant": 305,
+      "noble": 149,
+      "religious": 359,
+      "arcane": 140,
+      "craft": 122,
+      "other": 29,
+      "government": 13,
+      "criminal": 14
+     },
+     "contends": {
+      "military": 279,
+      "noble": 76,
+      "religious": 341,
+      "arcane": 55,
+      "merchant": 96,
+      "other": 22,
+      "craft": 33,
+      "criminal": 1,
+      "government": 6
+     },
+     "none": 177
+    },
+    "ladder": {
+     "city": {
+      "crisis": {
+       "Holding": 14,
+       "Contested": 9,
+       "Critical": 4
+      },
+      "calm": {
+       "Holding": 73
+      }
+     },
+     "hamlet": {
+      "calm": {
+       "Holding": 5,
+       "Stable": 56,
+       "Contested": 5
+      },
+      "crisis": {
+       "Stable": 22,
+       "Contested": 11,
+       "Holding": 1
+      }
+     },
+     "metropolis": {
+      "crisis": {
+       "Contested": 6,
+       "Holding": 21,
+       "Critical": 6
+      },
+      "calm": {
+       "Holding": 67
+      }
+     },
+     "thorp": {
+      "calm": {
+       "Stable": 70
+      },
+      "crisis": {
+       "Stable": 22,
+       "Contested": 8
+      }
+     },
+     "town": {
+      "calm": {
+       "Holding": 66,
+       "Contested": 4
+      },
+      "crisis": {
+       "Contested": 22,
+       "Critical": 5,
+       "Holding": 3
+      }
+     },
+     "village": {
+      "calm": {
+       "Contested": 47,
+       "Holding": 17,
+       "Stable": 6
+      },
+      "crisis": {
+       "Contested": 29,
+       "Stable": 1
+      }
+     }
+    },
+    "contendsBySize": {
+     "city": {
+      "military": 93,
+      "noble": 34,
+      "religious": 78,
+      "arcane": 17,
+      "merchant": 39,
+      "other": 6,
+      "craft": 1
+     },
+     "hamlet": {
+      "merchant": 3,
+      "military": 13,
+      "other": 3,
+      "criminal": 1,
+      "noble": 2
+     },
+     "metropolis": {
+      "military": 92,
+      "merchant": 29,
+      "religious": 88,
+      "arcane": 38,
+      "noble": 39,
+      "other": 1,
+      "craft": 2
+     },
+     "thorp": {
+      "other": 2,
+      "military": 3,
+      "merchant": 1,
+      "government": 2
+     },
+     "town": {
+      "military": 67,
+      "merchant": 21,
+      "religious": 89,
+      "craft": 30,
+      "other": 5,
+      "government": 3,
+      "noble": 1
+     },
+     "village": {
+      "religious": 86,
+      "other": 5,
+      "military": 11,
+      "merchant": 3,
+      "government": 1
+     }
+    },
+    "noneBySize": {
+     "hamlet": 78,
+     "thorp": 92,
+     "village": 7
+    },
+    "first": {
+     "powers": 2314,
+     "low": 514,
+     "bySize": {
+      "city": {
+       "powers": 645,
+       "low": 157
+      },
+      "hamlet": {
+       "powers": 125,
+       "low": 97
+      },
+      "metropolis": {
+       "powers": 808,
+       "low": 101
+      },
+      "thorp": {
+       "powers": 104,
+       "low": 100
+      },
+      "town": {
+       "powers": 408,
+       "low": 51
+      },
+      "village": {
+       "powers": 224,
+       "low": 8
+      }
+     }
+    }
+   }
+  }
+ },
+ "pairs": {
+  "visitor": {
+   "S->SK": {
+    "paired": 600,
+    "identical": 287,
+    "bySize": {
+     "city": {
+      "n": 100,
+      "identical": 1,
+      "gain": 0,
+      "lose": 1,
+      "swap": 13,
+      "other": 15,
+      "any": 15,
+      "contestMoved": 0,
+      "cardTowns": 99
+     },
+     "hamlet": {
+      "n": 100,
+      "identical": 97,
+      "gain": 1,
+      "lose": 0,
+      "swap": 0,
+      "other": 0,
+      "any": 1,
+      "contestMoved": 0,
+      "cardTowns": 3
+     },
+     "metropolis": {
+      "n": 100,
+      "identical": 1,
+      "gain": 0,
+      "lose": 1,
+      "swap": 11,
+      "other": 11,
+      "any": 12,
+      "contestMoved": 0,
+      "cardTowns": 99
+     },
+     "thorp": {
+      "n": 100,
+      "identical": 97,
+      "gain": 0,
+      "lose": 3,
+      "swap": 0,
+      "other": 0,
+      "any": 3,
+      "contestMoved": 0,
+      "cardTowns": 3
+     },
+     "town": {
+      "n": 100,
+      "identical": 0,
+      "gain": 1,
+      "lose": 3,
+      "swap": 10,
+      "other": 12,
+      "any": 15,
+      "contestMoved": 0,
+      "cardTowns": 100
+     },
+     "village": {
+      "n": 100,
+      "identical": 91,
+      "gain": 0,
+      "lose": 1,
+      "swap": 0,
+      "other": 0,
+      "any": 1,
+      "contestMoved": 0,
+      "cardTowns": 9
+     }
+    },
+    "conflictEx": {
+     "swap": {
+      "seed": "visitor-city-7",
+      "before": [
+       "Thieves' Guild / Craft Guilds",
+       "Merchant Guilds / Arcane Orders"
+      ],
+      "after": [
+       "Merchant Guilds / Arcane Orders",
+       "Merchant Guilds / The Grey Council"
+      ],
+      "desc": [
+       [
+        "The Thieves' Guild and the Craft Guilds are in high conflict over protection money taken from traders. The stakes are safety of trade.",
+        "The Merchant Guilds and the Arcane Orders are in moderate conflict over magic used in public without leave. The stakes are public safety."
+       ],
+       [
+        "The Merchant Guilds and the Arcane Orders are in moderate conflict over who buys the raw materials first. The stakes are supply.",
+        "The Merchant Guilds and the Grey Council are in moderate conflict over the right to raise a new levy. The stakes are revenue."
+       ]
+      ]
+     },
+     "other": {
+      "seed": "visitor-city-7",
+      "before": [
+       "Thieves' Guild / Craft Guilds",
+       "Merchant Guilds / Arcane Orders"
+      ],
+      "after": [
+       "Merchant Guilds / Arcane Orders",
+       "Merchant Guilds / The Grey Council"
+      ],
+      "desc": [
+       [
+        "The Thieves' Guild and the Craft Guilds are in high conflict over protection money taken from traders. The stakes are safety of trade.",
+        "The Merchant Guilds and the Arcane Orders are in moderate conflict over magic used in public without leave. The stakes are public safety."
+       ],
+       [
+        "The Merchant Guilds and the Arcane Orders are in moderate conflict over who buys the raw materials first. The stakes are supply.",
+        "The Merchant Guilds and the Grey Council are in moderate conflict over the right to raise a new levy. The stakes are revenue."
+       ]
+      ]
+     },
+     "lose": {
+      "seed": "visitor-city-59",
+      "before": [
+       "Noble Governorship / Noble Families",
+       "Noble Governorship / Military/Guard"
+      ],
+      "after": [
+       "Noble Governorship / Military/Guard"
+      ],
+      "desc": [
+       [
+        "The Noble Governorship and the Noble Families are in moderate conflict over control of a key trade route checkpoint. The stakes are economic leverage.",
+        "The Noble Governorship and the Guard are in moderate conflict over a broken promise of support. The stakes are trust."
+       ],
+       [
+        "The Noble Governorship and the Guard are in moderate conflict over punishment of a member who struck a local man. The stakes are honour and order."
+       ]
+      ]
+     },
+     "gain": {
+      "seed": "visitor-hamlet-11",
+      "before": [],
+      "after": [
+       "Headman's Authority / The Independent Bloc"
+      ],
+      "desc": [
+       [],
+       [
+        "The Headman's Authority and the Independent Bloc are in moderate conflict over control of a key trade route checkpoint. The stakes are economic leverage."
+       ]
+      ]
+     }
+    },
+    "contest": {
+     "fieldOrRisk": 0,
+     "topKinds": 0,
+     "enter": {},
+     "leave": {},
+     "riskMoves": {},
+     "ex": null
+    },
+    "roles": {
+     "the senior craft-guild master: low -> high": {
+      "cards": 295,
+      "towns": 295,
+      "power": {
+       "1 -> 8": 93,
+       "3 -> 10": 93,
+       "2 -> 9": 109
+      }
+     },
+     "the senior guild master: low -> high": {
+      "cards": 167,
+      "towns": 167,
+      "power": {
+       "1 -> 8": 47,
+       "2 -> 9": 63,
+       "3 -> 10": 57
+      }
+     },
+     "the guildmaster of thieves: low -> high": {
+      "cards": 50,
+      "towns": 50,
+      "power": {
+       "3 -> 10": 11,
+       "2 -> 9": 17,
+       "1 -> 8": 22
+      }
+     },
+     "the bloc's speaker: low -> moderate": {
+      "cards": 28,
+      "towns": 28,
+      "power": {
+       "2 -> 6": 8,
+       "2 -> 5": 2,
+       "3 -> 7": 9,
+       "1 -> 4": 6,
+       "1 -> 5": 1,
+       "3 -> 6": 2
+      }
+     },
+     "the neutrals' broker: low -> moderate": {
+      "cards": 2,
+      "towns": 2,
+      "power": {
+       "1 -> 4": 1,
+       "2 -> 6": 1
+      }
+     },
+     "the alliance's convenor: low -> moderate": {
+      "cards": 2,
+      "towns": 2,
+      "power": {
+       "3 -> 7": 1,
+       "3 -> 6": 1
+      }
+     },
+     "the reformer: low -> moderate": {
+      "cards": 2,
+      "towns": 2,
+      "power": {
+       "3 -> 7": 1,
+       "3 -> 6": 1
+      }
+     },
+     "the peacemaker: low -> moderate": {
+      "cards": 1,
+      "towns": 1,
+      "power": {
+       "1 -> 4": 1
+      }
+     }
+    },
+    "cardsMoved": 547,
+    "cardsUnmatched": 0,
+    "firstFlip": {
+     "lowToHigher": 271,
+     "higherToLow": 0,
+     "ex": "visitor-city-0: Craft Guilds's first card Euphemia Kyriadotes (the senior craft-guild master) low -> high"
+    },
+    "keys": {
+     "npcs": 313,
+     "relationships": 302,
+     "prominentRelationship": 59,
+     "pressureSentence": 37,
+     "powerStructure": 47,
+     "conflicts": 47,
+     "powerStructure.conflicts": 47,
+     "powerStructure.factionRelationships": 22,
+     "generationCoherenceReceipt": 11,
+     "stress": 4,
+     "stressors": 4
+    },
+    "other": {
+     "ties (relationships[], any field: prose included)": {
+      "leaves": 6440,
+      "towns": 302,
+      "ex": "visitor-city-0 relationships[2] npc_craft_guilds_30_80~npc_professional_city_watch: Professional Rivalry/personal -> Outstanding Debt/substantial (description moved)"
+     },
+     "ties whose ends, kind or strength moved": {
+      "leaves": 1161,
+      "towns": 302,
+      "ex": "visitor-city-0 relationships[2] npc_craft_guilds_30_80~npc_professional_city_watch: Professional Rivalry/personal -> npc_craft_guilds_30_80~npc_professional_city_watch Outstanding Debt/substantial"
+     },
+     "goals (npcs[].goal: short, long or intent)": {
+      "leaves": 606,
+      "towns": 244,
+      "ex": "visitor-city-1 Diarmuid Quinn (the master smith) goal short+intent: \"Win over one of Rónnat Doherty's friends. / Make the blacksmiths so needed by those who govern that no one dares touch the rights of the house.\" -> \"Keep Rónnat Doherty from calling in what is owed this season. / Make the blacksmiths so needed by those who govern that no one dares touch the rights of the house.\""
+     },
+     "the pressure sentence (pressureSentence)": {
+      "leaves": 37,
+      "towns": 37,
+      "ex": "visitor-city-5: \"Yasmin al-Aziz and Sulayman al-Rumi are allies of convenience. Yasmin al-Aziz has taken a precaution against Sulayman al-Rumi that he was not meant to discover. Sulayman al-Rumi has discovered it.\" -> \"Yasmin al-Aziz and Sulayman al-Rumi are allies of convenience. The threat that brought Yasmin al-Aziz and Sulayman al-Rumi together is gone. Neither has said so aloud.\""
+     },
+     "the powers' relationship directions": {
+      "leaves": 6,
+      "towns": 6,
+      "ex": "visitor-city-14 [Noble Governorship / Military/Guard]: escalating -> stable"
+     },
+     "the powers' relationship narratives (powerStructure.factionRelationships[].narrative)": {
+      "leaves": 21,
+      "towns": 20,
+      "ex": "visitor-city-25 [Corrupt City Council / Merchant Guilds]: \"The Corrupt City Council needs the taxes and loans of the Merchant Guilds, and the Merchant Guilds need the Corrupt City Council to enforce their contracts and keep the law. Neither can afford to ruin the other. Even so, the two are now at odds over military conscription of guild apprentices.\" -> \"The Corrupt City Council needs the taxes and loans of the Merchant Guilds, and the Merchant Guilds need the Corrupt City Council to enforce their contracts and keep the law. Neither can afford to ruin the other.\""
+     },
+     "a card's other fields (beyond influence, power, structuralPosition, goal)": {
+      "leaves": 2,
+      "towns": 2,
+      "ex": "visitor-metropolis-40 Michail Zoe (the senior craft-guild master)"
+     }
+    }
+   },
+   "S->SKW": {
+    "paired": 600,
+    "identical": 286,
+    "bySize": {
+     "city": {
+      "n": 100,
+      "identical": 1,
+      "gain": 0,
+      "lose": 1,
+      "swap": 13,
+      "other": 15,
+      "any": 15,
+      "contestMoved": 0,
+      "cardTowns": 99
+     },
+     "hamlet": {
+      "n": 100,
+      "identical": 97,
+      "gain": 1,
+      "lose": 0,
+      "swap": 0,
+      "other": 0,
+      "any": 1,
+      "contestMoved": 0,
+      "cardTowns": 3
+     },
+     "metropolis": {
+      "n": 100,
+      "identical": 0,
+      "gain": 0,
+      "lose": 1,
+      "swap": 13,
+      "other": 13,
+      "any": 14,
+      "contestMoved": 0,
+      "cardTowns": 100
+     },
+     "thorp": {
+      "n": 100,
+      "identical": 97,
+      "gain": 0,
+      "lose": 3,
+      "swap": 0,
+      "other": 0,
+      "any": 3,
+      "contestMoved": 0,
+      "cardTowns": 3
+     },
+     "town": {
+      "n": 100,
+      "identical": 0,
+      "gain": 1,
+      "lose": 3,
+      "swap": 10,
+      "other": 12,
+      "any": 15,
+      "contestMoved": 0,
+      "cardTowns": 100
+     },
+     "village": {
+      "n": 100,
+      "identical": 91,
+      "gain": 0,
+      "lose": 1,
+      "swap": 0,
+      "other": 0,
+      "any": 1,
+      "contestMoved": 0,
+      "cardTowns": 9
+     }
+    },
+    "conflictEx": {
+     "swap": {
+      "seed": "visitor-city-7",
+      "before": [
+       "Thieves' Guild / Craft Guilds",
+       "Merchant Guilds / Arcane Orders"
+      ],
+      "after": [
+       "Merchant Guilds / Arcane Orders",
+       "Merchant Guilds / The Grey Council"
+      ],
+      "desc": [
+       [
+        "The Thieves' Guild and the Craft Guilds are in high conflict over protection money taken from traders. The stakes are safety of trade.",
+        "The Merchant Guilds and the Arcane Orders are in moderate conflict over magic used in public without leave. The stakes are public safety."
+       ],
+       [
+        "The Merchant Guilds and the Arcane Orders are in moderate conflict over who buys the raw materials first. The stakes are supply.",
+        "The Merchant Guilds and the Grey Council are in moderate conflict over the right to raise a new levy. The stakes are revenue."
+       ]
+      ]
+     },
+     "other": {
+      "seed": "visitor-city-7",
+      "before": [
+       "Thieves' Guild / Craft Guilds",
+       "Merchant Guilds / Arcane Orders"
+      ],
+      "after": [
+       "Merchant Guilds / Arcane Orders",
+       "Merchant Guilds / The Grey Council"
+      ],
+      "desc": [
+       [
+        "The Thieves' Guild and the Craft Guilds are in high conflict over protection money taken from traders. The stakes are safety of trade.",
+        "The Merchant Guilds and the Arcane Orders are in moderate conflict over magic used in public without leave. The stakes are public safety."
+       ],
+       [
+        "The Merchant Guilds and the Arcane Orders are in moderate conflict over who buys the raw materials first. The stakes are supply.",
+        "The Merchant Guilds and the Grey Council are in moderate conflict over the right to raise a new levy. The stakes are revenue."
+       ]
+      ]
+     },
+     "lose": {
+      "seed": "visitor-city-59",
+      "before": [
+       "Noble Governorship / Noble Families",
+       "Noble Governorship / Military/Guard"
+      ],
+      "after": [
+       "Noble Governorship / Military/Guard"
+      ],
+      "desc": [
+       [
+        "The Noble Governorship and the Noble Families are in moderate conflict over control of a key trade route checkpoint. The stakes are economic leverage.",
+        "The Noble Governorship and the Guard are in moderate conflict over a broken promise of support. The stakes are trust."
+       ],
+       [
+        "The Noble Governorship and the Guard are in moderate conflict over punishment of a member who struck a local man. The stakes are honour and order."
+       ]
+      ]
+     },
+     "gain": {
+      "seed": "visitor-hamlet-11",
+      "before": [],
+      "after": [
+       "Headman's Authority / The Independent Bloc"
+      ],
+      "desc": [
+       [],
+       [
+        "The Headman's Authority and the Independent Bloc are in moderate conflict over control of a key trade route checkpoint. The stakes are economic leverage."
+       ]
+      ]
+     }
+    },
+    "contest": {
+     "fieldOrRisk": 0,
+     "topKinds": 0,
+     "enter": {},
+     "leave": {},
+     "riskMoves": {},
+     "ex": null
+    },
+    "roles": {
+     "the senior craft-guild master: low -> high": {
+      "cards": 295,
+      "towns": 295,
+      "power": {
+       "1 -> 8": 93,
+       "3 -> 10": 93,
+       "2 -> 9": 109
+      }
+     },
+     "the luxury merchant: low -> moderate": {
+      "cards": 181,
+      "towns": 181,
+      "power": {
+       "2 -> 6": 31,
+       "1 -> 5": 14,
+       "2 -> 5": 33,
+       "3 -> 7": 43,
+       "1 -> 4": 49,
+       "3 -> 6": 11
+      }
+     },
+     "the senior guild master: low -> high": {
+      "cards": 167,
+      "towns": 167,
+      "power": {
+       "1 -> 8": 47,
+       "2 -> 9": 63,
+       "3 -> 10": 57
+      }
+     },
+     "the guildmaster of thieves: low -> high": {
+      "cards": 50,
+      "towns": 50,
+      "power": {
+       "3 -> 10": 11,
+       "2 -> 9": 17,
+       "1 -> 8": 22
+      }
+     },
+     "the bloc's speaker: low -> moderate": {
+      "cards": 28,
+      "towns": 28,
+      "power": {
+       "2 -> 6": 8,
+       "2 -> 5": 2,
+       "3 -> 7": 9,
+       "1 -> 4": 6,
+       "1 -> 5": 1,
+       "3 -> 6": 2
+      }
+     },
+     "the neutrals' broker: low -> moderate": {
+      "cards": 2,
+      "towns": 2,
+      "power": {
+       "1 -> 4": 1,
+       "2 -> 6": 1
+      }
+     },
+     "the alliance's convenor: low -> moderate": {
+      "cards": 2,
+      "towns": 2,
+      "power": {
+       "3 -> 7": 1,
+       "3 -> 6": 1
+      }
+     },
+     "the exchange master: low -> moderate": {
+      "cards": 38,
+      "towns": 38,
+      "power": {
+       "1 -> 4": 14,
+       "2 -> 5": 6,
+       "2 -> 6": 5,
+       "3 -> 7": 10,
+       "3 -> 6": 2,
+       "1 -> 5": 1
+      }
+     },
+     "the reformer: low -> moderate": {
+      "cards": 2,
+      "towns": 2,
+      "power": {
+       "3 -> 7": 1,
+       "3 -> 6": 1
+      }
+     },
+     "the peacemaker: low -> moderate": {
+      "cards": 1,
+      "towns": 1,
+      "power": {
+       "1 -> 4": 1
+      }
+     }
+    },
+    "cardsMoved": 766,
+    "cardsUnmatched": 0,
+    "firstFlip": {
+     "lowToHigher": 301,
+     "higherToLow": 0,
+     "ex": "visitor-city-0: Craft Guilds's first card Euphemia Kyriadotes (the senior craft-guild master) low -> high"
+    },
+    "keys": {
+     "npcs": 314,
+     "relationships": 304,
+     "prominentRelationship": 63,
+     "pressureSentence": 38,
+     "powerStructure": 49,
+     "conflicts": 49,
+     "powerStructure.conflicts": 49,
+     "powerStructure.factionRelationships": 22,
+     "generationCoherenceReceipt": 11,
+     "stress": 4,
+     "stressors": 4
+    },
+    "other": {
+     "ties (relationships[], any field: prose included)": {
+      "leaves": 6868,
+      "towns": 304,
+      "ex": "visitor-city-0 relationships[2] npc_craft_guilds_30_80~npc_professional_city_watch: Professional Rivalry/personal -> Outstanding Debt/substantial (description moved)"
+     },
+     "ties whose ends, kind or strength moved": {
+      "leaves": 1310,
+      "towns": 304,
+      "ex": "visitor-city-0 relationships[2] npc_craft_guilds_30_80~npc_professional_city_watch: Professional Rivalry/personal -> npc_craft_guilds_30_80~npc_professional_city_watch Outstanding Debt/substantial"
+     },
+     "goals (npcs[].goal: short, long or intent)": {
+      "leaves": 698,
+      "towns": 253,
+      "ex": "visitor-city-1 Lasairfhiona Clifford (the luxury merchant) goal short+intent: \"Keep the friendship with Waitling O'Dwyer quiet, where it does the most good. / Grow rich enough that no one can ever tell them no.\" -> \"Keep the old lessons between them and Waitling O'Dwyer private. / Grow rich enough that no one can ever tell them no.\""
+     },
+     "the pressure sentence (pressureSentence)": {
+      "leaves": 38,
+      "towns": 38,
+      "ex": "visitor-city-1: \"Aifric Farrell and Yves Brennan are allies of convenience. Yves Brennan spoke against Aifric Farrell on a small matter last week. Aifric Farrell is waiting to see whether it was small.\" -> \"Aifric Farrell and Yves Brennan are allies of convenience. Yves Brennan has asked Aifric Farrell to back a candidate her distrusts. Refusing would cost the alliance its majority.\""
+     },
+     "the powers' relationship directions": {
+      "leaves": 6,
+      "towns": 6,
+      "ex": "visitor-city-14 [Noble Governorship / Military/Guard]: escalating -> stable"
+     },
+     "the powers' relationship narratives (powerStructure.factionRelationships[].narrative)": {
+      "leaves": 21,
+      "towns": 20,
+      "ex": "visitor-city-25 [Corrupt City Council / Merchant Guilds]: \"The Corrupt City Council needs the taxes and loans of the Merchant Guilds, and the Merchant Guilds need the Corrupt City Council to enforce their contracts and keep the law. Neither can afford to ruin the other. Even so, the two are now at odds over military conscription of guild apprentices.\" -> \"The Corrupt City Council needs the taxes and loans of the Merchant Guilds, and the Merchant Guilds need the Corrupt City Council to enforce their contracts and keep the law. Neither can afford to ruin the other.\""
+     },
+     "a card's other fields (beyond influence, power, structuralPosition, goal)": {
+      "leaves": 2,
+      "towns": 2,
+      "ex": "visitor-metropolis-40 Michail Zoe (the senior craft-guild master)"
+     }
+    }
+   },
+   "SK->SKW": {
+    "paired": 600,
+    "identical": 417,
+    "bySize": {
+     "city": {
+      "n": 100,
+      "identical": 15,
+      "gain": 0,
+      "lose": 0,
+      "swap": 0,
+      "other": 0,
+      "any": 0,
+      "contestMoved": 0,
+      "cardTowns": 85
+     },
+     "hamlet": {
+      "n": 100,
+      "identical": 100,
+      "gain": 0,
+      "lose": 0,
+      "swap": 0,
+      "other": 0,
+      "any": 0,
+      "contestMoved": 0,
+      "cardTowns": 0
+     },
+     "metropolis": {
+      "n": 100,
+      "identical": 2,
+      "gain": 0,
+      "lose": 0,
+      "swap": 2,
+      "other": 2,
+      "any": 2,
+      "contestMoved": 0,
+      "cardTowns": 97
+     },
+     "thorp": {
+      "n": 100,
+      "identical": 100,
+      "gain": 0,
+      "lose": 0,
+      "swap": 0,
+      "other": 0,
+      "any": 0,
+      "contestMoved": 0,
+      "cardTowns": 0
+     },
+     "town": {
+      "n": 100,
+      "identical": 100,
+      "gain": 0,
+      "lose": 0,
+      "swap": 0,
+      "other": 0,
+      "any": 0,
+      "contestMoved": 0,
+      "cardTowns": 0
+     },
+     "village": {
+      "n": 100,
+      "identical": 100,
+      "gain": 0,
+      "lose": 0,
+      "swap": 0,
+      "other": 0,
+      "any": 0,
+      "contestMoved": 0,
+      "cardTowns": 0
+     }
+    },
+    "conflictEx": {
+     "swap": {
+      "seed": "visitor-metropolis-3",
+      "before": [
+       "Grand Merchant Oligarchy / Noble Houses",
+       "Grand Merchant Oligarchy / Military/Guard"
+      ],
+      "after": [
+       "Grand Merchant Oligarchy / Military/Guard",
+       "Grand Merchant Oligarchy / Arcane Orders"
+      ],
+      "desc": [
+       [
+        "The Grand Merchant Oligarchy and the Noble Houses are in high conflict over members leaving one power for the other. The stakes are loyalty and numbers.",
+        "The Grand Merchant Oligarchy and the Guard are in moderate conflict over a loan called in early. The stakes are solvency."
+       ],
+       [
+        "The Grand Merchant Oligarchy and the Guard are in moderate conflict over precedence at public gatherings. The stakes are standing.",
+        "The Grand Merchant Oligarchy and the Arcane Orders are in moderate conflict over who may take on apprentices. The stakes are the trades' future."
+       ]
+      ]
+     },
+     "other": {
+      "seed": "visitor-metropolis-3",
+      "before": [
+       "Grand Merchant Oligarchy / Noble Houses",
+       "Grand Merchant Oligarchy / Military/Guard"
+      ],
+      "after": [
+       "Grand Merchant Oligarchy / Military/Guard",
+       "Grand Merchant Oligarchy / Arcane Orders"
+      ],
+      "desc": [
+       [
+        "The Grand Merchant Oligarchy and the Noble Houses are in high conflict over members leaving one power for the other. The stakes are loyalty and numbers.",
+        "The Grand Merchant Oligarchy and the Guard are in moderate conflict over a loan called in early. The stakes are solvency."
+       ],
+       [
+        "The Grand Merchant Oligarchy and the Guard are in moderate conflict over precedence at public gatherings. The stakes are standing.",
+        "The Grand Merchant Oligarchy and the Arcane Orders are in moderate conflict over who may take on apprentices. The stakes are the trades' future."
+       ]
+      ]
+     }
+    },
+    "contest": {
+     "fieldOrRisk": 0,
+     "topKinds": 0,
+     "enter": {},
+     "leave": {},
+     "riskMoves": {},
+     "ex": null
+    },
+    "roles": {
+     "the luxury merchant: low -> moderate": {
+      "cards": 181,
+      "towns": 181,
+      "power": {
+       "2 -> 6": 31,
+       "1 -> 5": 14,
+       "2 -> 5": 33,
+       "3 -> 7": 43,
+       "1 -> 4": 49,
+       "3 -> 6": 11
+      }
+     },
+     "the exchange master: low -> moderate": {
+      "cards": 38,
+      "towns": 38,
+      "power": {
+       "1 -> 4": 14,
+       "2 -> 5": 6,
+       "2 -> 6": 5,
+       "3 -> 7": 10,
+       "3 -> 6": 2,
+       "1 -> 5": 1
+      }
+     }
+    },
+    "cardsMoved": 219,
+    "cardsUnmatched": 0,
+    "firstFlip": {
+     "lowToHigher": 30,
+     "higherToLow": 0,
+     "ex": "visitor-city-1: The Commercial Circle's first card Lasairfhiona Clifford (the luxury merchant) low -> moderate"
+    },
+    "keys": {
+     "npcs": 183,
+     "relationships": 97,
+     "prominentRelationship": 10,
+     "pressureSentence": 5,
+     "powerStructure": 2,
+     "conflicts": 2,
+     "powerStructure.conflicts": 2
+    },
+    "other": {
+     "goals (npcs[].goal: short, long or intent)": {
+      "leaves": 103,
+      "towns": 66,
+      "ex": "visitor-city-1 Lasairfhiona Clifford (the luxury merchant) goal short+intent: \"Keep the friendship with Waitling O'Dwyer quiet, where it does the most good. / Grow rich enough that no one can ever tell them no.\" -> \"Keep the old lessons between them and Waitling O'Dwyer private. / Grow rich enough that no one can ever tell them no.\""
+     },
+     "ties (relationships[], any field: prose included)": {
+      "leaves": 1457,
+      "towns": 97,
+      "ex": "visitor-city-1 relationships[3] npc_luxury_goods_quarter~npc_chroniclers_exchange: Pragmatic Alliance/moderate -> Mentor and Successor/devoted (description moved)"
+     },
+     "ties whose ends, kind or strength moved": {
+      "leaves": 171,
+      "towns": 97,
+      "ex": "visitor-city-1 relationships[3] npc_luxury_goods_quarter~npc_chroniclers_exchange: Pragmatic Alliance/moderate -> npc_luxury_goods_quarter~npc_chroniclers_exchange Mentor and Successor/devoted"
+     },
+     "the pressure sentence (pressureSentence)": {
+      "leaves": 5,
+      "towns": 5,
+      "ex": "visitor-city-1: \"Aifric Farrell and Yves Brennan are allies of convenience. Yves Brennan spoke against Aifric Farrell on a small matter last week. Aifric Farrell is waiting to see whether it was small.\" -> \"Aifric Farrell and Yves Brennan are allies of convenience. Yves Brennan has asked Aifric Farrell to back a candidate her distrusts. Refusing would cost the alliance its majority.\""
+     }
+    }
+   }
+  },
+  "chair600": {
+   "S->SK": {
+    "paired": 600,
+    "identical": 298,
+    "bySize": {
+     "city": {
+      "n": 100,
+      "identical": 5,
+      "gain": 0,
+      "lose": 0,
+      "swap": 5,
+      "other": 8,
+      "any": 8,
+      "contestMoved": 0,
+      "cardTowns": 95
+     },
+     "hamlet": {
+      "n": 100,
+      "identical": 96,
+      "gain": 0,
+      "lose": 1,
+      "swap": 0,
+      "other": 0,
+      "any": 1,
+      "contestMoved": 0,
+      "cardTowns": 4
+     },
+     "metropolis": {
+      "n": 100,
+      "identical": 0,
+      "gain": 0,
+      "lose": 0,
+      "swap": 9,
+      "other": 10,
+      "any": 10,
+      "contestMoved": 0,
+      "cardTowns": 100
+     },
+     "thorp": {
+      "n": 100,
+      "identical": 98,
+      "gain": 0,
+      "lose": 0,
+      "swap": 0,
+      "other": 0,
+      "any": 0,
+      "contestMoved": 0,
+      "cardTowns": 2
+     },
+     "town": {
+      "n": 100,
+      "identical": 3,
+      "gain": 4,
+      "lose": 2,
+      "swap": 4,
+      "other": 8,
+      "any": 14,
+      "contestMoved": 0,
+      "cardTowns": 97
+     },
+     "village": {
+      "n": 100,
+      "identical": 96,
+      "gain": 0,
+      "lose": 0,
+      "swap": 0,
+      "other": 0,
+      "any": 0,
+      "contestMoved": 0,
+      "cardTowns": 4
+     }
+    },
+    "conflictEx": {
+     "other": {
+      "seed": "hxd-city-37",
+      "before": [
+       "Merchant Guilds / Craft Guilds",
+       "City Council / Craft Guilds",
+       "Military/Guard / Craft Guilds"
+      ],
+      "after": [
+       "Merchant Guilds / Craft Guilds",
+       "City Council / Craft Guilds",
+       "Military/Guard / Craft Guilds"
+      ],
+      "desc": [
+       [
+        "The Merchant Guilds and the Craft Guilds are in high conflict over weights and measures used in trade. The stakes are honest dealing.",
+        "The City Council and the Craft Guilds are in high conflict over ownership of a disputed building. The stakes are property.",
+        "The Guard and the Craft Guilds are in moderate conflict over who may take on apprentices. The stakes are the trades' future."
+       ],
+       [
+        "The Merchant Guilds and the Craft Guilds are in high conflict over weights and measures used in trade. The stakes are honest dealing.",
+        "The City Council and the Craft Guilds are in moderate conflict over ownership of a disputed building. The stakes are property.",
+        "The Guard and the Craft Guilds are in moderate conflict over who may take on apprentices. The stakes are the trades' future."
+       ]
+      ]
+     },
+     "swap": {
+      "seed": "hxd-city-41",
+      "before": [
+       "Merchant Guild Council / Merchant Guilds"
+      ],
+      "after": [
+       "Merchant Guild Council / Military/Guard"
+      ],
+      "desc": [
+       [
+        "The Merchant Guild Council and the Merchant Guilds are in high conflict over weights and measures used in trade. The stakes are honest dealing."
+       ],
+       [
+        "The Merchant Guild Council and the Guard are in high conflict over prices set on everyday goods. The stakes are livelihoods."
+       ]
+      ]
+     },
+     "lose": {
+      "seed": "hxd-hamlet-18",
+      "before": [
+       "The Independent Bloc / Feudal Stewardship"
+      ],
+      "after": [],
+      "desc": [
+       [
+        "The Independent Bloc and the Feudal Stewardship are in moderate conflict over blame for a costly failure last season. The stakes are reputation."
+       ],
+       []
+      ]
+     },
+     "gain": {
+      "seed": "hxd-town-2",
+      "before": [],
+      "after": [
+       "Merchant Guilds / Town Mayor"
+      ],
+      "desc": [
+       [],
+       [
+        "The Merchant Guilds and the Town Mayor are in moderate conflict over ownership of a disputed building. The stakes are property."
+       ]
+      ]
+     }
+    },
+    "contest": {
+     "fieldOrRisk": 0,
+     "topKinds": 0,
+     "enter": {},
+     "leave": {},
+     "riskMoves": {},
+     "ex": null
+    },
+    "roles": {
+     "the senior craft-guild master: low -> high": {
+      "cards": 289,
+      "towns": 289,
+      "power": {
+       "2 -> 9": 98,
+       "1 -> 8": 112,
+       "3 -> 10": 79
+      }
+     },
+     "the senior guild master: low -> high": {
+      "cards": 137,
+      "towns": 137,
+      "power": {
+       "3 -> 10": 48,
+       "2 -> 9": 39,
+       "1 -> 8": 50
+      }
+     },
+     "the guildmaster of thieves: low -> high": {
+      "cards": 66,
+      "towns": 66,
+      "power": {
+       "1 -> 8": 32,
+       "3 -> 10": 13,
+       "2 -> 9": 21
+      }
+     },
+     "the bloc's speaker: low -> moderate": {
+      "cards": 25,
+      "towns": 25,
+      "power": {
+       "1 -> 5": 2,
+       "3 -> 7": 6,
+       "2 -> 5": 7,
+       "3 -> 6": 6,
+       "2 -> 6": 3,
+       "1 -> 4": 1
+      }
+     },
+     "the commoners' tribune: low -> moderate": {
+      "cards": 1,
+      "towns": 1,
+      "power": {
+       "3 -> 7": 1
+      }
+     },
+     "the neutrals' broker: low -> moderate": {
+      "cards": 2,
+      "towns": 2,
+      "power": {
+       "3 -> 7": 1,
+       "3 -> 6": 1
+      }
+     },
+     "the alliance's convenor: low -> moderate": {
+      "cards": 1,
+      "towns": 1,
+      "power": {
+       "3 -> 7": 1
+      }
+     }
+    },
+    "cardsMoved": 521,
+    "cardsUnmatched": 0,
+    "firstFlip": {
+     "lowToHigher": 223,
+     "higherToLow": 0,
+     "ex": "hxd-city-1: Merchant Guilds's first card Tepeu Zaz (the senior guild master) low -> high"
+    },
+    "keys": {
+     "npcs": 302,
+     "relationships": 296,
+     "prominentRelationship": 66,
+     "pressureSentence": 53,
+     "stress": 3,
+     "stressors": 3,
+     "powerStructure": 33,
+     "conflicts": 33,
+     "powerStructure.conflicts": 33,
+     "powerStructure.factionRelationships": 20,
+     "generationCoherenceReceipt": 7
+    },
+    "other": {
+     "ties (relationships[], any field: prose included)": {
+      "leaves": 6656,
+      "towns": 296,
+      "ex": "hxd-city-0 relationships[17] npc_craft_guilds_30_80~npc_stable_district: Genuine Respect/deep -> Outstanding Debt/substantial (description moved)"
+     },
+     "ties whose ends, kind or strength moved": {
+      "leaves": 1086,
+      "towns": 296,
+      "ex": "hxd-city-0 relationships[17] npc_craft_guilds_30_80~npc_stable_district: Genuine Respect/deep -> npc_craft_guilds_30_80~npc_stable_district Outstanding Debt/substantial"
+     },
+     "goals (npcs[].goal: short, long or intent)": {
+      "leaves": 605,
+      "towns": 247,
+      "ex": "hxd-city-1 Tepeu Zaz (the senior guild master) goal short+intent: \"Keep Kanleox Pech from getting the thing they want most this season. / Make the merchant guilds too sound for any creditor to threaten.\" -> \"Call in one part of what Xoc Tun owes this season. / Make the merchant guilds too sound for any creditor to threaten.\""
+     },
+     "the pressure sentence (pressureSentence)": {
+      "leaves": 53,
+      "towns": 53,
+      "ex": "hxd-city-5: \"Ozomatli Kab has written down what Puma Lahun owes and left a sealed copy with a third party.\" -> \"Puma Lahun's secret is about to come out by other means. Once it does, Ozomatli Kab holds nothing over Puma Lahun.\""
+     },
+     "a card's other fields (beyond influence, power, structuralPosition, goal)": {
+      "leaves": 2,
+      "towns": 2,
+      "ex": "hxd-city-29 Fabius Ravilla (the senior guild master)"
+     },
+     "the powers' relationship narratives (powerStructure.factionRelationships[].narrative)": {
+      "leaves": 19,
+      "towns": 14,
+      "ex": "hxd-city-41 [Merchant Guild Council / Military/Guard]: \"The Merchant Guild Council gives the orders and the Guard carries them out; each needs the other to stay strong.\" -> \"The Merchant Guild Council gives the orders and the Guard carries them out; each needs the other to stay strong. Even so, the two are now at odds over prices set on everyday goods.\""
+     },
+     "the powers' relationship directions": {
+      "leaves": 16,
+      "towns": 15,
+      "ex": "hxd-city-41 [Merchant Guild Council / Military/Guard]: stable -> escalating"
+     }
+    }
+   },
+   "S->SKW": {
+    "paired": 600,
+    "identical": 297,
+    "bySize": {
+     "city": {
+      "n": 100,
+      "identical": 4,
+      "gain": 0,
+      "lose": 0,
+      "swap": 9,
+      "other": 11,
+      "any": 11,
+      "contestMoved": 0,
+      "cardTowns": 96
+     },
+     "hamlet": {
+      "n": 100,
+      "identical": 96,
+      "gain": 0,
+      "lose": 1,
+      "swap": 0,
+      "other": 0,
+      "any": 1,
+      "contestMoved": 0,
+      "cardTowns": 4
+     },
+     "metropolis": {
+      "n": 100,
+      "identical": 0,
+      "gain": 0,
+      "lose": 0,
+      "swap": 15,
+      "other": 16,
+      "any": 16,
+      "contestMoved": 0,
+      "cardTowns": 100
+     },
+     "thorp": {
+      "n": 100,
+      "identical": 98,
+      "gain": 0,
+      "lose": 0,
+      "swap": 0,
+      "other": 0,
+      "any": 0,
+      "contestMoved": 0,
+      "cardTowns": 2
+     },
+     "town": {
+      "n": 100,
+      "identical": 3,
+      "gain": 4,
+      "lose": 2,
+      "swap": 4,
+      "other": 8,
+      "any": 14,
+      "contestMoved": 0,
+      "cardTowns": 97
+     },
+     "village": {
+      "n": 100,
+      "identical": 96,
+      "gain": 0,
+      "lose": 0,
+      "swap": 0,
+      "other": 0,
+      "any": 0,
+      "contestMoved": 0,
+      "cardTowns": 4
+     }
+    },
+    "conflictEx": {
+     "swap": {
+      "seed": "hxd-city-16",
+      "before": [
+       "Noble Families / Craft Guilds",
+       "Merchant Guilds / Craft Guilds",
+       "Royal Authority / Merchant Guilds"
+      ],
+      "after": [
+       "Noble Families / Craft Guilds",
+       "Royal Authority / Merchant Guilds",
+       "Royal Authority / The Holy Compact"
+      ],
+      "desc": [
+       [
+        "The Noble Families and the Craft Guilds are in high conflict over who buys the raw materials first. The stakes are supply.",
+        "The Merchant Guilds and the Craft Guilds are in high conflict over blame for a costly failure last season. The stakes are reputation.",
+        "The Royal Authority and the Merchant Guilds are in moderate conflict over blame for a costly failure last season. The stakes are reputation."
+       ],
+       [
+        "The Noble Families and the Craft Guilds are in high conflict over who buys the raw materials first. The stakes are supply.",
+        "The Royal Authority and the Merchant Guilds are in moderate conflict over control of a key trade route checkpoint. The stakes are economic leverage.",
+        "The Royal Authority and the Holy Compact are in moderate conflict over control of a key trade route checkpoint. The stakes are economic leverage."
+       ]
+      ]
+     },
+     "other": {
+      "seed": "hxd-city-16",
+      "before": [
+       "Noble Families / Craft Guilds",
+       "Merchant Guilds / Craft Guilds",
+       "Royal Authority / Merchant Guilds"
+      ],
+      "after": [
+       "Noble Families / Craft Guilds",
+       "Royal Authority / Merchant Guilds",
+       "Royal Authority / The Holy Compact"
+      ],
+      "desc": [
+       [
+        "The Noble Families and the Craft Guilds are in high conflict over who buys the raw materials first. The stakes are supply.",
+        "The Merchant Guilds and the Craft Guilds are in high conflict over blame for a costly failure last season. The stakes are reputation.",
+        "The Royal Authority and the Merchant Guilds are in moderate conflict over blame for a costly failure last season. The stakes are reputation."
+       ],
+       [
+        "The Noble Families and the Craft Guilds are in high conflict over who buys the raw materials first. The stakes are supply.",
+        "The Royal Authority and the Merchant Guilds are in moderate conflict over control of a key trade route checkpoint. The stakes are economic leverage.",
+        "The Royal Authority and the Holy Compact are in moderate conflict over control of a key trade route checkpoint. The stakes are economic leverage."
+       ]
+      ]
+     },
+     "lose": {
+      "seed": "hxd-hamlet-18",
+      "before": [
+       "The Independent Bloc / Feudal Stewardship"
+      ],
+      "after": [],
+      "desc": [
+       [
+        "The Independent Bloc and the Feudal Stewardship are in moderate conflict over blame for a costly failure last season. The stakes are reputation."
+       ],
+       []
+      ]
+     },
+     "gain": {
+      "seed": "hxd-town-2",
+      "before": [],
+      "after": [
+       "Merchant Guilds / Town Mayor"
+      ],
+      "desc": [
+       [],
+       [
+        "The Merchant Guilds and the Town Mayor are in moderate conflict over ownership of a disputed building. The stakes are property."
+       ]
+      ]
+     }
+    },
+    "contest": {
+     "fieldOrRisk": 0,
+     "topKinds": 0,
+     "enter": {},
+     "leave": {},
+     "riskMoves": {},
+     "ex": null
+    },
+    "roles": {
+     "the luxury merchant: low -> moderate": {
+      "cards": 178,
+      "towns": 178,
+      "power": {
+       "1 -> 4": 46,
+       "2 -> 5": 35,
+       "3 -> 7": 50,
+       "1 -> 5": 16,
+       "2 -> 6": 20,
+       "3 -> 6": 11
+      }
+     },
+     "the senior craft-guild master: low -> high": {
+      "cards": 289,
+      "towns": 289,
+      "power": {
+       "2 -> 9": 98,
+       "1 -> 8": 112,
+       "3 -> 10": 79
+      }
+     },
+     "the senior guild master: low -> high": {
+      "cards": 137,
+      "towns": 137,
+      "power": {
+       "3 -> 10": 48,
+       "2 -> 9": 39,
+       "1 -> 8": 50
+      }
+     },
+     "the guildmaster of thieves: low -> high": {
+      "cards": 66,
+      "towns": 66,
+      "power": {
+       "1 -> 8": 32,
+       "3 -> 10": 13,
+       "2 -> 9": 21
+      }
+     },
+     "the bloc's speaker: low -> moderate": {
+      "cards": 25,
+      "towns": 25,
+      "power": {
+       "1 -> 5": 2,
+       "3 -> 7": 6,
+       "2 -> 5": 7,
+       "3 -> 6": 6,
+       "2 -> 6": 3,
+       "1 -> 4": 1
+      }
+     },
+     "the commoners' tribune: low -> moderate": {
+      "cards": 1,
+      "towns": 1,
+      "power": {
+       "3 -> 7": 1
+      }
+     },
+     "the exchange master: low -> moderate": {
+      "cards": 22,
+      "towns": 22,
+      "power": {
+       "3 -> 7": 10,
+       "1 -> 4": 6,
+       "2 -> 5": 1,
+       "2 -> 6": 4,
+       "3 -> 6": 1
+      }
+     },
+     "the neutrals' broker: low -> moderate": {
+      "cards": 2,
+      "towns": 2,
+      "power": {
+       "3 -> 7": 1,
+       "3 -> 6": 1
+      }
+     },
+     "the alliance's convenor: low -> moderate": {
+      "cards": 1,
+      "towns": 1,
+      "power": {
+       "3 -> 7": 1
+      }
+     }
+    },
+    "cardsMoved": 721,
+    "cardsUnmatched": 0,
+    "firstFlip": {
+     "lowToHigher": 248,
+     "higherToLow": 0,
+     "ex": "hxd-city-1: Merchant Guilds's first card Tepeu Zaz (the senior guild master) low -> high"
+    },
+    "keys": {
+     "npcs": 303,
+     "relationships": 296,
+     "prominentRelationship": 70,
+     "pressureSentence": 55,
+     "powerStructure": 42,
+     "conflicts": 42,
+     "powerStructure.factionRelationships": 28,
+     "powerStructure.conflicts": 42,
+     "stress": 3,
+     "stressors": 3,
+     "generationCoherenceReceipt": 7
+    },
+    "other": {
+     "ties (relationships[], any field: prose included)": {
+      "leaves": 7316,
+      "towns": 296,
+      "ex": "hxd-city-0 relationships[17] npc_craft_guilds_30_80~npc_stable_district: Genuine Respect/deep -> Outstanding Debt/substantial (description moved)"
+     },
+     "ties whose ends, kind or strength moved": {
+      "leaves": 1258,
+      "towns": 296,
+      "ex": "hxd-city-0 relationships[17] npc_craft_guilds_30_80~npc_stable_district: Genuine Respect/deep -> npc_craft_guilds_30_80~npc_stable_district Outstanding Debt/substantial"
+     },
+     "goals (npcs[].goal: short, long or intent)": {
+      "leaves": 704,
+      "towns": 254,
+      "ex": "hxd-city-1 Tepeu Zaz (the senior guild master) goal short+intent: \"Keep Kanleox Pech from getting the thing they want most this season. / Make the merchant guilds too sound for any creditor to threaten.\" -> \"Call in one part of what Xoc Tun owes this season. / Make the merchant guilds too sound for any creditor to threaten.\""
+     },
+     "the pressure sentence (pressureSentence)": {
+      "leaves": 55,
+      "towns": 55,
+      "ex": "hxd-city-5: \"Ozomatli Kab has written down what Puma Lahun owes and left a sealed copy with a third party.\" -> \"Puma Lahun's secret is about to come out by other means. Once it does, Ozomatli Kab holds nothing over Puma Lahun.\""
+     },
+     "the powers' relationship narratives (powerStructure.factionRelationships[].narrative)": {
+      "leaves": 29,
+      "towns": 23,
+      "ex": "hxd-city-16 [Merchant Guilds / Craft Guilds]: \"The Merchant Guilds and the Craft Guilds are at odds over blame for a costly failure last season, and fight over who keeps the profit of the trade.\" -> \"The Merchant Guilds and the Craft Guilds vote together against the Noble Families, then fight over who keeps the profit.\""
+     },
+     "the powers' relationship directions": {
+      "leaves": 21,
+      "towns": 20,
+      "ex": "hxd-city-16 [Merchant Guilds / Craft Guilds]: escalating -> stable"
+     },
+     "a card's other fields (beyond influence, power, structuralPosition, goal)": {
+      "leaves": 2,
+      "towns": 2,
+      "ex": "hxd-city-29 Fabius Ravilla (the senior guild master)"
+     }
+    }
+   },
+   "SK->SKW": {
+    "paired": 600,
+    "identical": 419,
+    "bySize": {
+     "city": {
+      "n": 100,
+      "identical": 16,
+      "gain": 0,
+      "lose": 0,
+      "swap": 4,
+      "other": 4,
+      "any": 4,
+      "contestMoved": 0,
+      "cardTowns": 84
+     },
+     "hamlet": {
+      "n": 100,
+      "identical": 100,
+      "gain": 0,
+      "lose": 0,
+      "swap": 0,
+      "other": 0,
+      "any": 0,
+      "contestMoved": 0,
+      "cardTowns": 0
+     },
+     "metropolis": {
+      "n": 100,
+      "identical": 3,
+      "gain": 0,
+      "lose": 0,
+      "swap": 7,
+      "other": 7,
+      "any": 7,
+      "contestMoved": 0,
+      "cardTowns": 96
+     },
+     "thorp": {
+      "n": 100,
+      "identical": 100,
+      "gain": 0,
+      "lose": 0,
+      "swap": 0,
+      "other": 0,
+      "any": 0,
+      "contestMoved": 0,
+      "cardTowns": 0
+     },
+     "town": {
+      "n": 100,
+      "identical": 100,
+      "gain": 0,
+      "lose": 0,
+      "swap": 0,
+      "other": 0,
+      "any": 0,
+      "contestMoved": 0,
+      "cardTowns": 0
+     },
+     "village": {
+      "n": 100,
+      "identical": 100,
+      "gain": 0,
+      "lose": 0,
+      "swap": 0,
+      "other": 0,
+      "any": 0,
+      "contestMoved": 0,
+      "cardTowns": 0
+     }
+    },
+    "conflictEx": {
+     "swap": {
+      "seed": "hxd-city-16",
+      "before": [
+       "Noble Families / Craft Guilds",
+       "Merchant Guilds / Craft Guilds",
+       "Royal Authority / Merchant Guilds"
+      ],
+      "after": [
+       "Noble Families / Craft Guilds",
+       "Royal Authority / Merchant Guilds",
+       "Royal Authority / The Holy Compact"
+      ],
+      "desc": [
+       [
+        "The Noble Families and the Craft Guilds are in high conflict over who buys the raw materials first. The stakes are supply.",
+        "The Merchant Guilds and the Craft Guilds are in high conflict over blame for a costly failure last season. The stakes are reputation.",
+        "The Royal Authority and the Merchant Guilds are in moderate conflict over blame for a costly failure last season. The stakes are reputation."
+       ],
+       [
+        "The Noble Families and the Craft Guilds are in high conflict over who buys the raw materials first. The stakes are supply.",
+        "The Royal Authority and the Merchant Guilds are in moderate conflict over control of a key trade route checkpoint. The stakes are economic leverage.",
+        "The Royal Authority and the Holy Compact are in moderate conflict over control of a key trade route checkpoint. The stakes are economic leverage."
+       ]
+      ]
+     },
+     "other": {
+      "seed": "hxd-city-16",
+      "before": [
+       "Noble Families / Craft Guilds",
+       "Merchant Guilds / Craft Guilds",
+       "Royal Authority / Merchant Guilds"
+      ],
+      "after": [
+       "Noble Families / Craft Guilds",
+       "Royal Authority / Merchant Guilds",
+       "Royal Authority / The Holy Compact"
+      ],
+      "desc": [
+       [
+        "The Noble Families and the Craft Guilds are in high conflict over who buys the raw materials first. The stakes are supply.",
+        "The Merchant Guilds and the Craft Guilds are in high conflict over blame for a costly failure last season. The stakes are reputation.",
+        "The Royal Authority and the Merchant Guilds are in moderate conflict over blame for a costly failure last season. The stakes are reputation."
+       ],
+       [
+        "The Noble Families and the Craft Guilds are in high conflict over who buys the raw materials first. The stakes are supply.",
+        "The Royal Authority and the Merchant Guilds are in moderate conflict over control of a key trade route checkpoint. The stakes are economic leverage.",
+        "The Royal Authority and the Holy Compact are in moderate conflict over control of a key trade route checkpoint. The stakes are economic leverage."
+       ]
+      ]
+     }
+    },
+    "contest": {
+     "fieldOrRisk": 0,
+     "topKinds": 0,
+     "enter": {},
+     "leave": {},
+     "riskMoves": {},
+     "ex": null
+    },
+    "roles": {
+     "the luxury merchant: low -> moderate": {
+      "cards": 178,
+      "towns": 178,
+      "power": {
+       "1 -> 4": 46,
+       "2 -> 5": 35,
+       "3 -> 7": 50,
+       "1 -> 5": 16,
+       "2 -> 6": 20,
+       "3 -> 6": 11
+      }
+     },
+     "the exchange master: low -> moderate": {
+      "cards": 22,
+      "towns": 22,
+      "power": {
+       "3 -> 7": 10,
+       "1 -> 4": 6,
+       "2 -> 5": 1,
+       "2 -> 6": 4,
+       "3 -> 6": 1
+      }
+     }
+    },
+    "cardsMoved": 200,
+    "cardsUnmatched": 0,
+    "firstFlip": {
+     "lowToHigher": 25,
+     "higherToLow": 0,
+     "ex": "hxd-city-8: The Commercial Circle's first card Naoki Tanaka (the luxury merchant) low -> moderate"
+    },
+    "keys": {
+     "npcs": 181,
+     "relationships": 103,
+     "prominentRelationship": 11,
+     "pressureSentence": 12,
+     "powerStructure": 11,
+     "conflicts": 11,
+     "powerStructure.factionRelationships": 9,
+     "powerStructure.conflicts": 11
+    },
+    "other": {
+     "goals (npcs[].goal: short, long or intent)": {
+      "leaves": 107,
+      "towns": 66,
+      "ex": "hxd-city-8 Naoki Tanaka (the luxury merchant) goal long+intent: \"Keep a bag packed and a way out ready. / Keep the bond with Kenji Tang as the work and the years change them both.\" -> \"Keep a bag packed and a way out ready. / Outlast Kenji Tang, and be the one still standing.\""
+     },
+     "ties (relationships[], any field: prose included)": {
+      "leaves": 1777,
+      "towns": 103,
+      "ex": "hxd-city-8 relationships[2] npc_luxury_goods_quarter~npc_foundling_home: Unresolved History/serious -> Outstanding Debt/substantial (description moved)"
+     },
+     "ties whose ends, kind or strength moved": {
+      "leaves": 188,
+      "towns": 103,
+      "ex": "hxd-city-8 relationships[2] npc_luxury_goods_quarter~npc_foundling_home: Unresolved History/serious -> npc_luxury_goods_quarter~npc_foundling_home Outstanding Debt/substantial"
+     },
+     "the pressure sentence (pressureSentence)": {
+      "leaves": 12,
+      "towns": 12,
+      "ex": "hxd-city-8: \"Kenji Tang and Naoki Tanaka are teacher and heir. Kenji Tang has asked Naoki Tanaka for a loan. It is the first time a debt between teacher and student has run that way.\" -> \"Kenji Tang and Naoki Tanaka are rivals in the same line of work. Kenji Tang has recently broken an unwritten rule of the contest. Naoki Tanaka is deciding what that permits.\""
+     },
+     "the powers' relationship narratives (powerStructure.factionRelationships[].narrative)": {
+      "leaves": 10,
+      "towns": 9,
+      "ex": "hxd-city-16 [Merchant Guilds / Craft Guilds]: \"The Merchant Guilds and the Craft Guilds are at odds over blame for a costly failure last season, and fight over who keeps the profit of the trade.\" -> \"The Merchant Guilds and the Craft Guilds vote together against the Noble Families, then fight over who keeps the profit.\""
+     },
+     "the powers' relationship directions": {
+      "leaves": 5,
+      "towns": 5,
+      "ex": "hxd-city-16 [Merchant Guilds / Craft Guilds]: escalating -> stable"
+     }
+    }
+   }
+  }
+ }
+}
