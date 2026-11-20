@@ -36,6 +36,9 @@
  *                    else REDS. A join-line row whose table the arm no longer finds reds until removed; a seat's
  *                    row (its pool changed or added on that seat's branch) stands until the seat registers it.
  *                    `HAND_CEILING` only falls: a lane registers its pool and removes its row.
+ *   THE KNOWN LIMIT  (the chair, 17:45, in these words) an indirectly drawn pool escapes the totality arm; the hand list is its remedy.
+ *                    The arm sees only a `src/data/` table imported BY NAME into a file that draws; a pool reached
+ *                    through a helper, a re-export or a closure is found by no scan, and is registered by hand.
  *   PHASE 3          (SAME-2 brief H; the chair's 17:45 order (2)) the hand-listed pools' LINES are read too
  *                    (`readHandLines`): a declared row (`needs` or `marks`) by its atoms, rule 1 and rule 2 as above;
  *                    every other line (a bare string, a function, a row that declares no need) by `CRIME_WORD`, a word
@@ -407,6 +410,11 @@ const handPoolsOnLine = async (rows) => {
 describe(`the hideable-house walker of the sameness pools (base ${BASE})`, async () => {
   const pools = await corpusPools();
   const ids = new Set(pools.map((p) => p.id));
+
+  test('THE KNOWN LIMIT stands in the header in the chair\'s words', () => {
+    const head = readFileSync(join(ROOT, 'tests/lint/samenessHideable.walker.test.js'), 'utf8').split('\nimport ')[0];
+    expect(head.replace(/\s*\n\s*\*\s*/g, ' ')).toContain('an indirectly drawn pool escapes the totality arm; the hand list is its remedy');
+  });
 
   test('the classes stand on the live vocabulary: every home named is a home, every crime-like dimension is a crime home', () => {
     const homes = new Set(Object.values(FACT_DIMENSIONS).map((d) => d.home));
