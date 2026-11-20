@@ -41,3 +41,12 @@ Read this, then `PAGE-5-HANDBACK.md` (§2 S6 row, §5 the ruled tables, §6 the 
   organised crime), 9 (watch), 10 (organised crime), 11 (rival rings), 12 (law ≤ critical); guild_conflict 12;
   external_threat 8; succession_crisis 1, 2, 3, 8 (ruler, in doubt); legitimacy_crisis 9 (needs as in TROUBLE-LINES-2).
 - LASTING EFFECTS: printed in the PDF only; a later unit AFTER the hooks; every effect needing a hideable fact is struck.
+- FIRST PAINT, EVERY LANE (the chair's ruling, 19:59; DEPTH-3 found 2.1 MB put into first paint by an eager vocabulary
+  file reaching a lazy-pinned module through a new facts module; no lint test sees it; THIS lane granted `house` and
+  `entrepot` and added the tension-cause modules): before "PAGE-TROUBLE <commit>" (PAGE-7 or PAGE-10), ONE `npm run build`
+  at the tip, then `VERIFY_DIST=1` on `tests/build/vendorPdfLazy.test.js` and `tests/build/generationWorkerLazy.test.js`
+  through the mutex (`sh scripts/gate-mutex.sh --run -- ...`), and the message carries first paint's three figures beside
+  the line's (1,177,668 raw, 374,676 gzip, 314,472 Brotli at 8196e5712) and the worker's (2,617,934). A rise is cured on
+  the lane: an eager file declares an atom BY NAME; the code that answers it is imported only on the lazy side.
+- HAND-OVER (the chair, 19:59): PAGE-10 (session_019yED1STKYbiqSui8mWphr2) is seated beside PAGE-7. PAGE-7 merges the
+  hooks if its count allows; otherwise "PAGE-PART <commit>, HANDED OVER". By 420,000 PAGE-7 hands over in any case.
