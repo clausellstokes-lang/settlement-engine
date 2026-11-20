@@ -1,0 +1,5 @@
+[gate-tail] start:  15:54:10 up 57 min,  0 user,  load average: 6.30, 6.68, 5.49 · cores: 4
+[gate-tail] end:  15:54:13 up 57 min,  0 user,  load average: 6.30, 6.68, 5.49
+[gate-tail] full log: /tmp/gate-tail.6870.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
+exit 0
