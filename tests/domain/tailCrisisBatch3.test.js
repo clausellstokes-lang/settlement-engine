@@ -51,7 +51,7 @@ const FALSE = [
   ['r2s-indebted-city-2', 'come to terms: holds the seat.', 'of the City Council, who holds the seat, is the one who would come to terms.'], // B11049
   ['r2r-thorp-22', 'Elder Council: holds the seat', 'it is aimed at Akna Balam of the Elder Council, who holds the seat, and the right to it is already in dispute.'], // B11090
   ['r2r-hamlet-35', 'of The Independent Bloc, who already carries more weight', 'of the Independent Bloc, whose power already carries more weight than whoever holds the seat, and gains as the seat weakens, is stirring it.'], // batch 3's inheritor read: the power's standing, not the person's
-  ['r2s-insurgency-town-0', 'Military/Guard loses most', 'if it gives way, the Guard loses most, because its own people feel the crisis first.'], // 20875
+  ['r2s-insurgency-town-0', 'Military/Guard loses most', 'if it gives way, the Guard loses most, because the danger lands first on those it arms.'], // 20875; FRAME-7 · SR1 (the pin moves): the loss said by its matched system (defense_readiness)
 ];
 
 /** [seed, a true sibling that must still print] */

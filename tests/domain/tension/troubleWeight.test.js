@@ -93,14 +93,18 @@ const JOURNAL_TONIGHT = Object.freeze({
  * 2d8e97beae5ef6d0. So metropolis-0's move is B11's (FRAME-3 ruling 9, a person is never "it": "In the migration, Liangjie
  * Tang of the Religious Authorities takes the worst of it: its people" -> "his people"), not the line's; it was red on the
  * lane from B11's merge (9c2be7882) and unnamed there. The other five are unchanged.
+ * RE-RECORDED BY CAUSE at FRAME-7 · SR1 (the stakes' reason; SR1-RESULTS.md): town-6, city-24 and metropolis-0 differ from
+ * SR1's base 334f9fb68 in ONE leaf each, the lever hook's "because …" (the first loser's stored reason, now said by its
+ * matched system: "people look to it first for an answer", "it has to find the hands to keep watch", "they hold people
+ * together, and that is what the crisis frays"); before: eae16131620269ec, 4545a9abe27449f1, e3bb76cf91977d0f.
  */
 const IN_CRISIS = Object.freeze({
   'frame-calm-thorp-2': 'aa729268a7bb3546',
   'frame-calm-hamlet-1': 'd2becadf54b62251',
   'frame-calm-village-1': 'a4eed51cd6861887',
-  'frame-calm-town-6': 'eae16131620269ec',
-  'frame-calm-city-24': '4545a9abe27449f1',
-  'frame-calm-metropolis-0': 'e3bb76cf91977d0f',
+  'frame-calm-town-6': '7f8fea0ab7b08fa1',
+  'frame-calm-city-24': 'edd1a8338c5ec9a9',
+  'frame-calm-metropolis-0': '7e775f15f6b2628f',
 });
 
 /**

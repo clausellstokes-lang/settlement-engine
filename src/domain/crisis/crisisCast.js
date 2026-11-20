@@ -35,12 +35,13 @@ import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { partitionDefenseInstitutions } from '../institutions/defenseInstitutionBuckets.js';
 import { factsOf } from '../facts/factsOf.js';
 import { TIER_WORDS } from '../facts/factVocabulary.js';
-import { resolveSibling } from '../facts/drawDeclared.js';
+import { drawDeclared, resolveSibling } from '../facts/drawDeclared.js';
 import { CAST_EDIT_PATH, CAST_EDIT_SEPARATOR } from '../userEditLines.js';
 import { nativeSemanticName } from '../content/customContentSemanticAuthority.js';
 import { firstRankMembershipOf, membersByRank, membershipsOf, powerOrderOf } from '../people/membership.js';
 import { allegianceOf } from '../people/allegiance.js'; // ALLEGIANCE-CAR1: the hidden allegiance's one reader (J-1)
 import { isSeatVacant } from '../people/seatKeeper.js'; import { fillAgreement } from '../display/powerSentenceName.js'; // ROUND THREE item 4: the empty seat's one home; FRAME-6 · C2B (b): the names lane's one agreement helper
+import { LOSES_FALLBACK, STAKE_REASONS, STAKE_REASON_LINES, stakeReasonKey } from '../../data/crisis/stakeReasonLines.js'; // FRAME-7 · SR1
 
 // ── The tuning (the owner's dials; docs/DESIGN_CRISIS_TAB.md "Open for the owner's veto") ──
 
@@ -244,45 +245,11 @@ export const CAST_ABSENCES = Object.freeze({
   noCandidate: 'everyone who could already holds a role that contradicts this one',
 });
 
-/** The stake reasons (rule 11). */
-export const STAKE_REASONS = Object.freeze({
-  gainsVacuum: 'the military gains in a vacuum of governance',
-  gainsChurch: 'the church gains while the seat struggles',
-  gainsMerchants: 'the merchants gain while the seat is endorsed',
-  gainsCrime: 'crime gains from the disorder',
-  gainsRival: 'already carries more weight than whoever holds the seat', // SW-6 (B3 C4): R3's fact, without the echo of "gains"
-  gainsClaim: 'a rival claim to govern gains by it',
-  gainsHolds: 'holds what the crisis makes scarce',
-  gainsOccupier: 'the occupier gains by it',
-  loses: 'its own people feel the crisis first', // SW-6 (B3 C4): "its base" was the rule's word
-  losesSeat: 'the seat bears the blame',
-  split: 'gains and loses by it at once',
-  untouched: 'it could side with either camp', // SW-6 (B3 A·C4): the page's label says "no stake yet"
-  leadsRevolt: 'it leads the revolt, and rises or falls with it', // TAIL-CRISIS-5 (K22): the power the revolt raised (RAISED_TO_LEAD)
-  // TAIL-CRISIS-6 (K24): the powers a crisis raises, each its stake by its own record (RAISED_BY_CRISIS)
-  holdsFood: 'it holds what is left of the food stores',
-  chargedWithSickness: 'it holds the emergency powers against the sickness',
-  leadsInquiry: 'it leads the inquiry into the betrayal',
-  // TAIL-CRISIS-6 (K25 (a)): K24's law carried to every party a crisis raises, and every power a crisis writes into
-  claimsToGovern: 'it claims the right to govern by other means',
-  courted: 'both sides are courting it, for a price',
-  creditorAgent: 'it speaks for the creditor the town owes',
-  holdsDebt: "its houses hold the crown's debt",
-  infiltrator: 'it is the outside interest with its own people placed here',
-  claimsSuccession: 'it presses its own claim to the succession',
-  leadsChallenge: 'it leads the challenge to the government',
-  speaksForNewcomers: 'it speaks for the newcomers',
-  aidsRevolt: 'it has been aiding the revolt in secret',
-  guildsThreatened: 'newcomers working outside the guilds threaten its hold on the trades',
-  claimantsNeedIt: 'every claimant needs its backing',
-  warNeedsIt: 'the call-up and the grieving have made it indispensable',
-  warDivides: 'contracts have made some of it rich while others have lost their trade routes',
-  revoltCutsLabour: 'the revolt has cut into its labour and its trade',
-  warCostsIt: 'trade disruption and requisitions are costing it',
-  someHoldDebt: "some of its houses hold the crown's debt",
-  termsWithOccupier: 'some of its families have made private terms with the new authority',
-  pressedToJudge: 'both sides press it to call the revolt just or sacrilegious',
-});
+/**
+ * The stake reasons (rule 11): their one home is `data/crisis/stakeReasonLines.js` (FRAME-7 · SR1), re-exported here so
+ * every reader and pin imports `STAKE_REASONS` (the pre-SR1 literals) unchanged.
+ */
+export { STAKE_REASONS };
 
 /**
  * THE POWER A CRISIS RAISES TO LEAD IT (TAIL-CRISIS-5, the chair's ruling K22 of 2026-11-15, vetoable by the owner; READ-ALL
@@ -615,10 +582,10 @@ export function natureOf(kind) {
 
 /**
  * Every faction's one stake in a crisis of `kind`.
- * @param {CastSettlement} s @param {string} kind
+ * @param {CastSettlement} s @param {string} kind @param {string} [seed] the birth's seed: the keyed hash of the said reason
  * @returns {CastStake[]}
  */
-export function deriveStakes(s, kind) {
+export function deriveStakes(s, kind, seed = '') {
   const factions = factionsOf(s);
   const governing = governingFactionOf(/** @type {never} */ (s));
   const govName = governing ? factionName(/** @type {CastFaction} */ (governing)) : '';
@@ -652,24 +619,27 @@ export function deriveStakes(s, kind) {
     else if (arch === A.MERCHANT && /** @type {{ isEndorsed?: boolean }} */ (pl).isEndorsed) gains = STAKE_REASONS.gainsMerchants;
 
     let loses = false;
+    let lostSys = ''; // the matched system: the one whose base set `loses`
     const occupierHere = kind === 'occupied' && isOccupier(f);
     for (const sys of occupierHere ? [] : systems) {
       const base = SYSTEM_BASE[sys];
       if (!base) continue;
-      if ((base.governing && isGov) || base.archetypes.includes(arch)) { loses = true; break; }
+      if ((base.governing && isGov) || base.archetypes.includes(arch)) { loses = true; lostSys = sys; break; }
     }
     const losesSeat = !loses && isGov && (nature === 'social' || nature === 'engineered');
     /** @type {CastStake} */
     let stake;
-    if (gains && (loses || losesSeat)) stake = { factionId: name, stake: 'split', reason: STAKE_REASONS.split };
+    // THE SAID REASON OF A LOSS (FRAME-7 · SR1, the chair's approval of 20:04 UTC, vetoable by the owner; C2B (b)'s agreement
+    // kept): a `split` row, and a `loses` row by its matched system, draw their wording from `STAKE_REASON_LINES` by a keyed
+    // hash over the record's own identity (the seed, the kind, the power's name), resolved through `drawDeclared`: no rng,
+    // nothing else moves. It is filled by the stake's own power (`fillAgreement`, the names lane's one helper). At birth only.
+    /** @param {ReadonlyArray<string>} pool @param {string} poolId */
+    const said = (pool, poolId) => fillAgreement(String(drawDeclared(pool, {
+      draw: (p) => p[Math.floor(castHash(seed, kind, `stake:${name}`) * p.length)], key: `${seed}::${kind}::${name}`, poolId, surface: 'crisis', drawKind: 'H',
+    }).text ?? ''), { power: name });
+    if (gains && (loses || losesSeat)) stake = { factionId: name, stake: 'split', reason: said(STAKE_REASON_LINES.split, 'STAKE_REASON_LINES.split') };
     else if (gains) stake = { factionId: name, stake: 'gains', reason: gains };
-    // A STAKE REASON SAID OF A PLURAL POWER TAKES ITS NUMBER, AT BIRTH (FRAME-6 · C2B (b), the chair's ruling of 2026-11-20
-    // 15:58 UTC, vetoable by the owner; C2 § found 2: "The Merchant Guilds lose · its own people feel the crisis first", 150
-    // rows on B7's pool): the `loses` reason in its agreement form, filled by the stake's own power through the names lane's
-    // helper (`data/people/powerSentenceName.js :: fillAgreement`): "their own people…" of the Merchant Guilds; of the Elder
-    // Council it is `STAKE_REASONS.loses` byte for byte (the string a saved town holds; the page reads the record and rewrites
-    // nothing). Only the `loses` reason: the chair's ruling names it. Draw-free. (One line: this file is at its size ceiling.)
-    else if (loses) stake = { factionId: name, stake: 'loses', reason: fillAgreement(`{power|its|their}${STAKE_REASONS.loses.slice('its'.length)}`, { power: name }) };
+    else if (loses) stake = { factionId: name, stake: 'loses', reason: said(STAKE_REASON_LINES.loses[lostSys] || LOSES_FALLBACK, `STAKE_REASON_LINES.loses.${lostSys}`) };
     else if (losesSeat) stake = { factionId: name, stake: 'loses', reason: STAKE_REASONS.losesSeat };
     else stake = { factionId: name, stake: 'split', reason: /** @type {Record<string, string>} */ (RAISED_TO_LEAD)[kind] === name ? STAKE_REASONS.leadsRevolt : (raisedReasonOf(kind, f, isGov) || STAKE_REASONS.untouched) };
     return stake;
@@ -705,7 +675,7 @@ export function bruntCandidates(s, kind, stakes) {
   // from a house whose stake the record holds as a LOSS ('loses', or 'split' because it gains and loses at once; never the
   // untouched 'split', "no stake yet", and never 'gains'), and the one-power fallback is gone: where the town's one power has
   // no stake or gains, nobody of it bears the brunt, and the role is absent by its own reason (noBase). No draw.
-  const losers = new Set(stakes.filter((k) => k.stake === 'loses' || (k.stake === 'split' && k.reason === STAKE_REASONS.split)).map((k) => k.factionId));
+  const losers = new Set(stakes.filter((k) => k.stake === 'loses' || (k.stake === 'split' && stakeReasonKey(k.reason) === 'split')).map((k) => k.factionId));
   /** @type {CastRow[]} */
   const out = [];
   // F10 unit 4, CENSUS-1c: a reason that names walls the place lacks resolves to its declared sibling (CAST_REASON_SIBLINGS).
@@ -1110,7 +1080,7 @@ export function deriveCrisisCast(settlement, entries, seed, options = {}) {
     const kind = str(entry?.type);
     if (!kind || casts.has(kind)) return;
     const nature = natureOf(kind);
-    const stakes = deriveStakes(settlement, kind);
+    const stakes = deriveStakes(settlement, kind, seed);
     /** @type {CastRow[]} */
     const roles = [];
     /** @type {CastAbsence[]} */
