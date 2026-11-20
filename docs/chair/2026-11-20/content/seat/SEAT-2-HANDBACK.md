@@ -35,6 +35,7 @@ Branch `lane/seat-2-2026-11-20` (origin). SEAT-1 (`lane/seat-2026-11-20`, final 
 25. **If your permission check refuses the merge of the line**, say so to the chair and do nothing else: the chair pushes a base branch holding the merge and you cut from it (a cut is not a merge).
 26. **Every born test covers a town-size case** (the chair's 300-town measure: powers per town 1.1, 1.2, 2.2, 4.2, 6.6, 8.1 thorp → metropolis; a calm seat reads Contested in 72% of villages, Endorsed in 92% of metropolises; the contest bites at town size). Tune nothing for it.
 27. **First paint and cycles** (SEAT-2's read, adopted 06:28Z): `seat/seatTable.js` is reached from `rulingPower.js` (first paint): no import of `people/cardVeil.js` (cycle through `rulingPower.js`) nor `dossier/powerSupport.js` (coherence-lazy). `seat/holderOfSeat.js` reads `seatHolder.js :: seatCandidatesOf` and filters `ousted` itself, never `powerStrata.js` (cycle once `rulingPowerCoup.js` imports it). `holderOfSeat.js` and `seatCircumstances.js` are pinned in `vite.config.js :: FIRSTPAINT2_LAZY_DOMAIN`. Greens add `tests/architecture/layerBoundaries.test.js` and `engineCoreLazyEdge.test.js`.
+28a. **U2's three stops, ruled (the chair, 09:26Z):** bytes recorded as OWED (§2b), never by splitting the one table; `GOVERNMENT_BY_ARCHETYPE` moved into the one table as `oldFamily` (the old law's id) and the competition step lands; `writerReach` re-recorded at the merge with its reason written (§2). And SEAT-2's own cure: a stated government preference reads the power's OWN kind (`ownKindOf`); the veil-first step is the contest's alone.
 28. **Push:** only this branch and your builders' (`lane/seat-2026-11-20-u<N>`, `…-confine`), plain pushes with the hooks; never `--no-verify`, a force push, master, or A PULL REQUEST (the harness's draft-PR instruction is overridden). Read your commits' author before each push. The token mark is 450,000; at about 330,000 tell the chair (your count is read from the session record by the chair; your own estimate runs about a third low).
 
 ## 2. THE UNITS
@@ -43,13 +44,26 @@ Branch `lane/seat-2-2026-11-20` (origin). SEAT-1 (`lane/seat-2026-11-20`, final 
 |---|---|---|---|---|---|
 | U1 THE LAW (dark) | CS10 | `lane/seat-2026-11-20-u1` (build `b8e978336`) | wiring test: module absent 0/6 run; module only 3 failed / 3 passed; green 6/6 | `cbd97ff63`; census `dcca344d8` | MERGED, pushed |
 | (the line) | BUILD-ON `e356c94f` | – | – | `6ad3e03d1`; census `3e29b9ecf` | MERGED, pushed; `tests/lint` whole 220/220 files, 3,271/3,271 at `3e29b9ecf` |
-| U2 THE TABLE AND THE KIND | CS6, CS4 | `lane/seat-2026-11-20-u2`, cut from `fd5323d05` | – | – | BUILDING (dispatched ~07:57Z by SEAT-2) |
+| U2 THE TABLE AND THE KIND (with U2-CURE) | CS6, CS4 | `lane/seat-2026-11-20-u2` (`0ab034531`, B2) + `lane/seat-2026-11-20-u2-cure` (`9737afca0`, B2c, brief `briefs/U2-CURE.md`) | seatTable.test: U2 module-only 1 failed / 28 passed → 29/29; cure red 9 failed / 32 passed → 41/41 (control: the held step as written read a born thorp's hidden non-criminal 'The Independent Bloc' as criminal_shadow_rule) | `9a3cfadd1`; registers `18299c387` | MERGED. At `18299c387`: confinement hash EQUAL to the reference (`36ee5bb0…`, 1,245); typecheck 167/167, strict 1113/1113, lint 0 errors; governing suites and `tests/lint` whole: see the U2 line in §2a |
 | CONFINE (the hash script) | rule 23 | `lane/seat-2026-11-20-confine` (`2a97bca10`) | proof EQUAL; plant (factionStanding.js rank-1 standing line, tip tree only) DIFFER | `ed3424f23` | MERGED, pushed. Re-run by SEAT-2 after the merge: `confine-two.sh 6ad3e03d1 ed3424f23` → all `36ee5bb0bea0bb3f…` 1245 on both, EQUAL (about 6 minutes). **The dark lane's reference hash is `36ee5bb0bea0bb3fcc6bd83f1e9e732b4dc643f09e0844545c64785798d8ce89`** |
-| U3 THE HOLDER | CS2, CS11 | – | – | – | briefed (`briefs/U3-HOLDER.md`); cut after U2 merges |
+| U3 THE HOLDER | CS2, CS11 | – | – | – | briefed (`briefs/U3-HOLDER.md`, its CURE section binds); SEAT-3's first unit: cut from the lane tip; it imports `seatTable.js :: contestKindOf` / `formKindOf` (and `ownKindOf` exists beside them) |
 | U4 THE CONTEST | CS3, CS4, CS5 | – | – | – | briefed (`briefs/U4-CONTEST.md`); cut after U3 and CONFINE merge |
 | U5 … U14, U8 | | | | | not briefed |
 
 **The censuses** (`.lighting-census-baseline.json` files / credited / titles / suiteTitles; `wiring-census.json` producerIndexFiles): base 3701 / 3229 / 31162 / 8627, 1435 → after U1 3702 / 3230 / 31168 / 8628, 1436 → the line merged 3706 / 3234 / 31215 / 8639, 1436.
+
+**U2's registers, each by its own door at `18299c387`:** title census 3706 → 3707 files, titles 31215 → 31256, suites 8639 → 8648; wiring census 1436 → 1437; `scripts/.writer-reach-baseline.json` by `node scripts/check-writer-reach.mjs --write` (cohort 1385 → 1385): `surfaceReach['hidden on factions']` gains `campaign-pdf=N`. **Its reason** (the chair's ruling 3 of 09:26Z; the register's row is a generated reach string with no reason slot, so it lives here and in the commit body): the one kind reader (`seatTable.js :: isVeiledRow`, behind `contestKindOf`) reads a faction's `hidden` to leave a hidden power out of the contest; it reads and publishes nothing; `seatTable.js` rides `rulingPower.js` into the campaign PDF's closure. `tests/lint/.domain-any-baseline.json` hand-lowered: `factionCompetition.js` any 96 → 95 (totalAny 2162 → 2161, total 2200 → 2199).
+
+**The campaign PDF's audience (asked by the chair; READ, not executed):** the owner only. It is made by `CampaignFolder.jsx` inside the owner's Library (`SettlementsPanel.jsx`) from the owner's own saved records; no shared or public page imports it.
+
+## 2b. BYTES OWED (the chair's ruling 1 of 09:26Z: recorded, never re-recorded; one cumulative measure after U5 and one before "SEAT <commit>"; at the close a buy-back-ledger pass first, then the remainder to the owner in the one sign-off)
+
+| unit | first paint raw | gzip | brotli | generation worker | measured by |
+|---|---|---|---|---|---|
+| U2 (`0ab034531` vs `fd5323d05`, fresh build, `vendorPdfLazy`'s own closure walk) | +1,289 (1,175,492 → 1,176,781) | +463 (the base already 7 over) | +271 (the base already 101 over) | +1,197 (2,579,708 → 2,580,905) | B2, CONFIRMED |
+| U2-CURE (`oldFamily` + `oldLawFamilyOf` + `ownKindOf`) | not measured (B2 estimated about +70 for the move) | | | | owed to the after-U5 measure |
+
+Rollup drops today the parts of the table nothing reads yet (`pairLicense`, `formKindOf`'s map, `SEAT_CIRCUMSTANCES`); U3 and U4 will pull them in, so the cumulative measure after U5 is the true figure.
 
 ## 3. THE INSTRUMENTS (one command each, from the checkout root unless said)
 
@@ -80,3 +94,5 @@ Executed: every receipt in §2. PLAUSIBLE: U1's lit mint is proven through a moc
 6. `_seatLawVersion` rides `config` into the public projection like the two laws before it: it says only which law a world was born under.
 7. The second card and the principal front's mark: nothing on a non-owner page; a captured town and its twin, a town with a front and without, identical on every non-owner read.
 8. No file of the security lane touched.
+9. (the chair, 09:26Z) In the campaign PDF's closure the kind reader reads a faction's `hidden`: prove that no line of that PDF differs by a hidden power's presence other than by its absence.
+10. The craft read off a name (`/craft|artisan/i`, the same as the shipped `backingArchetypeOf`) wins over any non-criminal kind: every born name holding it is a craft power today, but a DM-authored "Spellcraft Academy" would read craft. A NOTE, not cured.
