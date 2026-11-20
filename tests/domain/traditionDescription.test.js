@@ -10,7 +10,7 @@
  * (tests/lint/traditionDescriptionFrames.walker.test.js) and the shared page's (tests/security/…SharedPage.test.js).
  */
 import { describe, it, expect } from 'vitest';
-import { describeTradition } from '../../src/domain/traditions/traditionDescription.js';
+import { describeTradition, holdsAName, HELD_NAME_STOP_WORDS } from '../../src/domain/traditions/traditionDescription.js';
 
 /** A rite as genesis writes it (`genesis.js :: assembleRec`'s shape, the fields the leaf reads). */
 function rite(index, element, act, extra = {}) {
@@ -443,5 +443,95 @@ describe('describeTradition — derived at render: pure, deterministic, writes n
     expect(describeTradition(rite(1, 'harvest', 'feast'), null, { audience: 'owner' })).toBeNull();
     expect(describeTradition(rite(1, 'nonsense', 'feast'), town(), { audience: 'owner' })).toBeNull();
     expect(() => describeTradition(rite(1, 'harvest', 'feast'), { name: 'X', institutions: 'no', npcs: 7, history: null }, { audience: 'owner' })).not.toThrow();
+  });
+});
+
+describe('the reader\'s dead-cause word rule (TRAD-4 unit 7, the chair\'s ruling of 13:59 UTC): an event shares NO WORD with any held name', () => {
+  it('THE STOP LIST is closed and pinned: the, a, an, of, and, in, on, at, by, for, to', () => {
+    expect(HELD_NAME_STOP_WORDS).toEqual(['the', 'a', 'an', 'of', 'and', 'in', 'on', 'at', 'by', 'for', 'to']);
+    expect(Object.isFrozen(HELD_NAME_STOP_WORDS)).toBe(true);
+    // a held name of stop words alone holds no word: nothing is caught by it
+    expect(holdsAName('The Siege of the Town', ['The Of And'])).toBe(false);
+  });
+
+  it('CASE: both sides are case-folded', () => {
+    expect(holdsAName('THE ROOKERY FIRE', ['rookery'])).toBe(true);
+    expect(holdsAName('the rookery fire', ['ROOKERY'])).toBe(true);
+    expect(holdsAName('The Strasse Fire', ['Straße'])).toBe(true);
+  });
+
+  it('THE QUALIFIER: a held name\'s bracketed qualifier is part of the name (its words are in too); its stop words are not', () => {
+    expect(holdsAName('The Rookery Fire', ['Rookery (word of mouth)'])).toBe(true);
+    expect(holdsAName('The Mouth of the River', ['Rookery (word of mouth)'])).toBe(true);
+    // anchored: the two lines above catch by this same held name; "of" is its one stop word and the event shares no other
+    expect(holdsAName('The Fire of Years', ['Rookery (word of mouth)'])).toBe(false);
+  });
+
+  it('THE PREFIX: an event word that BEGINS WITH a held word counts as that word (a plural, a possessive); not the other way', () => {
+    expect(holdsAName("The Fences' Fire", ['Fence'])).toBe(true);
+    expect(holdsAName("Fence's Burning", ['Fence'])).toBe(true);
+    // anchored: the held word "fences" is longer than the event's "fence": the event word does not begin with it
+    expect(holdsAName('The Fence Fire', ['Fences'])).toBe(false);
+  });
+
+  it('ANY LENGTH; letter runs only: digits and punctuation are separators', () => {
+    expect(holdsAName('The Inn Fire', ['Inn'])).toBe(true);
+    expect(holdsAName('The Oxbow Flood', ['Ox (old)'])).toBe(true);
+    expect(holdsAName('The 7Gates Siege', ['Gate7'])).toBe(true);
+    expect(holdsAName("The Guild Fire", ["Thieves' guild"])).toBe(true);
+  });
+
+  it('CONTROL: an event that shares no word with any held name is not caught (the rule is not "never")', () => {
+    expect(holdsAName('The Granary Fire', ['Rookery (word of mouth)', 'Town Council', 'Edda Vogt'])).toBe(false);
+    expect(holdsAName('The Great Fire', [])).toBe(false);
+  });
+
+  it('THE LEAF: a reader\'s rite of the dead skips the event named by a hideable house\'s bare form and keeps the older one; the owner names the event', () => {
+    const t = town({
+      institutions: [...town().institutions, { name: 'Rookery (word of mouth)', category: 'Criminal', priorityCategory: 'criminal' }],
+      history: { ...town().history, historicalEvents: [...town().history.historicalEvents,
+        { name: 'The Rookery Fire', templateType: 'great_fire', severity: 'major', yearsAgo: 2 }] },
+    });
+    expect(describeTradition(rite(1, 'the-dead', 'vigil'), t, { audience: 'owner' }).text).toMatch(/the Rookery Fire(?: since then)?, 2 years ago/);
+    const reader = describeTradition(rite(1, 'the-dead', 'vigil'), t, { audience: 'reader' }).text;
+    expect(reader).toMatch(/in memory of the siege(?: since then)?, 40 years ago/);
+    // anchored: the line above asserts the reader's cause stands, on the older siege
+    expect(reader).not.toMatch(/great fire|2 years ago/);
+  });
+});
+
+describe('the word rule RE-STATED (ADDENDUM 1, the chair, 15:10 UTC): a word is a run of letters and apostrophes; the whole name stays as a floor', () => {
+  it('A POSSESSIVE HELD NAME against the bare event: "Cobbler\'s guild" / "The Cobbler Riots" is caught', () => {
+    expect(holdsAName('The Cobbler Riots', ["Cobbler's guild"])).toBe(true);
+  });
+
+  it('THE REVERSE: "Cobbler" / "The Cobbler\'s Fall" is caught (the event word "cobblers" begins with the held "cobbler")', () => {
+    expect(holdsAName("The Cobbler's Fall", ['Cobbler'])).toBe(true);
+  });
+
+  it('A PLURAL POSSESSIVE: "Smiths\' Hall" / "Smith\'s Fire" is caught (held "smiths", event "smiths")', () => {
+    expect(holdsAName("Smith's Fire", ["Smiths' Hall"])).toBe(true);
+  });
+
+  it('A CURLY APOSTROPHE (U+2019) and the modifier apostrophe (U+02BC) read as the apostrophe', () => {
+    expect(holdsAName('Smith’s Fire', ['Smiths’ Hall'])).toBe(true);
+    expect(holdsAName('Smithʼs Fire', ['Smithsʼ Hall'])).toBe(true);
+    expect(holdsAName("Smith's Fire", ['Smiths’ Hall'])).toBe(true);
+  });
+
+  it('AN INNER APOSTROPHE is deleted: "O\'Brien\'s Mill" / "The OBriens Flood" and "D\'Arcy Hall" / "The Darcy Fire" are caught', () => {
+    expect(holdsAName('The OBriens Flood', ["O'Brien's Mill"])).toBe(true);
+    expect(holdsAName('The Darcy Fire', ["D'Arcy Hall"])).toBe(true);
+  });
+
+  it('THE WHOLE-NAME FLOOR (full and bare form): a held name made only of stop words is still caught', () => {
+    expect(holdsAName('The At Fire', ['At'])).toBe(true);
+    expect(holdsAName('The By and By Siege', ['By and By (old)'])).toBe(true);
+  });
+
+  it('CONTROL THAT MUST KEEP ITS CAUSE: a held possessive against an event that only begins with s ("People\'s Council" / "The Siege")', () => {
+    expect(holdsAName('The Siege', ["People's Council", "Cobbler's guild", "Tailor's guild"])).toBe(false);
+    const t = town({ powerStructure: { factions: [...town().powerStructure.factions, { faction: "People's Council", category: 'government', power: 5 }] } });
+    expect(describeTradition(rite(1, 'the-dead', 'vigil'), t, { audience: 'reader' }).text).toMatch(/in memory of the siege(?: since then)?, 40 years ago/);
   });
 });

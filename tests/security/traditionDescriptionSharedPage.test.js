@@ -742,3 +742,136 @@ describe('TRAD-3 UNIT 4b, THE FLOOR EXCLUDES THE HIDEABLE CLASS (the chair\'s ru
     expect(JSON.stringify(sharedTraditionRowsOf(hidden))).toBe(JSON.stringify(rows));
   }, 120000);
 });
+
+// ── TRAD-4 UNIT 7 (REVIEW-VEIL-13's hole in "TRAD-SHARE 1f3cdc135"; the chair's rulings of 13:50 and 13:59 UTC) ──────
+/*
+ * (1) THE DEAD'S EVENT BY A BARE NAME. The reader's dead-cause skipped an event whose name held a FULL held name; the
+ * security lane's sweep (migration 212) also withholds an event by a hidden house's BARE form (its name less its
+ * bracketed qualifier). The chair's word rule: for a reader the dead's cause is chosen only among events whose name
+ * shares NO WORD with any name the record holds (letter runs, case-folded, the qualifier's words in, a closed stop list
+ * out, an event word that begins with a held word caught). The PLANT: the first hideable house renamed
+ * "<bare> (word of mouth)" and a graded great fire, two years ago, named by the bare form; the event as 212 withholds it
+ * is the record less that entry, and the reader's text and the drawn rows must be byte-identical with it and without it.
+ * (2) A POWER'S ARCHETYPE FROM A HIDEABLE FIELD. A power with no mapped category takes its archetype from its
+ * `description` (factionArchetypes.js :: factionArchetype), a field the faction card's eye removes: the reader's view
+ * reads every power less every field any of its eyes can remove (galleryVeil.js :: CARD_KINDS.faction.fields).
+ */
+describe('TRAD-4 UNIT 7 (1): the dead\'s event named by a hidden house\'s bare form, a plural, a possessive, a three-letter name', () => {
+  const SPECS = [['town', 'germanic', 'trad-f-town-germanic'], ['town', 'greek', 'trad-c-town-greek'],
+    ['city', 'arabic', 'trad-dead-city-arabic-0'], ['city', 'latin', 'trad-dead-city-latin-0'], ['metropolis', 'latin', 'trad-dead-metropolis-latin-0']];
+  const bareOf = (name) => String(name).replace(/\s*\([^)]*\)\s*$/, '');
+  /** The town with its first hideable house renamed and a graded great fire, two years ago, named `eventName`. */
+  const plant = (t, houseName, eventName) => {
+    const old = t.institutions.find((i) => isHideableHouse(i)).name;
+    return {
+      ...t,
+      institutions: t.institutions.map((i) => (i.name === old ? { ...i, name: houseName } : i)),
+      history: { ...t.history, historicalEvents: [...t.history.historicalEvents,
+        { id: 'evt_trad4_u7', name: eventName, templateType: 'great_fire', severity: 'major', yearsAgo: 2, description: 'The fire took a street.' }] },
+    };
+  };
+  /** The record as migration 212 serves it: the planted event withheld whole. */
+  const withheld = (p) => ({ ...p, history: { ...p.history, historicalEvents: p.history.historicalEvents.filter((e) => e.id !== 'evt_trad4_u7') } });
+  const towns = SPECS.map(([tier, culture, seed]) => {
+    const t = born(tier, culture, seed);
+    const bare = bareOf(t.institutions.find((i) => isHideableHouse(i)).name);
+    const word = `${bare} (word of mouth)`;
+    return {
+      t, bare,
+      plants: [
+        ['bare form', word, `The ${bare} Fire`],
+        ['plural', word, `The ${bare}s' Fire`],
+        ['possessive', word, `${bare}'s Burning`],
+        ['three letters', 'Inn (word of mouth)', 'The Inn Fire'],
+      ].map(([arm, houseName, eventName]) => ({ arm, eventName, planted: plant(t, houseName, eventName) })),
+      control: plant(t, word, 'The Granary Fire'),
+    };
+  });
+  const deadRites = (s) => shownTraditionsOf(s, []).recs.filter((r) => r.coreMotif?.element === 'the-dead' && !(/\.0$/.test(String(r.id)) && r.foundedYear === 1));
+  const readerTexts = (s) => JSON.stringify(deadRites(s).map((r) => describeTradition(r, s, { audience: 'reader' })?.text ?? ''));
+  const RECALL = 'in memory of the great fire, 2 years ago';
+  const recalls = (s) => sharedTraditionRowsOf(s).some((r) => r.text.includes(RECALL));
+
+  it('NOT VACUOUS: born towns of three tiers each hold a hideable house and a rite of the dead, and the plant keeps the house hideable', () => {
+    expect(new Set(SPECS.map(([tier]) => tier)).size).toBe(3);
+    for (const x of towns) {
+      expect(deadRites(x.t).length, x.t.name).toBeGreaterThan(0);
+      for (const p of x.plants) expect(p.planted.institutions.some((i) => isHideableHouse(i) && /\(word of mouth\)$/.test(i.name)), `${x.t.name} ${p.arm}`).toBe(true);
+    }
+  }, 120000);
+
+  it('CONTROL: "The Granary Fire", where no held name holds "granary", is STILL recalled by the reader (the rule is not "never")', () => {
+    // a town whose record holds a house, person or power named with "granary" (a born "Town granary") is no control
+    const holdsGranary = (s) => ['institution', 'npc', 'faction'].some((k) => copiesOf(s, k).some((c) => /granary/i.test(`${c.name ?? ''} ${c.faction ?? ''}`)));
+    const controls = towns.filter((x) => !holdsGranary(x.control));
+    expect(controls.length).toBeGreaterThan(1);
+    for (const x of controls) {
+      expect(recalls(x.control), x.t.name).toBe(true);
+      expect(readerTexts(x.control), x.t.name).not.toBe(readerTexts(withheld(x.control)));
+    }
+  }, 120000);
+
+  it('CONTROL: the OWNER\'s page names the planted event by its own name in every plant (the plant reaches the leaf)', () => {
+    for (const x of towns) {
+      for (const p of x.plants) {
+        const owner = deadRites(p.planted).map((r) => describeTradition(r, p.planted, { audience: 'owner' }).text).join(' ');
+        expect(owner, `${x.t.name} ${p.arm}`).toContain(`${p.eventName.replace(/^The /, 'the ')}, 2 years ago`);
+      }
+    }
+  }, 120000);
+
+  it('THE PLANTS: the reader\'s descriptions and the drawn rows are byte-identical with the event present and withheld, and recall no fire of two years ago', () => {
+    const red = [];
+    for (const x of towns) {
+      for (const p of x.plants) {
+        const where = `${x.t.name} ${p.arm} "${p.eventName}"`;
+        if (readerTexts(p.planted) !== readerTexts(withheld(p.planted))) red.push(`${where}: descriptions`);
+        if (JSON.stringify(sharedTraditionRowsOf(p.planted)) !== JSON.stringify(sharedTraditionRowsOf(withheld(p.planted)))) red.push(`${where}: rows`);
+        // anchored: the CONTROL arm asserts this same phrase stands in the rows for an event no held name shares a word with
+        if (recalls(p.planted)) red.push(`${where}: recalled`);
+      }
+    }
+    expect(red).toEqual([]);
+  }, 120000);
+});
+
+describe('TRAD-4 UNIT 7 (2): a DM-made power with no mapped category whose description alone makes it the wanted archetype', () => {
+  const PLANTS = [
+    ['religious', { faction: 'The Lantern Circle', category: 'other', power: 99, description: 'A temple brotherhood of priests who keep the shrines.' }],
+    ['merchantry', { faction: 'The Lantern Circle', category: 'other', power: 99, description: 'A merchant guild of caravan traders.' }],
+  ];
+  const towns = [['thorp', 'celtic', 'trad-curate-thorp'], ['hamlet', 'slavic', 'trad-curate-hamlet'], ['village', 'germanic', 'trad-curate-village'],
+    ['town', 'arabic', 'trad-curate-town']].map(([tier, culture, seed]) => born(tier, culture, seed));
+  const withPower = (t, power) => ({ ...t, powerStructure: { ...t.powerStructure, factions: [...(t.powerStructure?.factions || []), power] } });
+  const noDescription = (power) => { const { description, ...rest } = power; return rest; };
+  const rites = (t) => shownTraditionsOf(t, []).recs;
+  const texts = (t, s, audience) => JSON.stringify(rites(t).map((r) => describeTradition(r, s, { audience })?.text ?? ''));
+
+  it('NOT VACUOUS: the description alone makes the power the wanted archetype, it is a field the faction card\'s eye removes, and the eyes leave the name and category on the floor', () => {
+    expect(factionArchetype(PLANTS[0][1])).toBe('religious');
+    expect(factionArchetype(PLANTS[1][1])).toBe('merchant');
+    for (const [, p] of PLANTS) expect(factionArchetype(noDescription(p))).toBe('other');
+    const eyeKeys = Object.values(CARD_KINDS.faction.fields).flat();
+    expect(eyeKeys).toContain('description');
+    // anchored: the line above asserts the same declaration's eye keys hold the description (the collection is live)
+    for (const k of ['faction', 'name', 'category']) expect(eyeKeys).not.toContain(k);
+    expect(isVeiledPower(PLANTS[0][1])).toBe(false);
+  }, 120000);
+
+  it('CONTROL: the OWNER\'s keeper does change with the description removed (the plant reaches the leaf), for each archetype', () => {
+    for (const [want, power] of PLANTS) {
+      const moved = towns.filter((t) => texts(t, withPower(t, power), 'owner') !== texts(t, withPower(t, noDescription(power)), 'owner'));
+      expect(moved.length, want).toBeGreaterThan(0);
+    }
+  }, 120000);
+
+  it('the READER\'s descriptions are byte-identical with the power\'s description present and removed', () => {
+    const red = [];
+    for (const [want, power] of PLANTS) {
+      for (const t of towns) {
+        if (texts(t, withPower(t, power), 'reader') !== texts(t, withPower(t, noDescription(power)), 'reader')) red.push(`${want} ${t.name}`);
+      }
+    }
+    expect(red).toEqual([]);
+  }, 120000);
+});
