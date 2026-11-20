@@ -175,7 +175,7 @@ export const GOV_DESC_OF_UNNAMED_SEAT = Object.freeze({
 });
 
 /**
- * One quarrel of a pool, frozen whole: `{ id, text, needs }`. Its id is the pick's hash key; `needs` stands on the row as
+ * One quarrel of a pool, frozen whole: `{ id, text, needs }`. Its id names it in the ledger; `needs` stands on the row as
  * an array literal, so the presumption walkers read the declaration where the line is written.
  * @param {{ id: string, text: string | null, needs: string[] }} row
  */
@@ -190,11 +190,11 @@ const quarrel = (row) => {
  * `governanceNarrative.js :: deriveBaselineConflict` printed one sentence each: the grazing quarrel (the default rung) and
  * the field rotation (the market rung) in most small places, the levies in most towns (52 of 100 thorps, 58 of 100 towns;
  * `docs/chair/2026-11-20/content/depth/conflict/CONFLICT-MEASURE.md`). Where such a rung's line prints, the site picks the
- * place's quarrel from the rung's pool among the lines whose needs the place holds (`power/quarrelPick.js`), by keyed hash
- * and no roll. INDEX 0 OF EACH POOL IS TODAY'S LINE BYTE FOR BYTE (and GRAZING's second is the field rotation's), so the
+ * place's quarrel from the rung's pool among the lines whose needs the place holds (`power/quarrelPick.js`), by the
+ * mixed keyed pick and no roll. INDEX 0 OF EACH POOL IS TODAY'S LINE BYTE FOR BYTE (and GRAZING's second is the field rotation's), so the
  * thorp twin above, the no-grazing twin (`noGrazingQuarrelOf`) and the boycott rewrite (`factionDynamics.js ::
  * boycottReadsRelation`) fire as before wherever it is picked. A line is appended at the end of its pool, never reordered:
- * its id is its hash key. Each need is a vocabulary atom (`factVocabulary.js`), answered at the site by the roster, the tier
+ * the mixed pick reads the admitted lines in pool order. Each need is a vocabulary atom (`factVocabulary.js`), answered at the site by the roster, the tier
  * and the config.
  * THE FIELD ROTATION'S TEXT IS NOT COPIED HERE (`text: null`): its literal stays where the presumption-classes register
  * banks it (`governanceNarrative.js :: FIELD_ROTATION_QUARREL`, a `resource` word at the guard's base), and the site hands

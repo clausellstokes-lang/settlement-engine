@@ -7,8 +7,10 @@
  * Where such a rung's line PRINTS (the site's own rule: no primary-stress narrative overrides it, or the `infiltrated` one
  * carries it), the site hands it here, and the place's quarrel is chosen from the rung's pool
  * (`data/powerSiblings.js :: QUARREL_POOLS`, keyed by `QUARREL_POOL_OF_RUNG`, and the field rotation the site hands in
- * beside: its literal stays at the site, where the presumption-classes register banks it): the argmax of
- * `hashKey(<seed>::governanceNarrative:<POOL>::<id>)` over the lines whose needs the place holds.
+ * beside: its literal stays at the site, where the presumption-classes register banks it). THE MIXED PICK (the chair's
+ * rule of 17:18 UTC: a keyed pool not yet built takes it from the start): `pickVariantMixed(<the lines whose needs the
+ * place holds, in pool order>, '<seed>::governanceNarrative:<POOL>')` (`kernel/proseHash.js`: the FNV hash, mixed by a
+ * 32-bit finalizer before the modulo; the per-line argmax it replaced is gone).
  *
  * NO ROLL. The seed is read off the active stream and nothing is drawn from it (`safetyProfile.js :: voiceOf`'s idiom), so
  * no other line of the birth moves. With no seed (a fixture or a gallery call) the rung's own line prints, as before:
@@ -31,29 +33,10 @@
 import { QUARREL_POOLS, QUARREL_POOL_OF_RUNG } from '../../data/powerSiblings.js';
 import { drawDeclared } from '../../domain/facts/drawDeclared.js';
 import { declarationAdmits, declarationOf } from '../../domain/facts/factVocabulary.js';
-import { hashKey } from '../../domain/display/stateProse/stateProseKernel.js';
+import { pickVariantMixed } from '../../kernel/proseHash.js';
 import { getActiveRng } from '../../kernel/rngContext.js';
 
 /** @typedef {{ id: string, text: string | null, needs: ReadonlyArray<string> }} Quarrel */
-
-/**
- * The admitted line with the highest `hashKey(key::id)`, or null when none is admitted.
- * @param {ReadonlyArray<Quarrel>} lines @param {(line: Quarrel) => boolean} admitted @param {string} key
- * @returns {Quarrel | null}
- */
-function argmaxOf(lines, admitted, key) {
-  let best = null;
-  let bestKey = -1;
-  for (const line of lines) {
-    if (!admitted(line)) continue;
-    const k = hashKey(`${key}::${line.id}`);
-    if (k > bestKey) {
-      best = line;
-      bestKey = k;
-    }
-  }
-  return best;
-}
 
 /**
  * The place's everyday quarrel, where the ladder's line is a rung line of a pool.
@@ -86,7 +69,7 @@ export function pickQuarrel(baseline, { facts, noGrazing = null, fieldRotation =
   const admitted = (/** @type {Quarrel} */ line) => typeof textOf(line) === 'string'
     && declarationAdmits(declarationOf(line), /** @type {import('../../domain/facts/factVocabulary.js').FactsLike} */ (read())).admitted;
   const picked = drawDeclared(pool, {
-    draw: (lines) => argmaxOf(lines, admitted, key),
+    draw: (lines) => pickVariantMixed(lines.filter(admitted), key) ?? null,
     facts: read,
     key,
     poolId: `governanceNarrative:${poolName}`,
