@@ -180,3 +180,62 @@ The C2B builder wrote this on `frame6-c2b`, base `a170832e5`, for FRAME-6. It wa
 - The new test, every test importing `crisisCast.js`, the stake/cast tests (44 files), `tests/domain/crisis`, `tests/domain/tension` and `frameShareVeil`: 56 files, 524 passed and 1 expected fail, 0 failed.
 - `typecheck:ratchet` 167/167; `typecheck:domain:strict` 1,113/1,113; `lint` 0 errors (38 warnings).
 - Walkers (`writerReach`, `proseNumerics`, `namesInSentences`, `seedLoopTotality`, `sizeBaseline`) are green. `tuningRegister` is red on the same 3 rows as at C2Ba; they are not C2B's.
+
+## (c) An at-odds reason names the other power through `powerNameInProse`. Commit C2Bc (RENDER).
+
+**Where the reason is composed:**
+- It is composed at render, not stored. `crisisPage.js :: stakeShown` turns a record's untouched `split` into `atOdds`/`atOddsMany` where the record's own quarrels (`powerStructure.conflicts`) name the power.
+- Its reason, "in its/their own quarrel with …", lists `quarrelsOf`'s names.
+- `quarrelsOf` named each other power by the bare leaf (`powerSentenceName`). It now names each one by `powerNameInProse(p)`, mid-sentence: "the Elder Council"; "the Guard" for `Military/Guard`; a name that carries its own "The" is lowered.
+- The list keeps its "A, B and C" form, and every name takes its article: "with the Grand Council and the Arcane Orders".
+- `powerSentenceName` had no other reader in `crisisPage.js`, so its import is dropped.
+- Nothing stored moves.
+
+**Who sees it:**
+- The Stakes rows are on the Crisis tab (the owner's own surfaces: the live editor and the saved view), the PDF and the Foundry journal, all through the one composition. They are the same for the owner's and a non-owner's composition.
+- The gallery page and the party link do not mount the Crisis tab (U0's results, 4), so no shared reader sees a Stakes row.
+
+**Rows changed by (c), on B7's pool (tip against C2Bb):**
+- **241 of 1,818 Stakes rows**, all at-odds:
+  - `atOdds` 88 (6 of them lists);
+  - `atOddsMany` 153 (17 lists).
+- These 241 are on the tab and the PDF, and the same 241 in the journal. They fall in 155 towns.
+- 0 other rows move, and 0 at-odds rows stay unchanged.
+- 29 rows printed a capital "The" mid-sentence before ("with The Guard"). After the change, 0 do, 0 read "the the", and every listed name opens on "the".
+- Examples:
+  - `b7-under_siege-village-3`: "The Manor Household is already at odds · in its own quarrel with Elder Council" → "… with the Elder Council";
+  - `b7-under_siege-city-1`: "The Noble Families are already at odds · in their own quarrel with Noble Governorship" → "… with the Noble Governorship";
+  - `b7-famine-hamlet-3`: "… with Free Elder Council" → "… with the Free Elder Council";
+  - journal: "- **The Arcane Orders** are already at odds: in their own quarrel with the Craft Guilds."
+
+**Byte-identity:**
+
+| What | Towns | Identical |
+|---|---|---|
+| Stored record | 405 | 405 |
+| Composed page outside the Stakes rows | 360 | 360 |
+| Whole page, owner and non-owner | 360 | 205 (the 155 differ only in the at-odds rows) |
+| Calm towns | 45 | 45 |
+
+**Red first:**
+- `crisisStakeFollowups.test.jsx` C2B (c) failed 3 of 3 on C2Bb:
+  - "b7-under_siege-village-3: "in its own quarrel with the Elder Council", never "with Elder Council"";
+  - "b7-famine-town-1: … "with the Guard", never "with The Guard"";
+  - "a crafted town: every power the quarrels name stands with its article, listed with "and"; …".
+- Green: 7 of 7 in the file.
+
+**The pin moved:** `tests/domain/tailCrisisBatch4.test.js`, "no FALSE words print, and the line the record bears prints in their place". Its three at-odds anchors now read "with the Merchant oligarchy", "with the Royal Authority" and "with the City-State Council". It was red on these 3 of 10, and is green.
+
+**Gates at C2Bc:**
+- Every test file importing `crisisPage.js`, `CrisisTab.jsx`, `CrisisSections.jsx`, `crisisPrint.js` or `journalPages.js`, or holding "quarrel with" (tests/lint excluded), together with `tests/domain/crisis`, `tests/domain/tension` and `frameShareVeil`: 83 files, 711 tests, 0 failed.
+- `typecheck:ratchet` 167/167; `typecheck:domain:strict` 1,113/1,113; `lint` 0 errors (38 warnings).
+- Walkers: `writerReach`, `proseNumerics`, `namesInSentences`, `seedLoopTotality` and `sizeBaseline` are green. `tuningRegister` is red on the same 3 rows as at the base; they are not C2B's.
+- The phone floor census row: the tab's markup is untouched; only words change.
+
+## The scripts (scratch: `/tmp/claude-0/-home-user-settlement-engine/a474dbf6-e28f-5af7-9e9c-a8c4a943c31d/scratchpad/C2B/`)
+
+- `measure.mjs <tree> <out>` births B7's pool and C2's calm pool. It writes each record whole, and per town the owner's and the non-owner's composed page, the tab/PDF Stakes rows, the journal's Stakes rows and the stored stakes.
+- `compare.mjs <before> <after>` prints the tables above.
+- `calm.mjs <tree> <out>` covers B2's 330 calm towns (record and pages by sha).
+- `golden-rows.mjs <manifest> <born…>` gives the golden master's row hashes.
+- The two births are deleted.

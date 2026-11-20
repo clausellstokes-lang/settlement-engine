@@ -31,7 +31,7 @@ import { tierNounFor } from '../display/stateProse/weaveBlock.js';
 import { migrationDirectionOf } from './migrationDirection.js';
 import { governingFactionOf } from '../rulingPower.js';
 import { pluralPowerName, powerNameInProse } from '../display/governanceAccount.js';
-import { powerSentenceName, powerVerb } from '../display/powerSentenceName.js';
+import { powerVerb } from '../display/powerSentenceName.js';
 
 /** The page's one copy constant, on every surface that prints it. */
 export const CRISIS_PAGE_COPY = Object.freeze({
@@ -192,7 +192,10 @@ function eventLine(label, entry, noun) {
 
 /**
  * The others a power is in an open quarrel with, by the record's own quarrels (`powerStructure.conflicts`, the settled
- * list the page's Tensions block prints), each by its prose form; [] where the record names none.
+ * list the page's Tensions block prints), each by its prose form; [] where the record names none. FRAME-6 · C2B (c) (the
+ * chair's ruling of 2026-11-20 15:58 UTC, vetoable by the owner; C2 § found 3): each stands inside the at-odds reason as a
+ * sentence names a power, with its article (`powerNameInProse`): "in its own quarrel with the Elder Council", "… with the
+ * Guard", never the bare leaf ("with Elder Council", "with The Guard"). Display only: no record moves.
  * @param {PageSettlement} s @param {string} name @returns {string[]}
  */
 function quarrelsOf(s, name) {
@@ -202,7 +205,7 @@ function quarrelsOf(s, name) {
   for (const c of Array.isArray(rows) ? rows : []) {
     const parties = Array.isArray(c?.parties) ? c.parties.map(str) : [];
     if (!parties.includes(name)) continue;
-    for (const p of parties) if (p && p !== name && !out.includes(powerSentenceName(p))) out.push(powerSentenceName(p));
+    for (const p of parties) if (p && p !== name && !out.includes(powerNameInProse(p))) out.push(powerNameInProse(p));
   }
   return out;
 }
