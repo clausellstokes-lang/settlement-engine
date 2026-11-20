@@ -96,3 +96,19 @@ Each figure with its output file beside it (`docs/chair/2026-11-20/veil/doors/v2
   permission denied for function _gallery_world_snapshot_is_safe". The amendment's reason, executed. Green: walker 8 of 8,
   mutationCoverageManifest 10 of 10 (`out/item3-green.txt`); eslint 0. The manifest's row for the walker is extended with
   arms 7 and 8 and their plants.
+
+## 5. Item 4 — the map import under VR23 (written 2026-11-20 03:27 UTC)
+- **The path the browser really runs** (read whole): `src/store/galleryImportMap.js :: importGalleryMapWithCampaignImpl`
+  (and `importGalleryMapImpl` for a plain map) -> `src/lib/gallery.js :: fetchGalleryMap` -> `supabase.rpc('get_gallery_map')`
+  -> each `members[].settlement` normalised and scrubbed -> `saves.save` as the importer's own record. So VR23's cure in
+  `get_gallery_map` (the predecessor's) IS the import's; nothing is restated for this item.
+- **`import_gallery_map(text)` has no caller**: none in `src/`, `api/`, `scripts/`, `supabase/functions/` (searched by name);
+  in SQL only comments of 106 and 120 name it. SEC-GRANTS's catalogue lists it "INTERNAL — revoked now" (its caller column
+  "sql: bump_map_import" is a comment, and `bump_map_import` itself has no caller in `src/` either). It is SEC-GRANTS's to
+  close; the owner's emergency script revokes it on production. Not touched here.
+- **The born arm on that path** (galleryDoors.pglite, "VR23 ON THE BROWSER'S IMPORT PATH"): the client's `rpc` is routed to
+  the chain as a signed-in visitor, the save service captured; a campaign map of two members (one unmarked, one with the
+  default veil) imported through `importGalleryMapWithCampaignImpl`: each record holds the open Mill and no Black market.
+  RED at bedd5a392 (`out/item4-red-at-bedd5a392.txt`: the unmarked member's record carried
+  `$.institutions[0].name = "Black market"` and its `catalogId`); GREEN at this commit: the doors' file 9 of 9
+  (`out/item4-green.txt`); eslint 0.

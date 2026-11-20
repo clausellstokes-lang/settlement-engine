@@ -1,0 +1,21 @@
+[run] start 2026-11-20T03:26:49Z at ebe9387a2 1 dirty paths
+[run] cmd: npx vitest run --reporter=verbose tests/security/galleryDoors.pglite.test.js
+
+ RUN  v4.1.8 /home/user/settlement-engine
+
+ ✓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > V10-1 THE CHRONICLE DOOR: on a marked share an entry naming a house hidden whole (summary, target or payload), a covert act with a criminal grouping shut and an unclassed type are withheld whole, on the gallery read and a map's member; open entries arrive; no entry carries an id; an unmarked listed page keeps its chronicle as 032 sends it 218ms
+ ✓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > V10-1 / VR21 THE NEWEST FIFTY OF THE SERVED: a log of 70 entries whose newest five name the hidden house serves fifty, none of them withheld ones 49ms
+ ✓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > V10-3 THE TILE DOOR: on a marked share the stability tile is the band word alone (dossier column and list tile); prosperity is its stored band (VR28 tier 2); a tile holding a hideable house's name is sent by none; an unmarked listed page is unchanged 67ms
+ ✓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > V10-3 THE CLOSED ANSWER SENDS NO TILE: a share past the name search's bound (600 houses hidden whole of 145 characters) serves the name alone and no tile beside it 532ms
+ ✓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > V10-4 THE MAP MEMBER: a member with no veil of its own takes the default veil; a marked member its own 14ms
+ ✓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > THE ONE-ROW READ (the chair's condition (a), VEIL-DOORS-2): get_gallery_dossier takes its own row's tiles by the one tile rule, never every public row's; its row and tile columns equal the list's row for every share (unmarked, the default veil, a hand veil, Reveal DM, snapshot mode, votes and comments counted) 538ms
+ ✓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > VR23 ON THE BROWSER'S IMPORT PATH (VEIL-DOORS-2, item 4): importing a shared campaign map runs importGalleryMapWithCampaignImpl -> fetchGalleryMap -> get_gallery_map; a member with no veil of its own arrives in the importer's record default-veiled (its criminal house absent, its open house present), a marked member by its own veil 1525ms
+ ✓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > THE TILE ROWS ARE NO DOOR OF THEIR OWN: _gallery_public_tile_rows() is executable by neither anon nor authenticated (Supabase's default privileges) 1ms
+ ✓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > THE TWIN: the server and src/domain/display/galleryDoors.js send the same chronicle and the same tiles (the default veil and a hand veil, Reveal DM off and on; the closed answer) 993ms
+
+ Test Files  1 passed (1)
+      Tests  9 passed (9)
+   Start at  03:26:49
+   Duration  7.23s (transform 1.21s, setup 33ms, import 94ms, tests 6.97s, environment 0ms)
+
+[run] end 2026-11-20T03:26:57Z exit 0

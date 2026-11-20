@@ -18,6 +18,10 @@
  *   V10-4 THE MAP MEMBER (VR23): a member with no veil of its own takes the default veil.
  *   THE TILE ROWS ARE NO DOOR OF THEIR OWN: with Supabase's default privileges, _gallery_public_tile_rows() is callable
  *         by no visitor.
+ *   VR23 ON THE BROWSER'S IMPORT PATH (VEIL-DOORS-2, item 4; red at bedd5a392): the campaign map import the browser runs
+ *         (src/store/galleryImportMap.js :: importGalleryMapWithCampaignImpl -> src/lib/gallery.js :: fetchGalleryMap ->
+ *         get_gallery_map; import_gallery_map(text) has no caller in src/, api/, scripts/ or supabase/functions/) lands a
+ *         member with no veil of its own DEFAULT-VEILED in the importer's own record.
  *   THE ONE-ROW READ (VEIL-DOORS-2; the chair's condition (a), red at cca49cb8d): the dossier read takes its own row's
  *         tiles by the one tile rule (_gallery_doors_tiles), never the tile rows of every public row; every row and tile
  *         column it sends equals the list's row (the cost rows are in VEIL-DOORS-2-HANDBACK.md).
@@ -31,9 +35,26 @@ import { resolve, join } from 'node:path';
 const PGLITE_BOOT_TIMEOUT_MS = 900_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
 const ARM_TIMEOUT_MS = 600_000;
 
+// THE BROWSER'S PATH (VEIL-DOORS-2, item 4): the client's rpc runs the named function on this chain as a signed-in
+// visitor (the one arm that sets ROUTE.db), and the importer's save is captured, never written.
+const ROUTE = vi.hoisted(() => ({ db: null, uid: null, saved: [] }));
 vi.mock('../../src/lib/supabase.js', () => {
-  const supabase = { rpc: async () => ({ data: null, error: null }) };
+  const supabase = {
+    rpc: async (name, args = {}) => {
+      if (!ROUTE.db) return { data: null, error: null };
+      try {
+        await ROUTE.db.exec(`set role authenticated; set test.uid = '${ROUTE.uid}';`);
+        const keys = Object.keys(args);
+        const r = await ROUTE.db.query(`select public.${name}(${keys.map((k, i) => `${k} => $${i + 1}`).join(', ')}) as out`, keys.map((k) => args[k]));
+        return { data: r.rows[0]?.out ?? null, error: null };
+      } catch (e) { return { data: null, error: { message: String(e?.message || e) } }; } finally { await ROUTE.db.exec('reset role; reset test.uid;'); }
+    },
+  };
   return { supabase, isConfigured: true, default: supabase };
+});
+vi.mock('../../src/lib/saves.js', () => {
+  const ok = async () => ({});
+  return { saves: { save: async (entry) => { ROUTE.saved.push(entry); return `import_${ROUTE.saved.length}`; }, update: ok, delete: ok } };
 });
 
 const MIGRATIONS = resolve(process.cwd(), 'supabase', 'migrations');
@@ -249,6 +270,31 @@ describe('VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4
       expect([g.net_votes, g.comment_count, g.name], 'the counts and the title are the row\'s own').toEqual([1, 1, 'Rookford of the River']);
     }
     expect(differs).toEqual([]);
+  }, ARM_TIMEOUT_MS);
+
+  it('VR23 ON THE BROWSER\'S IMPORT PATH (VEIL-DOORS-2, item 4): importing a shared campaign map runs importGalleryMapWithCampaignImpl -> fetchGalleryMap -> get_gallery_map; a member with no veil of its own arrives in the importer\'s record default-veiled (its criminal house absent, its open house present), a marked member by its own veil', async () => {
+    const { importGalleryMapWithCampaignImpl } = await import('../../src/store/galleryImportMap.js');
+    const unmarked = await store(town(), { overrides: {}, isPublic: false, log: LOG });
+    const marked = await store(town(), { overrides: VEIL(), isPublic: false, log: LOG });
+    seq += 1;
+    const slug = `realm${seq}`;
+    await db.query(`insert into public.saved_maps (id,user_id,name,map_data,is_public,public_slug,share_kind,gallery_share_campaign,gallery_importable)
+      values (gen_random_uuid(),$1,'Realm',$2::jsonb,true,$3,'map_with_campaign',true,true)`, [OWNER, JSON.stringify({ campaign: { settlementIds: [unmarked.id, marked.id] } }), slug]);
+    const state = {
+      auth: { user: { id: READER }, tier: 'premium', role: 'user' }, campaignSessionGeneration: 0, savedSettlements: [], campaigns: [],
+      maxSaves: () => Infinity, createCampaign: () => { state.campaigns.push({ id: 'camp_import', settlementIds: [] }); return 'camp_import'; },
+      saveCampaignMap: () => {},
+    };
+    Object.assign(ROUTE, { db, uid: READER, saved: [] });
+    try {
+      expect(await importGalleryMapWithCampaignImpl(() => state, (fn) => fn(state), slug)).toBe('camp_import');
+    } finally { ROUTE.db = null; }
+    expect(ROUTE.saved.length, 'both members were imported').toBe(2);
+    for (const entry of ROUTE.saved) {
+      expect(arrivals(entry.settlement, 'Black market'), `the importer's record of ${entry.name}`).toEqual([]);
+      expect(arrivals(entry.settlement, 'Mill').length, `the open house arrives in ${entry.name}`).toBeGreaterThan(0);
+    }
+    expect(state.savedSettlements.map((e) => e.id)).toEqual(['import_1', 'import_2']);
   }, ARM_TIMEOUT_MS);
 
   it('THE TILE ROWS ARE NO DOOR OF THEIR OWN: _gallery_public_tile_rows() is executable by neither anon nor authenticated (Supabase\'s default privileges)', async () => {
