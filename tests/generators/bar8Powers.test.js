@@ -32,12 +32,18 @@ const TOWNS = Object.freeze({
   'bar0-village-famine-rand-46': ['14d'], // C44634
   'bar0-village-calm-rand-46': ['14d'],
   'r2r-village-45': ['14d'], // the noble power seated at the draw is not kept by the roster's trim
-  'bar0-thorp-calm-rand-47': ['15b'], // C31732: harbour, ship timber, ruins
-  'r2r-thorp-3': ['15b'], // marshlands, hot springs, a quarry
-  'r2r-thorp-53': ['15b'], // fishing grounds, salt flats
-  'bar0-thorp-calm-rand-45': ['15b-'], // NEGATIVE C30951: a foraging or a hunting ground
-  'bar0-thorp-calm-rand-46': ['15b-'], // NEGATIVE C31349
-  'bar0-hamlet-calm-rand-45': ['15b-'], // NEGATIVE C16138: common grazing
+  'bar0-thorp-calm-rand-47': ['15b'], // C31732: harbour, ship timber, ruins (BUILD-CONFLICT, DEPTH-2: the original, restored under the mixed pick (the chair's rule of 17:18 UTC))
+  'r2r-thorp-277': ['15b'], // marshlands, hot springs, a quarry (BUILD-CONFLICT, DEPTH-2: was r2r-thorp-3, the same grounds, then -364; the mixed pick (the chair's rule of 17:18 UTC))
+  'r2r-thorp-118': ['15b'], // fishing grounds, salt flats (BUILD-CONFLICT, DEPTH-2: was r2r-thorp-53, the same grounds, then -414; the mixed pick (the chair's rule of 17:18 UTC))
+  // BUILD-CONFLICT (DEPTH-2, 2026-11-20): the default rung now picks its quarrel by keyed hash, so each negative is a place whose
+  // pick is the grazing quarrel: bar0-thorp-calm-rand-45 -> -399 (a foraging ground, no other ground of the land), -46 -> -85
+  // (fishing and hunting grounds, hot springs, a quarry: -46's own), bar0-hamlet-calm-rand-45 -> -199 (common grazing; hunting
+  // ground and grove, as -45's)
+  // and under the mixed pick (the chair's rule of 17:18 UTC): -399 -> bar0-thorp-calm-rand-300 (a foraging ground, hot springs, iron), -85 -> -154 (a hunting
+  // ground, hot springs, coal), bar0-hamlet-calm-rand-199 -> -8 (common grazing; a hunting ground and a grove)
+  'bar0-thorp-calm-rand-300': ['15b-'], // NEGATIVE C30951: a foraging or a hunting ground
+  'bar0-thorp-calm-rand-154': ['15b-'], // NEGATIVE C31349
+  'bar0-hamlet-calm-rand-8': ['15b-'], // NEGATIVE C16138: common grazing
 });
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';

@@ -568,6 +568,12 @@ export const FACT_DIMENSIONS = Object.freeze({
     reader: (/** @type {FactsLike} */ f, /** @type {string|null} */ key) => (f.orderForce && typeof f.orderForce === 'object' && key ? bool(/** @type {Record<string, unknown>} */ (f.orderForce)[key]) : undefined) }),
   // ── the crisis dimension (the inverse default) ──
   crisis: dim({ shape: 'crisis', home: 'crisis', reader: (f) => f.crisis }),
+  // BUILD-CONFLICT (DEPTH-2, 2026-11-20; the chair's leave, vetoable by the owner, on the veto list as new vocabulary): three
+  // grounds the roster already holds as rows, each answered by its own home (`rosterGrounds.js`): a water source (either rung
+  // of the catalogue's ladder), the access to an external mill (which `institution: mill` never reads), the common grazing
+  'water source': dim({ shape: 'presence', home: 'waterSource', reader: (f) => bool(/** @type {Record<string, unknown>} */ (f).waterSource) }),
+  'access to external mill': dim({ shape: 'presence', home: 'externalMill', reader: (f) => bool(/** @type {Record<string, unknown>} */ (f).externalMill) }),
+  'common grazing land': dim({ shape: 'presence', home: 'commonGrazing', reader: (f) => bool(/** @type {Record<string, unknown>} */ (f).commonGrazing) }),
 });
 
 /** The crisis dimension's legal values. */
