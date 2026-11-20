@@ -2672,3 +2672,38 @@ export function temperamentYieldsToSecret(card) {
  * @type {ReadonlySet<string | { text: string }>}
  */
 export const ECONOMY_HOOKS_TRUE_OF_ANY_HOLDER = Object.freeze(new Set(NPC_FACTION_LOYALTY.economy.filter((l) => /^One of their most reliable suppliers has gone dark\.|^Someone is buying up their debts\.|^A contract they signed in difficult times |^A supplier is providing goods of uncertain provenance\.|^They have quietly stopped paying a supplier |^A crate came to them by mistake,/.test(typeof l === 'string' ? l : l.text))));
+
+/**
+ * S9 (PAGE-6, 2026-11-20; docs/chair/2026-11-20/content/page/briefs/S9-POST.md, the tag table of the refused first cut
+ * f2957d5be re-read whole; vetoable by the owner, every tag listed with its reason in
+ * docs/chair/2026-11-20/content/page/S2-TAGS.md): THE ROLE-FREE ROWS THAT PRESUME AN OFFICE, A DUTY OR A TRADE THE HOLDER
+ * MAY NOT HAVE, tagged with the holder classes they fit (`domain/roles/roleClass.js :: ROLE_CLASS` values), keyed by the
+ * row's secret text beside the table, never on the row, which is copied onto the card (as
+ * `people/titleSecretsPresentations.js :: TITLE_LINE_DECLARATIONS` is). A row that fits every holder is untagged. `other`
+ * is in every tag: roleClass.js leaves a role it cannot class unjudged, and most trades and keepers are `other`. Read
+ * AFTER every card of the town is dealt (`npc/factionLeaderSecret.js :: settleMisfitSecrets`): the draw is unchanged.
+ * At the file's end so no cited line moves (the tag table only).
+ * @type {Readonly<Record<string, readonly string[]>>}
+ */
+export const CRIMINAL_SECRET_HOLDER_TAGS = Object.freeze({
+  // the holder is supposed to serve merchants: an office of the market, or the watch that keeps it
+  "Runs a protection scheme targeting the very merchants they're supposed to serve": Object.freeze(['office', 'military', 'other']),
+  // the holder inspects: an office
+  'Has been falsifying inspection records for a fee': Object.freeze(['office', 'other']),
+  // the holder keeps a business
+  'Their legitimate business is a front for moving contraband': Object.freeze(['trade', 'merchant', 'criminal', 'other']),
+  // the holder holds an appointment
+  'Their appointment was secured through forged credentials': Object.freeze(['office', 'clergy', 'military', 'other']),
+  // the holder holds an authority of the town to hand over
+  'Has agreed to hand over authority to an external power in exchange for personal safety': Object.freeze(['office', 'noble', 'military', 'clergy', 'other']),
+  // the holder talks neighbours into ventures: a dealer in ventures
+  'Has been quietly betting against the ventures they talk their neighbours into, and profiting when they fail': Object.freeze(['merchant', 'trade', 'noble', 'other']),
+  // the holder sells goods
+  'The goods they sell as locally produced are sourced from somewhere with exploitative labour practices': Object.freeze(['trade', 'merchant', 'other']),
+  // the holder makes or sells a product
+  'Has been paying a health official to suppress a finding about their product': Object.freeze(['trade', 'merchant', 'other']),
+  // the holder has a competitor in a trade or a racket
+  'Has information about a competitor that would ruin them, obtained through clearly illegal means': Object.freeze(['trade', 'merchant', 'criminal', 'other']),
+  // the holder has a business partner
+  "Their business partner died of natural causes that weren't entirely natural": Object.freeze(['trade', 'merchant', 'criminal', 'other']),
+});

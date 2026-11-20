@@ -77,7 +77,10 @@ describe('a secret names merchants only where the roster holds a market (R2-CODE
     expect(quarantine('r2s-plague_onset-village-0')).toBe(false);
     expect(quarantine('r2s-plague_onset-town-0')).toBe(true);
   });
-  it('r2s-under_siege-village-0 (a market) keeps the protection scheme on its merchants', () => {
-    expect((born('r2s-under_siege-village-0').npcs || []).some((/** @type {any} */ n) => /targeting the very merchants/.test(n?.secret?.what || ''))).toBe(true);
+  // RE-KEYED BY CAUSE (PAGE-6 S9, c727a4d17): the old anchor, the priest of r2s-under_siege-village-0, held the scheme as a
+  // misfit (a clergy face; the row's tag admits office, military and other), and S9's post-pass gave him his next admitted
+  // line; the magistrate of r2r-town-53 holds it as dealt, beside a market. The assertion is as it was.
+  it('r2r-town-53 (a market) keeps the protection scheme on its merchants', () => {
+    expect((born('r2r-town-53').npcs || []).some((/** @type {any} */ n) => /targeting the very merchants/.test(n?.secret?.what || ''))).toBe(true);
   });
 });

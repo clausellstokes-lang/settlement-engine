@@ -92,13 +92,17 @@ describe('W2-FIX-DATA-12: the measured rows in the data lane\'s files', () => {
       // anchored: the same arrival scene is shown directly above to name its town (the scene's own hook)
       expect(a, seed).not.toMatch(WINE);
     }), 'no tavern: no wine shop in the arrival');
-    expect(String(bornCensus('r2r-town-2').arrivalScene || '')).toMatch(WINE);
+    // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): r2r-town-2 -> r2r-city-28, a census city whose tavern stands and whose
+    // people line is the patron's (its KEEP town)
+    expect(String(bornCensus('r2r-city-28').arrivalScene || '')).toMatch(WINE);
   }, 180_000);
 
   test('item 3 and the reader\'s A04: the smiths\' dominant pool claims no living by the forges (r2s-infiltrated-metropolis-3, r2r-town-47) and speaks only where a smith stands (r2r-town-26, r2s-mass_migration-town-0: a Smelter alone)', () => {
     const LIVES = /lives by its forges/;
     const POOL = /hammering|Forge smoke|ring of the anvils|new ironwork|clang of iron/;
-    expectNoSeedFailures(collectSeedFailures(['r2s-infiltrated-metropolis-3', 'r2r-town-47'], (seed) => {
+    // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): r2s-infiltrated-metropolis-3 -> r2r-metropolis-20 and r2r-town-47 ->
+    // r2r-town-72 (the same tiers; a smith stands, the forge line is drawn), so the forge line's sound is read and its living is not
+    expectNoSeedFailures(collectSeedFailures(['r2r-metropolis-20', 'r2r-town-72'], (seed) => {
       const a = String(bornCensus(seed).arrivalScene || '');
       expect(a, seed).toMatch(/The hammering of the forges echoes through all of|The clang of iron from the smithies carries down the lanes of/);
       // anchored: the same arrival scene is shown directly above to print the forge line's sound

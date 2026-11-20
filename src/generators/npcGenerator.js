@@ -19,7 +19,7 @@ import { themeOfText, UNTYPED } from '../domain/hookThemes.js';
 import { disambiguateNPCDisplayNames } from './npcDisplayNames.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
 import { legacyMassRange } from '../domain/density/densityLaw.js'; import { defenceRoleGate } from '../domain/defense/defenseFacts.js'; import { crimeHasThievesGuild, crimeSignalOf, withoutCriminalGuild } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3): one line, so no cited line moves
-import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js'; import { drawDeclared, lineText, resolveSibling } from '../domain/facts/drawDeclared.js'; import { birthFactsOf, factsOf } from '../domain/facts/factsOf.js'; // F5, F10, CENSUS-1c, CENSUS-4f: one line, so no cited line moves
+import { generateFactionLeaderSecret, noteSecretSource, withoutMarketWords } from './npc/factionLeaderSecret.js'; import { drawDeclared, lineText, resolveSibling } from '../domain/facts/drawDeclared.js'; import { birthFactsOf, factsOf } from '../domain/facts/factsOf.js'; // F5, F10, CENSUS-1c, CENSUS-4f: one line, so no cited line moves
 import { CRAFTS_ROLES, NOBLE_ROLES } from './npc/factionRoleCatalog.js'; import { POWER_BANDS, titleLinesFor } from './people/poolMap.js'; // ITEM 15 (ALLEGIANCE-CAR4), one line so no cited line moves
 import { resolveGeneratedNpcTitle } from './npc/generatedNpcTitle.js';
 import { deriveThorpSecondRole } from './npc/thorpSecondRole.js'; // CENSUS-4 R9's guildTitleName and R3's tieArchetype left this line at MERGE-CAR (R9 superseded by the census titles and the honorific pools, R-P9; R3 read at people/ties.js); one line, so no cited line moves
@@ -123,12 +123,12 @@ export const generateSingleNPC = ( // exported for people/representatives.js (th
   // every other face — and a titled face whose three are all held — draws by its role and category, as before.
   const titled = titleLinesFor(options.title);
   const titleSecrets = titled ? titled.secrets.filter((row) => !hookRegistry?.secrets?.has(String(row.secret).trim())) : [];
-  const secret = titleSecrets.length ? pickFromArray(titleSecrets) : generateFactionLeaderSecret(
+  const secretSource = {}; const secret = titleSecrets.length ? pickFromArray(titleSecrets) : generateFactionLeaderSecret( // S9 (PAGE-6): one line, so no cited line moves
     config,
     institutions,
     worldLaw, role, // CENSUS-1i R-AX: the holder's role keys both rolls (the type and the row)
     hookRegistry?.secrets, // REVIEW-INTAKE-4 (MERGE-R2: composed with the holder's keyed rows)
-  );
+  secretSource); // S9 (PAGE-6): the pool the row was taken from, noted beside the card (factionLeaderSecret.js :: noteSecretSource)
   if (secret?.secret) hookRegistry?.secrets?.add(String(secret.secret).trim()); // REVIEW-INTAKE-4; MERGE-R2: the drawn text (the held key) beside the text the figure carries
   // ONE PLOT HOOK PER PERSON (the owner, 2026-11-07: "one plot hook per NPC rather than multiple";
   // PEOPLE-3 HOOKS): the second hook (a coin-flip, μ 0.5 per card) is RETIRED. A representative's
@@ -136,7 +136,7 @@ export const generateSingleNPC = ( // exported for people/representatives.js (th
   // pool map (people/representatives.js :: drawCardHooks), so that seam asks for none here.
   const plotHooks = options.hook === false ? [] : [drawPersonHook(category, config, hookRegistry, { worldLaw, institutions, tier })];
   const powerLevel = generateNPCPowerLevel(role);
-  return {
+  const card = { // S9 (PAGE-6): the card's secret pool noted below for the town's post-pass (factionLeaderSecret.js :: settleMisfitSecrets); never stored
     id: null,
     name: fullName,
     gender,
@@ -162,7 +162,7 @@ export const generateSingleNPC = ( // exported for people/representatives.js (th
     influence: powerLevel.level,
     power: powerLevel.power,
     presentation: titled && titled.presentations.length ? { ...pickFromArray(titled.presentations) } : pickTitle(category, birthFactsOf({ institutions, config, tier }, worldLaw), religion), // ITEM 15: the title's own first impression; STYLE-2 SW-7 (B10(b)): else the card's own traits key "How they deal"
-  };
+  }; noteSecretSource(card, secretSource); return card;
 };
 
 // computeNPCWeights
@@ -719,7 +719,7 @@ export const mergeNPCLists = (npcs, factions, institutions, _tier, _config) => {
   // criminal faction and no criminal house, no NPC is filed under a "criminal network" or a
   // "Thieves' Guild" (471 and 17 NPCs in 1,000 soak places), and a secret or goal naming a
   // thieves' guild takes the pool's own "a powerful outside interest". No draw.
-  const crimeSignal = crimeSignalOf({ seats: factions, estate: institutions }); const noCrime = !crimeFaction && !crimeSignal.present; const noThievesGuild = !crimeHasThievesGuild(crimeSignal, crimeFaction?.faction); /* the crime home's reader (TAIL-CLOSE-SRC-4) */ const underworld = 'the local underworld'; const noMarket = !hasMarketInstitution(institutions); /** @param {unknown} text @returns {unknown} */ const withoutMarketWords = (text) => (typeof text !== 'string' ? text : text.replace("the very merchants they're supposed to serve", "the very households they're supposed to serve").replace('the merchants have been keeping records', 'the households have been keeping records')); // R2-CODE-A-7 (step 1 item 4; the chair's ruling: a secret names merchants, a market or a guild only where the roster holds them): a town with no market hears the protection scheme of its households, each rewrite the whole phrase as the pool spells it; draw-free; one line, as the ceiling requires. "goes to market" is the register's ruled figure (presumedThings row: to sale), not rewritten // R2-CODE-A item 7, R2-CODE-A-5: crime with no thieves' guild speaks of the local underworld, never a guild it lacks and never a power's NAME (a power can be hidden by hand: record 331); the powers lane's crimeSignal.js :: withTownsOwnUnderworld, word for word; one line, so no cited line moves
+  const crimeSignal = crimeSignalOf({ seats: factions, estate: institutions }); const noCrime = !crimeFaction && !crimeSignal.present; const noThievesGuild = !crimeHasThievesGuild(crimeSignal, crimeFaction?.faction); /* the crime home's reader (TAIL-CLOSE-SRC-4) */ const underworld = 'the local underworld'; const noMarket = !hasMarketInstitution(institutions); // R2-CODE-A-7 (step 1 item 4; the chair's ruling: a secret names merchants, a market or a guild only where the roster holds them): a town with no market hears the protection scheme of its households, each rewrite the whole phrase as the pool spells it; draw-free; one line, as the ceiling requires. "goes to market" is the register's ruled figure (presumedThings row: to sale), not rewritten // R2-CODE-A item 7, R2-CODE-A-5: crime with no thieves' guild speaks of the local underworld, never a guild it lacks and never a power's NAME (a power can be hidden by hand: record 331); the powers lane's crimeSignal.js :: withTownsOwnUnderworld, word for word; one line, so no cited line moves
   const milFaction = factions.find(
     f =>
       f.category === 'military' ||

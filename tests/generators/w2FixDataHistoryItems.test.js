@@ -53,6 +53,26 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { ARRIVAL_PEOPLE as PEOPLE_POOLS, ARRIVAL_SENSES as SENSE_POOLS } from '../../src/data/arrivalProse.js';
+import { textOf } from '../../src/domain/facts/textOf.js';
+
+/**
+ * RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED): an arrival liveness anchor
+ * COMPUTED from the pools' own export, never quoted: the first line of the given pools that this town's arrival prints
+ * (null where none prints, which reds the arm). The readers' towns stay the guard towns.
+ * @param {any} s @param {ReadonlyArray<any>} lines @returns {string | null}
+ */
+const arrivalLineIn = (s, lines) => {
+  const a = String(s.arrivalScene || '');
+  for (const l of lines) {
+    const t = textOf(l);
+    const said = String(typeof t === 'function' ? t(s.name) : t);
+    if (a.includes(said)) return said;
+  }
+  return null;
+};
+const PEOPLE_LINES = Object.values(PEOPLE_POOLS).flat();
+const SENSE_LINES = SENSE_POOLS.flatMap((/** @type {any} */ x) => [...(x.lines || []), ...(x.dominant || [])]);
 
 /** A reader's town re-born in the app's own shape (the seed's tier and ticked crises). */
 const born = (/** @type {string} */ seed) => {
@@ -178,12 +198,14 @@ describe('W2-FIX-DATA-HISTORY item D: a culture detail of a larger place does no
 
   /** LARGE's literals, one by one (a plain-literal alternation: exactly equivalent) */
   const LARGE_WORDS = LARGE.source.split('|');
-  /** seed -> [a phrase its own detail prints, a phrase its own arrival prints] (the liveness anchors) */
-  const PRINTS = /** @type {Record<string, [string, string]>} */ ({
+  /** seed -> [a phrase its own detail prints, a phrase its own arrival prints, or null: COMPUTED, `arrivalLineIn`] (the liveness anchors) */
+  const PRINTS = /** @type {Record<string, [string, string | null]>} */ ({
     'rww-thorp-under_siege-1': ['fenced garden plots', 'Nets hang drying on poles'],
-    'rww-hamlet-succession_void-1': ['planted courtyards', 'Barrels of salt fish stand stacked by the water'],
+    // RE-KEYED BY IDENTITY 2026-11-20 (L2): was 'Barrels of salt fish stand stacked by the water'; the sense draw moved to an appended line
+    'rww-hamlet-succession_void-1': ['planted courtyards', null],
     'rpf-thorp-occupied-13': ['deep eaves shade the open ground', 'notices are posted in two languages'],
-    'rw3-thorp-famine-1': ['a raised path and a water channel', 'Porters bent under loaded frames'],
+    // RE-KEYED BY IDENTITY 2026-11-20 (L2): was 'Porters bent under loaded frames'; the people draw moved to an appended line
+    'rw3-thorp-famine-1': ['a raised path and a water channel', null],
     'rr2s-village-calm-port-1': ['households cluster around shared wells', 'Households cluster around shared wells'],
   });
   // GUARDS: the readers' small towns that printed a larger place's detail at the base
@@ -192,7 +214,9 @@ describe('W2-FIX-DATA-HISTORY item D: a culture detail of a larger place does no
       const s = born(seed);
       expect(['thorp', 'hamlet', 'village']).toContain(s.tier);
       for (const w of LARGE_WORDS) expectAbsentWithAnchor(String(s.culturalIdentity.architecturalDetail), w, PRINTS[seed][0], `${seed} detail`);
-      for (const w of LARGE_WORDS) expectAbsentWithAnchor(String(s.arrivalScene), w, PRINTS[seed][1], `${seed} arrival`);
+      const arrivalAnchor = PRINTS[seed][1] ?? arrivalLineIn(s, [...PEOPLE_LINES, ...SENSE_LINES]);
+      expect(arrivalAnchor, `${seed}: a line of the arrival's own pools prints`).toBeTruthy();
+      for (const w of LARGE_WORDS) expectAbsentWithAnchor(String(s.arrivalScene), w, String(arrivalAnchor), `${seed} arrival`);
       expect(String(s.culturalIdentity.architecturalDetail).length).toBeGreaterThan(0);
     }, 60_000);
   }
@@ -288,7 +312,11 @@ describe('W2-FIX-DATA-HISTORY item F: the arrival and the inland fish stall say 
   });
   it('rww-hamlet-succession_void-1 (ww-541): a hamlet of 31 is told of no lanes of trades', () => {
     const s = born('rww-hamlet-succession_void-1');
-    expectAbsentWithAnchor(String(s.arrivalScene), 'Each lane seems to keep to its own trade', 'A clerk records every cartload that passes'); // the people line drawn in its place
+    // RE-KEYED BY IDENTITY 2026-11-20 (L2): the anchor was 'A clerk records every cartload that passes', the people line drawn in its
+    // place; L2 APPENDED to the people pools and the draw moved, so the anchor is the people line drawn there, COMPUTED from the pools
+    const drawn = arrivalLineIn(s, PEOPLE_LINES);
+    expect(drawn, 'a people line is drawn in its place').toBeTruthy();
+    expectAbsentWithAnchor(String(s.arrivalScene), 'Each lane seems to keep to its own trade', String(drawn)); // the people line drawn in its place
     expect(String(s.arrivalScene)).toMatch(/\S/);
   }, 60_000);
 });

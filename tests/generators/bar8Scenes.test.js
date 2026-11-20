@@ -272,7 +272,10 @@ describe('BR23 (3): enchanting offered, the arcane trade not at work', () => {
   const states = (s) => [admits(trade(), s), admits(noSign(), s), admits(slow(), s)];
   test('the trade line has exactly the two twins (the new one last in the pool)', () => {
     expect(twinsOf(pool(), trade())).toEqual([noSign(), slow()]);
-    expect(pool()[pool().length - 1]).toBe(slow());
+    // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35): "last in the pool" recorded the append of 2026-11-17, not a
+    // law; L2 APPENDED three lines after it. The law is the twins' order above (the LAST admitted twin answers, `arrivalScene.js ::
+    // drawAdmitted`), kept, and the twin keeps the index it was born at (6), so no row's id moved
+    expect(pool().indexOf(slow())).toBe(6);
   });
   test('C5157\'s town, bar0-city-under_siege+famine-rand-47: enchanting offered, the tower impaired by the siege', () => {
     const s = town('bar0-city-under_siege+famine-rand-47');
