@@ -44,7 +44,8 @@
  *            (shrink-only); a tier-2 band (and a sentence chosen by one) is RECORDED with its count.
  * NOT REACHED HERE (named): master's stored shape (RV9_GEN), the hand veil, the campaign map, the import send; the
  * reader's gate on the full differ is the seat's (SUB-BRIEF-VR7 R6).
- * The report (env R6_OUT, a directory): counterfactual.json.
+ * The report (env R6_OUT, a directory): counterfactual.json, inversion.json, keyorder-ruling-reorder.json, keyorder-ruling-value.json,
+ * keyorder-ruling-keyset.json.
  */
 import { describe, it, expect, beforeAll } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
@@ -110,18 +111,33 @@ function diff(a, b, p = '', out = []) {
   return out;
 }
 
-/** Every leaf (or whole value at an array path) whose differ-normalised path the regex matches, keyed by its indexed path. */
-function valuesAt(doc, re) {
+/**
+ * VR45, THE KEY-ORDER RULING (the seat, VEIL-22, 2026-11-20; stood by the chair's word as VR45): jsonb stores an object's keys in its
+ * own fixed order (a function of the key SET alone: length, then bytes), so the server's key order carries no document
+ * data, and the page reads every value by its key. The twin-versus-server comparison (MAIN) and the CONTROL arm compare
+ * OBJECTS MODULO KEY ORDER: canonical JSON, object keys sorted, recursively. ARRAY ORDER IS KEPT EXACTLY (VR21: order
+ * and density are part of what is judged), and every value is compared as before. NOTHING ELSE CHANGES: the judges, the
+ * RED arm and the INVERSION arm keep the plain `JSON.stringify` (`valuesAt` without `canon`). Not wider than key order:
+ * the VR45 arms below plant (a) an array reorder, (b) a value change and (c) an added and a missing key, at the entry
+ * and at the deepest object of a served document, and each is still caught: THE KEY SET IS STILL COMPARED EXACTLY.
+ */
+const canon = (v) => JSON.stringify(v, (_k, x) => (isRec(x) ? Object.fromEntries(Object.keys(x).sort().map((k) => [k, x[k]])) : x));
+
+/** Every leaf (or whole value at an array path) whose differ-normalised path the regex matches, keyed by its indexed path.
+ * `ser` serialises each value: plain `JSON.stringify` unless a comparison under the key-order ruling passes `canon`. */
+function valuesAt(doc, re, ser = JSON.stringify) {
   const out = new Map();
   const walk = (v, norm, exact) => {
-    if (norm && (re.test(norm) || re.test(`${norm} (only in A)`))) { out.set(exact, JSON.stringify(v)); return; }
+    if (norm && (re.test(norm) || re.test(`${norm} (only in A)`))) { out.set(exact, ser(v)); return; }
     if (Array.isArray(v)) v.forEach((x, i) => walk(x, `${norm}[]`, `${exact}[${i}]`));
     else if (isRec(v)) for (const k of Object.keys(v)) walk(v[k], norm ? `${norm}.${k}` : k, exact ? `${exact}.${k}` : k);
   };
   walk(doc, '', '');
   return out;
 }
-const sameAt = (a, b, re) => { const x = valuesAt(a, re); const y = valuesAt(b, re); return x.size === y.size && [...x].every(([k, v]) => y.get(k) === v); };
+const sameAt = (a, b, re, ser = JSON.stringify) => { const x = valuesAt(a, re, ser); const y = valuesAt(b, re, ser); return x.size === y.size && [...x].every(([k, v]) => y.get(k) === v); };
+/** VR45 applied (CONTROL and twin-versus-server only): equal modulo object key order, arrays kept in order. */
+const sameAtModKeyOrder = (a, b, re) => sameAt(a, b, re, canon);
 /** A person reference read by kind, not by value (R4, VR10: every id is re-keyed per read). */
 const REF_KEYS = new Set(['id', 'from', 'to', 'npc1Id', 'npc2Id', 'holderId', 'targetId', 'handler']);
 const unkeyed = (v) => JSON.parse(JSON.stringify(v, (k, x) => (REF_KEYS.has(k) && typeof x === 'string' ? '<ref>' : x)));
@@ -301,7 +317,8 @@ describe('VR4 G2: every built registry row holds on born towns against their cou
       const ref = unkeyed(dm ? t.unveiledDm : t.unveiled);
       for (const row of built().filter((x) => x.when === 'house-hidden')) {
         const re = new RegExp(row.path);
-        for (const eng of ['server', 'twin']) if (!sameAt(unkeyed(open[eng]), ref, re)) bad.push(`${t.seed} dm=${dm} ${eng}: ${row.id} moved on a share hiding nothing`);
+        // VR45 (see `canon`): objects modulo key order; arrays, values and key sets exactly
+        for (const eng of ['server', 'twin']) if (!sameAtModKeyOrder(unkeyed(open[eng]), ref, re)) bad.push(`${t.seed} dm=${dm} ${eng}: ${row.id} moved on a share hiding nothing`);
       }
       // and a withhold-always row is withheld there too (whatever the veil: VR16)
       for (const row of built().filter((x) => x.rule === 'withhold' && x.when === 'always')) {
@@ -368,6 +385,100 @@ describe('VR4 G2: every built registry row holds on born towns against their cou
     expect(sameAt(moved, revisit(moved), re), `${figure.row.id} moved by 7`).toBe(false);
   });
 
+  /** VR45's own arms: the ruling is not wider than key order. On a served array the built rows judge entry by
+   * entry (both comparisons the ruling governs: MAIN's twin against the server, CONTROL's share hiding nothing against the
+   * unveiled projection), the clean pair passes, every object's keys reversed still passes (the ruling's whole effect),
+   * and a planted change is caught: one arm reverses the array's order, the other moves one value. */
+  const stepsOf = (exact) => exact.split(/\.|\[(\d+)\]/).filter((x) => x !== undefined && x !== '');
+  const getAt = (doc, exact) => stepsOf(exact).reduce((o, k) => (o == null ? o : o[k]), doc);
+  const reverseKeys = (v) => JSON.parse(JSON.stringify(v, (_k, x) => (isRec(x) ? Object.fromEntries(Object.keys(x).reverse().map((k) => [k, x[k]])) : x)));
+  /** A built row and a served array it matches entry by entry (two or more entries, the entries distinct), for a pair. */
+  const arrayCase = (pairs, judged) => {
+    for (const { a, b, where } of pairs) for (const row of judged) {
+      const re = new RegExp(row.path);
+      if (!sameAtModKeyOrder(a, b, re)) continue;
+      const groups = new Map();
+      for (const [k, v] of valuesAt(a, re, canon)) { const m = /^(.*)\[(\d+)\]$/.exec(k); if (m) groups.set(m[1], [...(groups.get(m[1]) || []), v]); }
+      const hit = [...groups].find(([at, vs]) => vs.length > 1 && new Set(vs).size === vs.length && Array.isArray(getAt(a, at)));
+      if (hit) return { row, re, a, b, where, array: hit[0] };
+    }
+    return null;
+  };
+  const rulingPairs = () => {
+    const main = []; const control = [];
+    for (const t of counterfactualTowns()) {
+      for (const r of t.reads) main.push({ a: unkeyed(r.A.server), b: unkeyed(r.A.twin), where: `MAIN ${t.seed} ${r.veil} server vs twin` });
+      for (const dm of [false, true]) control.push({ a: unkeyed(t.open[String(dm)].server), b: unkeyed(dm ? t.unveiledDm : t.unveiled), where: `CONTROL ${t.seed} dm=${dm} open server vs unveiled` });
+    }
+    return { main, control };
+  };
+  const rulingArm = (plant) => {
+    const { main, control } = rulingPairs();
+    const out = {};
+    // each comparison over the rows it judges: MAIN every built row, CONTROL the built house-hidden rows
+    for (const [arm, pairs, judged] of [['main', main, built()], ['control', control, built().filter((x) => x.when === 'house-hidden')]]) {
+      const c = arrayCase(pairs, judged);
+      expect(c, `${arm}: a built row matching a served array of two or more distinct entries`).toBeTruthy();
+      expect(sameAtModKeyOrder(c.a, c.b, c.re), `${arm} ${c.row.id} @ ${c.where}: clean`).toBe(true);
+      expect(sameAtModKeyOrder(reverseKeys(c.a), c.b, c.re), `${arm} ${c.row.id}: every object's keys reversed still equal (the ruling)`).toBe(true);
+      const planted = clone(c.a);
+      plant(getAt(planted, c.array));
+      out[arm] = { row: c.row.id, where: c.where, array: c.array, caught: !sameAtModKeyOrder(planted, c.b, c.re), caughtKeysReversed: !sameAtModKeyOrder(reverseKeys(planted), c.b, c.re) };
+    }
+    return out;
+  };
+
+  it('VR45 (a): a planted ARRAY REORDER is still caught, on both comparisons the ruling governs', () => {
+    const out = rulingArm((arr) => arr.reverse());
+    console.log(`R6 RULING reorder: ${JSON.stringify(out)}`);
+    if (OUT) { mkdirSync(OUT, { recursive: true }); writeFileSync(join(OUT, 'keyorder-ruling-reorder.json'), JSON.stringify(out, null, 1)); }
+    for (const k of ['main', 'control']) { expect(out[k].caught, `${k} reorder`).toBe(true); expect(out[k].caughtKeysReversed, `${k} reorder, keys reversed`).toBe(true); }
+  });
+
+  it('VR45 (b): a planted VALUE CHANGE is still caught, on both comparisons the ruling governs', () => {
+    const out = rulingArm((arr) => {
+      const e = arr[0];
+      if (isRec(e)) { const k = Object.keys(e).find((x) => typeof e[x] === 'string' || typeof e[x] === 'number'); e[k] = typeof e[k] === 'number' ? e[k] + 1 : `${e[k]} (planted)`; }
+      else arr[0] = typeof e === 'number' ? e + 1 : `${e} (planted)`;
+    });
+    console.log(`R6 RULING value: ${JSON.stringify(out)}`);
+    if (OUT) { mkdirSync(OUT, { recursive: true }); writeFileSync(join(OUT, 'keyorder-ruling-value.json'), JSON.stringify(out, null, 1)); }
+    for (const k of ['main', 'control']) { expect(out[k].caught, `${k} value`).toBe(true); expect(out[k].caughtKeysReversed, `${k} value, keys reversed`).toBe(true); }
+  });
+
+  it('VR45 (c): a planted ADDED key and a planted MISSING key are still caught, at the entry and at any depth (the key set compared exactly)', () => {
+    const plantKey = (e, how) => { if (how === 'added') e.vr45Planted = 1; else delete e[Object.keys(e)[0]]; };
+    const out = {};
+    for (const how of ['added', 'missing']) {
+      // on a served array's entry, through both comparisons VR45 governs
+      out[how] = rulingArm((arr) => { const e = arr.find((x) => isRec(x) && Object.keys(x).length > 1); expect(e, 'an entry with two or more keys').toBeTruthy(); plantKey(e, how); });
+      // at the DEEPEST object of every served document (server and twin, every read): canon tells the key set apart
+      let deep = 0; let caught = 0; let maxDepth = 0;
+      for (const t of counterfactualTowns()) for (const r of t.reads) for (const eng of ['server', 'twin']) {
+        const doc = unkeyed(r.A[eng]);
+        let best = null;
+        const walk = (v, d) => { if (isRec(v) && Object.keys(v).length > 1 && (!best || d > best.d)) best = { v, d }; if (Array.isArray(v)) v.forEach((x) => walk(x, d + 1)); else if (isRec(v)) Object.values(v).forEach((x) => walk(x, d + 1)); };
+        walk(doc, 0);
+        expect(canon(reverseKeys(doc)), 'every object\'s keys reversed: equal').toBe(canon(doc));
+        const planted = clone(doc);
+        let at = null;
+        const find = (v, d) => { if (at) return; if (isRec(v) && Object.keys(v).length > 1 && d === best.d) { at = v; return; } if (Array.isArray(v)) v.forEach((x) => find(x, d + 1)); else if (isRec(v)) Object.values(v).forEach((x) => find(x, d + 1)); };
+        find(planted, 0);
+        plantKey(at, how);
+        deep += 1; maxDepth = Math.max(maxDepth, best.d);
+        if (canon(planted) !== canon(doc) && canon(reverseKeys(planted)) !== canon(doc)) caught += 1;
+      }
+      out[how].deepest = { documents: deep, caught, maxDepth };
+    }
+    console.log(`R6 VR45 (c) keys: ${JSON.stringify(out)}`);
+    if (OUT) { mkdirSync(OUT, { recursive: true }); writeFileSync(join(OUT, 'keyorder-ruling-keyset.json'), JSON.stringify(out, null, 1)); }
+    for (const how of ['added', 'missing']) {
+      for (const k of ['main', 'control']) { expect(out[how][k].caught, `${how} ${k}`).toBe(true); expect(out[how][k].caughtKeysReversed, `${how} ${k}, keys reversed`).toBe(true); }
+      expect(out[how].deepest.documents).toBeGreaterThan(0);
+      expect(out[how].deepest.caught, `${how}: at the deepest object`).toBe(out[how].deepest.documents);
+    }
+  });
+
   it('MAIN: every built (a) row equals its counterfactual and every built (b) row is absent, on every town, veil, Reveal setting, read and engine; what cannot yet be judged is named', () => {
     const live = built();
     const fails = []; const per = {};
@@ -383,7 +494,8 @@ describe('VR4 G2: every built registry row holds on born towns against their cou
     // the twin beside the server: on a built row, the two engines serve the same values (references read by kind)
     for (const t of counterfactualTowns()) for (const r of t.reads) for (const row of live) {
       const re = new RegExp(row.path);
-      if (!sameAt(unkeyed(r.A.server), unkeyed(r.A.twin), re)) fails.push(`${row.id} @ ${t.seed} ${r.veil}: the twin serves otherwise than the server`);
+      // VR45 (see `canon`): jsonb's key order carries no data; arrays, values and key sets compared exactly
+      if (!sameAtModKeyOrder(unkeyed(r.A.server), unkeyed(r.A.twin), re)) fails.push(`${row.id} @ ${t.seed} ${r.veil}: the twin serves otherwise than the server`);
     }
     // NAMED: what MAIN cannot judge yet, and what each unbuilt row would do were it marked built today
     const unbuilt = rows.filter((r) => !r.built && (r.rule === 'withhold' || r.rule === 'recompose'));

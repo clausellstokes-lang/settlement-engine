@@ -1,0 +1,16 @@
+{
+ "main": {
+  "row": "cast.stakes",
+  "where": "MAIN city-calm-1 default server vs twin",
+  "array": "stress.cast.stakes",
+  "caught": true,
+  "caughtKeysReversed": true
+ },
+ "control": {
+  "row": "cast.stakes",
+  "where": "CONTROL city-calm-1 dm=false open server vs unveiled",
+  "array": "stress.cast.stakes",
+  "caught": true,
+  "caughtKeysReversed": true
+ }
+}

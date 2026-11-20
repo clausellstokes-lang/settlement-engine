@@ -990,22 +990,6 @@
   "cast.stakes @ city-famine-7 shut +DM server/gallery: stress.cast.stakes[].factionId: A=\"Thieves' Guild\" | counterfactual=\"Merchant Guilds\"",
   "cast.stakes @ city-famine-7 shut +DM twin/gallery: stress.cast.stakes[].factionId: A=\"Thieves' Guild\" | counterfactual=\"Merchant Guilds\"",
   "cast.stakes @ city-famine-7 shut +DM twin/gallery: stress.cast.stakes[].stake: A=\"gains\" | counterfactual=\"split\"",
-  "cast.stakes @ city-famine-7 shut +DM twin/gallery: stress.cast.stakes[].reason: A=\"crime gains from the disorder\" | counterfactual=\"it could side with either camp\"",
-  "cast.stakes @ city-calm-1 default: the twin serves otherwise than the server",
-  "cast.stakes @ city-calm-1 shut: the twin serves otherwise than the server",
-  "cast.stakes @ city-calm-1 default +DM: the twin serves otherwise than the server",
-  "cast.stakes @ city-calm-1 shut +DM: the twin serves otherwise than the server",
-  "cast.stakes @ city-insurgency-3 default: the twin serves otherwise than the server",
-  "cast.stakes @ city-insurgency-3 shut: the twin serves otherwise than the server",
-  "cast.stakes @ city-insurgency-3 default +DM: the twin serves otherwise than the server",
-  "cast.stakes @ city-insurgency-3 shut +DM: the twin serves otherwise than the server",
-  "cast.stakes @ metropolis-indebted-5 default: the twin serves otherwise than the server",
-  "cast.stakes @ metropolis-indebted-5 shut: the twin serves otherwise than the server",
-  "cast.stakes @ metropolis-indebted-5 default +DM: the twin serves otherwise than the server",
-  "cast.stakes @ metropolis-indebted-5 shut +DM: the twin serves otherwise than the server",
-  "cast.stakes @ city-famine-7 default: the twin serves otherwise than the server",
-  "cast.stakes @ city-famine-7 shut: the twin serves otherwise than the server",
-  "cast.stakes @ city-famine-7 default +DM: the twin serves otherwise than the server",
-  "cast.stakes @ city-famine-7 shut +DM: the twin serves otherwise than the server"
+  "cast.stakes @ city-famine-7 shut +DM twin/gallery: stress.cast.stakes[].reason: A=\"crime gains from the disorder\" | counterfactual=\"it could side with either camp\""
  ]
 }

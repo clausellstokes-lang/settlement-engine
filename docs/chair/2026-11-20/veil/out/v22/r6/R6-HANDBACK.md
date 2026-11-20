@@ -1,4 +1,9 @@
-# R6 HAND-BACK (VEIL-22, the re-cut) — STOPPED at unit 1 on the stop rule
+# R6 HAND-BACK (VEIL-22, the re-cut)
+
+**Second builder (2026-11-20, from e56a0d42f): units 1-3 of the seat's continuation below the first builder's record.**
+The first builder's record follows unchanged (it stopped at unit 1 on the stop rule).
+
+# FIRST BUILDER — STOPPED at unit 1 on the stop rule
 
 Test-only builder for VEIL-22, worktree `/home/user/wt/r6`, branch `v22-r6`, cut from the lane tip 49d3de5b2. No file under
 `src/` or `supabase/` changed; `scripts/` only for the manifest row the counterfactual test owes (kept beside R2's
@@ -56,3 +61,23 @@ caught **24 of 24**; a family value the registry does not withhold (`crimeTypes`
 One `npx vitest run tests/domain/display/criminalVeilSwitch.test.js` ran with cwd `/home/user/settlement-engine` (a
 backgrounded `cd` chain). It changed no tracked file there (`git status` clean) but vitest wrote its own cache
 (`node_modules/.vite/vitest/.../results.json`, `node_modules/.vite-temp`) in that checkout. Left as found.
+
+# SECOND BUILDER (VEIL-22's continuation, 2026-11-20)
+
+## Unit 1, VR45 (the seat's key-order ruling, stood by the chair as VR45, arm (c) added) — CONFIRMED, executed
+Applied in `tests/security/rosterChoiceCounterfactual.pglite.test.js` (comment `VR45, THE KEY-ORDER RULING` at `canon`):
+`canon` = JSON with object keys sorted, recursively; arrays untouched. Used ONLY by `sameAtModKeyOrder`, called in two
+places: CONTROL's "nothing moves" and MAIN's twin-versus-server. The judges, RED and INVERSION keep plain `JSON.stringify`.
+Run (`counterfactual-keyorder-ruled.txt`; reports `counterfactual.json`, `inversion.json`, `keyorder-ruling-*.json`):
+**6 of 7 green; MAIN red 50 lines; twin-vs-server lines 0; CONTROL green** (was 8 red).
+- VR45 arms (each on MAIN's pair `cast.stakes` @ city-calm-1 default server-vs-twin AND CONTROL's pair city-calm-1 open
+  server-vs-unveiled; clean pair passes, every object's keys reversed passes, the plant caught both plain and keys-reversed):
+  (a) array reversed: caught 2/2; (b) one value moved: caught 2/2; (c) a key ADDED / a key MISSING on the entry: caught
+  2/2 each, and at the DEEPEST object of every served document (48 documents, server and twin, every read; depth up to 6):
+  added caught 48/48, missing caught 48/48 (`keyorder-ruling-keyset.json`).
+- MAIN's remaining reds (NOT this builder's; MAIN unaltered):
+  1. `cast.stakes` @ city-famine-7, 30 lines (default and shut, Reveal off/on; server gallery, twin, server link): a stake
+     `Thieves' Guild / gains / "crime gains from the disorder"` against the counterfactual's `Merchant Guilds / split`. The
+     stake is kept because its power is still served. CURE: R3 (`power.entry`: the criminal power withheld, its stake with it).
+  2. `cast.roles` @ city-insurgency-3, 20 lines: reason `"holds the seat, and the right to it is already in dispute"`
+     against `"holds the seat"`: the wording carries the hidden house. CURE: R3/R5 (re-class `cast.roles.reason`).
