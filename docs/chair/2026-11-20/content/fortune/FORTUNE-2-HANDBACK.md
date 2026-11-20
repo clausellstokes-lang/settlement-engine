@@ -1,4 +1,4 @@
-# FORTUNE-2 hand-back (kept current; last written 2026-11-20 13:41:10 UTC by `date -u`)
+# FORTUNE-2 hand-back (kept current; last written 2026-11-20 14:01:51 UTC by `date -u`)
 
 For a successor (FORTUNE-3): this file and the briefs (`briefs/COMMON.md`, `U2.md` to `U4.md`) are all you need.
 Lane branch `lane/fortune-2-2026-11-20` (taken at 57a79cc2d, FORTUNE-1's hand-over). The chair is
@@ -18,6 +18,11 @@ at most 300 words, with your count (the chair reads the true one; your own runs 
    count line.
 5. The chair, 13:17 UTC: `tests/lint/.tuning-inventory.json`'s `measuredAtSha` (acf2c2180, U1's builder's pre-amend
    commit, not on the lane) is re-taken by its own door at the NEXT merge, with the cause in the commit; not before.
+7. The chair, 13:56 UTC: the owner, "We have a weekly reset so don't mind that": builders side by side where path-disjoint;
+   nothing stays only in a container. NEW PUSH RULE: never commit on a branch while its push is in flight; `git ls-remote`
+   before every push and push only if the remote differs.
+8. The chair, 13:56 UTC: NEW UNIT U5 "MERITS OF RULE" (`briefs/U5.md`): measure and propose, build nothing until ruled;
+   lands DARK under the fortune law; numbers in the leaf's table; must not delay U2, U3 or "factionDynamics released".
 6. The chair, 13:17 UTC: the working line moved to 43ab0f5eb (point 82). Merge it into the lane BEFORE THE LAST UNIT
    (U4), not before.
 
@@ -30,6 +35,7 @@ at most 300 words, with your count (the chair reads the true one; your own runs 
 | U2 fortune | BUILDER OUT (seated ~12:15); WIP = its red test only, prosperity.js not yet changed | local lane/fortune-2-u2-2026-11-20, PUSHED as lane/fortune-2-2026-11-20-u2-wip | d0b3fc4ea (wip) |
 | U3 standing + play-time guard | BUILDER OUT (seated ~12:15); WIP = source edits and both tests, its gates running | local lane/fortune-2-u3-2026-11-20, PUSHED as lane/fortune-2-2026-11-20-u3-wip | 383903a85 (wip) |
 | readerShapeResolver 260>256 | ANSWERED: the gate's long TMPDIR (see section 3); not U1's, not the line's | — | — |
+| U5 merits of rule (measure + propose) | BUILDER OUT (seated ~14:05) | local lane/fortune-2-u5-2026-11-20 (from f20b80b0a); push as lane/fortune-2-2026-11-20-u5-wip | — |
 | U4 FS7 | after U2+U3 and the line's merge | lane/fortune-2-u4-2026-11-20 | — |
 | re-measure forced on; owner's page re-check; confinement; final hand-back; "FORTUNE <commit>" | after U4 | — | — |
 
