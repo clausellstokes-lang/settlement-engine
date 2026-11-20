@@ -17,12 +17,12 @@
  * THE CRISIS DIMENSION: the leads of a feast and of a fair, and the harvest's gloss, can clash with a town's present
  * crisis, so their pools OPT IN as crisis-scoped (silence then reads as calm): a line safe under any crisis says so
  * (`crisis: ['any']`); a line that contradicts a crisis family EXCLUDES it and has a TWIN that says only what is kept.
- * The families are the vocabulary's own (factVocabulary.js :: CRISIS_FAMILY_KINDS):
- *   hunger (famine, a siege; and any crisis while the food record reads a deficit): every feast lead but its twins
- *     ("a common feast", "a feast eaten in common", …) and the harvest glosses that give thanks.
- *   threat (a siege, an occupation, the beasts at the door): "a fair of stalls and trading", "a fair with traders from
- *     outside". War is the unrest family's, not the threat's: no line here excludes it.
- *   succession and unrest: no line here contradicts them (no line says the seat is settled or the streets are quiet).
+ * Every excluded line declares its family (`excludes: crisis: F`) and no crisis value, so in its crisis-scoped pool it is
+ * refused under ANY active crisis (silence reads calm: factVocabulary.js :: crisisAdmits) and under F by name; it
+ * resolves to its twin. The families are the vocabulary's own (factVocabulary.js :: CRISIS_FAMILY_KINDS):
+ *   hunger (famine, a siege; any crisis with a food deficit): the four feast leads, the harvest glosses that give thanks.
+ *   threat (a siege, an occupation, the beasts at the door): "a fair of stalls and trading", "a fair with traders from outside".
+ * (TRAD-4's ruling, vetoable by the owner: kept as at the base, the calmest; no `crisis: any` beside an exclusion.)
  * A line never says what became of the rite this year: that is the simulation's own record (`lastOutcome`), which the
  * composer does not read.
  *

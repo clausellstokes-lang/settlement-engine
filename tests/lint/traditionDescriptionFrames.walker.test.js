@@ -293,6 +293,8 @@ describe('traditionDescriptionFrames — THE CRISIS DIMENSION (CTR10; TRAD-4 uni
     // hunger: a feast eaten in common, and thanks given for the harvest, contradict a famine or a siege's want (and any
     // crisis while the food record reads a deficit); threat: a fair of stalls and of traders from outside contradicts a
     // siege, an occupation or the beasts at the door. Each family's kinds are the vocabulary's own (CRISIS_FAMILY_KINDS).
+    // Declaring no crisis value in a crisis-scoped pool, each excluded line is ALSO refused under any other active crisis
+    // (silence reads calm) and resolves to its twin: the family names the contradiction, not the whole of the refusal.
     expect(families).toEqual({ 'lead.feast': ['crisis: hunger'], 'lead.fair': ['crisis: threat'], 'gloss.harvest': ['crisis: hunger'] });
     expect([...CRISIS_FAMILY_KINDS.hunger]).toEqual(['famine', 'under_siege']);
     expect([...CRISIS_FAMILY_KINDS.threat]).toEqual(['under_siege', 'occupied', 'monster_pressure']);
