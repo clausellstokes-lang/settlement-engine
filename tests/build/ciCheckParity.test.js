@@ -429,6 +429,41 @@ describe('npm run check ↔ parallel ci.yml gate parity', () => {
     expect(verdictRuns).toContain('if [ "$SHARDS_RESULT" != success ]; then');
   });
 
+  it('the two browser jobs run in Playwright\'s image at the LOCKFILE\'s exact version, and their install is the launch probe with its fallback', () => {
+    // CI-FIT point 75 (2026-11-20): the jobs' `npx playwright install --with-deps` spent 43m38s
+    // (e2e) and 9m45s (performance) in APT at 29ec255fe; the browsers took about 10 s. Both jobs
+    // now run in `mcr.microsoft.com/playwright:v<version>-noble`, which carries the browsers and
+    // their libraries. An image of ANOTHER version carries browsers this playwright-core does not
+    // launch (every launch would fall back to the slow install, silently restoring the cost), so
+    // the tag is pinned here to package-lock.json: a Playwright bump that forgets the workflow,
+    // or the reverse, turns this red.
+    const ci = readFileSync(join(ROOT, '.github/workflows/ci.yml'), 'utf8');
+    const lock = JSON.parse(readFileSync(join(ROOT, 'package-lock.json'), 'utf8'));
+    const versions = ['node_modules/@playwright/test', 'node_modules/playwright', 'node_modules/playwright-core']
+      .map((key) => lock.packages?.[key]?.version);
+    // LIVENESS ANCHOR: the lockfile really names one Playwright version, so the equalities below
+    // cannot pass on an undefined read.
+    expect(versions[0], 'package-lock.json must lock @playwright/test').toMatch(/^\d+\.\d+\.\d+$/);
+    expect(new Set(versions).size, `the three Playwright packages must lock one version: ${versions.join(', ')}`).toBe(1);
+    const expected = `mcr.microsoft.com/playwright:v${versions[0]}-noble`;
+
+    const probes = { e2e: ['chromium', 'webkit'], performance: ['chromium'] };
+    for (const [id, browsers] of Object.entries(probes)) {
+      const job = jobBody(ci, id);
+      expect(job, `ci.yml must declare the ${id} job`).toBeTruthy();
+      const images = [...job.matchAll(/^\s*container:\s*\n\s*image:\s*(\S+)\s*$/gm)].map((m) => m[1]);
+      expect(images, `${id} runs in exactly one container, the lockfile's Playwright image`).toEqual([expected]);
+      const runs = runCommands(job);
+      // The install step is the probe, naming exactly the browsers the job launches; the old
+      // install survives ONLY as the probe's fallback (in the script), never as a step of its own.
+      expect(runs).toContain(`node scripts/ensure-playwright-browsers.mjs ${browsers.join(' ')}`);
+      expect(runs.filter((run) => /playwright install/.test(run)), `${id} must not install on the runner directly`).toEqual([]);
+      // The anti-vacuity guards stay: the probe cannot make a job pass that ran no test.
+      expect(runs.filter((run) => /scripts\/check-e2e-not-vacuous\.mjs --results /.test(run)).length,
+        `${id} keeps its runtime "is not vacuous" guard`).toBeGreaterThan(0);
+    }
+  });
+
   it('every setup-node use reads the repository runtime pin', () => {
     const ci = readFileSync(join(ROOT, '.github/workflows/ci.yml'), 'utf8');
     const setupCount = (ci.match(/uses:\s*actions\/setup-node@/g) || []).length;

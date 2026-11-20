@@ -401,6 +401,22 @@ jobs:
     # other in the performance job below). The longest CONCLUDED job is 14m22s (run 44282875950,
     # job 134727896661, with a 1m10s install); carrying the 13m57s install instead it is
     # 14m22s - 1m10s + 13m57s = 27m09s; x 1.5 = 40m44s -> 45.
+    # THE SLOW INSTALL, CURED STRUCTURALLY (CI-FIT point 75, 2026-11-20; the sixth chair's ruling:
+    # one more occurrence, then a cure). It recurred at 29ec255fe (run 44494042373, job
+    # 135456581358): "Install Playwright browsers" took 43m38s and the run was cut 52 s into the
+    # tests. Again APT, not the browsers: "Fetched 123 MB in 42min 30s (48.2 kB/s)" for 181 packages
+    # from us-east-2.ec2.archive.ubuntu.com; the four browser downloads took 11 s. So the job no
+    # longer installs system packages on the runner: it runs IN Playwright's own image at the
+    # lockfile's exact version, which carries the browsers and every library they need. The tag is
+    # pinned to package-lock.json by tests/build/ciCheckParity.test.js (they cannot drift apart),
+    # and the `performance` job below uses the SAME image. The install step is now a LAUNCH probe
+    # (scripts/ensure-playwright-browsers.mjs): if a browser the image serves does not launch, it
+    # falls back to the old `npx playwright install --with-deps`, so a broken image costs time,
+    # never a vacuous run. `--ipc=host`: Chromium's shared memory, as Playwright's Docker guide
+    # advises. The cap of 45 stands until a run concludes in the image (then the house rule).
+    container:
+      image: mcr.microsoft.com/playwright:v1.60.0-noble
+      options: --ipc=host
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
@@ -421,8 +437,10 @@ jobs:
       # ("Executable doesn't exist … webkit"); the anti-vacuity guards below now
       # also make an all-skipped mobile run a hard failure instead of green-on-
       # nothing, so the missing engine can no longer hide.
+      # In the image both are already installed with their libraries: this LAUNCHES each, and only
+      # installs (with the system packages) if one does not launch. See the job's comment.
       - name: Install Playwright browsers (chromium + webkit)
-        run: npx playwright install --with-deps chromium webkit
+        run: node scripts/ensure-playwright-browsers.mjs chromium webkit
 
       # Static anti-vacuity guard: prove the project actually enumerates specs
       # BEFORE running (a renamed/typo'd project would list zero tests and exit 0).
@@ -490,6 +508,14 @@ jobs:
     # went to APT ("Fetched 32.1 MB in 9min 27s (56.5 kB/s)" from the Ubuntu mirror; the browser
     # downloads took about 9 s), so no browser cache is added. 12m13s x 1.5 = 18m20s -> 30. At the
     # e2e job's worse install (13m57s) this job would take about 15m41s, which 30 still clears.
+    # THE INSTALL, CURED WITH THE E2E JOB'S (CI-FIT point 75, 2026-11-20): at 29ec255fe (job
+    # 135456581132) "Install Playwright Chromium" took 9m45s, again APT ("Fetched 32.1 MB in 8min
+    # 38s (61.9 kB/s)"). This job runs in the SAME image as `e2e` (one tag, pinned to the lockfile
+    # by tests/build/ciCheckParity.test.js) and its install step is the same launch probe with the
+    # same fallback. The cap of 30 stands until a run concludes in the image (then the house rule).
+    container:
+      image: mcr.microsoft.com/playwright:v1.60.0-noble
+      options: --ipc=host
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
@@ -502,8 +528,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # In the image it is already installed with its libraries: this LAUNCHES it, and only installs
+      # (with the system packages) if it does not launch. See the e2e job's comment.
       - name: Install Playwright Chromium
-        run: npx playwright install --with-deps chromium
+        run: node scripts/ensure-playwright-browsers.mjs chromium
 
       - name: Build the local-data production artifact
         run: npm run build -- --mode e2e
