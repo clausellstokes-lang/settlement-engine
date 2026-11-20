@@ -55,7 +55,7 @@ import { ARCHETYPE_LADDER, FRAME_TUNING, GENERATOR_REPLACED_SIDES, LODGING_HOUSE
  *   institution?: unknown, memberships?: unknown }} FrameNpc
  * @typedef {{ faction?: unknown, category?: unknown, power?: unknown, isGoverning?: unknown, captureState?: unknown }} FramePower
  * @typedef {{ type?: unknown, description?: unknown, factions?: unknown, plotHooks?: unknown }} FrameTension
- * @typedef {{ from?: unknown, to?: unknown, typeName?: unknown }} FrameTie
+ * @typedef {{ from?: unknown, to?: unknown, typeName?: unknown, type?: unknown }} FrameTie
  * @typedef {{ _seed?: unknown, name?: unknown, npcs?: unknown, relationships?: unknown, stress?: unknown,
  *   history?: { currentTensions?: unknown } | null,
  *   powerStructure?: { factions?: unknown, conflicts?: unknown, publicLegitimacy?: unknown } | null,
@@ -63,7 +63,7 @@ import { ARCHETYPE_LADDER, FRAME_TUNING, GENERATOR_REPLACED_SIDES, LODGING_HOUSE
  *
  * @typedef {Object} SideFace
  * @property {FaceKind} kind         the rung that filled the side
- * @property {'seat'|'head'|'commander'|'tie'|'hook'|'trade'|'criminal'|'criminalHouse'|'outsider'} rule the rule that fired
+ * @property {'seat'|'head'|'member'|'commander'|'tie'|'hook'|'trade'|'criminal'|'criminalHouse'|'outsider'} rule the rule that fired
  * @property {string} [npcId]         the person standing there (absent for an outsider or a house)
  * @property {string} [name]          their name, or the house's name in prose for a criminal house
  * @property {string} [viaId]         for an outsider: the person they are reached through
@@ -93,6 +93,8 @@ import { ARCHETYPE_LADDER, FRAME_TUNING, GENERATOR_REPLACED_SIDES, LODGING_HOUSE
 export const FRAME_REASONS = Object.freeze({
   seat: 'because {they} [holds|hold] the seat',
   head: 'because {they} [heads|head] {power}',
+  // FRAME-6 · F1 (the chair, 2026-11-20 15:35): a power's own member, not its head, on that power's row
+  member: 'because {they} [is|are] one of {power}',
   commander: 'because {they} [commands|command] {power}',
   debtor: 'because {they} [owes|owe] {other} a debt not yet paid',
   creditor: 'because {other} owes {them} a debt not yet paid',
@@ -124,6 +126,16 @@ export const FRAME_TIE_GLOSS = Object.freeze(/** @type {Record<string, string>} 
   'Outstanding Debt': 'are tied by a debt not yet paid',
   tieDefault: 'are closely tied',
 }));
+
+/**
+ * THE TIES OF STANDING (FRAME-6 · F1, the chair's ruling of 2026-11-20 15:35): the kinds of tie, by the record's own
+ * `relationships[].type`, through which a person who is no member of a power may stand on that power's row, because they
+ * stand WITH one of its members: an alliance (`ally`), respect (`respect`), teacher and pupil (`mentor_student`), family
+ * (`family`), a patron and the one they keep (`patron_client`). Never a rivalry (`rival`), an enmity (`enemy`), leverage
+ * (`political`, the record's "Mutual Leverage") or a debt one holds over the other (`debtor_creditor`).
+ * @type {ReadonlyArray<string>}
+ */
+export const FRAME_STANDING_TIES = Object.freeze(['ally', 'respect', 'mentor_student', 'family', 'patron_client']);
 
 /** @param {unknown} v @returns {string} */
 const str = (v) => (typeof v === 'string' ? v.replace(/\s+/g, ' ').trim() : '');
@@ -378,6 +390,7 @@ export function castTroubleFrame(settlement) {
   const governing = /** @type {FramePower | null} */ (governingFactionOf(/** @type {never} */ (s)));
   const ties = /** @type {FrameTie[]} */ (arr(s.relationships)).filter((t) => !!t && typeof t === 'object' && matter.ties.includes(str(t.typeName)));
   const byPower = (/** @type {number} */ a, /** @type {number} */ b) => b - a;
+  const standing = /** @type {FrameTie[]} */ (arr(s.relationships)).filter((t) => !!t && typeof t === 'object' && FRAME_STANDING_TIES.includes(str(t.type)));
 
   /** @type {Set<string>} */
   const used = new Set();
@@ -460,6 +473,27 @@ export function castTroubleFrame(settlement) {
       .map((k) => ({ via: k.npc, rule: /** @type {SideFace['rule']} */ ('outsider'), slots: { other: k.keeper, house: k.house } }));
   };
 
+  /**
+   * FRAME-6 · F1: the free people of the live roster who are no member of a power and stand WITH one of its members by
+   * a tie of standing (FRAME_STANDING_TIES), the members by rank and each member's ties in the record's order; each once,
+   * standing by that tie (FRAME_REASONS.tie, the member named).
+   * @param {FrameNpc[]} members the power's members, by rank @returns {Candidate[]}
+   */
+  const standingTiedTo = (members) => {
+    const inPower = new Set(members.map(idOf));
+    /** @type {Candidate[]} */
+    const out = [];
+    for (const m of members) {
+      for (const t of standing) {
+        const otherId = str(t.from) === idOf(m) ? str(t.to) : str(t.to) === idOf(m) ? str(t.from) : '';
+        const who = otherId ? byId.get(otherId) : undefined;
+        if (!who || inPower.has(idOf(who)) || !free(who) || out.some((c) => c.npc === who)) continue;
+        out.push({ npc: who, rule: 'tie', slots: { other: str(m.name), gloss: FRAME_TIE_GLOSS[str(t.typeName)] || FRAME_TIE_GLOSS.tieDefault, reasonText: FRAME_REASONS.tie } });
+      }
+    }
+    return out;
+  };
+
   /** @param {Candidate} c @param {FaceKind} kind @returns {SideFace} */
   const take = (c, kind) => {
     if (c.npc) used.add(idOf(c.npc));
@@ -499,9 +533,10 @@ export function castTroubleFrame(settlement) {
     /** @type {SideFace | null} */
     let face = null;
     // FACTS FIRST: the town decides who CAN stand by each rung. A side the record writes as a power's name is filled by
-    // office only by that power's head; a criminal side stands for the criminal power wherever one is strong enough.
+    // office only by that power's head; a criminal side stands for the criminal power wherever one is strong enough (on a
+    // side that IS a power, that power itself: FRAME-6 · F1).
     if (side.archetype === 'criminal') {
-      const c = candidatesOf('criminal', side.archetype)[0];
+      const c = candidatesOf('criminal', side.archetype).find((x) => !side.named || (!!x.power && powerName(x.power) === powerName(side.named)));
       if (c) face = take(c, 'criminal');
     }
     /** @param {FaceKind} kind @returns {Candidate[]} */
@@ -513,6 +548,28 @@ export function castTroubleFrame(settlement) {
       const rule = factionArchetype(/** @type {never} */ (f)) === 'military' ? 'commander' : (seat && head && idOf(head) === idOf(seat) ? 'seat' : 'head');
       return [{ npc: head, power: f, rule: /** @type {SideFace['rule']} */ (rule), slots: { power: powerNameInProse(powerName(f)) } }];
     };
+    // FRAME-6 · F1 (the chair, 2026-11-20 15:35): A SIDE THAT IS A POWER takes its ladder IN ORDER, and the hash chooses
+    // only within a rung: its own free office-holder; then its own free member (not its head, who stands by office or
+    // not at all: F2 below); then a person tied to one of its live members by a tie of standing (FRAME_STANDING_TIES).
+    // A person with no membership and no such tie never stands on a power's row, whatever their trade.
+    if (!face && side.named) {
+      const f = side.named;
+      const members = membersByRank(roster, powerName(f));
+      const head = headOf(f);
+      /** @type {Array<{ kind: FaceKind, list: Candidate[] }>} */
+      const rungs = [
+        { kind: 'office', list: listOf('office') },
+        { kind: 'member', list: members.filter((n) => free(n) && n !== head).map((n) => ({ npc: n, power: f, rule: /** @type {SideFace['rule']} */ ('member'), slots: { power: powerNameInProse(powerName(f)) } })) },
+        { kind: 'tie', list: standingTiedTo(members) },
+      ];
+      const fired = rungs.find((x) => x.list.length);
+      if (fired) {
+        const at = fired.kind === 'office' ? 0 : Math.floor(castHash(seed, key, `${side.i}:${fired.kind}:who`) * fired.list.length);
+        face = take(fired.list[at], fired.kind);
+      }
+      out[side.i] = { words: side.words, label: side.label, archetype: side.archetype, face };
+      continue;
+    }
     // THEN THE HASH against the rate, rung by rung; then the first rung the town can fill at all. Office takes the
     // first by rank; a tie, a trade or a keeper is chosen among the eligible by the hash (no draw).
     /** @type {Array<{ kind: FaceKind, list: Candidate[] }>} */
@@ -525,6 +582,26 @@ export function castTroubleFrame(settlement) {
       }
     }
     out[side.i] = { words: side.words, label: side.label, archetype: side.archetype, face };
+  }
+
+  // FRAME-6 · F2 (the chair, 2026-11-20 15:35): AN EMPTY SIDE YIELDS BEFORE THE CAPS. Once every side is cast, a side that
+  // IS a power and stands empty takes that power's first live person by rank whom no side and no crisis holds, even one
+  // the record names by role (an office stand-in, off the roster the rungs read) and even beyond `officeSidesMax`: the
+  // head by office (or as the criminal power's head), another by membership.
+  const alive = /** @type {FrameNpc[]} */ (arr(s.npcs)).filter((n) => !!n && typeof n === 'object' && !n.temporary && !n.ousted && !!str(n.name));
+  for (const side of castOrder) {
+    const f = side.named;
+    if (!f || out[side.i]?.face) continue;
+    const people = membersByRank(alive, powerName(f));
+    const who = people.find((n) => !used.has(idOf(n)) && !held.has(idOf(n)));
+    if (!who) continue;
+    const arch = factionArchetype(/** @type {never} */ (f));
+    const slots = { power: powerNameInProse(powerName(f)) };
+    /** @type {[FaceKind, SideFace['rule']]} */
+    const [kind, rule] = who !== people[0] ? ['member', 'member']
+      : arch === 'criminal' ? ['criminal', 'criminal']
+        : ['office', arch === 'military' ? 'commander' : seat && idOf(who) === idOf(seat) ? 'seat' : 'head'];
+    out[side.i] = { ...out[side.i], face: take({ npc: who, power: f, rule, slots }, kind) };
   }
 
   return {

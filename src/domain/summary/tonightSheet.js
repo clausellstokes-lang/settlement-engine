@@ -39,6 +39,7 @@ import { powerNameInProse } from '../display/governanceAccount.js';
 import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
 import { isSeatVacant, keeperFormOf, seatKeeperOf } from '../people/seatKeeper.js';
 import { castTroubleFrame } from '../tension/troubleCast.js';
+import { isOfficeStandIn } from '../dossier/seatHolder.js';
 
 /**
  * THE ONE COPY CONSTANT for the sheet, on every surface that prints it.
@@ -414,7 +415,9 @@ function frameOf(source) {
       archetype: side.archetype,
       kind: face?.kind || '',
       name: face && face.kind !== 'outsider' ? clean(face.name) : '',
-      role: npc ? clean(npc.role || npc.title) : '',
+      // FRAME-6 · F2: a person the record names by role (an office stand-in, "The High Priestess") is printed by that name
+      // alone, never "The High Priestess · High Priestess"
+      role: npc && !isOfficeStandIn(/** @type {never} */ (npc)) ? clean(npc.role || npc.title) : '',
       reason: face ? face.reason : '',
       line: own.line,
       says: own.says,
