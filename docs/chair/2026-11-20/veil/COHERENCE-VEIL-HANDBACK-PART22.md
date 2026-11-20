@@ -109,3 +109,8 @@ THE CHAIR'S ANSWERS (03:29 UTC): (1) the pin STAYS 117, the seat's measure gover
 OBSERVED-SHAPE SCANNER: THE EXPLAINED-WRITER ROWS NOW (one per "magicExists on config" finding, naming the writer and the
 measure 36 of 36; the count back to 1), THE GOVERNED SCHEMA-46 RUNG RECORDED AS DEBT for the first round after the deploy
 (it would also clear the 14 frozen rows of the same kind, PLAUSIBLE). The side builder resumed for unit 2 (03:39 UTC).
+
+UNIT 2 STOPPED AGAIN (03:42 UTC): the explained-writer table is in `scripts/check-observed-shape-readers.mjs`, a hash-locked
+detector file; rows key by `<key> on <shape>` (it would cover the 14 frozen rows); `writer` must be a src file writing the
+key (only `src/store/configSlice.js`); no admitted `mechanism` fits a served config. Both doors are the governed baseline.
+To the chair: (A) the three as KNOWN, NAMED reds with the schema-46 rung as debt (the seat recommends), or (B) the rung now.
