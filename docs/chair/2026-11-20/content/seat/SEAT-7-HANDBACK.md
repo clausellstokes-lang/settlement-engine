@@ -1,14 +1,20 @@
-# SEAT-7 — HAND-BACK (kept current at every push; last written 2026-11-20T21:01:37Z, read from `date -u`)
+# SEAT-7 — HAND-BACK (kept current at every push; last written 2026-11-20T21:21:56Z, read from `date -u`)
 
 **For the next owner of this lane: this file, `SEAT-6-HANDBACK.md` (items 53 to 68, §4 to §6), `SEAT-6-TO-LIGHT.md`, `SEAT-5-HANDBACK.md` §1 (items 1 to 52) and `briefs/` are all you need.** Every ruling in force: SEAT-5's 1 to 52, SEAT-6's 53 to 68, this file's 69 on.
 
 Branch `lane/seat-7-2026-11-20` (origin), fast-forwarded to `ce9462b55`: the chair said "THE LANE IS YOURS at ce9462b55" (19:54Z; SEAT-6's final tip; last green code tip `c9e6ce45b`, U5 + U5-CURE, `tests/lint` whole 220/220). SEAT-7 is session_019yED1P7Zp441ctXNjL8Kqf.
 
-## 0. THE STATE (2026-11-20T19:55:40Z)
+## 0. THE STATE (2026-11-20T21:21:56Z; the chair's read of SEAT-7's record 352,240 at 21:21Z; SEAT-8 being seated beside it)
 
-- **OUT in SEAT-6's container (return through SEAT-6 and the chair; SEAT-7 reads each diff once at its merge):** B5c, U5-CURE2 (`briefs/U5-CURE2.md` + the chair's newer rulings, items 69 and 70); BUK2, UK (`briefs/UK-BAND.md`, from `fb937f369`).
-- **OUT, SEAT-7's own:** BSV, SAVED-SEAT (`briefs/SAVED-SEAT.md`, branch `lane/seat-7-2026-11-20-saved` from `450beaba9`), tests only.
-- **ORDER (the chair, 19:54Z):** merge U5-CURE2 then UK as they arrive (U5-CURE2 proved by a build: first paint against the line's 1,177,668 raw / 374,676 gzip / 314,472 Brotli at `8196e5712`); SAVED-SEAT before the flip; the flip's worklist kept current (SEAT-6-TO-LIGHT §2); then U6 … U12 (SEAT-5 item 20). **THE SHIPPED STATE IS L1 (item 72).** The gallery-sanitizer arm (hidden taker, hidden retired holder) is the share veil lane's: the chair routes it; nothing built here.
+- **Lane tip:** `lane/seat-7-2026-11-20` (origin). Last code merge: U5-CURE2 `ff07bb815` + registers `db2dcdd14`. `tests/lint` whole at `db2dcdd14`: 218/220 files, 0 assertion failures, 2 files unrun (workers killed for memory): RE-RUN OWED on a quiet box.
+- **OUT (all in SEAT-7's container; each returns its report to SEAT-7, or to SEAT-8 once the lane is handed over; worktrees under `/tmp/claude-0/-home-user-settlement-engine/8849b19d-e763-58bf-b9f2-130aacabb24f/scratchpad/`):**
+  - **BSV, SAVED-SEAT** (`briefs/SAVED-SEAT.md`; branch `lane/seat-7-2026-11-20-saved` from `450beaba9`; worktree `wt-saved`): tests only; not yet reported (still running at 21:2xZ).
+  - **BFL, FLIP-CENSUS** (`briefs/FLIP-CENSUS.md` + item 73's amendment + item 76's shard ruling; branch `lane/seat-7-2026-11-20-flip` from `9cc5045f2`; worktrees `wt-flip` (unflipped cut) and `wt-flip-lit` (the two dials, never committed)): (A) the owner's plain table DONE in its worktree (calibration exact: 111 / 18 / craft −13 / criminal −5), not yet reported; (B) the flipped whole-suite run started 20:00:52Z, the 2-hour ceiling ends it ~22:00Z: then the partial census's size to the chair first, then shards, then the unflipped `test:ratchet` control.
+  - **BUC, UK-CURE** (`briefs/UK-CURE.md`; branch `lane/seat-7-2026-11-20-uk-cure` from `fad107fcc`; worktree `wt-ukcure`): `powerBandOfRole` to `src/generators/npc/powerBand.js`, UK's packed lines unpacked, `npcGenerator.js` ≤ 941 by its door (the chair: right, 21:21Z).
+- **UK (BUK2, SEAT-6's) RETURNED** at `fad107fcc` (`lane/seat-2026-11-20-uk`, pushed; report `briefs/UK-REPORT.md`): src diff READ ONCE by SEAT-7 (law gate as claimed); NOT MERGED: `npcGenerator.js` 941 = its ceiling at base and tip, fitted by PACKING (item 73). Merges TOGETHER with UK-CURE; then the two doors (lighting census 3710 → 3711 for `tests/generators/seatBandFold.test.js`; that file's row in `scripts/mutation-coverage-manifest.json`), the size baseline as BUC lowered it, `tests/lint` whole. UK's test diff (177 lines) not yet read: read it at the merge.
+- **OWED (to the chair):** the owner's plain table D → L1 with six places (BFL (A)); the flip census's size, partial first (BFL (B)); the wall minutes of one whole ratchet or shard set on this box (from BFL's shards; so far 258/3,711 files in 45 min under load ~10, `tests/lint` 220 files ~32 min); "UK merged <commit>"; SAVED-SEAT merged; before the landing request, COMMON-RULES rule 8's two runs (build + `test:ratchet`, the line's tip merged in, read against `ci/RED-AT-LINE.tsv` and `ci/LINE-NOW.md` on the chair's branch), then "SEAT <commit>".
+- **THE BOX (the chair, 21:21Z):** ONE heavy run at a time through the gate mutex; a builder waits its turn (three suites and a build at once killed workers for memory twice).
+- **NEXT after these:** U6 (`factionDynamics.js`, released at `1cd2e6d93`; merge FORTUNE-3's tip of that file first), then U7 … U12 by SEAT-5 item 20; every measure's headline the LIT world (L1) on the visitor pool.
 
 ## 1. RULINGS SINCE SEAT-6's HAND-BACK (each the chair's, each vetoable by the owner)
 
@@ -34,6 +40,7 @@ Branch `lane/seat-7-2026-11-20` (origin), fast-forwarded to `ce9462b55`: the cha
 | U5-LAWOUT | — | DROPPED (item 75) |
 | SAVED-SEAT | `lane/seat-7-2026-11-20-saved` (BSV, from `450beaba9`) | OUT |
 | FLIP-CENSUS (A) + (B) | `lane/seat-7-2026-11-20-flip` (BFL, from the commit carrying its brief) | OUT; docs and scripts only |
+| UK (BUK2) + UK-CURE (BUC) | `lane/seat-2026-11-20-uk` `fad107fcc` + `lane/seat-7-2026-11-20-uk-cure` | UK read, not merged (packing); UK-CURE OUT |
 | U6 … U12, CS21 + CS22 (b), U13, U14, U8 | | not briefed (U6 after UK: `factionDynamics.js` released at `1cd2e6d93`) |
 
 ## 3. FIRST PAINT AND SIZE (for the owner's size sign-off at the close)
