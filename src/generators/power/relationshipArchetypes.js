@@ -150,6 +150,21 @@ const bothNamedTensions = (archetype) => {
   return indices;
 };
 
+/** @type {WeakMap<object, boolean[]>} */
+const namesBothCache = new WeakMap();
+/** Whether an archetype's tension line at `id` (head or reserve) names BOTH parties (pure; cached per archetype). @param {any} archetype @param {number} id */
+const namesBoth = (archetype, id) => {
+  let flags = namesBothCache.get(archetype);
+  if (!flags) {
+    flags = Array.from({ length: archetype.tension.size }, (_, i) => {
+      const line = archetype.tension(PARTY_A, PARTY_B, i);
+      return line.includes(PARTY_A.name) && line.includes(PARTY_B.name);
+    });
+    namesBothCache.set(archetype, flags);
+  }
+  return flags[id] === true;
+};
+
 /** @type {WeakMap<object, ReadonlyArray<Readonly<{ id: number, needs: string[], excludes: string[], crisis: string[], trust?: 'none' | 'full' }>>>} BAR2-PEOPLE (PP4): a row's trust */
 const pairPoolCache = new WeakMap();
 /**
@@ -245,7 +260,9 @@ const quiet = (fn) => {
  * @param {Readonly<{ body: string, members: string, member: string }>} [force]
  * @param {object | (() => object) | null} [facts]
  * @returns {(archetype: any, npc: {id?: string, name?: string}, partner: {id?: string, name?: string}) =>
- *   {archetypeKey: string | undefined, proseVariant: number, description: string, tension: string}}
+ *   {archetypeKey: string | undefined, proseVariant: number, resolvedIndex: number, description: string, tension: string}}
+ *   `resolvedIndex` (GOALS-4 (A)): the index today's resolution chose before any TIES-HOLD replacement, for the caller's
+ *   temper only; never stored on the tie.
  */
 export const createTieProseDraw = (force, facts = null) => {
   /** @type {Map<unknown, {base: number, used: number, printed: Set<number>, cards: Map<number, string[][]>}>} GOALS-1 (GR3): `cards`, each printed index's ties as their two cards */
@@ -299,39 +316,57 @@ export const createTieProseDraw = (force, facts = null) => {
     });
     const from = String(npc?.id ?? npc?.name ?? '');
     const to = String(partner?.id ?? partner?.name ?? '');
-    let index = resolved.line ? resolved.line.id : drawnVariant;
+    // GOALS-4 (A), the chair's ruling of 2026-11-20 21:30 UTC: TODAY'S RESOLVED INDEX, before any replacement below. It is
+    // handed out beside `proseVariant` (never stored on the tie) so the tie's temper (`people/ties.js :: temperOfTie`) reads
+    // the line today's resolution chose, never a replacement's declaration: the stored fields stay byte-equal.
+    const resolvedIndex = resolved.line ? resolved.line.id : drawnVariant;
+    let index = resolvedIndex;
     let notes = todayNotes;
-    // GOALS-1 (GR3 for ties, the chair's rulings of 2026-11-20 10:28 UTC): A REPEAT PAST THE HEAD. Only where today's
-    // resolution prints an index the town already printed for this archetype, draw-free, (i) the first reserve index
-    // (from the cycle's place past the head) not printed and admitted, the printed and contrary indices held; else (ii) an
-    // index printed ONCE whose earlier tie shares no card with this one ("a template held twice is never held by two
-    // people tied to each other"), in the order the overflow cycle visits; else (iii) today's stands. A replacement
-    // declares the same trust as today's index, so the pair's trust, the tie's temper and every later tie are unchanged.
+    // GOALS-4 (A2), TIES-HOLD (the chair's ruling of 2026-11-20 21:30 UTC; it carries GOALS-1's GR3 for ties, 10:28 UTC):
+    // WITHIN ONE PLACE NO TIE PRINTS A TEMPLATE ANOTHER TIE OF THE PLACE PRINTED while a line is free. One template is one
+    // index of one archetype (one index picks the description AND the tension; no two lines of the tables render one
+    // template), and the place's ledger is `draw.cards` (each printed index's ties, in the ties' own order). Only where
+    // today's resolution prints an index already taken, draw-free: (1) the first index of the HEAD in its keyed order from
+    // the drawn index, then (2) the first of the RESERVE from the cycle's place past the head, not yet taken, that the trust
+    // clause and the line's own declarations admit; else (3) the LEAST PRINTED admitted line (a line naming both cards
+    // before a one-name line, TAIL-TIES-2; then one whose earlier ties share no card with this one, GR3's "a template held
+    // twice is never held by two people tied to each other"; then the same keyed order). THE TRUST CLAUSE, the corrected
+    // law (20:30 and 20:50 UTC): a replacement that declares a trust stands in only for today's same trust; one that
+    // declares none stands in for any. A line contrary to the pair's stated trust is held, as before.
     if (draw.printed.has(index)) {
       const trust = whole[index]?.trust;
       const contraryWhole = pairTrust ? whole.filter((l) => l.trust && l.trust !== pairTrust).map((l) => String(l.id)) : [];
-      /** @param {number} id @param {Set<string>} heldNow */
-      const admits = (id, heldNow) => {
+      const heldNow = new Set(contraryWhole);
+      /** @param {number} id */
+      const admits = (id) => {
+        if (whole[id].trust && whole[id].trust !== trust) return null;
         const probe = quiet(() => resolveAt({ draw: () => whole[id], held: heldNow, heldKey: (l) => String(l.id) }, whole));
         return probe.result.line && probe.result.line.id === id ? probe.notes : null;
       };
       const reserve = whole.length - size;
+      const order = [
+        ...Array.from({ length: size }, (_, k) => mod(drawnVariant + k, size)),
+        ...Array.from({ length: reserve }, (_, k) => size + mod(draw.base + used - size + k, reserve)),
+      ];
+      /** @type {{ id: number, kept: any[] } | null} */
       let found = null;
-      for (let k = 0; k < reserve && !found; k++) {
-        const id = size + mod(draw.base + used - size + k, reserve);
-        if (draw.printed.has(id) || whole[id].trust !== trust) continue;
-        const kept = admits(id, new Set([...[...draw.printed].map(String), ...contraryWhole]));
-        if (kept) found = { id, kept };
-      }
-      const order = named.length
-        ? Array.from({ length: named.length }, (_, k) => named[mod(draw.base + used - size + k, named.length)])
-        : Array.from({ length: size }, (_, k) => mod(draw.base + used + k, size));
-      for (const id of found ? [] : order) {
-        const by = draw.cards.get(id);
-        if (!by || by.length !== 1 || by[0].includes(from) || by[0].includes(to) || whole[id].trust !== trust) continue;
-        if (id === index) break; // today's own index qualifies: it stands, as resolved
-        const kept = admits(id, new Set(contraryWhole));
+      for (const id of order) {
+        if (draw.printed.has(id)) continue;
+        const kept = admits(id);
         if (kept) { found = { id, kept }; break; }
+      }
+      if (!found) {
+        /** @type {Array<{ id: number, kept: any[], rank: number[] }>} */
+        const open = [];
+        order.forEach((id, at) => {
+          const kept = admits(id);
+          if (!kept) return;
+          const by = draw.cards.get(id) ?? [];
+          const shares = by.some((pair) => pair.includes(from) || pair.includes(to)) ? 1 : 0;
+          open.push({ id, kept, rank: [namesBoth(archetype, id) ? 0 : 1, by.length, shares, at] });
+        });
+        open.sort((x, y) => x.rank[0] - y.rank[0] || x.rank[1] - y.rank[1] || x.rank[2] - y.rank[2] || x.rank[3] - y.rank[3]);
+        if (open.length && open[0].id !== index) found = open[0];
       }
       if (found) { index = found.id; notes = found.kept; }
     }
@@ -349,6 +384,7 @@ export const createTieProseDraw = (force, facts = null) => {
     return {
       archetypeKey,
       proseVariant,
+      resolvedIndex,
       description: archetype.desc(npc, partner, proseVariant, force),
       tension: archetype.tension(npc, partner, proseVariant, force),
     };
