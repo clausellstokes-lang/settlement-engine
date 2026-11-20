@@ -3365,3 +3365,15 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   8f758e067; the gap of (B) closed cheaply (dense ids in served order; nothing else served refers to a rite's
   genesis id). GOALS-1: the rare deal runs after the wants and replaces a card's whole secret: a guard at that seam
   for four rows (count 0 today), approved with a tooth.
+- 11:43 UTC · VEIL-25 at 282,870 (eighty minutes in the lane): THE CURATE NOTICE'S BUILDER RETURNED
+  (`lane/veil-25-curate-2026-11-20` at 1bd894613; read line by line; red 3 of 14 at the base, green 23 of 23): THE
+  WORDS RULED (two sentences: "While a criminal house is hidden, the town's criminal powers stay off the shared
+  page too, so they cannot give the house away. Show the house to show them, or leave it hidden and they stay
+  off."), THE SEAT'S ADDED CONDITION ACCEPTED (it shows only where the town has a criminal power); it merges and
+  sends "CURATE <commit>". `prompts/VEIL-26.txt` WRITTEN (lean; with a paragraph on spending less: a diff read once
+  at the merge; facts from a helper), seated after this push; the hand-over at R3's merge or 380,000. FRAME-5
+  took the chair's base by a plain merge (9e8777c35); THE LINE MOVES NONE OF ITS PINS; one pin was already red from
+  B11 (frame-calm-metropolis-0: "its people" now "his people"): proven and re-pinned (8a75a9a8c): THE CHAIR'S MERGE
+  MESSAGE WRONGLY EXPECTED THE LINE TO MOVE PINS; the lighting census re-taken (8b45003ef); C1's builder seated. A
+  NOISE OF THE CHAIR'S OWN: it ran two pushes of its branch at once (11:25 and 11:27): the first carried both
+  commits, the second was rejected ("cannot lock ref"): harmless; one push at a time.
