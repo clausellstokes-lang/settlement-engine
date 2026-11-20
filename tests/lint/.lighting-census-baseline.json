@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "c7687030bbea52674832889eb23265547ddb84de",
-  "measuredBy": "chair landing helper, point 85 (page-6 faa833b7a onto the line 8196e5712)",
+  "measuredAtSha": "4675980680c344d72e85cf8d73571e3f6d38e9c4",
+  "measuredBy": "depth-4",
   "date": "2026-11-20",
-  "note": "the line at point 85: the page lane (L2 arrival tranche, S9 secret post-pass; new test files arrivalPoolsDeepened and misfitSecretSettle) merged onto the line at point 84; the merge took the line side of this register",
-  "files": 3714,
+  "note": "DEPTH-4 at the line 062504aa8 merged into the depth lane: the lane's own test files (hooks tranches 1-2, the conflict unit, the first-paint cure, the themes unit) over the line's count",
+  "files": 3718,
   "parked": 475,
-  "credited": 3239,
-  "titles": 31266,
-  "suiteTitles": 8664
+  "credited": 3243,
+  "titles": 31291,
+  "suiteTitles": 8670
 }
