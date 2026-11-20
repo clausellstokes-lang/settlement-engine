@@ -795,3 +795,30 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   the event-type table on purpose; snapshot mode; AND A DOOR NOBODY MEASURED: the world columns of a public map
   (the census's rows 18 and 21: `world.snapshot`, `world.sections`, `realmArcSummary`, stored at publish,
   governed by nothing): measure first, one message before building.
+- 02:23 UTC · **VEIL-DOORS-2 SEATED** (created 02:20:22 UTC): session_019yED1SseXFADDhP3RzubJG, `lane/veil-doors-2-2026-11-20`
+  from cca49cb8d. **VEIL-VR17 FINISHED AT 81dd06d7e AND STOPPED** (its messages of 02:16 UTC; its count unreadable, so
+  it stopped by the chair's rule): the commit above efca35fd6 changes no file of `src/` or `scripts/`: the born test
+  now reads what every surface DRAWS (every tab; a phone's width; the civility-masked page and link through the real
+  pipeline), an arm for a withheld evidence key on an open page (not drawn), master's shape (both arrays written on
+  60 of 60 born towns by master's generator and by the tip), and no shared page offers a print, PDF, journal or
+  Foundry control. Red at the base 4 failed | 1 passed, green at the tip 5 passed. Its measure for the chair: of 70
+  WeakMap or WeakSet registers in `src`, the grouping mark was the ONLY identity-keyed one carrying a veil decision.
+  "VR17" is now 81dd06d7e for the merge and the cold read. V10-2 was NOT started there.
+  **RULING VR34, A SWITCH SETS ONLY WHAT A HAND CAN SEE AND UNDO (V10-2; vetoable):** the criminal switch's address
+  list is taken from the same model the Curate screen draws for that record (`galleryVeil.js :: curateModelFor`),
+  never from a card kind's whole field list; where the screen fails to offer an eye only because of the stored
+  shape (`staffed` reads `str(npc.institution)`, an object in the new shape) the SCREEN is cured by identity; where
+  no screen offers an address in any shape the switch stops writing it; both directions; a born guard through the
+  server. **SEAT VEIL-V102** (`prompts/VEIL-V102.txt`; `lane/veil-v102-2026-11-20` from 81dd06d7e): its files are the
+  switch's two, `curateModelFor` alone in `galleryVeil.js`, and tests.
+- 02:23 UTC · **SEC-GRANTS: "EMERGENCY-2 2669d6c2d" (tip 4875663f9), its message of 02:17 UTC, CROSSING THE COLD READ'S
+  LINE.** The revoke statements are unchanged; the one check file became FIVE, each one statement answering in one
+  row (CHECK_A_KEYS, CHECK_B_REVOKE_LIST: still open, missing, service role lacking; CHECK_C_PREFLIGHT: anything on
+  the database that uses one of the 157 as the visitor, by pg_depend and by the bodies of invoker functions in any
+  schema: 0 on the chain, 4 of 4 plants caught; CHECK_D_SECRET: whether the secret is set and where it is stored,
+  never its value, and the count of stored keys; CHECK_E_ANON_CATALOGUE: the whole list in one cell); the owner's
+  note has the order, a five-step smoke list and the one-function undo. READ BY THE CHAIR: the five queries and the
+  note. IT DOES NOT YET HOLD THE READER'S LINE (the three curate and feature functions): the seat is on it now
+  (265,212 tokens of its 300,000). Deliverable two is NOT started: `HANDOFF_213.md` (the line's chain 001..210 has
+  the same open set as 203's; the script applies there cleanly) is for a fresh seat, SEC-GRANTS-2, seated when the
+  emergency script is final.
