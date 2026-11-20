@@ -46,6 +46,31 @@ import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { SettlementPDF } from '../../src/pdf/SettlementPDF.jsx';
 import { composeTonightSheet } from '../../src/domain/summary/tonightSheet.js';
 
+/**
+ * THE BIRTH of a plan row: the chair's (DEFAULT_CONFIG at the size), or, for a row carrying a `config` (a `--plan` file's
+ * row; SAME-2 part 3, granted by the chair, 2026-11-20; it changes no check: the door's corpus is hxd), that config passed
+ * to the birth as given, with the store's content runtime at rest as the options, as `measure-lit.mjs :: visitorJob`
+ * births a visitor at ce3a4e9f6 (the visitor's plan is one such file).
+ * @param {{ seed: string, size: string, config?: any }} row @returns {Promise<[any, any]>} the config and the options
+ */
+async function birthOf(row) {
+  if (!row.config) return [birthConfig({ ...DEFAULT_CONFIG, settType: row.size }), { seed: row.seed, customContent: {} }];
+  const { createCustomContentSlice } = await import('../../src/store/customContentSlice.js');
+  const { settlementContentRuntimeOptions } = await import('../../src/store/settlementContentRuntime.js');
+  const { eligibleCustomContent } = await import('../../src/domain/customContentSchema.js');
+  const { contentRuntimeFromCampaignBinding } = await import('../../src/domain/content/contentEnvironment.js');
+  /** @type {any} */ let st;
+  const slice = createCustomContentSlice(() => {}, () => st);
+  st = { ...slice, activeCampaignId: null, campaigns: [], config: { ...DEFAULT_CONFIG, settType: row.size }, configExplicitFields: {} };
+  return [birthConfig(row.config), { seed: row.seed, ...settlementContentRuntimeOptions(st, contentRuntimeFromCampaignBinding, eligibleCustomContent) }];
+}
+/** `--text`: one UNMASKED .txt a place, every surface's printed lines in page order under their headings. @param {Record<string, any[][]>} surfaces */
+const textOf = (surfaces) => Object.entries(surfaces).flatMap(([k, lines]) => {
+  const out = [`== ${k} ==`]; let head = null;
+  for (const [l, h] of lines) { if (h !== head) { head = h; if (h) out.push(`## ${h}`); } out.push(l); }
+  return [...out, ''];
+}).join('\n');
+const TEXT = process.env.SAME_CENSUS_TEXT || '';
 const OUT = process.env.SAME_CENSUS_OUT;
 const PLAN = JSON.parse(readFileSync(String(process.env.SAME_CENSUS_PLAN), 'utf8'));
 const viewport = { matches: false, listeners: new Set() };
@@ -231,7 +256,8 @@ for (const row of PLAN) {
   test(row.seed, async () => {
     if (!ready) { await loadGenerationLawPayloads(); ready = true; }
     const t0 = Date.now();
-    let town = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: row.size }), null, { seed: row.seed, customContent: {} });
+    const [config, options] = await birthOf(row);
+    let town = generateSettlementPipeline(config, null, options);
     const mask = maskerFor(town);
     town = withPublicProse(town, composePublicProse(town));
     /** @type {Record<string, Array<[string, string]>>} */ const surfaces = {};
@@ -244,6 +270,7 @@ for (const row of PLAN) {
     }
     try { surfaces.session = sheetLines(composeTonightSheet(town)); } catch (e) { surfaces.session = [[`[SHEET THREW] ${String(e?.message || e).slice(0, 200)}`, '']]; }
     const masked = Object.fromEntries(Object.entries(surfaces).map(([k, v]) => [k, v.map(([l, h, q, c]) => [mask(l), mask(h), mask(q || ''), c || ''])]));
+    if (TEXT) writeFileSync(`${TEXT}/${row.seed}.txt`, textOf(surfaces));
     writeFileSync(`${OUT}/${row.seed}.json`, JSON.stringify({ seed: row.seed, size: row.size, ms: Date.now() - t0, surfaces: masked, stored: storedIndex(town, mask) }));
   }, 300000);
 }

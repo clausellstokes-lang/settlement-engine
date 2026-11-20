@@ -24,7 +24,8 @@ import { describe, expect, test } from 'vitest';
 
 import {
   CORPUS, LAW1_MEASURE, MIN_PLACES, NOISE_SE, REGISTER_PATH, SIZES, attributionOf, ceil2, confirmRises, emptyRegister,
-  incompleteRender, judge, law1RedPlaces, law1WatchPlaces, measureSlots, readRegister, shareError, slotKey, storedHeads, tighten, writeRows,
+  incompleteRender, judge, law1RedPlaces, law1WatchPlaces, measureSlots, readRegister, repeatsInPlace, shareError, slotKey,
+  storedHeads, tighten, writeRows,
 } from '../../scripts/sameness-census.mjs';
 
 const S = 'web:Summary/Overview';
@@ -101,6 +102,28 @@ describe('law 2: a rise reds only beyond the noise and only on both readings', (
     const c = confirmRises(judge(over, reg), judge(calm, reg));
     expect(c.over).toEqual([]);
     expect(c.notes.join('\n')).toContain('does not repeat');
+  });
+});
+
+describe('a sentence repeated inside one place (the chair, 20:14: an owner\'s stop condition)', () => {
+  const line = 'The two of them have not spoken since the flood took the lower mill.';
+  const LIST = 'RelationshipsTab.0.0 > Section.4 > TieCard.*.0';
+  test('two cards in one list printing one line: the place is counted, at its one position', () => {
+    const rows = [{ seed: 'p-0', surfaces: { 'web:World/Relationships': [[line, '', '', LIST], [line, '', '', LIST]] }, stored: {} }];
+    const r = repeatsInPlace(rows);
+    expect(r.places).toBe(1);
+    expect(r.sentences).toHaveLength(1);
+    expect(r.sentences[0]).toMatchObject({ family: 'web', sentence: line, places: 1, onePosition: 1, positions: [`web:World/Relationships | ${LIST}`] });
+  });
+  test('the line once in each of two places: not counted', () => {
+    const one = (/** @type {number} */ i) => ({ seed: `p-${i}`, surfaces: { 'web:World/Relationships': [[line, '', '', LIST]] }, stored: {} });
+    expect(repeatsInPlace([one(0), one(1)])).toMatchObject({ places: 0, sentences: [] });
+  });
+  test('the web dossier is one family (two tabs repeat); two PDF forms are two (no repeat)', () => {
+    const tabs = [{ seed: 'p-0', surfaces: { 'web:Summary/Overview': [[line, '', '', 'A']], 'web:World/Relationships': [[line, '', '', 'B']] }, stored: {} }];
+    expect(repeatsInPlace(tabs)).toMatchObject({ places: 1, sentences: [{ onePosition: 0 }] });
+    const forms = [{ seed: 'p-0', surfaces: { 'pdf:canon_dossier': [[line, '', '', 'A']], 'pdf:draft_brief': [[line, '', '', 'A']] }, stored: {} }];
+    expect(repeatsInPlace(forms).places).toBe(0);
   });
 });
 
