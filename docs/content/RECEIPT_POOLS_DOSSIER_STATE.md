@@ -1156,12 +1156,6 @@ register and stand as canonical-at-zero for the two lower tiers (R-DST-C).
 3. `[counterforce · dm-only · no organised crime]` What passes for a shadow economy here has never grown into one. There is unlicensed trade and nothing organised behind it.
 4. `[ledger · crime: ≥ organized]` Little of {settlement}'s trade goes unrecorded, but what does goes through the same organised hands each time.
 5. `[street · organised crime]` The shadow trade at {settlement} is small, but it is not casual: somebody organises it.
-6. `[visitor · dm-only · organised crime]` A visitor would hardly notice {settlement}'s quiet trade, which is small and kept out of sight by the people who run it.
-7. `[threshold · dm-only · organised crime]` {settlement}'s off-book trade sits at the small end of what any place carries, and it is organised, not loose.
-8. `[counterforce · dm-only · organised crime]` {settlement}'s shadow trade has not spread far, but neither is it scattered: what there is of it answers to someone.
-9. `[unfolding · dm-only · organised crime]` A little of {settlement}'s trade slips past the accounts week in and week out, and it slips past in an orderly way.
-10. `[street · dm-only · organised crime]` People at {settlement} who want something without a duty on it know whom to ask, and the asking always goes to the same door.
-11. `[ledger · dm-only · organised crime]` In {settlement}'s accounts the gap is small: a little trade that never reaches them, and none of it missed by chance.
 
 **FLAG: arcaneBlackMarket**
 1. `[ledger · dm-only · colour]` Spell components, charms and stolen scrolls change hands at {settlement} under the counter, sold by the same people who run the town's other quiet trade.
@@ -2652,10 +2646,6 @@ own entailment and licenses nothing about who runs it.
 1. `[ledger · no crisis: under_siege]` Goods reach {settlement} unrecorded: the cargo lists are false, and the dues owed on them are never paid.
 2. `[street · gate · no crisis: under_siege]` A share of what arrives at {settlement} never appears at the gate, and the dues on it are never paid.
 3. `[counterforce · no crisis: under_siege]` Some of the goods that reach {settlement} pay none of the dues owed on them.
-4. `[visitor · dm-only · no crisis: under_siege]` An honest trader at {settlement} pays dues that some of the goods on the next cart never paid.
-5. `[unfolding · dm-only · no crisis: under_siege]` Each cargo that comes into {settlement} under a false list leaves the place's dues a little shorter, and the shortfall runs on.
-6. `[threshold · dm-only · no crisis: under_siege]` Untaxed goods at {settlement} travel in among the taxed, and the line between the two is wherever a cargo list says it is.
-7. `[street · dm-only · no crisis: under_siege]` People at {settlement} know some wares sell cheaper than their dues would allow, and do not ask why.
 
 **operation role `unlicensed revenue`** {colour}
 1. `[ledger]` There is gambling at {settlement} that nobody licenses, and it funds a good deal more than itself.
@@ -3383,10 +3373,6 @@ the leash is the state, not a fate.
 1. `[ledger · no organised crime · no criminal income]` {settlement}'s books record no gang, guild or racket: what wrongdoing the town has, people do on their own account.
 2. `[street · no criminal income]` What goes wrong at {settlement} goes wrong one thing at a time and belongs to whoever did it.
 3. `[visitor · colour]` Ask at {settlement} who runs things on the quiet and you get blank looks; either nobody does, or the town hides it very well.
-4. `[counterforce · dm-only · colour]` Nobody at {settlement} pays to be left alone, so far as anyone will say.
-5. `[threshold · dm-only · colour]` Crime at {settlement} goes no further than a single wrongdoer and a single wrong; past that, the place knows of nothing.
-6. `[unfolding · dm-only · colour]` No ring that anyone can find has grown out of {settlement}'s small wrongs; they stay small and separate.
-7. `[visitor · dm-only · colour]` A visitor at {settlement} is told whom to trust and whom to watch, but never whom to pay.
 
 **capture `none`**
 1. `[ledger · colour]` No criminal's money appears in the {seat}'s accounts at {settlement}, so what the hall spends is spent on the town.
@@ -3423,10 +3409,6 @@ order: the black market, the thieves' guild, the smuggling network, the gangs (`
 **FIXTURE: black market** {colour}
 1. `[ledger]` Nothing sold at {settlement}'s black market reaches the toll book, so the town loses the dues on every load of contraband and stolen goods.
 2. `[street]` Anyone at {settlement} who knows whom to ask can buy contraband or stolen goods at the black market.
-3. `[visitor · dm-only]` Nothing marks {settlement}'s black market to a visitor, yet the goods sold there are the kind no lawful stall would show.
-4. `[counterforce · dm-only]` Whatever the place's law forbids to be sold, {settlement}'s black market has not stopped selling.
-5. `[unfolding · dm-only]` Contraband and stolen goods keep changing hands at {settlement}'s black market, out of sight of the place's lawful trade.
-6. `[threshold · dm-only]` The black market at {settlement} sits just out of the law's sight: a known thing in the place, and not quite an open one.
 
 **FIXTURE: thieves' guild** {colour}
 1. `[ledger]` Few thefts at {settlement} are ever written into the town's books: a thieves' guild settles them first, and the losses go uncounted.
