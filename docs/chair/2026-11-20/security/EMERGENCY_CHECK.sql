@@ -9,6 +9,9 @@
 --   (for instance one granted by another role than postgres): send the rows to the chair.
 -- The second query (also read-only) answers the urgent question alone: can anon reach the
 --   two BYOK key functions right now?
+-- The third query lists EVERY function of schema public that anon may execute (proname, identity
+--   arguments, prosecdef), the same shape as the chair's query, so production's result can be laid
+--   beside the chain's (proof/out/anon-catalogue-pre.txt and -post.txt).
 -- ════════════════════════════════════════════════════════════════════════════════════════
 begin transaction read only;
 
@@ -189,5 +192,10 @@ select p.oid::regprocedure as key_function,
        p.proacl                                                   as grants
 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
 where n.nspname = 'public' and p.proname in ('_surveyor_byok_secret', 'surveyor_byok_get');
+
+select p.proname, pg_get_function_identity_arguments(p.oid) as identity_arguments, p.prosecdef
+from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+where n.nspname = 'public' and has_function_privilege('anon', p.oid, 'execute')
+order by 1, 2;
 
 rollback;

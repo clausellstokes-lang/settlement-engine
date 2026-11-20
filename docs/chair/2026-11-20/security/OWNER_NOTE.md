@@ -5,11 +5,16 @@ signed-in user) the right to call every database function in `public`. Several m
 `revoke … from public`, which does not remove those two grants. On a copy of production's migrations (001..203),
 anyone could call 157 functions that only the server is meant to call. The worst two: `_surveyor_byok_secret()`
 returns the BYOK master secret, and `surveyor_byok_get(user, 'anthropic')` returns that user's **decrypted** AI
-provider key (user ids are visible to anyone through the public gallery). Others that ran to completion for an
-anonymous caller on the copy include: downgrading any user's plan (`handle_premium_downgrade`), purging a user's
+provider key (user ids are visible to anyone through the public gallery). An anonymous caller who names an admin's user id as
+the "actor" (the admin functions trust that argument) soft-deleted another user's town, banned it, disabled an account
+and read billing on the copy. Others that ran to completion for an anonymous caller include: downgrading any user's plan (`handle_premium_downgrade`), purging a user's
 analytics, running the inactive-plan purge on demand, hiding any gallery comment, writing fake audit rows, using up
 any user's rate limits or AI budget, and reading the admin analytics reports. All of it is proven on the copy;
 **on production it is not yet checked** — nobody in the program can see production.
+
+**If you already revoked the two key functions by hand:** the script repeats those two lines harmlessly, and the
+check's second result should already show `false` for both. The logs (below) are still the only way to know whether
+anyone used them before they were shut.
 
 **Step 1 — check (read-only).** In the SQL editor run `EMERGENCY_CHECK.sql`. Its second result answers the urgent
 question: if `anon_can` is `true` for the two key functions, production is open. Its first result lists every

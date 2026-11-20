@@ -61,6 +61,16 @@ fake key planted for user 2222.
   functions refusing anon and authenticated by name; **0 other outcomes changed**; 114 of the 157 run to completion as
   service_role, identically before and after. Before the script, 77 of the 157 ran to completion as anon.
 
+* `actor.sql` → `out/actor-pre.txt` / `out/actor-post.txt` (the chair's VEIL-DOORS class): as anon, naming admin
+  1111 as `p_actor`, `admin_soft_delete_settlement`, `admin_set_content_banned`, `set_account_disabled` and
+  `admin_billing_summary` succeed, and `handle_premium_downgrade(2222)` makes a premium user free. After the script,
+  all five are denied. Every function on this chain that takes a `p_actor` and is anon-executable (18) is in the
+  script; none has a browser caller (the admin pages call the `admin-actions` edge function, which uses the service
+  key). `_gallery_public_tile_rows`, `handle_premium_downgrade` and both `purge_expired_plan_inactive_*` are in it too.
+* `EMERGENCY_CHECK.sql`'s third query has the shape of the chair's production query (proname, identity arguments,
+  prosecdef, for anon). The chain's results are in `out/anon-catalogue-pre.txt` (299) and `-post.txt` (145). Both
+  counts include pgcrypto's 36 functions, which this chain installs in `public`; Supabase puts them in `extensions`.
+
 ## Limits (what is executed and what is not)
 EXECUTED on the chain: everything above. NOT EXECUTED: anything on production. PLAUSIBLE: production's grants equal the
 chain's (the check settles it). Caller analysis is static: a caller hidden behind a computed function name would be
