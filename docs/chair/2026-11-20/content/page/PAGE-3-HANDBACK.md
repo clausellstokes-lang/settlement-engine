@@ -12,8 +12,11 @@ then `briefs/BUILDER-RULES.md` and the brief of the unit you take. PAGE-3 integr
   manifest row (a written rationale) at 00ec2d54e and the lighting census refrozen by its door (3707→3708 files,
   31237→31247 titles) on local `page3/s7-merge`; tests/lint 220/220 files there (ledger file needs review-fixes fetched).
   The follow-up (the chair's six changes of 13:22, verbatim in `briefs/S7-FOLLOWUP.md`, plus the 13:50 ruling quoted
-  below): PAGE-3's builder RESUMED on the ruling at 13:5x on `page3/s7-fix`; whatever it committed is pushed as
-  `lane/page-3-2026-11-20-s7-wip` (see section 0a). PAGE-5: read its diff once, re-run red/green, re-take the lighting
+  below): PAGE-3's builder RESUMED on the ruling at 13:5x on `page3/s7-fix`; it RETURNED: 2f6b6a1db on
+  `lane/page-3-2026-11-20-s7-wip`, UNREAD BY PAGE-3 (builder's receipts: red 5 failed | 10 passed (15); green 15/15;
+  typecheck:ratchet 167/167; domain:strict 1113/1113; lint 0 errors; tests/lint NOT run; the eleven `named` rows as
+  ruled, the eight camps to 'none', Price regulators' without = the kind's unanchored words, the criminal network's
+  without = "Lawbreakers", header rule 0 states (a)/(b), rule 3 reads the slot row first). PAGE-5: read its diff once, re-run red/green, re-take the lighting
   census (its new arm adds titles), merge into the lane, send the chair the data file's commit and `SIDE-READERS.md`'s
   commit (837394d8f) in one line. Owed at the join: a parity test with the session sheet's `sideArchetypes.js`.
 - CAUSES: section 4b; not started.
