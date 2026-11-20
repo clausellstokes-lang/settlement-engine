@@ -33,7 +33,7 @@ Existing, for comparison:
 
 1. `Make {house} known to every supplier as a house that pays on the day.` (a name for paying promptly)
 2. `Let {house} grow only as fast as the money comes in, and no faster.` (growth held to what the house earns)
-3. `Leave the books of {house} so plain that whoever comes next could take them up.` (books another could take over; GOALS-1's rewrite: the draft's line had an unclear "they")
+3. `Leave the accounts of {house} so plain that whoever comes next could take them up.` (books another could take over; GOALS-1's rewrite: the draft's line had an unclear "they") (reworded 16:04 UTC at the chair's R4: "accounts" for "books")
 4. `Deal fairly with everyone {house} deals with, in good years and bad, and be trusted for it.` (fair dealing; GOALS-1's rewrite: the draft's "the hands at {house}" presumed staff a one-person house lacks; the chair's 10:48: "prices" presumed a house that sells)
 
 ### INSTITUTION / solvency / short (2)
