@@ -24,7 +24,7 @@
  * OWNER'S VETO; nothing here is imported by the generator, and the one import is the possessive leaf (a pure leaf).
  */
 
-import { powerNameWithArticle, powerPossessive, powerSentenceName } from './powerSentenceName.js'; // COHERENCE-POWERS-7 (R3): a power's possessive through the one leaf, never a hand-formed "'s"
+import { powerNameWithArticle, powerPossessive, powerSentenceName, powerVerb } from './powerSentenceName.js'; // COHERENCE-POWERS-7 (R3): a power's possessive through the one leaf, never a hand-formed "'s"
 
 /**
  * A POWER IN A SENTENCE TAKES ITS ARTICLE (NAMES-1, the seventh chair's ruling CN1 of 2026-11-20, vetoable by the owner):
@@ -174,7 +174,7 @@ export function criminalsOf(f) {
 function askerLine(f) {
   const share = shareWords(f.share);
   // NAMES-1 (CN1): every power with its article, "The" where it opens the line
-  if (f.rank === 1) return `${f.name} heads ${the(f.ruler)} and also holds ${share} in ${the(f.power)}, so what ${the(f.power)} wants from ${the(f.ruler)} goes straight to the top.`;
+  if (f.rank === 1) return `${f.name} heads ${the(f.ruler)} and also holds ${share} in ${the(f.power)}, so what ${the(f.power)} ${powerVerb(f.power, 'wants', 'want')} from ${the(f.ruler)} goes straight to the top.`; // NAMES-2 (item 5): the verb takes the power's number
   if (f.rank === 2) return `${the(f.power, true)} brings its requests to ${the(f.ruler)} through ${f.name}, second in ${the(f.ruler)}, who holds ${share} in ${the(f.power)}.`;
   if (f.rank === 3) return `${f.name} is third in ${the(f.ruler)} and holds ${share} in ${the(f.power)}, and carries ${theOwn(f.power)} requests to the two above.`;
   return `While the seat of ${the(f.ruler)} stands empty, its steward ${f.name} holds ${share} in ${the(f.power)}, and ${theOwn(f.power)} requests go through ${f.name}.`;
@@ -203,7 +203,7 @@ export const PATRONAGE_LINES = Object.freeze({
     // NAMES-1 (CN1): the ruler and the power with their article ("The" where the power opens a sentence)
     (f) => `${f.name}, ${patronPlace(f.rank, f.ruler)}, also holds ${shareWords(f.share)} in ${the(f.power)}, and that lends ${the(f.power)} weight it would not have on its own.`,
     (f) => askerLine(f),
-    (f) => `${f.name} serves ${the(f.ruler)} and ${the(f.power)} at once. While ${f.name} holds both places, ${the(f.power)} counts for more here than its own members would make it.`,
+    (f) => `${f.name} serves ${the(f.ruler)} and ${the(f.power)} at once. While ${f.name} holds both places, ${the(f.power)} ${powerVerb(f.power, 'counts', 'count')} for more here than ${powerVerb(f.power, 'its', 'their')} own members would make ${powerVerb(f.power, 'it', 'them')}.`, // NAMES-2 (item 5): verb and pronouns take the power's number
   ]),
   // the face's hidden allegiance to a criminal power (DM-only; the public page shows base strength)
   hidden: Object.freeze([

@@ -6,18 +6,15 @@
  * so `dossier/faithReading.js` (a reader `facts/factsOf.js` imports) reaches no governance account and through it no
  * `factsOf`: the `layerBoundaries` cycle `factsOf -> faithReading -> governanceAccount -> factsOf` is cut. No value moves.
  */
-import { powerSentenceName } from './powerSentenceName.js';
-
-/** @param {unknown} v @returns {string} */
-const text = (v) => (typeof v === 'string' ? v.trim() : '');
+import { pluralPowerName as pluralPowerNameLeaf } from '../../data/people/powerSentenceName.js'; // NAMES-2 (item 5): the body lives in the data leaf
 
 /**
  * Whether a power's name reads as plural ("Religious Authorities", "Noble Houses"): its head noun, the
  * last word of its prose form (powerSentenceName: "Third Bloc (Neutrals)" reads "The Neutrals"), ends in a single s ("Guild", "Gentry", "Circle" do not).
+ * NAMES-2 (item 5, 2026-11-20): the body moved verbatim to `data/people/powerSentenceName.js :: pluralPowerName`, so the
+ * Power tab's data-layer lines read it too; this home keeps its name and returns it. No value moves.
  * @param {string} name @returns {boolean}
  */
 export function pluralPowerName(name) {
-  const words = (text(name) ? powerSentenceName(text(name)) : '').split(/[\s/]+/).filter(Boolean);
-  const head = (words[words.length - 1] || '').replace(/[^A-Za-z']/g, '');
-  return /[^s']s$/i.test(head);
+  return pluralPowerNameLeaf(name);
 }
