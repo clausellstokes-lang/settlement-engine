@@ -120,3 +120,5 @@ unchanged), tell2-an.mjs, pool.sh, tell2.sh, verify.sh; `run1/` tell2-table.txt,
 done.txt, pool.txt. Left on disk, uncommitted: the pool (`/var/tmp/v18/t2/pool-t2sig-1/`, 34 MB, with meta.txt: tree,
 sha256 of the signature, probe, galleryVeil.js, criminalVeilSwitch.js, 212), the towns shards (`run1/towns-shard*.json`, 10 MB),
 `verify1/`. Databases: `t2_tpl`, `t2_pool_0..3`, `t2_run1_0..3` (the smoke databases dropped).
+
+COMMITS: 580a5c9dd (unit 1: docs/chair/2026-11-20/veil/out/v27/tell2/measure/{tell2-signature.mjs,tell2.probe.jsx,tell2-an.mjs,pool.sh,tell2.sh,verify.sh}, run1/{tell2-table.txt,sensitivity.txt,verify.txt,window.txt,done.txt,pool.txt}, TELL2-HANDBACK.md); this line's commit (TELL2-HANDBACK.md). 212 sha256 6260803d1c4dddc13831f0e72c7e3ee0c88e4853e74c56e1c384b4251efb0218 (unchanged); 211 eface6d093933170b9541fe630068c26e5bd41477e95e913ae7168e373be0b01.
