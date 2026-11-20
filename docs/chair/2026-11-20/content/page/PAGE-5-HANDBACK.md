@@ -1,4 +1,4 @@
-# PAGE-5's hand-back: THE TROUBLE (kept current at every push; last written 2026-11-20 14:48 UTC by `date -u`)
+# PAGE-5's hand-back: THE TROUBLE (kept current at every push; last written 2026-11-20 15:13 UTC by `date -u`)
 
 Read this, then `PAGE-3-HANDBACK.md` (sections 0, 0a, 4b), `briefs/BUILDER-RULES.md`, `briefs/T1.md` (S6),
 `briefs/S7.md` + `briefs/S7-FOLLOWUP.md` (sides). PAGE-5 integrates; builders (the Agent tool) build. PAGE-6 owns the
@@ -14,7 +14,7 @@ other half (L2, L4/S9, S3); no file is shared.
 | unit | state | commit | next |
 |---|---|---|---|
 | 1 sides table | MERGED: 2f6b6a1db read once against 13:22/13:50 (all six changes + case arm verbatim); red re-run "6 failed / 9 passed (15)" (five new arms + the S7-TABLE arm: the table was regenerated in the same commit; the builder's 5 was with the old table), green 15/15; merge c5da1cfb3; lighting census refrozen 12e2fd25b (titles 31247->31252), verified 34/34; wiring --check green (861/3054/169) | c5da1cfb3, 12e2fd25b | owed at the join: parity test with `sideArchetypes.js` (origin/lane/frame-5-2026-11-20) |
-| 2 S6 | NOT STARTED by PAGE-5: origin `lane/page-2-2026-11-20-t1` 532a74fa2 (5 files: historyData.js, historyGenerator.js one call site, new test, bar4HistoryOneTelling re-anchor, manifest row); gates never ran | | one builder runs its gates + the confinement (T1.md acceptance 4); PAGE-5 reads diff once, re-runs red/green, censuses, merges |
+| 2 S6 | MERGED 464fc1b98 (builder's eca22cc51 on page5/s6: bar4 arm (b)'s bare negative anchored; gates: 49 importers green, ratchet 167, strict 1113, lint 0 errors; confinement 60/60 equal masked, 17/107 tensions moved). Re-run by PAGE-5: red 3 failed/11 passed (14), green 14/14. Census refrozen (3708->3709 files, 31252->31257 titles), wiring green. STORED FINGERPRINTS MOVED, SIGNED BY NONE: generatorGoldenMaster 74 of 525 (inside the 521 red at the base; equal with descriptions masked). Measure 39.9%->38.9% (`measures/page-5/s6/`). Reds not ours: ledgerCitationIntegrity (ref missing in the worktree), readerShapeResolver 258>256 (red on the base) | 464fc1b98 | done |
 | 3 causes | (a) MEASURED; (b) PROPOSED 14:16; the chair's FOUR RULINGS 14:21 (section 4) applied in `measures/page-5/sim.mjs` (the tables there ARE the proposal: cause, rank, predicate); re-projection sent | | (c) crime_wave + guild_conflict lines in ONE file to the chair before any merge, then the other six; (d) `src/data/tensionCauses.js` + totality test |
 
 ## 3. Unit 3's measure (scripts and outputs: `measures/page-5/`)
