@@ -1439,3 +1439,54 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   pairings of form and holder with weights and stated reasons; the circumstances that lift each kind; the stored
   shape; the veil's rows) and ONE PAGE for the owner; then builders, each proposing before building; the security
   reader reads what touches a shared page. THE CLOSE NOW HOLDS THREE LANES: the veil, the content round, the seat.
+- 04:52 UTC · **FIVE MESSAGES READ AT 04:48 UTC.**
+  **(1) SEAT-MEASURE: THE COUNT (d411d1806) AND THE MAP (e6b371a3e)** (`docs/chair/2026-11-20/content/seat/`
+  on `lane/seat-measure-2026-11-20`; 900 towns at default sliders and 960 under the 16 Character presets, 0
+  errors). AT DEFAULT SLIDERS, of 900 towns: the civic seat rules 680; merchant bodies 148; seats with a noble NAME
+  103 (15 read as noble: Royal Authority, the governorships and the stewardship read as "government"); craftsmen
+  present in 504 and ruling in NONE, contending in 35 (7 per cent); nobles present in 517, contending in 145 (28
+  per cent; 67 under the presets); the military present in 770 and contending in 92 per cent, the clergy 665 and
+  88, mages 300 and 10, all three ruling in NONE at default; criminals in 288, ruling in none, barred from the
+  contest; LABOURERS AND OUTSIDERS NEVER BORN AS POWERS. WHAT KEEPS A GROUP OUT IS RAW POWER AT BIRTH, NOT THE
+  FACTOR (the median noble left out is 2 weight under the third contender, the median craft guild 4.45; the factor
+  alone decides 3 of 391 and 5 of 469). NO SEAT IS WON AT BIRTH: read off an institution's label in 60 per cent,
+  else set by size; with the sliders at 50 none of the 14 priority councils is ever born (each needs a priority
+  over 55). ITS CORRECTIONS OF THE CHAIR: noble and guild bodies exist by label; Craft Guilds is born with the
+  category `economy` and is weighed as a MERCHANT (0.95): the 0.85 craft factor applies to no power a town is born
+  with; `densityAscension` is dark. MOST LIKELY TO BREAK: the KIND (`inferFactionCategory` reads a body's kind
+  from its name's words: a new body is mis-kinded silently, and "Foreign Administration" reads as an occupier); THE
+  VEIL (the government's name is already a function of which houses stand, and the registry rates
+  `tile.governmentType` diffuse on four runs); a table of bare decimals reds the tuning inventory. ITS OPTIONS: O1
+  stamp the true kind; O2 circumstance factors on the contenders' weights inside `coupContenders`, the
+  `COUP_COERCION` table left alone (the war layer reads it); O3 the winner's own body takes the seat
+  (`transferRulingPower` already can); O4 born labour and outsider powers; O5 born rulers by circumstance. ITS
+  CRUX: whether the owner means BORN ruling or ABLE TO TAKE the seat.
+  **THE ONE PAGE WENT TO THE OWNER** (the count as a table; TWO CORRECTIONS OF THE CHAIR'S EARLIER WORDS SAID BY
+  NAME: "craftsmen start 15 per cent down" was wrong, and the five priority councils are never born at untouched
+  settings; the model: the FORM, the HOLDER and the PERSON kept apart, a table of holders as a council and as one
+  ruler, the holder never contesting its own seat; what lifts a group, from the record only; the rules: nothing
+  invented, only new towns, a criminal holder never on a shared page). THREE QUESTIONS PUT TO THE OWNER: born this
+  way or only able to take it (the chair reads both); at untouched settings may a town held by soldiers, clergy or
+  mages be born where its facts point there; labourers and outsiders only where the record calls for them. THE
+  TIME GUESS CORRECTED: two to three days for all of it, not one to two.
+  **(2) FRAME-1's PROPOSAL (5c63c875c, `docs/chair/2026-11-20/content/FRAME-1-PROPOSAL.md`), RULED, BUILDING:** 330
+  calm born towns: today's lead is the pressure sentence in 330 of 330, the seat-holder first voiced in 330, the
+  senior cleric second in 220; the record's tensions carry a grade; 29 types, 130 side labels, classed into 13
+  archetypes; its preview over 990 sides: by office 18 per cent (the seat-holder 5, a power's head 7, a force's
+  commander 6), a tie or an own hook 27, a trade 14, an outsider 3, the criminal power 5, ABSENT 33; all three
+  named in 146 of 330. RULINGS: the one-home red: in exports the trouble opens on its NAME and sides, the sentence
+  stays on screen; the pinned calm sheet re-seated by identity to a town with no trouble of weight; 33 per cent
+  absent accepted (by archetype in the hand-back). **ITS FINDING, PRE-EXISTING: THE SESSION SHEET OPENS ON A SHARED
+  PAGE AND ON THE PARTY LINK TODAY** (the Table View is mounted with no public gate). So CF3's gate is made
+  EXPLICIT (the composer takes its audience; a reader who is not the owner gets today's sheet, never the frame; the
+  stripped seed is a second lock), and the finding went to the veil lane (the render-twice harness walks that
+  sheet) and to the reader (a surface for FINAL).
+  **(3) VEIL-22 SEATED AND R2's DIFF READ AS SECOND EYES** (at 12a371c0b): sound (the restated `_gallery_veil`
+  differs from 211's by exactly the two cure hunks; the SQL and the twin match rule for rule; all four non-owner
+  reads pass through it). ONE CURE, RULED (VR37 sharpened): where the page's re-derived readiness score falls
+  outside the served label's own band, the page draws the label alone. For R4: a cast role of kind 'npc' is
+  matched by id, so R4 re-keys the cast's role ids before R2's step.
+  **A QUESTION THE SEAT'S MAP RAISES FOR THE SECURITY LANE, NOT YET SENT:** the government's NAME is a function of
+  the town's houses and priorities ("Corrupt Council", "Shadow Senate" and their description "Criminal networks
+  have captured governance" are served today); is that consistent with the default veil's shut capture grouping,
+  and what is served of the name when the governing house is hidden by hand? For the reader's FINAL list.
