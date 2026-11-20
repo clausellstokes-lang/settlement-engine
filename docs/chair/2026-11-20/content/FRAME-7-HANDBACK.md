@@ -21,6 +21,10 @@ Unchanged since FRAME-6 (63 owner framed at `4971555c3`; 58 by W1 to W3). Not re
 60. **SR1 APPROVED** (the chair, 20:04 UTC): the shape as written; the wordings with FOUR CURES (public_legitimacy 3 "people look to {power|it|them} first for an answer"; defense_readiness 2 "… to keep watch"; trade_connectivity 3 "{power|it lives|they live} by trade, and trade is what suffers"; healing_capacity "the hurt and the sick are brought to {power|it|them} first"); ONE MEASURE before the merge (the kinds of power and the crisis kinds reaching each matched system; a non-arming power or a crisis that is no danger of arms on defense_readiness beyond a trace needs a `needs`). P1 "beside F5R: GO"; FRAME-7 put SR1 FIRST and P1 on SR1's tip (both write `crisisCast.js`, at its 800-line ceiling; SR1 shortens it), told to the chair as vetoable. The three tuningRegister rows answered (20:1x): FRAME_TUNING added by this lane (FRAME-1, 535511009), unsigned; CRISIS_CAST_TUNING and WANT_MAX_WORDS existing rows whose importers moved; no value moved; none C2b's.
 : STATE, BRANCH, COMMIT
 
+61. **THE RATCHET BEFORE EACH LANDING REQUEST** (the chair, 20:14 UTC; the goals landing left three real reds no gate had run): ONE `npm run test:ratchet` at the lane's tip WITH THE LINE'S TIP MERGED IN (`scripts/check-test-ratchet.mjs`: the suite outside `tests/build`, the exclusive mutex, every failing test named; to a log, never a pipe; the ONE whole-suite run allowed). Its rows read BY NAME against the line's list (`git fetch origin lane/chair-2026-11-08 && git show FETCH_HEAD:docs/chair/2026-11-20/seventh/ci/RED-AT-LINE.tsv`): a row not on the list is a figure this lane moved (named with its cause; re-recorded only by its own door, or left for the close where the door is the owner's) or a real red, cured on the lane before the request. The unit's governing-files gate stays the unit's; the ratchet is the landing's.
+
+## EACH UNIT: STATE, BRANCH, COMMIT
+
 | unit | state | commit | receipts |
 |---|---|---|---|
 | take-over | DONE | `91c6723e1` (fast-forward) | — |
