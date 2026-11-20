@@ -24,6 +24,12 @@
  *                            seventh chair's ruling CN1 of 2026-11-20, goals.js :: cellCandidates fills
  *                            it through powerNameWithArticle); never "the {power}", never "{power}'s"
  *                            (many names are plural: "Merchant Guilds", "Grain Holders").
+ *   {power|one|many}         THE AGREEMENT FORM (NAMES-3, the seventh chair's rulings CV1 and CV7 of
+ *                            2026-11-20, vetoable by the owner): an "it"/"its" said of a power slot, or a
+ *                            verb whose subject it is, is written in both numbers and takes the power's
+ *                            own ("stronger than they found {power|it|them}"), filled by goals.js ::
+ *                            cellCandidates through the one reader (`powerSentenceName.js ::
+ *                            fillAgreement`). "They"/"their" after a singular power stand (CV7 (1)).
  *   {house} {otherHouse}     the house as "the" + its display noun (`institutionDisplayName`),
  *   {front} {targetHouse}    lower-cased, any parenthetical stripped ("the fish market", "the
  *                            mills", "the smuggling network"); never possessive, never the subject
@@ -219,7 +225,7 @@ export const GOAL_FAMILY_LINES = Object.freeze({
         "Take {above}'s place in {power}, and keep it longer than {above} did.",
         'Rise past {above} in {power} on their own merit, owing no one for the climb.',
         'Be the first person {power} would turn to, before anyone thinks to ask {above}.',
-        'Reach the head of {power} and run it the way {above} never would.',
+        'Reach the head of {power} and run {power|it|them} the way {above} never would.',
         'Outlast {above} in {power}, and be ready when the place falls empty.',
       ]),
     }),
@@ -237,15 +243,15 @@ export const GOAL_FAMILY_LINES = Object.freeze({
         'Stay at the head of {power} until they choose who comes after them.',
         'Hand {power} on to an heir of their own choosing, and not to {below}.',
         'Lead {power} so long and so well that no one, {below} included, thinks of replacing them.',
-        'Make {power} so much their own that it could not run a week without them.',
+        'Make {power} so much their own that {power|it|they} could not run a week without them.',
         'Keep {below} loyal for life, and make loyalty pay better than ambition.',
-        'Leave {power} stronger than they found it, with {below} still second and content.',
+        'Leave {power} stronger than they found {power|it|them}, with {below} still second and content.',
       ]),
     }),
     // a member who holds no rank
     enter: Object.freeze({
       short: cell([
-        'Do one thing for {power} this season that the people who lead it cannot ignore.',
+        'Do one thing for {power} this season that the people who lead {power|it|them} cannot ignore.',
         'Be in the room the next time {power} must decide something that matters.',
         'Find a patron among those who lead {power}, and make themselves useful to them.',
         'Bring {power} a piece of news before anyone else does.',
@@ -256,9 +262,9 @@ export const GOAL_FAMILY_LINES = Object.freeze({
         'Be counted one day among those who lead {power}.',
         'Earn a place among the leaders of {power} without buying it or marrying into it.',
         'Become someone {power} cannot do without.',
-        'Rise in {power} far enough that their word carries weight outside it.',
+        'Rise in {power} far enough that their word carries weight outside {power|it|them}.',
         'Reach the top of {power} by the long road, one earned favour at a time.',
-        'Be given the secrets of {power} to keep, as well as its errands to run.',
+        'Be given the secrets of {power} to keep, as well as {power|its|their} errands to run.',
       ]),
     }),
   }),
@@ -278,7 +284,7 @@ export const GOAL_FAMILY_LINES = Object.freeze({
         'See {rival} too weak to threaten {power} again.',
         'Make peace between {power} and {rival} on terms {power} can live with.',
         'Outlast {rival}, and still be standing with {power} when they are gone.',
-        'Build {power} up until it is beyond the reach of {rival}.',
+        'Build {power} up until {power|it is|they are} beyond the reach of {rival}.',
         'Bring {rival} under the sway of {power}, one member at a time.',
         'End the bad blood between {power} and {rival} before the next generation inherits it.',
       ]),
@@ -298,7 +304,7 @@ export const GOAL_FAMILY_LINES = Object.freeze({
         'Build {power} into something {rival} can only follow.',
         'Win so much for {power} that the contest with {rival} stops being a contest.',
         'Turn the contest with {rival} into a partnership on terms set by {power}.',
-        'See {power} outgrow {rival}, so it never has to look over its shoulder again.',
+        'See {power} outgrow {rival}, so {power|it never has|they never have} to look over {power|its|their} shoulder again.',
       ]),
     }),
     // either end of a corrupted relation: written so that both ends read true

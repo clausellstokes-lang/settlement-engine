@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "f431ab5be390b0743287d712a9bfe2a825567ec6",
-  "measuredBy": "FRAME-5",
+  "measuredAtSha": "379f63cb68650d548dbd66ccbf72f9a7f95c7586",
+  "measuredBy": "POINT-82",
   "date": "2026-11-20",
-  "note": "the merge of CF12 (f431ab5be: tonightSheetAudience.test.js; troubleWeight and the veil test grow), re-taken at the merged tip",
-  "files": 3716,
-  "parked": 473,
-  "credited": 3243,
-  "titles": 31285,
-  "suiteTitles": 8666
+  "note": "names-4 landed: the agreement work, its swap test and census cure",
+  "files": 3707,
+  "parked": 472,
+  "credited": 3235,
+  "titles": 31237,
+  "suiteTitles": 8651
 }
