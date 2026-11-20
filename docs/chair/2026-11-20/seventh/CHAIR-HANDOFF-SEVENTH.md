@@ -2161,3 +2161,23 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   **(3) TRAD-2 is session_019yED1Na8i5w3Xgw1qqgSB3** (seated 07:18 UTC; reads until the hand-over). TITLES-2 has about
   thirty sourced words verified and is writing its hand-back. NAMES-2 has committed and is running its lint and
   drafting its hand-back. The next net is armed for 08:30 UTC.
+- 07:25 UTC · **THE CHAIR CAN READ A SEAT'S TRUE TOKEN COUNT, AND THE SEATS' OWN ESTIMATES RAN ABOUT A THIRD LOW: FOUR HAND-OVERS ORDERED.**
+  HOW IT WAS FOUND: SEAT-2, seated beside SEAT-1, read SEAT-1's session record with `get_session` and told the chair
+  at once: 426,947 used tokens, where SEAT-1's own estimate at 06:08 was about 290,000. A SEAT'S READ OF ITSELF RETURNS 0
+  (every seat said so all day); THE CHAIR'S READ OF A SEAT RETURNS THE FIGURE (`external_metadata.context_usage`:
+  `used_tokens` of `max_tokens` 1,000,000; auto-compaction at 784,000), though not for every seat (TRAD-1 and NAMES-2
+  still read 0). READ AT 07:25 UTC: **SEAT-1 426,947; VEIL-22 381,559 (its own estimate 255,000); FRAME-2 335,885 (its
+  own 185,000); REVIEW-VEIL-11 636,370.** NOTHING HAS FAILED; the marks exist because a seat past them is slower,
+  dearer and less exact, and a reader about to clear a security migration must not be at two thirds of its window.
+  A RULE FROM NOW: at every pass the chair reads each working seat's count itself and acts on ITS figure; a prompt
+  says "your own estimate will run about a third low".
+  **ORDERED:** SEAT-1 hands over at U1's return WITHOUT reading the diff (the builder's branch pushed unread, a short
+  hand-over, "U1-UNREAD <commit>, HANDED OVER"): SEAT-2 reads, merges and dispatches U2 and U3. VEIL-22 writes PART
+  23's hand-over and sends "HANDED OVER at <commit>": VEIL-23 owns the lane; VEIL-22 remains ONLY A RELAY for the
+  builders it started (a builder returns to its starter's session): it reads no diff, pushes the branch, sends one
+  line. FRAME-2 starts no new unit, merges what its builders hold and sends "FRAME-PART <commit>, HANDED OVER":
+  **FRAME-3** (`prompts/FRAME-3.txt`) is seated beside it. **REVIEW-VEIL-12** (`prompts/REVIEW-VEIL-12.txt`), A FRESH
+  SECURITY READER, takes the cold reads from R3 on and FINAL, which the owner's word requires of a fresh reader in any
+  case; REVIEW-VEIL-11 writes a hand-over note (its instruments, its arms for FINAL, what it attacked and how) and
+  stops. TRAD-1 (its own estimate 390,000: by the same error it may be near 600,000) was already ordered to hand over.
+  ALSO: TRAD-2 has read everything and re-ran TRAD-1's tools byte-identical (432 towns); it waits for the lane.
