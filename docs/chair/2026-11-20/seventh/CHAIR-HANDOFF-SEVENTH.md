@@ -1678,6 +1678,22 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   only because hooks never reach a reader: an arm proves `currentTensions[].plotHooks` absent from the shared
   projection and the served document; those hooks listed for the security reader. Owed: "TROUBLE-LINES-2 <commit>".
 
+- **THE SECOND TRANCHES AND THE CONFLICT'S NINE MORE, READ (16:22 UTC).** `lines/TIES-3.md` and `HOOKS-3.md` at
+  be5517755 and `CONFLICT-LINES-2.md` at 275cdbf26 (`lane/depth-2-2026-11-20`). THE CHAIR READ EVERY LINE. TIES: 77
+  PAIRS (mutual_leverage 17, peer_rivalry 16, old_debt 15, wary_alliance 14, mentor_legacy 10, genuine_respect 5):
+  74 AS WRITTEN, THREE REWORDED because each stated a fact about a person the record may contradict (an age, a
+  household): old_debt 2's tension ("…saying the light is poor…", not failing eyes); old_debt 14 ("S paid R's way
+  into a trade…", not schooling); mentor_legacy 8's tension ("…a room for whenever R should want one…", not "now
+  that R lives alone"). HOOKS: 36 (`other` 30, `economy` 6): 25 AS WRITTEN; ELEVEN SENT BACK (other 1, 2, 4, 8, 17,
+  18, 19, 20, 27, 28; economy 4): they are states of mind with nothing to take hold of; THE RULE, the same as for a
+  trouble's hooks: A HOOK IS A LEAD A DM CAN USE TONIGHT: something has happened or is about to (a visitor, a
+  letter, an object, a request, a deadline, a discovery); owed: "HOOKS-3B <commit>". THE CONFLICT'S NINE: three
+  lines on the three small-place houses and six for the military rung: EIGHT AS WRITTEN, n1 reworded ("…whose turn
+  it is to keep the water clean…"); the atom "Water source" reads broadly. PROJECTED TOP SHARE WITH ALL 25 QUARRELS:
+  thorp 17, hamlet 16, village 11, town 12, city 16, metropolis 9 (from 52, 49, 44, 58, 52, 52). THE PLACEHOLDER
+  MEASURE of the two tranches together: a second city repeats 23.6% of a first's tie lines (62.8% today) and 25.5%
+  of its hooks (46.5%); metropolis 32.2% and 35.0% (73.4%, 63.5%); to be said again on built towns.
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -4613,3 +4629,14 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   no cited line moves: for the join with the goals lane; L4's brief does NOT add "principled" to the guard at
   `npcData.js:2548` (it reads the temperament in S9's admits); a helper is running PAGE-1's own `f5.mjs` unchanged
   on 79710682d and c727a4d17 with an L4 projection: the figures owed to the chair and then to the owner.
+- 16:23 UTC · "U4 merged 0702dc894" FROM SEAT-5 (lane 6e697f5db; tests/lint whole 3271 of 3271; confinement EQUAL; registers in
+  one commit 31fe59f7c: writer-reach moved exactly the three ruled identities; one wiring row re-keyed with its
+  cause: `system:public_legitimacy -> settlement.config` at `factionStanding.js :: annotateFactionStanding`; the
+  renamed-seat rule fires in 0 born towns on both pools). THE EARLY JOINT READING OF THE TWO DARK LAWS IS LAUNCHED
+  (a helper, 16:21): a scratch tree merging 6e697f5db with the fortune lane's c167b5f11; 600 places (hxd, 100 a size)
+  in four arms (both off, each alone, both on); its report under the scratchpad's `joint-reading/`: the cross (calm
+  rulers standing Tolerated who are contested, unprotected or unseated) and "a ruler in trouble with no cause in the
+  record". SEAT-6 SEATED BESIDE SEAT-5 at 16:20 (session_019yED1R4mTVRuHKRPWJPt3f; on `lane/seat-5-2026-11-20`;
+  outcome `lane/seat-6-2026-11-20`); SEAT-5 (about 330,000 by its own figure) goes on with U5 and hands over at a
+  natural stop near 400,000. DEPTH-2 (about 290,000 by its own figure): verdicts sent (section 2); DEPTH-3's prompt
+  is NOT written: write it at the next pass if its record reads past 330,000.
