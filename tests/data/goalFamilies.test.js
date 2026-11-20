@@ -431,14 +431,17 @@ describe('goal families — the wants\' tranche: the 380 approved lines, each at
     expect(new Set(all).size).toBe(all.length);
   });
 
-  for (const c of WANT_CELLS) {
-    test(`${c.family}/${c.sub}/${c.vantage}: its ${c.plus} approved lines close the drawn cell, verbatim and in order (${c.from} → ${c.to})`, () => {
+  test('every approved line closes its DRAWN cell, verbatim and in the source\'s order: each cell holds n + k lines, its last k the source\'s', () => {
+    const misplaced = WANT_CELLS.flatMap((c) => {
+      const where = `${c.family}/${c.sub}/${c.vantage}`;
       const cell = GOAL_FAMILY_LINES[c.family]?.[c.sub]?.[c.vantage];
-      expect(Array.isArray(cell), 'the drawn cell exists').toBe(true);
-      expect(cell.length).toBe(c.to);
-      expect(cell.slice(c.from).map((e) => (typeof e === 'string' ? e : null))).toEqual(c.lines.map((l) => l.line));
+      if (!Array.isArray(cell)) return c.lines.map((l) => `${where} #${l.n}: no such drawn cell`);
+      const tail = cell.length === c.to ? cell.slice(c.from).map(textOf) : [];
+      return c.lines.filter((l, i) => tail[i] !== l.line || typeof cell[c.from + i] !== 'string').map((l) => `${where} #${l.n} (cell holds ${cell.length}, wants ${c.to}): ${l.line}`);
     });
-  }
+    expect(misplaced.length, `approved lines not at their cells' ends: ${misplaced.length} of 380`).toBe(0);
+    expect(misplaced).toEqual([]);
+  });
 
   test('no approved line is a reserve line: the tranche is drawn, never only rotated onto', () => {
     const reserve = new Set(Object.values(GOAL_RESERVE_LINES).flatMap((subs) => Object.values(subs).flatMap((vs) => Object.values(vs).flat().map(textOf))));
