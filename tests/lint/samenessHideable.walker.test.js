@@ -41,8 +41,8 @@
  *                    through a helper, a re-export or a closure is found by no scan, and is registered by hand.
  *   PHASE 3          (SAME-2 brief H; the chair's 17:45 order (2)) the hand-listed pools' LINES are read too
  *                    (`readHandLines`): a declared row (`needs` or `marks`) by its atoms, rule 1 and rule 2 as above;
- *                    every other line (a bare string, a function, a row that declares no need) by `CRIME_WORD`, a word
- *                    beginning with a stem of `CRIME_KEY_WORDS` (PENDING: `FREE_TEXT_READ`, the chair's 19:12 word);
+ *                    every other line (a bare string, a function, a row that declares no need) by `CRIME_TEXT_FORMS`,
+ *                    the precise free-text forms the chair ruled at 19:29 (SAME-2 brief H2), never by the key list;
  *                    a line under a key `CRIME_KEY_WORDS` takes is in a CRIME POOL. A function line is read from its own source (literals and template quasis), never
  *                    called. The reds standing on 1c9673e84 are the bank's `hand` rows (pool, text hash, why); the
  *                    houses are the readings' `hand` rows. A seat's hand row whose table is not on this line is skipped.
@@ -230,16 +230,40 @@ function sortRows(rows, keys) {
 }
 
 // ── PHASE 3: THE HAND POOLS' LINES (SAME-2 brief H unit 1; the chair's 17:45 order (2)) ────────────
-/** A bare line's crime word: a WORD that begins with one of `CRIME_KEY_WORDS`' stems (the chair: whole words). */
-const CRIME_WORD = new RegExp(String.raw`\b(?:${CRIME_KEY_WORDS.source})`, 'i');
+/**
+ * THE FREE-TEXT FORMS (the chair's ruling of 19:29 UTC 2026-11-20 on PHASE3-REPORT's free-text table, accepted as
+ * proposed): a bare line is read by this precise list, one form per word, NOT by `CRIME_KEY_WORDS` (a key's list).
+ * organised only in "organised crime"; underground only before market, bazaar, network, trade or city; criminal(s)
+ * kept EXCEPT in a court's sentence (courts, benches), the plural kept; gang(s) and "gang war", dropped before "of";
+ * crime only in organised crime, crime wave, ring, lord, family, boss; corrupt only as corrupted or corruption; protection
+ * racket and racketeer; shadow only in shadow market, economy, trade, guild, broker; thieves' guild or "the thief";
+ * clandestine, syndicate, underworld as they stand. A word with no form (smuggl, black market, capture, operation role,
+ * off-book) is no free-text red.
+ */
+export const CRIME_TEXT_FORMS = Object.freeze({
+  organised: /\borgani[sz]ed crime\b/i,
+  underground: /\bunderground (?:market|bazaar|network|trade|city)s?\b/i,
+  criminal: /(?<!\b(?:courts?|benches)\b[^.]*)\bcriminals?\b(?![^.]*\b(?:courts?|benches)\b)/i,
+  gang: /\bgang(?:s|\s+wars?)?\b(?!\s+of\b)/i,
+  crime: /\bcrime (?:waves?|rings?|lords?|famil(?:y|ies)|boss(?:es)?)\b/i,
+  corrupt: /\bcorrupt(?:ed|ion)\b/i,
+  racket: /\b(?:protection rackets?|racketeer\w*)\b/i,
+  shadow: /\bshadow (?:markets?|econom(?:y|ies)|trades?|guilds?|brokers?)\b/i,
+  thief: /\bthieves'? guilds?\b|\bthe thief\b/i,
+  clandestine: /\bclandest\w*/i,
+  syndicate: /\bsyndicate\w*/i,
+  underworld: /\bunderworld\w*/i,
+});
+/** The word whose form a text holds (the first, in the list's order), or null. @param {string} text */
+export const crimeTextForm = (text) => Object.entries(CRIME_TEXT_FORMS).find(([, form]) => form.test(text))?.[0] ?? null;
 /** A row's fields that are not lines (its declaration, its classifiers, its labels). */
 const NOT_LINE_KEYS = new Set(['key', 'type', 'label', 'twinOf', 'needs', 'excludes', 'crisis', 'institutions', 'trade',
   'dominant', 'arcane', 'colour', 'marks']);
 const HOLE = '‹›';
 /**
- * THE FREE-TEXT READING IS PENDING (the chair, 19:12 UTC 2026-11-20): the word list is made precise for free text
- * (a phrase or a word-boundary form per word) before any free-text line is banked. Until the chair's word, a bare
- * line is read by `CRIME_WORD` only where a caller asks (`words: true`), and the bank holds no free-text red.
+ * THE FREE-TEXT READING (the chair, 19:12 and 19:29 UTC 2026-11-20): a bare line is read by `CRIME_TEXT_FORMS`. The
+ * forms stand (SAME-2 brief H2 unit 1); the reading opens with the bank of its reds (unit 4). Until then a bare line
+ * is read only where a caller asks (`words: true`), and the bank holds no free-text red.
  */
 const FREE_TEXT_READ = false;
 
@@ -320,9 +344,9 @@ export function poolLeaves(value) {
 /**
  * The phase-3 reading of the hand pools' lines. A DECLARED row (`needs` or `marks`) is read by its atoms: rule 1 reds
  * a crime or hideable atom, rule 2 lists its other houses. Every other line (a bare string, a function, a row that
- * declares no need) is read by `CRIME_WORD`. A line under a key `CRIME_KEY_WORDS` takes is in a CRIME POOL. A line
+ * declares no need) is read by `CRIME_TEXT_FORMS`. A line under a key `CRIME_KEY_WORDS` takes is in a CRIME POOL. A line
  * marked `dm-only`, or in a pool `EXEMPT` names, reds nowhere.
- * @param {HandPool[]} hand @param {Readonly<Record<string, unknown>>} [exempt] @param {boolean} [words] read bare lines by `CRIME_WORD`
+ * @param {HandPool[]} hand @param {Readonly<Record<string, unknown>>} [exempt] @param {boolean} [words] read bare lines by `CRIME_TEXT_FORMS`
  * @param {Readonly<Record<string, unknown>>} [dm] the tables dm-only by construction
  */
 export function readHandLines(hand, exempt = EXEMPT, words = FREE_TEXT_READ, dm = DM_BY_CONSTRUCTION) {
@@ -336,7 +360,7 @@ export function readHandLines(hand, exempt = EXEMPT, words = FREE_TEXT_READ, dm 
     /** @type {string[]} */ const why = [];
     if (path.some((k) => CRIME_KEY_WORDS.test(k))) why.push('crime pool');
     if (declared) why.push(...atoms.filter((a) => ['crime', 'hideable'].includes(String(atomClass(a)))).map((a) => `needs ${a}`));
-    else if (words && text !== null && CRIME_WORD.test(text)) why.push(`crime word ${String(text.match(CRIME_WORD)?.[0]).toLowerCase()}`);
+    else if (words && text !== null && crimeTextForm(text)) why.push(`crime word ${crimeTextForm(text)}`);
     if (text === null) why.push('unreadable');
     const quiet = (row.marks || []).includes(COVERT) || Object.hasOwn(exempt, pool) || Object.hasOwn(exempt, ref) || Object.hasOwn(dm, ref);
     out.push({ pool, sha: textSha(text), text, why, houses: atoms.filter((a) => atomClass(a) === 'house'), quiet });
@@ -561,13 +585,38 @@ describe(`the hideable-house walker of the sameness pools (base ${BASE})`, async
       expect(handReds([{ ref, value: { criminal: ['x'] } }], { [`${ref}::criminal`]: { class: 'withheld' } })).toEqual([]);
     });
 
-    test('PHASE 3: a bare line with a crime word reds in a non-crime hand pool, a string or a function read by its source', () => {
+    test('PHASE 3: a bare line holding a free-text form reds in a non-crime hand pool, a string or a function read by its source', () => {
       const ref = 'src/data/narrativeData.js :: STRESS_NOTES';
-      expect(handReds([{ ref, value: { famine: ['A smuggler sells grain by the well.'] } }], EXEMPT, true).map((r) => r.why)).toEqual(['crime word smuggl']);
-      expect(handReds([{ ref, value: { famine: ['A smuggler sells grain by the well.'] } }])).toEqual([]); // pending the chair's precise list (19:12)
+      expect(handReds([{ ref, value: { famine: ['Rival gangs, forever disputing their turf.'] } }], EXEMPT, true).map((r) => r.why)).toEqual(['crime word gang']);
       expect(handReds([{ ref, value: { famine: [(/** @type {string} */ n) => `${n} has a gang at its gate.`] } }], EXEMPT, true).map((r) => r.why)).toEqual(['crime word gang']);
       expect(sourceText((/** @type {string} */ n) => `${n} waits.`)).toBe('‹› waits.');
-      expect(handReds([{ ref, value: { famine: ['An unorganised heap of sacks.', 'The fishers mend their nets.'] } }], EXEMPT, true)).toEqual([]);
+      expect(handReds([{ ref, value: { famine: ['A smuggler sells grain by the well.', 'An unorganised heap of sacks.'] } }], EXEMPT, true)).toEqual([]); // smuggl has no form
+    });
+
+    test('THE FREE-TEXT FORMS (the chair, 19:29): each form takes its hit and leaves its non-hit (the report\'s examples)', () => {
+      /** @type {Record<string, [string, string]>} word -> [a hit, a non-hit] */
+      const cases = {
+        organised: ['A chapter of organised crime. Thirty to a hundred members.', 'Guild-organised carpenters, joiners and wrights.'],
+        underground: ['A standing underground market dealing contraband, forged papers, and services no law permits.', 'Drains laid underground.'],
+        criminal: ['Miles of tunnel and catacomb turned to shelter for criminals and refugees alike.', 'Commercial, criminal, and ecclesiastical benches, each in its own house.'],
+        gang: ['The criminal syndicate the city has never rooted out, for fear that open gang war would be worse.', 'A stone quarry, its blocks cut and dressed by a gang of quarrymen.'],
+        crime: ['A crime wave the watch cannot stem.', 'Separate courts for trade, for crime, and for the church.'],
+        corrupt: ['Bribes and corrupted border infrastructure hold it together.', 'Corrupt, vain and quick to anger.'],
+        racket: ['A "security fee" that is, in practice, a protection racket.', 'The racket of the mill wheel never stops.'],
+        shadow: ['A shadow market trades behind the granary.', 'Never end up in their shadow.'],
+        thief: ['On the payroll of the thieves\' guild as a silent informant.', 'Enough to discourage the casual thief.'],
+        clandestine: ['An entirely clandestine trade in persons.', 'An open trade in persons.'],
+        syndicate: ['The syndicate takes its cut.', 'The guild takes its cut.'],
+        underworld: ['An underworld power the city has never rooted out.', 'A power the city has never rooted out.'],
+      };
+      expect(Object.keys(cases)).toEqual(Object.keys(CRIME_TEXT_FORMS));
+      for (const [word, [hit, miss]] of Object.entries(cases)) {
+        expect(crimeTextForm(hit), hit).not.toBeNull();
+        expect(CRIME_TEXT_FORMS[/** @type {keyof typeof CRIME_TEXT_FORMS} */ (word)].test(hit), hit).toBe(true);
+        expect(crimeTextForm(miss), miss).toBeNull();
+      }
+      expect(crimeTextForm('Several courts sitting at once, each to its province: commercial, criminal, appellate, ecclesiastical.')).toBeNull();
+      expect(crimeTextForm('Holds debtors, criminals, and political prisoners alike.')).toBe('criminal'); // the plural is kept
     });
 
     test('PHASE 3: a declared hand line is read by its atoms (a crime atom reds; a house is listed), not by its words', () => {
