@@ -1,4 +1,4 @@
-# SEAT-6 — HAND-BACK (kept current at every push; last written 2026-11-20T19:27:47Z, read from `date -u`)
+# SEAT-6 — HAND-BACK (kept current at every push; last written 2026-11-20T19:31:52Z, read from `date -u`)
 
 **For the next owner of this lane: this file, `SEAT-5-HANDBACK.md` §1 to §3 (every ruling 1 to 52, the units' table, the instruments) and `briefs/` are all you need.** This file adds only what changed since SEAT-5's hand-over.
 
@@ -52,3 +52,15 @@ Branch `lane/seat-6-2026-11-20` (origin), fast-forwarded to `8bfabc080`: the cha
 
 65. **STOP 1 RULED A NAMED SURVIVOR (the chair, 18:57Z):** `mutateWorld.js :: changeRulingPower` (the DM's `CHANGE_RULING_POWER`, first paint) is NOT wired: a DM who installs a power chooses the outcome; a licensed pair falls closed to the winner's own form; pinned by `seatTransfer.test.js` arm (11) (`eventChange`).
 66. **STOP 2 RULED (the chair, 18:57Z):** `applyWorldPulse.js` IS wired, but its shrink-only size ceiling (907) does NOT rise (a size rise is the owner's); room by a move into an existing lazy sibling, byte-identical; arm (11)'s `pulseTransfer` pin moves from stop to kept in the wiring's commit. No clean move: STOP, the candidates to the chair, who carries the three lines to the owner at the close; the coup path fails closed until then.
+
+67. **THE OWNER: THE TRAIN SHIPS LIT (the chair's message of 19:14Z, written here VERBATIM as the chair ordered, for SEAT-7, which gets the same message):**
+
+> CHAIR to SEAT-6 (19:14 UTC; write it into the hand-back verbatim for SEAT-7, which gets the same message). THE OWNER HAS DECIDED, in the chair's chat at about 19:13 UTC, verbatim: "I agree with number 4 switch it on". Number 4 was the chair's recommendation that the new rules for who rules and for fortune SHIP SWITCHED ON at the deploy. SO THE TRAIN NO LONGER "LANDS DARK": IT LANDS READY TO LIGHT AND IT SHIPS LIT.
+> 1. YOU STILL BUILD WITH THE LAW OFF BY DEFAULT ON THE LANE, proved byte-identical dark, exactly as now. THE FLIP OF THE DEFAULT IS ONE UNIT OF THE CHAIR'S, AT THE CLOSE, ON THE JOINED TREE, with the re-signing of the stored figures (the owner's hand, then). No seat flips a default.
+> 2. WHAT SHIPS LIT: the seat law as built (arm D, with the contest at today's figures: your L1), the transfer, "UK", culture as a weight, and each later unit as it lands. NOT LIT: arm LP's proposed contest figures: a tuning the owner has not been shown; it stays a measured option in the hand-back.
+> 3. FROM NOW THE HEADLINE OF EVERY MEASURE IS THE LIT WORLD ON A VISITOR'S POOL; dark is the control.
+> 4. OWED IN THE HAND-BACK, a section "TO LIGHT": the exact switch (the law's key and where a birth mints it); every test and register that pins the dark default, by file and title (the flip's worklist); what a town ALREADY SAVED does (it must keep the law it was born under: name the test that proves it, or say none exists); and EVERY SURFACE THE LIT LAW ADDS TO A PUBLIC OR SHARED READ (the seat's train, the contest's reading, the transfer's wording), for the security reader: the share veil's gates must hold them before the flip.
+> 5. Nothing that was "harmless while dark" is harmless now: the coup path's wiring (U5-CURE2, without a size rise) ships; so does every arm that pinned a path as failing closed: say for each whether live play can reach it.
+> Order, pushes and the cherry-pick rule are unchanged.
+
+**What it changes in this hand-back:** "DARK" in items 9, 21, 42 and the briefs means OFF BY DEFAULT ON THE LANE, proved byte-identical, and READY TO LIGHT; the light is the chair's one unit at the close. Arm LP (`SEAT_CIRCUMSTANCE_TUNING`'s proposed figures) is NOT lit: a measured option only. Every measure's headline is the LIT world (seat law on, contest at L1 = today's figures) on the VISITOR pool. The section "TO LIGHT" follows (owed; §5).
