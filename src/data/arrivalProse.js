@@ -455,7 +455,7 @@ export const ARRIVAL_PEOPLE = Object.freeze({
     { text: () => 'A household leader hands out gifts in the open, and everyone watching keeps count.', crisis: ['any'] },
     { text: () => 'Neighbours work together to mend a roof, and nobody seems to be in charge of it.', crisis: ['any'] },
     // L2 (PAGE-2's lines, 2026-11-20): APPENDED; the custom each shows, in its profile's words, is cited in L2-LINES.md
-    { text: () => 'A household counts its winter stores aloud at the door of its storehouse, and the neighbours listen to the count.', crisis: ['any'] },
+    { text: () => 'A household counts its winter stores aloud at the door of its storehouse, and the neighbours listen to the count.', excludes: ['crisis: hunger'], crisis: ['any'] },
     { text: () => 'An old man recites a point of law from memory, and nobody listening needs to ask where he learned it.', crisis: ['any'] },
     { text: () => 'A silver ring is cut in two to settle a bargain, and each side weighs his piece in his palm.', crisis: ['any'] },
   ],

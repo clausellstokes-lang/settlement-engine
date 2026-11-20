@@ -45,7 +45,7 @@ export const ARRIVAL_SCENES = {
     (r) =>
       `You come into ${r} along the bank, where steps go down to the water and someone is filling a bucket at the bottom of them.`,
     (r) =>
-      `Willows lean over the water on the way into ${r}, and the first houses stand just above the line where the bank turns to mud.`,
+      `Trees lean over the water on the way into ${r}, and the first houses stand just above the line where the bank turns to mud.`,
     (r) =>
       `The river bends around ${r}, so that you see the settlement twice on the way in: once across the water, and once on arriving.`,
   ],
@@ -81,7 +81,7 @@ export const ARRIVAL_SCENES = {
     (r) =>
       `The smoke above ${r} stands straight up in the still air, a dozen thin columns that mark the settlement's shape on the sky like a map drawn in grey.`,
     // L2 (PAGE-2's lines, 2026-11-20): APPENDED; smoke seen and smelt on the way in, and no count of fires (the cookfire line declares its own)
-    (r) => `Smoke above the trees is all you see of ${r} for the last hour of the road, and then the roofs are suddenly there.`,
+    (r) => `Smoke on the skyline is all you see of ${r} for the last hour of the road, and then the roofs are suddenly there.`,
     (r) => `The wind brings you the smoke of ${r} in gusts, now strong, now gone, as the road winds toward it.`,
     (r) => `Woodsmoke hangs low over ${r} in the morning air, and the roofs show through it one at a time as you come closer.`,
   ],

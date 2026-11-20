@@ -11,6 +11,12 @@ town's name; a HOOK line's "settlement" is spoken in the town's own tier noun by
 
 ## What was chosen, and why (the measure)
 
+THE CHAIR'S READ (14:17 UTC, `lines/L2-LINES-TO-CHAIR.md`): 73 lines approved as written, THREE CHANGED and applied in
+L2's finish (PAGE-6's builder, by `briefs/L2-FINISH.md`): `ARRIVAL_SCENES.river` NEW [6] and `ARRIVAL_SCENES.smoke`
+NEW [4] reworded by the chair, `ARRIVAL_PEOPLE.norse` NEW [5] given `excludes: ['crisis: hunger']`. Re-measured after
+them on the 300: the three-town share 14.2% (a pair 5.0%), the table below unchanged to the tenth; `arrivalScene`
+changed in 285 of 300, every other stored field moved in 0 of 300.
+
 THE CHOICE is the brief's list as written, 76 lines: `ARRIVAL_SCENES.ordinary` +6, `.river` +4, `.port` +3,
 `.market` +3, `.smoke` +3; `ARRIVAL_TENSIONS.prosperous` +5, `.poor` +4; `ARRIVAL_SENSES` fish dominant +3,
 livestock lines +3, smiths dominant +3, arcane dominant +3; every culture's `ARRIVAL_PEOPLE`, `mixed` included, +3
@@ -57,11 +63,11 @@ and a good) as presumptions the lines did not declare; the presumed-things walke
 "a household shrine" and "people who work magic for a living" as things the roster must hold; the style law struck that line's second draft ("a stranger"). Each was reworded to
 presume nothing, not declared (no register row was added).
 
-OWED BY THE DOORS (four `tests/lint` reds this unit causes and cannot cure inside its files; each register is a door's):
+OWED BY THE DOORS (four `tests/lint` reds this unit caused; three it cannot cure inside its files, each register a door's; the fourth cured by its one row):
 - `poolDominance.walker`: 31 ceilings of the deepened pools now sit loose above their measure (the cure working: e.g.
   `ARRIVAL_SCENES.ordinary` top1 0.18 over 0.10); `scripts/census/pool-dominance.register.json` wants its tightening.
-- `mutationCoverageManifest`: the new `tests/data/arrivalPoolsDeepened.test.js` (an enforcer directory) wants a row in
-  `scripts/mutation-coverage-manifest.json`.
+- `mutationCoverageManifest`: CURED in L2's finish (PAGE-6, 2026-11-20): the new test's own rationale row in
+  `scripts/mutation-coverage-manifest.json` (the one row the finishing brief gives this unit).
 - `sovereigntyLightingContract.walker`: the estate's test-file count 3706 becomes 3707 (the same new file).
 - `proseWiringCensus.walker`: `docs/content/wiring-census.json` is stale in its `tablePools` section by 4 bytes
   (`node scripts/wiring-census.mjs --dry`: rows that would move 0).
@@ -111,8 +117,9 @@ NEW:
   - The road beside the river; presumes the river and its bank, as line 0 does (the route or the riverside port guarantee it).
 - **5: You come into {name} along the bank, where steps go down to the water and someone is filling a bucket at the bottom of them.** _[none]_
   - Steps to the water and a bucket: the bank "that people use every day" of line 0, shown.
-- **6: Willows lean over the water on the way into {name}, and the first houses stand just above the line where the bank turns to mud.** _[none]_
-  - Willows and the mud line: landscape the engine does not track, the river only.
+- **6: Trees lean over the water on the way into {name}, and the first houses stand just above the line where the bank turns to mud.** _[none]_
+  - Trees and the mud line: landscape the engine does not track, the river only.
+  - THE CHAIR'S CHANGE (14:17 read): was "Willows lean over the water …" (a species presumed a climate).
 - **7: The river bends around {name}, so that you see the settlement twice on the way in: once across the water, and once on arriving.** _[none]_
   - A bend, seen twice: line 2's "around the bend" without its mill and jetty (so no `needs`).
 
@@ -168,8 +175,9 @@ Beside them (the base, unchanged; index: text, declaration):
 
 NEW:
 
-- **4: Smoke above the trees is all you see of {name} for the last hour of the road, and then the roofs are suddenly there.** _[none]_
-  - Smoke over trees, then roofs: line 1's smear of smoke in other words. No count of fires (line 0 declares `population` for its hundred).
+- **4: Smoke on the skyline is all you see of {name} for the last hour of the road, and then the roofs are suddenly there.** _[none]_
+  - THE CHAIR'S CHANGE (14:17 read): was "Smoke above the trees is all you see …" (it presumed woodland).
+  - Smoke on the skyline, then roofs: line 1's smear of smoke in other words. No count of fires (line 0 declares `population` for its hundred).
 - **5: The wind brings you the smoke of {name} in gusts, now strong, now gone, as the road winds toward it.** _[none]_
   - Smoke on the wind in gusts as the road winds: no size, no fuel named.
 - **6: Woodsmoke hangs low over {name} in the morning air, and the roofs show through it one at a time as you come closer.** _[none]_
@@ -402,9 +410,9 @@ Beside them (the base, unchanged; index: text, declaration):
 
 NEW:
 
-- **5: A household counts its winter stores aloud at the door of its storehouse, and the neighbours listen to the count.** _[crisis: any]_
+- **5: A household counts its winter stores aloud at the door of its storehouse, and the neighbours listen to the count.** _[excludes: crisis: hunger; crisis: any]_
   - custom: A household counts its winter stores aloud at its storehouse door; neighbours listen. Profile words: socialTexture: "Seasonal scarcity makes storage, mutual aid, and dependable leadership visibly political."
-  - declared: `crisis: any` (a count is true in a lean year too)
+  - declared: `excludes: ['crisis: hunger']`, `crisis: any` (THE CHAIR'S CHANGE, 14:17 read: no stores counted where the food failed or is cut off, written as its siblings write it; true under any other crisis)
 - **6: An old man recites a point of law from memory, and nobody listening needs to ask where he learned it.** _[crisis: any]_
   - custom: An old man recites a point of law from memory. Profile words: civicPattern: "Household leaders and law speakers bargain in assembly beneath a chieftain or royal representative."; socialTexture: "Law, household reputation, reciprocal gifts …"
   - declared: `crisis: any`
