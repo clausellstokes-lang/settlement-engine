@@ -19,8 +19,14 @@ then `briefs/BUILDER-RULES.md` and the brief of the unit you take. PAGE-3 integr
 | unit | state | branch | commit | next |
 |---|---|---|---|---|
 | S6 | PAGE-2's builder; awaiting origin | lane/page-2-2026-11-20-t1 | (12dc0f96c local there) | read once, re-run red/green, censuses, confinement, merge FIRST |
-| sides table | PAGE-2's builder; awaiting origin | lane/page-2-2026-11-20-s7 | (a89859e6f local there) | S7-TABLE.txt path+commit to the chair; merge second; data file's commit + SIDE-READERS.md's commit to the chair in one line |
+| sides table | a89859e6f READ by PAGE-3, red/green re-run; merged on local `page3/s7-merge` (00ec2d54e + census commit); the chair's six changes (13:22) out to PAGE-3's builder on `page3/s7-fix` (brief `briefs/S7-FOLLOWUP.md`) | lane/page-2-2026-11-20-s7 | a89859e6f | read the follow-up, re-run, re-take the lighting census, merge, one line to the chair |
 | L2 | PAGE-2's builder; uncommitted | lane/page-2-2026-11-20-l2 | | lines to the chair; merge third |
 | L4/S9/S3 | PAGE-2's builder; uncommitted | lane/page-2-2026-11-20-s | | seven reworded lines to the chair; merge fourth |
 | L1 | NOT DISPATCHED (builds on S6's tip) | | | dispatch on T2.md once S6 is on origin |
 | K | PAGE-3's builder, PHASE 1 (trial) | lane/page-3-2026-11-20-k (local, /home/user/wt-page3-k) | | read trial; Phase 2 on PAGE-3's word; merge LAST |
+
+## 3. Owed at the join (the chair, 13:22)
+
+- A PARITY TEST on the joined tree: this lane's `src/data/tensionSideMeanings.js` and the session sheet's
+  `src/domain/tension/sideArchetypes.js` (origin/lane/frame-5-2026-11-20) must agree on what a side means.
+- The working line 43ab0f5eb (point 82) is merged into the lane at 6cf1e8e89 (no conflict).
