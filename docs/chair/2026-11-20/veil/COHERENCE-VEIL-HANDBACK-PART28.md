@@ -379,6 +379,22 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
     `import_gallery_map` (072) goes through `get_gallery_map` (211, its world snapshot sent as stored); the client's
     worldExport 'player' variant (the owner hands the file: PLAUSIBLE that a hidden house travels). Stage IMPORT-DOOR
     (`briefs/IMPORT-DOOR-BRIEF.md`) after R3-CURE-8 and before E; "IMPORT-DOOR <commit>" to the reader as its own line.
+57. THE CHAIR, 17:25: (a) the import door IS ruling 56 (the numbering stands). (b) AN UNMARKED SHARE READ AS A LISTING IS
+    SERVED EXACTLY: 211's decided design STANDS, not re-opened; the import of an unmarked share equals its listing. (c) 212
+    meets ruling 56 for the dossier; what is NEW is that THE REGISTRY COVERS PATHS, NOT DOORS: `briefs/IMPORT-DOOR-BRIEF.md`
+    APPROVED: a door-census walker, red first, naming EVERY function and client path that hands a stored dossier, a world
+    snapshot or a value derived from one to a non-owner, each held to the veil or to a written SHRINK-ONLY row saying why it
+    needs none; then the cures (`get_unlisted_map`'s snapshot, `get_gallery_map`'s snapshot reached by `import_gallery_map`,
+    the three tile values of `_gallery_public_tile_rows`), the client's world export measured with its STOP. After R3-CURE-8;
+    "IMPORT-DOOR <commit>" to the reader as its own line. (d) THE FROZEN SHARE's live name and tier on import: at the DOORS'
+    MERGE both the doors' cure and 212's weight strip are kept, PROVED BY A TEST at that merge, not a note. (e) The brief says
+    whether anything `fetchDossierForImport` adds can now be removed (the server serves the veiled document). (f) Ruling 52's
+    cost item MET (587 ms against 797). (g) A QUESTION FOR R5 (from SAME-1's sameness census): fourteen EXISTING state-prose
+    wordings eligible only by a crime fact print in public prose: DS-ECO-6 "minor shadow activity" vids 4, 5; DS-DEF-3 Safe
+    vids 3, 8, Unsafe vid 5, occupation curfew vid 2 (`crime wave`); DS-DEF-4 semi-organized vids 3-7, diffuse vids 2, 4,
+    capture-none vid 2. On a shared read hiding the criminal houses: WITHHELD, RE-COMPOSED with the crime facts demoted, or
+    SERVED AS STORED? One line a block, by execution (a helper launched 17:3x; `/var/tmp/v18/m27/r5q/`). The sameness seats
+    write no new line needing a crime fact: these fourteen are this lane's and the reader's (R5, ruling 32's class).
 ## 2. The bytes (kept current)
 | File | sha256 |
 |---|---|
@@ -538,8 +554,24 @@ readings at UNREGISTERED 0 (ruling 25); and the render-twice and inversion harne
 join it must import and call the lane's own function (`buildNameSearch` / the bare fold), never its copy.
 
 ## 8. STATE (VEIL-27; kept current). PART 27's section 8 (VEIL-26 to VEIL-27) is history in PART 27.
-THE LANE: `lane/veil-27-2026-11-20`. MERGED BY VEIL-27: R3-CURE-6 (99416745f, `--no-ff` of `lane/veil-25-r3c5-2026-11-20` at
-8d5768ebc: dc6227ead red, 8d5768ebc cure; read once line by line; the red re-run at dc6227ead 2 failed of 23, 24 faults each,
-`out/v27/r3c6/`). NEXT, IN ORDER: ruling 53's tooth and walker (R3-CURE-7, test-only unless the tooth reds); the server's
-key-level table and ruling 50's proof (a measure-only helper); R3-TELL (`briefs/R3-TELL-BRIEF.md`: measure first, the chair
-rules on the cost, then red, cure, gated arm); then "R3 <commit>" with the thirteen towns of section 6 and ruling 53 named.
+THE LANE: `lane/veil-27-2026-11-20`, tip = the commit carrying this section (read it back from origin). 212 `6260803d…0218`,
+rollback `8cbd7d1c…ded5b0`, 211 unchanged since the cut. MERGED BY VEIL-27 (each read once, line by line, its red and green
+re-run by the seat): R3-CURE-6 (99416745f), R3-TELL unit 1 (fbc41ad1e, measures only), R3-CURE-7 (2c6cb8efa, test-only).
+GREEN AT THE MERGED TIP (section 6's log): the gate HIGHER 0 / EQUAL 79 / LOWER 13 (the same thirteen), acceptance 40 PASS, the
+guards, the harnesses, the known reds only, the cost law (ruling 52 MET), ruling 47's server table (0 findings), ruling 50's
+proof (928/928).
+RUNNING, STARTED BY VEIL-27 (subagents: they return to VEIL-27, which relays one line each to the chair, UNREAD by the
+successor): (1) R3-CURE-8 (`briefs/R3-CURE-8-BRIEF.md`; worktree `/home/user/wt/r3c8`, branch `v27-r3c8`, from 5f45144ae;
+databases `c8_*`): the twin's parity on `availableServices` rows with no `institution` key (ruling 55). (2) R3-TELL-2 UNIT 1
+ONLY (`briefs/R3-TELL-2-BRIEF.md`; `/home/user/wt/r3tell2`, `v27-r3tell2`, from 5f45144ae; `t2_*`; cache `/var/tmp/v18/t2/`):
+the signature instrument and the widened pool (ruling 54); it STOPS before the cure; units 2-5 are resumed by message after
+R3-CURE-8 is merged, naming the base to merge in. (3) the R5 question's helper (ruling 57 (g); `/var/tmp/v18/m27/r5q/`).
+NEXT, IN ORDER (the chair's, 16:45 and 17:25): R3-CURE-8 read once, re-run, merged, its branch pushed as it returns
+(`lane/veil-27-r3c8-2026-11-20`); R3-TELL-2 units 2-5 (the cure under ruling 54, power.entry narrowed, the gated tell column
+0 non-members, the Curate notice's condition re-checked); "R3 <commit>" to the chair WITH the thirteen LOWER towns by name and
+rule (section 6), ruling 53 named (the fold owed in R4-CURE-2), the reader's named questions (ruling 50's Defense sentence
+`publicProse['defense:criminal']`); then IMPORT-DOOR (`briefs/IMPORT-DOOR-BRIEF.md`, ruling 57); then R6, R4-CURE-2 (+ ruling
+53's fold), R5 (+ ruling 57 (g)), R7, L, the doors (+ ruling 57 (d)'s test), the stored figures, E.
+THE INSTRUMENTS IN THIS CONTAINER: section 4's, plus `/var/tmp/v18/g27.sh <worktree> <tag> <batches>` (the guards),
+`run-all-v27.sh` (the acceptance run on private chains v27x211/v27x212), `/var/tmp/v18/m27/cost-tip.sh` (the cost law),
+`out/v25/r3c5/measure/gate.sh` (the gate; template `createdb -T v27x211 <tpl>` + the tree's 212). Copies under `out/v27/seated/`.
