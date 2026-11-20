@@ -445,3 +445,108 @@ console.log('\nW2 MATCHING SIDES', JSON.stringify(Object.entries(sideHits).sort(
 console.log('\n### Five passing'); P.forEach(show);
 console.log('\n### Five failing'); F.forEach(show);
 ```
+
+## Sensitivity: W2 from conflicts rows alone
+
+Added 2026-11-20T05:53Z (`date -u`) at the coordinator's follow-up, on the same cached pool (330 calm towns). W2 is read from `powerStructure.conflicts` rows only; no relationship rows count. W1 is unchanged (W1a, or W1b below 45; (b) through a side that names the governing power, or a challenger where W1a holds). W3 is W3c (an impaired chain), and its matter types are trade_collapse, trade_dispute, resource_scarcity, outside_debt and market_crash. The "first-opened" tension is the lowest-index tension that matches any strain the town holds. Conflicts `intensity` has two grades on the pool, moderate and high, so the "highest grade only" variant counts `high` rows. The third variant is the first with a matter test added for W1: a tension also counts as about W1 when the town holds W1 and the tension's type is legitimacy_crisis, succession_crisis, leadership_vacuum, tyranny or popular_uprising.
+
+**Variant: every conflicts row**
+
+| measure | thorp | hamlet | village | town | city | metropolis | total |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| UNION W1∪W2c∪W3c | 6 | 37 | 53 | 54 | 55 | 55 | 260 |
+| UNION ∧ (b) | 1 | 8 | 11 | 17 | 29 | 35 | 101 |
+| W2c ∧ b(W2c) | 1 | 4 | 4 | 13 | 24 | 25 | 71 |
+| W1 ∧ b(W1) | 0 | 3 | 9 | 0 | 0 | 0 | 12 |
+| passing towns whose first-opened tension is crime_wave | 0 | 2 | 1 | 8 | 18 | 18 | 47 |
+
+Conflicts rows' intensity on the pool: {"moderate":174,"high":197}; rows matched by a (b) side: {"moderate":33,"high":63}.
+First-opened tension types of the passing towns: [["crime_wave",47],["succession_crisis",15],["trade_dispute",9],["corruption_scandal",6],["trade_collapse",5],["resource_scarcity",5],["religious_tension",5],["economic_disparity",4],["outside_debt",4],["market_crash",1]].
+
+**Variant: a conflicts row only at intensity 'high'**
+
+| measure | thorp | hamlet | village | town | city | metropolis | total |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| UNION W1∪W2c∪W3c | 4 | 29 | 46 | 43 | 51 | 55 | 228 |
+| UNION ∧ (b) | 0 | 7 | 10 | 9 | 29 | 31 | 86 |
+| W2c ∧ b(W2c) | 0 | 2 | 0 | 4 | 24 | 21 | 51 |
+| W1 ∧ b(W1) | 0 | 3 | 9 | 0 | 0 | 0 | 12 |
+| passing towns whose first-opened tension is crime_wave | 0 | 1 | 0 | 2 | 18 | 16 | 37 |
+
+Rows counted (high) matched by a (b) side: {"high":63}.
+First-opened tension types of the passing towns: [["crime_wave",37],["succession_crisis",15],["trade_dispute",9],["trade_collapse",5],["resource_scarcity",5],["outside_debt",5],["religious_tension",4],["corruption_scandal",3],["economic_disparity",2],["market_crash",1]].
+
+**Variant: every conflicts row, plus the W1 matter test**
+
+| measure | thorp | hamlet | village | town | city | metropolis | total |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| UNION W1∪W2c∪W3c | 6 | 37 | 53 | 54 | 55 | 55 | 260 |
+| UNION ∧ (b) | 1 | 10 | 17 | 17 | 29 | 35 | 109 |
+| W2c ∧ b(W2c) | 1 | 4 | 4 | 13 | 24 | 25 | 71 |
+| W1 ∧ b(W1) | 0 | 5 | 15 | 0 | 0 | 0 | 20 |
+| passing towns whose first-opened tension is crime_wave | 0 | 2 | 1 | 8 | 18 | 18 | 47 |
+
+Tensions newly matching W1 by the matter test (not by a side): [["popular_uprising",3],["tyranny",3],["legitimacy_crisis",3]].
+First-opened tension types of the passing towns: [["crime_wave",47],["succession_crisis",15],["trade_dispute",9],["corruption_scandal",6],["trade_collapse",5],["resource_scarcity",5],["religious_tension",5],["economic_disparity",4],["outside_debt",4],["tyranny",3],["legitimacy_crisis",3],["popular_uprising",2],["market_crash",1]].
+
+The script change: a separate script, run as `node cf11c.mjs <pool.json> [src/]` from the repo root. `cf11.mjs` above is unchanged.
+
+```js
+// CF11 sensitivity (FRAME-2 · B1 follow-up): W2 from powerStructure.conflicts rows ALONE (no relationship rows).
+// W1 = W1a or W1b<45 (as cf11.mjs). W3 = W3c (an impaired chain) with matter types trade_collapse, trade_dispute,
+// resource_scarcity, outside_debt, market_crash. Variant "high": a conflicts row counts only at intensity 'high'.
+// Variant "w1matter": as "all", plus a W1 matter test (the town holds W1 and the tension's type is in W1_MATTER).
+// "First-opened" tension = the lowest-index tension matching any strain the town holds. argv: the cached pool, [src/].
+import fs from 'node:fs';
+const R = process.argv[3] || '/home/user/settlement-engine/src/';
+const { coupContenders } = await import(R + 'domain/rulingPowerCoup.js');
+const { governanceLedger } = await import(R + 'domain/governanceLedger.js');
+const { towns } = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
+const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
+const norm = (x) => String(x || '').toLowerCase().replace(/^the\s+/, '').trim();
+const MATTER = new Set(['trade_collapse', 'trade_dispute', 'resource_scarcity', 'outside_debt', 'market_crash']);
+const W1_MATTER = new Set(['legitimacy_crisis', 'succession_crisis', 'leadership_vacuum', 'tyranny', 'popular_uprising']);
+const c = (m, k) => { m[k] = (m[k] || 0) + 1; };
+for (const variant of ['all', 'high', 'w1matter']) {
+  const T = Object.fromEntries(TIERS.map((t) => [t, { U: 0, UB: 0, W2cB: 0, W1B: 0, firstCrime: 0 }]));
+  const inten = {}, intenMatched = {}, firstTypes = {}, newW1 = {};
+  for (const { tier, s } of towns) {
+    const ps = s.powerStructure || {}, cc = coupContenders(s);
+    const W1a = cc.incumbent.gated === false, W1 = W1a || governanceLedger(s).legitimacyScore < 45;
+    const w1Powers = W1 ? [cc.incumbent.name || ps.governingName, ...(W1a ? cc.challengers.map((x) => x.name) : [])].filter(Boolean) : [];
+    const all = ps.conflicts || [];
+    if (variant === 'all') for (const r of all) c(inten, r.intensity);
+    const rows = variant === 'high' ? all.filter((r) => r.intensity === 'high') : all;
+    const W2 = rows.length > 0;
+    const W3 = (s.economicState?.activeChains || []).some((ch) => ch.status === 'impaired');
+    const tensions = s.history?.currentTensions || [];
+    let first = -1, w2b = false, w1b = false; const hitRows = new Set();
+    tensions.forEach((t, i) => {
+      const sides = (t.factions || []).map(norm), names = (arr) => arr.some((p) => sides.includes(norm(p)));
+      const bySide = W1 && names(w1Powers), byMatter = variant === 'w1matter' && W1 && W1_MATTER.has(t.type);
+      if (byMatter && !bySide) c(newW1, t.type);
+      const m1 = bySide || byMatter; if (m1) w1b = true;
+      const m2rows = rows.filter((r) => names(r.parties || []));
+      for (const r of m2rows) hitRows.add(r);
+      const m3 = W3 && MATTER.has(t.type);
+      if (m2rows.length) w2b = true;
+      if ((m1 || m2rows.length || m3) && first < 0) first = i;
+    });
+    for (const r of hitRows) c(intenMatched, r.intensity);
+    const X = T[tier];
+    if (W1 || W2 || W3) X.U++;
+    if (first >= 0) { X.UB++; c(firstTypes, tensions[first].type); if (tensions[first].type === 'crime_wave') X.firstCrime++; }
+    if (w2b) X.W2cB++;
+    if (w1b) X.W1B++;
+  }
+  const tot = (k) => TIERS.reduce((a, t) => a + T[t][k], 0);
+  console.log(`\n**Variant: ${{ all: 'every conflicts row', high: "a conflicts row only at intensity 'high'", w1matter: 'every conflicts row, plus the W1 matter test' }[variant]}**\n`);
+  console.log(`| measure | ${TIERS.join(' | ')} | total |\n|---|${TIERS.map(() => '---:').join('|')}|---:|`);
+  for (const [k, l] of [['U', 'UNION W1∪W2c∪W3c'], ['UB', 'UNION ∧ (b)'], ['W2cB', 'W2c ∧ b(W2c)'], ['W1B', 'W1 ∧ b(W1)'], ['firstCrime', 'passing towns whose first-opened tension is crime_wave']])
+    console.log(`| ${l} | ${TIERS.map((t) => T[t][k]).join(' | ')} | ${tot(k)} |`);
+  if (variant === 'all') console.log(`\nConflicts rows' intensity on the pool: ${JSON.stringify(inten)}; rows matched by a (b) side: ${JSON.stringify(intenMatched)}.`);
+  else if (variant === 'w1matter') console.log(`\nTensions newly matching W1 by the matter test (not by a side): ${JSON.stringify(Object.entries(newW1).sort((a, b) => b[1] - a[1]))}.`);
+  else console.log(`\nRows counted (high) matched by a (b) side: ${JSON.stringify(intenMatched)}.`);
+  console.log(`First-opened tension types of the passing towns: ${JSON.stringify(Object.entries(firstTypes).sort((a, b) => b[1] - a[1]))}.`);
+}
+```
