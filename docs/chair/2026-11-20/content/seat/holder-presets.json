@@ -1,0 +1,6496 @@
+{
+ "meta": {
+  "script": "docs/chair/2026-11-20/content/seat/measure-holder.mjs",
+  "draft": "docs/chair/2026-11-20/content/seat/seat-draft.mjs",
+  "arm": "presets",
+  "n": 10,
+  "towns": 960,
+  "errors": 0,
+  "beforeMismatchWithShippedCoupContenders": 0,
+  "seconds": 109
+ },
+ "holderRules": {
+  "R4": 444,
+  "R3": 243,
+  "R2": 213,
+  "R5": 60
+ },
+ "holderRulesPublic": {
+  "R4": 444,
+  "R3": 243,
+  "R2": 213,
+  "R5": 60
+ },
+ "publicLost": 0,
+ "holderKind": {
+  "R4:government": 370,
+  "R2:merchant": 144,
+  "R3:merchant": 84,
+  "R2:noble": 64,
+  "R5:noble": 60,
+  "R3:military": 58,
+  "R3:religious": 55,
+  "R3:noble": 30,
+  "R4:religious": 30,
+  "R4:criminal": 22,
+  "R3:arcane": 16,
+  "R4:merchant": 15,
+  "R4:arcane": 4,
+  "R2:military": 3,
+  "R4:military": 3,
+  "R2:craft": 2
+ },
+ "disagreements": [
+  {
+   "seed": "seat-measure-city-mage_city-7",
+   "tier": "city",
+   "form": "Merchant Guild Council",
+   "R1": null,
+   "R2": "The Guild Alliance",
+   "R3": "Merchant Guilds",
+   "chosen": "R2"
+  },
+  {
+   "seed": "seat-measure-city-arcane_academy-3",
+   "tier": "city",
+   "form": "Merchant oligarchy",
+   "R1": null,
+   "R2": "The Merchant Bloc",
+   "R3": "Merchant Guilds",
+   "chosen": "R2"
+  }
+ ],
+ "multiHead": [],
+ "pairClass": {
+  "office:R4": 444,
+  "own": 387,
+  "civic": 66,
+  "office:R5": 60,
+  "licensed:civic_fallback": 3
+ },
+ "pairs": {
+  "Merchant oligarchy x merchant (own)": 39,
+  "Guild Council x merchant (own)": 37,
+  "Royal Authority x noble (own)": 28,
+  "Ducal Governorship x noble (own)": 27,
+  "Military Council x military (own)": 26,
+  "Church Council x religious (own)": 25,
+  "Noble Governorship x noble (own)": 25,
+  "Grand Merchant Oligarchy x merchant (own)": 23,
+  "Merchant Guild Council x merchant (own)": 22,
+  "Democratic assembly x merchant (civic)": 20,
+  "Military City Council x military (own)": 18,
+  "City-State Council x merchant (civic)": 15,
+  "Grand Guild Consortium x merchant (own)": 15,
+  "Elder Council x merchant (civic)": 14,
+  "Grand Military Council x military (own)": 14,
+  "Ecclesiastical Council x religious (own)": 13,
+  "Merchant Council x merchant (own)": 12,
+  "High Theocratic Council x religious (own)": 11,
+  "Arcane Council x arcane (own)": 9,
+  "Feudal Appointee x noble (own)": 9,
+  "Grand Merchant Senate x merchant (own)": 9,
+  "Household Council x merchant (civic)": 8,
+  "Arcane Senate x arcane (own)": 7,
+  "Merchant City Council x merchant (own)": 7,
+  "Priestly Guidance x religious (own)": 6,
+  "Feudal Stewardship x noble (own)": 5,
+  "Elected Reeve x merchant (civic)": 4,
+  "Elder Council x military (licensed:civic_fallback)": 3,
+  "Headman's Authority x merchant (civic)": 3,
+  "Town Mayor x craft (civic)": 2
+ },
+ "circumstances": {
+  "martial_pressure": 460,
+  "mandate": 302,
+  "strong_faith": 247,
+  "trade_wealth": 212,
+  "(none)": 164,
+  "outside_debt": 41,
+  "hunger": 31,
+  "craft_led": 29,
+  "occupation": 6
+ },
+ "circumstancesByTier": {
+  "mandate": {
+   "thorp": 64,
+   "hamlet": 73,
+   "village": 90,
+   "town": 50,
+   "city": 12,
+   "metropolis": 13
+  },
+  "martial_pressure": {
+   "thorp": 74,
+   "hamlet": 75,
+   "village": 80,
+   "town": 79,
+   "city": 75,
+   "metropolis": 77
+  },
+  "hunger": {
+   "thorp": 8,
+   "hamlet": 7,
+   "village": 6,
+   "town": 7,
+   "metropolis": 3
+  },
+  "outside_debt": {
+   "thorp": 4,
+   "hamlet": 8,
+   "village": 7,
+   "town": 8,
+   "city": 7,
+   "metropolis": 7
+  },
+  "strong_faith": {
+   "thorp": 41,
+   "hamlet": 40,
+   "village": 41,
+   "town": 42,
+   "city": 41,
+   "metropolis": 42
+  },
+  "occupation": {
+   "thorp": 1,
+   "hamlet": 1,
+   "village": 2,
+   "town": 2
+  },
+  "craft_led": {
+   "town": 19,
+   "city": 1,
+   "metropolis": 9
+  },
+  "trade_wealth": {
+   "town": 31,
+   "city": 73,
+   "metropolis": 108
+  }
+ },
+ "lift": {
+  "mandate -> noble": {
+   "stands": 28,
+   "contendsWithout": 26,
+   "contendsWith": 28
+  },
+  "mandate -> craft": {
+   "stands": 29,
+   "contendsWithout": 21,
+   "contendsWith": 21
+  },
+  "strong_faith -> religious": {
+   "stands": 83,
+   "contendsWithout": 83,
+   "contendsWith": 83
+  },
+  "martial_pressure -> noble": {
+   "stands": 132,
+   "contendsWithout": 129,
+   "contendsWith": 132
+  },
+  "craft_led -> craft": {
+   "stands": 28,
+   "contendsWithout": 18,
+   "contendsWith": 21
+  },
+  "trade_wealth -> merchant": {
+   "stands": 123,
+   "contendsWithout": 99,
+   "contendsWith": 99
+  },
+  "outside_debt -> merchant": {
+   "stands": 3,
+   "contendsWithout": 2,
+   "contendsWith": 2
+  }
+ },
+ "holderSide": {
+  "gatedBefore": 954,
+  "gatedWithHolder": 958,
+  "riskBefore": {
+   "Stable": 313,
+   "Contested": 124,
+   "Holding": 517,
+   "Critical. The seat could fall": 6
+  },
+  "riskWithHolder": {
+   "Stable": 313,
+   "Contested": 92,
+   "Holding": 553,
+   "Critical. The seat could fall": 2
+  }
+ },
+ "tally": {
+  "before": {
+   "present": {
+    "other": 61,
+    "noble": 257,
+    "military": 411,
+    "merchant": 419,
+    "government": 12,
+    "religious": 383,
+    "craft": 247,
+    "criminal": 84,
+    "arcane": 203
+   },
+   "contends": {
+    "other": 41,
+    "noble": 220,
+    "military": 356,
+    "merchant": 345,
+    "government": 6,
+    "religious": 290,
+    "craft": 147,
+    "arcane": 74
+   },
+   "none": 293,
+   "risk": {
+    "Stable": 293,
+    "Contested": 150,
+    "Holding": 507,
+    "Critical. The seat could fall": 10
+   },
+   "field": {
+    "0": 293,
+    "1": 157,
+    "2": 107,
+    "3": 403
+   }
+  },
+  "cs3": {
+   "present": {
+    "other": 61,
+    "noble": 257,
+    "military": 411,
+    "merchant": 419,
+    "government": 12,
+    "religious": 383,
+    "craft": 247,
+    "criminal": 84,
+    "arcane": 203
+   },
+   "contends": {
+    "other": 47,
+    "noble": 158,
+    "military": 339,
+    "merchant": 209,
+    "government": 7,
+    "religious": 277,
+    "craft": 191,
+    "arcane": 103
+   },
+   "none": 313,
+   "risk": {
+    "Stable": 313,
+    "Contested": 124,
+    "Holding": 517,
+    "Critical. The seat could fall": 6
+   },
+   "field": {
+    "0": 313,
+    "1": 203,
+    "2": 97,
+    "3": 347
+   }
+  },
+  "cs3cs4": {
+   "present": {
+    "other": 61,
+    "noble": 257,
+    "military": 411,
+    "merchant": 419,
+    "government": 12,
+    "religious": 383,
+    "craft": 247,
+    "criminal": 84,
+    "arcane": 203
+   },
+   "contends": {
+    "other": 47,
+    "noble": 158,
+    "military": 345,
+    "merchant": 215,
+    "government": 7,
+    "religious": 282,
+    "craft": 167,
+    "arcane": 105
+   },
+   "none": 313,
+   "risk": {
+    "Stable": 313,
+    "Contested": 123,
+    "Holding": 518,
+    "Critical. The seat could fall": 6
+   },
+   "field": {
+    "0": 313,
+    "1": 203,
+    "2": 97,
+    "3": 347
+   }
+  },
+  "cs3cs4cs5": {
+   "present": {
+    "other": 61,
+    "noble": 257,
+    "military": 411,
+    "merchant": 419,
+    "government": 12,
+    "religious": 383,
+    "craft": 247,
+    "criminal": 84,
+    "arcane": 203
+   },
+   "contends": {
+    "other": 47,
+    "noble": 161,
+    "military": 345,
+    "merchant": 214,
+    "government": 7,
+    "religious": 275,
+    "craft": 170,
+    "arcane": 100
+   },
+   "none": 313,
+   "risk": {
+    "Stable": 313,
+    "Contested": 131,
+    "Holding": 509,
+    "Critical. The seat could fall": 7
+   },
+   "field": {
+    "0": 313,
+    "1": 203,
+    "2": 97,
+    "3": 347
+   }
+  }
+ },
+ "examples": [
+  {
+   "seed": "seat-measure-thorp-merchant_republic-0",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Ananya Banerjee",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-merchant_republic-1",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Munkhtuya Kereit",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-merchant_republic-2",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Noyans Kereit",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-merchant_republic-3",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Yax Chuc",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-merchant_republic-4",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Khutulun Tayichi'ud",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-merchant_republic-5",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Jiahao Li",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [
+    "The Independent Bloc"
+   ],
+   "after": [
+    "The Independent Bloc"
+   ]
+  },
+  {
+   "seed": "seat-measure-thorp-merchant_republic-6",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Natasha Popov",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-merchant_republic-7",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Smoke Batab",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-merchant_republic-8",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Sulpicia Cato",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-merchant_republic-9",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Cormac Thorsson",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-trade_crossroads-0",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Rainer Becker",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-trade_crossroads-1",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Uglješa Novikov",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-trade_crossroads-2",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Chhaya Bakshi",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-trade_crossroads-3",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Diogenes Akropolites",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-trade_crossroads-4",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Christophoros Attaleiates",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-trade_crossroads-5",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Tertulla Corvinus",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-trade_crossroads-6",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Kaban Ahau",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-trade_crossroads-7",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Estrid Thorsson",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-trade_crossroads-8",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Badr al-Rahman",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-trade_crossroads-9",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Zhou Chen",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [
+    "The Independent Bloc"
+   ],
+   "after": [
+    "The Independent Bloc"
+   ]
+  },
+  {
+   "seed": "seat-measure-thorp-mining_colony-0",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Asmund Bjornsson",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-mining_colony-1",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Publicola Maximus",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-mining_colony-2",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Jucundus Corvinus",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-mining_colony-3",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Aisha ibn Ahmed",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-mining_colony-4",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Ulbrecht Weber",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-mining_colony-5",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Cosij Chi",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-mining_colony-6",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Rabab al-Din",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-mining_colony-7",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Amleth Eriksson",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-mining_colony-8",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Chagatai Taichiud",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-mining_colony-9",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Hoelun Kiyad",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-military_fortress-0",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Luba Kozlov",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-military_fortress-1",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Batu Kiyad",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-military_fortress-2",
+   "tier": "thorp",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Kráka Gunnarsson",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-military_fortress-3",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Bao Chen",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-military_fortress-4",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Maeve O'Connor",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-military_fortress-5",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Quetzalxochitl Ahau",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-military_fortress-6",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Mechthild Schulz",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-military_fortress-7",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Wen Zhou",
+   "circumstances": [
+    "martial_pressure",
+    "hunger",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-military_fortress-8",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Sameer ibn Rashid",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-military_fortress-9",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Gancho Kozlov",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-frontier_outpost-0",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Ekaparnika Bajaj",
+   "circumstances": [
+    "martial_pressure",
+    "mandate",
+    "outside_debt"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-frontier_outpost-1",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Ibaka Taichiud",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-frontier_outpost-2",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Zosimus Aquila",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-frontier_outpost-3",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Accia Varro",
+   "circumstances": [
+    "martial_pressure",
+    "hunger",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-frontier_outpost-4",
+   "tier": "thorp",
+   "form": "Feudal Stewardship",
+   "holder": "The Highborn Circle",
+   "rule": "R3",
+   "publicRule": "R3",
+   "person": "Veronika Richter",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [
+    "The Highborn Circle"
+   ],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-frontier_outpost-5",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Renuka Bhat",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-frontier_outpost-6",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Da Li",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-frontier_outpost-7",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Diya Bhatt",
+   "circumstances": [
+    "martial_pressure",
+    "mandate",
+    "outside_debt"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-frontier_outpost-8",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Ernst Meyer",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-frontier_outpost-9",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Mechthild Bauer",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-besieged_holdout-0",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Chiyo Wu",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-besieged_holdout-1",
+   "tier": "thorp",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Coatlicue Balam",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-besieged_holdout-2",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Mandodari Bajaj",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-besieged_holdout-3",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Jun Huang",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-besieged_holdout-4",
+   "tier": "thorp",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Ingrid Thorsson",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-besieged_holdout-5",
+   "tier": "thorp",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Umeko Zhang",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-besieged_holdout-6",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Ahulane Chel",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-besieged_holdout-7",
+   "tier": "thorp",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Torghil Jadaran",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-besieged_holdout-8",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Anuradha Bhat",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-besieged_holdout-9",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Rashida al-Din",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-plague_of_beasts-0",
+   "tier": "thorp",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Tadhg Kelly",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-plague_of_beasts-1",
+   "tier": "thorp",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Sheng Yang",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-plague_of_beasts-2",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Theophylaktos Akropolites",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-plague_of_beasts-3",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Skadi Sigmundsson",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-plague_of_beasts-4",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Vasyl Ivanov",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-plague_of_beasts-5",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Sif Sigmundsson",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-plague_of_beasts-6",
+   "tier": "thorp",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Andronikos Angelos",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-plague_of_beasts-7",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Isako Zhang",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-plague_of_beasts-8",
+   "tier": "thorp",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Luvsandorj Naiman",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-plague_of_beasts-9",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Yanzhima Borjigin",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-theocracy-0",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Manchu Zhang",
+   "circumstances": [
+    "strong_faith"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-theocracy-1",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Vilbirg Schulz",
+   "circumstances": [
+    "strong_faith",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-theocracy-2",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Cormac Eriksson",
+   "circumstances": [
+    "strong_faith"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-theocracy-3",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Ozomatli Chan",
+   "circumstances": [
+    "strong_faith"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-theocracy-4",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Theodor Schulz",
+   "circumstances": [
+    "strong_faith"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-theocracy-5",
+   "tier": "thorp",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Qiong Liu",
+   "circumstances": [
+    "strong_faith",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-theocracy-6",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Diemut Richter",
+   "circumstances": [
+    "strong_faith"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-theocracy-7",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Wen Chen",
+   "circumstances": [
+    "strong_faith"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-theocracy-8",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Liesel Schulz",
+   "circumstances": [
+    "strong_faith",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-theocracy-9",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Berta Schmidt",
+   "circumstances": [
+    "strong_faith",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-holy_sanctuary-0",
+   "tier": "thorp",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Vidar Eriksson",
+   "circumstances": [
+    "strong_faith",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-holy_sanctuary-1",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Noyans Taichiud",
+   "circumstances": [
+    "strong_faith",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-holy_sanctuary-2",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Genji Wu",
+   "circumstances": [
+    "strong_faith"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-holy_sanctuary-3",
+   "tier": "thorp",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Akhtar al-Qadir",
+   "circumstances": [
+    "strong_faith"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-holy_sanctuary-4",
+   "tier": "thorp",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Khongorzul Naiman",
+   "circumstances": [
+    "strong_faith"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-holy_sanctuary-5",
+   "tier": "thorp",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Lofthæna Sigmundsson",
+   "circumstances": [
+    "strong_faith"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-holy_sanctuary-6",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Padmini Balan",
+   "circumstances": [
+    "strong_faith"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-holy_sanctuary-7",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Benedikt Schneider",
+   "circumstances": [
+    "strong_faith",
+    "mandate"
+   ],
+   "before": [
+    "The Independent Bloc"
+   ],
+   "after": [
+    "The Independent Bloc"
+   ]
+  },
+  {
+   "seed": "seat-measure-thorp-holy_sanctuary-8",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Yagul Chel",
+   "circumstances": [
+    "strong_faith"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-holy_sanctuary-9",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Sadeq ibn Ahmed",
+   "circumstances": [
+    "strong_faith",
+    "hunger",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-crusader_chapter-0",
+   "tier": "thorp",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Sevaste Chomatenos",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-crusader_chapter-1",
+   "tier": "thorp",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Selma al-Rahman",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure",
+    "mandate",
+    "outside_debt"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-crusader_chapter-2",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Tryphon Chomatenos",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-crusader_chapter-3",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Oda Koch",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-crusader_chapter-4",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Alaqai Kiyad",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-crusader_chapter-5",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Penelope Attaleiates",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-crusader_chapter-6",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Tlacochcalco Chan",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-crusader_chapter-7",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Evtim Pavlov",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure",
+    "mandate",
+    "outside_debt"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-crusader_chapter-8",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Masao Chen",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-crusader_chapter-9",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Slobodan Popov",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-mage_city-0",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Damir Sidorov",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-mage_city-1",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Riko Zhou",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-mage_city-2",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Wafa ibn Rashid",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-mage_city-3",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Egnatius Varro",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-mage_city-4",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Shufen Liu",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-mage_city-5",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Wajiha al-Hassan",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-mage_city-6",
+   "tier": "thorp",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Konstantinos Bryennios",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-mage_city-7",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Udelhild Fischer",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-mage_city-8",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Raghuvir Bhat",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-mage_city-9",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Kaninia Cato",
+   "circumstances": [
+    "strong_faith",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-arcane_academy-0",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Órlaith O'Brien",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-arcane_academy-1",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Fang Wang",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-arcane_academy-2",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Glykeria Attaleiates",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-arcane_academy-3",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Lasair Kelly",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-arcane_academy-4",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Rashida al-Qadir",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-arcane_academy-5",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Garbhán Sullivan",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-arcane_academy-6",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Gnaeus Brutus",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-arcane_academy-7",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Alaqai Naiman",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-arcane_academy-8",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Gunter Müller",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-arcane_academy-9",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Eirik Gunnarsson",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-monster_hunters-0",
+   "tier": "thorp",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Lakin Chel",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-monster_hunters-1",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Yesülün Kereit",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-monster_hunters-2",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Teague O'Brien",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-monster_hunters-3",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Gnaeus Cicero",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-monster_hunters-4",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Deirdre Murphy",
+   "circumstances": [
+    "martial_pressure",
+    "hunger",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-monster_hunters-5",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Sneha Ahuja",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-monster_hunters-6",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Oddny Bjornsson",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-monster_hunters-7",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Nikoleta Lebedev",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-monster_hunters-8",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Agnes Bauer",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-monster_hunters-9",
+   "tier": "thorp",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Vasileia Angelos",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [
+    "The Independent Bloc"
+   ],
+   "after": [
+    "The Independent Bloc"
+   ]
+  },
+  {
+   "seed": "seat-measure-thorp-lawless_frontier-0",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Pakal Batab",
+   "circumstances": [
+    "hunger",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-lawless_frontier-1",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Fiona Walsh",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-lawless_frontier-2",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Chac Chel Chan",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-lawless_frontier-3",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Bilgüün Kereit",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-lawless_frontier-4",
+   "tier": "thorp",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Prasad Bajaj",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-lawless_frontier-5",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Alexios Attaleiates",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-lawless_frontier-6",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Eirenaion Akropolites",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [
+    "The Highborn Circle"
+   ],
+   "after": [
+    "The Highborn Circle"
+   ]
+  },
+  {
+   "seed": "seat-measure-thorp-lawless_frontier-7",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Dietrich Becker",
+   "circumstances": [
+    "hunger",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-lawless_frontier-8",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Emmerich Bauer",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [
+    "The Independent Bloc"
+   ],
+   "after": [
+    "The Independent Bloc"
+   ]
+  },
+  {
+   "seed": "seat-measure-thorp-lawless_frontier-9",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Tochtli Chan",
+   "circumstances": [
+    "martial_pressure",
+    "hunger",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-criminal_haven-0",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Jucundus Aurelius",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-criminal_haven-1",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Nuada Walsh",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-criminal_haven-2",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Gudmund Eriksson",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-criminal_haven-3",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Darya Lebedev",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-criminal_haven-4",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Naranchuluun Kereit",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-criminal_haven-5",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Radmila Pavlov",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-criminal_haven-6",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Saburo Yang",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-criminal_haven-7",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Kan Balam",
+   "circumstances": [
+    "mandate",
+    "occupation"
+   ],
+   "before": [
+    "Occupation Authority"
+   ],
+   "after": [
+    "Occupation Authority"
+   ]
+  },
+  {
+   "seed": "seat-measure-thorp-criminal_haven-8",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Bronwyn Ryan",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-criminal_haven-9",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Saoirse MacDonald",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-safe_province_capital-0",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Zuochen Wang",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-safe_province_capital-1",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Bilal ibn Rashid",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-safe_province_capital-2",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Christophoros Botaneiates",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-safe_province_capital-3",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Jiangli Zhou",
+   "circumstances": [
+    "hunger",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-safe_province_capital-4",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Hulegu Kereit",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-safe_province_capital-5",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Peng Chen",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-safe_province_capital-6",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Lakshmana Bhatt",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-safe_province_capital-7",
+   "tier": "thorp",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Sofia Volkov",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-safe_province_capital-8",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Theodosia Akropolites",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-thorp-safe_province_capital-9",
+   "tier": "thorp",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Ulugh Tayichi'ud",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-merchant_republic-0",
+   "tier": "hamlet",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Banan al-Qadir",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-merchant_republic-1",
+   "tier": "hamlet",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Kuchug Taichiud",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-merchant_republic-2",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Lucius Maximus",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-merchant_republic-3",
+   "tier": "hamlet",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Soo Guo",
+   "circumstances": [
+    "hunger",
+    "mandate"
+   ],
+   "before": [
+    "Grain Holders"
+   ],
+   "after": [
+    "Grain Holders"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-merchant_republic-4",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Hristo Novikov",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-merchant_republic-5",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Nasser al-Rahman",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [
+    "The Independent Bloc"
+   ],
+   "after": [
+    "The Independent Bloc"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-merchant_republic-6",
+   "tier": "hamlet",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Zubayr ibn Khalid",
+   "circumstances": [],
+   "before": [
+    "The Independent Bloc"
+   ],
+   "after": [
+    "The Independent Bloc"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-merchant_republic-7",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Moctezuma Chi",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [
+    "Quarantine Council"
+   ],
+   "after": [
+    "Quarantine Council"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-merchant_republic-8",
+   "tier": "hamlet",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Cassia Maximus",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-merchant_republic-9",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Prasad Banerjee",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-trade_crossroads-0",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Alfhild Andersson",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-trade_crossroads-1",
+   "tier": "hamlet",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Idris al-Amin",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-trade_crossroads-2",
+   "tier": "hamlet",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Shan Yang",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-trade_crossroads-3",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Styrkar Svensson",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-trade_crossroads-4",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Radha Ahuja",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-trade_crossroads-5",
+   "tier": "hamlet",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Geta Aurelius",
+   "circumstances": [],
+   "before": [
+    "Merchant Guilds"
+   ],
+   "after": [
+    "Merchant Guilds"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-trade_crossroads-6",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Barbara Choniates",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [
+    "War Council"
+   ],
+   "after": [
+    "War Council"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-trade_crossroads-7",
+   "tier": "hamlet",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Li He",
+   "circumstances": [
+    "mandate",
+    "occupation"
+   ],
+   "before": [
+    "Occupation Authority"
+   ],
+   "after": [
+    "Occupation Authority"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-trade_crossroads-8",
+   "tier": "hamlet",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Proinsias Burke",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-trade_crossroads-9",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Han Zhou",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-mining_colony-0",
+   "tier": "hamlet",
+   "form": "Feudal Stewardship",
+   "holder": "Manor Household",
+   "rule": "R2",
+   "publicRule": "R2",
+   "person": "Daniyya Chuc",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [
+    "Manor Household"
+   ],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-mining_colony-1",
+   "tier": "hamlet",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Yaotl Chuc",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-mining_colony-2",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Devaki Bakshi",
+   "circumstances": [
+    "martial_pressure",
+    "hunger",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-mining_colony-3",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Astrid Asgersson",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-mining_colony-4",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Saida al-Aziz",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-mining_colony-5",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Olof Thorsson",
+   "circumstances": [
+    "martial_pressure",
+    "mandate",
+    "outside_debt"
+   ],
+   "before": [
+    "Creditor's Representative"
+   ],
+   "after": [
+    "Creditor's Representative"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-mining_colony-6",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Muirenn Quinn",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-mining_colony-7",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Eire Akropolites",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [
+    "Military Party"
+   ],
+   "after": [
+    "Military Party"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-mining_colony-8",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Jambavati Banerjee",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-mining_colony-9",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Samira al-Rahman",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-military_fortress-0",
+   "tier": "hamlet",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Solongo Tayichi'ud",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-military_fortress-1",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Fenghua Ma",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-military_fortress-2",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Daoud al-Hassan",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-military_fortress-3",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Garbhán Doherty",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-military_fortress-4",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Badr al-Aziz",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [
+    "Military Party"
+   ],
+   "after": [
+    "Military Party"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-military_fortress-5",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Volso Varro",
+   "circumstances": [
+    "martial_pressure",
+    "mandate",
+    "outside_debt"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-military_fortress-6",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Rania ibn Khalid",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-military_fortress-7",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Yellow Corn Balam",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [
+    "Military Party"
+   ],
+   "after": [
+    "Military Party"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-military_fortress-8",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Cheol Wang",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-military_fortress-9",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Saidhbhín O'Connor",
+   "circumstances": [
+    "martial_pressure",
+    "hunger",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-frontier_outpost-0",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Postumia Flavius",
+   "circumstances": [
+    "martial_pressure",
+    "mandate",
+    "outside_debt"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-frontier_outpost-1",
+   "tier": "hamlet",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Mongfhind Byrne",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-frontier_outpost-2",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Adel ibn Ahmed",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-frontier_outpost-3",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Chagatai Tayichi'ud",
+   "circumstances": [
+    "martial_pressure",
+    "mandate",
+    "outside_debt"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-frontier_outpost-4",
+   "tier": "hamlet",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Haruki Huang",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-frontier_outpost-5",
+   "tier": "hamlet",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Werner Müller",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-frontier_outpost-6",
+   "tier": "hamlet",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Yaretzi Chan",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [
+    "Military Party"
+   ],
+   "after": [
+    "Military Party"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-frontier_outpost-7",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Souta Chen",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-frontier_outpost-8",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Amergin Quinn",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-frontier_outpost-9",
+   "tier": "hamlet",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Uroš Volkov",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-besieged_holdout-0",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Reem al-Jabbar",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [
+    "Military/Guard"
+   ],
+   "after": [
+    "Military/Guard"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-besieged_holdout-1",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Bjorn Andersson",
+   "circumstances": [
+    "martial_pressure",
+    "mandate",
+    "outside_debt"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-besieged_holdout-2",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Quetzal Coh",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-besieged_holdout-3",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Yuki Yang",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-besieged_holdout-4",
+   "tier": "hamlet",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Notburga Koch",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [
+    "Military/Guard"
+   ],
+   "after": [
+    "Military/Guard"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-besieged_holdout-5",
+   "tier": "hamlet",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Ixchel Dzul",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-besieged_holdout-6",
+   "tier": "hamlet",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Burmaa Barlas",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [
+    "Military/Guard"
+   ],
+   "after": [
+    "Military/Guard"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-besieged_holdout-7",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Kalliope Akropolites",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-besieged_holdout-8",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Vadim Popov",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [
+    "Military/Guard"
+   ],
+   "after": [
+    "Military/Guard"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-besieged_holdout-9",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Josefine Schulz",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-plague_of_beasts-0",
+   "tier": "hamlet",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Ai Yang",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-plague_of_beasts-1",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Veloz Chi",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-plague_of_beasts-2",
+   "tier": "hamlet",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Prasad Banerjee",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure"
+   ],
+   "before": [
+    "Military/Guard"
+   ],
+   "after": [
+    "Military/Guard"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-plague_of_beasts-3",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Zakhar Lebedev",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-plague_of_beasts-4",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Gisli Svensson",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-plague_of_beasts-5",
+   "tier": "hamlet",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Notger Wolf",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure"
+   ],
+   "before": [
+    "Military/Guard"
+   ],
+   "after": [
+    "Military/Guard"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-plague_of_beasts-6",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Konstantinos Dalassenos",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-plague_of_beasts-7",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Qiang Wang",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure"
+   ],
+   "before": [
+    "Military/Guard"
+   ],
+   "after": [
+    "Military/Guard"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-plague_of_beasts-8",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Lidija Sokolov",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure"
+   ],
+   "before": [
+    "Military/Guard"
+   ],
+   "after": [
+    "Military/Guard"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-plague_of_beasts-9",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Khurelbaatar Tayichi'ud",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-theocracy-0",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Sigyn Eriksson",
+   "circumstances": [
+    "strong_faith",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-theocracy-1",
+   "tier": "hamlet",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Mohan Choudhry",
+   "circumstances": [
+    "strong_faith",
+    "hunger",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-theocracy-2",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Ughul Taichiud",
+   "circumstances": [
+    "strong_faith",
+    "mandate",
+    "outside_debt"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-theocracy-3",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Taras Borisov",
+   "circumstances": [
+    "strong_faith"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-theocracy-4",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Hulegu Naiman",
+   "circumstances": [
+    "strong_faith"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-theocracy-5",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Iskra Ivanov",
+   "circumstances": [
+    "strong_faith"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-theocracy-6",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Connor Quinn",
+   "circumstances": [
+    "strong_faith",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-theocracy-7",
+   "tier": "hamlet",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Orlin Sidorov",
+   "circumstances": [
+    "strong_faith",
+    "hunger",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-theocracy-8",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Una O'Connor",
+   "circumstances": [
+    "strong_faith"
+   ],
+   "before": [
+    "Military/Guard"
+   ],
+   "after": [
+    "Military/Guard"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-theocracy-9",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Sükhbaatar Tayichi'ud",
+   "circumstances": [
+    "strong_faith"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-holy_sanctuary-0",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Freya Ragnarsson",
+   "circumstances": [
+    "strong_faith",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-holy_sanctuary-1",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Uglješa Pavlov",
+   "circumstances": [
+    "strong_faith"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-holy_sanctuary-2",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Predrag Novikov",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-holy_sanctuary-3",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Brennan Byrne",
+   "circumstances": [
+    "strong_faith"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-holy_sanctuary-4",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Yasmin al-Hassan",
+   "circumstances": [
+    "strong_faith"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-holy_sanctuary-5",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Bochak Jadaran",
+   "circumstances": [
+    "strong_faith"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-holy_sanctuary-6",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Uta Wolf",
+   "circumstances": [
+    "strong_faith"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-holy_sanctuary-7",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Ketil Ragnarsson",
+   "circumstances": [
+    "strong_faith",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-holy_sanctuary-8",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Indira Banerjee (the dairy farmer)",
+   "circumstances": [
+    "strong_faith"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-holy_sanctuary-9",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Macer Calvus",
+   "circumstances": [
+    "strong_faith",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-crusader_chapter-0",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Radha Bajaj",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-crusader_chapter-1",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Zipna Chan",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-crusader_chapter-2",
+   "tier": "hamlet",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Veronika Ivanov",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-crusader_chapter-3",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Huijatoo Hau",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure",
+    "mandate",
+    "outside_debt"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-crusader_chapter-4",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Acna Dzul",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-crusader_chapter-5",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Dawon He",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-crusader_chapter-6",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Rakesh Dixit",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-crusader_chapter-7",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Edda Haraldsson",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure"
+   ],
+   "before": [
+    "Military/Guard"
+   ],
+   "after": [
+    "Military/Guard"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-crusader_chapter-8",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Star Cohuoh",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [
+    "Reform Movement"
+   ],
+   "after": [
+    "Reform Movement"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-crusader_chapter-9",
+   "tier": "hamlet",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Yordan Pavlov",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-mage_city-0",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Ariun Taichiud",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [
+    "Newcomers' Settlement"
+   ],
+   "after": [
+    "Newcomers' Settlement"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-mage_city-1",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Piso Nero",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-mage_city-2",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Lkhagvajav Jadaran",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-mage_city-3",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Walid al-Farabi",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-mage_city-4",
+   "tier": "hamlet",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Bayan Kiyad",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [
+    "People's Council"
+   ],
+   "after": [
+    "People's Council"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-mage_city-5",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Nuan Wang",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-mage_city-6",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Eirenaion Choniates",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-mage_city-7",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Vijayalakshmi Deshpande",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-mage_city-8",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Kaspar Wolf",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-mage_city-9",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Nasser al-Din",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [
+    "People's Council"
+   ],
+   "after": [
+    "People's Council"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-arcane_academy-0",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Ghalib al-Qadir",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-arcane_academy-1",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Vira Novikov",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-arcane_academy-2",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Lubomír Alexeyev",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-arcane_academy-3",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Hostus Varro",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-arcane_academy-4",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Yafang Zhang",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-arcane_academy-5",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Aristoteles Alexios",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-arcane_academy-6",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": "Merchant Guilds",
+   "rule": "R2",
+   "publicRule": "R2",
+   "person": "Quintus Aurelius",
+   "circumstances": [],
+   "before": [
+    "Merchant Guilds"
+   ],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-arcane_academy-7",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Mugain O'Connor",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-arcane_academy-8",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Kiran Chaudhary",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-arcane_academy-9",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Ketil Sigmundsson",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-monster_hunters-0",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Rutilius Nero",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-monster_hunters-1",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Dáirine Fitzgerald",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-monster_hunters-2",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Kunigunde Wagner",
+   "circumstances": [
+    "martial_pressure",
+    "hunger",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-monster_hunters-3",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Danica Bykov",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-monster_hunters-4",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Sujin Liu",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-monster_hunters-5",
+   "tier": "hamlet",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Akna Cohuoh",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-monster_hunters-6",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Waltrada Schneider",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [
+    "Military/Guard"
+   ],
+   "after": [
+    "Military/Guard"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-monster_hunters-7",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Georgia Chrysoberges",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [
+    "Military/Guard"
+   ],
+   "after": [
+    "Military/Guard"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-monster_hunters-8",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Vranas Chomatenos",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-monster_hunters-9",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Satoshi Yang",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-lawless_frontier-0",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Rónnat Fitzgerald",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-lawless_frontier-1",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Grainne Kelly",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-lawless_frontier-2",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Barra Quinn",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [
+    "Military Party"
+   ],
+   "after": [
+    "Military Party"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-lawless_frontier-3",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Lateranus Varro",
+   "circumstances": [
+    "mandate",
+    "outside_debt"
+   ],
+   "before": [
+    "Creditor's Representative"
+   ],
+   "after": [
+    "Creditor's Representative"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-lawless_frontier-4",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Nedko Pavlov",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-lawless_frontier-5",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Renuka Choudhry",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-lawless_frontier-6",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Noboru Ma",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [
+    "Military Party"
+   ],
+   "after": [
+    "Military Party"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-lawless_frontier-7",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Ahuitzotl Ek",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [
+    "Military Party"
+   ],
+   "after": [
+    "Military Party"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-lawless_frontier-8",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Mandakini Das",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-lawless_frontier-9",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Khubilai Ongut",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-criminal_haven-0",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Magnhild Magnusson",
+   "circumstances": [
+    "hunger",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-criminal_haven-1",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Chimalxochitl Chel",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-criminal_haven-2",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Ivar Bjarnarson",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-criminal_haven-3",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Marcella Flavius",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-criminal_haven-4",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Muirenn O'Brien",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-criminal_haven-5",
+   "tier": "hamlet",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Ahuitzotl Balam",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-criminal_haven-6",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Cesair O'Connor",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-criminal_haven-7",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Kazuko Zhao",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-criminal_haven-8",
+   "tier": "hamlet",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Diogenes Chortasmenos",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-criminal_haven-9",
+   "tier": "hamlet",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Yifan Gao",
+   "circumstances": [],
+   "before": [
+    "Merchant Guilds"
+   ],
+   "after": [
+    "Merchant Guilds"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-safe_province_capital-0",
+   "tier": "hamlet",
+   "form": "Free Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Eudoxia Chrysoberges",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-safe_province_capital-1",
+   "tier": "hamlet",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Oisín Sullivan",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-safe_province_capital-2",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Babur Taichiud",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-safe_province_capital-3",
+   "tier": "hamlet",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Widad al-Aziz",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [
+    "The Independent Bloc"
+   ],
+   "after": [
+    "The Independent Bloc"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-safe_province_capital-4",
+   "tier": "hamlet",
+   "form": "Household Council",
+   "holder": "Merchant Guilds",
+   "rule": "R2",
+   "publicRule": "R2",
+   "person": "Onggur Ongut",
+   "circumstances": [],
+   "before": [
+    "Merchant Guilds"
+   ],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-safe_province_capital-5",
+   "tier": "hamlet",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Valentinus Silanus",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-safe_province_capital-6",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Dolgorsüren Kiyad",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-safe_province_capital-7",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Fulvia Cato",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-hamlet-safe_province_capital-8",
+   "tier": "hamlet",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Oleg Sokolov",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [
+    "The Independent Bloc"
+   ],
+   "after": [
+    "The Independent Bloc"
+   ]
+  },
+  {
+   "seed": "seat-measure-hamlet-safe_province_capital-9",
+   "tier": "hamlet",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Berke Borjigin",
+   "circumstances": [],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-village-merchant_republic-0",
+   "tier": "village",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Ottmar Fischer",
+   "circumstances": [],
+   "before": [
+    "Merchant Guilds"
+   ],
+   "after": [
+    "Merchant Guilds"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-merchant_republic-1",
+   "tier": "village",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Zac Chan",
+   "circumstances": [],
+   "before": [
+    "Religious Authorities"
+   ],
+   "after": [
+    "Religious Authorities"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-merchant_republic-2",
+   "tier": "village",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Isidor Volkov",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [
+    "War Council",
+    "Religious Authorities"
+   ],
+   "after": [
+    "War Council",
+    "Religious Authorities"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-merchant_republic-3",
+   "tier": "village",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Ahmed al-Amin",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [
+    "Religious Authorities"
+   ],
+   "after": [
+    "Religious Authorities"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-merchant_republic-4",
+   "tier": "village",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Achilles Botaneiates",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [
+    "Merchant Guilds",
+    "Craft Guilds"
+   ],
+   "after": [
+    "Merchant Guilds",
+    "Craft Guilds"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-merchant_republic-5",
+   "tier": "village",
+   "form": "Elected Reeve",
+   "holder": "Merchant Guilds",
+   "rule": "R2",
+   "publicRule": "R2",
+   "person": "Emiko Hu",
+   "circumstances": [],
+   "before": [
+    "Merchant Guilds",
+    "Craft Guilds"
+   ],
+   "after": [
+    "Craft Guilds"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-merchant_republic-6",
+   "tier": "village",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Danica Ilyin",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [
+    "Religious Authorities",
+    "The Inquiry"
+   ],
+   "after": [
+    "Religious Authorities",
+    "The Inquiry"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-merchant_republic-7",
+   "tier": "village",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Tezozomoc Ixim",
+   "circumstances": [],
+   "before": [
+    "Merchant Guilds",
+    "Craft Guilds"
+   ],
+   "after": [
+    "Merchant Guilds",
+    "Craft Guilds"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-merchant_republic-8",
+   "tier": "village",
+   "form": "Household Council",
+   "holder": "Merchant Guilds",
+   "rule": "R2",
+   "publicRule": "R2",
+   "person": "Nianzu Ma",
+   "circumstances": [],
+   "before": [
+    "Merchant Guilds",
+    "Craft Guilds"
+   ],
+   "after": [
+    "Craft Guilds"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-merchant_republic-9",
+   "tier": "village",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Quetzalxochitl Chi",
+   "circumstances": [],
+   "before": [
+    "Religious Authorities"
+   ],
+   "after": [
+    "Religious Authorities"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-trade_crossroads-0",
+   "tier": "village",
+   "form": "Elected Reeve",
+   "holder": "Merchant Guilds",
+   "rule": "R2",
+   "publicRule": "R2",
+   "person": "Mohini Goswami",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [
+    "Merchant Guilds",
+    "Religious Authorities"
+   ],
+   "after": [
+    "Religious Authorities"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-trade_crossroads-1",
+   "tier": "village",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Karl Braun",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [
+    "Reform Movement"
+   ],
+   "after": [
+    "Reform Movement"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-trade_crossroads-2",
+   "tier": "village",
+   "form": "Household Council",
+   "holder": "Merchant Guilds",
+   "rule": "R2",
+   "publicRule": "R2",
+   "person": "Ahuitzotl Batab",
+   "circumstances": [],
+   "before": [
+    "Merchant Guilds"
+   ],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-village-trade_crossroads-3",
+   "tier": "village",
+   "form": "Elected Reeve",
+   "holder": "Merchant Guilds",
+   "rule": "R2",
+   "publicRule": "R2",
+   "person": "Dina al-Jazari",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [
+    "Merchant Guilds",
+    "Religious Authorities"
+   ],
+   "after": [
+    "Religious Authorities"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-trade_crossroads-4",
+   "tier": "village",
+   "form": "Household Council",
+   "holder": "Merchant Guilds",
+   "rule": "R2",
+   "publicRule": "R2",
+   "person": "Wulfric Walsh",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [
+    "Merchant Guilds",
+    "Craft Guilds"
+   ],
+   "after": [
+    "Craft Guilds"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-trade_crossroads-5",
+   "tier": "village",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Cveta Bogdanov",
+   "circumstances": [],
+   "before": [
+    "Religious Authorities"
+   ],
+   "after": [
+    "Religious Authorities"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-trade_crossroads-6",
+   "tier": "village",
+   "form": "Household Council",
+   "holder": "Merchant Guilds",
+   "rule": "R2",
+   "publicRule": "R2",
+   "person": "Vijay Basu",
+   "circumstances": [],
+   "before": [
+    "Merchant Guilds",
+    "Craft Guilds"
+   ],
+   "after": [
+    "Craft Guilds"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-trade_crossroads-7",
+   "tier": "village",
+   "form": "Elected Reeve",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Theofanis Angelos",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [
+    "Reform Movement",
+    "Religious Authorities"
+   ],
+   "after": [
+    "Reform Movement",
+    "Religious Authorities"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-trade_crossroads-8",
+   "tier": "village",
+   "form": "Household Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Ciarán Doherty",
+   "circumstances": [
+    "mandate"
+   ],
+   "before": [
+    "Religious Authorities"
+   ],
+   "after": [
+    "Religious Authorities"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-trade_crossroads-9",
+   "tier": "village",
+   "form": "Household Council",
+   "holder": "Merchant Guilds",
+   "rule": "R2",
+   "publicRule": "R2",
+   "person": "Anwar al-Hassan",
+   "circumstances": [],
+   "before": [
+    "Merchant Guilds",
+    "Craft Guilds"
+   ],
+   "after": [
+    "Craft Guilds"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-mining_colony-0",
+   "tier": "village",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Manuela Comnenus",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [
+    "Religious Authorities"
+   ],
+   "after": [
+    "Religious Authorities"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-mining_colony-1",
+   "tier": "village",
+   "form": "Elected Reeve",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Huana Balam",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [
+    "Religious Authorities"
+   ],
+   "after": [
+    "Religious Authorities"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-mining_colony-2",
+   "tier": "village",
+   "form": "Headman's Authority",
+   "holder": "Merchant Guilds",
+   "rule": "R2",
+   "publicRule": "R2",
+   "person": "Diya Bhat",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [
+    "Merchant Guilds",
+    "Craft Guilds"
+   ],
+   "after": [
+    "Craft Guilds"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-mining_colony-3",
+   "tier": "village",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Xiao Huang",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [
+    "The Independent Bloc"
+   ],
+   "after": [
+    "The Independent Bloc"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-mining_colony-4",
+   "tier": "village",
+   "form": "Elder Council",
+   "holder": "Merchant Guilds",
+   "rule": "R2",
+   "publicRule": "R2",
+   "person": "Gregor Hartmann",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [
+    "Merchant Guilds",
+    "Craft Guilds"
+   ],
+   "after": [
+    "Craft Guilds"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-mining_colony-5",
+   "tier": "village",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Ahmed al-Nuri",
+   "circumstances": [
+    "martial_pressure",
+    "hunger",
+    "mandate"
+   ],
+   "before": [
+    "War Council"
+   ],
+   "after": [
+    "War Council"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-mining_colony-6",
+   "tier": "village",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Venus Woman Balam",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [
+    "Religious Authorities",
+    "Military Party"
+   ],
+   "after": [
+    "Religious Authorities",
+    "Military Party"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-mining_colony-7",
+   "tier": "village",
+   "form": "Elder Council",
+   "holder": "Merchant Guilds",
+   "rule": "R2",
+   "publicRule": "R2",
+   "person": "Plancus Caesar",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [
+    "Merchant Guilds",
+    "Craft Guilds"
+   ],
+   "after": [
+    "Craft Guilds"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-mining_colony-8",
+   "tier": "village",
+   "form": "Elected Reeve",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Barbara Lehmann",
+   "circumstances": [
+    "martial_pressure",
+    "hunger",
+    "mandate"
+   ],
+   "before": [
+    "War Council"
+   ],
+   "after": [
+    "War Council"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-mining_colony-9",
+   "tier": "village",
+   "form": "Elder Council",
+   "holder": "Military Party",
+   "rule": "R2",
+   "publicRule": "R2",
+   "person": "Mazin al-Hakim",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [
+    "Religious Authorities",
+    "Military Party"
+   ],
+   "after": [
+    "Religious Authorities"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-military_fortress-0",
+   "tier": "village",
+   "form": "Elected Reeve",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Varg Ragnarsson",
+   "circumstances": [
+    "martial_pressure",
+    "mandate",
+    "occupation"
+   ],
+   "before": [
+    "Occupation Authority"
+   ],
+   "after": [
+    "Occupation Authority"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-military_fortress-1",
+   "tier": "village",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Dominik Hoffmann",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [
+    "Military/Guard"
+   ],
+   "after": [
+    "Military/Guard"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-military_fortress-2",
+   "tier": "village",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Ernst Walter",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [
+    "Military Party"
+   ],
+   "after": [
+    "Military Party"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-military_fortress-3",
+   "tier": "village",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Decius Aurelius",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [
+    "Religious Authorities"
+   ],
+   "after": [
+    "Religious Authorities"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-military_fortress-4",
+   "tier": "village",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Tara Kapoor",
+   "circumstances": [
+    "martial_pressure",
+    "mandate",
+    "occupation"
+   ],
+   "before": [
+    "Occupation Authority"
+   ],
+   "after": [
+    "Occupation Authority"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-military_fortress-5",
+   "tier": "village",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Oddny Bjarnarson",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [
+    "Religious Authorities"
+   ],
+   "after": [
+    "Religious Authorities"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-military_fortress-6",
+   "tier": "village",
+   "form": "Elder Council",
+   "holder": "Merchant Guilds",
+   "rule": "R2",
+   "publicRule": "R2",
+   "person": "Angelos Gregoraios",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [
+    "Religious Authorities",
+    "Merchant Guilds"
+   ],
+   "after": [
+    "Religious Authorities"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-military_fortress-7",
+   "tier": "village",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Flint Chel",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [
+    "Religious Authorities",
+    "The Independent Bloc"
+   ],
+   "after": [
+    "Religious Authorities",
+    "The Independent Bloc"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-military_fortress-8",
+   "tier": "village",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Laith al-Nuri",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [
+    "Religious Authorities"
+   ],
+   "after": [
+    "Religious Authorities"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-military_fortress-9",
+   "tier": "village",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Metztli Itza",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [
+    "Religious Authorities"
+   ],
+   "after": [
+    "Religious Authorities"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-frontier_outpost-0",
+   "tier": "village",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Zhiwei Ma",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [
+    "Military/Guard"
+   ],
+   "after": [
+    "Military/Guard"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-frontier_outpost-1",
+   "tier": "village",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Caecilia Laenas",
+   "circumstances": [
+    "martial_pressure",
+    "hunger",
+    "mandate"
+   ],
+   "before": [
+    "War Council"
+   ],
+   "after": [
+    "War Council"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-frontier_outpost-2",
+   "tier": "village",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Vasili Andreyev",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [
+    "Religious Authorities"
+   ],
+   "after": [
+    "Religious Authorities"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-frontier_outpost-3",
+   "tier": "village",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Balarama Das",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [
+    "Religious Authorities"
+   ],
+   "after": [
+    "Religious Authorities"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-frontier_outpost-4",
+   "tier": "village",
+   "form": "Elder Council",
+   "holder": "Merchant Guilds",
+   "rule": "R2",
+   "publicRule": "R2",
+   "person": "Bebinn Murphy",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [
+    "Religious Authorities",
+    "Merchant Guilds"
+   ],
+   "after": [
+    "Religious Authorities"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-frontier_outpost-5",
+   "tier": "village",
+   "form": "Elder Council",
+   "holder": "Merchant Guilds",
+   "rule": "R2",
+   "publicRule": "R2",
+   "person": "Suhad al-Jabbar",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [
+    "Religious Authorities",
+    "Merchant Guilds"
+   ],
+   "after": [
+    "Religious Authorities"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-frontier_outpost-6",
+   "tier": "village",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Babur Olqunu'ud",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [
+    "Military Party",
+    "Religious Authorities"
+   ],
+   "after": [
+    "Military Party",
+    "Religious Authorities"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-frontier_outpost-7",
+   "tier": "village",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Denis Dmitriev",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [
+    "Military Party"
+   ],
+   "after": [
+    "Military Party"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-frontier_outpost-8",
+   "tier": "village",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Devayani Dutta",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [
+    "Military/Guard"
+   ],
+   "after": [
+    "Military/Guard"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-frontier_outpost-9",
+   "tier": "village",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Brynhild Dagsson",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [
+    "Religious Authorities"
+   ],
+   "after": [
+    "Religious Authorities"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-besieged_holdout-0",
+   "tier": "village",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Vladimir Frolov",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [
+    "Military/Guard",
+    "Religious Authorities"
+   ],
+   "after": [
+    "Military/Guard",
+    "Religious Authorities"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-besieged_holdout-1",
+   "tier": "village",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Mazin al-Din",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [
+    "Military/Guard",
+    "Religious Authorities"
+   ],
+   "after": [
+    "Military/Guard",
+    "Religious Authorities"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-besieged_holdout-2",
+   "tier": "village",
+   "form": "Feudal Stewardship",
+   "holder": "Manor Household",
+   "rule": "R2",
+   "publicRule": "R2",
+   "person": "Winal Ixim",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [
+    "Military/Guard",
+    "Manor Household"
+   ],
+   "after": [
+    "Military/Guard"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-besieged_holdout-3",
+   "tier": "village",
+   "form": "Elder Council",
+   "holder": "Military/Guard",
+   "rule": "R2",
+   "publicRule": "R2",
+   "person": "Quinn Gallagher",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [
+    "Military/Guard"
+   ],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-village-besieged_holdout-4",
+   "tier": "village",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Photios Attaleiates",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [
+    "Military/Guard"
+   ],
+   "after": [
+    "Military/Guard"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-besieged_holdout-5",
+   "tier": "village",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Reem al-Din",
+   "circumstances": [
+    "martial_pressure",
+    "mandate",
+    "outside_debt"
+   ],
+   "before": [
+    "Military/Guard"
+   ],
+   "after": [
+    "Military/Guard"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-besieged_holdout-6",
+   "tier": "village",
+   "form": "Elder Council",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Kamala Bhat",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [
+    "Military/Guard"
+   ],
+   "after": [
+    "Military/Guard"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-besieged_holdout-7",
+   "tier": "village",
+   "form": "Elected Reeve",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Riyad al-Masri",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [
+    "Religious Authorities"
+   ],
+   "after": [
+    "Religious Authorities"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-besieged_holdout-8",
+   "tier": "village",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Garbhán O'Brien",
+   "circumstances": [
+    "martial_pressure"
+   ],
+   "before": [
+    "Military/Guard"
+   ],
+   "after": [
+    "Military/Guard"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-besieged_holdout-9",
+   "tier": "village",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Aditya Bajaj",
+   "circumstances": [
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [
+    "Military/Guard"
+   ],
+   "after": [
+    "Military/Guard"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-plague_of_beasts-0",
+   "tier": "village",
+   "form": "Priestly Guidance",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Cnoc O'Connor",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [
+    "The Independent Bloc"
+   ],
+   "after": [
+    "The Independent Bloc"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-plague_of_beasts-1",
+   "tier": "village",
+   "form": "Priestly Guidance",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Keiko Li",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure",
+    "mandate",
+    "outside_debt"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-village-plague_of_beasts-2",
+   "tier": "village",
+   "form": "Priestly Guidance",
+   "holder": "Religious Authorities",
+   "rule": "R3",
+   "publicRule": "R3",
+   "person": "Jiro Hu",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure"
+   ],
+   "before": [
+    "Religious Authorities"
+   ],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-village-plague_of_beasts-3",
+   "tier": "village",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Vipsania Severus",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure"
+   ],
+   "before": [
+    "Religious Authorities"
+   ],
+   "after": [
+    "Religious Authorities"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-plague_of_beasts-4",
+   "tier": "village",
+   "form": "Priestly Guidance",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Tamara al-Masri",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-village-plague_of_beasts-5",
+   "tier": "village",
+   "form": "Elected Reeve",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Xiuhcoatl Chan",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure",
+    "hunger",
+    "mandate"
+   ],
+   "before": [
+    "Religious Authorities",
+    "Military/Guard"
+   ],
+   "after": [
+    "Religious Authorities",
+    "Military/Guard"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-plague_of_beasts-6",
+   "tier": "village",
+   "form": "Priestly Guidance",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Yaxal Hau",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure",
+    "hunger",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-village-plague_of_beasts-7",
+   "tier": "village",
+   "form": "Feudal Stewardship",
+   "holder": null,
+   "rule": "R5",
+   "publicRule": "R5",
+   "person": "Rónnat Byrne",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure"
+   ],
+   "before": [
+    "Military/Guard",
+    "Religious Authorities"
+   ],
+   "after": [
+    "Religious Authorities",
+    "Military/Guard"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-plague_of_beasts-8",
+   "tier": "village",
+   "form": "Priestly Guidance",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Ulfhéðinn Dagsson",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure"
+   ],
+   "before": [
+    "Military/Guard"
+   ],
+   "after": [
+    "Military/Guard"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-plague_of_beasts-9",
+   "tier": "village",
+   "form": "Headman's Authority",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Ukon Wei",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure"
+   ],
+   "before": [
+    "Religious Authorities"
+   ],
+   "after": [
+    "Religious Authorities"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-theocracy-0",
+   "tier": "village",
+   "form": "Elected Reeve",
+   "holder": "Merchant Guilds",
+   "rule": "R2",
+   "publicRule": "R2",
+   "person": "Mansur al-Rashidi",
+   "circumstances": [
+    "strong_faith"
+   ],
+   "before": [
+    "Religious Authorities",
+    "Merchant Guilds"
+   ],
+   "after": [
+    "Religious Authorities"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-theocracy-1",
+   "tier": "village",
+   "form": "Priestly Guidance",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Bohdan Komarov",
+   "circumstances": [
+    "strong_faith"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-village-theocracy-2",
+   "tier": "village",
+   "form": "Priestly Guidance",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Naranchuluun Suldus",
+   "circumstances": [
+    "strong_faith",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-village-theocracy-3",
+   "tier": "village",
+   "form": "Elected Reeve",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Fionnuala Reilly",
+   "circumstances": [
+    "strong_faith",
+    "mandate"
+   ],
+   "before": [
+    "The Independent Bloc"
+   ],
+   "after": [
+    "The Independent Bloc"
+   ]
+  },
+  {
+   "seed": "seat-measure-village-theocracy-4",
+   "tier": "village",
+   "form": "Priestly Guidance",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Tighearnach Carey",
+   "circumstances": [
+    "strong_faith",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-village-theocracy-5",
+   "tier": "village",
+   "form": "Priestly Guidance",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Albinus Aquila",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-village-theocracy-6",
+   "tier": "village",
+   "form": "Priestly Guidance",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Chimgee Merkit",
+   "circumstances": [
+    "strong_faith"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-village-theocracy-7",
+   "tier": "village",
+   "form": "Priestly Guidance",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Valerianus Aquila",
+   "circumstances": [
+    "strong_faith",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-village-theocracy-8",
+   "tier": "village",
+   "form": "Priestly Guidance",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Tlacaelel Kab",
+   "circumstances": [
+    "strong_faith",
+    "martial_pressure",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  },
+  {
+   "seed": "seat-measure-village-theocracy-9",
+   "tier": "village",
+   "form": "Priestly Guidance",
+   "holder": null,
+   "rule": "R4",
+   "publicRule": "R4",
+   "person": "Eithne Tobin",
+   "circumstances": [
+    "strong_faith",
+    "mandate"
+   ],
+   "before": [],
+   "after": []
+  }
+ ]
+}
