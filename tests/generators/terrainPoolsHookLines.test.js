@@ -62,11 +62,14 @@ describe('soak1k-921, a town in the hills on a road', () => {
     // draws a wet line with a twin — the economy loyalty hook (NPC_FACTION_LOYALTY's "lost at sea" cargo, its twin "lost
     // on the road") — read on soak1k-33, a town in the mountains on a road (landlocked), the first landlocked town of the
     // 1,000 at the car's tip whose cast draws it: no wet line, and the hook printed is the dry twin.
-    const t = birth(33).settlement;
+    // 2026-11-20 (DEPTH-2 hooks, the chair's word of 14:50 UTC): re-keyed soak1k-33 -> soak1k-4 (four NPC_FACTION_LOYALTY
+    // pools grew, so 33's cast no longer draws the cargo; 4, a city in the desert at a crossroads, landlocked, is the first
+    // landlocked town of the 1,000 at this tip whose cast does), found by a probe; the claim is unchanged.
+    const t = birth(4).settlement;
     expect(waterAccessKind(t.config?.terrainType, t.config?.tradeRouteAccess)).toBe('none');
     const tLines = (t.npcs || []).flatMap((n) => [n?.goal?.short, n?.goal?.long, ...(n?.plotHooks || [])]).filter((x) => typeof x === 'string');
     expect(tLines.filter((x) => WET_HOOK_WORD.test(x))).toEqual([]);
     const wetCargo = 'A valuable cargo was reported lost at sea. The manifest has reappeared in a market two settlements away.';
-    expect(tLines.filter((x) => x.includes(twinOf(wetCargo))).length, 'soak1k-33: the loyalty hook keeps its beat, the cargo, dry').toBeGreaterThan(0);
+    expect(tLines.filter((x) => x.includes(twinOf(wetCargo))).length, 'soak1k-4: the loyalty hook keeps its beat, the cargo, dry').toBeGreaterThan(0);
   });
 });
