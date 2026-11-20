@@ -164,3 +164,11 @@ served label's band, the page draws the label alone (count the disagreements; a 
 it): a cast role of kind 'npc' is matched by id: R4 re-keys `cast.roles[].id` BEFORE R2's step.
 THE GATE BEFORE R2 (gallery, new shape, N=2, committed export): registered 0 | diffuse 0 | rng-only 13 | UNREGISTERED 137
 (`out/v21/gate/gate-gallery-pre-r2-at-0d28ccf19.txt`).
+
+R6 PREPARED (the test-only builder, b47b7bbdb on `v21-r6`, pushed as `lane/veil-21-r6-2026-11-20`, worktree clean, NOT merged):
+`tests/security/rosterChoiceCounterfactual.pglite.test.js` + its manifest row; 4 of 4 at 0d28ccf19 (CONTROL, RED, MAIN, the
+INVERSION arm split by tier, VR32/VR28); MAIN judges 0 rows there (none built: of 105 unbuilt rows 79 would fail, 23 pass, 3 no
+born town). Tier 1 inverting: `defence.scores.internal` (R2 withholds it); tier 2 recorded: prosperity, safetyLabel. NOT
+covered: master's shape, the hand veil, the map, the import send. FOR THE SUCCESSOR: align or retire
+`rosterChoiceInversion.pglite.test.js` (its legitimacy rows and prosperityStanding no longer invert under VR32); merge R6 after
+R2 and re-run its MAIN arm (R2's rows are withhold-always, not (a)/(b): MAIN judges R3 onward).
