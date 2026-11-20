@@ -35,3 +35,8 @@ Red, then green, of the arms above; the files above; `npm run typecheck:ratchet`
 
 ## Your files
 `src/data/people/goalFamilies.js`, `src/generators/people/goals.js`, `tests/generators/people/goalsNoRepeatedWording.test.js` (or a new sibling), `tests/data/goalFamilies.test.js`. No rename. Do NOT commit or push; report back (files, differences from this brief, red and green with counts and log paths, the guard count (i) and (ii), anything undone).
+
+## AMENDMENT (10:59 UTC; the chair's rulings of 10:58 UTC; where it differs from the text above, THIS GOVERNS)
+3. **A sentence and its mirror are one.** A template is never held twice in one town with the same NAME-slot values in either order (seen in a forged town: "Get a bigger share of what passes between {power} and {rival}." held by the council's second as (Council, Guild) and by the guild's first as (Guild, Council)). In pass two, rungs (ii) and (iii) never take a candidate whose one holder filled its name slots with the same values as this card's, in any order (compare the sorted list of the name-slot values: the masked slots of `wordingOf`); a holding drawn so stays a repeat and rotates on. Draw-free.
+4. **Tests:** (h) a planted mirror (two cards whose drawn template and name values are one pair in either order): the later rotates and never stands as 'twice'. Red on 84a8606b9.
+5. **Report the count:** on the 300 towns, by size, holders of a mirrored pair at the base (835fabd2d), at 84a8606b9, and after your change.
