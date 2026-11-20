@@ -100,6 +100,19 @@ baseline file's _doc on a clean tree).
    `institution: theatre`, `institution: rootCellar`, `institution: bathhouse` (the chair's leave for that file, for these
    answers only); `bathhouse` was already one of the 14 original kinds (no new row; its pattern matches the catalogue's
    one name, "Public bathhouse"); N8 and B16 kept; N11 excludes `crisis: under_siege`, wording unchanged.
+21. (19:58) FIRST PAINT before "DAILY <commit>": ONE `npm run build` at the tip, then VERIFY_DIST=1 on
+   `tests/build/vendorPdfLazy.test.js` and `tests/build/generationWorkerLazy.test.js` through the mutex; the three
+   first-paint figures and the worker's size in the message beside the line's (1,177,668 / 374,676 / 314,472 at
+   8196e5712; worker 2,617,934). A rise is cured on the lane (an eager file declares an atom BY NAME; the code that
+   answers it is imported only on the lazy side) or ruled by the chair (this lane's +945/+255/+278: ASKED, § 5b).
+   A walker's class table is never widened without naming the row to the chair; every class-file edit is listed (§ 5b).
+22. (20:13) THE LANDING REQUEST before "DAILY <commit>": ONE `npm run test:ratchet` at the tip WITH THE LINE'S TIP
+   MERGED IN (`scripts/check-test-ratchet.mjs`; exclusive mutex; to a log, never through a pipe; the ONE whole-suite run
+   allowed). Its failing rows read BY NAME against the line's list (`git fetch origin lane/chair-2026-11-08 && git show
+   FETCH_HEAD:docs/chair/2026-11-20/seventh/ci/RED-AT-LINE.tsv`): a row not on the list is a stored figure,
+   fingerprint or golden this lane's wording moved (named with its cause; re-recorded only by its own door, or left
+   for the close where the door is the owner's) or a real red, CURED ON THE LANE before the request. With rule 21's
+   figures, that is the whole landing request.
 19. THE LANE DOES NOT PRINT: nothing under `src/components/`, `src/pdf/`, `supabase/`, `tests/security/`; no file under
    `src/generators/` without one line to the chair first.
 
