@@ -38,3 +38,6 @@ Commits on your branch (the red test first, then the cure), by explicit paths, t
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 Claude-Session: https://claude.ai/code/session_019yED1QfbBhtLaDuWfGxc42
 Never push, never a pull request, never `--no-verify`. Final message at most 250 words: the commits; the pipeline line and the factionDynamics line as written (with the function); the shares before and after; the house list of item 5 by pool (or the file it is in); every red you saw and whose it is.
+
+## HELD OUT (the integrator, 17:58 UTC, on M6's §F in `LINES-power-tranche2.md`)
+Do NOT write these five ruled wordings until the integrator relays the chair's ruling to you by message: `closingGap` 1 and 2 (false where they print: the merchants already stand above), `arcaneInShadow` 2 and 3 (false at a tie), `clergyAhead` 2 ("quietly"). Build everything else. If the ruling reaches you before your cure commit, apply it in that commit; otherwise list the five as held in your final message.
