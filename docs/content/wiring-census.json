@@ -55116,7 +55116,7 @@
       "name": "NPC_FACTION_LOYALTY",
       "drawKind": "R",
       "drawSite": "npcGenerator.js:659/683/687 drawLoyalty → drawUnique (NPC plot-hook titles, keyed by category)",
-      "lines": 175,
+      "lines": 235,
       "declares": [],
       "lineDeclares": {
         "appointed post": 1,
@@ -55137,7 +55137,7 @@
         "tier: ≥ village": 12,
         "watch": 1
       },
-      "undeclared": 130,
+      "undeclared": 190,
       "crisisScoped": false
     },
     {
