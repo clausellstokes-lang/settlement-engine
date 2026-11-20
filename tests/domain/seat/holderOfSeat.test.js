@@ -35,13 +35,21 @@
  *       taker when a made-up new wording stands first in the list; (a) a born seat's symbiotic/stable edge with its
  *       military power names no taker; (c) the DM's faction rename after a transfer
  *       (`store/settlementRenameHelpers.js :: renameFactionImpl` -> `factionRename.js :: applyFactionRenameToSettlement`):
- *       renaming the taker, or a bystander, leaves R1 the right power for the owner and the reader. (Renaming the SEAT
- *       is not pinned here: it answers a wrong power, reported to SEAT-5 in U4-CURE2-REPORT and not cured.)
+ *       renaming the taker, or a bystander, leaves R1 the right power for the owner and the reader.
+ *  (12) U4-CURE2 Addendum 3 (the chair 15:17Z, FAIL CLOSED INSIDE THE LEAF): renaming the SEAT after a transfer leaves
+ *       an edge on the seat's pair in a frozen wording written for ANOTHER form, and no edge for the current one: R1
+ *       answers NOBODY, for the owner and the reader, with no fall-through to R2 or R3 (it answered R3 Coin Exchange for
+ *       Merchant Guilds before). Condition 1: "nobody" is an omission: `dossier/powerStrata.js :: derivePowerStrata`, on
+ *       the record and on the served document, names the seat's form, says nothing of a vacant seat, and lists the
+ *       contest's contenders with no holder removed.
  */
 import { describe, test, expect } from 'vitest';
 import { holderOf, APPOINTED_SEAT_FORMS, isCrownedForm, TRANSFER_WORDINGS, transferSentenceSays, transferTakerOf } from '../../../src/domain/seat/holderOfSeat.js';
 import { transferRulingPower, RULING_POWER_CAUSES } from '../../../src/domain/rulingPower.js';
 import { applyFactionRenameToSettlement } from '../../../src/domain/factionRename.js';
+import { derivePowerStrata } from '../../../src/domain/dossier/powerStrata.js';
+import { coupContenders } from '../../../src/domain/rulingPowerCoup.js';
+import { SEAT_LAW_CONFIG_KEY, HOLDER_SEAT_LAW_VERSION } from '../../../src/domain/seat/seatLaw.js';
 import { toPublicSafe } from '../../../src/domain/display/publicSafe.js';
 import { APPOINTED_GOVERNMENTS } from '../../../src/generators/people/representatives.js';
 import { GOVERNMENT_FAMILY } from '../../../src/data/cultureOfficeTitles.js';
@@ -615,6 +623,61 @@ describe('(11) Step 1′: the transfer\'s sentences are read through ONE matcher
         expect(holderOf(s, OWNER)).toMatchObject({ rule: 'R1', holderName: 'Merchant Guilds', refused: false });
         expect(holderOf(toPublicSafe(s), READER)).toMatchObject({ rule: 'R1', holderName: 'Merchant Guilds', refused: false });
       });
+    }
+  });
+});
+
+// ── (12) Addendum 3: a transfer the read cannot attribute answers nobody ───────────────────────────────────
+
+describe('(12) Addendum 3: renaming the SEAT after a transfer: R1 answers NOBODY, never a wrong power', () => {
+  /** Coin Exchange (merchant, 40) outweighs the taker Merchant Guilds (31 after the transfer): R3's wrong answer before. */
+  const renamedSeat = (cause) => {
+    const start = civicTown({ extra: [{ faction: 'Coin Exchange', category: 'merchant', power: 40, modifiers: [] }] });
+    const s = structuredClone(transfer(start, 'Merchant Guilds', { cause, demoteIncumbent: false }));
+    expect(holderOf(s, OWNER)).toMatchObject({ rule: 'R1', holderName: 'Merchant Guilds' });
+    expect(applyFactionRenameToSettlement(s, s.powerStructure.government, 'The Gilded Compact').changed).toBe(true);
+    expect(s.powerStructure.government).toBe('The Gilded Compact');
+    return s;
+  };
+  const NOBODY = { rule: 'R1', holder: null, holderName: null, refused: false };
+
+  for (const cause of ['coup', 'election']) {
+    test(`${cause}: the owner and the reader (record and served) are told nobody, not Coin Exchange`, () => {
+      const s = renamedSeat(cause);
+      expect(holderOf(s, OWNER)).toMatchObject(NOBODY);
+      expect(holderOf(s, READER)).toMatchObject(NOBODY);
+      expect(holderOf(toPublicSafe(s), READER)).toMatchObject(NOBODY);
+      expect(holderOf(toPublicSafe(s), OWNER)).toMatchObject(NOBODY);
+      // the office stands: its kind is the seat's own (the merchant form), never a power's
+      expect(holderOf(s, OWNER).kind).toBe('merchant');
+    });
+  }
+
+  test('control: the rule needs an edge in a transfer wording on the seat\'s pair (a born seat\'s edge never fires it)', () => {
+    const born = civicTown({
+      extra: [{ faction: 'Town Watch', category: 'military', power: 22, modifiers: [] }],
+      relationships: [{ pair: ['Town Council', 'Town Watch'], type: 'symbiotic', direction: 'stable', narrative: 'The Town Council gives the orders and the Town Watch carries them out; each needs the other to stay strong.' }],
+    });
+    expect(holderOf(born, OWNER).rule).toBe('R4');
+    // two transfers: the first taker's edge carries the old form's wording, but the current form's edge is there
+    const twice = transfer(transfer(civicTown(), 'Merchant Guilds'), 'Noble Houses');
+    expect(holderOf(twice, OWNER)).toMatchObject({ rule: 'R1', holderName: 'Noble Houses' });
+  });
+
+  test('condition 1: derivePowerStrata, on the record and served, names the seat\'s form, says no seat is vacant, and removes no holder', () => {
+    const s = renamedSeat('coup');
+    s.config = { [SEAT_LAW_CONFIG_KEY]: HOLDER_SEAT_LAW_VERSION };
+    const oldLaw = (doc) => ({ ...doc, config: {} });
+    for (const [label, doc] of [['record', s], ['served', toPublicSafe(s)]]) {
+      const strata = derivePowerStrata(doc);
+      expect(strata.powers[0], label).toMatchObject({ name: 'The Gilded Compact', role: 'ruler' });
+      const said = JSON.stringify(strata.powers) + JSON.stringify(strata.roster.map(({ faction: _f, ...row }) => row));
+      expect(said, label).not.toMatch(/vacant|empty|unheld|no one holds|nobody holds/i);
+      // the contest's contenders, no holder removed: the old law's list (which removes none)
+      const contenders = strata.powers.filter((p) => p.role === 'contender').map((p) => p.name);
+      expect(contenders, label).toEqual(coupContenders(oldLaw(doc)).challengers.map((c) => c.name));
+      expect(contenders, label).toContain('Coin Exchange');
+      expect(contenders, label).toContain('Merchant Guilds');
     }
   });
 });

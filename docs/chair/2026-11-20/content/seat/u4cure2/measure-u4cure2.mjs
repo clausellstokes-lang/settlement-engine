@@ -19,6 +19,10 @@
  *       name the outgoing form, never the taker), and the winner's `ascendant` modifier (the unique non-governing row
  *       carrying it, and the row whose `ascendant` count is highest): at birth and after each transfer, how many towns
  *       each answers, and how many answer the sentence read's taker. (The `transfer` descriptor is returned, not stored.)
+ *   (e) U4-CURE2 Addendum 3 (builder B4e; the chair 15:17Z, condition 2): the towns where the built leaf's new rule
+ *       fires, a transfer R1 cannot attribute answering NOBODY (`holderOf` for the owner: `rule` 'R1' with no holder,
+ *       which no other path of the leaf returns to the owner): at birth (it must be 0 on both pools; any other count
+ *       stops the merge, with one town's record beside it) and, for information, after each real transfer.
  *
  *   node docs/chair/2026-11-20/content/seat/u4cure2/measure-u4cure2.mjs [--root <checkout>] [--n N] [--presets-n N]
  * `--root` defaults to the checkout this file sits in; run a scratch copy with `--root` so the outputs land beside the
@@ -109,13 +113,13 @@ const t0 = Date.now();
 for (const [pool, jobs] of Object.entries(POOLS)) {
   const R = {
     towns: 0, errors: 0,
-    birth: { falseR1: 0, falseR1ByTier: {}, falseR1Kinds: {}, falseR1Pairs: {}, sentenceR1: 0, structuredMulti: 0, holderR1: 0, previousGovernments: 0, ascendantCarriers: 0, examples: [] },
+    birth: { unattributed: 0, unattributedRecord: null, falseR1: 0, falseR1ByTier: {}, falseR1Kinds: {}, falseR1Pairs: {}, sentenceR1: 0, structuredMulti: 0, holderR1: 0, previousGovernments: 0, ascendantCarriers: 0, examples: [] },
     transfers: {},
   };
   for (const cause of CAUSES) for (let k = 1; k <= STEPS; k += 1) {
     R.transfers[`${cause}#${k}`] = { towns: 0, noWinner: 0, transferErrors: {}, winnerBy: {}, sentenceAnswersWinner: 0, sentenceNull: 0,
       same: 0, differ: 0, differShapes: {}, structuredMulti: 0, holderR1EqualsSentence: 0, ascendantUniqueEqualsSentence: 0,
-      ascendantUniqueAnswers: 0, ascendantHighestEqualsSentence: 0, ascendantHighestAnswers: 0, examples: [] };
+      ascendantUniqueAnswers: 0, ascendantHighestEqualsSentence: 0, ascendantHighestAnswers: 0, unattributed: 0, examples: [] };
   }
   for (const job of jobs) {
     let s;
@@ -140,7 +144,13 @@ for (const [pool, jobs] of Object.entries(POOLS)) {
     const bornStructured = structuredRead(s, form);
     if (bornSentence.taker) R.birth.sentenceR1 += 1;
     if (bornStructured.takers.length > 1) R.birth.structuredMulti += 1;
-    if (holderOf(s, { audience: 'owner' }).rule === 'R1') R.birth.holderR1 += 1;
+    const bornHolder = holderOf(s, { audience: 'owner' });
+    if (bornHolder.rule === 'R1') R.birth.holderR1 += 1;
+    // (e) the unattributed-transfer rule at birth: owner R1 with no holder
+    if (bornHolder.rule === 'R1' && bornHolder.holder === null) {
+      R.birth.unattributed += 1;
+      if (!R.birth.unattributedRecord) R.birth.unattributedRecord = { seed: job.seed, tier: job.tier, form, powerStructure: s.powerStructure };
+    }
     if ((s.powerStructure?.previousGovernments || []).length) R.birth.previousGovernments += 1;
     if (ascendantReads(s).carriers) R.birth.ascendantCarriers += 1;
     // (b) and (d): a chain of transfers per cause
@@ -172,6 +182,7 @@ for (const [pool, jobs] of Object.entries(POOLS)) {
           }
         }
         const h = holderOf(cur, { audience: 'owner' });
+        if (h.rule === 'R1' && h.holder === null) T.unattributed += 1;
         if ((h.rule === 'R1' ? h.holderName : null) === a.taker) T.holderR1EqualsSentence += 1;
         const asc = ascendantReads(cur);
         if (asc.unique) T.ascendantUniqueAnswers += 1;
@@ -193,6 +204,7 @@ const L = ['# U4-CURE2 Step 0: can R1 read the structured keys alone?', '',
 for (const [pool, R] of Object.entries(results)) {
   L.push(`## Pool ${pool} (${R.towns} born towns, ${R.errors} errors)`, '',
     `**(a) false R1 at birth (a symbiotic/stable edge between the form and another power's row): ${R.birth.falseR1} towns.** By size: ${TIERS.map((t) => `${t} ${R.birth.falseR1ByTier[t] || 0}`).join(' · ')}. The other power's kind (per edge): ${Object.entries(R.birth.falseR1Kinds).map(([k, v]) => `${k} ${v}`).join(' · ') || 'none'}.`,
+    `**(e) Addendum 3's rule (a transfer R1 cannot attribute answers nobody) fires at birth in ${R.birth.unattributed} towns${R.birth.unattributedRecord ? ` (first: ${R.birth.unattributedRecord.seed}; its record is in the JSON)` : ''}.** After each transfer: ${Object.entries(R.transfers).map(([k, T]) => `${k} ${T.unattributed}`).join(' · ')}.`,
     `Beside it at birth: the sentence read answers ${R.birth.sentenceR1}; the built leaf answers R1 in ${R.birth.holderR1}; the structured read finds two or more takers in ${R.birth.structuredMulti}; towns with a previousGovernments row ${R.birth.previousGovernments}; with an ascendant row ${R.birth.ascendantCarriers}.`, '',
     '**(b) after each transfer: the structured read against the sentence read**', '',
     '| chain | towns | sentence = winner | same | differ | structured 2+ takers | built R1 = sentence | ascendant unique answers / = sentence | ascendant highest answers / = sentence | difference shapes |',
