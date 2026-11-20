@@ -18,6 +18,21 @@
  * masked string holds the sentence word for word, else `COMPOSED@<heading>`. Per slot and size: holders, distinct,
  * sentences per place, TOP (commonest sentence, its places / holders), SEEN (the mean share of a place's sentences at the
  * slot that a second place also prints). `count()` is a pure function of the rendered rows (brief 2 reuses it).
+ *
+ * THE DOOR (brief 2, docs/chair/2026-11-20/content/same/SAME-1-DOOR-BRIEF.md, and the chair's amendments of 2026-11-20):
+ *   node scripts/sameness-census.mjs --check   [--from=<hxd run>] [--confirm=<hxu run>] [--n=<n>] [--seed-prefix=<p>]
+ *        renders hxd (150 a size, the six sizes), judges every slot against scripts/census/sameness-census.register.json,
+ *        renders hxu only when a rise needs confirming; exits 1 on a red. A foreign --n or --seed-prefix is a PROBE.
+ *   node scripts/sameness-census.mjs --write   adds an entry for every unregistered slot (>= MIN_PLACES places) at the
+ *        HIGHER of hxd and hxu rounded up to 0.01, retires stale entries by name; refuses (exit 1) on a confirmed rise.
+ *   node scripts/sameness-census.mjs --tighten THE CHAIR'S DOOR: lowers each ceiling loose on both readings, never raises.
+ * TWO LAWS: A PRINTED SLOT WITH NO ROW REDS; A CEILING ONLY TIGHTENS.
+ * THE SLOT is `<surface> | <position>`: where the page prints the line, whatever it says (positionOf). Every wording a
+ * position prints is one slot (a pool's lines are one slot); the stored paths are its attribution, found word for word or
+ * as the longest stored sentence a printed one contains (a label-prefixed line: "Constraint: <stored sentence>").
+ * THE READING: shareAll (the commonest sentence's places over ALL the size's places) is the ceiling's reading for a slot
+ * printing at most 1.5 sentences a place; SEEN for a slot printing more; shareIn (over the holders) is printed beside.
+ * MIN_PLACES and NOISE_SE are measured; their measures are written beside them (MIN_PLACES_MEASURE, NOISE_SE_MEASURE).
  */
 import { spawn } from 'node:child_process';
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
@@ -194,10 +209,14 @@ export const REGISTER_PATH = join(ROOT, 'scripts/census/sameness-census.register
 export const CORPUS = Object.freeze({ prefix: 'hxd', confirm: 'hxu', n: 150, sizes: SIZES });
 /** A slot printing at most this many sentences a place is met again by its TOP share; else by its SEEN. */
 export const ONE_A_PLACE = 1.5;
-/** RED, unregistered, from this many places of one size (MIN_PLACES_MEASURE in the header says why). */
+/** RED, unregistered, from this many places of one size. */
 export const MIN_PLACES = 5;
-/** A rise reds beyond this many standard errors of a share at the ceiling (NOISE_SE_MEASURE in the header). */
-export const NOISE_SE = 3;
+/** Why MIN_PLACES is 5 (the smallest value at which hxd and hxu agree on the slot set). */
+export const MIN_PLACES_MEASURE = 'hxd vs hxu at 23893d8d4, 150 a size: 55 slots printed in two or more places of a size in one corpus and in none of the other, by holders 2+: 55, 3+: 24, 4+: 6, 5+: 0; so from 5 places the two corpora agree on every slot (at 50 a size the same count needs 6: 2+: 66, 5+: 7, 6+: 0).';
+/** A rise reds beyond this many standard errors of a share at the ceiling, on both readings. */
+export const NOISE_SE = 4;
+/** Why NOISE_SE is 4. */
+export const NOISE_SE_MEASURE = 'hxd vs hxu at 23893d8d4, 150 a size, rows with 5+ holders: one corpus read against ceilings banked on the other alone puts over 3 SE 19 of 3150 rows (hxu) and 32 of 3186 (hxd), over 4 SE 5 and 2 (max 5.16 SE: SEEN is not binomial and runs wider). A red needs both readings over, so at 4 SE a re-dealt tree expects about (5/3150)^2 x 3150 = 0.008 false reds; at 3, 0.1 to 0.3.';
 
 /** An index of a place's stored sentences by their first 16 characters (the containment attribution). @param {Record<string, string[]>} stored */
 export function storedHeads(stored) {
@@ -417,6 +436,16 @@ export function readRun(dir) {
   for (const f of files.sort((a, b) => a.localeCompare(b, 'en', { numeric: true }))) { const r = JSON.parse(readFileSync(join(rd, f), 'utf8')); (bySize[r.size] ||= []).push(r); }
   return bySize;
 }
+/**
+ * One size of a rendered run (a 900-place run does not fit in memory at once), optionally only its places 0..limit-1
+ * (the 50-a-size corpus is the first 50 of the 150). @param {string} dir @param {string} size @param {number} [limit]
+ */
+export function readSize(dir, size, limit = Infinity) {
+  const rd = join(dir, 'rows');
+  const re = new RegExp(`^[a-z0-9]+-${size}-(\\d+)\\.json$`);
+  return (existsSync(rd) ? readdirSync(rd) : []).map((f) => [f, re.exec(f)]).filter(([, m]) => m && Number(m[1]) < limit)
+    .sort((a, b) => Number(a[1][1]) - Number(b[1][1])).map(([f]) => JSON.parse(readFileSync(join(rd, f), 'utf8')));
+}
 /** @param {string} name @param {string} [fallback] */
 const arg = (name, fallback) => { const hit = process.argv.find((a) => a.startsWith(`--${name}=`)); return hit ? hit.slice(name.length + 3) : fallback; };
 const cut = (/** @type {string} */ s, n = 120) => (s.length > n ? `${s.slice(0, n - 1)}…` : s);
@@ -486,22 +515,22 @@ async function door(mode) {
   if (probe) console.log(`sameness-census --check: A PROBE (prefix ${prefix}, n ${n}), not the register's corpus`);
   const base = arg('out') || mkdtempSync(join(tmpdir(), 'same-door-'));
   const readOrRender = async (/** @type {string | undefined} */ dir, /** @type {string} */ pfx, /** @type {string} */ name) => {
-    if (dir) return readRun(dir);
-    await renderRun(pfx, n, workers, join(base, name)); return readRun(join(base, name));
+    if (dir) return dir;
+    await renderRun(pfx, n, workers, join(base, name)); return join(base, name);
   };
-  const firstRun = await readOrRender(arg('from'), prefix, prefix);
+  const firstDir = await readOrRender(arg('from'), prefix, prefix);
   const t1 = Date.now();
-  /** @type {any} */ let secondRun = null;
-  const second = async () => { secondRun ||= await readOrRender(arg('confirm'), prefix === CORPUS.confirm ? CORPUS.prefix : CORPUS.confirm, 'confirm'); return secondRun; };
-  const tableOf = (/** @type {any} */ run) => Object.fromEntries(SIZES.filter((s) => run[s]).map((s) => [s, measureSlots(run[s])]));
-  const first = tableOf(firstRun);
+  /** @type {any} */ let secondTable = null;
+  const tableOf = (/** @type {string} */ dir) => Object.fromEntries(SIZES.flatMap((s) => { const rows = readSize(dir, s, n); return rows.length ? [[s, measureSlots(rows)]] : []; }));
+  const second = async () => { secondTable ||= tableOf(await readOrRender(arg('confirm'), prefix === CORPUS.confirm ? CORPUS.prefix : CORPUS.confirm, 'confirm')); return secondTable; };
+  const first = tableOf(firstDir);
   const idx = moduleIndex();
   const say = (/** @type {string} */ x) => console.log(x);
   if (mode === 'check') {
     let f = judge(first, register);
     /** @type {string[]} */ let notes = [];
     let confirmed = false;
-    if (f.over.length) { const t = tableOf(await second()); const c = confirmRises(f, judge(t, register)); notes = c.notes; f = c; confirmed = true; }
+    if (f.over.length) { const t = await second(); const c = confirmRises(f, judge(t, register)); notes = c.notes; f = c; confirmed = true; }
     for (const x of f.unregistered) say(`RED unregistered: ${x.text}`);
     for (const x of f.over) say(`RED rise: ${x.text}`);
     for (const x of notes) say(`NOTE rise on one reading: ${x}`);
@@ -512,7 +541,7 @@ async function door(mode) {
     say(`sameness-census --check: ${f.unregistered.length} unregistered, ${f.over.length} rises (red); ${notes.length} one-reading rises, ${f.stale.length} stale, ${f.loose.length} loose (notes); ${rows} rows; render ${((t1 - t0) / 60000).toFixed(1)} min, wall ${((Date.now() - t0) / 60000).toFixed(1)} min${confirmed ? ` (confirmed on ${CORPUS.confirm})` : ' (no confirmation needed)'}`);
     process.exit(f.unregistered.length || f.over.length ? 1 : 0);
   }
-  const t2 = tableOf(await second());
+  const t2 = await second();
   if (mode === 'write') {
     const r = writeRows(first, t2, register, { classify: (slot, m) => classifySlot(slot, m, idx) });
     if (r.refused.length) { for (const x of r.refused) say(x); say('sameness-census --write: NOTHING WRITTEN'); process.exit(1); }
