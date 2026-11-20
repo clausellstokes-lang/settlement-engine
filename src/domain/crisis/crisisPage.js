@@ -19,7 +19,9 @@
 
 import { crisisHookFor } from './crisisHooks.js';
 import { crisisContainer } from '../facts/crisisKind.js';
-import { CRISIS_ROLE_LABEL, STAKE_REASONS, castReasonShown, effectiveCastOf } from './crisisCast.js';
+import { CAST_ABSENCES, CRISIS_ROLE_LABEL, STAKE_REASONS, castReasonShown, effectiveCastOf } from './crisisCast.js';
+import { LODGING_HOUSE } from '../tension/sideArchetypes.js';
+import { isOfficeStandIn } from '../dossier/seatHolder.js';
 import { composeTonightSheet, TONIGHT_AUDIENCES } from '../summary/tonightSheet.js';
 import { entityIdFor } from '../dossier/entityLinks.js';
 import { factionIdFromName } from '../../lib/entities.js';
@@ -226,6 +228,50 @@ function stakeShown(s, govName, k) {
   return many ? { stake: 'untouchedMany', reason: k.reason.replace(/^it\b/, 'they') } : { stake: 'untouched', reason: k.reason };
 }
 
+/**
+ * WHO REACHES AN ABSENCE (FRAME-5 · P1B; B7 §P1b, the chair's rulings of 2026-11-20, each vetoable by the owner): the closed
+ * set of words the OWNER's page adds after an absence's stored reason, never stored, never shown to another reader. One
+ * sentence: an infiltration's instigator absent as "an outside hand, unnamed" is reached through the keeper of a house
+ * where strangers lodge. The hand is never named, nor the infiltrator power's face; `{keeper}` is a person on the record
+ * (named once, in full) and `{house}` the record's own word for the house (`lodgingKeeperOf`).
+ */
+export const CRISIS_ABSENCE_REACH = Object.freeze({
+  outsideHand: '{keeper} keeps the {house} where its people come and go',
+});
+
+/** @typedef {{ id?: unknown, name?: unknown, role?: unknown, title?: unknown, power?: unknown, temporary?: unknown, ousted?: unknown, institution?: unknown }} KeeperNpc */
+
+/**
+ * The keeper an outside hand is reached through, by the standing trouble's own outsider rule (tension/troubleCast.js ::
+ * castTroubleFrame, its `outsider` rung, read here because only the sheet's composer may import the trouble cast): the
+ * live roster (no temporary person, nobody ousted, no office stand-in), nobody an active crisis's cast holds (they keep
+ * that role), strongest first and then roster order, the first whose role, title or house (key or family) names a house
+ * where strangers lodge (`LODGING_HOUSE`) and whose house the record names; the house in the record's own wording (its
+ * key, less a trailing parenthesis, lower case). Rate 1 (a fact filling an absence): no hash. Null where none stands.
+ * @param {PageSettlement} s @returns {{ keeper: string, house: string } | null}
+ */
+function lodgingKeeperOf(s) {
+  const held = new Set(crisisContainer(s).flatMap((e) => {
+    const roles = /** @type {{ cast?: { roles?: unknown } } | null} */ (e)?.cast?.roles;
+    return Array.isArray(roles) ? roles : [];
+  }).filter((r) => r?.kind === 'npc').map((r) => str(r.id)));
+  /** @param {KeeperNpc} n */
+  const inst = (n) => /** @type {{ key?: unknown, family?: unknown }} */ (n.institution && typeof n.institution === 'object' ? n.institution : {});
+  /** @param {KeeperNpc} n */
+  const houseOf = (n) => str(inst(n).key).replace(/\s*\([^)]*\)\s*$/, '').toLowerCase();
+  /** @param {KeeperNpc} n */
+  const tradeWordsOf = (n) => [str(n.role), str(n.title), str(inst(n).key), str(inst(n).family)].join(' | ');
+  /** @param {unknown} v */
+  const num = (v) => (typeof v === 'number' && Number.isFinite(v) ? v : 0);
+  const roster = /** @type {KeeperNpc[]} */ (Array.isArray(s.npcs) ? s.npcs : [])
+    .filter((n) => !!n && typeof n === 'object' && !n.temporary && !n.ousted && !!str(n.name) && !isOfficeStandIn(/** @type {never} */ (n)));
+  const keeper = roster.map((n, i) => ({ n, i }))
+    .sort((a, b) => (num(b.n.power) - num(a.n.power)) || (a.i - b.i))
+    .map(({ n }) => n)
+    .find((n) => !held.has(str(n.id) || str(n.name)) && LODGING_HOUSE.test(tradeWordsOf(n)) && !!houseOf(n));
+  return keeper ? { keeper: str(keeper.name), house: houseOf(keeper) } : null;
+}
+
 /** @typedef {import('../summary/tonightSheet.js').TonightOptions} CrisisPageOptions */
 
 /**
@@ -245,8 +291,9 @@ export function crisisPageForOwner(options) {
  * Compose the whole page: one section per active crisis, worst first.
  *
  * THE AUDIENCE (FRAME-4 · U0): every production caller says who reads the page (`{ audience }`, the closed set of
- * `crisisPageForOwner`). Owner-only content is composed only where `forOwner`; today the page holds none, so every
- * reader gets the same page: the argument is the seam the owner-only lines draw behind. The sheet's facts the page reads
+ * `crisisPageForOwner`). Owner-only content is composed only where `forOwner`: the one line drawn there (FRAME-5 · P1B) is
+ * the outside hand's keeper, after the infiltration's absent instigator (`CRISIS_ABSENCE_REACH`); every other reader gets
+ * today's page, byte for byte. The sheet's facts the page reads
  * are composed for the same reader (the sheet fails closed too; its facts are the same for every reader).
  * @param {PageSettlement | null | undefined} settlement
  * @param {CrisisPageOptions | null} [options]
@@ -270,6 +317,21 @@ export function composeCrisisPage(settlement, options) {
   const govName = governing ? str(governing.faction) || str(governing.name) : '';
   /** @template T @param {T} text @returns {T} a non-string passes through untouched */
   const speak = (text) => /** @type {T} */ (typeof text === 'string' ? speakTierNoun(text, noun) : text);
+  // FRAME-5 · P1B (owner-only, behind U0's seam): the clause an absence's line adds, '' for every other reader and every
+  // other absence. The infiltration's instigator absent as "an outside hand, unnamed" keeps that stored reason first; the
+  // owner reads who reaches the hand (CRISIS_ABSENCE_REACH), where a free lodging keeper stands. The keeper's clause is the
+  // record's names and a fixed sentence with no place noun, so it is not re-spoken. A DM-edited cast shows no absence row
+  // (effectiveCastOf), so the clause follows it. Read once a page, and only where it is wanted.
+  /** @type {{ keeper: string, house: string } | null | undefined} */
+  let keeper;
+  /** @param {{ role: string, reason: string }} a @returns {string} */
+  const reachOf = (a) => {
+    if (!forOwner || a.role !== 'instigator' || a.reason !== CAST_ABSENCES.outsideHand) return '';
+    if (keeper === undefined) keeper = lodgingKeeperOf(s);
+    if (!keeper) return '';
+    const k = keeper;
+    return `; ${CRISIS_ABSENCE_REACH.outsideHand.replace(/\{(keeper|house)\}/g, (_, slot) => (slot === 'keeper' ? k.keeper : k.house))}`;
+  };
   const sections = entries.map(({ entry, index }) => {
     const type = str(entry.type);
     const label = str(entry.label) || type;
@@ -295,7 +357,7 @@ export function composeCrisisPage(settlement, options) {
         reason: speak(castReasonShown(r.reason)), // FRAME-5 · C1: a row stored before C1 prints without the dealer's tail
         temporary: !!r.temporary,
       })),
-      absent: (cast?.absent || []).map((a) => ({ role: a.role, roleLabel: CRISIS_ROLE_LABEL[a.role] || a.role, reason: speak(a.reason) })),
+      absent: (cast?.absent || []).map((a) => ({ role: a.role, roleLabel: CRISIS_ROLE_LABEL[a.role] || a.role, reason: speak(a.reason) + reachOf(a) })),
       edited,
       // TAIL-CRISIS-6 (the chair's ruling K25 (c), 2026-11-15, vetoable by the owner): a power the crisis has truly not
       // touched (no stake of its own, no quarrel the record names, not the governing power) takes NO ROW: "has no stake yet"
