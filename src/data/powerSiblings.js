@@ -173,3 +173,53 @@ export const GOV_DESC_OF_UNNAMED_SEAT = Object.freeze({
   'Town Mayor': "A mayor runs the town's day-to-day business.",
   'Grand Guild Council': 'The guilds of the metropolis govern together; the richer the guild, the more say it has.',
 });
+
+/** One quarrel of a pool: its id (the pick's hash key), its text and the atoms it needs. @param {string} id @param {string} text @param {string[]} needs */
+const quarrel = (id, text, needs) => Object.freeze({ id, text, needs: Object.freeze(needs) });
+
+/**
+ * BUILD-CONFLICT (DEPTH-2, 2026-11-20; the chair's word of 16:08 UTC, the lines `docs/chair/2026-11-20/content/depth/lines/
+ * CONFLICT-LINES.md` "THE LINES AS SENT" with the chair's three rewordings): THE EVERYDAY QUARRELS. Three rungs of
+ * `governanceNarrative.js :: deriveBaselineConflict` printed one sentence each: the grazing quarrel (the default rung) and
+ * the field rotation (the market rung) in most small places, the levies in most towns (52 of 100 thorps, 58 of 100 towns;
+ * `docs/chair/2026-11-20/content/depth/conflict/CONFLICT-MEASURE.md`). Where such a rung's line prints, the site picks the
+ * place's quarrel from the rung's pool among the lines whose needs the place holds (`power/quarrelPick.js`), by keyed hash
+ * and no roll. INDEX 0 OF EACH POOL IS TODAY'S LINE BYTE FOR BYTE (and GRAZING's second is the field rotation's), so the
+ * thorp twin above, the no-grazing twin (`noGrazingQuarrelOf`) and the boycott rewrite (`factionDynamics.js ::
+ * boycottReadsRelation`) fire as before wherever it is picked. A line is appended at the end of its pool, never reordered:
+ * its id is its hash key. Each need is a vocabulary atom (`factVocabulary.js`), answered at the site by the roster, the tier
+ * and the config.
+ */
+export const QUARREL_POOLS = Object.freeze({
+  GRAZING: Object.freeze([
+    quarrel('g1-grazing', 'A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.', []),
+    quarrel('g2-rotation', 'A dispute over field rotation and grazing rights has divided the village for most of this season.', ['tier: village']),
+    quarrel('g3-mill', 'The miller wants a bigger share of each sack for the grinding, and the households who bring their grain say the old share was fair.', ['institution: mill']),
+    quarrel('g4-road', 'The households along the road cannot agree who should fill the ruts outside their doors, so the work keeps being put off.', ['route: road']),
+    quarrel('g5-river', 'The households nearest the river and those further off disagree over who may draw water first when the river runs low.', ['river']),
+    quarrel('g6-shore', 'Two households both claim the same stretch of shore, and neither will give way.', ['coast']),
+    quarrel('g7-cows', "Two households graze their cows on the same patch of grass, and each says the other's beasts take more than their share.", ['trade at work: dairy']),
+    quarrel('g8-long-trip', 'With the nearest market days away, the households argue over whose turn it is to make the long trip.', ['route: isolated']),
+  ]),
+  LEVIES: Object.freeze([
+    quarrel('l1-levies', 'The council has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now acting as if the other has already lost.', ['market']),
+    quarrel('l2-millers', 'What the millers take for grinding has gone up twice this year, and the households who bring them grain have started to grumble.', ['institution: mill']),
+    quarrel('l3-granary', 'How much grain the granary should hold back in reserve has been argued all season, and nothing is agreed.', ['institution: granary']),
+    quarrel('l4-walls', 'Who should pay to mend the walls has been argued for months, and every street says the next one should pay more.', ['walls']),
+    quarrel('l5-watch', 'Everyone agrees the watch must be paid, but no one agrees how much each household should give.', ['watch']),
+    quarrel('l6-taverns', 'Some households want the taverns to close earlier, and the tavern keepers say an earlier hour would ruin them.', ['institution: tavern']),
+    quarrel('l7-forges', 'The smiths start their hammering before dawn, and the households beside the forges want them moved further out.', ['institution: smith']),
+    quarrel('l8-dock-dues', 'The dock dues were raised at the start of the season, and the boat owners have complained of it ever since.', ['institution: docks']),
+  ]),
+});
+
+/**
+ * The rung lines the site hands to the pick, by their printed text → their pool: the default rung's (GRAZING's index 0),
+ * the market rung's (GRAZING's field rotation) and the levies rung's (LEVIES' index 0). Any other line is no key, and is
+ * printed untouched. The no-grazing twin stands in for GRAZING's index 0 at the default rung (the site hands it beside).
+ */
+export const QUARREL_POOL_OF_RUNG = Object.freeze({
+  [QUARREL_POOLS.GRAZING[0].text]: 'GRAZING',
+  [QUARREL_POOLS.GRAZING[1].text]: 'GRAZING',
+  [QUARREL_POOLS.LEVIES[0].text]: 'LEVIES',
+});
