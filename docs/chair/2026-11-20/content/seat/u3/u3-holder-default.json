@@ -1,0 +1,82 @@
+{
+ "meta": {
+  "script": "docs/chair/2026-11-20/content/seat/u3/measure-u3.mjs",
+  "leaf": "src/domain/seat/holderOfSeat.js",
+  "arm": "default",
+  "n": 150,
+  "towns": 900,
+  "errors": 0,
+  "seconds": 189
+ },
+ "owner": {
+  "R4": 413,
+  "R2": 365,
+  "R3": 96,
+  "R5": 26
+ },
+ "reader": {
+  "R4": 413,
+  "R2": 365,
+  "R3": 96,
+  "R5": 26
+ },
+ "proposal": {
+  "R1": 0,
+  "R2": 365,
+  "R3": 96,
+  "R4": 413,
+  "R5": 26,
+  "disagree": 0
+ },
+ "kinds": {
+  "R4:government": 403,
+  "R2:merchant": 295,
+  "R3:merchant": 80,
+  "R2:noble": 61,
+  "R5:noble": 26,
+  "R3:noble": 16,
+  "R4:merchant": 10,
+  "R2:military": 5,
+  "R2:craft": 4
+ },
+ "byTier": {
+  "thorp": {
+   "R4": 144,
+   "R5": 6
+  },
+  "hamlet": {
+   "R4": 121,
+   "R5": 14,
+   "R2": 15
+  },
+  "village": {
+   "R4": 107,
+   "R5": 5,
+   "R2": 38
+  },
+  "town": {
+   "R2": 96,
+   "R3": 28,
+   "R4": 26
+  },
+  "city": {
+   "R4": 9,
+   "R2": 82,
+   "R3": 58,
+   "R5": 1
+  },
+  "metropolis": {
+   "R2": 134,
+   "R3": 10,
+   "R4": 6
+  }
+ },
+ "personRules": {
+  "seat": 900
+ },
+ "noPerson": 0,
+ "readerRefused": [],
+ "readerOther": [],
+ "disagreements": [],
+ "draftDiff": []
+}

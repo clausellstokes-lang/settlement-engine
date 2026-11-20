@@ -372,6 +372,12 @@ export const FIRSTPAINT2_LAZY_DOMAIN = [
   '/src/domain/foodSurplus.js',
   '/src/domain/marketInstitution.js',
   '/src/domain/rulingPowerCoup.js',
+  // SEAT-1 train 1, U3 (the holder leaf, 2026-11-20; brief U3-HOLDER.md's CURE): seat/holderOfSeat.js will be reached
+  // from generators (factionStanding.js, castPowers.js through coupContenders, U4), so the derivation would put it in
+  // EAGER engine-core, where its static import of dossier/seatHolder.js (pinned here) would be an engine-core ->
+  // coherence-lazy edge. Pinned beside rulingPowerCoup.js, seatHolder.js and powerStrata.js before any generator reaches
+  // it; its other imports ride engine-core and data-lazy, which this chunk already imports. Never left unpinned (FP-G11).
+  '/src/domain/seat/holderOfSeat.js',
   '/src/domain/spatial/seaLanes.js',
   '/src/domain/spatial/spatialCost.js',
   '/src/domain/spatial/waterBodies.js',
