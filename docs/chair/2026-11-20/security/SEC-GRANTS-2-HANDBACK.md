@@ -90,10 +90,18 @@ alter default privileges revoke execute on functions from public;               
 alter default privileges in schema public revoke execute on functions from anon, authenticated;   -- Supabase's grant
 alter default privileges in schema public grant execute on functions to service_role;
 ```
-→ new function: anon false, authenticated false, service_role true. **No `for role` clause:** migrations run as
-`postgres`, whose defaults govern every function they create; `for role supabase_admin` concerns objects that role
-creates (none of ours) and postgres is not, as far as I know, a member of it on hosted Supabase (PLAUSIBLE, not
-executed there). **What it breaks:** nothing that exists (defaults apply at creation; `create or replace` keeps an
+→ new function: anon false, authenticated false, service_role true. **No `for role` clause:** without it,
+`alter default privileges` changes the defaults of the role that RUNS it. Migrations run as `postgres`, so it covers
+every function a migration creates, and every function made in the dashboard's SQL editor (also `postgres`). It does
+NOT cover a function another role creates: EXECUTED with a second role carrying Supabase-like defaults of its own, its
+new function came out `{=X/other_admin, anon=X, authenticated=X, service_role=X, …}` (anon true) while postgres's came
+out `{postgres=X, service_role=X}`. On Supabase that is `supabase_admin` (extensions installed from the dashboard, its
+own schemas) and an extension's own install; Supabase's initial schema gives `supabase_admin` the same grant-all
+defaults in public. A `for role supabase_admin` line would need membership in that role, which `postgres` does not
+hold on hosted Supabase as far as I know (PLAUSIBLE, not executed there). So default-deny closes OUR functions only;
+the walker (and CHECK_213's `unlisted_open`) still sees a function any role leaves open. THE CHAIR'S PLAN (its message
+queued 03:29 UTC): the deploy does not need default-deny, since 213's walker already reds on any new function left
+open and unlisted; default-deny is a second lock, its own migration AFTER the deploy, with explicit grants for the 41. **What it breaks:** nothing that exists (defaults apply at creation; `create or replace` keeps an
 ACL). It changes the habit: every new door's migration must `grant execute … to authenticated` (and `anon` for a
 signed-out read), and a door DROPPED and re-created (a signature change) silently loses its grant. Measured: **41 of
 the 92 visitor-callable functions hold their grant only through today's default** (`out213/default-privilege-reliance.txt`);
