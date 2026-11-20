@@ -168,6 +168,17 @@ parts of the whole check (at the close).
   stored only the master secret could have been taken and replacing it costs nothing; a one-cell query that the
   editor cannot cut; that the full script comes only after an independent read.
 
+- **2026-11-20, between the clock's readings of 02:34 and 02:38 UTC, the owner (verbatim):** "what's going on... there
+  is a lot of stuff being worked on more than before". ANSWERED FIRST, in plain words: more runs because tonight's
+  security check found real holes in two places and a builder was put on each at once; four jobs (the open database
+  functions: the fix in the owner's hands since 02:29 UTC, the permanent one being built; the CI fix: merged, the
+  browser jobs now pass in under 14 minutes; the share veil: the long pole, six stages left, about a working day
+  more by the chair's rough guess, not a measure; two small ones); it looks like more because seats hand the same
+  job on at their marks (13 opened, 8 finished, 5 working, one more starting); WHAT IT COSTS: each seat is a full
+  session; the last reading (02:20 UTC) says inside the weekly limit and not in overage; a ceiling on seats at once
+  is the owner's to set, slower for the same result; the chair's own wrong ruling of the night said by name (VR27's
+  first wording would have broken saving a map). ASKED OF THE OWNER: only to run the database fix.
+
 ## 2. Rulings of this chair (each vetoable by the owner)
 
 - **SV1 (00:05 UTC, 2026-11-20): THE VEIL'S LIST ON THREE MACHINES.** VEIL-19 owns 212, its rollback and the twin's
@@ -868,3 +879,42 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   `incomeWeight` is a sentence chosen from withhold-always numbers: R5's. VEIL-19's seat is done and released.
 - 02:31 UTC · **VEIL-V102 SEATED** (created 02:25:55 UTC): session_019yED1PqAczUBxrKy7Kt6dB, `lane/veil-v102-2026-11-20`
   from 81dd06d7e (ruling VR34). POINT 75's CI RUN on pull request #75: run 44659169256, started 02:12:56 UTC.
+- 02:38 UTC · **VEIL-20 HANDED BACK AT ITS MARK (its message of 02:33 UTC; tip 5595455bf; PART 21, section 5d), BEFORE IT
+  COULD OPEN 212.** DONE: the cut's readings; R1 merged (3c3e458b6) and read; VR25 (db97168dd); TWO PROOF HARNESSES
+  through the server (5595455bf): the render-twice test (`tests/security/shareRenderTwice.pglite.test.jsx`: the
+  client's own fetch and `PublicDossierView`, every tab, desktop and phone, three born towns; 4 of 4) and the
+  inversion test (`rosterChoiceInversion.pglite.test.js`: eight born towns; 4 of 4), both frozen shrink-only.
+  FOUND BY THE FIRST: five registry rows called undrawn ARE DRAWN on a visitor's page: `conditions.severity` (the
+  chips), `defence.readiness.score`, `power.relation.direction`, `cast.stakes` (the Plot Hooks tab), `cast.roles`.
+  FOUND BY THE SECOND: seven rows a visitor re-derives otherwise only where a house is hidden, the three legitimacy
+  rows among them (they move through the prosperity band its harness re-derives; the reader's measure takes the
+  band as served and finds them equal: VR32 says the served values are the inputs).
+  **RULING VR37, THE FIVE DRAWN ROWS, BY AN ORDER OF PREFERENCE (vetoable):** (a) the page re-derives the value from
+  the served document; (b) where an entry names its house or faction it is withheld PER ENTRY by that house's eye,
+  never always, and what is left is dense (VR21); (c) only then withheld always, the page not drawing it, the loss
+  listed. So: a condition's severity NUMBER withheld, its BAND served (tier 2), the chips drawn from the band; the
+  readiness score withheld, the label kept; the crisis cast's stakes and roles per entry; the relation's direction
+  by the order. PART 21's "re-class prosperity and overcoming" is overtaken by VR28 (both stay as R1 registered).
+  **THE LESSON OF TWO LANE OWNERS AT THE MARK IN ONE NIGHT, AND THE SEAT'S NEW SHAPE:** this lane's reading costs
+  about 150,000 tokens before a line is built; VEIL-20 spent the rest on R1's read, VR25 and the two harnesses.
+  **SEAT VEIL-21** (`prompts/VEIL-21.txt`; `lane/veil-21-2026-11-20` from 5595455bf; the mark 450,000) INTEGRATES
+  AND DOES NOT BUILD: every stage is built by a builder of its own (a fresh one per stage, briefed by a committed
+  file, on a branch the seat pushes before reading its diff); the seat reads each diff line by line, re-runs red and
+  green, takes the gate's count and the cost rows; its prompt carries THE RULINGS IN FORCE IN THEIR FINAL FORM (so it
+  does not read this log); it tells the chair "R2 <commit>" and so on, and each goes to the reader at once.
+- 02:38 UTC · **REVIEW-VEIL-11: THE COLD READ OF VR17 HOLDS** (its message of 02:29 UTC): the diff line by line; the test red
+  at the base for the right reason (4 failed, 1 passed) and 11 of 11 at the cure; its own attack (the grouping shut
+  and open, Reveal DM off and on, live and snapshot, the gallery read and the link, through the tree's own
+  sanitiser: 320 reads on each stored shape): 0 shut read open, 0 open read shut.
+  **VEIL-V102'S FIRST ACT** (02:33 UTC): the reader's figures reproduced exactly on the new shape; ON MASTER'S SHAPE
+  a second path no hand can reach: the top-level `factions[]` carries `members` that `powerStructure.factions`
+  lacks and the Curate model walks only the first list, so no `members` eye is offered on any faction, and Show-all
+  sends criminal factions' members on Reveal-DM gallery reads. Its cure inside VR34 (the model reads each eye across
+  every copy of the card by id; the switch's list is the family met with the model's offered addresses; a flip drops
+  stale deltas on unoffered addresses): APPROVED, on one condition: an eye the screen newly offers defaults to what
+  the server serves today for an untouched share (no existing share's bytes change), proven by an arm.
+- 02:38 UTC · **POINT 75 ON PULL REQUEST #75's CI (run 44659169256, read at 02:34 UTC, not yet concluded):** "Chromium
+  end-to-end" SUCCESS in 13m47s (its browser step 2 seconds, in the container; it was cut at 45 minutes after a
+  43m38s install); "Production-build browser performance" SUCCESS in 1m53s; build, lint, validation, the type
+  ratchets, the edge tests and the hostile-locale golden master SUCCESS; shards 1 and 3 SUCCESS (13m50s and
+  19m34s); shards 2, 4, 5, 6 and the coverage floors running. THE BROWSER CURE IS CONFIRMED ON CI.
