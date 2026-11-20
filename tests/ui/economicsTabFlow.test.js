@@ -1033,14 +1033,17 @@ describe('DAILY LIFE — the four anchors, one offer line, no marketing', () => 
 describe('UX consolidation — the Economics page says each fact once', () => {
   const line = (blockId, text) => legibilityRung('', { blockId, poolKey: 'hand-built', angle: 'plain', text }, []);
 
-  test('T2-1: ONE prosperity home and the Output score ONCE — the Economy and Food tiles are gone', () => {
+  test('T2-1: ONE prosperity home, and no Output score (PAGE-1 OUTPUT, F3b) — the Economy and Food tiles are gone', () => {
     useStore.setState({ campaigns: [] });
-    const town = { ...SPEAKING, economicState: { ...SPEAKING.economicState, compound: { economyOutput: 55 } } };
+    // PAGE-1 OUTPUT (2026-11-20): the chip's "n/100" left every surface; the figure and its dial print as words
+    // (domain/display/outputInWords.js), once, under the prosperity word.
+    const town = { ...SPEAKING, economicState: { ...SPEAKING.economicState, compound: { economyOutput: 55, raw: { economy: 55 } } } };
     const { container } = render(e(EconomicsTab, { settlement: town, saveId: null, publicDossier: true }));
     const text = container.textContent;
-    expect(text, 'the header prints the Output chip').toContain('55/100');
-    expect(text.split('55/100').length - 1, 'the Output score is printed once').toBe(1);
-    expect(text, 'the tile sub-line is gone').not.toContain('Output score'); // anchored: toContain('55/100') above, same render
+    expect(text, 'the header says the output in words').toContain('It gets all its work could yield.');
+    expect(text.split('It gets all its work could yield.').length - 1, 'the words are printed once').toBe(1);
+    expect(text, 'no grade out of 100').not.toContain('55/100'); // anchored: the words above, same render
+    expect(text, 'the tile sub-line is gone').not.toContain('Output score'); // anchored: the words above, same render
     const exact = (word) => [...container.querySelectorAll('div,span,p')].filter((n) => n.children.length === 0 && n.textContent === word).length;
     expect(exact('Comfortable'), 'the prosperity word is printed once').toBe(1);
     expect(exact('Economy'), 'no Economy tile label').toBe(0);

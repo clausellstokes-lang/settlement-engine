@@ -1,0 +1,9 @@
+hxd: 300; said 300; null 0
+  share words [["about three parts in four",106],["nearly all",105],["all",37],["about two parts in three",22],["about four parts in five",13],["about half",12],["about a third",5]]
+  lines [["It gets about three parts in four of what its work could yield.",106],["It gets nearly all of what its work could yield.",105],["It gets all its work could yield.",37],["It gets about two parts in three of what its work could yield.",22],["It gets about four parts in five of what its work could yield.",13],["It gets about half of what its work could yield.",12],["It gets about a third of what its work could yield.",5]]
+  share range 0.32 1.01
+census: 720; said 720; null 0
+  share words [["about two parts in three",171],["about four parts in five",118],["nearly all",106],["all",95],["about three parts in four",91],["about half",78],["about a third",36],["more than",21],["about a quarter",4]]
+  lines [["It gets about two parts in three of what its work could yield.",171],["It gets about four parts in five of what its work could yield.",118],["It gets nearly all of what its work could yield.",106],["It gets all its work could yield.",95],["It gets about three parts in four of what its work could yield.",91],["It gets about half of what its work could yield.",78],["It gets about a third of what its work could yield.",36],["It gets more than its work alone could yield.",21],["It gets about a quarter of what its work could yield.",4]]
+  share range 0.27 1.19
+exit 0
