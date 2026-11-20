@@ -1,4 +1,4 @@
-# DEPTH-2 hand-back (kept current at every push; last written 2026-11-20T16:34Z by `date -u`)
+# DEPTH-2 hand-back (kept current at every push; last written 2026-11-20T18:07Z by `date -u`)
 
 Branch `lane/depth-2-2026-11-20` (lane given at 63ad8a193 by the chair, 15:10 UTC; merged as 105ceb55f). Prompt: origin/lane/chair-2026-11-08
 `docs/chair/2026-11-20/seventh/prompts/DEPTH-2.txt` (+ DEPTH-1.txt as the assignment). Chair: session_019yED1SUxGVHyjQnoqoFvQ8. Mark 450,000
@@ -40,3 +40,22 @@ Pre-push hook runs typecheck/lint (~2 min, no npm run check on a non-empty push)
 digits mask to one line. A tie line is a PAIR. `rewriteFactionPhrasing` garbles "the council meetings". The levies line is always stored
 as boycottReadsRelation's rewrite. Untagged hooks pass the theme preference: tag every one. Builders in `scratchpad/wt-*` worktrees.
 END: the owner's file (every new hook / tie pair beside two existing lines; one paragraph of before/after by size), then "DEPTH <commit>".
+
+## The split (the chair, 18:00 UTC) — read this first, DEPTH-3
+DEPTH-2 KEEPS: the conflict unit's merge and hooks tranche 2. PASS TO DEPTH-3: the ties (tranche 1 TIES-1/2.md, 80 pairs; tranche 2
+TIES-3.md, 77 pairs with the chair's three rewordings applied in place) built on the goals commit the chair names (point 84); and a
+THIRD hooks tranche for the METROPOLIS (built-town own-hook repeats: metro 63.5 -> 41.8% after tranche 1; ~35% projected after
+tranche 2: still over the bar). Tie pools: apply the kernel-mix rule (lane/kernel-mix-2026-11-20 bd42d63c7, `pickVariantMixed`):
+a built pool switches only if its measure on the built tree shows a line above ~1.5x its expected share; take it by MERGE.
+STATE AT 2026-11-20T18:07Z:
+- HOOKS 1: MERGED afc0261a9; censuses 030c62464 (wiring), ed5813d40 (lighting 3707->3708). Built measure: own hook town 25.3->15.7,
+  city 46.5->29.9, metro 63.5->41.8 (measure-2/measures.hooks-ed5813d40.out.txt). Corruption count after: principled 9 of 125
+  (before 8); straight family 63 of 972 (before 56).
+- HOOKS 2: built on lane/depth-2-2026-11-20-hooks-2 (pushed -wip; 027db8351 the 36 + cures af4d8bc86, 7ff59cb95, dee3e08c7,
+  b5a2589de); curing A6's fnv1a32External 54->55 (test + generationForkRegistry.js, traced) and loyaltyHooksRead r2r-town-1->-3.
+- CONFLICT: lane/depth-2-2026-11-20-conflict da16f2f4b (pushed), the chair took it 18:00 (top share 52/49/44/58/52/52 ->
+  14/13/15/14/9/11). Curing: the no-grazing twin must stand in for GRAZING's index 0 ONLY (my read's defect; damage counted
+  before/after); mb1 joins in the chair's wording; the eleven displays listed for the chair (accept where the noun agrees with the
+  seat's kind). Then merge, censuses, push.
+- FOR THE JOIN (the chair): `guardLineUnderTheLaw.js :: familiesHeldOf` reads a noun out of a STORED SENTENCE by a matcher
+  (`FAMILIES_NAMED`): fragile; the reading should come from the seat's kind on the record.
