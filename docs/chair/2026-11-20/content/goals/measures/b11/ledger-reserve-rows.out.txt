@@ -1,0 +1,34 @@
+RETEXT mil_crim_corruption.tension#7
+  was: Someone has started counting the coin in {A}'s house against what {A} is known to earn. {B} is watching the count.
+  now: Someone has started counting the coin in {A}'s house against the household's known earnings. {B} is watching the count.
+RETEXT gov_econ_dependence.desc#1
+  was: {B} holds the debts {A} has run up, and so {B} decides what {A} can afford to do.
+  now: {B} holds the debts {A} has run up, and so decides what may be spent.
+ADD peer_rivalry.desc#8 needs=[] excludes=[] crisis=[] colour=true
+ADD peer_rivalry.desc#9 needs=[] excludes=[] crisis=[] colour=true
+ADD peer_rivalry.tension#8 needs=[] excludes=[] crisis=[] colour=true
+ADD peer_rivalry.tension#9 needs=[] excludes=[] crisis=[] colour=true
+ADD mentor_legacy.desc#8 needs=[] excludes=[] crisis=[] colour=true
+ADD mentor_legacy.desc#9 needs=[] excludes=[] crisis=[] colour=true
+ADD mentor_legacy.tension#8 needs=[] excludes=[] crisis=[] colour=true
+ADD mentor_legacy.tension#9 needs=[] excludes=[] crisis=[] colour=true
+ADD mutual_leverage.desc#8 needs=[] excludes=[] crisis=[] colour=true
+ADD mutual_leverage.desc#9 needs=[] excludes=[] crisis=[] colour=true
+ADD mutual_leverage.desc#10 needs=[] excludes=[] crisis=[] colour=true
+ADD mutual_leverage.desc#11 needs=[] excludes=[] crisis=[] colour=true
+ADD mutual_leverage.desc#12 needs=[] excludes=[] crisis=[] colour=true
+ADD mutual_leverage.tension#8 needs=[] excludes=[] crisis=[] colour=true
+ADD mutual_leverage.tension#9 needs=[] excludes=[] crisis=[] colour=true
+ADD mutual_leverage.tension#10 needs=[] excludes=[] crisis=[] colour=true
+ADD mutual_leverage.tension#11 needs=[] excludes=[] crisis=[] colour=true
+ADD mutual_leverage.tension#12 needs=[] excludes=[] crisis=[] colour=true
+ADD wary_alliance.desc#8 needs=[] excludes=[] crisis=[] colour=true
+ADD wary_alliance.desc#9 needs=[] excludes=[] crisis=[] colour=true
+ADD wary_alliance.tension#8 needs=[] excludes=[] crisis=[] colour=true
+ADD wary_alliance.tension#9 needs=[] excludes=[] crisis=[] colour=true
+ADD old_debt.desc#8 needs=[] excludes=[] crisis=[] colour=true
+ADD old_debt.desc#9 needs=[] excludes=[] crisis=[] colour=true
+ADD old_debt.tension#8 needs=[] excludes=[] crisis=[] colour=true
+ADD old_debt.tension#9 needs=[] excludes=[] crisis=[] colour=true
+rows 306 -> 332 (+26)
+written: docs/census/declarations/npcData.STRESS_ECONOMIC_EFFECTS.json
