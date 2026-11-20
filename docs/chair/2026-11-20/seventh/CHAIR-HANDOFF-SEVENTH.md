@@ -902,6 +902,38 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   public or printed-for-players path is today's byte for byte; no new draw; every calm town without both facts
   keeps its sheet; the count (6 of 330) before and after as plain text for the owner.
 
+- **PAGE-1's PROPOSAL RULED (2026-11-20, 11:24 UTC; `PAGE-1-PROPOSAL.md` with measures A, B, C at a773b4c8b on
+  origin/lane/page-1-2026-11-20; 300 towns, executed): IT CORRECTS FOUR OF THE CHAIR'S LEADS, AND THE OWNER IS TOLD.**
+  (1) SAFETY: the labels sit two steps or more apart in 18% of towns (city 42%, metropolis 52%), and NOT because
+  of a bought hall (3 of 300): Safety is set by a FLOOR in 75% of calm towns (the size floor 49%, the court floor
+  26%); it also prints on player and public pages today. S4 IS WIDENED: on the DM's page, wherever Law & order
+  stands two steps from Safety, the tag carries it in both directions; one reader with an audience, fail closed;
+  public and player Safety stay byte for byte. (2) TENSIONS: 515 tensions carry 86 texts; three forges in a row
+  share a text 32.1% of the time (city 82%, metropolis 80%); the spare variants are PAST tense and fit only
+  anchored tensions (S6: a keyed hash, no draw); the commonest texts are present-tense unanchored forms with no
+  variants: THE GAIN IS NEW PRESENT-TENSE WORDINGS (L1: three for each of the eight commonest kinds first; the
+  simulated odds about 9.5%). The arrival paragraph repeats a sentence 22.9% of the time (L2: its pools of four or
+  five lines deepened, about 80 lines): ADDED TO THE ROUND BY THE CHAIR as the same fault on the first screen.
+  (3) SECRETS: another calling's wrong on 7.9% of clergy cards, 14.5% of justice, 2.7% of watch (1.5% elsewhere);
+  SEVEN titles lack rows (dean, bishop, priest, abbot, chief magistrate, watch captain, garrison commander); A
+  PRINCIPLED TEMPERAMENT BESIDE A VENAL SECRET ON 1,014 OF 5,452 CARDS (an existing guard lacks the word): cured
+  on the secrets' side by the draw-free walk with a card-level `admits` that reads the temperament, NOT by adding
+  the word to a guard that moves draws. (4) THE KEYWORD: 88.6% of cards read "marginal", 33.6% of firsts;
+  correcting it moves 273 cards in 151 towns and, through an extra `_rng()` in `relationshipArchetypes.js`, ties
+  in 148 towns and goals in 97: a design first, in which only what reads the band's meaning on the corrected
+  cards moves. ROUTED: PAGE-1 builds S1 to S5 now (render only; its authored words to the chair first). PAGE-2
+  takes S6, S7, S8 (after its design note), S9, L1, L2 (PART A), L3 (PART K), L4. GOALS-1 reconciles its count of
+  23 with PAGE-1's 170 for L7. L5 (the thin pages: Daily Life's eight slots are computed for every town and printed
+  by no page; Outlook drops its warnings in 144 towns and its dependencies in 167; Magic never prints its reasons)
+  IS PUT TO THE OWNER: not ordered; its brief is written meanwhile. L6 (Safety's floors; Criminal opportunity's
+  edge at 50: 128 towns Contained, 160 Elevated) NOT BEFORE THE DEPLOY unless the owner says so: stored bands that
+  two dark laws' standing was measured on.
+- **U0 (11:25 UTC, to FRAME-5):** returned at cb3797e2b (`lane/frame-4-2026-11-20-u0`, cut from be9032b02): the
+  crisis page takes an audience and fails closed; 1,500 pages byte-identical; THE SHARED PAGES DO NOT MOUNT THE
+  CRISIS TAB AT ALL TODAY (the security lane's gate): the test asserts that. Ruled on its notes: a Foundry export
+  passes 'owner' only because it is the DM's own file (say who can receive it); every reader of the Tonight
+  sheet's facts states its audience (the Foundry crisis page among them), folded into C1 or CF12.
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -3277,3 +3309,7 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   if nothing else served refers to a rite by its genesis id). A FAULT OF THE CHAIR'S, RULE 29, AGAIN: its messages
   to TRAD-3 and VEIL-25 were stamped 11:24 while the clock read about 11:21: guessed. The stamp is read from the
   clock in the command before the message, every time.
+- 11:25 UTC · PAGE-1's PROPOSAL (a773b4c8b) READ WHOLE AND RULED (section 2); PAGE-2 pointed at it as its measure, with the
+  routing; GOALS-1 asked to reconcile 23 against 170; FRAME-4's relay of U0 forwarded to FRAME-5 with two rulings.
+  OWED TO THE OWNER IN THE CHAIR'S NEXT WORDS: the four corrections; the arrival pools added; the thin pages put
+  to him; Safety's floors named as a deeper fault for after the deploy.
