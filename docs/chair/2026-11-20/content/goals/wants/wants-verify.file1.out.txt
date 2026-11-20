@@ -1,6 +1,6 @@
 base /tmp/claude-0/-home-user-settlement-engine/1b606ed5-1f0a-5e1b-bf32-8b8b1c4098bc/scratchpad/base300.json · after /tmp/claude-0/-home-user-settlement-engine/1b606ed5-1f0a-5e1b-bf32-8b8b1c4098bc/scratchpad/f1.json · append 60 lines in 12 cells: {"TIES/rival_enemy/short":9,"TIES/ally/long":4,"TIES/ally/short":3,"RANK/enter/long":16,"RANK/enter/short":15,"INSTITUTION/solvency/short":2,"INSTITUTION/charter/long":2,"RANK/climb/short":1,"INSTITUTION/solvency/long":2,"TIES/rival_enemy/long":4,"PERSONALITY/sway/long":1,"INSTITUTION/charter/short":1}
 
-size        vantage  before   after   (placeholders held a town, after)
+size        vantage  before   after   (new lines held a town, after)
 town        short     19.9%   13.3%   4.96
 town        long      18.8%   13.3%   4.92
 city        short     36.4%   25.6%   13.34
@@ -8,8 +8,8 @@ city        long      36.0%   26.7%   14.04
 metropolis  short     47.3%   37.0%   18.64
 metropolis  long      47.2%   37.9%   19.30
 
-THE MOVES over 300 towns: 7936 holdings changed text (264 towns touched): onto a placeholder 3953 · within an appended cell, to another of its lines 3835 · holdings of cells not appended (the cascade) 148
-by the holding's cell before (appended cells marked *): onto placeholder · within cell · cascade
+THE MOVES over 300 towns: 7936 holdings changed text (264 towns touched): onto a new line 3953 · within an appended cell, to another of its lines 3835 · holdings of cells not appended (the cascade) 148
+by the holding's cell before (appended cells marked *): onto a new line · within cell · cascade
   *RANK/enter/long                            904 · 333 · 0
   *RANK/enter/short                           862 · 328 · 0
   *INSTITUTION/solvency/long                  229 · 586 · 0
@@ -34,6 +34,5 @@ by the holding's cell before (appended cells marked *): onto placeholder · with
    TIES/mentor_student/short                  1 · 0 · 6
    TIES/debtor/short                          0 · 0 · 6
    TIES/family/short                          0 · 0 · 6
-   SUPPLY/expansion/short                     0 · 0 · 6
 
 identical goal sentences inside one town, after: 0 (over 300 towns)

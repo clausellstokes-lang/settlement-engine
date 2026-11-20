@@ -4,7 +4,8 @@
 //    globalThis.__WANTS_RECEIPTS ({ tag: 'deal' | 'post', ids, receipts }), so the deal's receipts (goalReceiptsOf) are
 //    captured exactly as the pipeline calls the deal and its post-pass;
 //  - src/data/people/goalFamilies.js (only when `append` is given): GOAL_FAMILY_LINES gains, at the END of each named cell,
-//    k PLACEHOLDER lines (distinct texts, the cell's own slots), so a run measures what k new DRAWN lines would do.
+//    k PLACEHOLDER lines (distinct texts, the cell's own slots), so a run measures what k new DRAWN lines would do; or, where
+//    the cell's entry is an array of lines, those very lines (the written tranche).
 let append = null;
 export async function initialize(data) { append = data?.append || null; }
 export async function load(url, context, nextLoad) {
@@ -29,7 +30,10 @@ export const GOAL_FAMILY_LINES = (() => {
   for (const [f, ks] of Object.entries(__GFL0)) { o[f] = {};
     for (const [k, vs] of Object.entries(ks)) { o[f][k] = {};
       for (const [v, lines] of Object.entries(vs)) {
-        const add = __APPEND[f + '/' + k + '/' + v] || 0;
+        // a number appends that many placeholders; an array appends those very lines (the written tranche, WANT-LINES-n.md)
+        const given = __APPEND[f + '/' + k + '/' + v];
+        if (Array.isArray(given)) { o[f][k][v] = Object.freeze([...lines, ...given]); continue; }
+        const add = given || 0;
         // the cell's commonest slot set, so a placeholder is gated as the cell's lines are
         const sets = new Map(); for (const l of lines) { const s = [...new Set([...text(l).matchAll(/\\{(\\w+)\\}/g)].map((m) => m[1]))].sort().join(' '); sets.set(s, (sets.get(s) || 0) + 1); }
         const slots = ([...sets].sort((a, b) => b[1] - a[1])[0]?.[0] || '').split(' ').filter(Boolean);

@@ -1,6 +1,6 @@
 base /tmp/claude-0/-home-user-settlement-engine/1b606ed5-1f0a-5e1b-bf32-8b8b1c4098bc/scratchpad/base300.json · after /tmp/claude-0/-home-user-settlement-engine/1b606ed5-1f0a-5e1b-bf32-8b8b1c4098bc/scratchpad/b3.json · append 380 lines in 34 cells: {"ALLEGIANCE/warrant/short":2,"TIES/mentor_student/short":6,"INSTITUTION/solvency/short":19,"INSTITUTION/charter/short":14,"RANK/climb/short":11,"PERSONALITY/sway/short":5,"PERSONALITY/grudge/short":5,"RANK/enter/short":49,"TIES/rival_enemy/short":30,"TIES/ally/short":17,"POWER/tense/short":18,"RANK/defend/short":1,"PERSONALITY/impulse/short":1,"TIES/debtor/short":5,"PERSONALITY/greed/short":3,"TIES/creditor/short":1,"SUPPLY/expansion/short":3,"RANK/defend/long":2,"PERSONALITY/sway/long":8,"TIES/rival_enemy/long":30,"INSTITUTION/charter/long":14,"SUPPLY/expansion/long":4,"RANK/enter/long":49,"PERSONALITY/fear/long":1,"INSTITUTION/solvency/long":18,"PERSONALITY/forbidden_patron/long":1,"TIES/ally/long":19,"PERSONALITY/grudge/long":7,"PERSONALITY/greed/long":3,"TIES/mentor_student/long":6,"RANK/climb/long":5,"POWER/tense/long":17,"TIES/debtor/long":5,"PERSONALITY/impulse/long":1}
 
-size        vantage  before   after   (placeholders held a town, after)
+size        vantage  before   after   (new lines held a town, after)
 town        short     19.9%    5.5%   13.68
 town        long      18.8%    5.5%   13.30
 city        short     36.4%   11.8%   32.20
@@ -8,8 +8,8 @@ city        long      36.0%   12.3%   33.30
 metropolis  short     47.3%   16.8%   46.62
 metropolis  long      47.2%   17.3%   48.82
 
-THE MOVES over 300 towns: 13695 holdings changed text (293 towns touched): onto a placeholder 10039 · within an appended cell, to another of its lines 3619 · holdings of cells not appended (the cascade) 37
-by the holding's cell before (appended cells marked *): onto placeholder · within cell · cascade
+THE MOVES over 300 towns: 13695 holdings changed text (293 towns touched): onto a new line 10039 · within an appended cell, to another of its lines 3619 · holdings of cells not appended (the cascade) 37
+by the holding's cell before (appended cells marked *): onto a new line · within cell · cascade
   *RANK/enter/long                            1113 · 145 · 0
   *RANK/enter/short                           1090 · 122 · 0
   *INSTITUTION/solvency/long                  719 · 248 · 0
@@ -35,5 +35,26 @@ by the holding's cell before (appended cells marked *): onto placeholder · with
   *PERSONALITY/sway/short                     109 · 76 · 0
   *PERSONALITY/grudge/short                   108 · 64 · 0
   *RANK/defend/long                           43 · 113 · 0
+  *PERSONALITY/greed/long                     80 · 72 · 0
+  *ALLEGIANCE/warrant/short                   56 · 85 · 0
+  *PERSONALITY/greed/short                    75 · 58 · 0
+  *RANK/defend/short                          32 · 65 · 0
+  *PERSONALITY/forbidden_patron/long          30 · 39 · 0
+  *PERSONALITY/impulse/long                   27 · 39 · 0
+  *TIES/creditor/short                        21 · 44 · 0
+  *PERSONALITY/fear/long                      22 · 40 · 0
+  *PERSONALITY/impulse/short                  24 · 33 · 0
+   INSTITUTION/takeover/long                  9 · 0 · 1
+   TIES/family/short                          2 · 0 · 7
+   INSTITUTION/takeover/short                 7 · 0 · 1
+   TIES/family/long                           3 · 0 · 2
+   SUPPLY/impaired/long                       1 · 0 · 4
+   TIES/creditor/long                         2 · 0 · 3
+   PERSONALITY/caution/long                   5 · 0 · 0
+   POWER/competitive/long                     3 · 0 · 2
+   SUPPLY/dependency/long                     2 · 0 · 3
+   POWER/competitive/short                    3 · 0 · 1
+   INSTITUTION/rebuilding/long                2 · 0 · 1
+   PERSONALITY/kindness/long                  2 · 0 · 1
 
 identical goal sentences inside one town, after: 0 (over 300 towns)

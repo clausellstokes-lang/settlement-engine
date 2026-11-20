@@ -71,4 +71,4 @@ for (const size of sizes) for (let i = 0; i < +nA; i++) {
   towns.push({ seed: `hxd-${size}-${i}`, tier: t.tier, npcs });
 }
 fs.writeFileSync(OUT, JSON.stringify({ tree: L, append, sizes, n: +nA, towns }));
-console.log(`born ${towns.length} towns in ${((Date.now() - t0) / 1000).toFixed(0)}s; deal calls ${dealCalls}; cards without a receipt ${receiptsMissing}; append ${append ? Object.values(append).reduce((a, b) => a + b, 0) + ' lines in ' + Object.keys(append).length + ' cells' : 'none'}; wrote ${OUT}`);
+console.log(`born ${towns.length} towns in ${((Date.now() - t0) / 1000).toFixed(0)}s; deal calls ${dealCalls}; cards without a receipt ${receiptsMissing}; append ${append ? Object.values(append).reduce((a, b) => a + (Array.isArray(b) ? b.length : b), 0) + ' lines in ' + Object.keys(append).length + ' cells' + (Object.values(append).some(Array.isArray) ? ' (written lines)' : ' (placeholders)') : 'none'}; wrote ${OUT}`);

@@ -1,6 +1,6 @@
 base /tmp/claude-0/-home-user-settlement-engine/1b606ed5-1f0a-5e1b-bf32-8b8b1c4098bc/scratchpad/base300.json · after /tmp/claude-0/-home-user-settlement-engine/1b606ed5-1f0a-5e1b-bf32-8b8b1c4098bc/scratchpad/b2.json · append 129 lines in 17 cells: {"TIES/mentor_student/short":1,"INSTITUTION/solvency/short":8,"INSTITUTION/charter/short":4,"RANK/climb/short":3,"PERSONALITY/sway/short":1,"PERSONALITY/grudge/short":1,"RANK/enter/short":24,"TIES/rival_enemy/short":15,"TIES/ally/short":6,"PERSONALITY/sway/long":3,"TIES/rival_enemy/long":14,"INSTITUTION/charter/long":5,"RANK/enter/long":25,"INSTITUTION/solvency/long":8,"TIES/ally/long":7,"PERSONALITY/grudge/long":2,"TIES/mentor_student/long":2}
 
-size        vantage  before   after   (placeholders held a town, after)
+size        vantage  before   after   (new lines held a town, after)
 town        short     19.9%   10.9%   7.48
 town        long      18.8%   10.8%   7.66
 city        short     36.4%   20.1%   19.80
@@ -8,8 +8,8 @@ city        long      36.0%   20.3%   21.66
 metropolis  short     47.3%   29.9%   28.06
 metropolis  long      47.2%   29.9%   30.46
 
-THE MOVES over 300 towns: 9601 holdings changed text (278 towns touched): onto a placeholder 6097 · within an appended cell, to another of its lines 3388 · holdings of cells not appended (the cascade) 116
-by the holding's cell before (appended cells marked *): onto placeholder · within cell · cascade
+THE MOVES over 300 towns: 9601 holdings changed text (278 towns touched): onto a new line 6097 · within an appended cell, to another of its lines 3388 · holdings of cells not appended (the cascade) 116
+by the holding's cell before (appended cells marked *): onto a new line · within cell · cascade
   *RANK/enter/long                            1006 · 235 · 0
   *RANK/enter/short                           973 · 231 · 0
   *INSTITUTION/solvency/long                  561 · 389 · 0
@@ -35,5 +35,9 @@ by the holding's cell before (appended cells marked *): onto placeholder · with
    TIES/debtor/long                           1 · 0 · 7
    PERSONALITY/forbidden_patron/long          2 · 0 · 5
    INSTITUTION/takeover/long                  6 · 0 · 1
+   INSTITUTION/takeover/short                 4 · 0 · 3
+   SUPPLY/expansion/short                     5 · 0 · 2
+   TIES/debtor/short                          1 · 0 · 5
+   PERSONALITY/impulse/long                   1 · 0 · 4
 
 identical goal sentences inside one town, after: 0 (over 300 towns)
