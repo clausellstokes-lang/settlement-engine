@@ -2388,3 +2388,25 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   norse. THE CHAIR WILL SEAT A THIRD PASS (TITLES-3) FOR EXACTLY THOSE CELLS after TITLES-2's final commit, with
   candidate words to verify by source (the chair's recollection, not verified: Schultheiss for a German village;
   Demarch and Komarch for a Greek town and village; Hersir for a Norse district; Magister for a Latin village).
+- 08:20 UTC · **THE SESSION SHEET'S LANE HANDED OVER; TITLES-2 FINAL IN ALL BUT ITS MESSAGE; THE VERB AGREEMENT MEASURED.**
+  FRAME-2 (08:20): "FRAME-PART 1fe37f10e, HANDED OVER": merged and pushed: the audience gate; weight (93 framed, 237
+  calm keep today's sheet: W2 one-sided); the veil test re-seated; the names rule in `crisisHooks.js` reconciled
+  with weight; CF9; the one red of its 104-file set the phone floor census. B10 ("a person is never 'it'") CAME BACK
+  RED AND IS NOT MERGED (`lane/frame-2-2026-11-20-b10` at d8a1b1657: 5 of 525 golden rows, 5 tests red, castDerived's
+  matcher among them). FRAME-2 read 357,996 tokens at 08:13; it has stopped. To FRAME-3 (08:21): "THE LANE IS YOURS
+  at 1fe37f10e", with its order: `tests/lint` whole at the tip first (not run on that lane since B3); the merge of
+  the line at e356c94f with the three re-pins by their proofs; B9 (both powers: 58); the "it" cause afresh, B10 a
+  lead; the two census doors; the re-seat; P1b, P4a; P1 to P4b on the two-crisis pool and by the shared confinement
+  tool; the measures and six sheets; "FRAME <commit>".
+  TITLES-2 pushed c81c1106 and da33bc58 (08:05): THE CHAIR'S TWO VERIFY-OR-KEEP RULINGS RESOLVED BY ITS SEARCHES:
+  PRAETOR TAKES THE LATIN HEADMAN CELLS, town and up (Podestà to the unsure list); GOST IS KEPT (Tysyatsky's tie to
+  the merchants thin); Vilicus kept. Said to the owner 08:14. Its final "TITLES-2 <commit>" (lint whole at the new
+  tip) is owed; `prompts/TITLES-3.txt` is written and on origin (ef6b6b1e): seated on that message.
+  NAMES-3's MEASURE AT ITS BASE (08:15; its own rebuilt reader, which also takes a clause opened by "and"): STORED 10
+  of 2,311 readings (the names seat: 5 of 1,724); RENDERED 150 of 4,514 (139): the asker line 129. ONE TEMPLATE
+  OUTSIDE THE NAMED FILES: `src/data/dossierStateProse/power.generated.js` (a generated pool filled by the state-prose
+  kernel; `{faction}` and `{counterpart}` carry singular verbs throughout). RULED: THE GENERATED POOL AND ITS KERNEL
+  ARE NOT TOUCHED IN THAT LANE: a mechanism's gap (no agreement form in the kernel's fill), a NAMED SURVIVOR with its
+  count and every sibling template counted, FOR AFTER THE DEPLOY. Its cure's shape accepted (the number's reader in
+  one home in the data layer, the display file re-exporting; one agreement form, one filler). The confinement tool
+  comes before the rest of its cure (restated to it).
