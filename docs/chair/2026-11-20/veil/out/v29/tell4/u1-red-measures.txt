@@ -1,0 +1,7 @@
+R3-TELL-4 unit 1, people.allegiance on the hiding plant: hiding reads 50 | engine:kind:state (cards): {"server:withheld-names:absent":72,"server:served-names:absent":48,"server:none:absent":25,"twin:withheld-names:absent":72,"twin:served-names:absent":48,"twin:none:absent":25,"server:withheld-names:HUSK":2,"server:withheld-names:as stored":1,"server:served-names:as stored":2,"twin:withheld-names:HUSK":2,"twin:withheld-names:as stored":1,"twin:served-names:as stored":2} | faults 6 | tooth: kept allegiances served 4 not byte for byte 0 
+  npc-a1 server gallery allOpen dm=true: HUSK {"via":"office","power":null,"share":0.1,"covert":true,"vector":"greed","veiled":true,"handler":null}
+  npc-a2 server gallery allOpen dm=true: HUSK {"via":"office","power":"Dock Syndicate","share":0.1,"covert":true,"vector":"greed","veiled":true,"handler":null}
+  npc-a3 server gallery allOpen dm=true: as stored {"via":"office","house":"Fish market","power":"Dock Syndicate","share":0.1,"covert":true,"vector":"greed","veiled":true,"handler":null}
+  npc-a1 twin gallery allOpen dm=true: HUSK {"power":null,"vector":"greed","via":"office","handler":null,"share":0.1,"veiled":true,"covert":true}
+  npc-a2 twin gallery allOpen dm=true: HUSK {"power":"Dock Syndicate","vector":"greed","via":"office","handler":null,"share":0.1,"veiled":true,"covert":true}
+  npc-a3 twin gallery allOpen dm=true: as stored {"power":"Dock Syndicate","house":"Fish market","vector":"greed","via":"office","handler":null,"share":0.1,"veiled":true,"covert":true}

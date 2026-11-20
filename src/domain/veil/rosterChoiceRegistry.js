@@ -362,6 +362,8 @@ const ROWS_SPEC = [
     scope: 'VR4 ii-12 with item B: the handler tie to a criminal house hidden whole withheld whole by identity (allegiance.js :: criminalHousesOf)' }),
   row({ id: 'trace.criminalAllegiance', path: '^simulationTrace\\[\\]\\.(targetId|causes\\[\\]\\.reason|downstreamEffects\\[\\]\\.(reason|target))$', re: true, writer: W.allegiance, house: P.criminal, rule: 'withhold', when: 'house-hidden', drawn: 'yes', server: H.sHomes, twin: H.tHomes,
     scope: 'item B: a trace entry (and each cause and downstream effect) stays only where a native listed house accounts for it; with it VR4 ii-12\'s "runs to the town\'s criminal power" / "the local underworld" line' }),
+  choiceWithhold({ id: 'people.allegiance', path: '^npcs\\[\\]\\.allegiance\\b', re: true, writer: 'src/domain/people/allegiance.js :: dealAllegiances', house: P.criminal,
+    scope: 'R3-TELL-4 unit (i) (ruling 73 (2): served as the house-free twin serves it): a served person\'s allegiance stays only BY POSITIVE ACCOUNT, its `house` a house the read lists and its `power` null or a power the read serves; else THE KEY leaves (the open place\'s form: no nothing-hidden birth of the pool serves one, 1,808 of 1,808; no husk, ruling 47). Not R4\'s holder pass (VR9): an agent is not its house\'s holder; the handler id inside it leaves with the key' }),
 
   // ── the power structure
   undrawn({ id: 'power.fingerprint', path: 'powerStructure.economyInputFingerprint', writer: W.fingerprint, house: P.flags, vr14: 'iii' }),
@@ -612,7 +614,7 @@ export const REGISTRY_SITES = Object.freeze({
   'src/domain/npcProfile.js :: institutionsForCategory': { rows: ['people.card'] },
   'src/domain/people/allegiance.js :: assignHandlers': { rows: ['ties.covertHandler', 'trace.criminalAllegiance'] },
   'src/domain/people/allegiance.js :: criminalHousesOf': { rows: ['ties.covertHandler', 'trace.criminalAllegiance'] },
-  'src/domain/people/allegiance.js :: dealAllegiances': { rows: ['ties.covertHandler', 'trace.criminalAllegiance', 'people.secret'] },
+  'src/domain/people/allegiance.js :: dealAllegiances': { rows: ['ties.covertHandler', 'trace.criminalAllegiance', 'people.secret', 'people.allegiance'] },
   'src/domain/people/allegiance.js :: isCriminalPower': { rx: 1, rows: ['ties.covertHandler', 'trace.criminalAllegiance'] },
   'src/domain/people/allegiance.js :: organizedCrimeOf': { rows: ['ties.covertHandler', 'trace.criminalAllegiance'] },
   'src/domain/spatial/cohesionWeave.js :: FACET_INFERENCE': { rx: 1, rows: ['spatial.quarters'] },

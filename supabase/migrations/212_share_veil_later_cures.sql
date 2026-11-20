@@ -2428,6 +2428,25 @@ begin
     end if;
   end if;
 
+  -- R3-TELL-4 unit (i) (the chair's ruling 73 (2): WHAT NAMES OR DEPENDS ON A WITHHELD HOUSE IS SERVED AS THE HOUSE-FREE TWIN
+  -- WOULD SERVE IT). registry: people.allegiance. A served person's `allegiance` ({power, house, ...}: allegiance.js ::
+  -- dealAllegiances; a clean card carries none, and no nothing-hidden birth of the pool serves one) stays only BY POSITIVE
+  -- ACCOUNT: an object whose `house` is the name of a house this read still lists and whose `power` is null, absent or the
+  -- name of a power this read still serves (`names`, both served lists); else THE KEY leaves, the open place's form (ruling
+  -- 47: no husk). A husk the name sweep left (its `house` taken) names no listed house, so it leaves (stated, not left to
+  -- SQL's null: an absent `house` makes the test null, which would keep the husk). Twin:
+  -- galleryRosterChoices.js :: applyRosterChoices, the same rule
+  if jsonb_typeof(s -> 'npcs') = 'array' then
+    s := jsonb_set(s, '{npcs}', (select coalesce(jsonb_agg(case when jsonb_typeof(n) = 'object' and n ? 'allegiance'
+        and not coalesce(jsonb_typeof(n -> 'allegiance') = 'object' and jsonb_typeof(n #> '{allegiance,house}') = 'string'
+                 and (n #>> '{allegiance,house}') = any(array(select public._gallery_veil_str(h -> 'name')
+                      from jsonb_array_elements(case when jsonb_typeof(s -> 'institutions') = 'array' then s -> 'institutions' else '[]' end) h
+                     where jsonb_typeof(h) = 'object' and public._gallery_veil_str(h -> 'name') <> ''))
+                 and (coalesce(jsonb_typeof(n #> '{allegiance,power}'), 'null') = 'null'
+                      or (jsonb_typeof(n #> '{allegiance,power}') = 'string' and (n #>> '{allegiance,power}') = any(names))), false)
+      then n - 'allegiance' else n end order by o), '[]') from jsonb_array_elements(s -> 'npcs') with ordinality x(n, o)));
+  end if;
+
   -- the stored and the served house flags (economicState.safetyProfile.compound.inst, else economicState.compound.inst)
   fl := coalesce(case when jsonb_typeof(p #> '{economicState,safetyProfile,compound,inst}') = 'object' then p #> '{economicState,safetyProfile,compound,inst}' end,
                  case when jsonb_typeof(p #> '{economicState,compound,inst}') = 'object' then p #> '{economicState,compound,inst}' end, '{}');
