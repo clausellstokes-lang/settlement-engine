@@ -85,7 +85,7 @@ describe('BAR4-HISTORY T1: one past event, one telling', () => {
     expect(ev.description).toMatch(/marked the temple district/); // KEEP: the past event's own place
     // the surge placed ONCE, in the temple district, and not its own past event's sentence
     expect(tn.description).toContain('the temple district');
-    expect(tn.description).not.toContain("the merchants' quarter");
+    expect(tn.description).not.toContain("the merchants' quarter"); // anchored: the same sentence holds 'the temple district' (line above) and is pinned whole by the toBe below
     expect(tn.description).not.toBe(ev.description);
     // PAGE-2 T1: the sentence itself, computed through the module: its form on the town's seed, placed where its event was,
     // and, where that form is the event's own sentence (as here), the first spare that differs (COHERENCE-PRESUME)
