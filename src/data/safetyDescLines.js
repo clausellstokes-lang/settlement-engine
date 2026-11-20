@@ -2,6 +2,9 @@
  * src/data/safetyDescLines.js — THE SAFETY LINE'S POOLS (PLACE-1's first unit, 2026-11-20; the owner's order to fix the
  * sameness fault; `docs/chair/2026-11-20/content/place/safetyDesc-MEASURE.md` §D, approved by the chair at 16:47 UTC with
  * the build brief's amendments: the watch's night row dropped, no new atom, the city's Unsafe line in, walls row 4 reworded).
+ * The chair's read of 18:36 UTC added 21 rows (TINY_MODERATE 10–15, MIXED_OPENING 8–10, MIXED_FORCE.garrison 8–9, .watch 7–8,
+ * .none 8–10, MIXED_CORNERS 8–12; `safetyDesc-VILLAGE-LINES.md`) and the threat-family declarations (`excludes: ['crisis: threat']`)
+ * on the three "safe enough" openings and on the Travelers advice: the branches run only where no threat-family crisis stands.
  *
  * The Defense tab's safety line (`economicState.safetyProfile.safetyDesc`) printed one sentence in up to 73 of 100 places a
  * size. Each sentence slot of the branches above the bar draws from its pool here, through
@@ -27,6 +30,12 @@ export const TINY_MODERATE = Object.freeze([
   Object.freeze({ text: 'If real trouble comes, the militia turns out; day to day, the neighbours watch one another.', needs: ['militia'] }),
   Object.freeze({ text: 'Few strangers come this far, and the neighbours keep an eye on one another.', needs: ['route: isolated'] }),
   Object.freeze({ text: 'A place this size has few secrets, and what trouble there is soon comes out.' }),
+  Object.freeze({ text: 'A wrong done here is a wrong done to neighbours, and it is not soon forgotten.' }),
+  Object.freeze({ text: 'Every household knows the others\' business, which keeps most quarrels small.' }),
+  Object.freeze({ text: 'Little here goes unnoticed for long; the neighbours see to that.' }),
+  Object.freeze({ text: 'Trouble here is settled among neighbours, mostly before it grows.' }),
+  Object.freeze({ text: 'Folk here look in on one another, and what one household sees, the next soon hears.' }),
+  Object.freeze({ text: 'There are few places here to do wrong unseen.' }),
 ]);
 
 /** Moderate, village and larger: the opening sentence. */
@@ -34,11 +43,14 @@ export const MIXED_OPENING = Object.freeze([
   Object.freeze({ text: 'A mix of safer and more exposed areas.' }),
   Object.freeze({ text: 'Some parts of the place are safer than others.' }),
   Object.freeze({ text: 'Safety here depends on where you are, and when.' }),
-  Object.freeze({ text: 'Most of the place is safe enough, though not all of it.' }),
-  Object.freeze({ text: 'The busy ways are safe enough; the edges less so.' }),
+  Object.freeze({ text: 'Most of the place is safe enough, though not all of it.', excludes: ['crisis: threat'] }),
+  Object.freeze({ text: 'The busy ways are safe enough; the edges less so.', excludes: ['crisis: threat'] }),
   Object.freeze({ text: 'Some quarters are safer than others.', needs: ['tier: ≥ town'] }),
-  Object.freeze({ text: 'The market and the busy streets are safe enough; other parts less so.', needs: ['market', 'tier: ≥ village'] }),
+  Object.freeze({ text: 'The market and the busy streets are safe enough; other parts less so.', needs: ['market', 'tier: ≥ village'], excludes: ['crisis: threat'] }),
   Object.freeze({ text: 'Order holds in most of the place, but not everywhere.' }),
+  Object.freeze({ text: 'It is safer here by day than by night.' }),
+  Object.freeze({ text: 'The well-used parts of the place are the better kept; the outskirts less so.' }),
+  Object.freeze({ text: 'Most trouble here keeps to the edges and the late hours.' }),
 ]);
 
 /** Moderate, village and larger: the force sentence, by the branch's force (the writer's order: garrison, watch, militia, none). */
@@ -52,6 +64,8 @@ export const MIXED_FORCE = Object.freeze({
     Object.freeze({ text: 'The garrison holds the gates and patrols the main streets; quieter spots after dark carry real risk.', needs: ['garrison', 'gate', 'tier: ≥ village'] }),
     Object.freeze({ text: 'By day the garrison is seen on every main street; after dark, the quieter spots carry genuine risk.', needs: ['garrison', 'force walks by day', 'tier: ≥ village'] }),
     Object.freeze({ text: 'The garrison patrols the market and the main streets; elsewhere, after dark, there is genuine risk.', needs: ['garrison', 'market', 'tier: ≥ village'] }),
+    Object.freeze({ text: 'Garrison soldiers keep to the main streets; the side lanes after dark are riskier.', needs: ['garrison', 'tier: ≥ village'] }),
+    Object.freeze({ text: 'The garrison\'s presence is felt on the main ways; off them, after dark, the risk is real.', needs: ['garrison'] }),
   ]),
   watch: Object.freeze([
     Object.freeze({ text: 'The watch covers the main paths; quieter spots after dark carry genuine risk.', needs: ['watch'] }),
@@ -61,6 +75,8 @@ export const MIXED_FORCE = Object.freeze({
     Object.freeze({ text: 'The watch holds the gates and walks the main streets; quieter spots after dark carry real risk.', needs: ['watch', 'gate', 'tier: ≥ village'] }),
     Object.freeze({ text: 'The watch is seen on the main streets by day; quieter spots after dark carry genuine risk.', needs: ['watch', 'force walks by day', 'tier: ≥ village'] }),
     Object.freeze({ text: 'The watch keeps an eye on the market and the main streets; quieter spots after dark carry genuine risk.', needs: ['watch', 'market', 'tier: ≥ village'] }),
+    Object.freeze({ text: 'The watch makes its rounds of the main streets; past them, after dark, the risk is real.', needs: ['watch', 'tier: ≥ village'] }),
+    Object.freeze({ text: 'The main ways are the watch\'s; the lanes beside them after dark are not.', needs: ['watch'] }),
   ]),
   militia: Object.freeze([
     Object.freeze({ text: 'Militia volunteers patrol the main paths; quieter spots after dark carry genuine risk.', needs: ['militia'] }),
@@ -77,6 +93,9 @@ export const MIXED_FORCE = Object.freeze({
     Object.freeze({ text: 'Stallholders and neighbours keep an eye on the market and the main paths; quieter spots after dark carry genuine risk.', needs: ['market'] }),
     Object.freeze({ text: 'Locals keep an eye on the road through and the main paths; quieter spots after dark carry real risk.', needs: ['route: road'] }),
     Object.freeze({ text: 'Locals keep an eye on the crossroads and the main paths; quieter spots after dark carry real risk.', needs: ['route: crossroads'] }),
+    Object.freeze({ text: 'Most comings and goings on the main paths are seen by someone; the quieter spots after dark are less safe.' }),
+    Object.freeze({ text: 'Doors and windows face the main paths, and someone is usually looking out; the dark spots off them are another matter.' }),
+    Object.freeze({ text: 'By day little passes on the main paths unseen; after dark, the quieter spots carry real risk.' }),
   ]),
 });
 
@@ -90,6 +109,11 @@ export const MIXED_CORNERS = Object.freeze([
   Object.freeze({ text: 'The people here know their own streets, and which to keep away from.', needs: ['tier: ≥ village'] }),
   Object.freeze({ text: 'Residents give the worst corners a wide berth.' }),
   Object.freeze({ text: 'Anyone who lives here can say which ways are best avoided.' }),
+  Object.freeze({ text: 'Locals can tell a newcomer which places to steer clear of.' }),
+  Object.freeze({ text: 'Those born here know which turnings to leave alone after dark.' }),
+  Object.freeze({ text: 'Residents keep to the places they know once night falls.' }),
+  Object.freeze({ text: 'Ask anyone who lives here, and they will name the spots to avoid.' }),
+  Object.freeze({ text: 'Long-time residents know the risky spots, and keep away from them.' }),
 ]);
 
 /** The Moderate wall note, both branches (printed where the walls stand). */
@@ -123,7 +147,7 @@ export const UNSAFE_GARRISON = Object.freeze([
 
 /** Unsafe: the advice (no travellers come in under a siege: every row excludes it). */
 export const UNSAFE_ADVICE = Object.freeze([
-  Object.freeze({ text: 'Travelers are advised to move in groups and keep valuables hidden.', excludes: ['crisis: siege'] }),
+  Object.freeze({ text: 'Travelers are advised to move in groups and keep valuables hidden.', excludes: ['crisis: threat'] }), // the threat family (siege among it): the outside class's families, the branch's guarantee
   Object.freeze({ text: 'Visitors are told to keep together and keep their purses out of sight.', excludes: ['crisis: siege'] }),
   Object.freeze({ text: 'Newcomers learn quickly to go about in company and show nothing worth taking.', excludes: ['crisis: siege'] }),
   Object.freeze({ text: 'In the market, people keep a hand on their purses and go in company.', needs: ['market'], excludes: ['crisis: siege'] }),

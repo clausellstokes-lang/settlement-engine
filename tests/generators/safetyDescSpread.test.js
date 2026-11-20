@@ -6,8 +6,8 @@
  * of 100 towns: the Moderate line (small place, and village and up) and the city's Unsafe-with-a-garrison line. The cure
  * draws each sentence slot from its own declared pool (`src/data/safetyDescLines.js`), by keyed hash with no roll.
  *
- *   (a) THE BAR: on 100 places a size (`hxd-<size>-0..99`, born and masked as the chair's stored-sentence census births
- *       and masks them), no sentence of the line in more than 15 of a size's places;
+ *   (a) THE BAR: on 150 places a size (`hxd-<size>-0..149`, born and masked as the chair's stored-sentence census births
+ *       and masks them), no sentence of the line in more than 15% of a size's places (22 of 150);
  *   (b) every pool row the stored line prints is admitted by the FINAL record (its declared `needs` / `excludes`);
  *   (c) CANONICAL AT ZERO: a seedless `generateSafetyProfile` prints today's line, byte for byte, in every branch the cure
  *       composes (Moderate small place with and without walls; Moderate village-and-up under each force; Unsafe with a
@@ -33,8 +33,8 @@ import { DEFENSE_BUCKET_KEYWORDS } from '../../src/domain/institutions/defenseIn
 import { isMarketInstitution } from '../../src/domain/facts/market.js';
 
 const SIZES = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
-const N = 100;
-const BAR = 15;
+const N = 150;
+const BAR = Math.floor(0.15 * N); // 22 of 150: no more than 15% of a size's places (the chair's bar on 150, 18:36 UTC)
 const SLOW = 300_000;
 
 /** The pool module (absent before the build: every test that reads it reds on its absence, not on a load error). */
@@ -93,7 +93,7 @@ function overBar(lines) {
   return [...m].filter(([, c]) => c > BAR).sort((a, b) => b[1] - a[1]).map(([s, c]) => `${c} ${s}`);
 }
 
-describe('(a) the bar: no sentence of the safety line in more than 15 of 100 places a size', () => {
+describe('(a) the bar: no sentence of the safety line in more than 15% of 150 places a size', () => {
   for (const size of SIZES) {
     it(`${size}: no sentence of safetyDesc in more than ${BAR} of ${N} places`, async () => {
       const born = await bornOf(size);
