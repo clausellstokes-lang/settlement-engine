@@ -451,10 +451,12 @@ describe('ARM 1 — the source', () => {
   /**
    * STYLE-2-MERGE-13, point 49 (the chair's ruling on STOP 49a (i), record 405): the line's two instruments are admitted
    * BY NAME, each with its exact counts (ARM1_INSTRUMENTS) — the rule book's form and chainPrintSites' EXEMPT form. A new
-   * literal in either file, or one gone, moves its count and reds here; a third file is never admitted by this arm.
+   * literal in either file, or one gone, moves its count and reds here; a third file is never admitted by this arm. GOALS-3
+   * R2 (the chair's ruling of 2026-11-20 16:04 UTC) admitted the third by name: the closed list of venal secrets, a matcher.
    */
-  test('the admitted instruments: each reads EXACTLY its named counts, and only these two are admitted', () => {
-    expect(Object.keys(ARM1_INSTRUMENTS)).toEqual(['src/domain/coherence/pageCensusFindings.js', 'src/domain/facts/factLayers.js']);
+  test('the admitted instruments: each reads EXACTLY its named counts, and only these three are admitted', () => {
+    // the third, the closed list of venal secrets, by the chair's ruling of 2026-11-20 16:04 UTC (GOALS-3, R2)
+    expect(Object.keys(ARM1_INSTRUMENTS)).toEqual(['src/domain/coherence/pageCensusFindings.js', 'src/domain/facts/factLayers.js', 'src/data/people/goalSecretRefusals.js']);
     const strips = stripTree(ROOT, { keepAdmitted: true });
     for (const [file, named] of Object.entries(ARM1_INSTRUMENTS)) {
       expect(all.filter((h) => h.file === file).length, `${file}: arm-1 hits`).toBe(named.hits);

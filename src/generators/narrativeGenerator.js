@@ -38,7 +38,7 @@ import { captureClimateOf } from './power/rulingStructure.js';
 import { withCaptureRelations } from './factionDynamics.js';
 import { cardInstitutionVeilOf } from '../domain/people/cardPowers.js';
 import { drawTies } from './people/ties.js';
-import { dealGoals } from './people/goals.js';
+import { dealGoals, refuseWantsBesideSecrets } from './people/goals.js'; // GOALS-2: the want refused beside the secret, a post-pass (twice)
 import { dealRareSecrets } from './people/rareSecrets.js'; // SECRETS-1: the very rare secrets, beside the goals
 import { pickVariant } from '../kernel/proseHash.js';
 import { selectOriginBody, supportChannelsOf } from './narrative/settlementOriginProse.js'; import { FOUNDER_ADMITS, FOUNDING_REASON_ADMITS, NAMES_A_FOUNDER, admittedRow, foundingStateOf, founderForOrigin, oneFounderRow } from './narrative/foundingRowAdmits.js'; // R2-CODE-A-5: one line, so no cited line moves
@@ -1062,7 +1062,10 @@ export const generateCoherence = (settlement, coherenceRng = null, pins = null, 
   // key is the DM's cast: its goals are not redrawn.
   const npcsHeld = !!pins && Object.prototype.hasOwnProperty.call(pins, 'npcs');
   // SECRETS-1 (2026-11-17, the owner's word; ruling RS1): the very rare secrets, dealt beside the goals by the seed's keyed hash, no draw taken
-  const goaledNpcs = npcsHeld ? mergedNpcs : dealRareSecrets(settlement, dealGoals(settlement, mergedNpcs, relationships, coherenceRng?.fork ? coherenceRng : getActiveRng()), relationships, { seed: seed ?? settlement._seed });
+  // GOALS-2 (the chair's rulings of 12:05 and 12:37 UTC): the deal, the rare deal, then ONE post-pass by each card's final
+  // secret (the want refused beside the card's own secret, no other card touched; people/goals.js)
+  const dealtGoals = npcsHeld ? mergedNpcs : dealGoals(settlement, mergedNpcs, relationships, coherenceRng?.fork ? coherenceRng : getActiveRng());
+  const goaledNpcs = npcsHeld ? mergedNpcs : refuseWantsBesideSecrets(settlement, dealRareSecrets(settlement, dealtGoals, relationships, { seed: seed ?? settlement._seed }), relationships, { receiptsOf: dealtGoals });
   const withTies = { ...settlement, npcs: goaledNpcs, relationships };
 
   const history = settlement.history || {};

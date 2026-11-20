@@ -1195,12 +1195,6 @@
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 4
     },
-    "ledger:foodwaysPrintSiblings:FOODWAYS_PRINT_SIBLINGS": {
-      "top1": 0.8643,
-      "top5": 1,
-      "lines": 2,
-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
-    },
     "ledger:goalFamilies:ALLEGIANCE.escape_fear.short": {
       "top1": 1,
       "top5": 1,
@@ -1627,18 +1621,6 @@
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 1
     },
-    "ledger:goalFamilies:SUPPLY.want.long": {
-      "top1": 1,
-      "top5": 1,
-      "lines": 1,
-      "reason": "banked BY ITS OWN ROW at the last close (LASTCLOSE-DOORS, 2026-11-18; BRIEF-LASTCLOSE.md, the ruled ones: the last small round's pool, LAST-VARIETY, point 70): the door's own bankNew narrowed to this pool (a drawn pool with no row, at the higher of the two corpora's readings), NOT --bank-new, which would also bank the base's three unregistered pools (listed for the chair)"
-    },
-    "ledger:goalFamilies:SUPPLY.want.short": {
-      "top1": 1,
-      "top5": 1,
-      "lines": 1,
-      "reason": "banked BY ITS OWN ROW at the last close (LASTCLOSE-DOORS, 2026-11-18; BRIEF-LASTCLOSE.md, the ruled ones: the last small round's pool, LAST-VARIETY, point 70): the door's own bankNew narrowed to this pool (a drawn pool with no row, at the higher of the two corpora's readings), NOT --bank-new, which would also bank the base's three unregistered pools (listed for the chair)"
-    },
     "ledger:goalFamilies:TIES.ally.long": {
       "top1": 1,
       "top5": 1,
@@ -1956,12 +1938,6 @@
       "top5": 1,
       "lines": 2,
       "reason": "re-recorded once by CLOSE-DOORS-1B (2026-11-18, the close of 2026-11-18) under the chair's ruling CL22 (vetoable; named for the owner as variety owed): top1 0.6364 -> 0.8107, measured on both corpora (2002 draws in 1154 towns; 1986 in 1144); top5 1, lines 2 held. Cause: the table went from 11 keys to 29 (BAR5-MARKS, JOIN-16 point 1, +15; BAR6-HOUSES, JOIN-17 point 2, +3), each key's line 1 a siege twin printed only under siege, so line 0 (the original) takes 0.8107 of the draws (0.5900 of 661 at 6483322cc); both lines still drawn, no pool emptied. Before: banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
-    },
-    "ledger:institutionDescVariants:DESC_VARIANT_SIBLINGS": {
-      "top1": 0.9916,
-      "top5": 1,
-      "lines": 2,
-      "reason": "banked BY ITS OWN ROW at the last close (LASTCLOSE-DOORS, 2026-11-19, the chair's ruling on its hand-back's §3 (1)), through the door's own bankNew narrowed to this pool (at the higher of the two corpora's readings), NOT --bank-new: two-line sibling pool; the second line's declaration refuses it in most towns (a true line passed over, LR3), so one line prints 99%; no draw prints false; on the post-deploy variety list (the chair, last close)"
     },
     "ledger:institutionDescVariants:city|Crafts|Alchemist quarter": {
       "top1": 0.3596,
@@ -5693,10 +5669,10 @@
       "lines": 8
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.mentor_legacy": {
-      "top1": 0.1269,
-      "top5": 0.63,
+      "top1": 0.1214,
+      "top5": 0.5994,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
-      "lines": 8
+      "lines": 10
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.mil_crim_corruption": {
       "top1": 0.1409,
@@ -5711,22 +5687,22 @@
       "lines": 8
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.mutual_leverage": {
-      "top1": 0.1437,
-      "top5": 0.7052,
+      "top1": 0.1394,
+      "top5": 0.594,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening; e0d38e6c4 / f00b248fe (TAIL-TIES T1/T2/T5, T6/T7) declared its council and vote lines off a town with no ruling body (needs: ruling body): top1 0.129 -> 0.1437 (confirm 0.1425), top5 0.6325 -> 0.7053 (confirm 0.6995); raised by the chair's ruling PD1 of 2026-11-15: variety owed after the release",
-      "lines": 8
+      "lines": 13
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.old_debt": {
-      "top1": 0.1293,
-      "top5": 0.6837,
+      "top1": 0.1286,
+      "top5": 0.6275,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening; e0d38e6c4 / f00b248fe (TAIL-TIES T1/T2/T5, T6/T7) declared its two vote lines off a town with no ruling body (needs: ruling body): top5 0.64 -> 0.6837 (the confirm corpus's higher reading; banked 0.6817); raised by the chair's ruling PD1 of 2026-11-15: variety owed after the release",
-      "lines": 8
+      "lines": 10
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.peer_rivalry": {
-      "top1": 0.13,
-      "top5": 0.6738,
+      "top1": 0.1266,
+      "top5": 0.6219,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening; e0d38e6c4 / f00b248fe (TAIL-TIES T1/T2/T5, T6/T7) declared its council-session and single-vote lines off a town with no ruling body (needs: ruling body): top5 0.6427 -> 0.6738 (confirm 0.6691); raised by the chair's ruling PD1 of 2026-11-15: variety owed after the release",
-      "lines": 8
+      "lines": 10
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.rel_crim_fraud": {
       "top1": 0.1747,
@@ -5741,10 +5717,10 @@
       "lines": 8
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.wary_alliance": {
-      "top1": 0.1592,
-      "top5": 0.7105,
+      "top1": 0.1447,
+      "top5": 0.6416,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening; e0d38e6c4 / f00b248fe (TAIL-TIES T1/T2/T5, T6/T7) declared its three vote lines off a town with no ruling body, and 21032205a (R2-CODE-A-14, ruling s1) its council-bloc line off a pair with no shared power: top1 0.1307 -> 0.1592 (confirm 0.1583), top5 0.6457 -> 0.7105 (confirm 0.7049); raised by the chair's ruling PD1 of 2026-11-15: variety owed after the release",
-      "lines": 8
+      "lines": 10
     },
     "ledger:npcGenerator:CRIME_KNOWLEDGE": {
       "top1": 0.2536,
@@ -5794,6 +5770,82 @@
       "lines": 2,
       "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
     },
+    "ledger:rulingStructure:FACTION_DESC_SIBLINGS": {
+      "top1": 1,
+      "top5": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+      "lines": 1
+    },
+    "ledger:safetyProfile:SAFETY_LINE_SIBLINGS": {
+      "top1": 0.7629,
+      "top5": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+      "lines": 2
+    },
+    "ledger:safetyProfile:SMUGGLING_HOOKS": {
+      "top1": 0.2551,
+      "top5": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+      "lines": 4
+    },
+    "ledger:stressInstitutionEffects:STRESS_INSTITUTION_EFFECTS": {
+      "top1": 0.1514,
+      "top5": 0.7274,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+      "lines": 15
+    },
+    "ledger:stressNarrative:RELIGIOUS_CONVERSION": {
+      "top1": 0.4211,
+      "top5": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+      "lines": 3
+    },
+    "ledger:stressNarrative:STRESS_SUMMARY_SIBLINGS": {
+      "top1": 0.9711,
+      "top5": 1,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+      "lines": 2
+    },
+    "ledger:stressTypes:STRESS_TYPE_SIBLINGS": {
+      "top1": 0.7571,
+      "top5": 1,
+      "lines": 2,
+      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
+    },
+    "record:conflicts.issue": {
+      "top1": 0.1,
+      "top5": 0.4,
+      "targets": [
+        "top1",
+        "top5"
+      ],
+      "reason": "the quarrels' issues: COHERENCE-QUARREL cure 2 widens the pool; the charter's targets (no issue above 10%, the first five under 40%)",
+      "lines": 53
+    },
+    "record:conflicts.plotHooks": {
+      "top1": 0.1,
+      "top5": 0.1777,
+      "targets": [
+        "top1"
+      ],
+      "reason": "the quarrels' plot hooks: COHERENCE-QUARREL cure 2 draws one of the issue's own hooks; the charter's target (no hook above 10%)",
+      "lines": 97
+    },
+    "record:safetyProfile.plotHooks": {
+      "top1": 0.25,
+      "top5": 0.693,
+      "targets": [
+        "top1"
+      ],
+      "reason": "the safety record's plot hooks: COHERENCE-QUARREL cure 4 gives the smuggling hook four tellings; the charter's target (no line above a quarter)",
+      "lines": 13
+    },
+    "ledger:foodwaysPrintSiblings:FOODWAYS_PRINT_SIBLINGS": {
+      "top1": 0.8643,
+      "top5": 1,
+      "lines": 2,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
     "ledger:rareSecrets:deeds": {
       "top1": 0.0245,
       "top5": 0.1222,
@@ -5824,29 +5876,17 @@
       "lines": 42,
       "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
     },
-    "ledger:rulingStructure:FACTION_DESC_SIBLINGS": {
+    "ledger:goalFamilies:SUPPLY.want.short": {
       "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
-      "lines": 1
+      "lines": 1,
+      "reason": "banked BY ITS OWN ROW at the last close (LASTCLOSE-DOORS, 2026-11-18; BRIEF-LASTCLOSE.md, the ruled ones: the last small round's pool, LAST-VARIETY, point 70): the door's own bankNew narrowed to this pool (a drawn pool with no row, at the higher of the two corpora's readings), NOT --bank-new, which would also bank the base's three unregistered pools (listed for the chair)"
     },
-    "ledger:safetyProfile:SAFETY_LINE_SIBLINGS": {
-      "top1": 0.7629,
+    "ledger:goalFamilies:SUPPLY.want.long": {
+      "top1": 1,
       "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
-      "lines": 2
-    },
-    "ledger:safetyProfile:SMUGGLING_HOOKS": {
-      "top1": 0.2551,
-      "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
-      "lines": 4
-    },
-    "ledger:safetyProfile:STANDARD_PATROL": {
-      "top1": 0.2984,
-      "top5": 1,
-      "lines": 4,
-      "reason": "banked BY ITS OWN ROW at the last close (LASTCLOSE-DOORS, 2026-11-19, the chair's ruling on its hand-back's §3 (1)), through the door's own bankNew narrowed to this pool (at the higher of the two corpora's readings), NOT --bank-new: K-WATCH-2's pool, points 48/49/57, named at its landing; top1 0.30, not lopsided; registered at the last close"
+      "lines": 1,
+      "reason": "banked BY ITS OWN ROW at the last close (LASTCLOSE-DOORS, 2026-11-18; BRIEF-LASTCLOSE.md, the ruled ones: the last small round's pool, LAST-VARIETY, point 70): the door's own bankNew narrowed to this pool (a drawn pool with no row, at the higher of the two corpora's readings), NOT --bank-new, which would also bank the base's three unregistered pools (listed for the chair)"
     },
     "ledger:settlementOriginProse:ORIGIN_DECLARED": {
       "top1": 1,
@@ -5854,63 +5894,23 @@
       "lines": 1,
       "reason": "banked BY ITS OWN ROW at the last close (LASTCLOSE-DOORS, 2026-11-18; BRIEF-LASTCLOSE.md, the ruled ones: the last small round's pool, LAST-DECLARE, point 69): the door's own bankNew narrowed to this pool (a drawn pool with no row, at the higher of the two corpora's readings), NOT --bank-new, which would also bank the base's three unregistered pools (listed for the chair)"
     },
-    "ledger:stressInstitutionEffects:STRESS_INSTITUTION_EFFECTS": {
-      "top1": 0.1514,
-      "top5": 0.7274,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
-      "lines": 15
-    },
-    "ledger:stressNarrative:RELIGIOUS_CONVERSION": {
-      "top1": 0.4211,
-      "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
-      "lines": 3
-    },
-    "ledger:stressNarrative:STRESS_SUMMARY_SIBLINGS": {
-      "top1": 0.9711,
-      "top5": 1,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
-      "lines": 2
-    },
-    "ledger:stressTypes:STRESS_TYPE_SIBLINGS": {
-      "top1": 0.7571,
+    "ledger:institutionDescVariants:DESC_VARIANT_SIBLINGS": {
+      "top1": 0.9916,
       "top5": 1,
       "lines": 2,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
+      "reason": "banked BY ITS OWN ROW at the last close (LASTCLOSE-DOORS, 2026-11-19, the chair's ruling on its hand-back's §3 (1)), through the door's own bankNew narrowed to this pool (at the higher of the two corpora's readings), NOT --bank-new: two-line sibling pool; the second line's declaration refuses it in most towns (a true line passed over, LR3), so one line prints 99%; no draw prints false; on the post-deploy variety list (the chair, last close)"
+    },
+    "ledger:safetyProfile:STANDARD_PATROL": {
+      "top1": 0.2984,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked BY ITS OWN ROW at the last close (LASTCLOSE-DOORS, 2026-11-19, the chair's ruling on its hand-back's §3 (1)), through the door's own bankNew narrowed to this pool (at the higher of the two corpora's readings), NOT --bank-new: K-WATCH-2's pool, points 48/49/57, named at its landing; top1 0.30, not lopsided; registered at the last close"
     },
     "ledger:trade-list:imports": {
       "top1": 0.1344,
       "top5": 0.5724,
       "lines": 15,
       "reason": "banked BY ITS OWN ROW at the last close (LASTCLOSE-DOORS, 2026-11-19, the chair's ruling on its hand-back's §3 (1)), through the door's own bankNew narrowed to this pool (at the higher of the two corpora's readings), NOT --bank-new: point 68's imports list (FR24); 15 lines, top1 0.13, not lopsided; registered at the last close"
-    },
-    "record:conflicts.issue": {
-      "top1": 0.1,
-      "top5": 0.4,
-      "targets": [
-        "top1",
-        "top5"
-      ],
-      "reason": "the quarrels' issues: COHERENCE-QUARREL cure 2 widens the pool; the charter's targets (no issue above 10%, the first five under 40%)",
-      "lines": 53
-    },
-    "record:conflicts.plotHooks": {
-      "top1": 0.1,
-      "top5": 0.1777,
-      "targets": [
-        "top1"
-      ],
-      "reason": "the quarrels' plot hooks: COHERENCE-QUARREL cure 2 draws one of the issue's own hooks; the charter's target (no hook above 10%)",
-      "lines": 97
-    },
-    "record:safetyProfile.plotHooks": {
-      "top1": 0.25,
-      "top5": 0.693,
-      "targets": [
-        "top1"
-      ],
-      "reason": "the safety record's plot hooks: COHERENCE-QUARREL cure 4 gives the smuggling hook four tellings; the charter's target (no line above a quarter)",
-      "lines": 13
     }
   }
 }
