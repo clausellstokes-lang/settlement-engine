@@ -109,6 +109,29 @@ const HAND_FOLD = Object.freeze({
   history: { currentTensions: [{ type: 'rivalry', factions: ['Harbour Board', TG], desc: 'Old grudges.' }, { type: 'trade', factions: ['Ropers'], desc: 'Tolls.' }] },
   economicState: { safetyProfile: { crimeTypes: [] } },
 });
+// R3-CURE-3 (VEIL-24's builder; the chair's ruling A of 10:21 UTC): THE NAME'S FORMS IN A GOAL SENTENCE. The search is
+// case-blind and counts a possessive and a plural ending as a boundary: one plant for each form ("the Thieves' Guild's", "thieves'
+// guilds", "THE THIEVES' GUILD"), each sentence naming the withheld power and aiming nowhere. THE OTHER DIRECTION: a goal naming a
+// SERVED power whose name contains the withheld one ("Old Thieves' Guild Watch") stays served byte for byte, its exemption the
+// containing served name (the ONLY exemption: a hit lying wholly inside the name of a power the same document serves).
+const TG_WATCH = "Old Thieves' Guild Watch";
+const HAND_FORMS = Object.freeze({
+  name: 'Saltmarch', tier: 'town',
+  institutions: [{ id: 'inst-tgc4', name: "Thieves' guild chapter", category: 'Criminal', desc: 'A chapter of the guild.' },
+    { id: 'inst-rope4', name: 'Ropewalk', category: 'Economy', desc: 'Rope, laid long.' }],
+  powerStructure: {
+    factions: [{ faction: 'Harbour Board', category: 'civic', power: 50, isGoverning: true, desc: 'The board sits at the tide.' },
+      { faction: TG, category: 'criminal', power: 25, desc: 'The guild takes its cut.' },
+      { faction: TG_WATCH, category: 'civic', power: 25, desc: 'Lamps and rounds.' }],
+  },
+  npcs: [{ id: 'npc.fen', name: 'Fen Aster', role: 'Boatwright', goal: { short: "Become the Thieves' Guild's fixer on the quay.", long: 'Own a boat.' } },
+    { id: 'npc.gil', name: 'Gil Brack', role: 'Carter', goal: { short: "Pay off the thieves' guilds of the coast, one by one.", long: 'Buy a cart.' } },
+    { id: 'npc.ivo', name: 'Ivo Tamsin', role: 'Net-mender', goal: { short: "Never cross THE THIEVES' GUILD again.", long: 'Mend nets.' } },
+    { id: 'npc.hal', name: 'Hal Wenning', role: 'Lamplighter', goal: { short: `Stand a night shift with the ${TG_WATCH}.`, long: 'Keep the lamps lit.',
+      intent: { long: { target: { id: TG_WATCH, kind: 'faction' } } } } },
+    { id: 'npc.jon', name: 'Jon Pell', role: 'Cooper', goal: { short: 'Finish the barrels by the fair.', long: 'Train an apprentice.' } }],
+  economicState: { safetyProfile: { crimeTypes: [] } },
+});
 // R3-CURE-2 (unit 4 (ii)): THE SHARE SUM. Fractional shares whose exact decimal sum is 100 but whose double sum is not
 // (0.1 + 64.1 + 35.8), and thirds whose double sum is 100 but whose exact decimal sum is not: the exact comparison in
 // both engines (212: numeric; the twin: the decimal spelling). No hideable house; no power withheld.
@@ -239,6 +262,8 @@ describe('R3: the drawn conditional rows where a house is hidden whole (through 
     // R3-CURE-2 (units 1, 4 (i) and 4 (ii)): the fold's plant, the number id's, and the two share sums
     towns.push({ seed: 'hand-fold', stored: clone(HAND_FOLD), hideable: HAND_FOLD.institutions.filter((h) => isHideableHouse(h)), B: null });
     for (const [seed, town] of [['hand-shares-a', HAND_SHARES_A], ['hand-shares-b', HAND_SHARES_B]]) towns.push({ seed, stored: clone(town), hideable: [], B: null });
+    // R3-CURE-3 (the chair's ruling A): the name's forms in a goal sentence, and a served power whose name contains the withheld one
+    towns.push({ seed: 'hand-forms', stored: clone(HAND_FORMS), hideable: HAND_FORMS.institutions.filter((h) => isHideableHouse(h)), B: null });
     // THE HIDDEN-FREE POOL (VR39): the crime types of every town that holds no hideable house (the counterfactual births
     // and the born towns with none)
     pool = new Set(towns.flatMap((t) => [t.B, t.hideable.length ? null : t.stored]).filter(Boolean)
@@ -568,6 +593,43 @@ describe('R3: the drawn conditional rows where a house is hidden whole (through 
       if (!(d.powerStructure?.conflicts || []).some((c) => J(c?.parties) === J(['Harbour Board', 'Ropers']))) bad.push(`${tag}: the shown conflict lost`);
     }
     note('R3-CURE-2 unit 1, the tooth (reads serving the shown power\'s goal, compared byte for byte):', tooth);
+    expect(tooth).toBeGreaterThan(0);
+    expect(bad).toEqual([]);
+  });
+
+  it('R3-CURE-3 (the chair\'s ruling A): a goal naming a withheld power by a POSSESSIVE, a PLURAL or in CAPITALS leaves, both engines, every read, Reveal DM off and on; a goal naming a SERVED power whose name contains the withheld one stays byte for byte, its exemption the containing served name', () => {
+    const bad = [];
+    const rs = cureReads().filter((x) => x.t.seed === 'hand-forms');
+    expect(rs.length).toBe(4);
+    const FORMS = { 'npc.fen': 'a possessive', 'npc.gil': 'a plural', 'npc.ivo': 'capitals' };
+    let tooth = 0; let judged = 0;
+    for (const r of rs) {
+      const twin = veil.projectShareVeil(veil.galleryPayloadFor(clone(r.stored), { shareDm: r.dm, memberOverrides: r.ov }), r.ov);
+      for (const [read, d] of [...docsOf(r), ['twin', twin]]) {
+        const tag = `hand-forms ${r.kind} dm=${r.dm} ${read}`;
+        if (!withheldOf(r.stored, d).includes(TG)) bad.push(`${tag}: the power is not withheld ${J(withheldOf(r.stored, d))}`);
+        const served = [...(d.powerStructure?.factions || []), ...(d.factions || [])].flatMap((f) => [f?.faction, f?.name]).filter((v) => typeof v === 'string');
+        if (!served.includes(TG_WATCH)) bad.push(`${tag}: the Watch not served ${J(served)}`);
+        const npc = (id) => (d.npcs || []).find((x) => x?.id === id);
+        for (const [id, form] of Object.entries(FORMS)) {
+          if (!npc(id)) continue;
+          judged += 1;
+          if ('goal' in npc(id)) bad.push(`${tag}: ${form}: the goal naming the withheld power served ${J(npc(id).goal)}`);
+        }
+        const hal = npc('npc.hal');
+        if (hal && 'goal' in hal) {
+          tooth += 1;
+          if (canon(hal.goal) !== canon(HAND_FORMS.npcs[3].goal)) bad.push(`${tag}: the goal naming the served Watch changed ${J(hal.goal)}`);
+          // THE EXEMPTION, positively: the bare search (no open names) hits the sentence, and the hit lies wholly inside a name
+          // this same document serves: that containing served name is the Watch, and with it cut out nothing is left to hit
+          const bare = buildNameSearch([TG], []);
+          const holders = served.filter((n) => hal.goal.short.includes(n) && bare.hit(n));
+          if (!bare.hit(hal.goal.short) || J(holders) !== J([TG_WATCH]) || bare.hit(hal.goal.short.split(TG_WATCH).join(' '))) bad.push(`${tag}: the exemption is not the containing served name ${J(holders)}`);
+        } else if (npc('npc.jon') && 'goal' in npc('npc.jon')) bad.push(`${tag}: the goal naming the served Watch withheld where a plain goal is served`);
+      }
+    }
+    note('R3-CURE-3 ruling A: the three forms judged on', judged, 'people-reads; the Watch goal served byte for byte on', tooth, 'reads');
+    expect(judged).toBeGreaterThan(0);
     expect(tooth).toBeGreaterThan(0);
     expect(bad).toEqual([]);
   });
