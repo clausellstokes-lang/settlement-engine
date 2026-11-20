@@ -322,7 +322,7 @@ const ROWS_SPEC = [
     page: 'not drawn',
     scope: 'VR8\'s condition, VR19 (b), (c), ruling 2: withheld on every non-owner read. Measured: the daily-life order words cut safetyRatio at 2.0, 1.5, 1.2, 1.0, 0.7, 0.5 (dailyLifeLogic.js safetyScore) where the safety band cuts effectiveSafety at 3.5, 2, 1.2, 0.6 (safetyProfile.js): FINER than the band, and no served field re-derives the ratio, so the shared page does not draw them' }),
   row({ id: 'safety.crimeTypes', path: '^economicState\\.safetyProfile\\.crimeTypes\\b', re: true, writer: W.safety, house: P.flags, rule: 'withhold', when: 'house-hidden', vr14: 'i', drawn: 'yes', server: H.sChoice, twin: H.tChoice, built: true,
-    scope: 'VR4 ii-1, i-4, i-5: an entry a hidden house chose withheld by the house\'s eye, not the grouping\'s; today the grouping block:defense.criminalStructure withholds the whole' }),
+    scope: 'VR4 ii-1, i-4, i-5: an entry a hidden house chose withheld by the house\'s eye, not the grouping\'s; today the grouping block:defense.criminalStructure withholds the whole. R3-CURE: a type the attribution map does not hold FAILS CLOSED (withheld); the map holds every type safetyProfile.js writes (tests/lint/rosterChoicePools.walker.test.js)' }),
   row({ id: 'safety.plotHooks', path: '^economicState\\.safetyProfile\\.plotHooks\\b', re: true, writer: W.safety, house: P.flags, rule: 'withhold', when: 'house-hidden', drawn: 'yes', server: H.sChoice, twin: H.tChoice, built: true,
     scope: 'VR4 i-7: a hook a hidden house chose, withheld by the house\'s eye; today tab:plot_hooks' }),
   row({ id: 'safety.criminalInstitutions', path: '^economicState\\.safetyProfile\\.criminalInstitutions\\b', re: true, writer: W.safety, house: P.criminal, rule: 'withhold', when: 'house-hidden', drawn: 'yes', server: H.sApply, twin: H.tHomes,
@@ -366,7 +366,7 @@ const ROWS_SPEC = [
   // ── the power structure
   undrawn({ id: 'power.fingerprint', path: 'powerStructure.economyInputFingerprint', writer: W.fingerprint, house: P.flags, vr14: 'iii' }),
   choiceWithhold({ id: 'power.entry', path: 'powerStructure.factions[] (only in A)', writer: W.ruling, house: P.criminal,
-    scope: 'a criminal POWER the hidden house raised, withheld with it; the rest re-derived (VR11). VR42 (tier 2): THE GOVERNING POWER\'S ROW IS NEVER REMOVED (a criminal-worded governing body is the town\'s public nature); every other criminal power (its seat\'s mark, or a thieves\' name) is withheld where a house is hidden whole (R3)' }),
+    scope: 'a criminal POWER the hidden house raised, withheld with it; the rest re-derived (VR11). VR42 (tier 2): THE GOVERNING POWER\'S ROW IS NEVER REMOVED (a criminal-worded governing body is the town\'s public nature); every other criminal power (its seat\'s mark, or a thieves\' name) is withheld where a house is hidden whole (R3). R3-CURE (the chair, 07:31 and 07:39 UTC): WHOLE, in either stored shape (the top-level factions[] too, an entry naming a governing power kept) and EVERY STRUCTURED COPY (a conflict or tension naming it, a contestsNiche, a person\'s membership, affiliation key and the goal that targets or names it); prose over the powers is R5\'s (power.desc)' }),
   diffuse({ id: 'power.composition', path: 'powerStructure.factions[] (only in B)', writer: W.ruling, house: P.any,
     scope: 'ruling 4: the counterfactual\'s own draw (a path only B holds), recorded as diffuse' }),
   undrawn({ id: 'power.contestsNiche', path: 'powerStructure.factions[].contestsNiche', writer: W.ruling, house: P.any }),

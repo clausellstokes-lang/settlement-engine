@@ -30,14 +30,23 @@ function recAt(s, key) {
 }
 /** A share the re-derivation reads (a JSON number a double holds, from 0 to 10^12), or null: gallerySecondHomes.js's income rule. @param {unknown} v @returns {number|null} */
 const shareBasis = (v) => (typeof v === 'number' && Number.isFinite(v) && v >= 0 && v <= 1e12 ? v : null);
-/** Each crime type by the house flags that raise it (safetyProfile.js; priorityHelpers.js :: getStressFlags). */
-const CRIME_TYPE_RAISERS = Object.freeze(/** @type {Record<string, string[]>} */ ({ Smuggling: ['hasSmuggling'], 'Organized guild crime': ['hasThievesGuild', 'hasCriminalInst'],
+/** Each crime type by the house flags that raise it (safetyProfile.js; priorityHelpers.js :: getStressFlags). R3-CURE (unit 3):
+ * EVERY type the engine writes is a key (tests/lint/rosterChoicePools.walker.test.js holds it equal to safetyProfile.js's own
+ * set); a crisis's type is raised by no house; 'contested property' by a standing religious house. A type it does not hold:
+ * unsure, withheld. */
+export const CRIME_TYPE_RAISERS = Object.freeze(/** @type {Record<string, string[]>} */ ({ Smuggling: ['hasSmuggling'], 'Organized guild crime': ['hasThievesGuild', 'hasCriminalInst'],
   'Street gang activity': ['hasGangInfra'], 'Criminal governance': ['hasCriminalInst'], 'Arcane black market': ['hasCriminalInst'],
   'Religious fraud': ['hasCriminalInst'], 'Commercial crime': ['hasCriminalInst'], 'Survival crime': ['hasCriminalInst'],
-  'Magical crime': ['hasCriminalInst'], 'Background crime': ['hasCriminalInst'], Lawlessness: ['hasCriminalInst'] }));
+  'Magical crime': ['hasCriminalInst'], 'Background crime': ['hasCriminalInst'], Lawlessness: ['hasCriminalInst'],
+  'State predation': [], 'desperation theft': [], 'black market food': [], 'resistance activity': [], 'collaboration fraud': [],
+  'quarantine violation': [], 'plague profiteering': [], 'debt evasion': [], 'political violence': [], 'loyalty testing': [],
+  'information trade': [], 'revolt violence': [], 'escape networks': [], 'informant pressure': [], 'weapons trade': [],
+  'underground worship': [], 'religious fraud': [], 'contested property': ['religiousHouse'], 'informant networks': [],
+  'war profiteering': [], 'deserter networks': [], 'conscription fraud': [], 'displacement crime': [], 'cultural friction': [],
+  'black market passage': [] }));
 const AUTHORITY_HOOK = 'Someone approached the party seeking legitimate authority to settle a dispute. The only "authority" here is ';
 /** Each hook of the safety profile's closed pool by the flags that raise it ([]: raised by no house). */
-const SAFETY_HOOK_RAISERS = Object.freeze(/** @type {Record<string, string[]>} */ ({
+export const SAFETY_HOOK_RAISERS = Object.freeze(/** @type {Record<string, string[]>} */ ({
   'A local family wants evidence of tax extortion gathered quietly, but the extorter wears an official badge.': [],
   'The garrison chaplain and the commander are the same person, who is authorizing military action for reasons that sound theological.': [],
   [`${AUTHORITY_HOOK}the guild.`]: ['hasCriminalInst'],
@@ -47,6 +56,9 @@ const SAFETY_HOOK_RAISERS = Object.freeze(/** @type {Record<string, string[]>} *
   'A pilgrim paid a fortune for a holy relic that is obviously fake. They want the fraud exposed without losing their faith in the process.': ['hasCriminalInst'],
   'A guild merchant hired the party, then asked for something the guild forbids; the pay is good, and someone else in the guild already knows.': ['hasCriminalInst'],
   "The merchant guild's private security force just detained someone, with no legal authority to do so. The watch is looking the other way.": ['hasGangInfra'],
+  // R3-CURE (unit 3): the two tellings safetyProfile.js :: said writes from SAFETY_LINE_SIBLINGS, each by its sibling's flags
+  "The merchant guild's private security force just detained someone, with no legal authority to do so. No one with the authority to stop it is trying.": ['hasGangInfra'],
+  "The settlement's chaplain also leads its armed men, and is authorizing military action for reasons that sound theological.": [],
   'The smuggling network is moving something unusual this week, not the normal contraband. Someone wants to know what it is before it arrives.': ['hasSmuggling'],
   'A smuggler wants one crate moved quietly and will pay well, but will not say what is in it.': ['hasSmuggling'],
   'The smugglers have stopped moving their usual goods this week, and nobody can say why.': ['hasSmuggling'],
@@ -55,7 +67,7 @@ const SAFETY_HOOK_RAISERS = Object.freeze(/** @type {Record<string, string[]>} *
   'The last smuggled load before the siege went missing, and the people who paid for it are asking questions.': ['hasSmuggling'],
 }));
 /** The three declared pairs the roster-moved fact 'rival power' chooses between (institutionDescVariants.js, TAIL-HOUSES-5 batch 8). */
-const RIVAL_POWER_DESCS = Object.freeze([
+export const RIVAL_POWER_DESCS = Object.freeze([
   'Wealthy merchant families hold exclusive civic power; political office is effectively purchased.',
   'Wealthy merchant families hold the civic offices; political office is effectively purchased.',
   'Civic power belongs solely to the wealthy merchant families, and office is bought in all but name.',
@@ -64,6 +76,13 @@ const RIVAL_POWER_DESCS = Object.freeze([
   'A handful of rich merchant houses hold the seat of power here; a political post is, in practice, something one purchases.',
 ]);
 const ROSTER_FLAGS = Object.freeze(['hasCriminalInst', 'hasSmuggling', 'hasThievesGuild', 'hasGangInfra', 'hasMarket']);
+const RELIGIOUS_HOUSE = /church|cathedral|temple|monaster|friary|shrine|abbey|chapel/i;
+const ACCESS_TO = /^access to/i;
+const NPC_AFFILIATION_KEYS = Object.freeze(['faction', 'factionAffiliation', 'affiliation', 'factionId']);
+/** The name keys of a power (`faction`, `name`) that are strings. @param {Rec} f @returns {string[]} */
+const powerNamesOf = (f) => [f.faction, f.name].filter((v) => typeof v === 'string');
+/** Whether a power is withheld by power.entry (VR42: never the governing row). @param {Rec} f */
+const entryOut = (f) => f.isGoverning !== true && (asciiLowerOf(f.category) === 'criminal' || /thie/i.test(str(f.faction !== undefined ? f.faction : f.name)));
 const BENEATH_THE_WALLS = /smuggling (network|operation)|underground (network|city)/i;
 const GATES_BENEATH = / The ([^.]+) keeps? the gates, but smugglers have ways in beneath the walls\./;
 const VERY_SAFE_BENEATH = ' The guard keeps the gates, but smugglers have ways in beneath the walls.';
@@ -91,9 +110,22 @@ export function applyRosterChoices(s, pub, idOf) {
   const gone = goneHouses.map(h => caseFold(str(h.name)));
   const whole = gone.length > 0;
   const ps = recAt(s, 'powerStructure');
+  // R3-CURE (unit 1, the chair's ruling of 07:31: THE POWER RULE GOVERNS; a power a hidden house raises leaves WHOLE): the
+  // governing powers' names (VR42, in either list) and the powers withheld below
+  const govNames = new Set(objectsOf(ps?.factions).filter(f => f.isGoverning === true).flatMap(powerNamesOf));
+  const psOut = new Set(objectsOf(ps?.factions).filter(entryOut).flatMap(powerNamesOf));
   if (whole && ps && Array.isArray(ps.factions)) {
-    ps.factions = ps.factions.filter(f => !(isRec(f) && f.isGoverning !== true
-      && (asciiLowerOf(f.category) === 'criminal' || /thie/i.test(str(f.faction !== undefined ? f.faction : f.name)))));
+    ps.factions = ps.factions.filter(f => !(isRec(f) && entryOut(f)));
+  }
+  // R3-CURE (unit 2): master's stored shape, the top-level factions[]: the same rule, an entry naming a power withheld above
+  // leaves too, one naming a governing power stays (VR42)
+  if (whole && Array.isArray(s.factions)) {
+    const before = objectsOf(s.factions).length;
+    s.factions = s.factions.filter(f => !(isRec(f) && f.isGoverning !== true && ![str(f.faction), str(f.name)].some(n => govNames.has(n))
+      && (entryOut(f) || [str(f.faction), str(f.name)].some(n => psOut.has(n)))));
+    // (VR11/VR31 on this list too: where the rule took an entry, a share set left is re-derived to 100 by largest remainder)
+    const left = objectsOf(s.factions);
+    if (left.length > 0 && left.length < before && left.every(f => typeof f.power === 'number')) s.factions = largestRemainder(/** @type {unknown[]} */ (s.factions));
   }
   // registry: power.share (VR11, VR31: wherever any power is withheld, re-derived to 100 by largest remainder from `power`)
   const n0 = objectsOf(recAt(pub, 'powerStructure')?.factions).length;
@@ -102,19 +134,7 @@ export function applyRosterChoices(s, pub, idOf) {
   // (a share set: every served power carries a number; an old record whose powers carry none has none to re-derive)
   const shares = n1 > 0 && objectsOf(ps?.factions).every(f => typeof f.power === 'number');
   const withheld = n1 < n0 || (shares && objectsOf(ps?.factions).reduce((a, f) => a + Number(f.power), 0) !== 100);
-  if (ps && withheld && shares && Array.isArray(ps.factions)) {
-    let basis = objectsOf(ps.factions).map(f => shareBasis(f.power) ?? 0);
-    let total = 0;
-    for (const b of basis) total += b;
-    if (!(total > 0)) { basis = basis.map(() => 1); total = basis.length; }
-    const q = basis.map(b => (b / total) * 100);
-    const shares = q.map(v => Math.floor(v));
-    let give = 100 - shares.reduce((a, v) => a + v, 0);
-    const order = q.map((_v, i) => i).sort((a, b) => ((q[b] - shares[b]) - (q[a] - shares[a])) || (a - b));
-    for (const i of order) { if (give <= 0) break; shares[i] += 1; give -= 1; }
-    let k = 0;
-    ps.factions = /** @type {unknown[]} */ (ps.factions).map(f => (isRec(f) ? { ...f, power: shares[k++] } : f));
-  }
+  if (ps && withheld && shares && Array.isArray(ps.factions)) ps.factions = largestRemainder(/** @type {unknown[]} */ (ps.factions));
   // registry: power.relation.entry
   // registry: power.relation.direction (VR37 (b): the word goes with its relation)
   if (ps && withheld && Array.isArray(ps.factionRelationships)) {
@@ -124,12 +144,61 @@ export function applyRosterChoices(s, pub, idOf) {
   }
   if (!whole) return;
 
+  // R3-CURE (unit 2; the chair's ruling of 07:39: "LEAVES WHOLE" MEANS EVERY COPY): the withheld powers' tokens (the name and
+  // id of every power of `pub`'s two lists that neither served list names) leave every STRUCTURED copy: a conflict between
+  // powers (both lists) and a tension naming one, whole; a power's contestsNiche naming one; a person's membership of one, an
+  // affiliation key naming one, and the goal that targets or names one. Prose over the powers is R5's (power.desc).
+  const servedNames = new Set([...objectsOf(ps?.factions), ...objectsOf(s.factions)].flatMap(powerNamesOf));
+  const wn = new Set([...objectsOf(recAt(pub, 'powerStructure')?.factions), ...objectsOf(pub.factions)]
+    .filter(f => ![str(f.faction), str(f.name)].some(n => servedNames.has(n)))
+    .flatMap(f => [f.faction, f.name, f.id].filter(v => typeof v === 'string' && v !== '')));
+  if (wn.size > 0) {
+    const names = (/** @type {Rec} */ x) => [x.faction, x.name, x.id].some(v => typeof v === 'string' && wn.has(v));
+    for (const holder of [ps, s]) {
+      if (holder && Array.isArray(holder.conflicts)) {
+        holder.conflicts = holder.conflicts.filter(c => !(isRec(c) && Array.isArray(c.parties)
+          && c.parties.some(pn => (typeof pn === 'string' && wn.has(pn)) || (isRec(pn) && names(pn)))));
+      }
+    }
+    const hist0 = recAt(s, 'history');
+    if (hist0 && Array.isArray(hist0.currentTensions)) {
+      hist0.currentTensions = hist0.currentTensions.filter(t => !(isRec(t) && Array.isArray(t.factions) && t.factions.some(x => typeof x === 'string' && wn.has(x))));
+    }
+    for (const holder of [ps, s]) {
+      if (holder && Array.isArray(holder.factions)) {
+        holder.factions = holder.factions.map(f => (isRec(f) && typeof f.contestsNiche === 'string' && wn.has(f.contestsNiche) ? (({ contestsNiche: _c, ...rest }) => rest)(f) : f));
+      }
+    }
+    if (Array.isArray(s.npcs)) {
+      const folded = [...wn].map(w => caseFold(str(w)));
+      s.npcs = s.npcs.map(n => {
+        if (!isRec(n)) return n;
+        const out = { ...n };
+        for (const k of NPC_AFFILIATION_KEYS) if (typeof out[k] === 'string' && wn.has(/** @type {string} */ (out[k]))) delete out[k];
+        const g = out.goal;
+        if (isRec(g)) {
+          const intent = recAt(g, 'intent') || {};
+          const tid = (/** @type {string} */ k) => str(recAt(recAt(recAt(intent, k) || {}, 'target') || {}, 'id'));
+          const said = [caseFold(str(g.short)), caseFold(str(g.long))];
+          if (wn.has(tid('short')) || wn.has(tid('long')) || folded.some(w => said.some(t => t.includes(w)))) delete out.goal;
+        }
+        if (Array.isArray(out.memberships)) {
+          out.memberships = out.memberships.filter(m => !(isRec(m) && [m.power, m.faction, m.name, m.id].some(v => typeof v === 'string' && wn.has(v))));
+        }
+        return out;
+      });
+    }
+  }
+
   const instOf = (/** @type {Rec} */ d) => recAt(recAt(recAt(recAt(d, 'economicState') || {}, 'safetyProfile') || {}, 'compound') || {}, 'inst')
     || recAt(recAt(recAt(d, 'economicState') || {}, 'compound') || {}, 'inst') || {};
   const fl = instOf(pub);
   const sfl = instOf(s);
   /** @type {Record<string, boolean>} */
   const raised = Object.fromEntries(ROSTER_FLAGS.map(k => [k, sfl[k] !== true && fl[k] !== false]));
+  // R3-CURE (unit 3): a religious house hidden whole, where no served one stands, raised 'contested property' (safetyProfile.js)
+  raised.religiousHouse = gone.some(g => RELIGIOUS_HOUSE.test(g) && !ACCESS_TO.test(g))
+    && !houses.some(h => RELIGIOUS_HOUSE.test(str(h.name)) && !ACCESS_TO.test(str(h.name)));
   const beneath = houses.some(h => BENEATH_THE_WALLS.test(str(h.name)));
   const es = recAt(s, 'economicState');
 
@@ -174,10 +243,11 @@ export function applyRosterChoices(s, pub, idOf) {
         sp.safetyDesc = sd.split(FOOTHOLD).join('organized crime has found no foothold.');
       }
     }
-    // registry: safety.crimeTypes ((b) by attribution, VR39; no type: unsure, withheld; VR29: still an array)
+    // registry: safety.crimeTypes ((b) by attribution, VR39; no type, or a type the map does not hold (R3-CURE unit 3): unsure,
+    // withheld; VR29: still an array)
     if (Array.isArray(sp.crimeTypes)) {
       sp.crimeTypes = sp.crimeTypes.filter(c => isRec(c) && typeof c.type === 'string'
-        && !(Object.prototype.hasOwnProperty.call(CRIME_TYPE_RAISERS, c.type) ? CRIME_TYPE_RAISERS[c.type] : []).some(f => raised[f]));
+        && Object.prototype.hasOwnProperty.call(CRIME_TYPE_RAISERS, c.type) && !CRIME_TYPE_RAISERS[c.type].some(f => raised[f]));
     }
     // registry: safety.plotHooks ((b): a hook of the pool no hidden house raised; a hook the pool does not hold: withheld)
     if (Array.isArray(sp.plotHooks)) {
@@ -202,6 +272,22 @@ export function applyRosterChoices(s, pub, idOf) {
   // registry: prose.criminal ((b): the criminal desk, by the house's eye)
   const blocks = recAt(recAt(s, 'publicProse') || {}, 'blocks');
   if (blocks) delete blocks['defense:criminal'];
+}
+
+/** The list with each power's share re-derived to 100 by LARGEST REMAINDER from `power` (VR11/VR31; a sum of 0 shares
+ * equally; ties by order): the SQL twin's re-derivation. @param {unknown[]} list @returns {unknown[]} */
+function largestRemainder(list) {
+  let basis = objectsOf(list).map(f => shareBasis(f.power) ?? 0);
+  let total = 0;
+  for (const b of basis) total += b;
+  if (!(total > 0)) { basis = basis.map(() => 1); total = basis.length; }
+  const q = basis.map(b => (b / total) * 100);
+  const shares = q.map(v => Math.floor(v));
+  let give = 100 - shares.reduce((a, v) => a + v, 0);
+  const order = q.map((_v, i) => i).sort((a, b) => ((q[b] - shares[b]) - (q[a] - shares[a])) || (a - b));
+  for (const i of order) { if (give <= 0) break; shares[i] += 1; give -= 1; }
+  let k = 0;
+  return list.map(f => (isRec(f) ? { ...f, power: shares[k++] } : f));
 }
 
 /** The SQL twin's _gallery_veil_truthy. @param {unknown} v @returns {boolean} */
