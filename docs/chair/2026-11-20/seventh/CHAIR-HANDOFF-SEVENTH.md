@@ -561,6 +561,13 @@ parts of the whole check (at the close).
   TOGETHER (fortune moves a ruler's standing; standing feeds who can be challenged and which calm towns the session
   sheet frames): THE JOINT COUNT AND A DOZEN WHOLE TOWNS WITH EVERY RULE LIT GO TO THE OWNER BEFORE ANY SIGN-OFF.
 
+- **About 10:30 UTC, 2026-11-20 (the chair's estimate), THE OWNER (verbatim):** "I meant your expectations of the
+  experience of a generated settlement." WHAT IT CORRECTS: the chair had answered the question "what are your
+  expectations of generated settlements now as designed" with COUNTS BY SIZE a third time; the owner asks what it
+  is LIKE to have one. THE CHAIR'S STEP: three whole towns (a village, a town, a city at untouched settings)
+  generated in the running app and every page a DM can open saved as text and pictures by a helper (the scratch
+  folder `exp/`), read by the chair before it answers: the experience described from the pages, not from counts.
+
 ## 2. Rulings of this chair (each vetoable by the owner)
 
 - **SV1 (00:05 UTC, 2026-11-20): THE VEIL'S LIST ON THREE MACHINES.** VEIL-19 owns 212, its rollback and the twin's
@@ -721,6 +728,29 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
 - **U3 MAY BE CUT BEFORE U2's SECOND CURE MERGES (10:28 UTC, to SEAT-3):** path-disjoint (new files and one
   `vite.config.js` entry); merged strictly in order; re-run at the merged tip. CS22 (c) binds the holder leaf's
   `person`.
+
+- **FORTUNE-1's PROPOSAL RULED (2026-11-20, 10:33 UTC; `FORTUNE-1-PROPOSAL.md` at fe797ede1 on
+  origin/lane/fortune-1-2026-11-20; every figure DRAFT for the owner's signature):** THE CAUSE IS BIGGER THAN THE
+  CHAIR READ: the depth term's expectation table (13 houses expected at a city that holds 42, 14 at a metropolis
+  that holds 53) carries 45% of the gap between a village and a city, the tier bonus 28%. BUILD AS PROPOSED, DARK:
+  one development figure 1 at every size (derived: the pooled mean of what the rule removes, so the world's level
+  stays and only its slope by size goes); magic's scale 0.6 at every size; the depth term by the code's own ratios
+  against measured medians (3, 5, 8, 20, 42, 53); the income-diversity bonus retired; a calm place never below Poor
+  after the label's steps; in standing the prosperity term unchanged in form and defence judged against the size's
+  usual range (four points a band); THE CUTS UNCHANGED. MEASURED ON THE PROTOTYPE (1,200 towns): calm villages
+  Approved 1% to 37%, Contested 66% to 14%; calm cities Prosperous 100% to 37% (Comfortable 37%, Moderate 23%, Poor
+  3%); calm metropolises Endorsed 91% to 0% (Tolerated 81%, Approved 19%); THE TOWN'S ROW BARELY MOVES (every size
+  now reads much as a town reads today); calm Legitimacy Crisis rises at no size. THE CHAIR'S RULINGS ON ITS THREE
+  QUESTIONS: (a) KEEP THE 75 CUT; no ruler is born Endorsed at untouched settings under the rule as proposed (today
+  that band is only a big place's): THE OWNER GETS A SECOND COLUMN at the sign-off (the smallest change of one
+  standing figure by which a place Prosperous for its size with one further earned merit opens Endorsed), measured
+  now, not built; (b) a crisis-born large place loses its size's cushion (crisis-born metropolis Legitimacy Crisis
+  12% to 21%; incumbent protected in a contest 82% to 39%; small places the other way: crisis-born village 90% to
+  43%): ACCEPTED as the rule applied to a crisis, and THE FORTUNE LAW IS NEVER LIT BEFORE THE SEAT'S LAW; the joint
+  measure is the chair's at the close; (c) the mint's textual collision with the seat's U1 is the chair's at the
+  join. ALSO: FS7 is EXHAUSTIVE for the new combinations (every line a pool can pick for Comfortable or Prosperous
+  at thorp to village and for Poor or Moderate at city and metropolis is read); `factionDynamics.js` is FORTUNE-1's
+  until "factionDynamics released at <commit>" (SEAT-3 told); a one-page plain file for the owner is owed.
 
 ## 3. The queue, in order
 
@@ -3021,3 +3051,13 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   U3 cut now (allowed). OWED TO THE OWNER IN THE CHAIR'S NEXT WORDS: the corrected figures for the goals fix; the
   13 calmer pages. WHEN "R3 <commit>" COMES: forward it to REVIEW-VEIL-12 WITH the named attack (the tell question,
   the 13 towns) and the acceptance's three conditions.
+- 10:33 UTC · THREE MESSAGES READ AT 10:30. NAMES-4: NO CODE FAULT in the cold read (every two-form call the right way round),
+  but A TEST GAP: a swapped pair often reds no test (8 of the first 18 narrativeText swaps survived 91 tests: the
+  new test reads only the first verb after the name): cured by a TEST from its builder (ad79aa8b1), red-proven by a
+  committed mutation tool, no src touched; THE CONFINEMENT EXECUTED IN FULL (golden 525 and census 720): 0
+  non-string, 0 other; golden 899 strings (891 number-only, 8 possessive), census 971 (918, 53): the hand-back's
+  figures reproduced. FORTUNE-1: "FORTUNE-PROPOSAL fe797ede1": RULED at 10:33 (section 2). GOALS-1: the depth table
+  (556a6d3d9): T1 25 goal lines in 10 cells and 13 tie pairs in 5 archetypes; T2 110 and 49; T3 243 and 91: BY THE
+  CHAIR'S RULE T1; rotation's rungs (another house, untied, no shared power) in its builder's hands; the ties'
+  frozen head its own unit. THE OWNER CLARIFIED HIS QUESTION AT ABOUT 10:30 (section 1): three whole towns are being
+  captured from the running app for the chair to read before it answers.
