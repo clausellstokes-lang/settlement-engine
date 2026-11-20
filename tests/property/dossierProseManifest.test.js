@@ -484,7 +484,10 @@ describe('the two controls no one-audience manifest can see', () => {
     }
     // 12 -> 13 (W2 DEF stress-type keys, 2026-11-07): DS-DEF-8's `override: INFILTRATION ACTIVE` holds three dm-only lines and
     // one player-safe line that says no more than the posture banner, so the player face speaks there too.
-    expect(mixed.size, 'mixed pools in the shipped corpus').toBe(13);
+    // BUILD-1-FINISH (2026-11-20, the chair's ruling of 18:46 UTC, measured at lane/prose-2-2026-11-20-build1 against the base
+    // 87f03395b): 13 -> 16, three pools gain BUILD-1's dm-only lines beside their unmarked ones (the chair's 17:28 ruling 9(2)):
+    // DS-DEF-4 structure null (v4-v7), DS-DEF-4 FIXTURE: black market (v3-v6), DS-POW-6 operation role duty evasion (v4-v7).
+    expect(mixed.size, 'mixed pools in the shipped corpus').toBe(16);
     /** @type {Map<string, {dm?: object, player?: object}>} */
     const byPosition = new Map();
     for (const cell of run.cells) {
