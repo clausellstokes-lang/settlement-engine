@@ -1,0 +1,60 @@
+FRAME-8 · F3+F4: THE LINES, FOR THE CHAIR'S EYE (COMMON-RULES 12). Written 2026-11-20T22:01Z (`date -u`) on frame8-f3f4 (cut at accd953ef; src = a42e90d89).
+Nothing under src/ is changed. Measured over the 330-town pool (frame6/tools/pool.mjs 55: tried 484, calm 330, framed 63 = W1 19, W2 13, W3 26, W4 5).
+Each line below was COMPOSED from the record by a script at this tree (scratch F3F4/lines.mjs), not typed.
+
+THE ROW: a THIRD Facts row (`sheet.facts`, beside Food and Defence), ONLY on the owner's FRAMED sheet, and only where the strain says so.
+  Its own label is needed: every renderer prints a Facts row as label + text. Two new TONIGHT_COPY keys (CF9's closed set widens by them):
+    supply: 'Supply'      (F3, W3 sheets only)
+    hall:   'The hall'    (F4, W4 sheets only; the Power tab's own heading for this fact, WhoRunsThisTownPanel.jsx "The hall")
+  A sheet is W3 or W4, never both: one new row at most. Calm sheets, stranger sheets, W1 and W2 sheets: no row, today's bytes.
+
+F3 (W3): "{chainPrintName(chain, town).label}: {chainSourceOf(chain, printed)} ({cause})."
+  {cause} = the new leaf src/domain/display/chainCauseShown.js :: chainCauseOf(chain): the record's own `resourceCondition`
+  where it is in the leaf's vocabulary (today ONE word: 'depleted'), else null; no line on null. No reader of the tree returns it
+  (chainHouses.js, chainStateShown.js, chainPrintName.js read: none does), so the leaf is new. Its shape is the Economics card's own
+  "From" read ("Hunting grounds (depleted)"), the chain's printed name before it: the W3 words as approved (F1-F5-RESULTS' "way through").
+  WHICH CHAIN: the FIRST impaired chain (`status: 'impaired'`) in `economicState.activeChains`' own order (the chain model's sort, the
+  order the Economics tab lists them): no draw, ONE chain printed. 26 W3 sheets carry 1..8 impaired chains (5 carry 1, 8 carry 2,
+  13 carry 3+) on 1..4 grounds; all 101 are `resourceCondition: 'depleted'` (101/101 = `resourceDepleted`), every grade 'impaired-chain'.
+  Two real sheets, as printed:
+   frame-calm-village-20 (W3)
+    Table View / Session Mode:  Supply Leather & Hides: Hunting grounds (depleted).
+    PDF (label column | text):  Supply   | Leather & Hides: Hunting grounds (depleted).
+    Foundry journal:            - **Supply**: Leather & Hides: Hunting grounds (depleted).
+    (above it, unchanged: "Food Secure. No granary; about a month and a half in household stores." / "Defence No walls and no standing force.")
+   frame-calm-city-22 (W3; 5 impaired chains on 2 grounds: the first is printed, the other four are not)
+    Table View / Session Mode:  Supply Alchemy & Reagents: Magical ley line node (depleted).
+    PDF:                        Supply   | Alchemy & Reagents: Magical ley line node (depleted).
+    Foundry journal:            - **Supply**: Alchemy & Reagents: Magical ley line node (depleted).
+  Reach: 26 of 26 W3 sheets (0 today). THE BAR: the commonest F3 line is "Textiles & Cloth: Grazing land (depleted)." on 7 of 55
+  metropolises (12.7%); every other size under 4%.
+  The alternative not proposed (the chair's if wanted): every ground once with its chains, e.g. metropolis-44 would print
+  4 grounds and 8 chains in one row ("Textiles & Cloth, Cloth Finishing & Clothing: Grazing land (depleted); ...").
+
+F4 (W4): "The ruling seat is {CAPTURE_RUNG_LABELS[rung], first letter lower-cased}."   (the label imported, never copied)
+  rung = `powerStructure.criminalCaptureState` (the Power tab's own read, patronage.js :: hallOf), printed only where it is
+  'corrupted' or 'capture' (troubleCast.js :: HALL_TAKEN). Absent, deleted by the veil (publicSafe.js deletes it), or any other
+  rung: no row. No audience, an unknown one, a stranger: no frame, so no row (the frame's first lock).
+  All five W4 owner sheets, as printed (all five rungs are 'corrupted'; the pool holds no 'capture'):
+   frame-calm-town-20, -town-80, frame-calm-city-12, -city-49, frame-calm-metropolis-51, each:
+    Table View / Session Mode:  The hall The ruling seat is partly in criminal hands.
+    PDF:                        The hall | The ruling seat is partly in criminal hands.
+    Foundry journal:            - **The hall**: The ruling seat is partly in criminal hands.
+  On a 'capture' rung the same sentence reads: "The ruling seat is run by the criminals."
+  Reach: 5 of 5 W4 sheets (0 today); 2 of 55 towns, 2 of 55 cities, 1 of 55 metropolises (under 4%).
+  The export read, for the join (safetyShown.js's clauses): data/people/dmPowerLines.js :: CAPTURE_RUNG_LABELS.
+
+THE RENDERERS. Every surface prints `sheet.facts` whole (a map over the rows), so a third row needs NO renderer change:
+  Table View and Session Mode: components/TonightSheet.jsx (both mount it); the PDF: pdf/sections/TonightAtTheTable.jsx;
+  the Foundry journal: foundry/journalPages.js :: tonightPage. Two other readers of the owner's facts (journalPages' crisis page,
+  pdf CrisisSections, crisisPage.js) read them only for a town in crisis, which draws no frame: they see no new row.
+  Changed files (proposed): tonightSheet.js (the row; TonightFact.id gains 'supply' | 'hall'), the new leaf, tests.
+
+WHAT THE CODE SAID THAT THE BRIEF DID NOT:
+  1. The sheet's frame does not carry its strain (TroubleFrame: type, at, line, hooks, sides): the sheet must ask
+     troubleOfWeight(source) again, or castTroubleFrame returns `strain` (one field, not stored). I propose the latter.
+  2. W4 is decided on `factions[].captureState`; the Power tab's label reads `criminalCaptureState`. They agree 5 of 5; the row needs both.
+  3. The four files' inline "(depleted)" reads the flag `resourceDepleted`, not `resourceCondition`: equal on 101 of 101. The walker holds the WORD.
+  4. First paint: tonightSheet.js is lazy (its readers: TableView and SessionMode by React.lazy, the PDF, the journal, crisisPage);
+     chainPrintName/chainHouses/dmPowerLines are already imported by generator modules (I did not measure their chunk). FRAME-8's build is the proof.
+  5. Security reader: F4 reads a fact about crime (owner-only by construction: frame-gated). F3 names no house.
