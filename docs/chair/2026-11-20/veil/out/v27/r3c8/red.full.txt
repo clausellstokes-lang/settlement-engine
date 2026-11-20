@@ -1,0 +1,42 @@
+
+- Expected
++ Received
+
+- []
++ [
++   "hand-services own dm=false gallery: server more [] | twin more [\"criminal:Keyless criminal\",\"criminal:Swept criminal\"]",
++   "hand-services own dm=false map: server more [] | twin more [\"criminal:Keyless criminal\",\"criminal:Swept criminal\"]",
++   "hand-services own dm=false link: server more [] | twin more [\"criminal:Keyless criminal\",\"criminal:Swept criminal\"]",
++   "hand-services own dm=false import: server more [] | twin more [\"criminal:Keyless criminal\",\"criminal:Swept criminal\"]",
++   "hand-services g:100 dm=false gallery: server more [] | twin more [\"criminal:Keyless criminal\",\"criminal:Swept criminal\"]",
++   "hand-services g:101 dm=false gallery: server more [] | twin more [\"criminal:Keyless criminal\",\"criminal:Swept criminal\"]",
++   "hand-services g:110 dm=false gallery: server more [] | twin more [\"criminal:Keyless criminal\",\"criminal:Swept criminal\"]",
++   "hand-services allOpen dm=false gallery: server more [] | twin more [\"criminal:Keyless criminal\",\"criminal:Swept criminal\"]",
++   "hand-services own dm=true gallery: server more [] | twin more [\"criminal:Keyless criminal\",\"criminal:Swept criminal\"]",
++   "hand-services own dm=true map: server more [] | twin more [\"criminal:Keyless criminal\",\"criminal:Swept criminal\"]",
++   "hand-services own dm=true import: server more [] | twin more [\"criminal:Keyless criminal\",\"criminal:Swept criminal\"]",
++   "hand-services g:100 dm=true gallery: server more [] | twin more [\"criminal:Keyless criminal\",\"criminal:Swept criminal\"]",
++   "hand-services g:101 dm=true gallery: server more [] | twin more [\"criminal:Keyless criminal\",\"criminal:Swept criminal\"]",
++   "hand-services g:110 dm=true gallery: server more [] | twin more [\"criminal:Keyless criminal\",\"criminal:Swept criminal\"]",
++   "hand-services allOpen dm=true gallery: server more [] | twin more [\"criminal:Keyless criminal\",\"criminal:Swept criminal\"]",
++ ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:1134:17
+    1132|     expect(compared).toBe(2 * 10 + 5);
+    1133|     expect(rows).toEqual([]);
+    1134|     expect(bad).toEqual([]);
+       |                 ^
+    1135|   }, ARM_TIMEOUT_MS);
+    1136| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/11]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  11 failed | 25 skipped (36)
+   Start at  17:42:56
+   Duration  654.79s (transform 4.06s, setup 32ms, import 178ms, tests 654.29s, environment 0ms)
+
+[gate-tail] end:  17:53:51 up  2:57,  0 user,  load average: 8.97, 8.10, 7.24
+[gate-tail] full log: /tmp/gate-tail.7906.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
