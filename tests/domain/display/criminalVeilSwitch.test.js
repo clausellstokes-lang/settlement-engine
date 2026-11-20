@@ -241,8 +241,28 @@ describe('the switch over a hand-made town', () => {
     expect(offers.has('class:faction:members'), "the Powers' members switch, usable").toBe(true);
     const d = defaultVeilFor(master);
     expect(setCriminalVeil([], d, false, undefined, m)).toContainEqual({ address: `field:faction:${id}:members`, hidden: false });
+    // R3-CURE-4 unit 4 (the chair's word of 11:12 UTC: VR34 (b) RE-STATED; the behaviour stands). R3-CURE 06e9e64b3 put
+    // power.entry on master's top-level list: where a criminal house is hidden whole, a criminal power that is not the
+    // governing one leaves BOTH lists WHOLE (its weight a hidden house could have raised; power.entry's reach fails toward
+    // withholding), so the old pin's `shut.factions[0]` no longer exists. BOTH ARMS, by the lane's rule:
+    const served = (doc) => [...(doc.powerStructure?.factions || []), ...(doc.factions || [])].filter((f) => f?.faction === 'Red hand' || f?.name === 'Red hand');
+    // (1) THE DEFAULT (the den hidden whole): the row is withheld whole on both lists, members and all
     const shut = applyVeil(master, resolveVeil(d, []));
-    expect(shut.factions[0].members, 'the default shuts it on every copy').toBeUndefined();
+    expect(served(shut), 'a criminal house hidden: the criminal power leaves both lists whole').toEqual([]);
+    expect(JSON.stringify(shut).includes('Red hand'), 'no copy of its name is served').toBe(false);
+    // (2) THE SWITCH ON (every criminal part shown, the den shown, so no criminal house is hidden): the row is served on both
+    // lists, its members included, as stored
+    const on = setCriminalVeil([], d, false, undefined, m);
+    const open = applyVeil(master, resolveVeil(d, on));
+    expect(open.powerStructure.factions.map((f) => f.faction), 'the switch on, no house hidden: the power row is served').toEqual(['Red hand']);
+    expect(open.factions[0].members, 'its members, on master\'s top-level list').toEqual([{ id: 'n1', name: 'Ada', role: 'Fence' }]);
+    // (3) THE SWITCH ON AND A CRIMINAL HOUSE HIDDEN ELSEWHERE (a second criminal house hidden by hand): withheld whole again
+    const m2 = { ...master, institutions: [...master.institutions, { id: 'inst-cove', name: "Smugglers' cove", category: 'Criminal', desc: 'A cove.' }] };
+    const d2 = defaultVeilFor(m2);
+    const on2 = setCriminalVeil([], d2, false, undefined, curateModelFor(m2, []));
+    const cove = `card:institution:${CARD_KINDS.institution.idOf(m2.institutions[2])}`;
+    expect(served(applyVeil(m2, resolveVeil(d2, on2))).length, 'the switch on, the cove shown: served').toBeGreaterThan(0);
+    expect(served(applyVeil(m2, resolveVeil(d2, [...on2, { address: cove, hidden: true }]))), 'the switch on, a criminal house hidden: withheld whole').toEqual([]);
   });
 
   it('a town with no criminal part reads none and a flip changes nothing (the static groupings count only over content)', () => {
