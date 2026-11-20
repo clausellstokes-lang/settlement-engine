@@ -34,12 +34,13 @@ it('rc', async () => {
   const guildRule = (cfg, insts, tier) => { const f = PH.getInstFlags(cfg, insts); const ce = f.criminalEffective; const mk = hasMarket ? hasMarket(insts) : true;
     return ce > 42 && (tier === 'city' || tier === 'metropolis' || ce > 58) && (!['thorp', 'hamlet', 'village'].includes(tier) || mk); };
   for (let k = 0; k < N; k += 1) for (const size of ['village', 'town', 'city', 'city', 'metropolis', 'metropolis']) for (const crisis of ['none', 'indebted', 'insurgency', 'famine', 'infiltrated', 'politically_fractured', 'none', 'wartime']) {
-    n += 1; const seed = `rv12-rc-${size}-${crisis}-${k}-${n}`;
+    n += 1; const seed = `rv12-rc-${size}-${crisis}-${k}-${n}`; if (process.env.RV12_ONLY && seed !== process.env.RV12_ONLY) continue;
     const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: n % 2 === 0, magicExists: true, contentProfile: 'grounded', ...(n % 2 ? { priorities: { ...(DEFAULT_CONFIG.priorities || {}), criminal: 85 } } : {}) };
     const cfg = birthConfig({ ...DEFAULT_CONFIG, ...dials, settType: size, ...(crisis !== 'none' ? { selectedStresses: [crisis], selectedStressesRandom: false } : {}) });
     let A = generateSettlementPipeline(cfg, null, { seed, customContent: {} });
     A = { ...A }; if (compose) { delete A.publicProse; A = withPP(A, compose(A)); } A = JSON.parse(JSON.stringify(A));
     const hid = (A.institutions || []).filter(hideable); if (CONTROL ? hid.length : !hid.length) continue;
+    if (process.env.RV12_PLANT && hid[0]) { const old = hid[0].name; hid[0].name = `${old} (the Black Hand)`; const rn = (v) => (typeof v === 'string' ? v.split(old).join(hid[0].name) : Array.isArray(v) ? v.map(rn) : isRec(v) ? Object.fromEntries(Object.entries(v).map(([kk, x]) => [kk, rn(x)])) : v); A = rn(A); }
     const kept = (A.institutions || []).filter((h) => !hideable(h));
     let rule = null; try { rule = { all: guildRule(A.config || cfg, A.institutions || [], size), without: guildRule(A.config || cfg, kept, size) }; } catch (e) { rule = { err: String(e.message).slice(0, 60) }; }
     const stF = A.powerStructure?.factions || []; const gov = stF.find((f) => f?.isGoverning); const govName = gov ? fname(gov) : null;
@@ -78,9 +79,23 @@ it('rc', async () => {
         // every served criminal power: none stored-and-raised; label distribution
         let key = null; try { key = CSK.criminalStructureKeyOf(D); } catch { key = 'threw'; }
         labels[`${tag} ${String(key)}`] = (labels[`${tag} ${String(key)}`] || 0) + 1;
+        // the derived key's FEEDERS as served (R3-CURE's acceptance leak: every served field that feeds the key is re-derived
+        // over the houses the read serves, or withheld): presence rates, compared with the control pool's
+        const servedCrimHouse = (D.institutions || []).some(hideable); const servedCrimPower = sF.some((f) => f?.category === 'criminal');
+        const feed = { ci: (D.economicState?.safetyProfile?.criminalInstitutions || []).length > 0, chains: (() => { try { return CSK.runningCriminalChains(D).length > 0; } catch { return false; } })(),
+          covert: (() => { try { return CSK.covertCrimeHeld(D); } catch { return false; } })(), rings: (() => { try { return (CSK.ringHousesOf(D) || []).length > 0; } catch { return false; } })() };
+        if (!servedCrimHouse && !servedCrimPower && door === 'gallery' && !dm) for (const e of D.economicState?.safetyProfile?.criminalInstitutions || []) { const lab = `ci entry ${typeof e === 'string' ? e : (e?.name || e?.type || JSON.stringify(e)).slice(0, 60)}`; labels[lab] = (labels[lab] || 0) + 1; } for (const [fk, fv] of Object.entries(feed)) { const kk = `${tag} feeder ${fk} ${servedCrimHouse || servedCrimPower ? 'with' : 'NO'} served criminal house/power`; labels[kk] = (labels[kk] || 0) + (fv ? 1 : 0); labels[`${kk} (towns)`] = (labels[`${kk} (towns)`] || 0) + 1; }
+        // the fold: every withheld house's and power's name AND its bare form (no bracketed qualifier), case-folded, as a
+        // string or a key, in no served string
+        const foldOf = (x) => { const a = String(x || '').toLowerCase().trim(); const b = a.replace(/\s*\([^)]*\)\s*/g, ' ').trim(); return [...new Set([a, b])].filter((z) => z.length >= 5); };
+        const servedPowNames = new Set(names.map((x) => x.toLowerCase()));
+        const goneNames = [...(A.institutions || []).filter((h) => !servedHouses.has(String(h?.name || '').toLowerCase())).map((h) => h.name), ...stF.filter((f) => !names.includes(fname(f))).map(fname)];
+        const low = all.map((x) => x.toLowerCase());
+        for (const g of goneNames) for (const f of foldOf(g)) { if (servedHouses.has(f) || servedPowNames.has(f)) continue; const re = new RegExp(`(^|[^a-z])${f.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}($|[^a-z])`); const hit = low.find((x) => re.test(x));
+          bump(`FOLD a withheld name or its bare form in no served string or key (${tag})`, !!hit, `${seed}: "${f}" (of "${g}") in "${String(hit || '').slice(0, 90)}"`); }
         // a removed power's name in no served string (beyond a served house or a served power of the same name)
         for (const f of stF) { const nm = fname(f); if (!nm || names.includes(nm) || servedHouses.has(nm.toLowerCase())) continue;
-          const hit = all.filter((s) => s.includes(nm)); bump(`removed power "${f.category}" name in no served string (${tag})`, hit.length > 0, `${seed}: "${nm}" in "${(hit[0] || '').slice(0, 100)}"`); }
+          const hit = all.filter((s) => s.includes(nm)); const pth = []; const pw = (v, p) => { if (typeof v === 'string') { if (v.includes(nm)) pth.push(p.replace(/\.\d+(?=\.|$)/g, '[]')); } else if (Array.isArray(v)) v.forEach((x, i) => pw(x, `${p}.${i}`)); else if (isRec(v)) for (const [kk, x] of Object.entries(v)) { if (kk.includes(nm)) pth.push(`${p}.{key}`); pw(x, `${p}.${kk}`); } }; if (hit.length) { pw(D, ''); bump(`removed power name at ${[...new Set(pth)].join(',')} (${tag})`, true, seed); } bump(`removed power "${f.category}" name in no served string (${tag})`, hit.length > 0, `${seed}: "${nm}" in "${(hit[0] || '').slice(0, Number(process.env.RV12_EXW || 100))}"`); }
       }
     }
   }

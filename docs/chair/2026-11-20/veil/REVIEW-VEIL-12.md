@@ -75,3 +75,21 @@ every other card removed, every hideable house removed, every person id re-keyed
 house record not stamped public, nor a hidden house's record, on a Reveal-DM-off page (0 of 1,884). Owner against visitor:
 78 of 3,830 cards print a different form, **every one a woman whose served card carries no gender** (0 of 2,858 otherwise;
 `hon-at-4c753ec52-bygender.txt`): that is VR48's field, read at R4.
+
+## 3. Pre-measure of the R3 cure 4db8e4208 (UNMERGED, not a stage read; 09:18 UTC)
+
+`rc.probe.jsx` sharpened on the chair's three owed points (the fold: a withheld name and its bare form, word-bounded, as a
+string or a key, with a bracketed-qualifier plant `RV12_PLANT=1`; the derived key's feeders against the control pool;
+Reveal-DM goals). Chain `r3c212`. 35 towns with a hideable house, groupings opened, every hideable house hidden; 28-town
+control (`out/rc-at-4db8e4208-*.txt`; the lane's own run `rc-at-c1b772e55-plant.txt`).
+- CURED there: the guild raised by hidden houses leaves whole (rows 24/24 at the lane -> 0/24; name traces 24/24 -> 0/24;
+  memberships 6/24 -> 0/24); faction shares sum 100 on every town (6 below at the lane -> 0); VR42 0/8, 4 of them towns
+  where a criminal-worded governing power stands beside a guild the hidden houses raised.
+- LEAD 1, TIER 1: a SHOWN power's `powerStructure.factions[].desc` names the withheld guild ("…they play Thieves' Guild and
+  City-State Council against each other when they can. A slow war with the guild: arrests are made, the gangs rebuild…";
+  rv12-rc-metropolis-indebted-0-42; all four reads).
+- LEAD 2, THE OBSERVABLE: with nothing criminal served, the served operations list carries "Rival Gangs" in 17 of 33 towns
+  (control 0 of 28), "Gambling District" 14 (0), "Red Light District" 13 (2), "Gambling Halls" 9 (2); the derived key reads
+  semi-organized in 29 of 35 against the control's 5 of 29 (my hidden pool is crime-heavy by its dials: a confounder).
+- The fold's one remaining hit: "black marketeer" served with Reveal DM on (a holder of the hidden Black market: R4's VR9;
+  that branch has no R4).
