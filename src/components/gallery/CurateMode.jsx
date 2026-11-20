@@ -18,9 +18,9 @@
  * reads and writes only the eyes THIS screen draws (the seventh chair's ruling VR34: a switch
  * sets only what a hand can see and undo on that record): it is handed the same model the
  * sections are drawn from. Where it reads shown or partly while a criminal house is hidden whole
- * (criminalHouseHiddenWhileShown, the seventh chair's ruling 38 (c)), its group says in one sentence
- * that the town's criminal powers stay off the shared page while the house is hidden; the sentence
- * sets nothing.
+ * on a town that has a criminal power (criminalHouseHiddenWhileShown, the seventh chair's ruling
+ * 38 (c) and its ruling on the notice), its group says that the town's criminal powers stay off the
+ * shared page while the house is hidden; the notice sets nothing.
  *
  * THE AFFORDANCE SLOT (X-23): wave three's shared slot primitive has not landed. The eye is
  * rendered by `CurateEye` at the slot's position, the trailing end of a card header or a
@@ -107,7 +107,7 @@ function Box({ card, preview, onToggle, mobile }) {
  * "Hide everything criminal": the label, the one line of what it covers, its state read from the
  * draft, and the one button. Disabled, with its words, on a town with no criminal part. It wraps
  * at phone width (the words take the row, the button drops under them). With `houseHidden` (a
- * criminal house hidden while it reads shown or partly) it adds the one sentence of the notice.
+ * criminal house hidden while it reads shown or partly, on a town with a criminal power) it adds the notice.
  * @param {{ state: 'none'|'hidden'|'shown'|'partly', onFlip: () => void, mobile: boolean, houseHidden?: boolean }} props
  */
 export function CriminalSwitch({ state, onFlip, mobile, houseHidden = false }) {
@@ -186,8 +186,8 @@ export default function CurateMode({ payload, deltas, onDone, onCancel }) {
   // VR34: the switch covers only the eyes this model draws (its addresses do not depend on the draft).
   const criminal = criminalSwitchStateOf(model.defaults, draft, present, model);
   const flipCriminal = () => setDraft(d => flipCriminalVeil(d, model.defaults, present, model));
-  // Ruling 38 (c): the notice where a criminal house hidden whole keeps the criminal powers off the shared page.
-  const houseHidden = criminalHouseHiddenWhileShown(criminal, model);
+  // Ruling 38 (c): the notice where a criminal house hidden whole keeps the town's criminal powers off the shared page.
+  const houseHidden = criminalHouseHiddenWhileShown(criminal, model, payload);
 
   return (
     <div role="region" aria-label="Curate for visitors" style={{

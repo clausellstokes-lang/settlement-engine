@@ -1,13 +1,13 @@
-[gate-tail] start:  11:33:35 up 20 min,  0 user,  load average: 5.14, 5.21, 3.47 · cores: 4
+[gate-tail] start:  11:48:32 up 35 min,  0 user,  load average: 6.96, 5.81, 4.51 · cores: 4
 
  RUN  v4.1.8 /home/user/wt/curate
 
 
  Test Files  1 passed (1)
-      Tests  14 passed (14)
-   Start at  11:33:37
-   Duration  6.20s (transform 1.77s, setup 72ms, import 2.52s, tests 2.38s, environment 1.02s)
+      Tests  16 passed (16)
+   Start at  11:48:33
+   Duration  5.94s (transform 1.45s, setup 83ms, import 2.00s, tests 2.93s, environment 752ms)
 
-[gate-tail] end:  11:33:43 up 21 min,  0 user,  load average: 5.19, 5.22, 3.49
-[gate-tail] full log: /tmp/gate-tail.3816.log
+[gate-tail] end:  11:48:39 up 36 min,  0 user,  load average: 6.97, 5.83, 4.52
+[gate-tail] full log: /tmp/gate-tail.7255.log
 [gate-tail] exit: 0 (the gate's own status, not a pipe's)

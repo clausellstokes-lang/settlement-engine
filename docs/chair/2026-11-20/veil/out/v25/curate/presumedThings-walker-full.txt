@@ -1,9 +1,9 @@
-[gate-tail] start:  11:34:14 up 21 min,  0 user,  load average: 4.73, 5.11, 3.51 · cores: 4
+[gate-tail] start:  11:51:36 up 38 min,  0 user,  load average: 8.40, 7.21, 5.29 · cores: 4
 
  RUN  v4.1.8 /home/user/wt/curate
 
- ❯ tests/lint/presumedThings.walker.test.js (43 tests | 1 failed) 76203ms
-     × ⛔ every source literal that names a thing declares it, or has its row 29ms
+ ❯ tests/lint/presumedThings.walker.test.js (43 tests | 1 failed) 87100ms
+     × ⛔ every source literal that names a thing declares it, or has its row 39ms
 
 ⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
 
@@ -76,7 +76,7 @@ AssertionError: declare the thing on the line (needs or excludes, with its twin)
 
  Test Files  1 failed (1)
       Tests  1 failed | 42 passed (43)
-   Start at  11:34:15
-   Duration  131.54s (transform 3.04s, setup 49ms, import 55.12s, tests 76.20s, environment 0ms)
+   Start at  11:51:37
+   Duration  139.63s (transform 2.87s, setup 33ms, import 52.35s, tests 87.10s, environment 0ms)
 
-[gate-tail] end:  11:36:27 up 23 min,  0 user,  load average: 3.86, 4.68, 3.58
+[gate-tail] end:  11:53:57 up 41 min,  0 user,  load average: 6.28, 6.85, 5.45

@@ -116,7 +116,7 @@ export const CRIMINAL_SWITCH_WORDS = Object.freeze({
   shown: 'Shown to visitors',
   partly: 'Partly shown, by you',
   none: 'This town has no criminal parts',
-  housesHidden: "While a criminal house is hidden, the town's criminal powers are kept off the shared page too, so they cannot give the house away; show the house to show them, or leave it hidden and they stay off.",
+  housesHidden: "While a criminal house is hidden, the town's criminal powers stay off the shared page too, so they cannot give the house away. Show the house to show them, or leave it hidden and they stay off.",
 });
 
 /**
@@ -263,16 +263,41 @@ export function criminalSwitchStateOf(defaults, deltas, present, model) {
  * is hideable (isHideableHouse, X-21e), which is exactly where curateModelFor draws a whole-house eye
  * and reads it hidden. Every hideable house is in the criminal family (its card's default class is
  * covert-brokerage, clandestine-institution or criminal-institution), so it is a criminal house.
- * Reads only the model the screen already draws; sets nothing.
+ * AND (the chair's ruling on the notice) the town HAS a criminal power: a power whose `category` is
+ * 'criminal' (any case, as cardVeil.js :: isVeiledPower and R3's power.entry read it) in
+ * `powerStructure.factions` or in master's top-level `factions`, read from the screen's own copy.
+ * Reads only the model and the payload the screen already holds; sets nothing.
  * @param {'none'|'hidden'|'shown'|'partly'} state  criminalSwitchStateOf(...)
  * @param {{ sections: ReadonlyArray<{ cards: ReadonlyArray<{ whole: { hidden: boolean } | null }> }> } | null | undefined} model  curateModelFor(payload, draft)
+ * @param {unknown} payload  galleryPayloadFor's output, the curate screen's own copy
  * @returns {boolean}
  */
-export function criminalHouseHiddenWhileShown(state, model) {
+export function criminalHouseHiddenWhileShown(state, model, payload) {
   if (state !== 'shown' && state !== 'partly') return false;
   /** @type {ReadonlyArray<{ cards: ReadonlyArray<{ whole: { hidden: boolean } | null }> }>} */
   const sections = model && Array.isArray(model.sections) ? model.sections : [];
-  return sections.some(sec => sec.cards.some(c => !!c.whole && c.whole.hidden === true));
+  if (!sections.some(sec => sec.cards.some(c => !!c.whole && c.whole.hidden === true))) return false;
+  return hasCriminalPower(payload);
+}
+
+/**
+ * Does the copy hold a criminal power: `category` 'criminal' (any case) in `powerStructure.factions`
+ * or in the top-level `factions` (master's stored shape)?
+ * @param {unknown} payload
+ * @returns {boolean}
+ */
+function hasCriminalPower(payload) {
+  /** @param {unknown} v @returns {Record<string, unknown> | null} */
+  const rec = (v) => (v && typeof v === 'object' && !Array.isArray(v) ? /** @type {Record<string, unknown>} */ (v) : null);
+  /** @param {unknown} list @returns {boolean} */
+  const anyCriminal = (list) => Array.isArray(list) && list.some((f) => {
+    const r = rec(f);
+    return !!r && typeof r.category === 'string' && r.category.toLowerCase() === 'criminal';
+  });
+  const p = rec(payload);
+  if (!p) return false;
+  const ps = rec(p.powerStructure);
+  return anyCriminal(ps ? ps.factions : null) || anyCriminal(p.factions);
 }
 
 /**

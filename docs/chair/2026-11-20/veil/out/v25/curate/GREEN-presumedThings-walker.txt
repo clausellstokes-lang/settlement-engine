@@ -24,9 +24,9 @@
 
  Test Files  1 failed (1)
       Tests  1 failed | 42 passed (43)
-   Start at  11:34:15
-   Duration  131.54s (transform 3.04s, setup 49ms, import 55.12s, tests 76.20s, environment 0ms)
+   Start at  11:51:37
+   Duration  139.63s (transform 2.87s, setup 33ms, import 52.35s, tests 87.10s, environment 0ms)
 
-[gate-tail] end:  11:36:27 up 23 min,  0 user,  load average: 3.86, 4.68, 3.58
-[gate-tail] full log: /tmp/gate-tail.3991.log
+[gate-tail] end:  11:53:57 up 41 min,  0 user,  load average: 6.28, 6.85, 5.45
+[gate-tail] full log: /tmp/gate-tail.7841.log
 [gate-tail] exit: 1 (the gate's own status, not a pipe's)
