@@ -1,6 +1,6 @@
 # FRAME-6 · F1–F5 — the chair's rulings on the six sheets (results)
 
-Written 2026-11-20T16:15Z, last updated 2026-11-20T16:32Z (`date -u`) by FRAME-6's builder of F1–F5 on `frame6-f` (cut at `038186160`). The brief is `F1-F5-SHEET-RULINGS.md`. Updated at each commit.
+Written 2026-11-20T16:15Z, last updated 2026-11-20T16:36Z (`date -u`) by FRAME-6's builder of F1–F5 on `frame6-f` (cut at `038186160`). The brief is `F1-F5-SHEET-RULINGS.md`. Updated at each commit.
 
 **Instruments** (in `frame6/tools/F/`): `measure.mjs <pool.json> <src/> <out.json>` composes the owner's and a stranger's sheet for every town of the 330-town calm pool (born at `4971555c3`'s generator, identical here), digests both (sha256 of the sheet's JSON, 16 hex) and prints the five counts; `cmp.mjs <a.json> <b.json>` compares two runs' digests (stranger, calm owner, framed owner); `faces.mjs <pool.json> <srcA/> <srcB/> <seed…>` prints each moved town's sides and people at two trees. BASE = an archive of `038186160`'s `src/`. Every number below is from these runs; the test (`tests/domain/tension/frameSheetRulings.test.js`) re-establishes each ruling's count on fresh births of the 63 framed towns.
 
@@ -52,3 +52,25 @@ Written 2026-11-20T16:15Z, last updated 2026-11-20T16:32Z (`date -u`) by FRAME-6
 **Gates (F2):** `tests/domain/tension` whole 5 files 44 passed; `tests/domain/summary` whole + every test file importing `tonightSheet.js` (36) + crisisKeeperBothDoors + noLegacyFactionReaders.walker: 44 files, before the troubleCast re-pin 1 failed (that pin) / 281 passed / 1 expected fail, after it the tension directory 44/44 green; `typecheck:ratchet` 167/167, `typecheck:domain:strict` 1113/1113, `lint` 0 errors (38 warnings, none in a changed file).
 
 **(d) for the security reader:** a stand-in ("The High Priestess") can now stand on the OWNER's frame and among the owner's people to voice; a stranger's sheet is today's (330/330). The `role` blanking is inside `frameOf`, which only the owner's composition reaches.
+
+## F3 — STOPPED BEFORE BUILDING: the Economics tab composes the cause inline (commit 3, this report only)
+
+**The brief's condition** ("through the reader the Economics tab already uses for that chain … if the tab composes the words inline with no reader a second surface can call, STOP and report before building") **is met.** Read in `src/components/new/tabs/EconomicsTab.jsx :: EconomicFlowsSection`, the impaired chain's card is put together from:
+- its NAME through a reader: `domain/display/chainPrintName.js :: chainPrintName(chain, town).label` ("Leather & Hides"), callable;
+- its SOURCE through a reader: `chainFlowFacts(chain, instNames, shown, town).resource` (`components/new/SupplyChainsPanel.jsx`, a component file), which is `domain/display/chainHouses.js :: chainSourceOf(chain, printed)` ("Hunting grounds"), callable;
+- its CAUSE inline, in the JSX: `` `${facts.resource}${facts.resourceDepleted?' (depleted)':''}` `` (EconomicsTab.jsx line 197), the same clause written again inline in `SupplyChainsPanel.jsx` line 56, `pdf/sections/SupplyChainFlow.jsx` line 133 and `pdf/sections/Services.jsx` line 230;
+- its STATE word inline: `FLOW_STATUS.impaired.label` "Impaired" (EconomicsTab.jsx line 85, a component constant).
+
+No reader returns the chain together with its cause, so the sheet's line would be a second wording of the tab's inline "(depleted)". Nothing was built for F3, and by the integrator's rule (a ruling refuted: stop at it, commit what is proven, end) **F4, F5 and the sheets (F6) were not built either.**
+
+**What the record holds (measured at the F2 tip, `tools/F/w3.mjs <pool.json> <src/>`):** the 26 W3 owner sheets carry 101 impaired chains, and every one of the 101 is impaired by a ground worked out: `resourceDepleted: true`, `resourceCondition: 'depleted'` (the record's own word). village-20: `{ label: 'Leather & Hides', resource: 'Hunting grounds', resourceCondition: 'depleted' }`; `chainPrintName` and `chainSourceOf` give "Leather & Hides" and "Hunting grounds" there.
+
+**The count before:** W3 owner sheets naming the impaired resource 0 of 26 (Q4's reading: the chain's id, label and ground words, Facts excluded; at the base and at the F2 tip). Read with Facts included it is 4 of 26, all false: "grain" in the food fact ("about … months of grain") against a `food_processing` chain on "Grain fields".
+
+**A way through, for the chair (not built):** one display leaf beside `chainSourceOf`, e.g. `chainHouses.js :: chainSourceShown(chain, printed)` -> "Hunting grounds (depleted)", called by the tab's card, `SupplyChainsPanel.jsx`, both PDF sections and then the sheet (its one Facts line: `chainPrintName(chain, town).label` + that leaf, e.g. "Leather & Hides: Hunting grounds (depleted)."). That moves four renderers' files (none of them this lane's) and needs a label for the Facts row (TONIGHT_COPY has none for it).
+
+## F4, F5, F6 — not built (stopped at F3); what was read, for the next builder
+
+- **F4.** The Power tab prints the capture rung in two places on this branch: its DM panel (`WhoRunsThisTownPanel.jsx` "The hall": `{label}. {line}`) reads `data/people/dmPowerLines.js :: CAPTURE_RUNG_LABELS` ("Partly in criminal hands", "Run by the criminals") through `domain/people/patronage.js :: hallOf`, from `powerStructure.criminalCaptureState`; the badge (`PowerTab.jsx` line 199) is a component-local map ("Criminal: Corrupted Officials", "Criminal: Governance Captured"). The brief's sentences ("The ruling seat is partly in criminal hands.") exist nowhere on this branch, and `safetyShown.js` is not on it (grep: no file). On the pool the five W4 towns hold `criminalCaptureState: 'corrupted'`, equal to their captured power's `captureState` (5 of 5). Count today: 0 of 5.
+- **F5.** Count at the F2 tip: 32 of 63 framed owner sheets drop the seat-holder (W3 16, W2 12, W4 3, W1 1; 33 at the base: F1 put the seat on village-81's power side). The calm sheet's seat row is `tonightSheet.js :: peopleOf`'s `add(seat, 'seat', …)`; `troubleWeight.test.js`'s city-14 arm asserts the people's sides equal the frame's sides, and would move with F5.
+- **F6.** Not run.
