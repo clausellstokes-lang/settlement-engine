@@ -3,7 +3,7 @@
 Lane `lane/daily-1-2026-11-20`; chair session_019yED1SUxGVHyjQnoqoFvQ8; assignment
 `origin/lane/chair-2026-11-08:docs/chair/2026-11-20/seventh/prompts/DAILY-1.txt`.
 
-## State (written 18:40 UTC)
+## State (written 18:48 UTC)
 - Base: 43ab0f5eb (the line) fast-forwarded to bd42d63c7 (`lane/kernel-mix-2026-11-20`, `pickVariantMixed`).
 - 6eef1daa0 brief M1; 8c6b0c85e M1 measure (measures/M1/SUMMARY.md); 3f5e12eb7 briefs LINES-COMMON, L1, L2; 13a4ae656 LINES-1 (lines/L1); 58632c368 LINES-2 (lines/L2, incl. the owner-only dm slot); f8d313591 B-BUILD-COMMON; next commit B1 brief.
 - RUNNING: L1's builder revising per the chair's 18:37 ruling into lines/L1/LINES-1b.md (+probe.1b), owed to the chair as "DAILY-LINES 1b <commit>"; builder B1 in worktree /home/user/wt-daily-b1, branch lane/daily-1-2026-11-20-b1 (C1 dead npc call + parity arm, C2 atoms + needs module + walker, C3 gathering_places). AWAITING the chair's read of LINES-2 (my four calls in the DAILY-LINES message: beat by event name, crime wound falls to next tension, recent_changes without ratings, drop index-0 time words).
@@ -41,3 +41,15 @@ See LINES-1 § THE HOUSES EACH SLOT NEEDS and LINES-2 § HOUSES EACH WORDING NEE
 
 ## Losses to look at again (for the owner)
 - None yet beyond the crime clauses, which moved to the owner-only slot rather than being lost.
+- 18:47: LINES-2 APPROVED with changes (being applied by L2's builder into lines/L2/LINES-2b.md, pools.2.mjs updated in
+  place, probe.2b.out.txt; owed: "DAILY-LINES 1b+2b <commit>" — 1b already sent at f0fb3988e): beat said by event
+  name (no age, no "founding survey"; a crime/corruption event not said); crime wound falls to the next tension;
+  THE RATINGS (unrest.order, economic_collapse.supply) ARE NOT THREATS IN ANY SLOT (recent_changes 27 cut; outsider
+  order lines fold into services.defense, supply lines cut); outsider power part only where the top power clearly
+  leads (else two fixed lines), second part by keyed pick among strained visible lenses + ordinary;
+  hidden.arcane_instability cut; legitimacy 4 needs critical/collapsed; dm "smugglers" needs smuggling, crime55 4-5
+  replaced by three; food surplus 8, adequate 11, critical 0 reworded; recent magical_instability 0 reworded.
+- PENDING THE CHAIR: LINES-1b's two open reads (small = tier thorp–village; the tension-type sets; defence at medium).
+- QUEUE (one writer on src/domain/dailyLife.js at a time): B1 (running) → B2 dawn_work + child_warnings (LINES-1 as
+  amended by LINES-1b) → B3 the five L2 slots + commoner_resentments_dm (LINES-2 as amended by LINES-2b; the dm
+  slot's four conditions of 18:26).
