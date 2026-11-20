@@ -504,3 +504,34 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   VEIL-19's pushed tip (9cbc2fa9f then: docs only above 72e8a855d). EIGHT SEATS, seven running: VEIL-19 (B, C, D, then
   it hands back), VEIL-20, VEIL-VR17, VEIL-DOORS, REVIEW-VEIL-10, CI-FIT, GIT-DOOR; VEIL-R1 done. THE SAFETY NET (2)
   is armed for 02:35 UTC (trig_0123nahsNmNqf7NqCRarWhht); it lists what each seat owes.
+- 01:30 UTC · **V10-8, CRITICAL, OUTSIDE THE VEIL, POSSIBLY LIVE ON PRODUCTION (REVIEW-VEIL-10's message of 01:23 UTC, from
+  the cold read of VR27 the chair had asked of it).** Supabase's default privileges grant EXECUTE on every function
+  of schema public to anon, authenticated and service_role; a migration that writes only `revoke all on function …
+  from public` leaves those grants. Migration 139 does exactly that for `_surveyor_byok_secret()` ("not granted to
+  anyone") and `surveyor_byok_get(uuid, text)` ("service_role ONLY"): both SECURITY DEFINER, no caller check.
+  EXECUTED by the reader as `set role anon` on a local chain 001..212: the first returns the BYOK master secret, the
+  second a named user's DECRYPTED provider key (a planted test key). User ids are on offer through the anon-callable
+  `_gallery_public_tile_rows()`. The same shape, WRITABLE by anon: `surveyor_byok_set_health`,
+  `surveyor_byok_set_probe_tier`, `surveyor_usage_precheck`, `_audit_action` (forged audit rows),
+  `_log_founder_transfer_event`, `_consume_action_rate_limit`; 27 underscore helpers in all (its commit
+  4707220ca). VERIFIED BY THE CHAIR against the primary source: migration 139 on origin/master, the two revokes from
+  public only, `surveyor_byok_get` returning `pgp_sym_decrypt(…)` with no caller check; no later migration
+  revokes from anon or authenticated or changes the default privileges. ON PRODUCTION: PLAUSIBLE, NOT EXECUTED (no
+  seat holds a production credential).
+  **TOLD TO THE OWNER AT ONCE (01:28 UTC), in plain words, with three things for the owner's own hand:** a read-only
+  check (`has_function_privilege` for anon and authenticated on the two functions); if true, two revokes from anon
+  and authenticated (safe by the migration's own comments: the set and clear functions are definers and keep
+  working; the edge calls as the service role); a count of stored keys, and to treat them as exposed and read the
+  API logs for the two RPC paths.
+  **RULING SV9 (vetoable): ITS OWN SEAT, SEC-GRANTS** (`prompts/SEC-GRANTS.txt`, passed inline at 01:29:28 UTC without
+  waiting for a push; session_019yED1SJagnqH6HgsTKTJa3; `lane/sec-grants-2026-11-20` from the line's 29ec255fe).
+  DELIVERABLE ONE: on a chain of origin/master's migrations (001..203, production's), every function anon or
+  authenticated may execute, classed (a deliberate door; internal; a door that trusts a parameter) against every
+  RPC the browser and the edge make; ONE idempotent revoke script proven on that chain not to break a browser call,
+  an edge call, a save, a share, a gallery read or an import; a read-only query before and after; one page for the
+  owner (the logs' paths, what to rotate). THE READER READS IT COLD BEFORE THE OWNER RUNS IT. DELIVERABLE TWO: a
+  migration 213 (the revokes by name; a caller check inside each door that trusts a parameter; default-deny for new
+  functions proposed with what it would break; a walker over the catalogue with a written allowlist), landing at the
+  close. NINE SEATS: eight running, VEIL-R1 done.
+- 01:30 UTC · The reader's permission check also refused installing the push hooks in its clone ("Undermining Oversight"):
+  the refusal stands; its docs-only pushes go without hooks, none skipped.
