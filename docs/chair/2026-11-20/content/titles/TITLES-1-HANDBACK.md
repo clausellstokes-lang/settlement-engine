@@ -87,161 +87,176 @@ All 58 government names are mapped in `GOVERNMENT_FAMILY`; the mapping is in the
 
 ## 4. THE FULL TABLE, AS PLAIN TEXT, FOR THE OWNER
 
-`·(X)` means the cell is left to the fallback, and the town shows X. For the nine families with a title today, X is the most common of today's words for that family's names at that size; a second word is shown after `|`. Generated from the data file by a script, so it is the table, not a copy of it.
+`·` means the cell is left to the fallback. For the nine families with a title today, the town keeps today's title, which depends on the government's NAME, not on the size; the legend at the top lists each name's word. For the four with no title today, the base word it shows is in brackets. The table is generated from the data file by a script, so it is the table, not a copy of it.
+
+(Corrected after the first hand-back commit `4902e1229`: the first rendering annotated each `·` with the most common of today's words across the family's names, which could show "Lord Mayor" at a thorp. Today's table never writes that there.)
 
 ```
-            THORP                     HAMLET                    VILLAGE                   TOWN                      CITY                      METROPOLIS                
-BASE
- sovereign  Chieftain                 Chieftain                 Chieftain                 Lord / Lady               King / Queen              Emperor / Empress         
- appointed  Steward                   Steward                   Steward                   Governor                  Governor                  Governor                  
- underboss  Ringleader                Ringleader                Underboss                 Underboss                 Underboss                 Underboss                 
- crime_boss Crime Boss                Crime Boss                Crime Boss                Crime Boss                Crime Boss                Crime Boss                
+TODAY'S TITLES (what a "·" cell shows, by the government's name; a name today's table does not hold shows the size's civic title: thorp Elder, hamlet Elder, village Elder, town Mayor, city Lord Mayor, metropolis Lord Mayor)
+ headman: Town Mayor = Mayor; Elected Reeve = Reeve; Headman's Authority = Headman
+ council: Town Council = Mayor; City Council = Lord Mayor; Grand Council = Lord Mayor; City-State Council = First Councillor; Mixed Council = (civic title)
+ assembly: Democratic assembly = Speaker of the Assembly; Commons Assembly = (civic title); Workers' Assembly = (civic title); Grand Commons Assembly = (civic title)
+ elders: Elder Council = Elder; Free Elder Council = Elder; Elder Consensus = Elder; Household Council = Household Elder
+ merchant: Merchant Council = Burgomaster; Merchant City Council = Lord Burgomaster; Grand Merchant Senate = Doge; Merchant oligarchy = First Magnate; Grand Merchant Oligarchy = First Magnate; Merchant Guild Council = Master of the Guilds; Grand Guild Consortium = Master of the Guilds
+ guild: Guild Council = Alderman; Guild Authority = Lord Alderman; Grand Guild Council = Lord Alderman; Guildmasters' Moot = Alderman; Guildhall Council = Alderman; Grand Guild Assembly = Lord Alderman
+ faith: Priestly Guidance = Elder Priest; Church Council = Warden of the Council; Ecclesiastical Council = Lord Warden; Theocratic Council = Lord Warden; High Theocratic Council = Lord Protector of the Faith
+ military: Militia Command = Captain of the Muster; Military Council = Captain-Mayor; Military City Council = Lord Marshal; Grand Military Council = Lord Marshal; Garrison Command = Lord Marshal
+ arcane: Circle of Adepts = First Adept; Arcane Council = Archmage of the Council; Arcane Senate = Archmage of the Senate; Grand Arcane Council = Archmage of the Council
+
+            THORP                   HAMLET                  VILLAGE                 TOWN                    CITY                    METROPOLIS              
+BASE (the four families with no title today; any culture without its own word)
+ sovereign  Chieftain               Chieftain               Chieftain               Lord / Lady             King / Queen            Emperor / Empress       
+ appointed  Steward                 Steward                 Steward                 Governor                Governor                Governor                
+ underboss  Ringleader              Ringleader              Underboss               Underboss               Underboss               Underboss               
+ crime_boss Crime Boss              Crime Boss              Crime Boss              Crime Boss              Crime Boss              Crime Boss              
 GERMANIC
- sovereign  ·(Chieftain)              ·(Chieftain)              ·(Chieftain)              Graf / Gräfin             König / Königin           Kaiser / Kaiserin         
- appointed  Vogt                      Vogt                      Vogt                      Vogt                      Landvogt                  Statthalter               
- headman    ·(Mayor | Reeve)          ·(Mayor | Reeve)          Schultheiss               Burgomaster               Burgomaster               Burgomaster               
- council    ·(Lord Mayor | Mayor)     ·(Lord Mayor | Mayor)     ·(Lord Mayor | Mayor)     Burgomaster               Burgomaster               Burgomaster               
- assembly   ·(Elder | Speaker of the Assembly) ·(Elder | Speaker of the Assembly) ·(Elder | Speaker of the Assembly) ·(Mayor | Speaker of the Assembly) ·(Lord Mayor | Speaker of the Assembly) ·(Lord Mayor | Speaker of the Assembly) 
- elders     ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) 
- merchant   ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) 
- guild      ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) 
- faith      ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) 
- military   ·(Lord Marshal | Captain of the Muster) ·(Lord Marshal | Captain of the Muster) ·(Lord Marshal | Captain of the Muster) ·(Lord Marshal | Captain of the Muster) ·(Lord Marshal | Captain of the Muster) ·(Lord Marshal | Captain of the Muster) 
- arcane     ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) 
- criminal   the BASE rows (underboss, crime_boss), heading "Crime Bosses"
+ sovereign  ·(Chieftain)            ·(Chieftain)            ·(Chieftain)            Graf / Gräfin           König / Königin         Kaiser / Kaiserin       
+ appointed  Vogt                    Vogt                    Vogt                    Vogt                    Landvogt                Statthalter             
+ headman    ·                       ·                       Schultheiss             Burgomaster             Burgomaster             Burgomaster             
+ council    ·                       ·                       ·                       Burgomaster             Burgomaster             Burgomaster             
+ assembly   ·                       ·                       ·                       ·                       ·                       ·                       
+ elders     ·                       ·                       ·                       ·                       ·                       ·                       
+ merchant   ·                       ·                       ·                       ·                       ·                       ·                       
+ guild      ·                       ·                       ·                       ·                       ·                       ·                       
+ faith      ·                       ·                       ·                       ·                       ·                       ·                       
+ military   ·                       ·                       ·                       ·                       ·                       ·                       
+ arcane     ·                       ·                       ·                       ·                       ·                       ·                       
+ criminal   the BASE rows (underboss, crime_boss); heading "Crime Bosses"
 LATIN
- sovereign  ·(Chieftain)              ·(Chieftain)              ·(Chieftain)              Princeps                  Rex / Regina              Imperator / Imperatrix    
- appointed  ·(Steward)                ·(Steward)                ·(Steward)                Procurator                Legate                    Proconsul                 
- headman    ·(Mayor | Reeve)          ·(Mayor | Reeve)          ·(Mayor | Reeve)          ·(Mayor | Reeve)          ·(Mayor | Reeve)          ·(Mayor | Reeve)          
- council    ·(Lord Mayor | Mayor)     ·(Lord Mayor | Mayor)     ·(Lord Mayor | Mayor)     Consul                    Consul                    First Consul              
- assembly   ·(Elder | Speaker of the Assembly) ·(Elder | Speaker of the Assembly) ·(Elder | Speaker of the Assembly) Tribune of the People     Tribune of the People     Tribune of the People     
- elders     ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) 
- merchant   ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) 
- guild      ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) 
- faith      ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) 
- military   ·(Lord Marshal | Captain of the Muster) ·(Lord Marshal | Captain of the Muster) Decurion                  Centurion                 Dux                       Dux                       
- arcane     ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) Magister                  Magister                  Archmagister              Archmagister              
- criminal   the BASE rows (underboss, crime_boss), heading "Crime Bosses"
+ sovereign  ·(Chieftain)            ·(Chieftain)            ·(Chieftain)            Princeps                Rex / Regina            Imperator / Imperatrix  
+ appointed  ·(Steward)              ·(Steward)              ·(Steward)              Procurator              Legate                  Proconsul               
+ headman    ·                       ·                       ·                       ·                       ·                       ·                       
+ council    ·                       ·                       ·                       Consul                  Consul                  First Consul            
+ assembly   ·                       ·                       ·                       Tribune of the People   Tribune of the People   Tribune of the People   
+ elders     ·                       ·                       ·                       ·                       ·                       ·                       
+ merchant   ·                       ·                       ·                       ·                       ·                       ·                       
+ guild      ·                       ·                       ·                       ·                       ·                       ·                       
+ faith      ·                       ·                       ·                       ·                       ·                       ·                       
+ military   ·                       ·                       Decurion                Centurion               Dux                     Dux                     
+ arcane     ·                       ·                       Magister                Magister                Archmagister            Archmagister            
+ criminal   the BASE rows (underboss, crime_boss); heading "Crime Bosses"
 CELTIC
- sovereign  ·(Chieftain)              ·(Chieftain)              ·(Chieftain)              Chieftain                 King / Queen              High King / High Queen    
- appointed  ·(Steward)                ·(Steward)                ·(Steward)                ·(Governor)               ·(Governor)               ·(Governor)               
- headman    ·(Mayor | Reeve)          ·(Mayor | Reeve)          Chieftain                 Chieftain                 ·(Mayor | Reeve)          ·(Mayor | Reeve)          
- council    ·(Lord Mayor | Mayor)     ·(Lord Mayor | Mayor)     ·(Lord Mayor | Mayor)     Vergobret                 Vergobret                 Vergobret                 
- assembly   ·(Elder | Speaker of the Assembly) ·(Elder | Speaker of the Assembly) ·(Elder | Speaker of the Assembly) ·(Mayor | Speaker of the Assembly) ·(Lord Mayor | Speaker of the Assembly) ·(Lord Mayor | Speaker of the Assembly) 
- elders     ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) 
- merchant   ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) 
- guild      ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) 
- faith      ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) 
- military   ·(Lord Marshal | Captain of the Muster) ·(Lord Marshal | Captain of the Muster) ·(Lord Marshal | Captain of the Muster) ·(Lord Marshal | Captain of the Muster) ·(Lord Marshal | Captain of the Muster) ·(Lord Marshal | Captain of the Muster) 
- arcane     ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) 
- criminal   the BASE rows (underboss, crime_boss), heading "Crime Bosses"
+ sovereign  ·(Chieftain)            ·(Chieftain)            ·(Chieftain)            Chieftain               King / Queen            High King / High Queen  
+ appointed  ·(Steward)              ·(Steward)              ·(Steward)              ·(Governor)             ·(Governor)             ·(Governor)             
+ headman    ·                       ·                       Chieftain               Chieftain               ·                       ·                       
+ council    ·                       ·                       ·                       Vergobret               Vergobret               Vergobret               
+ assembly   ·                       ·                       ·                       ·                       ·                       ·                       
+ elders     ·                       ·                       ·                       ·                       ·                       ·                       
+ merchant   ·                       ·                       ·                       ·                       ·                       ·                       
+ guild      ·                       ·                       ·                       ·                       ·                       ·                       
+ faith      ·                       ·                       ·                       ·                       ·                       ·                       
+ military   ·                       ·                       ·                       ·                       ·                       ·                       
+ arcane     ·                       ·                       ·                       ·                       ·                       ·                       
+ criminal   the BASE rows (underboss, crime_boss); heading "Crime Bosses"
 ARABIC
- sovereign  ·(Chieftain)              ·(Chieftain)              Sheikh / Sheikha          Sheikh / Sheikha          Emir / Emira              Sultan / Sultana          
- appointed  ·(Steward)                ·(Steward)                ·(Steward)                ·(Governor)               Wali                      Wali                      
- headman    Mukhtar                   Mukhtar                   Mukhtar                   Ra'is                     Ra'is                     Ra'is                     
- council    ·(Lord Mayor | Mayor)     ·(Lord Mayor | Mayor)     ·(Lord Mayor | Mayor)     ·(Mayor | Lord Mayor)     ·(Lord Mayor | Mayor)     ·(Lord Mayor | Mayor)     
- assembly   ·(Elder | Speaker of the Assembly) ·(Elder | Speaker of the Assembly) ·(Elder | Speaker of the Assembly) ·(Mayor | Speaker of the Assembly) ·(Lord Mayor | Speaker of the Assembly) ·(Lord Mayor | Speaker of the Assembly) 
- elders     Sheikh / Sheikha          Sheikh / Sheikha          Sheikh / Sheikha          Sheikh / Sheikha          Sheikh / Sheikha          Sheikh / Sheikha          
- merchant   ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) Shahbandar                Shahbandar                Shahbandar                
- guild      ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) 
- faith      ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) 
- military   ·(Lord Marshal | Captain of the Muster) ·(Lord Marshal | Captain of the Muster) Qaid                      Qaid                      ·(Lord Marshal | Captain of the Muster) ·(Lord Marshal | Captain of the Muster) 
- arcane     ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) 
- criminal   the BASE rows (underboss, crime_boss), heading "Crime Bosses"
+ sovereign  ·(Chieftain)            ·(Chieftain)            Sheikh / Sheikha        Sheikh / Sheikha        Emir / Emira            Sultan / Sultana        
+ appointed  ·(Steward)              ·(Steward)              ·(Steward)              ·(Governor)             Wali                    Wali                    
+ headman    Mukhtar                 Mukhtar                 Mukhtar                 Ra'is                   Ra'is                   Ra'is                   
+ council    ·                       ·                       ·                       ·                       ·                       ·                       
+ assembly   ·                       ·                       ·                       ·                       ·                       ·                       
+ elders     Sheikh / Sheikha        Sheikh / Sheikha        Sheikh / Sheikha        Sheikh / Sheikha        Sheikh / Sheikha        Sheikh / Sheikha        
+ merchant   ·                       ·                       ·                       Shahbandar              Shahbandar              Shahbandar              
+ guild      ·                       ·                       ·                       ·                       ·                       ·                       
+ faith      ·                       ·                       ·                       ·                       ·                       ·                       
+ military   ·                       ·                       Qaid                    Qaid                    ·                       ·                       
+ arcane     ·                       ·                       ·                       ·                       ·                       ·                       
+ criminal   the BASE rows (underboss, crime_boss); heading "Crime Bosses"
 NORSE
- sovereign  ·(Chieftain)              ·(Chieftain)              Jarl                      Jarl                      King / Queen              High King / High Queen    
- appointed  ·(Steward)                ·(Steward)                ·(Steward)                ·(Governor)               Jarl                      Jarl                      
- headman    ·(Mayor | Reeve)          ·(Mayor | Reeve)          Jarl                      Jarl                      Jarl                      Jarl                      
- council    ·(Lord Mayor | Mayor)     ·(Lord Mayor | Mayor)     Lawspeaker                Lawspeaker                Lawspeaker                Lawspeaker                
- assembly   ·(Elder | Speaker of the Assembly) ·(Elder | Speaker of the Assembly) Lawspeaker                Lawspeaker                Lawspeaker                Lawspeaker                
- elders     ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) 
- merchant   ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) 
- guild      ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) 
- faith      ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) 
- military   ·(Lord Marshal | Captain of the Muster) ·(Lord Marshal | Captain of the Muster) Hersir                    Hersir                    ·(Lord Marshal | Captain of the Muster) ·(Lord Marshal | Captain of the Muster) 
- arcane     ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) 
- criminal   the BASE rows (underboss, crime_boss), heading "Crime Bosses"
+ sovereign  ·(Chieftain)            ·(Chieftain)            Jarl                    Jarl                    King / Queen            High King / High Queen  
+ appointed  ·(Steward)              ·(Steward)              ·(Steward)              ·(Governor)             Jarl                    Jarl                    
+ headman    ·                       ·                       Jarl                    Jarl                    Jarl                    Jarl                    
+ council    ·                       ·                       Lawspeaker              Lawspeaker              Lawspeaker              Lawspeaker              
+ assembly   ·                       ·                       Lawspeaker              Lawspeaker              Lawspeaker              Lawspeaker              
+ elders     ·                       ·                       ·                       ·                       ·                       ·                       
+ merchant   ·                       ·                       ·                       ·                       ·                       ·                       
+ guild      ·                       ·                       ·                       ·                       ·                       ·                       
+ faith      ·                       ·                       ·                       ·                       ·                       ·                       
+ military   ·                       ·                       Hersir                  Hersir                  ·                       ·                       
+ arcane     ·                       ·                       ·                       ·                       ·                       ·                       
+ criminal   the BASE rows (underboss, crime_boss); heading "Crime Bosses"
 SLAVIC
- sovereign  ·(Chieftain)              ·(Chieftain)              ·(Chieftain)              Knyaz / Knyaginya         Grand Knyaz / Grand Knyaginya Tsar / Tsaritsa           
- appointed  ·(Steward)                ·(Steward)                ·(Steward)                Namestnik                 Namestnik                 Namestnik                 
- headman    Starosta                  Starosta                  Starosta                  Posadnik                  Posadnik                  Posadnik                  
- council    ·(Lord Mayor | Mayor)     ·(Lord Mayor | Mayor)     ·(Lord Mayor | Mayor)     ·(Mayor | Lord Mayor)     ·(Lord Mayor | Mayor)     ·(Lord Mayor | Mayor)     
- assembly   ·(Elder | Speaker of the Assembly) ·(Elder | Speaker of the Assembly) ·(Elder | Speaker of the Assembly) ·(Mayor | Speaker of the Assembly) ·(Lord Mayor | Speaker of the Assembly) ·(Lord Mayor | Speaker of the Assembly) 
- elders     Starosta                  Starosta                  Starosta                  Starosta                  Starosta                  Starosta                  
- merchant   ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) 
- guild      ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) 
- faith      ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) 
- military   ·(Lord Marshal | Captain of the Muster) ·(Lord Marshal | Captain of the Muster) Voivode                   Voivode                   Voivode                   Voivode                   
- arcane     ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) 
- criminal   the BASE rows (underboss, crime_boss), heading "Crime Bosses"
+ sovereign  ·(Chieftain)            ·(Chieftain)            ·(Chieftain)            Knyaz / Knyaginya       Grand Knyaz / Grand Knyaginya Tsar / Tsaritsa         
+ appointed  ·(Steward)              ·(Steward)              ·(Steward)              Namestnik               Namestnik               Namestnik               
+ headman    Starosta                Starosta                Starosta                Posadnik                Posadnik                Posadnik                
+ council    ·                       ·                       ·                       ·                       ·                       ·                       
+ assembly   ·                       ·                       ·                       ·                       ·                       ·                       
+ elders     Starosta                Starosta                Starosta                Starosta                Starosta                Starosta                
+ merchant   ·                       ·                       ·                       ·                       ·                       ·                       
+ guild      ·                       ·                       ·                       ·                       ·                       ·                       
+ faith      ·                       ·                       ·                       ·                       ·                       ·                       
+ military   ·                       ·                       Voivode                 Voivode                 Voivode                 Voivode                 
+ arcane     ·                       ·                       ·                       ·                       ·                       ·                       
+ criminal   the BASE rows (underboss, crime_boss); heading "Crime Bosses"
 EAST_ASIAN
- sovereign  ·(Chieftain)              ·(Chieftain)              ·(Chieftain)              Daimyo                    Daimyo                    ·(Emperor / Empress)      
- appointed  ·(Steward)                ·(Steward)                Daikan                    Bugyo                     Bugyo                     Bugyo                     
- headman    Nanushi                   Nanushi                   Nanushi                   ·(Mayor | Reeve)          ·(Mayor | Reeve)          ·(Mayor | Reeve)          
- council    ·(Lord Mayor | Mayor)     ·(Lord Mayor | Mayor)     ·(Lord Mayor | Mayor)     ·(Mayor | Lord Mayor)     ·(Lord Mayor | Mayor)     ·(Lord Mayor | Mayor)     
- assembly   ·(Elder | Speaker of the Assembly) ·(Elder | Speaker of the Assembly) ·(Elder | Speaker of the Assembly) ·(Mayor | Speaker of the Assembly) ·(Lord Mayor | Speaker of the Assembly) ·(Lord Mayor | Speaker of the Assembly) 
- elders     ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) 
- merchant   ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) 
- guild      ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) 
- faith      ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) 
- military   ·(Lord Marshal | Captain of the Muster) ·(Lord Marshal | Captain of the Muster) ·(Lord Marshal | Captain of the Muster) ·(Lord Marshal | Captain of the Muster) ·(Lord Marshal | Captain of the Muster) ·(Lord Marshal | Captain of the Muster) 
- arcane     ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) 
- criminal   the BASE rows (underboss, crime_boss), heading "Crime Bosses"
+ sovereign  ·(Chieftain)            ·(Chieftain)            ·(Chieftain)            Daimyo                  Daimyo                  ·(Emperor / Empress)    
+ appointed  ·(Steward)              ·(Steward)              Daikan                  Bugyo                   Bugyo                   Bugyo                   
+ headman    Nanushi                 Nanushi                 Nanushi                 ·                       ·                       ·                       
+ council    ·                       ·                       ·                       ·                       ·                       ·                       
+ assembly   ·                       ·                       ·                       ·                       ·                       ·                       
+ elders     ·                       ·                       ·                       ·                       ·                       ·                       
+ merchant   ·                       ·                       ·                       ·                       ·                       ·                       
+ guild      ·                       ·                       ·                       ·                       ·                       ·                       
+ faith      ·                       ·                       ·                       ·                       ·                       ·                       
+ military   ·                       ·                       ·                       ·                       ·                       ·                       
+ arcane     ·                       ·                       ·                       ·                       ·                       ·                       
+ criminal   the BASE rows (underboss, crime_boss); heading "Crime Bosses"
 MESOAMERICAN
- sovereign  ·(Chieftain)              ·(Chieftain)              ·(Chieftain)              Tlatoani                  Tlatoani                  Huey Tlatoani             
- appointed  ·(Steward)                ·(Steward)                Calpixqui                 Calpixqui                 Calpixqui                 Calpixqui                 
- headman    ·(Mayor | Reeve)          ·(Mayor | Reeve)          ·(Mayor | Reeve)          ·(Mayor | Reeve)          ·(Mayor | Reeve)          ·(Mayor | Reeve)          
- council    ·(Lord Mayor | Mayor)     ·(Lord Mayor | Mayor)     ·(Lord Mayor | Mayor)     ·(Mayor | Lord Mayor)     ·(Lord Mayor | Mayor)     ·(Lord Mayor | Mayor)     
- assembly   ·(Elder | Speaker of the Assembly) ·(Elder | Speaker of the Assembly) ·(Elder | Speaker of the Assembly) ·(Mayor | Speaker of the Assembly) ·(Lord Mayor | Speaker of the Assembly) ·(Lord Mayor | Speaker of the Assembly) 
- elders     ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) 
- merchant   ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) 
- guild      ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) 
- faith      ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) 
- military   ·(Lord Marshal | Captain of the Muster) ·(Lord Marshal | Captain of the Muster) ·(Lord Marshal | Captain of the Muster) ·(Lord Marshal | Captain of the Muster) ·(Lord Marshal | Captain of the Muster) ·(Lord Marshal | Captain of the Muster) 
- arcane     ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) 
- criminal   the BASE rows (underboss, crime_boss), heading "Crime Bosses"
+ sovereign  ·(Chieftain)            ·(Chieftain)            ·(Chieftain)            Tlatoani                Tlatoani                Huey Tlatoani           
+ appointed  ·(Steward)              ·(Steward)              Calpixqui               Calpixqui               Calpixqui               Calpixqui               
+ headman    ·                       ·                       ·                       ·                       ·                       ·                       
+ council    ·                       ·                       ·                       ·                       ·                       ·                       
+ assembly   ·                       ·                       ·                       ·                       ·                       ·                       
+ elders     ·                       ·                       ·                       ·                       ·                       ·                       
+ merchant   ·                       ·                       ·                       ·                       ·                       ·                       
+ guild      ·                       ·                       ·                       ·                       ·                       ·                       
+ faith      ·                       ·                       ·                       ·                       ·                       ·                       
+ military   ·                       ·                       ·                       ·                       ·                       ·                       
+ arcane     ·                       ·                       ·                       ·                       ·                       ·                       
+ criminal   the BASE rows (underboss, crime_boss); heading "Crime Bosses"
 SOUTH_ASIAN
- sovereign  ·(Chieftain)              ·(Chieftain)              ·(Chieftain)              Raja / Rani               Maharaja / Maharani       Samrat / Samrajni         
- appointed  ·(Steward)                ·(Steward)                ·(Steward)                Faujdar                   Subahdar                  Subahdar                  
- headman    Mukhiya                   Mukhiya                   Mukhiya                   ·(Mayor | Reeve)          ·(Mayor | Reeve)          ·(Mayor | Reeve)          
- council    ·(Lord Mayor | Mayor)     ·(Lord Mayor | Mayor)     Sarpanch                  Sarpanch                  ·(Lord Mayor | Mayor)     ·(Lord Mayor | Mayor)     
- assembly   ·(Elder | Speaker of the Assembly) ·(Elder | Speaker of the Assembly) Sabhapati                 Sabhapati                 Sabhapati                 Sabhapati                 
- elders     ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) 
- merchant   ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) Nagarsheth                Nagarsheth                Nagarsheth                
- guild      ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) 
- faith      ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) 
- military   ·(Lord Marshal | Captain of the Muster) ·(Lord Marshal | Captain of the Muster) ·(Lord Marshal | Captain of the Muster) Senapati                  Senapati                  Senapati                  
- arcane     ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) 
- criminal   the BASE rows (underboss, crime_boss), heading "Crime Bosses"
+ sovereign  ·(Chieftain)            ·(Chieftain)            ·(Chieftain)            Raja / Rani             Maharaja / Maharani     Samrat / Samrajni       
+ appointed  ·(Steward)              ·(Steward)              ·(Steward)              Faujdar                 Subahdar                Subahdar                
+ headman    Mukhiya                 Mukhiya                 Mukhiya                 ·                       ·                       ·                       
+ council    ·                       ·                       Sarpanch                Sarpanch                ·                       ·                       
+ assembly   ·                       ·                       Sabhapati               Sabhapati               Sabhapati               Sabhapati               
+ elders     ·                       ·                       ·                       ·                       ·                       ·                       
+ merchant   ·                       ·                       ·                       Nagarsheth              Nagarsheth              Nagarsheth              
+ guild      ·                       ·                       ·                       ·                       ·                       ·                       
+ faith      ·                       ·                       ·                       ·                       ·                       ·                       
+ military   ·                       ·                       ·                       Senapati                Senapati                Senapati                
+ arcane     ·                       ·                       ·                       ·                       ·                       ·                       
+ criminal   the BASE rows (underboss, crime_boss); heading "Crime Bosses"
 STEPPE
- sovereign  ·(Chieftain)              ·(Chieftain)              ·(Chieftain)              Khan / Khatun             Khan / Khatun             Khagan / Khatun           
- appointed  ·(Steward)                ·(Steward)                ·(Steward)                Darughachi                Darughachi                Darughachi                
- headman    ·(Mayor | Reeve)          ·(Mayor | Reeve)          ·(Mayor | Reeve)          ·(Mayor | Reeve)          ·(Mayor | Reeve)          ·(Mayor | Reeve)          
- council    ·(Lord Mayor | Mayor)     ·(Lord Mayor | Mayor)     ·(Lord Mayor | Mayor)     ·(Mayor | Lord Mayor)     ·(Lord Mayor | Mayor)     ·(Lord Mayor | Mayor)     
- assembly   ·(Elder | Speaker of the Assembly) ·(Elder | Speaker of the Assembly) ·(Elder | Speaker of the Assembly) ·(Mayor | Speaker of the Assembly) ·(Lord Mayor | Speaker of the Assembly) ·(Lord Mayor | Speaker of the Assembly) 
- elders     ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) 
- merchant   ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) 
- guild      ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) 
- faith      ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) 
- military   ·(Lord Marshal | Captain of the Muster) ·(Lord Marshal | Captain of the Muster) Noyan                     Noyan                     Noyan                     Noyan                     
- arcane     ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) 
- criminal   the BASE rows (underboss, crime_boss), heading "Crime Bosses"
+ sovereign  ·(Chieftain)            ·(Chieftain)            ·(Chieftain)            Khan / Khatun           Khan / Khatun           Khagan / Khatun         
+ appointed  ·(Steward)              ·(Steward)              ·(Steward)              Darughachi              Darughachi              Darughachi              
+ headman    ·                       ·                       ·                       ·                       ·                       ·                       
+ council    ·                       ·                       ·                       ·                       ·                       ·                       
+ assembly   ·                       ·                       ·                       ·                       ·                       ·                       
+ elders     ·                       ·                       ·                       ·                       ·                       ·                       
+ merchant   ·                       ·                       ·                       ·                       ·                       ·                       
+ guild      ·                       ·                       ·                       ·                       ·                       ·                       
+ faith      ·                       ·                       ·                       ·                       ·                       ·                       
+ military   ·                       ·                       Noyan                   Noyan                   Noyan                   Noyan                   
+ arcane     ·                       ·                       ·                       ·                       ·                       ·                       
+ criminal   the BASE rows (underboss, crime_boss); heading "Crime Bosses"
 GREEK
- sovereign  ·(Chieftain)              ·(Chieftain)              ·(Chieftain)              Basileus / Basilissa      Basileus / Basilissa      ·(Emperor / Empress)      
- appointed  ·(Steward)                ·(Steward)                ·(Steward)                Harmost                   Harmost                   Harmost                   
- headman    ·(Mayor | Reeve)          ·(Mayor | Reeve)          Demarch                   Demarch                   Demarch                   Demarch                   
- council    ·(Lord Mayor | Mayor)     ·(Lord Mayor | Mayor)     ·(Lord Mayor | Mayor)     Archon                    Archon                    Archon                    
- assembly   ·(Elder | Speaker of the Assembly) ·(Elder | Speaker of the Assembly) ·(Elder | Speaker of the Assembly) Epistates                 Epistates                 Epistates                 
- elders     ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) ·(Elder | Household Elder) 
- merchant   ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) ·(First Magnate | Master of the Guilds) 
- guild      ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) ·(Alderman | Lord Alderman) 
- faith      ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) ·(Lord Warden | Elder Priest) 
- military   ·(Lord Marshal | Captain of the Muster) ·(Lord Marshal | Captain of the Muster) ·(Lord Marshal | Captain of the Muster) Polemarch                 Polemarch                 Polemarch                 
- arcane     ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) ·(Archmage of the Council | First Adept) 
- criminal   the BASE rows (underboss, crime_boss), heading "Crime Bosses"
+ sovereign  ·(Chieftain)            ·(Chieftain)            ·(Chieftain)            Basileus / Basilissa    Basileus / Basilissa    ·(Emperor / Empress)    
+ appointed  ·(Steward)              ·(Steward)              ·(Steward)              Harmost                 Harmost                 Harmost                 
+ headman    ·                       ·                       Demarch                 Demarch                 Demarch                 Demarch                 
+ council    ·                       ·                       ·                       Archon                  Archon                  Archon                  
+ assembly   ·                       ·                       ·                       Epistates               Epistates               Epistates               
+ elders     ·                       ·                       ·                       ·                       ·                       ·                       
+ merchant   ·                       ·                       ·                       ·                       ·                       ·                       
+ guild      ·                       ·                       ·                       ·                       ·                       ·                       
+ faith      ·                       ·                       ·                       ·                       ·                       ·                       
+ military   ·                       ·                       ·                       Polemarch               Polemarch               Polemarch               
+ arcane     ·                       ·                       ·                       ·                       ·                       ·                       
+ criminal   the BASE rows (underboss, crime_boss); heading "Crime Bosses"
 
 COUNTS: authored culture cells 174; culture cells left to the fallback 552 (of 726 = 11 cultures x 11 official families x 6 sizes); base cells 24
 ```
+
+**THE CRIMINAL SIDE IS FINAL** (the chair, 2026-11-20, on the owner's deferral "Again I defer all decisions to you"). It varies by size only, the same in all eleven cultures: Ringleader at thorp and hamlet, Underboss above; Crime Boss for each of the three; the heading "Crime Bosses". The reason, for the record: every culture-specific word for a crime boss is a real people's organised-crime word, and it would read as a stereotype of that people.
 
 ## 5. UNSURE (left to the fallback; what would settle each)
 
@@ -324,7 +339,7 @@ All runs were on this branch, with no GIT_DIR, GIT_WORK_TREE, GIT_INDEX_FILE, GI
 - `npm run typecheck:domain:strict`: exit 0 (1113, ceiling 1113).
 - `npm run typecheck:ratchet`: exit 0 (167, ceiling 167).
 
-**`tests/lint` whole at the final commit:** the run's count is in the closing message to the chair.
+**`tests/lint` whole at `4902e1229`** (the code, the census and the first hand-back): **219/219 files, 3258/3258 tests green**, exit 0 by `scripts/gate-tail.sh`. The only change after it is this hand-back's §4 and §6, a docs file under `docs/chair/`; the closing message says whether the walkers were re-run on it.
 
 ## 7. CT5's map (read, none edited)
 
