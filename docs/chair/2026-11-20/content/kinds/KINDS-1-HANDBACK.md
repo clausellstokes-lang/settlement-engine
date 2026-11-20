@@ -20,7 +20,12 @@ started on the line's tip `062504aa8`. A successor needs this file and the brief
    chair's: "law 2 only lowers" is NOT the rule — where crime is strongest a wave may be MORE likely than today's coin);
    if B breaks the bar only at the metropolis, also B with ceiling 0.50. The table is a PARAMETER of the instrument
    (`--plant`, a scratch copy). Report A | B side by side, six sizes. The numbers stay a DRAFT row FOR THE OWNER'S SIGNING.
-6. First paint: the leaf is excised from engine-core and pinned to its own `trouble-law` chunk (the fortune lane's U6
+6. THE CHAIR, 21:41 UTC: `historyGenerator.js` is AT its shrink-only size ceiling. Weights computed wholly in the leaf;
+   the generator's lines change in place (threshold on the same line); the small place's coin the one added statement;
+   one import line; room made by moving ONE tension-side helper of `buildHistoricalEvent` to a leaf under
+   `src/generators/history/` (never a hook-side one: the trouble lane `lane/page-10-2026-11-20` moves one; the join is a
+   union of imports); file ends at or under its ceiling (under: baseline lowered by its door). No packed lines.
+7. First paint: the leaf is excised from engine-core and pinned to its own `trouble-law` chunk (the fortune lane's U6
    pattern); at the join the vite rows are a UNION with the fortune lane's.
 
 ## UNITS
