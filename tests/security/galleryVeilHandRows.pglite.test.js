@@ -1777,4 +1777,251 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
     expect(bad, `${bad.length} sends or losses`).toEqual([]);
     expect(paths).toEqual([]);
   }, ARM_TIMEOUT_MS);
+
+  // ── B, C, D (VEIL-19's builder; briefs/SUB-BRIEF-BCD.md): the trace by positive account, every flag by getInstFlags, the income row by its house ──
+  it('B THE TRACE BY POSITIVE ACCOUNT: on a share that hides any house whole, the trace keeps only what a native house still listed accounts for (an institution id whose fold is a listed house\'s catalogId or its name\'s fold): the reader\'s renamed hidden house (born Smuggling network, now The Velvet Hand; unstamped and stamped) leaves by its trace id as a target, a cause and an effect; an institution entry named bare or with no id leaves; an allegiance receipt whose house is hidden whole leaves whole (its handler and "The allegiance runs to the town\'s criminal power"), one that names no house leaves; what an open house accounts for stays (by its name\'s fold, by its catalogue identity under another name, the engine\'s capitalised spelling), and so does every entry that names no institution and an open house\'s allegiance receipt; a share that hides no house whole keeps its trace whole; every Reveal-DM read, server against twin 0 paths', async () => {
+    const bad = []; const paths = [];
+    const ALLY = (npc, house, power, handler) => ({ targetType: 'npc', targetId: npc, step: 'people-allegiance', result: 'allegiance',
+      causes: [{ source: 'allegiance.gate', effect: 'eligible', reason: 'A corruptible greed flaw.' }, { source: 'flaw.greed', effect: 'allegiance vector: bribe' }],
+      downstreamEffects: [...(house ? [{ target: house, effect: 'gains a hidden ally' }] : []),
+        { target: power, effect: 'holds a hidden allegiance', reason: `The allegiance runs to the town's criminal power (${power}).` },
+        { target: handler, effect: 'handles the agent', reason: 'One handler per allegiance, dealt by standing.' }] });
+    const TRACE = [
+      { targetType: 'institution', targetId: 'institution.smuggling_network', step: 'assembleInstitutions', result: 'selected', causes: [{ source: 'tier.town', reason: 'gtr1 smuggling network absorbed rivals' }] },
+      { targetType: 'institution', targetId: 'institution.fish_market', step: 'assembleInstitutions', result: 'selected',
+        causes: [{ source: 'tier.town', reason: 'kfish fish market grew' }, { source: 'institution.smuggling_network', reason: 'gtr2 a cause by the hidden id' }],
+        downstreamEffects: [{ target: 'publicOrder', effect: 'kpo improved' }, { target: 'institution.smuggling_network', effect: 'gtr3 an effect on the hidden id' }, { target: 'institution.Fish_market', effect: 'kcap the engine\'s capitalised spelling' }] },
+      { targetType: 'institution', targetId: 'Smuggling network', step: 'subsumptionPass', result: 'subsumed', causes: [{ source: 'tier.town', reason: 'gtr4 an institution entry named bare' }] },
+      { targetType: 'institution', step: 'subsumptionPass', result: 'subsumed', causes: [{ source: 'tier.town', reason: 'gtr5 an institution entry with no id' }] },
+      { targetType: 'institution', targetId: 'institution.mill', step: 'assembleInstitutions', result: 'selected', causes: [{ source: 'tier.town', reason: 'kmill an open house under its birth identity' }] },
+      { targetType: 'faction', targetId: 'faction.council', step: 'generatePower', result: 'seated', causes: [{ source: 'config.priorityMilitary', reason: 'kfac a power' }] },
+      { targetType: 'supply_chain', targetId: 'chain.fishing', step: 'economyReconcilePass', result: 'active', causes: [{ source: 'processor.fish_market', reason: 'kchain a chain' }] },
+      ALLY('npc.oro', 'Smuggling network', 'gpow1 the Night Court', 'npc_veiled_gh1'),
+      ALLY('npc.tam', 'The Velvet Hand', 'gpow2 the Night Court', 'npc_veiled_gh2'),
+      ALLY('npc.pell', null, 'gpow3 nobody named', 'npc_veiled_gh3'),
+      ALLY('npc.mira', 'Black market bazaar', 'kpow1 the Bazaar\'s friends', 'npc.kbroker'),
+    ];
+    const WANT = [
+      { targetId: 'institution.fish_market', causes: ['kfish fish market grew'], effects: ['kpo improved', 'kcap the engine\'s capitalised spelling'] },
+      { targetId: 'institution.mill' }, { targetId: 'faction.council' }, { targetId: 'chain.fishing' }, { targetId: 'npc.mira' },
+    ];
+    const ROWS = [
+      ['the reader\'s row: the hidden house unstamped, renamed', [{ id: 'inst-777', name: 'The Velvet Hand', category: 'Criminal', desc: 'Born the smuggling network.' }]],
+      ['the hidden house stamped (catalogId smuggling_network), renamed', [{ id: 'inst-777', name: 'The Velvet Hand', catalogId: 'smuggling_network', category: 'Criminal', desc: 'Born the smuggling network.' }]],
+    ];
+    for (const [what, hiddenHouses] of ROWS) {
+      const town = { name: 'Coldharbor', tier: 'town',
+        institutions: [...hiddenHouses, { id: 'inst-fish', name: 'Fish market', category: 'Economy', desc: 'Fish.' },
+          { id: 'inst-mill', name: 'Old Wheel', catalogId: 'mill', category: 'Economy', desc: 'Grain.' },
+          { id: 'inst-bmb', name: 'Black market bazaar', category: 'Economy', desc: 'A tolerated night market.' }],
+        npcs: [{ id: 'npc.mira', name: 'Mira Vane', role: 'Fence' }, { id: 'npc.oro', name: 'Oro Pell', role: 'Clerk' }, { id: 'npc.tam', name: 'Tam Reed', role: 'Smith' }, { id: 'npc.pell', name: 'Pell Ash', role: 'Carter' }],
+        simulationTrace: TRACE };
+      const r = await sharesOf(town, [...hide(hiddenHouses[0]), { address: `card:institution:${veil.CARD_KINDS.institution.idOf(town.institutions[3])}`, hidden: false }]);
+      paths.push(...enginePaths(what, r));
+      for (const { tag, doc } of everyRead(r)) {
+        if (!isRec(doc)) { bad.push(`${what}, ${tag}: no document`); continue; }
+        for (const n of ['smuggling_network', 'smuggling network', 'Velvet', 'gtr1', 'gtr2', 'gtr3', 'gtr4', 'gtr5', 'gpow1', 'gpow2', 'gpow3', 'npc_veiled_gh']) bad.push(...arrivals(doc, n).map(a => `${what}, ${tag}: ${a}`));
+        if (!tag.startsWith('dm/') || tag === 'dm/link') continue;
+        // KEEP: what an open house accounts for, every entry that names no institution, the open house's allegiance receipt
+        const got = (Array.isArray(doc.simulationTrace) ? doc.simulationTrace : []).map(e => ({ targetId: e.targetId,
+          ...(e.targetId === 'institution.fish_market' ? { causes: (e.causes || []).map(c => c.reason), effects: (e.downstreamEffects || []).map(x => x.effect) } : {}) }));
+        if (JSON.stringify(got) !== JSON.stringify(WANT)) bad.push(`${what}, ${tag}: the trace is ${JSON.stringify(got).slice(0, 300)}`);
+        const mira = (doc.simulationTrace || []).find(e => e.targetId === 'npc.mira');
+        if (differ(mira, TRACE[10]).length) bad.push(`${what}, ${tag}: the open house's allegiance receipt is ${JSON.stringify(mira).slice(0, 200)}`);
+      }
+    }
+    // KEEP: a share that hides no house whole keeps its trace whole (an id no house accounts for included)
+    const open = { name: 'Saltmere', tier: 'town', institutions: [{ id: 'inst-fish', name: 'Fish market', category: 'Economy', desc: 'Fish.' }],
+      simulationTrace: [{ targetType: 'institution', targetId: 'institution.foundling_home', step: 'assembleInstitutions', result: 'weighed', causes: [{ source: 'institution.rookery', reason: 'kopen weighed, not kept' }] }] };
+    const r0 = await sharesOf(open, [{ address: 'field:institution:inst-fish:description', hidden: true }]);
+    paths.push(...enginePaths('no house hidden whole', r0));
+    for (const tag of ['gallery', 'import', 'client']) {
+      if (differ(r0.dm[tag]?.simulationTrace, open.simulationTrace).length) bad.push(`no house hidden whole, dm/${tag}: the trace is ${JSON.stringify(r0.dm[tag]?.simulationTrace).slice(0, 200)}`);
+    }
+    expect(bad, `${bad.length} sends or losses`).toEqual([]);
+    expect(paths).toEqual([]);
+  }, ARM_TIMEOUT_MS);
+
+  it('B (V10-6, ruling VR21) NO COUNTER TAKEN BEFORE A REMOVAL: the trace\'s ts (the engine\'s sequence, 0..n-1) is dense in served order on every Reveal-DM read the veil runs, whatever it withheld (a hidden house\'s own steps by the name search, an entry no listed house accounts for, a hidden house\'s allegiance receipt): no hole places a withheld step; the entries keep their order; a trace that loses nothing keeps its stored ts; server against twin 0 paths', async () => {
+    const bad = []; const paths = [];
+    const step = (ts, targetId, extra = {}) => ({ targetType: 'institution', targetId, step: 'assembleInstitutions', result: 'selected', causes: [{ source: 'tier.town', reason: `step ${ts}` }], downstreamEffects: [], ts, ...extra });
+    const TRACE = [
+      step(0, 'institution.fish_market'),
+      step(1, 'institution.thieves_guild_powerful'),
+      step(2, 'institution.smuggling_network'),
+      step(3, 'institution.mill'),
+      { targetType: 'npc', targetId: 'npc.oro', step: 'people-allegiance', result: 'allegiance', causes: [], downstreamEffects: [{ target: "Thieves' guild (powerful)", effect: 'gains a hidden ally' }], ts: 4 },
+      step(5, 'institution.foundling_home'),
+      { targetType: 'faction', targetId: 'faction.council', step: 'generatePower', result: 'seated', causes: [], downstreamEffects: [], ts: 6 },
+    ];
+    const town = { name: 'Saltmere', tier: 'town',
+      institutions: [hiddenHouse('inst-tg', "Thieves' guild (powerful)"), { id: 'inst-fish', name: 'Fish market', category: 'Economy', desc: 'Fish.' },
+        { id: 'inst-mill', name: 'Old Wheel', catalogId: 'mill', category: 'Economy', desc: 'Grain.' }],
+      npcs: [{ id: 'npc.oro', name: 'Oro Pell', role: 'Clerk' }], simulationTrace: TRACE };
+    const r = await sharesOf(town, hide(town.institutions[0]));
+    paths.push(...enginePaths('V10-6', r));
+    for (const tag of ['gallery', 'import', 'client']) {
+      const tr = r.dm[tag]?.simulationTrace;
+      const got = (Array.isArray(tr) ? tr : []).map(e => [e.ts, e.targetId]);
+      const want = [[0, 'institution.fish_market'], [1, 'institution.mill'], [2, 'faction.council']];
+      if (JSON.stringify(got) !== JSON.stringify(want)) bad.push(`dm/${tag}: the served trace is ${JSON.stringify(got)}`);
+    }
+    // KEEP: a share that hides no house whole sends the trace with its stored ts
+    const open = { ...town, institutions: town.institutions.slice(1), simulationTrace: TRACE.filter(e => e.targetId !== 'institution.thieves_guild_powerful' && e.targetId !== 'npc.oro').map((e, i) => ({ ...e, ts: i })) };
+    const r0 = await sharesOf(open, [{ address: 'field:institution:inst-fish:description', hidden: true }]);
+    paths.push(...enginePaths('V10-6 KEEP', r0));
+    for (const tag of ['gallery', 'import', 'client']) {
+      if (differ(r0.dm[tag]?.simulationTrace, open.simulationTrace).length) bad.push(`KEEP dm/${tag}: the trace is ${JSON.stringify(r0.dm[tag]?.simulationTrace).slice(0, 200)}`);
+    }
+    expect(bad, `${bad.length} holes or losses`).toEqual([]);
+    expect(paths).toEqual([]);
+  }, ARM_TIMEOUT_MS);
+
+  it('C EVERY FLAG BY getInstFlags: on a share that hides any house whole, every boolean of both copies of the engine\'s institution flags that is true stays true only where a house still listed raises it by the engine\'s own rule, from ONE table (HOUSE_FLAGS: the same literal in 212, each row held to getInstFlags by execution over every catalogue name, its live and custom forms, the keywords\' neighbours and the market\'s tags) in ONE fold (the dotted capital I, the Kelvin sign); the reader\'s town-d (hasGuild by a thieves\' guild, hasChurch by a clandestine shrine) reads false, hasMarket stays; a front business is no gang house; a ruined prison holds no one; a flag the table does not hold reads false; never true where it was false; a share that hides no house whole is untouched; every read, Reveal DM off and on, server against twin 0 paths', async () => {
+    const bad = []; const paths = [];
+    const sh = await import('../../src/domain/display/gallerySecondHomes.js');
+    const { getInstFlags } = await import('../../src/generators/priorityHelpers.js');
+    const { institutionalCatalog } = await import('../../src/data/institutionalCatalog.js');
+    // (1) ONE TABLE: 212's literal (between its HOUSE_FLAGS markers) is the twin's, and the table holds every flag the engine writes
+    const sql = readFileSync(resolve(MIGRATIONS, '212_share_veil_later_cures.sql'), 'utf-8');
+    const lit = sql.slice(sql.indexOf('-- HOUSE_FLAGS begin'), sql.indexOf('-- HOUSE_FLAGS end'));
+    let served = null;
+    try { served = JSON.parse(lit.slice(lit.indexOf("'") + 1, lit.lastIndexOf("'")).replace(/''/g, "'")); } catch { /* no literal: red below */ }
+    if (!served || JSON.stringify(served) !== JSON.stringify(sh.HOUSE_FLAGS)) bad.push('212\'s HOUSE_FLAGS literal is not the twin\'s');
+    const engineFlags = Object.keys(getInstFlags({}, []).inst).filter(k => k !== 'names').sort();
+    const table = sh.HOUSE_FLAGS || {};
+    if (JSON.stringify(engineFlags) !== JSON.stringify(Object.keys(table).sort())) bad.push(`the table's flags ${Object.keys(table).length} are not the engine's ${engineFlags.length}`);
+    // (2) THE ENGINE'S RULE, by execution: one house at a time, every catalogue name and every keyword (alone, with neighbours),
+    // live, ruined and stopped, custom, and with its own tags; the twin's row against getInstFlags' answer, flag by flag
+    const names = new Set();
+    for (const shelves of Object.values(institutionalCatalog)) for (const rows of Object.values(shelves || {})) for (const n of Object.keys(rows || {})) names.add(n);
+    for (const r of Object.values(table)) for (const w of [...(r.kw || []), ...(r.names || [])]) for (const n of [w, `Old ${w}`, `${w}s`, `${w.toUpperCase()} yard`, `x${w}x`]) names.add(n);
+    for (const n of ['Free company hall', 'The free company', 'freecompany', 'Port', 'Seaport', 'Docks/port facilities', 'Harbour', 'harbor', 'navy yard', 'Gates', 'gate', 'Gatesman', 'Palisade wall', 'Stone wall', 'Earthwork walls', 'Infirmary', 'Healer', 'Healers', 'Friary', 'Friaryard', 'Gaol', 'Jailhouse', 'Ajail', 'stocks', 'Town hall', 'Hospital', 'Hospitaller lodge']) names.add(n);
+    const houses = [...names].flatMap(n => [{ name: n }, { name: n, status: 'ruined' }, { name: n, status: 'Removed' }, { name: n, _worldPulseInactive: true }, { name: n, isCustom: true }]);
+    houses.push({ name: 'Quay stalls', tags: ['market'] }, { name: 'Quay stalls', tags: ['guild', 'trade'] }, { name: 'Fish market', tags: ['food'] }, { name: 'Fish market', tags: [] }, { name: 'Quay stalls', tags: ['guild'] }, { name: 'Bespoke bazaar', isCustom: true, tags: ['market'] });
+    let checked = 0;
+    if (typeof sh.houseRaisesFlag !== 'function') bad.push('the twin holds no rule per house (houseRaisesFlag)');
+    else for (const h of houses) {
+      const eng = getInstFlags({}, [h]).inst;
+      const read = sh.houseAsFlagsRead(h);
+      for (const f of engineFlags) { checked += 1; if (eng[f] !== sh.houseRaisesFlag(f, read)) bad.push(`${f} of ${JSON.stringify(h)}: the engine ${eng[f]}, the table ${!eng[f]}`); }
+    }
+    if (checked < 50000) bad.push(`only ${checked} checks`);
+    // (3) THROUGH THE SERVER: every flag true in both copies; the houses still listed raise exactly what the engine raises over them
+    const allTrue = () => ({ names: [], ...Object.fromEntries(engineFlags.map(f => [f, true])), hasDragonLair: true, hasMoat: 'yes' });
+    const ROWS = [
+      ['the reader\'s town-d: a thieves\' guild and a clandestine shrine hidden whole, a fish market open',
+        [hiddenHouse('inst-tg', "Thieves' guild (powerful)"), { id: 'inst-sh', name: 'Hidden shrine of the Drowned', category: 'Religious', tags: ['facet:clandestine:clandestine'], desc: 'The only shrine.' }],
+        [{ id: 'inst-fish', name: 'Fish market', category: 'Economy', desc: 'Fish.' }]],
+      ['R3 and the side finding: a dotted capital I and a Kelvin sign in open names; a front business beside a hidden street gang; a ruined prison; a live town prison',
+        [hiddenHouse('inst-sg', 'Street gang'), hiddenHouse('inst-bm', 'Black market')],
+        [{ id: 'inst-th', name: "THİEVES' GUILD CHAPTER", category: 'Economy', desc: 'An open name with a dotted capital I.' },
+          { id: 'inst-k', name: 'BLACK MARKET BAZAAR', category: 'Economy', desc: 'An open name with a Kelvin sign.' },
+          { id: 'inst-fb', name: 'Front businesses', category: 'Economy', desc: 'Fronts.' },
+          { id: 'inst-op', name: 'Old prison', status: 'ruined', category: 'Civic', desc: 'Ruined.' },
+          { id: 'inst-gt', name: 'East gates', category: 'Defense', desc: 'Gates.' }]],
+    ];
+    for (const [what, hiddenHouses, open] of ROWS) {
+      const town = { name: 'Guildless', tier: 'town', institutions: [...hiddenHouses, ...open],
+        economicState: { compound: { inst: allTrue() }, safetyProfile: { compound: { inst: allTrue() } } } };
+      const r = await sharesOf(town, hide(...hiddenHouses));
+      paths.push(...enginePaths(what, r));
+      for (const { tag, doc } of everyRead(r)) {
+        if (!isRec(doc)) { bad.push(`${what}, ${tag}: no document`); continue; }
+        const listed = (Array.isArray(doc.institutions) ? doc.institutions : []);
+        // the one fold reads a dotted capital I as I, as the name search does (the engine's toLowerCase does not): the open
+        // THİEVES' GUILD CHAPTER raises hasThievesGuild in both engines alike (R3)
+        const want = { ...getInstFlags({}, listed).inst, ...(listed.some(h => h.id === 'inst-th') ? { hasThievesGuild: true, hasCriminalInst: true } : {}) };
+        for (const [copy, inst] of [['economicState.compound.inst', doc.economicState?.compound?.inst], ['economicState.safetyProfile.compound.inst', doc.economicState?.safetyProfile?.compound?.inst]]) {
+          if (!isRec(inst)) { bad.push(`${what}, ${tag}: ${copy} is not sent`); continue; }
+          for (const f of engineFlags) if (inst[f] !== want[f]) bad.push(`${what}, ${tag}: ${copy}.${f} is ${inst[f]}, the listed houses raise ${want[f]}`);
+          if (inst.hasDragonLair !== false) bad.push(`${what}, ${tag}: ${copy}.hasDragonLair (a flag the table does not hold) is ${inst.hasDragonLair}`);
+          if (inst.hasMoat !== 'yes') bad.push(`${what}, ${tag}: ${copy}.hasMoat (not a boolean) is ${inst.hasMoat}`);
+        }
+      }
+    }
+    const d = await sharesOf({ name: 'Guildless', tier: 'town', institutions: [...ROWS[0][1], ...ROWS[0][2]], economicState: { compound: { inst: allTrue() } } }, hide(...ROWS[0][1]));
+    for (const { tag, doc } of everyRead(d)) {
+      const inst = doc?.economicState?.compound?.inst || {};
+      if (inst.hasGuild !== false || inst.hasChurch !== false || inst.hasMarket !== true) bad.push(`town-d, ${tag}: hasGuild ${inst.hasGuild}, hasChurch ${inst.hasChurch}, hasMarket ${inst.hasMarket}`);
+    }
+    // NEVER RAISED, and a share that hides no house whole is untouched
+    const quiet = { name: 'Saltmere', tier: 'town', institutions: [{ id: 'inst-fish', name: 'Fish market', category: 'Economy', desc: 'Fish.' }],
+      economicState: { compound: { inst: { hasGuild: true, hasBank: true, hasMarket: false, hasDragonLair: true } } } };
+    const q = await sharesOf(quiet, [{ address: 'field:institution:inst-fish:description', hidden: true }]);
+    paths.push(...enginePaths('no house hidden whole', q));
+    for (const { tag, doc } of everyRead(q)) if (differ(doc?.economicState?.compound?.inst, quiet.economicState.compound.inst).length) bad.push(`no house hidden whole, ${tag}: the flags are ${JSON.stringify(doc?.economicState?.compound?.inst)}`);
+    expect(bad.slice(0, 60), `${bad.length} sends or losses`).toEqual([]);
+    expect(paths).toEqual([]);
+  }, ARM_TIMEOUT_MS);
+
+  it('D THE INCOME ROW BY ITS HOUSE, AND THE SHARES RE-DERIVED: the criminal income row is withheld where either grouping is shut OR a criminal house is hidden whole, and a hand reveal of the house and both groupings restores the true row and shares; wherever an income row is withheld, the remaining shares are re-derived to sum to exactly 100 by largest remainder from weight (ties by the rows\' order; legacy rows from their stored percentages; nothing left: []), and the income prose rungs (incomeMix, criminalLine and their @ copies) go with it; weight is withheld on every read whatever the veil; the PDF\'s normalizeIncomeSources reads the re-derived shares unchanged; every read, Reveal DM off and on, the unmarked share too, server against twin 0 paths', async () => {
+    const bad = []; const paths = [];
+    const { normalizeIncomeSources } = await import('../../src/pdf/lib/viewModelBodySlices.js');
+    const GROUPINGS_OPEN = [{ address: 'block:defense.criminalStructure', hidden: false }, { address: 'block:power.criminalUnderside', hidden: false }];
+    // a criminal row whose words name no house (the name search cannot take it): only its house's eye or a grouping withholds it
+    const CRIME = { source: 'Shadow Economy (untaxed)', isCriminal: true, percentage: 19, weight: 19, desc: 'gcrim1 an estimated 19% flows through unofficial channels' };
+    const LAWFUL = [
+      { source: 'Market Taxes', percentage: 40, weight: 46, desc: 'Stall fees and tolls.' },
+      { source: 'Fishing', percentage: 25, weight: 28.75, desc: 'The catch.' },
+      { source: 'Crafts', percentage: 16, weight: 18.4, desc: 'Workshops.' },
+    ];
+    const PROSE = { v: 'pp-1', blocks: {
+      'general:overview': { incomeMix: { text: 'gmix1 the town depends on one source of income' }, kother: { text: 'kother an overview rung' } },
+      'economy:economics': { incomeMix: { '@': 'general:overview' }, criminalLine: { text: 'gcl1 the guild takes its cut' }, tradeProfile: { text: 'ktrade a trade rung' } },
+      'economy:print': { criminalLine: { '@': 'economy:economics' } } } };
+    /** largest remainder, the brief's rule, written here on its own */
+    const lr = (basis) => {
+      let tot = 0; for (const b of basis) tot += b;
+      const parts = tot > 0 ? basis : basis.map(() => 1); const t = tot > 0 ? tot : parts.length;
+      const q = parts.map(b => (b / t) * 100); const f = q.map(v => Math.floor(v)); let give = 100 - f.reduce((a, v) => a + v, 0);
+      for (const i of q.map((_v, i) => i).sort((a, b) => ((q[b] - f[b]) - (q[a] - f[a])) || (a - b))) { if (give <= 0) break; f[i] += 1; give -= 1; }
+      return f;
+    };
+    const house = hiddenHouse('inst-tg', "Thieves' guild (powerful)");
+    const town = (income, prose = PROSE) => ({ name: 'Guildless', tier: 'town', institutions: [house, { id: 'inst-fish', name: 'Fish market', category: 'Economy', desc: 'Fish.' }],
+      economicState: { incomeSources: income, situationDesc: 'Honest trade gets by.' }, publicProse: prose });
+    const strip = (rows) => rows.map(({ weight: _w, ...r }) => r);
+    const ROWS = [
+      ['the house hidden whole, both groupings open: withheld by its house', town([...LAWFUL, CRIME]), [...hide(house), ...GROUPINGS_OPEN],
+        strip(LAWFUL).map((r, i) => ({ ...r, percentage: lr(LAWFUL.map(x => x.weight))[i] })), true],
+      ['the house revealed by hand, the groupings shut: withheld by the groupings', town([...LAWFUL, CRIME]), [{ address: cardAddress(house), hidden: false }],
+        strip(LAWFUL).map((r, i) => ({ ...r, percentage: lr(LAWFUL.map(x => x.weight))[i] })), true],
+      ['KEEP: the house and both groupings revealed by hand: the true row and shares', town([...LAWFUL, CRIME]), [{ address: cardAddress(house), hidden: false }, ...GROUPINGS_OPEN],
+        strip([...LAWFUL, CRIME]), false],
+      ['legacy rows with no weight: the stored percentages, scaled', town(strip([...LAWFUL, CRIME])), [...hide(house), ...GROUPINGS_OPEN],
+        strip(LAWFUL).map((r, i) => ({ ...r, percentage: lr(LAWFUL.map(x => x.percentage))[i] })), true],
+      ['one row without a weight: every row from its stored percentage', town([LAWFUL[0], { ...LAWFUL[1], weight: 'heavy' }, LAWFUL[2], CRIME]), [...hide(house), ...GROUPINGS_OPEN],
+        strip([LAWFUL[0], { ...LAWFUL[1], weight: 'heavy' }, LAWFUL[2]]).map((r, i) => ({ ...r, percentage: lr(LAWFUL.map(x => x.percentage))[i] })), true],
+      ['ties broken by the rows\' order', town([{ source: 'A', percentage: 27, weight: 10 }, { source: 'B', percentage: 27, weight: 10 }, { source: 'C', percentage: 27, weight: 10 }, CRIME]), [...hide(house), ...GROUPINGS_OPEN],
+        [{ source: 'A', percentage: 34 }, { source: 'B', percentage: 33 }, { source: 'C', percentage: 33 }], true],
+      ['nothing left: []', town([CRIME]), [...hide(house), ...GROUPINGS_OPEN], [], true],
+    ];
+    for (const [what, t, deltas, want, proseGoes] of ROWS) {
+      const r = await sharesOf(t, deltas);
+      paths.push(...enginePaths(what, r), ...differ(r.base.gallery, r.base.client).map(d => `${what}: base/gallery: ${d}`));
+      for (const { tag, doc } of [...everyRead(r), ...each(r, ['base'])]) {
+        if (!isRec(doc)) { bad.push(`${what}, ${tag}: no document`); continue; }
+        const rows = doc.economicState?.incomeSources;
+        if (!Array.isArray(rows)) { bad.push(`${what}, ${tag}: no income rows`); continue; }
+        if (rows.some(x => 'weight' in x)) bad.push(`${what}, ${tag}: weight is sent`);
+        if (tag.startsWith('base/')) continue; // the unmarked share (the link: the default veil): weight alone is asked of it here
+        for (const n of ['gcrim1', 'Shadow Economy']) if (proseGoes) bad.push(...arrivals(doc, n).map(a => `${what}, ${tag}: ${a}`));
+        if (differ(rows, want).length) bad.push(`${what}, ${tag}: the rows are ${JSON.stringify(rows).slice(0, 300)}`);
+        const sum = rows.reduce((a, x) => a + x.percentage, 0);
+        if (rows.length && sum !== 100) bad.push(`${what}, ${tag}: the shares sum to ${sum}`);
+        const pdf = normalizeIncomeSources(rows);
+        if (JSON.stringify(pdf.map(x => x.percentage)) !== JSON.stringify(rows.filter(x => x.percentage > 0).map(x => x.percentage))) bad.push(`${what}, ${tag}: the PDF reads ${JSON.stringify(pdf.map(x => x.percentage))}`);
+        const blocks = doc.publicProse?.blocks || {};
+        const rungs = Object.values(blocks).flatMap(b => Object.keys(b || {}));
+        if (proseGoes) {
+          for (const n of ['gmix1', 'gcl1']) bad.push(...arrivals(doc, n).map(a => `${what}, ${tag}: ${a}`));
+          if (rungs.includes('incomeMix') || rungs.includes('criminalLine')) bad.push(`${what}, ${tag}: an income prose rung is sent: ${JSON.stringify(blocks).slice(0, 200)}`);
+        } else if (!(blocks['general:overview']?.incomeMix?.text === 'gmix1 the town depends on one source of income' && blocks['economy:economics']?.criminalLine?.text === 'gcl1 the guild takes its cut')) bad.push(`${what}, ${tag}: the income prose is ${JSON.stringify(blocks).slice(0, 200)}`);
+        if (!rungs.includes('kother') || !rungs.includes('tradeProfile')) bad.push(`${what}, ${tag}: another rung went: ${JSON.stringify(blocks).slice(0, 200)}`);
+      }
+    }
+    expect(bad.slice(0, 60), `${bad.length} sends or losses`).toEqual([]);
+    expect(paths).toEqual([]);
+  }, ARM_TIMEOUT_MS);
 });

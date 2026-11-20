@@ -58,7 +58,7 @@
  * keeps its catalogue identity, `catalogId`, which is the fold of its birth name (institutionalCatalog.js ::
  * catalogIdForName; 519 of 519 catalogue names). So the two derived name lists are sent BY POSITIVE ACCOUNT (an entry
  * stays only where a native house still listed accounts for it, each house for one entry: a stamped house by its
- * catalogue identity, an unstamped one by its name), the five booleans read from the entries that stay, and every
+ * catalogue identity, an unstamped one by its name), every flag read from the houses that stay (VEIL-19, item C), and every
  * birth name of a house removed whole is searched with its current name.
  *
  * A HIDDEN NAME, ANYWHERE, IN ANY SCRIPT (COHERENCE-VEIL-10; REVIEW-VEIL-7's V7-1, V7-4, V7-7, V7-9, V7-10): the name
@@ -101,18 +101,84 @@ function recAt(s, key) {
 export const SECOND_HOME_LIMITS = Object.freeze({ pieceMin: 12, processorPrefix: 12, run: 12 });
 
 /**
- * The engine's five criminal-house booleans and the substrings of a lower-cased house name that raise each
- * (priorityHelpers.js :: getInstitutionNames, word for word; migration 212's table is the same). The chair's
- * ruling (b), COHERENCE-VEIL-8: each reads as the houses the projection still lists would raise it. The guard
- * holds the copy to the engine's own getInstFlags.
+ * VEIL-19 (item C; REVIEW-VEIL-212-FINAL's V7-8, the reader's d06): THE ENGINE'S INSTITUTION FLAGS, EVERY ONE, AS ONE TABLE
+ * (priorityHelpers.js :: getInstitutionNames, which stamps them once at birth over the roster; migration 212 carries this
+ * very literal between its HOUSE_FLAGS markers, and the guard holds the two equal and each row to the engine's own
+ * getInstFlags by execution). Per flag, what raises it from ONE house (every flag is an OR over the houses):
+ *   kw     a substring of the house's name;
+ *   not    a pattern the name must not match for `kw` to count (the timber walls: a palisade keeps no gate);
+ *   re     the engine's word-bounded pattern, its \b spelled as the lookarounds both engines run alike over the fold;
+ *   live   only a house of the engine's live roster (institutionRoster.js :: isLiveInstitution);
+ *   names  the market (market.js :: isMarketInstitution): the house's own `tags` where it carries them ('market', or
+ *          'guild' with 'trade'), else the catalogue's market names.
+ * The name is the house's native name (a custom house has none) in the name search's one fold (caseFold). hasGangInfra is
+ * gangHousesOf's two words (VR4 side finding 3: a front business is no gang house).
+ * @type {Readonly<Record<string, Readonly<{ kw?: ReadonlyArray<string>, not?: string, re?: string, live?: boolean, names?: ReadonlyArray<string> }>>>}
  */
-export const HOUSE_FLAG_NAMES = Object.freeze({
-  hasCriminalInst: Object.freeze(["thieves' guild", 'black market', 'smuggling', 'assassins', 'street gang', 'front business', 'gambling den', 'underground city', 'multiple criminal']),
-  hasThievesGuild: Object.freeze(["thieves' guild chapter", "thieves' guild (powerful)"]),
-  hasBlackMarket: Object.freeze(['black market', 'black market bazaar']),
-  hasSmuggling: Object.freeze(['smuggling network', 'smuggling operation']),
-  hasGangInfra: Object.freeze(['street gang', 'multiple criminal factions', 'front business']),
-});
+export const HOUSE_FLAGS = Object.freeze(Object.fromEntries(Object.entries(JSON.parse(`{
+  "hasMilitaryInst": {"kw": ["garrison", "barracks", "guard", "watch", "citadel", "walls", "militia", "mercenary", "navy", "charter hall"]},
+  "hasGarrison": {"kw": ["garrison", "barracks", "professional guard", "multiple garrison"]},
+  "hasMilitia": {"kw": ["citizen militia", "militia", "household levy"]},
+  "hasWatch": {"kw": ["town watch", "city watch", "professional city watch", "village watch"]},
+  "hasMercenary": {"live": true, "kw": ["mercenary company", "mercenary quarter", "hired muscle"], "re": "(?<![a-z0-9_])free company(?![a-z0-9_])"},
+  "hasFreeCompany": {"kw": ["free company hall"]},
+  "hasCharterHall": {"kw": ["adventurers' charter hall", "adventurers' guild hall", "multiple adventurers'", "adventurers' guild", "hireling hall"]},
+  "hasWalls": {"kw": ["walls", "citadel", "gates (if walled)", "inner citadel", "massive walls", "palisade", "earthwork"]},
+  "hasGates": {"live": true, "kw": ["wall", "citadel", "palisade", "earthwork", "inner citadel", "massive walls"], "not": "palisade|earthwork", "re": "(?<![a-z0-9_])gates?(?![a-z0-9_])"},
+  "hasPrison": {"live": true, "re": "prison|stocks|(?<![a-z0-9_])gaol|(?<![a-z0-9_])jail"},
+  "hasCourtSystem": {"live": true, "re": "courthouse|court buildings|democratic assembly|city hall|town hall"},
+  "hasMarket": {"live": true, "names": ["annual fair", "auction house", "caravaneer's post", "carriers' guild", "cobbler's guild", "daily markets", "district markets (5-10)", "fish market", "furrier's district", "international trade center", "major annual fairs", "market square", "merchant guilds (15-40)", "merchant guilds (3-8)", "merchant guilds (50-100+)", "multiple market squares", "periodic market", "tailor's guild", "weekly market"]},
+  "hasGuild": {"kw": ["guild", "guild consortium", "guild governance"]},
+  "hasMerchantGuild": {"kw": ["merchant guild", "merchant oligarchy"]},
+  "hasBank": {"kw": ["bank", "money changer", "counting", "stock exchange"]},
+  "hasWarehouse": {"kw": ["warehouse"]},
+  "hasPort": {"re": "(?<![a-z0-9_])(?:port|docks?|harbou?r|shipyard|navy)(?![a-z0-9_])"},
+  "hasNavy": {"kw": ["navy", "major port"]},
+  "hasGranary": {"kw": ["granar"]},
+  "hasHospital": {"live": true, "re": "(?<![a-z0-9_])hospital|(?<![a-z0-9_])healer(?![a-z0-9_])|(?<![a-z0-9_])infirmar|(?<![a-z0-9_])monaster|(?<![a-z0-9_])friary(?![a-z0-9_])"},
+  "hasChurch": {"kw": ["church", "cathedral", "temple", "monastery", "friary", "shrine", "priest", "abbey"]},
+  "hasCathedral": {"kw": ["cathedral", "great cathedral"]},
+  "hasMonastery": {"kw": ["monastery", "friary", "major monasteries"]},
+  "hasMagicInst": {"kw": ["wizard", "mage", "alchemist", "enchant", "arcane", "academy of magic", "scroll scribe", "spellcasting", "hedge wizard"]},
+  "hasMagesGuild": {"kw": ["mages' guild", "mages district", "enchanting quarter"]},
+  "hasWizardTower": {"kw": ["wizard's tower", "multiple wizard towers"]},
+  "hasAlchemist": {"kw": ["alchemist shop", "alchemist quarter"]},
+  "hasCriminalInst": {"kw": ["thieves' guild", "black market", "smuggling", "assassins", "street gang", "front business", "gambling den", "underground city", "multiple criminal"]},
+  "hasThievesGuild": {"kw": ["thieves' guild chapter", "thieves' guild (powerful)"]},
+  "hasBlackMarket": {"kw": ["black market", "black market bazaar"]},
+  "hasSmuggling": {"kw": ["smuggling network", "smuggling operation"]},
+  "hasGangInfra": {"kw": ["multiple criminal", "street gang"]}
+}`)).map(([k, v]) => [k, Object.freeze(Object.fromEntries(Object.entries(v).map(([a, x]) => [a, Array.isArray(x) ? Object.freeze(x) : x])))])));
+/** Each rule's two patterns, compiled once. @type {Map<string, { not: RegExp|null, re: RegExp|null }>} */
+const HOUSE_FLAG_PATTERNS = new Map(Object.entries(HOUSE_FLAGS).map(([k, r]) => [k, { not: r.not ? new RegExp(r.not) : null, re: r.re ? new RegExp(r.re) : null }]));
+/** The statuses the engine's live roster leaves out (institutionRoster.js :: INACTIVE_STATUS). */
+const NOT_LIVE = Object.freeze(['ruined', 'removed', 'destroyed', 'remnant']);
+
+/**
+ * One house as the engine's flags read it: its native name in the one fold (a custom house: ''), whether it stands on the
+ * live roster, its own tags where it carries an array of them. SQL twin: _gallery_veil_second_homes (`hf`).
+ * @param {Rec} h @returns {{ n: string, live: boolean, tags: unknown[]|null }}
+ */
+export function houseAsFlagsRead(h) {
+  const status = typeof h.status === 'string' && h.status !== '' ? asciiLower(h.status) : 'active';
+  return { n: isCustomHouse(h) ? '' : caseFold(str(h.name)), live: !(h._worldPulseInactive === true || NOT_LIVE.includes(status)),
+    tags: Array.isArray(h.tags) ? h.tags : null };
+}
+
+/**
+ * Does this one house raise the flag, by HOUSE_FLAGS' row (none: no house raises it)? SQL twin: _gallery_veil_second_homes.
+ * @param {string} flag @param {ReturnType<typeof houseAsFlagsRead>} h @returns {boolean}
+ */
+export function houseRaisesFlag(flag, h) {
+  if (!Object.prototype.hasOwnProperty.call(HOUSE_FLAGS, flag)) return false;
+  const r = HOUSE_FLAGS[flag];
+  const pat = /** @type {{ not: RegExp|null, re: RegExp|null }} */ (HOUSE_FLAG_PATTERNS.get(flag));
+  if (r.live && !h.live) return false;
+  if ((r.kw || []).some(w => h.n.includes(w)) && !(pat.not && pat.not.test(h.n))) return true;
+  if (pat.re && pat.re.test(h.n)) return true;
+  if (!r.names) return false;
+  return h.tags ? (h.tags.includes('market') || (h.tags.includes('guild') && h.tags.includes('trade'))) : r.names.includes(h.n);
+}
 
 /**
  * The searchable pieces of a hidden value: each string leaf, trimmed, and each run of it between
@@ -784,12 +850,12 @@ function tiePieces(t, out) {
  * @param {Rec} s
  * @param {ReturnType<typeof secondHomeSources>} src
  * @param {Set<string>} gone names of houses removed whole
- * @param {ReadonlyArray<string>} openNames the names of the houses the projection still lists
  * @param {Readonly<Record<string, ReadonlyArray<string>>>} houseFields the house's eyes and the keys each removes
  * @param {Set<string>} [births] the catalogue identities of the houses removed whole (COHERENCE-VEIL-9)
  * @param {Set<string>} [labels] the label of each house removed whole that has no name (COHERENCE-VEIL-10, V7-9)
+ * @param {boolean} [whole] this share hides some house whole (VEIL-19, item B: the trace by positive account)
  */
-export function withholdSecondHomes(s, src, gone, openNames, houseFields, births = new Set(), labels = new Set()) {
+export function withholdSecondHomes(s, src, gone, houseFields, births = new Set(), labels = new Set(), whole = gone.size > 0) {
   // COHERENCE-VEIL-10 (V7-2): THE COMPOSED HOMES, BY IDENTITY (the header states each rule)
   const ties = src.ties;
   if (ties.length) {
@@ -866,7 +932,7 @@ export function withholdSecondHomes(s, src, gone, openNames, houseFields, births
       });
     }
   }
-  if (!gone.size && !births.size && !labels.size) return;
+  if (!gone.size && !births.size && !labels.size && !whole) return;
   // COHERENCE-VEIL-9: the houses still listed that the engine read (native: priorityHelpers.js :: getInstitutionNames
   // stamps nativeSemanticNames, so a custom house is in neither list nor any flag), each with its identity
   const accountants = (Array.isArray(s.institutions) ? s.institutions : []).filter(isRec).filter(i => !isCustomHouse(i))
@@ -877,7 +943,9 @@ export function withholdSecondHomes(s, src, gone, openNames, houseFields, births
   // of the name it was born with), an unstamped one by its name. A hidden house's birth name cannot outlive a rename,
   // and no difference between two engines' case folds can leave a spelling behind. The chair's ruling (b): a flag only a
   // house removed whole raised reads false (never true where it was false)
-  const listed = openNames.map(n => n.toLowerCase());
+  const flagHouses = (Array.isArray(s.institutions) ? s.institutions : []).filter(isRec).map(houseAsFlagsRead);
+  /** @type {Map<string, boolean>} */
+  const raised = new Map();
   const econF = recAt(s, 'economicState');
   for (const inst of [recAt(recAt(econF || {}, 'compound') || {}, 'inst'), recAt(recAt(recAt(econF || {}, 'safetyProfile') || {}, 'compound') || {}, 'inst')]) {
     if (!inst) continue;
@@ -891,9 +959,20 @@ export function withholdSecondHomes(s, src, gone, openNames, houseFields, births
         return true;
       });
     }
-    for (const [flag, words] of Object.entries(HOUSE_FLAG_NAMES)) {
-      if (inst[flag] === true && !listed.some(l => words.some(w => l.includes(w)))) inst[flag] = false;
+    // VEIL-19 (item C; V7-8): EVERY BOOLEAN, by the engine's own rule over the houses still listed (HOUSE_FLAGS): a flag that
+    // is true stays true only where a listed house raises it; a flag the table does not hold: withheld, false
+    for (const [flag, v] of Object.entries(inst)) {
+      if (v !== true) continue;
+      if (!raised.has(flag)) raised.set(flag, flagHouses.some(h => houseRaisesFlag(flag, h)));
+      if (!raised.get(flag)) inst[flag] = false;
     }
+  }
+  // VEIL-19 (item B; V7-5): THE TRACE BY POSITIVE ACCOUNT, and with it the allegiance receipts by their house (VR4 ii-12):
+  // on a share that hides any house whole, what no native house still listed accounts for (its catalogId, its name's fold)
+  // leaves the trace (withholdTraceByAccount). SQL twin: _gallery_veil_second_homes (`acc_ids`)
+  if (whole && Array.isArray(s.simulationTrace)) {
+    withholdTraceByAccount(s, new Set((Array.isArray(s.institutions) ? s.institutions : []).filter(isRec).filter(i => !isCustomHouse(i))
+      .flatMap(i => [typeof i.catalogId === 'string' ? i.catalogId : '', foldName(str(i.name))]).filter(x => x !== '')));
   }
   // A chain names a house by the ENGINE's processor match, not only by the card's name (computeActiveChains.js ::
   // fuzzyProcessorMatch: the lower-cased name holds the pattern's first processorPrefix characters), so a house
@@ -982,6 +1061,60 @@ export function withholdSecondHomes(s, src, gone, openNames, houseFields, births
     withholdTiesOfTheSwept(s, search.hit);
     sweepHiddenNames(s, search);
   }
+}
+
+/** The trace's own spelling of a house's id (the engine's `institution.<snake>`). */
+const TRACE_HOUSE_ID = 'institution.';
+
+/**
+ * VEIL-19 (item B; REVIEW-VEIL-212-FINAL's V7-5): THE TRACE BY POSITIVE ACCOUNT (in place). A renamed house hidden whole keeps
+ * nothing of its birth name but the trace's `institution.<snake>`, so the name search cannot find it there. The trace keeps
+ * what a native house still listed accounts for, as the two derived lists do: an id that begins `institution.` (any string
+ * of an entry, of a cause or of an effect; an entry's targetId where its targetType is 'institution') is accounted for
+ * where the fold of the id after that prefix (foldName) is in `acc` (each listed native house's catalogId and its name's
+ * fold). An entry that holds one no house accounts for leaves whole, and an 'institution' entry whose targetId is not a
+ * string (unsure); a cause or an effect that holds one leaves its list. WITH IT (VR4 ii-12, by identity): an allegiance
+ * receipt (step 'people-allegiance' or result 'allegiance': allegiance.js :: leaveAllegianceReceipts) stays only where
+ * every effect 'gains a hidden ally' names, as its target, a house accounted for by the same rule, so a hidden house's
+ * handler line and "The allegiance runs to the town's criminal power" leave with it; a receipt that names no house leaves
+ * (unsure). SQL twin: _gallery_veil_second_homes (`acc_ids`), rule for rule.
+ * @param {Rec} s @param {Set<string>} acc
+ */
+function withholdTraceByAccount(s, acc) {
+  /** @param {string} v */
+  const accounted = (v) => acc.has(foldName(v.startsWith(TRACE_HOUSE_ID) ? v.slice(TRACE_HOUSE_ID.length) : v));
+  /** @param {unknown} x */
+  const holdsOther = (x) => (typeof x === 'string' ? [x] : isRec(x) ? Object.values(x).filter(v => typeof v === 'string') : [])
+    .some(v => v.startsWith(TRACE_HOUSE_ID) && !accounted(v));
+  const trace = /** @type {unknown[]} */ (s.simulationTrace);
+  s.simulationTrace = trace.flatMap((e) => {
+    if (!isRec(e)) return [e];
+    if (Object.entries(e).some(([k, v]) => k !== 'causes' && k !== 'downstreamEffects' && typeof v === 'string'
+      && (v.startsWith(TRACE_HOUSE_ID) || (k === 'targetId' && e.targetType === 'institution')) && !accounted(v))) return [];
+    if (e.targetType === 'institution' && typeof e.targetId !== 'string') return [];
+    if (e.step === 'people-allegiance' || e.result === 'allegiance') {
+      const allies = (Array.isArray(e.downstreamEffects) ? e.downstreamEffects : []).filter(d => isRec(d) && d.effect === 'gains a hidden ally');
+      if (!allies.length || !allies.every(d => typeof d.target === 'string' && accounted(d.target))) return [];
+    }
+    const next = { ...e };
+    for (const k of ['causes', 'downstreamEffects']) {
+      const list = e[k];
+      if (Array.isArray(list)) next[k] = list.filter(x => !holdsOther(x));
+    }
+    return [next];
+  });
+}
+
+/**
+ * VEIL-19 (REVIEW-VEIL-10's V10-6, the chair's ruling VR21): NO COUNTER TAKEN BEFORE A REMOVAL (in place). The trace's `ts` is
+ * the engine's own sequence (trace.js :: recordTrace's clock from 0; tracePartition.js re-indexes it 0..n-1), and an entry
+ * the veil withholds left a hole that placed the hidden house's own steps. Each served entry that carries `ts` takes its
+ * place in the served list, dense, in served order, on every read the veil runs. SQL twin: _gallery_veil_apply, last.
+ * @param {Rec} s
+ */
+export function renumberTrace(s) {
+  if (!Array.isArray(s.simulationTrace)) return;
+  s.simulationTrace = s.simulationTrace.map((e, i) => (isRec(e) && Object.prototype.hasOwnProperty.call(e, 'ts') ? { ...e, ts: i } : e));
 }
 
 /** The ends of a tie, in both stored shapes (from/to; master's npc1Id/npc2Id) and by name. */
@@ -1088,11 +1221,75 @@ const CRIMINAL_INCOME_SOURCES = Object.freeze(['block:defense.criminalStructure'
  * The chair's ruling (c), COHERENCE-VEIL-8: the criminal income row (economicState.incomeSources[] with
  * `isCriminal`) is built from what two groupings hide: its label from safetyProfile.criminalInstitutions, its
  * sentence from safetyProfile.blackMarketCapture. Where either grouping is shut it is withheld whole (in place, on
- * applyVeil's own clone). SQL twin: migration 212 :: _gallery_veil_apply.
- * @param {Rec} s @param {ReadonlyArray<string>} groupings
+ * applyVeil's own clone). VEIL-19 (item D): AND BY ITS HOUSE: where any criminal house (cardVeil.js ::
+ * isCriminalInstitution) is hidden whole, whatever the groupings; a hand reveal of the house and both groupings restores
+ * it. SQL twin: migration 212 :: _gallery_veil_apply.
+ * @param {Rec} s @param {ReadonlyArray<string>} groupings @param {boolean} [criminalGone] a criminal house is hidden whole
  */
-export function withholdCriminalIncome(s, groupings) {
+export function withholdCriminalIncome(s, groupings, criminalGone = false) {
   const econ = recAt(s, 'economicState');
-  if (!econ || !Array.isArray(econ.incomeSources) || !groupings.some(g => CRIMINAL_INCOME_SOURCES.includes(g))) return;
+  if (!econ || !Array.isArray(econ.incomeSources) || !(criminalGone || groupings.some(g => CRIMINAL_INCOME_SOURCES.includes(g)))) return;
   econ.incomeSources = econ.incomeSources.filter(r => !(isRec(r) && r.isCriminal === true));
+}
+
+/** The income prose rungs that carry the criminal income (economyStateProse.js: the economy desk's incomeMix and criminalLine). */
+const INCOME_PROSE_RUNGS = Object.freeze(['incomeMix', 'criminalLine']);
+
+/** A share the re-derivation reads (a JSON number a double holds, from 0 to 10^12), or null. @param {unknown} v @returns {number|null} */
+const shareBasis = (v) => (typeof v === 'number' && Number.isFinite(v) && v >= 0 && v <= 1e12 ? v : null);
+
+/**
+ * VEIL-19 (item D; ruling VR6, THE OWNER'S OWN DESIGN; ruling VR19): THE SHARES RE-DERIVED, FOR DISPLAY ONLY (in place, on
+ * applyVeil's own clone). Wherever the veil has withheld any income row (`before`: the rows the projection held before it),
+ * the remaining rows' `percentage` is re-derived to sum to exactly 100 by LARGEST REMAINDER from `weight` (weight / the
+ * remaining weights' sum x 100; the floors; then one more to each of the largest remainders, ties by the rows' order); where
+ * any remaining row carries no usable weight (a JSON number from 0 to 10^12), from the stored percentages so (legacy, scaled);
+ * a sum of 0 shares equally; nothing left: []. The income prose rungs that carry the criminal income (incomeMix,
+ * criminalLine, at every site of publicProse.blocks, their `@` copies among them) go with it. AND ON EVERY READ THE VEIL RUNS,
+ * whatever it withheld: each row's `weight` is withheld (no shared page draws it; ruling VR19: a share is re-derived or
+ * withheld, never sent raw), so its absence tells nothing. The arithmetic is IEEE doubles in both engines, in the rows'
+ * order. SQL twin: migration 212 :: _gallery_veil_apply (and the reads' unmarked path: withholdIncomeWeights).
+ * @param {Rec} s @param {number|null} before
+ */
+export function rederiveIncomeShares(s, before) {
+  const econ = recAt(s, 'economicState');
+  if (!econ || !Array.isArray(econ.incomeSources)) return;
+  const rows = /** @type {unknown[]} */ (econ.incomeSources);
+  if (before !== null && rows.length < before) {
+    const objs = rows.filter(isRec);
+    const byWeight = objs.length > 0 && objs.every(r => shareBasis(r.weight) !== null);
+    let basis = objs.map(r => (byWeight ? /** @type {number} */ (shareBasis(r.weight)) : (shareBasis(r.percentage) ?? 0)));
+    let total = 0;
+    for (const b of basis) total += b;
+    if (!(total > 0)) { basis = basis.map(() => 1); total = basis.length; }
+    const q = basis.map(b => (b / total) * 100);
+    const shares = q.map(v => Math.floor(v));
+    let give = 100 - shares.reduce((a, v) => a + v, 0);
+    const order = q.map((_v, i) => i).sort((a, b) => ((q[b] - shares[b]) - (q[a] - shares[a])) || (a - b));
+    for (const i of order) { if (give <= 0) break; shares[i] += 1; give -= 1; }
+    let k = 0;
+    econ.incomeSources = rows.map(r => (isRec(r) ? { ...r, percentage: shares[k++] } : r));
+    const blocks = recAt(recAt(s, 'publicProse') || {}, 'blocks');
+    if (blocks) for (const site of Object.keys(blocks)) { const b = recAt(blocks, site); if (b) for (const key of INCOME_PROSE_RUNGS) delete b[key]; }
+  }
+  econ.incomeSources = /** @type {unknown[]} */ (econ.incomeSources).map(r => (isRec(r) && 'weight' in r ? withoutKey(r, 'weight') : r));
+}
+
+/** @param {Rec} r @param {string} key @returns {Rec} */
+function withoutKey(r, key) {
+  const next = { ...r };
+  delete next[key];
+  return next;
+}
+
+/**
+ * VEIL-19 (item D (4)): the unmarked share's read (served as before, no veil): each income row's `weight` withheld all the
+ * same (every non-owner read; no shared page draws it). Returns the projection itself where nothing is withheld, else a
+ * copy. SQL twin: get_gallery_dossier and import_gallery_dossier, the unmarked path.
+ * @param {Rec} pub @returns {Rec}
+ */
+export function withholdIncomeWeights(pub) {
+  const econ = recAt(pub, 'economicState');
+  if (!econ || !Array.isArray(econ.incomeSources)) return pub;
+  return { ...pub, economicState: { ...econ, incomeSources: econ.incomeSources.map(r => (isRec(r) && 'weight' in r ? withoutKey(r, 'weight') : r)) } };
 }
