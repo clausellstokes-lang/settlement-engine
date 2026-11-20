@@ -93,7 +93,7 @@
  */
 
 import { substituteWholeWord } from '../lib/narrativeMutations.js';
-import { powerSentenceName } from './display/powerSentenceName.js';
+import { powerNameAfterArticle, powerSentenceName } from './display/powerSentenceName.js';
 import { deepClone } from './clone.js';
 import { nameOf } from './rulingPower.js';
 import { rekeyUserEdit, walkUserEdits } from './userEdits.js';
@@ -677,7 +677,18 @@ function rewriteProse(target, key, oldName, newName) {
  * @param {string} text @param {string} oldName @param {string} newName @returns {string}
  */
 function substituteName(text, oldName, newName) {
-  const next = substituteWholeWord(text, oldName, newName);
+  // NAMES-1 (the seventh chair's ruling CN1 of 2026-11-20): a sentence written through the leaf names the power WITH ITS
+  // ARTICLE ("the Guard" inside a sentence, "The Guard" at its head), so those move first, each to the new name's own
+  // article form ("Stop the Guard from ..." -> "Stop the Military Party from ..."); the older spellings follow as before
+  let next = text;
+  const bodyOld = powerNameAfterArticle(oldName);
+  const bodyNew = powerNameAfterArticle(newName);
+  if (bodyOld && bodyNew && bodyOld !== bodyNew) {
+    next = substituteWholeWord(next, `the ${bodyOld}`, `the ${bodyNew}`);
+    const atHead = new RegExp(`(^|[.!?…]["”')]?\\s+)The ${bodyOld.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![\\p{L}\\p{N}\\p{M}_])`, 'gu');
+    next = next.replace(atHead, (_m, lead) => `${lead}The ${bodyNew}`);
+  }
+  next = substituteWholeWord(next, oldName, newName);
   const saidOld = powerSentenceName(oldName);
   return saidOld && saidOld !== oldName ? substituteWholeWord(next, saidOld, powerSentenceName(newName)) : next;
 }

@@ -121,7 +121,9 @@ function exactHits(values, name) {
 /** Values a prose-surface path returned that CONTAIN `name` as a whole word. */
 function proseHits(values, name) {
   const re = wholeWordRe(name);
-  return values.filter(v => typeof v === 'string' && re.test(v)).length;
+  // NAMES-1 (CN1): a name that carries its own "The" is written "the …" inside a sentence (powerNameWithArticle)
+  const inSentence = /^The\s/.test(name) ? wholeWordRe(`the ${name.slice(4)}`) : null;
+  return values.filter(v => typeof v === 'string' && (re.test(v) || (inSentence !== null && inSentence.test(v)))).length;
 }
 
 function hitsFor(surface, settlement, name) {
@@ -470,7 +472,8 @@ describe('faction rename — what it must NOT touch', () => {
       },
     };
     applyFactionRenameToSettlement(settlement, 'Harbour Compact', NEW_NAME);
-    expect(settlement.powerStructure.factions[1].desc).toBe(`Paid by the ${NEW_NAME}, loyal to nobody.`);
+    // NAMES-1 (CN1): a sentence's "the" before a renamed power is the article of a name that carries its own: "the Amber Concord", never "the The Amber Concord"
+    expect(settlement.powerStructure.factions[1].desc).toBe(`Paid by the ${NEW_NAME.replace(/^The /, '')}, loyal to nobody.`);
     // ...without the sibling's own name moving.
     expect(settlement.powerStructure.factions[1].faction).toBe('Militia');
   });

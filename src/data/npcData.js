@@ -3,6 +3,7 @@
 
 import { pickVariant } from '../kernel/proseHash.js';
 import { HANDLER_TIE_LINES } from './people/handlerTieLines.js';
+import { secondMentions } from './people/personMention.js';
 import { sharesPower } from '../domain/facts/sharedPower.js';
 import { pairSharesPlaceOf } from '../domain/facts/pairPlace.js'; // BAR4-CLOSE-SWEEP (the chair's PD1, PD1b): `shared place`'s one reader, for the successor line's twin
 
@@ -1679,8 +1680,11 @@ const closureFor = (row, a, b) => (row && typeof row === 'object' && typeof row.
 const pairProse = (salt, variants, order = null, debt = false) => Object.assign((r, s, variant, force) => {
   const [a, b] = isReversedTie(variant) ? [s, r] : [r, s]; // TAIL-TIES-2 (T6): the pair's direction, read off the stored variant
   const drawn = order ? endsOf(a, b, order[0], order[1]) : [a, b], ends = debt && secretOwes(drawn[1], drawn[0]) && !secretOwes(drawn[0], drawn[1]) ? [drawn[1], drawn[0]] : drawn; // BAR3-PEOPLE-2 (C35097): the pair's one debt (secretOwes, at the file's end)
-  return closureFor(isTieIndex(variant) ? variants[tieIndexOf(variant) % variants.length]
+  // NAMES-1 (the seventh chair's ruling CN2 of 2026-11-20): a card's later mention in one sentence is a pronoun, its
+  // surname, its role or its given name, never its full name twice (data/people/personMention.js :: secondMentions)
+  const said = closureFor(isTieIndex(variant) ? variants[tieIndexOf(variant) % variants.length]
     : pickVariant(variants, `${r?.name ?? ''}>${s?.name ?? ''}::${salt}`), ends[0], ends[1])(...ends, force || TIE_FORCE_WORDS);
+  return secondMentions(said, ends);
 }, { size: variants.length, lines: Object.freeze([...variants]) }); // F1: the force words, garrison's by default (`defenseFacts.js :: forceWordsOf`)
 const TIE_FORCE_WORDS = Object.freeze({ body: 'garrison', members: 'soldiers', member: 'soldier' });
 /** A drawn tie index is a non-negative integer; anything else takes the pair-hash fallback. */
