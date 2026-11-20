@@ -203,3 +203,33 @@ COST: the largest born town here is Langengrund (502,604 B): Reveal-DM gallery r
 REDS KNOWN AFTER R2: `criminalVeilSwitch.test.js` VS1 (b)/(c): 28 lines on 12 births (8 at the base; it now also lists
 `blackMarketCapture`); V10-2 rewrites that test (merge it next). `observedShapeReaders.walker`: violations 4 and the register
 arm (the close's). Owed to the reader for R2: the gate through the link and master's shape.
+
+## 8. HANDED OVER (to VEIL-22, on the chair's word of 04:40 UTC)
+
+THE MARK: `get_session` reads `used_tokens 0`; by this seat's own count ~345,000. Nothing of this seat's is running; every
+builder has ended. Worktrees in this container (VEIL-22 has its own): `/home/user/wt/{r2,r2b,r6,side,osr,v21m,master}`.
+BRANCHES ON ORIGIN (pushed as transport, none for a pull request): `lane/veil-21-2026-11-20` (THE LANE; tip: the commit
+carrying this file), `lane/veil-21-r2-2026-11-20` (R2's first build, superseded), `lane/veil-21-r2b-2026-11-20` (R2 + cures;
+its push of 81e9fbfd1 may still show 7591663b4: the lane carries 4ddf8c60c, byte-equal), `lane/veil-21-r6-2026-11-20`
+(R6 PREPARED, b47b7bbdb, clean, NOT merged), `lane/veil-21-side-2026-11-20`, `lane/veil-21-osr-2026-11-20` (both merged).
+NEXT, IN ORDER (the chair's): merge "V10-2 cabdfaa69" `--no-ff` (its hunk in `curateModelFor` only; VS1's reds then gone: say
+the count); R3 and R4 IN PARALLEL from the lane tip (briefs committed); R6 merged after R2 (re-cut on the lane tip; its MAIN
+arm judges R3 onward); R5 after R3; R7 after R6; DOORS from `lane/veil-doors-3-2026-11-20` on the chair's word (two hunks
+INSIDE `import_gallery_dossier`); the stored figures once at the merged tree; E.
+WHAT I WOULD TELL EACH BUILDER THAT THE BRIEF DOES NOT SAY:
+- ALL: 212 now restates 211's top-level `_gallery_veil` with R2's withhold-always step AT ITS END and runs it on an unmarked
+  share too; your call line goes immediately BEFORE that step. The page side lives in `src/domain/veil/pageRederive.js`
+  (called from `src/lib/gallery.js :: sanitizeDossier`, with `unveiled` only for an unmarked share). The twin's mirror is
+  `src/domain/display/galleryWithholdAlways.js`. A builder that reaches ~300k tokens must stop clean: R2's first builder
+  stopped NOT GREEN at 440k and cost a second builder.
+- R3: VR39 and the power observable are the born test's arms; `power.relation.direction` is yours ((b) with its relation).
+  `restampServedMemberships` assumes a served membership is a public one: if R3 withholds memberships per entry, keep it true.
+- R4: re-key `cast.roles[].id` BEFORE R2's step (a cast role of kind 'npc' is matched by id there, or every such role is
+  withheld: the chair, 04:50 UTC). The render-twice harness now walks the session sheet: the cast is drawn there.
+- R6: align or retire `rosterChoiceInversion.pglite.test.js` (its legitimacy rows and prosperityStanding no longer invert
+  under VR32); `defence.scores.internal` left the tier-1 list with R2.
+EVERY RED I KNOW, BY NAME: `tests/domain/display/criminalVeilSwitch.test.js` VS1 (b)/(c) (28 lines on 12 births; V10-2's);
+`tests/lint/observedShapeReaders.walker.test.js` violations 4 against frozen 1 and its register arm {2220, 1556, 448} against
+{2214, 1552, 444} (the close's governed rung); the stored figures owed at the merged tree (the lighting census, the test
+ratchet, the wiring census as their hand-backs name). FOR THE CHAIR: `safety.blackMarketCapture` `page` moved to
+'re-derive' on unveiled shares by R2's cure (section 7).
