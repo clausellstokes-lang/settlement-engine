@@ -1193,3 +1193,14 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   Hide-all, changes the applier's output for 0; every offered part is hidden after Hide-all (1,296 and 1,237). No
   stored Show-all delta can exist on production (master holds no switch). VEIL-21 merges it at a stage boundary.
   THE READER'S COLD READS SO FAR, ALL HOLDING: B/C/D; VR17; DOORS as built; V10-2.
+- 03:59 UTC · **SAFETY NET (3), FIRED AT 03:57 UTC, READ.** SEATS: VEIL-21 running (tip d9ef1ce83; its side branch
+  ba820737c); VEIL-DOORS-2 running (tip eafece56a: item 5 committed, the security suite running); SEC-GRANTS-2
+  running (tip aa2b0ee9d); REVIEW-VEIL-11 idle, waiting for a cure's commit (five cold reads done, all holding);
+  VEIL-V102 handed back; the eight earlier seats done. GIT-DOOR: FOUND HOLDING THE POINT: its commits (1) the anchor
+  (ddaf1e1af) and (3) the shard cap (906386df3) exist only in its container, and since 03:12 UTC it has waited in
+  one long turn on the six-shard measuring run (shard 1: 606 files, 290 kinds of hook, none flagged); the chair's
+  03:01 ruling (the point is not held for the class) had not reached it. SENT INTO ITS RUNNING TURN: measure the
+  one hook directly beside the run, commit it, push the three, "GIT-DOOR-3"; the class follows. ORIGIN: no movement
+  by another hand (`lane/veil-18-2026-11-19` bedd5a392; the line 85fccf898; master db832c892). THE OWNER: the two
+  open answers (the app's smoke check; step 2's "all 0") and the two lines for the ticket thread are not yet
+  reported. RE-ARMED: safety net (4) at 05:15 UTC (trig_01Dk8HjmtuRdbTCFo2SzENrZ).
