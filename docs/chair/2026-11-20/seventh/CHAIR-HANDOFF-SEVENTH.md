@@ -5310,3 +5310,9 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   reasons): PERSONALITY/greed/short 5 "Come out of one bargain this season with twice what they put in." (a king
   keeps no shop); INSTITUTION/charter/long 11 "Win {house} freedom from the tolls and dues that others pay." (a
   garrison does not trade); TIES/rival_enemy/short 7 stands.
+- 17:57 UTC · THREE NOTIFICATIONS READ AT 17:55 AND RULED (section 2, "Rulings of 17:55"): the Outlook verdict's false alarm (97
+  of 108 places flagged only by the generator's own wording: the verdict to draw on a real contradiction only; the
+  offending fields to be measured and routed); traditions unit 10 (the keeper named in a short form, not left out).
+  PAGE-8 seated and reading (it notes PAGE-6's hand-back was last written at 15:36: PAGE-6 was told at 17:51 to
+  make it current). PROSE-1's BUILD-1 is out on `lane/prose-1-build-1-2026-11-20`; its hand-back (8de90368e) lists
+  the chair's thirteen rulings since 17:00.
