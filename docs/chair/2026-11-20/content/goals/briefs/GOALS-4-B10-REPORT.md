@@ -17,3 +17,14 @@ The branch is `lane/goals-4-2026-11-20-b10` (base d8b174237). Its tip is the com
 **Stored figures, not re-recorded (signed doors):** A1 7c466b88→3756a39f; golden master 525 of 525 rows change.
 
 **Not done (STOP):** presumptionClasses names 6 new lines with no declaration: 2 ease, 1 office, 3 threat. Curing them needs a declaration or a rewording, and both are forbidden. writerReach's shapesDigest is 7350e7ff→fd3443e1, which fails 2 tests. Neither was re-recorded.
+
+## Rewordings (20:17 ruling)
+
+The chair's ruling of 2026-11-20 20:17 UTC reworded six lines. Each was replaced verbatim, in its place in its cell, in `goalFamilies.js` and in the lane copy of `WANT-LINES-FINAL.md`, which also gained the note line. The commit is ffccf3ab8.
+
+- **(a) presumptionClasses walker:** 16/16, with nothing banked; the register is untouched.
+- **(b) goal suites and the 380-lines arm:** 279/280. The one red is A1, which was already red at the base; its control row moved 3756a39f → b47efa6d and was not re-recorded. No pin moved.
+- **(c) lighting census:** 34/34 on an ordinary run, so no refreeze was needed.
+- **(d) goals-final at 150 a size:** the TOTAL row at ffccf3ab8 is equal to c1ca6e653's: identical 0, mirror 0, template>2 42, template=2 245, refusal 0, nocell 100 (`goals/measures/goals-final.ffccf3ab8.150.out.txt`).
+
+writerReach was not touched; the integrator re-freezes it.
