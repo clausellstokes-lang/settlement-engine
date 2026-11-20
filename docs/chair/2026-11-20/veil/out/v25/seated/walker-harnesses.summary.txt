@@ -1,0 +1,4 @@
+/var/tmp/v18/out/v25/seated/walker.txt: Test Files  1 passed (1)
+/var/tmp/v18/out/v25/seated/walker.txt:      Tests  11 passed (11)
+/var/tmp/v18/out/v25/seated/harnesses.txt: Test Files  2 passed (2)
+/var/tmp/v18/out/v25/seated/harnesses.txt:      Tests  8 passed (8)

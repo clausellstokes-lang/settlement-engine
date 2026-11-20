@@ -1,0 +1,4 @@
+new-gallery: registered 13 | diffuse 21 | rng-only 13 | UNREGISTERED 42
+new-link: registered 13 | diffuse 21 | rng-only 13 | UNREGISTERED 38
+master-gallery: registered 13 | diffuse 15 | rng-only 10 | UNREGISTERED 66
+master-link: registered 13 | diffuse 15 | rng-only 10 | UNREGISTERED 55
