@@ -1339,6 +1339,23 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   town. THE ORDER: VEIL-26 merges R3-CURE-5 and hands over; VEIL-27 (`prompts/VEIL-27.txt`) builds R3-CURE-6 (the
   numeric-id and no-id husk) and R3-TELL; only then "R3 <commit>" and REVIEW-VEIL-14's seating.
 
+- **DEPTH-1's PROPOSAL RULED (2026-11-20, 14:40 UTC; `DEPTH-PROPOSAL 936f843e9` on `lane/depth-1-2026-11-20`, cut from the line
+  43ab0f5eb; the chair's measure re-run byte-identical):** HOW THE DRAWS WORK, read by it in the code: a tie's line
+  is chosen by `createTieProseDraw` (it opens at a hash of the town and steps; ONE stored index,
+  `relationships[].proseVariant`, picks the description AND its tension: a new tie line is a PAIR); a hook by
+  `drawUnique` (one roll, uniform over the rows not yet printed, preferring themes not yet spoken); the catch-all
+  group is `NPC_FACTION_LOYALTY.other` (40 rows); a new hook MUST be tagged in `domain/hookThemes.js ::
+  AUTHORED_HOOK_THEMES` (untagged, the new lines became the head). APPROVED: 80 TIE PAIRS (14 each to
+  wary_alliance, peer_rivalry, old_debt, mutual_leverage; 12 each to mentor_legacy, genuine_respect) AND 60 HOOKS
+  (30 catch-all, 14 economy, 8 criminal, 8 government), IN THE DRAW, APPENDED (20,014 of 20,014 stored ties of the
+  census re-render identical). ITS MEASURE ON PLACEHOLDER BIRTHS, an upper bound: ties: town 35% to 17%, city 63%
+  to 37%, metropolis 73% to 49%; hooks: town 25% to 17%, city 47% to 32%, metropolis 64% to 43%. WHAT MOVES IN A
+  NEW TOWN: the one number `proseVariant`; the strings of hooks, ties and what quotes them; AND THREE COUNTED
+  CLASSES, accepted, reported apart: rare secrets re-dealt because `dealRareSecrets` reads a hook's text (71
+  golden, 9 census cards); a second tie's kind and strength through `temperOfTie` (1 and 3); one long want each.
+  Hooks first; ties on the commit the chair names when the goals work lands; every line to the chair in files of
+  about forty before any build. (The measure's `born.mjs` was missing from the record: added now.)
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
