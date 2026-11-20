@@ -1,0 +1,22 @@
+run 2026-11-20T19:23:06Z
+tree /home/user/wt/t2read at f95ce89a5d74e6b59a6dcfd4cf1c743999c75b90
+53963f4e1577c25253fd52724c7e7cab9242aff066717ba2583cbe74606e2c41  /home/user/wt/t2read/docs/chair/2026-11-20/veil/out/v27/tell2/measure/tell2-signature.mjs
+662b5afc768a9c3b5e375697c6544d9e40b54e69d429526b63050d2f0d114d7a  /home/user/wt/t2read/docs/chair/2026-11-20/veil/out/v27/tell2/measure/tell2.probe.jsx
+8e19a41351170150a29d9c2d15e114a30eb0fe7966df734f613db66c634bed0c  /home/user/wt/t2read/src/domain/display/galleryVeil.js
+b2dfbdc1bde919fbfb1b0732f18813c49f86b82a5c391227e7303b82bfb61b0f  /home/user/wt/t2read/src/domain/display/galleryRosterChoices.js
+0483579e2ad7d185d8c1a81eb6fd7470821436817f1a08ab6355af68b06a1444  /home/user/wt/t2read/src/domain/display/criminalVeilSwitch.js
+6260803d1c4dddc13831f0e72c7e3ee0c88e4853e74c56e1c384b4251efb0218  /home/user/wt/t2read/supabase/migrations/212_share_veil_later_cures.sql
+A start 2026-11-20T19:23:06Z mode pool RV9_TARGET=300 RV9_AUDIT=50
+A end 2026-11-20T19:23:27Z
+B start 2026-11-20T19:23:27Z
+B end 2026-11-20T19:36:07Z
+run 2026-11-20T19:36:13Z
+tree /home/user/wt/t2read at f95ce89a5d74e6b59a6dcfd4cf1c743999c75b90
+53963f4e1577c25253fd52724c7e7cab9242aff066717ba2583cbe74606e2c41  /home/user/wt/t2read/docs/chair/2026-11-20/veil/out/v27/tell2/measure/tell2-signature.mjs
+662b5afc768a9c3b5e375697c6544d9e40b54e69d429526b63050d2f0d114d7a  /home/user/wt/t2read/docs/chair/2026-11-20/veil/out/v27/tell2/measure/tell2.probe.jsx
+8e19a41351170150a29d9c2d15e114a30eb0fe7966df734f613db66c634bed0c  /home/user/wt/t2read/src/domain/display/galleryVeil.js
+b2dfbdc1bde919fbfb1b0732f18813c49f86b82a5c391227e7303b82bfb61b0f  /home/user/wt/t2read/src/domain/display/galleryRosterChoices.js
+0483579e2ad7d185d8c1a81eb6fd7470821436817f1a08ab6355af68b06a1444  /home/user/wt/t2read/src/domain/display/criminalVeilSwitch.js
+6260803d1c4dddc13831f0e72c7e3ee0c88e4853e74c56e1c384b4251efb0218  /home/user/wt/t2read/supabase/migrations/212_share_veil_later_cures.sql
+A start 2026-11-20T19:36:13Z mode pool RV9_TARGET=300 RV9_AUDIT=50
+A end 2026-11-20T20:00:52Z
