@@ -1,0 +1,2 @@
+golden: towns 525 · changed holdings 3615 · changed but NOT a base repeat 0 · towns with no base repeat yet changed 0 · texts no template matched 0
+census: towns 720 · changed holdings 5740 · changed but NOT a base repeat 0 · towns with no base repeat yet changed 0 · texts no template matched 251

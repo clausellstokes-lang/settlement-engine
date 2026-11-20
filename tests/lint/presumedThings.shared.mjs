@@ -380,11 +380,14 @@ export const ARM1_RULE_BOOK = Object.freeze({
  * whose literals this walker's widened roots read as lines once both lanes stood on the line. Each is admitted with its
  * EXACT count of arm-1 hits and of strip sites: the walker asserts each file reads exactly its named counts, so a new line
  * in either file, or one gone, reds ("each admitted instrument reads exactly its named counts"). Not a directory rule: a
- * file in src/domain/coherence/ has printed a line before.
+ * file in src/domain/coherence/ has printed a line before. A THIRD, by the chair's ruling of 2026-11-20 16:04 UTC (GOALS-3,
+ * R2): the goals lane's closed list of venal secrets, a matcher whose texts copy live pool lines, pinned by its parity arm.
  */
 export const ARM1_INSTRUMENTS = Object.freeze({
   'src/domain/coherence/pageCensusFindings.js': Object.freeze({ hits: 11, strips: 2, reason: 'the rendered-dossier census (W2-A-LEAVES): its rows\' labels and the words its counter looks for, read by no printing file' }),
   'src/domain/facts/factLayers.js': Object.freeze({ hits: 3, strips: 0, reason: 'the layer table (W2-A-LEAVES): its leaves\' doc strings, read by its walker and no printing file' }),
+  // the chair's ruling of 2026-11-20 16:04 UTC (GOALS-3, R2)
+  'src/data/people/goalSecretRefusals.js': Object.freeze({ hits: 21, strips: 0, reason: 'the closed list of venal secrets (GOALS-1/2): a matcher, never printed; its texts are copies of live pool lines, pinned by the parity arm "(i) PARITY: every text of the closed list is a live secret line of its source pool; a text no pool holds reds" (tests/data/goalSecretRefusals.test.js); the chair\'s ruling of 2026-11-20 16:04 UTC' }),
 });
 
 /** Is this literal one of ARM1_NOT_PRINTED's sites? @param {string} rel @param {any} node */
