@@ -1,4 +1,4 @@
-# PROSE-1 HAND-BACK (kept current at every push; last written 2026-11-20T17:46Z)
+# PROSE-1 HAND-BACK (kept current at every push; last written 2026-11-20T17:54Z)
 
 **Seat:** PROSE-1 of the seventh chair (chair: session_019yED1SUxGVHyjQnoqoFvQ8). Assignment: `git show origin/lane/chair-2026-11-08:docs/chair/2026-11-20/seventh/prompts/PROSE-1.txt`. Branch `lane/prose-1-2026-11-20`, cut at `43ab0f5eb` (the working line `lane/join-2026-11-14`). **SUCCESSOR: PROSE-2** (seated 17:37 UTC) takes LINES-3/4, the count of existing "town" lines, and everything after BUILD-1's merge.
 
@@ -16,6 +16,10 @@
 11. (17:37) PROSE-2 seated; PROSE-1 keeps BUILD-1, its merge, the faith-licence answer and the DS-GEN-11 one-liner; then "PROSE-PART <commit>, HANDED OVER".
 12. (17:38) THE FAITH LICENCE (`tests/lint/faithTeaserLicence.test.js`) WIDENED BY EXACTLY FOUR WORDS: are, marks, turn, gather (verbs carrying no fact about the faith). **FOR THE SECURITY READER AT THE JOIN.** DS-FTH-2 PRIVATE DOSSIER gains six lines (in the verdict), each read with every {observance} fill.
 13. (17:38) DS-POW-2 #2's {seat} stays unfilled, as the desk decided. DS-POW-2 #1 REWORDED in the source document, the one existing line changed: "{settlement} is still living with its recent quarrel, and the hall is run with it in mind." (a WORD_CORRECTIONS row, ruling CHAIR-2026-11-20-17:38; a saved town keeps its stored sentence).
+14. (17:45) BUILD-1 = LINES-1+2 by the 17:28 verdict and the 17:38 rulings; PROSE-1's last unit. LINES-3/4's build is BUILD-2, PROSE-2's.
+15. (17:46) PROSE-LINES-3 and -4: ALL 123 READ AND APPROVED, with changes sent whole to PROSE-2: (1) the noun rule in most pools of both; (2) file 3: the council's four lines also carry `no ruler: lord`; rewordings at 5.5, 10.4, 11.8 ("faction" is the engine's word), 14.5, 17.7, 19.3, 25.8, 26.5, 26.6; 10.6 only if walls-absent means no palisade either; pool 21 adds `no crisis: occupied`; (3) file 4: rewordings at 11.4, 20.9, 26.6; (4) the three {timeband_age} lines built only where the slot fills; (5) the dm-only marks stand and 4's 15.11 stays public. ALL 260 LINES OF THE FOUR FILES ARE READ.
+16. (17:49) A TRAP: `map/run-map.sh` hard-codes ROOT=/home/user/settlement-engine; a builder in its own worktree must run a scratch copy with its own ROOT and print the ROOT and its commit at the head of each measure (sent to BUILD-1's builder; never edit the committed tool). A before-and-after without both printed is not accepted.
+17. (17:45) AS FOUND, CHANGE NONE: rows eligible nowhere (unfilled slots): DS-GEN-18 STALLED #1 ({institution},{resource}), DS-GEN-14 FOUNDED-OLD #1 ({timeband_age}), DS-GEN-18 BOUGHT-IN #3 ({institution}); angle words outside the palette on DS-GEN-14 FOUNDED-OLD #4-#7 and DS-GEN-18 BOUGHT-IN #4-#6, #9 (LINES-4's builder's reading).
 
 ## THE FILES
 - `PROSE-MAP.md` + `map/`: the eligibility map (MAP-1), `map/RANK-REACH.md` / `RANK-REACH-ALL.md` (the bar's ranking, `map/rank-reach.mjs`; PER = 50 places a size, hard-coded), `map/run-map.sh <draws|plain> <out> <workers> <prefix> <n>` re-makes the raw draws (local only, `.git/info/exclude`).
