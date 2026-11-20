@@ -431,6 +431,12 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
     sameness lanes have added wordings since (the trouble half's eleven hooks with a hideable need; the place lane's smuggling
     chain rows; the Daily Life owner-only slot `commoner_resentments_dm`): the walker of (1) covers the rows that withhold
     them. When R3-CURE-8 returns: merge if green, then the tell's cure.
+60. THE CHAIR, 19:10: A NEW STAGE, CHAINS-ROW (found by VEIL-28): no registry row names `economicState.activeChains`; its rows
+    are built red first like every registry row (ruling 59's walker covers them). And R3-CURE-8's STOP 1 FOR THE CHAIR'S WORD
+    (sent with the hand-over): both engines serve a NON-criminal services row whose `institution` named a hidden house in
+    another spelling (plant: '(street gang)' beside the hidden "Street gang") with that key swept: a husk (ruling 42 (1)'s
+    class), confirmed on the plant in 10 families + a custom one (25 of 25 reads), not measured on born towns (every synthetic
+    '(…)' provider is criminal). The seat's recommendation: such a row leaves WHOLE, both engines, red first, in the tell's cure.
 ## 2. The bytes (kept current)
 | File | sha256 |
 |---|---|
@@ -449,7 +455,7 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
 | CURATE notice (rulings 38 (c), 39, 40) | MERGED 7ddf4876f (`--no-ff` of `lane/veil-25-curate-2026-11-20` at 58f2fdf16: 1bd894613 + 58f2fdf16) | DONE: red 3/16 at 1bd894613's source, green 25/25 (`/var/tmp/v18/out/v25/curate/`); display only, 212 unchanged. Recorded, not cured: the notice reads `category` only (R3 also takes a /thie/ name: it can stay silent there) and does not exempt the governing power (VR42: it can over-warn there). RE-CHECK its condition if R3-CURE-4 narrows power.entry's reach. |
 | R6 tests | `lane/veil-22-r6-2026-11-20` 7d9ebd078 | COMPLETE, NOT MERGED; merge after R3 and re-run its MAIN arm (red 50 at R6's base: `cast.stakes` by R3's power, `cast.roles` wording by R3 or R5) |
 | R4 the people | `lane/veil-22-r4-2026-11-20` a4b89bf9d (R4 dfa031f3e + first cure) | NOT GREEN. AFTER "R3 <commit>", IMPORT-DOOR and R6: R4-CURE-2 (`briefs/R4-CURE-2-BRIEF.md`; STOP 1, STOP 3, the one salt, the catalogue red; VR48 its own commit; RULING 53's FOLD: one id-as-text helper per engine, the six 212 sites repointed, the walker retired; R3-CURE-5's join hazard: the re-key runs AFTER the copy pass). |
-| R5 composed prose, R7 | not started | R5 after R4 (rulings 14, 28, 32); R7 after R6 |
+| R5 composed prose, R7 | not started | R5 after R4 (rulings 14, 28, 32, 57 (g), 59): ITS BRIEF PUTS RULING 59's WALKER FIRST (every registry row's rule is what both engines do; its red list is R5's worklist), then the factions' desc, then the six blocks served as stored (`out/v27/r5q/RESULT.txt`), withheld unless a re-composition earns membership by ruling 58's two gates; R7 after R6 |
 | L the four walkers | not started | ruling 34 |
 | DOORS 3e1115c81 | `lane/veil-doors-3-2026-11-20` (hand-back `docs/chair/2026-11-20/veil/doors/VEIL-DOORS-3-HANDBACK.md` there: read whole before the merge) | merge `--no-ff` after R3 and R4, every hunk read, the two inside `import_gallery_dossier` hardest; ONE builder: rulings 19, 20, the reader's repros, the acceptance run at the merged tree |
 | stored figures, E | not started | once at the merged tree; then E (ruling 25) |
