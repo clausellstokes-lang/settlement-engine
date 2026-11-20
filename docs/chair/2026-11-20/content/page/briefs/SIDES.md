@@ -71,3 +71,17 @@ and say in your report where the sentence's call would sit on each surface.
 
 TESTS, red first, on a MADE-UP roster (never a quoted pool sentence): rules 1, 2 and 3 each; rule 4's drop; rule 6; the
 served-document case of rule 7; and the guard.
+
+## AMENDED BY PAGE-9, 2026-11-20 18:39 UTC (`date -u`), on the chair's ruling 19 (16:33) and "CAUSES `3411c9c83`" (18:39). THIS SECTION GOVERNS WHERE IT DIFFERS FROM THE ABOVE.
+
+BASE: the lane after PAGE-9 merges PAGE-7's `3411c9c83`, which carries `src/data/tensionSideMeanings.js` and its test
+BYTE-EQUAL to `c5da1cfb3`'s (blobs `aa7dea6da8` and `c14fba2206`, measured): do NOT `git show` them in again.
+THE {power} FILL (replaces rule 1's fill): `src/data/tensionSidePower.js :: solePowerNameOf(record, kind, start)`,
+PAGE-7's ONE helper: it applies the exactly-one test (rule 2) and the ruler's governing power itself, and gives the name
+as a sentence takes it (`start` true where the name opens the side). The reader writes NO fill and NO count of its own and
+never calls `powerNameInProse` for a side. A `named` row whose fill answers null shows the row's own words.
+THE MODULE: `src/domain/display/tensionShown.js` exports `tensionSidesShown` here and, in the next unit,
+`tensionSentenceShown` (`CAUSES-WIRING.md`): one module, the same surfaces, one guard for both.
+PARITY: beside rule 7's test, a born-pool arm: for the 300 and the 720, the sides shown on the owner's document and on
+each served projection differ ONLY where the served document lacks a power the owner's names (then the served side is
+the row's words, never a name); any other difference STOPS the builder.
