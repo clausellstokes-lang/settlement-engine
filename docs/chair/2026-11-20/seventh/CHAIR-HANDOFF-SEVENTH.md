@@ -568,3 +568,30 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   handful of rows to move; the measure shows it re-classes the very band VR8 named diffuse. The honest statement of
   the veil's promise is tier 1; tier 2 is what a determined person with the public code can still infer, said
   plainly to the owner instead of being hidden behind the word "diffuse".
+- 01:41 UTC · **REVIEW-VEIL-10 AT ITS MARK (526,039 tokens at 01:34 UTC): FINAL GOES TO A FRESH READER.** Its hand-off is
+  current at 3b88e0297 (`docs/chair/2026-11-20/veil/REVIEW-VEIL-10-HANDOFF.md`). It stays for ONE bounded read only:
+  SEC-GRANTS's emergency script, when its commit comes. **REVIEW-VEIL-11** (`prompts/REVIEW-VEIL-11.txt`) takes the
+  rest: the split of the registry's other 27 diffuse rows by the inversion probe (a precise figure that fails is
+  tier 1; a band is tier 2), a cold read of each cure as its commit comes, what Phase 1B did not reach, then FINAL.
+  IT IS CUT FROM THE VEIL LANE (`lane/veil-19-2026-11-20`), whose `CLAUDE.md` carries the owner's sentence, and
+  carries its predecessors' review files onto its own branch by a path checkout: the lesson of the refused staging.
+- 01:41 UTC · **VEIL-DOORS: TWO MORE RULINGS (its message of 01:36 UTC).** PLACEMENT: a SQL-language function is validated
+  when it is created, so 212 with the doors' section at its END does not apply (measured by the seat): its ONE
+  section goes immediately BEFORE "[212: RESTATED] public.get_gallery_dossier", with two in-place hunks inside that
+  read (the chronicle line; the seven tile columns) and its revoke loop beside section 7; the chair's "a section at
+  the end" was wrong. COST: the list at 1.3 to 1.5 times ACCEPTED (50 rows 198 ms to about 285; 500 rows 2.01 s to
+  2.6 to 3.0), on two conditions: the dossier read takes its one row's tiles and ends FASTER than today's; only a
+  marked row pays the name check. Its six arms are red at bedd5a392 and green on its draft. FOR THE OWNER: the
+  gallery's list already costs about 2 seconds at 500 public towns before any veil (it computes every town's tiles
+  on every request): a debt older than this work; stored public tiles (the public face of VR28) cure it.
+- 01:41 UTC · **VEIL-20'S FIRST MEASURES (its message of 01:38 UTC, crossing VR28).** (1) `computePublicLegitimacy` sums
+  contributions of four labels, so a served legitimacy score pins down a withheld prosperity (72 of 72 born towns):
+  MOOT under VR28 (the prosperity band is served), but kept as A LAW OF R5: a served value composed from a withheld
+  one is withheld or recomposed with it, NUMBERS INCLUDED; every composed row lists its numeric inputs; R6's
+  inversion arm checks that no served composed value pins down a value withheld on every read. (2) VR25: derivers
+  that read served fields only, exact on 72 of 72: the compound figures, the safety profile's compound, the safety
+  ratio, the storage months, the quarters; readiness, severity and the breakdown derive once prosperity is served;
+  severity differs on 10 towns with NOTHING hidden: a fault of the deriver, to be traced before anything is built on
+  it. THE CRISIS CAST'S ROLE AND REASON have no deriver without the seed: "not known" accepted: A LOSS ON IMPORT FOR
+  THE OWNER'S LIST (an imported crisis town arrives without its cast of three), unless a Reveal-DM page draws the
+  cast, which the seat is to answer first.
