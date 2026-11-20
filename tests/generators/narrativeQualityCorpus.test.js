@@ -616,14 +616,26 @@ describe('relationship archetype pools hold eight variants each (GS-1)', () => {
   const masked = line => line.split(A.name).join('X').split(B.name).join('Y');
   const keys = Object.keys(STRESS_ECONOMIC_EFFECTS);
 
+  // GOALS-4 builder 11 (the chair's ruling of 2026-11-20): THE CLAIM STAYS; THE FIGURE FOLLOWS THE LAW. GOALS-1 (GR3 for
+  // ties, the chair's ruling of 10:28 UTC) froze each pool's HEAD at its eight variants and let a RESERVE add lines past
+  // it (`npcData.js :: pairProse`'s `head` and `size`); GOALS-3 landed reserves of 2 in peer_rivalry, mentor_legacy,
+  // wary_alliance and old_debt and of 5 in mutual_leverage, so `size` there is 10 and 13 and the old pin (`size` 8) read
+  // the reserve as a breach. The pin is now the law's: the head is eight, frozen and distinct; a reserve adds distinct
+  // lines beyond it; an archetype's two fields are the same length (one index picks both rows).
   test('all 18 archetypes, both fields, eight distinct variants', () => {
     expect(keys).toHaveLength(18);
     for (const key of keys) {
+      const archetype = STRESS_ECONOMIC_EFFECTS[key];
+      expect(archetype.desc.size, `${key}: the two fields are the same length`).toBe(archetype.tension.size);
       for (const field of ['desc', 'tension']) {
-        const pool = STRESS_ECONOMIC_EFFECTS[key][field];
-        expect(pool.size, `${key}.${field} pool size`).toBe(8);
-        const lines = Array.from({ length: 8 }, (_, index) => masked(pool(A, B, index)));
-        expect(new Set(lines).size, `${key}.${field} has a duplicated variant`).toBe(8);
+        const pool = archetype[field];
+        expect(pool.head, `${key}.${field} head size`).toBe(8);
+        expect(Object.isFrozen(pool.lines), `${key}.${field} lines are frozen`).toBe(true);
+        const head = Array.from({ length: pool.head }, (_, index) => masked(pool(A, B, index)));
+        expect(new Set(head).size, `${key}.${field} has a duplicated head variant`).toBe(8);
+        expect(pool.size, `${key}.${field} size is the head and its reserve`).toBeGreaterThanOrEqual(pool.head);
+        const whole = Array.from({ length: pool.size }, (_, index) => masked(pool(A, B, index)));
+        expect(new Set(whole).size, `${key}.${field}: a reserve line repeats a line before it`).toBe(pool.size);
       }
     }
   });
