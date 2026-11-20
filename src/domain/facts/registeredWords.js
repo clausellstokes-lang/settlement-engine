@@ -480,7 +480,9 @@ const phrasePattern = (words) => {
  * INSTITUTION_KIND_PATTERNS`), so a line naming the house declares `institution: <kind>`. Every other family still waits.
  * @type {Readonly<Record<string, string>>}
  */
-const HOUSE_FAMILY_KINDS = Object.freeze({ bathhouse: 'bathhouse', theater: 'theatre', 'root cellar': 'rootCellar' });
+// DAILY-2 B2 (the chair's grant of 2026-11-20 20:31, in ruling 20's form; vetoable by the owner): `house: baker` <- institution:
+// bakery and `house: warehouse` <- institution: warehouse, for dawn_work's B0, B1 (bakers) and M0, M2 (warehouses).
+const HOUSE_FAMILY_KINDS = Object.freeze({ bathhouse: 'bathhouse', theater: 'theatre', 'root cellar': 'rootCellar', baker: 'bakery', warehouse: 'warehouse' });
 
 const HOUSE_FAMILIES = (() => {
   /** @type {Set<string>} */ const names = new Set();
