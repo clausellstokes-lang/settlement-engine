@@ -1,0 +1,31 @@
+$ git grep -n -E "housesHidden|criminalHouseHiddenWhileShown|CriminalSwitch\b|CRIMINAL_SWITCH_WORDS|houseHidden" -- src tests supabase
+src/components/gallery/CurateMode.jsx:21: * (criminalHouseHiddenWhileShown, the seventh chair's ruling 38 (c)), its group says in one sentence
+src/components/gallery/CurateMode.jsx:34:import { CRIMINAL_SWITCH_WORDS, criminalHouseHiddenWhileShown, criminalSwitchStateOf, flipCriminalVeil, presentCriminalGroupings } from '../../domain/display/criminalVeilSwitch.js';
+src/components/gallery/CurateMode.jsx:109: * at phone width (the words take the row, the button drops under them). With `houseHidden` (a
+src/components/gallery/CurateMode.jsx:111: * @param {{ state: 'none'|'hidden'|'shown'|'partly', onFlip: () => void, mobile: boolean, houseHidden?: boolean }} props
+src/components/gallery/CurateMode.jsx:113:export function CriminalSwitch({ state, onFlip, mobile, houseHidden = false }) {
+src/components/gallery/CurateMode.jsx:114:  const W = CRIMINAL_SWITCH_WORDS;
+src/components/gallery/CurateMode.jsx:127:        {houseHidden && <div data-criminal-switch-notice="" style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.4, overflowWrap: 'anywhere' }}>{W.housesHidden}</div>}
+src/components/gallery/CurateMode.jsx:190:  const houseHidden = criminalHouseHiddenWhileShown(criminal, model);
+src/components/gallery/CurateMode.jsx:211:      {!preview && <CriminalSwitch state={criminal} onFlip={flipCriminal} mobile={mobile} houseHidden={houseHidden} />}
+src/domain/display/criminalVeilSwitch.js:109: * (`housesHidden`, CURATE-NOTICE, the seventh chair's ruling 38 (c); its words are the chair's to
+src/domain/display/criminalVeilSwitch.js:110: * approve) drawn where criminalHouseHiddenWhileShown holds.
+src/domain/display/criminalVeilSwitch.js:112:export const CRIMINAL_SWITCH_WORDS = Object.freeze({
+src/domain/display/criminalVeilSwitch.js:119:  housesHidden: "While a criminal house is hidden, the town's criminal powers are kept off the shared page too, so they cannot give the house away; show the house to show them, or leave it hidden and they stay off.",
+src/domain/display/criminalVeilSwitch.js:271:export function criminalHouseHiddenWhileShown(state, model) {
+tests/components/curateModeCriminalSwitch.test.jsx:3: * curateModeCriminalSwitch.test.jsx — "Hide everything criminal" on "Curate for visitors"
+tests/components/curateModeCriminalSwitch.test.jsx:20: * partly while a criminal house is hidden in the draft, the switch's group says so in one sentence (W.housesHidden); it
+tests/components/curateModeCriminalSwitch.test.jsx:32:import { CRIMINAL_SWITCH_WORDS as W, criminalHouseHiddenWhileShown } from '../../src/domain/display/criminalVeilSwitch.js';
+tests/components/curateModeCriminalSwitch.test.jsx:152:    const has = (group) => typeof W.housesHidden === 'string' && W.housesHidden.length > 0 && group.textContent.includes(W.housesHidden);
+tests/components/curateModeCriminalSwitch.test.jsx:210:      expect(criminalHouseHiddenWhileShown('partly', model)).toBe(true);
+tests/components/curateModeCriminalSwitch.test.jsx:211:      expect(criminalHouseHiddenWhileShown('shown', model)).toBe(true);
+tests/components/curateModeCriminalSwitch.test.jsx:212:      expect(criminalHouseHiddenWhileShown('hidden', model)).toBe(false);
+tests/components/curateModeCriminalSwitch.test.jsx:213:      expect(criminalHouseHiddenWhileShown('none', model)).toBe(false);
+tests/components/curateModeCriminalSwitch.test.jsx:217:      expect(criminalHouseHiddenWhileShown('partly', openModel)).toBe(false);
+tests/components/curateModeCriminalSwitch.test.jsx:218:      expect(criminalHouseHiddenWhileShown('shown', openModel)).toBe(false);
+tests/components/curateModeCriminalSwitch.test.jsx:219:      expect(criminalHouseHiddenWhileShown('partly', null)).toBe(false);
+
+$ git grep -n -E "gallery/CurateMode(\.jsx)?" -- src tests
+src/components/gallery/ManageGallery.jsx:12:import CurateMode from './CurateMode.jsx';
+tests/components/curateModeCriminalSwitch.test.jsx:30:import CurateMode from '../../src/components/gallery/CurateMode.jsx';
+tests/lint/presumedThings.widened.register.json:28706:   "src/components/gallery/CurateMode.jsx",

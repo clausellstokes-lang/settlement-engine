@@ -14,6 +14,12 @@
  * WHAT A HAND CAN SEE AND UNDO ON THAT RECORD. Every address "Show all" and "Hide all" hand back is an eye the screen
  * draws for that record; a criminal house's People eye is drawn by identity (the people car's `institution` record and
  * master's string alike), so a hand can open and shut what the switch opens and shuts.
+ *
+ * THE NOTICE (CURATE-NOTICE, the seventh chair's ruling 38 (c); the words are the chair's to approve): R3's power rule
+ * keeps a criminal power's row off every non-owner read wherever a house is hidden whole. Where the switch reads shown or
+ * partly while a criminal house is hidden in the draft, the switch's group says so in one sentence (W.housesHidden); it
+ * sets nothing. Not with every criminal house shown, not with the switch reading hidden, not on a town with no criminal
+ * part. The house condition is the applier's own: a house the model shows hidden whole is one applyVeil removes.
  */
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
@@ -22,8 +28,8 @@ const mobile = { value: false };
 vi.mock('../../src/hooks/useIsMobile.js', () => ({ default: () => mobile.value }));
 
 import CurateMode from '../../src/components/gallery/CurateMode.jsx';
-import { curateModelFor, galleryPayloadFor } from '../../src/domain/display/galleryVeil.js';
-import { CRIMINAL_SWITCH_WORDS as W } from '../../src/domain/display/criminalVeilSwitch.js';
+import { applyVeil, curateModelFor, galleryPayloadFor, resolveVeil } from '../../src/domain/display/galleryVeil.js';
+import { CRIMINAL_SWITCH_WORDS as W, criminalHouseHiddenWhileShown } from '../../src/domain/display/criminalVeilSwitch.js';
 
 afterEach(() => { cleanup(); mobile.value = false; });
 
@@ -138,5 +144,79 @@ describe('Curate for visitors: the criminal switch', () => {
     const drawn = drawnAddresses(town);
     expect(drawn.has('field:institution:inst-den:people')).toBe(false);
     expect(shown.filter(d => !drawn.has(d.address)), 'Show all wrote an eye the screen does not draw').toEqual([]);
+  });
+
+  describe('the notice: a criminal house hidden while the switch reads shown or partly', () => {
+    // two criminal houses, so one can stay hidden while the other is shown
+    const twoDens = { ...town, institutions: [...town.institutions, { id: 'inst-yard', name: "Smugglers' yard", category: 'Criminal', desc: 'Boats by night.' }] };
+    const has = (group) => typeof W.housesHidden === 'string' && W.housesHidden.length > 0 && group.textContent.includes(W.housesHidden);
+
+    it('shows with the switch reading partly while a criminal house stays hidden (the owner opened the rest)', () => {
+      const { group, button } = mount(twoDens);
+      fireEvent.click(button); // Show all
+      expect(group.textContent).toContain(W.shown);
+      expect(has(group)).toBe(false);
+      for (const b of screen.getAllByRole('button', { name: /^Open the \d+ boxes$/ })) fireEvent.click(b);
+      fireEvent.click(screen.getByRole('button', { name: "Hide Smugglers' yard" }));
+      expect(group.textContent).toContain(W.partly);
+      expect(has(group), 'the notice is missing').toBe(true);
+    });
+
+    it('shows on a fresh share once one criminal eye is opened (partly, both houses hidden by default)', () => {
+      const { group } = mount(twoDens);
+      expect(has(group)).toBe(false); // (ii) the switch reads hidden
+      fireEvent.click(screen.getByRole('button', { name: 'Show Criminal services' }));
+      expect(group.textContent).toContain(W.partly);
+      expect(has(group), 'the notice is missing').toBe(true);
+    });
+
+    it('does not show (i) with every criminal house shown, though the switch reads partly', () => {
+      const { group } = mount(town);
+      for (const b of screen.getAllByRole('button', { name: /^Open the \d+ boxes$/ })) fireEvent.click(b);
+      fireEvent.click(screen.getByRole('button', { name: "Show Thieves' den" }));
+      expect(group.textContent).toContain(W.partly);
+      expect(has(group)).toBe(false);
+    });
+
+    it('does not show (i) with the switch reading shown and every house shown', () => {
+      const { group, button } = mount(twoDens);
+      fireEvent.click(button);
+      expect(group.textContent).toContain(W.shown);
+      expect(has(group)).toBe(false);
+    });
+
+    it('does not show (ii) with the switch reading hidden', () => {
+      const { group, button } = mount(twoDens);
+      expect(group.textContent).toContain(W.hidden);
+      expect(has(group)).toBe(false);
+      fireEvent.click(button);
+      fireEvent.click(button); // Show all, then Hide all
+      expect(group.textContent).toContain(W.hidden);
+      expect(has(group)).toBe(false);
+    });
+
+    it('does not show (iii) on a town with no criminal parts', () => {
+      const { group } = mount(plain);
+      expect(group.textContent).toContain(W.none);
+      expect(has(group)).toBe(false);
+    });
+
+    it("the predicate: true only for shown or partly with a house the applier removes whole; its house reading is applyVeil's", () => {
+      const payload = galleryPayloadFor(twoDens);
+      const yardHidden = [{ address: 'card:institution:inst-den', hidden: false }];
+      const model = curateModelFor(payload, yardHidden);
+      const drops = applyVeil(payload, resolveVeil(model.defaults, yardHidden)).institutions.length < payload.institutions.length;
+      expect(drops).toBe(true);
+      expect(criminalHouseHiddenWhileShown('partly', model)).toBe(true);
+      expect(criminalHouseHiddenWhileShown('shown', model)).toBe(true);
+      expect(criminalHouseHiddenWhileShown('hidden', model)).toBe(false);
+      expect(criminalHouseHiddenWhileShown('none', model)).toBe(false);
+      const open = [...yardHidden, { address: 'card:institution:inst-yard', hidden: false }];
+      const openModel = curateModelFor(payload, open);
+      expect(applyVeil(payload, resolveVeil(openModel.defaults, open)).institutions.length).toBe(payload.institutions.length);
+      expect(criminalHouseHiddenWhileShown('partly', openModel)).toBe(false);
+      expect(criminalHouseHiddenWhileShown('shown', openModel)).toBe(false);
+      expect(criminalHouseHiddenWhileShown('partly', null)).toBe(false);
+    });
   });
 });
