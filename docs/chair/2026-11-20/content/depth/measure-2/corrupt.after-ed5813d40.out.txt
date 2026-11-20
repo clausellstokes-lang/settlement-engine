@@ -1,0 +1,8 @@
+line /home/user/settlement-engine n=50/size hooks=8996 untyped=113
+size	cards	corruptionHook	principled	principled+corruption	straightFamily	straight+corruption
+thorp	65	2	1	0	6	0
+hamlet	170	4	2	0	19	1
+village	387	16	4	0	30	2
+town	1196	89	17	1	123	8
+city	3002	185	45	4	326	17
+metropolis	4192	271	58	4	468	35
