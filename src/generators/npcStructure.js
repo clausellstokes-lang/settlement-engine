@@ -21,8 +21,12 @@
  * activeGoal replaces the existing goal.short field on enriched NPCs so
  * the DM sees one coherent goal derived from the current situation.
  */
-import { resolveDeclared, lineText } from '../domain/facts/drawDeclared.js';
+import { resolveDeclared, lineText, filterDeclared } from '../domain/facts/drawDeclared.js';
 import { factsOf } from '../domain/facts/factsOf.js';
+import { notePresumption, withPresumptionLedger } from '../domain/facts/presumptionLedger.js';
+import { pickVariantMixed } from '../kernel/proseHash.js';
+import { POSITION_VARIANTS, POSITION_POOL_OF } from '../data/npcStructureVariants.js';
+import { fillLine, houseFill, resourceFill } from './people/goals.js';
 
 import { heldByOthers } from './hookVariety.js';
 import { powerOrderOf, structuralStandingOf, STANDING } from '../domain/people/membership.js';
@@ -562,8 +566,70 @@ function holderHouseLineOf(npc) {
 // card the cast gained after its people were dealt; counted in the cut it moved the cut, and a card that read its line lost
 // it. The cut is taken over the cast less those lords (each card's place among the others); a lord keeps the lines it reads
 // within the whole cast's cut, as before. Draw-free.
+// ── THE PLACE IN THE ORDER, POOLED (PEOPLE-1 B1, 2026-11-20; the chair's ruling of 16:41 UTC on PROPOSAL-structuralPosition.md) ─
+// A row's position was one line, so the calm rows printed alike in most towns of a size. The row's pool
+// (`data/npcStructureVariants.js`, keyed by the `T` key) holds today's line at index 0 and wordings read from what the record
+// holds; each is resolved against the record's facts (`filterDeclared`, the card as `ctx.npc`) and the card's wording is
+// chosen among the admitted ones whose slots fill by `pickVariantMixed` (the chair's ruling of 17:18 UTC: the hash mixed
+// before the modulo), keyed `<_seed>::npcStructure.<field>::<card id>`. No roll; a seedless call, or a card with no id,
+// prints index 0. The ledger notes the chosen wording only (the quiet gate of `people/goals.js`): index 0 is already noted
+// with its row.
+
+/** A list entry that is a service, a right or a trade, not a good that goes out or is bought in ("Transit trade", "Ship passage"). */
+const NOT_A_GOOD = /\b(?:trade|passage|rights?|services?|intelligence|maps|logistics|access|tolls?|labou?r|transport|hire)\b/i;
+/** @param {unknown} name @returns {string} the name filled as a `{resource}` (`people/goals.js :: resourceFill`), '' unless it names a good */
+const goodOf = (name) => (typeof name === 'string' && !NOT_A_GOOD.test(name) ? resourceFill(name) : '');
+/** The first good of the export list (a name, or a record's `name`). @param {unknown} list */
+const firstExportOf = (list) => {
+  for (const x of Array.isArray(list) ? list : []) {
+    const good = goodOf(typeof x === 'string' ? x : /** @type {{ name?: unknown } | null} */ (x)?.name);
+    if (good) return good;
+  }
+  return '';
+};
+/** The first good of the import list (its items are names). @param {unknown} list */
+const firstImportOf = (list) => {
+  for (const x of Array.isArray(list) ? list : []) {
+    const good = goodOf(x);
+    if (good) return good;
+  }
+  return '';
+};
+
+/**
+ * The card's line among its row's pooled wordings; `canonical` (the row's own line) where the row has no pool, the call no
+ * seed or the card no id, or nothing else is admitted.
+ * @param {Readonly<Record<string, ReadonlyArray<Readonly<{ text: string, needs: ReadonlyArray<string>, excludes: ReadonlyArray<string> }>>>>} pools
+ * @param {string} field the record field (`structuralPosition`) @param {string} looked the `T` key @param {string} canonical
+ * @param {Record<string, any>} npc @param {Record<string, any>} settlement @param {ReturnType<typeof factsOf>} facts @returns {string}
+ */
+function pooledLineOf(pools, field, looked, canonical, npc, settlement, facts) {
+  const pool = pools[POSITION_POOL_OF[looked] || looked];
+  const seed = settlement?._seed;
+  if (!pool || !seed || npc?.id == null || npc.id === '') return canonical;
+  /** @type {Array<Record<string, any>>} */ const notes = [];
+  const { result: admitted } = withPresumptionLedger(() => filterDeclared(pool, { facts, ctx: { npc }, poolId: `NPC_STRUCTURE.${looked}`, surface: 'npcs', drawKind: 'H' }), /** @type {any} */ (notes));
+  const inst = npc?.institution;
+  // a house of a hideable kind (criminal, clandestine: stamped `veiled` at birth) is never named (the chair's 17:13 UTC (e))
+  const slots = {
+    house: inst?.kind === 'house' && inst.veiled === false ? houseFill(inst.key) : '',
+    export: firstExportOf(facts.exports),
+    import: firstImportOf(facts.imports),
+  };
+  /** @type {Array<{ row: Readonly<{ text: string }>, at: number }>} */ const candidates = [{ row: pool[0], at: 0 }];
+  for (const row of admitted) {
+    const at = pool.indexOf(row);
+    if (at > 0 && fillLine(row.text, slots) !== null) candidates.push({ row, at });
+  }
+  if (candidates.length < 2) return canonical;
+  const chosen = /** @type {{ row: Readonly<{ text: string }>, at: number }} */ (pickVariantMixed(candidates, `${seed}::npcStructure.${field}::${npc.id}`));
+  if (chosen.at === 0) return canonical;
+  for (const n of notes) if (n.lineId === chosen.at) notePresumption(/** @type {any} */ (n));
+  return /** @type {string} */ (fillLine(chosen.row.text, slots));
+}
+
 /** @param {Record<string, any>} npc */
-const isMintedLord = (npc) => npc?.institution?.kind === 'power' && (npc?.institution?.title ?? npc?.title) === CLAIMANT_FACE.title; // TAIL-TITLES K-C: the face, not the holder's form
+const isMintedLord =(npc) => npc?.institution?.kind === 'power' && (npc?.institution?.title ?? npc?.title) === CLAIMANT_FACE.title; // TAIL-TITLES K-C: the face, not the holder's form
 /** The enrichment cut over a cast of `n`. @param {number} n */
 const cutOf = (n) => Math.min(5, Math.max(2, Math.floor(n * 0.45)));
 
@@ -638,11 +704,12 @@ export function enrichNPCsWithStructure(npcs, settlement) {
         ? { ...npc.goal, short: lineText(tmpl.goal) }
         : { short: lineText(tmpl.goal), long: lineText(tmpl.goal) }; // CENSUS-1e: a field may become `{ text, … }` (R-C); the record stores the text
     goalsNow[idx] = updatedGoal?.short;
+    const position = pooledLineOf(POSITION_VARIANTS, 'structuralPosition', looked, lineText(tmpl.position), npc, settlement, /** @type {ReturnType<typeof factsOf>} */ (facts)); // PEOPLE-1 B1: the row's pool; index 0 is the row's own line
 
     return {
       ...npc,
       goal:               updatedGoal,
-      structuralPosition: isHolder && holderHouseLineOf(npc) ? `${lineText(tmpl.position)} ${holderHouseLineOf(npc)}` : positionForStanding(npc, lineText(tmpl.position)), // BAR5-POWERS (1c-npc)
+      structuralPosition: isHolder && holderHouseLineOf(npc) ? `${position} ${holderHouseLineOf(npc)}` : positionForStanding(npc, position), // BAR5-POWERS (1c-npc): the low-standing twin maps index 0 alone
       activeConstraint:   lineText(tmpl.constraint),
       settlementCondition: condition,
       structuralRank:     standing.standing,
