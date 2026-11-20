@@ -71,7 +71,11 @@ describe('daily life reads no person of its own (the dead call removed)', () => 
   it('every slot text equals the pre-change text and the text on the toPublicSafe document', () => {
     for (const { seed, rec } of births) {
       const now = textsOf(rec);
-      expect(now, `${seed}: before vs after`).toEqual(BEFORE[seed]);
+      // DAILY-2 B1b C3 moved `gathering_places` by design (LINES-1 as the chair ruled): the parity of C1's removal holds
+      // on the other seven slots; the eighth is held by `tests/domain/dailyLifeGathering.test.js` and the owner-vs-public check below.
+      const { gathering_places: _moved, ...kept } = BEFORE[seed];
+      const { gathering_places: _now, ...nowKept } = now;
+      expect(nowKept, `${seed}: before vs after`).toEqual(kept);
       expect(textsOf(toPublicSafe(rec)), `${seed}: owner vs toPublicSafe`).toEqual(now);
     }
   });

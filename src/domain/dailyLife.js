@@ -43,6 +43,17 @@ import { deriveAllCapacities, CAPACITY_NAMES } from './capacityModel.js';
 import { deriveHistoryBeats } from './historyBeats.js';
 import { deriveCausalState } from './causalState.js';
 import { powerPossessive } from './display/powerSentenceName.js';
+import { GATHERING_NAMED, GATHERING_PLAIN } from '../data/dailyLife/gatheringPlaces.js';
+import { filterDeclared } from './facts/drawDeclared.js';
+import { atomHolds } from './facts/factVocabulary.js';
+import { factsOf } from './facts/factsOf.js';
+import { INSTITUTION_KIND_PATTERNS, ACCESS_ONLY } from './facts/institutions.js';
+import { isMarketInstitution } from './facts/market.js';
+import { liveInstitutions } from './institutions/institutionRoster.js';
+import { nativeSemanticName } from './content/customContentSemanticAuthority.js';
+import { isHideableHouse } from './people/cardVeil.js';
+import { institutionSentenceNoun } from './display/institutionSentenceNoun.js';
+import { pickVariantMixed } from '../kernel/proseHash.js';
 
 // ── Local typedefs ───────────────────────────────────────────────────────
 
@@ -146,16 +157,6 @@ function snakeCase(s) {
 }
 
 /**
- * @param {DailyLifeSettlement | null | undefined} settlement
- * @param {RegExp} pattern
- * @returns {InstitutionLike[]}
- */
-function institutionByPattern(settlement, pattern) {
-  const inst = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
-  return inst.filter(i => pattern.test(String(i?.name || '')));
-}
-
-/**
  * @param {DailyLifeSettlement} s
  * @param {DailyLifeContext} ctx
  * @returns {DailyLifeSlot}
@@ -242,39 +243,87 @@ function deriveDawnWork(s, ctx) {
   return slot('dawn_work', text, 'capacity.food_production + capacity.defense + dominant faction', refs);
 }
 
+// ── gathering_places (DAILY-1 LINES-1 § gathering_places, as the chair ruled at 18:37 and 18:56) ──
+//
+// THE RE-CUT: `named` when the record holds a live sacred house, market or inn the page may name, else `plain`.
+// THE ROUTE (ruling 12): a branch's pool (`data/dailyLife/gatheringPlaces.js`) is filtered to the lines the record
+// admits by their declared atoms (`facts/drawDeclared.js :: filterDeclared`) and whose every named house the live roster
+// can name; then `kernel/proseHash.js :: pickVariantMixed(eligible, '<name>::dailyLife.gathering_places::<branch>')`
+// picks one (a nameless record takes index 0 of the eligible list). No line true: the EMPTY string (ruling 3).
+
+/** @typedef {{ id?: string, name?: string }} RosterRow */
+
+/** The sacred house by preference: a cathedral, then a temple/church/abbey/chapel, then a shrine, then a monastery. */
+const SACRED_ORDER = Object.freeze([/\bcathedral/i, /\btemple|\bchurch|\babbey|\bchapel/i, /\bshrine/i, /\bmonaster|\bfriary\b/i]);
+/** The same without the shrine (a wayside shrine is no church). */
+const CHURCH_ORDER = Object.freeze([SACRED_ORDER[0], SACRED_ORDER[1], SACRED_ORDER[3]]);
+const MARKET_NAME = /\bmarkets?\b(?!\s*squares?)/i;
+const DOCKS_NAME = /\bdocks?\b|\bwharf|\bquays?\b/i;
+
+/** @param {unknown} inst @returns {string} the row's native name */
+const rowName = (inst) => String(nativeSemanticName(/** @type {object} */ (inst)) || /** @type {RosterRow} */ (inst)?.name || '');
+
+/**
+ * The rows a line may name: live (`liveInstitutions`), never hideable (`cardVeil.js :: isHideableHouse`), never
+ * an access-only row (`ACCESS_ONLY`), in roster order.
+ * @param {DailyLifeSettlement} s @returns {RosterRow[]}
+ */
+function nameableRows(s) {
+  return /** @type {RosterRow[]} */ (liveInstitutions(/** @type {any} */ (s))).filter((i) => !isHideableHouse(/** @type {Record<string, unknown>} */ (i)) && !ACCESS_ONLY.test(rowName(i)));
+}
+
+/** @param {RosterRow[]} rows @param {RegExp} re @param {(i: RosterRow) => boolean} [extra] @returns {RosterRow|undefined} */
+const firstRow = (rows, re, extra = () => true) => rows.find((i) => re.test(rowName(i)) && extra(i));
+
+/** The house a `{placeholder}` names, found in the nameable rows. @type {Readonly<Record<string, (rows: RosterRow[]) => RosterRow|undefined>>} */
+const GATHERING_HOUSES = Object.freeze({
+  sacred: (rows) => SACRED_ORDER.map((re) => firstRow(rows, re)).find(Boolean),
+  church: (rows) => CHURCH_ORDER.map((re) => firstRow(rows, re)).find(Boolean),
+  cathedral: (rows) => firstRow(rows, /\bcathedral/i),
+  market: (rows) => firstRow(rows, MARKET_NAME, isMarketInstitution),
+  square: (rows) => firstRow(rows, INSTITUTION_KIND_PATTERNS.square, isMarketInstitution),
+  inn: (rows) => firstRow(rows, INSTITUTION_KIND_PATTERNS.tavern),
+  mill: (rows) => firstRow(rows, INSTITUTION_KIND_PATTERNS.mill),
+  bathhouse: (rows) => firstRow(rows, INSTITUTION_KIND_PATTERNS.bathhouse),
+  bridge: (rows) => firstRow(rows, INSTITUTION_KIND_PATTERNS.bridge),
+  docks: (rows) => firstRow(rows, DOCKS_NAME),
+  theater: (rows) => firstRow(rows, INSTITUTION_KIND_PATTERNS.theatre),
+});
+
+/** @param {string} text @returns {string[]} the houses a line names */
+const housesNamedIn = (text) => [...text.matchAll(/\{(\w+)\}/g)].map((m) => m[1]);
+
 /**
  * @param {DailyLifeSettlement} s
  * @param {DailyLifeContext} _ctx
  * @returns {DailyLifeSlot}
  */
 function deriveGatheringPlaces(s, _ctx) {
+  const facts = /** @type {import('./facts/factVocabulary.js').FactsLike} */ (/** @type {unknown} */ (factsOf(/** @type {any} */ (s))));
+  const rows = nameableRows(s);
+  /** @type {Record<string, RosterRow|undefined>} */
+  const found = {};
+  const house = (/** @type {string} */ k) => (k in found ? found[k] : (found[k] = GATHERING_HOUSES[k]?.(rows)));
+  // the branch: a house of the three kinds the record holds (its atom) and the roster can name
+  const named = (atomHolds('sacredHouse', facts) === true && !!house('sacred'))
+    || (atomHolds('market', facts) === true && !!house('market'))
+    || (atomHolds('institution: tavern', facts) === true && !!house('inn'));
+  const branch = named ? 'named' : 'plain';
+  const eligible = filterDeclared(named ? GATHERING_NAMED : GATHERING_PLAIN, { facts, poolId: `dailyLife.gathering_places.${branch}`, surface: 'dailyLife' })
+    .filter((l) => housesNamedIn(l.text).every((k) => !!house(k)));
+  const name = /** @type {{ name?: unknown }} */ (s).name;
+  const pick = pickVariantMixed(eligible, typeof name === 'string' && name ? `${name}::dailyLife.gathering_places::${branch}` : null);
+
+  /** @type {SlotReference[]} */
   const refs = [];
-  const RELIGIOUS_PATTERN = /(temple|cathedral|chapel|shrine|abbey|monastery)/i;
-  const TRADE_PATTERN = /(market|bazaar|forum|exchange|quay|wharf)/i;
-  const INN_PATTERN = /(inn|tavern|hall|guildhall)/i;
-  const religious = institutionByPattern(s, RELIGIOUS_PATTERN);
-  const trade = institutionByPattern(s, TRADE_PATTERN);
-  const inns = institutionByPattern(s, INN_PATTERN);
+  const text = pick ? pick.text.replace(/\{(\w+)\}/g, (_, k) => {
+    const row = /** @type {RosterRow} */ (house(k));
+    const label = String(row.name || '');
+    refs.push({ id: row.id || `institution.${snakeCase(label)}`, label, type: 'institution' });
+    return `the ${institutionSentenceNoun(label)}`;
+  }) : '';
 
-  const places = [];
-  if (religious.length) {
-    places.push(`the steps of ${religious[0].name}`);
-    refs.push({ id: religious[0].id || `institution.${snakeCase(religious[0].name)}`, label: religious[0].name, type: 'institution' });
-  }
-  if (trade.length) {
-    places.push(`the ${trade[0].name.toLowerCase()}`);
-    refs.push({ id: trade[0].id || `institution.${snakeCase(trade[0].name)}`, label: trade[0].name, type: 'institution' });
-  }
-  if (inns.length) {
-    places.push(`the ${inns[0].name.toLowerCase()}`);
-    refs.push({ id: inns[0].id || `institution.${snakeCase(inns[0].name)}`, label: inns[0].name, type: 'institution' });
-  }
-
-  const text = places.length
-    ? `By midday people are gathered at ${places.join(', ')}: talking, trading, and watching.`
-    : 'People gather where they can: the well, the bridge, the open square.';
-
-  return slot('gathering_places', text, 'institutions matched by category pattern', refs);
+  return slot('gathering_places', text, 'the live roster, by the lines\' declared atoms (LINES-1)', refs);
 }
 
 /**
