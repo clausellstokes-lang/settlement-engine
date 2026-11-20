@@ -7,7 +7,9 @@
  *
  *   (1) the seat-holder's card says they hold the seat ("Holds the seat …" on the card the people list opens);
  *   (2) it reads as no one's subordinate (no row that places its holder under the seat, an office or a greater house);
- *   (3) it reads at the office's influence or above (the card's dots against the office's band at the town's size);
+ *   (3) it reads at the office's weight: its Standing row says it stands first of the seat's power (PAGE-1 CARD, F4,
+ *       2026-11-20: the card's influence dots, which this read once counted against the office's band, are gone with the
+ *       band misread at birth; the card's Standing row is the record's fact, cardStandingRead.js);
  *   (4) no other card says it holds the seat.
  *
  * The seat-holder is the person the Power tab's seat row names (rendered here and read from it), and the people list
@@ -66,8 +68,6 @@ const SUBORDINATE = new RegExp([
   'takes orders from', 'only as strong as the seat', 'without the seniors\'? leave', 'has little say',
   'decides? what it (may|can) do', 'offices that run things', 'truly runs? the seat', 'say (slowly )?shrinks',
 ].join('|'));
-/** The office's band at each size: the dots the seat's own face draws (poolMap.js :: SEAT_ROLE_BY_TIER), literals. */
-const OFFICE_DOTS = Object.freeze({ thorp: 1, hamlet: 1, village: 3, town: 3, city: 3, metropolis: 3 });
 
 /**
  * The holder's structural lines on its rendered card (COHERENCE-POWERS-6, item 4): the position (its italic paragraph), the
@@ -93,6 +93,7 @@ function openAll(root) {
 /** Every miss of the four reads in one town, on the rendered page. @param {any} s @param {string} key */
 function pageMissesOf(s, key) {
   const name = rulingChainOf(s).npc?.name || null;
+  const seatPower = rulingChainOf(s).power?.name || null;
   const power = render(<PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />).container.textContent || '';
   cleanup();
   const out = [];
@@ -108,8 +109,8 @@ function pageMissesOf(s, key) {
       // COHERENCE-POWERS-6 (item 4; G1): read EVERY structural line, not the first matching paragraph
       const sub = holderStructuralLines(el).find((t) => SUBORDINATE.test(t));
       if (sub) out.push(`${key}: the holder ${name}'s card reads as a subordinate: "${sub.trim()}"`);
-      const dots = (el.querySelector('button')?.textContent || '').match(/●+/)?.[0].length || 0;
-      if (dots < OFFICE_DOTS[s.tier]) out.push(`${key}: the holder ${name}'s card reads ${dots} dot(s) under a ${OFFICE_DOTS[s.tier]}-dot office`);
+      const standing = [...el.querySelectorAll('div')].map((d) => d.textContent || '').find((t) => t.startsWith('Standing ')) || '';
+      if (seatPower && !standing.includes(`first of ${seatPower}, `)) out.push(`${key}: the holder ${name}'s card does not stand first of the seat's power ${seatPower}: "${standing}"`);
     } else if (HOLDS.test(text)) {
       out.push(`${key}: ${card.name} (${card.role}) is not the seat's holder (${name ?? 'none'}) and says it holds the seat`);
     }

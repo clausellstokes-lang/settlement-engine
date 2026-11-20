@@ -319,13 +319,13 @@
   },
   {
     "path": "src/components/new/npcComponents.jsx",
-    "line": 166,
+    "line": 165,
     "category": "floatInterpolation",
     "snippet": "{rel.strength}"
   },
   {
     "path": "src/components/new/npcComponents.jsx",
-    "line": 172,
+    "line": 171,
     "category": "floatInterpolation",
     "snippet": "{rel.tension}"
   },
@@ -1063,13 +1063,13 @@
   },
   {
     "path": "src/pdf/sections/NotableNPCs.jsx",
-    "line": 339,
+    "line": 332,
     "category": "floatInterpolation",
     "snippet": "{npc.power}"
   },
   {
     "path": "src/pdf/sections/NotableNPCs.jsx",
-    "line": 392,
+    "line": 385,
     "category": "floatInterpolation",
     "snippet": "{npc.power}"
   },
