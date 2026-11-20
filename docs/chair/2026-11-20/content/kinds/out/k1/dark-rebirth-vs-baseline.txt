@@ -1,0 +1,1 @@
+dark re-birth vs K0 baseline: 900 places, hash equal 900, differ 0, missing/error 0 

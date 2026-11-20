@@ -331,6 +331,14 @@ export const ENGINE_SHARED_DOMAIN_EXCISIONS = [
   '/src/domain/display/clergyHouse.js',
   '/src/domain/display/pluralPowerName.js',
   '/src/domain/display/powerSentenceName.js',
+  // KINDS-1 K1 (2026-11-20; the fortune lane's U6 exactly): the trouble law leaves EAGER engine-core. Its importers are
+  // historyGenerator (lazy engine) and densityCreateBoundary (lazy); it would ride engine-core only because ESD seeds
+  // every domain module a generator imports. Excised AND PINNED to its own `trouble-law` chunk (manualChunks below).
+  // ⛔ NEVER EXCISED WITHOUT THE PIN (the fortune lane's probe B): the orphan co-locates into the big lazy `engine`
+  // chunk and the densityCreateBoundary chunk gains a static edge to the whole generator.
+  // @guarded-by tests/build/engineChunkLazy.test.js (KINDS-1 K1: the excision's row, the pinned chunk, no
+  //   densityCreateBoundary -> engine edge).
+  '/src/domain/trouble/troubleLaw.js',
 ];
 // FIRSTPAINT-2 (LANDING-6, 2026-11-05; the chair's ruling on vendorPdfLazy x4, "a cure, not a rise"). The rung-1
 // window's lanes (CRISIS, the coherence findings of TRUTH / SELF-VOUCH / F1 / F3 / F9 / F10, PLACE-NOT-TIER's sea
@@ -1208,6 +1216,14 @@ export default defineConfig({
           //   from the entry closure + present in a lazy chunk).
           if (id.includes('/src/domain/content/customContentCharset'))
             return 'custom-charset';
+
+          // ── The trouble law (LAZY LEAF, its own chunk; KINDS-1 K1) ──
+          // Excised from ESD above and pinned here, BEFORE the engine-core
+          // grouping (the fortune lane's U6 shape). A zero-import leaf whose
+          // readers are all lazy, so its own chunk drags nothing and no eager
+          // chunk imports it. ⛔ The pin is the half that is never dropped.
+          // @enforced-by tests/build/engineChunkLazy.test.js (KINDS-1 K1).
+          if (id.includes('/src/domain/trouble/troubleLaw.js')) return 'trouble-law';
 
           // ── Engine-core (generator-shared domain vocabulary) ──────
           // This derived grouping prevents Rollup from folding shared domain
