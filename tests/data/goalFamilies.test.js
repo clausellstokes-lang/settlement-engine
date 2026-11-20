@@ -4,7 +4,8 @@
  * `docs/allegiance/WRITE_GOALS_2026-11-08.md`).
  *
  *   - every cell holds exactly its §6.6 count (RANK 36 · POWER 48 · INSTITUTION 48 · SUPPLY 48 ·
- *     TIES 60 · PERSONALITY 96 · ALLEGIANCE 128 = 464);
+ *     TIES 60 · PERSONALITY 96 · ALLEGIANCE 128 = 464), and since GOALS-4 the wants' tranche's 380 lines appended to
+ *     35 of them (908 with UNCANNY's 60 and LAST-VARIETY's 4), each read from WANT-LINES-FINAL.md at its cell's end;
  *   - every `{slot}` is in its family's `GOAL_SLOTS` and its sub-kind's `GOAL_SUBKIND_SLOTS`, and no
  *     line uses a struck slot;
  *   - no duplicate line; no struck tic (STYLE-RULINGS-2026-11-07 §2 law 3, the list verbatim);
@@ -35,23 +36,33 @@ import { RELATIONSHIP_STRENGTHS } from '../../src/generators/people/ties.js';
 const SIX = { short: 6, long: 6 };
 const FIVE = { short: 5, long: 5 };
 const FOUR = { short: 4, long: 4 };
+/**
+ * GOALS-4 (the wants' tranche, the chair's approval of the 380 lines; THE PIN MOVED BY ITS OWN DOOR, the cause: 380 approved
+ * lines appended to the END of 35 drawn cells, 183 → 563, `WANT-LINES-FINAL.md` at 25b63efbc; the chair tells the owner the
+ * totals changed, his veto). Before: every cell at §6.6's count (RANK/POWER/INSTITUTION/SUPPLY 6, TIES and ALLEGIANCE 5 or 6,
+ * PERSONALITY 4, SUPPLY.want 2); after: the 35 cells below at their new counts, every other cell unchanged.
+ */
 const EXPECTED_CELLS = {
-  RANK: { climb: SIX, defend: SIX, enter: SIX },
-  POWER: { tense: SIX, competitive: SIX, corrupted: SIX, conflict: SIX },
-  INSTITUTION: { solvency: SIX, rebuilding: SIX, charter: SIX, takeover: SIX },
+  RANK: { climb: { short: 17, long: 11 }, defend: { short: 7, long: 7 }, enter: { short: 53, long: 54 } },
+  POWER: { tense: { short: 23, long: 23 }, competitive: { short: 14, long: 14 }, corrupted: SIX, conflict: SIX },
+  INSTITUTION: { solvency: { short: 24, long: 24 }, rebuilding: SIX, charter: { short: 19, long: 20 }, takeover: SIX },
   // LAST-VARIETY (item 2, 2026-11-18; the chair's ruling LR2): `want`, two a vantage, dealt only where a dependency's good is needed and not brought in
-  SUPPLY: { impaired: SIX, dependency: SIX, isolation: SIX, expansion: SIX, want: { short: 2, long: 2 } },
-  TIES: { rival_enemy: FIVE, debtor: FIVE, creditor: FIVE, ally: FIVE, family: FIVE, mentor_student: FIVE },
-  PERSONALITY: Object.fromEntries(PERSONALITY_CLUSTERS.map((k) => [k, FOUR])),
+  SUPPLY: { impaired: SIX, dependency: SIX, isolation: SIX, expansion: { short: 9, long: 10 }, want: { short: 2, long: 2 } },
+  TIES: { rival_enemy: { short: 34, long: 34 }, debtor: { short: 9, long: 9 }, creditor: { short: 6, long: 5 }, ally: { short: 21, long: 23 }, family: FIVE, mentor_student: { short: 11, long: 11 } },
+  PERSONALITY: {
+    ...Object.fromEntries(PERSONALITY_CLUSTERS.map((k) => [k, FOUR])),
+    greed: { short: 7, long: 7 }, fear: { short: 4, long: 5 }, forbidden_patron: { short: 4, long: 5 }, sway: { short: 9, long: 12 }, grudge: { short: 8, long: 10 }, impulse: { short: 4, long: 5 },
+  },
   ALLEGIANCE: {
     serve_greed: FIVE, serve_hunger_for_status: FIVE, serve_fear: FIVE, serve_forbidden_patron: FIVE,
     escape_greed: { short: 5 }, escape_hunger_for_status: { short: 5 }, escape_fear: { short: 5 }, escape_forbidden_patron: { short: 5 },
     keep_partnership: { short: 5 }, keep_leverage: { short: 5 }, keep_patron: { short: 5 }, keep_cause: { short: 5 },
-    front_keep: SIX, front_out: SIX, warrant: SIX, suspicion: SIX,
+    front_keep: SIX, front_out: SIX, warrant: { short: 8, long: 6 }, suspicion: SIX,
   },
   UNCANNY: { haunting: SIX, components: SIX, commission: SIX, omen: SIX, bargain: SIX },
 };
-const EXPECTED_TOTALS = { RANK: 36, POWER: 48, INSTITUTION: 48, SUPPLY: 52, TIES: 60, PERSONALITY: 96, ALLEGIANCE: 128, UNCANNY: 60 };
+/** Before GOALS-4: RANK 36 · POWER 48 · INSTITUTION 48 · SUPPLY 52 · TIES 60 · PERSONALITY 96 · ALLEGIANCE 128 · UNCANNY 60 = 528; after: +380. */
+const EXPECTED_TOTALS = { RANK: 149, POWER: 98, INSTITUTION: 111, SUPPLY: 59, TIES: 173, PERSONALITY: 128, ALLEGIANCE: 130, UNCANNY: 60 };
 /** The reserve (GOALS-1, the chair's approval of 10:48 UTC; GOALS-3's PERSONALITY, its approval of 13:32 UTC), cell by cell: 41 lines, outside the totals above. */
 const EXPECTED_RESERVE = {
   RANK: { enter: { short: 4, long: 3 } },
@@ -149,16 +160,16 @@ describe('goal families — the cells of design §6.6', () => {
     expect(Object.keys(GOAL_FAMILY_LINES)).toEqual([...GOAL_FAMILIES]);
   });
 
-  test('every cell holds exactly its §6.6 count', () => {
+  test('every cell holds exactly its §6.6 count, the wants\' tranche appended (GOALS-4)', () => {
     const actual = Object.fromEntries(Object.entries(GOAL_FAMILY_LINES).map(([f, subs]) => [f,
       Object.fromEntries(Object.entries(subs).map(([s, v]) => [s, Object.fromEntries(Object.entries(v).map(([k, lines]) => [k, lines.length]))]))]));
     expect(actual).toEqual(EXPECTED_CELLS);
   });
 
-  test('the family totals are §6.6\'s 464 plus UNCANNY\'s 60 plus LAST-VARIETY\'s 4, 528 in all', () => {
+  test('the family totals are §6.6\'s 464 plus UNCANNY\'s 60 plus LAST-VARIETY\'s 4 plus the wants\' tranche\'s 380, 908 in all', () => {
     const totals = Object.fromEntries(Object.entries(GOAL_FAMILY_LINES).map(([f, subs]) => [f, count(subs)]));
     expect(totals).toEqual(EXPECTED_TOTALS);
-    expect(Object.values(totals).reduce((a, b) => a + b, 0)).toBe(528);
+    expect(Object.values(totals).reduce((a, b) => a + b, 0)).toBe(908);
   });
 
   test('the table is frozen to its lines', () => {
@@ -380,5 +391,60 @@ describe('goal families — the reserve lines (GOALS-1, apart from the cells)', 
       }
     }
     expect(Object.isFrozen(GOAL_LINE_NOT_ON_TIES)).toBe(true);
+  });
+});
+
+/**
+ * THE WANTS' TRANCHE (GOALS-4, builder 10, 2026-11-20; the build brief `goals/briefs/GOALS-4-BUILD-WANTS-BRIEF.md` and its
+ * addendum): the 380 lines the chair read and approved, in their final wording, are APPENDED to the END of their DRAWN cells
+ * (never the reserve), in the order of the one source, `docs/chair/2026-11-20/content/goals/wants/WANT-LINES-FINAL.md`
+ * (a byte copy of 25b63efbc's). Every line is READ from that file, never quoted here: a cell header "### FAMILY/sub/vantage ·
+ * n → m (+k)", then lines "i. <line>  <sub>file:section.line</sub>" numbered n+1 … m.
+ */
+const WANT_LINES_FINAL = new URL('../../docs/chair/2026-11-20/content/goals/wants/WANT-LINES-FINAL.md', import.meta.url);
+/** The source's cells, in its order: `{ family, sub, vantage, from, to, plus, lines: [{ n, line }] }`. @param {string} md */
+const wantCellsOf = (md) => {
+  const cells = [];
+  let cur = null;
+  for (const raw of md.split('\n')) {
+    const h = raw.match(/^### ([A-Z]+)\/([a-z_]+)\/(short|long) · (\d+) → (\d+) \(\+(\d+)\)$/);
+    if (h) { cur = { family: h[1], sub: h[2], vantage: h[3], from: Number(h[4]), to: Number(h[5]), plus: Number(h[6]), lines: [] }; cells.push(cur); continue; }
+    if (raw.startsWith('#')) { cur = null; continue; }
+    const m = raw.match(/^(\d+)\. (.+) {2}<sub>\d+:[\d.]+<\/sub>$/);
+    if (m && cur) cur.lines.push({ n: Number(m[1]), line: m[2] });
+  }
+  return cells;
+};
+const WANT_CELLS = wantCellsOf(readFileSync(WANT_LINES_FINAL, 'utf8'));
+
+describe('goal families — the wants\' tranche: the 380 approved lines, each at the end of its drawn cell (GOALS-4)', () => {
+  test('the source holds 380 lines in 35 cells, each numbered on from its cell\'s old count, no line twice', () => {
+    expect(WANT_CELLS.length).toBe(35);
+    expect(WANT_CELLS.reduce((n, c) => n + c.lines.length, 0)).toBe(380);
+    for (const c of WANT_CELLS) {
+      const where = `${c.family}/${c.sub}/${c.vantage}`;
+      expect(c.lines.length, where).toBe(c.plus);
+      expect(c.from + c.plus, where).toBe(c.to);
+      expect(c.lines.map((l) => l.n), where).toEqual(Array.from({ length: c.plus }, (_, i) => c.from + 1 + i));
+    }
+    const all = WANT_CELLS.flatMap((c) => c.lines.map((l) => l.line.toLowerCase()));
+    expect(new Set(all).size).toBe(all.length);
+  });
+
+  test('every approved line closes its DRAWN cell, verbatim and in the source\'s order: each cell holds n + k lines, its last k the source\'s', () => {
+    const misplaced = WANT_CELLS.flatMap((c) => {
+      const where = `${c.family}/${c.sub}/${c.vantage}`;
+      const cell = GOAL_FAMILY_LINES[c.family]?.[c.sub]?.[c.vantage];
+      if (!Array.isArray(cell)) return c.lines.map((l) => `${where} #${l.n}: no such drawn cell`);
+      const tail = cell.length === c.to ? cell.slice(c.from).map(textOf) : [];
+      return c.lines.filter((l, i) => tail[i] !== l.line || typeof cell[c.from + i] !== 'string').map((l) => `${where} #${l.n} (cell holds ${cell.length}, wants ${c.to}): ${l.line}`);
+    });
+    expect(misplaced.length, `approved lines not at their cells' ends: ${misplaced.length} of 380`).toBe(0);
+    expect(misplaced).toEqual([]);
+  });
+
+  test('no approved line is a reserve line: the tranche is drawn, never only rotated onto', () => {
+    const reserve = new Set(Object.values(GOAL_RESERVE_LINES).flatMap((subs) => Object.values(subs).flatMap((vs) => Object.values(vs).flat().map(textOf))));
+    expect(WANT_CELLS.flatMap((c) => c.lines.map((l) => l.line)).filter((l) => reserve.has(l))).toEqual([]);
   });
 });

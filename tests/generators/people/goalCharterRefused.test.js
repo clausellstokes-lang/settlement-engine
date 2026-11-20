@@ -39,6 +39,9 @@ describe('POWERS-9 · the charter goals', () => {
   }, 240_000);
   it('THE GUARD: a lawful house\'s card keeps its charter goal (rpf-city-calm-13, the tailor\'s guild)', () => {
     const s = born('rpf-city-calm-13');
-    expect(s.npcs.some((c) => c.goal?.short === "Have those who govern confirm, in writing, who may give orders at the tailor's guild.")).toBe(true);
+    // GOALS-4 (the wants' tranche: INSTITUTION charter short 6 → 19 lines): the pin MOVED BY ITS OWN DOOR, the tailor's guild
+    // card still drawing a charter line, another one: before "Have those who govern confirm, in writing, who may give orders
+    // at the tailor's guild.", after the line below
+    expect(s.npcs.some((c) => c.goal?.short === "Win the tailor's guild first call on any help those who govern can give this season.")).toBe(true);
   }, 60_000);
 });

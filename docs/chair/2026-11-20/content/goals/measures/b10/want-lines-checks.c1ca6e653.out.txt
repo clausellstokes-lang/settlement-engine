@@ -1,0 +1,127 @@
+lifted checker: /home/user/wt-b10/tests/data/goalFamilies.test.js, 71 lines
+shapeViolations over the build's cells (the 380 in place) + reserve: 0
+the 380 at their cells' ends, verbatim: 380
+new-line slots outside the base cell's own slot set: 0
+controls: a planted bad slot reds it true; a planted tic reds it true; a planted duplicate of a new line reds it true
+
+== THE RESERVE CHECK: each new PERSONALITY drawn line beside its cluster's reserve (both vantages; '=' its own) ==
+PERSONALITY/greed/short #5: Come out of one bargain this season with twice what they put in.
+  reserve =short 0.00   Spend nothing this season that someone else could be made to pay for.
+  reserve  long  0.00   Have half the people here owing them money.
+PERSONALITY/greed/short #6: Charge one person this season for something they used to get free.
+  reserve =short 0.00   Spend nothing this season that someone else could be made to pay for.
+  reserve  long  0.00   Have half the people here owing them money.
+PERSONALITY/greed/short #7: Ask a higher share this season of anything they have a hand in.
+  reserve =short 0.00   Spend nothing this season that someone else could be made to pay for.
+  reserve  long  0.20   Have half the people here owing them money.
+PERSONALITY/greed/long #5: Hold a share in every good business in this place.
+  reserve  short 0.00   Spend nothing this season that someone else could be made to pay for.
+  reserve =long  0.00   Have half the people here owing them money.
+PERSONALITY/greed/long #6: Never pay full price for anything again.
+  reserve  short 0.20   Spend nothing this season that someone else could be made to pay for.
+  reserve =long  0.00   Have half the people here owing them money.
+PERSONALITY/greed/long #7: Turn every favour they ever do into money, sooner or later.
+  reserve  short 0.00   Spend nothing this season that someone else could be made to pay for.
+  reserve =long  0.20   Have half the people here owing them money.
+PERSONALITY/fear/long #5: Live among neighbours who would stand by them if trouble came.
+  reserve =long  0.00   Never again owe anything to someone who could use it against them.
+PERSONALITY/forbidden_patron/long #5: Leave behind secrets that keep people guessing long after they are gone.
+  reserve =long  0.00   Be everyone's confidant, and no one's friend.
+  reserve =long  0.17   Keep a foot in every camp here, and let each camp think it is the only one.
+PERSONALITY/sway/short #5: Win over a crowd at the next gathering here, and be cheered for it.
+  reserve =short 0.00   Be proved right this season about something everyone else doubted.
+  reserve  long  0.00   Never once be seen to back down.
+  reserve  long  0.00   Have a following who would go wherever they lead.
+PERSONALITY/sway/short #6: Take charge of one new thing this season, however small, and run it their way.
+  reserve =short 0.00   Be proved right this season about something everyone else doubted.
+  reserve  long  0.00   Never once be seen to back down.
+  reserve  long  0.00   Have a following who would go wherever they lead.
+PERSONALITY/sway/short #7: Settle one dispute here this season by their word alone.
+  reserve =short 0.00   Be proved right this season about something everyone else doubted.
+  reserve  long  0.00   Never once be seen to back down.
+  reserve  long  0.00   Have a following who would go wherever they lead.
+PERSONALITY/sway/short #8: Change one person's mind this season by argument alone.
+  reserve =short 0.00   Be proved right this season about something everyone else doubted.
+  reserve  long  0.00   Never once be seen to back down.
+  reserve  long  0.00   Have a following who would go wherever they lead.
+PERSONALITY/sway/short #9: Set the rules for one game, contest or feast here this season.
+  reserve =short 0.00   Be proved right this season about something everyone else doubted.
+  reserve  long  0.00   Never once be seen to back down.
+  reserve  long  0.00   Have a following who would go wherever they lead.
+PERSONALITY/sway/long #5: See their way of doing things become the way everyone here does them.
+  reserve  short 0.00   Be proved right this season about something everyone else doubted.
+  reserve =long  0.00   Never once be seen to back down.
+  reserve =long  0.00   Have a following who would go wherever they lead.
+PERSONALITY/sway/long #6: Have people here quote them for years after they are gone.
+  reserve  short 0.00   Be proved right this season about something everyone else doubted.
+  reserve =long  0.00   Never once be seen to back down.
+  reserve =long  0.20   Have a following who would go wherever they lead.
+PERSONALITY/sway/long #7: Bring the stubbornest people here round to their way, one by one.
+  reserve  short 0.00   Be proved right this season about something everyone else doubted.
+  reserve =long  0.00   Never once be seen to back down.
+  reserve =long  0.00   Have a following who would go wherever they lead.
+PERSONALITY/sway/long #8: Be the one this place sends to speak for it before outsiders.
+  reserve  short 0.00   Be proved right this season about something everyone else doubted.
+  reserve =long  0.00   Never once be seen to back down.
+  reserve =long  0.00   Have a following who would go wherever they lead.
+PERSONALITY/sway/long #9: Be the one whose word decides who is welcome here.
+  reserve  short 0.00   Be proved right this season about something everyone else doubted.
+  reserve =long  0.00   Never once be seen to back down.
+  reserve =long  0.00   Have a following who would go wherever they lead.
+PERSONALITY/sway/long #10: Have a hand in choosing whoever leads this place next.
+  reserve  short 0.00   Be proved right this season about something everyone else doubted.
+  reserve =long  0.00   Never once be seen to back down.
+  reserve =long  0.40   Have a following who would go wherever they lead.
+PERSONALITY/sway/long #11: Make every newcomer here learn quickly whose word counts.
+  reserve  short 0.00   Be proved right this season about something everyone else doubted.
+  reserve =long  0.00   Never once be seen to back down.
+  reserve =long  0.00   Have a following who would go wherever they lead.
+PERSONALITY/sway/long #12: Be listened to here even by those who dislike them.
+  reserve  short 0.00   Be proved right this season about something everyone else doubted.
+  reserve =long  0.00   Never once be seen to back down.
+  reserve =long  0.00   Have a following who would go wherever they lead.
+PERSONALITY/grudge/short #5: Spread one true but unkind story about someone they envy this season.
+  reserve =short 0.00   Spoil one good thing this season for someone who once slighted them.
+  reserve  long  0.00   See the people who looked down on them come asking for their help.
+  reserve  long  0.00   Never let a single wrong done to them be forgotten.
+PERSONALITY/grudge/short #6: Beat someone they envy to something both of them want this season.
+  reserve =short 0.00   Spoil one good thing this season for someone who once slighted them.
+  reserve  long  0.00   See the people who looked down on them come asking for their help.
+  reserve  long  0.00   Never let a single wrong done to them be forgotten.
+PERSONALITY/grudge/short #7: Let someone they resent see them do well this season.
+  reserve =short 0.00   Spoil one good thing this season for someone who once slighted them.
+  reserve  long  0.25   See the people who looked down on them come asking for their help.
+  reserve  long  0.25   Never let a single wrong done to them be forgotten.
+PERSONALITY/grudge/short #8: Keep a careful watch this season on someone they cannot stand.
+  reserve =short 0.00   Spoil one good thing this season for someone who once slighted them.
+  reserve  long  0.00   See the people who looked down on them come asking for their help.
+  reserve  long  0.00   Never let a single wrong done to them be forgotten.
+PERSONALITY/grudge/long #5: Take back, one day, everything they believe was taken from them.
+  reserve  short 0.00   Spoil one good thing this season for someone who once slighted them.
+  reserve =long  0.00   See the people who looked down on them come asking for their help.
+  reserve =long  0.00   Never let a single wrong done to them be forgotten.
+PERSONALITY/grudge/long #6: Outdo, in every way they can, the person they have envied longest.
+  reserve  short 0.00   Spoil one good thing this season for someone who once slighted them.
+  reserve =long  0.00   See the people who looked down on them come asking for their help.
+  reserve =long  0.00   Never let a single wrong done to them be forgotten.
+PERSONALITY/grudge/long #7: Make sure their name stands higher here than the name of anyone who ever spoke against them.
+  reserve  short 0.00   Spoil one good thing this season for someone who once slighted them.
+  reserve =long  0.00   See the people who looked down on them come asking for their help.
+  reserve =long  0.00   Never let a single wrong done to them be forgotten.
+PERSONALITY/grudge/long #8: Keep their anger hidden until the day it can be used.
+  reserve  short 0.00   Spoil one good thing this season for someone who once slighted them.
+  reserve =long  0.00   See the people who looked down on them come asking for their help.
+  reserve =long  0.00   Never let a single wrong done to them be forgotten.
+PERSONALITY/grudge/long #9: Win, in the end, every quarrel they ever started.
+  reserve  short 0.00   Spoil one good thing this season for someone who once slighted them.
+  reserve =long  0.00   See the people who looked down on them come asking for their help.
+  reserve =long  0.00   Never let a single wrong done to them be forgotten.
+PERSONALITY/grudge/long #10: Count among their friends no one who ever laughed at them.
+  reserve  short 0.00   Spoil one good thing this season for someone who once slighted them.
+  reserve =long  0.00   See the people who looked down on them come asking for their help.
+  reserve =long  0.00   Never let a single wrong done to them be forgotten.
+PERSONALITY/impulse/long #5: Spend their last coin on something wonderful, and never regret it.
+  reserve  short 0.00   Slip away for a few days this season, and tell no one where.
+  reserve =long  0.00   Never do a day's work they do not feel like doing.
+
+32 new PERSONALITY lines; 86 pairs against the reserve; duplicates 0; pairs with a word share >= 0.50: 0
