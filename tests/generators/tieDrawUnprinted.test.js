@@ -29,14 +29,14 @@ const PAIRS = Array.from({ length: 12 }, (_, k) => [{ name: `Aldo 0-${k}` }, { n
 /** The first `size` ties of one archetype in one town, each a different pair. @param {any} archetype @param {any} facts */
 const townOf = (archetype, facts) => {
   const draw = createTieProseDraw(undefined, facts);
-  return Array.from({ length: archetype.tension.size }, (_, k) => draw(archetype, ...PAIRS[k % PAIRS.length]).proseVariant);
+  return Array.from({ length: archetype.tension.head ?? archetype.tension.size }, (_, k) => draw(archetype, ...PAIRS[k % PAIRS.length]).proseVariant);
 };
 
 describe('a refused tie index resolves to one the town has not printed', () => {
   it('in the head of the cycle no index prints twice while an admitted unprinted index remains', () => {
     const offenders = [];
     for (const [key, archetype] of Object.entries(STRESS_ECONOMIC_EFFECTS)) {
-      const open = Array.from({ length: archetype.tension.size }, (_, i) => i).filter((i) => admitted(archetype, i, BARE));
+      const open = Array.from({ length: archetype.tension.head ?? archetype.tension.size }, (_, i) => i).filter((i) => admitted(archetype, i, BARE));
       const got = townOf(archetype, BARE);
       got.forEach((v, t) => {
         const before = new Set(got.slice(0, t));
@@ -53,7 +53,7 @@ describe('a refused tie index resolves to one the town has not printed', () => {
   it('KEEP: a place that admits every line prints exactly the old cycle (draw-free)', () => {
     for (const archetype of Object.values(STRESS_ECONOMIC_EFFECTS)) {
       const got = townOf(archetype, ADMIT_ALL);
-      expect([...got].sort((x, y) => x - y)).toEqual(Array.from({ length: archetype.tension.size }, (_, i) => i));
+      expect([...got].sort((x, y) => x - y)).toEqual(Array.from({ length: archetype.tension.head ?? archetype.tension.size }, (_, i) => i));
     }
   });
 });

@@ -25,6 +25,17 @@ import { CRISIS_SUMMARY_POOLS } from '../../src/domain/crisis/crisisSummaryVanta
 import { withPresumptionLedger } from '../../src/domain/facts/presumptionLedger.js';
 import { presumptionFindings } from '../../src/domain/facts/presumptionCheck.js';
 import { TROUBLE_HOOKS } from '../../src/data/troubleHooks.js';
+import { ARRIVAL_PEOPLE, ARRIVAL_SENSES } from '../../src/data/arrivalProse.js';
+import { textOf } from '../../src/domain/facts/textOf.js';
+
+/**
+ * RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): "what prints instead" on an
+ * arrival slot, COMPUTED from the slot's own pool export, never quoted: any of its lines but the flagged words (`{name}` any name).
+ * The reader's town stays the guard town; the slot is shown live whichever of its lines the draw lands on.
+ * @param {ReadonlyArray<any>} pool @param {RegExp} gone @returns {RegExp}
+ */
+const slotOf = (pool, gone) => new RegExp(pool.map((l) => { const t = textOf(l); return String(typeof t === 'function' ? t('@@NAME@@') : t); })
+  .filter((t) => !gone.test(t)).map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').split('@@NAME@@').join('[^"]+?')).join('|'));
 
 const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** The census's own configuration for its two seed families (CENSUS-3 seedcfg.mjs, r2r- and r2s-). @param {string} seed */
@@ -63,7 +74,9 @@ describe('BAR3-PLACES: the rows read the town', () => {
     ['H2 class: no crown colours', 'r2s-wartime-town-0', /clerk in crown colours/, /a clerk with an army seal records what comes and goes\. This is a war.s traffic, not trade.s\./],
     ['H2 class: no crown paying', 'r2s-wartime-city-1', /the crown is paying/, /and the war chest is paying\./],
     ['C4391 no runner out of a shut gate', 'r2s-under_siege-metropolis-2', /A runner comes out of the small side gate/, /A face shows at the grille of the small side gate, sees your group, and is gone\./],
-    ['C30302 no wine shop', 'r2r-city-3', /at a wine shop/, /A patron stands drinks for the whole room/],
+    // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): the anchor was the line then drawn on the slot; the reader's
+    // town keeps the guard, the slot computed from its pool's export (`slotOf`)
+    ['C30302 no wine shop', 'r2r-city-3', /at a wine shop/, slotOf(ARRIVAL_PEOPLE.greek, /at a wine shop/)],
     ['C2300 not every yard', 'r2r-city-20', /across every yard/, /Bolts of cloth hang drying in long bright strips across the yards\./],
     // BAR4-SCENES-2 (2026-11-16, re-keyed by identity; the chair's ruling HW1): r2r-city-18's one stone house, its every ground spent, is
     // "Short of stone." on the page, so the living-from-the-ground line takes its twin on the slot; the flagged words stay out
@@ -88,13 +101,21 @@ describe('BAR3-PLACES: the rows read the town', () => {
     ['C8717 the sovereign city: no kingdom', 'bar0-city-wartime-rand-7', /is in a kingdom/, /is at war and doing well out of it/],
     ['C34091 the sovereign city: no kingdom', 'bar0-city-wartime-rand-13', /is in a kingdom/, /is at war and doing well out of it/],
     ['C31794 no trade mark inside the history', 'bar0-town-occupied-rand-7', /\(taxed by occupation\) and property/, /A speculative frenzy in [^"(]*(\([a-z]+\) )?and property collapsed/],
-    ['C30302 no wine shop (the town read)', 'bar0-town-occupied-rand-7', /at a wine shop/, /A patron stands drinks for the whole room/],
+    // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): the anchor was the line then drawn on the slot; the reader's
+    // town keeps the guard, the slot computed from its pool's export (`slotOf`)
+    ['C30302 no wine shop (the town read)', 'bar0-town-occupied-rand-7', /at a wine shop/, slotOf(ARRIVAL_PEOPLE.greek, /at a wine shop/)],
     ['C30299 no busy streets under the occupation', 'bar0-town-occupied-rand-7', /the streets are busy/, /The market is open, the streets are orderly/],
     ['C15699 no trade built upon at the founding (the town read)', 'bar0-hamlet-under_siege-rand-8', /was built upon failed/, /The trade the settlement was founded to serve failed within its first few years/],
     ['C4391 no runner out of a shut gate (the town read)', 'bar0-city-under_siege+famine-rand-12', /A runner comes out of the small side gate/, /A face shows at the grille of the small side gate/],
-    ['C13758 no herd across the road under a siege', 'bar0-hamlet-under_siege-rand-6', /A dog drives a handful/, /Someone is churning butter in a doorway/],
-    ['C13759 no lanes of stalls in a besieged hamlet', 'bar0-hamlet-under_siege-rand-6', /Each lane of stalls/, /An old woman sits at a low table by her door/],
-    ['C24627 no broker of far goods with no market', 'bar0-thorp-calm-rand-7', /matching buyers to goods from routes/, /Two partners go over their accounts in a courtyard/],
+    // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): the anchor was the line then drawn on the slot; the reader's
+    // town keeps the guard, the slot computed from its pool's export (`slotOf`)
+    ['C13758 no herd across the road under a siege', 'bar0-hamlet-under_siege-rand-6', /A dog drives a handful/, slotOf(/** @type {any} */ (ARRIVAL_SENSES.find((s) => s.key === 'livestock')).lines, /A dog drives a handful/)],
+    // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): the anchor was the line then drawn on the slot; the reader's
+    // town keeps the guard, the slot computed from its pool's export (`slotOf`)
+    ['C13759 no lanes of stalls in a besieged hamlet', 'bar0-hamlet-under_siege-rand-6', /Each lane of stalls/, slotOf(ARRIVAL_PEOPLE.south_asian, /Each lane of stalls/)],
+    // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): the anchor was the line then drawn on the slot; the reader's
+    // town keeps the guard, the slot computed from its pool's export (`slotOf`)
+    ['C24627 no broker of far goods with no market', 'bar0-thorp-calm-rand-7', /matching buyers to goods from routes/, slotOf(ARRIVAL_PEOPLE.arabic, /matching buyers to goods from routes/)],
   ]);
   it('the flagged line no longer prints, and its slot says what the record bears (every row)', () => {
     expectNoSeedFailures(collectSeedFailures(CURED, ([id, seed, gone, instead]) => {
@@ -106,9 +127,13 @@ describe('BAR3-PLACES: the rows read the town', () => {
 
   /** [row, seed, the true sibling that must still print] */
   const KEEP = /** @type {Array<[string, string, RegExp]>} */ ([
-    ['H1: the herd on the road where no siege stands', 'r2r-hamlet-18', /A dog drives a handful of animals across the road, and you wait for them\./],
-    ['H1: the lanes of stalls in a market town', 'r2r-city-32', /Each lane of stalls has someone who speaks for it, and they are all speaking at once\./],
-    ['H1: the broker of far goods where a market stands', 'r2s-monster_pressure-city-0', /A broker sits in the shade, matching buyers to goods from routes you have never travelled\./],
+    // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): r2r-hamlet-18 -> r2r-thorp-79, a calm census thorp
+    ['H1: the herd on the road where no siege stands', 'r2r-thorp-79', /A dog drives a handful of animals across the road, and you wait for them\./],
+    // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): r2r-city-32 -> r2r-town-4, a south-asian market town
+    ['H1: the lanes of stalls in a market town', 'r2r-town-4', /Each lane of stalls has someone who speaks for it, and they are all speaking at once\./],
+    // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): r2s-monster_pressure-city-0 -> r2r-metropolis-62, an arabic market town
+    // with a road open (tailHistoryBatch4.test.js's KEEP takes the same address)
+    ['H1: the broker of far goods where a market stands', 'r2r-metropolis-62', /A broker sits in the shade, matching buyers to goods from routes you have never travelled\./],
     ['H1: the covert grain route where no siege stands', 'r2r-city-44', /through a covert route and selling them at triple the official price after dark/],
   ]);
   it('the true siblings still print (every row)', () => {

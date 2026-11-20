@@ -7,6 +7,7 @@ import { random as _rng } from '../../kernel/rngContext.js';
 import { fnv1a32 } from '../../kernel/proseHash.js';
 import { HANDLER_TIE_ARCHETYPES, REVERSED_TIE, STRESS_ECONOMIC_EFFECTS } from '../../data/npcData.js';
 import { drawDeclared } from '../../domain/facts/drawDeclared.js';
+import { notePresumption, withPresumptionLedger } from '../../domain/facts/presumptionLedger.js';
 
 export const computeRelTension = (factionA, factionB, stressFlags, instFlags) => {
   const categoryPair = [factionA.category, factionB.category].sort().join('_'),
@@ -122,17 +123,25 @@ export const handlerArchetypeFor = (vector, leverage = 'debt') => {
 const archetypeKeyOf = (archetype) => Object.entries(STRESS_ECONOMIC_EFFECTS).find(([, value]) => value === archetype)?.[0]
   ?? Object.entries(HANDLER_TIE_ARCHETYPES).find(([, value]) => value === archetype)?.[0];
 
+/**
+ * GOALS-1 (GR3 for ties, the chair's ruling of 2026-11-20 10:28 UTC): an archetype's HEAD, the count of its variants
+ * before any reserve (`npcData.js :: pairProse`). The head is frozen: the cycle, the lines that name both parties and
+ * the pool today's resolution reads are the first `head` indices only, so a reserve moves no tie that today's code deals.
+ * @param {any} archetype @returns {number}
+ */
+const headOf = (archetype) => archetype.tension.head ?? archetype.tension.size;
+
 /** Two stand-in names no generated NPC carries, for reading which lines name both parties. */
 const PARTY_A = { name: 'Party-A-of-the-tie' };
 const PARTY_B = { name: 'Party-B-of-the-tie' };
 /** @type {WeakMap<object, number[]>} */
 const bothNamedCache = new WeakMap();
-/** The indices of an archetype's tension lines that name BOTH parties (pure; cached per archetype). */
+/** The indices of an archetype's HEAD tension lines that name BOTH parties (pure; cached per archetype). */
 const bothNamedTensions = (archetype) => {
   let indices = bothNamedCache.get(archetype);
   if (!indices) {
     indices = [];
-    for (let index = 0; index < archetype.tension.size; index++) {
+    for (let index = 0; index < headOf(archetype); index++) {
       const line = archetype.tension(PARTY_A, PARTY_B, index);
       if (line.includes(PARTY_A.name) && line.includes(PARTY_B.name)) indices.push(index);
     }
@@ -183,6 +192,28 @@ const tiePairPool = (archetype) => {
   }
   return pool;
 };
+/** @type {WeakMap<object, ReadonlyArray<any>>} */
+const headPoolCache = new WeakMap();
+/** GOALS-1 (GR3): the pool's first `head` rows (the pool itself where the reserve is empty; frozen, cached). @param {any} archetype */
+const tieHeadPool = (archetype) => {
+  const pool = tiePairPool(archetype);
+  const head = headOf(archetype);
+  if (head >= pool.length) return pool;
+  let slice = headPoolCache.get(archetype);
+  if (!slice) {
+    slice = Object.freeze(pool.slice(0, head));
+    headPoolCache.set(archetype, slice);
+  }
+  return slice;
+};
+/** A non-negative remainder. @param {number} n @param {number} m */
+const mod = (n, m) => ((n % m) + m) % m;
+/**
+ * A resolution with its presumption notes KEPT ASIDE (`people/goals.js :: quiet`'s shape), so the ledger
+ * (`cert:false-presumption`) records the line the tie prints, never a candidate passed over.
+ * @template T @param {() => T} fn @returns {{ result: T, notes: any[] }}
+ */
+const quiet = (fn) => { /** @type {any[]} */ const notes = []; const { result } = withPresumptionLedger(fn, /** @type {any} */ (notes)); return { result, notes }; };
 
 /**
  * GS-1 (ODQ §934.101): THE TIE-PROSE DRAW, WITHOUT REPLACEMENT PER SETTLEMENT. One draw per
@@ -212,7 +243,7 @@ const tiePairPool = (archetype) => {
  *   {archetypeKey: string | undefined, proseVariant: number, description: string, tension: string}}
  */
 export const createTieProseDraw = (force, facts = null) => {
-  /** @type {Map<unknown, {base: number, used: number, printed: Set<number>}>} */
+  /** @type {Map<unknown, {base: number, used: number, printed: Set<number>, cards: Map<number, string[][]>}>} GOALS-1 (GR3): `cards`, each printed index's ties as their two cards */
   const draws = new Map();
   /** TAIL-TIES-2 (T6): each pair's FIRST tie of a kind, as its directed key (`npcData.js :: REVERSED_TIE`). @type {Map<string, string>} */
   const firstOfPair = new Map();
@@ -222,19 +253,23 @@ export const createTieProseDraw = (force, facts = null) => {
     const archetypeKey = archetypeKeyOf(archetype);
     let draw = draws.get(archetype);
     if (!draw) {
-      draw = { base: fnv1a32(`${npc?.name ?? ''}>${partner?.name ?? ''}::${archetypeKey ?? archetype?.label}`), used: 0, printed: new Set() };
+      draw = { base: fnv1a32(`${npc?.name ?? ''}>${partner?.name ?? ''}::${archetypeKey ?? archetype?.label}`), used: 0, printed: new Set(), cards: new Map() };
       draws.set(archetype, draw);
     }
-    const size = archetype.tension.size;
+    // GOALS-1 (GR3): THE HEAD IS FROZEN. The cycle's modulus, the two-name lines and the pool today's resolution reads
+    // are the first `head` indices (`headOf`); the reserve past them is reached only by a repeat, below.
+    const size = headOf(archetype);
     const named = bothNamedTensions(archetype);
-    const inHead = draw.used < size || named.length === 0;
+    const used = draw.used;
+    const inHead = used < size || named.length === 0;
     const drawnVariant = inHead
-      ? (draw.base + draw.used) % size
-      : named[(draw.base + draw.used - size) % named.length];
+      ? (draw.base + used) % size
+      : named[(draw.base + used - size) % named.length];
     draw.used += 1;
-    const pool = tiePairPool(archetype);
-    /** @param {{ draw: (p: ReadonlyArray<any>) => any, held?: Set<string>, heldKey?: (l: any) => string }} how */
-    const resolveAt = (how) => drawDeclared(pool, {
+    const whole = tiePairPool(archetype);
+    const pool = tieHeadPool(archetype);
+    /** @param {{ draw: (p: ReadonlyArray<any>) => any, held?: Set<string>, heldKey?: (l: any) => string }} how @param {ReadonlyArray<any>} [over] */
+    const resolveAt = (how, over = pool) => drawDeclared(over, {
       ...how, facts, ctx: { pair: [npc, partner] }, key: `${npc?.name ?? ''}>${partner?.name ?? ''}::${archetypeKey ?? archetype?.label}`,
       poolId: `npcData:${archetypeKey && Object.hasOwn(HANDLER_TIE_ARCHETYPES, archetypeKey) ? 'HANDLER_TIE_ARCHETYPES' : 'STRESS_ECONOMIC_EFFECTS'}.${archetypeKey ?? archetype?.label}`, surface: 'relationships', drawKind: 'H',
     });
@@ -248,21 +283,60 @@ export const createTieProseDraw = (force, facts = null) => {
     const pairTrust = trustOfPair.get(trustKey);
     const contrary = pairTrust ? pool.filter((l) => l.trust && l.trust !== pairTrust).map((l) => String(l.id)) : [];
     const held = inHead && (draw.printed.size || contrary.length) ? new Set([...[...draw.printed].map(String), ...contrary]) : null;
-    const once = held ? resolveAt({ draw: () => pool[drawnVariant], held, heldKey: (l) => String(l.id) }) : null;
-    // TAIL-TIES-2 (T6's vote lines refuse more indices under one ruler): PAST THE POOL'S END the cycle runs over the lines
-    // that name BOTH cards (above), so a refused overflow index resolves among THOSE first (the held set's rule: never a
-    // one-name line where an admitted two-name one stands); the whole pool only where none is admitted. Draw-free.
-    const overflow = !inHead && !once ? resolveAt({ draw: () => pool[drawnVariant], held: new Set([...pool.filter((l) => !named.includes(l.id)).map((l) => String(l.id)), ...contrary]), heldKey: (l) => String(l.id) }) : null;
-    const agreeing = contrary.length && !(once && once.line) && !(overflow && overflow.line) ? resolveAt({ draw: () => pool[drawnVariant], held: new Set(contrary), heldKey: (l) => String(l.id) }) : null;
-    const resolved = once && once.line ? once : overflow && overflow.line ? overflow : agreeing && agreeing.line ? agreeing : resolveAt({ draw: (p) => p[drawnVariant] });
-    const index = resolved.line ? resolved.line.id : drawnVariant;
+    const { result: resolved, notes: todayNotes } = quiet(() => {
+      const once = held ? resolveAt({ draw: () => pool[drawnVariant], held, heldKey: (l) => String(l.id) }) : null;
+      // TAIL-TIES-2 (T6's vote lines refuse more indices under one ruler): PAST THE POOL'S END the cycle runs over the lines
+      // that name BOTH cards (above), so a refused overflow index resolves among THOSE first (the held set's rule: never a
+      // one-name line where an admitted two-name one stands); the whole pool only where none is admitted. Draw-free.
+      const overflow = !inHead && !once ? resolveAt({ draw: () => pool[drawnVariant], held: new Set([...pool.filter((l) => !named.includes(l.id)).map((l) => String(l.id)), ...contrary]), heldKey: (l) => String(l.id) }) : null;
+      const agreeing = contrary.length && !(once && once.line) && !(overflow && overflow.line) ? resolveAt({ draw: () => pool[drawnVariant], held: new Set(contrary), heldKey: (l) => String(l.id) }) : null;
+      return once && once.line ? once : overflow && overflow.line ? overflow : agreeing && agreeing.line ? agreeing : resolveAt({ draw: (p) => p[drawnVariant] });
+    });
+    const from = String(npc?.id ?? npc?.name ?? '');
+    const to = String(partner?.id ?? partner?.name ?? '');
+    let index = resolved.line ? resolved.line.id : drawnVariant;
+    let notes = todayNotes;
+    // GOALS-1 (GR3 for ties, the chair's rulings of 2026-11-20 10:28 UTC): A REPEAT PAST THE HEAD. Only where today's
+    // resolution prints an index the town already printed for this archetype, draw-free, (i) the first reserve index
+    // (from the cycle's place past the head) not printed and admitted, the printed and contrary indices held; else (ii) an
+    // index printed ONCE whose earlier tie shares no card with this one ("a template held twice is never held by two
+    // people tied to each other"), in the order the overflow cycle visits; else (iii) today's stands. A replacement
+    // declares the same trust as today's index, so the pair's trust, the tie's temper and every later tie are unchanged.
+    if (draw.printed.has(index)) {
+      const trust = whole[index]?.trust;
+      const contraryWhole = pairTrust ? whole.filter((l) => l.trust && l.trust !== pairTrust).map((l) => String(l.id)) : [];
+      /** @param {number} id @param {Set<string>} heldNow */
+      const admits = (id, heldNow) => {
+        const probe = quiet(() => resolveAt({ draw: () => whole[id], held: heldNow, heldKey: (l) => String(l.id) }, whole));
+        return probe.result.line && probe.result.line.id === id ? probe.notes : null;
+      };
+      const reserve = whole.length - size;
+      let found = null;
+      for (let k = 0; k < reserve && !found; k++) {
+        const id = size + mod(draw.base + used - size + k, reserve);
+        if (draw.printed.has(id) || whole[id].trust !== trust) continue;
+        const kept = admits(id, new Set([...[...draw.printed].map(String), ...contraryWhole]));
+        if (kept) found = { id, kept };
+      }
+      const order = named.length
+        ? Array.from({ length: named.length }, (_, k) => named[mod(draw.base + used - size + k, named.length)])
+        : Array.from({ length: size }, (_, k) => mod(draw.base + used + k, size));
+      for (const id of found ? [] : order) {
+        const by = draw.cards.get(id);
+        if (!by || by.length !== 1 || by[0].includes(from) || by[0].includes(to) || whole[id].trust !== trust) continue;
+        if (id === index) break; // today's own index qualifies: it stands, as resolved
+        const kept = admits(id, new Set(contraryWhole));
+        if (kept) { found = { id, kept }; break; }
+      }
+      if (found) { index = found.id; notes = found.kept; }
+    }
+    for (const note of notes) notePresumption(note);
     draw.printed.add(index);
+    draw.cards.set(index, [...(draw.cards.get(index) ?? []), [from, to]]);
     const statedTrust = resolved.line ? resolved.line.trust : undefined;
     if (statedTrust && !trustOfPair.has(trustKey)) trustOfPair.set(trustKey, statedTrust);
     // TAIL-TIES-2, the chair's ruling (T6): a second tie of the same kind between the same two cards, drawn the other way
     // round, is written in the first tie's order (the pair's direction has one home); its index and draw are untouched.
-    const from = String(npc?.id ?? npc?.name ?? '');
-    const to = String(partner?.id ?? partner?.name ?? '');
     const pairKey = `${archetypeKey ?? archetype?.label}::${[from, to].sort().join('\u0000')}`;
     if (!firstOfPair.has(pairKey)) firstOfPair.set(pairKey, `${from}>${to}`);
     const reversed = from !== to && firstOfPair.get(pairKey) === `${to}>${from}`;
