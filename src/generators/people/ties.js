@@ -191,9 +191,11 @@ export function drawTies(cards, place, rng, only = {}) {
     firstOrder.set(archetype, orders);
     writing.order = orders.get(key) === `${String(to.id)}>${String(from.id)}` ? [to, from] : [from, to];
     if (!orders.has(key)) orders.set(key, `${String(from.id)}>${String(to.id)}`);
-    const { archetypeKey, proseVariant, description, tension } = drawTieProse(archetype, from, to);
+    const { archetypeKey, proseVariant, resolvedIndex, description, tension } = drawTieProse(archetype, from, to);
     writing.order = null;
-    if (!firstTemper.has(key)) firstTemper.set(key, temperOfTie(archetype, strength, proseVariant));
+    // GOALS-4 (A), the chair's ruling of 2026-11-20 21:30 UTC: the temper reads TODAY'S RESOLVED index (handed out beside
+    // `proseVariant`, never stored), not the printed line's declaration, so a TIES-HOLD replacement moves no stored field
+    if (!firstTemper.has(key)) firstTemper.set(key, temperOfTie(archetype, strength, resolvedIndex));
     return {
       id: `tie_${from.id}`,
       from: from.id,
@@ -246,7 +248,8 @@ function temperOfKind(type, strength) {
 }
 
 /**
- * A drawn tie's temper: its kind and strength's, or warm where its printed line declares the pair's trust full.
+ * A drawn tie's temper: its kind and strength's, or warm where the line TODAY'S resolution chose declares the pair's trust
+ * full (GOALS-4 (A): `variant` is the draw's `resolvedIndex`, never the printed index of a TIES-HOLD replacement).
  * @param {any} archetype @param {string} strength @param {number} variant
  */
 function temperOfTie(archetype, strength, variant) {

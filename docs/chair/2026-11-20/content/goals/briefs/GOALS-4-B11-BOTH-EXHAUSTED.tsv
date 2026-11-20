@@ -1,0 +1,26 @@
+# GOALS-4 b11 addendum (A2): THE BOTH-EXHAUSTED LIST, for the depth lane (its 157 new pairs land after this).
+# At the cure's tip 38bab73ea, 150 a size (seeds hxd-<size>-<i>), by archetype and size: the places where an archetype
+# printed one template twice, and the repeat ties. Under TIES-HOLD a repeat prints only where the pool AND the reserve hold
+# no line the tie may take: every admitted line taken (the unprinted lines read in a sample of 12 were all refused by their
+# declarations: ruling body, shared power, crisis threat/wartime). Before (d874c81e9): measures/b11/both-exhausted.d874c81e9.tsv.
+archetype	size	places	repeats
+bitter_history	metropolis	6	11
+family_complication	city	1	1
+family_complication	metropolis	2	2
+genuine_respect	town	2	8
+genuine_respect	city	34	90
+genuine_respect	metropolis	80	249
+mentor_legacy	town	2	3
+mentor_legacy	city	27	70
+mentor_legacy	metropolis	88	302
+mutual_leverage	city	41	127
+mutual_leverage	metropolis	93	376
+old_debt	town	3	4
+old_debt	city	60	195
+old_debt	metropolis	132	596
+peer_rivalry	town	2	3
+peer_rivalry	city	50	177
+peer_rivalry	metropolis	113	558
+wary_alliance	town	2	2
+wary_alliance	city	44	120
+wary_alliance	metropolis	91	360

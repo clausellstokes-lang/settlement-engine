@@ -1,0 +1,18 @@
+ties: 26548; elapsed 120.6s; tree /tmp/claude-0/-home-user-settlement-engine/a807bdac-f58c-5701-a27f-e9cb3f61f7b9/scratchpad/proto; 150/size
+size            towns     ties   places  repeats
+thorp             150       71        0        0
+hamlet            150      466        0        0
+village           150     1208        0        0
+town              150     3546       11       20
+city              150     8675      105      784
+metropolis        150    12582      150     2463
+TOTAL             900    26548      266     3267
+places by archetype (a place counts once per archetype with a template printed twice):
+  old_debt                   195
+  peer_rivalry               165
+  wary_alliance              137
+  mutual_leverage            134
+  mentor_legacy              117
+  genuine_respect            116
+  bitter_history               6
+  family_complication          3

@@ -404,7 +404,12 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // mixedOutside and settledLive measured empty after.
     // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): 332 -> 327, measured
     // by this arm's own census at the golden's tree 8c11f73ea: the round's re-drawn casts (a face for every seat of power) and economy fields.
-    expect(census().rows.filter((row) => row.takenLive > 0).length, 'the instrument is not idle').toBe(327);
+    // 2026-11-20, GOALS-4 builder 11 (BY MEASUREMENT, this arm's census probed at the line's first-parent stages on git-archive trees):
+    // 327 -> 328 at point 84, GOALS-3's merge 31a053445 (0a4edcff3, point 83, reads 327; the line 062504aa8 and builder 11's tip read
+    // 328). The one new row: town city|germanic|desert|road|civilized|golden-master-v3, edit E5, layer channel, taken leaf
+    // `prominentRelationship` alone (the tie draw's rotation re-deals that town's prominent tie); that leaf is in no declared
+    // consistency group, and mixedOutside and settledLive stay empty. Taken before GOALS-4's draw cure (its item 3, held).
+    expect(census().rows.filter((row) => row.takenLive > 0).length, 'the instrument is not idle').toBe(328);
     expect(census().rows.filter((row) => row.groupsJudged > 0).length, 'declared groups ARE judged').toBe(139); // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): 133 -> 139, measured by this file's own census at the golden's tree 8c11f73ea
     // THE POSITIVE CONTROL, CONSTRUCTED: one object holding a leaf taken from R1 beside a leaf kept
     // where the record had settled away from R0 IS a MIXED object, and enclosingGroup classes it.
@@ -597,7 +602,10 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // the owner's word 2026-11-18 about 19:07 UTC, "Yes to both"; the chair's line SIGN 2026-11-19 01:04 UTC): [695, 275, 2176] -> [695, 275, 2179], this arm's
     // received value at the landings' tip cc11c9504 (points 54 to 70 over the first close's tip 0dee69e17, where 2176 holds); E1 and E5 unmoved. ACCUMULATED over
     // points 54 to 70 (the re-dealt readings E6 reaches: the goals, ties, secrets and supply lists the points' declared cures move), not bisected by point.
-    expect([taken.E1, taken.E5, taken.E6], 'the edits that DO reach a reading').toEqual([695, 275, 2179]);
+    // 2026-11-20, GOALS-4 builder 11 (BY MEASUREMENT, as A3's census above): [695, 275, 2179] -> [695, 278, 2179] at point 84, GOALS-3's
+    // merge 31a053445 (point 83 0a4edcff3 reads 275): E5 at the same town, city|germanic|desert|road|civilized|golden-master-v3, 0 -> 3
+    // honesty readings taken, by the tie draw; no other town's E5 moved; E1 and E6 unmoved. Taken before GOALS-4's draw cure (item 3, held).
+    expect([taken.E1, taken.E5, taken.E6], 'the edits that DO reach a reading').toEqual([695, 278, 2179]);
     // an npc ROLE reached ZERO readings over the whole corpus until CRISIS, recorded so the figure is not silence.
     // 2026-11-05 (LANDING-6, the same bisection): 0 → 48 CRISIS (d3e072368: the crisis record carries its derived cast,
     // and the cast is chosen by role) → 63 SELF-VOUCH (0be13b5cb) → 32 car 3 (90dc22f18) → 24 PINS (37b1e746d) → 28 F6

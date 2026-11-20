@@ -1,0 +1,31 @@
+# trees.mjs d874c81e9 1f973dfb9 --words=none (the base and builder 11's tip, items 1,2,4,5 + the merge)
+## golden: documents 525 · identical 416 · with a non-string difference 0 · differing strings 109 · of them passing the word check (none) 109 · other 0
+| relationships[].tension | 109 | 109 |
+## census: documents 720 · identical 562 · with a non-string difference 0 · differing strings 161 · of them passing the word check (none) 161 · other 0
+| relationships[].tension | 158 | 158 |
+| pressureSentence | 1 | 1 |
+| prominentRelationship.phrasing | 1 | 1 |
+| prominentRelationship.tension | 1 | 1 |
+
+# born-paths.mjs, base -> tip (every path that differs, docs per path)
+golden: docs moved 109
+  .relationships[].tension 109
+census: docs moved 158
+  .pressureSentence 1
+  .prominentRelationship.phrasing 1
+  .prominentRelationship.tension 1
+  .relationships[].tension 158
+
+# UNLANDED PROTOTYPE of item 3 (both clauses read as the 20:30/20:50 law), tip -> tip+cure, born-paths.mjs
+golden: docs moved 78
+  .relationships[].description 78
+  .relationships[].proseVariant 78
+  .relationships[].tension 78
+census: docs moved 111
+  .pressureSentence 1
+  .prominentRelationship.full 2
+  .prominentRelationship.phrasing 2
+  .prominentRelationship.tension 2
+  .relationships[].description 111
+  .relationships[].proseVariant 111
+  .relationships[].tension 111
