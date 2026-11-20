@@ -1285,6 +1285,35 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   goals lane has landed. WANTS WAIT (about 380 lines for five points): lines true to a person's trade, designed
   and measured AFTER the deploy. Under 20% everywhere is about 1,700 lines: not before the deploy.
 
+- **A TROUBLE'S CAUSES, THE PROPOSAL RULED (2026-11-20, 14:21 UTC; PAGE-5's measure on 900 built towns):** per kind a closed
+  table with each cause's rate and the share it speaks for (crime_wave 231 towns: a thieves' guild 25%, law and
+  order critical or collapsed 14%, rival rings 29%, then standing houses, plain 11%; guild_conflict 215: a past
+  guild war 14%, the economy's power in the hall 28%, a caravan house 20%, docks 15%, plain 8%; and six more
+  kinds; great_flood: half its towns hold no river or coast). ITS PROJECTION with placeholder lines: three in a
+  row 34.1% to 10.3%; three cities 83.1% to 18.9%; three metropolises 81.1% to 27.7% (20.9% by a hash among the
+  causes that hold). RULED: (1) TWO RANKS: rank 1 the trouble's own engine (this town's present, or its own past
+  of the same kind: a stress, a band, a past event, who holds the hall, a rival power); rank 2 a standing feature
+  (a house, the route, the terrain); the reader picks by keyed hash among the rank-1 causes that hold, only then
+  among rank 2, else a plain wording: a town at war says war, never "a crossroads". (2) THE CAP BINDS THE
+  SENTENCE: no single wording in more than about 15% of its kind's towns; four plain wordings where plain exceeds
+  45%. (3) A CAUSE MUST BE A CAUSE OF THE SAME TROUBLE ("craft and merchant powers both" may not turn the guild
+  quarrel into another); for crime the chair asked for "no kept force" and "the guard too few for its size", or a
+  line saying why the record cannot carry them. (4) A cause that names or implies a HIDEABLE house holds only
+  where the document in hand shows it: said in the data file's header; those rows listed for the security reader.
+  THE LINES: crime and guilds first, to the chair before any merge.
+- **R3, THE KEY-LEVEL HUSKS: THE KEY IS LEFT OFF (14:21 UTC; VEIL-26's table at c4e2b1ab2, the twin only, 140 births):** on
+  the new shape no nothing-hidden page serves `contestsNiche` at all; on the old shape a power without it is the
+  ordinary case (67% to 88%); person keys: none served, none cut; withholding the holder would remove 97 served
+  power rows in 68 of 92 towns: the larger tell and the larger loss. ONE CONDITION BEFORE THE MERGE: the same
+  table from the SERVER (a parity finding stops the merge). The cuts that remove a value naming a served house
+  (14 or more) are over-withholding, counted for the owner's paragraph.
+- **R3, A GAP TOWARD SENDING FOUND IN dbff7eeb3 BY THE LANE'S OWNER, RULED A LEAK (14:21 UTC):** the pre-sweep matches a goal
+  or a membership to its person by id only where the id is a STRING, and the husk arm likewise: a person with a
+  NUMBER id or no id keeps a swept goal or membership as a husk the arm cannot see. CURED IN R3-CURE-5 (relayed to
+  VEIL-25's builder): the match by id as text for any scalar in both engines; no id: withheld where any served
+  goal naming a withheld power contains it; two plants, red first. The people stage's first stop (the number id
+  90001) and this cure share one helper for "an id as text".
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
