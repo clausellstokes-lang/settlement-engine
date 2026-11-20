@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * THE CONFINEMENT CHECK (the seventh chair's CV4; NAMES-2's check of its hand-back §3, rebuilt generic by NAMES-3). Usage:
- *   node confine.mjs <before-out> <after-out> [--words=number|names|none] [--control]
+ *   node confine.mjs <before-out> <after-out> [--words=number|names|none] [--control] [--fails=20]
  * reads `golden.jsonl` and `census.jsonl` from each (`run.mjs <tree> <out> born`; or `trees.mjs`, which does both trees)
  * and diffs every document key by key, matched by its corpus key.
  *
@@ -20,6 +20,7 @@ import { join } from 'node:path';
 
 const [beforeDir, afterDir] = process.argv.slice(2);
 const control = process.argv.includes('--control');
+const FAILS = Number((process.argv.find((a) => a.startsWith('--fails=')) || '--fails=20').slice(8));
 const WORDS = (process.argv.find((a) => a.startsWith('--words=')) || '--words=number').slice(8);
 
 /** the two numbers of one word, each way (lower case; a capital is folded) */
@@ -111,7 +112,7 @@ for (const corpus of ['golden', 'census']) {
       const f = fieldOf(s.path);
       fields.set(f, (fields.get(f) || 0) + 1);
       if (!towns.has(f)) towns.set(f, new Set()); towns.get(f).add(String(b.key));
-      if (!judge(s.before, s.after, vocab)) { bad++; if (fails.length < 20) fails.push(`${b.key} ${s.path}\n    before: ${s.before}\n    after:  ${s.after}`); }
+      if (!judge(s.before, s.after, vocab)) { bad++; if (fails.length < FAILS) fails.push(`${b.key} ${s.path}\n    before: ${s.before}\n    after:  ${s.after}`); }
     }
   });
   console.log(`## ${corpus}${control ? ' (CONTROL: each against its neighbour)' : ''}: documents ${before.length} · identical ${identical} · with a non-string difference ${otherDocs} · differing strings ${strings} · of them passing the word check (${WORDS}) ${strings - bad} · other ${bad}`);

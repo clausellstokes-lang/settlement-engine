@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * NAMES-3's agreement count (rebuilt from NAMES-2's hand-back §5, the same definition). Usage:
- *   node agree.mjs <reader-tree> <out-dir> [--examples=<n>] [--json=<file>]
+ *   node agree.mjs <reader-tree> <out-dir> [--examples=<n>] [--json=<file>] [--pronouns]
  * reads `<out-dir>/census.jsonl` (stored prose, the 720) and `<out-dir>/views/*.json` (the rendered pages, every view).
  *
  * A power as the SUBJECT of its clause: its article form ("the Merchant Guilds", "The Guard"; `powerNameWithArticle`)
@@ -111,6 +111,48 @@ function count(units) {
   return res;
 }
 
+/**
+ * THE PRONOUN READING (NAMES-3, item 3 (c)): a power P (its article form, any role) and, later in the same sentence, a
+ * pronoun of the other number (a singular P: they, them, their, themselves, they're, they've; a plural P: it, its, itself,
+ * it's), with nothing between them that could be the pronoun's own antecedent: no other power, no capitalised name, no
+ * plural noun ("the tolls", "people", "members": a word of four letters or more ending in a single s), no other pronoun.
+ * And across a stop: a sentence that OPENS on such a pronoun right after a sentence that opened on P ("P suspects it.
+ * They've been watching"). A floor: an antecedent the rule cannot see is skipped, never guessed.
+ */
+const SING_PRON = /^(?:it|its|itself|it's)$/i; const PLUR_PRON = /^(?:they|them|their|themselves|they're|they've|theirs)$/i;
+function pronounReadings(text, forms) {
+  const out = [];
+  const sentences = String(text).split(/(?<=[.!?;])\s+/);
+  let prevOpener = null;
+  for (const sent of sentences) {
+    const mentions = [];
+    for (const f of forms) for (const m of sent.matchAll(new RegExp(`(^|[^A-Za-z'])([Tt]he ${esc(f.body)})(?![A-Za-z])`, 'g'))) mentions.push({ f, end: m.index + m[1].length + m[2].length, at: m.index + m[1].length });
+    mentions.sort((a, b) => a.at - b.at);
+    const first = (sent.trim().split(/\s+/)[0] || '').replace(/[^A-Za-z']/g, '');
+    if (prevOpener && (prevOpener.plural ? SING_PRON : PLUR_PRON).test(first)) out.push({ form: prevOpener, pron: first, at: 0, cross: true });
+    for (const [i, m] of mentions.entries()) {
+      const stop = i + 1 < mentions.length ? mentions[i + 1].at : sent.length;
+      const words = sent.slice(m.end, stop).split(/\s+/).filter(Boolean);
+      for (const raw of words) {
+        const w = raw.replace(/^[^A-Za-z']+|[^A-Za-z']+$/g, '');
+        if (!w) continue;
+        if ((m.f.plural ? SING_PRON : PLUR_PRON).test(w)) { out.push({ form: m.f, pron: w, at: m.at }); break; }
+        if ((m.f.plural ? PLUR_PRON : SING_PRON).test(w) || /^(?:he|she|him|her|his|hers)$/i.test(w)) break; // its own number, or a person
+        if (/^[A-Z]/.test(w) && w !== 'The') break; // a name
+        if (/^[a-z]{3,}[^s's]s$/.test(w) || /^(?:people|members|men|women|others|both|all)$/.test(w)) break; // a plural noun
+      }
+    }
+    prevOpener = mentions.length && mentions[0].at <= 1 ? mentions[0].f : null;
+  }
+  return out;
+}
+
+function countPronouns(units) {
+  const res = { pluralSing: [], singPlural: [] };
+  for (const u of units) for (const r of pronounReadings(u.text, u.forms)) (r.form.plural ? res.pluralSing : res.singPlural).push({ ...r, verb: r.pron, u });
+  return res;
+}
+
 function report(label, res) {
   const towns = (xs) => new Set(xs.map((r) => r.u.town)).size;
   const lines = [`## ${label}: ${res.readings} subject readings; plural power + singular verb ${res.pluralSing.length} (${towns(res.pluralSing)} towns); singular power + plural verb ${res.singPlural.length} (${towns(res.singPlural)} towns)`];
@@ -143,7 +185,11 @@ for (const file of files) {
   for (const [view, lines] of Object.entries(views)) for (const l of lines) rendered.push({ town: seed, where: view, text: l, forms });
 }
 const S = count(stored); const R = count(rendered);
-const text = `${report(`STORED (${new Set(stored.map((u) => u.town)).size} towns)`, S)}\n\n${report(`RENDERED (${files.length} towns)`, R)}\n`;
+let text = `${report(`STORED (${new Set(stored.map((u) => u.town)).size} towns)`, S)}\n\n${report(`RENDERED (${files.length} towns)`, R)}\n`;
+if (process.argv.includes('--pronouns')) {
+  const P = countPronouns(stored); const Q = countPronouns(rendered);
+  text += `\n${report('PRONOUNS, STORED (plural power + it/its; singular power + they/them/their)', { readings: '-', ...P })}\n\n${report('PRONOUNS, RENDERED', { readings: '-', ...Q })}\n`;
+}
 const jsonOut = arg('json', '');
 if (jsonOut) writeFileSync(jsonOut, JSON.stringify({ stored: { readings: S.readings, pluralSing: S.pluralSing.length, singPlural: S.singPlural.length }, rendered: { readings: R.readings, pluralSing: R.pluralSing.length, singPlural: R.singPlural.length } }));
 process.stdout.write(text);
