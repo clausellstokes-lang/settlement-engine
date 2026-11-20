@@ -44,6 +44,8 @@ import { deriveHistoryBeats } from './historyBeats.js';
 import { deriveCausalState } from './causalState.js';
 import { powerPossessive } from './display/powerSentenceName.js';
 import { GATHERING_NAMED, GATHERING_PLAIN } from '../data/dailyLife/gatheringPlaces.js';
+import { DAWN_WORK } from '../data/dailyLife/dawnWork.js';
+import { CHILD_WARNINGS } from '../data/dailyLife/childWarnings.js';
 import { filterDeclared } from './facts/drawDeclared.js';
 import { atomHolds } from './facts/factVocabulary.js';
 import { factsOf } from './facts/factsOf.js';
@@ -209,36 +211,47 @@ function deriveFoodCulture(s, ctx) {
 // canonical food_production + defense lenses (what the first hours of
 // the day are FOR: bread and walls); the guild/merchant flavor the
 // craft band used to gate now keys off faction power alone.
+//
+// DAILY-2 B2 D1 (LINES-1 § dawn_work and LINES-1b, as the chair ruled at 18:37, 18:53 and 18:56): the six branches are
+// kept, but the defence branch needs a real outside threat (ruling 8: a siege, monster pressure, bandit raids or a hostile
+// neighbour at medium or above; a rating low because a place is small is no danger). Each branch's pool
+// (`data/dailyLife/dawnWork.js :: DAWN_WORK`) goes by THE ROUTE (`pickNameable`, below); no line true: the EMPTY string (ruling 3).
+
+/** The capacity bands that are a want. */
+const WANTING_BANDS = Object.freeze(['critical', 'collapsed']);
+/** Ruling 8: the threats to people outside (`threatProfile.js`'s kinds), taken at `severityBand` medium or above. */
+const OUTSIDE_THREATS = Object.freeze(['siege', 'monster_pressure', 'bandit_raids', 'rival_neighbor']);
+const MEDIUM_OR_ABOVE = Object.freeze(['medium', 'high', 'critical']);
+
 /**
  * @param {DailyLifeSettlement} s
  * @param {DailyLifeContext} ctx
  * @returns {DailyLifeSlot}
  */
 function deriveDawnWork(s, ctx) {
+  /** @type {SlotReference[]} */
   const refs = [];
   const food = ctx.capacities.capacities.food_production;
   const defense = ctx.capacities.capacities.defense;
   const dominantCraftPower = ctx.profiles.find(p => p.archetype === 'craft')?.power || 0;
   const dominantMerchantPower = ctx.profiles.find(p => p.archetype === 'merchant')?.power || 0;
+  const outside = ctx.threats.some((t) => OUTSIDE_THREATS.includes(t.type) && MEDIUM_OR_ABOVE.includes(t.severityBand));
 
-  let text;
-  if (food.band === 'critical' || food.band === 'collapsed') {
-    text = 'Dawn work is the search for food. Foragers leave before light, and the granary queue forms before the ovens are warm.';
-  } else if (defense.band === 'critical' || defense.band === 'collapsed') {
-    text = 'The walls claim the first hours: the watch musters thin at first light, and ordinary work waits until the rounds are walked.';
-  } else if (dominantCraftPower >= 25) {
-    text = 'Smithy fires light before sunrise; guild-callers move from shop to shop, and apprentices haul water before the bell.';
-  } else if (dominantMerchantPower >= 30 && ctx.threats.some((t) => t.type === 'siege')) {
-    // BAR5-WORLD (2026-11-16; LAW 5): under a siege no caravan rolls; the merchants' dawn is a count of their stock.
-    text = 'The merchants count their stock before light, and the porters wait for loads that do not come; dawn brings the smell of woodsmoke and grain.';
-  } else if (dominantMerchantPower >= 30) {
-    text = 'Merchant caravans roll before light; porters and apprentices queue at the warehouses, and dawn brings the smell of woodsmoke and grain.';
-  } else {
-    text = 'Bakers light their ovens first, then the smiths; the watch changes as the gates open.';
-  }
+  // BAR5-WORLD (2026-11-16; LAW 5): under a siege no caravan rolls; the merchants' dawn is a count of their stock.
+  /** @type {keyof typeof DAWN_WORK} */
+  const branch = WANTING_BANDS.includes(food.band) ? 'food'
+    : WANTING_BANDS.includes(defense.band) && outside ? 'defence'
+    : dominantCraftPower >= 25 ? 'craft'
+    : dominantMerchantPower >= 30 && ctx.threats.some((t) => t.type === 'siege') ? 'merchant_siege'
+    : dominantMerchantPower >= 30 ? 'merchant'
+    : 'default';
 
   refs.push({ id: 'capacity.food_production', label: 'Food production', type: 'capacity' });
   refs.push({ id: 'capacity.defense', label: 'Defense', type: 'capacity' });
+
+  const house = houseFinder(s);
+  const eligible = filterDeclared(DAWN_WORK[branch], { facts: factsFor(s), poolId: `dailyLife.dawn_work.${branch}`, surface: 'dailyLife' });
+  const text = sayDeclared(pickNameable(s, eligible, 'dawn_work', branch, house), house, refs);
 
   return slot('dawn_work', text, 'capacity.food_production + capacity.defense + dominant faction', refs);
 }
@@ -269,14 +282,14 @@ const rowName = (inst) => String(nativeSemanticName(/** @type {object} */ (inst)
  * @param {DailyLifeSettlement} s @returns {RosterRow[]}
  */
 function nameableRows(s) {
-  return /** @type {RosterRow[]} */ (liveInstitutions(/** @type {any} */ (s))).filter((i) => !isHideableHouse(/** @type {Record<string, unknown>} */ (i)) && !ACCESS_ONLY.test(rowName(i)));
+  return /** @type {RosterRow[]} */ (liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (/** @type {unknown} */ (s)))).filter((i) => !isHideableHouse(/** @type {Record<string, unknown>} */ (i)) && !ACCESS_ONLY.test(rowName(i)));
 }
 
 /** @param {RosterRow[]} rows @param {RegExp} re @param {(i: RosterRow) => boolean} [extra] @returns {RosterRow|undefined} */
 const firstRow = (rows, re, extra = () => true) => rows.find((i) => re.test(rowName(i)) && extra(i));
 
-/** The house a `{placeholder}` names, found in the nameable rows. @type {Readonly<Record<string, (rows: RosterRow[]) => RosterRow|undefined>>} */
-const GATHERING_HOUSES = Object.freeze({
+/** The house a `{placeholder}` names (every slot's), found in the nameable rows. @type {Readonly<Record<string, (rows: RosterRow[]) => RosterRow|undefined>>} */
+const DAILY_HOUSES = Object.freeze({
   sacred: (rows) => SACRED_ORDER.map((re) => firstRow(rows, re)).find(Boolean),
   church: (rows) => CHURCH_ORDER.map((re) => firstRow(rows, re)).find(Boolean),
   cathedral: (rows) => firstRow(rows, /\bcathedral/i),
@@ -293,37 +306,96 @@ const GATHERING_HOUSES = Object.freeze({
 /** @param {string} text @returns {string[]} the houses a line names */
 const housesNamedIn = (text) => [...text.matchAll(/\{(\w+)\}/g)].map((m) => m[1]);
 
+/** @typedef {import('./facts/factVocabulary.js').FactsLike} FactsLike */
+/** @typedef {(k: string) => RosterRow|undefined} HouseFinder */
+
+/** @param {DailyLifeSettlement} s @returns {FactsLike} the record's fact homes */
+const factsFor = (s) => /** @type {FactsLike} */ (/** @type {unknown} */ (factsOf(s)));
+
+/**
+ * One record's house finder: a `{placeholder}` → its row among the nameable rows, each looked up once.
+ * @param {DailyLifeSettlement} s @returns {HouseFinder}
+ */
+function houseFinder(s) {
+  const rows = nameableRows(s);
+  /** @type {Record<string, RosterRow|undefined>} */
+  const found = {};
+  return (k) => (k in found ? found[k] : (found[k] = DAILY_HOUSES[k]?.(rows)));
+}
+
+/**
+ * THE ROUTE (ruling 11), one for every slot: each deriver hands its branch's pool to the door itself
+ * (`facts/drawDeclared.js :: filterDeclared`, the pool named in the call so the presumed-things walker sees it drawn);
+ * here the lines the record admits keep only those whose every named house the live roster can name, and
+ * `kernel/proseHash.js :: pickVariantMixed(eligible, '<name>::dailyLife.<slot>::<branch>')` picks one (a nameless
+ * record takes index 0 of the eligible list; no eligible line, nothing).
+ * @template {{ text: string }} T
+ * @param {DailyLifeSettlement} s @param {ReadonlyArray<T>} admitted the door's lines @param {string} slotKey @param {string} branch
+ * @param {HouseFinder} house
+ * @returns {T|undefined}
+ */
+function pickNameable(s, admitted, slotKey, branch, house) {
+  const eligible = admitted.filter((l) => housesNamedIn(l.text).every((k) => !!house(k)));
+  const name = /** @type {{ name?: unknown }} */ (s).name;
+  return pickVariantMixed(eligible, typeof name === 'string' && name ? `${name}::dailyLife.${slotKey}::${branch}` : null);
+}
+
+/**
+ * A picked line said: each `{house}` its row's `the <noun>` (`display/institutionSentenceNoun.js`), the row cited.
+ * @param {{ text: string }|undefined} pick @param {HouseFinder} house @param {SlotReference[]} refs @returns {string} '' for no line
+ */
+function sayDeclared(pick, house, refs) {
+  return pick ? pick.text.replace(/\{(\w+)\}/g, (_, k) => {
+    const row = /** @type {RosterRow} */ (house(k));
+    const label = String(row.name || '');
+    refs.push({ id: row.id || `institution.${snakeCase(label)}`, label, type: 'institution' });
+    return `the ${institutionSentenceNoun(label)}`;
+  }) : '';
+}
+
 /**
  * @param {DailyLifeSettlement} s
  * @param {DailyLifeContext} _ctx
  * @returns {DailyLifeSlot}
  */
 function deriveGatheringPlaces(s, _ctx) {
-  const facts = /** @type {import('./facts/factVocabulary.js').FactsLike} */ (/** @type {unknown} */ (factsOf(/** @type {any} */ (s))));
-  const rows = nameableRows(s);
-  /** @type {Record<string, RosterRow|undefined>} */
-  const found = {};
-  const house = (/** @type {string} */ k) => (k in found ? found[k] : (found[k] = GATHERING_HOUSES[k]?.(rows)));
+  const facts = factsFor(s);
+  const house = houseFinder(s);
   // the branch: a house of the three kinds the record holds (its atom) and the roster can name
   const named = (atomHolds('sacredHouse', facts) === true && !!house('sacred'))
     || (atomHolds('market', facts) === true && !!house('market'))
     || (atomHolds('institution: tavern', facts) === true && !!house('inn'));
   const branch = named ? 'named' : 'plain';
-  const eligible = filterDeclared(named ? GATHERING_NAMED : GATHERING_PLAIN, { facts, poolId: `dailyLife.gathering_places.${branch}`, surface: 'dailyLife' })
-    .filter((l) => housesNamedIn(l.text).every((k) => !!house(k)));
-  const name = /** @type {{ name?: unknown }} */ (s).name;
-  const pick = pickVariantMixed(eligible, typeof name === 'string' && name ? `${name}::dailyLife.gathering_places::${branch}` : null);
 
   /** @type {SlotReference[]} */
   const refs = [];
-  const text = pick ? pick.text.replace(/\{(\w+)\}/g, (_, k) => {
-    const row = /** @type {RosterRow} */ (house(k));
-    const label = String(row.name || '');
-    refs.push({ id: row.id || `institution.${snakeCase(label)}`, label, type: 'institution' });
-    return `the ${institutionSentenceNoun(label)}`;
-  }) : '';
+  const eligible = filterDeclared(named ? GATHERING_NAMED : GATHERING_PLAIN, { facts, poolId: `dailyLife.gathering_places.${branch}`, surface: 'dailyLife' });
+  const text = sayDeclared(pickNameable(s, eligible, 'gathering_places', branch, house), house, refs);
 
   return slot('gathering_places', text, 'the live roster, by the lines\' declared atoms (LINES-1)', refs);
+}
+
+// ── child_warnings (DAILY-1 LINES-1 § child_warnings and LINES-1b, as the chair ruled at 18:37, 18:53 and 18:56) ──
+//
+// The threats by severity, each KIND said once, the first TWO kinds; a kind from a rating alone is not taken (ruling 8:
+// unrest needs a live trouble, economic collapse prosperity struggling or poor or a real stress); a kind with no pool
+// (corruption and cult among them) is `default` (D0); no real kind, the `none` pool's whole sentence. Each kind's pool
+// (`data/dailyLife/childWarnings.js :: CHILD_WARNINGS`) goes by THE ROUTE (`pickNameable`), keyed by its kind; two kinds
+// join "Children are warned about A, and about B.". No line true: the EMPTY string (ruling 3).
+
+/** LINES-1b § 1: the tension types that are a live trouble (`history.currentTensions[].type`, the field `facts/uprising.js`
+ * reads); crime_wave, corruption_scandal and infiltration_fear are left out (rule 6). */
+const CIVIL_TENSIONS = Object.freeze(['popular_uprising', 'succession_crisis', 'legitimacy_crisis', 'leadership_vacuum', 'tyranny',
+  'population_friction', 'disputed_land', 'religious_tension', 'guild_conflict', 'generational_divide', 'economic_disparity', 'heresy_trial']);
+/** LINES-1b § 1: the tension types that are a real economic stress. */
+const ECON_TENSIONS = Object.freeze(['trade_collapse', 'market_crash', 'outside_debt', 'resource_scarcity']);
+/** The threats the defence profile's ratings raise (`threatProfile.js` step 2): a rating alone, no trouble held. */
+const RATING_SURFACE = 'defenseProfile';
+
+/** @param {DailyLifeSettlement} s @returns {string[]} the record's live tension types */
+function tensionTypes(s) {
+  const t = /** @type {{ history?: { currentTensions?: unknown } | null }} */ (s)?.history?.currentTensions;
+  return (Array.isArray(t) ? t : t ? [t] : []).map((e) => /** @type {{ type?: unknown }} */ (e)?.type).filter((x) => typeof x === 'string');
 }
 
 /**
@@ -332,42 +404,50 @@ function deriveGatheringPlaces(s, _ctx) {
  * @returns {DailyLifeSlot}
  */
 function deriveChildWarnings(s, ctx) {
+  /** @type {SlotReference[]} */
   const refs = [];
-  // Top threats by severity
-  const top = [...ctx.threats].sort((a, b) => b.severity - a.severity).slice(0, 3);
+  const facts = factsFor(s);
+  const tensions = tensionTypes(s);
+  const conflicts = /** @type {{ conflicts?: unknown }} */ (s).conflicts;
+  const prosperity = /** @type {{ prosperity?: unknown }} */ (facts).prosperity;
+  const trouble = (Array.isArray(conflicts) && conflicts.length > 0) || tensions.some((t) => CIVIL_TENSIONS.includes(t))
+    || ctx.threats.some((t) => t.type === 'unrest' && t.originSurface !== RATING_SURFACE);
+  const econStress = prosperity === 'poor' || prosperity === 'struggling'
+    || ctx.threats.some((t) => t.type === 'economic_collapse' && t.originSurface !== RATING_SURFACE)
+    || tensions.some((t) => ECON_TENSIONS.includes(t));
+  /** @param {ThreatProfile} t @returns {keyof typeof CHILD_WARNINGS | null} the kind a threat is said as, null if not taken */
+  const kindOf = (t) => {
+    if ((t.type === 'unrest' && !trouble) || (t.type === 'economic_collapse' && !econStress)) return null;
+    return Object.hasOwn(CHILD_WARNINGS, t.type) && t.type !== 'none' && t.type !== 'default'
+      ? /** @type {keyof typeof CHILD_WARNINGS} */ (t.type) : 'default';
+  };
+  /** @type {Map<keyof typeof CHILD_WARNINGS, ThreatProfile>} the first threat of each kind, by severity */
+  const byKind = new Map();
+  for (const t of [...ctx.threats].sort((a, b) => b.severity - a.severity)) {
+    const k = kindOf(t);
+    if (k && !byKind.has(k)) byKind.set(k, t);
+  }
+  const kinds = [...byKind.keys()].slice(0, 2);
+  const house = houseFinder(s);
 
   let text;
-  if (top.length === 0) {
-    text = 'Children are warned about the usual things: the deep well, the strangers\' road, the woods at twilight.';
+  if (!kinds.length) {
+    const eligible = filterDeclared(CHILD_WARNINGS.none, { facts, poolId: 'dailyLife.child_warnings.none', surface: 'dailyLife' });
+    text = sayDeclared(pickNameable(s, eligible, 'child_warnings', 'none', house), house, refs);
   } else {
-    // R3-CODE-C (the chair's C-L4): two threats of one kind give one warning, said once ("the road past sundown; …; the road past sundown").
-    const parts = [...new Set(top.map(t => threatWarning(t)))];
-    text = `Children are warned about ${parts.join('; ')}.`;
-    for (const t of top) refs.push({ id: t.id, label: t.label, type: 'threat' });
+    const parts = [];
+    for (const kind of kinds) {
+      const eligible = filterDeclared(CHILD_WARNINGS[kind], { facts, poolId: `dailyLife.child_warnings.${kind}`, surface: 'dailyLife' });
+      const said = sayDeclared(pickNameable(s, eligible, 'child_warnings', kind, house), house, refs);
+      if (!said) continue;
+      const t = /** @type {ThreatProfile} */ (byKind.get(kind));
+      refs.push({ id: t.id, label: t.label, type: 'threat' });
+      parts.push(said);
+    }
+    text = parts.length ? `Children are warned about ${parts.join(', and about ')}.` : '';
   }
 
   return slot('child_warnings', text, 'top threats by severity', refs);
-}
-
-/**
- * @param {ThreatProfile} threat
- * @returns {string}
- */
-function threatWarning(threat) {
-  switch (threat.type) {
-    case 'monster_pressure':    return 'the road past sundown';
-    case 'bandit_raids':        return 'strangers who linger at the gates';
-    case 'siege':               return 'staying close when the bells ring three times';
-    case 'rival_neighbor':      return `anything bearing the colors of the neighbour`;
-    case 'plague':              return 'the sick-house and unfamiliar coughs';
-    case 'famine':              return 'wandering off: bread is short';
-    case 'corruption':          return 'talking to officials they don\'t know';
-    case 'unrest':              return 'crowds that gather quickly';
-    case 'arcane_instability':  return 'shimmering air and unfamiliar lights';
-    case 'cult':                return 'masked strangers offering sweets';
-    case 'economic_collapse':   return 'the empty stalls in the trade quarter';
-    default:                    return threat.label.toLowerCase();
-  }
 }
 
 /**
