@@ -1,0 +1,257 @@
+# M2 quarters measure: 600 places (thorp 100, hamlet 100, village 100, town 100, city 100, metropolis 100)
+
+## TODAY: TOP SENTENCE BY SIZE (places printing it / places holding the field)
+TODAY SIZE thorp: 79/90 = 88% distinct=4 top="Houses of worship, cloisters, quiet streets with priests and pilgrims"
+TODAY SIZE hamlet: 100/100 = 100% distinct=3 top="Houses of worship, cloisters, quiet streets with priests and pilgrims"
+TODAY SIZE village: 100/100 = 100% distinct=3 top="Houses of worship, cloisters, quiet streets with priests and pilgrims"
+TODAY SIZE town: 100/100 = 100% distinct=8 top="Bustling center with merchant stalls, hawkers, and crowds"
+TODAY SIZE city: 100/100 = 100% distinct=10 top="Houses of worship, cloisters, quiet streets with priests and pilgrims"
+TODAY SIZE metropolis: 100/100 = 100% distinct=12 top="Houses of worship, cloisters, quiet streets with priests and pilgrims"
+
+## TODAY: PER QUARTER TYPE (places holding the type; the type's commonest sentence)
+TODAY TYPE Religious Quarter | thorp: holders=79 distinct=1 top=79 (100%) "Houses of worship, cloisters, quiet streets with priests and pilgrims"
+TODAY TYPE Religious Quarter | hamlet: holders=100 distinct=1 top=100 (100%) "Houses of worship, cloisters, quiet streets with priests and pilgrims"
+TODAY TYPE Religious Quarter | village: holders=100 distinct=1 top=100 (100%) "Houses of worship, cloisters, quiet streets with priests and pilgrims"
+TODAY TYPE Religious Quarter | town: holders=100 distinct=1 top=100 (100%) "Houses of worship, cloisters, quiet streets with priests and pilgrims"
+TODAY TYPE Religious Quarter | city: holders=100 distinct=1 top=100 (100%) "Houses of worship, cloisters, quiet streets with priests and pilgrims"
+TODAY TYPE Religious Quarter | metropolis: holders=100 distinct=1 top=100 (100%) "Houses of worship, cloisters, quiet streets with priests and pilgrims"
+TODAY TYPE Fishing Landing | thorp: holders=38 distinct=1 top=38 (100%) "Nets, drying racks, upturned boats, and the perpetual smell of salt and fish"
+TODAY TYPE Woodcutters' Ground | thorp: holders=8 distinct=1 top=8 (100%) "Stacked timber, sawdust paths, and sheds for tools and sleds"
+TODAY TYPE Woodcutters' Ground | hamlet: holders=7 distinct=1 top=7 (100%) "Stacked timber, sawdust paths, and sheds for tools and sleds"
+TODAY TYPE Woodcutters' Ground | village: holders=19 distinct=1 top=19 (100%) "Stacked timber, sawdust paths, and sheds for tools and sleds"
+TODAY TYPE Roadside Shrine | thorp: holders=3 distinct=1 top=3 (100%) "A simple marker or cairn where travellers leave offerings"
+TODAY TYPE Alehouse & Common | hamlet: holders=34 distinct=1 top=34 (100%) "The alehouse and a scrap of common ground: the social heart of the settlement"
+TODAY TYPE Noxious Trades Quarter | village: holders=11 distinct=1 top=11 (100%) "Smelly, dirty area with tanneries, butchers, and dyers"
+TODAY TYPE Noxious Trades Quarter | town: holders=76 distinct=1 top=76 (100%) "Smelly, dirty area with tanneries, butchers, and dyers"
+TODAY TYPE Noxious Trades Quarter | city: holders=100 distinct=1 top=100 (100%) "Smelly, dirty area with tanneries, butchers, and dyers"
+TODAY TYPE Noxious Trades Quarter | metropolis: holders=100 distinct=1 top=100 (100%) "Smelly, dirty area with tanneries, butchers, and dyers"
+TODAY TYPE Market Quarter | town: holders=100 distinct=1 top=100 (100%) "Bustling center with merchant stalls, hawkers, and crowds"
+TODAY TYPE Waterfront District | town: holders=26 distinct=2 top=14 (54%) "Warehouses, docks, sailors, longshoremen, salt, and fish"
+TODAY TYPE Waterfront District | city: holders=44 distinct=2 top=23 (52%) "Warehouses, wharves, barges, dockworkers, and river traffic"
+TODAY TYPE Waterfront District | metropolis: holders=40 distinct=3 top=24 (60%) "Warehouses, wharves, barges, dockworkers, and river traffic"
+TODAY TYPE Government Quarter | town: holders=49 distinct=1 top=49 (100%) "Official buildings, courts, administrative offices"
+TODAY TYPE Government Quarter | city: holders=100 distinct=1 top=100 (100%) "Official buildings, courts, administrative offices"
+TODAY TYPE Government Quarter | metropolis: holders=100 distinct=1 top=100 (100%) "Official buildings, courts, administrative offices"
+TODAY TYPE Artisan Quarter | town: holders=24 distinct=1 top=24 (100%) "Workshops, guild halls, apprentices learning trades"
+TODAY TYPE Artisan Quarter | city: holders=5 distinct=1 top=5 (100%) "Workshops, guild halls, apprentices learning trades"
+TODAY TYPE Artisan Quarter | metropolis: holders=1 distinct=1 top=1 (100%) "Workshops, guild halls, apprentices learning trades"
+TODAY TYPE Mages' Quarter | town: holders=4 distinct=1 top=4 (100%) "Towers, arcane shops, strange lights and sounds at night"
+TODAY TYPE Mages' Quarter | city: holders=77 distinct=1 top=77 (100%) "Towers, arcane shops, strange lights and sounds at night"
+TODAY TYPE Mages' Quarter | metropolis: holders=96 distinct=1 top=96 (100%) "Towers, arcane shops, strange lights and sounds at night"
+TODAY TYPE Shadows District | city: holders=91 distinct=1 top=91 (100%) "Narrow alleys, hidden markets, criminal activity"
+TODAY TYPE Shadows District | metropolis: holders=100 distinct=1 top=100 (100%) "Narrow alleys, hidden markets, criminal activity"
+TODAY TYPE Wealthy Residential | city: holders=100 distinct=1 top=100 (100%) "Stone townhouses, private gardens, clean streets"
+TODAY TYPE Wealthy Residential | metropolis: holders=100 distinct=2 top=99 (99%) "Stone townhouses, private gardens, clean streets"
+TODAY TYPE Common Residential | city: holders=100 distinct=1 top=100 (100%) "Dense timber tenements, narrow streets, crowded"
+TODAY TYPE Common Residential | metropolis: holders=100 distinct=1 top=100 (100%) "Dense timber tenements, narrow streets, crowded"
+
+## TODAY: BRANCHES (places / entries), by size
+BRANCH Religious Quarter | thorp: access=79
+BRANCH Religious Quarter | hamlet: access=100
+BRANCH Religious Quarter | village: church=100
+BRANCH Religious Quarter | town: church=100
+BRANCH Religious Quarter | city: church=100
+BRANCH Religious Quarter | metropolis: church=100
+BRANCH Market Quarter | town: market=100
+BRANCH Noxious Trades Quarter | village: trades=11
+BRANCH Noxious Trades Quarter | town: trades=76
+BRANCH Noxious Trades Quarter | city: trades=100
+BRANCH Noxious Trades Quarter | metropolis: trades=100
+BRANCH Waterfront District | town: river=12 maritime=14
+BRANCH Waterfront District | city: river=23 maritime=21
+BRANCH Waterfront District | metropolis: river=25 maritime=15
+BRANCH Government Quarter | town: seat=49
+BRANCH Government Quarter | city: seat=100
+BRANCH Government Quarter | metropolis: seat=100
+BRANCH Mages' Quarter | town: arcane=4
+BRANCH Mages' Quarter | city: arcane=77
+BRANCH Mages' Quarter | metropolis: arcane=96
+BRANCH Shadows District | city: shadow=91
+BRANCH Shadows District | metropolis: shadow=100
+BRANCH Artisan Quarter | town: crafts=24
+BRANCH Artisan Quarter | city: crafts=5
+BRANCH Artisan Quarter | metropolis: crafts=1
+BRANCH Woodcutters' Ground | thorp: wood=8
+BRANCH Woodcutters' Ground | hamlet: wood=7
+BRANCH Woodcutters' Ground | village: wood=19
+BRANCH Fishing Landing | thorp: inland=24 coast=14
+BRANCH Alehouse & Common | hamlet: alehouse=27 inn=7
+BRANCH Roadside Shrine | thorp: shrine=3
+BRANCH Wealthy Residential | city: wealth=100
+BRANCH Wealthy Residential | metropolis: wealth=100
+BRANCH Common Residential | city: common=100
+BRANCH Common Residential | metropolis: common=100
+
+## TODAY: FALSE PRESUMPTIONS (places holding the quarter whose record lacks the word's fact)
+FALSE Religious Quarter | thorp (79): houses of worship (church): 79 · cloisters (institution: monastery): 79 · priests (clergy): 79 · streets (tier ≥ village): 79
+FALSE Religious Quarter | hamlet (100): houses of worship (church): 100 · cloisters (institution: monastery): 100 · priests (clergy): 100 · streets (tier ≥ village): 100
+FALSE Religious Quarter | village (100): houses of worship (church): 0 · cloisters (institution: monastery): 100 · priests (clergy): 0 · streets (tier ≥ village): 0
+FALSE Religious Quarter | town (100): houses of worship (church): 0 · cloisters (institution: monastery): 84 · priests (clergy): 0 · streets (tier ≥ village): 0
+FALSE Religious Quarter | city (100): houses of worship (church): 0 · cloisters (institution: monastery): 49 · priests (clergy): 0 · streets (tier ≥ village): 0
+FALSE Religious Quarter | metropolis (100): houses of worship (church): 0 · cloisters (institution: monastery): 6 · priests (clergy): 0 · streets (tier ≥ village): 0
+FALSE Market Quarter | town (100): market: 0
+FALSE Noxious Trades Quarter | village (11): tanneries: 0 · butchers: 11 · dyers: 11
+FALSE Noxious Trades Quarter | town (76): tanneries: 15 · butchers: 30 · dyers: 59
+FALSE Noxious Trades Quarter | city (100): tanneries: 3 · butchers: 17 · dyers: 34
+FALSE Noxious Trades Quarter | metropolis (100): tanneries: 0 · butchers: 8 · dyers: 4
+FALSE Waterfront District | town (26): warehouses: 13 · salt (salt works; maritime line only): 2
+FALSE Waterfront District | city (44): warehouses: 0 · salt (salt works; maritime line only): 4
+FALSE Waterfront District | metropolis (40): warehouses: 0 · salt (salt works; maritime line only): 2
+FALSE Government Quarter | town (49): courts (court sits): 0
+FALSE Government Quarter | city (100): courts (court sits): 0
+FALSE Government Quarter | metropolis (100): courts (court sits): 0
+FALSE Mages' Quarter | town (4): towers (wizard's tower): 0 · arcane shops (enchanter's shop): 4
+FALSE Mages' Quarter | city (77): towers (wizard's tower): 44 · arcane shops (enchanter's shop): 40
+FALSE Mages' Quarter | metropolis (96): towers (wizard's tower): 95 · arcane shops (enchanter's shop): 7
+FALSE Shadows District | city (91): hidden markets (black market): 7 · criminal activity (organised crime): 0
+FALSE Shadows District | metropolis (100): hidden markets (black market): 47 · criminal activity (organised crime): 0
+FALSE Artisan Quarter | town (24): guild halls (guild): 0
+FALSE Artisan Quarter | city (5): guild halls (guild): 0
+FALSE Artisan Quarter | metropolis (1): guild halls (guild): 0
+FALSE Fishing Landing | thorp (38): salt and fish smell (coast): 24
+FALSE Alehouse & Common | hamlet (34): the alehouse: 7
+
+## TODAY: CRISIS-SCOPED LINES PRINTED UNDER THE CRISIS THEY EXCLUDE (declared, not enforced: textOf carries them)
+CRISIS thorp: Market Quarter under threat/plague_onset 0/0 · Religious Quarter under unrest 4/79
+CRISIS hamlet: Market Quarter under threat/plague_onset 0/0 · Religious Quarter under unrest 6/100
+CRISIS village: Market Quarter under threat/plague_onset 0/0 · Religious Quarter under unrest 6/100
+CRISIS town: Market Quarter under threat/plague_onset 6/100 · Religious Quarter under unrest 6/100
+CRISIS city: Market Quarter under threat/plague_onset 0/0 · Religious Quarter under unrest 4/100
+CRISIS metropolis: Market Quarter under threat/plague_onset 0/0 · Religious Quarter under unrest 3/100
+
+## PROJECTED: TOP SENTENCE BY SIZE (places printing it / places holding the field)
+PROJECTED SIZE thorp: 12/90 = 13% distinct=35 top="The thorp keeps no church; its people go to the next parish to worship"
+PROJECTED SIZE hamlet: 13/100 = 13% distinct=31 top="Only the burial ground; the hamlet's church is a neighbour's"
+PROJECTED SIZE village: 12/100 = 12% distinct=28 top="A parish church, the priest's house, and the lanes around it"
+PROJECTED SIZE town: 13/100 = 13% distinct=163 top="The market square, the guild halls, and the traders' stalls between"
+PROJECTED SIZE city: 11/100 = 11% distinct=360 top="Narrow alleys, hidden markets, criminal activity"
+PROJECTED SIZE metropolis: 14/100 = 14% distinct=345 top="Dense timber tenements, narrow streets, crowded"
+
+## PROJECTED: PER QUARTER TYPE (places holding the type; the type's commonest sentence)
+PROJECTED TYPE Religious Quarter | thorp: holders=79 distinct=14 top=12 (15%) "The thorp keeps no church; its people go to the next parish to worship"
+PROJECTED TYPE Religious Quarter | hamlet: holders=100 distinct=15 top=13 (13%) "Only the burial ground; the hamlet's church is a neighbour's"
+PROJECTED TYPE Religious Quarter | village: holders=100 distinct=12 top=12 (12%) "A parish church, the priest's house, and the lanes around it"
+PROJECTED TYPE Religious Quarter | town: holders=100 distinct=26 top=11 (11%) "Parish churches, and the burial grounds where the town buries its dead"
+PROJECTED TYPE Religious Quarter | city: holders=100 distinct=41 top=6 (6%) "Parish churches and monasteries, and the houses of their clergy"
+PROJECTED TYPE Religious Quarter | metropolis: holders=100 distinct=25 top=10 (10%) "A great cathedral, parish churches and monasteries, and the cemeteries behind a low wall"
+PROJECTED TYPE Fishing Landing | thorp: holders=38 distinct=13 top=5 (13%) "A muddy landing on the river, boats tied up and nets on poles"
+PROJECTED TYPE Woodcutters' Ground | thorp: holders=8 distinct=5 top=2 (25%) "Felled trunks waiting to be cut, and a shed for the saws and sleds"
+PROJECTED TYPE Woodcutters' Ground | hamlet: holders=7 distinct=4 top=2 (29%) "Log piles, chip-strewn paths and the woodcutters' sheds"
+PROJECTED TYPE Woodcutters' Ground | village: holders=19 distinct=10 top=4 (21%) "Log piles, chip-strewn paths and the woodcutters' sheds"
+PROJECTED TYPE Roadside Shrine | thorp: holders=3 distinct=3 top=1 (33%) "A cairn and a shrine, kept clean by the households nearby"
+PROJECTED TYPE Alehouse & Common | hamlet: holders=34 distinct=12 top=5 (15%) "The alehouse, and the trodden common in front of it"
+PROJECTED TYPE Noxious Trades Quarter | village: holders=11 distinct=6 top=3 (27%) "A tannery, kept downwind of the houses"
+PROJECTED TYPE Noxious Trades Quarter | town: holders=76 distinct=46 top=4 (5%) "Tanneries, and the smell that comes with them"
+PROJECTED TYPE Noxious Trades Quarter | city: holders=100 distinct=54 top=8 (8%) "Smelly, dirty area with tanneries, butchers, and dyers"
+PROJECTED TYPE Noxious Trades Quarter | metropolis: holders=100 distinct=37 top=12 (12%) "Smelly, dirty area with tanneries, butchers, and dyers"
+PROJECTED TYPE Market Quarter | town: holders=100 distinct=27 top=13 (13%) "The market square, the guild halls, and the traders' stalls between"
+PROJECTED TYPE Waterfront District | town: holders=26 distinct=22 top=3 (12%) "Barges at the wharves, and the harbour master's office and the boatyard along the bank"
+PROJECTED TYPE Waterfront District | city: holders=44 distinct=39 top=4 (9%) "Warehouses, docks, sailors, longshoremen, salt, and fish"
+PROJECTED TYPE Waterfront District | metropolis: holders=40 distinct=32 top=5 (13%) "Warehouses, wharves, barges, dockworkers, and river traffic"
+PROJECTED TYPE Government Quarter | town: holders=49 distinct=18 top=7 (14%) "The town hall and the courthouse, and the offices around them"
+PROJECTED TYPE Government Quarter | city: holders=100 distinct=38 top=8 (8%) "Official buildings, courts, administrative offices"
+PROJECTED TYPE Government Quarter | metropolis: holders=100 distinct=52 top=8 (8%) "The court buildings and the offices that keep the city's business"
+PROJECTED TYPE Artisan Quarter | town: holders=24 distinct=21 top=4 (17%) "Workshops, guild halls, apprentices learning trades"
+PROJECTED TYPE Artisan Quarter | city: holders=5 distinct=5 top=1 (20%) "Workshops: a cooper's yard, a potter's kiln and weavers' looms"
+PROJECTED TYPE Artisan Quarter | metropolis: holders=1 distinct=1 top=1 (100%) "Workshops and guild halls: a cooper's yard and glassblowers"
+PROJECTED TYPE Mages' Quarter | town: holders=4 distinct=3 top=2 (50%) "A wizard's tower and the scroll scribes, kept apart from the rest of the town"
+PROJECTED TYPE Mages' Quarter | city: holders=77 distinct=52 top=4 (5%) "Arcane work set apart: the alchemists' workshops, the enchanter's shop and the sages' houses"
+PROJECTED TYPE Mages' Quarter | metropolis: holders=96 distinct=46 top=6 (6%) "The enchanter's shop, the sages' houses and the scroll scribes, and the shops that supply them"
+PROJECTED TYPE Shadows District | city: holders=91 distinct=56 top=11 (12%) "Narrow alleys, hidden markets, criminal activity"
+PROJECTED TYPE Shadows District | metropolis: holders=100 distinct=68 top=6 (6%) "Narrow alleys, hidden markets, criminal activity"
+PROJECTED TYPE Wealthy Residential | city: holders=100 distinct=35 top=9 (9%) "Stone townhouses, private gardens, clean streets"
+PROJECTED TYPE Wealthy Residential | metropolis: holders=100 distinct=43 top=6 (6%) "Stone townhouses, private gardens, clean streets"
+PROJECTED TYPE Common Residential | city: holders=100 distinct=40 top=9 (9%) "Dense timber tenements, narrow streets, crowded"
+PROJECTED TYPE Common Residential | metropolis: holders=100 distinct=41 top=14 (14%) "Dense timber tenements, narrow streets, crowded"
+
+## PROJECTED: WORDING USE by type and size (id=count); NONE = no wording eligible (falls back to today's line)
+USE Religious Quarter | thorp: access:A1=2 access:A10=4 access:A11=4 access:A13=9 access:A14=4 access:A15=5 access:A2=1 access:A3=2 access:A4=6 access:A5=6 access:A6=12 access:A7=11 access:A8=8 access:A9=5
+USE Religious Quarter | hamlet: access:A1=6 access:A10=7 access:A11=10 access:A12=1 access:A13=7 access:A14=13 access:A15=10 access:A2=1 access:A3=1 access:A4=8 access:A5=6 access:A6=4 access:A7=10 access:A8=12 access:A9=4
+USE Religious Quarter | village: church:R1=7 church:R10=12 church:R11=11 church:R14=8 church:R15=10 church:R16=9 church:R2=7 church:R3=5 church:R4=4 church:R5=8 church:R8=8 church:R9=11
+USE Religious Quarter | town: church:R0=1 church:R1=4 church:R10=10 church:R11=7 church:R12=8 church:R14=3 church:R15=10 church:R16=8 church:R2=11 church:R3=4 church:R4=7 church:R5=4 church:R6=2 church:R7=1 church:R8=8 church:R9=12
+USE Religious Quarter | city: church:R0=4 church:R1=5 church:R10=9 church:R11=6 church:R12=3 church:R13=5 church:R14=6 church:R15=5 church:R16=9 church:R2=12 church:R3=9 church:R4=3 church:R5=5 church:R6=6 church:R7=3 church:R8=4 church:R9=6
+USE Religious Quarter | metropolis: church:R0=5 church:R1=4 church:R10=8 church:R11=4 church:R12=8 church:R13=4 church:R14=4 church:R15=5 church:R16=10 church:R2=7 church:R3=6 church:R4=3 church:R5=9 church:R6=3 church:R7=5 church:R8=8 church:R9=7
+USE Market Quarter | town: market:M0=9 market:M1=9 market:M10=4 market:M2=11 market:M3=7 market:M4=5 market:M5=10 market:M6=6 market:M7=13 market:M8=17 market:M9=9
+USE Noxious Trades Quarter | village: trades:N1=3 trades:N2=2 trades:N3=1 trades:N5=1 trades:N6=3 trades:N7=1
+USE Noxious Trades Quarter | town: trades:N0=1 trades:N1=17 trades:N2=13 trades:N3=13 trades:N4=2 trades:N5=11 trades:N6=16 trades:N7=3
+USE Noxious Trades Quarter | city: trades:N0=8 trades:N1=22 trades:N2=19 trades:N3=18 trades:N4=5 trades:N5=12 trades:N6=15 trades:N7=1
+USE Noxious Trades Quarter | metropolis: trades:N0=12 trades:N1=17 trades:N2=18 trades:N3=13 trades:N4=6 trades:N5=20 trades:N6=14
+USE Waterfront District | town: maritime:Wm1=2 maritime:Wm2=2 maritime:Wm3=3 maritime:Wm4=6 maritime:Wm5=1 river:Wr1=2 river:Wr2=1 river:Wr3=4 river:Wr4=2 river:Wr5=3
+USE Waterfront District | city: maritime:W0=4 maritime:Wm1=4 maritime:Wm2=3 maritime:Wm3=3 maritime:Wm4=4 maritime:Wm5=3 river:W0=3 river:Wr1=4 river:Wr2=3 river:Wr3=6 river:Wr4=5 river:Wr5=2
+USE Waterfront District | metropolis: maritime:W0=3 maritime:Wm1=1 maritime:Wm2=6 maritime:Wm3=3 maritime:Wm5=2 river:W0=5 river:Wr1=1 river:Wr2=4 river:Wr3=4 river:Wr4=3 river:Wr5=8
+USE Government Quarter | town: seat:G0=1 seat:G1=7 seat:G10=4 seat:G11=2 seat:G2=4 seat:G3=5 seat:G4=6 seat:G5=4 seat:G6=3 seat:G7=3 seat:G8=4 seat:G9=6
+USE Government Quarter | city: seat:G0=8 seat:G1=11 seat:G10=4 seat:G11=10 seat:G2=8 seat:G3=9 seat:G4=9 seat:G5=10 seat:G6=7 seat:G7=9 seat:G8=7 seat:G9=8
+USE Government Quarter | metropolis: seat:G0=5 seat:G1=5 seat:G10=7 seat:G11=8 seat:G2=8 seat:G3=14 seat:G4=8 seat:G5=14 seat:G6=8 seat:G7=4 seat:G8=6 seat:G9=13
+USE Mages' Quarter | town: arcane:X1=2 arcane:X3=1 arcane:X5=1
+USE Mages' Quarter | city: arcane:X0=1 arcane:X1=18 arcane:X2=17 arcane:X3=11 arcane:X4=13 arcane:X5=17
+USE Mages' Quarter | metropolis: arcane:X1=23 arcane:X2=18 arcane:X3=16 arcane:X4=17 arcane:X5=22
+USE Shadows District | city: shadow:S0=11 shadow:S1=9 shadow:S2=16 shadow:S3=25 shadow:S4=16 shadow:S5=14
+USE Shadows District | metropolis: shadow:S0=6 shadow:S1=16 shadow:S2=22 shadow:S3=15 shadow:S4=16 shadow:S5=25
+USE Artisan Quarter | town: crafts:Z0=4 crafts:Z1=4 crafts:Z2=1 crafts:Z3=2 crafts:Z4=5 crafts:Z6=3 crafts:Z8=5
+USE Artisan Quarter | city: crafts:Z1=2 crafts:Z2=1 crafts:Z3=1 crafts:Z6=1
+USE Artisan Quarter | metropolis: crafts:Z4=1
+USE Woodcutters' Ground | thorp: wood:D0=1 wood:D1=1 wood:D10=2 wood:D5=2 wood:D8=2
+USE Woodcutters' Ground | hamlet: wood:D1=1 wood:D2=2 wood:D5=2 wood:D6=2
+USE Woodcutters' Ground | village: wood:D0=2 wood:D1=1 wood:D10=2 wood:D2=2 wood:D4=1 wood:D5=4 wood:D6=2 wood:D7=1 wood:D8=3 wood:D9=1
+USE Fishing Landing | thorp: coast:F2=4 coast:F3=2 coast:F4=4 coast:F5=2 coast:F6=2 inland:Fi1=2 inland:Fi2=2 inland:Fi3=3 inland:Fi4=4 inland:Fi5=4 inland:Fi7=5 inland:Fi8=3 inland:Fi9=1
+USE Alehouse & Common | hamlet: alehouse:H0=3 alehouse:H1=3 alehouse:H2=3 alehouse:H3=2 alehouse:H4=3 alehouse:H5=4 alehouse:H6=5 alehouse:H7=4 inn:I1=1 inn:I2=1 inn:I3=3 inn:I4=2
+USE Roadside Shrine | thorp: shrine:P0=1 shrine:P1=1 shrine:P3=1
+USE Wealthy Residential | city: wealth:L0=9 wealth:L1=13 wealth:L10=7 wealth:L2=6 wealth:L3=12 wealth:L4=5 wealth:L5=7 wealth:L6=7 wealth:L7=12 wealth:L8=12 wealth:L9=10
+USE Wealthy Residential | metropolis: wealth:L0=6 wealth:L1=9 wealth:L10=9 wealth:L2=7 wealth:L3=7 wealth:L4=9 wealth:L5=8 wealth:L6=16 wealth:L7=12 wealth:L8=8 wealth:L9=9
+USE Common Residential | city: common:C0=9 common:C1=6 common:C2=12 common:C3=21 common:C4=8 common:C5=19 common:C6=8 common:C7=8 common:C8=9
+USE Common Residential | metropolis: common:C0=14 common:C1=8 common:C2=5 common:C3=12 common:C4=12 common:C5=13 common:C6=14 common:C7=9 common:C8=13
+
+## PROJECTED: SAMPLE (first 2 places a size, every quarter)
+SAMPLE hxd-thorp-0 | Religious Quarter: The thorp keeps no church; its people go to the next parish to worship
+SAMPLE hxd-thorp-0 | Fishing Landing: A muddy landing on the river, boats tied up and nets on poles
+SAMPLE hxd-thorp-0 | Woodcutters' Ground: Stacked timber and the woodcutters' sheds
+SAMPLE hxd-thorp-1 | Religious Quarter: A neighbour's parish church serves the thorp; the burial ground is its own
+SAMPLE hxd-hamlet-0 | Religious Quarter: No house of worship stands here; the parish church is a neighbour's
+SAMPLE hxd-hamlet-1 | Religious Quarter: No church of its own; the people walk to a neighbour's parish church
+SAMPLE hxd-village-0 | Religious Quarter: A parish church, and quiet streets around it
+SAMPLE hxd-village-1 | Religious Quarter: A parish church, the priest's house, and the lanes around it
+SAMPLE hxd-town-0 | Market Quarter: The market square, where the weekly market sets up its stalls
+SAMPLE hxd-town-0 | Religious Quarter: Parish churches, and the burial grounds where the town buries its dead
+SAMPLE hxd-town-0 | Noxious Trades Quarter: A tannery, at the edge where no one else wants to live
+SAMPLE hxd-town-0 | Waterfront District: Wharves along the bank, with the boatyard and the salt works, busy when the barges come in
+SAMPLE hxd-town-0 | Government Quarter: The seat of the town's government: the town hall and the customs house
+SAMPLE hxd-town-1 | Market Quarter: The market square, the guild halls, and the traders' stalls between
+SAMPLE hxd-town-1 | Religious Quarter: Quiet streets about parish churches, where the town comes to worship
+SAMPLE hxd-town-1 | Noxious Trades Quarter: A tannery and butchers' yards, and the smell that comes with them
+SAMPLE hxd-town-1 | Waterfront District: The harbour front: docks, the harbour master's office, the fish market and the salt works
+SAMPLE hxd-city-0 | Religious Quarter: Parish churches, the clergy's houses, and the lanes around them
+SAMPLE hxd-city-0 | Noxious Trades Quarter: Butchers' yards, kept downwind of the houses
+SAMPLE hxd-city-0 | Government Quarter: The city hall and the customs house, and the offices around them
+SAMPLE hxd-city-0 | Shadows District: The black market and shops that serve as fronts, and the narrow alleys between them
+SAMPLE hxd-city-0 | Wealthy Residential: Clean streets of stone townhouses, and the public baths
+SAMPLE hxd-city-0 | Common Residential: Timber tenements, crowded yards, narrow streets, and the public baths
+SAMPLE hxd-city-1 | Religious Quarter: Parish churches and monasteries, the burial grounds and the charnel house, and the quiet lanes between
+SAMPLE hxd-city-1 | Noxious Trades Quarter: A tannery and butchers' yards, kept downwind of the houses
+SAMPLE hxd-city-1 | Government Quarter: Official buildings, courts, administrative offices
+SAMPLE hxd-city-1 | Mages' Quarter: Spellwork and study: the mages' guild, the alchemists' workshops and the scroll scribes
+SAMPLE hxd-city-1 | Shadows District: Narrow alleys and crooked lanes: the black market, brothels and the rival gangs' haunts
+SAMPLE hxd-city-1 | Wealthy Residential: Walled gardens and stone townhouses, a short way from the banking houses
+SAMPLE hxd-city-1 | Common Residential: Narrow streets of crowded tenements, and the fish market
+SAMPLE hxd-metropolis-0 | Religious Quarter: A great cathedral, parish churches and monasteries, with the cemeteries beside them
+SAMPLE hxd-metropolis-0 | Noxious Trades Quarter: A tannery, the dyers' vats and the fullers' troughs, kept downwind of the houses
+SAMPLE hxd-metropolis-0 | Artisan Quarter: Workshops and guild halls: a cooper's yard and glassblowers
+SAMPLE hxd-metropolis-0 | Government Quarter: The city's business is done here: the customs house and the mint
+SAMPLE hxd-metropolis-0 | Mages' Quarter: Arcane work set apart: the enchanter's shop, the sages' houses and the scroll scribes
+SAMPLE hxd-metropolis-0 | Shadows District: The stairs down to the underground city and shops that serve as fronts, out of sight of the better streets
+SAMPLE hxd-metropolis-0 | Wealthy Residential: Walled gardens and stone townhouses, a short way from the banking houses
+SAMPLE hxd-metropolis-0 | Common Residential: Tenements of timber, crowded and close; a market most days and the fish market
+SAMPLE hxd-metropolis-1 | Religious Quarter: Quiet streets about a great cathedral and parish churches, where the city comes to worship
+SAMPLE hxd-metropolis-1 | Noxious Trades Quarter: A tannery, the dyers' vats and the fullers' troughs, at the edge where no one else wants to live
+SAMPLE hxd-metropolis-1 | Government Quarter: The court buildings, busy on court days, and the offices beside them
+SAMPLE hxd-metropolis-1 | Mages' Quarter: The academy of magic, the sages' houses and the scroll scribes, and the shops that supply them
+SAMPLE hxd-metropolis-1 | Shadows District: Narrow alleys around gambling halls and the smugglers' stores
+SAMPLE hxd-metropolis-1 | Wealthy Residential: The merchant families' townhouses, with the theatre close by
+SAMPLE hxd-metropolis-1 | Common Residential: Crowded timber tenements and narrow streets, with the public baths
+
+## PROJECTED: THE CRISIS LAW KEPT (the same scopes as today, not widened): a "quiet" line under unrest; a Market Quarter line under threat/plague_onset
+PCRISIS thorp: quiet lines 0, of them under unrest 0 · Market Quarter under threat/plague_onset 0
+PCRISIS hamlet: quiet lines 0, of them under unrest 0 · Market Quarter under threat/plague_onset 0
+PCRISIS village: quiet lines 30, of them under unrest 0 · Market Quarter under threat/plague_onset 0
+PCRISIS town: quiet lines 31, of them under unrest 0 · Market Quarter under threat/plague_onset 6
+PCRISIS city: quiet lines 26, of them under unrest 0 · Market Quarter under threat/plague_onset 0
+PCRISIS metropolis: quiet lines 33, of them under unrest 1 · Market Quarter under threat/plague_onset 0

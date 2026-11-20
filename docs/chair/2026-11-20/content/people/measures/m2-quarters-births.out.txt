@@ -1,0 +1,7 @@
+BIRTHS thorp: 100 places, 90 hold quarters; the quarter set re-derived from the final roster agrees in 100/100
+BIRTHS hamlet: 100 places, 100 hold quarters; the quarter set re-derived from the final roster agrees in 100/100
+BIRTHS village: 100 places, 100 hold quarters; the quarter set re-derived from the final roster agrees in 100/100
+BIRTHS town: 100 places, 100 hold quarters; the quarter set re-derived from the final roster agrees in 100/100
+BIRTHS city: 100 places, 100 hold quarters; the quarter set re-derived from the final roster agrees in 100/100
+BIRTHS metropolis: 100 places, 100 hold quarters; the quarter set re-derived from the final roster agrees in 100/100
+WROTE 600 places
