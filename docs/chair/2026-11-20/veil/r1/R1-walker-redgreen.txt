@@ -48,3 +48,7 @@ ls: cannot access 'src/generators/__r1plant*': No such file or directory
 src/domain/veil/rosterChoiceRegistry.js: OK
  M src/domain/veil/rosterChoiceRegistry.js
  M tests/lint/rosterChoiceRegistry.walker.test.js
+== plant-F (rulings sitting, 01:07 UTC): a page answer on every diffuse row: exit: 1; Tests  1 failed | 10 passed (11)
+     +   "defence.readiness.label: a page answer on a row not withheld on every read",
+     +   "defence.readiness.colours: a page answer on a row not withheld on every read",
+== green after the plant: exit: 0; Tests  126 passed (126) (the walker plus five governing lint files)

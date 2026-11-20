@@ -227,7 +227,8 @@ describe('ARMS C and D: every row is bound to the server and the twin', () => {
   });
 
   test('ARM D: a BUILT row\'s symbols exist and each rule names its row id', () => {
-    const bad = REGISTRY_ROWS.filter((r) => r.built).flatMap((r) => {
+    // a built rng (VR13) or diffuse (VR8) row is a ruling: the server sends it as stored, so no rule names it
+    const bad = REGISTRY_ROWS.filter((r) => r.built && (r.rule === 'withhold' || r.rule === 'recompose')).flatMap((r) => {
       const out = [];
       const body = sqlFunctionBody(sql, r.server);
       if (body === null) out.push(`${r.id}: server ${r.server} is not a function of 212`);
@@ -260,6 +261,27 @@ describe('ARM E: the rows and the export', () => {
       if (!['withhold', 'recompose', 'diffuse', 'rng'].includes(r.rule)) out.push(`${r.id}: unknown rule`);
       if (!['always', 'house-hidden'].includes(r.when)) out.push(`${r.id}: unknown when`);
       if (!r.writer.includes(' :: ')) out.push(`${r.id}: writer is not path :: symbol`);
+      return out;
+    });
+    expect(bad).toEqual([]);
+  });
+
+  test('VR19, VR13, VR8, V10-1: a page answer only on a value withheld on every read; every rng row built; a diffuse row built exactly when its condition is; a copy takes its source\'s rule', () => {
+    const byId = new Map(REGISTRY_ROWS.map((r) => [r.id, r]));
+    const bad = REGISTRY_ROWS.flatMap((r) => {
+      const out = [];
+      if (r.page !== null && !(r.when === 'always' && (r.rule === 'withhold' || r.rule === 'recompose'))) out.push(`${r.id}: a page answer on a row not withheld on every read`);
+      if (r.rule === 'rng' && !r.built) out.push(`${r.id}: an rng row not built (VR13 is a ruling)`);
+      if (r.rule === 'diffuse') {
+        if (!r.condition.length) out.push(`${r.id}: a diffuse row with no condition`);
+        for (const id of r.condition) if (!byId.has(id)) out.push(`${r.id}: unknown condition row ${id}`);
+        if (r.built !== (r.condition.length > 0 && r.condition.every((id) => byId.get(id)?.built))) out.push(`${r.id}: built is not its condition's`);
+      }
+      if (r.copyOf) {
+        const src = byId.get(r.copyOf);
+        if (!src) out.push(`${r.id}: copies an unknown row`);
+        else if (src.rule !== r.rule || src.when !== r.when) out.push(`${r.id}: not its source's rule`);
+      }
       return out;
     });
     expect(bad).toEqual([]);

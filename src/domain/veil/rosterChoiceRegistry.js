@@ -56,6 +56,12 @@
  * @property {string} scope
  * @property {'recompose' | 'withhold' | null} compose  a composed row's own answer where an input withholds
  * @property {string} chair  '' or the reason the row is listed for the chair (the law decided it meanwhile)
+ * @property {'re-derive' | 'not drawn' | null} page  VR19 (c): a universally drawn value the server withholds on every
+ *   non-owner read: the page re-derives it from the SERVED document with the engine's own function, or does not draw it
+ * @property {boolean} crimeOnly  VR19 (d): content that exists only because of crime stays CONDITIONAL (withheld where
+ *   its chooser is hidden or its grouping shut), even where an input is withheld on every read
+ * @property {ReadonlyArray<string>} condition  a diffuse row's condition (VR8): the rows that must be built before it is exported
+ * @property {string | null} copyOf  a copy of another row's value (V10-1, the tile columns): it takes that row's rule
  */
 /**
  * @typedef {object} RegistryHost
@@ -81,6 +87,10 @@ const H = Object.freeze({
   tHomes: 'src/domain/display/gallerySecondHomes.js :: withholdSecondHomes',
   sApply: 'public._gallery_veil_apply',
   tIncome: 'src/domain/display/gallerySecondHomes.js :: withholdCriminalIncome',
+  sTile: 'public._gallery_veil_tile_columns',
+  tTile: 'src/domain/display/gallerySecondHomes.js :: withholdTileColumns',
+  sChronicle: 'public._gallery_veil_chronicle',
+  tChronicle: 'src/domain/display/gallerySecondHomes.js :: withholdChronicle',
   sSent: 'public.get_gallery_dossier',
   tSent: 'src/domain/display/galleryVeil.js :: galleryPayloadFor',
 });
@@ -101,6 +111,10 @@ export const REGISTRY_HOSTS = Object.freeze({
   [H.tHomes]: { engine: 'twin', state: 'exists', stage: 'B, C' },
   [H.sApply]: { engine: 'server', state: 'exists', stage: 'D (SUB-BRIEF-BCD, in 212 by VEIL-19)' },
   [H.tIncome]: { engine: 'twin', state: 'exists', stage: 'D' },
+  [H.sTile]: { engine: 'server', state: 'planned', stage: 'V10-1 (the tile columns beside data: VEIL-19 places them)' },
+  [H.tTile]: { engine: 'twin', state: 'planned', stage: 'V10-1' },
+  [H.sChronicle]: { engine: 'server', state: 'planned', stage: 'V10-1 (the chronicle: VEIL-19 designs it)' },
+  [H.tChronicle]: { engine: 'twin', state: 'planned', stage: 'V10-1' },
   [H.sSent]: { engine: 'server', state: 'exists', stage: 'none: a diffuse (VR8) or rng-only (VR13) row is sent as stored' },
   [H.tSent]: { engine: 'twin', state: 'exists', stage: 'none' },
 });
@@ -176,6 +190,11 @@ export function exactPath(/** @type {string} */ p) {
  * @property {string} twin
  * @property {string} [scope]
  * @property {string} [chair]
+ * @property {'re-derive' | 'not drawn' | null} [page]
+ * @property {boolean} [crimeOnly]
+ * @property {string[]} [condition]
+ * @property {string | null} [copyOf]
+ * @property {boolean} [built]
  */
 
 /** @returns {RegistryRow} */
@@ -192,10 +211,14 @@ function row(/** @type {RowSpec} */ o) {
     inputs: o.inputs ?? [],
     server: o.server,
     twin: o.twin,
-    built: false,
+    built: o.built ?? false,
     scope: o.scope ?? '',
     compose: o.compose ?? null,
     chair: o.chair ?? '',
+    page: o.page ?? null,
+    crimeOnly: o.crimeOnly ?? false,
+    condition: o.condition ?? [],
+    copyOf: o.copyOf ?? null,
   };
 }
 
@@ -206,9 +229,10 @@ const undrawn = (/** @type {ShortSpec} */ o) => row({ drawn: 'no', ...o, rule: '
 /** VR14 (i): a number that measures crime itself, withheld on every non-owner read (R2). */
 const crimeMeasure = (/** @type {ShortSpec} */ o) => row({ drawn: 'no', ...o, vr14: 'i', rule: 'withhold', when: 'always', server: H.sAlways, twin: H.tAlways });
 /** VR8 / VR14 (iv): a drawn form that stays, DIFFUSE, sent as stored (built once the band's condition holds). */
-const diffuse = (/** @type {ShortSpec} */ o) => row({ drawn: 'yes', ...o, rule: 'diffuse', when: 'always', server: H.sSent, twin: H.tSent });
+const BAND_CONDITION = Object.freeze(['compound.criminalEffective', 'safety.compound.criminalEffective', 'safety.safetyRatio', 'compound.militaryEffective', 'safety.compound.militaryEffective']);
+const diffuse = (/** @type {ShortSpec} */ o) => row({ drawn: 'yes', condition: [...BAND_CONDITION], ...o, rule: 'diffuse', when: 'always', server: H.sSent, twin: H.tSent });
 /** VR13: history drawn again by the rng alone (the seed never ships). */
-const rng = (/** @type {ShortSpec} */ o) => row({ drawn: 'yes', ...o, rule: 'rng', when: 'always', server: H.sSent, twin: H.tSent });
+const rng = (/** @type {ShortSpec} */ o) => row({ drawn: 'yes', ...o, rule: 'rng', when: 'always', built: true, server: H.sSent, twin: H.tSent });
 /** (a) a drawn field rebuilt exactly from served data alone where a house is hidden whole (R3). */
 const recompose = (/** @type {ShortSpec} */ o) => row({ drawn: 'yes', ...o, rule: 'recompose', when: 'house-hidden', server: H.sChoice, twin: H.tChoice });
 /** (b) a drawn field withheld where a house hidden whole could have chosen it (R3). */
@@ -238,9 +262,8 @@ const ROWS_SPEC = [
   // ── the compound (economicState.compound and its copy safetyProfile.compound: getInstFlags' stamp)
   crimeMeasure({ id: 'compound.criminalEffective', path: 'economicState.compound.criminalEffective', writer: W.flags, house: P.flags }),
   crimeMeasure({ id: 'compound.criminalPreStress', path: 'economicState.compound.criminalPreStress', writer: W.flags, house: P.flags }),
-  row({ id: 'compound.economyOutput', path: 'economicState.compound.economyOutput', writer: W.flags, house: P.flags, rule: 'recompose', when: 'always', vr14: 'iv', drawn: 'yes', server: H.sAlways, twin: H.tAlways,
-    scope: 'drawn as the integer chip "NN/100" (EconomicsGlance :: outputChipBesideWord); sent only in that drawn form, VR14 (iii)\'s form, on every non-owner read',
-    chair: 'the differ moves it in 85 of 91 towns and never under the control (C 0): the drawn integer still carries the crime term; recommended (iv) as drawn' }),
+  row({ id: 'compound.economyOutput', path: 'economicState.compound.economyOutput', writer: W.flags, house: P.flags, rule: 'withhold', when: 'always', vr14: 'i', drawn: 'yes', page: 're-derive', server: H.sAlways, twin: H.tAlways,
+    scope: 'VR19 (b), (c), ruling 1: it moves only with the hidden house (B 85, C 0), so VR14 (iv)\'s exception makes it (i). The page may re-derive it: getInstFlags(config, institutions) reads only the config (priorities, stresses, threat, neighbour) and the house names, both in the served document (config is in SETTLEMENT_FLOOR); that every config key it reads survives the projection is PLAUSIBLE, not executed' }),
   undrawn({ id: 'compound.magicInfluence', path: 'economicState.compound.magicInfluence', writer: W.flags, house: P.flags, vr14: 'iii' }),
   undrawn({ id: 'compound.militaryEffective', path: 'economicState.compound.militaryEffective', writer: W.flags, house: P.flags, vr14: 'iii', scope: 'VR8\'s condition: drawn on no shared page (VR7-MEASURE M3), so withheld' }),
   undrawn({ id: 'compound.religionInfluence', path: 'economicState.compound.religionInfluence', writer: W.flags, house: P.flags, vr14: 'iii' }),
@@ -267,8 +290,7 @@ const ROWS_SPEC = [
   row({ id: 'income.criminalRow', path: 'economicState.incomeSources[] (only in A)', writer: W.income, house: P.criminal, rule: 'withhold', when: 'house-hidden', drawn: 'yes', server: H.sApply, twin: H.tIncome,
     scope: 'item D (1): the criminal row withheld where either grouping is shut OR any criminal house is hidden whole; its desc goes with it' }),
   row({ id: 'income.composition', path: 'economicState.incomeSources[] (only in B)', writer: W.economy, house: P.any, rule: 'diffuse', when: 'always', drawn: 'yes', server: H.sSent, twin: H.tSent,
-    scope: 'a lawful row the town without the house drew (17 towns): the income mix\'s general composition',
-    chair: 'VR8 names the roster\'s composition, not the income mix\'s; recommended diffuse (no lawful row names a house)' }),
+    condition: [...BAND_CONDITION], scope: 'ruling 4: a lawful row only the counterfactual drew (17 towns), recorded as diffuse' }),
   row({ id: 'income.percentage', path: 'economicState.incomeSources[].percentage', writer: W.income, house: P.criminal, rule: 'recompose', when: 'house-hidden', vr14: 'ii', drawn: 'yes', server: H.sApply, twin: H.tIncome,
     scope: 'item D (2), VR6: wherever a row is withheld the rest re-derived to 100 by largest remainder from weight' }),
   undrawn({ id: 'income.weight', path: 'economicState.incomeSources[].weight', writer: W.income, house: P.criminal, vr14: 'iii', scope: 'item D (4): no non-owner page reads it' }),
@@ -280,7 +302,7 @@ const ROWS_SPEC = [
   // ── the safety profile
   choiceWithhold({ id: 'safety.economicDragDesc', path: 'economicState.safetyProfile.economicDragDesc', writer: W.safety, house: P.flags, scope: 'VR4 i-6: withheld with blackMarketCapture, and where a criminal house is hidden whole' }),
   row({ id: 'safety.blackMarketCapture', path: 'economicState.safetyProfile.blackMarketCapture', writer: W.safety, house: P.criminal, rule: 'withhold', when: 'always', vr14: 'i', drawn: 'yes', server: H.sAlways, twin: H.tAlways,
-    scope: 'VR14 (i); today withheld by the Capture grouping only', chair: 'drawn (EconomicsTab shadow economy, where served > 0): withheld always costs that section on every share; recommended (i) always' }),
+    page: 'not drawn', scope: 'VR14 (i), ruling 2: withheld on every non-owner read; no served field re-derives it, so the shadow-economy figure is not drawn on a shared page' }),
   undrawn({ id: 'safety.flags.anyActive', path: 'economicState.safetyProfile.flags.anyActive', writer: W.safety, house: P.flags, vr14: 'i' }),
   undrawn({ id: 'safety.flags.arcaneBlackMarket', path: 'economicState.safetyProfile.flags.arcaneBlackMarket', writer: W.safety, house: P.flags, vr14: 'i' }),
   undrawn({ id: 'safety.flags.merchantArmy', path: 'economicState.safetyProfile.flags.merchantArmy', writer: W.safety, house: P.flags, vr14: 'iii' }),
@@ -292,8 +314,8 @@ const ROWS_SPEC = [
     scope: 'VR4 i-3: the foothold word swapped exactly; VR4 i-2 (the Very Safe gates line, a facts-resolved sibling with no exact SQL twin): where it stands the field is withheld whole' }),
   diffuse({ id: 'safety.safetyLabel', path: 'economicState.safetyProfile.safetyLabel', writer: W.safety, house: P.flags, vr14: 'iv', scope: 'VR8: the overall safety band, diffuse on its condition (criminalEffective and safetyRatio withheld)' }),
   row({ id: 'safety.safetyRatio', path: 'economicState.safetyProfile.safetyRatio', writer: W.safety, house: P.flags, rule: 'withhold', when: 'always', vr14: 'i', drawn: 'yes', server: H.sAlways, twin: H.tAlways,
-    scope: 'VR8\'s condition: withheld (VR14 (i)); drawn only as band words (DailyLifeTab via dailyLifeLogic safetyScore)',
-    chair: 'withheld always, the daily-life order line loses its band words on every share; a conditional withhold would tell; R2\'s render-twice test will show it drawn' }),
+    page: 'not drawn',
+    scope: 'VR8\'s condition, VR19 (b), (c), ruling 2: withheld on every non-owner read. Measured: the daily-life order words cut safetyRatio at 2.0, 1.5, 1.2, 1.0, 0.7, 0.5 (dailyLifeLogic.js safetyScore) where the safety band cuts effectiveSafety at 3.5, 2, 1.2, 0.6 (safetyProfile.js): FINER than the band, and no served field re-derives the ratio, so the shared page does not draw them' }),
   row({ id: 'safety.crimeTypes', path: '^economicState\\.safetyProfile\\.crimeTypes\\b', re: true, writer: W.safety, house: P.flags, rule: 'withhold', when: 'house-hidden', vr14: 'i', drawn: 'yes', server: H.sChoice, twin: H.tChoice,
     scope: 'VR4 ii-1, i-4, i-5: an entry a hidden house chose withheld by the house\'s eye, not the grouping\'s; today the grouping block:defense.criminalStructure withholds the whole' }),
   row({ id: 'safety.plotHooks', path: '^economicState\\.safetyProfile\\.plotHooks\\b', re: true, writer: W.safety, house: P.flags, rule: 'withhold', when: 'house-hidden', drawn: 'yes', server: H.sChoice, twin: H.tChoice,
@@ -326,8 +348,8 @@ const ROWS_SPEC = [
   undrawn({ id: 'history.siegeNarrative', path: 'history.siegeNarrative', writer: W.siege, house: P.signal, scope: 'a desk input only (generalStateProse); its text names crime' }),
 
   // ── the houses and the people (new shape)
-  rng({ id: 'institutions.desc', path: 'institutions[].desc', writer: W.density, house: P.any,
-    scope: 'an open house\'s description re-worded (3 towns, default and hand veils only)', chair: 'recommended rng (a re-draw of wording; no hidden name); the law would withhold every open house\'s description' }),
+  choiceWithhold({ id: 'institutions.desc', path: 'institutions[].desc', writer: 'src/domain/facts/drawDeclared.js :: drawDeclared', house: 'the fact \'rival power\' (factVocabulary.js), read from powerStructure, which the hidden house\'s power moves',
+    scope: 'ruling 7, (b): measured on the three towns: each open-house description is one of a declared twin pair (src/data/institutionDescVariants.js: "belongs solely to" excludes \'rival power\', its twin "rests with"), chosen by a roster-moved fact, so not rng; withheld where a house is hidden whole' }),
   undrawn({ id: 'npcs.memberships.veiled', path: 'npcs[].memberships[].veiled', writer: W.cast, house: P.hideable, drawn: 'no',
     scope: 'Reveal DM: a membership\'s veiled mark (no component reads it)', chair: 'the import may need the mark to keep the cover on the importer\'s record (VR16 condition (2)): not decided here' }),
   undrawn({ id: 'npcs.stressNote', path: 'npcs[].stressNote', writer: W.arrival, house: P.any, scope: 'Reveal DM; no component reads npcs[].stressNote (only history.founding.stressNote)' }),
@@ -339,14 +361,12 @@ const ROWS_SPEC = [
   // ── the power structure
   undrawn({ id: 'power.fingerprint', path: 'powerStructure.economyInputFingerprint', writer: W.fingerprint, house: P.flags, vr14: 'iii' }),
   choiceWithhold({ id: 'power.entry', path: 'powerStructure.factions[] (only in A)', writer: W.ruling, house: P.criminal,
-    scope: 'a criminal POWER the hidden house raised, withheld with it; the rest re-derived (VR11)',
-    chair: 'no ruling places a power born of a house hidden whole; the law decides: withhold, with VR11\'s re-derivation' }),
+    scope: 'a criminal POWER the hidden house raised, withheld with it; the rest re-derived (VR11)' }),
   diffuse({ id: 'power.composition', path: 'powerStructure.factions[] (only in B)', writer: W.ruling, house: P.any,
-    chair: 'a lawful power the town without the house drew: the power roster\'s general composition; recommended diffuse (VR8 by analogy)' }),
+    scope: 'ruling 4: the counterfactual\'s own draw (a path only B holds), recorded as diffuse' }),
   undrawn({ id: 'power.contestsNiche', path: 'powerStructure.factions[].contestsNiche', writer: W.ruling, house: P.any }),
   composed({ id: 'power.desc', path: 'powerStructure.factions[].desc', writer: W.ruling, house: P.criminal, inputs: ['power.share', 'power.entry'], compose: 'withhold',
-    scope: 'a power\'s standing sentence ("close enough now to contest the seat") composed from the shares a withheld power held',
-    chair: 'withheld where an input withholds (VR12); SQL cannot rebuild the standing clause exactly' }),
+    scope: 'a power\'s standing sentence ("close enough now to contest the seat") composed from the shares a withheld power held; withheld with it (ruling 3)' }),
   row({ id: 'power.share', path: 'powerStructure.factions[].power', writer: W.powerShares, house: P.criminal, rule: 'recompose', when: 'house-hidden', vr14: 'ii', drawn: 'yes', server: H.sChoice, twin: H.tChoice,
     scope: 'VR11: where a power is withheld, the remaining powers\' shares re-derived to 100 by largest remainder' }),
   composed({ id: 'power.label', path: 'powerStructure.factions[].powerLabel', writer: W.powerShares, house: P.criminal, vr14: 'iv', inputs: ['power.share'], compose: 'recompose',
@@ -355,7 +375,7 @@ const ROWS_SPEC = [
   choiceWithhold({ id: 'power.relation.entry', path: 'powerStructure.factionRelationships[] (only in A)', writer: W.relations, house: P.criminal,
     scope: 'a relation one of whose ends is a withheld power (the capture relation, "symbiotic") leaves with it' }),
   diffuse({ id: 'power.relation.composition', path: 'powerStructure.factionRelationships[] (only in B)', writer: W.relations, house: P.any,
-    chair: 'a lawful relation drawn without the house; recommended diffuse with power.composition' }),
+    scope: 'ruling 4: the counterfactual\'s own draw, recorded as diffuse' }),
   composed({ id: 'power.relation.dmNote', path: 'powerStructure.factionRelationships[].dmNote', writer: W.relations, house: P.criminal, inputs: ['power.relation.entry'], compose: 'withhold',
     scope: 'Reveal DM: the note names the withheld criminal power by its own name' }),
   undrawn({ id: 'power.relation.ratio', path: 'powerStructure.factionRelationships[].ratio', writer: W.relations, house: P.any, vr14: 'iii' }),
@@ -370,10 +390,9 @@ const ROWS_SPEC = [
   composed({ id: 'power.recentConflict', path: 'powerStructure.recentConflict', writer: W.conflicts, house: P.criminal, inputs: ['power.entry'], compose: 'withhold',
     scope: 'a conflict that names a withheld power leaves with it; every other conflict is the power roster\'s composition (diffuse)' }),
   diffuse({ id: 'power.conflicts', path: '^(powerStructure\\.)?conflicts\\[\\](\\.(intensity|issue))?$', re: true, writer: W.conflicts, house: P.any, drawn: 'unsettled',
-    scope: 'master\'s shape: the conflicts drawn without the house', chair: 'recommended diffuse with power.composition; a conflict naming a withheld power follows power.recentConflict' }),
-  choiceWithhold({ id: 'power.stability', path: 'powerStructure.stability', writer: W.stability, house: P.flags,
-    scope: 'the crime-worded label ("Unstable (pervasive organized crime)", 14 towns) is not diffuse (VR8); every other label is',
-    chair: 'no exact SQL twin; withheld (b) its absence tells in those 14 towns, the same tell; the chair may prefer a fixed lawful label (a recomposition the ruling does not give)' }),
+    scope: 'ruling 4: master\'s shape, the conflicts the counterfactual drew; a conflict naming a withheld power follows power.recentConflict' }),
+  row({ id: 'power.stability', path: 'powerStructure.stability', writer: W.stability, house: P.flags, rule: 'recompose', when: 'always', vr14: 'iv', drawn: 'yes', page: 'not drawn', server: H.sAlways, twin: H.tAlways,
+    scope: 'VR19 (a), (b), ruling 5: the band word before its cause stays ("Unstable"), cut by one exact rule in both engines; the cause (the parenthesis or the clause after the dash) is withheld on every non-owner read, uniform, so a bare word tells nothing' }),
   undrawn({ id: 'power.factions.legitimacyCrisis', path: 'powerStructure.factions[].legitimacyCrisis', writer: W.ruling, house: P.any, drawn: 'unsettled', scope: 'master\'s shape' }),
 
   // ── publicProse (each composed block follows its inputs, VR12; an undrawn copy is withheld always, VR16)
@@ -387,12 +406,11 @@ const ROWS_SPEC = [
   composed({ id: 'prose.state.publicOrder.rung.glance', path: 'publicProse.blocks.defense:state.publicOrder.rung.glance', writer: W.composer, house: P.flags, drawn: 'no', inputs: ['safety.safetyLabel'], compose: 'recompose' }),
   composed({ id: 'prose.threat.economic', path: 'publicProse.blocks.defense:threat.economic.sentence', writer: W.composer, house: P.flags, inputs: ['defence.scores.economic'], compose: 'recompose' }),
   composed({ id: 'prose.wall.rationale', path: 'publicProse.blocks.defense:wall.rationale.sentence', writer: W.composer, house: P.flags, inputs: ['defence.readiness.label'], compose: 'recompose', scope: 'the wall line, chosen by the defence state (DefenseTab :: wallLine)' }),
-  composed({ id: 'prose.incomeWeight', path: 'publicProse.blocks.economy:economics.incomeWeight', writer: W.composer, house: P.flags, vr14: 'iv', inputs: ['compound.magicInfluence', 'compound.religionInfluence'], compose: 'recompose',
-    scope: 'drawn (EconomicsTab DeskLines economics.commercialProfile): the drawn form of two undrawn influences, VR14 (iv)',
-    chair: 'religionInfluence moves with the hidden house alone (B 60, C 0); its drawn sentence differs in 7 towns; item D (4) withholds incomeWeight only if no non-owner page reads it, and M3 finds this site drawn' }),
+  row({ id: 'prose.incomeWeight', path: 'publicProse.blocks.economy:economics.incomeWeight', writer: W.composer, house: P.criminal, vr14: 'ii', drawn: 'yes', inputs: ['income.percentage'], compose: 'recompose', server: H.sApply, twin: H.tIncome,
+    scope: 'ruling 6: a share (VR14 (ii)): it follows item D, re-derived with the percentages where a row is withheld, else withheld' }),
   undrawn({ id: 'prose.incomeWeight.alias', path: '^publicProse\\.blocks\\.economy:(daily_life|resources|services)\\.incomeWeight$', re: true, writer: W.composer, house: P.flags, scope: 'the aliases ({"@": "economy:economics"}) no tab draws' }),
-  composed({ id: 'prose.shadowEconomy', path: '^publicProse\\.blocks\\.economy:economics\\.shadowEconomy(\\.sentence)?$', re: true, writer: W.composer, house: P.flags, inputs: ['safety.economicDragDesc', 'safety.blackMarketCapture'], compose: 'withhold',
-    scope: 'V9-5: the shadow-economy sentence composed from a withheld blackMarketCapture (VR4 i-10)' }),
+  composed({ id: 'prose.shadowEconomy', path: '^publicProse\\.blocks\\.economy:economics\\.shadowEconomy(\\.sentence)?$', re: true, writer: W.composer, house: P.flags, inputs: ['safety.economicDragDesc', 'safety.blackMarketCapture'], compose: 'withhold', crimeOnly: true,
+    scope: 'V9-5, VR19 (d), ruling 2: crime-only content: sent as stored only where its grouping\'s eye is open AND no hideable house is hidden whole on that share; else withheld (VR12)' }),
   undrawn({ id: 'prose.shadowEconomy.alias', path: '^publicProse\\.blocks\\.economy:(daily_life|resources|services)\\.shadowEconomy$', re: true, writer: W.composer, house: P.flags, scope: 'the aliases no tab draws' }),
   composed({ id: 'prose.incomeMix', path: '^publicProse\\.blocks\\.economy:economics\\.(incomeMix(\\.sentence)?|criminalLine)$', re: true, writer: W.composer, house: P.criminal, inputs: ['income.criminalRow', 'income.percentage'], compose: 'withhold',
     scope: 'item D (3) and VR4 ii-15: the sentences that carry the criminal income go with the row' }),
@@ -405,16 +423,28 @@ const ROWS_SPEC = [
   composed({ id: 'prose.legitimacyBanner', path: 'publicProse.blocks.power:desk.legitimacyBanner.glance', writer: W.composer, house: P.flags, drawn: 'no', inputs: ['legitimacy.label'], compose: 'recompose' }),
   composed({ id: 'prose.legitimacyLens', path: 'publicProse.blocks.power:desk.legitimacyLens', writer: W.composer, house: P.flags, drawn: 'no', inputs: ['legitimacy.label'], compose: 'recompose' }),
   composed({ id: 'prose.stabilityHeader', path: 'publicProse.blocks.power:desk.stabilityHeader.glance', writer: W.composer, house: P.flags, drawn: 'no', inputs: ['power.stability'], compose: 'withhold' }),
-  composed({ id: 'prose.structureFlag', path: 'publicProse.blocks.power:desk.structureFlag', writer: W.composer, house: P.flags, inputs: ['safety.flags.merchantCriminalBlur'], compose: 'withhold', scope: 'VR4 ii-15: "the richest merchants and the criminal bosses are often the same people"',
-    chair: 'derived (VR12) from a VR14 (i) flag withheld always: the PowerTab structure line is withheld on every share' }),
+  composed({ id: 'prose.structureFlag', path: 'publicProse.blocks.power:desk.structureFlag', writer: W.composer, house: P.flags, inputs: ['safety.flags.merchantCriminalBlur'], compose: 'withhold', crimeOnly: true, scope: 'VR4 ii-15, VR19 (d), ruling 2: crime-only content: sent as stored only where its grouping\'s eye is open AND no hideable house is hidden whole; else withheld' }),
   composed({ id: 'prose.successionRisk', path: 'publicProse.blocks.power:desk.successionRisk.glance', writer: W.composer, house: P.any, drawn: 'no', inputs: ['power.share'], compose: 'recompose' }),
   composed({ id: 'prose.conditionSeverity', path: 'publicProse.blocks.stressors:overview.conditionSeverity.sentence', writer: W.composer, house: P.any, inputs: ['conditions.severity'], compose: 'recompose', scope: 'drawn (OverviewTab CONDITIONS_MOUNT)' }),
   undrawn({ id: 'prose.conditionSeverity.glance', path: 'publicProse.blocks.stressors:overview.conditionSeverity.glance', writer: W.composer, house: P.any }),
-  composed({ id: 'prose.templeFraud', path: 'publicProse.blocks.warFaith:faith.templeFraud', writer: W.composer, house: P.flags, inputs: ['safety.flags.religiousFraud'], compose: 'withhold',
-    chair: 'derived (VR12) from a VR14 (i) flag withheld always: that rung is withheld on every share' }),
+  composed({ id: 'prose.templeFraud', path: 'publicProse.blocks.warFaith:faith.templeFraud', writer: W.composer, house: P.flags, inputs: ['safety.flags.religiousFraud'], compose: 'withhold', crimeOnly: true,
+    scope: 'VR19 (d), ruling 2: crime-only content: sent as stored only where its grouping\'s eye is open AND no hideable house is hidden whole; else withheld' }),
 
   row({ id: 'prose.criminal', path: '^publicProse\\.blocks\\.defense:criminal\\b', re: true, writer: W.composer, house: P.criminal, rule: 'withhold', when: 'house-hidden', drawn: 'yes', server: H.sChoice, twin: H.tChoice,
     scope: 'VR4 i-11: the criminal desk (structure sentence, ring note) composed from the crime key over the roster; withheld by the house\'s eye, not only by block:defense.criminalStructure' }),
+
+  // ── V10-1 (the reader, HIGH): columns a read returns BESIDE `data` (get_gallery_dossier, the gallery list's cards), cut
+  //    from data by public._gallery_public_tile_rows (147); each is a copy of its source path and takes its rule
+  row({ id: 'tile.stability', path: '^tile\\.stability$', re: true, writer: 'supabase/migrations/147_gallery_tile_chain_aliveness_title_reactions.sql :: _gallery_public_tile_rows', house: P.flags, drawn: 'yes', copyOf: 'power.stability', server: H.sTile, twin: H.tTile,
+    scope: 'the tile column `stability` = data powerStructure.stability (first of its coalesce)' }),
+  row({ id: 'tile.prosperity', path: '^tile\\.prosperity$', re: true, writer: 'supabase/migrations/147_gallery_tile_chain_aliveness_title_reactions.sql :: _gallery_public_tile_rows', house: P.flags, drawn: 'yes', copyOf: 'economy.prosperity', server: H.sTile, twin: H.tTile,
+    scope: 'the tile column `prosperity` = data economicState.prosperity' }),
+  row({ id: 'tile.threatLevel', path: '^tile\\.threat_level$', re: true, writer: 'supabase/migrations/147_gallery_tile_chain_aliveness_title_reactions.sql :: _gallery_public_tile_rows', house: P.any, rule: 'diffuse', drawn: 'yes', condition: [...BAND_CONDITION], server: H.sTile, twin: H.tTile,
+    scope: 'the tile column `threat_level` = data threatProfile.level (else defense.threatLevel): its source differed in none of the four runs, so it is not in the class; recorded diffuse' }),
+  row({ id: 'tile.governmentType', path: '^tile\\.government_type$', re: true, writer: 'supabase/migrations/147_gallery_tile_chain_aliveness_title_reactions.sql :: _gallery_public_tile_rows', house: P.any, rule: 'diffuse', drawn: 'yes', condition: [...BAND_CONDITION], server: H.sTile, twin: H.tTile,
+    scope: 'the tile column `government_type` = data powerStructure.government (else governingName, governmentType): its source differed in none of the four runs; recorded diffuse' }),
+  row({ id: 'chronicle', path: '^chronicle\\b', re: true, writer: 'supabase/migrations/032_gallery_public_chronicle.sql :: _gallery_chronicle_json', house: P.any, rule: 'withhold', when: 'house-hidden', drawn: 'yes', server: H.sChronicle, twin: H.tChronicle,
+    scope: 'PLACEHOLDER FAMILY (V10-1): the campaign chronicle (campaign_state eventLog) returned beside data; VEIL-19 designs its rule; withheld where a house is hidden whole until then (the law)' }),
 
   // ── the town's quarters (V9-3)
   undrawn({ id: 'spatial.quarters', path: '^spatialLayout\\.quarters\\[\\]', re: true, writer: W.spatial, house: P.criminal, scope: 'VR4 ii-10 (V9-3): the town plan\'s criminal-named entry; no non-owner page draws that list (VR4 section 2b)' }),
@@ -466,7 +496,8 @@ export function derivedRule(r, byId, seen = new Set()) {
   });
   const telling = ins.filter((x) => (x.rule === 'withhold' || x.rule === 'recompose') && (x.when === 'house-hidden' || x.row.vr14 === 'i'));
   if (telling.length) {
-    const when = telling.some((x) => x.when === 'always' && x.rule === 'withhold') ? 'always' : 'house-hidden';
+    // VR19 (d): content that exists only because of crime stays conditional whatever its inputs
+    const when = !r.crimeOnly && telling.some((x) => x.when === 'always' && x.rule === 'withhold') ? 'always' : 'house-hidden';
     return { rule: r.compose ?? 'withhold', when };
   }
   return { rule: ins.every((x) => x.rule === 'rng') ? 'rng' : 'diffuse', when: 'always' };
@@ -475,7 +506,31 @@ export function derivedRule(r, byId, seen = new Set()) {
 /** @returns {ReadonlyArray<Readonly<RegistryRow>>} */
 function finalise(/** @type {RegistryRow[]} */ rows) {
   const byId = new Map(rows.map((r) => [r.id, r]));
-  return Object.freeze(rows.map((r) => Object.freeze({ ...r, ...derivedRule(r, byId), inputs: Object.freeze([...r.inputs]) })));
+  const derived = rows.map((r) => {
+    const d = { ...r, ...derivedRule(r, byId) };
+    // a composed row that derives diffuse takes its inputs' conditions (VR8's band, by default)
+    if (d.rule === 'diffuse' && !d.condition.length) {
+      const fromInputs = [...new Set(r.inputs.flatMap((id) => byId.get(id)?.condition ?? []))];
+      d.condition = fromInputs.length ? fromInputs : [...BAND_CONDITION];
+    }
+    return d;
+  });
+  const done = new Map(derived.map((r) => [r.id, r]));
+  // V10-1: a copy takes its source's rule, when, class and page
+  const copied = derived.map((r) => {
+    const src = r.copyOf ? done.get(r.copyOf) : null;
+    if (r.copyOf && !src) throw new Error(`roster-choice registry: ${r.id} copies an unknown row ${r.copyOf}`);
+    return src ? { ...r, rule: src.rule, when: src.when, vr14: src.vr14, page: src.page, condition: [...src.condition], built: false } : r;
+  });
+  const builtIds = new Set(copied.filter((r) => r.built && r.rule !== 'diffuse').map((r) => r.id));
+  // VR8: a diffuse row is exported (built) once every row its condition names is built
+  return Object.freeze(copied.map((r) => Object.freeze({
+    ...r,
+    // VR13 (the chair's ruling 10): an rng row is a ruling, not a build: built
+    built: r.rule === 'diffuse' ? r.condition.length > 0 && r.condition.every((id) => builtIds.has(id)) : r.rule === 'rng' ? true : r.built,
+    inputs: Object.freeze([...r.inputs]),
+    condition: Object.freeze([...r.condition]),
+  })));
 }
 
 /** Every row, its composed rules derived (VR12). */

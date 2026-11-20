@@ -8,7 +8,7 @@ The work follows `docs/chair/2026-11-19/veil/briefs/SUB-BRIEF-VR7.md`, stage R1.
 Every database used is a scratch PostgreSQL 16 cluster in this container (`/var/tmp/r1pg`, unix socket `/var/tmp/rv7`,
 `listen_addresses = ''`). No hosted database, no production credential, no `supabase` command, no deploy, no pull request.
 
-**Written 2026-11-20 00:44 UTC, amended 00:56 UTC (each read from `date -u`).**
+**Written 2026-11-20 00:44 UTC, amended 00:56 and 01:06 UTC (each read from `date -u`). Section 9 (the chair's rulings, applied) SUPERSEDES sections 2 to 4 wherever they differ.**
 
 ## 0. Outcome
 
@@ -246,3 +246,108 @@ PART 19 section 4 and the reader's hand-off section 4, with these changes:
 - whether the planned hosts are the right places for R2 to R5.
 
 **Not done here:** no rule is built (R1 builds none).
+
+
+## 9. THE CHAIR'S RULINGS OF 00:44 UTC, APPLIED (the third commit; written 01:06 UTC)
+
+**The chair's two messages, read at 00:59 UTC.** They were sent at 00:11 and 00:44 UTC; the harness delivered both late.
+
+**THE HAZARD CHECK (the 00:11 message), executed:**
+- `git config` shows `core.bare=false` and the user `Claude <noreply@anthropic.com>`. There is no "Fixture" user.
+- All three commits are authored by the harness identity.
+- `env | grep '^GIT_'` shows only the harness's `GIT_CONFIG_*`, `GIT_SSL_CAINFO`, `GIT_EDITOR` and `GIT_TERMINAL_PROMPT`.
+  There is no `GIT_DIR`.
+- My pushes were lane-only fast-forwards, so the hook ran the three fast gates and no tests.
+- I ran the `tests/lint` directory once, from a plain shell. I ran neither the whole suite nor `tests/scripts`.
+
+**THE ROWS, by the rulings:**
+
+| Ruling | What changed in the rows |
+|---|---|
+| VR19, 1 | `compound.economyOutput` is now withheld always, class (i), page `re-derive`. `getInstFlags(config, institutions)` reads only the config and the house names, both served. That every config key it reads survives the projection is PLAUSIBLE, not executed. |
+| 2 | `safetyRatio` and `blackMarketCapture` are withheld always, page `not drawn`. The daily-life order words cut safetyRatio at 2.0 / 1.5 / 1.2 / 1.0 / 0.7 / 0.5 (`dailyLifeLogic.js` safetyScore). The band cuts effectiveSafety at 3.5 / 2 / 1.2 / 0.6. The words are FINER, and no served field re-derives the ratio, so the page does not draw them. `shadowEconomy`, `structureFlag` and `templeFraud` carry `crimeOnly`, so `derivedRule` keeps them conditional (VR19 (d)): withheld where a house is hidden whole or the grouping is shut. |
+| 3, 4, 8, 9 | Accepted as they stood. The chair notes are cleared. |
+| 5 | `power.stability` is now `recompose`, always, page `not drawn`: the band word stays and the cause is withheld on every read. |
+| 6 | `prose.incomeWeight` is class (ii). It follows item D: it is re-derived with the percentages (input `income.percentage`), on D's hosts. |
+| 7 | `institutions[].desc` is (b), withheld where a house is hidden whole. Measured on the three towns: each description is one of a declared twin pair in `institutionDescVariants.js` ("belongs solely to" excludes 'rival power'; its twin is "rests with"). The pair is resolved by `drawDeclared.js :: drawDeclared` over the fact 'rival power', read from powerStructure, which the hidden house's power moves. So it is not rng. |
+| 10 | Every rng row is built (a ruling, not a build). A diffuse row carries `condition` (the band's: both `criminalEffective`, `safetyRatio`, both `militaryEffective`) and is exported once those rows are built. |
+| 11 | The reader's `rul-vr13.json` is on origin and holds the pattern I had rebuilt. My copy was removed; the readings cite the reader's file. |
+| V10-1 | The tile columns are rows. `tile.stability` copies `power.stability`, and `tile.prosperity` copies `economy.prosperity`. `tile.threat_level` and `tile.government_type` are diffuse: their sources (`threatProfile.level`, `powerStructure.government`) differed in none of the four runs. `chronicle` is a PLACEHOLDER family, withheld where a house is hidden whole until VEIL-19 designs it. The hosts are planned (`_gallery_veil_tile_columns`, `_gallery_veil_chronicle`). |
+
+**The walker gained ARM F:**
+- a `page` answer appears only on a value withheld on every read;
+- every rng row is built;
+- a diffuse row is built exactly when its condition is;
+- a copy takes its source's rule.
+
+ARM D now binds only built withhold and recompose rows. A built rng or diffuse row is sent as stored, so no rule names
+it.
+
+**THE ROWS NOW: 147 rows**
+
+| rule / when | (i) | (ii) | (iii) | (iv) | none | rows |
+|---|---|---|---|---|---|---|
+| withhold / always | 12 | 0 | 20 | 0 | 30 | 62 |
+| withhold / house-hidden | 1 | 0 | 0 | 0 | 32 | 33 |
+| recompose / house-hidden | 1 | 3 | 0 | 2 | 2 | 8 |
+| recompose / always (VR19 (a): the band kept, the rest withheld) | 0 | 0 | 0 | 2 | 0 | 2 |
+| diffuse (exported once the band's condition is built) | 0 | 0 | 0 | 18 | 13 | 31 |
+| rng (built) | 0 | 0 | 0 | 2 | 9 | 11 |
+| **all** | 14 | 3 | 20 | 24 | 86 | **147** |
+
+**THE GATE, re-read at the third commit (`R1-gate-readings.txt`):**
+
+| Run | Baseline (empty registry + the reader's VR13) | Committed export | Every row |
+|---|---|---|---|
+| New shape, gallery | 124 / 20 | 131 unregistered / 13 rng-only | 0 unregistered (108 registered, 23 diffuse, 13 rng) |
+| New shape, link | 118 / 20 | 125 / 13 | 0 |
+| Master's shape, gallery | 135 / 20 | 145 / 10 | 0 |
+| Master's shape, link | 122 / 20 | 132 / 10 | 0 |
+
+Each total is unchanged (144, 138, 155, 142). The committed reading moves 7 paths (10 in master's shape) from the
+reader's rng pattern to unregistered. The registry rules those paths otherwise: the crime-wave entries "only in A"
+(withheld, VR4 ii-11) and the undrawn history fields (withheld always, VR16). They stay unregistered until R2 and R3
+build them. No behaviour changed.
+
+### (i) WHAT A SHARED PAGE LOSES UNDER THE REGISTRY (drawn rows only; the undrawn ones cost no page)
+
+**Withheld on EVERY non-owner read, whatever the veil:**
+
+| Row | Page |
+|---|---|
+| `compound.economyOutput` (the Economics output chip, "NN/100") | the page RE-DERIVES it from the served config and houses |
+| `safety.safetyRatio` (the daily-life order words) | NOT DRAWN (finer than the band) |
+| `safety.blackMarketCapture` (the shadow-economy figure) | NOT DRAWN |
+| `power.stability`, the cause after the band word (e.g. "(pervasive organized crime)") | NOT DRAWN; the band word stays |
+| `tile.stability` (the gallery card's stability cause) | NOT DRAWN; the band word stays |
+| `food.storageMonths`, `power.relation.direction`, `power.factions.legitimacyCrisis` | drawn status UNSETTLED; R2's render-twice test decides |
+
+**Withheld or recomposed ONLY where a house is hidden whole (or, where its grouping governs, the grouping is shut):**
+- **Recomposed to the served town's wording:** the gates tail and the foothold word (`guardEffectivenessDesc`,
+  `safetyDesc`), `economicComplexity`, the income percentages and `incomeWeight`, the powers' shares and labels.
+- **Withheld:**
+  - from the income: the criminal income row and its desc, `economicDragDesc`;
+  - from the safety profile: crimeTypes entries, plot hooks, `criminalInstitutions`;
+  - from the history: the crime-wave tension and event, and a legacy line composed from one;
+  - from the houses and powers: the open houses' twin descriptions, the criminal power with its relations, dmNote,
+    recentConflict and power descriptions;
+  - from the people: the handler ties, the trace's criminal-allegiance entries, the holder's card whole with its roster
+    copies, ties, prominentRelationship and pressureSentence, and the people's secrets;
+  - from the prose: `shadowEconomy`, `incomeMix`, `structureFlag`, `templeFraud`, the criminal desk;
+  - the chronicle (placeholder).
+
+### (ii) V10-1, THE COLUMNS BESIDE `data` (registered; not in the differ, which reads `data` only)
+
+The tile columns are cut from `data` by `_gallery_public_tile_rows` (147) and returned by `get_gallery_dossier` and
+the gallery list's cards:
+
+| Row | Source | Rule |
+|---|---|---|
+| `tile.stability` | `powerStructure.stability` | its source's: the band kept, the cause withheld always |
+| `tile.prosperity` | `economicState.prosperity` | its source's: diffuse |
+| `tile.threat_level` | `threatProfile.level` | diffuse, recorded |
+| `tile.government_type` | `powerStructure.government` | diffuse, recorded |
+| `chronicle` (`_gallery_chronicle_json` over `campaign_state.eventLog`) | — | a placeholder family for VEIL-19 |
+
+The paths `tile.<column>` and `chronicle` are this registry's own names: no differ run produces them yet, because they
+are columns, not `data`.

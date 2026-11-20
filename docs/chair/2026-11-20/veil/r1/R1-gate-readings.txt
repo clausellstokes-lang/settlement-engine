@@ -1,29 +1,27 @@
 # VEIL-R1 · THE PROOF OF R1: the reader's gate (REVIEW-VEIL-9 differ-gate.mjs, origin/lane/review-veil-9-2026-11-19) over the
 # differ run THROUGH THE SERVER at the base bedd5a392 (chains of the base's own migrations; 212 dae0ae6c...19e247).
-# Written 2026-11-20 00:33 UTC. Runs: new shape N=2 (001..212), master's shape N=1 (master's generator db832c892, 203+211+212);
-# each with every veil (default, hand, every eye shut; Reveal DM off and on); the gallery read and the party link.
-# baseline = an empty registry and the VR13 rng ruling (the readers' form); committed = the two files of this commit;
-# every-row = scripts/veil/rosterChoiceRegistry.mjs --all /var/tmp/v18/all (outside the tree, never committed).
+# Re-read 2026-11-20 01:05 UTC after the chair's rulings VR19 and 1 to 11 (00:44 UTC). Runs (made 00:11 to 00:28 UTC): new shape N=2
+# (001..212), master's shape N=1 (master's generator db832c892, 203+211+212); every veil (default, hand, every eye shut;
+# Reveal DM off and on); the gallery read and the party link.
+# baseline = an empty registry and the reader's own rul-vr13.json (origin/lane/review-veil-9-2026-11-19 ::
+#   docs/chair/2026-11-19/veil/probes/REVIEW-VEIL-9/rul-vr13.json); committed = the two files of this commit (ruling 10:
+#   the VR13 rng rows built, so rulings.json carries them); every-row = scripts/veil/rosterChoiceRegistry.mjs --all (outside the tree).
 base-gallery | baseline: registered 0 | diffuse 0 | rng-only 20 | UNREGISTERED 124 (exit 1)
-base-gallery | committed: registered 0 | diffuse 0 | rng-only 0 | UNREGISTERED 144 (exit 1)
-base-gallery | every row: registered 106 | diffuse 24 | rng-only 14 | UNREGISTERED 0 (exit 0)
-base-gallery | committed reading's paths = the baseline's unregistered + rng-only paths, path for path (144)
+base-gallery | committed: registered 0 | diffuse 0 | rng-only 13 | UNREGISTERED 131 (exit 1)
+base-gallery | every row: registered 108 | diffuse 23 | rng-only 13 | UNREGISTERED 0 (exit 0)
 base-link | baseline: registered 0 | diffuse 0 | rng-only 20 | UNREGISTERED 118 (exit 1)
-base-link | committed: registered 0 | diffuse 0 | rng-only 0 | UNREGISTERED 138 (exit 1)
-base-link | every row: registered 100 | diffuse 24 | rng-only 14 | UNREGISTERED 0 (exit 0)
-base-link | committed reading's paths = the baseline's unregistered + rng-only paths, path for path (138)
+base-link | committed: registered 0 | diffuse 0 | rng-only 13 | UNREGISTERED 125 (exit 1)
+base-link | every row: registered 102 | diffuse 23 | rng-only 13 | UNREGISTERED 0 (exit 0)
 master-gallery | baseline: registered 0 | diffuse 0 | rng-only 20 | UNREGISTERED 135 (exit 1)
-master-gallery | committed: registered 0 | diffuse 0 | rng-only 0 | UNREGISTERED 155 (exit 1)
+master-gallery | committed: registered 0 | diffuse 0 | rng-only 10 | UNREGISTERED 145 (exit 1)
 master-gallery | every row: registered 120 | diffuse 25 | rng-only 10 | UNREGISTERED 0 (exit 0)
-master-gallery | committed reading's paths = the baseline's unregistered + rng-only paths, path for path (155)
 master-link | baseline: registered 0 | diffuse 0 | rng-only 20 | UNREGISTERED 122 (exit 1)
-master-link | committed: registered 0 | diffuse 0 | rng-only 0 | UNREGISTERED 142 (exit 1)
+master-link | committed: registered 0 | diffuse 0 | rng-only 10 | UNREGISTERED 132 (exit 1)
 master-link | every row: registered 107 | diffuse 25 | rng-only 10 | UNREGISTERED 0 (exit 0)
-master-link | committed reading's paths = the baseline's unregistered + rng-only paths, path for path (142)
-# the readers' own baselines (REVIEW-VEIL-9 out/gate-baseline-tip.txt, -master.txt, at ad093c92c): 124/20 and 135/20; the
-# new-shape and master-shape gallery baselines above list the SAME paths as the reader's (diffed path for path).
+# the readers' own baselines (out/gate-baseline-tip.txt, -master.txt, at ad093c92c): 124/20 and 135/20, the SAME paths
+# as the baselines above (diffed path for path at the first reading, 00:33 UTC).
 
-## the committed reading, new shape, gallery read (the 144 paths)
+## the committed reading's unregistered paths, new shape, gallery read
 activeConditions[].severity
 activeConditions[].severityBand
 defenseProfile.readiness.score
@@ -62,24 +60,12 @@ economicState.safetyProfile.safetyLabel
 economicState.safetyProfile.safetyRatio
 economicState.situationDesc
 history.currentTensions[] (only in A)
-history.currentTensions[] (only in B)
-history.currentTensions[].description
-history.currentTensions[].factions[] (only in A)
 history.eventsTimeline[] (only in A)
-history.eventsTimeline[] (only in B)
 history.eventsTimeline[].anchored
 history.eventsTimeline[].year
-history.eventsTimeline[].yearsAgo
 history.founding.overcoming
-history.historicalCharacter
 history.historicalEvents[] (only in A)
-history.historicalEvents[] (only in B)
 history.historicalEvents[].anchored
-history.historicalEvents[].description
-history.historicalEvents[].lastingEffects[] (only in A)
-history.historicalEvents[].lastingEffects[] (only in B)
-history.historicalEvents[].severity
-history.historicalEvents[].yearsAgo
 history.legacyAnnotations[]
 history.legacyAnnotations[].annotation
 history.legacyAnnotations[].eventName
@@ -142,7 +128,6 @@ publicProse.blocks.economy:resources.shadowEconomy
 publicProse.blocks.economy:services.incomeWeight
 publicProse.blocks.economy:services.shadowEconomy
 publicProse.blocks.general:history.legacyLines[] (only in A)
-publicProse.blocks.general:history.legacyLines[] (only in B)
 publicProse.blocks.power:desk.legitimacyBanner.glance
 publicProse.blocks.power:desk.legitimacyLens
 publicProse.blocks.power:desk.stabilityHeader.glance
