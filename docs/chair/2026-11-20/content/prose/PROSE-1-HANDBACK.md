@@ -1,11 +1,16 @@
-# PROSE-1 HAND-BACK (kept current at every push; last written 2026-11-20T17:13Z)
+# PROSE-1 HAND-BACK (kept current at every push; last written 2026-11-20T17:33Z)
 
 **Seat:** PROSE-1 of the seventh chair (chair: session_019yED1SUxGVHyjQnoqoFvQ8). Assignment: `git show origin/lane/chair-2026-11-08:docs/chair/2026-11-20/seventh/prompts/PROSE-1.txt`. Branch `lane/prose-1-2026-11-20`, cut at `43ab0f5eb` (the working line `lane/join-2026-11-14`).
 
 ## WHERE THE LANE STANDS
 1. THE MAP — DONE: `PROSE-MAP.md` (sent to the chair as "PROSE-MAP c7c661dfb"). Tools and tables under `map/` (`run-map.sh` re-makes `draws.hxd.jsonl`, which is local-only, 10.8 MB, listed in `.git/info/exclude`; `rank-excess-stored.mjs` ranks pools by excess over the 15% bar on stored draws).
-2. THE LINES — TWO FILES WITH THE CHAIR: `lines/PROSE-LINES-1.md` (6a33026e8; 15 pools, 56 lines + spares; brief `briefs/LINES-1.md`) and `lines/PROSE-LINES-2.md` (63665b37a; 20 pools, 81 lines; brief `briefs/LINES-2.md`), each read whole by PROSE-1 with its repairs marked in place. Counts follow the chair's bar (17:00 UTC: a pool carries about reach/0.15 eligible lines a size; `map/rank-reach.mjs`, `map/RANK-REACH-ALL.md`: 120 of 238 stored pools over, 263 lines clear them all). The rest of the 120 pools would take LINES-3/4 of the same form, after the chair's read of 1 and 2. OPEN QUESTIONS AT THE CHAIR: DS-ECO-6's audience (lines 6-11 unmarked like #5, or dm-only); DS-FTH-2 held to one new line by `tests/lint/faithTeaserLicence.test.js`; LINES-2's 17.7 (dm-only?).
-3. THE BUILD — NOT STARTED: the source document (`docs/content/RECEIPT_POOLS_DOSSIER_STATE.md`, rows APPENDED with the next number: the vid is the row number and the draw is an argmax over vids, so an appended line moves ~1/(n+1) of a pool's reads, all TO itself), then `npm run gen:dossier-prose`, the `prose-*` scripts and the pool lint green by their own rules, the two-tree tool for 0 non-string differences.
+2. THE LINES: `lines/PROSE-LINES-1.md` (15 pools, 56 lines + spares) and `lines/PROSE-LINES-2.md` (20 pools, 81 lines) are WITH THE CHAIR, who reads every line (17:25 UTC: "cut no builder before my verdict"). The 17:25 crime-fact ruling is applied in both files (e3f94cc52). `lines/PROSE-LINES-3.md` and `-4.md` (the remaining 54 pools over the bar, 123 lines; briefs `briefs/LINES-3.md`, `-4.md`, 7b7a209c2) are being drafted by two builders. Each file is read WHOLE by PROSE-1 before it goes to the chair. Repairs are marked in place as `*(PROSE-1: …)*`. Send each as "PROSE-LINES <n> <commit>".
+3. THE BUILD: brief `briefs/BUILD-1.md` (a6f9a1f8d). Cut it ONLY after the chair's verdict, with the verdict written into the builder's prompt: approved lines, spares taken, lines struck, marks changed. Its builder works in an isolated worktree, and PROSE-1 reads its diff once, at the merge. Then "PROSE <commit>" to the chair, which forwards it to SAME-1.
+
+## OPEN AT THE CHAIR (17:5x UTC)
+- DS-FTH-2: five lines inside the faith-teaser licence (they read alike), or admit four words (are, marks, turn, gather) for five that differ. The chair rules "with the security reader's eye".
+- DS-POW-2 #2's `{seat}` is left unfilled on purpose (`powerStateProse.js`'s DS-POW-2 slot bag; recorded ambiguity). A cure is a one-line desk change, not this lane's file.
+- DS-POW-2 #1 "who won it" as a NEED: no fact atom exists in `factVocabulary.js` (read-only to every seat) and `recentConflict` has no settled flag. Reported.
 
 ## RULINGS ASKED / RECEIVED
 - RULED (chair, 17:00 UTC): the bar is over ALL places of a size; a pool carries about reach/0.15 eligible lines at each size; measured on 150 places a size, up to 20% passes. One-eligible pools first. DS-GEN-11: lines without {band}. No kernel change. A line eligible only by a hideable fact is dm-only or unwritten; a calm place stays calm.
