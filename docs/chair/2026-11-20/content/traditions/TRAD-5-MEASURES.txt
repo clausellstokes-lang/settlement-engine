@@ -1,9 +1,9 @@
 WHAT MOVED SINCE THE FIRST CUT. One: no town now prints the same sentence in two of its traditions (before, 94
 of 432 towns did). A later tradition takes the next wording (141 descriptions moved); a keeper's fourth or fifth
 tradition reads "too" (8 times); where the wordings about income run out, the income is left out (11 times). Two:
-no opening sentence says "kept" twice (before, 11). Three: all 387 founding sentences now end on who founded the
-place. Four: the wordings are spread more evenly; "A common feast" was picked for 55 percent of feasts, now 24
-percent. Nothing new was invented: every sentence still states only what the town's record holds.
+no opening sentence says "kept" or "keeps" twice (before, 13 rites). Three: all 387 founding sentences now end on
+who founded the place. Four: the wordings are spread more evenly; "A common feast" was picked for 55 percent of
+feasts, now 24 percent. Nothing new was invented: every sentence still states only what the town's record holds.
 
 THE TRADITIONS DESCRIPTIONS, MEASURED AGAIN — IN PLAIN WORDS
 Written 2026-11-20 19:36 UTC (TRAD-5, unit 12). "First cut" is TRAD-4-MEASURES.txt (unit 6). "Now" is the same 432 towns (six sizes,
@@ -43,8 +43,9 @@ commonest is now "A slow procession", 26%.
 "CALM" TOWNS ARE NOT ALL CALM. 146 of the 432 towns are born with a pressure of their own. There the lines that would
 jar with hardship are quietly swapped for plain ones ("A feast day", "A fair kept by custom", "is held for the
 harvest"): 91 feast lines, 41 fair lines, 21 harvest lines (first cut 91, 49, 17: the picks moved). Nothing about the
-hardship is said. "Kept" said twice in one opening ("A feast day kept by custom that is kept for ..."): now in 0 rites
-(first cut 11; under famine 23, now 0).
+hardship is said. "Kept" or "keeps" said twice in one opening ("A feast day kept by custom that is kept for ..."): now
+in 0 rites, calm or in any crisis (before: 13 of 1,232 calm rites, 11 saying "kept" twice and 2 "keeps faith" after a
+"kept"; 29 under famine).
 
 THE READER'S PAGE shows the same 1,232 rites. 430 say where they come from (two rites of the dead whose event's name
 carries a name the town holds are not tied to it for the reader), and 336 say who pays (first cut 347: the same 11

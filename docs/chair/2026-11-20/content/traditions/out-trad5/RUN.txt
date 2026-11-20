@@ -46,6 +46,13 @@ under_siege: rites=1232 keptTwiceS1=0 feast=309 commonFeast=0 (0.0%) founding=38
 occupied: rites=1232 keptTwiceS1=0 feast=309 commonFeast=0 (0.0%) founding=387 withFounder=387 endingOnFounder=387
 wartime: rites=1232 keptTwiceS1=0 feast=309 commonFeast=0 (0.0%) founding=387 withFounder=387 endingOnFounder=387
 plague_onset: rites=1232 keptTwiceS1=0 feast=309 commonFeast=0 (0.0%) founding=387 withFounder=387 endingOnFounder=387
+"KEPT TWICE", THE SAME MEASURE AS UNIT 9's RECEIPT (a first sentence holding a form of "keep" -- kept, keep, keeps --
+more than once; at unit 9's base, whose code equals the first cut's: 13 of 1,232 calm rites, i.e. 11 kept x kept plus 2
+"keeps faith", by commit 992df7da9's body; 29 under famine, by TRAD-4-HANDBACK.md's unit 9 line, "clashes 13 -> 0 calm,
+29 -> 0 under famine"): now 0 in each of the six pools (calm, famine, under_siege,
+occupied, wartime, plague_onset), owner rows; the narrower "kept" twice (keptTwiceS1 above) is 0 too. The owner files'
+"before" is unit 9's 13 and 29 (the first commit 318fb3f33 gave 11 and 23: TRAD-4-MEASURES.txt's "kept" x "kept" count,
+a narrower measure).
 lead.feast as DRAWN (before any refusal; the rows' slots, calm): "A feast shared among neighbours" 94, "A common feast" 75
 (24.3%; first cut 171, 55.3%), "A feast at long tables" 73, "A feast eaten in common" 67, of 309.
 thirty: TRAD-4 30 pairs, TRAD-5 30; equal in order: true

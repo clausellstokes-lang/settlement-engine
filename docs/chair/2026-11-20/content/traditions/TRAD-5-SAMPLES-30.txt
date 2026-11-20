@@ -1,9 +1,9 @@
 WHAT MOVED SINCE THE FIRST CUT. One: no town now prints the same sentence in two of its traditions (before, 94
 of 432 towns did). A later tradition takes the next wording (141 descriptions moved); a keeper's fourth or fifth
 tradition reads "too" (8 times); where the wordings about income run out, the income is left out (11 times). Two:
-no opening sentence says "kept" twice (before, 11). Three: all 387 founding sentences now end on who founded the
-place. Four: the wordings are spread more evenly; "A common feast" was picked for 55 percent of feasts, now 24
-percent. Nothing new was invented: every sentence still states only what the town's record holds.
+no opening sentence says "kept" or "keeps" twice (before, 13 rites). Three: all 387 founding sentences now end on
+who founded the place. Four: the wordings are spread more evenly; "A common feast" was picked for 55 percent of
+feasts, now 24 percent. Nothing new was invented: every sentence still states only what the town's record holds.
 
 Drawn by rule, not by hand: for each of the six sizes, every printed rite of the pool (1232 rites, in the 403 towns that print one) ordered by the hash fnv1a32(seed|rite id), the first 5; 30 in all, in size order.
 
