@@ -12,6 +12,10 @@
  *                      the heading being the last heading-styled text passed (a page or section head › a sub head);
  *   session            the strings composeTonightSheet returns (what SessionMode and the Table View render), the heading
  *                      being the leaf's key path.
+ * Each line is `[text, heading path, TESTIDS, COMPONENTS]` (brief 2, the sameness door): where the page prints the line,
+ * whatever it says — on the web the chain of `data-testid`s holding the whole line and the chain of named React components
+ * that rendered it (below the panel's own); on the PDF the chain of named components holding it (both fields); on the
+ * session sheet the leaf's key path (both fields). The door keys a slot by the components.
  * Plus the STORED index: every string leaf of the stamped record (census.mjs's walk), masked and split to sentences,
  * masked sentence -> its paths (indices folded to `[]`). Lines are written MASKED (census.mjs's mask). Writes
  * `<out>/<seed>.json`.
@@ -52,22 +56,45 @@ const HEAD = /^H[1-6]$/;
 const isHeading = (el) => HEAD.test(el.tagName) || el.getAttribute('role') === 'heading' || el.tagName === 'SUMMARY' || el.tagName === 'LEGEND' || (el.hasAttribute('aria-expanded') && !el.hasAttribute('aria-haspopup'));
 /** A heading's own words: cut at its first glyph or a count, at most 60 characters. */
 const headWords = (t) => t.replace(/\s+/g, ' ').split(/[▲▼▸▾▴▶◀?(·:]/)[0].trim().slice(0, 60);
-/** One [line, heading path] per block element; `<style>` skipped. A heading (an h1–h6, a role=heading, a summary, a
- * disclosure's button) heads what follows it inside its parent: the path is the open headings, outer to inner, ` › `. */
+/** The longest common prefix of chains (arrays). @param {string[][]} cs */
+const lcp = (cs) => { if (!cs.length) return []; const out = []; for (let k = 0; ; k++) { const x = cs[0][k]; if (x === undefined || cs.some((c) => c[k] !== x)) return out; out.push(x); } };
+/** The chain of named React components that rendered an element (its fiber's owners), outer to inner. */
+const compMemo = new WeakMap();
+function compChain(el) {
+  if (compMemo.has(el)) return compMemo.get(el);
+  const key = Object.keys(el).find((k) => k.startsWith('__reactFiber$'));
+  const names = [];
+  for (let f = key ? el[key] : null; f; f = f.return) {
+    const t = f.type;
+    const nm = typeof t === 'function' ? (t.displayName || t.name) : t && typeof t === 'object' ? (t.displayName || t.render?.displayName || t.render?.name || t.type?.displayName || t.type?.name) : null;
+    if (nm && names[names.length - 1] !== nm) names.push(nm);
+  }
+  const chain = names.reverse();
+  compMemo.set(el, chain);
+  return chain;
+}
+/** One [line, heading path, position, components] per block element; `<style>` skipped. A heading (an h1–h6, a role=heading, a
+ * summary, a disclosure's button) heads what follows it inside its parent: the path is the open headings, outer to inner,
+ * ` › `. THE POSITION (brief 2) is the chain of `data-testid`s that hold the whole line (the common prefix of its text
+ * nodes' chains), outer to inner, ` > `: where the page prints it, whatever it says; the COMPONENTS are the chain of
+ * named React components that rendered the whole line (the common prefix of its text nodes' chains), below the panel's own. */
 function linesWithHeading(root) {
-  const out = []; let cur = ''; const stack = [];
-  const flush = () => { const t = cur.replace(/\s+/g, ' ').trim(); if (t) out.push([t, stack.join(' › ')]); cur = ''; };
+  const out = []; let cur = ''; let chains = []; let comps = []; const stack = []; const ids = [];
+  const base = compChain(root).length;
+  const flush = () => { const t = cur.replace(/\s+/g, ' ').trim(); if (t) out.push([t, stack.join(' › '), lcp(chains).join(' > '), lcp(comps).slice(base).join(' > ')]); cur = ''; chains = []; comps = []; };
   const walk = (n) => {
     const depth = stack.length;
     for (const c of n.childNodes) {
-      if (c.nodeType === 3) cur += c.nodeValue;
+      if (c.nodeType === 3) { cur += c.nodeValue; if (c.nodeValue.trim()) { chains.push([...ids]); comps.push(c.parentElement ? compChain(c.parentElement) : []); } }
       else if (c.nodeType === 1) {
         if (c.tagName === 'STYLE') { flush(); continue; }
-        if (isHeading(c)) { flush(); const h = headWords(c.textContent || ''); walk(c); flush(); if (h) stack.push(h); continue; }
+        const id = c.getAttribute('data-testid'); if (id) ids.push(id);
+        if (isHeading(c)) { flush(); const h = headWords(c.textContent || ''); walk(c); flush(); if (id) ids.pop(); if (h) stack.push(h); continue; }
         const block = BLOCK.has(c.tagName);
         if (block) flush();
         walk(c);
         if (block) flush();
+        if (id) ids.pop();
       }
     }
     if (stack.length > depth) { flush(); stack.length = depth; }
@@ -94,7 +121,7 @@ async function walkDossier(container) {
       const name = `web:${groupName}/${tabName}`;
       if (!panel) { views[name] = []; continue; }
       const seen = new Set(); const acc = [];
-      const snap = () => { for (const [l, h] of linesWithHeading(panel)) if (!seen.has(l)) { seen.add(l); acc.push([l, h]); } };
+      const snap = () => { for (const [l, h, q, c] of linesWithHeading(panel)) if (!seen.has(l)) { seen.add(l); acc.push([l, h, q, c]); } };
       const disclosures = () => [...panel.querySelectorAll('[aria-expanded]')].filter((e) => !e.hasAttribute('aria-haspopup'));
       for (let pass = 0; pass < 4; pass++) {
         const closed = disclosures().filter((e) => e.getAttribute('aria-expanded') === 'false');
@@ -122,7 +149,7 @@ function pdfTokens(node, out = []) {
   if (Array.isArray(node)) { for (const n of node) pdfTokens(n, out); return out; }
   if (typeof node === 'object') {
     if (typeof node.type === 'function') {
-      out.push('\n'); pdfTokens(node.type(node.props), out); out.push('\n'); return out;
+      out.push('\n', { enter: node.type.displayName || node.type.name || '?' }); pdfTokens(node.type(node.props), out); out.push({ exit: true }, '\n'); return out;
     }
     if (node.type && typeof node.type === 'object' && typeof node.type.type === 'function') return pdfTokens({ type: node.type.type, props: node.props }, out);
     const st = [node.props?.style].flat(Infinity).reduce((a, x) => (x && typeof x === 'object' ? Object.assign(a, x) : a), {});
@@ -135,12 +162,15 @@ function pdfTokens(node, out = []) {
 function pdfLines(variant, town) {
   const phase = variant === 'draft_brief' ? 'draft' : 'canon';
   const toks = pdfTokens({ type: SettlementPDF, props: { settlement: town, phase, variant, faithUnlocked: true } });
-  const out = []; let cur = []; let heading = ''; let section = '';
-  const flush = () => { const t = cur.join(' ').replace(/\s+/g, ' ').trim(); if (t) out.push([t, heading]); cur = []; };
+  // THE POSITION (brief 2): the chain of named components that hold the whole line, outer to inner, ` > `
+  const out = []; let cur = []; let chains = []; let heading = ''; let section = ''; const comps = [];
+  const flush = () => { const t = cur.join(' ').replace(/\s+/g, ' ').trim(); if (t) { const c = lcp(chains).join(' > '); out.push([t, heading, c, c]); } cur = []; chains = []; };
   for (const t of toks) {
+    if (typeof t === 'object' && 'enter' in t) { comps.push(t.enter); continue; }
+    if (typeof t === 'object' && 'exit' in t) { comps.pop(); continue; }
     if (typeof t === 'object') { flush(); if (t.lvl === 1) { section = t.h.slice(0, 50); heading = section; } else heading = `${section} › ${t.h.slice(0, 50)}`; continue; }
     if (t === '\n') { flush(); continue; }
-    cur.push(t);
+    cur.push(t); if (t.trim()) chains.push([...comps]);
   }
   flush();
   return out;
@@ -151,7 +181,7 @@ function sheetLines(sheet) {
   const out = []; const seen = new Set();
   const walk = (v, path) => {
     if (v == null) return;
-    if (typeof v === 'string') { const t = v.replace(/\s+/g, ' ').trim(); if (t) out.push([t, path || '(sheet)']); return; }
+    if (typeof v === 'string') { const t = v.replace(/\s+/g, ' ').trim(); if (t) out.push([t, path || '(sheet)', path || '(sheet)', path || '(sheet)']); return; }
     if (typeof v !== 'object' || seen.has(v)) return; seen.add(v);
     if (Array.isArray(v)) { for (const x of v) walk(x, `${path}[]`); return; }
     for (const k of Object.keys(v)) walk(v[k], path ? `${path}.${k}` : k);
@@ -195,7 +225,7 @@ for (const row of PLAN) {
       try { surfaces[`pdf:${variant}`] = pdfLines(variant, town); } catch (e) { surfaces[`pdf:${variant}`] = [[`[PDF THREW] ${String(e?.message || e).slice(0, 200)}`, '']]; }
     }
     try { surfaces.session = sheetLines(composeTonightSheet(town)); } catch (e) { surfaces.session = [[`[SHEET THREW] ${String(e?.message || e).slice(0, 200)}`, '']]; }
-    const masked = Object.fromEntries(Object.entries(surfaces).map(([k, v]) => [k, v.map(([l, h]) => [mask(l), mask(h)])]));
+    const masked = Object.fromEntries(Object.entries(surfaces).map(([k, v]) => [k, v.map(([l, h, q, c]) => [mask(l), mask(h), mask(q || ''), mask(c || '')])]));
     writeFileSync(`${OUT}/${row.seed}.json`, JSON.stringify({ seed: row.seed, size: row.size, ms: Date.now() - t0, surfaces: masked, stored: storedIndex(town, mask) }));
   }, 300000);
 }
