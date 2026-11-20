@@ -134,6 +134,14 @@ parts of the whole check (at the close).
   tied to the crisis; names with articles and pronouns), then real game masters. THE SLOT (the intake rule): these
   rows go on the eighth read's list and the first content round after the deploy; S122's heading (SD4) is one of them.
 
+- **2026-11-20, between the clock's readings of 01:39 and 01:45 UTC, the owner (verbatim), after the chair put the
+  choice between the strict reading and the tiers (VR28) in plain words with the reader's numbers:** "i defer all
+  decsision to you". TAKEN AS: VR28 (the tiers), VR23 (a map's never-listed member takes the default veil) and VR24
+  (timing out of scope) stand as ruled, each still vetoable; the chair decides and records, and does not put such a
+  choice back to the owner unless it is one of the acts that stay the owner's hand. SAID IN REPLY, once: deferring
+  cannot cover production: the read-only check of V10-8 and the two revokes need the owner's own hands on the
+  database; no seat holds a production credential.
+
 ## 2. Rulings of this chair (each vetoable by the owner)
 
 - **SV1 (00:05 UTC, 2026-11-20): THE VEIL'S LIST ON THREE MACHINES.** VEIL-19 owns 212, its rollback and the twin's
@@ -595,3 +603,7 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   it. THE CRISIS CAST'S ROLE AND REASON have no deriver without the seed: "not known" accepted: A LOSS ON IMPORT FOR
   THE OWNER'S LIST (an imported crisis town arrives without its cast of three), unless a Reveal-DM page draws the
   cast, which the seat is to answer first.
+- 01:45 UTC · **REVIEW-VEIL-11 SEATED** (created 01:44:45 UTC): session_019yED1PdKyhdKDWQ5Y3sxSx,
+  `lane/review-veil-11-2026-11-20` from the veil lane's tip. TEN SEATS OPENED BY THIS CHAIR: running VEIL-19 (to its
+  hand-back), VEIL-20, VEIL-VR17, VEIL-DOORS, SEC-GRANTS, REVIEW-VEIL-11, CI-FIT, GIT-DOOR; REVIEW-VEIL-10 past its
+  mark, held for one read; VEIL-R1 done.
