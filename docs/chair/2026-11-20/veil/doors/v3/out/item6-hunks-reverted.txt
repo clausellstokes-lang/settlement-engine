@@ -1,0 +1,38 @@
+
+ RUN  v4.1.8 <scratch tree of 97efb7fcf, the two hunks reverted>
+
+ ❯ tests/security/galleryDoors.pglite.test.js (11 tests | 1 failed | 10 skipped) 3516ms
+     × SNAPSHOT MODE (VEIL-DOORS-2, item 6): after a freeze the DM adds a criminal house and events, renames the town, shifts its tier and saves; the frozen share's chronicle, name, tier and time (dossier, list, map member, import) tell none of it; the twin agrees 229ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > SNAPSHOT MODE (VEIL-DOORS-2, item 6): after a freeze the DM adds a criminal house and events, renames the town, shifts its tier and saves; the frozen share's chronicle, name, tier and time (dossier, list, map member, import) tell none of it; the twin agrees
+AssertionError: the importer's record: expected { name: 'Rookhold', tier: 'city' } to deeply equal { name: 'Rookford', tier: 'town' }
+
+- Expected
++ Received
+
+  {
+-   "name": "Rookford",
+-   "tier": "town",
++   "name": "Rookhold",
++   "tier": "city",
+  }
+
+ ❯ tests/security/galleryDoors.pglite.test.js:370:74
+    368|     const imp = (await db.query('select * from public.import_gallery_d…
+    369|     await db.exec('reset test.uid;');
+    370|     expect({ name: imp.name, tier: imp.tier }, 'the importer\'s record…
+       |                                                                          ^
+    371|     // the twin: the same chronicle from the frozen marker
+    372|     const veil = await import('../../src/domain/display/galleryVeil.js…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 10 skipped (11)
+   Start at  04:47:02
+   Duration  3.79s (transform 104ms, setup 32ms, import 123ms, tests 3.52s, environment 0ms)
+
+exit 1
