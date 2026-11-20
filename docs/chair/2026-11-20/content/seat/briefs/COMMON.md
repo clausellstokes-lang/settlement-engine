@@ -44,3 +44,11 @@
 - **RULINGS.md's Addendum 6** (CS21, CS22, the factionDynamics.js owner rule, FORTUNE-1's standing) binds you beside the rest.
 - **One more red that is not yours until U2-CURE2 lands:** `tests/data/cultureOfficeTitles.test.js` cannot load at `8c4beb844` (it imports `rulingPower.js :: GOVERNMENT_PREFERENCES`, which U2 removed; its cure is B2d's). Name it and go on.
 - **The confinement reference** for a dark unit: `all 36ee5bb0bea0bb3fcc6bd83f1e9e732b4dc643f09e0844545c64785798d8ce89 1245`.
+
+## SEAT-4's lane (from 2026-11-20T12:55:48Z; "THE LANE IS YOURS at 1cf452ac2", the chair; these lines govern where an earlier line above disagrees)
+
+- **Your integrator is SEAT-4** (session_019yED1RNL8TjjpR5HCcJ3yW). Your commit trailers: `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>` and `Claude-Session: https://claude.ai/code/session_019yED1RNL8TjjpR5HCcJ3yW`. Do NOT push; SEAT-4 reads your diff line by line, re-runs your red and green, merges and pushes. Your hand-back goes to SEAT-4.
+- **A known red that is not yours** (beside the list above): `tests/property/dmLayerGoldenIsolation.test.js` A7 ("a dormant layer is the committed golden on EVERY corpus row"), red at the lane's base (it reads the golden master the names work left red). Name it and go on.
+- **`writerReach.walker`'s frozen `surfaceReach` is the integrator's too**: a reach GAIN your new module causes (a new reader of a `hidden` or veiled field in a surface's closure) is NAMED in your report by row (surface, field, before → after); never re-recorded by you.
+- **Every rate you measure for the owner is UNDER TODAY'S STANDING** (FORTUNE-1 is dark and will move it) and says so beside the figure. If your measure reads a card's or a faction's `power` or `influence`, say so in your report: another unit on the line raises stored weights of guild masters, thieves' guild masters, council speakers and the wealthiest merchant in NEW towns.
+- **One more known red** (beside the list above): `tests/build/generationWorkerLazy.test.js` "the generation worker bundle stays under its measured ceiling" (2,585,176 B against 2,579,708 at `0d71eaa3b`; the owner's at the close). Report your own delta against 2,585,176; lower nothing, re-record nothing.
