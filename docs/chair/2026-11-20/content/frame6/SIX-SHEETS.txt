@@ -1,0 +1,157 @@
+FRAME-6 · SIX — the six sheets for the owner: three CALM towns whose owner sheet at the tip is byte-identical to the line's, and three FRAMED towns (W1 seat, W3 material, W4 hall-captured) before and after, as plain text.
+BEFORE = today's line, an archive of 43ab0f5eb (lane/join-2026-11-14; no frame code), its composeTonightSheet(s) (it takes no audience). AFTER = the lane tip 9e551cda9, composeTonightSheet(s, { audience: 'owner' }).
+Each town born fresh at each tree by that tree's own generator: generateSettlementPipeline({ settType: tier }, null, { seed, customContent: {} }). Digests: sha256 of the composed sheet's JSON, 16 hex.
+A STRANGER (the tip, no options) gets the BEFORE sheet byte for byte in every town below (the digests are printed per town).
+Format: each side is 'words: who — why. Wants…'; each person to voice is 'name · role [why: side] — reason — line'; each hook ends with its source in parentheses.
+
+##### THE THREE CALM SHEETS (no trouble of weight at the tip; the owner sheet at the tip = the line's, printed once)
+
+=== frame-calm-thorp-0 (thorp) — calm
+--- digests: line eb85297cfc5b5e59 · tip owner eb85297cfc5b5e59 · tip stranger eb85297cfc5b5e59 — EQUAL
+--- THE SHEET (line = tip owner = tip stranger)
+Opening: A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+People to voice:
+  - Sunita Acharya · Elder [seat] — Wants to collect what is owed to the shepherd collective before the season is out.
+Facts:
+  Food: Secure. No granary; about a month and a half in household stores.
+  Defence: No walls and no standing force.
+Hooks:
+  * Someone close to authority is gathering powers no one granted, and keeps the papers that show it locked away. (Tyranny)
+  * A household that spoke out against the new rules has had its goods seized on a pretext, and wants them back. (Tyranny)
+  * Someone is paying for praise of a strong hand in the street, and stands to profit if it comes. (Tyranny)
+
+=== frame-calm-town-0 (town) — calm
+--- digests: line ea7a1e92e52d35da · tip owner ea7a1e92e52d35da · tip stranger ea7a1e92e52d35da — EQUAL
+--- THE SHEET (line = tip owner = tip stranger)
+Opening: Jong Kobayashi and Yuna Hayashi are tied by a debt not yet paid. Jong Kobayashi has begun to act like someone who considers the debt paid. Yuna Hayashi does not.
+People to voice:
+  - Kai Luo · Mayor [seat] — Wants to answer the next move by the Religious Authorities against the Merchant Guilds, quickly and in public.
+  - Yuki Li · the dean [cleric] — Wants to make sure Lang Li is not left behind by the changes in the work.
+Facts:
+  Food: Secure. Stores: a granary, about six months of grain.
+  Defence: Town walls, Town watch.
+Hooks:
+  * A partner died owing them money, and the partner's heir says the debt was paid in a letter nobody can find. (Kai Luo)
+  * A spy they turned is now being turned back, and feeding information in both directions. (Yuna Hayashi)
+  * Both sides have changed the locks on the building, and a third party has been living in it all winter. (Town Council vs Military/Guard)
+
+=== frame-calm-metropolis-3 (metropolis) — calm
+--- digests: line 88fda46e2ca6c25c · tip owner 88fda46e2ca6c25c · tip stranger 88fda46e2ca6c25c — EQUAL
+--- THE SHEET (line = tip owner = tip stranger)
+Opening: Mustafa al-Rifai is about to call it in.
+People to voice:
+  - Zubayr al-Jazari · the monarch [seat] — Wants to learn why people favour the Thieves' Guild, and do better for the Royal Authority.
+  - Nadia ibn Rushd · the dean [cleric] — Wants to do Huda al-Yamani a favour big enough to count against what is owed.
+Facts:
+  Food: Secure. Stores: a granary, about 15 months of grain.
+  Defence: Massive walls and fortifications, Citadel, Multiple garrisons, Professional city watch, Mercenary quarter, Multiple adventurers' guilds.
+Hooks:
+  * Their sister has been taking gifts from people who need their signature, and they found out from the person who paid most. (Zubayr al-Jazari)
+  * A good stall has been taken over by night, and its holder wants it back before market day. (Merchant Guilds vs Thieves' Guild)
+  * The promise was made in writing, and the paper is now in the hands of someone who wants a price for it. (Military/Guard vs Thieves' Guild)
+
+##### THE THREE FRAMED SHEETS (before: the line; after: the tip, the owner)
+
+=== frame-calm-town-20 (town) — W4 hall-captured, opening on crime_wave at #0
+--- digests: line d0d5036ee3166d5d · tip owner dc5d75f1f61c7494 · tip stranger d0d5036ee3166d5d (stranger = line)
+--- BEFORE (the line, today's owner sheet)
+Opening: Khurelbaatar Geniges has taken a new apprentice, and Jalayir Merkit has heard the apprentice is being taught things the chandler never was.
+People to voice:
+  - Abu Said Mangghud · Mayor [seat] — Covered up a cave-in that killed three men by sealing the gallery and reporting them as run off.
+  - Purevdulam Qonggirad · the dean [cleric] — Wants to settle one quarrel inside the Religious Authorities before Regünjid Jadaran can settle it and take the credit.
+Facts:
+  Food: Secure. Stores: a granary, about six months of grain.
+  Defence: Town walls, Town watch.
+Hooks:
+  * They have promised the same order to two buyers, and both are due to collect on the same morning. (Abu Said Mangghud)
+  * They've noticed the same group of faces at multiple locations where incidents occurred. No one else has. (Khurelbaatar Geniges)
+  * The iron carts are three weeks late and the carters will not say why. Broken tools stay broken, and work waits. (Strategic Resource)
+--- AFTER (the tip, the owner)
+Opening: Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands.
+The trouble: Crime wave
+Its three sides:
+  - The Guard: Barlas Arlat · the innkeeper — Because the trouble touches his trade. Wants to find a patron among those who lead the Merchant Guilds, and make themselves useful to them.
+  - Those who would take the law into their own hands: Alaqai Ba'arin · the master butcher — Because her own trouble is part of it. Wants to learn the secret of someone they envy.
+  - The criminal network: (no one named) — Not named here; Hulegu Khwarezm keeps the taverns, where strangers lodge, and would know of them.
+  The trouble's own hooks:
+    * The crime wave is coordinated. Someone is directing it to create a pretext.
+    * A guard captain is on the payroll of the criminal network.
+    * Those who would take the law into their own hands have picked out a culprit on bad information.
+People to voice:
+  - Barlas Arlat · the innkeeper [side: The Guard] — because the trouble touches his trade — Wants to find a patron among those who lead the Merchant Guilds, and make themselves useful to them.
+  - Alaqai Ba'arin · the master butcher [side: Those who would take the law into their own hands] — because her own trouble is part of it — Wants to learn the secret of someone they envy.
+Facts:
+  Food: Secure. Stores: a granary, about six months of grain.
+  Defence: Town walls, Town watch.
+Hooks:
+  * Someone keeps paying off their small debts around the place before they can, and has left no name. (Alaqai Ba'arin)
+  * They have seen the same unmarked cart pass their door three nights running, and have not wondered why. (Barlas Arlat)
+  * They have promised the same order to two buyers, and both are due to collect on the same morning. (Abu Said Mangghud)
+
+=== frame-calm-hamlet-17 (hamlet) — W1 legitimacy-below-45, opening on succession_crisis at #0
+--- digests: line 556fb73fa8d2aebf · tip owner 08004ef0bd3d2701 · tip stranger 556fb73fa8d2aebf (stranger = line)
+--- BEFORE (the line, today's owner sheet)
+Opening: The High Priestess and The Veteran Soldier each think the other owes the apology.
+People to voice:
+  - Mustafa al-Malik · Headman [seat] — Wants to tell the right story to the right person, and watch it spread.
+Facts:
+  Food: Secure. No granary; about a month and a half in household stores.
+  Defence: No walls and no standing force.
+Hooks:
+  * They overheard two people they know settle a bribe, and do not know whom to tell. (The High Priestess)
+  * The member has been hidden by his own side, and the other side is offering a reward. (Headman's Authority vs Military Party)
+  * A visitor from a neighbouring place has been given two different answers, and wants to know which one is true. (Religious Authorities vs Military Party)
+--- AFTER (the tip, the owner)
+Opening: Who will lead next is the quarrel of the day, and the would-be successors are each gathering support.
+The trouble: Succession crisis
+Its three sides:
+  - The Headman's Authority: Mustafa al-Malik · Headman — Because he holds the seat. Wants to tell the right story to the right person, and watch it spread.
+  - Popular candidate: (no one named)
+  - The Religious Authorities: (no one named)
+  The trouble's own hooks:
+    * A would-be heir approaches outsiders to investigate a rival's past.
+People to voice:
+  - Mustafa al-Malik · Headman [side: The Headman's Authority] — because he holds the seat — Wants to tell the right story to the right person, and watch it spread.
+Facts:
+  Food: Secure. No granary; about a month and a half in household stores.
+  Defence: No walls and no standing force.
+Hooks:
+  * Their apprentice has been talking to a rival, and came back with an offer to buy them out. (Mustafa al-Malik)
+  * They overheard two people they know settle a bribe, and do not know whom to tell. (The High Priestess)
+  * The member has been hidden by his own side, and the other side is offering a reward. (Headman's Authority vs Military Party)
+
+=== frame-calm-village-20 (village) — W3 impaired-chain, opening on resource_scarcity at #1
+--- digests: line ad73a0aee96160eb · tip owner d49362ceae4298f2 · tip stranger ad73a0aee96160eb (stranger = line)
+--- BEFORE (the line, today's owner sheet)
+Opening: A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+People to voice:
+  - Nomun Barlas · Reeve [seat] — Wants to ask Günji Olqunu'ud for a favour that settles a share of the debt.
+  - Zagdaakhüü Mangghud · the priest [cleric] — Wants to learn what Jochi Olqunu'ud has been saying about them, and to whom.
+Facts:
+  Food: Secure. No granary; about a month and a half in household stores.
+  Defence: No walls and no standing force.
+Hooks:
+  * A rival has hired away their two best hands in one week, on wages the rival cannot afford for long. (Nomun Barlas)
+  * The timber carts stopped coming a month ago, and the builders are bidding against each other for what is left in the yards. (Resource Conflict)
+  * A traditional practice conceals something the elders don't want examined. (Generational Divide)
+--- AFTER (the tip, the owner)
+Opening: A critical resource is running short, and some are hoarding it while others cannot pay the prices asked.
+The trouble: Resource scarcity
+Its three sides:
+  - Those hoarding what they can: Günji Olqunu'ud · the tanner — Because she and Tümer Merkit are rivals, and neither gives the other ground. Was present when Nomun Barlas did something they've never accounted for publicly. Neither has acknowledged the other was there.
+  - Those who cannot pay the prices: Tümer Merkit · the cobbler — Because he and Günji Olqunu'ud are rivals, and neither gives the other ground. Wants to pay every hand at the cobbler's shop in full and on time this season.
+  - Those who would fix a fair price: Jochi Olqunu'ud · the miller — Because the trouble touches his trade. Wants to take on the work in the Elected Reeve that no one else wants, and do it without complaint.
+  The trouble's own hooks:
+    * The scarcity was engineered. Someone destroyed the competing supply route.
+    * An alternative source exists but the information is being suppressed.
+People to voice:
+  - Günji Olqunu'ud · the tanner [side: Those hoarding what they can] — because she and Tümer Merkit are rivals, and neither gives the other ground — Was present when Nomun Barlas did something they've never accounted for publicly. Neither has acknowledged the other was there.
+  - Tümer Merkit · the cobbler [side: Those who cannot pay the prices] — because he and Günji Olqunu'ud are rivals, and neither gives the other ground — Wants to pay every hand at the cobbler's shop in full and on time this season.
+  - Jochi Olqunu'ud · the miller [side: Those who would fix a fair price] — because the trouble touches his trade — Wants to take on the work in the Elected Reeve that no one else wants, and do it without complaint.
+Facts:
+  Food: Secure. No granary; about a month and a half in household stores.
+  Defence: No walls and no standing force.
+Hooks:
+  * They overheard two people they know settle a bribe, and do not know whom to tell. (Jochi Olqunu'ud)
+  * Their son has been seen at night with people who do not work, and comes home with coin. (Günji Olqunu'ud)
+  * They lent their savings to a friend who has since left, and the friend's family says there was no loan. (Tümer Merkit)
