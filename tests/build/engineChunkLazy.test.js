@@ -523,8 +523,12 @@ describe('FORTUNE U6 — the fortune law leaves the first-paint closure for its 
   const staticDeps = (file) => {
     const code = readFileSync(join(assetsDir, file), 'utf-8');
     const specs = new Set();
-    for (const m of code.matchAll(/\bfrom\s*["']\.\/([^"']+\.js)["']/g)) specs.add(m[1]);
-    for (const m of code.matchAll(/(?:^|[;}])import\s*["']\.\/([^"']+\.js)["']/g)) specs.add(m[1]);
+    for (const m of code.matchAll(/\bfrom\s*["']\.\/([^"']+\.js)["']/g)) {
+      specs.add(m[1]);
+    }
+    for (const m of code.matchAll(/(?:^|[;}])import\s*["']\.\/([^"']+\.js)["']/g)) {
+      specs.add(m[1]);
+    }
     return [...specs];
   };
   const entryClosure = () => {
@@ -532,7 +536,14 @@ describe('FORTUNE U6 — the fortune law leaves the first-paint closure for its 
     const entry = html.match(/<script[^>]*type="module"[^>]*src="\/assets\/([^"]+)"/)[1];
     const seen = new Set([entry]);
     const queue = [entry];
-    while (queue.length) for (const dep of staticDeps(queue.shift())) if (!seen.has(dep)) { seen.add(dep); queue.push(dep); }
+    while (queue.length) {
+      for (const dep of staticDeps(queue.shift())) {
+        if (!seen.has(dep)) {
+          seen.add(dep);
+          queue.push(dep);
+        }
+      }
+    }
     return seen;
   };
 
