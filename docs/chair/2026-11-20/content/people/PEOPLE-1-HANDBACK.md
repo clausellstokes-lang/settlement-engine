@@ -1,4 +1,4 @@
-# PEOPLE-1 hand-back (kept current at every push; last written 2026-11-20T19:16Z)
+# PEOPLE-1 hand-back (kept current at every push; last written 2026-11-20T20:31Z)
 
 Seat: PEOPLE-1 of the seventh chair (chair session_019yED1SUxGVHyjQnoqoFvQ8). Assignment: `git show origin/lane/chair-2026-11-08:docs/chair/2026-11-20/seventh/prompts/PEOPLE-1.txt`.
 Branch: `lane/people-1-2026-11-20`, cut from the working line `lane/join-2026-11-14` at `43ab0f5eb`. Builder branches: `lane/people-1-m<N>-2026-11-20` (pushed as each returns; the integrator cherry-picks their commits).
@@ -65,3 +65,12 @@ FOUNDING: in scope (it prints through the traditions card): measure `foundedBy` 
 PROJECTIONS TAKEN: why the place is here 28/25/17/15/100/96% to 13/11/7/9/12/14%; relations 67/26/66/61/71/90% to 67/16/13/14/12/14% (the thorp's occupier line unpooled); the powers' leaf 41/35/41/34/38/86% to 10/10/12/9/14/11%. Re-measured on the built tree BY THE SENTENCE, on 150 places a size."
 
 OWED BY PEOPLE-2 (from the verdict): the count of codas printing in more than half of a size's places, for the owner (the cure for that is the who-rules and fortune laws). My lane already carries the kernel-mix merge (aa8475d42).
+
+## B1 AND B1b MERGED; B1c IN FLIGHT (state at 2026-11-20T20:31Z)
+- Merged on the lane: 629892ec3 (B1 + B1b at 192163821), afd7443f5 (the fill fix 628301ccb: three re-cut wordings approved by the chair 19:29; NOT_A_GOOD widened from the data homes). Builder branches on origin: `lane/people-1-b1-2026-11-20` at 628301ccb; `lane/people-1-b1-2026-11-20-wip` at 192163821 (superseded; its tree = d20c7b080 less the fill list).
+- My one read: every code and test diff of B1, after the compaction boundary. RED re-run at B1's base 11c9df9f0: both spread tests red. Base reds (fail identically at 11c9df9f0): worldFactRederive A7, generationForkCensus A1, espionageDormancyFence.
+- SHARES BY THE SENTENCE, 150 a size, thorp..metropolis: position 45/35/38/67/72/70% -> 11/12/11/17/22/22%; constraint 46/35/38/73/92/89% -> 12/11/13/18/15/18%. The city/metropolis 22% is the bare "Holds the seat." (left bare by the 16:41 ruling; a named survivor).
+- FOR PEOPLE-2 (the chair, 20:18): (i) the town's 18% "Steady work earns no notice; getting ahead takes a crisis or a patron." (an unpooled constraint row); (ii) the metropolis faith constraint "The priests under it answer in name, but each keeps their own flock and their own ways." (18% on 150; 16 of 75 on the builder's 100): THREE MORE WORDINGS owed for that branch.
+- THE SIX tests/lint REDS, ruled 20:18: (1) ledgerCitationIntegrity: the review-fixes fetch, DONE (green); (2) mutation manifest: four rationale entries, DONE (8e740cea1); (3) pool dominance: the 23 NPC_STRUCTURE.* rows tightened by the door, after B1c; (4) index 0 in two files: RULED 20:30 (b) THE LAW WHOLE, staffed as B1c (briefs/B1c-indexzero-BUILD.md, fe2e7a920); (5) lighting census by its door, after B1c; (6) tuning inventory by TUNING_INVENTORY_REFREEZE, reason "npcStructure.js imports the goals' fillers", after B1c.
+- A SEVENTH red found by tests/lint whole on afd7443f5: arcaneClassifierCensus ("npcStructure.js:587 — arcane [enchant, spellcast] mixed with ambiguous [sage]": NOT_A_GOOD's alternation); sent to B1c as a second commit (the arcane names in their own alternation; the same names refused).
+- FIRST PAINT, one build of afd7443f5: raw 1,178,487; gzip 374,845; Brotli 314,731 (the line at 8196e5712: 1,177,668 / 374,676 / 314,472; budgets in vendorPdfLazy 1,175,492 / 373,999 / 313,994). Worker 2,617,618 B (ceiling 2,579,708). The base build (11c9df9f0) for attribution is running.
