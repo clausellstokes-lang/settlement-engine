@@ -61,20 +61,33 @@ const MUST_NOT = [
   ['r2s-occupied-metropolis-1', /When the occupiers left/, /When the last occupiers left, they left behind a metropolis/],
   ['r2r-village-21', /Racks of drying fish line the way in/, /The drying racks along the way in stand nearly bare, and only the smell of salt and old catch is left\./],
   ['r2r-city-44', /Racks of drying fish line the way in/, /The drying racks along the way in stand nearly bare/],
-  ['r2r-hamlet-16', /seems to be gutting, salting or selling fish/, /has worked fish all its life, and there is almost no fish to work\./],
-  ['r2r-hamlet-28', /Barrels of salt fish stand stacked/, /Empty salt barrels stand stacked by the water, and even the gulls have given up on them\./],
-  ['r2r-thorp-58', /Barrels of salt fish stand stacked/, /Empty salt barrels stand stacked by the water/],
+  // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): r2r-hamlet-16 -> r2s-famine-hamlet-2, a hamlet
+  // whose fish failed in the famine, the slot taking the twin
+  ['r2s-famine-hamlet-2', /seems to be gutting, salting or selling fish/, /has worked fish all its life, and there is almost no fish to work\./],
+  // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's three fish twins of 17:13: a refused L2 fish line now keeps its slot with
+  // its twin, so the draws after it moved): r2r-hamlet-28 -> r2r-hamlet-10, a hamlet whose fish is short, the slot taking the twin
+  ['r2r-hamlet-10', /Barrels of salt fish stand stacked/, /Empty salt barrels stand stacked by the water, and even the gulls have given up on them\./],
+  // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): r2r-thorp-58 -> r2s-under_siege-hamlet-0, a
+  // besieged place whose fish house is stopped, the slot taking the twin
+  // RE-KEYED BY IDENTITY 2026-11-20 (L2, the same): r2s-under_siege-hamlet-0 -> r2s-under_siege-village-13, a besieged place
+  // whose fish house is stopped, the slot taking the twin
+  ['r2s-under_siege-village-13', /Barrels of salt fish stand stacked/, /Empty salt barrels stand stacked by the water/],
   // BAR4-SCENES-2 (2026-11-16, re-keyed by identity): the slot's first draw here is the basket line, which now has its own twin (the chair's
   // ruling HW1: a twin keeps the slot and spends no redraw), so the redraw that reached the nets line is no longer spent; the false words stay out
   ['r2s-famine-thorp-0', /the smell of the catch follows you/, /An empty fish basket is carried past, back from the water with nothing in it\./],
   ['r2s-under_siege-village-1', /the smell of the catch follows you/, /Nets hang drying on poles, and they have brought in little for a long while\./],
-  ['r2r-thorp-8', /A caravan broker shouts terms/, /A pair of pack animals stands in a yard, unladen, while their keeper mends a strap\./],
+  // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): r2r-thorp-8 -> r2r-thorp-42, a thorp with no
+  // market where the broker is refused and its twin takes the slot
+  ['r2r-thorp-42', /A caravan broker shouts terms/, /A pair of pack animals stands in a yard, unladen, while their keeper mends a strap\./],
   // RE-KEYED BY IDENTITY (TAIL-CLOSE-POOLS-2, 2026-11-15): r2s-plague_onset-village-0 printed the broker only on the history's own
   // branch; on the joined line its arrival's later beats are dealt otherwise (no broker and no twin at 796c49ef0 and every point after).
   // r2r-hamlet-41 holds the row's identity: the broker refused, its twin on the slot (one of the five census towns that print it).
-  ['r2r-hamlet-41', /A caravan broker shouts terms/, /A pair of pack animals stands in a yard, unladen/],
-  ['r2s-under_siege-city-8', /A money changer sits at his table with coins from many mints/, /A money changer sits at his table with little to do, counting the same coins from many mints again\./],
-  ['r2s-under_siege-metropolis-43', /A money changer sits at his table with coins from many mints/, /A money changer sits at his table with little to do/],
+  // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): r2r-hamlet-41 -> r2r-hamlet-70 (the same)
+  ['r2r-hamlet-70', /A caravan broker shouts terms/, /A pair of pack animals stands in a yard, unladen/],
+  // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): r2s-under_siege-city-8 and -metropolis-43 ->
+  // r2s-under_siege-metropolis-33 and -50, greek towns under the siege (the census's own family, extended) whose slot takes the twin
+  ['r2s-under_siege-metropolis-33', /A money changer sits at his table with coins from many mints/, /A money changer sits at his table with little to do, counting the same coins from many mints again\./],
+  ['r2s-under_siege-metropolis-50', /A money changer sits at his table with coins from many mints/, /A money changer sits at his table with little to do/],
   ['r2s-under_siege-town-8', /The clatter of looms follows you/, /Here and there someone works cloth behind a shutter in .+, though little of it goes out these days\./], // BAR6-SCENES (2026-11-16, LAW 6 rule 6b; re-keyed by identity): the siege twin reworded to name no loom
   ['r2s-under_siege-metropolis-67', /The clatter of looms follows you/, /Bolts of cloth and bales of wool are stacked in the shops, and none of it is going anywhere\./], // BAR6-SCENES (2026-11-16, LAW 6 rule 6b; re-keyed by identity): the first draw is the road out, refused by the siege; its twin (reworded, held to no route) now keeps the slot, so no redraw lands on the looms
   ['r2s-under_siege-thorp-1', /creditor's agent is in town/i, SILENT, 'r2r-thorp-28'],
@@ -94,11 +107,15 @@ const MUST_NOT = [
 const KEEP = [
   ['r2r-village-23', /When the occupiers left, they left behind a village of former collaborators and former resisters, none of it ever settled/],
   ['r2r-thorp-43', /Racks of drying fish line the way in, and the smell of salt and catch is everywhere\./],
-  ['r2r-thorp-22', /seems to be gutting, salting or selling fish\./],
-  ['r2r-thorp-53', /Barrels of salt fish stand stacked by the water, and the gulls have opinions about every one\./],
+  // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): r2r-thorp-22 -> r2r-thorp-44, a thorp whose catch is taken here
+  ['r2r-thorp-44', /seems to be gutting, salting or selling fish\./],
+  // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): r2r-thorp-53 -> r2r-thorp-22, a thorp whose fish is at work by navigable water
+  ['r2r-thorp-22', /Barrels of salt fish stand stacked by the water, and the gulls have opinions about every one\./],
   ['r2r-thorp-27', /Nets hang drying on poles, and the smell of the catch follows you\./],
-  ['r2r-city-15', /A caravan broker shouts terms to a line of laden animals and the people leading them\./],
-  ['r2r-metropolis-13', /A money changer sits at his table with coins from many mints\./],
+  // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): r2r-city-15 -> r2r-city-8, a steppe market city with a road open
+  ['r2r-city-8', /A caravan broker shouts terms to a line of laden animals and the people leading them\./],
+  // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): r2r-metropolis-13 -> r2r-metropolis-63, a greek metropolis under no siege
+  ['r2r-metropolis-63', /A money changer sits at his table with coins from many mints\./],
   ['r2r-town-9', /The clatter of looms follows you through .+, from one shutter to the next\./],
   ['r2r-thorp-28', /creditor's agent is in town conducting a quiet assessment before enforcement/i],
   ['r2r-town-50', /Price ceilings on the affected goods still enforced in lean seasons/],

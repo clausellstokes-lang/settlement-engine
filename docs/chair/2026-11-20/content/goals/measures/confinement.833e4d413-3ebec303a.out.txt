@@ -1,0 +1,70 @@
+trees.mjs: births at 833e4d413
+names3 born: exit codes 0,0
+trees.mjs: births at 3ebec303a
+names3 born: exit codes 0,0
+trees.mjs: 833e4d413 -> 3ebec303a
+## golden: documents 525 · identical 282 · with a non-string difference 39 · differing strings 2760 · of them passing the word check (none) 2760 · other 0
+| npcs[].goal.long | 1470 | 215 |
+| npcs[].goal.short | 1170 | 199 |
+| npcs[].goal.intent.short.family | 38 | 38 |
+| npcs[].goal.intent.short.kind | 38 | 38 |
+| npcs[].goal.intent.short.key | 38 | 38 |
+| npcs[].goal.intent.long.family | 2 | 2 |
+| npcs[].goal.intent.long.kind | 2 | 2 |
+| npcs[].goal.intent.long.key | 2 | 2 |
+NON-STRING town|germanic|coastal|port|civilized|golden-master-v3 npcs[0].goal.intent.short.target: null -> {"kind":"npc","id":"npc_shipyard"}
+NON-STRING town|latin|coastal|port|civilized|golden-master-v3 npcs[0].goal.intent.short.target: null -> {"kind":"npc","id":"npc_shipyard"}
+NON-STRING town|celtic|coastal|port|civilized|golden-master-v3 npcs[0].goal.intent.short.target: null -> {"kind":"npc","id":"npc_shipyard"}
+NON-STRING town|arabic|coastal|port|civilized|golden-master-v3 npcs[0].goal.intent.short.target: null -> {"kind":"npc","id":"npc_shipyard"}
+NON-STRING town|norse|coastal|port|civilized|golden-master-v3 npcs[0].goal.intent.short.target: null -> {"kind":"npc","id":"npc_shipyard"}
+NON-STRING town|slavic|coastal|port|civilized|golden-master-v3 npcs[0].goal.intent.short.target: null -> {"kind":"npc","id":"npc_shipyard"}
+NON-STRING town|east_asian|coastal|port|civilized|golden-master-v3 npcs[0].goal.intent.short.target: null -> {"kind":"npc","id":"npc_shipyard"}
+NON-STRING town|mesoamerican|coastal|port|civilized|golden-master-v3 npcs[0].goal.intent.short.target: null -> {"kind":"npc","id":"npc_shipyard"}
+NON-STRING town|south_asian|coastal|port|civilized|golden-master-v3 npcs[0].goal.intent.short.target: null -> {"kind":"npc","id":"npc_shipyard"}
+NON-STRING town|steppe|coastal|port|civilized|golden-master-v3 npcs[0].goal.intent.short.target: null -> {"kind":"npc","id":"npc_shipyard"}
+NON-STRING town|greek|coastal|port|civilized|golden-master-v3 npcs[0].goal.intent.short.target: null -> {"kind":"npc","id":"npc_shipyard"}
+NON-STRING town|mediterranean|coastal|port|civilized|golden-master-v3 npcs[0].goal.intent.short.target: null -> {"kind":"npc","id":"npc_shipyard"}
+NON-STRING metropolis|germanic|riverside|river|civilized|golden-master-v3 npcs[23].goal.intent.short.target: null -> {"kind":"power","id":"Thieves' Guild"}
+NON-STRING metropolis|germanic|coastal|port|civilized|golden-master-v3 npcs[24].goal.intent.short.target: null -> {"kind":"power","id":"Thieves' Guild"}
+NON-STRING metropolis|latin|riverside|river|civilized|golden-master-v3 npcs[23].goal.intent.short.target: null -> {"kind":"power","id":"Thieves' Guild"}
+NON-STRING metropolis|latin|coastal|port|civilized|golden-master-v3 npcs[27].goal.intent.short.target: null -> {"kind":"power","id":"Thieves' Guild"}
+NON-STRING metropolis|celtic|riverside|river|civilized|golden-master-v3 npcs[24].goal.intent.short.target: null -> {"kind":"power","id":"Thieves' Guild"}
+NON-STRING metropolis|celtic|coastal|port|civilized|golden-master-v3 npcs[26].goal.intent.short.target: null -> {"kind":"power","id":"Merchant Guilds"}
+NON-STRING metropolis|arabic|riverside|river|civilized|golden-master-v3 npcs[23].goal.intent.short.target: null -> {"kind":"power","id":"Thieves' Guild"}
+NON-STRING metropolis|arabic|coastal|port|civilized|golden-master-v3 npcs[27].goal.intent.short.target: null -> {"kind":"power","id":"Thieves' Guild"}
+## census: documents 720 · identical 398 · with a non-string difference 95 · differing strings 4933 · of them passing the word check (none) 4933 · other 0
+| npcs[].goal.long | 2523 | 292 |
+| npcs[].goal.short | 2054 | 285 |
+| npcs[].goal.intent.long.kind | 68 | 57 |
+| npcs[].goal.intent.long.family | 67 | 56 |
+| npcs[].goal.intent.long.key | 67 | 56 |
+| npcs[].goal.intent.short.kind | 54 | 51 |
+| npcs[].goal.intent.short.family | 50 | 48 |
+| npcs[].goal.intent.short.key | 50 | 48 |
+NON-STRING r2r-village-6 npcs[5].goal.intent.short.target: null -> {"kind":"npc","id":"npc_travelers_inn"}
+NON-STRING r2r-town-20 npcs[10].goal.intent.short.target: null -> {"kind":"power","id":"Military Council"}
+NON-STRING r2r-town-34 npcs[4].goal.intent.long.target: null -> {"kind":"npc","id":"npc_carriers_guild"}
+NON-STRING r2r-city-3 npcs[45].goal.intent.short.target: null -> {"kind":"power","id":"Merchant Guilds"}
+NON-STRING r2r-city-9 npcs[31].goal.intent.short.target: null -> {"kind":"power","id":"Merchant Guilds"}
+NON-STRING r2r-city-11 npcs[67].goal.intent.long.target: null -> {"kind":"house","id":"Blacksmiths (3-10)"}
+NON-STRING r2r-city-16 npcs[46].goal.intent.long.target: null -> {"kind":"house","id":"Weavers/Textile workers"}
+NON-STRING r2r-city-19 npcs[60].goal.intent.short.target: null -> {"kind":"house","id":"Brewery"}
+NON-STRING r2r-city-20 npcs[44].goal.intent.long.target: null -> {"kind":"npc","id":"npc_toll_bridge"}
+NON-STRING r2r-city-21 npcs[19].goal.intent.short.target: null -> {"kind":"npc","id":"npc_warehouse_district"}
+NON-STRING r2r-city-24 npcs[24].goal.intent.long.target: null -> {"kind":"house","id":"Weavers/Textile workers"}
+NON-STRING r2r-city-27 npcs[5].goal.intent.long.target: null -> {"kind":"npc","id":"npc_wizard_s_tower"}
+NON-STRING r2r-city-27 npcs[50].goal.intent.long.target: null -> {"kind":"npc","id":"npc_carpenters_5_15"}
+NON-STRING r2r-city-27 npcs[53].goal.intent.short.target: null -> {"kind":"house","id":"Specialized metalworkers"}
+NON-STRING r2r-city-28 npcs[6].goal.intent.short.target: null -> {"kind":"npc","id":"npc_merchant_guilds_15_40"}
+NON-STRING r2r-city-35 npcs[31].goal.intent.long.target: null -> {"kind":"house","id":"Potter"}
+NON-STRING r2r-city-37 npcs[54].goal.intent.short.target: null -> {"kind":"house","id":"Sawmill (commercial)"}
+NON-STRING r2r-city-42 npcs[5].goal.intent.long.target: null -> {"kind":"npc","id":"npc_parish_churches_10_30"}
+NON-STRING r2r-city-48 npcs[22].goal.intent.long.target: null -> {"kind":"house","id":"Potter"}
+NON-STRING r2r-city-48 npcs[30].goal.intent.long.target: null -> {"kind":"npc","id":"npc_bakers_5_15"}
+exit 0
+
+# CONTROL 833e4d413 -> 833e4d413
+trees.mjs: 833e4d413 -> 833e4d413
+## golden: documents 525 · identical 525 · with a non-string difference 0 · differing strings 0 · of them passing the word check (none) 0 · other 0
+## census: documents 720 · identical 720 · with a non-string difference 0 · differing strings 0 · of them passing the word check (none) 0 · other 0
+exit 0
