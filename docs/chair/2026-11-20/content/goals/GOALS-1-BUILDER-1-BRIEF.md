@@ -32,3 +32,14 @@ Your new test file red on the base (stash nothing: write the test first, run it,
 
 ## Your files
 `src/generators/people/goals.js`, `src/data/people/goalFamilies.js` (the one empty export), the new test file, and `tests/data/goalFamilies.test.js` only if its shape test needs the new export. Nothing else. No rename of any function or file. Do NOT commit and do NOT push: leave the work in the tree and report back (files changed, red and green with their counts, the logs' paths, anything you could not do).
+
+## AMENDMENT (10:30 UTC, the chair's rulings of 10:28 UTC; where it differs from the text above, THIS GOVERNS)
+1. **Repeat status is read from pass one alone.** A holding is a REPEAT iff an EARLIER holding of pass one (or a keeper) has its key. A holding that is not a repeat is never moved, whatever pass two does. Pass two keeps a count per key: every key pass one dealt to a non-repeater, plus every key pass two assigns (rotated to, or a repeat that stands).
+2. **A repeat chooses, in rotation order from its drawn position (k = 0 … n−1, k = 0 being the drawn candidate itself, skipping `refused`), in this order of preference:**
+   (i) the first candidate whose key has count 0 (k = 0 cannot qualify: a repeat's own key has count ≥ 1);
+   (ii) else the first whose key has count 1 and whose one holder is NOT of the same house as this card (`institution.kind === 'house'` and the same `institution.key`), NOT tied to this card (any relationship in `relationships` between the two, either direction, covert or not), and shares NO power with it (`domain/facts/sharedPower.js :: sharesPower`);
+   (iii) else the first whose key has count 1 and whose holder is neither of the same house nor tied to this card;
+   (iv) else the drawn candidate stands (counted: `receipt.repeat`, as before).
+   So no template is held more than twice where the cell allows, and a template held twice is never held by two of one house or two people tied to each other.
+3. **The receipt** of a repeat says which rung chose it: `receipt.repeat = { short: 'free' | 'twice' | 'twice-same-power' | 'stands' }` (`free` for (i)). `rotated` stays as before.
+4. **Tests:** (a) holds as written. (c), the exhausted kind, now asserts: with two wordings free of count, they are taken first; then no wording held by three where the cell allows; a template held twice is not held by two of one house nor by two tied; and a wording that must be held a third time stands and is counted. Add (d): a planted pair of one house where rung (ii) passes over the house-mate's wording for another holder's.
