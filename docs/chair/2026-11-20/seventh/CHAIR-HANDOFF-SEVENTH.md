@@ -2576,3 +2576,17 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   built (`faith.templeFraud`; `power:desk.structureFlag`; `economics.shadowEconomy`; `economics.incomeWeight`): R5
   takes them to 0. SEAT-3 (08:41) read in lean (about 115,000 by its estimate plus a third) and re-ran the holder's
   measure on 900 and 960 towns byte for byte; it waits for the lane.
+- 08:47 UTC · **THE NAMES LANDING IS RE-EXECUTED BY AN INDEPENDENT SEAT AND HOLDS; THE CONFINEMENT TOOL IS SHARED.** NAMES-3
+  (08:46): "CONFINEMENT-TOOL d1d8ffff8" on `lane/names-3-2026-11-20`:
+  `docs/chair/2026-11-20/content/tools/confinement/trees.mjs <rev-before> <rev-after> <workdir>
+  [--words=number|names|none] [--control]` (the golden's 525 and the census's 720 born in each tree; every document
+  diffed key by key). ITS FIRST RUN, 7e0c77ae2 AGAINST e356c94f2, REPRODUCES THE NAMES SEAT'S FIGURES EXACTLY: the
+  golden's 525: 4 identical, 0 non-string differences, 21,309 string leaves; the census's 720: 76 identical, 0
+  non-string, 25,429; the same fields, the same counts. Its names word-check passes 21,308 and 25,407; THE 23 OTHERS
+  ARE PUNCTUATION ONLY (a line taken out of its bracket; "(the workhouse master)'s"): asked for each, before and
+  after, with a judgement (a possessive after a bracket reads like a wart: those join its later list). THE CONTROL
+  BITES (every neighbour pair flagged non-string; `--words=number` flags all 46,738). e356c94f2 AGAINST 37b90e66b:
+  ALL 1,245 IDENTICAL (the merge of the line and the titles table moved no born town). `tests/lint` whole at the
+  tool's commit: 220 files, 3,271. SO ROW 77's CLEARANCE IS NO LONGER "PLAUSIBLE": RE-EXECUTED (to be written into
+  the row at the next landing). The tool's commit sent to SEAT-3 (for U8, the light: dark units keep the simple
+  hash proof) and to FRAME-3 for FRAME-4 (P1 to P4b). Its verdict on the verb agreement (9157373d0) follows.
