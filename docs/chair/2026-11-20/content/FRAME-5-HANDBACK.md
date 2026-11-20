@@ -1,19 +1,25 @@
-# FRAME-5 — hand-back (the session sheet's lane, third owner after FRAME-3 and FRAME-4)
+# FRAME-5 — hand-back (the session sheet's lane, the owner after FRAME-3 and FRAME-4)
 
-Last written 2026-11-20T12:49:47Z (`date -u`) by FRAME-5 on `lane/frame-5-2026-11-20`. The lane was taken at `9e23a094d` on the chair's word "THE LANE IS YOURS at 9e23a094d" (11:12 UTC). A successor needs this file and the briefs it names. Read it with `FRAME-4-HANDBACK.md`, whose rulings 18 to 25 stay in force, and `FRAME-3-HANDBACK.md`, whose rulings 1 to 17 stay in force.
+Last written 2026-11-20T13:12:45Z (`date -u`) by FRAME-5 on `lane/frame-5-2026-11-20`. The lane was taken at `9e23a094d` on the chair's word "THE LANE IS YOURS at 9e23a094d" (11:12 UTC). A successor needs this file and the briefs it names. Read it with `FRAME-4-HANDBACK.md`, whose rulings 18 to 25 stay in force, and `FRAME-3-HANDBACK.md`, whose rulings 1 to 17 stay in force.
 
 ## THE COUNT THE OWNER READS FIRST
 
-**UNDER TODAY'S STANDING: 58 of 330 calm towns take the frame; 272 keep today's sheet byte for byte.** This was re-executed by FRAME-5 at `9e23a094d` and the pool read tried 484, calm 330.
+**UNDER TODAY'S STANDING, AT THE LANE TIP (CF12 merged), re-executed by FRAME-5 on the 330-town calm pool (tried 484):**
 
-| | thorp | hamlet | village | town | city | metropolis | total |
+| audience | thorp | hamlet | village | town | city | metropolis | total |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| framed | 0 | 8 | 15 | 5 | 12 | 18 | **58** |
-| today's sheet | 55 | 47 | 40 | 50 | 43 | 37 | **272** |
+| **the OWNER's sheet: framed** (W1 to W4) | 0 | 8 | 15 | 7 | 14 | 19 | **63** |
+| the owner's sheet: today's | 55 | 47 | 40 | 48 | 41 | 36 | **267** |
+| **every other reader: framed** | 0 | 0 | 0 | 0 | 0 | 0 | **0** (the audience gate) |
+| the count by W1 to W3 alone (the figure before CF12) | 0 | 8 | 15 | 5 | 12 | 18 | **58** |
 
-Cast and weight disagree on 0 towns. The opening trouble is unchanged from FRAME-4's hand-back.
+CF12 (W4, a hall in criminal hands with a live crime wave) opens 5 more owner's sheets: town-20, town-80, city-12, city-49 and metropolis-51. frame-calm-city-14 holds both facts too, but is already framed by that same crime wave and is unchanged byte for byte. Cast and weight disagree on 0 towns.
 
-**One command against any tree** (another lane's law may be forced on with ENV=VAL): `sh count.sh <tree>/src/ <outdir> [ENV=VAL ...]`. `count.sh` wraps B2's `pool.mjs` and `cf11weight.mjs`, extracted verbatim from `frame2/B2-WEIGHT-RESULTS.md` ("The scripts"). The table's "W2 held" probe row is B2's original probe, so it reads 0 after B9. That is not the count.
+**Instruments, one command each.**
+- The count: `sh count.sh <tree>/src/ <outdir> [ENV=VAL ...]`. ENV=VAL forces another lane's law on, e.g. FORTUNE's switch once it exists. `count.sh` wraps B2's `pool.mjs` and `cf11weight.mjs`, extracted verbatim from `frame2/B2-WEIGHT-RESULTS.md` ("The scripts"). Its "W2 held" probe row is B2's pre-B9 probe and is not the count. Its "framed" row includes W4 from CF12 on; its W1 to W3 rows do not list W4.
+- CF12's six towns: `count/cf12.mjs pool.json <src/>` (embedded in `frame5/CF12-CAPTURED-HALL.md`).
+- S8's side-renaming probe: `count/s8probe.mjs pool.json <src/>`.
+- These scripts live in the FRAME-5 scratchpad `count/`. A successor re-extracts `pool.mjs` and `cf11weight.mjs` from B2's results file, and `cf12.mjs` from the CF12 brief.
 
 ## RULINGS ADDED SINCE FRAME-4's LIST
 
@@ -67,9 +73,21 @@ Cast and weight disagree on 0 towns. The opening trouble is unchanged from FRAME
 | registers at U0 + C1 | DONE | `8991b83b2` | lighting: files 3714, credited 3241, titles 31268, suiteTitles 8661, plain 34/34; wiring delta 0 |
 | `tests/lint` whole at `8991b83b2` | 2 red | — | `tuningRegister` (ruling 14's two rows + U0's WANT_MAX_WORDS row); `seedLoopTotality`: C1's `crisisDealerReason.test.js` line 112, a bare seed loop, CURED by C1's builder at `e7469b17e` and merged at `10758b67f`. Re-run at the lane tip: crisisDealerReason 6/6, seedLoopTotality 9/9, lighting 34/34 (no title moved). The lane's `tests/lint` state is therefore `tuningRegister` alone (three named rows) |
 | **P1b** | MERGED | `99eaeb518` (085fc9c18); registers `02ad22e47` | Diff read. The owner-only line after the outside hand's stored reason: "an outside hand, unnamed; Chae Yang keeps the alehouse where its people come and go" (`CRISIS_ABSENCE_REACH`, `lodgingKeeperOf`, `reachOf` in crisisPage.js). Reach: B7 5 of 14, the golden 120 of 288, natural 1 of 2. The builder's byte-identity over 1,245 towns: stored 1245/1245; non-owner pages 11205/11205; the owner's pages move only on the 126 predicted. Re-run by FRAME-5: red 4 failed on the pre-merge tree; merged 36 files, 314 passed. Lighting: files 3715, credited 3242, titles 31279, suiteTitles 8663; wiring delta 0. Pin amended: crisisPageAudience "the seam changes no page…" cuts only the owner's clause (stranger arms unchanged) |
-| **CF12** | BUILDER OUT (`frame5-cf12`, worktree scratchpad `wt-cf12`, from `8991b83b2`) | — | results `frame5/CF12-CAPTURED-HALL-RESULTS.md` |
-| P4a, C2, P1, P2, P3a, P3b, P4b, measures, six sheets, build + verify:dist | NOT STARTED | — | order: P4a after P1b (both crisisPage.js) -> C2 -> P1 -> P2 -> P3a -> P3b -> P4b -> measures -> sheets -> build + `verify:dist` |
+| **CF12** | MERGED | `f431ab5be` (73b78b8da); registers `eb555d407` | Diff read. W4 is `WEIGHT_GRADES`' own last row `'hall-captured'`, with `WEIGHT_MATTER.hall` `['crime_wave']` and `HALL_TAKEN` `['corrupted','capture']` on `powerStructure.factions[].captureState`. The two readers of the sheet's facts (`journalPages.js` crisis page; `coherence/crisisFactFindings.js`) pass `{ audience: owner }` under a walker (`tests/domain/summary/tonightSheetAudience.test.js`). Conflict: `frameShareVeil.test.jsx`, where P1b and CF12 each appended a describe, resolved as the union. Re-run by FRAME-5: red 5 failed on the pre-merge lane; merged 73 importers + crisis/tension/veil/seedLoop: 91 files, 705 passed, 1 expected fail; the count at the tip 63 (owner) by size, as the top table. The builder's: calm owner sheets 325/330 (the five W4 towns differ), stranger sheets 1320/1320, B7 owner 360/360 and stranger 1440/1440, the two readers' output 330/330 and 360/360; city-14 unchanged. The gate is `tonightSheet.js :: composeTonightSheet`'s owner check (first lock); the test is `frameShareVeil.test.jsx` › "CF12: a hall in criminal hands…" › "5 born towns: …every shared read and every page is today's". Pin moved, unsigned: `troubleCast.test.js` "the sharpest grade opens the sheet…". Lighting: files 3716, credited 3243, titles 31285, suiteTitles 8666; wiring delta 0. For the owner: `frame5/CF12-SHEETS.txt` (the six sheets before and after) |
+| `tests/lint` whole at `eb555d407` | DONE: 1 red, ruling 14 + U0 | — | 220 files, 3270 passed, 1 failed: `tuningRegister` on exactly three named rows, all unsigned and the owner's at the close: `sideArchetypes.js#FRAME_TUNING` (measured, not in the inventory); `crisisCast.js#CRISIS_CAST_TUNING` (dependents moved); `tonightSheet.js#WANT_MAX_WORDS` (dependents moved: U0, `CrisisSections.jsx` imports tonightSheet). CF12 adds none; seedLoopTotality green |
+| **HAND-OVER** | at this hand-back's own commit (the lane tip named in the hand-over message) to FRAME-6 | — | "FRAME-PART <commit>, HANDED OVER" sent to the chair |
+| P4a, C2, P1, P2, P3a, P3b, P4b, measures, six sheets, build + verify:dist | NOT STARTED: FRAME-6's | — | order: P4a (crisisPage.js; brief `frame4/FRAME4-BRIEFS-U0-P1B-P4A.md` § U2; U0, C1 and P1b are merged in its base) -> C2 (brief `frame5/C2-STAKES-PROSE.md`; U0 is merged, so its ORDER condition holds) -> P1 -> P2 -> P3a -> P3b -> P4b (briefs `frame4/FRAME4-BRIEFS-STORED.md`, design `frame2/B8-CF10-BUILDS.md`) -> the measures -> the six sheets -> build + `verify:dist`. For each stored unit, add CF12's W4 to proof (a): the owner's calm sheets of the 5 W4 towns are part of "every calm town" |
+
+## WHAT A SUCCESSOR MUST KNOW (beyond the rulings)
+
+- **Worktrees in the FRAME-5 scratchpad** (`wt-c1`, `wt-p1b`, `wt-cf12`, on branches `frame5-*`) are merged, and nothing in them is unmerged. `git worktree prune` after the container ends.
+- **The builders' branches are local only** (`frame5-c1`, `frame5-p1b`, `frame5-cf12`). Their commits ride the lane by merge.
+- **Gates were run in the main checkout, one at a time.** Never commit there while `tests/lint` runs: its walkers read the working tree.
+- **`node_modules` symlinks in worktrees and archives** need `node_modules` in `.git/info/exclude` (added) or the tree reads dirty to the lighting door.
+- **The S8 regression is averted by ruling 31, not by code.** If a seat ever renames stored sides, re-run `s8probe.mjs` first.
 
 ## EXECUTED OR PLAUSIBLE
 
-**Executed by FRAME-5:** the count, 58 by size, at `9e23a094d`; CF12's 6; the manifest union; the 71-file run; the re-pin proof (three archives); the lighting door and the wiring dry run; `tests/lint` whole. Logs are under the scratchpad's `merge/`.
+**Executed by FRAME-5:** the count, 58 by size, at `9e23a094d`, and 63 (owner) at the CF12 tip; CF12's 6; S8's probe; every merge's red on its pre-merge tree and its governing suites at the merged tree; U0's 1500-page byte-identity; the attribution of `WANT_MAX_WORDS` by archive; the manifest union; the 71-file run; the re-pin proof (three archives); the lighting door and the wiring dry run; `tests/lint` whole. Logs are under the scratchpad's `merge/`, `u0/`, `c1/`, `p1b/` and `cf12/`.
+
+**PLAUSIBLE (the builders' own, not re-executed by FRAME-5):** C1's B7, calm and golden identity counts; P1b's 1,245-town identity and its reach; CF12's identity counts and its six sheets. Each red-first and each merged-tree gate WAS re-run.
