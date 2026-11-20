@@ -70,7 +70,7 @@ import { composeArrivalScene, ROUTE_TO_SCENE } from './narrative/arrivalScene.js
 import { genRelNarrative, genSuccessionNarr } from './powerGenerator.js';
 import { mergeNPCLists } from './npcGenerator.js';
 import { enrichNPCsWithStructure } from './npcStructure.js';
-import { generateCrimeLevel, getStressHistory } from './npcGenerator.js'; import { heldByOthers } from './hookVariety.js'; // REVIEW-INTAKE-4, one line so no cited line moves
+import { generateCrimeLevel, getStressHistory } from './npcGenerator.js'; import { heldByOthers } from './hookVariety.js'; import { settleMisfitSecrets, withoutMarketWords } from './npc/factionLeaderSecret.js'; import { hasMarketInstitution } from '../domain/facts/market.js'; /* S9 (PAGE-6) */ // REVIEW-INTAKE-4, one line so no cited line moves
 import { generateSiegeCapability } from './narrative/siegeCapability.js';
 // The history half of the coherence tail. Extracted so the history REROLL runs
 // the same derivations assembly runs instead of shipping generateHistory's raw
@@ -973,7 +973,7 @@ export const enrichNpcCoherence = (settlement) => {
   // rank deal → A4 the handlers, draw-free, after the ranks they read. The receipts are left for the
   // assembly step's trace (steps/assembleSettlement.js); a regeneration's are dropped, as before.
   const rng = getActiveRng();
-  const landed = landMemberships(settlement, rawMergedNpcs, rng, settlement?._seed ?? null);
+  const landed = landMemberships(settlement, rawMergedNpcs, rng, settlement?._seed ?? null); settleMisfitSecrets(landed.all, { carry: hasMarketInstitution(settlement.institutions || []) ? undefined : withoutMarketWords }); // S9 (PAGE-6, S9-POST.md): every card dealt (the births, the overlay, the mints), the misfit secrets settled draw-free before the temperament yield and the ranks read them; a town with no market carries a row as mergeNPCLists does; one line, so no cited line moves
   const dealt = dealAllegiances(settlement, landed.all, rng);
   // (ALLEGIANCE-CAR4: the retired pass's compromised short goal is gone — the agent's goal is the ALLEGIANCE
   // family's, dealt at A9 with every other card's, people/goals.js :: dealGoals.)
