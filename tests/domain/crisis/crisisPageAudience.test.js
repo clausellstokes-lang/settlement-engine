@@ -18,6 +18,7 @@ import { join } from 'node:path';
 import { describe, expect, test } from 'vitest';
 import { composeCrisisPage, crisisPageForOwner } from '../../../src/domain/crisis/crisisPage.js';
 import { TONIGHT_AUDIENCES } from '../../../src/domain/summary/tonightSheet.js';
+import { CAST_ABSENCES } from '../../../src/domain/crisis/crisisCast.js';
 import { STRESS_TYPE_MAP } from '../../../src/data/stressTypes.js';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
@@ -29,6 +30,11 @@ const STRANGERS = [
   ["{ audience: 'Owner' }", [{ audience: 'Owner' }]], ["'owner' (not an options object)", ['owner']], ["{ audience: ['owner'] }", [{ audience: ['owner'] }]],
 ];
 const OWNER = ["{ audience: 'owner' }", [{ audience: TONIGHT_AUDIENCES.owner }]];
+/** FRAME-5 · P1B: the owner's page with its one owner-only clause cut (the outside hand's keeper, after the stored reason). */
+const withoutOwnerReach = (page) => page.map((x) => ({
+  ...x,
+  absent: x.absent.map((a) => (a.role === 'instigator' && a.reason.startsWith(`${CAST_ABSENCES.outsideHand}; `) ? { ...a, reason: CAST_ABSENCES.outsideHand } : a)),
+}));
 
 describe('U0: the crisis page is composed for an explicit reader', () => {
   test('the readers are the session sheet\'s closed set; only the owner is the owner, everything else fails closed', () => {
@@ -83,7 +89,10 @@ describe('U0: the crisis page is composed for an explicit reader', () => {
       if (forced) expect(inCrisis, `${seed}: born in its crisis`).toBe(true);
       if (inCrisis) expect(today.length, `${seed}: the page has its sections`).toBeGreaterThan(0);
       else { calm++; expect(today, `${seed}: a calm town has no page`).toEqual([]); }
-      for (const [label, args] of [...STRANGERS, OWNER]) expect(composeCrisisPage(s, ...args), `${seed} ${label}: today's page`).toEqual(today);
+      for (const [label, args] of STRANGERS) expect(composeCrisisPage(s, ...args), `${seed} ${label}: today's page`).toEqual(today);
+      // FRAME-5 · P1B: the owner's page is today's but for the one owner-only clause drawn behind the seam, the outside
+      // hand's keeper after the infiltration's absent instigator (tests/domain/crisis/crisisOutsideHand.test.js)
+      expect(withoutOwnerReach(composeCrisisPage(s, ...OWNER[1])), `${seed} ${OWNER[0]}: today's page, less the owner's clause`).toEqual(today);
     });
     expectNoSeedFailures(failures, 'every reader of every town gets today\'s crisis page');
     expect(calm, 'the natural pool holds calm towns').toBeGreaterThan(0);

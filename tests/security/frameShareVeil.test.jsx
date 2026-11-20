@@ -391,3 +391,89 @@ describe('CF3: the frame reaches no shared page', () => {
     expect(Object.keys(PDF_VARIANTS).sort()).toEqual(['campaign_state', 'canon_dossier', 'draft_brief', 'timeline_packet']);
   });
 });
+
+// FRAME-5 · P1B (B7 §P1b; the chair's ruling of 2026-11-20, vetoable by the owner: the infiltration's outside hand is
+// reached through a lodging keeper on the OWNER's crisis page only, behind U0's audience argument). Two of B7's forced
+// infiltrations whose instigator is absent as "an outside hand, unnamed" and whose record holds a free lodging keeper. The
+// owner's live editor draws the words on its Crisis tab (liveness: red at the base); the gallery page (default and DM
+// content shared) and the party link (Reveal DM off and on) offer no Crisis tab and print none of them; every reader who
+// is not the owner, of the shared record and of the owner's own record, composes today's crisis page, without them.
+describe('P1B: the outside hand\'s keeper is drawn for the owner only', () => {
+  const P1B_TOWNS = [
+    ['b7-infiltrated-hamlet-1', 'hamlet', 'Chae Yang keeps the alehouse where its people come and go'],
+    ['b7-infiltrated-town-0', 'town', 'Peppo Schubert keeps the taverns where its people come and go'],
+  ];
+  const STRANGER_OPTIONS = [undefined, null, {}, { audience: undefined }, { audience: TONIGHT_AUDIENCES.player }, { audience: TONIGHT_AUDIENCES.gallery }, { audience: 'Owner' }];
+  const handLine = (page) => page.find((x) => x.type === 'infiltrated')?.absent.find((a) => a.role === 'instigator')?.reason ?? null;
+
+  test(`the owner's Crisis tab reaches the hand; no shared page and no other reader does (${P1B_TOWNS.length} born towns)`, async () => {
+    const towns = [];
+    for (const [seed, tier, words] of P1B_TOWNS) {
+      const s = generateSettlementPipeline({ settType: tier, stressType: 'infiltrated' }, null, { seed, customContent: {} });
+      towns.push({ seed, words, s, reads: await sharedReadsOf(s) });
+    }
+    /** Render a page, wait for its tab strip, open the Crisis tab where offered; the page's text. */
+    const visit = async (element) => {
+      crisisMounts.length = 0;
+      const view = render(element);
+      await within(view.container).findByRole('tab', { name: /Overview/ }, { timeout: 60000 });
+      const tab = view.container.querySelector('#sf-tab-crisis');
+      let absent = [];
+      if (tab) {
+        fireEvent.click(tab);
+        await waitFor(() => expect(view.container.querySelector('[data-testid="crisis-tab"]')).toBeTruthy(), { timeout: 60000 });
+        absent = [...view.container.querySelectorAll('[data-testid="crisis-cast-absent"]')].map((p) => p.textContent || '');
+      }
+      const out = { offered: !!tab, absent, text: view.container.textContent || '', mounts: crisisMounts.slice() };
+      cleanup();
+      return out;
+    };
+    const seen = new Map();
+    for (const { seed, words, s, reads } of towns) {
+      const pages = [
+        ['owner', 'the live editor', <OutputContainer key="e" settlement={s} />],
+        ['stranger', 'the gallery page', <PublicDossierView key="g" dossier={reads.gallery} />],
+        ['stranger', 'the gallery page (DM content shared)', <PublicDossierView key="d" dossier={reads.galleryDmFull} />],
+        ['stranger', "the party link's page (Reveal DM off)", <PartyLinkView key="p" dossier={reads.partyLink} auth={{ user: null }} onReport={() => {}} />],
+        ['stranger', "the party link's page (Reveal DM on)", <PartyLinkView key="q" dossier={{ ...reads.partyLink, shareDm: true }} auth={{ user: null }} onReport={() => {}} />],
+      ];
+      const got = [];
+      for (const [who, where, element] of pages) {
+        try { got.push({ who, where, ...(await visit(element)) }); } catch (error) { cleanup(); got.push({ who, where, error }); }
+      }
+      seen.set(seed, { words, s, reads, got });
+    }
+    const failures = collectSeedFailures([...seen.keys()], (seed) => {
+      const { words, s, reads, got } = seen.get(seed);
+      // the owner's record: the words for the owner, today's page for every other reader
+      expect(handLine(composeCrisisPage(s, { audience: TONIGHT_AUDIENCES.owner })), `${seed}: the owner's line`).toBe(`an outside hand, unnamed; ${words}`);
+      for (const options of STRANGER_OPTIONS) {
+        expect(composeCrisisPage(s, options), `${seed} ${JSON.stringify(options)}: today's page on the owner's record`).toEqual(composeCrisisPage(s));
+      }
+      expect(handLine(composeCrisisPage(s)), `${seed}: today's line`).toBe('an outside hand, unnamed');
+      // every shared record: today's page for every reader who is not the owner, and none of the words
+      for (const key of ['gallery', 'galleryDmFull', 'partyLink']) {
+        const shared = reads[key].settlement;
+        expect(hasActiveCrisis(shared), `${seed} ${key}: the shared record holds the crisis`).toBe(true);
+        for (const options of STRANGER_OPTIONS) {
+          const page = composeCrisisPage(shared, options);
+          expect(page, `${seed} ${key} ${JSON.stringify(options)}: today's page`).toEqual(composeCrisisPage(shared));
+          expect(JSON.stringify(page).includes(words), `${seed} ${key} ${JSON.stringify(options)}: no keeper for the hand`).toBe(false);
+        }
+      }
+      for (const { who, where, offered, absent, text, mounts, error } of got) {
+        if (error) throw error;
+        if (who === 'owner') {
+          expect(offered, `${seed} on ${where}: the Crisis tab is offered`).toBe(true);
+          for (const m of mounts) expect(m, `${seed} on ${where}: mounted for the owner`).toEqual({ said: true, audience: TONIGHT_AUDIENCES.owner });
+          expect(absent.some((line) => line.endsWith(`an outside hand, unnamed; ${words}`)), `${seed} on ${where}: the tab prints the owner's line`).toBe(true);
+        } else {
+          expect(offered, `${seed} on ${where}: no Crisis tab is offered`).toBe(false);
+          expect(mounts, `${seed} on ${where}: no Crisis tab is mounted`).toEqual([]);
+          expect(text.includes(words), `${seed} on ${where}: the page prints no keeper for the hand`).toBe(false);
+        }
+      }
+    });
+    expectNoSeedFailures(failures, 'on every infiltrated town, the owner\'s Crisis tab reaches the hand, and no shared page or other reader does');
+  }, 600000);
+});
