@@ -331,6 +331,18 @@ export const ENGINE_SHARED_DOMAIN_EXCISIONS = [
   '/src/domain/display/clergyHouse.js',
   '/src/domain/display/pluralPowerName.js',
   '/src/domain/display/powerSentenceName.js',
+  // FORTUNE U6 (2026-11-20, the chair's ruling of 19:44 UTC: probe C exactly): the fortune law leaves EAGER engine-core. NO
+  // first-paint module reaches src/domain/fortune/fortuneLaw.js (its five importers, prosperity, factionDynamics, rulingStructure,
+  // densityCreateBoundary and economyStateProse, all sit in lazy chunks); it rode engine-core only because ESD seeds every domain
+  // module a generator imports. A source cut changes nothing; this row does. Excised AND PINNED to its own `fortune-law` chunk
+  // (manualChunks below), the FP-G14 convention. ⛔ NEVER EXCISED WITHOUT THE PIN (probe B, measured): the orphan co-locates into the
+  // big lazy `engine` chunk and the densityCreateBoundary chunk gains a static edge to it, so the create/rederive boundary fetches the
+  // whole generator (the FP-G11 incident). ⛔ Nor pinned into a shared lazy list (coherence-lazy, engine-core-lazy; read, not
+  // probed): its lazy consumers import neither today. ⚠ THIS LIST, not FIRSTPAINT2_LAZY_DOMAIN below (that one routes coherence-lazy). MEASURED (npm run build, the vendorPdfLazy closure walk): first paint raw 1,179,219 -> 1,177,726,
+  // gzip 375,228 -> 374,696, Brotli 314,955 -> 314,727; the generation worker unchanged (2,590,351).
+  // The measure: docs/chair/2026-11-20/content/fortune/measures/firstpaint/FIRSTPAINT-CHAIN.md.
+  // @guarded-by tests/build/engineChunkLazy.test.js (FORTUNE U6: the excision's row, the pinned chunk, no densityCreateBoundary -> engine edge).
+  '/src/domain/fortune/fortuneLaw.js',
 ];
 // FIRSTPAINT-2 (LANDING-6, 2026-11-05; the chair's ruling on vendorPdfLazy x4, "a cure, not a rise"). The rung-1
 // window's lanes (CRISIS, the coherence findings of TRUTH / SELF-VOUCH / F1 / F3 / F9 / F10, PLACE-NOT-TIER's sea
@@ -1208,6 +1220,16 @@ export default defineConfig({
           //   from the entry closure + present in a lazy chunk).
           if (id.includes('/src/domain/content/customContentCharset'))
             return 'custom-charset';
+
+          // ── The fortune law (LAZY LEAF, its own chunk; FORTUNE U6) ──
+          // Excised from ESD above and pinned here, BEFORE the engine-core
+          // grouping. A zero-import leaf whose readers are all lazy, so its own
+          // chunk drags nothing and no eager chunk imports it. ⛔ The pin is the
+          // half that is never dropped: excised without it (probe B), the law
+          // lands in the big lazy `engine` chunk and densityCreateBoundary
+          // statically imports the whole generator to read it.
+          // @enforced-by tests/build/engineChunkLazy.test.js (FORTUNE U6).
+          if (id.includes('/src/domain/fortune/fortuneLaw.js')) return 'fortune-law';
 
           // ── Engine-core (generator-shared domain vocabulary) ──────
           // This derived grouping prevents Rollup from folding shared domain
