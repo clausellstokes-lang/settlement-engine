@@ -224,6 +224,19 @@ export const QUARREL_POOLS = Object.freeze({
     quarrel({ id: 'l7-forges', text: 'The smiths start their hammering before dawn, and the households beside the forges want them moved further out.', needs: ['institution: smith'] }),
     quarrel({ id: 'l8-dock-dues', text: 'The dock dues were raised at the start of the season, and the boat owners have complained of it ever since.', needs: ['institution: docks'] }),
   ]),
+  // THE MILITARY RUNG (`institutionFlags.militaryEffective > 68 && !seatIsMilitary`; the chair's word of 16:22 UTC,
+  // CONFLICT-LINES-2.md at 275cdbf26): each of its sub-branches is a pool, today's line at index 0. The commanders'
+  // sub-branch (a military house and a court); its index 0 keeps its own sibling set above (the court's twin).
+  MILITARY_COURT: Object.freeze([
+    quarrel({ id: 'ma0-commanders', text: 'The military commanders are pushing for expanded authority over civilian courts, and the council is losing ground.', needs: ['court'] }),
+    quarrel({ id: 'ma1-watch-captains', text: 'The watch captains want to settle small disputes themselves instead of sending them to the court, and the council has not agreed.', needs: ['watch', 'court'] }),
+  ]),
+  // the else sub-branch (neither the commanders' nor the civic one, which keeps its one line). mb1 ("The militia want to
+  // decide who keeps the night watch, …", [militia]) is WITHHELD: both presumed-things arms read its "night watch" as
+  // the watch standing (`watch`), and the corpus prints it where none stands; the chair rules (reword, declare, or row)
+  MILITARY_ARMED: Object.freeze([
+    quarrel({ id: 'mb0-armed-household', text: "The strongest armed household has started making decisions on everyone's behalf without asking.", needs: [] }),
+  ]),
 });
 
 /**
@@ -235,4 +248,6 @@ export const QUARREL_POOLS = Object.freeze({
 export const QUARREL_POOL_OF_RUNG = Object.freeze({
   [/** @type {string} */ (QUARREL_POOLS.GRAZING[0].text)]: 'GRAZING',
   [/** @type {string} */ (QUARREL_POOLS.LEVIES[0].text)]: 'LEVIES',
+  [/** @type {string} */ (QUARREL_POOLS.MILITARY_COURT[0].text)]: 'MILITARY_COURT',
+  [/** @type {string} */ (QUARREL_POOLS.MILITARY_ARMED[0].text)]: 'MILITARY_ARMED',
 });
