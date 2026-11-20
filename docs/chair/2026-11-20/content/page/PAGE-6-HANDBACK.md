@@ -11,6 +11,17 @@ PAGE-6 KEEPS: L2's merge and S9's merge. EVERYTHING AFTER PASSES TO PAGE-8: L4; 
 ruling after A-NARROW); the guard (S9-POST commit 2, after L4); ARRIVAL-LINES-2; SECRET-LINES. PAGE-6 ends with
 "PAGE-PART <commit>, HANDED OVER" when L2 and S9 are merged, or at 420,000 by the chair's read.
 
+## 0a. F5 IS RULED (the chair, 18:26 UTC, VERBATIM, for PAGE-8)
+
+"F5 IS RULED: THE CURE IS A-NARROW. A principled, honest, incorruptible or plain-dealing card does not keep a venal secret: its secret walks, draw-free, to the next line its office admits; nothing else moves (arms A and B are withdrawn: they moved 902 and 1,031 cards to cure 139). CONDITIONS FOR THE BUILD (PAGE-8's, after your L2 and S9 merges and the hand-over): (1) THE PASS READS THE FINAL TEMPERAMENT: it runs after the last writer of temperament (`rankPowers`' yield moved 7 cards under it); red: on the 300, a card's temperament at the pass equals the one the record ends with, 0 differ. If that order cannot be had by moving one call, STOP and tell me why. (2) THE PASS NEVER HANDS A CARD A VENAL SECRET: the garrison commander who took "...inspection records for a fee" is a defect in the probe's admits: TRACED AND CURED before the merge; red: no card the pass moved ends with a secret on F5's venal list. (3) The 3 postmasters reached through title rows: accepted (they are narrow cards). (4) THE 20 SURVIVORS are named in the hand-back by office (prison warden 7, black marketeer 4, luxury merchant 2, seven singles) with the reason each has no admitted line; the black marketeer's is the trade, not the secret: left. (5) The two-tree tool: 0 non-string differences; the moved fields listed (secret, and the 5 personality and 1 goal lines explained or cured: a pass that walks a SECRET should not move a personality: say why it does)."
+
+A-NARROW's probe (scratch of c727a4d17, the 300): narrow F5 139 -> 20; F5 1,019 -> 894; 130 cards moved in 91 towns (119
+narrow + 11 others: 7 narrow at the pass but made warm-hearted later by `rankPowers`' yield, 3 principled postmasters via
+title rows, 1 house boss whose yield no longer fires); fields: secret 130, personality 5, goal.long 1. SURVIVORS 20: prison
+warden 7, black marketeer 4, luxury merchant 2, one each priest, bowyer, lord, chandler, dean, customs collector, brickmaker.
+Files: `measures/page-6/f5/A-narrow-diff.txt`, `A-narrow-cards.txt` (ten narrow cards whole before/after). The probe's patch
+lives only in the helper's scratch (`<scratch>/f5`); PAGE-8 rebuilds it from this description.
+
 ## 1. State
 
 - Lane `lane/page-6-2026-11-20`, cut at 79710682d (PAGE-3's final tip) + docs. NOTHING under `src/`/`tests/` merged yet.
