@@ -101,3 +101,24 @@ PLAUSIBLE, not executed: that CI's sharded verdict at the merge agrees (no merge
 Safety reads before the push: core.bare=false, user.name=Claude, every commit authored by Claude. The real repository's
 config gained only core.hookspath=.husky/_ (from `npm ci`'s husky install), and one remote-tracking ref
 (origin/review-fixes-2026-07-08, by a fetch).
+
+## 6. Addendum 2026-11-20 02:46 UTC: what the door and the hook forget, measured in this container (the chair's question)
+
+In this container the harness sets GIT_ASKPASS, GIT_CONFIG_COUNT, GIT_CONFIG_KEY_0..2, GIT_CONFIG_VALUE_0..2,
+GIT_EDITOR, GIT_SSL_CAINFO and GIT_TERMINAL_PROMPT. I added GIT_DIR, GIT_WORK_TREE, GIT_INDEX_FILE, GIT_COMMON_DIR,
+GIT_OBJECT_DIRECTORY, GIT_PREFIX and GIT_NAMESPACE, then ran each level's own function (EXECUTED):
+
+- **The runner level and the hook** (REPOSITORY_ENV: git's own `rev-parse --local-env-vars` less GIT_CONFIG_PARAMETERS and
+  GIT_CONFIG_COUNT; the hook's `unset` names the same thirteen) removed GIT_DIR, GIT_WORK_TREE, GIT_INDEX_FILE,
+  GIT_COMMON_DIR, GIT_OBJECT_DIRECTORY and GIT_PREFIX. It KEPT every harness variable, including GIT_SSL_CAINFO and all of
+  GIT_CONFIG_*. It also kept GIT_NAMESPACE, which is not on git's list. Its effect is ref namespacing inside whichever
+  repository git opens; it does not choose the repository. So under it a temp-directory fixture still writes to its own
+  repository. I did not change this; it is the chair's to rule.
+- **The fixture door** (`fixtureGitEnv`) drops EVERY ambient GIT_* except GIT_EXEC_PATH, so it drops GIT_SSL_CAINFO and
+  GIT_CONFIG_* too. It also switches off the global and system configuration and adds GIT_CEILING_DIRECTORIES. That is by
+  design: a fixture is a local throwaway repository and reads no network and no harness configuration. Measured
+  here: every fixture suite was green in this container, the whole suite under the hook included. A future fixture that
+  fetched over HTTPS through the proxy would lose the CA bundle and would have to pass it in `options.env`. Scripts
+  under test do NOT go through the door; they keep the harness variables (runner level only).
+- **The pushes from this container ran the new hook** (two, both green). The `unset` acts only on the hook's own
+  children, not on git's transport, and the harness's GIT_CONFIG_* and GIT_SSL_CAINFO survive it.
