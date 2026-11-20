@@ -237,7 +237,7 @@ The model above predicted 24.6% (ties) and 25.9% (hooks) at city. Placeholders r
      beside: desc "Years ago S did R a favour too large to repay, and R has been paying it back in small ways ever since." / tension "R has begun to act like someone who considers the debt paid. S does not."
 
 2. NEW desc: "S taught R to read when R was grown and ashamed to ask anyone else. R owes S for it and has never said so in company."
-   tension: "S's eyes are failing, and S has asked R to read something aloud. R is glad to, and finds it harder than expected to be thanked."
+   tension: "S has asked R to read something aloud, saying the light is poor. R is glad to, and finds it harder than expected to be thanked."
      beside: desc "R owes S for an old kindness. Neither mentions it, and both know exactly how much is still owed." / tension "Someone else has learned what favour R owes S, and now has a hold on R too."
      beside: desc "S paid R's bail eleven years ago and has never mentioned it. R mentions it to no one." / tension "S has asked R for a vote against R's own interests. It is the first payment S has asked for."
 
@@ -296,8 +296,8 @@ The model above predicted 24.6% (ties) and 25.9% (hooks) at city. Placeholders r
      beside: desc "R owes S a great deal, and neither has ever said so aloud." / tension "S is about to call it in."
      beside: desc "Years ago S did R a favour too large to repay, and R has been paying it back in small ways ever since." / tension "R has begun to act like someone who considers the debt paid. S does not."
 
-14. NEW desc: "S paid for R's schooling when R's family could not, and has never once brought it up."
-   tension: "R has started paying for the schooling of a young relative of S's. S has not said thank you, which is how R knows S understands."
+14. NEW desc: "S paid R's way into a trade when R's family could not, and has never once brought it up."
+   tension: "R has started paying a young relative of S's way into a trade. S has not said thank you, which is how R knows S understands."
      beside: desc "R owes S for an old kindness. Neither mentions it, and both know exactly how much is still owed." / tension "Someone else has learned what favour R owes S, and now has a hold on R too."
      beside: desc "S paid R's bail eleven years ago and has never mentioned it. R mentions it to no one." / tension "S has asked R for a vote against R's own interests. It is the first payment S has asked for."
 
@@ -418,7 +418,7 @@ The model above predicted 24.6% (ties) and 25.9% (hooks) at city. Placeholders r
      beside: desc "R vouched for S when nobody else would. S's first post came from that word." / tension "S corrected R in public last month, and was right."
 
 8. NEW desc: "R gave S a second home when S's own was unhappy, and taught S more there than anyone else did."
-   tension: "S has offered R a room now that R lives alone. R has not answered, and keeps visiting instead."
+   tension: "S has offered R a room for whenever R should want one. R has not answered, and keeps visiting instead."
      beside: desc "S still uses R's methods and R's ledger format. Everyone who sees S's work recognises the teacher." / tension "R has asked S for a loan. It is the first time a debt between teacher and student has run that way."
      beside: desc "R named S as successor in front of witnesses. The formal handover has not happened." / tension "S has begun teaching R's methods as S's own."
 
@@ -462,3 +462,5 @@ The model above predicted 24.6% (ties) and 25.9% (hooks) at city. Placeholders r
 
 
 INTEGRATOR'S EDITS (DEPTH-2, 16:10 UTC by `date -u`, read line by line): old_debt 9 (desc, tension): "S's parent ... since the parent's death" -> "S's family" (a living parent may stand in the record); mutual_leverage 9 (desc, tension): "why S left the place S came from" -> "the one thing S would least like told of S's younger days" (both cards may be born here); peer_rivalry 16 tension: "a neighbour's wedding next week" -> "a neighbour's table" (no event presumed). Every other pair as written.
+
+THE CHAIR'S WORD (2026-11-20 16:22 UTC): 74 pairs APPROVED AS WRITTEN with the integrator's edits; THREE REWORDED by the chair (a fact about a person the record may contradict: an age, a household), applied above: old_debt 2 tension; old_debt 14 desc and tension; mentor_legacy 8 tension. The NEW lines above are the built text.

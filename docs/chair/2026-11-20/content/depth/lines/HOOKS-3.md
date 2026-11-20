@@ -252,3 +252,5 @@ in HOOKS-1/HOOKS-2 (the first tranche, approved).
 
 
 INTEGRATOR'S EDITS (DEPTH-2, 16:10 UTC by `date -u`, read line by line): other 15 "A newcomer has asked" -> "Someone new to the place has asked"; other 24 "A newcomer has started copying" -> "Someone who settled here lately has started copying" (three newcomers in one pool). Every other line as written; none tagged corruption.
+
+THE CHAIR'S WORD (2026-11-20 16:22 UTC): 25 APPROVED AS WRITTEN (other 3, 5, 6, 7, 9-16, 21-26, 29, 30; economy 1, 2, 3, 5, 6). ELEVEN SENT BACK (other 1, 2, 4, 8, 17, 18, 19, 20, 27, 28; economy 4): A HOOK IS A LEAD A DM CAN USE TONIGHT (something has happened or is about to); their rewrites are HOOKS-3B.md. Only the 25 are built from this file.

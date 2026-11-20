@@ -12,7 +12,7 @@ name. Under the strict reading, "Water source" matches the row "Water source" on
 
 | id | draft | needs |
 |---|---|---|
-| n1-water-source | The households cannot agree whose turn it is to keep the water source clean, and each says another has missed a turn. | `Water source` |
+| n1-water-source | The households cannot agree whose turn it is to keep the water clean, and each says another has missed a turn. | `Water source` |
 | n2-mill-trip | The mill is a long way off, and the households argue over whose turn it is to carry everyone's grain there. | `Access to external mill` |
 | n3-commons | Some households say others put more beasts on the common grazing than their share, and nobody can agree how many each may keep there. | `Common grazing land` |
 
@@ -64,3 +64,5 @@ births it was 10.
 
 
 INTEGRATOR'S EDIT (DEPTH-2, 16:14 UTC by `date -u`, all nine read line by line): ma3 "want their own soldiers judged by their own officers, not before the civil court" -> "want their soldiers answerable to them alone, not to the civil court". Projections only (no probe): thorp 52->17, hamlet 49->16, village 44->11, town 58->12, city 52->16, metropolis 52->9.
+
+THE CHAIR'S WORD (2026-11-20 16:22 UTC): EIGHT AS WRITTEN (n2, n3, ma1-ma5 with the integrator's edit, mb1); n1 REWORDED (applied above). The atom "Water source" READS BROADLY (several water sources include one). They join the conflict unit.
