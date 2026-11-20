@@ -1,0 +1,1342 @@
+{
+  "meta": {
+    "script": "docs/chair/2026-11-20/content/seat/flip/plain-table.mjs",
+    "writtenAt": "2026-11-20T20:46:56.234Z",
+    "seconds": "re-made by `report` from the rows of an earlier `all`",
+    "standing": "fortune OFF: under today's standing",
+    "pool": "visitor (measure-lit.mjs :: visitorJob), seeds visitor-<size>-0..99, 600 places",
+    "force": {
+      "_seatLawVersion": 2
+    },
+    "D": {
+      "tree": "/tmp/claude-0/-home-user-settlement-engine/8849b19d-e763-58bf-b9f2-130aacabb24f/scratchpad/wt-flip",
+      "force": {
+        "_seatLawVersion": 2
+      },
+      "lit": false,
+      "newSettlementLaw": 1
+    },
+    "L1": {
+      "tree": "/tmp/claude-0/-home-user-settlement-engine/8849b19d-e763-58bf-b9f2-130aacabb24f/scratchpad/wt-flip-lit",
+      "force": {
+        "_seatLawVersion": 2
+      },
+      "lit": true,
+      "newSettlementLaw": 2
+    },
+    "instrument": [
+      "seat-D [visitor]: 600 places, lit false, 99 s -> /tmp/claude-0/-home-user-settlement-engine/8849b19d-e763-58bf-b9f2-130aacabb24f/scratchpad/bfl/plain/seat-D.jsonl",
+      "seat-L1 [visitor]: 600 places, lit true, 94 s -> /tmp/claude-0/-home-user-settlement-engine/8849b19d-e763-58bf-b9f2-130aacabb24f/scratchpad/bfl/plain/seat-L1.jsonl"
+    ]
+  },
+  "calibration": {
+    "pass": true,
+    "checks": [
+      {
+        "what": "seat-D aggregate (contender table, risk ladder, protection, circumstances, markers, roads, threats)",
+        "equal": true
+      },
+      {
+        "what": "seat-L1 aggregate (the same readings)",
+        "equal": true
+      },
+      {
+        "what": "D -> L1 pairing (field or risk moved, top-three kinds moved, enter, leave, calm turning)",
+        "equal": true
+      }
+    ],
+    "measuredHere": {
+      "fieldOrRiskMoved": 111,
+      "topKindsMoved": 18,
+      "enter": {
+        "religious": 1,
+        "arcane": 4,
+        "merchant": 3,
+        "government": 1,
+        "noble": 1
+      },
+      "leave": {
+        "criminal": 5,
+        "craft": 13
+      },
+      "calmContestedOn": 0,
+      "calmContestedOff": 0
+    },
+    "measureLit": {
+      "fieldOrRiskMoved": 111,
+      "topKindsMoved": 18,
+      "enter": {
+        "religious": 1,
+        "arcane": 4,
+        "merchant": 3,
+        "government": 1,
+        "noble": 1
+      },
+      "leave": {
+        "criminal": 5,
+        "craft": 13
+      },
+      "calmContestedOn": 0,
+      "calmContestedOff": 0
+    },
+    "measureLitAt": "213ec7cbbb6da480457f2089f1f9bddc157126a6"
+  },
+  "bySize": {
+    "thorp": {
+      "places": 100,
+      "listChanged": 0,
+      "membershipChanged": 0,
+      "riskChanged": 0,
+      "topKindsChanged": 0,
+      "pageChanged": 0,
+      "craftWordOnly": 0,
+      "enter": {},
+      "leave": {},
+      "matrix": {},
+      "calmTurnedContested": 0,
+      "calmStoppedContested": 0
+    },
+    "hamlet": {
+      "places": 100,
+      "listChanged": 1,
+      "membershipChanged": 1,
+      "riskChanged": 1,
+      "topKindsChanged": 1,
+      "pageChanged": 1,
+      "craftWordOnly": 0,
+      "enter": {},
+      "leave": {
+        "criminal": 1
+      },
+      "matrix": {
+        "Holding → Stable": 1
+      },
+      "calmTurnedContested": 0,
+      "calmStoppedContested": 0
+    },
+    "village": {
+      "places": 100,
+      "listChanged": 1,
+      "membershipChanged": 1,
+      "riskChanged": 1,
+      "topKindsChanged": 1,
+      "pageChanged": 5,
+      "craftWordOnly": 4,
+      "enter": {},
+      "leave": {
+        "criminal": 1
+      },
+      "matrix": {
+        "Holding → Stable": 1
+      },
+      "calmTurnedContested": 0,
+      "calmStoppedContested": 0
+    },
+    "town": {
+      "places": 100,
+      "listChanged": 6,
+      "membershipChanged": 3,
+      "riskChanged": 1,
+      "topKindsChanged": 3,
+      "pageChanged": 41,
+      "craftWordOnly": 34,
+      "enter": {
+        "religious": 1
+      },
+      "leave": {
+        "criminal": 3
+      },
+      "matrix": {
+        "Contested → Holding": 1
+      },
+      "calmTurnedContested": 0,
+      "calmStoppedContested": 0
+    },
+    "city": {
+      "places": 100,
+      "listChanged": 11,
+      "membershipChanged": 6,
+      "riskChanged": 0,
+      "topKindsChanged": 6,
+      "pageChanged": 34,
+      "craftWordOnly": 23,
+      "enter": {
+        "military": 2,
+        "arcane": 3,
+        "merchant": 1
+      },
+      "leave": {
+        "craft": 6
+      },
+      "matrix": {},
+      "calmTurnedContested": 0,
+      "calmStoppedContested": 0
+    },
+    "metropolis": {
+      "places": 100,
+      "listChanged": 11,
+      "membershipChanged": 7,
+      "riskChanged": 0,
+      "topKindsChanged": 7,
+      "pageChanged": 30,
+      "craftWordOnly": 19,
+      "enter": {
+        "merchant": 3,
+        "arcane": 1,
+        "military": 1,
+        "government": 1,
+        "noble": 1
+      },
+      "leave": {
+        "craft": 7
+      },
+      "matrix": {},
+      "calmTurnedContested": 0,
+      "calmStoppedContested": 0
+    }
+  },
+  "totals": {
+    "places": 600,
+    "listChanged": 30,
+    "membershipChanged": 18,
+    "riskChanged": 3,
+    "topKindsChanged": 18,
+    "pageChanged": 111,
+    "craftWordOnly": 80,
+    "calmTurnedContested": 0,
+    "calmStoppedContested": 0,
+    "enter": {
+      "religious": 1,
+      "military": 3,
+      "arcane": 4,
+      "merchant": 4,
+      "government": 1,
+      "noble": 1
+    },
+    "leave": {
+      "criminal": 5,
+      "craft": 13
+    },
+    "matrix": {
+      "Holding → Stable": 2,
+      "Contested → Holding": 1
+    }
+  },
+  "leavers": {
+    "criminal": {
+      "hidden": 5,
+      "criminalCategory": 0,
+      "statedKinds": {
+        "other": 5
+      }
+    },
+    "craft": {
+      "statedKinds": {
+        "merchant": 13
+      }
+    }
+  },
+  "six": [
+    {
+      "size": "thorp",
+      "none": true
+    },
+    {
+      "seed": "visitor-hamlet-11",
+      "size": "hamlet",
+      "calm": false,
+      "before": [
+        "The Seat and Its Contenders (2)",
+        "Ruler · Headman's Authority · Government · Dominant · Contested",
+        "Contender · The Independent Bloc · Other · Significant",
+        "(risk word: Holding)"
+      ],
+      "after": [
+        "The Seat",
+        "Ruler · Headman's Authority · Government · Dominant · Uncontested",
+        "(risk word: Stable)"
+      ],
+      "enter": [],
+      "leave": [
+        {
+          "name": "The Independent Bloc",
+          "kind": "criminal",
+          "shown": "other",
+          "weight": 22.5
+        }
+      ]
+    },
+    {
+      "seed": "visitor-village-21",
+      "size": "village",
+      "calm": false,
+      "before": [
+        "The Seat and Its Contenders (2)",
+        "Ruler · Priestly Guidance · Religious · Dominant · Contested",
+        "Contender · The Independent Bloc · Other · Minor",
+        "(risk word: Holding)"
+      ],
+      "after": [
+        "The Seat",
+        "Ruler · Priestly Guidance · Religious · Dominant · Uncontested",
+        "(risk word: Stable)"
+      ],
+      "enter": [],
+      "leave": [
+        {
+          "name": "The Independent Bloc",
+          "kind": "criminal",
+          "shown": "other",
+          "weight": 12.6
+        }
+      ]
+    },
+    {
+      "seed": "visitor-town-91",
+      "size": "town",
+      "calm": false,
+      "before": [
+        "The Seat and Its Contenders (2)",
+        "Ruler · Merchant Council · Merchant · Minor · Contested",
+        "Contender · Craft Guilds · Merchant · Significant",
+        "(risk word: Contested)"
+      ],
+      "after": [
+        "The Seat and Its Contenders (2)",
+        "Ruler · Merchant Council · Merchant · Minor · Contested",
+        "Contender · Craft Guilds · Craft · Significant",
+        "(risk word: Holding)"
+      ],
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-city-25",
+      "size": "city",
+      "calm": true,
+      "before": [
+        "The Seat and Its Contenders (4)",
+        "Ruler · Corrupt City Council · Criminal · Strong · Contested",
+        "Contender · Military/Guard · Military · Minor",
+        "Contender · Merchant Guilds · Merchant · Minor",
+        "Contender · Craft Guilds · Merchant · Minor",
+        "(risk word: Holding)"
+      ],
+      "after": [
+        "The Seat and Its Contenders (4)",
+        "Ruler · Corrupt City Council · Criminal · Strong · Contested",
+        "Contender · Military/Guard · Military · Minor",
+        "Contender · Merchant Guilds · Merchant · Minor",
+        "Contender · The Order of the Watch · Military · Minor",
+        "(risk word: Holding)"
+      ],
+      "enter": [
+        {
+          "name": "The Order of the Watch",
+          "kind": "military",
+          "shown": "military",
+          "weight": 10
+        }
+      ],
+      "leave": [
+        {
+          "name": "Craft Guilds",
+          "kind": "craft",
+          "shown": "merchant",
+          "weight": 10.45
+        }
+      ]
+    },
+    {
+      "seed": "visitor-metropolis-16",
+      "size": "metropolis",
+      "calm": true,
+      "before": [
+        "The Seat and Its Contenders (4)",
+        "Ruler · Grand Guild Consortium · Merchant · Strong · Contested",
+        "Contender · Military/Guard · Military · Minor",
+        "Contender · Arcane Orders · Arcane · Minor",
+        "Contender · Craft Guilds · Merchant · Minor",
+        "(risk word: Holding)"
+      ],
+      "after": [
+        "The Seat and Its Contenders (4)",
+        "Ruler · Grand Guild Consortium · Merchant · Strong · Contested",
+        "Contender · Military/Guard · Military · Minor",
+        "Contender · Arcane Orders · Arcane · Minor",
+        "Contender · The Merchant Bloc · Merchant · Significant",
+        "(risk word: Holding)"
+      ],
+      "enter": [
+        {
+          "name": "The Merchant Bloc",
+          "kind": "merchant",
+          "shown": "merchant",
+          "weight": 9.5
+        }
+      ],
+      "leave": [
+        {
+          "name": "Craft Guilds",
+          "kind": "craft",
+          "shown": "merchant",
+          "weight": 10.45
+        }
+      ]
+    }
+  ],
+  "changed": [
+    {
+      "seed": "visitor-hamlet-11",
+      "list": true,
+      "risk": "Holding → Stable",
+      "page": true,
+      "enter": [],
+      "leave": [
+        "The Independent Bloc (criminal)"
+      ]
+    },
+    {
+      "seed": "visitor-village-18",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-village-21",
+      "list": true,
+      "risk": "Holding → Stable",
+      "page": true,
+      "enter": [],
+      "leave": [
+        "The Independent Bloc (criminal)"
+      ]
+    },
+    {
+      "seed": "visitor-village-34",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-village-39",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-village-46",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-3",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-4",
+      "list": true,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-7",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-8",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-9",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-12",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-14",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-19",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-28",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-29",
+      "list": true,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-30",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-31",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-32",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-35",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-36",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-38",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-39",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-40",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-47",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-48",
+      "list": true,
+      "risk": null,
+      "page": true,
+      "enter": [
+        "Religious Authorities (religious)"
+      ],
+      "leave": [
+        "The Independent Bloc (criminal)"
+      ]
+    },
+    {
+      "seed": "visitor-town-52",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-54",
+      "list": true,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-56",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-57",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-59",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-67",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-69",
+      "list": true,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": [
+        "The Independent Bloc (criminal)"
+      ]
+    },
+    {
+      "seed": "visitor-town-79",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-81",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-84",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-85",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-86",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-87",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-89",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-90",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-91",
+      "list": false,
+      "risk": "Contested → Holding",
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-92",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-95",
+      "list": true,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": [
+        "The Independent Bloc (criminal)"
+      ]
+    },
+    {
+      "seed": "visitor-town-96",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-97",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-town-98",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-city-0",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-city-1",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-city-4",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-city-9",
+      "list": true,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-city-10",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-city-17",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-city-21",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-city-24",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-city-25",
+      "list": true,
+      "risk": null,
+      "page": true,
+      "enter": [
+        "The Order of the Watch (military)"
+      ],
+      "leave": [
+        "Craft Guilds (craft)"
+      ]
+    },
+    {
+      "seed": "visitor-city-26",
+      "list": true,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-city-27",
+      "list": true,
+      "risk": null,
+      "page": true,
+      "enter": [
+        "Arcane Orders (arcane)"
+      ],
+      "leave": [
+        "Craft Guilds (craft)"
+      ]
+    },
+    {
+      "seed": "visitor-city-31",
+      "list": true,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-city-32",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-city-36",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-city-42",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-city-46",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-city-47",
+      "list": true,
+      "risk": null,
+      "page": true,
+      "enter": [
+        "Arcane Orders (arcane)"
+      ],
+      "leave": [
+        "Craft Guilds (craft)"
+      ]
+    },
+    {
+      "seed": "visitor-city-48",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-city-49",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-city-50",
+      "list": true,
+      "risk": null,
+      "page": true,
+      "enter": [
+        "The Shield Compact (military)"
+      ],
+      "leave": [
+        "Craft Guilds (craft)"
+      ]
+    },
+    {
+      "seed": "visitor-city-52",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-city-58",
+      "list": true,
+      "risk": null,
+      "page": true,
+      "enter": [
+        "Arcane Orders (arcane)"
+      ],
+      "leave": [
+        "Craft Guilds (craft)"
+      ]
+    },
+    {
+      "seed": "visitor-city-61",
+      "list": true,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-city-68",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-city-69",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-city-73",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-city-78",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-city-80",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-city-86",
+      "list": true,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-city-87",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-city-90",
+      "list": true,
+      "risk": null,
+      "page": true,
+      "enter": [
+        "The Merchant Bloc (merchant)"
+      ],
+      "leave": [
+        "Craft Guilds (craft)"
+      ]
+    },
+    {
+      "seed": "visitor-city-96",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-city-98",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-city-99",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-metropolis-1",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-metropolis-5",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-metropolis-6",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-metropolis-8",
+      "list": true,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-metropolis-14",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-metropolis-16",
+      "list": true,
+      "risk": null,
+      "page": true,
+      "enter": [
+        "The Merchant Bloc (merchant)"
+      ],
+      "leave": [
+        "Craft Guilds (craft)"
+      ]
+    },
+    {
+      "seed": "visitor-metropolis-17",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-metropolis-18",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-metropolis-20",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-metropolis-22",
+      "list": true,
+      "risk": null,
+      "page": true,
+      "enter": [
+        "Arcane Orders (arcane)"
+      ],
+      "leave": [
+        "Craft Guilds (craft)"
+      ]
+    },
+    {
+      "seed": "visitor-metropolis-25",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-metropolis-28",
+      "list": true,
+      "risk": null,
+      "page": true,
+      "enter": [
+        "The Garrison Bloc (military)"
+      ],
+      "leave": [
+        "Craft Guilds (craft)"
+      ]
+    },
+    {
+      "seed": "visitor-metropolis-30",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-metropolis-34",
+      "list": true,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-metropolis-36",
+      "list": true,
+      "risk": null,
+      "page": true,
+      "enter": [
+        "Quarantine Council (government)"
+      ],
+      "leave": [
+        "Craft Guilds (craft)"
+      ]
+    },
+    {
+      "seed": "visitor-metropolis-37",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-metropolis-38",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-metropolis-40",
+      "list": true,
+      "risk": null,
+      "page": true,
+      "enter": [
+        "Noble Houses (noble)"
+      ],
+      "leave": [
+        "Craft Guilds (craft)"
+      ]
+    },
+    {
+      "seed": "visitor-metropolis-43",
+      "list": true,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-metropolis-45",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-metropolis-52",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-metropolis-62",
+      "list": true,
+      "risk": null,
+      "page": true,
+      "enter": [
+        "The Merchant Bloc (merchant)"
+      ],
+      "leave": [
+        "Craft Guilds (craft)"
+      ]
+    },
+    {
+      "seed": "visitor-metropolis-65",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-metropolis-67",
+      "list": true,
+      "risk": null,
+      "page": true,
+      "enter": [
+        "The Guild Alliance (merchant)"
+      ],
+      "leave": [
+        "Craft Guilds (craft)"
+      ]
+    },
+    {
+      "seed": "visitor-metropolis-69",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-metropolis-75",
+      "list": true,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-metropolis-84",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-metropolis-92",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-metropolis-94",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    },
+    {
+      "seed": "visitor-metropolis-97",
+      "list": false,
+      "risk": null,
+      "page": true,
+      "enter": [],
+      "leave": []
+    }
+  ]
+}
