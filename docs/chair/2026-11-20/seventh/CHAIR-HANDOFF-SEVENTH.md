@@ -1910,6 +1910,72 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   PDF and the session sheet; commonest sentence 100/100/79/73/100/100%). Given to the session sheet's lane:
   `prompts/FRAME-7.txt` now makes it that seat's measure-and-propose unit after P4a to P4b.
 
+### Rulings of 16:57 to 17:04 UTC (ten notifications read at 16:57; each ruling vetoable by the owner)
+
+- **VEIL RULING 55: THE IMPORT DOOR.** FOUND by TRAD-4's unit 8 (executed on the traditions lane's tree, which has no
+  212; red's seed 14f16760b on `lane/trad-4-2026-11-20-u8-wip`, `tests/security/traditionDescriptionSharedPage.test.js`):
+  `import_gallery_dossier` (its latest definition is migration 131) runs the sanitizer and the member splice only;
+  `src/lib/gallery.js :: fetchDossierForImport` adds the confidential strip and `veilPublicPayload` (a civility mask)
+  and reads no veil deltas. A planted hidden Criminal house reached the importer's clone and was named on the
+  importer's own page (34 times in 31 of 140 towns), while the party link's served document held it nowhere. NOT
+  EXECUTED, only plausible: that `get_gallery_dossier` ships hideable houses on the wire. NOT SEEN: production (nobody
+  in the program has); the chair INFERS it behaves the same, since the function is an old migration's. **RULED: WHAT AN
+  IMPORTER MAY RECEIVE IS THE DOCUMENT THE SHARE SERVES TO THAT READER UNDER THE VEIL, AND NOTHING ELSE. The clone is
+  built from the served document, never from the stored row. If the veil cannot be applied the import fails closed.
+  One veil, every door.** The cure is the veil lane's, a new stage IMPORT-DOOR after R3-CURE-8 and before E, red first,
+  read cold by the security reader as its own line. ASKED OF VEIL-27 FIRST, one measure-only helper on its tip:
+  (a) does 212 as it stands change what `import_gallery_dossier` returns; (b) has the registry a row for the import
+  door, and if not, how the inversion test missed a function that returns a dossier; (c) EVERY other function that
+  hands a stored dossier or a copy of one to a non-owner (clone, fork, template, export, duplicate, snapshot), by
+  search of the migrations' latest definitions and `src/lib/`. TRAD-4's unit 8 is CLOSED ("round trip green on 140
+  towns; the import door handed to the veil lane"). That a clone re-draws its traditions (seed scrubbed; `traditions`
+  dropped by the sanitizer; 0 of 140 clones show the served set) is today's behaviour of an import: a NAMED SURVIVOR
+  for the owner. THE OWNER WAS TOLD AT 17:01 in plain words, with the chair's recommendation: no emergency action;
+  cure it with the veil before the deploy; the one stopgap (switching gallery import off on the live site) is his
+  hand alone.
+- **THE KEYED PICK'S LOW BITS (TRAD-4's unit 6; measured by the chair, `scratchpad/lean.mjs`).** `pickVariant` is
+  `pool[fnv1a32(seed) % n]`, and FNV-1a's low bits never mix: for a pool of four the pick reads only the low two bits
+  of each key character. MEASURED on 600 keys of four shapes: NO general lean (four lines: top 25.5 to 29% against
+  25; eight lines: 12.8 to 17% against 12.5). It bites keys of a particular shape (TRAD's feast pool: "A common
+  feast" 171 of 309 before refusals). `pickVariant` IS ON MASTER with production callers (institution and history
+  descriptions, origin prose): IT IS NOT CHANGED. RULED: a NEW kernel function `pickVariantMixed` (the same hash,
+  then a 32-bit finalizer before the modulo; canonical-at-zero kept), built by the chair's builder on
+  `lane/kernel-mix-2026-11-20` (from 43ab0f5eb), read by the chair, named to the lanes; a pool whose BUILT measure
+  shows a line above about 1.5 times its expected share takes it by one call line; pools not yet built take it from
+  the start. Every pool is still measured on its built tree: the measure, not the function's name, is the proof.
+- **A TROUBLE'S HOOKS, the last eight (PAGE-7, TROUBLE-LINES-3 at 2b04ae927): read; seven as written;** guild 15
+  "A trader at the market has been selling under the agreed price, and a crowd is expected at the stall tomorrow."
+  (it named "the guild price" while declaring only a market). The bar on 150 a size is met (top share 10.7 / 11.3 /
+  8.0 / 10.7 / 14.0 / 14.7%). Measures are on 150 a size from here on. The eleven hooks with a hideable need are
+  listed for the security reader at the join (a hook is withheld on a read that hides the house it needs).
+- **WANTS, files 2 and 3 (GOALS-3, f54d13f9d and 05842c911): 120 lines read; 104 as written, 16 reworded, 2 hang on
+  whether the debtor's cell is drawn by the debtor's end only.** The rewordings and their reasons are in the chair's
+  message of 17:03 (file 2: 1.9, 2.4, 3.5, 4.2, 4.3, 5.1, 6.2, 7.3, 9.1; file 3: 2.1, 2.2, 2.4, 5.4, 7.3, 13.2, 22.1).
+  THE REASONS, for every later file: no line names "the town"; none presumes customers, goods sent out, prices, a
+  past debt, an age, a fear, a hostile governor or a standing; every {power} line reads true of a criminal power;
+  every PERSONALITY line reads true of the seat's holder. Files 4 to 7 started at 17:00. Measured with files 1 to 3:
+  a second city repeats 17.2 / 17.3% of a first city's wants (36.4 / 36.0 today), a metropolis 25.2 / 25.9% (47.3 /
+  47.2).
+- **THE BAR'S DENOMINATOR (for PROSE-1's map c7c661dfb and for SAME-1's door).** A sentence's share is taken over ALL
+  places of a size (places printing it / places of that size), about 15%, on 150 places a size (a top to 20% passes
+  as sampling). BY DESIGN a pool carries at least reach / 0.15 eligible lines at each size (reach: the share of that
+  size's places that print the slot): 7 where every place prints it, 4 at 60%, 2 at 30%; a pool already under the
+  bar by its reach gets none. PROSE-1: the one-eligible pools first (NO-MARKET on 135 small places above all); the
+  verdict pool gets lines that need no {band}; the kernel's argmax pick stands; a line eligible only by a hideable
+  fact is dm-only or not written.
+- **SAME-1'S DOOR HAS A SLOT-KEY FAULT (found by PROSE-1):** a pool's sibling lines are filed under different slots,
+  so a three-line pool with a top near 40% reads "100%" (the Defense state rows: arcane ABSENT, charter ABSENT,
+  garrison PRESENT). ORDERED: a pool's lines are ONE slot; the off-list's state rows re-issued; SAME-1 names which
+  figures given to the chair change. THE CHAIR GAVE THE OWNER some of those figures: corrected to him when the
+  re-issue is in. THE HIDEABLE WALKER is SAME-1's third brief (after the door): the ledger must be shown to reach
+  every new pool; the one list is `factLayers.js`'s hideable rows; exempt by declaration only (a field withheld from
+  every shared read; the trouble half's ruled design).
+- **TRADITIONS: THE OWNER'S FILES DELIVERED (17:04), AND A SENTENCE TWICE IN ONE TOWN.** The thirty samples, the
+  twelve in crisis, the measures and the shared-page paragraph (TRAD-4 at d003f7be8) were read whole by the chair and
+  sent to the owner. Reading them the chair saw two rites of ONE town ending on the identical sentence (samples 23
+  and 25; 17 and 19): UNIT 10, measure first, then a cure by rotation inside a town (keyed, no draw; a town with one
+  rite unchanged; the bar 0 of 432 towns). Unit 9 (the word "kept" twice in a sentence) approved as briefed.
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -4910,3 +4976,11 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   prompt is written when VEIL-27 passes 330,000. THE OWNER WAS TOLD AT 16:54: the card's constraint and the stakes'
   reason print after all; the veil's twin sent more than the server on 10 of 92 towns and is cured first; the
   veil's test re-stated as membership.
+- 17:05 UTC · TEN NOTIFICATIONS READ AT 16:57 AND RULED BY 17:04 (section 2, "Rulings of 16:57 to 17:04"). ABOVE ALL: VEIL RULING
+  55, THE IMPORT DOOR (an import of a gallery town hands the importer what the publisher hid; found by TRAD-4;
+  told to the owner at 17:01; the veil lane measures on its own tip, then cures as its own stage;
+  `prompts/REVIEW-VEIL-14.txt` carries it). The chair's builder is adding `pickVariantMixed` on
+  `lane/kernel-mix-2026-11-20` (worktree /home/user/wt/kmix; not pushed until read). Wants files 2 and 3 read (120
+  lines); files 4 to 7 started. The traditions' four files delivered to the owner. NEW UNITS ORDERED: TRAD unit 10
+  (no sentence twice in one town); SAME-1's slot-key mend and the hideable walker. NET 16 is set for 17:35
+  (trig_01557M3ZPwaV3T8JBeZmN6zK).
