@@ -22,7 +22,7 @@
 
 import { useMemo } from 'react';
 import { motifGlyph } from '../../../domain/traditions/genesis.js';
-import { shownTraditionsOf, sameWindowPlan, calendarLineOf, motifChipOf } from '../../../domain/traditions/shownTraditions.js';
+import { shownTraditionsOf, sameWindowPlan, calendarLineOf, motifChipOf, descriptionSetOf } from '../../../domain/traditions/shownTraditions.js';
 import { describeTradition } from '../../../domain/traditions/traditionDescription.js';
 import { publicProseOf } from '../../../domain/display/publicProse.js';
 import { useStore } from '../../../store/index.js';
@@ -124,9 +124,10 @@ function SharedTraditionRow({ row }) {
   );
 }
 
-/** A row of the owner's page (or the owner's player view): the description is composed here for this page's audience. */
-function OwnTraditionRow({ rec, preview, sameWindowAs, settlement, audience }) {
-  const described = describeTradition(rec, settlement, { audience });
+/** A row of the owner's page (or the owner's player view): the description is composed here for this page's audience,
+ *  over the audience's set (`descriptionSet`, TRAD-4 unit 10: no town prints the same sentence in two of its rites). */
+function OwnTraditionRow({ rec, preview, sameWindowAs, settlement, audience, descriptionSet }) {
+  const described = describeTradition(rec, settlement, { audience, set: descriptionSet });
   return <TraditionRow rec={rec} preview={preview} sameWindowAs={sameWindowAs} description={described ? described.text : ''} />;
 }
 
@@ -155,6 +156,12 @@ export default function TraditionsTab({ settlement, publicDossier = false, playe
   const preview = publicDossier ? true : !!shown?.preview;
   const traditions = publicDossier ? (Array.isArray(sharedRows) ? sharedRows : []) : (shown?.recs || []);
   const audience = playerView ? 'reader' : 'owner';
+  // THE SET THE DESCRIPTIONS ROTATE OVER (TRAD-4 unit 10; shownTraditions.js :: descriptionSetOf): the owner's set for the
+  // owner's page; in the player view the drawn set the shared page serves (CTR11), so the town reads the same on both.
+  const descriptionSet = useMemo(
+    () => (publicDossier ? null : descriptionSetOf(settlement, audience, customTraditions)),
+    [publicDossier, settlement, audience, customTraditions],
+  );
 
   const name = settlement?.name || settlement?.identity?.name || 'this settlement';
   // ONE CALENDAR LINE PER WINDOW (X-50, F2 REPEAT-ONCE): two traditions kept in the same weeks
@@ -181,7 +188,7 @@ export default function TraditionsTab({ settlement, publicDossier = false, playe
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
         {traditions.map((rec, i) => (publicDossier
           ? <SharedTraditionRow key={rec.id || i} row={rec} />
-          : <OwnTraditionRow key={rec.id} rec={rec} preview={preview} sameWindowAs={windowPlan.get(rec.id) ?? null} settlement={settlement} audience={audience} />
+          : <OwnTraditionRow key={rec.id} rec={rec} preview={preview} sameWindowAs={windowPlan.get(rec.id) ?? null} settlement={settlement} audience={audience} descriptionSet={descriptionSet} />
         ))}
       </div>
     </div>

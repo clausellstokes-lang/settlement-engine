@@ -12,6 +12,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { describeTradition, holdsAName, HELD_NAME_STOP_WORDS } from '../../src/domain/traditions/traditionDescription.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { shownTraditionsOf, sharedTraditionRowsOf } from '../../src/domain/traditions/shownTraditions.js';
 import { deriveFoundingTraditions } from '../../src/domain/traditions/genesis.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { declarationAdmits, declarationOf } from '../../src/domain/facts/factVocabulary.js';
@@ -692,5 +693,73 @@ describe('the word rule RE-STATED (ADDENDUM 1, the chair, 15:10 UTC): a word is 
     expect(holdsAName('The Siege', ["People's Council", "Cobbler's guild", "Tailor's guild"])).toBe(false);
     const t = town({ powerStructure: { factions: [...town().powerStructure.factions, { faction: "People's Council", category: 'government', power: 5 }] } });
     expect(describeTradition(rite(1, 'the-dead', 'vigil'), t, { audience: 'reader' }).text).toMatch(/in memory of the siege(?: since then)?, 40 years ago/);
+  });
+});
+
+describe('ONE TOWN, NO SENTENCE TWICE (TRAD-4 unit 10; the chair, reading the owner\'s thirty): a slot\'s wording by rotation inside one town', () => {
+  /** Every sentence a set of descriptions prints twice or more, with its count (the town's name left in). */
+  const twice = (texts) => {
+    /** @type {Map<string, number>} */
+    const seen = new Map();
+    for (const text of texts) for (const s of String(text || '').split(/(?<=\.) (?=\p{Lu})/u).filter(Boolean)) seen.set(s, (seen.get(s) || 0) + 1);
+    return [...seen].filter(([, n]) => n >= 2).map(([s, n]) => `${n}x ${s}`);
+  };
+  const bornAt = (settType, culture, seed) => generateSettlementPipeline(
+    { settType, culture, terrainOverride: 'auto', tradeRouteAccess: 'random_trade', monsterThreat: 'civilized' }, null, { seed, customContent: {} },
+  );
+  // the owner's samples 17/19 and 23/25 (the 432 pool's seeds: tools/trad-pool.mjs)
+  const SAMPLES = [['Ringthwaite', 'city', 'celtic', 'trad-e-city-celtic'], ['Bergbrekka', 'town', 'norse', 'trad-a-town-norse']];
+
+  it('RINGTHWAITE and BERGBREKKA, the owner\'s page (the tab\'s set) and the reader\'s drawn rows: no sentence printed in two rites', () => {
+    const found = [];
+    for (const [name, settType, culture, seed] of SAMPLES) {
+      const t = bornAt(settType, culture, seed);
+      expect(t.name).toBe(name);
+      const recs = shownTraditionsOf(t, []).recs;
+      expect(recs.length).toBeGreaterThan(1);
+      const owner = recs.map((rec) => describeTradition(rec, t, { audience: 'owner', set: recs })?.text ?? '');
+      const reader = (sharedTraditionRowsOf(t) || []).map((r) => r.text);
+      for (const s of twice(owner)) found.push(`${name} owner: ${s}`);
+      for (const s of twice(reader)) found.push(`${name} reader: ${s}`);
+    }
+    expect(found).toEqual([]);
+  });
+
+  it('THE PAYER RUNS OUT: four rites that pay alike take the three wordings in order and the fourth leaves the payer sentence out; each rite alone reads as today', () => {
+    // no house, no power: every rite's second sentence is its payer (Market Taxes, the chief income)
+    const t = town({ institutions: [], npcs: [], powerStructure: { factions: [] } });
+    const recs = [1, 2, 3, 4].map((i) => rite(i, 'market', 'fair'));
+    const alone = recs.map((rec) => describeTradition(rec, t, { audience: 'owner' }));
+    // not vacuous: alone, all four print a payer sentence, and four rites cannot print three wordings without a repeat
+    for (const d of alone) expect(d.parts.origin).toBe('economy');
+    const inSet = recs.map((rec) => describeTradition(rec, t, { audience: 'owner', set: recs }));
+    expect(inSet[0].text).toBe(alone[0].text);
+    expect(inSet.slice(0, 3).map((d) => d.parts.origin)).toEqual(['economy', 'economy', 'economy']);
+    expect(new Set(inSet.slice(0, 3).map((d) => sentences(d.text).at(-1))).size).toBe(3);
+    expect(inSet[3].parts.origin).toBeNull();
+    expect(twice(inSet.map((d) => d.text))).toEqual([]);
+  });
+
+  it('A KEEPER SLOT THAT RUNS OUT (Zhongmen\'s shape: four rites kept at one market by one power, three frames): the fourth keeps its own pick, nothing invented; its payer is left out', () => {
+    const t = town({ institutions: [{ name: 'Weekly market', category: 'Economy' }], npcs: [], powerStructure: { factions: [{ faction: 'Merchant Guilds', category: 'economy', power: 18 }] } });
+    const recs = [1, 2, 3, 4].map((i) => rite(i, 'market', 'fair'));
+    const keeperOf = (d) => sentences(d.text)[1];
+    const alone = recs.map((rec) => describeTradition(rec, t, { audience: 'owner' }));
+    for (const d of alone) expect(d.parts.keeper).toBe('house'); // not vacuous: each alone is kept at the market, by the power
+    const inSet = recs.map((rec) => describeTradition(rec, t, { audience: 'owner', set: recs }));
+    expect(new Set(inSet.slice(0, 3).map(keeperOf)).size).toBe(3);
+    expect(keeperOf(inSet[3])).toBe(keeperOf(alone[3]));
+    expect(inSet[3].parts.origin).toBeNull();
+  });
+
+  it('A RITE ALONE, OR NOT IN THE SET, READS EXACTLY AS WITHOUT ONE; the set is found by the same id when the objects differ', () => {
+    const t = town();
+    const recs = [rite(1, 'market', 'fair'), rite(2, 'harvest', 'feast'), rite(3, 'market', 'contest')];
+    for (const audience of ['owner', 'reader']) {
+      for (const rec of recs) expect(describeTradition(rec, t, { audience, set: [rec] })).toEqual(describeTradition(rec, t, { audience }));
+      expect(describeTradition(rite(9, 'market', 'fair'), t, { audience, set: recs })).toEqual(describeTradition(rite(9, 'market', 'fair'), t, { audience }));
+      const copies = recs.map((r) => ({ ...r }));
+      recs.forEach((rec, i) => expect(describeTradition(copies[i], t, { audience, set: recs })).toEqual(describeTradition(rec, t, { audience, set: recs })));
+    }
   });
 });

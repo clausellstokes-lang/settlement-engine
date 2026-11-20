@@ -17,11 +17,14 @@
  * NAME against the catalogue's tags, hidden or shown), so no later shut of a house's function eye could have moved the
  * set; and over no house of the hideable class (people/cardVeil.js :: isHideableHouse, TRAD-3 unit 4b), so no later
  * hide of a house whole could have. The owner's set (shownTraditionsOf) is unchanged and admits by the record it is handed.
+ * And `descriptionSetOf` (TRAD-4 unit 10): THE SET A DESCRIPTION ROTATES OVER, one rule for every surface that composes
+ * one (the tab, the drawn rows, the printed export, the search index), so a town reads the same on each: the owner's set
+ * for the owner; for a reader the DRAWN set (CTR11: never a row a DM can hide).
  * Pure: no draw, no clock, no write.
  */
 import { deriveFoundingTraditions, describeTraditionWindow } from './genesis.js';
 import { mergeCustomFoundingTraditions } from './customFounding.js';
-import { describeTradition, withoutFunction } from './traditionDescription.js';
+import { describeTraditions, withoutFunction } from './traditionDescription.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { isHideableHouse } from '../people/cardVeil.js';
 import { TRADITION_ELEMENTS } from '../../data/traditionCorpus.js';
@@ -134,15 +137,13 @@ export function calendarLineOf(rec, sameWindowAs) {
 }
 
 /**
- * THE SHARED PAGE'S TRADITIONS (CTR9), composed on the OWNER's record at save: the set the owner's tab shows (the DM's
- * custom traditions are the owner's library and are not shipped: none is passed), each as text with THE READER'S
- * description. Null where the record shows none.
- * @param {AnyRec|null|undefined} settlement the owner's record @returns {SharedTraditionRow[]|null}
+ * THE DRAWN SET: the set the owner's tab shows (the DM's custom traditions are the owner's library and are not shipped:
+ * none is passed), its motifs admitted by the floor (the chair's cure B): every live house NOT of the hideable class
+ * (cardVeil.js :: isHideableHouse, read on the house whole before the strip, as readerView reads it; TRAD-3 unit 4b), less
+ * its function-eye fields (the facts the admission reads, market and the smith, read the live roster only).
+ * @param {AnyRec|null|undefined} settlement the owner's record @returns {AnyRec[]}
  */
-export function sharedTraditionRowsOf(settlement) {
-  // the drawn set admits by the floor (the chair's cure B): every live house NOT of the hideable class (cardVeil.js ::
-  // isHideableHouse, read on the house whole before the strip, as readerView reads it; TRAD-3 unit 4b), less its
-  // function-eye fields (the facts the admission reads, market and the smith, read the live roster only)
+function drawnSetOf(settlement) {
   const floor = settlement && typeof settlement === 'object'
     ? {
       ...settlement,
@@ -150,12 +151,35 @@ export function sharedTraditionRowsOf(settlement) {
         .filter((i) => !isHideableHouse(/** @type {Record<string, unknown>} */ (i))).map(withoutFunction),
     }
     : settlement;
-  const { recs } = shownOver(settlement, [], floor);
+  return shownOver(settlement, [], floor).recs;
+}
+
+/**
+ * THE SET A DESCRIPTION ROTATES OVER (TRAD-4 unit 10; traditionDescription.js :: describeTradition's `set`), in the order
+ * the surface shows it: for the OWNER, the owner's set (shownTraditionsOf, with the DM's custom traditions the surface
+ * shows); for a READER (anything but 'owner', as the leaf reads it), THE DRAWN SET the shared page serves (CTR11: the
+ * reader's rotation runs over the rites the reader is shown, never over a row a DM can hide), whatever page composes it.
+ * @param {AnyRec|null|undefined} settlement the owner's record @param {unknown} audience
+ * @param {unknown} [customTraditions] the DM's authored custom traditions (the owner's set only) @returns {AnyRec[]}
+ */
+export function descriptionSetOf(settlement, audience, customTraditions) {
+  return audience === 'owner' ? shownTraditionsOf(settlement, customTraditions).recs : drawnSetOf(settlement);
+}
+
+/**
+ * THE SHARED PAGE'S TRADITIONS (CTR9), composed on the OWNER's record at save: the drawn set (drawnSetOf), each as text
+ * with THE READER'S description, composed over that same set (descriptionSetOf's reader set: TRAD-4 unit 10). Null where
+ * the record shows none.
+ * @param {AnyRec|null|undefined} settlement the owner's record @returns {SharedTraditionRow[]|null}
+ */
+export function sharedTraditionRowsOf(settlement) {
+  const recs = descriptionSetOf(settlement, 'reader');
   if (!recs.length) return null;
   const plan = sameWindowPlan(recs);
+  // composed whole by the leaf over the drawn set, in its order (its pools drawn through drawDeclared inside it)
+  const descriptions = describeTraditions(recs, /** @type {Record<string, unknown>} */ (settlement), { audience: 'reader' });
   return recs.map((rec, i) => {
-    // composed whole by the leaf (its pools drawn through drawDeclared inside it), then read as the row's text
-    const described = describeTradition(rec, settlement, { audience: 'reader' });
+    const described = descriptions[i];
     return {
       // THE DRAWN ROW'S ID (the chair's item 5, TRAD-3 unit 4): its place in the DRAWN set, dense, in the order served;
       // never the genesis id (which holds the seed), so a rite the floor rule drops leaves no gap. The owner's page keeps the genesis ids.

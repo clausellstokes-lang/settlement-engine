@@ -15,12 +15,19 @@
 //   re-read as the drawn line, and every 'twin' as the drawn line's twin: the count of disagreements is printed.
 // - THE READER'S SET is the shared page's own (shownTraditions.js :: sharedTraditionRowsOf, admitted at the floor), each
 //   description checked against the row's own text; the owner's is the tab's (shownTraditionsOf).
+//
+// TRAD-4 unit 10 (2026-11-20): each rite is described over its audience's SET (shownTraditions.js :: descriptionSetOf;
+// the leaf's `set`), as every surface now describes it, so a frame slot's wording may be TURNED by the rotation: a
+// 'drawn' note whose line is not the re-derived pick, on a rite whose text differs from the rite described alone, is
+// counted as turned (not a disagreement). New counts: the descriptions the rotation moved, the payer sentences it left
+// out, and THE BAR: the towns printing an IDENTICAL sentence (the town's name in) in two or more of their own rites, by
+// slot (townRepeats), with the slot that ran out where one did.
 // - CTR11's OTHER DIRECTION (the owner's list): the printed rites whose OWNER economy sentence differs from the one the
 //   record less its criminal income rows (`isCriminal: true`, the class the reader's view drops) would print.
 import { readFileSync, writeFileSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
-import { shownTraditionsOf, sharedTraditionRowsOf } from '../../../../../../src/domain/traditions/shownTraditions.js';
-import { describeTradition } from '../../../../../../src/domain/traditions/traditionDescription.js';
+import { descriptionSetOf, sharedTraditionRowsOf } from '../../../../../../src/domain/traditions/shownTraditions.js';
+import { describeTradition, describeTraditions } from '../../../../../../src/domain/traditions/traditionDescription.js';
 import { withPresumptionLedger } from '../../../../../../src/domain/facts/presumptionLedger.js';
 import { lineText } from '../../../../../../src/domain/facts/drawDeclared.js';
 import { pickVariant } from '../../../../../../src/kernel/proseHash.js';
@@ -46,11 +53,18 @@ const drawnBefore = (pool, seed, id, suffix) => {
 
 /**
  * One rite described for one audience, with each slot it drew: { d, slots: [{ pool, kind, resolvedBy, drawn, printed }],
- * mismatch } or null. `drawn` is the line the draw picked; `printed` the line that stands (null: nothing).
+ * mismatch, turned, alone } or null. `drawn` is the line the draw picked; `printed` the line that stands (null: nothing);
+ * `alone` the rite described with no set (unit 10: the rotation's control).
  */
 export function describeWithSlots(rec, town, audience) {
-  const { result: d, ledger } = withPresumptionLedger(() => describeTradition(rec, town, { audience }));
+  const set = descriptionSetOf(town, audience, []);
+  const { result: d, ledger: all } = withPresumptionLedger(() => describeTradition(rec, town, { audience, set }));
   if (!d) return null;
+  // the leaf composes the set's earlier rites first (the rotation): this rite's notes are the ones after theirs
+  const at = set.findIndex((r) => String(r.id || r.name || '') === String(rec.id || rec.name || ''));
+  const before = at > 0 ? withPresumptionLedger(() => describeTraditions(set.slice(0, at), town, { audience })).ledger.length : 0;
+  const ledger = all.slice(before);
+  const alone = describeTradition(rec, town, { audience }); const moved = !alone || alone.text !== d.text; let turned = 0;
   const seed = String(town._seed ?? town.id ?? ''); const id = String(rec.id || rec.name || '');
   const slots = []; let mismatch = 0;
   for (const e of ledger) {
@@ -59,7 +73,7 @@ export function describeWithSlots(rec, town, audience) {
     if (!pool) { slots.push({ pool: poolKey, kind, resolvedBy: e.resolvedBy, drawn: '(unknown pool)', printed: `#${e.lineId}` }); mismatch++; continue; }
     const line = pool[Number(e.lineId)]; const printed = String(lineText(line) ?? '');
     const drawn = drawnBefore(pool, seed, id, suffix);
-    if (e.resolvedBy === 'drawn' && drawn !== printed) mismatch++;
+    if (e.resolvedBy === 'drawn' && drawn !== printed) { if (moved) turned++; else mismatch++; }
     if (e.resolvedBy === 'twin' && !(isTwin(line) && line.twinOf === drawn)) mismatch++;
     slots.push({ pool: poolKey, kind, resolvedBy: e.resolvedBy, drawn, printed });
   }
@@ -71,16 +85,50 @@ export function describeWithSlots(rec, town, audience) {
   // a keeper or an origin the parts say stands, with no note: a frame refused to nothing (no frame declares: never seen)
   if (d.parts.keeper && !slots.some((s) => ['owner', 'house', 'power'].includes(s.kind))) slots.push({ pool: `(${d.parts.keeper}: unseen)`, kind: 'keeper', resolvedBy: 'none', drawn: '?', printed: null });
   if (d.parts.origin && !slots.some((s) => ['cause', 'economy'].includes(s.kind))) slots.push({ pool: `(${d.parts.origin}: unseen)`, kind: 'origin', resolvedBy: 'none', drawn: '?', printed: null });
-  return { d, slots, mismatch };
+  return { d, slots, mismatch, turned, alone };
 }
 
-/** The rites an audience is shown: the owner's tab (shownTraditionsOf); the reader's shared rows (sharedTraditionRowsOf). */
+/** The rites an audience is shown, its SET (descriptionSetOf): the owner's tab; the reader's drawn rows, each with its text. */
 export function shownFor(town, audience) {
-  const recs = shownTraditionsOf(town, []).recs;
+  const recs = descriptionSetOf(town, audience, []);
   if (audience === 'owner') return recs.map((rec) => ({ rec, rowText: null }));
-  const rows = sharedTraditionRowsOf(town) || []; const out = []; let i = 0;
-  for (const row of rows) { while (i < recs.length && String(recs[i].name ?? '') !== row.name) i++; if (i < recs.length) out.push({ rec: recs[i++], rowText: row.text }); else out.push({ rec: null, rowText: row.text }); }
-  return out;
+  const rows = sharedTraditionRowsOf(town) || [];
+  return rows.map((row, i) => ({ rec: recs[i] && String(recs[i].name ?? '') === row.name ? recs[i] : null, rowText: row.text }));
+}
+
+/**
+ * TRAD-4 unit 10: one rite's sentences, each with its SLOT: S1 'lead+gloss'; S2 'owner', 'keeper house' (house.body*),
+ * 'keeper place' (house.place*), 'keeper power' (power.*); S3 'cause', 'payer' (economy.*). Every frame of the table is
+ * one sentence, so the text splits at a full stop before a capital (any script: "Ögedeiserai") into 1 + (keeper) + (origin) sentences; a split that
+ * does not count so is returned as `split: false` (and counted by the caller).
+ */
+const S2_SLOT = (pool) => (pool === 'owner' ? 'owner' : pool.startsWith('house.body') ? 'keeper house' : pool.startsWith('house.place') ? 'keeper place' : pool.startsWith('power.') ? 'keeper power' : null);
+const S3_SLOT = (pool) => (pool.startsWith('cause.') ? 'cause' : pool.startsWith('economy.') ? 'payer' : null);
+export function slotSentences(d, slots) {
+  const parts = d.text.split(/(?<=\.) (?=\p{Lu})/u);
+  const s2 = slots.map((s) => S2_SLOT(s.pool)).find(Boolean) || null;
+  const s3 = slots.map((s) => S3_SLOT(s.pool)).find(Boolean) || null;
+  const want = 1 + (d.parts.keeper ? 1 : 0) + (d.parts.origin ? 1 : 0);
+  if (parts.length !== want) return { split: false, sentences: [] };
+  const names = ['lead+gloss', ...(d.parts.keeper ? [s2 || '(keeper?)'] : []), ...(d.parts.origin ? [s3 || '(origin?)'] : [])];
+  return { split: true, sentences: parts.map((text, i) => ({ slot: names[i], text })) };
+}
+/**
+ * TRAD-4 unit 10: the town's rites (the audience's own set) that print an IDENTICAL sentence (the town's name in) in two or
+ * more of them: [{ slot, text, rites: [name…] }], one entry a repeated sentence; plus the rites whose split failed.
+ */
+export function townRepeats(town, audience) {
+  const by = new Map(); let unsplit = 0;
+  for (const { rec } of shownFor(town, audience)) {
+    if (!rec) continue;
+    const r = describeWithSlots(rec, town, audience); if (!r) continue;
+    const { split, sentences } = slotSentences(r.d, r.slots); if (!split) { unsplit++; continue; }
+    for (const { slot, text } of sentences) {
+      const e = by.get(text) || { slots: new Set(), text, rites: [] }; e.slots.add(slot); e.rites.push(String(rec.name ?? '')); by.set(text, e);
+    }
+  }
+  const repeats = [...by.values()].filter((e) => e.rites.length >= 2).map((e) => ({ slot: [...e.slots].join('/'), text: e.text, rites: e.rites }));
+  return { repeats, unsplit };
 }
 
 const withoutCriminalIncome = (t) => ({ ...t, economicState: { ...(t.economicState || {}), incomeSources: (t.economicState?.incomeSources || []).filter((r) => r?.isCriminal !== true) } });
@@ -93,7 +141,7 @@ function main() {
   const blank = () => ({ n: 0, house: 0, owner: 0, power: 0, cause: 0, economy: 0, short: 0 });
   const tot = blank(); const byEl = new Map(); const byTier = new Map(); const shape = new Map(); const whole = new Map();
   const pools = new Map(); // poolKey -> { draws, lines: Map<printed,count>, drawn: Map<drawn,count>, res: Map<resolvedBy, Map<'drawn → printed', count>> }
-  let deadWithCause = 0; let dead = 0; let nulls = 0; let mismatch = 0; let rowDiffer = 0; let unmatched = 0; let shownRecs = 0;
+  let deadWithCause = 0; let dead = 0; let nulls = 0; let mismatch = 0; let turned = 0; let moved = 0; let leftOut = 0; let rowDiffer = 0; let unmatched = 0; let shownRecs = 0;
   let crimTowns = 0; let crimRites = 0; const crimPairs = []; let crimEconomy = 0;
   const bump = (o, d) => {
     o.n++; if (d.parts.keeper === 'house') o.house++; if (d.parts.keeper === 'owner') o.owner++; if (d.parts.keeper === 'power') o.power++;
@@ -108,7 +156,9 @@ function main() {
       shownRecs++;
       const r = describeWithSlots(rec, t, audience);
       if (!r) { nulls++; continue; }
-      const { d, slots } = r; mismatch += r.mismatch;
+      const { d, slots } = r; mismatch += r.mismatch; turned += r.turned;
+      if (!r.alone || r.alone.text !== d.text) moved++;
+      if (r.alone && r.alone.parts.origin === 'economy' && d.parts.origin === null) leftOut++;
       if (rowText !== null && rowText !== d.text) rowDiffer++;
       bump(tot, d);
       const el = rec.coreMotif.element;
@@ -151,7 +201,7 @@ function main() {
   out.push('', `rites of the dead: ${dead}; keeping a cause (a major or catastrophic siege, fire, flood or plague): ${deadWithCause}`);
   out.push('', '## per slot pool: draws · distinct lines printed · THE POOL-DOMINANCE FIGURE (the most printed line and its share) · lines refused and what replaced them');
   out.push('# read from the presumption ledger (`pool`, `lineId`), the drawn line re-read by the leaf\'s own key; a refusal to nothing is seen where the slot always draws (gloss)');
-  out.push(`# re-derivation disagreements with the ledger: ${mismatch}`);
+  out.push(`# re-derivation disagreements with the ledger: ${mismatch} (and ${turned} draws the unit 10 rotation turned)`);
   out.push(`# towns of this pool holding a stress (a crisis the record holds: crisis-scoped lines answer to it): ${stressed} of ${towns.length}`);
   out.push('# drawn-top: the most DRAWN line (before any refusal) and its share; the pick is kernel/proseHash.js :: pickVariant, fnv1a32(key) % pool size');
   let dom = null;
@@ -171,6 +221,25 @@ function main() {
   out.push('', '## ten most repeated shapes (town masked)'); [...shape].sort((a, b) => b[1] - a[1]).slice(0, 10).forEach(([k, v]) => out.push(`${v}x  ${k}`));
   out.push('', '## ten most repeated whole descriptions'); [...whole].sort((a, b) => b[1] - a[1]).slice(0, 10).forEach(([k, v]) => out.push(`${v}x  ${k}`));
   out.push('', `distinct whole: ${whole.size} of ${tot.n}; distinct shapes: ${shape.size}`);
+  // TRAD-4 unit 10: a sentence printed twice inside ONE town (its own rites, this audience's set), by slot
+  const rep = new Map(); const towns2 = new Set(); let pairs = 0; let unsplit = 0; const samples = [];
+  for (const t of towns) {
+    const { repeats, unsplit: u } = townRepeats(t, audience); unsplit += u;
+    if (repeats.length) towns2.add(t.name);
+    for (const r of repeats) {
+      const p = (r.rites.length * (r.rites.length - 1)) / 2; pairs += p;
+      const o = rep.get(r.slot) || { towns: new Set(), pairs: 0, sentences: 0 }; o.towns.add(t.name); o.pairs += p; o.sentences++; rep.set(r.slot, o);
+      if (samples.length < 12 || /Ringthwaite|Bergbrekka/.test(t.name)) samples.push(`  ${t.name} [${r.slot}] ${r.rites.length}x "${r.text}" (${r.rites.join(' | ')})`);
+    }
+  }
+  out.push('', '## TRAD-4 unit 10: an IDENTICAL sentence (town name in) in two or more rites of ONE town, by slot');
+  out.push(`descriptions the rotation moved (described over the set vs alone): ${moved} of ${tot.n}; payer sentences left out: ${leftOut}`);
+  out.push(`towns with any: ${towns2.size} of ${towns.length}; sentence pairs: ${pairs}; rites whose text did not split by its parts: ${unsplit}`);
+  for (const s of ['lead+gloss', 'keeper house', 'keeper place', 'keeper power', 'owner', 'cause', 'payer']) {
+    const o = rep.get(s); out.push(`${s.padEnd(13)} towns=${o ? o.towns.size : 0} sentences=${o ? o.sentences : 0} pairs=${o ? o.pairs : 0}`);
+  }
+  for (const [s, o] of rep) if (!['lead+gloss', 'keeper house', 'keeper place', 'keeper power', 'owner', 'cause', 'payer'].includes(s)) out.push(`${s.padEnd(13)} towns=${o.towns.size} sentences=${o.sentences} pairs=${o.pairs}  (a sentence across slots)`);
+  out.push(...samples);
   writeFileSync(outFile, `${out.join('\n')}\n`);
   console.log(out.slice(0, 4).join('\n'));
 }

@@ -152,7 +152,8 @@ describe('CTR9: the owner\'s set and the reader\'s descriptions travel as text',
   it('the drawn rows carry the READER\'s description: no person, nothing of the hideable class', () => {
     const owner = shownTraditionsOf(t, []).recs;
     const rows = saved.publicProse.blocks.traditions;
-    owner.forEach((rec, i) => expect(rows[i].text).toBe(describeTradition(rec, t, { audience: 'reader' })?.text ?? ''));
+    // over the reader's set (TRAD-4 unit 10: the drawn set, here the owner's set whole), as the save composes them
+    owner.forEach((rec, i) => expect(rows[i].text).toBe(describeTradition(rec, t, { audience: 'reader', set: descriptionSetOf(t, 'reader') })?.text ?? ''));
     const people = (t.npcs || []).map((n) => n?.name).filter(Boolean);
     for (const r of rows) for (const p of people) expect(r.text.includes(p), `${r.name}: ${p}`).toBe(false);
   });
@@ -873,5 +874,99 @@ describe('TRAD-4 UNIT 7 (2): a DM-made power with no mapped category whose descr
       }
     }
     expect(red).toEqual([]);
+  }, 120000);
+});
+
+/**
+ * TRAD-4 UNIT 10 (the chair, reading the owner's thirty): NO TOWN PRINTS THE SAME SENTENCE IN TWO OF ITS RITES. Inside one
+ * town a slot's wording is taken by rotation over the set the surface shows, in its order; the READER's rotation (CTR11) is
+ * over the rites the reader is shown (the drawn set: shownTraditions.js :: descriptionSetOf(t, 'reader'), admitted at the
+ * floor) and the reader's own composition, never over a row a DM can hide; every surface passes the same set.
+ */
+import { descriptionSetOf } from '../../src/domain/traditions/shownTraditions.js';
+import { enumerateDossierObjects } from '../../src/domain/dossier/dossierSearch.js';
+
+describe('TRAD-4 UNIT 10: the drawn rows print no sentence twice, and the reader\'s rotation is over the DRAWN set (CTR11)', () => {
+  /** Every sentence printed in two or more of the texts, with its count. */
+  const twice = (texts) => {
+    /** @type {Map<string, number>} */
+    const seen = new Map();
+    for (const text of texts) for (const s of String(text || '').split(/(?<=\.) (?=\p{Lu})/u).filter(Boolean)) seen.set(s, (seen.get(s) || 0) + 1);
+    return [...seen].filter(([, n]) => n >= 2).map(([s, n]) => `${n}x ${s}`);
+  };
+  // towns the 432 pool (tools/trad-pool.mjs) found printing a sentence twice, the owner's two samples first (not Zhongmen,
+  // trad-c-metropolis-east_asian: four of its rites are kept at the market squares by one power and the keeper frames are
+  // three, so its fourth keeps its pick: a slot that runs out is reported, not invented; tests/domain/traditionDescription.test.js
+  // holds that rule: "A KEEPER SLOT THAT RUNS OUT")
+  const towns = [
+    ['city', 'celtic', 'trad-e-city-celtic'], ['town', 'norse', 'trad-a-town-norse'], ['town', 'norse', 'trad-d-town-norse'],
+    ['town', 'south_asian', 'trad-d-town-south_asian'], ['hamlet', 'celtic', 'trad-c-hamlet-celtic'], ['metropolis', 'east_asian', 'trad-d-metropolis-east_asian'],
+  ].map(([tier, culture, seed]) => born(tier, culture, seed));
+
+  it('born towns the pool found repeating (Ringthwaite and Bergbrekka among them): no drawn row prints a sentence another row of its town prints', () => {
+    expect(towns.slice(0, 2).map((t) => t.name)).toEqual(['Ringthwaite', 'Bergbrekka']);
+    const found = [];
+    for (const t of towns) for (const s of twice((sharedTraditionRowsOf(t) || []).map((r) => r.text))) found.push(`${t.name}: ${s}`);
+    expect(found).toEqual([]);
+  }, 120000);
+
+  it('THE SAME SET ON EVERY SURFACE: the drawn rows, the player view\'s search and the leaf over the reader\'s set read alike; the owner\'s search and the leaf over the owner\'s set alike', () => {
+    for (const t of towns) {
+      const readerSet = descriptionSetOf(t, 'reader');
+      const rows = sharedTraditionRowsOf(t) || [];
+      expect(rows.map((r) => r.name), t.name).toEqual(readerSet.map((r) => String(r.name)));
+      readerSet.forEach((rec, i) => expect(rows[i].text, `${t.name}: ${rec.name}`).toBe(describeTradition(rec, t, { audience: 'reader', set: readerSet })?.text ?? ''));
+      const player = enumerateDossierObjects(t, { playerView: true }).objects.filter((o) => o.type === 'tradition');
+      for (const o of player) {
+        const i = readerSet.findIndex((r) => r.id === o.raw.id);
+        if (i >= 0) expect(o.meta.description, `${t.name} player view: ${o.names[0]}`).toBe(rows[i].text);
+      }
+      const ownerSet = descriptionSetOf(t, 'owner');
+      const own = enumerateDossierObjects(t, {}).objects.filter((o) => o.type === 'tradition');
+      expect(own.map((o) => o.meta.description), t.name).toEqual(ownerSet.map((rec) => describeTradition(rec, t, { audience: 'owner', set: ownerSet })?.text ?? ''));
+      expect(twice(own.map((o) => o.meta.description)), `${t.name} owner`).toEqual([]);
+    }
+  }, 120000);
+
+  // THE CTR11 TOOTH: a rite the OWNER's set admits by a house's own tags and the floor drops (plant 2's DM-authored market
+  // house, the town's only market) stands between two rites that fill the keeper slot the same way (the seat). Over the
+  // owner's set the later rite would rotate past it; the reader's rotation never sees it.
+  const b = born('town', 'latin', 'trad-plant2-town-latin-0');
+  const HOUSE = { name: 'The Lantern Exchange', category: 'Economy', tags: ['market'] };
+  const first = deriveFoundingTraditions(b).find((r) => r.coreMotif.element === 'first-landing');
+  const riteAt = (n, name, element, act) => ({ ...first, id: first.id.replace(/\.\d+$/, `.${n}`), name, foundedYear: 30, coreMotif: { element, act } });
+  const plant = (n) => {
+    const fair = riteAt(n, 'The Charter Fair', 'charter', 'fair');
+    const procession = riteAt(99, 'The Charter Procession', 'charter', 'procession');
+    return { fair, procession, t: { ...b, institutions: [...b.institutions.filter((i) => !isMarketInstitution(i)), HOUSE], traditions: [first, fair, procession] } };
+  };
+  // the fair's id is chosen so that, over the owner's set, the procession's reader text WOULD move (null: no id does)
+  const tooth = (() => {
+    for (let n = 3; n < 60; n += 1) {
+      const p = plant(n);
+      const over = describeTradition(p.procession, p.t, { audience: 'reader', set: [first, p.fair, p.procession] })?.text;
+      if (over !== describeTradition(p.procession, p.t, { audience: 'reader', set: [first, p.procession] })?.text) return p;
+    }
+    return null;
+  })();
+  const { fair, procession, t } = tooth || plant(3);
+  const veiled = applyVeil(t, new Set([`field:institution:${CARD_KINDS.institution.idOf(HOUSE)}:function`]));
+  const stripped = { ...t, institutions: t.institutions.map((i) => (i.name === HOUSE.name ? { name: i.name, category: i.category } : i)) };
+
+  it('NOT VACUOUS: the owner\'s set holds the fair between the two; the reader\'s set drops it; over the owner\'s set the procession\'s reader text would move', () => {
+    expect(tooth, 'a fair id that moves the procession over the owner\'s set').not.toBeNull();
+    expect(descriptionSetOf(t, 'owner').map((r) => r.id)).toEqual([first.id, fair.id, procession.id]);
+    expect(descriptionSetOf(t, 'reader').map((r) => r.id)).toEqual([first.id, procession.id]);
+  }, 120000);
+
+  it('the drawn rows and the player view\'s descriptions are byte-identical with the house\'s function eye open, shut by applyVeil, and its fields removed by hand', () => {
+    const read = (s) => JSON.stringify({
+      rows: sharedTraditionRowsOf(s),
+      player: enumerateDossierObjects(s, { playerView: true }).objects.filter((o) => o.type === 'tradition' && o.raw.id !== fair.id).map((o) => o.meta.description),
+    });
+    expect(read(veiled), 'applyVeil').toBe(read(t));
+    expect(read(stripped), 'by hand').toBe(read(t));
+    const procText = sharedTraditionRowsOf(t).find((r) => r.name === procession.name).text;
+    expect(enumerateDossierObjects(t, { playerView: true }).objects.find((o) => o.raw.id === procession.id).meta.description).toBe(procText);
   }, 120000);
 });
