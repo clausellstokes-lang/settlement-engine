@@ -84,3 +84,22 @@ THE ONE RED, ATTRIBUTED (a stored figure, not touched): `tests/lint/ruinFilterRo
 banked)". RED AT cc652712d already (`ruin-walker-at-cc652712d.txt`): B/C/D's C (`NOT_LIVE` over the houses) made the
 twin compliant; the ratchet asks the row deleted and the pin lowered. Sent to the chair; the door is the stored figures'
 (item 4) unless the chair says otherwise.
+
+## 5. The side builder (VR25's owed rows; merged 03:35 UTC as 88ab24a98)
+
+Branch pushed as `lane/veil-21-side-2026-11-20` (tip ba820737c), read line by line, merged `--no-ff`.
+- UNIT 0 (ba820737c): `gallerySecondHomes.js`'s `RUIN_AGNOSTIC_EXEMPT` row deleted (73 -> 72 rows). THE PIN STAYS 117,
+  A CORRECTION TO THE CHAIR'S "117 -> 116", MEASURED: the pin counts files that READ `.institutions`, compliant or
+  exempt; the twin still reads them (now compliant). Row deleted + pin 117: 12 of 12; + pin 116: 11 of 12
+  (`vr25-owed/u0-walker-measure.txt`). The seat's re-run 12 of 12 (`seat-side-u0-green.txt`). `importRederive.js`'s row stands.
+- UNIT 3 (50c7263d0): `importRederive.js` step 4 keeps the SERVED prosperity band, re-derives only where absent; the
+  dependent steps read it; a no-config document keeps it too (one step past the brief: it deleted it before).
+  `galleryImportRederive.test.js`'s `RULED_SINCE` emptied (VR28). New `tests/store/galleryImportServedBand.test.js`.
+  The seat's re-run: RED 2 of 4 at the base file (two Subsistence towns imported with no band, their -20 legitimacy cause
+  dropped), GREEN 9 of 9 (`seat-side-u3-red.txt`, `seat-side-u3-green.txt`).
+- UNIT 1 (3b78c427e): the ruined-house import: 9 born towns, 116 variants; ZERO mis-draws caused by the ruin; the
+  mis-draws present (compound and safetyRatio 42, readiness 28, quarters 28) occur equally in the unruined control
+  (hidden-house towns); `importRederive.js` unchanged for it (`vr25-owed/u1-ruined-summary.txt`).
+- UNIT 2 (aa9bca75a, record only): `observedShapeReaders` 4 reproduced; the corpus's door
+  (`scripts/lib/observed-shape-corpus.mjs`) is hash-bound to the schema-45 baseline: a served-config pass makes the gate
+  refuse. TO THE CHAIR: a governed schema-46 rung, or the explained-writer row.
