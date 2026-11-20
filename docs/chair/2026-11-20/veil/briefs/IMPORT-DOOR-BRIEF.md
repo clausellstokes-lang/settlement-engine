@@ -14,6 +14,11 @@ failure falls toward WITHHOLDING, never toward sending. Runs AFTER R3-CURE-8's m
   where yours touch theirs).
 
 ## THE UNITS (ruling 56: one veil, every door)
+0. TAKE THE OFFERED PIN (the chair, 17:38): TRAD-4's commit 14f16760b on `origin/lane/trad-4-2026-11-20-u8-wip`
+   (`tests/security/traditionDescriptionSharedPage.test.js`, its unit-8 block: a 140-town round trip and an import-clone arm
+   through `importGallerySettlementImpl`) RE-CUT on this tree as the pin "an import equals the gallery read" (marked and
+   unmarked shares, Reveal off and on; ruling 57 (b): an unmarked share's import equals its listing). Read it whole first; take
+   only what this tree can run; say what was dropped.
 1. THE DOOR CENSUS AS A WALKER, red first: every SQL function whose LATEST definition returns settlement `data` (or a copy, a
    snapshot, a world, a tile value derived from it) to a non-owner is ENROLLED in a list the test reads, each with the veil it
    applies; a function found by the walker's search and not enrolled reds it. Teeth: a scratch function returning `s.data`
