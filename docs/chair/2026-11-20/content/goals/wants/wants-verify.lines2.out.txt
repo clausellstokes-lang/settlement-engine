@@ -1,0 +1,43 @@
+base /tmp/claude-0/-home-user-settlement-engine/1b606ed5-1f0a-5e1b-bf32-8b8b1c4098bc/scratchpad/base300.json · after /tmp/claude-0/-home-user-settlement-engine/1b606ed5-1f0a-5e1b-bf32-8b8b1c4098bc/scratchpad/lines2born.json · append 120 lines in 17 cells: {"RANK/enter/short":22,"RANK/enter/long":23,"TIES/rival_enemy/short":13,"TIES/rival_enemy/long":14,"TIES/ally/short":6,"TIES/ally/long":7,"INSTITUTION/solvency/short":7,"INSTITUTION/solvency/long":7,"INSTITUTION/charter/short":4,"INSTITUTION/charter/long":5,"RANK/climb/short":3,"PERSONALITY/sway/long":3,"PERSONALITY/grudge/long":2,"TIES/mentor_student/long":1,"PERSONALITY/sway/short":1,"TIES/mentor_student/short":1,"PERSONALITY/grudge/short":1}
+
+size        vantage  before   after   (new lines held a town, after)
+town        short     19.9%   11.0%   7.32
+town        long      18.8%   10.8%   7.42
+city        short     36.4%   20.5%   19.36
+city        long      36.0%   20.5%   21.06
+metropolis  short     47.3%   30.4%   27.26
+metropolis  long      47.2%   29.7%   29.50
+
+THE MOVES over 300 towns: 9527 holdings changed text (278 towns touched): onto a new line 5932 · within an appended cell, to another of its lines 3478 · holdings of cells not appended (the cascade) 117
+by the holding's cell before (appended cells marked *): onto a new line · within cell · cascade
+  *RANK/enter/long                            990 · 245 · 0
+  *RANK/enter/short                           956 · 247 · 0
+  *INSTITUTION/solvency/long                  529 · 413 · 0
+  *INSTITUTION/solvency/short                 479 · 385 · 0
+  *TIES/rival_enemy/short                     561 · 194 · 0
+  *TIES/rival_enemy/long                      574 · 170 · 0
+  *INSTITUTION/charter/long                   370 · 371 · 0
+  *INSTITUTION/charter/short                  320 · 361 · 0
+  *TIES/ally/long                             326 · 172 · 0
+  *TIES/ally/short                            268 · 174 · 0
+  *RANK/climb/short                           130 · 212 · 0
+  *PERSONALITY/sway/long                      117 · 110 · 0
+  *PERSONALITY/grudge/long                    79 · 95 · 0
+  *TIES/mentor_student/long                   46 · 107 · 0
+  *TIES/mentor_student/short                  40 · 98 · 0
+  *PERSONALITY/sway/short                     38 · 70 · 0
+  *PERSONALITY/grudge/short                   43 · 54 · 0
+   POWER/tense/long                           6 · 0 · 18
+   SUPPLY/expansion/long                      7 · 0 · 12
+   POWER/tense/short                          7 · 0 · 7
+   PERSONALITY/greed/long                     3 · 0 · 6
+   TIES/family/short                          0 · 0 · 8
+   TIES/debtor/long                           1 · 0 · 7
+   PERSONALITY/forbidden_patron/long          2 · 0 · 5
+   INSTITUTION/takeover/long                  6 · 0 · 1
+   INSTITUTION/takeover/short                 4 · 0 · 3
+   SUPPLY/expansion/short                     5 · 0 · 2
+   TIES/debtor/short                          1 · 0 · 5
+   PERSONALITY/impulse/long                   1 · 0 · 4
+
+identical goal sentences inside one town, after: 0 (over 300 towns)

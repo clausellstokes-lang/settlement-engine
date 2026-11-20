@@ -27,7 +27,7 @@ for (const f of FILES) { let cell = null, on = false;
     const h = /^### \d+ · (\w+)\/(\w+)\/(short|long) /.exec(line); if (h) { cell = h.slice(1, 4).join('/'); on = false; continue; }
     if (/^New:\s*$/.test(line)) { on = true; continue; }
     const m = /^\d+\. (.+)$/.exec(line); if (cell && on && m) { (NEW[cell] ||= []).push(m[1].trim()); total++; }
-    const q = /^- (.+)$/.exec(line); if (cell && !on && q) (QUOTED[cell] ||= []).push(q[1].trim()); } }
+    const q = /^- (.+)$/.exec(line); if (cell && !on && q) (QUOTED[`${path.basename(f)} ${cell}`] ||= []).push(q[1].trim()); } }
 // the scratch table: cells, then reserve, then the new lines
 const table = {};
 for (const [fam, subs] of Object.entries(GF.GOAL_FAMILY_LINES)) { table[fam] = {}; for (const [sub, vs] of Object.entries(subs)) { table[fam][sub] = {};
@@ -48,9 +48,9 @@ for (const [c, lines] of Object.entries(NEW)) { const [f, k, v] = c.split('/'); 
 out.push(`new-line slots outside the cell's own slot set: ${slotWarn}`);
 // the layout's TWO existing lines per cell: each must stand verbatim among its cell's drawn lines
 let misquoted = 0;
-for (const [c, q] of Object.entries(QUOTED)) { const [f, k, v] = c.split('/'); const cellText = GF.GOAL_FAMILY_LINES[f][k][v].map((l) => (typeof l === 'string' ? l : l.line));
+for (const [fc, q] of Object.entries(QUOTED)) { const c = fc.split(' ')[1]; const [f, k, v] = c.split('/'); const cellText = GF.GOAL_FAMILY_LINES[f][k][v].map((l) => (typeof l === 'string' ? l : l.line));
   for (const l of q) if (!cellText.includes(l)) { misquoted++; out.push(`  not verbatim in ${c}: ${l}`); }
-  if (q.length !== 2) out.push(`  ${c} quotes ${q.length} existing lines, not two`); }
+  if (q.length !== 2) out.push(`  ${fc} quotes ${q.length} existing lines, not two`); }
 out.push(`existing lines quoted: ${Object.values(QUOTED).flat().length}, not verbatim: ${misquoted}`);
 // the anchored negatives (the test's controls): each plant must red the lifted checker
 const plant = (line) => { const t = JSON.parse(JSON.stringify(table)); t.RANK.enter.short.push(line); return shapeViolations(t).length > viol.length; };
