@@ -1,4 +1,4 @@
-# SEAT-7 — HAND-BACK (kept current at every push; last written 2026-11-20T20:18:44Z, read from `date -u`)
+# SEAT-7 — HAND-BACK (kept current at every push; last written 2026-11-20T21:01:37Z, read from `date -u`)
 
 **For the next owner of this lane: this file, `SEAT-6-HANDBACK.md` (items 53 to 68, §4 to §6), `SEAT-6-TO-LIGHT.md`, `SEAT-5-HANDBACK.md` §1 (items 1 to 52) and `briefs/` are all you need.** Every ruling in force: SEAT-5's 1 to 52, SEAT-6's 53 to 68, this file's 69 on.
 
@@ -22,19 +22,23 @@ Branch `lane/seat-7-2026-11-20` (origin), fast-forwarded to `ce9462b55`: the cha
 
 74. **TUNING TABLES AND THE JOIN (the chair, 20:18Z, every lane):** a tuning table a lane ADDS is registered as a DRAFT row (`status: 'draft'`, `signedAt: null`) and listed in §6 FOR THE OWNER'S SIGNING with what each number does; a "dependents moved" with no value moved is re-frozen by the inventory's door with the reason. The joins this lane owes are listed in §7. Also confirmed (20:18Z): FLIP-CENSUS's control at BFL's own cut; no line merge now; `ci/RED-AT-LINE.tsv` on origin/lane/chair-2026-11-08 at `a8a17f77b`.
 
+75. **U5-CURE2 MERGED; THE SEAT TRAIN'S FIRST-PAINT EXCEPTION; U5-LAWOUT DROPPED (the chair, 20:30Z, 20:50Z):** U5-CURE2 merged at `ff07bb815` (B5c `3909902fa`, part (a) only), registers `db2dcdd14` (tuning inventory: `SEAT_CIRCUMSTANCE_TUNING` dependents + `applyWorldPulse.js`, no value; lighting and wiring unchanged); `applyWorldPulse.js` 907 → 905 by its door, the chair accepting 905 over the estimated 903–904 (a hoisted `const handed` avoids a second outcome read). Receipts (SEAT-7): red 1 failed/38 at `5d9406890` with the tip's test; green 93/93; registers' receipt 114/114; `tests/lint` whole 218/220 files, 3,204/3,271 tests, 0 assertion failures, 2 files UNRUN (workers killed for memory with three suites on the box): RE-RUN OWED when the box is free. Build at `db2dcdd14`: first paint 1,179,623 raw / 375,422 gzip / 315,393 Brotli (line `8196e5712`: +1,955 / +746 / +921), worker 2,598,233; raw and worker identical to `cd14df0dd` (the wiring adds nothing to first paint). **THE SEAT TRAIN'S RULED FIRST-PAINT EXCEPTION ≈ 4,500 B minified in engine-core:** `seat/seatTable.js` 4,075 B (MEASURED: engine-core 311,836 → 307,761 with it pinned lazy in scratch) + `seat/seatLaw.js` ≈ 425 B (DERIVED: → 307,336 with both pinned). **U5-LAWOUT DROPPED** (its brief kept as a record): `densityCreateBoundary.js` is NOT first paint (its own lazy chunk), `rulingPower.js` is the one eager holder of `seatLaw.js`, and ~425 B is under the chair's one-kilobyte bar for a unit; B5c's miss is no fault to cure.
+76. **THE FLIP'S CENSUS UNDER THE 2-HOUR CEILING (SEAT-7 to BFL, 20:52Z):** no detached relaunch (the ceiling is the harness's; the kill was refused); a partial census at the ceiling, its size to the chair first; then the unreached files as `vitest run --shard=k/N` slices of the same flipped tree, one at a time, each under the ceiling; the shards together are the one whole-suite run; then the item-73 control.
+
 ## 2. THE UNITS
 
 | unit | builder branch | state |
 |---|---|---|
-| U5-CURE2 | `lane/seat-2026-11-20-u5-cure2` (B5c, SEAT-6's container, from `c9e6ce45b`) | OUT; at the merge: no move made; arm (11) `pulseTransfer` stop → kept; `eventChange` still a stop; 22 dark digests unchanged; size baseline LOWERED; `rulingPower.js → seatLaw.js` absent; the build proof |
+| U5-CURE2 | `lane/seat-2026-11-20-u5-cure2` (B5c, `3909902fa`) | MERGED `ff07bb815`, registers `db2dcdd14` (item 75; `tests/lint` re-run owed). Was OUT; at the merge: no move made; arm (11) `pulseTransfer` stop → kept; `eventChange` still a stop; 22 dark digests unchanged; size baseline LOWERED; `rulingPower.js → seatLaw.js` absent; the build proof |
 | UK | `lane/seat-2026-11-20-uk` (BUK2, SEAT-6's container, from `fb937f369`) | OUT; at the merge: SEAT-6 §6's list |
+| U5-LAWOUT | — | DROPPED (item 75) |
 | SAVED-SEAT | `lane/seat-7-2026-11-20-saved` (BSV, from `450beaba9`) | OUT |
 | FLIP-CENSUS (A) + (B) | `lane/seat-7-2026-11-20-flip` (BFL, from the commit carrying its brief) | OUT; docs and scripts only |
 | U6 … U12, CS21 + CS22 (b), U13, U14, U8 | | not briefed (U6 after UK: `factionDynamics.js` released at `1cd2e6d93`) |
 
 ## 3. FIRST PAINT AND SIZE (for the owner's size sign-off at the close)
 
-- `seat/seatTable.js`, ruled exception (item 70 (2)): figure owed by U5-CURE2's build proof.
+- The seat train's ruled exception (item 75): `seat/seatTable.js` 4,075 B + `seat/seatLaw.js` ≈ 425 B minified in engine-core.
 - The applyWorldPulse.js size: 907 → 902 by the import's collapse (formatting), then 903–904 with the coup path's wiring; the baseline LOWERED by its own door.
 
 ## 4. DECOMPOSITIONS FOR AFTER THE DEPLOY (recorded, not built; each the chair's)

@@ -1,4 +1,4 @@
-# U5-LAWOUT — `seat/seatLaw.js` leaves the first-paint closure by an argument (dark). Builder BLO. Written 2026-11-20T20:37:59Z by SEAT-7 on the chair's rulings of 19:35Z and 19:38Z (hand-back item 70 (1)).
+# [DROPPED 20:56Z, hand-back item 75: under a kilobyte] U5-LAWOUT — `seat/seatLaw.js` leaves the first-paint closure by an argument (dark). Builder BLO. Written 2026-11-20T20:37:59Z by SEAT-7 on the chair's rulings of 19:35Z and 19:38Z (hand-back item 70 (1)).
 
 Read `COMMON.md` (its SEAT-7 section governs), `../SEAT-7-HANDBACK.md` items 69, 70 and 73, `U5-CURE.md`, `U5-CURE2.md` and `U5-CURE2-REPORT.md`. **Cut from** `lane/seat-7-2026-11-20` at the commit SEAT-7 names: `git worktree add -b lane/seat-7-2026-11-20-lawout <your dir> <commit>`, then `npm ci`. B5c built U5-CURE2's part (a) only; this is its part (b), as a unit of its own.
 
