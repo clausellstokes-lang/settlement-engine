@@ -52,8 +52,7 @@ import { economicsSlice, defenseSlice, servicesSlice, resourcesSlice } from './v
 import { stressArray, foodCore, avgScore } from './viewModelPrimitives.js';
 import { crisisHookFor } from '../../domain/crisis/crisisHooks.js';
 import { crisisSummaryForSurface } from '../../domain/crisis/crisisSummaryVantage.js';
-import { dmPowerViewOf } from '../../domain/people/patronage.js';
-import { safetyShownOf } from '../../domain/display/safetyShown.js'; // PAGE-1 SAFETY (F3a): the label's one reader, and the owner's line
+import { dmPowerViewOf } from '../../domain/people/patronage.js'; import { safetyShownOf } from '../../domain/display/safetyShown.js'; // PAGE-1 SAFETY (F3a): the label's one reader, and the owner's line
 
 // Human labels for the publicLegitimacy breakdown factors
 // (factionDynamics.computePublicLegitimacy emits { prosperity, safety, defense,
@@ -191,10 +190,7 @@ export function buildViewModel({
     aiAppendix:    useAi ? appendixSlice(ai) : null,
     // read from the canonical save (`raw`): the allegiance and the ranks are owner facts
     ...(dmView ? { dm: dmPowerViewOf(raw) } : {}),
-    // PAGE-1 SAFETY (F3a; the chair's ruling of 11:24): the owner's line beside the Safety label (the law two or more steps
-    // away, the ruling seat in criminal hands, a crime wave), read off the record the chapters print. ONLY in the DM's own
-    // document: the Foundry journal and every other caller leave `dmView` off, and their view model carries no such key.
-    ...(dmView ? { safetyQualifier: safetyShownOf(active, 'owner').qualifier } : {}),
+    ...(dmView ? { safetyQualifier: safetyShownOf(active, 'owner').qualifier } : {}), // PAGE-1 SAFETY (F3a): the owner's line beside the Safety label, ONLY in the DM's own document (the Foundry journal and every other caller leave dmView off: no such key); one line, so the line-keyed rows below keep their address
   };
 }
 

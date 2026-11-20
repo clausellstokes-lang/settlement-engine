@@ -1,0 +1,27 @@
+
+ RUN  v4.1.8 /home/user/settlement-engine/.claude/worktrees/agent-a1dcf6cf52e96eb72
+
+ ❯ tests/lint/sovereigntyLightingContract.walker.test.js (34 tests | 1 failed) 11471ms
+     × THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed 188ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/sovereigntyLightingContract.walker.test.js > the sovereignty lighting condition — a marker is EVIDENCE only in a live title > THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed
+Error: census refreeze REFUSED — the tree is dirty, and this census counts the WORKING TREE. In a shared tree those paths may belong to another lane, and charging their files to this measurement writes a figure no checkout can reproduce. Commit first, then refreeze at the clean tip. Dirty: docs/chair/2026-11-20/content/page/build/SAFETY/gate.tests-lint.txt, docs/content/wiring-census.json, src/domain/display/safetyShown.js, src/pdf/lib/viewModel.js, tests/domain/display/safetyShown.test.js, tests/ui/safetyOwnerGuard.test.jsx, docs/chair/2026-11-20/content/page/build/SAFETY/gate.tests-lint.cured.txt, docs/chair/2026-11-20/content/page/build/SAFETY/gate.tests-lint.cured2.txt, docs/chair/2026-11-20/content/page/build/SAFETY/gate.tests-lint.reds-at-base.txt, docs/chair/2026-11-20/content/page/build/SAFETY/gate.tests-lint.seven.tip.txt, docs/chair/2026-11-20/content/page/build/SAFETY/lighting-census.refreeze.txt, docs/chair/2026-11-20/content/page/build/SAFETY/wiring-census.rewrite.txt
+ ❯ refreezeCensusBaseline tests/lint/sovereigntyLightingContract.walker.test.js:720:11
+    718|     .filter((path) => path !== CENSUS_BASELINE_REL);
+    719|   if (dirty.length) {
+    720|     throw new Error('census refreeze REFUSED — the tree is dirty, and …
+       |           ^
+    721|       + ' WORKING TREE. In a shared tree those paths may belong to ano…
+    722|       + ' their files to this measurement writes a figure no checkout …
+ ❯ tests/lint/sovereigntyLightingContract.walker.test.js:3088:36
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 33 passed (34)
+   Start at  14:11:05
+   Duration  13.09s (transform 392ms, setup 71ms, import 1.13s, tests 11.47s, environment 0ms)
+

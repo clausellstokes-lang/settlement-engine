@@ -63,16 +63,16 @@ describe('the owner\'s line (the authored words, verbatim)', () => {
   const q = (label, lawBand, capture = 'none', crimeWave = false) => safetyQualifierOf({ label, lawBand, capture, crimeWave });
 
   test('the streets above the law, two steps or more', () => {
-    expect(q('Moderate', 'collapsed')).toBe('Moderate on the streets; the law has broken down.');
-    expect(q('Safe', 'critical')).toBe('Safe on the streets; the law is weak.');
-    expect(q('Very Safe', 'strained')).toBe('Very safe on the streets; the law is stretched but standing.');
-    expect(q('Tense — Famine', 'collapsed')).toBe('Tense on the streets; the law has broken down.');
+    expect(q('Moderate', 'collapsed')).toBe('Moderate day to day; the law has broken down.');
+    expect(q('Safe', 'critical')).toBe('Safe day to day; the law is weak.');
+    expect(q('Very Safe', 'strained')).toBe('Very safe day to day; the law is stretched but standing.');
+    expect(q('Tense — Famine', 'collapsed')).toBe('Tense day to day; the law has broken down.');
   });
   test('the streets below the law, two steps or more', () => {
-    expect(q('Moderate', 'surplus')).toBe('Moderate on the streets; the law is strong.');
-    expect(q('Unsafe', 'adequate')).toBe('Unsafe on the streets; the law holds.');
-    expect(q('Dangerous', 'strained')).toBe('Dangerous on the streets; the law is stretched but standing.');
-    expect(q('Volatile — Succession Void', 'adequate')).toBe('Volatile on the streets; the law holds.');
+    expect(q('Moderate', 'surplus')).toBe('Moderate day to day; the law is strong.');
+    expect(q('Unsafe', 'adequate')).toBe('Unsafe day to day; the law holds.');
+    expect(q('Dangerous', 'strained')).toBe('Dangerous day to day; the law is stretched but standing.');
+    expect(q('Volatile — Succession Void', 'adequate')).toBe('Volatile day to day; the law holds.');
   });
   test('one step apart or level: nothing', () => {
     expect(q('Moderate', 'strained')).toBeNull();
@@ -83,29 +83,29 @@ describe('the owner\'s line (the authored words, verbatim)', () => {
     expect(q('Very Safe', 'surplus')).toBeNull();
   });
   test('the ruling seat in criminal hands, said in its own words, where the label reads Moderate or better', () => {
-    expect(q('Moderate', 'strained', 'corrupted')).toBe('Moderate on the streets; the ruling seat is partly in criminal hands.');
-    expect(q('Tense — Plague Conditions', 'strained', 'capture')).toBe('Tense on the streets; the ruling seat is run by the criminals.');
-    expect(q('Moderate', 'collapsed', 'capture')).toBe('Moderate on the streets; the law has broken down, and the ruling seat is run by the criminals.');
+    expect(q('Moderate', 'strained', 'corrupted')).toBe('Moderate day to day; the ruling seat is partly in criminal hands.');
+    expect(q('Tense — Plague Conditions', 'strained', 'capture')).toBe('Tense day to day; the ruling seat is run by the criminals.');
+    expect(q('Moderate', 'collapsed', 'capture')).toBe('Moderate day to day; the law has broken down, and the ruling seat is run by the criminals.');
     expect(q('Dangerous', 'collapsed', 'capture')).toBeNull(); // the label already says the streets are bad
     expect(q('Moderate', 'strained', 'equilibrium')).toBeNull();
     expect(q('Moderate', 'strained', 'adversarial')).toBeNull();
   });
   test('a live crime wave, where the label reads Moderate or better', () => {
-    expect(q('Moderate', 'strained', 'none', true)).toBe('Moderate on the streets; crime is rising faster than those in charge can answer it.');
-    expect(q('Moderate', 'collapsed', 'corrupted', true)).toBe('Moderate on the streets; the law has broken down, the ruling seat is partly in criminal hands, and crime is rising faster than those in charge can answer it.');
+    expect(q('Moderate', 'strained', 'none', true)).toBe('Moderate day to day; crime is rising faster than those in charge can answer it.');
+    expect(q('Moderate', 'collapsed', 'corrupted', true)).toBe('Moderate day to day; the law has broken down, the ruling seat is partly in criminal hands, and crime is rising faster than those in charge can answer it.');
     expect(q('Unsafe', 'strained', 'none', true)).toBeNull();
   });
   test('a label or a law band off the vocabulary says nothing it cannot read', () => {
     expect(q('Something new', 'collapsed')).toBeNull();
     expect(q('Moderate', undefined)).toBeNull();
-    expect(q('Moderate', undefined, 'capture')).toBe('Moderate on the streets; the ruling seat is run by the criminals.');
+    expect(q('Moderate', undefined, 'capture')).toBe('Moderate day to day; the ruling seat is run by the criminals.');
     expect(q(null, 'collapsed', 'capture', true)).toBeNull();
   });
   test('the capture rungs it names are the ladder\'s own', () => {
     for (const rung of ['corrupted', 'capture', 'equilibrium', 'adversarial', 'none']) expect(CAPTURE_LADDER).toContain(rung);
   });
   test('the PDF leads the line with the word it explains', () => {
-    expect(safetyQualifierLed('Moderate on the streets; the law is strong.')).toBe('Safety: Moderate on the streets; the law is strong.');
+    expect(safetyQualifierLed('Moderate day to day; the law is strong.')).toBe('Safety: Moderate day to day; the law is strong.');
     expect(safetyQualifierLed(null)).toBeNull();
   });
   test('no figure and none of the model\'s working in any line', () => {

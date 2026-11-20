@@ -11,7 +11,7 @@
  * surplus" is the commonest pair). Neither is wrong, so neither moves: the owner's page says, in one line beside the
  * label, what the other measure holds, in the shape of `prosperityInCrisis.js`:
  *
- *     "Moderate on the streets; the law is strong."
+ *     "Moderate day to day; the law is strong."
  *
  * WHAT THE LINE SAYS, each clause read from the record, none a new fact:
  *   (1) Law & order two or more steps from the label, either way: the law's own band in plain words (LAW_CLAUSE).
@@ -101,7 +101,7 @@ export function safetyQualifierOf({ label, lawBand, capture, crimeWave }) {
   if (law >= 0 && Math.abs(rung - law) >= APART) clauses.push(LAW_CLAUSE[/** @type {keyof typeof LAW_CLAUSE} */ (lawBand)]);
   if (rung >= SEEN_CALM && typeof capture === 'string' && SEAT_CLAUSE[capture]) clauses.push(SEAT_CLAUSE[capture]);
   if (rung >= SEEN_CALM && crimeWave === true) clauses.push(WAVE_CLAUSE);
-  return clauses.length ? `${statusCase(band)} on the streets; ${listOf(clauses)}.` : null;
+  return clauses.length ? `${statusCase(band)} day to day; ${listOf(clauses)}.` : null;
 }
 
 /**

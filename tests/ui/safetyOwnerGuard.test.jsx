@@ -32,8 +32,8 @@ import { SIZES, censusPlan, configOf } from '../components/pageCensusWalk.shared
 /** PAGE-1 measure B's scale (f3.out.txt, MAPS.SAFETY and MAPS.CAUSAL), copied, not imported. */
 const SAFETY = { 'Very Safe': 4, Safe: 3, Moderate: 2, Unsafe: 1, Dangerous: 0, Controlled: 2, Tense: 2, Quarantined: 2, Strained: 1, Restricted: 1, Suspicious: 1, Desperate: 0, Volatile: 0, Critical: 0 };
 const CAUSAL = { surplus: 4, adequate: 3, strained: 2, critical: 1, collapsed: 0 };
-/** The owner's line between the two: the label's word "on the streets;" then what it could not see. */
-const LINE = /\bon the streets; [^.]+\./;
+/** The owner's line between the two: the label's word, "day to day;", then what it could not see. */
+const LINE = /\bday to day; [^.]+\./;
 
 /** The PDF's text leaves (the goldenViewModel idiom). */
 function collectText(node, out = []) {
