@@ -2664,3 +2664,50 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   in its scratch folder. SEAT-2 (08:58): its hashing proof merged (ed3424f23; the 1,245 at 6ad3e03d1 and at the tip
   hash to one value, 36ee5bb0…; the builder's plant read DIFFER): THE DARK LANE'S REFERENCE; `SEAT-2-HANDBACK.md`
   rewritten for a successor (28 rulings in one list); tip 853b79890; U2 still building.
+- 09:12 UTC · **THE VEIL'S LANE TO VEIL-24 (R3's CURE UNMERGED, THREE THINGS OWED AND RULED); VR47 READ COLD: HOLDS; ONE LINT RED
+  AT THE LANDING'S TREE, CURED.** VEIL-23 (09:04): NO "R3" LINE: the cure returned not green at its builder's mark
+  (`lane/veil-23-r3c-2026-11-20` at 4db8e4208, unmerged; its 212 reads de3efccb…): DONE by its report: V8-4
+  re-recorded and the raised power gone whole; VR42 met by 0 of 140 born towns (a hand town serves its governing
+  "Thieves' Guild" whole); copies of a withheld power outside R5's list 364 to 0 (R5 owns `factions[].desc`: 24);
+  shares re-derived; crime types fail closed with a walker (24 missing crisis types, two hook drifts found); 9 pages
+  lose a Thieves' Guild row no hidden house raised. OWED: (1) ITS PROOF'S SEARCH MATCHED A LITERAL LABEL: the fold,
+  red first by a plant, in the arm, in 212 and in the twin; (2) ITS UNIT 4 STOPPED ON A LEAK: a visitor's derived
+  Defense key is HIGHER than the house-free counterfactual in 5 of 92 towns: three by the operations label "Rival
+  Gangs", from the hidden "Multiple criminal factions" (`safety.criminalInstitutions`, `_gallery_veil_apply`); two by
+  the covert rung, not attributed; (3) two guard reds of its own (`galleryServerVeil`, city-infiltrated-0 and
+  metropolis-3: a Reveal-DM goal aimed at a power the cure now withholds); the acceptance run, the cost law, the
+  harnesses and the twin batch not run. "HANDED OVER at 4c753ec52"; it read about 330,000 and has stopped. To
+  VEIL-24 (09:05): "THE LANE IS YOURS at 4c753ec52". RULED WITH IT: (2) IS R3's OWN: R3 IS NOT GREEN WHILE THE
+  DERIVED KEY DIFFERS FROM THE COUNTERFACTUAL IN ANY TOWN: EVERY SERVED FIELD THAT FEEDS A DERIVED KEY IS RE-DERIVED
+  OVER THE HOUSES THAT READ SERVES, OR WITHHELD; the covert rung attributed first; (3) the guards re-stated with the
+  reason (a goal that names a withheld power leaves with it, under Reveal DM too), their tooth being that a goal
+  aimed at a SHOWN power is still served byte for byte. ITS ORDER FROM HERE: R3's second cure; R6; R4's second cure
+  with VR48 as its own commit; R5 (the rank-word class; the reader's four rows; `factions[].desc`); R7; stage L;
+  the doors' merge; E. VEIL-24 says about 190,000; its successor is seated at 330,000 by the chair's read.
+  "THE OTHER 179" (VEIL-24, 09:04): every one a card whose stored `institution.veiled` is true: the public
+  projection takes its house away and the honorific prints nothing (176 houses, e.g. "the smuggler" printed
+  "Smuggler"; 3 powers): all from the default hiding of a hideable house or power: NO FAULT. Said to the owner.
+  REVIEW-VEIL-12 (09:12): "VR47 e4cce485f": HOLDS (its review section 2 at 084e0cc5c): the diff line by line; red
+  at the brief's commit (4 fail), green at the lane with three re-recorded pin files (38 of 38); every bundle
+  rebuilt at that commit byte-equal but for its stamps; ITS ATTACK (24 born towns; unmarked and default veil;
+  Reveal DM off and on; 3,830 drawn cards with a house): six things a read withholds or re-keys changed one by one
+  (the card's id; its institution key; `institution.veiled`; every other card removed; every hideable house
+  removed; every person id re-keyed): cards whose printed honorific moved: AT THE BASE 1,606 / 1,596 / 0 / 0 / 0 /
+  1,594; AT THE TIP 0 ON ALL SIX. Owner against visitor: 78 of 3,830 cards differ, EVERY ONE a woman whose served
+  card has no gender (0 of 2,858 otherwise): VR48's field, which it attacks at R4 as a field newly served.
+  FRAME-4 (09:06) found the stop it was told to look for: `crisisPage.js :: composeCrisisPage(settlement)` TAKES NO
+  AUDIENCE (callers: CrisisTab.jsx, the PDF's crisis sections, the Foundry journal). APPROVED: ITS UNIT U0, the
+  crisis page's explicit audience argument (the same set as the sheet's; fails closed; every caller passes it;
+  nothing new drawn: byte-identical for every reader), then P1b and P4a OWNER-ONLY, red on both sides (ruled: the
+  new lines are drawn for the owner only whatever today's shared page shows). FRAME-3 (09:05): its registers
+  re-taken at 36c640d36 (the lighting census 3,705 to 3,711; the wiring stamp +2 by name; the `proseNumerics` row);
+  B9 with the seed-loop cure, and B11 (the "it" cause, from B10's lead) with two builders.
+  THE LANDING OF POINTS 79 AND 80, HELD ONCE: `tests/lint` whole at the merged tree read 219 OF 220 FILES, 3,270 OF
+  3,271: `proseDrawnAnchors.walker` on NAMES-2's new `tests/generators/powerVerbAgreement.test.js` ("2 (frozen
+  none)"). CAUSE, found by a reading helper in the chair's container: a HAND-MADE input ("The gap between them and
+  the Merchant Guilds controls nothing") whose fixed words align with a state-prose template at the walker's floor
+  (18 characters): not a drawn sentence. CURED in that one file, the walker untouched (82348360: the input's
+  lead-in reworded; with the source fix taken out the file reads 5 failed of 6; the source restored byte for byte;
+  the walker 6 of 6; no title moved). NEITHER NAMES-2 NOR NAMES-3's VERDICT HAD RUN `tests/lint` WHOLE ON
+  6c38ecfaa, AND THE CHAIR HAD NOT ASKED THE VERDICT FOR IT: whole lint is part of every verdict and of every
+  hand-back that adds a test file. `tests/lint` whole is re-running at 82348360; then the rows and the push.
