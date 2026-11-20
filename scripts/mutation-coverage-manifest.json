@@ -4671,6 +4671,10 @@
       "kind": "mutation",
       "label": "names/a crisis stake's verb takes its power's number"
     },
+    "tests/data/tensionSideMeanings.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by PAGE-2's sides-table unit (S7 second cut, the seventh chair's rulings of 2026-11-20 11:36 and 11:58), integrated by PAGE-3. It holds a pure frozen data table (src/data/tensionSideMeanings.js) total against the template table and the generator's own source: every side string of every form of every kind and every fixed generator side has exactly one row at exactly its places, every presumed atom is known, every without names no power, house or tier, and the by-slot index reaches every slot. The catalogue it checks against is COMPUTED from HISTORICAL_EVENTS_DATA and historyGenerator.js at run time, so any edit to either side reds it without a sweep plant; red first on the base (the module absent) and by an in-place control (two withouts and the by-slot export reverted: 3 failed)."
+    },
     "tests/lint/namesInSentences.walker.test.js": {
       "kind": "rationale",
       "rationale": "Introduced by NAMES-1 (the seventh chair's rulings CN1-CN3 of 2026-11-20). It holds, over a born pool (every twentieth row of censusPlan('r2'), six tiers, calm and in crisis), that no stored prose sentence names a power by a bare label or a mid-sentence capital \"The\", that the prose form of every hideable power and house holds its name as the share veil folds it, that no full name stands twice in one sentence, and that no string speaks of a person by a gendered pronoun or half a name without naming them in full. Red first at the base 85fccf898 (852 bare labels, 109 mid-sentence capitals, 584 repeated names on the pool); its CONTROLS plant each defect and prove each detector reds; a sweep plant would re-plant the same reverts."
