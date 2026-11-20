@@ -1754,3 +1754,45 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   thoughts; `prompts/SEAT-1.txt` ADDENDUM 4 holds the ruling in full; sent into SEAT-1's running turn). OPEN WITH THE
   OWNER, one yes or no: whether the DM alone sees a mark on the front's own card (the chair recommends yes; built as
   "nowhere" meanwhile). FRAME-2 is session_019yED1SkacgZyeUgMMGhdL4 (seated 05:45 UTC from 4203eb655).
+- 05:54 UTC · **THREE HAND-BACKS: R2 IS MERGED AND THE VEIL'S LANE HANDED OVER; THE NAMES ARE BUILT, A FINISHER SEATED; THE DOORS' SEAT
+  ANSWERED.**
+  **(1) VEIL-21: "R2 4ddf8c60c"**, merged green; its tip 463d0362c (PART 22 sections 7 and 8: the hand-over); read back by
+  the chair: 212 sha256 05b915ab…8f10 (its rollback 1454f8f3…a66e), 211 unchanged (eface6d0…). R2: the withhold-always rows
+  in 212 and the twin; the page and the import re-derive what the server withholds. THE GATE THROUGH THE SERVER (the gallery
+  read, new shape, N=2): registered 0, diffuse 0, rng 13, UNREGISTERED 137 before; 13, 21, 13, 42 after. NOT RUN, OWED BY
+  THE NEXT OWNER: the party link and master's stored shape. THE THREE REDS, each by cause: a REGRESSION R2 itself made
+  (212 withheld the memberships' `veiled` stamp, so unmarked pages drew memberships empty on 7 of 8 towns: cured in code,
+  `restampServedMemberships` on the server's own data, a copy); old-behaviour pins re-recorded with their cause stated;
+  R2's own test edit of the Defense read undone (the owner's record restored). ALSO: equality 428 of 428; a ruined house:
+  8 shares, 0 wrong; VR37 sharpened as ruled (0 of 24 disagree, a planted control live); THE SESSION SHEET WALKED on the
+  shared page and the party link at both widths: nothing drawn; cost: the largest born town (502 KB), the Reveal-DM read
+  419.1 ms against the bound 529.6; the acceptance run exit 0; R6 prepared at b47b7bbdb, not merged. Known reds: VS1's 28
+  lines (cured by V10-2's merge); the observed-shape scanner (the close). ONE CONFIRMATION ASKED AND GIVEN: the registry's
+  page column for the black market's share is "re-derive" on a share that carries no veil (40 of 40 equal to the
+  owner's) and "not drawn" otherwise, ON CONDITION that the page knows it from the served signal alone and the absence is
+  the same for every town under that signal. FOR THE OWNER'S LIST: under the default settings a shared page no longer
+  shows the black market's percentage.
+  **THE HAND-OVER DONE: "THE LANE IS YOURS at 463d0362c" sent to VEIL-22** with what is owed (the link and master's shape;
+  that condition; V10-2's merge at the first stage boundary; R6; at the doors' merge the acceptance run and the reader's
+  repros are the lane owner's); "R2 4ddf8c60c" FORWARDED TO REVIEW-VEIL-11 for its cold read (the re-stamp named as the
+  thing to read hardest).
+  **(2) NAMES-1: "NAMES b34c3115f"** (code d0549419b; stopped past its mark). EXECUTED by it, on the stored prose of 720
+  born towns: bare power labels in sentences 20,449 to 0; a capital "The" in mid-sentence 1,802 to 0; a full name
+  repeated in one sentence 12,054 to 0; at render on 120 towns the DM's power lines 2,159 to 0. The mechanism as ruled
+  (`data/people/powerSentenceName.js :: powerNameWithArticle` behind `powerNameInProse`;
+  `data/people/personMention.js :: secondMentions`); the walker `namesInSentences.walker` red first, 13 of 13 green, its
+  two arms for the veil's rule green before and after with planted controls. LEFT: two walkers red by five rewritten
+  source lines (they bank lines by literal text); `tests/lint` whole, the page census and the pool-dominance registers
+  not run; "one hall rung on the Power tab drew another line", cause unmeasured; an older verb-agreement slip that the
+  article now makes audible ("the Merchant Guilds wants"). NAMED, NOT SIGNED: the golden master; `generationForkCensus`
+  A1; the golden-corpus arms of two more files; `worldFactRederive` A7; `powerEconomyFreshness` A4.
+  **NAMES-2 SEATED** (`prompts/NAMES-2.txt`; the middle tier at high effort; `lane/names-2-2026-11-20` from b34c3115f, the
+  line merged in first): the two reds by cause (the source line restored byte-identical, the article moved into the
+  value); **THE CONFINEMENT CHECK, NEW, WHICH DECIDES THE LANDING: between the base and its tip a born town differs ONLY
+  in prose strings (the 525 and the 720, key by key), and the moved hall line's cause is found**; `tests/lint` whole, the
+  page census, the registers; the verb agreement MEASURED AND PROPOSED ONLY; for the owner ten sentences before and
+  after, and for the chair one whole town's page text before and after.
+  **(3) VEIL-DOORS-3** (tip 117c49e88; item 3 pushed, item 4 committed): its question on the acceptance run crossed the
+  ruling that took it off its list: answered (NOT RUN, with its reason; the lane's owner runs it at the merged tree).
+  Its probes: the chronicle red 8 of 8 at bedd5a392, green at its tip; the tile's crime cause gone (the band word left:
+  the tier 2 residual); the world columns refused at storage at both.
