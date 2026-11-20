@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "379f63cb68650d548dbd66ccbf72f9a7f95c7586",
-  "measuredBy": "POINT-82",
+  "measuredAtSha": "1a4f526560c5c4a378ed73ebe6a0c51f17bf8b11",
+  "measuredBy": "GOALS-3 builder 8 (lane/goals-3-2026-11-20-b8)",
   "date": "2026-11-20",
-  "note": "names-4 landed: the agreement work, its swap test and census cure",
-  "files": 3707,
-  "parked": 472,
-  "credited": 3235,
-  "titles": 31237,
-  "suiteTitles": 8651
+  "note": "the goals lane added five test files: tests/data/goalSecretRefusals.test.js, tests/generators/people/goalSecretRefusals.test.js, tests/generators/people/goalSentencesOnceInTown.test.js, tests/generators/people/goalsNoRepeatedWording.test.js, tests/generators/tieReserveHead.test.js (units 1, 3, 4+6, 7: 84a8606b9, 94493d1fd, 3ebec303a, 293edcb9e)",
+  "files": 3712,
+  "parked": 474,
+  "credited": 3238,
+  "titles": 31262,
+  "suiteTitles": 8661
 }

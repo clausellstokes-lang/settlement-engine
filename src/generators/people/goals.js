@@ -449,29 +449,34 @@ function cellCandidates(family, kind, vantage, slots, ctx, held, extra = {}) {
   const said = Object.fromEntries(Object.entries(slots).map(([k, v]) => [k, PROSE_SLOTS.has(k) && typeof v === 'string' && v ? powerNameWithArticle(v) : v]));
   const people = personCardsOf(slots, ctx);
   const poolId = `goalFamilies:${family}.${kind}.${vantage}`;
-  /** @param {unknown[]} lines @param {boolean} counted whether a held refusal counts on the receipt (the cell's; the reserve's do not) @returns {Candidate[]} */
-  const build = (lines, counted) => {
+  /**
+   * GOALS-3 builder 8: the lines are the cell's (`counted`: a held refusal counts on the receipt) or the reserve's (it does
+   * not), read off the two tables above, never handed in; every text below is taken off the door's own kept line (`drawn`).
+   * @param {boolean} counted @returns {Candidate[]}
+   */
+  const build = (counted) => {
     /** @type {Candidate[]} */
     const out = [];
-    for (const line of lines) {
+    for (const line of counted ? cell : reserve) {
       const { result: kept, notes } = quiet(() => filterDeclared([line], { facts: ctx.facts, poolId, surface: 'npcs' }));
       if (!kept.length) continue;
+      const drawn = kept[0];
       // NAMES-3 (CV7): a line's agreement forms (`{power|it|them}`) take their power's own number, from the record's name
-      const filled = fillLine(fillAgreement(templateOf(line), slots), said);
+      const filled = fillLine(fillAgreement(templateOf(drawn), slots), said);
       if (!filled) continue;
       // NAMES-1 (CN2): a person's later mention in the line is a pronoun, a surname, a role or a given name
       const text = secondMentions(filled[0].toUpperCase() + filled.slice(1), people);
       if (held.has(text)) { if (counted) ctx.refusals.n += 1; continue; }
-      const used = Object.fromEntries(slotsIn(templateOf(line)).map((k) => [k, slots[k]]));
-      const fewMembers = typeof extra.members === 'number' && (GOAL_LINE_MIN_MEMBERS[templateOf(line)] ?? 0) > extra.members; // BAR8 K-PEOPLE (14h)
+      const used = Object.fromEntries(slotsIn(templateOf(drawn)).map((k) => [k, slots[k]]));
+      const fewMembers = typeof extra.members === 'number' && (GOAL_LINE_MIN_MEMBERS[templateOf(drawn)] ?? 0) > extra.members; // BAR8 K-PEOPLE (14h)
       // GOALS-1 (the chair's check of 10:48 UTC): a gentle line on a harsh tie is refused, marked (never dropped), draw-free
-      const harshTie = !!extra.tie && arr(rec(/** @type {Rec} */ (GOAL_LINE_NOT_ON_TIES)[templateOf(line)])[extra.tie.type]).includes(extra.tie.strength);
-      out.push({ family, kind, text, target: extra.target ?? null, slots: used, refs: extra.refs ?? [], notes, ...(fewMembers || harshTie ? { refused: true } : {}), wording: wordingOf(line, slots), call });
+      const harshTie = !!extra.tie && arr(rec(/** @type {Rec} */ (GOAL_LINE_NOT_ON_TIES)[templateOf(drawn)])[extra.tie.type]).includes(extra.tie.strength);
+      out.push({ family, kind, text, target: extra.target ?? null, slots: used, refs: extra.refs ?? [], notes, ...(fewMembers || harshTie ? { refused: true } : {}), wording: wordingOf(drawn, slots), call });
     }
     return out;
   };
-  const out = build(cell, true);
-  if (reserve.length) { const kept = build(reserve, false); if (kept.length) ctx.reserve.set(call, kept); }
+  const out = build(true);
+  if (reserve.length) { const kept = build(false); if (kept.length) ctx.reserve.set(call, kept); }
   return out;
 }
 
@@ -734,6 +739,8 @@ function apartIn(ctx) {
 
 /** The two vantages, in the order a card holds them. */
 const VANTAGES = /** @type {const} */ (['short', 'long']);
+/** A card's keyed intent at one vantage, read by its own key (`intent.short`, `intent.long`), never by a computed index. @param {unknown} intent @param {Vantage} v @returns {Rec} */
+const intentAt = (intent, v) => rec(v === 'long' ? rec(intent).long : rec(intent).short);
 
 /**
  * A9 — DEAL THE GOALS over the final cast (design §2): each card's SHORT and LONG goal, from two
@@ -971,7 +978,7 @@ export function refuseWantsBesideSecrets(settlement, cast, relationships, option
   const rowsOf = () => (rows ??= refusalRowsOf(settlement));
   const hits = cast.map((c) => {
     if (!c || c.id == null || keep.has(String(c.id))) return null;
-    const vs = VANTAGES.filter((v) => { const it = rec(rec(rec(rec(c).goal).intent)[v]); return it.family === 'PERSONALITY' && refusedCluster(it.kind); });
+    const vs = VANTAGES.filter((v) => { const it = intentAt(rec(rec(c).goal).intent, v); return it.family === 'PERSONALITY' && refusedCluster(it.kind); });
     if (!vs.length) return null;
     const r = rareRowOf(rec(c).secret); // the final secret: a rare row (its name, for the tooth), else the card's own
     const rare = !!r && GOAL_SECRET_REFUSAL_RARE_KEYS.includes(str(r.row.key));
@@ -1010,8 +1017,8 @@ export function refuseWantsBesideSecrets(settlement, cast, relationships, option
           const list = holders.get(key); if (list) list.push(h); else holders.set(key, [h]);
         }
       });
-      const old = rec(goal.intent[v]);
-      const other = str(rec(goal.intent[v === 'short' ? 'long' : 'short']).family);
+      const old = intentAt(goal.intent, v);
+      const other = str(intentAt(goal.intent, v === 'short' ? 'long' : 'short').family);
       const by = familyCandidates(card, out, ctx, v, held, { pursuit: v === 'long' ? lawLongPursuit(card, out, ctx) : null });
       const own = (by.PERSONALITY || []).map(refuse);
       const picked = own.find((c) => c.text === goal[v]) || own.find((c) => c.kind === old.kind) || null;

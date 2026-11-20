@@ -293,7 +293,7 @@ describe('GR3 for ties: the reserve arms, with the chair\'s approved pairs (GOAL
           for (const [field, lines] of /** @type {Array<['description' | 'tension', any[]]>} */ ([['description', a.desc.lines], ['tension', a.tension.lines]])) {
             expect(typeof got[field] === 'string' && got[field].length > 0, `${where}: a ${field}`).toBe(true);
             expect([got[field]], `${where}: the reserve's own ${field}`).toEqual(rendersOf(lines[i], X, Y, reversed));
-            for (let h = 0; h < head; h++) expect(rendersOf(lines[h], X, Y, reversed), `${where}: never head ${field} ${h}`).not.toContain(got[field]);
+            for (let h = 0; h < head; h++) expect(rendersOf(lines[h], X, Y, reversed), `${where}: never head ${field} ${h}`).not.toContain(got[field]); // anchored: got[field] is asserted a non-empty string and equal to the reserve line's own render two lines above
           }
           // `ties.js :: temperOfTie`'s read (module-private): the rows at `tieIndexOf(v) % lines.length` are the reserve's
           expect(tieIndexOf(v), `${where}: the stored index`).toBe(i);
