@@ -52,3 +52,16 @@ Commit; the readers' census (path); the parity counts (towns × tensions × proj
 every surface wired (file :: symbol) and every one NAMED for another seat; red-then-green receipts under
 `build/CAUSES-WIRING/`; born-hash counts (`build/CARD/bornHash.mjs`); each pin's before -> after with its cause;
 gates: `tests/lint` WHOLE, both typechecks, lint (each through `sh scripts/gate-mutex.sh --run --`, to a file).
+
+## ADDED BY PAGE-9, 2026-11-20 19:28 UTC (`date -u`), on the chair's condition of 19:28 UTC: THE FIRST PAINT DOES NOT GROW
+
+The trouble half's modules (`src/data/tensionCauses.js`, `tensionSideMeanings.js`, `tensionSidePower.js`,
+`src/domain/display/tensionCause.js`, `tensionCauseHolds.js`: about +77.5 KB source, +43.9 KB minified) are unwired
+today; YOUR wiring decides where they ship. `tensionShown.js` must NOT be reached statically from `main.jsx`'s closure,
+nor from any module a generator reaches; `facts/causeHouses.js` (already eager through `factsOf.js`) must not pull the
+tables after it. The surfaces are tabs and exports behind `import()` (`dossierLazyTabs.js`); CHECK every static
+importer of a surface you wire (e.g. `DossierSearchResults.jsx` imports `HistoryTab.jsx`'s `TensionRow` statically:
+find whether that file is itself lazy). PROOF, through the gate mutex, never a pipe: `npm run build` at base and at
+your tip, then `tests/build/vendorPdfLazy.test.js` and `tests/build/generationWorkerLazy.test.js`; the first-paint
+closure's raw, gzip and Brotli bytes at base and tip: NOT ONE BYTE UP; and name the chunk the tables land in. A rise
+STOPS you: report it, do not restructure the app's loading.
