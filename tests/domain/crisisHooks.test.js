@@ -35,7 +35,7 @@ describe('crisisHooksOf: one hook bound to the cast, one bound to the lever', ()
     const entry = { type: 'famine', cast: cast([npcRow('brunt', 'n1', 'Mara Vell', CAST_REASONS.bruntBase.food_security)]) };
     const [hook] = crisisHooksOf(town(), entry);
     expect(hook).toEqual({
-      text: 'In the famine, Mara Vell of Millers’ Guild takes the worst of it: the hunger falls first on its people.',
+      text: 'In the famine, Mara Vell of the Millers’ Guild takes the worst of it: the hunger falls first on its people.',
       bound: 'cast',
       link: { kind: 'npc', id: 'n1', label: 'Mara Vell' },
     });
@@ -45,7 +45,7 @@ describe('crisisHooksOf: one hook bound to the cast, one bound to the lever', ()
     const entry = { type: 'famine', cast: cast([npcRow('brunt', 'n1', 'Mara Vell', CAST_REASONS.bruntBase.food_security)]) };
     const s = town();
     s.npcs[0] = { ...s.npcs[0], memberships: [{ power: 'Town Council', rank: 3 }, { power: 'Millers’ Guild', rank: 1 }] };
-    expect(crisisHooksOf(s, entry)[0].text).toBe('In the famine, Mara Vell of Millers’ Guild takes the worst of it: the hunger falls first on its people.');
+    expect(crisisHooksOf(s, entry)[0].text).toBe('In the famine, Mara Vell of the Millers’ Guild takes the worst of it: the hunger falls first on its people.');
     s.npcs[0] = { ...s.npcs[0], memberships: [] };
     expect(crisisHooksOf(s, entry)[0].text).toBe('In the famine, Mara Vell takes the worst of it: the hunger falls first on its people.');
   });
@@ -57,7 +57,7 @@ describe('crisisHooksOf: one hook bound to the cast, one bound to the lever', ()
         [{ factionId: 'Merchants', stake: 'gains', reason: STAKE_REASONS.gainsHolds }, { factionId: 'Town Council', stake: 'loses', reason: STAKE_REASONS.loses }]),
     };
     expect(crisisHooksOf(town(), entry)).toEqual([{
-      text: 'The famine turns on the town granary, run by Mara Vell: if it gives way, Town Council loses most, because its own people feel the crisis first.',
+      text: 'The famine turns on the town granary, run by Mara Vell: if it gives way, the Town Council loses most, because its own people feel the crisis first.',
       bound: 'lever',
       link: { kind: 'faction', id: 'Town Council', label: 'Town Council' },
     }]);
@@ -84,7 +84,7 @@ describe('crisisHooksOf: one hook bound to the cast, one bound to the lever', ()
     const entry = { type: 'famine', cast: cast([npcRow('lever', 'n1', 'Mara Vell', CAST_REASONS.leverRuns)]) };
     const [hook] = crisisHooksOf(fed, entry);
     // TAIL-CRISIS batch 3 (re-keyed by identity): a predicate reason is said of the holder, never after a colon
-    expect(hook.text).toBe('In the crisis, Mara Vell of Millers’ Guild, who runs the office that decides how the crisis goes, holds the key to it.');
+    expect(hook.text).toBe('In the crisis, Mara Vell of the Millers’ Guild, who runs the office that decides how the crisis goes, holds the key to it.');
     expect(hookTruthViolations(hook.text, settlementHookFacts(fed))).toEqual([]);
   });
 
@@ -189,11 +189,11 @@ describe('crisisHooksOf: a cast hook never echoes its own clause', () => {
   const occupier = { role: 'face', kind: 'faction', id: 'Occupation Authority', name: 'Occupation Authority', reason: CAST_REASONS.face, temporary: false };
   it('the occupier\'s house as its own face reads as one plain sentence', () => {
     const [hook] = crisisHooksOf(town(), { type: 'occupied', cast: { ...cast([occupier]), nature: 'external' } });
-    expect(hook.text).toBe('In the occupation, the occupier\'s orders come through Occupation Authority.');
+    expect(hook.text).toBe('In the occupation, the occupier\'s orders come through the Occupation Authority.');
   });
   it('a defender who leads the military is not told twice that they lead it', () => {
     const [hook] = crisisHooksOf(town(), { type: 'wartime', cast: { ...cast([npcRow('defender', 'n2', 'Oswin Hale', CAST_REASONS.defenderMilitary)]), nature: 'external' } });
-    expect(hook.text).toBe('In the war, Oswin Hale of Town Council leads the defence.');
+    expect(hook.text).toBe('In the war, Oswin Hale of the Town Council leads the defence.');
   });
 });
 
@@ -222,7 +222,7 @@ describe('crisisHooksOf: the lever hook in plain grammar', () => {
 describe('crisisHooksOf: a person is never "it"', () => {
   it('the legitimacy brunt\'s reason names the house that takes the blame, for a person or the house alike', () => {
     const [hook] = crisisHooksOf(town(), { type: 'famine', cast: cast([npcRow('brunt', 'n2', 'Oswin Hale', CAST_REASONS.bruntBase.public_legitimacy)]) });
-    expect(hook.text).toBe('In the famine, Oswin Hale of Town Council takes the worst of it: the blame falls on the house, and its good name pays for the crisis.');
+    expect(hook.text).toBe('In the famine, Oswin Hale of the Town Council takes the worst of it: the blame falls on the house, and its good name pays for the crisis.');
     // anchored: the subject is the exact text or constant asserted positively beside it (SW-6), so it cannot have drifted away
     expect(hook.text).not.toMatch(/: it takes/);
   });
@@ -244,8 +244,8 @@ describe('crisisHooksOf: a plural power agrees', () => {
   it('a plural losing power takes "lose" and "their"; a singular one keeps "loses" and "its"', () => {
     const lever = { institution: 'Temple', holderId: null, holderName: null };
     const hookFor = (factionId) => crisisHooksOf(town(), { type: 'plague_onset', cast: cast([], [lever], [{ factionId, stake: 'loses', reason: STAKE_REASONS.loses }]) })[0].text;
-    expect(hookFor('Religious Authorities')).toMatch(/Religious Authorities lose most, because their own people feel the crisis first\.$/);
-    expect(hookFor('Town Council')).toMatch(/Town Council loses most, because its own people feel the crisis first\.$/);
+    expect(hookFor('Religious Authorities')).toMatch(/the Religious Authorities lose most, because their own people feel the crisis first\.$/);
+    expect(hookFor('Town Council')).toMatch(/the Town Council loses most, because its own people feel the crisis first\.$/);
   });
 });
 
