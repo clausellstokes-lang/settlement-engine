@@ -4506,3 +4506,14 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   DEPTH: the hooks unit BUILT at 6a6b5f814 (`lane/depth-2-2026-11-20-hooks-wip`; 60 lines byte-exact, 60 tags), NINE
   pins red in 6 files being sorted against its base; the second tranche's writer out (brief cb201e866); the
   conflict's measuring helper still out. PAGE-6: L2's builder applying the 15:35 word; S9 out.
+- 16:03 UTC · NET 14's PASS (the counts read at 16:00 to 16:01; every record now reads `allowed`, none `allowed_warning`).
+  COUNTS: FRAME-6 309,292; TRAD-4 309,162; SEAT-5 298,124; PAGE-6 295,869; GOALS-3 286,718; VEIL-27 262,974. Not
+  read this pass (each far from 360,000 by its last figure): DEPTH-2 (about 200,000), PAGE-7 (182,287 at 15:07),
+  PAGE-4 (its own estimate 230,000; its record is stale since a compaction), FORTUNE-3 (about 135,000), and the
+  three seated at 15:56 (SAME-1, PLACE-1, PEOPLE-1: read at net 15). BY THE PACE OF THE LAST 53 MINUTES: TRAD-4
+  reaches 360,000 near 16:45, FRAME-6 near 16:55, SEAT-5 near 17:00. `prompts/SEAT-6.txt` AND `prompts/FRAME-7.txt`
+  ARE WRITTEN (lean: the predecessor's prompt is the assignment; the rulings since; the hand-over), NOT SEATED: seat
+  each when its predecessor's record passes 360,000 (source: the predecessor's branch; outcome
+  `lane/seat-6-2026-11-20`, `lane/frame-7-2026-11-20`). TRAD-5 is not written: TRAD-4's lane may end first (unit
+  5's merge, unit 6's samples, the import path and the round trip for the reader); write it only if it passes
+  330,000 with units left. Net 15 set 45 minutes on.
