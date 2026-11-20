@@ -1,0 +1,65 @@
+UNIT 3 RED: the final test files against the BASE importRederive.js (git show cfd77fdef:src/domain/veil/importRederive.js), the cure set aside and restored byte-identical after
+[gate-tail] start:  03:09:16 up 32 min,  0 user,  load average: 2.74, 1.75, 1.61 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/side
+
+ ❯ tests/store/galleryImportServedBand.test.js (4 tests | 2 failed) 8506ms
+     × BAND: the importer's record carries the served band on every town 7ms
+     × DEPENDENT: the legitimacy cause, the readiness score and each condition's severity read the served band 11ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/store/galleryImportServedBand.test.js > VR28: the import keeps the served prosperity band, and what it derives from the band reads it > BAND: the importer's record carries the served band on every town
+AssertionError: expected [ …(2) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "thorp-famine-2 (Subsistence): served Struggling, imported undefined",
++   "hamlet-plague_onset-3 (Subsistence): served Struggling, imported undefined",
++ ]
+
+ ❯ tests/store/galleryImportServedBand.test.js:113:17
+    111|     const bad = towns.filter((t) => t.saved.economicState?.prosperity …
+    112|       .map((t) => `${t.seed}${t.subsistence ? ' (Subsistence)' : ''}: …
+    113|     expect(bad).toEqual([]);
+       |                 ^
+    114|   });
+    115|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/store/galleryImportServedBand.test.js > VR28: the import keeps the served prosperity band, and what it derives from the band reads it > DEPENDENT: the legitimacy cause, the readiness score and each condition's severity read the served band
+AssertionError: expected [ …(5) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "thorp-famine-2: breakdown.prosperity undefined vs the band's -20",
++   "thorp-famine-2: breakdown.prosperity undefined vs born -20",
++   "hamlet-plague_onset-3: breakdown.prosperity undefined vs the band's -20",
++   "hamlet-plague_onset-3: severity plague 0.76 vs 0.7",
++   "hamlet-plague_onset-3: breakdown.prosperity undefined vs born -20",
++ ]
+
+ ❯ tests/store/galleryImportServedBand.test.js:139:17
+    137|       }
+    138|     }
+    139|     expect(bad).toEqual([]);
+       |                 ^
+    140|   });
+    141|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  2 failed | 7 passed (9)
+   Start at  03:09:17
+   Duration  9.80s (transform 6.64s, setup 68ms, import 172ms, tests 18.09s, environment 0ms)
+
+[gate-tail] end:  03:09:26 up 32 min,  0 user,  load average: 3.56, 1.95, 1.68

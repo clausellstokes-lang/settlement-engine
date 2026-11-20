@@ -1,0 +1,34 @@
+UNIT 2 — STOPPED at measure-first: the door exists, but it is a GOVERNED detector source; nothing written, nothing committed but this record.
+
+REPRODUCED (CONFIRMED) at 3b78c427e (== 50c7263d0 + unit 1's docs): 4 violations, as the brief says:
+  criminalVeilSwitch.js  fields on institution ×1   (the switch's, at the cut)
+  economy/prosperity.js  magicExists on config ×2  (NEW)
+  foodGenerator.js       magicExists on config ×2  (NEW)
+  priorityHelpers.js     magicExists on config ×1  (NEW)
+  walker tests/lint/observedShapeReaders.walker.test.js: 45 of 47; two arms red: SHRINK-ONLY {violations 4, stale 0}
+  and A1/A7 register figures {reads 2220, identities 1556, files 448} vs frozen {2214, 1552, 444}
+  (u2-walker-red.txt; u2-check-red.txt is node scripts/check-observed-shape-readers.mjs).
+
+THE DOOR: scripts/lib/observed-shape-corpus.mjs :: buildObservedCorpus's topology passes (1b, 1b', 1c, 1d: settlements
+pushed onto `roots`, never `generated`, so the pulse is untouched). No pass runs the share's twin or birthConfig: every
+corpus config is a raw CONFIGS row without magicExists, so the shape `config` never carries it.
+
+WHY STOPPED (CONFIRMED by execution, the corpus file set aside and restored byte-identical after each try):
+  1. The corpus builder is a HASH-BOUND DETECTOR SOURCE of the schema-45 baseline (manifests.detectorTree,
+     scripts/lib/observed-shape-corpus.mjs sha256 72c11160...). With a pass added (2 x 4 settlements, CONFIGS[0] with
+     magicExists true / false), the gate refuses: "observed-shape DETECTOR SOURCE changed since the schema-45
+     instrument was governed (scripts/lib/observed-shape-corpus.mjs); an ordinary gate/write cannot migrate the
+     instrument. Build and review the governed migration bundle instead." (u2-door-experiment.txt)
+  2. Even --scan-only refuses it uncommitted: "observed-shape current detectorTree is not the exact committed HEAD
+     input tree". So using the door IS a schema-46 rung: the rung's code in scripts/check-observed-shape-readers.mjs
+     and scripts/lib/observed-shape-baseline.mjs, a reviewed --migration-review bundle, and --write from a clean
+     committed tree: files and a process the brief does not name.
+  3. THE SIZE (PLAUSIBLE, not executed: the instrument refuses the measure): "magicExists on config" is ONE identity
+     already admitted as ordinary debt: 14 frozen rows, 15 reads (defenseGenerator, magicProfile, magicReliance,
+     capacityModel, resolveConfig, selectors, ...). Observing the key on `config` would clear the identity in every
+     file: the 3 new rows (5 reads) AND the 14 frozen (15 reads), 17 rows / 20 reads (osr --report lists 20 reads in
+     17 files). The register figures and the inventory total would move with it; each would have to be named.
+
+FOR THE SEAT: (a) a governed schema-46 corpus-coverage rung (the schema-32 "infiltrated" pass precedent), or (b) the
+brief's fallback, an explained-writer row naming the writer (birthConfig over DEFAULT_CONFIG; the share serves the
+stored config) and the measure 36 of 36. Neither started.

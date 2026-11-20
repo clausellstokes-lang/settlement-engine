@@ -4,8 +4,10 @@
  *
  * THE SHARE AS R2 WILL SEND IT: born towns, the default veil (writeShareVeil({}, [])), Reveal DM off, read by the
  * client's twin (galleryPayloadFor, projectShareVeil); then every path the roster-choice registry withholds on EVERY
- * non-owner read deleted (its `withhold`/`always` rows), and prosperity with its founding line (the chair's ruling of
- * 01:20 UTC under VR19). That document is what the import read answers, and the tree's own import runs over it.
+ * non-owner read deleted (its `withhold`/`always` rows). (Prosperity and its founding line, withheld here under the
+ * chair's ruling of 01:20 UTC, are SERVED again under VR28 (01:35 UTC, tier 2): RULED_SINCE is empty since; the import
+ * keeps the served band, tests/store/galleryImportServedBand.test.js.) That document is what the import read answers,
+ * and the tree's own import runs over it.
  *
  * THE ARMS:
  *   1  THE TEN FIELDS (R2-IMPORT-MEASURE.md's outcome (c)) arrive on the importer's record: the compound's figures in
@@ -41,7 +43,8 @@ const SEEDS = [
 ];
 const isRec = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
 const clone = (v) => JSON.parse(JSON.stringify(v));
-const RULED_SINCE = [/^economicState\.prosperity$/, /^history\.founding\.overcoming$/];
+/** VR28 (01:35 UTC) served `economicState.prosperity` and `history.founding.overcoming` again (tier 2): none since. */
+const RULED_SINCE = [];
 
 /** Delete every node whose differ-normalised path a withhold-always pattern matches (arrays read as `[]`). */
 function withholdAlways(doc, patterns) {

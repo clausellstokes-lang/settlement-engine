@@ -1,0 +1,80 @@
+UNIT 0 — STOPPED: a measurement contradicts the instruction (the pin).
+The pin `expect(readers.length).toBe(117)` counts the walker's DISCOVERY SET (every src/domain file whose code reads .institutions, compliant or exempt), not exempt rows (73 rows).
+gallerySecondHomes.js still reads .institutions (now COMPLIANT via _worldPulseInactive/NOT_LIVE), so deleting its exempt row leaves the count at 117.
+  BASE (cfd77fdef + unit 3, walker untouched): 11 of 12 (exempt honesty red) — u3-gates.txt carries both runs.
+  VARIANT A: row deleted, pin 117 kept: 12 of 12 (exit 0).
+  VARIANT B: row deleted, pin 117 -> 116 as instructed: 11 of 12, 'expected 117 to be 116' (exit 1).
+The walker file was restored byte-identical; nothing committed for unit 0. Awaiting the seat's word on variant A.
+
+===== VARIANT A
+[gate-tail] start:  03:13:25 up 36 min,  0 user,  load average: 1.54, 2.27, 1.93 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/side
+
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > engine-gated rule keys (the census-invisible subsystem class) > guard the guard: the scanner sees code and only code 2ms
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > engine-gated rule keys (the census-invisible subsystem class) > guard the guard: the auditor reds on every failure shape 1ms
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > engine-gated rule keys (the census-invisible subsystem class) > the live scan is non-vacuous and reaches BOTH gate spellings 1602ms
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > engine-gated rule keys (the census-invisible subsystem class) > the manifest holds against the tree in BOTH directions 2ms
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > engine-gated rule keys (the census-invisible subsystem class) > every REGISTER member reached the census, and the register is a set 9ms
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > engine-gated rule keys (the census-invisible subsystem class) > every exemption carries a rationale, and the backlog is exact and shrink-only 1ms
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > engine-gated rule keys (the census-invisible subsystem class) > the pending manifest key is the recorded next step, not a red 0ms
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > ruin-filter roster ratchet (structural-prevention Pattern 2) > the scan finds roster readers (non-vacuous) 0ms
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > ruin-filter roster ratchet (structural-prevention Pattern 2) > every `.institutions` reader is COMPLIANT or EXEMPT 0ms
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > ruin-filter roster ratchet (structural-prevention Pattern 2) > ⛔ quarantine honesty: the undispositioned list is EXACT — an un-banked shrink reds too 0ms
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > ruin-filter roster ratchet (structural-prevention Pattern 2) > the scan reads CODE — a `.institutions` in a comment or a quoted string never enrols 0ms
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > ruin-filter roster ratchet (structural-prevention Pattern 2) > exempt honesty: every exempt entry still reads .institutions and is not already compliant 0ms
+
+ Test Files  1 passed (1)
+      Tests  12 passed (12)
+   Start at  03:13:25
+   Duration  3.52s (transform 190ms, setup 25ms, import 1.79s, tests 1.62s, environment 0ms)
+
+[gate-tail] end:  03:13:29 up 36 min,  0 user,  load average: 1.58, 2.27, 1.93
+
+===== VARIANT B
+[gate-tail] start:  03:13:29 up 36 min,  0 user,  load average: 1.58, 2.27, 1.93 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/side
+
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > engine-gated rule keys (the census-invisible subsystem class) > guard the guard: the scanner sees code and only code 2ms
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > engine-gated rule keys (the census-invisible subsystem class) > guard the guard: the auditor reds on every failure shape 1ms
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > engine-gated rule keys (the census-invisible subsystem class) > the live scan is non-vacuous and reaches BOTH gate spellings 1593ms
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > engine-gated rule keys (the census-invisible subsystem class) > the manifest holds against the tree in BOTH directions 2ms
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > engine-gated rule keys (the census-invisible subsystem class) > every REGISTER member reached the census, and the register is a set 10ms
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > engine-gated rule keys (the census-invisible subsystem class) > every exemption carries a rationale, and the backlog is exact and shrink-only 1ms
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > engine-gated rule keys (the census-invisible subsystem class) > the pending manifest key is the recorded next step, not a red 0ms
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > ruin-filter roster ratchet (structural-prevention Pattern 2) > the scan finds roster readers (non-vacuous) 0ms
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > ruin-filter roster ratchet (structural-prevention Pattern 2) > every `.institutions` reader is COMPLIANT or EXEMPT 0ms
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > ruin-filter roster ratchet (structural-prevention Pattern 2) > ⛔ quarantine honesty: the undispositioned list is EXACT — an un-banked shrink reds too 0ms
+ × tests/lint/ruinFilterRoster.walker.test.js > ruin-filter roster ratchet (structural-prevention Pattern 2) > the scan reads CODE — a `.institutions` in a comment or a quoted string never enrols 10ms
+   → expected 117 to be 116 // Object.is equality
+ ✓ tests/lint/ruinFilterRoster.walker.test.js > ruin-filter roster ratchet (structural-prevention Pattern 2) > exempt honesty: every exempt entry still reads .institutions and is not already compliant 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/ruinFilterRoster.walker.test.js > ruin-filter roster ratchet (structural-prevention Pattern 2) > the scan reads CODE — a `.institutions` in a comment or a quoted string never enrols
+AssertionError: expected 117 to be 116 // Object.is equality
+
+- Expected
++ Received
+
+- 116
++ 117
+
+ ❯ tests/lint/ruinFilterRoster.walker.test.js:551:28
+    549|     // VEIL-20 (2026-11-20, the seventh chair's grant in VR2's form): …
+    550|     // ("expected 117 to be 116"): src/domain/veil/importRederive.js :…
+    551|     expect(readers.length).toBe(116);
+       |                            ^
+    552|   });
+    553|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 11 passed (12)
+   Start at  03:13:29
+   Duration  3.63s (transform 216ms, setup 37ms, import 1.88s, tests 1.62s, environment 0ms)
+
+[gate-tail] end:  03:13:33 up 36 min,  0 user,  load average: 1.58, 2.27, 1.93
