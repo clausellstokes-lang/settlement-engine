@@ -4,26 +4,28 @@ Lane `lane/daily-2-2026-11-20`; seat DAILY-2 (session_019yED1NEpr7XE73nDAxNLv2);
 Assignment: `origin/lane/chair-2026-11-08:docs/chair/2026-11-20/seventh/prompts/DAILY-2.txt` (it binds DAILY-1.txt's
 cure pattern, points 1 to 8). Predecessor's record: `DAILY-1-HANDBACK.md` (history; this file governs).
 
-## 1. State (written 20:22 UTC)
-- THE LANE WAS GIVEN at 0eadcb032 (chair, 19:03). Branch cut there.
-- Merged: B1 C1 (the dead profile call + parity arm) at 8e2534945; B1b C2 (2d7fa8399: the 13 kinds in both homes,
-  four granted atoms, the hideable-and-crime arm `tests/domain/dailyLifeAtoms.test.js`) at b4083d31f, red re-run
-  18 failed | 4 passed of 22, green re-run 65 files / 402 passed; wiring census exit 0; lighting census refrozen at
-  c4d5b14bb (files 3709, parked 474), walker 34 passed.
-- Merged: B1b C3 (`gathering_places`; 999f85558 wip + df28b9319, B1b's report in df28b9319's message) at 9567ea7a2:
-  red re-run on the old deriver 8 failed | 37 of 45, green re-run 74 files / 508 passed, 5 skipped; presumed-things door
-  fresh 0 stale 0 (one stale row shrunk by the door: a `cultureProfiles.js` bathhouse line now answered); eslint 0;
-  typecheck:ratchet 167/167; domain:strict 1113/1113; wiring exit 0; lighting refrozen 648cc7397 (files 3710), 34
-  passed. Re-measure `measures/B1/b1.out.txt`: top 11/7/12/8/8/9%, distinct 17/34/25/26/32/24, EMPTY 0, false 0.
-- B2 (worktree `/home/user/wt-daily2-b2`, branch `lane/daily-2-2026-11-20-b2`): D1 `dawn_work` committed 7dd41dc59
-  (not merged; red 6 of 7 on the old deriver); RESUMED (20:22) on DAILY-2's decided cures (W0/B0 declare `watch`; B26, S0
-  `crisis: under_siege` excluded; child U7/P9 `tier: ≥ village`), the any-cast cure, and D2 wiring. LEAVE GRANTED 20:31
-  (ruling 23), relayed to B2 (asked 20:22): `registeredWords.js :: HOUSE_FAMILY_KINDS` += baker→bakery, warehouse→warehouse (B0, B1,
-  M0, M2); `presumptionClasses.shared.mjs` class table: `route open` under `outside` (M0). Not built (no atom): W12,
-  E0, rival N0/N1. D2's dry-run pools: B2's scratch `d2/childWarnings.js`, to be wired into `src/data/dailyLife/`.
-- SUCCESSION: DAILY-2's mark (+half) ≈ 350k at 20:2x; hand-over after B2's merge unless the chair says otherwise.
-- Lines: ALL READ AND RULED (LINES-1, 1b, 2, 2b). Nothing more goes to the chair's eye unless a builder must change a
-  wording to pass a gate (then one line each).
+## 1. State (written 20:48 UTC) — HANDED OVER to DAILY-3 at this commit's tip
+- Lane `lane/daily-2-2026-11-20` (pushed). Merged, each read once with red and green re-run, censuses by their doors:
+  B1 C1 (8e2534945, DAILY-1); B1b C2 (b4083d31f); B1b C3 `gathering_places` (9567ea7a2); B2 `dawn_work` +
+  `child_warnings` + the any-cast cure (1c56cb0c2; red 10 of 12 on the old deriver; green 79 files / 567 passed incl.
+  `domainAnyCastBaseline`; presumed-things door fresh 0 stale 0; presumption-classes door fresh 0 stale 0, ceiling 1781;
+  lighting refrozen 3782a700e, files 3712, 34 passed; wiring 0; eslint 0; typechecks at ceiling).
+- MEASURED on 900 (M1's births, 150 a size), top sentence thorp→metropolis: gathering 11/7/12/8/8/9%; dawn
+  9/7/11/9/9/13%; child 7/4/3/5/12/13%; EMPTY 0, false lines 0, no hideable house, bracket or "town" in all three
+  (`measures/B1/b1.out.txt`, `measures/B2/b2.out.txt`). Thinnest branch: child `monster_pressure`, 5 eligible at its
+  smallest size (66% reach). A calm thorp/hamlet holds >=7 dawn `default` lines; a thorp >=7 child `none` lines.
+- B2's two departures from DAILY-2's word, accepted at the merge: S0 (merchant_siege) NEEDS `crisis: under_siege`
+  (the exclusion did not answer the classes walker; S1 covers the branch where the record shows no siege); `route open`
+  went into `CLASS_DIMS.outside` only (the vocabulary already holds it; `NAMED_ATOMS` keys are pinned).
+- Reports: B1b's in the message of df28b9319, B2's in the message of 888227143 (the builders' tool refused report files).
+- NOT BUILT (no atom, ruling 11): dawn W12 (monster), child E0 (trade quarter), child rival N0/N1 (neighbour).
+- Worktrees (this container only, disposable): `/home/user/wt-daily2-b1`, `/home/user/wt-daily2-b2`, `/home/user/wt-verify`.
+- NEXT FOR DAILY-3: B3 by `briefs/B3-THE-OTHER-FIVE-AND-DM.md` (the five LINES-2 slots + `commoner_resentments_dm`,
+  ruling 6's conditions), branch cut from this tip; each merge's green set includes `tests/lint/domainAnyCastBaseline*`;
+  then rule 2 of COMMON-RULES if the chair rules it a unit (ruling 24); then the final measure on BOTH pools (ruling
+  17), ruling 21's build, ruling 22's `npm run test:ratchet` with the line merged in, the owner's file, "DAILY <commit>".
+- Lines: ALL READ AND RULED (LINES-1, 1b, 2, 2b). Nothing more to the chair unless a builder must change a wording to
+  pass a gate (one line each).
 
 ## 2. Queue (one writer on `src/domain/dailyLife.js` at a time)
 B1b C2 → B1b C3 → B2 (`dawn_work` + `child_warnings`; LINES-1 + 1b) → B3 (the five LINES-2 slots + the owner-only
@@ -161,6 +163,14 @@ baseline file's _doc on a clean tree).
 ## 5. Houses a wording needs (for the security reader)
 LINES-1 § THE HOUSES EACH SLOT NEEDS; LINES-2 § HOUSES EACH WORDING NEEDS; the dm slot: watch, guard force, gate,
 market, trade route, smuggling. Final per-slot list written at each build's merge.
+- `dawn_work` (merged 1c56cb0c2): NAMED: market, docks, inn, mill, bathhouse. NEEDED, NOT NAMED: granary, smithy,
+  bakery, warehouse, craft guild, dwellings, farmland, water source, common grazing, fishing landing, walls, gate,
+  militia, watch, guard force. Hand-list: `src/data/dailyLife/dawnWork.js` exports `DAWN_WORK` (one array a branch),
+  slot `dawn_work`, lines `{ id, text, needs, excludes? }`.
+- `child_warnings` (merged 1c56cb0c2): NAMED: market, inn, docks, bridge, mill. NEEDED, NOT NAMED: walls, gate, a
+  sick-house, a sacred house, smithy, dwellings, farmland, water source, fishing landing. Hand-list:
+  `src/data/dailyLife/childWarnings.js` exports `CHILD_WARNINGS` (one array a warning kind), slot `child_warnings`,
+  lines `{ id, text, needs }`.
 - `gathering_places` (merged 9567ea7a2): NAMED from the live roster (never hideable, never access-only): the sacred house,
   church, cathedral, market, market square, inn, mill, bathhouse, bridge, docks, theatre. NEEDED, NOT NAMED: water source,
   dwellings, farmland, common grazing, fishing landing, root cellar, shepherd; an elder ruler; a small place (tier).
@@ -180,7 +190,8 @@ market, trade route, smuggling. Final per-slot list written at each build's merg
   2,587,733; tip 4673cac4f 1,178,613 / 374,938 / 314,815 (+945 / +255 / +278), worker 2,589,009 (+1,276; each worker
   +1,276). Cause: engine-core +714 (the granted rows, eager by their home), kernel +231 (`pickVariantMixed` kept). No
   lazy module pulled eager. RULED 20:18 (ruling 21): accepted as named. WORKER RUNNING TOTAL (generation.worker, vs
-  base 2,587,733): +1,276 after B1b.
+  base 2,587,733): +1,276 after B1b; +1,276 after B2 (B2 added 0). First paint after B2: 1,178,613 / 374,953 / 314,688
+  (B2 added 0 raw).
 
 ## 6. Losses to look at again (for the owner)
 None yet.
