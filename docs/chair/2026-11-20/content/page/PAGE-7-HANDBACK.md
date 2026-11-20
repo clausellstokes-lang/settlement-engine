@@ -27,3 +27,7 @@ Read this, then `PAGE-5-HANDBACK.md` (§2 S6 row, §5 the ruled tables, §6 the 
   rival_power; every other kind's rival_power, merchants_rule, outranked (the roster of powers). Final list from the data
   file once merged.
 - PAGE-4 calls `tensionCauseSentenceOf` only; it builds no pick.
+- HOOKS WITH HIDEABLE NEEDS (the chair, 16:35; hooks reach a reader only when the owner lifts the veil: `publicSafe.js ::
+  toPublicSafe` drops `plotHooks` by default, 0 of 303; keep that arm): TROUBLE-LINES-2 numbering: crime_wave 2, 9, 10,
+  11, 12; guild_conflict 12; external_threat 8; succession_crisis 1, 2, 3, 8 (ruler, in doubt); legitimacy_crisis 9.
+- LASTING EFFECTS: printed in the PDF only; a later unit AFTER the hooks; every effect needing a hideable fact is struck.

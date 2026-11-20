@@ -19,6 +19,11 @@ export default {
       ['A shopkeeper has been told to close by the end of the week, by people who did not give their names', 'organised crime'],
       ['Two crews have been seen arguing over the same ground, and a fight between them looks a night away', 'rival rings'],
       ['A thief caught in the act is being held in a cellar by the household that caught him, and nobody knows what to do with him next', 'law: ≤ critical'],
+      // round 3 (the chair, 16:35): 13-16
+      ['A cart left loaded overnight was emptied before dawn, and the carter wants to know who was awake', 'none'],
+      ['An old woman\'s savings have gone from under her floor, and only her family knew where they were kept', 'none'],
+      ['A pedlar is selling goods cheap that several households swear were taken from them', 'none'],
+      ['Chalk marks have appeared on several doors overnight, and the households behind them are frightened', 'none'],
     ],
   },
   guild_conflict: {
@@ -36,6 +41,11 @@ export default {
       ['A trader turned away from selling is taking the matter to the court, and needs a witness who saw it', 'court sits'],
       ["A boat's cargo sits unloaded at the water's edge while the two sides argue over who may sell it", 'navigable'],
       ['A trader outside the guild has been offered protection by people outside the law, and is tempted', 'organised crime'],
+      // round 3 (the chair, 16:35): 13-16
+      ["An apprentice has run from one side of the quarrel to the other, and taken a master's tools along", 'none'],
+      ['A cart of goods from outside has arrived for a trader who is not allowed to sell them, and the carter wants paying', 'none'],
+      ['A trader at the market has been selling under the guild price, and a crowd is expected at the stall tomorrow', 'market'],
+      ['A guild master has quietly bought from a trader outside the guild, and someone saw it happen', 'guild'],
     ],
   },
   resource_scarcity: {

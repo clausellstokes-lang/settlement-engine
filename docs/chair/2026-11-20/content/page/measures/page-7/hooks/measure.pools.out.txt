@@ -157,43 +157,51 @@ BAR today (150 a size): thorp top 25/150 16.7% seen 6.1% · hamlet top 26/150 17
 BAR today (50 a size): thorp top 6/50 12.0% seen 4.3% · hamlet top 10/50 20.0% seen 6.7% · village top 7/50 14.0% seen 5.2% · town top 15/50 30.0% seen 11.9% · city top 27/50 54.0% seen 22.2% · metropolis top 28/50 56.0% seen 25.5%
 ATOMS 25 atoms used, unknown to the vocabulary: none
 KEY seed-first
-NEW crime_wave: pool 12 (6 need nothing, 3 stored), 3 a place, short 0/231; max line 34.6% of the kind's places, lines printed 12/12
-NEWLINE crime_wave need "none" holds 100.0% prints 29.9% STORED "The crime wave is coordinated. Someone is directing it to create a pretext"
-NEWLINE crime_wave need ["watch","organised crime"] holds 81.8% prints 19.0% STORED "A guard captain is on the payroll of the criminal network"
-NEWLINE crime_wave need "none" holds 100.0% prints 30.3% STORED "Those who would take the law into their own hands have picked out a culprit on bad information"
-NEWLINE crime_wave need "none" holds 100.0% prints 34.6% "A household woke to find its door forced and nothing taken, and wants to know what the thieves were looking for"
-NEWLINE crime_wave need "none" holds 100.0% prints 34.6% "A boy who runs errands for half the place has started carrying more coin than any errand pays"
-NEWLINE crime_wave need "none" holds 100.0% prints 32.0% "Those who talk of taking the law into their own hands meet tonight, and they want someone who can fight"
-NEWLINE crime_wave need "none" holds 100.0% prints 31.6% "A traveller robbed on the way in swears the robber knew which bag held the money"
-NEWLINE crime_wave need "market" holds 84.4% prints 26.8% "A stallholder at the market has stopped reporting thefts, and will not say why"
-NEWLINE crime_wave need "watch" holds 82.3% prints 25.5% "A watchman afraid of the night round is looking for someone to walk it with him, and will pay from his own purse"
-NEWLINE crime_wave need "organised crime" holds 84.4% prints 21.2% "A shopkeeper has been told to close by the end of the week, by people who did not give their names"
-NEWLINE crime_wave need "rival rings" holds 30.7% prints 7.8% "Two crews have been seen arguing over the same ground, and a fight between them looks a night away"
-NEWLINE crime_wave need "law: ≤ critical" holds 14.7% prints 6.5% "A thief caught in the act is being held in a cellar by the household that caught him, and nobody knows what to do with him next"
-NEWSIZE crime_wave thorp: 13 tensions, lines printed 7, max line 8/13
-NEWSIZE crime_wave hamlet: 21 tensions, lines printed 9, max line 11/21
-NEWSIZE crime_wave village: 8 tensions, lines printed 8, max line 5/8
-NEWSIZE crime_wave town: 31 tensions, lines printed 11, max line 13/31
-NEWSIZE crime_wave city: 79 tensions, lines printed 11, max line 29/79 [29 27 26 26 24 21 21 19 17 17 10]
-NEWSIZE crime_wave metropolis: 79 tensions, lines printed 11, max line 29/79 [29 26 25 23 23 23 22 22 21 15 8]
-NEW guild_conflict: pool 12 (4 need nothing, 3 stored), 3 a place, short 0/215; max line 33.5% of the kind's places, lines printed 12/12
-NEWLINE guild_conflict need "guild" holds 99.5% prints 27.9% STORED "A guild master's records have gone missing ahead of an audit"
-NEWLINE guild_conflict need "guild" holds 99.5% prints 19.1% STORED "A journeyman denied mastership has proof the exam was rigged"
-NEWLINE guild_conflict need ["market","guild"] holds 99.5% prints 27.9% STORED "Someone is sabotaging both sides to destabilize the market for a third party"
-NEWLINE guild_conflict need "none" holds 100.0% prints 31.2% "A trader selling outside the rules has had a cart overturned in the night, and has a fair idea who did it"
-NEWLINE guild_conflict need "none" holds 100.0% prints 26.0% "A craftsman working from home has been told to stop selling, and means to carry on"
-NEWLINE guild_conflict need "none" holds 100.0% prints 24.7% "Both sides of the quarrel over trade are counting heads before the next gathering, and each is a few short"
-NEWLINE guild_conflict need "none" holds 100.0% prints 29.8% "A family that sells to both sides is being pressed to choose, and has asked for a few more days"
-NEWLINE guild_conflict need "market" holds 100.0% prints 22.8% "A stall at the market has been promised to two traders at once, and both will turn up at dawn"
-NEWLINE guild_conflict need "guild" holds 99.5% prints 33.5% "The guild is about to fine a member for buying from an outsider, and the member has threatened to name who else does it"
-NEWLINE guild_conflict need "court sits" holds 93.0% prints 23.3% "A trader turned away from selling is taking the matter to the court, and needs a witness who saw it"
-NEWLINE guild_conflict need "navigable" holds 42.3% prints 11.6% "A boat's cargo sits unloaded at the water's edge while the two sides argue over who may sell it"
-NEWLINE guild_conflict need "organised crime" holds 81.9% prints 22.3% "A trader outside the guild has been offered protection by people outside the law, and is tempted"
-NEWSIZE guild_conflict hamlet: 2 tensions, lines printed 5, max line 2/2
+NEW crime_wave: pool 16 (10 need nothing, 3 stored), 3 a place, short 0/231; max line 26.8% of the kind's places, lines printed 16/16
+NEWLINE crime_wave need "none" holds 100.0% prints 22.9% STORED "The crime wave is coordinated. Someone is directing it to create a pretext"
+NEWLINE crime_wave need ["watch","organised crime"] holds 81.8% prints 15.6% STORED "A guard captain is on the payroll of the criminal network"
+NEWLINE crime_wave need "none" holds 100.0% prints 17.7% STORED "Those who would take the law into their own hands have picked out a culprit on bad information"
+NEWLINE crime_wave need "none" holds 100.0% prints 23.8% "A household woke to find its door forced and nothing taken, and wants to know what the thieves were looking for"
+NEWLINE crime_wave need "none" holds 100.0% prints 26.8% "A boy who runs errands for half the place has started carrying more coin than any errand pays"
+NEWLINE crime_wave need "none" holds 100.0% prints 22.1% "Those who talk of taking the law into their own hands meet tonight, and they want someone who can fight"
+NEWLINE crime_wave need "none" holds 100.0% prints 19.0% "A traveller robbed on the way in swears the robber knew which bag held the money"
+NEWLINE crime_wave need "market" holds 84.4% prints 21.2% "A stallholder at the market has stopped reporting thefts, and will not say why"
+NEWLINE crime_wave need "watch" holds 82.3% prints 17.3% "A watchman afraid of the night round is looking for someone to walk it with him, and will pay from his own purse"
+NEWLINE crime_wave need "organised crime" holds 84.4% prints 16.5% "A shopkeeper has been told to close by the end of the week, by people who did not give their names"
+NEWLINE crime_wave need "rival rings" holds 30.7% prints 3.5% "Two crews have been seen arguing over the same ground, and a fight between them looks a night away"
+NEWLINE crime_wave need "law: ≤ critical" holds 14.7% prints 3.9% "A thief caught in the act is being held in a cellar by the household that caught him, and nobody knows what to do with him next"
+NEWLINE crime_wave need "none" holds 100.0% prints 19.5% "A cart left loaded overnight was emptied before dawn, and the carter wants to know who was awake"
+NEWLINE crime_wave need "none" holds 100.0% prints 21.6% "An old woman's savings have gone from under her floor, and only her family knew where they were kept"
+NEWLINE crime_wave need "none" holds 100.0% prints 26.4% "A pedlar is selling goods cheap that several households swear were taken from them"
+NEWLINE crime_wave need "none" holds 100.0% prints 22.1% "Chalk marks have appeared on several doors overnight, and the households behind them are frightened"
+NEWSIZE crime_wave thorp: 13 tensions, lines printed 11, max line 7/13
+NEWSIZE crime_wave hamlet: 21 tensions, lines printed 13, max line 10/21
+NEWSIZE crime_wave village: 8 tensions, lines printed 12, max line 4/8
+NEWSIZE crime_wave town: 31 tensions, lines printed 15, max line 14/31
+NEWSIZE crime_wave city: 79 tensions, lines printed 15, max line 21/79 [21 21 20 19 19 18 17 16 15 15 13 13 12 12 6]
+NEWSIZE crime_wave metropolis: 79 tensions, lines printed 15, max line 20/79 [20 20 20 19 18 17 17 17 16 16 16 15 14 10 2]
+NEW guild_conflict: pool 16 (6 need nothing, 3 stored), 3 a place, short 0/215; max line 25.1% of the kind's places, lines printed 16/16
+NEWLINE guild_conflict need "guild" holds 99.5% prints 21.4% STORED "A guild master's records have gone missing ahead of an audit"
+NEWLINE guild_conflict need "guild" holds 99.5% prints 12.6% STORED "A journeyman denied mastership has proof the exam was rigged"
+NEWLINE guild_conflict need ["market","guild"] holds 99.5% prints 20.5% STORED "Someone is sabotaging both sides to destabilize the market for a third party"
+NEWLINE guild_conflict need "none" holds 100.0% prints 22.8% "A trader selling outside the rules has had a cart overturned in the night, and has a fair idea who did it"
+NEWLINE guild_conflict need "none" holds 100.0% prints 17.7% "A craftsman working from home has been told to stop selling, and means to carry on"
+NEWLINE guild_conflict need "none" holds 100.0% prints 17.7% "Both sides of the quarrel over trade are counting heads before the next gathering, and each is a few short"
+NEWLINE guild_conflict need "none" holds 100.0% prints 21.4% "A family that sells to both sides is being pressed to choose, and has asked for a few more days"
+NEWLINE guild_conflict need "market" holds 100.0% prints 18.1% "A stall at the market has been promised to two traders at once, and both will turn up at dawn"
+NEWLINE guild_conflict need "guild" holds 99.5% prints 25.1% "The guild is about to fine a member for buying from an outsider, and the member has threatened to name who else does it"
+NEWLINE guild_conflict need "court sits" holds 93.0% prints 15.8% "A trader turned away from selling is taking the matter to the court, and needs a witness who saw it"
+NEWLINE guild_conflict need "navigable" holds 42.3% prints 8.8% "A boat's cargo sits unloaded at the water's edge while the two sides argue over who may sell it"
+NEWLINE guild_conflict need "organised crime" holds 81.9% prints 16.3% "A trader outside the guild has been offered protection by people outside the law, and is tempted"
+NEWLINE guild_conflict need "none" holds 100.0% prints 19.5% "An apprentice has run from one side of the quarrel to the other, and taken a master's tools along"
+NEWLINE guild_conflict need "none" holds 100.0% prints 25.1% "A cart of goods from outside has arrived for a trader who is not allowed to sell them, and the carter wants paying"
+NEWLINE guild_conflict need "market" holds 100.0% prints 20.0% "A trader at the market has been selling under the guild price, and a crowd is expected at the stall tomorrow"
+NEWLINE guild_conflict need "guild" holds 99.5% prints 17.2% "A guild master has quietly bought from a trader outside the guild, and someone saw it happen"
+NEWSIZE guild_conflict hamlet: 2 tensions, lines printed 6, max line 1/2
 NEWSIZE guild_conflict village: 1 tensions, lines printed 3, max line 1/1
-NEWSIZE guild_conflict town: 49 tensions, lines printed 12, max line 22/49
-NEWSIZE guild_conflict city: 75 tensions, lines printed 12, max line 27/75 [27 26 22 22 20 19 19 18 18 13 12 9]
-NEWSIZE guild_conflict metropolis: 88 tensions, lines printed 12, max line 29/88 [29 27 27 25 25 25 23 21 20 18 18 6]
+NEWSIZE guild_conflict town: 49 tensions, lines printed 16, max line 16/49
+NEWSIZE guild_conflict city: 75 tensions, lines printed 16, max line 20/75 [20 18 18 17 16 16 15 15 14 13 13 13 12 9 9 7]
+NEWSIZE guild_conflict metropolis: 88 tensions, lines printed 16, max line 22/88 [22 21 20 20 20 19 19 19 16 15 15 15 15 12 11 5]
 NEW resource_scarcity: pool 9 (5 need nothing, 3 stored), 3 a place, short 0/114; max line 52.6% of the kind's places, lines printed 9/9
 NEWLINE resource_scarcity need "market" holds 42.1% prints 16.7% STORED "A store of the scarce goods is being kept off the market on purpose"
 NEWLINE resource_scarcity need "none" holds 100.0% prints 52.6% STORED "The scarcity was engineered. Someone destroyed the competing supply route"
@@ -290,6 +298,6 @@ NEWSIZE corruption_scandal village: 8 tensions, lines printed 7, max line 6/8
 NEWSIZE corruption_scandal town: 6 tensions, lines printed 9, max line 3/6
 NEWSIZE corruption_scandal city: 8 tensions, lines printed 9, max line 5/8 [5 5 3 3 3 2 1 1 1]
 NEWSIZE corruption_scandal metropolis: 8 tensions, lines printed 8, max line 7/8 [7 4 4 3 2 2 1 1]
-TRI new hooks: all 41.0% (thorp 14.9% hamlet 17.6% village 24.3% town 35.1% city 73.0% metropolis 81.1%)
-BAR new (150 a size): thorp top 16/150 10.7% seen 3.7% · hamlet top 17/150 11.3% seen 3.6% · village top 12/150 8.0% seen 4.4% · town top 22/150 14.7% seen 4.7% · city top 29/150 19.3% seen 8.1% · metropolis top 29/150 19.3% seen 8.8%
-BAR new (50 a size): thorp top 5/50 10.0% seen 2.8% · hamlet top 5/50 10.0% seen 3.0% · village top 7/50 14.0% seen 4.1% · town top 9/50 18.0% seen 5.2% · city top 10/50 20.0% seen 7.3% · metropolis top 11/50 22.0% seen 8.1%
+TRI new hooks: all 37.5% (thorp 14.9% hamlet 16.2% village 24.3% town 30.4% city 66.2% metropolis 73.0%)
+BAR new (150 a size): thorp top 16/150 10.7% seen 3.6% · hamlet top 17/150 11.3% seen 3.4% · village top 12/150 8.0% seen 4.4% · town top 16/150 10.7% seen 4.0% · city top 21/150 14.0% seen 6.6% · metropolis top 22/150 14.7% seen 7.0%
+BAR new (50 a size): thorp top 5/50 10.0% seen 2.7% · hamlet top 5/50 10.0% seen 2.9% · village top 7/50 14.0% seen 4.1% · town top 7/50 14.0% seen 4.4% · city top 10/50 20.0% seen 6.1% · metropolis top 9/50 18.0% seen 6.4%
