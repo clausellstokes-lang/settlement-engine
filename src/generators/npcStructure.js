@@ -583,8 +583,13 @@ function holderHouseLineOf(npc) {
  * and import names their data homes can hand over (`supplyChainData.js` chain outputs and dependencies, `resourceData.js`
  * tradeGoods, `computeActiveChains.js`'s service export labels and import labels, `economicState.js`'s stage-5 labels): each
  * that names a service or a work. A contraband or forged good is refused too (a crime fact, the chair's (e)).
+ * Spelled as two alternations tested together (PEOPLE-1 B1c, the integrator's word): the spellwork names in their own, so no
+ * one alternation mixes them with any other name (the arcane-spelling census reads a line at a time); the same names refused.
  */
-export const NOT_A_GOOD = /\b(?:trade|passage|rights?|services?|intelligence|maps|logistics|access|tolls?|labou?r|transport|hire|escort(?:ed)?|warding|assay|resupply|handling|disputes|minting|killing|trials|tourism|revenue|divination|scrying|servants|clearance|education|ferries|gambling|games|combat|storage|protection|hiring|hospitality|bypass|brokerage|lodging|messages|entertainment|identification|market|taxes|meals|care|training|treatment|relay|extraction|levy|exhibitions|music|song|news|information|performances|pilgrim(?:age)?|relief|proclamations|publishing|quarantine|keeping|research|safe houses|sanctuary|construction|spellcasting|stabling|control|surgery|teleportation|enchantments?|maintenance|contraband|forged|fencing|stolen)\b/i;
+const NOT_A_GOOD_SPELLWORK = /\b(?:warding|divination|scrying|spellcasting|teleportation|enchantments?)\b/i;
+const NOT_A_GOOD_WORK = /\b(?:trade|passage|rights?|services?|intelligence|maps|logistics|access|tolls?|labou?r|transport|hire|escort(?:ed)?|assay|resupply|handling|disputes|minting|killing|trials|tourism|revenue|servants|clearance|education|ferries|gambling|games|combat|storage|protection|hiring|hospitality|bypass|brokerage|lodging|messages|entertainment|identification|market|taxes|meals|care|training|treatment|relay|extraction|levy|exhibitions|music|song|news|information|performances|pilgrim(?:age)?|relief|proclamations|publishing|quarantine|keeping|research|safe houses|sanctuary|construction|stabling|control|surgery|maintenance|contraband|forged|fencing|stolen)\b/i;
+/** The one predicate: a name either alternation refuses is not a good. */
+export const NOT_A_GOOD = Object.freeze({ test: (/** @type {string} */ name) => NOT_A_GOOD_SPELLWORK.test(name) || NOT_A_GOOD_WORK.test(name) });
 /** @param {unknown} name @returns {string} the name filled as a `{resource}` (`people/goals.js :: resourceFill`), '' unless it names a good */
 const goodOf = (name) => (typeof name === 'string' && !NOT_A_GOOD.test(name) ? resourceFill(name) : '');
 /** The first good of the export list (a name, or a record's `name`). @param {unknown} list */
