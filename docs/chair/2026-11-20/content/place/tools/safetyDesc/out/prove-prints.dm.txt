@@ -1,0 +1,12 @@
+r2r-city-0 (Unsafe): "Crime is a persistent and visible problem. The garrison is overwhelmed or corrupt. Travelers are advised to move in groups and keep valuables hidden. Walls slow entry but don't solve what happens inside them."
+   whole line printed on: Systems/Defense
+   first sentence printed on: Systems/Defense
+   surfaces walked: 22
+r2r-thorp-0 (Moderate): "The neighbours keep an eye on one another, and what trouble there is, everyone soon hears of."
+   whole line printed on: Systems/Defense
+   first sentence printed on: Systems/Defense
+   surfaces walked: 22
+r2r-town-0 (Moderate): "A mix of safer and more exposed areas. The watch covers the main paths; quieter spots after dark carry genuine risk. Residents know which corners to avoid. The walls keep the trouble inside, off the roads beyond."
+   whole line printed on: Systems/Defense
+   first sentence printed on: Systems/Defense
+   surfaces walked: 22
