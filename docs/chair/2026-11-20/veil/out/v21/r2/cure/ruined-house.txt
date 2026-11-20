@@ -1,0 +1,92 @@
+town-calm-0 marked ruined 'Town watch' scores.disaster: page 57 owner 57 -> equal
+town-calm-0 marked ruined 'Town watch' scores.economic: page 84 owner 84 -> equal
+town-calm-0 marked ruined 'Town watch' scores.internal: page 49 owner 49 -> equal
+town-calm-0 marked ruined 'Town watch' scores.magical: page 32 owner 32 -> equal
+town-calm-0 marked ruined 'Town watch' scores.military: page 19 owner 19 -> equal
+town-calm-0 marked ruined 'Town watch' scores.monster: page 17 owner 17 -> equal
+town-calm-0 marked ruined 'Town watch' readiness.score: page 38 owner 38 -> equal
+town-calm-0 marked ruined 'Town watch' economicGates: page {"military":1,"monster":1,"internal":1,"economic":1,"disaster":1} owner {"military":1,"monster":1,"internal":1,"economic":1,"disaster":1} -> equal
+town-calm-0 marked ruined 'Town watch' compound.economyOutput: page 83.4865681002944 owner 83.4865681002944 -> equal
+town-calm-0 marked ruined 'Town watch' safety.blackMarketCapture: page undefined owner 2 -> notDrawn
+town-calm-0 unmarked ruined 'Town watch' scores.disaster: page 57 owner 57 -> equal
+town-calm-0 unmarked ruined 'Town watch' scores.economic: page 84 owner 84 -> equal
+town-calm-0 unmarked ruined 'Town watch' scores.internal: page 49 owner 49 -> equal
+town-calm-0 unmarked ruined 'Town watch' scores.magical: page 32 owner 32 -> equal
+town-calm-0 unmarked ruined 'Town watch' scores.military: page 19 owner 19 -> equal
+town-calm-0 unmarked ruined 'Town watch' scores.monster: page 17 owner 17 -> equal
+town-calm-0 unmarked ruined 'Town watch' readiness.score: page 38 owner 38 -> equal
+town-calm-0 unmarked ruined 'Town watch' economicGates: page {"military":1,"monster":1,"internal":1,"economic":1,"disaster":1} owner {"military":1,"monster":1,"internal":1,"economic":1,"disaster":1} -> equal
+town-calm-0 unmarked ruined 'Town watch' compound.economyOutput: page 83.4865681002944 owner 83.4865681002944 -> equal
+town-calm-0 unmarked ruined 'Town watch' safety.blackMarketCapture: page 2 owner 2 -> equal
+city-infiltrated-1 marked ruined 'City walls and gates' scores.disaster: page 55 owner 55 (unruined page 55) -> equal
+city-infiltrated-1 marked ruined 'City walls and gates' scores.economic: page 96 owner 96 (unruined page 96) -> equal
+city-infiltrated-1 marked ruined 'City walls and gates' scores.internal: page 79 owner 75 (unruined page 79) -> equal
+city-infiltrated-1 marked ruined 'City walls and gates' scores.magical: page 33 owner 33 (unruined page 33) -> equal
+city-infiltrated-1 marked ruined 'City walls and gates' scores.military: page 100 owner 100 (unruined page 100) -> equal
+city-infiltrated-1 marked ruined 'City walls and gates' scores.monster: page 90 owner 90 (unruined page 90) -> equal
+city-infiltrated-1 marked ruined 'City walls and gates' readiness.score: page 65 owner 64 (unruined page 65) -> equal
+city-infiltrated-1 marked ruined 'City walls and gates' economicGates: page {"military":1,"monster":1,"internal":1,"economic":1,"disaster":1} owner {"military":1,"monster":1,"internal":1,"economic":1,"disaster":1} (unruined page {"military":1,"monster":1,"internal":1,"economic":1,"disaster":1}) -> equal
+city-infiltrated-1 marked ruined 'City walls and gates' compound.economyOutput: page 35.99118137916228 owner 34.86945507102212 (unruined page 35.99118137916228) -> equal
+city-infiltrated-1 marked ruined 'City walls and gates' safety.blackMarketCapture: page undefined owner 0 (unruined page undefined) -> notDrawn
+city-infiltrated-1 unmarked ruined 'City walls and gates' scores.disaster: page 55 owner 55 -> equal
+city-infiltrated-1 unmarked ruined 'City walls and gates' scores.economic: page 96 owner 96 -> equal
+city-infiltrated-1 unmarked ruined 'City walls and gates' scores.internal: page 75 owner 75 -> equal
+city-infiltrated-1 unmarked ruined 'City walls and gates' scores.magical: page 33 owner 33 -> equal
+city-infiltrated-1 unmarked ruined 'City walls and gates' scores.military: page 100 owner 100 -> equal
+city-infiltrated-1 unmarked ruined 'City walls and gates' scores.monster: page 90 owner 90 -> equal
+city-infiltrated-1 unmarked ruined 'City walls and gates' readiness.score: page 64 owner 64 -> equal
+city-infiltrated-1 unmarked ruined 'City walls and gates' economicGates: page {"military":1,"monster":1,"internal":1,"economic":1,"disaster":1} owner {"military":1,"monster":1,"internal":1,"economic":1,"disaster":1} -> equal
+city-infiltrated-1 unmarked ruined 'City walls and gates' compound.economyOutput: page 34.86945507102212 owner 34.86945507102212 -> equal
+city-infiltrated-1 unmarked ruined 'City walls and gates' safety.blackMarketCapture: page 0 owner 0 -> equal
+metropolis-calm-2 marked ruined 'Massive walls and fortifications' scores.disaster: page 64 owner 64 (unruined page 64) -> equal
+metropolis-calm-2 marked ruined 'Massive walls and fortifications' scores.economic: page 100 owner 100 (unruined page 100) -> equal
+metropolis-calm-2 marked ruined 'Massive walls and fortifications' scores.internal: page 94 owner 89 (unruined page 94) -> equal
+metropolis-calm-2 marked ruined 'Massive walls and fortifications' scores.magical: page 58 owner 58 (unruined page 58) -> equal
+metropolis-calm-2 marked ruined 'Massive walls and fortifications' scores.military: page 100 owner 100 (unruined page 100) -> equal
+metropolis-calm-2 marked ruined 'Massive walls and fortifications' scores.monster: page 100 owner 100 (unruined page 100) -> equal
+metropolis-calm-2 marked ruined 'Massive walls and fortifications' readiness.score: page 83 owner 82 (unruined page 83) -> equal
+metropolis-calm-2 marked ruined 'Massive walls and fortifications' economicGates: page {"military":1,"monster":1,"internal":1,"economic":1,"disaster":1} owner {"military":1,"monster":1,"internal":1,"economic":1,"disaster":1} (unruined page {"military":1,"monster":1,"internal":1,"economic":1,"disaster":1}) -> equal
+metropolis-calm-2 marked ruined 'Massive walls and fortifications' compound.economyOutput: page 39.24754036198887 owner 37.96496872368893 (unruined page 39.24754036198887) -> equal
+metropolis-calm-2 marked ruined 'Massive walls and fortifications' safety.blackMarketCapture: page undefined owner 0 (unruined page undefined) -> notDrawn
+metropolis-calm-2 unmarked ruined 'Massive walls and fortifications' scores.disaster: page 64 owner 64 -> equal
+metropolis-calm-2 unmarked ruined 'Massive walls and fortifications' scores.economic: page 100 owner 100 -> equal
+metropolis-calm-2 unmarked ruined 'Massive walls and fortifications' scores.internal: page 89 owner 89 -> equal
+metropolis-calm-2 unmarked ruined 'Massive walls and fortifications' scores.magical: page 58 owner 58 -> equal
+metropolis-calm-2 unmarked ruined 'Massive walls and fortifications' scores.military: page 100 owner 100 -> equal
+metropolis-calm-2 unmarked ruined 'Massive walls and fortifications' scores.monster: page 100 owner 100 -> equal
+metropolis-calm-2 unmarked ruined 'Massive walls and fortifications' readiness.score: page 82 owner 82 -> equal
+metropolis-calm-2 unmarked ruined 'Massive walls and fortifications' economicGates: page {"military":1,"monster":1,"internal":1,"economic":1,"disaster":1} owner {"military":1,"monster":1,"internal":1,"economic":1,"disaster":1} -> equal
+metropolis-calm-2 unmarked ruined 'Massive walls and fortifications' compound.economyOutput: page 37.96496872368893 owner 37.96496872368893 -> equal
+metropolis-calm-2 unmarked ruined 'Massive walls and fortifications' safety.blackMarketCapture: page 0 owner 0 -> equal
+town-indebted-3 marked ruined 'Town watch' scores.disaster: page 57 owner 57 -> equal
+town-indebted-3 marked ruined 'Town watch' scores.economic: page 61 owner 61 -> equal
+town-indebted-3 marked ruined 'Town watch' scores.internal: page 64 owner 64 -> equal
+town-indebted-3 marked ruined 'Town watch' scores.magical: page 62 owner 62 -> equal
+town-indebted-3 marked ruined 'Town watch' scores.military: page 11 owner 11 -> equal
+town-indebted-3 marked ruined 'Town watch' scores.monster: page 0 owner 0 -> equal
+town-indebted-3 marked ruined 'Town watch' readiness.score: page 32 owner 32 -> equal
+town-indebted-3 marked ruined 'Town watch' economicGates: page {"military":1,"monster":1,"internal":1,"economic":1,"disaster":1} owner {"military":1,"monster":1,"internal":1,"economic":1,"disaster":1} -> equal
+town-indebted-3 marked ruined 'Town watch' compound.economyOutput: page 72.42706022835097 owner 72.42706022835097 -> equal
+town-indebted-3 marked ruined 'Town watch' safety.blackMarketCapture: page undefined owner 0 -> notDrawn
+town-indebted-3 unmarked ruined 'Town watch' scores.disaster: page 57 owner 57 -> equal
+town-indebted-3 unmarked ruined 'Town watch' scores.economic: page 61 owner 61 -> equal
+town-indebted-3 unmarked ruined 'Town watch' scores.internal: page 64 owner 64 -> equal
+town-indebted-3 unmarked ruined 'Town watch' scores.magical: page 62 owner 62 -> equal
+town-indebted-3 unmarked ruined 'Town watch' scores.military: page 11 owner 11 -> equal
+town-indebted-3 unmarked ruined 'Town watch' scores.monster: page 0 owner 0 -> equal
+town-indebted-3 unmarked ruined 'Town watch' readiness.score: page 32 owner 32 -> equal
+town-indebted-3 unmarked ruined 'Town watch' economicGates: page {"military":1,"monster":1,"internal":1,"economic":1,"disaster":1} owner {"military":1,"monster":1,"internal":1,"economic":1,"disaster":1} -> equal
+town-indebted-3 unmarked ruined 'Town watch' compound.economyOutput: page 72.42706022835097 owner 72.42706022835097 -> equal
+town-indebted-3 unmarked ruined 'Town watch' safety.blackMarketCapture: page 0 owner 0 -> equal
+
+per figure (equal / not drawn / wrong) over 8 ruined shares:
+  scores.disaster: 8 / 0 / 0
+  scores.economic: 8 / 0 / 0
+  scores.internal: 8 / 0 / 0
+  scores.magical: 8 / 0 / 0
+  scores.military: 8 / 0 / 0
+  scores.monster: 8 / 0 / 0
+  readiness.score: 8 / 0 / 0
+  economicGates: 8 / 0 / 0
+  compound.economyOutput: 8 / 0 / 0
+  safety.blackMarketCapture: 4 / 4 / 0

@@ -638,8 +638,13 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
     const want = (path, value) => { if (JSON.stringify(at(doc, path)) !== JSON.stringify(value)) bad.push(`${tag}: ${path.join('.')} is ${String(JSON.stringify(at(doc, path))).slice(0, 90)}, not ${JSON.stringify(value).slice(0, 60)}`); };
     want(['history', 'historicalEvents', 0, 'name'], 'The Salt Levy'); want(['history', 'historicalEvents', 1, 'name'], 'The Long Frost');
     want(['history', 'historicalEvents', 1, 'lastingEffects'], [FROST_EFFECT]);
-    want(['history', 'legacyAnnotations', 0, 'eventName'], 'The Salt Levy'); want(['history', 'legacyAnnotations', 0, 'yearsAgo'], 31);
-    want(['history', 'legacyAnnotations', 1, 'annotation'], FROST_ANNOTATION);
+    // R2-CURE (VEIL-21): RE-RECORDED BY THE RULING. The legacy annotations (registry: history.legacy) and the siege narrative
+    // (registry: history.siegeNarrative) are undrawn rows (drawn only through publicProse; VR7-MEASURE M3), withheld on EVERY
+    // non-owner read since R2 (the sixth chair's VR16 rule 1; 212 :: _gallery_veil_withhold_always, the twin
+    // galleryWithholdAlways.js :: withholdAlways). The floor held the open event's entry ARRIVING; it now holds every entry
+    // ABSENT on every read here (gallery, link, import, client; Reveal DM off and on). What else the floor guards is unchanged.
+    if (at(doc, ['history', 'legacyAnnotations']) !== undefined) bad.push(`${tag}: history.legacyAnnotations is sent (withheld on every read: VR16 rule 1, registry history.legacy): ${JSON.stringify(at(doc, ['history', 'legacyAnnotations'])).slice(0, 90)}`);
+    if (at(doc, ['history', 'siegeNarrative']) !== undefined) bad.push(`${tag}: history.siegeNarrative is sent (withheld on every read: VR16 rule 1, registry history.siegeNarrative)`);
     want(['history', 'currentTensions', 0, 'type'], 'guild_conflict');
     want(['relationships', 0, 'npc1Name'], 'Hale Dunmore'); want(['relationships', 0, 'npc2Name'], 'Wren Ashby'); want(['relationships', 0, 'typeName'], 'Outstanding Debt');
     want(['relationships', 1, 'description'], NET_LOFT); want(['relationships', 1, 'tension'], NET_MENDING);
@@ -691,7 +696,8 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
     const r1 = await sharesOf(c1.town, c1.deltas);
     differs.push(...twinDiffers(r1).map(d => `no tension shut: ${d}`));
     for (const { tag, doc } of each(r1)) {
-      if (at(doc, ['history', 'siegeNarrative']) !== c1.town.history.siegeNarrative) bad.push(`no tension shut, ${tag}: the narrative is ${JSON.stringify(at(doc, ['history', 'siegeNarrative']))}`);
+      // R2-CURE (VEIL-21): the narrative no longer arrives with no tension shut: it is withheld on every read (VR16 rule 1,
+      // registry history.siegeNarrative), which saltmereFloor below now holds
       bad.push(...saltmereFloor(`no tension shut, ${tag}`, doc));
     }
     const openSentence = `Odo Pell and Sib Marrow are rivals in the same line of work. ${NET_MENDING}.`;
@@ -707,7 +713,10 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
     const r3 = await sharesOf(c3.town, c3.deltas);
     differs.push(...twinDiffers(r3).map(d => `nothing shut: ${d}`));
     for (const { tag, doc } of each(r3)) {
-      for (const path of HOMES) if (JSON.stringify(at(doc, path)) !== JSON.stringify(at(c3.town, path))) bad.push(`nothing shut, ${tag}: ${path.join('.')} is ${String(JSON.stringify(at(doc, path))).slice(0, 90)}`);
+      // R2-CURE (VEIL-21): the legacy annotation and the siege narrative are withheld on every read (VR16 rule 1, registry
+      // history.legacy and history.siegeNarrative): with nothing shut they are ABSENT; every other home arrives as stored
+      const ALWAYS = (path) => path[0] === 'history';
+      for (const path of HOMES) if (JSON.stringify(at(doc, path)) !== JSON.stringify(ALWAYS(path) ? undefined : at(c3.town, path))) bad.push(`nothing shut, ${tag}: ${path.join('.')} is ${String(JSON.stringify(at(doc, path))).slice(0, 90)}`);
       if (person(doc, 'Hale Dunmore')?.presentation?.impression !== c3.town.npcs[0].presentation.impression) bad.push(`nothing shut, ${tag}: the impression is gone`);
     }
 
@@ -811,8 +820,10 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
     differs.push(...twinDiffers(r4).map(d => `a comma-clause only: ${d}`));
     for (const { tag, doc } of each(r4)) {
       if (doc.pressureSentence !== PRESSURE) bad.push(`a comma-clause only, ${tag}: the pressure sentence is ${JSON.stringify(doc.pressureSentence)}`);
-      if (at(doc, ['history', 'siegeNarrative']) !== NARRATIVE) bad.push(`a comma-clause only, ${tag}: the narrative is ${JSON.stringify(at(doc, ['history', 'siegeNarrative']))}`);
-      if (at(doc, ['history', 'legacyAnnotations', 1, 'annotation']) !== ANNOTATION) bad.push(`a comma-clause only, ${tag}: the open event's annotation is ${JSON.stringify(at(doc, ['history', 'legacyAnnotations', 1, 'annotation']))}`);
+      // R2-CURE (VEIL-21): the narrative and the open event's annotation are withheld on every read (VR16 rule 1, registry
+      // history.siegeNarrative and history.legacy), whatever their words: they no longer ARRIVE here; they are ABSENT
+      if (at(doc, ['history', 'siegeNarrative']) !== undefined) bad.push(`a comma-clause only, ${tag}: the narrative is sent: ${JSON.stringify(at(doc, ['history', 'siegeNarrative']))}`);
+      if (at(doc, ['history', 'legacyAnnotations']) !== undefined) bad.push(`a comma-clause only, ${tag}: the annotations are sent: ${JSON.stringify(at(doc, ['history', 'legacyAnnotations'])).slice(0, 90)}`);
     }
     if (process.env.VEIL_HAND_OUT) writeFileSync(process.env.VEIL_HAND_OUT, `${[...new Set([...bad, ...differs.map(d => `DIFFERS ${d}`)])].join('\n')}\n`);
     // THE RUN IS ONE (VEIL-15; replaces VEIL-12's THE CLAUSES ARE ONE). (1) THE WINDOWS: _gallery_veil_runs and the twin's
@@ -963,8 +974,8 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
       for (const needle of [NEEDLE.levy, 'still refused at the fish stalls', 'two courses lower than the charter', 'marked on no map']) bad.push(...arrivals(doc, needle).map(a => `shut, ${tag}: ${a}`));
       for (const k of ['full', 'tension', 'phrasing']) if (at(doc, ['prominentRelationship', k]) !== undefined) bad.push(`shut, ${tag}: the copy with no tie keeps ${k}`);
       for (const needle of [NEEDLE.favour, NEEDLE.insult]) bad.push(...arrivals(doc, needle).map(a => `shut, ${tag}: ${a}`));
-      // the entries keep their floor, and the open event (the switch excepted on it by hand) keeps its annotation
-      for (const [i, nm] of [[2, 'The Clipped Coin'], [3, 'The Wall Riot'], [4, 'The Drowned Fair']]) if ((at(doc, ['history', 'legacyAnnotations', i, 'eventName']) ?? at(doc, ['history', 'legacyAnnotations', i, 'event'])) !== nm) bad.push(`shut, ${tag}: entry ${i} lost its event's name`);
+      // R2-CURE (VEIL-21): the entries kept their floor (their event's name) here before R2; every entry is now withheld on
+      // every read (VR16 rule 1, registry history.legacy), which saltmereFloor below holds
       bad.push(...saltmereFloor(`shut, ${tag}`, doc));
     }
     // (2) no event's eye and no tie's eye shut (a person's appearance alone): every entry and the copy arrive as stored
@@ -972,7 +983,9 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
     const r2 = await sharesOf(s2.town, s2.deltas);
     differs.push(...twinDiffers(r2).map(d => `open: ${d}`));
     for (const { tag, doc } of each(r2)) {
-      if (differ(at(doc, ['history', 'legacyAnnotations']), s2.town.history.legacyAnnotations).length) bad.push(`open, ${tag}: the entries are ${JSON.stringify(at(doc, ['history', 'legacyAnnotations'])).slice(0, 160)}`);
+      // R2-CURE (VEIL-21): with no eye shut the entries arrived as stored before R2; they are now withheld on every read (VR16
+      // rule 1, registry history.legacy): ABSENT
+      if (at(doc, ['history', 'legacyAnnotations']) !== undefined) bad.push(`open, ${tag}: the entries are sent: ${JSON.stringify(at(doc, ['history', 'legacyAnnotations'])).slice(0, 160)}`);
       if (differ(doc.prominentRelationship, orphanCopies).length) bad.push(`open, ${tag}: the copy is ${JSON.stringify(doc.prominentRelationship).slice(0, 160)}`);
     }
     expect(bad).toEqual([]);

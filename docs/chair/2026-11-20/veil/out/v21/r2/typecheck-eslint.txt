@@ -1,0 +1,31 @@
+[gate-tail] start:  03:48:56 up  1:12,  0 user,  load average: 1.91, 2.12, 2.48 · cores: 4
+
+> settlementforge@1.0.0 typecheck:domain:strict
+> node scripts/check-domain-strict.mjs
+
+[domain-strict] ✓ no strict-type regressions (1113 errors, ceiling 1113).
+[gate-tail] end:  03:49:28 up  1:12,  0 user,  load average: 3.57, 2.52, 2.61
+[gate-tail] full log: /tmp/gate-tail.22870.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
+rc=0
+[gate-tail] start:  03:49:28 up  1:12,  0 user,  load average: 3.57, 2.52, 2.61 · cores: 4
+
+> settlementforge@1.0.0 typecheck:ratchet
+> node scripts/check-full-typecheck.mjs
+
+[typecheck-ratchet] OK — no type regressions (167 error(s), ceiling 167).
+[gate-tail] end:  03:50:07 up  1:13,  0 user,  load average: 4.66, 2.95, 2.75
+[gate-tail] full log: /tmp/gate-tail.22986.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
+rc=0
+[gate-tail] start:  03:50:07 up  1:13,  0 user,  load average: 4.66, 2.95, 2.75 · cores: 4
+
+/home/user/wt/r2/src/domain/display/gallerySecondHomes.js
+  1405:1  error  File has too many lines (833). Maximum allowed is 800  max-lines
+
+✖ 1 problem (1 error, 0 warnings)
+
+[gate-tail] end:  03:50:09 up  1:13,  0 user,  load average: 4.66, 2.95, 2.75
+[gate-tail] full log: /tmp/gate-tail.23058.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+rc=1

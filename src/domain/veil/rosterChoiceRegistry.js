@@ -74,7 +74,7 @@
 //    row's host exists and names the row; R2 to R5 create the planned ones (SUB-BRIEF-VR7 design point 5).
 const H = Object.freeze({
   sAlways: 'public._gallery_veil_withhold_always',
-  tAlways: 'src/domain/display/gallerySecondHomes.js :: withholdAlways',
+  tAlways: 'src/domain/display/galleryWithholdAlways.js :: withholdAlways',
   sChoice: 'public._gallery_veil_roster_choices',
   tChoice: 'src/domain/display/gallerySecondHomes.js :: applyRosterChoices',
   sPeople: 'public._gallery_veil_holders',
@@ -97,8 +97,8 @@ const H = Object.freeze({
 
 /** @type {Readonly<Record<string, RegistryHost>>} */
 export const REGISTRY_HOSTS = Object.freeze({
-  [H.sAlways]: { engine: 'server', state: 'planned', stage: 'R2 (VR16: the undrawn fields, VR14 (i), the band\'s condition)' },
-  [H.tAlways]: { engine: 'twin', state: 'planned', stage: 'R2' },
+  [H.sAlways]: { engine: 'server', state: 'exists', stage: 'R2 (VR16: the undrawn fields, VR14 (i), the band\'s condition; VR33; VR37), in 212 by VEIL-21' },
+  [H.tAlways]: { engine: 'twin', state: 'exists', stage: 'R2' },
   [H.sChoice]: { engine: 'server', state: 'planned', stage: 'R3 (the drawn conditional rows: (a) recompose, (b) withhold)' },
   [H.tChoice]: { engine: 'twin', state: 'planned', stage: 'R3' },
   [H.sPeople]: { engine: 'server', state: 'planned', stage: 'R4 (VR9: the holder\'s card whole with its ties)' },
@@ -225,9 +225,9 @@ function row(/** @type {RowSpec} */ o) {
 /** @typedef {Omit<RowSpec, 'rule' | 'when' | 'server' | 'twin' | 'drawn'> & { drawn?: DrawnAnswer }} ShortSpec */
 
 /** VR16 / VR14 (iii): a field no non-owner page draws, withheld on every non-owner read whatever the veil (R2). */
-const undrawn = (/** @type {ShortSpec} */ o) => row({ drawn: 'no', ...o, rule: 'withhold', when: 'always', server: H.sAlways, twin: H.tAlways });
+const undrawn = (/** @type {ShortSpec} */ o) => row({ drawn: 'no', built: true, ...o, rule: 'withhold', when: 'always', server: H.sAlways, twin: H.tAlways });
 /** VR14 (i): a number that measures crime itself, withheld on every non-owner read (R2). */
-const crimeMeasure = (/** @type {ShortSpec} */ o) => row({ drawn: 'no', ...o, vr14: 'i', rule: 'withhold', when: 'always', server: H.sAlways, twin: H.tAlways });
+const crimeMeasure = (/** @type {ShortSpec} */ o) => row({ drawn: 'no', built: true, ...o, vr14: 'i', rule: 'withhold', when: 'always', server: H.sAlways, twin: H.tAlways });
 /** VR8 / VR14 (iv): a drawn form that stays, DIFFUSE, sent as stored (built once the band's condition holds). */
 const BAND_CONDITION = Object.freeze(['compound.criminalEffective', 'safety.compound.criminalEffective', 'safety.safetyRatio', 'compound.militaryEffective', 'safety.compound.militaryEffective']);
 const diffuse = (/** @type {ShortSpec} */ o) => row({ drawn: 'yes', condition: [...BAND_CONDITION], ...o, rule: 'diffuse', when: 'always', server: H.sSent, twin: H.tSent });
@@ -244,25 +244,30 @@ const composed = (/** @type {ShortSpec & { inputs: string[], compose: 'recompose
 
 const ROWS_SPEC = [
   // ── the conditions (crisis severity: the stressors a hidden house moved)
-  undrawn({ id: 'conditions.severity', path: 'activeConditions[].severity', writer: W.conditions, house: P.any, vr14: 'iii' }),
-  undrawn({ id: 'conditions.severityBand', path: 'activeConditions[].severityBand', writer: W.conditions, house: P.any, vr14: 'iii' }),
+  undrawn({ id: 'conditions.severity', path: 'activeConditions[].severity', writer: W.conditions, house: P.any, vr14: 'iii', drawn: 'yes', page: 're-derive',
+    scope: 'VR33, VR37 (a): R2\'s render-twice found it DRAWN (the Foundations chips, causalState.js); the number withheld on every read, the band served; the page draws the chips from the band (pageRederive.js :: rederiveForPage: the band\'s own default severity, activeConditions.js :: defaultSeverityForBand)' }),
+  diffuse({ id: 'conditions.severityBand', path: 'activeConditions[].severityBand', writer: W.conditions, house: P.any, vr14: 'iv',
+    scope: 'VR37: a condition\'s band, a closed ordered vocabulary (VR28 tier 2), sent as stored; the page draws the chips from it' }),
 
   // ── the defence profile (getInstFlags' crime flags and the criminal compound feed every score)
-  undrawn({ id: 'defence.readiness.score', path: 'defenseProfile.readiness.score', writer: W.defence, house: P.flags, vr14: 'iii' }),
+  undrawn({ id: 'defence.readiness.score', path: 'defenseProfile.readiness.score', writer: W.defence, house: P.flags, vr14: 'iii', drawn: 'yes', page: 're-derive',
+    scope: 'VR33, VR37 (a): DRAWN (the Foundations chip); withheld on every read, the label and colours stay (tier 2); the page re-derives it (pageRederive.js :: rederiveForPage)' }),
   diffuse({ id: 'defence.readiness.label', path: 'defenseProfile.readiness.label', writer: W.defence, house: P.flags, vr14: 'iv', scope: 'DefenseTab readiness banner' }),
   diffuse({ id: 'defence.readiness.colours', path: '^defenseProfile\\.readiness\\.(color|background|border)$', re: true, writer: W.defence, house: P.flags, vr14: 'iv', scope: 'the banner\'s colours, the label\'s drawn form' }),
-  diffuse({ id: 'defence.scores.disaster', path: 'defenseProfile.scores.disaster', writer: W.defence, house: P.flags, vr14: 'iv' }),
-  diffuse({ id: 'defence.scores.economic', path: 'defenseProfile.scores.economic', writer: W.defence, house: P.flags, vr14: 'iv' }),
-  diffuse({ id: 'defence.scores.internal', path: 'defenseProfile.scores.internal', writer: W.defence, house: P.flags, vr14: 'iv' }),
-  diffuse({ id: 'defence.scores.magical', path: 'defenseProfile.scores.magical', writer: W.defence, house: P.flags, vr14: 'iv', drawn: 'unsettled', scope: 'master\'s shape; DefenseTab :: threatScores draws every score (plausible)' }),
-  diffuse({ id: 'defence.scores.military', path: 'defenseProfile.scores.military', writer: W.defence, house: P.flags, vr14: 'iv', drawn: 'unsettled', scope: 'master\'s shape; as magical' }),
-  diffuse({ id: 'defence.scores.monster', path: 'defenseProfile.scores.monster', writer: W.defence, house: P.flags, vr14: 'iv', drawn: 'unsettled', scope: 'master\'s shape; as magical' }),
-  diffuse({ id: 'defence.economicGates', path: '^defenseProfile\\.economicGates\\.(disaster|economic|internal|military|monster)$', re: true, writer: W.defence, house: P.flags, vr14: 'iv', drawn: 'unsettled', scope: 'master\'s shape; read by DefenseTab and defenseDisplay.js (not settled to the pixel)' }),
+  // VR33 (the seventh chair, FINAL): all six scores and the gates withheld on EVERY non-owner read, both stored shapes (R1 had
+  // them diffuse); the page re-derives what it draws (pageRederive.js :: rederiveForPage), the import's save re-derives them
+  undrawn({ id: 'defence.scores.disaster', path: 'defenseProfile.scores.disaster', writer: W.defence, house: P.flags, vr14: 'iii', drawn: 'yes', page: 're-derive', scope: 'VR33; R2\'s render-twice moved no byte on its three towns; the page re-derives it with the other five' }),
+  undrawn({ id: 'defence.scores.economic', path: 'defenseProfile.scores.economic', writer: W.defence, house: P.flags, vr14: 'iii', drawn: 'yes', page: 're-derive', scope: 'VR33; DRAWN (Overview bars, Foundations, DefenseTab)' }),
+  undrawn({ id: 'defence.scores.internal', path: 'defenseProfile.scores.internal', writer: W.defence, house: P.flags, vr14: 'iii', drawn: 'yes', page: 're-derive', scope: 'VR33; DRAWN (Foundations, DefenseTab)' }),
+  undrawn({ id: 'defence.scores.magical', path: 'defenseProfile.scores.magical', writer: W.defence, house: P.flags, vr14: 'iii', drawn: 'yes', page: 're-derive', scope: 'VR33; DRAWN (Overview bars)' }),
+  undrawn({ id: 'defence.scores.military', path: 'defenseProfile.scores.military', writer: W.defence, house: P.flags, vr14: 'iii', drawn: 'yes', page: 're-derive', scope: 'VR33; DRAWN (Foundations, DefenseTab)' }),
+  undrawn({ id: 'defence.scores.monster', path: 'defenseProfile.scores.monster', writer: W.defence, house: P.flags, vr14: 'iii', drawn: 'yes', page: 're-derive', scope: 'VR33; DRAWN (Overview bars, DefenseTab)' }),
+  undrawn({ id: 'defence.economicGates', path: '^defenseProfile\\.economicGates\\.(disaster|economic|internal|military|monster)$', re: true, writer: W.defence, house: P.flags, vr14: 'iii', drawn: 'yes', page: 're-derive', scope: 'VR33; the object goes whole; DRAWN (the Defense tab\'s law and guard lines read the gates: publicProseEquality soak1k-3, -9), so the page re-derives it' }),
 
   // ── the compound (economicState.compound and its copy safetyProfile.compound: getInstFlags' stamp)
   crimeMeasure({ id: 'compound.criminalEffective', path: 'economicState.compound.criminalEffective', writer: W.flags, house: P.flags }),
   crimeMeasure({ id: 'compound.criminalPreStress', path: 'economicState.compound.criminalPreStress', writer: W.flags, house: P.flags }),
-  row({ id: 'compound.economyOutput', path: 'economicState.compound.economyOutput', writer: W.flags, house: P.flags, rule: 'withhold', when: 'always', vr14: 'i', drawn: 'yes', page: 're-derive', server: H.sAlways, twin: H.tAlways,
+  row({ id: 'compound.economyOutput', path: 'economicState.compound.economyOutput', writer: W.flags, house: P.flags, rule: 'withhold', when: 'always', vr14: 'i', drawn: 'yes', page: 're-derive', server: H.sAlways, twin: H.tAlways, built: true,
     scope: 'VR19 (b), (c), ruling 1: it moves only with the hidden house (B 85, C 0), so VR14 (iv)\'s exception makes it (i). The page may re-derive it: getInstFlags(config, institutions) reads only the config (priorities, stresses, threat, neighbour) and the house names, both in the served document (config is in SETTLEMENT_FLOOR); that every config key it reads survives the projection is PLAUSIBLE, not executed' }),
   undrawn({ id: 'compound.magicInfluence', path: 'economicState.compound.magicInfluence', writer: W.flags, house: P.flags, vr14: 'iii' }),
   undrawn({ id: 'compound.militaryEffective', path: 'economicState.compound.militaryEffective', writer: W.flags, house: P.flags, vr14: 'iii', scope: 'VR8\'s condition: drawn on no shared page (VR7-MEASURE M3), so withheld' }),
@@ -284,7 +289,7 @@ const ROWS_SPEC = [
     scope: 'VR4 ii-14: the ladder re-derived from the served rows (count without the withheld row, the served shares, the engine\'s hasInst words over the served names)' }),
   diffuse({ id: 'food.record.storageMonths', path: 'economicState.foodSecurity.foodRecord.storageMonths', writer: W.food, house: P.flags, vr14: 'iv', scope: 'drawn as words (tonightSheet.js :: foodStoresWords)' }),
   diffuse({ id: 'food.resilienceScore', path: 'economicState.foodSecurity.resilienceScore', writer: W.food, house: P.flags, vr14: 'iv' }),
-  undrawn({ id: 'food.storageMonths', path: 'economicState.foodSecurity.storageMonths', writer: W.food, house: P.flags, vr14: 'iii', drawn: 'unsettled', scope: 'campaign-season only (dossierViewModel.js :: deriveGranaryOutlook); R2\'s render-twice test decides' }),
+  undrawn({ id: 'food.storageMonths', path: 'economicState.foodSecurity.storageMonths', writer: W.food, house: P.flags, vr14: 'iii', scope: 'campaign-season only (dossierViewModel.js :: deriveGranaryOutlook); R2\'s render-twice: no byte' }),
   undrawn({ id: 'food.storageNote', path: 'economicState.foodSecurity.storageNote', writer: W.food, house: P.flags }),
   // D (SUB-BRIEF-BCD): the income row by its house, the shares re-derived, weight withheld
   row({ id: 'income.criminalRow', path: 'economicState.incomeSources[] (only in A)', writer: W.income, house: P.criminal, rule: 'withhold', when: 'house-hidden', drawn: 'yes', server: H.sApply, twin: H.tIncome,
@@ -301,8 +306,8 @@ const ROWS_SPEC = [
 
   // ── the safety profile
   choiceWithhold({ id: 'safety.economicDragDesc', path: 'economicState.safetyProfile.economicDragDesc', writer: W.safety, house: P.flags, scope: 'VR4 i-6: withheld with blackMarketCapture, and where a criminal house is hidden whole' }),
-  row({ id: 'safety.blackMarketCapture', path: 'economicState.safetyProfile.blackMarketCapture', writer: W.safety, house: P.criminal, rule: 'withhold', when: 'always', vr14: 'i', drawn: 'yes', server: H.sAlways, twin: H.tAlways,
-    page: 'not drawn', scope: 'VR14 (i), ruling 2: withheld on every non-owner read; no served field re-derives it, so the shadow-economy figure is not drawn on a shared page' }),
+  row({ id: 'safety.blackMarketCapture', path: 'economicState.safetyProfile.blackMarketCapture', writer: W.safety, house: P.criminal, rule: 'withhold', when: 'always', vr14: 'i', drawn: 'yes', server: H.sAlways, twin: H.tAlways, built: true,
+    page: 're-derive', scope: 'VR14 (i), ruling 2: withheld on every non-owner read. R2-CURE (VEIL-21; the chair\'s ruling of 04:27 UTC, identity; VR19 (c)): the engine\'s generateSafetyProfile over the served config, tier and houses gives the stored figure (40 of 40 soak towns\' unmarked shares), and the page puts it back ONLY on a share it knows carries no veil (pageRederive.js, `unveiled`; gallery.js :: sanitizeDossier): a marked share and the map\'s member, which cannot prove the underside grouping open, do not draw it (VR17)' }),
   undrawn({ id: 'safety.flags.anyActive', path: 'economicState.safetyProfile.flags.anyActive', writer: W.safety, house: P.flags, vr14: 'i' }),
   undrawn({ id: 'safety.flags.arcaneBlackMarket', path: 'economicState.safetyProfile.flags.arcaneBlackMarket', writer: W.safety, house: P.flags, vr14: 'i' }),
   undrawn({ id: 'safety.flags.merchantArmy', path: 'economicState.safetyProfile.flags.merchantArmy', writer: W.safety, house: P.flags, vr14: 'iii' }),
@@ -313,7 +318,7 @@ const ROWS_SPEC = [
   recompose({ id: 'safety.safetyDesc', path: 'economicState.safetyProfile.safetyDesc', writer: W.foothold, house: P.flags,
     scope: 'VR4 i-3: the foothold word swapped exactly; VR4 i-2 (the Very Safe gates line, a facts-resolved sibling with no exact SQL twin): where it stands the field is withheld whole' }),
   diffuse({ id: 'safety.safetyLabel', path: 'economicState.safetyProfile.safetyLabel', writer: W.safety, house: P.flags, vr14: 'iv', scope: 'VR8: the overall safety band, diffuse on its condition (criminalEffective and safetyRatio withheld)' }),
-  row({ id: 'safety.safetyRatio', path: 'economicState.safetyProfile.safetyRatio', writer: W.safety, house: P.flags, rule: 'withhold', when: 'always', vr14: 'i', drawn: 'yes', server: H.sAlways, twin: H.tAlways,
+  row({ id: 'safety.safetyRatio', path: 'economicState.safetyProfile.safetyRatio', writer: W.safety, house: P.flags, rule: 'withhold', when: 'always', vr14: 'i', drawn: 'yes', server: H.sAlways, twin: H.tAlways, built: true,
     page: 'not drawn',
     scope: 'VR8\'s condition, VR19 (b), (c), ruling 2: withheld on every non-owner read. Measured: the daily-life order words cut safetyRatio at 2.0, 1.5, 1.2, 1.0, 0.7, 0.5 (dailyLifeLogic.js safetyScore) where the safety band cuts effectiveSafety at 3.5, 2, 1.2, 0.6 (safetyProfile.js): FINER than the band, and no served field re-derives the ratio, so the shared page does not draw them' }),
   row({ id: 'safety.crimeTypes', path: '^economicState\\.safetyProfile\\.crimeTypes\\b', re: true, writer: W.safety, house: P.flags, rule: 'withhold', when: 'house-hidden', vr14: 'i', drawn: 'yes', server: H.sChoice, twin: H.tChoice,
@@ -379,7 +384,8 @@ const ROWS_SPEC = [
   composed({ id: 'power.relation.dmNote', path: 'powerStructure.factionRelationships[].dmNote', writer: W.relations, house: P.criminal, inputs: ['power.relation.entry'], compose: 'withhold',
     scope: 'Reveal DM: the note names the withheld criminal power by its own name' }),
   undrawn({ id: 'power.relation.ratio', path: 'powerStructure.factionRelationships[].ratio', writer: W.relations, house: P.any, vr14: 'iii' }),
-  undrawn({ id: 'power.relation.direction', path: 'powerStructure.factionRelationships[].direction', writer: W.relations, house: P.any, drawn: 'unsettled', scope: 'master\'s shape; no reader settled' }),
+  choiceWithhold({ id: 'power.relation.direction', path: 'powerStructure.factionRelationships[].direction', writer: W.relations, house: P.criminal,
+    scope: 'VR37 (b): DRAWN (Systems/Power, PowerStrata.jsx :: chipDirection). Not (a): it is chosen by the capture state and the legitimacy flags (factionDynamics.js), and the flags are withheld on every read, so no served field re-derives it. The relation names its two powers (pair), so the word goes with its relation per entry, by the powers\' rule (power.relation.entry, R3); the word left is a closed vocabulary (stable / escalating: VR28 tier 2)' }),
   diffuse({ id: 'legitimacy.label', path: 'powerStructure.publicLegitimacy.label', writer: W.legitimacy, house: P.flags, vr14: 'iv' }),
   diffuse({ id: 'legitimacy.score', path: 'powerStructure.publicLegitimacy.score', writer: W.legitimacy, house: P.flags, vr14: 'iv', scope: 'drawn raw on PowerTab (the number); VR14 (iv) until the differ shows the drawn form alone identifies a house' }),
   diffuse({ id: 'legitimacy.colours', path: '^powerStructure\\.publicLegitimacy\\.(bg|color)$', re: true, writer: W.legitimacy, house: P.flags, vr14: 'iv', scope: 'the label\'s drawn colours' }),
@@ -391,7 +397,7 @@ const ROWS_SPEC = [
     scope: 'a conflict that names a withheld power leaves with it; every other conflict is the power roster\'s composition (diffuse)' }),
   diffuse({ id: 'power.conflicts', path: '^(powerStructure\\.)?conflicts\\[\\](\\.(intensity|issue))?$', re: true, writer: W.conflicts, house: P.any, drawn: 'unsettled',
     scope: 'ruling 4: master\'s shape, the conflicts the counterfactual drew; a conflict naming a withheld power follows power.recentConflict' }),
-  row({ id: 'power.stability', path: 'powerStructure.stability', writer: W.stability, house: P.flags, rule: 'recompose', when: 'always', vr14: 'iv', drawn: 'yes', page: 'not drawn', server: H.sAlways, twin: H.tAlways,
+  row({ id: 'power.stability', path: 'powerStructure.stability', writer: W.stability, house: P.flags, rule: 'recompose', when: 'always', vr14: 'iv', drawn: 'yes', page: 'not drawn', server: H.sAlways, twin: H.tAlways, built: true,
     scope: 'VR19 (a), (b), ruling 5: the band word before its cause stays ("Unstable"), cut by one exact rule in both engines; the cause (the parenthesis or the clause after the dash) is withheld on every non-owner read, uniform, so a bare word tells nothing' }),
   undrawn({ id: 'power.factions.legitimacyCrisis', path: 'powerStructure.factions[].legitimacyCrisis', writer: W.ruling, house: P.any, drawn: 'unsettled', scope: 'master\'s shape' }),
 
@@ -451,8 +457,10 @@ const ROWS_SPEC = [
 
   // ── the crisis cast (both copies: stress and stressors)
   undrawn({ id: 'cast.absent', path: '^(stress|stressors)\\.cast\\.absent\\[\\]$', re: true, writer: W.stakes, house: P.any, scope: 'the Crisis tab is off on every player-view or public page' }),
-  undrawn({ id: 'cast.roles', path: '^(stress|stressors)\\.cast\\.roles\\[\\]\\.(reason|role)$', re: true, writer: W.stakes, house: P.any }),
-  undrawn({ id: 'cast.stakes', path: '^(stress|stressors)\\.cast\\.stakes\\[\\](\\.(factionId|reason|stake))?$', re: true, writer: W.stakes, house: P.criminal, scope: 'the stake of a criminal power ("crime gains from the disorder") among them' }),
+  row({ id: 'cast.roles', path: '^(stress|stressors)\\.cast\\.roles\\[\\]\\.(reason|role)$', re: true, writer: W.stakes, house: P.any, rule: 'withhold', when: 'house-hidden', drawn: 'yes', server: H.sAlways, twin: H.tAlways, built: true,
+    scope: 'VR37 (b): DRAWN (Plot Hooks); a role row names its person, power or house and goes PER ENTRY with it (kept only where that is served: 212 :: _gallery_veil_cast); the rest dense (VR21)' }),
+  row({ id: 'cast.stakes', path: '^(stress|stressors)\\.cast\\.stakes\\[\\](\\.(factionId|reason|stake))?$', re: true, writer: W.stakes, house: P.criminal, rule: 'withhold', when: 'house-hidden', drawn: 'yes', server: H.sAlways, twin: H.tAlways, built: true,
+    scope: 'VR37 (b): DRAWN (Plot Hooks); a stake names its power (factionId) and goes PER ENTRY with it (kept only where that power is served: 212 :: _gallery_veil_cast), so a criminal power\'s stake goes with the power (R3: power.entry); the rest dense (VR21)' }),
   holder({ id: 'cast.roles.entry', path: '^(stress|stressors)\\.cast\\.roles\\[\\]( \\(only in [AB]\\)|\\.name)$', re: true, writer: W.stakes, house: P.holder, drawn: 'no',
     scope: 'master\'s shape: a cast role held by a person whose card is withheld follows the card (VR9); undrawn on a non-owner page besides' }),
   holder({ id: 'cast.levers.holder', path: '^(stress|stressors)\\.cast\\.levers\\[\\]\\.(holderId|holderName)$', re: true, writer: W.stakes, house: P.holder, drawn: 'no',

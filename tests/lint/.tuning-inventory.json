@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "ef0eacb3fa5dbb03d92a2ee5878d715bc108278a",
-  "measuredBy": "VEIL-17",
-  "date": "2026-11-19",
-  "note": "VR3: src/domain/display/gallerySecondHomes.js banks its one named constant NAME_WALK_BOUND, attributed by its DECLARED_GROWTH row (5abf99906); no tuning value",
+  "measuredAtSha": "87d9411c1e80309a13ec6b4873b3f867782e1212",
+  "measuredBy": "VEIL-21 R2-CURE builder",
+  "date": "2026-11-20",
+  "note": "R2: pageRederive.js and importRederive.js import facts/keep.js (keepOfRecord); no value moved",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1431,6 +1431,8 @@
         "src/domain/display/prosperityInCrisis.js",
         "src/domain/facts/factsOf.js",
         "src/domain/magicProfile.js",
+        "src/domain/veil/importRederive.js",
+        "src/domain/veil/pageRederive.js",
         "src/generators/defenseGenerator.js",
         "src/generators/economy/economicState.js",
         "src/generators/services/serviceRollMaterialization.js",
@@ -1453,6 +1455,8 @@
         "src/domain/display/prosperityInCrisis.js",
         "src/domain/facts/factsOf.js",
         "src/domain/magicProfile.js",
+        "src/domain/veil/importRederive.js",
+        "src/domain/veil/pageRederive.js",
         "src/generators/defenseGenerator.js",
         "src/generators/economy/economicState.js",
         "src/generators/services/serviceRollMaterialization.js",

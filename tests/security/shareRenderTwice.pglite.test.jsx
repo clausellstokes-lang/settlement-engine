@@ -11,8 +11,13 @@
  * unlisted slug through the same function), the rpc routed to that chain. Each read is rendered twice:
  *   A  the served document with every withhold-always path removed;
  *   B  A with each such path's STORED value grafted back (arrays aligned by length, else by id, name or archetype).
- * Rendered: PublicDossierView (OutputContainer read-only, the player view), every group and sub-tab and every
- * disclosure opened, at desktop and at phone width; the panel's HTML per view, React's generated ids normalised.
+ * Rendered: PublicDossierView (OutputContainer read-only, the player view) for the gallery read, PartyLinkView (the
+ * players' page, PublicDossierView inside) for the link, every group and sub-tab and every disclosure opened, at
+ * desktop and at phone width; the panel's HTML per view, React's generated ids normalised. THE SESSION SHEET (the
+ * Table View, "Open Tonight", the chair's ruling of 2026-11-20 04:50 UTC): composed at render from the served
+ * document and mounted by OutputContainer with no public gate, it is opened as a visitor opens it (the Overview's
+ * "Open Tonight" control, the store's `tableViewOpen` pref) and its dialog's HTML joins the views on both surfaces
+ * and both widths; CONTROL proves the walk reaches it (non-empty, the served name drawn).
  * THE ARMS:
  *   CONTROL  A rendered twice is byte-equal (the walk is deterministic, so a difference below is the field's).
  *   RED      the harness sees a DRAWN field: with the safety band (`safetyLabel`, drawn on DefenseTab) removed from A
@@ -36,13 +41,16 @@ import { bootChain, storeShare, withhold, graft, BIRTH_DIALS } from './veilChain
 const PGLITE_BOOT_TIMEOUT_MS = 900_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
 const ARM_TIMEOUT_MS = 1_800_000;
 
-const env = vi.hoisted(() => ({ db: null, mobile: false, mutate: null, store: {} }));
+const env = vi.hoisted(() => ({ db: null, mobile: false, mutate: null, store: {}, version: 0, subs: new Set(), sheetText: null, lastServedName: null }));
 vi.mock('../../src/hooks/useIsMobile.js', () => ({ default: () => env.mobile }));
 vi.mock('../../src/generators/aiLayer', () => ({ runTemplateNarrative: vi.fn() }));
 vi.mock('../../src/lib/analytics.js', () => ({ track: vi.fn(), Funnel: { track: vi.fn() }, EVENTS: new Proxy({}, { get: (_t, k) => String(k) }) }));
-vi.mock('../../src/store/index.js', () => {
-  const useStore = (sel) => (typeof sel === 'function' ? sel(env.store) : env.store);
-  useStore.subscribe = () => () => {};
+vi.mock('../../src/store/index.js', async () => {
+  // Reactive on `setUserPref` alone (renderOnce's), so the Table View mounts when a visitor opens it.
+  const { useSyncExternalStore } = await import('react');
+  const subscribe = (fn) => { env.subs.add(fn); return () => env.subs.delete(fn); };
+  const useStore = (sel) => { useSyncExternalStore(subscribe, () => env.version); return typeof sel === 'function' ? sel(env.store) : env.store; };
+  useStore.subscribe = subscribe;
   useStore.getState = () => env.store;
   useStore.setState = () => {};
   return { useStore, default: useStore };
@@ -78,17 +86,25 @@ const DRAWN_CONTROL = [/^economicState\.safetyProfile\.safetyLabel$/];
 /** MEASURED by this harness at its first run (VEIL-20, 2026-11-20; three born towns, the default veil, Reveal off, the
  * gallery read and the link, desktop and phone): rows the registry withholds on every read as UNDRAWN that a
  * non-owner page DRAWS. R2 re-classes each ((a) recompose or (b) withhold, VR16) and strikes it here. Shrink-only. */
-const KNOWN_DRAWN = Object.freeze(new Set(['cast.roles', 'cast.stakes', 'conditions.severity', 'defence.readiness.score', 'power.relation.direction']));
+const KNOWN_DRAWN = Object.freeze(new Set([]));
+/* STRUCK BY R2 (VEIL-21, 2026-11-20; the seventh chair's VR37), each with its class (rosterChoiceRegistry.js):
+ *   conditions.severity      withheld on every read; its band served (tier 2); the page draws the chips from the band
+ *   defence.readiness.score  withheld on every read; the label stays; the page re-derives the score (pageRederive.js)
+ *   cast.stakes, cast.roles  (b): per entry, with the power, person or house each names (212 :: _gallery_veil_cast)
+ *   power.relation.direction (b): with its relation, per entry (R3's power.relation.entry); a closed vocabulary */
 
 /** React's generated ids (useId) differ between mounts; nothing else may. */
 const normalise = (html) => html.replace(/:r[0-9a-z]+:/g, ':id:').replace(/«r[0-9a-z]+»/g, '«id»');
+const SHEET_VIEW = 'SHEET/Tonight (Table View)';
 
 /** Walk every group, sub-tab and disclosure (tests/components/pageCensusWalk.shared.mjs's walk), keeping each panel's HTML. */
-async function walkHtml(container) {
+async function walkHtml(container, copy) {
   const groupTabs = () => [...container.querySelectorAll('[aria-label="Dossier sections"] [role="tab"]')];
   const subTabs = () => [...container.querySelectorAll('[aria-label="Dossier tabs"] [role="tab"]')];
   await waitFor(() => expect(groupTabs().length).toBeGreaterThan(0));
   /** @type {Record<string, string>} */ const views = {}; // the panels only: the page's status line at mount is transient
+  const openButton = (root) => [...root.querySelectorAll('button')].find((b) => (b.textContent || '').trim() === copy.open);
+  let opener = null; // [group, sub-tab] of the panel that carries the sheet's control
   for (let g = 0; g < groupTabs().length; g++) {
     const groupName = (groupTabs()[g].textContent || '').trim();
     fireEvent.click(groupTabs()[g]);
@@ -106,7 +122,23 @@ async function walkHtml(container) {
         for (const e of closed) fireEvent.click(e);
       }
       views[name] = normalise(panel.innerHTML);
+      if (!opener && openButton(panel)) opener = [g, i];
     }
+  }
+  // THE SESSION SHEET, opened as a visitor opens it: back to the panel with the control, then a click.
+  env.sheetText = null;
+  views[SHEET_VIEW] = '[NO SHEET CONTROL]';
+  if (opener) {
+    fireEvent.click(groupTabs()[opener[0]]);
+    await waitFor(() => expect(subTabs().length).toBeGreaterThan(opener[1]));
+    fireEvent.click(subTabs()[opener[1]]);
+    const button = await waitFor(() => { const b = openButton(container); expect(b).toBeTruthy(); return b; }, { timeout: 10000 });
+    fireEvent.click(button);
+    const dialog = () => container.querySelector(`[role="dialog"][aria-label^="${copy.title}: "]`);
+    try { await waitFor(() => expect((dialog()?.textContent || '').length).toBeGreaterThan(15), { timeout: 10000 }); } catch { /* read as it is */ }
+    const d = dialog();
+    views[SHEET_VIEW] = d ? normalise(d.outerHTML) : '[NO SHEET]';
+    env.sheetText = d ? d.textContent || '' : null;
   }
   return views;
 }
@@ -137,6 +169,8 @@ describe('VR16 (1): a field withheld on every non-owner read as undrawn moves no
     lib = {
       fetchPublicDossier: (await import('../../src/lib/gallery.js')).fetchPublicDossier,
       PublicDossierView: (await import('../../src/components/PublicDossierView.jsx')).default,
+      PartyLinkView: (await import('../../src/components/PartyLinkView.jsx')).default,
+      TONIGHT_COPY: (await import('../../src/domain/summary/tonightSheet.js')).TONIGHT_COPY,
       storeFor,
     };
     await loadGenerationLawPayloads();
@@ -162,8 +196,14 @@ describe('VR16 (1): a field withheld on every non-owner read as undrawn moves no
     const dossier = await lib.fetchPublicDossier(surfaceSlug);
     expect(dossier?.settlement, `${town.seed}: the read served a dossier`).toBeTruthy();
     env.store = lib.storeFor(dossier.settlement, vi.fn);
-    const { container } = render(React.createElement(lib.PublicDossierView, { dossier: { ...dossier, viewCount: 0, publishedAt: null }, showHeader: false }));
-    const views = await walkHtml(container);
+    env.store.setUserPref = (k, v) => { env.store = { ...env.store, userPrefs: { ...env.store.userPrefs, [k]: v } }; env.version += 1; for (const f of env.subs) f(); };
+    const d = { ...dossier, viewCount: 0, publishedAt: null };
+    const el = surfaceSlug === town.link
+      ? React.createElement(lib.PartyLinkView, { dossier: d, auth: null, onReport: vi.fn(), reportBusy: false })
+      : React.createElement(lib.PublicDossierView, { dossier: d, showHeader: false });
+    const { container } = render(el);
+    const views = await walkHtml(container, lib.TONIGHT_COPY);
+    env.lastServedName = dossier.settlement.name;
     cleanup();
     return views;
   }
@@ -178,6 +218,10 @@ describe('VR16 (1): a field withheld on every non-owner read as undrawn moves no
     for (const [surface, slug] of SURFACES(t)) for (const [width, mobile] of WIDTHS) {
       const re = PATTERNS.map((p) => p.re);
       const one = await renderOnce(t, slug, mobile, armA(re));
+      // THE WALK REACHES THE SHEET (negative control): its HTML is there, non-empty, and draws the served name.
+      expect(one[SHEET_VIEW], `${surface}/${width}: the session sheet was opened`).toMatch(/^<div[^>]*role="dialog"/);
+      expect(env.sheetText?.length ?? 0, `${surface}/${width}: the sheet is non-empty`).toBeGreaterThan(40);
+      expect(env.sheetText, `${surface}/${width}: the sheet draws the served name`).toContain(env.lastServedName);
       const two = await renderOnce(t, slug, mobile, armA(re));
       expect(Object.keys(one).length, `${surface}/${width}: views walked`).toBeGreaterThan(5);
       bad.push(...viewDiffs(one, two).map((d) => `${surface}/${width}: ${d}`));

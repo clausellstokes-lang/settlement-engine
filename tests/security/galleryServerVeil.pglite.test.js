@@ -366,7 +366,12 @@ describe('the server-side share veil (211) — execution against the real SQL an
           if (!member) faults.push(`${tag} map: no member`);
           else {
             fault(`${tag} map member shows what the listing hides`, carried(member, now.gPage).readable);
-            fault(`${tag} map member lacks what the listing shows`, carried(now.gPage, member).paths);
+            // R2-CURE (VEIL-21; the chair's ruling of 04:27 UTC, identity): an UNMARKED listing's page re-derives the black
+            // market's capture (pageRederive.js, `unveiled`: the read knows the share carries no veil); the map's member
+            // carries no veil record and cannot prove the underside grouping open, so it does not (VR17: where the veil cannot
+            // be sure, it withholds). That one path alone; every other path the listing shows, the member shows
+            const MEMBER_CANNOT_PROVE = name === 'unmarked' ? new Set(['economicState.safetyProfile.blackMarketCapture']) : new Set();
+            fault(`${tag} map member lacks what the listing shows`, carried(now.gPage, member).paths.filter((p) => !MEMBER_CANNOT_PROVE.has(p)));
             fault(`${tag} map member carries a role its card withholds`, rolesItsCardWithholds(member));
           }
         }
@@ -438,7 +443,13 @@ describe('the server-side share veil (211) — execution against the real SQL an
     // the page the 210 client draws from the same stored row (its own clamp), equal to what 211 serves
     const want = canon(veil.projectShareVeil(pub, { $veil: { v: 1, deltas } }));
     expect(JSON.stringify(canon(now.gRow.data))).toBe(JSON.stringify(want));
-    expect(JSON.stringify(now.gPage)).toBe(JSON.stringify(want));
+    // R2-CURE (VEIL-21): RE-RECORDED BY THE RULING. The page is the served document AND the page's re-derivation of what the
+    // server withholds on every read and the page draws (the seventh chair's VR19 (c), VR33, VR37 (a): the defence scores,
+    // the readiness score, the gates, the economy's output, a condition's severity from its band; src/lib/gallery.js ::
+    // sanitizeDossier -> src/domain/veil/pageRederive.js), so the page equals the twin's projection re-derived, from the
+    // projection alone. The server's document still equals the twin's projection exactly (above).
+    const { rederiveForPage } = await import('../../src/domain/veil/pageRederive.js');
+    expect(JSON.stringify(now.gPage)).toBe(JSON.stringify(canon(rederiveForPage(veil.projectShareVeil(pub, { $veil: { v: 1, deltas } })))));
   });
 
   it('the $veil shapes never raise and never leak; an anonymous legacy event is veiled fail-closed', async () => {

@@ -1,0 +1,43 @@
+gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.0.lock.shared as PID 378 after 0 poll(s); 2 shared holder(s) live, worker cap <= 2.
++ ]
+
+ ❯ tests/components/publicProseEquality.test.jsx:154:48
+    152|       const b = new Set(proseLines(TABS[tab](shared, { publicDossier: …
+    153|       expect(a.length).toBeGreaterThan(0);
+    154|       expect(a.filter((line) => !b.has(line))).toEqual([]);
+       |                                                ^
+    155|     });
+    156|   }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/lint/ruinFilterRoster.walker.test.js > ruin-filter roster ratchet (structural-prevention Pattern 2) > exempt honesty: every exempt entry still reads .institutions and is not already compliant
+AssertionError: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/domain/display/gallerySecondHomes.js: now routes through the ruin filter — delete its exempt row (the win is banked)",
++ ]
+
+ ❯ tests/lint/ruinFilterRoster.walker.test.js:566:19
+    564|       else if (r.compliant) stale.push(`${rel}: now routes through the…
+    565|     }
+    566|     expect(stale).toEqual([]);
+       |                   ^
+    567|   });
+    568| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  2 failed | 8 passed (10)
+      Tests  3 failed | 588 passed (591)
+   Start at  04:02:13
+   Duration  84.08s (transform 14.17s, setup 178ms, import 15.75s, tests 121.06s, environment 628ms)
+
+[gate-tail] end:  04:03:37 up  1:26,  0 user,  load average: 6.06, 4.88, 4.01
+[gate-tail] full log: /tmp/gate-tail.385.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

@@ -211,6 +211,17 @@
 --       unmarked share's gallery read and import, restated here for that alone; the link always runs the veil). Never a
 --       stored change (_gallery_veil_apply, get_gallery_dossier, import_gallery_dossier; gallerySecondHomes.js ::
 --       withholdCriminalIncome, rederiveIncomeShares, withholdIncomeWeights). No signature changes.
+--   (34) WHAT NO NON-OWNER READ SENDS, WHATEVER THE VEIL (VEIL-21, R2; the sixth chair's VR16 rule 1, the seventh chair's VR28,
+--       VR33, VR37; SUB-BRIEF-VR7 point 5): every row of the roster-choice registry (src/domain/veil/rosterChoiceRegistry.js)
+--       hosted in _gallery_veil_withhold_always, each rule naming its row: the fields no non-owner page draws, the crime
+--       measures, the defence scores, gates and readiness score, a condition's severity (its band sent as stored), the
+--       stability's cause (its band word stays), and a crisis cast's absences; a cast's stake or role row goes per entry with
+--       the power, person or house it names (VR37 (b)). _gallery_veil (211's, RESTATED here) runs it last on every body,
+--       and on an UNMARKED listing's projection too, returned as `body`, so the gallery read, the import, the party link
+--       and the campaign map's member all send it, both stored shapes, Reveal DM off and on. The page and the import's
+--       save re-derive from the served document what they draw (pageRederive.js; importRederive.js). The owner's own
+--       reads never come here. Four helpers (_minus_at, _each_minus_at, _cast, _withhold_always), revoked by name.
+--       galleryWithholdAlways.js :: withholdAlways, called by galleryVeil.js :: applyVeil and projectShareVeil.
 --   (10) A PERSON HIDDEN BY THE PER-PERSON SWITCH IS NOT SENT IN A ROSTER COPY EITHER (COHERENCE-VEIL-6; the fifth
 --       review's V5-4, ruled by the chair): _gallery_apply_member_overrides now reduces each roster copy
 --       (factions[].members[], powerStructure.factions[].members[]) of a person the share does not reveal to the
@@ -222,6 +233,7 @@
 --       Reveal-DM projection of the gallery read and the import, beside 211's decrees and dmLayer; before, every
 --       reader and every importer of such a share received both.
 --
+-- VEIL-21 (R2): NEW, four more (_gallery_veil_minus_at, _each_minus_at, _cast, _withhold_always); RESTATED, _gallery_veil.
 -- NEW: thirty-one helpers (_gallery_veil_pieces, _runs, _embeds, _case_fold, _fold, _hidden_name, _sources, _tie_pieces,
 -- _second_homes, _member_revealed, _roster_members, _tie_roles, _roster_splice; and the name search's eighteen: _name_sep, _name_bound,
 -- _name_pad, _name_case, _name_prep, _name_fold, _name_needle, _name_search, _name_ready, _name_json, _name_hits, _name_hit, _named,
@@ -1871,6 +1883,240 @@ begin
   end if;
   return s;
 end $$;
+
+-- [212: NEW] public._gallery_veil_minus_at
+-- VEIL-21 (R2): the object at `path` without `keys`; anything else (a path that is not there, or not an object) as it was.
+-- Never raises: the path is followed by #>, which answers NULL where it does not resolve.
+create or replace function public._gallery_veil_minus_at(s jsonb, path text[], keys text[])
+returns jsonb language sql immutable as $$
+  select case when jsonb_typeof(s #> path) = 'object' then jsonb_set(s, path, (s #> path) - keys) else s end
+$$;
+
+-- [212: NEW] public._gallery_veil_each_minus_at
+-- VEIL-21 (R2): each object of the array at `path` without `keys` (every other element as it was, in order); anything
+-- that is not an array at `path` as it was.
+create or replace function public._gallery_veil_each_minus_at(s jsonb, path text[], keys text[])
+returns jsonb language sql immutable as $$
+  select case when jsonb_typeof(s #> path) = 'array' then jsonb_set(s, path, (
+      select coalesce(jsonb_agg(case when jsonb_typeof(e) = 'object' then e - keys else e end order by o), '[]')
+        from jsonb_array_elements(s #> path) with ordinality x(e, o))) else s end
+$$;
+
+-- [212: NEW] public._gallery_veil_cast
+-- VEIL-21 (R2; the seventh chair's VR37 (b), VR21): one crisis (an entry of `stress` or `stressors`) with its cast's rows
+-- judged. `absent` is withheld on every non-owner read (registry: cast.absent). A role row and a stake are DRAWN (the Plot
+-- Hooks tab): each names its own person, power or house, and goes PER ENTRY with it: a stake stays only where its
+-- `factionId` names a served power; a role row only where its `kind` 'npc' row names a served person (by id or name), its
+-- 'faction' row a served power, any other row a served person, power or house; a row that is not an object, or names
+-- nothing served, goes (where unsure, withhold). What is left stays dense, in order (VR21). With nothing withheld every
+-- row names what is served and nothing moves. gallerySecondHomes.js :: castByServed.
+create or replace function public._gallery_veil_cast(c jsonb, powers text[], people text[], houses text[])
+returns jsonb language sql immutable as $$
+  select case when jsonb_typeof(c) = 'object' and jsonb_typeof(c -> 'cast') = 'object' then jsonb_set(c, '{cast}',
+    (c -> 'cast') - 'absent'
+    || case when jsonb_typeof(c #> '{cast,stakes}') = 'array' then jsonb_build_object('stakes', (
+         select coalesce(jsonb_agg(e order by o), '[]') from jsonb_array_elements(c #> '{cast,stakes}') with ordinality x(e, o)
+          where jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'factionId') = 'string' and (e ->> 'factionId') = any(powers))) else '{}'::jsonb end
+    || case when jsonb_typeof(c #> '{cast,roles}') = 'array' then jsonb_build_object('roles', (
+         select coalesce(jsonb_agg(e order by o), '[]') from jsonb_array_elements(c #> '{cast,roles}') with ordinality x(e, o)
+          cross join lateral (select case when jsonb_typeof(e -> 'id') = 'string' then e ->> 'id' end as id,
+                                     case when jsonb_typeof(e -> 'name') = 'string' then e ->> 'name' end as nm,
+                                     case when jsonb_typeof(e -> 'kind') = 'string' then e ->> 'kind' end as kind) r
+          where jsonb_typeof(e) = 'object' and coalesce(
+            case r.kind
+              when 'npc' then r.id = any(people) or r.nm = any(people)
+              when 'faction' then r.id = any(powers) or r.nm = any(powers)
+              else r.id = any(people || powers || houses) or r.nm = any(people || powers || houses) end, false))) else '{}'::jsonb end)
+  else c end
+$$;
+
+-- [212: NEW] public._gallery_veil_withhold_always
+-- VEIL-21 (R2; the sixth chair's VR16, the seventh chair's VR28, VR33, VR37; SUB-BRIEF-VR7 point 5): WHAT NO NON-OWNER READ
+-- SENDS, WHATEVER THE VEIL. Each rule names its row of the roster-choice registry (src/domain/veil/rosterChoiceRegistry.js).
+-- A field no non-owner page draws, and every precise figure the seventh chair withholds on every read (VR33: the defence
+-- scores and gates, the readiness score, a condition's severity, the crime measures), leaves EVERY non-owner read: the
+-- gallery read, the party link, the import, the public page and the campaign map's members; both stored shapes; Reveal DM
+-- off and on; a marked share and an unmarked one (_gallery_veil runs it on both), so its absence tells nothing. The page
+-- re-derives what it draws of these from the served document (src/domain/veil/pageRederive.js :: rederiveForPage; the
+-- import's save, rederiveServed). The owner's own reads never come here. A fixed-path pass: no text is scanned.
+-- galleryWithholdAlways.js :: withholdAlways, rule for rule.
+create or replace function public._gallery_veil_withhold_always(doc jsonb)
+returns jsonb language plpgsql immutable as $$
+declare
+  s jsonb := doc;
+  k text;
+  powers text[];
+  people text[];
+  houses text[];
+begin
+  if jsonb_typeof(s) is distinct from 'object' then return doc; end if;
+  -- registry: conditions.severity (VR37: the number withheld; its band, severityBand, is sent as stored, tier 2)
+  s := public._gallery_veil_each_minus_at(s, '{activeConditions}', array['severity']);
+  -- registry: defence.readiness.score (VR37: the label and its colours stay, tier 2)
+  s := public._gallery_veil_minus_at(s, '{defenseProfile,readiness}', array['score']);
+  -- registry: defence.scores.disaster
+  -- registry: defence.scores.economic
+  -- registry: defence.scores.internal
+  -- registry: defence.scores.magical
+  -- registry: defence.scores.military
+  -- registry: defence.scores.monster (VR33)
+  s := public._gallery_veil_minus_at(s, '{defenseProfile,scores}', array['disaster', 'economic', 'internal', 'magical', 'military', 'monster']);
+  -- registry: defence.economicGates (VR33: every gate, so the object goes whole)
+  s := public._gallery_veil_minus_at(s, '{defenseProfile}', array['economicGates']);
+  -- registry: compound.criminalEffective
+  -- registry: compound.criminalPreStress
+  -- registry: compound.economyOutput
+  -- registry: compound.magicInfluence
+  -- registry: compound.militaryEffective
+  -- registry: compound.religionInfluence
+  s := public._gallery_veil_minus_at(s, '{economicState,compound}', array['criminalEffective', 'criminalPreStress', 'economyOutput', 'magicInfluence', 'militaryEffective', 'religionInfluence']);
+  -- registry: safety.compound.criminalEffective
+  -- registry: safety.compound.criminalPreStress
+  -- registry: safety.compound.economyOutput
+  -- registry: safety.compound.magicInfluence
+  -- registry: safety.compound.militaryEffective
+  -- registry: safety.compound.religionInfluence
+  s := public._gallery_veil_minus_at(s, '{economicState,safetyProfile,compound}', array['criminalEffective', 'criminalPreStress', 'economyOutput', 'magicInfluence', 'militaryEffective', 'religionInfluence']);
+  -- registry: food.storageMonths
+  -- registry: food.storageNote
+  s := public._gallery_veil_minus_at(s, '{economicState,foodSecurity}', array['storageMonths', 'storageNote']);
+  -- registry: income.weight (item D withholds it in _gallery_veil_apply and the unmarked reads; here the map's unmarked
+  -- member too, which neither reached)
+  s := public._gallery_veil_each_minus_at(s, '{economicState,incomeSources}', array['weight']);
+  -- registry: economy.situationDesc
+  s := public._gallery_veil_minus_at(s, '{economicState}', array['situationDesc']);
+  -- registry: safety.blackMarketCapture
+  -- registry: safety.safetyRatio
+  s := public._gallery_veil_minus_at(s, '{economicState,safetyProfile}', array['blackMarketCapture', 'safetyRatio']);
+  -- registry: safety.flags.anyActive
+  -- registry: safety.flags.arcaneBlackMarket
+  -- registry: safety.flags.merchantArmy
+  -- registry: safety.flags.religiousFraud
+  -- registry: safety.flags.merchantCriminalBlur
+  s := public._gallery_veil_minus_at(s, '{economicState,safetyProfile,flags}', array['anyActive', 'arcaneBlackMarket', 'merchantArmy', 'religiousFraud', 'merchantCriminalBlur']);
+  -- registry: history.timeline.anchored
+  -- registry: history.timeline.year
+  s := public._gallery_veil_each_minus_at(s, '{history,eventsTimeline}', array['anchored', 'year']);
+  -- registry: history.event.anchored
+  s := public._gallery_veil_each_minus_at(s, '{history,historicalEvents}', array['anchored']);
+  -- registry: history.legacy
+  -- registry: history.siegeNarrative
+  s := public._gallery_veil_minus_at(s, '{history}', array['legacyAnnotations', 'siegeNarrative']);
+  -- registry: npcs.stressNote
+  s := public._gallery_veil_each_minus_at(s, '{npcs}', array['stressNote']);
+  -- registry: npcs.memberships.veiled
+  if jsonb_typeof(s -> 'npcs') = 'array' then
+    s := jsonb_set(s, '{npcs}', (select coalesce(jsonb_agg(case when jsonb_typeof(e) = 'object'
+        then public._gallery_veil_each_minus_at(e, '{memberships}', array['veiled']) else e end order by o), '[]')
+      from jsonb_array_elements(s -> 'npcs') with ordinality x(e, o)));
+  end if;
+  -- registry: power.fingerprint
+  s := public._gallery_veil_minus_at(s, '{powerStructure}', array['economyInputFingerprint']);
+  -- registry: power.contestsNiche
+  -- registry: power.rawPower
+  -- registry: power.factions.legitimacyCrisis
+  s := public._gallery_veil_each_minus_at(s, '{powerStructure,factions}', array['contestsNiche', 'rawPower', 'legitimacyCrisis']);
+  -- registry: power.relation.ratio (power.relation.direction is DRAWN, VR37: it goes with its relation, per entry)
+  s := public._gallery_veil_each_minus_at(s, '{powerStructure,factionRelationships}', array['ratio']);
+  -- registry: legitimacy.breakdown
+  s := public._gallery_veil_minus_at(s, '{powerStructure,publicLegitimacy,breakdown}', array['prosperity', 'safety', 'defense']);
+  -- registry: legitimacy.crimMultiplier
+  -- registry: legitimacy.govMultiplier
+  -- registry: legitimacy.flags
+  s := public._gallery_veil_minus_at(s, '{powerStructure,publicLegitimacy}', array['crimMultiplier', 'govMultiplier',
+    'isApproved', 'isContested', 'isEndorsed', 'isTolerated', 'governanceFractured', 'isLegitimacyCrisis']);
+  -- registry: power.stability (VR19 (a), ruling 5): the band word before its cause stays; the cause (from the first
+  -- '(', em dash or ';', with the spaces before it) goes; a value that is not a string, or no word before its cause, goes
+  if jsonb_typeof(s -> 'powerStructure') = 'object' and (s -> 'powerStructure') ? 'stability' then
+    s := case when jsonb_typeof(s #> '{powerStructure,stability}') = 'string'
+                   and regexp_replace(s #>> '{powerStructure,stability}', ' *[(' || chr(8212) || ';].*$', '') <> ''
+              then jsonb_set(s, '{powerStructure,stability}', to_jsonb(regexp_replace(s #>> '{powerStructure,stability}', ' *[(' || chr(8212) || ';].*$', '')))
+              else s #- '{powerStructure,stability}' end;
+  end if;
+  -- registry: prose.incomeWeight.alias
+  -- registry: prose.shadowEconomy.alias
+  foreach k in array array['economy:daily_life', 'economy:resources', 'economy:services'] loop
+    s := public._gallery_veil_minus_at(s, array['publicProse', 'blocks', k], array['incomeWeight', 'shadowEconomy']);
+  end loop;
+  -- registry: prose.prosperity.glance
+  s := public._gallery_veil_minus_at(s, '{publicProse,blocks,economy:economics,prosperityHeader}', array['glance']);
+  s := public._gallery_veil_minus_at(s, '{publicProse,blocks,economy:economics,prosperityRung}', array['glance']);
+  -- registry: prose.conditionSeverity.glance
+  s := public._gallery_veil_minus_at(s, '{publicProse,blocks,stressors:overview,conditionSeverity}', array['glance']);
+  -- registry: spatial.quarters
+  s := public._gallery_veil_minus_at(s, '{spatialLayout}', array['quarters']);
+  -- registry: cast.absent
+  -- registry: cast.stakes
+  -- registry: cast.roles (_gallery_veil_cast: absent always; a stake or a role row per entry, by
+  -- what is served of the person, power or house it names)
+  if s ?| array['stress', 'stressors'] then
+    powers := array(select v from (
+        select jsonb_array_elements(case when jsonb_typeof(s #> '{powerStructure,factions}') = 'array' then s #> '{powerStructure,factions}' else '[]' end) f
+        union all select jsonb_array_elements(case when jsonb_typeof(s -> 'factions') = 'array' then s -> 'factions' else '[]' end)) q,
+      lateral (select q.f ->> 'name' as v where jsonb_typeof(q.f -> 'name') = 'string' union select q.f ->> 'faction' where jsonb_typeof(q.f -> 'faction') = 'string') w);
+    people := array(select v from jsonb_array_elements(case when jsonb_typeof(s -> 'npcs') = 'array' then s -> 'npcs' else '[]' end) n,
+      lateral (select n ->> 'id' as v where jsonb_typeof(n -> 'id') = 'string' union select n ->> 'name' where jsonb_typeof(n -> 'name') = 'string') w);
+    houses := array(select v from jsonb_array_elements(case when jsonb_typeof(s -> 'institutions') = 'array' then s -> 'institutions' else '[]' end) h,
+      lateral (select h ->> 'id' as v where jsonb_typeof(h -> 'id') = 'string' union select h ->> 'name' where jsonb_typeof(h -> 'name') = 'string') w);
+    foreach k in array array['stress', 'stressors'] loop
+      if jsonb_typeof(s -> k) = 'object' then
+        s := jsonb_set(s, array[k], public._gallery_veil_cast(s -> k, powers, people, houses));
+      elsif jsonb_typeof(s -> k) = 'array' then
+        s := jsonb_set(s, array[k], (select coalesce(jsonb_agg(public._gallery_veil_cast(e, powers, people, houses) order by o), '[]')
+                                       from jsonb_array_elements(s -> k) with ordinality x(e, o)));
+      end if;
+    end loop;
+  end if;
+  return s;
+end $$;
+
+-- [212: RESTATED (211's statement, with the cure)] public._gallery_veil
+-- VEIL-21 (R2): 211's statement, and _gallery_veil_withhold_always run on every body it returns: last on the veiled body,
+-- and, where the share is unmarked (no veil: 211 returned no body and the reads served their projection as before), on
+-- that projection, returned as `body`, so the gallery read, the import and the campaign map's member (whose member
+-- expression takes `body` before its projection) send it too. The served marker is unchanged. Twin:
+-- galleryVeil.js :: projectShareVeil (the unmarked path) and applyVeil (last).
+create or replace function public._gallery_veil(pub jsonb, overrides jsonb, link boolean, copy boolean default false)
+returns jsonb language plpgsql immutable as $$
+declare
+  -- the stored overrides, decompressed ONCE: every later look at them is in memory (a stored object
+  -- of any size is read once per read, never once per operator)
+  ov jsonb := coalesce(overrides #> '{}', '{}');
+  doc jsonb := case when jsonb_typeof(pub) = 'object' then pub else '{}' end;
+  -- every person of the document, by the client's member key (the served booleans and the card deltas)
+  people text[] := array(select distinct public._gallery_veil_npc_id(c.card) from public._gallery_veil_cards(doc, 'npc') c);
+  res jsonb;
+  body jsonb;
+begin
+  if jsonb_typeof(ov) <> 'object' then ov := '{}'; end if;
+  res := public._gallery_veil_resolve(pub, ov, link, people);
+  -- VEIL-21 (R2): an unmarked listing is served as before (the reads take `body` where it is given), but for what no
+  -- non-owner read sends whatever the veil (_gallery_veil_withhold_always): the gallery read, the import and the campaign
+  -- map's member (get_gallery_map serves `body` where there is one), each its own projection less those rows
+  if res is null then
+    return jsonb_build_object('served', public._gallery_veil_served(ov, null, to_jsonb(people), copy))
+      || case when jsonb_typeof(pub) = 'object' then jsonb_build_object('body', public._gallery_veil_withhold_always(pub)) else '{}'::jsonb end;
+  end if;
+  body := public._gallery_veil_apply(pub, res);
+  -- a person card with neither a name nor a role is dropped, as the client's projection drops it
+  -- (publicSafe.js :: toPublicSafe); a served page is not projected again (the third review's V3-2)
+  if jsonb_typeof(body -> 'npcs') = 'array' then
+    body := jsonb_set(body, '{npcs}', coalesce((select jsonb_agg(e order by o) from jsonb_array_elements(body -> 'npcs') with ordinality x(e, o)
+      where jsonb_typeof(e) <> 'object' or public._gallery_veil_truthy(e -> 'name') or public._gallery_veil_truthy(e -> 'role')), '[]'));
+  end if;
+  -- VEIL-21 (R2): last, what no non-owner read sends whatever the veil
+  body := public._gallery_veil_withhold_always(body);
+  return jsonb_build_object(
+    'body', body,
+    'groupings', res -> 'groupings',
+    'served', public._gallery_veil_served(ov, res -> 'groupings', to_jsonb(people), copy));
+end $$;
+
+-- VR27 (as amended): a helper this lane adds, called only inside the definer reads, is revoked by name
+revoke execute on function public._gallery_veil_minus_at(jsonb, text[], text[]) from public, anon, authenticated;
+revoke execute on function public._gallery_veil_each_minus_at(jsonb, text[], text[]) from public, anon, authenticated;
+revoke execute on function public._gallery_veil_cast(jsonb, text[], text[], text[]) from public, anon, authenticated;
+revoke execute on function public._gallery_veil_withhold_always(jsonb) from public, anon, authenticated;
 
 -- [212: NEW] public._gallery_veil_member_revealed
 -- ── V5-4 (COHERENCE-VEIL-6; the fifth review §1.5, ruled by the chair on 2026-11-13): a person hidden by the per-person

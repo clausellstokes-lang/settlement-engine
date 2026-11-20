@@ -17,6 +17,9 @@
 -- comparison (every function's body, arguments, volatility, definer flag, settings, grants, owner):
 -- 0 lines differ. tests/security/galleryVeilCures.pglite.test.js pins it.
 --
+-- VEIL-21 (R2): 212 also restates 211's _gallery_veil (it goes back here, verbatim, with the six) and creates four
+-- helpers (_gallery_veil_minus_at, _each_minus_at, _cast, _withhold_always), dropped in section 2.
+--
 -- NOT reversed, because there is nothing to: no stored row was written by 212.
 
 -- ── 1. the six functions 212 restated, at the frozen 211's statements, verbatim ───────────────────────
@@ -396,7 +399,40 @@ $$;
 revoke execute on function public.import_gallery_dossier(text) from public;
 grant execute on function public.import_gallery_dossier(text) to authenticated;
 
+-- [212 down: back to 211 at 333b33973] public._gallery_veil (restated by 212 for VEIL-21's R2)
+create or replace function public._gallery_veil(pub jsonb, overrides jsonb, link boolean, copy boolean default false)
+returns jsonb language plpgsql immutable as $$
+declare
+  -- the stored overrides, decompressed ONCE: every later look at them is in memory (a stored object
+  -- of any size is read once per read, never once per operator)
+  ov jsonb := coalesce(overrides #> '{}', '{}');
+  doc jsonb := case when jsonb_typeof(pub) = 'object' then pub else '{}' end;
+  -- every person of the document, by the client's member key (the served booleans and the card deltas)
+  people text[] := array(select distinct public._gallery_veil_npc_id(c.card) from public._gallery_veil_cards(doc, 'npc') c);
+  res jsonb;
+  body jsonb;
+begin
+  if jsonb_typeof(ov) <> 'object' then ov := '{}'; end if;
+  res := public._gallery_veil_resolve(pub, ov, link, people);
+  if res is null then return jsonb_build_object('served', public._gallery_veil_served(ov, null, to_jsonb(people), copy)); end if;
+  body := public._gallery_veil_apply(pub, res);
+  -- a person card with neither a name nor a role is dropped, as the client's projection drops it
+  -- (publicSafe.js :: toPublicSafe); a served page is not projected again (the third review's V3-2)
+  if jsonb_typeof(body -> 'npcs') = 'array' then
+    body := jsonb_set(body, '{npcs}', coalesce((select jsonb_agg(e order by o) from jsonb_array_elements(body -> 'npcs') with ordinality x(e, o)
+      where jsonb_typeof(e) <> 'object' or public._gallery_veil_truthy(e -> 'name') or public._gallery_veil_truthy(e -> 'role')), '[]'));
+  end if;
+  return jsonb_build_object(
+    'body', body,
+    'groupings', res -> 'groupings',
+    'served', public._gallery_veil_served(ov, res -> 'groupings', to_jsonb(people), copy));
+end $$;
+
 -- ── 2. the helpers 212 created, by signature (thirty-one: COHERENCE-VEIL-10 replaced the eighth seat's sweep, _folded_name, _names and _sweep, by the name search's fourteen, _name_* and _named; COHERENCE-VEIL-11 added _case_fold; COHERENCE-VEIL-12 added _name_bound and _name_pad, and _clauses, which VEIL-15 replaced by _runs; VEIL-16 added _name_json and _name_tokens, and _name_near takes a range of tokens) ──
+drop function if exists public._gallery_veil_withhold_always(jsonb);
+drop function if exists public._gallery_veil_cast(jsonb, text[], text[], text[]);
+drop function if exists public._gallery_veil_each_minus_at(jsonb, text[], text[]);
+drop function if exists public._gallery_veil_minus_at(jsonb, text[], text[]);
 drop function if exists public._gallery_veil_runs(jsonb);
 drop function if exists public._gallery_veil_embeds(jsonb, text[]);
 drop function if exists public._gallery_veil_case_fold(text);
