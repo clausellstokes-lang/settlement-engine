@@ -141,7 +141,7 @@ export function computePublicLegitimacy(economicState, defenseLabel, tier, fortu
                   : 1.0;
 
   const pContrib = sizeRelativeStanding(fortuneLaw) ? fortuneProsperityContrib(prosperity) : PROSPERITY_CONTRIB[prosperity] ?? 0;
-  const sContrib = safetyContrib(safetyLabel);
+  const sContrib = sizeRelativeStanding(fortuneLaw) ? sizeRelativeSafetyContrib(safetyLabel, tier) : safetyContrib(safetyLabel);
   const dContrib = sizeRelativeStanding(fortuneLaw) ? sizeRelativeDefenceContrib(defenseLabel, tier, defScale) : Math.round((DEFENSE_CONTRIB[defenseLabel] ?? 0) * defScale);
   const fContrib = Math.round(foodContrib(foodLabel) * foodScale);
 
@@ -180,8 +180,8 @@ export function computePublicLegitimacy(economicState, defenseLabel, tier, fortu
  * argument is the law's version, handed by its one caller (`power/rulingStructure.js`, from
  * `resolveFortuneLawVersion(config)`), and read here through the law's closed reader: absent or
  * garbage is version 1, and under version 1 every line computes exactly as before the law. Under
- * version 2 the prosperity term reads the law's table and the defence term is judged against the
- * size's usual range; safety, food, the base 50, the cuts and the band derivation are unchanged.
+ * version 2 the prosperity term reads the law's table, and the defence term and a calm safety label
+ * are judged against the size's usual range (U5s); food, the base 50, the cuts and the bands are unchanged.
  * @param {unknown} fortuneLaw @returns {boolean}
  */
 function sizeRelativeStanding(fortuneLaw) {
@@ -221,6 +221,28 @@ function sizeRelativeDefenceContrib(defenseLabel, tier, defScale) {
   const [low, high] = range.map((band) => READINESS_ORDER.indexOf(band));
   const offset = index > high ? index - high : index < low ? index - low : 0;
   return Math.round(Math.max(-defenceBound, Math.min(defenceBound, defencePointsPerBand * offset)) * defScale);
+}
+
+/**
+ * The safety term under the fortune law (FORTUNE-3 U5s, the chair's ruling of 2026-11-20 15:58
+ * UTC): safety judged against what is USUAL for the size. A label on the calm ladder
+ * (`safetyCalmLadder`, lowest first) inside the size's usual range (`safetyUsualRange`) is worth 0;
+ * outside it, its own points (`safetyContrib`) LESS those of the range's nearest band. Every
+ * figure is today's `safetyContrib`; the ladder and the ranges are the law's DRAFT table
+ * (`FORTUNE_LAW_TUNING.standing`). A label off the ladder (a crisis strain, the two governance
+ * labels) keeps today's points; a size off the table reads the town's range, as defence does.
+ *
+ * @param {string} safetyLabel
+ * @param {string} tier
+ * @returns {number}
+ */
+function sizeRelativeSafetyContrib(safetyLabel, tier) {
+  const { safetyCalmLadder, safetyUsualRange } = FORTUNE_LAW_TUNING.standing;
+  const index = safetyCalmLadder.indexOf(safetyLabel);
+  if (index < 0) return safetyContrib(safetyLabel);
+  const range = /** @type {Record<string, ReadonlyArray<string>>} */ (safetyUsualRange)[tier] ?? safetyUsualRange.town;
+  const [low, high] = range.map((band) => safetyCalmLadder.indexOf(band));
+  return safetyContrib(safetyLabel) - safetyContrib(safetyCalmLadder[Math.max(low, Math.min(high, index))]);
 }
 
 

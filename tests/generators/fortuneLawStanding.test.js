@@ -6,7 +6,9 @@
  * Under version 2 ONLY, defence is judged against the size's usual RANGE of readiness bands
  * (`FORTUNE_LAW_TUNING.standing`): so many points a band above the range's top or below its
  * bottom, within the bound, weighed by the size's existing scale (`legitimacyDefScale`); the
- * prosperity term reads the law's table. Under version 1 every line computes exactly as today.
+ * prosperity term reads the law's table; the safety term is FORTUNE-3 U5s's (a calm label judged
+ * against the size's usual range, proven in `fortuneLawSafety.test.js`, recomputed here by its
+ * definition). Under version 1 every line computes exactly as today.
  *
  * THE ARMS, in the brief's order:
  *   (a) DARK — every (defence label x size x prosperity label) cell, with no fourth argument, with
@@ -73,6 +75,20 @@ function litDefence(label, tier) {
     .map((band) => BAND_ORDER.indexOf(band));
   const offset = index > high ? index - high : index < low ? index - low : 0;
   return Math.round(clamp(STANDING.defencePointsPerBand * offset, -STANDING.defenceBound, STANDING.defenceBound) * legitimacyDefScale(tier));
+}
+
+/** The safety term under the law (FORTUNE-3 U5s), read off the law's table: a label on the calm
+ *  ladder (`safetyCalmLadder`, lowest first) is 0 inside the size's usual range
+ *  (`safetyUsualRange`) and, outside it, its law-1 points less those of the range's nearest band;
+ *  a label off the ladder keeps its law-1 points. @param {string} label @param {string} tier */
+function litSafety(label, tier) {
+  const ladder = /** @type {ReadonlyArray<string>} */ (STANDING.safetyCalmLadder);
+  const today = (/** @type {string} */ l) => computePublicLegitimacy(economyOf('Moderate', l), null, tier).breakdown.safety;
+  const index = ladder.indexOf(label);
+  if (index < 0) return today(label);
+  const [low, high] = /** @type {Record<string, ReadonlyArray<string>>} */ (STANDING.safetyUsualRange)[tier]
+    .map((band) => ladder.indexOf(band));
+  return today(label) - today(ladder[clamp(index, low, high)]);
 }
 
 // ── (a) DARK ──────────────────────────────────────────────────────────────────
@@ -167,7 +183,7 @@ describe('(b) LIT: under law 2 defence is judged against the size\'s usual range
     expect(computePublicLegitimacy(economyOf('Moderate'), 'Well-Defended', 'city').breakdown.defense).toBeGreaterThan(0);
   });
 
-  it('an unknown label contributes 0; the prosperity term reads the law\'s table; safety, food, the base and the key order are unchanged', () => {
+  it('an unknown label contributes 0; the prosperity term reads the law\'s table; safety is the U5s rule; food, the base and the key order are unchanged', () => {
     for (const tier of TIER_ORDER) {
       expect(computePublicLegitimacy(economyOf('Moderate'), /** @type {any} */ ('Moated'), tier, LIT).breakdown.defense).toBe(0);
       expect(computePublicLegitimacy(economyOf('Moderate'), /** @type {any} */ (null), tier, LIT).breakdown.defense).toBe(0);
@@ -180,7 +196,8 @@ describe('(b) LIT: under law 2 defence is judged against the size\'s usual range
           expect(Object.keys(lit)).toEqual(Object.keys(dark));
           expect(Object.keys(lit.breakdown)).toEqual(Object.keys(dark.breakdown));
           expect(lit.breakdown.prosperity).toBe(STANDING.prosperityPoints[/** @type {keyof typeof STANDING.prosperityPoints} */ (prosperity)]);
-          expect(lit.breakdown.safety).toBe(dark.breakdown.safety);
+          // U5s: the dark term off the calm ladder, 0 inside the size's usual range, the rule outside it
+          expect(lit.breakdown.safety, `${tier} / ${safety}`).toBe(litSafety(safety, tier));
           expect(lit.breakdown.food).toBe(dark.breakdown.food);
           expect(lit.breakdown.defense).toBe(litDefence(label, tier));
           const { prosperity: p, safety: s, defense: d, food: f } = lit.breakdown;
