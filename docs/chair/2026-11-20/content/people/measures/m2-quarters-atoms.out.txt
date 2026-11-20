@@ -1,0 +1,125 @@
+
+## STEP 0 (no new key): granted {}
+(a) today's line printed where §2 finds it false: 0 · no eligible wording (falls back to today's line): 0
+(b) SIZE thorp 10% · hamlet 11% · village 14% · town 13% · city 11% · metropolis 14%
+(b) TYPES n>=30 over 15%: none
+(b) TYPE Religious Quarter|thorp 11% · Religious Quarter|hamlet 11% · Religious Quarter|village 14% · Religious Quarter|town 11% · Religious Quarter|city 8% · Religious Quarter|metropolis 9% · Fishing Landing|thorp 13% · Alehouse & Common|hamlet 12% · Noxious Trades Quarter|town 11% · Noxious Trades Quarter|city 11% · Noxious Trades Quarter|metropolis 11% · Market Quarter|town 13% · Waterfront District|city 14% · Waterfront District|metropolis 15% · Government Quarter|town 8% · Government Quarter|city 8% · Government Quarter|metropolis 10% · Mages' Quarter|city 14% · Mages' Quarter|metropolis 13% · Shadows District|city 12% · Shadows District|metropolis 11% · Wealthy Residential|city 9% · Wealthy Residential|metropolis 13% · Common Residential|city 9% · Common Residential|metropolis 14%
+    small n (<30, the bar unreadable): Woodcutters' Ground|thorp 2/8 · Woodcutters' Ground|hamlet 2/7 · Woodcutters' Ground|village 4/19 · Roadside Shrine|thorp 1/3 · Noxious Trades Quarter|village 3/11 · Waterfront District|town 5/26 · Artisan Quarter|town 6/24 · Artisan Quarter|city 1/5 · Artisan Quarter|metropolis 1/1 · Mages' Quarter|town 1/4
+    commonest thorp: "No house of worship stands here; the parish church is a neighbour's"
+    commonest hamlet: "For worship, the hamlet looks to a neighbour's parish church"
+    commonest village: "A parish church, its yard the quietest ground in the village"
+    commonest town: "The market square, its stalls, and the shops around it"
+    commonest city: "The smelliest trades, kept downwind of the houses"
+    commonest metropolis: "Dense timber tenements, narrow streets, crowded"
+
+STEP 1: + institution: burial (sum of the top shares the bar reads falls by 13.0 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 13% city 11% metropolis 14% · over 15% at n>=30: none
+
+STEP 2: + institution: customs house (sum of the top shares the bar reads falls by 7.0 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 13% city 11% metropolis 14% · over 15% at n>=30: none
+
+STEP 3: + institution: mages' guild (sum of the top shares the bar reads falls by 5.2 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 13% city 11% metropolis 14% · over 15% at n>=30: none
+
+STEP 4: + institution: black market (sum of the top shares the bar reads falls by 4.3 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 13% city 11% metropolis 14% · over 15% at n>=30: none
+
+STEP 5: + institution: weekly market (sum of the top shares the bar reads falls by 4.0 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 11% city 11% metropolis 14% · over 15% at n>=30: none
+
+STEP 6: + institution: gambling (sum of the top shares the bar reads falls by 3.0 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 11% city 11% metropolis 14% · over 15% at n>=30: none
+
+STEP 7: + institution: butcher (sum of the top shares the bar reads falls by 2.0 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 11% city 11% metropolis 14% · over 15% at n>=30: none
+
+STEP 8: + institution: theatre (sum of the top shares the bar reads falls by 1.0 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 11% city 11% metropolis 14% · over 15% at n>=30: none
+
+STEP 9: + institution: slaughterhouse (sum of the top shares the bar reads falls by 0.0 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 11% city 11% metropolis 14% · over 15% at n>=30: none
+
+STEP 10: + institution: fuller (sum of the top shares the bar reads falls by 0.0 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 11% city 11% metropolis 14% · over 15% at n>=30: none
+
+STEP 11: + institution: salt works (sum of the top shares the bar reads falls by 0.0 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 11% city 11% metropolis 14% · over 15% at n>=30: none
+
+STEP 12: + institution: fish market (sum of the top shares the bar reads falls by 0.0 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 11% city 11% metropolis 14% · over 15% at n>=30: none
+
+STEP 13: + institution: chandler (sum of the top shares the bar reads falls by 0.0 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 11% city 11% metropolis 14% · over 15% at n>=30: none
+
+STEP 14: + institution: ropemaker (sum of the top shares the bar reads falls by 0.0 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 11% city 11% metropolis 14% · over 15% at n>=30: none
+
+STEP 15: + institution: shipyard (sum of the top shares the bar reads falls by 0.0 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 11% city 11% metropolis 14% · over 15% at n>=30: none
+
+STEP 16: + institution: fair (sum of the top shares the bar reads falls by 0.0 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 11% city 11% metropolis 14% · over 15% at n>=30: none
+
+STEP 17: + institution: town hall (sum of the top shares the bar reads falls by 0.0 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 11% city 11% metropolis 14% · over 15% at n>=30: none
+
+STEP 18: + institution: palace (sum of the top shares the bar reads falls by 0.0 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 11% city 11% metropolis 14% · over 15% at n>=30: none
+
+STEP 19: + institution: mint (sum of the top shares the bar reads falls by 0.0 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 11% city 11% metropolis 14% · over 15% at n>=30: none
+
+STEP 20: + institution: enchanter (sum of the top shares the bar reads falls by 0.0 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 11% city 11% metropolis 14% · over 15% at n>=30: none
+
+STEP 21: + institution: great library (sum of the top shares the bar reads falls by 0.0 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 11% city 11% metropolis 14% · over 15% at n>=30: none
+
+STEP 22: + institution: sage (sum of the top shares the bar reads falls by 0.0 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 11% city 11% metropolis 14% · over 15% at n>=30: none
+
+STEP 23: + institution: brothel (sum of the top shares the bar reads falls by 0.0 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 11% city 11% metropolis 14% · over 15% at n>=30: none
+
+STEP 24: + institution: smuggling (sum of the top shares the bar reads falls by 0.0 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 11% city 11% metropolis 14% · over 15% at n>=30: none
+
+STEP 25: + institution: underground city (sum of the top shares the bar reads falls by 0.0 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 11% city 11% metropolis 14% · over 15% at n>=30: none
+
+STEP 26: + institution: cooper (sum of the top shares the bar reads falls by 0.0 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 11% city 11% metropolis 14% · over 15% at n>=30: none
+
+STEP 27: + institution: tailor (sum of the top shares the bar reads falls by 0.0 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 11% city 11% metropolis 14% · over 15% at n>=30: none
+
+STEP 28: + institution: sawmill (sum of the top shares the bar reads falls by 0.0 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 11% city 11% metropolis 14% · over 15% at n>=30: none
+
+STEP 29: + institution: alehouse (sum of the top shares the bar reads falls by 0.0 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 11% city 11% metropolis 14% · over 15% at n>=30: none
+
+STEP 30: + institution: wayside inn (sum of the top shares the bar reads falls by 0.0 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 11% city 11% metropolis 14% · over 15% at n>=30: none
+
+STEP 31: + institution: baker (sum of the top shares the bar reads falls by 0.0 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 11% city 11% metropolis 14% · over 15% at n>=30: none
+
+STEP 32: + institution: water system (sum of the top shares the bar reads falls by 0.0 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 11% city 11% metropolis 14% · over 15% at n>=30: none
+
+STEP 33: + institution: alchemist (sum of the top shares the bar reads falls by -1.3 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 11% city 11% metropolis 14% · over 15% at n>=30: none
+
+STEP 34: + institution: wizard's tower (sum of the top shares the bar reads falls by -1.3 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 11% city 11% metropolis 14% · over 15% at n>=30: none
+
+STEP 35: + institution: warehouse (sum of the top shares the bar reads falls by -2.5 points)
+  (a) 0 · NONE 0 · SIZE thorp 10% hamlet 10% village 11% town 11% city 11% metropolis 14% · over 15% at n>=30: none
+
+## ALL KEYS: granted {burial, customs house, mages' guild, black market, weekly market, gambling, butcher, theatre, slaughterhouse, fuller, salt works, fish market, chandler, ropemaker, shipyard, fair, town hall, palace, mint, enchanter, great library, sage, brothel, smuggling, underground city, cooper, tailor, sawmill, alehouse, wayside inn, baker, water system, alchemist, wizard's tower, warehouse}
+(a) today's line printed where §2 finds it false: 0 · no eligible wording (falls back to today's line): 0
+(b) SIZE thorp 10% · hamlet 10% · village 11% · town 11% · city 11% · metropolis 14%
+(b) TYPES n>=30 over 15%: none
+(b) TYPE Religious Quarter|thorp 11% · Religious Quarter|hamlet 10% · Religious Quarter|village 11% · Religious Quarter|town 10% · Religious Quarter|city 5% · Religious Quarter|metropolis 8% · Fishing Landing|thorp 13% · Alehouse & Common|hamlet 12% · Noxious Trades Quarter|town 11% · Noxious Trades Quarter|city 11% · Noxious Trades Quarter|metropolis 9% · Market Quarter|town 11% · Waterfront District|city 9% · Waterfront District|metropolis 15% · Government Quarter|town 8% · Government Quarter|city 8% · Government Quarter|metropolis 10% · Mages' Quarter|city 12% · Mages' Quarter|metropolis 13% · Shadows District|city 9% · Shadows District|metropolis 7% · Wealthy Residential|city 8% · Wealthy Residential|metropolis 13% · Common Residential|city 9% · Common Residential|metropolis 14%
+    small n (<30, the bar unreadable): Woodcutters' Ground|thorp 2/8 · Woodcutters' Ground|hamlet 2/7 · Woodcutters' Ground|village 4/19 · Roadside Shrine|thorp 1/3 · Noxious Trades Quarter|village 3/11 · Waterfront District|town 3/26 · Artisan Quarter|town 6/24 · Artisan Quarter|city 1/5 · Artisan Quarter|metropolis 1/1 · Mages' Quarter|town 3/4

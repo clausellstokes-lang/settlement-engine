@@ -18,6 +18,20 @@ const { liveInstitutionNames, hasInstitution } = await import(`${L}/src/domain/f
 const { faithReadingOf } = await import(`${L}/src/domain/dossier/faithReading.js`);
 const { guildHouseStands } = await import(`${L}/src/domain/facts/guild.js`);
 const { courtHoldersOf } = await import(`${L}/src/domain/facts/defence.js`);
+// §7 (the coordinator's follow-up): every EXISTING atom a §7 wording declares, answered by the vocabulary's own reader
+// (`factVocabulary.js :: atomHolds`, the draw door's evaluation), and the live roster's catalogue ids.
+const { atomHolds } = await import(`${L}/src/domain/facts/factVocabulary.js`);
+const { liveInstitutions } = await import(`${L}/src/domain/institutions/institutionRoster.js`);
+const ATOMS = [
+  'church', 'church access', 'clergy', 'priest', 'sacredHouse', 'market', 'guild', 'court sits', 'legal house', 'magic', 'enchanting',
+  'organised crime', 'rival rings', 'criminal income', 'coast', 'river', 'ruling body', 'appointed post', 'timber at hand', 'timber reaches the saws',
+  ...['monastery', 'hospital', 'temple', 'tavern', 'bathhouse', 'bank', 'smith', 'docks', 'school', 'mill', 'granary'].map((k) => `institution: ${k}`),
+  ...['plains', 'hills', 'forest', 'riverside', 'coastal', 'mountain', 'desert'].map((k) => `terrain: ${k}`),
+  ...['fish', 'kilns', 'clay kilns', 'charcoal kilns', 'stone', 'arcane', 'dairy', 'cloth', 'ironwork', 'herbs', 'spice', 'cut stone', 'woodwork', 'leather', 'dyed cloth', 'building'].map((k) => `trade at work: ${k}`),
+  ...['cloth', 'flour', 'hides', 'ale', 'arms'].map((k) => `exported: ${k}`),
+  ...['elder', 'lord', 'priest', 'mayor', 'occupier', 'council'].map((k) => `ruler: ${k}`),
+  'crisis: under_siege', 'crisis: plague_onset', 'crisis: unrest', 'crisis: threat',
+];
 await loadGenerationLawPayloads();
 
 const SIZES = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
@@ -59,6 +73,8 @@ for (const size of SIZES) {
       market: f.market, guild: f.guild, guildHouse: guildHouseStands(t), court: courtHoldersOf(t).map((x) => String(x?.name || x)),
       defence: { ...f.defence }, magic: { ...f.magic }, crime: f.crime, prosperity: f.prosperity, populationBand: f.populationBand, water: f.water,
       crisis, quarters, rederivedAgrees: same,
+      atoms: Object.fromEntries(ATOMS.map((w) => { let v; try { v = atomHolds(w, f); } catch (e) { v = `ERR ${e.message}`; } return [w, v]; })),
+      catalogIds: liveInstitutions(t).map((x) => x?.catalogId ?? null),
     });
   }
   console.log(`BIRTHS ${size}: ${n} places, ${held} hold quarters; the quarter set re-derived from the final roster agrees in ${agree}/${n}`);

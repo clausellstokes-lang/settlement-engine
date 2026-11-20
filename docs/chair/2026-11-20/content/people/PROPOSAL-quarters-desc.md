@@ -409,3 +409,88 @@ Every type the bar can read at n ≥ 30 is at or under 15%. The types over it ar
 - **R6 (the integrator's).** `generateSpatialLayout` needs the birth's seed and its facts (the faith reading, water, crime, crisis) at `economyReconcilePass`: a fifth argument, `{ seed, facts }`. Its two callers are the step and the unit tests (seedless, unchanged). The golden master moves. The fork registry's hash-channel count moves.
 - **R7 (the chair's).** **"Pilgrims"** (in today's index 0 only) has no fact home. Keep index 0 as is, or strike the word (a text move)? The access-branch lines also say what the faith panel says ("its people walk to a neighbour's parish church"). Is that duplication across surfaces acceptable in a description-position line?
 - **Not settled.** With n < 25 (Woodcutters, Artisan in cities and metropolises, Mages' in towns, the Shrine, Noxious in villages), the 15% bar is not readable on 100 places. Those pools were sized by count, not by the bar.
+
+## 7. The minimal atom set, the item tables, the strikes (the coordinator's follow-up, 2026-11-20)
+
+These are the same 600 births. `m2-quarters-births.mjs` now also records, per birth, the vocabulary's own answer (`factVocabulary.js :: atomHolds`) for every existing atom a §7 wording declares, and each live row's catalogue id.
+
+- **Wordings:** `measures/m2-quarters-pools-atoms.mjs`, the §4 pools rewritten toward the existing atoms.
+- **Run:** `measures/m2-quarters-atoms.mjs` → `m2-quarters-atoms.out.txt`.
+- **Selection:** a wording or a slot item is eligible only where every atom it declares holds, and every new key it needs is granted and holds.
+- **Gate guarantees (R-B1):** a quarter's own gate house needs no declaration. The woodcutter, the fishing community, the shrine and the market square are guaranteed this way. The Noxious gate guarantees a tanner, a butcher or a slaughterhouse, so its generic lines say only "the smelliest trades".
+
+**(1) THE MINIMAL SET IS EMPTY.** With **no new key**, step 0 of the run passes all three tests:
+- **(a)** today's line prints nowhere that §2 finds it false (0).
+- **(b)** every size and every type with n ≥ 30 is at or under 15%.
+- **(c)** every wording or item that needs a key leaves its pool. No birth falls back (NONE 0).
+
+Step 0 shares:
+
+| | thorp | hamlet | village | town | city | metro |
+|---|---|---|---|---|---|---|
+| size top | 10% | 11% | 14% | 13% | 11% | 14% |
+| Religious | 11% | 11% | 14% | 11% | 8% | 9% |
+
+The other types at n ≥ 30, at step 0:
+- **Fishing:** thorp 13%
+- **Alehouse:** hamlet 12%
+- **Noxious:** town 11%, city 11%, metro 11%
+- **Market:** town 13%
+- **Waterfront:** city 14%, metro 15%
+- **Government:** town 8%, city 8%, metro 10%
+- **Mages':** city 14%, metro 13%
+- **Shadows:** city 12%, metro 11%
+- **Wealthy:** city 9%, metro 13%
+- **Common:** city 9%, metro 14%
+
+The types with n < 30 (Woodcutters, Shrine, Noxious in villages, Waterfront in towns, Artisan, Mages' in towns) cannot be read against the bar.
+
+What step 0 costs: today's index-0 line leaves every place in five types. Noxious needs butcher; Waterfront needs warehouse and salt works; Mages' needs a wizard's tower and an enchanter; Shadows needs a black market; Alehouse needs alehouse. The Religious index 0 still prints where a church and a monastery stand, and Market, Government, Artisan, Wealthy and Common keep theirs.
+
+**The order to grant, if the chair grants any.** Each key below is the one that most lowers the sum of the top shares the bar reads. Every step keeps (a), (b) and (c); the chair can stop anywhere. In the chair's form:
+
+1. ATOM institution: burial : src/domain/facts/institutions.js : R3, R5, R9, R16, A4, A7, A9, A14. The sum falls 13.0 points. Village top 14% → 11%, hamlet 11% → 10%.
+2. ATOM institution: customs house : src/domain/facts/institutions.js : the Waterfront and Government slots. The sum falls 7.0.
+3. ATOM institution: mages' guild : src/domain/facts/magic.js (`ARCANE_GUILD_HOUSES`) : the Mages' slot. The sum falls 5.2.
+4. ATOM institution: black market : src/domain/facts/criminalStructureKey.js : S0 (today's line, back where true), the Shadows slot. The sum falls 4.3.
+5. ATOM institution: weekly market : src/domain/facts/market.js : M1, M2. The sum falls 4.0. Town top 13% → 11%.
+6. ATOM institution: gambling : src/domain/facts/criminalStructureKey.js : the Shadows slot. The sum falls 3.0.
+7. ATOM institution: butcher : src/domain/facts/institutions.js : N0 (today's line, with leather and dyed cloth), the Noxious slot. The sum falls 2.0.
+8. ATOM institution: theatre : src/domain/facts/institutions.js : the Wealthy slot. The sum falls 1.0.
+
+After step 8 the sizes stand at thorp 10%, hamlet 10%, village 11%, town 11%, city 11%, metro 14%. The remaining 27 keys move nothing the bar reads at n ≥ 30. They do restore today's line where it is true (warehouse, salt works, wizard's tower with enchanter, alehouse) and enrich the n < 30 pools. In the run's order:
+- slaughterhouse, fuller, salt works, fish market, chandler, ropemaker, shipyard
+- fair, town hall, palace, mint
+- enchanter, great library, sage
+- brothel, smuggling, underground city
+- cooper, tailor, sawmill
+- alehouse, wayside inn, baker, water system
+- alchemist, wizard's tower, warehouse
+
+**Existing atoms the rewrite now declares:**
+- **Faith and place:** `church`, `church access`, `clergy`, `sacredHouse`, `market`, `guild`, `court sits`, `legal house`, `magic`, `enchanting`, `coast`, `river`, `terrain: forest`.
+- **Crime:** `organised crime`, `rival rings`, `criminal income`.
+- **Houses:** `institution: monastery | hospital | temple | tavern | bathhouse | bank | school | granary | docks`.
+- **Trade at work:** `trade at work: leather` (the tanning pits), `dyed cloth` (the dye vats), `cloth`, `ironwork`, `woodwork`, `clay kilns`, `charcoal kilns`, `dairy`, `spice`, `herbs`.
+- **Exports:** `exported: cloth | flour | hides | ale | arms` (the goods on the waterfront).
+- **Rulers:** `ruler: council | mayor | lord` (the council chamber, the mayor's offices, the lord's hall).
+- **Crisis:** the excludes `crisis: unrest` on the quiet lines, and `crisis: under_siege, plague_onset` on the walk-to-church lines.
+
+I did not use `trade at work: fish | kilns | arcane | stone`. They read true in 95–100% of thorps, too wide to bear a house's name.
+
+`trade at work` is stricter than presence: a house that is short drops out of the slot. It leaves a sentence; it never makes one false.
+
+**(2) Can a `{houses}` slot be declared by its item table? For items with an existing atom, yes; for a bare catalogue id, no.**
+- **Yes, by declaration.** Every item row with an existing atom is credited by declaration with no exemption. An item table handed to `filterDeclared` or `drawDeclared` is a drawn range (`presumedThings.shared.mjs :: drawnRanges`, `DOOR_ARGS`), so the walker's arm 1 credits each row's own `needs` exactly as it credits a pool line. The slot's frame names no thing of its own, and arm 2 reads the printed sentence against the record, which every standing item satisfies.
+- **No, for a catalogue id.** A declaration must be a vocabulary atom (`factVocabulary.js :: parseAtom` / `assertDeclarable`), and a catalogue id is not one. So an item for a house no atom answers cannot be declared by its id alone. One new keyed dimension (`house: <catalogue id>`, read from the live roster in `institutions.js`) would cover every such item in a single grant, where the list above takes one grant per key.
+- **One mechanical catch.** The texts must come out of the door's result through `lineText` or a per-position `drawDeclared` with its `used` set. A `.map((l) => l.text)` over the filtered items is a shape the walker's strip ban names, and it would need a strip row.
+
+**(3) The coordinator's strikes, applied in the §7 pools and projected:**
+- **L5:** "on the high ground" is struck. It now reads "Stone townhouses, with {also} close by".
+- **D6:** declares `terrain: forest`.
+- **A5 and A15:** declare `not: clergy`. A shrine makes `clergy` true, so a hamlet with a shrine never prints "no priest".
+- **Church-branch index 0 ("pilgrims"):** declares `sacredHouse`. With its `institution: monastery` and `church`, it prints where a church and a monastery stand: town 1, city 4, metro 4 in §5's run. This is for the chair.
+
+**Further rewrites made in §7:**
+- **Alehouse & Common:** the branch is no longer split by roster name. The `institution: tavern` atom answers an alehouse or an inn alike, so tavern-neutral lines T1–T14 ("the drinking house") carry the pool, and the alehouse and wayside-inn wordings wait for their keys.
+- **Struck as invention:** "the watch walks in pairs", "worst-lit streets" and "business no one writes down".
