@@ -1,4 +1,4 @@
-# PAGE-10's hand-back: THE TROUBLE HALF (kept current at every push; last written 2026-11-20 20:13 UTC by `date -u`)
+# PAGE-10's hand-back: THE TROUBLE HALF (kept current at every push; last written 2026-11-20 20:31 UTC by `date -u`)
 
 A successor reads THIS, then the briefs it names. PAGE-10 integrates; builders build (the Agent tool), each briefed by a
 committed file; a diff is read once, at the merge.
@@ -15,8 +15,8 @@ committed file; a diff is read once, at the merge.
 | hooks | BUILT at 1263731e7 (`-hooks-wip`), NOT merged; the chair ruled six wordings + one register row at 20:03 (three new lines of the chair's for the timeline's external-threat template, so the row comes under its ceiling); PAGE-7 merges, sends "HOOKS <commit>", hands over. Do NOT read the wip: read the MERGED diff once | | on the lane: read once, red/green re-run, censuses by their doors, two-tree proof (0 non-string differences), measure 150 a size beside the projection |
 | closing measure + owner's plain file | brief `briefs/CLOSE-MEASURE.md` written, NOT dispatched (waits for the hooks merge) | | dispatch with the AFTER commit |
 | (1) working line | merge the working line's tip (the chair names it; it holds `src/kernel/proseHash.js :: mix32`) into the lane | | first, when the lane is PAGE-10's |
-| (2) mixed key | `src/generators/history/troubleHooksOf.js`: the hooks' rank takes `mix32(fnv1a32(...))`; two-tree strings only; the bar re-measured beside PAGE-7's (top 14.0% city, 14.7% metropolis) | | brief to write |
-| (3) themes | `src/domain/hookThemes.js :: themeOfText` classifies by exact text; asked the chair at 20:06 what DEPTH-3's digest wants for the 86 hooks | | the answer |
+| (2) mixed key | `src/generators/history/troubleHooksOf.js`: the hooks' rank takes `mix32(fnv1a32(...))`; two-tree strings only; the bar re-measured beside PAGE-7's (top 14.0% city, 14.7% metropolis) | | brief `briefs/MIXED-KEY.md` written, not dispatched |
+| (3) themes | DEPTH-3 (via the chair, 20:31): `TROUBLE_HOOK_THEMES` in `src/data/troubleHooks.js`, one `HOOK_THEMES` member a row, index-aligned by kind (as `npcData.js :: NPC_FACTION_LOYALTY_THEMES`); the pool added to `scripts/hook-theme-digest.mjs`'s pool list; `hookThemeTotality.walker` green. BUILT ONLY after the depth lane's themes unit is on the working line (the chair names the commit). Meanwhile a DRAFT for the chair (86 lines, text beside theme, no new theme word) | | brief `briefs/THEMES-DRAFT.md` written, dispatch when the lane is PAGE-10's |
 | lasting effects | PAGE-7's unit 5 (PDF only; strike every effect needing a hideable fact; lines to the chair first): NOT in PAGE-10's order | | ask the chair |
 
 ## 3. Rulings in force (every one vetoable by the owner)
@@ -33,5 +33,6 @@ committed file; a diff is read once, at the merge.
 11. There is NO hideable layer (`factLayers.js` is read layers); hideability is `isHideableHouse`.
 12. ONE heavy gate at a time (`scripts/gate-mutex.sh`); never a gate through a pipe; never the whole suite; fetch the ledger ref before `tests/lint`. Push only `refs/heads/lane/*`, plain, with hooks; `git ls-remote` before every push; never a pull request.
 13. Close of the lane (the chair, 20:03, units in order: working line, mixed key, themes, close): the closing measure (M and V pools), the owner's plain file, ONE BUILD's first-paint figures, then ONE message "PAGE-TROUBLE <commit>" with `tests/lint` whole at that commit; when the chair names the landed line, MERGE it into the lane.
+14a. FIRST PAINT (the chair, 20:31): the first-paint cure is merged ("FIRSTPAINT afacca8a6": two fact leaves pinned lazy; first paint 1,177,993 raw, +325 over the lane's base, a ruled exception: the vocabulary's own two dims).
 14. THE TEST RATCHET (the chair, 20:13, every lane): BEFORE "PAGE-TROUBLE <commit>", ONE `npm run test:ratchet` at the tip with the line's tip merged in (`scripts/check-test-ratchet.mjs`; exclusive mutex; to a log, never a pipe; the ONE whole-suite run allowed); its failing rows read BY NAME against `docs/chair/2026-11-20/seventh/ci/RED-AT-LINE.tsv` on origin/lane/chair-2026-11-08 (job, file, title, class). A row not on the list is either a stored figure/fingerprint/golden the lane's wording moved (named with its cause: the hooks unit moves the golden master on 350 rows; name anything else) or a real red, CURED ON THE LANE first. The message carries: rows on the list, rows moved by the lane's wording (named), rows cured, the build's three first-paint figures.
 15. THE MARK: 450,000 used tokens by the chair's read; successor seated at 360,000.
