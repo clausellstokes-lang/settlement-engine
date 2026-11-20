@@ -1,35 +1,39 @@
 /**
- * tests/domain/tension/troubleCast.test.js — A CALM TOWN'S SHARPEST TROUBLE AND THREE PEOPLE ON ITS SIDES (FRAME-1, the
- * seventh chair's CF1, CF2, CF4, CF6). Over born calm towns of every tier: the trouble is the record's sharpest by its
- * own severity and order; every face is a person (or a house) on the record, with a reason from the closed set, filled;
+ * tests/domain/tension/troubleCast.test.js — A CALM TOWN'S TROUBLE OF WEIGHT AND THREE PEOPLE ON ITS SIDES (FRAME-1, the
+ * seventh chair's CF1, CF2, CF4, CF6; FRAME-2 · B2, CF11). The trouble is a tension ABOUT a graded strain the town holds,
+ * the sharpest grade first and the record's order breaking a tie (its `severity` is never read). Over born calm towns
+ * that carry one: every face is a person (or a house) on the record, with a reason from the closed set, filled;
  * an outsider is never named and is reached through a person on the record; the caps hold (one side by office, the
  * seat-holder on one side, nobody on two); the cast is pure (same record in, same frame out) and stores nothing; and
  * the owner's variety shows: the seat-holder, a power's head and a force's commander are not the usual three.
  */
 import { describe, it, expect } from 'vitest';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
-import { castTroubleFrame, sharpestTroubleOf, fillReason, FRAME_REASONS, templateLabelOf } from '../../../src/domain/tension/troubleCast.js';
+import { readFileSync } from 'node:fs';
+import { castTroubleFrame, troubleOfWeight, fillReason, FRAME_REASONS, templateLabelOf, WEIGHT_GRADES, WEIGHT_MATTER } from '../../../src/domain/tension/troubleCast.js';
+import { LEGITIMACY_CUTS } from '../../../src/data/bandLadders.js';
 import { SIDE_ARCHETYPE } from '../../../src/domain/tension/sideArchetypes.js';
 import { rulingChainOf } from '../../../src/domain/dossier/powerStrata.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
 
-const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
-const SEV = { minor: 1, major: 2, catastrophic: 3 };
-/** Born calm towns, `per` of each tier (a birth with a crisis is set aside). */
-const calmTowns = (per) => {
-  const out = [];
-  for (const tier of TIERS) {
-    for (let i = 0, got = 0; got < per && i < per * 4; i += 1) {
-      const seed = `frame-cast-${tier}-${i}`;
-      const s = generateSettlementPipeline({ settType: tier }, null, { seed, customContent: {} });
-      if (s.stress && (!Array.isArray(s.stress) || s.stress.length)) continue;
-      out.push({ seed, tier, s });
-      got += 1;
-    }
-  }
-  return out;
-};
-const TOWNS = calmTowns(10);
+/**
+ * Born calm towns that CARRY a trouble of weight, ten of each tier where the tier births one (CF11, measured over
+ * `frame-cast-<tier>-<i>`): before CF11 this pool was the first ten calm births of each tier, every one framed by its
+ * sharpest severity; under CF11 most calm towns keep today's sheet, so the pool is re-seated to the births that frame
+ * (hamlet 4 and village 1 of their first 40 calm births do; no calm thorp of the 28 here, nor of the 55 of the CF11
+ * measure, holds a trouble of weight, so the tier has none to cast).
+ */
+const FRAMED = Object.freeze({
+  hamlet: [11, 23, 29, 36, 42, 45, 46, 52, 70, 77],
+  village: [19, 42, 43, 50, 54, 56, 65, 69, 74, 82],
+  town: [15, 36, 37, 40, 50, 59, 67, 112, 113, 119],
+  city: [1, 2, 6, 9, 14, 18, 19, 20, 21, 23],
+  metropolis: [1, 2, 3, 5, 6, 7, 13, 15, 17, 18],
+});
+const TOWNS = Object.entries(FRAMED).flatMap(([tier, at]) => at.map((i) => {
+  const seed = `frame-cast-${tier}-${i}`;
+  return { seed, tier, s: generateSettlementPipeline({ settType: tier }, null, { seed, customContent: {} }) };
+}));
 /** Every reason the closed set can print, as a pattern over its filled text. */
 const REASON_PATTERNS = Object.values(FRAME_REASONS).map((r) => new RegExp(`^${r
   .replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
@@ -37,25 +41,83 @@ const REASON_PATTERNS = Object.values(FRAME_REASONS).map((r) => new RegExp(`^${r
   .replace(/\\\{(?:they|their|them)\\\}/g, '(?:she|he|they|her|his|their|him|them)')
   .replace(/\\\{\w+\\\}/g, '.+?')}$`));
 
-describe('the sharpest standing trouble (CF1)', () => {
-  it('is the tension whose severity admits the highest grade, the record\'s order breaking a tie', () => {
-    const s = { history: { currentTensions: [
-      { type: 'guild_conflict', factions: ['a', 'b', 'c'], severity: ['minor', 'major'] },
-      { type: 'great_fire', factions: ['a', 'b', 'c'], severity: ['major', 'catastrophic'] },
-      { type: 'plague_years', factions: ['a', 'b', 'c'], severity: ['major', 'catastrophic'] },
-    ] } };
-    expect(sharpestTroubleOf(s)).toMatchObject({ at: 1 });
-    expect(sharpestTroubleOf({ history: { currentTensions: [] } })).toBe(null);
+/** A calm record built by hand: one governing power, legitimacy 60, food Secure, no conflict, no impaired chain. */
+const town = ({ tensions, score = 60, conflicts = [], food = 'Secure', chains = [], powers = [] }) => ({
+  history: { currentTensions: tensions.map(([type, ...factions]) => ({ type, factions, description: type, severity: ['minor'] })) },
+  powerStructure: { publicLegitimacy: { score, govMultiplier: 1 }, factions: [{ faction: 'Elder Council', power: 60, isGoverning: true }, ...powers], conflicts },
+  economicState: { foodSecurity: { label: food }, activeChains: chains },
+});
+const SIDES = ['a', 'b', 'c'];
+const grade = (s) => troubleOfWeight(s)?.strain.grade ?? null;
+
+describe('the trouble of weight (CF11)', () => {
+  it('the edges are the legitimacy ladder\'s own cuts, cited: below 30 and below 45 (a score AT a cut is in the band above)', () => {
+    expect([LEGITIMACY_CUTS.contested, LEGITIMACY_CUTS.tolerated]).toEqual([30, 45]);
+    const seatTrouble = (score) => grade(town({ score, tensions: [['succession_crisis', ...SIDES]] }));
+    expect([29, 30, 44, 45, 60].map(seatTrouble)).toEqual(['legitimacy-below-30', 'legitimacy-below-45', 'legitimacy-below-45', null, null]);
   });
 
-  it('on born towns it is never a tension the rank would pass over', () => {
-    for (const { s } of TOWNS) {
-      const ts = s.history.currentTensions;
-      const top = sharpestTroubleOf(s);
-      const grade = (t) => Math.max(...[].concat(t.severity).map((g) => SEV[g] || 0));
-      for (let i = 0; i < ts.length; i += 1) {
-        expect(grade(ts[i]) > grade(top.tension) || (grade(ts[i]) === grade(top.tension) && i < top.at)).toBe(false);
-      }
+  it('a strain alone is not weight: only a tension ABOUT a strain the town holds makes it so', () => {
+    // legitimacy below 45 with no tension about the seat
+    expect(troubleOfWeight(town({ score: 40, tensions: [['crime_wave', ...SIDES], ['great_fire', ...SIDES]] }))).toBe(null);
+    // a high conflict no side names
+    expect(troubleOfWeight(town({ conflicts: [{ parties: ['Merchant Guilds', 'Craft Guilds'], intensity: 'high' }], tensions: [['crime_wave', ...SIDES]] }))).toBe(null);
+    // an impaired chain with no material tension
+    expect(troubleOfWeight(town({ chains: [{ status: 'impaired' }], tensions: [['guild_conflict', ...SIDES], ['economic_disparity', ...SIDES]] }))).toBe(null);
+    // a tension about a strain the town does NOT hold
+    expect(troubleOfWeight(town({ tensions: [['succession_crisis', ...SIDES], ['trade_dispute', ...SIDES]] }))).toBe(null);
+    expect(troubleOfWeight({ history: { currentTensions: [] } })).toBe(null);
+  });
+
+  it('the closed lists: the seat\'s matters, the material matters, and a conflict only at intensity high, by a side naming a party', () => {
+    for (const type of WEIGHT_MATTER.seat) expect(grade(town({ score: 40, tensions: [[type, ...SIDES]] })), type).toBe('legitimacy-below-45');
+    for (const type of WEIGHT_MATTER.material) expect(grade(town({ chains: [{ status: 'impaired' }], tensions: [[type, ...SIDES]] })), type).toBe('impaired-chain');
+    const row = (intensity) => [{ parties: ["Thieves' Guild", 'Military/Guard'], intensity }];
+    expect(grade(town({ conflicts: row('moderate'), tensions: [['crime_wave', 'Military/Guard', 'b', 'c']] }))).toBe(null);
+    const high = troubleOfWeight(town({ conflicts: row('high'), tensions: [['crime_wave', 'a', 'b', "the Thieves' Guild"]] }));
+    expect(high).toMatchObject({ at: 0, strain: { strain: 'W2', grade: 'high-conflict', powers: ["Thieves' Guild", 'Military/Guard'] } });
+  });
+
+  it('a corruption scandal is about the seat only where its own sides name the ruling power (the generator writes "Corrupt officials" as it)', () => {
+    expect(grade(town({ score: 40, tensions: [['corruption_scandal', 'Elder Council', 'Reformers', 'Complicit beneficiaries']] }))).toBe('legitimacy-below-45');
+    expect(grade(town({ score: 40, tensions: [['corruption_scandal', 'Corrupt officials', 'Reformers', 'Complicit beneficiaries']] }))).toBe(null);
+    const gen = readFileSync(new URL('../../../src/generators/historyGenerator.js', import.meta.url), 'utf8');
+    expect(gen).toContain('.replace(/Corrupt officials/g, govFaction)');
+  });
+
+  it('food below Secure and a creditor power on the roster are material strains (the names the indebted stress pushes)', () => {
+    for (const food of ['Pressured', 'Import-Dependent', 'Deficit', 'Deficit — Active Famine']) expect(grade(town({ food, tensions: [['resource_scarcity', ...SIDES]] })), food).toBe('food-below-secure');
+    expect(grade(town({ food: 'Surplus', tensions: [['resource_scarcity', ...SIDES]] }))).toBe(null);
+    for (const faction of ["Creditor's Representative", 'Crown Creditors (Noble Coalition)']) {
+      expect(grade(town({ powers: [{ faction, power: 18 }], tensions: [['outside_debt', ...SIDES]] })), faction).toBe('creditor-power');
+    }
+    const src = readFileSync(new URL('../../../src/generators/power/stressFactions.js', import.meta.url), 'utf8');
+    expect(src).toContain("'Crown Creditors (Noble Coalition)' : \"Creditor's Representative\"");
+  });
+
+  it('the sharpest grade opens the sheet, over the record\'s order; the record\'s order breaks a tie; severity is never read', () => {
+    const conflicts = [{ parties: ['Merchant Guilds', 'Craft Guilds'], intensity: 'high' }];
+    const chains = [{ status: 'impaired' }];
+    const s = town({ score: 40, conflicts, chains, tensions: [['trade_dispute', ...SIDES], ['economic_disparity', 'Merchant Guilds', 'b', 'c'], ['tyranny', ...SIDES], ['succession_crisis', ...SIDES]] });
+    expect(troubleOfWeight(s)).toMatchObject({ at: 2, strain: { strain: 'W1', grade: 'legitimacy-below-45' } });
+    const noSeat = town({ conflicts, chains, tensions: [['trade_dispute', ...SIDES], ['economic_disparity', 'Merchant Guilds', 'b', 'c']] });
+    expect(troubleOfWeight(noSeat)).toMatchObject({ at: 1, strain: { grade: 'high-conflict' } });
+    const sharper = { ...s, history: { currentTensions: s.history.currentTensions.map((t, i) => ({ ...t, severity: i === 0 ? ['catastrophic'] : ['minor'] })) } };
+    expect(troubleOfWeight(sharper)?.at).toBe(2);
+    expect(WEIGHT_GRADES.flat()).toEqual(['legitimacy-below-30', 'seat-ungated', 'legitimacy-below-45', 'high-conflict', 'food-below-secure', 'creditor-power', 'impaired-chain']);
+  });
+
+  it('on born towns the cast opens on the trouble of weight, and no tension about a sharper grade (or an equal one earlier) is passed over', () => {
+    for (const { seed, s } of TOWNS) {
+      const top = troubleOfWeight(s);
+      expect(top, seed).not.toBe(null);
+      expect(castTroubleFrame(s), seed).toMatchObject({ at: top.at, type: top.tension.type });
+      const rank = (g) => WEIGHT_GRADES.findIndex((row) => row.includes(g));
+      s.history.currentTensions.forEach((t, i) => {
+        const own = troubleOfWeight({ ...s, history: { currentTensions: [t] } });
+        if (!own) return;
+        expect(rank(own.strain.grade) < rank(top.strain.grade) || (rank(own.strain.grade) === rank(top.strain.grade) && i < top.at), `${seed} #${i}`).toBe(false);
+      });
     }
   });
 });
@@ -65,7 +127,8 @@ describe('three people on its three sides (CF4, CF6)', () => {
     const failures = collectSeedFailures(TOWNS.map((t) => t.seed), (seed) => {
       const { s } = TOWNS.find((t) => t.seed === seed);
       const frame = castTroubleFrame(s);
-      if (!frame) throw new Error('a calm town with a standing tension has no frame');
+      if (s.stress && (!Array.isArray(s.stress) || s.stress.length)) throw new Error('a town of the pool is in crisis');
+      if (!frame) throw new Error('a calm town with a trouble of weight has no frame');
       if (frame.sides.length !== 3) throw new Error(`${frame.sides.length} sides`);
       const ids = new Set(s.npcs.map((n) => n.id || n.name));
       const seatName = rulingChainOf(s).npc?.name;

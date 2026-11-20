@@ -312,8 +312,9 @@ const HOOK_COUNT = 3;
  *
  * @typedef {Object} TonightSheet
  * @property {TonightCrisis | null} crisis
- * @property {TonightFrame | null} frame  a calm town's sharpest standing trouble (FRAME-1); null in a town in crisis, and for
- *   every reader who is not the owner (FRAME-2 B3)
+ * @property {TonightFrame} [frame]  a calm town's trouble of weight (FRAME-1; CF11); ABSENT (no key) where none is cast: a town
+ *                                    in crisis, a calm town with no trouble of weight (it keeps today's sheet byte for byte),
+ *                                    and every reader who is not the owner (FRAME-2 B3)
  * @property {string} opening       the first line: the crisis line, the trouble's sentence, or the pressure sentence
  * @property {TonightPerson[]} people
  * @property {TonightFact[]} facts
@@ -382,7 +383,7 @@ export function composeTonightSheet(settlement, options) {
   const frame = crisis || !forOwner ? null : frameOf(source);
   return {
     crisis,
-    frame,
+    ...(frame ? { frame } : {}),
     opening: crisis ? crisis.line : frame ? sentence(frame.line) : sentence(clean(source.pressureSentence)),
     people: frame ? framePeopleOf(frame) : peopleOf(source),
     facts: [foodFact(source), defenceFact(source)].filter(/** @returns {f is TonightFact} */ (f) => f !== null),
