@@ -64,6 +64,20 @@ the chair says. Every branch pushed (`-wip` when unfinished) after every return;
   misfit keeps its secret BYTE FOR BYTE; if a later draw of the same card makes that impossible, the builder says which
   and stops.
 
+## 4b. L1 RE-CUT (the chair, 13:56): T2.md's 24 wordings are NOT written
+
+A trouble's sentence says WHY IT IS HAPPENING HERE, from the record, shown AT RENDER; this lane's part is DATA ONLY.
+The chair's measure (300 built towns): three in a row share a trouble's sentence 33.0% mixed, 40.8% towns, 80.8% cities,
+79.8% metropolises; names masked change nothing; "crime is rising" in 25.7% of towns, "guild against outside traders"
+18.7%. STEPS: (1) MEASURE per kind (crime_wave, guild_conflict first, then the next six): what `historyGenerator.js`
+reads to give a town that kind (weights, conditions) and which born-record facts stand in its towns, each with its rate.
+(2) PROPOSE to the chair in ONE message before any line: per kind a CLOSED TABLE OF CAUSES, each a pure predicate over the
+document with its rate (none above ~a third of the kind's towns; a plain wording when none holds), in priority order.
+(3) THE LINES: two wordings a cause, three plain a kind, each saying ONLY what its predicate holds; no new fact, secret
+or crime; no pronoun after a power's name; to the chair in batches before merge. (4) `src/data/tensionCauses.js` + a
+totality test; the display seat builds the reader; the stored description stays. TARGETS (built towns, names masked):
+mixed under 10%; three cities in a row under 25%. Not started by PAGE-3.
+
 ## 5. Open questions to the chair (asked, unanswered at this writing)
 
 - (answered 13:50: see 4a.)
