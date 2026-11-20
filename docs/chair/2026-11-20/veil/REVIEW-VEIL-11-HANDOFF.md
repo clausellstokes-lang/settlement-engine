@@ -1,4 +1,4 @@
-# REVIEW-VEIL-11 — HAND-OFF (kept current at every push; last written 2026-11-20 06:29 UTC by date -u, before FINAL)
+# REVIEW-VEIL-11 — HAND-OFF (kept current at every push; last written 2026-11-20 07:10 UTC by date -u, before FINAL)
 
 The review: `REVIEW-VEIL-11.md` beside this file. Probes and outputs: `probes/REVIEW-VEIL-11/`. **No verdict; 212 is NOT
 cleared.** My predecessors' hand-offs stand whole and are read from origin only (`git show
@@ -102,3 +102,13 @@ Run any probe: `RV6_SRC=<tree> [RV10_GEN=<master tree>] RV10_TPL=<chain> RV10_N=
         foreigner or the record-keeper as the occupier's face; listed in that seat's hand-back. Attack: each new kind of
         stored cast role through `_gallery_veil_cast` (a stake or role naming a criminal power the share withholds must
         go per entry) and through the session sheet ("Tonight") on the gallery page and the party link.
+22. R4's SALT (the chair, 07:10 UTC; VR10, VR45, VR46): `probes/REVIEW-VEIL-11/salt.sh <db> <slug>` (copy both files to
+    /var/tmp/v16/rv11): the catalogue arm (every `_gallery_*` function and the public reads with `provolatile`; NONE that
+    draws a salt or calls one that does may be immutable or stable) and ten executions of ONE prepared read in one session
+    (seven under the default plan cache, three under `plan_cache_mode = force_generic_plan`): the served person-id sets must
+    be 10 of 10 distinct. BASELINE at R2 (4ddf8c60c, `xr2`): no function draws; served ids are the stored ids ("npc_a"),
+    1 distinct of 10: VR10 is not built there. Also at R4: whether 211's byte-frozen `_gallery_veil` declaration can ever be
+    the live one (212 restates it in the same push); VR46's guards re-stated modulo the per-read id bijection, attacked by
+    its five teeth (a reference that does not follow its card; an original stored id served; a changed non-id byte; a
+    collision or split of the mapping; two reads of one town equal); VR45: the twin-against-server comparison ignores jsonb
+    key order ONLY (array order exact).
