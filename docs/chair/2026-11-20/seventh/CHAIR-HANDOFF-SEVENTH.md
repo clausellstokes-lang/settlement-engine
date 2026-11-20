@@ -5282,3 +5282,13 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   (25); a trouble's last eight hooks; why the place is here (62); the powers' descriptions and relations (51 pools);
   the state sentences (260). SEATS NOW WORKING: 22 (six of them successors reading in beside a predecessor). Net 17
   is set for 18:24 (trig_016ow3rVUNeyZhfA7FTwJ1xx).
+- 17:52 UTC · PAGE-8 SEATED at 17:51 (session_019yED1RSHGRx42QAcpsbeUH, beside PAGE-6 at 340,070: seated early, its queue is
+  long). GOALS-4 WOKEN at 17:51 (session_019yED1PeMjUXXn4rS5rbzvj; by `prompts/GOALS-4-ADDENDUM.txt`; beside GOALS-3
+  at 345,361, whose lint at 171fc3d18 is running: "GOALS <commit>" is next). `prompts/SEAT-7.txt` and
+  `prompts/FORTUNE-4.txt` WRITTEN, NOT SEATED (sources `lane/seat-6-2026-11-20` and `lane/fortune-3-2026-11-20`;
+  outcomes `lane/seat-7-2026-11-20` and `lane/fortune-4-2026-11-20`): seat each at 360,000 (SEAT-6 read 283,535 at
+  17:40; FORTUNE-3 315,755 at 17:32). VEIL-28 re-made every instrument in a fresh container and reproduced the gate
+  (HIGHER 0, EQUAL 79, LOWER 13); ITS FINDING: three things lived only in VEIL-27's container (told to push them as
+  -wip); the order is PART 28's: "R3 <commit>" first, IMPORT-DOOR its own line after. A TRAP PASSED TO PROSE-1: its
+  build brief's measure script hard-codes the main checkout as ROOT, so a builder's "after" would equal its
+  "before". A STAMP SLIP: three messages stamped 17:51 on a read of 17:50.
