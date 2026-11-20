@@ -1,4 +1,4 @@
-# PEOPLE-1 hand-back (kept current at every push; last written 2026-11-20T16:59Z)
+# PEOPLE-1 hand-back (kept current at every push; last written 2026-11-20T17:15Z)
 
 Seat: PEOPLE-1 of the seventh chair (chair session_019yED1SUxGVHyjQnoqoFvQ8). Assignment: `git show origin/lane/chair-2026-11-08:docs/chair/2026-11-20/seventh/prompts/PEOPLE-1.txt`.
 Branch: `lane/people-1-2026-11-20`, cut from the working line `lane/join-2026-11-14` at `43ab0f5eb`. Builder branches: `lane/people-1-m<N>-2026-11-20` (pushed as each returns; the integrator cherry-picks their commits).
@@ -21,6 +21,17 @@ Branch: `lane/people-1-2026-11-20`, cut from the working line `lane/join-2026-11
 
 ## Known blemish
 - The commits b53a665e7 (dangling), 6e84a81a7, b1f782f05 and 01351d72d carry a mistyped Claude-Session line (`session_019yED1Sri7MHNbHp`); the right one is `session_019yED1Rzt4qD1sri7MHNbHp`. Pushed history is not rewritten.
+
+## THE SPLIT (the chair, 17:13 UTC)
+PEOPLE-1 keeps B1 (structuralPosition, then activeConstraint) to its merge, then "PEOPLE-PART <commit>, HANDED OVER". PEOPLE-2 (session_019yED1QfbBhtLaDuWfGxc42) takes the three proposals (factions desc, relations narrative, settlementReason) and the founding, with the chair's verdicts. Cut NO builder for the three before the chair's verdict.
+
+The chair's answers of 17:13, for PEOPLE-2:
+1. Power placement APPROVED: one new data file and ONE line in `generateSettlementPipeline.js` after the `withConflictRelations` statement (send the line as written before the merge). ONE line in `factionDynamics.js` for the regen's vote matcher is allowed, outside `computePublicLegitimacy` and outside the who-rules lane's transfer unit: name the function and line to the chair before the merge.
+2. settlementReason's one argument in `steps/generateNarratives.js`: APPROVED.
+3. Pool dominance: a new pool takes NEW rows by the register's own door, the cause in the commit; an existing row only shrinks. The power-of-two law is `settlementOriginProse.js`'s law 3 (NO POWER-OF-TWO POOL: FNV-1a bit 0 is input parity, so `% 2^k` can kill half a pool); I now propose it DOES extend to the per-place eligible lists (drop the last eligible wording when a list's length is a power of two): the law's failure is silent and seed-family-dependent, and one wording is a cheap price. Answer sent to the chair; ruling awaited.
+4. "The village priest is the most educated person for miles" is `powerStructure.factions[].desc`, written in `src/generators/power/rulingStructure.js` (the religious faction's `religiousDesc` chain, the `religiousPower > 17`, hamlet-or-village branch). It takes `priest` as a NEED inside the factions-desc unit (truth outranks canonical-at-zero: where no priest stands, the pool's next line speaks).
+5. FOUNDING IS IN SCOPE: it prints through the traditions card (387 of 1,232 rites quote `foundedBy`). Measure the `foundedBy` pool's commonest phrase by size and propose; a noble founder where no lord rules is history, not a contradiction: leave it. M3's PROPOSAL-founding.md is the start.
+6. The chair's verdict on the three proposals' lines, and on index 0's "quietly resented", is pending.
 
 ## Builder in flight
 - B1 (structuralPosition) on c8c88cd4e, branch lane/people-1-b1-2026-11-20 (local worktree; push it as it returns). At the merge: read its diff once; re-run its red and green; take the lighting census (LIGHTING_CENSUS_REFREEZE door, tests/lint/sovereigntyLightingContract.walker.test.js) and the wiring census (scripts/wiring-census.mjs) by their doors; send the chair the three atom lines as added; then "PEOPLE structuralPosition <commit>".
