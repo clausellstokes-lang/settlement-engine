@@ -191,7 +191,7 @@ export function classOf(r) {
 /** THE REGISTER: scripts/census/sameness-census.register.json. */
 export const REGISTER_PATH = join(ROOT, 'scripts/census/sameness-census.register.json');
 /** The corpus the register is banked on, and its confirmation corpus (the same plan under another prefix). */
-export const CORPUS = Object.freeze({ prefix: 'hxd', confirm: 'hxu', n: 50, sizes: SIZES });
+export const CORPUS = Object.freeze({ prefix: 'hxd', confirm: 'hxu', n: 150, sizes: SIZES });
 /** A slot printing at most this many sentences a place is met again by its TOP share; else by its SEEN. */
 export const ONE_A_PLACE = 1.5;
 /** RED, unregistered, from this many places of one size (MIN_PLACES_MEASURE in the header says why). */
@@ -220,106 +220,39 @@ export function attributionOf(s, stored, heads) {
   }
   return best ? stored[best] : [];
 }
-/** A stored path's arity fold: `stress[].summary` and `stress.summary` are one field printed at one place. @param {string} p */
-export const arityFold = (p) => p.replace(/\[\]/g, '');
-const shorter = (/** @type {string} */ a, /** @type {string} */ b) => a.length - b.length || (a < b ? -1 : a > b ? 1 : 0);
 /**
- * THE POSITION: where the page prints a line, whatever it says — the renderer's fourth field: on the web the chain of
- * named React components that rendered the whole line below the tab's panel, on the PDF the chain of named components
- * below SettlementPDF, on the session sheet the leaf's key path. @param {string} surface @param {any[]} line
+ * THE POSITION: where the page prints a line, whatever it says — the renderer's fourth field: on the web the named
+ * React components and each element's place among its siblings below the tab's panel (a keyed list item is `*`, so a
+ * list is one position), on the PDF the same over SettlementPDF's element tree, on the session sheet the leaf's key path. @param {string} surface @param {any[]} line
  */
 export const positionOf = (surface, line) => `${surface} | ${line[3] ?? '?'}`;
 /**
- * THE ALIAS RULE (written into the register's `identity.fields`): a printed sentence can be held word for word by
- * several stored paths (a mirror, a copy, a quotation). At ONE POSITION, paths that ever hold one printed sentence
- * together, or that differ only by an array's `[]` (the arity fold: `stress[].x` is `stress.x`), are ONE FIELD, named by
- * the path that holds the most printed sentences there over both corpora at the write (then the shorter). A position's
- * fields are written as groups, most-printed first: `[[name, alias, ...], ...]`. A known group never loses a path or
- * its name; a new path joins the group it is co-held with, else forms a new group after the known ones. A sentence
- * holding no path the register groups at its position takes its shortest path: a path new to the register is a new
- * slot, as law 1 intends.
- * @param {Iterable<[string, string[]]>} held each printed sentence's position and attribution, over both corpora
- * @param {Record<string, string[][]>} [known] the register's groups
- * @returns {Record<string, string[][]>}
+ * THE SLOT KEY: `<surface> | <position>` (the chair's rulings of 2026-11-20: a slot is keyed by surface and printed
+ * position, the stored path its attribution; a pool's lines printed at one position are ONE slot, whichever stored path
+ * holds the wording). The stored paths are recorded beside it (`paths`), never part of its identity.
+ * @param {string} surface @param {any[]} line
  */
-export function fieldsOf(held, known = {}) {
-  /** @type {Map<string, { par: Map<string, string>, n: Map<string, number> }>} */ const at = new Map();
-  const ensure = (/** @type {string} */ pos) => { let a = at.get(pos); if (!a) { a = { par: new Map(), n: new Map() }; at.set(pos, a); } return a; };
-  const find = (/** @type {Map<string, string>} */ par, /** @type {string} */ x) => { let r = x; while (par.get(r) !== r) r = /** @type {string} */ (par.get(r)); return r; };
-  const union = (/** @type {Map<string, string>} */ par, /** @type {string} */ x, /** @type {string} */ y) => { const a = find(par, x), b = find(par, y); if (a !== b) par.set(b, a); };
-  for (const [pos, groups] of Object.entries(known)) { const a = ensure(pos); for (const g of groups) for (const p of g) { if (!a.par.has(p)) a.par.set(p, p); union(a.par, g[0], p); } }
-  for (const [pos, paths] of held) {
-    const a = ensure(pos);
-    for (const p of paths) { if (!a.par.has(p)) a.par.set(p, p); a.n.set(p, (a.n.get(p) || 0) + 1); union(a.par, paths[0], p); }
-  }
-  for (const a of at.values()) {
-    /** @type {Map<string, string>} */ const fold = new Map();
-    for (const p of a.par.keys()) { const f = arityFold(p); const o = fold.get(f); if (o === undefined) fold.set(f, p); else union(a.par, o, p); }
-  }
-  /** @type {Record<string, string[][]>} */ const out = {};
-  for (const pos of [...at.keys()].sort()) {
-    const a = at.get(pos); if (!a) continue;
-    /** @type {Map<string, string[]>} */ const byRoot = new Map();
-    for (const p of a.par.keys()) { const r = find(a.par, p); const g = byRoot.get(r); if (g) g.push(p); else byRoot.set(r, [p]); }
-    const old = known[pos] || [];
-    const total = (/** @type {string[]} */ g) => g.reduce((x, p) => x + (a.n.get(p) || 0), 0);
-    const groups = [...byRoot.values()].map((g) => {
-      const was = old.find((o) => o.some((p) => g.includes(p)));
-      const name = was ? was[0] : [...g].sort((x, y) => (a.n.get(y) || 0) - (a.n.get(x) || 0) || shorter(x, y))[0];
-      return { was: was ? old.indexOf(was) : Infinity, n: total(g), list: [name, ...g.filter((p) => p !== name).sort()] };
-    }).sort((x, y) => x.was - y.was || y.n - x.n || shorter(x.list[0], y.list[0]));
-    out[pos] = groups.map((g) => g.list);
-  }
-  return out;
-}
-/** The field of a printed sentence at a position, by the register's groups there. @param {string[]} paths @param {string[][] | undefined} groups */
-export function fieldOf(paths, groups) {
-  if (!paths.length) return '~';
-  const folds = new Set(paths.map(arityFold));
-  const hit = (groups || []).find((g) => g.some((p) => folds.has(arityFold(p))));
-  return `@${hit ? hit[0] : [...paths].sort(shorter)[0]}`;
-}
+export const slotKey = (surface, line) => positionOf(surface, line);
 /**
- * THE SLOT KEY: `<surface> | <position> | <field>`: where the page prints the sentence (positionOf) and the field that
- * position prints there (fieldOf: `@<path>`, or `~` for a sentence composed at display). The stored paths are the slot's
- * attribution, recorded beside it (`paths`).
- * @param {string} surface @param {any[]} line @param {string} field
- */
-export const slotKey = (surface, line, field) => `${positionOf(surface, line)} | ${field}`;
-/**
- * Every printed sentence's position and attribution in a run's rows (the input fieldsOf ranks).
- * @param {Array<{ surfaces: Record<string, any[][]>, stored: Record<string, string[]> }>} rows
- * @returns {Generator<[string, string[]]>}
- */
-export function* heldIn(rows) {
-  for (const row of rows) {
-    const heads = storedHeads(row.stored);
-    for (const [surface, lines] of Object.entries(row.surfaces)) for (const line of lines) for (const s of sentencesOf(line[0])) {
-      const paths = attributionOf(s, row.stored, heads); if (paths.length) yield [positionOf(surface, line), paths];
-    }
-  }
-}
-
-/**
- * THE DOOR'S MEASURE (one size): per slot, places (holders), distinct sentences, sentences a place, TOP (the commonest
- * sentence's places / holders), SEEN (count()'s), the commonest sentence, and its attribution (path -> places).
+ * THE DOOR'S MEASURE (one size): per slot, places (holders), `of` (the size's places), distinct sentences, sentences a
+ * place, shareAll (the commonest sentence's places / ALL the size's places: the chair's bar), shareIn (its places / the
+ * holders), SEEN (count()'s), the commonest sentence, and its attribution (path -> places).
  * @param {Array<{ surfaces: Record<string, Array<[string, string, string?, string?]>>, stored: Record<string, string[]> }>} rows
- * @param {Record<string, string[][]>} fields the register's `identity.fields`
  */
-export function measureSlots(rows, fields) {
+export function measureSlots(rows) {
   /** @type {Map<string, { bySentence: Map<string, Set<number>>, paths: Map<string, Set<number>>, exactOnly: boolean }>} */ const slots = new Map();
   rows.forEach((row, i) => {
     const heads = storedHeads(row.stored);
     for (const [surface, lines] of Object.entries(row.surfaces)) for (const line of lines) for (const s of sentencesOf(line[0])) {
       const paths = attributionOf(s, row.stored, heads);
-      const key = slotKey(surface, line, fieldOf(paths, fields[positionOf(surface, line)]));
+      const key = slotKey(surface, line);
       let sl = slots.get(key); if (!sl) { sl = { bySentence: new Map(), paths: new Map(), exactOnly: true }; slots.set(key, sl); }
       if (paths.length && !row.stored[s]?.length) sl.exactOnly = false;
       let st = sl.bySentence.get(s); if (!st) { st = new Set(); sl.bySentence.set(s, st); } st.add(i);
       for (const p of paths) { let ps = sl.paths.get(p); if (!ps) { ps = new Set(); sl.paths.set(p, ps); } ps.add(i); }
     }
   });
-  /** @type {Map<string, { places: number, distinct: number, perPlace: number, top: number, seen: number, sentence: string, paths: Record<string, number>, contained: boolean }>} */ const out = new Map();
+  /** @type {Map<string, { places: number, of: number, distinct: number, perPlace: number, shareAll: number, shareIn: number, seen: number, sentence: string, paths: Record<string, number>, contained: boolean }>} */ const out = new Map();
   for (const [key, sl] of slots) {
     /** @type {Map<number, { c: number, sh: number }>} */ const per = new Map(); let top = ''; let topN = 0;
     for (const [s, st] of sl.bySentence) {
@@ -328,18 +261,22 @@ export function measureSlots(rows, fields) {
     }
     const H = per.size; let seen = 0; for (const o of per.values()) seen += o.sh / o.c / Math.max(1, H - 1); seen /= H;
     const perPlace = [...per.values()].reduce((a, o) => a + o.c, 0) / H;
-    out.set(key, { places: H, distinct: sl.bySentence.size, perPlace: +perPlace.toFixed(2), top: +(topN / H).toFixed(4), seen: +seen.toFixed(4), sentence: top,
+    out.set(key, { places: H, of: rows.length, distinct: sl.bySentence.size, perPlace: +perPlace.toFixed(2), shareAll: +(topN / rows.length).toFixed(4), shareIn: +(topN / H).toFixed(4), seen: +seen.toFixed(4), sentence: top,
       paths: Object.fromEntries([...sl.paths].map(([p, st]) => [p, st.size]).sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1))), contained: !sl.exactOnly });
   }
   return out;
 }
-/** @param {{ top: number, seen: number, perPlace: number }} m @param {'top' | 'seen'} [by] */
-export const meetOf = (m, by) => ((by || (m.perPlace <= ONE_A_PLACE ? 'top' : 'seen')) === 'top' ? m.top : m.seen);
+/** How a slot is met again: `top` (one a place) or `seen` (many a place). @param {{ perPlace: number }} m @returns {'top' | 'seen'} */
+export const byOf = (m) => (m.perPlace <= ONE_A_PLACE ? 'top' : 'seen');
+/** The share a DM meets again: shareAll for a one-a-place slot, SEEN for a many-a-place slot. @param {any} m @param {'top' | 'seen'} [by] */
+export const meetOf = (m, by) => ((by || byOf(m)) === 'top' ? m.shareAll : m.seen);
+/** The places a reading's share is taken over: all the size's places (shareAll), or the holders (SEEN). @param {any} m @param {'top' | 'seen'} by */
+export const overOf = (m, by) => (by === 'top' ? m.of : m.places);
 /** A share rounded UP to 0.01, so a ceiling never sits below its reading. @param {number} x */
 export const ceil2 = (x) => Math.min(1, Math.ceil(x * 100 - 1e-9) / 100);
 /**
- * The standard error of a share AT the ceiling over the reading's places (binomial over holders; SEEN's error taken over
- * places the same way). The share is floored at half a place, so a ceiling at 0 or 1 still allows a place's noise.
+ * The standard error of a share AT the ceiling over the reading's places (binomial; shareAll over all the size's places,
+ * SEEN over its holders). The share is floored at half a place, so a ceiling at 0 or 1 still allows a place's noise.
  * @param {number} ceiling @param {number} places
  */
 export function shareError(ceiling, places) {
@@ -366,8 +303,8 @@ export function judge(table, register, opts = {}) {
   for (const size of Object.keys(table)) for (const [slot, m] of table[size]) {
     const e = rows[slot]?.sizes?.[size];
     if (!e) { (m.places >= minPlaces ? f.unregistered : f.rare).push({ slot, size, m, text: `${size} ${slot}: printed in ${m.places} places, no row` }); continue; }
-    const meet = meetOf(m, e.by); const se = shareError(e.ceiling, m.places);
-    if (meet > e.ceiling + noise * se + 1e-9) f.over.push({ slot, size, meet, text: `${size} ${slot}: meet ${meet.toFixed(2)} > ceiling ${e.ceiling} (${((meet - e.ceiling) / se).toFixed(1)} SE over ${m.places} places)` });
+    const meet = meetOf(m, e.by); const se = shareError(e.ceiling, overOf(m, e.by));
+    if (meet > e.ceiling + noise * se + 1e-9) f.over.push({ slot, size, meet, text: `${size} ${slot}: ${e.by === 'top' ? 'shareAll' : 'seen'} ${meet.toFixed(2)} > ceiling ${e.ceiling} (${((meet - e.ceiling) / se).toFixed(1)} SE over ${overOf(m, e.by)} places)` });
     else if (e.ceiling - meet > noise * se + 1e-9) f.loose.push({ slot, size, meet, text: `${size} ${slot}: ceiling ${e.ceiling} above meet ${meet.toFixed(2)} (${((e.ceiling - meet) / se).toFixed(1)} SE)` });
   }
   for (const [slot, row] of Object.entries(rows)) for (const size of Object.keys(row.sizes || {})) {
@@ -397,23 +334,22 @@ export function confirmRises(first, second) {
 
 /** The class and reason of a door slot: the hand classes, then classOf's rule, read off its commonest sentence. @param {string} slot @param {any} m @param {any} [idx] */
 export function classifySlot(slot, m, idx) {
-  const field = slot.split(' | ').pop() || '~';
   const surface = slot.split(' | ')[0];
   const paths = Object.keys(m.paths || {});
+  const field = paths.length ? `@${paths[0]}` : '~';
   const mod = idx ? moduleOf(m.sentence, idx)?.file || 'unfound' : 'unfound';
   const heading = surface === 'session' ? slot.split(' | ')[1] : '(none)';
   const pseudo = { source: field === '~' ? `COMPOSED@${heading}` : field.slice(1), module: mod, top: m.sentence, distinct: m.distinct, holders: m.places, seen: m.seen, perPlace: m.perPlace, heading };
-  for (const p of field === '~' ? [] : [field.slice(1), ...paths]) { const hit = handClassOf({ ...pseudo, source: p }); if (hit) return { cls: hit.cls, reason: hit.why }; }
+  for (const p of paths) { const hit = handClassOf({ ...pseudo, source: p }); if (hit) return { cls: hit.cls, reason: hit.why }; }
   const c = classOf(pseudo);
   return { cls: c.cls, reason: c.why };
 }
-const NEW_REASON = 'written by --write (brief 2): a printed slot with no row, at the higher of hxd and hxu';
 /**
  * --write: an entry for every slot printed in >= MIN_PLACES places of a size (on either reading) with none, at the HIGHER
  * of the two readings rounded up to 0.01, classed from the classes file; a stale entry (printed on neither reading)
  * retires by name into `retired` with its last reading. It never raises a ceiling: a confirmed rise refuses the whole write.
  * @param {Record<string, Map<string, any>>} first @param {Record<string, Map<string, any>>} second @param {any} register
- * @param {{ classify?: (slot: string, m: any) => { cls: string, reason: string }, fields?: Record<string, string[][]>, minPlaces?: number }} [opts]
+ * @param {{ classify?: (slot: string, m: any) => { cls: string, reason: string }, minPlaces?: number }} [opts]
  * @returns {{ refused: string[], next: any, changed: string[] }}
  */
 export function writeRows(first, second, register, opts = {}) {
@@ -421,7 +357,6 @@ export function writeRows(first, second, register, opts = {}) {
   const rises = confirmRises(judge(first, register), judge(second, register)).over;
   if (rises.length) return { refused: rises.map((x) => `refused: ${x.text} (a write never raises a ceiling)`), next: register, changed: [] };
   const next = JSON.parse(JSON.stringify(register)); next.rows ||= {}; next.retired ||= {};
-  if (opts.fields) next.identity = { ...(next.identity || {}), fields: opts.fields };
   const changed = [];
   for (const size of Object.keys(first)) {
     const keys = new Set([...first[size].keys(), ...(second[size]?.keys() || [])]);
@@ -430,7 +365,7 @@ export function writeRows(first, second, register, opts = {}) {
       const a = first[size].get(slot); const b = second[size]?.get(slot);
       if (Math.max(a?.places || 0, b?.places || 0) < minPlaces) continue;
       const hi = [a, b].filter(Boolean).sort((x, y) => meetOf(y) - meetOf(x) || y.places - x.places)[0];
-      const by = /** @type {'top' | 'seen'} */ (hi.perPlace <= ONE_A_PLACE ? 'top' : 'seen');
+      const by = byOf(hi);
       const meet = Math.max(a ? meetOf(a, by) : 0, b ? meetOf(b, by) : 0);
       const ref = a || b;
       if (!next.rows[slot]) {
@@ -439,8 +374,8 @@ export function writeRows(first, second, register, opts = {}) {
       }
       const row = next.rows[slot];
       for (const [p, n] of Object.entries(ref.paths || {})) row.paths[p] = Math.max(row.paths[p] || 0, n);
-      row.sizes[size] = { places: ref.places, distinct: ref.distinct, top: ref.top, seen: ref.seen, by, meet: +meet.toFixed(4), ceiling: ceil2(meet) };
-      changed.push(`+ ${size} ${slot}: ceiling ${row.sizes[size].ceiling} (${by} ${a ? meetOf(a, by).toFixed(2) : '-'} / ${b ? meetOf(b, by).toFixed(2) : '-'}; ${NEW_REASON})`);
+      row.sizes[size] = { places: ref.places, of: ref.of, distinct: ref.distinct, shareAll: ref.shareAll, shareIn: ref.shareIn, seen: ref.seen, by, meet: +meet.toFixed(4), ceiling: ceil2(meet) };
+      changed.push(`+ ${size} ${slot}: ceiling ${row.sizes[size].ceiling} (${by}: hxd ${a ? meetOf(a, by).toFixed(2) : '-'}, hxu ${b ? meetOf(b, by).toFixed(2) : '-'}; ${row.class})`);
     }
   }
   for (const [slot, row] of Object.entries(next.rows)) {
@@ -529,9 +464,9 @@ export default { root: '${ROOT}', plugins: [react()], test: { environment: 'node
 }
 
 const REGISTER_LAW = 'TWO LAWS (SAME-1 brief 2, the sameness door). A PRINTED SLOT WITH NO ROW REDS: every slot (surface | printed position | field) the page prints in MIN_PLACES or more places of a size, over the corpus `corpus` names, has an entry for that size. A CEILING ONLY TIGHTENS: an entry\'s ceiling bounds `meet` (TOP share where the slot prints at most 1.5 sentences a place, SEEN otherwise; `by` names which); --write adds entries and retires stale ones by name into `retired` and never raises a ceiling; --tighten (the chair\'s door) lowers a ceiling loose on both readings and never raises one. Nothing edits this file by hand. Held by tests/lint/samenessCensus.walker.test.js and `node scripts/sameness-census.mjs --check`.';
-const IDENTITY_RULE = 'A slot is keyed `<surface> | <position> | <field>`. POSITION: where the page prints the line, whatever it says (the renderer\'s component chain; the session sheet\'s key path). FIELD: `~` for a sentence composed at display; else the name of the group, in `fields` below at that position, holding one of the stored paths that hold the printed sentence (word for word, or the longest stored sentence it contains); else the shortest such path. At one position, paths ever co-held by one printed sentence, or equal but for an array\'s `[]`, are one group, named by its most-printed path at the write; a known group never loses a path or its name.';
+const IDENTITY_RULE = 'A slot is keyed `<surface> | <position>`: the surface, and where the page prints the line whatever it says (the renderer\'s position: named components and each element\'s place among its siblings, a keyed list item `*`; the session sheet\'s key path). Every wording printed at one position is one slot, whichever stored path holds it (the chair, 2026-11-20: a pool\'s lines are one slot). The stored paths are attribution (`paths`): those that hold the printed sentence word for word, else those of the longest stored sentence it contains.';
 /** An empty register on this corpus (the first --write fills it). */
-export const emptyRegister = () => ({ _law: REGISTER_LAW, corpus: { ...CORPUS, sizes: [...SIZES] }, identity: { _rule: IDENTITY_RULE, fields: {} }, rows: {}, retired: {} });
+export const emptyRegister = () => ({ _law: REGISTER_LAW, corpus: { ...CORPUS, sizes: [...SIZES] }, identity: { _rule: IDENTITY_RULE }, rows: {}, retired: {} });
 const sameCorpus = (/** @type {any} */ c) => JSON.stringify(c) === JSON.stringify({ ...CORPUS, sizes: [...SIZES] });
 
 /**
@@ -558,12 +493,7 @@ async function door(mode) {
   const t1 = Date.now();
   /** @type {any} */ let secondRun = null;
   const second = async () => { secondRun ||= await readOrRender(arg('confirm'), prefix === CORPUS.confirm ? CORPUS.prefix : CORPUS.confirm, 'confirm'); return secondRun; };
-  let fields = register.identity?.fields || {};
-  if (mode === 'write') {
-    const s2 = await second();
-    fields = fieldsOf((function* () { for (const r of [firstRun, s2]) for (const size of SIZES) if (r[size]) yield* heldIn(r[size]); })(), fields);
-  }
-  const tableOf = (/** @type {any} */ run) => Object.fromEntries(SIZES.filter((s) => run[s]).map((s) => [s, measureSlots(run[s], fields)]));
+  const tableOf = (/** @type {any} */ run) => Object.fromEntries(SIZES.filter((s) => run[s]).map((s) => [s, measureSlots(run[s])]));
   const first = tableOf(firstRun);
   const idx = moduleIndex();
   const say = (/** @type {string} */ x) => console.log(x);
@@ -584,7 +514,7 @@ async function door(mode) {
   }
   const t2 = tableOf(await second());
   if (mode === 'write') {
-    const r = writeRows(first, t2, register, { fields, classify: (slot, m) => classifySlot(slot, m, idx) });
+    const r = writeRows(first, t2, register, { classify: (slot, m) => classifySlot(slot, m, idx) });
     if (r.refused.length) { for (const x of r.refused) say(x); say('sameness-census --write: NOTHING WRITTEN'); process.exit(1); }
     writeFileSync(regPath, `${JSON.stringify(r.next, null, 1)}\n`);
     for (const x of r.changed) say(x);
