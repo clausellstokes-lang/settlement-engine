@@ -133,6 +133,24 @@ describe('R3-CURE unit 3: the roster-choice pools of 212 and the twin against th
     expect({ sql: drift(engine, sqlPools().rival), twin: drift(engine, [...(twin.RIVAL_POWER_DESCS || [])]) }).toEqual({ sql: [[], []], twin: [[], []] });
   });
 
+  // R3-CURE-2 (VEIL-24's builder, unit 2 (a)): the operations list's label table, re-derived over the served houses
+  it('operations labels: 212 `crimlabels` and the twin CRIMINAL_INST_LABELS are safetyProfile.js\'s CRIMINAL_INST_LABELS, entry for entry; with one entry removed, the walker names it', async () => {
+    const twin = await import('../../src/domain/display/galleryRosterChoices.js');
+    const block = SAFETY.match(/const CRIMINAL_INST_LABELS = \{([\s\S]*?)\};/);
+    if (!block) throw new Error('the engine\'s label table is not where the walker reads it');
+    const engine = Object.fromEntries([...block[1].matchAll(/(?:'((?:[^'\\]|\\.)+)'|"((?:[^"\\]|\\.)+)")\s*:\s*(?:'((?:[^'\\]|\\.)+)'|"((?:[^"\\]|\\.)+)")/g)].map((m) => [lit(m[1] ?? m[2]), lit(m[3] ?? m[4])]));
+    expect(Object.keys(engine).length).toBe(15);
+    expect(engine['multiple criminal factions']).toBe('Rival Gangs');
+    const sec = SQL.slice(SQL.indexOf('-- ── R3: the roster choices'));
+    const lm = sec.match(/crimlabels jsonb := '(\{[\s\S]*?\})';/);
+    if (!lm) throw new Error('212\'s label table is not where the walker reads it');
+    const sql = JSON.parse(lm[1].replace(/''/g, "'"));
+    expect(sql).toEqual(engine);
+    expect({ ...twin.CRIMINAL_INST_LABELS }).toEqual(engine);
+    const less = { ...engine }; delete less['street gang'];
+    expect(drift(new Set(Object.keys(engine)), Object.keys(less))[0]).toEqual(['street gang']);
+  });
+
   it('TEETH: a pool with one key removed is named by the walker (each pool, each engine)', async () => {
     const twin = await import('../../src/domain/display/galleryRosterChoices.js');
     const sql = sqlPools();

@@ -23,6 +23,7 @@ import { appendFileSync } from 'node:fs';
 import { PGlite } from '@electric-sql/pglite';
 import { pgcrypto } from '@electric-sql/pglite/contrib/pgcrypto';
 import { bootChain, BIRTH_DIALS, OWNER } from './veilChain.shared.mjs';
+import { buildNameSearch } from '../../src/domain/display/gallerySecondHomes.js';
 
 const ARM_TIMEOUT_MS = 600_000; // deadlock guard for the twin arm (it projects every read again), not a perf budget
 const PGLITE_BOOT_TIMEOUT_MS = 900_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
@@ -83,29 +84,86 @@ const HAND_GOVERNS = Object.freeze({
   },
   economicState: { safetyProfile: { crimeTypes: [] } },
 });
-/** The withheld powers of a read: every power name and id the stored lists hold that neither served list holds. */
+// R3-CURE-2 (VEIL-24's builder, unit 1; the chair's ruling 28 of 08:22 and 09:04): THE FOLD. A withheld power whose name
+// carries a bracketed qualifier, "Thieves' Guild (powerful)", named everywhere by its BARE form ("Thieves' Guild"), with a
+// NUMBER id (unit 4 (i)): a membership { id: 7 } and a goal whose target id is 7 and whose sentences do not name it.
+const TGP = "Thieves' Guild (powerful)";
+const HAND_FOLD = Object.freeze({
+  name: 'Brinewick', tier: 'town',
+  institutions: [{ id: 'inst-tgc3', name: "Thieves' guild chapter", category: 'Criminal', desc: 'A chapter of the guild.' },
+    { id: 'inst-rope', name: 'Ropewalk', category: 'Economy', desc: 'Rope, laid long.' }],
+  powerStructure: {
+    factions: [{ faction: 'Harbour Board', category: 'civic', power: 55, isGoverning: true, desc: 'The board sits at the tide.' },
+      { id: 7, faction: TGP, category: 'criminal', power: 25, desc: 'The guild takes its cut.' },
+      { faction: 'Ropers', category: 'economic', power: 20, desc: 'The ropers keep the walk.', contestsNiche: TG }],
+    factionRelationships: [{ pair: ['Harbour Board', 'Ropers'], type: 'ally' }],
+    conflicts: [{ parties: ['Harbour Board', TG], desc: 'A quarrel over the tide-tolls.' }, { parties: ['Harbour Board', 'Ropers'], desc: 'Rope prices.' }],
+  },
+  conflicts: [{ parties: [{ name: TG }, { name: 'Harbour Board' }], desc: 'A quarrel over the tide-tolls.' }],
+  npcs: [{ id: 'npc.cass', name: 'Cass Orrin', role: 'Roper', memberships: [{ power: TG, role: 'member' }, { power: 'Ropers', role: 'member' }], factionAffiliation: TG,
+    goal: { short: `Be the one the ${TG} sends.`, long: 'Own a walk.' } },
+  { id: 'npc.dun', name: 'Dun Hale', role: 'Clerk', memberships: [{ id: 7, role: 'informer' }, { power: 'Harbour Board', role: 'member' }],
+    goal: { short: 'Settle a debt.', long: 'Keep the ledger straight.', intent: { long: { target: { id: 7, kind: 'faction' } } } } },
+  { id: 'npc.eli', name: 'Eli Marr', role: 'Harbourmaster', memberships: [{ power: 'Harbour Board', role: 'member' }],
+    goal: { short: 'Win the board a vote.', long: 'Seat the board for good.', intent: { long: { target: { id: 'Harbour Board', kind: 'faction' } } } } }],
+  history: { currentTensions: [{ type: 'rivalry', factions: ['Harbour Board', TG], desc: 'Old grudges.' }, { type: 'trade', factions: ['Ropers'], desc: 'Tolls.' }] },
+  economicState: { safetyProfile: { crimeTypes: [] } },
+});
+// R3-CURE-2 (unit 4 (ii)): THE SHARE SUM. Fractional shares whose exact decimal sum is 100 but whose double sum is not
+// (0.1 + 64.1 + 35.8), and thirds whose double sum is 100 but whose exact decimal sum is not: the exact comparison in
+// both engines (212: numeric; the twin: the decimal spelling). No hideable house; no power withheld.
+const HAND_SHARES_A = Object.freeze({ name: 'Tollmere', tier: 'village', institutions: [{ id: 'inst-mill', name: 'Mill', category: 'Economy', desc: 'Grain.' }],
+  powerStructure: { factions: [{ faction: 'Reeve', category: 'civic', power: 0.1, isGoverning: true }, { faction: 'Millers', category: 'economic', power: 64.1 }, { faction: 'Carters', category: 'economic', power: 35.8 }],
+    factionRelationships: [{ pair: ['Reeve', 'Millers'], type: 'ally' }] } });
+const HAND_SHARES_B = Object.freeze({ name: 'Threeways', tier: 'village', institutions: [{ id: 'inst-well', name: 'Well', category: 'Civic', desc: 'Water.' }],
+  powerStructure: { factions: [{ faction: 'Elders', category: 'civic', power: 33.333333333333336, isGoverning: true }, { faction: 'Herders', category: 'economic', power: 33.333333333333336 }, { faction: 'Weavers', category: 'economic', power: 33.33333333333333 }],
+    factionRelationships: [{ pair: ['Elders', 'Herders'], type: 'ally' }] } });
+// R3-CURE-2 (unit 2; the chair's ruling 2: R3 IS NOT GREEN WHILE ANY TOWN DIFFERS): the 14 towns whose served Defense key
+// differed from the house-free counterfactual's at the first cure (out/v23/r3c/unit4-counterfactual.txt), each born with
+// its counterfactual and read through the open veil (Reveal DM off and on), both engines
+const KEY_SEEDS = ['town-indebted-0-16', 'town-under_siege-1-88', 'metropolis-insurgency-1-124', 'city-none-0-37', 'city-wartime-0-49', 'town-under_siege-0-18',
+  'town-insurgency-1-94', 'town-under_siege-1-98', 'city-under_siege-1-118', 'town-wartime-0-19', 'town-none-0-23', 'city-none-0-31', 'metropolis-wartime-0-59', 'town-none-1-91'];
+const KEY_RANK = Object.freeze({ organized: 3, 'semi-organized': 2, diffuse: 1, null: 0 });
+/** The fields the Defense key reads (criminalStructureKey.js), each as a getter and a setter: the attribution swaps one. */
+const KEY_FIELDS = {
+  institutions: [(d) => d?.institutions, (d, v) => { d.institutions = v; }],
+  powers: [(d) => d?.powerStructure?.factions, (d, v) => { d.powerStructure = { ...(d.powerStructure || {}), factions: v }; }],
+  criminalInstitutions: [(d) => d?.economicState?.safetyProfile?.criminalInstitutions, (d, v) => { d.economicState = d.economicState || {}; d.economicState.safetyProfile = { ...(d.economicState.safetyProfile || {}), criminalInstitutions: v }; }],
+  activeChains: [(d) => d?.economicState?.activeChains, (d, v) => { d.economicState = { ...(d.economicState || {}), activeChains: v }; }],
+  incomeSources: [(d) => d?.economicState?.incomeSources, (d, v) => { d.economicState = { ...(d.economicState || {}), incomeSources: v }; }],
+  servicesCriminal: [(d) => d?.availableServices?.criminal, (d, v) => { d.availableServices = { ...(d.availableServices || {}), criminal: v }; }],
+};
+/** The withheld powers of a read: every power name and id the stored lists hold that neither served list holds (R3-CURE-2,
+ * unit 4 (i): an id that is a number, by its String()). */
 function withheldOf(stored, d) {
   const lists = (x) => [...(Array.isArray(x?.powerStructure?.factions) ? x.powerStructure.factions : []), ...(Array.isArray(x?.factions) ? x.factions : [])].filter(isRec);
   const servedNames = new Set(lists(d).flatMap((f) => [f.faction, f.name, f.id].filter((v) => typeof v === 'string')));
   const out = new Set();
   for (const f of lists(stored)) {
     const names = [f.faction, f.name].filter((v) => typeof v === 'string' && v);
-    if (names.length && !names.some((n) => servedNames.has(n))) for (const v of [...names, f.id]) if (typeof v === 'string' && v) out.add(v);
+    if (names.length && !names.some((n) => servedNames.has(n))) for (const v of [...names, typeof f.id === 'number' ? String(f.id) : f.id]) if (typeof v === 'string' && v) out.add(v);
   }
   return [...out];
 }
-/** THE SEARCH (the chair, 07:39 UTC): every served string VALUE holding a token as a substring and every object KEY holding one, case-folded, by normalised path. */
+/** THE SEARCH (the chair, 07:39 UTC; R3-CURE-2: the ruling 28 of 08:22 and 09:04): every served string VALUE and every
+ * object KEY that holds a token, by normalised path. A token that is not all digits is searched by THE LANE'S OWN FOLD
+ * (gallerySecondHomes.js :: buildNameSearch: itself and its bare form, without its bracketed qualifier, folded, at the
+ * name boundary); a number id (all digits) as its String(): a whole string value, a whole key, or a number at an `id`. */
 function searchHits(doc, tokens) {
   const out = [];
-  const lows = tokens.map((t) => t.toLowerCase());
-  const stack = [[doc, '']];
+  const nums = new Set(tokens.filter((t) => /^\d+$/.test(t)));
+  const search = buildNameSearch(tokens.filter((t) => !nums.has(t)), []);
+  const hit = (t) => nums.has(t) || (!!search && search.hit(t));
+  const stack = [[doc, '', '']];
   while (stack.length) {
-    const [v, p] = stack.pop();
-    if (typeof v === 'string') { const l = v.toLowerCase(); for (const t of lows) if (l.includes(t)) out.push({ path: p.replace(/\[\d+\]/g, '[]'), at: p, text: v.slice(0, 80), token: t }); }
-    else if (Array.isArray(v)) v.forEach((x, i) => stack.push([x, `${p}[${i}]`]));
+    const [v, p, k0] = stack.pop();
+    const norm = p.replace(/\[\d+\]/g, '[]');
+    if (typeof v === 'string') { if (hit(v)) out.push({ path: norm, at: p, text: v.slice(0, 80) }); }
+    else if (typeof v === 'number') { if (k0 === 'id' && nums.has(String(v))) out.push({ path: norm, at: p, text: String(v) }); }
+    else if (Array.isArray(v)) v.forEach((x, i) => stack.push([x, `${p}[${i}]`, '']));
     else if (isRec(v)) for (const k of Object.keys(v)) {
-      const l = k.toLowerCase(); for (const t of lows) if (l.includes(t)) out.push({ path: `${p.replace(/\[\d+\]/g, '[]')}.{KEY}`, at: `${p}.${k}`, text: k, token: t });
-      stack.push([v[k], p ? `${p}.${k}` : k]);
+      if (hit(k)) out.push({ path: `${norm}.{KEY}`, at: `${p}.${k}`, text: k });
+      stack.push([v[k], p ? `${p}.${k}` : k, k]);
     }
   }
   return out;
@@ -141,6 +199,7 @@ describe('R3: the drawn conditional rows where a house is hidden whole (through 
   let veil;
   let pool;
   let derive;
+  let keyTowns;
 
   beforeAll(async () => {
     const db = new PGlite({ extensions: { pgcrypto } });
@@ -177,6 +236,9 @@ describe('R3: the drawn conditional rows where a house is hidden whole (through 
     // measure found one (out/v23/r3c/unit2-measure-copies-base.txt), and a crime type no map holds (unit 3)
     towns.push({ seed: 'hand-raised', stored: clone(HAND), hideable: HAND.institutions.filter((h) => isHideableHouse(h)), B: null });
     towns.push({ seed: 'hand-governs', stored: clone(HAND_GOVERNS), hideable: HAND_GOVERNS.institutions.filter((h) => isHideableHouse(h)), B: null });
+    // R3-CURE-2 (units 1, 4 (i) and 4 (ii)): the fold's plant, the number id's, and the two share sums
+    towns.push({ seed: 'hand-fold', stored: clone(HAND_FOLD), hideable: HAND_FOLD.institutions.filter((h) => isHideableHouse(h)), B: null });
+    for (const [seed, town] of [['hand-shares-a', HAND_SHARES_A], ['hand-shares-b', HAND_SHARES_B]]) towns.push({ seed, stored: clone(town), hideable: [], B: null });
     // THE HIDDEN-FREE POOL (VR39): the crime types of every town that holds no hideable house (the counterfactual births
     // and the born towns with none)
     pool = new Set(towns.flatMap((t) => [t.B, t.hideable.length ? null : t.stored]).filter(Boolean)
@@ -185,16 +247,26 @@ describe('R3: the drawn conditional rows where a house is hidden whole (through 
     const idOf = (h) => veil.CARD_KINDS.institution.idOf(h);
     reads = [];
     let n = 0;
-    for (const t of towns) {
+    // R3-CURE-2 (unit 2): the key towns, each with its counterfactual birth; read through the open veil only (kinds 'key'
+    // and, for the counterfactual, 'keyB'), outside `towns` so no earlier arm's pool or tally moves
+    keyTowns = KEY_SEEDS.map((k) => {
+      const [size, crisis] = k.split('-');
+      const seed = `r3m-${k}`;
+      const stored = birth(size, crisis, seed, null);
+      const hideable = (stored.institutions || []).filter((h) => isHideableHouse(h));
+      return { seed: k, stored, hideable, B: birth(size, crisis, seed, (h) => isHideableHouse(h)) };
+    });
+    const keyRuns = keyTowns.flatMap((t) => [[t, 'key', t.stored], [t, 'keyB', t.B]]);
+    for (const [t, only, keyDoc] of [...towns.map((x) => [x, null, null]), ...keyRuns]) {
       const shows = t.hideable.flatMap((h) => [`card:institution:${idOf(h)}`, ...['description', 'function', 'services', 'people'].map((f) => `field:institution:${idOf(h)}:${f}`)]);
       const veils = [['open', [...OPEN].map((a) => ({ address: a, hidden: false })), [false, true]],
         // R3-CURE: master's stored shape (the powers ALSO in the top-level factions[], R4's twins), the same veil
         ['openM', [...OPEN].map((a) => ({ address: a, hidden: false })), [false, true]],
         ['shown', [...OPEN, ...shows].map((a) => ({ address: a, hidden: false })), [false]],
         ['default', [], [false]], ['unmarked', null, [false]]];
-      for (const [kind, deltas, dms] of veils) for (const dm of dms) {
+      for (const [kind, deltas, dms] of only ? [[only, [...OPEN].map((a) => ({ address: a, hidden: false })), [false, true]]] : veils) for (const dm of dms) {
         n += 1;
-        const stored = kind === 'openM' ? { ...t.stored, factions: clone(t.stored.powerStructure?.factions || []) } : t.stored;
+        const stored = kind === 'openM' ? { ...t.stored, factions: clone(t.stored.powerStructure?.factions || []) } : keyDoc || t.stored;
         const ov = deltas === null ? {} : veil.writeShareVeil({}, deltas, { mode: 'live', at });
         const id = `7e530000-0000-0000-0000-${String(n).padStart(12, '0')}`;
         const slug = `rc${n}`;
@@ -472,6 +544,96 @@ describe('R3: the drawn conditional rows where a house is hidden whole (through 
     }
     expect(bad).toEqual([]);
   });
+
+  // ── R3-CURE-2 (VEIL-24's builder; R3-CURE-2-BRIEF units 1, 2 and 4; the chair's rulings of 08:22 and 09:04 UTC) ────────
+  it('R3-CURE-2 unit 1 and unit 4 (i): THE FOLD AND THE NUMBER ID: a withheld "Thieves\' Guild (powerful)" named by its BARE form, and its number id 7, leave every structured copy (conflicts both lists, the tension, contestsNiche, memberships, the affiliation key, the goal named by sentence and the goal aimed by id), both shapes, every read, Reveal DM off and on; its tooth: a goal aimed at a SHOWN power and a membership of a shown power are served byte for byte', () => {
+    const bad = [];
+    const rs = cureReads().filter((x) => x.t.seed === 'hand-fold');
+    expect(rs.length).toBe(4);
+    let tooth = 0;
+    for (const r of rs) for (const [read, d] of docsOf(r)) {
+      const tag = `hand-fold ${r.kind} dm=${r.dm} ${read}`;
+      if (!withheldOf(r.stored, d).includes(TGP) || !withheldOf(r.stored, d).includes('7')) bad.push(`${tag}: the power is not withheld ${J(withheldOf(r.stored, d))}`);
+      for (const h of searchHits(d, [TGP, '7'])) if (!R5_PROSE.includes(h.path)) bad.push(`${tag}: ${h.at} = ${J(h.text)}`);
+      const npc = (id) => (d.npcs || []).find((x) => x?.id === id);
+      const eli = HAND_FOLD.npcs[2];
+      // THE TOOTH, where the read serves a person's goal and memberships at all (Reveal DM on; the gallery and the import):
+      // the shown power's goal and membership byte for byte (canonical key order: jsonb orders an object's keys)
+      if (npc('npc.eli') && 'goal' in npc('npc.eli')) {
+        tooth += 1;
+        if (canon(npc('npc.eli').goal) !== canon(eli.goal)) bad.push(`${tag}: the goal aimed at the shown Harbour Board ${J(npc('npc.eli')?.goal)}`);
+        if (canon(npc('npc.eli').memberships) !== canon(eli.memberships)) bad.push(`${tag}: a shown power's membership ${J(npc('npc.eli')?.memberships)}`);
+        if (!(npc('npc.cass')?.memberships || []).some((m) => m?.power === 'Ropers')) bad.push(`${tag}: the Ropers membership lost`);
+      }
+      if (!(d.powerStructure?.conflicts || []).some((c) => J(c?.parties) === J(['Harbour Board', 'Ropers']))) bad.push(`${tag}: the shown conflict lost`);
+    }
+    note('R3-CURE-2 unit 1, the tooth (reads serving the shown power\'s goal, compared byte for byte):', tooth);
+    expect(tooth).toBeGreaterThan(0);
+    expect(bad).toEqual([]);
+  });
+
+  it('R3-CURE-2 unit 4 (ii): THE SHARE SUM is compared EXACTLY in both engines: shares whose decimal sum is 100 stay as stored (0.1, 64.1, 35.8), shares whose decimal sum is not are re-derived to 100 (the thirds), every read, the server and the twin alike', () => {
+    const bad = [];
+    for (const r of reads.filter((x) => x.t.seed === 'hand-shares-a' || x.t.seed === 'hand-shares-b')) {
+      const twin = veil.projectShareVeil(veil.galleryPayloadFor(clone(r.stored), { shareDm: r.dm, memberOverrides: r.ov }), r.ov);
+      const want = r.t.seed === 'hand-shares-a' ? J([0.1, 64.1, 35.8]) : null;
+      for (const [eng, d] of [['server', r.docs.gallery], ['twin', twin]]) {
+        const got = (d?.powerStructure?.factions || []).map((f) => f?.power);
+        if (want !== null && J(got) !== want) bad.push(`${r.t.seed} ${r.kind} dm=${r.dm} ${eng}: ${J(got)} (an exact 100 re-derived)`);
+        if (want === null && (got.reduce((a, v) => a + v, 0) !== 100 || got.some((v) => !Number.isInteger(v)))) bad.push(`${r.t.seed} ${r.kind} dm=${r.dm} ${eng}: ${J(got)} (not re-derived)`);
+      }
+    }
+    expect(bad).toEqual([]);
+  });
+
+  it('R3-CURE-2 unit 4 (iii): where NO house is hidden whole and a power is withheld anyway (the projection, a Reveal-off read, a shut grouping), no served string or key names it by the fold, outside R5\'s named prose', () => {
+    const outside = [];
+    let judged = 0;
+    for (const r of reads.filter((x) => !['open', 'openM', 'key', 'keyB'].includes(x.kind) || !x.t.hideable.length).filter((x) => x.kind === 'unmarked' || x.kind === 'shown' || !x.t.hideable.length)) {
+      for (const [read, d] of docsOf(r)) {
+        const W = withheldOf(r.stored, d);
+        if (!W.length) continue;
+        judged += 1;
+        for (const h of searchHits(d, W)) if (!R5_PROSE.includes(h.path)) outside.push(`${r.t.seed} ${r.kind} dm=${r.dm} ${read}: ${h.at} = ${J(h.text)}`);
+      }
+    }
+    note('R3-CURE-2 unit 4 (iii): reads with no house hidden whole and a power withheld, judged:', judged, '| hits outside R5\'s list:', outside.length, outside.length ? `\n  ${outside.slice(0, 200).join('\n  ')}` : '');
+    // MEASURED (out/v24/r3c2/born-red.full.log): at 06e9e64b3 the only hits were the hand town's PARTY LINK with no veil
+    // record (3: its conflicts both lists and its tension, by the BARE form); the link's own default hides the hand town's
+    // criminal house whole, so they were unit 1's (the literal-label match), and the fold cures them (born-green.full.log).
+    // Where no house is hidden whole and a power is withheld, nothing names it: the copy pass's gate (`whole`) stands.
+    expect(outside).toEqual([]);
+  });
+
+  it('R3-CURE-2 unit 2 (the chair\'s ruling 2): PER TOWN, the Defense key a visitor derives from the served document equals the house-free counterfactual\'s, or is LOWER with its cause named (the field whose counterfactual value alone closes the gap); ZERO towns HIGHER; "Magical crime" served only where the counterfactual serves it; both engines, Reveal DM off and on', () => {
+    const bad = [];
+    const told = [];
+    const tally = {};
+    const keyOf = (d) => derive.criminalStructureKeyOf(d);
+    const causeOf = (a, b, want) => {
+      const one = Object.entries(KEY_FIELDS).filter(([, [get, set]]) => { const x = clone(a); set(x, get(b) === undefined ? undefined : clone(get(b))); return keyOf(x) === want; }).map(([f]) => f);
+      return one;
+    };
+    for (const t of keyTowns) for (const dm of [false, true]) {
+      const ra = reads.find((x) => x.t === t && x.kind === 'key' && x.dm === dm);
+      const rb = reads.find((x) => x.t === t && x.kind === 'keyB' && x.dm === dm);
+      const tw = (r) => veil.projectShareVeil(veil.galleryPayloadFor(clone(r.stored), { shareDm: dm, memberOverrides: r.ov }), r.ov);
+      for (const [eng, a, b] of [['server', ra.docs.gallery, rb.docs.gallery], ['twin', tw(ra), tw(rb)]]) {
+        const ka = keyOf(a); const kb = keyOf(b);
+        const cmp = KEY_RANK[String(ka)] === KEY_RANK[String(kb)] ? 'EQUAL' : KEY_RANK[String(ka)] > KEY_RANK[String(kb)] ? 'HIGHER' : 'LOWER';
+        tally[`${eng} dm=${dm}`] = tally[`${eng} dm=${dm}`] || { EQUAL: 0, LOWER: 0, HIGHER: 0 };
+        tally[`${eng} dm=${dm}`][cmp] += 1;
+        const cause = cmp === 'EQUAL' ? [] : causeOf(a, b, kb);
+        told.push(`${t.seed} ${eng} dm=${dm}: served ${ka} | counterfactual ${kb} | ${cmp}${cause.length ? ` | cause: ${cause.join(', ')}` : ''}`);
+        if (cmp === 'HIGHER') bad.push(`${t.seed} ${eng} dm=${dm}: served ${ka} above the counterfactual's ${kb} (${cause.join(', ') || 'no single field'})`);
+        if (cmp === 'LOWER' && !cause.length) bad.push(`${t.seed} ${eng} dm=${dm}: served ${ka} below ${kb} with no cause named`);
+        const magic = (d) => (d?.economicState?.safetyProfile?.crimeTypes || []).some((c) => c?.type === 'Magical crime');
+        if (magic(a) && !magic(b)) bad.push(`${t.seed} ${eng} dm=${dm}: "Magical crime" served, not in the counterfactual`);
+      }
+    }
+    note('R3-CURE-2 unit 2, the Defense key per town (open veil, gallery):', J(tally), `\n  ${told.join('\n  ')}`);
+    expect(bad).toEqual([]);
+  }, ARM_TIMEOUT_MS);
 
   it('the twin (projectShareVeil over galleryPayloadFor) sends what the server sends at every R3 path of the gallery read', () => {
     const differ = [];

@@ -1,0 +1,123 @@
++   "hand-shares-b open dm=true twin: [33.333333333333336,33.333333333333336,33.33333333333333] (not re-derived)",
++   "hand-shares-b openM dm=false twin: [33.333333333333336,33.333333333333336,33.33333333333333] (not re-derived)",
++   "hand-shares-b openM dm=true twin: [33.333333333333336,33.333333333333336,33.33333333333333] (not re-derived)",
++   "hand-shares-b shown dm=false twin: [33.333333333333336,33.333333333333336,33.33333333333333] (not re-derived)",
++   "hand-shares-b default dm=false twin: [33.333333333333336,33.333333333333336,33.33333333333333] (not re-derived)",
++   "hand-shares-b unmarked dm=false twin: [33.333333333333336,33.333333333333336,33.33333333333333] (not re-derived)",
++ ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:578:17
+    576|       }
+    577|     }
+    578|     expect(bad).toEqual([]);
+       |                 ^
+    579|   });
+    580|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯
+
+ FAIL  tests/security/galleryRosterChoices.pglite.test.js > R3: the drawn conditional rows where a house is hidden whole (through the server; the twin beside it) > R3-CURE-2 unit 4 (iii): where NO house is hidden whole and a power is withheld anyway (the projection, a Reveal-off read, a shut grouping), no served string or key names it by the fold, outside R5's named prose
+AssertionError: expected [ …(3) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "hand-fold unmarked dm=false link: powerStructure.conflicts[0].parties[1] = \"Thieves' Guild\"",
++   "hand-fold unmarked dm=false link: conflicts[0].parties[0].name = \"Thieves' Guild\"",
++   "hand-fold unmarked dm=false link: history.currentTensions[0].factions[1] = \"Thieves' Guild\"",
++ ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:593:21
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯
+
+ FAIL  tests/security/galleryRosterChoices.pglite.test.js > R3: the drawn conditional rows where a house is hidden whole (through the server; the twin beside it) > R3-CURE-2 unit 2 (the chair's ruling 2): PER TOWN, the Defense key a visitor derives from the served document equals the house-free counterfactual's, or is LOWER with its cause named (the field whose counterfactual value alone closes the gap); ZERO towns HIGHER; "Magical crime" served only where the counterfactual serves it; both engines, Reveal DM off and on
+AssertionError: expected [ …(20) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "town-indebted-0-16 server dm=false: served diffuse above the counterfactual's null (servicesCriminal)",
++   "town-indebted-0-16 twin dm=false: served diffuse above the counterfactual's null (servicesCriminal)",
++   "town-indebted-0-16 server dm=true: served diffuse above the counterfactual's null (servicesCriminal)",
++   "town-indebted-0-16 twin dm=true: served diffuse above the counterfactual's null (servicesCriminal)",
++   "city-none-0-37 server dm=false: served semi-organized above the counterfactual's null (criminalInstitutions)",
++   "city-none-0-37 twin dm=false: served semi-organized above the counterfactual's null (criminalInstitutions)",
++   "city-none-0-37 server dm=true: served semi-organized above the counterfactual's null (criminalInstitutions)",
++   "city-none-0-37 twin dm=true: served semi-organized above the counterfactual's null (criminalInstitutions)",
++   "city-wartime-0-49 server dm=false: served semi-organized above the counterfactual's null (criminalInstitutions)",
++   "city-wartime-0-49 twin dm=false: served semi-organized above the counterfactual's null (criminalInstitutions)",
++   "city-wartime-0-49 server dm=true: served semi-organized above the counterfactual's null (criminalInstitutions)",
++   "city-wartime-0-49 twin dm=true: served semi-organized above the counterfactual's null (criminalInstitutions)",
++   "town-wartime-0-19 server dm=false: served diffuse above the counterfactual's null (servicesCriminal)",
++   "town-wartime-0-19 twin dm=false: served diffuse above the counterfactual's null (servicesCriminal)",
++   "town-wartime-0-19 server dm=true: served diffuse above the counterfactual's null (servicesCriminal)",
++   "town-wartime-0-19 twin dm=true: served diffuse above the counterfactual's null (servicesCriminal)",
++   "city-none-0-31 server dm=false: served semi-organized above the counterfactual's diffuse (no single field)",
++   "city-none-0-31 twin dm=false: served semi-organized above the counterfactual's diffuse (no single field)",
++   "city-none-0-31 server dm=true: served semi-organized above the counterfactual's diffuse (no single field)",
++   "city-none-0-31 twin dm=true: served semi-organized above the counterfactual's diffuse (no single field)",
++ ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:623:17
+    621|     }
+    622|     note('R3-CURE-2 unit 2, the Defense key per town (open veil, galle…
+    623|     expect(bad).toEqual([]);
+       |                 ^
+    624|   }, ARM_TIMEOUT_MS);
+    625|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯
+
+ FAIL  tests/security/galleryRosterChoices.pglite.test.js > R3: the drawn conditional rows where a house is hidden whole (through the server; the twin beside it) > the twin (projectShareVeil over galleryPayloadFor) sends what the server sends at every R3 path of the gallery read
+AssertionError: expected [ …(17) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "/^powerStructure\\.factions\\[\\]\\.(faction|power|category|isGoverning)$/ @ hand-shares-a open dm=false",
++   "/^powerStructure\\.factions\\[\\]\\.(faction|power|category|isGoverning)$/ @ hand-shares-a open dm=true",
++   "/^powerStructure\\.factions\\[\\]\\.(faction|power|category|isGoverning)$/ @ hand-shares-a openM dm=false",
++   "/^powerStructure\\.factions\\[\\]\\.(faction|power|category|isGoverning)$/ @ hand-shares-a openM dm=true",
++   "/^powerStructure\\.factions\\[\\]\\.(faction|power|category|isGoverning)$/ @ hand-shares-a shown dm=false",
++   "/^powerStructure\\.factions\\[\\]\\.(faction|power|category|isGoverning)$/ @ hand-shares-a default dm=false",
++   "/^powerStructure\\.factions\\[\\]\\.(faction|power|category|isGoverning)$/ @ hand-shares-a unmarked dm=false",
++   "/^powerStructure\\.factions\\[\\]\\.(faction|power|category|isGoverning)$/ @ hand-shares-b open dm=false",
++   "/^powerStructure\\.factions\\[\\]\\.(faction|power|category|isGoverning)$/ @ hand-shares-b open dm=true",
++   "/^powerStructure\\.factions\\[\\]\\.(faction|power|category|isGoverning)$/ @ hand-shares-b openM dm=false",
++   "/^powerStructure\\.factions\\[\\]\\.(faction|power|category|isGoverning)$/ @ hand-shares-b openM dm=true",
++   "/^powerStructure\\.factions\\[\\]\\.(faction|power|category|isGoverning)$/ @ hand-shares-b shown dm=false",
++   "/^powerStructure\\.factions\\[\\]\\.(faction|power|category|isGoverning)$/ @ hand-shares-b default dm=false",
++   "/^powerStructure\\.factions\\[\\]\\.(faction|power|category|isGoverning)$/ @ hand-shares-b unmarked dm=false",
++   "/^npcs\\[\\]\\.(memberships\\[\\]\\.power|goal\\.(short|long)|factionAffiliation)$/ @ metropolis-insurgency-1-124 key dm=true",
++   "/^npcs\\[\\]\\.(memberships\\[\\]\\.power|goal\\.(short|long)|factionAffiliation)$/ @ town-none-0-23 key dm=true",
++   "/^npcs\\[\\]\\.(memberships\\[\\]\\.power|goal\\.(short|long)|factionAffiliation)$/ @ metropolis-wartime-0-59 key dm=true",
++ ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:639:20
+    637|       if (has(r.docs.gallery) !== has(twin)) differ.push(`defense:crim…
+    638|     }
+    639|     expect(differ).toEqual([]);
+       |                    ^
+    640|   }, ARM_TIMEOUT_MS);
+    641| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  6 failed | 14 passed (20)
+   Start at  09:14:58
+   Duration  544.38s (transform 3.57s, setup 34ms, import 158ms, tests 544.04s, environment 0ms)
+
+[gate-tail] end:  09:24:03 up 31 min,  0 user,  load average: 3.78, 4.70, 2.98
+[gate-tail] full log: /tmp/gate-tail.14678.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+exit 1

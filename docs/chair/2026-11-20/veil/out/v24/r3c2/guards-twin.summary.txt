@@ -1,0 +1,19 @@
+     × SHRINK-ONLY: no file exceeds its frozen ceiling, and no row has vanished 68ms
+     × A1/A7: schema-7 filters narrow ordinary noise while explained writers stay banked live 59ms
+     × criminal faction: members, goals, conflicts and description hidden; name, category and standing stay 14ms
+     × Defense's criminal architecture and Power's capture reading: their data goes and the groupings are listed 2ms
+     × with the door closed, flipping every eye to shown reveals no DM-only field 2ms
+     × VR34 (b): a power's members carried only on master's top-level list are offered and covered 12ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯
+ FAIL  tests/lint/observedShapeReaders.walker.test.js > reader-with-no-writer ratchet: the live scan > SHRINK-ONLY: no file exceeds its frozen ceiling, and no row has vanished
+AssertionError: the live heuristic inventory must exactly match the frozen one. A lawful shrink is `node scripts/check-observed-shape-readers.mjs --write` on a clean tree — it re-derives inventory, total and identities together and refuses anything that is not a shrink. NEVER hand-edit a row: that throws "observed-shape baseline totals are inconsistent" out of validateLeafBaseline (scripts/lib/observed-shape-baseline.mjs).: expected { violations: 5, stale: +0 } to deeply equal { violations: +0, stale: +0 }
+ FAIL  tests/lint/observedShapeReaders.walker.test.js > reader-with-no-writer ratchet: the live scan > A1/A7: schema-7 filters narrow ordinary noise while explained writers stay banked live
+AssertionError: expected { reads: 2222, identities: 1556, …(3) } to deeply equal { reads: 2214, identities: 1552, …(3) }
+ FAIL  tests/domain/display/criminalVeilSwitch.test.js > the switch over a hand-made town > VR34 (b): a power's members carried only on master's top-level list are offered and covered
+ FAIL  tests/domain/display/publicSafe.test.js > galleryVeil — the one default set (X-21c / X-21d, W2-VEIL-A U2) > criminal faction: members, goals, conflicts and description hidden; name, category and standing stay
+AssertionError: expected { faction: 'Merchant Guilds', …(4) } to deeply equal { faction: 'Thieves\' Guild', …(3) }
+ FAIL  tests/domain/display/publicSafe.test.js > galleryVeil — the one default set (X-21c / X-21d, W2-VEIL-A U2) > Defense's criminal architecture and Power's capture reading: their data goes and the groupings are listed
+AssertionError: expected undefined to deeply equal { …(2) }
+ FAIL  tests/domain/display/publicSafe.test.js > galleryVeil — the veil only removes (X-21 (d), W2-VEIL-A U4) > with the door closed, flipping every eye to shown reveals no DM-only field
+ Test Files  3 failed | 13 passed (16)
+      Tests  6 failed | 254 passed (260)

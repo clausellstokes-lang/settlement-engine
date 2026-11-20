@@ -2071,6 +2071,20 @@ begin
 end $$;
 
 -- ── R3: the roster choices ──────────────────────────────────────────────────────────────────────────
+-- [212: NEW] public._gallery_veil_power_named
+-- R3-CURE-2 (VEIL-24's builder; the chair's ruling 28 of 08:22 and 09:04 UTC: THE NAME SEARCH): a value names a withheld
+-- power: a number by its text (an id as a string, as the twin's String()), a string as an id (the whole value) or as a
+-- name by THE LANE'S OWN FOLD (itself and its bare form without its bracketed qualifier, at the name boundary: `hits` is
+-- _gallery_veil_name_hits over the values asked, by _gallery_veil_name_search). Called only by
+-- _gallery_veil_roster_choices. Twin: galleryRosterChoices.js :: withholdPowerCopies (`named`).
+create or replace function public._gallery_veil_power_named(x jsonb, ids text[], hits jsonb)
+returns boolean language sql immutable as $$
+  select coalesce(case jsonb_typeof(x)
+                    when 'number' then (x::text) = any(ids)
+                    when 'string' then (x #>> '{}') <> '' and ((x #>> '{}') = any(ids) or public._gallery_veil_name_hit(x #>> '{}', hits, null, null))
+                    else false end, false)
+$$;
+
 -- [212: NEW] public._gallery_veil_roster_choices
 -- VEIL-22 (R3; SUB-BRIEF-VR7 point 5; the chairs' VR7, VR11/VR31, VR21, VR29, VR39, VR42 and the power observable, each
 -- vetoable by the owner): THE DRAWN CONDITIONAL ROWS. `doc` is the veiled body, `pub` the projection the veil ran on. On
@@ -2119,6 +2133,17 @@ declare
   ps_out text[];
   wn text[];
   pth text[];
+  -- R3-CURE-2 (VEIL-24's builder): the withheld powers' ids (a string, or a number by its text), the name search over the
+  -- withheld powers' names and its hits over the structured copies; the operations list's label table (unit 2 (a))
+  wn_ids text[];
+  nt int;
+  srch jsonb;
+  hits jsonb;
+  crimlabels jsonb := '{"thieves'' guild chapter": "Thieves'' Guild Chapter", "thieves'' guild (powerful)": "Thieves'' Guild (Powerful)",
+    "assassins'' guild": "Assassins'' Guild", "multiple criminal factions": "Rival Gangs", "black market": "Black Market",
+    "black market bazaar": "Black Market Bazaar", "smuggling operation": "Smuggling Operation", "smuggling network": "Smuggling Network",
+    "street gang": "Street Gang", "front businesses": "Front Businesses", "underground city": "Underground City", "gambling den": "Gambling Den",
+    "gambling halls": "Gambling Halls", "gambling district": "Gambling District", "red light district": "Red Light District"}';
   -- registry: safety.crimeTypes (each type by the flags that raise it: safetyProfile.js's crime types and the stress flags
   -- they read, priorityHelpers.js :: getStressFlags; criminalEffective moves only with hasCriminalInst among the houses)
   -- R3-CURE (VEIL-23's builder, unit 3): EVERY type the engine writes is a key (tests/lint/rosterChoicePools.walker.test.js
@@ -2270,39 +2295,52 @@ begin
   end if;
   if not whole then return s; end if;
 
-  -- R3-CURE (unit 2; the chair's ruling of 07:39: "LEAVES WHOLE" MEANS EVERY COPY): the withheld powers' tokens (the name and
-  -- the id of every power of `pub`'s two lists that neither served list names) leave every STRUCTURED copy: a conflict
-  -- between powers (both lists) and a tension naming one, whole; a power's `contestsNiche` naming one; a person's membership
-  -- of one, an affiliation key naming one, and the goal that targets one or names one (its intent and its two sentences go
-  -- together). Prose composed over the powers is R5's (registry power.desc). What is left is dense, in order (VR21).
+  -- R3-CURE (unit 2; the chair's ruling of 07:39: "LEAVES WHOLE" MEANS EVERY COPY): the withheld powers (every power of
+  -- `pub`'s two lists that neither served list names) leave every STRUCTURED copy: a conflict between powers (both lists)
+  -- and a tension naming one, whole; a power's `contestsNiche` naming one; a person's membership of one, an affiliation key
+  -- naming one, and the goal that targets one or names one (its intent and its two sentences go together). R3-CURE-2 (units
+  -- 1 and 4 (i); the chair's ruling 28 of 08:22 and 09:04): a NAME is searched FOLDED, as itself and as its BARE FORM (the
+  -- lane's own search, _gallery_veil_name_search, the served powers' names its open names); an ID as a STRING (a number id
+  -- by its text), the whole value (_gallery_veil_power_named). Prose composed over the powers is R5's (registry
+  -- power.desc). What is left is dense, in order (VR21).
   names := array(select v from (select jsonb_array_elements(case when jsonb_typeof(s #> '{powerStructure,factions}') = 'array' then s #> '{powerStructure,factions}' else '[]' end) f
                                 union all select jsonb_array_elements(case when jsonb_typeof(s -> 'factions') = 'array' then s -> 'factions' else '[]' end)) q,
     lateral (select q.f ->> 'faction' as v where jsonb_typeof(q.f -> 'faction') = 'string' union select q.f ->> 'name' where jsonb_typeof(q.f -> 'name') = 'string') w);
   wn := array(select distinct v from (select jsonb_array_elements(case when jsonb_typeof(p #> '{powerStructure,factions}') = 'array' then p #> '{powerStructure,factions}' else '[]' end) f
                                       union all select jsonb_array_elements(case when jsonb_typeof(p -> 'factions') = 'array' then p -> 'factions' else '[]' end)) q,
-    lateral (select q.f ->> 'faction' as v where jsonb_typeof(q.f -> 'faction') = 'string' union select q.f ->> 'name' where jsonb_typeof(q.f -> 'name') = 'string'
-             union select q.f ->> 'id' where jsonb_typeof(q.f -> 'id') = 'string') w
+    lateral (select q.f ->> 'faction' as v where jsonb_typeof(q.f -> 'faction') = 'string' union select q.f ->> 'name' where jsonb_typeof(q.f -> 'name') = 'string') w
     where jsonb_typeof(q.f) = 'object' and v <> ''
       and not (public._gallery_veil_str(q.f -> 'faction') = any(names) or public._gallery_veil_str(q.f -> 'name') = any(names)));
-  if cardinality(wn) > 0 then
+  wn_ids := array(select distinct v from (select jsonb_array_elements(case when jsonb_typeof(p #> '{powerStructure,factions}') = 'array' then p #> '{powerStructure,factions}' else '[]' end) f
+                                          union all select jsonb_array_elements(case when jsonb_typeof(p -> 'factions') = 'array' then p -> 'factions' else '[]' end)) q,
+    lateral (select case jsonb_typeof(q.f -> 'id') when 'string' then q.f ->> 'id' when 'number' then (q.f -> 'id')::text end as v) w
+    where jsonb_typeof(q.f) = 'object' and v is not null and v <> ''
+      and not (public._gallery_veil_str(q.f -> 'faction') = any(names) or public._gallery_veil_str(q.f -> 'name') = any(names)));
+  srch := case when cardinality(wn) > 0 then public._gallery_veil_name_search(wn, names) end;
+  if srch is not null or cardinality(wn_ids) > 0 then
+    hits := case when srch is null then '{}'::jsonb
+                 else public._gallery_veil_name_hits(jsonb_build_array(s #> '{powerStructure,conflicts}', s -> 'conflicts', s #> '{history,currentTensions}',
+                                                                       s #> '{powerStructure,factions}', s -> 'factions', s -> 'npcs', s -> 'simulationTrace'), srch) end;
     foreach sd in array array['powerStructure', 'top'] loop
       pth := case when sd = 'top' then array['conflicts'] else array['powerStructure', 'conflicts'] end;
       if jsonb_typeof(s #> pth) = 'array' then
         s := jsonb_set(s, pth, coalesce((select jsonb_agg(e order by o) from jsonb_array_elements(s #> pth) with ordinality x(e, o)
           where not (jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'parties') = 'array' and exists (select 1 from jsonb_array_elements(e -> 'parties') pn
-            where (jsonb_typeof(pn) = 'string' and (pn #>> '{}') = any(wn))
-               or (jsonb_typeof(pn) = 'object' and (public._gallery_veil_str(pn -> 'faction') = any(wn) or public._gallery_veil_str(pn -> 'name') = any(wn) or public._gallery_veil_str(pn -> 'id') = any(wn)))))), '[]'));
+            where public._gallery_veil_power_named(pn, wn_ids, hits)
+               or (jsonb_typeof(pn) = 'object' and (public._gallery_veil_power_named(pn -> 'faction', wn_ids, hits) or public._gallery_veil_power_named(pn -> 'name', wn_ids, hits)
+                                                    or public._gallery_veil_power_named(pn -> 'id', wn_ids, hits)))))), '[]'));
       end if;
     end loop;
     if jsonb_typeof(s #> '{history,currentTensions}') = 'array' then
       s := jsonb_set(s, '{history,currentTensions}', coalesce((select jsonb_agg(e order by o) from jsonb_array_elements(s #> '{history,currentTensions}') with ordinality x(e, o)
         where not (jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'factions') = 'array'
-                   and exists (select 1 from jsonb_array_elements(e -> 'factions') fn where jsonb_typeof(fn) = 'string' and (fn #>> '{}') = any(wn)))), '[]'));
+                   and exists (select 1 from jsonb_array_elements(e -> 'factions') fn where jsonb_typeof(fn) = 'string' and public._gallery_veil_power_named(fn, wn_ids, hits)))), '[]'));
     end if;
     foreach sd in array array['powerStructure', 'top'] loop
       pth := case when sd = 'top' then array['factions'] else array['powerStructure', 'factions'] end;
       if jsonb_typeof(s #> pth) = 'array' then
-        s := jsonb_set(s, pth, (select coalesce(jsonb_agg(case when jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'contestsNiche') = 'string' and (e ->> 'contestsNiche') = any(wn)
+        s := jsonb_set(s, pth, (select coalesce(jsonb_agg(case when jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'contestsNiche') = 'string'
+                                                                   and public._gallery_veil_power_named(e -> 'contestsNiche', wn_ids, hits)
                                                               then e - 'contestsNiche' else e end order by o), '[]')
                                   from jsonb_array_elements(s #> pth) with ordinality x(e, o)));
       end if;
@@ -2310,17 +2348,28 @@ begin
     if jsonb_typeof(s -> 'npcs') = 'array' then
       s := jsonb_set(s, '{npcs}', (select coalesce(jsonb_agg(case when jsonb_typeof(n) <> 'object' then n else
           (n - (select coalesce(array_agg(k), '{}') from unnest(array['faction', 'factionAffiliation', 'affiliation', 'factionId']) k
-                 where jsonb_typeof(n -> k) = 'string' and (n ->> k) = any(wn))
+                 where jsonb_typeof(n -> k) = 'string' and public._gallery_veil_power_named(n -> k, wn_ids, hits))
              - (case when jsonb_typeof(n -> 'goal') = 'object' and (
-                   public._gallery_veil_str(n #> '{goal,intent,short,target,id}') = any(wn) or public._gallery_veil_str(n #> '{goal,intent,long,target,id}') = any(wn)
-                   or exists (select 1 from unnest(wn) w where position(public._gallery_veil_case_fold(w) in public._gallery_veil_case_fold(public._gallery_veil_str(n #> '{goal,short}'))) > 0
-                                                         or position(public._gallery_veil_case_fold(w) in public._gallery_veil_case_fold(public._gallery_veil_str(n #> '{goal,long}'))) > 0))
+                   public._gallery_veil_power_named(n #> '{goal,intent,short,target,id}', wn_ids, hits) or public._gallery_veil_power_named(n #> '{goal,intent,long,target,id}', wn_ids, hits)
+                   or public._gallery_veil_name_hit(public._gallery_veil_str(n #> '{goal,short}'), hits, null, null)
+                   or public._gallery_veil_name_hit(public._gallery_veil_str(n #> '{goal,long}'), hits, null, null))
                 then array['goal'] else '{}'::text[] end))
           || case when jsonb_typeof(n -> 'memberships') = 'array' then jsonb_build_object('memberships', (select coalesce(jsonb_agg(m order by mo), '[]')
                from jsonb_array_elements(n -> 'memberships') with ordinality y(m, mo)
-              where not (jsonb_typeof(m) = 'object' and (public._gallery_veil_str(m -> 'power') = any(wn) or public._gallery_veil_str(m -> 'faction') = any(wn)
-                                                          or public._gallery_veil_str(m -> 'name') = any(wn) or public._gallery_veil_str(m -> 'id') = any(wn))))) else '{}'::jsonb end
+              where not (jsonb_typeof(m) = 'object' and (public._gallery_veil_power_named(m -> 'power', wn_ids, hits) or public._gallery_veil_power_named(m -> 'faction', wn_ids, hits)
+                                                          or public._gallery_veil_power_named(m -> 'name', wn_ids, hits) or public._gallery_veil_power_named(m -> 'id', wn_ids, hits))))) else '{}'::jsonb end
         end order by o), '[]') from jsonb_array_elements(s -> 'npcs') with ordinality x(n, o)));
+    end if;
+    -- R3-CURE-2 (found by the fold: "faction.thieves_guild" under Reveal DM): a simulation-trace entry a top-level string of
+    -- which names a withheld power leaves whole; the trace renumbered dense after (VR21: the apply's own `ts` rule)
+    if jsonb_typeof(s -> 'simulationTrace') = 'array' then
+      nt := jsonb_array_length(s -> 'simulationTrace');
+      s := jsonb_set(s, '{simulationTrace}', coalesce((select jsonb_agg(e order by o) from jsonb_array_elements(s -> 'simulationTrace') with ordinality x(e, o)
+        where not (jsonb_typeof(e) = 'object' and exists (select 1 from jsonb_each(e) kv where public._gallery_veil_power_named(kv.value, wn_ids, hits) and jsonb_typeof(kv.value) = 'string'))), '[]'));
+      if jsonb_array_length(s -> 'simulationTrace') < nt then
+        s := jsonb_set(s, '{simulationTrace}', (select coalesce(jsonb_agg(case when jsonb_typeof(e) = 'object' and e ? 'ts' then jsonb_set(e, '{ts}', to_jsonb(o - 1)) else e end order by o), '[]')
+                                                 from jsonb_array_elements(s -> 'simulationTrace') with ordinality x(e, o)));
+      end if;
     end if;
   end if;
 
@@ -2340,6 +2389,27 @@ begin
   beneath := exists (select 1 from jsonb_array_elements(case when jsonb_typeof(s -> 'institutions') = 'array' then s -> 'institutions' else '[]' end) e
                       where jsonb_typeof(e) = 'object' and public._gallery_veil_str(e -> 'name') ~* 'smuggling (network|operation)|underground (network|city)');
   es := s -> 'economicState';
+
+  -- R3-CURE-2 (unit 2, the chair's ruling 2: EVERY SERVED FIELD THAT FEEDS A DERIVED KEY IS RE-DERIVED OVER THE HOUSES THE
+  -- READ SERVES, OR WITHHELD): (a) safety.criminalInstitutions, the operations list the Defense key reads
+  -- (criminalStructureKey.js, `listed`): re-derived over the SERVED houses by the engine's own label table (`crimlabels`,
+  -- safetyProfile.js's CRIMINAL_INST_LABELS), an entry kept, in order, only as many times as served houses carry its label
+  -- (the hidden "Multiple criminal factions" wrote "Rival Gangs", which holds no house's name); (b) a covert criminal service
+  -- (`institution` '(covert)', the key's covert rung), drawn from the criminal climate the houses moved
+  -- (servicesGenerator.js), which no served field re-derives: withheld
+  if jsonb_typeof(s #> '{economicState,safetyProfile,criminalInstitutions}') = 'array' then
+    s := jsonb_set(s, '{economicState,safetyProfile,criminalInstitutions}', coalesce((select jsonb_agg(e order by o) from (
+        select e, o, row_number() over (partition by e order by o) as k
+          from jsonb_array_elements(s #> '{economicState,safetyProfile,criminalInstitutions}') with ordinality x(e, o)) z
+      where jsonb_typeof(e) = 'string'
+        and k <= (select count(*) from jsonb_array_elements(case when jsonb_typeof(s -> 'institutions') = 'array' then s -> 'institutions' else '[]' end) h
+                   where jsonb_typeof(h) = 'object'
+                     and crimlabels ->> translate(public._gallery_veil_str(h -> 'name'), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = (e #>> '{}'))), '[]'));
+  end if;
+  if jsonb_typeof(s #> '{availableServices,criminal}') = 'array' then
+    s := jsonb_set(s, '{availableServices,criminal}', coalesce((select jsonb_agg(e order by o) from jsonb_array_elements(s #> '{availableServices,criminal}') with ordinality x(e, o)
+      where not (jsonb_typeof(e) = 'object' and e -> 'institution' = '"(covert)"'::jsonb)), '[]'));
+  end if;
 
   -- registry: economy.complexity ((a): prosperity.js :: deriveEconomicComplexity over the SERVED rows: the tier, the income
   -- rows' count and shares, the exports' count, a served house whose name holds market, trading, merchant or guild, the
@@ -2462,6 +2532,8 @@ end $$;
 
 -- VR27 (as amended): called only inside the definer reads (by _gallery_veil), revoked by name
 revoke execute on function public._gallery_veil_roster_choices(jsonb, jsonb) from public, anon, authenticated;
+-- R3-CURE-2: and its helper, called only by it
+revoke execute on function public._gallery_veil_power_named(jsonb, text[], jsonb) from public, anon, authenticated;
 
 -- [212: RESTATED (211's statement, with the cure)] public._gallery_veil
 -- VEIL-21 (R2): 211's statement, and _gallery_veil_withhold_always run on every body it returns: last on the veiled body,

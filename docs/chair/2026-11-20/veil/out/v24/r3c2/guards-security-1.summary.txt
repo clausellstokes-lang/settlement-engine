@@ -1,0 +1,6 @@
+     × R3-CURE-2 (the chair's ruling 3): THE GOAL RE-STATEMENT'S TOOTH: goals aimed at a SHOWN power are still compared, and served, byte for byte; the goals that left named a withheld power 8ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+ FAIL  tests/security/galleryServerVeil.pglite.test.js > the server-side share veil (211) — execution against the real SQL and the real client read > R3-CURE-2 (the chair's ruling 3): THE GOAL RE-STATEMENT'S TOOTH: goals aimed at a SHOWN power are still compared, and served, byte for byte; the goals that left named a withheld power
+AssertionError: expected 0 to be greater than 0
+ Test Files  1 failed | 3 passed (4)
+      Tests  1 failed | 80 passed (81)

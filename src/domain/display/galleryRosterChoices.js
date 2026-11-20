@@ -11,7 +11,7 @@
  * ceiling; the houses are read there (gallerySecondHomes.js :: rosterHouses, a name lookup). Pure in kind: works in place
  * on the veil's own copy.
  */
-import { caseFold, rosterHouses } from './gallerySecondHomes.js';
+import { buildNameSearch, caseFold, renumberTrace, rosterHouses } from './gallerySecondHomes.js';
 
 /** @typedef {Record<string, unknown>} Rec */
 
@@ -75,6 +75,14 @@ export const RIVAL_POWER_DESCS = Object.freeze([
   'A handful of rich merchant houses monopolise power here; a political post is, in practice, something one purchases.',
   'A handful of rich merchant houses hold the seat of power here; a political post is, in practice, something one purchases.',
 ]);
+/** R3-CURE-2 (unit 2 (a)): the operations list's label table, safetyProfile.js's CRIMINAL_INST_LABELS (a house by its
+ * native name, case-folded, to the label the list carries; tests/lint/rosterChoicePools.walker.test.js holds it equal). */
+export const CRIMINAL_INST_LABELS = Object.freeze(/** @type {Record<string, string>} */ ({ "thieves' guild chapter": "Thieves' Guild Chapter",
+  "thieves' guild (powerful)": "Thieves' Guild (Powerful)", "assassins' guild": "Assassins' Guild", 'multiple criminal factions': 'Rival Gangs',
+  'black market': 'Black Market', 'black market bazaar': 'Black Market Bazaar', 'smuggling operation': 'Smuggling Operation',
+  'smuggling network': 'Smuggling Network', 'street gang': 'Street Gang', 'front businesses': 'Front Businesses', 'underground city': 'Underground City',
+  'gambling den': 'Gambling Den', 'gambling halls': 'Gambling Halls', 'gambling district': 'Gambling District', 'red light district': 'Red Light District' }));
+const COVERT = '(covert)';
 const ROSTER_FLAGS = Object.freeze(['hasCriminalInst', 'hasSmuggling', 'hasThievesGuild', 'hasGangInfra', 'hasMarket']);
 const RELIGIOUS_HOUSE = /church|cathedral|temple|monaster|friary|shrine|abbey|chapel/i;
 const ACCESS_TO = /^access to/i;
@@ -133,7 +141,8 @@ export function applyRosterChoices(s, pub, idOf) {
   // (VR31: a power the projection itself withheld, a hidden one off a Reveal-DM read, leaves the shares short of 100)
   // (a share set: every served power carries a number; an old record whose powers carry none has none to re-derive)
   const shares = n1 > 0 && objectsOf(ps?.factions).every(f => typeof f.power === 'number');
-  const withheld = n1 < n0 || (shares && objectsOf(ps?.factions).reduce((a, f) => a + Number(f.power), 0) !== 100);
+  // (R3-CURE-2, unit 4 (ii): the sum compared EXACTLY, as 212's numeric: each share by its decimal spelling, never a double sum)
+  const withheld = n1 < n0 || (shares && !sumIsHundred(objectsOf(ps?.factions).map(f => /** @type {number} */ (f.power))));
   if (ps && withheld && shares && Array.isArray(ps.factions)) ps.factions = largestRemainder(/** @type {unknown[]} */ (ps.factions));
   // registry: power.relation.entry
   // registry: power.relation.direction (VR37 (b): the word goes with its relation)
@@ -144,51 +153,9 @@ export function applyRosterChoices(s, pub, idOf) {
   }
   if (!whole) return;
 
-  // R3-CURE (unit 2; the chair's ruling of 07:39: "LEAVES WHOLE" MEANS EVERY COPY): the withheld powers' tokens (the name and
-  // id of every power of `pub`'s two lists that neither served list names) leave every STRUCTURED copy: a conflict between
-  // powers (both lists) and a tension naming one, whole; a power's contestsNiche naming one; a person's membership of one, an
-  // affiliation key naming one, and the goal that targets or names one. Prose over the powers is R5's (power.desc).
-  const servedNames = new Set([...objectsOf(ps?.factions), ...objectsOf(s.factions)].flatMap(powerNamesOf));
-  const wn = new Set([...objectsOf(recAt(pub, 'powerStructure')?.factions), ...objectsOf(pub.factions)]
-    .filter(f => ![str(f.faction), str(f.name)].some(n => servedNames.has(n)))
-    .flatMap(f => [f.faction, f.name, f.id].filter(v => typeof v === 'string' && v !== '')));
-  if (wn.size > 0) {
-    const names = (/** @type {Rec} */ x) => [x.faction, x.name, x.id].some(v => typeof v === 'string' && wn.has(v));
-    for (const holder of [ps, s]) {
-      if (holder && Array.isArray(holder.conflicts)) {
-        holder.conflicts = holder.conflicts.filter(c => !(isRec(c) && Array.isArray(c.parties)
-          && c.parties.some(pn => (typeof pn === 'string' && wn.has(pn)) || (isRec(pn) && names(pn)))));
-      }
-    }
-    const hist0 = recAt(s, 'history');
-    if (hist0 && Array.isArray(hist0.currentTensions)) {
-      hist0.currentTensions = hist0.currentTensions.filter(t => !(isRec(t) && Array.isArray(t.factions) && t.factions.some(x => typeof x === 'string' && wn.has(x))));
-    }
-    for (const holder of [ps, s]) {
-      if (holder && Array.isArray(holder.factions)) {
-        holder.factions = holder.factions.map(f => (isRec(f) && typeof f.contestsNiche === 'string' && wn.has(f.contestsNiche) ? (({ contestsNiche: _c, ...rest }) => rest)(f) : f));
-      }
-    }
-    if (Array.isArray(s.npcs)) {
-      const folded = [...wn].map(w => caseFold(str(w)));
-      s.npcs = s.npcs.map(n => {
-        if (!isRec(n)) return n;
-        const out = { ...n };
-        for (const k of NPC_AFFILIATION_KEYS) if (typeof out[k] === 'string' && wn.has(/** @type {string} */ (out[k]))) delete out[k];
-        const g = out.goal;
-        if (isRec(g)) {
-          const intent = recAt(g, 'intent') || {};
-          const tid = (/** @type {string} */ k) => str(recAt(recAt(recAt(intent, k) || {}, 'target') || {}, 'id'));
-          const said = [caseFold(str(g.short)), caseFold(str(g.long))];
-          if (wn.has(tid('short')) || wn.has(tid('long')) || folded.some(w => said.some(t => t.includes(w)))) delete out.goal;
-        }
-        if (Array.isArray(out.memberships)) {
-          out.memberships = out.memberships.filter(m => !(isRec(m) && [m.power, m.faction, m.name, m.id].some(v => typeof v === 'string' && wn.has(v))));
-        }
-        return out;
-      });
-    }
-  }
+  // R3-CURE (unit 2; the chair's ruling of 07:39: "LEAVES WHOLE" MEANS EVERY COPY): the withheld powers (every power of
+  // `pub`'s two lists that neither served list names) leave every STRUCTURED copy (withholdPowerCopies)
+  withholdPowerCopies(s, pub, ps);
 
   const instOf = (/** @type {Rec} */ d) => recAt(recAt(recAt(recAt(d, 'economicState') || {}, 'safetyProfile') || {}, 'compound') || {}, 'inst')
     || recAt(recAt(recAt(d, 'economicState') || {}, 'compound') || {}, 'inst') || {};
@@ -201,6 +168,30 @@ export function applyRosterChoices(s, pub, idOf) {
     && !houses.some(h => RELIGIOUS_HOUSE.test(str(h.name)) && !ACCESS_TO.test(str(h.name)));
   const beneath = houses.some(h => BENEATH_THE_WALLS.test(str(h.name)));
   const es = recAt(s, 'economicState');
+
+  // R3-CURE-2 (unit 2, the chair's ruling 2: EVERY SERVED FIELD THAT FEEDS A DERIVED KEY IS RE-DERIVED OVER THE HOUSES THE
+  // READ SERVES, OR WITHHELD): (a) safety.criminalInstitutions, the operations list the Defense key reads
+  // (criminalStructureKey.js, `listed`): re-derived over the SERVED houses by the engine's own label table, an entry kept,
+  // in order, only as many times as served houses carry its label (the hidden "Multiple criminal factions" wrote
+  // "Rival Gangs", which holds no house's name); (b) a covert criminal service (`institution` '(covert)', the key's
+  // covert rung, covertCrimeHeld), drawn from the criminal climate the houses moved (servicesGenerator.js), which no served
+  // field re-derives: withheld
+  const spOps = es0(s);
+  if (spOps && Array.isArray(spOps.criminalInstitutions)) {
+    /** @type {Map<string, number>} */
+    const left = new Map();
+    for (const h of houses) {
+      const lbl = CRIMINAL_INST_LABELS[asciiLowerOf(h.name)];
+      if (lbl !== undefined) left.set(lbl, (left.get(lbl) || 0) + 1);
+    }
+    spOps.criminalInstitutions = spOps.criminalInstitutions.filter(e => {
+      const k = typeof e === 'string' ? left.get(e) || 0 : 0;
+      if (k > 0) left.set(/** @type {string} */ (e), k - 1);
+      return k > 0;
+    });
+  }
+  const svc = recAt(s, 'availableServices');
+  if (svc && Array.isArray(svc.criminal)) svc.criminal = svc.criminal.filter(x => !(isRec(x) && x.institution === COVERT));
 
   // registry: economy.complexity ((a): prosperity.js :: deriveEconomicComplexity over the served rows; unreadable: withheld)
   if (es && 'economicComplexity' in es) {
@@ -272,6 +263,94 @@ export function applyRosterChoices(s, pub, idOf) {
   // registry: prose.criminal ((b): the criminal desk, by the house's eye)
   const blocks = recAt(recAt(s, 'publicProse') || {}, 'blocks');
   if (blocks) delete blocks['defense:criminal'];
+}
+
+/** @param {Rec} d @returns {Rec | null} the served safety profile */
+function es0(d) {
+  const es = recAt(d, 'economicState');
+  return es ? recAt(es, 'safetyProfile') : null;
+}
+
+/**
+ * R3-CURE (unit 2) and R3-CURE-2 (units 1, 4 (i); the chair's ruling 28 of 08:22 and 09:04: THE NAME SEARCH), in place:
+ * THE WITHHELD POWERS (every power of `pub`'s two lists that neither served list names) leave every STRUCTURED copy: a
+ * conflict between powers (both lists) and a tension naming one, whole; a power's contestsNiche naming one; a person's
+ * membership of one, an affiliation key naming one, the goal that targets or names one, and (R3-CURE-2, found by the fold:
+ * "faction.thieves_guild" under Reveal DM) a simulation-trace entry a top-level string of which names one, whole, the trace
+ * renumbered dense after (VR21: renumberTrace, 212's own rule). A NAME is searched FOLDED, as
+ * itself AND as its BARE FORM (without its bracketed qualifier), at the name boundary: the lane's own search
+ * (gallerySecondHomes.js :: buildNameSearch; the served powers' names its open names); an ID as a STRING (a number id by its
+ * String()), the whole value. Prose over the powers is R5's (power.desc). SQL twin: 212 :: _gallery_veil_roster_choices.
+ * @param {Rec} s @param {Rec} pub @param {Rec | null} ps
+ */
+function withholdPowerCopies(s, pub, ps) {
+  const servedNames = new Set([...objectsOf(ps?.factions), ...objectsOf(s.factions)].flatMap(powerNamesOf));
+  const out = [...objectsOf(recAt(pub, 'powerStructure')?.factions), ...objectsOf(pub.factions)]
+    .filter(f => ![str(f.faction), str(f.name)].some(n => servedNames.has(n)));
+  const wIds = new Set(out.map(f => idText(f.id)).filter(v => v !== ''));
+  const search = buildNameSearch(out.flatMap(powerNamesOf).filter(v => v !== ''), servedNames);
+  if (!search && wIds.size === 0) return;
+  /** @param {unknown} v @returns {boolean} the value names a withheld power: an id by its String(), a name by the fold */
+  const named = (v) => (typeof v === 'number' && wIds.has(idText(v))) || (typeof v === 'string' && v !== '' && (wIds.has(v) || (!!search && search.hit(v))));
+  const recNames = (/** @type {Rec} */ x) => [x.faction, x.name, x.id].some(named);
+  for (const holder of [ps, s]) {
+    if (holder && Array.isArray(holder.conflicts)) {
+      holder.conflicts = holder.conflicts.filter(c => !(isRec(c) && Array.isArray(c.parties) && c.parties.some(pn => named(pn) || (isRec(pn) && recNames(pn)))));
+    }
+  }
+  const hist0 = recAt(s, 'history');
+  if (hist0 && Array.isArray(hist0.currentTensions)) {
+    hist0.currentTensions = hist0.currentTensions.filter(t => !(isRec(t) && Array.isArray(t.factions) && t.factions.some(x => typeof x === 'string' && named(x))));
+  }
+  for (const holder of [ps, s]) {
+    if (holder && Array.isArray(holder.factions)) {
+      holder.factions = holder.factions.map(f => (isRec(f) && typeof f.contestsNiche === 'string' && named(f.contestsNiche) ? (({ contestsNiche: _c, ...rest }) => rest)(f) : f));
+    }
+  }
+  if (Array.isArray(s.npcs)) {
+    s.npcs = s.npcs.map(n => {
+      if (!isRec(n)) return n;
+      const o = { ...n };
+      for (const k of NPC_AFFILIATION_KEYS) if (typeof o[k] === 'string' && named(o[k])) delete o[k];
+      const g = o.goal;
+      if (isRec(g)) {
+        const intent = recAt(g, 'intent') || {};
+        const tid = (/** @type {string} */ k) => (recAt(recAt(intent, k) || {}, 'target') || {}).id;
+        if (named(tid('short')) || named(tid('long')) || (!!search && (search.hit(str(g.short)) || search.hit(str(g.long))))) delete o.goal;
+      }
+      if (Array.isArray(o.memberships)) o.memberships = o.memberships.filter(m => !(isRec(m) && [m.power, m.faction, m.name, m.id].some(named)));
+      return o;
+    });
+  }
+  if (Array.isArray(s.simulationTrace)) {
+    const nt = s.simulationTrace.length;
+    s.simulationTrace = s.simulationTrace.filter(e => !(isRec(e) && Object.values(e).some(v => typeof v === 'string' && named(v))));
+    if (s.simulationTrace.length < nt) renumberTrace(s);
+  }
+}
+
+/** An id as a string: a string as itself, a finite number by its String() (212: the JSON number's text). @param {unknown} v @returns {string} */
+function idText(v) {
+  return typeof v === 'string' ? v : typeof v === 'number' && Number.isFinite(v) ? String(v) : '';
+}
+
+/** Whether the shares' EXACT decimal sum is 100 (212: sum(power::numeric) = 100): each share by its decimal spelling
+ * (String(), the spelling JSON writes and 212's numeric reads), summed as integers at one scale. @param {number[]} vals */
+function sumIsHundred(vals) {
+  /** @type {Array<[bigint, number]>} */
+  const parts = [];
+  for (const v of vals) {
+    const m = /^(-?)(\d+)(?:\.(\d+))?(?:e([+-]?\d+))?$/i.exec(String(v));
+    if (!m) return false;
+    const frac = m[3] || '';
+    parts.push([BigInt(`${m[1]}${m[2]}${frac}`), Number(m[4] || 0) - frac.length]);
+  }
+  const e = Math.min(0, ...parts.map(([, x]) => x));
+  /** @param {number} k @returns {bigint} ten to the k, by repeated multiplication (k from 0 to a few hundred) */
+  const p10 = (k) => { let r = 1n; for (let i = 0; i < k; i += 1) r *= 10n; return r; };
+  let sum = 0n;
+  for (const [d, x] of parts) sum += d * p10(x - e);
+  return sum === 100n * p10(-e);
 }
 
 /** The list with each power's share re-derived to 100 by LARGEST REMAINDER from `power` (VR11/VR31; a sum of 0 shares

@@ -1,0 +1,32 @@
+
+ ❯ tests/domain/display/publicSafe.test.js:719:56
+    717|     expect(sp.safetyLabel).toBe('Strained');
+    718|     expect('criminalCaptureState' in out.powerStructure).toBe(false);
+    719|     expect(out.powerStructure.factionRelationships[0]).toEqual({ pair:…
+       |                                                        ^
+    720|     expect(isVeiled(out, 'block:defense.criminalStructure')).toBe(true…
+    721|     expect(isVeiled(out, 'block:power.criminalUnderside')).toBe(true);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/domain/display/publicSafe.test.js > galleryVeil — the veil only removes (X-21 (d), W2-VEIL-A U4) > with the door closed, flipping every eye to shown reveals no DM-only field
+TypeError: Cannot read properties of undefined (reading 'description')
+ ❯ tests/domain/display/publicSafe.test.js:793:43
+    791|       for (const k of ['secret', 'goal', 'plotHooks', 'relationships',…
+    792|     }
+    793|     expect(out.history.currentTensions[0].description).toBe('A surge i…
+       |                                           ^
+    794|     expect('plotHooks' in out.history.currentTensions[0]).toBe(false);
+    795|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  4 failed | 61 passed (65)
+   Start at  10:14:07
+   Duration  10.27s (transform 2.88s, setup 49ms, import 2.12s, tests 7.89s, environment 0ms)
+
+[gate-tail] end:  10:14:18 up  1:21,  0 user,  load average: 1.11, 1.47, 1.78
+[gate-tail] full log: /tmp/gate-tail.26206.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

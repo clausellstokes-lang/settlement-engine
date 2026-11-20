@@ -1,0 +1,62 @@
++   "desc": "The trades.",
++   "faction": "Merchant Guilds",
++   "power": 100,
++   "powerLabel": "Strong",
+  }
+
+ ❯ tests/domain/display/publicSafe.test.js:698:18
+    696|     const f = project(bailthwaite()).powerStructure.factions;
+    697|     // R2 (VEIL-21; VR16, VR14 (iii)): `rawPower` is drawn by no non-o…
+    698|     expect(f[0]).toEqual({ faction: "Thieves' Guild", power: 5, powerL…
+       |                  ^
+    699|     expect(f[1].desc).toBe('The trades.');
+    700|     expect(rowsOf(temurpolis(), 'criminal-faction')).toEqual([]);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯
+
+ FAIL  tests/domain/display/publicSafe.test.js > galleryVeil — the one default set (X-21c / X-21d, W2-VEIL-A U2) > Defense's criminal architecture and Power's capture reading: their data goes and the groupings are listed
+AssertionError: expected undefined to deeply equal { …(2) }
+
+- Expected:
+{
+  "pair": [
+    "Thieves' Guild",
+    "Merchant Guilds",
+  ],
+  "type": "rivalry",
+}
+
++ Received:
+undefined
+
+ ❯ tests/domain/display/publicSafe.test.js:719:56
+    717|     expect(sp.safetyLabel).toBe('Strained');
+    718|     expect('criminalCaptureState' in out.powerStructure).toBe(false);
+    719|     expect(out.powerStructure.factionRelationships[0]).toEqual({ pair:…
+       |                                                        ^
+    720|     expect(isVeiled(out, 'block:defense.criminalStructure')).toBe(true…
+    721|     expect(isVeiled(out, 'block:power.criminalUnderside')).toBe(true);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯
+
+ FAIL  tests/domain/display/publicSafe.test.js > galleryVeil — the veil only removes (X-21 (d), W2-VEIL-A U4) > with the door closed, flipping every eye to shown reveals no DM-only field
+TypeError: Cannot read properties of undefined (reading 'description')
+ ❯ tests/domain/display/publicSafe.test.js:793:43
+    791|       for (const k of ['secret', 'goal', 'plotHooks', 'relationships',…
+    792|     }
+    793|     expect(out.history.currentTensions[0].description).toBe('A surge i…
+       |                                           ^
+    794|     expect('plotHooks' in out.history.currentTensions[0]).toBe(false);
+    795|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯
+
+
+ Test Files  3 failed | 13 passed (16)
+      Tests  6 failed | 254 passed (260)
+   Start at  10:07:24
+   Duration  187.94s (transform 9.20s, setup 266ms, import 13.03s, tests 172.34s, environment 499ms)
+
+[gate-tail] end:  10:10:32 up  1:17,  0 user,  load average: 1.14, 1.64, 1.90
+[gate-tail] full log: /tmp/gate-tail.25639.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

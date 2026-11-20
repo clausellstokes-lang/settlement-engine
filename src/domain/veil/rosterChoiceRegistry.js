@@ -326,7 +326,7 @@ const ROWS_SPEC = [
   row({ id: 'safety.plotHooks', path: '^economicState\\.safetyProfile\\.plotHooks\\b', re: true, writer: W.safety, house: P.flags, rule: 'withhold', when: 'house-hidden', drawn: 'yes', server: H.sChoice, twin: H.tChoice, built: true,
     scope: 'VR4 i-7: a hook a hidden house chose, withheld by the house\'s eye; today tab:plot_hooks' }),
   row({ id: 'safety.criminalInstitutions', path: '^economicState\\.safetyProfile\\.criminalInstitutions\\b', re: true, writer: W.safety, house: P.criminal, rule: 'withhold', when: 'house-hidden', drawn: 'yes', server: H.sApply, twin: H.tHomes,
-    scope: 'VR4 ii-2: built by 212 (16)/(19) by name; registered so the walker binds it' }),
+    scope: 'VR4 ii-2: built by 212 (16)/(19) by name; registered so the walker binds it. R3-CURE-2 (the chair\'s ruling 2, the seat\'s relay of 09:18: the whole list): where a house is hidden whole, every entry is RE-DERIVED over the served houses by the engine\'s label table (212 `crimlabels` and the twin CRIMINAL_INST_LABELS in R3\'s host, held equal to safetyProfile.js by tests/lint/rosterChoicePools.walker.test.js), kept only as many times as served houses carry its label: a hidden "Multiple criminal factions" wrote "Rival Gangs", which no by-name rule reads, and the Defense key read it (`listed`); VR29: the array stays' }),
 
   // ── history: the crime-wave entries are the house's; every other re-draw is the rng's (VR13)
   choiceWithhold({ id: 'history.tension.crimeWave', path: 'history.currentTensions[] (only in A)', writer: W.event, house: P.signal, scope: 'VR4 ii-7: the crime_wave tension withheld where the SERVED crime signal is false (no criminal seat, no served criminal house)' }),
@@ -580,7 +580,7 @@ export const CRIME_NAME_PATTERN = Object.freeze({ source: 'thie|smuggl|undergrou
 /** @typedef {{ rows?: string[], why?: string, rx?: number }} RegistrySite */
 
 const SAFETY_ROWS = ['safety.safetyDesc', 'safety.guardEffectivenessDesc', 'safety.safetyLabel', 'safety.safetyRatio', 'safety.economicDragDesc', 'safety.crimeTypes', 'safety.plotHooks', 'safety.criminalInstitutions'];
-const SERVICES_WHY = 'availableServices only: a hidden house\'s service rows leave with it (X-21e, _gallery_veil_apply; galleryVeil.js :: applyVeil); no differ path';
+const SERVICES_WHY = 'availableServices only: a hidden house\'s service rows leave with it (X-21e, _gallery_veil_apply; galleryVeil.js :: applyVeil); no differ path. R3-CURE-2 (the chair\'s ruling 2): where a house is hidden whole, a covert criminal service (institution \'(covert)\', drawn from the criminal climate the houses moved, the Defense key\'s covert rung) is WITHHELD in R3\'s host (212 _gallery_veil_roster_choices, twin applyRosterChoices): no served field re-derives it (town-indebted-0-16, town-wartime-0-19 served diffuse against a counterfactual null)';
 
 /** @type {Readonly<Record<string, RegistrySite>>} */
 export const REGISTRY_SITES = Object.freeze({

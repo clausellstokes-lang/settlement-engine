@@ -1,0 +1,37 @@
+  h=5 hit=10000 cold=0 nl=1 round 1 :: r3c2_x211 | r3c2_x211 | ok | houses listed 1 | rows back 10000 | rows with d 10000 | bytes 509025 | 7008 ms 
+  h=5 hit=10000 cold=0 nl=1 round 1 :: r3c2_base | r3c2_base | ok | houses listed 1 | rows back 10000 | rows with d 0 | bytes 40131 | 7850 ms 
+  h=5 hit=10000 cold=0 nl=1 round 1 :: r3c2_after | r3c2_after | ok | houses listed 1 | rows back 10000 | rows with d 0 | bytes 40131 | 7578 ms 
+  h=5 hit=10000 cold=0 nl=1 round 2 :: r3c2_x211 | r3c2_x211 | ok | houses listed 1 | rows back 10000 | rows with d 10000 | bytes 509025 | 6544 ms 
+  h=5 hit=10000 cold=0 nl=1 round 2 :: r3c2_base | r3c2_base | ok | houses listed 1 | rows back 10000 | rows with d 0 | bytes 40131 | 7818 ms 
+  h=5 hit=10000 cold=0 nl=1 round 2 :: r3c2_after | r3c2_after | ok | houses listed 1 | rows back 10000 | rows with d 0 | bytes 40131 | 7550 ms 
+  h=5 hit=10000 cold=0 nl=1 round 3 :: r3c2_x211 | r3c2_x211 | ok | houses listed 1 | rows back 10000 | rows with d 10000 | bytes 509025 | 6620 ms 
+  h=5 hit=10000 cold=0 nl=1 round 3 :: r3c2_base | r3c2_base | ok | houses listed 1 | rows back 10000 | rows with d 0 | bytes 40131 | 7541 ms 
+  h=5 hit=10000 cold=0 nl=1 round 3 :: r3c2_after | r3c2_after | ok | houses listed 1 | rows back 10000 | rows with d 0 | bytes 40131 | 7541 ms 
+  h=50 hit=500 cold=500 nl=1 round 1 :: r3c2_x211 | r3c2_x211 | ok | houses listed 1 | rows back 1000 | rows with d 1000 | bytes 40825 | 111 ms 
+  h=50 hit=500 cold=500 nl=1 round 1 :: r3c2_base | r3c2_base | ok | houses listed 1 | rows back 1000 | rows with d 500 | bytes 17523 | 214 ms 
+  h=50 hit=500 cold=500 nl=1 round 1 :: r3c2_after | r3c2_after | ok | houses listed 1 | rows back 1000 | rows with d 500 | bytes 17523 | 273 ms 
+  h=50 hit=500 cold=500 nl=1 round 2 :: r3c2_x211 | r3c2_x211 | ok | houses listed 1 | rows back 1000 | rows with d 1000 | bytes 40825 | 115 ms 
+  h=50 hit=500 cold=500 nl=1 round 2 :: r3c2_base | r3c2_base | ok | houses listed 1 | rows back 1000 | rows with d 500 | bytes 17523 | 221 ms 
+  h=50 hit=500 cold=500 nl=1 round 2 :: r3c2_after | r3c2_after | ok | houses listed 1 | rows back 1000 | rows with d 500 | bytes 17523 | 253 ms 
+  h=50 hit=500 cold=500 nl=1 round 3 :: r3c2_x211 | r3c2_x211 | ok | houses listed 1 | rows back 1000 | rows with d 1000 | bytes 40825 | 118 ms 
+  h=50 hit=500 cold=500 nl=1 round 3 :: r3c2_base | r3c2_base | ok | houses listed 1 | rows back 1000 | rows with d 500 | bytes 17523 | 217 ms 
+  h=50 hit=500 cold=500 nl=1 round 3 :: r3c2_after | r3c2_after | ok | houses listed 1 | rows back 1000 | rows with d 500 | bytes 17523 | 219 ms 
+  depth=10 houses=200 strings=5000 dm=false round 1 :: r3c2_x211 | r3c2_x211 | ok | houses listed 1 | exports back 5000 | 411 ms 
+  depth=10 houses=200 strings=5000 dm=false round 1 :: r3c2_base | r3c2_base | ok | houses listed 1 | exports back 5000 | 435 ms 
+  depth=10 houses=200 strings=5000 dm=false round 1 :: r3c2_after | r3c2_after | ok | houses listed 1 | exports back 5000 | 464 ms 
+  depth=10 houses=200 strings=5000 dm=false round 2 :: r3c2_x211 | r3c2_x211 | ok | houses listed 1 | exports back 5000 | 431 ms 
+  depth=10 houses=200 strings=5000 dm=false round 2 :: r3c2_base | r3c2_base | ok | houses listed 1 | exports back 5000 | 440 ms 
+  depth=10 houses=200 strings=5000 dm=false round 2 :: r3c2_after | r3c2_after | ok | houses listed 1 | exports back 5000 | 553 ms 
+  depth=10 houses=200 strings=5000 dm=false round 3 :: r3c2_x211 | r3c2_x211 | ok | houses listed 1 | exports back 5000 | 539 ms 
+  depth=10 houses=200 strings=5000 dm=false round 3 :: r3c2_base | r3c2_base | ok | houses listed 1 | exports back 5000 | 468 ms 
+  depth=10 houses=200 strings=5000 dm=false round 3 :: r3c2_after | r3c2_after | ok | houses listed 1 | exports back 5000 | 453 ms 
+  depth=10 houses=600 strings=10000 dm=false round 1 :: r3c2_x211 | r3c2_x211 | ok | houses listed 1 | exports back 10000 | 1608 ms 
+  depth=10 houses=600 strings=10000 dm=false round 1 :: r3c2_base | r3c2_base | ok | houses listed 1 | exports back 10000 | 1620 ms 
+  depth=10 houses=600 strings=10000 dm=false round 1 :: r3c2_after | r3c2_after | ok | houses listed 1 | exports back 10000 | 1587 ms 
+  depth=10 houses=600 strings=10000 dm=false round 2 :: r3c2_x211 | r3c2_x211 | ok | houses listed 1 | exports back 10000 | 1423 ms 
+  depth=10 houses=600 strings=10000 dm=false round 2 :: r3c2_base | r3c2_base | ok | houses listed 1 | exports back 10000 | 1562 ms 
+  depth=10 houses=600 strings=10000 dm=false round 2 :: r3c2_after | r3c2_after | ok | houses listed 1 | exports back 10000 | 1685 ms 
+  depth=10 houses=600 strings=10000 dm=false round 3 :: r3c2_x211 | r3c2_x211 | ok | houses listed 1 | exports back 10000 | 1608 ms 
+  depth=10 houses=600 strings=10000 dm=false round 3 :: r3c2_base | r3c2_base | ok | houses listed 1 | exports back 10000 | 1526 ms 
+  depth=10 houses=600 strings=10000 dm=false round 3 :: r3c2_after | r3c2_after | ok | houses listed 1 | exports back 10000 | 1486 ms 
+done
