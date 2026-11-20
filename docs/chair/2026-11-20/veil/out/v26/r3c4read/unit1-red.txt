@@ -1,0 +1,43 @@
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/security/galleryServerVeil.pglite.test.js > the server-side share veil (211) — execution against the real SQL and the real client read > server-veil-metropolis-7: nothing the page hides is sent; no page changes; 210 is red on the same rows
+AssertionError: default+dm/live gallery page serves a goal aimed at a withheld power: npcs[id=npc_multiple_garrisons].goal = {"intent":{"long":{"family":"POWER","key":"expand_influence","kind":"tense","tar
+default+dm/live gallery page serves a goal aimed at a withheld power: npcs[id=npc_workhouse].goal = {"intent":{"long":{"family":"RANK","key":"secure_office","kind":"climb","target"
+default+dm/live gallery page serves a goal aimed at a withheld power: npcs[id=npc_professional_city_watch].goal = {"intent":{"long":{"family":"POWER","key":"expand_influence","kind":"tense","tar
+default+dm/snapshot gallery page serves a goal aimed at a withheld power: npcs[id=npc_multiple_garrisons].goal = {"intent":{"long":{"family":"POWER","key":"expand_influence","kind":"tense","tar
+default+dm/snapshot gallery page serves a goal aimed at a withheld power: npcs[id=npc_workhouse].goal = {"intent":{"long":{"family":"RANK","key":"secure_office","kind":"climb","target"
+default+dm/snapshot gallery page serves a goal aimed at a withheld power: npcs[id=npc_professional_city_watch].goal = {"intent":{"long":{"family":"POWER","key":"expand_influence","kind":"tense","tar: expected [ …(6) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "default+dm/live gallery page serves a goal aimed at a withheld power: npcs[id=npc_multiple_garrisons].goal = {\"intent\":{\"long\":{\"family\":\"POWER\",\"key\":\"expand_influence\",\"kind\":\"tense\",\"tar",
++   "default+dm/live gallery page serves a goal aimed at a withheld power: npcs[id=npc_workhouse].goal = {\"intent\":{\"long\":{\"family\":\"RANK\",\"key\":\"secure_office\",\"kind\":\"climb\",\"target\"",
++   "default+dm/live gallery page serves a goal aimed at a withheld power: npcs[id=npc_professional_city_watch].goal = {\"intent\":{\"long\":{\"family\":\"POWER\",\"key\":\"expand_influence\",\"kind\":\"tense\",\"tar",
++   "default+dm/snapshot gallery page serves a goal aimed at a withheld power: npcs[id=npc_multiple_garrisons].goal = {\"intent\":{\"long\":{\"family\":\"POWER\",\"key\":\"expand_influence\",\"kind\":\"tense\",\"tar",
++   "default+dm/snapshot gallery page serves a goal aimed at a withheld power: npcs[id=npc_workhouse].goal = {\"intent\":{\"long\":{\"family\":\"RANK\",\"key\":\"secure_office\",\"kind\":\"climb\",\"target\"",
++   "default+dm/snapshot gallery page serves a goal aimed at a withheld power: npcs[id=npc_professional_city_watch].goal = {\"intent\":{\"long\":{\"family\":\"POWER\",\"key\":\"expand_influence\",\"kind\":\"tense\",\"tar",
++ ]
+
+ ❯ tests/security/galleryServerVeil.pglite.test.js:435:54
+    433|         }
+    434|       }
+    435|       expect(faults, faults.slice(0, 20).join('\n')).toEqual([]);
+       |                                                      ^
+    436|       expect(control.rows).toBeGreaterThan(0);
+    437|     }, TOWN_TIMEOUT_MS);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  3 failed | 36 passed (39)
+   Start at  12:33:50
+   Duration  1181.78s (transform 4.78s, setup 53ms, import 615ms, tests 1180.86s, environment 0ms)
+
+[gate-tail] end:  12:53:32 up 21 min,  0 user,  load average: 1.01, 1.37, 1.10
+[gate-tail] full log: /tmp/gate-tail.429.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+EXIT 1

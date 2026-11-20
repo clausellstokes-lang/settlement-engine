@@ -1,0 +1,6 @@
+// SCRATCH (uncommitted) — runs /home/user/wt/brok/brok_plant.mjs under vitest (jsx transforms)
+import { it, expect } from 'vitest';
+it('brok plant', async () => {
+  await import('../../brok_plant.mjs');
+  expect(true).toBe(true);
+}, 1_800_000);
