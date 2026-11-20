@@ -37,3 +37,18 @@ left. Deliverable one is complete and pushed (`EMERGENCY-2`, 2669d6c2d). What th
 * **Tools here:** `proof/chain.sh` and `proof/scaffold.sql` build any chain on a scratch PG16. `proof/harness.sh`
   calls every function as each role, and `proof/flows.sql` runs the product paths. Use these to prove 213 by the same
   before/after diff.
+
+## The chair's amended ruling (received 2026-11-20 02:25 UTC; message of 02:20 UTC)
+* 212 (the share veil's) now revokes only the helpers that 211 and 212 create themselves, plus `_gallery_public_tile_rows()`.
+  **The eight older gallery helpers belong to 213:** `_gallery_chronicle_entry`, `_gallery_chronicle_json`,
+  `_gallery_map_backdrop`, `_gallery_apply_member_overrides`, `_gallery_npc_key`, `_gallery_dm_full_json`,
+  `_gallery_sanitize_public_json` and `_gallery_world_snapshot_is_safe`.
+* `_gallery_world_snapshot_is_safe` is called as the VISITOR by the INVOKER trigger function
+  `_saved_maps_world_snapshot_guard` on saved_maps. It either stays executable, or the trigger's path is made definer.
+  This is for 213 to propose: `flows.sql`'s "MAP insert" step is the regression probe.
+  `_gallery_sanitize_public_json` is also reached through the invoker `_gallery_apply_member_overrides`. Check every
+  invoker caller in `CATALOGUE.md` before revoking.
+* 213 is cut on 001..210 and must also apply cleanly AFTER 211 and 212. Those two create and revoke their own
+  `_gallery_veil_*` / `_gallery_doors_*` helpers; the allowlist names them, and 213 does not touch them.
+* The walkers meet at the close by full signature. A function passes if neither visitor role can execute it, or if it
+  is on a written list naming the visitor context that needs it. VEIL-DOORS-2 is on lane/veil-doors-2-2026-11-20.
