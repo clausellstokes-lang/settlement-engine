@@ -3481,3 +3481,15 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   builder 5 at `-b5` 3e1eb04c4) and the ruling that the refusal is reworked as a post-pass (section 2). FORTUNE-2
   took its lane at 57a79cc2d; its question on the reason clause answered (section 2). SEAT-4 and GOALS-2 read in
   (their measures reproduce).
+- 12:13 UTC · FRAME-5 (about 260,000 with the third): U0 MERGED (1ca50da42; byte-identity 1,500 of 1,500 pages re-run at the
+  merged tip; the PDF and the Foundry export are built only from the DM's own surfaces) AND C1 MERGED (b632fe3bc:
+  the stored tail stood on 22 of 690 cast rows, all "brunt", now 0; calm 330 of 330 and golden 525 of 525
+  identical; two test titles re-pinned, unsigned); registers re-taken at 8991b83b2 (lighting 3,714 files; wiring
+  delta 0); P1b and CF12 building side by side; two production calls of the Tonight sheet's composer passed no
+  audience (`journalPages.js`, `coherence/crisisFactFindings.js`): a walker covers both. `prompts/FRAME-6.txt`
+  WRITTEN (lean), seated after this push. PAGE-2 (12:09): the generator's three faulty sides join the DISPLAY
+  table as rows (no stored side changes); the table is keyed by a side's own words over all 147 slot occurrences
+  (87 base forms; 71% of tensions print the unanchored form). PAGE-1 (about 140,000): the sides' brief committed
+  (373eac144); the thin pages' brief written (94d111a44), not dispatched: four of the eight daily-life slots can
+  print as they are, four need their pools mended first. VEIL-25 (about 330,000): R3's re-runs match the receipts;
+  five LOWER towns checked; the tell question re-stated (section 2).
