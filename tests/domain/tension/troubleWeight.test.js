@@ -64,14 +64,22 @@ const JOURNAL_TONIGHT = Object.freeze({
   'frame-calm-thorp-1': '195c36f6e30841a1',
 });
 
-/** A town in crisis of every tier: the sheet's digest at `7e0c77ae2`. */
+/**
+ * A town in crisis of every tier: the sheet's digest at `7e0c77ae2` WITH THE NAMES RULE ALONE (FRAME-2 · B5c). The crisis
+ * sheet carries the crisis hooks, and B5 (8594e509d) names their powers through `powerNameInProse` ("of the Household
+ * Council", "the Guard loses most"). These pins were measured in an archive of `7e0c77ae2` with only that change applied
+ * (`git diff 79db75eb2 8594e509d -- src/domain/crisis/crisisHooks.js`, applied to the archive), so a crisis sheet differs
+ * from the base by the names rule and nothing else. The same archive unpatched gives the old pins (05546993e0ac6ff1,
+ * b6150a0c2ee81edc, a5387ed63cd9cac4, 4243a02c390c9a6a, 385c00c79c91f40b, 4b26a1c208b3f083); the calm pins above hold
+ * against `7e0c77ae2` unpatched.
+ */
 const IN_CRISIS = Object.freeze({
-  'frame-calm-thorp-2': '05546993e0ac6ff1',
-  'frame-calm-hamlet-1': 'b6150a0c2ee81edc',
-  'frame-calm-village-1': 'a5387ed63cd9cac4',
-  'frame-calm-town-6': '4243a02c390c9a6a',
-  'frame-calm-city-24': '385c00c79c91f40b',
-  'frame-calm-metropolis-0': '4b26a1c208b3f083',
+  'frame-calm-thorp-2': 'aa729268a7bb3546',
+  'frame-calm-hamlet-1': 'd2becadf54b62251',
+  'frame-calm-village-1': 'a4eed51cd6861887',
+  'frame-calm-town-6': 'eae16131620269ec',
+  'frame-calm-city-24': '54ce2e41e160e9b6',
+  'frame-calm-metropolis-0': '7ba6125620f836e9',
 });
 
 /**
@@ -109,7 +117,7 @@ describe('a calm town without a trouble of weight keeps today\'s sheet, byte for
 });
 
 describe('a town in crisis keeps its crisis sheet, byte for byte', () => {
-  it(`${Object.keys(IN_CRISIS).length} towns in crisis, one a tier: the sheet digests as at 7e0c77ae2`, () => {
+  it(`${Object.keys(IN_CRISIS).length} towns in crisis, one a tier: the sheet digests as at 7e0c77ae2 with the names rule alone`, () => {
     const failures = collectSeedFailures(Object.keys(IN_CRISIS), (seed) => {
       const s = born(seed);
       const sheet = composeTonightSheet(s, OWNER);
@@ -117,7 +125,7 @@ describe('a town in crisis keeps its crisis sheet, byte for byte', () => {
       expect(digest(JSON.stringify(sheet)), `${seed} (the owner)`).toBe(IN_CRISIS[seed]);
       expect(digest(JSON.stringify(composeTonightSheet(s))), `${seed} (a stranger)`).toBe(IN_CRISIS[seed]);
     });
-    expectNoSeedFailures(failures, 'a town in crisis keeps the sheet of 7e0c77ae2');
+    expectNoSeedFailures(failures, 'a town in crisis keeps the sheet of 7e0c77ae2 with the names rule alone');
   }, 300000);
 });
 

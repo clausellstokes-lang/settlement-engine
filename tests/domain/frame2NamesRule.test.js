@@ -161,7 +161,10 @@ const shown = (list) => list.slice(0, 5).map((b) => `${b.seed} · ${b.where} · 
 
 describe('the names rule in FRAME-2\'s own files, over 120 born towns', () => {
   it('reads every file\'s output (the pool is not empty)', () => {
-    expect(read.tonightSheet).toBeGreaterThan(100);
+    // FRAME-2 · B5c: measured 97 at 8df635b61 (247 at 79db75eb2). The sheet is composed as the owner throughout; the fall
+    // is B2's weight (CF11): only a calm town with a trouble of weight is framed now, 10 of this pool's 60 calm towns
+    // (3 villages, 2 cities, 5 metropolises; all 60 before), so the sides' sentences fell from 180 to 30.
+    expect(read.tonightSheet).toBeGreaterThan(90);
     expect(read.crisisHooks).toBeGreaterThan(100);
     expect(read.troubleCast).toBeGreaterThan(300);
     expect(read.crisisCast).toBeGreaterThan(300);
