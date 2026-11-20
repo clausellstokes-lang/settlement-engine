@@ -125,12 +125,15 @@ const LOSES_BY_SYSTEM = Object.freeze({
   faction_stability: Object.freeze(['{power|its|their} own ranks start to quarrel']),
 });
 
-/** A matched system with no pool above: the pre-SR1 line in its agreement form (C2b(b)'s, byte for byte when filled). */
-export const LOSES_FALLBACK = Object.freeze(['{power|its|their} own people feel the crisis first']);
+/**
+ * A matched system with no pool above: the pre-SR1 line in its agreement form (C2b(b)'s, byte for byte when filled),
+ * composed from its one home (COMMON-RULES rule 2: a literal has one home; FRAME-8, the chair's ruling of 22:23 UTC).
+ */
+export const LOSES_FALLBACK = Object.freeze([`{power|its|their}${STAKE_REASONS.loses.slice('its'.length)}`]);
 
 /** `split`: the power gains and loses at once ("it" is the crisis). No `needs`. @type {ReadonlyArray<string>} */
 const SPLIT_LINES = Object.freeze([
-  'gains and loses by it at once',
+  STAKE_REASONS.split, // the pre-SR1 line, by reference (COMMON-RULES rule 2: a literal has one home)
   '{power|stands|stand} to win by it and to lose by it alike',
   '{power|has|have} as much to gain from it as to lose',
 ]);
