@@ -644,6 +644,30 @@ parts of the whole check (at the close).
   appointed seats (governor, steward, monarch) DO hold a named person today (`crown2.out.txt`): the first count's
   "none" was its own rough match.
 
+- **About 13:46 UTC, 2026-11-20 (the chair's estimate), THE OWNER (verbatim):** "How would you fix:\n\nNo ruler is born beloved
+  at untouched settings once fortune is switched on. You kept that number. \n\nSameness between settlements shrinks
+  but stays. Three settlements made in a row share a trouble's sentence word for word 32% of the time today. The
+  target is under 10%, from a simulation, not from built towns. A city prints 60 short wants out of about 900
+  wordings, so a DM who reads every card will meet a few again in the next city. That is my arithmetic, not a
+  measure.\nWe have a weekly reset so don't mind that" (the first two paragraphs are the chair's own words of 12:58,
+  quoted back). WHAT THE CHAIR TOOK FROM IT AND SAID BACK: (1) A CORRECTION: "You kept that number" WAS WRONG: THE
+  CHAIR KEPT IT (the 15 points for Prosperous); the owner was shown the choice and has not ruled. (2) ON USAGE
+  ("We have a weekly reset so don't mind that"): NO WORK IS HELD BACK FOR THE ALLOWANCE: the holds of 13:31 are
+  LIFTED (told to PAGE-3 and FRAME-6 at 13:48); "nothing only in a container" stays. (3) THE TWO FIXES AS THE
+  CHAIR ANSWERED, each waiting on a measure before it is ruled (a helper is counting on the 300 untouched towns:
+  the base rates of five merits among calm towns by size; a second city's lines already seen in a first, names
+  masked; the trouble sentence's repeats with and without names): BELOVED IS EARNED FROM THE RECORD, never from
+  size and never invented: a short list of merits, each a pure read, counted only upward (the seat never changed
+  hands; a great hardship remembered and nothing of its kind troubling the place today; no trouble of today about
+  the ruler; the seat's person of a principled temper; the faith standing with the seat if the record holds it),
+  THE REASON PRINTED, a few calm places in a hundred at every size, built dark with the fortune law, the numbers
+  the owner's to sign; NOT the 15 raised to 24 and NOT a lower bar. A TROUBLE'S SENTENCE SAYS WHY IT IS HAPPENING
+  HERE: for each common kind a closed table of causes, each tied to a fact the record holds, composed AT RENDER
+  (saved towns get it; no stored town moves), measured on built towns WITH NAMES MASKED: it replaces the plan of
+  three new wordings a kind (L1), which PAGE-3 is told not to dispatch until the ruling. WANTS AND SECRETS ACROSS
+  TOWNS: pool depth: lines true to a person's trade, the commonest trades first, AFTER the deploy, unless the
+  measure shows more than about one line in five of a second city already seen in the first.
+
 ## 2. Rulings of this chair (each vetoable by the owner)
 
 - **SV1 (00:05 UTC, 2026-11-20): THE VEIL'S LIST ON THREE MACHINES.** VEIL-19 owns 212, its rollback and the twin's
