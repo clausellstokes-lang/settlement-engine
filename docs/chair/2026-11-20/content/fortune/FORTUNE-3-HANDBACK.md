@@ -1,4 +1,4 @@
-# FORTUNE-3 hand-back (kept current at every push; last written 2026-11-20 16:01:00 UTC by `date -u`)
+# FORTUNE-3 hand-back (kept current at every push; last written 2026-11-20 16:30:54 UTC by `date -u`)
 
 For a successor: this file and the briefs (`briefs/COMMON.md`, `U4.md`, `U5-BUILD.md`) are all you need.
 The chair is session_019yED1SUxGVHyjQnoqoFvQ8 (send_message, Claude Code Remote MCP server).
@@ -31,3 +31,18 @@ merge routine, the gates, the known reds and the instruments.
 
 The merits depend on the capture rung (a condition: none counts at `corrupted` or `capture`), so `publicLegitimacy.breakdown.merits`
 (stored only under the fortune law, only when non-zero) is a field a hidden house can move; `publicSafe.js :: toPublicSafe` carries the breakdown.
+
+## 4. The join with the who-rules (seat) lane (the chair, 16:31 UTC)
+
+- THE EARLY JOINT READING (the chair's helper: who-rules tip 6e697f5db merged with c167b5f11 in a scratch tree; 600 places
+  hxd-<size>-0..99; U1 to U3 only): calm places whose seat reads Contested or Critical (`rulingPowerCoup.js`): today
+  thorp 0, hamlet 7.6, village 70, town 8.6, city 0, metropolis 0%; both laws 0, 1.5, 17.1, 8.6, city 16.4, metropolis
+  10.4%: a calm city's ruler, Tolerated at multiplier 1.0, is outweighed by its Military/Guard. Every calm incumbent stays
+  protected; no transfer at birth. Crisis-born metropolis protected 82% -> 48%. Report: origin/lane/chair-2026-11-08
+  `docs/chair/2026-11-20/seventh/measures/joint-reading/` (its recipe: `_fortuneLawVersion: 2` and `_seatLawVersion: 2`
+  set after `birthConfig`).
+- OWED BY THIS LANE: THE SAME TABLE with U5s on (when merged: say whether the safety hunk alone moves the calm cities,
+  with the count), and again with U5a's merits on (how many calm cities leave the contested reading at Approved, x1.15).
+- THE MERGE OF THE TWO LANES: six conflicts: `src/domain/density/densityCreateBoundary.js` and its walker test (each lane
+  adds a sibling row at one place: KEEP BOTH); four registers re-taken by their own doors (wiring census, lighting
+  baseline, tuning inventory, tuning register).
