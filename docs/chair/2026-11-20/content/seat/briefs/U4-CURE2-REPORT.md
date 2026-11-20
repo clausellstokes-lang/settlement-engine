@@ -92,3 +92,42 @@ I propose no discriminator and parse no prose. The chair rules.
 CONFIRMED (executed here at `fbf77bfa2`): every count above, from the one measure run on both pools. The writers in (c) are
 CONFIRMED by reading the code at `path :: symbol`. That they fire after a transfer on the regeneration path is PLAUSIBLE: it
 was read from the code and not executed.
+
+## Step 2 (SEAT-5's addendum): arm (10), built by builder B4e. Written 2026-11-20T14:47:12Z, read from `date -u`.
+
+**STATUS: GREEN at base; the arm convicts two named plants.** `src/` is untouched at the tip (`git diff --quiet fbf77bfa2 -- src/`
+holds). Only `tests/domain/seat/holderOfSeat.test.js` (arm (10) and its header line) and this section changed. Nothing was pushed.
+No census, register or baseline was touched.
+
+**The arm.** `(10) CS11: on a SERVED document, no audience but the owner's is told a criminal or a hidden power`. For each of seven
+non-owner audiences (`'reader'`, no options, `{}`, `null`, `''`, `'public'`, `'dm'`), `holderOf(toPublicSafe(s), options)` holds
+neither forbidden name (`The Shadow Hand`, criminal; `Velvet Ledger`, `hidden: true`) anywhere in `JSON.stringify` of the answer.
+Every fixture is town size, and the seat's card holds a membership in each forbidden power, stamped `veiled: true`. The six tests:
+- (a) the criminal power took the seat through the real `transferRulingPower`: refused R1;
+- (b) the hidden power took it: refused R1;
+- (c) the merchants took it beside the criminal power's born symbiotic/stable edge on the same form: R1 Merchant Guilds, told. Three
+  variants: the transfer's sentence stands; a later writer replaced `recentConflict`; the criminal power held the seat before;
+- (d) a born-shape town with a symbiotic/stable edge between the seat and its military power (Town Watch), and no transfer on record:
+  R4, never R1, with the person Hilde Brandt.
+
+Non-vacuity: the owner is told (a) and (b) on the record. The served document keeps (a)'s row. (c) and (d) assert the served
+symbiotic/stable edges on the form. In (d) the owner's answer on the record names both powers through the person.
+
+**Red first.** At base, 6 passed, 0 failed. The plants, each run and restored:
+- P1 in `holderOfSeat.js :: servable`: `const servable = (row) => true || (!isVeiledRow(row) && contestKindOf(row) !== A.CRIMINAL);`
+  gives 1 failed, 5 passed. (a) fails: "audience 'reader': expected [ 'The Shadow Hand' ] to deeply equal []".
+- P2 in `holderOfSeat.js :: transferTakerOf`, the structured-only read: the narrative test becomes
+  `!(rel.type === 'symbiotic' && rel.direction === 'stable')`. That gives 2 failed, 4 passed: (c) with the sentence replaced, and (d)
+  ("expected 'R1' not to be 'R1'").
+
+No plant in the leaf can convict (b). The served document holds no trace of the hidden name, because `toPublicSafe` drops its row and
+masks it. (b) guards the pairing of the leaf with `toPublicSafe`.
+
+**Green.** `holderOfSeat.test.js` and `seatContest.test.js` whole: 62 passed of 62. `eslint` on the test file: exit 0.
+
+CONFIRMED (executed here): every count above. PLAUSIBLE: that no other leaf change would let (b) name the hidden power. I reasoned this
+from `publicSafe.js :: publicVeilPass` and did not test it.
+
+**Not done: ADDENDUM 2's Step 1′.** Addendum 2 (14:47:15Z) landed in the brief while this section was being written. My dispatch says to
+build Step 2 only and to change nothing under `src/`. So Step 1′ (the one matcher, the frozen list of wordings, and its arms (a) and
+(c)) is not started. It is SEAT-5's to dispatch. Step 2's arm (10) is condition (4) of that ruling.

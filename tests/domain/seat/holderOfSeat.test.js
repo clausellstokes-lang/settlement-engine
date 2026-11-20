@@ -23,6 +23,12 @@
  *       `spatial/cohesionWeave.js`, so `rulingPowerCoup.js`'s import of it widens no surface's reach of the
  *       "fear on candidates" identity (`writerReach.walker`); the veil read it uses instead of `cardVeil.js`
  *       (`seatTable.js :: isVeiledRow`) answers `cardVeil.js :: isVeiledPower`'s answer on every row shape here.
+ *  (10) U4-CURE2 Step 2, as SEAT-5's addendum amends it (CS11): for every audience that is not the owner's ('reader',
+ *       missing, null, '', 'public', 'dm'), `holderOf` on a SERVED document (`publicSafe.js :: toPublicSafe`, read-only
+ *       use as in (4)) names no criminal and no hidden power anywhere in its answer (`holderName` and `person`
+ *       included). Town-size fixtures whose last transfer's taker is (a) criminal, (b) hidden, (c) open beside a
+ *       criminal power's symbiotic/stable edge on the same form; and (d) a born-shape town whose seat has a
+ *       symbiotic/stable edge with its military power and no transfer on record, which answers no R1.
  */
 import { describe, test, expect } from 'vitest';
 import { holderOf, APPOINTED_SEAT_FORMS, isCrownedForm } from '../../../src/domain/seat/holderOfSeat.js';
@@ -397,5 +403,114 @@ describe('(9) the leaf reaches no cohesionWeave.js (writerReach), and its veil r
     const differ = rows.filter((r) => isVeiledRow(r) !== isVeiledPower(r));
     expect(differ).toEqual([]);
     expect(rows.filter((r) => isVeiledRow(r)).length, 'the veiled rows are read veiled').toBe(3);
+  });
+});
+
+// ── (10) CS11 on the served document ───────────────────────────────────────────────────────────────────────
+
+describe('(10) CS11: on a SERVED document, no audience but the owner\'s is told a criminal or a hidden power', () => {
+  const CRIMINAL = 'The Shadow Hand';
+  const HIDDEN = 'Velvet Ledger';
+  /** Every audience that is not the owner's, as `holderOf` is handed it (an unknown or missing one reads as the reader). */
+  const NON_OWNER = [
+    ['\'reader\'', { audience: 'reader' }],
+    ['missing (no options)', undefined],
+    ['missing (empty options)', {}],
+    ['null', { audience: null }],
+    ['\'\'', { audience: '' }],
+    ['\'public\'', { audience: 'public' }],
+    ['\'dm\'', { audience: 'dm' }],
+  ];
+  /** The forbidden names, wherever they stand in the answer (`holderName` and `person` included). */
+  const named = (answer) => [CRIMINAL, HIDDEN].filter((name) => JSON.stringify(answer).includes(name));
+
+  /**
+   * A town (town size) with a criminal power and a hidden power beside its open ones; the seat's card holds a
+   * membership in each, stamped veiled as a born card's is (the served document drops both).
+   */
+  const town = (relationships = [], extra = []) => civicTown({
+    extra: [
+      { faction: CRIMINAL, category: 'criminal', power: 18, modifiers: [] },
+      { faction: HIDDEN, category: 'economy', power: 16, hidden: true, modifiers: [] },
+      ...extra,
+    ],
+    relationships,
+    npcs: [card('npc_mayor', 'Hilde Brandt', 'Mayor', [
+      { power: 'Town Council', rank: 1 }, { power: CRIMINAL, rank: 3, veiled: true }, { power: HIDDEN, rank: 2, veiled: true },
+    ])],
+  });
+  /** The criminal power's symbiotic/stable edge with the seat, as a born town may carry it. */
+  const criminalEdge = { pair: ['Town Council', CRIMINAL], type: 'symbiotic', direction: 'stable', narrative: 'The Town Council looks away and The Shadow Hand keeps the docks quiet; each needs the other.' };
+  /** The open taker's own edge with the seat, at the HEAD of the list, so a transfer rewrites it in place. */
+  const merchantEdge = { pair: ['Town Council', 'Merchant Guilds'], type: 'competitive', direction: 'stable', narrative: 'They haggle over the market dues.' };
+
+  /** Each non-owner audience on the served document: no forbidden name, and the answer `expected` asks for. */
+  const servedAnswersHold = (s, expected) => {
+    const served = toPublicSafe(s);
+    for (const [label, options] of NON_OWNER) {
+      const h = holderOf(served, options);
+      expect(named(h), `audience ${label}`).toEqual([]);
+      expected(h, label);
+    }
+  };
+
+  test('(a) the last transfer\'s taker is a criminal power', () => {
+    const s = transfer(town(), CRIMINAL);
+    // non-vacuous: the owner is told it on the record, and the served document still holds its row
+    expect(holderOf(s, OWNER)).toMatchObject({ rule: 'R1', holderName: CRIMINAL });
+    expect(toPublicSafe(s).powerStructure.factions.map((f) => f.faction)).toContain(CRIMINAL);
+    servedAnswersHold(s, (h, label) => expect(h, `audience ${label}`).toMatchObject({ rule: 'R1', holder: null, holderName: null, refused: true }));
+  });
+
+  test('(b) the last transfer\'s taker is a hidden power', () => {
+    const s = transfer(town(), HIDDEN);
+    expect(holderOf(s, OWNER)).toMatchObject({ rule: 'R1', holderName: HIDDEN });
+    servedAnswersHold(s, (h, label) => expect(h, `audience ${label}`).toMatchObject({ rule: 'R1', holder: null, holderName: null, refused: true }));
+  });
+
+  /** The served document's symbiotic/stable edges on the current form, by the other power (masked names as served). */
+  const symbioticOnForm = (s) => {
+    const served = toPublicSafe(s);
+    const form = served.powerStructure.government;
+    return served.powerStructure.factionRelationships
+      .filter((r) => r.pair.includes(form) && r.type === 'symbiotic' && r.direction === 'stable')
+      .map((r) => r.pair.find((n) => n !== form));
+  };
+  const toldTheMerchants = (h, label) => expect(h, `audience ${label}`).toMatchObject({ rule: 'R1', holderName: 'Merchant Guilds', refused: false });
+
+  test('(c) an open taker beside a criminal power\'s symbiotic/stable edge on the same form (born; the transfer\'s sentence stands)', () => {
+    const s = transfer(town([merchantEdge, criminalEdge]), 'Merchant Guilds');
+    expect(symbioticOnForm(s)).toEqual(['Merchant Guilds', CRIMINAL]);
+    servedAnswersHold(s, toldTheMerchants);
+  });
+
+  test('(c) the same, where a later writer has replaced the transfer\'s sentence', () => {
+    const s = transfer(town([merchantEdge, criminalEdge]), 'Merchant Guilds');
+    s.powerStructure.recentConflict = 'The river tolls are disputed again.';
+    expect(symbioticOnForm(s)).toEqual(['Merchant Guilds', CRIMINAL]);
+    servedAnswersHold(s, toldTheMerchants);
+  });
+
+  test('(c) the same, where the criminal power held the seat by the transfer before', () => {
+    const s = transfer(transfer(town(), CRIMINAL), 'Merchant Guilds');
+    expect(symbioticOnForm(s)).toEqual([CRIMINAL, 'Merchant Guilds']);
+    servedAnswersHold(s, toldTheMerchants);
+  });
+
+  test('(d) a born-shape town whose seat has a symbiotic/stable edge with its MILITARY power, and no transfer on record', () => {
+    const s = town(
+      [{ pair: ['Town Council', 'Town Watch'], type: 'symbiotic', direction: 'stable', narrative: 'The Town Council gives the orders and the Town Watch carries them out; each needs the other to stay strong.' }],
+      [{ faction: 'Town Watch', category: 'military', power: 22, modifiers: [] }],
+    );
+    expect(s.powerStructure.previousGovernments).toBeUndefined();
+    expect(s.powerStructure.recentConflict).toBeUndefined();
+    expect(symbioticOnForm(s)).toEqual(['Town Watch']);
+    // non-vacuous: on the record, the seat's person carries both forbidden names (the served document drops them)
+    expect(named(holderOf(s, OWNER))).toEqual([CRIMINAL, HIDDEN]);
+    servedAnswersHold(s, (h, label) => {
+      expect(h.rule, `audience ${label}`).not.toBe('R1');
+      expect(h, `audience ${label}`).toMatchObject({ rule: 'R4', holder: null, refused: false });
+      expect(h.person?.name, `audience ${label}`).toBe('Hilde Brandt');
+    });
   });
 });
