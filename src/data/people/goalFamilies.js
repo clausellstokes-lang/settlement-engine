@@ -1117,3 +1117,11 @@ export const GOAL_FAMILY_LINES = Object.freeze({
     }),
   }),
 });
+
+/**
+ * THE RESERVE LINES (GR1, GOALS-1, the chair's rule: no goal wording twice in one town). The same shape as
+ * `GOAL_FAMILY_LINES` (`[family][subKind][vantage]` → `cell([...])`), kept APART from the cells: a line here is never
+ * drawn, only TAKEN by a repeat's rotation (`generators/people/goals.js :: dealGoals`, pass two), so appending one moves
+ * no draw (appending to a cell would change its pick's modulus and move every draw of that kind). Empty at birth.
+ */
+export const GOAL_RESERVE_LINES = Object.freeze({});

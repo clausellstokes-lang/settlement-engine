@@ -33,7 +33,7 @@
  * DM-only by construction: `npcs[].goal` (and so `intent`) never reaches a public page (design §6.3).
  */
 
-import { GOAL_FAMILY_LINES, GOAL_LINE_MIN_MEMBERS, PERSONALITY_CLUSTER_OF, TIE_TYPE_TO_GOAL_SUBKIND } from '../../data/people/goalFamilies.js'; import { facesInPower } from '../../domain/people/cardPowers.js'; // BAR8 K-PEOPLE (14h): the power's members as the Power tab counts them
+import { GOAL_FAMILY_LINES, GOAL_LINE_MIN_MEMBERS, GOAL_RESERVE_LINES, PERSONALITY_CLUSTER_OF, TIE_TYPE_TO_GOAL_SUBKIND } from '../../data/people/goalFamilies.js'; import { facesInPower } from '../../domain/people/cardPowers.js'; // BAR8 K-PEOPLE (14h): the power's members as the Power tab counts them
 import { familyOfInstitution, isLawEnforcementInstitution, isNoPowerInstitution } from '../../data/institutionalCatalog.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { chainPrintName } from '../../domain/display/chainPrintName.js';
@@ -45,6 +45,7 @@ import { notePresumption, withPresumptionLedger } from '../../domain/facts/presu
 import { magicOf } from '../../domain/facts/magic.js';
 import { goodNeededNotBroughtIn, goodsNeededNotBroughtIn } from '../../domain/facts/needNotBroughtIn.js'; // FAULTS-NEED item 2 (11e.wantBuy): the page's need list
 import { allegianceOf, criminalHousesOf, criminalPowersOf, organizedCrimeOf } from '../../domain/people/allegiance.js';
+import { sharesPower } from '../../domain/facts/sharedPower.js'; // GR1: a wording held twice is never held by two of one power where another is free
 import { NPC_GOAL_SIBLINGS, SIEGE_GOALS, STRESS_GOAL_OVERRIDES, stressBucketOf } from '../npcGenerator.js';
 import { deriveTradeCommodity } from '../tradeCommodity.js';
 import { faceOfRole } from '../../data/holderTitleForms.js'; // TAIL-TITLES K-C: the bucket keys the face
@@ -53,7 +54,10 @@ import { clamp, clamp01 } from '../../kernel/math.js';
 /** @typedef {Record<string, any>} Rec */
 /** @typedef {'short' | 'long'} Vantage */
 /** @typedef {{ kind: 'npc' | 'power' | 'house' | 'chain', id: string }} GoalTarget */
-/** @typedef {{ family: string, kind: string, text: string, target: GoalTarget | null, slots: Rec, refs: string[], crisisNote?: string | null, notes?: Rec[], refused?: boolean }} Candidate */
+/**
+ * @typedef {{ family: string, kind: string, text: string, target: GoalTarget | null, slots: Rec, refs: string[], crisisNote?: string | null, notes?: Rec[], refused?: boolean, wording: string, call?: number }} Candidate
+ * `wording`: the line's WORDING with the town's names masked (GR1, `wordingOf`); `call`: the `cellCandidates` call that built it (its rotation group).
+ */
 
 /** The keyed fork family the goals draw under (declared in the fork census). */
 export const GOALS_FORK_LABEL = 'people-goals';
@@ -277,6 +281,11 @@ export function goalContextOf(settlement, cards, relationships) {
     needUnmetGoods: (/** @type {unknown} */ resource) => goodsNeededNotBroughtIn(settlement, resource),
     /** the held texts refused so far (the receipt's `refused`, per card) */
     refusals: { n: 0 },
+    // GR1 (GOALS-1, the chair's rule): every `cellCandidates` call's id (its candidates' rotation group), and the reserve
+    // lines' candidates of each call, filed apart from the draw (`GOAL_RESERVE_LINES`)
+    calls: { n: 0 },
+    /** @type {Map<number, Candidate[]>} */
+    reserve: new Map(),
     // the handler's agents: handler id → [{ agent, archetype }] (the agent's covert handler tie names the kind)
     agentsOf: (() => {
       const m = new Map();
@@ -357,6 +366,17 @@ function pursuitChances(card, ctx) {
 const PROSE_SLOTS = new Set(['power', 'rival', 'guild']);
 /** The slots that name a person (the slot contract: "a person, by name; a person may take 's"). */
 const PERSON_SLOTS = Object.freeze(['above', 'below', 'other', 'handler', 'agent', 'target']);
+/** The slots that name a house (the slot contract's {house} fill and UNCANNY's houses). */
+const HOUSE_SLOTS = Object.freeze(['house', 'otherHouse', 'front', 'targetHouse', 'shrine', 'arcaneHouse']);
+/** GR1: the NAME slots a line's wording masks (a person, a power, a house); every other slot is its value. */
+const NAME_SLOTS = new Set([...PERSON_SLOTS, 'priest', ...PROSE_SLOTS, ...HOUSE_SLOTS]);
+
+/**
+ * GR1 (GOALS-1, the chair's rule): a line's WORDING, the key two people may not share in one town. Its template with every
+ * NAME slot as `§` and every other slot (`resource`, `import`, `issue`, `chain`) as its value; the agreement forms
+ * (`{power|it|them}`) as written (the key is never printed). @param {unknown} line @param {Rec} slots @returns {string}
+ */
+const wordingOf = (line, slots) => templateOf(line).replace(/\{(\w+)\}/g, (_m, k) => (NAME_SLOTS.has(k) ? '§' : str(slots[k])));
 
 /**
  * The cards a line's person slots name, for its second mentions (NAMES-1, CN2): each slot's printed name with the one card
@@ -376,7 +396,9 @@ function personCardsOf(slots, ctx) {
 }
 
 /**
- * Every line of a cell the record fills and admits, unheld: the candidates of one sub-kind.
+ * Every line of a cell the record fills and admits, unheld: the candidates of one sub-kind. GR1: every candidate carries
+ * its WORDING and this call's id (`call`, its rotation group); the reserve lines of the cell (`GOAL_RESERVE_LINES`) are
+ * built the same way and filed on `ctx.reserve` under the call's id, OUT of the returned list, so no draw moves.
  * @param {string} family @param {string} kind @param {Vantage} vantage @param {Rec} slots @param {GoalContext} ctx
  * @param {Set<string>} held @param {{ target?: GoalTarget | null, refs?: string[], members?: number }} [extra] `members`: the power's members as the Power tab counts them (BAR8 K-PEOPLE 14h)
  * @returns {Candidate[]}
@@ -384,6 +406,8 @@ function personCardsOf(slots, ctx) {
 function cellCandidates(family, kind, vantage, slots, ctx, held, extra = {}) {
   const cell = arr(rec(rec(/** @type {Rec} */ (GOAL_FAMILY_LINES)[family])[kind])[vantage]);
   if (!cell.length) return [];
+  const call = (ctx.calls.n += 1);
+  const reserve = arr(rec(rec(/** @type {Rec} */ (GOAL_RESERVE_LINES)[family])[kind])[vantage]);
   // POWERS-16 (the chair's ruling (r2): a faction named in a sentence takes its prose form, from one leaf): the line
   // prints a power slot through display/powerSentenceName.js ("Military/Guard" -> "the Guard"); the slots kept on the
   // card (the keyed intent) keep the record's names, so every reader that matches a power by name still finds it.
@@ -392,21 +416,27 @@ function cellCandidates(family, kind, vantage, slots, ctx, held, extra = {}) {
   const said = Object.fromEntries(Object.entries(slots).map(([k, v]) => [k, PROSE_SLOTS.has(k) && typeof v === 'string' && v ? powerNameWithArticle(v) : v]));
   const people = personCardsOf(slots, ctx);
   const poolId = `goalFamilies:${family}.${kind}.${vantage}`;
-  /** @type {Candidate[]} */
-  const out = [];
-  for (const line of cell) {
-    const { result: kept, notes } = quiet(() => filterDeclared([line], { facts: ctx.facts, poolId, surface: 'npcs' }));
-    if (!kept.length) continue;
-    // NAMES-3 (CV7): a line's agreement forms (`{power|it|them}`) take their power's own number, from the record's name
-    const filled = fillLine(fillAgreement(templateOf(line), slots), said);
-    if (!filled) continue;
-    // NAMES-1 (CN2): a person's later mention in the line is a pronoun, a surname, a role or a given name
-    const text = secondMentions(filled[0].toUpperCase() + filled.slice(1), people);
-    if (held.has(text)) { ctx.refusals.n += 1; continue; }
-    const used = Object.fromEntries(slotsIn(templateOf(line)).map((k) => [k, slots[k]]));
-    const fewMembers = typeof extra.members === 'number' && (GOAL_LINE_MIN_MEMBERS[templateOf(line)] ?? 0) > extra.members; // BAR8 K-PEOPLE (14h)
-    out.push({ family, kind, text, target: extra.target ?? null, slots: used, refs: extra.refs ?? [], notes, ...(fewMembers ? { refused: true } : {}) });
-  }
+  /** @param {unknown[]} lines @param {boolean} counted whether a held refusal counts on the receipt (the cell's; the reserve's do not) @returns {Candidate[]} */
+  const build = (lines, counted) => {
+    /** @type {Candidate[]} */
+    const out = [];
+    for (const line of lines) {
+      const { result: kept, notes } = quiet(() => filterDeclared([line], { facts: ctx.facts, poolId, surface: 'npcs' }));
+      if (!kept.length) continue;
+      // NAMES-3 (CV7): a line's agreement forms (`{power|it|them}`) take their power's own number, from the record's name
+      const filled = fillLine(fillAgreement(templateOf(line), slots), said);
+      if (!filled) continue;
+      // NAMES-1 (CN2): a person's later mention in the line is a pronoun, a surname, a role or a given name
+      const text = secondMentions(filled[0].toUpperCase() + filled.slice(1), people);
+      if (held.has(text)) { if (counted) ctx.refusals.n += 1; continue; }
+      const used = Object.fromEntries(slotsIn(templateOf(line)).map((k) => [k, slots[k]]));
+      const fewMembers = typeof extra.members === 'number' && (GOAL_LINE_MIN_MEMBERS[templateOf(line)] ?? 0) > extra.members; // BAR8 K-PEOPLE (14h)
+      out.push({ family, kind, text, target: extra.target ?? null, slots: used, refs: extra.refs ?? [], notes, ...(fewMembers ? { refused: true } : {}), wording: wordingOf(line, slots), call });
+    }
+    return out;
+  };
+  const out = build(cell, true);
+  if (reserve.length) { const kept = build(reserve, false); if (kept.length) ctx.reserve.set(call, kept); }
   return out;
 }
 
@@ -555,7 +585,7 @@ export function familyCandidates(card, cards, ctx, vantage, held, opts = {}) {
       const { result: [kept], notes } = quiet(() => filterDeclared([o], { facts: ctx.facts, poolId: `npcGenerator:STRESS_GOAL_OVERRIDES.${ctx.stressType}`, surface: 'npcs', drawKind: 'T' }));
       const row = rec(kept); const overrideNote = str(row.note); // the override row's own note, a caller-supplied bag (the flavor census's decoy)
       const { result: said, notes: saidNotes } = quiet(() => (kept ? { text: spoken(str(row.short)), crisisNote: overrideNote ? spoken(overrideNote) : null } : null));
-      if (said?.text && !held.has(said.text)) push([{ family: 'CRISIS', kind: bucket, text: said.text, target: null, slots: {}, refs: [], crisisNote: said.crisisNote, notes: [...notes, ...saidNotes] }]);
+      if (said?.text && !held.has(said.text)) push([{ family: 'CRISIS', kind: bucket, text: said.text, target: null, slots: {}, refs: [], crisisNote: said.crisisNote, notes: [...notes, ...saidNotes], wording: said.text }]);
     }
   }
   if (ctx.stresses.includes('under_siege')) {
@@ -564,7 +594,7 @@ export function familyCandidates(card, cards, ctx, vantage, held, opts = {}) {
       const { result: [kept], notes } = quiet(() => filterDeclared([row], { facts: ctx.facts, poolId: 'npcGenerator:STRESS_GOALS', surface: 'npcs' }));
       if (!kept) return;
       const { result: text, notes: saidNotes } = quiet(() => resolveSibling(str(rec(kept)[vantage]), NPC_GOAL_SIBLINGS, { facts: ctx.facts, poolId: 'npcGenerator:NPC_GOAL_SIBLINGS', surface: 'npcs', drawKind: 'T' }));
-      if (text && !held.has(text)) push([{ family: 'CRISIS', kind: `siege_${k}`, text, target: null, slots: {}, refs: [], notes: [...notes, ...saidNotes] }]);
+      if (text && !held.has(text)) push([{ family: 'CRISIS', kind: `siege_${k}`, text, target: null, slots: {}, refs: [], notes: [...notes, ...saidNotes], wording: text }]);
     });
   }
   return by;
@@ -635,12 +665,40 @@ export function goalReceiptsOf(cards) {
   return (cards && typeof cards === 'object' && RECEIPTS.get(/** @type {object} */ (cards))) || [];
 }
 
+/** A drawn candidate's ROTATION GROUP (GR1): the candidates of its `cellCandidates` call in list order, as the draw holds
+ * them (a refusal marked on the list kept), then the call's reserve candidates unless every one of the call's own is
+ * refused; a candidate of no call (a crisis line, the floor) is its own group. @param {Candidate | null} chosen @param {Candidate[]} pool @param {GoalContext} ctx @returns {Candidate[]} */
+function groupOf(chosen, pool, ctx) {
+  if (!chosen) return [];
+  if (chosen.call == null) return [chosen];
+  const main = pool.filter((c) => c.call === chosen.call);
+  // a call its caller refused as a whole (the charter of a criminal house or of the governing head, a dependency whose good
+  // is not brought in) lends no reserve line: draw-free, the callers as they are
+  const group = [...main, ...(main.some((c) => !c.refused) ? (ctx.reserve.get(chosen.call) || []) : [])];
+  return group.includes(chosen) ? group : [chosen];
+}
+
+/** The two vantages, in the order a card holds them. */
+const VANTAGES = /** @type {const} */ (['short', 'long']);
+
 /**
  * A9 — DEAL THE GOALS over the final cast (design §2): each card's SHORT and LONG goal, from two
  * different families its record supports, on its own keyed fork. Returns a NEW array of new card
  * objects (`goal: { short, long, intent }`; a CRISIS override's note as `stressNote`); the receipts
  * ride beside it (`goalReceiptsOf`). Cards in `keep` (a regeneration's preserved keepers) are passed
  * through untouched, and their texts are held.
+ *
+ * GR1 (GOALS-1, the chair's rule and rulings of 2026-11-20 10:28 UTC): within one town no two people hold the same goal
+ * WORDING (`wordingOf`: the line with the town's names masked). PASS ONE is the deal above, every draw and every held
+ * text as it was. A holding is a REPEAT iff an earlier holding of pass one (or a keeper) has its wording; a non-repeater
+ * is never moved. PASS TWO, in roster order, short then long, counts the holders of each wording (every non-repeater's,
+ * then each wording pass two assigns) and gives each repeat, in rotation order from the index it drew (k = 0 the drawn
+ * candidate itself, a refused line skipped), NO NEW DRAW: (i) the first wording nobody holds ('free'); else (ii) the
+ * first held once by someone not of its house, not tied to it and sharing no power with it ('twice'); else (iii) the
+ * first held once by someone neither of its house nor tied to it ('twice-same-power'); else (iv) the drawn wording
+ * stands ('stands'). The receipt names the rung (`receipt.repeat[vantage]`), the pass-one wording (`drawn`) and any
+ * move (`rotated: { from, to }`, indices in the group). The floor is never rotated. The presumption ledger records
+ * each card's FINAL lines, after pass two, in card order, short then long.
  * @param {Rec} settlement the settlement-shaped object at the seam
  * @param {Rec[]} cards the final cast (ranks, allegiances and handlers written)
  * @param {Rec[]} relationships the ties drawn over that cast
@@ -660,13 +718,16 @@ export function dealGoals(settlement, cards, relationships, rng, options = {}) {
   let uncannyDealt = 0;
   /** @type {Rec[]} */
   const receipts = [];
-  const out = cards.map((card) => {
-    if (!card || card.id == null || keep.has(String(card.id))) return card;
+  /** @typedef {{ card: Rec, receipt: Rec, short: Candidate | null, long: Candidate | null, groups: { short: Candidate[], long: Candidate[] }, drawn: { short: string | null, long: string | null }, rotated: Rec }} Dealt */
+  /** PASS ONE: the deal, every draw and every held text as before; each holding's rotation group recorded. @type {Array<Dealt | null>} */
+  const dealt = cards.map((card) => {
+    if (!card || card.id == null || keep.has(String(card.id))) return null;
     const fork = family.fork(String(card.id));
     /** @type {Rec} */
     const receipt = { id: String(card.id), refs: [] };
     ctx.refusals.n = 0;
     /** @type {Candidate | null} */ let short = null;
+    /** @type {Candidate[]} */ let shortPool = [];
     /** @type {{ kind: 'warrant' | 'suspicion', target: Rec } | null} */ let pursuit = null;
     // (1) THE LAW'S PURSUIT (§3.5): a WARRANT where an open criminal face stands, else a SUSPICION where an agent does
     if (isLawFace(card, ctx)) {
@@ -680,8 +741,9 @@ export function dealGoals(settlement, cards, relationships, rng, options = {}) {
         if (!fork.chance(kind === 'warrant' ? pWarrant : pSuspicion)) continue;
         const target = pool.length === 1 ? pool[0].card : fork.weightedPick(pool.map((t) => t.card), pool.map((t) => t.weight));
         pursuit = { kind, target };
-        const cands = familyCandidates(card, cards, ctx, 'short', heldShort, { pursuit }).ALLEGIANCE?.filter((c) => c.kind === kind) || [];
-        if (cands.length) { short = cands.length === 1 ? cands[0] : fork.pick(cands); law.landed = kind; }
+        const allegiance = familyCandidates(card, cards, ctx, 'short', heldShort, { pursuit }).ALLEGIANCE || [];
+        const cands = allegiance.filter((c) => c.kind === kind);
+        if (cands.length) { short = cands.length === 1 ? cands[0] : fork.pick(cands); shortPool = allegiance; law.landed = kind; }
         break;
       }
       receipt.law = law;
@@ -698,6 +760,7 @@ export function dealGoals(settlement, cards, relationships, rng, options = {}) {
           const kind = okKinds.length === 1 ? okKinds[0] : fork.pick(okKinds);
           const lines = all.filter((c) => c.kind === kind);
           short = lines.length === 1 ? lines[0] : fork.pick(lines);
+          shortPool = all;
           uncannyDealt += 1;
         }
       }
@@ -708,23 +771,65 @@ export function dealGoals(settlement, cards, relationships, rng, options = {}) {
       const d = drawVantage(card, by, ctx, 'short', fork, null);
       receipt.shortWeights = d.weights;
       short = d.chosen;
+      shortPool = Object.values(by).flat();
     }
     const longPursuit = pursuit ? null : lawLongPursuit(card, cards, ctx);
     const byLong = familyCandidates(card, cards, ctx, 'long', heldLong, { pursuit: longPursuit });
     const dl = drawVantage(card, byLong, ctx, 'long', fork, short ? short.family : null);
     receipt.longWeights = dl.weights;
     let long = dl.chosen;
-    // the floor (never a card without a goal): every family held → the card's own cluster, held or not
-    if (!short) { short = personalityFloor(card, 'short'); receipt.floor = true; }
-    if (!long) { long = personalityFloor(card, 'long'); receipt.floor = true; }
-    noteDrawn(short); noteDrawn(long);
+    const groups = { short: groupOf(short, shortPool, ctx), long: groupOf(long, Object.values(byLong).flat(), ctx) };
+    // the floor (never a card without a goal): every family held → the card's own cluster, held or not; never rotated
+    if (!short) { short = personalityFloor(card, 'short'); groups.short = short ? [short] : []; receipt.floor = true; }
+    if (!long) { long = personalityFloor(card, 'long'); groups.long = long ? [long] : []; receipt.floor = true; }
     if (short) heldShort.add(short.text);
     if (long) heldLong.add(long.text);
-    for (const c of [short, long]) if (c) receipt.refs.push(...c.refs);
     receipt.refused = ctx.refusals.n;
-    receipt.short = short && { family: short.family, kind: short.kind, slots: short.slots };
-    receipt.long = long && { family: long.family, kind: long.kind, slots: long.slots };
     receipts.push(receipt);
+    return { card, receipt, short, long, groups, drawn: { short: short?.wording ?? null, long: long?.wording ?? null }, rotated: {} };
+  });
+
+  // PASS TWO (GR1): repeat status from pass one alone; the holders of each wording counted; each repeat takes its rung
+  /** @type {Map<string, Rec[]>} */ const holders = new Map();
+  const hold = (/** @type {string} */ key, /** @type {Rec} */ card) => { const h = holders.get(key); if (h) h.push(card); else holders.set(key, [card]); };
+  /** @type {Set<string>} */ const prior = new Set();
+  for (const c of cards) if (c && keep.has(String(c.id))) for (const v of VANTAGES) { const t = c.goal?.[v]; if (t) { const key = String(t).trim(); prior.add(key); hold(key, c); } }
+  /** @type {Array<{ d: Dealt, v: Vantage }>} */ const repeats = [];
+  for (const d of dealt) if (d) for (const v of VANTAGES) {
+    const c = d[v]; if (!c) continue;
+    if (prior.has(c.wording)) repeats.push({ d, v }); else hold(c.wording, d.card);
+    prior.add(c.wording);
+  }
+  const tied = new Set(ctx.ties.flatMap((t) => [`${t.from}\u0000${t.to}`, `${t.to}\u0000${t.from}`]));
+  const houseKey = (/** @type {Rec} */ c) => (rec(c.institution).kind === 'house' ? str(rec(c.institution).key) : '');
+  /** @param {Rec} a @param {Rec} b @param {boolean} power whether a shared power also keeps them apart */
+  const apart = (a, b, power) => !(houseKey(a) && houseKey(a) === houseKey(b)) && !tied.has(`${a.id}\u0000${b.id}`) && !(power && sharesPower(a, b));
+  for (const { d, v } of repeats) {
+    const drawn = /** @type {Candidate} */ (d[v]);
+    const group = d.groups[v].length ? d.groups[v] : [drawn];
+    const at = Math.max(0, group.indexOf(drawn));
+    const order = group.map((_, k) => group[(at + k) % group.length]).filter((x) => !x.refused);
+    const count = (/** @type {Candidate} */ x) => (holders.get(x.wording) || []).length;
+    const once = (/** @type {Candidate} */ x, /** @type {boolean} */ power) => count(x) === 1 && apart(/** @type {Rec[]} */ (holders.get(x.wording))[0], d.card, power);
+    /** @type {[string, Candidate | undefined][]} */
+    const rungs = [['free', order.find((x) => count(x) === 0)], ['twice', order.find((x) => once(x, true))], ['twice-same-power', order.find((x) => once(x, false))]];
+    const [rung, taken] = rungs.find(([, x]) => x) || ['stands', drawn];
+    const took = /** @type {Candidate} */ (taken);
+    hold(took.wording, d.card);
+    (d.receipt.repeat ??= {})[v] = rung;
+    if (took !== drawn) { d[v] = took; d.rotated[v] = { from: at, to: group.indexOf(took) }; }
+  }
+
+  const out = cards.map((card, i) => {
+    const d = dealt[i];
+    if (!d) return card;
+    const { receipt, short, long } = d;
+    noteDrawn(short); noteDrawn(long);
+    for (const c of [short, long]) if (c) receipt.refs.push(...c.refs);
+    for (const v of VANTAGES) {
+      const c = d[v];
+      receipt[v] = c && { family: c.family, kind: c.kind, slots: c.slots, drawn: d.drawn[v], ...(d.rotated[v] ? { rotated: d.rotated[v] } : {}) };
+    }
     /** @type {Rec} */
     const next = { ...card, goal: { short: short?.text ?? null, long: long?.text ?? null, intent: { short: short ? intentOf(short) : null, long: long ? intentOf(long) : null } } };
     if (short?.family === 'CRISIS' && short.crisisNote) next.stressNote = short.crisisNote;
@@ -765,5 +870,5 @@ function personalityFloor(card, vantage) {
   const cluster = [p.flaw, p.dominant, p.modifier].map((w) => /** @type {Rec} */ (PERSONALITY_CLUSTER_OF)[str(w).toLowerCase()]).find(Boolean) || 'caution';
   const cell = arr(rec(rec(GOAL_FAMILY_LINES.PERSONALITY)[cluster])[vantage]);
   const text = cell.length ? templateOf(cell[0]) : '';
-  return text ? { family: 'PERSONALITY', kind: cluster, text, target: null, slots: {}, refs: [] } : null;
+  return text ? { family: 'PERSONALITY', kind: cluster, text, target: null, slots: {}, refs: [], wording: text } : null;
 }
