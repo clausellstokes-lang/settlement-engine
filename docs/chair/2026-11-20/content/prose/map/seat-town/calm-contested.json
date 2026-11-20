@@ -1,0 +1,2076 @@
+{
+ "ROOT": "/home/user/settlement-engine/.claude/worktrees/agent-ac99ce80789bf85d3",
+ "HEAD": "9f3558f67035381fdbfa92ed1a747d3218ecd9c3",
+ "note": "the 84 calm (record.stress absent) places whose seat reads Contested or Critical (rulingPowerCoup.js :: coupRiskLabel(coupContenders(record))), births hxd-<size>-<0..149>, read by seat-town.census.mjs + analyze-seat-town.mjs",
+ "places": [
+  {
+   "seed": "hxd-hamlet-33",
+   "name": "Nektaragio",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Military/Guard",
+    "archetype": "military",
+    "weight": 66.25
+   },
+   "inc": 37.6,
+   "header": "no token matched: unclassified (the plain-description floor)",
+   "named": false,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Military/Guard:tense"
+   ],
+   "banner": "Ask at Nektaragio who decides things and you hear two answers before the day is out; neither is the Elder Council."
+  },
+  {
+   "seed": "hxd-hamlet-81",
+   "name": "Megapetra",
+   "label": "Contested",
+   "legit": "Tolerated",
+   "gov": "Feudal Stewardship",
+   "first": {
+    "name": "Military/Guard",
+    "archetype": "military",
+    "weight": 57.5
+   },
+   "inc": 54,
+   "header": "no token matched: unclassified (the plain-description floor)",
+   "named": false,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Military/Guard:tense"
+   ],
+   "banner": "Megapetra neither backs the Feudal Stewardship nor opposes it. Routine orders are obeyed; a hard decision would find nobody willing to carry it."
+  },
+  {
+   "seed": "hxd-hamlet-108",
+   "name": "Maghfell",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Military/Guard",
+    "archetype": "military",
+    "weight": 66.25
+   },
+   "inc": 37.6,
+   "header": "no token matched: unclassified (the plain-description floor)",
+   "named": false,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Military/Guard:tense"
+   ],
+   "banner": "Acceptance of the Elder Council is fraying at Maghfell. Instructions are argued with before they are followed, and increasingly they are argued with instead."
+  },
+  {
+   "seed": "hxd-village-0",
+   "name": "Dobroki",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Headman's Authority",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 48
+   },
+   "inc": 41.6,
+   "header": "v3",
+   "named": false,
+   "namedProse": false,
+   "atOdds": false,
+   "tie": {
+    "type": "dependent",
+    "captureState": null
+   },
+   "estranged": [],
+   "banner": "The Headman's Authority still governs Dobroki, but every order takes more pushing, and others are quietly settling what it leaves undone."
+  },
+  {
+   "seed": "hxd-village-3",
+   "name": "Yutian",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 53
+   },
+   "inc": 37.6,
+   "header": "v1",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "Acceptance of the Elder Council is fraying at Yutian. Instructions are argued with before they are followed, and increasingly they are argued with instead."
+  },
+  {
+   "seed": "hxd-village-6",
+   "name": "Ximiao",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 54
+   },
+   "inc": 36.8,
+   "header": "v1",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "The Elder Council keeps Ximiao's loyalty only where nothing has gone wrong yet. One hard season would cost it most of what is left."
+  },
+  {
+   "seed": "hxd-village-9",
+   "name": "Skálbrekka",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 53
+   },
+   "inc": 37.6,
+   "header": "v4",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "Each season fewer dues reach the Elder Council at Skálbrekka on time. Nobody refuses outright; payments come late, and some never come."
+  },
+  {
+   "seed": "hxd-village-12",
+   "name": "Monteforum",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 54
+   },
+   "inc": 36.8,
+   "header": "v3",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "Ask at Monteforum who decides things and you hear two answers before the day is out; neither is the Elder Council."
+  },
+  {
+   "seed": "hxd-village-18",
+   "name": "Celosk",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 53
+   },
+   "inc": 37.6,
+   "header": "v1",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "The Elder Council still governs Celosk, but every order takes more pushing, and others are quietly settling what it leaves undone."
+  },
+  {
+   "seed": "hxd-village-21",
+   "name": "Kamenvich",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Feudal Stewardship",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 35
+   },
+   "inc": 23.2,
+   "header": "v1",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Merchant Guilds:competitive",
+    "Religious Authorities:tense"
+   ],
+   "banner": "The Feudal Stewardship still governs Kamenvich, but every order takes more pushing, and others are quietly settling what it leaves undone."
+  },
+  {
+   "seed": "hxd-village-24",
+   "name": "Eleftpetra",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 54
+   },
+   "inc": 36.8,
+   "header": "v3",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "The Elder Council keeps Eleftpetra's loyalty only where nothing has gone wrong yet. One hard season would cost it most of what is left."
+  },
+  {
+   "seed": "hxd-village-27",
+   "name": "Huji",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elected Reeve",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 54
+   },
+   "inc": 36.8,
+   "header": "v1",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "Each season fewer dues reach the Elected Reeve at Huji on time. Nobody refuses outright; payments come late, and some never come."
+  },
+  {
+   "seed": "hxd-village-36",
+   "name": "Fjordbrekka",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Headman's Authority",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 48
+   },
+   "inc": 41.6,
+   "header": "v4",
+   "named": false,
+   "namedProse": false,
+   "atOdds": false,
+   "tie": {
+    "type": "dependent",
+    "captureState": null
+   },
+   "estranged": [],
+   "banner": "Ask at Fjordbrekka who decides things and you hear two answers before the day is out; neither is the Headman's Authority."
+  },
+  {
+   "seed": "hxd-village-48",
+   "name": "Kallition",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 54
+   },
+   "inc": 36.8,
+   "header": "v1",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "The Elder Council still governs Kallition, but every order takes more pushing, and others are quietly settling what it leaves undone."
+  },
+  {
+   "seed": "hxd-village-51",
+   "name": "Inverburn",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Headman's Authority",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 42
+   },
+   "inc": 36.8,
+   "header": "v3",
+   "named": false,
+   "namedProse": false,
+   "atOdds": false,
+   "tie": {
+    "type": "dependent",
+    "captureState": null
+   },
+   "estranged": [],
+   "banner": "Each season fewer dues reach the Headman's Authority at Inverburn on time. Nobody refuses outright; payments come late, and some never come."
+  },
+  {
+   "seed": "hxd-village-60",
+   "name": "Bailcross",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 54
+   },
+   "inc": 36.8,
+   "header": "v3",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "The Elder Council still governs Bailcross, but every order takes more pushing, and others are quietly settling what it leaves undone."
+  },
+  {
+   "seed": "hxd-village-63",
+   "name": "Tenoac",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 39
+   },
+   "inc": 26.4,
+   "header": "v3",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "The Elder Council keeps Tenoac's loyalty only where nothing has gone wrong yet. One hard season would cost it most of what is left."
+  },
+  {
+   "seed": "hxd-village-66",
+   "name": "Mingpu",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 54
+   },
+   "inc": 36.8,
+   "header": "v1",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "Each season fewer dues reach the Elder Council at Mingpu on time. Nobody refuses outright; payments come late, and some never come."
+  },
+  {
+   "seed": "hxd-village-78",
+   "name": "Silbergrund",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 53
+   },
+   "inc": 37.6,
+   "header": "v4",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "Acceptance of the Elder Council is fraying at Silbergrund. Instructions are argued with before they are followed, and increasingly they are argued with instead."
+  },
+  {
+   "seed": "hxd-village-96",
+   "name": "Yekebash",
+   "label": "Contested",
+   "legit": "Tolerated",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Military/Guard",
+    "archetype": "military",
+    "weight": 37.5
+   },
+   "inc": 36,
+   "header": "no token matched: unclassified (the plain-description floor)",
+   "named": false,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Military/Guard:tense"
+   ],
+   "banner": "Yekebash obeys the Elder Council out of habit, not liking. Orders are followed; nobody speaks up for it."
+  },
+  {
+   "seed": "hxd-village-99",
+   "name": "Dzibmul",
+   "label": "Contested",
+   "legit": "Legitimacy Crisis",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Merchant Guilds",
+    "archetype": "merchant",
+    "weight": 37.05
+   },
+   "inc": 14.4,
+   "header": "no token matched: unclassified (the plain-description floor)",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "competitive",
+    "captureState": null
+   },
+   "estranged": [
+    "Merchant Guilds:competitive",
+    "Religious Authorities:tense"
+   ],
+   "banner": "Nobody at Dzibmul speaks for the whole place any more; several people will speak for their own part of it."
+  },
+  {
+   "seed": "hxd-village-108",
+   "name": "Haicheng",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Headman's Authority",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 48
+   },
+   "inc": 41.6,
+   "header": "v1",
+   "named": false,
+   "namedProse": false,
+   "atOdds": false,
+   "tie": {
+    "type": "dependent",
+    "captureState": null
+   },
+   "estranged": [],
+   "banner": "Ask at Haicheng who decides things and you hear two answers before the day is out; neither is the Headman's Authority."
+  },
+  {
+   "seed": "hxd-village-114",
+   "name": "Mayancoatl",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Feudal Stewardship",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 53
+   },
+   "inc": 37.6,
+   "header": "v4",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "Acceptance of the Feudal Stewardship is fraying at Mayancoatl. Instructions are argued with before they are followed, and increasingly they are argued with instead."
+  },
+  {
+   "seed": "hxd-village-117",
+   "name": "Albaforum",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 46
+   },
+   "inc": 32,
+   "header": "v3",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "Ask at Albaforum who decides things and you hear two answers before the day is out; neither is the Elder Council."
+  },
+  {
+   "seed": "hxd-village-120",
+   "name": "Xitang",
+   "label": "Contested",
+   "legit": "Tolerated",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Military/Guard",
+    "archetype": "military",
+    "weight": 37.5
+   },
+   "inc": 36,
+   "header": "no token matched: unclassified (the plain-description floor)",
+   "named": false,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Military/Guard:tense"
+   ],
+   "banner": "Ask at Xitang who governs and people shrug and name the Elder Council. They obey it; they would not defend it."
+  },
+  {
+   "seed": "hxd-village-135",
+   "name": "Tianzhou",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 46
+   },
+   "inc": 32,
+   "header": "v4",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "The Elder Council still governs Tianzhou, but every order takes more pushing, and others are quietly settling what it leaves undone."
+  },
+  {
+   "seed": "hxd-village-141",
+   "name": "Buyantash",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Merchant Guilds",
+    "archetype": "merchant",
+    "weight": 51.3
+   },
+   "inc": 36.8,
+   "header": "v4",
+   "named": false,
+   "namedProse": false,
+   "atOdds": false,
+   "tie": {
+    "type": "dependent",
+    "captureState": null
+   },
+   "estranged": [],
+   "banner": "The Elder Council keeps Buyantash's loyalty only where nothing has gone wrong yet. One hard season would cost it most of what is left."
+  },
+  {
+   "seed": "hxd-village-147",
+   "name": "Dzibucan",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 53
+   },
+   "inc": 37.6,
+   "header": "v4",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "The Elder Council still governs Dzibucan, but every order takes more pushing, and others are quietly settling what it leaves undone."
+  },
+  {
+   "seed": "hxd-town-108",
+   "name": "Vikby",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Town Mayor",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 32
+   },
+   "inc": 28,
+   "header": "no token matched: unclassified (the plain-description floor)",
+   "named": false,
+   "namedProse": false,
+   "atOdds": false,
+   "tie": {
+    "type": "dependent",
+    "captureState": null
+   },
+   "estranged": [],
+   "banner": "The Town Mayor still governs Vikby, but every order takes more pushing, and others are quietly settling what it leaves undone."
+  },
+  {
+   "seed": "hxd-town-114",
+   "name": "Sundvoll",
+   "label": "Contested",
+   "legit": "Tolerated",
+   "gov": "Town Mayor",
+   "first": {
+    "name": "Military/Guard",
+    "archetype": "military",
+    "weight": 45
+   },
+   "inc": 36,
+   "header": "no token matched: unclassified (the plain-description floor)",
+   "named": false,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Military/Guard:tense"
+   ],
+   "banner": "Sundvoll tolerates the Town Mayor, no more. A good season would win it friends; a bad one would cost it more than it has."
+  },
+  {
+   "seed": "hxd-hamlet-73",
+   "name": "Altavicus",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Free Elder Council",
+   "first": {
+    "name": "Military/Guard",
+    "archetype": "military",
+    "weight": 58.75
+   },
+   "inc": 42.4,
+   "header": "no token matched: unclassified (the plain-description floor)",
+   "named": false,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Military/Guard:tense"
+   ],
+   "banner": "The Free Elder Council still governs Altavicus, but every order takes more pushing, and others are quietly settling what it leaves undone."
+  },
+  {
+   "seed": "hxd-hamlet-94",
+   "name": "Qaryahkhel",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Headman's Authority",
+   "first": {
+    "name": "Military/Guard",
+    "archetype": "military",
+    "weight": 58.75
+   },
+   "inc": 42.4,
+   "header": "no token matched: unclassified (the plain-description floor)",
+   "named": false,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Military/Guard:tense"
+   ],
+   "banner": "The Headman's Authority still governs Qaryahkhel, but every order takes more pushing, and others are quietly settling what it leaves undone."
+  },
+  {
+   "seed": "hxd-hamlet-97",
+   "name": "Krasnono",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Feudal Stewardship",
+   "first": {
+    "name": "Merchant Guilds",
+    "archetype": "merchant",
+    "weight": 52.25
+   },
+   "inc": 36,
+   "header": "no token matched: unclassified (the plain-description floor)",
+   "named": true,
+   "namedProse": true,
+   "atOdds": false,
+   "tie": {
+    "type": "competitive",
+    "captureState": null
+   },
+   "estranged": [
+    "Merchant Guilds:competitive"
+   ],
+   "banner": "The Feudal Stewardship still governs Krasnono, but every order takes more pushing, and others are quietly settling what it leaves undone."
+  },
+  {
+   "seed": "hxd-village-1",
+   "name": "Yuan",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Feudal Stewardship",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 53
+   },
+   "inc": 37.6,
+   "header": "v3",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "The Feudal Stewardship still governs Yuan, but every order takes more pushing, and others are quietly settling what it leaves undone."
+  },
+  {
+   "seed": "hxd-village-4",
+   "name": "Tihoko",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 53
+   },
+   "inc": 37.6,
+   "header": "v1",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "Each season fewer dues reach the Elder Council at Tihoko on time. Nobody refuses outright; payments come late, and some never come."
+  },
+  {
+   "seed": "hxd-village-7",
+   "name": "Ráðbrekka",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 54
+   },
+   "inc": 36.8,
+   "header": "no token matched: unclassified (the plain-description floor)",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "Each season fewer dues reach the Elder Council at Ráðbrekka on time. Nobody refuses outright; payments come late, and some never come."
+  },
+  {
+   "seed": "hxd-village-13",
+   "name": "Loughfield",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 54
+   },
+   "inc": 36.8,
+   "header": "no token matched: unclassified (the plain-description floor)",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "Each season fewer dues reach the Elder Council at Loughfield on time. Nobody refuses outright; payments come late, and some never come."
+  },
+  {
+   "seed": "hxd-village-16",
+   "name": "Petenxochitl",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 54
+   },
+   "inc": 36.8,
+   "header": "no token matched: unclassified (the plain-description floor)",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "Acceptance of the Elder Council is fraying at Petenxochitl. Instructions are argued with before they are followed, and increasingly they are argued with instead."
+  },
+  {
+   "seed": "hxd-village-19",
+   "name": "Tarkhankul",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Merchant Guilds",
+    "archetype": "merchant",
+    "weight": 51.3
+   },
+   "inc": 36.8,
+   "header": "v3",
+   "named": false,
+   "namedProse": false,
+   "atOdds": false,
+   "tie": {
+    "type": "dependent",
+    "captureState": null
+   },
+   "estranged": [],
+   "banner": "Ask at Tarkhankul who decides things and you hear two answers before the day is out; neither is the Elder Council."
+  },
+  {
+   "seed": "hxd-village-22",
+   "name": "Nokhoikul",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Merchant Guilds",
+    "archetype": "merchant",
+    "weight": 34.2
+   },
+   "inc": 24,
+   "header": "v4",
+   "named": false,
+   "namedProse": false,
+   "atOdds": true,
+   "tie": {
+    "type": "dependent",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "Ask at Nokhoikul who decides things and you hear two answers before the day is out; neither is the Elder Council."
+  },
+  {
+   "seed": "hxd-village-25",
+   "name": "Izamoatl",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 53
+   },
+   "inc": 37.6,
+   "header": "v4",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "The Elder Council keeps Izamoatl's loyalty only where nothing has gone wrong yet. One hard season would cost it most of what is left."
+  },
+  {
+   "seed": "hxd-village-34",
+   "name": "Pianoforum",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 54
+   },
+   "inc": 36.8,
+   "header": "no token matched: unclassified (the plain-description floor)",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "The Elder Council keeps Pianoforum's loyalty only where nothing has gone wrong yet. One hard season would cost it most of what is left."
+  },
+  {
+   "seed": "hxd-village-40",
+   "name": "Hagiochorio",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Headman's Authority",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 36
+   },
+   "inc": 31.2,
+   "header": "v4",
+   "named": false,
+   "namedProse": false,
+   "atOdds": false,
+   "tie": {
+    "type": "dependent",
+    "captureState": null
+   },
+   "estranged": [],
+   "banner": "Ask at Hagiochorio who decides things and you hear two answers before the day is out; neither is the Headman's Authority."
+  },
+  {
+   "seed": "hxd-village-43",
+   "name": "Xiafeng",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 54
+   },
+   "inc": 36.8,
+   "header": "v4",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "Acceptance of the Elder Council is fraying at Xiafeng. Instructions are argued with before they are followed, and increasingly they are argued with instead."
+  },
+  {
+   "seed": "hxd-village-49",
+   "name": "Qal'atziyarat",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Merchant Guilds",
+    "archetype": "merchant",
+    "weight": 52.25
+   },
+   "inc": 36,
+   "header": "no token matched: unclassified (the plain-description floor)",
+   "named": true,
+   "namedProse": true,
+   "atOdds": false,
+   "tie": {
+    "type": "competitive",
+    "captureState": null
+   },
+   "estranged": [
+    "Merchant Guilds:competitive"
+   ],
+   "banner": "The Elder Council still governs Qal'atziyarat, but every order takes more pushing, and others are quietly settling what it leaves undone."
+  },
+  {
+   "seed": "hxd-village-58",
+   "name": "Shangzhen",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 54
+   },
+   "inc": 36.8,
+   "header": "v1",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "The Elder Council keeps Shangzhen's loyalty only where nothing has gone wrong yet. One hard season would cost it most of what is left."
+  },
+  {
+   "seed": "hxd-village-61",
+   "name": "Palaiopyrgos",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 54
+   },
+   "inc": 36.8,
+   "header": "v3",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "The Elder Council keeps Palaiopyrgos's loyalty only where nothing has gone wrong yet. One hard season would cost it most of what is left."
+  },
+  {
+   "seed": "hxd-village-67",
+   "name": "Jayakot",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Headman's Authority",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 48
+   },
+   "inc": 41.6,
+   "header": "v3",
+   "named": false,
+   "namedProse": false,
+   "atOdds": false,
+   "tie": {
+    "type": "dependent",
+    "captureState": null
+   },
+   "estranged": [],
+   "banner": "The Headman's Authority still governs Jayakot, but every order takes more pushing, and others are quietly settling what it leaves undone."
+  },
+  {
+   "seed": "hxd-village-76",
+   "name": "Vallemare",
+   "label": "Contested",
+   "legit": "Legitimacy Crisis",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 61
+   },
+   "inc": 23.4,
+   "header": "no token matched: unclassified (the plain-description floor)",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "Nobody at Vallemare speaks for the whole place any more; several people will speak for their own part of it."
+  },
+  {
+   "seed": "hxd-village-82",
+   "name": "Dagby",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Military/Guard",
+    "archetype": "military",
+    "weight": 42.5
+   },
+   "inc": 24.8,
+   "header": "no token matched: unclassified (the plain-description floor)",
+   "named": false,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Military/Guard:tense",
+    "Religious Authorities:tense"
+   ],
+   "banner": "Acceptance of the Elder Council is fraying at Dagby. Instructions are argued with before they are followed, and increasingly they are argued with instead."
+  },
+  {
+   "seed": "hxd-village-88",
+   "name": "Ripavetum",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Merchant Guilds",
+    "archetype": "merchant",
+    "weight": 34.2
+   },
+   "inc": 24,
+   "header": "v3",
+   "named": false,
+   "namedProse": false,
+   "atOdds": true,
+   "tie": {
+    "type": "dependent",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "Each season fewer dues reach the Elder Council at Ripavetum on time. Nobody refuses outright; payments come late, and some never come."
+  },
+  {
+   "seed": "hxd-village-91",
+   "name": "Krasnoin",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elected Reeve",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 53
+   },
+   "inc": 37.6,
+   "header": "v3",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "Each season fewer dues reach the Elected Reeve at Krasnoin on time. Nobody refuses outright; payments come late, and some never come."
+  },
+  {
+   "seed": "hxd-village-94",
+   "name": "Chichche",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elected Reeve",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 54
+   },
+   "inc": 36.8,
+   "header": "no token matched: unclassified (the plain-description floor)",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "Ask at Chichche who decides things and you hear two answers before the day is out; neither is the Elected Reeve."
+  },
+  {
+   "seed": "hxd-village-109",
+   "name": "Ravenin",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Military/Guard",
+    "archetype": "military",
+    "weight": 42.5
+   },
+   "inc": 24.8,
+   "header": "no token matched: unclassified (the plain-description floor)",
+   "named": false,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Military/Guard:tense",
+    "Religious Authorities:tense"
+   ],
+   "banner": "Ask at Ravenin who decides things and you hear two answers before the day is out; neither is the Elder Council."
+  },
+  {
+   "seed": "hxd-village-112",
+   "name": "Quirigahau",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Headman's Authority",
+   "first": {
+    "name": "Merchant Guilds",
+    "archetype": "merchant",
+    "weight": 47.5
+   },
+   "inc": 40,
+   "header": "no token matched: unclassified (the plain-description floor)",
+   "named": false,
+   "namedProse": false,
+   "atOdds": false,
+   "tie": {
+    "type": "dependent",
+    "captureState": null
+   },
+   "estranged": [],
+   "banner": "Acceptance of the Headman's Authority is fraying at Quirigahau. Instructions are argued with before they are followed, and increasingly they are argued with instead."
+  },
+  {
+   "seed": "hxd-village-118",
+   "name": "Altfurt",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 54
+   },
+   "inc": 36.8,
+   "header": "v4",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "Acceptance of the Elder Council is fraying at Altfurt. Instructions are argued with before they are followed, and increasingly they are argued with instead."
+  },
+  {
+   "seed": "hxd-village-124",
+   "name": "Dongzhen",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Military/Guard",
+    "archetype": "military",
+    "weight": 42.5
+   },
+   "inc": 24.8,
+   "header": "no token matched: unclassified (the plain-description floor)",
+   "named": false,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Military/Guard:tense",
+    "Religious Authorities:tense"
+   ],
+   "banner": "Each season fewer dues reach the Elder Council at Dongzhen on time. Nobody refuses outright; payments come late, and some never come."
+  },
+  {
+   "seed": "hxd-village-127",
+   "name": "Wuguan",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 53
+   },
+   "inc": 37.6,
+   "header": "v1",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "Each season fewer dues reach the Elder Council at Wuguan on time. Nobody refuses outright; payments come late, and some never come."
+  },
+  {
+   "seed": "hxd-village-139",
+   "name": "Karakmandi",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 54
+   },
+   "inc": 36.8,
+   "header": "v4",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "Ask at Karakmandi who decides things and you hear two answers before the day is out; neither is the Elder Council."
+  },
+  {
+   "seed": "hxd-village-142",
+   "name": "Fenggou",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 53
+   },
+   "inc": 37.6,
+   "header": "v3",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "Acceptance of the Elder Council is fraying at Fenggou. Instructions are argued with before they are followed, and increasingly they are argued with instead."
+  },
+  {
+   "seed": "hxd-village-145",
+   "name": "Izamek",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 53
+   },
+   "inc": 37.6,
+   "header": "v3",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "The Elder Council still governs Izamek, but every order takes more pushing, and others are quietly settling what it leaves undone."
+  },
+  {
+   "seed": "hxd-village-148",
+   "name": "Sanctapolis",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 54
+   },
+   "inc": 36.8,
+   "header": "v4",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "The Elder Council still governs Sanctapolis, but every order takes more pushing, and others are quietly settling what it leaves undone."
+  },
+  {
+   "seed": "hxd-town-28",
+   "name": "Sanctafossae",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Feudal Appointee",
+   "first": {
+    "name": "Landed Gentry",
+    "archetype": "noble",
+    "weight": 47.3
+   },
+   "inc": 20,
+   "header": "no token matched: unclassified (the plain-description floor)",
+   "named": false,
+   "namedProse": false,
+   "atOdds": false,
+   "tie": null,
+   "estranged": [
+    "Merchant Guilds:competitive"
+   ],
+   "banner": "Ask at Sanctafossae who decides things and you hear two answers before the day is out; neither is the Feudal Appointee."
+  },
+  {
+   "seed": "hxd-town-94",
+   "name": "Grudin",
+   "label": "Contested",
+   "legit": "Tolerated",
+   "gov": "Town Mayor",
+   "first": {
+    "name": "Military/Guard",
+    "archetype": "military",
+    "weight": 30
+   },
+   "inc": 27,
+   "header": "no token matched: unclassified (the plain-description floor)",
+   "named": false,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Military/Guard:tense"
+   ],
+   "banner": "Grudin puts up with the Town Mayor. Nothing it asks is refused, and nothing it asks arrives on time."
+  },
+  {
+   "seed": "hxd-town-97",
+   "name": "Mikroambelos",
+   "label": "Contested",
+   "legit": "Approved",
+   "gov": "Feudal Appointee",
+   "first": {
+    "name": "Landed Gentry",
+    "archetype": "noble",
+    "weight": 26.4
+   },
+   "inc": 25.3,
+   "header": "v1",
+   "named": false,
+   "namedProse": false,
+   "atOdds": false,
+   "tie": null,
+   "estranged": [],
+   "banner": "The Feudal Appointee is liked well enough at Mikroambelos that it can make an unpopular decision and still be obeyed."
+  },
+  {
+   "seed": "hxd-town-106",
+   "name": "Kitagou",
+   "label": "Contested",
+   "legit": "Tolerated",
+   "gov": "Town Council",
+   "first": {
+    "name": "Military/Guard",
+    "archetype": "military",
+    "weight": 30
+   },
+   "inc": 27,
+   "header": "no token matched: unclassified (the plain-description floor)",
+   "named": false,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Military/Guard:tense"
+   ],
+   "banner": "Kitagou puts up with the Town Council. Nothing it asks is refused, and nothing it asks arrives on time."
+  },
+  {
+   "seed": "hxd-village-26",
+   "name": "Nordby",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elected Reeve",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 53
+   },
+   "inc": 37.6,
+   "header": "v1",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "The Elected Reeve keeps Nordby's loyalty only where nothing has gone wrong yet. One hard season would cost it most of what is left."
+  },
+  {
+   "seed": "hxd-village-35",
+   "name": "Hupu",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 54
+   },
+   "inc": 36.8,
+   "header": "v4",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "The Elder Council still governs Hupu, but every order takes more pushing, and others are quietly settling what it leaves undone."
+  },
+  {
+   "seed": "hxd-village-41",
+   "name": "Ancheng",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 54
+   },
+   "inc": 36.8,
+   "header": "v3",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "The Elder Council still governs Ancheng, but every order takes more pushing, and others are quietly settling what it leaves undone."
+  },
+  {
+   "seed": "hxd-village-50",
+   "name": "Shanjin",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 53
+   },
+   "inc": 37.6,
+   "header": "v4",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "Ask at Shanjin who decides things and you hear two answers before the day is out; neither is the Elder Council."
+  },
+  {
+   "seed": "hxd-village-62",
+   "name": "Nahrsaray",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Feudal Stewardship",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 53
+   },
+   "inc": 37.6,
+   "header": "no token matched: unclassified (the plain-description floor)",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "Each season fewer dues reach the Feudal Stewardship at Nahrsaray on time. Nobody refuses outright; payments come late, and some never come."
+  },
+  {
+   "seed": "hxd-village-65",
+   "name": "Forteporta",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 53
+   },
+   "inc": 37.6,
+   "header": "v1",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "Acceptance of the Elder Council is fraying at Forteporta. Instructions are argued with before they are followed, and increasingly they are argued with instead."
+  },
+  {
+   "seed": "hxd-village-77",
+   "name": "Fionnholme",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elected Reeve",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 54
+   },
+   "inc": 36.8,
+   "header": "v3",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "The Elected Reeve still governs Fionnholme, but every order takes more pushing, and others are quietly settling what it leaves undone."
+  },
+  {
+   "seed": "hxd-village-83",
+   "name": "Fjordstad",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 54
+   },
+   "inc": 36.8,
+   "header": "v3",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "The Elder Council still governs Fjordstad, but every order takes more pushing, and others are quietly settling what it leaves undone."
+  },
+  {
+   "seed": "hxd-village-89",
+   "name": "Velikovich",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 54
+   },
+   "inc": 36.8,
+   "header": "no token matched: unclassified (the plain-description floor)",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "Each season fewer dues reach the Elder Council at Velikovich on time. Nobody refuses outright; payments come late, and some never come."
+  },
+  {
+   "seed": "hxd-village-95",
+   "name": "Kolkvam",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elected Reeve",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 54
+   },
+   "inc": 36.8,
+   "header": "v4",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "The Elected Reeve still governs Kolkvam, but every order takes more pushing, and others are quietly settling what it leaves undone."
+  },
+  {
+   "seed": "hxd-village-98",
+   "name": "Terraplenum",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 53
+   },
+   "inc": 37.6,
+   "header": "v1",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "The Elder Council still governs Terraplenum, but every order takes more pushing, and others are quietly settling what it leaves undone."
+  },
+  {
+   "seed": "hxd-village-119",
+   "name": "Achiltion",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 54
+   },
+   "inc": 36.8,
+   "header": "no token matched: unclassified (the plain-description floor)",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "The Elder Council keeps Achiltion's loyalty only where nothing has gone wrong yet. One hard season would cost it most of what is left."
+  },
+  {
+   "seed": "hxd-village-131",
+   "name": "Serrapagus",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 54
+   },
+   "inc": 36.8,
+   "header": "v4",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "The Elder Council still governs Serrapagus, but every order takes more pushing, and others are quietly settling what it leaves undone."
+  },
+  {
+   "seed": "hxd-village-140",
+   "name": "Frostvik",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Elder Council",
+   "first": {
+    "name": "Merchant Guilds",
+    "archetype": "merchant",
+    "weight": 34.2
+   },
+   "inc": 24,
+   "header": "v4",
+   "named": false,
+   "namedProse": false,
+   "atOdds": true,
+   "tie": {
+    "type": "dependent",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "The Elder Council still governs Frostvik, but every order takes more pushing, and others are quietly settling what it leaves undone."
+  },
+  {
+   "seed": "hxd-village-143",
+   "name": "Aryapat",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Feudal Stewardship",
+   "first": {
+    "name": "Religious Authorities",
+    "archetype": "religious",
+    "weight": 53
+   },
+   "inc": 37.6,
+   "header": "v3",
+   "named": true,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Religious Authorities:tense"
+   ],
+   "banner": "The Feudal Stewardship keeps Aryapat's loyalty only where nothing has gone wrong yet. One hard season would cost it most of what is left."
+  },
+  {
+   "seed": "hxd-town-23",
+   "name": "Bhagatala",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Guild Council",
+   "first": {
+    "name": "Military/Guard",
+    "archetype": "military",
+    "weight": 26.25
+   },
+   "inc": 20,
+   "header": "no token matched: unclassified (the plain-description floor)",
+   "named": false,
+   "namedProse": true,
+   "atOdds": true,
+   "tie": {
+    "type": "tense",
+    "captureState": null
+   },
+   "estranged": [
+    "Military/Guard:tense"
+   ],
+   "banner": "Acceptance of the Guild Council is fraying at Bhagatala. Instructions are argued with before they are followed, and increasingly they are argued with instead."
+  },
+  {
+   "seed": "hxd-town-32",
+   "name": "Beloko",
+   "label": "Contested",
+   "legit": "Tolerated",
+   "gov": "Feudal Appointee",
+   "first": {
+    "name": "Landed Gentry",
+    "archetype": "noble",
+    "weight": 29.7
+   },
+   "inc": 28,
+   "header": "v1",
+   "named": false,
+   "namedProse": false,
+   "atOdds": false,
+   "tie": null,
+   "estranged": [],
+   "banner": "Beloko puts up with the Feudal Appointee. Nothing it asks is refused, and nothing it asks arrives on time."
+  },
+  {
+   "seed": "hxd-town-86",
+   "name": "Vishnubari",
+   "label": "Contested",
+   "legit": "Contested",
+   "gov": "Feudal Appointee",
+   "first": {
+    "name": "Landed Gentry",
+    "archetype": "noble",
+    "weight": 49.5
+   },
+   "inc": 17.6,
+   "header": "no token matched: unclassified (the plain-description floor)",
+   "named": false,
+   "namedProse": false,
+   "atOdds": false,
+   "tie": null,
+   "estranged": [
+    "Military/Guard:competitive"
+   ],
+   "banner": "The Feudal Appointee still governs Vishnubari, but every order takes more pushing, and others are quietly settling what it leaves undone."
+  }
+ ]
+}

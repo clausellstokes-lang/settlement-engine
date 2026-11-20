@@ -1,0 +1,881 @@
+# ROOT=/home/user/settlement-engine/.claude/worktrees/agent-ac99ce80789bf85d3
+# HEAD=9f3558f67035381fdbfa92ed1a747d3218ecd9c3
+# every wording of the six src/data/dossierStateProse/*.generated.js the kernel pass (speakTierNoun) speaks: it says "the town"/"a town"/"town's" of the place
+# made by town-noun.static.mjs; eligible = the sizes its tier: marks admit (factVocabulary.js :: atomHolds); pop = any population: mark
+file	block	pool	vid	eligible	pop	dm-only	text
+defense	DS-DEF-1	readiness STRONG	2	all	-		What {settlement} can field and what {settlement} has built are both in good order; the town would take real effort to threaten and knows it.
+defense	DS-DEF-1	readiness STRONG	3	all	-		The town does not spend much time thinking about being attacked: its defences are in good order, and its people know it.
+defense	DS-DEF-1	readiness STRONG	5	all	-		Danger has come to {settlement}, and the town meets it strongly defended.
+defense	DS-DEF-1	readiness STRONG	6	all	-		People at {settlement} take the danger seriously, and they trust the town's defences to hold.
+defense	DS-DEF-1	readiness STRONG	7	all	-		The war has made {settlement} think about being attacked, and what it sees when it looks is a town that would be hard to take.
+defense	DS-DEF-1	readiness STRONG	8	all	-		With the war on, {settlement}'s people under arms and its works are both in good order, and the town means to keep them so.
+defense	DS-DEF-1	readiness WEAK	1	all	-		{settlement} could deal with a brawl or a thief, but the town could not hold off a raid.
+defense	DS-DEF-1	readiness CRITICAL	1	all	-		{settlement} is all but undefended. Nothing in the town would stop a serious attack for long.
+defense	DS-DEF-1	terrain FAVOURABLE to the defender	1	all	-		The ground does more for {settlement} than the town does. The approach is narrow, and anything coming at it has to come the long way and in the open.
+defense	DS-DEF-1	terrain FAVOURABLE to the defender	2	all	-		{settlement} is sited where the terrain carries part of the defense; what the town has built is worth more here than the same works would be on flat ground.
+defense	DS-DEF-1	terrain EXPOSED	1	all	-		{settlement} sits open. No hill or river helps it, and every defence the town has had to be built by hand.
+defense	DS-DEF-1	terrain EXPOSED	2	all	-		The site gives {settlement} nothing defensively. Every advantage the town holds is one it has paid for and must keep paying for.
+defense	DS-DEF-1	terrain EXPOSED	3	all	-		People at {settlement} know their ground gives them no help: there is no hill and no narrows, and whatever defends the town had to be built by hand.
+defense	DS-DEF-1	strategic value HIGH	1	all	-		Any map of the region marks {settlement} as worth taking, so the town has to make itself cost more to seize than it is worth.
+defense	DS-DEF-1	strategic value HIGH	2	all	-		People at {settlement} know what the town sits on and that their neighbours know it too, and it makes them careful whom they cross.
+defense	DS-DEF-1	strategic value LOW	1	all	-		Nothing at {settlement} is worth an army's season, and that plain fact is the town's best defence.
+defense	DS-DEF-1	strategic value LOW	2	all	-		{settlement} is not a prize: no map of the region marks it as worth taking, and that protects it better than anything the town has built.
+defense	DS-DEF-1	strategic value LOW	3	all	-		People at {settlement} know the town is not worth taking, and they count on that more than on their own defences.
+defense	DS-DEF-1	strategic value LOW	4	all	-		Nothing at {settlement} was worth an army's season by any sensible reckoning, and somebody has come for it anyway; the town's plainness is no defense now.
+defense	DS-DEF-2	Beasts & Monsters: plagued, perimeter AND organized force	1	all	-		The country around {settlement} is thick with creatures, and the town keeps both a wall and people to hold it, and both are in use constantly.
+defense	DS-DEF-2	Beasts & Monsters: plagued, NO perimeter and NO force	2	all	-		The town does not defend itself. What it does is watch, and move, and hope the pressure goes around it, and that is understood by everyone in it.
+defense	DS-DEF-2	Beasts & Monsters: frontier, credible deterrence	1	all	-		The tally of raids at {settlement} is short for a frontier town: with a wall and armed people behind it, most of what comes out of the wild country turns back before it reaches the houses.
+defense	DS-DEF-2	Beasts & Monsters: frontier, credible deterrence	2	all	-		The town takes the frontier seriously and has taken it seriously long enough that the arrangements are ordinary rather than anxious.
+defense	DS-DEF-2	Beasts & Monsters: frontier, force without a perimeter	1	all	-		{settlement} keeps armed people on an open frontier, which means the defense is reactive: whatever comes chooses where the fighting happens, and the town arrives afterwards.
+defense	DS-DEF-2	Beasts & Monsters: frontier, force without a perimeter	2	all	-		You see spears at {settlement} and no wall for them to stand on, so anything that came at the town from two sides at once would get in.
+defense	DS-DEF-2	Beasts & Monsters: frontier, force without a perimeter	3	all	-		People at {settlement} cannot stop what attacks from arriving, so every season the town loses something before its fighters get there.
+defense	DS-DEF-2	Beasts & Monsters: settled, defenses beyond the need	1	all	-		The country around {settlement} holds very little in the way of creatures; whatever the town's works are for, it is not them.
+defense	DS-DEF-2	Beasts & Monsters: settled, defenses beyond the need	2	all	-		Few beasts come out of the settled country around {settlement}, and the town's works see little of them.
+defense	DS-DEF-2	Beasts & Monsters: settled, defenses beyond the need	3	all	-		You notice {settlement}'s works more than anything beyond them: the settled country around the town holds few creatures.
+defense	DS-DEF-2	Beasts & Monsters: settled, nothing organized	2	all	-		People at {settlement} seldom see a beast: the settled country around the town holds few of them.
+defense	DS-DEF-2	Beasts & Monsters: settled, nothing organized	4	all	-		{settlement} kept no defence because the country never asked for one, and the country is asking now; the town is improvising what it never built.
+defense	DS-DEF-2	Invasion & War: walls AND professional garrison	3	all	-		People at {settlement} believe the town could be held, and the soldiers on the walls give them good reason to.
+defense	DS-DEF-2	Invasion & War: walls with NO force	1	all	-		{settlement} has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
+defense	DS-DEF-2	Invasion & War: walls with NO force	3	all	-		People at {settlement} admit it when asked: the town has walls and nobody to stand on them.
+defense	DS-DEF-2	Invasion & War: force with NO walls	2	all	-		The town's defense is people rather than works, and people can be gone around.
+defense	DS-DEF-2	Invasion & War: militia only	2	all	-		The militia at {settlement} know every path around the town, and they know that will not stop a professional army.
+defense	DS-DEF-2	Invasion & War: neither walls nor force	1	all	-		{settlement} has no line and no force. Organized aggression cannot be resisted here; what preserves the town is distance, diplomacy, or being beneath notice.
+defense	DS-DEF-2	Invasion & War: neither walls nor force	2	all	-		If anyone came for {settlement}, nothing about the town would stop them; it is safe for exactly as long as nobody comes.
+defense	DS-DEF-2	Invasion & War: neither walls nor force	3	all	-		The town's plan for an army is to not be interesting to one, and everybody here can state the plan.
+defense	DS-DEF-2	Invasion & War: neither walls nor force	9	all	-		With trouble at hand, {settlement}'s watch is all the town has to send, and there is no wall to send it to.
+defense	DS-DEF-2	Internal Security: full legal chain (court AND prison)	2	all	-		A thing done wrong at {settlement} goes somewhere and takes time, and the town has come to rely on that rather than on the watch's temper.
+defense	DS-DEF-2	Internal Security: court without detention	2	all	-		The town's law can name a wrong and cannot keep the person who did it, so it reaches for the purse or the road.
+defense	DS-DEF-2	Internal Security: no legal infrastructure	2	all	-		The town settles things itself, quickly, and does not always settle them well.
+defense	DS-DEF-2	Economic Survival: STRONG	1	all	-		{settlement}'s accounts have money in hand: the town can buy what a bad season needs without going begging.
+defense	DS-DEF-2	Economic Survival: STRONG	2	all	-		The town could go through a bad season with its arrangements intact, and the people who would have to be paid through one know it.
+defense	DS-DEF-2	Economic Survival: STRONG	4	all	-		The famine is costing the town dearly, and the town is paying: its money is going on food, and so far there is money enough.
+defense	DS-DEF-2	Economic Survival: STRONG	5	all	-		The debt takes much of what {settlement} earns, but what is left still keeps the town's own business running.
+defense	DS-DEF-2	Economic Survival: STRONG	6	all	-		People in {settlement} complain of what the creditor takes, but the town still meets its payments.
+defense	DS-DEF-2	Economic Survival: STRONG	8	all	-		Nobody in {settlement} lies awake over a lean year: there is enough in hand to see the town through one.
+defense	DS-DEF-2	Economic Survival: STRONG	9	all	-		Whatever the present trouble costs {settlement}, the town is paying it from money it had put by.
+defense	DS-DEF-2	Economic Survival: STRONG	10	all	-		Hunger has come to the town, but its money has not run out: what food can be bought, it buys.
+defense	DS-DEF-2	Economic Survival: STRONG	11	all	-		Food is dear and hard to find here, but whatever food reaches the town is bought: the money is there for it.
+defense	DS-DEF-2	Economic Survival: STRONG	12	all	-		The town went into this trouble with money in hand, and so far the money has held.
+defense	DS-DEF-2	Economic Survival: STRONG	13	all	-		{settlement} had money laid by when the occupiers came; what the town earns now goes to them.
+defense	DS-DEF-2	Economic Survival: CRITICAL	1	all	-		{settlement} cannot fund a response to anything. Any sustained pressure exhausts the town's capacity almost immediately and then continues.
+defense	DS-DEF-2	Economic Survival: CRITICAL	2	all	-		{settlement} has no money to meet trouble, so each misfortune goes unmended and leaves the town weaker for the next.
+defense	DS-DEF-2	Economic Survival: CRITICAL	3	all	-		The town could not pay for a bad month at {settlement}, and the people who would have to be paid know it.
+defense	DS-DEF-2	CHAIN: defence supplied	1	all	-		What {settlement}'s trades supply counts in its defence's favour: the town is better able to defend itself for them.
+defense	DS-DEF-2	CHAIN: food trades working	1	all	-		{settlement}'s food trades are working, and what they put by means the town would not run short at once if it were cut off.
+defense	DS-DEF-2	CHAIN: food trades working	2	all	-		The food trades at {settlement} are working, which would matter a great deal if the town were ever cut off.
+defense	DS-DEF-2	CHAIN: food trades working	3	all	-		As long as {settlement}'s food trades keep working, the town has some provisions to fall back on if it is cut off.
+defense	DS-DEF-2	CHAIN: food trades working	4	all	-		{settlement} is cut off now, and what its food trades put by before the siege is helping to keep the town fed.
+defense	DS-DEF-2	CHAIN: food trades failing	1	all	-		{settlement}'s food trades are failing, so less food is being put by than should be; if the town were cut off, it would have less to fall back on than it ought.
+defense	DS-DEF-2	CHAIN: food trades failing	3	all	-		The food trades at {settlement} are struggling to keep up, and less is being put by against the town being cut off than ought to be.
+defense	DS-DEF-2	CHAIN: food trades failing	4	all	-		{settlement}'s food trades are failing, and what they fail to put by is food the town would miss if it were cut off.
+defense	DS-DEF-2	Disasters & Famine: granary AND hospital	1	all	-		{settlement} holds food against a bad year and has somewhere to put the sick; between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.
+defense	DS-DEF-2	Disasters & Famine: granary AND parish care only	2	all	-		The town can eat through a bad year. What it does about a plague is pray and nurse, in that order.
+defense	DS-DEF-2	Disasters & Famine: granary AND parish care only	3	all	-		You find a full grain store at {settlement} and only a small infirmary run by the clergy, because the town has planned for hunger more than for sickness.
+defense	DS-DEF-2	Disasters & Famine: granary AND parish care only	5	all	-		The town has a little grain put by, not enough for a bad year. What it does about sickness is pray and nurse, in that order.
+defense	DS-DEF-2	Disasters & Famine: granary, NO medical provision	2	all	-		The stores will carry the town through hunger. Nothing here will carry it through a plague, and the town has not built anything that would.
+defense	DS-DEF-2	Disasters & Famine: NO reserves, hospital present	2	all	-		People at {settlement} can nurse their sick but have no grain put by, so one bad harvest would leave the town hungry the same year.
+defense	DS-DEF-2	Disasters & Famine: NO reserves, NO medical provision	2	all	-		The town's answer to a bad season is the same as its answer to a sickness, which is to endure it and count afterwards.
+defense	DS-DEF-3	Very Safe	1	all	-		Nothing much happens to people at {settlement}. The watch is heavier than anything working against it, by a margin the town does not have to think about.
+defense	DS-DEF-3	Very Safe	3	all	-		The town's record of crimes at {settlement} is short: enforcement far outweighs the criminals, and there is little to write down.
+defense	DS-DEF-3	Very Safe	5	all	-		The town's record of crimes at {settlement} is short: there is little crime to write down, and neighbours settle what there is between themselves.
+defense	DS-DEF-3	Safe	2	all	-		The town's record of crimes at {settlement} stays short: there is crime, but enforcement keeps it down and keeps it from growing.
+defense	DS-DEF-3	Safe	3	all	-		The town's record of crimes at {settlement} is still short, but it grows longer each season, and enforcement is not keeping pace.
+defense	DS-DEF-3	Safe	5	all	-		The town's record of crimes at {settlement} stays short: there is some crime, and neighbours settle most of it between themselves.
+defense	DS-DEF-3	Moderate	1	all	-		{settlement} keeps a working balance: the law is present, so is crime, and neither has the town to itself.
+defense	DS-DEF-3	Moderate	2	all	-		The town's record of crimes at {settlement} is not short, and the next few seasons will decide whether the law or the criminals gain on it.
+defense	DS-DEF-3	Unsafe	2	all	-		The town's record of crimes at {settlement} grows faster than its record of arrests, and people pay for the difference in what they lose.
+defense	DS-DEF-3	Dangerous	1	all	-		The watch at {settlement} has been overwhelmed. What happens in this town is decided by whoever is present when it happens.
+defense	DS-DEF-3	Dangerous	2	all	-		Crime at {settlement} now outweighs the law outright, and nothing in the town is safe from it.
+defense	DS-DEF-3	COMPOUND override (a crisis stress has rewritten the label)	3	all	-		The watch at {settlement} has set aside its usual rounds for the crisis, so the town's ordinary record of order no longer describes it.
+defense	DS-DEF-3	COMPOUND: slave revolt	3	all	-		Everyone at {settlement} who could keep order has gone to fight the revolt, so the rest of the town keeps its own order.
+defense	DS-DEF-3	COMPOUND: debt crisis	2	all	-		The law at {settlement} moves quickest when a debt is owed to the town's creditors.
+defense	DS-DEF-3	COMPOUND: debt crisis	3	all	-		The creditors' accounts come first at {settlement}: what enforcement the town can afford goes where their agent directs, not where the crime is.
+defense	DS-DEF-3	COMPOUND: mass migration, arrivals	3	all	-		The town's count of its people at {settlement} is out of date with so many arriving, and nobody keeping order knows who is new.
+defense	DS-DEF-3	COMPOUND: mass migration, departures	3	all	-		The town's count of its people at {settlement} still lists families who have left, and their empty houses go unguarded.
+defense	DS-DEF-3	COMPOUND: criminal governance	3	all	-		The protection money at {settlement} is the town's real tax, and those who cannot pay it go unprotected.
+defense	DS-DEF-3	First-Survey qualification (the reading is a first look)	2	all	-		This account of {settlement}'s safety comes from a first survey, so trouble the town keeps from newcomers may be missing from it.
+defense	DS-DEF-4	structure organized	4	all	-		The people who run {settlement}'s crime put down any violence that would bring the law on them: what is allowed in the town is theirs to say first, and the law's after.
+defense	DS-DEF-4	structure semi-organized	1	all	-		Criminal work at {settlement} is coordinated enough to hold routes and territories, though not yet tight enough to run the whole town.
+defense	DS-DEF-4	structure semi-organized	6	village,town,city,metropolis	-		More than one crew works {settlement}, but the town's law is heavier than any of them, and none of them can fight for the streets in the open.
+defense	DS-DEF-4	structure null (nothing organized recognized)	1	all	-		{settlement}'s books record no gang, guild or racket: what wrongdoing the town has, people do on their own account.
+defense	DS-DEF-4	structure null (nothing organized recognized)	3	all	-		Ask at {settlement} who runs things on the quiet and you get blank looks; either nobody does, or the town hides it very well.
+defense	DS-DEF-4	capture none	1	all	-		No criminal's money appears in the {seat}'s accounts at {settlement}, so what the hall spends is spent on the town.
+defense	DS-DEF-4	capture adversarial	1	all	-		The {seat} at {settlement} and the town's criminals are at open odds, and the hall's accounts show the cost: money spent on the fight is not spent on the town.
+defense	DS-DEF-4	capture adversarial	2	all	-		The hall at {settlement} moves against the operators and the operators move back, and the town is where the two of them meet.
+defense	DS-DEF-4	capture adversarial	3	all	-		The hall and the operators at {settlement} are each spending on the other and neither is gaining, and the spending is coming out of things the town needed.
+defense	DS-DEF-4	capture capture	1	all	-	Y	The criminals hold the {seat} at {settlement}. The hall's minutes record decisions made elsewhere, and the town pays for them as if they were its own.
+defense	DS-DEF-4	capture capture	2	all	-	Y	At {settlement} the criminals and the government are the same people; they run the town and use the hall to do it.
+defense	DS-DEF-4	FIXTURE: black market	1	all	-		Nothing sold at {settlement}'s black market reaches the toll book, so the town loses the dues on every load of contraband and stolen goods.
+defense	DS-DEF-4	FIXTURE: thieves' guild	1	all	-		Few thefts at {settlement} are ever written into the town's books: a thieves' guild settles them first, and the losses go uncounted.
+defense	DS-DEF-4	FIXTURE: smuggling	1	all	-		Goods moved by smuggling never pass through {settlement}'s toll book, and every load that slips past is a due the town does not collect.
+defense	DS-DEF-4	FIXTURE: smuggling	2	all	-		A smuggling network runs through {settlement}, and some of what is sold in the town never paid a toll.
+defense	DS-DEF-4	FIXTURE: gangs	2	all	-		Whatever {settlement}'s gangs take in never appears on the tax lists, and the town is poorer by what they collect.
+defense	DS-DEF-5	walls PRESENT	1	all	-		There is a line around {settlement} and it is kept: the gates shut, the works are repaired, and a stranger who comes by the road enters where the town intends.
+defense	DS-DEF-5	walls PRESENT	3	all	-		The town has a wall and arranges its day around the gates without noticing that it does.
+defense	DS-DEF-5	walls PRESENT	6	all	-		{settlement}'s wall is all that stands between the town and the siege, and every stretch of it is watched now.
+defense	DS-DEF-5	walls ABSENT	1	all	-		{settlement} is unfortified. There is no perimeter, which means the town cannot control entry and cannot make a chokepoint of anything.
+defense	DS-DEF-5	walls ABSENT	3	all	-		The town has an edge rather than a boundary at {settlement}, and the edge is wherever the last building happens to be.
+defense	DS-DEF-5	garrison PRESENT	1	all	-		{settlement} keeps a standing force: people whose work is the defense of this town and who are answerable for it as work.
+defense	DS-DEF-5	garrison PRESENT	2	all	-		{settlement}'s soldiers serve all year, not for a season; the town relies on them and grumbles about them in equal measure.
+defense	DS-DEF-5	militia PRESENT (no garrison)	1	all	-		{settlement}'s defense is its own people under arms. They know the ground, they can be raised, and raising them stops everything else the town was doing.
+defense	DS-DEF-5	militia PRESENT (no garrison)	3	all	-		{settlement} could keep soldiers and does not; the town has decided that arming itself when needed costs less than paying anybody to be armed all year.
+defense	DS-DEF-5	watch PRESENT	1	all	-		{settlement} keeps a watch, which is a matter of order rather than of war. It answers what happens inside the town and is not built for what arrives from outside it.
+defense	DS-DEF-5	watch PRESENT	2	all	-		There are people walking the town at {settlement} at night, and the town's sense of itself rests more on that than on anything at the gate.
+defense	DS-DEF-5	NO organized force at all	3	all	-		Nobody at {settlement} is responsible for defending the town; ask who is, and nobody can name anyone.
+defense	DS-DEF-5	mercenary / contracted forces PRESENT	2	all	-		The town pays for some of its soldiers and knows which ones, and treats them accordingly.
+defense	DS-DEF-5	charter hall PRESENT (specialist monster response)	2	all	-		There is somewhere at {settlement} to take the problems that are not soldiers' problems, and the town uses it more than it likes to say.
+defense	DS-DEF-5	charter hall ABSENT where the country warrants one	1	all	-		{settlement} retains no specialists. Whatever comes out of the country is met by whoever the town has, whether or not they are the right answer to it.
+defense	DS-DEF-5	arcane defense PRESENT	1	all	-		{settlement}'s defence is not all arms: some of what protects the town is magic.
+defense	DS-DEF-5	arcane defense PRESENT	3	all	-		People at {settlement} know the town's defence does not end with its weapons.
+defense	DS-DEF-5	arcane defense ABSENT	3	all	-		Anything unseen that came at {settlement} would find nothing to meet it: the town keeps no wards or seers to notice it.
+defense	DS-DEF-5	FIXTURE: charter hall	1	all	-		Adventurers at {settlement} take their contracts at the charter hall, and the town posts its worst problems there.
+defense	DS-DEF-5	FIXTURE: charter hall	2	all	-		The charter hall at {settlement} keeps a book of the bounties the town has posted, and every unclaimed one is a danger still at large.
+defense	DS-DEF-5	FIXTURE: free company	2	all	-		The free company at {settlement} keeps its own muster roll, not the town's: its fighters answer to their captain and their contracts.
+defense	DS-DEF-5	ARCANE: wizard's tower	1	all	-		The wizard's tower at {settlement} is where the town turns when a threat is beyond its ordinary defences.
+defense	DS-DEF-5	ARCANE: wizard's tower	2	all	-		The town's defence against magic rests on the wizard's tower at {settlement}, and no muster roll lists it: if the wizard leaves, it leaves too.
+defense	DS-DEF-5	ARCANE: mages' guild	1	all	-		The mages at {settlement} keep the town's wards and answer hostile spells.
+defense	DS-DEF-5	ARCANE: alchemists	1	all	-		Alchemy is practised at {settlement}, and some of what it makes goes to the town's defenders.
+defense	DS-DEF-5	ARCANE: divine	1	all	-		The clergy at {settlement} heal and ward by prayer, and the town counts them among its defences.
+defense	DS-DEF-5	ARCANE: divine	2	all	-		Divine magic stands behind {settlement}'s defence, but the priests who heal the wounded are on no muster roll, and the town cannot order them out.
+defense	DS-DEF-5	ARCANE: druidic	1	all	-		Druids at {settlement} ward the land around the town and know its ground better than anyone.
+defense	DS-DEF-5	ARCANE: druidic	2	all	-		{settlement}'s defence draws on its druids, who keep watch over the country around it; they are on no muster roll, and the town cannot order them out.
+defense	DS-DEF-5	ARCANE: practitioners	1	all	-		Practitioners of the arcane at {settlement} are called on when the town is threatened.
+defense	DS-DEF-6	Economic Backing: Well-funded	1	all	-		{settlement} pays its defense in full and on time, keeps the equipment maintained and holds something in reserve; every other arrangement in the town's defense is worth more for it.
+defense	DS-DEF-6	Economic Backing: Well-funded	2	all	-		The soldiers at {settlement} are paid, which the town regards as unremarkable and which is the single thing most likely to keep them where they are.
+defense	DS-DEF-6	Economic Backing: Critical	3	all	-		Nobody at {settlement} is being paid to defend it, and the people still doing it are doing it for reasons the town cannot rely on.
+defense	DS-DEF-6	Arcane Support: Present	2	all	-		The town has people it calls on for the things soldiers cannot do, and calls on them rarely enough that it still counts as remarkable.
+defense	DS-DEF-6	Arcane Support: Present	3	all	-		Someone at {settlement} is charged with watching for what the walls cannot see, but the town would hear of trouble in a report, not from an alarm.
+defense	DS-DEF-6	Arcane Support: Present	4	all	-		Someone at {settlement} is charged with watching for what its lookouts cannot see, but the town would hear of trouble in a report, not from an alarm.
+defense	DS-DEF-6	Legal Infrastructure: Court + Prison	1	all	-		{settlement} holds the whole chain: arrest, prosecution and detention. A wrong here has a route through the town's institutions and the route ends somewhere.
+defense	DS-DEF-6	Legal Infrastructure: Court + Prison	3	all	-		You can see the courthouse and the gaol at {settlement} from the street, and the town means you to.
+defense	DS-DEF-6	Legal Infrastructure: Court only	3	all	-		The town at {settlement} fines what it cannot hold and exiles what it cannot fine, and both fall hardest on people who have nowhere to go.
+defense	DS-DEF-6	Legal Infrastructure: Prison only	2	all	-		People are taken at {settlement} and the taking is not explained, and the town has learned not to press for the explanation.
+defense	DS-DEF-6	Medical Readiness: Hospital present	1	all	-		{settlement}'s hospital treats the wounded and contains outbreaks, and its list of the recovered is the town's strength in a siege: people saved who would otherwise be lost.
+defense	DS-DEF-6	Medical Readiness: Hospital present	2	all	-		There is a place at {settlement} for the badly hurt, and the town's willingness to fight is quietly founded on it.
+defense	DS-DEF-6	Medical Readiness: Clergy care	2	all	-		The town's sick go to the {institution} and are tended there, well and without means.
+defense	DS-DEF-6	Medical Readiness: None	2	all	-		{settlement} has nobody who could slow an outbreak; one bad sickness and the town will bury many.
+defense	DS-DEF-6	Logistics & Supply: Granary + port	3	all	-		The town has grain in store and water at the door at {settlement}, and is unhurried about threats in a way that irritates its neighbours.
+defense	DS-DEF-6	Logistics & Supply: Granary in isolation	3	all	-		What is in the store at {settlement} is the whole of the town's future in a bad season, and everybody here can estimate it.
+defense	DS-DEF-6	Logistics & Supply: Granary with road supply	2	all	-		The town has grain put by and knows it is put by against the {route} closing rather than against the harvest failing.
+defense	DS-DEF-6	Logistics & Supply: No reserves, port open	3	all	-		The town eats what the water brings at {settlement}, daily, and has no cause to wonder what it would do otherwise.
+defense	DS-DEF-6	Logistics & Supply: No reserves, landlocked	2	all	-		The town eats what arrives and what households laid in, and a season of no arrivals would empty both.
+defense	DS-DEF-6	Logistics & Supply: No reserves, landlocked	3	all	-		{settlement} has never kept reserves, so one long break in supply would leave the town hungry within the season.
+defense	DS-DEF-6	Naval Defense: Naval force	1	all	-		{settlement} controls its own sea approaches; anything coming by water would need to beat the fleet before it reached the town.
+defense	DS-DEF-6	Naval Defense: Naval force	2	all	-		Arriving by sea at {settlement}, you are met by the town's own vessels well before the harbour.
+defense	DS-DEF-6	Naval Defense: Under blockade	1	all	-		A hostile fleet sits across {settlement}'s sea approaches: the harbour book records no ship in, and the goods the town lives on have stopped.
+defense	DS-DEF-6	Naval Defense: Under blockade	3	all	-		The blockade on {settlement} is doing its work quietly. Nothing has been assaulted, and everything the town needs is a little further away each week.
+defense	DS-DEF-6	Naval Defense: Under blockade	4	all	-	Y	The fleet has closed the water to {settlement} but not cut the town off: a magical channel still brings goods through, slowly and at great cost.
+defense	DS-DEF-7	band surplus	1	all	-		{settlement} can field more than it needs. Whatever the town was built for, what it can actually put in the line today exceeds it.
+defense	DS-DEF-7	band surplus	3	all	-		Nothing threatens {settlement} and the town is at full strength anyway, which is a choice somebody made and is still paying for.
+defense	DS-DEF-7	band adequate	1	all	-		{settlement}'s duty list covers what the town needs today and little more, so one more demand would leave a post empty.
+defense	DS-DEF-7	band strained	1	all	-		{settlement} can still field a defense and it is costing the town elsewhere; what is standing in the line is standing because something else was set down.
+defense	DS-DEF-7	band critical	3	all	-		What is left at {settlement} is committed, and the town has stopped discussing what it would do if more were asked.
+defense	DS-DEF-7	band collapsed	1	all	-		{settlement}'s muster lists still carry the names, but the people are gone: the town can no longer field a defence.
+defense	DS-DEF-7	live band EXCEEDS the built profile	1	all	-		{settlement} is fielding more than its works would suggest. What is holding this town is people rather than stone, and it is holding.
+defense	DS-DEF-7	a contributor with a RECORDED reason, adverse	1	all	-		{settlement}'s muster lists show what {reason} has cost the town: fewer names fit to stand, and nobody to replace them.
+defense	DS-DEF-7	a contributor with a RECORDED reason, adverse	3	all	-		The town can name what has cost it at {settlement}, exactly, and names it whenever the subject of the walls comes up.
+defense	DS-DEF-7	a contributor with a RECORDED reason, favourable	2	all	-		The town is better defended than it was, and can name the thing that did it.
+defense	DS-DEF-7	besiegedBy present	1	all	-		There is an army at {settlement}'s walls. Everything the town does now is done inside them, and the gates have stopped being a matter of routine.
+defense	DS-DEF-7	besiegedBy present	2	all	-		{counterpart} holds the approaches to {settlement}. Nothing enters and nothing leaves, and the town's condition from here is a question of stores and time.
+defense	DS-DEF-7	besiegedBy present	3	all	-		Nobody can reach {settlement} now; you can see the town only from behind the besiegers' lines.
+defense	DS-DEF-7	besiegingTargets present (the army is abroad)	2	all	-		The town has sent its soldiers to sit outside somebody else's walls, and is quieter and emptier and more exposed for it.
+defense	DS-DEF-8	override: UNDER OCCUPATION	1	all	-		{settlement}'s defence answers to its occupiers now: the arms in the town are theirs, and whatever the townsfolk could raise themselves would be small beside them.
+defense	DS-DEF-8	override: BEAST PRESSURE	1	all	-		Beasts come out of the country at {settlement} steadily, and the town loses guards and gear to them faster than it replaces them.
+defense	DS-DEF-8	override: BEAST PRESSURE	2	all	-		The guards at {settlement} watch the country, not the town, and they do not stand down.
+defense	DS-DEF-8	override: BEAST PRESSURE	3	all	-		The beasts give {settlement} no rest between attacks, and each one costs the town something it cannot quickly replace.
+defense	DS-DEF-8	override: REVOLT ACTIVE	1	all	-		Part of {settlement}'s own people have risen, and the town's arms are turned inward against them.
+defense	DS-DEF-8	override active, viability intact	2	all	-		Life in the town goes on through the crisis: people work, eat and sleep, and the defence makes do with what is left over.
+defense	DS-DEF-9	magicDependency true	2	all	-		Some at {settlement} do work that nobody else there can do, and the town has come to lean on it without ever deciding to.
+defense	DS-DEF-9	magicDependency true	3	all	-		{settlement} leans on the people who give it help beyond ordinary work; a hard season for them (a feud, a sickness, a falling-out) is a hard season for the town.
+defense	DS-DEF-9	magicDependency true	4	all	-		A visitor to {settlement} soon learns how much the town leans on help beyond ordinary work, and on the people who give it.
+defense	DS-DEF-9	magicDependency true, with a NAMED dependent chain	3	all	-		People at {settlement} know that part of the town's work now holds up only with help beyond ordinary labour.
+defense	DS-DEF-9	magicDependency false	1	all	-		Nothing structural at {settlement} depends on arcane work. What the town makes it makes with hands and ground, and would go on making without a practitioner in it.
+defense	DS-DEF-9	magicDependency false	2	all	-		Whatever magic reaches {settlement}, the town does not rest on it: nothing it lives by would stop without it.
+defense	DS-DEF-9	magicDependency false	3	all	-		The town would go on as it is if the arcane went away; nothing it lives by waits on a spell.
+defense	DS-DEF-9	magicDependency false, availability absent	1	all	-		No one works magic at {settlement}, and nothing in the town depends on it.
+defense	DS-DEF-9	magicDependency false, availability absent	2	all	-		Nobody at {settlement} casts, brews or wards for a living, and nothing in the town leans on magic.
+defense	DS-DEF-9	magicDependency false, availability absent	3	all	-		Nobody at {settlement} sells spells or charms, and nothing in the town depends on magic.
+defense	DS-DEF-9	FLAG: magicMilitarized	1	all	-		The soldiers at {settlement} command its magic: the arcane houses answer to them, and their work goes first to the town's defence.
+defense	DS-DEF-10	badge STRONG (any arm)	1	all	-		This pressure is well covered at {settlement}. What the town has against it is more than the pressure is likely to bring.
+defense	DS-DEF-10	badge STRONG (any arm)	2	all	-		Nobody at {settlement} worries about this one, and with good reason: the town is well prepared for it.
+defense	DS-DEF-10	badge STRONG (any arm)	3	all	-		Nothing of this kind gets far at {settlement}, because the town holds more against it than it is likely to face.
+defense	DS-DEF-10	badge ADEQUATE (any arm)	2	all	-		The town would manage, and knows roughly how narrowly.
+defense	DS-DEF-10	badge ADEQUATE (any arm)	3	all	-		{settlement} can meet this at its usual size, and nothing would warn the town if it came bigger.
+defense	DS-DEF-10	badge CRITICAL (any arm)	1	all	-		{settlement} is effectively uncovered against this. Whatever the town has here would not slow the thing it is meant to slow.
+defense	DS-DEF-10	badge CRITICAL (any arm)	2	all	-		The town knows this is where it would break and has not been able to do anything about it.
+defense	DS-DEF-10	overall reading undefended	1	all	-		{settlement}'s accounts show nothing spent against beasts, armies, crime, hard times or disaster: the town is not weak in one place but bare everywhere.
+defense	DS-DEF-10	overall reading undefended	2	all	-		The town's continued existence is a matter of nothing having come for it.
+defense	DS-DEF-10	posture ACTIVE SIEGE	1	all	-		An army sits outside {settlement}, and its defence is about holding out: the town's ration lists decide how long it can.
+defense	DS-DEF-10	posture INTERNAL PRESSURE (famine)	1	all	-		{settlement} is defending a hungry town, which changes what can be asked of anyone in it and how long they will keep answering.
+defense	DS-DEF-10	posture UNDER OCCUPATION	1	all	-		{settlement}'s walls are held by {counterpart}'s troops now, and the town's own muster lists would raise only a fraction of that.
+defense	DS-DEF-10	posture UNDER OCCUPATION	3	all	-		{settlement} is strongly held and cannot use its own defence: the troops in the town answer to {counterpart}.
+defense	DS-DEF-10	posture COMMAND SPLIT (politically fractured)	1	all	-		There is more than one authority at {settlement} that believes it commands the town's defense, and the arrangements are being duplicated and contradicted in equal measure.
+defense	DS-DEF-10	posture UNDER TRIBUTE (indebted)	2	all	-		The town pays before it protects, and everybody who has to stand a watch here understands the order.
+defense	DS-DEF-10	posture SECURITY COMPROMISED (recently betrayed)	1	all	-		Something at {settlement} was given away recently, and the town's defensive arrangements are being reworked on the assumption that what was given away is known.
+defense	DS-DEF-10	posture SECURITY COMPROMISED (recently betrayed)	2	all	-	Y	The watch at {settlement} has changed its rounds and will not say why, and the town can work out why.
+defense	DS-DEF-10	posture SECURITY COMPROMISED (recently betrayed)	3	all	-		Everything {settlement} knew about its own arrangements must now be assumed to be known elsewhere, and re-arranging all of it is slower than the town has.
+defense	DS-DEF-10	posture INFILTRATION ACTIVE	1	all	-	Y	Someone inside {settlement}'s defence works for the other side and has not been found, so every list of posts and rounds the town keeps is in the enemy's hands too.
+defense	DS-DEF-10	posture INFILTRATION ACTIVE	2	all	-	Y	Each measure {settlement} takes is a measure the other side learns about, and the town has not yet stopped taking them.
+defense	DS-DEF-10	posture QUARANTINE ACTIVE (plague onset)	1	all	-		{settlement} is closed against a sickness rather than against an army; the gates are held, and they are held against the town's own country.
+defense	DS-DEF-10	posture QUARANTINE ACTIVE (plague onset)	2	all	-		Nobody comes in and nobody goes out, and the reason is not war, which the town finds harder rather than easier.
+defense	DS-DEF-10	posture QUARANTINE ACTIVE (plague onset)	3	all	-		The gates at {settlement} are being held against the town's own country, and every week of that costs the town something the country would have supplied.
+defense	DS-DEF-10	posture BEAST PRESSURE	1	all	-		What is coming out of the country at {settlement} is coming steadily, and the town's arrangements are being spent on it faster than they are being replaced.
+defense	DS-DEF-10	posture BEAST PRESSURE	3	all	-		The pressure at {settlement} does not pause between attempts, and what the town spends answering it is not being replaced at the same rate.
+defense	DS-DEF-10	posture INSURGENCY ACTIVE	1	all	-		{settlement} is being defended against people who live in it, which is a different problem from a siege and one the town's arrangements were not built for.
+defense	DS-DEF-10	posture REVOLT ACTIVE	1	all	-		A part of {settlement}'s own population has risen, and the town's arrangements are being used inward rather than outward.
+defense	DS-DEF-10	posture REVOLT ACTIVE	2	all	-		What is happening at {settlement} will end, and how it ends will decide what the town is afterwards rather than merely who holds it.
+defense	DS-DEF-10	posture REVOLT ACTIVE	3	all	-		The town's arms at {settlement} are pointed inward, and everybody holding one knows at whom.
+defense	DS-DEF-10	posture WAR FOOTING (wartime)	3	all	-		What {settlement} produces, stores and spares is all being decided against the war, and the deciding has reached things the town did not expect it to reach.
+defense	DS-DEF-10	posture MIGRATION SURGE	1	all	-		The town's count of its people at {settlement} falls further behind each week as newcomers arrive, and keeping order among them now matters more than guarding the roads.
+defense	DS-DEF-10	posture MIGRATION SURGE	2	all	-		The town is fuller than it was by {band}, and nothing about the watch, the water or the gates has been enlarged to match.
+defense	DS-DEF-12	MAGIC-DEPENDENT	1	all	-		The town's accounts at {settlement} balance only because supplies arrive by magic; if that magic failed, the town could not keep itself supplied by its own paths.
+defense	DS-DEF-12	MAGIC-DEPENDENT	2	all	-		Much of what {settlement} needs arrives by magic now, and if that magic failed the town would be cut off with too little of its own.
+defense	DS-DEF-12	MAGIC-DEPENDENT	3	all	-		People at {settlement} rely on goods that arrive by magic, and nobody there could say how the town would manage without them.
+defense	DS-DEF-12	CAPACITY: ample	1	all	-		No dependable road, river or port reaches {settlement}, and the town does not need one: it keeps itself supplied with room to spare, even in a bad year.
+defense	DS-DEF-12	CAPACITY: ample	2	all	-		By the town's own count of its stores, {settlement} has more put by than a bad year would take, so having no road costs it little.
+defense	DS-DEF-12	CAPACITY: ample	3	all	-		Traders seldom reach {settlement}, and people there seldom miss them: the town has more than enough to get through a hard year.
+defense	DS-DEF-12	CAPACITY: ample	4	all	-		In an ordinary year {settlement} would not miss the road, river or port it lacks, but this is not an ordinary year: the town is not raising the food it needs.
+defense	DS-DEF-12	CAPACITY: ample	5	all	-		No dependable road, river or port reaches {settlement}, and the town makes do without one: what it raises falls a little short of what it eats, and its stores make up the rest.
+defense	DS-DEF-12	CAPACITY: ample	6	all	-		Traders seldom reach {settlement}, and people there seldom miss them, though the town raises a little less than it eats and draws on its stores for the rest.
+defense	DS-DEF-12	CAPACITY: ample	8	all	-		No dependable road, river or port reaches {settlement}, and this year the town lives on what it had put by.
+defense	DS-DEF-12	CAPACITY: ample	9	all	-		By the town's own count of its stores, {settlement} can make up what its own food falls short by, so having no road costs it little.
+defense	DS-DEF-12	CAPACITY: ample	10	all	-		No dependable road, river or port reaches {settlement}, and the town makes do without one, though what it raises falls a little short of what it eats.
+defense	DS-DEF-12	CAPACITY: ample	11	all	-		No dependable road, river or port reaches {settlement}, and with the crisis on, the town has little put by to live on.
+defense	DS-DEF-12	CAPACITY: enough	1	all	-		No dependable road, river or port reaches {settlement}, so what the town raises is what it has, and an ordinary year leaves nothing over.
+defense	DS-DEF-12	CAPACITY: short	2	all	-		The town's count of its stores at {settlement} comes up short of what a place its size needs for a hard year, so a bad harvest there would mean going without.
+defense	DS-DEF-12	CAPACITY: short	3	all	-		At {settlement} people go without what the town cannot make for itself, and most families know a bad year would find the stores thin.
+defense	DS-DEF-12	CAPACITY: far short	2	all	-		The town's count of its stores at {settlement} falls far short of what a place its size needs for a hard year, and its people would pay the gap in the first bad season.
+defense	DS-DEF-12	CAPACITY: far short	3	all	-		Everyone at {settlement} knows the town is too big for what reaches it: what it cannot make is scarce and dear, and a bad year would hit it hard.
+defense	DS-DEF-11	WALLED-THREATENED	1	all	-		{settlement}'s accounts pay for the upkeep of its {defwork} as surely as for grain, because the country around the town is dangerous.
+defense	DS-DEF-11	WALLED-THREATENED	2	all	-		Nobody in {settlement} thinks of the {defwork} as ornament; the town knows what it is for and checks it.
+defense	DS-DEF-11	WALLED-THREATENED	3	all	-		Fresh repairs show on {settlement}'s {defwork}; the town keeps its defences in working order against a real threat.
+defense	DS-DEF-11	WALLED-QUIET	2	all	-		The older people of {settlement} say defences are easier to keep than to raise, so what the town built stands ahead of any present need.
+defense	DS-DEF-11	WALLED-QUIET	3	all	-		{settlement}'s accounts show little spent on its {defwork}, since built work needs little upkeep and the town asks little of its defences now.
+defense	DS-DEF-11	WALLED-QUIET	5	all	-		What {settlement} spent on its {defwork} in the quiet years is what stands between the town and the threat at hand.
+defense	DS-DEF-11	WALLED-QUIET	6	all	-		{settlement} kept its {defwork} in repair through the quiet years, and with news of danger on the way, the town is glad it did.
+defense	DS-DEF-11	WALLED-QUIET	7	all	-		{settlement}'s {defwork} face outward, and the trouble the town has now is not the kind they keep out.
+defense	DS-DEF-11	WALLED-STRAINED	2	all	-		{settlement} keeps its {defwork} in repair, but fewer people turn out each season to man the defences, and the town is slow to notice.
+defense	DS-DEF-11	WALLED-STRAINED	4	all	-		The siege has put more people on {settlement}'s defences than the town could ever find for them in quieter seasons.
+defense	DS-DEF-11	WALLED-STRAINED	6	all	-		{settlement} still keeps its {defwork} in repair, though nobody in the town has the work of manning the defences.
+defense	DS-DEF-11	WALLED-STRAINED	7	all	-		{settlement} keeps its {defwork} in repair, and the only people who would stand on the defences are the town's own.
+defense	DS-DEF-11	UNWALLED-SMALL	1	all	-		{settlement} is too small to wall and knows it; the town's safety is its neighbours, its distance, and its unimportance.
+defense	DS-DEF-11	UNWALLED-LARGE	1	all	-		{settlement} is as big as places that usually raise a wall of stone, and it never has; whether from confidence or thrift, the town lies open.
+defense	DS-DEF-11	UNWALLED-LARGE	2	all	-		{settlement}'s accounts show nothing spent on a wall: the money a place its size would put into stone goes to other needs, and the town stays open.
+economy	DS-ECO-1	COMBINATION C1: a high rung on a working approach	3	all	-		Nobody here talks about the price of bread. The town is well off, and the talk is about what to build next.
+economy	DS-ECO-1	COMBINATION C3: the middle rungs	2	all	-		{settlement} pays its way from year to year, and nobody here calls the town poor.
+economy	DS-ECO-1	COMBINATION C4: a low rung on a working approach	2	all	-		Little that comes past {settlement} stops there. The town is poor, and its people say so to anyone who asks.
+economy	DS-ECO-1	COMBINATION C4: a low rung on a working approach	3	all	-		{settlement}'s {access} is busy, and the town is poor all the same, and so are the traders at its market.
+economy	DS-ECO-1	COMBINATION C4: a low rung on a working approach	4	all	-		With the siege closing the roads, {settlement} has lost what passing trade used to leave behind, and the town feels the loss.
+economy	DS-ECO-1	COMBINATION C4: a low rung on a working approach	6	all	-		There is no market at {settlement} to hold whatever its {access} brings, and the town stays poor.
+economy	DS-ECO-2	FOOD: deficit	1	all	-		{settlement} does not grow enough to eat. Food comes in from outside every week, and the town pays for it every week.
+economy	DS-ECO-2	FOOD: deficit	2	all	-		Bread here is bought, not simply had. The fields do not cover the town and everyone knows which day the carts come.
+economy	DS-ECO-2	FOOD: deficit	3	all	-		The granary at {settlement} is filled from carts, not from the town's own fields.
+economy	DS-ECO-2	FOOD: surplus	2	all	-		The talk about food here is about price, not about enough. The fields have been good to the town and the stores show it.
+economy	DS-ECO-2	FOOD: surplus	3	all	-		Loaded carts leave {settlement} for other markets. The town grows more food than it can eat.
+economy	DS-ECO-2	FOOD: surplus	4	all	-		{settlement}'s fields still raise more than the town eats, but the hunger is real and the town is living off its stores.
+economy	DS-ECO-2	FOOD: balanced	2	all	-		Food is not a subject here. The town feeds itself, and it feeds itself exactly.
+economy	DS-ECO-2	FOOD: balanced	3	all	-		{settlement} sits level on food. The fields answer the town and no further, so a single failure would be felt at once and a good season would not be noticed.
+economy	DS-ECO-2	GRANARY: well stocked	4	all	-		{settlement}'s stores went into {season} full, and the town is eating them down now because of the hunger.
+economy	DS-ECO-2	GRANARY: stocked	1	all	-		The granary holds a working reserve into {season}: enough to carry the town through, not enough to lend.
+economy	DS-ECO-2	GRANARY: stocked	3	all	-		{settlement}'s granary is stocked but not deep. It will carry the town through {season} if nothing else goes wrong.
+economy	DS-ECO-2	GRANARY: stocked	4	all	-		The stores hold a working reserve into {season}: enough to carry the town through, not enough to lend.
+economy	DS-ECO-3	SHORTAGE × trade-dependent	0	all	-		The roads have gone quiet. Little reaches the markets, and what the town depends on is not arriving.
+economy	DS-ECO-3	SHORTAGE × trade-dependent	1	all	-		Fewer carts reach {settlement}'s gate than the town has paid for, and what is missing is what the town cannot make for itself.
+economy	DS-ECO-3	SHORTAGE × trade-dependent	3	all	-		Traffic into {settlement} has fallen below what the town runs on, and the stores are covering the difference for now.
+economy	DS-ECO-3	SHORTAGE × not trade-dependent	1	all	-		Little moves on {settlement}'s roads and the books barely register it. The town buys and sells almost nothing beyond its own walls.
+economy	DS-ECO-3	SHORTAGE × not trade-dependent	3	all	-		The approaches to {settlement} are empty and the market does not mind; the town trades little beyond its own fields.
+economy	DS-ECO-3	SHORTAGE × not trade-dependent	4	all	-		Little moves on {settlement}'s roads and the books barely register it. The town buys and sells almost nothing beyond its own bounds.
+economy	DS-ECO-3	SURPLUS × trade-dependent	1	all	-		More is moving through {settlement} than the town's own trade accounts for. Everything the market depends on arrives ahead of its need.
+economy	DS-ECO-3	SURPLUS × trade-dependent	2	all	-		The yard is full most mornings and the market is fat on it. What the town cannot make, the town can simply buy.
+economy	DS-ECO-3	SURPLUS × trade-dependent	3	all	-		Visitors wait behind carts to get into {settlement}. The roads carry more than the town needs.
+economy	DS-ECO-4	NO HIGHLIGHT: everything steady	1	all	-		Nothing in {settlement}'s market is priced out of the ordinary. Every good the town trades sits within its accustomed reckoning.
+economy	DS-ECO-4	MIXED: exports dear, imports cheap	1	all	-		In {settlement} what the town sells is dear and what it buys is cheap.
+economy	DS-ECO-4	MIXED: exports dear, imports cheap	3	all	-		A trader arriving at {settlement} pays dear for what the town makes and gets little for what he brought.
+economy	DS-ECO-5	IMPAIRED (canonical scarce), with a named dependency	1	all	-		The {chain} is running below what it should. It wants {resource} the town cannot supply, and the shortfall reaches the services that draw on it.
+economy	DS-ECO-5	RUNNING (canonical stable): draw only with the note fields empty (R-DST-F)	3	all	-		Nobody talks about the {chain}. It works, it has worked, and the town's attention is elsewhere.
+economy	DS-ECO-5	ENTREPÔT	1	all	-		{settlement} does not make {good}; it handles it. The goods enter, change hands and leave, and the town's earnings are in the handling.
+economy	DS-ECO-5	OPERATIONAL: the service economy (no line of supply behind it)	3	all	-		Some of what this town earns has no cargo at all. {institution} answers people, and people come.
+economy	DS-SUP-1	COMPLETE LINE, output exported	1	all	-		The line from {resource} to {good} is unbroken: the workings feed {institution}, {institution} finishes the work, and the finished goods leave the town as trade.
+economy	DS-SUP-1	COMPLETE LINE, output exported	3	all	-		This is the trade the town is known for. Every hand in the line between the {resource} and the road is one of {settlement}'s own.
+economy	DS-SUP-1	A PROCESSING HOUSE MISSING FROM THE ROSTER	2	all	-		There is no {institution} in {settlement}. What the town takes out of the ground, it sends away for others to finish.
+economy	DS-SUP-1	UPSTREAM LINK COVERED BY AN IMPORT	2	all	-		{settlement}'s {institution} has everything it needs except the {resource}, which the town has to buy in.
+economy	DS-SUP-1	RESOURCE DEPLETED	2	all	-		‹needs a dated depletion› {settlement}'s {resource} gave out {timeband_since} and the town has not found another. The workings are still there; what was in them is not.
+economy	DS-SUP-1	ENTREPÔT PASS-THROUGH (no workshop in the line)	1	all	-		Nothing in this {chain} is made at {settlement}. Goods arrive finished and go on again, and the town is paid for the handling.
+economy	DS-SUP-1	ENTREPÔT PASS-THROUGH (no workshop in the line)	3	all	-		The town does not make it and does not use it. The town moves it.
+economy	DS-SUP-1	BLOCKED: nothing can be got away	3	all	-		The town has the {resource} and no use for it. Without a road out, the ground might as well be empty.
+economy	DS-ECO-6	TIER: a large share off the books (≥30)	2	all	-	Y	A good share of the business of this town is done quietly, and the quiet part is not hiding especially hard.
+economy	DS-ECO-6	TIER: minor shadow activity (≥3)	2	all	-	Y	There is some thieving and some selling without a licence. Every town this size has both.
+economy	DS-ECO-6	FLAG: arcaneBlackMarket	1	all	-	Y	Spell components, charms and stolen scrolls change hands at {settlement} under the counter, sold by the same people who run the town's other quiet trade.
+economy	DS-ECO-6	FLAG: arcaneBlackMarket	3	all	-	Y	A visitor after arcane goods finds them here more easily than they should: the town's thieves and its mages do business with each other.
+economy	DS-ECO-6	FLAG: theocraticEconomy	1	all	-	Y	At {settlement} the faith comes before trade. The religious houses carry more weight in the town's business than its merchants do, and much of that business is done on their terms.
+economy	DS-ECO-6	FACET: an underground house	2	all	-	Y	The way into {settlement}'s {institution} is through a cellar, and the people who use it come and go by passages under the town.
+economy	DS-ECO-6	FACET: a clandestine house	1	all	-	Y	{settlement}'s {institution} does its business out of sight and pays the town no dues.
+economy	DS-ECO-7	TALLIES	0	all	-		Something has changed in this town since these tallies were taken, and it may not show in them yet.
+economy	DS-ECO-7	CATALOG	0	all	-		Something has changed in this town since this list of houses and services was drawn up, and it may not show on it yet.
+economy	DS-ECO-8	SUBSISTENCE	2	all	-		There is no spare anything in this town: no spare grain, no spare coin, no spare hands. What it has is what it is using.
+economy	DS-ECO-8	STRUGGLING	2	all	-		The town never quite makes ends meet. Every month something it needs waits for money that does not come.
+economy	DS-ECO-8	POOR	2	all	-		The town gets by. Nobody is going without bread and nobody is building anything either.
+economy	DS-ECO-8	MODERATE	3	all	-		Nothing about {settlement}'s condition asks to be remarked on. The town pays its own way and has a little in hand.
+economy	DS-ECO-8	MODERATE	4	all	-		{settlement}'s accounts still balance, and that is the one thing about the town the crisis has not yet reached.
+economy	DS-ECO-8	COMFORTABLE	2	all	-		People here put things by, and can. That is the difference between this town and a poorer one.
+economy	DS-ECO-8	COMFORTABLE	3	all	-		The town is plainly comfortable. The buildings are finished rather than patched, and the stores are more than the season needs.
+economy	DS-ECO-8	COMFORTABLE	4	all	-		The town is plainly comfortable. Its buildings are well kept, though nobody here keeps more in store than the coming season needs.
+economy	DS-ECO-8	PROSPEROUS	1	all	-		{settlement} has money to spend, and spends it on the town's buildings and their upkeep.
+economy	DS-ECO-8	PROSPEROUS	2	all	-		{settlement} is visibly well off. The halls, the walls and the roads are all better than a town this size strictly requires.
+economy	DS-ECO-8	PROSPEROUS	3	all	-		There is money here and it goes into the town. Nobody argues about whether a thing can be afforded, only about whether it should be done.
+economy	DS-ECO-8	PROSPEROUS	4	all	-		{settlement} is visibly well off. The halls, the houses and the roads are all better than a town this size strictly requires.
+economy	DS-ECO-8	WEALTHY	3	all	-		The town is rich and behaves like it. What would be a crisis elsewhere is an expense here.
+economy	DS-ECO-8	FOOD AND PROSPERITY: hunger holds the town down	1	all	-		Food is what holds {settlement} back. However its trades do, the town cannot grow richer while it cannot feed itself.
+economy	DS-ECO-8	FOOD AND PROSPERITY: hunger holds the town down	2	all	-		Whatever {settlement} earns goes first on food, and until the town can feed itself there is little left over for anything else.
+economy	DS-ECO-8	FOOD AND PROSPERITY: the cost of food weighs on the town	1	all	-		Feeding {settlement} costs it. The money spent bringing food in or making up the shortfall is money the town does not keep.
+economy	DS-ECO-8	FOOD AND PROSPERITY: the cost of food weighs on the town	2	all	-		A good part of what households at {settlement} earn goes on food, and that leaves the town a little poorer than its trades alone would make it.
+economy	DS-ECO-8	FOOD AND PROSPERITY: the cost of food weighs on the town	3	all	-		As long as food costs {settlement} this much, the town's fortunes will sit a step lower than its work deserves.
+economy	DS-ECO-8	FOOD AND PROSPERITY: full stores lift the town	1	all	-		Full stores help {settlement}'s fortunes. With food to spare and a granary to keep it in, the town has more to trade and less to fear from a bad year.
+economy	DS-ECO-8	FOOD AND PROSPERITY: full stores lift the town	2	all	-		Nobody at {settlement} worries much about the next meal, and the spare food in the granary is part of why the town does as well as it does.
+economy	DS-ECO-9	SECURE	2	all	-		The town eats. It is not a subject anyone raises unprompted.
+economy	DS-ECO-9	SECURE	4	all	-		The town ate well enough until the hunger came, and the margin it had is the first thing the hunger has spent.
+economy	DS-ECO-9	SECURE	5	all	-		{settlement}'s counts came out ahead before the hunger; they do not now, and nobody at {settlement} calls the town fed.
+economy	DS-ECO-9	IMPORT-DEPENDENT	1	all	-		A substantial part of what {settlement} needs to eat has to come from outside the town, and when it does not come, the town goes short.
+economy	DS-ECO-9	IMPORT-DEPENDENT	2	all	-		The carts feed this town as much as the fields do. Everybody knows what day they come and what it means if they do not.
+economy	DS-ECO-9	IMPORT-DEPENDENT	6	all	-		The trade that fed {settlement} is shut out by the siege, and the town is finding out what it can live without.
+economy	DS-ECO-9	DEFICIT	3	all	-		What the town raises falls far short of what it needs, and the difference is being taken out of the stores rather than made up from anywhere.
+economy	DS-ECO-9	DEFICIT	5	all	-		Nothing has come into {settlement} since the siege closed the roads, and what the town can still grow is not near enough.
+economy	DS-ECO-9	ACTIVE FAMINE	2	all	-		The town is hungry. Not short, not pressed: hungry, and the ordinary answers have already been tried.
+economy	DS-ECO-9	BLOCKADED	1	all	-		The stores are sealed off from the road. What is inside the walls is what the town has, and no count is being added to it.
+economy	DS-ECO-9	BLOCKADED	4	all	-		The stores are sealed off, and the road brings nothing more to them. What is already in the town is what the town has, and no count is being added to it.
+economy	DS-ECO-9	BLOCKADE BYPASSED	3	all	-		The town is meant to be shut and the market is not empty. Nobody local will explain that, and everybody local has noticed it.
+economy	DS-ECO-9	ACTIVE FAMINE: the failed source, most of the harvest	1	all	-		The {good} failed this year and took most of {settlement}'s own food with it. What the town does not grow now has to be bought or done without until the next harvest.
+economy	DS-ECO-9	ACTIVE FAMINE: the failed source, part of the harvest	1	all	-		The {good} failed this year and took a large part of {settlement}'s own food with it. The town's other food and its stores are carrying the loss.
+economy	DS-ECO-9	HOW THE NEED IS MET: much of it brought in	1	all	-		Food comes into {settlement} most days, and it matters: a good part of what the town eats is grown elsewhere and brought in.
+economy	DS-ECO-9	HOW THE NEED IS MET: part of it by magic	1	all	-		Not all of {settlement}'s food is grown or bought: some of what the town eats is provided by spell or by prayer, and the town would go shorter without it.
+economy	DS-ECO-9	FOOD SOURCES: one source	1	all	-		{settlement}'s own food comes first of all from its {good}, so one bad year for the {good} is felt across the whole town.
+economy	DS-ECO-9	FOOD SOURCES: one source	4	all	-		{settlement}'s own food once came first from its {good}, and the grounds are worked out: what the town still raises for itself is the less for it.
+economy	DS-ECO-9	FOOD SOURCES: several, the largest named	1	all	-		{settlement}'s food comes from more than one source, the {good} most of all, so a poor year in one does not empty the town's tables.
+economy	DS-ECO-9	FOOD SOURCES: several, the largest named	4	all	-		{settlement}'s food comes from more than one source, and this year that has not been enough: the town is hungry all the same.
+economy	DS-ECO-9	FOOD SOURCES: several, the largest named	6	all	-		{settlement}'s food comes from more than one source, the {good} most of all, and this year all of them together fall short of what the town eats.
+economy	DS-ECO-9	FOOD SOURCES: several, the largest named	7	all	-		{settlement}'s food comes from more than one source, the {good} most of all, and with the siege on, what they give and what is stored is all the town has to eat.
+economy	DS-ECO-9	FOOD SOURCES: several, the largest named	9	all	-		{settlement}'s food comes from more than one source, the {good} most of all, and together they do not quite cover what the town eats.
+economy	DS-SUP-2	CAPTURED	1	all	-	Y	The {chain} still runs and no longer runs for the town. {faction} takes its cut at the point everything must pass, and the cut is an arrangement rather than a theft.
+economy	DS-ECO-10	POSTURE: none	1	all	-		{settlement} sells nothing outward. What the town makes, the town uses, and the accounts have no export column at all.
+economy	DS-ECO-10	POSTURE: limited	1	all	-		{settlement} exports one thing. The whole of the town's outward trade rests on {good} and there is nothing behind it.
+economy	DS-ECO-10	POSTURE: limited	3	all	-		Ask what this town sells and you get one answer, given without hesitation and without a second item.
+economy	DS-ECO-10	POSTURE: vulnerable	2	all	-		What the town makes has to get out over the {access}, and the {access} is not the kind of road a trader counts on.
+economy	DS-ECO-10	POSTURE: entrepot	1	all	-		{settlement} sells on goods it never made: some of what leaves the town entered it as imports the same season.
+economy	DS-ECO-10	POSTURE: entrepot	2	village,town,city,metropolis	-		The trade here is in the moving of things, and the town's yards are as busy as its workshops.
+economy	DS-ECO-10	POSTURE: entrepot	3	all	-		Goods come and go through the town, and the town takes its part of both.
+economy	DS-ECO-10	POSTURE: import_dependent	1	all	-		{settlement} buys more than it sells, and the imbalance is structural rather than seasonal. What the town needs, the town does not make.
+economy	DS-ECO-10	POSTURE: import_dependent	2	all	-		More arrives here than leaves. That is simply how the town is arranged and everyone trades around it.
+economy	DS-ECO-10	POSTURE: established	1	all	-		{settlement} sells more than one thing beyond the town.
+economy	DS-ECO-10	POSTURE: established	2	village,town,city,metropolis	-		The yards here are full of goods bound out and no two of them are the same. This is a town that sells.
+economy	DS-ECO-10	SCARCITY: surplus	3	all	-		{good} is cheap in {settlement}; the town has more than it can use.
+economy	DS-ECO-11	TERRAIN: Coastal	1	all	-		{settlement} keeps its back to the land and its face to the water, and everything the town is good at begins at the tideline.
+economy	DS-ECO-11	TERRAIN: Coastal	3	all	-		The weather that matters in this town is the weather out at sea, and everybody watches it whether or not they sail.
+economy	DS-ECO-11	TERRAIN: Plains	1	all	-		{settlement} sits on open ground that grows things easily, and most of the town lives by farming it.
+economy	DS-ECO-11	TERRAIN: Plains	2	all	-		The country around {settlement} is open in every direction: good for a plough, good for a cart, and good for anything else that wants to reach the town.
+economy	DS-ECO-11	TERRAIN: Plains	3	all	-		Around {settlement} there is nothing but the town's own fields to the horizon, and nothing to hide behind.
+economy	DS-ECO-11	TERRAIN: Forest	2	all	-		The trees come nearly to the doorframes at {settlement}, and the town has arranged its light, its roads and its watch around them.
+economy	DS-ECO-11	TERRAIN: Forest	3	all	-		Everything in this town is made of what grows around it, and the making is the trade.
+economy	DS-ECO-11	TERRAIN: Hills	2	all	-		Nothing at {settlement} is level, and the town has made a virtue of it. The approaches are slow and the sightlines are long.
+economy	DS-ECO-11	TERRAIN: Mountains	3	all	-		Everything this town does not dig out of the mountain, it carries up to itself.
+economy	DS-ECO-11	TERRAIN: River	1	all	-		The river is {settlement}'s road and its mill-race, and most of the town's money is made along it.
+economy	DS-ECO-11	TERRAIN: River	2	all	-		{settlement} is arranged lengthwise on its water, and a stranger meets the town by walking upstream or down.
+economy	DS-ECO-11	TERRAIN: River	3	all	-		The river decides what this town can move and when, and nobody here treats that as a hardship.
+economy	DS-ECO-11	TERRAIN: Desert	3	all	-		Nothing grows here without being made to, and everybody in the town knows exactly what the making costs.
+economy	DS-ECO-11	TERRAIN: Swamp	1	all	-		The ground under {settlement} will not carry a heavy building or a straight road, and every trade in the town works around that.
+economy	DS-ECO-11	TERRAIN: Swamp	2	all	-		Only one path into {settlement} holds firm, and the town stands where that path ends.
+economy	DS-ECO-11	TERRAIN: Tundra	3	all	-		The town spends the good months preparing for the others, and does not think of that as pessimism.
+economy	DS-ECO-11	TERRAIN: anything else (the default accent)	1	all	-		The country around {settlement} is ordinary country, and what the town earns it earns by working it rather than by being anywhere in particular.
+economy	DS-ECO-11	TERRAIN: anything else (the default accent)	2	all	-		There is nothing special about the ground around {settlement}; the town has made its living by work, not by luck of place.
+economy	DS-ECO-11	TERRAIN: anything else (the default accent)	3	all	-		The ground here is what it is. The town has never had cause to describe it further.
+economy	DS-ECO-11	ECONOMIC STRENGTHS: the roster is populated	2	all	-		Ask what this town does well and you get two or three answers, all of them the same two or three answers.
+economy	DS-ECO-11	ECONOMIC STRENGTHS: the roster is populated	3	all	-		What {settlement} is for is legible within a day, because the town does a small number of things and does them visibly.
+economy	DS-ECO-11	ECONOMIC STRENGTHS: none recorded	1	all	-		Nothing about {settlement}'s ground or its trades stands out as a strength. The town works, and works at nothing in particular.
+economy	DS-ECO-11	ECONOMIC STRENGTHS: none recorded	2	all	-		This town has no speciality and has never needed one; what it makes, it makes for itself.
+economy	DS-ECO-11	STRATEGIC VALUE: the generator's assessment, framed	4	all	-		A newcomer to {settlement} soon hears what its ground is worth to the powers around it, and how little of that worth stays in the town.
+economy	DS-ECO-11	STRATEGIC VALUE: the generator's assessment, framed	5	all	-		For as long as others value {settlement}'s position, the town will have to reckon with who wants it and what they will offer for it.
+economy	DS-ECO-11	EXPLOITATION: unexploited, exportValue: high	1	all	-		There is {resource} in {settlement}'s country worth real money elsewhere, and none of it leaves the town for sale.
+economy	DS-ECO-11	EXPLOITATION: unexploited, exportValue: high	2	all	-		None of the {resource} around {settlement} is sold beyond the town, and anyone who knows its price elsewhere will want to change that.
+economy	DS-ECO-11	EXPLOITATION: unexploited, exportValue: high	3	all	-		Everybody in this town can point at the {resource}, and nobody in this town is selling it outside.
+economy	DS-ECO-11	EXPLOITATION: unexploited, exportValue: medium or low	1	all	-		{settlement} sells none of its {resource} beyond the town. It would fetch barely enough to pay for the work.
+economy	DS-ECO-11	EXPLOITATION: unexploited, exportValue: medium or low	2	all	-		There is {resource} out there and nobody has ever thought it worth selling beyond the town, which is the town's considered opinion rather than an oversight.
+economy	DS-ECO-11	EXPLOITATION: unexploited, exportValue: medium or low	3	all	-		For as long as {settlement} has stood, its {resource} has been there to take, and nobody has found it worth selling beyond the town.
+economy	DS-ECO-11	EXPLOITATION: partiallyExploited	2	all	-		{settlement} sends its {resource} out half-finished, and nobody in the town is troubled by it.
+economy	DS-ECO-11	EXPLOITATION: partiallyExploited	3	all	-		The {chain} between {resource} and {good} is begun and not finished here; what stands between the two is one {institution} the town does not have.
+economy	DS-ECO-11	EXPLOITATION: partiallyExploited	4	all	-		The town takes the easy half of this trade and sells the rest of it to whoever will do the hard half.
+economy	DS-ECO-11	EXPLOITATION: partiallyExploited	5	all	-		With the roads cut by the siege, {settlement} can no longer send out its {resource}, and what it has stays in the town.
+economy	DS-ECO-11	EXPLOITATION: partiallyExploited, nothing exported	1	all	-		{settlement} works part of the line that {resource} could support, and none of it is sold beyond the town now.
+economy	DS-ECO-11	EXPLOITATION: fullyExploited	5	all	-		With the siege on, none of {settlement}'s {resource} can go out to buyers; whatever the town works, the town must use.
+economy	DS-ECO-11	RESOURCE CONDITION: worked out, recovers in time	1	all	-		{settlement} has worked out its {resource}. Left alone, the ground will come back in time; until it does, the town buys what it used to take, or goes without.
+economy	DS-ECO-12	INCOME MIX: one source carries the town	3	all	-		{settlement} lives largely on one source of income. It is doing well enough now, but if that source has a bad year, the whole town has a bad year.
+economy	DS-ECO-12	INCOME MIX: a broad spread, no leader	1	all	-		{settlement} lives on many trades, and no one of them carries the town.
+economy	DS-ECO-12	INCOME MIX: a criminal line is present	1	all	-	Y	Some of {settlement}'s money is made by people who keep it off the tax lists, so the town collects nothing on it and honest traders carry the tax alone.
+economy	DS-ECO-12	TRADE PROFILE: exports and imports both present	1	all	-		{settlement} sends {good} out and takes other goods in, and the two columns are the whole of the town's dealings with the world.
+economy	DS-ECO-12	TRADE PROFILE: exports and imports both present	3	all	-		The market at {settlement} carries the town's own goods and other towns' goods on the same stalls, and nobody tells a visitor which is which.
+economy	DS-ECO-12	TRADE PROFILE: no significant exports	1	all	-		{settlement} sends nothing out worth recording. What the town makes, the town uses.
+economy	DS-ECO-12	TRADE PROFILE: no significant exports	2	all	-		Nothing leaves this town but people, and not many of those.
+economy	DS-ECO-12	TRADE PROFILE: no significant exports	3	all	-		{settlement} produces enough to feed and clothe itself and sells none of it, which is a decision the town has never had to revisit.
+economy	DS-ECO-12	TRADE PROFILE: imports only, nothing outward	2	all	-		The town buys what it needs and sells almost nothing, and that lasts only as long as whatever pays for it lasts.
+economy	DS-ECO-12	TRADE PROFILE: imports only, nothing outward	3	all	-		This town takes delivery and does not dispatch, and everybody here can name what the difference is bought with.
+economy	DS-ECO-12	TRADE PROFILE: isEntrepot, transit goods marked among the exports	1	all	-		Some of what leaves {settlement} as export was never the town's: it came in and went on again, and the town is paid for handling it.
+economy	DS-ECO-12	TRADE PROFILE: isEntrepot, transit goods marked among the exports	2	all	-		The export list at {settlement} is longer than the town's own trades would explain, and the difference is what passes through.
+economy	DS-ECO-12	TRADE PROFILE: isEntrepot, transit goods marked among the exports	3	all	-		Half of what goes out of this town came into it the same season, and the town's part of the business is the yard and the road.
+economy	DS-ECO-12	CRITICAL IMPORT: a house needs what the land lacks	1	all	-		Some of {settlement}'s work cannot go on without {good}, and the country around the town does not give enough of it, so the town buys from outside or that work stops.
+economy	DS-ECO-12	CRITICAL IMPORT: the land cannot give it	1	all	-		The country around {settlement} does not give the town enough {good} for what the town needs of it.
+economy	DS-ECO-12	CRITICAL IMPORT: the land cannot give it	3	all	-		The country around {settlement} does not give the town enough {good}, so the town must look elsewhere for the rest.
+economy	DS-ECO-12	INCOME WEIGHT: the religious houses	1	village,town,city,metropolis	-		Faith carries real weight at {settlement}: what the religious houses say is heard in the town's dealings, whatever their own share of its money.
+economy	DS-ECO-12	INCOME WEIGHT: the religious houses	2	village,town,city,metropolis	-		The religious houses at {settlement} are heard in its dealings, and a quarrel with them is one the town's traders feel.
+economy	DS-ECO-12	INCOME WEIGHT: the religious houses	3	all	-		{settlement} keeps no house for its faith, so none of the town's money passes through one.
+economy	DS-ECO-12	INCOME WEIGHT: the practice of magic	1	all	-		Magic carries real weight at {settlement}: what it can do is reckoned with in the town's dealings, whatever its own share of the town's money.
+economy	DS-SUP-3	COMPLETE FOR ITS TIER	3	all	-		The town can answer what a town this size ought to answer, and does not think about it further.
+economy	DS-SUP-3	SEVERAL EXPECTED CATEGORIES MISSING	2	all	-		This town is bigger than the things it can do for you, and the people here are used to going elsewhere for several of them.
+economy	DS-SUP-3	THE HEALING GAP	2	all	-		The sick in this town are tended at home, and everybody knows how far the nearest better answer is.
+economy	DS-SUP-3	A CATEGORY PRESENT BUT ITS CHAIN IMPAIRED	2	all	-		The house is still there and cannot do half of what it is known for, and the town has adjusted its expectations quietly.
+economy	DS-SUP-3	A METROPOLIS-TIER CATALOG, COMPLETE	3	all	-		There is nothing this town has to send away for, which the people here mention to visitors more often than they realise.
+general	DS-POP-1	QUANTITY: a dozen or so	2	all	-		The loss runs to a dozen or so: enough to leave a trade short-handed, not enough to alter what the town can do.
+general	DS-POP-1	QUANTITY: a dozen or so	3	all	-		About a dozen households' worth of people have moved on; the town has redistributed the work among the rest without much comment.
+general	DS-POP-1	QUANTITY: a hundred or so	2	all	-		The town is still arguing about why a hundred or so people have gone.
+general	DS-POP-1	QUANTITY: several hundred	1	all	-		Several hundred have left {settlement}. The town is measurably smaller, and its institutions have not shrunk to match.
+general	DS-POP-1	QUANTITY: several hundred	3	all	-		Several hundred people are no longer here. What they paid in, the town now raises from the ones who stayed.
+general	DS-POP-1	HERALD KIND: hungry_gap	3	all	-		The town did not grow enough to eat, and people died of it. The new graves show the cost.
+general	DS-POP-1	RECEIPT: births exceed deaths	1	all	-		More are born here than buried, and have been for a while. The town is growing from inside rather than from the road.
+general	DS-POP-1	RECEIPT: births exceed deaths	3	all	-		The rolls run in the town's favour. Nothing dramatic; simply more cradles than graves, season after season.
+general	DS-POP-1	RECEIPT: births and deaths in balance	2	all	-		Births and burials run level here. The town holds its size out of its own population, without help and without loss.
+general	DS-POP-1	RECEIPT: births and deaths in balance	3	all	-		Nothing about the town's counts is moving. It is neither growing nor failing, only continuing.
+general	DS-POP-1	RECEIPT: deficit01 positive	1	all	-		More are buried here than born. The town is not emptying quickly, and it is not replacing itself either.
+general	DS-POP-1	RECEIPT: deficit01 positive	3	all	-		The town only holds its size while newcomers keep arriving; more are buried here than born.
+general	DS-POP-1	CANDIDATE KIND: decline	1	all	-		The town is shrinking with no one leaving: deaths outrun births, a few at a time.
+general	DS-POP-1	BELIEVED TREND diverges from the ring	2	all	-	Y	{counterpart} still believes this town is emptying. It stopped some time ago, and nothing has travelled the road to say so.
+general	DS-POP-1	BELIEVED TREND diverges from the ring	3	all	-	Y	The realm's count of {settlement} is out of date, and for now the error suits the town.
+general	DS-POP-2	BAND −2: has been emptying	3	all	-		The population has fallen hard in recent years; the town is much smaller than its elders remember.
+general	DS-POP-2	BAND −1: has been thinning	2	all	-		The town has been getting smaller. Not sharply; the kind of decline you only see by comparing years.
+general	DS-POP-2	BAND 0: has held level	3	all	-		Population here has not moved. Whatever pressures the town is under, none of them have shown up in the count.
+general	DS-POP-2	BAND +1: has been growing	2	all	-		The town has been adding people year on year. Not a boom; just a place that works.
+general	DS-POP-2	BAND +1: has been growing	3	all	-		Numbers here have been rising gently. The town has begun building again, which is usually the first honest sign.
+general	DS-POP-2	BAND +2: has been swelling	2	all	-		The town has grown fast. Housing, water and order are all serving more people than they were built for.
+general	DS-POP-2	NET MAGNITUDE, banded	2	all	-		A few dozen have come or gone in recent years; the town looks much as it did.
+general	DS-POP-2	NET MAGNITUDE, banded	3	all	-		Many hundreds have come or gone in recent years; this is not the town it was.
+general	DS-GEN-1	crime_wave	5	all	population: ≥ middling		Thieving in {settlement} hits the same quarters every season, and the town has learned to live with it.
+general	DS-GEN-1	economic_disparity	3	all	-		{faction} holds the greater part of what {settlement} earns, and the rolls show the rest of the town living on the remainder without much room in it.
+general	DS-GEN-1	guild_conflict	1	all	-		Two trades in {settlement} claim the same work, and every contract written in this town has to say which of them is doing it.
+general	DS-GEN-1	guild_conflict	2	all	-		{faction} and {faction2} are not fighting in {settlement} so much as refusing each other: a job one takes, the other will not touch, and the town works around the hole.
+general	DS-GEN-1	guild_conflict	4	all	-		The quarrel between {settlement}'s trades now leaves work undone: no guild will let the wrong hands take a job, and the town waits.
+general	DS-GEN-1	magical_controversy	2	all	-		A practitioner arriving in {settlement} learns quickly that the town has a position on the subject, and that the position is not unanimous.
+general	DS-GEN-1	magical_controversy	3	all	-		{faction} wants the Art in {settlement} licensed and counted; the rest of the town wants it left alone; neither holds enough of the hall to end the argument.
+general	DS-GEN-1	outside_debt	2	all	-		What {settlement} sends away each quarter is more than the town would like to send, and anyone here can tell you roughly what it costs them without being shown a book.
+general	DS-GEN-1	outside_debt	3	all	-		{settlement} looks poorer than its trade suggests, and the reason is not in the town: the difference leaves for a creditor beyond the walls.
+general	DS-GEN-1	outside_debt	5	all	-		{settlement} carries an outside debt comfortably: the payments go out on time, and the creditor has never had a reason to look closely at the town.
+general	DS-GEN-1	resource_scarcity	3	all	-		{settlement} rations something a town this size should have in plenty, and visitors notice the queues.
+general	DS-GEN-1	succession_crisis	2	all	-		{settlement} has more than one candidate and no procedure, and the town has quietly sorted itself along the line between them.
+general	DS-GEN-2	intensity: moderate	1	all	-		{faction} and {faction2} are openly on opposite sides of {issue} in {settlement}, and the town has learned which rooms not to raise it in.
+general	DS-GEN-2	intensity: moderate	3	all	-		{settlement} works, but {faction} and {faction2} stand on opposite sides of {issue}, and the town divides along that line.
+general	DS-GEN-2	intensity: high	5	all	-		{faction} and {faction2} are close to open fighting in {settlement}; only the fear of wrecking the town holds them back.
+general	DS-GEN-3	scores.military: STRONG	3	all	-		Nobody in {settlement} expects the town to lose a straight fight, and that expectation shapes how it speaks to its neighbours.
+general	DS-GEN-3	scores.military: WEAK	3	all	-		Few in {settlement} bear arms, and the town has not needed them to.
+general	DS-GEN-3	scores.monster: ADEQUATE	2	all	-		The bounty book at {settlement} is used and modest: the town answers what troubles it and does not go looking.
+general	DS-GEN-3	scores.monster: WEAK	3	all	-		When something takes stock near {settlement}, the town's response is to talk about it.
+general	DS-GEN-3	scores.monster: CRITICAL	1	all	-		The country around {settlement} is not held at all, and the town's edge is wherever the last house happens to stand.
+general	DS-GEN-3	scores.internal: WEAK	3	all	-		Getting a thing settled in {settlement} depends on who you are, and the town is arranged accordingly.
+general	DS-GEN-3	scores.economic: STRONG	2	all	-		Prices in {settlement} hold steady from one market to the next; the town is not living hand to mouth.
+general	DS-GEN-3	scores.economic: STRONG	3	all	-		A bad year in {settlement} is a bad year and not a crisis, and the town budgets for one.
+general	DS-GEN-3	scores.magical: WEAK	3	all	-		The Art is little worked in {settlement}; when it is needed, the town has to look elsewhere.
+general	DS-GEN-3	prosperity: Poverty / Impoverished	1	all	-		{settlement} is a poor town and does not disguise it: what is here is here because it could not be sold.
+general	DS-GEN-3	prosperity: Moderate / Modest	2	all	-		{settlement}'s books show a town that pays for itself and does not accumulate.
+general	DS-GEN-3	prosperity: Comfortable / Prosperous	1	all	-		{settlement} has the look of a town where the ordinary year leaves something over.
+general	DS-GEN-3	prosperity: Comfortable / Prosperous	2	all	-		The surplus at {settlement} is real and gets spent on the town rather than out of it.
+general	DS-GEN-3	prosperity: Wealthy / Thriving	2	all	-		{settlement}'s books carry more than the town needs, and what to do with the excess is a question in its own right here.
+general	DS-GEN-3	economicViability.viable: true	1	all	-		{settlement} is a town that works: what it needs, it can get, and what it makes, it can move.
+general	DS-GEN-3	defenseProfile.readiness.label: Lightly Defended	1	all	-		{settlement}'s walls are low and broken in places; they mark the town's edge more than they defend it.
+general	DS-GEN-3	defenseProfile.readiness.label: Lightly Defended	3	all	-		{settlement} has no real defences; nothing more than a boundary marks where the town stops.
+general	DS-GEN-3	defenseProfile.readiness.label: Vulnerable	2	all	-		{settlement} has less between itself and trouble than a town this size ought to.
+general	DS-GEN-3	foodSecurity.label: Surplus	4	all	-		The surplus here is what {settlement} sells; a season that took it would cost the town its income before it cost the town its dinner.
+general	DS-GEN-3	foodSecurity.label: Import-Dependent	5	all	-		{settlement}'s market is well supplied and almost none of it was grown within sight of the town.
+general	DS-GEN-5	market (route crossroads)	1	all	-		The roads into {settlement} arrive from more directions than the town has business for, and all of them end in the same square.
+general	DS-GEN-5	market (route crossroads)	3	all	-		More passes through {settlement} than stops in it, and the town takes its living from the difference.
+general	DS-GEN-5	port	2	all	-		Work in {settlement} runs on the tide rather than the sun, and the town's hours are strange to anyone from inland.
+general	DS-GEN-5	port	3	all	-		{settlement}'s wharves are the town's real ground; what happens on the land is arranged around what happens at the quay.
+general	DS-GEN-5	river	2	all	-		Everything in {settlement} is upstream or downstream of something else, and the town gives directions that way.
+general	DS-GEN-5	ordinary (route road and the default)	4	all	-		The road runs past {settlement}, but few travellers stop, and the town sells mostly to itself.
+general	DS-GEN-6	crossroads	1	all	-		{settlement} is here because the roads are here; the town is what grew in the place where stopping made sense.
+general	DS-GEN-6	crossroads	2	all	-		Nobody chose {settlement}'s site; the roads met here, and the town grew where travellers stopped.
+general	DS-GEN-6	crossroads	3	all	-		{settlement} sits where the roads meet and eats what the roads bring: the ground under the town was never the reason for the town.
+general	DS-GEN-6	port	1	all	-		{settlement} exists because of the water, and nothing about the town makes sense without it.
+general	DS-GEN-6	port	2	all	-		{settlement}'s living comes off the quay; the fields behind it are a convenience the town could manage without.
+general	DS-GEN-6	port	3	all	-		{settlement}'s food and its goods both come in by water; without the harbour the town would have no reason to be here.
+general	DS-GEN-6	river	3	all	-		{settlement}'s ground gives less than the town needs and the river makes up the rest, which is why the town is on the river and not on better ground.
+general	DS-GEN-6	road	3	all	-		What {settlement} cannot grow comes by road; if the road closes, the town goes hungry.
+general	DS-GEN-6	road	4	all	-		{settlement} is a road town that has outgrown its fields, and it is buying the difference.
+general	DS-GEN-6	tier overlay: other tiers	3	all	-		{settlement} is an ordinary town: a few trades, a hall, and nothing that stands out.
+general	DS-GEN-7	power_economic: criminal faction in a transit hub	1	all	-	Y	{faction} holds {band} of the power in {settlement}, a town goods pass through; part of what passes is smuggled, so more trade moves than the market tallies show, and the town collects nothing on the rest.
+general	DS-GEN-7	power_economic: criminal faction in a transit hub	3	all	-		{settlement} handles more goods than its books show; some leakage is normal in a crossing town, but here it is large.
+general	DS-GEN-7	power_economic: powerful criminal faction in a prosperous settlement	1	all	-	Y	{faction} holds {band} of the power in {settlement}, and much of the town's wealth never reaches the tax lists, so the treasury is poorer than the town looks.
+general	DS-GEN-7	stress_economic: siege against trade income	1	all	-		{settlement} is under siege and has earned almost nothing since the gates shut; the town is living on what it made before.
+general	DS-GEN-7	stress_economic: siege against trade income	3	all	-		The trade {settlement} is known for has stopped, and the town has not yet felt the full loss.
+general	DS-GEN-7	power_stress: occupation against stated stability	1	village,town,city,metropolis	-		{settlement} is under occupation; the streets are quiet because soldiers hold them, not because the town is at peace.
+general	DS-GEN-7	historical_economic: the recovery narrative	1	all	-		{settlement}'s prosperity was rebuilt and not inherited: the town went down a generation and more ago, and came back inside the memory of people still working.
+general	DS-GEN-7	historical_economic: the recovery narrative	2	all	-		{settlement} went under once, before living memory, and recovered within it, and it still hoards grain and coin like a town that remembers going under.
+general	DS-GEN-7	historical_economic: the recovery narrative	3	all	-		{settlement} is comfortable now but still spends like a poor town; the fear of the old collapse has outlasted it.
+general	DS-GEN-7	structuralViolations[]	1	all	-		{settlement} keeps an institution a town its size should not be able to support, and everyone knows it.
+general	DS-GEN-7	structuralViolations[]	2	all	-		Something in {settlement} is beyond what a town its size should be able to afford, and someone is paying for it.
+general	DS-GEN-7	structuralViolations[]	3	all	-		Someone outside the town is footing the bill for {settlement}'s institutions; it keeps more than it could pay for alone.
+general	DS-GEN-7	structuralSuggestions[]	1	all	-		{settlement} lacks something a town like it would need, and a few people are already arguing over who should provide it.
+general	DS-GEN-7	structuralSuggestions[]	2	all	-		{settlement} gets by without something a town its size usually has.
+general	DS-REL-1	allied	2	all	-		Trouble for {counterpart} is trouble in {settlement}, and the town would say so out loud.
+general	DS-REL-1	cross-settlement engagements	2	all	-		The trouble {settlement} has with {counterpart} is not the whole town's trouble; it belongs to a few people on each side who have not let it go.
+general	DS-GEN-9	founding	2	all	-		{founder} put {settlement} here, and the first hard test was {challenge}; the town survived it.
+general	DS-GEN-9	founding	4	all	-		The oldest part of {settlement} still shows what the town was for when it started, which is not always what it is for now.
+general	DS-GEN-9	event type: political	2	all	-		{event} settled a question in {settlement} {timeband_since}, and the town still runs by that answer.
+general	DS-GEN-9	event type: economic	1	all	-		{event} changed what {settlement} lives on {timeband_since}, and the town has been living on the new thing ever since.
+general	DS-GEN-9	event type: magical	1	all	-		{event} left something at {settlement} that is still there {timeband_since}, and the town lives around it.
+general	DS-GEN-9	event type: demographic	1	all	-		{event}, {timeband_since}, changed {settlement}'s numbers by {band}, and the town has been that size since.
+general	DS-GEN-9	event type: exile_return	1	all	-		People {settlement} sent away came back {timeband_since}, and the town has never fully resolved what it owes them or what they owe it.
+general	DS-GEN-9	event type: exile_return	4	all	-		The returned in {settlement} have claims the town has not settled, and the claims are being pressed rather than dropped.
+general	DS-GEN-9	event type: occupation_infiltration	1	all	-		{settlement} was held {timeband_since} and the arrangements made then are the arrangements the town still runs on.
+general	DS-GEN-9	recency framing: Recent	1	all	-		It is recent enough at {settlement} that the people it happened to are the people running the town.
+general	DS-GEN-9	recency framing: Living memory	1	all	-		There are people in {settlement} who were there, and their account is not quite the town's account.
+general	DS-GEN-9	recency framing: Deep history	1	all	-		It is older than {settlement}'s own story of itself, and the town's explanation is guesswork.
+general	DS-GEN-10	PRINT-NATIVE CHAPTER OPENERS: overview	3	all	-		This is the town as {settlement} would describe itself to somebody staying.
+general	DS-HK-1	category economics: the books are the opening	4	all	-		{settlement} has so little to spare that one missed delivery would change how the town lives.
+general	DS-HK-1	category safety: the streets are the opening	3	all	-		{settlement} is a town where being competent and armed makes you immediately useful, and the town knows it.
+general	DS-HK-1	clock smuggling_rise	3	all	-		More of {settlement}'s trade is slipping past where it can be counted, and the town's income is falling with it.
+general	DS-HK-1	clock legitimacy_crisis	2	all	-		Instructions from {settlement}'s hall are being complied with slowly, which is how a town says no without saying it.
+general	DS-GEN-11	viable: true: the arithmetic closes	1	all	-		{settlement} works as a town: it can get what it needs and sell what it makes.
+general	DS-GEN-11	viable: true: the arithmetic closes	2	all	-		It is plain from the road why {settlement} is here, and nothing in the town contradicts it.
+general	DS-GEN-11	viable: true: the arithmetic closes	3	all	-		The town works, and pays its way.
+general	DS-GEN-11	viable: true: the arithmetic closes	4	all	-		{settlement} has real problems, but none of them threatens the town's living.
+general	DS-GEN-11	the MARGINAL arm: neither verdict returned	4	all	-		The town makes sense in most respects. The respects in which it does not are the ones people here decline to discuss with outsiders.
+general	DS-GEN-11	viable: false: the arithmetic does not close	3	all	-		Everyone in {settlement} knows the town spends more than it earns, and nobody can fix it.
+general	DS-GEN-11	criticalIssueCount: critical contradictions on the record	3	all	-		A handful of things about this town cannot all be true at once, and everyone here has their own explanation.
+general	DS-GEN-11	THE FIRST-SURVEY QUALIFICATION	3	all	-		This town has been described once; nobody has been back to check.
+general	DS-GEN-12	WATER-EDGE	1	all	-		In {settlement} the water comes first: everything the town does for a living is done within reach of it.
+general	DS-GEN-12	HIGH-GROUND	2	all	-		Nothing in {settlement} is level for long; the town takes the slope as a condition of living here.
+general	DS-GEN-12	HIGH-GROUND	3	all	-		Everything in {settlement} must be hauled uphill, and the town pays that price for its height.
+general	DS-GEN-12	WOODLAND	3	all	-		In {settlement} the wood is where things come from, and the town is where they are made into something.
+general	DS-GEN-12	OPEN-GROUND	1	all	-		{settlement} sits in open country with nothing to hem it in, so the town has spread wherever it liked.
+general	DS-GEN-12	OPEN-GROUND	2	all	-		Nothing hems {settlement} in; where the town stops, it stops by custom, not necessity.
+general	DS-GEN-13	MARKET-OPEN	2	all	-		{settlement}'s market lives off through-traffic; the town sells to the road as much as to itself.
+general	DS-GEN-13	MARKET-OPEN	5	all	-		With the siege closing the road, {settlement}'s market has only the town's own people left to sell to.
+general	DS-GEN-13	MARKET-NARROW	1	all	-		{settlement}'s market serves the town itself; little passes through that was not always coming here.
+general	DS-GEN-13	MARKET-NARROW	3	all	-		No great road feeds {settlement}'s market; it serves the town itself, no more.
+general	DS-GEN-13	ENTREPOT	1	town,city,metropolis	-		{settlement}'s market handles more than the town could ever use; the difference is the town's living.
+general	DS-GEN-13	ENTREPOT	2	town,city,metropolis	-		Half the goods traded in {settlement} are only passing through, and the town lives off their passing.
+general	DS-GEN-13	NO-MARKET	1	all	-		No market or fair stands in {settlement}: what trade the town does is done at the gate, at the inn and on the road.
+general	DS-GEN-13	NO-MARKET	3	all	-		No market or fair stands in {settlement}: what trade the town does is done house to house.
+general	DS-GEN-13	COMMERCE: a bank	1	all	-		A traveller passing through {settlement} can change coin, borrow or settle a debt at the town's bank without carrying the silver home.
+general	DS-GEN-13	COMMERCE: a merchant guild, no bank	2	all	-		{settlement}'s merchant guild sets the terms of trade and its members carry the town's dealings outward.
+general	DS-GEN-13	COMMERCE: a market, no guild	2	all	-		No guild keeps a house at {settlement}'s market: the town's own hold on trade there is the stall fee.
+general	DS-GEN-13	WAREHOUSES	2	all	-		A merchant at {settlement} can store a cargo in the town's warehouses and sell it when the price suits.
+general	DS-GEN-13	WAREHOUSES	3	all	-		{settlement}'s warehouses fill after the harvest and empty through the year as the town trades out of them.
+general	DS-GEN-14	FOUNDED-OLD	1	all	-		{settlement} was made for a purpose, and that purpose is {timeband_age}; the town has been added to every year since.
+general	DS-GEN-14	FOUNDED-OLD	2	all	-		{settlement} still knows why it was first built, and the town has grown well past that since.
+general	DS-POP-3	RISING-OPEN	1	all	-		{settlement} is growing and its roads are open; the town must find room for the newcomers who keep arriving.
+general	DS-POP-3	RISING-NARROW	3	all	-		The roads into {settlement} are poor and the country is long, yet the town keeps growing.
+general	DS-GEN-15	SCARRED-FRESH	1	all	-		The {calamity} still shows in {settlement}, and the town goes about its work around the damage.
+general	DS-GEN-15	SCARRED-FRESH	2	all	-		Something went wrong in {settlement} {timeband_since}, and the town is still clearing up after it.
+general	DS-GEN-15	SCARRED-FADING	2	all	-		Only people who knew {settlement} before still see where the {calamity} sat; the town has grown over it the way turf grows over a track.
+general	DS-GEN-16	ANCHORED-OLD	3	all	-		Nobody now in {settlement} saw the {calamity}, and everybody here lives in the town that time made.
+general	DS-GEN-16	ANCHORED-OLD-MARKED	2	all	-		Nobody now in {settlement} saw the {calamity}, but the town still carries a mark from that time.
+general	DS-GEN-16	LAYERED-ANCHORED	1	all	-		One hard season after another has passed over {settlement}, and each still shapes the town.
+general	DS-GEN-16	LAYERED-ANCHORED	2	all	-		{settlement} has been knocked down and has answered more than once, and the answering shows; this is a town with practice.
+general	DS-GEN-16	RECORDED-UNANCHORED	1	all	-		The {calamity} happened here, but {settlement} has moved on; nothing in the town today turns on that time.
+general	DS-GEN-16	LIVING-MEMORY	1	all	-		People in {settlement} still remember the {calamity}, and the memory weighs on the quarrels the town is having now.
+general	DS-GEN-16	LIVING-MEMORY	2	all	-		Ask about the town's present quarrels in {settlement} and before long somebody brings up the {calamity}.
+general	DS-GEN-16	LEGACY-RECOVERED-MARKED	1	all	-		{settlement} came through the {calamity}, and the mark left on the town is {timeband_age}.
+general	DS-GEN-16	LEGACY-RECOVERED-MARKED	2	all	-		The {calamity} left a mark on {settlement}, and the town came through; that mark is {timeband_age}.
+general	DS-GEN-16	LEGACY-SHIFTED	2	all	-		{settlement} still keeps the shape the town took after the {calamity}, and that shape is {timeband_age}, though the times have moved on.
+general	DS-GEN-17	GARRISONED	1	all	-		{settlement} keeps people under arms for its defence; the town does not trust to luck and neighbours.
+general	DS-GEN-17	LETTERED	2	all	-		There are people in {settlement} whose whole trade is knowing things, and the town has decided it can afford them.
+general	DS-GEN-18	HOME-FED	2	all	-		The crafts of {settlement} are the country around it, worked up: what the ground gives, the town finishes.
+general	DS-GEN-18	BOUGHT-IN	3	all	-		{institution} at {settlement} eats what the carts bring; the town's crafts begin at the weighbeam, not the field.
+general	DS-GEN-18	UNWORKED	2	all	-		There is more to be had in the country around {settlement} than the town takes, and an outsider with money could make use of it.
+power	DS-POW-1	Approved	2	all	-		The {seat} at {settlement} has the town on its side; what it asks for it generally gets, and the exceptions are few enough to name.
+power	DS-POW-1	Legitimacy Crisis	1	all	-		The {seat} at {settlement} has lost the town. What it announces is received as news from somewhere else, and the town goes on making its own arrangements.
+power	DS-POW-1	breakdown dominated by DEFENSE, adverse	1	all	-		The complaint against the {seat} at {settlement} is weakness, not theft: people think the town is badly defended, and they blame the {seat}.
+power	DS-POW-1	breakdown dominated by DEFENSE, adverse	3	all	-		{settlement} keeps one plain accusation against the {seat} (that it has left the town open) and brings it out again whenever anything else goes wrong.
+power	DS-POW-1	breakdown dominated by FOOD, adverse	2	all	-		Hunger at {settlement} has turned into a question about the {seat} rather than about the harvest; the town has decided that somebody could have arranged this better.
+power	DS-POW-1	governanceFractured true	3	all	-	Y	{settlement} has a governing body and it has a government, and they are not the same set of people. The town knows which one to approach and does not say so aloud.
+power	DS-POW-2	stable matched	1	all	-		The hall at {settlement} is settled. {faction} holds it, the town expects {faction} to go on holding it, and business is conducted on that expectation.
+power	DS-POW-2	unstable matched	1	all	-		The hall at {settlement} does not hold steady. {faction} governs, and how long {faction} governs is an open question the town asks out loud.
+power	DS-POW-2	siege matched	2	all	-		The {seat} at {settlement} governs a besieged town, which means it governs rationing, the gates and the watch rota, and defers the rest.
+power	DS-POW-2	siege matched	3	all	-		Nobody gets into {settlement} and nobody gets out, and the town's ordinary business has stopped.
+power	DS-POW-2	siege matched	4	all	-		{faction}'s hold on {settlement} is being decided outside the walls rather than inside them, and the town knows it.
+power	DS-POW-2	siege matched	6	all	-		{faction}'s hold on {settlement} is being decided outside the hall rather than inside it, and the town knows it.
+power	DS-POW-2	no token matched: unclassified (the plain-description floor)	1	all	-		{faction} holds the hall at {settlement} and the town's affairs run through it.
+power	DS-POW-2	no token matched: unclassified (the plain-description floor)	2	all	-		The {seat} at {settlement} is {faction}'s, and the town takes its questions there.
+power	DS-POW-2	governing faction holds a NARROW plurality	1	all	-		{faction} governs {settlement} by the smallest margin the town has, and every decision it takes is taken with that margin in view.
+power	DS-POW-2	governing faction holds a NARROW plurality	2	all	-		{faction} holds the hall at {settlement} because it is first and not because it is large; the town treats the arrangement as current rather than settled.
+power	DS-POW-2	recentConflict present	2	all	-		The {seat} at {settlement} governs a town that recently fought over who should rule. The side that lost still lives here and still owes the {seat} its dues, and it pays them slowly.
+power	DS-POW-2	recentConflict present	3	all	-		Nobody at {settlement} needs the trouble explained to them; it is recent enough that the town simply refers to it and moves on.
+power	DS-POW-3	crowded top rung, low instability	2	all	-		{faction} at {settlement} has a first among several rather than a head, and the town has learned to ask which of them it is dealing with today.
+power	DS-POW-3	high instability (churn at the top)	2	all	-		{faction} at {settlement} keeps replacing whoever leads it, and the town has stopped bothering to learn the name until it has lasted a season.
+power	DS-POW-3	shallow ladder (few rungs recorded)	2	all	-		{faction} at {settlement} is {npc} and a handful of others, and the town treats the handful as {npc}'s rather than as anybody's rivals.
+power	DS-POW-4	riskLabel: Stable (no challengers)	1	all	-		Nobody at {settlement} is in a position to take the {seat}'s place: whatever the town thinks of the {seat}, no contender stands ready to try.
+power	DS-POW-4	riskLabel: Stable (no challengers)	2	all	-		If anyone at {settlement} asked who might replace the {seat}, the town would have no contender to name.
+power	DS-POW-4	riskLabel: Stable (no challengers)	3	all	-		People at {settlement} may grumble, but nobody in the town stands ready to lead them against the {seat}.
+power	DS-POW-4	riskLabel: Stable (no challengers)	5	all	-		The {seat} at {settlement} has no rival and no secure holder either; the town asks who governs and gets no answer it can act on.
+power	DS-POW-4	riskLabel: Holding	1	all	-		{faction} outweighs everyone at {settlement} who wants its place, and the whole town knows who they are. {faction} holds on, but has to watch them.
+power	DS-POW-4	riskLabel: Critical. The seat could fall	2	all	-		{settlement} is waiting. The hall could change hands within the season and the town has already begun arranging itself for both answers.
+power	DS-POW-4	legitimacyHold: public backing hardens the hold	1	all	-		The town stands behind whoever sits at {settlement}, and that lets its ruler do things a ruler without the town could not try.
+power	DS-POW-4	legitimacyHold: public backing hardens the hold	2	all	-		The town's backing makes the {seat}'s hold at {settlement} hard to shake; a challenge that would be serious elsewhere is a nuisance here.
+power	DS-POW-4	legitimacyHold: public backing hardens the hold	3	all	-		There are people at {settlement} who would move on the {seat} and do not, because moving on a ruler the town is behind costs more than the seat is worth.
+power	DS-POW-4	legitimacyHold: public opinion neither helps nor hurts	3	all	-		The {seat} at {settlement} stands on its own strength alone. If the town's mood turned either way, the {seat} would feel it at once.
+power	DS-POW-4	legitimacyHold: public rejection is breaking the hold	1	all	-		The town has turned on whoever sits at {settlement}, and the turning is doing more damage to the hold than any rival has managed.
+power	DS-POW-4	legitimacyHold: public rejection is breaking the hold	3	all	-		The {seat} at {settlement} has lost the town's support, and no rival had to take it.
+power	DS-POW-4	previousGovernments present with a recorded cause	2	all	-		The town chronicle at {settlement} lists what brought down each government before this one, and none of them simply grew old. The present {seat} knows what it has to guard against.
+power	DS-POW-4	previousGovernments present with a recorded cause	3	all	-		The town remembers the government before this one and remembers what ended it, and refers to both in the same breath whenever the present {seat} overreaches.
+power	DS-POW-4	previousGovernments present with a recorded cause	4	all	-		The {seat} at {settlement} is {timeband_age} and has not gone the way the ones before it went; the town measures its rulers against that.
+power	DS-POW-5	council	2	all	-		At {settlement} the town's business goes to the whole {seat}, and everybody has learned how long the answer takes.
+power	DS-POW-5	council	3	all	-		The {seat} at {settlement} watches the town's temper closely: what it fears is the town turning on it.
+power	DS-POW-5	council	6	all	-		At {settlement} the town's business goes to the {seat}, and everybody has learned how long the answer takes.
+power	DS-POW-5	theocracy	1	all	-		The {seat} at {settlement} rules by its faith: every decision is checked against doctrine first, and only then against what the town needs.
+power	DS-POW-5	theocracy	2	all	-		The town takes its quarrels over land and law to the same people it takes its prayers to.
+power	DS-POW-5	mixed	1	all	-		Nothing at {settlement} governs cleanly: the {seat} is several kinds of power sitting together, and the town waits on the most reluctant of them.
+power	DS-POW-5	mixed	2	all	-		At {settlement} no one power is in charge, and the town gets only what the {seat}'s members can agree on.
+power	DS-POW-5	mixed	3	all	-		No part of the {seat} at {settlement} can rule alone, so they rule the town together, and each watches for the day one of them can do without the others.
+power	DS-POW-5	economicBase: extraction	1	all	-		{settlement} lives on what it takes out of the ground, and everything about the town (its rhythm, its politics, its fear) follows the yield.
+power	DS-POW-5	economicBase: extraction	2	all	-		The town's whole nightmare is the day the workings run out, and it is discussed at {settlement} the way weather is discussed elsewhere.
+power	DS-POW-5	economicBase: agrarian	2	all	-		The town's fear is the season that fails, and the fear is old and specific and shared by everybody in it.
+power	DS-POW-5	economicBase: agrarian	3	all	-		{settlement} fights between harvests or not at all; every hand taken for soldiering is a hand not bringing in the town's bread.
+power	DS-POW-5	economicBase: trade_hub	1	all	-		{settlement} lives on what passes through it, which makes the roads rather than the fields the thing the town is actually built on.
+power	DS-POW-5	economicBase: trade_hub	2	all	-		What frightens the town is a route turning elsewhere, and {settlement} watches the {route} the way a farming town watches the sky.
+power	DS-POW-5	economicBase: craft	3	all	-		{settlement} fights in a limited way and guards its supply above everything else; the town will concede a great deal before it concedes the road its workshops eat from.
+power	DS-POW-5	economicBase: mixed	3	all	-		{settlement} goes to war only when most of the town agrees, because no single trade here is big enough to drag the rest along.
+power	DS-POW-5	governing body name: a SLOT, never a baked noun	1	all	-		What governs {settlement} calls itself the {seat}; the name tells you how important the town thinks it is.
+power	DS-POW-5	FLAG: crimeIsGovt	2	all	-		The {seat} at {settlement} holds the title and little else. The gang bosses settle disputes, collect debts and hand out punishments, and the town pays them as it would pay a tax.
+power	DS-POW-5	FLAG: crimeIsGovt	4	all	-		{settlement} has people paid to keep order, but the gang bosses keep their own order alongside them, and charge the town for it.
+power	DS-POW-5	FLAG: secularBrutalism	1	all	-		{settlement} is ruled by force. Soldiers carry out the {seat}'s orders, and no temple or priest stands between the town and the punishment.
+power	DS-POW-5	FLAG: secularBrutalism	3	all	-		{settlement} is ruled by force. Soldiers carry out the occupiers' orders through the {seat}, and nobody of the faith stands between the town and the punishment.
+power	DS-POW-6	present: false (no legitimacy reading)	1	all	-		Nobody at {settlement} has ever had reason to ask whether the town backs the {seat}.
+power	DS-POW-6	present: false (no legitimacy reading)	2	all	-		Whether the town backs the {seat} is not something anybody at {settlement} has had cause to establish.
+power	DS-POW-6	neutral baseline (nothing pulling either way)	1	all	-		Nothing at {settlement} is moving the town's view of its rulers: not the harvest, not the watch, not the walls. The {seat} stands on the bare fact of being the {seat}.
+power	DS-POW-6	neutral baseline (nothing pulling either way)	4	all	-		Nothing at {settlement} is moving the town's view of its rulers: not the harvest, not the watch, not the roads. The {seat} stands on the bare fact of being the {seat}.
+power	DS-POW-6	capture pressure ADVANCING (weak security, poor prosperity)	1	village,town,city,metropolis	-	Y	Criminal money would go a long way with the officials of {settlement}: the town is poor, its streets are badly watched, and nobody has shut the door.
+power	DS-POW-6	capture pressure ADVANCING (weak security, poor prosperity)	2	village,town,city,metropolis	-	Y	Each season it gets easier to buy an official at {settlement}: the town stays poor, the streets stay badly guarded, and nobody in the {seat} is mending either.
+power	DS-POW-6	capture pressure RECOVERING (strong security, prosperity)	1	all	-	Y	The criminals at {settlement} are losing their grip on the hall: the town is doing well again and it is well guarded.
+power	DS-POW-6	capture pressure RECOVERING (strong security, prosperity)	4	all	-	Y	Criminal money finds little purchase at {settlement}: the town is doing well, and its officials have little reason to sell.
+power	DS-POW-6	capture reached a LEADER	3	all	-	Y	{faction} at {settlement} has stopped opposing one particular interest and has never explained the change, which the town has noticed without being able to name.
+power	DS-POW-6	operation role parallel marketplace	2	all	-		The town buys in two places and only mentions one of them.
+power	DS-POW-6	operation role unlicensed revenue	2	all	-		The town's debts start in one house and are collected in another, and the two are the same concern.
+power	DS-POW-6	operation role stolen goods market	3	all	-		Things taken at {settlement} reappear in the market a season later with nothing wrong about them, and the town has stopped looking closely at the interval.
+power	DS-POW-6	GM ADVISORY: the commander is a political actor	2	all	-	Y	Treat the commander at {settlement} as a power, not a servant: the {seat} cannot act against the soldiers' wishes, and anyone who wins the commander over wins the town's muscle.
+power	DS-POW-7	a RULING bloc, consolidated	2	all	-		The town knows which houses go together at {settlement} and takes its business to whichever of them is nearest.
+power	DS-POW-7	glue patronage (personal loyalty between leaders)	2	all	-		The alliance in the hall at {settlement} is between two people rather than two houses, and the town has noticed which.
+power	DS-POW-7	glue doctrine (a shared creed)	2	all	-		The houses that agree at {settlement} agree about something larger than the town, which makes them very hard to divide over anything smaller.
+power	DS-POW-7	glue threat (a common danger at the walls)	4	all	-		The fractious have closed ranks at {settlement} because of what is outside the town; the combination is real, effective and entirely contingent on the danger continuing.
+power	DS-POW-7	end survival	1	all	-		The combination at {settlement} has one purpose and it is getting the town through; anything not bearing on that is being deferred and openly so.
+power	DS-POW-7	end survival	2	all	-		Everything the combination at {settlement} is doing is aimed at the town still being here afterwards, and it says so plainly.
+power	DS-POW-7	end survival	3	all	-		The combination at {settlement} is spending its own future to buy the town a present one, and every member of it knows the bill is coming.
+power	DS-POW-7	end patron	1	all	-	Y	What the combination at {settlement} serves is somebody's interest rather than the town's, and the somebody is not always in the town.
+power	DS-POW-7	end patron	2	all	-	Y	The combination at {settlement} serves an interest, and the interest is not one of this town's powers and is not always in it.
+power	DS-POW-7	receipt formed	2	all	-		Two interests at {settlement} started voting together and have not stopped, and the town worked out what that meant before the hall admitted it.
+power	DS-POW-7	receipt realigned	3	all	-		The combination at {settlement} kept its name and changed its mind, and the town noticed the second before it noticed the first.
+power	DS-POW-7	receipt exposed	2	all	-	Y	Something was uncovered at {settlement} and the hall reorganized itself within the week, and the town has a fairly accurate idea of what.
+power	DS-POW-7	hostile leader tie HARD-BLOCKS an otherwise natural alignment	2	all	-		The obvious alliance at {settlement} does not happen, and the town knows exactly whose quarrel is preventing it.
+stressors	DS-STR-1	UNDER SIEGE	3	all	-		Nothing comes to market through the gate now, and the siege decides what the town eats.
+stressors	DS-STR-1	UNDER SIEGE	5	all	-		{settlement}'s stores are being counted daily and issued against a list, and the list is shorter than the town.
+stressors	DS-STR-1	UNDER SIEGE	7	all	-		Nothing moves on the roads. {settlement} lives on what is already inside the town, and counts it daily.
+stressors	DS-STR-1	UNDER SIEGE	8	all	-		The town is held from outside; the fields beyond it have not been worked since the lines closed.
+stressors	DS-STR-1	UNDER OCCUPATION	2	all	-		{settlement}'s taxes go to the occupier before the town sees them, and its officials take their orders from outside.
+stressors	DS-STR-1	UNDER OCCUPATION	3	all	-		The garrison is quartered inside the walls, and the town's business is conducted around it.
+stressors	DS-STR-1	UNDER OCCUPATION	4	all	-		{settlement} is held by somebody it did not choose, and the town's own hall can now only advise.
+stressors	DS-STR-1	UNDER OCCUPATION	5	all	-		Every licence, levy and permission in {settlement} passes a hand that is not the town's before it takes effect.
+stressors	DS-STR-1	UNDER OCCUPATION	7	all	-		The occupiers are quartered inside the town, and the town's business is conducted around them.
+stressors	DS-STR-1	POLITICALLY FRACTURED	3	all	-		Each power runs its own part of the town, and nothing that needs all of them gets decided.
+stressors	DS-STR-1	INDEBTED TO AN OUTSIDE POWER	2	all	-		The books balance only because nothing is being built. The debt is served first and the town second.
+stressors	DS-STR-1	RECENTLY BETRAYED	4	all	-		{settlement} was let down by somebody it had reason to trust, and the town has grown careful in a way that reaches past the person responsible.
+stressors	DS-STR-1	RECENTLY BETRAYED	5	all	-		Agreements at {settlement} are being written longer than they used to be written, and the length is the town's answer.
+stressors	DS-STR-1	INFILTRATED	4	all	-		Somebody in {settlement} answers elsewhere, and the town knows it without knowing who.
+stressors	DS-STR-1	DISEASE OUTBREAK	1	all	-		Illness is loose in the town. The market thins as people keep to their own doors, and travel is discouraged, though not forbidden.
+stressors	DS-STR-1	DISEASE OUTBREAK	4	all	-		Sickness has come into {settlement}, and the town now puts keeping it contained before its work.
+stressors	DS-STR-1	BEAST & RAIDER THREAT	1	all	-		The roads outside are not safe. Trade arrives thinner and later, and what the town does not spend on defense it does not have.
+stressors	DS-STR-1	BEAST & RAIDER THREAT	2	all	-		Attacks on the outlying holdings have become regular enough to plan around, and the plans cost coin the town was spending elsewhere.
+stressors	DS-STR-1	INSURGENCY	1	all	-		An armed movement operates inside the town's own population, and the town cannot tell it from the town.
+stressors	DS-STR-1	RELIGIOUS CRISIS	1	all	-		The town's creed is contested from within. Congregations that once shared a calendar now keep separate ones.
+stressors	DS-STR-1	SLAVE REVOLT	4	all	-		The people {settlement} held have stopped being held, and the town has no arrangement for what follows.
+stressors	DS-STR-1	WARTIME	1	all	-		The town is on a war footing. Grain, iron and men are counted for the campaign now, not for the season.
+stressors	DS-STR-1	WARTIME	4	all	-		{settlement} is at war, and the war has reached the town as absence: the men, the carts, and the ordinary expectation of next year.
+stressors	DS-STR-1	MASS MIGRATION	1	all	-		People are arriving faster than the town can house them. The camps outside the wall are becoming a second settlement.
+stressors	DS-STR-1	MASS MIGRATION	3	all	-		The newcomers came from somewhere worse, and their arrival is reshaping what the town can afford.
+stressors	DS-STR-1	MASS MIGRATION	4	all	-		People have come into {settlement} in numbers the town did not plan for, and the planning is happening after the fact.
+stressors	DS-STR-1	MASS MIGRATION	7	all	-		People are arriving faster than the town can house them. The camps at the edge of the town are becoming a second settlement.
+stressors	DS-STR-1	Overview's own section framing	2	all	-		Nothing here is urgent. The town's difficulties are old ones, not emergencies, and it has the room to work on them.
+stressors	DS-STR-2	LIFECYCLE: emerging	2	all	-		Something has begun. The town is not yet organized around it, and the people worst placed for it have not worked that out.
+stressors	DS-STR-2	LIFECYCLE: active	1	all	-		The crisis is fully underway and the town is arranged around it. Everything ordinary now happens in its margins.
+stressors	DS-STR-2	LIFECYCLE: peaking	1	all	-		It is as bad as it has been. Whatever the town had in reserve is being spent, and there is no obvious second reserve.
+stressors	DS-STR-2	LIFECYCLE: easing	1	all	-		The worst has passed. The town is not recovered, but it has begun to plan past the trouble rather than around it.
+stressors	DS-STR-2	LIFECYCLE: residual	1	all	-		The crisis is over and the town still moves as though it were not. The habits it forced have outlived the reason for them.
+stressors	DS-STR-2	COUNTERFORCE: a named leading source	1	all	-		What is carrying {settlement} through this is {reason}. The rest of the town's strengths are following that one.
+stressors	DS-STR-2	COUNTERFORCE: weak or absent	1	all	-		The town has little to bring against this. It will end when it ends, and not because of anything {settlement} does.
+stressors	DS-STR-2	COUNTERFORCE: weak or absent	3	all	-		{settlement} is enduring rather than resisting. The trouble decays at its own pace, and the town waits it out.
+stressors	DS-STR-2	SYNERGY: famine × siege	2	all	-		There is grain within a short road of here and none of it can reach the town. The shortage ends when the siege does, and not before.
+stressors	DS-STR-2	ORIGIN: declared_war	2	all	-		This is a declared quarrel rather than a shadow one. The town knows exactly who is pressing it and why.
+stressors	DS-STR-2	ORIGIN: unattributed	1	all	-		No banner has been raised. The town knows it is under pressure and does not know from whom.
+stressors	DS-STR-2	ORIGIN: unattributed	4	all	-		Whoever is doing this has not troubled to identify themselves, and knew precisely where the town is weakest.
+stressors	DS-STR-2	ORIGIN: barracks_coup	5	all	-		What moves against the government is armed, disciplined, and already inside the town by right.
+stressors	DS-STR-2	ORIGIN: council_schism	2	all	-		Two officials claim the same seal, the same office and the same tax. The town pays whichever collector reaches it first.
+stressors	DS-CND-1	SEVERITY: low	1	village,town,city,metropolis	-		The town's account books show this trouble, but the streets hardly do; it is a small one.
+stressors	DS-CND-1	SEVERITY: low	3	all	-		People notice it, but it has not yet cost the town anything it would miss.
+stressors	DS-CND-1	SEVERITY: high	3	all	-		Above everything else, this is what the town is living through now.
+stressors	DS-CND-1	SEVERITY: critical	1	all	-		The town is at its limit. There is no capacity left to absorb this, and nothing behind it that could absorb the next thing.
+stressors	DS-CND-1	SEVERITY: critical	3	all	-		This is more than the town was built to carry, and everything else waits on it.
+stressors	DS-CND-1	DIRECTION: easing	1	all	-		It is lifting. Slowly, and from a level the town remembers clearly, but lifting.
+stressors	DS-CND-1	DIRECTION: easing	2	all	-		The pressure is coming off; what the town still carries is the cost of it, not the cause.
+stressors	DS-CND-1	DIRECTION: worsening · CRISIS: famine	3	all	-		Food costs more in {settlement} each week, and there is less of it than the town needs.
+stressors	DS-CND-1	DIRECTION: stable · CRISIS: indebted	4	all	-		Newcomers to {settlement} soon learn who the town owes, and that their own dues will go to paying it.
+stressors	DS-CND-1	DIRECTION: stable · CRISIS: wartime	1	all	-		The war goes on far from {settlement}, neither nearer nor further, and the town has grown used to its demands.
+stressors	DS-CND-1	ARCHETYPE: reconstruction	1	all	-		The town is rebuilding: new work stands beside the old damage, and the job is not done.
+stressors	DS-CND-1	ARCHETYPE: boom	1	all	-		The town is doing well, and its merchants have started borrowing as if it always will.
+stressors	DS-CND-1	ARCHETYPE: flourishing	1	all	-		This is a good stretch for the town. There is room here for things that are not strictly necessary, and the accounts carry them without strain.
+stressors	DS-CND-1	ARCHETYPE: flourishing	3	all	-		The town is culturally fertile: workshops, schools, and arguments about art, all of them affordable for the first time in a while.
+stressors	DS-CND-1	PROVENANCE: no causes[] and no sourceEventType	1	all	-		Nobody remembers how this started, and the town has stopped asking.
+stressors	DS-CND-1	DURATION: inside the expiry wind-down window	3	all	-		The town is at the tail of it. What is left is lifting, and nobody is treating that as an achievement.
+stressors	DS-CND-1	FAMILY: regional transmission	2	all	-		This trouble started elsewhere and reached the town the same way its trade comes.
+stressors	DS-CND-1	FAMILY: war layer, aggressor side	3	all	-		The town is paying for an army that is fighting far away, and every levy leaves it poorer.
+stressors	DS-CND-1	FAMILY: occupation layer	3	all	-		The occupier takes more from the town than it gives, but its own accounts never show what holding the town costs it in men and coin.
+stressors	DS-CND-1	FAMILY: recovery	1	all	-		The worst is behind {settlement}. What remains is the work of being a normal town again, which is slower than it looks.
+stressors	DS-CND-1	FAMILY: recovery	3	all	-		The town is recovering, but it will not be the town it was before.
+warFaith	DS-WAR-1	statusLabel: On campaign	1	all	-		{settlement}'s army is in the field against {counterpart}, and everything the town does at home is done with that absence in it.
+warFaith	DS-WAR-1	statusLabel: On campaign	2	all	-		The town is short of the people who would ordinarily be here, and the shortness is felt at the harvest and the gate before it is felt anywhere else.
+warFaith	DS-WAR-1	statusLabel: On campaign	4	all	-		You find {settlement} quieter than a town its size should be, because so many of its people are away with the army.
+warFaith	DS-WAR-1	statusLabel: Occupied	2	all	-		What is decided at {settlement} is decided subject to the occupier; the town's institutions run, and run inside a boundary somebody else drew.
+warFaith	DS-WAR-1	statusLabel: Occupied	3	all	-		You deal with {settlement}'s own people, and only slowly notice that {counterpart}'s troops stand where the town's would.
+warFaith	DS-WAR-1	statusLabel: At war (no front at the walls, no army abroad)	1	all	-		{settlement} is at war with {counterpart} and nothing has yet come of it here. No army has marched and none has arrived, and the town is arranged for both.
+warFaith	DS-WAR-1	statusLabel: At war (no front at the walls, no army abroad)	2	all	-		The town is at war in the way a town can be at war without seeing any: prices, absences, and a great many conversations about what might happen.
+warFaith	DS-WAR-1	warExhaustion: rested	1	all	-		{settlement} carries no scar from fighting. Whatever the town has done, it has recovered from, and what it could put in the field it could put there tomorrow.
+warFaith	DS-WAR-1	warExhaustion: rested	2	all	-		The town has its people and its temper both, and neither has been spent on anything recently.
+warFaith	DS-WAR-1	warExhaustion: rested	4	all	-		{settlement} came to this fighting rested, with nothing spent before it began; that reserve is the town's whole advantage, and the fighting now draws on it daily.
+warFaith	DS-WAR-1	warExhaustion: near peace	2	all	-		The town is close to being done with the war it fought, and the last of it is going out of the place slowly.
+warFaith	DS-WAR-1	warExhaustion: near peace	3	all	-		{settlement} is at the edge of being clear of its war; another quiet season closes it, and a single hard one would put the town back where it was.
+warFaith	DS-WAR-1	warExhaustion: near peace	4	all	-		The town talks about the fighting in the past tense now, with the occasional slip.
+warFaith	DS-WAR-1	warExhaustion: war-weary	1	all	-		{settlement} has had enough. The fighting has gone on past what the town believed it agreed to, and the agreement is being withdrawn quietly in a hundred small refusals.
+warFaith	DS-WAR-1	warExhaustion: war-weary	2	all	-		{settlement}'s levy roll has been called too often: the hall still wants the war and the town no longer does, and the pressure to end it now comes from inside.
+warFaith	DS-WAR-1	warExhaustion: war-weary	3	all	-		The town is being pushed toward suing for peace by its own weariness rather than by any defeat, and the pushing gets harder to resist each season.
+warFaith	DS-WAR-1	warExhaustion: exhausted	1	all	-		{settlement}'s levy roll has no one left to call: there is no fight left in the town, and nothing more asked of it will come.
+warFaith	DS-WAR-1	warExhaustion: exhausted	2	all	-		The town has nothing left to give the war and has stopped pretending it might find some.
+warFaith	DS-WAR-1	mobilization: climbing the ramp, still distant	2	all	-		The town has begun to prepare in the way towns prepare: quietly, and well ahead of anybody admitting what for.
+warFaith	DS-WAR-1	mobilization: climbing, close to ready	2	all	-		The town is very close to war-ready now, and nothing about the preparation looks reversible from inside it.
+warFaith	DS-WAR-1	mobilization: fully ready	1	all	-		{settlement} is mobilized. The town could march this season, and everything it is doing instead is a choice.
+warFaith	DS-WAR-1	mobilization: COVERT	2	all	-	Y	Nothing at {settlement} looks like a town going to war, which at this stage is the intended appearance.
+warFaith	DS-WAR-1	occupation.pays false (the occupation is a net drain on the holder)	3	all	-		The troops holding {settlement} cost {counterpart} more than the town has ever produced, and the townsfolk know it.
+warFaith	DS-WAR-1	occupation.pays true	2	all	-		What the town produces leaves it, and the leaving has become regular enough that the town budgets around it.
+warFaith	DS-WAR-1	occupierHoldings.stretchedThin	3	all	-		The garrison at {settlement} is smaller than it was and has not been reinforced, and the town has drawn the obvious conclusion about how {counterpart} is doing elsewhere.
+warFaith	DS-WAR-1	occupierHoldings.strengthened	1	all	-		{counterpart}'s victories elsewhere are feeding the troops it keeps at {settlement}, and the town's own count of them grows each season.
+warFaith	DS-WAR-1	feasibility plausible	2	all	-		The town believes it could be taken and believes it could hold, and lives with both beliefs at once.
+warFaith	DS-WAR-1	feasibility harassment	2	all	-		What {settlement} faces from {counterpart} is raiding rather than war; the town itself is not at risk and the country around it is.
+warFaith	DS-WAR-1	feasibility harassment	3	all	-		The outlying country around {settlement} is dangerous because of {counterpart} and the town itself is not, and the distinction matters a great deal to the people living outside the walls.
+warFaith	DS-WAR-1	feasibility harassment	4	all	-		The outlying country around {settlement} is dangerous because of {counterpart} and the town itself is not, and the distinction matters a great deal to the people living out on the farms.
+warFaith	DS-WAR-1	feasibility require_coalition	1	all	-		{counterpart} could not threaten {settlement} alone and knows it; whether this town is in danger is a question about who else {counterpart} can bring.
+warFaith	DS-WAR-1	feasibility require_coalition	2	all	-		{settlement} is safe from {counterpart} alone but not from {counterpart} with allies, so the town's letters and treaties are spent on keeping those allies away.
+warFaith	DS-WAR-1	feasibility require_betrayal	2	all	-		{counterpart} cannot break {settlement}'s walls, so its hope lies in turning someone inside the town, and that threat shows in no count of troops.
+warFaith	DS-WAR-1	feasibility require_betrayal	4	all	-		{counterpart} cannot take {settlement} by force, so its hope lies in turning someone inside the town, and that threat shows in no count of troops.
+warFaith	DS-WAR-1	feasibility require_betrayal	6	all	-		The way into {settlement} is not by the road: {counterpart} is waiting for a quarrel inside the town.
+warFaith	DS-WAR-1	feasibility require_magic	1	all	-		Nothing conventional {counterpart} could bring would take {settlement}; only decisive arcane force would open this town, and that is a different kind of undertaking entirely.
+warFaith	DS-WAR-2	economic · honored	2	all	-		What the town owes {counterpart} it pays, and pays without incident, and the paying has become one of the ordinary burdens of the year.
+warFaith	DS-WAR-2	economic · defaulted	2	all	-		The town has stopped paying and has not said so formally, which everyone involved understands to be the same as saying so.
+warFaith	DS-WAR-2	relational · honored	3	all	-		You can watch {settlement}'s muster march out on time and in silence, to a war the town cares nothing for.
+warFaith	DS-WAR-2	relational · defaulted	2	all	-		The town will not send its people to {counterpart} again, and has said so where it cannot be taken back.
+warFaith	DS-WAR-2	security · honored	1	all	-		The cap on arms holds at {settlement}; no muster gathers where the terms forbid one, and the town has arranged its defense around what remains permitted.
+warFaith	DS-WAR-2	security · honored	3	all	-		The town keeps within what it agreed at {settlement}, including in the seasons when keeping to it was plainly against its interest.
+warFaith	DS-WAR-2	security · defaulted	2	all	-		The town is arming past what it agreed to and is not hiding it, which means the next move belongs to {counterpart}.
+warFaith	DS-WAR-2	security · defaulted	3	all	-		The town is arming at {settlement} in daylight, and has stopped offering any account of it.
+warFaith	DS-WAR-2	territorial · strained	5	all	-		The occupiers' duty lists at {settlement} now put more of their troops on policing the town than on watching the country, and more each season.
+warFaith	DS-WAR-2	territorial · defaulted	1	all	-		The townspeople of {settlement} have taken up arms against the occupiers' troops, now besieged inside the town they hold, and the treaty's terms here are torn up.
+warFaith	DS-WAR-2	territorial · defaulted	2	all	-		The town has turned on the soldiers holding it, and the soldiers are now holding a position rather than a place.
+warFaith	DS-WAR-2	political · strained	1	all	-		The installed seat at {settlement} wavers; its writ runs thinly beyond the hall itself, and the parts of the town that ignore it are growing.
+warFaith	DS-WAR-2	political · defaulted	2	all	-		The town took its hall back, and the taking was not gentle and was not disputed by anybody who lives here.
+warFaith	DS-WAR-2	informational · honored	2	all	-		There are people at the hall who are not the town's and everybody knows which, and the arrangement is tolerated as the price of the peace.
+warFaith	DS-WAR-2	informational · honored	3	all	-		At {settlement}'s hall you meet people plainly not of the town and plainly entitled to be there.
+warFaith	DS-WAR-2	sovereignty · defaulted	2	all	-		The town's own dispute is no longer the town's own, and the people who made it somebody else's are visible from the gate.
+warFaith	DS-WAR-2	generic floor · honored	2	all	-		Whatever was agreed is being done, and the town has stopped watching to see whether it will be.
+warFaith	DS-WAR-2	generic floor · strained	3	all	-		The town keeps what it agreed at {settlement} and has begun to talk openly about the cost of keeping it.
+warFaith	DS-WAR-2	generic floor · defaulted	2	all	-		What was agreed is not being done, and the town has stopped explaining why.
+warFaith	DS-WAR-2	document-level: the treaty runs out within the year	2	all	-		The peace has a short time left in it, and the town has begun to talk about afterwards as a real place.
+warFaith	DS-WAR-2	document-level: the town is the LOSER side	2	all	-		The town has carried these terms {timeband_since} and has stopped describing them as recent.
+warFaith	DS-WAR-2	document-level: the town is the VICTOR side	1	all	-		{settlement} wrote these terms and {counterpart} keeps them, and what the town is owed arrives because the town won rather than because it asked.
+warFaith	DS-WAR-4	Belligerent	2	all	-		The town's temper is known. When something goes wrong at a border, {settlement} is not the party that waits.
+warFaith	DS-WAR-4	Assertive	3	all	-		The town at {settlement} does not let a thing go, and its neighbours settle small matters with it promptly rather than discover what happens otherwise.
+warFaith	DS-WAR-4	Cautious	3	all	-		The town at {settlement} would rather be wronged than be at war, and says so when the question is put directly.
+warFaith	DS-WAR-5	posture peace	2	all	-		The town is doing what it does, and has been doing it long enough that a muster would be a genuine interruption.
+warFaith	DS-WAR-5	posture alert	2	all	-		The town has not changed what it does and has changed how carefully it does it.
+warFaith	DS-WAR-5	posture war_preparation	1	all	-		{settlement}'s market books show the town buying for war: the change shows first in what it buys, and only later in who it calls up.
+warFaith	DS-WAR-5	posture war_preparation	3	all	-		The town at {settlement} is buying differently, storing differently and hiring differently, and none of it has been announced.
+warFaith	DS-WAR-5	posture mobilized	2	all	-		The town is ready and is being kept ready, and being kept ready is expensive in ways the hall is discovering.
+warFaith	DS-WAR-5	posture mobilized	3	all	-		{settlement} is ready to march and sitting idle, and keeping an army waiting drains the town fast.
+warFaith	DS-WAR-5	posture deployed	1	all	-		{settlement}'s army is in the field. What the town has is elsewhere, and what remains here is what could not be taken.
+warFaith	DS-WAR-5	posture deployed	2	all	-		The town is short of its own people and will be until the campaign ends, however it ends.
+warFaith	DS-WAR-5	posture deployed	3	all	-		{settlement} is short of exactly the people a town its size should be full of, and nobody needs to ask where they are.
+warFaith	DS-WAR-5	posture war_exhaustion	3	all	-		The town at {settlement} has stopped answering the muster properly and has not formally refused it, and both facts are understood.
+warFaith	DS-WAR-5	posture demobilizing	2	all	-		People are coming back to the town and are not returning to what they left, because what they left has been reorganized around their absence.
+warFaith	DS-WAR-5	settlementWarStatus null (peace, not missing data)	1	all	-		There is no war at {settlement}: none against it and none of its own. The town's quarrels are the ordinary kind and are settled the ordinary way.
+warFaith	DS-WAR-5	settlementWarStatus null (peace, not missing data)	3	all	-		Nobody at {settlement} is fighting anybody, and the town would find the question of who odd rather than sensitive.
+warFaith	DS-WAR-5	live war_front INTO the settlement (a genuine siege)	1	all	-		An army is drawn up against {settlement}, and the town's ration lists decide how long it can hold.
+warFaith	DS-WAR-5	live war_front INTO the settlement (a genuine siege)	3	all	-		{settlement}'s fate is being decided outside its walls, and little the town does inside them changes it.
+warFaith	DS-WAR-5	phantom front (hostility with no army behind it)	2	all	-		{settlement} and {counterpart} are enemies, but neither has an army marching, so the town's muster lists show no siege measures.
+warFaith	DS-WAR-5	occupation contested	1	all	-		{counterpart} holds {settlement} but has no grip on it: the occupiers' duty lists put every one of their troops to keeping the town down.
+warFaith	DS-WAR-5	occupation contested	2	all	-		The soldiers are here and the town has not accepted that they are, and neither side has yet been able to change the other's mind.
+warFaith	DS-WAR-5	occupation contested	3	all	-		{counterpart}'s troops at {settlement} spend their strength just holding the town, and that costs more each week the town refuses them.
+warFaith	DS-WAR-5	occupation unstable	3	all	-		The occupation at {settlement} sits at the point where a single incident decides it, and both the garrison and the town are behaving as though they know which incident.
+warFaith	DS-WAR-5	occupation extractive	1	all	-		{counterpart} bleeds {settlement} for everything the town holds. The occupation has begun to pay, and it pays by taking rather than by governing.
+warFaith	DS-WAR-5	occupation extractive	2	all	-		What the town makes leaves it, and the leaving is thorough enough that the town has stopped planning past the season.
+warFaith	DS-WAR-5	occupation extractive	3	all	-		{counterpart} takes from {settlement} and puts nothing back; it pays now, and leaves the town poorer each year.
+warFaith	DS-WAR-5	occupation stabilized	3	all	-		The town at {settlement} has arranged itself around the occupier and stopped calling it an occupation in ordinary conversation.
+warFaith	DS-WAR-5	occupation vassalized	1	all	-		{settlement} pays {counterpart} as a client, not a conquest, and the town's accounts show little difference to the people paying.
+warFaith	DS-WAR-5	resistance largely quiescent	2	all	-		The town has decided, for now, that enduring costs less than the alternative.
+warFaith	DS-WAR-5	resistance in open revolt	3	all	-		The town at {settlement} is fighting the people holding it, in daylight, and has stopped calculating whether it can win.
+warFaith	DS-WAR-5	blockade stamped (recorded cause)	2	all	-		What reaches {settlement} reaches it around the blockade, in smaller quantities and at prices the town has not seen before.
+warFaith	DS-WAR-5	blockade stamped (recorded cause)	3	all	-		The town at {settlement} can name what is stopping its supply, and points at the water when it does.
+warFaith	DS-WAR-5	blockade LIFTED (the impairment is cleared)	1	all	-		The blockade on {settlement} has ended and goods are moving again, but the town's accounts still show what it lost while it was closed, and that has not come back.
+warFaith	DS-WAR-5	blockade LIFTED (the impairment is cleared)	2	all	-		The road is open at {settlement} and the prices have not come back down, and the town is learning which of those was actually the blockade's doing.
+warFaith	DS-WAR-5	blockade LIFTED (the impairment is cleared)	3	all	-		The blockade on {settlement} is gone but the town has not recovered, and only now can people see what the blockade really cost.
+warFaith	DS-WAR-5	a HIGH-burden term	1	all	-		What {term} takes from {settlement} is a real share of everything the town has, and it is the heaviest charge in the town's accounts.
+warFaith	DS-WAR-5	a HIGH-burden term	2	all	-		{term} takes enough from {settlement} to shape what the town becomes, not just what it can afford.
+warFaith	DS-WAR-5	a HIGH-burden term	3	all	-		What the town sends away at {settlement} is enough that people plan their year around what is left, rather than around what they earn.
+warFaith	DS-WAR-5	aftermath siege_lifted	1	all	-		The army outside {settlement} has gone. The gates are open, the town is counting, and the counting is taking longer than anybody expected.
+warFaith	DS-WAR-5	aftermath siege_lifted	2	all	-		The siege at {settlement} has been lifted and the town's condition has not yet caught up with the fact; stores, walls and people are all where the siege left them.
+warFaith	DS-WAR-5	aftermath occupation_lifted	1	all	-		{counterpart}'s troops have left {settlement}, but the rules they wrote into the town's books remain, and the town must now run things it never chose.
+warFaith	DS-WAR-5	aftermath occupation_lifted	2	all	-		The soldiers are gone from {settlement} and the questions the town avoided while they were here have all arrived at once.
+warFaith	DS-WAR-5	aftermath occupation_lifted	3	all	-		The arrangements {counterpart} made at {settlement} have outlived {counterpart}'s presence, and the town now has to decide which of them to keep.
+warFaith	DS-WAR-5	aftermath war_exhaustion	3	all	-		{settlement} is not recovering so much as levelling off, and the level is below where the town started.
+warFaith	DS-WAR-5	aftermath war_drain	1	all	-		The war is still taking from {settlement} after the fighting. The costs did not end where the campaign did, and the town is meeting them out of ordinary revenue.
+warFaith	DS-WAR-5	aftermath war_drain	3	all	-		The town is still paying for a war that is over at {settlement}, and has begun to resent the paying in a way it never resented the fighting.
+warFaith	DS-WAR-5	aftermath war_spoils	1	all	-		{settlement} came out of the fighting with more than it went in with, and the more is in the town: visible, unevenly distributed, and generating its own quarrels.
+warFaith	DS-WAR-5	aftermath war_spoils	2	all	-		The town profited, and the profit is not shared in the proportions anybody expected before the fighting started.
+warFaith	DS-WAR-5	aftermath war_spoils	3	all	-		The people holding {settlement}'s spoils are making them permanent, and the town will be changed by it.
+warFaith	DS-WAR-5	aftermath relief_burden	1	all	-		{settlement}'s relief lists still carry the people it took in, long after the crisis that brought them, and the town keeps paying to feed and house them.
+warFaith	DS-WAR-5	aftermath trade_realignment	2	all	-		The stalls at {settlement} are quieter than the town remembers them being, and the carters who used to fill them have somewhere else to be now.
+warFaith	DS-FTH-1	PATRON: rankAxis: major	2	all	-		The observance here is {creed}'s, and it is the observance of the region besides; the calendar kept in this town is the calendar kept along the whole road.
+warFaith	DS-FTH-1	PATRON: rankAxis: minor	2	all	-		The town's rite is {creed}'s: established, unremarkable elsewhere, and entirely sufficient here.
+warFaith	DS-FTH-1	PATRON: rankAxis: cult	2	all	-		{creed} holds the seat here and almost nowhere else; the town is the faith rather than a part of it.
+warFaith	DS-FTH-1	CULTS: cults[] present beneath the patron	1	all	-		Beneath {creed}, smaller observances keep their own shrines: tolerated, attended, and not confused with the town's own rite.
+warFaith	DS-FTH-1	DEVOTION: faithful	1	all	-		The town keeps its faith properly. Attendance is the rule rather than the exception, and lapsing is noticed.
+warFaith	DS-FTH-1	DEVOTION: observant	2	all	-		The town observes. It marks the days, attends the required occasions, and does not think about it much between them.
+warFaith	DS-FTH-1	DEVOTION: secular	2	all	-		The town keeps very little of its faith; nothing forbids the rites, and almost nobody attends them.
+warFaith	DS-FTH-1	DEVOTION: secular	3	all	-		{settlement} is not a godless town, but it is a distracted one. The creed reaches the ceremonies and not much further.
+warFaith	DS-FTH-1	ARC: trend: rising	1	all	-		More people attend the rites each season, because the town is living as its creed asks.
+warFaith	DS-FTH-1	ARC: trend: steady	2	all	-		The town's faith is at rest: neither a revival nor a drift, only the same observance it kept within the year.
+warFaith	DS-FTH-1	STANDINGS: the patron dominant	1	all	-		The patron holds most of the town's adherence outright; the other creeds keep shrines rather than congregations.
+warFaith	DS-FTH-1	STANDINGS: the patron pressed by a near rival	1	all	-		The patron holds the seat, but not comfortably: {rival_creed} has taken enough of the town's adherence to be counted.
+warFaith	DS-FTH-1	STANDINGS: a plural field, no majority	3	all	-		Several observances share this town in rough proportion, which the clergy of each describe differently.
+warFaith	DS-FTH-1	SINK: unaffiliated present, arc falling	1	all	-		A growing share of the town keeps no god at all. The share is not going to a rival rite, it is going out of the rites altogether.
+warFaith	DS-FTH-1	SINK: unaffiliated present, arc rising	2	all	-		The godless share of the town is shrinking; whatever emptied the benches has stopped being persuasive.
+warFaith	DS-FTH-1	live: false	3	all	-		The creed is new to this town, and nobody yet knows how deep it will take root.
+warFaith	DS-FTH-3	STANDING: cult	1	all	-		{creed} is kept here by a few households and no more: a following rather than a congregation, and one the town's other rites do not take seriously.
+warFaith	DS-FTH-3	STANDING: cult	3	all	-		This is a small faith in this town. Small enough that whether it grows is a question about a handful of families.
+warFaith	DS-FTH-3	STANDING: established	1	all	-		{creed} is properly settled here. Enough of the town keeps it that its days are the town's days, without its holding the seat.
+warFaith	DS-FTH-3	STANDING: established	3	all	-		It is one of the town's settled faiths, not a passing curiosity.
+warFaith	DS-FTH-3	NICHE: slots saturated at tier capacity	1	all	-		The town sustains as many faiths as it can. A new creed arriving here does not join the field; it displaces something.
+warFaith	DS-FTH-3	NICHE: slots open	1	all	-		The town has room for more faith than it keeps. Shrines stand unclaimed, and an arriving creed would find space rather than resistance.
+warFaith	DS-FTH-3	NICHE: the patron's niche carries a contestant	2	all	-		{creed} and {rival_creed} answer the same need in {settlement}, and a town rarely holds two answers to one need quietly.
+warFaith	DS-FTH-3	NICHE: every niche uncontested	1	all	-		Each of the town's creeds keeps its own ground. They divide the year without dividing the households, and nobody competes for the same believer.
+warFaith	DS-FTH-3	NICHE: every niche uncontested	4	all	-		On paper each of the town's creeds still has its separate calling; the conversion pressing on {settlement} is not a quarrel between them but a pull on every household at once.
+warFaith	DS-FTH-3	LEGITIMACY: secure	1	all	-		The patron's claim is not questioned here. Whatever the shares say, the town regards {creed} as the rightful faith of this place, and has for {timeband_span}.
+warFaith	DS-FTH-3	FALL: displaced	1	all	-		The seat changed hands. {rival_creed} drew away enough of the town's adherence to take it, steadily and without any single decisive week.
+warFaith	DS-FTH-3	FALL: suppressed	2	all	-		{creed} was evicted from the town's religious life by force. What it holds now, it holds quietly.
+warFaith	DS-FTH-3	COVERT CONGREGATION: deities[ref].covert present	1	all	-	Y	A congregation persists that the town's records do not show. It keeps {creed} without a building, at a size the suppression was meant to prevent.
+warFaith	DS-FTH-3	PILGRIM SEASON: heavy	1	all	-		The pilgrim road is busy. {settlement} takes in more travellers in {season} than it houses in any other part of the year, and the town's whole trade bends toward them.
+warFaith	DS-FTH-3	PILGRIM SEASON: heavy	2	all	-		This is the season the faithful come. Beds are scarce, prices are seasonal, and the town's opinion of pilgrims is seasonal too.
+warFaith	DS-FTH-3	PILGRIM SEASON: thin	2	all	-		Few travellers keep the rite here now. The calendar has moved past the occasion, and the town has gone back to itself.
+warFaith	DS-FTH-3	PILGRIM SEASON: thin	3	all	-		The pilgrim trade is at its low ebb. What remains is the local congregation, which is smaller than the town's provisioning suggests.
+warFaith	DS-FTH-4	ROOTED	1	all	-		{creed} has held {settlement} {timeband_age}; its feast days are the town's holidays.
+warFaith	DS-FTH-4	ROOTED	2	all	-		Faith in {settlement} is not a choice anyone remembers making; {institution} was here, is here, and the town arranges itself accordingly.
+warFaith	DS-FTH-4	THIN	2	all	-		{institution} at {settlement} is one part of the town's week, not the centre of it.
+warFaith	DS-FTH-4	FLAG: religiousFraud	2	all	-		Folk in {settlement} pay for blessings and relics they half suspect are a fraud. The church and the town's thieves share what their faith pays.
