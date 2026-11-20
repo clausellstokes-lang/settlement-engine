@@ -1,0 +1,161 @@
+/**
+ * PAGE-7, CAUSES-DATA (the brief at 9e4ba24b6, rule 7, first and second arms): THE CAUSES' DATA FILE IS WHOLE
+ * (`src/data/tensionCauses.js`).
+ *   - eight kinds, the causes in the ruled order with their ranks (`PAGE-5-HANDBACK.md` §5, the chair's 14:21 and 14:33;
+ *     `old_crime_wave` dropped);
+ *   - every cause's `holds` key is a predicate of `src/domain/display/tensionCauseHolds.js`, and every predicate is used;
+ *   - three wordings for a cause the chair ruled in `WORDS`, two for the others; plain three a kind, great_flood four;
+ *   - no function and no pattern anywhere in the data file;
+ *   - every wording pinned: the count and a content digest per kind, so a changed wording reds;
+ *   - no wording holds "the place" twice; `{power}` only where ruled (outside_debt's `merchants_rule`);
+ *   - `hideable` exactly as ruled (rule 5 and the addendum of 15:19).
+ */
+import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
+import { describe, expect, it } from 'vitest';
+import { TENSION_CAUSES } from '../../src/data/tensionCauses.js';
+import { TENSION_CAUSE_HOLDS } from '../../src/domain/display/tensionCauseHolds.js';
+
+/** The ruled tables, cause and rank, in order (`PAGE-5-HANDBACK.md` §5; `old_crime_wave` dropped by the chair, 14:33). */
+const RULED = Object.freeze({
+  crime_wave: [['criminal_power', 1], ['law_thin', 1], ['rival_rings', 1], ['no_force', 1], ['force_unpaid_or_cut', 1],
+    ['thieves_house', 2], ['contraband_water', 2], ['underground', 2], ['assassins', 2], ['black_market', 2],
+    ['whisper_market', 2], ['outlaws_near', 2]],
+  guild_conflict: [['old_guild_war', 1], ['guilds_rule', 1], ['rival_power', 1], ['caravans', 2], ['ships', 2],
+    ['crossroads', 2], ['fair', 2], ['trade_center', 2], ['luxury_quarter', 2]],
+  resource_scarcity: [['famine', 1], ['sickness', 1], ['war_levy', 1], ['source_spent', 1], ['old_scarcity', 1], ['isolated', 2]],
+  external_threat: [['war', 1], ['beasts_pressing', 1], ['old_threat', 1], ['militia_only', 2], ['open_road', 2], ['beasts_frontier', 2]],
+  succession_crisis: [['void', 1], ['heir_house', 1], ['outranked', 1], ['rival_power', 1], ['contested', 1], ['old_succession', 1]],
+  outside_debt: [['creditors_sit', 1], ['old_crash', 1], ['hard_up', 1], ['merchants_rule', 1], ['old_debt', 1], ['through_trade', 2]],
+  great_flood: [['old_flood', 1], ['coast', 2], ['river', 2]],
+  legitimacy_crisis: [['insurgency', 1], ['creed', 1], ['crisis_band', 1], ['outranked', 1], ['lord', 1], ['rival_power', 1]],
+});
+/** The chair's 14:33: three wordings for these. */
+const WORDS = new Set(['crime_wave:rival_rings', 'guild_conflict:guilds_rule', 'guild_conflict:rival_power', 'guild_conflict:fair',
+  'resource_scarcity:war_levy', 'external_threat:old_threat', 'external_threat:war', 'legitimacy_crisis:rival_power',
+  'outside_debt:creditors_sit', 'great_flood:river', 'succession_crisis:old_succession']);
+/** Rule 5 and the addendum: crime_wave's nine named rows and law_thin, no_force, force_unpaid_or_cut; guilds_rule and
+ * rival_power; every rival_power, merchants_rule and outranked; militia_only reads the force that keeps order. */
+const HIDEABLE = new Set(['crime_wave:criminal_power', 'crime_wave:law_thin', 'crime_wave:rival_rings', 'crime_wave:no_force',
+  'crime_wave:force_unpaid_or_cut', 'crime_wave:thieves_house', 'crime_wave:contraband_water', 'crime_wave:underground',
+  'crime_wave:assassins', 'crime_wave:black_market', 'crime_wave:whisper_market', 'crime_wave:outlaws_near',
+  'guild_conflict:guilds_rule', 'guild_conflict:rival_power', 'external_threat:militia_only', 'succession_crisis:outranked',
+  'succession_crisis:rival_power', 'outside_debt:merchants_rule', 'legitimacy_crisis:outranked', 'legitimacy_crisis:rival_power']);
+/** The causes ruled to carry `{power}` (`CAUSES-LINES-B.md`: the governing power's name). */
+const POWER_CAUSES = new Set(['outside_debt:merchants_rule']);
+/** THE PIN: per kind, the wordings' count and the first 16 hex of the sha256 of its causes' ids and wordings and its plain. */
+const PINNED = Object.freeze({
+  crime_wave: [28, 'de7d5b90d47f4378'],
+  guild_conflict: [24, 'aa3f46d815558843'],
+  resource_scarcity: [16, 'ee322988e4898ca0'],
+  external_threat: [17, 'fe4c91dd9696867a'],
+  succession_crisis: [16, '3a5ed84ac78c5788'],
+  outside_debt: [16, '8de84450eff42c0b'],
+  great_flood: [11, 'b04c0371553d2a08'],
+  legitimacy_crisis: [16, '6ddee343949856dc'],
+});
+
+const kinds = Object.keys(TENSION_CAUSES);
+const allCauses = kinds.flatMap((k) => TENSION_CAUSES[k].causes.map((c) => ({ kind: k, ...c })));
+const allWordings = [...kinds.flatMap((k) => [...TENSION_CAUSES[k].causes.flatMap((c) => c.wordings), ...TENSION_CAUSES[k].plain]),
+  TENSION_CAUSES.guild_conflict.withoutItsHouse];
+/** The chair's ruling of 15:35 (addendum 2): the guild quarrel's one sentence where the guild's home answers no. */
+const GUILDLESS = 'Traders here are fighting over who may sell what, and over a say in how the place is run.';
+
+describe('the causes table: eight kinds, the ruled causes in the ruled order', () => {
+  it('holds exactly the eight kinds', () => {
+    expect(kinds).toEqual(Object.keys(RULED));
+  });
+  it.each(Object.keys(RULED))('%s: the ruled causes and ranks, in order', (kind) => {
+    expect(TENSION_CAUSES[kind].causes.map((c) => [c.id, c.rank])).toEqual(RULED[kind]);
+  });
+  it('every holds key is a predicate, and every predicate is used', () => {
+    const used = new Set(allCauses.map((c) => c.holds));
+    for (const c of allCauses) expect(typeof TENSION_CAUSE_HOLDS[c.holds], `${c.kind}:${c.id} → ${c.holds}`).toBe('function');
+    expect(Object.keys(TENSION_CAUSE_HOLDS).filter((k) => !used.has(k))).toEqual([]);
+  });
+});
+
+describe('the wordings', () => {
+  it('three for a cause ruled in WORDS, two for the others', () => {
+    for (const c of allCauses) expect(c.wordings.length, `${c.kind}:${c.id}`).toBe(WORDS.has(`${c.kind}:${c.id}`) ? 3 : 2);
+    expect(allCauses.filter((c) => WORDS.has(`${c.kind}:${c.id}`)).length).toBe(WORDS.size);
+  });
+  it('plain: three a kind, great_flood four', () => {
+    for (const k of kinds) expect(TENSION_CAUSES[k].plain.length, k).toBe(k === 'great_flood' ? 4 : 3);
+  });
+  it.each(Object.keys(PINNED))('%s: pinned by count and content digest', (kind) => {
+    const t = TENSION_CAUSES[kind];
+    const body = JSON.stringify({ causes: t.causes.map((c) => [c.id, c.wordings]), plain: t.plain });
+    const count = t.causes.reduce((a, c) => a + c.wordings.length, 0) + t.plain.length;
+    expect([count, createHash('sha256').update(body).digest('hex').slice(0, 16)]).toEqual(PINNED[kind]);
+  });
+  it('every wording is a sentence, none repeated within its kind', () => {
+    for (const k of kinds) {
+      const own = [...TENSION_CAUSES[k].causes.flatMap((c) => c.wordings), ...TENSION_CAUSES[k].plain];
+      expect(new Set(own).size, k).toBe(own.length);
+      for (const w of own) expect(w, k).toMatch(/^[A-Z].*\.$/);
+    }
+  });
+  it('no wording holds "the place" twice', () => {
+    expect(allWordings.filter((w) => (w.match(/\bthe place\b/gi) || []).length > 1)).toEqual([]);
+  });
+  it('{power} appears only on the causes ruled to carry it, and in each of their wordings', () => {
+    for (const c of allCauses) {
+      const carries = c.wordings.map((w) => w.includes('{power}'));
+      expect(carries.every(Boolean) || carries.every((x) => !x), `${c.kind}:${c.id}`).toBe(true);
+      expect(carries[0], `${c.kind}:${c.id}`).toBe(POWER_CAUSES.has(`${c.kind}:${c.id}`));
+    }
+    for (const k of kinds) expect(TENSION_CAUSES[k].plain.some((w) => w.includes('{power}')), k).toBe(false);
+    expect(allWordings.filter((w) => /\{(?!power\})[^}]*\}/.test(w))).toEqual([]);
+  });
+});
+
+describe('the guild quarrel without its guild (addendum 2, the chair\'s 15:35)', () => {
+  it('guild_conflict carries withoutItsHouse, exactly the ruled sentence; no other kind carries one', () => {
+    expect(TENSION_CAUSES.guild_conflict.withoutItsHouse).toBe(GUILDLESS);
+    for (const k of kinds.filter((x) => x !== 'guild_conflict')) expect(Object.hasOwn(TENSION_CAUSES[k], 'withoutItsHouse'), k).toBe(false);
+    expect(Object.keys(TENSION_CAUSES.guild_conflict).sort()).toEqual(['causes', 'plain', 'withoutItsHouse']);
+    for (const k of kinds.filter((x) => x !== 'guild_conflict')) expect(Object.keys(TENSION_CAUSES[k]).sort(), k).toEqual(['causes', 'plain']);
+  });
+  it('is no cause\'s and no plain wording', () => {
+    const own = [...TENSION_CAUSES.guild_conflict.causes.flatMap((c) => c.wordings), ...TENSION_CAUSES.guild_conflict.plain];
+    expect(own).not.toContain(GUILDLESS);
+  });
+});
+
+describe('hideable: a list for the security reader, exactly as ruled', () => {
+  it('marks exactly the ruled causes', () => {
+    expect(allCauses.filter((c) => c.hideable).map((c) => `${c.kind}:${c.id}`).sort()).toEqual([...HIDEABLE].sort());
+    for (const c of allCauses) expect(typeof c.hideable, `${c.kind}:${c.id}`).toBe('boolean');
+  });
+  it('the header states the rule: one rule for every audience, a list and not a branch', () => {
+    const src = readFileSync(new URL('../../src/data/tensionCauses.js', import.meta.url), 'utf8');
+    expect(src).toMatch(/A CAUSE HOLDS ONLY WHERE THE DOCUMENT IN HAND SHOWS IT/);
+    expect(src).toMatch(/ONE RULE FOR EVERY AUDIENCE/);
+    expect(src).toMatch(/LIST for the security reader at the join, NOT A BRANCH/);
+  });
+});
+
+describe('data only', () => {
+  it('holds no function and no pattern', () => {
+    /** @param {unknown} v @param {string} at @returns {string[]} */
+    const bad = (v, at) => {
+      if (typeof v === 'function' || v instanceof RegExp) return [at];
+      if (v && typeof v === 'object') return Object.entries(v).flatMap(([k, x]) => bad(x, `${at}.${k}`));
+      return [];
+    };
+    expect(bad(TENSION_CAUSES, 'TENSION_CAUSES')).toEqual([]);
+    const code = readFileSync(new URL('../../src/data/tensionCauses.js', import.meta.url), 'utf8')
+      .replace(/\/\*[\s\S]*?\*\//g, '').replace(/'(?:[^'\\]|\\.)*'|"(?:[^"\\]|\\.)*"/g, '""');
+    expect(code).not.toMatch(/=>|\bfunction\b|\bnew RegExp\b|\bimport\b/);
+    expect(code).not.toMatch(/[(,=:[]\s*\/[^/*]/);
+  });
+  it('is frozen through', () => {
+    expect(Object.isFrozen(TENSION_CAUSES)).toBe(true);
+    for (const k of kinds) {
+      expect(Object.isFrozen(TENSION_CAUSES[k]) && Object.isFrozen(TENSION_CAUSES[k].causes) && Object.isFrozen(TENSION_CAUSES[k].plain), k).toBe(true);
+      for (const c of TENSION_CAUSES[k].causes) expect(Object.isFrozen(c) && Object.isFrozen(c.wordings), `${k}:${c.id}`).toBe(true);
+    }
+  });
+});
