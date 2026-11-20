@@ -668,6 +668,28 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   leaves a test's pool under its floor (`frame2NamesRule`: over 300 needed, 272 read), the pool it reads is widened
   by the fair rule until the floor holds; the seat first says what the floor counts.
 
+- **R3's ACCEPTANCE AND ITS TEETH (2026-11-20, 10:21 UTC; on VEIL-24's read of R3's second cure at b907c75c9):** THE
+  GATE is per-town equality of every derived label against the town's REGENERATED counterfactual (houses cut at
+  every step), over every town of the pool, in both engines, Reveal DM off and on; it must be SHOWN ABLE TO FAIL
+  (with the re-derivation switched off in a scratch copy the same test reds on the five towns that read HIGHER
+  before). The control distribution is REPORTED, NOT GATED, and "the gap is the pool's dials" must be a measurement
+  (the same comparison inside each dial setting; a gap that does not close there is a finding). A GOAL SERVED AGAIN
+  IS A LEAK UNTIL ATTRIBUTED: the ONLY exemption is a hit lying wholly inside the name of a power or house the same
+  document serves, and the test names that containing name; the search is case-blind and counts a possessive and a
+  plural ending as a boundary; plants in both directions, red first. THE FOUR TWIN REDS AT THE LANE'S BASE: the
+  three `publicSafe` pins may be re-stated on three conditions each (the cause in the commit; the old positive kept
+  on a town where no house is hidden: the criminal power's name, category and standing stay byte for byte; the new
+  arm proved by the search); `criminalVeilSwitch` VR34(b) IS NOT RE-STATED WITHOUT THE CHAIR'S WORD (it pins the
+  owner's switch): its assertion and what now happens come to the chair first.
+- **U2's SECOND CURE, ITS DESIGN ACCEPTED (10:21 UTC):** U2 removed `rulingPower.js :: GOVERNMENT_PREFERENCES`, which
+  the line's `tests/data/cultureOfficeTitles.test.js` (point 78) imports: `rulingPower.js` re-exports a frozen view
+  DERIVED from the one table (old shape and values byte for byte; a test that fails if view and table disagree);
+  the titles' test is not edited; the one-home pin forbids a second declaration, not a derived view.
+- **`frame2NamesRule`'s FLOOR (10:21 UTC, on FRAME-4's measure):** the floor counts trouble-cast SENTENCES read
+  (307 at the lane's tip, 272 with B9), not framed towns: THE POOL IS WIDENED BY ITS OWN FAIR RULE (PER 10 to 12:
+  144 towns, 336 sentences), THE FLOOR STAYS 300, in its own commit after B9's merge; no crisis kind read at PER 10
+  goes unread at PER 12; no new assertion on framed towns in that file.
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -2935,3 +2957,24 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   A FAULT OF THE CHAIR'S, RULE 29: the hours it wrote on its messages of this pass were GUESSED, up to five minutes
   ahead of the clock (it wrote 10:12, 10:13 and 10:18; the clock read about 10:10, 10:11 and 10:13). From here the
   hour on a message is read from the clock by the command before it.
+- 10:20 UTC · VEIL-25 SEATED BESIDE VEIL-24 (session_019yED1QCGsC1hjJ6rjiboyE; on `lane/veil-24-2026-11-20`; outcome
+  `lane/veil-25-2026-11-20`); VEIL-24 told at 10:17: go on with R3's second cure, keep PART 25 true, HAND OVER AT THE
+  R3 MERGE OR AT 400,000, never start R4's second cure itself. The CI check-in armed for 10:19 was deleted (CI was
+  read at 10:13 by a helper). SAFETY NET 8 armed for 10:58 (trig_01A7n2Ds8txsQnxHDM7bvPJZ). THE LANDINGS FILE on the
+  line takes the CI line of 0c906948 with point 82's row (no push of its own).
+- 10:22 UTC · EIGHT MESSAGES READ AT 10:20 AND ANSWERED AT 10:21 (hours by the clock). SEAT-2: "U2 9a3cfadd1, HANDED OVER at
+  8c4beb844" = origin/lane/seat-2-2026-11-20-u2merge (the lane's own branch stays at its last green tip 9c7024f32):
+  U2 merged with its first cure (registers 18299c387; the confinement hash EQUAL over 1,245 towns), ONE KNOWN RED
+  (the titles' test cannot load: `GOVERNMENT_PREFERENCES` removed), its cure B2d out on
+  `lane/seat-2026-11-20-u2-cure2`, `tests/lint` whole unread; the campaign PDF's audience: THE OWNER ONLY. SEAT-3
+  TOLD "THE LANE IS YOURS at 8c4beb844" (cut `lane/seat-3-2026-11-20` there; lint whole and the confinement first;
+  B2d read and merged; "U2 GREEN <commit>"; then U3 on); it had acknowledged CS22. SEAT-2 only relays from here.
+  VEIL-24: R3's second cure returned at b907c75c9 (`lane/veil-24-r3c2-2026-11-20`; 212 there cde84613...79e2; 211
+  unchanged), NOT MERGED: receipts green (the fold red by plant then green, and it caught a trace entry under
+  Reveal DM; the Defense key over 92 towns HIGHER 0 (was 5), EQUAL 79, LOWER 13 with causes; "Rival Gangs" served in
+  0 towns; acceptance exit 0; cost 593.0 against 885.8 ms); THREE THINGS HOLD THE MERGE: two Reveal-DM goals the
+  first cure withheld are served again (NOT ATTRIBUTED: a leak until attributed; R3-CURE-3 staffed); the
+  control-distribution acceptance not met as worded (RULED: section 2); four twin reds at the base that pin what
+  the power rule overturned (RULED: section 2). FRAME-4: the floor counts sentences (RULED: section 2). TRAD-3's
+  first message: on dd13d18cc; TRAD-2's hand-back not yet written. NAMES-4: on 835fabd2d, the line an ancestor;
+  the cold read begun.
