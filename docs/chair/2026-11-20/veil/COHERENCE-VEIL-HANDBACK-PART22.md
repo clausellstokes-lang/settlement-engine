@@ -13,6 +13,16 @@ The assignment's list "THE RULINGS IN FORCE" (VR28, VR32, VR33, VR37, VR21/VR31,
 VR25's two owed rows, R5's law) governs where PART 21 or a brief differs. The laws and push paragraph of
 `prompts/VEIL-17.txt` bind word for word. The mark: 450,000 used tokens.
 
+### 0a. Rulings received during the seat (read 03:08 UTC)
+- **VR39 (the chair, 02:51 UTC; a reader's finding, tier 1, live at B/C/D; for R3's brief):** with the three family
+  groupings OPENED by hand and each criminal house hidden whole, the gallery read serves `safetyProfile.crimeTypes` with a
+  bare `{"type":"Smuggling"}` in 27 of 45 towns (the name search took `desc`, left `type`). A CRIME TYPE LEAVES BY
+  ATTRIBUTION, NOT BY NAME: an entry is withheld where the house that RAISES it (the engine's own rule: the crime signal and
+  the settling of the crime lines) is hidden whole, whatever its text; an entry a SHOWN house or a crisis raises stays.
+  R3's born test: grouping open, every hideable house hidden: no served crime type no town of the hidden-free pool ever
+  has; control: a town whose criminal house the DM SHOWS keeps its types. VR29 confirmed by measure: the keys stay arrays,
+  empty where nothing is left; only the shut grouping deletes them.
+
 ## 1. The bytes (kept current)
 
 | File | sha256 |
