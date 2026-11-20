@@ -7,134 +7,134 @@
   "config": "{ settType: <tier>, ...archetypePatch(<preset>) } ; customContent {}",
   "towns": 960,
   "errors": [],
-  "seconds": 78
+  "seconds": 143
  },
  "kinds": {
   "all": {
    "government": {
-    "present": 586,
+    "present": 584,
     "rules": 579,
-    "contender": 19,
-    "nonRulingPowers": 22,
+    "contender": 6,
+    "nonRulingPowers": 12,
     "power": {
-     "p10": 8.3,
-     "p50": 15,
+     "p10": 7,
+     "p50": 10,
      "p90": 48.6
     },
-    "left": 3,
-    "leftBelowFloor": 0,
+    "left": 6,
+    "leftBelowFloor": 1,
     "leftGapToThird": {
-     "p10": 4.24,
-     "p50": 5.2,
-     "p90": 6.08
+     "p10": 3.88,
+     "p50": 4.5,
+     "p90": 5.02
     },
     "thirdWeight": {
-     "p50": 13.2
+     "p50": 12.6
     },
     "leftByFactorAlone": 0,
-    "inByFactorAlone": 1
+    "inByFactorAlone": 0
    },
    "noble": {
-    "present": 523,
+    "present": 260,
     "rules": 12,
-    "contender": 349,
-    "nonRulingPowers": 553,
+    "contender": 220,
+    "nonRulingPowers": 326,
     "power": {
      "p10": 6,
      "p50": 12,
-     "p90": 22
+     "p90": 23
     },
-    "left": 186,
-    "leftBelowFloor": 7,
+    "left": 91,
+    "leftBelowFloor": 5,
     "leftGapToThird": {
-     "p10": 0.82,
-     "p50": 3,
-     "p90": 5.75
+     "p10": 0.5,
+     "p50": 3.42,
+     "p90": 5.5
     },
     "thirdWeight": {
-     "p50": 10.45
+     "p50": 11.13
     },
-    "leftByFactorAlone": 1,
-    "inByFactorAlone": 28
+    "leftByFactorAlone": 0,
+    "inByFactorAlone": 17
    },
    "military": {
-    "present": 720,
+    "present": 414,
     "rules": 61,
-    "contender": 573,
-    "nonRulingPowers": 777,
+    "contender": 356,
+    "nonRulingPowers": 514,
     "power": {
      "p10": 6,
      "p50": 17,
-     "p90": 28
+     "p90": 36.7
     },
-    "left": 161,
-    "leftBelowFloor": 10,
+    "left": 119,
+    "leftBelowFloor": 22,
     "leftGapToThird": {
-     "p10": 0.7,
-     "p50": 2.3,
-     "p90": 4.95
+     "p10": 0.5,
+     "p50": 2,
+     "p90": 5
     },
     "thirdWeight": {
-     "p50": 10
+     "p50": 10.5
     },
     "leftByFactorAlone": 0,
     "inByFactorAlone": 46
    },
    "merchant": {
-    "present": 551,
+    "present": 438,
     "rules": 179,
-    "contender": 395,
-    "nonRulingPowers": 1050,
+    "contender": 345,
+    "nonRulingPowers": 804,
     "power": {
      "p10": 6,
-     "p50": 10,
-     "p90": 21
+     "p50": 12,
+     "p90": 26
     },
-    "left": 470,
-    "leftBelowFloor": 0,
+    "left": 284,
+    "leftBelowFloor": 21,
     "leftGapToThird": {
-     "p10": 1.35,
-     "p50": 4.5,
-     "p90": 9.37
+     "p10": 0.7,
+     "p50": 3.75,
+     "p90": 7.26
     },
     "thirdWeight": {
-     "p50": 12
+     "p50": 11
     },
-    "leftByFactorAlone": 53,
+    "leftByFactorAlone": 50,
     "inByFactorAlone": 1
    },
    "religious": {
-    "present": 714,
+    "present": 413,
     "rules": 85,
-    "contender": 481,
-    "nonRulingPowers": 730,
+    "contender": 290,
+    "nonRulingPowers": 452,
     "power": {
-     "p10": 6,
+     "p10": 7,
      "p50": 14,
      "p90": 34
     },
-    "left": 242,
-    "leftBelowFloor": 1,
+    "left": 143,
+    "leftBelowFloor": 13,
     "leftGapToThird": {
-     "p10": 1.1,
-     "p50": 3.25,
-     "p90": 5.3
+     "p10": 1.23,
+     "p50": 4,
+     "p90": 6.2
     },
     "thirdWeight": {
-     "p50": 10.45
+     "p50": 12.05
     },
-    "leftByFactorAlone": 9,
-    "inByFactorAlone": 9
+    "leftByFactorAlone": 13,
+    "inByFactorAlone": 4
    },
    "criminal": {
-    "present": 180,
+    "present": 90,
     "rules": 22,
     "contender": 0,
-    "nonRulingPowers": 176,
+    "nonRulingPowers": 101,
     "power": {
-     "p10": 5,
-     "p50": 9,
-     "p90": 17
+     "p10": 7,
+     "p50": 12,
+     "p90": 25
     },
     "left": 0,
     "leftBelowFloor": 0,
@@ -150,27 +150,27 @@
     "inByFactorAlone": 0
    },
    "arcane": {
-    "present": 303,
+    "present": 207,
     "rules": 20,
-    "contender": 90,
-    "nonRulingPowers": 303,
+    "contender": 74,
+    "nonRulingPowers": 259,
     "power": {
      "p10": 5,
-     "p50": 7,
-     "p90": 13
+     "p50": 8,
+     "p90": 14
     },
-    "left": 213,
-    "leftBelowFloor": 2,
+    "left": 185,
+    "leftBelowFloor": 21,
     "leftGapToThird": {
-     "p10": 0.9,
-     "p50": 3.7,
-     "p90": 7.95
+     "p10": 0.73,
+     "p50": 3.1,
+     "p90": 7.74
     },
     "thirdWeight": {
      "p50": 11
     },
-    "leftByFactorAlone": 7,
-    "inByFactorAlone": 1
+    "leftByFactorAlone": 4,
+    "inByFactorAlone": 3
    },
    "craft": {
     "present": 0,
@@ -288,26 +288,26 @@
     "inByFactorAlone": 0
    },
    "other": {
-    "present": 162,
+    "present": 63,
     "rules": 2,
-    "contender": 83,
-    "nonRulingPowers": 185,
+    "contender": 41,
+    "nonRulingPowers": 71,
     "power": {
      "p10": 7,
-     "p50": 12,
-     "p90": 32
+     "p50": 15,
+     "p90": 64
     },
-    "left": 92,
-    "leftBelowFloor": 0,
+    "left": 30,
+    "leftBelowFloor": 2,
     "leftGapToThird": {
-     "p10": 1.2,
-     "p50": 4.2,
-     "p90": 9.1
+     "p10": 1.33,
+     "p50": 4.1,
+     "p90": 7.88
     },
     "thirdWeight": {
-     "p50": 12.35
+     "p50": 12.05
     },
-    "leftByFactorAlone": 16,
+    "leftByFactorAlone": 4,
     "inByFactorAlone": 0
    }
   },
@@ -315,12 +315,12 @@
    "government": {
     "present": 160,
     "rules": 160,
-    "contender": 3,
-    "nonRulingPowers": 3,
+    "contender": 0,
+    "nonRulingPowers": 0,
     "power": {
-     "p10": 12.4,
-     "p50": 14,
-     "p90": 42
+     "p10": null,
+     "p50": null,
+     "p90": null
     },
     "left": 0,
     "leftBelowFloor": 0,
@@ -336,14 +336,14 @@
     "inByFactorAlone": 0
    },
    "noble": {
-    "present": 4,
+    "present": 2,
     "rules": 0,
-    "contender": 4,
-    "nonRulingPowers": 8,
+    "contender": 2,
+    "nonRulingPowers": 2,
     "power": {
-     "p10": 27,
-     "p50": 32.5,
-     "p90": 35.5
+     "p10": 57.4,
+     "p50": 59,
+     "p90": 60.6
     },
     "left": 0,
     "leftBelowFloor": 0,
@@ -359,14 +359,315 @@
     "inByFactorAlone": 0
    },
    "military": {
-    "present": 74,
+    "present": 1,
     "rules": 0,
-    "contender": 74,
-    "nonRulingPowers": 82,
+    "contender": 1,
+    "nonRulingPowers": 1,
     "power": {
-     "p10": 15.1,
+     "p10": 49,
+     "p50": 49,
+     "p90": 49
+    },
+    "left": 0,
+    "leftBelowFloor": 0,
+    "leftGapToThird": {
+     "p10": null,
+     "p50": null,
+     "p90": null
+    },
+    "thirdWeight": {
+     "p50": null
+    },
+    "leftByFactorAlone": 0,
+    "inByFactorAlone": 0
+   },
+   "merchant": {
+    "present": 0,
+    "rules": 0,
+    "contender": 0,
+    "nonRulingPowers": 0,
+    "power": {
+     "p10": null,
+     "p50": null,
+     "p90": null
+    },
+    "left": 0,
+    "leftBelowFloor": 0,
+    "leftGapToThird": {
+     "p10": null,
+     "p50": null,
+     "p90": null
+    },
+    "thirdWeight": {
+     "p50": null
+    },
+    "leftByFactorAlone": 0,
+    "inByFactorAlone": 0
+   },
+   "religious": {
+    "present": 0,
+    "rules": 0,
+    "contender": 0,
+    "nonRulingPowers": 0,
+    "power": {
+     "p10": null,
+     "p50": null,
+     "p90": null
+    },
+    "left": 0,
+    "leftBelowFloor": 0,
+    "leftGapToThird": {
+     "p10": null,
+     "p50": null,
+     "p90": null
+    },
+    "thirdWeight": {
+     "p50": null
+    },
+    "leftByFactorAlone": 0,
+    "inByFactorAlone": 0
+   },
+   "criminal": {
+    "present": 0,
+    "rules": 0,
+    "contender": 0,
+    "nonRulingPowers": 0,
+    "power": {
+     "p10": null,
+     "p50": null,
+     "p90": null
+    },
+    "left": 0,
+    "leftBelowFloor": 0,
+    "leftGapToThird": {
+     "p10": null,
+     "p50": null,
+     "p90": null
+    },
+    "thirdWeight": {
+     "p50": null
+    },
+    "leftByFactorAlone": 0,
+    "inByFactorAlone": 0
+   },
+   "arcane": {
+    "present": 0,
+    "rules": 0,
+    "contender": 0,
+    "nonRulingPowers": 0,
+    "power": {
+     "p10": null,
+     "p50": null,
+     "p90": null
+    },
+    "left": 0,
+    "leftBelowFloor": 0,
+    "leftGapToThird": {
+     "p10": null,
+     "p50": null,
+     "p90": null
+    },
+    "thirdWeight": {
+     "p50": null
+    },
+    "leftByFactorAlone": 0,
+    "inByFactorAlone": 0
+   },
+   "craft": {
+    "present": 0,
+    "rules": 0,
+    "contender": 0,
+    "nonRulingPowers": 0,
+    "power": {
+     "p10": null,
+     "p50": null,
+     "p90": null
+    },
+    "left": 0,
+    "leftBelowFloor": 0,
+    "leftGapToThird": {
+     "p10": null,
+     "p50": null,
+     "p90": null
+    },
+    "thirdWeight": {
+     "p50": null
+    },
+    "leftByFactorAlone": 0,
+    "inByFactorAlone": 0
+   },
+   "labor": {
+    "present": 0,
+    "rules": 0,
+    "contender": 0,
+    "nonRulingPowers": 0,
+    "power": {
+     "p10": null,
+     "p50": null,
+     "p90": null
+    },
+    "left": 0,
+    "leftBelowFloor": 0,
+    "leftGapToThird": {
+     "p10": null,
+     "p50": null,
+     "p90": null
+    },
+    "thirdWeight": {
+     "p50": null
+    },
+    "leftByFactorAlone": 0,
+    "inByFactorAlone": 0
+   },
+   "outsider": {
+    "present": 0,
+    "rules": 0,
+    "contender": 0,
+    "nonRulingPowers": 0,
+    "power": {
+     "p10": null,
+     "p50": null,
+     "p90": null
+    },
+    "left": 0,
+    "leftBelowFloor": 0,
+    "leftGapToThird": {
+     "p10": null,
+     "p50": null,
+     "p90": null
+    },
+    "thirdWeight": {
+     "p50": null
+    },
+    "leftByFactorAlone": 0,
+    "inByFactorAlone": 0
+   },
+   "occupation": {
+    "present": 0,
+    "rules": 0,
+    "contender": 0,
+    "nonRulingPowers": 0,
+    "power": {
+     "p10": null,
+     "p50": null,
+     "p90": null
+    },
+    "left": 0,
+    "leftBelowFloor": 0,
+    "leftGapToThird": {
+     "p10": null,
+     "p50": null,
+     "p90": null
+    },
+    "thirdWeight": {
+     "p50": null
+    },
+    "leftByFactorAlone": 0,
+    "inByFactorAlone": 0
+   },
+   "civic": {
+    "present": 0,
+    "rules": 0,
+    "contender": 0,
+    "nonRulingPowers": 0,
+    "power": {
+     "p10": null,
+     "p50": null,
+     "p90": null
+    },
+    "left": 0,
+    "leftBelowFloor": 0,
+    "leftGapToThird": {
+     "p10": null,
+     "p50": null,
+     "p90": null
+    },
+    "thirdWeight": {
+     "p50": null
+    },
+    "leftByFactorAlone": 0,
+    "inByFactorAlone": 0
+   },
+   "other": {
+    "present": 5,
+    "rules": 0,
+    "contender": 5,
+    "nonRulingPowers": 5,
+    "power": {
+     "p10": 59,
+     "p50": 66,
+     "p90": 68.2
+    },
+    "left": 0,
+    "leftBelowFloor": 0,
+    "leftGapToThird": {
+     "p10": null,
+     "p50": null,
+     "p90": null
+    },
+    "thirdWeight": {
+     "p50": null
+    },
+    "leftByFactorAlone": 0,
+    "inByFactorAlone": 0
+   }
+  },
+  "hamlet": {
+   "government": {
+    "present": 160,
+    "rules": 160,
+    "contender": 3,
+    "nonRulingPowers": 3,
+    "power": {
+     "p10": 36.2,
+     "p50": 49,
+     "p90": 49
+    },
+    "left": 0,
+    "leftBelowFloor": 0,
+    "leftGapToThird": {
+     "p10": null,
+     "p50": null,
+     "p90": null
+    },
+    "thirdWeight": {
+     "p50": null
+    },
+    "leftByFactorAlone": 0,
+    "inByFactorAlone": 0
+   },
+   "noble": {
+    "present": 1,
+    "rules": 0,
+    "contender": 1,
+    "nonRulingPowers": 1,
+    "power": {
+     "p10": 22,
      "p50": 22,
-     "p90": 30
+     "p90": 22
+    },
+    "left": 0,
+    "leftBelowFloor": 0,
+    "leftGapToThird": {
+     "p10": null,
+     "p50": null,
+     "p90": null
+    },
+    "thirdWeight": {
+     "p50": null
+    },
+    "leftByFactorAlone": 0,
+    "inByFactorAlone": 0
+   },
+   "military": {
+    "present": 21,
+    "rules": 0,
+    "contender": 21,
+    "nonRulingPowers": 21,
+    "power": {
+     "p10": 20,
+     "p50": 41,
+     "p90": 46
     },
     "left": 0,
     "leftBelowFloor": 0,
@@ -387,9 +688,9 @@
     "contender": 5,
     "nonRulingPowers": 5,
     "power": {
-     "p10": 37.6,
+     "p10": 40.4,
      "p50": 43,
-     "p90": 44.8
+     "p90": 47.2
     },
     "left": 0,
     "leftBelowFloor": 0,
@@ -405,14 +706,14 @@
     "inByFactorAlone": 0
    },
    "religious": {
-    "present": 37,
+    "present": 0,
     "rules": 0,
-    "contender": 37,
-    "nonRulingPowers": 42,
+    "contender": 0,
+    "nonRulingPowers": 0,
     "power": {
-     "p10": 19.1,
-     "p50": 33.5,
-     "p90": 49
+     "p10": null,
+     "p50": null,
+     "p90": null
     },
     "left": 0,
     "leftBelowFloor": 0,
@@ -589,39 +890,14 @@
     "inByFactorAlone": 0
    },
    "other": {
-    "present": 23,
+    "present": 8,
     "rules": 0,
-    "contender": 22,
-    "nonRulingPowers": 28,
+    "contender": 8,
+    "nonRulingPowers": 8,
     "power": {
-     "p10": 12,
-     "p50": 26,
-     "p90": 37.5
-    },
-    "left": 1,
-    "leftBelowFloor": 0,
-    "leftGapToThird": {
-     "p10": 12.8,
-     "p50": 12.8,
-     "p90": 12.8
-    },
-    "thirdWeight": {
-     "p50": 20
-    },
-    "leftByFactorAlone": 0,
-    "inByFactorAlone": 0
-   }
-  },
-  "hamlet": {
-   "government": {
-    "present": 160,
-    "rules": 160,
-    "contender": 6,
-    "nonRulingPowers": 6,
-    "power": {
-     "p10": 24,
-     "p50": 39,
-     "p90": 49
+     "p10": 29.2,
+     "p50": 45.5,
+     "p90": 66.6
     },
     "left": 0,
     "leftBelowFloor": 0,
@@ -634,295 +910,19 @@
      "p50": null
     },
     "leftByFactorAlone": 0,
-    "inByFactorAlone": 0
-   },
-   "noble": {
-    "present": 66,
-    "rules": 0,
-    "contender": 56,
-    "nonRulingPowers": 68,
-    "power": {
-     "p10": 9,
-     "p50": 15,
-     "p90": 26.3
-    },
-    "left": 10,
-    "leftBelowFloor": 0,
-    "leftGapToThird": {
-     "p10": 1.53,
-     "p50": 5.15,
-     "p90": 9.24
-    },
-    "thirdWeight": {
-     "p50": 16.13
-    },
-    "leftByFactorAlone": 0,
-    "inByFactorAlone": 1
-   },
-   "military": {
-    "present": 93,
-    "rules": 0,
-    "contender": 93,
-    "nonRulingPowers": 102,
-    "power": {
-     "p10": 13,
-     "p50": 21,
-     "p90": 37
-    },
-    "left": 0,
-    "leftBelowFloor": 0,
-    "leftGapToThird": {
-     "p10": null,
-     "p50": null,
-     "p90": null
-    },
-    "thirdWeight": {
-     "p50": null
-    },
-    "leftByFactorAlone": 0,
-    "inByFactorAlone": 1
-   },
-   "merchant": {
-    "present": 18,
-    "rules": 0,
-    "contender": 17,
-    "nonRulingPowers": 19,
-    "power": {
-     "p10": 14.8,
-     "p50": 26,
-     "p90": 37
-    },
-    "left": 1,
-    "leftBelowFloor": 0,
-    "leftGapToThird": {
-     "p10": 2,
-     "p50": 2,
-     "p90": 2
-    },
-    "thirdWeight": {
-     "p50": 16.25
-    },
-    "leftByFactorAlone": 1,
-    "inByFactorAlone": 0
-   },
-   "religious": {
-    "present": 37,
-    "rules": 0,
-    "contender": 37,
-    "nonRulingPowers": 37,
-    "power": {
-     "p10": 15,
-     "p50": 23,
-     "p90": 46
-    },
-    "left": 0,
-    "leftBelowFloor": 0,
-    "leftGapToThird": {
-     "p10": null,
-     "p50": null,
-     "p90": null
-    },
-    "thirdWeight": {
-     "p50": null
-    },
-    "leftByFactorAlone": 0,
-    "inByFactorAlone": 0
-   },
-   "criminal": {
-    "present": 2,
-    "rules": 0,
-    "contender": 0,
-    "nonRulingPowers": 2,
-    "power": {
-     "p10": 19.4,
-     "p50": 25,
-     "p90": 30.6
-    },
-    "left": 0,
-    "leftBelowFloor": 0,
-    "leftGapToThird": {
-     "p10": null,
-     "p50": null,
-     "p90": null
-    },
-    "thirdWeight": {
-     "p50": null
-    },
-    "leftByFactorAlone": 0,
-    "inByFactorAlone": 0
-   },
-   "arcane": {
-    "present": 0,
-    "rules": 0,
-    "contender": 0,
-    "nonRulingPowers": 0,
-    "power": {
-     "p10": null,
-     "p50": null,
-     "p90": null
-    },
-    "left": 0,
-    "leftBelowFloor": 0,
-    "leftGapToThird": {
-     "p10": null,
-     "p50": null,
-     "p90": null
-    },
-    "thirdWeight": {
-     "p50": null
-    },
-    "leftByFactorAlone": 0,
-    "inByFactorAlone": 0
-   },
-   "craft": {
-    "present": 0,
-    "rules": 0,
-    "contender": 0,
-    "nonRulingPowers": 0,
-    "power": {
-     "p10": null,
-     "p50": null,
-     "p90": null
-    },
-    "left": 0,
-    "leftBelowFloor": 0,
-    "leftGapToThird": {
-     "p10": null,
-     "p50": null,
-     "p90": null
-    },
-    "thirdWeight": {
-     "p50": null
-    },
-    "leftByFactorAlone": 0,
-    "inByFactorAlone": 0
-   },
-   "labor": {
-    "present": 0,
-    "rules": 0,
-    "contender": 0,
-    "nonRulingPowers": 0,
-    "power": {
-     "p10": null,
-     "p50": null,
-     "p90": null
-    },
-    "left": 0,
-    "leftBelowFloor": 0,
-    "leftGapToThird": {
-     "p10": null,
-     "p50": null,
-     "p90": null
-    },
-    "thirdWeight": {
-     "p50": null
-    },
-    "leftByFactorAlone": 0,
-    "inByFactorAlone": 0
-   },
-   "outsider": {
-    "present": 0,
-    "rules": 0,
-    "contender": 0,
-    "nonRulingPowers": 0,
-    "power": {
-     "p10": null,
-     "p50": null,
-     "p90": null
-    },
-    "left": 0,
-    "leftBelowFloor": 0,
-    "leftGapToThird": {
-     "p10": null,
-     "p50": null,
-     "p90": null
-    },
-    "thirdWeight": {
-     "p50": null
-    },
-    "leftByFactorAlone": 0,
-    "inByFactorAlone": 0
-   },
-   "occupation": {
-    "present": 0,
-    "rules": 0,
-    "contender": 0,
-    "nonRulingPowers": 0,
-    "power": {
-     "p10": null,
-     "p50": null,
-     "p90": null
-    },
-    "left": 0,
-    "leftBelowFloor": 0,
-    "leftGapToThird": {
-     "p10": null,
-     "p50": null,
-     "p90": null
-    },
-    "thirdWeight": {
-     "p50": null
-    },
-    "leftByFactorAlone": 0,
-    "inByFactorAlone": 0
-   },
-   "civic": {
-    "present": 0,
-    "rules": 0,
-    "contender": 0,
-    "nonRulingPowers": 0,
-    "power": {
-     "p10": null,
-     "p50": null,
-     "p90": null
-    },
-    "left": 0,
-    "leftBelowFloor": 0,
-    "leftGapToThird": {
-     "p10": null,
-     "p50": null,
-     "p90": null
-    },
-    "thirdWeight": {
-     "p50": null
-    },
-    "leftByFactorAlone": 0,
-    "inByFactorAlone": 0
-   },
-   "other": {
-    "present": 32,
-    "rules": 0,
-    "contender": 26,
-    "nonRulingPowers": 35,
-    "power": {
-     "p10": 9.8,
-     "p50": 22,
-     "p90": 36.6
-    },
-    "left": 6,
-    "leftBelowFloor": 0,
-    "leftGapToThird": {
-     "p10": 2.3,
-     "p50": 8.55,
-     "p90": 10
-    },
-    "thirdWeight": {
-     "p50": 14.85
-    },
-    "leftByFactorAlone": 1,
     "inByFactorAlone": 0
    }
   },
   "village": {
    "government": {
-    "present": 132,
+    "present": 130,
     "rules": 130,
-    "contender": 6,
-    "nonRulingPowers": 6,
+    "contender": 1,
+    "nonRulingPowers": 1,
     "power": {
-     "p10": 15,
-     "p50": 19,
-     "p90": 31
+     "p10": 45,
+     "p50": 45,
+     "p90": 45
     },
     "left": 0,
     "leftBelowFloor": 0,
@@ -938,106 +938,106 @@
     "inByFactorAlone": 0
    },
    "noble": {
-    "present": 66,
+    "present": 6,
     "rules": 0,
-    "contender": 44,
-    "nonRulingPowers": 72,
+    "contender": 6,
+    "nonRulingPowers": 6,
     "power": {
-     "p10": 6,
-     "p50": 12,
-     "p90": 19.9
+     "p10": 21,
+     "p50": 27.5,
+     "p90": 43.5
     },
-    "left": 24,
+    "left": 0,
     "leftBelowFloor": 0,
     "leftGapToThird": {
-     "p10": 1.25,
-     "p50": 5.4,
-     "p90": 8.71
+     "p10": null,
+     "p50": null,
+     "p90": null
     },
     "thirdWeight": {
-     "p50": 13.75
+     "p50": null
     },
     "leftByFactorAlone": 0,
-    "inByFactorAlone": 2
+    "inByFactorAlone": 0
    },
    "military": {
-    "present": 93,
+    "present": 42,
     "rules": 0,
-    "contender": 81,
-    "nonRulingPowers": 103,
+    "contender": 42,
+    "nonRulingPowers": 42,
     "power": {
-     "p10": 9.2,
-     "p50": 17,
-     "p90": 31
+     "p10": 26.2,
+     "p50": 39.5,
+     "p90": 52.6
     },
-    "left": 15,
+    "left": 0,
     "leftBelowFloor": 0,
     "leftGapToThird": {
-     "p10": 1.35,
-     "p50": 5,
-     "p90": 8.63
+     "p10": null,
+     "p50": null,
+     "p90": null
     },
     "thirdWeight": {
-     "p50": 14.25
+     "p50": null
     },
     "leftByFactorAlone": 0,
-    "inByFactorAlone": 5
+    "inByFactorAlone": 0
    },
    "merchant": {
-    "present": 49,
+    "present": 34,
     "rules": 0,
-    "contender": 46,
-    "nonRulingPowers": 96,
+    "contender": 34,
+    "nonRulingPowers": 49,
     "power": {
-     "p10": 10,
-     "p50": 17,
-     "p90": 30
+     "p10": 20,
+     "p50": 33,
+     "p90": 43.8
     },
-    "left": 19,
+    "left": 0,
     "leftBelowFloor": 0,
     "leftGapToThird": {
-     "p10": 2.36,
-     "p50": 3.8,
-     "p90": 4.9
+     "p10": null,
+     "p50": null,
+     "p90": null
     },
     "thirdWeight": {
-     "p50": 13.3
+     "p50": null
     },
-    "leftByFactorAlone": 3,
+    "leftByFactorAlone": 0,
     "inByFactorAlone": 0
    },
    "religious": {
-    "present": 160,
+    "present": 100,
     "rules": 30,
-    "contender": 154,
-    "nonRulingPowers": 164,
+    "contender": 76,
+    "nonRulingPowers": 76,
     "power": {
-     "p10": 12,
-     "p50": 23,
-     "p90": 42
+     "p10": 19,
+     "p50": 30,
+     "p90": 53.5
     },
-    "left": 8,
+    "left": 0,
     "leftBelowFloor": 0,
     "leftGapToThird": {
-     "p10": 1.27,
-     "p50": 2.8,
-     "p90": 6.05
+     "p10": null,
+     "p50": null,
+     "p90": null
     },
     "thirdWeight": {
-     "p50": 15.35
+     "p50": null
     },
-    "leftByFactorAlone": 1,
+    "leftByFactorAlone": 0,
     "inByFactorAlone": 0
    },
    "criminal": {
-    "present": 6,
+    "present": 1,
     "rules": 0,
     "contender": 0,
-    "nonRulingPowers": 6,
+    "nonRulingPowers": 1,
     "power": {
-     "p10": 14,
-     "p50": 14.5,
-     "p90": 23
+     "p10": 55,
+     "p50": 55,
+     "p90": 55
     },
     "left": 0,
     "leftBelowFloor": 0,
@@ -1191,39 +1191,39 @@
     "inByFactorAlone": 0
    },
    "other": {
-    "present": 29,
+    "present": 12,
     "rules": 0,
-    "contender": 19,
-    "nonRulingPowers": 34,
+    "contender": 12,
+    "nonRulingPowers": 12,
     "power": {
-     "p10": 10,
-     "p50": 17,
-     "p90": 28
+     "p10": 26.4,
+     "p50": 41,
+     "p90": 64.9
     },
-    "left": 13,
+    "left": 0,
     "leftBelowFloor": 0,
     "leftGapToThird": {
-     "p10": 2.27,
-     "p50": 5,
-     "p90": 13.71
+     "p10": null,
+     "p50": null,
+     "p90": null
     },
     "thirdWeight": {
-     "p50": 17.1
+     "p50": null
     },
-    "leftByFactorAlone": 3,
+    "leftByFactorAlone": 0,
     "inByFactorAlone": 0
    }
   },
   "town": {
    "government": {
-    "present": 3,
+    "present": 1,
     "rules": 0,
-    "contender": 3,
-    "nonRulingPowers": 3,
+    "contender": 1,
+    "nonRulingPowers": 1,
     "power": {
-     "p10": 11.4,
-     "p50": 13,
-     "p90": 14.6
+     "p10": 21,
+     "p50": 21,
+     "p90": 21
     },
     "left": 0,
     "leftBelowFloor": 0,
@@ -1236,109 +1236,109 @@
      "p50": null
     },
     "leftByFactorAlone": 0,
-    "inByFactorAlone": 1
+    "inByFactorAlone": 0
    },
    "noble": {
-    "present": 83,
+    "present": 42,
     "rules": 12,
-    "contender": 59,
-    "nonRulingPowers": 85,
+    "contender": 36,
+    "nonRulingPowers": 39,
     "power": {
-     "p10": 9,
-     "p50": 11,
-     "p90": 20
+     "p10": 11,
+     "p50": 15,
+     "p90": 29.2
     },
-    "left": 25,
+    "left": 3,
     "leftBelowFloor": 0,
     "leftGapToThird": {
-     "p10": 0.31,
-     "p50": 1.35,
-     "p90": 4.81
+     "p10": 0.13,
+     "p50": 0.25,
+     "p90": 0.29
     },
     "thirdWeight": {
-     "p50": 11.4
+     "p50": 13.3
     },
     "leftByFactorAlone": 0,
-    "inByFactorAlone": 10
+    "inByFactorAlone": 2
    },
    "military": {
-    "present": 145,
+    "present": 102,
     "rules": 29,
-    "contender": 114,
-    "nonRulingPowers": 163,
+    "contender": 95,
+    "nonRulingPowers": 100,
     "power": {
-     "p10": 6,
-     "p50": 14,
-     "p90": 24
+     "p10": 10.9,
+     "p50": 23,
+     "p90": 37.1
     },
-    "left": 37,
+    "left": 4,
     "leftBelowFloor": 0,
     "leftGapToThird": {
-     "p10": 0.84,
-     "p50": 2.5,
-     "p90": 5.06
+     "p10": 0.97,
+     "p50": 2.2,
+     "p90": 3.02
     },
     "thirdWeight": {
-     "p50": 11.25
+     "p50": 12.82
     },
     "leftByFactorAlone": 0,
-    "inByFactorAlone": 12
+    "inByFactorAlone": 1
    },
    "merchant": {
-    "present": 159,
+    "present": 127,
     "rules": 69,
     "contender": 109,
-    "nonRulingPowers": 310,
+    "nonRulingPowers": 183,
     "power": {
-     "p10": 6,
-     "p50": 12,
-     "p90": 24
+     "p10": 10,
+     "p50": 17,
+     "p90": 30
     },
-    "left": 134,
+    "left": 18,
     "leftBelowFloor": 0,
     "leftGapToThird": {
-     "p10": 1.52,
-     "p50": 4.5,
-     "p90": 9.65
+     "p10": 0.7,
+     "p50": 3.8,
+     "p90": 10.59
     },
     "thirdWeight": {
-     "p50": 12.1
+     "p50": 12.68
     },
-    "leftByFactorAlone": 12,
+    "leftByFactorAlone": 2,
     "inByFactorAlone": 0
    },
    "religious": {
-    "present": 160,
+    "present": 100,
     "rules": 31,
-    "contender": 104,
-    "nonRulingPowers": 162,
+    "contender": 83,
+    "nonRulingPowers": 94,
     "power": {
-     "p10": 7.1,
-     "p50": 12,
-     "p90": 26
+     "p10": 9,
+     "p50": 19,
+     "p90": 34
     },
-    "left": 58,
+    "left": 11,
     "leftBelowFloor": 0,
     "leftGapToThird": {
-     "p10": 0.5,
-     "p50": 2.4,
-     "p90": 4.38
+     "p10": 1.35,
+     "p50": 2.35,
+     "p90": 4.75
     },
     "thirdWeight": {
-     "p50": 11.4
+     "p50": 12.35
     },
-    "leftByFactorAlone": 7,
-    "inByFactorAlone": 5
+    "leftByFactorAlone": 1,
+    "inByFactorAlone": 0
    },
    "criminal": {
-    "present": 30,
+    "present": 25,
     "rules": 12,
     "contender": 0,
-    "nonRulingPowers": 26,
+    "nonRulingPowers": 20,
     "power": {
-     "p10": 8.5,
-     "p50": 16,
-     "p90": 23
+     "p10": 14,
+     "p50": 23.5,
+     "p90": 33.5
     },
     "left": 0,
     "leftBelowFloor": 0,
@@ -1354,24 +1354,24 @@
     "inByFactorAlone": 0
    },
    "arcane": {
-    "present": 10,
+    "present": 7,
     "rules": 5,
-    "contender": 7,
-    "nonRulingPowers": 10,
+    "contender": 2,
+    "nonRulingPowers": 3,
     "power": {
-     "p10": 7,
-     "p50": 9,
-     "p90": 13
+     "p10": 8,
+     "p50": 8,
+     "p90": 13.6
     },
-    "left": 3,
+    "left": 1,
     "leftBelowFloor": 0,
     "leftGapToThird": {
-     "p10": 1.73,
-     "p50": 2.05,
-     "p90": 3.33
+     "p10": 0.6,
+     "p50": 0.6,
+     "p90": 0.6
     },
     "thirdWeight": {
-     "p50": 10.45
+     "p50": 9
     },
     "leftByFactorAlone": 0,
     "inByFactorAlone": 0
@@ -1492,26 +1492,26 @@
     "inByFactorAlone": 0
    },
    "other": {
-    "present": 31,
+    "present": 12,
     "rules": 2,
-    "contender": 4,
-    "nonRulingPowers": 35,
+    "contender": 8,
+    "nonRulingPowers": 10,
     "power": {
-     "p10": 5.4,
-     "p50": 10,
-     "p90": 13
+     "p10": 10.8,
+     "p50": 18,
+     "p90": 32.4
     },
-    "left": 31,
+    "left": 2,
     "leftBelowFloor": 0,
     "leftGapToThird": {
-     "p10": 0.5,
-     "p50": 3.3,
-     "p90": 8.85
+     "p10": 2.29,
+     "p50": 4.03,
+     "p90": 5.77
     },
     "thirdWeight": {
-     "p50": 12.35
+     "p50": 16.18
     },
-    "leftByFactorAlone": 9,
+    "leftByFactorAlone": 0,
     "inByFactorAlone": 0
    }
   },
@@ -1529,117 +1529,117 @@
     "left": 1,
     "leftBelowFloor": 0,
     "leftGapToThird": {
-     "p10": 6.3,
-     "p50": 6.3,
-     "p90": 6.3
+     "p10": 4.6,
+     "p50": 4.6,
+     "p90": 4.6
     },
     "thirdWeight": {
-     "p50": 14.3
+     "p50": 12.6
     },
     "leftByFactorAlone": 0,
     "inByFactorAlone": 0
    },
    "noble": {
-    "present": 150,
+    "present": 94,
     "rules": 0,
-    "contender": 91,
-    "nonRulingPowers": 159,
+    "contender": 80,
+    "nonRulingPowers": 116,
     "power": {
-     "p10": 5,
-     "p50": 11,
-     "p90": 22
+     "p10": 7,
+     "p50": 13,
+     "p90": 23
     },
-    "left": 65,
+    "left": 30,
     "leftBelowFloor": 1,
     "leftGapToThird": {
-     "p10": 1.15,
-     "p50": 3.25,
-     "p90": 4.86
-    },
-    "thirdWeight": {
-     "p50": 9.95
-    },
-    "leftByFactorAlone": 1,
-    "inByFactorAlone": 7
-   },
-   "military": {
-    "present": 158,
-    "rules": 18,
-    "contender": 109,
-    "nonRulingPowers": 161,
-    "power": {
-     "p10": 5,
-     "p50": 10,
-     "p90": 21
-    },
-    "left": 50,
-    "leftBelowFloor": 4,
-    "leftGapToThird": {
-     "p10": 0.42,
-     "p50": 1.77,
-     "p90": 3.72
-    },
-    "thirdWeight": {
-     "p50": 9.5
-    },
-    "leftByFactorAlone": 0,
-    "inByFactorAlone": 18
-   },
-   "merchant": {
-    "present": 160,
-    "rules": 59,
-    "contender": 109,
-    "nonRulingPowers": 309,
-    "power": {
-     "p10": 5,
-     "p50": 10,
-     "p90": 18
-    },
-    "left": 149,
-    "leftBelowFloor": 0,
-    "leftGapToThird": {
-     "p10": 1.2,
-     "p50": 4.75,
-     "p90": 9.58
+     "p10": 0.84,
+     "p50": 2.9,
+     "p90": 5.8
     },
     "thirdWeight": {
      "p50": 11.25
     },
-    "leftByFactorAlone": 20,
+    "leftByFactorAlone": 0,
+    "inByFactorAlone": 5
+   },
+   "military": {
+    "present": 114,
+    "rules": 18,
+    "contender": 97,
+    "nonRulingPowers": 164,
+    "power": {
+     "p10": 6,
+     "p50": 13,
+     "p90": 22.7
+    },
+    "left": 43,
+    "leftBelowFloor": 5,
+    "leftGapToThird": {
+     "p10": 0.4,
+     "p50": 2.15,
+     "p90": 5
+    },
+    "thirdWeight": {
+     "p50": 11.4
+    },
+    "leftByFactorAlone": 0,
+    "inByFactorAlone": 23
+   },
+   "merchant": {
+    "present": 128,
+    "rules": 59,
+    "contender": 100,
+    "nonRulingPowers": 275,
+    "power": {
+     "p10": 6,
+     "p50": 11,
+     "p90": 21
+    },
+    "left": 108,
+    "leftBelowFloor": 8,
+    "leftGapToThird": {
+     "p10": 0.79,
+     "p50": 3.8,
+     "p90": 7.1
+    },
+    "thirdWeight": {
+     "p50": 11.4
+    },
+    "leftByFactorAlone": 21,
     "inByFactorAlone": 0
    },
    "religious": {
-    "present": 160,
+    "present": 101,
     "rules": 13,
-    "contender": 73,
-    "nonRulingPowers": 163,
+    "contender": 64,
+    "nonRulingPowers": 132,
     "power": {
-     "p10": 5,
-     "p50": 9,
-     "p90": 21
+     "p10": 6,
+     "p50": 12,
+     "p90": 22.9
     },
-    "left": 90,
-    "leftBelowFloor": 1,
+    "left": 59,
+    "leftBelowFloor": 5,
     "leftGapToThird": {
-     "p10": 1.29,
-     "p50": 3,
-     "p90": 5.36
+     "p10": 1.77,
+     "p50": 4.22,
+     "p90": 6
     },
     "thirdWeight": {
-     "p50": 9.9
+     "p50": 11.4
     },
-    "leftByFactorAlone": 1,
+    "leftByFactorAlone": 6,
     "inByFactorAlone": 2
    },
    "criminal": {
-    "present": 70,
+    "present": 29,
     "rules": 6,
     "contender": 0,
-    "nonRulingPowers": 70,
+    "nonRulingPowers": 39,
     "power": {
-     "p10": 5,
-     "p50": 7,
-     "p90": 14
+     "p10": 6,
+     "p50": 11,
+     "p90": 17.6
     },
     "left": 0,
     "leftBelowFloor": 0,
@@ -1655,27 +1655,27 @@
     "inByFactorAlone": 0
    },
    "arcane": {
-    "present": 133,
+    "present": 69,
     "rules": 8,
-    "contender": 32,
-    "nonRulingPowers": 133,
+    "contender": 24,
+    "nonRulingPowers": 86,
     "power": {
      "p10": 5,
-     "p50": 7,
-     "p90": 13
+     "p50": 8,
+     "p90": 14.5
     },
-    "left": 101,
-    "leftBelowFloor": 1,
+    "left": 62,
+    "leftBelowFloor": 4,
     "leftGapToThird": {
-     "p10": 1.09,
-     "p50": 3.98,
-     "p90": 7.95
+     "p10": 0.87,
+     "p50": 3.05,
+     "p90": 8.12
     },
     "thirdWeight": {
-     "p50": 10.45
+     "p50": 11.4
     },
-    "leftByFactorAlone": 5,
-    "inByFactorAlone": 0
+    "leftByFactorAlone": 3,
+    "inByFactorAlone": 2
    },
    "craft": {
     "present": 0,
@@ -1793,154 +1793,154 @@
     "inByFactorAlone": 0
    },
    "other": {
-    "present": 25,
+    "present": 12,
     "rules": 0,
-    "contender": 10,
-    "nonRulingPowers": 29,
+    "contender": 6,
+    "nonRulingPowers": 16,
     "power": {
-     "p10": 6.8,
-     "p50": 9,
-     "p90": 12
+     "p10": 7,
+     "p50": 9.5,
+     "p90": 15
     },
-    "left": 19,
+    "left": 10,
     "leftBelowFloor": 0,
     "leftGapToThird": {
-     "p10": 1.32,
-     "p50": 4.15,
-     "p90": 7.58
+     "p10": 1.22,
+     "p50": 4.17,
+     "p90": 9.26
     },
     "thirdWeight": {
-     "p50": 10.5
+     "p50": 10.93
     },
-    "leftByFactorAlone": 0,
+    "leftByFactorAlone": 2,
     "inByFactorAlone": 0
    }
   },
   "metropolis": {
    "government": {
-    "present": 74,
+    "present": 76,
     "rules": 73,
     "contender": 1,
-    "nonRulingPowers": 3,
+    "nonRulingPowers": 6,
     "power": {
-     "p10": 7.2,
+     "p10": 5.5,
      "p50": 8,
-     "p90": 10.4
+     "p90": 10
     },
-    "left": 2,
-    "leftBelowFloor": 0,
+    "left": 5,
+    "leftBelowFloor": 1,
     "leftGapToThird": {
-     "p10": 4.12,
-     "p50": 4.6,
-     "p90": 5.08
+     "p10": 3.86,
+     "p50": 4.25,
+     "p90": 5.06
     },
     "thirdWeight": {
-     "p50": 12.1
+     "p50": 12.25
     },
     "leftByFactorAlone": 0,
     "inByFactorAlone": 0
    },
    "noble": {
-    "present": 154,
+    "present": 115,
     "rules": 0,
     "contender": 95,
-    "nonRulingPowers": 161,
+    "nonRulingPowers": 162,
     "power": {
-     "p10": 5,
+     "p10": 6,
      "p50": 11,
-     "p90": 20
+     "p90": 19.9
     },
-    "left": 62,
-    "leftBelowFloor": 6,
+    "left": 58,
+    "leftBelowFloor": 4,
     "leftGapToThird": {
-     "p10": 2.08,
-     "p50": 2.9,
-     "p90": 4
+     "p10": 0.7,
+     "p50": 3.7,
+     "p90": 5.5
     },
     "thirdWeight": {
-     "p50": 9.5
+     "p50": 11
     },
     "leftByFactorAlone": 0,
-    "inByFactorAlone": 8
+    "inByFactorAlone": 10
    },
    "military": {
-    "present": 157,
+    "present": 134,
     "rules": 14,
-    "contender": 102,
-    "nonRulingPowers": 166,
+    "contender": 100,
+    "nonRulingPowers": 186,
     "power": {
      "p10": 5,
      "p50": 10,
      "p90": 21
     },
-    "left": 59,
-    "leftBelowFloor": 6,
+    "left": 72,
+    "leftBelowFloor": 17,
     "leftGapToThird": {
      "p10": 0.7,
-     "p50": 2.25,
-     "p90": 3.25
+     "p50": 1.95,
+     "p90": 4.68
     },
     "thirdWeight": {
      "p50": 9.5
     },
     "leftByFactorAlone": 0,
-    "inByFactorAlone": 10
+    "inByFactorAlone": 22
    },
    "merchant": {
-    "present": 160,
+    "present": 144,
     "rules": 51,
-    "contender": 109,
-    "nonRulingPowers": 311,
+    "contender": 97,
+    "nonRulingPowers": 292,
     "power": {
-     "p10": 5,
-     "p50": 9,
+     "p10": 6,
+     "p50": 10,
      "p90": 17
     },
-    "left": 167,
-    "leftBelowFloor": 0,
+    "left": 158,
+    "leftBelowFloor": 13,
     "leftGapToThird": {
-     "p10": 1,
-     "p50": 4.5,
-     "p90": 9.35
+     "p10": 0.61,
+     "p50": 3.3,
+     "p90": 6.98
     },
     "thirdWeight": {
-     "p50": 11
+     "p50": 10.5
     },
-    "leftByFactorAlone": 17,
+    "leftByFactorAlone": 27,
     "inByFactorAlone": 1
    },
    "religious": {
-    "present": 160,
+    "present": 112,
     "rules": 11,
-    "contender": 76,
-    "nonRulingPowers": 162,
+    "contender": 67,
+    "nonRulingPowers": 150,
     "power": {
      "p10": 5,
-     "p50": 8,
+     "p50": 9.5,
      "p90": 21
     },
-    "left": 86,
-    "leftBelowFloor": 0,
+    "left": 73,
+    "leftBelowFloor": 8,
     "leftGapToThird": {
-     "p10": 2.45,
-     "p50": 3.5,
-     "p90": 5.67
+     "p10": 0.6,
+     "p50": 4.3,
+     "p90": 6.2
     },
     "thirdWeight": {
-     "p50": 9.5
+     "p50": 12
     },
-    "leftByFactorAlone": 0,
+    "leftByFactorAlone": 6,
     "inByFactorAlone": 2
    },
    "criminal": {
-    "present": 72,
+    "present": 35,
     "rules": 4,
     "contender": 0,
-    "nonRulingPowers": 72,
+    "nonRulingPowers": 41,
     "power": {
-     "p10": 5,
-     "p50": 6,
-     "p90": 14
+     "p10": 7,
+     "p50": 10,
+     "p90": 16
     },
     "left": 0,
     "leftBelowFloor": 0,
@@ -1956,26 +1956,26 @@
     "inByFactorAlone": 0
    },
    "arcane": {
-    "present": 160,
+    "present": 131,
     "rules": 7,
-    "contender": 51,
-    "nonRulingPowers": 160,
+    "contender": 48,
+    "nonRulingPowers": 170,
     "power": {
-     "p10": 5,
+     "p10": 4.9,
      "p50": 8,
-     "p90": 14
+     "p90": 13
     },
-    "left": 109,
-    "leftBelowFloor": 1,
+    "left": 122,
+    "leftBelowFloor": 17,
     "leftGapToThird": {
-     "p10": 0.49,
-     "p50": 3.02,
-     "p90": 8.05
+     "p10": 0.75,
+     "p50": 3.2,
+     "p90": 7.57
     },
     "thirdWeight": {
      "p50": 11
     },
-    "leftByFactorAlone": 2,
+    "leftByFactorAlone": 1,
     "inByFactorAlone": 1
    },
    "craft": {
@@ -2094,26 +2094,26 @@
     "inByFactorAlone": 0
    },
    "other": {
-    "present": 22,
+    "present": 14,
     "rules": 0,
     "contender": 2,
-    "nonRulingPowers": 24,
+    "nonRulingPowers": 20,
     "power": {
-     "p10": 5,
+     "p10": 4.9,
      "p50": 8,
-     "p90": 11.7
+     "p90": 12.1
     },
-    "left": 22,
-    "leftBelowFloor": 0,
+    "left": 18,
+    "leftBelowFloor": 2,
     "leftGapToThird": {
-     "p10": 1.33,
-     "p50": 4.13,
-     "p90": 7.57
+     "p10": 1.32,
+     "p50": 4.05,
+     "p90": 7.13
     },
     "thirdWeight": {
-     "p50": 11
+     "p50": 12.05
     },
-    "leftByFactorAlone": 3,
+    "leftByFactorAlone": 2,
     "inByFactorAlone": 0
    }
   }
@@ -2121,129 +2121,129 @@
  "kindsByBacking": {
   "all": {
    "government": {
-    "present": 586,
+    "present": 584,
     "rules": 579,
-    "contender": 19,
-    "nonRulingPowers": 22,
+    "contender": 6,
+    "nonRulingPowers": 12,
     "power": {
-     "p10": 8.3,
-     "p50": 15,
+     "p10": 7,
+     "p50": 10,
      "p90": 48.6
     },
-    "left": 3,
-    "leftBelowFloor": 0,
+    "left": 6,
+    "leftBelowFloor": 1,
     "leftGapToThird": {
-     "p10": 4.24,
-     "p50": 5.2,
-     "p90": 6.08
+     "p10": 3.88,
+     "p50": 4.5,
+     "p90": 5.02
     },
     "thirdWeight": {
-     "p50": 13.2
+     "p50": 12.6
     },
     "leftByFactorAlone": 0,
-    "inByFactorAlone": 1
+    "inByFactorAlone": 0
    },
    "noble": {
-    "present": 523,
+    "present": 260,
     "rules": 12,
-    "contender": 349,
-    "nonRulingPowers": 553,
+    "contender": 220,
+    "nonRulingPowers": 326,
     "power": {
      "p10": 6,
      "p50": 12,
-     "p90": 22
+     "p90": 23
     },
-    "left": 186,
-    "leftBelowFloor": 7,
+    "left": 91,
+    "leftBelowFloor": 5,
     "leftGapToThird": {
-     "p10": 0.82,
-     "p50": 3,
-     "p90": 5.75
+     "p10": 0.5,
+     "p50": 3.42,
+     "p90": 5.5
     },
     "thirdWeight": {
-     "p50": 10.45
+     "p50": 11.13
     },
-    "leftByFactorAlone": 1,
-    "inByFactorAlone": 28
+    "leftByFactorAlone": 0,
+    "inByFactorAlone": 17
    },
    "military": {
-    "present": 720,
+    "present": 414,
     "rules": 61,
-    "contender": 573,
-    "nonRulingPowers": 777,
+    "contender": 356,
+    "nonRulingPowers": 514,
     "power": {
      "p10": 6,
      "p50": 17,
-     "p90": 28
+     "p90": 36.7
     },
-    "left": 161,
-    "leftBelowFloor": 10,
+    "left": 119,
+    "leftBelowFloor": 22,
     "leftGapToThird": {
-     "p10": 0.7,
-     "p50": 2.3,
-     "p90": 4.95
+     "p10": 0.5,
+     "p50": 2,
+     "p90": 5
     },
     "thirdWeight": {
-     "p50": 10
+     "p50": 10.5
     },
     "leftByFactorAlone": 0,
     "inByFactorAlone": 46
    },
    "merchant": {
-    "present": 551,
+    "present": 434,
     "rules": 179,
-    "contender": 395,
-    "nonRulingPowers": 554,
+    "contender": 345,
+    "nonRulingPowers": 557,
     "power": {
      "p10": 6,
      "p50": 14,
-     "p90": 26
+     "p90": 29.4
     },
-    "left": 158,
-    "leftBelowFloor": 0,
+    "left": 184,
+    "leftBelowFloor": 21,
     "leftGapToThird": {
-     "p10": 1.35,
-     "p50": 5.6,
-     "p90": 10.32
+     "p10": 0.9,
+     "p50": 3.8,
+     "p90": 8.17
     },
     "thirdWeight": {
-     "p50": 12.75
+     "p50": 11.25
     },
-    "leftByFactorAlone": 14,
+    "leftByFactorAlone": 23,
     "inByFactorAlone": 1
    },
    "religious": {
-    "present": 714,
+    "present": 413,
     "rules": 85,
-    "contender": 481,
-    "nonRulingPowers": 730,
+    "contender": 290,
+    "nonRulingPowers": 452,
     "power": {
-     "p10": 6,
+     "p10": 7,
      "p50": 14,
      "p90": 34
     },
-    "left": 242,
-    "leftBelowFloor": 1,
+    "left": 143,
+    "leftBelowFloor": 13,
     "leftGapToThird": {
-     "p10": 1.1,
-     "p50": 3.25,
-     "p90": 5.3
+     "p10": 1.23,
+     "p50": 4,
+     "p90": 6.2
     },
     "thirdWeight": {
-     "p50": 10.45
+     "p50": 12.05
     },
-    "leftByFactorAlone": 9,
-    "inByFactorAlone": 9
+    "leftByFactorAlone": 13,
+    "inByFactorAlone": 4
    },
    "criminal": {
-    "present": 180,
+    "present": 90,
     "rules": 22,
     "contender": 0,
-    "nonRulingPowers": 176,
+    "nonRulingPowers": 101,
     "power": {
-     "p10": 5,
-     "p50": 9,
-     "p90": 17
+     "p10": 7,
+     "p50": 12,
+     "p90": 25
     },
     "left": 0,
     "leftBelowFloor": 0,
@@ -2259,49 +2259,49 @@
     "inByFactorAlone": 0
    },
    "arcane": {
-    "present": 303,
+    "present": 207,
     "rules": 20,
-    "contender": 90,
-    "nonRulingPowers": 303,
+    "contender": 74,
+    "nonRulingPowers": 259,
     "power": {
      "p10": 5,
-     "p50": 7,
-     "p90": 13
+     "p50": 8,
+     "p90": 14
     },
-    "left": 213,
-    "leftBelowFloor": 2,
+    "left": 185,
+    "leftBelowFloor": 21,
     "leftGapToThird": {
-     "p10": 0.9,
-     "p50": 3.7,
-     "p90": 7.95
+     "p10": 0.73,
+     "p50": 3.1,
+     "p90": 7.74
     },
     "thirdWeight": {
      "p50": 11
     },
-    "leftByFactorAlone": 7,
-    "inByFactorAlone": 1
+    "leftByFactorAlone": 4,
+    "inByFactorAlone": 3
    },
    "craft": {
-    "present": 496,
+    "present": 247,
     "rules": 0,
-    "contender": 184,
-    "nonRulingPowers": 496,
+    "contender": 147,
+    "nonRulingPowers": 247,
     "power": {
-     "p10": 5,
-     "p50": 9,
-     "p90": 14
+     "p10": 7,
+     "p50": 10,
+     "p90": 17.4
     },
-    "left": 312,
+    "left": 100,
     "leftBelowFloor": 0,
     "leftGapToThird": {
-     "p10": 1.4,
-     "p50": 4.13,
-     "p90": 8.25
+     "p10": 0.68,
+     "p50": 2.8,
+     "p90": 5.6
     },
     "thirdWeight": {
-     "p50": 11.25
+     "p50": 10.9
     },
-    "leftByFactorAlone": 39,
+    "leftByFactorAlone": 27,
     "inByFactorAlone": 0
    },
    "labor": {
@@ -2397,26 +2397,26 @@
     "inByFactorAlone": 0
    },
    "other": {
-    "present": 162,
+    "present": 63,
     "rules": 2,
-    "contender": 83,
-    "nonRulingPowers": 185,
+    "contender": 41,
+    "nonRulingPowers": 71,
     "power": {
      "p10": 7,
-     "p50": 12,
-     "p90": 32
+     "p50": 15,
+     "p90": 64
     },
-    "left": 92,
-    "leftBelowFloor": 0,
+    "left": 30,
+    "leftBelowFloor": 2,
     "leftGapToThird": {
-     "p10": 1.2,
-     "p50": 4.2,
-     "p90": 9.1
+     "p10": 1.33,
+     "p50": 4.1,
+     "p90": 7.88
     },
     "thirdWeight": {
-     "p50": 12.35
+     "p50": 12.05
     },
-    "leftByFactorAlone": 16,
+    "leftByFactorAlone": 4,
     "inByFactorAlone": 0
    }
   }
@@ -2671,65 +2671,86 @@
    "Democratic assembly": 26,
    "Elected Reeve": 19,
    "City-State Council": 18,
-   "Quarantine Council": 11,
-   "People's Council": 10,
+   "People's Council": 4,
+   "The Grey Council": 4,
+   "Quarantine Council": 3,
    "Reform Stewards' Coalition": 1
   },
   "noble": {
-   "Noble Houses": 151,
-   "Noble Families": 147,
-   "Manor Household": 124,
-   "Landed Gentry": 81,
+   "Noble Houses": 111,
+   "Noble Families": 92,
+   "Landed Gentry": 38,
    "The Highborn Circle": 24,
-   "The Peerage": 24,
+   "The Peerage": 21,
+   "The Old Houses": 17,
+   "The Landed Bloc": 16,
    "Feudal Appointee": 12,
+   "Manor Household": 5,
    "Crown Creditors (Noble Coalition)": 1,
    "Loyalist Noble Opposition": 1
   },
   "military": {
-   "Military/Guard": 569,
-   "Military Party": 141,
-   "War Council": 49,
+   "Military/Guard": 381,
    "Military Council": 29,
+   "The Garrison Bloc": 28,
+   "The Shield Compact": 26,
+   "The Order of the Watch": 23,
    "Military City Council": 18,
+   "War Council": 18,
+   "Military Party": 16,
+   "The Martial Alliance": 15,
    "Grand Military Council": 14,
-   "Monster Hunters / Adventurers": 6,
    "Occupation Authority": 6,
-   "Resistance Network": 6
+   "Monster Hunters / Adventurers": 1
   },
   "merchant": {
-   "Merchant Guilds": 538,
-   "Craft Guilds": 496,
+   "Merchant Guilds": 415,
+   "Craft Guilds": 247,
+   "The Guild Alliance": 45,
    "Guild Council": 43,
    "Merchant oligarchy": 41,
+   "The Commercial Circle": 36,
+   "The Merchant Bloc": 32,
    "Grand Merchant Oligarchy": 26,
+   "The Trade Compact": 26,
    "Merchant Guild Council": 24,
-   "Grain Holders": 16,
    "Grand Guild Consortium": 16,
    "Merchant Council": 13,
    "Grand Merchant Senate": 9,
-   "Merchant City Council": 7
+   "Merchant City Council": 7,
+   "Grain Holders": 3
   },
   "religious": {
-   "Religious Authorities": 712,
+   "Religious Authorities": 380,
    "Church Council": 31,
    "Priestly Guidance": 30,
+   "The Faithful Assembly": 22,
+   "The Clergy Alliance": 20,
+   "The Devout Circle": 15,
    "Ecclesiastical Council": 13,
    "High Theocratic Council": 11,
-   "Reform Congregation": 8,
-   "New Faith Community": 4,
-   "Conversion Enforcement Office": 3,
-   "Underground Old Faith": 3
+   "The Holy Compact": 11,
+   "Reform Congregation": 2,
+   "Conversion Enforcement Office": 1,
+   "New Faith Community": 1
   },
   "criminal": {
-   "Thieves' Guild": 176,
+   "Thieves' Guild": 84,
    "Corrupt Council": 12,
    "Corrupt City Council": 6,
-   "Shadow Senate": 4
+   "The Black Circle": 6,
+   "Shadow Senate": 4,
+   "The Shadow Compact": 4,
+   "The Underground": 4,
+   "The Hidden Hand": 3
   },
   "arcane": {
-   "Arcane Orders": 303,
+   "Arcane Orders": 203,
+   "The Arcane Circle": 20,
+   "The Mages' Compact": 16,
    "Arcane Council": 13,
+   "The Enlightened": 10,
+   "The Tower Alliance": 10,
    "Arcane Senate": 7
   },
   "craft": {},
@@ -2738,18 +2759,19 @@
   "occupation": {},
   "civic": {},
   "other": {
-   "Creditor's Representative": 40,
-   "The Independent Bloc": 37,
-   "Peace Movement": 28,
-   "Third Bloc (Neutrals)": 24,
-   "The Inquiry": 22,
-   "Newcomers' Settlement": 17,
-   "Reform Movement": 17,
-   "Town Mayor": 2
+   "The Independent Bloc": 32,
+   "Creditor's Representative": 16,
+   "Reform Movement": 10,
+   "The Common Interest": 5,
+   "Newcomers' Settlement": 3,
+   "The Inquiry": 3,
+   "Town Mayor": 2,
+   "The Free Alliance": 1,
+   "Third Bloc (Neutrals)": 1
   }
  },
  "craftNamedReadAs": {
-  "Craft Guilds -> coup:merchant backing:craft category:economy": 496
+  "Craft Guilds -> coup:merchant backing:craft category:economy": 247
  },
  "neverReached": [
   "Elder Consensus",
@@ -2767,43 +2789,42 @@
  ],
  "bornNotInTables": [],
  "incumbentGated": {
-  "all": "885/960",
-  "thorp": "152/160",
-  "hamlet": "147/160",
-  "village": "130/160",
-  "town": "140/160",
+  "all": "950/960",
+  "thorp": "160/160",
+  "hamlet": "160/160",
+  "village": "160/160",
+  "town": "155/160",
   "city": "158/160",
-  "metropolis": "158/160"
+  "metropolis": "157/160"
  },
  "fieldSize": {
   "all": {
-   "0": 87,
-   "1": 130,
-   "2": 106,
-   "3": 637
+   "0": 293,
+   "1": 157,
+   "2": 107,
+   "3": 403
   },
   "thorp": {
-   "0": 53,
-   "1": 61,
-   "2": 32,
-   "3": 14
+   "0": 152,
+   "1": 8
   },
   "hamlet": {
-   "0": 34,
-   "1": 36,
-   "2": 56,
-   "3": 34
+   "0": 122,
+   "1": 38
   },
   "village": {
-   "1": 33,
-   "2": 18,
-   "3": 109
+   "0": 19,
+   "1": 96,
+   "2": 45
   },
   "town": {
-   "3": 160
+   "1": 15,
+   "2": 59,
+   "3": 86
   },
   "city": {
-   "3": 160
+   "2": 3,
+   "3": 157
   },
   "metropolis": {
    "3": 160
@@ -2812,124 +2833,124 @@
  "cultures": {
   "arabic": {
    "towns": 86,
-   "government": "57/57/2",
-   "noble": "47/1/31",
-   "military": "58/3/51",
-   "merchant": "47/14/34",
-   "religious": "66/9/51",
-   "criminal": "14/1/0",
-   "arcane": "25/1/4",
-   "other": "20/0/9"
+   "government": "57/57/1",
+   "noble": "22/1/19",
+   "military": "34/3/32",
+   "merchant": "37/14/27",
+   "religious": "43/9/32",
+   "criminal": "8/1/0",
+   "arcane": "18/1/3",
+   "other": "7/0/5"
   },
   "celtic": {
    "towns": 81,
-   "government": "56/55/4",
-   "noble": "42/1/30",
-   "military": "56/4/41",
-   "merchant": "42/13/32",
-   "religious": "59/5/38",
-   "criminal": "12/1/0",
-   "arcane": "28/2/7",
-   "other": "12/0/8"
+   "government": "56/55/1",
+   "noble": "22/1/19",
+   "military": "31/4/25",
+   "merchant": "36/13/27",
+   "religious": "29/5/21",
+   "criminal": "8/1/0",
+   "arcane": "20/2/6",
+   "other": "4/0/2"
   },
   "east_asian": {
    "towns": 99,
    "government": "62/62/0",
-   "noble": "50/0/34",
-   "military": "75/7/62",
-   "merchant": "55/18/42",
-   "religious": "68/8/42",
-   "criminal": "19/2/0",
-   "arcane": "32/2/8",
-   "other": "19/0/9"
+   "noble": "25/0/21",
+   "military": "38/7/35",
+   "merchant": "43/18/36",
+   "religious": "34/8/23",
+   "criminal": "8/2/0",
+   "arcane": "23/2/9",
+   "other": "5/0/3"
   },
   "germanic": {
    "towns": 80,
-   "government": "48/47/2",
-   "noble": "42/1/31",
-   "military": "62/5/44",
-   "merchant": "49/22/40",
-   "religious": "62/3/38",
-   "criminal": "14/1/0",
-   "arcane": "23/1/12",
-   "other": "11/0/6"
+   "government": "48/47/0",
+   "noble": "24/1/21",
+   "military": "34/5/29",
+   "merchant": "40/22/35",
+   "religious": "34/3/21",
+   "criminal": "8/1/0",
+   "arcane": "14/1/9",
+   "other": "7/0/5"
   },
   "greek": {
    "towns": 83,
    "government": "48/48/0",
-   "noble": "52/3/39",
-   "military": "64/5/52",
-   "merchant": "52/16/33",
-   "religious": "61/8/42",
-   "criminal": "16/1/0",
-   "arcane": "27/1/7",
-   "other": "18/1/7"
+   "noble": "32/3/26",
+   "military": "41/5/36",
+   "merchant": "47/16/34",
+   "religious": "44/8/28",
+   "criminal": "4/1/0",
+   "arcane": "18/1/6",
+   "other": "5/1/3"
   },
   "latin": {
    "towns": 85,
-   "government": "48/46/1",
-   "noble": "41/0/22",
-   "military": "62/3/42",
-   "merchant": "53/19/40",
-   "religious": "66/11/46",
-   "criminal": "17/3/0",
-   "arcane": "33/3/15",
-   "other": "15/0/8"
+   "government": "46/46/0",
+   "noble": "19/0/14",
+   "military": "31/3/21",
+   "merchant": "46/19/37",
+   "religious": "43/11/32",
+   "criminal": "11/3/0",
+   "arcane": "27/3/10",
+   "other": "5/0/3"
   },
   "mesoamerican": {
    "towns": 94,
-   "government": "58/56/5",
-   "noble": "55/0/30",
-   "military": "77/6/64",
-   "merchant": "50/16/38",
-   "religious": "71/11/51",
-   "criminal": "19/3/0",
-   "arcane": "25/1/7",
-   "other": "13/1/7"
+   "government": "57/56/2",
+   "noble": "17/0/15",
+   "military": "41/6/39",
+   "merchant": "36/16/29",
+   "religious": "37/11/23",
+   "criminal": "13/3/0",
+   "arcane": "14/1/6",
+   "other": "6/1/3"
   },
   "norse": {
    "towns": 100,
-   "government": "58/58/1",
-   "noble": "58/1/43",
-   "military": "77/10/67",
-   "merchant": "64/17/38",
-   "religious": "78/10/53",
-   "criminal": "23/2/0",
-   "arcane": "36/2/7",
-   "other": "19/0/7"
+   "government": "58/58/0",
+   "noble": "33/1/30",
+   "military": "54/10/46",
+   "merchant": "44/17/36",
+   "religious": "49/10/36",
+   "criminal": "8/2/0",
+   "arcane": "20/2/6",
+   "other": "7/0/5"
   },
   "slavic": {
    "towns": 76,
-   "government": "50/50/1",
-   "noble": "39/1/28",
-   "military": "55/4/45",
-   "merchant": "37/14/25",
-   "religious": "54/5/41",
-   "criminal": "6/2/0",
-   "arcane": "16/0/6",
-   "other": "12/0/8"
+   "government": "50/50/0",
+   "noble": "19/1/17",
+   "military": "30/4/25",
+   "merchant": "31/14/20",
+   "religious": "36/5/30",
+   "criminal": "4/2/0",
+   "arcane": "13/0/5",
+   "other": "5/0/3"
   },
   "south_asian": {
    "towns": 85,
-   "government": "50/49/1",
-   "noble": "48/2/32",
-   "military": "70/7/58",
-   "merchant": "51/12/36",
-   "religious": "66/10/44",
-   "criminal": "16/3/0",
-   "arcane": "29/2/8",
-   "other": "10/0/5"
+   "government": "50/49/0",
+   "noble": "21/2/19",
+   "military": "41/7/38",
+   "merchant": "40/12/30",
+   "religious": "34/10/25",
+   "criminal": "6/3/0",
+   "arcane": "21/2/6",
+   "other": "4/0/3"
   },
   "steppe": {
    "towns": 91,
-   "government": "51/51/2",
-   "noble": "49/2/29",
-   "military": "64/7/47",
-   "merchant": "51/18/37",
-   "religious": "63/5/35",
-   "criminal": "24/3/0",
-   "arcane": "29/5/9",
-   "other": "13/0/9"
+   "government": "52/51/2",
+   "noble": "26/2/19",
+   "military": "39/7/30",
+   "merchant": "38/18/34",
+   "religious": "30/5/19",
+   "criminal": "12/3/0",
+   "arcane": "19/5/8",
+   "other": "8/0/6"
   }
  },
  "priorityPath": {

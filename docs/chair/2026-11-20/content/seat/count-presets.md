@@ -1,64 +1,64 @@
-# The seat count, arm presets — who is present, who rules, who contends (960 born towns)
+# The seat count, arm presets, law birth — who is present, who rules, who contends (960 born towns)
 
-Executed: `node docs/chair/2026-11-20/content/seat/measure-seat.mjs --arm presets --n 10` at the base named in the commit; seeds `seat-measure-<tier>-<preset>-<i>, i=0..n-1, 16 presets`; config `{ settType: <tier>, ...archetypePatch(<preset>) } ; customContent {}`. 0 generation errors. Kind = the coup's reading (`factionArchetypes.js :: factionArchetype`). Raw: `count-presets.json`.
+Executed: `node docs/chair/2026-11-20/content/seat/measure-seat.mjs --arm presets --law birth --n 10` at the base named in the commit; seeds `seat-measure-<tier>-<preset>-<i>, i=0..n-1, 16 presets`; config `{ settType: <tier>, ...archetypePatch(<preset>) } ; customContent {}`. 0 generation errors. Kind = the coup's reading (`factionArchetypes.js :: factionArchetype`). Raw: `count-presets.json`.
 
 ## THE TABLE (all tiers)
 
 | kind | present in | rules at birth | a contender | median power (not ruling) | left out though present | of those: under the floor of 5 | of those: the factor alone keeps it out | contenders that are in only by their factor |
 |---|---|---|---|---|---|---|---|---|
-| government | 586 (61%) | 579 | 19 (3% of present) | 15 | 3 | 0 | 0 | 1 |
-| noble | 523 (54%) | 12 | 349 (67% of present) | 12 | 186 | 7 | 1 | 28 |
-| military | 720 (75%) | 61 | 573 (80% of present) | 17 | 161 | 10 | 0 | 46 |
-| merchant | 551 (57%) | 179 | 395 (72% of present) | 10 | 470 | 0 | 53 | 1 |
-| religious | 714 (74%) | 85 | 481 (67% of present) | 14 | 242 | 1 | 9 | 9 |
-| criminal | 180 (19%) | 22 | 0 (0% of present) | 9 | 0 | 0 | 0 | 0 |
-| arcane | 303 (32%) | 20 | 90 (30% of present) | 7 | 213 | 2 | 7 | 1 |
+| government | 584 (61%) | 579 | 6 (1% of present) | 10 | 6 | 1 | 0 | 0 |
+| noble | 260 (27%) | 12 | 220 (85% of present) | 12 | 91 | 5 | 0 | 17 |
+| military | 414 (43%) | 61 | 356 (86% of present) | 17 | 119 | 22 | 0 | 46 |
+| merchant | 438 (46%) | 179 | 345 (79% of present) | 12 | 284 | 21 | 50 | 1 |
+| religious | 413 (43%) | 85 | 290 (70% of present) | 14 | 143 | 13 | 13 | 4 |
+| criminal | 90 (9%) | 22 | 0 (0% of present) | 12 | 0 | 0 | 0 | 0 |
+| arcane | 207 (22%) | 20 | 74 (36% of present) | 8 | 185 | 21 | 4 | 3 |
 | craft | 0 | 0 | 0 | – | – | – | – | – |
 | labor | 0 | 0 | 0 | – | – | – | – | – |
 | outsider | 0 | 0 | 0 | – | – | – | – | – |
 | occupation | 0 | 0 | 0 | – | – | – | – | – |
 | civic | 0 | 0 | 0 | – | – | – | – | – |
-| other | 162 (17%) | 2 | 83 (51% of present) | 12 | 92 | 0 | 16 | 0 |
+| other | 63 (7%) | 2 | 41 (65% of present) | 15 | 30 | 2 | 4 | 0 |
 
 ## By tier: present / rules / contender
 
 | kind | thorp | hamlet | village | town | city | metropolis |
 |---|---|---|---|---|---|---|
-| government | 160/160/3 | 160/160/6 | 132/130/6 | 3/0/3 | 57/56/0 | 74/73/1 |
-| noble | 4/0/4 | 66/0/56 | 66/0/44 | 83/12/59 | 150/0/91 | 154/0/95 |
-| military | 74/0/74 | 93/0/93 | 93/0/81 | 145/29/114 | 158/18/109 | 157/14/102 |
-| merchant | 5/0/5 | 18/0/17 | 49/0/46 | 159/69/109 | 160/59/109 | 160/51/109 |
-| religious | 37/0/37 | 37/0/37 | 160/30/154 | 160/31/104 | 160/13/73 | 160/11/76 |
-| criminal | 0/0/0 | 2/0/0 | 6/0/0 | 30/12/0 | 70/6/0 | 72/4/0 |
-| arcane | 0/0/0 | 0/0/0 | 0/0/0 | 10/5/7 | 133/8/32 | 160/7/51 |
-| other | 23/0/22 | 32/0/26 | 29/0/19 | 31/2/4 | 25/0/10 | 22/0/2 |
+| government | 160/160/0 | 160/160/3 | 130/130/1 | 1/0/1 | 57/56/0 | 76/73/1 |
+| noble | 2/0/2 | 1/0/1 | 6/0/6 | 42/12/36 | 94/0/80 | 115/0/95 |
+| military | 1/0/1 | 21/0/21 | 42/0/42 | 102/29/95 | 114/18/97 | 134/14/100 |
+| merchant | 0/0/0 | 5/0/5 | 34/0/34 | 127/69/109 | 128/59/100 | 144/51/97 |
+| religious | 0/0/0 | 0/0/0 | 100/30/76 | 100/31/83 | 101/13/64 | 112/11/67 |
+| criminal | 0/0/0 | 0/0/0 | 1/0/0 | 25/12/0 | 29/6/0 | 35/4/0 |
+| arcane | 0/0/0 | 0/0/0 | 0/0/0 | 7/5/2 | 69/8/24 | 131/7/48 |
+| other | 5/0/5 | 8/0/8 | 12/0/12 | 12/2/8 | 12/0/6 | 14/0/2 |
 
 ## The cut: a left-out power against the third contender (towns with a full field, power ≥ 5)
 
 | kind | power p10 / p50 / p90 (not ruling) | third contender's weight, median | gap to the third (weight), p10 / p50 / p90 |
 |---|---|---|---|
-| government | 8.3 / 15 / 48.6 | 13.2 | 4.24 / 5.2 / 6.08 |
-| noble | 6 / 12 / 22 | 10.45 | 0.82 / 3 / 5.75 |
-| military | 6 / 17 / 28 | 10 | 0.7 / 2.3 / 4.95 |
-| merchant | 6 / 10 / 21 | 12 | 1.35 / 4.5 / 9.37 |
-| religious | 6 / 14 / 34 | 10.45 | 1.1 / 3.25 / 5.3 |
-| criminal | 5 / 9 / 17 | – | – / – / – |
-| arcane | 5 / 7 / 13 | 11 | 0.9 / 3.7 / 7.95 |
-| other | 7 / 12 / 32 | 12.35 | 1.2 / 4.2 / 9.1 |
+| government | 7 / 10 / 48.6 | 12.6 | 3.88 / 4.5 / 5.02 |
+| noble | 6 / 12 / 23 | 11.13 | 0.5 / 3.42 / 5.5 |
+| military | 6 / 17 / 36.7 | 10.5 | 0.5 / 2 / 5 |
+| merchant | 6 / 12 / 26 | 11 | 0.7 / 3.75 / 7.26 |
+| religious | 7 / 14 / 34 | 12.05 | 1.23 / 4 / 6.2 |
+| criminal | 7 / 12 / 25 | – | – / – / – |
+| arcane | 5 / 8 / 14 | 11 | 0.73 / 3.1 / 7.74 |
+| other | 7 / 15 / 64 | 12.05 | 1.33 / 4.1 / 7.88 |
 
 ## The backing catalogue's reading (reads craft off the name)
 
 | kind | present | rules | contender |
 |---|---|---|---|
-| government | 586 | 579 | 19 |
-| noble | 523 | 12 | 349 |
-| military | 720 | 61 | 573 |
-| merchant | 551 | 179 | 395 |
-| religious | 714 | 85 | 481 |
-| criminal | 180 | 22 | 0 |
-| arcane | 303 | 20 | 90 |
-| craft | 496 | 0 | 184 |
-| other | 162 | 2 | 83 |
+| government | 584 | 579 | 6 |
+| noble | 260 | 12 | 220 |
+| military | 414 | 61 | 356 |
+| merchant | 434 | 179 | 345 |
+| religious | 413 | 85 | 290 |
+| criminal | 90 | 22 | 0 |
+| arcane | 207 | 20 | 74 |
+| craft | 247 | 0 | 147 |
+| other | 63 | 2 | 41 |
 
 ## Where the ruler comes from
 
@@ -95,26 +95,26 @@ Born but in no table: (none)
 
 ## Names under each kind (all tiers)
 
-- government: Elder Council 193 · Household Council 92 · Feudal Stewardship 57 · Headman's Authority 51 · Free Elder Council 38 · Ducal Governorship 29 · Royal Authority 29 · Noble Governorship 27 · Democratic assembly 26 · Elected Reeve 19 · City-State Council 18 · Quarantine Council 11
-- noble: Noble Houses 151 · Noble Families 147 · Manor Household 124 · Landed Gentry 81 · The Highborn Circle 24 · The Peerage 24 · Feudal Appointee 12 · Crown Creditors (Noble Coalition) 1 · Loyalist Noble Opposition 1
-- military: Military/Guard 569 · Military Party 141 · War Council 49 · Military Council 29 · Military City Council 18 · Grand Military Council 14 · Monster Hunters / Adventurers 6 · Occupation Authority 6 · Resistance Network 6
-- merchant: Merchant Guilds 538 · Craft Guilds 496 · Guild Council 43 · Merchant oligarchy 41 · Grand Merchant Oligarchy 26 · Merchant Guild Council 24 · Grain Holders 16 · Grand Guild Consortium 16 · Merchant Council 13 · Grand Merchant Senate 9 · Merchant City Council 7
-- religious: Religious Authorities 712 · Church Council 31 · Priestly Guidance 30 · Ecclesiastical Council 13 · High Theocratic Council 11 · Reform Congregation 8 · New Faith Community 4 · Conversion Enforcement Office 3 · Underground Old Faith 3
-- criminal: Thieves' Guild 176 · Corrupt Council 12 · Corrupt City Council 6 · Shadow Senate 4
-- arcane: Arcane Orders 303 · Arcane Council 13 · Arcane Senate 7
-- other: Creditor's Representative 40 · The Independent Bloc 37 · Peace Movement 28 · Third Bloc (Neutrals) 24 · The Inquiry 22 · Newcomers' Settlement 17 · Reform Movement 17 · Town Mayor 2
+- government: Elder Council 193 · Household Council 92 · Feudal Stewardship 57 · Headman's Authority 51 · Free Elder Council 38 · Ducal Governorship 29 · Royal Authority 29 · Noble Governorship 27 · Democratic assembly 26 · Elected Reeve 19 · City-State Council 18 · People's Council 4
+- noble: Noble Houses 111 · Noble Families 92 · Landed Gentry 38 · The Highborn Circle 24 · The Peerage 21 · The Old Houses 17 · The Landed Bloc 16 · Feudal Appointee 12 · Manor Household 5 · Crown Creditors (Noble Coalition) 1 · Loyalist Noble Opposition 1
+- military: Military/Guard 381 · Military Council 29 · The Garrison Bloc 28 · The Shield Compact 26 · The Order of the Watch 23 · Military City Council 18 · War Council 18 · Military Party 16 · The Martial Alliance 15 · Grand Military Council 14 · Occupation Authority 6 · Monster Hunters / Adventurers 1
+- merchant: Merchant Guilds 415 · Craft Guilds 247 · The Guild Alliance 45 · Guild Council 43 · Merchant oligarchy 41 · The Commercial Circle 36 · The Merchant Bloc 32 · Grand Merchant Oligarchy 26 · The Trade Compact 26 · Merchant Guild Council 24 · Grand Guild Consortium 16 · Merchant Council 13
+- religious: Religious Authorities 380 · Church Council 31 · Priestly Guidance 30 · The Faithful Assembly 22 · The Clergy Alliance 20 · The Devout Circle 15 · Ecclesiastical Council 13 · High Theocratic Council 11 · The Holy Compact 11 · Reform Congregation 2 · Conversion Enforcement Office 1 · New Faith Community 1
+- criminal: Thieves' Guild 84 · Corrupt Council 12 · Corrupt City Council 6 · The Black Circle 6 · Shadow Senate 4 · The Shadow Compact 4 · The Underground 4 · The Hidden Hand 3
+- arcane: Arcane Orders 203 · The Arcane Circle 20 · The Mages' Compact 16 · Arcane Council 13 · The Enlightened 10 · The Tower Alliance 10 · Arcane Senate 7
+- other: The Independent Bloc 32 · Creditor's Representative 16 · Reform Movement 10 · The Common Interest 5 · Newcomers' Settlement 3 · The Inquiry 3 · Town Mayor 2 · The Free Alliance 1 · Third Bloc (Neutrals) 1
 
-Craft-named powers as each reader reads them: Craft Guilds -> coup:merchant backing:craft category:economy (496)
+Craft-named powers as each reader reads them: Craft Guilds -> coup:merchant backing:craft category:economy (247)
 
 ## The field
 
-- all: contenders per town 0:87 1:130 2:106 3:637; incumbent gated 885/960
-- thorp: contenders per town 0:53 1:61 2:32 3:14; incumbent gated 152/160
-- hamlet: contenders per town 0:34 1:36 2:56 3:34; incumbent gated 147/160
-- village: contenders per town 1:33 2:18 3:109; incumbent gated 130/160
-- town: contenders per town 3:160; incumbent gated 140/160
-- city: contenders per town 3:160; incumbent gated 158/160
-- metropolis: contenders per town 3:160; incumbent gated 158/160
+- all: contenders per town 0:293 1:157 2:107 3:403; incumbent gated 950/960
+- thorp: contenders per town 0:152 1:8; incumbent gated 160/160
+- hamlet: contenders per town 0:122 1:38; incumbent gated 160/160
+- village: contenders per town 0:19 1:96 2:45; incumbent gated 160/160
+- town: contenders per town 1:15 2:59 3:86; incumbent gated 155/160
+- city: contenders per town 2:3 3:157; incumbent gated 158/160
+- metropolis: contenders per town 3:160; incumbent gated 157/160
 
 ## The priority path (no governance label in the roster)
 
@@ -147,14 +147,14 @@ Craft-named powers as each reader reads them: Craft Guilds -> coup:merchant back
 
 ## By culture: present / rules / contender
 
-- arabic (86): government 57/57/2 · noble 47/1/31 · military 58/3/51 · merchant 47/14/34 · religious 66/9/51 · criminal 14/1/0 · arcane 25/1/4 · other 20/0/9
-- celtic (81): government 56/55/4 · noble 42/1/30 · military 56/4/41 · merchant 42/13/32 · religious 59/5/38 · criminal 12/1/0 · arcane 28/2/7 · other 12/0/8
-- east_asian (99): government 62/62/0 · noble 50/0/34 · military 75/7/62 · merchant 55/18/42 · religious 68/8/42 · criminal 19/2/0 · arcane 32/2/8 · other 19/0/9
-- germanic (80): government 48/47/2 · noble 42/1/31 · military 62/5/44 · merchant 49/22/40 · religious 62/3/38 · criminal 14/1/0 · arcane 23/1/12 · other 11/0/6
-- greek (83): government 48/48/0 · noble 52/3/39 · military 64/5/52 · merchant 52/16/33 · religious 61/8/42 · criminal 16/1/0 · arcane 27/1/7 · other 18/1/7
-- latin (85): government 48/46/1 · noble 41/0/22 · military 62/3/42 · merchant 53/19/40 · religious 66/11/46 · criminal 17/3/0 · arcane 33/3/15 · other 15/0/8
-- mesoamerican (94): government 58/56/5 · noble 55/0/30 · military 77/6/64 · merchant 50/16/38 · religious 71/11/51 · criminal 19/3/0 · arcane 25/1/7 · other 13/1/7
-- norse (100): government 58/58/1 · noble 58/1/43 · military 77/10/67 · merchant 64/17/38 · religious 78/10/53 · criminal 23/2/0 · arcane 36/2/7 · other 19/0/7
-- slavic (76): government 50/50/1 · noble 39/1/28 · military 55/4/45 · merchant 37/14/25 · religious 54/5/41 · criminal 6/2/0 · arcane 16/0/6 · other 12/0/8
-- south_asian (85): government 50/49/1 · noble 48/2/32 · military 70/7/58 · merchant 51/12/36 · religious 66/10/44 · criminal 16/3/0 · arcane 29/2/8 · other 10/0/5
-- steppe (91): government 51/51/2 · noble 49/2/29 · military 64/7/47 · merchant 51/18/37 · religious 63/5/35 · criminal 24/3/0 · arcane 29/5/9 · other 13/0/9
+- arabic (86): government 57/57/1 · noble 22/1/19 · military 34/3/32 · merchant 37/14/27 · religious 43/9/32 · criminal 8/1/0 · arcane 18/1/3 · other 7/0/5
+- celtic (81): government 56/55/1 · noble 22/1/19 · military 31/4/25 · merchant 36/13/27 · religious 29/5/21 · criminal 8/1/0 · arcane 20/2/6 · other 4/0/2
+- east_asian (99): government 62/62/0 · noble 25/0/21 · military 38/7/35 · merchant 43/18/36 · religious 34/8/23 · criminal 8/2/0 · arcane 23/2/9 · other 5/0/3
+- germanic (80): government 48/47/0 · noble 24/1/21 · military 34/5/29 · merchant 40/22/35 · religious 34/3/21 · criminal 8/1/0 · arcane 14/1/9 · other 7/0/5
+- greek (83): government 48/48/0 · noble 32/3/26 · military 41/5/36 · merchant 47/16/34 · religious 44/8/28 · criminal 4/1/0 · arcane 18/1/6 · other 5/1/3
+- latin (85): government 46/46/0 · noble 19/0/14 · military 31/3/21 · merchant 46/19/37 · religious 43/11/32 · criminal 11/3/0 · arcane 27/3/10 · other 5/0/3
+- mesoamerican (94): government 57/56/2 · noble 17/0/15 · military 41/6/39 · merchant 36/16/29 · religious 37/11/23 · criminal 13/3/0 · arcane 14/1/6 · other 6/1/3
+- norse (100): government 58/58/0 · noble 33/1/30 · military 54/10/46 · merchant 44/17/36 · religious 49/10/36 · criminal 8/2/0 · arcane 20/2/6 · other 7/0/5
+- slavic (76): government 50/50/0 · noble 19/1/17 · military 30/4/25 · merchant 31/14/20 · religious 36/5/30 · criminal 4/2/0 · arcane 13/0/5 · other 5/0/3
+- south_asian (85): government 50/49/0 · noble 21/2/19 · military 41/7/38 · merchant 40/12/30 · religious 34/10/25 · criminal 6/3/0 · arcane 21/2/6 · other 4/0/3
+- steppe (91): government 52/51/2 · noble 26/2/19 · military 39/7/30 · merchant 38/18/34 · religious 30/5/19 · criminal 12/3/0 · arcane 19/5/8 · other 8/0/6

@@ -33,11 +33,17 @@ const { backingArchetypeOf } = await imp('src/domain/dossier/powerSupport.js');
 const { rulingKindOf } = await imp('src/generators/power/rulerKin.js');
 const { liveSeatCandidatesOf } = await imp('src/domain/dossier/powerStrata.js');
 const { ARCHETYPES, archetypePatch } = await imp('src/components/generate/characterPresets.js');
+const { birthConfig, loadGenerationLawPayloads } = await imp('src/domain/density/densityCreateBoundary.js');
 
 const args = process.argv.slice(2);
 const argOf = (flag, fallback) => { const i = args.indexOf(flag); return i >= 0 && args[i + 1] != null ? args[i + 1] : fallback; };
 const ARM = argOf('--arm', 'default');
 const N = Number(argOf('--n', ARM === 'presets' ? 10 : 150));
+// --law birth (default) | v1: as measure-seat.mjs (birthConfig, or the bare config with a -v1 suffix).
+const LAW = argOf('--law', 'birth');
+const SUFFIX = `${ARM}${LAW === 'v1' ? '-v1' : ''}`;
+if (LAW !== 'v1') await loadGenerationLawPayloads();
+const lawConfig = (c) => (LAW === 'v1' ? c : birthConfig(c));
 const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 const PRESETS = ARCHETYPES.map((a) => a.key).filter((k) => k !== 'balanced');
 const JOBS = ARM === 'presets'
@@ -54,7 +60,7 @@ let towns = 0; let errors = 0; let holderless = 0;
 const t0 = Date.now();
 for (const job of JOBS) {
   let s;
-  try { s = generateSettlementPipeline(job.config, null, { seed: job.seed, customContent: {} }); } catch { errors += 1; continue; }
+  try { s = generateSettlementPipeline(lawConfig(job.config), null, { seed: job.seed, customContent: {} }); } catch { errors += 1; continue; }
   towns += 1;
   const gov = governingFactionOf(s);
   if (!gov) continue;
@@ -82,13 +88,13 @@ for (const job of JOBS) {
 }
 
 const out = {
-  meta: { script: 'docs/chair/2026-11-20/content/seat/measure-kin.mjs', arm: ARM, n: N, towns, errors, holderless, seconds: Math.round((Date.now() - t0) / 1000) },
+  meta: { script: 'docs/chair/2026-11-20/content/seat/measure-kin.mjs', arm: ARM, law: LAW, n: N, towns, errors, holderless, seconds: Math.round((Date.now() - t0) / 1000) },
   byKind: sorted(Object.fromEntries(Object.entries(byKind).map(([k, v]) => [k, v.seats]))) && byKind,
   pairs: sorted(pairs), formBehind: sorted(formBehind), formOwn: sorted(formOwn), formRulerKind: sorted(formRulerKind),
 };
-writeFileSync(join(HERE, `kin-${ARM}.json`), `${JSON.stringify(out, null, 1)}\n`);
-const L = [`# The seat's own kind, arm ${ARM} (${towns} born towns, ${errors} errors, ${holderless} with no seat-holder)`, '',
-  `Executed: \`node ${out.meta.script} --arm ${ARM} --n ${N}\`. Kind of the seat = \`backingArchetypeOf\` (craft read off the name). Raw: \`kin-${ARM}.json\`.`, '',
+writeFileSync(join(HERE, `kin-${SUFFIX}.json`), `${JSON.stringify(out, null, 1)}\n`);
+const L = [`# The seat's own kind, arm ${ARM}, law ${LAW} (${towns} born towns, ${errors} errors, ${holderless} with no seat-holder)`, '',
+  `Executed: \`node ${out.meta.script} --arm ${ARM} --law ${LAW} --n ${N}\`. Kind of the seat = \`backingArchetypeOf\` (craft read off the name). Raw: \`kin-${SUFFIX}.json\`.`, '',
   '## (a) Per kind of seat', '',
   '| seat kind | seats | rulingKindOf null (no house test, no fold) | a same-kind power stands beside it | that power is one of the 3 contenders | the seat-holder is that power\'s first member | …and it contends |', '|---|---|---|---|---|---|---|'];
 for (const [k, v] of Object.entries(byKind).sort((a, b) => b[1].seats - a[1].seats)) L.push(`| ${k} | ${v.seats} | ${v.rulerKindNull} | ${v.withSameKind} | ${v.sameKindContends} | ${v.holderHeadsSameKind} | ${v.holderHeadsContendingSameKind} |`);
@@ -96,5 +102,5 @@ L.push('', '## (b) Body × same-kind power beside it', '', ...Object.entries(out
 L.push('', '## (c) Form × the kind of the power the seat-holder heads', '', ...Object.entries(out.formBehind).map(([p, c]) => `- ${p}: ${c}`));
 L.push('', '## Form × its own kind (backing / coup reading)', '', ...Object.entries(out.formOwn).map(([p, c]) => `- ${p}: ${c}`));
 L.push('', '## Form × rulingKindOf', '', ...Object.entries(out.formRulerKind).map(([p, c]) => `- ${p}: ${c}`));
-writeFileSync(join(HERE, `kin-${ARM}.md`), `${L.join('\n')}\n`);
-process.stderr.write(`wrote kin-${ARM} (${towns} towns, ${errors} errors, ${out.meta.seconds}s)\n`);
+writeFileSync(join(HERE, `kin-${SUFFIX}.md`), `${L.join('\n')}\n`);
+process.stderr.write(`wrote kin-${SUFFIX} (${towns} towns, ${errors} errors, ${out.meta.seconds}s)\n`);

@@ -37,10 +37,18 @@ const { governingFactionOf, nameOf } = await imp('src/domain/rulingPower.js');
 const { backingArchetypeOf } = await imp('src/domain/dossier/powerSupport.js');
 const { nativeSemanticNames, isMaterializedCustomContent } = await imp('src/domain/content/customContentSemanticAuthority.js');
 const { getPriorities } = await imp('src/generators/priorityHelpers.js');
+const { birthConfig, loadGenerationLawPayloads } = await imp('src/domain/density/densityCreateBoundary.js');
 
 const args = process.argv.slice(2);
 const argOf = (flag, fallback) => { const i = args.indexOf(flag); return i >= 0 && args[i + 1] != null ? args[i + 1] : fallback; };
 const ARM = argOf('--arm', 'default');
+// --law birth (default): the config goes through densityCreateBoundary.js :: birthConfig, as every app birth does
+// (today: _densityLawVersion 2, _livingContentLawVersion 2). --law v1: the bare config, the law of towns born before
+// Register VII was lit (daed2bf56); outputs carry a -v1 suffix.
+const LAW = argOf('--law', 'birth');
+const SUFFIX = `${ARM}${LAW === 'v1' ? '-v1' : ''}`;
+if (LAW !== 'v1') await loadGenerationLawPayloads();
+const lawConfig = (c) => (LAW === 'v1' ? c : birthConfig(c));
 const N = Number(argOf('--n', ARM === 'presets' ? 10 : 150));
 const { ARCHETYPES, archetypePatch } = await imp('src/components/generate/characterPresets.js');
 const PRESETS = ARCHETYPES.map((a) => a.key).filter((k) => k !== 'balanced');
@@ -91,7 +99,7 @@ for (const job of JOBS) {
   lastTier = tier;
   {
     let s;
-    try { s = generateSettlementPipeline(job.config, null, { seed, customContent: {} }); }
+    try { s = generateSettlementPipeline(lawConfig(job.config), null, { seed, customContent: {} }); }
     catch (e) { rows.push({ tier, preset, seed, error: String(e?.message || e) }); continue; }
     const factions = s.powerStructure?.factions || [];
     const gov = governingFactionOf(s);
@@ -200,13 +208,13 @@ for (const c of [...new Set(ok.map((r) => r.culture))].sort()) {
   result.cultures[c] = { towns: rs.length, ...Object.fromEntries(KINDS.filter((k) => kt[k].present).map((k) => [k, `${kt[k].present}/${kt[k].rules}/${kt[k].contender}`])) };
 }
 
-writeFileSync(join(OUT, `count-${ARM}.json`), `${JSON.stringify(result, null, 1)}\n`);
+writeFileSync(join(OUT, `count-${SUFFIX}.json`), `${JSON.stringify(result, null, 1)}\n`);
 
 // ── The one table the owner reads, and the detail tables ──────────────────────
 const pct = (a, b) => (b ? `${Math.round((100 * a) / b)}%` : '–');
 const L = [];
-L.push(`# The seat count, arm ${ARM} — who is present, who rules, who contends (${ok.length} born towns)`, '');
-L.push(`Executed: \`node ${result.meta.script} --arm ${ARM} --n ${N}\` at the base named in the commit; seeds \`${result.meta.seeds}\`; config \`${result.meta.config}\`. ${errors.length} generation errors. Kind = the coup's reading (\`factionArchetypes.js :: factionArchetype\`). Raw: \`count-${ARM}.json\`.`, '');
+L.push(`# The seat count, arm ${ARM}, law ${LAW} — who is present, who rules, who contends (${ok.length} born towns)`, '');
+L.push(`Executed: \`node ${result.meta.script} --arm ${ARM} --law ${LAW} --n ${N}\` at the base named in the commit; seeds \`${result.meta.seeds}\`; config \`${result.meta.config}\`. ${errors.length} generation errors. Kind = the coup's reading (\`factionArchetypes.js :: factionArchetype\`). Raw: \`count-${SUFFIX}.json\`.`, '');
 L.push('## THE TABLE (all tiers)', '');
 L.push('| kind | present in | rules at birth | a contender | median power (not ruling) | left out though present | of those: under the floor of 5 | of those: the factor alone keeps it out | contenders that are in only by their factor |');
 L.push('|---|---|---|---|---|---|---|---|---|');
@@ -253,5 +261,5 @@ for (const t of ['all', ...TIERS]) { const x = result.priorityPath[t]; L.push(`-
 if (result.byPreset) { L.push('', '## Ruling bodies by preset (all tiers)', ''); for (const [p, m] of Object.entries(result.byPreset)) L.push(`- ${p}: ${Object.entries(m).map(([k, v]) => `${k} ${v}`).join(' · ')}`); }
 L.push('', '## By culture: present / rules / contender', '');
 for (const [c, x] of Object.entries(result.cultures)) L.push(`- ${c} (${x.towns}): ${Object.entries(x).filter(([k]) => k !== 'towns').map(([k, v]) => `${k} ${v}`).join(' · ')}`);
-writeFileSync(join(OUT, `count-${ARM}.md`), `${L.join('\n')}\n`);
-process.stderr.write(`wrote count-${ARM}.json, count-${ARM}.md (${ok.length} towns, ${errors.length} errors, ${result.meta.seconds}s)\n`);
+writeFileSync(join(OUT, `count-${SUFFIX}.md`), `${L.join('\n')}\n`);
+process.stderr.write(`wrote count-${SUFFIX}.json, count-${SUFFIX}.md (${ok.length} towns, ${errors.length} errors, ${result.meta.seconds}s)\n`);

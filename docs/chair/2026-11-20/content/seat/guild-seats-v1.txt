@@ -1,0 +1,21 @@
+== default
+- Merchant Guild Council | Craft Guilds beside | Merchant Guilds beside, contends: 28
+- Guild Council | Craft Guilds beside | Merchant Guilds beside, contends: 21
+- Grand Guild Consortium | Craft Guilds beside | Merchant Guilds beside, contends: 21
+- Guild Council | Craft Guilds beside | Merchant Guilds beside: 4
+- Merchant Guild Council | Craft Guilds beside | Merchant Guilds beside: 4
+- Grand Guild Consortium | Craft Guilds beside | Merchant Guilds beside: 1
+== presets
+- Guild Council | Craft Guilds beside, contends | Merchant Guilds beside, contends: 26
+- Merchant Guild Council | Craft Guilds beside, contends | Merchant Guilds beside, contends: 13
+- Guild Council | Craft Guilds beside | Merchant Guilds beside, contends: 9
+- Grand Guild Consortium | Craft Guilds beside | Merchant Guilds beside, contends: 7
+- Guild Council | Craft Guilds beside | Merchant Guilds beside: 6
+- Merchant Guild Council | Craft Guilds beside | Merchant Guilds beside, contends: 6
+- Grand Guild Consortium | Craft Guilds beside, contends | Merchant Guilds beside, contends: 5
+- Merchant Guild Council | Craft Guilds beside | Merchant Guilds beside: 3
+- Grand Guild Consortium | Craft Guilds beside | Merchant Guilds beside: 3
+- Guild Council | Craft Guilds absent | Merchant Guilds beside: 2
+- Merchant Guild Council | Craft Guilds beside | Merchant Guilds absent: 1
+- Merchant Guild Council | Craft Guilds absent | Merchant Guilds beside: 1
+- Grand Guild Consortium | Craft Guilds absent | Merchant Guilds beside: 1
