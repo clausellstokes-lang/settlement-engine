@@ -1,0 +1,1205 @@
+{
+ "measured": "2026-11-20T05:07:02.308Z",
+ "towns": [
+  {
+   "world": 0,
+   "name": "Qal'atserai",
+   "entries": 28,
+   "served": 26,
+   "ruleAlone": [
+    {
+     "bodyPaths": [
+      "$.history.currentTensions[2].factions[0]",
+      "$.conflicts[1].parties[0]",
+      "$.powerStructure.conflicts[1].parties[0]",
+      "$.powerStructure.previousGovernments[0].label"
+     ],
+     "bodyFaction": null,
+     "type": "IMPAIR_FACTION",
+     "why": "served in the body (matching gap)",
+     "summary": "Corrupt City Council lost capacity.",
+     "targetId": "Corrupt City Council",
+     "payload": {
+      "dimension": "capacity",
+      "severity": "moderate"
+     },
+     "namesHideable": false
+    }
+   ]
+  },
+  {
+   "world": 0,
+   "name": "Naglvoll",
+   "entries": 27,
+   "served": 26,
+   "ruleAlone": []
+  },
+  {
+   "world": 0,
+   "name": "Magnanovum",
+   "entries": 25,
+   "served": 24,
+   "ruleAlone": [
+    {
+     "bodyPaths": [
+      "$.npcs[1].memberships[1].power",
+      "$.npcs[3].memberships[1].power",
+      "$.npcs[5].memberships[0].power",
+      "$.npcs[6].memberships[0].power",
+      "$.npcs[8].memberships[0].power",
+      "$.npcs[9].memberships[0].power"
+     ],
+     "bodyFaction": null,
+     "type": "RESTORE_FACTION",
+     "why": "served in the body (matching gap)",
+     "summary": "Guild Council recovered.",
+     "targetId": "Guild Council",
+     "payload": {},
+     "namesHideable": false
+    }
+   ]
+  },
+  {
+   "world": 0,
+   "name": "Altaishari",
+   "entries": 30,
+   "served": 30,
+   "ruleAlone": []
+  },
+  {
+   "world": 0,
+   "name": "Zelenoburg",
+   "entries": 26,
+   "served": 26,
+   "ruleAlone": []
+  },
+  {
+   "world": 0,
+   "name": "Kilheath",
+   "entries": 24,
+   "served": 24,
+   "ruleAlone": []
+  },
+  {
+   "world": 0,
+   "name": "Nishigang",
+   "entries": 27,
+   "served": 27,
+   "ruleAlone": []
+  },
+  {
+   "world": 0,
+   "name": "Karakpara",
+   "entries": 22,
+   "served": 22,
+   "ruleAlone": []
+  },
+  {
+   "world": 0,
+   "name": "Portanovum",
+   "entries": 26,
+   "served": 26,
+   "ruleAlone": []
+  },
+  {
+   "world": 1,
+   "name": "Karakbazaar",
+   "entries": 27,
+   "served": 27,
+   "ruleAlone": []
+  },
+  {
+   "world": 1,
+   "name": "Andronpyrgos",
+   "entries": 25,
+   "served": 24,
+   "ruleAlone": [
+    {
+     "bodyPaths": [
+      "$.npcs[22].id",
+      "$.powerStructure.factions[4].memberNpcIds[0]"
+     ],
+     "bodyFaction": null,
+     "type": "KILL_NPC",
+     "why": "served in the body (matching gap)",
+     "summary": "The the lantern league founder sw1l2m is gone.",
+     "targetId": "npc.the_the_lantern_league_founder_sw1l2m",
+     "payload": {
+      "importance": "pillar"
+     },
+     "namesHideable": false
+    }
+   ]
+  },
+  {
+   "world": 1,
+   "name": "Xochimul",
+   "entries": 26,
+   "served": 25,
+   "ruleAlone": []
+  },
+  {
+   "world": 1,
+   "name": "Bayardavan",
+   "entries": 29,
+   "served": 28,
+   "ruleAlone": [
+    {
+     "bodyPaths": [
+      "$.npcs[9].id",
+      "$.powerStructure.factions[3].memberNpcIds[0]"
+     ],
+     "bodyFaction": null,
+     "type": "ASSIGN_NPC_TO_ROLE",
+     "why": "served in the body (matching gap)",
+     "summary": "The the lantern league founder 2gc2f4 took up a vacant role.",
+     "targetId": "npc.the_the_lantern_league_founder_2gc2f4",
+     "payload": {
+      "quality": "competent"
+     },
+     "namesHideable": false
+    }
+   ]
+  },
+  {
+   "world": 1,
+   "name": "Novamonte",
+   "entries": 28,
+   "served": 26,
+   "ruleAlone": [
+    {
+     "bodyPaths": [
+      "$.config.eventConditions[1].causes[0].detail",
+      "$.powerStructure.previousGovernments[1].label",
+      "$.activeConditions[1].causes[0].detail"
+     ],
+     "bodyFaction": null,
+     "type": "IMPAIR_FACTION",
+     "why": "served in the body (matching gap)",
+     "summary": "Church Council lost capacity.",
+     "targetId": "Church Council",
+     "payload": {
+      "dimension": "capacity",
+      "severity": "moderate"
+     },
+     "namesHideable": false
+    },
+    {
+     "bodyPaths": [
+      "$.npcs[5].id",
+      "$.powerStructure.factions[2].memberNpcIds[0]"
+     ],
+     "bodyFaction": null,
+     "type": "KILL_NPC",
+     "why": "served in the body (matching gap)",
+     "summary": "The the lantern league founder ymld3l is gone.",
+     "targetId": "npc.the_the_lantern_league_founder_ymld3l",
+     "payload": {
+      "importance": "key"
+     },
+     "namesHideable": false
+    }
+   ]
+  },
+  {
+   "world": 1,
+   "name": "Kamalanand",
+   "entries": 27,
+   "served": 26,
+   "ruleAlone": [
+    {
+     "bodyPaths": [
+      "$.npcs[1].memberships[0].power",
+      "$.npcs[2].memberships[0].power",
+      "$.npcs[3].memberships[0].power",
+      "$.npcs[4].memberships[0].power",
+      "$.npcs[5].memberships[0].power",
+      "$.stress.cast.stakes[1].factionId"
+     ],
+     "bodyFaction": null,
+     "type": "IMPAIR_FACTION",
+     "why": "served in the body (matching gap)",
+     "summary": "Elected Reeve lost capacity.",
+     "targetId": "Elected Reeve",
+     "payload": {
+      "dimension": "capacity",
+      "severity": "moderate"
+     },
+     "namesHideable": false
+    }
+   ]
+  },
+  {
+   "world": 1,
+   "name": "Somaabad",
+   "entries": 25,
+   "served": 23,
+   "ruleAlone": [
+    {
+     "bodyPaths": [
+      "$.npcs[2].id"
+     ],
+     "bodyFaction": null,
+     "type": "KILL_LEADER",
+     "why": "served in the body (matching gap)",
+     "summary": "Old tamsin szjozr (the settlement's leader) is gone.",
+     "targetId": "npc.old_tamsin_szjozr",
+     "payload": {},
+     "namesHideable": false
+    },
+    {
+     "bodyPaths": [
+      "$.npcs[3].id"
+     ],
+     "bodyFaction": null,
+     "type": "KILL_NPC",
+     "why": "served in the body (matching gap)",
+     "summary": "Brother ivo sim89v is gone.",
+     "targetId": "npc.brother_ivo_sim89v",
+     "payload": {
+      "importance": "notable"
+     },
+     "namesHideable": false
+    }
+   ]
+  },
+  {
+   "world": 1,
+   "name": "Ráðholm",
+   "entries": 26,
+   "served": 25,
+   "ruleAlone": [
+    {
+     "bodyPaths": [
+      "$.npcs[6].id"
+     ],
+     "bodyFaction": null,
+     "type": "KILL_LEADER",
+     "why": "served in the body (matching gap)",
+     "summary": "Brother ivo 2j6vlq (the settlement's leader) is gone.",
+     "targetId": "npc.brother_ivo_2j6vlq",
+     "payload": {},
+     "namesHideable": false
+    }
+   ]
+  },
+  {
+   "world": 1,
+   "name": "Oxtecoatl",
+   "entries": 24,
+   "served": 17,
+   "ruleAlone": [
+    {
+     "bodyPaths": [
+      "$.npcs[0].memberships[0].power",
+      "$.powerStructure.previousGovernments[0].label"
+     ],
+     "bodyFaction": null,
+     "type": "RESTORE_FACTION",
+     "why": "served in the body (matching gap)",
+     "summary": "Elder Council recovered.",
+     "targetId": "Elder Council",
+     "payload": {},
+     "namesHideable": false
+    },
+    {
+     "bodyPaths": [
+      "$.npcs[1].id"
+     ],
+     "bodyFaction": null,
+     "type": "KILL_NPC",
+     "why": "served in the body (matching gap)",
+     "summary": "Brother ivo obgbs8 is gone.",
+     "targetId": "npc.brother_ivo_obgbs8",
+     "payload": {
+      "importance": "notable"
+     },
+     "namesHideable": false
+    },
+    {
+     "bodyPaths": [
+      "$.npcs[0].memberships[0].power",
+      "$.powerStructure.previousGovernments[0].label"
+     ],
+     "bodyFaction": null,
+     "type": "RESTORE_FACTION",
+     "why": "served in the body (matching gap)",
+     "summary": "Elder Council recovered.",
+     "targetId": "Elder Council",
+     "payload": {},
+     "namesHideable": false
+    },
+    {
+     "bodyPaths": [
+      "$.npcs[0].memberships[0].power",
+      "$.powerStructure.previousGovernments[0].label"
+     ],
+     "bodyFaction": null,
+     "type": "RESTORE_FACTION",
+     "why": "served in the body (matching gap)",
+     "summary": "Elder Council recovered.",
+     "targetId": "Elder Council",
+     "payload": {},
+     "namesHideable": false
+    },
+    {
+     "bodyPaths": [
+      "$.npcs[3].id",
+      "$.powerStructure.factions[1].memberNpcIds[0]"
+     ],
+     "bodyFaction": null,
+     "type": "KILL_NPC",
+     "why": "served in the body (matching gap)",
+     "summary": "The the lantern league founder pa1jc3 is gone.",
+     "targetId": "npc.the_the_lantern_league_founder_pa1jc3",
+     "payload": {
+      "importance": "notable"
+     },
+     "namesHideable": false
+    },
+    {
+     "bodyPaths": [
+      "$.npcs[1].id"
+     ],
+     "bodyFaction": null,
+     "type": "KILL_NPC",
+     "why": "served in the body (matching gap)",
+     "summary": "Brother ivo obgbs8 is gone.",
+     "targetId": "npc.brother_ivo_obgbs8",
+     "payload": {
+      "importance": "notable"
+     },
+     "namesHideable": false
+    },
+    {
+     "bodyPaths": [
+      "$.npcs[3].id",
+      "$.powerStructure.factions[1].memberNpcIds[0]"
+     ],
+     "bodyFaction": null,
+     "type": "KILL_NPC",
+     "why": "served in the body (matching gap)",
+     "summary": "The the lantern league founder pa1jc3 is gone.",
+     "targetId": "npc.the_the_lantern_league_founder_pa1jc3",
+     "payload": {
+      "importance": "notable"
+     },
+     "namesHideable": false
+    }
+   ]
+  },
+  {
+   "world": 2,
+   "name": "Fionngarth",
+   "entries": 25,
+   "served": 25,
+   "ruleAlone": []
+  },
+  {
+   "world": 2,
+   "name": "Geraskastro",
+   "entries": 27,
+   "served": 27,
+   "ruleAlone": []
+  },
+  {
+   "world": 2,
+   "name": "Kamalapeth",
+   "entries": 26,
+   "served": 25,
+   "ruleAlone": [
+    {
+     "bodyPaths": [
+      "$.npcs[11].id"
+     ],
+     "bodyFaction": null,
+     "type": "KILL_LEADER",
+     "why": "served in the body (matching gap)",
+     "summary": "Brother ivo 4n3dlh (the settlement's leader) is gone.",
+     "targetId": "npc.brother_ivo_4n3dlh",
+     "payload": {},
+     "namesHideable": false
+    }
+   ]
+  },
+  {
+   "world": 2,
+   "name": "Pianoaltum",
+   "entries": 27,
+   "served": 27,
+   "ruleAlone": []
+  },
+  {
+   "world": 2,
+   "name": "Inverness",
+   "entries": 24,
+   "served": 22,
+   "ruleAlone": [
+    {
+     "bodyPaths": [
+      "$.npcs[4].id",
+      "$.powerStructure.factions[2].memberNpcIds[0]"
+     ],
+     "bodyFaction": null,
+     "type": "KILL_NPC",
+     "why": "served in the body (matching gap)",
+     "summary": "The the lantern league founder effm39 is gone.",
+     "targetId": "npc.the_the_lantern_league_founder_effm39",
+     "payload": {
+      "importance": "key"
+     },
+     "namesHideable": false
+    },
+    {
+     "bodyPaths": [
+      "$.npcs[5].id"
+     ],
+     "bodyFaction": null,
+     "type": "KILL_NPC",
+     "why": "served in the body (matching gap)",
+     "summary": "Old tamsin lysl8l is gone.",
+     "targetId": "npc.old_tamsin_lysl8l",
+     "payload": {
+      "importance": "notable"
+     },
+     "namesHideable": false
+    }
+   ]
+  },
+  {
+   "world": 2,
+   "name": "Agiipetra",
+   "entries": 24,
+   "served": 24,
+   "ruleAlone": []
+  },
+  {
+   "world": 2,
+   "name": "Flachhafen",
+   "entries": 25,
+   "served": 25,
+   "ruleAlone": []
+  },
+  {
+   "world": 2,
+   "name": "Bergfoss",
+   "entries": 29,
+   "served": 28,
+   "ruleAlone": [
+    {
+     "bodyPaths": [
+      "$.npcs[6].id"
+     ],
+     "bodyFaction": null,
+     "type": "KILL_NPC",
+     "why": "served in the body (matching gap)",
+     "summary": "Old tamsin eoy9jk is gone.",
+     "targetId": "npc.old_tamsin_eoy9jk",
+     "payload": {
+      "importance": "notable"
+     },
+     "namesHideable": false
+    }
+   ]
+  },
+  {
+   "world": 2,
+   "name": "Xiakou",
+   "entries": 23,
+   "served": 21,
+   "ruleAlone": [
+    {
+     "bodyPaths": [
+      "$.npcs[2].id"
+     ],
+     "bodyFaction": null,
+     "type": "KILL_LEADER",
+     "why": "served in the body (matching gap)",
+     "summary": "Old tamsin vow2oi (the settlement's leader) is gone.",
+     "targetId": "npc.old_tamsin_vow2oi",
+     "payload": {},
+     "namesHideable": false
+    },
+    {
+     "bodyPaths": [
+      "$.npcs[2].id"
+     ],
+     "bodyFaction": null,
+     "type": "KILL_NPC",
+     "why": "served in the body (matching gap)",
+     "summary": "Old tamsin vow2oi is gone.",
+     "targetId": "npc.old_tamsin_vow2oi",
+     "payload": {
+      "importance": "pillar"
+     },
+     "namesHideable": false
+    }
+   ]
+  },
+  {
+   "world": 3,
+   "name": "Bab-al-pur",
+   "entries": 27,
+   "served": 26,
+   "ruleAlone": []
+  },
+  {
+   "world": 3,
+   "name": "Uaymkin",
+   "entries": 28,
+   "served": 28,
+   "ruleAlone": []
+  },
+  {
+   "world": 3,
+   "name": "Kolset",
+   "entries": 27,
+   "served": 27,
+   "ruleAlone": []
+  },
+  {
+   "world": 3,
+   "name": "Morktun",
+   "entries": 24,
+   "served": 22,
+   "ruleAlone": [
+    {
+     "bodyPaths": [
+      "$.npcs[6].id"
+     ],
+     "bodyFaction": null,
+     "type": "KILL_NPC",
+     "why": "served in the body (matching gap)",
+     "summary": "Old tamsin eixc67 is gone.",
+     "targetId": "npc.old_tamsin_eixc67",
+     "payload": {
+      "importance": "notable"
+     },
+     "namesHideable": false
+    },
+    {
+     "bodyPaths": [
+      "$.npcs[7].id"
+     ],
+     "bodyFaction": null,
+     "type": "KILL_NPC",
+     "why": "served in the body (matching gap)",
+     "summary": "Brother ivo fgyzva is gone.",
+     "targetId": "npc.brother_ivo_fgyzva",
+     "payload": {
+      "importance": "notable"
+     },
+     "namesHideable": false
+    }
+   ]
+  },
+  {
+   "world": 3,
+   "name": "Capovetum",
+   "entries": 25,
+   "served": 24,
+   "ruleAlone": [
+    {
+     "bodyPaths": [
+      "$.npcs[11].id"
+     ],
+     "bodyFaction": null,
+     "type": "ASSIGN_NPC_TO_ROLE",
+     "why": "served in the body (matching gap)",
+     "summary": "Old tamsin 255rbi took up a vacant role.",
+     "targetId": "npc.old_tamsin_255rbi",
+     "payload": {
+      "quality": "competent"
+     },
+     "namesHideable": false
+    }
+   ]
+  },
+  {
+   "world": 3,
+   "name": "Cobahuacan",
+   "entries": 26,
+   "served": 25,
+   "ruleAlone": [
+    {
+     "bodyPaths": [
+      "$.npcs[4].id",
+      "$.powerStructure.factions[2].memberNpcIds[0]"
+     ],
+     "bodyFaction": null,
+     "type": "ASSIGN_NPC_TO_ROLE",
+     "why": "served in the body (matching gap)",
+     "summary": "The the lantern league founder e8ig24 took up a vacant role.",
+     "targetId": "npc.the_the_lantern_league_founder_e8ig24",
+     "payload": {
+      "quality": "competent"
+     },
+     "namesHideable": false
+    }
+   ]
+  },
+  {
+   "world": 3,
+   "name": "Agioseia",
+   "entries": 25,
+   "served": 24,
+   "ruleAlone": [
+    {
+     "bodyPaths": [
+      "$.npcs[4].id",
+      "$.powerStructure.factions[2].memberNpcIds[0]"
+     ],
+     "bodyFaction": null,
+     "type": "KILL_NPC",
+     "why": "served in the body (matching gap)",
+     "summary": "The the lantern league founder ens9kn is gone.",
+     "targetId": "npc.the_the_lantern_league_founder_ens9kn",
+     "payload": {
+      "importance": "notable"
+     },
+     "namesHideable": false
+    }
+   ]
+  },
+  {
+   "world": 3,
+   "name": "Breitenfeld",
+   "entries": 24,
+   "served": 24,
+   "ruleAlone": []
+  },
+  {
+   "world": 3,
+   "name": "Chinggiskotan",
+   "entries": 25,
+   "served": 25,
+   "ruleAlone": []
+  },
+  {
+   "world": 4,
+   "name": "Becantun",
+   "entries": 25,
+   "served": 25,
+   "ruleAlone": []
+  },
+  {
+   "world": 4,
+   "name": "Bab-al-pur",
+   "entries": 26,
+   "served": 24,
+   "ruleAlone": []
+  },
+  {
+   "world": 4,
+   "name": "Hartberg",
+   "entries": 26,
+   "served": 25,
+   "ruleAlone": [
+    {
+     "bodyPaths": [
+      "$.npcs[29].id",
+      "$.powerStructure.factions[3].memberNpcIds[0]"
+     ],
+     "bodyFaction": null,
+     "type": "KILL_NPC",
+     "why": "served in the body (matching gap)",
+     "summary": "The the lantern league founder 8tru63 is gone.",
+     "targetId": "npc.the_the_lantern_league_founder_8tru63",
+     "payload": {
+      "importance": "pillar"
+     },
+     "namesHideable": false
+    }
+   ]
+  },
+  {
+   "world": 4,
+   "name": "Ribatshahr",
+   "entries": 27,
+   "served": 27,
+   "ruleAlone": []
+  },
+  {
+   "world": 4,
+   "name": "Fonteplenum",
+   "entries": 27,
+   "served": 27,
+   "ruleAlone": []
+  },
+  {
+   "world": 4,
+   "name": "Xochichihua",
+   "entries": 27,
+   "served": 27,
+   "ruleAlone": []
+  },
+  {
+   "world": 4,
+   "name": "Medinabazaar",
+   "entries": 25,
+   "served": 24,
+   "ruleAlone": [
+    {
+     "bodyPaths": [
+      "$.npcs[2].id"
+     ],
+     "bodyFaction": null,
+     "type": "ASSIGN_NPC_TO_ROLE",
+     "why": "served in the body (matching gap)",
+     "summary": "Old tamsin 8oa0rv took up a vacant role.",
+     "targetId": "npc.old_tamsin_8oa0rv",
+     "payload": {
+      "quality": "competent"
+     },
+     "namesHideable": false
+    }
+   ]
+  },
+  {
+   "world": 4,
+   "name": "Varanand",
+   "entries": 29,
+   "served": 28,
+   "ruleAlone": [
+    {
+     "bodyPaths": [
+      "$.npcs[2].id"
+     ],
+     "bodyFaction": null,
+     "type": "KILL_NPC",
+     "why": "served in the body (matching gap)",
+     "summary": "Old tamsin k9xjwv is gone.",
+     "targetId": "npc.old_tamsin_k9xjwv",
+     "payload": {
+      "importance": "notable"
+     },
+     "namesHideable": false
+    }
+   ]
+  },
+  {
+   "world": 4,
+   "name": "Andronchorion",
+   "entries": 27,
+   "served": 27,
+   "ruleAlone": []
+  },
+  {
+   "world": 5,
+   "name": "Gankhuudavan",
+   "entries": 27,
+   "served": 26,
+   "ruleAlone": []
+  },
+  {
+   "world": 5,
+   "name": "Doireton",
+   "entries": 25,
+   "served": 24,
+   "ruleAlone": [
+    {
+     "bodyPaths": [
+      "$.npcs[24].id",
+      "$.powerStructure.factions[4].memberNpcIds[0]"
+     ],
+     "bodyFaction": null,
+     "type": "KILL_NPC",
+     "why": "served in the body (matching gap)",
+     "summary": "The the lantern league founder f0pky9 is gone.",
+     "targetId": "npc.the_the_lantern_league_founder_f0pky9",
+     "payload": {
+      "importance": "pillar"
+     },
+     "namesHideable": false
+    }
+   ]
+  },
+  {
+   "world": 5,
+   "name": "Archopyrgos",
+   "entries": 22,
+   "served": 22,
+   "ruleAlone": []
+  },
+  {
+   "world": 5,
+   "name": "Temürkher",
+   "entries": 25,
+   "served": 25,
+   "ruleAlone": []
+  },
+  {
+   "world": 5,
+   "name": "Makrorion",
+   "entries": 27,
+   "served": 23,
+   "ruleAlone": [
+    {
+     "bodyPaths": [
+      "$.npcs[6].id"
+     ],
+     "bodyFaction": null,
+     "type": "ASSIGN_NPC_TO_ROLE",
+     "why": "served in the body (matching gap)",
+     "summary": "Brother ivo tx6nku took up a vacant role.",
+     "targetId": "npc.brother_ivo_tx6nku",
+     "payload": {
+      "quality": "competent"
+     },
+     "namesHideable": false
+    },
+    {
+     "bodyPaths": [
+      "$.npcs[0].memberships[0].power",
+      "$.npcs[1].memberships[0].power",
+      "$.npcs[2].memberships[0].power",
+      "$.npcs[3].memberships[0].power",
+      "$.history.currentTensions[0].factions[0]",
+      "$.powerStructure.previousGovernments[0].label"
+     ],
+     "bodyFaction": null,
+     "type": "IMPAIR_FACTION",
+     "why": "served in the body (matching gap)",
+     "summary": "Priestly Guidance lost capacity.",
+     "targetId": "Priestly Guidance",
+     "payload": {
+      "dimension": "capacity",
+      "severity": "moderate"
+     },
+     "namesHideable": false
+    },
+    {
+     "bodyPaths": [
+      "$.npcs[0].memberships[0].power",
+      "$.npcs[1].memberships[0].power",
+      "$.npcs[2].memberships[0].power",
+      "$.npcs[3].memberships[0].power",
+      "$.history.currentTensions[0].factions[0]",
+      "$.powerStructure.previousGovernments[0].label"
+     ],
+     "bodyFaction": null,
+     "type": "IMPAIR_FACTION",
+     "why": "served in the body (matching gap)",
+     "summary": "Priestly Guidance lost capacity.",
+     "targetId": "Priestly Guidance",
+     "payload": {
+      "dimension": "capacity",
+      "severity": "moderate"
+     },
+     "namesHideable": false
+    },
+    {
+     "bodyPaths": [
+      "$.npcs[6].id"
+     ],
+     "bodyFaction": null,
+     "type": "ASSIGN_NPC_TO_ROLE",
+     "why": "served in the body (matching gap)",
+     "summary": "Brother ivo tx6nku took up a vacant role.",
+     "targetId": "npc.brother_ivo_tx6nku",
+     "payload": {
+      "quality": "competent"
+     },
+     "namesHideable": false
+    }
+   ]
+  },
+  {
+   "world": 5,
+   "name": "Nektarambelos",
+   "entries": 26,
+   "served": 24,
+   "ruleAlone": [
+    {
+     "bodyPaths": [
+      "$.npcs[4].id"
+     ],
+     "bodyFaction": null,
+     "type": "KILL_NPC",
+     "why": "served in the body (matching gap)",
+     "summary": "Brother ivo 9hfr6v is gone.",
+     "targetId": "npc.brother_ivo_9hfr6v",
+     "payload": {
+      "importance": "notable"
+     },
+     "namesHideable": false
+    },
+    {
+     "bodyPaths": [
+      "$.npcs[4].id"
+     ],
+     "bodyFaction": null,
+     "type": "KILL_NPC",
+     "why": "served in the body (matching gap)",
+     "summary": "Brother ivo 9hfr6v is gone.",
+     "targetId": "npc.brother_ivo_9hfr6v",
+     "payload": {
+      "importance": "notable"
+     },
+     "namesHideable": false
+    }
+   ]
+  },
+  {
+   "world": 5,
+   "name": "Doirefield",
+   "entries": 23,
+   "served": 23,
+   "ruleAlone": []
+  },
+  {
+   "world": 5,
+   "name": "Jinzhen",
+   "entries": 22,
+   "served": 20,
+   "ruleAlone": [
+    {
+     "bodyPaths": [
+      "$.npcs[0].memberships[0].power",
+      "$.npcs[1].memberships[0].power",
+      "$.powerStructure.previousGovernments[0].label"
+     ],
+     "bodyFaction": null,
+     "type": "RESTORE_FACTION",
+     "why": "served in the body (matching gap)",
+     "summary": "Elder Council recovered.",
+     "targetId": "Elder Council",
+     "payload": {},
+     "namesHideable": false
+    },
+    {
+     "bodyPaths": [
+      "$.npcs[2].id",
+      "$.powerStructure.factions[1].memberNpcIds[0]"
+     ],
+     "bodyFaction": null,
+     "type": "KILL_NPC",
+     "why": "served in the body (matching gap)",
+     "summary": "The the lantern league founder z5y76u is gone.",
+     "targetId": "npc.the_the_lantern_league_founder_z5y76u",
+     "payload": {
+      "importance": "notable"
+     },
+     "namesHideable": false
+    }
+   ]
+  },
+  {
+   "world": 5,
+   "name": "Farostagnum",
+   "entries": 24,
+   "served": 22,
+   "ruleAlone": [
+    {
+     "bodyPaths": [
+      "$.npcs[1].memberships[0].power",
+      "$.stress.cast.stakes[1].factionId",
+      "$.stressors.cast.stakes[1].factionId",
+      "$.powerStructure.previousGovernments[0].label"
+     ],
+     "bodyFaction": null,
+     "type": "RESTORE_FACTION",
+     "why": "served in the body (matching gap)",
+     "summary": "Elder Council recovered.",
+     "targetId": "Elder Council",
+     "payload": {},
+     "namesHideable": false
+    },
+    {
+     "bodyPaths": [
+      "$.npcs[2].id",
+      "$.powerStructure.factions[2].memberNpcIds[0]"
+     ],
+     "bodyFaction": null,
+     "type": "KILL_LEADER",
+     "why": "served in the body (matching gap)",
+     "summary": "The the lantern league founder nwwgfa (the settlement's leader) is gone.",
+     "targetId": "npc.the_the_lantern_league_founder_nwwgfa",
+     "payload": {},
+     "namesHideable": false
+    }
+   ]
+  }
+ ],
+ "totals": {
+  "entries": 1393,
+  "served": 1344,
+  "withheld": 49,
+  "ruleAlone": 42,
+  "ruleAloneNamesNothingHideable": 42,
+  "byType": {
+   "KILL_LEADER": {
+    "entries": 49,
+    "served": 44,
+    "ruleAlone": 5,
+    "ruleAloneNothingHideable": 5
+   },
+   "IMPAIR_INSTITUTION": {
+    "entries": 84,
+    "served": 83,
+    "ruleAlone": 0,
+    "ruleAloneNothingHideable": 0
+   },
+   "KILL_NPC": {
+    "entries": 130,
+    "served": 110,
+    "ruleAlone": 20,
+    "ruleAloneNothingHideable": 20
+   },
+   "REMOVE_INSTITUTION": {
+    "entries": 164,
+    "served": 163,
+    "ruleAlone": 0,
+    "ruleAloneNothingHideable": 0
+   },
+   "ADD_NPC": {
+    "entries": 70,
+    "served": 70,
+    "ruleAlone": 0,
+    "ruleAloneNothingHideable": 0
+   },
+   "REMOVE_TRADE_GOOD": {
+    "entries": 66,
+    "served": 66,
+    "ruleAlone": 0,
+    "ruleAloneNothingHideable": 0
+   },
+   "RESTORE_INSTITUTION": {
+    "entries": 62,
+    "served": 61,
+    "ruleAlone": 0,
+    "ruleAloneNothingHideable": 0
+   },
+   "ADD_TRADE_GOOD": {
+    "entries": 43,
+    "served": 43,
+    "ruleAlone": 0,
+    "ruleAloneNothingHideable": 0
+   },
+   "DAMAGE_INSTITUTION": {
+    "entries": 75,
+    "served": 72,
+    "ruleAlone": 0,
+    "ruleAloneNothingHideable": 0
+   },
+   "IMPAIR_FACTION": {
+    "entries": 57,
+    "served": 52,
+    "ruleAlone": 5,
+    "ruleAloneNothingHideable": 5
+   },
+   "PLAGUE": {
+    "entries": 65,
+    "served": 65,
+    "ruleAlone": 0,
+    "ruleAloneNothingHideable": 0
+   },
+   "RESTORE_FACTION": {
+    "entries": 65,
+    "served": 59,
+    "ruleAlone": 6,
+    "ruleAloneNothingHideable": 6
+   },
+   "ADD_FACTION": {
+    "entries": 36,
+    "served": 36,
+    "ruleAlone": 0,
+    "ruleAloneNothingHideable": 0
+   },
+   "ASSIGN_NPC_TO_ROLE": {
+    "entries": 57,
+    "served": 51,
+    "ruleAlone": 6,
+    "ruleAloneNothingHideable": 6
+   },
+   "RAID_OR_MONSTER_ATTACK": {
+    "entries": 57,
+    "served": 57,
+    "ruleAlone": 0,
+    "ruleAloneNothingHideable": 0
+   },
+   "CHANGE_RULING_POWER": {
+    "entries": 39,
+    "served": 39,
+    "ruleAlone": 0,
+    "ruleAloneNothingHideable": 0
+   },
+   "STARTED_RIOT": {
+    "entries": 67,
+    "served": 67,
+    "ruleAlone": 0,
+    "ruleAloneNothingHideable": 0
+   },
+   "ADD_INSTITUTION": {
+    "entries": 60,
+    "served": 59,
+    "ruleAlone": 0,
+    "ruleAloneNothingHideable": 0
+   },
+   "DEPLETE_RESOURCE": {
+    "entries": 81,
+    "served": 81,
+    "ruleAlone": 0,
+    "ruleAloneNothingHideable": 0
+   },
+   "SETTLEMENT_DISPUTE": {
+    "entries": 66,
+    "served": 66,
+    "ruleAlone": 0,
+    "ruleAloneNothingHideable": 0
+   }
+  },
+  "payloadKeysByType": {
+   "KILL_LEADER": {},
+   "IMPAIR_INSTITUTION": {
+    "dimension": 84,
+    "severity": 84
+   },
+   "KILL_NPC": {
+    "importance": 130
+   },
+   "REMOVE_INSTITUTION": {},
+   "ADD_NPC": {
+    "importance": 70
+   },
+   "REMOVE_TRADE_GOOD": {},
+   "RESTORE_INSTITUTION": {},
+   "ADD_TRADE_GOOD": {
+    "direction": 43,
+    "entrepot": 43,
+    "label": 43
+   },
+   "DAMAGE_INSTITUTION": {
+    "severity": 75
+   },
+   "IMPAIR_FACTION": {
+    "dimension": 57,
+    "severity": 57
+   },
+   "PLAGUE": {},
+   "RESTORE_FACTION": {},
+   "ADD_FACTION": {},
+   "ASSIGN_NPC_TO_ROLE": {
+    "quality": 57
+   },
+   "RAID_OR_MONSTER_ATTACK": {},
+   "CHANGE_RULING_POWER": {
+    "cause": 39
+   },
+   "STARTED_RIOT": {},
+   "ADD_INSTITUTION": {},
+   "DEPLETE_RESOURCE": {},
+   "SETTLEMENT_DISPUTE": {
+    "relationshipType": 66
+   }
+  },
+  "twinDiffers": 0,
+  "why": {
+   "IMPAIR_FACTION: served in the body (matching gap)": 5,
+   "RESTORE_FACTION: served in the body (matching gap)": 6,
+   "KILL_NPC: served in the body (matching gap)": 20,
+   "ASSIGN_NPC_TO_ROLE: served in the body (matching gap)": 6,
+   "KILL_LEADER: served in the body (matching gap)": 5
+  }
+ }
+}

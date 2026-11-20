@@ -1,0 +1,68 @@
+// VR40 measure: born campaign worlds (composeInstantWorld, the app's own birth), the pulse advanced, the share editor's
+// serializer with its default sections; what the chronicle holds, and what a public channel's goods[].label can carry.
+// Run: node vr40-measure.mjs <repo> <out.json> <worlds> <months>
+import { writeFileSync } from 'node:fs';
+import { createRequire } from 'node:module';
+import { pathToFileURL } from 'node:url';
+
+const [repo, outPath, worldsArg = '6', monthsArg = '12'] = process.argv.slice(2);
+const { createServer } = await import(pathToFileURL(createRequire(`${repo}/package.json`).resolve('vite')).href);
+const server = await createServer({ root: repo, configFile: false, server: { middlewareMode: true, hmr: false }, appType: 'custom', logLevel: 'error', optimizeDeps: { noDiscovery: true, include: [] } });
+const load = (p) => server.ssrLoadModule(`${repo}/${p}`);
+const { composeInstantWorld, loadGenerationLawPayloads } = await load('src/lib/instantWorld/composeInstantWorld.js');
+await loadGenerationLawPayloads();
+const { advanceCampaignWorld } = await load('src/domain/worldPulse/advanceCampaignWorld.js');
+const { serializeWorldSnapshotPublic } = await load('src/domain/display/worldSnapshotPublic.js');
+const { buildRealmArcSummary } = await load('src/domain/display/realmArcSummary.js');
+const { isHideableHouse } = await load('src/domain/people/cardVeil.js');
+const { GOOD_CATALOG } = await load('src/domain/region/goodsCatalog.js');
+
+const CRIME = /crim|thie|rack|smuggl|contraband|black.?market|fence|stolen|illicit|corrupt|bribe|syndicate|gang|cartel|underworld|guild of shadows|assassin|poach|slav|launder|extort|protection|infiltrat|outlaw|bandit|pirat|cult/i;
+const squeeze = (t) => String(t || '').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '');
+const strings = (v, acc = []) => { if (typeof v === 'string') acc.push(v); else if (Array.isArray(v)) v.forEach((x) => strings(x, acc)); else if (v && typeof v === 'object') Object.values(v).forEach((x) => strings(x, acc)); return acc; };
+const editorDefaults = { worldClock: true, chronicle: true, pantheon: true, warNetwork: true, dashboard: true };
+
+const out = { measured: new Date().toISOString(), method: `composeInstantWorld (the app's Instant World birth, vanilla), advanceCampaignWorld one_month x ${monthsArg} (pinned now), serializeWorldSnapshotPublic with the share editor's five default sections, buildRealmArcSummary; needles: each member's hideable houses (isHideableHouse: name, label, catalogId) and hidden powers; CRIME regex over every string`, catalogueLabels: Object.values(GOOD_CATALOG).map((g) => g.label), worlds: [] };
+for (let w = 0; w < Number(worldsArg); w += 1) {
+  const born = composeInstantWorld({ seed: `vr40-world-${w}`, clock: () => '2026-11-20T00:00:00.000Z' });
+  let campaign = born.campaign;
+  let saves = born.settlements.map((s) => ({ id: s.id, name: s.name, phase: 'canon', settlement: s.settlement || s, campaignState: { phase: 'canon', eventLog: [], locks: {} } }));
+  for (let m = 0; m < Number(monthsArg); m += 1) {
+    const r = advanceCampaignWorld({ campaign, saves, interval: 'one_month', now: `2027-01-${String(1 + (m % 27)).padStart(2, '0')}T00:00:00.000Z` });
+    if (!r) break;
+    campaign = { ...campaign, worldState: r.worldState, regionalGraph: r.regionalGraph, wizardNews: r.wizardNews };
+    saves = saves.map((s) => { const u = r.settlementUpdates.find((x) => String(x.saveId) === String(s.id)); return u ? { ...s, settlement: u.settlement } : s; });
+  }
+  const members = saves.map((s) => ({ id: s.id, name: s.name, tier: s.settlement?.tier, settlement: s.settlement }));
+  const needles = [];
+  for (const s of saves) {
+    for (const i of s.settlement?.institutions || []) if (isHideableHouse(i)) for (const v of [i.name, i.label, i.catalogId]) if (v) needles.push({ town: s.name, house: i.name, v });
+    for (const f of s.settlement?.powerStructure?.factions || []) if (f?.hidden === true) for (const v of [f.faction, f.name]) if (v) needles.push({ town: s.name, power: f.faction || f.name, v });
+  }
+  const snap = serializeWorldSnapshotPublic(campaign.worldState, campaign.regionalGraph, members, editorDefaults);
+  const arc = buildRealmArcSummary({ worldState: campaign.worldState, regionalGraph: campaign.regionalGraph, settlements: members });
+  const hits = (strs) => strs.flatMap((t) => needles.filter((n) => squeeze(n.v).length > 2 && squeeze(t).includes(squeeze(n.v))).map((n) => ({ text: t.slice(0, 90), needle: n.v, town: n.town })));
+  const chronicleStrings = strings(snap.chronicle || []);
+  const nonChronicle = strings({ ...snap, chronicle: undefined });
+  const channels = snap.warNetwork?.channels || [];
+  const goodsLabels = [...new Set(channels.flatMap((c) => (c.goods || []).map((g) => g.label)))];
+  // every good any member exports or imports (what a public channel CAN carry), and whether it is a catalogue label
+  const allGraphGoods = [...new Set((campaign.regionalGraph?.channels || []).flatMap((c) => (c.goods || []).map((g) => `${c.visibility}|${g.id}|${g.label}`)))];
+  const exportsRaw = [...new Set(saves.flatMap((s) => [...(s.settlement?.economicState?.primaryExports || []), ...(s.settlement?.economicState?.exports || [])].map((x) => (typeof x === 'string' ? x : x?.label || x?.name || JSON.stringify(x)))))];
+  out.worlds.push({
+    world: w, members: saves.length, ticks: campaign.worldState?.tick, sections: Object.keys(snap), bytes: JSON.stringify(snap).length,
+    needles: needles.length,
+    chronicle: { headlines: chronicleStrings.length, houseOrPowerHits: hits(chronicleStrings), crimeWorded: chronicleStrings.filter((t) => CRIME.test(t)).map((t) => t.slice(0, 100)) },
+    otherSections: { houseOrPowerHits: hits(nonChronicle), crimeWorded: nonChronicle.filter((t) => CRIME.test(t)).map((t) => t.slice(0, 100)) },
+    arc: { text: String(arc || '').slice(0, 300), houseOrPowerHits: hits([String(arc || '')]), crimeWorded: CRIME.test(String(arc || '')) },
+    publicChannels: channels.length,
+    publicGoodsLabels: goodsLabels,
+    publicGoodsCrime: goodsLabels.filter((l) => CRIME.test(l)), publicGoodsHits: hits(goodsLabels),
+    publicGoodsNotCatalogue: goodsLabels.filter((l) => !out.catalogueLabels.includes(l)),
+    graphGoods: allGraphGoods,
+    exportsRawCrime: exportsRaw.filter((t) => CRIME.test(t)),
+  });
+  process.stderr.write(`world ${w}: ${saves.length} members, chronicle ${chronicleStrings.length} strings\n`);
+}
+writeFileSync(outPath, JSON.stringify(out, null, 1));
+await server.close();

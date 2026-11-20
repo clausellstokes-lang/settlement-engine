@@ -1,0 +1,35 @@
+// VR40 goods measure: can a public channel's goods[].label carry a crime word or a hidden house's good?
+// (1) every crime-worded supply-chain output and service, through normalizeGood (the channel's label source);
+// (2) born towns (criminal-heavy configs and wizard sizes): every export/import string with a crime word, and its label.
+import { writeFileSync } from 'node:fs';
+import { createRequire } from 'node:module';
+import { pathToFileURL } from 'node:url';
+const [repo, outPath, nArg = '24'] = process.argv.slice(2);
+const { createServer } = await import(pathToFileURL(createRequire(`${repo}/package.json`).resolve('vite')).href);
+const server = await createServer({ root: repo, configFile: false, server: { middlewareMode: true, hmr: false }, appType: 'custom', logLevel: 'error', optimizeDeps: { noDiscovery: true, include: [] } });
+const load = (p) => server.ssrLoadModule(`${repo}/${p}`);
+const { loadGenerationLawPayloads } = await load('src/lib/instantWorld/composeInstantWorld.js');
+await loadGenerationLawPayloads();
+const { generateSettlementPipeline } = await load('src/generators/generateSettlementPipeline.js');
+const { normalizeGood, goodsIntersect } = await load('src/domain/region/goodsCatalog.js');
+const { isHideableHouse } = await load('src/domain/people/cardVeil.js');
+const CRIME = /crim|thie|racket|smuggl|contraband|black.?market|fenc|stolen|illicit|illegal|corrupt|bribe|syndicate|gang|cartel|underworld|assassin|poach|slave|launder|extort|infiltrat|outlaw|bandit|pirat|forged|safe house/i;
+const src = (await import('node:fs')).readFileSync(`${repo}/src/data/supplyChainData.js`, 'utf-8');
+const vocab = [...new Set([...src.matchAll(/'([^'\n]{3,60})'/g)].map((m) => m[1]).filter((t) => CRIME.test(t)))];
+const mapped = vocab.map((t) => { const g = normalizeGood(t); return { text: t, id: g?.id, label: g?.label, custom: !!g?.custom }; });
+const sizes = ['hamlet', 'village', 'town', 'city', 'metropolis'];
+const towns = [];
+const n = Number(nArg);
+for (let k = 0; k < n; k += 1) {
+  const cfg = k % 2 ? { settType: sizes[k % 5], priorityCriminal: 90 } : { settType: sizes[k % 5] };
+  const s = generateSettlementPipeline(cfg, null, { seed: `vr40-goods-${k}`, customContent: {} });
+  const econ = s.economicState || {};
+  const ex = [...(econ.primaryExports || []), ...(econ.exports || []), ...(econ.transit || [])].map((x) => (typeof x === 'string' ? x : x?.label || x?.name || ''));
+  const im = [...(econ.primaryImports || []), ...(econ.imports || []), ...(econ.necessityImports || [])].map((x) => (typeof x === 'string' ? x : x?.label || x?.name || ''));
+  const hidden = (s.institutions || []).filter((i) => isHideableHouse(i)).map((i) => i.name);
+  towns.push({ k, cfg, hidden: hidden.length, exportsCrime: ex.filter((t) => CRIME.test(t)), importsCrime: im.filter((t) => CRIME.test(t)),
+    customExports: ex.map((t) => normalizeGood(t)).filter((g) => g?.custom).map((g) => g.label), exports: ex.length });
+}
+// the label a channel would carry between every ordered pair of born towns' exports and imports (goodsIntersect)
+writeFileSync(outPath, JSON.stringify({ measured: new Date().toISOString(), crimeVocabThroughNormalizeGood: mapped, towns }, null, 1));
+await server.close();

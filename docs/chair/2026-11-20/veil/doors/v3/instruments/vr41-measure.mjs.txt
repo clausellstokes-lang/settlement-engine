@@ -1,0 +1,155 @@
+// VR41 (a-ii) MEASURE: the loss of the log's-own-names rule on born towns given a LIVED log.
+//   Towns: composeInstantWorld (the app's Instant World birth, vanilla), seeds vr41-world-0..W-1, every member.
+//   Lived log: a seeded mix of the composer's events over each town's REAL targets (the manifest's own target options),
+//   each built by the composer's own builder (eventComposer/buildEvent.js :: buildEvent) and applied by the app's own
+//   writer (domain/events/applyEvent.js :: applyEvent) in sequence, vetoed events skipped, as the store logs them.
+//   Read: each town stored on a pglite chain of every migration on disk as a public share with the DEFAULT veil (a marked
+//   share, live mode), get_gallery_dossier read as anon; the served chronicle compared to the log.
+//   Attribution: the twin (galleryDoors.js :: veilChronicle) with and without the log's-own-names loop (a scratch copy
+//   with the loop removed); the twin WITH it is checked equal to the server for every town.
+// Run: node vr41-measure.mjs <repo> <out.json> <worlds> <eventsPerTown>
+import { writeFileSync, readFileSync, readdirSync, mkdirSync } from 'node:fs';
+import { createRequire } from 'node:module';
+import { pathToFileURL } from 'node:url';
+import { join } from 'node:path';
+const [repo, outPath, worldsArg = '6', perTownArg = '30', scratch] = process.argv.slice(2);
+const req = createRequire(`${repo}/package.json`);
+const { createServer } = await import(pathToFileURL(req.resolve('vite')).href);
+const { PGlite } = await import(pathToFileURL(req.resolve('@electric-sql/pglite')).href);
+const { pgcrypto } = await import(pathToFileURL(req.resolve('@electric-sql/pglite/contrib/pgcrypto')).href);
+const server = await createServer({ root: repo, configFile: false, server: { middlewareMode: true, hmr: false, fs: { strict: false } }, appType: 'custom', logLevel: 'error', optimizeDeps: { noDiscovery: true, include: [] } });
+const load = (p) => server.ssrLoadModule(p.startsWith('/') ? p : `${repo}/${p}`);
+const { composeInstantWorld, loadGenerationLawPayloads } = await load('src/lib/instantWorld/composeInstantWorld.js');
+await loadGenerationLawPayloads();
+const { buildEvent } = await load('src/components/settlement/eventComposer/buildEvent.js');
+const { applyEvent } = await load('src/domain/events/applyEvent.js');
+const { AFFORDANCE_MANIFEST, TARGET_ENTITY_BY_EVENT, buildTargetOptions } = await load('src/domain/events/affordanceManifest.js');
+const { isHideableHouse } = await load('src/domain/people/cardVeil.js');
+const veil = await load('src/domain/display/galleryVeil.js');
+const doors = await load('src/domain/display/galleryDoors.js');
+// the twin WITHOUT the log's-own-names loop (scratch copy; imports re-pointed at the repo)
+mkdirSync(scratch, { recursive: true });
+let src = readFileSync(`${repo}/src/domain/display/galleryDoors.js`, 'utf-8').replace(/from '\.\.?\/([^']+)'/g, (m, p) => `from '${repo}/src/domain/${m.includes("'../") ? '' : 'display/'}${p}'`);
+const loopStart = src.indexOf('  for (const e of log) {\n    if (!isRec(e)) continue;\n    const ev = isRec(e.event) ? e.event : null;\n    const cls = CHRONICLE_CLASSES[typeOf(e)];');
+const loopEnd = src.indexOf('  const search = names.length');
+if (loopStart < 0 || loopEnd < loopStart) throw new Error('the loop was not found in galleryDoors.js');
+src = src.slice(0, loopStart) + src.slice(loopEnd);
+writeFileSync(`${scratch}/galleryDoorsNoLogNames.mjs`, src);
+const noRule = await load(`${scratch}/galleryDoorsNoLogNames.mjs`);
+
+// ── the chain ──
+const SCAFFOLD = readFileSync(`${repo}/tests/security/galleryDoors.pglite.test.js`, 'utf-8').match(/const SCAFFOLD = `([\s\S]*?)`;/)[1];
+const db = new PGlite({ extensions: { pgcrypto } });
+await db.exec(SCAFFOLD);
+for (const f of readdirSync(`${repo}/supabase/migrations`).filter((n) => /^\d{3}_.*\.sql$/.test(n)).sort()) {
+  await db.exec(readFileSync(join(`${repo}/supabase/migrations`, f), 'utf-8').replace(/create extension if not exists (pg_cron|pg_net)( with schema extensions)?/gi, 'select 1'));
+}
+const OWNER = '11111111-1111-1111-1111-111111111111';
+await db.exec(`insert into auth.users (id) values ('${OWNER}') on conflict do nothing; insert into public.profiles (id) values ('${OWNER}') on conflict do nothing; update public.profiles set role = 'developer' where id = '${OWNER}';`);
+
+// ── the lived log ──
+let rng = 1;
+const rand = () => { rng = (rng * 1103515245 + 12345) % 2147483648; return rng / 2147483648; };
+const pick = (xs) => xs[Math.floor(rand() * xs.length)];
+const MIX = ['REMOVE_INSTITUTION', 'REMOVE_INSTITUTION', 'DAMAGE_INSTITUTION', 'IMPAIR_INSTITUTION', 'RESTORE_INSTITUTION', 'ADD_INSTITUTION',
+  'KILL_NPC', 'KILL_NPC', 'ASSIGN_NPC_TO_ROLE', 'ADD_NPC', 'PROMOTE_NPC', 'DEMOTE_NPC', 'KILL_LEADER',
+  'IMPAIR_FACTION', 'RESTORE_FACTION', 'ADD_FACTION', 'CHANGE_RULING_POWER',
+  'PLAGUE', 'RAID_OR_MONSTER_ATTACK', 'DEPLETE_RESOURCE', 'ADD_TRADE_GOOD', 'REMOVE_TRADE_GOOD', 'SETTLEMENT_DISPUTE', 'STARTED_RIOT'];
+const FREE = { ADD_INSTITUTION: ['Granary', 'Watchtower', 'Smuggling operation', 'Herbalist'], ADD_NPC: ['Old Tamsin', 'Brother Ivo'], ADD_FACTION: ['The Lantern League'],
+  PLAGUE: ['red cough'], RAID_OR_MONSTER_ATTACK: ['wolves'], ADD_TRADE_GOOD: ['Wool'], STARTED_RIOT: ['the docks'] };
+const formOf = (type, target, s) => ({ type, target, effectiveTarget: target, settlement: s, phase: 'canon', sessionEventId: null, causeOverride: null,
+  addCategory: '', severity: 'moderate', dimension: 'capacity', importance: 'notable', role: '', institutionId: '', npcFlaw: '', npcTemperament: '', npcGoals: '',
+  npcConstraint: '', npcSecret: '', quality: 'competent', relationshipType: '', criminalOrg: '', criminalOrgs: [], corruptScope: 'individual', corruptBeneficiary: null,
+  stressorPick: null, stressorSeverity: 'moderate', powerCause: 'coup', reliefMagnitude: 'measured', tradeDirection: 'export', tradeEntrepot: false, swapWithNpcId: '',
+  tierDirection: 'promotion', customContent: {}, deityRef: null, deityMode: '', cultRemoveRef: null, isWarStressor: false, isInfiltrationStressor: false,
+  instigatorNeighbour: '', instigatorRelationship: 'rival', tradeTarget: '', partyCaused: false, description: '' });
+function targetsFor(type, s) {
+  if (FREE[type]) return FREE[type].map((x) => ({ id: x, name: x }));
+  const m = AFFORDANCE_MANIFEST[type];
+  const opts = typeof m?.targetOptions === 'function' ? m.targetOptions(s) : null;
+  if (Array.isArray(opts) && opts.length) return opts;
+  const key = TARGET_ENTITY_BY_EVENT[type] || ({ KILL_LEADER: 'npcs', PROMOTE_NPC: 'npcs', DEMOTE_NPC: 'npcs', CHANGE_RULING_POWER: 'factions' })[type];
+  return key ? buildTargetOptions(s, key) : [];
+}
+const VEIL = { $veil: { v: 1, mode: 'live', at: '2026-11-01T00:00:00.000Z', deltas: [] } };
+const squeeze = (t) => String(t || '').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '');
+const typeOf = (e) => e?.event?.type || e?.type;
+const out = { measured: new Date().toISOString(), towns: [], totals: {} };
+let seq = 0;
+const tally = { entries: 0, served: 0, withheld: 0, ruleAlone: 0, ruleAloneNamesNothingHideable: 0, byType: {}, payloadKeysByType: {}, twinDiffers: 0 };
+for (let w = 0; w < Number(worldsArg); w += 1) {
+  const born = composeInstantWorld({ seed: `vr41-world-${w}`, clock: () => '2026-11-20T00:00:00.000Z' });
+  for (const member of born.settlements) {
+    const original = JSON.parse(JSON.stringify(member.settlement || member));
+    let s = JSON.parse(JSON.stringify(original));
+    let sys = null;
+    const log = [];
+    for (let k = 0; k < Number(perTownArg); k += 1) {
+      const type = pick(MIX);
+      const ts = targetsFor(type, s);
+      if (!ts.length) continue;
+      const t = pick(ts);
+      let r;
+      try { r = applyEvent({ settlement: s, systemState: sys, event: buildEvent(formOf(type, String(t.id), s)), now: `2027-01-01T${String(Math.floor(k / 60)).padStart(2, '0')}:${String(k % 60).padStart(2, '0')}:00.000Z` }); } catch (e) { continue; }
+      if (r.veto) continue;
+      s = r.nextSettlement; sys = r.nextSystemState; log.push(r.logEntry);
+    }
+    // the hideable things of the town, at birth and at the end of its log
+    const hideable = new Set();
+    for (const town of [original, s]) {
+      for (const i of town.institutions || []) if (isHideableHouse(i)) for (const v of [i.name, i.label, i.catalogId, i.id]) if (v) hideable.add(squeeze(v));
+      for (const f of town.powerStructure?.factions || []) if (f?.hidden === true) for (const v of [f.faction, f.name, f.id]) if (v) hideable.add(squeeze(v));
+      for (const n of town.npcs || []) if (n?.institution?.veiled === true || (typeof n?.institution === 'object' && hideable.has(squeeze(n.institution?.key)))) for (const v of [n.name, n.id]) if (v) hideable.add(squeeze(v));
+    }
+    seq += 1;
+    const id = `d0000000-0000-0000-0000-${String(seq).padStart(12, '0')}`;
+    await db.query(`insert into public.settlements (id,user_id,name,tier,data,is_public,public_slug,published_at,gallery_member_overrides,gallery_importable,campaign_state,access_state)
+      values ($1,$2,$3,'town',$4::jsonb,true,$5,now(),$6::jsonb,true,$7::jsonb,'active')`,
+    [id, OWNER, s.name || 'x', JSON.stringify(s), `v41-${seq}`, JSON.stringify(VEIL), JSON.stringify({ eventLog: log })]);
+    await db.exec('set role anon;');
+    const g = (await db.query('select data, chronicle, gallery_member_overrides from public.get_gallery_dossier($1)', [`v41-${seq}`])).rows[0];
+    await db.exec('reset role;');
+    const proj = veil.galleryPayloadFor(JSON.parse(JSON.stringify(s)), { shareDm: false, memberOverrides: VEIL });
+    const args = { proj, body: g.data, groupings: g.gallery_member_overrides?.$veil?.groupings || [], src: s, shareDm: false };
+    const twin = doors.veilChronicle(log, args);
+    const canon = (v) => JSON.stringify(v, (k, x) => (x && typeof x === 'object' && !Array.isArray(x) ? Object.fromEntries(Object.keys(x).sort().map((key) => [key, x[key]])) : x));
+    if (canon(twin) !== canon(g.chronicle)) { tally.twinDiffers += 1; (tally.twinDiffSamples ||= []).push({ town: s.name, server: canon(g.chronicle).slice(0, 400), twin: canon(twin).slice(0, 400) }); }
+    const without = noRule.veilChronicle(log, args);
+    const servedKeys = new Set((g.chronicle || []).map((e) => `${e.appliedAt}|${e.narrativeSummary}`));
+    const withoutKeys = new Set((without || []).map((e) => `${e.appliedAt}|${e.narrativeSummary}`));
+    const town = { world: w, name: s.name, entries: log.length, served: (g.chronicle || []).length, ruleAlone: [] };
+    for (const e of log) {
+      const ty = typeOf(e); const key = `${e.appliedAt}|${e.narrativeSummary}`;
+      const bt = (tally.byType[ty] ||= { entries: 0, served: 0, ruleAlone: 0, ruleAloneNothingHideable: 0 });
+      bt.entries += 1; tally.entries += 1;
+      const pk = (tally.payloadKeysByType[ty] ||= {});
+      for (const k of Object.keys(e.event?.payload || {})) pk[k] = (pk[k] || 0) + 1;
+      if (servedKeys.has(key)) { bt.served += 1; tally.served += 1; continue; }
+      tally.withheld += 1;
+      if (withoutKeys.has(key)) {
+        bt.ruleAlone += 1; tally.ruleAlone += 1;
+        const strs = [e.narrativeSummary, e.event?.targetId, JSON.stringify(e.event?.payload || {})].map(squeeze);
+        const namesHideable = [...hideable].some((h) => h.length > 2 && strs.some((x) => x.includes(h)));
+        if (!namesHideable) { bt.ruleAloneNothingHideable += 1; tally.ruleAloneNamesNothingHideable += 1; }
+        // WHY the target is not "shown": served in the body (a matching gap), gone from the town (dead, removed), or in the
+        // town and veiled (correctly withheld)
+        const tgt = squeeze(String(e.event?.targetId || '').replace(/^.*[.]/, ''));
+        const leaves = (v, acc = []) => { if (typeof v === 'string') acc.push(squeeze(v)); else if (Array.isArray(v)) v.forEach((x) => leaves(x, acc)); else if (v && typeof v === 'object') Object.values(v).forEach((x) => leaves(x, acc)); return acc; };
+        const bodyHas = tgt.length > 2 && leaves(g.data).some((x) => x === tgt || x.endsWith(tgt));
+        const ents = [...(s.npcs || []).flatMap((n) => [n?.name, n?.id]), ...(s.powerStructure?.factions || []).flatMap((f) => [f?.faction, f?.name, f?.id]), ...(s.institutions || []).flatMap((i) => [i?.name, i?.id])].map(squeeze);
+        const townHas = tgt.length > 2 && ents.some((x) => x === tgt || x.endsWith(tgt));
+        const why = bodyHas ? 'served in the body (matching gap)' : townHas ? 'in the town, not served (veiled)' : 'gone from the town';
+        (tally.why ||= {})[`${ty}: ${why}`] = ((tally.why || {})[`${ty}: ${why}`] || 0) + 1;
+        const paths = (v, p = '$', acc = []) => { if (typeof v === 'string') { const x = squeeze(v); if (tgt.length > 2 && (x === tgt || x.endsWith(tgt))) acc.push(p); } else if (Array.isArray(v)) v.forEach((y, i) => paths(y, `${p}[${i}]`, acc)); else if (v && typeof v === 'object') Object.entries(v).forEach(([k, y]) => paths(y, `${p}.${k}`, acc)); return acc; };
+        const bodyPaths = paths(g.data).slice(0, 6);
+        const bodyFaction = (g.data?.powerStructure?.factions || []).find((f) => [f?.faction, f?.name].map(squeeze).includes(tgt)) || null;
+        town.ruleAlone.push({ bodyPaths, bodyFaction: bodyFaction && { faction: bodyFaction.faction, name: bodyFaction.name, hidden: bodyFaction.hidden }, type: ty, why, summary: String(e.narrativeSummary).slice(0, 100), targetId: e.event?.targetId, payload: e.event?.payload, namesHideable });
+      }
+    }
+    out.towns.push(town);
+  }
+  process.stderr.write(`world ${w} done: ${JSON.stringify({ entries: tally.entries, served: tally.served, ruleAlone: tally.ruleAlone, nothingHideable: tally.ruleAloneNamesNothingHideable, twinDiffers: tally.twinDiffers })}\n`);
+}
+out.totals = tally;
+writeFileSync(outPath, JSON.stringify(out, null, 1));
+await server.close();
