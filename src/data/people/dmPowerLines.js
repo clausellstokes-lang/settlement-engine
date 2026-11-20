@@ -250,7 +250,7 @@ export const CAPTURE_LINES = Object.freeze({
     (f) => (f.agents.length
       ? `${namedAnswerClause(f)}. ${byRank(f)[0].name} can slow what ${the(f.ruler)} decides against ${criminalsOf(f)}, but cannot stop it alone.`
       : `${the(f.ruler, true)} knows what ${criminalsOf(f)} does and lets most of it go. ${cap(criminalsOf(f))} keeps its business quiet enough to be let go.`),
-    (f) => `${the(f.ruler, true)} still rules, and ${criminalsOf(f)} still works the streets. The two have settled on what each will put up with from the other.`,
+    (f) => ((f) => `${f.ruler} still rules, and ${criminalsOf(f)} still works the streets. The two have settled on what each will put up with from the other.`)({ ...f, ruler: the(f.ruler, true) }), // NAMES-2 (CN1): the article rides in the value ("The Elder Council" opens the line), so the banked line reads as it did
   ]),
   // an agent head; or the second and the third; or a criminal ruling power, with or without an agent
   corrupted: Object.freeze([

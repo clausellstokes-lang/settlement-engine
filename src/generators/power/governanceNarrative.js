@@ -602,7 +602,7 @@ const buildStressNarratives = ({ failedFoodSource = null, // BAR3-POWERS (C36418
         ? 'Food is short, and every quarrel in the settlement has grown sharper for it. Those with stocks are not advertising the fact. Those without are watching those with.'
         : `${['fish', 'livestock', 'game'].includes(String(failedFoodSource)) ? `The ${FAILED_SOURCE_WORDS[/** @type {'fish'|'livestock'|'game'} */ (failedFoodSource)]} failed badly this year.` : 'The last harvest failed badly.'} What remains is being rationed by whoever holds the stores. Neighbours who shared meals last winter are watching each other carefully.`, // BAR3-POWERS (C36418): the failed source's own word where it is not the harvest
     occupied:
-      `An occupying officer arrested a local elder for "seditious speech". ${powerNameWithArticle(governingFactionName, true) || governingFactionName}` + // NAMES-1 (CN1): "The Elder Council filed a formal protest" (no name: the legacy rendering, as before)
+      `An occupying officer arrested a local elder for "seditious speech". ${/* NAMES-1 (CN1): The Elder Council, with its article; no name gives the legacy rendering. NAMES-2: nothing after the closing backtick moves (the presumption walkers bank the text from there) */ powerNameWithArticle(governingFactionName, true) || governingFactionName}` +
       ' filed a formal protest. The protest was returned unread.',
     // OWNER-WORDS-DOSSIER item 3b (2026-11-09): the word "faction" is retired from the page; "power".
     politically_fractured:

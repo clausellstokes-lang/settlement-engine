@@ -221,7 +221,7 @@ export const genSuccessionNarr = (ctx) => {
     );
   if (ctx.topTension === 'occupation_legacy')
     narratives.push(
-      `${ctx.name} carries the memory of an occupation that officially ended. Collaborators and resisters still share the same streets and the same market, and answer to ${ctx.govFaction || 'the same council'}. The official position is that this is resolved.` // NAMES-1 (CN1): "the same Elder Council" named a power bare (and a tier's wording read "the same the town council")
+      ((ctx) => `${ctx.name} carries the memory of an occupation that officially ended. Collaborators and resisters still share the same streets, the same market, the same ${ctx.govFaction || 'council'}. The official position is that this is resolved.`)({ ...ctx, govFaction: ctx.govFaction && `rule under ${ctx.govFaction}` }) // NAMES-2 (CN1): the value carries the power with its article ("the same rule under the Elder Council"; a tier's wording, "under the village elders"), so the banked line reads as it did
     );
   if (ctx.topTension === 'disputed_land')
     narratives.push(
