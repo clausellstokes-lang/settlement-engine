@@ -639,6 +639,8 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
   cure `707822e6…01ae`, 211 unchanged (`/var/tmp/v18/out/v29/t3/`).
 - 21:25 PART 30 opened; the tell's gates on the cure (verify, then tell2.sh with template t29tpl = v27x211 + the cure's 212) running.
 - 21:26 A SLIP, SAID: PART 30's first commit (3142d9784) was made with `-c core.hooksPath=.husky`, which skipped the configured `.husky/_` pre-commit wrapper (lint-staged). Its two globs (`*.{js,jsx,mjs,cjs}`, `docs/implementation/**`) match none of the commit's seven files (docs .md/.txt), so nothing was skipped in effect; every later commit runs with the configured hooks.
+- 21:31 the tell's gates at b3b533027 on this seat's pool (verified 45 / 0 differ): EQUAL to the builder's green table line for line (`out/v29/t3/tell2-table-b3b533027.txt`): GATE-1 4 of 92, LOWER BY RULE 7, non-governing rows against the rule 0, GATE-2 34 of 40 cells red.
+- 21:33 RULING 72 (b)'s figures (`out/v29/t3/gate2-chance.txt`; the analyzer + `gate2-chance-append.mjs`): 40 cells, 34 red; CONTROLS AGAINST CONTROLS 0 red in 2,000 random 24/24 splits (max 0): far above chance; families: people.allegiance 69 towns, svc.criminal 27, powers.capture 21, inst.criminal 6, chains.criminal 6, sp.ops 3 (controls 1), powers.criminal 3, relations 2, income / crimeTypes / tensions.crime / imports.criminal 1 each. Ruling 72 (a)'s proposals sent (three forms; measures first). Sent to the chair with what stands.
 
 ## 7. THE JOIN (the chair's word in VEIL-25's prompt): what the join must re-prove on the joined document
 The working line (origin/lane/join-2026-11-14, at 0c906948 when this was written) and four content lanes ADD SERVED TEXT at

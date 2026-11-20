@@ -1,0 +1,42 @@
++   "food server gallery off dm=true: served {\"desc\":\"A row whose house is the hidden one, in another spelling.\",\"name\":\"Swept food\"}",
++   "equipment server gallery off dm=true: served {\"desc\":\"A row whose house is the hidden one, in another spelling.\",\"name\":\"Swept equipment\"}",
++   "magic server gallery off dm=true: served {\"desc\":\"A row whose house is the hidden one, in another spelling.\",\"name\":\"Swept magic\"}",
++   "information server gallery off dm=true: served {\"desc\":\"A row whose house is the hidden one, in another spelling.\",\"name\":\"Swept information\"}",
++   "healing server gallery off dm=true: served {\"desc\":\"A row whose house is the hidden one, in another spelling.\",\"name\":\"Swept healing\"}",
++   "transport server gallery off dm=true: served {\"desc\":\"A row whose house is the hidden one, in another spelling.\",\"name\":\"Swept transport\"}",
++   "legal server gallery off dm=true: served {\"desc\":\"A row whose house is the hidden one, in another spelling.\",\"name\":\"Swept legal\"}",
++   "employment server gallery off dm=true: served {\"desc\":\"A row whose house is the hidden one, in another spelling.\",\"name\":\"Swept employment\"}",
++   "entertainment server gallery off dm=true: served {\"desc\":\"A row whose house is the hidden one, in another spelling.\",\"name\":\"Swept entertainment\"}",
++   "curiosities server gallery off dm=true: served {\"desc\":\"A row whose house is the hidden one, in another spelling.\",\"name\":\"Swept curiosities\"}",
++   "lodging twin gallery off dm=true: served {\"name\":\"Swept lodging\",\"desc\":\"A row whose house is the hidden one, in another spelling.\"}",
++   "food twin gallery off dm=true: served {\"name\":\"Swept food\",\"desc\":\"A row whose house is the hidden one, in another spelling.\"}",
++   "equipment twin gallery off dm=true: served {\"name\":\"Swept equipment\",\"desc\":\"A row whose house is the hidden one, in another spelling.\"}",
++   "magic twin gallery off dm=true: served {\"name\":\"Swept magic\",\"desc\":\"A row whose house is the hidden one, in another spelling.\"}",
++   "information twin gallery off dm=true: served {\"name\":\"Swept information\",\"desc\":\"A row whose house is the hidden one, in another spelling.\"}",
++   "healing twin gallery off dm=true: served {\"name\":\"Swept healing\",\"desc\":\"A row whose house is the hidden one, in another spelling.\"}",
++   "transport twin gallery off dm=true: served {\"name\":\"Swept transport\",\"desc\":\"A row whose house is the hidden one, in another spelling.\"}",
++   "legal twin gallery off dm=true: served {\"name\":\"Swept legal\",\"desc\":\"A row whose house is the hidden one, in another spelling.\"}",
++   "employment twin gallery off dm=true: served {\"name\":\"Swept employment\",\"desc\":\"A row whose house is the hidden one, in another spelling.\"}",
++   "entertainment twin gallery off dm=true: served {\"name\":\"Swept entertainment\",\"desc\":\"A row whose house is the hidden one, in another spelling.\"}",
++   "curiosities twin gallery off dm=true: served {\"name\":\"Swept curiosities\",\"desc\":\"A row whose house is the hidden one, in another spelling.\"}",
++ ]
+
+ ❯ tests/security/galleryVeilTell3.pglite.test.js:192:19
+    190|     for (const f of families) expect(table[f], `${f}: judged on no rea…
+    191|     expect(lost.filter((x) => !x.startsWith('criminal '))).toEqual([]);
+    192|     expect(husks).toEqual([]);
+       |                   ^
+    193|   }, ARM_TIMEOUT_MS);
+    194| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 1 passed (3)
+   Start at  21:22:32
+   Duration  7.53s (transform 1.12s, setup 49ms, import 288ms, tests 6.98s, environment 0ms)
+
+[gate-tail] end:  21:22:40 up 1 min,  0 user,  load average: 0.25, 0.06, 0.02
+[gate-tail] full log: /tmp/gate-tail.283.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
