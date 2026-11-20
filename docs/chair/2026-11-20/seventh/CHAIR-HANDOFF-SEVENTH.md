@@ -2410,3 +2410,26 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   count and every sibling template counted, FOR AFTER THE DEPLOY. Its cure's shape accepted (the number's reader in
   one home in the data layer, the display file re-exporting; one agreement form, one filler). The confinement tool
   comes before the rest of its cure (restated to it).
+- 08:21 UTC · **TITLES-2 FINAL; TITLES-3 SEATED; TRAD-2's FIRST READ (a correction of the chair's own).** "TITLES-2 da33bc58f":
+  Praetor (1911 Britannica "Praetor": the highest magistrates of the Latin towns; the caveat that such towns often
+  had two is written), Gost kept ("first of the great merchants"; Tysyatsky to the unsure list: no source says he
+  presided over the merchants' court), Vilicus kept; 245 cells authored, 481 on the fallback; the suite 19 of 19
+  with its plants; `tests/data` 594 of 594; `tests/lint` whole 219 files, 3,258 of 3,258. It has stopped. TITLES-3
+  SEATED 08:21 (session_019yED1Pvf1u19teoDp5SzRK; `lane/titles-3-2026-11-20` from da33bc58f; `prompts/TITLES-3.txt`).
+  Both land with the next landing on the line.
+  TRAD-2 (08:20), lane cut at 2cc20afb1: (1) TRAD-1 CHANGED NEITHER `drawDeclared.js` NOR `factVocabulary.js` (its
+  diff of `src/domain/facts/` is empty): THE CHAIR'S WORRY OF 08:00 ("TRAD-1 changed a shared mechanism") WAS A
+  MISREADING OF TRAD-1's SENTENCE; TRAD-2's CONFINEMENT, EXECUTED: the golden's 525 and the census's 720 born in a
+  base archive and at the tip: 1,245 DOCUMENTS BYTE-IDENTICAL (one sha256, a293ad45…, both sides); (2)
+  `observedShapeReaders` is the scanner's misreading, cured in the leaf, not banked; (3) A THIRD RED THE HAND-OVER
+  DID NOT NAME: `drawDeclaredKeys` (2 tests) at 2cc20afb1 itself; (4) the scratch merge of the line: one conflict
+  (the mutation manifest, a union), `tests/lint` 218 of 221 on the scratch tree, `namesInSentences` green; (5) the
+  leaf names a power through the line's helper but A HOUSE THROUGH ITS OWN ARTICLE RULE: a breach of the one-helper
+  rule, cured in unit 1 after the line's merge. RULED: unit 1a (the two walker reds), the merge of the line for
+  real, the censuses by their doors, unit 1b (houses through `houseSentenceName`), lint whole, "TRAD-SHARE". ITS
+  CONFESSION: two scratch commits made with `--no-verify`, local, never pushed: nothing harmed; THE RULE STANDS ON A
+  SCRATCH TREE TOO (a scratch merge needs no commit: `--no-commit` in a detached worktree); it removes them and says
+  neither is an ancestor of anything pushed.
+  TOLD TO SEAT-2 (a correction of the "BUILD-ON" message): for a unit that claims ZERO differences the proof is
+  TRAD-2's: the 1,245 born documents hashed at the base and at the tip, the two hashes in each unit's report; the
+  generic two-tree tool is needed only where differences are expected (the law lit, U8).
