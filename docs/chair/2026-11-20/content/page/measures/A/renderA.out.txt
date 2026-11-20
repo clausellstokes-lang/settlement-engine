@@ -1,0 +1,5 @@
+vitest exit 0
+towns rendered: 60 (10 a size)
+tension descriptions printed verbatim on some view: 107/107; views: Summary/Overview, World/History, Systems/Outlook
+tension sides printed verbatim: 309/309
+arrival sentences printed verbatim: 290/290; views: Summary/Overview; public arrival == record arrival in 60/60
