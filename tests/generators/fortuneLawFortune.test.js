@@ -44,6 +44,7 @@ import { PROSPERITY_LABELS } from '../../src/domain/prosperityRank.js';
 import { isMaterializedCustomContent } from '../../src/domain/content/customContentSemanticAuthority.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const LIT = SIZE_RELATIVE_FORTUNE_LAW_VERSION;
 /** The six sizes, read off the law's own table (never re-typed here). */
@@ -170,13 +171,11 @@ describe('(b) LIT, direct: under the law the size alone moves nothing, the depth
 
   test('the income-diversity count moves nothing under the law (and moves the same inputs today)', () => {
     // An economy dial that leaves the sum a quarter above a whole step, so today's half-point bonus rounds it up.
-    const cfg = { ...alike('city'), magicExists: false, priorityEconomy: 60 };
-    const institutions = trades(FORTUNE_LAW_TUNING.depthExpectation.city);
+    const cfg = { ...alike('town'), magicExists: false, priorityEconomy: 60 };
+    const institutions = trades(FORTUNE_LAW_TUNING.depthExpectation.town);
     const litBases = [0, 5, 7].map((n) => baseOf(lit(cfg), institutions, n));
     expect(new Set(litBases).size).toBe(1);
-    const control = { ...cfg, tier: 'town', settType: 'town' };
-    const townTrades = trades(FORTUNE_LAW_TUNING.depthExpectation.town);
-    expect(baseOf(dark(control), townTrades, 7), 'the control: today the count moves this base').not.toBe(baseOf(dark(control), townTrades, 0));
+    expect(baseOf(dark(cfg), institutions, 7), 'the control: today the count moves this base').not.toBe(baseOf(dark(cfg), institutions, 0));
   });
 });
 
@@ -257,12 +256,15 @@ describe('(d) BORN, forced: twelve births under the law read what the functions 
   };
 
   test('the forced arm carries the law into the record', () => {
-    for (const [, seed] of SEEDS) expect(lits[seed].config[FORTUNE_LAW_CONFIG_KEY], seed).toBe(LIT);
+    const failures = collectSeedFailures(SEEDS, ([, seed]) => {
+      expect(lits[seed].config[FORTUNE_LAW_CONFIG_KEY], seed).toBe(LIT);
+    });
+    expectNoSeedFailures(failures, 'every forced birth carries the law in its config');
   });
 
   test('under the law, the printed and the standing labels are what the functions compute from each town\'s own record', () => {
     let read = 0;
-    for (const [, seed] of SEEDS) {
+    const failures = collectSeedFailures(SEEDS, ([, seed]) => {
       const town = lits[seed];
       const depth = town.institutions.filter((i) => !isMaterializedCustomContent(i) && (i.category === 'Economy' || i.category === 'Crafts')).length;
       expect(depth, seed).toBeGreaterThan(0);
@@ -270,11 +272,12 @@ describe('(d) BORN, forced: twelve births under the law read what the functions 
       if (base === 'Subsistence') {
         // The one Subsistence draw is the birth's own; the printed and the standing labels share it.
         expect(town.economicState.prosperity, seed).toBe(town.economicState.prosperityStanding);
-        continue;
+        return;
       }
       expect({ prosperity: town.economicState.prosperity, prosperityStanding: town.economicState.prosperityStanding }, seed).toEqual(labels);
       read += 1;
-    }
+    });
+    expectNoSeedFailures(failures, 'every forced birth reads the labels its own record computes');
     expect(read, 'most of the twelve are read whole (a Subsistence base replays the birth\'s own draw)').toBeGreaterThan(SEEDS.length / 2);
   });
 
@@ -286,9 +289,10 @@ describe('(d) BORN, forced: twelve births under the law read what the functions 
 
   test('with no marker the twelve are byte-identical (JSON) to a birth under law 1, the marker\'s own key aside', () => {
     const strip = (town) => JSON.stringify(town, (key, value) => (key === FORTUNE_LAW_CONFIG_KEY ? undefined : value));
-    for (const [, seed] of SEEDS) {
+    const failures = collectSeedFailures(SEEDS, ([, seed]) => {
       expect(JSON.stringify(nones[seed]).includes(FORTUNE_LAW_CONFIG_KEY), seed).toBe(false);
       expect(strip(ones[seed]), seed).toBe(JSON.stringify(nones[seed]));
-    }
+    });
+    expectNoSeedFailures(failures, 'every markerless birth is byte-identical to its law-1 twin');
   });
 });
