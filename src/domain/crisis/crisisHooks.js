@@ -37,7 +37,7 @@ import { resolveDeclared, lineText } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
 import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
 import { institutionHouseLabel } from '../display/institutionDisplayName.js';
-import { pluralPowerName } from '../display/governanceAccount.js';
+import { pluralPowerName, powerNameInProse } from '../display/governanceAccount.js';
 import { powerSentenceName } from '../display/powerSentenceName.js';
 
 /** @typedef {import('./crisisCast.js').CrisisCast} CrisisCast */
@@ -122,11 +122,15 @@ function holderWords(s, row) {
   if (row.kind === 'npc') {
     const npc = (Array.isArray(s.npcs) ? s.npcs : []).find((n) => !!n && (str(n.id) || str(n.name)) === row.id);
     const house = str(firstRankMembershipOf(npc, powerOrderOf(s))?.power);
-    // TAIL-CRISIS-2 batch 3: a power named in a sentence takes its prose form from its leaf ("Military/Guard" → "The Guard")
-    return house ? `${row.name} of ${powerSentenceName(house)}` : row.name;
+    // TAIL-CRISIS-2 batch 3: a power named in a sentence takes its prose form from its leaf ("Military/Guard" → "The Guard").
+    // FRAME-2 · B5 (the chair's names rule): and its article, through the one helper, mid-sentence ("of the Guard", "of
+    // the Household Council"; never "of The Guard", "of Household Council": 78 of the census's 124).
+    return house ? `${row.name} of ${powerNameInProse(house)}` : row.name;
   }
   // ROUND THREE item 4 (the chair's ruling): a hook names a house through houseInProse, never raw.
-  return row.kind === 'institution' ? `the ${houseInProse(row.name)}` : row.name;
+  // FRAME-2 · B5: a power holding the role is named through the one helper too ("In the outbreak, the Religious
+  // Authorities …"; never the raw label). The holder never opens a hook's sentence ("In the {noun}, …"), so mid-sentence.
+  return row.kind === 'institution' ? `the ${houseInProse(row.name)}` : row.kind === 'faction' ? powerNameInProse(row.name) : row.name;
 }
 
 /**
@@ -223,9 +227,11 @@ function leverSentence(noun, house, holder, loser) {
  * @param {import('./crisisCast.js').CastStake} loser @returns {string}
  */
 function loserClause(loser) {
-  // TAIL-CRISIS-2 batch 3 (READ-ALL 20875: "Military/Guard loses most"): the power by its prose form (`powerSentenceName`)
-  const name = powerSentenceName(loser.factionId);
-  const plural = pluralPowerName(name);
+  // TAIL-CRISIS-2 batch 3 (READ-ALL 20875: "Military/Guard loses most"): the power by its prose form (`powerSentenceName`);
+  // FRAME-2 · B5 (the chair's names rule): with its article, through the one helper, after "if it gives way," ("the Guard
+  // loses most", never "The Guard loses most" or "Town Council loses most": 44 of the census's 124)
+  const name = powerNameInProse(loser.factionId);
+  const plural = pluralPowerName(powerSentenceName(loser.factionId));
   const reason = plural ? loser.reason.replace(/\bits\b/g, 'their') : loser.reason;
   return `${name} ${plural ? 'lose' : 'loses'} most, because ${reason}`;
 }
