@@ -17,7 +17,18 @@
  *                        through `{resource}` (the chair's call (1)), never a fixed noun;
  *   `carrier: transit`   a row that says the good comes from elsewhere, wherever the chain can be the place's own (salt,
  *                        furs, luxury goods, enchanted goods; the chair's call (2), widened);
- *   `market`, `institution: tavern|bank`   a row that names the market, a tavern or a bank.
+ *   `market`, `institution: bank`   a row that names the market or a bank;
+ *   `imports` / `exports`   THE CLASS DECLARATIONS (PLACE-2's cure, the chair's ruling (2) of 18:52 UTC: "a fresh builder reads
+ *                        the walker and DECLARES each class a row fits"): a row whose words fall in the presumption-classes
+ *                        walker's goods or outside class declares the trade it presumes, `imports` where it says the good is
+ *                        brought or bought in, `exports` where it says the good is taken, made or sent on from here (both where
+ *                        it says both); each held wherever its chain's note is held on the census's 600 births;
+ *   `prosperity: ≥ poor`   silk-steady's "a steady trade" (the walker's work class), the one class not answered by a trade.
+ * THE FOUR OPEN-TRADE ROWS ARE DROPPED (the chair's ruling (3) of 18:52 UTC; salt-wanted, lux-value, wine-through, fin-lend:
+ * "... passes through here"). The walker's own open-trade atom exists (`registeredWords.js :: STATE_FAMILIES.openTrade`: true
+ * where no siege is in force, answered by `excludes: ['crisis: under_siege']`), but the draw cannot hold it: the record the
+ * call line hands the composer (`steps/economyReconcilePass.js`: config, economicState, institutions, tier) carries no
+ * crisis, so a sieged place stored them all the same (hxd-metropolis-98: lux-value and fin-lend, refused on its final record).
  * `carrier` is the chain-scoped atom the chair granted ("ATOM carrier: own|transit : src/domain/facts/chainCarrier.js ::
  * chainCarrierOf : chain-scoped"): the draw hands the chain as `ctx.chain`.
  * Two luxury rows name goods (fine metalwork, jewellery): they say so only where the chain's own record names them
@@ -66,21 +77,23 @@ export const ENTREPOT_NOTES = deepFreeze({
     { id: 'salt-own', needs: ['carrier: own'], text: 'Much of the salt sold here is its own, taken from the {resource} nearby.' },
     { id: 'salt-own-keep', needs: ['carrier: own'], text: '{resource} nearby supply the salt, for preserving food here and for selling on.' },
     { id: 'salt-transit', needs: ['carrier: transit'], text: 'No salt is taken here; it is brought in, and sold on or used to preserve food.' },
-    { id: 'salt-wanted', needs: [], text: 'Salt is wanted everywhere, and a share of the trade in it passes through here.' },
     { id: 'salt-bought', needs: [], text: 'Salt is bought and sold here in quantity, for preserving food and for selling on.' },
   ],
   furs_north: [
     { id: 'canonical', text: today },
-    { id: 'furs-port', needs: ['route: port'], text: 'Furs are gathered here and shipped on by sea.' },
-    { id: 'furs-river', needs: ['route: river', 'carrier: transit'], text: 'Furs come down the river in bales and change hands here before going on.' },
-    { id: 'furs-crossroads', needs: ['route: crossroads', 'carrier: transit'], text: 'Furs from several directions meet here, where the roads cross, and are sold on.' },
-    { id: 'furs-road', needs: ['route: road', 'carrier: transit'], text: 'Furs come in along the road and change hands here before going on.' },
-    { id: 'furs-own', needs: ['carrier: own'], text: 'Many of the furs sold here are taken on the place\'s own {resource}.' },
-    { id: 'furs-own-rest', needs: ['carrier: own'], text: 'Furs and pelts come off the {resource} nearby, and what is not used here is traded on.' },
-    { id: 'furs-transit', needs: ['carrier: transit'], text: 'None of these furs are taken here; they come from hunting grounds elsewhere and are traded on.' },
-    { id: 'furs-through', needs: ['carrier: transit'], text: 'Furs pass through here on their way to buyers elsewhere, and the place takes a share of the trade.' },
-    { id: 'furs-steady', needs: [], text: 'The fur trade is steady here, in pelts and the leather made from them.' },
-    { id: 'furs-regular', needs: [], text: 'Furs and pelts are a regular part of the trade here.' },
+    { id: 'furs-port', needs: ['route: port', 'exports'], text: 'Furs are gathered here and shipped on by sea.' },
+    { id: 'furs-river', needs: ['route: river', 'carrier: transit', 'imports'], text: 'Furs come down the river in bales and change hands here before going on.' },
+    { id: 'furs-crossroads', needs: ['route: crossroads', 'carrier: transit', 'imports'], text: 'Furs from several directions meet here, where the roads cross, and are sold on.' },
+    { id: 'furs-road', needs: ['route: road', 'carrier: transit', 'imports'], text: 'Furs come in along the road and change hands here before going on.' },
+    { id: 'furs-own', needs: ['carrier: own', 'exports'], text: 'Many of the furs sold here are taken on the place\'s own {resource}.' },
+    { id: 'furs-own-rest', needs: ['carrier: own', 'exports'], text: 'Furs and pelts come off the {resource} nearby, and what is not used here is traded on.' },
+    { id: 'furs-transit', needs: ['carrier: transit', 'imports'], text: 'None of these furs are taken here; they come from hunting grounds elsewhere and are traded on.' },
+    { id: 'furs-through', needs: ['carrier: transit', 'imports', 'exports'], text: 'Furs pass through here on their way to buyers elsewhere, and the place takes a share of the trade.' },
+    { id: 'furs-steady', needs: ['exports'], text: 'The fur trade is steady here, in pelts and the leather made from them.' },
+    { id: 'furs-regular', needs: ['imports', 'exports'], text: 'Furs and pelts are a regular part of the trade here.' },
+    // the chair's ruling (1) of 18:52 UTC: two more furs rows with no needs, in the pool's voice (the metropolis's bar)
+    { id: 'furs-among', needs: ['imports', 'exports'], text: 'Furs and pelts are among the goods bought and sold here.' },
+    { id: 'furs-leather', needs: ['exports'], text: 'Some of the pelts here go to make leather goods, and the rest are sold on as they are.' },
   ],
   luxury_goods: [
     { id: 'canonical', text: today, excludes: ['route: road', 'route: isolated', 'route: mountain_pass'] },
@@ -88,49 +101,47 @@ export const ENTREPOT_NOTES = deepFreeze({
     { id: 'lux-river', needs: ['route: river', 'carrier: transit'], text: 'Fine goods come up the river to be sold here, and the markup on them is high.' },
     { id: 'lux-crossroads', needs: ['route: crossroads', 'carrier: transit'], text: 'Fine goods from several directions meet here where the roads cross, and are sold on at a markup.' },
     { id: 'lux-road', needs: ['route: road', 'carrier: transit'], text: 'Fine goods come in by road from far away, and are sold here at a good markup.' },
-    { id: 'lux-own', needs: ['carrier: own'], text: 'The precious metal of {resource} nearby is the root of the luxury trade here.' },
+    { id: 'lux-own', needs: ['carrier: own'], text: 'The luxury trade here begins with the {resource} nearby.' },
     { id: 'lux-transit', needs: ['carrier: transit'], text: 'Little of the luxury trade here starts here: fine goods are brought in and sold on at a markup.' },
-    { id: 'lux-value', needs: [], text: 'Fine goods are a small trade by weight but a large one by value, and some of it passes through here.' },
     { id: 'lux-far', needs: [], text: 'Luxury goods are carried far, and part of what they earn on the way is earned here.' },
-    { id: 'lux-kinds', needs: [], text: 'The luxury trade here is in fine metalwork, jewellery and other costly goods.', namesGoods: ['Fine metalwork and jewelry'], otherwise: 'The luxury trade here is in costly goods.' },
+    { id: 'lux-kinds', needs: ['exports'], text: 'The luxury trade here is in fine metalwork, jewellery and other costly goods.', namesGoods: ['Fine metalwork and jewelry'], otherwise: 'The luxury trade here is in costly goods.' },
     { id: 'lux-price', needs: [], text: 'Costly goods travel long distances, and every place they pass through adds to the price.' },
     { id: 'lux-market', needs: ['market'], text: 'Costly goods, jewellery and fine metalwork among them, are sold in the market here.', namesGoods: ['Fine metalwork and jewelry'], otherwise: 'Costly goods are sold in the market here.' },
   ],
   spices_dyes: [
     { id: 'canonical', text: today, excludes: ['route: road', 'route: river', 'route: isolated', 'route: mountain_pass'] },
-    { id: 'spice-port', needs: ['route: port'], text: 'Spices and dyes come in by sea from distant lands, and are sold on inland from here.' },
-    { id: 'spice-river', needs: ['route: river'], text: 'Spices and dyes come up the river from distant lands, and are sold on from here at a markup.' },
-    { id: 'spice-crossroads', needs: ['route: crossroads'], text: 'Spices and dyes from distant lands reach the crossing roads here and are sold on in every direction.' },
-    { id: 'spice-road', needs: ['route: road'], text: 'Spices and dyes come in along the road from far away and are sold on at a markup.' },
-    { id: 'spice-far', needs: [], text: 'Nothing in this trade is grown here: the spices and dyes come from far away and pass on at a profit.' },
-    { id: 'spice-light', needs: [], text: 'Spices and dyes are light, costly and carried far, and part of their price is added here.' },
-    { id: 'spice-others', needs: [], text: 'The spice and dye trade here is a trade in other places\' goods, bought in and sold on.' },
-    { id: 'spice-bulk', needs: [], text: 'Spices and dyes are a small trade here by bulk, and a profitable one.' },
-    { id: 'spice-market', needs: ['market'], text: 'Spices and dyes from far away are sold in the market here, and some are carried on.' },
+    { id: 'spice-port', needs: ['route: port', 'imports'], text: 'Spices and dyes come in by sea from distant lands, and are sold on inland from here.' },
+    { id: 'spice-river', needs: ['route: river', 'imports'], text: 'Spices and dyes come up the river from distant lands, and are sold on from here at a markup.' },
+    { id: 'spice-crossroads', needs: ['route: crossroads', 'imports'], text: 'Spices and dyes from distant lands reach the crossing roads here and are sold on in every direction.' },
+    { id: 'spice-road', needs: ['route: road', 'imports'], text: 'Spices and dyes come in along the road from far away and are sold on at a markup.' },
+    { id: 'spice-far', needs: ['imports'], text: 'Nothing in this trade is grown here: the spices and dyes come from far away and pass on at a profit.' },
+    { id: 'spice-light', needs: ['imports'], text: 'Spices and dyes are light, costly and carried far, and part of their price is added here.' },
+    { id: 'spice-others', needs: ['imports'], text: 'The spice and dye trade here is a trade in other places\' goods, bought in and sold on.' },
+    { id: 'spice-bulk', needs: ['imports'], text: 'Spices and dyes are a small trade here by bulk, and a profitable one.' },
+    { id: 'spice-market', needs: ['market', 'imports'], text: 'Spices and dyes from far away are sold in the market here, and some are carried on.' },
   ],
   silk_luxury_textiles: [
     { id: 'canonical', text: today, excludes: ['route: road', 'route: river', 'route: isolated', 'route: mountain_pass'] },
-    { id: 'silk-port', needs: ['route: port'], text: 'Silk arrives by sea, and from here it is carried inland to be sold.' },
-    { id: 'silk-river', needs: ['route: river'], text: 'Silk comes up the river to be sold here, or carried further on.' },
-    { id: 'silk-crossroads', needs: ['route: crossroads'], text: 'Silk reaches the crossing roads here and is sent on inland in several directions.' },
-    { id: 'silk-road', needs: ['route: road'], text: 'Silk comes in by road from far away, and is sold here or carried on.' },
-    { id: 'silk-none', needs: [], text: 'No silk is made here; it is brought from far away, and fine cloth is sold on from here.' },
-    { id: 'silk-long', needs: [], text: 'Silk is carried a long way to reach this place, and it is sold on at a good price.' },
-    { id: 'silk-trade', needs: [], text: 'The silk trade here is a trade in fine cloth bought from far away and sold on.' },
-    { id: 'silk-market', needs: ['market'], text: 'Silk and other fine cloth from far away are sold in the market here.' },
-    { id: 'silk-steady', needs: [], text: 'Fine cloth from far away is a steady trade here, silk among it.' },
-    { id: 'silk-bales', needs: [], text: 'Bales of silk are bought here from those who have carried them far, and sold on.' },
+    { id: 'silk-port', needs: ['route: port', 'imports'], text: 'Silk arrives by sea, and from here it is carried inland to be sold.' },
+    { id: 'silk-river', needs: ['route: river', 'imports'], text: 'Silk comes up the river to be sold here, or carried further on.' },
+    { id: 'silk-crossroads', needs: ['route: crossroads', 'imports'], text: 'Silk reaches the crossing roads here and is sent on inland in several directions.' },
+    { id: 'silk-road', needs: ['route: road', 'imports'], text: 'Silk comes in by road from far away, and is sold here or carried on.' },
+    { id: 'silk-none', needs: ['imports'], text: 'No silk is made here; it is brought from far away, and fine cloth is sold on from here.' },
+    { id: 'silk-long', needs: ['imports'], text: 'Silk is carried a long way to reach this place, and it is sold on at a good price.' },
+    { id: 'silk-trade', needs: ['imports'], text: 'The silk trade here is a trade in fine cloth bought from far away and sold on.' },
+    { id: 'silk-market', needs: ['market', 'imports'], text: 'Silk and other fine cloth from far away are sold in the market here.' },
+    { id: 'silk-steady', needs: ['imports', 'prosperity: ≥ poor'], text: 'Fine cloth from far away is a steady trade here, silk among it.' },
+    { id: 'silk-bales', needs: ['imports'], text: 'Bales of silk are bought here from those who have carried them far, and sold on.' },
   ],
   wine_spirits: [
     { id: 'canonical', text: today, excludes: ['route: road', 'route: crossroads', 'route: isolated', 'route: mountain_pass'] },
-    { id: 'wine-port', needs: ['route: port'], text: 'Wine comes in by sea in casks, and is sold here or carried on inland.' },
-    { id: 'wine-river', needs: ['route: river'], text: 'Wine comes down the river in casks, and is sold here and further on.' },
-    { id: 'wine-crossroads', needs: ['route: crossroads'], text: 'Wine from more than one region meets here where the roads cross, and is sold on.' },
-    { id: 'wine-road', needs: ['route: road'], text: 'Wine comes in by road from far away, and is sold here and further on.' },
-    { id: 'wine-cask', needs: [], text: 'Wine is bought in by the cask here, and much of it is sold on.' },
-    { id: 'wine-through', needs: [], text: 'The wine trade passes through here; casks are bought in, stored and sold on.' },
-    { id: 'wine-few', needs: [], text: 'Wine is drunk everywhere and made in few places, and some of the trade between them runs through here.' },
-    { id: 'wine-tavern', needs: ['institution: tavern'], text: 'Some of the wine coming through is drunk here over the tavern\'s counter; the rest is sold on.' },
+    { id: 'wine-port', needs: ['route: port', 'imports'], text: 'Wine comes in by sea in casks, and is sold here or carried on inland.' },
+    { id: 'wine-river', needs: ['route: river', 'imports'], text: 'Wine comes down the river in casks, and is sold here and further on.' },
+    { id: 'wine-crossroads', needs: ['route: crossroads', 'imports'], text: 'Wine from more than one region meets here where the roads cross, and is sold on.' },
+    { id: 'wine-road', needs: ['route: road', 'imports'], text: 'Wine comes in by road from far away, and is sold here and further on.' },
+    { id: 'wine-cask', needs: ['imports'], text: 'Wine is bought in by the cask here, and much of it is sold on.' },
+    { id: 'wine-few', needs: ['imports'], text: 'Wine is drunk everywhere and made in few places, and some of the trade between them runs through here.' },
+    { id: 'wine-tavern', needs: ['imports'], text: 'Some of the wine coming through is drunk here; the rest is sold on.' },
   ],
   // The chair's condition (b): see CHAIN_SCOPED_POOLS below.
   smuggling: [
@@ -149,7 +160,7 @@ export const ENTREPOT_NOTES = deepFreeze({
     { id: 'magic-river', needs: ['route: river', 'carrier: transit'], text: 'Enchanted goods come up the river and are sold here at a high price.' },
     { id: 'magic-crossroads', needs: ['route: crossroads', 'carrier: transit'], text: 'Enchanted goods from several directions meet here where the roads cross, and fetch a high price.' },
     { id: 'magic-road', needs: ['route: road', 'carrier: transit'], text: 'Enchanted goods come in by road and are sold here at a high price.' },
-    { id: 'magic-own', needs: ['carrier: own'], text: 'The enchanted goods sold here begin at {resource} nearby, and go on to buyers elsewhere.' },
+    { id: 'magic-own', needs: ['carrier: own'], text: 'The enchanted goods sold here begin at the {resource} nearby, and go on to buyers elsewhere.' },
     { id: 'magic-transit', needs: ['carrier: transit'], text: 'Most enchanted goods sold here are brought in from elsewhere, at a high price.' },
     { id: 'magic-weight', needs: [], text: 'Enchanted goods are worth a great deal for their weight, and some of that trade is done here.' },
     { id: 'magic-small', needs: [], text: 'The trade in enchanted goods is small but valuable, and buyers come here for it.' },
@@ -162,7 +173,6 @@ export const ENTREPOT_NOTES = deepFreeze({
     { id: 'fin-crossroads', needs: ['route: crossroads'], text: 'Traders meeting at the crossing roads here settle accounts and borrow against their loads.' },
     { id: 'fin-road', needs: ['route: road'], text: 'Traders on the road settle their accounts here and borrow against their loads.' },
     { id: 'fin-bank', needs: ['institution: bank'], text: 'The bank here lends to traders and changes their money, and earns from trade it does not carry.' },
-    { id: 'fin-lend', needs: [], text: 'Lending and money-changing here earn from the trade that passes through.' },
     { id: 'fin-credit', needs: [], text: 'Large loads need credit, and the lending here grows with the trade passing through.' },
     { id: 'fin-settle', needs: [], text: 'Traders passing through borrow, settle and change money here, and that business pays.' },
   ],
@@ -237,8 +247,8 @@ export function entrepotNoteTextOf(row, chain, record, note) {
 export function entrepotNoteOf(chain, record, seed, facts = () => factsOf(record)) {
   const pool = seed && typeof chain?.entrepotNote === 'string' && chain.entrepotNote ? entrepotNotePoolOf(chain) : null;
   if (!pool) return chain?.entrepotNote;
-  const key = `${seed}::entrepotNote::${chain.chainId}`;
-  const r = drawDeclared(pool, { facts, draw: (p) => pickVariantMixed(p, key), key, poolId: `entrepotNotes.${chain.chainId}`, surface: 'economics', drawKind: 'H', ctx: { chain } });
+  const seedKey = `${seed}::entrepotNote::${chain.chainId}`;
+  const r = drawDeclared(pool, { facts, draw: (p) => pickVariantMixed(p, seedKey), key: seedKey, poolId: `entrepotNotes.${chain.chainId}`, surface: 'economics', drawKind: 'H', ctx: { chain } });
   const text = r.line ? entrepotNoteTextOf(r.line, chain, record, chain.entrepotNote) : null;
   return typeof text === 'string' && text && !text.includes(RESOURCE_SLOT) ? text : chain.entrepotNote;
 }

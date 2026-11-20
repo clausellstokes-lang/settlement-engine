@@ -264,8 +264,15 @@ describe('(e) the chair\'s condition: no row needs or excludes a hideable house 
       const p = parseAtom(String(a).replace(/^no\s+/i, ''));
       if (p && !['route', 'carrier'].includes(p.dimension)) needed.add(`${id}: ${a}`);
     }
+    // the houses: market (luxury, silk, spices) and bank (finance); the tavern row was re-ruled to no house (18:52 UTC). The rest
+    // are the class declarations (imports, exports, silk-steady's prosperity: PLACE-2's cure, the chair's ruling (2))
     expect([...needed].sort()).toEqual([
-      'luxury_goods: market', 'silk_luxury_textiles: market', 'spices_dyes: market', 'transit_finance: institution: bank', 'wine_spirits: institution: tavern',
+      'furs_north: exports', 'furs_north: imports',
+      'luxury_goods: exports', 'luxury_goods: market',
+      'silk_luxury_textiles: imports', 'silk_luxury_textiles: market', 'silk_luxury_textiles: prosperity: ≥ poor',
+      'spices_dyes: imports', 'spices_dyes: market',
+      'transit_finance: institution: bank',
+      'wine_spirits: imports',
     ]);
   });
   it('the smuggling pool declares its chain\'s own scope (its rows print on that chain\'s card alone)', async () => {
@@ -332,7 +339,7 @@ describe('(g) the chair\'s calls, rewordings and conditions (17:18 UTC)', () => 
       expect(held, id).toEqual(routes);
     }
   });
-  it('the eight rewordings stand verbatim', async () => {
+  it('the eight rewordings stand verbatim (three of them as the chair re-ruled them at 18:52 UTC)', async () => {
     const mod = await pools();
     expect(mod, `${POOL_FILE}: the pools of the entrepôt note`).not.toBeNull();
     const text = (id, rowId) => mod.ENTREPOT_NOTES[id].find((r) => r.id === rowId)?.text;
@@ -340,10 +347,12 @@ describe('(g) the chair\'s calls, rewordings and conditions (17:18 UTC)', () => 
     expect(text('furs_north', 'furs-port')).toBe('Furs are gathered here and shipped on by sea.');
     expect(text('furs_north', 'furs-own')).toBe('Many of the furs sold here are taken on the place\'s own {resource}.');
     expect(text('furs_north', 'furs-transit')).toBe('None of these furs are taken here; they come from hunting grounds elsewhere and are traded on.');
-    expect(text('luxury_goods', 'lux-own')).toBe('The precious metal of {resource} nearby is the root of the luxury trade here.');
+    expect(text('luxury_goods', 'lux-own')).toBe('The luxury trade here begins with the {resource} nearby.');
     expect(text('silk_luxury_textiles', 'silk-steady')).toBe('Fine cloth from far away is a steady trade here, silk among it.');
-    expect(text('wine_spirits', 'wine-tavern')).toBe('Some of the wine coming through is drunk here over the tavern\'s counter; the rest is sold on.');
-    expect(text('magical_goods', 'magic-own')).toBe('The enchanted goods sold here begin at {resource} nearby, and go on to buyers elsewhere.');
+    expect(text('wine_spirits', 'wine-tavern')).toBe('Some of the wine coming through is drunk here; the rest is sold on.');
+    // "(no needs)": no house; its one atom is the goods class's declaration (imports), held wherever the wine chain is
+    expect(mod.ENTREPOT_NOTES.wine_spirits.find((r) => r.id === 'wine-tavern').needs).toEqual(['imports']);
+    expect(text('magical_goods', 'magic-own')).toBe('The enchanted goods sold here begin at the {resource} nearby, and go on to buyers elsewhere.');
   });
   it('(a) the luxury rows name fine metalwork and jewellery only where the chain\'s own record names them', async () => {
     const mod = await pools();
@@ -356,6 +365,19 @@ describe('(g) the chair\'s calls, rewordings and conditions (17:18 UTC)', () => 
       expect(textOf(bare, rowId), rowId).not.toMatch(/jewel|metalwork/);
       expect(textOf(bare, rowId), rowId).toMatch(/costly goods/i);
     }
+  });
+  it('the chair\'s ruling of 18:52 UTC: two more furs rows; the four open-trade rows dropped (the draw cannot read a siege)', async () => {
+    const mod = await pools();
+    expect(mod, `${POOL_FILE}: the pools of the entrepôt note`).not.toBeNull();
+    const row = (id, rowId) => mod.ENTREPOT_NOTES[id].find((r) => r.id === rowId);
+    expect(mod.ENTREPOT_NOTES.furs_north).toHaveLength(13);
+    for (const rowId of ['furs-among', 'furs-leather']) {
+      // no need of the place's own: the goods class's declaration only (imports / exports: held wherever the chain is)
+      expect((row('furs_north', rowId).needs || []).filter((a) => !['imports', 'exports'].includes(a)), rowId).toEqual([]);
+      expect(row('furs_north', rowId).excludes, rowId).toBeUndefined();
+    }
+    const OPEN_TRADE = [['salt', 'salt-wanted'], ['luxury_goods', 'lux-value'], ['wine_spirits', 'wine-through'], ['transit_finance', 'fin-lend']];
+    for (const [id, rowId] of OPEN_TRADE) expect(row(id, rowId), `${id}[${rowId}]`).toBeUndefined();
   });
   it('the pick is the mixed keyed pick, keyed on the seed, the field and the chain', () => {
     const src = readFileSync(POOL_FILE, 'utf8');
