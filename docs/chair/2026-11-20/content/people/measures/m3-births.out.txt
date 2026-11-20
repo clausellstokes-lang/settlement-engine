@@ -1,0 +1,8 @@
+births thorp: places 100 · with settlementReason 100 · with foundedBy 100 · with overcoming 100
+births hamlet: places 100 · with settlementReason 100 · with foundedBy 100 · with overcoming 100
+births village: places 100 · with settlementReason 100 · with foundedBy 100 · with overcoming 100
+births town: places 100 · with settlementReason 100 · with foundedBy 100 · with overcoming 100
+births city: places 100 · with settlementReason 100 · with foundedBy 100 · with overcoming 100
+births metropolis: places 100 · with settlementReason 100 · with foundedBy 100 · with overcoming 100
+atoms answered per place: 208
+written <cache.json> (a local cache, not committed; reproduce: M3_BASE=<base> node m3-births.mjs <checkout> 100 <cache.json>)
