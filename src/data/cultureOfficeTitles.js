@@ -19,6 +19,8 @@
  *   • A cell this table does not hold FALLS BACK: to today's title for the nine families that have one today, to the
  *     BASE ladder for the four that do not. Never a blank, never another culture's word.
  *   • The criminal side varies by SIZE and not by culture until the owner rules (the chair, 2026-11-20).
+ * TITLES-2 (the same day, the second pass) filled the commonest fallback cells with words read in a named source; every
+ * word's gloss and source: docs/chair/2026-11-20/content/titles/TITLES-2-HANDBACK.md. A cell marked "TITLES-2" is its.
  * Pure data and its resolvers; no draw.
  */
 
@@ -132,10 +134,13 @@ export const CULTURE_OFFICE_TITLES = Object.freeze({
     appointed: ladder('Vogt', 'Vogt', 'Vogt', 'Vogt', 'Landvogt', 'Statthalter'),
     headman: ladder(null, null, 'Schultheiss', 'Burgomaster', 'Burgomaster', 'Burgomaster'),
     council: ladder(null, null, null, 'Burgomaster', 'Burgomaster', 'Burgomaster'),
+    guild: ladder(null, null, null, 'Zunftmeister', 'Zunftmeister', 'Zunftmeister'), // TITLES-2: the guild's master
+    military: ladder(null, null, null, null, 'Marschall', 'Marschall'), // TITLES-2: the army's marshal
   }),
   latin: Object.freeze({
     sovereign: ladder(null, null, null, 'Princeps', pair('Rex', 'Regina'), pair('Imperator', 'Imperatrix')),
-    appointed: ladder(null, null, null, 'Procurator', 'Legate', 'Proconsul'),
+    appointed: ladder(pair('Vilicus', 'Vilica'), pair('Vilicus', 'Vilica'), pair('Vilicus', 'Vilica'), 'Procurator', 'Legate', 'Proconsul'), // TITLES-2 below town: the estate's bailiff
+    headman: ladder(null, null, null, 'Podestà', 'Podestà', 'Podestà'), // TITLES-2: the commune's chief magistrate
     council: ladder(null, null, null, 'Consul', 'Consul', 'First Consul'),
     assembly: ladder(null, null, null, 'Tribune of the People', 'Tribune of the People', 'Tribune of the People'),
     military: ladder(null, null, 'Decurion', 'Centurion', 'Dux', 'Dux'),
@@ -143,16 +148,19 @@ export const CULTURE_OFFICE_TITLES = Object.freeze({
   }),
   celtic: Object.freeze({
     sovereign: ladder(null, null, null, 'Chieftain', pair('King', 'Queen'), pair('High King', 'High Queen')),
+    appointed: ladder('Maer', 'Maer', 'Maer', 'Maer', null, null), // TITLES-2: the king's reeve
     headman: ladder(null, null, 'Chieftain', 'Chieftain', null, null),
     council: ladder(null, null, null, 'Vergobret', 'Vergobret', 'Vergobret'),
+    military: ladder(null, null, 'Penteulu', 'Penteulu', 'Penteulu', 'Penteulu'), // TITLES-2: captain of the warband
   }),
   arabic: Object.freeze({
     sovereign: ladder(null, null, pair('Sheikh', 'Sheikha'), pair('Sheikh', 'Sheikha'), pair('Emir', 'Emira'), pair('Sultan', 'Sultana')),
     appointed: ladder(null, null, null, null, 'Wali', 'Wali'),
     headman: ladder('Mukhtar', 'Mukhtar', 'Mukhtar', "Ra'is", "Ra'is", "Ra'is"),
+    council: ladder(null, null, null, "Ra'is", "Ra'is", "Ra'is"), // TITLES-2: head of the notables
     elders: ladder(pair('Sheikh', 'Sheikha'), pair('Sheikh', 'Sheikha'), pair('Sheikh', 'Sheikha'), pair('Sheikh', 'Sheikha'), pair('Sheikh', 'Sheikha'), pair('Sheikh', 'Sheikha')),
     merchant: ladder(null, null, null, 'Shahbandar', 'Shahbandar', 'Shahbandar'),
-    military: ladder(null, null, 'Qaid', 'Qaid', null, null),
+    military: ladder(null, null, 'Qaid', 'Qaid', 'Amir al-Juyush', 'Amir al-Juyush'), // TITLES-2 at city and up: commander of the armies
   }),
   norse: Object.freeze({
     sovereign: ladder(null, null, 'Jarl', 'Jarl', pair('King', 'Queen'), pair('High King', 'High Queen')),
@@ -160,36 +168,47 @@ export const CULTURE_OFFICE_TITLES = Object.freeze({
     headman: ladder(null, null, 'Jarl', 'Jarl', 'Jarl', 'Jarl'),
     council: ladder(null, null, 'Lawspeaker', 'Lawspeaker', 'Lawspeaker', 'Lawspeaker'),
     assembly: ladder(null, null, 'Lawspeaker', 'Lawspeaker', 'Lawspeaker', 'Lawspeaker'),
-    military: ladder(null, null, 'Hersir', 'Hersir', null, null),
+    military: ladder(null, null, 'Hersir', 'Hersir', 'Stallari', 'Stallari'), // TITLES-2 at city and up: the king's marshal
   }),
   slavic: Object.freeze({
     sovereign: ladder(null, null, null, pair('Knyaz', 'Knyaginya'), pair('Grand Knyaz', 'Grand Knyaginya'), pair('Tsar', 'Tsaritsa')),
-    appointed: ladder(null, null, null, 'Namestnik', 'Namestnik', 'Namestnik'),
+    appointed: ladder('Tiun', 'Tiun', 'Tiun', 'Namestnik', 'Namestnik', 'Namestnik'), // TITLES-2 below town: the prince's steward
     headman: ladder('Starosta', 'Starosta', 'Starosta', 'Posadnik', 'Posadnik', 'Posadnik'),
+    council: ladder(null, null, null, 'Golova', 'Golova', 'Golova'), // TITLES-2: the city's head
     elders: ladder('Starosta', 'Starosta', 'Starosta', 'Starosta', 'Starosta', 'Starosta'),
+    merchant: ladder(null, null, null, 'Gost', 'Gost', 'Gost'), // TITLES-2: the great merchant
     military: ladder(null, null, 'Voivode', 'Voivode', 'Voivode', 'Voivode'),
   }),
   east_asian: Object.freeze({
     sovereign: ladder(null, null, null, 'Daimyo', 'Daimyo', null),
     appointed: ladder(null, null, 'Daikan', 'Bugyo', 'Bugyo', 'Bugyo'),
-    headman: ladder('Nanushi', 'Nanushi', 'Nanushi', null, null, null),
+    headman: ladder('Nanushi', 'Nanushi', 'Nanushi', 'Toshiyori', 'Toshiyori', 'Toshiyori'), // TITLES-2 at town and up: the town elder
+    council: ladder(null, null, null, 'Toshiyori', 'Toshiyori', 'Tairo'), // TITLES-2: the town elder; the great elder
+    elders: ladder('Otona', 'Otona', 'Otona', 'Toshiyori', 'Toshiyori', 'Toshiyori'), // TITLES-2: the village elders; the town elder
+    military: ladder(null, null, 'Kumigashira', 'Obangashira', 'Obangashira', 'Obangashira'), // TITLES-2: the squad's leader; captain of the guard
   }),
   mesoamerican: Object.freeze({
     sovereign: ladder(null, null, null, 'Tlatoani', 'Tlatoani', 'Huey Tlatoani'),
     appointed: ladder(null, null, 'Calpixqui', 'Calpixqui', 'Calpixqui', 'Calpixqui'),
+    military: ladder(null, null, null, 'Tlacateccatl', 'Tlacateccatl', 'Tlacateccatl'), // TITLES-2: the army's general
   }),
   south_asian: Object.freeze({
     sovereign: ladder(null, null, null, pair('Raja', 'Rani'), pair('Maharaja', 'Maharani'), pair('Samrat', 'Samrajni')),
     appointed: ladder(null, null, null, 'Faujdar', 'Subahdar', 'Subahdar'),
     headman: ladder('Mukhiya', 'Mukhiya', 'Mukhiya', null, null, null),
     council: ladder(null, null, 'Sarpanch', 'Sarpanch', null, null),
+    elders: ladder('Sarpanch', 'Sarpanch', 'Sarpanch', 'Sarpanch', null, null), // TITLES-2: head of the panchayat
     assembly: ladder(null, null, 'Sabhapati', 'Sabhapati', 'Sabhapati', 'Sabhapati'),
     merchant: ladder(null, null, null, 'Nagarsheth', 'Nagarsheth', 'Nagarsheth'),
+    guild: ladder(null, null, null, 'Jetthaka', 'Jetthaka', 'Jetthaka'), // TITLES-2: the craft guild's chief
     military: ladder(null, null, null, 'Senapati', 'Senapati', 'Senapati'),
   }),
   steppe: Object.freeze({
     sovereign: ladder(null, null, null, pair('Khan', 'Khatun'), pair('Khan', 'Khatun'), pair('Khagan', 'Khatun')),
     appointed: ladder(null, null, null, 'Darughachi', 'Darughachi', 'Darughachi'),
+    headman: ladder(null, null, pair('Beg', 'Begim'), pair('Beg', 'Begim'), pair('Beg', 'Begim'), pair('Beg', 'Begim')), // TITLES-2: the clan's chief
+    council: ladder(null, null, null, 'Biy', 'Biy', 'Biy'), // TITLES-2: the elected judge-elder
+    elders: ladder('Biy', 'Biy', 'Biy', 'Biy', 'Biy', 'Biy'), // TITLES-2: the elected judge-elder
     military: ladder(null, null, 'Noyan', 'Noyan', 'Noyan', 'Noyan'),
   }),
   greek: Object.freeze({
