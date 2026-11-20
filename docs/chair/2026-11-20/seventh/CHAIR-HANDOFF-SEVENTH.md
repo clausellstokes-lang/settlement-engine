@@ -1824,6 +1824,19 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   PEOPLE-1's proposals for the card's two lines (01351d72d: activeConstraint 46/35/39/70/94/87% to about 10 to 15%;
   structuralPosition 17/14/37/61/70/68% to 5 to 15%) ARE NOT YET READ BY THE CHAIR.
 
+- **THE CARD'S POSITION LINE, READ AND RULED (16:41 UTC; PEOPLE-1's `PROPOSAL-structuralPosition.md` at 01351d72d).**
+  About seventy wordings over the holder's, the armed head's, the faith's, the houses', the civic post's, the
+  casters' and the old family's rows, calm and under strain; the pick `<seed>::npcStructure.<field>::<card id>` at
+  birth; `HOLDS_THE_SEAT` left bare; the pool id unchanged. Measured top share, today to proposed:
+  17/14/37/61/70/68% to 5/9/13/14/15/15%. APPROVED TO BUILD with PEOPLE-1's own strikes AND: (1) A WORDING MAY NOT
+  SAY THE SEAT IS ACCEPTED OR UNPRESSED UNLESS THE RECORD SAYS SO (a calm place's standing can read Contested):
+  seven lines keep their fact and lose the claim ("Holds the seat; the market days run and the dues come in."; "…in
+  a quiet season; there is time to act."; "…in lean years, and every cost it asks is counted."; and four more, in
+  the message); (2) "an old family whose name still opens doors here" (not "older than the seat itself"); (3) the
+  casters' "the work is the ordinary run of spellwork"; (4) THREE ATOMS ALLOWED: the card's own house, the export
+  good, the import good. `activeConstraint` is NOT ruled: the rendered census finds its stored text on no surface;
+  asked of SAME-1 and PEOPLE-1; its wordings are read when the card is shown printing it.
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -4789,3 +4802,12 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   shrink-only door 1385 to 1368); units 8 (the import path and the round trip on 24 towns or more) and 6 (the
   owner's thirty and twelve samples) out. `prompts/PROSE-1.txt` WRITTEN, seated after this push. A FOURTH STAMP FAULT
   OF THE CHAIR: two messages stamped "16:33" when the clock read 16:30 to 16:32; told to the owner.
+- 16:41 UTC · PROSE-1 SEATED at 16:40 on the working line (session_019yED1S1pNxcvjmQEWa8J4P; `lane/prose-1-2026-11-20`; owes
+  "PROSE-MAP <commit>": every pool of the page's state sentences where a size has one eligible variant). FOUR
+  RECORDS READ AT 16:41: TRAD-4 332,038 (unit 6 merging; unit 8 out: its lane ends before 450,000: NO TRAD-5);
+  FRAME-6 322,275 (six builders out); PAGE-6 311,649; DEPTH-2 293,665. PROMPTS MADE READY, NOT SEATED: `DEPTH-3.txt`
+  (source `lane/depth-2-2026-11-20`, outcome `lane/depth-3-2026-11-20`); `PAGE-8.txt` brought up to date (source
+  `lane/page-6-2026-11-20`, outcome `lane/page-8-2026-11-20`); `FRAME-7.txt` and `SEAT-6.txt` from 16:03 (SEAT-6 is
+  seated). SEAT EACH WHEN ITS PREDECESSOR'S RECORD PASSES 360,000. Messages sent at 16:38 to 16:41: PAGE-6 (the
+  secret on nearly every place's cards), PLACE-1 (the economy's and the safety's own hooks), PEOPLE-1 (the position
+  line's verdict).
