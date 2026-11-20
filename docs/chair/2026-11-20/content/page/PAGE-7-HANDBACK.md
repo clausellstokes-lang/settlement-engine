@@ -56,5 +56,6 @@ Read this, then `PAGE-5-HANDBACK.md` (§2 S6 row, §5 the ruled tables, §6 the 
   through the mutex (`sh scripts/gate-mutex.sh --run -- ...`), and the message carries first paint's three figures beside
   the line's (1,177,668 raw, 374,676 gzip, 314,472 Brotli at 8196e5712) and the worker's (2,617,934). A rise is cured on
   the lane: an eager file declares an atom BY NAME; the code that answers it is imported only on the lazy side.
+- TEST RATCHET BEFORE EACH LANDING REQUEST (the chair, 20:13, every lane; PAGE-10 runs it): before "PAGE-TROUBLE <commit>", ONE `npm run test:ratchet` at the tip with the line's tip merged in (exclusive mutex, to a log), its verdict's rows read BY NAME against `docs/chair/2026-11-20/seventh/ci/RED-AT-LINE.tsv` on the chair's branch; a row not on that list is a stored figure or golden this lane's wording moved (named with its cause: the hooks' 350 golden-master rows in `currentTensions[].plotHooks`) or a real red, cured on the lane before the request. "HOOKS <commit>" needs only the named gates and the one build.
 - HAND-OVER (the chair, 19:59): PAGE-10 (session_019yED1STKYbiqSui8mWphr2) is seated beside PAGE-7. PAGE-7 merges the
   hooks if its count allows; otherwise "PAGE-PART <commit>, HANDED OVER". By 420,000 PAGE-7 hands over in any case.
