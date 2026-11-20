@@ -1,16 +1,19 @@
 /**
- * domain/tension/troubleCast.js — A TOWN'S SHARPEST STANDING TROUBLE, AND THREE PEOPLE ON ITS THREE SIDES (FRAME-1, the
+ * domain/tension/troubleCast.js — A CALM TOWN'S TROUBLE OF WEIGHT, AND THREE PEOPLE ON ITS THREE SIDES (FRAME-1, the
  * seventh chair's CF1–CF6; the owner, 2026-11-20: "Do it pre deploy. I like it. But make sure there is variability of
- * who is relevant to a crisis where appropriate").
+ * who is relevant to a crisis where appropriate"; FRAME-2 · B2, the chair's CF1 as amended and CF11, final; the owner,
+ * 2026-11-20: "A calm town should be as it currently is. Just a collection of people without a central issue if there is
+ * none. Don't invent drama capitalize on what's already there if it's there.").
  *
  * The sibling, for a standing trouble, of crisis/crisisCast.js (docs/DESIGN_CRISIS_TAB.md), with one difference that
  * is the whole of CF2: NOTHING IS STORED. The cast is derived AT RENDER from the record by pure rules; no field is
  * written, nothing changes at generation, and so no stored town and no golden moves.
  *
- *   THE TROUBLE: the tension of `history.currentTensions` with the sharpest severity its record carries (the record's
- *   `severity`, a list of the grades it may take: catastrophic over major over minor, by the highest it admits), the
- *   record's own order breaking a tie (the generator writes the town's own pressures first: its crime, its neighbour,
- *   its stress; then the fill).
+ *   THE TROUBLE (CF11): ONLY a TROUBLE OF WEIGHT, a tension of `history.currentTensions` ABOUT a graded strain the town
+ *   holds (`troubleOfWeight`, below: the seat under real pressure, two powers in a high conflict, a material strain short
+ *   of a crisis). Among those, the one whose strain has the highest grade, the record's own order breaking a tie. A town
+ *   with none casts NO frame and keeps today's sheet byte for byte. The tension's `severity` is not read (it is the
+ *   template's list, FRAME-1 measured it).
  *
  *   ITS SIDES: the tension's three `factions`, each classed by its template label (sideArchetypes.js) and filled
  *   through its archetype's LADDER: office, a tie on the record that speaks of the matter, trade, an outsider reached
@@ -39,6 +42,9 @@ import { rulingChainOf } from '../dossier/powerStrata.js';
 import { isOfficeStandIn } from '../dossier/seatHolder.js';
 import { membersByRank } from '../people/membership.js';
 import { powerNameInProse } from '../display/governanceAccount.js';
+import { coupContenders } from '../rulingPowerCoup.js';
+import { governanceLedger } from '../governanceLedger.js';
+import { FOOD_SECURITY_BANDS, LEGITIMACY_CUTS } from '../../data/bandLadders.js';
 import { ARCHETYPE_LADDER, FRAME_TUNING, GENERATOR_REPLACED_SIDES, LODGING_HOUSE, SIDE_ARCHETYPE, TROUBLE_MATTER, TROUBLE_MATTER_DEFAULT } from './sideArchetypes.js';
 
 /**
@@ -48,10 +54,12 @@ import { ARCHETYPE_LADDER, FRAME_TUNING, GENERATOR_REPLACED_SIDES, LODGING_HOUSE
  *   category?: unknown, ousted?: unknown, temporary?: unknown, plotHooks?: unknown, secret?: unknown,
  *   institution?: unknown, memberships?: unknown }} FrameNpc
  * @typedef {{ faction?: unknown, category?: unknown, power?: unknown, isGoverning?: unknown }} FramePower
- * @typedef {{ type?: unknown, description?: unknown, factions?: unknown, plotHooks?: unknown, severity?: unknown }} FrameTension
+ * @typedef {{ type?: unknown, description?: unknown, factions?: unknown, plotHooks?: unknown }} FrameTension
  * @typedef {{ from?: unknown, to?: unknown, typeName?: unknown }} FrameTie
  * @typedef {{ _seed?: unknown, name?: unknown, npcs?: unknown, relationships?: unknown, stress?: unknown,
- *   history?: { currentTensions?: unknown } | null, powerStructure?: { factions?: unknown } | null }} FrameSettlement
+ *   history?: { currentTensions?: unknown } | null,
+ *   powerStructure?: { factions?: unknown, conflicts?: unknown, publicLegitimacy?: unknown } | null,
+ *   economicState?: { foodSecurity?: { label?: unknown } | null, activeChains?: unknown } | null }} FrameSettlement
  *
  * @typedef {Object} SideFace
  * @property {FaceKind} kind         the rung that filled the side
@@ -75,9 +83,6 @@ import { ARCHETYPE_LADDER, FRAME_TUNING, GENERATOR_REPLACED_SIDES, LODGING_HOUSE
  * @property {string[]} hooks         its own hooks, as the record holds them
  * @property {TroubleSide[]} sides
  */
-
-/** THE GRADES of a tension's severity, sharpest highest. */
-const SEVERITY_ORDER = Object.freeze(/** @type {Record<string, number>} */ ({ minor: 1, major: 2, catastrophic: 3 }));
 
 /**
  * THE REASONS (CF6): the closed set of words a face stands on its side with, in the page's own register. `{they}`,
@@ -140,22 +145,113 @@ export function fillReason(text, npc, slots = {}) {
     .replace(/\{(\w+)\}/g, (whole, k) => (Object.hasOwn(slots, k) ? slots[k] : whole));
 }
 
-/** The highest grade a tension's severity admits. @param {FrameTension} t @returns {number} */
-function sharpnessOf(t) {
-  const grades = Array.isArray(t.severity) ? t.severity : [t.severity];
-  return Math.max(0, ...grades.map((g) => SEVERITY_ORDER[str(g)] || 0));
-}
+/**
+ * THE GRADES OF A STRAIN OF WEIGHT, sharpest first (CF11). Two grades in one row are one grade.
+ *   - `legitimacy-below-30` and `seat-ungated`: legitimacy below the Contested cut (LEGITIMACY_CUTS.contested, the gates'
+ *     own read: governanceLedger, as politicalFractureGate makes it), or the incumbent UNGATED (coupContenders: a full
+ *     field of three challengers and the ruler's amplified case below the weakest of them). The ungated seat stands
+ *     with below 30 because of what resolveCoupVerdict makes of it: pHold 0.08, "the seat falls; only the heir is in
+ *     question", under the 0.1 floor of every gated contest: the gravest read the record has of the seat.
+ *   - `legitimacy-below-45`: legitimacy below the Tolerated cut (LEGITIMACY_CUTS.tolerated).
+ *   - `high-conflict`: a row of `powerStructure.conflicts` at intensity `high` (never `moderate`, never a relationship).
+ *   - `food-below-secure`, `creditor-power`, `impaired-chain`: food security below Secure, a creditor power on the roster,
+ *     an `impaired` chain in `economicState.activeChains`. (The first two stay though no calm town holds them today.)
+ * @type {ReadonlyArray<ReadonlyArray<string>>}
+ */
+export const WEIGHT_GRADES = Object.freeze([
+  Object.freeze(['legitimacy-below-30', 'seat-ungated']),
+  Object.freeze(['legitimacy-below-45']),
+  Object.freeze(['high-conflict']),
+  Object.freeze(['food-below-secure', 'creditor-power', 'impaired-chain']),
+]);
 
 /**
- * THE SHARPEST STANDING TROUBLE: the highest severity grade the record admits, the record's order breaking a tie.
- * @param {FrameSettlement} s @returns {{ tension: FrameTension, at: number } | null}
+ * WHAT A TENSION IS ABOUT, by its matter (CF11's closed lists).
+ *   seat      the types about the seat under pressure (W1); `corruption_scandal` is about it ONLY where its own sides name
+ *             the ruling power (the template's sentence is "Evidence of official corruption has surfaced but powerful
+ *             figures resist investigation", and the generator writes its first side, "Corrupt officials", as the
+ *             governing power's name: historyGenerator.js :: substituteNames; on the 330 calm towns, 17 of 17 stored
+ *             scandals name it so. The officials are the ruling body's own; a scandal whose sides do not name the seat
+ *             is not read as one about it).
+ *   material  the types about a material strain short of a crisis (W3); never `guild_conflict`, never
+ *             `economic_disparity`.
+ * A tension is about a high conflict (W2) by its SIDES, not its type: a side whose words are one of the row's two powers.
  */
-export function sharpestTroubleOf(s) {
-  const list = /** @type {FrameTension[]} */ (arr(s?.history?.currentTensions))
+export const WEIGHT_MATTER = Object.freeze({
+  seat: Object.freeze(['legitimacy_crisis', 'succession_crisis', 'leadership_vacuum', 'tyranny', 'popular_uprising']),
+  seatWhereItNamesTheRuler: Object.freeze(['corruption_scandal']),
+  material: Object.freeze(['trade_collapse', 'trade_dispute', 'resource_scarcity', 'outside_debt', 'market_crash']),
+});
+
+/**
+ * A creditor power as the record marks it: by its name, the only mark the record gives (the two powers the `indebted`
+ * stress pushes onto the roster, generators/power/stressFactions.js, are the only names that carry the word; B1's read).
+ */
+const CREDITOR_POWER = /\bcreditor/i;
+
+/** The food bands below Secure, by the one ladder's own labels (data/bandLadders.js). */
+const FOOD_BELOW_SECURE = Object.freeze([FOOD_SECURITY_BANDS.pressured, FOOD_SECURITY_BANDS.importDependent,
+  FOOD_SECURITY_BANDS.deficit, FOOD_SECURITY_BANDS.famine].map((b) => b.label));
+
+/** A side or a power's name, compared as B1 read them: lower case, a leading "the " dropped. @param {unknown} v */
+const sideKey = (v) => str(v).toLowerCase().replace(/^the\s+/, '');
+
+/** @param {string} grade @returns {number} its row in WEIGHT_GRADES (0 the sharpest) */
+const gradeRank = (grade) => WEIGHT_GRADES.findIndex((row) => row.includes(grade));
+
+/**
+ * @typedef {Object} WeightStrain
+ * @property {'W1' | 'W2' | 'W3'} strain  the seat under pressure, two powers in a high conflict, a material strain
+ * @property {string} grade              one of WEIGHT_GRADES
+ * @property {string[]} [powers]          for W2: the conflict's two powers, as the record names them
+ */
+
+/**
+ * THE TROUBLE OF WEIGHT (CF11): among the town's tensions ABOUT a strain it holds, the one whose strain has the highest
+ * grade, the record's order breaking a tie; null where the town holds no strain, or no tension is about one it holds.
+ * @param {FrameSettlement | null | undefined} settlement
+ * @returns {{ tension: FrameTension, at: number, strain: WeightStrain } | null}
+ */
+export function troubleOfWeight(settlement) {
+  const s = settlement && typeof settlement === 'object' ? settlement : {};
+  const list = /** @type {FrameTension[]} */ (arr(s.history?.currentTensions))
     .map((tension, at) => ({ tension, at }))
     .filter(({ tension }) => !!tension && typeof tension === 'object' && str(tension.type) && arr(tension.factions).some((f) => str(f)));
   if (!list.length) return null;
-  return [...list].sort((a, b) => (sharpnessOf(b.tension) - sharpnessOf(a.tension)) || (a.at - b.at))[0];
+  const ps = s.powerStructure || {};
+  // W1: the seat under real pressure (legitimacy below 45 ALONE is not weight: only a tension about the seat makes it so)
+  const legitimacy = governanceLedger(/** @type {never} */ (s)).legitimacyScore;
+  const coup = coupContenders(/** @type {never} */ (s));
+  const seat = legitimacy < LEGITIMACY_CUTS.contested ? 'legitimacy-below-30'
+    : coup.incumbent.gated === false ? 'seat-ungated'
+      : legitimacy < LEGITIMACY_CUTS.tolerated ? 'legitimacy-below-45' : '';
+  const ruler = sideKey(coup.incumbent.name);
+  // W2: two powers in a recorded conflict at intensity high
+  const high = /** @type {Array<{ parties?: unknown, intensity?: unknown }>} */ (arr(ps.conflicts))
+    .filter((r) => !!r && typeof r === 'object' && r.intensity === 'high' && arr(r.parties).filter((p) => str(p)).length === 2);
+  // W3: a material strain short of a crisis
+  const material = FOOD_BELOW_SECURE.includes(str(s.economicState?.foodSecurity?.label)) ? 'food-below-secure'
+    : powersOf(s).some((f) => CREDITOR_POWER.test(powerName(f))) ? 'creditor-power'
+      : arr(s.economicState?.activeChains).some((c) => /** @type {{ status?: unknown }} */ (c)?.status === 'impaired') ? 'impaired-chain' : '';
+
+  /** @type {{ tension: FrameTension, at: number, strain: WeightStrain } | null} */
+  let best = null;
+  for (const { tension, at } of list) {
+    const type = str(tension.type);
+    const sides = arr(tension.factions).map(sideKey);
+    /** @type {WeightStrain[]} */
+    const about = [];
+    if (seat && (WEIGHT_MATTER.seat.includes(type) || (WEIGHT_MATTER.seatWhereItNamesTheRuler.includes(type) && !!ruler && sides.includes(ruler)))) {
+      about.push({ strain: 'W1', grade: seat });
+    }
+    const row = high.find((r) => arr(r.parties).some((p) => sides.includes(sideKey(p))));
+    if (row) about.push({ strain: 'W2', grade: 'high-conflict', powers: arr(row.parties).map(str) });
+    if (material && WEIGHT_MATTER.material.includes(type)) about.push({ strain: 'W3', grade: material });
+    if (!about.length) continue;
+    const strain = about.reduce((a, b) => (gradeRank(b.grade) < gradeRank(a.grade) ? b : a));
+    if (!best || gradeRank(strain.grade) < gradeRank(best.strain.grade)) best = { tension, at, strain };
+  }
+  return best;
 }
 
 /**
@@ -211,7 +307,8 @@ function houseOf(n) {
  */
 
 /**
- * Cast the sides of a town's sharpest standing trouble. Null where the record holds no trouble, or no seed (CF3).
+ * Cast the sides of a town's trouble of weight (CF11). Null where the record holds none (the town keeps today's sheet),
+ * or no seed (CF3).
  * @param {FrameSettlement | null | undefined} settlement
  * @returns {TroubleFrame | null}
  */
@@ -219,9 +316,9 @@ export function castTroubleFrame(settlement) {
   const s = settlement && typeof settlement === 'object' ? settlement : {};
   const seed = str(s._seed);
   if (!seed) return null; // CF3: a shared projection carries no seed, so no frame
-  const sharpest = sharpestTroubleOf(s);
-  if (!sharpest) return null;
-  const { tension, at } = sharpest;
+  const weighty = troubleOfWeight(s);
+  if (!weighty) return null;
+  const { tension, at } = weighty;
   const type = str(tension.type);
   const matter = TROUBLE_MATTER[type] || TROUBLE_MATTER_DEFAULT;
   const roster = rosterOf(s);
