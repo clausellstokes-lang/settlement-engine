@@ -500,3 +500,7 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   300,000: this lane's reading alone costs about 150,000 tokens (212 whole, the twin, the registry, PART 18 to 20);
   the window is a million and the allowance is not a constraint (the standard's rule 23). If a seat past 300,000
   makes a slip a fresh seat would not have made, the mark returns to 300,000.
+- 01:24 UTC · **VEIL-20 SEATED** (created 01:24:12 UTC): session_019yED1QdPy3HMRiKyAsd7aD, `lane/veil-20-2026-11-20` from
+  VEIL-19's pushed tip (9cbc2fa9f then: docs only above 72e8a855d). EIGHT SEATS, seven running: VEIL-19 (B, C, D, then
+  it hands back), VEIL-20, VEIL-VR17, VEIL-DOORS, REVIEW-VEIL-10, CI-FIT, GIT-DOOR; VEIL-R1 done. THE SAFETY NET (2)
+  is armed for 02:35 UTC (trig_0123nahsNmNqf7NqCRarWhht); it lists what each seat owes.
