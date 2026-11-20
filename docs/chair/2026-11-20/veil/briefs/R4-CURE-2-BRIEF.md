@@ -1,4 +1,4 @@
-# R4-CURE-2 — brief (VEIL-24, the lane's owner; the seventh chair's rulings bind; each vetoable by the owner)
+# R4-CURE-2 — brief (written by VEIL-24, re-stamped by VEIL-26, the lane's owner; the seventh chair's rulings bind; each vetoable by the owner)
 
 > STATUS: written ahead of need (the chair, 09:04: "the R4 second cure" follows R3). Its base (`<R3 merge commit>`, `<r4>`,
 > `<r4c1>`) is filled by the seat in the commit that launches its builder; until then no builder reads it.
@@ -8,7 +8,7 @@ green, and merges. You never push and never open a pull request. A security lane
 first; a failure falls toward WITHHOLDING, never toward sending.
 
 ## Where you work
-- Worktree `/home/user/wt/r4c2`, branch `v24-r4c2`, cut from THE LANE TIP AFTER R3 MERGED (`<R3 merge commit>`), with R4
+- Worktree `/home/user/wt/r4c2`, branch `v26-r4c2`, cut from THE LANE TIP AFTER R3 MERGED (`<R3 merge commit>`), with R4
   (dfa031f3e) and its first cure (a4b89bf9d) cherry-picked on it by the seat as `<r4>` and `<r4c1>`. `node_modules` in
   place (hard links). Leave those two commits as they are; your cure is ONE commit on top (units 1-5), and VR48 (unit 6) a
   SECOND commit after it. The seat squashes the first three into the lane's single R4 commit; VR48 stays its own.
@@ -25,10 +25,10 @@ first; a failure falls toward WITHHOLDING, never toward sending.
   exit by `sh scripts/gate-tail.sh <cmd>`, never through a pipe. Commit with the hooks; never `--no-verify`.
 - You touch no line of `src/data/faceHonorifics.js`, `cardDoor.js`, `seatKeeper.js` (VR47, merged on the lane at df6809f9c, seeds the honorific by name and title). The
   switch's file `src/domain/display/criminalVeilSwitch.js` is touched ONLY for unit 4.
-- Outputs under `docs/chair/2026-11-20/veil/out/v24/r4c2/`, one file per figure, committed with the cure.
+- Outputs under `docs/chair/2026-11-20/veil/out/v26/r4c2/`, one file per figure, committed with the cure.
 - YOUR MARK: about 250,000 tokens. Before it: commit what is green, hand-back current, say what is left.
 
-## THE RULINGS THAT BIND THIS STAGE (PART 24's list, numbers kept)
+## THE RULINGS THAT BIND THIS STAGE (PART 27's list, numbers kept; read PART 27 section 1 WHOLE: where this brief differs, that list governs)
 - 15 VR9: where a house is hidden whole, its HOLDER is withheld WHOLE WITH ITS TIES, never blanked. VR10: on every
   non-owner read every person id is re-keyed under ONE salt per read; every in-payload reference follows.
 - 16 THE SALT: VOLATILE on every function that draws randomness AND every function reaching it by the transitive closure
@@ -63,7 +63,7 @@ first; a failure falls toward WITHHOLDING, never toward sending.
    `block:power.criminalUnderside`; a town with a person and no criminal content reads 'hidden' not 'none'). GREEN: the
    present sets equal d136940c3's on every copy. `criminalVeilSwitch.test.js` stays green; its 24 known
    `(b): safety blackMarketCapture` reds are re-checked against the base and named, not touched.
-5. THE READER'S LAST HIT AT R3 (4db8e4208; PART 25 ruling 36 (c)): "black marketeer" served with Reveal DM on, a holder
+5. THE READER'S LAST HIT AT R3 (4db8e4208; PART 27 ruling 36 (c)): "black marketeer" served with Reveal DM on, a holder
    of the hidden Black market. Red first by the reader's probe; VR9's holder pass takes the holder whole with its ties,
    Reveal DM on as off, by the fold (ruling 28).
 5b. PLAUSIBLE FROM THE FIRST CURE, MEASURED: a numeric-id holder's ties are caught by string match (folds into unit 1);
@@ -87,7 +87,15 @@ first; a failure falls toward WITHHOLDING, never toward sending.
      EVERY read that serves the card: cure it there too, red first.
    - ONE registry row: `people.card` (gender is floor; it leaves only with the card: VR9's holder takes it whole).
    - A born arm that a WITHHELD card's (a holder's, VR9) `gender` is served nowhere, by search.
-   - Owner-visible: a field newly served. Say so in the hand-back; the seat writes it into PART 25's owner paragraph.
+   - Owner-visible: a field newly served. Say so in the hand-back; the seat writes it into PART 27's owner paragraph (section 5).
+
+7. RE-STATEMENTS R3 OWES TO THE RE-KEY (VEIL-26's read of R3-CURE-4, 12:4x): `tests/security/galleryServerVeil.pglite.test.js ::
+   goalsAimedAtWithheld` matches a served person to the stored one by STORED id; under VR10 it must match through the read's
+   person-id bijection (ruling 17), its tooth kept (a goal aimed at a withheld power still found and still counted). Read
+   every other R3 arm that keys a served person by id (R3's husk arm `husksOf` and the goal arms in
+   `galleryRosterChoices.pglite.test.js`) the same way; list each with its re-statement.
+8. THE CURATE NOTICE (merged 7ddf4876f; PART 27 ruling 40): if R3 as merged narrowed power.entry's reach, its condition was
+   re-checked at the R3 merge; touch nothing of `CurateMode.jsx` or `criminalVeilSwitch.js` beyond unit 4.
 
 ## GREEN, AT YOUR COMMIT (the seat re-runs each)
 R4's born test `tests/security/galleryVeilPeople.pglite.test.js` with the new arms; the six veil guards and R2's and R3's
@@ -99,5 +107,5 @@ Reveal-OFF read of the same town. Report 212's and its rollback's sha256; prove 
 212 adds that only the definer reads call is revoked from PUBLIC, anon and authenticated by name (VR27).
 
 ## Hand-back
-`docs/chair/2026-11-20/veil/out/v24/r4c2/R4C2-HANDBACK.md`, in R4-CURE-HANDBACK's form: per unit, red and green with files,
+`docs/chair/2026-11-20/veil/out/v26/r4c2/R4C2-HANDBACK.md`, in R4-CURE-HANDBACK's form: per unit, red and green with files,
 counts, CONFIRMED vs PLAUSIBLE. Last line: your commit's hash and the files it touches.
