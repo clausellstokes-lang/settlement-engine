@@ -1828,7 +1828,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `${r.name}'s quarter-day payment from ${s.name} arrived with a name attached: someone ${s.name} wants dealt with.`, colour: true },
       { line: (r, s) =>
-        `Someone has started counting the coin in ${r.name}'s house against what ${r.name} is known to earn. ${s.name} is watching the count.`, colour: true },
+        `Someone has started counting the coin in ${r.name}'s house against the household's known earnings. ${s.name} is watching the count.`, colour: true },
     ], ['military', 'criminal']),
     type: 'ally',
   },
@@ -2015,7 +2015,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `${r.name} pays for the common works with money borrowed from ${s.name}. ${r.name} cannot cross ${s.name}, and ${s.name} makes sure ${r.name} remembers it.`, colour: true },
       { line: (r, s) =>
-        `${s.name} holds the debts ${r.name} has run up, and so ${s.name} decides what ${r.name} can afford to do.`, colour: true },
+        `${s.name} holds the debts ${r.name} has run up, and so decides what may be spent.`, colour: true },
       { line: (r, s) =>
         `Every civic project ${r.name} announces has first been costed, quietly, in ${s.name}'s counting-room. The public believes the order is the other way around.`, colour: true },
       { line: (r, s) =>
