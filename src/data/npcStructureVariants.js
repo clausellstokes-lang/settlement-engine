@@ -36,7 +36,7 @@ export const POSITION_VARIANTS = Object.freeze({
     Object.freeze({ text: 'Holds the seat, and in a place this small everyone knows it; most quarrels end at its door.', needs: ['population: small'], excludes: ['crisis'] }),
     Object.freeze({ text: "Holds the seat in good years; the place is comfortable, and the seat's costs are met.", needs: ['prosperity: ≥ comfortable'], excludes: ['crisis'] }),
     Object.freeze({ text: 'Holds the seat; there is enough coin for the everyday work, if little over.', needs: ['prosperity: moderate'], excludes: ['crisis'] }),
-    Object.freeze({ text: 'Holds the seat while {export} goes out and coin comes back; there is room to act.', needs: ['export good'], excludes: ['crisis'] }),
+    Object.freeze({ text: 'Holds the seat while the place sends out {export} and coin comes back; there is room to act.', needs: ['export good'], excludes: ['crisis'] }),
     Object.freeze({ text: 'Holds the seat in a quiet season; there is time to act.', needs: [], excludes: ['crisis'] }),
   ]),
   military__stable__dominant: Object.freeze([
@@ -108,7 +108,7 @@ export const POSITION_VARIANTS = Object.freeze({
   ]),
   government__economic_stress__dominant: Object.freeze([
     Object.freeze({ text: 'Holds the seat while money is short, and people judge the seat by what it can no longer pay for.', needs: [], excludes: [] }),
-    Object.freeze({ text: 'Holds the seat while money is short, in a place that lives on what its {export} fetches.', needs: ['export good'], excludes: [] }),
+    Object.freeze({ text: 'Holds the seat while money is short, in a place that lives on what it gets for its {export}.', needs: ['export good'], excludes: [] }),
     Object.freeze({ text: 'Holds the seat while money is short, and {import} must still be bought in at whatever it costs.', needs: ['import good'], excludes: [] }),
     Object.freeze({ text: 'Holds the seat in a small place gone short of coin, where everyone knows what has gone unpaid.', needs: ['population: small'], excludes: [] }),
     Object.freeze({ text: 'Holds the seat while money is short, and every council meeting comes back to the same few coins.', needs: ['ruling body'], excludes: [] }),
@@ -207,7 +207,7 @@ export const CONSTRAINT_VARIANTS = Object.freeze({
   economy__stable__dominant: Object.freeze([
     Object.freeze({ text: 'Every new privilege it gathers in plain sight draws the eye of the seat and of its rivals.', needs: [], excludes: ['crisis'] }),
     Object.freeze({ text: 'Does not set the dues on trade; the council does, and the council hears every house.', needs: ['ruling body'], excludes: ['crisis'] }),
-    Object.freeze({ text: 'Lives on the {export} that goes out; whatever cuts that trade cuts this house first.', needs: ['export good'], excludes: ['crisis'] }),
+    Object.freeze({ text: 'Lives on the place\'s trade in {export}; whatever cuts that trade cuts this house first.', needs: ['export good'], excludes: ['crisis'] }),
     Object.freeze({ text: 'Must buy in {import} like everyone else, at prices set somewhere else.', needs: ['import good'], excludes: ['crisis'] }),
     Object.freeze({ text: 'Being first in the trade means being the one every complaint about prices is brought to.', needs: [], excludes: ['crisis'] }),
     Object.freeze({ text: 'Must keep the smaller houses of the guild content; the guild\'s rules bind the leading house too.', needs: ['guild'], excludes: ['crisis'] }),

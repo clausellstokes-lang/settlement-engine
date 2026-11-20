@@ -16,7 +16,7 @@
 import { readFileSync } from 'node:fs';
 import { beforeAll, describe, expect, it } from 'vitest';
 import { CONSTRAINT_VARIANTS, POSITION_VARIANTS, POSITION_POOL_OF } from '../../../src/data/npcStructureVariants.js';
-import { enrichNPCsWithStructure } from '../../../src/generators/npcStructure.js';
+import { enrichNPCsWithStructure, NOT_A_GOOD } from '../../../src/generators/npcStructure.js';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
@@ -163,6 +163,32 @@ describe('PEOPLE-1 B1b · every printed constraint is the record\'s (100 places 
     expect(misses).toEqual([]);
     expect(printed, 'premise: the births print pooled constraints').toBeGreaterThan(300);
     expect(housed, 'premise: some card names its own house').toBeGreaterThan(0);
+  });
+
+  it('a goods slot (both pools) agrees with no verb after it and never fills with a service or a work', () => {
+    // the integrator's unit of 2026-11-20: "furs and pelts goes out", "what its river fish fetches"; "sends out spellcasting"
+    const GOODS = [...Object.entries(POSITION_VARIANTS).map(([k, pool]) => ['structuralPosition', k, pool]), ...Object.entries(CONSTRAINT_VARIANTS).map(([k, pool]) => ['constraint', k, pool])]
+      .flatMap(([field, key, pool]) => /** @type {any[]} */ (pool).map((row, at) => ({ field, key, at, row })))
+      .filter((r) => /\{(?:export|import)\}/.test(r.row.text))
+      .map((r) => ({ ...r, re: new RegExp(`^${esc(r.row.text).replace(/\\\{(?:house|export|import)\\\}/g, '(.+)')}$`), slot: r.row.text.search(/\{(?:export|import)\}/) }));
+    const misses = [];
+    let filled = 0;
+    for (const { seed, s } of births) {
+      for (const c of s.npcs || []) {
+        for (const g of GOODS) {
+          const text = String((g.field === 'constraint' ? c.activeConstraint : c.structuralPosition) || '').replace(/ Still .+ as well\.$/, '');
+          const m = g.re.exec(text);
+          if (!m) continue;
+          filled++;
+          const fill = m[1];
+          const after = text.slice(text.indexOf(fill) + fill.length);
+          if (/^ (?:goes out|fetches)\b/.test(after) || / goes out| fetches/.test(after)) misses.push(`${seed} ${g.key}#${g.at}: a verb agrees with the slot: ${text}`);
+          if (NOT_A_GOOD.test(fill)) misses.push(`${seed} ${g.key}#${g.at}: a refused name fills the slot (${fill}): ${text}`);
+        }
+      }
+    }
+    expect(misses).toEqual([]);
+    expect(filled, 'premise: the births fill goods slots').toBeGreaterThan(30);
   });
 
   it('a seedless re-run of the structural pass prints no pooled constraint but index 0', () => {

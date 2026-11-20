@@ -589,7 +589,7 @@
     },
     {
       "id": "economy__stable__dominant.constraint.2",
-      "text": "Lives on the {export} that goes out; whatever cuts that trade cuts this house first.",
+      "text": "Lives on the place's trade in {export}; whatever cuts that trade cuts this house first.",
       "needs": [
         "export good"
       ],
