@@ -123,3 +123,8 @@ it still reds, STOP and the governed rung becomes its own unit on the line. A fr
 THE CHAIR (03:48 UTC): "V10-2 cabdfaa69" (origin/lane/veil-v102-2026-11-20) read by the chair, gone to the reader; MERGE
 `--no-ff` AFTER R2 IS MERGED (no builder in flight on galleryVeil.js); its hunk in `curateModelFor` only; after it the
 eight reds of VS1 (b)/(c) are gone (say the count); its stored figures: lighting census +1 file, one manifest row.
+
+OSR-C STOPPED AT ITS BOUND (merged as records only, 04:01 UTC): with the config through `DEFAULT_CONFIG` by
+`persistMerge.js :: mergePersistedState`'s merge, the walker is UNCHANGED (45 of 47; violations 4; register {2220, 1556,
+448} vs frozen {2214, 1552, 444}); the detector types a value by its SHAPE TOKEN, not its writer (`s.config` resolves to
+the corpus shape `config`, which never carries magicExists). No src change. To the chair: the governed rung as its own unit.
