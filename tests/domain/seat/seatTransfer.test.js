@@ -550,7 +550,7 @@ const PATHS = {
     causes: ['appointment'],
     run: (s) => pulse(s, {
       id: 'faction.gov', type: 'faction', candidateType: 'faction_government_change', applyMode: 'auto', targetSaveId: 's1', severity: 0.6,
-      headline: 'Merchant Guilds take the seat', summary: 'The seat changed hands.', reasons: [],
+      headline: 'Merchant Guilds take the seat', summary: 'U5-CURE fixture: government_change.', reasons: [],
       proposalPayload: { kind: 'government_change', settlementId: 's1', factionId: 's1:merchant_guilds' },
       metadata: { factionName: 'Merchant Guilds' },
     }),
@@ -605,7 +605,9 @@ describe('(12) U5-CURE (b): THE LAW DARK, the three paths are byte-identical at 
   /** Both fixtures dark: the crown city (licensed) and a civic town (kept under the law). */
   const FIXTURES = { crown: () => crownTown(), civic: () => place({ tier: 'town', government: 'Town Council' }) };
 
-  // RECORDED at 9a05215bc (the callers before U5-CURE), by this arm's own `digest`, before any caller was edited.
+  // RECORDED at 9a05215bc (the callers before U5-CURE), by this arm's own `digest`, before any caller was edited. The
+  // two rosterChange rows were re-recorded the same way (this file run in a `git archive` tree of 9a05215bc) when the
+  // fixture's summary left a state-prose wording (proseDrawnAnchors.walker); the other 20 rows read equal there.
   const RECORDED = {
     'civic:eventChange:appointment': '2a2319a200081990518ee5187f523d0b970280e658b9630a6ae7231cc7874a9e',
     'civic:eventChange:conquest': 'a2c423eb8c3bb76fc02af3e7a52caee9e5be9e527ed82784fbdd672f6fa9a7cd',
@@ -617,7 +619,7 @@ describe('(12) U5-CURE (b): THE LAW DARK, the three paths are byte-identical at 
     'civic:pulseTransfer:coup': 'd63b15b884b2e7eea63f5f405339268d954cb55ffad5028e5da031a046278b7d',
     'civic:pulseTransfer:election': '0459ffabb43a8ec0ae91572e71586e96d8ef62515606d1eac965253cdd322e1b',
     'civic:pulseTransfer:succession': 'dca96502b76cbe76efcb751bdd00beef6ac9d988bbf7f2ee96cbae87c1525d10',
-    'civic:rosterChange:appointment': 'b571a2d5716bbd8efdf7175d338ea4f2a060d15e884bb893a72f1d908fc8b41e',
+    'civic:rosterChange:appointment': '61cd36cdaf56a24c2c76685032a8012255e29ef5abbc829c83171124a6acdde2',
     'crown:eventChange:appointment': 'c506372f380686044559b50787b38472084d7bb0b53353da7691499444bf8188',
     'crown:eventChange:conquest': '70a7aed68c0876aa038bb3c82fdd16b628fdf5104b4f445408698975fab2634f',
     'crown:eventChange:coup': '98e3e1068d18c91cda7d859c8a066be149c995663f702a544b440639eda57801',
@@ -628,7 +630,7 @@ describe('(12) U5-CURE (b): THE LAW DARK, the three paths are byte-identical at 
     'crown:pulseTransfer:coup': '256f7092c533c247994fefdb1dd86414422e5bbb19857184264edb5617a7e8c1',
     'crown:pulseTransfer:election': '185326cc5cb66d2de70e92bfeafa333518c9e8b114910640534cdc1ca15bdeeb',
     'crown:pulseTransfer:succession': 'babe5d415740772bd062b8735d68c2798e146d7d6fe7849852dc75f3a58621a7',
-    'crown:rosterChange:appointment': '814c7e0ab4927c62682206da94132e78e630d21dd984add97179754157268797',
+    'crown:rosterChange:appointment': 'c184d3a992ab8b5aeb838d8b654603c0e2af7f5d32fb52908993dc4e0fe99829',
   };
 
   const runAll = (config) => {
