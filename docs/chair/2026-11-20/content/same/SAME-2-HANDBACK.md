@@ -1,6 +1,6 @@
 # SAME-2 HAND-BACK (kept current at every push)
 
-Last written: 2026-11-20 20:46 UTC.
+Last written: 2026-11-20 20:52 UTC.
 
 SEAT: SAME-2 of the seventh chair (session_019yED1SUxGVHyjQnoqoFvQ8). Prompt: `git show origin/lane/chair-2026-11-08:docs/chair/2026-11-20/seventh/prompts/SAME-2.txt` (SAME-1.txt is the assignment, renamed). Seated 17:49 UTC beside SAME-1; THE LANE IS YOURS at 36c5214d0 (the chair, 18:52). Branch `lane/same-2-2026-11-20`. Read SAME-1-HANDBACK.md for everything before 18:52 (the standing orders hold).
 
@@ -35,3 +35,6 @@ THE CHAIR, 20:31: FENCE ruled (person sense only; other "fence" -> the watch; th
 
 MERGED: H4 7979d5d70 (fence + rookery in the crime sense only; the garden fence released; ceiling 251; watch 0). DOOR PARTS 2-3 fb284e198 (repeatsInPlace, red first; `--plan` + `--text`; RANKED.md, RANKED-VISITOR.md, FULL.tsv, REPEATS.tsv, UNRESOLVED.md under door/; tables at 7e93c087b); red (repeat threshold planted at 3: 2 red) / green 80/80; eslint 0. SENT "SAME-CENSUS fb284e198" to the chair (repeats first; 438 over the bar, 360 covered by nothing (76 STATE/NARRATIVE); secrets confirm PAGE-8; visitor 436 / 123 moved; 311 `?` rows named).
 OPEN FOR THE SUCCESSOR: (a) CAUSES 3411c9c83 (lane/page-7-2026-11-20) by the door, at the unit's commit and its base (say the base: page-7 is not on this lane's tip); (b) DAILY's dm-by-construction arm on "DAILY <commit>"; (c) before any landing request: `npm run test:ratchet` at the tip with the line merged, read by name against RED-AT-LINE.tsv; (d) the chair's next rulings on the census's 76 uncovered STATE/NARRATIVE rows. Worktrees: /home/user/same2-door (door builder, ~357k tokens: retire it), same2-hide, same2-hide2, same2-hide4 (all merged). Door runs: scratchpad door/runs/hxd, runs/confirm, hxw-run/hxw, the visitor run.
+
+THE CHAIR, 20:37: THE LINE MOVED to 062504aa8 (point 85: the arrival paragraph's deepened pools; a secret that fits its holder): MERGED here at a966c0bf9 (one manifest conflict: all rows kept; no src file differs from the line). ON THE MERGED TREE the hideable walker reds ONE arm (RULE 2: a new ARRIVAL_SCENES::port line needs `docks`, unlisted): brief R (`SAME-2-REMEASURE-BRIEF.md`, 2badb528f), builder on `lane/same-2-remeasure-2026-11-20` (/home/user/same2-rm): unit 0 the house list re-taken; unit 1 the register re-taken at this tree, the arrival and secret rows before -> after (the door's first landed proof) to the chair, one line each. THIS LANE IS NOT PUSHED past fb284e198's hand-back until R's unit 0 is merged.
+THE CHAIR KEEPS: `docs/chair/2026-11-20/seventh/ci/LINE-NOW.md` (the line's tip, figures, known reds) beside `RED-AT-LINE.tsv`; THE RULES FOR EVERY LANE: `docs/chair/2026-11-20/seventh/prompts/COMMON-RULES.txt` (both on origin/lane/chair-2026-11-08). SAME-3: read COMMON-RULES.txt, then this hand-back whole.
