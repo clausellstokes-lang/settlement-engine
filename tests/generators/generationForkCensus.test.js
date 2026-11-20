@@ -364,7 +364,15 @@ const PICK_VARIANT_CALLS = 31;
 // `<seed>::rare-secrets::<family>::<person id>`), the natures, deeds and ties families for each of the probe row's ten named
 // people (30) and the outsiders' `::place` (1). Every string is the record's own seed and a person's own id: no clock, no
 // order of iteration, no view state; the town's stream of draws untouched. The register's fnv1a32External moves with it.
-const FNV_EXTERNAL_CALLS = 54;
+// RE-KEYED 2026-11-20 (DEPTH-2 hooks tranche 2, the chair's words of 16:22 and 16:35 UTC; DEPTH-2's ruling): 54 -> 55, MEASURED
+// by A6 at 027db8351 and attributed caller by caller (a probe recording each external fnv1a32 call's string and first src frames on
+// the probe row, at ed5813d40 and at this tip): the 54 strings of ed5813d40 stand byte for byte; the +1 is the hook draw's keyed
+// resolution (domain/facts/drawDeclared.js :: freshAdmitted, reached by npcGenerator.js :: drawLoyalty): the second tranche's
+// appends (other 70 -> 100, economy 38 -> 44) turn the town watch card's draw onto the military row "Weapons from the armoury ...",
+// refused there and resolved draw-free to "They've noticed the same group of faces ...", one fnv1a32 of
+// `<seed>::generatePopulation::people-hooks::npc_town_watch::npcData:NPC_FACTION_LOYALTY::<drawn>::<candidate>`. No roll is spent:
+// the town's stream of draws is untouched. The register's fnv1a32External moves with it.
+const FNV_EXTERNAL_CALLS = 55;
 /** The fork law A1 pins: the mint wrapper's equivalence rests on this line and nothing else. */
 const FORK_LAW = 'fork: (label) => createPRNG(`${seed}::${label}`),';
 /** §6.4's off-corpus block: a wizard-reachable switch, the keys it moves, and 24 seeds. */
