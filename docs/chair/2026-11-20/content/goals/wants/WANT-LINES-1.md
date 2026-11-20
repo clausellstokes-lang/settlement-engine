@@ -1,5 +1,12 @@
 # WANT-LINES-1 · the wants' tranche, file 1 of 7: 60 new DRAWN lines, the worst cells first
 
+> **READ BY THE CHAIR 16:33 UTC: 58 approved, 2 reworded as below** (word for word, the chair's): RANK/enter/short line 11
+> → "Stand in for any member of {power} who falls ill this season, and keep their work going until they are back.";
+> RANK/enter/long line 2 → "See someone of their own choosing follow them into {power}, starting higher than they did."
+> The reason, carried into every later file: no line may state something about a person or member the record may not
+> hold (a cleric or a childless card holds that cell): no line presumes a family, child, spouse, health, or a member's
+> state the record may not hold.
+
 GOALS-3 · builder 9 · 2026-11-20. Docs only: TEXT for the chair's reading and the owner's veto; nothing is built from it
 until the chair has read it. The cells and counts are the first 60 lines of the build order in
 [`WANTS-PROPOSAL.md`](WANTS-PROPOSAL.md) (`wants-by-pool.out.txt`, "THE BUILD ORDER", file 1). Each line is APPENDED to
@@ -57,7 +64,7 @@ New:
 8. Make a friend this season of one member of {power} who has been there far longer than they have.
 9. Win {power} one new piece of business or one useful friend that {power|it|they} did not have before.
 10. Carry one grievance of the newer members of {power} to those who lead {power|it|them}, and come back with an answer.
-11. Stand in for a member of {power} who has fallen ill, and keep their work going until they are back.
+11. Stand in for any member of {power} who falls ill this season, and keep their work going until they are back.
 12. Learn the work of one office in {power} this season, well enough to fill it if it falls empty.
 13. Keep a careful account of everything they do for {power} this season, so no one else can claim it.
 14. Speak well of those who lead {power} all season, and make sure word of it reaches them.
@@ -73,7 +80,7 @@ Existing (two of six, verbatim):
 
 New:
 1. Spend a whole working life in {power}, and be thanked for it at the end.
-2. Bring their children into {power} after them, starting higher than they did.
+2. See someone of their own choosing follow them into {power}, starting higher than they did.
 3. Open the doors of {power} to people like themselves, who were kept out before.
 4. Win their own line of work a louder voice inside {power}.
 5. Be chosen to bargain for {power} with outsiders, year after year.
