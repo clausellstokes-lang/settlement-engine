@@ -274,7 +274,7 @@ remembered number.** Migration numbers grow every release, so this guide
 deliberately does NOT pin a "latest" number that would rot and cause an operator
 to under-apply.
 
-**Current migration head: `210_public_prose_text_projection.sql`** (this
+**Current migration head: `213_function_grants_default_deny.sql`** (this
 filename is kept current by a freshness pin — `tests/docs/deployRunbookFreshness.test.js`
 derives the head from `supabase/migrations/` and fails the gate if this line drifts).
 <!-- @enforced-by tests/docs/deployRunbookFreshness.test.js -->
@@ -289,6 +289,14 @@ and 209 applied before it (both on their own lanes until STYLE-2-MERGE). A share
 composed blocks on the gallery and party pages only after its first save once the client that
 stamps `publicProse` has shipped, so one save per shared town is owed. Name it to the owner; it
 is never scripted.
+
+`213_function_grants_default_deny.sql` (SEC-GRANTS-2, finding V10-8) closes by name what Supabase's
+default privileges left open to the visitor roles: the emergency script's 157 server-only functions
+(a no-op where the owner already ran `docs/chair/2026-11-20/security/EMERGENCY_REVOKE.sql`), the three
+admin doors and the ticket thread to anon, and 21 helpers no visitor context runs; and it makes five
+guards NULL-safe (set_curated, set_featured, set_featured_map, list_ticket_thread, get_credit_balance).
+No table, column, row or policy. Apply it after 212; read its preamble and run its one-row check
+(the chair's deploy document) after it. It is never reversed as a blanket down: see its `@rollback`.
 
 **Read these preambles before the push, whatever the head number says.** Most
 migrations are additive and need no separate reading; these are the pending ones whose

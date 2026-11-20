@@ -16,7 +16,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { basename, join } from 'node:path';
 
 export const MIGRATION_TRAIN_BASE_HEAD = 121;
-export const MIGRATION_TRAIN_REPO_HEAD = 210;
+export const MIGRATION_TRAIN_REPO_HEAD = 213;
 
 const FORWARD_ONLY_REASON = [
   'No automatic schema rollback is admitted for this wave.',
@@ -839,6 +839,39 @@ export const MIGRATION_WAVES = Object.freeze([
     }),
     expectedObjects: Object.freeze([
       Object.freeze({ kind: 'function', name: '_gallery_sanitize_public_json' }),
+    ]),
+  }),
+  // 213 lands with its own lane's entry (SEC-GRANTS-2), written against 211's and 212's.
+  Object.freeze({
+    id: 'function-grants-default-deny',
+    from: 213,
+    to: 213,
+    purpose: '213 — FUNCTION GRANTS, DEFAULT DENY (finding V10-8, CRITICAL; lane SEC-GRANTS-2). Supabase\'s default '
+      + 'privileges grant EXECUTE on every new function of schema public to anon, authenticated and service_role, so a '
+      + 'migration that writes only `revoke … from public` left 157 server-only SECURITY DEFINER functions callable by '
+      + 'any visitor. 213 closes by name the emergency script\'s 157 (from public, anon, authenticated; service_role '
+      + 'granted: a no-op where the owner already ran docs/chair/2026-11-20/security/EMERGENCY_REVOKE.sql), the three '
+      + 'admin doors and list_ticket_thread to anon, and 21 invoker helpers no visitor context runs; and it re-states '
+      + 'five bodies with ONE guard line each made NULL-safe (set_curated, set_featured, set_featured_map, '
+      + 'list_ticket_thread, get_credit_balance). account_is_active is left as it stands (ruling VR38). No table, '
+      + 'column, constraint, policy or row. Its statements depend on no object 211 or 212 creates. DEPLOYMENT remains '
+      + 'the owner\'s manual act after 212 (`supabase db push` plus the applied-head bump in that same act), with the '
+      + 'one-row read-only check of the deploy document after it.',
+    rollback: Object.freeze({
+      mode: 'forward-only',
+      reason: [
+        FORWARD_ONLY_REASON,
+        'Its own @rollback annotation spells the reversal out: re-run the five bodies as they stood at 210 verbatim and '
+        + 're-grant the 21 invoker helpers — which is why 213 classifies as documented-manual-reversal rather than '
+        + 'taking the wave policy. The 157, the three admin doors\' and the ticket thread\'s revokes are NEVER reversed '
+        + 'as a blanket down: that re-opens V10-8 (a user\'s decrypted provider key, the BYOK master secret, the '
+        + 'actor-trusting admin functions). Nothing is destroyed on reversal: 213 creates no object and touches no row.',
+      ].join(' '),
+    }),
+    expectedObjects: Object.freeze([
+      Object.freeze({ kind: 'function', name: 'set_curated' }),
+      Object.freeze({ kind: 'function', name: 'list_ticket_thread' }),
+      Object.freeze({ kind: 'function', name: 'get_credit_balance' }),
     ]),
   }),
 ]);
