@@ -69,8 +69,8 @@ export const powerBandOfRole = role => { // COHERENCE-POWERS-5 (N2): the keyword
     'crime lord',
   ];
   const MID_POWER = ['council_member', 'priest', 'wealthy_merchant', 'wizard', 'knight', 'magister', 'sergeant'];
-  const r = String(role || '').toLowerCase();
-  return HIGH_POWER.some(kw => r.includes(kw)) ? 'high' : MID_POWER.some(kw => r.includes(kw)) ? 'moderate' : 'low';
+  const fold = s => String(s || '').toLowerCase().replace(/_/g, ' '), r = fold(role); // PAGE-3 K1: '_' and ' ' fold alike, both sides ('guild_master' meets 'Guild Master')
+  return HIGH_POWER.some(kw => r.includes(fold(kw))) ? 'high' : MID_POWER.some(kw => r.includes(fold(kw))) ? 'moderate' : 'low';
 };
 // one draw within the role's band (people/poolMap.js :: POWER_BANDS), as before: the same one `_rng()` call, the same values
 const generateNPCPowerLevel = role => { const band = POWER_BANDS[powerBandOfRole(role)]; return { level: band.level, power: band.floor + Math.floor(_rng() * band.span) }; };
