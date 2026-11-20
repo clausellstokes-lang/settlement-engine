@@ -144,3 +144,34 @@ could fold one salt for every read), and the twin's salt drawn once per page loa
 read and re-stated under THE SEAT'S RULING (vetoable: modulo the read's person-id bijection, renamed by first appearance;
 teeth: a reference not following its card reds, any stored id served reds, a changed non-id byte reds), then R2-BRIEF's
 green list.
+
+## 7. The chair's word of 07:10 and 07:14 UTC: the salt, VR46, the successor
+
+**THE SALT (07:10, binding on R4-CURE; relayed to its builder):** (1) red first, honest about plan caching: the prepared
+read executed AT LEAST SEVEN TIMES (a generic plan after five) and once more under `plan_cache_mode = force_generic_plan`;
+green: every execution a different salt; then VOLATILE on every function that draws or carries the salt. (2) THE FINAL
+CATALOGUE: one statement listing `provolatile` for every function 211 and 212 create or restate, each with its reason; no
+function that reaches the salt is immutable or stable, directly or through a call. **211 AND 212 IN ONE PUSH:** 211 is
+byte-frozen and its own text keeps its own declarations (`_gallery_veil` IMMUTABLE there); 212 runs after it and RESTATES
+`_gallery_veil` (and every function that carries the salt): 212's restatement is THE FINAL DEFINITION a deployed database
+holds; between the two statements, inside one migration run, no read is served. (3) THE COST LAW re-measured, before and
+after. (4) THE TWIN: one salt a projection; two projections of one town in one page load differ in their person ids.
+**VR46 (07:10, the seat's guard ruling, no veto, two teeth added):** a guard that pins a served person id byte-for-byte is
+re-stated modulo the read's person-id bijection (canonical names by first appearance), every other byte compared exactly;
+teeth, each executed: (i) a reference not following its card reds; (ii) any stored person id served reds; (iii) a changed
+non-id byte reds; (iv) within one read the re-key is a BIJECTION (two stored people under one id, or one person under two,
+reds); (v) two reads of one town DIFFER in their person ids (the server through the prepared statement; the twin). A red
+that does not hold under the re-statement stops the builder.
+
+**FOR THE OWNER, IN PLAIN WORDS: WHAT A READER OF A SHARED PAGE LOSES BY THE RE-KEY (VR10).** Every time a visitor opens a
+shared town, each person in it gets a fresh, random id that holds only for that one load of the page. So: a link or an
+anchor pointing at one person's card stops working after a reload (the card is still there, under a new id); anything a
+visitor's browser might remember about a person by their id between visits would not carry over (the seat found no such
+store in the page code today: a search of the page and library code for anchors, scrolling or local storage tied to a
+person found none; PLAUSIBLE, read, not executed); and an imported copy keeps the ids of the one read it was taken from,
+so two imports of the same town cannot be matched person to person by id (an import is always a new save, so nothing in
+the app relies on that). Names, roles and every tie between people are unchanged within a page; only the hidden key moves.
+
+**THE SUCCESSOR (07:14):** VEIL-23 (session_019yED1SPikQqQKF16wCQQfC) is seated beside this seat on its tip and writes
+nothing until the chair's word. THE HAND-OVER at the first clean boundary (after "R3", or after the R4 cure merged green,
+or at 380,000 tokens): this file current with a section "the hand-over", then "<stage> <commit>, HANDED OVER".
