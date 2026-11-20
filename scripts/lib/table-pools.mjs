@@ -68,6 +68,8 @@ export const TABLE_POOLS = Object.freeze([
   // CENSUS-5d unit 3: the two left of CENSUS-5c's list that are one export (R-R, read by 5c and re-read here).
   { id: 'warRemembrance.WAR_ENDING_TELLINGS', module: 'src/domain/display/warRemembrance.js', name: 'WAR_ENDING_TELLINGS', drawKind: 'T', rulings: ['colour'], drawSite: 'warRemembrance.js (ending-keyed by the record\'s classifier)' },
   { id: 'deityEffects.DEITY_AXIS_EFFECTS', module: 'src/domain/display/deityEffects.js', name: 'DEITY_AXIS_EFFECTS', drawKind: 'T', rulings: ['colour'], drawSite: 'deityEffects.js (axis-keyed)', lines: (t) => Object.values(t).flatMap((axis) => Object.values(axis).map((e) => e.effect)) },
+  // PLACE-1 (entrepotNote, 2026-11-20): the chain cards' entrepot note, one declared pool a chain id (row 0 today's sentence, read from the chain).
+  { id: 'entrepotNotes.ENTREPOT_NOTES', module: 'src/data/entrepotNotes.js', name: 'ENTREPOT_NOTES', drawKind: 'H', drawSite: 'steps/economyReconcilePass.js → entrepotNotes.js :: entrepotNotesOf (drawDeclared over pickVariantMixed, key `${seed}::entrepotNote::${chainId}`)', lines: (t) => Object.values(t) },
 ]);
 
 /**

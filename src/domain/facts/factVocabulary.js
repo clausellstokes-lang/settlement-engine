@@ -568,6 +568,13 @@ export const FACT_DIMENSIONS = Object.freeze({
     reader: (/** @type {FactsLike} */ f, /** @type {string|null} */ key) => (f.orderForce && typeof f.orderForce === 'object' && key ? bool(/** @type {Record<string, unknown>} */ (f.orderForce)[key]) : undefined) }),
   // ── the crisis dimension (the inverse default) ──
   crisis: dim({ shape: 'crisis', home: 'crisis', reader: (f) => f.crisis }),
+  // PLACE-1 (the chair's ruling of 2026-11-20 17:18 UTC, "THE ATOM IS GRANTED: ATOM carrier: own|transit :
+  // src/domain/facts/chainCarrier.js :: chainCarrierOf : chain-scoped"; vetoable by the owner, on the veto list as new
+  // vocabulary), APPENDED: what carries the chain a line is drawn for, the place's own ground (`own`) or passing trade
+  // (`transit`), read per chain through `factsOf(record).chainCarrier` (the leaf `chainCarrierOf`); the draw hands the chain
+  // as `ctx.chain` (`data/entrepotNotes.js`), and without it the atom is unanswered.
+  carrier: dim({ shape: 'presence', home: 'chainCarrier', keys: Object.freeze(['own', 'transit']), needsContext: 'chain',
+    reader: (f, key, ctx) => { const read = /** @type {{ chainCarrier?: unknown }} */ (f).chainCarrier; return typeof read === 'function' && key && ctx && 'chain' in ctx ? read(ctx.chain) === key : undefined; } }),
 });
 
 /** The crisis dimension's legal values. */

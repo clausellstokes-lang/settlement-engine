@@ -60,6 +60,7 @@ import {
   nativeSemanticResourceKeys,
 } from '../../domain/content/customContentSemanticAuthority.js';
 import { hasTradeRouteConnection } from '../../domain/tradeRouteSemantics.js';
+import { entrepotNotesOf } from '../../data/entrepotNotes.js'; // PLACE-1 (entrepotNote): the chain cards' notes from their declared pools
 
 /**
  * Final trade-list normalization (exported for focused tests). Re-applies
@@ -360,6 +361,7 @@ registerStep('economyReconcilePass', {
     projectCustomTradeSemantics(economicState, ctx.neighbourProfile);
   }
 
+  if (Array.isArray(economicState.activeChains)) economicState.activeChains = entrepotNotesOf(economicState.activeChains, { config: effectiveConfig, economicState, institutions, tier }, ctx._seed); // PLACE-1 (entrepotNote): each chain's note from its pool, keyed on the seed, after the chains' final writer
   // ── 5. Supply-chain receipts from the final economy ─────────────────────
   emitChainTraces(ctx, economicState, tier);
 

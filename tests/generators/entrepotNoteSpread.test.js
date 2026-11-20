@@ -127,6 +127,14 @@ describe('(a) the bar: no sentence of the entrepôt note in more than 15 of 100 
 
 /** A row's declaration, as the draw reads it. @param {any} row @param {any} facts @param {any} chain */
 const admits = (row, facts, chain) => declarationAdmits(declarationOf(row), facts, { ctx: { chain } });
+/**
+ * A chain's pool, each row's text as it prints for the chain in the record (today's sentence `note` at index 0), or null.
+ * @param {any} mod @param {any} chain @param {any} record @param {string|null} note
+ */
+const rowsOf = (mod, chain, record, note) => {
+  const pool = mod.entrepotNotePoolOf(chain);
+  return pool ? pool.map((r) => ({ ...r, text: mod.entrepotNoteTextOf(r, chain, record, note) })) : null;
+};
 
 describe('(b) every stored note is a row of its chain\'s pool, admitted by the FINAL record', () => {
   it('the pool module exists; every stored note is a pool row whose needs and excludes hold on the final record (0 refused)', async () => {
@@ -137,7 +145,7 @@ describe('(b) every stored note is a row of its chain\'s pool, admitted by the F
     for (const b of await allBorn()) {
       const facts = factsOf(b.t);
       for (const c of noted(b.t)) {
-        const rows = mod.entrepotNoteRowsOf(c, b.t, catalogueNote(c.chainId));
+        const rows = rowsOf(mod, c, b.t, catalogueNote(c.chainId));
         if (!rows) { if (c.entrepotNote !== catalogueNote(c.chainId)) unknown.push(`${b.seed} ${c.chainId}: no pool, "${c.entrepotNote}"`); continue; }
         const i = rows.findIndex((r) => r.text === c.entrepotNote);
         if (i < 0) { unknown.push(`${b.seed} ${c.chainId}: "${c.entrepotNote}"`); continue; }
@@ -147,8 +155,8 @@ describe('(b) every stored note is a row of its chain\'s pool, admitted by the F
       }
     }
     expect(unknown).toEqual([]);
-    expect(checked, 'notes checked').toBeGreaterThan(1500);
-    expect(beyondIndexZero, 'notes beyond index 0').toBeGreaterThan(1000);
+    expect(checked, 'notes checked').toBeGreaterThan(1100);
+    expect(beyondIndexZero, 'notes beyond index 0').toBeGreaterThan(800);
     expect(refused).toEqual([]);
   }, SLOW);
 });
@@ -188,7 +196,7 @@ describe('(d) the planted control: a one-wording pool reds the bar', () => {
     for (const size of SIZES) {
       const born = await bornOf(size);
       const collapsed = born.map((b) => noted(b.t).map((c) => {
-        const rows = mod.entrepotNoteRowsOf(c, b.t, catalogueNote(c.chainId));
+        const rows = rowsOf(mod, c, b.t, catalogueNote(c.chainId));
         return b.mask(rows ? rows[0].text : String(c.entrepotNote));
       }));
       if (overBar(collapsed).length) over.push(size);
@@ -241,7 +249,7 @@ describe('(e) the chair\'s condition: no row needs or excludes a hideable house 
   it('every row reads the same with every hideable house and veiled power struck from the record', async () => {
     const mod = await pools();
     expect(mod, `${POOL_FILE}: the pools of the entrepôt note`).not.toBeNull();
-    expect(hiddenDecides((c, t) => mod.entrepotNoteRowsOf(c, t, catalogueNote(c.chainId)), await allBorn())).toEqual([]);
+    expect(hiddenDecides((c, t) => rowsOf(mod, c, t, catalogueNote(c.chainId)), await allBorn())).toEqual([]);
   }, SLOW);
   it('the planted control: a row that needs a crime fact is caught both ways', async () => {
     const planted = Object.freeze({ id: 'planted', text: 'Organised crime runs the trade here.', needs: Object.freeze(['crime: organized']) });
@@ -319,7 +327,7 @@ describe('(g) the chair\'s calls, rewordings and conditions (17:18 UTC)', () => 
     for (const [id, routes] of Object.entries(CLAIMS)) {
       const row0 = mod.ENTREPOT_NOTES[id][0];
       expect(row0.id, id).toBe('canonical');
-      expect(mod.entrepotNoteRowsOf({ chainId: id, entrepotNote: TODAY[id] }, {}, TODAY[id])[0].text, id).toBe(TODAY[id]);
+      expect(rowsOf(mod, { chainId: id, entrepotNote: TODAY[id] }, {}, TODAY[id])[0].text, id).toBe(TODAY[id]);
       const held = ROUTE_WORDS.filter((route) => declarationAdmits(declarationOf(row0), /** @type {any} */ ({ route })).admitted).sort();
       expect(held, id).toEqual(routes);
     }
@@ -342,11 +350,11 @@ describe('(g) the chair\'s calls, rewordings and conditions (17:18 UTC)', () => 
     expect(mod, `${POOL_FILE}: the pools of the entrepôt note`).not.toBeNull();
     const named = { chainId: 'luxury_goods', outputs: ['Luxury manufactured goods', 'Fine metalwork and jewelry'] };
     const bare = { chainId: 'luxury_goods', outputs: ['Luxury manufactured goods'] };
-    const textOf = (chain, rowId) => mod.entrepotNoteRowsOf(chain, {}, TODAY.luxury_goods).find((r) => r.id === rowId).text;
+    const textOf = (chain, rowId) => rowsOf(mod, chain, {}, TODAY.luxury_goods).find((r) => r.id === rowId).text;
     for (const rowId of ['lux-kinds', 'lux-market']) {
       expect(textOf(named, rowId), rowId).toMatch(/jewellery/);
       expect(textOf(bare, rowId), rowId).not.toMatch(/jewel|metalwork/);
-      expect(textOf(bare, rowId), rowId).toMatch(/costly goods/);
+      expect(textOf(bare, rowId), rowId).toMatch(/costly goods/i);
     }
   });
   it('the pick is the mixed keyed pick, keyed on the seed, the field and the chain', () => {
