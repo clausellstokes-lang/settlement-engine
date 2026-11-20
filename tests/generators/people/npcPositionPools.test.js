@@ -27,16 +27,18 @@ import { declarationAdmits, declarationOf, parseAtom } from '../../../src/domain
 const WRITER = readFileSync(new URL('../../../src/generators/npcStructure.js', import.meta.url), 'utf8');
 const cut = (/** @type {string} */ from, /** @type {string} */ to) => { const a = WRITER.indexOf(from); const b = WRITER.indexOf(to, a); if (a < 0 || b < 0) throw new Error(`slice ${from}`); return WRITER.slice(a, b); };
 const TABLE = [cut('const GOVERNANCE_FRACTURED', 'function getPrimaryCondition'), cut('const T = {};', '// ── Score NPCs'), 'export { T };'].join('\n');
+/** @type {Record<string, any>} the writer's own rows per `T` key */
+const { T } = await import(/* @vite-ignore */ `data:text/javascript;base64,${Buffer.from(TABLE).toString('base64')}`);
 /** @type {Record<string, string>} the writer's own line per `T` key */
-let T_POSITION = {};
-beforeAll(async () => {
-  const { T } = await import(/* @vite-ignore */ `data:text/javascript;base64,${Buffer.from(TABLE).toString('base64')}`);
-  T_POSITION = Object.fromEntries(Object.entries(T).map(([k, v]) => [k, /** @type {any} */ (v).position]));
-});
+const T_POSITION = Object.fromEntries(Object.entries(T).map(([k, v]) => [k, /** @type {any} */ (v).position]));
 
 const esc = (/** @type {string} */ s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-/** Every row of every pool, with its key, index and a matcher for its filled text. */
-const ROWS = Object.entries(POSITION_VARIANTS).flatMap(([key, pool]) => pool.map((row, at) => ({
+/**
+ * Every row of every pool AS THE WRITER COMPOSES IT (PEOPLE-1 B1c: [the `T` row, ...the data pool]), with its key, index and a
+ * matcher for its filled text: index 0 is the `T` row's own line with the `T` row's own declaration (its `tags`), never retyped.
+ */
+const composedOf = (/** @type {string} */ key) => [{ text: T_POSITION[key], ...declarationOf(T[key], { tagged: true }) }, ...POSITION_VARIANTS[key]];
+const ROWS = Object.keys(POSITION_VARIANTS).flatMap((key) => composedOf(key).map((row, at) => ({
   key, at, row, re: new RegExp(`^${esc(row.text).replace(/\\\{(?:house|export|import)\\\}/g, '.+')}$`),
 })));
 const VARIANTS = ROWS.filter((r) => r.at > 0);
@@ -57,11 +59,12 @@ const HOLDS = /^Holds the seat\b/;
 const isHolderPool = (/** @type {string} */ key) => /^government__.*__dominant$/.test(key);
 
 describe('PEOPLE-1 B1 · the pools, canonical at zero', () => {
-  it('index 0 of every pool is the writer\'s own line; every alias names a pool of the same line', () => {
+  it('index 0 of every pool is the writer\'s own line (composed from the T row; the data pool holds the siblings only); every alias names a pool of the same line', () => {
     for (const [key, pool] of Object.entries(POSITION_VARIANTS)) {
       expect(T_POSITION[key], `${key} is a T row`).toBeDefined();
-      expect(pool[0].text, key).toBe(T_POSITION[key]);
-      expect(pool.length, `${key} is a pool`).toBeGreaterThan(1);
+      expect(composedOf(key)[0].text, key).toBe(T_POSITION[key]);
+      expect(pool.map((r) => r.text), `${key}: the data pool holds no copy of its T line`).not.toContain(T_POSITION[key]);
+      expect(composedOf(key).length, `${key} is a pool`).toBeGreaterThan(1);
     }
     for (const [alias, key] of Object.entries(POSITION_POOL_OF)) expect(T_POSITION[alias], alias).toBe(T_POSITION[key]);
   });
@@ -89,7 +92,7 @@ describe('PEOPLE-1 B1 · the pools, canonical at zero', () => {
         economicState: { prosperity: condition === 'economic_stress' ? 'Struggling' : 'Comfortable', foodSecurity: { label: condition === 'food_crisis' ? 'Famine' : '' }, primaryExports: ['Raw wool'], primaryImports: ['Iron'] },
       });
       const cards = rank === 'dominant' ? [head(category, 1, 'a'), head(category, 3, 'b'), head(category, 3, 'c')] : [head(category, 3, 'a'), head(category, 3, 'b'), head(category, 1, 'c')];
-      const pool = POSITION_VARIANTS[POSITION_POOL_OF[key] || key];
+      const pool = composedOf(POSITION_POOL_OF[key] || key);
       const canon = new Set([pool[0].text, 'Heads the leading house in the trade in quiet times, though its word counts for little beyond the trade.', 'Heads the casters in quiet times; their spells are in demand, though their word counts for little beyond them.']);
       for (const c of enrichNPCsWithStructure(cards, place(undefined))) {
         const p = String(c.structuralPosition || '').replace(HOUSE_TAIL, '');

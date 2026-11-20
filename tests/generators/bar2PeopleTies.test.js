@@ -17,6 +17,14 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { CONSTRAINT_VARIANTS, POSITION_VARIANTS } from '../../src/data/npcStructureVariants.js';
+import { readFileSync } from 'node:fs';
+
+// PEOPLE-1 B1c (the chair's ruling of 20:30 UTC): a pool's index 0 is the writer's own `T` row, its one home; read from the
+// writer's table, SLICED FROM ITS FILE and evaluated (`npcPositionPools.test.js`'s method; never retyped)
+const WRITER = readFileSync(new URL('../../src/generators/npcStructure.js', import.meta.url), 'utf8');
+const cutT = (/** @type {string} */ from, /** @type {string} */ to) => { const a = WRITER.indexOf(from); const b = WRITER.indexOf(to, a); if (a < 0 || b < 0) throw new Error(`slice ${from}`); return WRITER.slice(a, b); };
+/** @type {Record<string, { position: string, constraint: string }>} */
+const { T } = await import(/* @vite-ignore */ `data:text/javascript;base64,${Buffer.from([cutT('const GOVERNANCE_FRACTURED', 'function getPrimaryCondition'), cutT('const T = {};', '// ── Score NPCs'), 'export { T };'].join('\n')).toString('base64')}`);
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** the census's 720 shape (r2r-) @param {string} seed */
@@ -66,7 +74,8 @@ const resolved = (seed, line) => {
   if (!line.startsWith('@')) return line;
   const field = line.startsWith('@c:') ? 'activeConstraint' : 'structuralPosition';
   const key = line.replace(/^@(?:c:)?/, '');
-  const pool = (field === 'activeConstraint' ? CONSTRAINT_VARIANTS : POSITION_VARIANTS)[key].map((r) => new RegExp(`^${r.text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\\\{(?:house|export|import)\\\}/g, '.+')}$`));
+  // the pool as the writer composes it (B1c): [the T row's own line, ...the data pool]
+  const pool = [{ text: T[key][field === 'activeConstraint' ? 'constraint' : 'position'] }, ...(field === 'activeConstraint' ? CONSTRAINT_VARIANTS : POSITION_VARIANTS)[key]].map((r) => new RegExp(`^${r.text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\\\{(?:house|export|import)\\\}/g, '.+')}$`));
   const printed = JSON.parse(towns[seed]).npcs.map((/** @type {any} */ n) => String(n[field] || ''));
   return printed.find((/** @type {string} */ p) => pool.some((re) => re.test(p))) ?? `(no member of ${key} prints)`;
 };

@@ -16,9 +16,18 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { POSITION_VARIANTS } from '../../src/data/npcStructureVariants.js';
+import { readFileSync } from 'node:fs';
 
-/** PEOPLE-1 B1: a pooled row's member, by identity (a `{slot}` reads as any fill). @param {string} key @param {unknown} text */
-const memberOf = (key, text) => POSITION_VARIANTS[key].some((r) => new RegExp(`^${r.text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\\\{(?:house|export|import)\\\}/g, '.+')}$`).test(String(text)));
+// PEOPLE-1 B1c (the chair's ruling of 20:30 UTC): a pool's index 0 is the writer's own `T` row, its one home; read from the
+// writer's table, SLICED FROM ITS FILE and evaluated (`npcPositionPools.test.js`'s method; never retyped)
+const WRITER = readFileSync(new URL('../../src/generators/npcStructure.js', import.meta.url), 'utf8');
+const cutT = (/** @type {string} */ from, /** @type {string} */ to) => { const a = WRITER.indexOf(from); const b = WRITER.indexOf(to, a); if (a < 0 || b < 0) throw new Error(`slice ${from}`); return WRITER.slice(a, b); };
+/** @type {Record<string, { position: string, constraint: string }>} */
+const { T } = await import(/* @vite-ignore */ `data:text/javascript;base64,${Buffer.from([cutT('const GOVERNANCE_FRACTURED', 'function getPrimaryCondition'), cutT('const T = {};', '// ── Score NPCs'), 'export { T };'].join('\n')).toString('base64')}`);
+
+/** PEOPLE-1 B1: a pooled row's member, by identity (a `{slot}` reads as any fill); the pool as the writer composes it (B1c:
+ * [the T row's own line, ...the data pool]). @param {string} key @param {unknown} text */
+const memberOf = (key, text) => [{ text: T[key].position }, ...POSITION_VARIANTS[key]].some((r) => new RegExp(`^${r.text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\\\{(?:house|export|import)\\\}/g, '.+')}$`).test(String(text)));
 
 /** @param {string} seed the readers' shape (rpf-/rw3-: DEFAULT_CONFIG, Random off for crises) */
 function born(seed) {

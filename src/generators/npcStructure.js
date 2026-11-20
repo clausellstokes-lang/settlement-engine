@@ -570,8 +570,8 @@ function holderHouseLineOf(npc) {
 // within the whole cast's cut, as before. Draw-free.
 // ── THE PLACE IN THE ORDER, POOLED (PEOPLE-1 B1, 2026-11-20; the chair's ruling of 16:41 UTC on PROPOSAL-structuralPosition.md) ─
 // A row's position was one line, so the calm rows printed alike in most towns of a size. The row's pool
-// (`data/npcStructureVariants.js`, keyed by the `T` key) holds today's line at index 0 and wordings read from what the record
-// holds; each is resolved against the record's facts (`filterDeclared`, the card as `ctx.npc`) and the card's wording is
+// (`data/npcStructureVariants.js`, keyed by the `T` key) holds wordings read from what the record holds, after index 0, the
+// row's own line (composed by `pooledLineOf` from the `T` row itself: PEOPLE-1 B1c); each is resolved against the record's facts (`filterDeclared`, the card as `ctx.npc`) and the card's wording is
 // chosen among the admitted ones whose slots fill by `pickVariantMixed` (the chair's ruling of 17:18 UTC: the hash mixed
 // before the modulo), keyed `<_seed>::npcStructure.<field>::<card id>`. No roll; a seedless call, or a card with no id,
 // prints index 0. The ledger notes the chosen wording only (the quiet gate of `people/goals.js`): index 0 is already noted
@@ -583,8 +583,13 @@ function holderHouseLineOf(npc) {
  * and import names their data homes can hand over (`supplyChainData.js` chain outputs and dependencies, `resourceData.js`
  * tradeGoods, `computeActiveChains.js`'s service export labels and import labels, `economicState.js`'s stage-5 labels): each
  * that names a service or a work. A contraband or forged good is refused too (a crime fact, the chair's (e)).
+ * Spelled as two alternations tested together (PEOPLE-1 B1c, the integrator's word): the spellwork names in their own, so no
+ * one alternation mixes them with any other name (the arcane-spelling census reads a line at a time); the same names refused.
  */
-export const NOT_A_GOOD = /\b(?:trade|passage|rights?|services?|intelligence|maps|logistics|access|tolls?|labou?r|transport|hire|escort(?:ed)?|warding|assay|resupply|handling|disputes|minting|killing|trials|tourism|revenue|divination|scrying|servants|clearance|education|ferries|gambling|games|combat|storage|protection|hiring|hospitality|bypass|brokerage|lodging|messages|entertainment|identification|market|taxes|meals|care|training|treatment|relay|extraction|levy|exhibitions|music|song|news|information|performances|pilgrim(?:age)?|relief|proclamations|publishing|quarantine|keeping|research|safe houses|sanctuary|construction|spellcasting|stabling|control|surgery|teleportation|enchantments?|maintenance|contraband|forged|fencing|stolen)\b/i;
+const NOT_A_GOOD_SPELLWORK = /\b(?:warding|divination|scrying|spellcasting|teleportation|enchantments?)\b/i;
+const NOT_A_GOOD_WORK = /\b(?:trade|passage|rights?|services?|intelligence|maps|logistics|access|tolls?|labou?r|transport|hire|escort(?:ed)?|assay|resupply|handling|disputes|minting|killing|trials|tourism|revenue|servants|clearance|education|ferries|gambling|games|combat|storage|protection|hiring|hospitality|bypass|brokerage|lodging|messages|entertainment|identification|market|taxes|meals|care|training|treatment|relay|extraction|levy|exhibitions|music|song|news|information|performances|pilgrim(?:age)?|relief|proclamations|publishing|quarantine|keeping|research|safe houses|sanctuary|construction|stabling|control|surgery|maintenance|contraband|forged|fencing|stolen)\b/i;
+/** The one predicate: a name either alternation refuses is not a good. */
+export const NOT_A_GOOD = Object.freeze({ test: (/** @type {string} */ name) => NOT_A_GOOD_SPELLWORK.test(name) || NOT_A_GOOD_WORK.test(name) });
 /** @param {unknown} name @returns {string} the name filled as a `{resource}` (`people/goals.js :: resourceFill`), '' unless it names a good */
 const goodOf = (name) => (typeof name === 'string' && !NOT_A_GOOD.test(name) ? resourceFill(name) : '');
 /** The first good of the export list (a name, or a record's `name`). @param {unknown} list */
@@ -644,19 +649,23 @@ const CONSTRAINT_ROW_GATES = Object.freeze({
 });
 
 /**
- * The card's line among its row's pooled wordings; `canonical` (the row's own line) where the row has no pool, the call no
- * seed or the card no id, or nothing else is admitted.
+ * The card's line among its row's pooled wordings; the row's own line where the row has no pool, the call no seed or the
+ * card no id, or nothing else is admitted. ONE HOME FOR EVERY INDEX 0 (PEOPLE-1 B1c, the chair's ruling of 20:30 UTC): the
+ * data pool holds the siblings only, and the pool resolved here is [the `T` row's own line, ...the data pool], for every key.
  * @param {Readonly<Record<string, ReadonlyArray<Readonly<{ text: string, needs: ReadonlyArray<string>, excludes: ReadonlyArray<string>, house?: string }>>>>} pools
- * @param {string} field the record field (`structuralPosition`) @param {string} looked the `T` key @param {string} canonical
+ * @param {string} field the record field (`structuralPosition`) @param {string} looked the `T` key
+ * @param {string | Readonly<{ text: string }>} line the `T` row's own line, as the row declares it (index 0)
  * @param {Record<string, any>} npc @param {Record<string, any>} settlement @param {ReturnType<typeof factsOf>} facts
  * @param {Readonly<Record<string, (npc: Record<string, any>, settlement: Record<string, any>) => boolean>>} [gates] rows the record refuses
  * @returns {string}
  */
-function pooledLineOf(pools, field, looked, canonical, npc, settlement, facts, gates = {}) {
+function pooledLineOf(pools, field, looked, line, npc, settlement, facts, gates = {}) {
+  const canonical = /** @type {string} */ (lineText(line));
   const poolKey = POSITION_POOL_OF[looked] || looked;
-  const pool = pools[poolKey];
+  const siblings = pools[poolKey];
   const seed = settlement?._seed;
-  if (!pool || !seed || npc?.id == null || npc.id === '') return canonical;
+  if (!siblings || !seed || npc?.id == null || npc.id === '') return canonical;
+  /** @type {ReadonlyArray<any>} */ const pool = [line, ...siblings];
   /** @type {Array<Record<string, any>>} */ const notes = [];
   const { result: admitted } = withPresumptionLedger(() => filterDeclared(pool, { facts, ctx: { npc }, poolId: `NPC_STRUCTURE.${looked}`, surface: 'npcs', drawKind: 'H' }), /** @type {any} */ (notes));
   const inst = npc?.institution;
@@ -755,7 +764,7 @@ export function enrichNPCsWithStructure(npcs, settlement) {
         ? { ...npc.goal, short: lineText(tmpl.goal) }
         : { short: lineText(tmpl.goal), long: lineText(tmpl.goal) }; // CENSUS-1e: a field may become `{ text, … }` (R-C); the record stores the text
     goalsNow[idx] = updatedGoal?.short;
-    const position = pooledLineOf(POSITION_VARIANTS, 'structuralPosition', looked, lineText(tmpl.position), npc, settlement, /** @type {ReturnType<typeof factsOf>} */ (facts)); // PEOPLE-1 B1: the row's pool; index 0 is the row's own line
+    const position = pooledLineOf(POSITION_VARIANTS, 'structuralPosition', looked, tmpl.position, npc, settlement, /** @type {ReturnType<typeof factsOf>} */ (facts)); // PEOPLE-1 B1: the row's pool; index 0 is the row's own line
 
     return {
       ...npc,
@@ -763,7 +772,7 @@ export function enrichNPCsWithStructure(npcs, settlement) {
       structuralPosition: isHolder && holderHouseLineOf(npc) ? `${position} ${holderHouseLineOf(npc)}` : positionForStanding(npc, position), // BAR5-POWERS (1c-npc): the low-standing twin maps index 0 alone
       // PEOPLE-1 B1b: the row's constraint pool, keyed apart from the position; the old families' wordings only on a card whose
       // category IS `other` (the chair's (d)): a card that falls to that row keeps index 0
-      activeConstraint:   looked === OTHER_STABLE_DOMINANT && cat !== 'other' ? lineText(tmpl.constraint) : pooledLineOf(CONSTRAINT_VARIANTS, 'activeConstraint', looked, lineText(tmpl.constraint), npc, settlement, /** @type {ReturnType<typeof factsOf>} */ (facts), CONSTRAINT_ROW_GATES),
+      activeConstraint:   looked === OTHER_STABLE_DOMINANT && cat !== 'other' ? lineText(tmpl.constraint) : pooledLineOf(CONSTRAINT_VARIANTS, 'activeConstraint', looked, tmpl.constraint, npc, settlement, /** @type {ReturnType<typeof factsOf>} */ (facts), CONSTRAINT_ROW_GATES),
       settlementCondition: condition,
       structuralRank:     standing.standing,
     };

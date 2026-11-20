@@ -15,21 +15,11 @@
       "other__economic_stress__dominant": "other__stable__dominant",
       "other__contested__dominant": "other__stable__dominant"
     },
-    "lines": 92,
-    "declaring": 80,
-    "note": "PEOPLE-1 B1b (2026-11-20; the chair's ruling of 16:51 UTC on PROPOSAL-activeConstraint.md, (e) corrected at 17:13 UTC). Index 0 of every pool is the writer's own T constraint line, declared as its row is (the stable rows CALM_ONLY: excludes crisis). `own house`, `export good`, `import good` are the three atoms of the chair's ruling 4. Rows id `<T key>.constraint.<index>`; a `house` names the kind of house a {house} row fits; rows gated by the record in the writer: government__stable__dominant.constraint.2, military__stable__dominant.constraint.9; the aliases are T keys that read another key's pool."
+    "lines": 78,
+    "declaring": 72,
+    "note": "PEOPLE-1 B1b (2026-11-20; the chair's ruling of 16:51 UTC on PROPOSAL-activeConstraint.md, (e) corrected at 17:13 UTC). Index 0 of every pool is the writer's own T constraint line, and its one home is the writer's table (npcStructure.T.json `<key>.constraint`): PEOPLE-1 B1c (the chair's ruling of 20:30 UTC) took it out of the data pools, and pooledLineOf composes [the T row, ...the pool] for every key, so this ledger holds the siblings only, each keeping its composed index in its id. `own house`, `export good`, `import good` are the three atoms of the chair's ruling 4. Rows id `<T key>.constraint.<index>`; a `house` names the kind of house a {house} row fits; rows gated by the record in the writer: government__stable__dominant.constraint.2, military__stable__dominant.constraint.9; the aliases are T keys that read another key's pool."
   },
   "rows": [
-    {
-      "id": "government__stable__dominant.constraint.0",
-      "text": "With nothing pressing, it is hard to win support for mending the weak spots before they break.",
-      "needs": [],
-      "excludes": [
-        "crisis"
-      ],
-      "crisis": [],
-      "colour": false
-    },
     {
       "id": "government__stable__dominant.constraint.1",
       "text": "Cannot act alone: nothing is done here until the rest of the council agrees.",
@@ -205,16 +195,6 @@
       "colour": false
     },
     {
-      "id": "military__stable__dominant.constraint.0",
-      "text": "It is hard to win the coin and the say that would be needed if worse trouble came.",
-      "needs": [],
-      "excludes": [
-        "crisis"
-      ],
-      "crisis": [],
-      "colour": false
-    },
-    {
       "id": "military__stable__dominant.constraint.1",
       "text": "Cannot raise more hands or more pay without the council, and in quiet years the council is careful with coin.",
       "needs": [
@@ -347,16 +327,6 @@
       "colour": false
     },
     {
-      "id": "religious__stable__dominant.constraint.0",
-      "text": "With nothing pressing, it is easy to grow comfortable and hard to argue for growing.",
-      "needs": [],
-      "excludes": [
-        "crisis"
-      ],
-      "crisis": [],
-      "colour": false
-    },
-    {
       "id": "religious__stable__dominant.constraint.1",
       "text": "Keeping {house} in repair takes alms, and alms come slowly when nothing troubles people.",
       "needs": [
@@ -462,16 +432,6 @@
       "colour": false
     },
     {
-      "id": "economy__stable__subordinate.constraint.0",
-      "text": "Growing into the leading house's trade invites a reply; staying out of it means staying small.",
-      "needs": [],
-      "excludes": [
-        "crisis"
-      ],
-      "crisis": [],
-      "colour": false
-    },
-    {
       "id": "economy__stable__subordinate.constraint.1",
       "text": "What {house} can take on is limited to what the leading house leaves alone.",
       "needs": [
@@ -566,16 +526,6 @@
       "colour": false
     },
     {
-      "id": "economy__stable__dominant.constraint.0",
-      "text": "Every new privilege it gathers in plain sight draws the eye of the seat and of its rivals.",
-      "needs": [],
-      "excludes": [
-        "crisis"
-      ],
-      "crisis": [],
-      "colour": false
-    },
-    {
       "id": "economy__stable__dominant.constraint.1",
       "text": "Does not set the dues on trade; the council does, and the council hears every house.",
       "needs": [
@@ -627,16 +577,6 @@
       "needs": [
         "guild"
       ],
-      "excludes": [
-        "crisis"
-      ],
-      "crisis": [],
-      "colour": false
-    },
-    {
-      "id": "government__stable__subordinate.constraint.0",
-      "text": "Good work is expected and goes unnoticed; a mistake is remembered.",
-      "needs": [],
       "excludes": [
         "crisis"
       ],
@@ -702,16 +642,6 @@
       "colour": false
     },
     {
-      "id": "magic__stable__dominant.constraint.0",
-      "text": "In quiet times the seat slowly hems the casters in with rules; recognition comes with limits.",
-      "needs": [],
-      "excludes": [
-        "crisis"
-      ],
-      "crisis": [],
-      "colour": false
-    },
-    {
       "id": "magic__stable__dominant.constraint.1",
       "text": "Must keep {house} paid for out of fees and patrons, and patrons want a say in the work.",
       "needs": [
@@ -748,16 +678,6 @@
     {
       "id": "magic__stable__dominant.constraint.4",
       "text": "Some people here will not buy a spell at any price, and no fair dealing changes their minds.",
-      "needs": [],
-      "excludes": [
-        "crisis"
-      ],
-      "crisis": [],
-      "colour": false
-    },
-    {
-      "id": "other__stable__dominant.constraint.0",
-      "text": "The family's say slowly shrinks beside the offices that run things.",
       "needs": [],
       "excludes": [
         "crisis"
@@ -813,14 +733,6 @@
       "colour": false
     },
     {
-      "id": "government__governance_fractured__dominant.constraint.0",
-      "text": "Cannot mend what is broken without bringing to light the quiet deals that keep the place running now.",
-      "needs": [],
-      "excludes": [],
-      "crisis": [],
-      "colour": false
-    },
-    {
       "id": "government__governance_fractured__dominant.constraint.1",
       "text": "Cannot get the council to agree on any remedy, and cannot act without it.",
       "needs": [
@@ -863,14 +775,6 @@
       "colour": false
     },
     {
-      "id": "government__economic_stress__dominant.constraint.0",
-      "text": "Cannot pay for the repairs and relief people want without coin the place does not have.",
-      "needs": [],
-      "excludes": [],
-      "crisis": [],
-      "colour": false
-    },
-    {
       "id": "government__economic_stress__dominant.constraint.1",
       "text": "Every coin spent on the walls is a coin not spent on relief, and both are wanted.",
       "needs": [
@@ -903,14 +807,6 @@
     {
       "id": "government__economic_stress__dominant.constraint.4",
       "text": "Can promise little and pay for less, and every refusal is remembered.",
-      "needs": [],
-      "excludes": [],
-      "crisis": [],
-      "colour": false
-    },
-    {
-      "id": "religious__economic_stress__dominant.constraint.0",
-      "text": "Anything it does to guard its own wealth while people go short is seen by all.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -956,14 +852,6 @@
       "colour": false
     },
     {
-      "id": "religious__governance_fractured__dominant.constraint.0",
-      "text": "Whatever the faith takes on now, whoever next holds the seat firmly may resent and take back.",
-      "needs": [],
-      "excludes": [],
-      "crisis": [],
-      "colour": false
-    },
-    {
       "id": "religious__governance_fractured__dominant.constraint.1",
       "text": "Has no hands to enforce anything it settles; its word holds only while people choose to keep it.",
       "needs": [],
@@ -984,14 +872,6 @@
       "colour": false
     },
     {
-      "id": "religious__contested__dominant.constraint.0",
-      "text": "The longer it waits to bless the seat, the less the blessing will be worth.",
-      "needs": [],
-      "excludes": [],
-      "crisis": [],
-      "colour": false
-    },
-    {
       "id": "religious__contested__dominant.constraint.1",
       "text": "Whatever it says of the seat, part of the congregation will have hoped for the other answer.",
       "needs": [],
@@ -1008,14 +888,6 @@
       "excludes": [
         "ruler: priest"
       ],
-      "crisis": [],
-      "colour": false
-    },
-    {
-      "id": "government__contested__dominant.constraint.0",
-      "text": "Every hard move gives the doubters a new reason; every delay lets the doubt grow.",
-      "needs": [],
-      "excludes": [],
       "crisis": [],
       "colour": false
     },
