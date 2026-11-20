@@ -1,6 +1,6 @@
 # SAME-2 HAND-BACK (kept current at every push)
 
-Last written: 2026-11-20 18:56 UTC.
+Last written: 2026-11-20 19:01 UTC.
 
 SEAT: SAME-2 of the seventh chair (session_019yED1SUxGVHyjQnoqoFvQ8). Prompt: `git show origin/lane/chair-2026-11-08:docs/chair/2026-11-20/seventh/prompts/SAME-2.txt` (SAME-1.txt is the assignment, renamed). Seated 17:49 UTC beside SAME-1; THE LANE IS YOURS at 36c5214d0 (the chair, 18:52). Branch `lane/same-2-2026-11-20`. Read SAME-1-HANDBACK.md for everything before 18:52 (the standing orders hold).
 
@@ -12,3 +12,6 @@ UNITS IN FLIGHT
 - OWED AFTER D: CAUSES 3411c9c83 (`lane/page-7-2026-11-20`) by the door, at the unit's commit and its base.
 
 VISITOR'S POOL (asked 18:52; not run): the visitor's birth is `measure-lit.mjs :: visitorJob` at ce3a4e9f6 (DEFAULT_CONFIG + size, four empty toggle bags, `_randomizePriorities: true`, the content runtime at rest). A second 900 = one more render of ~16.5 min on four forks (the door's measured time), plus a plan option in the renderer (~20 lines); as a standing second corpus it doubles every --check.
+
+THE CHAIR, 18:55: (1) Daily Life's pools go through `drawDeclared.js :: filterDeclared` then `pickVariantMixed`; corpusPools does not read them; they join the hideable hand list when the Daily seat sends "DAILY <commit>" (forwarded); `commoner_resentments_dm` is dm-only BY CONSTRUCTION (owner audience only; absent on every `toPublicSafe` document by test). (2) THE LINE MOVED to 8196e5712 (the mixed pick; the goals lane): MERGED into this lane at b63b21b3d (2026-11-20 19:01 UTC). The door's register is re-taken at the merged tree (builder D told); every table names its tree's commit.
+RED ON THE MERGED TREE (found by SAME-2): the hideable walker's TOTALITY arm, two goals-lane tables unregistered (`src/data/people/goalSecretRefusals.js :: GOAL_SECRET_REFUSAL_RARE_KEYS`, `:: GOAL_SECRET_REFUSED_CLUSTERS`): builder H's unit 0. THIS LANE IS NOT PUSHED past d737077ad until H's cure is merged.
