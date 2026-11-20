@@ -220,3 +220,60 @@ describe('TITLES-1 · officeWordInfo, the reverse read for the readers that matc
     }
   });
 });
+
+describe('TITLES-2 · the cells filled by research (each word\'s gloss and source: TITLES-2-HANDBACK.md)', () => {
+  /** culture, family, the six sizes smallest first (null: the fallback), each a literal; a pair is read as its male form */
+  const PINNED = [
+    ['germanic', 'guild', [null, null, null, 'Zunftmeister', 'Zunftmeister', 'Zunftmeister']],
+    ['germanic', 'military', [null, null, null, null, 'Marschall', 'Marschall']],
+    ['latin', 'appointed', ['Vilicus', 'Vilicus', 'Vilicus', 'Procurator', 'Legate', 'Proconsul']],
+    ['latin', 'headman', [null, null, null, 'Praetor', 'Praetor', 'Praetor']],
+    ['celtic', 'appointed', ['Maer', 'Maer', 'Maer', 'Maer', null, null]],
+    ['celtic', 'military', [null, null, 'Penteulu', 'Penteulu', 'Penteulu', 'Penteulu']],
+    ['arabic', 'council', [null, null, null, "Ra'is", "Ra'is", "Ra'is"]],
+    ['arabic', 'military', [null, null, 'Qaid', 'Qaid', 'Amir al-Juyush', 'Amir al-Juyush']],
+    ['norse', 'military', [null, null, 'Hersir', 'Hersir', 'Stallari', 'Stallari']],
+    ['slavic', 'appointed', ['Tiun', 'Tiun', 'Tiun', 'Namestnik', 'Namestnik', 'Namestnik']],
+    ['slavic', 'council', [null, null, null, 'Golova', 'Golova', 'Golova']],
+    ['slavic', 'merchant', [null, null, null, 'Gost', 'Gost', 'Gost']],
+    ['east_asian', 'headman', ['Nanushi', 'Nanushi', 'Nanushi', 'Toshiyori', 'Toshiyori', 'Toshiyori']],
+    ['east_asian', 'council', [null, null, null, 'Toshiyori', 'Toshiyori', 'Tairo']],
+    ['east_asian', 'elders', [null, null, null, 'Toshiyori', 'Toshiyori', 'Toshiyori']],
+    ['east_asian', 'military', [null, null, 'Kumigashira', 'Obangashira', 'Obangashira', 'Obangashira']],
+    ['mesoamerican', 'military', [null, null, null, 'Tlacateccatl', 'Tlacateccatl', 'Tlacateccatl']],
+    ['south_asian', 'elders', ['Sarpanch', 'Sarpanch', 'Sarpanch', 'Sarpanch', null, null]],
+    ['south_asian', 'guild', [null, null, null, 'Jetthaka', 'Jetthaka', 'Jetthaka']],
+    ['steppe', 'headman', [null, null, 'Beg', 'Beg', 'Beg', 'Beg']],
+    ['steppe', 'council', [null, null, null, 'Biy', 'Biy', 'Biy']],
+    ['steppe', 'elders', ['Biy', 'Biy', 'Biy', 'Biy', 'Biy', 'Biy']],
+  ];
+
+  it('each filled row reads its words at its sizes, and a size left open reads the fallback (today\'s title or the base ladder)', () => {
+    expect(PINNED).toHaveLength(22);
+    for (const [culture, family, rungs] of PINNED) {
+      OFFICE_TIERS.forEach((tier, i) => {
+        const got = officeTitleOf({ family, tier, culture, sex: 'male' });
+        if (rungs[i] !== null) expect(got, `${culture}.${family}.${tier}`).toBe(rungs[i]);
+        else if (TODAY_FAMILIES.includes(family)) expect(got, `${culture}.${family}.${tier}`).toBeNull();
+        else expect(got, `${culture}.${family}.${tier}`).toBe(officeTitleOf({ family, tier, culture: null, sex: 'male' }));
+      });
+    }
+    expect(officeTitleIn({ family: 'military', tier: 'town', culture: 'germanic', government: 'Militia Command' })).toBe('Captain of the Muster');
+    expect(officeTitleIn({ family: 'appointed', tier: 'city', culture: 'celtic' })).toBe('Governor');
+  });
+
+  it('the forms by sex, and the reverse read of the new words for SEAT-1', () => {
+    expect(officeTitleOf({ family: 'appointed', tier: 'hamlet', culture: 'latin', sex: 'female' })).toBe('Vilica');
+    expect(officeTitleOf({ family: 'headman', tier: 'town', culture: 'steppe', sex: 'female' })).toBe('Begim');
+    expect(officeTitleOf({ family: 'headman', tier: 'town', culture: 'steppe' })).toBe('Beg');
+    expect(officeTitleOf({ family: 'headman', tier: 'city', culture: 'steppe', sovereign: true, sex: 'female' })).toBe('Khatun');
+    expect(officeWordInfo("Ra'is")).toEqual({ families: ['council', 'headman'], sovereign: false, crown: false, sex: null });
+    expect(officeWordInfo('Toshiyori')).toEqual({ families: ['council', 'elders', 'headman'], sovereign: false, crown: false, sex: null });
+    expect(officeWordInfo('Biy')).toEqual({ families: ['council', 'elders'], sovereign: false, crown: false, sex: null });
+    expect(officeWordInfo('Begim')).toEqual({ families: ['headman'], sovereign: false, crown: false, sex: 'female' });
+    expect(officeWordInfo('Vilicus')).toEqual({ families: ['appointed'], sovereign: false, crown: false, sex: 'male' });
+    expect(officeWordInfo('Amir al-Juyush')).toEqual({ families: ['military'], sovereign: false, crown: false, sex: null });
+    expect(officeWordInfo('praetor')).toEqual({ families: ['headman'], sovereign: false, crown: false, sex: null });
+    expect(officeWordInfo('Podestà')).toBeNull();
+  });
+});
