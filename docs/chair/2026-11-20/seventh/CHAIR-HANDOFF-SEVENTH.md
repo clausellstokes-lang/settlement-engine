@@ -305,6 +305,38 @@ parts of the whole check (at the close).
   there, 211 does not, and the owner's own client builds the veiled copy at sharing
   (`src/hooks/useGalleryShareControls.js`).
 
+- **2026-11-20, about 05:14 UTC, THE OWNER (verbatim, the whole message):** "I defer all judgement to you
+  And history can also say or show a change in seat. If you think that makes it rich and provide interesting tensions.
+  Perhaps a second card for the ruling seat, if it is captured by the criminal faction.
+
+  Everything operates as intended or being designed. But if a seat is captured by criminals, a second ruler card
+  specific to criminals in the black and red font that we have pops up. It would show either an underboss for if ruled
+  by a single person or criminal treatise or something appropriate (I for one don't think any council of gangs can
+  truly exists rather than as a delicate power balance of keeping each other in check so a naming sense that is
+  appropriate to that and it requires 2 or more criminal institutions at least). What are your thoughts on that? They
+  don't participate in legitimacy, the front leader does. Abd this card is hidden with other criminal share things.
+  What are your thoughts?" TAKEN AS: (1) the answer to the chair's three questions on who rules, by the chair's own
+  reading (born this way AND able to take the seat later; a town held by soldiers, clergy or mages may be born where
+  its facts point there; labourers and outsiders only where the record calls for them): TRAIN 2 IS ORDERED (CS14);
+  (2) a design the owner asks the chair's thoughts on: THE SECOND RULER CARD for a captured seat; the criminal side
+  takes no part in legitimacy; hidden with the criminal share things; a pact of two or more criminal houses is a
+  balance, never a council; (3) leave for history to say a change of seat where it makes the town richer.
+  THE CHAIR'S ANSWER, GIVEN IN FULL THE SAME TURN: yes to both. READ IN THE CODE FIRST: the record already holds the
+  secret half (`people/hallCapture.js`: five rungs from none to capture, derived from the hidden allegiances of the
+  ruling three; at the top rung the lord himself is an agent), stripped from every shared page; the legitimacy
+  figure is already the front's; `powerStructure.previousGovernments` already exists. THREE THINGS THE CHAIR ADDED:
+  the crime-worded government names (Corrupt Council, Shadow Senate) must retire for new towns or the front gives
+  the secret away (they are public today: 11 of the reader's 144 towns); the person on the card is one the town
+  already has, by the criminal house's own title; the pact's name comes from a short closed list (the Accord, the
+  Truce, the Division, the Understanding, the Quiet Table: the owner strikes). THE HARD RULE ADDED: the card and the
+  new front add no new way for a player to tell (the security reader's test); the one known tell (prosperity
+  recomputed) was named again. LEFT ALONE BEFORE THE DEPLOY: what happens to the hold when the front falls (the
+  play-time ladder already moves the rung; the card reads it). HISTORY: only as the stated reason of an unusual pair
+  or where the record holds the cause; never in an ordinary calm town; a past criminal takeover only on the hidden
+  side. SAID AS NOT KNOWN: how many towns are born captured and how many hold two criminal houses (to be counted
+  before anything is built; if near none, whether capture should be commoner is a tuning choice brought to the owner
+  with numbers). THE TIME GUESS MOVED: about half a day more on the two to three days.
+
 ## 2. Rulings of this chair (each vetoable by the owner)
 
 - **SV1 (00:05 UTC, 2026-11-20): THE VEIL'S LIST ON THREE MACHINES.** VEIL-19 owns 212, its rollback and the twin's
@@ -1563,3 +1595,32 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   hideable class), so that question does not arise. TWO NOTES FORWARDED TO THE VEIL'S NEXT OWNER: `power.entry` (VR11)
   must never remove the GOVERNING power's row while the government's name stays; `safetyProfile.economicDragDesc`
   ("Goods change hands here in back rooms…") is served in 6 of the 11, registered and not yet built: an arm of FINAL.
+- 05:17 UTC · **THE OWNER ANSWERED AND ADDED A DESIGN; POINT 76 IS MERGED LOCALLY.** (1) THE OWNER'S MESSAGE (section 1, verbatim):
+  the three questions deferred to the chair, so TRAIN 2 IS ORDERED; a SECOND RULER CARD for a captured seat; history
+  may say a change of seat. Answered in full the same turn (section 1). RULED, CS14 to CS18 (in full in
+  `prompts/SEAT-1.txt`, ADDENDUM 1; sent to SEAT-1 into its running turn): CS14 train 2 ordered; CS15 the second
+  ruler card: a READ of the capture state, the allegiances and the houses, no new key; one criminal house: a person
+  the record already holds, by the house's own title; two or more: a pact card named from a short closed list that
+  says balance; the criminal side takes no part in legitimacy; on a page that is not the owner's it is derived from
+  the served document alone (it shows only where the DM's share serves the capture state and that power); CS11's
+  wording amended to "never names a power the served document does not hold"; CS16 the crime-worded public forms
+  retire under the new law (an ordinary front; the hold carried by the hidden allegiances and `writeHallCapture`);
+  MEASURE FIRST (the rungs at birth; one and two-or-more criminal houses; what the retired forms' towns reach);
+  `HALL_CAPTURE_TUNING` is a DRAFT row, the owner's to sign; CS17 history may carry a change of seat only as the
+  stated reason of an unusual pair or where the record holds the cause; CS18 the security test: no NEW public
+  difference between a captured town and the same town uncaptured. THIS SUPERSEDES VR42 FOR NEW TOWNS ONLY (the
+  crime-worded names stay public on saved towns: still on the owner's list).
+  (2) SEC-GRANTS-2: "213 a18bf94bc 22f694366d65aa174f049a8f966321ae16aee3bec9ecd837be684d04240a740c": the
+  `@rollback` comment corrected, comment lines only (213 with comments stripped identical to the cleared text); the
+  deploy note and CHECK_213's header give both rows. Forwarded to REVIEW-GRANTS-1 for the re-clear by the diff.
+  (3) GIT-DOOR: "GIT-DOOR-3 9718d685c": three commits read line by line (the anchored negative in
+  `ensurePlaywrightBrowsers.test.js`; the corpus hook of `distributionEnvelopes.test.js` takes its own budget, 120 s,
+  by measure; the shard cap 45 to 60 by the house rule with the parity pin following the job by name). THE HOOK
+  CLASS IS CLOSED BY MEASURE (694 of 3,634 files hold a beforeAll or afterAll; one reaches three quarters of its
+  budget at the runner factor; beforeEach and afterEach are not separable by that instrument: a named blind spot):
+  no fourth hand-back. **POINT 76 MERGED LOCALLY on the line at 4b9ca37e0** (`--no-ff`; the merged tree
+  8d9063a4b8e4 equals the seat's); the eight changed files re-run at the merged tree: 85 of 85; `tests/lint` WHOLE
+  running (the chair's rule since point 75's miss); the push, the row of the landings table and the read of CI
+  follow. The chair's push of this record waits on that run, so that the hook's load does not move a budgeted test.
+  (4) VEIL-22, one line: R3 builds `safety.economicDragDesc` (by attribution), R5 its composed prose copy; VR42's
+  rule (the governing row never removed while its name stays) goes into R3's launch and born test.
