@@ -2202,6 +2202,32 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   contested all have Moderate streets (the merits' turn). ON THE CHAIR'S 600 (no randomised priorities): the
   VISITOR pool is still owed (SEAT-6).
 
+### Rulings of 17:45 to 17:48 UTC (each vetoable by the owner)
+
+- **THE STATE SENTENCES: ALL FOUR FILES ARE READ (89 pools, 260 new lines).** PROSE-LINES 3 (2782132dd; 27 pools, 82
+  lines) and 4 (d6b1137d2; 27 pools, 41 lines): APPROVED TO BUILD as BUILD-2 (PROSE-2's) with: (1) the noun rule
+  again (no "the town", "a town", "another town"); (2) file 3: the council's four lines also carry `no ruler: lord`;
+  5.5 "{settlement}'s watch is there for the drunk and the brawl first, whatever else it is asked to do."; 10.4 "No
+  wall closes {settlement} in at night; its lanes run straight out into the country."; 10.6 only if walls-absent
+  means no palisade or earthwork either; 11.8 "...no power at {settlement} is gathering to take its place."
+  ("faction" is the engine's word); 14.5, 17.7, 19.3, 25.8 ("People at {settlement} give directions from the gate
+  they know best."), 26.5 ("The cathedral at {settlement} is the largest house of worship the place has, and it
+  shows from a long way off."), 26.6; pool 21 adds `no crisis: occupied`; (3) file 4: 11.4 "{settlement} cannot
+  afford to let its {defwork} fall into neglect: the country around it is never safe to ignore."; 20.9; 26.6 (no
+  possessive after the seat's name); (4) the three lines on {timeband_age} are built only where the slot fills; (5)
+  the dm-only marks stand; "things go astray now and then" stays public. PROSE-1's last unit is BUILD-1 (files 1 and
+  2).
+- **F5 (the session sheet): THE SEAT'S HOLDER IS A PRINTED LINE ON THE FRAMED SHEET.** FRAME-6's builder stopped at
+  a red, rightly: the domain change works (the holder was dropped on 32 of 63 framed owner sheets; now 0), but no
+  renderer prints a framed sheet's people, and Session Mode's panel hides everyone in `sheet.people`, so the holder
+  would have VANISHED there. RULED (a): one line, one function, the same words in all four renderers (the sheet, the
+  table view, the Foundry journal page, the PDF); Session Mode keeps the holder visible; built after C2b; the
+  sentence to the chair on six sheets first; the stranger's sheet: the same line or none, with the reason.
+- **SAME-1's WALKER (brief 3 merged at d7fb46735).** An exemption stands only with the line of code that withholds
+  its block from every shared read. THE GAP (the hand-listed pools' lines are not read, and most new lines live
+  there) is PHASE 3, SAME-2's. An indirectly drawn pool escaping the totality arm is a known limit, written in the
+  walker's header.
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -5250,3 +5276,9 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   4 (123 lines) are with the chair; their build is PROSE-2's. SAME-1's brief 3: an exemption stands only with the
   line of code that withholds its block; the gap (hand-listed pools' lines unread) is phase 3, SAME-2's. SEAT-6: U5's
   cure unit B5b out (the class renamed `retiredEdge`, the three callers wired); the VISITOR measure out.
+- 17:49 UTC · SAME-2 SEATED at 17:48 (session_019yED1RoZS5SEe65ng74Jsk, beside SAME-1). SEAT-6's record read 283,535 at 17:40 (a
+  SEAT-7 prompt is owed at 330,000). THE CHAIR'S READING THIS HOUR, FOR THE RECORD: wants files 2 to 7 (320 lines)
+  and five replacements; the card's constraint (78); the safety line (78); the trade note (88); the economy's hooks
+  (25); a trouble's last eight hooks; why the place is here (62); the powers' descriptions and relations (51 pools);
+  the state sentences (260). SEATS NOW WORKING: 22 (six of them successors reading in beside a predecessor). Net 17
+  is set for 18:24 (trig_016ow3rVUNeyZhfA7FTwJ1xx).
