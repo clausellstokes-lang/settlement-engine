@@ -1056,3 +1056,21 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   leaves the defaults, its control shown as not shareable yet); a born test holds "publishing with the editor's
   defaults succeeds"; the guard is not loosened: a shared world chronicle must first pass the veil, after the
   deploy. If master's code fails the same way it is failing on production today: the owner is told at once.
+- 03:15 UTC · **VEIL-21: ITEMS 1 AND 2 DONE** (its message of 03:08 UTC; tip d5323b8b8): the first act reproduced at
+  408f8e508; "B/C/D e62fabb2e" merged (d262df16d): the six guards 127 of 127, THE ACCEPTANCE RUN AT EXIT 0, 37 of 37,
+  212 fec111c2…4acea3; "VR17 81dd06d7e" merged (cfd77fdef; one register conflict, both sides' rows kept). Reds seen:
+  the switch's eight (VEIL-V102's) and the ruin-filter walker's "exempt honesty" (`gallerySecondHomes.js` now goes
+  through the ruin filter, so its exemption is no longer true): RULED, done at once, not with the stored figures:
+  the row deleted and the pin lowered 117 to 116 (a ratchet asking to tighten is owed at once). R2's builder and a
+  test-only builder (the ruined-house measure, the observed-shape cure, the import keeping the served band) run.
+  Its own estimate: about 130,000 tokens.
+  **REVIEW-VEIL-11, THE CHAIR'S SECOND ATTACK ON VR17 RUN (its message of 03:15 UTC; `ct2.probe.jsx`):** with the
+  groupings opened and every hideable house hidden by the default, the Defense block a visitor derives from the
+  SERVED document reads "Organized Syndicate" in 17 of 45 towns (control: 1 of 25), every one driven by a SERVED
+  criminal POWER (16 "Thieves' Guild", 1 "Corrupt Council"), never by a served house. That is the registry's
+  `power.entry` (VR11: the power a hidden house raised is withheld with it), registered and NOT BUILT. No new
+  finding; THE OBSERVABLE for its born test and R3's (no served criminal power that a hidden house raised; the
+  derived label within the control pool's distribution), sent to VEIL-21 for the briefs; on the reader's FINAL
+  arms. **VR35 IS RE-ORDERED BY IT:** V10-5's re-measure comes AFTER `power.entry` is built: a power that leaves with
+  its house no longer accounts for its name, and the positive account then drops its mentions rightly (VEIL-19's
+  156 strings were counted while that power was still served).
