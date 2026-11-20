@@ -22,6 +22,15 @@ VR25's two owed rows, R5's law) governs where PART 21 or a brief differs. The la
   R3's born test: grouping open, every hideable house hidden: no served crime type no town of the hidden-free pool ever
   has; control: a town whose criminal house the DM SHOWS keeps its types. VR29 confirmed by measure: the keys stay arrays,
   empty where nothing is left; only the shut grouping deletes them.
+- **03:12 UTC: the ruin-filter "exempt honesty" red DONE NOW** (not with the stored figures): delete
+  `gallerySecondHomes.js`'s exempt row, pin 117 -> 116, one small commit by the side builder (its unit 0, sent 03:13 UTC);
+  the final count and the rows that stand (VR25's `importRederive.js`) stated.
+- **03:15 UTC, for R3 (`power.entry` and `power.share` are R3's rows, host `_gallery_veil_roster_choices`):** MEASURED by the
+  reader at 427ea0bed, groupings open, every hideable house hidden: the Defense block a visitor derives from the served
+  document reads "Organized Syndicate" in 17 of 45 towns (control, 25 towns with no hideable house: organized 1, semi 5,
+  diffuse 3, none 16); all 17 driven by a SERVED criminal POWER (16 "Thieves' Guild", 1 "Corrupt Council"). R3's born
+  test: no served criminal power is one a hidden house raised, and the derived label does not exceed the control pool's
+  distribution. **V10-5's re-measure (VR35) moves to AFTER `power.entry` is built (R3), not after R2.**
 
 ## 1. The bytes (kept current)
 
