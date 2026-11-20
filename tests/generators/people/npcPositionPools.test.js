@@ -15,6 +15,7 @@
  */
 import { readFileSync } from 'node:fs';
 import { beforeAll, describe, expect, it } from 'vitest';
+import { expectAbsentWithAnchor } from '../../helpers/anchoredNegatives.js';
 import { POSITION_VARIANTS, POSITION_POOL_OF } from '../../../src/data/npcStructureVariants.js';
 import { enrichNPCsWithStructure } from '../../../src/generators/npcStructure.js';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
@@ -63,7 +64,7 @@ describe('PEOPLE-1 B1 · the pools, canonical at zero', () => {
     for (const [key, pool] of Object.entries(POSITION_VARIANTS)) {
       expect(T_POSITION[key], `${key} is a T row`).toBeDefined();
       expect(composedOf(key)[0].text, key).toBe(T_POSITION[key]);
-      expect(pool.map((r) => r.text), `${key}: the data pool holds no copy of its T line`).not.toContain(T_POSITION[key]);
+      expectAbsentWithAnchor(pool.map((r) => r.text), T_POSITION[key], pool[0]?.text, `${key}: the data pool holds no copy of its T line (its first sibling present)`);
       expect(composedOf(key).length, `${key} is a pool`).toBeGreaterThan(1);
     }
     for (const [alias, key] of Object.entries(POSITION_POOL_OF)) expect(T_POSITION[alias], alias).toBe(T_POSITION[key]);
