@@ -49,7 +49,10 @@ test that computes its output at the pre-merit band and at the stored band, equa
 idempotent, proved by running it twice; a NUMBER-writer is listed with what it read, and left.
 A word-writer in a file `COMMON.md` forbids (`src/domain/seat/`, `src/domain/rulingPower*.js`, `factionCompetition.js`,
 `src/domain/summary/`, `src/domain/crisis/`, `src/domain/tension/`, ...): STOP and report; FORTUNE-3 tells the chair.
-Commit the census alone; push; report its count to FORTUNE-3 and wait for "BUILD U5a".
+The census is READ-ONLY (the chair, 15:58: its builder may start at once, beside U5s): branch
+`lane/fortune-3-u5c-2026-11-20` from the lane tip FORTUNE-3 names, pushed as `lane/fortune-3-2026-11-20-u5c-wip`. Read the
+readers at that tip (U5s changes no band reader). Commit the census alone; push; report its count to FORTUNE-3 and wait
+for "BUILD U5a".
 
 ## STEP 2, U5a: THE LAW'S ROWS, THE SAFETY TERM, THE LATE STEP (one commit, red first)
 
@@ -60,11 +63,9 @@ Commit the census alone; push; report its count to FORTUNE-3 and wait for "BUILD
    the vice families' traits (`price`, `slippery`, `hard`), the ruler's-trouble kinds (`succession_crisis`,
    `corruption_scandal`, `tyranny`, `popular_uprising`, `legitimacy_crisis`, `leadership_vacuum`). The leaf stays
    zero-import; the Tolerated gate is READ from `LEGITIMACY_CUTS` by the step, never copied.
-2. SAFETY (condition 1): in `src/generators/factionDynamics.js :: computePublicLegitimacy`, the one line that computes
-   the safety term, under law 2 only, from `standing.safetyUsualRange[tier]` and the calm ladder's order (read from
-   `src/data/bandLadders.js` if it holds it; else from `safetyProfile.js`'s own list, never re-spelled). ⛔ THIS FILE IS
-   RELEASED TO THE SEAT'S LANE at "factionDynamics released": build this hunk ONLY if FORTUNE-3's go names the chair's
-   leave for it; otherwise the term is applied in the late step (item 5) and the brief's line here is struck.
+2. SAFETY (condition 1): RULED by the chair 15:58 UTC: AT BIRTH, in `computePublicLegitimacy`, as its own FIRST unit
+   U5s (`briefs/U5-SAFETY.md`), merged before U5a; `factionDynamics.js` is then RELEASED to the seat's lane and U5a
+   NEVER touches it.
 3. THE MERITS' PREDICATES: NEW `src/domain/fortune/fortuneMerits.js`, pure, imported by the birth step AND (U5b) by the
    render, so the page and the birth cannot disagree: `rulerOf(settlement)` (rank 1 of the governing power, by
    `npcs[].memberships`), `rulerTroubled(settlement)` (condition 1's two clauses), `isPrincipled(ruler)` (dominant trait
@@ -86,15 +87,14 @@ Commit the census alone; push; report its count to FORTUNE-3 and wait for "BUILD
 
 MANIFEST U5a: `fortuneLaw.js` (the rows), NEW `src/domain/fortune/fortuneMerits.js`, `legitimacyBandFor`'s import only,
 `generateSettlementPipeline.js` (the step's call and import only), `legacyGenerator.js` (the exported list and its read in
-`annotationBody` only), `factionDynamics.js :: computePublicLegitimacy`'s safety line only IF leave is named, each census
+`annotationBody` only), (NOT `factionDynamics.js`: released), each census
 word-writer's re-run (a file outside this list is reported first), NEW `tests/generators/fortuneLawMerits.test.js`, NEW
 `tests/domain/fortuneMeritsPredicates.test.js`; registers keyed on these files that red, re-taken by their own doors.
 No census rows (the integrator takes both censuses).
 
 THE TESTS (red first; every expectation computed from `FORTUNE_LAW_TUNING`, `LEGITIMACY_CUTS`, the predicates and the
 generator's own list, never quoted): (a) DARK: twelve births (two a size) with no marker byte-identical to
-`_fortuneLawVersion: 1`, and the safety term under 1 equal to today's in every (label x size) cell; (b) LIT SAFETY: inside
-the usual range 0; a calm city's Unsafe 0; Safe and Very Safe keep their points; an off-ladder label keeps today's;
+`_fortuneLawVersion: 1`; (b) (safety: U5s's own test, `fortuneLawSafety.test.js`);
 (c) THE MERITS, direct: each predicate on built records (a principled ruler with a vice flaw is not principled; a
 catastrophe at the window's edge and one past it; a catastrophe with its kind among today's tensions; one with an
 unresolved annotation); only upward; never below the Tolerated gate; never with a troubled ruler or a capture rung of
