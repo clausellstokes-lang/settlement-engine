@@ -382,3 +382,55 @@ describe('goal families — the reserve lines (GOALS-1, apart from the cells)', 
     expect(Object.isFrozen(GOAL_LINE_NOT_ON_TIES)).toBe(true);
   });
 });
+
+/**
+ * THE WANTS' TRANCHE (GOALS-4, builder 10, 2026-11-20; the build brief `goals/briefs/GOALS-4-BUILD-WANTS-BRIEF.md` and its
+ * addendum): the 380 lines the chair read and approved, in their final wording, are APPENDED to the END of their DRAWN cells
+ * (never the reserve), in the order of the one source, `docs/chair/2026-11-20/content/goals/wants/WANT-LINES-FINAL.md`
+ * (a byte copy of 25b63efbc's). Every line is READ from that file, never quoted here: a cell header "### FAMILY/sub/vantage ·
+ * n → m (+k)", then lines "i. <line>  <sub>file:section.line</sub>" numbered n+1 … m.
+ */
+const WANT_LINES_FINAL = new URL('../../docs/chair/2026-11-20/content/goals/wants/WANT-LINES-FINAL.md', import.meta.url);
+/** The source's cells, in its order: `{ family, sub, vantage, from, to, plus, lines: [{ n, line }] }`. @param {string} md */
+const wantCellsOf = (md) => {
+  const cells = [];
+  let cur = null;
+  for (const raw of md.split('\n')) {
+    const h = raw.match(/^### ([A-Z]+)\/([a-z_]+)\/(short|long) · (\d+) → (\d+) \(\+(\d+)\)$/);
+    if (h) { cur = { family: h[1], sub: h[2], vantage: h[3], from: Number(h[4]), to: Number(h[5]), plus: Number(h[6]), lines: [] }; cells.push(cur); continue; }
+    if (raw.startsWith('#')) { cur = null; continue; }
+    const m = raw.match(/^(\d+)\. (.+)  <sub>\d+:[\d.]+<\/sub>$/);
+    if (m && cur) cur.lines.push({ n: Number(m[1]), line: m[2] });
+  }
+  return cells;
+};
+const WANT_CELLS = wantCellsOf(readFileSync(WANT_LINES_FINAL, 'utf8'));
+
+describe('goal families — the wants\' tranche: the 380 approved lines, each at the end of its drawn cell (GOALS-4)', () => {
+  test('the source holds 380 lines in 35 cells, each numbered on from its cell\'s old count, no line twice', () => {
+    expect(WANT_CELLS.length).toBe(35);
+    expect(WANT_CELLS.reduce((n, c) => n + c.lines.length, 0)).toBe(380);
+    for (const c of WANT_CELLS) {
+      const where = `${c.family}/${c.sub}/${c.vantage}`;
+      expect(c.lines.length, where).toBe(c.plus);
+      expect(c.from + c.plus, where).toBe(c.to);
+      expect(c.lines.map((l) => l.n), where).toEqual(Array.from({ length: c.plus }, (_, i) => c.from + 1 + i));
+    }
+    const all = WANT_CELLS.flatMap((c) => c.lines.map((l) => l.line.toLowerCase()));
+    expect(new Set(all).size).toBe(all.length);
+  });
+
+  for (const c of WANT_CELLS) {
+    test(`${c.family}/${c.sub}/${c.vantage}: its ${c.plus} approved lines close the drawn cell, verbatim and in order (${c.from} → ${c.to})`, () => {
+      const cell = GOAL_FAMILY_LINES[c.family]?.[c.sub]?.[c.vantage];
+      expect(Array.isArray(cell), 'the drawn cell exists').toBe(true);
+      expect(cell.length).toBe(c.to);
+      expect(cell.slice(c.from).map((e) => (typeof e === 'string' ? e : null))).toEqual(c.lines.map((l) => l.line));
+    });
+  }
+
+  test('no approved line is a reserve line: the tranche is drawn, never only rotated onto', () => {
+    const reserve = new Set(Object.values(GOAL_RESERVE_LINES).flatMap((subs) => Object.values(subs).flatMap((vs) => Object.values(vs).flat().map(textOf))));
+    expect(WANT_CELLS.flatMap((c) => c.lines.map((l) => l.line)).filter((l) => reserve.has(l))).toEqual([]);
+  });
+});
