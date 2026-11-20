@@ -14,6 +14,12 @@
  *   5. the approved seat's twin swap still reads the legitimacy pool (`historyData.js :: LEGITIMACY_HELD_TWINS`);
  *   6. `toPublicSafe` default mode carries no `plotHooks` (the chair's arm).
  * Red at 3411c9c83 (no pool module; the template's whole list stored).
+ *
+ * HOOKS-FINISH (PAGE-10's brief, the chair's rulings of 20:49 UTC 2026-11-20), red at 41edc9410:
+ *   1b. no timeline template's hook list holds more than four rows (`generateEventNarrative` re-reads the list's length
+ *       after each splice, so a fifth row adds a roll); computed from `HISTORICAL_EVENTS_DATA`;
+ *   3d. on the two births where a legitimacy line was kept at the pick and false on the final record (`seat outranked`),
+ *       no line the door kept reads false at the end (the line is struck from the pool; arm 3c pins no late write).
  */
 import { beforeAll, describe, expect, test } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
@@ -33,7 +39,7 @@ const troubleHooks = await import('../../src/data/troubleHooks.js').catch(() => 
 const POOLS = /** @type {Record<string, Array<{ text: string, needs?: string[], excludes?: string[] }>>} */ (/** @type {any} */ (troubleHooks).TROUBLE_HOOKS ?? {});
 const RULED = Object.freeze({
   crime_wave: 16, guild_conflict: 16, resource_scarcity: 9, external_threat: 9,
-  succession_crisis: 9, outside_debt: 9, legitimacy_crisis: 9, corruption_scandal: 9,
+  succession_crisis: 9, outside_debt: 9, legitimacy_crisis: 8, corruption_scandal: 9, // HOOKS-FINISH (iv): legitimacy 9 struck
 });
 const KINDS = Object.keys(RULED);
 const SIZES = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
@@ -66,11 +72,35 @@ describe('HOOKS-BUILD arm 1: the pools are total', () => {
     const twins = new Set(Object.values(LEGITIMACY_HELD_TWINS));
     expect(KINDS.flatMap((k) => (POOLS[k] || []).map((r) => r.text)).filter((t) => twins.has(t))).toEqual([]);
   });
+  test('arm 1b: no timeline template\'s hook list holds more than four rows (a fifth adds a roll to the timeline\'s loop)', () => {
+    const over = HISTORICAL_EVENTS_DATA.filter((t) => Array.isArray(t.plotHooks) && t.plotHooks.length > 4).map((t) => `${t.type} ${t.plotHooks.length}`);
+    expect(over).toEqual([]);
+  });
   test('no byMemory copy of a hook list stands for these kinds (the pool belongs to the kind)', () => {
     const copies = HISTORICAL_EVENTS_DATA.filter((t) => KINDS.includes(t.type))
       .flatMap((t) => Object.entries(t.byMemory || {}).filter(([, w]) => w && 'plotHooks' in w).map(([m]) => `${t.type}.${m}`));
     expect(copies).toEqual([]);
   });
+});
+
+describe('HOOKS-FINISH arm 3d: the legitimacy pool on the two births where a kept line read false at the end', () => {
+  test('no legitimacy line the door kept at the pick reads false on the final record of hxd-hamlet-36 or hxd-metropolis-61', async () => {
+    await loadGenerationLawPayloads();
+    const pool = POOLS.legitimacy_crisis || [];
+    const fails = [];
+    let seen = 0;
+    for (const [size, seed] of [['hamlet', 'hxd-hamlet-36'], ['metropolis', 'hxd-metropolis-61']]) {
+      const { result: record, ledger } = withPresumptionLedger(() => birth(size, seed));
+      if ((record.history?.currentTensions || []).some((x) => x.type === 'legitimacy_crisis')) seen++;
+      const facts = factsOf(record);
+      for (const n of ledger.filter((x) => x.pool === 'troubleHooks:TROUBLE_HOOKS:legitimacy_crisis')) {
+        const r = pool[n.lineId];
+        if (r && !declarationAdmits(declarationOf(r), facts).admitted) fails.push(`${seed} ${atomsOf(r).join('+')}`);
+      }
+    }
+    expect(seen, 'both births still hold a legitimacy crisis').toBe(2);
+    expect(fails).toEqual([]);
+  }, 120_000);
 });
 
 describe('HOOKS-BUILD arms 2-6: the stored hooks, 150 towns a size', () => {
@@ -125,11 +155,10 @@ describe('HOOKS-BUILD arms 2-6: the stored hooks, 150 towns a size', () => {
     expect(bad).toEqual([]);
   }, 60_000);
 
-  test('arm 3c: every stored hook\'s needs hold on the FINAL record, but for the late writes named here', () => {
-    // A late write: the atom held when the history was written and not at the end of the birth (the birth self-check,
-    // `presumptionCheck.js`, names it). Both are `seat outranked` on the legitimacy pool; the cure is at assembly
-    // (`power/rosterText.js :: settleTensionsToRoster`), outside this unit. The list is exact: a new one reds, a cured one reds.
-    const LATE_WRITES = ['hxd-hamlet-36 legitimacy_crisis seat outranked', 'hxd-metropolis-61 legitimacy_crisis seat outranked'];
+  test('arm 3c: every stored hook\'s needs hold on the FINAL record (no late write pinned)', () => {
+    // HOOKS-FINISH (iv): the two late writes once pinned here (`seat outranked`, legitimacy 9, on hxd-hamlet-36 and
+    // hxd-metropolis-61) were false, not missed; the line is struck, so the list is empty.
+    /** @type {string[]} */ const LATE_WRITES = [];
     const fails = [];
     for (const { seed, record, tension } of tensionsOf()) {
       const pool = POOLS[tension.type] || [];
