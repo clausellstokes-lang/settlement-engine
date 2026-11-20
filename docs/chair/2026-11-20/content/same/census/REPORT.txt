@@ -1,0 +1,28 @@
+SAME-1 census (brief 1): report
+
+RUN. Measured at 669e2d72e. hxd took 5.8 min and hxu took 5.6 min, each 300 places (50 a size) on 4 forks and 4 cores, with
+no render failures (300 of 300 each). The chair's census.mjs re-run took about 1 min.
+
+SLOTS COUNTED. hxd: 1,812 slots with >= 5 holders across six sizes, and 221 printed-twice-in-one-place rows.
+hxu: 1,839 slots and 217 such rows.
+
+CLASSES. 130 slots are hand-classed in scripts/census/sameness-census.classes.json. They cover every slot in any size's
+forty-worst list, plus every LABEL?/CATALOGUE? slot with >= 10 holders and top share >= 0.5. classOf reads that file first
+and falls back to the rule. 7 of the 240 forty-worst rows keep a `?`: the hand class itself is unsure (foodSources,
+operationReading, siteLines, the session's crisis line). Rows marked "empty state" print where the place has none; they
+are listed with the furniture at the top of SAME-CENSUS.md.
+
+AGREEMENT WITH census.mjs. The re-run at the tip matches the committed census.json exactly: 961 rows, 0 different
+(agreement.txt).
+- economicState.situationDesc has no rendered row because the page does not print it. EconomicsTab.jsx:394 and
+  EconomicsGlance.jsx:46 replaced it with the desk prose.
+- powerStructure.recentConflict: the same sentence is also stored at pressureSentence, and that shorter path is the slot.
+  On the Summary Overview it reads 24 of 50 thorps (the chair's "about half"). On the Power tab it reads 73 to 90% of
+  holders.
+
+NOT ATTRIBUTED. 95 of 430 composed rows have no module. 153 composed rows print under no stable heading (COMPOSED@(none)). Each such bag mixes furniture
+with prose.
+
+THE SESSION SHEET. It is the string leaves of composeTonightSheet(town). SessionMode.jsx:201 and TableView.jsx:101
+(through TonightSheet.jsx) render that sheet. Leaves under 25 characters (ids, sourcePath, labels) drop out. It is the sheet's strings,
+not the screen's exact lines.

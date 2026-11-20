@@ -157,8 +157,17 @@ export function moduleOf(s, idx) {
 }
 
 // ── the class: decided by the source (path, module, heading); `?` where the rule guesses ──
+/** THE HAND CLASSES (scripts/census/sameness-census.classes.json), read before the rule. */
+export const HAND_CLASSES = JSON.parse(readFileSync(join(ROOT, 'scripts/census/sameness-census.classes.json'), 'utf8'));
+/** The hand class of a row, by its most specific key. @param {any} r @returns {{ cls: string, why: string } | null} */
+export function handClassOf(r) {
+  const base = r.source.startsWith('COMPOSED@') ? `${r.source} ~ ${r.module || 'unfound'}` : r.source;
+  const hit = HAND_CLASSES[`${base} ~ ${r.top}`] || HAND_CLASSES[base];
+  return hit && typeof hit === 'object' ? { cls: hit.cls, why: `hand: ${hit.why}` } : null;
+}
 /** @param {any} r @returns {{ cls: string, why: string }} */
 export function classOf(r) {
+  const hand = handClassOf(r); if (hand) return hand;
   const p = r.source.startsWith('COMPOSED@') ? '' : r.source;
   const leaf = p.split('.').pop() || '';
   const mod = r.module || '';
@@ -269,6 +278,25 @@ function censusMd(counted, { commit, wall, confirm }) {
     '3. A SLOT is `surface | source`: the shortest stored path whose string holds the sentence word for word, else `COMPOSED@<heading>` with the module whose longest literal fragment the sentence contains.',
     '4. TOP = the commonest sentence\'s places / holders; SEEN = the mean share of a place\'s sentences at the slot that a second place also prints. Rows with >= 10 holders.',
     '5. Ranked: (a) one a place (<= 1.5 sentences per place) by TOP share, (b) many a place by SEEN, merged, STATE and NARRATIVE classes only (a `?` class is the rule\'s guess); one row per source and top sentence, its surfaces listed (the reading shown is its worst surface); then every twice-printed row (c).', '');
+  // FURNITURE AND EMPTY STATES THAT A DM MEETS AGAIN: LABEL rows (and any empty state) with top share >= 0.6 and >= 25
+  // holders, one line per source and top sentence, sizes merged
+  /** @type {Map<string, any>} */ const furn = new Map();
+  for (const size of SIZES) {
+    if (!counted[size]) continue;
+    for (const r of counted[size].c.slots) {
+      if (!(r.holders >= 25 && r.topShare >= 0.6 && (/^LABEL/.test(r.cls) || /empty state/.test(r.why)))) continue;
+      const k = `${r.source.startsWith('COMPOSED@') ? `${r.source} ~ ${r.module}` : r.source}\u0000${r.top}`;
+      const o = furn.get(k) || { r, sizes: new Map(), surfaces: new Set() };
+      const was = o.sizes.get(size); if (!was || r.topShare > was.topShare) o.sizes.set(size, r);
+      o.surfaces.add(r.surface); furn.set(k, o);
+    }
+  }
+  L.push('## FURNITURE AND EMPTY STATES THAT A DM MEETS AGAIN', '', 'LABEL rows, and every row marked `empty state`, with top share >= 0.6 and >= 25 holders (hxd), one line per source and top sentence, sizes merged (size: top places / holders).', '');
+  for (const o of [...furn.values()].sort((a, b) => b.sizes.size - a.sizes.size || a.r.top.localeCompare(b.r.top))) {
+    const sz = [...o.sizes].map(([s, r]) => `${s} ${r.topN}/${r.holders}`).join(', ');
+    L.push(`- **${o.r.cls}**${/empty state/.test(o.r.why) ? ' (empty state)' : ''} "${cut(o.r.top, 110)}" — ${sz} — ${[...o.surfaces].map((x) => `\`${x}\``).join(' ')} — ${o.r.why}`);
+  }
+  L.push('');
   for (const size of SIZES) {
     if (!counted[size]) continue;
     const { c } = counted[size];
