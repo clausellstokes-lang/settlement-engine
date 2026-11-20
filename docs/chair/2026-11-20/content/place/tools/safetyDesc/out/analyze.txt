@@ -1,0 +1,181 @@
+== A. branches by size (100 places a size), the branch the writer took (its label and its line)
+branch                                  thorp     hamlet    village       town       city metropolis
+dangerous                                   3          2          2          0          0          0
+moderate:Locals watch over                  0          0         57          0          0          0
+moderate:Militia volunteers patrol          0          0          9          0          0          0
+moderate:The garrison patrols               0          0          0         13         58         67
+moderate:The watch covers                   0          0          3         60          0          0
+moderate:tiny                              67         64          0          0          0          0
+safe:The garrison is present                0          0          0          0          1          0
+strain                                     30         33         29         27         23         32
+unsafe                                      0          1          0          0         18          1
+
+== A. top share by size: the WHOLE line, masked (the census mask), and the FIRST sentence
+thorp       whole 48/100 (48%) 18 distinct :: "The neighbours keep an eye on one another, and what trouble there is, everyone soon hears "
+            first 67/100 (67%) 14 distinct :: "The neighbours keep an eye on one another, and what trouble there is, everyone soon hears "
+hamlet      whole 48/100 (48%) 18 distinct :: "The neighbours keep an eye on one another, and what trouble there is, everyone soon hears "
+            first 64/100 (64%) 16 distinct :: "The neighbours keep an eye on one another, and what trouble there is, everyone soon hears "
+village     whole 56/100 (56%) 20 distinct :: "A mix of safer and more exposed areas. Locals watch over the main paths; quieter spots aft"
+            first 69/100 (69%) 15 distinct :: "A mix of safer and more exposed areas."
+town        whole 43/100 (43%) 16 distinct :: "A mix of safer and more exposed areas. The watch covers the main paths; quieter spots afte"
+            first 73/100 (73%) 13 distinct :: "A mix of safer and more exposed areas."
+city        whole 58/100 (58%) 15 distinct :: "A mix of safer and more exposed areas. The garrison patrols the main paths; quieter spots "
+            first 58/100 (58%) 15 distinct :: "A mix of safer and more exposed areas."
+metropolis  whole 66/100 (66%) 13 distinct :: "A mix of safer and more exposed areas. The garrison patrols the main paths; quieter spots "
+            first 67/100 (67%) 12 distinct :: "A mix of safer and more exposed areas."
+
+== A. the chair's figure reproduced (the first 50 a size, whole line masked): the tap moves no birth
+  thorp       28/50 "The neighbours keep an eye on one another, and what trouble there is, everyone s"
+  town        16/50 "A mix of safer and more exposed areas. The watch covers the main paths; quieter "
+  city        33/50 "A mix of safer and more exposed areas. The garrison patrols the main paths; quie"
+
+== A. the commonest whole lines by size (top 5)
+-- thorp
+   48  The neighbours keep an eye on one another, and what trouble there is, everyone soon hears of.
+   19  The neighbours keep an eye on one another, and what trouble there is, everyone soon hears of. The walls keep the trouble inside, off the roads beyond.
+    5  People are hungry and stealing to eat. Whoever controls the food now has the say. Anyone known to have food hidden away is robbed, or worse.
+    5  The debt comes before everything. The creditor's agent decides which wrongs are chased and which are let go.
+    3  Neighbours keep the quarantine among themselves, but not everyone obeys. Frightened neighbours turn on the sick, and medicine and burials cost whatever the seller asks.
+-- hamlet
+   48  The neighbours keep an eye on one another, and what trouble there is, everyone soon hears of.
+   16  The neighbours keep an eye on one another, and what trouble there is, everyone soon hears of. The walls keep the trouble inside, off the roads beyond.
+    5  People are hungry and stealing to eat. Whoever controls the food now has the say. Anyone known to have food hidden away is robbed, or worse.
+    5  Neighbours keep the quarantine among themselves, but not everyone obeys. Frightened neighbours turn on the sick, and medicine and burials cost whatever the seller asks.
+    4  The war has changed daily life: strangers are watched closely, and curfews and fixed prices are enforced now and then.
+-- village
+   56  A mix of safer and more exposed areas. Locals watch over the main paths; quieter spots after dark carry genuine risk. Residents know which corners to avoid.
+    8  A mix of safer and more exposed areas. Militia volunteers patrol the main paths; quieter spots after dark carry genuine risk. Residents know which corners to avoid. The walls keep the trouble inside, off the roads beyond.
+    5  Neighbours keep the quarantine among themselves, but not everyone obeys. Frightened neighbours turn on the sick, and medicine and burials cost whatever the seller asks.
+    4  No stable governing authority; whoever holds sway decides what rules apply, and that changes.
+    3  Armed rebels are active, and nobody is sure whose side a neighbour is on.
+-- town
+   43  A mix of safer and more exposed areas. The watch covers the main paths; quieter spots after dark carry genuine risk. Residents know which corners to avoid. The walls keep the trouble inside, off the roads beyond.
+   17  A mix of safer and more exposed areas. The watch covers the main paths; quieter spots after dark carry genuine risk. Residents know which corners to avoid.
+    8  A mix of safer and more exposed areas. The garrison patrols the main paths; quieter spots after dark carry genuine risk. Residents know which corners to avoid.
+    5  A mix of safer and more exposed areas. The garrison patrols the main paths; quieter spots after dark carry genuine risk. Residents know which corners to avoid. The walls keep the trouble inside, off the roads beyond.
+    5  No stable governing authority. Enforcement is inconsistent; which power controls a district determines what rules apply.
+-- city
+   58  A mix of safer and more exposed areas. The garrison patrols the main paths; quieter spots after dark carry genuine risk. Residents know which corners to avoid. The walls keep the trouble inside, off the roads beyond.
+   18  Crime is a persistent and visible problem. The garrison is overwhelmed or corrupt. Travelers are advised to move in groups and keep valuables hidden. Walls slow entry but don't solve what happens inside them.
+    5  No stable governing authority. Enforcement is inconsistent; which power controls a district determines what rules apply.
+    3  Armed rebels are active. Patrols have changed their routes, some districts are closed off, and nobody is sure whose side a neighbour is on.
+    3  Creatures come close after dark. People keep away from the outlying houses, and nobody walks out at night.
+-- metropolis
+   66  A mix of safer and more exposed areas. The garrison patrols the main paths; quieter spots after dark carry genuine risk. Residents know which corners to avoid. The walls keep the trouble inside, off the roads beyond.
+    7  Authority is contested. The watch is uncertain whose orders to follow. Opportunistic crime is rising in the gap.
+    7  The debt comes before everything. The creditor's agent decides which wrongs are chased and which are let go.
+    4  The garrison keeps order, and more harshly as the food runs down. People quarrel over rations, food is sold under the counter, and the hungry have started to steal.
+    3  Since the betrayal, strangers are watched closely and neighbours quietly test each other's loyalty.
+
+== A. sentence SLOTS: for every sentence position, the top share among places whose line has that position (by size)
+-- thorp: s1 67/100 (held 100) "The neighbours keep an eye on one another, and what trouble " | s2 19/100 (held 44) "The walls keep the trouble inside, off the roads beyond."
+-- hamlet: s1 64/100 (held 100) "The neighbours keep an eye on one another, and what trouble " | s2 16/100 (held 40) "The walls keep the trouble inside, off the roads beyond."
+-- village: s1 69/100 (held 100) "A mix of safer and more exposed areas." | s2 57/100 (held 89) "Locals watch over the main paths; quieter spots after dark c" | s3 69/100 (held 75) "Residents know which corners to avoid." | s4 11/100 (held 13) "The walls keep the trouble inside, off the roads beyond."
+-- town: s1 73/100 (held 100) "A mix of safer and more exposed areas." | s2 60/100 (held 95) "The watch covers the main paths; quieter spots after dark ca" | s3 73/100 (held 76) "Residents know which corners to avoid." | s4 48/100 (held 48) "The walls keep the trouble inside, off the roads beyond."
+-- city: s1 58/100 (held 100) "A mix of safer and more exposed areas." | s2 58/100 (held 97) "The garrison patrols the main paths; quieter spots after dar" | s3 58/100 (held 78) "Residents know which corners to avoid." | s4 58/100 (held 77) "The walls keep the trouble inside, off the roads beyond."
+-- metropolis: s1 67/100 (held 100) "A mix of safer and more exposed areas." | s2 66/100 (held 96) "The garrison patrols the main paths; quieter spots after dar" | s3 67/100 (held 75) "Residents know which corners to avoid." | s4 67/100 (held 68) "The walls keep the trouble inside, off the roads beyond."
+
+== A. any sentence (anywhere in the line) printed in more than 15 of a size's places
+  thorp        67  The neighbours keep an eye on one another, and what trouble there is, everyone soon hears of.
+  thorp        19  The walls keep the trouble inside, off the roads beyond.
+  hamlet       64  The neighbours keep an eye on one another, and what trouble there is, everyone soon hears of.
+  hamlet       16  The walls keep the trouble inside, off the roads beyond.
+  village      69  A mix of safer and more exposed areas.
+  village      69  Residents know which corners to avoid.
+  village      57  Locals watch over the main paths; quieter spots after dark carry genuine risk.
+  town         73  A mix of safer and more exposed areas.
+  town         73  Residents know which corners to avoid.
+  town         60  The watch covers the main paths; quieter spots after dark carry genuine risk.
+  town         48  The walls keep the trouble inside, off the roads beyond.
+  city         58  A mix of safer and more exposed areas.
+  city         58  The garrison patrols the main paths; quieter spots after dark carry genuine risk.
+  city         58  Residents know which corners to avoid.
+  city         58  The walls keep the trouble inside, off the roads beyond.
+  city         18  Crime is a persistent and visible problem.
+  city         18  The garrison is overwhelmed or corrupt.
+  city         18  Travelers are advised to move in groups and keep valuables hidden.
+  city         18  Walls slow entry but don't solve what happens inside them.
+  metropolis   67  A mix of safer and more exposed areas.
+  metropolis   67  Residents know which corners to avoid.
+  metropolis   67  The walls keep the trouble inside, off the roads beyond.
+  metropolis   66  The garrison patrols the main paths; quieter spots after dark carry genuine risk.
+
+== C. the writer: calls a birth, which call the stored line equals, the seed in scope there
+calls a birth: 2 calls × 499, 3 calls × 101
+stored line = the LAST call's: 599/600; = the first call's: 593/600; first and last calls differ: 6; stored equals no call: 1
+the active stream's seed at the writer: <seed>::economyReconcilePass × 701, <seed>::generateEconomy × 600
+config._seed at the writer equals the birth's seed: 0 of 1301 calls
+
+== C. the stored line changed after the writer (a later pass): where the stored line equals no call, the pair
+  hxd-city-56: writer "Crime exists but is well-managed. The garrison is present and responsi" → stored "Crime is on the rise. The garrison is present and responsive. Petty th"
+
+== C. the writer's facts (the last call's roster) against the FINAL record's, disagreements on the 600
+  defence.walls      0 
+  defence.wallKind   0 
+  defence.palisade   0 
+  defence.gate       0 
+  defence.watch      0 
+  defence.militia    0 
+  defence.garrison   0 
+  defence.mercenary  0 
+  defence.court      0 
+  defence.prison     0 
+  forceWalksByDay    0 
+  paidWatch          0 
+  guardPresence      0 
+  market             0 
+  route              600 hxd-thorp-0 ""→"river"; hxd-thorp-1 ""→"road"; hxd-thorp-2 ""→"river"
+  terrain            600 hxd-thorp-0 ""→"forest"; hxd-thorp-1 ""→"plains"; hxd-thorp-2 ""→"riverside"
+  tier               0 
+  courtSits          33 hxd-town-1 false→true; hxd-town-2 false→true; hxd-town-4 false→true
+  crime              23 hxd-town-2 "none"→"diffuse"; hxd-town-4 "none"→"diffuse"; hxd-town-10 "none"→"diffuse"
+  sacredHouse        0 
+  guild              24 hxd-hamlet-0 false→true; hxd-hamlet-61 false→true; hxd-hamlet-97 false→true
+  route   by the writer's config.tradeRouteAccess: 0 disagree; terrain by config.terrainType: 0 disagree
+  houses.garrison   0 
+  houses.watch      0 
+  houses.militia    0 
+  houses.mercenary  0 
+  houses.walls      0 
+
+== C. the force houses by name, by size, in the places of the repeated branches (moderate:*, safe:*, verySafe:*), FINAL roster
+-- thorp (67): (none) ×51 | Household levy ×16
+   walls: (no walls) ×48 | Palisade ×19
+   day:false ×58, day:true ×9 | route road ×27, river ×18, isolated ×8, crossroads ×7, port ×7 | market 0 | court sits 0
+-- hamlet (64): (none) ×48 | Citizen militia ×16
+   walls: (no walls) ×48 | Palisade or earthworks ×16
+   day:false ×48, day:true ×16 | route road ×20, crossroads ×14, isolated ×12, river ×11, port ×7 | market 4 | court sits 0
+-- village (69): (none) ×57 | Citizen militia ×9 | Village watch ×3
+   walls: (no walls) ×58 | Palisade or earthworks ×11
+   day:false ×60, day:true ×9 | route road ×23, river ×17, isolated ×11, crossroads ×10, port ×8 | market 16 | court sits 0
+-- town (73): Town watch ×60 | Barracks + Town watch ×13
+   walls: Town walls ×42 | (no walls) ×25 | Town walls + Gates (if walled) ×3 | Town walls + Citadel ×2 | Citadel + Town walls ×1
+   day:false ×60, day:true ×13 | route road ×46, river ×12, crossroads ×9, port ×6 | market 73 | court sits 59
+-- city (59): Garrison + Professional city watch ×59
+   walls: City walls and gates + Citadel ×43 | City walls and gates ×16
+   day:true ×59 | route road ×24, river ×17, crossroads ×9, port ×9 | market 59 | court sits 59
+-- metropolis (67): Multiple garrisons + Professional city watch ×67
+   walls: Massive walls and fortifications + Citadel ×51 | Massive walls and fortifications ×16
+   day:true ×67 | route road ×35, river ×18, port ×8, crossroads ×6 | market 67 | court sits 67
+
+== C. the force houses' own texts (the descriptions the force prints), commonest 12 across the 600
+   78  Professional city watch: Full-time law enforcement. About one officer for every hundred people.
+   64  Professional city watch: A standing force of the law, roughly one in a hundred residents.
+   58  Professional city watch: Full-time keepers of order, about one for every hundred people in the city.
+   37  Garrison: A professional force, under arms full-time.
+   37  Multiple garrisons: Troops quartered in several places at once, a metropolis being far too large for one garrison.
+   33  Multiple garrisons: Garrison forces distributed across quarters. No single barracks can secure a metropolis.
+   32  Garrison: A professional force, kept under arms for pay.
+   31  Garrison: A standing force, paid to bear arms.
+   30  Multiple garrisons: Garrisons spread through the quarters; no single barracks could secure a city this size.
+   24  Town watch: Part-time guards who walk the night and hold the gates.
+   20  Town watch: Part-time guards. Night patrol and gate duty.
+   19  Town watch: Watchmen serving part-time. Night patrols and gate duty.
+
+== C. crime wave beside the Safe branch (CRIME_WAVE_TWINS rewrites its opening at assembly)
+  thorp       Safe 0, opening "Crime is on the rise." 0
+  hamlet      Safe 0, opening "Crime is on the rise." 0
+  village     Safe 0, opening "Crime is on the rise." 0
+  town        Safe 0, opening "Crime is on the rise." 0
+  city        Safe 1, opening "Crime is on the rise." 1
+  metropolis  Safe 0, opening "Crime is on the rise." 0
