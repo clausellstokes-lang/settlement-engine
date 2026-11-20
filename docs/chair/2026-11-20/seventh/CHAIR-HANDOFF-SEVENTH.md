@@ -1831,3 +1831,16 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   from a living religion for a ruler or a criminal, the priests' existing ones left alone) and the one question.
   OPEN WITH THE OWNER NOW: culture on the criminal titles (yes or no); a DM-only mark on a front's own card (yes or no).
   NAMES-2 is session_019yED1QtZ3FpHeLyMj7RFWD.
+- 06:05 UTC · **PULL REQUEST #75's CI IS GREEN AT POINT 76** (run 44681357957 at 7e0c77ae, 05:29 to 06:02 UTC; read job by job
+  through the GitHub tools, the subscription to the pull request having failed): "Validate, test, build" success;
+  the test ratchet's verdict success over six shards, each concluded (the source phase: shard 1 16m14s, 2 15m01s,
+  3 15m52s, 4 22m42s, 5 20m44s, 6 32m00s; the cap is 60: the longest times 1.5 is 48); validation, the type ratchets,
+  lint, build and dist success; Chromium end-to-end success (the suite 10m38s in Playwright's image; the install
+  step one second); the browser performance job, the golden master under the hostile locale, the coverage floors
+  (31m25s) and the edge functions' tests success; the deploy jobs SKIPPED, as they must be (the deploy is the
+  owner's). POINT 75's AND POINT 76's "PLAUSIBLE UNTIL CI" ARE NOW CONFIRMED: the image and both browser suites, the
+  twenty budgets, the corpus hook's budget on a runner, the shard cap. WHAT COMES NEXT WILL RED IT AGAIN BY DESIGN: a
+  content lane that lands (the names, the frame, the seat) moves the golden master and its sibling figures, which stay
+  named and unsigned on the line until the close and the owner's yes.
+  ALSO: this session's worker was restarted at about 06:00 UTC in the middle of a commit and push of this record
+  (exit 137); the commit had been made (2124fc61), the push had not: pushed after the restart; nothing lost.
