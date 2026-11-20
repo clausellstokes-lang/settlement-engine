@@ -73,9 +73,10 @@ describe('daily life reads no person of its own (the dead call removed)', () => 
       const now = textsOf(rec);
       // DAILY-2 B1b C3 moved `gathering_places` by design (LINES-1 as the chair ruled): the parity of C1's removal holds
       // on the other seven slots; the eighth is held by `tests/domain/dailyLifeGathering.test.js` and the owner-vs-public check below.
-      // DAILY-2 B2 D1 moved `dawn_work` by design the same way (LINES-1 / LINES-1b as ruled; held by `dailyLifeDawn.test.js`).
-      const { gathering_places: _moved, dawn_work: _movedDawn, ...kept } = BEFORE[seed];
-      const { gathering_places: _now, dawn_work: _nowDawn, ...nowKept } = now;
+      // DAILY-2 B2 D1 and D2 moved `dawn_work` and `child_warnings` by design the same way (LINES-1 / LINES-1b as ruled; held
+      // by `dailyLifeDawn.test.js` and `dailyLifeChild.test.js`).
+      const { gathering_places: _moved, dawn_work: _movedDawn, child_warnings: _movedChild, ...kept } = BEFORE[seed];
+      const { gathering_places: _now, dawn_work: _nowDawn, child_warnings: _nowChild, ...nowKept } = now;
       expect(nowKept, `${seed}: before vs after`).toEqual(kept);
       expect(textsOf(toPublicSafe(rec)), `${seed}: owner vs toPublicSafe`).toEqual(now);
     }

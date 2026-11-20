@@ -45,6 +45,7 @@ import { deriveCausalState } from './causalState.js';
 import { powerPossessive } from './display/powerSentenceName.js';
 import { GATHERING_NAMED, GATHERING_PLAIN } from '../data/dailyLife/gatheringPlaces.js';
 import { DAWN_WORK } from '../data/dailyLife/dawnWork.js';
+import { CHILD_WARNINGS } from '../data/dailyLife/childWarnings.js';
 import { filterDeclared } from './facts/drawDeclared.js';
 import { atomHolds } from './facts/factVocabulary.js';
 import { factsOf } from './facts/factsOf.js';
@@ -374,48 +375,79 @@ function deriveGatheringPlaces(s, _ctx) {
   return slot('gathering_places', text, 'the live roster, by the lines\' declared atoms (LINES-1)', refs);
 }
 
+// ── child_warnings (DAILY-1 LINES-1 § child_warnings and LINES-1b, as the chair ruled at 18:37, 18:53 and 18:56) ──
+//
+// The threats by severity, each KIND said once, the first TWO kinds; a kind from a rating alone is not taken (ruling 8:
+// unrest needs a live trouble, economic collapse prosperity struggling or poor or a real stress); a kind with no pool
+// (corruption and cult among them) is `default` (D0); no real kind, the `none` pool's whole sentence. Each kind's pool
+// (`data/dailyLife/childWarnings.js :: CHILD_WARNINGS`) goes by THE ROUTE (`pickNameable`), keyed by its kind; two kinds
+// join "Children are warned about A, and about B.". No line true: the EMPTY string (ruling 3).
+
+/** LINES-1b § 1: the tension types that are a live trouble (`history.currentTensions[].type`, the field `facts/uprising.js`
+ * reads); crime_wave, corruption_scandal and infiltration_fear are left out (rule 6). */
+const CIVIL_TENSIONS = Object.freeze(['popular_uprising', 'succession_crisis', 'legitimacy_crisis', 'leadership_vacuum', 'tyranny',
+  'population_friction', 'disputed_land', 'religious_tension', 'guild_conflict', 'generational_divide', 'economic_disparity', 'heresy_trial']);
+/** LINES-1b § 1: the tension types that are a real economic stress. */
+const ECON_TENSIONS = Object.freeze(['trade_collapse', 'market_crash', 'outside_debt', 'resource_scarcity']);
+/** The threats the defence profile's ratings raise (`threatProfile.js` step 2): a rating alone, no trouble held. */
+const RATING_SURFACE = 'defenseProfile';
+
+/** @param {DailyLifeSettlement} s @returns {string[]} the record's live tension types */
+function tensionTypes(s) {
+  const t = /** @type {{ history?: { currentTensions?: unknown } | null }} */ (s)?.history?.currentTensions;
+  return (Array.isArray(t) ? t : t ? [t] : []).map((e) => /** @type {{ type?: unknown }} */ (e)?.type).filter((x) => typeof x === 'string');
+}
+
 /**
  * @param {DailyLifeSettlement} s
  * @param {DailyLifeContext} ctx
  * @returns {DailyLifeSlot}
  */
 function deriveChildWarnings(s, ctx) {
+  /** @type {SlotReference[]} */
   const refs = [];
-  // Top threats by severity
-  const top = [...ctx.threats].sort((a, b) => b.severity - a.severity).slice(0, 3);
+  const facts = factsFor(s);
+  const tensions = tensionTypes(s);
+  const conflicts = /** @type {{ conflicts?: unknown }} */ (s).conflicts;
+  const prosperity = /** @type {{ prosperity?: unknown }} */ (facts).prosperity;
+  const trouble = (Array.isArray(conflicts) && conflicts.length > 0) || tensions.some((t) => CIVIL_TENSIONS.includes(t))
+    || ctx.threats.some((t) => t.type === 'unrest' && t.originSurface !== RATING_SURFACE);
+  const econStress = prosperity === 'poor' || prosperity === 'struggling'
+    || ctx.threats.some((t) => t.type === 'economic_collapse' && t.originSurface !== RATING_SURFACE)
+    || tensions.some((t) => ECON_TENSIONS.includes(t));
+  /** @param {ThreatProfile} t @returns {keyof typeof CHILD_WARNINGS | null} the kind a threat is said as, null if not taken */
+  const kindOf = (t) => {
+    if ((t.type === 'unrest' && !trouble) || (t.type === 'economic_collapse' && !econStress)) return null;
+    return Object.hasOwn(CHILD_WARNINGS, t.type) && t.type !== 'none' && t.type !== 'default'
+      ? /** @type {keyof typeof CHILD_WARNINGS} */ (t.type) : 'default';
+  };
+  /** @type {Map<keyof typeof CHILD_WARNINGS, ThreatProfile>} the first threat of each kind, by severity */
+  const byKind = new Map();
+  for (const t of [...ctx.threats].sort((a, b) => b.severity - a.severity)) {
+    const k = kindOf(t);
+    if (k && !byKind.has(k)) byKind.set(k, t);
+  }
+  const kinds = [...byKind.keys()].slice(0, 2);
+  const house = houseFinder(s);
 
   let text;
-  if (top.length === 0) {
-    text = 'Children are warned about the usual things: the deep well, the strangers\' road, the woods at twilight.';
+  if (!kinds.length) {
+    const eligible = filterDeclared(CHILD_WARNINGS.none, { facts, poolId: 'dailyLife.child_warnings.none', surface: 'dailyLife' });
+    text = sayDeclared(pickNameable(s, eligible, 'child_warnings', 'none', house), house, refs);
   } else {
-    // R3-CODE-C (the chair's C-L4): two threats of one kind give one warning, said once ("the road past sundown; …; the road past sundown").
-    const parts = [...new Set(top.map(t => threatWarning(t)))];
-    text = `Children are warned about ${parts.join('; ')}.`;
-    for (const t of top) refs.push({ id: t.id, label: t.label, type: 'threat' });
+    const parts = [];
+    for (const kind of kinds) {
+      const eligible = filterDeclared(CHILD_WARNINGS[kind], { facts, poolId: `dailyLife.child_warnings.${kind}`, surface: 'dailyLife' });
+      const said = sayDeclared(pickNameable(s, eligible, 'child_warnings', kind, house), house, refs);
+      if (!said) continue;
+      const t = /** @type {ThreatProfile} */ (byKind.get(kind));
+      refs.push({ id: t.id, label: t.label, type: 'threat' });
+      parts.push(said);
+    }
+    text = parts.length ? `Children are warned about ${parts.join(', and about ')}.` : '';
   }
 
   return slot('child_warnings', text, 'top threats by severity', refs);
-}
-
-/**
- * @param {ThreatProfile} threat
- * @returns {string}
- */
-function threatWarning(threat) {
-  switch (threat.type) {
-    case 'monster_pressure':    return 'the road past sundown';
-    case 'bandit_raids':        return 'strangers who linger at the gates';
-    case 'siege':               return 'staying close when the bells ring three times';
-    case 'rival_neighbor':      return `anything bearing the colors of the neighbour`;
-    case 'plague':              return 'the sick-house and unfamiliar coughs';
-    case 'famine':              return 'wandering off: bread is short';
-    case 'corruption':          return 'talking to officials they don\'t know';
-    case 'unrest':              return 'crowds that gather quickly';
-    case 'arcane_instability':  return 'shimmering air and unfamiliar lights';
-    case 'cult':                return 'masked strangers offering sweets';
-    case 'economic_collapse':   return 'the empty stalls in the trade quarter';
-    default:                    return threat.label.toLowerCase();
-  }
 }
 
 /**

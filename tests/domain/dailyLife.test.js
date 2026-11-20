@@ -28,6 +28,7 @@ import {
 } from '../../src/domain/dailyLife.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { DAWN_WORK } from '../../src/data/dailyLife/dawnWork.js';
+import { CHILD_WARNINGS } from '../../src/data/dailyLife/childWarnings.js';
 
 // ── Catalog ────────────────────────────────────────────────────────────
 
@@ -186,7 +187,10 @@ describe('child_warnings behavior', () => {
     const s = deriveDailyLifeSlot('child_warnings', {
       config: { monsterThreat: 'plagued' },
     });
-    expect(s.text.toLowerCase()).toMatch(/(sundown|road|monster|woods|night)/);
+    // DAILY-2 B2 D2 (LINES-1 § child_warnings): the plagued country's warning is a line of the monster pool, picked among
+    // those the record holds (this nameless record holds no road, so not "the road past sundown"): the pin re-recorded to the
+    // meaning it guarded, the top threat said by its own kind's warning and cited.
+    expect(CHILD_WARNINGS.monster_pressure.map((l) => `Children are warned about ${l.text}.`)).toContain(s.text);
     expect(s.references.some(r => r.type === 'threat')).toBe(true);
   });
 
