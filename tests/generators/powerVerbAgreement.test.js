@@ -34,7 +34,7 @@ describe('the one helper, in the data leaf and at its domain home', () => {
     expect(withPowerVerb('so the Merchant Guilds controls one district; a rival controls another', 'Merchant Guilds', 'controls', 'control'))
       .toBe('so the Merchant Guilds control one district; a rival controls another');
     expect(withPowerVerb('so the Elder Council controls one district', 'Elder Council', 'controls', 'control')).toBe('so the Elder Council controls one district');
-    expect(withPowerVerb('The gap between them and the Merchant Guilds controls nothing', 'Craft Guilds', 'controls', 'control')).toBe('The gap between them and the Merchant Guilds controls nothing');
+    expect(withPowerVerb('Next to them, the Merchant Guilds controls nothing', 'Craft Guilds', 'controls', 'control')).toBe('Next to them, the Merchant Guilds controls nothing');
   });
 });
 
