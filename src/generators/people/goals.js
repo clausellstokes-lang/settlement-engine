@@ -734,6 +734,8 @@ function apartIn(ctx) {
 
 /** The two vantages, in the order a card holds them. */
 const VANTAGES = /** @type {const} */ (['short', 'long']);
+/** A card's keyed intent at one vantage, read by its own key (`intent.short`, `intent.long`), never by a computed index. @param {unknown} intent @param {Vantage} v @returns {Rec} */
+const intentAt = (intent, v) => rec(v === 'long' ? rec(intent).long : rec(intent).short);
 
 /**
  * A9 — DEAL THE GOALS over the final cast (design §2): each card's SHORT and LONG goal, from two
@@ -971,7 +973,7 @@ export function refuseWantsBesideSecrets(settlement, cast, relationships, option
   const rowsOf = () => (rows ??= refusalRowsOf(settlement));
   const hits = cast.map((c) => {
     if (!c || c.id == null || keep.has(String(c.id))) return null;
-    const vs = VANTAGES.filter((v) => { const it = rec(rec(rec(rec(c).goal).intent)[v]); return it.family === 'PERSONALITY' && refusedCluster(it.kind); });
+    const vs = VANTAGES.filter((v) => { const it = intentAt(rec(rec(c).goal).intent, v); return it.family === 'PERSONALITY' && refusedCluster(it.kind); });
     if (!vs.length) return null;
     const r = rareRowOf(rec(c).secret); // the final secret: a rare row (its name, for the tooth), else the card's own
     const rare = !!r && GOAL_SECRET_REFUSAL_RARE_KEYS.includes(str(r.row.key));
@@ -1010,8 +1012,8 @@ export function refuseWantsBesideSecrets(settlement, cast, relationships, option
           const list = holders.get(key); if (list) list.push(h); else holders.set(key, [h]);
         }
       });
-      const old = rec(goal.intent[v]);
-      const other = str(rec(goal.intent[v === 'short' ? 'long' : 'short']).family);
+      const old = intentAt(goal.intent, v);
+      const other = str(intentAt(goal.intent, v === 'short' ? 'long' : 'short').family);
       const by = familyCandidates(card, out, ctx, v, held, { pursuit: v === 'long' ? lawLongPursuit(card, out, ctx) : null });
       const own = (by.PERSONALITY || []).map(refuse);
       const picked = own.find((c) => c.text === goal[v]) || own.find((c) => c.kind === old.kind) || null;
