@@ -43,7 +43,8 @@
  *                    (`readHandLines`): a declared row (`needs` or `marks`) by its atoms, rule 1 and rule 2 as above;
  *                    every other line (a bare string, a function, a row that declares no need) by `CRIME_TEXT_FORMS`,
  *                    the precise free-text forms the chair ruled at 19:29 (SAME-2 brief H2), never by the key list;
- *                    a line under a key `CRIME_KEY_WORDS` takes is in a CRIME POOL. A function line is read from its own source (literals and template quasis), never
+ *                    a line under a key `CRIME_KEY_WORDS` takes is in a CRIME POOL (a SENTENCE key, by its free-text
+ *                    form: `isSentenceKey`). A function line is read from its own source (literals and template quasis), never
  *                    called. The reds standing on 1c9673e84 are the bank's `hand` rows (pool, text hash, why); the
  *                    houses are the readings' `hand` rows. A seat's hand row whose table is not on this line is skipped.
  *
@@ -256,6 +257,20 @@ export const CRIME_TEXT_FORMS = Object.freeze({
 });
 /** The word whose form a text holds (the first, in the list's order), or null. @param {string} text */
 export const crimeTextForm = (text) => Object.entries(CRIME_TEXT_FORMS).find(([, form]) => form.test(text))?.[0] ?? null;
+/**
+ * A SENTENCE KEY (SAME-2 brief H2 unit 2, the chair's 19:29): a key of FIVE OR MORE WORDS that holds no `|`. Measured on
+ * this line, it takes every key of the five tables keyed by their base sentence (DESC_VARIANT_SIBLINGS 55,
+ * SERVICE_DESC_SIBLINGS 18, HISTORY_DESC_SIBLINGS 28, FOODWAYS_PRINT_SIBLINGS 4, NPC_HOOK_SIBLINGS 2) and no other
+ * table's key (INSTITUTION_DESC_VARIANTS' `tier|kind|name` keys hold `|`; the refusal rows' keys are two to four words).
+ * A sentence key is read by the free-text forms, NOT by the key list: "Organised bands of hired blades." is no crime pool.
+ * @param {string} key
+ */
+export const isSentenceKey = (key) => !key.includes('|') && key.trim().split(/\s+/).length >= 5;
+/** A key that puts its lines in a CRIME POOL: a sentence key by its free-text form, any other by `CRIME_KEY_WORDS`. @param {string} key */
+export const isCrimeKey = (key) => (isSentenceKey(key) ? crimeTextForm(key) !== null : CRIME_KEY_WORDS.test(key));
+/** The tables keyed by a sentence (the measure above): the sentence-key rule takes all their keys and no other table's. */
+const SENTENCE_KEYED = Object.freeze(['src/data/foodwaysPrintSiblings.js :: FOODWAYS_PRINT_SIBLINGS', 'src/data/historyData.js :: HISTORY_DESC_SIBLINGS',
+  'src/data/institutionDescVariants.js :: DESC_VARIANT_SIBLINGS', 'src/data/institutionServices.js :: SERVICE_DESC_SIBLINGS', 'src/data/npcData.js :: NPC_HOOK_SIBLINGS']);
 /** A row's fields that are not lines (its declaration, its classifiers, its labels). */
 const NOT_LINE_KEYS = new Set(['key', 'type', 'label', 'twinOf', 'needs', 'excludes', 'crisis', 'institutions', 'trade',
   'dominant', 'arcane', 'colour', 'marks']);
@@ -344,7 +359,7 @@ export function poolLeaves(value) {
 /**
  * The phase-3 reading of the hand pools' lines. A DECLARED row (`needs` or `marks`) is read by its atoms: rule 1 reds
  * a crime or hideable atom, rule 2 lists its other houses. Every other line (a bare string, a function, a row that
- * declares no need) is read by `CRIME_TEXT_FORMS`. A line under a key `CRIME_KEY_WORDS` takes is in a CRIME POOL. A line
+ * declares no need) is read by `CRIME_TEXT_FORMS`. A line under a key `isCrimeKey` takes is in a CRIME POOL. A line
  * marked `dm-only`, or in a pool `EXEMPT` names, reds nowhere.
  * @param {HandPool[]} hand @param {Readonly<Record<string, unknown>>} [exempt] @param {boolean} [words] read bare lines by `CRIME_TEXT_FORMS`
  * @param {Readonly<Record<string, unknown>>} [dm] the tables dm-only by construction
@@ -358,7 +373,7 @@ export function readHandLines(hand, exempt = EXEMPT, words = FREE_TEXT_READ, dm 
     const atoms = declared ? [...new Set([...(row.needs || []), ...(row.marks || []).filter((/** @type {string} */ m) => m !== COVERT)])] : [];
     const text = lineText(x);
     /** @type {string[]} */ const why = [];
-    if (path.some((k) => CRIME_KEY_WORDS.test(k))) why.push('crime pool');
+    if (path.some(isCrimeKey)) why.push('crime pool');
     if (declared) why.push(...atoms.filter((a) => ['crime', 'hideable'].includes(String(atomClass(a)))).map((a) => `needs ${a}`));
     else if (words && text !== null && crimeTextForm(text)) why.push(`crime word ${crimeTextForm(text)}`);
     if (text === null) why.push('unreadable');
@@ -520,6 +535,16 @@ describe(`the hideable-house walker of the sameness pools (base ${BASE})`, async
     expect(handHouseReadings(await handPoolsOnLine(readJson(HAND_REL).rows))).toEqual(readJson(HOUSES_REL).hand);
   });
 
+  test('SENTENCE KEYS: the rule takes every key of the sentence-keyed tables and no other table\'s key', async () => {
+    const taken = new Map();
+    for (const { ref, value } of await handPoolsOnLine(readJson(HAND_REL).rows)) {
+      const keys = new Set(poolLeaves(value).flatMap(({ path }) => path));
+      taken.set(ref, [[...keys].filter(isSentenceKey).length, keys.size]);
+    }
+    expect([...taken].filter(([, [n]]) => n > 0).map(([ref]) => ref).sort()).toEqual([...SENTENCE_KEYED]);
+    for (const ref of SENTENCE_KEYED) expect(taken.get(ref)?.[0], ref).toBe(taken.get(ref)?.[1]);
+  });
+
   test('TOTALITY: every pool-shaped table a draw site reads is reached by corpusPools or on the hand list', async () => {
     const hand = readJson(HAND_REL).rows;
     expect(hand.length).toBeLessThanOrEqual(HAND_CEILING);
@@ -583,6 +608,16 @@ describe(`the hideable-house walker of the sameness pools (base ${BASE})`, async
       expect(handReds([{ ref, value: { criminal: ['They owe the crew one favour more.'] } }]).map((r) => r.why)).toEqual(['crime pool']);
       expect(handReds([{ ref, value: { criminal: [{ text: 'They owe the crew one favour more.', marks: [COVERT] }] } }])).toEqual([]);
       expect(handReds([{ ref, value: { criminal: ['x'] } }], { [`${ref}::criminal`]: { class: 'withheld' } })).toEqual([]);
+    });
+
+    test('SENTENCE KEYS: a key that is a sentence is read by the free-text forms, not the key list', () => {
+      const ref = 'src/data/institutionDescVariants.js :: DESC_VARIANT_SIBLINGS';
+      const blades = 'Organised bands of hired blades. Major forces, hundreds to thousands strong.';
+      expect(isSentenceKey(blades)).toBe(true);
+      expect(isSentenceKey('city|Criminal|Thieves guild chapter')).toBe(false);
+      expect(handReds([{ ref, value: { [blades]: ['Hired swords, by the hundred.'] } }])).toEqual([]);
+      expect(handReds([{ ref, value: { 'A chapter of organised crime. Thirty to a hundred members.': ['A cell of the wider order.'] } }]).map((r) => r.why)).toEqual(['crime pool']);
+      expect(handReds([{ ref: 'src/data/npcData.js :: NPC_WANTS', value: { organised: ['x'] } }]).map((r) => r.why)).toEqual(['crime pool']);
     });
 
     test('PHASE 3: a bare line holding a free-text form reds in a non-crime hand pool, a string or a function read by its source', () => {
