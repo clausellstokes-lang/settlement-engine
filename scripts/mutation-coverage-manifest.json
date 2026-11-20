@@ -4678,6 +4678,14 @@
     "tests/generators/faultsWatch.test.js": {
       "kind": "mutation",
       "label": "faults-watch/the holding cells hold pending trial only where a court sits"
+    },
+    "tests/security/galleryDoors.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "THE DOORS WALKER (VEIL-DOORS; the seventh chair's VR20 (C) and VR27). It reads the catalogue of a chain of every migration on disk under Supabase's default privileges and registers every function anon or authenticated may execute that reads a town or a map (its kind, and for a door every column, filter key and sort key with its rule), red on an unregistered one and on a stale row; the tile rows are executable by no visitor; every event type the app writes to a chronicle is classed in both engines' tables, which are equal; the stability band table is one in both engines. WHY RATIONALE: a sweep plant is validated by executing scripts/mutation-sweep.sh, whose revert is a checkout against the live worktree, which the shared-tree protocol forbids. ITS CATCHING POWER IS EXECUTED: at bedd5a392 (before the cure) its tile-rows arm, its class-table arm and its band arm were red on the tree and green after the cure in the same commit, and its census arms derive the registry's coverage from the catalogue and the functions' own text on every run (a column, filter or sort added to a door reds it). Promote to kind:mutation once the sweep can run from CI or a single-owner checkout, planting one unregistered column in a door."
+    },
+    "tests/security/galleryDoors.pglite.test.js": {
+      "kind": "rationale",
+      "rationale": "THE DOORS BESIDE `data` (VEIL-DOORS; REVIEW-VEIL-10's V10-1, V10-3, V10-4). Its catching power is EXECUTED RED FIRST, not claimed: at bedd5a392, the commit before the cure, all six server arms were red each for its own finding (the chronicle named the hidden house and the covert act; the newest-fifty window was taken before the removal; the stability tile carried its cause; the closed answer was sent beside tiles; an unmarked map member was served whole; anon could execute the tile rows), and green after the cure; the twin arm compares the server with src/domain/display/galleryDoors.js on every run. WHY RATIONALE: a sweep plant is validated by executing scripts/mutation-sweep.sh, whose revert is a checkout against the live worktree, which the shared-tree protocol forbids. Promote to kind:mutation once the sweep can run from CI or a single-owner checkout."
     }
   },
   "meta": {

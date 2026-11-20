@@ -1839,6 +1839,471 @@ create or replace function public._gallery_apply_member_overrides(
   ) ws;
 $$;
 
+-- ════════════════════════════════════════════════════════════════════════════
+-- VEIL-DOORS (the seventh chair's seat, 2026-11-20): THE DOORS BESIDE `data`
+-- ════════════════════════════════════════════════════════════════════════════
+-- REVIEW-VEIL-10 read everything else a non-owner read returns and found three doors the veil never passed (each read
+-- as anon on a chain 001..212 at bedd5a392; tests/security/galleryDoors.pglite.test.js holds each, red at that commit):
+--   V10-1 THE CHRONICLE: get_gallery_dossier's `chronicle` and every map member's (032's allowlist of the eventLog) named a
+--     house the share hides ("A new Black market was established."; IMPOSE_CORRUPTION "... turned by the Smuggling network").
+--   V10-3 THE TILES: _gallery_public_tile_rows (147) read stability, prosperity and the rest RAW from the row, for every
+--     list, filter, sort and count and for the dossier's top-level columns; a closed answer was sent beside them.
+--   V10-4 THE MAP MEMBER: get_gallery_map served a member with no veil of its own through the sanitiser alone.
+-- THE RULINGS (the seventh chair's VR19 to VR23; each vetoable by the owner), as built here:
+--   (1) THE TILES (VR19, VR22): one rule, in the tile rows every list, filter, sort and count and the dossier read: a row
+--       with no veil marker is served as before (VR23: R4's sparing of an unmarked listed page, tiles included); a marked
+--       row's tiles are read from the document the read itself serves (the narration where narrated, the frozen copy in
+--       snapshot mode), never from a stored copy of it (the facet columns): stability is its BAND WORD ALONE
+--       (_gallery_doors_band: labelBands.js :: STABILITY_BANDS, the longest that opens the label and is not followed by a
+--       letter), the cause never; prosperity its stored band (VR28 tier 2: a coarse band of a closed vocabulary, sent as
+--       stored, its inversion count the recorded residual); every tile drawn from the town is withheld where a
+--       name a share could hide lies inside it (_gallery_doors_names, _gallery_doors_tile). The dossier read sends no tile
+--       beside the closed answer. _gallery_public_tile_rows is callable by no visitor (Supabase's default privileges
+--       granted it to anon and authenticated: `revoke ... from public` never reached them).
+--   (2) THE CHRONICLE (VR20 (B), VR21): _gallery_doors_chronicle, each entry by its own veil (section below).
+--   (3) THE MAP MEMBER (VR23): a member is read through its own veil, and a member with none takes the default veil, as
+--       the party link's unmarked share does (R4: "the readers are players"); its chronicle by (2).
+-- COUPLED CLIENT TWIN: src/domain/display/galleryDoors.js (tilesUnderVeil, veilChronicle), rule for rule.
+-- NOT CHANGED: every _gallery_veil* helper (called, never edited), _gallery_chronicle_entry and _gallery_chronicle_json
+-- (032), every list's body (each reads the tile rows).
+
+-- [212: NEW, VEIL-DOORS] public._gallery_doors_band
+-- THE STABILITY TILE'S BAND WORD (VR19): the longest band of labelBands.js :: STABILITY_BANDS that opens the label (its
+-- spaces and tabs at either end trimmed) and is not followed by an ASCII letter; NULL where none does. The same table as
+-- the client's (tests/security/galleryDoors.walker.test.js compares them); the twin is galleryDoors.js :: tileBand.
+create or replace function public._gallery_doors_band(label text)
+returns text language sql immutable as $$
+  select b.w
+    from (select btrim(coalesce(label, ''), E' \t\n\r') as t) x,
+         unnest(array['Enforced Order', 'Unstable', 'Rigid', 'Fragile', 'Tense', 'Stable', 'Vulnerable', 'Ordered', 'Critical',
+                      'Suppressed', 'Fractured', 'Shaken', 'Desperate', 'Anxious', 'Volatile', 'Strained']) b(w)
+   where left(x.t, char_length(b.w)) = b.w and substr(x.t, char_length(b.w) + 1, 1) !~ '[A-Za-z]'
+   order by char_length(b.w) desc
+   limit 1
+$$;
+
+-- [212: NEW, VEIL-DOORS] public._gallery_doors_squeeze
+-- The name search's fold (_gallery_veil_name_fold) with its separators squeezed out. A text of ASCII alone (the tiles'
+-- words, nearly always) takes the same answer by one lowering and one replace: in ASCII every character that is not a
+-- letter or a digit is a separator (_gallery_veil_name_sep) and nothing is padded or prepared; any other text takes the
+-- fold itself. galleryDoors.js :: squeezedFold is the twin.
+create or replace function public._gallery_doors_squeeze(t text)
+returns text language sql immutable as $$
+  select case when t is null then null
+              when t !~ '[^\x01-\x7f]' then regexp_replace(translate(t, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '[^a-z0-9]+', '', 'g')
+              else replace(public._gallery_veil_name_fold(t), '_', '') end
+$$;
+
+-- [212: NEW, VEIL-DOORS] public._gallery_doors_names
+-- EVERY NAME A SHARE COULD HIDE, read off the served source WITHOUT the veil (a list asks it of every row, and the veil
+-- is the read's cost): each house in the hideable class (_gallery_veil_house: the only houses any veil removes whole,
+-- X-21e) by its name, its name without the bracketed qualifier, its label and its catalogue identity; and each power
+-- flagged hidden by its `faction` and `name` (the sanitiser removes it from every public projection). Each in the name
+-- search's fold (_gallery_veil_name_fold: every script, A-Z lowered) with its separators squeezed out, so a tile is
+-- asked by containment (no boundary, no form): a superset of what the name search asks.
+create or replace function public._gallery_doors_names(ins jsonb, powers jsonb)
+returns text[] language sql immutable as $$
+  select coalesce(array_agg(distinct q.f) filter (where q.f <> ''), '{}')
+    from (
+      select public._gallery_doors_squeeze(n.v) as f
+        from (select i from jsonb_array_elements(case when jsonb_typeof(ins) = 'array' then ins else '[]' end) i
+               where jsonb_typeof(i) = 'object'
+                 -- a necessary condition of the house predicate, asked first (the predicate is the list's cost): a criminal
+                 -- category or priority category, declared facets, the tag 'criminal' or a facet tag
+                 and (position('criminal' in lower(coalesce(i ->> 'category', '') || ' ' || coalesce(i ->> 'priorityCategory', ''))) > 0
+                      or jsonb_typeof(i -> 'facets') = 'object' or coalesce(i -> 'tags' @> '["criminal"]', false)
+                      or coalesce(position('facet:' in (i -> 'tags')::text) > 0, false))
+                 and public._gallery_veil_house(i)
+              offset 0) h,
+             lateral (values (public._gallery_veil_str(h.i -> 'name')),
+                             (regexp_replace(public._gallery_veil_str(h.i -> 'name'), '(?:[ \t]*[(\[][^()\[\]]*[)\]])+[ \t]*$', '')),
+                             (public._gallery_veil_str(h.i -> 'label')),
+                             (public._gallery_veil_str(h.i -> 'catalogId'))) n(v)
+      union all
+      select public._gallery_doors_squeeze(public._gallery_veil_str(f -> k))
+        from (select f from jsonb_array_elements(case when jsonb_typeof(powers) = 'array' then powers else '[]' end) f
+               where jsonb_typeof(f) = 'object' and coalesce(f -> 'hidden' = 'true'::jsonb, false) offset 0) p,
+             unnest(array['faction', 'name']) k
+    ) q
+$$;
+
+-- [212: NEW, VEIL-DOORS] public._gallery_doors_tile
+-- A tile drawn from the town, on a marked row: withheld (NULL) where any name a share could hide lies inside it, in the
+-- one fold, separators squeezed out; else the value as the row has it.
+create or replace function public._gallery_doors_tile(v text, names text[])
+returns text language sql immutable as $$
+  select case when v is null then null
+              when cardinality(names) > 0
+                   and exists (select 1 from unnest(names) n where position(n in public._gallery_doors_squeeze(v)) > 0)
+                then null
+              else v end
+$$;
+
+-- [212: RESTATED, VEIL-DOORS] public._gallery_public_tile_rows
+-- 147's statement (every column, in its order), plus THE TILE RULE ((1) above) for a row whose share carries a veil marker:
+-- the document is the read's own source (the narration where narrated, then the frozen copy in snapshot mode: the bytes
+-- the gallery read veils), each tile drawn from the town is read from it by 147's paths, stability is its band word,
+-- prosperity its stored band (VR28), and every tile is withheld where a name a share could hide lies inside it; the facet copies
+-- (culture, prosperity, deity) are not read for a marked row. A row with no marker: 147's columns exactly. Every list,
+-- filter, sort and count reads these rows, and get_gallery_dossier's top-level columns too. The pg_temp pin a recreated
+-- definer takes. Called only by the reads (the grant below).
+create or replace function public._gallery_public_tile_rows()
+returns table (
+  id uuid,
+  public_slug text,
+  name text,
+  tier text,
+  published_at timestamptz,
+  updated_at timestamptz,
+  view_count integer,
+  is_curated boolean,
+  gallery_description text,
+  gallery_image_url text,
+  gallery_image_alt text,
+  gallery_tags text[],
+  population integer,
+  terrain text,
+  government_type text,
+  magic_level text,
+  stability text,
+  primary_resource text,
+  threat_level text,
+  culture text,
+  prosperity text,
+  primary_deity text,
+  at_war boolean,
+  net_votes integer,
+  comment_count integer,
+  owner_id uuid,
+  importable boolean,
+  aliveness integer,
+  reactions jsonb
+)
+language sql
+stable
+security definer
+set search_path = public, pg_temp
+as $$
+  select
+    s.id,
+    s.public_slug,
+    coalesce(nullif(btrim(s.gallery_title), ''), s.name) as name,
+    s.tier,
+    s.published_at,
+    coalesce(s.gallery_updated_at, s.updated_at, s.published_at) as updated_at,
+    s.view_count,
+    s.is_curated,
+    s.gallery_description,
+    s.gallery_image_url,
+    s.gallery_image_alt,
+    s.gallery_tags,
+    case when (t.d ->> 'population') ~ '^[0-9]+$' then (t.d ->> 'population')::integer else null end as population,
+    case when t.marked then public._gallery_doors_tile(t.terrain, t.names) else t.terrain end as terrain,
+    case when t.marked then public._gallery_doors_tile(t.government_type, t.names) else t.government_type end as government_type,
+    case when t.marked then public._gallery_doors_tile(t.magic_level, t.names) else t.magic_level end as magic_level,
+    case when t.marked then public._gallery_doors_tile(public._gallery_doors_band(t.stability), t.names) else t.stability end as stability,
+    case when t.marked then public._gallery_doors_tile(t.primary_resource, t.names) else t.primary_resource end as primary_resource,
+    case when t.marked then public._gallery_doors_tile(t.threat_level, t.names) else t.threat_level end as threat_level,
+    case when t.marked then public._gallery_doors_tile(nullif(t.d #>> '{config,culture}', ''), t.names)
+         else coalesce(nullif(s.gallery_facet_culture, ''), nullif(t.d #>> '{config,culture}', '')) end as culture,
+    case when t.marked then public._gallery_doors_tile(nullif(t.d #>> '{economicState,prosperity}', ''), t.names)
+         else coalesce(nullif(s.gallery_facet_prosperity, ''), nullif(t.d #>> '{economicState,prosperity}', '')) end as prosperity,
+    case when t.marked then public._gallery_doors_tile(nullif(t.d #>> '{config,primaryDeitySnapshot,name}', ''), t.names)
+         else coalesce(nullif(s.gallery_facet_deity, ''), nullif(t.d #>> '{config,primaryDeitySnapshot,name}', '')) end as primary_deity,
+    coalesce(s.gallery_facet_at_war, false) as at_war,
+    coalesce(v.vote_count, 0)::integer as net_votes,
+    coalesce(c.comment_count, 0)::integer as comment_count,
+    s.user_id as owner_id,
+    coalesce(s.gallery_importable, false) as importable,
+    s.gallery_facet_aliveness as aliveness,
+    coalesce(rx.reactions, '{}'::jsonb) as reactions
+  from public.settlements s
+  -- the marker, read once; for a marked row the read's own source (the gallery read's `base` and `src` laterals)
+  cross join lateral (
+    select coalesce(jsonb_typeof(s.gallery_member_overrides -> '$veil') = 'object', false) as marked offset 0
+  ) mk
+  cross join lateral (
+    select mk.marked, d.d, x.names,
+      coalesce(nullif(d.d #>> '{config,terrainType}', ''), nullif(d.d #>> '{config,terrainOverride}', ''),
+               nullif(d.d #>> '{geography,terrain}', ''), nullif(d.d ->> 'terrain', '')) as terrain,
+      coalesce(nullif(d.d #>> '{powerStructure,government}', ''), nullif(d.d #>> '{powerStructure,governingName}', ''),
+               nullif(d.d #>> '{powerStructure,governmentType}', ''), nullif(d.d #>> '{government,type}', ''),
+               nullif(d.d ->> 'governmentType', '')) as government_type,
+      coalesce(nullif(d.d #>> '{config,magicLevel}', ''), nullif(d.d ->> 'magicLevel', '')) as magic_level,
+      coalesce(nullif(d.d #>> '{powerStructure,stability}', ''), nullif(d.d #>> '{viability,stability}', ''),
+               nullif(d.d #>> '{systemState,stability}', ''), nullif(d.d ->> 'stability', '')) as stability,
+      coalesce(nullif(d.d #>> '{config,nearbyResources,0}', ''), nullif(d.d #>> '{nearbyResources,0}', '')) as primary_resource,
+      coalesce(nullif(d.d #>> '{threatProfile,level}', ''), nullif(d.d #>> '{defense,threatLevel}', ''),
+               nullif(d.d ->> 'threatLevel', '')) as threat_level
+      from (select case
+              when not mk.marked then s.data
+              when s.gallery_member_overrides #>> '{$veil,mode}' = 'snapshot' and jsonb_typeof(s.gallery_member_overrides #> '{$veil,snapshot}') = 'object'
+                then s.gallery_member_overrides #> '{$veil,snapshot}'
+              when s.gallery_share_narrated and s.ai_data is not null and jsonb_typeof(s.ai_data -> 'aiSettlement') = 'object'
+                then s.ai_data -> 'aiSettlement'
+              else s.data end as d offset 0) d
+      cross join lateral (select case when mk.marked then public._gallery_doors_names(d.d -> 'institutions', d.d #> '{powerStructure,factions}') end as names offset 0) x
+  ) t
+  left join (
+    select settlement_id, count(*)::integer as vote_count
+    from public.gallery_votes
+    group by settlement_id
+  ) v on v.settlement_id = s.id
+  left join (
+    select settlement_id, count(*)::integer as comment_count
+    from public.gallery_comments
+    where deleted_at is null
+    group by settlement_id
+  ) c on c.settlement_id = s.id
+  left join (
+    select settlement_id, jsonb_object_agg(reaction_key, cnt) as reactions
+    from (
+      select settlement_id, reaction_key, count(*)::integer as cnt
+      from public.gallery_reactions
+      group by settlement_id, reaction_key
+    ) rk
+    group by settlement_id
+  ) rx on rx.settlement_id = s.id
+  where s.is_public = true;
+$$;
+
+revoke execute on function public._gallery_public_tile_rows() from public, anon, authenticated;
+
+-- [212: NEW, VEIL-DOORS] public._gallery_doors_chronicle_classes
+-- THE CHRONICLE'S CLASSES: every event type the app writes to campaign_state.eventLog, by its class. 'target': the entry
+-- names what it acts on (the 41 types of src/domain/events/registry.js :: EVENT_REGISTRY, the settlement-row writers'
+-- RENAME_SETTLEMENT and DESTROY_SETTLEMENT, the table ledger's TABLE_INCIDENT); 'covert': the act itself is the
+-- underworld's (IMPOSE_CORRUPTION: a house turned in the shadows), withheld wherever a criminal grouping is shut. A type
+-- no class knows is withheld (tests/security/galleryDoors.walker.test.js reds on a type the app writes and this omits).
+create or replace function public._gallery_doors_chronicle_classes()
+returns jsonb language sql immutable as $$
+  select '{
+    "ADD_INSTITUTION": "target", "REMOVE_INSTITUTION": "target", "DAMAGE_INSTITUTION": "target", "DEPLETE_RESOURCE": "target",
+    "CUT_TRADE_ROUTE": "target", "CREATE_ROUTE": "target", "SETTLEMENT_DISPUTE": "target", "DESTROY_SETTLEMENT": "target",
+    "ADD_NPC": "target", "KILL_NPC": "target", "ASSIGN_NPC_TO_ROLE": "target", "IMPAIR_INSTITUTION": "target",
+    "RESTORE_INSTITUTION": "target", "IMPAIR_FACTION": "target", "RESTORE_FACTION": "target", "ADD_FACTION": "target",
+    "KILL_LEADER": "target", "EXPOSE_CORRUPTION": "target", "IMPOSE_CORRUPTION": "covert", "REFUGEE_WAVE": "target",
+    "PLAGUE": "target", "RAID_OR_MONSTER_ATTACK": "target", "REMOVED_THREAT": "target", "BROKERED_ALLIANCE": "target",
+    "STARTED_RIOT": "target", "OPENED_TRADE_ROUTE": "target", "RECOVERED_RESOURCE": "target", "APPLY_STRESSOR": "target",
+    "CHANGE_RULING_POWER": "target", "RESOLVE_STRESSOR": "target", "ADD_TRADE_GOOD": "target", "REMOVE_TRADE_GOOD": "target",
+    "ADD_RESOURCE": "target", "SET_PRIMARY_DEITY": "target", "IMPOSE_CULT": "target", "SHIFT_TIER": "target",
+    "REMOVE_RESOURCE": "target", "FORCE_RELIEF": "target", "OFFER_CREDIT": "target", "PROMOTE_NPC": "target",
+    "DEMOTE_NPC": "target", "RENAME_SETTLEMENT": "target", "TABLE_INCIDENT": "target"
+  }'::jsonb
+$$;
+
+-- [212: NEW, VEIL-DOORS] public._gallery_doors_chronicle
+-- THE CHRONICLE BY ITS OWN VEIL (VR20 (B), VR21). `log`: the raw campaign_state.eventLog; `proj`: the projection the read
+-- veiled; `v`: _gallery_veil's answer for it; `src`: the read's source (the hidden powers' names, which the projection
+-- masks); `share_dm`: Reveal DM.
+--   An UNMARKED listed share (no body: the read serves `data` as before): 032's chronicle exactly (VR23, R4).
+--   THE CLOSED ANSWER (the body is the town's name alone): no chronicle.
+--   Else each entry (an object of the log) is WITHHELD WHOLE where
+--     its type (the event's, else the row's own) has no class (_gallery_doors_chronicle_classes);
+--     its class is 'covert' and the share shuts a criminal grouping or removes a house whole;
+--     the name search (_gallery_veil_name_search and _name_hits, VEIL-19's, called) finds in its summary, its target
+--       (the event's and the row's) or its payload a name the read withheld: every house the veil removed whole (in
+--       the projection and not in the body, by id: its name, its label, its catalogue identity), every person it
+--       removed (by id: the name), and on a read the sanitiser projects every power flagged hidden (`faction`, `name`);
+--       the open houses and the shown powers are its cut-outs, as the veil's own search has them.
+--   Then THE NEWEST FIFTY OF WHAT IS SERVED (VR21: the window is taken after the removal, never before), in the log's
+--   order, each entry as a shared page draws it and no more: its summary, its time (the row's timestamp where truthy,
+--   else appliedAt: the page's order), partyCaused (true where the entry or its event is party-caused or caused
+--   'party_action': the page's stamp), and its event's type (the page's title). No id: a flavor row's id holds the log's
+--   length when it was written (a counter taken before the removal), and the page needs none (it numbers what it gets).
+create or replace function public._gallery_doors_chronicle(log jsonb, proj jsonb, v jsonb, src jsonb, share_dm boolean)
+returns jsonb language plpgsql immutable as $$
+declare
+  body jsonb := v -> 'body';
+  shut boolean;
+  nm text[];
+  opens text[];
+  srch jsonb;
+  hits jsonb := '{}';
+  doc jsonb;
+begin
+  if body is null then return public._gallery_chronicle_json(log); end if;
+  if jsonb_typeof(log) is distinct from 'array' then return null; end if;
+  if jsonb_typeof(body) is distinct from 'object' or (body - 'name') = '{}'::jsonb then return null; end if;
+  if jsonb_typeof(proj) is distinct from 'object' then proj := '{}'; end if;
+  -- what the read withheld, by identity
+  with gone as (
+    select c.card from public._gallery_veil_cards(proj, 'institution') c
+     where public._gallery_veil_inst_id(c.card) is not null
+       and public._gallery_veil_inst_id(c.card) not in (select public._gallery_veil_inst_id(b.card) from public._gallery_veil_cards(body, 'institution') b
+                                                          where public._gallery_veil_inst_id(b.card) is not null)
+  ), gone_people as (
+    select c.card from public._gallery_veil_cards(proj, 'npc') c
+     where public._gallery_veil_npc_id(c.card) is not null
+       and public._gallery_veil_npc_id(c.card) not in (select public._gallery_veil_npc_id(b.card) from public._gallery_veil_cards(body, 'npc') b
+                                                         where public._gallery_veil_npc_id(b.card) is not null)
+  )
+  select array(select x from (
+           select public._gallery_veil_str(card -> k) as x from gone, unnest(array['name', 'label', 'catalogId']) k
+           union select public._gallery_veil_str(card -> 'name') from gone_people
+           union select public._gallery_veil_str(f -> k)
+                   from jsonb_array_elements(case when not coalesce(share_dm, false) and jsonb_typeof(src #> '{powerStructure,factions}') = 'array'
+                                                  then src #> '{powerStructure,factions}' else '[]' end) f, unnest(array['faction', 'name']) k
+                  where jsonb_typeof(f) = 'object' and coalesce(f -> 'hidden' = 'true'::jsonb, false)) q where x <> ''),
+         exists (select 1 from gone)
+    into nm, shut;
+  shut := shut or coalesce(v -> 'groupings' ?| array['block:services.criminal', 'block:defense.criminalStructure', 'block:power.criminalUnderside'], false);
+  opens := array(select x from (
+             select case when public._gallery_veil_str(e -> 'name') <> '' then public._gallery_veil_str(e -> 'name') else public._gallery_veil_str(e -> 'label') end as x
+               from jsonb_array_elements(case when jsonb_typeof(body -> 'institutions') = 'array' then body -> 'institutions' else '[]' end) e where jsonb_typeof(e) = 'object'
+             union select public._gallery_veil_str(e -> 'catalogId')
+               from jsonb_array_elements(case when jsonb_typeof(body -> 'institutions') = 'array' then body -> 'institutions' else '[]' end) e where jsonb_typeof(e) = 'object'
+             union select public._gallery_veil_str(f -> k)
+               from jsonb_array_elements(case when jsonb_typeof(body #> '{powerStructure,factions}') = 'array' then body #> '{powerStructure,factions}' else '[]' end) f,
+                    unnest(array['faction', 'name']) k
+              where jsonb_typeof(f) = 'object' and not coalesce(f -> 'hidden' = 'true'::jsonb, false)) q where x <> '');
+  -- each entry's strings the rule asks (its summary, its targets, its payload), once, in one document
+  doc := coalesce((select jsonb_agg(jsonb_build_array(e -> 'narrativeSummary', e -> 'targetId', e #> '{event,targetId}', e #> '{event,payload}', e -> 'payload') order by o)
+                     from jsonb_array_elements(log) with ordinality x(e, o) where jsonb_typeof(e) = 'object'), '[]');
+  if cardinality(nm) > 0 then
+    srch := public._gallery_veil_name_search(nm, opens);
+    if srch is not null then hits := public._gallery_veil_name_hits(doc, srch); end if;
+  end if;
+  return (
+    select coalesce(jsonb_agg(w.m order by w.o), '[]')
+      from (select k.o, k.m from (
+              select x.o, jsonb_strip_nulls(jsonb_build_object(
+                  'appliedAt', case when public._gallery_veil_truthy(x.e -> 'timestamp') then x.e -> 'timestamp' else x.e -> 'appliedAt' end,
+                  'narrativeSummary', x.e -> 'narrativeSummary',
+                  'partyCaused', case when public._gallery_veil_truthy(x.e -> 'partyCaused') or public._gallery_veil_truthy(x.e #> '{event,partyCaused}')
+                                           or x.e -> 'cause' = '"party_action"'::jsonb or x.e #> '{event,cause}' = '"party_action"'::jsonb
+                                      then true end,
+                  'event', case when jsonb_typeof(x.e -> 'event') = 'object' and coalesce(jsonb_typeof(x.e #> '{event,type}'), 'null') <> 'null'
+                                then jsonb_build_object('type', x.e #> '{event,type}') end)) as m
+                from (select e, o, row_number() over (order by o) as n
+                        from jsonb_array_elements(log) with ordinality y(e, o) where jsonb_typeof(e) = 'object') x
+                cross join lateral (select coalesce(nullif(case when jsonb_typeof(x.e -> 'event') = 'object' then public._gallery_veil_str(x.e #> '{event,type}') end, ''),
+                                                    nullif(public._gallery_veil_str(x.e -> 'type'), '')) as t offset 0) ty
+               where public._gallery_doors_chronicle_classes() ? ty.t
+                 and not (public._gallery_doors_chronicle_classes() ->> ty.t = 'covert' and shut)
+                 and not (hits <> '{}' and public._gallery_veil_named(doc -> (x.n::int - 1), hits, srch -> 'blank', srch -> 'raw'))
+            ) k order by k.o desc limit 50) w);
+end $$;
+
+-- [212: NEW, VEIL-DOORS] public._gallery_doors_closed
+-- THE CLOSED ANSWER (VEIL-17, V8-9): the veil served the town's name alone. Beside it the dossier read sends no tile (VR22)
+-- and no chronicle.
+create or replace function public._gallery_doors_closed(v jsonb)
+returns boolean language sql immutable as $$
+  select coalesce(jsonb_typeof(v -> 'body') = 'object' and ((v -> 'body') - 'name') = '{}'::jsonb, false)
+$$;
+
+-- [212: RESTATED, VEIL-DOORS] public.get_gallery_map
+-- 211's statement (088's body plus the veil), and ONE change, the member's two expressions (V10-4, VR23; V10-1): each
+-- member is read through _gallery_veil with the link's `true`, so a member whose share carries no veil marker takes the
+-- default veil, as the party link's unmarked share does (R4, "the readers are players": a map's member was never
+-- published as a page of its own); a marked member is read through its own veil exactly as before. Its chronicle is
+-- _gallery_doors_chronicle under that same veil. Nothing else of the map changes; its grant restated as 211 states it.
+create or replace function public.get_gallery_map(p_slug text)
+returns jsonb language plpgsql security definer set search_path = public, pg_temp as $$
+declare
+  row      public.saved_maps;
+  v_camp   jsonb;
+  v_members jsonb;
+begin
+  select * into row from public.saved_maps where public_slug = p_slug and is_public = true;
+  if not found then return null; end if;
+  update public.saved_maps set view_count = view_count + 1 where id = row.id;
+
+  if row.share_kind = 'map_with_campaign' and row.gallery_share_campaign then
+    v_camp := coalesce(row.map_data->'campaign', row.map_data);
+    -- Member dossiers — public-safe via the SAME sanitizers as the settlement
+    -- gallery. settlementIds that aren't cloud rows (local-only) simply drop out.
+    -- 088: also project each member's public_slug so the client can cross-link a
+    -- member to its public gallery dossier (null when that member isn't published).
+    select jsonb_agg(jsonb_build_object(
+      'old_id',      s.id::text,
+      'name',        s.name,
+      'tier',        s.tier,
+      'public_slug', case when s.is_public then s.public_slug else null end,
+      -- VEIL-DOORS (VR23): the member through its own veil, and a member with none takes the default veil (the link's
+      -- `true`: a map's member was never published as a page of its own); its chronicle by its own veil (VR20 (B))
+      'settlement',  vm.v -> 'body',
+      'chronicle',   public._gallery_doors_chronicle(s.campaign_state -> 'eventLog', pub.j, vm.v, src.j, false)
+    )) into v_members
+    from public.settlements s
+    -- 211: the member's own listing source (the review's F7): its narration when narrated, its frozen
+    -- copy in snapshot mode (a copy past the bound is refused: the member is left out, never served
+    -- live), then the sanitizer and its own listing's veil
+    cross join lateral (
+      select case
+        when s.gallery_share_narrated
+          and s.ai_data is not null
+          and jsonb_typeof(s.ai_data -> 'aiSettlement') = 'object'
+        then s.ai_data -> 'aiSettlement'
+        else s.data
+      end as j
+    ) base
+    cross join lateral (
+      select case when cp.copy is not null then cp.copy else base.j end as j,
+             coalesce(length(cp.copy::text) > public._gallery_veil_copy_bound(), false) as refused
+        from (select case when mv.v ->> 'mode' = 'snapshot' and jsonb_typeof(mv.v -> 'snapshot') = 'object' then mv.v -> 'snapshot' end as copy
+                from (select s.gallery_member_overrides -> '$veil' as v offset 0) mv) cp
+    ) src
+    cross join lateral (select public._gallery_sanitize_public_json(src.j) as j offset 0) pub
+    cross join lateral (select public._gallery_veil(pub.j, s.gallery_member_overrides, true) as v offset 0) vm
+    where not src.refused
+      and s.id::text in (
+      select jsonb_array_elements_text(coalesce(v_camp->'settlementIds', '[]'::jsonb))
+    )
+      -- CRITICAL (IDOR guard, 046): the owner may only ever expose their OWN
+      -- settlements. settlementIds is owner-controlled free-form jsonb and this
+      -- fn is SECURITY DEFINER (bypasses settlements RLS), so without this an
+      -- owner could list another user's settlement UUIDs and leak their dossiers.
+      and s.user_id = row.user_id
+      and s.access_state = 'active';
+
+    return jsonb_build_object(
+      'slug', row.public_slug, 'name', row.name, 'kind', row.share_kind,
+      'description', row.gallery_description, 'tags', to_jsonb(row.gallery_tags),
+      -- 088: cover image + realm-arc summary projected for the detail header.
+      'imageUrl', row.gallery_image_url, 'imageAlt', row.gallery_image_alt,
+      'realmArcSummary', row.gallery_realm_arc_summary,
+      -- ALLOWLIST the mapState fields the importer actually consumes (backdrop +
+      -- placements + the sharer's published annotations). layers/viewport (which
+      -- include GM display filters) are deliberately dropped; worldState /
+      -- regionalGraph are siblings under v_camp and NEVER included.
+      'mapState', (
+        select jsonb_strip_nulls(jsonb_build_object(
+          'fmgSnapshot',    ms->'fmgSnapshot',
+          'seed',           ms->'seed',
+          'customBackdrop', ms->'customBackdrop',
+          'placements',     ms->'placements',
+          'labels',         ms->'labels',
+          'markers',        ms->'markers',
+          'forests',        ms->'forests'
+        )) from (select v_camp->'mapState' as ms) x
+      ),
+      -- 088: the shared-world panel is the STORED, pre-sanitized publish-time
+      -- artifact (gallery_world_snapshot / _sections) — projected ONLY on the
+      -- owner's gallery_share_world opt-in, and NEVER a live read of
+      -- v_camp->'worldState' / 'regionalGraph' (those stay un-projected, per 046).
+      'world', case when row.gallery_share_world then jsonb_strip_nulls(jsonb_build_object(
+        'snapshot', row.gallery_world_snapshot,
+        'sections', coalesce(row.gallery_world_sections, '[]'::jsonb)
+      )) else null end,
+      'members', coalesce(v_members, '[]'::jsonb)
+    );
+  end if;
+
+  -- Default / kind='map' = blank-canvas backdrop only (Phase 1). 088: still carry
+  -- the cover image + rich description so a plain map share has a header too.
+  return jsonb_build_object(
+    'slug', row.public_slug, 'name', row.name, 'kind', row.share_kind,
+    'description', row.gallery_description, 'tags', to_jsonb(row.gallery_tags),
+    'imageUrl', row.gallery_image_url, 'imageAlt', row.gallery_image_alt,
+    'realmArcSummary', row.gallery_realm_arc_summary,
+    'backdrop', public._gallery_map_backdrop(row.map_data)
+  );
+end $$;
+
+grant execute on function public.get_gallery_map(text) to anon, authenticated;
+
 -- [212: RESTATED (211's statement, with the cure)] public.get_gallery_dossier
 -- get_gallery_dossier: 147's body plus the veil, and the pg_temp pin a recreated definer takes
 -- (tests/lint/migrationSearchPathPin.test.js; its ledger row comes off)
@@ -1895,16 +2360,16 @@ as $$
     s.gallery_share_dm,
     s.gallery_importable,
     vl.v -> 'served' as gallery_member_overrides,
-    r.population,
-    r.terrain,
-    r.government_type,
-    r.magic_level,
-    r.stability,
-    r.primary_resource,
-    r.threat_level,
+    case when public._gallery_doors_closed(vl.v) then null else r.population end as population,
+    case when public._gallery_doors_closed(vl.v) then null else r.terrain end as terrain,
+    case when public._gallery_doors_closed(vl.v) then null else r.government_type end as government_type,
+    case when public._gallery_doors_closed(vl.v) then null else r.magic_level end as magic_level,
+    case when public._gallery_doors_closed(vl.v) then null else r.stability end as stability,
+    case when public._gallery_doors_closed(vl.v) then null else r.primary_resource end as primary_resource,
+    case when public._gallery_doors_closed(vl.v) then null else r.threat_level end as threat_level,
     r.net_votes,
     r.comment_count,
-    public._gallery_chronicle_json(s.campaign_state -> 'eventLog') as chronicle,
+    public._gallery_doors_chronicle(s.campaign_state -> 'eventLog', proj.d, vl.v, src.j, s.gallery_share_dm) as chronicle,
     ap.external_name as author_name,
     r.aliveness
   from public.settlements s
@@ -2075,6 +2540,16 @@ $$;
 
 revoke execute on function public.import_gallery_dossier(text) from public;
 grant execute on function public.import_gallery_dossier(text) to authenticated;
+
+-- VEIL-DOORS: its helpers are called only inside the reads, likewise (by name, never from PUBLIC alone: VR27)
+do $do$
+declare f record;
+begin
+  for f in select p.oid::regprocedure as sig from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+            where n.nspname = 'public' and p.proname like '\_gallery\_doors\_%' loop
+    execute format('revoke execute on function %s from public, anon, authenticated', f.sig);
+  end loop;
+end $do$;
 
 -- ── 7. THE HELPERS ARE CALLED ONLY INSIDE THE READS ─────────────────────────────────────────
 do $do$

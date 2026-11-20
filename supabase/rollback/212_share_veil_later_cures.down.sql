@@ -428,3 +428,260 @@ drop function if exists public._gallery_veil_second_homes(jsonb, jsonb, jsonb);
 drop function if exists public._gallery_veil_sources(jsonb, jsonb, jsonb, jsonb);
 drop function if exists public._gallery_veil_tie_pieces(jsonb);
 drop function if exists public._gallery_veil_tie_roles(jsonb, jsonb, jsonb, boolean, boolean, boolean);
+
+-- ── VEIL-DOORS (the seventh chair's seat, 2026-11-20): its block, last ────────────────────────────────────────────
+-- 212's VEIL-DOORS section restated two functions and created seven helpers. Back: get_gallery_map at 211's statement
+-- (verbatim, its grant as 211 states it) and _gallery_public_tile_rows at 147's (verbatim; get_gallery_dossier, which
+-- calls the helpers, is already back at 211's above). The tile rows' revoke from anon and authenticated is NOT reversed:
+-- no client calls the helper, every read that does is a definer, and a down file never reopens a door (on a chain whose
+-- scaffold grants nothing by default the catalogue is 211's exactly). Then the seven helpers, by signature.
+
+-- [212 down: VEIL-DOORS, back to 211] public.get_gallery_map
+create or replace function public.get_gallery_map(p_slug text)
+returns jsonb language plpgsql security definer set search_path = public, pg_temp as $$
+declare
+  row      public.saved_maps;
+  v_camp   jsonb;
+  v_members jsonb;
+begin
+  select * into row from public.saved_maps where public_slug = p_slug and is_public = true;
+  if not found then return null; end if;
+  update public.saved_maps set view_count = view_count + 1 where id = row.id;
+
+  if row.share_kind = 'map_with_campaign' and row.gallery_share_campaign then
+    v_camp := coalesce(row.map_data->'campaign', row.map_data);
+    -- Member dossiers — public-safe via the SAME sanitizers as the settlement
+    -- gallery. settlementIds that aren't cloud rows (local-only) simply drop out.
+    -- 088: also project each member's public_slug so the client can cross-link a
+    -- member to its public gallery dossier (null when that member isn't published).
+    select jsonb_agg(jsonb_build_object(
+      'old_id',      s.id::text,
+      'name',        s.name,
+      'tier',        s.tier,
+      'public_slug', case when s.is_public then s.public_slug else null end,
+      'settlement',  coalesce(public._gallery_veil(pub.j, s.gallery_member_overrides, false) -> 'body', pub.j),
+      'chronicle',   public._gallery_chronicle_json(s.campaign_state -> 'eventLog')
+    )) into v_members
+    from public.settlements s
+    -- 211: the member's own listing source (the review's F7): its narration when narrated, its frozen
+    -- copy in snapshot mode (a copy past the bound is refused: the member is left out, never served
+    -- live), then the sanitizer and its own listing's veil
+    cross join lateral (
+      select case
+        when s.gallery_share_narrated
+          and s.ai_data is not null
+          and jsonb_typeof(s.ai_data -> 'aiSettlement') = 'object'
+        then s.ai_data -> 'aiSettlement'
+        else s.data
+      end as j
+    ) base
+    cross join lateral (
+      select case when cp.copy is not null then cp.copy else base.j end as j,
+             coalesce(length(cp.copy::text) > public._gallery_veil_copy_bound(), false) as refused
+        from (select case when mv.v ->> 'mode' = 'snapshot' and jsonb_typeof(mv.v -> 'snapshot') = 'object' then mv.v -> 'snapshot' end as copy
+                from (select s.gallery_member_overrides -> '$veil' as v offset 0) mv) cp
+    ) src
+    cross join lateral (select public._gallery_sanitize_public_json(src.j) as j offset 0) pub
+    where not src.refused
+      and s.id::text in (
+      select jsonb_array_elements_text(coalesce(v_camp->'settlementIds', '[]'::jsonb))
+    )
+      -- CRITICAL (IDOR guard, 046): the owner may only ever expose their OWN
+      -- settlements. settlementIds is owner-controlled free-form jsonb and this
+      -- fn is SECURITY DEFINER (bypasses settlements RLS), so without this an
+      -- owner could list another user's settlement UUIDs and leak their dossiers.
+      and s.user_id = row.user_id
+      and s.access_state = 'active';
+
+    return jsonb_build_object(
+      'slug', row.public_slug, 'name', row.name, 'kind', row.share_kind,
+      'description', row.gallery_description, 'tags', to_jsonb(row.gallery_tags),
+      -- 088: cover image + realm-arc summary projected for the detail header.
+      'imageUrl', row.gallery_image_url, 'imageAlt', row.gallery_image_alt,
+      'realmArcSummary', row.gallery_realm_arc_summary,
+      -- ALLOWLIST the mapState fields the importer actually consumes (backdrop +
+      -- placements + the sharer's published annotations). layers/viewport (which
+      -- include GM display filters) are deliberately dropped; worldState /
+      -- regionalGraph are siblings under v_camp and NEVER included.
+      'mapState', (
+        select jsonb_strip_nulls(jsonb_build_object(
+          'fmgSnapshot',    ms->'fmgSnapshot',
+          'seed',           ms->'seed',
+          'customBackdrop', ms->'customBackdrop',
+          'placements',     ms->'placements',
+          'labels',         ms->'labels',
+          'markers',        ms->'markers',
+          'forests',        ms->'forests'
+        )) from (select v_camp->'mapState' as ms) x
+      ),
+      -- 088: the shared-world panel is the STORED, pre-sanitized publish-time
+      -- artifact (gallery_world_snapshot / _sections) — projected ONLY on the
+      -- owner's gallery_share_world opt-in, and NEVER a live read of
+      -- v_camp->'worldState' / 'regionalGraph' (those stay un-projected, per 046).
+      'world', case when row.gallery_share_world then jsonb_strip_nulls(jsonb_build_object(
+        'snapshot', row.gallery_world_snapshot,
+        'sections', coalesce(row.gallery_world_sections, '[]'::jsonb)
+      )) else null end,
+      'members', coalesce(v_members, '[]'::jsonb)
+    );
+  end if;
+
+  -- Default / kind='map' = blank-canvas backdrop only (Phase 1). 088: still carry
+  -- the cover image + rich description so a plain map share has a header too.
+  return jsonb_build_object(
+    'slug', row.public_slug, 'name', row.name, 'kind', row.share_kind,
+    'description', row.gallery_description, 'tags', to_jsonb(row.gallery_tags),
+    'imageUrl', row.gallery_image_url, 'imageAlt', row.gallery_image_alt,
+    'realmArcSummary', row.gallery_realm_arc_summary,
+    'backdrop', public._gallery_map_backdrop(row.map_data)
+  );
+end $$;
+
+grant execute on function public.get_gallery_map(text) to anon, authenticated;
+
+-- [212 down: VEIL-DOORS, back to 147] public._gallery_public_tile_rows
+create or replace function public._gallery_public_tile_rows()
+returns table (
+  id uuid,
+  public_slug text,
+  name text,
+  tier text,
+  published_at timestamptz,
+  updated_at timestamptz,
+  view_count integer,
+  is_curated boolean,
+  gallery_description text,
+  gallery_image_url text,
+  gallery_image_alt text,
+  gallery_tags text[],
+  population integer,
+  terrain text,
+  government_type text,
+  magic_level text,
+  stability text,
+  primary_resource text,
+  threat_level text,
+  culture text,
+  prosperity text,
+  primary_deity text,
+  at_war boolean,
+  net_votes integer,
+  comment_count integer,
+  owner_id uuid,
+  importable boolean,
+  aliveness integer,
+  reactions jsonb
+)
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select
+    s.id,
+    s.public_slug,
+    -- 148: the sharer's display title (147), falling back to the settlement
+    -- name — the ONE fallback chokepoint for every gallery surface.
+    coalesce(nullif(btrim(s.gallery_title), ''), s.name) as name,
+    s.tier,
+    s.published_at,
+    coalesce(s.gallery_updated_at, s.updated_at, s.published_at) as updated_at,
+    s.view_count,
+    s.is_curated,
+    s.gallery_description,
+    s.gallery_image_url,
+    s.gallery_image_alt,
+    s.gallery_tags,
+    case
+      when (s.data->>'population') ~ '^[0-9]+$' then (s.data->>'population')::integer
+      else null
+    end as population,
+    coalesce(
+      nullif(s.data #>> '{config,terrainType}', ''),
+      nullif(s.data #>> '{config,terrainOverride}', ''),
+      nullif(s.data #>> '{geography,terrain}', ''),
+      nullif(s.data->>'terrain', '')
+    ) as terrain,
+    coalesce(
+      nullif(s.data #>> '{powerStructure,government}', ''),
+      nullif(s.data #>> '{powerStructure,governingName}', ''),
+      nullif(s.data #>> '{powerStructure,governmentType}', ''),
+      nullif(s.data #>> '{government,type}', ''),
+      nullif(s.data->>'governmentType', '')
+    ) as government_type,
+    coalesce(
+      nullif(s.data #>> '{config,magicLevel}', ''),
+      nullif(s.data->>'magicLevel', '')
+    ) as magic_level,
+    coalesce(
+      nullif(s.data #>> '{powerStructure,stability}', ''),
+      nullif(s.data #>> '{viability,stability}', ''),
+      nullif(s.data #>> '{systemState,stability}', ''),
+      nullif(s.data->>'stability', '')
+    ) as stability,
+    coalesce(
+      nullif(s.data #>> '{config,nearbyResources,0}', ''),
+      nullif(s.data #>> '{nearbyResources,0}', '')
+    ) as primary_resource,
+    coalesce(
+      nullif(s.data #>> '{threatProfile,level}', ''),
+      nullif(s.data #>> '{defense,threatLevel}', ''),
+      nullif(s.data->>'threatLevel', '')
+    ) as threat_level,
+    coalesce(
+      nullif(s.gallery_facet_culture, ''),
+      nullif(s.data #>> '{config,culture}', '')
+    ) as culture,
+    coalesce(
+      nullif(s.gallery_facet_prosperity, ''),
+      nullif(s.data #>> '{economicState,prosperity}', '')
+    ) as prosperity,
+    coalesce(
+      nullif(s.gallery_facet_deity, ''),
+      nullif(s.data #>> '{config,primaryDeitySnapshot,name}', '')
+    ) as primary_deity,
+    coalesce(s.gallery_facet_at_war, false) as at_war,
+    coalesce(v.vote_count, 0)::integer as net_votes,
+    coalesce(c.comment_count, 0)::integer as comment_count,
+    s.user_id as owner_id,
+    coalesce(s.gallery_importable, false) as importable,
+    -- 148: the publish-time aliveness snapshot (147). RAW + nullable — null is
+    -- "never stamped" (pre-phase-2 share / no owning campaign), which sorts
+    -- nulls-last under most_alive instead of masquerading as a zero score.
+    s.gallery_facet_aliveness as aliveness,
+    -- 148: per-key reaction counts (146), '{}' when none — the card digest
+    -- rides the tile row instead of N+1 state RPCs.
+    coalesce(rx.reactions, '{}'::jsonb) as reactions
+  from public.settlements s
+  left join (
+    select settlement_id, count(*)::integer as vote_count
+    from public.gallery_votes
+    group by settlement_id
+  ) v on v.settlement_id = s.id
+  left join (
+    select settlement_id, count(*)::integer as comment_count
+    from public.gallery_comments
+    where deleted_at is null
+    group by settlement_id
+  ) c on c.settlement_id = s.id
+  left join (
+    select settlement_id, jsonb_object_agg(reaction_key, cnt) as reactions
+    from (
+      select settlement_id, reaction_key, count(*)::integer as cnt
+      from public.gallery_reactions
+      group by settlement_id, reaction_key
+    ) rk
+    group by settlement_id
+  ) rx on rx.settlement_id = s.id
+  where s.is_public = true;
+$$;
+
+revoke execute on function public._gallery_public_tile_rows() from public;
+
+drop function if exists public._gallery_doors_chronicle(jsonb, jsonb, jsonb, jsonb, boolean);
+drop function if exists public._gallery_doors_chronicle_classes();
+drop function if exists public._gallery_doors_closed(jsonb);
+drop function if exists public._gallery_doors_tile(text, text[]);
+drop function if exists public._gallery_doors_names(jsonb, jsonb);
+drop function if exists public._gallery_doors_squeeze(text);
+drop function if exists public._gallery_doors_band(text);
