@@ -19,7 +19,7 @@ plotHooks.js` and `src/domain/hookEscalation.js` (`themeOf: (hook) => themeOfTex
    `THEME_OF_REL_ARCHETYPE`, `themeOfRelArchetype` unchanged. `taggedTemplates` (walker-only today) is retired or answers from (1) in tests only.
 3. Every reader's contract kept: `hookVariety.js :: drawUnique`'s theme preference and `npcGenerator.js :: drawLoyalty`/`ownPoolHook` call
    `themeOfText` unchanged; the `*_HOOKS_TRUE_OF_ANY_HOLDER` sets (text matchers inside npcData.js) untouched; a collision is impossible among
-   the live pools (a walker proves it) and ~1 in 18 million for a DM's free text (it would only reorder that hook's retention, never drop it).
+   the live pools (a walker proves it) and about 1 in 15 million for a DM's free text (300 tagged lines over 2^32) (it would only reorder that hook's retention, never drop it).
 
 THE TESTS. RED FIRST (record titles and counts): (i) NEW walker `tests/lint/hookTextOneHome.walker.test.js`: no `NPC_FACTION_LOYALTY` line's text
 (and no fold of it) occurs in more than one module under `src/`: RED at your base (every line is in two), green after. (ii) `hookThemeTotality.
