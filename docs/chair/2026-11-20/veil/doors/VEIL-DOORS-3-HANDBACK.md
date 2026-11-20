@@ -57,7 +57,8 @@ last figure, reproduced.
   files and 20 titles red as at the base (section 8).
 
 ## 4. Item 3 — the stressor catalogue, read whole (8af1cb703)
-Read: `stressorsCore.js :: STRESSOR_CATALOG` (21 types), `stressTypes.js :: STRESS_TYPE_MAP` (15, the composer's
+IN ONE LINE (the chair's (1) of 04:36): every LABEL and SUMMARY a stressor entry can print was read, and only the three
+catalogue entries below are crime-worded; their labels now withhold as their keys did. Read: `stressorsCore.js :: STRESSOR_CATALOG` (21 types), `stressTypes.js :: STRESS_TYPE_MAP` (15, the composer's
 picker unions both), the registry's narration ("<payload.label || labelOf(targetId)> grips / no longer grips the
 settlement."), the table's obligation types (debt, famine, scarcity, unrest, siege, plague). Crime-worded: only
 criminal_corridor "Criminal corridor", infiltration "Infiltration network", infiltrated "Infiltrated". Judged NOT
@@ -99,8 +100,26 @@ chains built from each tree's migrations (`out/probes/`):
 | gaps | `simulationTrace[].ts` holes, 24 (V10-6: the DATA veil's finding, not a door) | the same 24: unchanged by the doors (the data veil's, VEIL-20's) |
 | worldcol (N=1: 14 towns, 4 with a binding) | refused at storage ("cannot be stored"): no leak | the same: refused at storage, no leak (the guard is not loosened; the read now drops a stored chronicle too) |
 THE ACCEPTANCE RUN: NOT RUN. Its runner (REVIEW-VEIL-7 `run-all.sh`, library at 72a3bb24f per PART 19 section 4) is on
-no branch this clone reaches and a short sha cannot be fetched. The hand-backs disagree on its expected result (exit 1,
-a07 and d06 FAIL, on this lineage; exit 0 on the lane owner's after B/C/D): asked of the chair.
+no branch this clone reaches and a short sha cannot be fetched. The chair (05:42 and 05:52 UTC) took item 5 off this
+list: the lane's owner (VEIL-22) runs the acceptance run and re-runs the reader's repros at the merged tree, where B, C
+and D stand and the expected result is exit 0. The probes above are recorded as run here, N=1.
+
+## 6b. VR43 (the chair, 05:42 UTC): the gallery read that raises on a row holding a chronicle. NO BUILD; the guard stays.
+It fails closed (nothing served). (a) CAN SUCH A ROW EXIST? The column `gallery_world_snapshot` came in 088; 089's
+`_gallery_world_snapshot_is_safe` refuses any key matching `.*chronicle.*`, but 089 guards ONLY publish_map; the direct
+owner write (`updateMapGalleryMetadata`, RLS) was guarded only from 091 (its own header: "Closes the
+updateMapGalleryMetadata direct-update bypass"). So a row written by a direct metadata save on a database that ran 088
+or 089 without 091 CAN hold one; on a database where 091 stood from 088 onward, none can (any write of such a row raises).
+Read from the migrations, not executed against any hosted database. (b) THE ONE-ROW COUNT, read-only, for the deploy note
+(any depth, a KEY whose name holds "chronicle", as the guard's own pattern; a string value does not match; executed on
+the local chain: 0):
+`select count(*) as rows_with_chronicle from public.saved_maps where gallery_world_snapshot is not null and gallery_world_snapshot::text ~* '"[^"]*chronicle[^"]*"[[:space:]]*:';`
+
+## 6c. What a visitor may still read (residuals, measured by the reader, NOT built; for the owner's list)
+A SHORT FORM of a hidden house's name in the free text of a `target` entry ("Multiple crews rioted…" beside a house
+named "Multiple criminal factions": the name search asks whole names); a CUSTOM stressor the DM named "Gang war",
+served with the grouping shut (the DM's own label, also on the body as stored). Both are the DM's own words. And VR28's
+tier 2: the stability band word and the prosperity band as stored.
 
 ## 7. Item 6 — the two one-line hunks in `import_gallery_dossier` (the data veil's function), for the lane's owner
 `name` := `coalesce(case when src.copied then nullif(btrim(public._gallery_veil_str(src.j -> 'name')), '') end, s.name)`
@@ -119,7 +138,22 @@ the base adds no offender (the predecessor's un-anchored assertion moved line 22
 numeric constant in `src/`.
 
 ## 9. GREEN at the last code commit, and the bytes proved
-PENDING at this commit: `tests/security` WHOLE at the code of 8af1cb703 is running; its counts, the three gates and the bytes proved land in the next commit.
+The code is unchanged since 8af1cb703 (every later commit is docs). `tests/security` WHOLE there: **Test Files 159 passed
+| 1 skipped (160); Tests 2013 passed | 1 skipped (2014); exit 0** (`out/tip-tests-security.txt`; the base's 158/2009 plus
+the new file and the new arms). The three gates, the hook's own run at 8af1cb703's push (`out/push-gates-at-8af1cb703.txt`):
+`typecheck:ratchet` OK (167, ceiling 167); `typecheck:domain:strict` OK (1113, ceiling 1113); `lint` 0 errors, 38 warnings
+(the base's count). `tests/lint` WHOLE: section 8. Bytes proved at the tip (read 05:55 UTC): 211
+`eface6d0…be0b01` and its rollback `ce8474ff…d49712f`, equal to the frozen figures; 212 `8773ece9…6c271e99`; 212 down
+`0feea5c3…0a012daa` (section 1 in full).
+
+## 9b. LEFT, said plainly (at the mark, about 355k of 350k by my estimate; get_session reads 0)
+THE CHAIR'S RULING OF 05:42 UTC ON VR41 (a-ii), NOT BUILT: both narrowings in one commit, red first: (i) the compare
+also folds the RAW targetId (an event-born person whose id the served body holds); (ii) a power target counts as shown
+where the SERVED body, after the veil, names it anywhere, by the name search's fold; against what is served to that
+reader, every other class rule still applying, the frozen copy in snapshot mode; PROOF: the 1,393 entries 42 -> 0
+(`instruments/vr41-measure.mjs.txt` re-runs it) and a born arm with every hideable house hidden. Where it goes: 212's
+`_gallery_doors_chronicle` (the "log's own names" block: the target's raw fold beside the narrated one; the shown
+set widened by the served body's strings for a power) and its twin `galleryDoors.js :: veilChronicle`.
 
 ## 10. Executed and plausible; what a reader should attack
 EXECUTED: every red, green and count above, with its output file. PLAUSIBLE: a crime output reaching an export label;
