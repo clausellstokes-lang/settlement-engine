@@ -153,15 +153,82 @@ diffuse band: sent to the chair for a ruling). Six composed prose rows differ ev
 reads what the projection does not serve: "cannot be re-derived", R5's by VR12). GREEN 4 of 4 (`run2-green.txt`).
 Both new pglite files took the manifest's `pglite-executed` rationale (VR1's form); the manifest test 10 of 10.
 
+## 5e. THE CHAIR'S RULINGS RECEIVED (read 02:33 UTC; sent 01:35 to 02:29 UTC; each vetoable by the owner). THEY GOVERN THE SECTIONS ABOVE WHERE THEY DIFFER
+
+- **VR28, THE TIERS (01:35; amends VR26).** TIER 1, blocking: no name, person, tie, sentence, crime-worded label or cause,
+  sequence gap, door beside `data`, and no PRECISE figure carrying a hidden house's term reaches a non-owner read; the
+  inversion test blocks these. TIER 2, recorded, not blocking: a COARSE BAND every town shows from a closed ordered
+  vocabulary (safety band, prosperity band, stability word, readiness label) is sent as stored (VR8); the inversion test
+  RECORDS its count. So `economy.prosperity` and `history.founding.overcoming` are DIFFUSE AGAIN; `compound.economyOutput`
+  stays withheld on every read; the stability cause stays withheld on every read.
+- **01:40: the legitimacy surprise is moot under VR28** (the prosperity band is served): `legitimacy.score/.label/.colours`
+  are NOT re-classed. KEPT AS R5'S LAW, to be written into `derivedRule`: a served value composed from a withheld one is
+  withheld or recomposed with it, NUMBERS INCLUDED; every composed row lists its numeric inputs (`legitimacy.score` its four
+  labels, `breakdown.prosperity` prosperity); R6's inversion arm checks that no served composed value pins down a value
+  withheld on every read. VR25 ACCEPTED as measured; THE CAST: "not known" accepted, recorded for the owner's list in plain
+  words: AN IMPORTED CRISIS TOWN ARRIVES WITHOUT ITS CAST OF THREE. The chair's question, "on a Reveal-DM share does any
+  non-owner page draw the cast?", is ANSWERED BY 5b, MORE STRONGLY: `cast.stakes` (and `cast.roles` in one metropolis)
+  are drawn on the visitor's page with Reveal DM OFF (the Plot Hooks tab). So the cast is a DRAWN field, not
+  withhold-always under VR16: BACK TO THE CHAIR (sent with the hand-back). For DOORS's merge: its section stands
+  immediately before 212's "[212: RESTATED] public.get_gallery_dossier"; two in-place hunks inside that read (the chronicle
+  line; the seven tile columns) are DOORS's: keep this lane's edits away from them.
+- **01:55, then 02:09, then VR33 (02:14) for the defence row, FINAL:** `defence.scores.*` (ALL SIX) AND
+  `defence.economicGates` are withheld on EVERY non-owner read on BOTH stored shapes, one rule (master's shape fails all
+  six: internal 78, economic 52, disaster 37, magical 33, military 31, monster 28 of 86, control 0; gates 38 and 0); the page
+  re-derives them (VR19 (c)). `defence.readiness.label`/colours: tier 2. **VR29, THE EVIDENCE KEYS:** R3's withholding of
+  a `crimeTypes` or `criminalInstitutions` entry leaves each key an ARRAY (empty where nothing is left); ONLY the shut
+  grouping `block:defense.criminalStructure` deletes the keys; R3's born test holds both arms; if an empty array tells
+  more than a town with no crime, say so first. **VR31, SHARES SUM OVER WHAT IS SERVED:** income percentages and faction
+  power recomposed whenever ANY member is withheld (house hidden, grouping shut, row withheld always); FINAL holds 100 on
+  the control too (the old tip: 6 of 50 control towns short). **VR32:** a figure that EQUALS its re-derivation from served
+  values passes (storageMonths, resilienceScore, legitimacy.score). As registered, R2's and R5's: `conditions.severity` and
+  `severityBand` are served raw at the base though registered withhold-always.
+- **02:14, four answers:** VR25 at db97168dd TAKEN. `ruinFilterRoster`: GRANTED in VR2's form: APPLIED in this push (the
+  row, the pin 116 -> 117; the walker 12 of 12). OWED WITH IT: a born town given a RUINED house, imported: for each of the
+  ten, does the re-derived value mis-draw against that town's own recomputed one; where it does, left out, not drawn wrong;
+  the count to the chair. `observedShapeReaders`: NO RAISE and no exemption for a false positive: cure BY OBSERVATION (show
+  the scanner's corpus a served config carrying `magicExists`, true and false); only if the walker has no door for that,
+  an explained-writer row naming the writer and the measure (36 of 36). The count stays 1. NOT DONE BY THIS SEAT.
+- **02:20, VR27 AMENDED:** 212 revokes by name ONLY the helpers 211 and 212 create (`_gallery_veil_*`, `_gallery_doors_*`)
+  and `_gallery_public_tile_rows()`; the eight older invoker helpers go to SEC-GRANTS's migration 213. A helper this lane
+  adds, called only inside the definer reads, is revoked from public, anon and authenticated by name in the commit that
+  adds it. VEIL-DOORS handed back PARTIAL (cca49cb8d): NOT merged; VEIL-DOORS-2 (`lane/veil-doors-2-2026-11-20`) finishes
+  it; merge "DOORS <commit>" only from that branch, on the chair's word.
+- **02:25, "VR17 81dd06d7e"** (supersedes efca35fd6; no file of src/ or scripts/ beyond efca35fd6's): merge it `--no-ff`
+  AFTER B/C/D. Its stored figure: the lighting census +2 files. V10-2 has its own seat (VEIL-V102); merge "V10-2 <commit>"
+  after VR17 on the chair's word.
+- **02:29, "B/C/D e62fabb2e"** (origin/lane/veil-19-2026-11-20; 212 sha256 fec111c2…4acea3; the six guard files 127 of
+  127; the acceptance run EXIT 0, 37 of 37): NOT MERGED BY THIS SEAT (the mark). With it, ruled: (1) eight reds not this
+  lane's, `criminalVeilSwitch.test.js` VS1 (b) and (c): VEIL-V102's, named, not touched; (2) VR35, V10-5's positive account
+  REFINED: a catalogue hideable name is accounted for by a served house OR A SERVED POWER whose folded name equals it;
+  RE-MEASURE first (what is dropped must only name a hidden or absent house), the count and five examples to the chair
+  before building; MED, after R2; (3) VR36, THE COST LAW's named rows gain the Reveal-DM gallery read of the largest born
+  town (Albaorum, 499 KB), bound: twice 211's Reveal-OFF read of the same town (570 ms on that box; 1.6 times now): every
+  stage touching 212 times it; (4) `incomeWeight` is R5's (VR12); (5) VR31: D re-derives where ANY row went (confirm 100
+  on the control towns); FACTION POWER is not in D: this lane's.
+
+WHAT THE RULINGS CHANGE IN THIS SEAT'S PUSHED WORK (for the successor, before R2):
+1. `src/domain/veil/importRederive.js` step 4 RE-DERIVES prosperity and drops it where a Subsistence base leaves it
+   unknown. Under VR28 the prosperity band is SERVED: the import should keep the served band where present and fall to
+   the re-derivation only where it is absent (the dependent steps then read the served band; `underEachOutcome` keeps
+   working with one outcome). `history.founding.overcoming` likewise is served. A small change with its own red first.
+2. `tests/security/rosterChoiceInversion.pglite.test.js`: its KNOWN_INVERTING list is now TIER 2's recorded residual for
+   the bands (prosperity, prosperityStanding, safetyLabel, legitimacy label/colours) and TIER 1 for the numbers
+   (`defence.scores.internal`, `legitimacy.score` passes by VR32 per the reader; this seat's harness counted it inverting
+   because its re-derivation used the RE-DERIVED prosperity: with the served band it is equal). R6 splits the arm by tier.
+3. `tests/security/shareRenderTwice.pglite.test.jsx`: KNOWN_DRAWN stands as measured; `cast.stakes`/`cast.roles` drawn
+   is the answer to the chair's cast question (above).
+
 ## 5d. HANDED BACK AT THE MARK (02:3x UTC)
 
 THE MARK: `get_session` reads `used_tokens 0` in this container (the field is not reported); by the seat's own count
 it stands near 400,000 of SV8's 450,000, so the seat hands back after this push. Nothing is running. Every commit is
 pushed (the tip: the commit carrying this file). 211's two files untouched (proved at the cut and at the last commit);
 212, its rollback and the twin's rule files NOT OPENED by this seat.
-DONE: items 1, 2, 3a, 3b, 3c. WAITING ON THE CHAIR: (i) the legitimacy score's inversion of prosperity (and now the six
-other inverting rows, `safetyLabel` with them); (ii) the two walker rows of VR25 (`ruinFilterRoster`'s exemption and pin
-116 -> 117; `observedShapeReaders`' "magicExists on config", a measured false finding); (iii) "B/C/D <commit>".
+DONE: items 1, 2, 3a, 3b, 3c. THE CHAIR ANSWERED (i) and (ii) and sent (iii) before this seat's hand-back reached it: SECTION 5e. LEFT FOR THE
+SUCCESSOR from it: item 4 ("B/C/D e62fabb2e", then "VR17 81dd06d7e"); the cast question back to the chair (drawn on
+Reveal-off pages); the ruined-house import measure; `observedShapeReaders` cured by observation; the import's
+prosperity kept as served (5e point 1).
 FOR THE SUCCESSOR, in order: item 4 (merge VEIL-19's final tip on "B/C/D <commit>", the acceptance run must exit 0);
 item 5 R2, which now has its proof machinery: build the withhold-always rows in 212 and the twin; class the five
 KNOWN_DRAWN rows (a)/(b) and strike them; re-class prosperity and overcoming (the chair's 01:20 ruling) and whatever the
