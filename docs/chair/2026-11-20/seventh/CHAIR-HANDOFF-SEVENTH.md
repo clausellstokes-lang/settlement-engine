@@ -2109,6 +2109,56 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   stops and both sentences come to the chair. PEOPLE-1: the power-of-two law is not extended; no wording is dropped.
   TRAD-4's count by the chair's read is 353,332 (it reckoned 390,000): no successor now.
 
+### Rulings of 17:32 to 17:35 UTC (fourteen notifications read at 17:31; each ruling vetoable by the owner)
+
+- **THE MIXED PICK: MERGE OR CHERRY-PICK, BY THE LANE'S BASE (the chair's "every lane holds the line's tip" was
+  WRONG; TRAD-4 found it by aborting a merge that would have pulled the whole line in).** MEASURED: on the line's tip
+  (43ab0f5eb), so they MERGE `lane/kernel-mix-2026-11-20`: depth, page-7, page-6, goals, frame, fortune, place,
+  people (and same, prose). ON AN OLDER BASE, so they CHERRY-PICK bd42d63c7 (two files; both byte-identical to the
+  line's on each tip; identical content joins clean at the landing): the traditions lane, the veil, the who-rules
+  lane.
+- **A TROUBLE'S CAUSES, round 2 (PAGE-7 at 3bcd71ec6; declared draw 19,613 checks, 0 refused; parity 0; mixed 7.8%,
+  three cities in a row 14.2%).** (1) LEAVE to append `house:thieves_guild` and `house:smuggling` to the house
+  family's atoms in `src/domain/facts/registeredWords.js`. (2) TWO ATOMS GRANTED: "ATOM house:caravans :
+  facts/causeHouses.js : guild_conflict caravans"; "ATOM entrepot : facts/entrepot.js over economicState.isEntrepot :
+  outside_debt through_trade". (3) THE LAYER: layer 1 stands if the layers walker is green; `factLayers.js` holds
+  READ layers and no hideable layer exists (the chair's earlier word misled); what makes the two criminal houses
+  hideable is `cardVeil.js :: isHideableHouse`. (4) MERCHANTS_RULE held 0% (2 to 5 economy powers in every debt
+  town that trade governs): its {power} is the GOVERNING power; the exactly-one test stays for every other fill;
+  the 13 sentences to the chair before the merge. The one wording at 20.5% is 8 places of 900: under the bar.
+- **WHO RULES (SEAT-6).** `factionDynamics.js` RELEASED: forwarded "factionDynamics released at 1cd2e6d93" (FORTUNE-3;
+  U5s merged green f526c8e20; confinement 525 of 525 and 720 of 720; tests/lint 220 of 220). U5's WIRING rides a
+  cure unit B5b (the three callers pass the seat's circumstances), on two conditions: no other lane touches those
+  files; with the law dark every play-time digest is byte-identical. THE WALKER: THE CHAIR WITHDREW "never by
+  renaming": SEAT-6 measured that the declaration would stop the walker triggering on 'retired' for good; the word
+  in TRANSFER_WORDINGS is a true homonym (a retired EDGE, not a retired person): it is DISAMBIGUATED by its name and
+  the walker keeps its full trigger set. THE POOLS: pool A births every place on a road at a frontier (no
+  DEFAULT_CONFIG): it goes into no table for the owner; the chair's 600 is nearer; A VISITOR'S BIRTH ALSO CARRIES
+  `_randomizePriorities: true` (`settlementGenerateAction.js`), WHICH NEITHER POOL ROLLS: a VISITOR pool is ordered
+  into `measure-lit.sh`, and it is the headline of the owner's table.
+- **THE PRINCIPLED-AND-VENAL COUNT, THREE ARMS MEASURED (PAGE-6 at 2bdf3ab37).** (C) Only 139 of the 1,019 carry a
+  word that says the person cannot be bought or does not lie (principled 34, honest 35, incorruptible 34,
+  plain-dealing 36); the other 880 carry words of manner or duty. (A) the secret side over all 1,019: 136 left; 902
+  secrets move; survivors over 41 titles (prison warden 30, black marketeer 26: every row venal). (B) the
+  temperament side: 0 left; 1,031 temperaments move, goals on 144 cards in 79 towns, 5 secrets. THE CHAIR'S LEAN
+  HOLDS ON THE FIGURES; A-NARROW (the secret side for the 139 only) is being measured; the ruling follows it.
+- **WANTS: THE TRANCHE IS WRITTEN (GOALS-3; 380 lines, 35 cells, 183 to 563).** Births with all seven files: a second
+  city repeats 12.0 / 12.1% of a first city's wants (36.4 / 36.0 today), a metropolis 17.4 / 17.5% (47.3 / 47.2);
+  identical 0, refusal 0, MIRROR 0 (83 today). The debtor's cells are drawn by the debtor's end only
+  (`goals.js :: familyCandidates`): those four lines stand. Two of the chair's rewordings put a verb after {house}:
+  GOALS-3's shape cures stand. Files 6 and 7 (80 lines) and five PERSONALITY replacements are with the chair.
+- **THE DEPTH LANE (DEPTH-2 at ed5813d40).** HOOKS UNIT 1 (the 60) MERGED. On built towns: a second town's own hooks
+  already seen in a first: town 25.3 to 15.7%, city 46.5 to 29.9%, metropolis 63.5 to 41.8%. Tranche 2 (36) is
+  building. The metropolis stays over the bar after it by projection (35%): a third tranche for the metropolis's
+  pools is owed. Principled cards holding a corruption hook: 8 of 125 before, 9 after.
+- **SAME-1's walker, phase 2: GO.** The hand list is the registry for pools that are not the dossier's state prose;
+  a totality arm guards it; rule 1 also reads a pool's KEY (a pool keyed on a criminal house or a crime state is a
+  crime pool).
+- **THE SIX MONTHS (FRAME-7's answer).** "Stores: a granary, about six months of grain." is read from the record,
+  but the record is nearly a table (`foodGenerator.js :: storageMonthsFull`: a tier table, a mill, the stores'
+  share; the sheet rounds to whole months): a town with a granary and a mill reads six. THE WORDS ARE TRUE; varying
+  them would be invention. A NAMED SURVIVOR: the sameness is in the generator's storage table.
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -5134,3 +5184,13 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   read; the red was an unmarked share). MEASURE-LIT IS IN (the contest measured lit; one question open on the two
   pools). U5 returned and forwarded to SEAT-6. All 137 state sentences read. `prompts/VEIL-28.txt` and
   `prompts/REVIEW-VEIL-14.txt` corrected. NET 16 fires at 17:35.
+- 17:34 UTC · NET 16, DONE AT 17:31 TO 17:34 (the trigger was set for 17:35). EVERY WORKING SEAT'S RECORD, by the chair's read:
+  PAGE-4 369,770 (17:10; PAGE-9 seated beside); SEAT-5 365,000 (its units are done); FRAME-6 362,261 (17:11; FRAME-7
+  seated beside); TRAD-4 353,332 (17:25; it reckoned 390,000; no successor unless past 400,000 with unit 10 open);
+  PROSE-1 352,319 (seated 16:40: 350,000 IN FIFTY MINUTES: `prompts/PROSE-2.txt` written, seated after this push);
+  GOALS-3 345,361 (`prompts/GOALS-4-ADDENDUM.txt` written: GOALS-4 is woken at 360,000); PEOPLE-1 342,058 (PEOPLE-2
+  seated beside); PAGE-6 339,415 (`prompts/PAGE-8.txt` brought up to date); VEIL-27 334,481 (`prompts/VEIL-28.txt`
+  ready); FORTUNE-3 315,755 (a FORTUNE-4 prompt is owed at 330,000); SAME-1 306,633; DEPTH-2 304,960; PAGE-7
+  294,290; PLACE-1 291,799. NEW SEATS, by their own counts with a half added: FRAME-7 112,000; PAGE-9 70,000;
+  PEOPLE-2 150,000; SEAT-6 280,000. Fourteen notifications read at 17:31 and ruled (section 2, "Rulings of 17:32
+  to 17:35").
