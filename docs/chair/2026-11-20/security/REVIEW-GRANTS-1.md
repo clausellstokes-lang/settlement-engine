@@ -182,7 +182,7 @@ The rollback, if ever needed, does not reopen the 157. After the push, `CHECK_21
 ## Addendum: re-clear by the diff (2026-11-20 05:12 UTC)
 
 The builder's commit is a18bf94bc on origin/lane/sec-grants-2-2026-11-20, which I fetched. I read the diff from
-fac781e7e. It touches only ,  and the hand-back.
+fac781e7e. It touches only `213`, `CHECK_213.sql` and the hand-back.
 
 - **213.** Every changed line is a comment line (`-U0` diff). With comments stripped, the file is identical to
   c87283ac. The new `@rollback` text is true:
