@@ -1372,6 +1372,57 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   All three identities to the security reader. A NAMED SURVIVOR FOR AFTER THE DEPLOY, the owner's: a stored
   marker for a change of hands, which retires the sentence read.
 
+- **THE SEATS' MARKS, RAISED BY MEASURE (15:10 UTC, 2026-11-20).** Measured at net 13 from the seats' own records: a
+  seat's reading-in costs 150,000 to 240,000 tokens before its first unit (VEIL-27 224,941 at 39 minutes after its
+  seating; SEAT-5 240,678 at 47; PAGE-7 182,287 at 30; DEPTH-2 148,184 at 12), and two seats' own estimates were
+  low by 80,000 and 90,000. A hand-over at 300,000 therefore leaves 60,000 to 150,000 of work for about 200,000 of
+  reading, half an hour of clock and a lane learned again. By the records' own costs (a cache write is priced at about
+  twelve cache reads a token) carrying a seat from 300,000 to 450,000 costs about what one successor's read-in costs,
+  with no lost hour and no lost knowledge. RULING: EVERY WORKING SEAT'S MARK IS 450,000 BY THE CHAIR'S READ; A
+  SUCCESSOR IS SEATED BESIDE AT 360,000. Hand-overs already paid for stand (FORTUNE-2 to FORTUNE-3; PAGE-5 to PAGE-7).
+  GOALS-4, seated 15:03 on the old mark, was stood down at 15:10 (GOALS-3 keeps the lane to its end); TRAD-4 (247,065
+  true: it had added a half to the chair's own read and believed itself past 300,000) keeps the lane; PAGE-8 and
+  REVIEW-VEIL-14's prompts stay written, unseated; FRAME-7's and TRAD-5's are not written. FAULT OF THE CHAIR: the
+  marks of 300,000 were set without measuring a read-in; by today's measure each hand-over at that mark cost about
+  what it saved.
+- **THE TRADITIONS' WORD RULE, ONE NORMAL FORM (15:10 UTC).** TRAD-4's measure of the rule to the letter: 34 reader
+  dead-causes lost on the 432 (31 by the letter run "s" that a possessive leaves, which with the prefix catch took
+  every event word beginning with s; 3 by "great", right by the rule). RE-STATED: (a) a WORD is a maximal run of
+  letters and apostrophes (U+0027, U+2019, U+02BC read as one), case-folded: an apostrophe never splits; (b) a HELD
+  word: apostrophes at its ends dropped, a trailing possessive dropped, every apostrophe left inside deleted
+  ("Cobbler's" → cobbler; "Smiths'" → smiths; "O'Brien's" → obrien); (c) an EVENT word: every apostrophe deleted,
+  nothing dropped ("Cobbler's" → cobblers); (d) the stop list and the prefix rule stand on these forms; (e) THE
+  WHOLE-NAME TEST (full and bare form) STAYS BESIDE THE WORD RULE as a floor (a held name made only of stop words).
+  Plants red first (possessive held against bare event; the reverse; a plural possessive; a curly and an inner
+  apostrophe) and a control that keeps its cause ("People's Council" against "The Siege"). The loss is told to the
+  chair only above 5 of 432.
+- **VEIL, RULING 53 FOR PART 28: R3-CURE-6's TWO ID HELPERS (15:10 UTC).** VEIL-27 read dc6227ead and 8d5768ebc line
+  by line: the cure holds toward withholding (a person matched on any scalar id; a person with no id checked against
+  every pre-sweep person by containment), BUT the twin now holds two id-as-text functions (`idText` reads a boolean as
+  '', `idKeyOf` as 'true') and 212 writes the scalar-text expression inline six times: a deviation from ruling 48 (one
+  helper an engine). RULED: MERGE AS BUILT under three conditions: (1) a tooth now, red first where it can red (ids
+  true, false and the empty string, both engines: same served result, no stripped goal or membership surviving); if
+  red, the fold comes before R3-TELL; (2) a walker holds 212's six inline expressions to one text until the fold;
+  (3) the fold owed in R4-CURE-2 (one helper an engine; 212's revoked by name, dropped by the rollback, known to
+  213's walker; six sites repointed); the deviation named in the line "R3 <commit>". The conditional tooth on the
+  shown power's goal needs no unit: the possible-world arm is two-sided.
+- **THE CAUSES' SHAPE AND SEAM (15:10 UTC; PAGE-7 asked).** (1) KEYS, NOT FUNCTIONS, in `src/data/tensionCauses.js`:
+  `{ causes: [{ id, rank, holds: '<predicate key>', hideable, wordings }], plain }`. (2) The predicates: one module,
+  one pure function a key over `(record, factsOf(record))`; `src/domain/facts/factsOf.js` is ONE FACT, ONE HOME: a
+  fact with a home is read from it, a house test with no home gets one there, never a pattern in the data file; a
+  parity arm against the measure's own tables on its 900 towns (0 disagreements), then the measure re-pointed at the
+  built module. (3) ONE FUNCTION, PAGE-7's: `src/domain/display/tensionCause.js :: tensionCauseSentenceOf(record,
+  tension)` (the sentence, or null: the stored text as today) holds the whole pick; PAGE-4 ONLY WIRES, after a census
+  of the readers of a tension's `description`, so that no two surfaces print two sentences for one trouble; a surface
+  in another seat's files is named to the chair. (4) THE KEY, a security rule: the pick is keyed only on what every
+  read serves (the town's seed only if a shared document is proved to carry it; else the town's name and the
+  trouble's kind); red first: the document with `seed` deleted prints the same sentences; the projection re-run
+  through the built function (mixed under 10%, three cities under 25%). (5) `hideable` IS A LIST FOR THE SECURITY
+  READER, NOT A BRANCH (ruling 4 of 14:21 stands: one rule for every audience, a cause holds only where the document
+  in hand shows it). (6) {power} is filled by the sides table's own fill under its reader's test. FOR THE JOIN (the
+  chair's): on the veil gate's towns the sentence composed from the served document equals the sentence composed
+  from the possible-world document; a sheet or export surface left unwired is wired there.
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -4147,3 +4198,35 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   THE HOOKS MAY BE BUILT NOW; THE TIES ONLY ON THE COMMIT THE CHAIR NAMES WHEN THE GOALS WORK LANDS. DEPTH-1 is
   past its successor point (about 245,000 by its own count): told to make its hand-back current and hand over;
   `prompts/DEPTH-2.txt` WRITTEN (the builds are what is left), seated after this push.
+- 15:13 UTC · NET 13's PASS AND THE EIGHT MESSAGES THAT CAME WITH IT (the counts read at 15:07; every record `allowed_warning`
+  on the seven-day allowance, resetting 2026-11-24 15:00 UTC, none other). COUNTS: GOALS-3 283,585; VEIL-27 224,941;
+  SEAT-5 240,678; FRAME-6 260,320; FORTUNE-2 266,579 (FORTUNE-3 read in and waiting since 14:22); TRAD-4 247,065;
+  PAGE-5 284,485 (hands to PAGE-7 when S6's builder returns); PAGE-7 182,287; PAGE-6 269,286; DEPTH-2 148,184;
+  PAGE-4 160,504, THE SAME FIGURE AS AT 14:15 across six restarts of its container: not trusted, its own estimate
+  asked. THE MARKS ARE RAISED (section 2): 450,000, a successor at 360,000; every working seat told.
+  VEIL: VEIL-26 "HANDED OVER at 99a159f59": R3 MERGED aa4e3079e (through 4661a1353); 212 sha256 70c6eb45…220a124,
+  rollback 8cbd7d1c…ded5b0, 211 unchanged; re-run at the merged tree, every exit 0: gate HIGHER 0 / EQUAL 79 /
+  LOWER 13 of 92, server = twin, Reveal off = on; born 22/22; serverVeil and hand rows 43/43; walkers and the
+  switch 26/26; acceptance 40 PASS. THE THIRTEEN LOWER, by rule (all `r3m-`): income.criminalRow (8): city-none-0-31,
+  city-under_siege-1-118, town-insurgency-1-94, town-under_siege-0-18, town-under_siege-0-28, town-under_siege-1-88,
+  town-under_siege-1-98, town-wartime-0-29; power.entry's reach (3): metropolis-insurgency-1-124,
+  metropolis-wartime-0-59, town-none-0-23; covert service alone (2): town-none-0-17, town-none-1-91. NOT sent to the
+  reader (R3-TELL and the key-level table first). VEIL-27 GIVEN THE LANE at 15:10; it had read dc6227ead and
+  8d5768ebc (the id gap's red and cure, on `lane/veil-25-r3c5-2026-11-20`): ruling 53 (section 2).
+  DEPTH: "DEPTH-PART 63ad8a193, HANDED OVER"; DEPTH-2 GIVEN THE LANE at 15:10 (hooks brief 7b4a917a6).
+  TRADITIONS: unit 7 BUILT c2eccd7fc (`lane/trad-4-2026-11-20-u7-wip`: 60 checks red at base, green at tip; owner
+  pages moved 0), unit 5 BUILT e03aedc92 (`-u5-wip`: 70 bare frames to 0, gloss pools 16 by 3, the printed export,
+  a totality arm; writerReach 4 red by design, re-taken by its door at the merge), hand-back 8bc8b5a19; the word
+  rule to the letter lost 34 of 432: RE-STATED (section 2); TRAD-4 keeps the lane.
+  THE TROUBLE: the chair read all 92 cause wordings of PAGE-7's files A (4254f5ae0) and B (63a943db6) at 14:58:
+  78 APPROVED AS WRITTEN, 14 REWORDED; the fourteen applied verbatim at f8ee0ed50 (`lines/CAUSES-LINES-A.md`,
+  `-B.md` on `lane/page-7-2026-11-20`); one rule for the data file's test: no wording holds "the place" twice. The
+  shape and the seam ruled (section 2). STILL OWED TO THE CHAIR'S EYE: crime_wave's and guild_conflict's lines.
+  DISPLAY (PAGE-4): CARD merged fe1ff5410; MAGIC merged; relayed to it unread: SAFETY at
+  `lane/page-1-2026-11-20-safety` 58fa4078c ("<Label> day to day; <clause>.") and OUTPUT at `-output` ac0ccdd80
+  ("It gets {very little … nearly all} of what its work could yield."; the drag clause not built; one pin
+  re-recorded by hand, to be re-taken by its door); each one's words come to the chair before its merge.
+  GOALS: lint whole is NOT green at 293edcb9e: 13 reds in 8 files (`goals/measures/lint-whole.293edcb9e.reds.txt`),
+  builder 8 curing them on `lane/goals-3-2026-11-20-b8` (brief b4cd9f8c3); `prompts/GOALS-4.txt` written (68dd714eb)
+  and GOALS-4 seated 15:03 (session_019yED1PeMjUXXn4rS5rbzvj), THEN STOOD DOWN at 15:10 under the marks ruling.
+  A THIRD STAMP FAULT OF THE CHAIR, recorded: a message stamped "14:53" when the clock read 14:52.
