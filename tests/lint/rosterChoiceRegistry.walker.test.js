@@ -26,6 +26,7 @@
  */
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { parse } from 'espree';
 import { describe, expect, test } from 'vitest';
 import {
@@ -38,7 +39,7 @@ import {
 } from '../../src/domain/veil/rosterChoiceRegistry.js';
 import { driftedFiles } from '../../scripts/veil/rosterChoiceRegistry.mjs';
 
-const ROOT = process.cwd();
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const MIGRATION_212 = 'supabase/migrations/212_share_veil_later_cures.sql';
 const COMPOSER = 'src/components/new/publicProseCompose.js';
 const CRIME_RE = new RegExp(CRIME_NAME_PATTERN.source, CRIME_NAME_PATTERN.flags);
@@ -129,11 +130,11 @@ function liveCensus() {
 
 /** The body of `create or replace function <name>(` in 212, to the next function or the end. */
 function sqlFunctionBody(sql, name) {
-  const head = new RegExp(`create or replace function ${name.replace(/[.$]/g, '\\$&')}\\(`, 'i');
+  const head = new RegExp(`^create\\s+or\\s+replace\\s+function\\s+${name.replace(/[.$]/g, '\\$&')}\\(`, 'im');
   const m = head.exec(sql);
   if (!m) return null;
   const rest = sql.slice(m.index + m[0].length);
-  const next = rest.search(/create or replace function /i);
+  const next = rest.search(/^create\s+or\s+replace\s+function\s/im);
   return next < 0 ? rest : rest.slice(0, next);
 }
 

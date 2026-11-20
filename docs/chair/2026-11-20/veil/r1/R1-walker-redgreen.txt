@@ -38,3 +38,13 @@ ls: cannot access 'src/generators/__r1plant*': No such file or directory
 ?? tests/lint/rosterChoiceRegistry.walker.test.js
 --check with rulings.json edited by hand: exit 1
 --check restored: exit 0
+== plant-D1 (after the anchor and root cures): exit exit: 1; Tests  1 failed | 9 passed (10)
+     +   "spatial.quarters: server public._gallery_veil_withhold_always is not a function of 212",
+     +   "spatial.quarters: twin src/domain/display/gallerySecondHomes.js :: withholdAlways is not a top-level declaration",
+== plant-D2 (after the anchor and root cures): exit exit: 1; Tests  1 failed | 9 passed (10)
+     +   "income.criminalRow: public._gallery_veil_apply does not name it (-- registry: income.criminalRow)",
+     +   "income.criminalRow: src/domain/display/gallerySecondHomes.js :: withholdCriminalIncome does not name it (// registry: income.criminalRow)",
+== green (after the anchor and root cures): exit exit: 0; Tests  10 passed (10)
+src/domain/veil/rosterChoiceRegistry.js: OK
+ M src/domain/veil/rosterChoiceRegistry.js
+ M tests/lint/rosterChoiceRegistry.walker.test.js

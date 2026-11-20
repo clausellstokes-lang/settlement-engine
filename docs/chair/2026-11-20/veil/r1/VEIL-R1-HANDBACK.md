@@ -8,7 +8,7 @@ The work follows `docs/chair/2026-11-19/veil/briefs/SUB-BRIEF-VR7.md`, stage R1.
 Every database used is a scratch PostgreSQL 16 cluster in this container (`/var/tmp/r1pg`, unix socket `/var/tmp/rv7`,
 `listen_addresses = ''`). No hosted database, no production credential, no `supabase` command, no deploy, no pull request.
 
-**Written 2026-11-20 00:44 UTC (read from `date -u`).**
+**Written 2026-11-20 00:44 UTC, amended 00:56 UTC (each read from `date -u`).**
 
 ## 0. Outcome
 
@@ -156,14 +156,54 @@ transitive reach).
 
 ## 6. Guards run at the commit, and the stored figures the change moves (NOT re-taken here; VEIL-19 takes each door once at the merged tree)
 
-**Guards, all executed and green:**
+**Guards, all executed and green (re-run at the second commit):**
 - the walker, 10 of 10;
 - `tests/lint/mutationCoverageManifest.test.js`, 10 of 10;
 - eslint on the three new JS files, 0;
 - `typecheck:domain:strict` and `typecheck:ratchet`, both exit 0 (the module is strict-clean);
 - `--check`, 0.
 
-**The whole `tests/lint` directory:** see section 6b.
+**The whole `tests/lint` directory, executed at the first commit b4ed24b04 (220 files):** 13 files were red.
+
+**Ten of them are red at the base too.** I ran the same 13 files in a worktree at bedd5a392. Ten fail there, and their
+failure messages are identical to mine, compared line by line. Those are the base's, not mine:
+- `chainPrintSites`
+- `ledgerCitationIntegrity`: it needs the ledger ref `review-fixes-2026-07-08`, which a shallow clone lacks
+- `noLegacyFactionReaders`
+- `observedShapeReaders`: violations 1
+- `presumedThings`: 4 hits
+- `proseWiringCensus`
+- `slugifyIdiomBaseline`
+- `sovereigntyLightingContract`
+- `styleLaw`
+- `writerReach`: the same `weight` row on contenders
+
+**Four reds were my own, and each was cured in my own files in the second commit:**
+
+| Walker | What it found | The cure |
+|---|---|---|
+| `moduleScopeCwdRatchet` | 18 roots against 17 banked | The walker's ROOT now comes from `import.meta.url`. |
+| `netCurrentExtractorAnchor` | two unanchored function regexes | Now `^create\s+or\s+replace\s+function` with the m flag. |
+| `presumptionClasses` | a "size" word in a note | The note is reworded. |
+| `presumedThings` | 8 new hits from my note strings: the trade, crime and place words in the `scope`, `chair` and `why` texts | Reworded, so its count is back to the base's 4. |
+
+After the cures those four walkers and the registry's own walker are green. ARM D's plants were re-run after the anchor
+cure (`R1-walker-redgreen.txt`, its tail), and the every-row export is byte-identical, so the gate readings stand.
+
+**THE STORED FIGURE MY CHANGE MOVES (not re-taken here):**
+- **The lighting census** (`tests/lint/.lighting-census-baseline.json`, frozen at 3705 files).
+  - The estate read 3707 at the base, already red, and reads 3708 on my branch. The +1 is my new walker file.
+  - The walker asserts the file count first. Its other figures (parked, credited, titles, suiteTitles) were therefore
+    not read here.
+  - The expected movement is +1 file, and in titles my walker's own: 10 tests in 5 describe blocks. That is PLAUSIBLE,
+    not measured.
+  - Door: `LIGHTING_CENSUS_REFREEZE='VEIL-19' LIGHTING_CENSUS_NOTE='VEIL-R1: the roster-choice registry walker'
+    npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js`, on a clean tree at the merged tip.
+- **Did not move:** the writers' reach (`writerReach`'s message is the same as at the base), the wiring census
+  (`proseWiringCensus`, the same) and the tuning inventory (`tuningRegister.walker` green: no new top-level named
+  numeric constant).
+- **The test ratchet** (`scripts/.test-ratchet-baseline.json`, in `npm run check`): gains one file and 10 tests. Not
+  run here; the whole check is not run on a lane branch.
 
 ## 7. How the instruments are re-made
 

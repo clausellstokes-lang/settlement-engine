@@ -258,7 +258,7 @@ const ROWS_SPEC = [
 
   // ── the economy
   recompose({ id: 'economy.complexity', path: 'economicState.economicComplexity', writer: W.complexity, house: P.criminal, vr14: 'iv', inputs: [],
-    scope: 'VR4 ii-14: the ladder re-derived from the served rows (count without the withheld row, the served shares, the market word over the served names)' }),
+    scope: 'VR4 ii-14: the ladder re-derived from the served rows (count without the withheld row, the served shares, the engine\'s hasInst words over the served names)' }),
   diffuse({ id: 'food.record.storageMonths', path: 'economicState.foodSecurity.foodRecord.storageMonths', writer: W.food, house: P.flags, vr14: 'iv', scope: 'drawn as words (tonightSheet.js :: foodStoresWords)' }),
   diffuse({ id: 'food.resilienceScore', path: 'economicState.foodSecurity.resilienceScore', writer: W.food, house: P.flags, vr14: 'iv' }),
   undrawn({ id: 'food.storageMonths', path: 'economicState.foodSecurity.storageMonths', writer: W.food, house: P.flags, vr14: 'iii', drawn: 'unsettled', scope: 'campaign-season only (dossierViewModel.js :: deriveGranaryOutlook); R2\'s render-twice test decides' }),
@@ -297,7 +297,7 @@ const ROWS_SPEC = [
   row({ id: 'safety.crimeTypes', path: '^economicState\\.safetyProfile\\.crimeTypes\\b', re: true, writer: W.safety, house: P.flags, rule: 'withhold', when: 'house-hidden', vr14: 'i', drawn: 'yes', server: H.sChoice, twin: H.tChoice,
     scope: 'VR4 ii-1, i-4, i-5: an entry a hidden house chose withheld by the house\'s eye, not the grouping\'s; today the grouping block:defense.criminalStructure withholds the whole' }),
   row({ id: 'safety.plotHooks', path: '^economicState\\.safetyProfile\\.plotHooks\\b', re: true, writer: W.safety, house: P.flags, rule: 'withhold', when: 'house-hidden', drawn: 'yes', server: H.sChoice, twin: H.tChoice,
-    scope: 'VR4 i-7: a smuggling hook withheld by the house\'s eye; today tab:plot_hooks' }),
+    scope: 'VR4 i-7: a hook a hidden house chose, withheld by the house\'s eye; today tab:plot_hooks' }),
   row({ id: 'safety.criminalInstitutions', path: '^economicState\\.safetyProfile\\.criminalInstitutions\\b', re: true, writer: W.safety, house: P.criminal, rule: 'withhold', when: 'house-hidden', drawn: 'yes', server: H.sApply, twin: H.tHomes,
     scope: 'VR4 ii-2: built by 212 (16)/(19) by name; registered so the walker binds it' }),
 
@@ -339,7 +339,7 @@ const ROWS_SPEC = [
   // ── the power structure
   undrawn({ id: 'power.fingerprint', path: 'powerStructure.economyInputFingerprint', writer: W.fingerprint, house: P.flags, vr14: 'iii' }),
   choiceWithhold({ id: 'power.entry', path: 'powerStructure.factions[] (only in A)', writer: W.ruling, house: P.criminal,
-    scope: 'a criminal POWER (e.g. "Thieves\' Guild") the hidden house raised, withheld with it; the rest re-derived (VR11)',
+    scope: 'a criminal POWER the hidden house raised, withheld with it; the rest re-derived (VR11)',
     chair: 'no ruling places a power born of a house hidden whole; the law decides: withhold, with VR11\'s re-derivation' }),
   diffuse({ id: 'power.composition', path: 'powerStructure.factions[] (only in B)', writer: W.ruling, house: P.any,
     chair: 'a lawful power the town without the house drew: the power roster\'s general composition; recommended diffuse (VR8 by analogy)' }),
@@ -357,7 +357,7 @@ const ROWS_SPEC = [
   diffuse({ id: 'power.relation.composition', path: 'powerStructure.factionRelationships[] (only in B)', writer: W.relations, house: P.any,
     chair: 'a lawful relation drawn without the house; recommended diffuse with power.composition' }),
   composed({ id: 'power.relation.dmNote', path: 'powerStructure.factionRelationships[].dmNote', writer: W.relations, house: P.criminal, inputs: ['power.relation.entry'], compose: 'withhold',
-    scope: 'Reveal DM: the note names the criminal power ("which officials have arrangements with Thieves\' Guild?")' }),
+    scope: 'Reveal DM: the note names the withheld criminal power by its own name' }),
   undrawn({ id: 'power.relation.ratio', path: 'powerStructure.factionRelationships[].ratio', writer: W.relations, house: P.any, vr14: 'iii' }),
   undrawn({ id: 'power.relation.direction', path: 'powerStructure.factionRelationships[].direction', writer: W.relations, house: P.any, drawn: 'unsettled', scope: 'master\'s shape; no reader settled' }),
   diffuse({ id: 'legitimacy.label', path: 'powerStructure.publicLegitimacy.label', writer: W.legitimacy, house: P.flags, vr14: 'iv' }),
@@ -411,13 +411,13 @@ const ROWS_SPEC = [
   composed({ id: 'prose.conditionSeverity', path: 'publicProse.blocks.stressors:overview.conditionSeverity.sentence', writer: W.composer, house: P.any, inputs: ['conditions.severity'], compose: 'recompose', scope: 'drawn (OverviewTab CONDITIONS_MOUNT)' }),
   undrawn({ id: 'prose.conditionSeverity.glance', path: 'publicProse.blocks.stressors:overview.conditionSeverity.glance', writer: W.composer, house: P.any }),
   composed({ id: 'prose.templeFraud', path: 'publicProse.blocks.warFaith:faith.templeFraud', writer: W.composer, house: P.flags, inputs: ['safety.flags.religiousFraud'], compose: 'withhold',
-    chair: 'derived (VR12) from a VR14 (i) flag withheld always: the temple-fraud rung is withheld on every share' }),
+    chair: 'derived (VR12) from a VR14 (i) flag withheld always: that rung is withheld on every share' }),
 
   row({ id: 'prose.criminal', path: '^publicProse\\.blocks\\.defense:criminal\\b', re: true, writer: W.composer, house: P.criminal, rule: 'withhold', when: 'house-hidden', drawn: 'yes', server: H.sChoice, twin: H.tChoice,
     scope: 'VR4 i-11: the criminal desk (structure sentence, ring note) composed from the crime key over the roster; withheld by the house\'s eye, not only by block:defense.criminalStructure' }),
 
   // ── the town's quarters (V9-3)
-  undrawn({ id: 'spatial.quarters', path: '^spatialLayout\\.quarters\\[\\]', re: true, writer: W.spatial, house: P.criminal, scope: 'VR4 ii-10: "Shadows District"; nothing draws spatialLayout.quarters on a non-owner page (VR4 section 2b)' }),
+  undrawn({ id: 'spatial.quarters', path: '^spatialLayout\\.quarters\\[\\]', re: true, writer: W.spatial, house: P.criminal, scope: 'VR4 ii-10 (V9-3): the town plan\'s criminal-named entry; no non-owner page draws that list (VR4 section 2b)' }),
 
   // ── the crisis cast (both copies: stress and stressors)
   undrawn({ id: 'cast.absent', path: '^(stress|stressors)\\.cast\\.absent\\[\\]$', re: true, writer: W.stakes, house: P.any, scope: 'the Crisis tab is off on every player-view or public page' }),
@@ -436,7 +436,7 @@ const ROWS_SPEC = [
   holder({ id: 'people.rosterCopy', path: '^factions\\[\\]\\.members\\[\\]\\.(activeConstraint|category|goal\\.(short|long)|influence|personality\\.tell|physical\\.clothes|power|presentation\\.(behaviour|disposition|impression)|role|secondaryAffiliation|settlementCondition|structuralPosition|structuralRank)$', re: true, writer: W.roster, house: P.holder,
     scope: 'a roster copy of a person follows the person\'s own card (212 (10), ruling (5)); the holder\'s copy goes whole' }),
   holder({ id: 'people.secret', path: '^npcs\\[\\]\\.secret\\b', re: true, writer: W.roster, house: P.criminal,
-    scope: 'VR4 i-9: "thieves\' guild" / "the local underworld" in a secret, chosen by a hidden house; withheld by class:npc:secret today, SENT on Reveal DM' }),
+    scope: 'VR4 i-9: a secret whose wording a hidden house chose (crimeSignal.js :: crimeHasThievesGuild, withTownsOwnUnderworld); withheld by class:npc:secret today, SENT on Reveal DM' }),
   holder({ id: 'people.ties', path: '^relationships\\[\\] \\(only in [AB]\\)$', re: true, writer: W.ties, house: P.holder, scope: 'a tie of a withheld card leaves whole (VR9, ruling (5)); every other tie is the roster\'s composition' }),
   holder({ id: 'people.prominentRelationship', path: '^prominentRelationship\\.(full|npc1|npc2|phrasing|tension|type)$', re: true, writer: W.ties, house: P.holder, scope: 'the copy of a withheld tie follows it whole (ruling (5))' }),
   holder({ id: 'people.pressureSentence', path: 'pressureSentence', writer: W.ties, house: P.holder, scope: 'where it names a withheld tie\'s two ends or holds its words (ruling (5))' }),
@@ -521,7 +521,7 @@ const SERVICES_WHY = 'availableServices only: a hidden house\'s service rows lea
 
 /** @type {Readonly<Record<string, RegistrySite>>} */
 export const REGISTRY_SITES = Object.freeze({
-  'src/domain/coherence/hookTruth.js :: WORDS': { rx: 1, why: 'a hook\'s truth words over hook text ("banditry" as famine), not house names; the hooks themselves are row safety.plotHooks' },
+  'src/domain/coherence/hookTruth.js :: WORDS': { rx: 1, why: 'a hook\'s truth words over hook text, never house names; the hooks themselves are row safety.plotHooks' },
   'src/domain/conditionPromotion.js :: STRESSOR_ARCHETYPE_RULES': { rx: 1, why: 'over stressor names (criminal corridor, smuggling route), never a house name' },
   'src/domain/corruption.js :: isCriminalInstitution': { rx: 1, rows: ['ties.covertHandler', 'trace.criminalAllegiance', 'people.secret'], why: 'the registered predicate\'s own definition (category criminal)' },
   'src/domain/corruption.js :: rivalRingsOf': { rx: 1, rows: ['prose.criminal'] },
