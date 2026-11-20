@@ -1,4 +1,4 @@
-# FORTUNE-3 hand-back (kept current at every push; last written 2026-11-20 18:39:01 UTC by `date -u`)
+# FORTUNE-3 hand-back (kept current at every push; last written 2026-11-20 19:15:35 UTC by `date -u`)
 
 For a successor: this file and the briefs (`briefs/COMMON.md`, `U4.md`, `U5-BUILD.md`) are all you need.
 The chair is session_019yED1SUxGVHyjQnoqoFvQ8 (send_message, Claude Code Remote MCP server).
@@ -24,9 +24,9 @@ FORCED-ON ARM IN ONE COMMAND (the prototype today; the real law after U4): `sh d
 | U5 census (STEP 1, read-only) | MERGED (docs); the chair ruled its three 16:45 UTC (`U5-BUILD.md` end) | aa0dc14c7, merge 11326dfd8 |
 | U5s safety at birth | MERGED GREEN; "factionDynamics released at 1cd2e6d93" SENT; never touch that file again (imports only) | 46f918dfb + aa7db0ccf, merge f526c8e20, lighting 1cd2e6d93 |
 | the working line 43ab0f5eb | MERGED GREEN (one conflict: the lighting census, re-taken) | merge 6707e474b, lighting 9910adb03 |
-| U4 FS7 | BUILDER OUT on 9910adb03 (worktree `scratchpad/wt-u4`, pushes `lane/fortune-3-2026-11-20-u4-wip`) | — |
 | U5a the late step | MEASURED at the ruled place (6b00d35a2 on -u5a-wip: 0 of 2,400 differ from end of birth; FS4, contest, capture hold; stale W1 0/2, W2-W4 0, W5 9/1; law-1 births 600/600 identical); BUILDER OUT under the chair's 18:38 rulings (A) to (C) below (worktree `scratchpad/wt-u5a`) | 6b00d35a2 (measure) |
-| U5b render reason | after U4 merged and the six sentences ruled | — |
+| U4 FS7 | MERGED (3f500da51; censuses a49838e67; pushed): inventory 83df37b55 (240 lines, 3 findings, law-1 readings listed in its section 5); F1 91708ca94 (`economyStateProse.js`), F2 6ae967af2 (`prosperity.js`, its twin table NOT exported: enrol it in the census at the light); F3 a survivor; step 4 needs no cure (`governanceAccount.js :: legitimacyCausesOf` never names a term of 0). Red re-run on the pre-unit tree 2 failed / 5 passed (7). Gates and confinement at a49838e67: RUNNING at 19:1x (logs `scratchpad/f3logs/g3-*`, `scratchpad/conf3.log`) | 3f500da51, a49838e67 |
+| U5b render reason | after U5a merged and the six sentences ruled (on six whole pages, the chair's 19:14) | — |
 
 THE CHAIR'S RULINGS ON U5a, 18:38 UTC: (A) NO new pipeline step: the merits run as the TAIL of the `assembleSettlement`
 step (before `resolveCrisisCast`); no registry rows, nothing on the reveal rail; the proof says, with a test, that the
@@ -70,6 +70,24 @@ The merits depend on the capture rung (a condition: none counts at `corrupted` o
 - THE MERGE OF THE TWO LANES: six conflicts: `src/domain/density/densityCreateBoundary.js` and its walker test (each lane
   adds a sibling row at one place: KEEP BOTH); four registers re-taken by their own doors (wiring census, lighting
   baseline, tuning inventory, tuning register).
+
+## 5. THE OWNER'S DECISION OF ~19:13 UTC, AND THE WORKLIST FOR THE CLOSE (the chair, 19:14 UTC, verbatim)
+
+> CHAIR to FORTUNE-3 (19:14 UTC; write it into the hand-back verbatim; FORTUNE-4 gets the same message). THE OWNER HAS DECIDED, in the chair's chat at about 19:13 UTC, verbatim: "I agree with number 4 switch it on". Number 4 was the chair's recommendation that the new rules for who rules and for fortune SHIP SWITCHED ON at the deploy. SO FORTUNE NO LONGER "LANDS SWITCHED OFF": IT LANDS READY TO LIGHT AND SHIPS LIT, with its merits.
+> 1. YOU STILL BUILD WITH THE LAW OFF BY DEFAULT ON THE LANE (law 1 byte-identical, as you prove today). THE FLIP OF THE DEFAULT IS ONE UNIT OF THE CHAIR'S, AT THE CLOSE, ON THE JOINED TREE, with the re-signing of the stored figures (the owner's hand, then). No seat flips a default.
+> 2. THE "BEFORE LIGHTING" SECTION OF THE HAND-BACK IS NOW A WORKLIST FOR THE CLOSE, not a note for someday: (a) `breakdown.merits` rides the public read and is absent where the rung is corrupted or captured: the share veil's gate must hold that key before the flip (I have told the veil lane); (b) every test and register that pins law 1 as the default, by file and title; (c) what a town ALREADY SAVED does (it keeps the law it was born under: the test that proves it, or none); (d) every surface the lit law adds to a public or shared read (the score and band by a place's own size, the merits' sentences).
+> 3. THE SIX MERIT SENTENCES now print for every new town a DM makes: they come to my eye before U5b, as ordered, and I will read them on six whole pages, not alone.
+> 4. THE HEADLINE OF EVERY MEASURE IS THE LIT WORLD ON A VISITOR'S POOL (the who-rules lane's recipe); the forced-on re-measure at the end is that headline; dark is the control.
+> Order and pushes are unchanged.
+
+THE WORKLIST (owed by this lane before its last message; each item a file or a list in this folder):
+- (a) the veil key: below (the security reader's sentence); the chair has told the veil lane.
+- (b) the tests and registers pinning law 1 as the default: NOT YET LISTED (start: `grep -rlnE "DEFAULT_FORTUNE_LAW_VERSION|NEW_SETTLEMENT_FORTUNE_LAW_VERSION|_fortuneLawVersion" tests`).
+- (c) a saved town keeps its law: NOT YET ANSWERED (find the test that births under 1, saves/loads, and re-reads under the
+  default flipped; else say none).
+- (d) the surfaces the lit law adds to a public or shared read: NOT YET LISTED (the score and band by own size; the
+  merits' sentences (U5b); F2's twin line (enrol in the census)).
+- The final measure's HEADLINE: the lit world on a visitor's pool (the who-rules lane's recipe); dark the control.
 
 ## 5. BEFORE LIGHTING (the chair, 18:38 UTC; also for the security reader at the join)
 
