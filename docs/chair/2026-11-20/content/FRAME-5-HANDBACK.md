@@ -1,6 +1,6 @@
 # FRAME-5 — hand-back (the session sheet's lane, third owner after FRAME-3 and FRAME-4)
 
-Last written 2026-11-20T12:37:55Z (`date -u`) by FRAME-5 on `lane/frame-5-2026-11-20`. The lane was taken at `9e23a094d` on the chair's word "THE LANE IS YOURS at 9e23a094d" (11:12 UTC). A successor needs this file and the briefs it names. Read it with `FRAME-4-HANDBACK.md`, whose rulings 18 to 25 stay in force, and `FRAME-3-HANDBACK.md`, whose rulings 1 to 17 stay in force.
+Last written 2026-11-20T12:49:47Z (`date -u`) by FRAME-5 on `lane/frame-5-2026-11-20`. The lane was taken at `9e23a094d` on the chair's word "THE LANE IS YOURS at 9e23a094d" (11:12 UTC). A successor needs this file and the briefs it names. Read it with `FRAME-4-HANDBACK.md`, whose rulings 18 to 25 stay in force, and `FRAME-3-HANDBACK.md`, whose rulings 1 to 17 stay in force.
 
 ## THE COUNT THE OWNER READS FIRST
 
@@ -47,6 +47,10 @@ Cast and weight disagree on 0 towns. The opening trouble is unchanged from FRAME
     - The count moves for the OWNER's audience only. Both figures are given: the reader's (58, under today's standing) and the owner's (58 plus those of the 5 that W4 opens).
 33. **THE HAND-OVER POINT** (the chair, 12:16 UTC). FRAME-6 is seated beside FRAME-5 (`prompts/FRAME-6.txt` on the chair's branch). FRAME-5 hands over when P1b and CF12 are both merged, or at 330,000 tokens by its own count, whichever comes first: "FRAME-PART <commit>, HANDED OVER". After that FRAME-5 only relays builders, unread.
 
+34. **P1b's two notes** (FRAME-5, 12:5x UTC; put to the chair).
+    - (a) The wording is VETOABLE. The builder used the brief's example sentence; the trouble frame's own "where strangers lodge, and would know of them" is the more modest option. The house is the record's own word ("the taverns").
+    - (b) DRIFT: `crisisPage.js :: lodgingKeeperOf` is a second copy of `troubleCast.js`'s outsider rung, because the veil test's walker ("one door: only the sheet's composer imports the trouble cast") forbids the import. A change to either copy must be made to both, until the rule is exported from a module both may import. It also reads a card's `power` (add it to ruling 30's list).
+
 ## EACH UNIT: STATE, BRANCH, COMMIT
 
 | unit | state | commit | receipts |
@@ -62,7 +66,7 @@ Cast and weight disagree on 0 towns. The opening trouble is unchanged from FRAME
 | **C1** | MERGED | `b632fe3bc` (e5f53a3c1) | diff read; conflict = crisisPage.js import lines (union). Red re-run 5 failed/1 passed; merged 50 files 431 passed + U0's 82 files 1320 passed. Builder: stored tail 22 of B7's 690 rows (all brunt) -> 0; B7 338/360 identical, the 22 exactly the tail towns; calm 330/330; golden 525/525. Pins moved (unsigned): crisisCast.test.js "…passed over…", crisisCastReaderRows.test.js "GUARD: a brunt of a house that loses…" |
 | registers at U0 + C1 | DONE | `8991b83b2` | lighting: files 3714, credited 3241, titles 31268, suiteTitles 8661, plain 34/34; wiring delta 0 |
 | `tests/lint` whole at `8991b83b2` | 2 red | — | `tuningRegister` (ruling 14's two rows + U0's WANT_MAX_WORDS row); `seedLoopTotality`: C1's `crisisDealerReason.test.js` line 112, a bare seed loop, CURED by C1's builder at `e7469b17e` and merged at `10758b67f`. Re-run at the lane tip: crisisDealerReason 6/6, seedLoopTotality 9/9, lighting 34/34 (no title moved). The lane's `tests/lint` state is therefore `tuningRegister` alone (three named rows) |
-| **P1b** | BUILDER OUT (`frame5-p1b`, worktree scratchpad `wt-p1b`, from `8991b83b2`) | — | results `frame5/P1B-RESULTS.md` |
+| **P1b** | MERGED | `99eaeb518` (085fc9c18); registers `02ad22e47` | Diff read. The owner-only line after the outside hand's stored reason: "an outside hand, unnamed; Chae Yang keeps the alehouse where its people come and go" (`CRISIS_ABSENCE_REACH`, `lodgingKeeperOf`, `reachOf` in crisisPage.js). Reach: B7 5 of 14, the golden 120 of 288, natural 1 of 2. The builder's byte-identity over 1,245 towns: stored 1245/1245; non-owner pages 11205/11205; the owner's pages move only on the 126 predicted. Re-run by FRAME-5: red 4 failed on the pre-merge tree; merged 36 files, 314 passed. Lighting: files 3715, credited 3242, titles 31279, suiteTitles 8663; wiring delta 0. Pin amended: crisisPageAudience "the seam changes no page…" cuts only the owner's clause (stranger arms unchanged) |
 | **CF12** | BUILDER OUT (`frame5-cf12`, worktree scratchpad `wt-cf12`, from `8991b83b2`) | — | results `frame5/CF12-CAPTURED-HALL-RESULTS.md` |
 | P4a, C2, P1, P2, P3a, P3b, P4b, measures, six sheets, build + verify:dist | NOT STARTED | — | order: P4a after P1b (both crisisPage.js) -> C2 -> P1 -> P2 -> P3a -> P3b -> P4b -> measures -> sheets -> build + `verify:dist` |
 
