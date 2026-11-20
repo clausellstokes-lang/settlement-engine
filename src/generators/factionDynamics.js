@@ -16,6 +16,7 @@
  */
 
 import { LEGITIMACY_CUTS, legitimacyBandOf } from '../data/bandLadders.js'; import { STRESS_POWER_FACES } from '../data/stressPowerFaces.js'; import { powerNameAfterArticle, powerNameWithArticle, powerPossessive } from '../domain/display/powerSentenceName.js'; import { pluralPowerName } from '../domain/display/governanceAccount.js'; /** TAIL-POWERS-B (P3 + the agreement law): a power in a relation line takes its prose form (`say`) and the verb its number (`verb`). NAMES-1 (CN1): the form with its article, "the Elder Council" (`opening` raises a sentence's first "the"), and its possessive "the Guard's" (`sayOf`). @param {{faction?: string} | null | undefined} f */ const say = (f) => powerNameWithArticle(f?.faction); /** @param {{faction?: string}} f @param {string} one @param {string} many */ const verb = (f, one, many) => (pluralPowerName(say(f)) ? many : one); /** @param {{faction?: string}} f */ const sayOf = (f) => `the ${powerPossessive(powerNameAfterArticle(f?.faction))}`; /** @param {unknown} t @returns {any} */ const opening = (t) => (typeof t === 'string' ? t.replace(/(^|[.!?]\s+)the /g, '$1The ') : t); // one line: the holder census keys this file by line
+import { READINESS_BANDS } from '../data/bandLadders.js'; import { FORTUNE_LAW_TUNING, SIZE_RELATIVE_FORTUNE_LAW_VERSION, readFortuneLawVersion } from '../domain/fortune/fortuneLaw.js'; // FORTUNE-1 U3 (FS2): the readiness ladder's order, and the fortune law's one reader and one table
 // ── Public legitimacy contributions ──────────────────────────────────────────
 // Prosperity → ±20
 const PROSPERITY_CONTRIB = {
@@ -81,6 +82,33 @@ export const legitimacyDefScale = (tier) =>
   : tier === 'town'    ? 0.85
   : 1.0;
 
+// FORTUNE-1 U3 (FS2, the proposal's section 3 item 7; THE FORTUNE LAW ONLY): the readiness bands
+// LOWEST FIRST, read off the one ladder (`READINESS_BANDS`, held highest first), never re-spelled.
+const READINESS_ORDER = READINESS_BANDS.map((band) => band.label).reverse();
+
+/**
+ * The defence term under the fortune law (version 2): defence judged against what is USUAL for the
+ * size. So many points (`defencePointsPerBand`) a band the label stands above the size's usual
+ * range's top or below its bottom (0 inside it), within plus or minus `defenceBound`, weighed by the
+ * size's existing scale (`legitimacyDefScale`, unchanged). Every figure is the law's DRAFT table
+ * (`FORTUNE_LAW_TUNING.standing`). A label off the ladder contributes 0, as today; a size off the
+ * table reads the town's range (the prototype's fallback, `instruments/rule.mjs`, patch fs2-defence).
+ *
+ * @param {string|null|undefined} defenseLabel
+ * @param {string} tier
+ * @param {number} defScale  `legitimacyDefScale(tier)`
+ * @returns {number}
+ */
+function sizeRelativeDefenceContrib(defenseLabel, tier, defScale) {
+  const { defenceUsualRange, defencePointsPerBand, defenceBound } = FORTUNE_LAW_TUNING.standing;
+  const index = READINESS_ORDER.indexOf(String(defenseLabel));
+  if (index < 0) return 0;
+  const range = /** @type {Record<string, ReadonlyArray<string>>} */ (defenceUsualRange)[tier] ?? defenceUsualRange.town;
+  const [low, high] = range.map((band) => READINESS_ORDER.indexOf(band));
+  const offset = index > high ? index - high : index < low ? index - low : 0;
+  return Math.round(Math.max(-defenceBound, Math.min(defenceBound, defencePointsPerBand * offset)) * defScale);
+}
+
 /**
  * The SINGLE public-legitimacy band derivation (cycle-3 Wave 2, chokepoint for
  * the M5 class). score → { label, color, bg, multipliers, boolean flags }. This
@@ -123,9 +151,16 @@ export function legitimacyBandFor(score) {
  * @param {Object} economicState   - from generateEconomicState
  * @param {string} defenseLabel    - readiness label from defenseProfile (may be null)
  * @param {string} tier
+ * @param {number} [fortuneLaw]    - the fortune law's version (`resolveFortuneLawVersion` of the
+ *   world's config, handed by the one caller, `power/rulingStructure.js`). Read through the law's
+ *   closed reader: absent or garbage is version 1, and under version 1 every line computes exactly
+ *   as before the law. Under version 2 (FS2) the prosperity term reads the law's table and the
+ *   defence term is judged against the size's usual range (`sizeRelativeDefenceContrib`); safety,
+ *   food, the base 50, the cuts and the band derivation are unchanged.
  * @returns {{ score:number, label:string, color:string, bg:string, breakdown:Object, govMultiplier:number, crimMultiplier:number, isEndorsed:boolean, isApproved:boolean, isTolerated:boolean, isContested:boolean, isLegitimacyCrisis:boolean, governanceFractured:boolean }}
  */
-export function computePublicLegitimacy(economicState, defenseLabel, tier) {
+export function computePublicLegitimacy(economicState, defenseLabel, tier, fortuneLaw) {
+  const sizeRelative  = readFortuneLawVersion(fortuneLaw) === SIZE_RELATIVE_FORTUNE_LAW_VERSION; // FORTUNE-1 U3 (FS2)
   const prosperity    = economicState?.prosperity      || 'Moderate';
   const safetyLabel   = economicState?.safetyProfile?.safetyLabel || 'Moderate';
   const foodLabel     = economicState?.foodSecurity?.label || 'Secure';
@@ -140,9 +175,11 @@ export function computePublicLegitimacy(economicState, defenseLabel, tier) {
                   : tier === 'town'    ? 0.85
                   : 1.0;
 
-  const pContrib = PROSPERITY_CONTRIB[prosperity] ?? 0;
+  const pContrib = (sizeRelative ? /** @type {Record<string, number>} */ (FORTUNE_LAW_TUNING.standing.prosperityPoints) : PROSPERITY_CONTRIB)[prosperity] ?? 0;
   const sContrib = safetyContrib(safetyLabel);
-  const dContrib = Math.round((DEFENSE_CONTRIB[defenseLabel] ?? 0) * defScale);
+  const dContrib = sizeRelative
+    ? sizeRelativeDefenceContrib(defenseLabel, tier, defScale)
+    : Math.round((DEFENSE_CONTRIB[defenseLabel] ?? 0) * defScale);
   const fContrib = Math.round(foodContrib(foodLabel) * foodScale);
 
   const score = Math.max(0, Math.min(100, 50 + pContrib + sContrib + dContrib + fContrib));
