@@ -70,6 +70,9 @@ export const OTHER_SHAPES = Object.freeze({
   // COHERENCE-POWERS-7 leftover 1 (1022e9887): withTownsOwnUnderworld reads the town's crime signal (`crimeSignalOf`'s
   // criminal powers' names, roster order), the class defenseDisplay.js's row names; read by POWERS-10 at the site
   'src/domain/crimeSignal.js:91': 'the crime signal',
+  // FRAME-1 (2026-11-20, the seventh chair's CF1): the trouble cast reads a TENSION's own `factions`, its three sides
+  // (history.currentTensions[].factions), never the retired grouping; both reads are of the tension
+  'src/domain/tension/troubleCast.js': 'a tension\'s sides',
   // density plan / ladder rows that PEOPLE-1 retires with the roster (kept so the draft is exact at the base):
   'src/generators/density/applyDensityLaw.js:269': 'the density plan', 'src/generators/density/applyDensityLaw.js:375': 'a powerStructure copy',
   'src/generators/density/applyDensityLaw.js:476': 'the density plan',

@@ -4658,6 +4658,14 @@
     "tests/generators/faultsWatch.test.js": {
       "kind": "mutation",
       "label": "faults-watch/the holding cells hold pending trial only where a court sits"
+    },
+    "tests/domain/tension/sideArchetypes.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "THE TROUBLE CAST'S GUARDS (FRAME-1, the seventh chair's CF3 and CF5, 2026-11-20): tests/domain/tension/sideArchetypes.walker.test.js (every side label HISTORICAL_EVENTS_DATA can write is classed; the labels the generator writes over are exactly its own seven replacements, each at its place) and tests/security/frameShareVeil.test.jsx (the frame reaches no shared read: the gallery read default and DM-full, the party link, the import and the player world export are byte-identical to the lane's base and compose no frame, and their Table View draws none of its lines). EXECUTED AT BUILD TIME, 2026-11-20, each planted with python in the lane's OWN files, run under the gate mutex (shared tier, two workers), restored from a cp backup and verified by cmp: (1) one label deleted from SIDE_ARCHETYPE reds the walker (1 failed / 4 passed); (2) one row deleted from GENERATOR_REPLACED_SIDES reds the walker (1 failed / 4 passed); (3) the seed gate opened in castTroubleFrame (a record with no _seed cast as if seeded) reds the veil test's born arm at its first shared read, 'gallery: no frame' (1 failed / 2 passed; the born arm loops the eight towns in one test, the each-family law); (4) the office cap lifted to 3 reds tests/domain/tension/troubleCast.test.js (1 failed / 7 passed); (5) the seat cap zeroed reds it (1 failed / 7 passed). TWO SURVIVORS, RECORDED: the seat cap raised to 9 is EQUIVALENT at one trouble a sheet (nobody holds two sides, so the seat-holder cannot front two), and casting the authority side in record order instead of first leaves the pool's arms green (an ordering preference no arm pins; the cap it protects against is the office cap, which (4) guards). A standing sweep plant is not offered: the sweep reverts with a checkout against a shared worktree, the reason recorded at customContentCharsetWiring."
+    },
+    "tests/security/frameShareVeil.test.jsx": {
+      "kind": "rationale",
+      "rationale": "See tests/domain/tension/sideArchetypes.walker.test.js: the two guards of the trouble cast share one executed control record (plant (3) is this file's)."
     }
   },
   "meta": {

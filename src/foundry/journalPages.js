@@ -30,7 +30,7 @@ import {
   prominentPair, prominentType, prominentProse,
 } from '../pdf/lib/format.js';
 import { gateFaithEvents } from '../domain/display/faithEventFilter.js';
-import { composeTonightSheet, printsAsWant, secretLeadOf, TONIGHT_COPY } from '../domain/summary/tonightSheet.js';
+import { composeTonightSheet, printsAsWant, secretLeadOf, sideReadOf, TONIGHT_COPY } from '../domain/summary/tonightSheet.js';
 import { composeCrisisPage, CRISIS_PAGE_COPY } from '../domain/crisis/crisisPage.js';
 // ⛔ ONE HOME PER SENTENCE (STYLE-0 §3's keep-on rules, applied by STYLE-RULINGS-2 B4, 2026-11-09):
 // the crisis page's two print rules are the PDF's, from one module.
@@ -163,8 +163,14 @@ function tonightPage(settlement) {
   const hookLine = (h) => `- ${esc(h.text)}${h.source ? ` *(${esc(h.source)})*` : ''}`;
   const why = { seat: TONIGHT_COPY.seat, secret: TONIGHT_COPY.secret, cleric: TONIGHT_COPY.cleric };
   return md(
-    sheet.opening ? md(`## ${sheet.crisis ? TONIGHT_COPY.crisis : TONIGHT_COPY.urgent}`, esc(sheet.opening)) : null,
-    sheet.people.length ? md('', `## ${TONIGHT_COPY.people}`, sheet.people.map(p =>
+    // FRAME-1: the trouble by NAME on the journal page; its sentence and its hooks print once, on their own pages (B4)
+    sheet.opening ? md(`## ${sheet.crisis ? TONIGHT_COPY.crisis : sheet.frame ? TONIGHT_COPY.trouble : TONIGHT_COPY.urgent}`, esc(sheet.frame ? sheet.frame.name : sheet.opening)) : null,
+    // FRAME-1 (CF1): a calm town's trouble, its three sides, who stands on each and why
+    sheet.frame ? md('', `## ${TONIGHT_COPY.sides}`, sheet.frame.sides.map(side => {
+      const read = sideReadOf(side);
+      return `- **${esc(read.words)}**: ${read.who ? `${esc(read.who)}, ` : ''}${esc(read.why)}${read.wants ? ` ${esc(read.wants)}` : ''}`;
+    })) : null,
+    !sheet.frame && sheet.people.length ? md('', `## ${TONIGHT_COPY.people}`, sheet.people.map(p =>
       `- **${esc(p.name)}** (${esc([p.role, p.castLabel || why[p.why]].filter(Boolean).join(' · '))})${p.line ? `: ${!printsAsWant(p) ? esc([secretLeadOf(p), p.line].filter(Boolean).join(' ')) : p.sameAs ? `${TONIGHT_COPY.wantsSame} ${esc(p.sameAs)}.` : `${TONIGHT_COPY.wants} ${esc(p.line)}`}` : ''}`)) : null,
     sheet.facts.length ? md('', `## ${TONIGHT_COPY.facts}`, sheet.facts.map(f => `- **${esc(f.label)}**: ${esc(f.text)}`)) : null,
     sheet.hooks.length ? md('', `## ${TONIGHT_COPY.hooks}`, sheet.hooks.map(hookLine)) : null,

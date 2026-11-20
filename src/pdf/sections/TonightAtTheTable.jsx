@@ -16,7 +16,7 @@ import { PageChrome } from '../primitives/PageChrome.jsx';
 import { ChapterBand, GoldRule, HairRule } from '../primitives/Dense.jsx';
 import { NotesField } from '../primitives/Editable.jsx';
 import { type, palette, space, pt } from '../theme.js';
-import { composeTonightSheet, printsAsWant, secretLeadOf, TONIGHT_COPY } from '../../domain/summary/tonightSheet.js';
+import { composeTonightSheet, printsAsWant, secretLeadOf, sideReadOf, TONIGHT_COPY } from '../../domain/summary/tonightSheet.js';
 import { CrisisSections } from './CrisisSections.jsx';
 
 /** @param {{ children: string, color: string }} props */
@@ -47,14 +47,32 @@ export function TonightAtTheTable({ settlement, narrativeMode }) {
           backgroundColor: palette.badBg,
           borderLeft: `2pt solid ${palette.bad}`,
         }} wrap={false}>
-          <Eyebrow color={palette.bad}>{sheet.crisis ? TONIGHT_COPY.crisis : TONIGHT_COPY.urgent}</Eyebrow>
+          <Eyebrow color={palette.bad}>{sheet.crisis ? TONIGHT_COPY.crisis : sheet.frame ? TONIGHT_COPY.trouble : TONIGHT_COPY.urgent}</Eyebrow>
+          {/* FRAME-1: the trouble by NAME here; its sentence and its hooks print once per export, in their own chapters (B4) */}
           <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10.5'], lineHeight: 1.35 }}>
-            {sheet.opening}
+            {sheet.frame ? sheet.frame.name : sheet.opening}
           </Text>
         </View>
       ) : null}
 
-      {sheet.people.length > 0 ? (
+      {sheet.frame ? (
+        <View style={{ marginBottom: space.sm }}>
+          <Eyebrow color={palette.cool}>{TONIGHT_COPY.sides}</Eyebrow>
+          {sheet.frame.sides.map((side) => {
+            const read = sideReadOf(side);
+            return (
+              <View key={read.words} style={{ marginBottom: 5, paddingLeft: 6, borderLeft: `1.5pt solid ${palette.border}` }} wrap={false}>
+                <Text style={{ ...type.italic, color: palette.muted, fontSize: pt['8.5'] }}>{read.words}</Text>
+                {read.who ? <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10.5'] }}>{read.who}</Text> : null}
+                <Text style={{ ...type.body, color: palette.second, fontSize: pt['9'], lineHeight: 1.3 }}>{read.why}</Text>
+                {read.wants ? <Text style={{ ...type.body, color: palette.second, fontSize: pt['9'], lineHeight: 1.3 }}>{read.wants}</Text> : null}
+              </View>
+            );
+          })}
+        </View>
+      ) : null}
+
+      {!sheet.frame && sheet.people.length > 0 ? (
         <View style={{ marginBottom: space.sm }}>
           <Eyebrow color={palette.cool}>{TONIGHT_COPY.people}</Eyebrow>
           {sheet.people.map((p) => (

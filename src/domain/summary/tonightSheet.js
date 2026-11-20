@@ -38,6 +38,7 @@ import { CRISIS_NOUN, LINE_ROLE_CLAUSE } from '../crisis/crisisHooks.js';
 import { powerNameInProse } from '../display/governanceAccount.js';
 import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
 import { isSeatVacant, keeperFormOf, seatKeeperOf } from '../people/seatKeeper.js';
+import { castTroubleFrame } from '../tension/troubleCast.js';
 
 /**
  * THE ONE COPY CONSTANT for the sheet, on every surface that prints it.
@@ -58,6 +59,10 @@ export const TONIGHT_COPY = Object.freeze({
   wantsSame: 'Wants the same as',
   open: 'Open Tonight',
   close: 'Close Tonight',
+  // FRAME-1 (the seventh chair's CF1): a calm town's sheet opens on its sharpest standing trouble and its three sides
+  trouble: 'The trouble',
+  sides: 'Its three sides',
+  nobody: 'No one here is named for it.',
 });
 
 /**
@@ -262,7 +267,9 @@ const HOOK_COUNT = 3;
  * @typedef {Object} TonightPerson
  * @property {string} name
  * @property {string} role
- * @property {'seat'|'secret'|'cleric'|'cast'} why
+ * @property {'seat'|'secret'|'cleric'|'cast'|'side'} why
+ * @property {string=} side         for a person on a side of the trouble (FRAME-1): the side's words
+ * @property {string=} reason       for a person on a side of the trouble: why they stand there (troubleCast.js :: FRAME_REASONS)
  * @property {string=} castLabel    the cast's role label, for a person drawn from the crisis cast
  * @property {string=} castId       the cast row's id, for a person drawn from the crisis cast (the want's key)
  * @property {string=} castKind     the crisis kind the person was cast in (the want's fill)
@@ -284,9 +291,29 @@ const HOOK_COUNT = 3;
  * @property {string} text
  * @property {string} source
  *
+ * @typedef {Object} TonightSide
+ * @property {string} words         the side as the record holds it
+ * @property {string} archetype     its class (tension/sideArchetypes.js)
+ * @property {string} kind          the rung that filled it ('' where none did)
+ * @property {string} name          the person (or house) standing there; '' for an outsider or an absent side
+ * @property {string} role          the person's role as the card prints it
+ * @property {string} reason        why they stand there; for an outsider, the person they are reached through
+ * @property {string} line          what they want (or their secret, or temperament), as the people to voice print it
+ * @property {'want'|'secret'|'temperament'} says
+ * @property {string=} sourcePath
+ * @property {string=} sameAs       an earlier side's person who wants the same: the want prints once (F2 REPEAT-ONCE)
+ *
+ * @typedef {Object} TonightFrame
+ * @property {string} type          the tension's template type
+ * @property {string} name          the trouble by name (its type in words), what an export prints in place of the sentence
+ * @property {string} line          the record's own sentence for the trouble
+ * @property {string[]} hooks       the trouble's own hooks
+ * @property {TonightSide[]} sides  its three sides, in the record's order
+ *
  * @typedef {Object} TonightSheet
  * @property {TonightCrisis | null} crisis
- * @property {string} opening       the first line: the crisis line, or the pressure sentence with no crisis
+ * @property {TonightFrame | null} frame  a calm town's sharpest standing trouble (FRAME-1); null in a town in crisis
+ * @property {string} opening       the first line: the crisis line, the trouble's sentence, or the pressure sentence
  * @property {TonightPerson[]} people
  * @property {TonightFact[]} facts
  * @property {TonightHook[]} hooks
@@ -314,6 +341,10 @@ const HOOK_COUNT = 3;
  *
  * @typedef {Object} TonightSource
  * @property {unknown} [name]
+ * @property {unknown} [_seed]
+ * @property {unknown} [relationships]
+ * @property {unknown} [history]
+ * @property {unknown} [powerStructure]
  * @property {TonightStress | TonightStress[] | null} [stress]
  * @property {unknown} [pressureSentence]
  * @property {TonightNpc[]} [npcs]
@@ -328,13 +359,114 @@ const HOOK_COUNT = 3;
 export function composeTonightSheet(settlement) {
   const source = settlement && typeof settlement === 'object' ? settlement : {};
   const crisis = crisisOf(source);
+  const frame = crisis ? null : frameOf(source);
   return {
     crisis,
-    opening: crisis ? crisis.line : sentence(clean(source.pressureSentence)),
-    people: peopleOf(source),
+    frame,
+    opening: crisis ? crisis.line : frame ? sentence(frame.line) : sentence(clean(source.pressureSentence)),
+    people: frame ? framePeopleOf(frame) : peopleOf(source),
     facts: [foodFact(source), defenceFact(source)].filter(/** @returns {f is TonightFact} */ (f) => f !== null),
-    hooks: hooksOf(source),
+    hooks: frame ? frameHooksOf(source, frame) : hooksOf(source),
   };
+}
+
+/**
+ * THE FRAME (FRAME-1, the seventh chair's CF1; the owner, 2026-11-20: "Do it pre deploy. I like it."): a town with NO
+ * active crisis opens on its sharpest standing trouble, in the record's own sentence, with three people on its three
+ * sides (tension/troubleCast.js: derived at render, nothing stored). Each face is voiced as every person on the sheet
+ * is (`voicedLineOf`: their own goal, else their secret, else their temperament). An outsider is never named: the side
+ * prints its words and the person it is reached through; a side no rule fills prints its words and no one.
+ * @param {TonightSource} source @returns {TonightFrame | null}
+ */
+function frameOf(source) {
+  const cast = castTroubleFrame(/** @type {Parameters<typeof castTroubleFrame>[0]} */ (source));
+  if (!cast) return null;
+  const npcs = Array.isArray(source.npcs) ? source.npcs : [];
+  /** @type {TonightSide[]} */
+  const sides = cast.sides.map((side) => {
+    const face = side.face;
+    const at = face?.npcId ? npcs.findIndex((n) => !!n && (clean(/** @type {{ id?: unknown }} */ (n).id) || clean(n.name)) === face.npcId) : -1;
+    const npc = at >= 0 ? npcs[at] : null;
+    const own = npc ? ownLineOf(npc) : { says: /** @type {'want'} */ ('want'), line: '' };
+    return {
+      words: side.words,
+      archetype: side.archetype,
+      kind: face?.kind || '',
+      name: face && face.kind !== 'outsider' ? clean(face.name) : '',
+      role: npc ? clean(npc.role || npc.title) : '',
+      reason: face ? face.reason : '',
+      line: own.line,
+      says: own.says,
+      ...(at >= 0 ? { sourcePath: `npcs[${at}]` } : {}),
+    };
+  });
+  // ONE WANT, ONE HOME (X-50, F2 REPEAT-ONCE) holds across the sides as across the people to voice
+  /** @type {Map<string, string>} */
+  const firstBy = new Map();
+  const folded = sides.map((side) => {
+    if (!side.name || side.says !== 'want' || !side.line) return side;
+    const first = firstBy.get(side.line);
+    if (first === undefined) { firstBy.set(side.line, side.name); return side; }
+    return { ...side, sameAs: first };
+  });
+  return { type: cast.type, name: troubleNameOf(cast.type), line: cast.line, hooks: cast.hooks.map((h) => sentence(clean(h))).filter(Boolean), sides: folded };
+}
+
+/**
+ * The trouble by its NAME, for an export (the PDF chapter, the journal page): the sentence prints once per export, where
+ * the export keeps the town's tensions (STYLE-RULINGS-2 B4, the keep-on rule; tests/pdf/restoredSubsections.test.js), so
+ * the export's Tonight page names it as the Overview's tension rows do: the type in words.
+ * @param {string} type @returns {string}
+ */
+function troubleNameOf(type) {
+  const words = clean(type).replace(/_/g, ' ');
+  return words ? words[0].toUpperCase() + words.slice(1) : '';
+}
+
+/**
+ * HOW A SIDE READS — ONE HOME for the three renderers (components/TonightSheet.jsx, pdf/sections/TonightAtTheTable.jsx,
+ * foundry/journalPages.js): its words; who stands there ("name · role", '' for an outsider or an absent side); why, as
+ * a sentence (for an outsider, the person they are reached through; for an absent side, TONIGHT_COPY.nobody); and what
+ * the person wants, after "Wants to" (a secret or a temperament as it stands).
+ * @param {TonightSide} side @returns {{ words: string, who: string, why: string, wants: string }}
+ */
+export function sideReadOf(side) {
+  return {
+    words: side.words,
+    who: side.name ? [side.name, side.role].filter(Boolean).join(' · ') : '',
+    why: side.kind ? sentence(side.reason) : TONIGHT_COPY.nobody,
+    wants: !side.name || !side.line ? '' : side.sameAs ? `${TONIGHT_COPY.wantsSame} ${side.sameAs}.` : side.says === 'want' ? `${TONIGHT_COPY.wants} ${side.line}` : side.line,
+  };
+}
+
+/**
+ * The people to voice on a calm town's sheet: the named faces of the trouble's sides, in the sides' order, each once
+ * (a criminal house stands on its side by name and voices nothing; an outsider and an absent side name no one).
+ * @param {TonightFrame} frame @returns {TonightPerson[]}
+ */
+function framePeopleOf(frame) {
+  /** @type {TonightPerson[]} */
+  const out = frame.sides.filter((side) => side.name && side.sourcePath).map((side) => ({
+    name: side.name, role: side.role, why: /** @type {'side'} */ ('side'), side: side.words, reason: side.reason,
+    line: side.line, says: side.says, sourcePath: /** @type {string} */ (side.sourcePath),
+  }));
+  return wantsOnce(out);
+}
+
+/**
+ * The hooks of a calm town's sheet (CF1): the trouble's own are shown with it, so the list carries the faces' own hooks
+ * first, then the rest by the record's priority, none twice and none the trouble already shows.
+ * @param {TonightSource} source @param {TonightFrame} frame @returns {TonightHook[]}
+ */
+function frameHooksOf(source, frame) {
+  const shown = new Set(frame.hooks);
+  const faces = new Set(frame.sides.map((side) => side.name).filter(Boolean));
+  /** @type {TonightHook[]} */
+  const all = hooksOf(source, Number.POSITIVE_INFINITY).filter((h) => !shown.has(h.text));
+  const ordered = [...all.filter((h) => faces.has(h.source)), ...all.filter((h) => !faces.has(h.source))];
+  /** @type {Set<string>} */
+  const seen = new Set();
+  return ordered.filter((h) => (seen.has(h.text) ? false : (seen.add(h.text), true))).slice(0, HOOK_COUNT);
 }
 
 /** @param {TonightSource} source @returns {TonightStress[]} */
@@ -728,11 +860,11 @@ function defenceFact(source) {
   return { id: 'defence', label: TONIGHT_COPY.defence, text, sourcePath: 'defenseFactsOf' };
 }
 
-/** @param {TonightSource} source @returns {TonightHook[]} */
-function hooksOf(source) {
+/** @param {TonightSource} source @param {number} [limit] @returns {TonightHook[]} */
+function hooksOf(source, limit = HOOK_COUNT) {
   return [...collectPlotHooks(/** @type {Parameters<typeof collectPlotHooks>[0]} */ (source))]
     .sort((a, b) => (b.priority || 0) - (a.priority || 0))
-    .slice(0, HOOK_COUNT)
+    .slice(0, limit)
     .map((h) => ({ text: sentence(clean(h.text)), source: clean(h.source) }))
     .filter((h) => h.text);
 }

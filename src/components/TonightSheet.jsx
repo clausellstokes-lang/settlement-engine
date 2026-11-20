@@ -10,7 +10,7 @@
 import { FS } from './theme.js';
 import useIsMobile from '../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../design/proseScale.js';
-import { TONIGHT_COPY, printsAsWant, secretLeadOf } from '../domain/summary/tonightSheet.js';
+import { TONIGHT_COPY, printsAsWant, secretLeadOf, sideReadOf } from '../domain/summary/tonightSheet.js';
 
 const serif = '"Crimson Text", Georgia, serif';
 
@@ -51,14 +51,40 @@ export default function TonightSheet({ sheet, palette }) {
           padding: '10px 12px', background: palette.card,
           border: `1px solid ${palette.rule}`, borderLeft: `3px solid ${palette.alarm}`,
         }}>
-          <Eyebrow color={palette.alarm}>{sheet.crisis ? TONIGHT_COPY.crisis : TONIGHT_COPY.urgent}</Eyebrow>
+          <Eyebrow color={palette.alarm}>{sheet.crisis ? TONIGHT_COPY.crisis : sheet.frame ? TONIGHT_COPY.trouble : TONIGHT_COPY.urgent}</Eyebrow>
           <div style={{ fontFamily: serif, fontSize: proseFontSize(FS.lg, mobile), color: palette.ink, lineHeight: 1.4 }}>
             {sheet.opening}
+          </div>
+          {sheet.frame && sheet.frame.hooks.length > 0 && (
+            <ul data-tonight-trouble-hooks="" style={{ margin: '6px 0 0', paddingLeft: 18, display: 'flex', flexDirection: 'column', gap: 3 }}>
+              {sheet.frame.hooks.map((h) => (
+                <li key={h} style={{ fontSize: proseFontSize(FS.sm, mobile), color: palette.body, lineHeight: 1.45 }}>{h}</li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
+
+      {sheet.frame && (
+        <div data-tonight-sides="">
+          <Eyebrow color={palette.accent}>{TONIGHT_COPY.sides}</Eyebrow>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {sheet.frame.sides.map((side) => {
+              const read = sideReadOf(side);
+              return (
+                <div key={read.words} style={{ paddingLeft: 9, borderLeft: `2px solid ${palette.rule}` }}>
+                  <div style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, color: palette.faint }}>{read.words}</div>
+                  {read.who && <div style={{ fontFamily: serif, fontWeight: 700, fontSize: FS.md, color: palette.ink }}>{read.who}</div>}
+                  <div style={{ fontSize: proseFontSize(FS.sm, mobile), color: palette.body, lineHeight: 1.45 }}>{read.why}</div>
+                  {read.wants && <div style={{ fontSize: proseFontSize(FS.sm, mobile), color: palette.body, lineHeight: 1.45 }}>{read.wants}</div>}
+                </div>
+              );
+            })}
           </div>
         </div>
       )}
 
-      {sheet.people.length > 0 && (
+      {!sheet.frame && sheet.people.length > 0 && (
         <div>
           <Eyebrow color={palette.accent}>{TONIGHT_COPY.people}</Eyebrow>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
