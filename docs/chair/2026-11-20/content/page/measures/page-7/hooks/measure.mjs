@@ -1,12 +1,16 @@
-// PAGE-7 measure (TROUBLE-LINES step 1, 2026-11-20): a current tension's stored hooks and lasting effects.
-// Towns: PAGE-5's 900 (hxd-<size>-<i>, i=0..n-1, every size in SIZES), built as page-5/sim.mjs builds them.
-// Reads the FINAL record: history.currentTensions[].plotHooks / .lastingEffects, and factsOf(record) for each need.
+// PAGE-7 measure (TROUBLE-LINES step 1, 2026-11-20; round 2 after the chair's rulings of 16:19): a current tension's
+// stored hooks (and, step 1 only, its lasting effects). Towns: PAGE-5's 900 (hxd-<size>-<i>, i=0..n-1, every size in
+// SIZES), built as page-5/sim.mjs builds them. Reads the FINAL record: history.currentTensions[].plotHooks /
+// .lastingEffects, and factsOf(record) for each need.
 // Usage: node measure.mjs <checkout root> [n=150] [prefix=hxd] [pools.mjs]
-//   With a pools file (export default { <kind>: { take: { hooks, effects }, hooks: [[text, need]...], effects: [[text, need]...] } },
-//   `need` a fact-vocabulary atom (`src/domain/facts/factVocabulary.js :: atomHolds` over factsOf(record)) or 'none'), it also
-//   prints the proposed pools' spread: each kind's hooks/effects replaced by the top-`take` of
-//   fnv1a32(`${seed}::trouble::${kind}::hook|effect::${text}`) among the lines whose need holds, draw-free.
-// Count lines start with KINDS, KIND, HOOK, EFFECT, LEN, CHOSEN, FACT, TRI, TOP, NEW (read those; the rest is detail).
+//   With a pools file (export default { <kind>: { take: { hooks }, hooks: [[text, need, stored?]...] } }; a need is 'none',
+//   a fact-vocabulary atom (`src/domain/facts/factVocabulary.js :: atomHolds` over factsOf(record)), '!atom' (reads
+//   false) or an array of those, all holding), it also prints the pools' spread: each kind's hooks replaced by the
+//   top-`take` of fnv1a32(`${seed}::trouble::${kind}::hook::${text}`) among the lines whose need holds, draw-free.
+// THE BAR (the chair, 16:19), by size over the path history.currentTensions[].plotHooks[] (every kind): TOPSHARE = the
+//   commonest hook's places / the places holding any hook (the census's topN/holders); SEEN = the census's measure, the
+//   mean over holders of the share of a place's hooks a second place also prints (census.mjs's `seen`).
+// Count lines start with KINDS, KIND, HOOK, EFFECT, LEN, FACT, TRI, TOP, ATOMS, NEW, BAR (read those; the rest is detail).
 const [, , L = process.cwd(), nA = '150', prefix = 'hxd', poolsPath = ''] = process.argv;
 const { generateSettlementPipeline } = await import(`${L}/src/generators/generateSettlementPipeline.js`);
 const { birthConfig, loadGenerationLawPayloads } = await import(`${L}/src/domain/density/densityCreateBoundary.js`);
@@ -17,7 +21,9 @@ const { fnv1a32 } = await import(`${L}/src/kernel/proseHash.js`);
 const { atomHolds, isKnownAtom } = await import(`${L}/src/domain/facts/factVocabulary.js`);
 await loadGenerationLawPayloads();
 const pools = poolsPath ? await import(poolsPath) : null;
-const ATOMS = pools ? [...new Set(Object.values(pools.default).flatMap((p) => [...p.hooks, ...p.effects].map(([, need]) => need)).filter((n) => n !== 'none'))] : [];
+const partsOf = (need) => (Array.isArray(need) ? need : [need]).filter((x) => x !== 'none');
+const ATOMS = pools ? [...new Set(Object.values(pools.default).flatMap((p) => p.hooks.flatMap(([, need]) => partsOf(need).map((x) => x.replace(/^!/, '')))))] : [];
+const admits = (need, held) => partsOf(need).every((x) => (x.startsWith('!') ? held[x.slice(1)] === false : held[x] === true));
 const unknown = ATOMS.filter((a) => !isKnownAtom(a));
 if (pools) console.log(`ATOMS ${ATOMS.length} needs used, unknown to the vocabulary: ${unknown.length ? unknown.join(', ') : 'none'}`);
 
@@ -78,7 +84,7 @@ for (const size of SIZES) for (let i = 0; i < +nA; i++) {
   const tens = (t.history?.currentTensions || []).map((x) => {
     const bool = Object.fromEntries(BOOL.map(([k, , p]) => [k, !!safe(() => p(t, f, x.type))]));
     const spread = Object.fromEntries(SPREAD.map(([k, , p]) => [k, String(safe(() => p(t, f)))]));
-    const needsHeld = pools ? Object.fromEntries(ATOMS.map((a) => [a, safe(() => atomHolds(a, f)) === true])) : null;
+    const needsHeld = pools ? Object.fromEntries(ATOMS.map((a) => [a, safe(() => atomHolds(a, f))])) : null;
     return { kind: x.type, hooks: [...(x.plotHooks || [])].map(String), effects: [...(x.lastingEffects || [])].map(String), bool, spread, needsHeld };
   });
   towns.push({ seed, tier: t.tier ?? size, tens });
@@ -131,30 +137,53 @@ for (const size of ['city', 'metropolis']) for (const field of ['hooks', 'effect
   console.log(`TOP ${size} ${field}: ` + [...c].sort((a, b) => b[1] - a[1]).slice(0, 5).map(([s, n]) => `${n}/${g.length} "${s.slice(0, 60)}"`).join(' | '));
 }
 
+// THE BAR by size (see the header), over the first `m` places of each size (150 = all; 50 = the census's places).
+const bar = (label, hooksOf, m) => {
+  const parts = [];
+  for (const size of SIZES) {
+    const g = towns.filter((t) => t.tier === size).slice(0, m).map((t) => new Set(hooksOf(t)));
+    const holders = g.filter((h) => h.size > 0); const H = holders.length;
+    const df = new Map(); for (const h of holders) for (const s of h) df.set(s, (df.get(s) || 0) + 1);
+    const top = Math.max(0, ...df.values());
+    let seen = 0; for (const h of holders) { let sh = 0; for (const s of h) sh += df.get(s) - 1; seen += sh / h.size / Math.max(1, H - 1); }
+    parts.push(`${size} top ${top}/${H} ${pct(top, H)} seen ${H ? (100 * seen / H).toFixed(1) : '-'}%`);
+  }
+  console.log(`BAR ${label} (${m} a size): ${parts.join(' · ')}`);
+};
+bar('today', (t) => t.tens.flatMap((x) => x.hooks), 150);
+bar('today', (t) => t.tens.flatMap((x) => x.hooks), 50);
+
 if (pools) {
   const P = pools.default;
-  const choose = (seed, kind, field, lines, held, len) => lines.filter(([, need]) => need === 'none' || held[need])
-    .map(([text]) => [text, fnv1a32(`${seed}::trouble::${kind}::${field === 'hooks' ? 'hook' : 'effect'}::${text}`)])
+  const unknown = ATOMS.filter((a) => !isKnownAtom(a));
+  console.log(`ATOMS ${ATOMS.length} atoms used, unknown to the vocabulary: ${unknown.length ? unknown.join(', ') : 'none'}`);
+  // KEY ORDER (env TROUBLE_KEY): 'seed-first' (default) hashes `${seed}::trouble::${kind}::hook::${text}`; 'text-first'
+  // hashes `${text}::trouble::${kind}::hook::${seed}` (the town's own bytes last, so FNV-1a mixes them last).
+  const keyOf = (seed, kind, text) => (process.env.TROUBLE_KEY === 'text-first' ? `${text}::trouble::${kind}::hook::${seed}` : `${seed}::trouble::${kind}::hook::${text}`);
+  console.log(`KEY ${process.env.TROUBLE_KEY === 'text-first' ? 'text-first' : 'seed-first'}`);
+  const choose = (seed, kind, lines, held, len) => lines.filter(([, need]) => admits(need, held))
+    .map(([text]) => [text, fnv1a32(keyOf(seed, kind, text))])
     .sort((a, b) => b[1] - a[1]).slice(0, len).map(([text]) => text);
-  const LEN = Object.fromEntries(Object.keys(P).map((k) => [k, P[k].take]));
   const memo = new Map();
   const newMap = (t, x) => { const key = `${t.seed}::${x.kind}`; if (memo.has(key)) return memo.get(key);
-    const p = P[x.kind]; const v = p ? { hooks: choose(t.seed, x.kind, 'hooks', p.hooks, x.needsHeld, LEN[x.kind].hooks), effects: choose(t.seed, x.kind, 'effects', p.effects, x.needsHeld, LEN[x.kind].effects) } : { hooks: x.hooks, effects: x.effects };
+    const p = P[x.kind]; const v = p ? { hooks: choose(t.seed, x.kind, p.hooks, x.needsHeld, p.take.hooks) } : { hooks: x.hooks };
     memo.set(key, v); return v; };
   for (const k of Object.keys(P)) {
     const rows = towns.flatMap((t) => t.tens.filter((x) => x.kind === k).map((x) => ({ t, x }))); const n = rows.length;
-    for (const field of ['hooks', 'effects']) {
-      const c = new Map(); let short = 0;
-      for (const { t, x } of rows) { const v = newMap(t, x)[field]; if (v.length < LEN[k][field]) short++; for (const s of v) c.set(s, (c.get(s) || 0) + 1); }
-      const top = [...c].sort((a, b) => b[1] - a[1]);
-      const needRate = [...new Set(P[k][field].map(([, need]) => need))].map((need) => `${need}:${pct(rows.filter(({ x }) => need === 'none' || x.needsHeld[need]).length, n)}`);
-      console.log(`NEW ${k} ${field}: pool ${P[k][field].length}, chosen ${LEN[k][field]} a town, short ${short}/${n}; max line ${top[0] ? pct(top[0][1], n) : '-'} ("${top[0]?.[0].slice(0, 50)}"), min line ${top.length ? pct(top[top.length - 1][1], n) : '-'}, lines printed ${top.length}/${P[k][field].length}; needs ${needRate.join(' ')}`);
-      for (const [s, m] of top) console.log(`NEWLINE ${k} ${field} ${pct(m, n)} "${s}"`);
-      for (const size of SIZES) { const g = rows.filter(({ t }) => t.tier === size); if (!g.length) continue; const cs = new Map();
-        for (const { t, x } of g) for (const s of newMap(t, x)[field]) cs.set(s, (cs.get(s) || 0) + 1);
-        const mx = [...cs].sort((a, b) => b[1] - a[1])[0]; console.log(`NEWSIZE ${k} ${field} ${size}: ${g.length} tensions, lines printed ${cs.size}, max line ${mx ? pct(mx[1], g.length) : '-'}`); }
+    const c = new Map(); let short = 0;
+    for (const { t, x } of rows) { const v = newMap(t, x).hooks; if (v.length < P[k].take.hooks) short++; for (const s of v) c.set(s, (c.get(s) || 0) + 1); }
+    const top = [...c].sort((a, b) => b[1] - a[1]);
+    const free = P[k].hooks.filter(([, need]) => partsOf(need).length === 0).length;
+    console.log(`NEW ${k}: pool ${P[k].hooks.length} (${free} need nothing, ${P[k].hooks.filter((h) => h[2]).length} stored), ${P[k].take.hooks} a place, short ${short}/${n}; max line ${top[0] ? pct(top[0][1], n) : '-'} of the kind's places, lines printed ${top.length}/${P[k].hooks.length}`);
+    for (const [text, need, stored] of P[k].hooks) {
+      const rate = rows.filter(({ x }) => admits(need, x.needsHeld)).length;
+      console.log(`NEWLINE ${k} need ${JSON.stringify(need)} holds ${pct(rate, n)} prints ${pct(c.get(text) || 0, n)}${stored ? ' STORED' : ''} "${text}"`);
     }
+    for (const size of SIZES) { const g = rows.filter(({ t }) => t.tier === size); if (!g.length) continue; const cs = new Map();
+      for (const { t, x } of g) for (const s of newMap(t, x).hooks) cs.set(s, (cs.get(s) || 0) + 1);
+      const srt = [...cs].sort((a, b) => b[1] - a[1]); const mx = srt[0]; console.log(`NEWSIZE ${k} ${size}: ${g.length} tensions, lines printed ${cs.size}, max line ${mx ? `${mx[1]}/${g.length}` : '-'}${['city', 'metropolis'].includes(size) ? ` [${srt.map(([, m]) => m).join(' ')}]` : ''}`); }
   }
   console.log(`TRI new hooks: ${tri('hooks', newMap)}`);
-  console.log(`TRI new effects: ${tri('effects', newMap)}`);
+  bar('new', (t) => t.tens.flatMap((x) => newMap(t, x).hooks), 150);
+  bar('new', (t) => t.tens.flatMap((x) => newMap(t, x).hooks), 50);
 }

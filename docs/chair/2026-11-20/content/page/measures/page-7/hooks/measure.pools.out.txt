@@ -1,4 +1,4 @@
-ATOMS 33 needs used, unknown to the vocabulary: none
+ATOMS 25 needs used, unknown to the vocabulary: none
 KINDS towns 900, tensions 1543, kinds 29: crime_wave 231 · guild_conflict 215 · resource_scarcity 114 · external_threat 79 · succession_crisis 74 · outside_debt 63 · legitimacy_crisis 58 · corruption_scandal 51 · popular_uprising 50 · wild_magic 46 · generational_divide 41 · magical_controversy 41 · great_flood 39 · disputed_land 39 · plague_years 37 · tyranny 36 · great_fire 35 · leadership_vacuum 34 · occupation_legacy 31 · population_friction 30 · infiltration_fear 30 · religious_tension 27 · pilgrimage_surge 25 · economic_disparity 25 · heresy_trial 24 · trade_dispute 22 · trade_collapse 21 · demographic_pressure 14 · market_crash 11
 
 KIND crime_wave: 231 tensions (thorp 13 hamlet 21 village 8 town 31 city 79 metropolis 79)
@@ -153,246 +153,143 @@ TOP city hooks: 79/150 "The crime wave is coordinated. Someone is directing it t
 TOP city effects: 79/150 "An expanded watch and a night curfew survive from the crackd" | 79/150 "Vigilante bands never fully disbanded and still operate quie" | 75/150 "Guild membership rolls now audited by an outside adjudicator" | 75/150 "One guild's charter was revoked and never fully restored" | 14/150 "Emergency grain reserves mandated by ordinance since the sho"
 TOP metropolis hooks: 88/150 "A guild master's records have gone missing ahead of an audit" | 88/150 "A journeyman denied mastership has proof the exam was rigged" | 79/150 "The crime wave is coordinated. Someone is directing it to cr" | 79/150 "A guard captain is on the payroll of the criminal network" | 79/150 "Those who would take the law into their own hands have picke"
 TOP metropolis effects: 88/150 "Guild membership rolls now audited by an outside adjudicator" | 88/150 "One guild's charter was revoked and never fully restored" | 79/150 "An expanded watch and a night curfew survive from the crackd" | 79/150 "Vigilante bands never fully disbanded and still operate quie" | 21/150 "Tribute payments to the external creditor continue on a sche"
-NEW crime_wave hooks: pool 9, chosen 3 a town, short 0/231; max line 46.8% ("Some here talk of taking the law into their own ha"), min line 8.2%, lines printed 9/9; needs none:100.0% watch:82.3% organised crime:84.4% rival rings:30.7% law: ≤ critical:14.7% market:84.4%
-NEWLINE crime_wave hooks 46.8% "Some here talk of taking the law into their own hands; who speaks loudest for it, and whom would they go after first?"
-NEWLINE crime_wave hooks 44.2% "Which crimes are rising here, and who has suffered them most?"
-NEWLINE crime_wave hooks 39.8% "Those in charge cannot answer the rising crime alone, and may welcome help from outside."
-NEWLINE crime_wave hooks 39.4% "Who in this place is better off for the rising crime, and does anyone else see it?"
-NEWLINE crime_wave hooks 38.5% "Organised crime works this place; is the rise its own doing, or are lesser hands taking their chance?"
-NEWLINE crime_wave hooks 38.5% "The watch cannot keep pace with the crime; which hours and which ground does it leave uncovered?"
-NEWLINE crime_wave hooks 33.8% "The traders at the market feel the rising crime first; which of them would pay to see it stopped?"
-NEWLINE crime_wave hooks 10.8% "Rival rings work this place and none rules the rest; is the rising crime their quarrel spilling over?"
-NEWLINE crime_wave hooks 8.2% "The law here has all but given way; who still answers when a neighbour is wronged?"
-NEWSIZE crime_wave hooks thorp: 13 tensions, lines printed 5, max line 84.6%
-NEWSIZE crime_wave hooks hamlet: 21 tensions, lines printed 6, max line 71.4%
-NEWSIZE crime_wave hooks village: 8 tensions, lines printed 8, max line 75.0%
-NEWSIZE crime_wave hooks town: 31 tensions, lines printed 8, max line 58.1%
-NEWSIZE crime_wave hooks city: 79 tensions, lines printed 8, max line 53.2%
-NEWSIZE crime_wave hooks metropolis: 79 tensions, lines printed 8, max line 45.6%
-NEW crime_wave effects: pool 8, chosen 2 a town, short 0/231; max line 35.1% ("Households bar their doors at night and keep their"), min line 7.4%, lines printed 8/8; needs none:100.0% watch:82.3% market:84.4% criminal income:81.0% law: ≤ critical:14.7% gate:79.2%
-NEWLINE crime_wave effects 35.1% "Households bar their doors at night and keep their valuables close."
-NEWLINE crime_wave effects 33.8% "Few go about alone after dark."
-NEWLINE crime_wave effects 29.4% "Neighbours keep a closer eye on strangers than on one another."
-NEWLINE crime_wave effects 24.2% "Part of what the place earns comes from outside the law, and few speak of it openly."
-NEWLINE crime_wave effects 23.8% "Traders take their goods in before dark and leave nothing out overnight."
-NEWLINE crime_wave effects 23.8% "The watch is stretched thin, and more is asked of it than it can give."
-NEWLINE crime_wave effects 22.5% "Strangers are asked their business at the gate."
-NEWLINE crime_wave effects 7.4% "Wrongs go unanswered by the law, and people settle them among themselves."
-NEWSIZE crime_wave effects thorp: 13 tensions, lines printed 5, max line 69.2%
-NEWSIZE crime_wave effects hamlet: 21 tensions, lines printed 6, max line 61.9%
-NEWSIZE crime_wave effects village: 8 tensions, lines printed 5, max line 75.0%
-NEWSIZE crime_wave effects town: 31 tensions, lines printed 8, max line 35.5%
-NEWSIZE crime_wave effects city: 79 tensions, lines printed 7, max line 32.9%
-NEWSIZE crime_wave effects metropolis: 79 tensions, lines printed 7, max line 34.2%
-NEW guild_conflict hooks: pool 9, chosen 3 a town, short 0/215; max line 43.7% ("The quarrel is fought out at the market itself; wh"), min line 16.3%, lines printed 9/9; needs none:100.0% guild:99.5% market:100.0% court sits:93.0% navigable:42.3% organised crime:81.9%
-NEWLINE guild_conflict hooks 43.7% "The quarrel is fought out at the market itself; whose goods are turned away, and who decides?"
-NEWLINE guild_conflict hooks 40.9% "Each side in the quarrel over trade is looking for allies; who has not yet chosen?"
-NEWLINE guild_conflict hooks 39.5% "The guild guards who may sell what; which of its rules would it least like to see tested?"
-NEWLINE guild_conflict hooks 35.3% "What would either side accept to end the quarrel, and who would be left out of the bargain?"
-NEWLINE guild_conflict hooks 33.0% "Those without a voice in how the place is run want one; whom would they choose to speak for them?"
-NEWLINE guild_conflict hooks 32.1% "A court sits here; would either side bring the quarrel before it, and at what cost?"
-NEWLINE guild_conflict hooks 31.6% "Who may sell what is the quarrel here; which trade is fought over hardest, and why that one?"
-NEWLINE guild_conflict hooks 27.4% "Organised crime works this place too; does either side in the quarrel over trade deal with it?"
-NEWLINE guild_conflict hooks 16.3% "Goods come in by water here; who may land and sell them, and who says so?"
-NEWSIZE guild_conflict hooks hamlet: 2 tensions, lines printed 4, max line 100.0%
-NEWSIZE guild_conflict hooks village: 1 tensions, lines printed 3, max line 100.0%
-NEWSIZE guild_conflict hooks town: 49 tensions, lines printed 9, max line 53.1%
-NEWSIZE guild_conflict hooks city: 75 tensions, lines printed 9, max line 41.3%
-NEWSIZE guild_conflict hooks metropolis: 88 tensions, lines printed 9, max line 42.0%
-NEW guild_conflict effects: pool 8, chosen 2 a town, short 0/215; max line 30.7% ("Every new trader who arrives is asked, first of al"), min line 20.9%, lines printed 8/8; needs none:100.0% guild:99.5% market:100.0% court sits:93.0% tier: ≥ town:98.6%
-NEWLINE guild_conflict effects 30.7% "Every new trader who arrives is asked, first of all, which side they are on."
-NEWLINE guild_conflict effects 30.2% "Traders on either side of the quarrel will not deal with the other."
-NEWLINE guild_conflict effects 27.0% "Prices differ with who is selling, and everyone knows which side is cheaper."
-NEWLINE guild_conflict effects 24.2% "Apprentices on one side of the quarrel do not cross to the other."
-NEWLINE guild_conflict effects 22.8% "Buyers ask who made a thing before they ask its price."
-NEWLINE guild_conflict effects 22.8% "Quarrels over who may trade are common business for the court."
-NEWLINE guild_conflict effects 21.4% "Goods without the guild's mark are sold quietly, or not at all."
-NEWLINE guild_conflict effects 20.9% "Some stalls at the market stand empty while the right to trade from them is argued."
-NEWSIZE guild_conflict effects hamlet: 2 tensions, lines printed 3, max line 100.0%
-NEWSIZE guild_conflict effects village: 1 tensions, lines printed 2, max line 100.0%
-NEWSIZE guild_conflict effects town: 49 tensions, lines printed 8, max line 32.7%
-NEWSIZE guild_conflict effects city: 75 tensions, lines printed 8, max line 36.0%
-NEWSIZE guild_conflict effects metropolis: 88 tensions, lines printed 8, max line 29.5%
-NEW resource_scarcity hooks: pool 9, chosen 3 a town, short 0/114; max line 57.0% ("Some are hoarding what is short; who holds the mos"), min line 7.0%, lines printed 9/9; needs market:42.1% none:100.0% famine:18.4% war: at war:18.4% navigable:44.7%
-NEWLINE resource_scarcity hooks 57.0% "Some are hoarding what is short; who holds the most, and what would make them part with it?"
-NEWLINE resource_scarcity hooks 48.2% "Where else could the place get what it lacks, and what stands in the way?"
-NEWLINE resource_scarcity hooks 48.2% "Some would fix a fair price for what is short; who would see it kept, and who would refuse it?"
-NEWLINE resource_scarcity hooks 48.2% "Some here cannot pay what is asked for what is short; what are they giving up instead?"
-NEWLINE resource_scarcity hooks 42.1% "Who sets the price of what is short, and who is losing patience with that price?"
-NEWLINE resource_scarcity hooks 21.9% "Boats could bring in what is short; who would pay for the cargo, and who would profit?"
-NEWLINE resource_scarcity hooks 20.2% "A store of the scarce goods is being kept off the market on purpose"
-NEWLINE resource_scarcity hooks 7.0% "The place is going hungry; who decides who is fed first?"
-NEWLINE resource_scarcity hooks 7.0% "The war takes its share of what is short; who here says it should not?"
-NEWSIZE resource_scarcity hooks thorp: 25 tensions, lines printed 8, max line 60.0%
-NEWSIZE resource_scarcity hooks hamlet: 26 tensions, lines printed 8, max line 69.2%
-NEWSIZE resource_scarcity hooks village: 21 tensions, lines printed 8, max line 66.7%
-NEWSIZE resource_scarcity hooks town: 16 tensions, lines printed 8, max line 50.0%
-NEWSIZE resource_scarcity hooks city: 14 tensions, lines printed 8, max line 71.4%
-NEWSIZE resource_scarcity hooks metropolis: 12 tensions, lines printed 8, max line 66.7%
-NEW resource_scarcity effects: pool 8, chosen 2 a town, short 0/114; max line 42.1% ("What is short is counted and recounted, and nothin"), min line 7.0%, lines printed 8/8; needs none:100.0% market:42.1% famine:18.4% institution: granary:36.8% war: at war:18.4%
-NEWLINE resource_scarcity effects 42.1% "What is short is counted and recounted, and nothing is wasted."
-NEWLINE resource_scarcity effects 41.2% "What is short sells for more than most can pay."
-NEWLINE resource_scarcity effects 38.6% "Neighbours watch what each other has, and resent what they see."
-NEWLINE resource_scarcity effects 37.7% "Families share what they can with kin, and little with anyone else."
-NEWLINE resource_scarcity effects 12.3% "The granary doors stay locked, and every measure taken out is counted."
-NEWLINE resource_scarcity effects 11.4% "Market days are short and tense, and the stalls sell out early."
-NEWLINE resource_scarcity effects 9.6% "What the war needs is taken first, and the place makes do with what is left."
-NEWLINE resource_scarcity effects 7.0% "Hunger is plain to see in the place."
-NEWSIZE resource_scarcity effects thorp: 25 tensions, lines printed 6, max line 56.0%
-NEWSIZE resource_scarcity effects hamlet: 26 tensions, lines printed 6, max line 53.8%
-NEWSIZE resource_scarcity effects village: 21 tensions, lines printed 7, max line 52.4%
-NEWSIZE resource_scarcity effects town: 16 tensions, lines printed 7, max line 37.5%
-NEWSIZE resource_scarcity effects city: 14 tensions, lines printed 7, max line 50.0%
-NEWSIZE resource_scarcity effects metropolis: 12 tensions, lines printed 6, max line 58.3%
-NEW external_threat hooks: pool 8, chosen 3 a town, short 0/79; max line 58.2% ("Some want to stand and fight, some to bargain, som"), min line 16.5%, lines printed 8/8; needs none:100.0% walls:58.2% guardPresence:70.9% war: at war:32.9% crisis: monster_pressure:24.1%
-NEWLINE external_threat hooks 58.2% "Some want to stand and fight, some to bargain, some to hide; which way is the place leaning?"
-NEWLINE external_threat hooks 53.2% "Those who would flee need somewhere to go; where would they go, and who would take them in?"
-NEWLINE external_threat hooks 53.2% "What exactly is coming, and how long before it arrives?"
-NEWLINE external_threat hooks 43.0% "News of danger is coming in; who brought it, and how much of it is true?"
-NEWLINE external_threat hooks 29.1% "Those who keep order here would be first to face the danger; how many could be put to it, and how soon?"
-NEWLINE external_threat hooks 26.6% "The walls are the place's answer to the danger; are they in a state to hold?"
-NEWLINE external_threat hooks 20.3% "The place is already at war; is the danger the war coming closer?"
-NEWLINE external_threat hooks 16.5% "Beasts already press on this place; is the danger more of them, or something else?"
-NEWSIZE external_threat hooks thorp: 13 tensions, lines printed 8, max line 76.9%
-NEWSIZE external_threat hooks hamlet: 11 tensions, lines printed 8, max line 63.6%
-NEWSIZE external_threat hooks village: 16 tensions, lines printed 8, max line 75.0%
-NEWSIZE external_threat hooks town: 15 tensions, lines printed 8, max line 53.3%
-NEWSIZE external_threat hooks city: 11 tensions, lines printed 8, max line 54.5%
-NEWSIZE external_threat hooks metropolis: 13 tensions, lines printed 8, max line 61.5%
-NEW external_threat effects: pool 8, chosen 2 a town, short 0/79; max line 41.8% ("Every household has thought about what it would ca"), min line 7.6%, lines printed 8/8; needs tier: ≤ village:50.6% none:100.0% walls:58.2% guardPresence:70.9% war: at war:32.9% market:59.5%
-NEWLINE external_threat effects 41.8% "Every household has thought about what it would carry if it had to leave."
-NEWLINE external_threat effects 38.0% "Talk of the danger runs through every gathering."
-NEWLINE external_threat effects 31.6% "Strangers on the road are asked where they have come from, and what they have seen."
-NEWLINE external_threat effects 26.6% "Someone is always on the walls, looking out."
-NEWLINE external_threat effects 25.3% "Those who keep order are drilled and kept close to hand."
-NEWLINE external_threat effects 15.2% "Traders hold back their goods, waiting to see what the danger brings."
-NEWLINE external_threat effects 13.9% "The heads of the families still keep count of who could be called on to fight"
-NEWLINE external_threat effects 7.6% "The war's demands come first in everything the place decides."
-NEWSIZE external_threat effects thorp: 13 tensions, lines printed 7, max line 69.2%
-NEWSIZE external_threat effects hamlet: 11 tensions, lines printed 7, max line 54.5%
-NEWSIZE external_threat effects village: 16 tensions, lines printed 8, max line 50.0%
-NEWSIZE external_threat effects town: 15 tensions, lines printed 7, max line 46.7%
-NEWSIZE external_threat effects city: 11 tensions, lines printed 7, max line 54.5%
-NEWSIZE external_threat effects metropolis: 13 tensions, lines printed 6, max line 53.8%
-NEW succession_crisis hooks: pool 10, chosen 3 a town, short 0/74; max line 56.8% ("Which would-be successor has the fewest backers, a"), min line 4.1%, lines printed 10/10; needs ruler: lord:9.5% none:100.0% crisis: succession_void:37.8% ruler: council:43.2% ruler: elder:39.2% rival power:40.5%
-NEWLINE succession_crisis hooks 56.8% "Which would-be successor has the fewest backers, and what might that one try?"
-NEWLINE succession_crisis hooks 48.6% "What does each would-be successor promise, and to whom?"
-NEWLINE succession_crisis hooks 48.6% "Who stands to lose most if the wrong one leads next?"
-NEWLINE succession_crisis hooks 37.8% "Who has the right to choose the next to lead, and does everyone agree on that much?"
-NEWLINE succession_crisis hooks 37.8% "Each would-be successor is gathering support; whose backing would settle it?"
-NEWLINE succession_crisis hooks 23.0% "The council must agree on who leads next; whose voice is still undecided?"
-NEWLINE succession_crisis hooks 18.9% "The elders will name who leads next; which of them is still to be won over?"
-NEWLINE succession_crisis hooks 14.9% "A strong power beside the governing one watches the quarrel; which would-be successor does that power favour?"
-NEWLINE succession_crisis hooks 9.5% "The seat stands empty while the quarrel goes on; who handles the place's business in the meantime?"
-NEWLINE succession_crisis hooks 4.1% "A would-be heir approaches outsiders to investigate a rival's past"
-NEWSIZE succession_crisis hooks thorp: 12 tensions, lines printed 7, max line 75.0%
-NEWSIZE succession_crisis hooks hamlet: 8 tensions, lines printed 8, max line 62.5%
-NEWSIZE succession_crisis hooks village: 15 tensions, lines printed 8, max line 60.0%
-NEWSIZE succession_crisis hooks town: 10 tensions, lines printed 7, max line 60.0%
-NEWSIZE succession_crisis hooks city: 12 tensions, lines printed 7, max line 75.0%
-NEWSIZE succession_crisis hooks metropolis: 17 tensions, lines printed 9, max line 64.7%
-NEW succession_crisis effects: pool 7, chosen 2 a town, short 0/74; max line 50.0% ("Families take sides, and those on opposite sides k"), min line 9.5%, lines printed 6/7; needs ruler: lord:9.5% none:100.0% crisis: succession_void:37.8% ruler: council:43.2% market:56.8%
-NEWLINE succession_crisis effects 50.0% "Families take sides, and those on opposite sides keep apart."
-NEWLINE succession_crisis effects 47.3% "Every gathering is read for who stands beside whom."
-NEWLINE succession_crisis effects 47.3% "Decisions that can wait are put off until it is known who will lead."
-NEWLINE succession_crisis effects 25.7% "Traders hold off on long bargains until they know who will lead."
-NEWLINE succession_crisis effects 20.3% "Council meetings run long and end without agreement."
-NEWLINE succession_crisis effects 9.5% "No one holds the seat, and the place's business waits."
-NEWSIZE succession_crisis effects thorp: 12 tensions, lines printed 4, max line 66.7%
-NEWSIZE succession_crisis effects hamlet: 8 tensions, lines printed 4, max line 87.5%
-NEWSIZE succession_crisis effects village: 15 tensions, lines printed 4, max line 73.3%
-NEWSIZE succession_crisis effects town: 10 tensions, lines printed 5, max line 70.0%
-NEWSIZE succession_crisis effects city: 12 tensions, lines printed 6, max line 58.3%
-NEWSIZE succession_crisis effects metropolis: 17 tensions, lines printed 6, max line 58.8%
-NEW outside_debt hooks: pool 8, chosen 3 a town, short 0/63; max line 57.1% ("The outside power is preparing to collect; what wi"), min line 9.5%, lines printed 8/8; needs none:100.0% prosperity: ≤ poor:22.2% prosperity: ≥ prosperous:27.0% crisis: indebted:44.4%
-NEWLINE outside_debt hooks 57.1% "The outside power is preparing to collect; what will it take if the debt is not paid?"
-NEWLINE outside_debt hooks 52.4% "Some who profited from the debt want no questions asked; what would a question find?"
-NEWLINE outside_debt hooks 50.8% "The debt could be voided, if someone can prove it was obtained through fraud"
-NEWLINE outside_debt hooks 44.4% "Who here took the loans, and what did the money buy?"
-NEWLINE outside_debt hooks 42.9% "Who will bear the cost of paying, and are they willing?"
-NEWLINE outside_debt hooks 22.2% "The creditors' demands are already felt here; whose goods would be taken first?"
-NEWLINE outside_debt hooks 20.6% "The place is wealthy enough to pay; why has the debt not been paid?"
-NEWLINE outside_debt hooks 9.5% "The place is poor and the debt is heavy; what could it sell or give up to pay?"
-NEWSIZE outside_debt hooks thorp: 9 tensions, lines printed 7, max line 55.6%
-NEWSIZE outside_debt hooks hamlet: 5 tensions, lines printed 7, max line 80.0%
-NEWSIZE outside_debt hooks village: 7 tensions, lines printed 6, max line 71.4%
-NEWSIZE outside_debt hooks town: 9 tensions, lines printed 7, max line 77.8%
-NEWSIZE outside_debt hooks city: 12 tensions, lines printed 7, max line 50.0%
-NEWSIZE outside_debt hooks metropolis: 21 tensions, lines printed 7, max line 61.9%
-NEW outside_debt effects: pool 7, chosen 2 a town, short 0/63; max line 39.7% ("Little is mended or built while the debt hangs ove"), min line 12.7%, lines printed 7/7; needs none:100.0% crisis: indebted:44.4% market:66.7% institution: bank:42.9%
-NEWLINE outside_debt effects 39.7% "Little is mended or built while the debt hangs over the place."
-NEWLINE outside_debt effects 38.1% "Those who took the loans are spoken of with bitterness."
-NEWLINE outside_debt effects 36.5% "Families put aside what they can against the day the debt is called in."
-NEWLINE outside_debt effects 30.2% "Every expense is argued over, because every coin may be owed."
-NEWLINE outside_debt effects 25.4% "Traders keep their best goods out of sight, in case they are taken against the debt."
-NEWLINE outside_debt effects 17.5% "Part of what the place earns goes out to its creditors before it can be spent at home."
-NEWLINE outside_debt effects 12.7% "The bank lends little, and on hard terms, while the debt stands."
-NEWSIZE outside_debt effects thorp: 9 tensions, lines printed 5, max line 55.6%
-NEWSIZE outside_debt effects hamlet: 5 tensions, lines printed 4, max line 60.0%
-NEWSIZE outside_debt effects village: 7 tensions, lines printed 4, max line 71.4%
-NEWSIZE outside_debt effects town: 9 tensions, lines printed 5, max line 55.6%
-NEWSIZE outside_debt effects city: 12 tensions, lines printed 7, max line 50.0%
-NEWSIZE outside_debt effects metropolis: 21 tensions, lines printed 7, max line 42.9%
-NEW legitimacy_crisis hooks: pool 9, chosen 3 a town, short 0/58; max line 65.5% ("What does the sitting authority do to show its rig"), min line 5.2%, lines printed 9/9; needs none:100.0% legitimacy crisis:29.3% crisis: insurgency:32.8% crisis: religious_conversion:15.5% seat outranked:24.1%
-NEWLINE legitimacy_crisis hooks 65.5% "What does the sitting authority do to show its right to rule, and who is convinced?"
-NEWLINE legitimacy_crisis hooks 60.3% "Those who question the right to rule speak openly; who listens, and who would rather they were silent?"
-NEWLINE legitimacy_crisis hooks 50.0% "Those who deny the authority's mandate: what would they put in its place?"
-NEWLINE legitimacy_crisis hooks 44.8% "Some here question the authority's right to rule; on what grounds, and who first said so?"
-NEWLINE legitimacy_crisis hooks 39.7% "Some want any stable answer to who should rule; what would it take to win them over?"
-NEWLINE legitimacy_crisis hooks 12.1% "Some have risen against those in charge; how many of the doubters stand with the rising?"
-NEWLINE legitimacy_crisis hooks 12.1% "A power stands above the governing one; does the favour of that power make or break the authority's claim?"
-NEWLINE legitimacy_crisis hooks 10.3% "Few here accept the authority's right to rule; who still obeys, and why?"
-NEWLINE legitimacy_crisis hooks 5.2% "A new faith is spreading here; does it question the authority's right to rule as well?"
-NEWSIZE legitimacy_crisis hooks thorp: 7 tensions, lines printed 8, max line 85.7%
-NEWSIZE legitimacy_crisis hooks hamlet: 6 tensions, lines printed 6, max line 83.3%
-NEWSIZE legitimacy_crisis hooks village: 15 tensions, lines printed 9, max line 66.7%
-NEWSIZE legitimacy_crisis hooks town: 9 tensions, lines printed 7, max line 66.7%
-NEWSIZE legitimacy_crisis hooks city: 10 tensions, lines printed 6, max line 80.0%
-NEWSIZE legitimacy_crisis hooks metropolis: 11 tensions, lines printed 6, max line 72.7%
-NEW legitimacy_crisis effects: pool 7, chosen 2 a town, short 0/58; max line 48.3% ("People are careful whom they speak in front of whe"), min line 3.4%, lines printed 7/7; needs none:100.0% legitimacy crisis:29.3% crisis: insurgency:32.8% guardPresence:60.3% sacredHouse:82.8%
-NEWLINE legitimacy_crisis effects 48.3% "People are careful whom they speak in front of when the authority comes up."
-NEWLINE legitimacy_crisis effects 39.7% "Dues owed to those in charge are paid late, or short, by those who doubt the right to ask."
-NEWLINE legitimacy_crisis effects 39.7% "Orders from those in charge are obeyed slowly, and sometimes argued with first."
-NEWLINE legitimacy_crisis effects 31.0% "Prayers for those in charge are said in some houses of worship and left out in others."
-NEWLINE legitimacy_crisis effects 25.9% "Those who keep order are asked, openly, on whose authority they act."
-NEWLINE legitimacy_crisis effects 12.1% "Those in charge go about with guards, and keep away from some parts of the place."
-NEWLINE legitimacy_crisis effects 3.4% "Many obey those in charge only where they are watched."
-NEWSIZE legitimacy_crisis effects thorp: 7 tensions, lines printed 5, max line 71.4%
-NEWSIZE legitimacy_crisis effects hamlet: 6 tensions, lines printed 7, max line 50.0%
-NEWSIZE legitimacy_crisis effects village: 15 tensions, lines printed 7, max line 53.3%
-NEWSIZE legitimacy_crisis effects town: 9 tensions, lines printed 6, max line 55.6%
-NEWSIZE legitimacy_crisis effects city: 10 tensions, lines printed 6, max line 50.0%
-NEWSIZE legitimacy_crisis effects metropolis: 11 tensions, lines printed 6, max line 54.5%
-NEW corruption_scandal hooks: pool 9, chosen 3 a town, short 0/51; max line 54.9% ("Reformers want the corruption exposed; what would "), min line 11.8%, lines printed 9/9; needs none:100.0% court sits:43.1% crisis: recently_betrayed:39.2% market:47.1% rival power:39.2%
-NEWLINE corruption_scandal hooks 54.9% "Reformers want the corruption exposed; what would they do with power if they had it?"
-NEWLINE corruption_scandal hooks 54.9% "Powerful figures resist the investigation; what are they protecting, and how far will they go?"
-NEWLINE corruption_scandal hooks 45.1% "Who benefited from the corruption without taking part in it, and do they know it?"
-NEWLINE corruption_scandal hooks 43.1% "Whose names does the evidence touch, and who has it left out so far?"
-NEWLINE corruption_scandal hooks 39.2% "Evidence of corruption has surfaced; who found it, and who else has seen it?"
-NEWLINE corruption_scandal hooks 19.6% "A power beside the governing one stands to gain if the corruption is proven; how hard will that power press?"
-NEWLINE corruption_scandal hooks 17.6% "Traders paid the dues asked of them; how much of it went where it should?"
-NEWLINE corruption_scandal hooks 13.7% "A court sits here; will the evidence ever be put before it?"
-NEWLINE corruption_scandal hooks 11.8% "The place was recently betrayed; is the corruption bound up with the betrayal?"
-NEWSIZE corruption_scandal hooks thorp: 8 tensions, lines printed 7, max line 62.5%
-NEWSIZE corruption_scandal hooks hamlet: 13 tensions, lines printed 7, max line 69.2%
-NEWSIZE corruption_scandal hooks village: 8 tensions, lines printed 7, max line 87.5%
-NEWSIZE corruption_scandal hooks town: 6 tensions, lines printed 8, max line 66.7%
-NEWSIZE corruption_scandal hooks city: 8 tensions, lines printed 7, max line 62.5%
-NEWSIZE corruption_scandal hooks metropolis: 8 tensions, lines printed 7, max line 62.5%
-NEW corruption_scandal effects: pool 8, chosen 2 a town, short 0/51; max line 45.1% ("Those in office are watched closely, and trusted l"), min line 11.8%, lines printed 8/8; needs none:100.0% court sits:43.1% market:47.1% tier: ≥ town:43.1% crisis: recently_betrayed:39.2%
-NEWLINE corruption_scandal effects 45.1% "Those in office are watched closely, and trusted little."
-NEWLINE corruption_scandal effects 43.1% "Payments owed to those in charge are made grudgingly, and every receipt is kept."
-NEWLINE corruption_scandal effects 37.3% "Talk of the evidence turns up in every quarrel, whatever the quarrel is about."
-NEWLINE corruption_scandal effects 25.5% "Those pressing for an investigation are careful whom they trust."
-NEWLINE corruption_scandal effects 13.7% "After the betrayal and the corruption both, few here trust anyone in office."
-NEWLINE corruption_scandal effects 11.8% "Traders ask for a receipt for every due they pay."
-NEWLINE corruption_scandal effects 11.8% "Officials keep their own records of what passes through their hands, in case they are asked."
-NEWLINE corruption_scandal effects 11.8% "Every ruling of the court is doubted, by one side or the other."
-NEWSIZE corruption_scandal effects thorp: 8 tensions, lines printed 4, max line 75.0%
-NEWSIZE corruption_scandal effects hamlet: 13 tensions, lines printed 5, max line 61.5%
-NEWSIZE corruption_scandal effects village: 8 tensions, lines printed 6, max line 50.0%
-NEWSIZE corruption_scandal effects town: 6 tensions, lines printed 5, max line 50.0%
-NEWSIZE corruption_scandal effects city: 8 tensions, lines printed 8, max line 37.5%
-NEWSIZE corruption_scandal effects metropolis: 8 tensions, lines printed 8, max line 62.5%
-TRI new hooks: all 44.7% (thorp 16.2% hamlet 17.6% village 23.0% town 41.2% city 82.4% metropolis 87.8%)
-TRI new effects: all 31.8% (thorp 13.5% hamlet 7.4% village 13.5% town 24.3% city 57.4% metropolis 74.3%)
+BAR today (150 a size): thorp top 25/150 16.7% seen 6.1% · hamlet top 26/150 17.3% seen 6.9% · village top 21/150 14.0% seen 6.0% · town top 49/150 32.7% seen 12.4% · city top 79/150 52.7% seen 24.4% · metropolis top 88/150 58.7% seen 27.1%
+BAR today (50 a size): thorp top 6/50 12.0% seen 4.3% · hamlet top 10/50 20.0% seen 6.7% · village top 7/50 14.0% seen 5.2% · town top 15/50 30.0% seen 11.9% · city top 27/50 54.0% seen 22.2% · metropolis top 28/50 56.0% seen 25.5%
+ATOMS 25 atoms used, unknown to the vocabulary: none
+KEY seed-first
+NEW crime_wave: pool 12 (6 need nothing, 3 stored), 3 a place, short 0/231; max line 34.6% of the kind's places, lines printed 12/12
+NEWLINE crime_wave need "none" holds 100.0% prints 29.9% STORED "The crime wave is coordinated. Someone is directing it to create a pretext"
+NEWLINE crime_wave need ["watch","organised crime"] holds 81.8% prints 19.0% STORED "A guard captain is on the payroll of the criminal network"
+NEWLINE crime_wave need "none" holds 100.0% prints 30.3% STORED "Those who would take the law into their own hands have picked out a culprit on bad information"
+NEWLINE crime_wave need "none" holds 100.0% prints 34.6% "A household woke to find its door forced and nothing taken, and wants to know what the thieves were looking for"
+NEWLINE crime_wave need "none" holds 100.0% prints 34.6% "A boy who runs errands for half the place has started carrying more coin than any errand pays"
+NEWLINE crime_wave need "none" holds 100.0% prints 32.0% "Those who talk of taking the law into their own hands meet tonight, and they want someone who can fight"
+NEWLINE crime_wave need "none" holds 100.0% prints 31.6% "A traveller robbed on the way in swears the robber knew which bag held the money"
+NEWLINE crime_wave need "market" holds 84.4% prints 26.8% "A stallholder at the market has stopped reporting thefts, and will not say why"
+NEWLINE crime_wave need "watch" holds 82.3% prints 25.5% "A watchman afraid of the night round is looking for someone to walk it with him, and will pay from his own purse"
+NEWLINE crime_wave need "organised crime" holds 84.4% prints 21.2% "A shopkeeper has been told to close by the end of the week, by people who did not give their names"
+NEWLINE crime_wave need "rival rings" holds 30.7% prints 7.8% "Two crews have been seen arguing over the same ground, and a fight between them looks a night away"
+NEWLINE crime_wave need "law: ≤ critical" holds 14.7% prints 6.5% "A thief caught in the act is being held in a cellar by the household that caught him, and nobody knows what to do with him next"
+NEWSIZE crime_wave thorp: 13 tensions, lines printed 7, max line 8/13
+NEWSIZE crime_wave hamlet: 21 tensions, lines printed 9, max line 11/21
+NEWSIZE crime_wave village: 8 tensions, lines printed 8, max line 5/8
+NEWSIZE crime_wave town: 31 tensions, lines printed 11, max line 13/31
+NEWSIZE crime_wave city: 79 tensions, lines printed 11, max line 29/79 [29 27 26 26 24 21 21 19 17 17 10]
+NEWSIZE crime_wave metropolis: 79 tensions, lines printed 11, max line 29/79 [29 26 25 23 23 23 22 22 21 15 8]
+NEW guild_conflict: pool 12 (4 need nothing, 3 stored), 3 a place, short 0/215; max line 33.5% of the kind's places, lines printed 12/12
+NEWLINE guild_conflict need "guild" holds 99.5% prints 27.9% STORED "A guild master's records have gone missing ahead of an audit"
+NEWLINE guild_conflict need "guild" holds 99.5% prints 19.1% STORED "A journeyman denied mastership has proof the exam was rigged"
+NEWLINE guild_conflict need ["market","guild"] holds 99.5% prints 27.9% STORED "Someone is sabotaging both sides to destabilize the market for a third party"
+NEWLINE guild_conflict need "none" holds 100.0% prints 31.2% "A trader selling outside the rules has had a cart overturned in the night, and has a fair idea who did it"
+NEWLINE guild_conflict need "none" holds 100.0% prints 26.0% "A craftsman working from home has been told to stop selling, and means to carry on"
+NEWLINE guild_conflict need "none" holds 100.0% prints 24.7% "Both sides of the quarrel over trade are counting heads before the next gathering, and each is a few short"
+NEWLINE guild_conflict need "none" holds 100.0% prints 29.8% "A family that sells to both sides is being pressed to choose, and has asked for a few more days"
+NEWLINE guild_conflict need "market" holds 100.0% prints 22.8% "A stall at the market has been promised to two traders at once, and both will turn up at dawn"
+NEWLINE guild_conflict need "guild" holds 99.5% prints 33.5% "The guild is about to fine a member for buying from an outsider, and the member has threatened to name who else does it"
+NEWLINE guild_conflict need "court sits" holds 93.0% prints 23.3% "A trader turned away from selling is taking the matter to the court, and needs a witness who saw it"
+NEWLINE guild_conflict need "navigable" holds 42.3% prints 11.6% "A boat's cargo sits unloaded at the water's edge while the two sides argue over who may sell it"
+NEWLINE guild_conflict need "organised crime" holds 81.9% prints 22.3% "A trader outside the guild has been offered protection by people outside the law, and is tempted"
+NEWSIZE guild_conflict hamlet: 2 tensions, lines printed 5, max line 2/2
+NEWSIZE guild_conflict village: 1 tensions, lines printed 3, max line 1/1
+NEWSIZE guild_conflict town: 49 tensions, lines printed 12, max line 22/49
+NEWSIZE guild_conflict city: 75 tensions, lines printed 12, max line 27/75 [27 26 22 22 20 19 19 18 18 13 12 9]
+NEWSIZE guild_conflict metropolis: 88 tensions, lines printed 12, max line 29/88 [29 27 27 25 25 25 23 21 20 18 18 6]
+NEW resource_scarcity: pool 9 (5 need nothing, 3 stored), 3 a place, short 0/114; max line 52.6% of the kind's places, lines printed 9/9
+NEWLINE resource_scarcity need "market" holds 42.1% prints 16.7% STORED "A store of the scarce goods is being kept off the market on purpose"
+NEWLINE resource_scarcity need "none" holds 100.0% prints 52.6% STORED "The scarcity was engineered. Someone destroyed the competing supply route"
+NEWLINE resource_scarcity need "none" holds 100.0% prints 51.8% STORED "An alternative source exists but the information is being suppressed"
+NEWLINE resource_scarcity need "none" holds 100.0% prints 51.8% "A household caught hoarding is about to be turned out by its neighbours, and swears it was keeping the goods for others"
+NEWLINE resource_scarcity need "none" holds 100.0% prints 48.2% "A carter offers to fetch what is short from elsewhere, if someone will pay half the price before he sets out"
+NEWLINE resource_scarcity need "none" holds 100.0% prints 40.4% "A family that cannot pay the prices asked is selling its last good tools to buy what it needs"
+NEWLINE resource_scarcity need "famine" holds 18.4% prints 7.9% "With the place going hungry, a sack of food has gone missing from a household that had little to spare"
+NEWLINE resource_scarcity need "war: at war" holds 18.4% prints 7.9% "A party sent to take supplies for the war is due tomorrow, and households are hiding what they can"
+NEWLINE resource_scarcity need "navigable" holds 44.7% prints 22.8% "A boat has come in loaded with what is short, and its master is asking twice what anyone here can pay"
+NEWSIZE resource_scarcity thorp: 25 tensions, lines printed 8, max line 16/25
+NEWSIZE resource_scarcity hamlet: 26 tensions, lines printed 8, max line 17/26
+NEWSIZE resource_scarcity village: 21 tensions, lines printed 9, max line 12/21
+NEWSIZE resource_scarcity town: 16 tensions, lines printed 9, max line 10/16
+NEWSIZE resource_scarcity city: 14 tensions, lines printed 7, max line 10/14 [10 7 7 6 5 4 3]
+NEWSIZE resource_scarcity metropolis: 12 tensions, lines printed 7, max line 7/12 [7 7 5 5 5 4 3]
+NEW external_threat: pool 9 (4 need nothing, 3 stored), 3 a place, short 0/79; max line 63.3% of the kind's places, lines printed 9/9
+NEWLINE external_threat need "!war: peace" holds 32.9% prints 13.9% STORED "The threat is being exaggerated by someone who profits from wartime contracts"
+NEWLINE external_threat need "!war: peace" holds 32.9% prints 12.7% STORED "A diplomatic channel exists that the war party is suppressing"
+NEWLINE external_threat need "none" holds 100.0% prints 51.9% STORED "The threat has an agent already inside the settlement"
+NEWLINE external_threat need "none" holds 100.0% prints 49.4% "A rider brings fresh news of the danger tonight, and it does not match what the last one said"
+NEWLINE external_threat need "none" holds 100.0% prints 54.4% "A family is packing to leave before dawn, and the neighbours are trying to stop them spreading panic"
+NEWLINE external_threat need "none" holds 100.0% prints 63.3% "A stranger asking about the roads in and out has asked for a bed for the night"
+NEWLINE external_threat need "walls" holds 58.2% prints 21.5% "A stretch of the wall has been found crumbling, and mending it needs more hands than there are"
+NEWLINE external_threat need "guardPresence" holds 70.9% prints 25.3% "Those who keep order are calling for volunteers, and the first to come forward is the last one anyone expected"
+NEWLINE external_threat need "crisis: monster_pressure" holds 24.1% prints 7.6% "Tracks of the beasts that press on this place have been found beside a well-used path, closer than ever"
+NEWSIZE external_threat thorp: 13 tensions, lines printed 9, max line 11/13
+NEWSIZE external_threat hamlet: 11 tensions, lines printed 9, max line 7/11
+NEWSIZE external_threat village: 16 tensions, lines printed 9, max line 12/16
+NEWSIZE external_threat town: 15 tensions, lines printed 9, max line 9/15
+NEWSIZE external_threat city: 11 tensions, lines printed 8, max line 8/11 [8 5 5 4 4 3 2 2]
+NEWSIZE external_threat metropolis: 13 tensions, lines printed 7, max line 10/13 [10 9 7 4 4 3 2]
+NEW succession_crisis: pool 9 (4 need nothing, 3 stored), 3 a place, short 0/74; max line 63.5% of the kind's places, lines printed 9/9
+NEWLINE succession_crisis need "ruler: lord" holds 9.5% prints 4.1% STORED "A would-be heir approaches outsiders to investigate a rival's past"
+NEWLINE succession_crisis need ["!ruler: council","!ruler: elder","!crisis: succession_void"] holds 8.1% prints 6.8% STORED "The ailing ruler wants a final errand completed before naming a successor"
+NEWLINE succession_crisis need ["!ruler: council","!ruler: elder","!crisis: succession_void"] holds 8.1% prints 2.7% STORED "Someone is poisoning the ruler slowly, and someone in the household knows"
+NEWLINE succession_crisis need "none" holds 100.0% prints 63.5% "One of the would-be successors is giving a feast tonight, and every guest will be counted"
+NEWLINE succession_crisis need "none" holds 100.0% prints 59.5% "A would-be successor wants a rival's supporters watched, quietly, and is offering coin for it"
+NEWLINE succession_crisis need "none" holds 100.0% prints 60.8% "A letter meant for one would-be successor has reached another, and both now know what it says"
+NEWLINE succession_crisis need "none" holds 100.0% prints 62.2% "A household that has backed no one is visited by each side in turn, and has asked for protection from both"
+NEWLINE succession_crisis need "ruler: council" holds 43.2% prints 21.6% "A council member has not yet said whom they back, and their house was broken into last night"
+NEWLINE succession_crisis need "crisis: succession_void" holds 37.8% prints 18.9% "With the seat empty, the seal used on the place's business has gone missing"
+NEWSIZE succession_crisis thorp: 12 tensions, lines printed 7, max line 9/12
+NEWSIZE succession_crisis hamlet: 8 tensions, lines printed 7, max line 5/8
+NEWSIZE succession_crisis village: 15 tensions, lines printed 7, max line 12/15
+NEWSIZE succession_crisis town: 10 tensions, lines printed 7, max line 8/10
+NEWSIZE succession_crisis city: 12 tensions, lines printed 7, max line 10/12 [10 7 7 6 4 1 1]
+NEWSIZE succession_crisis metropolis: 17 tensions, lines printed 7, max line 10/17 [10 10 9 8 6 6 2]
+NEW outside_debt: pool 9 (5 need nothing, 3 stored), 3 a place, short 0/63; max line 47.6% of the kind's places, lines printed 9/9
+NEWLINE outside_debt need "none" holds 100.0% prints 47.6% STORED "The original loan documents contain a clause that was never disclosed publicly"
+NEWLINE outside_debt need "!crisis: under_siege" holds 98.4% prints 39.7% STORED "A creditor's agent is in town conducting a quiet assessment before enforcement"
+NEWLINE outside_debt need "none" holds 100.0% prints 25.4% STORED "The debt could be voided, if someone can prove it was obtained through fraud"
+NEWLINE outside_debt need "none" holds 100.0% prints 46.0% "The one who kept the accounts of the loans has gone missing a week before the collectors are due"
+NEWLINE outside_debt need "none" holds 100.0% prints 39.7% "A family that would bear the cost is quietly moving its goods out of the place, cart by cart"
+NEWLINE outside_debt need "none" holds 100.0% prints 41.3% "The outside power has sent word of the day it will collect, and wants to know who will meet its people"
+NEWLINE outside_debt need "crisis: indebted" holds 44.4% prints 19.0% "The creditors have taken a household's goods against the debt, and the household wants them back before they leave"
+NEWLINE outside_debt need "prosperity: ≥ prosperous" holds 27.0% prints 15.9% "A wealthy household offers to pay the debt itself, in return for a say in how the place is run"
+NEWLINE outside_debt need "market" holds 66.7% prints 25.4% "A trader at the market is selling off stock cheap before the collectors arrive, and seems to know the day"
+NEWSIZE outside_debt thorp: 9 tensions, lines printed 7, max line 6/9
+NEWSIZE outside_debt hamlet: 5 tensions, lines printed 7, max line 4/5
+NEWSIZE outside_debt village: 7 tensions, lines printed 6, max line 5/7
+NEWSIZE outside_debt town: 9 tensions, lines printed 9, max line 6/9
+NEWSIZE outside_debt city: 12 tensions, lines printed 9, max line 6/12 [6 6 5 4 4 4 3 2 2]
+NEWSIZE outside_debt metropolis: 21 tensions, lines printed 9, max line 9/21 [9 9 8 8 8 7 5 5 4]
+NEW legitimacy_crisis: pool 9 (6 need nothing, 3 stored), 3 a place, short 0/58; max line 48.3% of the kind's places, lines printed 9/9
+NEWLINE legitimacy_crisis need "none" holds 100.0% prints 43.1% STORED "A document that would settle the question of legitimacy exists, and both sides would rather it stayed lost"
+NEWLINE legitimacy_crisis need "none" holds 100.0% prints 44.8% STORED "Those in power are paying people to speak for them at the gatherings, because no one will do it for free"
+NEWLINE legitimacy_crisis need "none" holds 100.0% prints 37.9% STORED "A third party is keeping the question open on purpose, because an unsettled claim is easier to bargain with"
+NEWLINE legitimacy_crisis need "none" holds 100.0% prints 44.8% "Someone has painted a challenge to the authority's right to rule where everyone will see it at dawn, and those in charge want the hand found"
+NEWLINE legitimacy_crisis need "none" holds 100.0% prints 48.3% "A speaker who questions the right to rule is due at a gathering tonight, and those in charge mean to stop the gathering"
+NEWLINE legitimacy_crisis need "none" holds 100.0% prints 46.6% "One of those who deny the mandate has been offered a post by those in charge, and has not yet answered"
+NEWLINE legitimacy_crisis need "crisis: insurgency" holds 32.8% prints 15.5% "Those risen against the authority have taken a cart of supplies on the road, and the carter is missing"
+NEWLINE legitimacy_crisis need "crisis: religious_conversion" holds 15.5% prints 5.2% "A preacher of the new faith is telling crowds that those in charge rule without blessing"
+NEWLINE legitimacy_crisis need "seat outranked" holds 24.1% prints 13.8% "The power that stands above the governing one has sent an envoy to look into the question, and both sides are courting the envoy"
+NEWSIZE legitimacy_crisis thorp: 7 tensions, lines printed 8, max line 6/7
+NEWSIZE legitimacy_crisis hamlet: 6 tensions, lines printed 8, max line 4/6
+NEWSIZE legitimacy_crisis village: 15 tensions, lines printed 8, max line 10/15
+NEWSIZE legitimacy_crisis town: 9 tensions, lines printed 8, max line 6/9
+NEWSIZE legitimacy_crisis city: 10 tensions, lines printed 8, max line 6/10 [6 5 5 4 4 3 2 1]
+NEWSIZE legitimacy_crisis metropolis: 11 tensions, lines printed 8, max line 7/11 [7 6 6 4 4 4 1 1]
+NEW corruption_scandal: pool 9 (6 need nothing, 3 stored), 3 a place, short 0/51; max line 54.9% of the kind's places, lines printed 9/9
+NEWLINE corruption_scandal need "none" holds 100.0% prints 41.2% STORED "The investigator who uncovered the corruption has received a death threat"
+NEWLINE corruption_scandal need "none" holds 100.0% prints 47.1% STORED "A key witness can be found, but won't speak without protection"
+NEWLINE corruption_scandal need "none" holds 100.0% prints 54.9% STORED "The corruption goes higher than anyone yet suspects; those pressing to expose it are being used"
+NEWLINE corruption_scandal need "none" holds 100.0% prints 35.3% "A copy of the evidence is being passed from hand to hand, and one copy differs from the rest"
+NEWLINE corruption_scandal need "none" holds 100.0% prints 35.3% "An official named in the evidence is selling property in a hurry"
+NEWLINE corruption_scandal need "none" holds 100.0% prints 41.2% "Someone has offered to buy the evidence outright, for more than it seems worth"
+NEWLINE corruption_scandal need "court sits" holds 43.1% prints 5.9% "The hearing on the evidence is set for next week, and the clerk who was to read it out has fallen ill"
+NEWLINE corruption_scandal need "crisis: recently_betrayed" holds 39.2% prints 19.6% "One of those who betrayed the place is named in the evidence, under another name"
+NEWLINE corruption_scandal need "market" holds 47.1% prints 19.6% "A trader who paid dues to the corrupt has kept every receipt, and is deciding whom to give them to"
+NEWSIZE corruption_scandal thorp: 8 tensions, lines printed 5, max line 8/8
+NEWSIZE corruption_scandal hamlet: 13 tensions, lines printed 7, max line 8/13
+NEWSIZE corruption_scandal village: 8 tensions, lines printed 7, max line 6/8
+NEWSIZE corruption_scandal town: 6 tensions, lines printed 9, max line 3/6
+NEWSIZE corruption_scandal city: 8 tensions, lines printed 9, max line 5/8 [5 5 3 3 3 2 1 1 1]
+NEWSIZE corruption_scandal metropolis: 8 tensions, lines printed 8, max line 7/8 [7 4 4 3 2 2 1 1]
+TRI new hooks: all 41.0% (thorp 14.9% hamlet 17.6% village 24.3% town 35.1% city 73.0% metropolis 81.1%)
+BAR new (150 a size): thorp top 16/150 10.7% seen 3.7% · hamlet top 17/150 11.3% seen 3.6% · village top 12/150 8.0% seen 4.4% · town top 22/150 14.7% seen 4.7% · city top 29/150 19.3% seen 8.1% · metropolis top 29/150 19.3% seen 8.8%
+BAR new (50 a size): thorp top 5/50 10.0% seen 2.8% · hamlet top 5/50 10.0% seen 3.0% · village top 7/50 14.0% seen 4.1% · town top 9/50 18.0% seen 5.2% · city top 10/50 20.0% seen 7.3% · metropolis top 11/50 22.0% seen 8.1%
