@@ -24,9 +24,10 @@ import { TITLE_LINE_DECLARATIONS, TITLE_SECRETS } from '../../src/data/people/ti
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { censusPlan, configOf } from '../components/pageCensusWalk.shared.mjs';
 
 /** The wrapper's state: `off` makes the narrow pass a no-op (the base); every card the pass sees is noted with its temperament there. */
-const state = vi.hoisted(() => ({ off: false, passes: 0, seen: new Map() }));
+const state = vi.hoisted(() => ({ off: false, passes: 0, seen: new Map(), /** @type {{ id: string, secret: { what: string, stakes: string } } | null} */ feed: null }));
 vi.mock('../../src/generators/npc/factionLeaderSecret.js', async (importOriginal) => {
   /** @type {Record<string, any>} */
   const real = await importOriginal();
@@ -36,6 +37,7 @@ vi.mock('../../src/generators/npc/factionLeaderSecret.js', async (importOriginal
       if (options?.narrow !== true) return real.settleMisfitSecrets(cards, options);
       state.passes += 1;
       for (const c of cards || []) if (c?.personality && typeof c.personality === 'object') state.seen.set(c.personality, c.personality.dominant ?? null);
+      if (state.feed) { const fed = state.feed; for (const c of cards || []) if (c?.id === fed.id) c.secret = { ...fed.secret }; return { misfits: 0, moved: 0, kept: 0 }; } // the deal fed ONE card's secret, no pass
       return state.off ? { misfits: 0, moved: 0, kept: 0 } : real.settleMisfitSecrets(cards, options);
     },
   };
@@ -155,5 +157,60 @@ describe('F5-NARROW · the walk', () => {
       if (JSON.stringify({ ...after, npcs: null }) !== JSON.stringify({ ...base, npcs: null })) faults.push(`${seed}: the town beside its cast`);
     }
     expect(faults).toEqual([]);
+  });
+});
+
+/**
+ * THE WANT FOLLOWS THE SECRET IT PRINTS (the chair's ruling (A) of 21:33, after the goals lane: "a card's want is dealt from
+ * THE SECRET IT PRINTS, so where the pass changes a secret the want follows it"). The goal deal (people/goals.js :: dealGoals,
+ * then refuseWantsBesideSecrets, which reads each card's FINAL secret) runs after the narrow pass, so it reads the moved text.
+ * SHAPE: a fixture card of the census's 720 (r2r-town-20 npcs[10], one of the 13 whose want the pass moves, chosen by the
+ * integrator's measure) forged three ways through the wrapper: AS BORN (the pass runs); the BASE (the narrow call a no-op: the
+ * deal fed the pre-pass secret); and FED (the narrow call a no-op that sets this ONE card's secret to the one the born card
+ * prints, and moves no other: the deal fed the printed secret). THE LAW: the born card's want is the FED want (the want the
+ * deal gives for the secret printed) and not the BASE want (the stale want of the pre-pass secret). THE CONTROL: the same check
+ * on the STALE record (the base card with the printed secret written over it after the deal, as a pass placed after the deal
+ * would leave it) must find the fault; so the check can fail, and does, on every run.
+ */
+describe('F5-NARROW · the want follows the secret it prints (the chair\'s ruling (A), 21:33)', () => {
+  const SEED = 'r2r-town-20';
+  const AT = 10;
+  /** @type {Record<string, any>} */ const t = {};
+  beforeAll(async () => {
+    await loadGenerationLawPayloads();
+    const row = censusPlan('r2').find((r) => r.seed === SEED);
+    const birth = () => generateSettlementPipeline(configOf(/** @type {any} */ (row), DEFAULT_CONFIG, birthConfig), null, { seed: SEED, customContent: {} });
+    state.off = false; state.feed = null; t.born = birth();
+    state.off = true; t.base = birth();
+    const card = t.born.npcs[AT];
+    state.off = false; state.feed = { id: card.id, secret: { what: card.secret.what, stakes: card.secret.stakes } }; t.fed = birth();
+    state.feed = null;
+  }, 240000);
+  const wantOf = (/** @type {any} */ c) => JSON.stringify(c?.goal ?? null);
+  /** The law on one record's card: its want is the deal's want for its printed secret, never the pre-pass secret's. @param {any} card */
+  const faultsOf = (card) => {
+    const out = [];
+    if (JSON.stringify(card.secret) !== JSON.stringify(t.fed.npcs[AT].secret)) out.push('the fed forge does not print this secret');
+    if (wantOf(card) !== wantOf(t.fed.npcs[AT])) out.push(`the want printed is not the want dealt for the secret printed: ${card.goal?.short} / ${card.goal?.long}`);
+    if (wantOf(card) === wantOf(t.base.npcs[AT])) out.push('the stale want of the pre-pass secret is printed');
+    return out;
+  };
+
+  it('the fixture discriminates: the pass moved its secret, and the deal gives the printed secret another want than the pre-pass one', () => {
+    const born = t.born.npcs[AT], base = t.base.npcs[AT];
+    expect(born.id).toBe(base.id);
+    expect(venalRe.test(base.secret.what), `the pre-pass secret is venal: ${base.secret.what}`).toBe(true);
+    expect(NARROW.has(born.personality.dominant)).toBe(true);
+    expect(born.secret.what).not.toBe(base.secret.what);
+    expect(wantOf(t.fed.npcs[AT])).not.toBe(wantOf(base));
+  });
+
+  it('the born card prints the want the deal gives for the secret it prints, not the stale one', () => {
+    expect(faultsOf(t.born.npcs[AT])).toEqual([]);
+  });
+
+  it('CONTROL: the stale record (the printed secret written after the deal) is found out', () => {
+    const stale = { ...t.base.npcs[AT], secret: { ...t.born.npcs[AT].secret } };
+    expect(faultsOf(stale).length).toBeGreaterThan(0);
   });
 });
