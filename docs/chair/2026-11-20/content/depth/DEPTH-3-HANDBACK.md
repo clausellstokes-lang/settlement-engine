@@ -1,4 +1,4 @@
-# DEPTH-3 hand-back (kept current at every push; last written 2026-11-20T19:47Z by `date -u`)
+# DEPTH-3 hand-back (kept current at every push; last written 2026-11-20T19:56Z by `date -u`)
 
 Branch `lane/depth-3-2026-11-20` (the lane given by the chair at 461272505, 19:33 UTC; merged as 2582075ed). Prompt: origin/lane/chair-2026-11-08
 `docs/chair/2026-11-20/seventh/prompts/DEPTH-3.txt` (+ DEPTH-1.txt and DEPTH-2.txt as the assignment). Chair: session_019yED1SUxGVHyjQnoqoFvQ8.
@@ -19,7 +19,14 @@ RULE (the chair 19:28): no unit may raise the first-paint closure unless a first
 
 ## State
 - THEMES: builder dispatched ~19:40 on `lane/depth-3-2026-11-20-themes` from 2582075ed (worktree scratchpad/wt-themes). Not returned.
-- SURPRISE, sent to the chair ~19:5x, awaiting its word: the lane's base puts 2.1 MB in first paint. Fresh builds (vendorPdfLazy with
+- CURE-FIRSTPAINT: the chair's GO 19:54 (rulings at the brief's foot: rosterGrounds not reached from engine-core; red first TWICE:
+  my build (FIX-B2 + "no prose leaf" red at 2582075ed, green after; beside the line's 1,177,668 / 374,676 / 314,472 at 8196e5712) and
+  engineCoreLazyEdge WIDENED (red now, green after; one sentence on what its derivation missed: the chair carries it to the line); two-tree 0
+  non-string; conflict tests green). Builder dispatched ~19:58 on `lane/depth-3-2026-11-20-firstpaint` from 2582075ed (scratchpad/wt-firstpaint).
+  ORDER AFTER: merge the cure (build proof), merge themes (build proof), tests/lint WHOLE, then ONE line "DEPTH <commit>" with the build's
+  three figures: the chair lands the lane. The chair's question answered (19:5x): tranche 1's +7,441 is PLAUSIBLY its hook texts in
+  hookThemes.js; the themes unit should put first paint BELOW the line's figure (CONFIRM at its build).
+- THE SURPRISE (found 19:5x): the lane's base puts 2.1 MB in first paint. Fresh builds (vendorPdfLazy with
   VERIFY_DIST=1): e0d108bb0 1,185,109 raw; 15b13325e 1,190,052 raw / 378,600 gzip / 317,561 Brotli (worker 2,610,912); 2582075ed
   3,309,715 / 950,068 / 774,953 (worker 2,617,219): coherence-lazy + data-lazy + narrative-mutations in first paint. Cause: the conflict
   unit's `facts/rosterGrounds.js` (eager via factVocabulary/registeredWords/factLayers) imports `liveInstitutionNames.js` (pinned
