@@ -1,6 +1,6 @@
 # PAGE-4's hand-back (the display lane after PAGE-1)
 
-Kept current at every push; last written 14:55 UTC 2026-11-20 (`date -u`). A successor needs THIS FILE and the briefs
+Kept current at every push; last written 15:25 UTC 2026-11-20 (`date -u`). A successor needs THIS FILE and the briefs
 under `docs/chair/2026-11-20/content/page/briefs/` only. The seat's prompt:
 `git show origin/lane/chair-2026-11-08:docs/chair/2026-11-20/seventh/prompts/PAGE-4.txt`. PAGE-1's hand-back
 (`PAGE-1-HANDBACK.md`, true at `a67e1b502`) holds the rulings 1-8 and the measures; this file adds what came after.
@@ -10,7 +10,15 @@ under `docs/chair/2026-11-20/content/page/briefs/` only. The seat's prompt:
 - BRANCH `lane/page-4-2026-11-20`, cut at PAGE-1's final tip `a67e1b502` ("THE LANE IS YOURS", the chair 14:29 UTC).
 - MERGED: CARD (S1, S2) from `lane/page-1-2026-11-20-card` `c03e48972` (merge `fe1ff5410`). Red 7 of 7 at base re-run by
   PAGE-4; green and the merge's gates green: see the table.
-- OUT: CARD-SERVED (brief `briefs/CARD-SERVED.md`), the chair's condition (1) on CARD. One builder at a time.
+- MERGED: MAGIC (S5) from `lane/page-1-2026-11-20-magic` `dcb3b2744` (merge `fdec4d96f`; phoneChromeFloor's floors and
+  the wiring census's producerIndexFiles re-measured by their doors at the merged tree: 620/863/665, 1437).
+- MERGED: CARD-SERVED (the chair's condition (1) on CARD) from `page-4-card-served-2026-11-20` `e26476fa5` (merge
+  `cf997215b`); the lighting census refrozen by its door for MAGIC's and CARD-SERVED's two new test files (`2cae388bc`).
+- OUT: MAGIC-AUDIENCE (brief `briefs/MAGIC-AUDIENCE.md`, the chair's three conditions on MAGIC's Overview line), its
+  builder on local branch `page-4-magic-audience-2026-11-20` from `65b324b5e`. ADDED TO IT (15:2x): the ONE red on the lane,
+  `tests/lint/observedShapeReaders.walker.test.js` (2 tests): `magicMeasuresApart.js :: magicHeadlineScope` reads the raw
+  `config.magicExists` (a key no writer produces, ceiling 0); the cure reads magic's existence through the page's leaf.
+  Until it merges, tests/lint is 219/220 files at the lane tip.
 
 ## The rulings that came after PAGE-1's list (the chair's; each vetoable by the owner)
 
@@ -53,10 +61,18 @@ CARD (merged) -> CARD-SERVED -> MAGIC (`lane/page-1-2026-11-20-magic` `dcb3b2744
 
 - THE CARD'S WEIGHT reads ONE served field: `powerStructure.factions[].power` (via `cardPowers.js :: powersOf`), ranked
   only among the roster rows of the document in hand that carry a finite figure (`cardStandingRead.js :: powerWeightHere`).
-- (MAGIC's Overview line: to be filled at its merge.)
+- CARD-SERVED: a power the card's membership names but the document's roster does NOT hold is never named in the
+  Standing row (`cardStandingRead.js :: cardFirstOfWeights`, fail closed); a held power with no figure prints
+  "first of <power>" with no weight. NOT CURED HERE, FOR THE SECURITY READER: the card's separate power line
+  (`cardPowers.js :: cardPowerLine`, pre-existing) names every power in the card's memberships whether or not the served
+  roster holds it (CARD-SERVED's builder's measurement).
+- MAGIC's Overview line (`magicMeasuresApart.js :: magicMeasuresApartLine`) prints to every audience on the chair's three
+  conditions; their tests are MAGIC-AUDIENCE's (to be filled at its merge).
 
 ## Merge receipts
 
 | Unit | Merge | Red at base | Green | Gates |
 |---|---|---|---|---|
 | CARD | `fe1ff5410` | 2 files failed, 7 of 7 tests (PAGE-4's re-run) | 8 files, 65 of 65 (the 8 test files the unit touched) | lighting 34/34; wiring `--check` exit 0; tests/lint 220 files, 3271/3271; typecheck:ratchet 0; domain:strict 0; lint 0 |
+| MAGIC | `fdec4d96f` | 1 file, 2 of 2 tests (PAGE-4's re-run) | 11/11 with the floor census | see the row below |
+| CARD-SERVED | `cf997215b` | 5 of 6 in its new file at `2e29d60ea` (PAGE-4's re-run on a `git archive`; the builder recorded 3 of 14 over more files) | at `2cae388bc`: 8 files 45/45 (CARD, CARD-SERVED, MAGIC and the view-model/journal tests) | at `2cae388bc`: lighting 34/34; wiring 0; tests/lint 219/220 files, 3269/3271 (observedShapeReaders, MAGIC's raw read: with MAGIC-AUDIENCE); both typechecks 0; lint 0 |
