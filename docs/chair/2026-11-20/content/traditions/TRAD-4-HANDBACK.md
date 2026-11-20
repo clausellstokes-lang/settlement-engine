@@ -22,7 +22,7 @@ restated; this file adds what came after.
 | unit | what | state | commit |
 |---|---|---|---|
 | 1, 1c, 2, 4, 4b | see TRAD-3-HANDBACK §2 | landed before the hand-over; "TRAD-SHARE 1f3cdc135" with the security reader (REVIEW-VEIL-13) | `1f3cdc135` |
-| 7 | REVIEW-VEIL-13's hole (the chair 13:50/13:59): the reader's dead-cause chosen by the chair's word rule; no power archetype from a hideable field | BUILT, NOT YET READ OR MERGED; WAITS ON A CHAIR RULING (below). Brief `briefs/TRAD-4-U7-VEIL13.md` | `d0e90a6d8`, `c2eccd7fc` on `lane/trad-4-2026-11-20-u7-wip` |
+| 7 | REVIEW-VEIL-13's hole: the reader's dead-cause by the chair's word rule (re-stated 15:10, ADDENDUM 1); no power archetype from a hideable field | READ WHOLE, reds re-run 16/90 at `ef605266f`, greens 90/90, MERGED; "TRAD-SHARE-2" sent | `edfeb052d`; merge `18414593c` |
 | 5 | CTR10 finished: every frame a declared line (70 bare → 0), floors by arms, gloss pools raised to 3 (+32 lines), crisis arms, the totality arm, census rows (Appendix B), the printed export | BUILT, NOT YET READ OR MERGED; merges AFTER unit 7 (same leaf). Brief `briefs/TRAD-4-U5-POOLS.md` | `4cee71146`, `e03aedc92` on `lane/trad-4-2026-11-20-u5-wip` |
 | 6 | the measures (CTR8 by element and by size; pool dominance per slot; the most repeated shape masked) and the owner's 30 + 12 samples | not briefed | — |
 | — | CTR11's "other direction" line for the owner (where a DM SHOWS the criminal income, the reader still ranks without it), with its born count | open | — |
@@ -69,3 +69,11 @@ and reader reproduce TRAD-3-HANDBACK §5 exactly (1,232 rites; SHORT 8.7%; top s
 ## Updated (append at each later commit, with `date -u`)
 - 2026-11-20 13:33 UTC — the lane taken at `1f3cdc135`; pushed; unit 5's brief written.
 - 2026-11-20 14:5x UTC — units 7 and 5 built, pushed as `-wip` lane branches; unit 7 waits on the chair's ruling on the word rule; this file is the successor's start.
+- 2026-11-20 15:54 UTC — UNIT 7 MERGED (`18414593c`). Measures (builder, executed): owner moved 0 of 1,261; reader keepers moved 0; reader
+  dead-causes moved 3 (45 → 43 keeping a cause; all "The Great Fire" caught by "great" of "Great cathedral"/"Great
+  library": Maghwick and Vishnughat lost, Albacivitas moved to an older event). At the merge, by TRAD-4: `tests/lint` whole
+  220/221 files, 3285/3286, the one red the lighting census, re-taken by its door (titles 31313 → 31334, suiteTitles
+  8671 → 8675; plain run 34/34); THE CONFINEMENT base (`0c9069489` archive, sha `d70950941f33…a002a`) vs `18414593c`: 1,245
+  documents cmp-identical. Not chased (builder): the whole-name floor matches at a word's start only, so a held name of
+  stop words alone ("At") also catches "The Attack" (toward withholding). NEXT: unit 5's merge (read whole by TRAD-4;
+  third commit `22be32bea` the comment correction, TRAD-4's ruling: keep the base's calmest crisis behaviour).
