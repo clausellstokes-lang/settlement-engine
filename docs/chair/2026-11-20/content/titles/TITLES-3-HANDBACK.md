@@ -59,14 +59,14 @@ This is the third pass on the office titles. It gives the small places their cul
   - The Perseus/Perseids text of *Anabasis* 4.5.
 - Register: classical (4th century BC), as are Demarch and Archon. It ends in "-arch" like Demarch, Polemarch and Archon, so it is a single word that fits any holder.
 
-**celtic headman, thorp and hamlet: Pencenedl**, "head of the kindred" (pen-KEN-edl). Chieftain stays at village and town.
+**celtic headman, thorp and hamlet: Pencenedl**, "head of the kindred" (pen-KEN-ed-ul). Chieftain stays at village and town. **KEPT by the chair** (2026-11-20, ruling on my first message).
 - The office: in the medieval Welsh laws, the head of a kindred (*pen* "head" + *cenedl* "kindred"), the kin group that paid and received compensation and held the kindred's hereditary land.
 - Sources:
   - Wiktionary "pencenedl" ("head of a kindred (in the Welsh laws)").
   - T. P. Ellis, *Welsh Tribal Law and Custom in the Middle Ages* (McMaster text).
   - F. Seebohm, *The Tribal System in Wales* (1895, archive.org).
   - Britannica, "Welsh law".
-- **FLAGGED for the chair.**
+- **Note** (the chair kept the word and put the modern sense here, not in the gloss):
   - Modern Welsh *cenedl* means "nation", so a Welsh speaker may hear "head of the nation". In the laws it is the kindred, which is not a people.
   - One older critique doubts several of the Triads' kin officers, but not the pencenedl. It is quoted on a blog and is undated.
   - Strike it and these two cells read "Headman".
@@ -95,12 +95,22 @@ This is the third pass on the office titles. It gives the small places their cul
 | word | say it | word | say it |
 |---|---|---|---|
 | Bauermeister | BOW-er-my-ster | Komarch | KOH-mark |
-| Pencenedl | pen-KEN-edl | Calpullec | kal-POOL-lek |
+| Pencenedl | pen-KEN-ed-ul | Calpullec | kal-POOL-lek |
 | Huehue / Ilama | WAY-way / ee-LAH-mah | | |
 
 These hints are from the words' usual English renderings. They are a reading aid and are not executed.
 
 ## 2. What SEAT-1 sees
+
+**The classifier check, on every word (the chair's order).** All 127 distinct words the table writes, from all three passes, were run through `roleToCategory`, `classOfRole` and `holdsOffice` in node. Geron and Graia were added to the run. The results:
+- 120 words read `other / other / false`, including all six of this pass.
+- Lord reads `noble / office / true`, and Lady reads `noble / other / false`.
+- Chieftain reads `other / other / true`.
+- Steward reads `government / other / false`, and Governor reads `government / office / true`.
+- Magister reads `magic / other / true`, and Archmagister reads `magic / arcane / false`. Both sit in latin's ARCANE row, where `magic` is right.
+
+**No word in the table is misclassed.** The two words this pass weighed and dropped for the classifier, Magister Vici and Magister Pagi, are in §3.
+
 
 - All six new words class as `other` under `roleToCategory`, `classOfRole` and `holdsOffice` (measured in node).
 - None is sovereign or a crown word. None is in the CROWN or SACRED patterns of the tests.
@@ -153,6 +163,8 @@ These hints are from the words' usual English renderings. They are a reading aid
 A `·` means the cell falls back to today's title:
 - elders: "Elder" ("Household Elder" for a Household Council);
 - headman: "Headman", "Reeve" or "Mayor" by the government's name, and "Lord Mayor" at city and up.
+
+**Plainly, for the owner:** norse and latin small places keep "Elder" and "Headman" at thorp and hamlet. Latin also keeps them at village, and both keep "Elder" at town. I found no office word that holds for those cells, so the English words stand. The same is true of the elders in germanic, celtic and greek (§3).
 
 The table is rendered from the data file by a script.
 
