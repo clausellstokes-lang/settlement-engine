@@ -254,7 +254,7 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
 | R1 registry, R2 withhold-always, V10-2 | merged (4ddf8c60c, d136940c3, b5cb22caf) | read cold: they hold |
 | VR47 the honorific | merged df6809f9c, bundles e4cce485f (VEIL-23) | done; the owner's count in section 5 |
 | R3 roster choices | `lane/veil-24-r3c2-2026-11-20` at 9b18835d1 (R3 411565ff9, cures 06e9e64b3, b907c75c9, 9b18835d1; 212 `cde846131969c93a094ef518a1ce8dec74d33dff1532b91f3e3dca5310ad79e2`, rollback `40357bed…65b1`); R3-CURE-4 on `v25-r3c4` (worktree `/home/user/wt/r3c4`, brief `briefs/R3-CURE-4-BRIEF.md`) | NOT MERGED. b907c75c9 and 9b18835d1 READ LINE BY LINE BY THIS SEAT (11:13-11:25): they hold as built; the husk (ruling 38 (a)), the exemption (38 (b)), the gate's three conditions (37 (b)), VR34 (b) (38 (c)) and the owner's counts go to R3-CURE-4. Seat's notes from the read: a DM-renamed SERVED criminal house loses its operations-list label (the re-derivation matches the catalogue name only; toward withholding); the born arm's Defense-key check covers the 14 seeds of the first cure, not the 92 (R3-CURE-4 unit 3 makes the gate the 92). Re-runs: section 6. |
-| CURATE notice (ruling 38 (c), 39) | `v25-curate` (worktree `/home/user/wt/curate`, cut at ae77ff26f; brief `briefs/CURATE-NOTICE-BRIEF.md`) | BUILDING (launched 11:22); its sentence to the chair before the merge |
+| CURATE notice (ruling 38 (c), 39) | `lane/veil-25-curate-2026-11-20` at 1bd894613 (pushed; worktree `/home/user/wt/curate`; hand-back `out/v25/curate/CURATE-NOTICE-HANDBACK.md` there) | RETURNED, READ LINE BY LINE, NOT MERGED: red 3/14 at ae77ff26f's source, green 23/23 (re-run by the seat, `/var/tmp/v18/out/v25/curate/`); the sentence and the seat's recommendation (add: the town has a criminal power) sent to the chair 11:42; merges on its word |
 | R6 tests | `lane/veil-22-r6-2026-11-20` 7d9ebd078 | COMPLETE, NOT MERGED; merge after R3 and re-run its MAIN arm (red 50 at R6's base: `cast.stakes` by R3's power, `cast.roles` wording by R3 or R5) |
 | R4 the people | `lane/veil-22-r4-2026-11-20` a4b89bf9d (R4 dfa031f3e + first cure) | NOT GREEN. NEXT after R3: the R4-CURE-2 builder (STOP 1, STOP 3, the switch's one salt, the catalogue as the red; VR48 its own commit). Draft brief at the seat; committed when launched. |
 | R5 composed prose, R7 | not started | R5 after R4 (rulings 14, 28, 32); R7 after R6 |
@@ -319,6 +319,7 @@ run exit 0, 40 PASS (`out/v24/gender/accept.txt`).
 - 11:12 THE LANE IS YOURS at 214c36dde; branch fast-forwarded; 211 proved. Ruling 38. b907c75c9 and 9b18835d1 read line by
   line; their reds and greens re-run (`out/v25/rerun/`); R3-CURE-4 brief written and its builder launched (11:16).
 - 11:24 the chair: the Curate notice now, beside R3-CURE-4 (ruling 39); its builder launched 11:22.
+- 11:42 the Curate notice returned (1bd894613), read, re-run; its sentence to the chair.
 
 ## 7. THE JOIN (the chair's word in VEIL-25's prompt): what the join must re-prove on the joined document
 The working line (origin/lane/join-2026-11-14, at 0c906948 when this was written) and four content lanes ADD SERVED TEXT at
