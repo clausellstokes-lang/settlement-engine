@@ -186,6 +186,17 @@
 --       own selection steps on a Reveal-DM read. On every read the veil runs, each served trace entry that carries `ts`
 --       takes its place in the served list (dense, in served order); the trace holds no other counter
 --       (_gallery_veil_apply, last; gallerySecondHomes.js :: renumberTrace, applyVeil's last). No signature changes.
+--   (32) EVERY FLAG BY THE ENGINE'S RULE (VEIL-19; REVIEW-VEIL-212-FINAL's V7-8, the reader's d06; (15) made whole, and R3): (15)
+--       recomposed five criminal booleans by a keyword list over the open names lowered by lower() (the twin by
+--       toLowerCase(), R3), so a boolean outside the five that only a hidden house raised was sent (hasGuild by a thieves'
+--       guild, hasChurch by a clandestine shrine), and 212's hasGangInfra counted a front business the client's
+--       gangHousesOf does not. Now EVERY boolean of economicState.compound.inst and economicState.safetyProfile.compound.inst
+--       (the only copies a born town stores) that is true stays true only where a house still listed raises it by the
+--       engine's own rule (priorityHelpers.js :: getInstitutionNames: getInstFlags' 32 flags), from ONE table carried by
+--       both engines as one literal (the HOUSE_FLAGS markers; gallerySecondHomes.js :: HOUSE_FLAGS, held to getInstFlags
+--       by execution): a substring of the name, the engine's word-bounded patterns, its live roster, the market by the
+--       house's own tags or the catalogue's market names; the name in the one fold (_gallery_veil_case_fold). A flag the
+--       table does not hold reads false. Never true where it was false. No signature changes.
 --   (10) A PERSON HIDDEN BY THE PER-PERSON SWITCH IS NOT SENT IN A ROSTER COPY EITHER (COHERENCE-VEIL-6; the fifth
 --       review's V5-4, ruled by the chair): _gallery_apply_member_overrides now reduces each roster copy
 --       (factions[].members[], powerStructure.factions[].members[]) of a person the share does not reveal to the
@@ -1211,7 +1222,6 @@ declare
   ev_pieces text[];
   k text;
   v jsonb;
-  open_names text[];
   pth text[];
   nm text[];
   srch jsonb;
@@ -1219,7 +1229,8 @@ declare
   blank jsonb := '[]';
   raws jsonb := '[]';
   hot boolean := false;
-  listed text[];
+  rules jsonb;         -- VEIL-19 (C): the engine's flag table (HOUSE_FLAGS)
+  hf jsonb;            -- VEIL-19 (C): each house still listed, as the engine's flags read it {n, live, tags}
   fk text;
   kw jsonb;
   births text[] := array(select jsonb_array_elements_text(case when jsonb_typeof(src -> 'births') = 'array' then src -> 'births' else '[]' end));
@@ -1354,9 +1365,6 @@ begin
     end loop;
   end if;
   if gone = '{}' and cardinality(births) = 0 and cardinality(labels) = 0 and not whole then return s; end if;
-  open_names := array(select public._gallery_veil_str(e -> 'name')
-                        from jsonb_array_elements(case when jsonb_typeof(s -> 'institutions') = 'array' then s -> 'institutions' else '[]' end) e
-                       where jsonb_typeof(e) = 'object');
   -- COHERENCE-VEIL-9: each house still listed as the engine's processor match reads it (stamped: by its identity)
   opens := coalesce((select jsonb_agg(case when jsonb_typeof(e -> 'catalogId') = 'string' and (e ->> 'catalogId') <> ''
                                            then jsonb_build_object('cid', e ->> 'catalogId') else jsonb_build_object('name', public._gallery_veil_str(e -> 'name')) end order by o)
@@ -1414,21 +1422,84 @@ begin
       s := jsonb_set(s, pth, kept);
     end if;
   end loop;
-  -- COHERENCE-VEIL-8, the chair's ruling (b): the engine's five criminal-house booleans, raised at birth by a
-  -- substring of a house's lower-cased name (priorityHelpers.js :: getInstitutionNames, these very lists), read as
-  -- the houses this projection still lists would raise them: a flag only a house removed whole raised reads false
-  -- (never true where it was false)
-  listed := array(select lower(o) from unnest(open_names) o);
+  -- VEIL-19 (item C; REVIEW-VEIL-212-FINAL's V7-8, the reader's d06; the chair's ruling (b), COHERENCE-VEIL-8, made whole):
+  -- EVERY BOOLEAN OF THE ENGINE'S INSTITUTION FLAGS (economicState.compound.inst, economicState.safetyProfile.compound.inst;
+  -- priorityHelpers.js :: getInstitutionNames, stamped once at birth over the roster) reads as the houses this projection
+  -- still lists would raise it BY THE ENGINE'S OWN RULE: a flag that is true stays true only where a listed house raises
+  -- it (never true where it was false). ONE TABLE, the engine's, carried by both engines as the same literal (between the
+  -- two markers below; gallerySecondHomes.js :: HOUSE_FLAGS), held to getInstFlags by execution: for each flag, `kw` (a
+  -- substring of the house's name), `not` (a name it must not match: the timber walls hold no gate), `re` (the engine's
+  -- word-bounded patterns, \b spelled as the ASCII lookarounds both engines run alike), `live` (the engine's live roster:
+  -- a house not ruined, removed, destroyed or a remnant, not stopped by the world pulse), `names` (the market: the house's
+  -- own `tags` where it carries them, else the catalogue's market names). A house's name is its native name (a custom
+  -- house: none) in ONE FOLD, the name search's (_gallery_veil_case_fold; R3: never lower() against toLowerCase()). A flag
+  -- the table does not hold (the record keeps it from something else): withheld, false. gangHousesOf's two words are
+  -- hasGangInfra's (VR4 side finding 3: a front business is no gang house).
+  rules := (
+    -- HOUSE_FLAGS begin
+    '{
+        "hasMilitaryInst": {"kw": ["garrison", "barracks", "guard", "watch", "citadel", "walls", "militia", "mercenary", "navy", "charter hall"]},
+        "hasGarrison": {"kw": ["garrison", "barracks", "professional guard", "multiple garrison"]},
+        "hasMilitia": {"kw": ["citizen militia", "militia", "household levy"]},
+        "hasWatch": {"kw": ["town watch", "city watch", "professional city watch", "village watch"]},
+        "hasMercenary": {"live": true, "kw": ["mercenary company", "mercenary quarter", "hired muscle"], "re": "(?<![a-z0-9_])free company(?![a-z0-9_])"},
+        "hasFreeCompany": {"kw": ["free company hall"]},
+        "hasCharterHall": {"kw": ["adventurers'' charter hall", "adventurers'' guild hall", "multiple adventurers''", "adventurers'' guild", "hireling hall"]},
+        "hasWalls": {"kw": ["walls", "citadel", "gates (if walled)", "inner citadel", "massive walls", "palisade", "earthwork"]},
+        "hasGates": {"live": true, "kw": ["wall", "citadel", "palisade", "earthwork", "inner citadel", "massive walls"], "not": "palisade|earthwork", "re": "(?<![a-z0-9_])gates?(?![a-z0-9_])"},
+        "hasPrison": {"live": true, "re": "prison|stocks|(?<![a-z0-9_])gaol|(?<![a-z0-9_])jail"},
+        "hasCourtSystem": {"live": true, "re": "courthouse|court buildings|democratic assembly|city hall|town hall"},
+        "hasMarket": {"live": true, "names": ["annual fair", "auction house", "caravaneer''s post", "carriers'' guild", "cobbler''s guild", "daily markets", "district markets (5-10)", "fish market", "furrier''s district", "international trade center", "major annual fairs", "market square", "merchant guilds (15-40)", "merchant guilds (3-8)", "merchant guilds (50-100+)", "multiple market squares", "periodic market", "tailor''s guild", "weekly market"]},
+        "hasGuild": {"kw": ["guild", "guild consortium", "guild governance"]},
+        "hasMerchantGuild": {"kw": ["merchant guild", "merchant oligarchy"]},
+        "hasBank": {"kw": ["bank", "money changer", "counting", "stock exchange"]},
+        "hasWarehouse": {"kw": ["warehouse"]},
+        "hasPort": {"re": "(?<![a-z0-9_])(?:port|docks?|harbou?r|shipyard|navy)(?![a-z0-9_])"},
+        "hasNavy": {"kw": ["navy", "major port"]},
+        "hasGranary": {"kw": ["granar"]},
+        "hasHospital": {"live": true, "re": "(?<![a-z0-9_])hospital|(?<![a-z0-9_])healer(?![a-z0-9_])|(?<![a-z0-9_])infirmar|(?<![a-z0-9_])monaster|(?<![a-z0-9_])friary(?![a-z0-9_])"},
+        "hasChurch": {"kw": ["church", "cathedral", "temple", "monastery", "friary", "shrine", "priest", "abbey"]},
+        "hasCathedral": {"kw": ["cathedral", "great cathedral"]},
+        "hasMonastery": {"kw": ["monastery", "friary", "major monasteries"]},
+        "hasMagicInst": {"kw": ["wizard", "mage", "alchemist", "enchant", "arcane", "academy of magic", "scroll scribe", "spellcasting", "hedge wizard"]},
+        "hasMagesGuild": {"kw": ["mages'' guild", "mages district", "enchanting quarter"]},
+        "hasWizardTower": {"kw": ["wizard''s tower", "multiple wizard towers"]},
+        "hasAlchemist": {"kw": ["alchemist shop", "alchemist quarter"]},
+        "hasCriminalInst": {"kw": ["thieves'' guild", "black market", "smuggling", "assassins", "street gang", "front business", "gambling den", "underground city", "multiple criminal"]},
+        "hasThievesGuild": {"kw": ["thieves'' guild chapter", "thieves'' guild (powerful)"]},
+        "hasBlackMarket": {"kw": ["black market", "black market bazaar"]},
+        "hasSmuggling": {"kw": ["smuggling network", "smuggling operation"]},
+        "hasGangInfra": {"kw": ["multiple criminal", "street gang"]}
+      }'
+    -- HOUSE_FLAGS end
+    )::jsonb;
+  hf := coalesce((select jsonb_agg(jsonb_build_object(
+          'n', case when coalesce(e -> 'isCustom' = 'true'::jsonb, false) or coalesce(e -> 'custom' = 'true'::jsonb, false)
+                         or coalesce(e -> 'source' = '"custom"'::jsonb, false)
+                         or jsonb_typeof(e -> 'customDefinitionId') is not distinct from 'string'
+                         or jsonb_typeof(e -> 'customDefinitionCategory') is not distinct from 'string'
+                    then '' else public._gallery_veil_case_fold(public._gallery_veil_str(e -> 'name')) end,
+          'live', not (coalesce(e -> '_worldPulseInactive' = 'true'::jsonb, false)
+                       or (case when jsonb_typeof(e -> 'status') = 'string' and (e ->> 'status') <> ''
+                                then translate(e ->> 'status', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') else 'active' end)
+                          in ('ruined', 'removed', 'destroyed', 'remnant')),
+          'tags', case when jsonb_typeof(e -> 'tags') = 'array' then e -> 'tags' end))
+        from jsonb_array_elements(case when jsonb_typeof(s -> 'institutions') = 'array' then s -> 'institutions' else '[]' end) e
+       where jsonb_typeof(e) = 'object'), '[]');
   for pth in select p from (values (array['economicState', 'compound', 'inst']), (array['economicState', 'safetyProfile', 'compound', 'inst'])) v(p) loop
     if jsonb_typeof(s #> pth) = 'object' then
-      for fk, kw in select * from jsonb_each('{
-          "hasCriminalInst": ["thieves'' guild", "black market", "smuggling", "assassins", "street gang", "front business", "gambling den", "underground city", "multiple criminal"],
-          "hasThievesGuild": ["thieves'' guild chapter", "thieves'' guild (powerful)"],
-          "hasBlackMarket": ["black market", "black market bazaar"],
-          "hasSmuggling": ["smuggling network", "smuggling operation"],
-          "hasGangInfra": ["street gang", "multiple criminal factions", "front business"]}'::jsonb) loop
-        if (s #> pth) -> fk = 'true'::jsonb
-           and not exists (select 1 from unnest(listed) l, jsonb_array_elements_text(kw) w where position(w in l) > 0) then
+      for fk in select z.k from jsonb_each(s #> pth) z(k, x) where z.x = 'true'::jsonb loop
+        kw := rules -> fk;
+        if kw is null or not exists (
+            select 1 from jsonb_array_elements(hf) h
+             where (not coalesce(kw -> 'live' = 'true'::jsonb, false) or (h -> 'live') = 'true'::jsonb)
+               and ((exists (select 1 from jsonb_array_elements_text(case when jsonb_typeof(kw -> 'kw') = 'array' then kw -> 'kw' else '[]' end) w
+                              where position(w in h ->> 'n') > 0)
+                     and not coalesce((h ->> 'n') ~ (kw ->> 'not'), false))
+                    or coalesce((h ->> 'n') ~ (kw ->> 're'), false)
+                    or (kw ? 'names' and case when jsonb_typeof(h -> 'tags') = 'array'
+                                             then (h -> 'tags') ? 'market' or ((h -> 'tags') ? 'guild' and (h -> 'tags') ? 'trade')
+                                             else exists (select 1 from jsonb_array_elements_text(kw -> 'names') m where m = h ->> 'n') end))) then
           s := jsonb_set(s, pth || fk, 'false'::jsonb);
         end if;
       end loop;

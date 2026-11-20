@@ -1876,4 +1876,82 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
     expect(bad, `${bad.length} holes or losses`).toEqual([]);
     expect(paths).toEqual([]);
   }, ARM_TIMEOUT_MS);
+
+  it('C EVERY FLAG BY getInstFlags: on a share that hides any house whole, every boolean of both copies of the engine\'s institution flags that is true stays true only where a house still listed raises it by the engine\'s own rule, from ONE table (HOUSE_FLAGS: the same literal in 212, each row held to getInstFlags by execution over every catalogue name, its live and custom forms, the keywords\' neighbours and the market\'s tags) in ONE fold (the dotted capital I, the Kelvin sign); the reader\'s town-d (hasGuild by a thieves\' guild, hasChurch by a clandestine shrine) reads false, hasMarket stays; a front business is no gang house; a ruined prison holds no one; a flag the table does not hold reads false; never true where it was false; a share that hides no house whole is untouched; every read, Reveal DM off and on, server against twin 0 paths', async () => {
+    const bad = []; const paths = [];
+    const sh = await import('../../src/domain/display/gallerySecondHomes.js');
+    const { getInstFlags } = await import('../../src/generators/priorityHelpers.js');
+    const { institutionalCatalog } = await import('../../src/data/institutionalCatalog.js');
+    // (1) ONE TABLE: 212's literal (between its HOUSE_FLAGS markers) is the twin's, and the table holds every flag the engine writes
+    const sql = readFileSync(resolve(MIGRATIONS, '212_share_veil_later_cures.sql'), 'utf-8');
+    const lit = sql.slice(sql.indexOf('-- HOUSE_FLAGS begin'), sql.indexOf('-- HOUSE_FLAGS end'));
+    let served = null;
+    try { served = JSON.parse(lit.slice(lit.indexOf("'") + 1, lit.lastIndexOf("'")).replace(/''/g, "'")); } catch { /* no literal: red below */ }
+    if (!served || JSON.stringify(served) !== JSON.stringify(sh.HOUSE_FLAGS)) bad.push('212\'s HOUSE_FLAGS literal is not the twin\'s');
+    const engineFlags = Object.keys(getInstFlags({}, []).inst).filter(k => k !== 'names').sort();
+    const table = sh.HOUSE_FLAGS || {};
+    if (JSON.stringify(engineFlags) !== JSON.stringify(Object.keys(table).sort())) bad.push(`the table's flags ${Object.keys(table).length} are not the engine's ${engineFlags.length}`);
+    // (2) THE ENGINE'S RULE, by execution: one house at a time, every catalogue name and every keyword (alone, with neighbours),
+    // live, ruined and stopped, custom, and with its own tags; the twin's row against getInstFlags' answer, flag by flag
+    const names = new Set();
+    for (const shelves of Object.values(institutionalCatalog)) for (const rows of Object.values(shelves || {})) for (const n of Object.keys(rows || {})) names.add(n);
+    for (const r of Object.values(table)) for (const w of [...(r.kw || []), ...(r.names || [])]) for (const n of [w, `Old ${w}`, `${w}s`, `${w.toUpperCase()} yard`, `x${w}x`]) names.add(n);
+    for (const n of ['Free company hall', 'The free company', 'freecompany', 'Port', 'Seaport', 'Docks/port facilities', 'Harbour', 'harbor', 'navy yard', 'Gates', 'gate', 'Gatesman', 'Palisade wall', 'Stone wall', 'Earthwork walls', 'Infirmary', 'Healer', 'Healers', 'Friary', 'Friaryard', 'Gaol', 'Jailhouse', 'Ajail', 'stocks', 'Town hall', 'Hospital', 'Hospitaller lodge']) names.add(n);
+    const houses = [...names].flatMap(n => [{ name: n }, { name: n, status: 'ruined' }, { name: n, status: 'Removed' }, { name: n, _worldPulseInactive: true }, { name: n, isCustom: true }]);
+    houses.push({ name: 'Quay stalls', tags: ['market'] }, { name: 'Quay stalls', tags: ['guild', 'trade'] }, { name: 'Fish market', tags: ['food'] }, { name: 'Fish market', tags: [] }, { name: 'Quay stalls', tags: ['guild'] }, { name: 'Bespoke bazaar', isCustom: true, tags: ['market'] });
+    let checked = 0;
+    if (typeof sh.houseRaisesFlag !== 'function') bad.push('the twin holds no rule per house (houseRaisesFlag)');
+    else for (const h of houses) {
+      const eng = getInstFlags({}, [h]).inst;
+      const read = sh.houseAsFlagsRead(h);
+      for (const f of engineFlags) { checked += 1; if (eng[f] !== sh.houseRaisesFlag(f, read)) bad.push(`${f} of ${JSON.stringify(h)}: the engine ${eng[f]}, the table ${!eng[f]}`); }
+    }
+    if (checked < 50000) bad.push(`only ${checked} checks`);
+    // (3) THROUGH THE SERVER: every flag true in both copies; the houses still listed raise exactly what the engine raises over them
+    const allTrue = () => ({ names: [], ...Object.fromEntries(engineFlags.map(f => [f, true])), hasDragonLair: true, hasMoat: 'yes' });
+    const ROWS = [
+      ['the reader\'s town-d: a thieves\' guild and a clandestine shrine hidden whole, a fish market open',
+        [hiddenHouse('inst-tg', "Thieves' guild (powerful)"), { id: 'inst-sh', name: 'Hidden shrine of the Drowned', category: 'Religious', tags: ['facet:clandestine:clandestine'], desc: 'The only shrine.' }],
+        [{ id: 'inst-fish', name: 'Fish market', category: 'Economy', desc: 'Fish.' }]],
+      ['R3 and the side finding: a dotted capital I and a Kelvin sign in open names; a front business beside a hidden street gang; a ruined prison; a live town prison',
+        [hiddenHouse('inst-sg', 'Street gang'), hiddenHouse('inst-bm', 'Black market')],
+        [{ id: 'inst-th', name: "THİEVES' GUILD CHAPTER", category: 'Economy', desc: 'An open name with a dotted capital I.' },
+          { id: 'inst-k', name: 'BLACK MARKET BAZAAR', category: 'Economy', desc: 'An open name with a Kelvin sign.' },
+          { id: 'inst-fb', name: 'Front businesses', category: 'Economy', desc: 'Fronts.' },
+          { id: 'inst-op', name: 'Old prison', status: 'ruined', category: 'Civic', desc: 'Ruined.' },
+          { id: 'inst-gt', name: 'East gates', category: 'Defense', desc: 'Gates.' }]],
+    ];
+    for (const [what, hiddenHouses, open] of ROWS) {
+      const town = { name: 'Guildless', tier: 'town', institutions: [...hiddenHouses, ...open],
+        economicState: { compound: { inst: allTrue() }, safetyProfile: { compound: { inst: allTrue() } } } };
+      const r = await sharesOf(town, hide(...hiddenHouses));
+      paths.push(...enginePaths(what, r));
+      for (const { tag, doc } of everyRead(r)) {
+        if (!isRec(doc)) { bad.push(`${what}, ${tag}: no document`); continue; }
+        const listed = (Array.isArray(doc.institutions) ? doc.institutions : []);
+        // the one fold reads a dotted capital I as I, as the name search does (the engine's toLowerCase does not): the open
+        // THİEVES' GUILD CHAPTER raises hasThievesGuild in both engines alike (R3)
+        const want = { ...getInstFlags({}, listed).inst, ...(listed.some(h => h.id === 'inst-th') ? { hasThievesGuild: true, hasCriminalInst: true } : {}) };
+        for (const [copy, inst] of [['economicState.compound.inst', doc.economicState?.compound?.inst], ['economicState.safetyProfile.compound.inst', doc.economicState?.safetyProfile?.compound?.inst]]) {
+          if (!isRec(inst)) { bad.push(`${what}, ${tag}: ${copy} is not sent`); continue; }
+          for (const f of engineFlags) if (inst[f] !== want[f]) bad.push(`${what}, ${tag}: ${copy}.${f} is ${inst[f]}, the listed houses raise ${want[f]}`);
+          if (inst.hasDragonLair !== false) bad.push(`${what}, ${tag}: ${copy}.hasDragonLair (a flag the table does not hold) is ${inst.hasDragonLair}`);
+          if (inst.hasMoat !== 'yes') bad.push(`${what}, ${tag}: ${copy}.hasMoat (not a boolean) is ${inst.hasMoat}`);
+        }
+      }
+    }
+    const d = await sharesOf({ name: 'Guildless', tier: 'town', institutions: [...ROWS[0][1], ...ROWS[0][2]], economicState: { compound: { inst: allTrue() } } }, hide(...ROWS[0][1]));
+    for (const { tag, doc } of everyRead(d)) {
+      const inst = doc?.economicState?.compound?.inst || {};
+      if (inst.hasGuild !== false || inst.hasChurch !== false || inst.hasMarket !== true) bad.push(`town-d, ${tag}: hasGuild ${inst.hasGuild}, hasChurch ${inst.hasChurch}, hasMarket ${inst.hasMarket}`);
+    }
+    // NEVER RAISED, and a share that hides no house whole is untouched
+    const quiet = { name: 'Saltmere', tier: 'town', institutions: [{ id: 'inst-fish', name: 'Fish market', category: 'Economy', desc: 'Fish.' }],
+      economicState: { compound: { inst: { hasGuild: true, hasBank: true, hasMarket: false, hasDragonLair: true } } } };
+    const q = await sharesOf(quiet, [{ address: 'field:institution:inst-fish:description', hidden: true }]);
+    paths.push(...enginePaths('no house hidden whole', q));
+    for (const { tag, doc } of everyRead(q)) if (differ(doc?.economicState?.compound?.inst, quiet.economicState.compound.inst).length) bad.push(`no house hidden whole, ${tag}: the flags are ${JSON.stringify(doc?.economicState?.compound?.inst)}`);
+    expect(bad.slice(0, 60), `${bad.length} sends or losses`).toEqual([]);
+    expect(paths).toEqual([]);
+  }, ARM_TIMEOUT_MS);
 });

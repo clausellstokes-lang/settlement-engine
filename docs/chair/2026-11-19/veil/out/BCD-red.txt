@@ -21,3 +21,10 @@ B2 (the seventh chair's two additions to B, 00:53 UTC: V10-6 with RULING VR21, a
    twin): 216 of 216 reads that hide a house whole have a hole in the served `ts` (gallery 72, import 72, twin 72; 18 towns);
    the reader's repro: 59 of 61 entries served, 21 holes in ts.
    V10-5 MEASURED FIRST, NOT BUILT (out/V105-measure.txt): see BCD-born.txt.
+
+C  "C EVERY FLAG BY getInstFlags": RED at the base, 880 sends or losses (no table in 212 and none in the twin; the reader's town-d:
+   hasGuild and hasChurch sent true; every flag outside the five sent true where no listed house raises it; R3: the open
+   names were lowered by lower() on the server and toLowerCase() in the twin (an open THİEVES' GUILD CHAPTER); a front business kept
+   hasGangInfra true beside a hidden street gang (VR4 side finding 3); a ruined prison; a flag the engine does not write).
+   The acceptance row d06 at the base: veil/gallery `economicState.compound.inst.hasGuild` and `.hasChurch` true (16 hits in 8
+   responses).

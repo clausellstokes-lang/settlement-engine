@@ -42,3 +42,16 @@ V10-5 MEASURED FIRST AND NOT BUILT (measure/v105-measure.probe.jsx; out/V105-mea
   8, the trace's effects, ...). That is ordinary content, and against the chair's ruling (1) (a shown power keeps its name):
   per the chair's instruction, STOPPED and reported, not built. The chain half: 0 reads would lose a chain (no born chain
   names a processing house that no listed house answers).
+
+C (every flag by getInstFlags, R3, VR4 side finding 3):
+  THE COPIES (measure/flag-copies.probe.jsx, the 48 births): every born town stores the engine's 32 flags at
+           economicState.compound.inst and economicState.safetyProfile.compound.inst, and nowhere else;
+           economicState.foodSecurity.foodRecord holds one key of the same spelling (hasGranary), which is the food
+           record's own fact ("a real granary stands", foodGenerator.js), not a copy of the flag: not touched.
+  bcd-born (base | C's tree), each veil (the default veil; every eye shut): rows 768; differ 102 (B's alone); differ OUTSIDE
+           the trace, the flags, the income rows and the prose 0; FLAGS THAT MOVE: 0 (no born read sends a true flag that
+           the houses it still lists do not raise by the engine's getInstFlags over their stored records: 544 reads of the
+           17 towns that hide a house whole, both copies, every flag checked); flags raised 0; server-twin 0 | 0; 0 raise.
+           So on born towns C moves nothing beyond what 212 (15) already lowered: the born hidden houses (smuggling network,
+           underground network, black market, thieves' guild, street gang, ...) raise only the five criminal flags there.
+  r5-born (B2 | C): 1152 rows, 0 differ; (base | C): 102 differ, B's.

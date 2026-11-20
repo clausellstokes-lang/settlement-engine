@@ -11,3 +11,12 @@ B  the arm: 0 sends or losses, server against twin 0 paths (GREEN; 114 at the ba
 B2 (V10-6, ruling VR21): the arm 0 holes (GREEN; 3 at the base), server against twin 0 paths; KEEP (a trace that loses nothing
    keeps its stored ts) holds. Six guard files 6 of 6, 125 of 125; the twin's tests 120 of 120; acceptance at the tree: exit 1, d06 the only FAIL
    row, 36 of 37, the 15 hand rows equal; typecheck:domain:strict 1113/1113, typecheck:ratchet 167/167, eslint 0 (exit 0 each).
+
+C  the arm: 0 sends or losses (GREEN; 880 at the base): 212's HOUSE_FLAGS literal equals the twin's table; the table's 32 flags
+   are the engine's 32; every catalogue name and every keyword's variants, live, ruined, removed, stopped, custom and with
+   their own tags, one house at a time, the twin's row equals getInstFlags' answer flag by flag (more than 50,000 checks);
+   through the server, both copies, every read, the served flags equal the engine's over the houses each read lists (the
+   dotted capital I read as I in both engines); a flag the table does not hold reads false; a non-boolean stays; a share
+   that hides no house whole is untouched; server against twin 0 paths. Six guard files 6 of 6, 126 of 126; the twin's tests
+   120 of 120. THE ACCEPTANCE RUN at C: exit 0, 37 of 37 (a07 and
+   d06 PASS, d07 PASS), the 15 hand rows equal. typecheck:domain:strict 1113/1113, typecheck:ratchet 167/167, eslint 0.
