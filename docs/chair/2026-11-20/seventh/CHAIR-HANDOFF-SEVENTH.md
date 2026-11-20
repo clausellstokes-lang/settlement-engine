@@ -179,6 +179,19 @@ parts of the whole check (at the close).
   is the owner's to set, slower for the same result; the chair's own wrong ruling of the night said by name (VR27's
   first wording would have broken saving a map). ASKED OF THE OWNER: only to run the database fix.
 
+- **2026-11-20, between the clock's readings of 02:46 and 02:47 UTC, THE OWNER RAN THE EMERGENCY SCRIPT ON PRODUCTION
+  AND REPORTED (verbatim, numbered by the chair's six steps):** "1. 0 / 2. all 0 / 3. success / 4. all 0 and all
+  false / 5. [blank] / 6. secret_visible_to_this_session,secret_stored_for,stored_byok_keys false,null,0". TAKEN
+  AS: the pre-flight read 0 (nothing on production uses one of the 157 as a visitor); the script ran; AFTER it
+  CHECK_B's four counts are 0 and CHECK_A's four are false: THE 157 SERVER-ONLY FUNCTIONS AND THE THREE ADMIN DOORS
+  ARE CLOSED TO OUTSIDERS ON PRODUCTION (by the owner's own checks; no seat has seen production). Step 6: THE
+  MASTER SECRET WAS NEVER SET (not visible to the session, stored for no database or role) AND NO KEY IS STORED: the
+  key-reading door had nothing behind it; nothing to rotate. TWO THINGS NOT KNOWN, asked once in plain words: step 5
+  (the app's smoke list) was left blank; step 2 says "all 0" BEFORE the script, where `still_open_count` should have
+  read about 155 (if every count truly was 0 before, the one-cell catalogue, CHECK_E, is asked for; if it was
+  shorthand, nothing). STILL TO RUN: the two lines for `list_ticket_thread`. Whether anyone used the admin doors
+  before tonight is a question only the API logs answer: said as the owner's call.
+
 ## 2. Rulings of this chair (each vetoable by the owner)
 
 - **SV1 (00:05 UTC, 2026-11-20): THE VEIL'S LIST ON THREE MACHINES.** VEIL-19 owns 212, its rollback and the twin's
@@ -956,3 +969,17 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   id is active, is not a trade this chair makes. In 213 it stands on the allowlist as an accepted residual; the
   split is the seat's PROPOSAL for after the deploy. FOR THE OWNER'S LIST: an outsider can ask whether an account
   id is active and gets yes or no, nothing more.
+- 02:47 UTC · **GIT-DOOR HANDED BACK "GIT-DOOR 34bfd0098"** (its message of 02:45 UTC; `lane/git-door-2026-11-20`, cut from
+  29ec255fe; `docs/chair/2026-11-20/ci/GIT-DOOR-HANDBACK.md`). Draft pull request #74's three commits picked with
+  -x; one conflict in `.husky/pre-push` (its `unset` placed above the line's lane routing, the routing kept byte
+  for byte); a fifth fixture family born on the line since master (`landingStageMeasure`) put behind the door.
+  EXECUTED: the guard red at the base's bytes for the right reason and 137 of 137 at the tip; UNDER A REAL PRE-PUSH
+  HOOK, in a decoy's linked worktree with GIT_DIR exported and a logging git shim, the whole source phase as six
+  shards: 3,634 files, 41,674 tests passed, 1 skipped, 0 red, the decoy byte-identical before and after (and after
+  a container kill mid-run); every git call that carried a repository variable was one of the guard's 49 raw
+  controls. NOT run under the hook: the 67 `tests/build` files (green without one). THE CHAIR'S READ: the hook's one
+  statement; `tests/setup/gitEnvIsolation.js` and its line in `vite.config.js`; every changed line of the five
+  existing tests (only the git spawn moves behind `fixtureGit` or `withoutRepositoryEnv`; no assertion changed).
+  ACCEPTED. ONE STEP BEFORE IT LANDS AS POINT 76: point 75 moved the same stored figure (the lighting census), the
+  only file both changed; the seat merges the line at 85fccf898 into its branch and re-takes the census by its door
+  at the merged tree, then "GIT-DOOR-2 <commit>"; the chair merges with the tree equal to the seat's.
