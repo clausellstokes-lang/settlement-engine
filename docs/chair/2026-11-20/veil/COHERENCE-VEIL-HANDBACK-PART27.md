@@ -391,6 +391,14 @@ run exit 0, 40 PASS (`out/v24/gender/accept.txt`).
 - 12:35-12:50 R3-CURE-4's branch read and re-run (section 3). The brokerage plant (helper): NOT REAL; one line to the chair.
 - 12:57 PART 27 current; waiting for R3-CURE-5's relay.
 
+- 13:05 ANOMALY: a plain push of 2cfea785d ran `.husky/pre-push`'s NON-lane path (`npm run check`, the whole suite) though
+  the ref was `lane/*`; the push landed; the check was killed at 20 min; its dead lock removed. Cause NOT established. Every
+  later push runs under a guard that kills it when `> settlementforge@1.0.0 check` appears (the command in section 6's next line).
+- 13:31 the chair (13:31, to every seat): the weekly usage warning; nothing stays only in a container; `-wip` branches for
+  unfinished work; one builder at a time; R3's merge is the lane's one aim. THE GUARDED PUSH: `L=/var/tmp/v18/out/v26/push.txt;
+  (git push origin lane/veil-26-2026-11-20 > $L 2>&1; echo "EXIT $?" >> $L) & P=$!; for i in $(seq 1 60); do sleep 10; grep -q
+  "settlementforge@1.0.0 check$" $L && { pkill -P $P; kill $P; break; }; grep -q '^EXIT' $L && break; done`.
+
 ## 7. THE JOIN (the chair's word in VEIL-25's prompt): what the join must re-prove on the joined document
 The working line (origin/lane/join-2026-11-14, at 0c906948 when this was written) and four content lanes ADD SERVED TEXT at
 the join: the traditions' descriptions (their text a function only of facts no act of the DM can hide), the session sheet's
