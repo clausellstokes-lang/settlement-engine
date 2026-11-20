@@ -210,6 +210,7 @@ export const QUARREL_POOLS = Object.freeze({
     quarrel({ id: 'g6-shore', text: 'Two households both claim the same stretch of shore, and neither will give way.', needs: ['coast'] }),
     quarrel({ id: 'g7-cows', text: "Two households graze their cows on the same patch of grass, and each says the other's beasts take more than their share.", needs: ['trade at work: dairy'] }),
     quarrel({ id: 'g8-long-trip', text: 'With the nearest market days away, the households argue over whose turn it is to make the long trip.', needs: ['route: isolated'] }),
+    quarrel({ id: 'n1-water', text: 'The households cannot agree whose turn it is to keep the water clean, and each says another has missed a turn.', needs: ['water source'] }), // the chair's word of 16:22 UTC (CONFLICT-LINES-2.md, 275cdbf26)
   ]),
   LEVIES: Object.freeze([
     quarrel({ id: 'l1-levies', text: 'The council has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now acting as if the other has already lost.', needs: ['market'] }),
