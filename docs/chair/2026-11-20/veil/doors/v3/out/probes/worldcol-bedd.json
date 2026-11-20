@@ -1,0 +1,23 @@
+{
+ "towns": 14,
+ "withBinding": 4,
+ "firstIllegal": 0,
+ "firstHidden": 0,
+ "servedInWorld": 0,
+ "servedInMember": 0,
+ "ex": [],
+ "anyIllegal": 1,
+ "keys": [
+  "schemaVersion",
+  "sourceWorldStateSchemaVersion",
+  "chronicle",
+  "tick",
+  "headlines",
+  "headline",
+  "summary",
+  "affectedSettlementIds",
+  "affectedSettlementNames"
+ ],
+ "err": "World snapshot contains a forbidden private key and cannot be stored",
+ "snap": "{\"schemaVersion\":1,\"sourceWorldStateSchemaVersion\":1,\"chronicle\":[{\"tick\":3,\"headlines\":[{\"headline\":\"Grand Guild Consortium buys an answer from Chroniclers' exchange\",\"summary\":\"Grand Guild Consortium paid Chroniclers' exchange of Yuwan for what it holds on Yuwan, and was answered at the house's own grade.\"}],\"affectedSettlementIds\":[\"abcd9900-0000-0000-0000-000000000014\"],\"affectedSettlementNames\":[\"Yuwan\"]}]}"
+}

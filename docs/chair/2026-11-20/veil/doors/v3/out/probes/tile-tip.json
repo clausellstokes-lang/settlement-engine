@@ -1,0 +1,1357 @@
+{
+ "census": {
+  "population": {
+   "AB": 0,
+   "AC": 0,
+   "ex": []
+  },
+  "terrain": {
+   "AB": 0,
+   "AC": 0,
+   "ex": []
+  },
+  "government_type": {
+   "AB": 0,
+   "AC": 1,
+   "ex": []
+  },
+  "magic_level": {
+   "AB": 0,
+   "AC": 0,
+   "ex": []
+  },
+  "stability": {
+   "AB": 6,
+   "AC": 0,
+   "ex": [
+    "rv10-tile-town-none-0-11: A=\"Unstable\" B=\"Stable\" C=\"Unstable\"",
+    "rv10-tile-town-infiltrated-0-12: A=\"Unstable\" B=\"Vulnerable\" C=\"Unstable\"",
+    "rv10-tile-town-indebted-0-16: A=\"Unstable\" B=\"Strained\" C=\"Unstable\"",
+    "rv10-tile-city-indebted-0-36: A=\"Unstable\" B=\"Strained\" C=\"Unstable\"",
+    "rv10-tile-city-infiltrated-0-42: A=\"Unstable\" B=\"Vulnerable\" C=\"Unstable\"",
+    "rv10-tile-city-none-0-43: A=\"Unstable\" B=\"Ordered\" C=\"Unstable\""
+   ]
+  },
+  "primary_resource": {
+   "AB": 0,
+   "AC": 0,
+   "ex": []
+  },
+  "threat_level": {
+   "AB": 0,
+   "AC": 0,
+   "ex": []
+  },
+  "culture": {
+   "AB": 0,
+   "AC": 0,
+   "ex": []
+  },
+  "prosperity": {
+   "AB": 22,
+   "AC": 2,
+   "ex": [
+    "rv10-tile-town-none-0-11: A=\"Comfortable\" B=\"Wealthy\" C=\"Comfortable\"",
+    "rv10-tile-town-infiltrated-0-12: A=\"Comfortable\" B=\"Wealthy\" C=\"Comfortable\"",
+    "rv10-tile-town-indebted-0-16: A=\"Moderate\" B=\"Comfortable\" C=\"Moderate\"",
+    "rv10-tile-town-politically_fractured-0-20: A=\"Moderate\" B=\"Comfortable\" C=\"Moderate\"",
+    "rv10-tile-town-politically_fractured-0-30: A=\"Poor\" B=\"Moderate\" C=\"Poor\"",
+    "rv10-tile-city-infiltrated-0-32: A=\"Comfortable\" B=\"Prosperous\" C=\"Comfortable\""
+   ]
+  },
+  "primary_deity": {
+   "AB": 0,
+   "AC": 0,
+   "ex": []
+  },
+  "at_war": {
+   "AB": 0,
+   "AC": 0,
+   "ex": []
+  }
+ },
+ "crimeWords": [],
+ "towns": [
+  {
+   "seed": "rv10-tile-village-none-0-1",
+   "hideable": 0
+  },
+  {
+   "seed": "rv10-tile-village-infiltrated-0-2",
+   "hideable": 0
+  },
+  {
+   "seed": "rv10-tile-village-none-0-3",
+   "hideable": 0
+  },
+  {
+   "seed": "rv10-tile-village-insurgency-0-4",
+   "hideable": 0
+  },
+  {
+   "seed": "rv10-tile-village-occupied-0-5",
+   "hideable": 0
+  },
+  {
+   "seed": "rv10-tile-village-indebted-0-6",
+   "hideable": 0
+  },
+  {
+   "seed": "rv10-tile-village-none-0-7",
+   "hideable": 0
+  },
+  {
+   "seed": "rv10-tile-village-under_siege-0-8",
+   "hideable": 0
+  },
+  {
+   "seed": "rv10-tile-village-wartime-0-9",
+   "hideable": 0
+  },
+  {
+   "seed": "rv10-tile-village-politically_fractured-0-10",
+   "hideable": 0
+  },
+  {
+   "seed": "rv10-tile-town-none-0-11",
+   "size": "town",
+   "crisis": "none",
+   "hideable": [
+    "Smuggling operation",
+    "Street gang"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 1236,
+    "terrain": "plains",
+    "government_type": "Merchant Council",
+    "magic_level": "medium",
+    "stability": "Unstable",
+    "primary_resource": "foraging_areas",
+    "threat_level": null,
+    "culture": "slavic",
+    "prosperity": "Comfortable",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Unstable (pervasive organized crime)"
+  },
+  {
+   "seed": "rv10-tile-town-infiltrated-0-12",
+   "size": "town",
+   "crisis": "infiltrated",
+   "hideable": [
+    "Front businesses",
+    "Street gang"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 2157,
+    "terrain": "plains",
+    "government_type": "Merchant oligarchy",
+    "magic_level": "medium",
+    "stability": "Unstable",
+    "primary_resource": "foraging_areas",
+    "threat_level": null,
+    "culture": "east_asian",
+    "prosperity": "Comfortable",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Unstable — criminal governance"
+  },
+  {
+   "seed": "rv10-tile-town-none-0-13",
+   "size": "town",
+   "crisis": "none",
+   "hideable": [
+    "Smuggling operation"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 1283,
+    "terrain": "plains",
+    "government_type": "Church Council",
+    "magic_level": "high",
+    "stability": "Strained",
+    "primary_resource": "grazing_land",
+    "threat_level": null,
+    "culture": "latin",
+    "prosperity": "Moderate",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Strained (people arriving); monsters on the roads"
+  },
+  {
+   "seed": "rv10-tile-town-insurgency-0-14",
+   "hideable": 0
+  },
+  {
+   "seed": "rv10-tile-town-occupied-0-15",
+   "size": "town",
+   "crisis": "occupied",
+   "hideable": [
+    "Rookery"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 439,
+    "terrain": "plains",
+    "government_type": "Corrupt Council",
+    "magic_level": "low",
+    "stability": "Suppressed",
+    "primary_resource": "hunting_grounds",
+    "threat_level": null,
+    "culture": "germanic",
+    "prosperity": "Poor",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Suppressed (under occupation: resistance simmers)"
+  },
+  {
+   "seed": "rv10-tile-town-indebted-0-16",
+   "size": "town",
+   "crisis": "indebted",
+   "hideable": [
+    "Front businesses",
+    "Street gang"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 2279,
+    "terrain": "riverside",
+    "government_type": "Feudal Appointee",
+    "magic_level": "medium",
+    "stability": "Unstable",
+    "primary_resource": "river_fish",
+    "threat_level": null,
+    "culture": "east_asian",
+    "prosperity": "Moderate",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Unstable — criminal governance"
+  },
+  {
+   "seed": "rv10-tile-town-none-0-17",
+   "hideable": 0
+  },
+  {
+   "seed": "rv10-tile-town-under_siege-0-18",
+   "size": "town",
+   "crisis": "under_siege",
+   "hideable": [
+    "Fence (word of mouth)",
+    "Front businesses",
+    "Street gang"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 2321,
+    "terrain": "coastal",
+    "government_type": "Arcane Council",
+    "magic_level": "high",
+    "stability": "Critical",
+    "primary_resource": "fishing_grounds",
+    "threat_level": null,
+    "culture": "south_asian",
+    "prosperity": "Struggling",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Critical (under siege)"
+  },
+  {
+   "seed": "rv10-tile-town-wartime-0-19",
+   "hideable": 0
+  },
+  {
+   "seed": "rv10-tile-town-politically_fractured-0-20",
+   "size": "town",
+   "crisis": "politically_fractured",
+   "hideable": [
+    "Smuggling operation"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 1628,
+    "terrain": "riverside",
+    "government_type": "Church Council",
+    "magic_level": "high",
+    "stability": "Fractured",
+    "primary_resource": "river_fish",
+    "threat_level": null,
+    "culture": "south_asian",
+    "prosperity": "Moderate",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Fractured — no stable governing authority"
+  },
+  {
+   "seed": "rv10-tile-town-none-0-21",
+   "hideable": 0
+  },
+  {
+   "seed": "rv10-tile-town-infiltrated-0-22",
+   "hideable": 0
+  },
+  {
+   "seed": "rv10-tile-town-none-0-23",
+   "hideable": 0
+  },
+  {
+   "seed": "rv10-tile-town-insurgency-0-24",
+   "hideable": 0
+  },
+  {
+   "seed": "rv10-tile-town-occupied-0-25",
+   "hideable": 0
+  },
+  {
+   "seed": "rv10-tile-town-indebted-0-26",
+   "hideable": 0
+  },
+  {
+   "seed": "rv10-tile-town-none-0-27",
+   "hideable": 0
+  },
+  {
+   "seed": "rv10-tile-town-under_siege-0-28",
+   "hideable": 0
+  },
+  {
+   "seed": "rv10-tile-town-wartime-0-29",
+   "size": "town",
+   "crisis": "wartime",
+   "hideable": [
+    "Street gang"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 1305,
+    "terrain": "plains",
+    "government_type": "Feudal Appointee",
+    "magic_level": "medium",
+    "stability": "Tense",
+    "primary_resource": "hunting_grounds",
+    "threat_level": null,
+    "culture": "greek",
+    "prosperity": "Struggling",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Tense (requisition and conscription)"
+  },
+  {
+   "seed": "rv10-tile-town-politically_fractured-0-30",
+   "size": "town",
+   "crisis": "politically_fractured",
+   "hideable": [
+    "Street gang",
+    "Front businesses"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 2245,
+    "terrain": "mountain",
+    "government_type": "Arcane Council",
+    "magic_level": "high",
+    "stability": "Fractured",
+    "primary_resource": "hot_springs_mineral",
+    "threat_level": null,
+    "culture": "south_asian",
+    "prosperity": "Poor",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Fractured — no stable governing authority; monsters on the roads"
+  },
+  {
+   "seed": "rv10-tile-city-none-0-31",
+   "size": "city",
+   "crisis": "none",
+   "hideable": [
+    "Smuggling network",
+    "Front businesses",
+    "Underground network",
+    "Black market"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 8644,
+    "terrain": "plains",
+    "government_type": "Merchant oligarchy",
+    "magic_level": "low",
+    "stability": "Stable",
+    "primary_resource": "hunting_grounds",
+    "threat_level": null,
+    "culture": "latin",
+    "prosperity": "Prosperous",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Stable"
+  },
+  {
+   "seed": "rv10-tile-city-infiltrated-0-32",
+   "size": "city",
+   "crisis": "infiltrated",
+   "hideable": [
+    "Smuggling network",
+    "Thieves' guild chapter",
+    "Front businesses",
+    "Underground network",
+    "Black market"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 14233,
+    "terrain": "forest",
+    "government_type": "Noble Governorship",
+    "magic_level": "high",
+    "stability": "Vulnerable",
+    "primary_resource": "foraging_areas",
+    "threat_level": null,
+    "culture": "east_asian",
+    "prosperity": "Comfortable",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Vulnerable (decisions shaped from outside)"
+  },
+  {
+   "seed": "rv10-tile-city-none-0-33",
+   "size": "city",
+   "crisis": "none",
+   "hideable": [
+    "Black market"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 4977,
+    "terrain": "desert",
+    "government_type": "Royal Authority",
+    "magic_level": "medium",
+    "stability": "Ordered",
+    "primary_resource": "desert_salt",
+    "threat_level": null,
+    "culture": "mesoamerican",
+    "prosperity": "Prosperous",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Ordered (strong military presence)"
+  },
+  {
+   "seed": "rv10-tile-city-insurgency-0-34",
+   "size": "city",
+   "crisis": "insurgency",
+   "hideable": [
+    "Multiple criminal factions",
+    "Front businesses",
+    "Contract killer",
+    "Smuggling network"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 10182,
+    "terrain": "forest",
+    "government_type": "Noble Governorship",
+    "magic_level": "low",
+    "stability": "Unstable",
+    "primary_resource": "marshlands",
+    "threat_level": null,
+    "culture": "greek",
+    "prosperity": "Struggling",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Unstable (insurgency contests authority)"
+  },
+  {
+   "seed": "rv10-tile-city-occupied-0-35",
+   "size": "city",
+   "crisis": "occupied",
+   "hideable": [
+    "Smuggling network",
+    "Thieves' guild chapter",
+    "Front businesses",
+    "Underground network",
+    "Whisper market",
+    "Black market",
+    "Contract killer"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 14577,
+    "terrain": "hills",
+    "government_type": "Corrupt City Council",
+    "magic_level": "medium",
+    "stability": "Suppressed",
+    "primary_resource": "hunting_grounds",
+    "threat_level": null,
+    "culture": "germanic",
+    "prosperity": "Poor",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Suppressed (under occupation: resistance simmers)"
+  },
+  {
+   "seed": "rv10-tile-city-indebted-0-36",
+   "size": "city",
+   "crisis": "indebted",
+   "hideable": [
+    "Smuggling network",
+    "Multiple criminal factions",
+    "Front businesses",
+    "Black market",
+    "Contract killer"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 5598,
+    "terrain": "hills",
+    "government_type": "Corrupt City Council",
+    "magic_level": "low",
+    "stability": "Unstable",
+    "primary_resource": "grazing_land",
+    "threat_level": null,
+    "culture": "east_asian",
+    "prosperity": "Moderate",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Unstable (pervasive organized crime)"
+  },
+  {
+   "seed": "rv10-tile-city-none-0-37",
+   "size": "city",
+   "crisis": "none",
+   "hideable": [
+    "Front businesses",
+    "Black market"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 8241,
+    "terrain": "hills",
+    "government_type": "Merchant oligarchy",
+    "magic_level": "medium",
+    "stability": "Tense",
+    "primary_resource": "managed_forest",
+    "threat_level": null,
+    "culture": "south_asian",
+    "prosperity": "Prosperous",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Tense — regional monster threat"
+  },
+  {
+   "seed": "rv10-tile-city-under_siege-0-38",
+   "size": "city",
+   "crisis": "under_siege",
+   "hideable": [
+    "Smuggling network",
+    "Multiple criminal factions",
+    "Front businesses",
+    "Underground network",
+    "Whisper market",
+    "Black market"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 14830,
+    "terrain": "coastal",
+    "government_type": "Merchant oligarchy",
+    "magic_level": "low",
+    "stability": "Critical",
+    "primary_resource": "fishing_grounds",
+    "threat_level": null,
+    "culture": "celtic",
+    "prosperity": "Struggling",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Critical (under siege)"
+  },
+  {
+   "seed": "rv10-tile-city-wartime-0-39",
+   "size": "city",
+   "crisis": "wartime",
+   "hideable": [
+    "Multiple criminal factions",
+    "Whisper market",
+    "Black market",
+    "Front businesses"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 4674,
+    "terrain": "coastal",
+    "government_type": "Merchant Guild Council",
+    "magic_level": "medium",
+    "stability": "Tense",
+    "primary_resource": "deep_harbour",
+    "threat_level": null,
+    "culture": "south_asian",
+    "prosperity": "Moderate",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Tense (requisition and conscription)"
+  },
+  {
+   "seed": "rv10-tile-city-politically_fractured-0-40",
+   "size": "city",
+   "crisis": "politically_fractured",
+   "hideable": [
+    "Multiple criminal factions",
+    "Front businesses"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 3149,
+    "terrain": "forest",
+    "government_type": "Corrupt City Council",
+    "magic_level": "medium",
+    "stability": "Fractured",
+    "primary_resource": "marshlands",
+    "threat_level": null,
+    "culture": "norse",
+    "prosperity": "Struggling",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Fractured — no stable governing authority"
+  },
+  {
+   "seed": "rv10-tile-city-none-0-41",
+   "size": "city",
+   "crisis": "none",
+   "hideable": [
+    "Smuggling network",
+    "Front businesses",
+    "Contract killer"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 5760,
+    "terrain": "forest",
+    "government_type": "Merchant oligarchy",
+    "magic_level": "medium",
+    "stability": "Ordered",
+    "primary_resource": "grain_fields",
+    "threat_level": null,
+    "culture": "germanic",
+    "prosperity": "Prosperous",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Ordered (strong military presence)"
+  },
+  {
+   "seed": "rv10-tile-city-infiltrated-0-42",
+   "size": "city",
+   "crisis": "infiltrated",
+   "hideable": [
+    "Smuggling network",
+    "Front businesses",
+    "Whisper market",
+    "Black market"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 8313,
+    "terrain": "plains",
+    "government_type": "Merchant Guild Council",
+    "magic_level": "medium",
+    "stability": "Unstable",
+    "primary_resource": "hunting_grounds",
+    "threat_level": null,
+    "culture": "slavic",
+    "prosperity": "Comfortable",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Unstable (pervasive organized crime)"
+  },
+  {
+   "seed": "rv10-tile-city-none-0-43",
+   "size": "city",
+   "crisis": "none",
+   "hideable": [
+    "Smuggling network",
+    "Multiple criminal factions",
+    "Front businesses",
+    "Black market"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 10904,
+    "terrain": "coastal",
+    "government_type": "Noble Governorship",
+    "magic_level": "medium",
+    "stability": "Unstable",
+    "primary_resource": "deep_harbour",
+    "threat_level": null,
+    "culture": "norse",
+    "prosperity": "Comfortable",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Unstable (pervasive organized crime); monsters on the roads"
+  },
+  {
+   "seed": "rv10-tile-city-insurgency-0-44",
+   "size": "city",
+   "crisis": "insurgency",
+   "hideable": [
+    "Smuggling network",
+    "Black market",
+    "Contract killer",
+    "Front businesses",
+    "Rookery"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 4870,
+    "terrain": "plains",
+    "government_type": "Merchant Guild Council",
+    "magic_level": "high",
+    "stability": "Unstable",
+    "primary_resource": "grazing_land",
+    "threat_level": null,
+    "culture": "south_asian",
+    "prosperity": "Moderate",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Unstable (insurgency contests authority)"
+  },
+  {
+   "seed": "rv10-tile-city-occupied-0-45",
+   "size": "city",
+   "crisis": "occupied",
+   "hideable": [
+    "Rookery",
+    "Black market"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 6502,
+    "terrain": "forest",
+    "government_type": "Merchant oligarchy",
+    "magic_level": "low",
+    "stability": "Suppressed",
+    "primary_resource": "managed_forest",
+    "threat_level": null,
+    "culture": "arabic",
+    "prosperity": "Poor",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Suppressed (under occupation: resistance simmers)"
+  },
+  {
+   "seed": "rv10-tile-city-indebted-0-46",
+   "hideable": 0
+  },
+  {
+   "seed": "rv10-tile-city-none-0-47",
+   "size": "city",
+   "crisis": "none",
+   "hideable": [
+    "Smuggling network",
+    "Multiple criminal factions",
+    "Front businesses",
+    "Whisper market",
+    "Black market",
+    "Contract killer"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 12455,
+    "terrain": "coastal",
+    "government_type": "Noble Governorship",
+    "magic_level": "medium",
+    "stability": "Tense",
+    "primary_resource": "fishing_grounds",
+    "threat_level": null,
+    "culture": "east_asian",
+    "prosperity": "Prosperous",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Tense (the creed is contested)"
+  },
+  {
+   "seed": "rv10-tile-city-under_siege-0-48",
+   "hideable": 0
+  },
+  {
+   "seed": "rv10-tile-city-wartime-0-49",
+   "size": "city",
+   "crisis": "wartime",
+   "hideable": [
+    "Smuggling network",
+    "Thieves' guild chapter",
+    "Front businesses",
+    "Underground network",
+    "Whisper market",
+    "Black market"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 14257,
+    "terrain": "coastal",
+    "government_type": "Merchant Guild Council",
+    "magic_level": "medium",
+    "stability": "Tense",
+    "primary_resource": "deep_harbour",
+    "threat_level": null,
+    "culture": "latin",
+    "prosperity": "Moderate",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Tense (requisition and conscription)"
+  },
+  {
+   "seed": "rv10-tile-city-politically_fractured-0-50",
+   "size": "city",
+   "crisis": "politically_fractured",
+   "hideable": [
+    "Smuggling network",
+    "Thieves' guild chapter",
+    "Front businesses",
+    "Black market"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 11977,
+    "terrain": "plains",
+    "government_type": "Arcane Council",
+    "magic_level": "high",
+    "stability": "Fractured",
+    "primary_resource": "foraging_areas",
+    "threat_level": null,
+    "culture": "norse",
+    "prosperity": "Poor",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Fractured — no stable governing authority"
+  },
+  {
+   "seed": "rv10-tile-metropolis-none-0-51",
+   "size": "metropolis",
+   "crisis": "none",
+   "hideable": [
+    "Smuggling network",
+    "Thieves' guild (powerful)",
+    "Front businesses"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 29454,
+    "terrain": "coastal",
+    "government_type": "Grand Council",
+    "magic_level": "low",
+    "stability": "Tense",
+    "primary_resource": "deep_harbour",
+    "threat_level": null,
+    "culture": "slavic",
+    "prosperity": "Prosperous",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Tense — regional monster threat"
+  },
+  {
+   "seed": "rv10-tile-metropolis-infiltrated-0-52",
+   "size": "metropolis",
+   "crisis": "infiltrated",
+   "hideable": [
+    "Thieves' guild (powerful)",
+    "Front businesses",
+    "Whisper market"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 20777,
+    "terrain": "hills",
+    "government_type": "Ducal Governorship",
+    "magic_level": "high",
+    "stability": "Ordered",
+    "primary_resource": "grain_fields",
+    "threat_level": null,
+    "culture": "celtic",
+    "prosperity": "Wealthy",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Ordered (strong military presence)"
+  },
+  {
+   "seed": "rv10-tile-metropolis-none-0-53",
+   "size": "metropolis",
+   "crisis": "none",
+   "hideable": [
+    "Smuggling network",
+    "Multiple criminal factions",
+    "Underground network",
+    "Underground city",
+    "Whisper market",
+    "Black market bazaar",
+    "Assassins' guild"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 58454,
+    "terrain": "hills",
+    "government_type": "Grand Merchant Oligarchy",
+    "magic_level": "medium",
+    "stability": "Tense",
+    "primary_resource": "hunting_grounds",
+    "threat_level": null,
+    "culture": "arabic",
+    "prosperity": "Comfortable",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Tense (militarised)"
+  },
+  {
+   "seed": "rv10-tile-metropolis-insurgency-0-54",
+   "size": "metropolis",
+   "crisis": "insurgency",
+   "hideable": [
+    "Smuggling network",
+    "Thieves' guild (powerful)",
+    "Front businesses",
+    "Underground network",
+    "Underground city",
+    "Whisper market",
+    "Assassins' guild"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 16678,
+    "terrain": "coastal",
+    "government_type": "Shadow Senate",
+    "magic_level": "high",
+    "stability": "Unstable",
+    "primary_resource": "fishing_grounds",
+    "threat_level": null,
+    "culture": "arabic",
+    "prosperity": "Moderate",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Unstable (insurgency contests authority)"
+  },
+  {
+   "seed": "rv10-tile-metropolis-occupied-0-55",
+   "hideable": 0
+  },
+  {
+   "seed": "rv10-tile-metropolis-indebted-0-56",
+   "size": "metropolis",
+   "crisis": "indebted",
+   "hideable": [
+    "Thieves' guild (powerful)",
+    "Front businesses",
+    "Whisper market"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 308284,
+    "terrain": "desert",
+    "government_type": "Grand Guild Consortium",
+    "magic_level": "high",
+    "stability": "Strained",
+    "primary_resource": "date_palms",
+    "threat_level": null,
+    "culture": "steppe",
+    "prosperity": "Prosperous",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Strained — the creditors have a say in every decision"
+  },
+  {
+   "seed": "rv10-tile-metropolis-none-0-57",
+   "size": "metropolis",
+   "crisis": "none",
+   "hideable": [
+    "Contract killer"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 31924,
+    "terrain": "hills",
+    "government_type": "City-State Council",
+    "magic_level": "medium",
+    "stability": "Stable",
+    "primary_resource": "grain_fields",
+    "threat_level": null,
+    "culture": "steppe",
+    "prosperity": "Prosperous",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Stable"
+  },
+  {
+   "seed": "rv10-tile-metropolis-under_siege-0-58",
+   "size": "metropolis",
+   "crisis": "under_siege",
+   "hideable": [
+    "Thieves' guild (powerful)",
+    "Front businesses"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 18934,
+    "terrain": "forest",
+    "government_type": "Democratic assembly",
+    "magic_level": "medium",
+    "stability": "Critical",
+    "primary_resource": "grazing_land",
+    "threat_level": null,
+    "culture": "latin",
+    "prosperity": "Struggling",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Critical (under siege); monsters on the roads"
+  },
+  {
+   "seed": "rv10-tile-metropolis-wartime-0-59",
+   "size": "metropolis",
+   "crisis": "wartime",
+   "hideable": [
+    "Smuggling network",
+    "Multiple criminal factions",
+    "Front businesses",
+    "Whisper market",
+    "Black market bazaar",
+    "Assassins' guild"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 43701,
+    "terrain": "forest",
+    "government_type": "Democratic assembly",
+    "magic_level": "high",
+    "stability": "Tense",
+    "primary_resource": "grain_fields",
+    "threat_level": null,
+    "culture": "celtic",
+    "prosperity": "Moderate",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Tense (requisition and conscription); monsters on the roads"
+  },
+  {
+   "seed": "rv10-tile-metropolis-politically_fractured-0-60",
+   "size": "metropolis",
+   "crisis": "politically_fractured",
+   "hideable": [
+    "Smuggling network",
+    "Thieves' guild (powerful)",
+    "Front businesses",
+    "Underground city",
+    "Rookery",
+    "Assassins' guild"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 99539,
+    "terrain": "riverside",
+    "government_type": "Shadow Senate",
+    "magic_level": "medium",
+    "stability": "Fractured",
+    "primary_resource": "river_mills",
+    "threat_level": null,
+    "culture": "greek",
+    "prosperity": "Poor",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Fractured — no stable governing authority"
+  },
+  {
+   "seed": "rv10-tile-metropolis-none-0-61",
+   "size": "metropolis",
+   "crisis": "none",
+   "hideable": [
+    "Smuggling network",
+    "Thieves' guild (powerful)",
+    "Whisper market",
+    "Assassins' guild"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 42771,
+    "terrain": "desert",
+    "government_type": "Ducal Governorship",
+    "magic_level": "medium",
+    "stability": "Stable",
+    "primary_resource": "desert_salt",
+    "threat_level": null,
+    "culture": "mesoamerican",
+    "prosperity": "Wealthy",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Stable"
+  },
+  {
+   "seed": "rv10-tile-metropolis-infiltrated-0-62",
+   "size": "metropolis",
+   "crisis": "infiltrated",
+   "hideable": [
+    "Smuggling network",
+    "Multiple criminal factions",
+    "Front businesses",
+    "Underground city",
+    "Rookery",
+    "Black market bazaar",
+    "Assassins' guild"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 42101,
+    "terrain": "mountain",
+    "government_type": "Grand Council",
+    "magic_level": "medium",
+    "stability": "Vulnerable",
+    "primary_resource": "mountain_timber",
+    "threat_level": null,
+    "culture": "steppe",
+    "prosperity": "Prosperous",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Vulnerable (decisions shaped from outside)"
+  },
+  {
+   "seed": "rv10-tile-metropolis-none-0-63",
+   "size": "metropolis",
+   "crisis": "none",
+   "hideable": [
+    "Smuggling network",
+    "Multiple criminal factions",
+    "Front businesses",
+    "Black market bazaar",
+    "Contract killer"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 15691,
+    "terrain": "riverside",
+    "government_type": "Shadow Senate",
+    "magic_level": "medium",
+    "stability": "Shaken",
+    "primary_resource": "river_mills",
+    "threat_level": null,
+    "culture": "germanic",
+    "prosperity": "Poor",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Shaken — nobody trusts those in charge"
+  },
+  {
+   "seed": "rv10-tile-metropolis-insurgency-0-64",
+   "size": "metropolis",
+   "crisis": "insurgency",
+   "hideable": [
+    "Smuggling network",
+    "Multiple criminal factions",
+    "Front businesses"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 16784,
+    "terrain": "mountain",
+    "government_type": "Arcane Senate",
+    "magic_level": "high",
+    "stability": "Unstable",
+    "primary_resource": "alpine_pasture",
+    "threat_level": null,
+    "culture": "norse",
+    "prosperity": "Moderate",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Unstable (insurgency contests authority)"
+  },
+  {
+   "seed": "rv10-tile-metropolis-occupied-0-65",
+   "size": "metropolis",
+   "crisis": "occupied",
+   "hideable": [
+    "Smuggling network",
+    "Multiple criminal factions",
+    "Front businesses",
+    "Whisper market",
+    "Black market bazaar"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 17431,
+    "terrain": "hills",
+    "government_type": "Royal Authority",
+    "magic_level": "high",
+    "stability": "Suppressed",
+    "primary_resource": "foraging_areas",
+    "threat_level": null,
+    "culture": "latin",
+    "prosperity": "Poor",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Suppressed (under occupation: resistance simmers)"
+  },
+  {
+   "seed": "rv10-tile-metropolis-indebted-0-66",
+   "size": "metropolis",
+   "crisis": "indebted",
+   "hideable": [
+    "Thieves' guild (powerful)",
+    "Front businesses",
+    "Whisper market"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 22827,
+    "terrain": "desert",
+    "government_type": "Grand Guild Consortium",
+    "magic_level": "low",
+    "stability": "Strained",
+    "primary_resource": "oasis_water",
+    "threat_level": null,
+    "culture": "latin",
+    "prosperity": "Moderate",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Strained — the creditors have a say in every decision"
+  },
+  {
+   "seed": "rv10-tile-metropolis-none-0-67",
+   "size": "metropolis",
+   "crisis": "none",
+   "hideable": [
+    "Smuggling network",
+    "Thieves' guild (powerful)",
+    "Front businesses",
+    "Assassins' guild"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 32874,
+    "terrain": "riverside",
+    "government_type": "City-State Council",
+    "magic_level": "high",
+    "stability": "Ordered",
+    "primary_resource": "river_fish",
+    "threat_level": null,
+    "culture": "steppe",
+    "prosperity": "Wealthy",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Ordered (strong military presence)"
+  },
+  {
+   "seed": "rv10-tile-metropolis-under_siege-0-68",
+   "size": "metropolis",
+   "crisis": "under_siege",
+   "hideable": [
+    "Smuggling network",
+    "Thieves' guild (powerful)",
+    "Front businesses",
+    "Underground network",
+    "Underground city",
+    "Whisper market",
+    "Assassins' guild"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 47246,
+    "terrain": "coastal",
+    "government_type": "Grand Merchant Senate",
+    "magic_level": "high",
+    "stability": "Critical",
+    "primary_resource": "fishing_grounds",
+    "threat_level": null,
+    "culture": "latin",
+    "prosperity": "Struggling",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Critical (under siege)"
+  },
+  {
+   "seed": "rv10-tile-metropolis-wartime-0-69",
+   "size": "metropolis",
+   "crisis": "wartime",
+   "hideable": [
+    "Smuggling network"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 32018,
+    "terrain": "plains",
+    "government_type": "Grand Military Council",
+    "magic_level": "high",
+    "stability": "Tense",
+    "primary_resource": "managed_forest",
+    "threat_level": null,
+    "culture": "east_asian",
+    "prosperity": "Comfortable",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Tense (requisition and conscription)"
+  },
+  {
+   "seed": "rv10-tile-metropolis-politically_fractured-0-70",
+   "size": "metropolis",
+   "crisis": "politically_fractured",
+   "hideable": [
+    "Smuggling network",
+    "Thieves' guild (powerful)",
+    "Front businesses",
+    "Underground network",
+    "Underground city",
+    "Whisper market",
+    "Assassins' guild"
+   ],
+   "sentHideable": 0,
+   "tileA": {
+    "population": 95414,
+    "terrain": "plains",
+    "government_type": "Grand Merchant Oligarchy",
+    "magic_level": "medium",
+    "stability": "Fractured",
+    "primary_resource": "grazing_land",
+    "threat_level": null,
+    "culture": "norse",
+    "prosperity": "Moderate",
+    "primary_deity": null,
+    "at_war": false
+   },
+   "dosStability": "Fractured — no stable governing authority"
+  }
+ ]
+}
