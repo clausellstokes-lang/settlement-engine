@@ -758,7 +758,8 @@ function npcsSlice(active) {
     // `influence` band, a keyword misread at birth (88.6% of the chair's 300 towns' cards "low"). Both print the record's
     // fact instead, from the people card's one reader: the powers the person stands first of and each one's weight here.
     const standingLine = cardStandingLine(n, s);
-    const firstOfLine = cardFirstOfWeights(n, s).map((p) => `${p.power}, ${p.weightHere}`).join('; ') || null;
+    // PAGE-4 CARD-SERVED: a power the document holds with no figure prints its name alone (no weight)
+    const firstOfLine = cardFirstOfWeights(n, s).map((p) => (p.weightHere ? `${p.power}, ${p.weightHere}` : p.power)).join('; ') || null;
     // Engine plotHooks is array of strings; titles aren't present as a separate field for some npcs
     const npcRace = n?.race || n?.culture || culture;
     // Phase-D anchor identity. `id` keys this NPC's card anchor (matches the
