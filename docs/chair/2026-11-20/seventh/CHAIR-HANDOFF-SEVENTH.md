@@ -934,6 +934,28 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   passes 'owner' only because it is the DM's own file (say who can receive it); every reader of the Tonight
   sheet's facts states its audience (the Foundry crisis page among them), folded into C1 or CF12.
 
+- **PART K, THE BAND FAULT: A PLAIN CORRECTION (2026-11-20, 11:36 UTC, on PAGE-2's census; no dark law):** the misses:
+  Guild Master (4 titles, 221 cards of 9,012) and Thieves Guild Master (34) should read HIGH, Council Member (3
+  titles and the Government shelf) MODERATE; the near miss Wealthiest Merchant (100 cards) IS IN, as its own commit.
+  WHAT MOVES AT BIRTH: `influence`; `power` (low to high is +7); `npcs[].structuralPosition`; and the crisis cast's
+  roles with their twin and receipt, because `crisisCast.js :: exploiterCandidates` and `collaboratorCandidates`
+  break ties by a card's power. READ AT PLAY AND ON THE PAGE, with no stored field: the people page's counts and
+  sort, the important people of the session sheet, quick guide and PDFs, the war figures, hook priority, search.
+  A saved town keeps what it stores. CONDITIONS: a TRIAL through the two-tree tool FIRST, because PAGE-1's trial
+  moved ties in 148 towns and goals in 97 through an extra `_rng()` in `relationshipArchetypes.js` and PAGE-2's
+  census says no draw is added: if an uncorrected card's ties or goals move, that draw goes on its own keyed fork
+  or holds to the old band; a guard (every keyword matches a pool role; every pool role's band stated in one
+  census); the counts for the owner; confined to the corrected roles' cards and the casts they stand in. The
+  owner signs its stored figures at the close.
+- **T3, A TENSION'S SIDES (11:36 UTC, on PAGE-2's design note):** THE SHAPE APPROVED (still `string[]`, two or three; a
+  side that IS a power is its roster spelling verbatim, because readers match it exactly; a phrase that contains a
+  power's name through the names helpers; powers only, no houses). THE SEAT'S REPLACEMENT RULE NARROWED: A POWER IS
+  NEVER CAST IN ANOTHER PARTY'S PART (the governing power named as "the legal class profiting" would be a new
+  fact): where the record holds the party the side MEANS it is named; where it does not, an unnamed actor that
+  presumes no house, or dropped where even that would be false; a duplicate dropped. S6, S7 and L1 build now. S8
+  (generic sides named from the town's powers) IS HELD until FRAME-5 says what its lane reads from a tension's
+  sides and whether more sides that are powers would change which calm towns it frames (the 58 of 330).
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -3336,3 +3358,10 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   towns, census 11). (3) an approved new line named {other} twice and reds the names walker where two cards share a
   name: reworded and APPROVED: "Quietly learn one thing this season from watching {other} at work." PAGE-1: four
   builders on the display half (card, output, safety, magic), brief at ff51769f7.
+- 11:37 UTC · PAGE-2's TWO NOTES RULED (section 2): PART K a plain correction after a trial; T3's shape approved, its replacement
+  rule narrowed, S8 held on a question put to FRAME-5 (what its lane reads from a tension's sides; it was also
+  told that K raises some cards' power and so can change a crisis role where ties are broken by power). TRAD-3:
+  the suite error was the ledger branch missing in a fresh clone; the lighting census re-taken (58df63a71); pushed
+  8f758e067; the gap of (B) closed cheaply (dense ids in served order; nothing else served refers to a rite's
+  genesis id). GOALS-1: the rare deal runs after the wants and replaces a card's whole secret: a guard at that seam
+  for four rows (count 0 today), approved with a tooth.
