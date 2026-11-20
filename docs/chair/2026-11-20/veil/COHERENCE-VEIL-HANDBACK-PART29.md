@@ -504,6 +504,13 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
     THE COUNT: 281,566 by the chair's read at 19:44 (the seat's own estimate ran low); VEIL-29's prompt at 330,000, seated at
     360,000; PART 29 is its whole inheritance.
 
+68. THE CHAIR, 20:14 (a rule for every lane since 20:13; for the JOIN at the close and for the doors' merge, not for "R3"):
+    before the veil lane is joined, ONE `npm run test:ratchet` at the tip (`scripts/check-test-ratchet.mjs`; exclusive mutex;
+    to a log, never through a pipe), its failing tests read BY NAME against `docs/chair/2026-11-20/seventh/ci/RED-AT-LINE.tsv`
+    on `lane/chair-2026-11-08`: a row not on that list is a stored figure the lane moved (named with its cause) or a real red,
+    cured on the lane first. AND one build's first-paint figures beside the line's (1,177,668 raw, 374,676 gzip, 314,472
+    Brotli at 8196e5712): the client twin sits where first paint loads.
+
 ## 2. The bytes (kept current)
 | File | sha256 |
 |---|---|
@@ -636,5 +643,6 @@ RUNNING (subagents of this seat): R3-TELL-3, the tell's cure (`briefs/R3-TELL-3-
 databases `t3_*`); the pool part A rebuild (`/var/tmp/v18/t2/pool-t2sig-2`, a background shell of the seat).
 NEXT, IN ORDER (ruling 67): R3-TELL-3 (with ruling 60's husk, 67 (2)) read once, re-run, merged; IMPORT-DOOR; "R3 <commit>"
 with the LOWER towns by rule and the IMPORT-DOOR line; CHAINS-ROW (64); R6; R4-CURE-2 (+ ruling 53's fold, the brief amended at launch); R5 (59's walker first); R7; L; the doors
-(+ 57 (d)'s test); the stored figures; AT THE CLOSE ruling 67 (3)'s arm and 65's red on the joined tree; E (58 §4: both gates
+(+ 57 (d)'s test); the stored figures; AT THE CLOSE ruling 67 (3)'s arm, 65's red on the joined tree and
+68's ratchet and first-paint figures (also at the doors' merge); E (58 §4: both gates
 on every door; 63: the lit pools before the flip).
