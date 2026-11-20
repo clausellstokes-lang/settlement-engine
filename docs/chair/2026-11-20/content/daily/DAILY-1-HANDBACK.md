@@ -3,7 +3,7 @@
 Lane `lane/daily-1-2026-11-20`; chair session_019yED1SUxGVHyjQnoqoFvQ8; assignment
 `origin/lane/chair-2026-11-08:docs/chair/2026-11-20/seventh/prompts/DAILY-1.txt`.
 
-## State (written 18:48 UTC)
+## State (written 18:53 UTC)
 - Base: 43ab0f5eb (the line) fast-forwarded to bd42d63c7 (`lane/kernel-mix-2026-11-20`, `pickVariantMixed`).
 - 6eef1daa0 brief M1; 8c6b0c85e M1 measure (measures/M1/SUMMARY.md); 3f5e12eb7 briefs LINES-COMMON, L1, L2; 13a4ae656 LINES-1 (lines/L1); 58632c368 LINES-2 (lines/L2, incl. the owner-only dm slot); f8d313591 B-BUILD-COMMON; next commit B1 brief.
 - RUNNING: L1's builder revising per the chair's 18:37 ruling into lines/L1/LINES-1b.md (+probe.1b), owed to the chair as "DAILY-LINES 1b <commit>"; builder B1 in worktree /home/user/wt-daily-b1, branch lane/daily-1-2026-11-20-b1 (C1 dead npc call + parity arm, C2 atoms + needs module + walker, C3 gathering_places). AWAITING the chair's read of LINES-2 (my four calls in the DAILY-LINES message: beat by event name, crime wound falls to next tension, recent_changes without ratings, drop index-0 time words).
@@ -53,3 +53,23 @@ See LINES-1 § THE HOUSES EACH SLOT NEEDS and LINES-2 § HOUSES EACH WORDING NEE
 - QUEUE (one writer on src/domain/dailyLife.js at a time): B1 (running) → B2 dawn_work + child_warnings (LINES-1 as
   amended by LINES-1b) → B3 the five L2 slots + commoner_resentments_dm (LINES-2 as amended by LINES-2b; the dm
   slot's four conditions of 18:26).
+
+## 18:53 UTC — B1 C1 MERGED; B1 stopped at C2 (for the successor: START HERE)
+- C1 de69de46a (worktree /home/user/wt-daily-b1, branch lane/daily-1-2026-11-20-b1, pushed) merged at 8e2534945:
+  the dead `deriveAllNpcProfiles` call gone from `dailyLife.js :: buildContext`; parity arm
+  `tests/domain/dailyLifeNoPeople.test.js` (30 places; equal to the pre-change fixture and to `toPublicSafe`);
+  red re-run by DAILY-1 ("expected 2 to be 1"), green 45/45. `causalState.js :: deriveSocialTrust` still calls
+  `deriveAllNpcProfiles` itself (pinned: dailyLife adds none). 0.37 -> 0.29 ms a call.
+- Censuses at the merge: wiring `node scripts/wiring-census.mjs --check` exit 0 (+ its two walkers); lighting
+  refrozen by its door at 7ed8357ef (`LIGHTING_CENSUS_REFREEZE=DAILY-1 ... npx vitest run
+  tests/lint/sovereigntyLightingContract.walker.test.js` on a clean tree, then plainly: 34/34).
+- RED BY DESIGN: `aiGroundingBundle.freshness` (source hash moves on any dailyLife.js edit): the chair rebuilds at the close.
+- C2 BLOCKED, asked of the chair (18:5x): (1) the 13 granted atoms also need matching rows in
+  `factVocabulary.js :: INSTITUTION_WORDS` (`tests/domain/facts/factVocabulary.test.js` pins equality); (2) no
+  registration route makes new `src/data/dailyLife/` pools green by declaration (`corpusPools` reads only
+  dossierStateProse; presumed-things credits needs only on drawDeclared pools; its register only shrinks); (3) three
+  dailyLife.test pins move under the empty-slot rule. RULED BY DAILY-1: need names that clash are split (L1 `mill` =
+  house -> `millHouse`; L2 `mill` = food source -> `millSource`; L1 `notSmall` = population band ->
+  `notSmallPop`; L2 `notSmall` = tier -> `notSmallTier`).
+- RESUME: on the chair's answers, resume B1 (or a fresh builder in /home/user/wt-daily-b1 after `git merge` of the
+  lane) at C2, then C3; B2 and B3 per the queue above. L2's builder is applying the 18:47 ruling (LINES-2b, owed).
