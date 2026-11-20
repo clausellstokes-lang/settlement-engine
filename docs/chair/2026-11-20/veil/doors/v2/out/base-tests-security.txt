@@ -1,0 +1,12 @@
+[run] start 2026-11-20T02:22:49Z at cca49cb8d 1 dirty paths
+[run] cmd: npx vitest run tests/security
+
+ RUN  v4.1.8 /home/user/settlement-engine
+
+
+ Test Files  158 passed | 1 skipped (159)
+      Tests  2003 passed | 1 skipped (2004)
+   Start at  02:22:50
+   Duration  874.11s (transform 8.68s, setup 2.68s, import 16.54s, tests 2522.31s, environment 590ms)
+
+[run] end 2026-11-20T02:37:24Z exit 0
