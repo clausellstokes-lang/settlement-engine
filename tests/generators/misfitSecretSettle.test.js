@@ -15,7 +15,9 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 import * as npcData from '../../src/data/npcData.js';
 import * as leaderSecret from '../../src/generators/npc/factionLeaderSecret.js';
-import { generateSingleNPC } from '../../src/generators/npcGenerator.js';
+import { generateSingleNPC, mergeNPCLists } from '../../src/generators/npcGenerator.js';
+import { hasMarketInstitution } from '../../src/domain/facts/market.js';
+import { clearActiveRng, setActiveRng } from '../../src/kernel/rngContext.js';
 import { onStream } from '../../src/generators/people/representatives.js';
 import { classOfRole, ROLE_CLASS } from '../../src/domain/roles/roleClass.js';
 import { createPRNG } from '../../src/kernel/prng.js';
@@ -36,10 +38,19 @@ const face = (/** @type {string} */ seed, /** @type {string} */ role, /** @type 
 /** The test's own reading of admission (the tags, the principled temperament's venal words). */
 const admitted = (/** @type {{ secret: string }} */ row, /** @type {string | null} */ cls, /** @type {string | null} */ temperament) =>
   !(Object.hasOwn(TAGS, row.secret) && cls !== null && !TAGS[row.secret].includes(cls)) && !(temperament === 'principled' && VENAL.test(row.secret));
-/** The next admitted, unheld line after `at` in `rows` (a rewrite's words passed), or null. */
-const nextLine = (/** @type {any[]} */ rows, /** @type {number} */ at, /** @type {string | null} */ cls, /** @type {string | null} */ temperament, /** @type {Set<string>} */ held) => {
-  for (let k = 1; k < rows.length; k += 1) { const r = rows[(at + k) % rows.length]; if (admitted(r, cls, temperament) && !held.has(r.secret.trim()) && !/thieves|guild|merchant/i.test(`${r.secret} ${r.stakes}`)) return r; }
+/** The next admitted line after `at` in `rows` that no card holds as the town prints it (`carry`; a guild row passed), or null. */
+const nextLine = (/** @type {any[]} */ rows, /** @type {number} */ at, /** @type {string | null} */ cls, /** @type {string | null} */ temperament, /** @type {Set<string>} */ held, carry = (/** @type {string} */ t) => t) => {
+  for (let k = 1; k < rows.length; k += 1) { const r = rows[(at + k) % rows.length]; if (admitted(r, cls, temperament) && !held.has(carry(r.secret).trim()) && !/thieves|guild/i.test(`${r.secret} ${r.stakes}`)) return r; }
   return null;
+};
+/**
+ * The town's own rewrite of a row's text, COMPUTED by the merge that writes it (`npcGenerator.js :: mergeNPCLists`, its
+ * no-market rule): a card holding `text` beside the town's houses, under a power of no crime.
+ * @param {unknown[]} institutions @returns {(text: string) => string}
+ */
+const carryOf = (institutions) => (text) => {
+  const prev = setActiveRng(createPRNG('s9-carry'));
+  try { return mergeNPCLists([{ role: 'the carrier', secret: { what: text, stakes: '' } }], [{ faction: 'Elder Council', isGoverning: true, category: 'government', power: 10 }], institutions, 'village', {})[0].secret.what; } finally { clearActiveRng(prev); }
 };
 const withoutSecret = (/** @type {Record<string, any>} */ card) => JSON.stringify({ ...card, secret: undefined });
 
@@ -105,12 +116,15 @@ describe('S9 · a misfit takes its next admitted line, draw-free, after the deal
 });
 
 describe('S9 · the born towns', () => {
-  const SEEDS = ['hxd-city-3', 'hxd-metropolis-7', 'hxd-town-11', 'hxd-village-2'];
+  // r2r-village-12 (no market; born in the r2r dials of tests/generators/informantNoThievesGuild.test.js): its priest holds the
+  // protection scheme in the no-market rewrite (households), a clergy face's misfit the merge rewrote before the pass
+  const SEEDS = ['hxd-city-3', 'hxd-metropolis-7', 'hxd-town-11', 'hxd-village-2', 'r2r-village-12'];
+  const R2R = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
   /** @type {Record<string, any>} */
   const towns = {};
   beforeAll(async () => {
     await loadGenerationLawPayloads();
-    for (const seed of SEEDS) towns[seed] = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: seed.split('-')[1] }), null, { seed, customContent: {} });
+    for (const seed of SEEDS) towns[seed] = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...(seed.startsWith('r2r-') ? R2R : {}), settType: seed.split('-')[1] }), null, { seed, customContent: {} });
   }, 120000);
 
   it('every card whose secret is a row of its noted pool holds an admitted line, or none was left to it', () => {
@@ -118,18 +132,30 @@ describe('S9 · the born towns', () => {
     let noted = 0;
     for (const seed of SEEDS) {
       const npcs = towns[seed].npcs;
+      const carry = carryOf(towns[seed].institutions || []);
       const held = new Set(npcs.map((/** @type {any} */ n) => n.secret?.what).filter(Boolean).map((/** @type {string} */ w) => w.trim()));
       for (const card of npcs) {
         const source = F.secretSourceOf?.(card);
         if (!source) continue;
         noted += 1;
-        const at = source.rows.findIndex((/** @type {any} */ r) => r.secret === card.secret?.what);
+        const at = source.rows.findIndex((/** @type {any} */ r) => r.secret === card.secret?.what || carry(r.secret) === card.secret?.what);
         if (at < 0 || admitted(source.rows[at], source.holderClass, card.personality?.dominant ?? null)) continue;
         if (BOUND.has(JSON.stringify(card.presentation))) continue; // its presentation was drawn from its secret's words: it keeps it
-        if (nextLine(source.rows, at, source.holderClass, card.personality?.dominant ?? null, held)) faults.push(`${seed} ${card.id} [${card.title}]: ${card.secret.what}`);
+        if (nextLine(source.rows, at, source.holderClass, card.personality?.dominant ?? null, held, carry)) faults.push(`${seed} ${card.id} [${card.title}]: ${card.secret.what}`);
       }
     }
     expect(faults).toEqual([]);
     expect(noted, 'the deal notes its pool').toBeGreaterThan(0);
+  });
+
+  it('a card holding the no-market rewrite of a row it is refused is settled too (r2r-village-12, a town with no market)', () => {
+    const town = towns['r2r-village-12'];
+    expect(hasMarketInstitution(town.institutions || []), 'the anchor town holds no market').toBe(false);
+    const carry = carryOf(town.institutions || []);
+    const scheme = (/** @type {any[]} */ (N.NPC_CRIMINAL_SECRETS_BY_HOLDER.any.criminal)).find((r) => Object.hasOwn(TAGS, r.secret) && carry(r.secret) !== r.secret);
+    expect(scheme, 'a tagged row the no-market rewrite changes').toBeTruthy();
+    const holders = town.npcs.filter((/** @type {any} */ n) => n.secret?.what === carry(scheme.secret));
+    const refused = holders.filter((/** @type {any} */ n) => { const src = F.secretSourceOf?.(n); return !src || !admitted(scheme, src.holderClass, n.personality?.dominant ?? null); });
+    expect(refused.map((/** @type {any} */ n) => `${n.id} [${n.title}]`), 'no card the row refuses holds its rewrite').toEqual([]);
   });
 });

@@ -6,7 +6,9 @@ The table is `src/data/npcData.js :: CRIMINAL_SECRET_HOLDER_TAGS`, at the end of
 1. the next row after its own in the same pool, in row order, wrapping, that the card is admitted to and that no card of the town holds;
 2. if none, it keeps its draw (counted).
 
-Two more refusals keep the card's other fields true: a card whose presentation was drawn from its secret's words (the three secret-bound modes of `getStressHistory`) keeps its secret, and a row a draw-free rewrite reads (thieves, guild, merchant) is passed.
+Two more refusals keep the card's other fields true: a card whose presentation was drawn from its secret's words (the three secret-bound modes of `getStressHistory`) keeps its secret, and a row the guild rewrite reads (thieves, guild) is passed.
+
+**A town with no market.** The merge has already rewritten the protection scheme's merchants as households (`npcGenerator.js :: withoutMarketWords`). The pass reads a card's text as its row or that row's rewrite, and prints a settled row through the same rewrite (secret and stakes).
 
 **The temperament.** The same predicate (`admitsSecretRow`) refuses a venal row to a card whose drawn temperament is `principled`. "Venal" means the `incorruptible` words of `SECRETS_DENIED_BY_TEMPERAMENT`; that table is read, not edited. L4's office rows join by being noted as the card's pool when L4 settles them.
 

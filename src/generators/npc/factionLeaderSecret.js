@@ -203,8 +203,8 @@ export function secretSourceOf(card) {
 /** The presentation modes a secret's words draw (`npcGenerator.js :: getStressHistory`; as `people/rareSecrets.js` reads them). */
 const SECRET_BOUND_PRESENTATIONS = new Set(['dangerous_presents_safe', 'compromised_presents_professional', 'significant_presents_ordinary']
   .flatMap((k) => /** @type {Record<string, unknown[]>} */ (NPC_PRESENTATION_MODES)[k] || []).map((p) => JSON.stringify(p)));
-/** The words a draw-free rewrite of the text reads (`npcGenerator.js :: mergeNPCLists`, `crimeSignal.js :: withTownsOwnUnderworld`). */
-const REWRITTEN_WORDS = /thieves|guild|merchant/i;
+/** The guild words a draw-free rewrite of the text reads (`npcGenerator.js :: mergeNPCLists`, `crimeSignal.js :: withTownsOwnUnderworld`). */
+const GUILD_REWRITTEN_WORDS = /thieves|guild/i;
 
 /**
  * S9 AS A POST-PASS (PAGE-6, 2026-11-20; S9-POST.md, the chair's ruling of 13:50): A SECRET THAT FITS ITS HOLDER. Run ONCE
@@ -214,13 +214,18 @@ const REWRITTEN_WORDS = /thieves|guild|merchant/i;
  * is not admitted to (`admitsSecretRow`: a tag that does not name its class; a venal row to a principled card) takes ITS
  * NEXT ADMITTED LINE THAT NO CARD OF THE TOWN HOLDS: the next row after its own in the same pool, in row order, wrapping.
  * Two more refusals keep every other field of the card true: a card whose presentation was drawn from its secret's words
- * (the three secret-bound modes) keeps its secret; a row a draw-free rewrite reads (thieves, guild, merchant) is passed.
+ * (the three secret-bound modes) keeps its secret; a row the guild rewrite reads (thieves, guild) is passed.
+ * THE TOWN'S CARRY (`options.carry`): the draw-free rewrite the merge gave the town's secrets before the pass (a town with
+ * no market: `npcGenerator.js :: withoutMarketWords`). A card's text is its row's or the row's carried form; a settled row
+ * is printed carried (its secret and its stakes), and held as carried.
  * None left: the card keeps its draw (counted). No draw: a card that is no misfit keeps its secret byte for byte, and no
  * other card's draw reads the result. Mutates the moved cards' `secret`; returns the receipt.
  * @param {Array<Record<string, any>> | null | undefined} cards the town's whole cast
+ * @param {{ carry?: (text: string) => string }} [options]
  * @returns {{ misfits: number, moved: number, kept: number }}
  */
-export function settleMisfitSecrets(cards) {
+export function settleMisfitSecrets(cards, options = {}) {
+  const carry = typeof options.carry === 'function' ? options.carry : (/** @type {string} */ text) => text;
   const receipt = { misfits: 0, moved: 0, kept: 0 };
   if (!Array.isArray(cards)) return receipt;
   const held = new Set(cards.map((c) => c?.secret?.what).filter((w) => typeof w === 'string').map((w) => w.trim()));
@@ -229,8 +234,8 @@ export function settleMisfitSecrets(cards) {
     const what = card?.secret?.what;
     if (!source || typeof what !== 'string') continue;
     const { rows, holderClass } = source;
-    const at = rows.findIndex((r) => r.secret === what);
-    if (at < 0) continue; // the overlay or a rewrite has replaced the dealt text: not this pool's row
+    const at = rows.findIndex((r) => r.secret === what || carry(r.secret) === what);
+    if (at < 0) continue; // the overlay or a guild rewrite has replaced the dealt text: not this pool's row
     const temperament = card.personality?.dominant ?? null;
     if (admitsSecretRow(rows[at], holderClass, temperament)) continue;
     receipt.misfits += 1;
@@ -238,14 +243,23 @@ export function settleMisfitSecrets(cards) {
     if (!SECRET_BOUND_PRESENTATIONS.has(JSON.stringify(card.presentation ?? null))) {
       for (let k = 1; k < rows.length && !next; k += 1) {
         const r = rows[(at + k) % rows.length];
-        if (admitsSecretRow(r, holderClass, temperament) && !held.has(r.secret.trim()) && !REWRITTEN_WORDS.test(`${r.secret} ${r.stakes}`)) next = r;
+        if (admitsSecretRow(r, holderClass, temperament) && !held.has(carry(r.secret).trim()) && !GUILD_REWRITTEN_WORDS.test(`${r.secret} ${r.stakes}`)) next = r;
       }
     }
     if (!next) { receipt.kept += 1; continue; }
     held.delete(what.trim());
-    held.add(next.secret.trim());
-    card.secret = { what: next.secret, stakes: next.stakes };
+    held.add(carry(next.secret).trim());
+    card.secret = { what: carry(next.secret), stakes: carry(next.stakes) };
     receipt.moved += 1;
   }
   return receipt;
 }
+
+/**
+ * R2-CODE-A-7 (step 1 item 4; the chair's ruling): a town with no market hears the protection scheme of its households, each
+ * rewrite the whole phrase as the pool spells it; draw-free. Read by `npcGenerator.js :: mergeNPCLists` (its one writer) and, since S9 (PAGE-6),
+ * by the town's secret post-pass (`settleMisfitSecrets`), which carries a settled row the same way. Lifted out of
+ * mergeNPCLists unchanged, so one spelling serves both (here, beside the pass, so the merge's file keeps its size ceiling).
+ * @template T @param {T} text @returns {T}
+ */
+export const withoutMarketWords = (text) => /** @type {T} */ (/** @type {unknown} */ (typeof text !== 'string' ? text : text.replace("the very merchants they're supposed to serve", "the very households they're supposed to serve").replace('the merchants have been keeping records', 'the households have been keeping records')));
