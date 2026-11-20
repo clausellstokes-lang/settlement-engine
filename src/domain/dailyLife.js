@@ -281,7 +281,7 @@ const rowName = (inst) => String(nativeSemanticName(/** @type {object} */ (inst)
  * @param {DailyLifeSettlement} s @returns {RosterRow[]}
  */
 function nameableRows(s) {
-  return /** @type {RosterRow[]} */ (liveInstitutions(/** @type {any} */ (s))).filter((i) => !isHideableHouse(/** @type {Record<string, unknown>} */ (i)) && !ACCESS_ONLY.test(rowName(i)));
+  return /** @type {RosterRow[]} */ (liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (/** @type {unknown} */ (s)))).filter((i) => !isHideableHouse(/** @type {Record<string, unknown>} */ (i)) && !ACCESS_ONLY.test(rowName(i)));
 }
 
 /** @param {RosterRow[]} rows @param {RegExp} re @param {(i: RosterRow) => boolean} [extra] @returns {RosterRow|undefined} */
@@ -309,7 +309,7 @@ const housesNamedIn = (text) => [...text.matchAll(/\{(\w+)\}/g)].map((m) => m[1]
 /** @typedef {(k: string) => RosterRow|undefined} HouseFinder */
 
 /** @param {DailyLifeSettlement} s @returns {FactsLike} the record's fact homes */
-const factsFor = (s) => /** @type {FactsLike} */ (/** @type {unknown} */ (factsOf(/** @type {any} */ (s))));
+const factsFor = (s) => /** @type {FactsLike} */ (/** @type {unknown} */ (factsOf(s)));
 
 /**
  * One record's house finder: a `{placeholder}` → its row among the nameable rows, each looked up once.
