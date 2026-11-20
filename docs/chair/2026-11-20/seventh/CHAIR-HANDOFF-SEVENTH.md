@@ -1145,6 +1145,27 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   after a power's name, so it needs nothing of point 82; the totality of the dead's-cause kind phrases becomes a
   COMMITTED arm in unit 5 (unit 4b proved it by a scratch test, deleted).
 
+- **THE PUSH HAZARD, PROVEN ON THE CHAIR'S OWN WORKTREE (2026-11-20, 13:34 to 13:44 UTC), AND THE RULES FROM IT:** THE
+  MECHANISM, each step read from the processes, the logs and the refs: (1) over HTTPS a push sends the branch's
+  tip AS IT STANDS AT THE TRANSFER, not the tip the push began with, while its own report and the tracking ref
+  show the older one (push 112 began at e3c3d6def at 13:30; the chair committed d656ddc07 at 13:33:57 during its
+  hook; origin then held d656ddc07); (2) the NEXT push therefore had nothing to send; (3) `.husky/pre-push`, given
+  no ref on its input, takes its NON-lane path and runs `npm run check`, the whole suite; (4) that suite runs
+  INSIDE GIT'S HOOK ENVIRONMENT (`GIT_DIR` set), and two fixture tests of the packets' tool then wrote INTO THE
+  REAL REPOSITORY at 13:39:30: FOUR COMMITS by "Fixture <fixture@example.test>" on the checked-out branch (each a
+  tree of six fixture files, so every real file read as untracked), and in the SHARED config `core.bare = true`,
+  the fixture identity and `commit.gpgsign = false`. NOTHING REACHED ORIGIN (every lane searched by that author:
+  only old commits of September, October and 2026-11-15, where an earlier seat named the same hazard). THE REPAIR
+  (13:42 to 13:44): the check killed; the damaged config copied to the scratchpad, then `core.bare` set false and
+  the fixture lines removed; the local branch put back on d656ddc07 by a mixed reset (working files untouched;
+  status clean; identity "Claude"); the main checkout and the two other worktrees read clean. VEIL-26 met step 3
+  at 13:05 (its check killed at twenty minutes): told to read its own config. THE RULES, FOR THE CHAIR AND EVERY
+  SEAT: NEVER COMMIT ON A BRANCH WHILE ITS PUSH IS IN FLIGHT; before every push `git ls-remote` and push only if
+  the remote differs from the local tip; a push log that shows `npm run check` is killed at once and the config
+  (`core.bare`, a local `user.email`) and the branch's last authors are read. FOR THE CLOSE, A SMALL UNIT ON THE
+  HOOK (the owner told): it clears git's hook environment before it runs anything, and a push with nothing to
+  send runs nothing.
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
