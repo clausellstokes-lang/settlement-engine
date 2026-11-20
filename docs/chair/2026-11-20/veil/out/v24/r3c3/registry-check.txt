@@ -1,0 +1,6 @@
+[gate-tail] start:  10:32:33 up  1:39,  0 user,  load average: 2.20, 2.23, 1.97 · cores: 4
+roster-choice registry: registry.json and rulings.json are the module's
+[gate-tail] end:  10:32:33 up  1:39,  0 user,  load average: 2.20, 2.23, 1.97
+[gate-tail] full log: /tmp/gate-tail.30012.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
+exit=0

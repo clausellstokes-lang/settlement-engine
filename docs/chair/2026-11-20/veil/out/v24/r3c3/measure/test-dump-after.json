@@ -1,0 +1,3415 @@
+{
+ "control": {
+  "readable": 76420,
+  "rows": 62,
+  "withheld": 0,
+  "goals": 0,
+  "shownGoals": 276
+ },
+ "rows": [
+  {
+   "seed": "server-veil-city-infiltrated-0",
+   "tag": "unmarked/live",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "City Council",
+     "Thieves' Guild",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ],
+    "l": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-city-infiltrated-0",
+   "tag": "default/live",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ],
+    "l": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-city-infiltrated-0",
+   "tag": "default/snapshot",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ],
+    "l": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-city-infiltrated-0",
+   "tag": "default/old-copy",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ],
+    "l": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-city-infiltrated-0",
+   "tag": "default+dm/live",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 21,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": {
+      "intent": {
+       "long": {
+        "family": "RANK",
+        "key": "secure_office",
+        "kind": "enter",
+        "target": {
+         "id": "Craft Guilds",
+         "kind": "power"
+        }
+       },
+       "short": {
+        "family": "TIES",
+        "key": "protect_ally",
+        "kind": "ally",
+        "target": {
+         "id": "npc_customs_house",
+         "kind": "npc"
+        }
+       }
+      },
+      "long": "Reach the top of Craft Guilds by the long road, one earned favour at a time.",
+      "short": "Warn Li He of any trouble before it reaches them."
+     }
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": {
+      "intent": {
+       "long": {
+        "family": "RANK",
+        "key": "secure_office",
+        "kind": "enter",
+        "target": {
+         "id": "Craft Guilds",
+         "kind": "power"
+        }
+       },
+       "short": {
+        "family": "TIES",
+        "key": "protect_ally",
+        "kind": "ally",
+        "target": {
+         "id": "npc_customs_house",
+         "kind": "npc"
+        }
+       }
+      },
+      "long": "Reach the top of Craft Guilds by the long road, one earned favour at a time.",
+      "short": "Warn Li He of any trouble before it reaches them."
+     }
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "The Independent Bloc",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ],
+    "l": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-city-infiltrated-0",
+   "tag": "default+dm/snapshot",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 21,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": {
+      "intent": {
+       "long": {
+        "family": "RANK",
+        "key": "secure_office",
+        "kind": "enter",
+        "target": {
+         "id": "Craft Guilds",
+         "kind": "power"
+        }
+       },
+       "short": {
+        "family": "TIES",
+        "key": "protect_ally",
+        "kind": "ally",
+        "target": {
+         "id": "npc_customs_house",
+         "kind": "npc"
+        }
+       }
+      },
+      "long": "Reach the top of Craft Guilds by the long road, one earned favour at a time.",
+      "short": "Warn Li He of any trouble before it reaches them."
+     }
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": {
+      "intent": {
+       "long": {
+        "family": "RANK",
+        "key": "secure_office",
+        "kind": "enter",
+        "target": {
+         "id": "Craft Guilds",
+         "kind": "power"
+        }
+       },
+       "short": {
+        "family": "TIES",
+        "key": "protect_ally",
+        "kind": "ally",
+        "target": {
+         "id": "npc_customs_house",
+         "kind": "npc"
+        }
+       }
+      },
+      "long": "Reach the top of Craft Guilds by the long road, one earned favour at a time.",
+      "short": "Warn Li He of any trouble before it reaches them."
+     }
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "The Independent Bloc",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ],
+    "l": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-city-infiltrated-0",
+   "tag": "groupings/live",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ],
+    "l": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-city-infiltrated-0",
+   "tag": "groupings/snapshot",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ],
+    "l": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-city-infiltrated-0",
+   "tag": "switches/live",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ],
+    "l": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-city-infiltrated-0",
+   "tag": "switches/snapshot",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ],
+    "l": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-city-infiltrated-0",
+   "tag": "houses/live",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ],
+    "l": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-city-infiltrated-0",
+   "tag": "houses/snapshot",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ],
+    "l": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-city-infiltrated-0",
+   "tag": "faces/live",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ],
+    "l": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-city-infiltrated-0",
+   "tag": "faces/snapshot",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ],
+    "l": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-city-infiltrated-0",
+   "tag": "npcFields/live",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ],
+    "l": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-city-infiltrated-0",
+   "tag": "npcFields/snapshot",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ],
+    "l": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-city-infiltrated-0",
+   "tag": "powerFields/live",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ],
+    "l": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-city-infiltrated-0",
+   "tag": "powerFields/snapshot",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ],
+    "l": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-city-infiltrated-0",
+   "tag": "otherFields/live",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ],
+    "l": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-city-infiltrated-0",
+   "tag": "otherFields/snapshot",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ],
+    "l": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-city-infiltrated-0",
+   "tag": "all/live",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ],
+    "l": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-city-infiltrated-0",
+   "tag": "all/snapshot",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ],
+    "l": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-city-infiltrated-0",
+   "tag": "all/old-copy",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ],
+    "l": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-city-infiltrated-0",
+   "tag": "all+dm/live",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "The Independent Bloc",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ],
+    "l": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-city-infiltrated-0",
+   "tag": "all+dm/snapshot",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "The Independent Bloc",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ],
+    "l": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-city-infiltrated-0",
+   "tag": "opened/live",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "City Council",
+     "Thieves' Guild",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ],
+    "l": [
+     "City Council",
+     "Thieves' Guild",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-city-infiltrated-0",
+   "tag": "opened/snapshot",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "City Council",
+     "Thieves' Guild",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ],
+    "l": [
+     "City Council",
+     "Thieves' Guild",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-city-infiltrated-0",
+   "tag": "opened/old-copy",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "City Council",
+     "Thieves' Guild",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ],
+    "l": [
+     "City Council",
+     "Thieves' Guild",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-city-infiltrated-0",
+   "tag": "opened+dm/live",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 35,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": {
+      "intent": {
+       "long": {
+        "family": "TIES",
+        "key": "collect_debt",
+        "kind": "creditor",
+        "target": {
+         "id": "npc_butchers_3_8",
+         "kind": "npc"
+        }
+       },
+       "short": {
+        "family": "ALLEGIANCE",
+        "key": "serve_patron",
+        "kind": "serve_fear",
+        "target": {
+         "id": "Thieves' Guild",
+         "kind": "power"
+        }
+       }
+      },
+      "long": "Keep Koharu Kim in debt for as long as it is useful.",
+      "short": "Keep Cheng Jung satisfied, so that what is known stays hidden."
+     },
+     "npc_smelter": {
+      "intent": {
+       "long": {
+        "family": "RANK",
+        "key": "secure_office",
+        "kind": "enter",
+        "target": {
+         "id": "Craft Guilds",
+         "kind": "power"
+        }
+       },
+       "short": {
+        "family": "TIES",
+        "key": "protect_ally",
+        "kind": "ally",
+        "target": {
+         "id": "npc_customs_house",
+         "kind": "npc"
+        }
+       }
+      },
+      "long": "Reach the top of Craft Guilds by the long road, one earned favour at a time.",
+      "short": "Warn Li He of any trouble before it reaches them."
+     }
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": {
+      "intent": {
+       "long": {
+        "family": "TIES",
+        "key": "collect_debt",
+        "kind": "creditor",
+        "target": {
+         "id": "npc_butchers_3_8",
+         "kind": "npc"
+        }
+       },
+       "short": {
+        "family": "ALLEGIANCE",
+        "key": "serve_patron",
+        "kind": "serve_fear",
+        "target": {
+         "id": "Thieves' Guild",
+         "kind": "power"
+        }
+       }
+      },
+      "long": "Keep Koharu Kim in debt for as long as it is useful.",
+      "short": "Keep Cheng Jung satisfied, so that what is known stays hidden."
+     },
+     "npc_smelter": {
+      "intent": {
+       "long": {
+        "family": "RANK",
+        "key": "secure_office",
+        "kind": "enter",
+        "target": {
+         "id": "Craft Guilds",
+         "kind": "power"
+        }
+       },
+       "short": {
+        "family": "TIES",
+        "key": "protect_ally",
+        "kind": "ally",
+        "target": {
+         "id": "npc_customs_house",
+         "kind": "npc"
+        }
+       }
+      },
+      "long": "Reach the top of Craft Guilds by the long road, one earned favour at a time.",
+      "short": "Warn Li He of any trouble before it reaches them."
+     }
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "City Council",
+     "Thieves' Guild",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "The Independent Bloc",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ],
+    "l": [
+     "City Council",
+     "Thieves' Guild",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-city-infiltrated-0",
+   "tag": "opened+dm/snapshot",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 35,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": {
+      "intent": {
+       "long": {
+        "family": "TIES",
+        "key": "collect_debt",
+        "kind": "creditor",
+        "target": {
+         "id": "npc_butchers_3_8",
+         "kind": "npc"
+        }
+       },
+       "short": {
+        "family": "ALLEGIANCE",
+        "key": "serve_patron",
+        "kind": "serve_fear",
+        "target": {
+         "id": "Thieves' Guild",
+         "kind": "power"
+        }
+       }
+      },
+      "long": "Keep Koharu Kim in debt for as long as it is useful.",
+      "short": "Keep Cheng Jung satisfied, so that what is known stays hidden."
+     },
+     "npc_smelter": {
+      "intent": {
+       "long": {
+        "family": "RANK",
+        "key": "secure_office",
+        "kind": "enter",
+        "target": {
+         "id": "Craft Guilds",
+         "kind": "power"
+        }
+       },
+       "short": {
+        "family": "TIES",
+        "key": "protect_ally",
+        "kind": "ally",
+        "target": {
+         "id": "npc_customs_house",
+         "kind": "npc"
+        }
+       }
+      },
+      "long": "Reach the top of Craft Guilds by the long road, one earned favour at a time.",
+      "short": "Warn Li He of any trouble before it reaches them."
+     }
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": {
+      "intent": {
+       "long": {
+        "family": "TIES",
+        "key": "collect_debt",
+        "kind": "creditor",
+        "target": {
+         "id": "npc_butchers_3_8",
+         "kind": "npc"
+        }
+       },
+       "short": {
+        "family": "ALLEGIANCE",
+        "key": "serve_patron",
+        "kind": "serve_fear",
+        "target": {
+         "id": "Thieves' Guild",
+         "kind": "power"
+        }
+       }
+      },
+      "long": "Keep Koharu Kim in debt for as long as it is useful.",
+      "short": "Keep Cheng Jung satisfied, so that what is known stays hidden."
+     },
+     "npc_smelter": {
+      "intent": {
+       "long": {
+        "family": "RANK",
+        "key": "secure_office",
+        "kind": "enter",
+        "target": {
+         "id": "Craft Guilds",
+         "kind": "power"
+        }
+       },
+       "short": {
+        "family": "TIES",
+        "key": "protect_ally",
+        "kind": "ally",
+        "target": {
+         "id": "npc_customs_house",
+         "kind": "npc"
+        }
+       }
+      },
+      "long": "Reach the top of Craft Guilds by the long road, one earned favour at a time.",
+      "short": "Warn Li He of any trouble before it reaches them."
+     }
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "City Council",
+     "Thieves' Guild",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "The Independent Bloc",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ],
+    "l": [
+     "City Council",
+     "Thieves' Guild",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-city-infiltrated-0",
+   "tag": "mixed/live",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ],
+    "l": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-city-infiltrated-0",
+   "tag": "mixed/snapshot",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ],
+    "l": [
+     "City Council",
+     "Merchant Guilds",
+     "Arcane Orders",
+     "Military/Guard",
+     "Craft Guilds",
+     "Noble Families"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-metropolis-3",
+   "tag": "unmarked/live",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Thieves' Guild",
+     "Noble Houses",
+     "Craft Guilds"
+    ],
+    "l": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-metropolis-3",
+   "tag": "default/live",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ],
+    "l": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-metropolis-3",
+   "tag": "default/snapshot",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ],
+    "l": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-metropolis-3",
+   "tag": "default/old-copy",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ],
+    "l": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-metropolis-3",
+   "tag": "default+dm/live",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 30,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ],
+    "l": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-metropolis-3",
+   "tag": "default+dm/snapshot",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 30,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ],
+    "l": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-metropolis-3",
+   "tag": "groupings/live",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ],
+    "l": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-metropolis-3",
+   "tag": "groupings/snapshot",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ],
+    "l": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-metropolis-3",
+   "tag": "switches/live",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ],
+    "l": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-metropolis-3",
+   "tag": "switches/snapshot",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ],
+    "l": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-metropolis-3",
+   "tag": "houses/live",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ],
+    "l": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-metropolis-3",
+   "tag": "houses/snapshot",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ],
+    "l": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-metropolis-3",
+   "tag": "faces/live",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ],
+    "l": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-metropolis-3",
+   "tag": "faces/snapshot",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ],
+    "l": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-metropolis-3",
+   "tag": "npcFields/live",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ],
+    "l": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-metropolis-3",
+   "tag": "npcFields/snapshot",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ],
+    "l": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-metropolis-3",
+   "tag": "powerFields/live",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ],
+    "l": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-metropolis-3",
+   "tag": "powerFields/snapshot",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ],
+    "l": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-metropolis-3",
+   "tag": "otherFields/live",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ],
+    "l": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-metropolis-3",
+   "tag": "otherFields/snapshot",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ],
+    "l": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-metropolis-3",
+   "tag": "all/live",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ],
+    "l": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-metropolis-3",
+   "tag": "all/snapshot",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ],
+    "l": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-metropolis-3",
+   "tag": "all/old-copy",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ],
+    "l": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-metropolis-3",
+   "tag": "all+dm/live",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ],
+    "l": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-metropolis-3",
+   "tag": "all+dm/snapshot",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ],
+    "l": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-metropolis-3",
+   "tag": "opened/live",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Thieves' Guild",
+     "Noble Houses",
+     "Craft Guilds"
+    ],
+    "l": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Thieves' Guild",
+     "Noble Houses",
+     "Craft Guilds"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-metropolis-3",
+   "tag": "opened/snapshot",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Thieves' Guild",
+     "Noble Houses",
+     "Craft Guilds"
+    ],
+    "l": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Thieves' Guild",
+     "Noble Houses",
+     "Craft Guilds"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-metropolis-3",
+   "tag": "opened/old-copy",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Thieves' Guild",
+     "Noble Houses",
+     "Craft Guilds"
+    ],
+    "l": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Thieves' Guild",
+     "Noble Houses",
+     "Craft Guilds"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-metropolis-3",
+   "tag": "opened+dm/live",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 52,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": {
+      "intent": {
+       "long": {
+        "family": "RANK",
+        "key": "secure_office",
+        "kind": "climb",
+        "target": {
+         "id": "npc_craft_guilds_100_150",
+         "kind": "npc"
+        }
+       },
+       "short": {
+        "family": "ALLEGIANCE",
+        "key": "serve_patron",
+        "kind": "serve_greed",
+        "target": {
+         "id": "Thieves' Guild",
+         "kind": "power"
+        }
+       }
+      },
+      "long": "Rise past Mamata Prasad in Craft Guilds on their own merit, owing no one for the climb.",
+      "short": "Prove to Parvati Chaudhary that they are worth a bigger cut."
+     }
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": {
+      "intent": {
+       "long": {
+        "family": "RANK",
+        "key": "secure_office",
+        "kind": "climb",
+        "target": {
+         "id": "npc_craft_guilds_100_150",
+         "kind": "npc"
+        }
+       },
+       "short": {
+        "family": "ALLEGIANCE",
+        "key": "serve_patron",
+        "kind": "serve_greed",
+        "target": {
+         "id": "Thieves' Guild",
+         "kind": "power"
+        }
+       }
+      },
+      "long": "Rise past Mamata Prasad in Craft Guilds on their own merit, owing no one for the climb.",
+      "short": "Prove to Parvati Chaudhary that they are worth a bigger cut."
+     }
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Thieves' Guild",
+     "Noble Houses",
+     "Craft Guilds"
+    ],
+    "l": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Thieves' Guild",
+     "Noble Houses",
+     "Craft Guilds"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-metropolis-3",
+   "tag": "opened+dm/snapshot",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 52,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": {
+      "intent": {
+       "long": {
+        "family": "RANK",
+        "key": "secure_office",
+        "kind": "climb",
+        "target": {
+         "id": "npc_craft_guilds_100_150",
+         "kind": "npc"
+        }
+       },
+       "short": {
+        "family": "ALLEGIANCE",
+        "key": "serve_patron",
+        "kind": "serve_greed",
+        "target": {
+         "id": "Thieves' Guild",
+         "kind": "power"
+        }
+       }
+      },
+      "long": "Rise past Mamata Prasad in Craft Guilds on their own merit, owing no one for the climb.",
+      "short": "Prove to Parvati Chaudhary that they are worth a bigger cut."
+     }
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": {
+      "intent": {
+       "long": {
+        "family": "RANK",
+        "key": "secure_office",
+        "kind": "climb",
+        "target": {
+         "id": "npc_craft_guilds_100_150",
+         "kind": "npc"
+        }
+       },
+       "short": {
+        "family": "ALLEGIANCE",
+        "key": "serve_patron",
+        "kind": "serve_greed",
+        "target": {
+         "id": "Thieves' Guild",
+         "kind": "power"
+        }
+       }
+      },
+      "long": "Rise past Mamata Prasad in Craft Guilds on their own merit, owing no one for the climb.",
+      "short": "Prove to Parvati Chaudhary that they are worth a bigger cut."
+     }
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Thieves' Guild",
+     "Noble Houses",
+     "Craft Guilds"
+    ],
+    "l": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Thieves' Guild",
+     "Noble Houses",
+     "Craft Guilds"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-metropolis-3",
+   "tag": "mixed/live",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ],
+    "l": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ]
+   }
+  },
+  {
+   "seed": "server-veil-metropolis-3",
+   "tag": "mixed/snapshot",
+   "g2n": 0,
+   "l2n": 0,
+   "g2shown": 0,
+   "l2shown": 0,
+   "ref": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "now": {
+    "g": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    },
+    "l": {
+     "npc_mages_guild": null,
+     "npc_smelter": null
+    }
+   },
+   "servedPowers": {
+    "g": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ],
+    "l": [
+     "Shadow Senate",
+     "Religious Authorities",
+     "Arcane Orders",
+     "Merchant Guilds",
+     "Military/Guard",
+     "Noble Houses",
+     "Craft Guilds"
+    ]
+   }
+  }
+ ]
+}

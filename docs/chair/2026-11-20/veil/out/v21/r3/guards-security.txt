@@ -1,0 +1,42 @@
++ ]
+
+ ❯ tests/security/galleryVeilHandRows.pglite.test.js:1731:50
+    1729|       } else if (tag.startsWith('dm/') && !tag.endsWith('/link')) bad.…
+    1730|     }
+    1731|     expect(bad, `${bad.length} sends or losses`).toEqual([]);
+       |                                                  ^
+    1732|     expect(paths).toEqual([]);
+    1733|   }, ARM_TIMEOUT_MS);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯
+
+Vitest caught 1 unhandled error during the test run.
+This might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.
+
+⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯
+Error: [vitest-pool]: Worker forks emitted error.
+ ❯ EventEmitter.<anonymous> node_modules/vitest/dist/chunks/cli-api.BfdDOPPI.js:3446:22
+ ❯ EventEmitter.emit node:events:519:28
+ ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BfdDOPPI.js:3013:22
+ ❯ ChildProcess.emit node:events:519:28
+ ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12
+
+Caused by: Error: Worker exited unexpectedly
+ ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BfdDOPPI.js:3012:33
+ ❯ ChildProcess.emit node:events:519:28
+ ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+
+
+ Test Files  3 failed | 8 passed (12)
+      Tests  3 failed | 173 passed (179)
+     Errors  1 error
+   Start at  06:43:15
+   Duration  1548.32s (transform 21.75s, setup 221ms, import 3.17s, tests 2532.36s, environment 819ms)
+
+[gate-tail] end:  07:09:04 up  1:16,  0 user,  load average: 3.86, 5.17, 6.72
+[gate-tail] full log: /tmp/gate-tail.23263.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

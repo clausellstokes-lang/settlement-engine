@@ -1,0 +1,6 @@
+# R3-CURE-3: sha256 at this cure (no migration touched: git diff b907c75c9 -- supabase is empty)
+eface6d093933170b9541fe630068c26e5bd41477e95e913ae7168e373be0b01  supabase/migrations/211_server_side_share_veil.sql
+cde846131969c93a094ef518a1ce8dec74d33dff1532b91f3e3dca5310ad79e2  supabase/migrations/212_share_veil_later_cures.sql
+ce8474ffc251b4c4bd6005d5a409d4a15bd20fef6b507534ef6338d3bd49712f  supabase/rollback/211_server_side_share_veil.down.sql
+40357bed2f44aa8c8b14179a83992d891ddb5a0b31c6dff47f204871091065b1  supabase/rollback/212_share_veil_later_cures.down.sql
+git diff --stat b907c75c9 -- supabase:

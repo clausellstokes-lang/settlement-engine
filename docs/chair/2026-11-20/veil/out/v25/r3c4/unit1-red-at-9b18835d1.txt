@@ -1,0 +1,122 @@
+
+stderr | tests/security/galleryServerVeil.pglite.test.js > the server-side share veil (211) — execution against the real SQL and the real client read > server-veil-metropolis-7: nothing the page hides is sent; no page changes; 210 is red on the same rows
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryServerVeil.pglite.test.js > the server-side share veil (211) — execution against the real SQL and the real client read > server-veil-metropolis-7: nothing the page hides is sent; no page changes; 210 is red on the same rows
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryServerVeil.pglite.test.js > the server-side share veil (211) — execution against the real SQL and the real client read > server-veil-metropolis-7: nothing the page hides is sent; no page changes; 210 is red on the same rows
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryServerVeil.pglite.test.js > the server-side share veil (211) — execution against the real SQL and the real client read > server-veil-metropolis-7: nothing the page hides is sent; no page changes; 210 is red on the same rows
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryServerVeil.pglite.test.js > the server-side share veil (211) — execution against the real SQL and the real client read > server-veil-metropolis-7: nothing the page hides is sent; no page changes; 210 is red on the same rows
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryServerVeil.pglite.test.js > the server-side share veil (211) — execution against the real SQL and the real client read > server-veil-metropolis-7: nothing the page hides is sent; no page changes; 210 is red on the same rows
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryServerVeil.pglite.test.js > the server-side share veil (211) — execution against the real SQL and the real client read > server-veil-metropolis-7: nothing the page hides is sent; no page changes; 210 is red on the same rows
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryServerVeil.pglite.test.js > the server-side share veil (211) — execution against the real SQL and the real client read > server-veil-metropolis-7: nothing the page hides is sent; no page changes; 210 is red on the same rows
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+ ❯ tests/security/galleryServerVeil.pglite.test.js (18 tests | 2 failed) 757855ms
+     × server-veil-city-2: nothing the page hides is sent; no page changes; 210 is red on the same rows 141200ms
+     × server-veil-metropolis-7: nothing the page hides is sent; no page changes; 210 is red on the same rows 136626ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryRosterChoices.pglite.test.js > R3: the drawn conditional rows where a house is hidden whole (through the server; the twin beside it) > R3-CURE-3 (the chair's ruling A): a goal naming a withheld power by a POSSESSIVE, a PLURAL or in CAPITALS leaves, both engines, every read, Reveal DM off and on; a goal naming a SERVED power whose name contains the withheld one stays byte for byte, its exemption the containing served name
+AssertionError: expected 0 to be greater than 0
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:633:19
+    631|     for (const r of rs) for (const [read, d] of docsOf(r)) {
+    632|       const tag = `hand-fold ${r.kind} dm=${r.dm} ${read}`;
+    633|       if (!withheldOf(r.stored, d).includes(TGP) || !withheldOf(r.stor…
+       |                   ^
+    634|       for (const h of searchHits(d, [TGP, '7'])) if (!R5_PROSE.include…
+    635|       const npc = (id) => (d.npcs || []).find((x) => x?.id === id);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/security/galleryServerVeil.pglite.test.js > the server-side share veil (211) — execution against the real SQL and the real client read > server-veil-city-2: nothing the page hides is sent; no page changes; 210 is red on the same rows
+AssertionError: default+dm/live gallery page serves a goal aimed at a withheld power: npcs[id=npc_merchant_guilds_15_40].goal = {"intent":{"long":{"family":"POWER","key":"expand_influence","kind":"tense","tar
+default+dm/live gallery page serves a goal aimed at a withheld power: npcs[id=npc_mint_official].goal = {"intent":{"long":{"family":"RANK","key":"secure_office","kind":"climb","target"
+default+dm/live gallery page serves a goal aimed at a withheld power: npcs[id=npc_stone_quarry].goal = {"intent":{"long":{"family":"POWER","key":"expand_influence","kind":"tense","tar
+default+dm/snapshot gallery page serves a goal aimed at a withheld power: npcs[id=npc_merchant_guilds_15_40].goal = {"intent":{"long":{"family":"POWER","key":"expand_influence","kind":"tense","tar
+default+dm/snapshot gallery page serves a goal aimed at a withheld power: npcs[id=npc_mint_official].goal = {"intent":{"long":{"family":"RANK","key":"secure_office","kind":"climb","target"
+default+dm/snapshot gallery page serves a goal aimed at a withheld power: npcs[id=npc_stone_quarry].goal = {"intent":{"long":{"family":"POWER","key":"expand_influence","kind":"tense","tar: expected [ …(6) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "default+dm/live gallery page serves a goal aimed at a withheld power: npcs[id=npc_merchant_guilds_15_40].goal = {\"intent\":{\"long\":{\"family\":\"POWER\",\"key\":\"expand_influence\",\"kind\":\"tense\",\"tar",
++   "default+dm/live gallery page serves a goal aimed at a withheld power: npcs[id=npc_mint_official].goal = {\"intent\":{\"long\":{\"family\":\"RANK\",\"key\":\"secure_office\",\"kind\":\"climb\",\"target\"",
++   "default+dm/live gallery page serves a goal aimed at a withheld power: npcs[id=npc_stone_quarry].goal = {\"intent\":{\"long\":{\"family\":\"POWER\",\"key\":\"expand_influence\",\"kind\":\"tense\",\"tar",
++   "default+dm/snapshot gallery page serves a goal aimed at a withheld power: npcs[id=npc_merchant_guilds_15_40].goal = {\"intent\":{\"long\":{\"family\":\"POWER\",\"key\":\"expand_influence\",\"kind\":\"tense\",\"tar",
++   "default+dm/snapshot gallery page serves a goal aimed at a withheld power: npcs[id=npc_mint_official].goal = {\"intent\":{\"long\":{\"family\":\"RANK\",\"key\":\"secure_office\",\"kind\":\"climb\",\"target\"",
++   "default+dm/snapshot gallery page serves a goal aimed at a withheld power: npcs[id=npc_stone_quarry].goal = {\"intent\":{\"long\":{\"family\":\"POWER\",\"key\":\"expand_influence\",\"kind\":\"tense\",\"tar",
++ ]
+
+ ❯ tests/security/galleryServerVeil.pglite.test.js:435:54
+    433|         }
+    434|       }
+    435|       expect(faults, faults.slice(0, 20).join('\n')).toEqual([]);
+       |                                                      ^
+    436|       expect(control.rows).toBeGreaterThan(0);
+    437|     }, TOWN_TIMEOUT_MS);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/security/galleryServerVeil.pglite.test.js > the server-side share veil (211) — execution against the real SQL and the real client read > server-veil-metropolis-7: nothing the page hides is sent; no page changes; 210 is red on the same rows
+AssertionError: default+dm/live gallery page serves a goal aimed at a withheld power: npcs[id=npc_multiple_garrisons].goal = {"intent":{"long":{"family":"POWER","key":"expand_influence","kind":"tense","tar
+default+dm/live gallery page serves a goal aimed at a withheld power: npcs[id=npc_workhouse].goal = {"intent":{"long":{"family":"RANK","key":"secure_office","kind":"climb","target"
+default+dm/live gallery page serves a goal aimed at a withheld power: npcs[id=npc_professional_city_watch].goal = {"intent":{"long":{"family":"POWER","key":"expand_influence","kind":"tense","tar
+default+dm/snapshot gallery page serves a goal aimed at a withheld power: npcs[id=npc_multiple_garrisons].goal = {"intent":{"long":{"family":"POWER","key":"expand_influence","kind":"tense","tar
+default+dm/snapshot gallery page serves a goal aimed at a withheld power: npcs[id=npc_workhouse].goal = {"intent":{"long":{"family":"RANK","key":"secure_office","kind":"climb","target"
+default+dm/snapshot gallery page serves a goal aimed at a withheld power: npcs[id=npc_professional_city_watch].goal = {"intent":{"long":{"family":"POWER","key":"expand_influence","kind":"tense","tar: expected [ …(6) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "default+dm/live gallery page serves a goal aimed at a withheld power: npcs[id=npc_multiple_garrisons].goal = {\"intent\":{\"long\":{\"family\":\"POWER\",\"key\":\"expand_influence\",\"kind\":\"tense\",\"tar",
++   "default+dm/live gallery page serves a goal aimed at a withheld power: npcs[id=npc_workhouse].goal = {\"intent\":{\"long\":{\"family\":\"RANK\",\"key\":\"secure_office\",\"kind\":\"climb\",\"target\"",
++   "default+dm/live gallery page serves a goal aimed at a withheld power: npcs[id=npc_professional_city_watch].goal = {\"intent\":{\"long\":{\"family\":\"POWER\",\"key\":\"expand_influence\",\"kind\":\"tense\",\"tar",
++   "default+dm/snapshot gallery page serves a goal aimed at a withheld power: npcs[id=npc_multiple_garrisons].goal = {\"intent\":{\"long\":{\"family\":\"POWER\",\"key\":\"expand_influence\",\"kind\":\"tense\",\"tar",
++   "default+dm/snapshot gallery page serves a goal aimed at a withheld power: npcs[id=npc_workhouse].goal = {\"intent\":{\"long\":{\"family\":\"RANK\",\"key\":\"secure_office\",\"kind\":\"climb\",\"target\"",
++   "default+dm/snapshot gallery page serves a goal aimed at a withheld power: npcs[id=npc_professional_city_watch].goal = {\"intent\":{\"long\":{\"family\":\"POWER\",\"key\":\"expand_influence\",\"kind\":\"tense\",\"tar",
++ ]
+
+ ❯ tests/security/galleryServerVeil.pglite.test.js:435:54
+    433|         }
+    434|       }
+    435|       expect(faults, faults.slice(0, 20).join('\n')).toEqual([]);
+       |                                                      ^
+    436|       expect(control.rows).toBeGreaterThan(0);
+    437|     }, TOWN_TIMEOUT_MS);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  3 failed | 36 passed (39)
+   Start at  11:20:04
+   Duration  1362.15s (transform 5.19s, setup 51ms, import 451ms, tests 1361.33s, environment 0ms)
+
+[gate-tail] end:  11:42:47 up 30 min,  0 user,  load average: 3.18, 3.97, 3.63
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/935e9849-d0bd-5207-a89c-bbccbd16db44/scratchpad/gate-tail.1262.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

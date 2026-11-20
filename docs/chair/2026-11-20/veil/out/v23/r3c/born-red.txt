@@ -1,0 +1,83 @@
++   "hand-raised open dm=true import: npcs[].goal.intent.short.target.id = \"faction.thieves-guild-7q\"",
++   "hand-raised open dm=true import: npcs[].goal.short = \"Be the one Thieves' Guild sends.\"",
++   "hand-raised openM dm=false gallery: powerStructure.conflicts[].parties[] = \"Thieves' Guild\"",
++   "hand-raised openM dm=false gallery: powerStructure.conflicts[].desc = \"Town Council and Thieves' Guild are in high conflict over the quay.\"",
++   "hand-raised openM dm=false gallery: conflicts[].parties[] = \"Thieves' Guild\"",
++   "hand-raised openM dm=false gallery: conflicts[].desc = \"Town Council and Thieves' Guild are in high conflict over the quay.\"",
++   "hand-raised openM dm=false gallery: history.currentTensions[].factions[] = \"Thieves' Guild\"",
++   "hand-raised openM dm=false map: powerStructure.conflicts[].parties[] = \"Thieves' Guild\"",
++   "hand-raised openM dm=false map: powerStructure.conflicts[].desc = \"Town Council and Thieves' Guild are in high conflict over the quay.\"",
++   "hand-raised openM dm=false map: conflicts[].parties[] = \"Thieves' Guild\"",
++   "hand-raised openM dm=false map: conflicts[].desc = \"Town Council and Thieves' Guild are in high conflict over the quay.\"",
++   "hand-raised openM dm=false map: history.currentTensions[].factions[] = \"Thieves' Guild\"",
++   "hand-raised openM dm=false link: powerStructure.conflicts[].parties[] = \"Thieves' Guild\"",
++   "hand-raised openM dm=false link: powerStructure.conflicts[].desc = \"Town Council and Thieves' Guild are in high conflict over the quay.\"",
++   "hand-raised openM dm=false link: conflicts[].parties[] = \"Thieves' Guild\"",
++   "hand-raised openM dm=false link: conflicts[].desc = \"Town Council and Thieves' Guild are in high conflict over the quay.\"",
++   "hand-raised openM dm=false link: history.currentTensions[].factions[] = \"Thieves' Guild\"",
++   "hand-raised openM dm=false import: powerStructure.conflicts[].parties[] = \"Thieves' Guild\"",
++   "hand-raised openM dm=false import: powerStructure.conflicts[].desc = \"Town Council and Thieves' Guild are in high conflict over the quay.\"",
++   "hand-raised openM dm=false import: conflicts[].parties[] = \"Thieves' Guild\"",
++   "hand-raised openM dm=false import: conflicts[].desc = \"Town Council and Thieves' Guild are in high conflict over the quay.\"",
++   "hand-raised openM dm=false import: history.currentTensions[].factions[] = \"Thieves' Guild\"",
++   "hand-raised openM dm=true map: powerStructure.conflicts[].parties[] = \"Thieves' Guild\"",
++   "hand-raised openM dm=true map: powerStructure.conflicts[].desc = \"Town Council and Thieves' Guild are in high conflict over the quay.\"",
++   "hand-raised openM dm=true map: conflicts[].parties[] = \"Thieves' Guild\"",
++   "hand-raised openM dm=true map: conflicts[].desc = \"Town Council and Thieves' Guild are in high conflict over the quay.\"",
++   "hand-raised openM dm=true map: history.currentTensions[].factions[] = \"Thieves' Guild\"",
++ ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:421:21
+    419|     note('R3-CURE unit 2, hits outside the named list:', outside.lengt…
+    420|     expect(rules['withheld (power.entry)']?.length || 0).toBeGreaterTh…
+    421|     expect(outside).toEqual([]);
+       |                     ^
+    422|   });
+    423|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/security/galleryRosterChoices.pglite.test.js > R3: the drawn conditional rows where a house is hidden whole (through the server; the twin beside it) > R3-CURE unit 3: a crime type no map holds FAILS CLOSED where a house is hidden whole (withheld), on every read, both shapes; a crisis type the engine writes stays
+AssertionError: expected [ …(14) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "open dm=false gallery: the unknown type served",
++   "open dm=false map: the unknown type served",
++   "open dm=false link: the unknown type served",
++   "open dm=false import: the unknown type served",
++   "open dm=true gallery: the unknown type served",
++   "open dm=true map: the unknown type served",
++   "open dm=true import: the unknown type served",
++   "openM dm=false gallery: the unknown type served",
++   "openM dm=false map: the unknown type served",
++   "openM dm=false link: the unknown type served",
++   "openM dm=false import: the unknown type served",
++   "openM dm=true gallery: the unknown type served",
++   "openM dm=true map: the unknown type served",
++   "openM dm=true import: the unknown type served",
++ ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:444:17
+    442|       if (!types.includes('debt evasion')) bad.push(`${r.kind} dm=${r.…
+    443|     }
+    444|     expect(bad).toEqual([]);
+       |                 ^
+    445|   });
+    446|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 12 passed (16)
+   Start at  07:48:24
+   Duration  245.41s (transform 2.91s, setup 40ms, import 79ms, tests 245.19s, environment 0ms)
+
+[gate-tail] end:  07:52:30 up 23 min,  0 user,  load average: 1.20, 0.90, 0.71
+[gate-tail] full log: /tmp/gate-tail.3653.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+exit 1

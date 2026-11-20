@@ -1,0 +1,15 @@
+     × the surfaceReach grammar round-trips: parse(format(reach)) equals reach for every LIT identity 22ms
+     × ⛔ every source literal that names a thing declares it, or has its row 27ms
+     × no NEW undeclared line: every hit is banked (declare the line; the door never banks a new one) 10ms
+     × each surface matches its registry row, and an owned surface may only shrink 18ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+ FAIL  tests/components/phoneChromeFloor.census.test.js > THE PHONE CHROME FLOOR — a census of the source, on every route the router declares > each surface matches its registry row, and an owned surface may only shrink
+AssertionError: 
+ FAIL  tests/lint/presumedThings.walker.test.js > ARM 1 — the source > ⛔ every source literal that names a thing declares it, or has its row
+AssertionError: declare the thing on the line (needs or excludes, with its twin), never add a row: expected [ …(56) ] to deeply equal []
+ FAIL  tests/lint/presumptionClasses.walker.test.js > the tree against its register > no NEW undeclared line: every hit is banked (declare the line; the door never banks a new one)
+AssertionError: expected [ …(3) ] to deeply equal []
+ FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the frozen register > the surfaceReach grammar round-trips: parse(format(reach)) equals reach for every LIT identity
+AssertionError: veiled on allegiance is missing from the frozen surfaceReach: expected 'campaign-pdf=N dossier-pdf=N foundry=…' to be 'campaign-pdf=N dossier-pdf=N foundry=…' // Object.is equality
+ Test Files  4 failed (4)
+      Tests  4 failed | 116 passed (120)

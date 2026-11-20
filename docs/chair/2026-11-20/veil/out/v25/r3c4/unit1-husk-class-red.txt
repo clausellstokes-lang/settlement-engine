@@ -1,0 +1,62 @@
++   "city-insurgency-1-104 open dm=false import: powerStructure.conflicts[].parties[]",
++   "city-insurgency-1-104 open dm=false twin: conflicts[].parties[]",
++   "city-insurgency-1-104 open dm=false twin: conflicts[].parties[]",
++   "city-insurgency-1-104 open dm=false twin: history.currentTensions[].factions[]",
++   "city-insurgency-1-104 open dm=false twin: powerStructure.conflicts[].parties[]",
++   "city-insurgency-1-104 open dm=false twin: powerStructure.conflicts[].parties[]",
++   "city-insurgency-1-104 open dm=true gallery: powerStructure.factionRelationships[].pair[]",
++   "city-insurgency-1-104 open dm=true gallery: powerStructure.factionRelationships[].pair[]",
++   "city-insurgency-1-104 open dm=true gallery: powerStructure.conflicts[].parties[]",
++   "city-insurgency-1-104 open dm=true gallery: powerStructure.conflicts[].parties[]",
++   "city-insurgency-1-104 open dm=true gallery: npcs[].memberships[].power",
++   "city-insurgency-1-104 open dm=true gallery: npcs[].memberships[].power",
++   "city-insurgency-1-104 open dm=true gallery: npcs[].memberships[].power",
++   "city-insurgency-1-104 open dm=true gallery: npcs[].memberships[].power",
++   "city-insurgency-1-104 open dm=true gallery: npcs[].goal.intent.short.target.id",
++   "city-insurgency-1-104 open dm=true gallery: npcs[].goal.intent.short.target.id",
++   "city-insurgency-1-104 open dm=true gallery: npcs[].goal.intent.long.target.id",
++   "city-insurgency-1-104 open dm=true gallery: npcs[].memberships[].power",
++   "city-insurgency-1-104 open dm=true gallery: npcs[].goal.intent.long.target.id",
++   "city-insurgency-1-104 open dm=true gallery: npcs[].memberships[].power",
++   "city-insurgency-1-104 open dm=true gallery: npcs[].memberships[].power",
++   "city-insurgency-1-104 open dm=true gallery: npcs[].goal.intent.long.target.id",
++   "city-insurgency-1-104 open dm=true gallery: npcs[].memberships[].power",
++   "city-insurgency-1-104 open dm=true gallery: npcs[].goal.intent.long.target.id",
++   "city-insurgency-1-104 open dm=true gallery: npcs[].memberships[].power",
++   "city-insurgency-1-104 open dm=true gallery: npcs[].goal.intent.short.target.id",
++   "city-insurgency-1-104 open dm=true gallery: npcs[].memberships[].power",
++   "city-insurgency-1-104 open dm=true gallery: npcs[].goal.intent.long.target.id",
++   "city-insurgency-1-104 open dm=true gallery: npcs[].goal.intent.short.target.id",
++   "city-insurgency-1-104 open dm=true gallery: npcs[].goal.intent.long.target.id",
++   "city-insurgency-1-104 open dm=true gallery: npcs[].goal.intent.short.target.id",
++   "city-insurgency-1-104 open dm=true gallery: npcs[].goal.intent.short.target.id",
++   "city-insurgency-1-104 open dm=true gallery: npcs[].goal.intent.short.target.id",
++   "city-insurgency-1-104 open dm=true gallery: npcs[].goal.intent.long.target.id",
++   "city-insurgency-1-104 open dm=true gallery: npcs[].goal.intent.long.target.id",
++   "city-insurgency-1-104 open dm=true gallery: npcs[].goal.intent.long.target.id",
++   "city-insurgency-1-104 open dm=true gallery: npcs[].goal.intent.short.target.id",
++   "city-insurgency-1-104 open dm=true gallery: npcs[].goal.intent.long.target.id",
++   "city-insurgency-1-104 open dm=true gallery: npcs[].goal.intent.long.target.id",
++   "city-insurgency-1-104 open dm=true gallery: npcs[].goal.intent.long.target.id",
++   "city-insurgency-1-104 open dm=true gallery: npcs[].goal.intent.short.target.id",
++ ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:714:30
+    712|     expect(judged).toBeGreaterThan(0);
+    713|     expect(compared).toBeGreaterThan(0);
+    714|     expect(bad.slice(0, 60)).toEqual([]);
+       |                              ^
+    715|   }, ARM_TIMEOUT_MS);
+    716|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 21 skipped (22)
+   Start at  11:24:50
+   Duration  619.40s (transform 3.83s, setup 48ms, import 205ms, tests 618.97s, environment 0ms)
+
+[gate-tail] end:  11:35:10 up 22 min,  0 user,  load average: 4.70, 5.04, 3.59
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/935e9849-d0bd-5207-a89c-bbccbd16db44/scratchpad/gate-tail.2511.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

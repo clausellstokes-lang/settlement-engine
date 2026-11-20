@@ -46,6 +46,7 @@ import { PGlite } from '@electric-sql/pglite';
 import { pgcrypto } from '@electric-sql/pglite/contrib/pgcrypto';
 import { readFileSync, readdirSync } from 'node:fs';
 import { resolve, join } from 'node:path';
+import { buildNameSearch } from '../../src/domain/display/gallerySecondHomes.js';
 
 const PGLITE_BOOT_TIMEOUT_MS = 900_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
 const TOWN_TIMEOUT_MS = 900_000;
@@ -206,6 +207,53 @@ function withheldFrom(ref, now) {
   });
   return { page, n };
 }
+/** R3-CURE-2 (VEIL-24's builder; the chair's ruling 3 of 09:04 UTC): A GOAL THAT NAMES A WITHHELD POWER LEAVES WITH IT, UNDER
+ *  REVEAL DM TOO (the ruling "leaves whole" reaches every string: R3-CURE's goal rule, 212 :: _gallery_veil_roster_choices).
+ *  Law (2)'s reference with exactly those goals removed: a person's goal whose intent targets, or whose sentence names (the
+ *  lane's own fold, gallerySecondHomes.js :: buildNameSearch), a power of the stored record that the page after 212 does
+ *  not serve. `n` counts them; `shown` counts the goals left aimed at a SHOWN power (the re-statement's tooth: each is
+ *  still compared byte for byte by law (2)). */
+function goalsLeaveWithTheirPower(record, page, now) {
+  const powers = (d) => [...(Array.isArray(d?.powerStructure?.factions) ? d.powerStructure.factions : []), ...(Array.isArray(d?.factions) ? d.factions : [])].filter(isRec);
+  const served = new Set(powers(now).flatMap((f) => [f.faction, f.name, f.id].filter((v) => typeof v === 'string' && v)));
+  const gone = powers(record).filter((f) => ![f.faction, f.name].some((x) => typeof x === 'string' && served.has(x)));
+  const ids = new Set(gone.map((f) => (typeof f.id === 'number' ? String(f.id) : f.id)).filter((v) => typeof v === 'string' && v));
+  const search = buildNameSearch(gone.flatMap((f) => [f.faction, f.name]).filter((v) => typeof v === 'string' && v), [...served]);
+  const named = (v) => (typeof v === 'number' && ids.has(String(v))) || (typeof v === 'string' && v !== '' && (ids.has(v) || (!!search && search.hit(v))));
+  const out = structuredClone(page); let n = 0; let shown = 0;
+  for (const p of isRec(out) && Array.isArray(out.npcs) ? out.npcs : []) {
+    if (!isRec(p) || !isRec(p.goal)) continue;
+    const g = p.goal; const it = isRec(g.intent) ? g.intent : {};
+    const tids = [it.short?.target?.id, it.long?.target?.id];
+    if (tids.some(named) || (!!search && (search.hit(String(g.short ?? '')) || search.hit(String(g.long ?? ''))))) { delete p.goal; n += 1; }
+    else if (tids.some((v) => typeof v === 'string' && served.has(v))) shown += 1;
+  }
+  return { page: out, n, shown };
+}
+/** R3-CURE-3 (VEIL-24's builder; the chair's ruling A of 10:21 UTC): THE LEAK CHECK the re-statement's tooth rests on. Every person of
+ *  the stored record whose goal targets, or whose sentence names (the lane's search), a power the page does not serve: `aimed` counts
+ *  them; `served` lists those whose goal the page still carries (a leak). Measured (out/v24/r3c3/unit1-goals.txt): at R3-CURE-2 the
+ *  two towns' Reveal-DM goals of npc_mages_guild and npc_smelter are aimed at the withheld Thieves' Guild by their target id and leave
+ *  on BOTH pages (the 210 page too: the current client read withholds them over 210's response), so goalsLeaveWithTheirPower
+ *  removes nothing there; the checks below prove they leave, and that the goals aimed at a SHOWN power stay byte for byte. */
+function goalsAimedAtWithheld(record, now) {
+  const powers = (d) => [...(Array.isArray(d?.powerStructure?.factions) ? d.powerStructure.factions : []), ...(Array.isArray(d?.factions) ? d.factions : [])].filter(isRec);
+  const served = new Set(powers(now).flatMap((f) => [f.faction, f.name, f.id].filter((v) => typeof v === 'string' && v)));
+  const gone = powers(record).filter((f) => ![f.faction, f.name].some((x) => typeof x === 'string' && served.has(x)));
+  const ids = new Set(gone.map((f) => (typeof f.id === 'number' ? String(f.id) : f.id)).filter((v) => typeof v === 'string' && v));
+  const search = buildNameSearch(gone.flatMap((f) => [f.faction, f.name]).filter((v) => typeof v === 'string' && v), [...served]);
+  const named = (v) => (typeof v === 'number' && ids.has(String(v))) || (typeof v === 'string' && v !== '' && (ids.has(v) || (!!search && search.hit(v))));
+  const onPage = new Map((isRec(now) && Array.isArray(now.npcs) ? now.npcs : []).filter((p) => isRec(p) && typeof p.id === 'string').map((p) => [p.id, p]));
+  let aimed = 0; const leaks = [];
+  for (const p of Array.isArray(record?.npcs) ? record.npcs : []) {
+    if (!isRec(p) || !isRec(p.goal)) continue;
+    const g = p.goal; const it = isRec(g.intent) ? g.intent : {};
+    if (![it.short?.target?.id, it.long?.target?.id].some(named) && !(!!search && (search.hit(String(g.short ?? '')) || search.hit(String(g.long ?? ''))))) continue;
+    aimed += 1;
+    if (isRec(onPage.get(p.id)) && 'goal' in onPage.get(p.id)) leaks.push(`npcs[id=${p.id}].goal = ${JSON.stringify(onPage.get(p.id).goal).slice(0, 80)}`);
+  }
+  return { aimed, leaks };
+}
 const SERVED_KEYS = new Set(['v', 'mode', 'at', 'groupings']);
 /** The overrides a read sends: each member's two booleans and, at most, the served marker. */
 function overridesOffences(ov) {
@@ -226,7 +274,7 @@ function overridesOffences(ov) {
 describe('the server-side share veil (211) — execution against the real SQL and the real client read', () => {
   /** @type {any} */ let LIVE; /** @type {any} */ let AT210;
   /** @type {any} */ let gen; /** @type {any} */ let veil; /** @type {any} */ let gallery; /** @type {any} */ let compose;
-  const control = { readable: 0, rows: 0, withheld: 0 };
+  const control = { readable: 0, rows: 0, withheld: 0, goals: 0, shownGoals: 0, aimedAtWithheld: 0 };
 
   beforeAll(async () => {
     LIVE = await buildDb();
@@ -334,14 +382,22 @@ describe('the server-side share veil (211) — execution against the real SQL an
             + carried(before.gRow.gallery_member_overrides?.$veil?.snapshot ?? {}, before.gPage).readable.length;
           control.readable += r; control.rows += 1;
         }
+        // R3-CURE-3 (the chair's ruling A): a goal aimed at, or naming, a power the page withholds leaves with it, every read
+        for (const [where, page] of [['gallery page', now.gPage], ['link page', now.lPage]]) {
+          const a = goalsAimedAtWithheld(record, page); control.aimedAtWithheld += a.aimed;
+          fault(`${tag} ${where} serves a goal aimed at a withheld power`, a.leaks);
+        }
         // (2) no page changes: compared with 210's page of the same share read LIVE
         const key = `${name}|${dm}`;
         if (mode === 'live') livePage210.set(key, before);
         const ref = livePage210.get(key);
         if (ref) {
           // re-keyed by identity (the header): the page withholds exactly law (4)'s copies, and changes nothing else
-          const g2 = withheldFrom(ref.gPage, now.gPage); const l2 = withheldFrom(ref.lPage, now.lPage);
-          control.withheld += g2.n + l2.n;
+          const g1 = withheldFrom(ref.gPage, now.gPage); const l1 = withheldFrom(ref.lPage, now.lPage);
+          control.withheld += g1.n + l1.n;
+          // R3-CURE-2 (the chair's ruling 3): and the goals that name a withheld power, which leave with it (Reveal DM too)
+          const g2 = goalsLeaveWithTheirPower(record, g1.page, now.gPage); const l2 = goalsLeaveWithTheirPower(record, l1.page, now.lPage);
+          control.goals += g2.n + l2.n; control.shownGoals += g2.shown + l2.shown;
           if (JSON.stringify(now.gPage) !== JSON.stringify(g2.page)) fault(`${tag} gallery page changed`, carried(g2.page, now.gPage).paths.concat(carried(now.gPage, g2.page).paths.map((p) => `+${p}`)).concat(['(order or value)']));
           if (JSON.stringify(now.gGroupings) !== JSON.stringify(ref.gGroupings)) fault(`${tag} gallery groupings`, [`${now.gGroupings} vs ${ref.gGroupings}`]);
           if (JSON.stringify(now.lPage) !== JSON.stringify(l2.page)) fault(`${tag} link page changed`, carried(l2.page, now.lPage).paths.concat(carried(now.lPage, l2.page).paths.map((p) => `+${p}`)).concat(['(order or value)']));
@@ -380,6 +436,12 @@ describe('the server-side share veil (211) — execution against the real SQL an
       expect(control.rows).toBeGreaterThan(0);
     }, TOWN_TIMEOUT_MS);
   }
+
+  it('R3-CURE-3, THE RE-STATEMENT\'S TOOTH (the chair\'s rulings 3 of 09:04 and A of 10:21): goals aimed at a withheld power exist on the judged reads and leave; goals aimed at a SHOWN power exist and are compared byte for byte by law (2)', () => {
+    expect(control.rows).toBeGreaterThan(0);
+    expect(control.aimedAtWithheld, 'stored goals aimed at a power the page withholds (the leak check is live)').toBeGreaterThan(0);
+    expect(control.shownGoals, 'goals aimed at a shown power, each compared byte for byte by law (2)').toBeGreaterThan(0);
+  });
 
   it('THE RED CONTROL: at 210 the same rows carry what their pages hide (the pin is live)', () => {
     expect(control.rows).toBeGreaterThan(0);

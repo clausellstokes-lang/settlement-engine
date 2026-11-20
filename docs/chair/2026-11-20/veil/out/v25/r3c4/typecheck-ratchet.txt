@@ -1,0 +1,9 @@
+[gate-tail] start:  11:49:23 up 36 min,  0 user,  load average: 8.02, 6.24, 4.72 · cores: 4
+
+> settlementforge@1.0.0 typecheck:ratchet
+> node scripts/check-full-typecheck.mjs
+
+[typecheck-ratchet] OK — no type regressions (167 error(s), ceiling 167).
+[gate-tail] end:  11:50:56 up 38 min,  0 user,  load average: 9.20, 7.13, 5.18
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/935e9849-d0bd-5207-a89c-bbccbd16db44/scratchpad/gate-tail.7439.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)

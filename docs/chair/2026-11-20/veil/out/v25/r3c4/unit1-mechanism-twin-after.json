@@ -1,0 +1,3000 @@
+[
+ {
+  "seed": "server-veil-city-2",
+  "hiddenHouses": [
+   "Smuggling network",
+   "Thieves' guild chapter",
+   "Front businesses",
+   "Whisper market",
+   "Black market"
+  ],
+  "pubPowers": [
+   [
+    "Merchant oligarchy",
+    "economy",
+    null,
+    true
+   ],
+   [
+    "Merchant Guilds",
+    "economy",
+    null,
+    null
+   ],
+   [
+    "Military/Guard",
+    "military",
+    null,
+    null
+   ],
+   [
+    "Religious Authorities",
+    "religious",
+    null,
+    null
+   ],
+   [
+    "Craft Guilds",
+    "economy",
+    null,
+    null
+   ],
+   [
+    "Arcane Orders",
+    "magic",
+    null,
+    null
+   ],
+   [
+    "Noble Families",
+    "noble",
+    null,
+    null
+   ],
+   [
+    "Thieves' Guild",
+    "criminal",
+    null,
+    null
+   ]
+  ],
+  "servedPowers": [
+   "Merchant oligarchy",
+   "Merchant Guilds",
+   "Military/Guard",
+   "Religious Authorities",
+   "Craft Guilds",
+   "Arcane Orders",
+   "Noble Families"
+  ],
+  "people": [
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Find out whether Wenceslas Obradović has been meeting anyone from Merchant oligarchy in private.\",\"long\":\"Bring Thieves' Guild under the sway of Merchant oligarchy, one member at a time.\",\"intent\":{\"short\":{\"family\":\"RANK\",\"kind\":\"defend\",\"key\":\"consolidate_power\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_mint_official\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Thieves' Guild\"}}}}",
+      "after": "{\"short\":\"Find out whether Wenceslas Obradović has been meeting anyone from Merchant oligarchy in private.\",\"intent\":{\"short\":{\"family\":\"RANK\",\"kind\":\"defend\",\"key\":\"consolidate_power\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_mint_official\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"short\":\"Find out whether Wenceslas Obradović has been meeting anyone from Merchant oligarchy in private.\",\"intent\":{\"short\":{\"family\":\"RANK\",\"kind\":\"defend\",\"key\":\"consolidate_power\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_mint_official\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_merchant_guilds_15_40",
+    "stored": {
+     "short": "Find out whether Wenceslas Obradović has been meeting anyone from Merchant oligarchy in private.",
+     "long": "Bring Thieves' Guild under the sway of Merchant oligarchy, one member at a time.",
+     "intent": {
+      "short": {
+       "family": "RANK",
+       "kind": "defend",
+       "key": "consolidate_power",
+       "target": {
+        "kind": "npc",
+        "id": "npc_mint_official"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Find out whether Wenceslas Obradović has been meeting anyone from Merchant oligarchy in private.",
+     "long": "Bring Thieves' Guild under the sway of Merchant oligarchy, one member at a time.",
+     "intent": {
+      "short": {
+       "family": "RANK",
+       "kind": "defend",
+       "key": "consolidate_power",
+       "target": {
+        "kind": "npc",
+        "id": "npc_mint_official"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": false,
+     "long": false,
+     "tids": [
+      false,
+      false
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Set money aside where Vira Dmitriev cannot reach it.\",\"long\":\"Be the first person Merchant oligarchy would turn to, before anyone thinks to ask Ludmila Pavlov.\",\"intent\":{\"short\":{\"family\":\"ALLEGIANCE\",\"kind\":\"escape_greed\",\"key\":\"escape_patron\",\"target\":{\"kind\":\"power\",\"id\":\"Thieves' Guild\"}},\"long\":{\"family\":\"RANK\",\"kind\":\"climb\",\"key\":\"secure_office\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_merchant_guilds_15_40\"}}}}",
+      "after": "{\"short\":\"Set money aside where Vira Dmitriev cannot reach it.\",\"long\":\"Be the first person Merchant oligarchy would turn to, before anyone thinks to ask Ludmila Pavlov.\",\"intent\":{\"short\":{\"family\":\"ALLEGIANCE\",\"kind\":\"escape_greed\",\"key\":\"escape_patron\",\"target\":{\"kind\":\"power\"}},\"long\":{\"family\":\"RANK\",\"kind\":\"climb\",\"key\":\"secure_office\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_merchant_guilds_15_40\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"short\":\"Set money aside where Vira Dmitriev cannot reach it.\",\"long\":\"Be the first person Merchant oligarchy would turn to, before anyone thinks to ask Ludmila Pavlov.\",\"intent\":{\"short\":{\"family\":\"ALLEGIANCE\",\"kind\":\"escape_greed\",\"key\":\"escape_patron\",\"target\":{\"kind\":\"power\"}},\"long\":{\"family\":\"RANK\",\"kind\":\"climb\",\"key\":\"secure_office\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_merchant_guilds_15_40\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_mint_official",
+    "stored": {
+     "short": "Set money aside where Vira Dmitriev cannot reach it.",
+     "long": "Be the first person Merchant oligarchy would turn to, before anyone thinks to ask Ludmila Pavlov.",
+     "intent": {
+      "short": {
+       "family": "ALLEGIANCE",
+       "kind": "escape_greed",
+       "key": "escape_patron",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      },
+      "long": {
+       "family": "RANK",
+       "kind": "climb",
+       "key": "secure_office",
+       "target": {
+        "kind": "npc",
+        "id": "npc_merchant_guilds_15_40"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Set money aside where Vira Dmitriev cannot reach it.",
+     "long": "Be the first person Merchant oligarchy would turn to, before anyone thinks to ask Ludmila Pavlov.",
+     "intent": {
+      "short": {
+       "family": "ALLEGIANCE",
+       "kind": "escape_greed",
+       "key": "escape_patron",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      },
+      "long": {
+       "family": "RANK",
+       "kind": "climb",
+       "key": "secure_office",
+       "target": {
+        "kind": "npc",
+        "id": "npc_merchant_guilds_15_40"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": false,
+     "long": false,
+     "tids": [
+      false,
+      false
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Show the rest of Merchant oligarchy that Wenceslas Obradović can be wrong, without ever saying so aloud.\",\"long\":\"End the bad blood between Merchant oligarchy and Thieves' Guild before the next generation inherits it.\",\"intent\":{\"short\":{\"family\":\"RANK\",\"kind\":\"climb\",\"key\":\"secure_office\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_mint_official\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Thieves' Guild\"}}}}",
+      "after": "{\"short\":\"Show the rest of Merchant oligarchy that Wenceslas Obradović can be wrong, without ever saying so aloud.\",\"intent\":{\"short\":{\"family\":\"RANK\",\"kind\":\"climb\",\"key\":\"secure_office\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_mint_official\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"short\":\"Show the rest of Merchant oligarchy that Wenceslas Obradović can be wrong, without ever saying so aloud.\",\"intent\":{\"short\":{\"family\":\"RANK\",\"kind\":\"climb\",\"key\":\"secure_office\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_mint_official\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_stone_quarry",
+    "stored": {
+     "short": "Show the rest of Merchant oligarchy that Wenceslas Obradović can be wrong, without ever saying so aloud.",
+     "long": "End the bad blood between Merchant oligarchy and Thieves' Guild before the next generation inherits it.",
+     "intent": {
+      "short": {
+       "family": "RANK",
+       "kind": "climb",
+       "key": "secure_office",
+       "target": {
+        "kind": "npc",
+        "id": "npc_mint_official"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Show the rest of Merchant oligarchy that Wenceslas Obradović can be wrong, without ever saying so aloud.",
+     "long": "End the bad blood between Merchant oligarchy and Thieves' Guild before the next generation inherits it.",
+     "intent": {
+      "short": {
+       "family": "RANK",
+       "kind": "climb",
+       "key": "secure_office",
+       "target": {
+        "kind": "npc",
+        "id": "npc_mint_official"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": false,
+     "long": false,
+     "tids": [
+      false,
+      false
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Find out who has been asking about them, and why.\",\"long\":\"End the bad blood between The Guard and Thieves' Guild before the next generation inherits it.\",\"intent\":{\"short\":{\"family\":\"PERSONALITY\",\"kind\":\"fear\",\"key\":\"indulge_trait\",\"target\":null},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Thieves' Guild\"}}}}",
+      "after": "{\"short\":\"Find out who has been asking about them, and why.\",\"intent\":{\"short\":{\"family\":\"PERSONALITY\",\"kind\":\"fear\",\"key\":\"indulge_trait\",\"target\":null},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"short\":\"Find out who has been asking about them, and why.\",\"intent\":{\"short\":{\"family\":\"PERSONALITY\",\"kind\":\"fear\",\"key\":\"indulge_trait\",\"target\":null},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_gladiatorial_school",
+    "stored": {
+     "short": "Find out who has been asking about them, and why.",
+     "long": "End the bad blood between The Guard and Thieves' Guild before the next generation inherits it.",
+     "intent": {
+      "short": {
+       "family": "PERSONALITY",
+       "kind": "fear",
+       "key": "indulge_trait",
+       "target": null
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Find out who has been asking about them, and why.",
+     "long": "End the bad blood between The Guard and Thieves' Guild before the next generation inherits it.",
+     "intent": {
+      "short": {
+       "family": "PERSONALITY",
+       "kind": "fear",
+       "key": "indulge_trait",
+       "target": null
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": false,
+     "long": false,
+     "tids": [
+      null,
+      false
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Pay every hand at the black market in full and on time this season.\",\"long\":\"Be the first person Thieves' Guild would turn to, before anyone thinks to ask Dragana Sidorov.\",\"intent\":{\"short\":{\"family\":\"INSTITUTION\",\"kind\":\"solvency\",\"key\":\"control_institution\",\"target\":{\"kind\":\"house\",\"id\":\"Black market\"}},\"long\":{\"family\":\"RANK\",\"kind\":\"climb\",\"key\":\"secure_office\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_veiled_9c49b2aacfad98f5\"}}}}",
+      "after": "{\"intent\":{\"short\":{\"family\":\"INSTITUTION\",\"kind\":\"solvency\",\"key\":\"control_institution\",\"target\":{\"kind\":\"house\"}},\"long\":{\"family\":\"RANK\",\"kind\":\"climb\",\"key\":\"secure_office\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_veiled_9c49b2aacfad98f5\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"intent\":{\"short\":{\"family\":\"INSTITUTION\",\"kind\":\"solvency\",\"key\":\"control_institution\",\"target\":{\"kind\":\"house\"}},\"long\":{\"family\":\"RANK\",\"kind\":\"climb\",\"key\":\"secure_office\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_veiled_9c49b2aacfad98f5\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_veiled_165e8119b874edb0",
+    "stored": {
+     "short": "Pay every hand at the black market in full and on time this season.",
+     "long": "Be the first person Thieves' Guild would turn to, before anyone thinks to ask Dragana Sidorov.",
+     "intent": {
+      "short": {
+       "family": "INSTITUTION",
+       "kind": "solvency",
+       "key": "control_institution",
+       "target": {
+        "kind": "house",
+        "id": "Black market"
+       }
+      },
+      "long": {
+       "family": "RANK",
+       "kind": "climb",
+       "key": "secure_office",
+       "target": {
+        "kind": "npc",
+        "id": "npc_veiled_9c49b2aacfad98f5"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Pay every hand at the black market in full and on time this season.",
+     "long": "Be the first person Thieves' Guild would turn to, before anyone thinks to ask Dragana Sidorov.",
+     "intent": {
+      "short": {
+       "family": "INSTITUTION",
+       "kind": "solvency",
+       "key": "control_institution",
+       "target": {
+        "kind": "house",
+        "id": "Black market"
+       }
+      },
+      "long": {
+       "family": "RANK",
+       "kind": "climb",
+       "key": "secure_office",
+       "target": {
+        "kind": "npc",
+        "id": "npc_veiled_9c49b2aacfad98f5"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": true,
+     "long": false,
+     "tids": [
+      true,
+      false
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Keep the people working at the luxury goods quarter busy, paid and incurious.\",\"long\":\"Win the luxury goods quarter a lasting privilege that no other house can claim.\",\"intent\":{\"short\":{\"family\":\"ALLEGIANCE\",\"kind\":\"front_keep\",\"key\":\"serve_patron\",\"target\":{\"kind\":\"power\",\"id\":\"Thieves' Guild\"}},\"long\":{\"family\":\"INSTITUTION\",\"kind\":\"charter\",\"key\":\"control_institution\",\"target\":{\"kind\":\"house\",\"id\":\"Luxury goods quarter\"}}}}",
+      "after": "{\"short\":\"Keep the people working at the luxury goods quarter busy, paid and incurious.\",\"long\":\"Win the luxury goods quarter a lasting privilege that no other house can claim.\",\"intent\":{\"short\":{\"family\":\"ALLEGIANCE\",\"kind\":\"front_keep\",\"key\":\"serve_patron\",\"target\":{\"kind\":\"power\"}},\"long\":{\"family\":\"INSTITUTION\",\"kind\":\"charter\",\"key\":\"control_institution\",\"target\":{\"kind\":\"house\",\"id\":\"Luxury goods quarter\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"short\":\"Keep the people working at the luxury goods quarter busy, paid and incurious.\",\"long\":\"Win the luxury goods quarter a lasting privilege that no other house can claim.\",\"intent\":{\"short\":{\"family\":\"ALLEGIANCE\",\"kind\":\"front_keep\",\"key\":\"serve_patron\",\"target\":{\"kind\":\"power\"}},\"long\":{\"family\":\"INSTITUTION\",\"kind\":\"charter\",\"key\":\"control_institution\",\"target\":{\"kind\":\"house\",\"id\":\"Luxury goods quarter\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_luxury_goods_quarter",
+    "stored": {
+     "short": "Keep the people working at the luxury goods quarter busy, paid and incurious.",
+     "long": "Win the luxury goods quarter a lasting privilege that no other house can claim.",
+     "intent": {
+      "short": {
+       "family": "ALLEGIANCE",
+       "kind": "front_keep",
+       "key": "serve_patron",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      },
+      "long": {
+       "family": "INSTITUTION",
+       "kind": "charter",
+       "key": "control_institution",
+       "target": {
+        "kind": "house",
+        "id": "Luxury goods quarter"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Keep the people working at the luxury goods quarter busy, paid and incurious.",
+     "long": "Win the luxury goods quarter a lasting privilege that no other house can claim.",
+     "intent": {
+      "short": {
+       "family": "ALLEGIANCE",
+       "kind": "front_keep",
+       "key": "serve_patron",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      },
+      "long": {
+       "family": "INSTITUTION",
+       "kind": "charter",
+       "key": "control_institution",
+       "target": {
+        "kind": "house",
+        "id": "Luxury goods quarter"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": false,
+     "long": false,
+     "tids": [
+      false,
+      false
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Stop Thieves' Guild from taking anything more from The Guard this season.\",\"long\":\"Rise in Merchant Guilds far enough that their word carries weight outside it.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Thieves' Guild\"}},\"long\":{\"family\":\"RANK\",\"kind\":\"enter\",\"key\":\"secure_office\",\"target\":{\"kind\":\"power\",\"id\":\"Merchant Guilds\"}}}}",
+      "after": "{\"long\":\"Rise in Merchant Guilds far enough that their word carries weight outside it.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}},\"long\":{\"family\":\"RANK\",\"kind\":\"enter\",\"key\":\"secure_office\",\"target\":{\"kind\":\"power\",\"id\":\"Merchant Guilds\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"long\":\"Rise in Merchant Guilds far enough that their word carries weight outside it.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}},\"long\":{\"family\":\"RANK\",\"kind\":\"enter\",\"key\":\"secure_office\",\"target\":{\"kind\":\"power\",\"id\":\"Merchant Guilds\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_mercenary_quarter",
+    "stored": {
+     "short": "Stop Thieves' Guild from taking anything more from The Guard this season.",
+     "long": "Rise in Merchant Guilds far enough that their word carries weight outside it.",
+     "intent": {
+      "short": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      },
+      "long": {
+       "family": "RANK",
+       "kind": "enter",
+       "key": "secure_office",
+       "target": {
+        "kind": "power",
+        "id": "Merchant Guilds"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Stop Thieves' Guild from taking anything more from The Guard this season.",
+     "long": "Rise in Merchant Guilds far enough that their word carries weight outside it.",
+     "intent": {
+      "short": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      },
+      "long": {
+       "family": "RANK",
+       "kind": "enter",
+       "key": "secure_office",
+       "target": {
+        "kind": "power",
+        "id": "Merchant Guilds"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": false,
+     "long": false,
+     "tids": [
+      false,
+      false
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Take on the work in Merchant oligarchy that no one else wants, and do it without complaint.\",\"long\":\"Outlast Thieves' Guild, and still be standing with Merchant oligarchy when they are gone.\",\"intent\":{\"short\":{\"family\":\"RANK\",\"kind\":\"enter\",\"key\":\"secure_office\",\"target\":{\"kind\":\"power\",\"id\":\"Merchant oligarchy\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Thieves' Guild\"}}}}",
+      "after": "{\"short\":\"Take on the work in Merchant oligarchy that no one else wants, and do it without complaint.\",\"intent\":{\"short\":{\"family\":\"RANK\",\"kind\":\"enter\",\"key\":\"secure_office\",\"target\":{\"kind\":\"power\",\"id\":\"Merchant oligarchy\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"short\":\"Take on the work in Merchant oligarchy that no one else wants, and do it without complaint.\",\"intent\":{\"short\":{\"family\":\"RANK\",\"kind\":\"enter\",\"key\":\"secure_office\",\"target\":{\"kind\":\"power\",\"id\":\"Merchant oligarchy\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_furrier_s_district",
+    "stored": {
+     "short": "Take on the work in Merchant oligarchy that no one else wants, and do it without complaint.",
+     "long": "Outlast Thieves' Guild, and still be standing with Merchant oligarchy when they are gone.",
+     "intent": {
+      "short": {
+       "family": "RANK",
+       "kind": "enter",
+       "key": "secure_office",
+       "target": {
+        "kind": "power",
+        "id": "Merchant oligarchy"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Take on the work in Merchant oligarchy that no one else wants, and do it without complaint.",
+     "long": "Outlast Thieves' Guild, and still be standing with Merchant oligarchy when they are gone.",
+     "intent": {
+      "short": {
+       "family": "RANK",
+       "kind": "enter",
+       "key": "secure_office",
+       "target": {
+        "kind": "power",
+        "id": "Merchant oligarchy"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": false,
+     "long": false,
+     "tids": [
+      false,
+      false
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Beat Wojciech Semyonov at something this season, in front of people who matter.\",\"long\":\"Make peace between Merchant oligarchy and Thieves' Guild on terms Merchant oligarchy can live with.\",\"intent\":{\"short\":{\"family\":\"TIES\",\"kind\":\"rival_enemy\",\"key\":\"settle_rivalry\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_town_crier\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Thieves' Guild\"}}}}",
+      "after": "{\"short\":\"Beat Wojciech Semyonov at something this season, in front of people who matter.\",\"intent\":{\"short\":{\"family\":\"TIES\",\"kind\":\"rival_enemy\",\"key\":\"settle_rivalry\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_town_crier\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"short\":\"Beat Wojciech Semyonov at something this season, in front of people who matter.\",\"intent\":{\"short\":{\"family\":\"TIES\",\"kind\":\"rival_enemy\",\"key\":\"settle_rivalry\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_town_crier\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_beast_trainers",
+    "stored": {
+     "short": "Beat Wojciech Semyonov at something this season, in front of people who matter.",
+     "long": "Make peace between Merchant oligarchy and Thieves' Guild on terms Merchant oligarchy can live with.",
+     "intent": {
+      "short": {
+       "family": "TIES",
+       "kind": "rival_enemy",
+       "key": "settle_rivalry",
+       "target": {
+        "kind": "npc",
+        "id": "npc_town_crier"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Beat Wojciech Semyonov at something this season, in front of people who matter.",
+     "long": "Make peace between Merchant oligarchy and Thieves' Guild on terms Merchant oligarchy can live with.",
+     "intent": {
+      "short": {
+       "family": "TIES",
+       "kind": "rival_enemy",
+       "key": "settle_rivalry",
+       "target": {
+        "kind": "npc",
+        "id": "npc_town_crier"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": false,
+     "long": false,
+     "tids": [
+      false,
+      false
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Find a second supplier of grain, so one lost cart cannot stop the work at the city granaries.\",\"long\":\"Build Merchant oligarchy up until it is beyond the reach of Thieves' Guild.\",\"intent\":{\"short\":{\"family\":\"SUPPLY\",\"kind\":\"dependency\",\"key\":\"secure_supply\",\"target\":{\"kind\":\"house\",\"id\":\"City granaries\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Thieves' Guild\"}}}}",
+      "after": "{\"short\":\"Find a second supplier of grain, so one lost cart cannot stop the work at the city granaries.\",\"intent\":{\"short\":{\"family\":\"SUPPLY\",\"kind\":\"dependency\",\"key\":\"secure_supply\",\"target\":{\"kind\":\"house\",\"id\":\"City granaries\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"short\":\"Find a second supplier of grain, so one lost cart cannot stop the work at the city granaries.\",\"intent\":{\"short\":{\"family\":\"SUPPLY\",\"kind\":\"dependency\",\"key\":\"secure_supply\",\"target\":{\"kind\":\"house\",\"id\":\"City granaries\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_city_granaries",
+    "stored": {
+     "short": "Find a second supplier of grain, so one lost cart cannot stop the work at the city granaries.",
+     "long": "Build Merchant oligarchy up until it is beyond the reach of Thieves' Guild.",
+     "intent": {
+      "short": {
+       "family": "SUPPLY",
+       "kind": "dependency",
+       "key": "secure_supply",
+       "target": {
+        "kind": "house",
+        "id": "City granaries"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Find a second supplier of grain, so one lost cart cannot stop the work at the city granaries.",
+     "long": "Build Merchant oligarchy up until it is beyond the reach of Thieves' Guild.",
+     "intent": {
+      "short": {
+       "family": "SUPPLY",
+       "kind": "dependency",
+       "key": "secure_supply",
+       "target": {
+        "kind": "house",
+        "id": "City granaries"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": false,
+     "long": false,
+     "tids": [
+      false,
+      false
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Take on the work in The Guard that no one else wants, and do it without complaint.\",\"long\":\"See Thieves' Guild too weak to threaten Merchant oligarchy again.\",\"intent\":{\"short\":{\"family\":\"RANK\",\"kind\":\"enter\",\"key\":\"secure_office\",\"target\":{\"kind\":\"power\",\"id\":\"Military/Guard\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Thieves' Guild\"}}}}",
+      "after": "{\"short\":\"Take on the work in The Guard that no one else wants, and do it without complaint.\",\"intent\":{\"short\":{\"family\":\"RANK\",\"kind\":\"enter\",\"key\":\"secure_office\",\"target\":{\"kind\":\"power\",\"id\":\"Military/Guard\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"short\":\"Take on the work in The Guard that no one else wants, and do it without complaint.\",\"intent\":{\"short\":{\"family\":\"RANK\",\"kind\":\"enter\",\"key\":\"secure_office\",\"target\":{\"kind\":\"power\",\"id\":\"Military/Guard\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_multiple_adventurers_guilds",
+    "stored": {
+     "short": "Take on the work in The Guard that no one else wants, and do it without complaint.",
+     "long": "See Thieves' Guild too weak to threaten Merchant oligarchy again.",
+     "intent": {
+      "short": {
+       "family": "RANK",
+       "kind": "enter",
+       "key": "secure_office",
+       "target": {
+        "kind": "power",
+        "id": "Military/Guard"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Take on the work in The Guard that no one else wants, and do it without complaint.",
+     "long": "See Thieves' Guild too weak to threaten Merchant oligarchy again.",
+     "intent": {
+      "short": {
+       "family": "RANK",
+       "kind": "enter",
+       "key": "secure_office",
+       "target": {
+        "kind": "power",
+        "id": "Military/Guard"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": false,
+     "long": false,
+     "tids": [
+      false,
+      false
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Answer the next move by Thieves' Guild against Merchant oligarchy, quickly and in public.\",\"long\":\"Secure rights for the post relay station that will outlast whoever governs now.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Thieves' Guild\"}},\"long\":{\"family\":\"INSTITUTION\",\"kind\":\"charter\",\"key\":\"control_institution\",\"target\":{\"kind\":\"house\",\"id\":\"Post relay station\"}}}}",
+      "after": "{\"long\":\"Secure rights for the post relay station that will outlast whoever governs now.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}},\"long\":{\"family\":\"INSTITUTION\",\"kind\":\"charter\",\"key\":\"control_institution\",\"target\":{\"kind\":\"house\",\"id\":\"Post relay station\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"long\":\"Secure rights for the post relay station that will outlast whoever governs now.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}},\"long\":{\"family\":\"INSTITUTION\",\"kind\":\"charter\",\"key\":\"control_institution\",\"target\":{\"kind\":\"house\",\"id\":\"Post relay station\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_post_relay_station",
+    "stored": {
+     "short": "Answer the next move by Thieves' Guild against Merchant oligarchy, quickly and in public.",
+     "long": "Secure rights for the post relay station that will outlast whoever governs now.",
+     "intent": {
+      "short": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      },
+      "long": {
+       "family": "INSTITUTION",
+       "kind": "charter",
+       "key": "control_institution",
+       "target": {
+        "kind": "house",
+        "id": "Post relay station"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Answer the next move by Thieves' Guild against Merchant oligarchy, quickly and in public.",
+     "long": "Secure rights for the post relay station that will outlast whoever governs now.",
+     "intent": {
+      "short": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      },
+      "long": {
+       "family": "INSTITUTION",
+       "kind": "charter",
+       "key": "control_institution",
+       "target": {
+        "kind": "house",
+        "id": "Post relay station"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": false,
+     "long": false,
+     "tids": [
+      false,
+      false
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Ask Svetlana Lazarev for one thing this season, and reward them well when it is done.\",\"long\":\"Bring Merchant oligarchy under the sway of Thieves' Guild, one member at a time.\",\"intent\":{\"short\":{\"family\":\"ALLEGIANCE\",\"kind\":\"keep_patron\",\"key\":\"keep_agent\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_mine\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Merchant oligarchy\"}}}}",
+      "after": "{\"short\":\"Ask Svetlana Lazarev for one thing this season, and reward them well when it is done.\",\"intent\":{\"short\":{\"family\":\"ALLEGIANCE\",\"kind\":\"keep_patron\",\"key\":\"keep_agent\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_mine\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Merchant oligarchy\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"short\":\"Ask Svetlana Lazarev for one thing this season, and reward them well when it is done.\",\"intent\":{\"short\":{\"family\":\"ALLEGIANCE\",\"kind\":\"keep_patron\",\"key\":\"keep_agent\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_mine\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Merchant oligarchy\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_pawnbroker",
+    "stored": {
+     "short": "Ask Svetlana Lazarev for one thing this season, and reward them well when it is done.",
+     "long": "Bring Merchant oligarchy under the sway of Thieves' Guild, one member at a time.",
+     "intent": {
+      "short": {
+       "family": "ALLEGIANCE",
+       "kind": "keep_patron",
+       "key": "keep_agent",
+       "target": {
+        "kind": "npc",
+        "id": "npc_mine"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Merchant oligarchy"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Ask Svetlana Lazarev for one thing this season, and reward them well when it is done.",
+     "long": "Bring Merchant oligarchy under the sway of Thieves' Guild, one member at a time.",
+     "intent": {
+      "short": {
+       "family": "ALLEGIANCE",
+       "kind": "keep_patron",
+       "key": "keep_agent",
+       "target": {
+        "kind": "npc",
+        "id": "npc_mine"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Merchant oligarchy"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": false,
+     "long": false,
+     "tids": [
+      false,
+      false
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Win over one of Grigori Novikov's friends.\",\"long\":\"Be counted one day among those who lead Thieves' Guild.\",\"intent\":{\"short\":{\"family\":\"TIES\",\"kind\":\"rival_enemy\",\"key\":\"settle_rivalry\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_charlatan_fortune_tellers\"}},\"long\":{\"family\":\"RANK\",\"kind\":\"enter\",\"key\":\"secure_office\",\"target\":{\"kind\":\"power\",\"id\":\"Thieves' Guild\"}}}}",
+      "after": "{\"short\":\"Win over one of Grigori Novikov's friends.\",\"intent\":{\"short\":{\"family\":\"TIES\",\"kind\":\"rival_enemy\",\"key\":\"settle_rivalry\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_charlatan_fortune_tellers\"}},\"long\":{\"family\":\"RANK\",\"kind\":\"enter\",\"key\":\"secure_office\",\"target\":{\"kind\":\"power\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"short\":\"Win over one of Grigori Novikov's friends.\",\"intent\":{\"short\":{\"family\":\"TIES\",\"kind\":\"rival_enemy\",\"key\":\"settle_rivalry\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_charlatan_fortune_tellers\"}},\"long\":{\"family\":\"RANK\",\"kind\":\"enter\",\"key\":\"secure_office\",\"target\":{\"kind\":\"power\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_gambling_halls",
+    "stored": {
+     "short": "Win over one of Grigori Novikov's friends.",
+     "long": "Be counted one day among those who lead Thieves' Guild.",
+     "intent": {
+      "short": {
+       "family": "TIES",
+       "kind": "rival_enemy",
+       "key": "settle_rivalry",
+       "target": {
+        "kind": "npc",
+        "id": "npc_charlatan_fortune_tellers"
+       }
+      },
+      "long": {
+       "family": "RANK",
+       "kind": "enter",
+       "key": "secure_office",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Win over one of Grigori Novikov's friends.",
+     "long": "Be counted one day among those who lead Thieves' Guild.",
+     "intent": {
+      "short": {
+       "family": "TIES",
+       "kind": "rival_enemy",
+       "key": "settle_rivalry",
+       "target": {
+        "kind": "npc",
+        "id": "npc_charlatan_fortune_tellers"
+       }
+      },
+      "long": {
+       "family": "RANK",
+       "kind": "enter",
+       "key": "secure_office",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": false,
+     "long": false,
+     "tids": [
+      false,
+      false
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Answer the next move by Merchant oligarchy against Thieves' Guild, quickly and in public.\",\"long\":\"Make Radomir Bykov admit, in public, that they were wrong.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Merchant oligarchy\"}},\"long\":{\"family\":\"TIES\",\"kind\":\"rival_enemy\",\"key\":\"settle_rivalry\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_craft_guilds_30_80\"}}}}",
+      "after": "{\"long\":\"Make Radomir Bykov admit, in public, that they were wrong.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Merchant oligarchy\"}},\"long\":{\"family\":\"TIES\",\"kind\":\"rival_enemy\",\"key\":\"settle_rivalry\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_craft_guilds_30_80\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"long\":\"Make Radomir Bykov admit, in public, that they were wrong.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Merchant oligarchy\"}},\"long\":{\"family\":\"TIES\",\"kind\":\"rival_enemy\",\"key\":\"settle_rivalry\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_craft_guilds_30_80\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_red_light_district",
+    "stored": {
+     "short": "Answer the next move by Merchant oligarchy against Thieves' Guild, quickly and in public.",
+     "long": "Make Radomir Bykov admit, in public, that they were wrong.",
+     "intent": {
+      "short": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Merchant oligarchy"
+       }
+      },
+      "long": {
+       "family": "TIES",
+       "kind": "rival_enemy",
+       "key": "settle_rivalry",
+       "target": {
+        "kind": "npc",
+        "id": "npc_craft_guilds_30_80"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Answer the next move by Merchant oligarchy against Thieves' Guild, quickly and in public.",
+     "long": "Make Radomir Bykov admit, in public, that they were wrong.",
+     "intent": {
+      "short": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Merchant oligarchy"
+       }
+      },
+      "long": {
+       "family": "TIES",
+       "kind": "rival_enemy",
+       "key": "settle_rivalry",
+       "target": {
+        "kind": "npc",
+        "id": "npc_craft_guilds_30_80"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": false,
+     "long": false,
+     "tids": [
+      false,
+      false
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Be asked for an opinion by those who lead Thieves' Guild, once, this season.\",\"long\":\"Be someone the people here can always count on.\",\"intent\":{\"short\":{\"family\":\"RANK\",\"kind\":\"enter\",\"key\":\"secure_office\",\"target\":{\"kind\":\"power\",\"id\":\"Thieves' Guild\"}},\"long\":{\"family\":\"PERSONALITY\",\"kind\":\"duty\",\"key\":\"indulge_trait\",\"target\":null}}}",
+      "after": "{\"long\":\"Be someone the people here can always count on.\",\"intent\":{\"short\":{\"family\":\"RANK\",\"kind\":\"enter\",\"key\":\"secure_office\",\"target\":{\"kind\":\"power\"}},\"long\":{\"family\":\"PERSONALITY\",\"kind\":\"duty\",\"key\":\"indulge_trait\",\"target\":null}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"long\":\"Be someone the people here can always count on.\",\"intent\":{\"short\":{\"family\":\"RANK\",\"kind\":\"enter\",\"key\":\"secure_office\",\"target\":{\"kind\":\"power\"}},\"long\":{\"family\":\"PERSONALITY\",\"kind\":\"duty\",\"key\":\"indulge_trait\",\"target\":null}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_veiled_4141602ed879cfb6",
+    "stored": {
+     "short": "Be asked for an opinion by those who lead Thieves' Guild, once, this season.",
+     "long": "Be someone the people here can always count on.",
+     "intent": {
+      "short": {
+       "family": "RANK",
+       "kind": "enter",
+       "key": "secure_office",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      },
+      "long": {
+       "family": "PERSONALITY",
+       "kind": "duty",
+       "key": "indulge_trait",
+       "target": null
+      }
+     }
+    },
+    "inPub": {
+     "short": "Be asked for an opinion by those who lead Thieves' Guild, once, this season.",
+     "long": "Be someone the people here can always count on.",
+     "intent": {
+      "short": {
+       "family": "RANK",
+       "kind": "enter",
+       "key": "secure_office",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      },
+      "long": {
+       "family": "PERSONALITY",
+       "kind": "duty",
+       "key": "indulge_trait",
+       "target": null
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": false,
+     "long": false,
+     "tids": [
+      false,
+      null
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Get the whisper market through the season without borrowing.\",\"long\":\"Outlast Merchant oligarchy, and still be standing with Thieves' Guild when they are gone.\",\"intent\":{\"short\":{\"family\":\"INSTITUTION\",\"kind\":\"solvency\",\"key\":\"control_institution\",\"target\":{\"kind\":\"house\",\"id\":\"Whisper market\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Merchant oligarchy\"}}}}",
+      "after": "{\"intent\":{\"short\":{\"family\":\"INSTITUTION\",\"kind\":\"solvency\",\"key\":\"control_institution\",\"target\":{\"kind\":\"house\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Merchant oligarchy\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"intent\":{\"short\":{\"family\":\"INSTITUTION\",\"kind\":\"solvency\",\"key\":\"control_institution\",\"target\":{\"kind\":\"house\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Merchant oligarchy\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_veiled_df8e563ebf5413f0",
+    "stored": {
+     "short": "Get the whisper market through the season without borrowing.",
+     "long": "Outlast Merchant oligarchy, and still be standing with Thieves' Guild when they are gone.",
+     "intent": {
+      "short": {
+       "family": "INSTITUTION",
+       "kind": "solvency",
+       "key": "control_institution",
+       "target": {
+        "kind": "house",
+        "id": "Whisper market"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Merchant oligarchy"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Get the whisper market through the season without borrowing.",
+     "long": "Outlast Merchant oligarchy, and still be standing with Thieves' Guild when they are gone.",
+     "intent": {
+      "short": {
+       "family": "INSTITUTION",
+       "kind": "solvency",
+       "key": "control_institution",
+       "target": {
+        "kind": "house",
+        "id": "Whisper market"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Merchant oligarchy"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": true,
+     "long": false,
+     "tids": [
+      true,
+      false
+     ]
+    },
+    "served": "NO GOAL KEY"
+   }
+  ]
+ },
+ {
+  "seed": "server-veil-metropolis-7",
+  "hiddenHouses": [
+   "Smuggling network",
+   "Thieves' guild (powerful)",
+   "Front businesses",
+   "Underground network",
+   "Underground city",
+   "Whisper market",
+   "Assassins' guild"
+  ],
+  "pubPowers": [
+   [
+    "Grand Council",
+    "government",
+    null,
+    true
+   ],
+   [
+    "Thieves' Guild",
+    "criminal",
+    null,
+    null
+   ],
+   [
+    "Military/Guard",
+    "military",
+    null,
+    null
+   ],
+   [
+    "Arcane Orders",
+    "magic",
+    null,
+    null
+   ],
+   [
+    "Noble Houses",
+    "noble",
+    null,
+    null
+   ],
+   [
+    "Merchant Guilds",
+    "economy",
+    null,
+    null
+   ]
+  ],
+  "servedPowers": [
+   "Grand Council",
+   "Military/Guard",
+   "Arcane Orders",
+   "Noble Houses",
+   "Merchant Guilds"
+  ],
+  "people": [
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Bring Renuka Khanna of the smuggling network in before the season is out.\",\"long\":\"End the bad blood between The Guard and Thieves' Guild before the next generation inherits it.\",\"intent\":{\"short\":{\"family\":\"ALLEGIANCE\",\"kind\":\"warrant\",\"key\":\"pursue_warrant\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_veiled_3785dc53d17bd811\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Thieves' Guild\"}}}}",
+      "after": "{\"intent\":{\"short\":{\"family\":\"ALLEGIANCE\",\"kind\":\"warrant\",\"key\":\"pursue_warrant\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_veiled_3785dc53d17bd811\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"intent\":{\"short\":{\"family\":\"ALLEGIANCE\",\"kind\":\"warrant\",\"key\":\"pursue_warrant\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_veiled_3785dc53d17bd811\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_multiple_garrisons",
+    "stored": {
+     "short": "Bring Renuka Khanna of the smuggling network in before the season is out.",
+     "long": "End the bad blood between The Guard and Thieves' Guild before the next generation inherits it.",
+     "intent": {
+      "short": {
+       "family": "ALLEGIANCE",
+       "kind": "warrant",
+       "key": "pursue_warrant",
+       "target": {
+        "kind": "npc",
+        "id": "npc_veiled_3785dc53d17bd811"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Bring Renuka Khanna of the smuggling network in before the season is out.",
+     "long": "End the bad blood between The Guard and Thieves' Guild before the next generation inherits it.",
+     "intent": {
+      "short": {
+       "family": "ALLEGIANCE",
+       "kind": "warrant",
+       "key": "pursue_warrant",
+       "target": {
+        "kind": "npc",
+        "id": "npc_veiled_3785dc53d17bd811"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": true,
+     "long": true,
+     "tids": [
+      false,
+      true
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Win one ally of Thieves' Guild over to the side of Grand Council.\",\"long\":\"Rise past Chandrasekhar Choudhry in Grand Council on their own merit, owing no one for the climb.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Thieves' Guild\"}},\"long\":{\"family\":\"RANK\",\"kind\":\"climb\",\"key\":\"secure_office\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_state_granary_complex\"}}}}",
+      "after": "{\"long\":\"Rise past Chandrasekhar Choudhry in Grand Council on their own merit, owing no one for the climb.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}},\"long\":{\"family\":\"RANK\",\"kind\":\"climb\",\"key\":\"secure_office\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_state_granary_complex\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"long\":\"Rise past Chandrasekhar Choudhry in Grand Council on their own merit, owing no one for the climb.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}},\"long\":{\"family\":\"RANK\",\"kind\":\"climb\",\"key\":\"secure_office\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_state_granary_complex\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_workhouse",
+    "stored": {
+     "short": "Win one ally of Thieves' Guild over to the side of Grand Council.",
+     "long": "Rise past Chandrasekhar Choudhry in Grand Council on their own merit, owing no one for the climb.",
+     "intent": {
+      "short": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      },
+      "long": {
+       "family": "RANK",
+       "kind": "climb",
+       "key": "secure_office",
+       "target": {
+        "kind": "npc",
+        "id": "npc_state_granary_complex"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Win one ally of Thieves' Guild over to the side of Grand Council.",
+     "long": "Rise past Chandrasekhar Choudhry in Grand Council on their own merit, owing no one for the climb.",
+     "intent": {
+      "short": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      },
+      "long": {
+       "family": "RANK",
+       "kind": "climb",
+       "key": "secure_office",
+       "target": {
+        "kind": "npc",
+        "id": "npc_state_granary_complex"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": true,
+     "long": false,
+     "tids": [
+      true,
+      false
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Catch Aarti Parekh with something from the thieves' guild on them, in front of witnesses.\",\"long\":\"Bring Thieves' Guild under the sway of Grand Council, one member at a time.\",\"intent\":{\"short\":{\"family\":\"ALLEGIANCE\",\"kind\":\"warrant\",\"key\":\"pursue_warrant\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_veiled_a2a91b247c5d1a69\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Thieves' Guild\"}}}}",
+      "after": "{\"intent\":{\"short\":{\"family\":\"ALLEGIANCE\",\"kind\":\"warrant\",\"key\":\"pursue_warrant\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_veiled_a2a91b247c5d1a69\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"intent\":{\"short\":{\"family\":\"ALLEGIANCE\",\"kind\":\"warrant\",\"key\":\"pursue_warrant\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_veiled_a2a91b247c5d1a69\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_professional_city_watch",
+    "stored": {
+     "short": "Catch Aarti Parekh with something from the thieves' guild on them, in front of witnesses.",
+     "long": "Bring Thieves' Guild under the sway of Grand Council, one member at a time.",
+     "intent": {
+      "short": {
+       "family": "ALLEGIANCE",
+       "kind": "warrant",
+       "key": "pursue_warrant",
+       "target": {
+        "kind": "npc",
+        "id": "npc_veiled_a2a91b247c5d1a69"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Catch Aarti Parekh with something from the thieves' guild on them, in front of witnesses.",
+     "long": "Bring Thieves' Guild under the sway of Grand Council, one member at a time.",
+     "intent": {
+      "short": {
+       "family": "ALLEGIANCE",
+       "kind": "warrant",
+       "key": "pursue_warrant",
+       "target": {
+        "kind": "npc",
+        "id": "npc_veiled_a2a91b247c5d1a69"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": true,
+     "long": true,
+     "tids": [
+      false,
+      true
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Have the old rights of the listening post read out and recognised before anyone challenges them.\",\"long\":\"Outlast Grand Council, and still be standing with Thieves' Guild when they are gone.\",\"intent\":{\"short\":{\"family\":\"INSTITUTION\",\"kind\":\"charter\",\"key\":\"control_institution\",\"target\":{\"kind\":\"house\",\"id\":\"Listening post\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Grand Council\"}}}}",
+      "after": "{\"short\":\"Have the old rights of the listening post read out and recognised before anyone challenges them.\",\"intent\":{\"short\":{\"family\":\"INSTITUTION\",\"kind\":\"charter\",\"key\":\"control_institution\",\"target\":{\"kind\":\"house\",\"id\":\"Listening post\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Grand Council\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"short\":\"Have the old rights of the listening post read out and recognised before anyone challenges them.\",\"intent\":{\"short\":{\"family\":\"INSTITUTION\",\"kind\":\"charter\",\"key\":\"control_institution\",\"target\":{\"kind\":\"house\",\"id\":\"Listening post\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Grand Council\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_listening_post",
+    "stored": {
+     "short": "Have the old rights of the listening post read out and recognised before anyone challenges them.",
+     "long": "Outlast Grand Council, and still be standing with Thieves' Guild when they are gone.",
+     "intent": {
+      "short": {
+       "family": "INSTITUTION",
+       "kind": "charter",
+       "key": "control_institution",
+       "target": {
+        "kind": "house",
+        "id": "Listening post"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Grand Council"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Have the old rights of the listening post read out and recognised before anyone challenges them.",
+     "long": "Outlast Grand Council, and still be standing with Thieves' Guild when they are gone.",
+     "intent": {
+      "short": {
+       "family": "INSTITUTION",
+       "kind": "charter",
+       "key": "control_institution",
+       "target": {
+        "kind": "house",
+        "id": "Listening post"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Grand Council"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": false,
+     "long": true,
+     "tids": [
+      false,
+      false
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Learn the plans of Thieves' Guild against Grand Council before they can act on them.\",\"long\":\"Win the sage's quarter a lasting privilege that no other house can claim.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Thieves' Guild\"}},\"long\":{\"family\":\"INSTITUTION\",\"kind\":\"charter\",\"key\":\"control_institution\",\"target\":{\"kind\":\"house\",\"id\":\"Sage's quarter\"}}}}",
+      "after": "{\"long\":\"Win the sage's quarter a lasting privilege that no other house can claim.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}},\"long\":{\"family\":\"INSTITUTION\",\"kind\":\"charter\",\"key\":\"control_institution\",\"target\":{\"kind\":\"house\",\"id\":\"Sage's quarter\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"long\":\"Win the sage's quarter a lasting privilege that no other house can claim.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}},\"long\":{\"family\":\"INSTITUTION\",\"kind\":\"charter\",\"key\":\"control_institution\",\"target\":{\"kind\":\"house\",\"id\":\"Sage's quarter\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_sage_s_quarter",
+    "stored": {
+     "short": "Learn the plans of Thieves' Guild against Grand Council before they can act on them.",
+     "long": "Win the sage's quarter a lasting privilege that no other house can claim.",
+     "intent": {
+      "short": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      },
+      "long": {
+       "family": "INSTITUTION",
+       "kind": "charter",
+       "key": "control_institution",
+       "target": {
+        "kind": "house",
+        "id": "Sage's quarter"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Learn the plans of Thieves' Guild against Grand Council before they can act on them.",
+     "long": "Win the sage's quarter a lasting privilege that no other house can claim.",
+     "intent": {
+      "short": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      },
+      "long": {
+       "family": "INSTITUTION",
+       "kind": "charter",
+       "key": "control_institution",
+       "target": {
+        "kind": "house",
+        "id": "Sage's quarter"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": true,
+     "long": false,
+     "tids": [
+      true,
+      false
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Pass Vinod Verma a favour from Thieves' Guild that they could not have won alone.\",\"long\":\"Keep the bond with Mohini Mahajan as the work and the years change them both.\",\"intent\":{\"short\":{\"family\":\"ALLEGIANCE\",\"kind\":\"keep_patron\",\"key\":\"keep_agent\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_workhouse\"}},\"long\":{\"family\":\"TIES\",\"kind\":\"mentor_student\",\"key\":\"protect_ally\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_veiled_ffe10a2a3310c118\"}}}}",
+      "after": "{\"long\":\"Keep the bond with Mohini Mahajan as the work and the years change them both.\",\"intent\":{\"short\":{\"family\":\"ALLEGIANCE\",\"kind\":\"keep_patron\",\"key\":\"keep_agent\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_workhouse\"}},\"long\":{\"family\":\"TIES\",\"kind\":\"mentor_student\",\"key\":\"protect_ally\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_veiled_ffe10a2a3310c118\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"long\":\"Keep the bond with Mohini Mahajan as the work and the years change them both.\",\"intent\":{\"short\":{\"family\":\"ALLEGIANCE\",\"kind\":\"keep_patron\",\"key\":\"keep_agent\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_workhouse\"}},\"long\":{\"family\":\"TIES\",\"kind\":\"mentor_student\",\"key\":\"protect_ally\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_veiled_ffe10a2a3310c118\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_veiled_a2a91b247c5d1a69",
+    "stored": {
+     "short": "Pass Vinod Verma a favour from Thieves' Guild that they could not have won alone.",
+     "long": "Keep the bond with Mohini Mahajan as the work and the years change them both.",
+     "intent": {
+      "short": {
+       "family": "ALLEGIANCE",
+       "kind": "keep_patron",
+       "key": "keep_agent",
+       "target": {
+        "kind": "npc",
+        "id": "npc_workhouse"
+       }
+      },
+      "long": {
+       "family": "TIES",
+       "kind": "mentor_student",
+       "key": "protect_ally",
+       "target": {
+        "kind": "npc",
+        "id": "npc_veiled_ffe10a2a3310c118"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Pass Vinod Verma a favour from Thieves' Guild that they could not have won alone.",
+     "long": "Keep the bond with Mohini Mahajan as the work and the years change them both.",
+     "intent": {
+      "short": {
+       "family": "ALLEGIANCE",
+       "kind": "keep_patron",
+       "key": "keep_agent",
+       "target": {
+        "kind": "npc",
+        "id": "npc_workhouse"
+       }
+      },
+      "long": {
+       "family": "TIES",
+       "kind": "mentor_student",
+       "key": "protect_ally",
+       "target": {
+        "kind": "npc",
+        "id": "npc_veiled_ffe10a2a3310c118"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": true,
+     "long": false,
+     "tids": [
+      false,
+      false
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Keep the quarrel between Grand Council and Thieves' Guild from turning into open trouble this season.\",\"long\":\"Reach the top of Grand Council by the long road, one earned favour at a time.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Thieves' Guild\"}},\"long\":{\"family\":\"RANK\",\"kind\":\"enter\",\"key\":\"secure_office\",\"target\":{\"kind\":\"power\",\"id\":\"Grand Council\"}}}}",
+      "after": "{\"long\":\"Reach the top of Grand Council by the long road, one earned favour at a time.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}},\"long\":{\"family\":\"RANK\",\"kind\":\"enter\",\"key\":\"secure_office\",\"target\":{\"kind\":\"power\",\"id\":\"Grand Council\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"long\":\"Reach the top of Grand Council by the long road, one earned favour at a time.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}},\"long\":{\"family\":\"RANK\",\"kind\":\"enter\",\"key\":\"secure_office\",\"target\":{\"kind\":\"power\",\"id\":\"Grand Council\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_elder_grove_council",
+    "stored": {
+     "short": "Keep the quarrel between Grand Council and Thieves' Guild from turning into open trouble this season.",
+     "long": "Reach the top of Grand Council by the long road, one earned favour at a time.",
+     "intent": {
+      "short": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      },
+      "long": {
+       "family": "RANK",
+       "kind": "enter",
+       "key": "secure_office",
+       "target": {
+        "kind": "power",
+        "id": "Grand Council"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Keep the quarrel between Grand Council and Thieves' Guild from turning into open trouble this season.",
+     "long": "Reach the top of Grand Council by the long road, one earned favour at a time.",
+     "intent": {
+      "short": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      },
+      "long": {
+       "family": "RANK",
+       "kind": "enter",
+       "key": "secure_office",
+       "target": {
+        "kind": "power",
+        "id": "Grand Council"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": true,
+     "long": false,
+     "tids": [
+      true,
+      false
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Answer the next move by Thieves' Guild against Grand Council, quickly and in public.\",\"long\":\"Collect everything Aarav Mukhopadhyay owes, in full.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Thieves' Guild\"}},\"long\":{\"family\":\"TIES\",\"kind\":\"creditor\",\"key\":\"collect_debt\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_coaching_inn\"}}}}",
+      "after": "{\"long\":\"Collect everything Aarav Mukhopadhyay owes, in full.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}},\"long\":{\"family\":\"TIES\",\"kind\":\"creditor\",\"key\":\"collect_debt\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_coaching_inn\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"long\":\"Collect everything Aarav Mukhopadhyay owes, in full.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}},\"long\":{\"family\":\"TIES\",\"kind\":\"creditor\",\"key\":\"collect_debt\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_coaching_inn\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_public_bathhouse",
+    "stored": {
+     "short": "Answer the next move by Thieves' Guild against Grand Council, quickly and in public.",
+     "long": "Collect everything Aarav Mukhopadhyay owes, in full.",
+     "intent": {
+      "short": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      },
+      "long": {
+       "family": "TIES",
+       "kind": "creditor",
+       "key": "collect_debt",
+       "target": {
+        "kind": "npc",
+        "id": "npc_coaching_inn"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Answer the next move by Thieves' Guild against Grand Council, quickly and in public.",
+     "long": "Collect everything Aarav Mukhopadhyay owes, in full.",
+     "intent": {
+      "short": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      },
+      "long": {
+       "family": "TIES",
+       "kind": "creditor",
+       "key": "collect_debt",
+       "target": {
+        "kind": "npc",
+        "id": "npc_coaching_inn"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": true,
+     "long": false,
+     "tids": [
+      true,
+      false
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Stop Thieves' Guild from taking anything more from Grand Council this season.\",\"long\":\"Protect Anand Patel from anyone who would bring them down.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Thieves' Guild\"}},\"long\":{\"family\":\"TIES\",\"kind\":\"ally\",\"key\":\"protect_ally\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_auction_house\"}}}}",
+      "after": "{\"long\":\"Protect Anand Patel from anyone who would bring them down.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}},\"long\":{\"family\":\"TIES\",\"kind\":\"ally\",\"key\":\"protect_ally\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_auction_house\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"long\":\"Protect Anand Patel from anyone who would bring them down.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}},\"long\":{\"family\":\"TIES\",\"kind\":\"ally\",\"key\":\"protect_ally\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_auction_house\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_fuller",
+    "stored": {
+     "short": "Stop Thieves' Guild from taking anything more from Grand Council this season.",
+     "long": "Protect Anand Patel from anyone who would bring them down.",
+     "intent": {
+      "short": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      },
+      "long": {
+       "family": "TIES",
+       "kind": "ally",
+       "key": "protect_ally",
+       "target": {
+        "kind": "npc",
+        "id": "npc_auction_house"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Stop Thieves' Guild from taking anything more from Grand Council this season.",
+     "long": "Protect Anand Patel from anyone who would bring them down.",
+     "intent": {
+      "short": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      },
+      "long": {
+       "family": "TIES",
+       "kind": "ally",
+       "key": "protect_ally",
+       "target": {
+        "kind": "npc",
+        "id": "npc_auction_house"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": true,
+     "long": false,
+     "tids": [
+      true,
+      false
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Find out which members of Grand Council are still friendly with Thieves' Guild, and why.\",\"long\":\"Keep the alliance with Gayatri Tagore strong for as long as both live.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Thieves' Guild\"}},\"long\":{\"family\":\"TIES\",\"kind\":\"ally\",\"key\":\"protect_ally\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_fuller\"}}}}",
+      "after": "{\"long\":\"Keep the alliance with Gayatri Tagore strong for as long as both live.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}},\"long\":{\"family\":\"TIES\",\"kind\":\"ally\",\"key\":\"protect_ally\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_fuller\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"long\":\"Keep the alliance with Gayatri Tagore strong for as long as both live.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}},\"long\":{\"family\":\"TIES\",\"kind\":\"ally\",\"key\":\"protect_ally\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_fuller\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_weavers_textile_workers",
+    "stored": {
+     "short": "Find out which members of Grand Council are still friendly with Thieves' Guild, and why.",
+     "long": "Keep the alliance with Gayatri Tagore strong for as long as both live.",
+     "intent": {
+      "short": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      },
+      "long": {
+       "family": "TIES",
+       "kind": "ally",
+       "key": "protect_ally",
+       "target": {
+        "kind": "npc",
+        "id": "npc_fuller"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Find out which members of Grand Council are still friendly with Thieves' Guild, and why.",
+     "long": "Keep the alliance with Gayatri Tagore strong for as long as both live.",
+     "intent": {
+      "short": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      },
+      "long": {
+       "family": "TIES",
+       "kind": "ally",
+       "key": "protect_ally",
+       "target": {
+        "kind": "npc",
+        "id": "npc_fuller"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": true,
+     "long": false,
+     "tids": [
+      true,
+      false
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Let Prasad Deshpande believe all is well at the tailor's guild while they look for a way out.\",\"long\":\"Hand on the tailor's guild with full stores, honest accounts and nothing owed.\",\"intent\":{\"short\":{\"family\":\"ALLEGIANCE\",\"kind\":\"front_out\",\"key\":\"escape_patron\",\"target\":{\"kind\":\"power\",\"id\":\"Thieves' Guild\"}},\"long\":{\"family\":\"INSTITUTION\",\"kind\":\"solvency\",\"key\":\"control_institution\",\"target\":{\"kind\":\"house\",\"id\":\"Tailor's guild\"}}}}",
+      "after": "{\"short\":\"Let Prasad Deshpande believe all is well at the tailor's guild while they look for a way out.\",\"long\":\"Hand on the tailor's guild with full stores, honest accounts and nothing owed.\",\"intent\":{\"short\":{\"family\":\"ALLEGIANCE\",\"kind\":\"front_out\",\"key\":\"escape_patron\",\"target\":{\"kind\":\"power\"}},\"long\":{\"family\":\"INSTITUTION\",\"kind\":\"solvency\",\"key\":\"control_institution\",\"target\":{\"kind\":\"house\",\"id\":\"Tailor's guild\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"short\":\"Let Prasad Deshpande believe all is well at the tailor's guild while they look for a way out.\",\"long\":\"Hand on the tailor's guild with full stores, honest accounts and nothing owed.\",\"intent\":{\"short\":{\"family\":\"ALLEGIANCE\",\"kind\":\"front_out\",\"key\":\"escape_patron\",\"target\":{\"kind\":\"power\"}},\"long\":{\"family\":\"INSTITUTION\",\"kind\":\"solvency\",\"key\":\"control_institution\",\"target\":{\"kind\":\"house\",\"id\":\"Tailor's guild\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_tailor_s_guild",
+    "stored": {
+     "short": "Let Prasad Deshpande believe all is well at the tailor's guild while they look for a way out.",
+     "long": "Hand on the tailor's guild with full stores, honest accounts and nothing owed.",
+     "intent": {
+      "short": {
+       "family": "ALLEGIANCE",
+       "kind": "front_out",
+       "key": "escape_patron",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      },
+      "long": {
+       "family": "INSTITUTION",
+       "kind": "solvency",
+       "key": "control_institution",
+       "target": {
+        "kind": "house",
+        "id": "Tailor's guild"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Let Prasad Deshpande believe all is well at the tailor's guild while they look for a way out.",
+     "long": "Hand on the tailor's guild with full stores, honest accounts and nothing owed.",
+     "intent": {
+      "short": {
+       "family": "ALLEGIANCE",
+       "kind": "front_out",
+       "key": "escape_patron",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      },
+      "long": {
+       "family": "INSTITUTION",
+       "kind": "solvency",
+       "key": "control_institution",
+       "target": {
+        "kind": "house",
+        "id": "Tailor's guild"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": false,
+     "long": false,
+     "tids": [
+      true,
+      false
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Take on the work in Grand Council that no one else wants, and do it without complaint.\",\"long\":\"Make peace between Grand Council and Thieves' Guild on terms Grand Council can live with.\",\"intent\":{\"short\":{\"family\":\"RANK\",\"kind\":\"enter\",\"key\":\"secure_office\",\"target\":{\"kind\":\"power\",\"id\":\"Grand Council\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Thieves' Guild\"}}}}",
+      "after": "{\"short\":\"Take on the work in Grand Council that no one else wants, and do it without complaint.\",\"intent\":{\"short\":{\"family\":\"RANK\",\"kind\":\"enter\",\"key\":\"secure_office\",\"target\":{\"kind\":\"power\",\"id\":\"Grand Council\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"short\":\"Take on the work in Grand Council that no one else wants, and do it without complaint.\",\"intent\":{\"short\":{\"family\":\"RANK\",\"kind\":\"enter\",\"key\":\"secure_office\",\"target\":{\"kind\":\"power\",\"id\":\"Grand Council\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_ropemaker",
+    "stored": {
+     "short": "Take on the work in Grand Council that no one else wants, and do it without complaint.",
+     "long": "Make peace between Grand Council and Thieves' Guild on terms Grand Council can live with.",
+     "intent": {
+      "short": {
+       "family": "RANK",
+       "kind": "enter",
+       "key": "secure_office",
+       "target": {
+        "kind": "power",
+        "id": "Grand Council"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Take on the work in Grand Council that no one else wants, and do it without complaint.",
+     "long": "Make peace between Grand Council and Thieves' Guild on terms Grand Council can live with.",
+     "intent": {
+      "short": {
+       "family": "RANK",
+       "kind": "enter",
+       "key": "secure_office",
+       "target": {
+        "kind": "power",
+        "id": "Grand Council"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": false,
+     "long": true,
+     "tids": [
+      false,
+      true
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Be asked for an opinion by those who lead Grand Council, once, this season.\",\"long\":\"See Thieves' Guild too weak to threaten Grand Council again.\",\"intent\":{\"short\":{\"family\":\"RANK\",\"kind\":\"enter\",\"key\":\"secure_office\",\"target\":{\"kind\":\"power\",\"id\":\"Grand Council\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Thieves' Guild\"}}}}",
+      "after": "{\"short\":\"Be asked for an opinion by those who lead Grand Council, once, this season.\",\"intent\":{\"short\":{\"family\":\"RANK\",\"kind\":\"enter\",\"key\":\"secure_office\",\"target\":{\"kind\":\"power\",\"id\":\"Grand Council\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"short\":\"Be asked for an opinion by those who lead Grand Council, once, this season.\",\"intent\":{\"short\":{\"family\":\"RANK\",\"kind\":\"enter\",\"key\":\"secure_office\",\"target\":{\"kind\":\"power\",\"id\":\"Grand Council\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_midwife",
+    "stored": {
+     "short": "Be asked for an opinion by those who lead Grand Council, once, this season.",
+     "long": "See Thieves' Guild too weak to threaten Grand Council again.",
+     "intent": {
+      "short": {
+       "family": "RANK",
+       "kind": "enter",
+       "key": "secure_office",
+       "target": {
+        "kind": "power",
+        "id": "Grand Council"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Be asked for an opinion by those who lead Grand Council, once, this season.",
+     "long": "See Thieves' Guild too weak to threaten Grand Council again.",
+     "intent": {
+      "short": {
+       "family": "RANK",
+       "kind": "enter",
+       "key": "secure_office",
+       "target": {
+        "kind": "power",
+        "id": "Grand Council"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": false,
+     "long": true,
+     "tids": [
+      false,
+      true
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Bring Grand Council a piece of news before anyone else does.\",\"long\":\"End the bad blood between Grand Council and Thieves' Guild before the next generation inherits it.\",\"intent\":{\"short\":{\"family\":\"RANK\",\"kind\":\"enter\",\"key\":\"secure_office\",\"target\":{\"kind\":\"power\",\"id\":\"Grand Council\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Thieves' Guild\"}}}}",
+      "after": "{\"short\":\"Bring Grand Council a piece of news before anyone else does.\",\"intent\":{\"short\":{\"family\":\"RANK\",\"kind\":\"enter\",\"key\":\"secure_office\",\"target\":{\"kind\":\"power\",\"id\":\"Grand Council\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"short\":\"Bring Grand Council a piece of news before anyone else does.\",\"intent\":{\"short\":{\"family\":\"RANK\",\"kind\":\"enter\",\"key\":\"secure_office\",\"target\":{\"kind\":\"power\",\"id\":\"Grand Council\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_town_crier",
+    "stored": {
+     "short": "Bring Grand Council a piece of news before anyone else does.",
+     "long": "End the bad blood between Grand Council and Thieves' Guild before the next generation inherits it.",
+     "intent": {
+      "short": {
+       "family": "RANK",
+       "kind": "enter",
+       "key": "secure_office",
+       "target": {
+        "kind": "power",
+        "id": "Grand Council"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Bring Grand Council a piece of news before anyone else does.",
+     "long": "End the bad blood between Grand Council and Thieves' Guild before the next generation inherits it.",
+     "intent": {
+      "short": {
+       "family": "RANK",
+       "kind": "enter",
+       "key": "secure_office",
+       "target": {
+        "kind": "power",
+        "id": "Grand Council"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": false,
+     "long": true,
+     "tids": [
+      false,
+      true
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Get the court buildings excused from one tax or levy this season.\",\"long\":\"Outlast Thieves' Guild, and still be standing with Grand Council when they are gone.\",\"intent\":{\"short\":{\"family\":\"INSTITUTION\",\"kind\":\"charter\",\"key\":\"control_institution\",\"target\":{\"kind\":\"house\",\"id\":\"Multiple court buildings\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Thieves' Guild\"}}}}",
+      "after": "{\"short\":\"Get the court buildings excused from one tax or levy this season.\",\"intent\":{\"short\":{\"family\":\"INSTITUTION\",\"kind\":\"charter\",\"key\":\"control_institution\",\"target\":{\"kind\":\"house\",\"id\":\"Multiple court buildings\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"short\":\"Get the court buildings excused from one tax or levy this season.\",\"intent\":{\"short\":{\"family\":\"INSTITUTION\",\"kind\":\"charter\",\"key\":\"control_institution\",\"target\":{\"kind\":\"house\",\"id\":\"Multiple court buildings\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_multiple_court_buildings",
+    "stored": {
+     "short": "Get the court buildings excused from one tax or levy this season.",
+     "long": "Outlast Thieves' Guild, and still be standing with Grand Council when they are gone.",
+     "intent": {
+      "short": {
+       "family": "INSTITUTION",
+       "kind": "charter",
+       "key": "control_institution",
+       "target": {
+        "kind": "house",
+        "id": "Multiple court buildings"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Get the court buildings excused from one tax or levy this season.",
+     "long": "Outlast Thieves' Guild, and still be standing with Grand Council when they are gone.",
+     "intent": {
+      "short": {
+       "family": "INSTITUTION",
+       "kind": "charter",
+       "key": "control_institution",
+       "target": {
+        "kind": "house",
+        "id": "Multiple court buildings"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": false,
+     "long": true,
+     "tids": [
+      false,
+      true
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Get enough on Aarti Parekh to hold them, and make it stick.\",\"long\":\"Make peace between The Guard and Thieves' Guild on terms The Guard can live with.\",\"intent\":{\"short\":{\"family\":\"ALLEGIANCE\",\"kind\":\"warrant\",\"key\":\"pursue_warrant\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_veiled_a2a91b247c5d1a69\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Thieves' Guild\"}}}}",
+      "after": "{\"short\":\"Get enough on Aarti Parekh to hold them, and make it stick.\",\"intent\":{\"short\":{\"family\":\"ALLEGIANCE\",\"kind\":\"warrant\",\"key\":\"pursue_warrant\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_veiled_a2a91b247c5d1a69\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"short\":\"Get enough on Aarti Parekh to hold them, and make it stick.\",\"intent\":{\"short\":{\"family\":\"ALLEGIANCE\",\"kind\":\"warrant\",\"key\":\"pursue_warrant\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_veiled_a2a91b247c5d1a69\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_massive_prison",
+    "stored": {
+     "short": "Get enough on Aarti Parekh to hold them, and make it stick.",
+     "long": "Make peace between The Guard and Thieves' Guild on terms The Guard can live with.",
+     "intent": {
+      "short": {
+       "family": "ALLEGIANCE",
+       "kind": "warrant",
+       "key": "pursue_warrant",
+       "target": {
+        "kind": "npc",
+        "id": "npc_veiled_a2a91b247c5d1a69"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Get enough on Aarti Parekh to hold them, and make it stick.",
+     "long": "Make peace between The Guard and Thieves' Guild on terms The Guard can live with.",
+     "intent": {
+      "short": {
+       "family": "ALLEGIANCE",
+       "kind": "warrant",
+       "key": "pursue_warrant",
+       "target": {
+        "kind": "npc",
+        "id": "npc_veiled_a2a91b247c5d1a69"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": false,
+     "long": true,
+     "tids": [
+      false,
+      true
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Get the great library through the season without borrowing.\",\"long\":\"Build Grand Council up until it is beyond the reach of Thieves' Guild.\",\"intent\":{\"short\":{\"family\":\"INSTITUTION\",\"kind\":\"solvency\",\"key\":\"control_institution\",\"target\":{\"kind\":\"house\",\"id\":\"Great library\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Thieves' Guild\"}}}}",
+      "after": "{\"short\":\"Get the great library through the season without borrowing.\",\"intent\":{\"short\":{\"family\":\"INSTITUTION\",\"kind\":\"solvency\",\"key\":\"control_institution\",\"target\":{\"kind\":\"house\",\"id\":\"Great library\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"short\":\"Get the great library through the season without borrowing.\",\"intent\":{\"short\":{\"family\":\"INSTITUTION\",\"kind\":\"solvency\",\"key\":\"control_institution\",\"target\":{\"kind\":\"house\",\"id\":\"Great library\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_great_library",
+    "stored": {
+     "short": "Get the great library through the season without borrowing.",
+     "long": "Build Grand Council up until it is beyond the reach of Thieves' Guild.",
+     "intent": {
+      "short": {
+       "family": "INSTITUTION",
+       "kind": "solvency",
+       "key": "control_institution",
+       "target": {
+        "kind": "house",
+        "id": "Great library"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Get the great library through the season without borrowing.",
+     "long": "Build Grand Council up until it is beyond the reach of Thieves' Guild.",
+     "intent": {
+      "short": {
+       "family": "INSTITUTION",
+       "kind": "solvency",
+       "key": "control_institution",
+       "target": {
+        "kind": "house",
+        "id": "Great library"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": false,
+     "long": true,
+     "tids": [
+      false,
+      true
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Win one ally of Thieves' Guild over to the side of The Guard.\",\"long\":\"Have a life worth telling stories about.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Thieves' Guild\"}},\"long\":{\"family\":\"PERSONALITY\",\"kind\":\"impulse\",\"key\":\"indulge_trait\",\"target\":null}}}",
+      "after": "{\"long\":\"Have a life worth telling stories about.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}},\"long\":{\"family\":\"PERSONALITY\",\"kind\":\"impulse\",\"key\":\"indulge_trait\",\"target\":null}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"long\":\"Have a life worth telling stories about.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\"}},\"long\":{\"family\":\"PERSONALITY\",\"kind\":\"impulse\",\"key\":\"indulge_trait\",\"target\":null}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_multiple_adventurers_guilds",
+    "stored": {
+     "short": "Win one ally of Thieves' Guild over to the side of The Guard.",
+     "long": "Have a life worth telling stories about.",
+     "intent": {
+      "short": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      },
+      "long": {
+       "family": "PERSONALITY",
+       "kind": "impulse",
+       "key": "indulge_trait",
+       "target": null
+      }
+     }
+    },
+    "inPub": {
+     "short": "Win one ally of Thieves' Guild over to the side of The Guard.",
+     "long": "Have a life worth telling stories about.",
+     "intent": {
+      "short": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Thieves' Guild"
+       }
+      },
+      "long": {
+       "family": "PERSONALITY",
+       "kind": "impulse",
+       "key": "indulge_trait",
+       "target": null
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": true,
+     "long": false,
+     "tids": [
+      true,
+      null
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Stand by Prasad Deshpande in their next quarrel, whoever it is with.\",\"long\":\"Build Thieves' Guild up until it is beyond the reach of Grand Council.\",\"intent\":{\"short\":{\"family\":\"TIES\",\"kind\":\"ally\",\"key\":\"protect_ally\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_listening_post\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Grand Council\"}}}}",
+      "after": "{\"short\":\"Stand by Prasad Deshpande in their next quarrel, whoever it is with.\",\"intent\":{\"short\":{\"family\":\"TIES\",\"kind\":\"ally\",\"key\":\"protect_ally\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_listening_post\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Grand Council\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"short\":\"Stand by Prasad Deshpande in their next quarrel, whoever it is with.\",\"intent\":{\"short\":{\"family\":\"TIES\",\"kind\":\"ally\",\"key\":\"protect_ally\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_listening_post\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Grand Council\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_pawnbroker",
+    "stored": {
+     "short": "Stand by Prasad Deshpande in their next quarrel, whoever it is with.",
+     "long": "Build Thieves' Guild up until it is beyond the reach of Grand Council.",
+     "intent": {
+      "short": {
+       "family": "TIES",
+       "kind": "ally",
+       "key": "protect_ally",
+       "target": {
+        "kind": "npc",
+        "id": "npc_listening_post"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Grand Council"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Stand by Prasad Deshpande in their next quarrel, whoever it is with.",
+     "long": "Build Thieves' Guild up until it is beyond the reach of Grand Council.",
+     "intent": {
+      "short": {
+       "family": "TIES",
+       "kind": "ally",
+       "key": "protect_ally",
+       "target": {
+        "kind": "npc",
+        "id": "npc_listening_post"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Grand Council"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": false,
+     "long": true,
+     "tids": [
+      false,
+      false
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Keep the old lessons between them and Madhuri Gupta private.\",\"long\":\"Bring The Guard under the sway of Thieves' Guild, one member at a time.\",\"intent\":{\"short\":{\"family\":\"TIES\",\"kind\":\"mentor_student\",\"key\":\"protect_ally\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_veiled_1868e680d974fbf2\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Military/Guard\"}}}}",
+      "after": "{\"short\":\"Keep the old lessons between them and Madhuri Gupta private.\",\"intent\":{\"short\":{\"family\":\"TIES\",\"kind\":\"mentor_student\",\"key\":\"protect_ally\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_veiled_1868e680d974fbf2\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Military/Guard\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"short\":\"Keep the old lessons between them and Madhuri Gupta private.\",\"intent\":{\"short\":{\"family\":\"TIES\",\"kind\":\"mentor_student\",\"key\":\"protect_ally\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_veiled_1868e680d974fbf2\"}},\"long\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Military/Guard\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_veiled_72a993f9df7477ab",
+    "stored": {
+     "short": "Keep the old lessons between them and Madhuri Gupta private.",
+     "long": "Bring The Guard under the sway of Thieves' Guild, one member at a time.",
+     "intent": {
+      "short": {
+       "family": "TIES",
+       "kind": "mentor_student",
+       "key": "protect_ally",
+       "target": {
+        "kind": "npc",
+        "id": "npc_veiled_1868e680d974fbf2"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Military/Guard"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Keep the old lessons between them and Madhuri Gupta private.",
+     "long": "Bring The Guard under the sway of Thieves' Guild, one member at a time.",
+     "intent": {
+      "short": {
+       "family": "TIES",
+       "kind": "mentor_student",
+       "key": "protect_ally",
+       "target": {
+        "kind": "npc",
+        "id": "npc_veiled_1868e680d974fbf2"
+       }
+      },
+      "long": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Military/Guard"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": false,
+     "long": true,
+     "tids": [
+      false,
+      false
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Learn the plans of The Guard against Thieves' Guild before they can act on them.\",\"long\":\"Settle things with Kumar Bhat for good, one way or another.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Military/Guard\"}},\"long\":{\"family\":\"TIES\",\"kind\":\"rival_enemy\",\"key\":\"settle_rivalry\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_multiple_theaters\"}}}}",
+      "after": "{\"long\":\"Settle things with Kumar Bhat for good, one way or another.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Military/Guard\"}},\"long\":{\"family\":\"TIES\",\"kind\":\"rival_enemy\",\"key\":\"settle_rivalry\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_multiple_theaters\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"long\":\"Settle things with Kumar Bhat for good, one way or another.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Military/Guard\"}},\"long\":{\"family\":\"TIES\",\"kind\":\"rival_enemy\",\"key\":\"settle_rivalry\",\"target\":{\"kind\":\"npc\",\"id\":\"npc_multiple_theaters\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_veiled_3c81d55ad7bf0d41",
+    "stored": {
+     "short": "Learn the plans of The Guard against Thieves' Guild before they can act on them.",
+     "long": "Settle things with Kumar Bhat for good, one way or another.",
+     "intent": {
+      "short": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Military/Guard"
+       }
+      },
+      "long": {
+       "family": "TIES",
+       "kind": "rival_enemy",
+       "key": "settle_rivalry",
+       "target": {
+        "kind": "npc",
+        "id": "npc_multiple_theaters"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Learn the plans of The Guard against Thieves' Guild before they can act on them.",
+     "long": "Settle things with Kumar Bhat for good, one way or another.",
+     "intent": {
+      "short": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Military/Guard"
+       }
+      },
+      "long": {
+       "family": "TIES",
+       "kind": "rival_enemy",
+       "key": "settle_rivalry",
+       "target": {
+        "kind": "npc",
+        "id": "npc_multiple_theaters"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": true,
+     "long": false,
+     "tids": [
+      false,
+      false
+     ]
+    },
+    "served": "NO GOAL KEY"
+   },
+   {
+    "passes": [
+     {
+      "pass": "withholdSecondHomes (its last step: sweepHiddenNames)",
+      "before": "{\"short\":\"Find out which members of Thieves' Guild are still friendly with Grand Council, and why.\",\"long\":\"Build up enough savings at the gambling district to ride out two bad years.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Grand Council\"}},\"long\":{\"family\":\"INSTITUTION\",\"kind\":\"solvency\",\"key\":\"control_institution\",\"target\":{\"kind\":\"house\",\"id\":\"Gambling district\"}}}}",
+      "after": "{\"long\":\"Build up enough savings at the gambling district to ride out two bad years.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Grand Council\"}},\"long\":{\"family\":\"INSTITUTION\",\"kind\":\"solvency\",\"key\":\"control_institution\",\"target\":{\"kind\":\"house\",\"id\":\"Gambling district\"}}}}",
+      "changed": true
+     },
+     {
+      "pass": "applyRosterChoices (power.entry, then withholdPowerCopies)",
+      "before": "{\"long\":\"Build up enough savings at the gambling district to ride out two bad years.\",\"intent\":{\"short\":{\"family\":\"POWER\",\"kind\":\"tense\",\"key\":\"expand_influence\",\"target\":{\"kind\":\"power\",\"id\":\"Grand Council\"}},\"long\":{\"family\":\"INSTITUTION\",\"kind\":\"solvency\",\"key\":\"control_institution\",\"target\":{\"kind\":\"house\",\"id\":\"Gambling district\"}}}}",
+      "after": null,
+      "changed": true
+     }
+    ],
+    "id": "npc_gambling_district",
+    "stored": {
+     "short": "Find out which members of Thieves' Guild are still friendly with Grand Council, and why.",
+     "long": "Build up enough savings at the gambling district to ride out two bad years.",
+     "intent": {
+      "short": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Grand Council"
+       }
+      },
+      "long": {
+       "family": "INSTITUTION",
+       "kind": "solvency",
+       "key": "control_institution",
+       "target": {
+        "kind": "house",
+        "id": "Gambling district"
+       }
+      }
+     }
+    },
+    "inPub": {
+     "short": "Find out which members of Thieves' Guild are still friendly with Grand Council, and why.",
+     "long": "Build up enough savings at the gambling district to ride out two bad years.",
+     "intent": {
+      "short": {
+       "family": "POWER",
+       "kind": "tense",
+       "key": "expand_influence",
+       "target": {
+        "kind": "power",
+        "id": "Grand Council"
+       }
+      },
+      "long": {
+       "family": "INSTITUTION",
+       "kind": "solvency",
+       "key": "control_institution",
+       "target": {
+        "kind": "house",
+        "id": "Gambling district"
+       }
+      }
+     }
+    },
+    "houseSearchHits": {
+     "short": true,
+     "long": false,
+     "tids": [
+      false,
+      false
+     ]
+    },
+    "served": "NO GOAL KEY"
+   }
+  ]
+ }
+]

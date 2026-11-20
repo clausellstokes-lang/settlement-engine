@@ -1876,6 +1876,14 @@
       "kind": "rationale",
       "ref": "pglite-executed"
     },
+    "tests/security/galleryRosterChoices.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/lint/rosterChoicePools.walker.test.js": {
+      "kind": "rationale",
+      "ref": "walker-totality-executed"
+    },
     "tests/security/galleryVeilSignalCopies.pglite.test.js": {
       "kind": "rationale",
       "ref": "pglite-executed"

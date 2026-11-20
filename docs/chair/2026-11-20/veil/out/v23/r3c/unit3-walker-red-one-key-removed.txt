@@ -1,0 +1,42 @@
+  }
+
+ ❯ tests/lint/rosterChoicePools.walker.test.js:119:132
+    117|     const twin = await import('../../src/domain/display/galleryRosterC…
+    118|     const engine = engineCrimeTypes();
+    119|     expect({ sql: drift(engine, Object.keys(sqlPools().types)), twin: …
+       |                                                                                                                                    ^
+    120|     expect(sqlPools().types).toEqual(twin.CRIME_TYPE_RAISERS);
+    121|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/lint/rosterChoicePools.walker.test.js > R3-CURE unit 3: the roster-choice pools of 212 and the twin against the engine > TEETH: a pool with one key removed is named by the walker (each pool, each engine)
+AssertionError: crime types: expected [ 'State predation', 'debt evasion' ] to deeply equal [ 'State predation' ]
+
+- Expected
++ Received
+
+  [
+    "State predation",
++   "debt evasion",
+  ]
+
+ ❯ tests/lint/rosterChoicePools.walker.test.js:144:70
+    142|     for (const [what, engine, keys] of cases) {
+    143|       const gone = [...engine][0];
+    144|       expect(drift(engine, keys.filter((k) => k !== gone))[0], what).t…
+       |                                                                      ^
+    145|     }
+    146|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 3 passed (5)
+   Start at  07:53:29
+   Duration  1.18s (transform 730ms, setup 34ms, import 20ms, tests 1.03s, environment 0ms)
+
+[gate-tail] end:  07:53:30 up 24 min,  0 user,  load average: 0.64, 0.80, 0.68
+[gate-tail] full log: /tmp/gate-tail.5519.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

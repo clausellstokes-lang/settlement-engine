@@ -76,7 +76,7 @@ const H = Object.freeze({
   sAlways: 'public._gallery_veil_withhold_always',
   tAlways: 'src/domain/display/galleryWithholdAlways.js :: withholdAlways',
   sChoice: 'public._gallery_veil_roster_choices',
-  tChoice: 'src/domain/display/gallerySecondHomes.js :: applyRosterChoices',
+  tChoice: 'src/domain/display/galleryRosterChoices.js :: applyRosterChoices',
   sPeople: 'public._gallery_veil_holders',
   tPeople: 'src/domain/display/gallerySecondHomes.js :: withholdHolders',
   sRekey: 'public._gallery_veil_rekey',
@@ -99,8 +99,8 @@ const H = Object.freeze({
 export const REGISTRY_HOSTS = Object.freeze({
   [H.sAlways]: { engine: 'server', state: 'exists', stage: 'R2 (VR16: the undrawn fields, VR14 (i), the band\'s condition; VR33; VR37), in 212 by VEIL-21' },
   [H.tAlways]: { engine: 'twin', state: 'exists', stage: 'R2' },
-  [H.sChoice]: { engine: 'server', state: 'planned', stage: 'R3 (the drawn conditional rows: (a) recompose, (b) withhold)' },
-  [H.tChoice]: { engine: 'twin', state: 'planned', stage: 'R3' },
+  [H.sChoice]: { engine: 'server', state: 'exists', stage: 'R3 (the drawn conditional rows: (a) recompose, (b) withhold), in 212 by VEIL-22\'s builder' },
+  [H.tChoice]: { engine: 'twin', state: 'exists', stage: 'R3' },
   [H.sPeople]: { engine: 'server', state: 'planned', stage: 'R4 (VR9: the holder\'s card whole with its ties)' },
   [H.tPeople]: { engine: 'twin', state: 'planned', stage: 'R4' },
   [H.sRekey]: { engine: 'server', state: 'planned', stage: 'R4 (VR10: every person\'s id re-keyed per read)' },
@@ -234,9 +234,9 @@ const diffuse = (/** @type {ShortSpec} */ o) => row({ drawn: 'yes', condition: [
 /** VR13: history drawn again by the rng alone (the seed never ships). */
 const rng = (/** @type {ShortSpec} */ o) => row({ drawn: 'yes', ...o, rule: 'rng', when: 'always', built: true, server: H.sSent, twin: H.tSent });
 /** (a) a drawn field rebuilt exactly from served data alone where a house is hidden whole (R3). */
-const recompose = (/** @type {ShortSpec} */ o) => row({ drawn: 'yes', ...o, rule: 'recompose', when: 'house-hidden', server: H.sChoice, twin: H.tChoice });
+const recompose = (/** @type {ShortSpec} */ o) => row({ drawn: 'yes', built: true, ...o, rule: 'recompose', when: 'house-hidden', server: H.sChoice, twin: H.tChoice });
 /** (b) a drawn field withheld where a house hidden whole could have chosen it (R3). */
-const choiceWithhold = (/** @type {ShortSpec} */ o) => row({ drawn: 'yes', ...o, rule: 'withhold', when: 'house-hidden', server: H.sChoice, twin: H.tChoice });
+const choiceWithhold = (/** @type {ShortSpec} */ o) => row({ drawn: 'yes', built: true, ...o, rule: 'withhold', when: 'house-hidden', server: H.sChoice, twin: H.tChoice });
 /** VR9: the holder's card withheld whole with its ties; every copy of a tie follows (R4). */
 const holder = (/** @type {ShortSpec} */ o) => row({ drawn: 'yes', ...o, rule: 'withhold', when: 'house-hidden', server: H.sPeople, twin: H.tPeople });
 /** VR12: a composed path; its rule and `when` are derived from its inputs (R5). */
@@ -305,7 +305,7 @@ const ROWS_SPEC = [
   undrawn({ id: 'economy.situationDesc', path: 'economicState.situationDesc', writer: W.situation, house: P.flags, scope: 'a fallback no born town draws (settlementQuickGuide.js material_life); its text names crime' }),
 
   // ── the safety profile
-  choiceWithhold({ id: 'safety.economicDragDesc', path: 'economicState.safetyProfile.economicDragDesc', writer: W.safety, house: P.flags, scope: 'VR4 i-6: withheld with blackMarketCapture, and where a criminal house is hidden whole' }),
+  choiceWithhold({ id: 'safety.economicDragDesc', path: 'economicState.safetyProfile.economicDragDesc', writer: W.safety, house: P.flags, scope: 'VR4 i-6: withheld with blackMarketCapture, and where a criminal house is hidden whole. R3, VR42: by attribution, withheld where a hidden house raised hasCriminalInst or hasMarket (the black-market share and its line move with them) or carried an organised name; a criminal governing body moves none of them, so there it stays' }),
   row({ id: 'safety.blackMarketCapture', path: 'economicState.safetyProfile.blackMarketCapture', writer: W.safety, house: P.criminal, rule: 'withhold', when: 'always', vr14: 'i', drawn: 'yes', server: H.sAlways, twin: H.tAlways, built: true,
     page: 're-derive', scope: 'VR14 (i), ruling 2: withheld on every non-owner read. R2-CURE (VEIL-21; the chair\'s ruling of 04:27 UTC, identity; VR19 (c)): the engine\'s generateSafetyProfile over the served config, tier and houses gives the stored figure (40 of 40 soak towns\' unmarked shares), and the page puts it back ONLY on a share it knows carries no veil (pageRederive.js, `unveiled`; gallery.js :: sanitizeDossier): a marked share and the map\'s member, which cannot prove the underside grouping open, do not draw it (VR17)' }),
   undrawn({ id: 'safety.flags.anyActive', path: 'economicState.safetyProfile.flags.anyActive', writer: W.safety, house: P.flags, vr14: 'i' }),
@@ -321,12 +321,12 @@ const ROWS_SPEC = [
   row({ id: 'safety.safetyRatio', path: 'economicState.safetyProfile.safetyRatio', writer: W.safety, house: P.flags, rule: 'withhold', when: 'always', vr14: 'i', drawn: 'yes', server: H.sAlways, twin: H.tAlways, built: true,
     page: 'not drawn',
     scope: 'VR8\'s condition, VR19 (b), (c), ruling 2: withheld on every non-owner read. Measured: the daily-life order words cut safetyRatio at 2.0, 1.5, 1.2, 1.0, 0.7, 0.5 (dailyLifeLogic.js safetyScore) where the safety band cuts effectiveSafety at 3.5, 2, 1.2, 0.6 (safetyProfile.js): FINER than the band, and no served field re-derives the ratio, so the shared page does not draw them' }),
-  row({ id: 'safety.crimeTypes', path: '^economicState\\.safetyProfile\\.crimeTypes\\b', re: true, writer: W.safety, house: P.flags, rule: 'withhold', when: 'house-hidden', vr14: 'i', drawn: 'yes', server: H.sChoice, twin: H.tChoice,
-    scope: 'VR4 ii-1, i-4, i-5: an entry a hidden house chose withheld by the house\'s eye, not the grouping\'s; today the grouping block:defense.criminalStructure withholds the whole' }),
-  row({ id: 'safety.plotHooks', path: '^economicState\\.safetyProfile\\.plotHooks\\b', re: true, writer: W.safety, house: P.flags, rule: 'withhold', when: 'house-hidden', drawn: 'yes', server: H.sChoice, twin: H.tChoice,
+  row({ id: 'safety.crimeTypes', path: '^economicState\\.safetyProfile\\.crimeTypes\\b', re: true, writer: W.safety, house: P.flags, rule: 'withhold', when: 'house-hidden', vr14: 'i', drawn: 'yes', server: H.sChoice, twin: H.tChoice, built: true,
+    scope: 'VR4 ii-1, i-4, i-5: an entry a hidden house chose withheld by the house\'s eye, not the grouping\'s; today the grouping block:defense.criminalStructure withholds the whole. R3-CURE: a type the attribution map does not hold FAILS CLOSED (withheld); the map holds every type safetyProfile.js writes (tests/lint/rosterChoicePools.walker.test.js)' }),
+  row({ id: 'safety.plotHooks', path: '^economicState\\.safetyProfile\\.plotHooks\\b', re: true, writer: W.safety, house: P.flags, rule: 'withhold', when: 'house-hidden', drawn: 'yes', server: H.sChoice, twin: H.tChoice, built: true,
     scope: 'VR4 i-7: a hook a hidden house chose, withheld by the house\'s eye; today tab:plot_hooks' }),
   row({ id: 'safety.criminalInstitutions', path: '^economicState\\.safetyProfile\\.criminalInstitutions\\b', re: true, writer: W.safety, house: P.criminal, rule: 'withhold', when: 'house-hidden', drawn: 'yes', server: H.sApply, twin: H.tHomes,
-    scope: 'VR4 ii-2: built by 212 (16)/(19) by name; registered so the walker binds it' }),
+    scope: 'VR4 ii-2: built by 212 (16)/(19) by name; registered so the walker binds it. R3-CURE-2 (the chair\'s ruling 2, the seat\'s relay of 09:18: the whole list): where a house is hidden whole, every entry is RE-DERIVED over the served houses by the engine\'s label table (212 `crimlabels` and the twin CRIMINAL_INST_LABELS in R3\'s host, held equal to safetyProfile.js by tests/lint/rosterChoicePools.walker.test.js), kept only as many times as served houses carry its label: a hidden "Multiple criminal factions" wrote "Rival Gangs", which no by-name rule reads, and the Defense key read it (`listed`); VR29: the array stays' }),
 
   // ── history: the crime-wave entries are the house's; every other re-draw is the rng's (VR13)
   choiceWithhold({ id: 'history.tension.crimeWave', path: 'history.currentTensions[] (only in A)', writer: W.event, house: P.signal, scope: 'VR4 ii-7: the crime_wave tension withheld where the SERVED crime signal is false (no criminal seat, no served criminal house)' }),
@@ -366,13 +366,13 @@ const ROWS_SPEC = [
   // ── the power structure
   undrawn({ id: 'power.fingerprint', path: 'powerStructure.economyInputFingerprint', writer: W.fingerprint, house: P.flags, vr14: 'iii' }),
   choiceWithhold({ id: 'power.entry', path: 'powerStructure.factions[] (only in A)', writer: W.ruling, house: P.criminal,
-    scope: 'a criminal POWER the hidden house raised, withheld with it; the rest re-derived (VR11)' }),
+    scope: 'a criminal POWER the hidden house raised, withheld with it; the rest re-derived (VR11). VR42 (tier 2): THE GOVERNING POWER\'S ROW IS NEVER REMOVED (a criminal-worded governing body is the town\'s public nature); every other criminal power (its seat\'s mark, or a thieves\' name) is withheld where a house is hidden whole (R3). R3-CURE (the chair, 07:31 and 07:39 UTC): WHOLE, in either stored shape (the top-level factions[] too, an entry naming a governing power kept) and EVERY STRUCTURED COPY (a conflict or tension naming it, a contestsNiche, a person\'s membership, affiliation key and the goal that targets or names it); prose over the powers is R5\'s (power.desc)' }),
   diffuse({ id: 'power.composition', path: 'powerStructure.factions[] (only in B)', writer: W.ruling, house: P.any,
     scope: 'ruling 4: the counterfactual\'s own draw (a path only B holds), recorded as diffuse' }),
   undrawn({ id: 'power.contestsNiche', path: 'powerStructure.factions[].contestsNiche', writer: W.ruling, house: P.any }),
   composed({ id: 'power.desc', path: 'powerStructure.factions[].desc', writer: W.ruling, house: P.criminal, inputs: ['power.share', 'power.entry'], compose: 'withhold',
     scope: 'a power\'s standing sentence ("close enough now to contest the seat") composed from the shares a withheld power held; withheld with it (ruling 3)' }),
-  row({ id: 'power.share', path: 'powerStructure.factions[].power', writer: W.powerShares, house: P.criminal, rule: 'recompose', when: 'house-hidden', vr14: 'ii', drawn: 'yes', server: H.sChoice, twin: H.tChoice,
+  row({ id: 'power.share', path: 'powerStructure.factions[].power', writer: W.powerShares, house: P.criminal, rule: 'recompose', when: 'house-hidden', vr14: 'ii', drawn: 'yes', server: H.sChoice, twin: H.tChoice, built: true,
     scope: 'VR11: where a power is withheld, the remaining powers\' shares re-derived to 100 by largest remainder' }),
   composed({ id: 'power.label', path: 'powerStructure.factions[].powerLabel', writer: W.powerShares, house: P.criminal, vr14: 'iv', inputs: ['power.share'], compose: 'recompose',
     scope: 'the label ladder over the re-derived share' }),
@@ -436,7 +436,7 @@ const ROWS_SPEC = [
   composed({ id: 'prose.templeFraud', path: 'publicProse.blocks.warFaith:faith.templeFraud', writer: W.composer, house: P.flags, inputs: ['safety.flags.religiousFraud'], compose: 'withhold', crimeOnly: true,
     scope: 'VR19 (d), ruling 2: crime-only content: sent as stored only where its grouping\'s eye is open AND no hideable house is hidden whole; else withheld' }),
 
-  row({ id: 'prose.criminal', path: '^publicProse\\.blocks\\.defense:criminal\\b', re: true, writer: W.composer, house: P.criminal, rule: 'withhold', when: 'house-hidden', drawn: 'yes', server: H.sChoice, twin: H.tChoice,
+  row({ id: 'prose.criminal', path: '^publicProse\\.blocks\\.defense:criminal\\b', re: true, writer: W.composer, house: P.criminal, rule: 'withhold', when: 'house-hidden', drawn: 'yes', server: H.sChoice, twin: H.tChoice, built: true,
     scope: 'VR4 i-11: the criminal desk (structure sentence, ring note) composed from the crime key over the roster; withheld by the house\'s eye, not only by block:defense.criminalStructure' }),
 
   // ── V10-1 (the reader, HIGH): columns a read returns BESIDE `data` (get_gallery_dossier, the gallery list's cards), cut
@@ -580,7 +580,7 @@ export const CRIME_NAME_PATTERN = Object.freeze({ source: 'thie|smuggl|undergrou
 /** @typedef {{ rows?: string[], why?: string, rx?: number }} RegistrySite */
 
 const SAFETY_ROWS = ['safety.safetyDesc', 'safety.guardEffectivenessDesc', 'safety.safetyLabel', 'safety.safetyRatio', 'safety.economicDragDesc', 'safety.crimeTypes', 'safety.plotHooks', 'safety.criminalInstitutions'];
-const SERVICES_WHY = 'availableServices only: a hidden house\'s service rows leave with it (X-21e, _gallery_veil_apply; galleryVeil.js :: applyVeil); no differ path';
+const SERVICES_WHY = 'availableServices only: a hidden house\'s service rows leave with it (X-21e, _gallery_veil_apply; galleryVeil.js :: applyVeil); no differ path. R3-CURE-2 (the chair\'s ruling 2): where a house is hidden whole, a covert criminal service (institution \'(covert)\', drawn from the criminal climate the houses moved, the Defense key\'s covert rung) is WITHHELD in R3\'s host (212 _gallery_veil_roster_choices, twin applyRosterChoices): no served field re-derives it (town-indebted-0-16, town-wartime-0-19 served diffuse against a counterfactual null)';
 
 /** @type {Readonly<Record<string, RegistrySite>>} */
 export const REGISTRY_SITES = Object.freeze({

@@ -1,0 +1,123 @@
+[gate-tail] start:  12:21:15 up  1:08,  0 user,  load average: 1.46, 1.81, 2.67 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/r3c4
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js (22 tests | 4 failed) 614260ms
+     × R3-CURE unit 2 (the chair, 07:39): "LEAVES WHOLE" MEANS EVERY COPY: after the read, a withheld power's NAME and ID are in no served string and are no object key, outside R5's named prose; both stored shapes, gallery, link, import and map, Reveal DM off and on; the rule that took each town is said 803ms
+     × R3-CURE-3 (the chair's ruling A): a goal naming a withheld power by a POSSESSIVE, a PLURAL or in CAPITALS leaves, both engines, every read, Reveal DM off and on; a goal naming a SERVED power whose name contains the withheld one stays byte for byte, its exemption the containing served name 25ms
+     × R3-CURE-4 unit 1, THE HUSK CLASS (the chair, 11:12: "a husk is a tell"): no served object whose pre-sweep counterpart held a withheld power's name or id as a STRUCTURED field is served with that field removed or blanked (it leaves whole); every read, both engines, both shapes, gallery, link, import and map, Reveal DM off and on; prose husks are listed by path and count (R5's) 26446ms
+     × R3-CURE-2 unit 4 (iii): where NO house is hidden whole and a power is withheld anyway (the projection, a Reveal-off read, a shut grouping), no served string or key names it by the fold, outside R5's named prose 184ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryRosterChoices.pglite.test.js > R3: the drawn conditional rows where a house is hidden whole (through the server; the twin beside it) > R3-CURE unit 2 (the chair, 07:39): "LEAVES WHOLE" MEANS EVERY COPY: after the read, a withheld power's NAME and ID are in no served string and are no object key, outside R5's named prose; both stored shapes, gallery, link, import and map, Reveal DM off and on; the rule that took each town is said
+AssertionError: expected [ …(24) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "hand-forms open dm=false gallery: powerStructure.factions[].faction = \"Old Thieves' Guild Watch\"",
++   "hand-forms open dm=false map: powerStructure.factions[].faction = \"Old Thieves' Guild Watch\"",
++   "hand-forms open dm=false link: powerStructure.factions[].faction = \"Old Thieves' Guild Watch\"",
++   "hand-forms open dm=false import: powerStructure.factions[].faction = \"Old Thieves' Guild Watch\"",
++   "hand-forms open dm=true gallery: powerStructure.factions[].faction = \"Old Thieves' Guild Watch\"",
++   "hand-forms open dm=true gallery: npcs[].goal.intent.long.target.id = \"Old Thieves' Guild Watch\"",
++   "hand-forms open dm=true gallery: npcs[].goal.short = \"Stand a night shift with the Old Thieves' Guild Watch.\"",
++   "hand-forms open dm=true map: powerStructure.factions[].faction = \"Old Thieves' Guild Watch\"",
++   "hand-forms open dm=true import: powerStructure.factions[].faction = \"Old Thieves' Guild Watch\"",
++   "hand-forms open dm=true import: npcs[].goal.intent.long.target.id = \"Old Thieves' Guild Watch\"",
++   "hand-forms open dm=true import: npcs[].goal.short = \"Stand a night shift with the Old Thieves' Guild Watch.\"",
++   "hand-forms openM dm=false gallery: powerStructure.factions[].faction = \"Old Thieves' Guild Watch\"",
++   "hand-forms openM dm=false map: powerStructure.factions[].faction = \"Old Thieves' Guild Watch\"",
++   "hand-forms openM dm=false link: powerStructure.factions[].faction = \"Old Thieves' Guild Watch\"",
++   "hand-forms openM dm=false import: powerStructure.factions[].faction = \"Old Thieves' Guild Watch\"",
++   "hand-forms openM dm=true gallery: powerStructure.factions[].faction = \"Old Thieves' Guild Watch\"",
++   "hand-forms openM dm=true gallery: factions[].faction = \"Old Thieves' Guild Watch\"",
++   "hand-forms openM dm=true gallery: npcs[].goal.intent.long.target.id = \"Old Thieves' Guild Watch\"",
++   "hand-forms openM dm=true gallery: npcs[].goal.short = \"Stand a night shift with the Old Thieves' Guild Watch.\"",
++   "hand-forms openM dm=true map: powerStructure.factions[].faction = \"Old Thieves' Guild Watch\"",
++   "hand-forms openM dm=true import: powerStructure.factions[].faction = \"Old Thieves' Guild Watch\"",
++   "hand-forms openM dm=true import: factions[].faction = \"Old Thieves' Guild Watch\"",
++   "hand-forms openM dm=true import: npcs[].goal.intent.long.target.id = \"Old Thieves' Guild Watch\"",
++   "hand-forms openM dm=true import: npcs[].goal.short = \"Stand a night shift with the Old Thieves' Guild Watch.\"",
++ ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:599:21
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/security/galleryRosterChoices.pglite.test.js > R3: the drawn conditional rows where a house is hidden whole (through the server; the twin beside it) > R3-CURE-3 (the chair's ruling A): a goal naming a withheld power by a POSSESSIVE, a PLURAL or in CAPITALS leaves, both engines, every read, Reveal DM off and on; a goal naming a SERVED power whose name contains the withheld one stays byte for byte, its exemption the containing served name
+AssertionError: expected [ …(3) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "hand-forms openM dm=true gallery: the exemption is not the containing served name [\"Old Thieves' Guild Watch\",\"Old Thieves' Guild Watch\"]",
++   "hand-forms openM dm=true import: the exemption is not the containing served name [\"Old Thieves' Guild Watch\",\"Old Thieves' Guild Watch\"]",
++   "hand-forms openM dm=true twin: the exemption is not the containing served name [\"Old Thieves' Guild Watch\",\"Old Thieves' Guild Watch\"]",
++ ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:686:17
+    684|     const bad = [];
+    685|     const rs = cureReads().filter((x) => x.t.seed === 'hand-forms');
+    686|     expect(rs.length).toBe(4);
+       |                 ^
+    687|     const FORMS = { 'npc.fen': 'a possessive', 'npc.gil': 'a plural', …
+    688|     let tooth = 0; let judged = 0;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/security/galleryRosterChoices.pglite.test.js > R3: the drawn conditional rows where a house is hidden whole (through the server; the twin beside it) > R3-CURE-4 unit 1, THE HUSK CLASS (the chair, 11:12: "a husk is a tell"): no served object whose pre-sweep counterpart held a withheld power's name or id as a STRUCTURED field is served with that field removed or blanked (it leaves whole); every read, both engines, both shapes, gallery, link, import and map, Reveal DM off and on; prose husks are listed by path and count (R5's)
+AssertionError: expected [ …(6) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "hand-raised open dm=true gallery: npcs[].memberships[].power",
++   "hand-raised open dm=true import: npcs[].memberships[].power",
++   "hand-raised open dm=true twin: npcs[].memberships[].power",
++   "hand-raised openM dm=true gallery: npcs[].memberships[].power",
++   "hand-raised openM dm=true import: npcs[].memberships[].power",
++   "hand-raised openM dm=true twin: npcs[].memberships[].power",
++ ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:720:30
+    719|   });
+    720|
+    721|   // KEY-LEVEL ON A SERVED HOLDER, NOT CURED HERE (STOPPED to the seat…
+       |                             ^
+    722|   // not its holder: a SHOWN power's `contestsNiche` naming a withheld…
+    723|   // holder whole would withhold a shown power or a served person; tha…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/security/galleryRosterChoices.pglite.test.js > R3: the drawn conditional rows where a house is hidden whole (through the server; the twin beside it) > R3-CURE-2 unit 4 (iii): where NO house is hidden whole and a power is withheld anyway (the projection, a Reveal-off read, a shut grouping), no served string or key names it by the fold, outside R5's named prose
+AssertionError: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "hand-forms unmarked dm=false link: powerStructure.factions[1].faction = \"Old Thieves' Guild Watch\"",
++ ]
+
+ ❯ tests/security/galleryRosterChoices.pglite.test.js:753:21
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 18 passed (22)
+   Start at  12:21:16
+   Duration  614.62s (transform 3.90s, setup 35ms, import 173ms, tests 614.26s, environment 0ms)
+
+[gate-tail] end:  12:31:30 up  1:18,  0 user,  load average: 4.43, 5.24, 4.24

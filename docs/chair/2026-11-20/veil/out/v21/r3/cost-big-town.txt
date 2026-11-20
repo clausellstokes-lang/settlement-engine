@@ -1,0 +1,7 @@
+# VR36, the largest born town (R3, VEIL-22's builder): bcd-big-cost.mjs's method (9 rounds, medians, anon, local scratch cluster)
+# town: Langengrund 502604 a060ce8d9fbb8481366fb6efb7a39c668068e6318204d09abfc9bb27f769612e (r5-born.probe.jsx's R5_BIG pick, metropolis/infiltrated/6, regenerated at this tree: the same sha as R2's)
+# chains: r3x211 (001..211, 211 frozen), r3base (212 at d136940c3, sha 05b915ab...8f10), r3after (212 of this commit)
+the largest born town, gallery off: x211 354.5 | base 506.0 | after 530.8 ms (after/x211 1.50)
+the largest born town, gallery dm: x211 200.8 | base 537.8 | after 570.7 ms (after/x211 2.84)
+the largest born town, link: x211 236.8 | base 480.5 | after 511.4 ms (after/x211 2.16)
+# BOUND (R2's form, VR36): the Reveal-DM gallery read after (570.7 ms) <= twice 211's Reveal-OFF read of the same town (2 x 354.5 = 709.0 ms): MET. Every read served (the script throws on a missing row). NAMED: the link after 511.4 ms is 2.16x 211's own link (base 2.03x; R3's step adds 31 ms, +6%); measured while the guard batches ran (contention on every chain alike, the rounds interleaved).

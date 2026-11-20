@@ -1,0 +1,8 @@
+born-green exit 0
+green-serverveil-handrows exit 0
+guards-security-1 exit 0
+guards-security-2 exit 0
+guards-harnesses exit 0
+guards-twin exit 1
+known-reds exit 1
+batch done: s1 s2 harn twin known
