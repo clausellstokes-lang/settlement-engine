@@ -1,0 +1,21 @@
+cards: 9012; elapsed 64.8s; tree /home/user/wt-b9; 50/size; reserve exported; closed list 119 rows from /home/user/wt-b9/src/data/people/goalSecretRefusals.js
+size         towns  cards identical mirror template>2 template=2 tieDesc tieTension tieIndex refusal  venal unmatched nocell
+thorp           50     65         0      0          0          0       0          0        0       0      7         0      1
+hamlet          50    170         0      0          0          0       0          0        0       0     15         0      2
+village         50    387         0      0          0          0       0          0        0       0     65         0      4
+town            50   1196         0      0          0         11       5          7        7       0    236         0      6
+city            50   3002         0     15          5         42     288        288      334       0    711         0      3
+metropolis      50   4192         0      9          9         65     665        675      790       0   1001         0      7
+TOTAL          300   9012         0     24         14        118     958        970     1131       0   2035         0     23
+append /tmp/claude-0/-home-user-settlement-engine/1b606ed5-1f0a-5e1b-bf32-8b8b1c4098bc/scratchpad/lines5.json; mirror 24 (the table's TOTAL mirror column), by template:
+  POWER/competitive/long#0             3
+  POWER/competitive/long#1             5
+  POWER/competitive/long#3             1
+  POWER/competitive/long#4             3
+  POWER/competitive/long#5             2
+  POWER/competitive/short#0            1
+  POWER/competitive/short#1            1
+  POWER/competitive/short#2            2
+  POWER/competitive/short#3            2
+  POWER/competitive/short#4            2
+  POWER/competitive/short#5            2

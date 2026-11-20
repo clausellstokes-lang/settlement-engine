@@ -18,8 +18,9 @@ pair, and none is another with {power} and {rival} swapped; no refused cluster (
   POWER/competitive, a cell the tranche does not touch; POWER/tense now holds none (base 58); none on a new line;
 - the moves: 12,498 of 17,992 holdings change text (8,490 onto a new line, 3,957 within their cell, 51 the cascade), in
   287 towns;
-- the checker over cells + reserve + files 1–4: 0 violations (`want-lines-check.out.txt`; six agreement faults of the
-  first draft, a verb after {power}, {rival} or {house}, were caught by it and rewritten before this commit).
+- the checker over cells + reserve + files 1–4: 0 violations (`want-lines-check.out.txt`; four lines of the first
+  draft put a verb after {power}, {rival} or {house}; the checker caught each, two of them twice, and each was rewritten
+  before this commit).
 
 ---
 
