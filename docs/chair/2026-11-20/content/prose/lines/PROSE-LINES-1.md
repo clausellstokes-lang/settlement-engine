@@ -20,10 +20,10 @@ Existing:
 
 New:
 7. `[ledger · no market · no crisis: under_siege]` {settlement} keeps no market of any kind, so no stall fee or market due is taken there.
-8. `[visitor · no market · no crisis: under_siege]` A stranger with goods to sell at {settlement} finds no stall to take and no market day to wait for; a buyer here is found by asking.
+8. `[visitor · no market · no crisis: under_siege]` A visitor with goods to sell at {settlement} finds no stall to take and no market day to wait for; a buyer here is found by asking. *(BUILD-1-FINISH ADDENDUM 1, the chair's 18:46 ruling: reworded in the line; refused by style law: a stranger; was: "A stranger with goods to sell at {settlement} finds no stall to take and no market day to wait for; a buyer here is found by asking.")*
 9. `[counterforce · no market · no crisis: under_siege]` No market day sets the rhythm of {settlement}'s week; buying and selling happen whenever one neighbour has something another wants.
 10. `[threshold · no market · no crisis: under_siege]` Trade at {settlement} goes as far as neighbours can carry it between themselves, and there is no market to take it beyond that.
-11. `[street · no market · no crisis: under_siege]` Nobody at {settlement} speaks of going to market in the town, for there is none to go to.
+11. `[street · no market · no crisis: under_siege]` {settlement} keeps no market, so nobody here speaks of going to one. *(BUILD-1-FINISH ADDENDUM 1, the chair's 18:46 ruling: reworded in the line; refused by presumedThings arm 1 (market: 'going to market' read as naming one); was: "Nobody at {settlement} speaks of going to market here, for there is none to go to.")* *(CHAIR 17:28: reworded word for word)*
 12. `[unfolding · no market · no crisis: under_siege]` {settlement} trades in the small way of a place without a market: a sack here, a bundle there, and nothing set out for sale.
 
 ## 2. DS-FTH-2 :: PRIVATE DOSSIER
@@ -36,10 +36,15 @@ Existing:
 3. `[visitor]` Among {settlement}'s powers, the faith's party is the {faction}.
 4. `[elder]` Folk in {settlement} keep their observances {observance}.
 
-New:
+New *(CHAIR 17:38: the faith teaser; six rows after #4, in this order, `{colour}` pool so no marks; each read with every `{observance}` fill, none dropped)*:
 5. `[ledger]` {settlement} holds to its rites {observance}.
+6. `[visitor]` The rites are kept at {settlement} {observance}.
+7. `[threshold]` {settlement} marks its rites {observance}.
+8. `[counterforce]` Folk at {settlement} turn to their rites {observance}.
+9. `[street]` The people here gather for their rites {observance}.
+10. `[unfolding]` {settlement} keeps its observances {observance}.
 
-FEWER (one, not six): within the licensed vocabulary, with `{observance}` as the one fact every reading gives, a second line only restates #4 or the public pool's #4.
+*(CHAIR 17:38: superseded; the licensed set gains `are`, `marks`, `turn`, `gather`, and the pool takes six.)* FEWER (one, not six): within the licensed vocabulary, with `{observance}` as the one fact every reading gives, a second line only restates #4 or the public pool's #4.
 
 ## 3. DS-ECO-12 :: TRADE PROFILE: exports and imports both present
 
@@ -52,10 +57,10 @@ Existing:
 
 New:
 4. `[ledger · colour]` What {settlement} sends out and what it brings in both show in its dealings, and neither side of the account stands empty.
-5. `[counterforce · colour]` {settlement} is not a town that only buys or only sells: goods leave it and goods reach it, and it lives by both.
-6. `[visitor · colour]` A stranger at {settlement} soon sees that the town both sells to the world beyond it and buys from it.
+5. `[counterforce · colour]` {settlement} is not a place that only buys or only sells: things go out of it and things come into it, and it lives by both. *(BUILD-1-FINISH ADDENDUM 1, the chair's 18:46 ruling: reworded in the line; refused by presumptionClasses goods (goods leave); was: "{settlement} is not a place that only buys or only sells: goods leave it and goods reach it, and it lives by both.")* *(CHAIR 17:28: the noun; no new line says "town")*
+6. `[visitor · colour]` A visitor at {settlement} soon sees that the place both sells to the world beyond it and buys from it. *(BUILD-1-FINISH ADDENDUM 1, the chair's 18:46 ruling: reworded in the line; refused by style law: a stranger; was: "A stranger at {settlement} soon sees that the place both sells to the world beyond it and buys from it.")* *(CHAIR 17:28: the noun; no new line says "town")*
 7. `[unfolding · colour]` In the ordinary run of things, goods are leaving {settlement} and goods are arriving in it.
-8. `[street · colour]` People at {settlement} speak of trade as give and take: something goes out of the town, and something comes back for it.
+8. `[street · colour]` People at {settlement} speak of trade as give and take: something goes out of the place, and something comes back for it. *(CHAIR 17:28: the noun; no new line says "town")*
 
 ## 4. DS-GEN-11 :: criticalIssueCount: critical contradictions on the record
 
@@ -68,9 +73,9 @@ Existing:
 
 New:
 4. `[counterforce]` Not every account of {settlement} squares with every other, and the points on which they differ are not small ones.
-5. `[threshold]` {settlement}'s story does not merely have loose ends: on some points it contradicts itself outright.
+5. `[threshold]` {settlement}'s story has more than loose ends: on some points it contradicts itself outright. *(BUILD-1-FINISH ADDENDUM 1, the chair's 18:46 ruling: reworded in the line; refused by style law: not merely; was: "{settlement}'s story does not merely have loose ends: on some points it contradicts itself outright.")*
 6. `[ledger]` Set side by side, the accounts of {settlement} disagree on points that matter, and no one of them settles the rest.
-7. `[visitor]` A stranger who asks about {settlement} in more than one place will come away with answers that do not fit together.
+7. `[visitor]` A visitor who asks about {settlement} in more than one place will come away with answers that do not fit together. *(BUILD-1-FINISH ADDENDUM 1, the chair's 18:46 ruling: reworded in the line; refused by style law: a stranger; was: "A stranger who asks about {settlement} in more than one place will come away with answers that do not fit together.")*
 SPARE:
 - `[street]` Two people from {settlement} can tell the same thing about the town in ways that cannot both stand.
 
@@ -84,7 +89,7 @@ Existing:
 3. `[visitor · institution: granary · grain]` The granary at {settlement} is filled from carts, not from the town's own fields.
 
 New:
-4. `[ledger]` Set what {settlement} raises against what it eats and the town comes out short.
+4. `[ledger]` Set what {settlement} raises against what it eats and the place comes out short. *(CHAIR 17:28: the noun; no new line says "town")*
 5. `[unfolding]` The gap between what {settlement} raises and what it eats is there every day, and every day it has to be filled.
 
 SPARE:
@@ -103,7 +108,7 @@ Existing:
 3. `[street · grain]` Around {settlement} there is nothing but the town's own fields to the horizon, and nothing to hide behind.
 
 New:
-4. `[counterforce · colour]` No hill or ridge gives {settlement} a shape it must work around, and nothing in the lie of the land decides where the town ends. *(PROSE-1: promoted from SPARE; the draft's "a wall or a load" presumed building works.)*
+4. `[counterforce · colour]` No hill or ridge gives {settlement} a shape it must work around, and nothing in the lie of the land decides where the place ends. *(CHAIR 17:28: the noun; no new line says "town")* *(PROSE-1: promoted from SPARE; the draft's "a wall or a load" presumed building works.)*
 SPARE:
 - `[ledger · colour]` Building and carting at {settlement} cost no fight with the ground: it lies level, and a wall or a load goes where it is set. *(PROSE-1: NOT for use: "a wall".)*
 - `[street · colour]` People at {settlement} see the weather coming long before it arrives, since nothing in the open country around the town stands in its way.
@@ -124,12 +129,12 @@ Existing:
 5. `[street · organised crime]` The shadow trade at {settlement} is small, but it is not casual: somebody organises it.
 
 New (the common, organised state):
-6. `[visitor · dm-only · organised crime]` A stranger would hardly notice {settlement}'s quiet trade, which is small and kept out of sight by the people who run it.
-7. `[threshold · dm-only · organised crime]` {settlement}'s off-book trade sits at the small end of what any town carries, and it is organised rather than loose.
+6. `[visitor · dm-only · organised crime]` A visitor would hardly notice {settlement}'s quiet trade, which is small and kept out of sight by the people who run it. *(BUILD-1-FINISH ADDENDUM 1, the chair's 18:46 ruling: reworded in the line; refused by style law: a stranger; was: "A stranger would hardly notice {settlement}'s quiet trade, which is small and kept out of sight by the people who run it.")*
+7. `[threshold · dm-only · organised crime]` {settlement}'s off-book trade sits at the small end of what any place carries, and it is organised, not loose. *(BUILD-1-FINISH ADDENDUM 1, the chair's 18:46 ruling: reworded in the line; refused by style law: rather than; was: "{settlement}'s off-book trade sits at the small end of what any place carries, and it is organised rather than loose.")* *(CHAIR 17:28: the noun; no new line says "town")*
 8. `[counterforce · dm-only · organised crime]` {settlement}'s shadow trade has not spread far, but neither is it scattered: what there is of it answers to someone.
-9. `[unfolding · dm-only · organised crime]` A little of {settlement}'s trade slips past the books week in and week out, and it slips past in an orderly way.
+9. `[unfolding · dm-only · organised crime]` A little of {settlement}'s trade slips past the accounts week in and week out, and it slips past in an orderly way. *(BUILD-1-FINISH ADDENDUM 1, the chair's 18:46 ruling: reworded in the line; refused by presumptionClasses goods (books); was: "A little of {settlement}'s trade slips past the books week in and week out, and it slips past in an orderly way.")*
 10. `[street · dm-only · organised crime]` People at {settlement} who want something without a duty on it know whom to ask, and the asking always goes to the same door.
-11. `[ledger · dm-only · organised crime]` On {settlement}'s books the gap is small: a little trade that never reaches them, and none of it missed by chance.
+11. `[ledger · dm-only · organised crime]` In {settlement}'s accounts the gap is small: a little trade that never reaches them, and none of it missed by chance. *(BUILD-1-FINISH ADDENDUM 1, the chair's 18:46 ruling: reworded in the line; refused by presumptionClasses goods (books); was: "On {settlement}'s books the gap is small: a little trade that never reaches them, and none of it missed by chance.")*
 
 SPARE (the minority, unorganised state):
 - `[visitor · dm-only · no organised crime · no crisis: famine · no crisis: under_siege]` What a stranger meets of {settlement}'s shadow trade is a pocket picked or a sale made without a licence, and nothing behind either.
@@ -140,16 +145,16 @@ SPARE (the minority, unorganised state):
 State: `powerStructure.recentConflict` holds engine prose. It is present at all 300 places, mostly an open dispute (a reeve and a militia captain, grazing rights, a guild contest), or a stress narrative where a crisis overrides it. The jsonl shows eligible `[1,3]` at all 300. #2 is excluded at all 300 (signature `{seat}`). Marks: none (`{colour}`). Slots: `{settlement}`. Law: the field licenses a causal clause, but the record does not say who, what, or whether it is settled. So these lines frame "the trouble" without naming parties, a winner or an outcome, and without referring to the page layout.
 
 Existing:
-1. `[elder]` {settlement} is still living with its recent quarrel, and the hall is run the way it is because of who won it.
+1. `[elder]` {settlement} is still living with its recent quarrel, and the hall is run with it in mind. *(CHAIR 17:38: reworded, truth outranks canonical-at-zero; built through `WORD_CORRECTIONS`, ruling `CHAIR-2026-11-20-17:38`)*
 2. `[ledger]` The {seat} at {settlement} governs a town that recently fought over who should rule. The side that lost still lives here and still owes the {seat} its dues, and it pays them slowly.
 3. `[street]` Nobody at {settlement} needs the trouble explained to them; it is recent enough that the town simply refers to it and moves on.
 
 New:
-4. `[visitor]` A stranger at {settlement} does not have to ask long before someone mentions the trouble; it is what the town has on its mind.
-5. `[unfolding]` The trouble at {settlement} belongs to the town's present rather than to its history, and people speak of it that way.
-6. `[counterforce]` Nobody at {settlement} treats the trouble as somebody else's business; it is the town's own, whoever is at the heart of it.
-7. `[ledger]` Whoever decides things at {settlement} decides them with the trouble in view; it sits too near the hall for anyone there to set aside.
-8. `[street]` Everyone at {settlement} has something to say about the trouble, whatever their own part in it.
+4. `[visitor]` A visitor at {settlement} does not have to ask long before someone mentions the quarrel. *(BUILD-1-FINISH ADDENDUM 1, the chair's 18:46 ruling: reworded in the line; refused by style law: a stranger; was: "A stranger at {settlement} does not have to ask long before someone mentions the quarrel.")* *(CHAIR 17:28: reworded word for word)*
+5. `[unfolding]` The quarrel at {settlement} belongs to the place's present, not to its history, and people speak of it that way. *(BUILD-1-FINISH ADDENDUM 1, the chair's 18:46 ruling: reworded in the line; refused by style law: rather than; was: "The quarrel at {settlement} belongs to the place's present rather than to its history, and people speak of it that way.")* *(CHAIR 17:28: reworded word for word)*
+6. `[counterforce]` Nobody at {settlement} treats the quarrel as somebody else's business; it is the place's own, whoever is at the heart of it. *(CHAIR 17:28: reworded word for word)*
+7. `[ledger]` Whoever decides things at {settlement} decides them with the quarrel in view. *(CHAIR 17:28: reworded word for word)*
+8. `[street]` Most people at {settlement} have something to say about the quarrel, whatever their own part in it. *(CHAIR 17:28: reworded word for word)*
 
 ## 9. DS-DEF-3 :: First-Survey qualification (the reading is a first look)
 
@@ -163,8 +168,8 @@ Existing:
 New:
 4. `[counterforce]` Nothing in this reading of {settlement}'s safety has been tested by a long stay: it is what a first look could see, and no more.
 5. `[threshold]` This is {settlement}'s safety at first acquaintance, and a longer acquaintance could bear it out or overturn it.
-6. `[visitor]` A newcomer judges {settlement}'s streets by a few days in them, and this account is a newcomer's judgment.
-7. `[unfolding]` {settlement}'s safety is set down here as first found, and what the town's days bring after that first finding is not part of it.
+6. `[visitor]` A newcomer reads {settlement}'s safety from a few days in the place, and this account is a newcomer's reading. *(BUILD-1-FINISH ADDENDUM 1, the chair's 18:46 ruling: reworded in the line; refused by presumedThings arm 1 (streets, a size word); presumptionClasses size + office (streets, judges); was: "A newcomer judges {settlement}'s streets by a few days in them, and this account is a newcomer's judgment.")*
+7. `[unfolding]` {settlement}'s safety is set down here as first found, and what later days bring is not part of it. *(CHAIR 17:28: reworded word for word)*
 
 ## 10. DS-POW-5 :: governing body name: a SLOT, never a baked noun
 
@@ -176,10 +181,10 @@ Existing:
 3. `[street]` {settlement} calls its hall the {seat} in public and something shorter everywhere else.
 
 New:
-4. `[counterforce]` The {seat} is what {settlement}'s government is called, no grander and no humbler than the town that keeps it.
+4. `[counterforce]` The {seat} is what {settlement}'s government is called, no grander and no humbler than the place that keeps it. *(CHAIR 17:28: the noun; no new line says "town")*
 5. `[unfolding]` Official business at {settlement} is done in the name of the {seat}.
 6. `[threshold]` The {seat} is the one name {settlement}'s authority answers to; a petition addressed to any other has gone to the wrong door.
-7. `[visitor]` A stranger at {settlement} hears the {seat} named long before meeting anyone who sits in it.
+7. `[visitor]` A visitor at {settlement} hears the {seat} named long before meeting anyone who speaks for it. *(BUILD-1-FINISH ADDENDUM 1, the chair's 18:46 ruling: reworded in the line; refused by style law: a stranger; was: "A stranger at {settlement} hears the {seat} named long before meeting anyone who speaks for it.")* *(CHAIR 17:28: reworded word for word)*
 
 ## 11. DS-ECO-11 :: ECONOMIC STRENGTHS: the roster is populated
 
@@ -191,9 +196,9 @@ Existing:
 3. `[visitor]` What {settlement} is for is legible within a day, because the town does a small number of things and does them visibly.
 
 New:
-4. `[counterforce]` {settlement} does not live by plain work alone; it has strengths of its own, and the town leans on them.
+4. `[counterforce]` {settlement} does not live by plain work alone; it has strengths of its own, and the place leans on them. *(CHAIR 17:28: the noun; no new line says "town")*
 5. `[threshold]` Each of {settlement}'s strengths stands on something its own country or its approach supplies, and holds for as long as that does.
-6. `[unfolding]` {settlement}'s strengths are in daily use, worked by the town's own hands rather than kept as a boast.
+6. `[unfolding]` {settlement}'s strengths are in daily use, worked by the place's own hands and not kept as a boast. *(BUILD-1-FINISH ADDENDUM 1, the chair's 18:46 ruling: reworded in the line; refused by style law: rather than; was: "{settlement}'s strengths are in daily use, worked by the place's own hands rather than kept as a boast.")* *(CHAIR 17:28: the noun; no new line says "town")*
 
 ## 12. DS-ECO-9 :: SECURE
 
@@ -210,8 +215,8 @@ Existing:
 
 New:
 8. `[visitor · no hunger]` Nothing on {settlement}'s tables suggests to a visitor that food is a worry here.
-9. `[counterforce · no hunger]` Food is not what keeps {settlement}'s people awake: whether the town grows it or buys it, the need is met.
-10. `[unfolding · no hunger]` Food reaches {settlement}'s tables as fast as the town eats it, and the town does not have to think about the pace. *(PROSE-1: promoted; the draft #10 "rather than far beyond it" denied the deep stores of #6 and #7, which the same places can hold.)*
+9. `[counterforce · no hunger]` Food is not what keeps {settlement}'s people awake: whether the place grows it or buys it, the need is met. *(CHAIR 17:28: the noun; no new line says "town")*
+10. `[unfolding · no hunger]` Food reaches {settlement}'s tables as fast as it is eaten, and nobody has to think about the pace. *(CHAIR 17:28: reworded word for word)* *(PROSE-1: promoted; the draft #10 "rather than far beyond it" denied the deep stores of #6 and #7, which the same places can hold.)*
 
 ## 13. DS-STR-1 :: Overview's own section framing
 
@@ -223,8 +228,8 @@ Existing:
 3. `[ledger]` There is no crisis on the books. Whatever strain the settlement carries, it carries at a weight it can hold.
 
 New:
-4. `[counterforce]` Nothing at {settlement} stands at the pitch of an emergency; whatever the town has to deal with, it deals with in the ordinary way.
-5. `[visitor]` A stranger at {settlement} sees none of the signs of an emergency: nothing rationed and nothing shut against trouble.
+4. `[counterforce]` Nothing at {settlement} stands at the pitch of an emergency; whatever the place has to deal with, it deals with in the ordinary way. *(CHAIR 17:28: the noun; no new line says "town")*
+5. `[visitor]` A visitor at {settlement} sees none of the signs of an emergency: nothing rationed and nothing shut against trouble. *(BUILD-1-FINISH ADDENDUM 1, the chair's 18:46 ruling: reworded in the line; refused by style law: a stranger; was: "A stranger at {settlement} sees none of the signs of an emergency: nothing rationed and nothing shut against trouble.")*
 
 SPARE:
 - `[unfolding]` Whatever {settlement} is working on, it works on in its own time; no emergency is setting the pace.
@@ -240,7 +245,7 @@ Existing:
 3. `[counterforce]` Anything unseen that came at {settlement} would find nothing to meet it: the town keeps no wards or seers to notice it.
 
 New:
-4. `[visitor]` Whatever defence {settlement} keeps, a stranger would find nothing arcane in it.
+4. `[visitor]` Whatever defence {settlement} keeps, a visitor would find nothing arcane in it. *(BUILD-1-FINISH ADDENDUM 1, the chair's 18:46 ruling: reworded in the line; refused by style law: a stranger; was: "Whatever defence {settlement} keeps, a stranger would find nothing arcane in it.")*
 5. `[threshold]` {settlement}'s protection reaches as far as ordinary eyes and hands reach, and no further.
 6. `[street]` Ask at {settlement} who would answer a threat worked by magic, and the answer is that nobody would. *(PROSE-1: the draft's tail "nobody can name anyone" is DS-DEF-5 NO-FORCE #3's own, and the two print on one page.)*
 7. `[ledger]` Whoever defends {settlement}, none of them works with magic. *(PROSE-1: the draft's "roll of defenders" presumed a muster roll a place with no force lacks.)*
@@ -256,8 +261,8 @@ Existing:
 4. `[ledger · magic supply]` {settlement}'s own work does not lean on magic, but no trade road reaches it, and some of what it lives on is brought in by magic.
 
 New:
-5. `[visitor · no magic supply]` A visitor may meet magic at {settlement}, but nothing the town needs in order to live is waiting on it.
-6. `[threshold · no magic supply]` Were every practitioner to leave {settlement}, the town would lose what they offer and keep its living.
+5. `[visitor · no magic supply]` A visitor may meet magic at {settlement}, but nothing the place needs in order to live is waiting on it. *(CHAIR 17:28: the noun; no new line says "town")*
+6. `[threshold · no magic supply]` Without any magic at all, {settlement} would still keep its living. *(BUILD-1-FINISH ADDENDUM 1, the chair's 18:46 ruling: reworded in the line; refused by presumedThings arm 1 (practitioner); was: "Were every practitioner to leave {settlement}, the place would lose what they offer and keep its living.")* *(CHAIR 17:28: the noun; no new line says "town")*
 7. `[unfolding · no magic supply]` The work that keeps {settlement} fed and busy is done by ordinary labour, whatever magic is about the place.
 8. `[ledger · no magic supply]` Set {settlement}'s trades against the help they draw on, and magic is not a thing any of them needs.
 
