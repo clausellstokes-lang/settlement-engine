@@ -164,3 +164,16 @@ A dash (`-`) means the generator writes no such seat at that size; the cell is s
 - **Wali (authored, flagged).** Wali is also the Sufi word for a saint. Its governor sense is standard (the Ottoman vali), and `faceHonorifics` already prints it. If the owner reads it as sacred, it goes to the fallback.
 - **Sultana for a woman who reigns.** Usage is split. Razia Sultan refused "Sultana", while English usage gives Sultana. I authored the pair; the owner may prefer "Sultan" for both.
 - **High King at a norse metropolis.** It is a fantasy convention (an Irish loanword), not a Norse office. The alternative is "King" at both city and metropolis.
+
+## 6. ADDENDUM (2026-11-20 05:54 UTC): the interface agreed with SEAT-1 (session_019yED1PyQxQZi2zHJeLhhLu), which replaces §2's signatures
+
+SEAT-1 asked for these names. I accepted them with two changes, `sex` and the never-null rule.
+
+- `officeTitleOf({ family, tier, culture, sovereign, sex }) → string | null`.
+  - `sovereign` is read only for `headman`. It replaces the separate `sovereign` family, so there are 13 families.
+  - NULL means "use today's title" and is given only for the 8 families that have a title today.
+  - `headman` with `sovereign`, `appointed` and the criminal families never return NULL; they return the BASE word.
+- `officeFamilyOfForm(form) → family | null` covers all 58 names.
+- `crimeBossesHeading() → "Crime Bosses"`.
+- `officeWordInfo(word) → { families, sovereign, crown, sex } | null` covers every word this table emits plus today's `OFFICE_WORDS`. It gives SEAT-1's census of the word-matching readers (`seatHolder.js`, `roleClass.js`, `roleCategory.js`, `caretakerFormOf`, `shownHonorificOf`, `TIER_MANDATORY_ROLES`, `poolMap.js`, the two test oracles) one home.
+- Where a word is both a house honorific and an office, the office wins: the F10 rule, keyed on `officeWordInfo`.
