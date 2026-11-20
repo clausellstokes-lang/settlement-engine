@@ -1,0 +1,804 @@
+birth file /tmp/claude-0/-home-user-settlement-engine/1b606ed5-1f0a-5e1b-bf32-8b8b1c4098bc/scratchpad/base300.json: 300 towns (thorp,hamlet,village,town,city,metropolis), tree /home/user/wt-b9, append none
+
+================ SHORT WANTS ================
+(A) city: 50 towns, 60.0 short wants a town; all 2450 ordered pairs: share of B's among A's 36.4%; repeats 53163
+(A) metropolis: 50 towns, 83.8 short wants a town; all 2450 ordered pairs: share of B's among A's 47.3%; repeats 97080
+
+(B) PER CELL (short), worst first by the city's repeats. lines = cell+reserve; hold/town = mean holdings a town (city · metropolis);
+    reps% = the cell's share of all repeats; pts = points of the pair share it carries (observed · the model at k=0);
+    rungs over city+metropolis: drawn line kept · moved by pass two (to a cell line · to a RESERVE line) · twice/same-power/stands/exhausted · refused-by-secret
+
+  RANK/enter/short  lines 6+4  hold/town 8.50 · 12.46  reps% 28.3% · 26.2%  pts 10.38/12.04 · 12.45/14.66
+    rungs: kept 675 · moved 370 (to cell 38 · to reserve 334) · twice 169 · twice-same-power 0 · stands 3 · exhausted 0 · refused-by-secret 3
+    template use (index:holdings, R = reserve): 0:115 1:112 2:116 3:122 4:129 5:120 R0:106 R1:92 R2:73 R3:63
+    offices (role): senior charter master 29, master smith 23, master fishmonger 22, potter 22, tailor 21, warehouse factor 21, bowyer 21, master weaver 19, brewer 19, master furrier 19
+    kinds (category): other 55%, economy 20%, government 11%, criminal 6%, military 4%, religious 2%, magic 2%
+
+  TIES/rival_enemy/short  lines 5+2  hold/town 5.20 · 7.64  reps% 17.3% · 17.7%  pts 6.41/7.02 · 8.34/8.50
+    rungs: kept 400 · moved 240 (to cell 95 · to reserve 145) · twice 69 · twice-same-power 4 · stands 0 · exhausted 0 · refused-by-secret 2
+    template use (index:holdings, R = reserve): 0:95 1:95 2:102 3:102 4:103 R0:83 R1:62
+    offices (role): fortune teller 17, master fishmonger 15, master baker 13, warehouse factor 13, cooper 13, cobbler 12, bowyer 12, senior charter master 12, apothecary 11, scroll scribe 11
+    kinds (category): other 51%, economy 17%, criminal 10%, government 9%, magic 5%, religious 5%, military 4%
+
+  TIES/ally/short  lines 5+0  hold/town 3.68 · 4.22  reps% 11.5% · 8.0%  pts 4.04/4.02 · 3.73/3.72
+    rungs: kept 301 · moved 94 (to cell 94 · to reserve 0) · twice 37 · twice-same-power 2 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:72 1:80 2:86 3:75 4:82
+    offices (role): chief magistrate 11, scroll scribe 9, bath-keeper 9, senior craft-guild master 8, master metalworker 8, apothecary 8, customs collector 8, master fishmonger 8, brickmaker 8, network's head 8
+    kinds (category): other 46%, economy 18%, criminal 12%, government 12%, magic 5%, religious 4%, military 3%
+
+  INSTITUTION/solvency/short  lines 6+2  hold/town 6.18 · 9.30  reps% 8.7% · 9.9%  pts 3.18/4.07 · 4.66/5.45
+    rungs: kept 496 · moved 275 (to cell 137 · to reserve 138) · twice 121 · twice-same-power 5 · stands 0 · exhausted 0 · refused-by-secret 3
+    template use (index:holdings, R = reserve): 0:111 1:106 2:104 3:103 4:104 5:108 R0:82 R1:56
+    offices (role): whisper broker 22, midwife 16, outfitter 15, senior craft-guild master 15, banker 15, warehouse factor 14, potter 14, gang boss 14, master of granaries 13, nominal owner 13
+    kinds (category): other 39%, economy 19%, criminal 18%, government 9%, religious 5%, magic 5%, military 5%
+
+  INSTITUTION/charter/short  lines 6+0  hold/town 5.60 · 7.08  reps% 6.8% · 6.1%  pts 2.44/2.53 · 2.91/3.19
+    rungs: kept 464 · moved 170 (to cell 170 · to reserve 0) · twice 112 · twice-same-power 5 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:103 1:104 2:109 3:107 4:105 5:106
+    offices (role): dean 19, master of granaries 18, enchanter 17, chief magistrate 16, hospital's master 14, crier 14, theatre manager 14, cobbler 13, master fishmonger 13, beast master 12
+    kinds (category): other 44%, economy 20%, government 13%, religious 10%, magic 6%, military 4%, criminal 4%
+
+  RANK/climb/short  lines 6+0  hold/town 2.96 · 3.36  reps% 5.9% · 4.3%  pts 2.25/2.55 · 2.05/2.21
+    rungs: kept 262 · moved 54 (to cell 54 · to reserve 0) · twice 3 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:51 1:45 2:59 3:60 4:53 5:48
+    offices (role): hospital's master 20, mint master 15, sage 13, college master 12, chief magistrate 11, miller 10, warehouse factor 10, midwife 10, master of granaries 9, company captain 9
+    kinds (category): other 35%, economy 19%, religious 13%, government 11%, military 9%, magic 8%, criminal 6%
+
+  TIES/mentor_student/short  lines 5+0  hold/town 1.88 · 2.36  reps% 2.8% · 2.5%  pts 0.99/1.12 · 1.17/1.27
+    rungs: kept 167 · moved 44 (to cell 44 · to reserve 0) · twice 5 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 1
+    template use (index:holdings, R = reserve): 0:41 1:42 2:49 3:45 4:35
+    offices (role): dean 8, lord 7, company captain 6, sage 6, scroll scribe 6, mine captain 5, miller 5, sawyer 5, guild archmage 5, network's head 4
+    kinds (category): other 42%, economy 17%, criminal 9%, government 8%, military 8%, religious 8%, magic 8%
+
+  PERSONALITY/sway/short  lines 4+1  hold/town 1.44 · 1.78  reps% 2.4% · 2.0%  pts 0.86/0.86 · 0.92/0.93
+    rungs: kept 161 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:40 1:45 2:39 3:37
+    offices (role): ropemaker 6, sawyer 6, senior charter master 5, fortune teller 5, chief magistrate 4, glassmaker 4, guild archmage 4, vintner 4, master tanner 3, exchange's steward 3
+    kinds (category): other 50%, economy 19%, criminal 10%, government 9%, military 5%, religious 4%, magic 4%
+
+  SUPPLY/expansion/short  lines 6+0  hold/town 3.00 · 2.46  reps% 2.3% · 0.9%  pts 0.82/0.89 · 0.45/0.47
+    rungs: kept 226 · moved 47 (to cell 47 · to reserve 0) · twice 9 · twice-same-power 4 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:48 1:38 2:40 3:47 4:54 5:46
+    offices (role): cartographer 18, customs collector 18, house boss 15, vintner 15, master furrier 14, brewer 12, college master 11, toll-keeper 11, innkeeper 9, luxury merchant 9
+    kinds (category): other 56%, economy 27%, government 11%, criminal 5%
+
+  POWER/tense/short  lines 6+2  hold/town 2.16 · 6.28  reps% 2.1% · 9.7%  pts 0.74/0.83 · 4.57/4.94
+    rungs: kept 317 · moved 104 (to cell 21 · to reserve 84) · twice 19 · twice-same-power 3 · stands 39 · exhausted 0 · refused-by-secret 1
+    template use (index:holdings, R = reserve): 0:58 1:55 2:53 3:58 4:58 5:56 R0:48 R1:36
+    offices (role): apothecary 14, potter 13, master weaver 12, bowyer 10, house boss 10, tailor 10, ropemaker 9, stable master 9, dyer 9, cobbler 9
+    kinds (category): other 58%, economy 21%, criminal 11%, government 5%, military 4%, religious 2%
+
+  PERSONALITY/grudge/short  lines 4+1  hold/town 1.16 · 1.94  reps% 1.5% · 2.3%  pts 0.55/0.55 · 1.10/1.11
+    rungs: kept 155 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:40 1:32 2:43 3:40
+    offices (role): chief magistrate 6, cartographer 5, theatre manager 4, master weaver 4, dyer 4, bath-keeper 4, grove elder 4, customs collector 3, chronicler 3, network's spider 3
+    kinds (category): other 49%, economy 14%, criminal 11%, government 10%, magic 6%, religious 6%, military 3%
+
+  TIES/debtor/short  lines 5+0  hold/town 1.32 · 2.10  reps% 1.5% · 2.1%  pts 0.54/0.58 · 1.01/1.03
+    rungs: kept 146 · moved 25 (to cell 25 · to reserve 0) · twice 1 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:28 1:32 2:38 3:38 4:35
+    offices (role): dean 9, garrison commander 5, mine captain 5, guild archmage 5, fortune teller 5, ropemaker 4, blade captain 4, glassmaker 4, master tanner 4, master butcher 4
+    kinds (category): other 39%, economy 20%, government 9%, magic 9%, criminal 8%, religious 8%, military 7%
+
+  ALLEGIANCE/warrant/short  lines 6+0  hold/town 1.52 · 1.80  reps% 1.4% · 1.1%  pts 0.49/0.16 · 0.53/0.17
+    rungs: kept 159 · moved 7 (to cell 7 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:21 1:27 2:29 3:31 4:29 5:29
+    offices (role): watch commander 46, garrison commander 42, prison warden 42, castellan 36
+    kinds (category): military 75%, government 25%
+
+  PERSONALITY/greed/short  lines 4+1  hold/town 1.04 · 1.44  reps% 1.2% · 1.3%  pts 0.45/0.44 · 0.62/0.61
+    rungs: kept 124 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:27 1:28 2:28 3:41
+    offices (role): lady 5, beast master 4, woodcarver 3, miller 3, glassmaker 3, luxury merchant 3, fortune teller 3, black marketeer 3, senior guild master 3, outfitter 3
+    kinds (category): other 45%, economy 18%, criminal 14%, government 9%, magic 5%, military 5%, religious 5%
+
+  TIES/creditor/short  lines 5+0  hold/town 1.00 · 1.34  reps% 0.9% · 0.8%  pts 0.33/0.33 · 0.39/0.42
+    rungs: kept 101 · moved 16 (to cell 16 · to reserve 0) · twice 1 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:27 1:20 2:25 3:23 4:22
+    offices (role): smelt master 6, guild archmage 5, Lord Mayor 5, harbour master 4, Master of the Guilds 3, senior craft-guild master 3, lady 3, beast master 3, master weaver 3, bishop 3
+    kinds (category): other 38%, economy 22%, government 10%, magic 9%, religious 9%, military 6%, criminal 6%
+
+  TIES/family/short  lines 5+0  hold/town 0.88 · 0.90  reps% 0.7% · 0.3%  pts 0.25/0.25 · 0.16/0.19
+    rungs: kept 78 · moved 10 (to cell 10 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 1
+    template use (index:holdings, R = reserve): 0:19 1:16 2:20 3:17 4:17
+    offices (role): fortune teller 4, master baker 3, warehouse factor 3, chief magistrate 3, black marketeer 3, potter 3, smelt master 3, master smith 3, customs collector 2, lady 2
+    kinds (category): other 43%, economy 22%, criminal 15%, government 12%, magic 6%, religious 1%, military 1%
+
+  INSTITUTION/takeover/short  lines 6+0  hold/town 1.16 · 1.18  reps% 0.6% · 0.2%  pts 0.21/0.11 · 0.09/0.06
+    rungs: kept 106 · moved 10 (to cell 10 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 1
+    template use (index:holdings, R = reserve): 0:26 1:27 2:16 3:15 4:19 5:14
+    offices (role): coaching-inn keeper 6, bath-keeper 6, innkeeper 5, fuller 5, senior guild master 5, master butcher 4, smelt master 4, luxury merchant 4, cooper 4, cartographer 4
+    kinds (category): other 68%, economy 27%, government 5%
+
+  RANK/defend/short  lines 6+0  hold/town 0.98 · 1.64  reps% 0.6% · 1.0%  pts 0.22/0.11 · 0.49/0.20
+    rungs: kept 121 · moved 9 (to cell 9 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 1
+    template use (index:holdings, R = reserve): 0:16 1:23 2:22 3:25 4:18 5:27
+    offices (role): dean 26, lord 16, lady 12, guild archmage 10, governor 8, garrison commander 8, senior craft-guild master 7, senior guild master 6, chancellor 6, senior abbess 4
+    kinds (category): religious 26%, other 24%, economy 19%, magic 14%, government 8%, military 8%, criminal 1%
+
+  PERSONALITY/impulse/short  lines 4+1  hold/town 0.72 · 0.94  reps% 0.6% · 0.5%  pts 0.21/0.21 · 0.25/0.26
+    rungs: kept 83 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:15 1:20 2:25 3:23
+    offices (role): auctioneer 3, bath-keeper 3, woodcarver 3, whisper broker 3, beast master 2, warehouse factor 2, postmaster 2, watcher 2, master fishmonger 2, potter 2
+    kinds (category): other 54%, criminal 17%, economy 12%, government 7%, religious 4%, magic 4%, military 2%
+
+  PERSONALITY/fear/short  lines 4+0  hold/town 0.66 · 0.70  reps% 0.5% · 0.3%  pts 0.20/0.19 · 0.15/0.14
+    rungs: kept 68 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:23 1:9 2:21 3:15
+    offices (role): beast master 3, collier 2, luxury merchant 2, smelt master 2, exchange's steward 2, alchemist 2, black marketeer 2, master metalworker 2, sage 2, dean 2
+    kinds (category): other 49%, economy 15%, criminal 12%, religious 9%, government 9%, military 4%, magic 3%
+
+  POWER/competitive/short  lines 6+0  hold/town 1.10 · 0.30  reps% 0.4% · 0.0%  pts 0.14/0.22 · 0.00/0.01
+    rungs: kept 62 · moved 8 (to cell 8 · to reserve 0) · twice 4 · twice-same-power 1 · stands 12 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:11 1:10 2:12 3:12 4:12 5:13
+    offices (role): master fishmonger 3, dyer 3, potter 3, apothecary 3, master furrier 2, brickmaker 2, glassmaker 2, network's head 2, printer 2, tailor 2
+    kinds (category): other 60%, economy 16%, government 9%, criminal 7%, religious 4%, military 4%
+
+  PERSONALITY/kindness/short  lines 4+1  hold/town 0.52 · 0.74  reps% 0.3% · 0.4%  pts 0.10/0.11 · 0.17/0.16
+    rungs: kept 63 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:18 1:17 2:15 3:13
+    offices (role): chief magistrate 4, nominal owner 3, bowyer 3, chandler 3, gang boss 2, guild archmage 2, auctioneer 2, quarry master 2, senior charter master 2, mine captain 2
+    kinds (category): other 32%, economy 19%, government 17%, criminal 14%, magic 8%, religious 5%, military 5%
+
+  PERSONALITY/duty/short  lines 4+0  hold/town 0.52 · 0.46  reps% 0.3% · 0.1%  pts 0.11/0.12 · 0.05/0.06
+    rungs: kept 49 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:10 1:14 2:12 3:13
+    offices (role): chief magistrate 3, master baker 2, dean 2, fortune teller 2, postmaster 2, pawnbroker 2, collier 2, master furrier 1, barge master 1, customs collector 1
+    kinds (category): other 41%, economy 18%, criminal 16%, government 14%, magic 4%, religious 4%, military 2%
+
+  PERSONALITY/mastery/short  lines 4+0  hold/town 0.52 · 0.72  reps% 0.3% · 0.3%  pts 0.11/0.11 · 0.14/0.15
+    rungs: kept 62 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:16 1:17 2:14 3:15
+    offices (role): whisper broker 4, dyer 3, lord 3, senior craft-guild master 2, chief magistrate 2, master weaver 2, luxury merchant 2, crier 2, black marketeer 1, fuller 1
+    kinds (category): other 39%, economy 23%, government 16%, criminal 15%, religious 3%, military 3%, magic 2%
+
+  SUPPLY/dependency/short  lines 6+0  hold/town 1.90 · 2.94  reps% 0.3% · 0.3%  pts 0.10/0.07 · 0.13/0.08
+    rungs: kept 239 · moved 2 (to cell 2 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 1
+    template use (index:holdings, R = reserve): 0:37 1:37 2:49 3:32 4:39 5:48
+    offices (role): innkeeper 28, miller 21, master carpenter 21, master of granaries 19, banker 14, master baker 13, master weaver 12, company captain 10, wharfinger 10, master metalworker 10
+    kinds (category): other 64%, economy 21%, military 10%, religious 5%, magic 1%
+
+  PERSONALITY/forbidden_patron/short  lines 4+0  hold/town 0.42 · 0.98  reps% 0.2% · 0.6%  pts 0.09/0.07 · 0.27/0.28
+    rungs: kept 70 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:12 1:25 2:16 3:17
+    offices (role): fortune teller 3, gang boss 3, brickmaker 3, woodcarver 2, tailor 2, front man 2, master butcher 2, bowyer 2, lodge master 2, outfitter 2
+    kinds (category): other 44%, criminal 17%, economy 14%, government 9%, religious 6%, magic 6%, military 4%
+
+  ALLEGIANCE/suspicion/short  lines 6+0  hold/town 0.42 · 0.62  reps% 0.1% · 0.2%  pts 0.05/0.04 · 0.09/0.07
+    rungs: kept 50 · moved 2 (to cell 2 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:9 1:11 2:5 3:4 4:17 5:6
+    offices (role): garrison commander 15, prison warden 15, castellan 11, watch commander 11
+    kinds (category): military 71%, government 29%
+
+  PERSONALITY/hunger_for_status/short  lines 4+0  hold/town 0.36 · 0.32  reps% 0.1% · 0.1%  pts 0.05/0.05 · 0.03/0.03
+    rungs: kept 34 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:4 1:11 2:11 3:8
+    offices (role): midwife 2, tanner 2, quarry master 2, master fishmonger 1, tailor 1, senior abbess 1, foundling-mother 1, sage 1, chandler 1, guildmaster of thieves 1
+    kinds (category): other 62%, economy 12%, criminal 9%, religious 6%, government 6%, magic 3%, military 3%
+
+  PERSONALITY/caution/short  lines 4+0  hold/town 0.32 · 0.54  reps% 0.1% · 0.2%  pts 0.04/0.04 · 0.09/0.08
+    rungs: kept 43 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:11 1:11 2:13 3:8
+    offices (role): crier 3, bishop 2, master baker 2, master metalworker 2, impresario 2, midwife 2, vintner 1, watcher 1, sawyer 1, auctioneer 1
+    kinds (category): other 47%, economy 19%, government 12%, criminal 9%, religious 9%, magic 5%
+
+  ALLEGIANCE/keep_partnership/short  lines 5+0  hold/town 0.34 · 0.54  reps% 0.1% · 0.1%  pts 0.02/0.02 · 0.07/0.05
+    rungs: kept 42 · moved 2 (to cell 2 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:10 1:14 2:6 3:10 4:4
+    offices (role): network's head 9, gang boss 7, guildmaster of thieves 7, front man 4, black marketeer 4, whisper broker 4, guild's master 3, undercity boss 3, nominal owner 2, rookery boss 1
+    kinds (category): criminal 100%
+
+  PERSONALITY/conviction/short  lines 4+0  hold/town 0.24 · 0.30  reps% 0.1% · 0.0%  pts 0.02/0.03 · 0.02/0.03
+    rungs: kept 27 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:5 1:8 2:5 3:9
+    offices (role): midwife 2, beast master 2, tailor 2, bath-keeper 1, apothecary 1, senior guild master 1, bowyer 1, lanista 1, killer 1, luxury merchant 1
+    kinds (category): other 56%, criminal 22%, economy 11%, military 7%, government 4%
+
+  SUPPLY/impaired/short  lines 6+0  hold/town 0.48 · 1.24  reps% 0.0% · 0.2%  pts 0.02/0.02 · 0.08/0.07
+    rungs: kept 78 · moved 8 (to cell 8 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:12 1:22 2:15 3:15 4:13 5:9
+    offices (role): tailor 7, brickmaker 6, master butcher 6, quarry master 5, bowyer 5, cobbler 5, master furrier 4, master metalworker 3, smelt master 3, mine captain 3
+    kinds (category): other 69%, economy 23%, magic 8%
+
+  ALLEGIANCE/keep_patron/short  lines 5+0  hold/town 0.16 · 0.30  reps% 0.0% · 0.0%  pts 0.01/0.00 · 0.02/0.01
+    rungs: kept 22 · moved 1 (to cell 1 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:7 1:3 2:3 3:6 4:4
+    offices (role): network's head 5, black marketeer 4, undercity boss 3, gang boss 2, network's spider 2, front man 2, guildmaster of thieves 2, whisper broker 1, nominal owner 1, guild's master 1
+    kinds (category): criminal 100%
+
+  UNCANNY/bargain/short  lines 6+0  hold/town 0.14 · 0.28  reps% 0.0% · 0.0%  pts 0.01/0.01 · 0.02/0.01
+    rungs: kept 21 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:4 1:1 3:7 4:3 5:6
+    offices (role): brickmaker 2, master weaver 2, brewer 2, hiring master 1, senior charter master 1, Master of the Guilds 1, postmaster 1, master metalworker 1, auctioneer 1, impresario 1
+    kinds (category): other 57%, economy 29%, criminal 10%, government 5%
+
+  UNCANNY/components/short  lines 6+0  hold/town 0.12 · 0.16  reps% 0.0% · 0.0%  pts 0.00/0.00 · 0.01/0.00
+    rungs: kept 14 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:1 2:4 3:1 4:4 5:4
+    offices (role): salt master 1, apothecary 1, fuller 1, bath-keeper 1, harbour master 1, smelt master 1, guild archmage 1, garrison commander 1, enchanter 1, miller 1
+    kinds (category): other 50%, economy 21%, magic 14%, government 7%, military 7%
+
+  ALLEGIANCE/serve_greed/short  lines 5+0  hold/town 0.14 · 0.20  reps% 0.0% · 0.0%  pts 0.00/0.00 · 0.01/0.00
+    rungs: kept 16 · moved 1 (to cell 1 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:4 1:7 2:2 3:3 4:1
+    offices (role): enchanter 2, glassmaker 1, garrison commander 1, workhouse master 1, crier 1, chief magistrate 1, printer 1, warehouse factor 1, watcher 1, fuller 1
+    kinds (category): other 41%, government 24%, magic 12%, criminal 12%, military 6%, economy 6%
+
+  ALLEGIANCE/serve_fear/short  lines 5+0  hold/town 0.10 · 0.18  reps% 0.0% · 0.0%  pts 0.00/0.00 · 0.00/0.00
+    rungs: kept 14 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:4 1:2 2:5 3:1 4:2
+    offices (role): chief magistrate 1, banker 1, customs collector 1, hiring master 1, glassmaker 1, chronicler 1, master of granaries 1, senior abbess 1, master butcher 1, mine captain 1
+    kinds (category): other 36%, government 29%, economy 29%, religious 7%
+
+  INSTITUTION/rebuilding/short  lines 6+0  hold/town 0.16 · 0.42  reps% 0.0% · 0.0%  pts 0.00/0.00 · 0.02/0.02
+    rungs: kept 29 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:6 1:5 2:4 3:3 4:6 5:5
+    offices (role): master butcher 3, dyer 3, brickmaker 2, master tanner 2, master baker 2, master smith 2, castellan 2, tanner 1, smelt master 1, senior craft-guild master 1
+    kinds (category): other 72%, economy 10%, magic 10%, military 7%
+
+  ALLEGIANCE/serve_forbidden_patron/short  lines 5+0  hold/town 0.08 · 0.12  reps% 0.0% · 0.0%  pts 0.00/0.00 · 0.00/0.00
+    rungs: kept 10 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:4 1:1 2:3 3:1 4:1
+    offices (role): fortune teller 2, master of granaries 1, lady 1, pit boss 1, tailor 1, lodge master 1, quarry master 1, enchanter 1, boatwright 1
+    kinds (category): other 50%, economy 20%, criminal 10%, military 10%, magic 10%
+
+  ALLEGIANCE/front_keep/short  lines 6+0  hold/town 0.16 · 0.14  reps% 0.0% · 0.0%  pts 0.00/0.00 · 0.00/0.00
+    rungs: kept 15 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:1 1:4 2:4 3:2 4:1 5:3
+    offices (role): senior craft-guild master 2, master metalworker 2, collier 1, ropemaker 1, chandler 1, bath-keeper 1, Master of the Guilds 1, sawyer 1, brewer 1, master weaver 1
+    kinds (category): other 73%, economy 27%
+
+  UNCANNY/commission/short  lines 6+0  hold/town 0.10 · 0.20  reps% 0.0% · 0.0%  pts 0.00/0.00 · 0.01/0.01
+    rungs: kept 15 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:3 1:2 2:4 3:1 4:1 5:4
+    offices (role): postmaster 1, coaching-inn keeper 1, miller 1, cobbler 1, network's head 1, auctioneer 1, outfitter 1, chandler 1, senior abbot 1, master tanner 1
+    kinds (category): other 40%, economy 20%, government 13%, military 13%, criminal 7%, religious 7%
+
+  ALLEGIANCE/escape_fear/short  lines 5+0  hold/town 0.08 · 0.06  reps% 0.0% · 0.0%  pts 0.00/0.00 · 0.00/0.00
+    rungs: kept 7 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 1:3 2:2 4:2
+    offices (role): hospital's master 1, woodcarver 1, innkeeper 1, customs collector 1, arena master 1, master of granaries 1, blade captain 1
+    kinds (category): other 29%, government 29%, religious 14%, economy 14%, military 14%
+
+  ALLEGIANCE/escape_greed/short  lines 5+0  hold/town 0.12 · 0.20  reps% 0.0% · 0.0%  pts 0.00/0.00 · 0.00/0.00
+    rungs: kept 16 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:2 1:4 2:3 3:3 4:4
+    offices (role): ropemaker 1, miller 1, senior charter master 1, wharfinger 1, dyer 1, collier 1, company captain 1, master of granaries 1, chronicler 1, librarian 1
+    kinds (category): other 56%, military 19%, economy 13%, government 6%, magic 6%
+
+  UNCANNY/haunting/short  lines 6+0  hold/town 0.08 · 0.24  reps% 0.0% · 0.0%  pts 0.00/0.00 · 0.01/0.01
+    rungs: kept 16 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:4 2:3 3:5 4:3 5:1
+    offices (role): guild archmage 2, scroll scribe 1, bath-keeper 1, exchange's steward 1, senior charter master 1, lord 1, senior guild master 1, caravanserai keeper 1, black marketeer 1, master butcher 1
+    kinds (category): other 44%, economy 25%, magic 19%, criminal 6%, government 6%
+
+  SUPPLY/want/short  lines 2+0  hold/town 0.08 · 0.08  reps% 0.0% · 0.0%  pts 0.00/0.00 · 0.00/0.00
+    rungs: kept 8 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:8
+    offices (role): banker 4, master carpenter 2, master metalworker 1, master smith 1
+    kinds (category): economy 50%, other 50%
+
+  UNCANNY/omen/short  lines 6+0  hold/town 0.10 · 0.12  reps% 0.0% · 0.0%  pts 0.00/0.00 · 0.00/0.00
+    rungs: kept 11 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:1 2:2 3:4 4:3 5:1
+    offices (role): smelt master 1, master fishmonger 1, network's head 1, senior craft-guild master 1, midwife 1, beast master 1, glassmaker 1, auctioneer 1, college master 1, harbour master 1
+    kinds (category): other 45%, economy 27%, criminal 9%, government 9%, magic 9%
+
+  ALLEGIANCE/escape_hunger_for_status/short  lines 5+0  hold/town 0.04 · 0.06  reps% 0.0% · 0.0%  pts 0.00/0.00 · 0.00/0.00
+    rungs: kept 5 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:1 1:1 3:2 4:1
+    offices (role): chief magistrate 1, apothecary 1, crier 1, postmaster 1, luxury merchant 1
+    kinds (category): government 60%, other 20%, economy 20%
+
+  ALLEGIANCE/escape_forbidden_patron/short  lines 5+0  hold/town 0.02 · 0.10  reps% 0.0% · 0.0%  pts 0.00/0.00 · 0.00/0.00
+    rungs: kept 6 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:1 1:1 2:1 4:3
+    offices (role): master carpenter 1, monarch 1, senior craft-guild master 1, auctioneer 1, apothecary 1, master of granaries 1
+    kinds (category): economy 50%, other 33%, government 17%
+
+  ALLEGIANCE/front_out/short  lines 6+0  hold/town 0.10 · 0.24  reps% 0.0% · 0.0%  pts 0.00/0.00 · 0.00/0.00
+    rungs: kept 17 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:3 1:2 2:4 3:2 4:5 5:1
+    offices (role): dyer 2, master butcher 1, miller 1, stable master 1, master carpenter 1, banker 1, outfitter 1, senior guild master 1, tanner 1, cobbler 1
+    kinds (category): other 71%, economy 29%
+
+  ALLEGIANCE/serve_hunger_for_status/short  lines 5+0  hold/town 0.02 · 0.04  reps% 0.0% · 0.0%  pts 0.00/0.00 · 0.00/0.00
+    rungs: kept 3 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:1 1:1 2:1
+    offices (role): enchanter 2, senior guild master 1
+    kinds (category): magic 67%, economy 33%
+
+  no cell (CRISIS lines and the like): 7 holdings over city+metropolis; city repeats 0
+
+(C) THE BILL BY CELL (short), calibrated (each cell's model scaled to its observed points). Observed city 36.4% · metropolis 47.3%.
+    The model's own k=0 (uncalibrated): city 39.8% · metropolis 50.7%
+
+  BILL 1, a second CITY under 30.0% (to 29.0%, the margin for the model's error): +19 lines; projected city 28.9% · metropolis 41.0%
+    cell                                         now  +lines  city pts before→after   metro pts before→after
+    RANK/enter/short                                6     +7    10.38 → 7.80           12.45 → 10.63
+    TIES/rival_enemy/short                          5     +7     6.41 → 3.49            8.34 → 5.58
+    TIES/ally/short                                 5     +3     4.04 → 2.73            3.73 → 2.57
+    INSTITUTION/solvency/short                      6     +1     3.18 → 2.81            4.66 → 4.39
+    RANK/climb/short                                6     +1     2.25 → 1.93            2.05 → 1.78
+
+  BILL 2, BILL 1 continued until a second METROPOLIS is under 30.0% too (to 29.0%): +63 lines; projected city 19.3% · metropolis 28.8%
+    cell                                         now  +lines  city pts before→after   metro pts before→after
+    RANK/enter/short                                6    +24    10.38 → 3.45           12.45 → 5.25
+    TIES/rival_enemy/short                          5    +15     6.41 → 2.09            8.34 → 3.38
+    INSTITUTION/solvency/short                      6     +8     3.18 → 1.47            4.66 → 2.55
+    TIES/ally/short                                 5     +6     4.04 → 2.00            3.73 → 1.91
+    INSTITUTION/charter/short                       6     +4     2.44 → 1.52            2.91 → 1.80
+    RANK/climb/short                                6     +3     2.25 → 1.50            2.05 → 1.39
+    TIES/mentor_student/short                       5     +1     0.99 → 0.84            1.17 → 0.99
+    PERSONALITY/sway/short                          4     +1     0.86 → 0.69            0.92 → 0.73
+    PERSONALITY/grudge/short                        4     +1     0.55 → 0.44            1.10 → 0.88
+
+  BILL 3, BILL 2 continued to the budget of 190 lines in this vantage, each line where it buys the most fall in city and metropolis together: +190 lines; projected city 11.4% · metropolis 16.2%
+    cell                                         now  +lines  city pts before→after   metro pts before→after
+    RANK/enter/short                                6    +49    10.38 → 1.88           12.45 → 2.87
+    TIES/rival_enemy/short                          5    +30     6.41 → 1.20            8.34 → 1.93
+    INSTITUTION/solvency/short                      6    +19     3.18 → 0.82            4.66 → 1.43
+    POWER/tense/short                               6    +18     0.74 → 0.26            4.57 → 1.78
+    TIES/ally/short                                 5    +17     4.04 → 1.00            3.73 → 0.95
+    INSTITUTION/charter/short                       6    +14     2.44 → 0.76            2.91 → 0.90
+    RANK/climb/short                                6    +11     2.25 → 0.79            2.05 → 0.74
+    TIES/mentor_student/short                       5     +6     0.99 → 0.46            1.17 → 0.54
+    PERSONALITY/sway/short                          4     +5     0.86 → 0.38            0.92 → 0.41
+    PERSONALITY/grudge/short                        4     +5     0.55 → 0.24            1.10 → 0.49
+    TIES/debtor/short                               5     +5     0.54 → 0.27            1.01 → 0.51
+    PERSONALITY/greed/short                         4     +3     0.45 → 0.26            0.62 → 0.36
+    SUPPLY/expansion/short                          6     +3     0.82 → 0.55            0.45 → 0.30
+    ALLEGIANCE/warrant/short                        6     +2     0.49 → 0.36            0.53 → 0.40
+    RANK/defend/short                               6     +1     0.22 → 0.19            0.49 → 0.42
+    PERSONALITY/impulse/short                       4     +1     0.21 → 0.17            0.25 → 0.20
+    TIES/creditor/short                             5     +1     0.33 → 0.27            0.39 → 0.33
+
+================ LONG WANTS ================
+(A) city: 50 towns, 60.0 long wants a town; all 2450 ordered pairs: share of B's among A's 36.0%; repeats 52860
+(A) metropolis: 50 towns, 83.8 long wants a town; all 2450 ordered pairs: share of B's among A's 47.2%; repeats 96930
+
+(B) PER CELL (long), worst first by the city's repeats. lines = cell+reserve; hold/town = mean holdings a town (city · metropolis);
+    reps% = the cell's share of all repeats; pts = points of the pair share it carries (observed · the model at k=0);
+    rungs over city+metropolis: drawn line kept · moved by pass two (to a cell line · to a RESERVE line) · twice/same-power/stands/exhausted · refused-by-secret
+
+  RANK/enter/long  lines 6+3  hold/town 9.26 · 12.80  reps% 28.8% · 26.3%  pts 10.35/13.61 · 12.46/15.21
+    rungs: kept 767 · moved 332 (to cell 43 · to reserve 291) · twice 267 · twice-same-power 4 · stands 4 · exhausted 0 · refused-by-secret 4
+    template use (index:holdings, R = reserve): 0:137 1:138 2:131 3:132 4:129 5:145 R0:116 R1:93 R2:82
+    offices (role): senior charter master 23, customs collector 23, prison warden 23, cobbler 22, bowyer 22, glassmaker 21, dyer 20, brickmaker 20, master carpenter 19, bath-keeper 18
+    kinds (category): other 52%, economy 17%, government 12%, criminal 7%, military 6%, religious 3%, magic 2%
+
+  TIES/rival_enemy/long  lines 5+4  hold/town 5.64 · 7.70  reps% 16.5% · 15.1%  pts 5.81/6.42 · 7.11/7.65
+    rungs: kept 394 · moved 272 (to cell 55 · to reserve 218) · twice 52 · twice-same-power 1 · stands 0 · exhausted 0 · refused-by-secret 1
+    template use (index:holdings, R = reserve): 0:84 1:83 2:92 3:92 4:98 R0:72 R1:69 R2:52 R3:25
+    offices (role): master fishmonger 22, chief magistrate 14, customs collector 12, whisper broker 12, luxury merchant 12, woodcarver 12, fuller 12, master metalworker 11, enchanter 11, potter 11
+    kinds (category): other 46%, economy 17%, criminal 13%, government 12%, military 4%, magic 4%, religious 4%
+
+  TIES/ally/long  lines 5+0  hold/town 3.80 · 4.76  reps% 12.1% · 9.5%  pts 4.37/4.42 · 4.47/4.51
+    rungs: kept 322 · moved 106 (to cell 106 · to reserve 0) · twice 47 · twice-same-power 6 · stands 1 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:78 1:84 2:94 3:84 4:88
+    offices (role): customs collector 9, warehouse factor 9, midwife 9, brewer 9, fortune teller 8, master butcher 8, smelt master 8, senior charter master 8, bowyer 7, master baker 7
+    kinds (category): other 49%, economy 15%, government 12%, criminal 11%, military 6%, magic 4%, religious 4%
+
+  INSTITUTION/solvency/long  lines 6+4  hold/town 6.96 · 9.90  reps% 8.9% · 9.1%  pts 3.22/4.16 · 4.27/5.75
+    rungs: kept 484 · moved 348 (to cell 108 · to reserve 246) · twice 59 · twice-same-power 1 · stands 0 · exhausted 0 · refused-by-secret 11
+    template use (index:holdings, R = reserve): 0:106 1:94 2:101 3:99 4:98 5:99 R0:86 R1:67 R2:52 R3:41
+    offices (role): network's head 22, black marketeer 21, chief magistrate 17, scroll scribe 17, dean 16, guildmaster of thieves 16, whisper broker 14, watch commander 13, tailor 13, beast master 13
+    kinds (category): other 38%, criminal 20%, economy 15%, government 11%, military 6%, religious 6%, magic 5%
+
+  INSTITUTION/charter/long  lines 6+1  hold/town 5.52 · 7.86  reps% 6.5% · 7.1%  pts 2.43/2.88 · 3.35/3.89
+    rungs: kept 448 · moved 219 (to cell 142 · to reserve 77) · twice 98 · twice-same-power 7 · stands 0 · exhausted 0 · refused-by-secret 2
+    template use (index:holdings, R = reserve): 0:96 1:102 2:101 3:98 4:92 5:103 R0:77
+    offices (role): garrison commander 18, master of granaries 16, chief magistrate 15, sawyer 14, outfitter 13, tailor 13, hospital's master 13, warehouse factor 13, master furrier 13, potter 12
+    kinds (category): other 47%, economy 20%, government 11%, military 9%, religious 5%, magic 4%, criminal 4%
+
+  PERSONALITY/sway/long  lines 4+2  hold/town 1.92 · 2.56  reps% 4.1% · 4.1%  pts 1.46/1.48 · 1.96/1.97
+    rungs: kept 223 · moved 1 (to cell 0 · to reserve 1) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:58 1:57 2:55 3:53 R0:1
+    offices (role): apothecary 7, ropemaker 7, fortune teller 6, mint master 5, master of granaries 5, lady 5, toll-keeper 5, stable master 5, innkeeper 4, lord 4
+    kinds (category): other 46%, economy 17%, government 13%, criminal 8%, military 6%, magic 5%, religious 4%
+
+  PERSONALITY/grudge/long  lines 4+2  hold/town 1.78 · 2.10  reps% 3.6% · 2.7%  pts 1.28/1.29 · 1.27/1.28
+    rungs: kept 193 · moved 1 (to cell 0 · to reserve 1) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:45 1:48 2:48 3:52 R0:1
+    offices (role): fortune teller 9, ropemaker 6, gang boss 6, workhouse master 5, dean 5, warehouse factor 5, watch commander 5, beast master 4, sage 4, bowyer 4
+    kinds (category): other 46%, economy 16%, military 9%, criminal 9%, government 9%, religious 6%, magic 5%
+
+  SUPPLY/expansion/long  lines 6+0  hold/town 2.90 · 2.28  reps% 3.1% · 0.9%  pts 1.19/1.23 · 0.44/0.44
+    rungs: kept 213 · moved 46 (to cell 46 · to reserve 0) · twice 10 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:49 1:39 2:41 3:40 4:47 5:43
+    offices (role): house boss 21, coaching-inn keeper 13, brewer 13, college master 12, miller 11, vintner 11, luxury merchant 10, master smith 10, master furrier 10, customs collector 9
+    kinds (category): other 57%, economy 27%, criminal 8%, government 8%
+
+  RANK/climb/long  lines 6+0  hold/town 2.28 · 2.74  reps% 2.6% · 1.9%  pts 0.91/1.38 · 0.92/1.46
+    rungs: kept 206 · moved 42 (to cell 42 · to reserve 0) · twice 1 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 3
+    template use (index:holdings, R = reserve): 0:35 1:48 2:46 3:52 4:35 5:35
+    offices (role): college master 13, miller 9, lodge master 9, scroll scribe 8, mint master 8, chancellor 8, midwife 7, watch commander 7, master fishmonger 7, master of granaries 7
+    kinds (category): other 37%, economy 19%, magic 11%, military 11%, government 9%, religious 8%, criminal 4%
+
+  TIES/debtor/long  lines 5+0  hold/town 1.58 · 1.88  reps% 2.1% · 1.8%  pts 0.77/0.79 · 0.85/0.83
+    rungs: kept 144 · moved 28 (to cell 28 · to reserve 0) · twice 2 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 1
+    template use (index:holdings, R = reserve): 0:32 1:30 2:37 3:36 4:38
+    offices (role): tailor 7, dean 7, guild archmage 6, warehouse factor 5, potter 5, stable master 5, lodge master 4, enchanter 4, beast master 4, lord 4
+    kinds (category): other 42%, economy 16%, religious 10%, government 10%, magic 8%, criminal 8%, military 6%
+
+  TIES/mentor_student/long  lines 5+0  hold/town 1.58 · 2.60  reps% 2.1% · 3.3%  pts 0.79/0.83 · 1.54/1.56
+    rungs: kept 171 · moved 37 (to cell 37 · to reserve 0) · twice 4 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 1
+    template use (index:holdings, R = reserve): 0:35 1:37 2:50 3:42 4:45
+    offices (role): guild archmage 7, scroll scribe 6, beast master 5, master fishmonger 5, mine captain 5, master weaver 5, garrison commander 5, gang boss 4, lodge master 4, smelt master 4
+    kinds (category): other 37%, economy 22%, criminal 11%, government 8%, magic 8%, military 8%, religious 6%
+
+  POWER/tense/long  lines 6+3  hold/town 1.98 · 6.48  reps% 1.6% · 9.7%  pts 0.55/0.71 · 4.56/4.95
+    rungs: kept 303 · moved 117 (to cell 19 · to reserve 99) · twice 26 · twice-same-power 2 · stands 20 · exhausted 0 · refused-by-secret 3
+    template use (index:holdings, R = reserve): 0:52 1:52 2:53 3:57 4:52 5:58 R0:42 R1:31 R2:26
+    offices (role): apothecary 12, master weaver 12, master butcher 10, tailor 10, cobbler 10, senior guild master 9, warehouse factor 9, potter 9, master baker 9, master carpenter 9
+    kinds (category): other 59%, economy 22%, criminal 9%, government 5%, military 5%, religious 0%
+
+  RANK/defend/long  lines 6+0  hold/town 1.40 · 1.88  reps% 1.0% · 1.1%  pts 0.34/0.19 · 0.53/0.27
+    rungs: kept 145 · moved 18 (to cell 18 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 1
+    template use (index:holdings, R = reserve): 0:27 1:20 2:30 3:36 4:29 5:22
+    offices (role): dean 29, garrison commander 24, senior craft-guild master 18, lord 17, guild archmage 17, lady 11, senior guild master 6, Lord Mayor 6, alchemist 5, Master of the Guilds 4
+    kinds (category): economy 24%, other 20%, religious 20%, magic 16%, military 16%, government 4%, criminal 1%
+
+  PERSONALITY/fear/long  lines 4+1  hold/town 0.92 · 1.00  reps% 1.0% · 0.6%  pts 0.35/0.35 · 0.29/0.29
+    rungs: kept 96 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:26 1:24 2:26 3:20
+    offices (role): banker 4, stable master 3, bowyer 3, enchanter 3, dean 3, master fishmonger 3, postmaster 3, senior craft-guild master 2, garrison commander 2, castellan 2
+    kinds (category): other 36%, economy 24%, government 11%, criminal 9%, military 7%, religious 7%, magic 4%
+
+  PERSONALITY/greed/long  lines 4+1  hold/town 0.92 · 1.70  reps% 0.9% · 1.8%  pts 0.34/0.35 · 0.85/0.86
+    rungs: kept 131 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:28 1:31 2:38 3:34
+    offices (role): banker 5, hospital's master 5, fortune teller 5, bowyer 3, master butcher 3, senior charter master 3, whisper broker 3, company captain 3, chandler 3, lady 3
+    kinds (category): other 39%, economy 18%, government 15%, criminal 11%, military 7%, religious 7%, magic 4%
+
+  PERSONALITY/forbidden_patron/long  lines 4+2  hold/town 0.82 · 1.08  reps% 0.7% · 0.7%  pts 0.26/0.27 · 0.31/0.33
+    rungs: kept 94 · moved 1 (to cell 0 · to reserve 1) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:23 1:25 2:24 3:22 R0:1
+    offices (role): fortune teller 5, senior craft-guild master 4, enchanter 3, chronicler 3, stable master 3, hospital's master 3, chandler 2, master carpenter 2, cartographer 2, senior abbess 2
+    kinds (category): other 43%, economy 17%, criminal 14%, religious 11%, government 7%, military 5%, magic 3%
+
+  PERSONALITY/impulse/long  lines 4+1  hold/town 0.74 · 1.04  reps% 0.6% · 0.7%  pts 0.22/0.22 · 0.33/0.32
+    rungs: kept 89 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:21 1:15 2:24 3:29
+    offices (role): cobbler 4, company captain 3, enchanter 3, toll-keeper 3, senior charter master 3, chief magistrate 3, master carpenter 2, master metalworker 2, prison warden 2, exchange's steward 2
+    kinds (category): other 44%, economy 16%, government 11%, criminal 11%, magic 8%, military 6%, religious 4%
+
+  TIES/creditor/long  lines 5+0  hold/town 0.80 · 1.20  reps% 0.6% · 0.7%  pts 0.20/0.19 · 0.32/0.34
+    rungs: kept 95 · moved 5 (to cell 5 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:19 1:18 2:13 3:22 4:28
+    offices (role): garrison commander 6, guild archmage 6, college master 4, black marketeer 4, dean 4, master of granaries 3, sage 3, network's head 3, lady 3, chancellor 3
+    kinds (category): other 27%, criminal 18%, economy 17%, military 11%, magic 11%, government 9%, religious 7%
+
+  TIES/family/long  lines 5+0  hold/town 0.76 · 0.98  reps% 0.5% · 0.5%  pts 0.21/0.20 · 0.22/0.22
+    rungs: kept 80 · moved 7 (to cell 7 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:15 1:23 2:18 3:15 4:16
+    offices (role): banker 4, enchanter 4, dean 3, gang boss 3, crier 3, chandler 3, innkeeper 3, cartographer 2, workhouse master 2, chief magistrate 2
+    kinds (category): other 46%, economy 14%, government 11%, criminal 10%, religious 9%, magic 7%, military 2%
+
+  POWER/competitive/long  lines 6+0  hold/town 1.20 · 0.46  reps% 0.5% · 0.0%  pts 0.15/0.29 · 0.01/0.02
+    rungs: kept 80 · moved 3 (to cell 3 · to reserve 0) · twice 0 · twice-same-power 0 · stands 15 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:13 1:15 2:11 3:14 4:16 5:14
+    offices (role): master butcher 4, ropemaker 4, nominal owner 3, brewer 3, brickmaker 3, master baker 3, cobbler 3, network's head 2, tailor 2, cooper 2
+    kinds (category): other 53%, economy 23%, criminal 11%, military 5%, government 5%, religious 4%
+
+  PERSONALITY/kindness/long  lines 4+1  hold/town 0.62 · 0.82  reps% 0.4% · 0.4%  pts 0.14/0.16 · 0.19/0.20
+    rungs: kept 72 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:21 1:19 2:17 3:15
+    offices (role): whisper broker 3, librarian 3, potter 2, banker 2, bishop 2, bath-keeper 2, bowyer 2, cooper 2, customs collector 2, fortune teller 2
+    kinds (category): other 40%, economy 21%, criminal 13%, government 11%, religious 8%, military 4%, magic 3%
+
+  PERSONALITY/duty/long  lines 4+0  hold/town 0.58 · 0.88  reps% 0.3% · 0.4%  pts 0.13/0.15 · 0.20/0.22
+    rungs: kept 73 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:19 1:19 2:17 3:18
+    offices (role): beast master 3, senior abbot 3, gang boss 3, crier 3, sage 2, senior craft-guild master 2, tailor 2, luxury merchant 2, apothecary 2, chandler 2
+    kinds (category): other 36%, economy 21%, criminal 21%, government 8%, religious 7%, military 4%, magic 4%
+
+  PERSONALITY/mastery/long  lines 4+0  hold/town 0.56 · 0.64  reps% 0.3% · 0.3%  pts 0.12/0.14 · 0.12/0.12
+    rungs: kept 60 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:12 1:21 2:14 3:13
+    offices (role): senior craft-guild master 3, dean 3, sawyer 2, fortune teller 2, warehouse factor 2, master weaver 2, castellan 2, fuller 2, house boss 2, master carpenter 2
+    kinds (category): other 40%, economy 23%, government 12%, military 8%, religious 8%, magic 5%, criminal 3%
+
+  INSTITUTION/takeover/long  lines 6+0  hold/town 1.06 · 1.42  reps% 0.3% · 0.4%  pts 0.11/0.09 · 0.18/0.08
+    rungs: kept 114 · moved 9 (to cell 9 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 1
+    template use (index:holdings, R = reserve): 0:27 1:16 2:25 3:18 4:19 5:19
+    offices (role): cartographer 8, innkeeper 7, postmaster 7, bath-keeper 6, senior guild master 5, sawyer 5, customs collector 5, master baker 4, cobbler 4, Master of the Guilds 4
+    kinds (category): other 65%, economy 23%, government 12%
+
+  PERSONALITY/caution/long  lines 4+0  hold/town 0.44 · 0.78  reps% 0.2% · 0.4%  pts 0.09/0.08 · 0.19/0.18
+    rungs: kept 61 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:14 1:17 2:8 3:22
+    offices (role): cartographer 3, senior charter master 3, potter 3, warehouse factor 2, pawnbroker 2, master of granaries 2, innkeeper 2, mint master 2, keeper of the house 2, glassmaker 2
+    kinds (category): other 48%, economy 21%, criminal 11%, government 8%, religious 7%, military 3%, magic 2%
+
+  PERSONALITY/hunger_for_status/long  lines 4+1  hold/town 0.40 · 0.50  reps% 0.2% · 0.2%  pts 0.06/0.06 · 0.08/0.07
+    rungs: kept 45 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:8 1:14 2:14 3:9
+    offices (role): innkeeper 3, hospital's master 2, chronicler 2, cooper 2, vintner 2, luxury merchant 2, Lord Mayor 1, tailor 1, fuller 1, senior guild master 1
+    kinds (category): other 49%, economy 24%, magic 9%, government 7%, religious 4%, criminal 4%, military 2%
+
+  SUPPLY/dependency/long  lines 6+0  hold/town 1.88 · 3.24  reps% 0.2% · 0.2%  pts 0.07/0.10 · 0.11/0.13
+    rungs: kept 255 · moved 1 (to cell 1 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:45 1:47 2:48 3:40 4:36 5:40
+    offices (role): master baker 19, banker 18, master of granaries 17, miller 16, master carpenter 15, master smith 15, luxury merchant 14, master butcher 13, master weaver 13, hospital's master 13
+    kinds (category): other 55%, economy 23%, military 11%, religious 9%, magic 2%
+
+  PERSONALITY/conviction/long  lines 4+0  hold/town 0.24 · 0.40  reps% 0.1% · 0.1%  pts 0.04/0.02 · 0.04/0.05
+    rungs: kept 32 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:12 1:6 2:9 3:5
+    offices (role): crier 3, bath-keeper 2, black marketeer 2, chief magistrate 2, Lord Mayor 2, brewer 2, fortune teller 2, foundling-keeper 1, pawnbroker 1, apothecary 1
+    kinds (category): other 31%, economy 19%, government 19%, criminal 16%, religious 9%, military 3%, magic 3%
+
+  SUPPLY/impaired/long  lines 6+0  hold/town 0.60 · 1.02  reps% 0.0% · 0.1%  pts 0.02/0.03 · 0.07/0.08
+    rungs: kept 73 · moved 7 (to cell 7 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 1
+    template use (index:holdings, R = reserve): 0:11 1:12 2:17 3:15 4:14 5:12
+    offices (role): smelt master 8, dyer 6, master tanner 5, sawyer 5, mine captain 5, quarry master 4, fuller 4, tanner 4, brickmaker 3, castellan 3
+    kinds (category): other 67%, economy 22%, magic 7%, military 4%
+
+  ALLEGIANCE/warrant/long  lines 6+0  hold/town 0.24 · 0.24  reps% 0.0% · 0.0%  pts 0.02/0.01 · 0.01/0.00
+    rungs: kept 24 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:4 1:6 2:6 3:5 4:2 5:1
+    offices (role): garrison commander 7, watch commander 6, prison warden 6, castellan 5
+    kinds (category): military 75%, government 25%
+
+  ALLEGIANCE/serve_greed/long  lines 5+0  hold/town 0.12 · 0.12  reps% 0.0% · 0.0%  pts 0.00/0.00 · 0.00/0.00
+    rungs: kept 12 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:3 1:3 2:1 3:3 4:2
+    offices (role): senior guild master 2, mint master 2, woodcarver 1, district madam 1, customs collector 1, college master 1, master of granaries 1, potter 1, lady 1, chancellor 1
+    kinds (category): other 33%, government 25%, economy 25%, criminal 8%, magic 8%
+
+  SUPPLY/want/long  lines 2+0  hold/town 0.08 · 0.02  reps% 0.0% · 0.0%  pts 0.00/0.00 · 0.00/0.00
+    rungs: kept 5 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:2 1:3
+    offices (role): banker 4, watch commander 1
+    kinds (category): economy 80%, military 20%
+
+  INSTITUTION/rebuilding/long  lines 6+0  hold/town 0.22 · 0.32  reps% 0.0% · 0.0%  pts 0.00/0.00 · 0.01/0.01
+    rungs: kept 27 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:6 1:4 2:5 3:2 4:5 5:5
+    offices (role): master metalworker 3, collier 3, castellan 2, master smith 2, fuller 2, sawyer 2, wizard 1, tailor 1, senior craft-guild master 1, cobbler 1
+    kinds (category): other 67%, economy 19%, magic 7%, military 7%
+
+  ALLEGIANCE/serve_forbidden_patron/long  lines 5+0  hold/town 0.04 · 0.10  reps% 0.0% · 0.0%  pts 0.00/0.00 · 0.00/0.00
+    rungs: kept 7 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:1 1:1 3:2 4:3
+    offices (role): district madam 1, master shipwright 1, fortune teller 1, scroll scribe 1, customs collector 1, collier 1, prison warden 1
+    kinds (category): other 29%, government 29%, criminal 14%, economy 14%, magic 14%
+
+  ALLEGIANCE/front_out/long  lines 6+0  hold/town 0.10 · 0.10  reps% 0.0% · 0.0%  pts 0.00/0.00 · 0.00/0.00
+    rungs: kept 10 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:1 1:1 2:1 3:2 4:3 5:2
+    offices (role): cobbler 1, smelt master 1, beast master 1, exchange's steward 1, innkeeper 1, potter 1, luxury merchant 1, warehouse factor 1, tailor 1, brewer 1
+    kinds (category): other 70%, economy 30%
+
+  ALLEGIANCE/front_keep/long  lines 6+0  hold/town 0.06 · 0.08  reps% 0.0% · 0.0%  pts 0.00/0.00 · 0.00/0.00
+    rungs: kept 6 · moved 1 (to cell 1 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 2:3 3:2 4:2
+    offices (role): master tanner 1, master weaver 1, beast master 1, coaching-inn keeper 1, banker 1, innkeeper 1, master metalworker 1
+    kinds (category): other 86%, economy 14%
+
+  ALLEGIANCE/serve_fear/long  lines 5+0  hold/town 0.02 · 0.08  reps% 0.0% · 0.0%  pts 0.00/0.00 · 0.00/0.00
+    rungs: kept 5 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 0:3 1:1 2:1
+    offices (role): sage 1, lanista 1, auctioneer 1, harbour master 1, scroll scribe 1
+    kinds (category): other 20%, military 20%, economy 20%, government 20%, magic 20%
+
+  ALLEGIANCE/serve_hunger_for_status/long  lines 5+0  hold/town 0.02 · 0.02  reps% 0.0% · 0.0%  pts 0.00/0.00 · 0.00/0.00
+    rungs: kept 2 · moved 0 (to cell 0 · to reserve 0) · twice 0 · twice-same-power 0 · stands 0 · exhausted 0 · refused-by-secret 0
+    template use (index:holdings, R = reserve): 2:1 4:1
+    offices (role): company captain 1, fuller 1
+    kinds (category): military 50%, other 50%
+
+  no cell (CRISIS lines and the like): 3 holdings over city+metropolis; city repeats 0
+
+(C) THE BILL BY CELL (long), calibrated (each cell's model scaled to its observed points). Observed city 36.0% · metropolis 47.2%.
+    The model's own k=0 (uncalibrated): city 42.1% · metropolis 53.3%
+
+  BILL 1, a second CITY under 30.0% (to 29.0%, the margin for the model's error): +19 lines; projected city 28.9% · metropolis 41.1%
+    cell                                         now  +lines  city pts before→after   metro pts before→after
+    RANK/enter/long                                 6    +13    10.35 → 5.66           12.46 → 8.46
+    TIES/ally/long                                  5     +4     4.37 → 2.66            4.47 → 2.91
+    INSTITUTION/charter/long                        6     +1     2.43 → 2.10            3.35 → 3.04
+    INSTITUTION/solvency/long                       6     +1     3.22 → 2.90            4.27 → 4.03
+
+  BILL 2, BILL 1 continued until a second METROPOLIS is under 30.0% too (to 29.0%): +66 lines; projected city 19.4% · metropolis 29.0%
+    cell                                         now  +lines  city pts before→after   metro pts before→after
+    RANK/enter/long                                 6    +25    10.35 → 3.47           12.46 → 5.19
+    TIES/rival_enemy/long                           5    +14     5.81 → 2.44            7.11 → 3.37
+    INSTITUTION/solvency/long                       6     +8     3.22 → 1.53            4.27 → 2.30
+    TIES/ally/long                                  5     +7     4.37 → 2.00            4.47 → 2.20
+    INSTITUTION/charter/long                        6     +5     2.43 → 1.38            3.35 → 2.01
+    PERSONALITY/sway/long                           4     +3     1.46 → 0.85            1.96 → 1.12
+    PERSONALITY/grudge/long                         4     +2     1.28 → 0.85            1.27 → 0.86
+    TIES/mentor_student/long                        5     +2     0.79 → 0.57            1.54 → 1.12
+
+  BILL 3, BILL 2 continued to the budget of 190 lines in this vantage, each line where it buys the most fall in city and metropolis together: +190 lines; projected city 11.5% · metropolis 16.7%
+    cell                                         now  +lines  city pts before→after   metro pts before→after
+    RANK/enter/long                                 6    +49    10.35 → 1.96           12.46 → 2.92
+    TIES/rival_enemy/long                           5    +30     5.81 → 1.32            7.11 → 1.83
+    TIES/ally/long                                  5    +19     4.37 → 1.00            4.47 → 1.10
+    INSTITUTION/solvency/long                       6    +18     3.22 → 0.89            4.27 → 1.34
+    POWER/tense/long                                6    +17     0.55 → 0.20            4.56 → 1.97
+    INSTITUTION/charter/long                        6    +14     2.43 → 0.76            3.35 → 1.10
+    PERSONALITY/sway/long                           4     +8     1.46 → 0.49            1.96 → 0.65
+    PERSONALITY/grudge/long                         4     +7     1.28 → 0.47            1.27 → 0.47
+    TIES/mentor_student/long                        5     +6     0.79 → 0.36            1.54 → 0.71
+    RANK/climb/long                                 6     +5     0.91 → 0.49            0.92 → 0.51
+    TIES/debtor/long                                5     +5     0.77 → 0.39            0.85 → 0.43
+    SUPPLY/expansion/long                           6     +4     1.19 → 0.72            0.44 → 0.26
+    PERSONALITY/greed/long                          4     +3     0.34 → 0.19            0.85 → 0.49
+    RANK/defend/long                                6     +2     0.34 → 0.26            0.53 → 0.40
+    PERSONALITY/fear/long                           4     +1     0.35 → 0.28            0.29 → 0.23
+    PERSONALITY/forbidden_patron/long               4     +1     0.26 → 0.21            0.31 → 0.26
+    PERSONALITY/impulse/long                        4     +1     0.22 → 0.18            0.33 → 0.26
+
+================ THE BUILD ORDER: 380 lines, in files of 60 ================
+
+  FILE 1: 60 lines (bills 1, 2); after it (cumulative 60): short city 25.0% · metropolis 36.4%; long city 26.3% · metropolis 37.9%
+    RANK/enter/long                              +16  (lines 1–16 of the cell's new)
+    RANK/enter/short                             +15  (lines 1–15 of the cell's new)
+    TIES/rival_enemy/short                       +9  (lines 1–9 of the cell's new)
+    TIES/ally/long                               +4  (lines 1–4 of the cell's new)
+    TIES/rival_enemy/long                        +4  (lines 1–4 of the cell's new)
+    TIES/ally/short                              +3  (lines 1–3 of the cell's new)
+    INSTITUTION/solvency/short                   +2  (lines 1–2 of the cell's new)
+    INSTITUTION/charter/long                     +2  (lines 1–2 of the cell's new)
+    INSTITUTION/solvency/long                    +2  (lines 1–2 of the cell's new)
+    RANK/climb/short                             +1  (lines 1–1 of the cell's new)
+    PERSONALITY/sway/long                        +1  (lines 1–1 of the cell's new)
+    INSTITUTION/charter/short                    +1  (lines 1–1 of the cell's new)
+
+  FILE 2: 60 lines (bills 2); after it (cumulative 120): short city 19.9% · metropolis 29.8%; long city 19.8% · metropolis 29.7%
+    TIES/rival_enemy/long                        +10  (lines 5–14 of the cell's new)
+    RANK/enter/short                             +7  (lines 16–22 of the cell's new)
+    RANK/enter/long                              +7  (lines 17–23 of the cell's new)
+    INSTITUTION/solvency/short                   +5  (lines 3–7 of the cell's new)
+    INSTITUTION/solvency/long                    +5  (lines 3–7 of the cell's new)
+    TIES/rival_enemy/short                       +4  (lines 10–13 of the cell's new)
+    INSTITUTION/charter/short                    +3  (lines 2–4 of the cell's new)
+    TIES/ally/short                              +3  (lines 4–6 of the cell's new)
+    TIES/ally/long                               +3  (lines 5–7 of the cell's new)
+    INSTITUTION/charter/long                     +3  (lines 3–5 of the cell's new)
+    PERSONALITY/grudge/long                      +2  (lines 1–2 of the cell's new)
+    PERSONALITY/sway/long                        +2  (lines 2–3 of the cell's new)
+    RANK/climb/short                             +2  (lines 2–3 of the cell's new)
+    TIES/mentor_student/long                     +1  (lines 1–1 of the cell's new)
+    PERSONALITY/sway/short                       +1  (lines 1–1 of the cell's new)
+    TIES/mentor_student/short                    +1  (lines 1–1 of the cell's new)
+    PERSONALITY/grudge/short                     +1  (lines 1–1 of the cell's new)
+
+  FILE 3: 60 lines (bills 2, 3); after it (cumulative 180): short city 16.8% · metropolis 24.6%; long city 16.9% · metropolis 25.6%
+    RANK/enter/short                             +7  (lines 23–29 of the cell's new)
+    RANK/enter/long                              +6  (lines 24–29 of the cell's new)
+    POWER/tense/short                            +6  (lines 1–6 of the cell's new)
+    TIES/rival_enemy/short                       +5  (lines 14–18 of the cell's new)
+    TIES/rival_enemy/long                        +4  (lines 15–18 of the cell's new)
+    INSTITUTION/solvency/short                   +3  (lines 8–10 of the cell's new)
+    INSTITUTION/solvency/long                    +3  (lines 8–10 of the cell's new)
+    TIES/ally/short                              +3  (lines 7–9 of the cell's new)
+    TIES/ally/long                               +3  (lines 8–10 of the cell's new)
+    POWER/tense/long                             +3  (lines 1–3 of the cell's new)
+    INSTITUTION/charter/short                    +2  (lines 5–6 of the cell's new)
+    RANK/climb/short                             +2  (lines 4–5 of the cell's new)
+    INSTITUTION/charter/long                     +2  (lines 6–7 of the cell's new)
+    TIES/mentor_student/long                     +1  (lines 2–2 of the cell's new)
+    TIES/debtor/long                             +1  (lines 1–1 of the cell's new)
+    RANK/climb/long                              +1  (lines 1–1 of the cell's new)
+    TIES/debtor/short                            +1  (lines 1–1 of the cell's new)
+    TIES/mentor_student/short                    +1  (lines 2–2 of the cell's new)
+    PERSONALITY/sway/long                        +1  (lines 4–4 of the cell's new)
+    PERSONALITY/grudge/long                      +1  (lines 3–3 of the cell's new)
+    PERSONALITY/greed/long                       +1  (lines 1–1 of the cell's new)
+    PERSONALITY/sway/short                       +1  (lines 2–2 of the cell's new)
+    SUPPLY/expansion/long                        +1  (lines 1–1 of the cell's new)
+    PERSONALITY/grudge/short                     +1  (lines 2–2 of the cell's new)
+
+  FILE 4: 60 lines (bills 3); after it (cumulative 240): short city 14.8% · metropolis 21.3%; long city 14.8% · metropolis 21.6%
+    POWER/tense/long                             +8  (lines 4–11 of the cell's new)
+    RANK/enter/long                              +6  (lines 30–35 of the cell's new)
+    POWER/tense/short                            +6  (lines 7–12 of the cell's new)
+    RANK/enter/short                             +5  (lines 30–34 of the cell's new)
+    TIES/ally/long                               +3  (lines 11–13 of the cell's new)
+    INSTITUTION/solvency/short                   +3  (lines 11–13 of the cell's new)
+    TIES/rival_enemy/long                        +3  (lines 19–21 of the cell's new)
+    TIES/rival_enemy/short                       +3  (lines 19–21 of the cell's new)
+    INSTITUTION/charter/short                    +2  (lines 7–8 of the cell's new)
+    TIES/mentor_student/long                     +2  (lines 3–4 of the cell's new)
+    TIES/ally/short                              +2  (lines 10–11 of the cell's new)
+    INSTITUTION/charter/long                     +2  (lines 8–9 of the cell's new)
+    INSTITUTION/solvency/long                    +2  (lines 11–12 of the cell's new)
+    RANK/climb/short                             +2  (lines 6–7 of the cell's new)
+    PERSONALITY/greed/short                      +1  (lines 1–1 of the cell's new)
+    TIES/mentor_student/short                    +1  (lines 3–3 of the cell's new)
+    RANK/climb/long                              +1  (lines 2–2 of the cell's new)
+    PERSONALITY/sway/long                        +1  (lines 5–5 of the cell's new)
+    TIES/debtor/long                             +1  (lines 2–2 of the cell's new)
+    TIES/debtor/short                            +1  (lines 2–2 of the cell's new)
+    PERSONALITY/grudge/long                      +1  (lines 4–4 of the cell's new)
+    SUPPLY/expansion/short                       +1  (lines 1–1 of the cell's new)
+    SUPPLY/expansion/long                        +1  (lines 2–2 of the cell's new)
+    PERSONALITY/sway/short                       +1  (lines 3–3 of the cell's new)
+    PERSONALITY/greed/long                       +1  (lines 2–2 of the cell's new)
+
+  FILE 5: 60 lines (bills 3); after it (cumulative 300): short city 13.1% · metropolis 18.8%; long city 13.1% · metropolis 19.1%
+    RANK/enter/short                             +6  (lines 35–40 of the cell's new)
+    RANK/enter/long                              +6  (lines 36–41 of the cell's new)
+    TIES/rival_enemy/long                        +4  (lines 22–25 of the cell's new)
+    TIES/rival_enemy/short                       +4  (lines 22–25 of the cell's new)
+    INSTITUTION/charter/short                    +3  (lines 9–11 of the cell's new)
+    TIES/ally/short                              +3  (lines 12–14 of the cell's new)
+    INSTITUTION/solvency/long                    +3  (lines 13–15 of the cell's new)
+    POWER/tense/long                             +3  (lines 12–14 of the cell's new)
+    INSTITUTION/charter/long                     +2  (lines 10–11 of the cell's new)
+    TIES/mentor_student/short                    +2  (lines 4–5 of the cell's new)
+    RANK/climb/long                              +2  (lines 3–4 of the cell's new)
+    PERSONALITY/sway/long                        +2  (lines 6–7 of the cell's new)
+    INSTITUTION/solvency/short                   +2  (lines 14–15 of the cell's new)
+    TIES/ally/long                               +2  (lines 14–15 of the cell's new)
+    POWER/tense/short                            +2  (lines 13–14 of the cell's new)
+    RANK/climb/short                             +2  (lines 8–9 of the cell's new)
+    PERSONALITY/grudge/short                     +1  (lines 3–3 of the cell's new)
+    TIES/debtor/long                             +1  (lines 3–3 of the cell's new)
+    ALLEGIANCE/warrant/short                     +1  (lines 1–1 of the cell's new)
+    PERSONALITY/greed/short                      +1  (lines 2–2 of the cell's new)
+    PERSONALITY/grudge/long                      +1  (lines 5–5 of the cell's new)
+    TIES/debtor/short                            +1  (lines 3–3 of the cell's new)
+    SUPPLY/expansion/long                        +1  (lines 3–3 of the cell's new)
+    SUPPLY/expansion/short                       +1  (lines 2–2 of the cell's new)
+    TIES/mentor_student/long                     +1  (lines 5–5 of the cell's new)
+    PERSONALITY/fear/long                        +1  (lines 1–1 of the cell's new)
+    PERSONALITY/sway/short                       +1  (lines 4–4 of the cell's new)
+    RANK/defend/long                             +1  (lines 1–1 of the cell's new)
+
+  FILE 6: 60 lines (bills 3); after it (cumulative 360): short city 11.8% · metropolis 16.9%; long city 11.8% · metropolis 17.0%
+    RANK/enter/short                             +6  (lines 41–46 of the cell's new)
+    RANK/enter/long                              +6  (lines 42–47 of the cell's new)
+    TIES/rival_enemy/long                        +4  (lines 26–29 of the cell's new)
+    TIES/rival_enemy/short                       +4  (lines 26–29 of the cell's new)
+    INSTITUTION/solvency/short                   +3  (lines 16–18 of the cell's new)
+    INSTITUTION/charter/long                     +3  (lines 12–14 of the cell's new)
+    TIES/ally/long                               +3  (lines 16–18 of the cell's new)
+    POWER/tense/long                             +3  (lines 15–17 of the cell's new)
+    INSTITUTION/solvency/long                    +3  (lines 16–18 of the cell's new)
+    POWER/tense/short                            +2  (lines 15–16 of the cell's new)
+    TIES/ally/short                              +2  (lines 15–16 of the cell's new)
+    INSTITUTION/charter/short                    +2  (lines 12–13 of the cell's new)
+    PERSONALITY/grudge/short                     +1  (lines 4–4 of the cell's new)
+    TIES/creditor/short                          +1  (lines 1–1 of the cell's new)
+    PERSONALITY/grudge/long                      +1  (lines 6–6 of the cell's new)
+    PERSONALITY/greed/long                       +1  (lines 3–3 of the cell's new)
+    TIES/debtor/long                             +1  (lines 4–4 of the cell's new)
+    PERSONALITY/impulse/long                     +1  (lines 1–1 of the cell's new)
+    TIES/debtor/short                            +1  (lines 4–4 of the cell's new)
+    SUPPLY/expansion/long                        +1  (lines 4–4 of the cell's new)
+    ALLEGIANCE/warrant/short                     +1  (lines 2–2 of the cell's new)
+    RANK/climb/short                             +1  (lines 10–10 of the cell's new)
+    TIES/mentor_student/long                     +1  (lines 6–6 of the cell's new)
+    SUPPLY/expansion/short                       +1  (lines 3–3 of the cell's new)
+    PERSONALITY/forbidden_patron/long            +1  (lines 1–1 of the cell's new)
+    PERSONALITY/sway/long                        +1  (lines 8–8 of the cell's new)
+    PERSONALITY/greed/short                      +1  (lines 3–3 of the cell's new)
+    RANK/defend/short                            +1  (lines 1–1 of the cell's new)
+    TIES/mentor_student/short                    +1  (lines 6–6 of the cell's new)
+    RANK/climb/long                              +1  (lines 5–5 of the cell's new)
+    PERSONALITY/sway/short                       +1  (lines 5–5 of the cell's new)
+
+  FILE 7: 20 lines (bills 3); after it (cumulative 380): short city 11.4% · metropolis 16.2%; long city 11.5% · metropolis 16.7%
+    RANK/enter/short                             +3  (lines 47–49 of the cell's new)
+    POWER/tense/short                            +2  (lines 17–18 of the cell's new)
+    RANK/enter/long                              +2  (lines 48–49 of the cell's new)
+    RANK/climb/short                             +1  (lines 11–11 of the cell's new)
+    INSTITUTION/solvency/short                   +1  (lines 19–19 of the cell's new)
+    PERSONALITY/grudge/long                      +1  (lines 7–7 of the cell's new)
+    RANK/defend/long                             +1  (lines 2–2 of the cell's new)
+    TIES/ally/short                              +1  (lines 17–17 of the cell's new)
+    TIES/rival_enemy/long                        +1  (lines 30–30 of the cell's new)
+    PERSONALITY/impulse/short                    +1  (lines 1–1 of the cell's new)
+    TIES/rival_enemy/short                       +1  (lines 30–30 of the cell's new)
+    PERSONALITY/grudge/short                     +1  (lines 5–5 of the cell's new)
+    TIES/ally/long                               +1  (lines 19–19 of the cell's new)
+    TIES/debtor/long                             +1  (lines 5–5 of the cell's new)
+    INSTITUTION/charter/short                    +1  (lines 14–14 of the cell's new)
+    TIES/debtor/short                            +1  (lines 5–5 of the cell's new)
+
+wrote /tmp/claude-0/-home-user-settlement-engine/1b606ed5-1f0a-5e1b-bf32-8b8b1c4098bc/scratchpad/base300.bill.json

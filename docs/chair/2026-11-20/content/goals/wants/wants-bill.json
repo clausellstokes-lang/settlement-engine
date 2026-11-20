@@ -1,0 +1,2025 @@
+{
+ "target": 0.3,
+ "pools": {
+  "short": {
+   "observed": {
+    "city": 0.36435033037571973,
+    "metropolis": 0.4726335967104339
+   },
+   "bills": [
+    {
+     "cells": {
+      "INSTITUTION/solvency/short": 1,
+      "RANK/climb/short": 1,
+      "RANK/enter/short": 7,
+      "TIES/rival_enemy/short": 7,
+      "TIES/ally/short": 3
+     },
+     "lines": 19,
+     "city": 0.2892373190761951,
+     "metropolis": 0.4100468853686409
+    },
+    {
+     "cells": {
+      "TIES/mentor_student/short": 1,
+      "INSTITUTION/solvency/short": 8,
+      "INSTITUTION/charter/short": 4,
+      "RANK/climb/short": 3,
+      "PERSONALITY/sway/short": 1,
+      "PERSONALITY/grudge/short": 1,
+      "RANK/enter/short": 24,
+      "TIES/rival_enemy/short": 15,
+      "TIES/ally/short": 6
+     },
+     "lines": 63,
+     "city": 0.19315573147925347,
+     "metropolis": 0.28843278394448035
+    },
+    {
+     "cells": {
+      "ALLEGIANCE/warrant/short": 2,
+      "TIES/mentor_student/short": 6,
+      "INSTITUTION/solvency/short": 19,
+      "INSTITUTION/charter/short": 14,
+      "RANK/climb/short": 11,
+      "PERSONALITY/sway/short": 5,
+      "PERSONALITY/grudge/short": 5,
+      "RANK/enter/short": 49,
+      "TIES/rival_enemy/short": 30,
+      "TIES/ally/short": 17,
+      "POWER/tense/short": 18,
+      "RANK/defend/short": 1,
+      "PERSONALITY/impulse/short": 1,
+      "TIES/debtor/short": 5,
+      "PERSONALITY/greed/short": 3,
+      "TIES/creditor/short": 1,
+      "SUPPLY/expansion/short": 3
+     },
+     "lines": 190,
+     "city": 0.11395451199264822,
+     "metropolis": 0.161882593430223
+    }
+   ]
+  },
+  "long": {
+   "observed": {
+    "city": 0.35973073038897224,
+    "metropolis": 0.4724845436828339
+   },
+   "bills": [
+    {
+     "cells": {
+      "INSTITUTION/charter/long": 1,
+      "RANK/enter/long": 13,
+      "INSTITUTION/solvency/long": 1,
+      "TIES/ally/long": 4
+     },
+     "lines": 19,
+     "city": 0.289480548487433,
+     "metropolis": 0.4114980544183756
+    },
+    {
+     "cells": {
+      "PERSONALITY/sway/long": 3,
+      "TIES/rival_enemy/long": 14,
+      "INSTITUTION/charter/long": 5,
+      "RANK/enter/long": 25,
+      "INSTITUTION/solvency/long": 8,
+      "TIES/ally/long": 7,
+      "PERSONALITY/grudge/long": 2,
+      "TIES/mentor_student/long": 2
+     },
+     "lines": 66,
+     "city": 0.19358329940253916,
+     "metropolis": 0.2899609077662604
+    },
+    {
+     "cells": {
+      "RANK/defend/long": 2,
+      "PERSONALITY/sway/long": 8,
+      "TIES/rival_enemy/long": 30,
+      "INSTITUTION/charter/long": 14,
+      "SUPPLY/expansion/long": 4,
+      "RANK/enter/long": 49,
+      "PERSONALITY/fear/long": 1,
+      "INSTITUTION/solvency/long": 18,
+      "PERSONALITY/forbidden_patron/long": 1,
+      "TIES/ally/long": 19,
+      "PERSONALITY/grudge/long": 7,
+      "PERSONALITY/greed/long": 3,
+      "TIES/mentor_student/long": 6,
+      "RANK/climb/long": 5,
+      "POWER/tense/long": 17,
+      "TIES/debtor/long": 5,
+      "PERSONALITY/impulse/long": 1
+     },
+     "lines": 190,
+     "city": 0.11513525905399777,
+     "metropolis": 0.1668106374983634
+    }
+   ]
+  }
+ },
+ "order": [
+  {
+   "c": "TIES/rival_enemy/short",
+   "k": 4,
+   "stage": 1
+  },
+  {
+   "c": "TIES/ally/long",
+   "k": 1,
+   "stage": 1
+  },
+  {
+   "c": "TIES/ally/short",
+   "k": 1,
+   "stage": 1
+  },
+  {
+   "c": "TIES/ally/long",
+   "k": 2,
+   "stage": 1
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 11,
+   "stage": 1
+  },
+  {
+   "c": "TIES/rival_enemy/short",
+   "k": 5,
+   "stage": 1
+  },
+  {
+   "c": "TIES/rival_enemy/short",
+   "k": 3,
+   "stage": 1
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 12,
+   "stage": 1
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 10,
+   "stage": 1
+  },
+  {
+   "c": "TIES/ally/short",
+   "k": 2,
+   "stage": 1
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 13,
+   "stage": 1
+  },
+  {
+   "c": "TIES/rival_enemy/short",
+   "k": 6,
+   "stage": 1
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 9,
+   "stage": 1
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 7,
+   "stage": 1
+  },
+  {
+   "c": "TIES/rival_enemy/short",
+   "k": 1,
+   "stage": 1
+  },
+  {
+   "c": "TIES/ally/long",
+   "k": 3,
+   "stage": 1
+  },
+  {
+   "c": "TIES/rival_enemy/short",
+   "k": 7,
+   "stage": 1
+  },
+  {
+   "c": "TIES/rival_enemy/short",
+   "k": 2,
+   "stage": 1
+  },
+  {
+   "c": "TIES/ally/short",
+   "k": 3,
+   "stage": 1
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 2,
+   "stage": 1
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 8,
+   "stage": 1
+  },
+  {
+   "c": "INSTITUTION/solvency/short",
+   "k": 1,
+   "stage": 1
+  },
+  {
+   "c": "TIES/ally/long",
+   "k": 4,
+   "stage": 1
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 6,
+   "stage": 1
+  },
+  {
+   "c": "INSTITUTION/charter/long",
+   "k": 1,
+   "stage": 1
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 7,
+   "stage": 1
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 6,
+   "stage": 1
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 5,
+   "stage": 1
+  },
+  {
+   "c": "RANK/climb/short",
+   "k": 1,
+   "stage": 1
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 5,
+   "stage": 1
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 3,
+   "stage": 1
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 3,
+   "stage": 1
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 4,
+   "stage": 1
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 4,
+   "stage": 1
+  },
+  {
+   "c": "INSTITUTION/solvency/long",
+   "k": 1,
+   "stage": 1
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 1,
+   "stage": 1
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 2,
+   "stage": 1
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 1,
+   "stage": 1
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 10,
+   "stage": 2
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 8,
+   "stage": 2
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 11,
+   "stage": 2
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 9,
+   "stage": 2
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 12,
+   "stage": 2
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 13,
+   "stage": 2
+  },
+  {
+   "c": "TIES/rival_enemy/long",
+   "k": 4,
+   "stage": 2
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 14,
+   "stage": 2
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 14,
+   "stage": 2
+  },
+  {
+   "c": "PERSONALITY/sway/long",
+   "k": 1,
+   "stage": 2
+  },
+  {
+   "c": "TIES/rival_enemy/long",
+   "k": 5,
+   "stage": 2
+  },
+  {
+   "c": "TIES/rival_enemy/short",
+   "k": 8,
+   "stage": 2
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 15,
+   "stage": 2
+  },
+  {
+   "c": "INSTITUTION/charter/short",
+   "k": 1,
+   "stage": 2
+  },
+  {
+   "c": "TIES/rival_enemy/long",
+   "k": 7,
+   "stage": 2
+  },
+  {
+   "c": "TIES/rival_enemy/long",
+   "k": 6,
+   "stage": 2
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 15,
+   "stage": 2
+  },
+  {
+   "c": "INSTITUTION/solvency/short",
+   "k": 2,
+   "stage": 2
+  },
+  {
+   "c": "TIES/rival_enemy/short",
+   "k": 9,
+   "stage": 2
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 16,
+   "stage": 2
+  },
+  {
+   "c": "INSTITUTION/charter/long",
+   "k": 2,
+   "stage": 2
+  },
+  {
+   "c": "INSTITUTION/solvency/long",
+   "k": 3,
+   "stage": 2
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 16,
+   "stage": 2
+  },
+  {
+   "c": "INSTITUTION/charter/short",
+   "k": 2,
+   "stage": 2
+  },
+  {
+   "c": "INSTITUTION/solvency/short",
+   "k": 3,
+   "stage": 2
+  },
+  {
+   "c": "INSTITUTION/solvency/long",
+   "k": 2,
+   "stage": 2
+  },
+  {
+   "c": "TIES/ally/short",
+   "k": 4,
+   "stage": 2
+  },
+  {
+   "c": "TIES/ally/long",
+   "k": 5,
+   "stage": 2
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 17,
+   "stage": 2
+  },
+  {
+   "c": "TIES/rival_enemy/long",
+   "k": 8,
+   "stage": 2
+  },
+  {
+   "c": "TIES/rival_enemy/long",
+   "k": 9,
+   "stage": 2
+  },
+  {
+   "c": "TIES/rival_enemy/short",
+   "k": 10,
+   "stage": 2
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 17,
+   "stage": 2
+  },
+  {
+   "c": "INSTITUTION/solvency/long",
+   "k": 4,
+   "stage": 2
+  },
+  {
+   "c": "TIES/rival_enemy/long",
+   "k": 2,
+   "stage": 2
+  },
+  {
+   "c": "PERSONALITY/grudge/long",
+   "k": 1,
+   "stage": 2
+  },
+  {
+   "c": "TIES/rival_enemy/long",
+   "k": 3,
+   "stage": 2
+  },
+  {
+   "c": "INSTITUTION/solvency/short",
+   "k": 4,
+   "stage": 2
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 18,
+   "stage": 2
+  },
+  {
+   "c": "TIES/rival_enemy/long",
+   "k": 10,
+   "stage": 2
+  },
+  {
+   "c": "TIES/rival_enemy/long",
+   "k": 1,
+   "stage": 2
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 18,
+   "stage": 2
+  },
+  {
+   "c": "INSTITUTION/solvency/short",
+   "k": 5,
+   "stage": 2
+  },
+  {
+   "c": "TIES/ally/short",
+   "k": 5,
+   "stage": 2
+  },
+  {
+   "c": "INSTITUTION/solvency/long",
+   "k": 5,
+   "stage": 2
+  },
+  {
+   "c": "INSTITUTION/charter/short",
+   "k": 3,
+   "stage": 2
+  },
+  {
+   "c": "PERSONALITY/sway/long",
+   "k": 2,
+   "stage": 2
+  },
+  {
+   "c": "TIES/ally/long",
+   "k": 6,
+   "stage": 2
+  },
+  {
+   "c": "TIES/rival_enemy/short",
+   "k": 11,
+   "stage": 2
+  },
+  {
+   "c": "RANK/climb/short",
+   "k": 2,
+   "stage": 2
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 19,
+   "stage": 2
+  },
+  {
+   "c": "TIES/rival_enemy/long",
+   "k": 11,
+   "stage": 2
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 19,
+   "stage": 2
+  },
+  {
+   "c": "INSTITUTION/charter/long",
+   "k": 3,
+   "stage": 2
+  },
+  {
+   "c": "INSTITUTION/charter/long",
+   "k": 4,
+   "stage": 2
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 20,
+   "stage": 2
+  },
+  {
+   "c": "INSTITUTION/solvency/short",
+   "k": 6,
+   "stage": 2
+  },
+  {
+   "c": "TIES/rival_enemy/short",
+   "k": 12,
+   "stage": 2
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 20,
+   "stage": 2
+  },
+  {
+   "c": "TIES/ally/short",
+   "k": 6,
+   "stage": 2
+  },
+  {
+   "c": "TIES/rival_enemy/long",
+   "k": 12,
+   "stage": 2
+  },
+  {
+   "c": "INSTITUTION/solvency/long",
+   "k": 6,
+   "stage": 2
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 21,
+   "stage": 2
+  },
+  {
+   "c": "TIES/ally/long",
+   "k": 7,
+   "stage": 2
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 21,
+   "stage": 2
+  },
+  {
+   "c": "INSTITUTION/charter/short",
+   "k": 4,
+   "stage": 2
+  },
+  {
+   "c": "TIES/mentor_student/long",
+   "k": 1,
+   "stage": 2
+  },
+  {
+   "c": "RANK/climb/short",
+   "k": 3,
+   "stage": 2
+  },
+  {
+   "c": "TIES/rival_enemy/long",
+   "k": 13,
+   "stage": 2
+  },
+  {
+   "c": "TIES/rival_enemy/short",
+   "k": 13,
+   "stage": 2
+  },
+  {
+   "c": "PERSONALITY/sway/short",
+   "k": 1,
+   "stage": 2
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 22,
+   "stage": 2
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 22,
+   "stage": 2
+  },
+  {
+   "c": "PERSONALITY/grudge/long",
+   "k": 2,
+   "stage": 2
+  },
+  {
+   "c": "INSTITUTION/solvency/short",
+   "k": 7,
+   "stage": 2
+  },
+  {
+   "c": "INSTITUTION/charter/long",
+   "k": 5,
+   "stage": 2
+  },
+  {
+   "c": "TIES/mentor_student/short",
+   "k": 1,
+   "stage": 2
+  },
+  {
+   "c": "PERSONALITY/grudge/short",
+   "k": 1,
+   "stage": 2
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 23,
+   "stage": 2
+  },
+  {
+   "c": "PERSONALITY/sway/long",
+   "k": 3,
+   "stage": 2
+  },
+  {
+   "c": "INSTITUTION/solvency/long",
+   "k": 7,
+   "stage": 2
+  },
+  {
+   "c": "TIES/rival_enemy/long",
+   "k": 14,
+   "stage": 2
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 23,
+   "stage": 2
+  },
+  {
+   "c": "TIES/rival_enemy/short",
+   "k": 14,
+   "stage": 2
+  },
+  {
+   "c": "INSTITUTION/solvency/short",
+   "k": 8,
+   "stage": 2
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 24,
+   "stage": 2
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 24,
+   "stage": 2
+  },
+  {
+   "c": "INSTITUTION/solvency/long",
+   "k": 8,
+   "stage": 2
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 25,
+   "stage": 2
+  },
+  {
+   "c": "TIES/rival_enemy/short",
+   "k": 15,
+   "stage": 2
+  },
+  {
+   "c": "TIES/mentor_student/long",
+   "k": 2,
+   "stage": 2
+  },
+  {
+   "c": "TIES/ally/short",
+   "k": 7,
+   "stage": 3
+  },
+  {
+   "c": "TIES/ally/long",
+   "k": 8,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/charter/short",
+   "k": 5,
+   "stage": 3
+  },
+  {
+   "c": "TIES/rival_enemy/long",
+   "k": 15,
+   "stage": 3
+  },
+  {
+   "c": "RANK/climb/short",
+   "k": 4,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/charter/long",
+   "k": 6,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 25,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/short",
+   "k": 6,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/long",
+   "k": 5,
+   "stage": 3
+  },
+  {
+   "c": "TIES/ally/long",
+   "k": 9,
+   "stage": 3
+  },
+  {
+   "c": "TIES/ally/short",
+   "k": 8,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 26,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/solvency/short",
+   "k": 9,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 26,
+   "stage": 3
+  },
+  {
+   "c": "TIES/rival_enemy/long",
+   "k": 16,
+   "stage": 3
+  },
+  {
+   "c": "TIES/debtor/long",
+   "k": 1,
+   "stage": 3
+  },
+  {
+   "c": "TIES/rival_enemy/short",
+   "k": 16,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/long",
+   "k": 6,
+   "stage": 3
+  },
+  {
+   "c": "RANK/climb/long",
+   "k": 1,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/solvency/long",
+   "k": 9,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 27,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/charter/short",
+   "k": 6,
+   "stage": 3
+  },
+  {
+   "c": "TIES/debtor/short",
+   "k": 1,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/long",
+   "k": 7,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 27,
+   "stage": 3
+  },
+  {
+   "c": "TIES/mentor_student/short",
+   "k": 2,
+   "stage": 3
+  },
+  {
+   "c": "PERSONALITY/sway/long",
+   "k": 4,
+   "stage": 3
+  },
+  {
+   "c": "PERSONALITY/grudge/long",
+   "k": 3,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/short",
+   "k": 5,
+   "stage": 3
+  },
+  {
+   "c": "TIES/ally/long",
+   "k": 10,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 28,
+   "stage": 3
+  },
+  {
+   "c": "PERSONALITY/greed/long",
+   "k": 1,
+   "stage": 3
+  },
+  {
+   "c": "TIES/rival_enemy/long",
+   "k": 17,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/charter/long",
+   "k": 7,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/short",
+   "k": 7,
+   "stage": 3
+  },
+  {
+   "c": "PERSONALITY/sway/short",
+   "k": 2,
+   "stage": 3
+  },
+  {
+   "c": "TIES/rival_enemy/short",
+   "k": 17,
+   "stage": 3
+  },
+  {
+   "c": "RANK/climb/short",
+   "k": 5,
+   "stage": 3
+  },
+  {
+   "c": "TIES/ally/short",
+   "k": 9,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/short",
+   "k": 3,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/solvency/short",
+   "k": 10,
+   "stage": 3
+  },
+  {
+   "c": "SUPPLY/expansion/long",
+   "k": 1,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 28,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/short",
+   "k": 4,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 29,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/solvency/long",
+   "k": 10,
+   "stage": 3
+  },
+  {
+   "c": "PERSONALITY/grudge/short",
+   "k": 2,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 29,
+   "stage": 3
+  },
+  {
+   "c": "TIES/rival_enemy/long",
+   "k": 18,
+   "stage": 3
+  },
+  {
+   "c": "TIES/rival_enemy/short",
+   "k": 18,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/short",
+   "k": 9,
+   "stage": 3
+  },
+  {
+   "c": "PERSONALITY/greed/short",
+   "k": 1,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/charter/short",
+   "k": 7,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 30,
+   "stage": 3
+  },
+  {
+   "c": "TIES/mentor_student/long",
+   "k": 3,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/short",
+   "k": 8,
+   "stage": 3
+  },
+  {
+   "c": "TIES/ally/long",
+   "k": 11,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 30,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/solvency/short",
+   "k": 11,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/short",
+   "k": 2,
+   "stage": 3
+  },
+  {
+   "c": "TIES/ally/short",
+   "k": 10,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/charter/long",
+   "k": 8,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/short",
+   "k": 10,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 31,
+   "stage": 3
+  },
+  {
+   "c": "TIES/rival_enemy/long",
+   "k": 19,
+   "stage": 3
+  },
+  {
+   "c": "TIES/rival_enemy/short",
+   "k": 19,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/long",
+   "k": 8,
+   "stage": 3
+  },
+  {
+   "c": "TIES/mentor_student/short",
+   "k": 3,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/solvency/long",
+   "k": 11,
+   "stage": 3
+  },
+  {
+   "c": "RANK/climb/short",
+   "k": 6,
+   "stage": 3
+  },
+  {
+   "c": "RANK/climb/long",
+   "k": 2,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 31,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/short",
+   "k": 1,
+   "stage": 3
+  },
+  {
+   "c": "PERSONALITY/sway/long",
+   "k": 5,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 32,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/long",
+   "k": 4,
+   "stage": 3
+  },
+  {
+   "c": "TIES/debtor/long",
+   "k": 2,
+   "stage": 3
+  },
+  {
+   "c": "TIES/debtor/short",
+   "k": 2,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 32,
+   "stage": 3
+  },
+  {
+   "c": "TIES/ally/long",
+   "k": 12,
+   "stage": 3
+  },
+  {
+   "c": "TIES/rival_enemy/long",
+   "k": 20,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/solvency/short",
+   "k": 12,
+   "stage": 3
+  },
+  {
+   "c": "PERSONALITY/grudge/long",
+   "k": 4,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/charter/short",
+   "k": 8,
+   "stage": 3
+  },
+  {
+   "c": "TIES/rival_enemy/short",
+   "k": 20,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 33,
+   "stage": 3
+  },
+  {
+   "c": "SUPPLY/expansion/short",
+   "k": 1,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/short",
+   "k": 11,
+   "stage": 3
+  },
+  {
+   "c": "TIES/ally/short",
+   "k": 11,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/long",
+   "k": 9,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/charter/long",
+   "k": 9,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 33,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/long",
+   "k": 1,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/solvency/long",
+   "k": 12,
+   "stage": 3
+  },
+  {
+   "c": "SUPPLY/expansion/long",
+   "k": 2,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 34,
+   "stage": 3
+  },
+  {
+   "c": "TIES/rival_enemy/long",
+   "k": 21,
+   "stage": 3
+  },
+  {
+   "c": "PERSONALITY/sway/short",
+   "k": 3,
+   "stage": 3
+  },
+  {
+   "c": "TIES/rival_enemy/short",
+   "k": 21,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 34,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/long",
+   "k": 11,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/long",
+   "k": 2,
+   "stage": 3
+  },
+  {
+   "c": "RANK/climb/short",
+   "k": 7,
+   "stage": 3
+  },
+  {
+   "c": "TIES/ally/long",
+   "k": 13,
+   "stage": 3
+  },
+  {
+   "c": "TIES/mentor_student/long",
+   "k": 4,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/solvency/short",
+   "k": 13,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 35,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/long",
+   "k": 12,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/long",
+   "k": 3,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/short",
+   "k": 12,
+   "stage": 3
+  },
+  {
+   "c": "PERSONALITY/greed/long",
+   "k": 2,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 35,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/charter/short",
+   "k": 9,
+   "stage": 3
+  },
+  {
+   "c": "TIES/ally/short",
+   "k": 12,
+   "stage": 3
+  },
+  {
+   "c": "PERSONALITY/grudge/short",
+   "k": 3,
+   "stage": 3
+  },
+  {
+   "c": "TIES/rival_enemy/long",
+   "k": 22,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/solvency/long",
+   "k": 13,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/long",
+   "k": 10,
+   "stage": 3
+  },
+  {
+   "c": "TIES/rival_enemy/short",
+   "k": 22,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 36,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/charter/long",
+   "k": 10,
+   "stage": 3
+  },
+  {
+   "c": "TIES/mentor_student/short",
+   "k": 4,
+   "stage": 3
+  },
+  {
+   "c": "RANK/climb/long",
+   "k": 3,
+   "stage": 3
+  },
+  {
+   "c": "PERSONALITY/sway/long",
+   "k": 6,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 36,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 37,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/solvency/short",
+   "k": 14,
+   "stage": 3
+  },
+  {
+   "c": "TIES/ally/long",
+   "k": 14,
+   "stage": 3
+  },
+  {
+   "c": "TIES/debtor/long",
+   "k": 3,
+   "stage": 3
+  },
+  {
+   "c": "TIES/rival_enemy/long",
+   "k": 23,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/long",
+   "k": 13,
+   "stage": 3
+  },
+  {
+   "c": "TIES/rival_enemy/short",
+   "k": 23,
+   "stage": 3
+  },
+  {
+   "c": "ALLEGIANCE/warrant/short",
+   "k": 1,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 37,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/short",
+   "k": 13,
+   "stage": 3
+  },
+  {
+   "c": "PERSONALITY/greed/short",
+   "k": 2,
+   "stage": 3
+  },
+  {
+   "c": "PERSONALITY/grudge/long",
+   "k": 5,
+   "stage": 3
+  },
+  {
+   "c": "RANK/climb/short",
+   "k": 8,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 38,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/solvency/long",
+   "k": 14,
+   "stage": 3
+  },
+  {
+   "c": "TIES/ally/short",
+   "k": 13,
+   "stage": 3
+  },
+  {
+   "c": "TIES/debtor/short",
+   "k": 3,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/charter/short",
+   "k": 10,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 38,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/charter/long",
+   "k": 11,
+   "stage": 3
+  },
+  {
+   "c": "TIES/rival_enemy/long",
+   "k": 24,
+   "stage": 3
+  },
+  {
+   "c": "SUPPLY/expansion/long",
+   "k": 3,
+   "stage": 3
+  },
+  {
+   "c": "SUPPLY/expansion/short",
+   "k": 2,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 39,
+   "stage": 3
+  },
+  {
+   "c": "TIES/rival_enemy/short",
+   "k": 24,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/solvency/short",
+   "k": 15,
+   "stage": 3
+  },
+  {
+   "c": "TIES/ally/long",
+   "k": 15,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 39,
+   "stage": 3
+  },
+  {
+   "c": "TIES/mentor_student/long",
+   "k": 5,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/long",
+   "k": 14,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 40,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/short",
+   "k": 14,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/solvency/long",
+   "k": 15,
+   "stage": 3
+  },
+  {
+   "c": "PERSONALITY/fear/long",
+   "k": 1,
+   "stage": 3
+  },
+  {
+   "c": "PERSONALITY/sway/short",
+   "k": 4,
+   "stage": 3
+  },
+  {
+   "c": "TIES/rival_enemy/long",
+   "k": 25,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 40,
+   "stage": 3
+  },
+  {
+   "c": "TIES/rival_enemy/short",
+   "k": 25,
+   "stage": 3
+  },
+  {
+   "c": "TIES/ally/short",
+   "k": 14,
+   "stage": 3
+  },
+  {
+   "c": "PERSONALITY/sway/long",
+   "k": 7,
+   "stage": 3
+  },
+  {
+   "c": "RANK/defend/long",
+   "k": 1,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 41,
+   "stage": 3
+  },
+  {
+   "c": "RANK/climb/short",
+   "k": 9,
+   "stage": 3
+  },
+  {
+   "c": "TIES/mentor_student/short",
+   "k": 5,
+   "stage": 3
+  },
+  {
+   "c": "RANK/climb/long",
+   "k": 4,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/charter/short",
+   "k": 11,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/solvency/short",
+   "k": 16,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/charter/long",
+   "k": 12,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 41,
+   "stage": 3
+  },
+  {
+   "c": "TIES/ally/long",
+   "k": 16,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 42,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/long",
+   "k": 15,
+   "stage": 3
+  },
+  {
+   "c": "TIES/rival_enemy/long",
+   "k": 26,
+   "stage": 3
+  },
+  {
+   "c": "PERSONALITY/grudge/short",
+   "k": 4,
+   "stage": 3
+  },
+  {
+   "c": "TIES/rival_enemy/short",
+   "k": 26,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/short",
+   "k": 15,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/solvency/long",
+   "k": 16,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 42,
+   "stage": 3
+  },
+  {
+   "c": "TIES/creditor/short",
+   "k": 1,
+   "stage": 3
+  },
+  {
+   "c": "PERSONALITY/grudge/long",
+   "k": 6,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 43,
+   "stage": 3
+  },
+  {
+   "c": "PERSONALITY/greed/long",
+   "k": 3,
+   "stage": 3
+  },
+  {
+   "c": "TIES/debtor/long",
+   "k": 4,
+   "stage": 3
+  },
+  {
+   "c": "TIES/ally/short",
+   "k": 15,
+   "stage": 3
+  },
+  {
+   "c": "TIES/rival_enemy/long",
+   "k": 27,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/solvency/short",
+   "k": 17,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 43,
+   "stage": 3
+  },
+  {
+   "c": "PERSONALITY/impulse/long",
+   "k": 1,
+   "stage": 3
+  },
+  {
+   "c": "TIES/rival_enemy/short",
+   "k": 27,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 44,
+   "stage": 3
+  },
+  {
+   "c": "TIES/ally/long",
+   "k": 17,
+   "stage": 3
+  },
+  {
+   "c": "TIES/debtor/short",
+   "k": 4,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/charter/long",
+   "k": 13,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/charter/short",
+   "k": 12,
+   "stage": 3
+  },
+  {
+   "c": "SUPPLY/expansion/long",
+   "k": 4,
+   "stage": 3
+  },
+  {
+   "c": "ALLEGIANCE/warrant/short",
+   "k": 2,
+   "stage": 3
+  },
+  {
+   "c": "RANK/climb/short",
+   "k": 10,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/long",
+   "k": 16,
+   "stage": 3
+  },
+  {
+   "c": "TIES/mentor_student/long",
+   "k": 6,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 44,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/solvency/long",
+   "k": 17,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/short",
+   "k": 16,
+   "stage": 3
+  },
+  {
+   "c": "SUPPLY/expansion/short",
+   "k": 3,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 45,
+   "stage": 3
+  },
+  {
+   "c": "PERSONALITY/forbidden_patron/long",
+   "k": 1,
+   "stage": 3
+  },
+  {
+   "c": "TIES/rival_enemy/long",
+   "k": 28,
+   "stage": 3
+  },
+  {
+   "c": "PERSONALITY/sway/long",
+   "k": 8,
+   "stage": 3
+  },
+  {
+   "c": "TIES/rival_enemy/short",
+   "k": 28,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 45,
+   "stage": 3
+  },
+  {
+   "c": "TIES/ally/short",
+   "k": 16,
+   "stage": 3
+  },
+  {
+   "c": "PERSONALITY/greed/short",
+   "k": 3,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/solvency/short",
+   "k": 18,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 46,
+   "stage": 3
+  },
+  {
+   "c": "RANK/defend/short",
+   "k": 1,
+   "stage": 3
+  },
+  {
+   "c": "TIES/mentor_student/short",
+   "k": 6,
+   "stage": 3
+  },
+  {
+   "c": "RANK/climb/long",
+   "k": 5,
+   "stage": 3
+  },
+  {
+   "c": "TIES/ally/long",
+   "k": 18,
+   "stage": 3
+  },
+  {
+   "c": "PERSONALITY/sway/short",
+   "k": 5,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/long",
+   "k": 17,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 46,
+   "stage": 3
+  },
+  {
+   "c": "TIES/rival_enemy/long",
+   "k": 29,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/charter/long",
+   "k": 14,
+   "stage": 3
+  },
+  {
+   "c": "TIES/rival_enemy/short",
+   "k": 29,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 47,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/charter/short",
+   "k": 13,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/solvency/long",
+   "k": 18,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/short",
+   "k": 17,
+   "stage": 3
+  },
+  {
+   "c": "RANK/climb/short",
+   "k": 11,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 47,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 48,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/solvency/short",
+   "k": 19,
+   "stage": 3
+  },
+  {
+   "c": "PERSONALITY/grudge/long",
+   "k": 7,
+   "stage": 3
+  },
+  {
+   "c": "RANK/defend/long",
+   "k": 2,
+   "stage": 3
+  },
+  {
+   "c": "TIES/ally/short",
+   "k": 17,
+   "stage": 3
+  },
+  {
+   "c": "TIES/rival_enemy/long",
+   "k": 30,
+   "stage": 3
+  },
+  {
+   "c": "PERSONALITY/impulse/short",
+   "k": 1,
+   "stage": 3
+  },
+  {
+   "c": "TIES/rival_enemy/short",
+   "k": 30,
+   "stage": 3
+  },
+  {
+   "c": "PERSONALITY/grudge/short",
+   "k": 5,
+   "stage": 3
+  },
+  {
+   "c": "TIES/ally/long",
+   "k": 19,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 48,
+   "stage": 3
+  },
+  {
+   "c": "TIES/debtor/long",
+   "k": 5,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/long",
+   "k": 49,
+   "stage": 3
+  },
+  {
+   "c": "POWER/tense/short",
+   "k": 18,
+   "stage": 3
+  },
+  {
+   "c": "RANK/enter/short",
+   "k": 49,
+   "stage": 3
+  },
+  {
+   "c": "INSTITUTION/charter/short",
+   "k": 14,
+   "stage": 3
+  },
+  {
+   "c": "TIES/debtor/short",
+   "k": 5,
+   "stage": 3
+  }
+ ]
+}
