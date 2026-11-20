@@ -1,6 +1,6 @@
 # PLACE-1 — hand-back (kept current at every push)
 
-Last written: 2026-11-20T17:33Z Seat: PLACE-1 of the seventh chair (session_019yED1SUxGVHyjQnoqoFvQ8). Prompt: `docs/chair/2026-11-20/seventh/prompts/PLACE-1.txt` on `origin/lane/chair-2026-11-08` (read it whole: it is the assignment). Branch: `lane/place-1-2026-11-20`, cut at 43ab0f5eb (the working line `lane/join-2026-11-14`).
+Last written: 2026-11-20T17:40Z Seat: PLACE-1 of the seventh chair (session_019yED1SUxGVHyjQnoqoFvQ8). Prompt: `docs/chair/2026-11-20/seventh/prompts/PLACE-1.txt` on `origin/lane/chair-2026-11-08` (read it whole: it is the assignment). Branch: `lane/place-1-2026-11-20`, cut at 43ab0f5eb (the working line `lane/join-2026-11-14`).
 
 ## How a successor resumes
 1. Read the prompt, then this file, then the briefs in this directory (`BRIEF-*.md`); nothing else is needed.
@@ -29,7 +29,7 @@ eS.activeChains[].entrepotNote               thorp - | hamle 8/12 | villa 13/22 
 | economicViability.dependencies[] + warnings[] + summary | c33953282 | 50384de85 (merged 6571cf474): NOTHING REPEATED PRINTS (Outlook tab and PDF drop severity `dependency`; the one warning hidden by its title; the pages print their own verdict, not `summary`) | DROPPED, reported | — | — | — |
 | tradeDependencies[].impact | c33953282 | — | — | — | DROPPED by the chair 16:30 (printed in 0–4 places a size) |
 | activeChains[].entrepotNote | c33953282 | 5ef59564a (merged 0899d93e6): PRINTS on Economics › Economic Flows cards (entrepot && !dependency) and the PDF; held top 3/8/13/31/81/76 → 1/3/4/7/12/13 WITH the carrier atom (metro 24 without) | APPROVED 17:18 (atom granted; 8 rewordings; 3 conditions) | building: place-1/entrepotNote-build from 0b41e9fd4 | the chair's SECOND unit |
-| economicViability.plotHooks[].hook | f18e3c59c | 903ab1d5d (merged bc5ed1792): PRINTS on Summary › Plot Hooks (DM, player), PDF via `collectPlotHooks`; all-places top 11/10/12/19/15/16 → 5/3/3/8/11/12 (two pools: merchant food line, iron hooks) | sent as bc5ed1792; WAITING (twists? iron pool in scope? today's text drawable?) | — | added by the chair 16:38, after entrepotNote |
+| economicViability.plotHooks[].hook | f18e3c59c | 903ab1d5d (merged bc5ed1792): PRINTS on Summary › Plot Hooks (DM, player), PDF via `collectPlotHooks`; all-places top 11/10/12/19/15/16 → 5/3/3/8/11/12 (two pools: merchant food line, iron hooks) | APPROVED 17:38 as written (25 rows; iron pool in; today's text drawable; the grade: cure if printed, else survivor) | brief `BRIEF-BUILD-viabilityHooks.md`; builder cut when a seat frees (re-measure on 150 a size) | added by the chair 16:38, after entrepotNote |
 | safetyProfile.plotHooks[] | f18e3c59c | — | — | — | added by the chair 16:38, after entrepotNote |
 
 ## Laws I hold (from the prompt; short)
@@ -48,6 +48,9 @@ Builders build, I integrate: one builder a field, red first; I read its diff onc
 - 16:51 UTC: NO ROW MAY NEED A HIDEABLE FACT (`factLayers.js`) on a field a player or public page prints; say in the hand-back how it is held and which reads serve the field.
 - 17:13 UTC: the 16:51 condition CORRECTED: the test is `cardVeil.js :: isHideableHouse` (criminal or clandestine) or any crime/clandestine fact (red); every other house a row needs is LISTED here, pool by pool, for the security reader at the join (see 'Houses the pools need').
 - 17:18 UTC: entrepotNote APPROVED (verbatim in `BRIEF-BUILD-entrepotNote.md`). EVERY LANE MERGES `lane/kernel-mix-2026-11-20` at bd42d63c7 (`pickVariantMixed`): merged here as 550d7d8b3; every new pool uses `pickVariantMixed`. The chair's count of this seat: 258,692 at 16:53; PLACE-2's prompt is ready (the successor).
+- 17:38 UTC: economy hooks APPROVED (verbatim in `BRIEF-BUILD-viabilityHooks.md`). The chair's count: 291,799 at 17:32; PLACE-2 is seated past 360,000.
+- STILL TO MEASURE: `safetyProfile.plotHooks[]` (brief `BRIEF-MEASURE-safetyHooks.md`, not yet dispatched).
+- AT EACH MERGE (mine): read the diff once; re-run red and green; `node docs/chair/2026-11-20/content/tools/confinement/trees.mjs a331a4a19 <tip> <workdir>` (base births cached in the scratchpad `conf/`; 0 non-string differences, list the moved string fields); the lighting census (`LIGHTING_CENSUS_REFREEZE=... npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js`), the wiring census (`node scripts/wiring-census.mjs` then `--check`), the page census (`node scripts/census/page-census.mjs`); the chair's census after (`census.mjs` 100, or 150 where ruled); then "PLACE <field> <commit>".
 
 ## Houses the pools need (for the security reader at the join)
 (filled per unit at its merge)
