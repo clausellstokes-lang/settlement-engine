@@ -409,10 +409,10 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
 |---|---|---|
 | R1 registry, R2 withhold-always, V10-2 | merged (4ddf8c60c, d136940c3, b5cb22caf) | read cold: they hold |
 | VR47 the honorific | merged df6809f9c, bundles e4cce485f (VEIL-23) | done; the owner's count in section 5 |
-| R3 roster choices | MERGED into the lane by VEIL-26 (`--no-ff` of `lane/veil-25-r3c5-2026-11-20` at 4661a1353: R3 411565ff9, cures 06e9e64b3, b907c75c9, 9b18835d1, R3-CURE-4 a9e2de44a/5ef2a92b1/c5786c5ce, R3-CURE-5 dbff7eeb3 (the cure, read once by VEIL-26) and c4e2b1ab2/101fae14d/4661a1353 (measures, docs: no code)); 212 `70c6eb45…220a124`, rollback `8cbd7d1c…ded5b0` | GREEN TOWARD WITHHOLDING, NOT SENT TO THE READER: R3-TELL (ruling 49), R3-CURE-6 (ruling 48) and the server's key-level table (ruling 51) are owed first (VEIL-27). Re-runs at the merged tree: section 6. R3-CURE-5's own report: `out/v25/r3c5/R3C5-HANDBACK.md`; its gate, one command: `sh docs/chair/2026-11-20/veil/out/v25/r3c5/measure/gate.sh <tree> <outdir> <template: createdb -T x211 then 212 applied> 2` (EXIT 1 on any HIGHER). |
+| R3 roster choices | MERGED (VEIL-26: aa4e3079e through 4661a1353) + R3-CURE-6 (99416745f) + R3-CURE-7 (2c6cb8efa, test-only) by VEIL-27; 212 `6260803d…0218` | GREEN TOWARD WITHHOLDING at the tip (gate 0/79/13; section 6). NOT SENT TO THE READER: R3-CURE-8 (ruling 55) and R3-TELL-2 (ruling 54) RUNNING (section 8); then "R3 <commit>" with the thirteen towns and ruling 53. |
 | CURATE notice (rulings 38 (c), 39, 40) | MERGED 7ddf4876f (`--no-ff` of `lane/veil-25-curate-2026-11-20` at 58f2fdf16: 1bd894613 + 58f2fdf16) | DONE: red 3/16 at 1bd894613's source, green 25/25 (`/var/tmp/v18/out/v25/curate/`); display only, 212 unchanged. Recorded, not cured: the notice reads `category` only (R3 also takes a /thie/ name: it can stay silent there) and does not exempt the governing power (VR42: it can over-warn there). RE-CHECK its condition if R3-CURE-4 narrows power.entry's reach. |
 | R6 tests | `lane/veil-22-r6-2026-11-20` 7d9ebd078 | COMPLETE, NOT MERGED; merge after R3 and re-run its MAIN arm (red 50 at R6's base: `cast.stakes` by R3's power, `cast.roles` wording by R3 or R5) |
-| R4 the people | `lane/veil-22-r4-2026-11-20` a4b89bf9d (R4 dfa031f3e + first cure) | NOT GREEN. NEXT after R3-TELL and R3-CURE-6 (rulings 48, 49), then R6's merge: the R4-CURE-2 builder (STOP 1, STOP 3, the switch's one salt, the catalogue as the red; VR48 its own commit). Draft brief at the seat; committed when launched. |
+| R4 the people | `lane/veil-22-r4-2026-11-20` a4b89bf9d (R4 dfa031f3e + first cure) | NOT GREEN. AFTER "R3 <commit>", IMPORT-DOOR and R6: R4-CURE-2 (`briefs/R4-CURE-2-BRIEF.md`; STOP 1, STOP 3, the one salt, the catalogue red; VR48 its own commit; RULING 53's FOLD: one id-as-text helper per engine, the six 212 sites repointed, the walker retired; R3-CURE-5's join hazard: the re-key runs AFTER the copy pass). |
 | R5 composed prose, R7 | not started | R5 after R4 (rulings 14, 28, 32); R7 after R6 |
 | L the four walkers | not started | ruling 34 |
 | DOORS 3e1115c81 | `lane/veil-doors-3-2026-11-20` (hand-back `docs/chair/2026-11-20/veil/doors/VEIL-DOORS-3-HANDBACK.md` there: read whole before the merge) | merge `--no-ff` after R3 and R4, every hunk read, the two inside `import_gallery_dossier` hardest; ONE builder: rulings 19, 20, the reader's repros, the acceptance run at the merged tree |
@@ -447,6 +447,20 @@ run exit 0, 40 PASS (`out/v24/gender/accept.txt`).
 - VEIL-26 SEATED, in a fresh container (11:50-12:15, at eca0d655d): every section-4 instrument re-made and equal to PART 26:
   sha256 four; `--check` 0; walker 11/11; harnesses 8/8; acceptance exit 0, 40 PASS; the gate 42|38|66|55 UNREGISTERED
   (`out/v26/seated/`).
+
+- VEIL-27'S INSTRUMENTS, ONE COMMAND EACH (a FRESH container: first section 4's cluster, pg driver, library, probes and `npm ci`):
+  the private chains and the acceptance run: `cp docs/chair/2026-11-20/veil/out/v27/seated/run-all-v27.sh
+  /var/tmp/v18/lib/docs/chair/2026-11-13/probes/REVIEW-VEIL-7/ && cd /var/tmp/v18 && PGHOST=/var/tmp/rv7 RV6_PGMOD=/var/tmp/v18/pgmod
+  sh lib/docs/chair/2026-11-13/probes/REVIEW-VEIL-7/run-all-v27.sh <tree> <outdir>` (builds v27x211 and v27x212; EXIT 0, 40 PASS);
+  THE GATE: `export PGHOST=/var/tmp/rv7 PGUSER=postgres; createdb -T v27x211 <tpl> && psql -q -v ON_ERROR_STOP=1 -d <tpl> -f
+  <tree>/supabase/migrations/212_share_veil_later_cures.sql && sh <tree>/docs/chair/2026-11-20/veil/out/v25/r3c5/measure/gate.sh
+  <tree> <outdir> <tpl> 2` (about 2 minutes on a quiet box; EXIT 0: HIGHER 0, EQUAL 79, LOWER 13 at 6260803d);
+  THE GUARDS: `cp docs/chair/2026-11-20/veil/out/v27/seated/g27.sh /var/tmp/v18/ && sh /var/tmp/v18/g27.sh <worktree> <tag> born sv s1
+  s2 harn twin known` (outputs `/var/tmp/v18/out/v27/<tag>/`; one batch at a time; the known reds: observedShapeReaders in
+  twin, the four in known); THE COST LAW: `out/v27/cost/cost-tip.sh` (needs `/var/tmp/v18/m27/{big.probe.jsx,big-cost.mjs,cost.sh,base}`:
+  big.probe from `out/v24/r3c2/measure/`, big-cost from `out/v25/r3c5/measure/` with the town path set to
+  /var/tmp/v18/m27/big.json and dbs v27x211/v27x212, cost.sh from `out/v24/r3c2/measure/`, base = `git archive e5b95d637
+  supabase/migrations`); run it on a QUIET box. Builders' unfinished work is saved under `out/v27/wip/` (diff + untracked tar).
 
 ## 5. FOR THE OWNER, IN PLAIN WORDS: what a reader of a shared page loses (and one thing it gains)
 - THE RE-KEY OF PERSON IDS (VR10): each time a visitor opens a shared town, every person gets a fresh hidden id for that

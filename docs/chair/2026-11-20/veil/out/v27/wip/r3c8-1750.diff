@@ -1,0 +1,193 @@
+diff --git a/tests/security/galleryRosterChoices.pglite.test.js b/tests/security/galleryRosterChoices.pglite.test.js
+index e3b15e855..1a8dc1c9a 100644
+--- a/tests/security/galleryRosterChoices.pglite.test.js
++++ b/tests/security/galleryRosterChoices.pglite.test.js
+@@ -18,7 +18,7 @@
+  * The owner's record keeps every row. The client twin (projectShareVeil over galleryPayloadFor) sends what the server
+  * sends at every R3 path. RED at R3's base (d136940c3): docs/chair/2026-11-20/veil/out/v21/r3/red.txt.
+  */
+-import { describe, it, expect, beforeAll } from 'vitest';
++import { describe, it, expect, beforeAll, afterAll } from 'vitest';
+ import { appendFileSync, readFileSync } from 'node:fs';
+ import { PGlite } from '@electric-sql/pglite';
+ import { pgcrypto } from '@electric-sql/pglite/contrib/pgcrypto';
+@@ -184,6 +184,32 @@ const HAND_SHARES_B = Object.freeze({ name: 'Threeways', tier: 'village', instit
+ const KEY_SEEDS = ['town-indebted-0-16', 'town-under_siege-1-88', 'metropolis-insurgency-1-124', 'city-none-0-37', 'city-wartime-0-49', 'town-under_siege-0-18',
+   'town-insurgency-1-94', 'town-under_siege-1-98', 'city-under_siege-1-118', 'town-wartime-0-19', 'town-none-0-23', 'city-none-0-31', 'metropolis-wartime-0-59', 'town-none-1-91'];
+ const KEY_RANK = Object.freeze({ organized: 3, 'semi-organized': 2, diffuse: 1, null: 0 });
++// R3-CURE-8 (ruling 55, the chair 16:45: THE TWIN SENDS MORE): the ten born towns of R3-TELL's STOP 1 (out/v27/tell/run2/
++// tell-table.txt "PARITY BY TOWN"), on which the twin served `availableServices.criminal` rows carrying NO `institution` key
++// (the hidden-house name sweep took '(street gang)' and '(thieves guild)' out of them) that 212 did not serve
++const SVC_SEEDS = ['metropolis-politically_fractured-0-60', 'metropolis-insurgency-1-124', 'city-infiltrated-0-42', 'metropolis-politically_fractured-0-70',
++  'metropolis-wartime-1-139', 'town-none-0-21', 'town-insurgency-0-14', 'town-under_siege-0-18', 'town-infiltrated-0-22', 'town-under_siege-1-98'];
++/** R3-CURE-8: a family no catalogue writes, as custom content writes one (economyReconcilePass.js: `availableServices[typeKey]`). */
++const SVC_CUSTOM_FAMILY = 'curiosities';
++/** R3-CURE-8: THE HAND PLANT PER FAMILY, for each family the generator writes (servicesGenerator.js, read in beforeAll) and the
++ * custom one: a row born with NO `institution` key; a row whose `institution` the hidden-house sweep takes ('(street gang)'
++ * holds the hidden "Street gang"), so it reaches the roster pass with no key; a served house's row; the hidden house's row. */
++const svcRowsOf = (fam) => [{ name: `Keyless ${fam}`, desc: 'A row born with no institution key.' },
++  { name: `Swept ${fam}`, desc: 'A row the sweep leaves with no institution key.', institution: '(street gang)' },
++  { name: `Served ${fam}`, desc: 'A served house offers it.', institution: 'Fish market' },
++  { name: `Hidden ${fam}`, desc: 'The hidden house offers it.', institution: 'Street gang' }];
++const handSvcOf = (families) => ({
++  name: 'Keelmouth', tier: 'town',
++  institutions: [{ id: 'inst-sg8', name: 'Street gang', category: 'Criminal', desc: 'The gang works the docks.' },
++    { id: 'inst-fish8', name: 'Fish market', category: 'Economy', desc: 'Fish.' }],
++  powerStructure: { factions: [{ faction: 'Town Council', category: 'civic', power: 70, isGoverning: true }, { faction: 'Fishers', category: 'economic', power: 30 }] },
++  availableServices: Object.fromEntries(families.map((f) => [f, svcRowsOf(f)])),
++  economicState: { safetyProfile: { crimeTypes: [] } },
++});
++const SVC_CRIM = ['block:services.criminal', 'block:defense.criminalStructure', 'block:power.criminalUnderside'];
++/** A record's own rows that reach the roster pass with no `institution` key, by family (an object without the key). */
++const keylessOf = (d) => Object.entries(isRec(d?.availableServices) ? d.availableServices : {})
++  .flatMap(([f, rows]) => (Array.isArray(rows) ? rows : []).filter((x) => isRec(x) && !Object.prototype.hasOwnProperty.call(x, 'institution')).map((x) => `${f}:${x.name}`));
+ /** The fields the Defense key reads (criminalStructureKey.js), each as a getter and a setter: the attribution swaps one. */
+ const KEY_FIELDS = {
+   institutions: [(d) => d?.institutions, (d, v) => { d.institutions = v; }],
+@@ -939,6 +965,7 @@ describe('R3: the drawn conditional rows where a house is hidden whole (through
+     }
+     expect(differ).toEqual([]);
+   }, ARM_TIMEOUT_MS);
++
+ });
+ 
+ // ── R3-CURE-7 (ruling 53, condition 2: THE WALKER) ───────────────────────────────────────────────────────────────────────
+@@ -972,3 +999,138 @@ describe('R3-CURE-7 (ruling 53, condition 2): THE WALKER over 212\'s inline id-a
+     expect(texts, said).toEqual([ID_TEXT_ONE]);
+   });
+ });
++
++// ── R3-CURE-8 (VEIL-27's builder; ruling 55, the chair 16:45: THE TWIN SENDS MORE) ──────────────────────────────────────────
++// Its own chain and its own boot (the R3 describe's boot hook is at its deadlock guard): the hook boots and births only; each
++// town's reads run in that town's own arm. Every setting of the owner's switches (the gate's own; the seven other mixes
++// g:<bits> of the three criminal groupings, each open 1 or shut 0, the hooks tab open; "Show everything criminal" with every
++// hideable house at its default; the switch OFF), Reveal DM off and on: the gallery read at every setting; at the gate's own
++// the party link, the import and the campaign map's member too. Each server read against the twin's projection of the same
++// share (the map's member is read with Reveal DM OFF whatever the share says, 211 :: get_gallery_map; the link is always the
++// player view): the served `availableServices` compared WITHOUT REGARD TO KEY ORDER, array order exact (VR45).
++describe('R3-CURE-8 (ruling 55): a services row with no `institution` key, the twin against 212', () => {
++  let db;
++  let veil;
++  let sw;
++  let towns;
++  let families;
++  let m = 0;
++  const at = '2026-11-01T00:00:00.000Z';
++  const opened = (as) => as.map((a) => ({ address: a, hidden: false }));
++  /** The owner's switch settings, each computed on the record read (out/v27/tell/measure/tell-common.mjs :: settings). */
++  const settingsOf = (stored, dm) => {
++    const pub = veil.galleryPayloadFor(clone(stored), { shareDm: dm, memberOverrides: null });
++    const model = veil.curateModelFor(pub, []);
++    const present = sw.presentCriminalGroupings(pub);
++    const out = { own: opened(OPEN) };
++    for (let b = 0; b < 7; b += 1) {
++      const bits = [4, 2, 1].map((x) => ((b & x) ? '1' : '0')).join('');
++      out[`g:${bits}`] = opened(['tab:plot_hooks', ...SVC_CRIM.filter((_g, i) => bits[i] === '1')]);
++    }
++    out.allOpen = sw.setCriminalVeil(opened(OPEN), model.defaults, false, present, model).filter((d) => !String(d.address).startsWith('card:institution:'));
++    out.off = sw.setCriminalVeil(opened(OPEN), model.defaults, true, present, model);
++    return out;
++  };
++  /** Every read of one town, every setting, Reveal DM off and on. */
++  const readTown = async (t) => {
++    const out = [];
++    for (const dm of [false, true]) for (const [setting, deltas] of Object.entries(settingsOf(t.stored, dm))) {
++      m += 1;
++      const ov = veil.writeShareVeil({}, deltas, { mode: 'live', at });
++      const id = `7e5c0000-0000-0000-0000-${String(m).padStart(12, '0')}`;
++      const slug = `sv${m}`;
++      await db.query(`insert into public.settlements (id,user_id,name,tier,data,is_public,public_slug,published_at,unlisted_slug,visibility,gallery_member_overrides,gallery_share_dm,gallery_importable)
++        values ($1,$2,$3,$4,$5::jsonb,true,$6,now(),$7,'unlisted',$8::jsonb,$9,true)`, [id, OWNER, String(t.stored.name || 'T'), String(t.stored.tier || 'town'), J(t.stored), slug, `${slug}-link`, J(ov), dm]);
++      await db.exec(`set test.uid = '';`);
++      const docs = { gallery: (await db.query('select to_jsonb(g.data) d from public.get_gallery_dossier($1) g', [slug])).rows[0]?.d };
++      if (setting === 'own') {
++        await db.query(`insert into public.saved_maps (id, user_id, name, map_data, is_public, public_slug, unlisted_slug, visibility, share_kind, gallery_share_campaign, gallery_importable)
++          values (gen_random_uuid(), $1, 'm', $2, true, $3, $4, 'unlisted', 'map_with_campaign', true, true)`, [OWNER, J({ campaign: { settlementIds: [id] } }), `${slug}-map`, `${slug}-mapl`]);
++        docs.map = (await db.query('select public.get_gallery_map($1) #> \'{members,0,settlement}\' d', [`${slug}-map`])).rows[0]?.d;
++        if (!dm) docs.link = (await db.query('select public.get_unlisted_dossier($1) -> \'dossier\' d', [`${slug}-link`])).rows[0]?.d;
++        await db.exec(`set test.uid = '${READER}';`);
++        docs.import = (await db.query('select to_jsonb(g.data) d from public.import_gallery_dossier($1) g', [slug])).rows[0]?.d;
++        await db.exec(`set test.uid = '';`);
++      }
++      out.push({ t, setting, dm, ov, docs });
++    }
++    return out;
++  };
++  /** Per read: the two engines' `availableServices` (VR45), and every row with no `institution` key each serves, by family. */
++  const parity = (rs) => {
++    const bad = []; const keyless = { server: {}, twin: {} }; let compared = 0;
++    for (const r of rs) {
++      const twinOf = (dm) => veil.projectShareVeil(veil.galleryPayloadFor(clone(r.t.stored), { shareDm: dm, memberOverrides: r.ov }), r.ov);
++      const twin = twinOf(r.dm); const twinOff = r.dm ? twinOf(false) : twin;
++      for (const [read, d] of Object.entries(r.docs).filter(([, x]) => isRec(x))) {
++        const tw = read === 'map' || read === 'link' ? twinOff : twin;
++        compared += 1;
++        if (canon(d.availableServices ?? null) !== canon(tw.availableServices ?? null)) {
++          const a = new Set(keylessOf(d)); const b = new Set(keylessOf(tw));
++          bad.push(`${r.t.seed} ${r.setting} dm=${r.dm} ${read}: server more ${J([...a].filter((x) => !b.has(x)))} | twin more ${J([...b].filter((x) => !a.has(x)))}${canon([...a]) === canon([...b]) ? ' (the keyed rows differ)' : ''}`);
++        }
++        for (const [eng, doc] of [['server', d], ['twin', tw]]) for (const x of keylessOf(doc)) { const f = x.split(':')[0]; keyless[eng][f] = (keyless[eng][f] || 0) + 1; }
++      }
++    }
++    return { bad, keyless, compared };
++  };
++
++  beforeAll(async () => {
++    db = new PGlite({ extensions: { pgcrypto } });
++    expect(await bootChain(db)).toEqual([]);
++    await db.exec(`insert into auth.users (id) values ('${READER}') on conflict do nothing; insert into public.profiles (id) values ('${READER}') on conflict do nothing;
++      create or replace function public.current_user_has_premium_access() returns boolean language sql stable as $f$ select true $f$;`);
++    const { generateSettlementPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
++    const { birthConfig, loadGenerationLawPayloads } = await import('../../src/domain/density/densityCreateBoundary.js');
++    const { DEFAULT_CONFIG } = await import('../../src/store/configSlice.js');
++    const { composePublicProse } = await import('../../src/components/new/publicProseCompose.js');
++    const { withPublicProse } = await import('../../src/domain/display/publicProse.js');
++    const { generateAvailableServices } = await import('../../src/generators/servicesGenerator.js');
++    veil = await import('../../src/domain/display/galleryVeil.js');
++    sw = await import('../../src/domain/display/criminalVeilSwitch.js');
++    await loadGenerationLawPayloads();
++    // THE FAMILY LIST, FROM THE GENERATOR (never a hand list): the buckets it writes for a town of every size, and the custom one
++    families = [...new Set([...['village', 'town', 'city', 'metropolis'].flatMap((tier) => Object.keys(generateAvailableServices(tier, [], {}, {}))), SVC_CUSTOM_FAMILY])];
++    const birth = (size, crisis, seed) => {
++      const cfg = birthConfig({ ...DEFAULT_CONFIG, ...BIRTH_DIALS, settType: size, ...(crisis !== 'none' ? { selectedStresses: [crisis], selectedStressesRandom: false } : {}) });
++      const t = { ...generateSettlementPipeline(cfg, null, { seed, customContent: {} }) }; delete t.publicProse;
++      return clone(withPublicProse(t, composePublicProse(t)));
++    };
++    towns = [...SVC_SEEDS.map((k) => { const [size, crisis] = k.split('-'); return { seed: k, stored: birth(size, crisis, `r3m-${k}`) }; }),
++      { seed: 'hand-services', stored: handSvcOf(families) }];
++  }, PGLITE_BOOT_TIMEOUT_MS);
++  afterAll(async () => { if (db) await db.close(); });
++
++  for (const seed of SVC_SEEDS) {
++    it(`R3-CURE-8 THE TEN TOWNS of R3-TELL's STOP 1, ${seed}: the twin serves EXACTLY the \`availableServices\` 212 serves (VR45), rows with no \`institution\` key included; every setting, gallery, link, import and map, Reveal DM off and on`, async () => {
++      const t = towns.find((x) => x.seed === seed);
++      // the town holds what STOP 1 named: a criminal row and a house the default veil hides whole
++      expect(t.stored.availableServices?.criminal?.length).toBeGreaterThan(0);
++      const rs = await readTown(t);
++      const { bad, keyless, compared } = parity(rs);
++      note(`R3-CURE-8 ${seed}: reads compared`, compared, '| rows with no institution key served, by family (server | twin):', J(keyless.server), '|', J(keyless.twin), '| differing reads:', bad.length, bad.length ? `\n  ${bad.join('\n  ')}` : '');
++      expect(rs.length).toBe(2 * 10);
++      expect(compared).toBe(2 * 10 + 5);
++      expect(bad).toEqual([]);
++    }, ARM_TIMEOUT_MS);
++  }
++
++  it('R3-CURE-8 THE HAND PLANT PER FAMILY (every family the generator writes, and a custom one): a row born with no `institution` key and a row the hidden-house sweep leaves with none are treated ALIKE by the twin and 212, every setting, every read, Reveal DM off and on; the served house\'s row stays and the hidden house\'s row leaves, both engines', async () => {
++    const t = towns.find((x) => x.seed === 'hand-services');
++    const rs = await readTown(t);
++    const { bad, keyless, compared } = parity(rs);
++    const rows = [];
++    for (const r of rs) for (const [read, d] of Object.entries(r.docs).filter(([, x]) => isRec(x))) {
++      const av = isRec(d.availableServices) ? d.availableServices : {};
++      for (const f of families) {
++        const names = (Array.isArray(av[f]) ? av[f] : []).map((x) => x?.name);
++        if (names.includes(`Hidden ${f}`)) rows.push(`${r.setting} dm=${r.dm} ${read} ${f}: the hidden house's row served`);
++        if (f in av && !names.includes(`Served ${f}`)) rows.push(`${r.setting} dm=${r.dm} ${read} ${f}: the served house's row withheld`);
++      }
++    }
++    note('R3-CURE-8 the hand plant: reads compared', compared, '| families', J(families), '| rows with no institution key served, by family (server | twin):', J(keyless.server), '|', J(keyless.twin), '| differing reads:', bad.length, bad.length ? `\n  ${bad.join('\n  ')}` : '');
++    expect(compared).toBe(2 * 10 + 5);
++    expect(rows).toEqual([]);
++    expect(bad).toEqual([]);
++  }, ARM_TIMEOUT_MS);
++});
