@@ -44,7 +44,10 @@ describe("TAIL-POWERS-3 · batch 2: a conflict line about the seat's rival needs
     // Military Council's own seat, its strong military presence printed: the commanders' rung yields to the levies, picked)
     'r2r-town-89': ['The military commanders are pushing for expanded authority over civilian courts', 'Military Council has been debating market levies'],
     'r2r-metropolis-53': ['The military commanders are pushing for expanded authority over civilian courts', 'The church is demanding veto power over council appointments'],
-    'r2r-metropolis-3': ['A hedge wizard was dragged before the ecclesiastical court', 'The military commanders are pushing for expanded authority over civilian courts'],
+    // BUILD-CONFLICT (DEPTH-2): the military rung picks its quarrel by keyed hash (MILITARY_COURT, the chair's word of 16:22 UTC);
+    // r2r-metropolis-3 -> r2r-metropolis-57 (the heresy flag on, an arcane house, a Democratic assembly's seat and no religious
+    // power of weight: the hedge wizard's line is refused and the commanders' line, picked, prints)
+    'r2r-metropolis-57': ['A hedge wizard was dragged before the ecclesiastical court', 'The military commanders are pushing for expanded authority over civilian courts'],
     'r2r-hamlet-55': ['The priest has summoned someone before the church court', 'The most devout households want a say over who may trade and when'],
   });
   for (const [seed, [was, now]] of Object.entries(CURED)) {
@@ -58,7 +61,7 @@ describe("TAIL-POWERS-3 · batch 2: a conflict line about the seat's rival needs
   /** KEEP: each line where its rival stands. seed -> the line that still prints */
   const KEEP = /** @type {Record<string, string>} */ ({
     'r2r-town-54': 'The church is demanding veto power over council appointments', // a church of its own; a Feudal Appointee holds the seat
-    'r2r-town-15': 'The military commanders are pushing for expanded authority over civilian courts', // a Guild Council holds the seat
+    'r2r-town-326': 'The military commanders are pushing for expanded authority over civilian courts', // a Guild Council holds the seat (BUILD-CONFLICT, DEPTH-2: was r2r-town-15, whose military rung now picks another line of its pool)
     'r2r-metropolis-28': 'A hedge wizard was dragged before the ecclesiastical court', // a High Theocratic Council holds the seat
   });
   for (const [seed, keep] of Object.entries(KEEP)) {
