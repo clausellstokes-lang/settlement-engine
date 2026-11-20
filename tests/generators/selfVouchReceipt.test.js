@@ -35,8 +35,13 @@ describe('the self-vouch line follows the receipt\'s battery judgment', () => {
   // RE-KEYED BY IDENTITY (URBAN-FIX C-1): soak1k-178's last finding was the culture's raw foodways sentence, which the
   // record no longer stores (the food record's line is the one home); its receipt passes. Re-pointed to the first seed
   // of the 1,000 with no critical issue whose battery still finds a contradiction (probed at the cure): was soak1k-178.
-  it('soak1k-7: the battery finds the contradictions and the page does not vouch', () => {
-    const { settlement } = birth(7);
+  // RE-KEYED BY CAUSE (MATCHER, 2026-11-20): soak1k-7's only findings were false matches of the defence-words check (a
+  // walls or soldier word that claims nothing about the place), which the check no longer reads as claims; its receipt
+  // passes. Re-pointed to the first seed of the 1,000 with no critical issue whose battery still finds a contradiction
+  // the check keeps (probed 0..119 at the MATCHER tip): soak1k-8, a village whose stored record says "town"
+  // (`battery.tier-noun`, "town" for a village). Its findings are re-measured EXACTLY, as before.
+  it('soak1k-8: the battery finds the contradiction and the page does not vouch', () => {
+    const { settlement } = birth(8);
     expect(settlement.economicViability.metrics.criticalIssueCount).toBe(0);
     const judgment = battery(settlement);
     expect(judgment.status).toBe('needs_review');
@@ -48,7 +53,7 @@ describe('the self-vouch line follows the receipt\'s battery judgment', () => {
     // does not vouch (below).
     // RE-KEYED BY CAUSE (URBAN-FIX B-P1, 1b3436acd): the tier-noun finding was the Shadows District's "Old town or
     // slums" on this city, the instrument's false positive the licence row cured; one contradiction remains.
-    expect(judgment.findings.map((f) => f.path)).toEqual(['battery.defense-words', 'battery.defense-words']);
+    expect(judgment.findings.map((f) => f.path)).toEqual(['battery.tier-noun']);
     expect(verdict(settlement)).not.toMatch(VOUCH); // anchored: the next line pins the live contradiction verdict
     expect(verdict(settlement)).toMatch(/cannot all be true/);
   });
