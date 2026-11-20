@@ -130,6 +130,18 @@ market, trade route, smuggling. Final per-slot list written at each build's merg
   SAME-2's hand-list rows: `src/data/dailyLife/gatheringPlaces.js` exports `GATHERING_NAMED`, `GATHERING_PLAIN`, slot
   `gathering_places`, line shape `{ id, text, needs, excludes? }`.
 
+## 5b. Class-file edits and bytes (for the join; the chair, 19:58)
+- Class files edited: `src/domain/facts/registeredWords.js :: HOUSE_FAMILY_KINDS` (3 rows: bathhouse, theater, root
+  cellar → `institution:` kinds); `src/domain/facts/factVocabulary.js` (13 `INSTITUTION_WORDS`, 4 atoms: sick house,
+  route open, government named, grain imported); `src/domain/facts/institutions.js :: INSTITUTION_KIND_PATTERNS` (13
+  rows); `tests/lint/defenceFactReaders.shared.mjs :: ATOM_WORDS` (2 rows); `tests/lint/presumedThings.widened.register.json`
+  (one row shrunk by its door).
+- FIRST PAINT (measured 20:06 UTC; `npm run build` + VERIFY_DIST=1 `tests/build/vendorPdfLazy.test.js`,
+  `generationWorkerLazy.test.js`): base 0eadcb032 = the line's 1,177,668 raw / 374,683 gzip / 314,537 Br, worker
+  2,587,733; tip 4673cac4f 1,178,613 / 374,938 / 314,815 (+945 / +255 / +278), worker 2,589,009 (+1,276; each worker
+  +1,276). Cause: engine-core +714 (the granted rows, eager by their home), kernel +231 (`pickVariantMixed` kept). No
+  lazy module pulled eager. RULING ASKED of the chair (recommend: accept as recorded cost). Re-measure at each merge.
+
 ## 6. Losses to look at again (for the owner)
 None yet.
 
