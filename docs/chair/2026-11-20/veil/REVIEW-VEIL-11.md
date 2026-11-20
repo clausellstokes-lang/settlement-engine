@@ -157,6 +157,23 @@ them); 435 of 443 naming a served power served; no withheld house's name in any 
 house's or power's name and no crime-worded tile. Not reached here (VEIL-DOORS-2's list): the snapshot-mode chronicle,
 the one-row read and its cost, the eight older helpers (SEC-GRANTS's 213).
 
+## 3e. A public map's world columns (DOORS's census rows 18 and 21), measured at cca49cb8d (`xd212`). No veil leak found.
+
+The only free text the stored world snapshot copies from the world pulse is the chronicle section's headline and summary
+of each auto outcome. The brokerage producer writes `${patronName} buys an answer from ${houseName}` with the asker
+`bindings[0]` and no filter on an illegal house (`brokerageServicesRules.js:289`, read). Executed with the engine's own
+`brokeragePatronBindings`, the brokerage layer on (its two opt-in rules), `worldcol.probe.jsx`: 91 born towns, 34 with a
+binding, `bindings[0]` illegal in 3, an illegal binding in 13. It cannot be served: the serializer's section key is
+`chronicle`, and 089's guard (unchanged through 206, 207 and 210) rejects any key matching `.*chronicle.*`
+(`_gallery_world_snapshot_is_safe('{"schemaVersion":1,"chronicle":[]}')` is false; storing the snapshot raised "World
+snapshot contains a forbidden private key"). The storable sections (worldClock, pantheon, warNetwork's sieges, trade wars,
+dispositions and public channels, dashboard) are keyed by settlement and deity (read): no house or power field. Not
+measured: a public channel's `goods[].label`.
+
+A FAULT OUTSIDE THE VEIL, FOR THE OWNER'S LIST (PLAUSIBLE: read, plus the guard's executed answer): `MapShareEditor.jsx`
+turns all five sections on by default, so a campaign map shared with its world sends a `chronicle` key and `publish_map`
+raises. The guard protects the veil here by accident: a cure that lets the chronicle through must veil its headlines first.
+
 ## 4. THE RAW MEASURES, BOTH SHAPES, AT THIS TIP (`splitp.probe.jsx` on the new shape, 45 towns; `splitm` on master): every
 gallery read serves `economicState.compound.criminalEffective` (e.g. 82.84), `compound.militaryEffective` and
 `safetyProfile.safetyRatio` (45 of 45 new; 86 of 86 and 50 of 50 master), and `activeConditions[].severity` (32 of 45;
