@@ -1,4 +1,4 @@
-# PAGE-3's hand-back (kept current at every push; last written 2026-11-20 13:41 UTC by `date -u`)
+# PAGE-3's hand-back (kept current at every push; last written 2026-11-20 13:47 UTC by `date -u`)
 
 Read this, then `PAGE-2-HANDBACK.md` (its section 1, the rulings in force, still governs where this file is silent),
 then `briefs/BUILDER-RULES.md` and the brief of the unit you take. PAGE-3 integrates; builders (the Agent tool) build.
@@ -23,7 +23,7 @@ then `briefs/BUILDER-RULES.md` and the brief of the unit you take. PAGE-3 integr
 | L2 | PAGE-2's builder; uncommitted | lane/page-2-2026-11-20-l2 | | lines to the chair; merge third |
 | L4/S9/S3 | PAGE-2's builder; uncommitted | lane/page-2-2026-11-20-s | | seven reworded lines to the chair; merge fourth |
 | L1 | NOT DISPATCHED (builds on S6's tip) | | | dispatch on T2.md once S6 is on origin |
-| K | PAGE-3's builder, PHASE 1 (trial) running | origin `lane/page-3-2026-11-20-k-wip` (brief only so far) | | the trial result to the chair in ONE message; Phase 2 only on the chair's word |
+| K | PHASE 1 DONE, TRIAL FAILS CONFINEMENT: OTHER 353 leaves/44 towns (golden), 686/89 (census): the powers' conflicts (`powerStructure.conflicts`, parties swap, 34 towns lose their conflict), `factionRelationships[].narrative/direction`, `pressureSentence` (26), ~42 census goals outside classes 2/5, one tie between unmoved cards changing archetype. Bands move for exactly 3 roles (273 cards/151 towns). Also moves tests/lint `poolDominance` (old_debt 0.1389 > 0.1293) and `writerReach` (shapesDigest). Output: `measures/page-3/K-trial-f4a434660.out.txt` | origin `lane/page-3-2026-11-20-k-wip` | f4a434660 (code), b2f8fe25e (scripts) | the chair's ruling on OTHER; Phase 2 only on its word |
 
 ## 3. THE CHAIR'S ORDER OF 13:32 (usage warning on)
 
