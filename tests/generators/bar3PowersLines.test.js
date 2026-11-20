@@ -49,7 +49,10 @@ const REFUSED = /** @type {Array<[string, string, (t: any) => string, string, st
   ['C11669', 'r2s-wartime-town-0', (t) => descOf(t, /military|guard/i), 'Undermanned and underfunded', 'Kept small before the war, and the war has put more on it than it was built to carry.'],
   ['C5398', 'r2r-city-36', (t) => descOf(t, /Ecclesiastical Council/), 'alongside elected aldermen', 'Senior clergy hold effective civic authority through the council'],
   ['C45570', 'r2r-village-46', (t) => descOf(t, /military|guard/i), 'they are waiting for a chance to push back', ', close enough to matter and too far behind to lead.'],
-  ['C27440', 'r2r-town-2', conflictOf, 'The merchants have stopped attending the sessions.', 'The merchants have argued against every one of them, and nothing has been settled yet.'],
+  // BUILD-CONFLICT (DEPTH-2, 2026-11-20): the levies rung picks its quarrel by keyed hash; r2r-town-2 -> r2r-town-175 (a
+  // Church Council, as -2's, settled to the merchants: the levies line picked)
+  // under the mixed pick (the chair's rule of 17:18 UTC): -175 -> r2r-town-101 (a Church Council, settled to the merchants)
+  ['C27440', 'r2r-town-101', conflictOf, 'The merchants have stopped attending the sessions.', 'The merchants have argued against every one of them, and nothing has been settled yet.'],
   ['C36418', 'r2r-hamlet-28', conflictOf, 'The last harvest failed badly.', `The ${FAILED_SOURCE_WORDS.fish} failed badly this year.`],
   ['C36418', 'r2s-famine-thorp-1', conflictOf, 'The last harvest failed badly.', `The ${FAILED_SOURCE_WORDS.livestock} failed badly this year.`],
   ['C21481', 'r2r-town-1', (t) => relationOf(t, 'Arcane Council', 'Religious Authorities'), 'Each props up the other.', 'but the two are now at odds over'],
@@ -60,7 +63,9 @@ const REFUSED = /** @type {Array<[string, string, (t: any) => string, string, st
 /** KEEP: [row, town, what is read, the true sibling that still prints] */
 const KEEP = /** @type {Array<[string, string, (t: any) => string, string]>} */ ([
   ['C11669', 'r2s-monster_pressure-town-0', (t) => descOf(t, /military|guard/i), 'Undermanned and underfunded; unable to enforce law consistently and aware of it.'],
-  ['C27440', 'r2r-town-20', conflictOf, 'The merchants have stopped attending the sessions.'],
+  // BUILD-CONFLICT: r2r-town-20 -> r2r-city-20 (the seat unsettled with the merchants; the levies line picked)
+  // under the mixed pick (the chair's rule of 17:18 UTC): r2r-city-20 -> r2r-town-304 (a town, as -20 was: a Corrupt Council unsettled with the merchants)
+  ['C27440', 'r2r-town-304', conflictOf, 'The merchants have stopped attending the sessions.'],
   ['C36418', 'r2s-famine-village-0', conflictOf, 'The last harvest failed badly.'],
   ['C31100', 'r2r-city-10', accountOf, 'without bargaining with them first.'],
   ['C21481', 'r2r-village-7', (t) => relationOf(t, 'Elder Council', 'Religious Authorities'), 'Each props up the other.'],

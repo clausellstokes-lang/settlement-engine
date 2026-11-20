@@ -41,8 +41,9 @@ const market = (s) => Boolean(factsOf(s).market);
 const court = (s) => Boolean(s.economicState?.compound?.inst?.hasCourtSystem);
 const LEVIES = 'has been debating market levies for three months. The merchants have stopped attending the sessions.';
 // BAR3-CLOSE-SWEEP-A (2026-11-15): the levy line where the seat's relation row with the merchant power is settled (the
-// powers branch's c0d013098, its declared cure C27440: `factionDynamics.js :: boycottReadsRelation`); r2r-town-4's Town
-// Mayor stands `subordinate`, `stable` to the Merchant Guilds, and the line naming the market still prints where it stands
+// powers branch's c0d013098, its declared cure C27440: `factionDynamics.js :: boycottReadsRelation`); r2r-town-42's Town
+// Mayor (was r2r-town-4's, then -78's; BUILD-CONFLICT: the levies rung picks its quarrel by the mixed pick (the chair's rule of 17:18 UTC), and -42 picks the levies)
+// stands settled to the merchant power, and the line naming the market still prints where it stands
 const LEVIES_SETTLED = 'has been debating market levies for three months. The merchants have argued against every one of them, and nothing has been settled yet.';
 const MURDERED = 'Several merchants have been found murdered this season';
 const OUTBUYING = 'The merchant class is outbuying noble landholdings.';
@@ -52,11 +53,19 @@ describe('POWERS-13 #291 · the conflict ladder names a market or a court only w
   beforeAll(async () => { await loadGenerationLawPayloads(); });
   it('the guard towns: each line is gone where its market or court is not, and says what the ladder says next', () => {
     expectNoSeedFailures(collectSeedFailures([
-      ['bar0-village-calm-rand-1', LEVIES, 'A dispute over grazing rights and water access has run for two seasons'],
-      ['r2r-village-4', LEVIES, 'A dispute over grazing rights and water access has run for two seasons'],
+      // BUILD-CONFLICT (DEPTH-2, 2026-11-20): the default rung now picks its quarrel by keyed hash, so each guard is a village
+      // whose pick is the grazing quarrel: bar0-village-calm-rand-1 -> -66 and r2r-village-4 -> -219 (each a village with no
+      // market beside an adventurers' charter hall, its civic house), r2r-hamlet-14 -> -187 (a Feudal Stewardship under a
+      // lord's steward, no market)
+      // under the mixed pick (the chair's rule of 17:18 UTC): -66 -> bar0-village-calm-rand-172 (a charter hall), -219 -> r2r-village-133 (a carriers' hiring hall),
+      // -187 -> r2r-hamlet-262 (a Feudal Stewardship under a lord's steward)
+      ['bar0-village-calm-rand-172', LEVIES, 'A dispute over grazing rights and water access has run for two seasons'],
+      ['r2r-village-133', LEVIES, 'A dispute over grazing rights and water access has run for two seasons'],
       ['r2r-hamlet-56', MURDERED, 'Someone has been stealing from the communal stores.'],
-      ['r2r-hamlet-14', OUTBUYING, 'A dispute over grazing rights and water access has run for two seasons'],
-      ['r2r-village-8', COURTS, "The strongest armed household has started making decisions on everyone's behalf without asking."],
+      ['r2r-hamlet-262', OUTBUYING, 'A dispute over grazing rights and water access has run for two seasons'],
+      // under MILITARY_ARMED's mb1 (the chair's wording of 18:00 UTC): r2r-village-8 -> r2r-village-205 (no court, a charter hall,
+      // the military rung's else sub-branch; the strongest armed household picked)
+      ['r2r-village-205', COURTS, "The strongest armed household has started making decisions on everyone's behalf without asking."],
     ], ([seed, gone, now]) => {
       const s = born(seed);
       if (gone === COURTS) expect(court(s), `${seed}: the town lacks a court`).toBe(false);
@@ -66,7 +75,8 @@ describe('POWERS-13 #291 · the conflict ladder names a market or a court only w
   }, 240_000);
   it('the twins: each line keeps its place where its market or court stands', () => {
     expectNoSeedFailures(collectSeedFailures([
-      ['r2r-town-4', LEVIES_SETTLED], ['r2r-town-0', MURDERED], ['r2r-town-10', OUTBUYING], ['r2r-town-16', COURTS],
+      // under the mixed pick (the chair's rule of 17:18 UTC): r2r-town-16 -> r2r-town-153 (a court, the commanders' line picked; a Church Council's seat)
+      ['r2r-town-42', LEVIES_SETTLED], ['r2r-town-0', MURDERED], ['r2r-town-10', OUTBUYING], ['r2r-town-153', COURTS],
     ], ([seed, line]) => {
       const s = born(seed);
       expect(line === COURTS ? court(s) : market(s), `${seed}: the thing stands`).toBe(true);

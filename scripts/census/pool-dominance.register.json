@@ -3,9 +3,9 @@
   "corpus": "[{\"tier\":\"thorp\",\"n\":150},{\"tier\":\"hamlet\",\"n\":200},{\"tier\":\"village\",\"n\":350},{\"tier\":\"town\",\"n\":550},{\"tier\":\"city\",\"n\":350},{\"tier\":\"metropolis\",\"n\":150},{\"tier\":\"village\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"under_siege\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"under_siege\"}]",
   "census": {
     "_note": "Figures for the second wave, never a red: re-written by every door.",
-    "pools": 960,
+    "pools": 964,
     "printOneLine": 670,
-    "measuredUnder30Draws": 151,
+    "measuredUnder30Draws": 152,
     "highestSharesOver150Draws": [
       {
         "pool": "ledger:institutionDescVariants:DESC_VARIANT_SIBLINGS",
@@ -85,10 +85,10 @@
         "lines": 2
       },
       {
-        "pool": "ledger:npcData:NPC_HOOK_SIBLINGS",
-        "top1": 0.8772,
+        "pool": "ledger:institutionServices:Daily markets.Fresh produce",
+        "top1": 0.8734,
         "top5": 1,
-        "draws": 407,
+        "draws": 450,
         "lines": 2
       }
     ],
@@ -5911,6 +5911,30 @@
       "top5": 0.5724,
       "lines": 15,
       "reason": "banked BY ITS OWN ROW at the last close (LASTCLOSE-DOORS, 2026-11-19, the chair's ruling on its hand-back's §3 (1)), through the door's own bankNew narrowed to this pool (at the higher of the two corpora's readings), NOT --bank-new: point 68's imports list (FR24); 15 lines, top1 0.13, not lopsided; registered at the last close"
+    },
+    "ledger:governanceNarrative:GRAZING": {
+      "top1": 0.1865,
+      "top5": 0.7204,
+      "lines": 11,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:governanceNarrative:LEVIES": {
+      "top1": 0.1792,
+      "top5": 0.8167,
+      "lines": 8,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:governanceNarrative:MILITARY_ARMED": {
+      "top1": 0.591,
+      "top5": 1,
+      "lines": 2,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:governanceNarrative:MILITARY_COURT": {
+      "top1": 0.2648,
+      "top5": 0.9118,
+      "lines": 6,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
     }
   }
 }

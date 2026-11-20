@@ -32,7 +32,10 @@ describe('TAIL-POWERS-4 · batch 1: a conflict line claims what the place bears'
 
   /** seed -> [the text that must NOT be written, the text written instead] */
   const CURED = /** @type {Record<string, [string, string]>} */ ({
-    'r2r-thorp-7': ['the families on each side', 'and those on each side of it no longer speak to one another'],
+    // BUILD-CONFLICT (DEPTH-2, 2026-11-20): the default rung picks its quarrel by keyed hash (GRAZING gained n1-n3); r2r-thorp-7
+    // -> r2r-thorp-83 (a thorp whose pick is the grazing quarrel, so its thorp twin prints)
+    // under the mixed pick (the chair's rule of 17:18 UTC): -83 -> r2r-thorp-59 (an Elder Council thorp, as -7)
+    'r2r-thorp-59': ['the families on each side', 'and those on each side of it no longer speak to one another'],
     'r2r-thorp-4': ['the families on each side', 'and those on each side of it no longer speak to one another'],
     'r2r-hamlet-11': ['Three estates have changed hands', 'A merchant has bought land the old landholding family once held'],
     'r2r-village-45': ['Three estates have changed hands', 'A merchant has bought land the old landholding family once held'],
@@ -51,7 +54,7 @@ describe('TAIL-POWERS-4 · batch 1: a conflict line claims what the place bears'
 
   /** KEEP: each original where the place bears it. seed -> the line that still prints */
   const KEEP = /** @type {Record<string, string>} */ ({
-    'r2r-hamlet-8': 'and the families on each side no longer speak to one another', // a hamlet of 57
+    'r2r-hamlet-52': 'and the families on each side no longer speak to one another', // a hamlet (BUILD-CONFLICT, DEPTH-2: was r2r-hamlet-8, a hamlet of 57, which the mixed pick (the chair's rule of 17:18 UTC) gives the shore line)
     'r2r-metropolis-17': 'The merchant class is outbuying noble landholdings. Three estates have changed hands', // a metropolis
     'r2r-town-10': 'The merchant class is outbuying noble landholdings.', // a town
   });

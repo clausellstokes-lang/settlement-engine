@@ -222,6 +222,12 @@ export function factsOf(record, options = {}) {
     get prosperity() { const l = prosperityLabelOf(/** @type {FactsOwnFields} */ (record)?.economicState?.prosperity).toLowerCase(); return l || undefined; },
     /** what the place can keep up (`keep.js :: keepOf`), read off the prosperity label: `{ bought, funded }` */
     get keep() { return keepOf(/** @type {FactsOwnFields} */ (record)?.economicState?.prosperity); },
+    /** BUILD-CONFLICT (DEPTH-2): a live 'Water source' or 'Multiple water sources' row (`rosterGrounds.js`) */
+    get waterSource() { return waterSourceOf(record); },
+    /** BUILD-CONFLICT (DEPTH-2): a live 'Access to external mill' row: the grain goes to a neighbour's mill (`rosterGrounds.js`) */
+    get externalMill() { return externalMillOf(record); },
+    /** BUILD-CONFLICT (DEPTH-2): a live 'Common grazing land' row (`rosterGrounds.js`) */
+    get commonGrazing() { return commonGrazingOf(record); },
   });
 }
 
@@ -285,3 +291,4 @@ import { criticalImportBroughtInOf } from './criticalImportBroughtIn.js'; // BAR
 import { uprisingOf } from './uprising.js'; // BAR8-DESKS-DEF (12e): at the END, no line above moves
 import { needNotBroughtInOf } from './needNotBroughtIn.js'; // FAULTS-NEED (FR2): at the END, no line above moves
 import { fishBoughtIn } from './fishBoughtIn.js'; // FAULTS-ROWS (FR12 (3)): at the END, no line above moves
+import { commonGrazingOf, externalMillOf, waterSourceOf } from './rosterGrounds.js'; // BUILD-CONFLICT (DEPTH-2): at the END, no line above moves

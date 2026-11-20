@@ -12,8 +12,9 @@
  * those precedence rules explicit when adding new narrative cases.
  */
 
-import { FAILED_SOURCE_WORDS } from '../economy/foodBalance.js'; import { defenceOf } from '../../domain/facts/defence.js'; import { resolveGenerationWorldLaw } from '../generationContext.js'; import { migrationDirectionOfConfig } from '../../domain/migrationDirection.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { factsOf } from '../../domain/facts/factsOf.js'; import { BASELINE_CONFLICT_SIBLINGS } from '../../data/powerSiblings.js'; export { BASELINE_CONFLICT_SIBLINGS }; import { buildInsurgencyNarrative, buildMigrationNarrative, buildReligiousConversionNarrative, buildWartimeNarrative } from './governingStressVignettes.js'; import { migrationDirectionOf } from '../../domain/crisis/migrationDirection.js'; import { powerNameAfterArticle, powerNameWithArticle, powerPossessive } from '../../domain/display/powerSentenceName.js'; // NAMES-1 (CN1, the seventh chair's ruling of 2026-11-20, vetoable by the owner): a power in a sentence takes its article // F10, CENSUS-1c, CENSUS-5c (R-AB: the table moved to data/powerSiblings.js, re-exported): one line, so no cited line moves — LANDING-R2 (ODQ §934.105): the four governing-faction stress vignettes moved verbatim to power/governingStressVignettes.js, imported on this line, so no cited line moves — W3 POW (WAVE-RULINGS item 8): the label reads the entry's direction through F13's reader, imported on this line // BAR3-POWERS (C36418): the failed source's words, first on this line
+import { FAILED_SOURCE_WORDS } from '../economy/foodBalance.js'; import { defenceOf } from '../../domain/facts/defence.js'; import { resolveGenerationWorldLaw } from '../generationContext.js'; import { migrationDirectionOfConfig } from '../../domain/migrationDirection.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { factsOf } from '../../domain/facts/factsOf.js'; import { BASELINE_CONFLICT_SIBLINGS } from '../../data/powerSiblings.js'; export { BASELINE_CONFLICT_SIBLINGS }; import { pickQuarrel } from './quarrelPick.js'; import { buildInsurgencyNarrative, buildMigrationNarrative, buildReligiousConversionNarrative, buildWartimeNarrative } from './governingStressVignettes.js'; import { migrationDirectionOf } from '../../domain/crisis/migrationDirection.js'; import { powerNameAfterArticle, powerNameWithArticle, powerPossessive } from '../../domain/display/powerSentenceName.js'; // NAMES-1 (CN1, the seventh chair's ruling of 2026-11-20, vetoable by the owner): a power in a sentence takes its article // F10, CENSUS-1c, CENSUS-5c (R-AB: the table moved to data/powerSiblings.js, re-exported): one line, so no cited line moves — LANDING-R2 (ODQ §934.105): the four governing-faction stress vignettes moved verbatim to power/governingStressVignettes.js, imported on this line, so no cited line moves — W3 POW (WAVE-RULINGS item 8): the label reads the entry's direction through F13's reader, imported on this line // BAR3-POWERS (C36418): the failed source's words, first on this line
 
+export const FIELD_ROTATION_QUARREL = 'A dispute over field rotation and grazing rights has divided the village for most of this season.'; // the field-rotation rung's line (`deriveBaselineConflict`); BUILD-CONFLICT (DEPTH-2): the site hands it to the pick's GRAZING pool, so it keeps its one literal here
 const SMALL_SETTLEMENT_TIERS = new Set(['thorp', 'hamlet', 'village']);
 
 const ADVERSARIAL_RELATIONSHIP_TYPES = new Set([
@@ -514,7 +515,7 @@ const deriveBaselineConflict = ({
     return 'The council has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now acting as if the other has already lost.';
   }
   if (hasMarketInstitution) {
-    return 'A dispute over field rotation and grazing rights has divided the village for most of this season.';
+    return FIELD_ROTATION_QUARREL;
   }
   return institutionFlags?.noGrazingQuarrel || 'A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.'; // BAR8-K-POWERS (15b, C31732): no grazing quarrel where nothing grazes (the power step reads the place: data/powerSiblings.js :: noGrazingQuarrelOf)
 };
@@ -770,9 +771,9 @@ export const buildGovernanceLabels = ({
   const baselineOverridden = Boolean(
     primaryStress && primaryStress !== 'infiltrated' && stressNarratives[primaryStress],
   );
-  let recentConflict = baselineOverridden
-    ? baselineConflict
-    : resolveSibling(baselineConflict, BASELINE_CONFLICT_SIBLINGS, { facts: () => factsOf({ institutions: (institutionNames || []).map((name) => ({ name })), tier }), poolId: 'governanceNarrative:BASELINE_CONFLICT_SIBLINGS', surface: 'power', drawKind: 'T' });
+  const siteFacts = () => factsOf({ institutions: (institutionNames || []).map((name) => ({ name })), tier, config }); // BUILD-CONFLICT (DEPTH-2, the chair's word): the config too (terrain, route, water), and where the baseline prints its quarrel is picked from the rung's pool by keyed hash, no roll (power/quarrelPick.js)
+  let recentConflict = baselineOverridden ? baselineConflict
+    : resolveSibling(pickQuarrel(baselineConflict, { facts: siteFacts, noGrazing: institutionFlags?.noGrazingQuarrel, fieldRotation: FIELD_ROTATION_QUARREL }), BASELINE_CONFLICT_SIBLINGS, { facts: siteFacts, poolId: 'governanceNarrative:BASELINE_CONFLICT_SIBLINGS', surface: 'power', drawKind: 'T' });
   stressNarratives.infiltrated = recentConflict;
 
   if (recentConflict) {
