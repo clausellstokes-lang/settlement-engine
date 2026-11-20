@@ -31,3 +31,6 @@ ALSO FROM MY READ (`READ-M1-npcStructure.md`): military #11 is NOT struck (the c
 - the FILL LIST of (c): every distinct filled sentence carrying {house}, {export} or {import} over 600 places (100 a size), written to `docs/chair/2026-11-20/content/people/measures/b1b-fills.out.txt`;
 - the walker of (e) (a test: no `needs` atom of a pool row is a hideable fact by `factLayers.js`), and the reads that serve the field;
 - the shares before and after on the BUILT tree, by size.
+
+## CORRECTION to condition (e), the chair at 17:13 UTC (added 2026-11-20T17:14Z, sent to the builder the same minute)
+"`factLayers.js` holds no hideable rows (my wrong citation). It reads: (1) no wording may NEED a house of a hideable kind (`src/domain/people/cardVeil.js :: isHideableHouse`, criminal or clandestine) or any fact about crime or a clandestine thing; (2) every OTHER house a wording needs is LISTED in your hand-back, pool by pool, for the security reader at the join."
