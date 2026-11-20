@@ -979,6 +979,22 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   owner's audience only, with the gate named and tested; both counts said (58 under today's rule; 58 plus those of
   the 5 that W4 opens).
 
+- **THE REFUSAL IS A POST-PASS (2026-11-20, 12:05 UTC, to GOALS-2; builder 4's unit at b768ad502 does not merge as
+  built):** the builder's own figure: 238 wants moved, not about 55: the extra 183 are cards WITHOUT the pairing,
+  re-dealt because `goals.js :: cellCandidates` refuses a held text before the draw (a refused card's released and
+  new texts change the list's length for every later card of its cell; the personality family's wants carry no
+  slot, so the cascade runs down the cell). THE CHAIR'S WORD WAS "a card without the pairing keeps its want byte
+  for byte": so `dealGoals` runs exactly as today, and THEN, draw-free, each card with the pairing takes the next
+  admitted candidate of its own cell that no card of the town holds; no other card is touched; the seam is after
+  `dealGoals` and before `dealRareSecrets`; the rare-deal guard stays after that deal. THE GENERAL FACT, for the
+  join: the held set makes ANY upstream change of a want cascade to later cards of its cell (PAGE-2's K meets it
+  as its fifth class: 12 goals in 300 towns).
+- **THE STANDING SENTENCE'S REASON CLAUSE IS CURED UNDER THE NEW LAW ONLY (12:01 UTC, to FORTUNE-2):** under today's
+  law "Weak defences keep <town> from more than tolerating <ruler>" tells the truth about the score beside it;
+  rewording it there would make the words disagree with the number on the same card; a town born before the
+  light is not changed. The law-1 readings are LISTED for the owner (the clause, its trigger term, how many of
+  twenty towns print it, by size).
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -3444,3 +3460,8 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   the titles' appointed family is re-run. SEAT-4 SEATED BESIDE IT (session_019yED1RNL8TjjpR5HCcJ3yW; on
   `lane/seat-3-2026-11-20` at f749245fb; outcome `lane/seat-4-2026-11-20`); the hand-over after U3's merge and
   U4's dispatch, or at 380,000.
+- 12:05 UTC · GOALS-1 "GOALS-PART cd6c2eadb, HANDED OVER" (about 450,000): GOALS-2 TOLD "THE LANE IS YOURS at cd6c2eadb" (12:05)
+  with the relays (builder 4 at `lane/goals-1-2026-11-20-b4` b768ad502, unread, 238 wants moved against 55;
+  builder 5 at `-b5` 3e1eb04c4) and the ruling that the refusal is reworked as a post-pass (section 2). FORTUNE-2
+  took its lane at 57a79cc2d; its question on the reason clause answered (section 2). SEAT-4 and GOALS-2 read in
+  (their measures reproduce).
