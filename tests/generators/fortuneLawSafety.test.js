@@ -287,8 +287,8 @@ describe('(d) FS4\'s ARM, born forced: under law 2 no score falls and no band is
       expect(typeof label, `${seed}: a born town carries its safety label`).toBe('string');
       expect(legitimacy.breakdown.safety, `${seed} at ${label}`).toBe(litSafety(label, tier));
       expect(legitimacy.breakdown.safety, `${seed} at ${label}: below its law-1 term`).toBeGreaterThanOrEqual(todaySafety(label));
-      const { prosperity, safety, defense, food } = legitimacy.breakdown;
-      expect(legitimacy.score).toBe(clamp(50 + prosperity + safety + defense + food, 0, 100));
+      const { prosperity, safety, defense, food, merits = 0 } = legitimacy.breakdown; // FORTUNE U5a: the merits of rule, added after the sum's clamp
+      expect(legitimacy.score - merits).toBe(clamp(50 + prosperity + safety + defense + food, 0, 100));
       // the same town's score before this unit: the stored score less this unit's term plus the law-1 term
       const before = clamp(50 + prosperity + todaySafety(label) + defense + food, 0, 100);
       expect(legitimacy.score, `${seed}: the score fell`).toBeGreaterThanOrEqual(before);

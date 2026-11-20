@@ -107,6 +107,17 @@ export const NEW_SETTLEMENT_FORTUNE_LAW_VERSION = DEFAULT_FORTUNE_LAW_VERSION;
  *   standing.safetyUsualRange   — each size's usual [low, high] band of that ladder (p10 to p90,
  *     hxe; U5-PROPOSAL section 3): inside it a label is worth 0, outside it its own points less
  *     those of the range's nearest band (FORTUNE-3 U5s, the chair's ruling of 15:58 UTC).
+ *   THE MERITS OF RULE (FORTUNE-3 U5a; U5-PROPOSAL sections 4, 5 and 10; the chair's condition 1 and its rulings of
+ *   2026-11-20 19:33 and 19:38 UTC: a merit claims an OUTCOME and reads only what every shared read serves; read by
+ *   `src/domain/fortune/fortuneMerits.js`, the one home of the predicates the birth and the page share):
+ *   standing.meritPoints          — the points one counted merit adds, only upward, only at Tolerated or better (the
+ *     gate is READ from `LEGITIMACY_CUTS.tolerated` by the predicates, never copied here).
+ *   standing.weatheredWithinYears — a catastrophe weathered within this many years (a generation) is a merit.
+ *   standing.endorsedMinReasons   — Endorsed never stands on fewer reasons than this (a reason: a merit, or a positive
+ *     term of the sum).
+ *   VOCABULARY, NOT TUNING (read, not chosen): standing.weatheredSeverity (the history's grade of a catastrophe) and
+ *   standing.rulerTroubleKinds (the tension types that concern the ruler). NO capture rung, no governing power's name,
+ *   kind or house, no card's trait: the chair barred each (the rung is DM-only; memberships ride per row by the veil).
  */
 export const FORTUNE_LAW_TUNING = Object.freeze({
   developmentFigure: 1,
@@ -135,6 +146,11 @@ export const FORTUNE_LAW_TUNING = Object.freeze({
       city: Object.freeze(['Unsafe', 'Moderate']),
       metropolis: Object.freeze(['Moderate', 'Moderate']),
     }),
+    meritPoints: 10,
+    weatheredWithinYears: 40,
+    endorsedMinReasons: 2,
+    weatheredSeverity: 'catastrophic',
+    rulerTroubleKinds: Object.freeze(['succession_crisis', 'corruption_scandal', 'tyranny', 'popular_uprising', 'legitimacy_crisis', 'leadership_vacuum']),
   }),
 });
 

@@ -84,7 +84,7 @@ function annotationBody(ev, relationship, suffix) {
     : '';
 
   if (relationship === 'unresolved') {
-    return `${name} (${ev.yearsAgo} years ago) left trouble that has never been put right: ${suffix}${effectClause}`;
+    return `${name} (${ev.yearsAgo} years ago) ${UNRESOLVED_LEGACY_WORDINGS[0]}: ${suffix}${effectClause}`;
   }
   if (relationship === 'recovery') {
     return `${name} (${ev.yearsAgo} years ago) hit the settlement hard, and it has since recovered: ${suffix}${effectClause}`;
@@ -299,3 +299,4 @@ export function deriveLegacyAnnotations(history, settlement) {
   }
   return result;
 }
+import { UNRESOLVED_LEGACY_WORDINGS } from '../data/legacyUnresolvedWordings.js'; export { UNRESOLVED_LEGACY_WORDINGS }; // FORTUNE U5a (condition 4): the unresolved line's ONE list (a data leaf, read by the fortune merits too), at the END so no line moves
