@@ -1,4 +1,4 @@
-# PAGE-12's hand-back: THE TROUBLE HALF (the eighth chair's seat; kept current at every push; last written 2026-11-21 23:21 UTC by `date -u`)
+# PAGE-12's hand-back: THE TROUBLE HALF (the eighth chair's seat; kept current at every push; last written 2026-11-21 23:36 UTC by `date -u`)
 
 A successor reads THIS, then the briefs it names (under `briefs/`), then `PAGE-10-HANDBACK.md` only where this file sends it.
 PAGE-12 integrates; builders build (the Agent tool, the seat's own tier); a diff is read once, at the merge.
@@ -8,14 +8,15 @@ PAGE-12 integrates; builders build (the Agent tool, the seat's own tier); a diff
 - THE WORKING LINE: `lane/join-2026-11-14` at a64619510 (point 86), already merged into the lane by PAGE-10 (6f84deba7).
 - MERGED (PAGE-10's, unproven at the tip until unit 1): causes 3411c9c83; first-paint pin afacca8a6; hooks 81076db2d; HOOKS-CURES A+B 12c211dc9; line a64619510 at 6f84deba7.
 - BUILT, UNMERGED: CAUSES-PARITY M 3a953c6d3 + B-wip 6a1120efd (`lane/page-10-2026-11-20-parity-wip`); HOOKS-CURES C-wip 1da4c7c56 (`lane/page-10-2026-11-20-cures-wip`).
-- IN FLIGHT: unit 1, `tests/lint` whole at cbbe87154.
-- NEXT: unit 2, the parity (brief `briefs/CAUSES-PARITY-2.md`).
+- UNIT 1 PROVEN: `tests/lint` whole at cbbe87154 GREEN, 220 of 220 files, 3271 of 3271 tests (23:35 UTC; log `/home/user/page12-logs/lint-tip.log`).
+- IN FLIGHT: unit 2, the parity builder (brief `briefs/CAUSES-PARITY-2.md`), worktree `/home/user/wt-parity12`, branch `lane/page-12-2026-11-21-parity` = M cherry-picked (f1b55a3ae) on 3f17bb3a8 + PAGE-10's arm uncommitted; B first; H waits for the chair's leave on the two vocabulary files (asked 23:35).
+- NEXT: read the parity diff once, red/green re-run, merge; ONE line to the chair; then unit 3 (cure C).
 
 ## 2. Units (the eighth chair's order, PAGE-12.txt)
 | # | unit | state | commit | next |
 |---|---|---|---|---|
-| 1 | PROVE THE TIP (`tests/lint` whole) | running | cbbe87154 | read by name |
-| 2 | THE PARITY (B, W, F + the fault families) | not dispatched | | brief CAUSES-PARITY-2 |
+| 1 | PROVE THE TIP (`tests/lint` whole) | GREEN 220/220, 3271/3271 | cbbe87154 | done |
+| 2 | THE PARITY (B, H the five house rows, W, F) | BUILDER OUT 23:3x | `-parity` from 3f17bb3a8 | read once, merge |
 | 3 | CURE C (the mixed key) | not dispatched | 1da4c7c56 wip | fresh builder from 13ba319e0 |
 | 4 | THE THEMES' ROWS | WAITS: PAGE-10's hand-back §2 row (3): built ONLY after the depth lane's themes unit is on the working line (the chair names the commit); at a64619510 `src/domain/hookThemes.js` is not yet re-keyed by `textKey` | draft 5a88385f7, ruling 636d5f68a | the chair's commit |
 | 5 | CLOSING MEASURE + OWNER'S PLAIN FILE | brief `briefs/CLOSE-MEASURE.md` | | after 2 and 3 |
