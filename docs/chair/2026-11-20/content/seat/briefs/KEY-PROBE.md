@@ -62,3 +62,44 @@ The precedent: the fortune lane met the same question and was ruled route (B), o
 Label each claim CONFIRMED (run) or PLAUSIBLE (read).
 
 Your final message: at most 200 words, the one-line answer first.
+
+## ADDENDUM: PLAY TIME (written 2026-11-21T23:53:50Z by SEAT-10, on the chair's word of 23:42Z)
+
+The same question, asked of play time instead of birth. Do it once and keep it small. Keep the same limits, the same no-git rule and the same mutex, and write into the same `keyprobe/` files, extended: `probe.mjs` gains `--mode=play`; `keyprobe.md` gains a "PLAY TIME" section; the JSON goes to `keyprobe-play.json`.
+
+**THE BOX BUDGET: about 30 minutes of compute.** Time 1 pair first and project the cost. If the whole would cost more than 30 minutes, STOP: write the projection and report it.
+
+### Pairs and the dial
+
+- **Pairs:** 5 pairs a size, for each of thorp, hamlet, village, town, city and metropolis: `{ settType, culture: 'germanic' }`, seeds `kpp-<size>-0..4`.
+- **Born:** each birth as at birth time, once with `_seatLawVersion: 1` and once with 2.
+- **The dial:** run everything with the contest dial AS IT SHIPS, LIT, in your scratch clone with the one edit `SEAT_CONTEST_LIT = true` (arm B's).
+
+### The play, the same for both laws of a pair
+
+(a) **THE PULSE.**
+- Run `simulateCampaignWorldPulse` for 6 one-month intervals with `commit: true`.
+- Build the campaign as `scripts/lib/observed-shape-corpus.mjs`'s pulse producer builds it (read that producer; give it the one save).
+- Use a fixed `now`, and carry `worldState`, `wizardNews` and `saves` forward between intervals, as the corpus does.
+
+(b) **THE DM'S CHANGE.**
+- Make one change of the seat on the resulting save, through `src/domain/events/mutate.js :: mutateSettlementChecked` with a `CHANGE_RULING_POWER` event.
+- The event's target is the first non-governing faction in roster order. Read `mutateWorld.js :: changeRulingPower` and `affordanceManifest.js :: rulingPowerTargets` for the event's shape.
+
+(c) **THE COUP PATH.**
+- On the save from (a), not on the one (b) changed, make one transfer by the coup's road.
+- That road is the `power_transfer` outcome (`src/domain/worldPulse/coup.js`) as `applyWorldPulse.js` applies it, with the winner the top contender (`rulingPowerCoup.js :: coupContenders`).
+- Use the narrowest real entry that applies that outcome to a save. Name it in the report, and say if you had to construct the outcome by hand.
+- If the pulse in (a) already fired a transfer, say so: it counts as the coup road only when it came by that path.
+
+### What to diff
+
+- For each pair and each step, take the key paths of the records under law 1 and law 2 and diff them, streamed, exactly as at birth.
+- The records are: the save after (a); the pulse result of each interval; the save after (b); the save after (c).
+- Then the readers step as before, for every path written under law 2 that law 1 never writes.
+
+### What to report
+
+- If such a path exists: name it, the step that writes it, and every reader (`file :: symbol`).
+- If none exists: one line.
+- Also: how many pairs ran each step, and how many transfers each road actually made under each law. A road that made 0 transfers was NOT measured: say so.
