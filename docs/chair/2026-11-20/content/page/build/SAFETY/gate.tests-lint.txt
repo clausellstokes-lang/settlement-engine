@@ -1,0 +1,42 @@
+
+EM-A1 ARM I-2 — the 12 declared pool ids:
+  faction.category
+  institution.class
+  institution.state
+  npc.role
+  npc.status
+  power.holder
+  tier
+  worldFact.culture
+  worldFact.monsterThreat
+  worldFact.resources
+  worldFact.stressors
+  worldFact.terrain
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/ledgerCitationIntegrity.test.js [ tests/lint/ledgerCitationIntegrity.test.js ]
+Error: Command failed: git -C /home/user/settlement-engine/.claude/worktrees/agent-a1dcf6cf52e96eb72 ls-tree -r --name-only -z refs/heads/review-fixes-2026-07-08 -- docs
+fatal: Not a valid object name refs/heads/review-fixes-2026-07-08
+
+ ❯ loadCorpusFromRef scripts/audit/ledger-citations.mjs:265:31
+    263|  */
+    264| export function loadCorpusFromRef(ref = DEFAULT_LEDGER_REF, repo = REP…
+    265|   const listing = execFileSync('git', ['-C', repo, 'ls-tree', '-r', '-…
+       |                               ^
+    266|     encoding: 'utf8',
+    267|     maxBuffer: 1024 * 1024 * 64,
+ ❯ resolveCorpus scripts/audit/ledger-citations.mjs:297:17
+ ❯ tests/lint/ledgerCitationIntegrity.test.js:150:42
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 219 passed (220)
+      Tests  3261 passed (3261)
+   Start at  14:16:24
+   Duration  1716.69s (transform 31.83s, setup 7.91s, import 1223.57s, tests 1745.59s, environment 25ms)
+
+[gate-tail] end:  14:45:01 up  3:50,  0 user,  load average: 2.24, 3.34, 6.00
+[gate-tail] full log: /tmp/gate-tail.13141.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

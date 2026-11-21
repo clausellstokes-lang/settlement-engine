@@ -1,0 +1,183 @@
+F6 RENDERED (60 towns, 10 a size)
+
+════ Daily Life (World/Daily Life)
+  thorp      lines mean 8.3 (min 8, max 11); words mean 33; distinct short labels 18: Food(10) Access(10) Culture(10) Secure(9) River(4) Road(4) Celtic(2) East Asian(2) Crossroads(2) Germanic(1) South Asian(1) Slavic(1) Deficit(1) Arabic(1) Active stress(1) Under Siege(1) Latin(1) Greek(1)
+  hamlet     lines mean 9.3 (min 8, max 11); words mean 39; distinct short labels 22: Food(10) Access(10) Culture(10) Secure(6) Active stress(5) Germanic(3) Crossroads(2) Road(2) Betrayed(2) Deficit — Active Famine(2) Famine(2) River(2) Pressured(2) Isolated(2) South Asian(2) Port(2) Greek(1) Arabic(1) Steppe(1) Celtic(1) Slavic(1) Disease(1)
+  village    lines mean 8.5 (min 8, max 11); words mean 32; distinct short labels 17: Food(10) Access(10) Culture(10) Secure(8) Isolated(4) East Asian(4) Norse(3) Slavic(2) Port(2) Road(2) Active stress(2) Pressured(2) Mesoamerican(1) Crossroads(1) Insurgency(1) River(1) Religious Crisis(1)
+  town       lines mean 8.7 (min 8, max 11); words mean 34; distinct short labels 16: Food(10) Access(10) Culture(10) Secure(7) Road(5) River(4) Norse(3) Active stress(3) Pressured(3) Arabic(2) Steppe(2) Germanic(2) Fractured(2) Mesoamerican(1) Port(1) Succession Void(1)
+  city       lines mean 8.4 (min 8, max 10); words mean 34; distinct short labels 17: Food(10) Access(10) Culture(10) Secure(8) Mesoamerican(4) Road(4) River(3) Crossroads(2) Active stress(2) Pressured(2) Greek(2) Celtic(2) Infiltrated(1) Occupied(1) Latin(1) Port(1) East Asian(1)
+  metropolis lines mean 8.6 (min 8, max 10); words mean 33; distinct short labels 17: Food(10) Access(10) Culture(10) Road(8) Secure(7) Active stress(3) Pressured(3) Celtic(2) Succession Void(2) River(2) Latin(2) Slavic(2) East Asian(1) Monster Threat(1) Germanic(1) Greek(1) Arabic(1)
+  SAMPLE hxd-thorp-0: Food ¶ Secure ¶ Access ¶ River ¶ Culture ¶ Celtic ¶ People here put things by, and can. That is the difference between this thorp and a poorer one. ¶ Generate Daily Life: Narrative refinement
+  SAMPLE hxd-village-0: Food ¶ Secure ¶ Access ¶ Isolated ¶ Culture ¶ Slavic ¶ Money is short in Dobroki, and most households spend what they earn as soon as it comes in. ¶ Generate Daily Life: Narrative refinement
+  SAMPLE hxd-city-0: Food ¶ Secure ¶ Access ¶ Crossroads ¶ Culture ¶ Mesoamerican ¶ Active stress ¶ Infiltrated ¶ Petenhuitz has money to spend, and spends it on the city's buildings and their upkeep. ¶ Generate Daily Life: Narrative refinement
+
+════ Outlook (Systems/Outlook)
+  thorp      lines mean 4.6 (min 3, max 15); words mean 39; distinct short labels 5: ✓ Viable(9) ✗ Not viable(1) 2 critical(1) Critical Issues (2)▲(1) Suggested fixes(1)
+  hamlet     lines mean 5.2 (min 3, max 9); words mean 51; distinct short labels 7: ✓ Viable(8) ✗ Not viable(2) 1 critical(2) Critical Issues (1)▲(2) Supply in isolation(2) Active Stress Effects (1)▲(1) Crisis Cutting the Food Supply(1)
+  village    lines mean 4.1 (min 3, max 6); words mean 44; distinct short labels 2: ✓ Viable(10) Supply in isolation(4)
+  town       lines mean 3.6 (min 3, max 4); words mean 37; distinct short labels 1: ✓ Viable(10)
+  city       lines mean 3.4 (min 3, max 6); words mean 32; distinct short labels 3: ✓ Viable(10) Active Stress Effects (1)▲(1) Crisis Adding Mouths to Feed(1)
+  metropolis lines mean 3.1 (min 3, max 4); words mean 30; distinct short labels 1: ✓ Viable(10)
+  SAMPLE hxd-thorp-0: ✓ Viable ¶ Rossleigh feeds itself and pays its own way. ¶ Judged at the first survey; not re-run since. ¶ A handful of things about this thorp cannot all be true at once, and everyone here has their own explanation.
+  SAMPLE hxd-village-0: ✓ Viable ¶ Dobroki gets through the year on its own land and trades, and goes without what they do not provide. ¶ Judged at the first survey; not re-run since. ¶ Supply in isolation ¶ People at Dobroki make do with what they have; a good year is enough and a bad one is lean.
+  SAMPLE hxd-city-0: ✓ Viable ¶ Petenhuitz can stand, but only while metals keep arriving and the routes that bring them stay open. ¶ Judged at the first survey; not re-run since.
+
+════ Magic (Systems/Magic)
+  thorp      lines mean 17.0 (min 17, max 17); words mean 61; distinct short labels 15: Magic(10) Medium(10) Envelope(10) Availability(10) Legality(10) Institutional control(10) Service cost(10) Risk(10) Religious acceptance(10) Roles(10) Reliance on magic(10) Economic role(10) Military role(10) Medical role(10) Infrastructure role(10)
+  hamlet     lines mean 17.0 (min 17, max 17); words mean 61; distinct short labels 15: Magic(10) Medium(10) Envelope(10) Availability(10) Legality(10) Institutional control(10) Service cost(10) Risk(10) Religious acceptance(10) Roles(10) Reliance on magic(10) Economic role(10) Military role(10) Medical role(10) Infrastructure role(10)
+  village    lines mean 17.0 (min 17, max 17); words mean 64; distinct short labels 15: Magic(10) Medium(10) Envelope(10) Availability(10) Legality(10) Institutional control(10) Service cost(10) Risk(10) Roles(10) Economic role(10) Military role(10) Medical role(10) Infrastructure role(10) Reliance on magic(9) Religious acceptance(7)
+  town       lines mean 17.0 (min 17, max 17); words mean 62; distinct short labels 15: Magic(10) Medium(10) Envelope(10) Availability(10) Legality(10) Institutional control(10) Service cost(10) Risk(10) Religious acceptance(10) Roles(10) Economic role(10) Military role(10) Medical role(10) Infrastructure role(10) Reliance on magic(9)
+  city       lines mean 17.2 (min 17, max 18); words mean 82; distinct short labels 15: Magic(10) Medium(10) Envelope(10) Availability(10) Legality(10) Institutional control(10) Service cost(10) Risk(10) Roles(10) Economic role(10) Military role(10) Medical role(10) Infrastructure role(10) Religious acceptance(5) Reliance on magic(2)
+  metropolis lines mean 18.2 (min 17, max 21); words mean 110; distinct short labels 14: Magic(10) Medium(10) Envelope(10) Availability(10) Legality(10) Institutional control(10) Service cost(10) Risk(10) Roles(10) Economic role(10) Military role(10) Medical role(10) Infrastructure role(10) Religious acceptance(1)
+  SAMPLE hxd-thorp-0: Magic ¶ Medium ¶ Envelope ¶ Availabilitymoderate ¶ Legalityregulated ¶ Institutional controlunregulated ¶ Service costcostly ¶ Riskmoderate ¶ Religious acceptanceindifferent ¶ Roles ¶ Reliance on magic: None ¶ Economic role: occasional ¶ Military role: absent ¶ Medical role: absent ¶ Infrastructure role: occasional ¶ Reliance on magic, as judged at the first survey ¶ The thorp would go on as it is if the arcane went away; nothing it lives by waits on a spell.
+  SAMPLE hxd-village-0: Magic ¶ Medium ¶ Envelope ¶ Availabilitylimited ¶ Legalityrestricted ¶ Institutional controlunregulated ¶ Service costcostly ¶ Riskmoderate ¶ Religious acceptancehostile ¶ Roles ¶ Reliance on magic: None ¶ Economic role: occasional ¶ Military role: absent ¶ Medical role: absent ¶ Infrastructure role: occasional ¶ Reliance on magic, as judged at the first survey ¶ Nothing structural at Dobroki depends on arcane work. What the village makes it makes with hands and ground, and would go on making without a practitioner in it.
+  SAMPLE hxd-city-0: Magic ¶ Medium ¶ Envelope ¶ Availabilitymoderate ¶ Legalityregulated ¶ Institutional controlunregulated ¶ Service costcostly ¶ Riskmoderate ¶ Religious acceptancewary ¶ Roles ¶ Reliance on magic: None ¶ Economic role: occasional ¶ Military role: absent ¶ Medical role: absent ¶ Infrastructure role: occasional ¶ Reliance on magic, as judged at the first survey ¶ The city would go on as it is if the arcane went away; nothing it lives by waits on a spell.
+
+
+F6 RECORD (300 towns): field | filled (of 300) by size | over the 60 rendered: items printed on THIS page / on ANOTHER page (where) / nowhere
+
+[Daily Life] deriveDailyLife().slots.food_culture (src/domain/dailyLife.js :109 slots, :570)
+   filled 300/300 (thor 50 haml 50 vill 50 town 50 city 50 metr 50); items in the 60: own page 0, other page 0 [], nowhere 60
+   e.g. "Hearty grain bread and turnip-and-onion stews dominate the table; meat appears at festivals and on the wealthier streets."
+
+[Daily Life] deriveDailyLife().slots.dawn_work (src/domain/dailyLife.js :109 slots, :570)
+   filled 300/300 (thor 50 haml 50 vill 50 town 50 city 50 metr 50); items in the 60: own page 0, other page 0 [], nowhere 60
+   e.g. "The walls claim the first hours: the watch musters thin at first light, and ordinary work waits until the rounds are walked."
+
+[Daily Life] deriveDailyLife().slots.gathering_places (src/domain/dailyLife.js :109 slots, :570)
+   filled 300/300 (thor 50 haml 50 vill 50 town 50 city 50 metr 50); items in the 60: own page 0, other page 0 [], nowhere 60
+   e.g. "People gather where they can: the well, the bridge, the open square."
+
+[Daily Life] deriveDailyLife().slots.child_warnings (src/domain/dailyLife.js :109 slots, :570)
+   filled 300/300 (thor 50 haml 50 vill 50 town 50 city 50 metr 50); items in the 60: own page 0, other page 0 [], nowhere 60
+   e.g. "Children are warned about crowds that gather quickly; the road past sundown; the empty stalls in the trade quarter."
+
+[Daily Life] deriveDailyLife().slots.commoner_resentments (src/domain/dailyLife.js :109 slots, :570)
+   filled 300/300 (thor 50 haml 50 vill 50 town 50 city 50 metr 50); items in the 60: own page 0, other page 0 [], nowhere 60
+   e.g. "Commoners voice the small grievances of any town: the gate fee, the rain on market day, the council's favorite tavern."
+
+[Daily Life] deriveDailyLife().slots.outsider_impressions (src/domain/dailyLife.js :109 slots, :570)
+   filled 300/300 (thor 50 haml 50 vill 50 town 50 city 50 metr 50); items in the 60: own page 0, other page 0 [], nowhere 60
+   e.g. "Outsiders notice Elder Council's mark is on every door that matters; civic stability at risk is the obvious unspoken weight; several civic services run short. Visitors no"
+
+[Daily Life] deriveDailyLife().slots.unspoken_topics (src/domain/dailyLife.js :109 slots, :570)
+   filled 300/300 (thor 50 haml 50 vill 50 town 50 city 50 metr 50); items in the 60: own page 0, other page 0 [], nowhere 60
+   e.g. "Locals will not openly discuss the matter referenced as "the wound"."
+
+[Daily Life] deriveDailyLife().slots.recent_changes (src/domain/dailyLife.js :109 slots, :570)
+   filled 300/300 (thor 50 haml 50 vill 50 town 50 city 50 metr 50); items in the 60: own page 0, other page 0 [], nowhere 60
+   e.g. "The Great Fire (19 years ago) is still being felt: A fire out of the houses nearest the river spread from roof to roof before anyone could bring it under control; civic s"
+
+[Daily Life] culturalIdentity.foodways
+   filled 300/300 (thor 50 haml 50 vill 50 town 50 city 50 metr 50); items in the 60: own page 0, other page 60 [["Systems/Economics",60]], nowhere 0
+   e.g. "What each holding grows goes to its own table; beyond that, what it puts on the table itself is the day's catch."
+
+[Daily Life] culturalIdentity.sacredLife
+   filled 300/300 (thor 50 haml 50 vill 50 town 50 city 50 metr 50); items in the 60: own page 0, other page 0 [], nowhere 60
+   e.g. "Ritual authority is distributed among formal sanctuaries, seasonal gatherings, and place-based customs."
+
+[Daily Life] culturalIdentity.builtForm
+   filled 300/300 (thor 50 haml 50 vill 50 town 50 city 50 metr 50); items in the 60: own page 0, other page 0 [], nowhere 60
+   e.g. "A dispersed settlement has grown inward around an assembly green, defended height, or sacred enclosure."
+
+[Daily Life] culturalIdentity.civicPattern
+   filled 300/300 (thor 50 haml 50 vill 50 town 50 city 50 metr 50); items in the 60: own page 0, other page 0 [], nowhere 60
+   e.g. "Kin groups, oath relationships, learned mediators, and an assembly divide political authority."
+
+[Daily Life] culturalIdentity.exchangePattern
+   filled 300/300 (thor 50 haml 50 vill 50 town 50 city 50 metr 50); items in the 60: own page 0, other page 0 [], nowhere 60
+   e.g. "Buying and selling go on beside tribute, fosterage, and reciprocal obligations between kin groups."
+
+[Daily Life] culturalNotes
+   filled 300/300 (thor 50 haml 50 vill 50 town 50 city 50 metr 50); items in the 60: own page 0, other page 0 [], nowhere 60
+   e.g. "Kinship and neighborhood obligations carry legal force, while poets, judges, and mediators preserve public memory. A dispersed settlement has grown inward around an assem"
+
+[Daily Life] economicState.safetyProfile.safetyDesc
+   filled 300/300 (thor 50 haml 50 vill 50 town 50 city 50 metr 50); items in the 60: own page 0, other page 60 [["Systems/Defense",60]], nowhere 0
+   e.g. "The neighbours keep an eye on one another, and what trouble there is, everyone soon hears of."
+
+[Daily Life] economicState.safetyProfile.crimeTypes[].desc
+   filled 158/300 (thor 11 haml 14 vill 9 town 28 city 46 metr 50); items in the 60: own page 0, other page 52 [["Systems/Defense",52]], nowhere 0
+   e.g. "Hunger-driven theft of food, livestock, and stored goods."
+
+[Daily Life] economicState.situationDesc
+   filled 300/300 (thor 50 haml 50 vill 50 town 50 city 50 metr 50); items in the 60: own page 0, other page 0 [], nowhere 60
+   e.g. "Trade proceeds at an ordinary pace for a settlement of this size."
+
+[Daily Life] spatialLayout.quarters[].desc
+   filled 294/300 (thor 44 haml 50 vill 50 town 50 city 50 metr 50); items in the 60: own page 0, other page 0 [], nowhere 220
+   e.g. "Houses of worship, cloisters, quiet streets with priests and pilgrims"
+
+[Daily Life] arrivalScene (text)
+   filled 300/300 (thor 50 haml 50 vill 50 town 50 city 50 metr 50); items in the 60: own page 0, other page 60 [["Summary/Overview",60]], nowhere 0
+   e.g. "Rossleigh runs along the water the way settlements do when water is the reason they exist: practical, a little chaotic at the waterfront, tidier as you move inland. Earth"
+
+[Outlook] economicViability.summary
+   filled 300/300 (thor 50 haml 50 vill 50 town 50 city 50 metr 50); items in the 60: own page 0, other page 0 [], nowhere 60
+   e.g. "✓ VIABLE: Settlement is economically self-sufficient and historically plausible."
+
+[Outlook] economicViability.issues[]
+   filled 35/300 (thor 8 haml 11 vill 5 town 7 city 3 metr 1); items in the 60: own page 6, other page 0 [], nowhere 0
+   e.g. "Uncovered Local Food Deficit"
+
+[Outlook] economicViability.warnings[]
+   filled 144/300 (thor 0 haml 0 vill 0 town 45 city 50 metr 49); items in the 60: own page 0, other page 0 [], nowhere 30
+   e.g. "Trade Dependencies"
+
+[Outlook] economicViability.dependencies[]
+   filled 167/300 (thor 0 haml 5 vill 30 town 32 city 50 metr 50); items in the 60: own page 0, other page 0 [], nowhere 81
+   e.g. "Food Import Requirement"
+
+[Outlook] economicViability.suggestions[]
+   filled 74/300 (thor 0 haml 8 vill 22 town 18 city 20 metr 6); items in the 60: own page 0, other page 0 [], nowhere 13
+   e.g. "Opportunity: process marshlands"
+
+[Outlook] economicViability.plotHooks[]
+   filled 119/300 (thor 8 haml 11 vill 12 town 25 city 29 metr 34); items in the 60: own page 0, other page 27 [["Summary/Plot Hooks",27]], nowhere 0
+   e.g. "The settlement is starving, and its hungriest steal what food they can find."
+
+[Outlook] structuralViolations[]
+   filled 0/300 (thor 0 haml 0 vill 0 town 0 city 0 metr 0); items in the 60: own page 0, other page 0 [], nowhere 0
+   e.g. ""
+
+[Outlook] structuralSuggestions[]
+   filled 0/300 (thor 0 haml 0 vill 0 town 0 city 0 metr 0); items in the 60: own page 0, other page 0 [], nowhere 0
+   e.g. ""
+
+[Outlook] coherenceNotes[]
+   filled 0/300 (thor 0 haml 0 vill 0 town 0 city 0 metr 0); items in the 60: own page 0, other page 0 [], nowhere 0
+   e.g. ""
+
+[Outlook] pressureSentence
+   filled 300/300 (thor 50 haml 50 vill 50 town 50 city 50 metr 50); items in the 60: own page 0, other page 59 [["Summary/Overview",59],["Systems/Power",20],["World/Relationships",16]], nowhere 1
+   e.g. "A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another."
+
+[Outlook] isolationSupport (applicable)
+   filled 25/300 (thor 7 haml 7 vill 11 town 0 city 0 metr 0); items in the 60: own page 0, other page 0 [], nowhere 0
+   e.g. "viable"
+
+[Magic] magicProfile.contributors[].reason (src/domain/magicProfile.js :404)
+   filled 300/300 (thor 50 haml 50 vill 50 town 50 city 50 metr 50); items in the 60: own page 0, other page 0 [], nowhere 405
+   e.g. "Magic level: medium."
+
+[Magic] magicReliance.practitioners (src/domain/magicReliance.js)
+   filled 93/300 (thor 0 haml 0 vill 1 town 3 city 39 metr 50); items in the 60: own page 49, other page 0 [], nowhere 0
+   e.g. "Hedge wizard"
+
+[Magic] magicReliance.dependents
+   filled 117/300 (thor 0 haml 0 vill 17 town 6 city 45 metr 49); items in the 60: own page 41, other page 17 [["Systems/Economics",17]], nowhere 0
+   e.g. "Fishing & Seafood"
+
+[Magic] defenseProfile.traditions (any true)
+   filled 112/300 (thor 0 haml 0 vill 2 town 12 city 48 metr 50); items in the 60: own page 0, other page 0 [], nowhere 0
+   e.g. "hasDruid"
+
+[Magic] NPCs who practise (role/title says mage, witch, priest-healer...)
+   filled 19/300 (thor 0 haml 0 vill 1 town 2 city 15 metr 1); items in the 60: own page 1, other page 0 [], nowhere 0
+   e.g. "Bera Finsson"
+
+[Magic] arcane institutions on the roster (category Magic/Arcane)
+   filled 93/300 (thor 0 haml 0 vill 1 town 3 city 39 metr 50); items in the 60: own page 48, other page 0 [], nowhere 0
+   e.g. "Hedge wizard"
+
+  dailyLife slot texts that are the module's generic fallback (contain "any town"/"the small grievances"): 63/300 commoner_resentments; distinct texts per slot over 300: food_culture 38 · dawn_work 4 · gathering_places 24 · child_warnings 20 · commoner_resentments 9 · outsider_impressions 91 · unspoken_topics 1 · recent_changes 241
