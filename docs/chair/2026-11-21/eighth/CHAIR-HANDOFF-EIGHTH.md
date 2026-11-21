@@ -119,6 +119,12 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   as claimed (one explained-writer row, the rung 45 to 46, three bookkeeping paths, no `src`); its proofs are running.
   (4) A CORRECTION TO COMMON-EIGHTH 7: "no test with a `GIT_*` variable" meant git's REPOSITORY variables; the cloud
   machine always sets eleven others (certificates, credentials, three config keys), which are not the hazard.
+- 2026-11-21 23:29 UTC · A SLIP OF MINE, CORRECTED: the base merge 66585d96a was committed and pushed with NO HOOK RUN, though its
+  message says "hooks on": a scratch worktree has no `.husky/_` (it is made by `npm ci`, untracked), so git found no
+  hook. Nothing was lost: the three lane gates were then run on it by hand: type ratchet 167 of 167, strict 1113 of
+  1113, eslint 0 errors. THE RULE FOR THE CHAIR'S SCRATCH WORKTREES: link `node_modules` AND `.husky/_` from
+  `/home/user/wt/line` before the first commit (both names are in the common `info/exclude`). SEAT-10 was told the base
+  is on origin (23:27) and takes it by a fast-forward; if its check refuses that, the lane is re-seated on the base.
 
 ## 4. The order of the lanes still to seat (after the first four), and what each waits on
 
