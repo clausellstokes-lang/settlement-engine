@@ -1,0 +1,31 @@
+# COHERENCE-VEIL — hand-back, part 32: the thirty-first seat (VEIL-31). Read with PART 30 (section 1, rulings 1-75: THE RULINGS IN FORCE; section 4: the pool; section 8: the list after R3) and PART 31 (the state at the stop). A successor needs this, PART 30 and the briefs alone.
+
+Seat: VEIL-31, a seat of the EIGHTH chair (session_01ACmDYY29VRchM87v1yhL9Q; send_message, Claude Code Remote MCP). Branch
+`lane/veil-31-2026-11-21`. Assignment: `lane/chair-2026-11-08 :: docs/chair/2026-11-21/eighth/prompts/VEIL-31.txt` (read at
+12efb6f5f) with `COMMON-EIGHTH.txt`. Seated 23:19 UTC 2026-11-21 (`date -u`) on 5818130c4 (= origin `lane/veil-30-2026-11-20`,
+verified by ls-remote).
+
+## 1. WHERE THE LANE STANDS (kept current at every push)
+- THE LANE: `lane/veil-31-2026-11-21` = 5818130c4 (VEIL-30's saved tip: 2437ffea0 + R3-TELL-3 merged cca6656a6 + R3-TELL-4
+  unit (i) merged 147eeb22f + brief R3-TELL-5 a3eec1e76 + PART 31) + this record. NOTHING MERGED BY VEIL-31.
+- BYTES at 5818130c4: 212 `1bfb961b165965f5b92cf7b55be844a12000d54ce954e08abbaf7c4f01b20d10`, rollback `8cbd7d1c…ded5b0`;
+  211 `eface6d0…0b01` / `ce8474ff…712f` unchanged.
+- A RED AT THE MERGED TIP (found 23:21 by make-instruments, `walker 1`): `tests/lint/rosterChoiceRegistry.walker.test.js` ARM D
+  "a BUILT row's symbols exist and each rule names its row id": `people.allegiance` is not named by
+  `public._gallery_veil_roster_choices` (`-- registry: people.allegiance`) nor by `galleryRosterChoices.js :: applyRosterChoices`
+  (`// registry: people.allegiance`). Cause: R3-TELL-4 unit (i) wrote the marker mid-sentence ("-- WOULD SERVE IT). registry:
+  people.allegiance."). Comment-only; it moves 212's sha256. Told the chair ~23:22; proposed as unit (ii)'s builder's first commit.
+- BRANCHES: `lane/veil-30-r3tell5-wip-2026-11-20` d251a2d55 (VEIL-30's builder: an unrun 71-line step-0 probe
+  `out/v30/tell5/measure/step0.probe.jsx`; nothing built).
+- IN FLIGHT: the pool and chain1 (section 3).
+- NEXT: chain1's `done.txt`; ONE line to the chair with GATE-1 / GATE-2 at the merge; then unit (ii) from `briefs/R3-TELL-5-BRIEF.md`.
+
+## 2. RULINGS SINCE PART 30 (numbered on from 75)
+(none yet)
+
+## 3. Log (every hour from `date -u`)
+- 23:19 seated; tip verified. Read CLAUDE.md, the standard, COMMON-EIGHTH, COMMON-RULES, VEIL-30, VEIL-29, PART 31, PART 30, brief R3-TELL-5.
+- 23:20 `/var/tmp/v18/out/v31/chain0.sh` (npm ci 0; ledger ref 0; make-instruments; pool.sh) launched; `after0.sh` runs
+  `/var/tmp/v18/out/v31/chain1.sh` (VEIL-30's chain1 re-pointed: M = this checkout; + the gates at 2437ffea0 on this pool, so
+  the "worse than" comparison is like for like) once the pool stands.
+- 23:21 make-instruments: check 0, walker 1 (section 1). 23:2x first message to the chair; then the walker red to the chair (that message said "23:23", written WITHOUT a `date -u` read: a slip; the clock read 23:22 after it).
