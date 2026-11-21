@@ -59,6 +59,26 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
 - E5 · RULED FOR THE TROUBLE LANE (asked of the seventh chair, not ruled): the rule-2 guard stays as arm 1d of
   `tests/generators/troubleHooksPools.test.js`; it does not move to `tests/lint` (rule 8 runs `tests/generators`
   whole for any lane that touches `src/generators` or `src/data`, and CI runs it always).
+- E6 · THE FOUR RULINGS THE SEATS ASKED OF THE SEVENTH CHAIR AND DID NOT GET (ruled 2026-11-21 23:21 UTC; each goes into its lane's
+  next prompt). (a) THE TWO LANDING LINES ARE READ. "PROSE 588967385": taken for landing as point 89 at the lane's tip
+  (docs only past that commit). Its four reds off the list are NAMED: `proseCorpusBytes` RAW and GZIP and
+  `proseComposed` A0b are the owner's size signings (the seventh chair's ruling of 20:49: red by name, raised by nobody;
+  economy 213,968 raw / 28,935 gzip; A0b 2,322 against 2,103) and join `ci/RED-AT-LINE.tsv` at the landing;
+  `tests/generators/selfVouchReceipt.test.js` soak1k-8 is a seed-keyed case whose premise the MATCHER unit moved: NOT
+  an owner's golden: it is THE STATE-SENTENCE LANE'S FIRST UNIT after the landing (re-keyed by cause, inside
+  WORDING-CURE), and until then it is on the list as owed by that lane. "DAILY b1a205d14": taken for landing as point 90
+  at the lane's tip (docs only past the code tip 5db0b6a84). (b) PEOPLE AND PLACE, ARM (u) of
+  `tests/generators/people/goalSentencesOnceInTown.test.js`: NEITHER re-recorded NOR left red for the close. The arm is
+  an allow-list against the d3937c3f8 fixture ("any other mover is named"): it gains ONE named mover, a holding whose own
+  receipt shows that F5-NARROW made its want follow its walked secret; the ten are counted in the arm by size as
+  measured; the fixture stays d3937c3f8's. If the record holds no mark that identifies the ten, the seat says what does
+  before it changes the arm. (c) DEPTH: the hook "A stranger has taken lodging nearby and is far too interested in their
+  old stories." hits the style law's struck phrase and is REWORDED BY THE CHAIR to "A new lodger nearby is far too
+  interested in their old stories." (its fold moves: the themes digest by its door, the answers fixture); ALL NINE of the
+  lane's own failures are cured on the lane BEFORE "DEPTH <commit>" (the fork census's A3e row investigated before its
+  register is re-taken). (d) THE TROUBLES LAW: its successor finishes K3 ITSELF where what is left is door runs and the
+  one stale comment (running a door is an integrator's act); the K3 branch is read whole once first. The lane stays
+  DARK and lands only on the owner's yes; it is seated when a seat is free, after the lanes that land without it.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
