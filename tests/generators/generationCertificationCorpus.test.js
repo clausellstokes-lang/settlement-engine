@@ -98,20 +98,14 @@ const ADVISORY_STATUS = new Map();
  * direction the ladder drives this list. */
 const ADVISORY_FAILING = Object.freeze([
   'certification-v1-criminal-crossroads-town-bracken',
-  'certification-v1-criminal-crossroads-town-ember',
   'certification-v1-frontier-hamlet-alder',
   'certification-v1-frontier-hamlet-bracken',
   'certification-v1-frontier-hamlet-cinder',
   'certification-v1-frontier-hamlet-dun',
   'certification-v1-frontier-hamlet-ember',
-  'certification-v1-isolated-arcane-town-dun',
   'certification-v1-magical-desert-village-alder',
-  'certification-v1-magical-desert-village-bracken',
-  'certification-v1-magical-desert-village-cinder',
   'certification-v1-magical-desert-village-dun',
   'certification-v1-magical-desert-village-ember',
-  'certification-v1-mercantile-seaport-town-alder',
-  'certification-v1-mercantile-seaport-town-ember',
   'certification-v1-plagued-martial-city-bracken',
   'certification-v1-religious-river-village-alder',
   'certification-v1-religious-river-village-bracken',
@@ -125,7 +119,6 @@ const ADVISORY_FAILING = Object.freeze([
   'population-25',
   'population-349',
   'population-350',
-  'population-87',
   'population-88',
 ]);
 
