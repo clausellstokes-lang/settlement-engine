@@ -14,14 +14,22 @@ verified by ls-remote).
   "a BUILT row's symbols exist and each rule names its row id": `people.allegiance` is not named by
   `public._gallery_veil_roster_choices` (`-- registry: people.allegiance`) nor by `galleryRosterChoices.js :: applyRosterChoices`
   (`// registry: people.allegiance`). Cause: R3-TELL-4 unit (i) wrote the marker mid-sentence ("-- WOULD SERVE IT). registry:
-  people.allegiance."). Comment-only; it moves 212's sha256. Told the chair ~23:22; proposed as unit (ii)'s builder's first commit.
+  people.allegiance."). Comment-only; it moves 212's sha256. Told the chair ~23:22; RULED 23:24 as proposed (ruling 77): unit (ii)'s builder's first commit.
 - BRANCHES: `lane/veil-30-r3tell5-wip-2026-11-20` d251a2d55 (VEIL-30's builder: an unrun 71-line step-0 probe
   `out/v30/tell5/measure/step0.probe.jsx`; nothing built).
 - IN FLIGHT: the pool and chain1 (section 3).
-- NEXT: chain1's `done.txt`; ONE line to the chair with GATE-1 / GATE-2 at the merge; then unit (ii) from `briefs/R3-TELL-5-BRIEF.md`.
+- NEXT: chain1's `done.txt`; `tests/lint` whole at the tip (ruling 77); ONE line to the chair with GATE-1 / GATE-2 at the merge; then unit (ii) from `briefs/R3-TELL-5-BRIEF.md`.
 
-## 2. RULINGS SINCE PART 30 (numbered on from 75)
-(none yet)
+## 2. RULINGS SINCE PART 30 (numbered on from 75; the eighth chair's; each vetoable by the owner)
+76. THE CHAIR, 23:18 UTC 2026-11-21: OPEN NO PULL REQUEST for the lane's branch or any builder's branch, whatever a session's
+    own setup suggests after a push (COMMON-RULES 11); the program's only pull request is the working line's draft 75, the
+    chair's. A push of the lane branch is transport only.
+77. THE CHAIR, 23:24 UTC (on the seat's proposal, RULED AS PUT): the registry's marker is the walker's literal form and is never
+    banked around. The unit (ii) builder's FIRST commit, ON ITS OWN, puts each `registry: people.allegiance` marker on a line of
+    its own in BOTH engines (212's `_gallery_veil_roster_choices`, the twin's `applyRosterChoices`); its receipt: ARM D red at
+    5818130c4, then green 11 of 11; nothing else in that commit; 212's new sha256 and the rollback's go into this file with the
+    cause. Then unit (ii) proper. FOR THE REST OF THE RUN: `tests/lint` WHOLE AT EVERY MERGE (this red rode in because the merge
+    was never walker-run). The like-for-like gates run at 2437ffea0 on the seat's own pool: kept.
 
 ## 3. Log (every hour from `date -u`)
 - 23:19 seated; tip verified. Read CLAUDE.md, the standard, COMMON-EIGHTH, COMMON-RULES, VEIL-30, VEIL-29, PART 31, PART 30, brief R3-TELL-5.
@@ -29,3 +37,4 @@ verified by ls-remote).
   `/var/tmp/v18/out/v31/chain1.sh` (VEIL-30's chain1 re-pointed: M = this checkout; + the gates at 2437ffea0 on this pool, so
   the "worse than" comparison is like for like) once the pool stands.
 - 23:21 make-instruments: check 0, walker 1 (section 1). 23:2x first message to the chair; then the walker red to the chair (that message said "23:23", written WITHOUT a `date -u` read: a slip; the clock read 23:22 after it).
+- 23:26 the chair's two messages read: rulings 76 and 77.
