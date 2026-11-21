@@ -124,7 +124,7 @@
     "sourceTwoSourceRows": 10,
     "modifierRows": 0,
     "declaredColumnRows": 861,
-    "tablePools": 51
+    "tablePools": 63
   },
   "rows": [
     {
@@ -55465,6 +55465,198 @@
       "undeclared": 0,
       "crisisScoped": false,
       "colour": true
+    },
+    {
+      "id": "safetyDescLines.TINY_MODERATE",
+      "module": "src/data/safetyDescLines.js",
+      "name": "TINY_MODERATE",
+      "drawKind": "H",
+      "drawSite": "safetyProfile.js :: generateSafetyProfile (Moderate, thorp or hamlet) → safetyDescSlot",
+      "lines": 16,
+      "declares": [],
+      "lineDeclares": {
+        "militia": 1,
+        "route: isolated": 1
+      },
+      "undeclared": 14,
+      "crisisScoped": false
+    },
+    {
+      "id": "safetyDescLines.MIXED_OPENING",
+      "module": "src/data/safetyDescLines.js",
+      "name": "MIXED_OPENING",
+      "drawKind": "H",
+      "drawSite": "safetyProfile.js :: generateSafetyProfile (Moderate, village and up) → safetyDescSlot",
+      "lines": 11,
+      "declares": [],
+      "lineDeclares": {
+        "market": 1,
+        "no crisis: threat": 3,
+        "tier: ≥ town": 1,
+        "tier: ≥ village": 1
+      },
+      "undeclared": 7,
+      "crisisScoped": false
+    },
+    {
+      "id": "safetyDescLines.MIXED_FORCE.garrison",
+      "module": "src/data/safetyDescLines.js",
+      "name": "MIXED_FORCE",
+      "drawKind": "H",
+      "drawSite": "safetyProfile.js :: generateSafetyProfile (Moderate, village and up, a garrison) → safetyDescSlot",
+      "lines": 10,
+      "declares": [],
+      "lineDeclares": {
+        "force walks by day": 1,
+        "garrison": 10,
+        "gate": 1,
+        "market": 1,
+        "tier: ≥ village": 7,
+        "watch": 1
+      },
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "id": "safetyDescLines.MIXED_FORCE.watch",
+      "module": "src/data/safetyDescLines.js",
+      "name": "MIXED_FORCE",
+      "drawKind": "H",
+      "drawSite": "safetyProfile.js :: generateSafetyProfile (Moderate, village and up, a watch) → safetyDescSlot",
+      "lines": 9,
+      "declares": [],
+      "lineDeclares": {
+        "force walks by day": 1,
+        "gate": 1,
+        "market": 1,
+        "tier: ≥ village": 7,
+        "watch": 9
+      },
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "id": "safetyDescLines.MIXED_FORCE.militia",
+      "module": "src/data/safetyDescLines.js",
+      "name": "MIXED_FORCE",
+      "drawKind": "H",
+      "drawSite": "safetyProfile.js :: generateSafetyProfile (Moderate, village and up, a militia) → safetyDescSlot",
+      "lines": 4,
+      "declares": [],
+      "lineDeclares": {
+        "militia": 4
+      },
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "id": "safetyDescLines.MIXED_FORCE.none",
+      "module": "src/data/safetyDescLines.js",
+      "name": "MIXED_FORCE",
+      "drawKind": "H",
+      "drawSite": "safetyProfile.js :: generateSafetyProfile (Moderate, village and up, no force) → safetyDescSlot",
+      "lines": 11,
+      "declares": [],
+      "lineDeclares": {
+        "market": 1,
+        "route: crossroads": 1,
+        "route: road": 1,
+        "tier: village": 1
+      },
+      "undeclared": 7,
+      "crisisScoped": false
+    },
+    {
+      "id": "safetyDescLines.MIXED_CORNERS",
+      "module": "src/data/safetyDescLines.js",
+      "name": "MIXED_CORNERS",
+      "drawKind": "H",
+      "drawSite": "safetyProfile.js :: generateSafetyProfile (Moderate, village and up) → safetyDescSlot",
+      "lines": 13,
+      "declares": [],
+      "lineDeclares": {
+        "tier: ≥ village": 2
+      },
+      "undeclared": 11,
+      "crisisScoped": false
+    },
+    {
+      "id": "safetyDescLines.MODERATE_WALLS",
+      "module": "src/data/safetyDescLines.js",
+      "name": "MODERATE_WALLS",
+      "drawKind": "H",
+      "drawSite": "safetyProfile.js :: generateSafetyProfile (Moderate, walls) → safetyDescSlot",
+      "lines": 9,
+      "declares": [],
+      "lineDeclares": {
+        "garrison": 1,
+        "gate": 2,
+        "guardPresence": 1,
+        "no palisade": 1,
+        "palisade": 2,
+        "walls": 5
+      },
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "id": "safetyDescLines.UNSAFE_OPENING",
+      "module": "src/data/safetyDescLines.js",
+      "name": "UNSAFE_OPENING",
+      "drawKind": "H",
+      "drawSite": "safetyProfile.js :: generateSafetyProfile (Unsafe, a garrison, no siege) → safetyDescSlot",
+      "lines": 4,
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 4,
+      "crisisScoped": false
+    },
+    {
+      "id": "safetyDescLines.UNSAFE_GARRISON",
+      "module": "src/data/safetyDescLines.js",
+      "name": "UNSAFE_GARRISON",
+      "drawKind": "H",
+      "drawSite": "safetyProfile.js :: generateSafetyProfile (Unsafe, a garrison, no siege) → safetyDescSlot",
+      "lines": 4,
+      "declares": [],
+      "lineDeclares": {
+        "garrison": 4,
+        "watch": 1
+      },
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "id": "safetyDescLines.UNSAFE_ADVICE",
+      "module": "src/data/safetyDescLines.js",
+      "name": "UNSAFE_ADVICE",
+      "drawKind": "H",
+      "drawSite": "safetyProfile.js :: generateSafetyProfile (Unsafe, a garrison, no siege) → safetyDescSlot",
+      "lines": 4,
+      "declares": [],
+      "lineDeclares": {
+        "market": 1,
+        "no crisis: siege": 3,
+        "no crisis: threat": 1
+      },
+      "undeclared": 0,
+      "crisisScoped": false
+    },
+    {
+      "id": "safetyDescLines.UNSAFE_WALLS",
+      "module": "src/data/safetyDescLines.js",
+      "name": "UNSAFE_WALLS",
+      "drawKind": "H",
+      "drawSite": "safetyProfile.js :: generateSafetyProfile (Unsafe, a garrison, no siege, walls) → safetyDescSlot",
+      "lines": 3,
+      "declares": [],
+      "lineDeclares": {
+        "gate": 1,
+        "guardPresence": 1,
+        "walls": 2
+      },
+      "undeclared": 0,
+      "crisisScoped": false
     }
   ],
   "modifiers": {

@@ -1,0 +1,6 @@
+catalogue rows read: 519; hideable among them: 39
+market                 answered by  32 catalogue rows; by a hideable one: 0
+institution: granary   answered by   3 catalogue rows; by a hideable one: 0
+institution: mill      answered by   4 catalogue rows; by a hideable one: 0
+institution: tavern    answered by  11 catalogue rows; by a hideable one: 0
+institution: smith     answered by   5 catalogue rows; by a hideable one: 0

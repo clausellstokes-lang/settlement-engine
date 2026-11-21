@@ -1,0 +1,84 @@
+## §A THE BRANCHES (share of 100 places a size; seeds hxd-<size>-0..99)
+branch | thorp | hamlet | village | town | city | metropolis
+medium | 67 | 62 | 68 | 89 | 89 | 85
+isolatedMedium | 9 | 13 | 11 | 0 | 0 | 0
+plague | 3 | 5 | 6 | 3 | 2 | 2
+fractured | 2 | 3 | 4 | 5 | 5 | 2
+low | 5 | 7 | 6 | 0 | 0 | 0
+indebted | 5 | 1 | 1 | 1 | 2 | 7
+famine | 6 | 5 | 1 | 1 | 0 | 0
+occupied | 2 | 3 | 1 | 1 | 1 | 0
+siege | 1 | 1 | 0 | 0 | 1 | 4
+isolatedLow | 0 | 0 | 2 | 0 | 0 | 0
+economy output (compound.economyOutput) at 70 or over, the high bands' door: 0/600
+twins printed (market-less twin of a market line), by size: thorp 15, hamlet 18, village 11, town 0, city 0, metropolis 0
+
+## BEFORE: top masked sentence by size (this run) vs the chair's census100-before.json
+thorp: 67/100 (67%) "Trade proceeds at an ordinary pace for a settlement of this size." · census topN 67, distinct 10 · this run distinct 10 · AGREES
+hamlet: 62/100 (62%) "Trade proceeds at an ordinary pace for a settlement of this size." · census topN 62, distinct 10 · this run distinct 10 · AGREES
+village: 68/100 (68%) "Trade proceeds at an ordinary pace for a settlement of this size." · census topN 68, distinct 10 · this run distinct 10 · AGREES
+town: 89/100 (89%) "Trade proceeds at an ordinary pace for a settlement of this size." · census topN 89, distinct 6 · this run distinct 6 · AGREES
+city: 89/100 (89%) "Trade proceeds at an ordinary pace for a settlement of this size." · census topN 89, distinct 6 · this run distinct 6 · AGREES
+metropolis: 85/100 (85%) "Trade proceeds at an ordinary pace for a settlement of this size." · census topN 85, distinct 5 · this run distinct 5 · AGREES
+
+## INSTRUMENT: 600/600 births identical (line, both lists, label) between the plain run and the captured run
+
+## §C IN SCOPE AT THE WRITER vs THE FINAL RECORD (600 births)
+generateEconomicState called twice (roster changed after the economy): 101/600; the last call's line is the stored line: 600/600
+config._seed present at the writer: 0/600
+exports at the writer != final: 0/600 · imports at the writer != final: 403/600 · label at the writer != final: 0/600
+  of the 460 medium-branch places: exports differ 0, imports differ 347
+  by size (exports / imports): thorp 0/1, hamlet 0/18, village 0/85, town 0/100, city 0/99, metropolis 0/100
+after economyReconcilePass != final: exports 0/600, imports 330/600
+after generateNarratives != final: exports 0/600, imports 0/600
+
+## §C FACTS AT HAND, medium-branch places (final record)
+thorp (67): exports 63 · imports 37 · both 37 · market 0 · guild 0 · routes road 32/river 20/port 8/crossroads 7 · distinct lead export 13 · distinct lead import 1 · record's lead export printed 61/63 · lead import printed 37/37
+hamlet (62): exports 60 · imports 62 · both 60 · market 5 · guild 3 · routes road 27/crossroads 15/river 13/port 7 · distinct lead export 16 · distinct lead import 5 · record's lead export printed 56/60 · lead import printed 62/62
+village (68): exports 68 · imports 68 · both 68 · market 19 · guild 18 · routes road 27/river 21/crossroads 12/port 8 · distinct lead export 20 · distinct lead import 9 · record's lead export printed 66/68 · lead import printed 58/68
+town (89): exports 89 · imports 89 · both 89 · market 89 · guild 89 · routes road 52/river 15/crossroads 13/port 9 · distinct lead export 24 · distinct lead import 14 · record's lead export printed 86/89 · lead import printed 89/89
+city (89): exports 89 · imports 89 · both 89 · market 89 · guild 89 · routes road 30/river 28/crossroads 17/port 14 · distinct lead export 25 · distinct lead import 17 · record's lead export printed 82/89 · lead import printed 89/89
+metropolis (85): exports 85 · imports 85 · both 85 · market 85 · guild 85 · routes road 46/river 21/port 10/crossroads 8 · distinct lead export 26 · distinct lead import 13 · record's lead export printed 81/85 · lead import printed 85/85
+
+## §E THE PROJECTION (the candidate composer, simulated on the same 600 births, masked as the census masks)
+thorp: before 67/100 "Trade proceeds at an ordinary pace for a settlemen…" → after 9/100 "The settlement feeds and supplies itself without outside trade, but it has little to spare" · distinct 10 → 50
+hamlet: before 62/100 "Trade proceeds at an ordinary pace for a settlemen…" → after 13/100 "The settlement feeds and supplies itself without outside trade, but it has little to spare" · distinct 10 → 54
+village: before 68/100 "Trade proceeds at an ordinary pace for a settlemen…" → after 11/100 "The settlement feeds and supplies itself without outside trade, but it has little to spare" · distinct 10 → 54
+town: before 89/100 "Trade proceeds at an ordinary pace for a settlemen…" → after 7/100 "Trade here is ordinary; the main thing it has to buy in is iron." · distinct 6 → 74
+city: before 89/100 "Trade proceeds at an ordinary pace for a settlemen…" → after 5/100 "Trading now means picking a way between rival powers that did not exist a year ago. Some m" · distinct 6 → 79
+metropolis: before 85/100 "Trade proceeds at an ordinary pace for a settlemen…" → after 7/100 "Much of what the settlement takes in goes on its debts before anything can be spent at hom" · distinct 5 → 69
+
+the ten commonest after-sentences in the worst size (hamlet):
+  13× The settlement feeds and supplies itself without outside trade, but it has little to spare and cannot get what it does not make.
+  8× Trade here is ordinary; the main thing it has to buy in is salt.
+  7× Commerce is sluggish; little is bought or sold and many crafts are in decline.
+  5× Food is short, and those with grain hold the power. What food is sold costs more than most people can pay, and those without grain are growing desperate.
+  5× Fear of the sickness and the quarantine keep people from trading, and everyday goods are hard to come by. Either trouble alone could be borne; together each makes the other worse.
+  3× Trading now means picking a way between rival powers that did not exist a year ago. Some merchants have taken sides. Trade between the sides goes on, but it is slower and dearer than it should be.
+  3× Trade here is ordinary; the main thing it has to buy in is incense and votive candles.
+  2× It sells raw wool and buys salt, and its trade goes on at an ordinary pace.
+  2× It sells healing waters and buys incense and votive candles, and its trade goes on at an ordinary pace.
+  2× It sends its salted fish out by sea, and trade keeps an ordinary pace for a place this size.
+
+the commonest COMPOSED line a size (share of the 100): thorp 5 ("Its trade is steady rather than busy, and it sends out mostl") · hamlet 8 ("Trade here is ordinary; the main thing it has to buy in is s") · village 5 ("Trade here is ordinary; the main thing it has to buy in is s") · town 7 ("Trade here is ordinary; the main thing it has to buy in is i") · city 3 ("It sends out milled flour and brings in precious metals, at ") · metropolis 4 ("Trade here is ordinary; the main thing it has to buy in is d")
+the stored line still canonical after the composer: 0/460
+
+composed lines opening with a TRADE_LINE_BANDS pattern: 0/460
+resolved by: argmax 289 · drawn 171
+wording use over the medium places (id:resolvedBy places): steady-sends:argmax 73 · out-in:argmax 44 · buys-in:argmax 43 · sells-buys:drawn 38 · sells-buys:argmax 36 · out-in:drawn 34 · route-road:argmax 27 · buys-in:drawn 26 · market-sends:argmax 23 · market-sends:drawn 23 · route-river:argmax 22 · steady-sends:drawn 20 · route-road:drawn 12 · route-crossroads:argmax 9 · route-river:drawn 8 · route-port:drawn 6 · route-port:argmax 5 · route-only-port:argmax 5 · route-crossroads:drawn 3 · route-only-crossroads:argmax 2 · route-only-road:drawn 1
+composed lines carrying a surplus word beside a record that grows less than it eats: 0
+medium places where the record holds a list the page prints empty (exports / imports): 5 / 0
+
+ten composed lines, one a size, for the eye:
+  thorp: It sends its healing waters out by river, and trade keeps an ordinary pace for a place this size.
+  thorp: Trade here is ordinary; the main thing it has to buy in is salt.
+  hamlet: It sends out coal and brings in salt, at the pace usual for a place this size.
+  hamlet: It sells raw wool and buys salt, and its trade goes on at an ordinary pace.
+  village: It sells sea salt and buys incense and votive candles, and its trade goes on at an ordinary pace.
+  village: It sends out river fish and brings in salt, at the pace usual for a place this size.
+  town: Trade here is ordinary; the main thing it has to buy in is grain.
+  town: Its trade is steady rather than busy, and it sends out mostly salted fish and smoked seafood.
+  city: It sells river fish and buys dressed stone, and its trade goes on at an ordinary pace.
+  city: Its trade is steady rather than busy, and it sends out mostly medicinal herbs and alchemical reagents.
+  metropolis: It sends its pine planks out by road, and trade keeps an ordinary pace for a place this size.
+  metropolis: Trade here is ordinary; the main thing it has to buy in is timber.
