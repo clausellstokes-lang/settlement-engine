@@ -1,0 +1,674 @@
+[gate-tail] start:  21:48:07 up  2:19,  0 user,  load average: 5.09, 4.80, 4.66 · cores: 4
+
+ RUN  v4.1.8 /home/user/settlement-engine/.claude/worktrees/agent-a0626ed37dea5cdc4
+
+
+[shift-register] 15 mechanisms, 4 named NOT mechanisms, measured at 709 pools / 2764 variants
+  variant-count-per-pool     integer+digest           3 — THIN-pool growth (car 9b), owner-gated per batch
+  face-count-per-variant     integer+integer+digest   1 — the REWRITE + FACES freeze (cars 8a-8n), one owner re-
+  vids                       digest                   none — a renumbering is REFUSED at the projector
+  pool-key-rename            digest                   none — a rename is a REPLACED cell for every town and has 
+  connective-list-length     map                      a declared row of its own — a longer list re-rolls every j
+  norm-bit                   integer+integer+integer+digest a declared row of its own — a longer list re-rolls every j
+  attach-set                 integer+digest           a declared row of its own — a longer list re-rolls every j
+  draw-formula               source                   a declared row of its own — a longer list re-rolls every j
+  passage-shape              source+source            1 — the REWRITE + FACES freeze, IF the sitting adopts a se
+  face-draw-key              source                   1 — the faces land with the rewrite
+  connective-draw-key        source                   with the first list longer than one phrase
+  comparator-and-band-rule   source+integer+integer   a declared row — a comparator change re-orders candidates 
+  fact-and-position-budget   map                      a declared row
+  registry-id                integer                  4 — TURNS (car 11), owner-gated per turn class
+  instance-key               integer                  2 — the list-position keys (car 10), owner-gated
+
+[re-index] REWRITE car 8a-1 over DRIFT — 525 configurations x 2 audiences, base 29ec62425
+  cells 73284
+  RE-INDEXED    43685  59.61 %   <- the one-time cost
+  UNCHANGED     29599  40.39 %
+  REPLACED          0  <- a FACT would have moved
+  WORDING-ONLY      0   ADDITIVE 0   ADDED 0   REMOVED 0
+  dm 21994 of 36660 · player 21691 of 36624
+  blocks touched 40 · untouched 0 · deepest DS-GEN-5 and DS-STR-1, both 100.00 per cent of their cells · shallowest DS-GEN-18, 0.47 per cent
+  node scripts/prose-manifest-cells.mjs --out <file> at each sha, then node scripts/prose-manifest-diff.mjs <base> <tip>
+
+[state-key] 68 STATE-KEY paragraphs read · 47 name a field their own header declares · 113 tokens · 20 AGREE with the branch grain and are transcribed · 18 name a field in a block the census recovered NOTHING for · 75 name a field the census does not read on a block it did resolve. Nothing is written: a transcription the census does not carry would move a census row.
+  DARK-BLOCK  DS-ECO-4 :: tag
+  DARK-BLOCK  DS-ECO-4 :: highlight
+  DARK-BLOCK  DS-ECO-5 :: entrepot
+  DARK-BLOCK  DS-ECO-5 :: dependency
+  DARK-BLOCK  DS-ECO-5 :: magicRecovery
+  DARK-BLOCK  DS-ECO-7 :: tallies
+  DARK-BLOCK  DS-ECO-7 :: catalog
+  DARK-BLOCK  DS-DEF-7 :: defense_readiness.band
+  DARK-BLOCK  DS-DEF-7 :: defense
+  DARK-BLOCK  DS-DEF-7 :: besiegingTargets
+  DARK-BLOCK  DS-DEF-10 :: DEFENSE_STRESS_STATUS
+  DARK-BLOCK  DS-WAR-4 :: aggressionPosture
+  DARK-BLOCK  DS-WAR-5 :: war_front
+  DARK-BLOCK  DS-POP-1 :: QUANTITY_BANDS
+  DARK-BLOCK  DS-POP-1 :: deficit01
+  DARK-BLOCK  DS-GEN-1 :: type
+  DARK-BLOCK  DS-GEN-1 :: tensions
+  DARK-BLOCK  DS-GEN-15 :: fabricRead
+  READS-OTHER DS-ECO-1 :: prosperity
+  READS-OTHER DS-ECO-1 :: tradeAccess
+  READS-OTHER DS-ECO-1 :: compound.economyOutput
+  READS-OTHER DS-ECO-1 :: economicComplexity
+  READS-OTHER DS-ECO-1 :: situationDesc
+  READS-OTHER DS-ECO-3 :: isTradeDependent
+  READS-OTHER DS-ECO-11 :: terrain
+  READS-OTHER DS-ECO-11 :: unexploited
+  READS-OTHER DS-ECO-11 :: partiallyExploited
+  READS-OTHER DS-ECO-11 :: fullyExploited
+  READS-OTHER DS-SUP-3 :: tier
+  READS-OTHER DS-POW-1 :: publicLegitimacy.label
+  READS-OTHER DS-POW-2 :: governingName
+  READS-OTHER DS-POW-3 :: ladderInstabilityOf
+  READS-OTHER DS-POW-5 :: economicBase
+  READS-OTHER DS-POW-5 :: governingName
+  READS-OTHER DS-POW-5 :: power
+  READS-OTHER DS-POW-7 :: strain
+  READS-OTHER DS-DEF-1 :: resourceAnalysis.terrain
+  READS-OTHER DS-DEF-1 :: resourceAnalysis.strategicValue
+  READS-OTHER DS-DEF-1 :: safetyProfile.guardEffectivenessDesc
+  READS-OTHER DS-DEF-2 :: config.monsterThreat
+  READS-OTHER DS-DEF-2 :: compound.inst
+  READS-OTHER DS-DEF-2 :: institutions.walls
+  READS-OTHER DS-DEF-4 :: capture
+  READS-OTHER DS-DEF-8 :: type
+  READS-OTHER DS-DEF-8 :: DEFENSE_STRESS_STATUS
+  READS-OTHER DS-DEF-8 :: stress.summary
+  READS-OTHER DS-DEF-8 :: stress.viabilityNote
+  READS-OTHER DS-DEF-8 :: summary
+  READS-OTHER DS-DEF-8 :: viabilityNote
+  READS-OTHER DS-DEF-9 :: activeChains[].magicNote
+  READS-OTHER DS-WAR-1 :: settlementWarStatus
+  READS-OTHER DS-WAR-2 :: complianceState
+  READS-OTHER DS-WAR-3 :: faith
+  READS-OTHER DS-STR-1 :: stress[].type
+  READS-OTHER DS-STR-2 :: counterforceAssessment
+  READS-OTHER DS-STR-2 :: synergyAssessment
+  READS-OTHER DS-CND-1 :: severityBand
+  READS-OTHER DS-FTH-3 :: standing
+  READS-OTHER DS-FTH-3 :: legitimacy
+  READS-OTHER DS-FTH-3 :: suppressed
+  READS-OTHER DS-FTH-3 :: deities[ref].covert
+  READS-OTHER DS-GEN-2 :: issue
+  READS-OTHER DS-GEN-2 :: stakes
+  READS-OTHER DS-GEN-3 :: readiness.label
+  READS-OTHER DS-GEN-3 :: foodSecurity.label
+  READS-OTHER DS-GEN-7 :: type
+  READS-OTHER DS-GEN-7 :: severity
+  READS-OTHER DS-GEN-8 :: yearsAgo
+  READS-OTHER DS-GEN-8 :: ancientRuin.yearsAgo
+  READS-OTHER DS-REL-1 :: relationshipType
+  READS-OTHER DS-REL-2 :: flagDriven
+  READS-OTHER DS-GEN-9 :: historicalEvents[].type
+  READS-OTHER DS-GEN-9 :: severity
+  READS-OTHER DS-GEN-9 :: major
+  READS-OTHER DS-GEN-9 :: anchored
+  READS-OTHER DS-GEN-9 :: founding
+  READS-OTHER DS-GEN-9 :: age
+  READS-OTHER DS-GEN-9 :: founding.reason
+  READS-OTHER DS-GEN-9 :: founding.initialChallenge
+  READS-OTHER DS-GEN-9 :: history
+  READS-OTHER DS-GEN-16 :: lastingEffects
+  READS-OTHER DS-GEN-16 :: type
+  READS-OTHER DS-GEN-16 :: anchored
+  READS-OTHER DS-GEN-17 :: hasCourtSystem
+  READS-OTHER DS-GEN-17 :: hasPrison
+  READS-OTHER DS-GEN-17 :: hasNavy
+  READS-OTHER DS-GEN-17 :: hasMagicInst
+  READS-OTHER DS-GEN-17 :: hasGranary
+  READS-OTHER DS-GEN-17 :: hasHospital
+  READS-OTHER DS-FTH-4 :: tenure
+  READS-OTHER DS-FTH-4 :: compound.inst.hasChurch
+  READS-OTHER DS-FTH-4 :: temple
+  READS-OTHER DS-FTH-4 :: standing
+ ❯ tests/property/generatorGoldenMaster.test.js (3 tests | 1 failed) 64679ms
+     × every config produces byte-identical output to the golden master 64669ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/property/generatorGoldenMaster.test.js > generator golden master (cross-build output stability) > every config produces byte-identical output to the golden master
+AssertionError: expected [ …(521) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "thorp|germanic|plains|road|civilized|golden-master-v3",
++   "thorp|germanic|hills|road|civilized|golden-master-v3",
++   "thorp|germanic|forest|isolated|civilized|golden-master-v3",
++   "thorp|germanic|riverside|river|civilized|golden-master-v3",
++   "thorp|germanic|coastal|port|civilized|golden-master-v3",
++   "thorp|germanic|mountain|road|civilized|golden-master-v3",
++   "thorp|germanic|desert|road|civilized|golden-master-v3",
++   "thorp|latin|plains|road|civilized|golden-master-v3",
++   "thorp|latin|hills|road|civilized|golden-master-v3",
++   "thorp|latin|riverside|river|civilized|golden-master-v3",
++   "thorp|latin|coastal|port|civilized|golden-master-v3",
++   "thorp|latin|mountain|road|civilized|golden-master-v3",
++   "thorp|latin|desert|road|civilized|golden-master-v3",
++   "thorp|celtic|plains|road|civilized|golden-master-v3",
++   "thorp|celtic|hills|road|civilized|golden-master-v3",
++   "thorp|celtic|forest|isolated|civilized|golden-master-v3",
++   "thorp|celtic|riverside|river|civilized|golden-master-v3",
++   "thorp|celtic|coastal|port|civilized|golden-master-v3",
++   "thorp|celtic|mountain|road|civilized|golden-master-v3",
++   "thorp|celtic|desert|road|civilized|golden-master-v3",
++   "thorp|arabic|plains|road|civilized|golden-master-v3",
++   "thorp|arabic|hills|road|civilized|golden-master-v3",
++   "thorp|arabic|forest|isolated|civilized|golden-master-v3",
++   "thorp|arabic|riverside|river|civilized|golden-master-v3",
++   "thorp|arabic|coastal|port|civilized|golden-master-v3",
++   "thorp|arabic|mountain|road|civilized|golden-master-v3",
++   "thorp|arabic|desert|road|civilized|golden-master-v3",
++   "thorp|norse|plains|road|civilized|golden-master-v3",
++   "thorp|norse|hills|road|civilized|golden-master-v3",
++   "thorp|norse|forest|isolated|civilized|golden-master-v3",
++   "thorp|norse|riverside|river|civilized|golden-master-v3",
++   "thorp|norse|coastal|port|civilized|golden-master-v3",
++   "thorp|norse|mountain|road|civilized|golden-master-v3",
++   "thorp|norse|desert|road|civilized|golden-master-v3",
++   "thorp|slavic|plains|road|civilized|golden-master-v3",
++   "thorp|slavic|hills|road|civilized|golden-master-v3",
++   "thorp|slavic|forest|isolated|civilized|golden-master-v3",
++   "thorp|slavic|riverside|river|civilized|golden-master-v3",
++   "thorp|slavic|coastal|port|civilized|golden-master-v3",
++   "thorp|slavic|mountain|road|civilized|golden-master-v3",
++   "thorp|slavic|desert|road|civilized|golden-master-v3",
++   "thorp|east_asian|plains|road|civilized|golden-master-v3",
++   "thorp|east_asian|hills|road|civilized|golden-master-v3",
++   "thorp|east_asian|forest|isolated|civilized|golden-master-v3",
++   "thorp|east_asian|riverside|river|civilized|golden-master-v3",
++   "thorp|east_asian|coastal|port|civilized|golden-master-v3",
++   "thorp|east_asian|mountain|road|civilized|golden-master-v3",
++   "thorp|east_asian|desert|road|civilized|golden-master-v3",
++   "thorp|mesoamerican|plains|road|civilized|golden-master-v3",
++   "thorp|mesoamerican|hills|road|civilized|golden-master-v3",
++   "thorp|mesoamerican|riverside|river|civilized|golden-master-v3",
++   "thorp|mesoamerican|coastal|port|civilized|golden-master-v3",
++   "thorp|mesoamerican|mountain|road|civilized|golden-master-v3",
++   "thorp|mesoamerican|desert|road|civilized|golden-master-v3",
++   "thorp|south_asian|plains|road|civilized|golden-master-v3",
++   "thorp|south_asian|hills|road|civilized|golden-master-v3",
++   "thorp|south_asian|forest|isolated|civilized|golden-master-v3",
++   "thorp|south_asian|riverside|river|civilized|golden-master-v3",
++   "thorp|south_asian|coastal|port|civilized|golden-master-v3",
++   "thorp|south_asian|mountain|road|civilized|golden-master-v3",
++   "thorp|south_asian|desert|road|civilized|golden-master-v3",
++   "thorp|steppe|plains|road|civilized|golden-master-v3",
++   "thorp|steppe|hills|road|civilized|golden-master-v3",
++   "thorp|steppe|riverside|river|civilized|golden-master-v3",
++   "thorp|steppe|coastal|port|civilized|golden-master-v3",
++   "thorp|steppe|mountain|road|civilized|golden-master-v3",
++   "thorp|steppe|desert|road|civilized|golden-master-v3",
++   "thorp|greek|plains|road|civilized|golden-master-v3",
++   "thorp|greek|hills|road|civilized|golden-master-v3",
++   "thorp|greek|forest|isolated|civilized|golden-master-v3",
++   "thorp|greek|riverside|river|civilized|golden-master-v3",
++   "thorp|greek|coastal|port|civilized|golden-master-v3",
++   "thorp|greek|mountain|road|civilized|golden-master-v3",
++   "thorp|greek|desert|road|civilized|golden-master-v3",
++   "thorp|mediterranean|plains|road|civilized|golden-master-v3",
++   "thorp|mediterranean|hills|road|civilized|golden-master-v3",
++   "thorp|mediterranean|riverside|river|civilized|golden-master-v3",
++   "thorp|mediterranean|coastal|port|civilized|golden-master-v3",
++   "thorp|mediterranean|mountain|road|civilized|golden-master-v3",
++   "thorp|mediterranean|desert|road|civilized|golden-master-v3",
++   "hamlet|germanic|plains|road|civilized|golden-master-v3",
++   "hamlet|germanic|hills|road|civilized|golden-master-v3",
++   "hamlet|germanic|forest|isolated|civilized|golden-master-v3",
++   "hamlet|germanic|riverside|river|civilized|golden-master-v3",
++   "hamlet|germanic|coastal|port|civilized|golden-master-v3",
++   "hamlet|germanic|mountain|road|civilized|golden-master-v3",
++   "hamlet|germanic|desert|road|civilized|golden-master-v3",
++   "hamlet|latin|plains|road|civilized|golden-master-v3",
++   "hamlet|latin|hills|road|civilized|golden-master-v3",
++   "hamlet|latin|forest|isolated|civilized|golden-master-v3",
++   "hamlet|latin|riverside|river|civilized|golden-master-v3",
++   "hamlet|latin|coastal|port|civilized|golden-master-v3",
++   "hamlet|latin|mountain|road|civilized|golden-master-v3",
++   "hamlet|latin|desert|road|civilized|golden-master-v3",
++   "hamlet|celtic|plains|road|civilized|golden-master-v3",
++   "hamlet|celtic|hills|road|civilized|golden-master-v3",
++   "hamlet|celtic|forest|isolated|civilized|golden-master-v3",
++   "hamlet|celtic|riverside|river|civilized|golden-master-v3",
++   "hamlet|celtic|coastal|port|civilized|golden-master-v3",
++   "hamlet|celtic|mountain|road|civilized|golden-master-v3",
++   "hamlet|celtic|desert|road|civilized|golden-master-v3",
++   "hamlet|arabic|plains|road|civilized|golden-master-v3",
++   "hamlet|arabic|hills|road|civilized|golden-master-v3",
++   "hamlet|arabic|forest|isolated|civilized|golden-master-v3",
++   "hamlet|arabic|riverside|river|civilized|golden-master-v3",
++   "hamlet|arabic|coastal|port|civilized|golden-master-v3",
++   "hamlet|arabic|mountain|road|civilized|golden-master-v3",
++   "hamlet|arabic|desert|road|civilized|golden-master-v3",
++   "hamlet|norse|plains|road|civilized|golden-master-v3",
++   "hamlet|norse|hills|road|civilized|golden-master-v3",
++   "hamlet|norse|forest|isolated|civilized|golden-master-v3",
++   "hamlet|norse|riverside|river|civilized|golden-master-v3",
++   "hamlet|norse|coastal|port|civilized|golden-master-v3",
++   "hamlet|norse|mountain|road|civilized|golden-master-v3",
++   "hamlet|norse|desert|road|civilized|golden-master-v3",
++   "hamlet|slavic|plains|road|civilized|golden-master-v3",
++   "hamlet|slavic|hills|road|civilized|golden-master-v3",
++   "hamlet|slavic|forest|isolated|civilized|golden-master-v3",
++   "hamlet|slavic|riverside|river|civilized|golden-master-v3",
++   "hamlet|slavic|coastal|port|civilized|golden-master-v3",
++   "hamlet|slavic|mountain|road|civilized|golden-master-v3",
++   "hamlet|slavic|desert|road|civilized|golden-master-v3",
++   "hamlet|east_asian|plains|road|civilized|golden-master-v3",
++   "hamlet|east_asian|hills|road|civilized|golden-master-v3",
++   "hamlet|east_asian|forest|isolated|civilized|golden-master-v3",
++   "hamlet|east_asian|riverside|river|civilized|golden-master-v3",
++   "hamlet|east_asian|coastal|port|civilized|golden-master-v3",
++   "hamlet|east_asian|mountain|road|civilized|golden-master-v3",
++   "hamlet|east_asian|desert|road|civilized|golden-master-v3",
++   "hamlet|mesoamerican|plains|road|civilized|golden-master-v3",
++   "hamlet|mesoamerican|hills|road|civilized|golden-master-v3",
++   "hamlet|mesoamerican|forest|isolated|civilized|golden-master-v3",
++   "hamlet|mesoamerican|riverside|river|civilized|golden-master-v3",
++   "hamlet|mesoamerican|coastal|port|civilized|golden-master-v3",
++   "hamlet|mesoamerican|mountain|road|civilized|golden-master-v3",
++   "hamlet|mesoamerican|desert|road|civilized|golden-master-v3",
++   "hamlet|south_asian|plains|road|civilized|golden-master-v3",
++   "hamlet|south_asian|hills|road|civilized|golden-master-v3",
++   "hamlet|south_asian|forest|isolated|civilized|golden-master-v3",
++   "hamlet|south_asian|riverside|river|civilized|golden-master-v3",
++   "hamlet|south_asian|coastal|port|civilized|golden-master-v3",
++   "hamlet|south_asian|mountain|road|civilized|golden-master-v3",
++   "hamlet|south_asian|desert|road|civilized|golden-master-v3",
++   "hamlet|steppe|plains|road|civilized|golden-master-v3",
++   "hamlet|steppe|hills|road|civilized|golden-master-v3",
++   "hamlet|steppe|forest|isolated|civilized|golden-master-v3",
++   "hamlet|steppe|riverside|river|civilized|golden-master-v3",
++   "hamlet|steppe|coastal|port|civilized|golden-master-v3",
++   "hamlet|steppe|mountain|road|civilized|golden-master-v3",
++   "hamlet|steppe|desert|road|civilized|golden-master-v3",
++   "hamlet|greek|plains|road|civilized|golden-master-v3",
++   "hamlet|greek|hills|road|civilized|golden-master-v3",
++   "hamlet|greek|forest|isolated|civilized|golden-master-v3",
++   "hamlet|greek|riverside|river|civilized|golden-master-v3",
++   "hamlet|greek|coastal|port|civilized|golden-master-v3",
++   "hamlet|greek|mountain|road|civilized|golden-master-v3",
++   "hamlet|greek|desert|road|civilized|golden-master-v3",
++   "hamlet|mediterranean|plains|road|civilized|golden-master-v3",
++   "hamlet|mediterranean|hills|road|civilized|golden-master-v3",
++   "hamlet|mediterranean|forest|isolated|civilized|golden-master-v3",
++   "hamlet|mediterranean|riverside|river|civilized|golden-master-v3",
++   "hamlet|mediterranean|coastal|port|civilized|golden-master-v3",
++   "hamlet|mediterranean|mountain|road|civilized|golden-master-v3",
++   "hamlet|mediterranean|desert|road|civilized|golden-master-v3",
++   "village|germanic|plains|road|civilized|golden-master-v3",
++   "village|germanic|hills|road|civilized|golden-master-v3",
++   "village|germanic|forest|isolated|civilized|golden-master-v3",
++   "village|germanic|riverside|river|civilized|golden-master-v3",
++   "village|germanic|coastal|port|civilized|golden-master-v3",
++   "village|germanic|mountain|road|civilized|golden-master-v3",
++   "village|germanic|desert|road|civilized|golden-master-v3",
++   "village|latin|plains|road|civilized|golden-master-v3",
++   "village|latin|hills|road|civilized|golden-master-v3",
++   "village|latin|forest|isolated|civilized|golden-master-v3",
++   "village|latin|riverside|river|civilized|golden-master-v3",
++   "village|latin|coastal|port|civilized|golden-master-v3",
++   "village|latin|mountain|road|civilized|golden-master-v3",
++   "village|latin|desert|road|civilized|golden-master-v3",
++   "village|celtic|plains|road|civilized|golden-master-v3",
++   "village|celtic|hills|road|civilized|golden-master-v3",
++   "village|celtic|forest|isolated|civilized|golden-master-v3",
++   "village|celtic|riverside|river|civilized|golden-master-v3",
++   "village|celtic|coastal|port|civilized|golden-master-v3",
++   "village|celtic|mountain|road|civilized|golden-master-v3",
++   "village|celtic|desert|road|civilized|golden-master-v3",
++   "village|arabic|plains|road|civilized|golden-master-v3",
++   "village|arabic|hills|road|civilized|golden-master-v3",
++   "village|arabic|forest|isolated|civilized|golden-master-v3",
++   "village|arabic|riverside|river|civilized|golden-master-v3",
++   "village|arabic|coastal|port|civilized|golden-master-v3",
++   "village|arabic|mountain|road|civilized|golden-master-v3",
++   "village|arabic|desert|road|civilized|golden-master-v3",
++   "village|norse|plains|road|civilized|golden-master-v3",
++   "village|norse|hills|road|civilized|golden-master-v3",
++   "village|norse|forest|isolated|civilized|golden-master-v3",
++   "village|norse|riverside|river|civilized|golden-master-v3",
++   "village|norse|coastal|port|civilized|golden-master-v3",
++   "village|norse|mountain|road|civilized|golden-master-v3",
++   "village|norse|desert|road|civilized|golden-master-v3",
++   "village|slavic|plains|road|civilized|golden-master-v3",
++   "village|slavic|hills|road|civilized|golden-master-v3",
++   "village|slavic|forest|isolated|civilized|golden-master-v3",
++   "village|slavic|riverside|river|civilized|golden-master-v3",
++   "village|slavic|coastal|port|civilized|golden-master-v3",
++   "village|slavic|mountain|road|civilized|golden-master-v3",
++   "village|slavic|desert|road|civilized|golden-master-v3",
++   "village|east_asian|plains|road|civilized|golden-master-v3",
++   "village|east_asian|hills|road|civilized|golden-master-v3",
++   "village|east_asian|forest|isolated|civilized|golden-master-v3",
++   "village|east_asian|riverside|river|civilized|golden-master-v3",
++   "village|east_asian|coastal|port|civilized|golden-master-v3",
++   "village|east_asian|mountain|road|civilized|golden-master-v3",
++   "village|east_asian|desert|road|civilized|golden-master-v3",
++   "village|mesoamerican|plains|road|civilized|golden-master-v3",
++   "village|mesoamerican|hills|road|civilized|golden-master-v3",
++   "village|mesoamerican|forest|isolated|civilized|golden-master-v3",
++   "village|mesoamerican|riverside|river|civilized|golden-master-v3",
++   "village|mesoamerican|coastal|port|civilized|golden-master-v3",
++   "village|mesoamerican|mountain|road|civilized|golden-master-v3",
++   "village|mesoamerican|desert|road|civilized|golden-master-v3",
++   "village|south_asian|plains|road|civilized|golden-master-v3",
++   "village|south_asian|hills|road|civilized|golden-master-v3",
++   "village|south_asian|forest|isolated|civilized|golden-master-v3",
++   "village|south_asian|riverside|river|civilized|golden-master-v3",
++   "village|south_asian|coastal|port|civilized|golden-master-v3",
++   "village|south_asian|mountain|road|civilized|golden-master-v3",
++   "village|south_asian|desert|road|civilized|golden-master-v3",
++   "village|steppe|plains|road|civilized|golden-master-v3",
++   "village|steppe|hills|road|civilized|golden-master-v3",
++   "village|steppe|forest|isolated|civilized|golden-master-v3",
++   "village|steppe|riverside|river|civilized|golden-master-v3",
++   "village|steppe|coastal|port|civilized|golden-master-v3",
++   "village|steppe|mountain|road|civilized|golden-master-v3",
++   "village|steppe|desert|road|civilized|golden-master-v3",
++   "village|greek|plains|road|civilized|golden-master-v3",
++   "village|greek|hills|road|civilized|golden-master-v3",
++   "village|greek|forest|isolated|civilized|golden-master-v3",
++   "village|greek|riverside|river|civilized|golden-master-v3",
++   "village|greek|coastal|port|civilized|golden-master-v3",
++   "village|greek|mountain|road|civilized|golden-master-v3",
++   "village|greek|desert|road|civilized|golden-master-v3",
++   "village|mediterranean|plains|road|civilized|golden-master-v3",
++   "village|mediterranean|hills|road|civilized|golden-master-v3",
++   "village|mediterranean|forest|isolated|civilized|golden-master-v3",
++   "village|mediterranean|riverside|river|civilized|golden-master-v3",
++   "village|mediterranean|coastal|port|civilized|golden-master-v3",
++   "village|mediterranean|mountain|road|civilized|golden-master-v3",
++   "village|mediterranean|desert|road|civilized|golden-master-v3",
++   "town|germanic|plains|road|civilized|golden-master-v3",
++   "town|germanic|hills|road|civilized|golden-master-v3",
++   "town|germanic|forest|isolated|civilized|golden-master-v3",
++   "town|germanic|riverside|river|civilized|golden-master-v3",
++   "town|germanic|coastal|port|civilized|golden-master-v3",
++   "town|germanic|mountain|road|civilized|golden-master-v3",
++   "town|germanic|desert|road|civilized|golden-master-v3",
++   "town|latin|plains|road|civilized|golden-master-v3",
++   "town|latin|hills|road|civilized|golden-master-v3",
++   "town|latin|forest|isolated|civilized|golden-master-v3",
++   "town|latin|riverside|river|civilized|golden-master-v3",
++   "town|latin|coastal|port|civilized|golden-master-v3",
++   "town|latin|mountain|road|civilized|golden-master-v3",
++   "town|latin|desert|road|civilized|golden-master-v3",
++   "town|celtic|plains|road|civilized|golden-master-v3",
++   "town|celtic|hills|road|civilized|golden-master-v3",
++   "town|celtic|forest|isolated|civilized|golden-master-v3",
++   "town|celtic|riverside|river|civilized|golden-master-v3",
++   "town|celtic|coastal|port|civilized|golden-master-v3",
++   "town|celtic|mountain|road|civilized|golden-master-v3",
++   "town|celtic|desert|road|civilized|golden-master-v3",
++   "town|arabic|plains|road|civilized|golden-master-v3",
++   "town|arabic|hills|road|civilized|golden-master-v3",
++   "town|arabic|forest|isolated|civilized|golden-master-v3",
++   "town|arabic|riverside|river|civilized|golden-master-v3",
++   "town|arabic|coastal|port|civilized|golden-master-v3",
++   "town|arabic|mountain|road|civilized|golden-master-v3",
++   "town|arabic|desert|road|civilized|golden-master-v3",
++   "town|norse|plains|road|civilized|golden-master-v3",
++   "town|norse|hills|road|civilized|golden-master-v3",
++   "town|norse|forest|isolated|civilized|golden-master-v3",
++   "town|norse|riverside|river|civilized|golden-master-v3",
++   "town|norse|coastal|port|civilized|golden-master-v3",
++   "town|norse|mountain|road|civilized|golden-master-v3",
++   "town|norse|desert|road|civilized|golden-master-v3",
++   "town|slavic|plains|road|civilized|golden-master-v3",
++   "town|slavic|hills|road|civilized|golden-master-v3",
++   "town|slavic|forest|isolated|civilized|golden-master-v3",
++   "town|slavic|riverside|river|civilized|golden-master-v3",
++   "town|slavic|coastal|port|civilized|golden-master-v3",
++   "town|slavic|mountain|road|civilized|golden-master-v3",
++   "town|slavic|desert|road|civilized|golden-master-v3",
++   "town|east_asian|plains|road|civilized|golden-master-v3",
++   "town|east_asian|hills|road|civilized|golden-master-v3",
++   "town|east_asian|forest|isolated|civilized|golden-master-v3",
++   "town|east_asian|riverside|river|civilized|golden-master-v3",
++   "town|east_asian|coastal|port|civilized|golden-master-v3",
++   "town|east_asian|mountain|road|civilized|golden-master-v3",
++   "town|east_asian|desert|road|civilized|golden-master-v3",
++   "town|mesoamerican|plains|road|civilized|golden-master-v3",
++   "town|mesoamerican|hills|road|civilized|golden-master-v3",
++   "town|mesoamerican|forest|isolated|civilized|golden-master-v3",
++   "town|mesoamerican|riverside|river|civilized|golden-master-v3",
++   "town|mesoamerican|coastal|port|civilized|golden-master-v3",
++   "town|mesoamerican|mountain|road|civilized|golden-master-v3",
++   "town|mesoamerican|desert|road|civilized|golden-master-v3",
++   "town|south_asian|plains|road|civilized|golden-master-v3",
++   "town|south_asian|hills|road|civilized|golden-master-v3",
++   "town|south_asian|forest|isolated|civilized|golden-master-v3",
++   "town|south_asian|riverside|river|civilized|golden-master-v3",
++   "town|south_asian|coastal|port|civilized|golden-master-v3",
++   "town|south_asian|mountain|road|civilized|golden-master-v3",
++   "town|south_asian|desert|road|civilized|golden-master-v3",
++   "town|steppe|plains|road|civilized|golden-master-v3",
++   "town|steppe|hills|road|civilized|golden-master-v3",
++   "town|steppe|forest|isolated|civilized|golden-master-v3",
++   "town|steppe|riverside|river|civilized|golden-master-v3",
++   "town|steppe|coastal|port|civilized|golden-master-v3",
++   "town|steppe|mountain|road|civilized|golden-master-v3",
++   "town|steppe|desert|road|civilized|golden-master-v3",
++   "town|greek|plains|road|civilized|golden-master-v3",
++   "town|greek|hills|road|civilized|golden-master-v3",
++   "town|greek|forest|isolated|civilized|golden-master-v3",
++   "town|greek|riverside|river|civilized|golden-master-v3",
++   "town|greek|coastal|port|civilized|golden-master-v3",
++   "town|greek|mountain|road|civilized|golden-master-v3",
++   "town|greek|desert|road|civilized|golden-master-v3",
++   "town|mediterranean|plains|road|civilized|golden-master-v3",
++   "town|mediterranean|hills|road|civilized|golden-master-v3",
++   "town|mediterranean|forest|isolated|civilized|golden-master-v3",
++   "town|mediterranean|riverside|river|civilized|golden-master-v3",
++   "town|mediterranean|coastal|port|civilized|golden-master-v3",
++   "town|mediterranean|mountain|road|civilized|golden-master-v3",
++   "town|mediterranean|desert|road|civilized|golden-master-v3",
++   "city|germanic|plains|road|civilized|golden-master-v3",
++   "city|germanic|hills|road|civilized|golden-master-v3",
++   "city|germanic|forest|isolated|civilized|golden-master-v3",
++   "city|germanic|riverside|river|civilized|golden-master-v3",
++   "city|germanic|coastal|port|civilized|golden-master-v3",
++   "city|germanic|mountain|road|civilized|golden-master-v3",
++   "city|germanic|desert|road|civilized|golden-master-v3",
++   "city|latin|plains|road|civilized|golden-master-v3",
++   "city|latin|hills|road|civilized|golden-master-v3",
++   "city|latin|forest|isolated|civilized|golden-master-v3",
++   "city|latin|riverside|river|civilized|golden-master-v3",
++   "city|latin|coastal|port|civilized|golden-master-v3",
++   "city|latin|mountain|road|civilized|golden-master-v3",
++   "city|latin|desert|road|civilized|golden-master-v3",
++   "city|celtic|plains|road|civilized|golden-master-v3",
++   "city|celtic|hills|road|civilized|golden-master-v3",
++   "city|celtic|forest|isolated|civilized|golden-master-v3",
++   "city|celtic|riverside|river|civilized|golden-master-v3",
++   "city|celtic|coastal|port|civilized|golden-master-v3",
++   "city|celtic|mountain|road|civilized|golden-master-v3",
++   "city|celtic|desert|road|civilized|golden-master-v3",
++   "city|arabic|plains|road|civilized|golden-master-v3",
++   "city|arabic|hills|road|civilized|golden-master-v3",
++   "city|arabic|forest|isolated|civilized|golden-master-v3",
++   "city|arabic|riverside|river|civilized|golden-master-v3",
++   "city|arabic|coastal|port|civilized|golden-master-v3",
++   "city|arabic|mountain|road|civilized|golden-master-v3",
++   "city|arabic|desert|road|civilized|golden-master-v3",
++   "city|norse|plains|road|civilized|golden-master-v3",
++   "city|norse|hills|road|civilized|golden-master-v3",
++   "city|norse|forest|isolated|civilized|golden-master-v3",
++   "city|norse|riverside|river|civilized|golden-master-v3",
++   "city|norse|coastal|port|civilized|golden-master-v3",
++   "city|norse|mountain|road|civilized|golden-master-v3",
++   "city|norse|desert|road|civilized|golden-master-v3",
++   "city|slavic|plains|road|civilized|golden-master-v3",
++   "city|slavic|hills|road|civilized|golden-master-v3",
++   "city|slavic|forest|isolated|civilized|golden-master-v3",
++   "city|slavic|riverside|river|civilized|golden-master-v3",
++   "city|slavic|coastal|port|civilized|golden-master-v3",
++   "city|slavic|mountain|road|civilized|golden-master-v3",
++   "city|slavic|desert|road|civilized|golden-master-v3",
++   "city|east_asian|plains|road|civilized|golden-master-v3",
++   "city|east_asian|hills|road|civilized|golden-master-v3",
++   "city|east_asian|forest|isolated|civilized|golden-master-v3",
++   "city|east_asian|riverside|river|civilized|golden-master-v3",
++   "city|east_asian|coastal|port|civilized|golden-master-v3",
++   "city|east_asian|mountain|road|civilized|golden-master-v3",
++   "city|east_asian|desert|road|civilized|golden-master-v3",
++   "city|mesoamerican|plains|road|civilized|golden-master-v3",
++   "city|mesoamerican|hills|road|civilized|golden-master-v3",
++   "city|mesoamerican|forest|isolated|civilized|golden-master-v3",
++   "city|mesoamerican|riverside|river|civilized|golden-master-v3",
++   "city|mesoamerican|coastal|port|civilized|golden-master-v3",
++   "city|mesoamerican|mountain|road|civilized|golden-master-v3",
++   "city|mesoamerican|desert|road|civilized|golden-master-v3",
++   "city|south_asian|plains|road|civilized|golden-master-v3",
++   "city|south_asian|hills|road|civilized|golden-master-v3",
++   "city|south_asian|forest|isolated|civilized|golden-master-v3",
++   "city|south_asian|riverside|river|civilized|golden-master-v3",
++   "city|south_asian|coastal|port|civilized|golden-master-v3",
++   "city|south_asian|mountain|road|civilized|golden-master-v3",
++   "city|south_asian|desert|road|civilized|golden-master-v3",
++   "city|steppe|plains|road|civilized|golden-master-v3",
++   "city|steppe|hills|road|civilized|golden-master-v3",
++   "city|steppe|forest|isolated|civilized|golden-master-v3",
++   "city|steppe|riverside|river|civilized|golden-master-v3",
++   "city|steppe|coastal|port|civilized|golden-master-v3",
++   "city|steppe|mountain|road|civilized|golden-master-v3",
++   "city|steppe|desert|road|civilized|golden-master-v3",
++   "city|greek|plains|road|civilized|golden-master-v3",
++   "city|greek|hills|road|civilized|golden-master-v3",
++   "city|greek|forest|isolated|civilized|golden-master-v3",
++   "city|greek|riverside|river|civilized|golden-master-v3",
++   "city|greek|coastal|port|civilized|golden-master-v3",
++   "city|greek|mountain|road|civilized|golden-master-v3",
++   "city|greek|desert|road|civilized|golden-master-v3",
++   "city|mediterranean|plains|road|civilized|golden-master-v3",
++   "city|mediterranean|hills|road|civilized|golden-master-v3",
++   "city|mediterranean|forest|isolated|civilized|golden-master-v3",
++   "city|mediterranean|riverside|river|civilized|golden-master-v3",
++   "city|mediterranean|coastal|port|civilized|golden-master-v3",
++   "city|mediterranean|mountain|road|civilized|golden-master-v3",
++   "city|mediterranean|desert|road|civilized|golden-master-v3",
++   "metropolis|germanic|plains|road|civilized|golden-master-v3",
++   "metropolis|germanic|hills|road|civilized|golden-master-v3",
++   "metropolis|germanic|forest|isolated|civilized|golden-master-v3",
++   "metropolis|germanic|riverside|river|civilized|golden-master-v3",
++   "metropolis|germanic|coastal|port|civilized|golden-master-v3",
++   "metropolis|germanic|mountain|road|civilized|golden-master-v3",
++   "metropolis|germanic|desert|road|civilized|golden-master-v3",
++   "metropolis|latin|plains|road|civilized|golden-master-v3",
++   "metropolis|latin|hills|road|civilized|golden-master-v3",
++   "metropolis|latin|forest|isolated|civilized|golden-master-v3",
++   "metropolis|latin|riverside|river|civilized|golden-master-v3",
++   "metropolis|latin|coastal|port|civilized|golden-master-v3",
++   "metropolis|latin|mountain|road|civilized|golden-master-v3",
++   "metropolis|latin|desert|road|civilized|golden-master-v3",
++   "metropolis|celtic|plains|road|civilized|golden-master-v3",
++   "metropolis|celtic|hills|road|civilized|golden-master-v3",
++   "metropolis|celtic|forest|isolated|civilized|golden-master-v3",
++   "metropolis|celtic|riverside|river|civilized|golden-master-v3",
++   "metropolis|celtic|coastal|port|civilized|golden-master-v3",
++   "metropolis|celtic|mountain|road|civilized|golden-master-v3",
++   "metropolis|celtic|desert|road|civilized|golden-master-v3",
++   "metropolis|arabic|plains|road|civilized|golden-master-v3",
++   "metropolis|arabic|hills|road|civilized|golden-master-v3",
++   "metropolis|arabic|forest|isolated|civilized|golden-master-v3",
++   "metropolis|arabic|riverside|river|civilized|golden-master-v3",
++   "metropolis|arabic|coastal|port|civilized|golden-master-v3",
++   "metropolis|arabic|mountain|road|civilized|golden-master-v3",
++   "metropolis|arabic|desert|road|civilized|golden-master-v3",
++   "metropolis|norse|plains|road|civilized|golden-master-v3",
++   "metropolis|norse|hills|road|civilized|golden-master-v3",
++   "metropolis|norse|forest|isolated|civilized|golden-master-v3",
++   "metropolis|norse|riverside|river|civilized|golden-master-v3",
++   "metropolis|norse|coastal|port|civilized|golden-master-v3",
++   "metropolis|norse|mountain|road|civilized|golden-master-v3",
++   "metropolis|norse|desert|road|civilized|golden-master-v3",
++   "metropolis|slavic|plains|road|civilized|golden-master-v3",
++   "metropolis|slavic|hills|road|civilized|golden-master-v3",
++   "metropolis|slavic|forest|isolated|civilized|golden-master-v3",
++   "metropolis|slavic|riverside|river|civilized|golden-master-v3",
++   "metropolis|slavic|coastal|port|civilized|golden-master-v3",
++   "metropolis|slavic|mountain|road|civilized|golden-master-v3",
++   "metropolis|slavic|desert|road|civilized|golden-master-v3",
++   "metropolis|east_asian|plains|road|civilized|golden-master-v3",
++   "metropolis|east_asian|hills|road|civilized|golden-master-v3",
++   "metropolis|east_asian|forest|isolated|civilized|golden-master-v3",
++   "metropolis|east_asian|riverside|river|civilized|golden-master-v3",
++   "metropolis|east_asian|coastal|port|civilized|golden-master-v3",
++   "metropolis|east_asian|mountain|road|civilized|golden-master-v3",
++   "metropolis|east_asian|desert|road|civilized|golden-master-v3",
++   "metropolis|mesoamerican|plains|road|civilized|golden-master-v3",
++   "metropolis|mesoamerican|hills|road|civilized|golden-master-v3",
++   "metropolis|mesoamerican|forest|isolated|civilized|golden-master-v3",
++   "metropolis|mesoamerican|riverside|river|civilized|golden-master-v3",
++   "metropolis|mesoamerican|coastal|port|civilized|golden-master-v3",
++   "metropolis|mesoamerican|mountain|road|civilized|golden-master-v3",
++   "metropolis|mesoamerican|desert|road|civilized|golden-master-v3",
++   "metropolis|south_asian|plains|road|civilized|golden-master-v3",
++   "metropolis|south_asian|hills|road|civilized|golden-master-v3",
++   "metropolis|south_asian|forest|isolated|civilized|golden-master-v3",
++   "metropolis|south_asian|riverside|river|civilized|golden-master-v3",
++   "metropolis|south_asian|coastal|port|civilized|golden-master-v3",
++   "metropolis|south_asian|mountain|road|civilized|golden-master-v3",
++   "metropolis|south_asian|desert|road|civilized|golden-master-v3",
++   "metropolis|steppe|plains|road|civilized|golden-master-v3",
++   "metropolis|steppe|hills|road|civilized|golden-master-v3",
++   "metropolis|steppe|forest|isolated|civilized|golden-master-v3",
++   "metropolis|steppe|riverside|river|civilized|golden-master-v3",
++   "metropolis|steppe|coastal|port|civilized|golden-master-v3",
++   "metropolis|steppe|mountain|road|civilized|golden-master-v3",
++   "metropolis|steppe|desert|road|civilized|golden-master-v3",
++   "metropolis|greek|plains|road|civilized|golden-master-v3",
++   "metropolis|greek|hills|road|civilized|golden-master-v3",
++   "metropolis|greek|forest|isolated|civilized|golden-master-v3",
++   "metropolis|greek|riverside|river|civilized|golden-master-v3",
++   "metropolis|greek|coastal|port|civilized|golden-master-v3",
++   "metropolis|greek|mountain|road|civilized|golden-master-v3",
++   "metropolis|greek|desert|road|civilized|golden-master-v3",
++   "metropolis|mediterranean|plains|road|civilized|golden-master-v3",
++   "metropolis|mediterranean|hills|road|civilized|golden-master-v3",
++   "metropolis|mediterranean|forest|isolated|civilized|golden-master-v3",
++   "metropolis|mediterranean|riverside|river|civilized|golden-master-v3",
++   "metropolis|mediterranean|coastal|port|civilized|golden-master-v3",
++   "metropolis|mediterranean|mountain|road|civilized|golden-master-v3",
++   "metropolis|mediterranean|desert|road|civilized|golden-master-v3",
++   "town|germanic|plains|river|civilized|golden-master-v3",
++   "town|germanic|plains|port|civilized|golden-master-v3",
++   "town|germanic|plains|crossroads|civilized|golden-master-v3",
++   "town|germanic|plains|isolated|civilized|golden-master-v3",
++   "town|germanic|plains|mountain_pass|civilized|golden-master-v3",
++   "town|germanic|plains|none|civilized|golden-master-v3",
++   "town|germanic|mountain|mountain_pass|civilized|golden-master-v3",
++   "town|germanic|plains|road|safe|golden-master-v3",
++   "town|germanic|plains|road|frontier|golden-master-v3",
++   "town|germanic|plains|road|plagued|golden-master-v3",
++   "town|germanic|auto|random_trade|civilized|golden-master-v3",
++   "town|germanic|mountain|random_trade|civilized|golden-master-v3",
++   "town|germanic|auto|random_trade|civilized|gm-seed-a",
++   "town|germanic|mountain|random_trade|civilized|gm-seed-a",
++   "town|germanic|auto|random_trade|civilized|gm-seed-b",
++   "town|germanic|mountain|random_trade|civilized|gm-seed-b",
++   "town|germanic|auto|random_trade|civilized|gm-seed-c",
++   "town|germanic|mountain|random_trade|civilized|gm-seed-c",
++   "town|germanic|plains|road|civilized|gm-seed-a",
++   "town|germanic|plains|road|civilized|gm-seed-b",
++   "town|germanic|plains|road|civilized|gm-seed-c",
++ ]
+
+ ❯ tests/property/generatorGoldenMaster.test.js:1438:19
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 194 passed (195)
+      Tests  1 failed | 3039 passed (3040)
+   Start at  21:48:10
+   Duration  776.72s (transform 32.51s, setup 4.52s, import 257.38s, tests 1984.95s, environment 40.10s)
+
+[gate-tail] end:  22:01:07 up  2:32,  0 user,  load average: 4.28, 4.84, 4.98

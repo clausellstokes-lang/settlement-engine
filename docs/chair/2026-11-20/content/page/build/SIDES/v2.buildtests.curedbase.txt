@@ -1,0 +1,43 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 26941 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+  gzip    1472  br    1319  vendor-icons-aOW4IQH8.js
+  gzip   60454  br   52076  vendor-react-DsScxBXT.js
+  gzip    7106  br    6420  vendor-state-DXnjcO3h.js: expected 374772 to be less than or equal to 373999
+ ❯ tests/build/vendorPdfLazy.test.js:1340:9
+    1338|         gzipTotal,
+    1339|         `first-paint gzip transfer = ${gzipTotal} B (budget ${CLOSURE_…
+    1340|       ).toBeLessThanOrEqual(CLOSURE_GZIP_BUDGET_BYTES);
+       |         ^
+    1341|     },
+    1342|   );
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > entry static closure Brotli bytes stay under 313994
+AssertionError: first-paint Brotli transfer = 314541 B (budget 313994):
+  gzip    2610  br    2244  content-identity-BiMB_uYV.js
+  gzip   46206  br   37970  data-BkSMGMGf.js
+  gzip   99153  br   83508  engine-core-BAa8Qgi6.js
+  gzip  155270  br  128741  index-BQSQ_fU8.js
+  gzip    2501  br    2263  kernel-BI0fDpJx.js
+  gzip    1472  br    1319  vendor-icons-aOW4IQH8.js
+  gzip   60454  br   52076  vendor-react-DsScxBXT.js
+  gzip    7106  br    6420  vendor-state-DXnjcO3h.js: expected 314541 to be less than or equal to 313994
+ ❯ tests/build/vendorPdfLazy.test.js:1351:9
+    1349|         brotliTotal,
+    1350|         `first-paint Brotli transfer = ${brotliTotal} B (budget ${CLOS…
+    1351|       ).toBeLessThanOrEqual(CLOSURE_BROTLI_BUDGET_BYTES);
+       |         ^
+    1352|     },
+    1353|   );
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  5 failed | 61 passed (66)
+   Start at  22:02:15
+   Duration  3.94s (transform 202ms, setup 87ms, import 1.27s, tests 3.12s, environment 0ms)
+
+[gate-tail] end:  22:02:19 up  2:34,  0 user,  load average: 3.79, 4.48, 4.84
+[gate-tail] full log: /tmp/gate-tail.27310.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

@@ -1,0 +1,231 @@
+[gate-tail] start:  20:13:18 up 45 min,  0 user,  load average: 1.56, 2.23, 1.86 · cores: 4
+
+ RUN  v4.1.8 /home/user/settlement-engine/.claude/worktrees/agent-a0626ed37dea5cdc4
+
+ ❯ tests/build/generationWorkerLazy.test.js (11 tests | 1 failed) 184ms
+     × the generation worker bundle stays under its measured ceiling (monotone-down; WORKER_BUNDLE_CEILING_BYTES) 15ms
+ ❯ tests/build/vendorPdfLazy.test.js (55 tests | 7 failed) 6393ms
+     × the FIX-B2 anchored-leaf chunks are ABSENT from the entry transitive static closure 34ms
+     × the engine chunk still exists (lazy) and remains large 1ms
+     × entry static closure raw bytes stay under the first-paint budget (1175492) 11ms
+     × entry static closure gzip bytes stay under 373999 5051ms
+     × entry static closure Brotli bytes stay under 313994 0ms
+     × no prose leaf reaches a first-paint chunk, the entry chunk or the eager data chunk 140ms
+     × every prose leaf lands in a data-lazy chunk (PRESENCE: the fresh build only) 135ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 8 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/build/generationWorkerLazy.test.js > generation worker — production boundary > the generation worker bundle stays under its measured ceiling (monotone-down; WORKER_BUNDLE_CEILING_BYTES)
+AssertionError: generation worker bundle generation.worker-G1RimfGO.js is 2589546 B; the ceiling is 2579708 B (re-recorded at the measured figure by the chair's ruling B3, 2026-11-15, the close of the round BAR3, as at the close of BAR2; before it WB1, ODQ §934.105). A RISE IS NEVER A LANE'S EDIT: buy the bytes back, or take the ruling.: expected 2589546 to be less than or equal to 2579708
+ ❯ tests/build/generationWorkerLazy.test.js:847:7
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/8]⎯
+
+ FAIL  tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > the FIX-B2 anchored-leaf chunks are ABSENT from the entry transitive static closure
+AssertionError: a FIX-B2 lazy chunk reached first paint via the static graph: narrative-mutations-DySCruP0.js.
+An EAGER static importer of a module in one of these chunks drags the chunk into the entry closure and charges first paint for generation code. Closure:
+  index-Dx4cI7x3.js
+  vendor-state-DXnjcO3h.js
+  vendor-react-DsScxBXT.js
+  engine-core-CbDpmfLl.js
+  data-BkSMGMGf.js
+  kernel-BI0fDpJx.js
+  content-identity-BiMB_uYV.js
+  vendor-icons-aOW4IQH8.js
+  coherence-lazy-CM3Q_te2.js
+  data-lazy-lq9vbG3e.js
+  narrative-mutations-DySCruP0.js: expected [ 'narrative-mutations-DySCruP0.js' ] to have a length of +0 but got 1
+
+- Expected
++ Received
+
+- 0
++ 1
+
+ ❯ tests/build/vendorPdfLazy.test.js:977:7
+    975|       + 'entry closure and charges first paint for generation code. Cl…
+    976|       + `${files.join('\n  ')}`,
+    977|     ).toHaveLength(0);
+       |       ^
+    978|     // NON-VACUITY: the closure must be a real, populated walk, or the…
+    979|     // green-on-nothing — the exact way this file's own ratchet once w…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/8]⎯
+
+ FAIL  tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > the engine chunk still exists (lazy) and remains large
+AssertionError: expected 911294 to be less than 909928
+ ❯ tests/build/vendorPdfLazy.test.js:1128:18
+    1126|     // follow-ups (68) +74; FAULTS-BIRTH (63) +72; FR25 (67) +64; J-IN…
+    1127|     // FAULTS-TOOLS, FAULTS-DESKS and point 71 +0.
+    1128|     expect(size).toBeLessThan(909_928);
+       |                  ^
+    1129|   });
+    1130|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/8]⎯
+
+ FAIL  tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > entry static closure raw bytes stay under the first-paint budget (1175492)
+AssertionError: first-paint static closure = 3298405 bytes (budget 1175492):
+     282823  coherence-lazy-CM3Q_te2.js
+       5362  content-identity-BiMB_uYV.js
+     156695  data-BkSMGMGf.js
+    1834893  data-lazy-lq9vbG3e.js
+     309752  engine-core-CbDpmfLl.js
+     489633  index-Dx4cI7x3.js
+       4722  kernel-BI0fDpJx.js
+        724  narrative-mutations-DySCruP0.js
+       3579  vendor-icons-aOW4IQH8.js
+     193176  vendor-react-DsScxBXT.js
+      17046  vendor-state-DXnjcO3h.js: expected 3298405 to be less than or equal to 1175492
+ ❯ tests/build/vendorPdfLazy.test.js:1330:7
+    1328|       total,
+    1329|       `first-paint static closure = ${total} bytes (budget ${CLOSURE_B…
+    1330|     ).toBeLessThanOrEqual(CLOSURE_BUDGET_BYTES);
+       |       ^
+    1331|   });
+    1332|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/8]⎯
+
+ FAIL  tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > entry static closure gzip bytes stay under 373999
+AssertionError: first-paint gzip transfer = 946042 B (budget 373999):
+  gzip   95286  br   81095  coherence-lazy-CM3Q_te2.js
+  gzip    2610  br    2244  content-identity-BiMB_uYV.js
+  gzip   46206  br   37970  data-BkSMGMGf.js
+  gzip  475083  br  374886  data-lazy-lq9vbG3e.js
+  gzip   99639  br   83884  engine-core-CbDpmfLl.js
+  gzip  155274  br  128841  index-Dx4cI7x3.js
+  gzip    2501  br    2263  kernel-BI0fDpJx.js
+  gzip     411  br     358  narrative-mutations-DySCruP0.js
+  gzip    1472  br    1319  vendor-icons-aOW4IQH8.js
+  gzip   60454  br   52076  vendor-react-DsScxBXT.js
+  gzip    7106  br    6420  vendor-state-DXnjcO3h.js: expected 946042 to be less than or equal to 373999
+ ❯ tests/build/vendorPdfLazy.test.js:1340:9
+    1338|         gzipTotal,
+    1339|         `first-paint gzip transfer = ${gzipTotal} B (budget ${CLOSURE_…
+    1340|       ).toBeLessThanOrEqual(CLOSURE_GZIP_BUDGET_BYTES);
+       |         ^
+    1341|     },
+    1342|   );
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/8]⎯
+
+ FAIL  tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > entry static closure Brotli bytes stay under 313994
+AssertionError: first-paint Brotli transfer = 771356 B (budget 313994):
+  gzip   95286  br   81095  coherence-lazy-CM3Q_te2.js
+  gzip    2610  br    2244  content-identity-BiMB_uYV.js
+  gzip   46206  br   37970  data-BkSMGMGf.js
+  gzip  475083  br  374886  data-lazy-lq9vbG3e.js
+  gzip   99639  br   83884  engine-core-CbDpmfLl.js
+  gzip  155274  br  128841  index-Dx4cI7x3.js
+  gzip    2501  br    2263  kernel-BI0fDpJx.js
+  gzip     411  br     358  narrative-mutations-DySCruP0.js
+  gzip    1472  br    1319  vendor-icons-aOW4IQH8.js
+  gzip   60454  br   52076  vendor-react-DsScxBXT.js
+  gzip    7106  br    6420  vendor-state-DXnjcO3h.js: expected 771356 to be less than or equal to 313994
+ ❯ tests/build/vendorPdfLazy.test.js:1351:9
+    1349|         brotliTotal,
+    1350|         `first-paint Brotli transfer = ${brotliTotal} B (budget ${CLOS…
+    1351|       ).toBeLessThanOrEqual(CLOSURE_BROTLI_BUDGET_BYTES);
+       |         ^
+    1352|     },
+    1353|   );
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/8]⎯
+
+ FAIL  tests/build/vendorPdfLazy.test.js > ARCH car 2 — the corpus rides data-lazy, and that chunk has a row > no prose leaf reaches a first-paint chunk, the entry chunk or the eager data chunk
+AssertionError: the composed-prose corpus left the lazy chunk. Closure (11 files):
+  index-Dx4cI7x3.js
+  vendor-state-DXnjcO3h.js
+  vendor-react-DsScxBXT.js
+  engine-core-CbDpmfLl.js
+  data-BkSMGMGf.js
+  kernel-BI0fDpJx.js
+  content-identity-BiMB_uYV.js
+  vendor-icons-aOW4IQH8.js
+  coherence-lazy-CM3Q_te2.js
+  data-lazy-lq9vbG3e.js
+  narrative-mutations-DySCruP0.js
+Findings:
+  src/data/dossierStateProse/defense.generated.js: reached FIRST PAINT via data-lazy-lq9vbG3e.js
+  src/data/dossierStateProse/economy.generated.js: reached FIRST PAINT via data-lazy-lq9vbG3e.js
+  src/data/dossierStateProse/general.generated.js: reached FIRST PAINT via data-lazy-lq9vbG3e.js
+  src/data/dossierStateProse/power.generated.js: reached FIRST PAINT via data-lazy-lq9vbG3e.js
+  src/data/dossierStateProse/stressors.generated.js: reached FIRST PAINT via data-lazy-lq9vbG3e.js
+  src/data/dossierStateProse/warFaith.generated.js: reached FIRST PAINT via data-lazy-lq9vbG3e.js: expected [ …(6) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/data/dossierStateProse/defense.generated.js: reached FIRST PAINT via data-lazy-lq9vbG3e.js",
++   "src/data/dossierStateProse/economy.generated.js: reached FIRST PAINT via data-lazy-lq9vbG3e.js",
++   "src/data/dossierStateProse/general.generated.js: reached FIRST PAINT via data-lazy-lq9vbG3e.js",
++   "src/data/dossierStateProse/power.generated.js: reached FIRST PAINT via data-lazy-lq9vbG3e.js",
++   "src/data/dossierStateProse/stressors.generated.js: reached FIRST PAINT via data-lazy-lq9vbG3e.js",
++   "src/data/dossierStateProse/warFaith.generated.js: reached FIRST PAINT via data-lazy-lq9vbG3e.js",
++ ]
+
+ ❯ tests/build/vendorPdfLazy.test.js:2011:7
+    2009|       `the composed-prose corpus left the lazy chunk. Closure (${closu…
+    2010|       + `Findings:\n  ${findings.join('\n  ')}`,
+    2011|     ).toEqual([]);
+       |       ^
+    2012|   });
+    2013|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/8]⎯
+
+ FAIL  tests/build/vendorPdfLazy.test.js > ARCH car 2 — the corpus rides data-lazy, and that chunk has a row > every prose leaf lands in a data-lazy chunk (PRESENCE: the fresh build only)
+AssertionError: a prose leaf reached no data-lazy chunk in a FRESH build. Closure (11 files):
+  index-Dx4cI7x3.js
+  vendor-state-DXnjcO3h.js
+  vendor-react-DsScxBXT.js
+  engine-core-CbDpmfLl.js
+  data-BkSMGMGf.js
+  kernel-BI0fDpJx.js
+  content-identity-BiMB_uYV.js
+  vendor-icons-aOW4IQH8.js
+  coherence-lazy-CM3Q_te2.js
+  data-lazy-lq9vbG3e.js
+  narrative-mutations-DySCruP0.js
+Findings:
+  src/data/dossierStateProse/defense.generated.js: reached FIRST PAINT via data-lazy-lq9vbG3e.js
+  src/data/dossierStateProse/economy.generated.js: reached FIRST PAINT via data-lazy-lq9vbG3e.js
+  src/data/dossierStateProse/general.generated.js: reached FIRST PAINT via data-lazy-lq9vbG3e.js
+  src/data/dossierStateProse/power.generated.js: reached FIRST PAINT via data-lazy-lq9vbG3e.js
+  src/data/dossierStateProse/stressors.generated.js: reached FIRST PAINT via data-lazy-lq9vbG3e.js
+  src/data/dossierStateProse/warFaith.generated.js: reached FIRST PAINT via data-lazy-lq9vbG3e.js: expected [ …(6) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/data/dossierStateProse/defense.generated.js: reached FIRST PAINT via data-lazy-lq9vbG3e.js",
++   "src/data/dossierStateProse/economy.generated.js: reached FIRST PAINT via data-lazy-lq9vbG3e.js",
++   "src/data/dossierStateProse/general.generated.js: reached FIRST PAINT via data-lazy-lq9vbG3e.js",
++   "src/data/dossierStateProse/power.generated.js: reached FIRST PAINT via data-lazy-lq9vbG3e.js",
++   "src/data/dossierStateProse/stressors.generated.js: reached FIRST PAINT via data-lazy-lq9vbG3e.js",
++   "src/data/dossierStateProse/warFaith.generated.js: reached FIRST PAINT via data-lazy-lq9vbG3e.js",
++ ]
+
+ ❯ tests/build/vendorPdfLazy.test.js:2022:7
+    2020|       `a prose leaf reached no data-lazy chunk in a FRESH build. Closu…
+    2021|       + `Findings:\n  ${findings.join('\n  ')}`,
+    2022|     ).toEqual([]);
+       |       ^
+    2023|   });
+    2024|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/8]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  8 failed | 58 passed (66)
+   Start at  20:13:19
+   Duration  7.30s (transform 165ms, setup 96ms, import 1.17s, tests 6.58s, environment 0ms)
+
+[gate-tail] end:  20:13:26 up 45 min,  0 user,  load average: 1.70, 2.24, 1.86

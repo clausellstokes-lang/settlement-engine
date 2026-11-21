@@ -121,7 +121,7 @@ const RENDERERS = Object.freeze({
     Component: HistoryEventCard,
     props: (o, ctx, ui) => ({ evt: o.raw, h: ctx.history, isExp: ui.open, onToggle: ui.toggle }),
   },
-  tension: { Component: TensionRow, props: (o) => ({ t: o.raw }) },
+  tension: { Component: TensionRow, props: (o, ctx) => ({ t: o.raw, settlement: ctx.settlement }) },
   tradition: { Component: TraditionRow, props: (o) => ({ rec: o.raw, preview: !!o.meta.preview }) },
   hook: { Component: PlotHookCard, props: (o) => ({ hook: o.raw }) },
   resource: {

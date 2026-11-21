@@ -1,0 +1,13 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 29303 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+[gate-tail] start:  22:05:32 up  2:37,  0 user,  load average: 2.03, 3.59, 4.45 · cores: 4
+
+> settlementforge@1.0.0 typecheck:domain:strict
+> node scripts/check-domain-strict.mjs
+
+[domain-strict] strict-type regressions in the domain kernel (fix or annotate; do not widen the baseline):
+  src/domain/display/tensionShown.js: 1 strict errors (baseline 0) — +1
+
+Domain strict-error ceiling is 1113. New/worsened files must be strict-clean.
+[gate-tail] end:  22:05:55 up  2:37,  0 user,  load average: 1.84, 3.42, 4.36
+[gate-tail] full log: /tmp/gate-tail.29627.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

@@ -1,0 +1,43 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 12783 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+  1:1  warning  Unused eslint-disable directive (no problems were reported)
+
+/home/user/settlement-engine/.claude/worktrees/agent-a0626ed37dea5cdc4/src/domain/corruptionLeash.js
+  141:35  warning  'settlement' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+  141:47  warning  'worldState' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+
+/home/user/settlement-engine/.claude/worktrees/agent-a0626ed37dea5cdc4/src/domain/display/stateProse/defenseStateProse.js
+    97:10  warning  'MONSTER_THREAT_TIERS' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+  1634:9   warning  'rung' is assigned a value but never used. Allowed unused vars must match /^_/u         no-unused-vars
+
+/home/user/settlement-engine/.claude/worktrees/agent-a0626ed37dea5cdc4/src/domain/display/stateProse/stressorsStateProse.js
+  50:10  warning  'STRESS_TYPE_MAP' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+/home/user/settlement-engine/.claude/worktrees/agent-a0626ed37dea5cdc4/src/domain/townCartography/cartographySkeleton.js
+  62:10  warning  'ordinal' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+/home/user/settlement-engine/.claude/worktrees/agent-a0626ed37dea5cdc4/src/hooks/useGalleryPageState.js
+  183:10  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  181 |
+  182 |   useEffect(() => {
+> 183 |     void loadList(galleryQuery);
+      |          ^^^^^^^^ Avoid calling setState() directly within an effect
+  184 |     // Cleanup bumps the token, and THAT is what retires an in-flight load on a
+  185 |     // query change or an unmount: a superseded promise finds `gen` behind the
+  186 |     // current one and writes nothing. It replaces the old local `cancelled`  react-hooks/set-state-in-effect
+
+/home/user/settlement-engine/.claude/worktrees/agent-a0626ed37dea5cdc4/src/pdf/sections/Cover.jsx
+  18:20  warning  'num' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+✖ 38 problems (0 errors, 38 warnings)
+  0 errors and 1 warning potentially fixable with the `--fix` option.
+
+[gate-tail] end:  22:47:22 up  3:19,  0 user,  load average: 1.50, 1.67, 2.23
+[gate-tail] full log: /tmp/gate-tail.13098.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)

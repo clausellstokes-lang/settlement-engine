@@ -61,7 +61,9 @@ export const OTHER_SHAPES = Object.freeze({
   // lines; +3/+3/+3 at JOIN-17 point 12, BAR6-SEAM-PDF b4dbbd71f, and +3/+3/+15 at point 20, BAR7-CARDS bbd69cf65, lines added above them)
   // re-keyed by identity 352/515/709 -> 353/516/710 (PAGE-1 CARD, F4, 2026-11-20: the same three tension reads, byte-identical
   // lines, moved one line by the cardStandingRead.js import)
-  'src/pdf/lib/viewModel.js:353': 'a tension', 'src/pdf/lib/viewModel.js:516': 'a tension', 'src/pdf/lib/viewModel.js:710': 'a tension', // W4 PEOPLE second seat (merging the car): re-keyed +3 by line, #29's crisisSummaryForSurface import and cover/overview vantage lines above them
+  // PAGE-9 SIDES (2026-11-20): viewModel.js's three tension reads (:353/:516/:710, 'a tension') LEFT: each slice's `parties` is now
+  // the one sides reader's (`tensionSidesShown`), which reads a tension's sides in one place
+  'src/domain/display/tensionShown.js': 'a tension\'s sides (the one reader of them, PAGE-9 SIDES)',
   'src/pdf/sections/PowerStructure.jsx': 'vm.power',
   // COHERENCE-POWERS-3 F2 (28c93c9da): a tension's parties, re-named for the final roster (settleTensionsToRoster); read as viewModel's are
   // re-keyed by identity 123 -> 124 (POWERS-10, the reader's M4 at 96a6ced46: the same tension read, moved one line by 943e34d6f's

@@ -1,0 +1,119 @@
+diff --git a/src/components/dossier/DossierSearchResults.jsx b/src/components/dossier/DossierSearchResults.jsx
+index bfd126a78..1c23c2662 100644
+--- a/src/components/dossier/DossierSearchResults.jsx
++++ b/src/components/dossier/DossierSearchResults.jsx
+@@ -121,7 +121,7 @@ const RENDERERS = Object.freeze({
+     Component: HistoryEventCard,
+     props: (o, ctx, ui) => ({ evt: o.raw, h: ctx.history, isExp: ui.open, onToggle: ui.toggle }),
+   },
+-  tension: { Component: TensionRow, props: (o) => ({ t: o.raw }) },
++  tension: { Component: TensionRow, props: (o, ctx) => ({ t: o.raw, settlement: ctx.settlement }) },
+   tradition: { Component: TraditionRow, props: (o) => ({ rec: o.raw, preview: !!o.meta.preview }) },
+   hook: { Component: PlotHookCard, props: (o) => ({ hook: o.raw }) },
+   resource: {
+diff --git a/src/components/new/tabs/HistoryTab.jsx b/src/components/new/tabs/HistoryTab.jsx
+index cf7a3300b..77de5714c 100644
+--- a/src/components/new/tabs/HistoryTab.jsx
++++ b/src/components/new/tabs/HistoryTab.jsx
+@@ -23,6 +23,8 @@ import { entityAnchor, eventIdFor } from '../../../domain/dossier/entityLinks.js
+ import { useEntityFocus } from '../../dossier/useEntityFocus.js';
+ import { MentionText } from '../../ProseParagraph.jsx';
+ import { FLUSH } from '../../../design/flush.js';
++// PAGE-9 SIDES: a tension's sides are printed through the one reader, from the document this tab was given.
++import { tensionSidesShown } from '../../../domain/display/tensionShown.js';
+ 
+ // Extended event type colors (EVENT_COLORS only covers 5 types)
+ // ⛔ A CATEGORY WORD NAMES THE EVENT'S OWN TEMPLATE (R3-TABS, round three's cut #1104). Each of these
+@@ -69,8 +71,9 @@ const eventTitle = (evt) => {
+  * One current-tension row, extracted verbatim from the tab (BUILD-W2-SEARCH U2, no behaviour
+  * change) so the dossier search mounts a tension through its own row.
+  */
+-export function TensionRow({t}) {
++export function TensionRow({t, settlement}) {
+   const mobile = useIsMobile();
++  const sides = tensionSidesShown(settlement, t);
+   // The table above names ten tension types and the engine writes more than ten
+   // (the campaign path adds `external_threat` and its siblings), so the fallback
+   // was printing the raw kind. A kind the table has not styled still reads as a
+@@ -97,8 +100,8 @@ export function TensionRow({t}) {
+       {/* Description. The tension's plot hooks live on the Plot Hooks tab (X-2). */}
+       <p style={{fontSize:proseFontSize(FS.md, mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 6px'}}><MentionText text={typeof t==='object'?t.description||t.issue||t.type:String(t)}/></p>
+       {/* Factions */}
+-      {t.factions?.length>0&&<div style={{display:'flex',gap:4,flexWrap:'wrap'}}>
+-        {t.factions.map((f,j)=><span key={j} style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'1px 6px'}}><MentionText text={f} structural/></span>)}
++      {sides.length>0&&<div style={{display:'flex',gap:4,flexWrap:'wrap'}}>
++        {sides.map((f,j)=><span key={j} style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'1px 6px'}}><MentionText text={f} structural/></span>)}
+       </div>}
+     </div>
+   );
+@@ -282,7 +285,7 @@ export function HistoryTab({settlement:r, narrativeNote, onReroll, publicDossier
+       {/* ── CURRENT TENSIONS (most DM-relevant — first) ──────────────────── */}
+       {currentTensions.length>0&&<Section title={`Current Tensions (${currentTensions.length})`} collapsible defaultOpen accent="#b8860b">
+         <div style={{display:'flex',flexDirection:'column',gap:10}}>
+-          {currentTensions.map((t,i)=><TensionRow key={i} t={t}/>)}
++          {currentTensions.map((t,i)=><TensionRow key={i} t={t} settlement={r}/>)}
+         </div>
+       </Section>}
+ 
+diff --git a/src/components/new/tabs/OverviewTab.jsx b/src/components/new/tabs/OverviewTab.jsx
+index 04dc93f87..2d47abbc0 100644
+--- a/src/components/new/tabs/OverviewTab.jsx
++++ b/src/components/new/tabs/OverviewTab.jsx
+@@ -32,6 +32,7 @@ import { deriveMagicRelianceView, magicRowsGated } from '../../../domain/display
+ import { magicMeasuresApartLine } from '../../../domain/display/magicMeasuresApart.js';
+ import { prosperityInCrisisLine } from '../../../domain/display/prosperityInCrisis.js';
+ import { foodWordShown } from '../../../domain/display/foodWordShown.js';
++import { tensionSidesShown } from '../../../domain/display/tensionShown.js'; // PAGE-9 SIDES: a tension's sides through the one reader
+ 
+ import {NarrativeNote} from '../NarrativeNote';
+ import SteadingsSection from './SteadingsSection.jsx';
+@@ -497,8 +498,8 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
+             <span style={{fontSize:FS.sm,flexShrink:0,marginTop:1,color:swatch['#B8860B']}}>▸</span>
+             <div>
+               <p style={{fontSize:proseFontSize(FS.md,mobile),color:swatch.inkMag2,lineHeight:1.45,margin:0}}>{typeof t==='object'?t.description:t}</p>
+-              {t.factions?.length>0&&<div style={{display:'flex',gap:4,marginTop:3,flexWrap:'wrap'}}>
+-                {t.factions.map((f,j)=><span key={j} style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'0 5px'}}>{f}</span>)}
++              {tensionSidesShown(r,t).length>0&&<div style={{display:'flex',gap:4,marginTop:3,flexWrap:'wrap'}}>
++                {tensionSidesShown(r,t).map((f,j)=><span key={j} style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'0 5px'}}>{f}</span>)}
+               </div>}
+             </div>
+           </div>
+diff --git a/src/pdf/lib/viewModel.js b/src/pdf/lib/viewModel.js
+index c54ccad0e..53e6680a7 100644
+--- a/src/pdf/lib/viewModel.js
++++ b/src/pdf/lib/viewModel.js
+@@ -36,6 +36,7 @@ import { stressEffectsShown } from '../../domain/display/impairedListShown.js';
+ import { rowMarkText } from '../../domain/display/crisisStoppedRow.js';
+ import { summarizeMagic, deriveMagicProfile } from '../../domain/magicProfile.js';
+ import { humanize } from './format.js';
++import { tensionSidesShown } from '../../domain/display/tensionShown.js'; // PAGE-9 SIDES: a tension's sides through the one reader
+ import { buildPdfLiveWorld } from './liveWorld.js';
+ import { directionalRelationshipLabel } from '../../domain/relationships/canonicalRelationship.js';
+ import { cardTieLines } from '../../domain/relationships/cardTies.js';
+@@ -350,7 +351,7 @@ function overviewSlice(active, ai, useAi) {
+     type: t?.type,
+     severity: normSeverity(t?.severity),
+     description: t?.description,
+-    parties: t?.factions || t?.parties || [],
++    parties: tensionSidesShown(s, t),
+     hooks: cleanHooks(t?.plotHooks),
+   }));
+   const conflicts = (s?.conflicts || []).map(c => ({
+@@ -513,7 +514,7 @@ function powerSlice(active) {
+     label: t?.label || t?.type,
+     severity: normSeverity(t?.severity),
+     description: t?.description,
+-    parties: t?.factions || t?.parties || [],
++    parties: tensionSidesShown(s, t),
+     hooks: cleanHooks(t?.plotHooks),
+   }));
+ 
+@@ -707,7 +708,7 @@ function historySlice(active) {
+       label: t?.label || t?.type,
+       severity: t?.severity,
+       description: t?.description,
+-      parties: t?.factions || t?.parties || [],
++      parties: tensionSidesShown(s, t),
+       hooks: t?.plotHooks || [],
+     })),
+     timeline: h?.eventsTimeline || [],

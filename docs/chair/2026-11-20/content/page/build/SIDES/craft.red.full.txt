@@ -1,0 +1,75 @@
+[gate-tail] start:  20:34:12 up  1:05,  0 user,  load average: 6.15, 5.18, 4.08 · cores: 4
+
+ RUN  v4.1.8 /home/user/settlement-engine/.claude/worktrees/agent-a0626ed37dea5cdc4
+
+ ❯ tests/domain/display/tensionShown.test.js (23 tests | 4 failed) 3346ms
+     × born r2s-famine-town-2: its guild members keep their own words beside a sole economy power 2478ms
+     × born r2s-famine-city-3: its guild members keep their own words beside a sole economy power 435ms
+     × born r2r-city-25: its guild members keep their own words beside a sole economy power 171ms
+     × a made-up roster whose one economy power is a craft guild: still the row's own words 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/domain/display/tensionShown.test.js > tensionSidesShown: THE CRAFT RULING (a craft side is never named by the economy mark) > born r2s-famine-town-2: its guild members keep their own words beside a sole economy power
+ FAIL  tests/domain/display/tensionShown.test.js > tensionSidesShown: THE CRAFT RULING (a craft side is never named by the economy mark) > born r2s-famine-city-3: its guild members keep their own words beside a sole economy power
+AssertionError: expected 'The Grain Holders' to be 'Guild members' // Object.is equality
+
+Expected: "Guild members"
+Received: "The Grain Holders"
+
+ ❯ tests/domain/display/tensionShown.test.js:99:76
+     97|     // the precondition the economy mark would have named: exactly one…
+     98|     expect(solePowerNameOf(doc, 'economy', true)).toBeTruthy();
+     99|     for (const { t, s, i } of crafts) expect(tensionSidesShown(doc, t)…
+       |                                                                            ^
+    100|   }, 120000);
+    101|   it('a made-up roster whose one economy power is a craft guild: still…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/domain/display/tensionShown.test.js > tensionSidesShown: THE CRAFT RULING (a craft side is never named by the economy mark) > born r2r-city-25: its guild members keep their own words beside a sole economy power
+AssertionError: expected 'The Merchant oligarchy' to be 'Guild members' // Object.is equality
+
+Expected: "Guild members"
+Received: "The Merchant oligarchy"
+
+ ❯ tests/domain/display/tensionShown.test.js:99:76
+     97|     // the precondition the economy mark would have named: exactly one…
+     98|     expect(solePowerNameOf(doc, 'economy', true)).toBeTruthy();
+     99|     for (const { t, s, i } of crafts) expect(tensionSidesShown(doc, t)…
+       |                                                                            ^
+    100|   }, 120000);
+    101|   it('a made-up roster whose one economy power is a craft guild: still…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/domain/display/tensionShown.test.js > tensionSidesShown: THE CRAFT RULING (a craft side is never named by the economy mark) > a made-up roster whose one economy power is a craft guild: still the row's own words
+AssertionError: expected [ 'The Craft Guilds', …(2) ] to deeply equal [ 'Guild members', …(2) ]
+
+- Expected
++ Received
+
+  [
+-   "Guild members",
++   "The Craft Guilds",
+    "Those who would trade outside the guild",
+    "Non-guild workers",
+  ]
+
+ ❯ tests/domain/display/tensionShown.test.js:105:39
+    103|     const t = { type: 'guild_conflict', factions: ['Guild members', 'T…
+    104|     expect(solePowerNameOf(rec, 'economy', true)).toBeTruthy();
+    105|     expect(tensionSidesShown(rec, t)).toEqual(t.factions);
+       |                                       ^
+    106|   });
+    107| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 19 passed (23)
+   Start at  20:34:13
+   Duration  4.41s (transform 2.31s, setup 49ms, import 907ms, tests 3.35s, environment 0ms)
+
+[gate-tail] end:  20:34:17 up  1:06,  0 user,  load average: 5.98, 5.16, 4.08

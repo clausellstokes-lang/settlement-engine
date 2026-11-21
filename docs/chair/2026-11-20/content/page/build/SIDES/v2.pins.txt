@@ -1,0 +1,43 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 28274 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
++   "hxd-metropolis-30 pdf.overview",
++   "hxd-metropolis-37 overview.gallery",
++   "hxd-metropolis-37 overview.revealShare",
++   "hxd-metropolis-37 overview.playerShare",
++   "hxd-metropolis-37 pdf.vm",
++   "hxd-metropolis-37 pdf.overview",
++   "hxd-metropolis-38 overview.gallery",
++   "hxd-metropolis-38 overview.revealShare",
++   "hxd-metropolis-38 overview.playerShare",
++   "hxd-metropolis-38 pdf.vm",
++   "hxd-metropolis-38 pdf.overview",
++   "hxd-metropolis-45 overview.gallery",
++   "hxd-metropolis-45 overview.revealShare",
++   "hxd-metropolis-45 overview.playerShare",
++   "hxd-metropolis-45 pdf.vm",
++   "hxd-metropolis-45 pdf.overview",
++   "hxd-metropolis-46 overview.gallery",
++   "hxd-metropolis-46 overview.revealShare",
++   "hxd-metropolis-46 overview.playerShare",
++   "hxd-metropolis-46 pdf.vm",
++   "hxd-metropolis-46 pdf.overview",
++ ]
+
+ ❯ tests/ui/safetyReaderBytes.test.jsx:105:19
+    103|     const surfaces = Object.values(now).reduce((n, h) => n + Object.ke…
+    104|     console.log(`READER BYTES: ${Object.keys(now).length} towns, ${sur…
+    105|     expect(moved).toEqual([]);
+       |                   ^
+    106|   });
+    107| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 3 passed (4)
+   Start at  22:03:11
+   Duration  111.17s (transform 9.53s, setup 144ms, import 12.19s, tests 123.23s, environment 999ms)
+
+[gate-tail] end:  22:05:02 up  2:36,  0 user,  load average: 2.25, 3.80, 4.54
+[gate-tail] full log: /tmp/gate-tail.28635.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
