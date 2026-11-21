@@ -45,6 +45,7 @@ import { isMaterializedCustomContent } from '../../src/domain/content/customCont
 import { createPRNG } from '../../src/kernel/prng.js';
 import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { legacyConfig } from '../helpers/fortuneLegacyConfig.js';
 
 const LIT = SIZE_RELATIVE_FORTUNE_LAW_VERSION;
 /** The six sizes, read off the law's own table (never re-typed here). */
@@ -229,8 +230,10 @@ describe('(c) THE FLOOR: a calm place holding its required economy reads at leas
 
 describe('(d) BORN, forced: twelve births under the law read what the functions compute; with no marker, byte-identical to law 1', () => {
   const SEEDS = SIZES.flatMap((tier) => [0, 1].map((i) => [tier, `u2-fortune-${tier}-${i}`]));
+  /** ABSENT: a LEGACY config (the law's key deleted, whatever the dial); a marker: forced AFTER birthConfig. */
   const born = (tier, seed, marker) => generateSettlementPipeline(
-    withMarker(birthConfig({ ...DEFAULT_CONFIG, settType: tier }), marker), null, { seed, customContent: {} },
+    marker === ABSENT ? legacyConfig({ ...DEFAULT_CONFIG, settType: tier }) : withMarker(birthConfig({ ...DEFAULT_CONFIG, settType: tier }), marker),
+    null, { seed, customContent: {} },
   );
   /** @type {Record<string, any>} */ const lits = {};
   /** @type {Record<string, any>} */ const nones = {};
@@ -287,6 +290,7 @@ describe('(d) BORN, forced: twelve births under the law read what the functions 
     expect(moved.length).toBeGreaterThan(0);
   });
 
+  // "with no marker" means a LEGACY config (the law's key deleted), not a bare birthConfig that mints the dial
   test('with no marker the twelve are byte-identical (JSON) to a birth under law 1, the marker\'s own key aside', () => {
     const strip = (town) => JSON.stringify(town, (key, value) => (key === FORTUNE_LAW_CONFIG_KEY ? undefined : value));
     const failures = collectSeedFailures(SEEDS, ([, seed]) => {
