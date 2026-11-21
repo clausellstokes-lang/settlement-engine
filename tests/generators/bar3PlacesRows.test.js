@@ -24,7 +24,7 @@ import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { CRISIS_SUMMARY_POOLS } from '../../src/domain/crisis/crisisSummaryVantage.js';
 import { withPresumptionLedger } from '../../src/domain/facts/presumptionLedger.js';
 import { presumptionFindings } from '../../src/domain/facts/presumptionCheck.js';
-import { TROUBLE_HOOKS } from '../../src/data/troubleHooks.js';
+import { troubleHookPool } from '../../src/generators/history/troubleHooksOf.js'; // HOOKS-CURES A: the kind's pool, composed at its call site
 import { ARRIVAL_PEOPLE, ARRIVAL_SENSES } from '../../src/data/arrivalProse.js';
 import { textOf } from '../../src/domain/facts/textOf.js';
 
@@ -303,9 +303,9 @@ describe('BAR3-PLACES-3: the compact and the guild war read the town', () => {
     const { record, noted, findings } = guildHookCheck('r2r-town-0');
     const hooks = record.history?.currentTensions?.find((t) => t.type === 'guild_conflict')?.plotHooks || [];
     expect(hooks.length, "the live quarrel's three hooks").toBe(3);
-    expect(hooks.filter((h) => !TROUBLE_HOOKS.guild_conflict.some((r) => r.text === h)), 'each a line of the pool').toEqual([]);
+    expect(hooks.filter((h) => !(troubleHookPool('guild_conflict') ?? []).some((r) => r.text === h)), 'each a line of the pool').toEqual([]);
     expect(noted.filter((e) => e.pool === GUILD_POOL).length, 'each drawn through the ledger').toBe(3);
-    expect(TROUBLE_HOOKS.guild_conflict.find((r) => r.text.startsWith('Someone is sabotaging both sides'))?.needs, 'the sabotage line declares its guild').toContain('guild');
+    expect((troubleHookPool('guild_conflict') ?? []).find((r) => r.text.startsWith('Someone is sabotaging both sides'))?.needs, 'the sabotage line declares its guild').toContain('guild');
     expect(findings.filter((f) => f.atom === 'guild'), 'every guild atom holds on the final record').toEqual([]);
   });
 });

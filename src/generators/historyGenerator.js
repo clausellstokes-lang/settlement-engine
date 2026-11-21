@@ -1238,42 +1238,6 @@ function admittedTimelineTemplate(pool, i, facts) {
   return null;
 }
 
-// ─── W2-FIX-DATA-3 item 6 (2026-11-13; the chair's ruling on the carried red): A TIMELINE HOOK IS NOTED BY ITS OWN ROW ──
-// `drawDeclared` notes a line by its index in the domain it is handed (`drawDeclared.js :: lineIdOf`), and
-// `resolveTimelineHook`'s domain LEADS with the drawn row, so every timeline hook was noted as line 0: the repetition
-// guard read one line where the town printed several. The note this call made is re-keyed to the row's index in its
-// template, the id the tension's own hook list (drawKind A, `filterDeclared` over the whole list) already notes. Only the
-// ledger's note moves: the draw, its argmax key (which reads the domain's index) and the printed text do not.
-// At the end of the file on purpose: the prose wiring census cites this file's producer writes by line.
-import { activePresumptionLedger } from '../domain/facts/presumptionLedger.js';
-
-/** How many notes the open ledger holds (0 when none is open). @returns {number} */
-function notedSoFar() {
-  return activePresumptionLedger()?.length ?? 0;
-}
-
-/**
- * Re-key the timeline-hook notes made since `from`: a note that names a row by its index in `list` (a row with no
- * own id) is keyed by that row's index in the template instead. Returns `value` unchanged.
- * @template T @param {number} from @param {ReadonlyArray<any>} list the domain the draw was handed
- * @param {any} eventTemplate @param {T} value @returns {T}
- */
-function noteByTemplateRow(from, list, eventTemplate, value) {
-  const ledger = activePresumptionLedger();
-  if (ledger === null) return value;
-  const pool = `historyData:HISTORICAL_EVENTS_DATA.plotHooks:${eventTemplate?.type ?? ''}`;
-  const rows = Array.isArray(eventTemplate?.plotHooks) ? eventTemplate.plotHooks : [];
-  for (let k = from; k < ledger.length; k++) {
-    const entry = ledger[k];
-    if (entry?.pool !== pool || typeof entry.lineId !== 'number') continue;
-    const row = list[entry.lineId];
-    if (row === undefined || (row && typeof row === 'object' && 'id' in row)) continue;
-    const at = rows.indexOf(row);
-    if (at >= 0) ledger[k] = { ...entry, lineId: at };
-  }
-  return value;
-}
-
 // ─── W2-FIX-DATA-5 (2026-11-13; ROUND-3-CUT #331): A HISTORY TEXT TAKES ITS SMALL-PLACE TWIN ─────────────────────
 // The great fire "spread through barges, warehouses, and wharf infrastructure across entire districts" in a village of
 // 172. A description that presumes a place's districts and quarters declares its size (`historyData.js ::
@@ -1294,7 +1258,9 @@ function sizedHistoryText(text, facts) {
 import { admittedResourceEvent, resourceEventAdmitted } from './history/resourceEventAdmission.js';
 
 // W2-FIX-DATA-13 (the chair's 12:11 ruling): a lasting effect that names a district or a quarter is a town's (draw-free).
-import { sizedLastingEffects } from './history/sizedLastingEffects.js'; import { troubleHooksOf } from './history/troubleHooksOf.js'; // HOOKS-BUILD: a trouble's hooks from its kind's pool (one line, so no cited line moves)
+import { sizedLastingEffects } from './history/sizedLastingEffects.js';
+// HOOKS-BUILD: a trouble's hooks from its kind's pool. HOOKS-CURES B: the timeline hook's note re-keying (W2-FIX-DATA-3 item 6) lives in the leaf.
+import { notedSoFar, noteByTemplateRow, troubleHooksOf } from './history/troubleHooksOf.js';
 
 // BAR3-PLACES (H3, 2026-11-15): a trade collapse within five years of the town's age (4 of 88 on the census's 720) failed no
 // trade "the settlement was built upon": it takes the founding twin, draw-free (event, year and every draw unmoved).

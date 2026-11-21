@@ -20,7 +20,14 @@
  *       after each splice, so a fifth row adds a roll); computed from `HISTORICAL_EVENTS_DATA`;
  *   3d. on the two births where a legitimacy line was kept at the pick and false on the final record (`seat outranked`),
  *       no line the door kept reads false at the end (the line is struck from the pool; arm 3c pins no late write).
+ *
+ * HOOKS-CURES A (PAGE-10's brief, the chair's 21:41 ruling: a literal has one home), red at 7903d6bb7 (2 failed):
+ *   1c. each kind's pool composed from the modules' exports (`troubleHooksOf.js :: troubleHookPool`) equals the pool as it
+ *       stood at 7903d6bb7, element for element and in order (`tests/fixtures/trouble-hooks-pools.snapshot.json`, written
+ *       by `tests/fixtures/troubleHooksPoolsSnapshot.mjs`);
+ *   1d. no `TROUBLE_HOOKS` line equals any timeline template's `plotHooks` line (20 such copies at 7903d6bb7).
  */
+import { readFileSync } from 'node:fs';
 import { beforeAll, describe, expect, test } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
@@ -36,7 +43,15 @@ import { withPresumptionLedger } from '../../src/domain/facts/presumptionLedger.
 
 // Loaded softly so the red at the base names every arm (the module does not exist there).
 const troubleHooks = await import('../../src/data/troubleHooks.js').catch(() => ({}));
-const POOLS = /** @type {Record<string, Array<{ text: string, needs?: string[], excludes?: string[] }>>} */ (/** @type {any} */ (troubleHooks).TROUBLE_HOOKS ?? {});
+// HOOKS-CURES A: a kind's pool is COMPOSED at the call site (`troubleHooksOf.js :: troubleHookPool`): the table holds the
+// new lines, and each line the timeline's template already holds is named by its index there.
+const { troubleHookPool } = /** @type {any} */ (await import('../../src/generators/history/troubleHooksOf.js'));
+/** @type {Record<string, Array<{ text: string, needs?: string[], excludes?: string[] }>>} */
+const TABLE = /** @type {any} */ (troubleHooks).TROUBLE_HOOKS ?? {};
+const POOLS = /** @type {Record<string, Array<{ text: string, needs?: string[], excludes?: string[] }>>} */ (Object.fromEntries(
+  Object.keys(TABLE).map((kind) => [kind, typeof troubleHookPool === 'function' ? troubleHookPool(kind) : []])));
+/** Each kind's pool as it stood at 7903d6bb7, written by `tests/fixtures/troubleHooksPoolsSnapshot.mjs` (never typed). */
+const SNAPSHOT = JSON.parse(readFileSync(new URL('../fixtures/trouble-hooks-pools.snapshot.json', import.meta.url), 'utf8'));
 const RULED = Object.freeze({
   crime_wave: 16, guild_conflict: 16, resource_scarcity: 9, external_threat: 9,
   succession_crisis: 9, outside_debt: 9, legitimacy_crisis: 8, corruption_scandal: 9, // HOOKS-FINISH (iv): legitimacy 9 struck
@@ -79,6 +94,21 @@ describe('HOOKS-BUILD arm 1: the pools are total', () => {
   test('no byMemory copy of a hook list stands for these kinds (the pool belongs to the kind)', () => {
     const copies = HISTORICAL_EVENTS_DATA.filter((t) => KINDS.includes(t.type))
       .flatMap((t) => Object.entries(t.byMemory || {}).filter(([, w]) => w && 'plotHooks' in w).map(([m]) => `${t.type}.${m}`));
+    expect(copies).toEqual([]);
+  });
+});
+
+describe('HOOKS-CURES A: a line the timeline still draws has one home', () => {
+  test("arm 1c: each kind's composed pool equals its pool as it stood at 7903d6bb7, element for element and in order", () => {
+    expect(SNAPSHOT.from).toBe('7903d6bb7');
+    expect(Object.keys(TABLE)).toEqual(Object.keys(SNAPSHOT.pools));
+    for (const kind of Object.keys(SNAPSHOT.pools)) {
+      expect(typeof troubleHookPool === 'function' ? troubleHookPool(kind) : null, kind).toStrictEqual(SNAPSHOT.pools[kind]);
+    }
+  });
+  test("arm 1d: no line of TROUBLE_HOOKS is a timeline template's plotHooks line (the chair's rule 2, a literal has one home)", () => {
+    const templateLines = new Set(HISTORICAL_EVENTS_DATA.flatMap((t) => (t.plotHooks || []).map((r) => (typeof r === 'string' ? r : r?.text))));
+    const copies = Object.entries(TABLE).flatMap(([kind, rows]) => rows.filter((r) => templateLines.has(r.text)).map((r) => `${kind}: ${r.text}`));
     expect(copies).toEqual([]);
   });
 });
