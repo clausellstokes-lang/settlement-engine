@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "3f0c08c1dad3f32ddfc01ec27e9076ad32ba5920",
-  "measuredBy": "chair landing helper, point 86 (page-9 4f8695c10 onto the line 062504aa8)",
-  "date": "2026-11-20",
-  "note": "the line at point 86: the display half of the page round (CARD, CARD-SERVED, MAGIC, MAGIC-AUDIENCE, OUTPUT, SAFETY, SAFETY-MOUNT, PIN-FIX; new test files under tests/components, tests/domain/display, tests/ui) merged onto the line at point 85; the merge took the line side of this register",
-  "files": 3723,
+  "measuredAtSha": "d2a572d0e129463658d6fc7849afafb38a1f7e79",
+  "measuredBy": "PAGE-10",
+  "date": "2026-11-21",
+  "note": "the working line a64619510 merged into the trouble lane (6f84deba7)",
+  "files": 3730,
   "parked": 476,
-  "credited": 3247,
-  "titles": 31318,
-  "suiteTitles": 8680
+  "credited": 3254,
+  "titles": 31396,
+  "suiteTitles": 8702
 }
