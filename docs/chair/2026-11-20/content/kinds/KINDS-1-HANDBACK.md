@@ -1,3 +1,19 @@
+# SAVED AT THE STOP (2026-11-21)
+
+- `lane/kinds-1-2026-11-20` @ the commit carrying this section (K0, K1, K2 MERGED; on origin). Builders' branches K0
+  (99a4a462e), K1 (6a5132049) and K2 (3469a8f17) are merged into it, so their commits are on origin through the lane;
+  their own refs were not pushed (nothing of theirs is unmerged; their worktrees held only a `node_modules` symlink).
+- BUILT BUT UNMERGED: K3 at `lane/kinds-1-2026-11-20-k3-wip` @ e09b205c7 (on origin): crime row = B50 (98ee01c93,
+  proved 900/900 against the planted B50 measure), the tuning register's two DRAFT rows (d563406b1), the tuning
+  inventory by its door (134602ad1, walker 76/76), and a WIP one-line wiring-census change (e09b205c7, UNVERIFIED).
+- IN FLIGHT when cut (the account's weekly limit, 2026-11-21 ~02:00 UTC): K3's remaining doors: the wiring census's
+  ordinary run, the lighting census door, the mutation manifest, the stale comment in `densityCreateBoundary.js`'s header
+  (item 4: the regen now reads `settlement.config || settlement._config || config`), the boundary walker run, the
+  `tests/lint` sweep. Then rule 8's two runs (as re-ruled 21:27: build + the two build tests; tests/generators,
+  tests/data, tests/domain/density, tests/domain/trouble, tests/lint, tests/build) and "KINDS <commit>" to the chair.
+- NEXT STEP: read K3's diff on `-k3-wip`, finish the doors listed in `briefs/K3.md` (from item 1's ordinary run on),
+  merge it, then the two runs.
+
 # KINDS-1 hand-back (the lane "which troubles a place is born with") — kept current at every push
 
 Seat: KINDS-1, first owner. Chair: session_019yED1SUxGVHyjQnoqoFvQ8. Prompt:
