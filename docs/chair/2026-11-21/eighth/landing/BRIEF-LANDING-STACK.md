@@ -61,7 +61,10 @@ f. Then ONE run of the lanes' own test directories, the UNION over every landed 
    `git diff --name-only <merge>^1...<merge>^2 -- src` and collect: `tests/generators` and `tests/data` for
    `src/generators/**` or `src/data/**`; `tests/components` and `tests/pdf` for `src/components/**` or `src/pdf/**`;
    `tests/domain/<dir>` for each `src/domain/<dir>/`; `tests/kernel` for `src/kernel/**`; `tests/store`, `tests/lib`
-   for those. `--maxWorkers=3`, `timeout 7200`.
+   for those. ALSO (added 2026-11-21 after the first stack showed the hole): EVERY TEST FILE A LANDED LANE ITSELF
+   CHANGED OR ADDED, wherever it lives (`git diff --name-only <merge>^1...<merge>^2 -- tests`: each `*.test.js` or
+   `*.test.jsx` not already inside a directory run whole), and, for a `src` file directly under `src/domain/` (no
+   sub-directory), the `tests/domain/*.test.js` files that name its module. `--maxWorkers=3`, `timeout 7200`.
 g. CLASSIFY EVERY FAILING TEST of d, e and f BY NAME: (1) on `RED-AT-LINE.tsv` (file and title); (2) on the chair's
    message's list of reds it has already ruled; (3) a register cured by its door above; (4) ANYTHING ELSE: do not
    cure it; record the file, the full title, the first two lines of its message, and WHICH LANDED LANE touches the

@@ -38,6 +38,19 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
 - Every standing directive in the seventh handoff's section 1 stands (everything but the next read of thirty lands
   before the deploy; reports in very simple words; an owner's prompt is answered first and in full; his rule on
   which tier architects and which tier does everything else).
+- **2026-11-21, between the clock's readings of 23:47 and 23:52 UTC, the owner (verbatim, the whole message):** "so what are
+  we doing with daily life?" ANSWERED FIRST AND IN FULL the same turn, in plain words: the page prints about 33 words;
+  the record derives eight more things about a place's day that no page prints, and as measured they could not print
+  (one sentence nearly everywhere; some false at the small sizes); THREE are rebuilt true and varied (where people
+  gather, how the day starts, what children are warned about: the commonest sentence on 3 to 13% of a size's places on
+  900, none empty, none of the known false claims), with three of their sentences quoted; they are merged in the
+  stack as point 90, not landed until its gate is read; THE PAGE DOES NOT SHOW THEM until the display lane prints them
+  (no seat yet); the other five and the owner-only line are worded and ruled, NOT built (held at the stop). THE
+  CHAIR'S PLAN SAID: land the three; the display lane takes the next free seat; the other five built before the deploy
+  (his standing "all of it predeploy"); a plain before-and-after of six places for him. ONE CAUTION SAID: the figures
+  are the lane's own machine measure on a pool where every place sits on a monster frontier, and the chair has not yet
+  read Daily Life on whole pages. PUT TO HIM AS HIS CALL, UNANSWERED: a fifth and a sixth seat would start the display
+  lane and Daily Life's second half now instead of in some hours.
 
 ## 2. Decisions of this chair (each vetoable by the owner)
 
@@ -157,6 +170,28 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   reader's list; W proves a hiding read prints what a place without the house prints; the owner's page moves 0
   sentences; criminal_power's four signatures listed, not cured; the rows stand under the sameness door's hideable
   walker by declared exemption only). The trouble hooks' theme rows wait for the depth lane's themes on the line.
+- 2026-11-21 23:54 UTC · THE STACK AT ITS GATE, AND THE SEATS' MESSAGES OF 23:36 TO 23:52. (1) THE STACK: four lanes merged in order, each
+  its own merge commit: point 88 the traditions lane (cf5b24079), 89 the state sentences (e7096fe96, the lane's tip
+  b67b2753a), 90 Daily Life (d50e8c0e9, tip 7689dda18), 91 the place lane's safety line (822d514b6, tip 3dccb0069); the
+  one gate is running at 822d514b6. THE PEOPLE LANE'S FIRST HALF DID NOT MERGE: beside two registers, a conflict in
+  `tests/domain/bar5PowersStanding.test.js` where both sides add lines after `DEFAULT_CONFIG`'s import (the line: one
+  import, `cardStandingLine`; the lane: two imports and the block that slices the writer's `T` table). RULED: BOTH KEPT,
+  the line's import first; the two sides' other changes to that file are in different places; it goes into the next
+  stack with that ruling named. A HOLE IN THE STACK'S BRIEF, FOUND BY THE CHAIR AND CLOSED (step f): the one gate now
+  also runs every test file a landed lane itself changed or added, wherever it lives (Daily Life's own tests sit
+  directly under `tests/domain/` and matched no directory); the running helper was told. (2) SEAT-10: THE KEY QUESTION
+  IS ANSWERED FOR BIRTHS: over 166 birth pairs law 2 writes no key path that law 1 lacks, nor the reverse (values only);
+  no explained-writer row is owed. ORDERED: the same probe once over PLAY TIME (the pulse and each road by which a
+  seat changes hands), five pairs a size, if it fits in half an hour of box. It took the base by a fast-forward and
+  re-took the doors (the wiring census 1439 to 1444, 5e26f4062; the lighting census 3723 to 3730, ef5abf4da; the size
+  baseline green at 930). WRITER-REACH CAME TO THE CHAIR (COMMON-RULES 9: the door's report is not the same at the
+  two trees: six `surfaceReach` rows differ, four the lane's, two the line's; no identity new: judged 12,726, DARK
+  1,425 at all three). RULED: re-taken by its own door at the merged tip ON CONDITION of a three-way proof that every
+  row at the tip equals the line's frozen row or the lane's (the merge made no reach that neither side had frozen);
+  any other row comes to the chair unwritten; the six rows go to the security reader as one table (`hidden on
+  factions` reaching the campaign PDF above all). (3) PAGE-12 passed the vocabulary ruling to its builder word for word
+  and wrote cure C's brief (finish 1da4c7c56, not drop it). (4) CI's run on 89ab44e34 is 44962726346 (started 23:37);
+  read by name when it ends.
 
 ## 4. The order of the lanes still to seat (after the first four), and what each waits on
 
