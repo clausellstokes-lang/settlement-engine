@@ -1,4 +1,4 @@
-# PAGE-10's hand-back: THE TROUBLE HALF (kept current at every push; last written 2026-11-21 02:12 UTC by `date -u`)
+# PAGE-10's hand-back: THE TROUBLE HALF (kept current at every push; last written 2026-11-21 02:19 UTC by `date -u`)
 
 A successor reads THIS, then the briefs it names. PAGE-10 integrates; builders build (the Agent tool), each briefed by a
 committed file; a diff is read once, at the merge.
@@ -10,7 +10,7 @@ committed file; a diff is read once, at the merge.
 
 ## 1b. BOTH BUILDERS CUT OFF BY THE ACCOUNT'S WEEKLY LIMIT (about 23:0x UTC 2026-11-20; resets 2026-11-24 15:00 UTC)
 Saved by PAGE-10 at 02:0x UTC 2026-11-21 and pushed as transport (NOT merged, NOT proven):
-- HOOKS-CURES: `lane/page-10-2026-11-20-cures-wip` = A 337a33621 (one home), B 13ba319e0 (the packed line), then 1da4c7c56 = C UNPROVEN wip (the mixed key: red seen, the leaf mid-change). Each of A and B carries its own receipts in its message; PAGE-10 has NOT read their diffs. RESUME: the same builder by SendMessage after the reset (its transcript is saved), or a fresh builder on the -wip branch from 13ba319e0 (drop 1da4c7c56 or finish it), brief `briefs/HOOKS-CURES.md` C.
+- HOOKS-CURES: `lane/page-10-2026-11-20-cures-wip` = A 337a33621 (one home), B 13ba319e0 (the packed line), then 1da4c7c56 = C UNPROVEN wip (the mixed key: red seen, the leaf mid-change). A AND B READ ONCE AND MERGED by PAGE-10 at 12c211dc9 (02:2x UTC; red re-run at 7903d6bb7: arms 1c, 1d fail; green 27/27; wiring --check clean; lighting 31344 titles). The rule-2 guard is arm 1d in the hooks' test file, not a tests/lint walker (said to the chair). C ALONE REMAINS. RESUME: the same builder by SendMessage after the reset (its transcript is saved), or a fresh builder on the -wip branch from 13ba319e0 (drop 1da4c7c56 or finish it), brief `briefs/HOOKS-CURES.md` C.
 - CAUSES-PARITY: `lane/page-10-2026-11-20-parity-wip` = M 3a953c6d3 (the measure: NOT EXACT, 14/900, all served-only), then 6a1120efd = B's red-first arm UNPROVEN wip. LEAVE GRANTED by PAGE-10 (told the chair 22:5x, vetoable) for `tensionCauseHolds.js :: forceUnpaidOrCut` only: keep `kept && (volunteers || pay short || pay unpaid)`, drop payCut; re-prove on the three faulted places from PAGE-9's evidence (`build/CAUSES-WIRING-PARITY/pairs.2026-11-20.txt` at caf3509e7). Then W (new walker; also payCut reaching the crime clause via the capture arm) and F. THE GAP (for after the deploy): the older lines that need payCut, named by the builder when B is done.
 
 ## 2. Units
