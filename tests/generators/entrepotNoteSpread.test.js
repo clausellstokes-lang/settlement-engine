@@ -267,7 +267,7 @@ describe('(e) the chair\'s condition: no row needs or excludes a hideable house 
     // the houses: market (luxury, silk, spices) and bank (finance); the tavern row was re-ruled to no house (18:52 UTC). The rest
     // are the class declarations (imports, exports, silk-steady's prosperity: PLACE-2's cure, the chair's ruling (2))
     expect([...needed].sort()).toEqual([
-      'furs_north: exports', 'furs_north: imports',
+      'furs_north: exports', 'furs_north: imports', 'furs_north: trade at work: leather',
       'luxury_goods: exports', 'luxury_goods: market',
       'silk_luxury_textiles: imports', 'silk_luxury_textiles: market', 'silk_luxury_textiles: prosperity: ≥ poor',
       'spices_dyes: imports', 'spices_dyes: market',
@@ -372,8 +372,10 @@ describe('(g) the chair\'s calls, rewordings and conditions (17:18 UTC)', () => 
     const row = (id, rowId) => mod.ENTREPOT_NOTES[id].find((r) => r.id === rowId);
     expect(mod.ENTREPOT_NOTES.furs_north).toHaveLength(13);
     for (const rowId of ['furs-among', 'furs-leather']) {
-      // no need of the place's own: the goods class's declaration only (imports / exports: held wherever the chain is)
-      expect((row('furs_north', rowId).needs || []).filter((a) => !['imports', 'exports'].includes(a)), rowId).toEqual([]);
+      // no need of the place's own but the goods class's declaration (imports / exports: held wherever the chain is) and,
+      // for furs-leather, the leather work it names (the chair's condition of 22:04 UTC: `trade at work: leather`)
+      const own = rowId === 'furs-leather' ? ['trade at work: leather'] : [];
+      expect((row('furs_north', rowId).needs || []).filter((a) => !['imports', 'exports'].includes(a)), rowId).toEqual(own);
       expect(row('furs_north', rowId).excludes, rowId).toBeUndefined();
     }
     const OPEN_TRADE = [['salt', 'salt-wanted'], ['luxury_goods', 'lux-value'], ['wine_spirits', 'wine-through'], ['transit_finance', 'fin-lend']];

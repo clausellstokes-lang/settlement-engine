@@ -93,7 +93,7 @@ export const ENTREPOT_NOTES = deepFreeze({
     { id: 'furs-regular', needs: ['imports', 'exports'], text: 'Furs and pelts are a regular part of the trade here.' },
     // the chair's ruling (1) of 18:52 UTC: two more furs rows with no needs, in the pool's voice (the metropolis's bar)
     { id: 'furs-among', needs: ['imports', 'exports'], text: 'Furs and pelts are among the goods bought and sold here.' },
-    { id: 'furs-leather', needs: ['exports'], text: 'Some of the pelts here go to make leather goods, and the rest are sold on as they are.' },
+    { id: 'furs-leather', needs: ['exports', 'trade at work: leather'], text: 'Some of the pelts here go to make leather goods, and the rest are sold on as they are.' },
   ],
   luxury_goods: [
     { id: 'canonical', text: today, excludes: ['route: road', 'route: isolated', 'route: mountain_pass'] },
