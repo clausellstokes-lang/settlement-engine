@@ -143,13 +143,13 @@ It also checks that no sentence is shared by two lines. Result: 40 lines, 0 fail
 
 | # | what | stakes |
 |---|---|---|
-| 1 | Knows that # broke a promise everyone believes # kept, and has not yet decided what to do about it | # has been praised for keeping that promise, and would not take the truth well |
+| 1 | Knows that # broke a promise that everyone believes was kept, and has not yet decided what to do about it **[CN2, the chair 22:34: was "Knows that # broke a promise everyone believes # kept, and has not yet decided what to do about it"]** | # has been praised for keeping that promise, and would not take the truth well |
 | 2 | Knows what # really said in a quarrel that everyone else remembers differently, and has let the other version stand | # has repeated the other version often enough to be caught out by it |
 | 3 | Knows why # turned back from a journey last year, and has kept the reason to themselves | # told everyone the weather turned them back, and would not like the true reason heard |
-| 4 | Knows that # once took the blame for something they did not do, and has never asked # why | If it came out, # would have to say whom they were shielding |
+| 4 | Knows that # once took the blame for something they did not do, and has never asked them why **[CN2, the chair 22:34: was "Knows that # once took the blame for something they did not do, and has never asked # why"]** | If it came out, # would have to say whom they were shielding |
 | 5 | Knows that # once made ready to go away for good and was talked into staying, and has never brought it up | # has since spoken as if going had never crossed their mind |
-| 6 | Knows whom # goes to see on the evenings # says they are out walking, and has kept it quiet | # has never given a reason for those walks, and would not want to be asked for one |
-| 7 | Knows that # lost something they were trusted to keep, and has watched # hide the loss ever since | # has never owned to the loss, and could not make it good now |
+| 6 | Knows where # really goes on the evenings they say they are out walking, and has kept it quiet **[CN2, the chair 22:34: was "Knows whom # goes to see on the evenings # says they are out walking, and has kept it quiet"]** | # has never given a reason for those walks, and would not want to be asked for one |
+| 7 | Knows that # lost something they were trusted to keep, and has watched them hide the loss ever since **[CN2, the chair 22:34: was "Knows that # lost something they were trusted to keep, and has watched # hide the loss ever since"]** | # has never owned to the loss, and could not make it good now |
 | 8 | Knows that the choice everyone blames on someone else was #'s, and has never said a word | # has let another carry the blame for it, and would have that to answer for as well |
 | 9 | Knows that # started a rumour that did someone real harm, and has never told the one it hurt | # would lose a friend over it, and perhaps more than one |
 | 10 | Knows that # turned down help when it was offered, then told everyone none was offered | # has made much of being left to manage alone, and would look small if the truth came out |
@@ -158,31 +158,31 @@ It also checks that no sentence is shared by two lines. Result: 40 lines, 0 fail
 
 | # | what | stakes |
 |---|---|---|
-| 1 | Was still up when # came by very late one night, and saw the state # was in. Neither has spoken of it since | Someone has started asking where everyone was that night |
-| 2 | Overheard # make a promise to someone # has since turned away from. Neither has mentioned it | The one the promise was made to has begun to talk about it |
+| 1 | Was still up when # came by very late one night, and saw the state they were in. Neither has spoken of it since **[CN2, the chair 22:34: was "Was still up when # came by very late one night, and saw the state # was in. Neither has spoken of it since"]** | Someone has started asking where everyone was that night |
+| 2 | Overheard # make a promise to someone who has since been turned away. Neither has mentioned it **[CN2, the chair 22:34: was "Overheard # make a promise to someone # has since turned away from. Neither has mentioned it"]** | The one the promise was made to has begun to talk about it |
 | 3 | Stood by while # turned away someone who badly needed help. They have not spoken of it since | The one turned away has come back, and remembers who was there |
 | 4 | Was there when # lost their temper and broke something that was not theirs. Neither has brought it up | The owner still wonders what became of it, and has started asking |
 | 5 | Watched # put something in the fire that others have been looking for ever since. Neither has said a word | The search for it has started up again |
-| 6 | Saw # meet someone at first light whom # claims never to have met. They have never talked about it | That someone has come back, and greeted them both like old acquaintances |
-| 7 | Was with # the day # said something cruel to a friend, and has never repeated it. Neither has raised it | The friend has heard part of it from someone else, and wants the rest |
+| 6 | Saw # meet someone at first light. # claims never to have met them. They have never talked about it **[CN2, the chair 22:34: was "Saw # meet someone at first light whom # claims never to have met. They have never talked about it"]** | That someone has come back, and greeted them both like old acquaintances |
+| 7 | Was with # the day they said something cruel to a friend, and has never repeated it. Neither has raised it **[CN2, the chair 22:34: was "Was with # the day # said something cruel to a friend, and has never repeated it. Neither has raised it"]** | The friend has heard part of it from someone else, and wants the rest |
 | 8 | Saw # weep after a meeting that everyone else thinks went well. Neither has let on | Another such meeting is coming, and they will both be in the room |
 | 9 | Was close by when # made a choice that cost someone else dearly, and kept still. Both have kept still since | The one who bore the cost has begun to wonder who else was there |
-| 10 | Heard # tell a lie that settled a quarrel in #'s favour, and said nothing. The two of them have left it there **[CURE 5, the chair 20:02: not "let it lie" after "tell a lie"]** | The quarrel has started up again, and the lie will not hold a second time |
+| 10 | Heard # tell a lie that settled a quarrel in their favour, and said nothing. The two of them have left it there **[CURE 5, the chair 20:02: not "let it lie" after "tell a lie"]** **[CN2, the chair 22:34: was "Heard # tell a lie that settled a quarrel in #'s favour, and said nothing. The two of them have left it there"]** | The quarrel has started up again, and the lie will not hold a second time |
 
 ### K2: beside "Owes # a debt from before either of them held their current position: one that # has never formally called in" / "The silence feels like patience, and it is not forgiveness"
 
 | # | what | stakes |
 |---|---|---|
-| 1 | Owes # a debt for lodging given when they had nowhere to go, and # has never once mentioned it **[CURE 1, the chair 20:02: no season]** | Being let off so lightly sits worse with them every year |
-| 2 | Owes # a debt for a word put in at the right moment, and # has never asked for anything in return | A favour of that size is bound to be asked for one day |
-| 3 | Owes # a debt for keeping quiet about a mistake, and # has never said what it will cost | They have begun to dread the day # names a price |
-| 4 | Owes # a debt from a bad year, when # carried them through, and # has never asked for it back **[CURE 2: "a bad year", not "season"]** | Others have noticed how readily they side with # on every question |
-| 5 | Owes # a debt on a promise made in a hard hour, and # has never held them to it **[CURE 3, the chair 20:02: no echo]** | A promise left lying that long is only waiting for its moment |
-| 6 | Owes # a debt that neither of them ever wrote down, and that # has never once raised | With nothing written, # may ask for whatever they please |
-| 7 | Owes # a debt for a loan made in friendship, and # has never asked for it back | The friendship has cooled, and the loan has not been forgotten |
-| 8 | Owes # a debt for taking their side when no one else would, and # has never said so aloud | If # ever needs someone to stand up for them, they will be expected to |
-| 9 | Owes # a debt for a kindness done in secret, and # has never let on who did it | They have only lately learned whose kindness it was, and cannot tell what is expected of them |
-| 10 | Owes # a debt for an introduction that made their name, and # has never called it in | Everyone assumes they rose on their own, and # is aware it is not so |
+| 1 | Owes # a debt for lodging given when they had nowhere to go. # has never once mentioned it **[CURE 1, the chair 20:02: no season]** **[CN2, the chair 22:34: was "Owes # a debt for lodging given when they had nowhere to go, and # has never once mentioned it"]** | Being let off so lightly sits worse with them every year |
+| 2 | Owes # a debt for a word put in at the right moment, and they have never asked for anything in return **[CN2, the chair 22:34: was "Owes # a debt for a word put in at the right moment, and # has never asked for anything in return"]** | A favour of that size is bound to be asked for one day |
+| 3 | Owes # a debt for keeping quiet about a mistake, and they have never said what it will cost **[CN2, the chair 22:34: was "Owes # a debt for keeping quiet about a mistake, and # has never said what it will cost"]** | They have begun to dread the day # names a price |
+| 4 | Owes # a debt from a bad year. # carried them through it and has never asked for it back **[CURE 2: "a bad year", not "season"]** **[CN2, the chair 22:34: was "Owes # a debt from a bad year, when # carried them through, and # has never asked for it back"]** | Others have noticed how readily they side with # on every question |
+| 5 | Owes # a debt on a promise made in a hard hour. # has never held them to it **[CURE 3, the chair 20:02: no echo]** **[CN2, the chair 22:34: was "Owes # a debt on a promise made in a hard hour, and # has never held them to it"]** | A promise left lying that long is only waiting for its moment |
+| 6 | Owes # a debt that neither of them ever wrote down. # has never once raised it **[CN2, the chair 22:34: was "Owes # a debt that neither of them ever wrote down, and that # has never once raised"]** | With nothing written, # may ask for whatever they please |
+| 7 | Owes # a debt for a loan made in friendship, and they have never asked for it back **[CN2, the chair 22:34: was "Owes # a debt for a loan made in friendship, and # has never asked for it back"]** | The friendship has cooled, and the loan has not been forgotten |
+| 8 | Owes # a debt for taking their side when no one else would. # has never said so aloud **[CN2, the chair 22:34: was "Owes # a debt for taking their side when no one else would, and # has never said so aloud"]** | If # ever needs someone to stand up for them, they will be expected to |
+| 9 | Owes # a debt for a kindness done in secret, and they have never let on who did it **[CN2, the chair 22:34: was "Owes # a debt for a kindness done in secret, and # has never let on who did it"]** | They have only lately learned whose kindness it was, and cannot tell what is expected of them |
+| 10 | Owes # a debt for an introduction that made their name. # has never called it in **[CN2, the chair 22:34: was "Owes # a debt for an introduction that made their name, and # has never called it in"]** | Everyone assumes they rose on their own, and # is aware it is not so |
 
 ### K3: beside "Has been reading #'s correspondence through an intermediary. Nothing damaging yet. But they keep looking" / "The intermediary has recently started asking for more money"
 
@@ -194,10 +194,10 @@ It also checks that no sentence is shared by two lines. Result: 40 lines, 0 fail
 | 4 | Has been piecing together #'s past from what visitors let slip. The pieces do not fit yet. They go on gathering them | One of those visitors has mentioned the questions to # directly |
 | 5 | Has set someone to trail # on errands for months. The reports are dull. They keep the trailing up **[CURE 4: "for months", not "for a season"]** | The one doing the trailing has grown fond of #, and may say something |
 | 6 | Has been reading the letters # leaves lying about, whenever the chance comes. There has been nothing worth having. They read on regardless | # has begun to put the letters away |
-| 7 | Has been keeping count of the hours # spends away and where # says they went. The accounts mostly match. Mostly is not enough for them | # has noticed that the questions always come from the same direction |
+| 7 | Has been keeping count of the hours # spends away and where they say they went. The accounts mostly match. Mostly is not enough for them **[CN2, the chair 22:34: was "Has been keeping count of the hours # spends away and where # says they went. The accounts mostly match. Mostly is not enough for them"]** | # has noticed that the questions always come from the same direction |
 | 8 | Has been making a friend of #'s closest friend in the hope of hearing something useful. Nothing useful yet. The friendship goes on | The friend has begun to repeat the questions to # |
 | 9 | Has been noting every promise # makes in front of others and checking which are kept. So far most are. The tally goes on | A tally like that would be hard to explain if it were found |
-| 10 | Has been watching whom # sits with and whom # avoids, and drawing conclusions. None of them is firm yet. The watching goes on | Someone has asked them, half in jest, why they always seem to be wherever # is |
+| 10 | Has been watching who sits with # and who is kept at a distance, and drawing conclusions. None of them is firm yet. The watching goes on **[CN2, the chair 22:34: was "Has been watching whom # sits with and whom # avoids, and drawing conclusions. None of them is firm yet. The watching goes on"]** | Someone has asked them, half in jest, why they always seem to be wherever # is |
 
 **Judgment calls for the chair's eye:**
 

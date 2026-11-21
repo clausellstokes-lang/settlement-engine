@@ -166,4 +166,8 @@ describe('the draft\'s lint: plain, small, and nothing the card or the place may
       for (const s of [...sentences(out.what), ...sentences(out.stakes)]) { expect(seen.get(s) ?? null, `"${s}" (${key})`).toBeNull(); seen.set(s, key); }
     }
   });
+  it('the other card is named at most once in a sentence (namesInSentences CN2; the chair\'s rule of 22:34: a second mention is a pronoun, or the sentence is recast)', () => {
+    expect(PRINTED.size).toBe(KEYS.length);
+    for (const [key, { out }] of PRINTED) for (const s of [...sentences(out.what), ...sentences(out.stakes)]) expect(s.split(OTHER.name).length - 1, `${key}: ${s}`).toBeLessThanOrEqual(1);
+  });
 });
