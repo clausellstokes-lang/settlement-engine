@@ -1,7 +1,12 @@
-AMENDED BY THE CHAIR, 2026-11-21 02:16 UTC. THE OWNER MOVES THE PROGRAM TO ANOTHER ACCOUNT ON 2026-11-21.
-WHEN YOU READ THIS, THAT ACCOUNT MAY BE AT WORK ON YOUR LANE AND ON YOUR BRANCHES.
-THIS PART OVERRIDES EVERYTHING BELOW IT WHERE THE TWO DIFFER.
+AMENDED BY THE CHAIR (2026-11-21, 02:16 UTC; re-worded 02:21 UTC because the seats proved to be awake tonight).
+READ THE CLOCK FIRST: `date -u`.
 
+A. IF IT IS BEFORE 2026-11-21 06:00 UTC: nothing in this top part binds you. Kill every run and builder of
+   yours that is still going, then do the first-written text below the line EXACTLY (your OWN branches,
+   the note atop the hand-back, send the chair nothing, stop for good).
+
+B. IF IT IS 2026-11-21 06:00 UTC OR LATER: the owner has moved the program to another account, which may be
+   at work on your lane and on your branches. Then this part overrides everything below it where they differ:
  (i) FIRST LOOK, CHANGE NOTHING. `git fetch origin` (a fetch moves no branch of yours). Then, in every
      worktree on this machine: `git status --short`; and for every local branch: does it hold a commit
      that origin does not hold? If nothing is uncommitted and no local commit is missing from origin,
