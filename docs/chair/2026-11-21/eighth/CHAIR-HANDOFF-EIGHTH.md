@@ -101,6 +101,24 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   session's own setup suggests after a push (each child session is created with a draft-pull-request default;
   COMMON-RULES 11 is the owner's standing word). A seat's message reaches the chair as a turn; the chair replies with
   `send_message`; `get_session` on a seat shows whether it runs and its token count.
+- 2026-11-21 23:25 UTC · THE SEATS' FIRST MESSAGES (23:20 to 23:23) AND THE RULINGS ON THEM. (1) SEAT-10: ITS OWN PERMISSION CHECK
+  REFUSED THE MERGE OF THE LINE ("Destructive or Unwanted Actions"); it routed round nothing. THE INSTRUCTION IS
+  WITHDRAWN AND THE CHAIR MADE THE MERGE in a scratch worktree (`/home/user/wt/seatbase`): `lane/seat-10-base-2026-11-21`
+  at 66585d96a (parents 3e8e2e37d and a64619510; `--no-ff`, hooks on; five conflicts as SEAT-9 measured:
+  `npcGenerator.js :: generateSingleNPC` both sides kept; the mutation manifest as the union; the wiring census,
+  writer-reach and the lighting census at the line's side; NOTHING RE-PINNED: the doors and the size baseline are
+  SEAT-10's next commits). ITS CENSUS ANSWER ACCEPTED: the old cut 9cc5045f2 lacks UK and points 83 to 86, so the
+  flip's census is RE-CUT at the merged tip (about an hour and a half of box); meanwhile it measures the key question.
+  A FAULT OF THIS CHAIR: its first prompts ORDERED the line's merge; the seventh chair's rule is that it is asked, never
+  required: now COMMON-EIGHTH 10, and the next prompts are seated on a base the chair has already merged where it can.
+  (2) VEIL-31 FOUND A RED IN THE LAST MERGE before any gate: `tests/lint/rosterChoiceRegistry.walker` ARM D, 1 of 11:
+  R3-TELL-4 unit (i) wrote the marker `registry: people.allegiance` mid-sentence in 212 and in the twin; the walker
+  wants it on a line of its own. RULED AS THE SEAT PROPOSED: the unit (ii) builder's FIRST commit, alone, moves the
+  marker in both engines (red then green 11 of 11); 212's new sha256 into PART 32; `tests/lint` whole at every merge
+  from here on. Its pool is being re-made (about 33 minutes). (3) FORTUNE-6 read CURE-2 unit 1's three commits whole:
+  as claimed (one explained-writer row, the rung 45 to 46, three bookkeeping paths, no `src`); its proofs are running.
+  (4) A CORRECTION TO COMMON-EIGHTH 7: "no test with a `GIT_*` variable" meant git's REPOSITORY variables; the cloud
+  machine always sets eleven others (certificates, credentials, three config keys), which are not the hazard.
 
 ## 4. The order of the lanes still to seat (after the first four), and what each waits on
 
