@@ -1,9 +1,28 @@
-# PAGE-8's hand-back (PEOPLE AND PLACE, after PAGE-6). Last written 2026-11-20 22:35 UTC by `date -u`
+# PAGE-8's hand-back (PEOPLE AND PLACE, after PAGE-6). Last written 2026-11-21 02:12 UTC by `date -u`
 
 A successor needs this file, `PAGE-6-HANDBACK.md` (§0a the F5 ruling verbatim; §4 lines), the chair's
 `docs/chair/2026-11-20/seventh/prompts/COMMON-RULES.txt` (origin `lane/chair-2026-11-08`; thirteen rules, binding) and the briefs
 under `briefs/`: `BUILDER-RULES.md`, `F5-NARROW.md`, `SECRET-LINES-BUILD.md`, `ARRIVAL-LINES-2-BUILD.md`, `L4-FINISH.md`,
 `S9-POST.md` (commit 2: the guard), and the HELD drafts' briefs `SECRETS-30.md`, `PHYSICAL.md`. PAGE-8 integrates; builders build.
+
+## 0. AT 2026-11-21 02:12 UTC: THE ACCOUNT'S WEEKLY LIMIT WAS REACHED (~23:5x UTC on 2026-11-20; it resets 2026-11-24 15:00 UTC)
+
+- The frames' and landmarks' builders were cut by it mid-work. RESUME EACH by message to its agent once requests are accepted
+  (its work is saved): frames (SECRET-LINES build) at origin `lane/page-8-2026-11-20-frames-wip` 620046593 — a PAGE-8 WIP commit
+  of the builder's UNVERIFIED, UNGATED partial cures (the 22:34 pronoun rule, ruling 14) on top of its unit 9fc56c549;
+  landmarks (ARRIVAL-LINES-2) at origin `lane/page-8-2026-11-20-arrival2-wip` 5a30cdc2a (its last commit; clean tree; whether
+  commit A of ruling 13 is in it is NOT yet read by PAGE-8).
+- F5-NARROW: the builder's follow-up is DONE (f9db0a119: the want-follows-secret test, red 5 failed|2 passed → green 7 passed,
+  re-run by PAGE-8; no new writer identity, no new shape, the target {id,kind} rows 26,556 → 26,555). On `page8/int`: writer-reach
+  door aded7f27c; the line at point 86 (a64619510) merged 8960e44b3 (both registers taken from the line, re-taken by their doors:
+  lighting 879564529 (files 3723 → 3724), writer-reach dd706b807 (cohort 1385 → 1385, HOLD, debt none)). Rule 8's runs at
+  dd706b807 started (logs `g-build.log`, `g-dist.log`, `g-dirs.log` in the scratchpad). A NAMED MOVE, NOT ON RED-AT-LINE:
+  `goalSentencesOnceInTown` arm (u), 4 tests (village to metropolis): its 10 flagged holdings lose their match to its d3937c3f8
+  reference, each a narrow card whose want followed its walked secret (ruling 12): a reference the unit moved, named; not
+  re-recorded (its door is not yet found; the chair rules).
+- NEXT FOR F5: read the three logs by their count lines; failing rows by name against RED-AT-LINE.tsv; fast-forward the lane to
+  `page8/int`; push; the landing line "F5-NARROW <commit>" with the build figures, rows on the list, rows moved (writer-reach,
+  goalSentencesOnceInTown (u), the 13 goal moves), rows cured.
 
 ## 1. State (21:35)
 
