@@ -2,6 +2,13 @@
 
 Seat: PEOPLE-2 of the seventh chair (chair session_019yED1SUxGVHyjQnoqoFvQ8; this seat session_019yED1QfbBhtLaDuWfGxc42). Assignment: `git show origin/lane/chair-2026-11-08:docs/chair/2026-11-20/seventh/prompts/PEOPLE-2.txt` (it binds `PEOPLE-1.txt` with my names). Branch: `lane/people-2-2026-11-20`, started on c71e403f4, fast-forwarded to PEOPLE-1's docs tip 2783260be (src identical to the working line 43ab0f5eb). Builder branches: `lane/people-2-<unit>-2026-11-20`.
 
+## SAVED AT THE STOP (2026-11-21)
+- Branches (tips on origin): `lane/people-2-2026-11-20` (this hand-back's commit; code tip 38ef194f7); `lane/people-2-b2-2026-11-20` 7f20574b6; `lane/people-2-b3-2026-11-20` a915fc17a; `lane/people-2-m5-2026-11-20` a8dd55a0f and `lane/people-2-m6-2026-11-20` e44ab2711 (measures, already picked onto the lane). Nothing was uncommitted in any checkout at the stop (only untracked `node_modules`, not saved).
+- MERGED on the lane: kernel-mix (8b0618de7); the working line at 8196e5712 (d28a9bb15) and at 062504aa8 (38ef194f7); briefs and measures (M5, M6 picks; briefs B2, B2b, B3, B4).
+- BUILT, UNMERGED: B2 cure dcc194c26 (unverified) + WIP re-keyed seeded tests 7f20574b6; B3 cure ce1c6cab9 (shares 23/25/16/13/100/97 → 14/13/5/7/13/11) + WIP a915fc17a (two strikes, manifest entry, rows tests re-keyed; unverified).
+- IN FLIGHT when stopped (weekly limit): B2 — the chair's two text-key tests (20:50), first-paint figures, then B2b (brief 852c7a0d9); B3 — the four rewordings ruled 22:35 with `{export}` restricted to physical goods + the 900-place non-good count, then the green re-run. B4 HELD (brief ready, never cut). B1 is PEOPLE-1's, to land first.
+- NEXT: finish B3 on its branch (rewordings + goods condition), then B2 (+B2b); merge each by "How a merge is taken"; landing after PEOPLE-1's B1.
+
 ## The split (the chair, 17:13 UTC; `PEOPLE-1-HANDBACK.md`, THE SPLIT, governs)
 PEOPLE-1 keeps B1 (structuralPosition, then activeConstraint: `npcStructure.js`, `src/data/npcStructureVariants.js`) to its merge. PEOPLE-2 holds: factions[].desc, factionRelationships[].narrative, settlementReason[], founding. NO builder for the three before the chair's verdict on their lines. Nothing under `src/` or `tests/` before "THE LANE IS YOURS at <commit>".
 
