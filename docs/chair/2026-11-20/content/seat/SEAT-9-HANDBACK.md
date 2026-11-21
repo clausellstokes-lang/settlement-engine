@@ -1,3 +1,5 @@
+**SAVED AT THE STOP** (2026-11-21T02:05Z, read from `date -u`: the owner's order, relayed by the chair, a save and a stop for every lane; nothing was started after it).
+
 # SEAT-9 — HAND-BACK (kept current at every push; first written 2026-11-20T22:14:55Z, read from `date -u`)
 
 **For the next owner of this lane: this file, `SEAT-7-HANDBACK.md` (items 69 to 79, §2 to §7), `SEAT-6-HANDBACK.md` (items 53 to 68), `SEAT-6-TO-LIGHT.md`, `SEAT-5-HANDBACK.md` §1 (items 1 to 52) and `briefs/` are all you need.** Every ruling in force: SEAT-5's 1 to 52, SEAT-6's 53 to 68, SEAT-7's 69 to 79, this file's 80 on. SEAT-9's assignment: `docs/chair/2026-11-20/seventh/prompts/SEAT-9.txt` on `origin/lane/chair-2026-11-08` (where it differs from SEAT-8.txt, it governs).
@@ -6,7 +8,12 @@ Branch `lane/seat-9-2026-11-20`, cut at SEAT-7's handed-over tip `b2845bafc` (ve
 
 ## 0. THE STATE
 
-- **Lane tip:** `lane/seat-9-2026-11-20`. Last code merge: UK + UK-CURE (`9624a7ac4`), its follow-up and doors (`333952f7d`, `c5f8d91d2`, `b939ed26b`).
+- **Lane tip:** `lane/seat-9-2026-11-20` (pushed at the stop). Code merges: UK + UK-CURE (`9624a7ac4`), its follow-up and doors (`333952f7d`, `c5f8d91d2`, `b939ed26b`); UK-FOLLOW (`e1557b41c`, BUF `60bd8ef02`, item 84) and the manifest row's text (`4bee8848f`).
+- **AT THE STOP — WHAT IS DONE AND WHAT IS NOT:**
+  - UNIT 1 (UK with UK-CURE) is DONE on the lane: `tests/lint` whole at `5438dd0dc` 220/220 files, 3,271/3,271 tests (`ledgerCitationIntegrity` needs a LOCAL `refs/heads/review-fixes-2026-07-08`: `git branch review-fixes-2026-07-08 origin/review-fixes-2026-07-08`, then 10/10); typecheck 167/167, strict 1113/1113, eslint 0; confine-two `b2845bafc`→`b939ed26b` EQUAL. NOT YET RUN: the ONE build for unit 1 (rule 8 (a)).
+  - UNIT 2 (the flip's census): BFL's final four lists never reached this seat; only the partial (item 83).
+  - UNIT 3 (rule 8 before "SEAT <commit>"): NOT STARTED. The line's tip `a64619510` (point 86) merged into the lane conflicts in FIVE files (`git merge-tree`, measured 2026-11-20 ~22:45Z): `src/generators/npcGenerator.js` (the line's S9/PAGE-6 `secretSource` edits around `generateSingleNPC`'s return beside UK's `generateNPCPowerLevel(role, config)`: keep both), and four registers to re-take by their doors: `docs/content/wiring-census.json`, `scripts/.writer-reach-baseline.json` (rule 9: re-frozen only where the door's report is identical at both trees, else to the chair), `scripts/mutation-coverage-manifest.json` (keep both rows), `tests/lint/.lighting-census-baseline.json`. Also re-measure `npcGenerator.js`'s size baseline after the join (UK-CURE's 930).
+  - THE CHAIR's QUESTION (22:24Z), UNANSWERED: "does law 2 write a key a reader reads that `observedShapeReaders` cannot see written?" A green `tests/lint` does NOT answer it: the detector's corpus (`scripts/lib/observed-shape-corpus.mjs`) calls `generateSettlementPipeline` directly, never `birthConfig`, so it births law 1 only. SEAT-9's probe (key paths of 150 births under law 1 vs law 2, `scratchpad/probe/keys.test.js`) was KILLED FOR MEMORY (it held every path of every record): re-run it streaming, per size, one worker, or diff key paths per birth pair.
 - **OUT:** BFL (FLIP-CENSUS) in SEAT-7's container; its branch `lane/seat-7-2026-11-20-flip-wip` comes through the chair when it closes. If the container ends first: re-staff from `briefs/FLIP-CENSUS.md` + items 73, 76, 78, one shard at a time.
 - **OWED (to the chair, before "SEAT <commit>"):** the flip census's size by file (item 83, partial so far); rule 8 as re-ruled (item 78). The owner's plain table is DONE (item 82).
 
@@ -32,12 +39,15 @@ Branch `lane/seat-9-2026-11-20`, cut at SEAT-7's handed-over tip `b2845bafc` (ve
    - **`seatBandFold.test.js`:** BFL's cut `9cc5045f2` lacks it. After UK-FOLLOW it must not move at the flip (BUF's flip-proof arm).
    - NEXT in BFL's container: two flipped shards over the 793-file set, then the same 793 unflipped, then the four lists. SEAT-7 pushes `-wip` after each.
 
+84. **UK-FOLLOW MERGED (SEAT-9, e1557b41c):** BUF's diff read whole. Arm 3 is a one-tree differential: 199 roles against a local restatement of the old expression, with exactly 11 moving under law 2, both ways; and two births with the key stripped deep-equal their law-1 twins, the key excepted. Every dark birth forces `_seatLawVersion: 1`. There are three length guards. Receipts: tip 13/13; plant (i), the ungated fold, 7 red; plant (ii), no fold under the law, 5 red; both restored; flip-proof with the first dial set 13/13. **`seatBandFold.test.js` does not move at the flip.**
+85. **x46NpcBand (CORRECTS item 83's line; SEAT-9 to the chair 22:27Z):** its dark arm births with `generateSettlementPipeline({ settType, tier })` directly and never reaches `birthConfig`, so the flip cannot move it. It is ALREADY RED unflipped at the line: RED-AT-LINE.tsv row 25, the same title. It belongs in census list (2), the known reds, not (3). No edit was made, and its sixty signed digests are untouched. PLAUSIBLE: that it is red unflipped at this lane's older base as well (BFL's control would show it).
+
 ## 2. THE UNITS
 
 | unit | branch | state |
 |---|---|---|
 | UK + UK-CURE | `lane/seat-2026-11-20-uk` `fad107fcc` + `lane/seat-7-2026-11-20-uk-cure-wip` `452e6f639` | MERGED `9624a7ac4`; follow-up and doors `333952f7d` `c5f8d91d2` `b939ed26b` (item 80) |
-| UK-FOLLOW (BUF) | `lane/seat-9-2026-11-20-uk-follow` (worktree `scratchpad/wt-buf`) from `30e812c0e` (brief `briefs/UK-FOLLOW.md`) | OUT; then the lighting census and the manifest row re-taken by their doors if the title count moves |
+| UK-FOLLOW (BUF) | `lane/seat-9-2026-11-20-uk-follow` `60bd8ef02` (pushed at the stop) | MERGED `e1557b41c`; manifest row text `4bee8848f`; lighting counts unchanged (13 tests, 5 describes); seatBandFold + lighting + manifest + seedLoopTotality 66/66 |
 | FLIP-CENSUS (BFL) | `lane/seat-7-2026-11-20-flip(-wip)` | OUT in SEAT-7's container |
 | U6 … U12 | | not briefed (SEAT-7 §0 NEXT) |
 
