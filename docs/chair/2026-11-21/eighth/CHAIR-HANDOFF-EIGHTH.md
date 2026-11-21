@@ -79,6 +79,12 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   register is re-taken). (d) THE TROUBLES LAW: its successor finishes K3 ITSELF where what is left is door runs and the
   one stale comment (running a door is an integrator's act); the K3 branch is read whole once first. The lane stays
   DARK and lands only on the owner's yes; it is seated when a seat is free, after the lanes that land without it.
+- E7 · THE PLACE LANE DOES NOT RE-EMIT THE HOME PAGE'S SAMPLE TOWN (ruled 2026-11-21 23:22 UTC; it corrects PLACE-2's hand-back and the
+  pickup's line 7, which called three failures the lane's own): `tests/build/landingFixtureFreshness.test.js` (both tests)
+  is ALREADY on `ci/RED-AT-LINE.tsv` (red on the line since point 85) and is re-emitted ONCE, AT THE CLOSE (the close
+  worklist's item 5). So the place lane owes ONE cure before "PLACE": the mutation manifest's row for
+  `tests/generators/safetyDescSpread.test.js`. TWO PROMPTS WRITTEN AHEAD OF NEED: `PLACE-3.txt` and `PEOPLE-3.txt` (one
+  seat for both people halves: the first half to its landing line, then the second as its own line).
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
