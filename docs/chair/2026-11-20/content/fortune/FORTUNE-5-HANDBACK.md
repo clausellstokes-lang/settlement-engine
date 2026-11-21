@@ -1,3 +1,5 @@
+# SAVED AT THE STOP (2026-11-21 02:06:00 UTC by `date -u`; the chair's message of 02:05 UTC: the owner ordered a save and a stop for every lane). Nothing in flight: every builder's work is on origin (`lane/fortune-5-2026-11-20-cure2-wip` a4ffa59fa, `lane/fortune-5-2026-11-20-u5bsent-wip` e0d1cbd65); the U5b builder wrote no code. The order to resume is section 1's OWED list.
+
 # FORTUNE-5 hand-back (kept current at every push; last written 2026-11-21 02:00:47 UTC by `date -u`)
 
 For a successor: this file, `FORTUNE-4-HANDBACK.md` (sections 2, 3 and 5 still stand: the confinement, the size account,
