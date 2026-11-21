@@ -1,4 +1,4 @@
-# PAGE-10's hand-back: THE TROUBLE HALF (kept current at every push; last written 2026-11-20 22:37 UTC by `date -u`)
+# PAGE-10's hand-back: THE TROUBLE HALF (kept current at every push; last written 2026-11-21 02:12 UTC by `date -u`)
 
 A successor reads THIS, then the briefs it names. PAGE-10 integrates; builders build (the Agent tool), each briefed by a
 committed file; a diff is read once, at the merge.
@@ -7,6 +7,11 @@ committed file; a diff is read once, at the merge.
 - Lane `lane/page-10-2026-11-20`, started at eae5fd6dc. THE LANE IS PAGE-10's (the chair, 20:49, "at 308d3428d"): merged as cfad20e9c. PAGE-7's hand-back read twice.
 - THE CHAIR'S ORDER (20:49): (1) hooks finished on (i)-(iv) below, read once, red/green, both censuses by their doors, ONE build, merge, "HOOKS <commit>"; (2) merge the working line 062504aa8 (read `ci/LINE-NOW.md`); (3) mixed key; (4) themes draft (86 rows less the strike); (5) closing measure on both pools with the kinds table; (6) the two runs, "PAGE-TROUBLE <commit>". THEN the roll-count pin, THEN the second tranche. Container: `npm ci` done (hooks
   installed); the ledger ref `review-fixes-2026-07-08` fetched (the green rule's fetch).
+
+## 1b. BOTH BUILDERS CUT OFF BY THE ACCOUNT'S WEEKLY LIMIT (about 23:0x UTC 2026-11-20; resets 2026-11-24 15:00 UTC)
+Saved by PAGE-10 at 02:0x UTC 2026-11-21 and pushed as transport (NOT merged, NOT proven):
+- HOOKS-CURES: `lane/page-10-2026-11-20-cures-wip` = A 337a33621 (one home), B 13ba319e0 (the packed line), then 1da4c7c56 = C UNPROVEN wip (the mixed key: red seen, the leaf mid-change). Each of A and B carries its own receipts in its message; PAGE-10 has NOT read their diffs. RESUME: the same builder by SendMessage after the reset (its transcript is saved), or a fresh builder on the -wip branch from 13ba319e0 (drop 1da4c7c56 or finish it), brief `briefs/HOOKS-CURES.md` C.
+- CAUSES-PARITY: `lane/page-10-2026-11-20-parity-wip` = M 3a953c6d3 (the measure: NOT EXACT, 14/900, all served-only), then 6a1120efd = B's red-first arm UNPROVEN wip. LEAVE GRANTED by PAGE-10 (told the chair 22:5x, vetoable) for `tensionCauseHolds.js :: forceUnpaidOrCut` only: keep `kept && (volunteers || pay short || pay unpaid)`, drop payCut; re-prove on the three faulted places from PAGE-9's evidence (`build/CAUSES-WIRING-PARITY/pairs.2026-11-20.txt` at caf3509e7). Then W (new walker; also payCut reaching the crime clause via the capture arm) and F. THE GAP (for after the deploy): the older lines that need payCut, named by the builder when B is done.
 
 ## 2. Units
 | unit | state | commit | next |
