@@ -1,0 +1,24 @@
+{
+ "towns": 630,
+ "err": 0,
+ "casts": 1260,
+ "forcedBoth": 630,
+ "entryMoved": 0,
+ "rolesSame": 1260,
+ "rolesMoved": 0,
+ "absentMoved": 0,
+ "stakeCountMoved": 0,
+ "keyMoved": 0,
+ "powerOrStakeMoved": 0,
+ "castBlankedMoved": 0,
+ "reasonsDiffer": 2592,
+ "stakeRows": 9320,
+ "castsWithLosesOrSplit": 1220,
+ "townsWithLosesOrSplit": 628,
+ "kindsWithout": [],
+ "reasonsDifferByKey": {
+  "loses": 1685,
+  "split": 907
+ },
+ "kindsSeen": 15
+}

@@ -1,0 +1,35 @@
+{
+ "crisis": 360,
+ "calm": 330,
+ "missing": 0,
+ "noRow": 11,
+ "noRowSame": 11,
+ "noRowRec": 11,
+ "noRowPage": 11,
+ "blankRec": 360,
+ "blankPage": 360,
+ "blankBoth": 360,
+ "withRow": 349,
+ "withRowRecSame": 13,
+ "calmRec": 330,
+ "calmPage": 330,
+ "calmBoth": 330,
+ "rows": 2238,
+ "rowsChanged": 696,
+ "otherChanged": 0,
+ "keyMoved": 0,
+ "factionOrStakeMoved": 0,
+ "rowCountMoved": 0,
+ "changedByKey": {
+  "loses": 543,
+  "split": 153
+ },
+ "w4": {
+  "frame-calm-town-20": true,
+  "frame-calm-town-80": true,
+  "frame-calm-city-12": true,
+  "frame-calm-city-14": true,
+  "frame-calm-city-49": true,
+  "frame-calm-metropolis-51": true
+ }
+}
