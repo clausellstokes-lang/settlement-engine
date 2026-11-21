@@ -2946,6 +2946,10 @@
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"
     },
+    "tests/generators/settlementReasonVariants.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by PEOPLE-2 B3 (2026-11-20; the chair's rulings of 17:13 and 17:21 UTC) in the commit that builds src/data/settlementReasonVariants.js. It births 150 places a size through the real pipeline and asserts on what came back: no settlementReason sentence above 20% of a size's places; every printed wording's needs hold and excludes do not on the final record through drawDeclared, with the hideable houses taken off the roster; the slots read the final record; a seedless or ineligible call returns the very lines. The regressions it kills are red at its base d85b18ae3 (one city line in 150 of 150 cities, the red commit 3f954559d): dropping the closing call in narrativeGenerator.js :: generateSettlementReason, or the handed record in steps/generateNarratives.js, puts the bar back to 100%. Entered by the builder on the integrator's word (one entry)."
+    },
     "tests/generators/spatialGenerator.test.js": {
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"

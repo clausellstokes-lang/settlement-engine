@@ -321,20 +321,6 @@
       "inputs": []
     },
     {
-      "id": "SMALL_PLACE_VARIANTS::small.3",
-      "pool": "SMALL_PLACE_VARIANTS",
-      "where": "settlementReason[1], thorp and hamlet (after narrativeGenerator.js :: SMALL_PLACE_TIER_LINES)",
-      "text": "Fishing is part of how the households here feed themselves.",
-      "needs": [
-        "fish"
-      ],
-      "excludes": [],
-      "crisis": [],
-      "colour": false,
-      "slots": [],
-      "inputs": []
-    },
-    {
       "id": "SMALL_PLACE_VARIANTS::small.4",
       "pool": "SMALL_PLACE_VARIANTS",
       "where": "settlementReason[1], thorp and hamlet (after narrativeGenerator.js :: SMALL_PLACE_TIER_LINES)",
@@ -491,22 +477,6 @@
         "food surplus"
       ],
       "excludes": [],
-      "crisis": [],
-      "colour": false,
-      "slots": [],
-      "inputs": []
-    },
-    {
-      "id": "SMALL_PLACE_VARIANTS::small.15",
-      "pool": "SMALL_PLACE_VARIANTS",
-      "where": "settlementReason[1], thorp and hamlet (after narrativeGenerator.js :: SMALL_PLACE_TIER_LINES)",
-      "text": "What the place has to sell is taken elsewhere to market.",
-      "needs": [
-        "exports"
-      ],
-      "excludes": [
-        "market"
-      ],
       "crisis": [],
       "colour": false,
       "slots": [],

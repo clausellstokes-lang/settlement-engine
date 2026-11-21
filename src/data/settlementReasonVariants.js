@@ -91,12 +91,15 @@ export const ORIGIN_VARIANTS = Object.freeze({
   ].map((row) => Object.freeze(row))),
 });
 
-/** settlementReason[1], thorp and hamlet: the wordings that follow `narrativeGenerator.js :: SMALL_PLACE_TIER_LINES`. */
+/** settlementReason[1], thorp and hamlet: the wordings that follow `narrativeGenerator.js :: SMALL_PLACE_TIER_LINES`.
+ * small.3 ("Fishing is part of how …") and small.15 ("… taken elsewhere to market.") are STRUCK (the integrator's word,
+ * 2026-11-20): no atom declares what the presumption walker reads in them (a house named fishing; a market), and a
+ * wording no atom declares is not built. The ids of the rest are kept.
+ */
 export const SMALL_PLACE_VARIANTS = Object.freeze([
   // the chair, 17:21, item 2: small places 1 as ruled ("each with its own work.")
   { id: 'small.1', text: 'A few households {ground}, each with its own work.', needs: [], excludes: [] },
   { id: 'small.2', text: 'A handful of homes {ground}, where any newcomer is noticed at once.', needs: [], excludes: [] },
-  { id: 'small.3', text: 'Fishing is part of how the households here feed themselves.', needs: ['fish'], excludes: [] },
   // the chair, 17:21, item 2: small places 4 also excludes `famine`
   { id: 'small.4', text: 'Grain from their own fields feeds the households here.', needs: ['grain'], excludes: ['famine'] },
   { id: 'small.5', text: 'Herds are part of how the households here feed themselves.', needs: ['livestock'], excludes: [] },
@@ -109,7 +112,6 @@ export const SMALL_PLACE_VARIANTS = Object.freeze([
   { id: 'small.12', text: 'What little needs deciding here is decided by the elders together.', needs: ['ruling body', 'ruler: elder'], excludes: [] },
   { id: 'small.13', text: 'A palisade rings the few houses here.', needs: ['palisade'], excludes: [] },
   { id: 'small.14', text: 'The fields here grow more than the households eat.', needs: ['food surplus'], excludes: [] },
-  { id: 'small.15', text: 'What the place has to sell is taken elsewhere to market.', needs: ['exports'], excludes: ['market'] },
 ].map((row) => Object.freeze(row)));
 
 /** settlementReason[1], a city with a meaningful food gap. Every wording keeps the gap. */

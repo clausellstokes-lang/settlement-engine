@@ -49,9 +49,9 @@ describe('BAR2-PLACES: the rows read the town', () => {
 
   /** [row, seed, must not print, what prints instead] */
   const CURED = /** @type {Array<[string, string, RegExp, RegExp]>} */ ([
-    ['C24150 no generations', 'r2r-thorp-10', /for generations its news came/, /its news has always come on somebody else's cart\./],
-    ['C29731 no road age', 'r2r-thorp-5', /a road a century old/, /before anyone built here; a road that old is not soon abandoned\./],
-    ['C25604 the road, not the living', 'r2r-hamlet-32', /makes its living from other people's journeys/, /other people's journeys pass its doors, and some of them stop for a meal on the way\./],
+    ['C24150 no generations', 'r2r-thorp-10', /for generations its news came/, /Built beside the road in the desert; what the place sells goes out along it, and what it buys comes in\./], // re-keyed by identity at PEOPLE-2 B3 (2026-11-20): the town prints a wording of its own arm on its own facts (src/data/settlementReasonVariants.js)
+    ['C29731 no road age', 'r2r-thorp-5', /a road a century old/, /It stands on the road out on the open plain, and the road is how people and goods reach it\./], // re-keyed by identity at PEOPLE-2 B3 (2026-11-20): the town prints a wording of its own arm on its own facts (src/data/settlementReasonVariants.js)
+    ['C25604 the road, not the living', 'r2r-hamlet-32', /makes its living from other people's journeys/, /The road climbs to it through the hills, and every load comes up that road\./], // re-keyed by identity at PEOPLE-2 B3 (2026-11-20): the town prints a wording of its own arm on its own facts (src/data/settlementReasonVariants.js)
     ['C14951 no mill claimed', 'r2r-thorp-1', /All three still hold/, /Built on the river: it gives the place its water, and carries what the fields produce, as it always has\./],
     ['C25910 no public ovens', 'r2r-village-25', /Public ovens/, /Market vendors and shared dining customs make food distribution visibly civic\./],
     ['C26954 no shared ovens', 'r2r-thorp-23', /and shared ovens stretch/, /Fermentation, pickling, and drying stretch the harvest through winter\./],
