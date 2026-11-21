@@ -1,3 +1,10 @@
+# SAVED AT THE STOP (2026-11-21)
+- `lane/place-2-2026-11-20` (the lane): tip below this commit's parent 2b886d129. MERGED ON THE LANE: PLACE-1's whole lane to 25f29b33a (the safety line merged as 95a9887e1); the working line 062504aa8 (7cea24d75); lighting refreeze 2d459ae9c; the P3source report dd1ed4be5 (d3038dcba).
+- SAFETY LINE: merged on the lane, NOT LANDED: three unlisted reds of its own to cure before "PLACE <commit>" (landingFixtureFreshness x2: re-emit lf-033 and re-ground; mutationCoverageManifest TOTALITY: safetyDescSpread.test.js needs an entry). Details in the state section below.
+- BUILT, UNMERGED: `lane/place-2-entrepotnote-cure-2026-11-20` at f19599ec2 (cure ce7f04f32 + "wip: saved at the stop" f19599ec2 holding the builder's UNVERIFIED edit of furs-leather's needs, cut off by the limit). `lane/place-2-viabilityhooks-2026-11-20-wip` at 92787117f (pools and composer; red tests never run; nothing calls it).
+- IN FLIGHT: nothing running. Safety hooks measure never started. `place-2/p3source-measure` (dd1ed4be5) is not on origin by its own name: it is merged on the lane.
+- NEXT STEP: cure the safety line's three reds, re-run the touched test directories (rule 8 as re-ruled 21:27), send "PLACE <commit>"; then verify f19599ec2 (furs-leather needs `trade at work: leather`) and merge the entrepot cure.
+
 # PLACE-2 — hand-back (kept current at every push)
 
 Last written: 2026-11-21T02:06Z. Seat: PLACE-2 of the seventh chair (session_019yED1SUxGVHyjQnoqoFvQ8). Prompt: `docs/chair/2026-11-20/seventh/prompts/PLACE-2.txt` on `origin/lane/chair-2026-11-08` (it points to PLACE-1.txt as the assignment). Branch: `lane/place-2-2026-11-20`. THE LANE WAS GIVEN at 25f29b33a (the chair, 20:17 UTC). PLACE-1's hand-back (`PLACE-1-HANDBACK.md`) holds the history to 20:10 and the merge recipe ("AT EACH MERGE"); this file holds what is new.
