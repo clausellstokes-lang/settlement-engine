@@ -16,8 +16,15 @@ The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
 - **UNIT 2 (law 2's keys against `observedShapeReaders`):** not started; it waits on unit 1.
 - **UNIT 3 (the flip's census):** my answer to the chair is that the cut `9cc5045f2` does NOT answer for the tip. It lacks UK, which changes law-2 births, and it lacks the line's points 83 to 86. A re-cut of the two flipped shards plus the control, 793 files each way, is estimated at about 1.5 h of box: shard 1 took 18 min for 309 files. That is under the 2 h bar, so the census is re-cut at the merged tip after unit 1.
 - **UNIT 4 (rule 8, then "SEAT <commit>"):** not started.
-- **OUT:** none (no builder started).
-- **NEXT:** the chair's word on the refused merge.
+- **THE CHAIR'S WORD (23:24Z):** the order to merge the line is WITHDRAWN. The chair merges `a64619510` into this branch's tip `f82c2a183` in its own container and pushes the result as `lane/seat-10-base-2026-11-21`:
+  - `npcGenerator.js` keeps both sides;
+  - the four registers take the line's side, and the manifest takes the union;
+  - nothing is re-pinned.
+
+  SEAT-10 then takes it by a fast-forward. Each register's door and the size baseline become SEAT-10's next commits, each with its proof. Until then, SEAT-10 adds NO commit to its branch: the two files below stay untracked.
+- **OUT:** builder BKP (unit 2, `briefs/KEY-PROBE.md`, uncommitted until the fast-forward). Its outputs will go to `keyprobe/`.
+- **READY:** `recut/recut.sh`, the census re-cut at the merged tip. It is BFL's set, shard runner and four lists, without the whole run, on a flipped local clone.
+- **NEXT:** the chair's line with the base's commit, then the fast-forward.
 
 ## 1. RULINGS AND FINDINGS SINCE SEAT-9's HAND-BACK
 
