@@ -1,0 +1,10 @@
+SAVE AND STOP (the chair, 2026-11-21, on the owner's order; it binds every seat of the seventh chair and replaces every earlier order).
+
+THE OWNER'S ORDER, VERBATIM: "Look we don't have much usage left. I want you to focus all your attention on saving our progress where it is at per lane. I'll pick this up with a different account tomorrow. After each save, stop that lanes progress."
+
+WHEN YOU NEXT RUN, DO ONLY THIS, IN THIS ORDER, AND NOTHING ELSE:
+1. START NOTHING. No builder, no gate, no test run, no merge, no measure, no reading of diffs. Stop any builder or background run of yours that is still alive.
+2. SAVE. In your own checkout and in every worktree of your builders: `git add -A` and commit what is uncommitted with the message `wip: saved at the stop of 2026-11-21 (unverified)`; push each to ITS OWN branch (a builder's branch that is not on origin yet goes up under its own name with `-wip` added). Never push to the working line, to the chair's branch or to another seat's branch. Push only where `git rev-parse HEAD` differs from the remote (an empty push runs the whole check: do not). Never `--no-verify`, never a force push.
+3. WRITE IT DOWN. Put ONE short section at the top of your hand-back, titled "SAVED AT THE STOP (2026-11-21)": every branch of your lane with its tip; what is merged on the lane; what is built but unmerged and where; what was in flight and how far; the next step in one line. Commit and push it.
+4. STOP FOR GOOD. Send the chair nothing. Do not continue your lane, now or later: it will be picked up from origin by a new seat under another account. If you have already done steps 1 to 3, do nothing at all.
+If your own permission check refuses a push, stop there and try nothing else.
