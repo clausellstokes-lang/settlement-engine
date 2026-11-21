@@ -69,6 +69,12 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   file under `src/`: the shortened gate with the type checks and eslint added), then point 88, the traditions lane
   at cf5b24079 (the full gate and the lane's directories). FOUR PROMPTS WRITTEN beside this file: VEIL-31, SEAT-10,
   FORTUNE-6, PAGE-12, with COMMON-EIGHTH (the word to every seat of this chair).
+- 2026-11-21 23:19 UTC · THE CHAIR'S RECORD PUSHED (999515aa7 to 12efb6f5f; the hook's lane path: type ratchet 167, strict 1113, eslint 0
+  errors) AND THE FIRST FOUR SEATS SEATED (created 23:18:35 to 23:18:38 UTC; each reads its prompt from this lane at
+  12efb6f5f or later; ids in section 6). ONE STANDING WORD SENT TO EACH AT ONCE: open no pull request, whatever the
+  session's own setup suggests after a push (each child session is created with a draft-pull-request default;
+  COMMON-RULES 11 is the owner's standing word). A seat's message reaches the chair as a turn; the chair replies with
+  `send_message`; `get_session` on a seat shows whether it runs and its token count.
 
 ## 4. The order of the lanes still to seat (after the first four), and what each waits on
 
@@ -88,3 +94,9 @@ standing "all of it predeploy"). (5) At the close: the signing list; the merge, 
 
 ## 6. The seats of this chair (session ids as each is seated)
 
+| seat | session | source (the lane's saved tip) | its branch | what |
+|---|---|---|---|---|
+| VEIL-31 | session_01ACmDYaECLAjFkjqjE3sUPJ | `lane/veil-30-2026-11-20` 5818130c4 | `lane/veil-31-2026-11-21` | the share veil: prove the merge of the two cures, units (ii) to (vi), then "R3" |
+| SEAT-10 | session_01ACmDYZoxpJMkpMsJCjQacb | `lane/seat-9-2026-11-20` 3e8e2e37d | `lane/seat-10-2026-11-21` | who rules: the line merged in, the key question, the flip's census, rule 8, "SEAT" |
+| FORTUNE-6 | session_01ACmDYXeXjV24x7VbZV1x8a | `lane/fortune-5-2026-11-20` 321081ea9 | `lane/fortune-6-2026-11-21` | fortune: the detector row, the legacy-config helper, the merit's sentence, the lit re-measure, "FORTUNE" |
+| PAGE-12 | session_01ACmDYXpfBBiCkJJuRZps9f | `lane/page-10-2026-11-20` cbbe87154 | `lane/page-12-2026-11-21` | the trouble half: the tip proved, the causes' parity, the mixed key, the closing measure, "PAGE-TROUBLE" |
