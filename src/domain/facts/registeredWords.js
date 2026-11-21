@@ -474,6 +474,16 @@ const phrasePattern = (words) => {
  * `factsOf` getter.
  * @type {Record<string, RegisteredWord>}
  */
+/**
+ * DAILY-2 B1b C3 (the chair's ruling of 2026-11-20 19:41, the leave for this file for these answers only; vetoable by the
+ * owner): three house families are answered by an institution kind of the vocabulary (`facts/institutions.js ::
+ * INSTITUTION_KIND_PATTERNS`), so a line naming the house declares `institution: <kind>`. Every other family still waits.
+ * @type {Readonly<Record<string, string>>}
+ */
+// DAILY-2 B2 (the chair's grant of 2026-11-20 20:31, in ruling 20's form; vetoable by the owner): `house: baker` <- institution:
+// bakery and `house: warehouse` <- institution: warehouse, for dawn_work's B0, B1 (bakers) and M0, M2 (warehouses).
+const HOUSE_FAMILY_KINDS = Object.freeze({ bathhouse: 'bathhouse', theater: 'theatre', 'root cellar': 'rootCellar', baker: 'bakery', warehouse: 'warehouse' });
+
 const HOUSE_FAMILIES = (() => {
   /** @type {Set<string>} */ const names = new Set();
   for (const tier of Object.values(institutionalCatalog)) for (const shelf of Object.values(tier || {})) for (const n of Object.keys(shelf || {})) names.add(n);
@@ -496,9 +506,12 @@ const HOUSE_FAMILIES = (() => {
     // the leaf reads the house's STEM, so a brewer is answered by a brewery and a smith by a blacksmith, and a power of
     // that name counts as the house (a Thieves' Guild on the powers' roster)
     const stem = new RegExp(key.split(' ').map((w) => w.replace(/'s$|s'$/, '').replace(/(?:ery|ers|er|ry|y)$/, '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('\\S*\\s+'), 'i');
+    const kind = HOUSE_FAMILY_KINDS[key];
     out[`house: ${key}`] = {
-      kind: 'thing', layer: 'P', leaf: `institutions.js :: liveInstitutionNames, or a power of the name (a house named ${key}); its atom \`house: ${key}\` waits for a factsOf getter`,
-      words: re, atoms: [], absent: (_f, rosterNames, record) => !rosterHas(rosterNames, stem) && !powerNames(record).some((n) => stem.test(n)),
+      kind: 'thing', layer: 'P', leaf: kind
+        ? `institutions.js :: liveInstitutionNames, or a power of the name (a house named ${key}); answered by \`institution: ${kind}\` (DAILY-2, the chair's ruling of 2026-11-20 19:41)`
+        : `institutions.js :: liveInstitutionNames, or a power of the name (a house named ${key}); its atom \`house: ${key}\` waits for a factsOf getter`,
+      words: re, atoms: kind ? [`institution: ${kind}`] : [], absent: (_f, rosterNames, record) => !rosterHas(rosterNames, stem) && !powerNames(record).some((n) => stem.test(n)),
       pageWithdrawn: PAGE_WITHDRAWN.house,
     };
   }
