@@ -85,6 +85,21 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   worklist's item 5). So the place lane owes ONE cure before "PLACE": the mutation manifest's row for
   `tests/generators/safetyDescSpread.test.js`. TWO PROMPTS WRITTEN AHEAD OF NEED: `PLACE-3.txt` and `PEOPLE-3.txt` (one
   seat for both people halves: the first half to its landing line, then the second as its own line).
+- E8 · LANDINGS ARE STACKED UNDER ONE GATE (ruled 2026-11-21 23:39 UTC; the standard's rule 8 and rule 40's batched tail). The line is
+  the program's narrow place: one worktree, one gate, four cores; a gate a lane is about an hour. Lanes that are
+  file-disjoint and carry their own proofs are merged in order, each its own merge commit and point, and the gate
+  runs ONCE at the top (`tests/lint` whole, the registers by their doors once, the type checks, eslint, one build,
+  `tests/build` whole, the union of the lanes' directories); a red off the lists is named and attributed to its lane
+  by the file it touches and is never cured by the helper. The brief: `landing/BRIEF-LANDING-STACK.md`. It adds a
+  third class of conflict a helper may resolve: a test's own dated NOTES where both sides only add comment lines
+  (met on `tests/components/dossierPhoneFloorAllViews.test.jsx` at point 88): both kept, the line's first.
+- E9 · THE CHAIR CURES A LANE'S LAST SMALL RED ITSELF WHERE THE CURE IS ALREADY WRITTEN OR IS ONE ROW, so that a lane
+  ready but for it joins the landing train without waiting for a seat (the cap is four). Done twice on 2026-11-21, each
+  red first then green, each on the lane's new branch: PLACE (`lane/place-3-2026-11-21` 3dccb0069: the mutation
+  manifest's rationale row for `tests/generators/safetyDescSpread.test.js`: TOTALITY 1 failed of 10, then 10 of 10)
+  and PEOPLE's first half (`lane/people-3-2026-11-21` 930413518: PEOPLE-1's own written cure 07e737596 applied:
+  `npcStructure.js :: NOT_A_GOOD` exported after the census extractor's slice: `faultsTools` red, then 3 files and 21
+  tests green). The seats PLACE-3 and PEOPLE-3, when seated, start from those branches.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -125,6 +140,23 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   1113, eslint 0 errors. THE RULE FOR THE CHAIR'S SCRATCH WORKTREES: link `node_modules` AND `.husky/_` from
   `/home/user/wt/line` before the first commit (both names are in the common `info/exclude`). SEAT-10 was told the base
   is on origin (23:27) and takes it by a fast-forward; if its check refuses that, the lane is re-seated on the base.
+- 2026-11-21 23:39 UTC · POINT 87 IS LANDED AND PUSHED (the line's tip is 89ab44e34): the sameness door at 9e267e019 (merge 5dff29db5,
+  no conflict: git joined the mutation manifest itself; the lighting census by its door df1d43861, 3,723 to 3,725
+  files; the row 89ab44e34). ITS GATE (shortened: no file under `src/`): `tests/lint` 222 files, 3,326 tests, the one
+  red the lighting census, green by its door; `tests/scripts` 16 of 16; type ratchet 167, strict 1113, eslint 0
+  errors. SAME-2's "12 failing tests in 8 files, one read by name" did not reproduce under `tests/lint` and
+  `tests/scripts`: only the lighting census reds there; its run also held `tests/build`, where the line's own rows
+  red without a build (PLAUSIBLE, not re-run). POINT 88 DID NOT LAND ON THE FIRST TRY (a conflict in a test file's
+  dated notes, outside the old brief's two classes): ruled (E8) and re-queued. THE STACK IS RUNNING (one helper,
+  started 23:39): traditions cf5b24079, state sentences 588967385, Daily Life b1a205d14, place 3dccb0069, people's
+  first half 930413518. `ci/LINE-NOW.md` brought to point 87. SEATS, 23:26 to 23:36: SEAT-10 had pushed its
+  hand-back (f82c2a183) before the base came, so the base gained that commit (3e6894120) for a fast-forward; PAGE-12
+  proved its tip (`tests/lint` 220 of 220) and asked for five keys under the vocabulary's `house` atom
+  (black_market, assassins, underground, whisper_market, outlaws: the houses `causeHouses.js` already answers):
+  GRANTED with conditions (appended in that order; one key-to-group table; every row that declares one on the veil
+  reader's list; W proves a hiding read prints what a place without the house prints; the owner's page moves 0
+  sentences; criminal_power's four signatures listed, not cured; the rows stand under the sameness door's hideable
+  walker by declared exemption only). The trouble hooks' theme rows wait for the depth lane's themes on the line.
 
 ## 4. The order of the lanes still to seat (after the first four), and what each waits on
 
