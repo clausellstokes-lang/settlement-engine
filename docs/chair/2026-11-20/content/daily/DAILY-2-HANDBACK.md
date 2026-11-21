@@ -4,6 +4,20 @@ Lane `lane/daily-2-2026-11-20`; seat DAILY-2 (session_019yED1NEpr7XE73nDAxNLv2);
 Assignment: `origin/lane/chair-2026-11-08:docs/chair/2026-11-20/seventh/prompts/DAILY-2.txt` (it binds DAILY-1.txt's
 cure pattern, points 1 to 8). Predecessor's record: `DAILY-1-HANDBACK.md` (history; this file governs).
 
+## 0. LANDING REQUEST SENT (2026-11-21 02:06 UTC): "DAILY 5db0b6a84"
+- After the hand-over the chair said "DAILY-2, FINISH IT" (20:56): the line 062504aa8 merged (aab373e94; the lighting
+  census conflict taken one side and regenerated, 79b8e01af); rule 8 re-ruled (21:27): the full ratchet stopped, the
+  touched directories run at 79b8e01af: 876 files, 29 failed: 25 on RED-AT-LINE by name; `ledgerCitationIntegrity` the
+  environment (ledger branch unfetched; green once fetched); 4 THIS LANE'S (negativeAssertionAnchor, seedLoopTotality,
+  observedShapeReaders x2) cured by B2c (da5d803c9, 09eaeb072, 38e03b7ca; brief `briefs/B2c-LINT-CURE.md`; the
+  `grain imported` reader string-only by DAILY-2's decision), merged 5db0b6a84; then `tests/lint` whole +
+  `tests/domain/facts` + `tests/domain/dailyLife*`: 285 files / 3635 passed. A LANE FAULT, SAID: the merge green sets
+  ran named walkers, not `tests/lint` whole; from now `tests/lint` whole at every merge.
+- Build at 79b8e01af (VERIFY_DIST=1): first paint 1,178,613 / 374,938 / 314,786 vs the line's 1,177,668 / 374,670 /
+  314,580 (+945 = the two ruled items); worker 2,632,512 vs 2,631,236 (+1,276). B2c moves no eager byte (one reader shortened).
+- B3 HELD (the chair, 20:53): it would build `briefs/B3-THE-OTHER-FIVE-AND-DM.md` exactly (E1 the owner-only dm slot;
+  E2 commoner_resentments + food_culture; E3 outsider_impressions, unspoken_topics, recent_changes). Not started.
+
 ## 1. State (written 20:48 UTC) — HANDED OVER to DAILY-3 at this commit's tip
 - Lane `lane/daily-2-2026-11-20` (pushed). Merged, each read once with red and green re-run, censuses by their doors:
   B1 C1 (8e2534945, DAILY-1); B1b C2 (b4083d31f); B1b C3 `gathering_places` (9567ea7a2); B2 `dawn_work` +
