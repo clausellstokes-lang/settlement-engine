@@ -1,0 +1,18 @@
+SIZE thorp towns 150 with a first trouble 150; distinct first sentences before 50 after 74
+  BEFORE 8.7% (13/150) "Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands"
+  AFTER  5.3% (8/150) "Strange flares of magic come without warning, and what causes them, and what to do about the people they touch, is argued over by everyone"
+SIZE hamlet towns 150 with a first trouble 150; distinct first sentences before 49 after 70
+  BEFORE 13.3% (20/150) "Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands"
+  AFTER  6.0% (9/150) "Evidence of official corruption has surfaced but powerful figures resist investigation"
+SIZE village towns 150 with a first trouble 150; distinct first sentences before 58 after 78
+  BEFORE 8.0% (12/150) "The right of the current authority to rule is openly and widely questioned, and no one can agree on who, if anyone, holds a legitimate claim"
+  AFTER  5.3% (8/150) "The common people are pressing those in charge over better working conditions, and each dispute grows louder than the last"
+SIZE town towns 150 with a first trouble 150; distinct first sentences before 48 after 73
+  BEFORE 22.7% (34/150) "Guild and non-guild traders are fighting over who may sell what, and over a say in how the place is run"
+  AFTER  8.0% (12/150) "The guild and those who would trade outside it are at odds, and here the say in how the place is run is not held by those who govern alone."
+SIZE city towns 150 with a first trouble 150; distinct first sentences before 42 after 64
+  BEFORE 47.3% (71/150) "Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands"
+  AFTER  9.3% (14/150) "With rival rings at odds and no single organisation over them, crime here is rising."
+SIZE metropolis towns 150 with a first trouble 150; distinct first sentences before 42 after 66
+  BEFORE 48.0% (72/150) "Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands"
+  AFTER  7.3% (11/150) "With rival rings at odds and no single organisation over them, crime here is rising."
