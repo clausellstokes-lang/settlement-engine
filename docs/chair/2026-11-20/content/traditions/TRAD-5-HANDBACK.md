@@ -1,3 +1,23 @@
+# SAVED AT THE STOP
+
+Saved 2026-11-21 02:06 UTC on the chair's order (the owner ordered a save and a stop for every lane). Nothing was started after the order.
+The lane's tip is `cd6989657` (units 10 to 13 merged); every builder's branch is on origin
+(`lane/trad-5-2026-11-20-u11-wip` b328a9b5a, `-u12-wip` 1a86ee712, `-u13-wip` 643f932f5). "TRAD cf5b24079" was sent (22:12,
+2026-11-20); unit 13 (`f6cb2d68d`, census `cd6989657`) has NOT been sent as a landing request.
+UNIT 13's GATE BATCH at `cd6989657` (ruling 22), RESULTS NOT YET READ BY NAME AGAINST `RED-AT-LINE.tsv`, for the successor:
+- test dirs (tests/lint, components, pdf, data, domain/dossier, kernel + the module files): 2 failed / 8315 passed (851 files);
+  one named: `tests/lint/presumptionClasses.walker.test.js` "no NEW undeclared line: every hit is banked" — LIKELY UNIT 13's
+  (the sixteen "also" lines are declared lines, but this register may need their rows by its own door): READ IT FIRST; the second
+  failure is in `batch-dirs.log` (scratch, gone with the box): re-run the dirs to name it.
+  (At cf5b24079 `tests/lint` whole was 3307/3307 green, so this walker is new at unit 13.)
+- typechecks 0; eslint 0; build 0; confinement 1,245 identical vs 441ec3b32.
+- first paint at cd6989657: raw 1,177,013, gzip 374,555, Brotli 314,617, worker 2,584,113 (base 441ec3b32: 1,176,468 /
+  374,374 / 314,336 / 2,584,113): Brotli +173 over cf5b24079's 314,444 (unit 13's lines in a lazy chunk? UNREAD).
+- `VERIFY_DIST=1 tests/build` whole: 13 failed / 593 passed: the 5 base size reds (ruling 21) plus 8 edge-bundle equality
+  tests ("the bundle's birth for the wire body equals the local core…", "every golden-corpus config…", "the espionage
+  fence's 360-settlement…"): their bundles are committed artifacts the lane's text moves (the leaf rides the engine bundle):
+  compare with RED-AT-LINE.tsv by name; NOT re-bundled here (a bundle's door is not this lane's to guess).
+
 # TRAD-5 — THE HAND-BACK (kept current at every push)
 
 Written 2026-11-20 18:45 UTC (`date -u`). Branch `lane/trad-5-2026-11-20`, fast-forwarded to TRAD-4's final tip `a7473f47c` on the
