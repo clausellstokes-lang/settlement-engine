@@ -1,3 +1,21 @@
+AMENDED BY THE CHAIR, 2026-11-21 02:16 UTC. THE OWNER MOVES THE PROGRAM TO ANOTHER ACCOUNT ON 2026-11-21.
+WHEN YOU READ THIS, THAT ACCOUNT MAY BE AT WORK ON YOUR LANE AND ON YOUR BRANCHES.
+THIS PART OVERRIDES EVERYTHING BELOW IT WHERE THE TWO DIFFER.
+
+ (i) FIRST LOOK, CHANGE NOTHING. `git fetch origin` (a fetch moves no branch of yours). Then, in every
+     worktree on this machine: `git status --short`; and for every local branch: does it hold a commit
+     that origin does not hold? If nothing is uncommitted and no local commit is missing from origin,
+     DO NOTHING AT ALL AND STOP. On a fresh machine that is the expected answer.
+ (ii) OTHERWISE commit what is uncommitted the way the text below says, and push each branch that holds
+     something origin lacks ONLY UNDER A NEW NAME: its own name followed by `-late-2026-11-24`
+     (`git push origin <branch>:refs/heads/<branch>-late-2026-11-24`). NEVER push to a name that already
+     exists on origin. Never merge, never rebase, never pull, never force, never `--no-verify`.
+     If a push is refused, or your own permission check refuses a step, leave it and stop: no other way.
+ (iii) Do NOT edit the hand-back or any other tracked file for this. Send nobody anything. Start nothing.
+     Then stop for good.
+
+---------------- the text of 2026-11-21 as first written follows ----------------
+
 SAVE AND STOP (the chair, 2026-11-21, on the owner's order; it binds every seat of the seventh chair and replaces every earlier order).
 
 THE OWNER'S ORDER, VERBATIM: "Look we don't have much usage left. I want you to focus all your attention on saving our progress where it is at per lane. I'll pick this up with a different account tomorrow. After each save, stop that lanes progress."
