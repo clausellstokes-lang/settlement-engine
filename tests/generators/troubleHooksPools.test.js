@@ -3,7 +3,7 @@
  * POOL BY NEED, THREE KEPT. The eight commonest tension kinds stored their template's WHOLE hook list, so two places of one
  * kind shared every line. Each kind now holds a pool (`src/data/troubleHooks.js :: TROUBLE_HOOKS`): a line is admitted
  * where its needs hold through the declared door (`drawDeclared.js`), the admitted lines are ranked by
- * `fnv1a32(`${seed}::trouble::${kind}::hook::${text}`)` highest first, and the top three are stored. No draw is added.
+ * `fnv1a32(`${seed}::trouble::${kind}::hook::${text}`)` highest first (since MIXED-KEY, `mix32` over it), and the top three are stored. No draw is added.
  *
  * The arms COMPUTE every sentence from the pool's own export; none is quoted.
  *   1. totality: the eight kinds and the ruled counts, at least four need-free lines a pool, every need a known atom;
@@ -26,6 +26,11 @@
  *       stood at 7903d6bb7, element for element and in order (`tests/fixtures/trouble-hooks-pools.snapshot.json`, written
  *       by `tests/fixtures/troubleHooksPoolsSnapshot.mjs`);
  *   1d. no `TROUBLE_HOOKS` line equals any timeline template's `plotHooks` line (20 such copies at 7903d6bb7).
+ *
+ * MIXED-KEY (PAGE-10's brief; the chair, 20:03: one keyed law for every pool): the rank is `mix32(fnv1a32(<the same
+ * key>))` (`proseHash.js :: mix32`), here and in arms 3 and 3e (`rank` below). Red at 13ba319e0:
+ *   3e. on a fixed record (hxd-city-0) each tension of these kinds stores the top three of its admitted lines by the mixed
+ *       key, computed from the composed pool and `factsOf`, and `troubleHooksOf` returns the same.
  */
 import { readFileSync } from 'node:fs';
 import { beforeAll, describe, expect, test } from 'vitest';
@@ -36,7 +41,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { declarationAdmits, declarationOf, isKnownAtom } from '../../src/domain/facts/factVocabulary.js';
-import { fnv1a32 } from '../../src/kernel/proseHash.js';
+import { fnv1a32, mix32 } from '../../src/kernel/proseHash.js';
 import { HISTORICAL_EVENTS_DATA, LEGITIMACY_HELD_TWINS, legitimacyHeldTensions } from '../../src/data/historyData.js';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 import { withPresumptionLedger } from '../../src/domain/facts/presumptionLedger.js';
@@ -45,7 +50,7 @@ import { withPresumptionLedger } from '../../src/domain/facts/presumptionLedger.
 const troubleHooks = await import('../../src/data/troubleHooks.js').catch(() => ({}));
 // HOOKS-CURES A: a kind's pool is COMPOSED at the call site (`troubleHooksOf.js :: troubleHookPool`): the table holds the
 // new lines, and each line the timeline's template already holds is named by its index there.
-const { troubleHookPool } = /** @type {any} */ (await import('../../src/generators/history/troubleHooksOf.js'));
+const { troubleHookPool, troubleHooksOf } = /** @type {any} */ (await import('../../src/generators/history/troubleHooksOf.js'));
 /** @type {Record<string, Array<{ text: string, needs?: string[], excludes?: string[] }>>} */
 const TABLE = /** @type {any} */ (troubleHooks).TROUBLE_HOOKS ?? {};
 const POOLS = /** @type {Record<string, Array<{ text: string, needs?: string[], excludes?: string[] }>>} */ (Object.fromEntries(
@@ -63,7 +68,8 @@ const KEPT = 3;
 /** Each approved-seat twin back to its form. */
 const FORM_OF = Object.fromEntries(Object.entries(LEGITIMACY_HELD_TWINS).map(([form, twin]) => [twin, form]));
 const atomsOf = (/** @type {{ needs?: string[], excludes?: string[] }} */ row) => [...(row.needs || []), ...(row.excludes || [])];
-const rank = (/** @type {string} */ seed, /** @type {string} */ kind, /** @type {string} */ text) => fnv1a32(`${seed}::trouble::${kind}::hook::${text}`);
+// MIXED-KEY (the chair, 20:03): the rank takes the kernel's mixed key over the same string.
+const rank = (/** @type {string} */ seed, /** @type {string} */ kind, /** @type {string} */ text) => mix32(fnv1a32(`${seed}::trouble::${kind}::hook::${text}`));
 const birth = (/** @type {string} */ size, /** @type {string} */ seed) => generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: size }), null, { seed, customContent: {} });
 
 describe('HOOKS-BUILD arm 1: the pools are total', () => {
@@ -111,6 +117,24 @@ describe('HOOKS-CURES A: a line the timeline still draws has one home', () => {
     const copies = Object.entries(TABLE).flatMap(([kind, rows]) => rows.filter((r) => templateLines.has(r.text)).map((r) => `${kind}: ${r.text}`));
     expect(copies).toEqual([]);
   });
+});
+
+describe('MIXED-KEY: the rank is the kernel\'s mixed key', () => {
+  test('arm 3e: on hxd-city-0, each tension of these kinds stores the top three of its admitted lines by mix32(fnv1a32(key)), and troubleHooksOf gives the same', async () => {
+    await loadGenerationLawPayloads();
+    const seed = 'hxd-city-0';
+    const record = birth('city', seed);
+    const facts = factsOf(record);
+    const rows = (record.history?.currentTensions || []).filter((x) => KINDS.includes(x.type));
+    expect(rows.length, 'the fixed record holds a tension of these kinds').toBeGreaterThan(0);
+    for (const tension of rows) {
+      const pool = POOLS[tension.type] || [];
+      const expected = pool.filter((r) => declarationAdmits(declarationOf(r), facts).admitted)
+        .map((r) => ({ text: r.text, key: rank(seed, tension.type, r.text) })).sort((a, b) => b.key - a.key).slice(0, KEPT).map((r) => r.text);
+      expect(tension.plotHooks, `${seed} ${tension.type} stored`).toEqual(expected);
+      expect(troubleHooksOf(tension.type, facts, seed), `${seed} ${tension.type} troubleHooksOf`).toEqual(expected);
+    }
+  }, 120_000);
 });
 
 describe('HOOKS-FINISH arm 3d: the legitimacy pool on the two births where a kept line read false at the end', () => {

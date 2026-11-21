@@ -2,7 +2,7 @@
  * HOOKS-BUILD (PAGE-7's brief, 2026-11-20 17:01 UTC; the chair's rulings of 16:35 and 17:00): A TROUBLE'S HOOKS FROM A
  * POOL BY NEED, THREE KEPT. The eight commonest current-tension kinds stored their template's whole hook list, so two
  * places of one kind shared every line. Their hooks now come from the kind's pool (`src/data/troubleHooks.js`, composed by `troubleHookPool`): the pool
- * is ranked by `fnv1a32(`${seed}::trouble::${kind}::hook::${text}`)` highest first (the town's own seed, `config._seed`,
+ * is ranked by `mix32(fnv1a32(`${seed}::trouble::${kind}::hook::${text}`))` highest first (MIXED-KEY: the kernel's mixed key) (the town's own seed, `config._seed`,
  * as the timeline's description variants are keyed, so a history reroll keeps it), and each line in that order is handed
  * to the declared door ALONE, so a line is admitted where its needs hold and the presumption ledger notes exactly the
  * lines kept (the birth self-check re-reads those on the final record, and no other); the first three admitted are
@@ -15,7 +15,7 @@
  */
 import { drawDeclared, lineText } from '../../domain/facts/drawDeclared.js';
 import { getActiveRng } from '../../kernel/rngContext.js';
-import { fnv1a32 } from '../../kernel/proseHash.js';
+import { fnv1a32, mix32 } from '../../kernel/proseHash.js';
 import { TROUBLE_HOOKS, TROUBLE_HOOK_COUNT, TROUBLE_HOOK_TEMPLATE_LINES } from '../../data/troubleHooks.js';
 import { HISTORICAL_EVENTS_DATA } from '../../data/historyData.js';
 import { activePresumptionLedger } from '../../domain/facts/presumptionLedger.js';
@@ -57,7 +57,8 @@ export function troubleHooksOf(kind, facts, townSeed) {
   const pool = troubleHookPool(kind);
   if (!pool) return null;
   const seed = townSeed ?? getActiveRng()?.seed ?? '';
-  const keyOf = (/** @type {{ text: string }} */ line) => fnv1a32(`${seed}::trouble::${kind}::hook::${line.text}`);
+  // MIXED-KEY (the chair, 20:03: one keyed law for every pool): the kernel's mixed key over the same string
+  const keyOf = (/** @type {{ text: string }} */ line) => mix32(fnv1a32(`${seed}::trouble::${kind}::hook::${line.text}`));
   // id: the line's index in its pool, the ledger's line id (the door notes a one-line domain's line by it)
   const ranked = pool.map((line, id) => ({ ...line, id })).sort((a, b) => keyOf(b) - keyOf(a));
   /** @type {string[]} */ const kept = [];
