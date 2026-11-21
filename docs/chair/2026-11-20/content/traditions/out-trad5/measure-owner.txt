@@ -1,0 +1,128 @@
+# TRAD-4 unit 6 measure (the final leaf) — audience=owner; towns=432; printed rites=1232
+ALL            n=1232  house/owner=633 (51.4%)  power=474 (38.5%)  cause=432 (35.1%)  economy=335 (27.2%)  SHORT=107 (8.7%)
+  (of house/owner: house=633, the rite's owner in play=0)
+  set: the owner's tab (shownTraditionsOf); rites shown=1232; no description composed=0
+
+## by tier (size)
+thorp          n=  81  house/owner=7 (8.6%)  power=56 (69.1%)  cause=54 (66.7%)  economy=11 (13.6%)  SHORT=10 (12.3%)
+hamlet         n=  78  house/owner=4 (5.1%)  power=61 (78.2%)  cause=60 (76.9%)  economy=5 (6.4%)  SHORT=8 (10.3%)
+village        n= 112  house/owner=31 (27.7%)  power=65 (58.0%)  cause=60 (53.6%)  economy=11 (9.8%)  SHORT=13 (11.6%)
+town           n= 203  house/owner=95 (46.8%)  power=86 (42.4%)  cause=75 (36.9%)  economy=55 (27.1%)  SHORT=21 (10.3%)
+city           n= 315  house/owner=195 (61.9%)  power=97 (30.8%)  cause=83 (26.3%)  economy=120 (38.1%)  SHORT=22 (7.0%)
+metropolis     n= 443  house/owner=301 (67.9%)  power=109 (24.6%)  cause=100 (22.6%)  economy=133 (30.0%)  SHORT=33 (7.4%)
+
+## by element
+founding       n= 229  house/owner=0 (0.0%)  power=229 (100.0%)  cause=220 (96.1%)  economy=3 (1.3%)  SHORT=0 (0.0%)
+first-landing  n= 148  house/owner=0 (0.0%)  power=148 (100.0%)  cause=95 (64.2%)  economy=29 (19.6%)  SHORT=0 (0.0%)
+charter        n=  97  house/owner=0 (0.0%)  power=97 (100.0%)  cause=72 (74.2%)  economy=9 (9.3%)  SHORT=0 (0.0%)
+hearth         n=  33  house/owner=19 (57.6%)  power=0 (0.0%)  cause=0 (0.0%)  economy=7 (21.2%)  SHORT=14 (42.4%)
+harvest        n=  74  house/owner=66 (89.2%)  power=0 (0.0%)  cause=0 (0.0%)  economy=32 (43.2%)  SHORT=0 (0.0%)
+river          n=  42  house/owner=36 (85.7%)  power=0 (0.0%)  cause=0 (0.0%)  economy=13 (31.0%)  SHORT=4 (9.5%)
+stone          n=  62  house/owner=43 (69.4%)  power=0 (0.0%)  cause=0 (0.0%)  economy=18 (29.0%)  SHORT=19 (30.6%)
+the-dead       n=  63  house/owner=63 (100.0%)  power=0 (0.0%)  cause=45 (71.4%)  economy=1 (1.6%)  SHORT=0 (0.0%)
+field          n=  62  house/owner=42 (67.7%)  power=0 (0.0%)  cause=0 (0.0%)  economy=28 (45.2%)  SHORT=12 (19.4%)
+forge          n=  61  house/owner=61 (100.0%)  power=0 (0.0%)  cause=0 (0.0%)  economy=17 (27.9%)  SHORT=0 (0.0%)
+market         n=  82  house/owner=82 (100.0%)  power=0 (0.0%)  cause=0 (0.0%)  economy=79 (96.3%)  SHORT=0 (0.0%)
+hunt           n=  49  house/owner=43 (87.8%)  power=0 (0.0%)  cause=0 (0.0%)  economy=14 (28.6%)  SHORT=6 (12.2%)
+long-sun       n=  40  house/owner=23 (57.5%)  power=0 (0.0%)  cause=0 (0.0%)  economy=14 (35.0%)  SHORT=17 (42.5%)
+tide           n=  41  house/owner=41 (100.0%)  power=0 (0.0%)  cause=0 (0.0%)  economy=39 (95.1%)  SHORT=0 (0.0%)
+greening       n=  86  house/owner=55 (64.0%)  power=0 (0.0%)  cause=0 (0.0%)  economy=20 (23.3%)  SHORT=31 (36.0%)
+stars          n=  63  house/owner=59 (93.7%)  power=0 (0.0%)  cause=0 (0.0%)  economy=12 (19.0%)  SHORT=4 (6.3%)
+
+rites of the dead: 63; keeping a cause (a major or catastrophic siege, fire, flood or plague): 45
+
+## per slot pool: draws · distinct lines printed · THE POOL-DOMINANCE FIGURE (the most printed line and its share) · lines refused and what replaced them
+# read from the presumption ledger (`pool`, `lineId`), the drawn line re-read by the leaf's own key; a refusal to nothing is seen where the slot always draws (gloss)
+# re-derivation disagreements with the ledger: 0 (and 150 draws the unit 10 rotation turned)
+# towns of this pool holding a stress (a crisis the record holds: crisis-scoped lines answer to it): 146 of 432
+# drawn-top: the most DRAWN line (before any refusal) and its share; the pick is kernel/proseHash.js :: pickVariantMixed, mix32(fnv1a32(key)) % pool size
+cause.dead             draws=  45 lines=3  top=35.6% "It is kept in memory of {event}, {when}."  drawn-top=40.0% "It is kept in memory of {event}, {when}."
+cause.founding         draws= 387 lines=3  top=34.9% "It has been kept since {town} was founded, {age} years ago, by {foundedBy}."  drawn-top=34.9% "It has been kept since {town} was founded, {age} years ago, by {foundedBy}."
+economy.chief          draws= 230 lines=3  top=33.9% "{Income} {brings} {town} more than anything else."  drawn-top=34.3% "{Town} takes in more from {income} than from anything else."
+economy.lesser         draws=  96 lines=3  top=35.4% "{Income} {is} one of the mainstays of {town}."  drawn-top=37.5% "A good share of what {town} takes in comes from {income}."
+economy.only           draws=   9 lines=3  top=44.4% "{Town} lives by {income} alone."  drawn-top=44.4% "{Town} lives by {income} alone."
+gloss.charter          draws=  97 lines=3  top=36.1% "honours the charter"  drawn-top=36.1% "honours the charter"
+gloss.field            draws=  62 lines=3  top=35.5% "blesses the furrows"  drawn-top=35.5% "blesses the furrows"
+gloss.first-landing    draws= 148 lines=3  top=37.8% "marks the first landing"  drawn-top=37.8% "marks the first landing"
+gloss.forge            draws=  61 lines=3  top=36.1% "honours the forge"  drawn-top=36.1% "honours the forge"
+gloss.founding         draws= 229 lines=3  top=36.2% "honours the founding"  drawn-top=36.2% "honours the founding"
+gloss.greening         draws=  86 lines=3  top=43.0% "marks the coming of spring"  drawn-top=43.0% "marks the coming of spring"
+gloss.harvest          draws=  74 lines=5  top=32.4% "marks the gathering of the harvest"  drawn-top=40.5% "gives thanks for the harvest"
+                        refused: twin 21: 12× "gives thanks for the harvest" → "is held for the harvest"; 9× "gives thanks for what the fields have given" → "is held for what the fields give"
+gloss.hearth           draws=  33 lines=3  top=39.4% "blesses hearth and home"  drawn-top=39.4% "blesses hearth and home"
+gloss.hunt             draws=  49 lines=3  top=40.8% "marks the hunting season"  drawn-top=40.8% "marks the hunting season"
+gloss.long-sun         draws=  40 lines=3  top=40.0% "marks midsummer"  drawn-top=40.0% "marks midsummer"
+gloss.market           draws=  82 lines=3  top=40.2% "honours the market"  drawn-top=40.2% "honours the market"
+gloss.river            draws=  42 lines=3  top=38.1% "honours the river and its waters"  drawn-top=38.1% "honours the river and its waters"
+gloss.stars            draws=  63 lines=3  top=39.7% "honours the stars"  drawn-top=39.7% "honours the stars"
+gloss.stone            draws=  62 lines=3  top=43.5% "honours the old standing stones"  drawn-top=43.5% "honours the old standing stones"
+gloss.the-dead         draws=  63 lines=3  top=38.1% "honours the dead"  drawn-top=38.1% "honours the dead"
+gloss.tide             draws=  41 lines=3  top=46.3% "honours the tide"  drawn-top=46.3% "honours the tide"
+house.bodyPerson       draws= 358 lines=4  top=34.4% "It is in the keeping of {house}, with {person}, {title}, presiding."  drawn-top=36.9% "Its keeping falls to {house}; {person}, {title}, presides."
+house.place            draws=   5 lines=3  top=60.0% "It takes place at {house}."  drawn-top=60.0% "It takes place at {house}."
+house.placePerson      draws= 111 lines=3  top=37.8% "It is held at {house}, where {person}, {title}, presides."  drawn-top=39.6% "It is held at {house}, where {person}, {title}, presides."
+house.placePower       draws= 159 lines=4  top=45.3% "It is held at {house}, in the keeping of {power}."  drawn-top=44.7% "It is held at {house}, in the keeping of {power}."
+lead.contest           draws= 125 lines=4  top=30.4% "A day of contests"  drawn-top=30.4% "A day of contests"
+lead.fair              draws= 280 lines=6  top=25.4% "A fair day"  drawn-top=27.1% "A fair with traders from outside"
+                        refused: twin 41: 25× "A fair with traders from outside" → "A fair kept as of old"; 16× "A fair of stalls and trading" → "A fair kept by custom"
+lead.feast             draws= 309 lines=8  top=21.4% "A feast shared among neighbours"  drawn-top=30.4% "A feast shared among neighbours"
+                        refused: twin 91: 28× "A feast shared among neighbours" → "A feast day kept as of old"; 23× "A common feast" → "A feast day"; 23× "A feast at long tables" → "A feast kept as of old"; 17× "A feast eaten in common" → "A feast day kept by custom"
+lead.offering          draws= 157 lines=4  top=29.9% "A day of offerings"  drawn-top=29.9% "A day of offerings"
+lead.procession        draws= 203 lines=4  top=26.1% "A slow procession"  drawn-top=26.1% "A slow procession"
+lead.vigil             draws= 158 lines=4  top=27.8% "A night's vigil"  drawn-top=27.8% "A night's vigil"
+power.seat             draws= 474 lines=4  top=34.4% "{Power} {oversees} it."  drawn-top=35.0% "It is overseen by {power}."
+
+most dominated pool (of pools with 20 draws or more): gloss.tide — "honours the tide" 19 of 41 (46.3%)
+
+## CTR11's other direction (for the owner's list): the owner's economy sentence ranks with the criminal income row; the reader's without it
+towns holding a criminal income row: 45 of 432; their printed rites: 200; rites whose owner economy sentence differs from the record-less-the-row's: 34 (of 1232 printed rites)
+  The Frost Feast (town): OWNER "A good share of what {town} takes in comes from market taxes."  /  READER "Nothing brings {town} more than market taxes."  [criminal row at rank 1 of 9]
+  The Procession of the Tide (city): OWNER "It is in the keeping of the harbour master's office, with Hadwige Schulz, the harbour master, presiding. {town} takes in a good part of its living from port duties."  /  READER "Its keeping falls to the harbour master's office. {town} takes in a good part of its living from port duties."  [criminal row at rank 3 of 11]
+  The Old Fair (city): OWNER "Market taxes are one of the mainstays of {town}."  /  READER "Market taxes bring {town} more than anything else."  [criminal row at rank 1 of 12]
+
+## ten most repeated shapes (town masked)
+2x  A friendly contest that welcomes the year's new growth.
+2x  A feast shared among neighbours that honours the old standing stones.
+2x  A procession that marks the hunting season.
+2x  A day of contests that marks the coming of spring.
+2x  A slow procession that marks midsummer.
+2x  A friendly contest that honours home and family.
+2x  A friendly contest that honours hearth and household.
+2x  A feast at long tables that honours the first green of the year.
+2x  A slow procession that honours home and family.
+2x  A slow procession that stays true to the standing stones.
+
+## ten most repeated whole descriptions
+2x  A friendly contest that welcomes the year's new growth.
+2x  A feast shared among neighbours that honours the old standing stones.
+2x  A procession that marks the hunting season.
+2x  A day of contests that marks the coming of spring.
+2x  A slow procession that marks midsummer.
+2x  A friendly contest that honours home and family.
+2x  A friendly contest that honours hearth and household.
+2x  A feast at long tables that honours the first green of the year.
+2x  A slow procession that honours home and family.
+2x  A slow procession that stays true to the standing stones.
+
+distinct whole: 1219 of 1232; distinct shapes: 1218
+
+## TRAD-4 unit 10: an IDENTICAL sentence (town name in) in two or more rites of ONE town, by slot
+descriptions the rotation moved (described over the set vs alone): 141 of 1232; payer sentences left out: 11
+towns with any: 0 of 432; sentence pairs: 0; rites whose text did not split by its parts: 0
+lead+gloss    towns=0 sentences=0 pairs=0
+keeper house  towns=0 sentences=0 pairs=0
+keeper place  towns=0 sentences=0 pairs=0
+keeper power  towns=0 sentences=0 pairs=0
+owner         towns=0 sentences=0 pairs=0
+cause         towns=0 sentences=0 pairs=0
+payer         towns=0 sentences=0 pairs=0
+
+## TRAD-4 unit 10, the keeper's "too" wordings (the chair, 17:55 UTC)
+"too" wordings printed: 8; in a rite described alone: 0; in a rite first in its set to name its keeper: 0
+keeper sentences left out (beyond the fifth): 0; towns reaching a sixth rite of one keeper: 0 of 432
+THE PDF over a lit mirror (the founding set as the mirror, every row printed, a row the set drops described alone): towns printing a sentence twice: 5
+  Longmiao: 2x "It falls to the Elder Council."
+  Hisntappa: 2x "The Elder Council oversees it."
+  Lykovrysi: 2x "It is overseen by the Elder Council."
+  Ormfoss: 2x "It is kept by the river ferry, and Ingrid Hrollasson, the ferryman, presides."
+  Vedapura: 2x "Its keeping falls to the specialized metalworkers; Bhavana Sarkar, the master metalworker, presides."

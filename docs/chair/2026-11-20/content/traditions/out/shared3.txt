@@ -1,0 +1,26 @@
+### Bergstrand — The Common Offering
+OWNER'S PAGE:   A day of offerings that remembers the dead. Its keeping falls to the great cathedral; Þorbjörg Andersson, the bishop, presides. Bergstrand keeps it in memory of the Siege, 258 years ago.
+PARTY LINK, the same rite from the served document: A day of offerings that remembers the dead. Its keeping falls to the great cathedral; Þorbjörg Andersson, the bishop, presides. Bergstrand keeps it in memory of the Siege, 258 years ago.
+PARTY LINK TODAY (genesis over the served document, no _seed):
+  - The Common Procession: A procession that marks the first landing. It falls to the Grand Council. It has been kept since Bergstrand was founded by imperial decree and the systematic forced relocation of skilled populations, 486 years ago.
+  - The Procession of the Charter: A walking procession that honours the charter. It is overseen by the Grand Council.
+  - The Bright Stars Fair: A fair that is kept under the stars. It is kept by the great cathedral, and Þorbjörg Andersson, the bishop, presides. Market taxes are the chief of Bergstrand's incomes.
+  - The Bright River Vigil: A night's vigil that honours the river. Its keeping falls to the great cathedral; Þorbjörg Andersson, the bishop, presides.
+  - The Common Furrow Feast: A common feast that blesses the fields.
+  - The Quiet Procession: A walking procession that honours hearth and household.
+  - The River Feast: A common feast that honours the river.
+
+### Ormsund — The Bright Harvest Fair
+OWNER'S PAGE:   A fair of stalls and trading that gives thanks for the harvest. It is kept at the town granary, where Ranveig Hrafnsson, the granary reeve, presides. Market taxes are Ormsund's second income.
+PARTY LINK, the same rite from the served document: A fair of stalls and trading that gives thanks for the harvest. It is kept at the town granary, where Ranveig Hrafnsson, the granary reeve, presides. Market taxes are Ormsund's second income.
+PARTY LINK TODAY (genesis over the served document, no _seed):
+  - The Wolf Feast: A feast eaten in common that marks the first landing. It is overseen by the Guild Council. Ormsund has kept it since its founding by a merchant consortium that needed a waypoint and decided to own it, 283 years ago.
+  - The Feast of the Standing Stones: A common feast that honours the standing stones.
+  - The Charter Offering: A day of offerings that honours the charter. It is overseen by the Guild Council.
+
+### Xingang — The Feast of the Charter
+OWNER'S PAGE:   A feast eaten in common that honours the charter. It is overseen by the Elder Council. Xingang has kept it since its founding by a discharged soldier who liked the view and had nowhere better to be, 129 years ago.
+PARTY LINK, the same rite from the served document: A feast eaten in common that honours the charter. It is overseen by the Elder Council. Xingang has kept it since its founding by a discharged soldier who liked the view and had nowhere better to be, 129 years ago.
+PARTY LINK TODAY (genesis over the served document, no _seed):
+  - The Fair of the Charter: A fair that honours the charter. It falls to the Elder Council. It has been kept since Xingang was founded by a discharged soldier who liked the view and had nowhere better to be, 129 years ago.
+
