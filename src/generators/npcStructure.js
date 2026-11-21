@@ -589,7 +589,7 @@ function holderHouseLineOf(npc) {
 const NOT_A_GOOD_SPELLWORK = /\b(?:warding|divination|scrying|spellcasting|teleportation|enchantments?)\b/i;
 const NOT_A_GOOD_WORK = /\b(?:trade|passage|rights?|services?|intelligence|maps|logistics|access|tolls?|labou?r|transport|hire|escort(?:ed)?|assay|resupply|handling|disputes|minting|killing|trials|tourism|revenue|servants|clearance|education|ferries|gambling|games|combat|storage|protection|hiring|hospitality|bypass|brokerage|lodging|messages|entertainment|identification|market|taxes|meals|care|training|treatment|relay|extraction|levy|exhibitions|music|song|news|information|performances|pilgrim(?:age)?|relief|proclamations|publishing|quarantine|keeping|research|safe houses|sanctuary|construction|stabling|control|surgery|maintenance|contraband|forged|fencing|stolen)\b/i;
 /** The one predicate: a name either alternation refuses is not a good. */
-export const NOT_A_GOOD = Object.freeze({ test: (/** @type {string} */ name) => NOT_A_GOOD_SPELLWORK.test(name) || NOT_A_GOOD_WORK.test(name) });
+const NOT_A_GOOD = Object.freeze({ test: (/** @type {string} */ name) => NOT_A_GOOD_SPELLWORK.test(name) || NOT_A_GOOD_WORK.test(name) });
 /** @param {unknown} name @returns {string} the name filled as a `{resource}` (`people/goals.js :: resourceFill`), '' unless it names a good */
 const goodOf = (name) => (typeof name === 'string' && !NOT_A_GOOD.test(name) ? resourceFill(name) : '');
 /** The first good of the export list (a name, or a record's `name`). @param {unknown} list */
@@ -694,6 +694,7 @@ const isMintedLord = (npc) => npc?.institution?.kind === 'power' && (npc?.instit
 const cutOf = (n) => Math.min(5, Math.max(2, Math.floor(n * 0.45)));
 
 // ── Main export ────────────────────────────────────────────────────────────────
+export { NOT_A_GOOD }; // after the census extractor's slice (`census4-extract-pools.mjs` evaluates the file up to the line above)
 export function enrichNPCsWithStructure(npcs, settlement) {
   if (!npcs?.length) return npcs;
 
