@@ -45,7 +45,7 @@ started on the line's tip `062504aa8`. A successor needs this file and the brief
 | K0 | `briefs/K0.md` | `lane/kinds-1-2026-11-20-k0` @ 99a4a462e | MERGED (2565118b9). Calibration held. |
 | K1 | `briefs/K1.md` | `lane/kinds-1-2026-11-20-k1` @ 6a5132049 | MERGED (4b6fada00). Dark: 525/720 identical, 0 differences. Lit A/B/B50 in `out/law2-compare.md`; sent to the chair ~22:4x. Moved `tensionByMemory` to `src/generators/history/`. The ONE born-with pin: `troubleLawWiring.test.js` "1. CREATE (dark)" (list it for the flip). |
 | K2 | `briefs/K2.md` | `lane/kinds-1-2026-11-20-k2` @ 3469a8f17 | MERGED. 10 arms green; shape 1 cured (`settlementRegenAction.js`), shape 2 pinned. |
-| K3 | `briefs/K3.md` | `lane/kinds-1-2026-11-20-k3` | dispatching (reds it cures: tuningRegister x4, proseWiringCensus x2, lighting census) |
+| K3 | `briefs/K3.md` | `lane/kinds-1-2026-11-20-k3-wip` @ e09b205c7 (worktree `../kinds-k3`) | CUT BY THE ACCOUNT'S WEEKLY LIMIT (resets 2026-11-24 15:00 UTC) mid-unit. DONE and committed: step 0 (crime row B50; 900/900 equal to the planted B50 measure; tests/domain/trouble 36/36) 98ee01c93; the tuning register's two DRAFT rows d563406b1; the tuning inventory by its door 134602ad1 (walker 76/76). WIP, UNVERIFIED: the wiring census as its door left it (e09b205c7). NOT DONE: the wiring census's ordinary run; the lighting census door; the mutation manifest; the stale comment (4b); the boundary walker run; the `tests/lint` sweep. Nothing of K3 is merged into the lane. |
 
 ## K0 BASELINE (visitor pool, 150 a size; `out/baseline.md`)
 guild / crime / commonest first / troubles 0-1-2-3+: thorp 0/11.3/scarcity 17.3/0-146-3-1; hamlet 0/5.3/scarcity
