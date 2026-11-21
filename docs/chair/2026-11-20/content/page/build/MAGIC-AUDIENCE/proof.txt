@@ -1,0 +1,24 @@
+PAGE-4 MAGIC-AUDIENCE — the two hash proofs (base 65b324b5e, tip = the cure in the working tree before the commit)
+
+1. BORN DOCUMENTS (render only; build/CARD/bornHash.mjs, run once per tree):
+   bornHash.base.txt: COUNT hxd300 300 LIST-DIGEST 61e0cfb1ef2dee06341ba0729c05cc1fd518dbf460ece57b4bece09bbd43acf2
+                      COUNT census720 720 LIST-DIGEST 877943f2a62be509605188658b3204d1afb0fec7ec9aa2eb6e387e306e1df88d
+   bornHash.tip.txt:  the same two lines; `cmp bornHash.base.txt bornHash.tip.txt` -> equal, byte for byte (1,020 documents).
+
+2. RENDERED READER VIEWS (brief point 4; readerHash.run.jsx under readerHash.vitest.config.mjs): the Overview and the
+   Magic tab, for the player view (record, playerView) and the public page (toPublicSafe(record), publicDossier), over the
+   chair's 300 and the brief's three made-up documents: 1,212 rendered views.
+   `diff readerHash.base.txt readerHash.tip.txt` moves exactly two lines (and the list digest):
+     made-up-unsupplied player overview   (the line naming "Divine & Magical Healing" falls: the Magic tab prints no reliance line there)
+     made-up-unsupplied public overview   (the same)
+   Every one of the 300's 1,200 reader views is byte-identical; no Magic tab view moved anywhere.
+
+3. THE COORDINATOR'S ADDITION (observed-shape readers, red at the lane tip 65b324b5e per PAGE-4: "NEW magicExists on
+   config — 1 read(s) (ceiling 0)" in magicMeasuresApart.js, from magicHeadlineScope's raw config read). Cured by reading
+   the Magic tab's own posture (`deriveMagicPosture(settlement).magicExists === false`, false exactly where
+   config.magicExists === false: magicProfile.js :: deriveMagicProfile's only false branch). The register is not written.
+   gate.observed-shape-readers.txt (the script): "2214 finding(s), exactly matching the frozen inventory", exit 0.
+   gate.observedShapeReaders.txt (the walker alone): 47/47. Reader hashes (2. above) re-recorded after this change.
+
+RECEIPTS: measure.mjs/measure.out.txt (point 1); red.out.txt (base sources, 1 failed | 3 passed);
+green.out.txt (4/4); affected-tests.out.txt (the eight magic component files, 30/30); gate.*.txt (the gates).

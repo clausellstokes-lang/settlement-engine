@@ -319,13 +319,13 @@
   },
   {
     "path": "src/components/new/npcComponents.jsx",
-    "line": 166,
+    "line": 165,
     "category": "floatInterpolation",
     "snippet": "{rel.strength}"
   },
   {
     "path": "src/components/new/npcComponents.jsx",
-    "line": 172,
+    "line": 171,
     "category": "floatInterpolation",
     "snippet": "{rel.tension}"
   },
@@ -334,12 +334,6 @@
     "line": 258,
     "category": "floatInterpolation",
     "snippet": "{storeAiProgress || 'Regenerating…'}"
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsGlance.jsx",
-    "line": 134,
-    "category": "floatInterpolation",
-    "snippet": "{ecoScore}"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
@@ -1063,13 +1057,13 @@
   },
   {
     "path": "src/pdf/sections/NotableNPCs.jsx",
-    "line": 339,
+    "line": 332,
     "category": "floatInterpolation",
     "snippet": "{npc.power}"
   },
   {
     "path": "src/pdf/sections/NotableNPCs.jsx",
-    "line": 392,
+    "line": 385,
     "category": "floatInterpolation",
     "snippet": "{npc.power}"
   },

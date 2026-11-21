@@ -1,0 +1,9 @@
+cards: 9012; elapsed 49.5s; tree <scratch>/base; 50/size; reserve absent; closed list 119 rows from /home/user/wt-b6/src/data/people/goalSecretRefusals.js
+size         towns  cards identical mirror template>2 template=2 tieDesc tieTension tieIndex refusal  venal unmatched nocell
+thorp           50     65         0      0          0          1       0          0        0       1      7         0      1
+hamlet          50    170         0      0          0          6       0          0        0       1     15         0      2
+village         50    387         0      4          1         27       1          1        1       2     65         0      4
+town            50   1196         0     26         21        232      20         26       28       8    236         0      6
+city            50   3002         1     78        342        851     556        590      682      23    711         0      3
+metropolis      50   4192         2    198        801       1223    1102       1143     1342      20   1001         0      7
+TOTAL          300   9012         3    306       1165       2340    1679       1760     2053      55   2035         0     23

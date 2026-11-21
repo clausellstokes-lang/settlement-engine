@@ -51,3 +51,39 @@ export function pickVariant(pool, seed) {
   if (pool.length === 1 || !seed) return pool[0];
   return pool[fnv1a32(String(seed)) % pool.length];
 }
+
+/**
+ * The 32-bit finalizer (murmur3 fmix32): every input bit reaches every output bit.
+ * Pure — no rng, no clock.
+ * @param {number} h @returns {number} an unsigned 32-bit integer
+ */
+export function mix32(h) {
+  h ^= h >>> 16;
+  h = Math.imul(h, 0x85ebca6b);
+  h ^= h >>> 13;
+  h = Math.imul(h, 0xc2b2ae35);
+  h ^= h >>> 16;
+  return h >>> 0;
+}
+
+/**
+ * The mixed keyed pick: `pickVariant`'s exact contract, with the hash mixed before the modulo.
+ *
+ * Why it exists: FNV-1a's low bits never mix — the low two bits of `fnv1a32` depend only on
+ * the low two bits of each key character, in order — so for a pool of 2, 4, 8 or 16, keys
+ * that differ only in the high bits of their characters all take the same line. New pools
+ * use this pick. `pickVariant` stays exactly as it is, because births already in production
+ * draw their prose with it and that prose must not move.
+ *
+ * Contract (same as `pickVariant`): non-array or empty pool → undefined; single-entry pool →
+ * that entry; ANY falsy seed → index 0 (canonical-at-zero). Zero PRNG draws.
+ * @template T
+ * @param {readonly T[]} pool
+ * @param {string | number | null | undefined} seed
+ * @returns {T | undefined}
+ */
+export function pickVariantMixed(pool, seed) {
+  if (!Array.isArray(pool) || pool.length === 0) return undefined;
+  if (pool.length === 1 || !seed) return pool[0];
+  return pool[mix32(fnv1a32(String(seed))) % pool.length];
+}

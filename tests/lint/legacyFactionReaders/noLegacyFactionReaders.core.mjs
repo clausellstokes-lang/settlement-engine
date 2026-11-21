@@ -59,7 +59,9 @@ export const OTHER_SHAPES = Object.freeze({
   // re-keyed by identity 345/508/690 -> 346/509/691 (COHERENCE-POWERS-4: the same three tension reads, moved one line by the third seat's seatKeeperOf import, F7)
   // re-keyed by identity 346/509/691 -> 352/515/709 (CLOSE-DOORS-1B, 2026-11-18, the close: the same three tension reads, byte-identical
   // lines; +3/+3/+3 at JOIN-17 point 12, BAR6-SEAM-PDF b4dbbd71f, and +3/+3/+15 at point 20, BAR7-CARDS bbd69cf65, lines added above them)
-  'src/pdf/lib/viewModel.js:352': 'a tension', 'src/pdf/lib/viewModel.js:515': 'a tension', 'src/pdf/lib/viewModel.js:709': 'a tension', // W4 PEOPLE second seat (merging the car): re-keyed +3 by line, #29's crisisSummaryForSurface import and cover/overview vantage lines above them
+  // re-keyed by identity 352/515/709 -> 353/516/710 (PAGE-1 CARD, F4, 2026-11-20: the same three tension reads, byte-identical
+  // lines, moved one line by the cardStandingRead.js import)
+  'src/pdf/lib/viewModel.js:353': 'a tension', 'src/pdf/lib/viewModel.js:516': 'a tension', 'src/pdf/lib/viewModel.js:710': 'a tension', // W4 PEOPLE second seat (merging the car): re-keyed +3 by line, #29's crisisSummaryForSurface import and cover/overview vantage lines above them
   'src/pdf/sections/PowerStructure.jsx': 'vm.power',
   // COHERENCE-POWERS-3 F2 (28c93c9da): a tension's parties, re-named for the final roster (settleTensionsToRoster); read as viewModel's are
   // re-keyed by identity 123 -> 124 (POWERS-10, the reader's M4 at 96a6ced46: the same tension read, moved one line by 943e34d6f's

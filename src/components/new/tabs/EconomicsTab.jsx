@@ -360,7 +360,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
 
   const _hasCrit = eco.tradeDependencies?.some(d => d.severity === 'critical');
   const _sp = eco.safetyProfile || {};
-  const ecoScore = Math.round(eco.compound?.economyOutput || 0);
+  // PAGE-1 OUTPUT (F3b, 2026-11-20): the output figure prints on no surface; the glance reads domain/display/outputInWords.js.
   const tradeLabel = (eco.tradeAccess || 'road').replace(/_/g,' ');
   const customChainViews = (eco.customChains || []).map(chain => ({
     chain,
@@ -403,7 +403,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
       <NarrativeNote note={narrativeNote} />
 
       {/* ── PROSPERITY HEADER (the tab's glance surface; the campaign tiles close the page) ── */}
-      <EconomicsGlance eco={{ ...eco, economicComplexity: complexityLabelShown(eco) }} settlement={s} prosColor={prosColor} tradeLabel={tradeLabel} ecoScore={ecoScore}
+      <EconomicsGlance eco={{ ...eco, economicComplexity: complexityLabelShown(eco) }} settlement={s} prosColor={prosColor} tradeLabel={tradeLabel}
         headerRung={deskProse.prosperityHeader} economyRung={deskProse.prosperityRung} />
 
       {econOrdinaryTimesLine(s, eco)&&<p data-testid="economics-ordinary-times" style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch['#5A3A10'],fontStyle:'italic',margin:'0 0 10px',lineHeight:1.5}}>{econOrdinaryTimesLine(s, eco)}</p>}{/* ── INCOME SOURCES ──────────────────────────────────────────────── */}

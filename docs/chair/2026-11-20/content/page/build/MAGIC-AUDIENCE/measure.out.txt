@@ -1,0 +1,5 @@
+owner: docs 1020; Magic tab prints the reliance names in 424; Overview line in 174, naming chains in 129; line names a chain the same audience's Magic tab does not print: 0
+player: docs 1020; Magic tab prints the reliance names in 424; Overview line in 174, naming chains in 129; line names a chain the same audience's Magic tab does not print: 0
+public (toPublicSafe): docs 1020; Magic tab prints the reliance names in 424; Overview line in 174, naming chains in 129; line names a chain the same audience's Magic tab does not print: 0
+public (toPublicSafe full): docs 1020; Magic tab prints the reliance names in 424; Overview line in 174, naming chains in 129; line names a chain the same audience's Magic tab does not print: 0
+reader (publicVeiledRecordOf): docs 1020; Magic tab prints the reliance names in 424; Overview line in 174, naming chains in 129; line names a chain the same audience's Magic tab does not print: 0

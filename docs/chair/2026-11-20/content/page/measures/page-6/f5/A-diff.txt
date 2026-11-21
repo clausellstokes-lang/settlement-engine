@@ -1,0 +1,48 @@
+F5 base 1019/5452; arm 136/5452
+cards moved 902: base-F5 891, others 11; towns with any change 168
+FIELD PATHS (normalized; leaves; towns):
+  902	168	npcs[].secret.what
+  902	168	npcs[].secret.stakes
+  5	5	npcs[].personality.dominant
+  1	1	npcs[].goal.long
+  1	1	npcs[].goal.intent.long.kind
+CARD FIELD SETS:
+  897	secret
+  4	personality+secret
+  1	goal+personality+secret
+OTHERS (non-F5 cards moved):
+  hxd-town-19 Ek Chuah Ixim (the senior craft-guild master) fields secret.stakes,secret.what temp hospitable->hospitable secret Knows the settlement's most important legal docume -> Has been delaying vital information from reaching 
+  hxd-city-2 Eudokia Choniates (the company captain) fields secret.stakes,secret.what temp magnanimous->magnanimous secret Ordered what was officially ruled an accident, and -> Their legitimate business is a front for moving co
+  hxd-city-7 Flavia Crispus (the chief magistrate) fields secret.stakes,secret.what temp astute->astute secret Ordered what was officially ruled an accident, and -> Secretly directs a fencing operation through a tru
+  hxd-city-37 Prima Balbus (the company captain) fields secret.stakes,secret.what temp wise->wise secret Secretly directs a fencing operation through a tru -> Has been embezzling from the organisation they ove
+  hxd-metropolis-5 Lepidus Vetus (the undercity boss) fields secret.stakes,secret.what temp -> secret Knows the settlement's most important legal docume -> Has been delaying vital information from reaching 
+  hxd-metropolis-20 Photios Chortasmenos (the network's head) fields secret.stakes,secret.what temp -> secret Knows the settlement's most important legal docume -> Has been delaying vital information from reaching 
+  hxd-metropolis-22 Murdoch MacKenzie (the chief magistrate) fields secret.stakes,secret.what temp -> secret Ordered what was officially ruled an accident, and -> Secretly directs a fencing operation through a tru
+  hxd-metropolis-24 Naoise Doyle (the house boss) fields personality.dominant,secret.stakes,secret.what temp level-headed->incorruptible secret Skims from the house's takings before the money re -> Holds the debts of half a dozen respected people a
+  hxd-metropolis-30 Zorana Alexeyev (the postmaster) fields secret.stakes,secret.what temp principled->principled secret Charges for fast riders and sends the letters with -> Opens letters for people who pay to know what is i
+  hxd-metropolis-31 Sofia Kiselev (the postmaster) fields secret.stakes,secret.what temp principled->principled secret Charges for fast riders and sends the letters with -> Opens letters for people who pay to know what is i
+  hxd-metropolis-39 Wendelin Walter (the postmaster) fields secret.stakes,secret.what temp principled->principled secret Charges for fast riders and sends the letters with -> Opens letters for people who pay to know what is i
+base-F5 cards moved that are still F5: 7; non-F5 that became F5: 1
+SURVIVORS by title (top 10):
+  30	the prison warden
+  26	the black marketeer
+  6	the company captain
+  5	the senior guild master
+  4	the dean
+  4	the alchemist
+  4	the garrison commander
+  4	the guildmaster of thieves
+  4	the bishop
+  4	the luxury merchant
+  distinct titles 41
+SURVIVOR texts (top 10):
+  13	Keeps a prisoner in the cells long after their sentence ended, at the request of someone who pays for it
+  12	Has been selling poisons to a buyer who uses them on people
+  11	Sells better food, letters and visits to the prisoners whose families can pay, and lets the rest go hungry
+  9	Secretly directs a fencing operation through a trusted intermediary
+  8	Is paid by someone in authority to report who buys what, and sells their own customers out
+  7	Their legitimate business is a front for moving contraband
+  6	Sells goods seized by the officials, bought back from the officials who seized them
+  6	Let a prisoner walk out one night for a purse of gold and reported an escape the next morning
+  5	Has been quietly betting against the ventures they talk their neighbours into, and profiting when they fail
+  5	Has been systematically bribing multiple officials for preferential treatment

@@ -1,0 +1,143 @@
+# S7 (second cut): what each tension side means, as data only. GENERATED from src/data/tensionSideMeanings.js :: TENSION_SIDE_TABLE_LINES
+# (tests/data/tensionSideMeanings.test.js holds the two equal). Brief: docs/chair/2026-11-20/content/page/briefs/S7.md; the reader's rule is the file's header.
+# One line a row: kind/form/slot (every place that carries the words) · today's words · means · presumes · without.
+# presumes "-": the words presume no house the record may lack where they stand; without "-": no rewording is owed.
+# A template side the generator writes over (a power's name, or a fixed word) is reached by slot: TENSION_SIDE_BY_SLOT.
+succession_crisis/base/0 · "Legitimate heir" · ruler · - · -
+succession_crisis/base/1 · "Popular candidate" · none · - · -
+succession_crisis/base/2 · "Power behind throne" · none · - · -
+economic_disparity/base/0 · "Wealthy merchants" · merchant power · - · "Those growing richer"
+economic_disparity/base/1 · "Poor workers" · none · - · -
+economic_disparity/base/2 · "Moderate reformers" · none · - · -
+religious_tension/base/0 · "Orthodox believers" · faith power · - · "The orthodox faithful"
+religious_tension/base/1 · "Reformists" · none · - · -
+religious_tension/base/2 · "Secular camp" · none · - · -
+guild_conflict/base/0 · "Established guilds" · craft power · - · -
+guild_conflict/base/1 · "Upstart guilds" · craft power · - · -
+guild_conflict/base/2, guild_conflict/unanchored/2 · "Non-guild workers" · none · - · -
+guild_conflict/unanchored/0 · "Guild members" · craft power · - · -
+guild_conflict/unanchored/1 · "Those who would trade outside the guild" · none · - · -
+external_threat/base/0 · "Prepare for war" · none · - · -
+external_threat/base/1 · "Seek diplomacy" · none · - · -
+external_threat/base/2 · "Flee/hide" · none · - · -
+resource_scarcity/base/0 · "Hoarders" · none · - · -
+resource_scarcity/base/1 · "Desperate poor" · none · - · -
+resource_scarcity/base/2 · "Price regulators" · ruler · market · null (drop the side)
+resource_scarcity/unanchored/0 · "Those hoarding what they can" · none · - · -
+resource_scarcity/unanchored/1 · "Those who cannot pay the prices" · none · - · -
+resource_scarcity/unanchored/2 · "Those who would fix a fair price" · none · - · -
+crime_wave/base/0, crime_wave/unanchored/0 · "Official guards" · watch · force: kept · "Those in charge"
+crime_wave/base/1 · "Vigilantes" · none · - · -
+crime_wave/base/2, crime_wave/unanchored/2 · "Criminal organisations" · criminal power · organised crime · "Lawbreakers"
+crime_wave/unanchored/1 · "Those who would take the law into their own hands" · none · - · -
+magical_controversy/base/0 · "Pro-magic" · none · - · -
+magical_controversy/base/1 · "Anti-magic" · none · - · -
+magical_controversy/base/2 · "Regulation advocates" · none · - · -
+generational_divide/base/0 · "Traditionalists" · none · - · -
+generational_divide/base/1 · "Progressives" · none · - · -
+generational_divide/base/2 · "Pragmatic middle" · none · - · -
+corruption_scandal/base/0 · "Corrupt officials" · ruler · - · -
+corruption_scandal/base/1 · "Reformers" · none · - · -
+corruption_scandal/base/2 · "Complicit beneficiaries" · none · - · -
+outside_debt/base/0 · "Debtors who took the loans" · none · - · -
+outside_debt/base/1, outside_debt/unanchored/1 · "Those who will bear the cost" · none · - · -
+outside_debt/base/2 · "Those who profited and escaped" · none · - · -
+outside_debt/unanchored/0 · "Those who took the loans" · none · - · -
+outside_debt/unanchored/2 · "Those who profited and want no questions asked" · none · - · -
+occupation_legacy/base/0 · "Former collaborators" · none · - · -
+occupation_legacy/base/1 · "Former resistance" · none · - · -
+occupation_legacy/base/2 · "New generation wanting to move on" · none · - · -
+occupation_legacy/unanchored/0, occupation_legacy/dated/0 · "Collaborator families" · none · - · -
+occupation_legacy/unanchored/1, occupation_legacy/dated/1 · "Resistance families" · none · - · -
+occupation_legacy/unanchored/2, occupation_legacy/dated/2 · "Those who want it forgotten" · none · - · -
+infiltration_fear/base/0 · "Security hardliners" · none · - · -
+infiltration_fear/base/1 · "Civil libertarians" · none · - · -
+infiltration_fear/base/2 · "Actual agents exploiting the confusion" · outsider · - · -
+disputed_land/base/0 · "Original claimants" · none · - · -
+disputed_land/base/1 · "Current occupants" · none · - · -
+disputed_land/base/2 · "Legal class profiting from ambiguity" · none · legal house · "Those who profit from the muddle"
+population_friction/base/0 · "Old families" · none · - · -
+population_friction/base/1 · "Newcomers" · none · - · -
+population_friction/base/2 · "Merchants who benefit from cheap newcomer labour" · merchant power · market · "Those who benefit from cheap newcomer labour"
+leadership_vacuum/base/0 · "Multiple weak claimants" · none · - · -
+leadership_vacuum/base/1, leadership_vacuum/unanchored/1 · "Pragmatists who want stability" · none · - · -
+leadership_vacuum/base/2 · "Those who prefer the vacuum" · none · - · -
+leadership_vacuum/unanchored/0 · "Rival claimants, none strong enough to win" · none · - · -
+leadership_vacuum/unanchored/2 · "Those who prefer things unsettled" · none · - · -
+market_crash/base/0 · "Ruined speculators" · none · - · -
+market_crash/base/1, market_crash/unanchored/1 · "Creditors calling in debts" · none · - · -
+market_crash/base/2 · "Those who sold in time" · none · - · -
+market_crash/unanchored/0 · "Those buying as if prices can only rise" · none · - · -
+market_crash/unanchored/2 · "Those who have sold and are waiting" · none · - · -
+trade_collapse/base/0 · "Displaced traders" · merchant power · - · -
+trade_collapse/base/1 · "Workers left without wages" · none · - · -
+trade_collapse/base/2 · "Rivals who profited from the diversion" · none · - · -
+trade_collapse/unanchored/0 · "Traders who fear the buyers are going elsewhere" · merchant power · - · -
+trade_collapse/unanchored/1 · "Workers afraid for their wages" · none · - · -
+trade_collapse/unanchored/2 · "Rivals who would gain if the trade moved" · none · - · -
+great_fire/base/0 · "Survivors seeking someone to blame" · none · - · -
+great_fire/base/1, great_fire/dated/1 · "Rebuilders and profiteers" · none · - · -
+great_fire/base/2, great_fire/dated/2 · "Those accused of setting it" · none · - · -
+great_fire/unanchored/0 · "Those who want timber and thatch forbidden" · none · - · -
+great_fire/unanchored/1 · "Households who cannot afford to build in anything else" · none · - · -
+great_fire/unanchored/2 · "Those who say the danger is overblown" · none · - · -
+great_fire/dated/0 · "Families still seeking someone to blame" · none · - · -
+plague_years/base/0 · "Quarantine hardliners" · none · - · -
+plague_years/base/1 · "The bereaved and the blamed" · none · - · -
+plague_years/base/2 · "Healers and charlatans alike" · none · healer · "Those who sold cures, honest or not"
+plague_years/unanchored/0 · "Those who would shut the sick away" · none · - · -
+plague_years/unanchored/1 · "Families who refuse to be shut in" · none · - · -
+plague_years/unanchored/2 · "Those who trust to prayer and old remedies" · none · - · -
+great_flood/base/0 · "Displaced families" · none · - · -
+great_flood/base/1 · "Landowners pressing newly-convenient claims" · none · - · -
+great_flood/base/2 · "Those who profited from the redrawing" · none · - · -
+great_flood/unanchored/0 · "Households on the low ground" · none · - · -
+great_flood/unanchored/1 · "Landowners on the high ground" · none · - · -
+great_flood/unanchored/2 · "Those who say the water will never come" · none · - · -
+heresy_trial/base/0, heresy_trial/unanchored/0 · "The accusers" · none · - · -
+heresy_trial/base/1, heresy_trial/unanchored/1 · "The accused and their sympathizers" · none · - · -
+heresy_trial/base/2 · "Authorities exploiting the rift" · ruler · - · -
+heresy_trial/unanchored/2 · "Those in authority who would exploit the rift" · ruler · - · -
+pilgrimage_surge/base/0 · "Temple beneficiaries" · faith power · - · -
+pilgrimage_surge/base/1 · "Overwhelmed old residents" · none · - · -
+pilgrimage_surge/base/2, pilgrimage_surge/unanchored/2 · "Sceptics who doubt the miracle" · none · - · -
+pilgrimage_surge/unanchored/0 · "Those who would proclaim the miracle" · none · - · -
+pilgrimage_surge/unanchored/1 · "Residents who want no crowds of strangers" · none · - · -
+popular_uprising/base/0 · "Former rebels" · none · - · -
+popular_uprising/base/1 · "The restored order" · ruler · - · -
+popular_uprising/base/2 · "Those who changed sides at the right moment" · none · - · -
+popular_uprising/unanchored/0 · "Those pressing their demands" · none · - · -
+popular_uprising/unanchored/1 · "Those in charge, who will not give way" · ruler · - · -
+popular_uprising/unanchored/2 · "Those waiting to see which side wins" · none · - · -
+tyranny/base/0 · "Old loyalists" · none · - · -
+tyranny/base/1 · "Those who suffered under the regime" · none · - · -
+tyranny/base/2 · "Beneficiaries who kept their gains" · none · - · -
+tyranny/unanchored/0 · "Those who want a strong hand" · none · - · -
+tyranny/unanchored/1 · "Those who fear a tyrant in the making" · none · - · -
+tyranny/unanchored/2 · "Those who will serve whoever wins" · none · - · -
+tyranny/dated/0 · "Loyalist families" · none · - · -
+tyranny/dated/1 · "Families the regime wronged" · none · - · -
+tyranny/dated/2 · "Families who kept the regime's gains" · none · - · -
+wild_magic/base/0 · "The changed and their descendants" · none · - · -
+wild_magic/base/1, wild_magic/unanchored/1 · "Those who fear them" · none · - · -
+wild_magic/base/2 · "Scholars studying the residue" · none · - · -
+wild_magic/unanchored/0 · "Those touched by the flares" · none · - · -
+wild_magic/unanchored/2 · "Those who would study the flares" · none · - · -
+legitimacy_crisis/base/0 · "The sitting authority" · ruler · - · -
+legitimacy_crisis/base/1 · "Those who deny its mandate" · none · - · -
+legitimacy_crisis/base/2 · "Pragmatists who want any stable answer" · none · - · -
+demographic_pressure/base/0 · "Established residents" · none · - · -
+demographic_pressure/base/1 · "The newly arrived or departing" · none · - · -
+demographic_pressure/base/2 · "Those profiting from the churn" · none · - · -
+trade_dispute/base/0 · "Merchants tied to the old partner" · merchant power · - · -
+trade_dispute/base/1, trade_dispute/unanchored/1 · "Those who want new partners" · none · - · -
+trade_dispute/base/2, trade_dispute/unanchored/2 · "Authorities caught between them" · ruler · - · -
+trade_dispute/unanchored/0 · "Merchants who trade with the partner" · merchant power · - · -
+crime_wave/base/2, crime_wave/unanchored/2 · "the criminal network" (generator, for "Criminal organisations") · criminal power · organised crime · "the lawbreakers"
+economic_disparity/base/0, succession_crisis/base/2 · "the merchant class" (generator, for "Wealthy merchants" / "Power behind throne") · merchant power · market · "those who pull the strings"
+religious_tension/base/0 · "the orthodox clergy" (generator, for "Orthodox believers") · faith power · clergy · "the orthodox faithful"
+crime_wave/base/0, crime_wave/unanchored/0 · "The garrison" (generator, for "Official guards") · watch · - · -
+crime_wave/base/0, crime_wave/unanchored/0 · "The watch" (generator, for "Official guards") · watch · - · -
+crime_wave/base/0, crime_wave/unanchored/0 · "The militia" (generator, for "Official guards") · watch · - · -
+crime_wave/base/0, crime_wave/unanchored/0 · "Local enforcement" (generator, for "Official guards") · watch · force: kept · "Those in charge"
+succession_crisis/base/0, corruption_scandal/base/0 · "the governing authority" (generator, for "Legitimate heir" / "Corrupt officials") · ruler · - · -

@@ -119,6 +119,28 @@ function oneSentence(sentence, people) {
 }
 
 /**
+ * THE POSSESSIVE OF A QUALIFIED NAME OPENS ITS BRACKET INTO AN EPITHET (NAMES-3, the seventh chair's ruling of 2026-11-20 on
+ * item 3 (d), a style, vetoable by the owner). A card whose name collides with another's carries its title in a bracket
+ * (`generators/npcDisplayNames.js`: "Tserenpuntsag Ongirad (the miller)"); a composed "{name}'s" then read "Tserenpuntsag
+ * Ongirad (the miller)'s hours" (54 stored strings in 33 towns of the census's 720, 8 in 5 of the golden's 525, at the line
+ * 0c906948). In a composed sentence that possessive reads "Tserenpuntsag Ongirad the miller's hours", never "(the miller)'s"
+ * and never a doubled possessive. Only the possessive moves: the card's `name` and every other mention keep the bracket,
+ * and the bare name still stands in the string (the share veil folds a bracketed qualifier and searches the bare name).
+ * @param {string} text @param {ReadonlyArray<MentionCard | null | undefined>} cards @returns {string}
+ */
+export function qualifiedPossessives(text, cards) {
+  if (typeof text !== 'string' || !text) return text;
+  let out = text;
+  for (const c of cards || []) {
+    const name = str(c?.name);
+    const m = /^(.+?)\s+\(([^()]+)\)$/.exec(name);
+    if (!m) continue;
+    out = out.replace(new RegExp(`${NOT_AFTER_LETTER}${esc(name)}(['’])s${NOT_BEFORE_LETTER}`, 'gu'), (_w, q) => `${m[1]} ${m[2]}${q}s`);
+  }
+  return out;
+}
+
+/**
  * A composed text with every person's later mention in each sentence changed (the rule in the header); the first
  * mention in each sentence keeps the full name. A card with no printed name is not a person of the text.
  * @param {string} text the composed line, as written @param {ReadonlyArray<MentionCard | null | undefined>} cards the
@@ -139,5 +161,6 @@ export function secondMentions(text, cards) {
   if (people.length === 0) return text;
   // a sentence ends at . ! or ? (a closing quote kept with it) before a capital or an opening quote
   const parts = text.split(/((?<=[.!?…]["”')]?)\s+(?=["“'(]?\p{Lu}))/u);
-  return parts.map((part, i) => (i % 2 === 1 ? part : oneSentence(part, people))).join('');
+  // NAMES-3 (item 3 (d)): a first mention's possessive of a qualified name opens its bracket (`qualifiedPossessives`)
+  return qualifiedPossessives(parts.map((part, i) => (i % 2 === 1 ? part : oneSentence(part, people))).join(''), cards);
 }

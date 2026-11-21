@@ -9,7 +9,9 @@
  * exactly (RANK 36 · POWER 48 · INSTITUTION 48 · SUPPLY 48 · TIES 60 · PERSONALITY 96 ·
  * ALLEGIANCE 128 = 464), plus UNCANNY 60 (the owner's word of 2026-11-08: rare fantasy goals, magic on
  * as the gate) = 524. No goal is keyed by title (J-16). CRISIS keeps today's lines and has no
- * cell here. Every line is written to the owner's style law (WIRING-RULINGS §5–§8, STYLE-RULINGS §2,
+ * cell here. APART from the cells, and outside every total above, `GOAL_RESERVE_LINES` holds 41 reserve lines (GOALS-1,
+ * GR1; the chair's approval of 2026-11-20 10:48 UTC): TIES 6 · INSTITUTION 7 · RANK 7 · POWER 5; and GOALS-3 (the chair's
+ * approval of 13:32 UTC): PERSONALITY 16, in 13 cells; never drawn, only taken by a repeat's rotation or the floor's walk. Every line is written to the owner's style law (WIRING-RULINGS §5–§8, STYLE-RULINGS §2,
  * WAVE-RULINGS item 16) and is listed here FOR THE OWNER'S VETO.
  *
  * ── THE VANTAGES ──
@@ -24,6 +26,12 @@
  *                            seventh chair's ruling CN1 of 2026-11-20, goals.js :: cellCandidates fills
  *                            it through powerNameWithArticle); never "the {power}", never "{power}'s"
  *                            (many names are plural: "Merchant Guilds", "Grain Holders").
+ *   {power|one|many}         THE AGREEMENT FORM (NAMES-3, the seventh chair's rulings CV1 and CV7 of
+ *                            2026-11-20, vetoable by the owner): an "it"/"its" said of a power slot, or a
+ *                            verb whose subject it is, is written in both numbers and takes the power's
+ *                            own ("stronger than they found {power|it|them}"), filled by goals.js ::
+ *                            cellCandidates through the one reader (`powerSentenceName.js ::
+ *                            fillAgreement`). "They"/"their" after a singular power stand (CV7 (1)).
  *   {house} {otherHouse}     the house as "the" + its display noun (`institutionDisplayName`),
  *   {front} {targetHouse}    lower-cased, any parenthetical stripped ("the fish market", "the
  *                            mills", "the smuggling network"); never possessive, never the subject
@@ -198,6 +206,18 @@ export const GOAL_LINE_MIN_MEMBERS = Object.freeze({
 });
 
 /**
+ * GOALS-1 (the chair's check of 2026-11-20 10:48 UTC): A GENTLE LINE IS NEVER HELD ON A HARSH TIE. Beside its line, the
+ * tie types and strengths (`generators/people/ties.js :: RELATIONSHIP_STRENGTHS`) a TIES line is refused on: template →
+ * `{ type: [strengths] }`. Read by `people/goals.js :: cellCandidates` from the tie its TIES call reads: a line refused
+ * there is marked refused (never dropped), so the list and every draw stay as they are, and a rotation passes over it.
+ * @type {Readonly<Record<string, Readonly<Record<string, readonly string[]>>>>}
+ */
+export const GOAL_LINE_NOT_ON_TIES = Object.freeze({
+  "Earn {other}'s respect, if never their friendship.": Object.freeze({ enemy: Object.freeze(['serious', 'mortal']), rival: Object.freeze(['bitter']) }),
+  'Keep the rivalry with {other} a fair one, fought in the open, for as long as it lasts.': Object.freeze({ enemy: Object.freeze(['serious', 'mortal']), rival: Object.freeze(['bitter']) }),
+});
+
+/**
  * THE LINES. `GOAL_FAMILY_LINES[family][subKind][vantage]` → the variants (a string, or
  * `{ line, needs }`). Every line is FOR THE OWNER'S VETO.
  */
@@ -219,7 +239,7 @@ export const GOAL_FAMILY_LINES = Object.freeze({
         "Take {above}'s place in {power}, and keep it longer than {above} did.",
         'Rise past {above} in {power} on their own merit, owing no one for the climb.',
         'Be the first person {power} would turn to, before anyone thinks to ask {above}.',
-        'Reach the head of {power} and run it the way {above} never would.',
+        'Reach the head of {power} and run {power|it|them} the way {above} never would.',
         'Outlast {above} in {power}, and be ready when the place falls empty.',
       ]),
     }),
@@ -237,15 +257,15 @@ export const GOAL_FAMILY_LINES = Object.freeze({
         'Stay at the head of {power} until they choose who comes after them.',
         'Hand {power} on to an heir of their own choosing, and not to {below}.',
         'Lead {power} so long and so well that no one, {below} included, thinks of replacing them.',
-        'Make {power} so much their own that it could not run a week without them.',
+        'Make {power} so much their own that {power|it|they} could not run a week without them.',
         'Keep {below} loyal for life, and make loyalty pay better than ambition.',
-        'Leave {power} stronger than they found it, with {below} still second and content.',
+        'Leave {power} stronger than they found {power|it|them}, with {below} still second and content.',
       ]),
     }),
     // a member who holds no rank
     enter: Object.freeze({
       short: cell([
-        'Do one thing for {power} this season that the people who lead it cannot ignore.',
+        'Do one thing for {power} this season that the people who lead {power|it|them} cannot ignore.',
         'Be in the room the next time {power} must decide something that matters.',
         'Find a patron among those who lead {power}, and make themselves useful to them.',
         'Bring {power} a piece of news before anyone else does.',
@@ -256,9 +276,9 @@ export const GOAL_FAMILY_LINES = Object.freeze({
         'Be counted one day among those who lead {power}.',
         'Earn a place among the leaders of {power} without buying it or marrying into it.',
         'Become someone {power} cannot do without.',
-        'Rise in {power} far enough that their word carries weight outside it.',
+        'Rise in {power} far enough that their word carries weight outside {power|it|them}.',
         'Reach the top of {power} by the long road, one earned favour at a time.',
-        'Be given the secrets of {power} to keep, as well as its errands to run.',
+        'Be given the secrets of {power} to keep, as well as {power|its|their} errands to run.',
       ]),
     }),
   }),
@@ -278,7 +298,7 @@ export const GOAL_FAMILY_LINES = Object.freeze({
         'See {rival} too weak to threaten {power} again.',
         'Make peace between {power} and {rival} on terms {power} can live with.',
         'Outlast {rival}, and still be standing with {power} when they are gone.',
-        'Build {power} up until it is beyond the reach of {rival}.',
+        'Build {power} up until {power|it is|they are} beyond the reach of {rival}.',
         'Bring {rival} under the sway of {power}, one member at a time.',
         'End the bad blood between {power} and {rival} before the next generation inherits it.',
       ]),
@@ -298,7 +318,7 @@ export const GOAL_FAMILY_LINES = Object.freeze({
         'Build {power} into something {rival} can only follow.',
         'Win so much for {power} that the contest with {rival} stops being a contest.',
         'Turn the contest with {rival} into a partnership on terms set by {power}.',
-        'See {power} outgrow {rival}, so it never has to look over its shoulder again.',
+        'See {power} outgrow {rival}, so {power|it never has|they never have} to look over {power|its|their} shoulder again.',
       ]),
     }),
     // either end of a corrupted relation: written so that both ends read true
@@ -1107,6 +1127,141 @@ export const GOAL_FAMILY_LINES = Object.freeze({
         { line: 'Become the one person here the spirits of the place will deal with.', needs: ['magic'] },
         { line: 'End the bargain, so their children never inherit it.', needs: ['magic'] },
         { line: 'Make a second bargain good enough to undo the first.', needs: ['magic'] },
+      ]),
+    }),
+  }),
+});
+
+/**
+ * THE RESERVE LINES (GR1, GOALS-1, the chair's rule: no goal wording twice in one town). The same shape as
+ * `GOAL_FAMILY_LINES` (`[family][subKind][vantage]` → `cell([...])`), kept APART from the cells: a line here is never
+ * drawn, only TAKEN by a repeat's rotation (`generators/people/goals.js :: dealGoals`, pass two), so appending one moves
+ * no draw (appending to a cell would change its pick's modulus and move every draw of that kind). Empty at birth; the
+ * 25 lines of RANK, POWER, INSTITUTION and TIES are the chair's approval of 2026-11-20 10:48 UTC (GOALS-1, builder 4), the
+ * 16 of PERSONALITY its approval of 13:32 UTC (GOALS-3, builder 7: also walked by the floor, `personalityFloor`), outside
+ * the cells' totals.
+ */
+export const GOAL_RESERVE_LINES = Object.freeze({
+  RANK: Object.freeze({
+    enter: Object.freeze({
+      short: cell([
+        'Learn how decisions are really made in {power}, and whose word settles them.',
+        'Have their name put forward for the next place that opens in {power}.',
+        'Keep every promise they make inside {power} this season, however small.',
+        'Speak up for {power} once this season when it costs them something to do so.',
+      ]),
+      long: cell([
+        'Be given a rank in {power} one day for years of faithful service, and ask for nothing sooner.',
+        'Be trusted by every side inside {power}, so that a quarrel there is brought to them to settle.',
+        'Change one thing about the way things are done in {power}, from the inside.',
+      ]),
+    }),
+  }),
+  POWER: Object.freeze({
+    tense: Object.freeze({
+      short: cell([
+        'Find one matter this season on which {power} and {rival} want the same thing.',
+        'Give {rival} no fair cause for complaint against {power} this season.',
+      ]),
+      long: cell([
+        'Be the one person in {power} that {rival} will always agree to hear.',
+        'Keep {power} out of every quarrel with {rival} that is not truly {power|its|their} own.',
+        'Free {power} of any need for what only {rival} can give.',
+      ]),
+    }),
+  }),
+  INSTITUTION: Object.freeze({
+    solvency: Object.freeze({
+      short: cell([
+        'Put a little by at {house} every week this season, however small the sum.',
+        { line: 'Win better terms from one of those who supply {house}, before the season is out.', excludes: ['crisis: siege'] },
+      ]),
+      long: cell([
+        'Make {house} known to every supplier as a house that pays on the day.',
+        'Let {house} grow only as fast as the money comes in, and no faster.',
+        'Leave the accounts of {house} so plain that whoever comes next could take them up.',
+        'Deal fairly with everyone {house} deals with, in good years and bad, and be trusted for it.',
+      ]),
+    }),
+    charter: Object.freeze({
+      long: cell([
+        'Win rights for every house that does the same work as {house}, not for {house} alone.',
+      ]),
+    }),
+  }),
+  TIES: Object.freeze({
+    rival_enemy: Object.freeze({
+      short: cell([
+        "Keep out of {other}'s way this season, and get on with their own work in peace.",
+        "Quietly learn one thing this season from watching {other} at work.",
+      ]),
+      long: cell([
+        "Earn {other}'s respect, if never their friendship.",
+        "Leave a name that will be remembered longer than {other}'s.",
+        'Come through the rivalry with {other} no meaner than they went into it.',
+        'Keep the rivalry with {other} a fair one, fought in the open, for as long as it lasts.',
+      ]),
+    }),
+  }),
+  // GOALS-3 (builder 7; the chair's ruling of 13:17 UTC on cause B and approval of these lines at 13:32 UTC): a PERSONALITY cell's
+  // reserve, keyed like its cells (cluster, vantage), reached only by the walk (a repeat's rotation, the floor), never by the draw
+  PERSONALITY: Object.freeze({
+    greed: Object.freeze({
+      short: cell([
+        'Spend nothing this season that someone else could be made to pay for.',
+      ]),
+      long: cell([
+        'Have half the people here owing them money.',
+      ]),
+    }),
+    hunger_for_status: Object.freeze({
+      long: cell([
+        'Live in the finest house here, and have everyone know whose it is.',
+      ]),
+    }),
+    fear: Object.freeze({
+      long: cell([
+        'Never again owe anything to someone who could use it against them.',
+      ]),
+    }),
+    forbidden_patron: Object.freeze({
+      long: cell([
+        "Be everyone's confidant, and no one's friend.",
+        'Keep a foot in every camp here, and let each camp think it is the only one.',
+      ]),
+    }),
+    kindness: Object.freeze({
+      short: cell([
+        'Keep company this season with someone who is grieving.',
+      ]),
+      long: cell([
+        'Forgive everyone who has ever wronged them, and mean it.',
+      ]),
+    }),
+    sway: Object.freeze({
+      short: cell([
+        'Be proved right this season about something everyone else doubted.',
+      ]),
+      long: cell([
+        'Never once be seen to back down.',
+        'Have a following who would go wherever they lead.',
+      ]),
+    }),
+    grudge: Object.freeze({
+      short: cell([
+        'Spoil one good thing this season for someone who once slighted them.',
+      ]),
+      long: cell([
+        'See the people who looked down on them come asking for their help.',
+        'Never let a single wrong done to them be forgotten.',
+      ]),
+    }),
+    impulse: Object.freeze({
+      short: cell([
+        'Slip away for a few days this season, and tell no one where.',
+      ]),
+      long: cell([
+        "Never do a day's work they do not feel like doing.",
       ]),
     }),
   }),

@@ -42,8 +42,12 @@ r2s-occupied-city-1, r2r-village-8), stored before the names work (85fccf898) an
    before: Partly in criminal hands. Corrupt Council is itself run as a criminal concern, so the people who make the laws here are the ones who profit from breaking them.
    after:  Partly in criminal hands. The Corrupt Council is itself run as a criminal concern, so the people who make the laws here are the ones who profit from breaking them.
 
+One kind more, added 2026-11-20 08:19 UTC (NAMES-2 item 5, built on the chair's word): a plural power's verb takes its
+number (r2r-town-9, the Power tab: the line a ruling head who holds a share in a guild prints)
+   before: ... and also holds a full share in the Merchant Guilds, so what the Merchant Guilds wants from the Guild Council goes straight to the top.
+   after:  ... and also holds a full share in the Merchant Guilds, so what the Merchant Guilds want from the Guild Council goes straight to the top.
+
 Left as it was, and worth the owner's ear (not changed by this work):
-  - a plural power still takes a singular verb in a few lines composed on the page: "so what the Merchant Guilds wants from
-    the Guild Council goes straight to the top" (measured and proposed in NAMES-2-HANDBACK.md, item 5; not built);
-  - a pronoun for a plural power: "Build the Craft Guilds up until it is beyond the reach of the Merchant Guilds";
+  - a pronoun for a plural power: "Build the Craft Guilds up until it is beyond the reach of the Merchant Guilds"
+    (measured and listed in NAMES-2-HANDBACK.md, item 5; not built);
   - a label that is a description takes the capital of its label: "The Merchant oligarchy".

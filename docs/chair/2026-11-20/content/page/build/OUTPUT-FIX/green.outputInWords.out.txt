@@ -1,0 +1,19 @@
+
+ RUN  v4.1.8 /home/user/settlement-engine/.claude/worktrees/agent-afd57509ad4c67afb
+
+ ✓ tests/domain/display/outputInWords.test.jsx > the reader says the record in words > the share is the figure over the town's own dial, said as the nearest named fraction 3ms
+ ✓ tests/domain/display/outputInWords.test.jsx > the reader says the record in words > the ladder: each named fraction says itself, and the share between two takes the nearer 1ms
+ ✓ tests/domain/display/outputInWords.test.jsx > the reader says the record in words > no figure or no dial: nothing 0ms
+ ✓ tests/domain/display/outputInWords.test.jsx > the reader says the record in words > over born towns of every size: every line said, no figure and no working 2ms
+ ✓ tests/domain/display/outputInWords.test.jsx > the drag as a plain fact: no market (the chair's ruling of 15:16 UTC) > below "nearly all" with no market, the line ends on the market 1ms
+ ✓ tests/domain/display/outputInWords.test.jsx > the drag as a plain fact: no market (the chair's ruling of 15:16 UTC) > with a market, or at "nearly all" and above, no drag is named 1ms
+ ✓ tests/domain/display/outputInWords.test.jsx > the drag as a plain fact: no market (the chair's ruling of 15:16 UTC) > THE ARM: through the generator's own function, all else equal, the output without a market is lower than with one 1ms
+ ✓ tests/domain/display/outputInWords.test.jsx > every surface prints the words, and no grade out of 100 > the Economics header 707ms
+ ✓ tests/domain/display/outputInWords.test.jsx > every surface prints the words, and no grade out of 100 > the PDF Economics chapter 140ms
+
+ Test Files  1 passed (1)
+      Tests  9 passed (9)
+   Start at  16:32:14
+   Duration  14.08s (transform 5.32s, setup 47ms, import 7.46s, tests 5.90s, environment 537ms)
+
+exit 0

@@ -44,6 +44,7 @@ import { buildDossierEntityIndex, entityIdFor, slugifyEntity } from '../../domai
 import { factionIdFromName } from '../../lib/entities.js';
 import { cardHouseOf, cardPowerLine, firstPowerOf, governingNameOf, powerOrderOf } from '../../domain/people/cardPowers.js';
 import { seatKeeperOf } from '../../domain/people/seatKeeper.js';
+import { cardStandingLine, cardFirstOfWeights } from '../../domain/display/cardStandingRead.js';
 import { ownerGenerationContracts } from './generationContracts.js';
 // The four settlement-body chapters and the shared small readers moved out under
 // THE DECOMPOSITION WAVE (lane D); buildViewModel below still calls them in the
@@ -52,7 +53,7 @@ import { economicsSlice, defenseSlice, servicesSlice, resourcesSlice } from './v
 import { stressArray, foodCore, avgScore } from './viewModelPrimitives.js';
 import { crisisHookFor } from '../../domain/crisis/crisisHooks.js';
 import { crisisSummaryForSurface } from '../../domain/crisis/crisisSummaryVantage.js';
-import { dmPowerViewOf } from '../../domain/people/patronage.js';
+import { dmPowerViewOf } from '../../domain/people/patronage.js'; import { safetyShownOf } from '../../domain/display/safetyShown.js'; // PAGE-1 SAFETY (F3a): the label's one reader, and the owner's line
 
 // Human labels for the publicLegitimacy breakdown factors
 // (factionDynamics.computePublicLegitimacy emits { prosperity, safety, defense,
@@ -190,6 +191,7 @@ export function buildViewModel({
     aiAppendix:    useAi ? appendixSlice(ai) : null,
     // read from the canonical save (`raw`): the allegiance and the ranks are owner facts
     ...(dmView ? { dm: dmPowerViewOf(raw) } : {}),
+    ...(dmView ? { safetyQualifier: safetyShownOf(active, 'owner').qualifier } : {}), // PAGE-1 SAFETY (F3a): the owner's line beside the Safety label, ONLY in the DM's own document (the Foundry journal and every other caller leave dmView off: no such key); one line, so the line-keyed rows below keep their address
   };
 }
 
@@ -279,7 +281,6 @@ function summarySlice(active, ai, useAi, aiDailyLife) {
 function identitySlice(s, canonical = s) {
   const ec = s?.economicState || {};
   const dp = s?.defenseProfile || {};
-  const sp = ec?.safetyProfile || {};
   // A+ P1.8: source food via the shared deriveFoodBalance (clamped, screen-parity),
   // not the raw unclamped metrics.foodBalance — the anchor mirrors DailyLifeTab, so
   // it must show the same number the screen + the PDF overview do (one source per fact).
@@ -309,7 +310,7 @@ function identitySlice(s, canonical = s) {
       governingName:  governing?.faction || governing?.name || null,
       prosperity:     ec?.prosperity || null,
       complexity:     complexityLabelShown(ec) || null,
-      safety:         sp?.safetyLabel || null,
+      safety:         safetyShownOf(s).label,
       // ⚠ AN UNCOMPUTED ECONOMY IS NOT A BALANCED ONE. deriveFoodBalance returns
       // `available:false` with 0/0 for a settlement whose economy was never
       // computed, and the raw `?? null` let those zeros through — so a threadbare
@@ -383,7 +384,7 @@ function overviewSlice(active, ai, useAi) {
     .sort((a, b) => b.count - a.count);
 
   const prosperity = ec?.prosperity || null;
-  const safety = sp?.safetyLabel || null;
+  const safety = safetyShownOf(s).label;
   return {
     thesis:             useAi ? (ai?.thesis || null) : null,
     arrivalScene:       useAi ? (ai?.arrivalScene || ai?.aiNarrative?.arrivalScene || null) : null,
@@ -753,14 +754,12 @@ function npcsSlice(active) {
       }
       return false;
     });
-    // Influence might be string label, object, or numeric
-    const inf = n?.influence;
-    let influenceLabel = null, influenceDescription = null;
-    if (typeof inf === 'string') influenceLabel = inf;
-    else if (inf && typeof inf === 'object') {
-      influenceLabel = inf.label || inf.level || null;
-      influenceDescription = inf.description || null;
-    }
+    // ⛔ NO INFLUENCE LABEL (PAGE-1 CARD, F4, 2026-11-20): the PDF's "Influence: low" and the journal's printed the stored
+    // `influence` band, a keyword misread at birth (88.6% of the chair's 300 towns' cards "low"). Both print the record's
+    // fact instead, from the people card's one reader: the powers the person stands first of and each one's weight here.
+    const standingLine = cardStandingLine(n, s);
+    // PAGE-4 CARD-SERVED: a power the document holds with no figure prints its name alone (no weight)
+    const firstOfLine = cardFirstOfWeights(n, s).map((p) => (p.weightHere ? `${p.power}, ${p.weightHere}` : p.power)).join('; ') || null;
     // Engine plotHooks is array of strings; titles aren't present as a separate field for some npcs
     const npcRace = n?.race || n?.culture || culture;
     // Phase-D anchor identity. `id` keys this NPC's card anchor (matches the
@@ -798,9 +797,8 @@ function npcsSlice(active) {
         : [],
       powerLine: cardPowerLine(n, powerOrder, governingName, !!keeper && keeper.id === n.id) || null, // COHERENCE-POWERS: the leader's office (screen parity; F7: an empty seat's keeper)
       power: n?.power || 0,
-      influence: inf,
-      influenceLabel,
-      influenceDescription,
+      standingLine,
+      firstOfLine,
       blurb: n?.blurb || n?.description || null,
       personality: personalityStr,
       motivation: motivationStr,
