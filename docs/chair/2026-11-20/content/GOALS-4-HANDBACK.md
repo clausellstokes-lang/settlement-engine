@@ -1,3 +1,37 @@
+SAVED AT THE STOP
+
+# The owner's save and stop (the chair's message of 2026-11-21, about 02:06 UTC). GOALS-4 saved at 02:07 UTC on 2026-11-21 and stopped. NOT LANDED: no "WANTS <commit>" was sent.
+
+## The state at the stop
+
+- THE LANE `lane/goals-4-2026-11-20` holds:
+  - the line 062504aa8;
+  - builder 11's cure, merged at 261ee96fc;
+  - builder 10's wants, merged at aecbae238;
+  - the lighting census re-taken by its door at 191bebfa5 (files 3714 → 3716, titles 31266 → 31276);
+  - the writerReach shapesDigest re-frozen by its door at c004eede8 (7350e7ff → fd3443e1; cause: shape `target` 26,556 → 26,551 rows, the door's report identical at the line and the tip; FOR THE SECURITY READER);
+  - this file.
+  Every file of both builders is byte-identical at the tip to its builder's branch.
+- THE BUILDERS' BRANCHES, pushed and clean:
+  - `lane/goals-4-2026-11-20-b10-wip` at d83633b9b (the wants, with the six rewordings);
+  - `lane/goals-4-2026-11-20-b11-wip` at 3d1496328 (the cure: A, A2 TIES-HOLD, B, C; its report is `goals/briefs/GOALS-4-B11-REPORT.md`).
+- TIES-HOLD did not reach its target of 0. At 150 a size, places printing one tie template twice went from 280 to 266: town 18 → 11, city 112 → 105, metropolis 150 → 150. Every remaining repeat is a place whose admitted lines are all printed. The both-exhausted list for the depth lane is `goals/briefs/GOALS-4-B11-BOTH-EXHAUSTED.tsv`.
+- THE BUILD AT c004eede8 (`npm run build`, then `VERIFY_DIST=1` on the two build tests), beside the line's own figures in LINE-NOW.md:
+  - first paint 1,177,668 raw (0), 374,658 gzip (−12), 314,574 Brotli (−6): NO RISE;
+  - the worker 2,659,483 (line 2,631,236: +28,247, the wants and the cure);
+  - the engine chunk 926,191 (line 925,898: +293).
+  - The five red build rows are the line's own five.
+- RULE 8's ONE RUN at c004eede8 (`tests/generators tests/data tests/lint tests/build`, VERIFY_DIST=1, through the mutex): 16 files failed of 813; 27 tests failed, 7,652 passed, 6 skipped. Its rows were NOT YET READ BY NAME against `ci/RED-AT-LINE.tsv` (53 rows) when the stop came. The log was in the session's scratch and is not saved. `tests/lint/poolDominance.walker.test.js` is among the failing files: the wants grew the goal pools, and the register's door (`--tighten`, the lane's rows only; STOP if a ceiling would loosen) was not yet run.
+- NOT DONE at the stop:
+  - those rows read by name;
+  - the goals measure at 150 a size at the merged tip;
+  - the cross-town figure;
+  - the sameness door's three figures;
+  - the owner's file of twenty wants (its script is committed as `goals/measures/goals4-owner-twenty.mjs`, not run);
+  - what reads `goal.intent.target` outside the card;
+  - "WANTS <commit>".
+- Scratch worktrees on this box only: `/home/user/wt-b10`, `/home/user/wt-b11`, `/home/user/wt-base` (at d874c81e9) and `/home/user/wt-pre` (detached).
+
 # GOALS-4 · the hand-back (kept current; the hand-over of 21:32 UTC was NOT TAKEN: the chair's read governs, 240,443 at 21:34; the lane stays with GOALS-4 until the chair says 400,000)
 
 Seat: GOALS-4, the wants' build, under the seventh chair (session_019yED1SUxGVHyjQnoqoFvQ8). Orders: `docs/chair/2026-11-20/seventh/prompts/GOALS-4.txt` and `GOALS-4-ADDENDUM.txt` on `lane/chair-2026-11-08`, plus the chair's messages listed below. The lane was given at 18:46 UTC ("THE LANE IS YOURS at 021557d4d").
