@@ -1,3 +1,13 @@
+# SAVED AT THE STOP (2026-11-21)
+- Branches (tips): `lane/daily-2-2026-11-20` = this commit (code tip 5db0b6a84; the landing request "DAILY b1a205d14"
+  sent to the chair before the stop); builders, all MERGED into the lane: `lane/daily-2-2026-11-20-b1-wip` df28b9319,
+  `-b2-wip` 888227143, `-b2c-wip` 38e03b7ca.
+- Merged on the lane: B1 C1 (dead people call), B1b C2 (13 kinds + 4 atoms + hideable-and-crime arm), B1b C3
+  `gathering_places`, B2 `dawn_work` + `child_warnings` + the any-cast cure, the line 062504aa8, B2c (lint cure).
+  Verified: tests/lint whole + tests/domain/facts + tests/domain/dailyLife* 285 files / 3635 passed at 5db0b6a84.
+- Built but unmerged: nothing. In flight: nothing (no builder, no run).
+- NEXT: on the chair's word, B3 by `briefs/B3-THE-OTHER-FIVE-AND-DM.md` (held at 20:53), then the owner's before/after file.
+
 # DAILY-2 HAND-BACK (kept current at every push; a successor needs this file and the briefs only)
 
 Lane `lane/daily-2-2026-11-20`; seat DAILY-2 (session_019yED1NEpr7XE73nDAxNLv2); chair session_019yED1SUxGVHyjQnoqoFvQ8.
