@@ -1,3 +1,15 @@
+SAVED AT THE STOP (2026-11-21T02:07Z, the owner's order relayed by the chair at 2026-11-21T02:06Z; SAVE-AND-STOP.txt was not yet on the chair's branch at 94913687a, so the message's own summary was followed).
+
+STATE AT THE STOP:
+- Lane `lane/people-1-2026-11-20` at its pushed tip (B1, B1b, the fill fix, B1c and its anchored negatives all merged; the three doors taken: pool dominance --tighten, lighting 3707->3712, tuning).
+- "PEOPLE <commit>" WAS NOT SENT: one red of ours remained. tests/generators/faultsTools.test.js reds because `export const NOT_A_GOOD` sits inside the slice `scripts/census/census4-extract-pools.mjs` evaluates. The cure (const + `export { NOT_A_GOOD }` after the slice) is written but UNTESTED at 07e737596 on `lane/people-1-b1c-2026-11-20-wip`; NOT merged into the lane. Its green to run: faultsTools, npcConstraintPools, the arcane walker.
+- Rule-8 run at 94b683518: tests/lint 220/220 green; tests/data + tests/domain/facts + tests/kernel 152/152 green; two trees afd7443f5->94b683518: 0 differences of any kind; tests/generators 9 files red, 8 in ci/RED-AT-LINE.tsv plus faultsTools (above); tests/build 5 files red, all in RED-AT-LINE (engine bundle freshness, first-paint budgets, worker ceiling).
+- First paint at 94b683518: 1,178,487 raw / 374,868 gzip / 314,794 Brotli (B1's base 11c9df9f0: 1,177,668 / 374,681 / 314,577); worker 2,613,936 B (base 2,587,733).
+- Shares by the sentence, 150 a size: position 45/35/38/67/72/70% -> 11/12/11/17/22/22%; constraint 46/35/38/73/92/89% -> 12/11/13/18/15/18%.
+- The pool-dominance door tightened 30 rows beyond NPC_STRUCTURE (not vetoed by the chair, 21:33): ARRIVAL_MEMORIES.occupation_legacy; ARRIVAL_PEOPLE.mesoamerican/norse/slavic; ARRIVAL_SCENES.ordinary; ARRIVAL_SENSES.(arcane, arms, cloth, faith, fish, herbs, livestock, smiths, stone).dominant and (bread, cloth, faith, fish, horses, kilns, livestock, stone, timber).lines; POLITICAL_FLAVOR.stable; conflicts:HOOKS; foodBalance:OUTLOOK_HOOK_SIBLINGS; npcData:STRESS_ECONOMIC_EFFECTS.mutual_leverage; npcGenerator:CRIME_KNOWLEDGE; stressInstitutionEffects:STRESS_INSTITUTION_EFFECTS; record:conflicts.plotHooks.
+- One push of mine (94b683518, first try) ran the whole `npm run check` in its hook; killed by the time limit, reported to the chair; the re-push ran the lane gates only. Cause not known.
+- The owner's plain file: PEOPLE-1-FOR-THE-OWNER.md.
+
 # PEOPLE-1 hand-back (kept current at every push; last written 2026-11-20T20:31Z)
 
 Seat: PEOPLE-1 of the seventh chair (chair session_019yED1SUxGVHyjQnoqoFvQ8). Assignment: `git show origin/lane/chair-2026-11-08:docs/chair/2026-11-20/seventh/prompts/PEOPLE-1.txt`.
