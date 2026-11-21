@@ -51,6 +51,20 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   are the lane's own machine measure on a pool where every place sits on a monster frontier, and the chair has not yet
   read Daily Life on whole pages. PUT TO HIM AS HIS CALL, UNANSWERED: a fifth and a sixth seat would start the display
   lane and Daily Life's second half now instead of in some hours.
+- **A WRONG WORD OF THE CHAIR'S ON DAILY LIFE, CORRECTED TO THE OWNER BY NAME (2026-11-21 23:58 UTC).** The answer above said the lane's
+  test pool "puts every place on a monster frontier". FALSE: taken from SAME-2's note about the sameness door's own pool
+  and never checked against the Daily Life lane's recipe (`birthConfig(DEFAULT_CONFIG + size)`, whose `monsterThreat`
+  is `random_threat`). MEASURED on 72 of its births: frontier 38, heartland 26, plagued 8. Said to him in those
+  figures. THE CHAIR THEN READ THE THREE REBUILT LINES ITSELF on 28 places (six before and after at 89ab44e34 against
+  the stack's top 822d514b6; 22 with `_randomizePriorities`), checked the old lines' false claims against three
+  records (the thorp, the hamlet and the village hold no walls, gate or watch; the thorp no market), traced the one
+  quarrel line on a calm-looking thorp to a live `succession_crisis` in its record (the unrest branch needs a live
+  trouble: `dailyLife.js`), and DELIVERED THE OWNER'S PLAIN BEFORE-AND-AFTER: `daily/DAILY-LIFE-BEFORE-AFTER.md` beside
+  this file, with the scripts and their outputs. WHAT THE READ FOUND: the three lines are varied and grounded, none
+  claiming a thing the place lacks; every wary dawn line sat on a frontier or plagued place; about half of all places
+  roll a frontier, so about half carry one wary line among the three (said to him as worth knowing, not as a fault);
+  the five unbuilt lines must not print as they stand (`unspoken_topics` is one sentence on six of six). The owner's
+  before-and-after file that DAILY-2 owed is therefore DONE for the three; it is owed again for the other five.
 
 ## 2. Decisions of this chair (each vetoable by the owner)
 
