@@ -22,7 +22,9 @@ The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
   - nothing is re-pinned.
 
   SEAT-10 then takes it by a fast-forward. Each register's door and the size baseline become SEAT-10's next commits, each with its proof. Until then, SEAT-10 adds NO commit to its branch: the two files below stay untracked.
-- **OUT:** builder BKP (unit 2, `briefs/KEY-PROBE.md`, uncommitted until the fast-forward). Its outputs will go to `keyprobe/`.
+- **UNIT 2 IS DONE (item 87), reported to the chair at 23:47Z.** BKP's `keyprobe/` outputs (probe, report and JSON) were read by SEAT-10.
+- **THE BASE (23:33Z):** the chair's `66585d96a` has first parent `3e8e2e37d`, not this branch's `f82c2a183`, so it is not a fast-forward. The chair was asked for a merge that includes `f82c2a183`, or a re-seat on the base. Until then, the work in progress is on `lane/seat-10-2026-11-21-wip` (`c0b8c7cf1`, then `d4caa078a`).
+- SEAT-10 read the base's `npcGenerator.js :: generateSingleNPC` hunk. It keeps both sides correctly: UK's `generateNPCPowerLevel(role, config)` sits above the line's `const card = {…}` with `noteSecretSource(card, secretSource); return card;`.
 - **READY:** `recut/recut.sh`, the census re-cut at the merged tip. It is BFL's set, shard runner and four lists, without the whole run, on a flipped local clone.
 - **NEXT:** the chair's line with the base's commit, then the fast-forward.
 
@@ -30,12 +32,22 @@ The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
 
 86. **THE LINE'S MERGE WAS REFUSED BY THIS SEAT'S PERMISSION CHECK (23:20Z).** By COMMON-EIGHTH 8 the refusal stands. It went to the chair in one line, and the chair's word decides the route.
 
+87. **THE KEY QUESTION, ANSWERED BY MEASURE (BKP, `briefs/KEY-PROBE.md` → `keyprobe/keyprobe.md`; CONFIRMED by run at `f82c2a183`). No key path is new under law 2 at birth.**
+   - **Pairs:** 166 birth pairs (the corpus's `CONFIGS × SEEDS` 16, plus 6 sizes × 25 germanic seeds), each born with `_seatLawVersion` 1 and 2 through `generateSettlementPipeline`.
+   - **Result:** law 2 writes no key path that law 1 lacks, and the reverse holds too. There are 1,028 paths under each law with the corpus's fold and 1,068 with no fold.
+   - **Both contest dials:** the result is the same with the contest dark and lit (a scratch clone, one edit). Arm B's law-1 births equal arm A's on 10 of 10 hashed pairs.
+   - **Law 2 acts:** law 2 moves values on 10 of 10 hashed pairs.
+   - **Caveat:** the marker `_seatLawVersion` on `config` and `_config` is absent from the corpus. Its one reader, `seatLaw.js :: resolveSeatLawVersion`, uses computed access, which the scan cannot see, so it is no finding and there is no baseline row.
+   - **So:** no explained-writer row is owed.
+   - **Not measured:** play-time writes (the pulse and the coup, where the contest dial is read).
+   - **Seen in passing, PLAUSIBLE:** on the 10 hashed pairs the lit contest leaves the law-2 birth byte-equal. TO-LIGHT §2 expected `factionStanding.js`'s "contestedBy" to move at birth when lit. The census re-cut will show whether it does.
+
 ## 2. THE UNITS
 
 | unit | branch | state |
 |---|---|---|
 | 1 THE LINE | `lane/seat-10-2026-11-21` | BLOCKED (item 86) |
-| 2 THE KEY QUESTION | — | not started |
+| 2 THE KEY QUESTION | BKP (subagent; outputs in `keyprobe/`) | DONE (item 87) |
 | 3 FLIP CENSUS (re-cut) | — | not started; to be re-cut at the merged tip |
 | 4 RULE 8 | — | not started |
 
