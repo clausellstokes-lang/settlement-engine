@@ -1,4 +1,4 @@
-# FORTUNE-5 hand-back (kept current at every push; last written 2026-11-20 22:30:26 UTC by `date -u`)
+# FORTUNE-5 hand-back (kept current at every push; last written 2026-11-21 02:00:47 UTC by `date -u`)
 
 For a successor: this file, `FORTUNE-4-HANDBACK.md` (sections 2, 3 and 5 still stand: the confinement, the size account,
 the join), `LIGHTING-WORKLIST.md`, and the open briefs named below. The chair is session_019yED1SUxGVHyjQnoqoFvQ8
@@ -37,12 +37,16 @@ the join), `LIGHTING-WORKLIST.md`, and the open briefs named below. The chair is
 | unit | state | commits |
 |---|---|---|
 | (1) U5a-CURE item 1 | MERGED, read whole once: behaviour-identical. Proofs EXECUTED: its 4 files 53/53; confinement 43ab0f5eb -> 065c13b3a golden 525/525, census 720/720 identical | 570d56a6a, merge 065c13b3a |
-| (1) U5a-CURE item 2 + 14(c) helper | BUILDER OUT (opus, high; brief `briefs/U5a-CURE-2.md`; branch `lane/fortune-5-cure2` in its worktree, unpushed); the chair's 22:21 precisions relayed to it | — |
+| (1) U5a-CURE item 2 + 14(c) helper | BUILDER CUT by the account's WEEKLY LIMIT (resets 2026-11-24 15:00 UTC). Unit 1 COMMITTED, UNREAD, UNPROVEN by me: OSR rung 45 -> 46, act 1 8bf91a7e0, the chair's 22:21 precisions 7541f4c87, act 2 a4ffa59fa; pushed as `lane/fortune-5-2026-11-20-cure2-wip` (base 3ca68ffa1). Its `tests/lint` whole was not run. Unit 2 (the legacy-config helper) NOT STARTED. To resume: SendMessage the builder after the reset, or a new builder on the same brief from a4ffa59fa | 8bf91a7e0, 7541f4c87, a4ffa59fa |
 | (2) the 22:01 check | DONE: 0 stored digests; flipped run 37 = B1's 36 + U5a (a); one arm made law-explicit | e5975e873 |
 | (3) the sentences | DRAFT ruled by the chair 22:26 (`lane/fortune-5-2026-11-20-u5bsent-wip` e0d1cbd65, NOT merged: the draft is superseded by the ruling) | e0d1cbd65 |
-| U5b build | BUILDER OUT (opus, high; brief `briefs/U5b-BUILD.md`; branch `lane/fortune-5-u5b` in its worktree, unpushed) | — |
+| U5b build | NOT BUILT: its builder STOPPED correctly (no code): `pickVariantMixed` (bd42d63c7, line point 83) was not in the lane. CURED by merging the line (below). Re-seat on `briefs/U5b-BUILD.md` from the lane tip 7514ffdb7 or later | — |
+| THE LINE MERGED | `lane/join-2026-11-14` at 062504aa8 merged (5d0090ce7; the one conflict, the lighting baseline, kept at the lane's); censuses re-taken by their doors (7514ffdb7: lighting 3717 -> 3724 files, parked 476 -> 479; wiring 861 pools); EXECUTED after: the lighting walker 34/34, `wiring-census --check` exit 0. Confinement base for later units: 062504aa8 | 5d0090ce7, 7514ffdb7 |
 | (4) lit re-measure | NOT STARTED: at the merged tip after U5b | — |
-| (5) landing check | NOT STARTED. The line 062504aa8 is NOT in the lane; a trial merge conflicts only in `tests/lint/.lighting-census-baseline.json` (re-take by its door) | — |
+| (5) landing check | NOT STARTED (the line is now in the lane) | — |
+
+THE ACCOUNT'S WEEKLY LIMIT was hit at about 22:4x UTC 2026-11-20 (a builder's API call refused, HTTP 429, "resets Nov 24, 3pm (UTC)"). This
+seat stopped seating builders; the state above is everything on disk and on origin.
 
 ## 2. For the join and the security reader
 
