@@ -1,0 +1,73 @@
+
+ RUN  v4.1.8 /home/user/settlement-engine/.claude/worktrees/agent-afd57509ad4c67afb
+
+ × tests/domain/display/outputInWords.test.jsx > the reader says the record in words > the share is the figure over the town's own dial, said as the nearest named fraction 8ms
+   → expected 'It gets about three parts in four of …' to be 'It gets about three quarters of what …' // Object.is equality
+ × tests/domain/display/outputInWords.test.jsx > the reader says the record in words > the ladder: each named fraction says itself, and the share between two takes the nearer 1ms
+   → expected 'It gets about four parts in five of w…' to be 'It gets about four fifths of what its…' // Object.is equality
+ ✓ tests/domain/display/outputInWords.test.jsx > the reader says the record in words > no figure or no dial: nothing 0ms
+ ✓ tests/domain/display/outputInWords.test.jsx > the reader says the record in words > over born towns of every size: every line said, no figure and no working 1ms
+ × tests/domain/display/outputInWords.test.jsx > the drag as a plain fact: no market (the chair's ruling of 15:16 UTC) > below "nearly all" with no market, the line ends on the market 1ms
+   → expected 'It gets about half of what its work c…' to be 'It gets about half of what its work c…' // Object.is equality
+ ✓ tests/domain/display/outputInWords.test.jsx > the drag as a plain fact: no market (the chair's ruling of 15:16 UTC) > with a market, or at "nearly all" and above, no drag is named 1ms
+ ✓ tests/domain/display/outputInWords.test.jsx > the drag as a plain fact: no market (the chair's ruling of 15:16 UTC) > THE ARM: through the generator's own function, all else equal, the output without a market is lower than with one 1ms
+ ✓ tests/domain/display/outputInWords.test.jsx > every surface prints the words, and no grade out of 100 > the Economics header 721ms
+ ✓ tests/domain/display/outputInWords.test.jsx > every surface prints the words, and no grade out of 100 > the PDF Economics chapter 146ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/domain/display/outputInWords.test.jsx > the reader says the record in words > the share is the figure over the town's own dial, said as the nearest named fraction
+AssertionError: expected 'It gets about three parts in four of …' to be 'It gets about three quarters of what …' // Object.is equality
+
+Expected: "It gets about three quarters of what its work could yield, held back by having no market."
+Received: "It gets about three parts in four of what its work could yield."
+
+ ❯ tests/domain/display/outputInWords.test.jsx:85:39
+     83|     expect(r?.share).toBeCloseTo(c.economyOutput / c.raw.economy, 12);
+     84|     expect(factsOf(T.noMarket).market, 'anchored: the thorp holds no m…
+     85|     expect(outputInWords(T.noMarket)).toBe('It gets about three quarte…
+       |                                       ^
+     86|     expect(outputInWords(T.all)).toBe('It gets all its work could yiel…
+     87|     expect(factsOf(T.siege).market, 'anchored: the besieged village ho…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/domain/display/outputInWords.test.jsx > the reader says the record in words > the ladder: each named fraction says itself, and the share between two takes the nearer
+AssertionError: expected 'It gets about four parts in five of w…' to be 'It gets about four fifths of what its…' // Object.is equality
+
+Expected: "It gets about four fifths of what its work could yield."
+Received: "It gets about four parts in five of what its work could yield."
+
+ ❯ tests/domain/display/outputInWords.test.jsx:97:24
+     95|     expect(at(60, 50)).toBe('It gets more than its work alone could yi…
+     96|     expect(at(45, 50)).toBe('It gets nearly all of what its work could…
+     97|     expect(at(40, 50)).toBe('It gets about four fifths of what its wor…
+       |                        ^
+     98|     expect(at(25, 50)).toBe('It gets about half of what its work could…
+     99|     expect(at(12.5, 50)).toBe('It gets about a quarter of what its wor…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/domain/display/outputInWords.test.jsx > the drag as a plain fact: no market (the chair's ruling of 15:16 UTC) > below "nearly all" with no market, the line ends on the market
+AssertionError: expected 'It gets about half of what its work c…' to be 'It gets about half of what its work c…' // Object.is equality
+
+Expected: "It gets about half of what its work could yield, held back by having no market."
+Received: "It gets about half of what its work could yield."
+
+ ❯ tests/domain/display/outputInWords.test.jsx:123:44
+    121|   const HELD = ', held back by having no market.';
+    122|   test('below "nearly all" with no market, the line ends on the market…
+    123|     expect(outputInWords(rec(25, 50, []))).toBe('It gets about half of…
+       |                                            ^
+    124|     expect(outputInWords(rec(5, 50, []))).toBe('It gets very little of…
+    125|     expect(outputInWords(rec(33, 50, []))).toBe('It gets about two thi…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 6 passed (9)
+   Start at  16:06:59
+   Duration  15.44s (transform 5.81s, setup 66ms, import 8.13s, tests 6.50s, environment 618ms)
+
+exit 1

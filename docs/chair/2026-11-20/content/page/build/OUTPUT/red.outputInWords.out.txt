@@ -1,0 +1,28 @@
+  Plugin: vite:import-analysis
+  File: /home/user/settlement-engine/.claude/worktrees/agent-a30251bfb579f8154/tests/domain/display/outputInWords.test.jsx:26:0
+  15 |  const __vi_import_4__ = await import("../../../src/pdf/sections/EconomicsTrade.jsx");
+  16 |  const __vi_import_5__ = await import("../../../src/pdf/lib/viewModel.js");
+  17 |  const __vi_import_6__ = await import("../../../src/domain/display/outputInWords.js");
+     |                                       ^
+  18 |  const __vi_import_7__ = await import("../../../src/generators/generateSettlementPipeline.js");
+  19 |  const __vi_import_8__ = await import("../../../src/domain/density/densityCreateBoundary.js");
+ ❯ TransformPluginContext._formatLog node_modules/vite/dist/node/chunks/config.js:29079:43
+ ❯ TransformPluginContext.error node_modules/vite/dist/node/chunks/config.js:29076:14
+ ❯ normalizeUrl node_modules/vite/dist/node/chunks/config.js:27199:18
+ ❯ node_modules/vite/dist/node/chunks/config.js:27257:32
+ ❯ TransformPluginContext.transform node_modules/vite/dist/node/chunks/config.js:27225:4
+ ❯ EnvironmentPluginContainer.transform node_modules/vite/dist/node/chunks/config.js:28877:14
+ ❯ loadAndTransform node_modules/vite/dist/node/chunks/config.js:22746:26
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  no tests
+   Start at  12:14:11
+   Duration  4.15s (transform 77ms, setup 162ms, import 0ms, tests 0ms, environment 3.35s)
+
+[gate-tail] end:  12:14:15 up  1:19,  0 user,  load average: 12.85, 13.75, 13.43
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/e39601df-bea0-5bb7-a071-cd1164f3a939/scratchpad/gate-tail.25900.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+exit 1

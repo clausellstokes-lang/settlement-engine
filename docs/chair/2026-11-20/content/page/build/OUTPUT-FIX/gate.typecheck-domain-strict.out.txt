@@ -1,0 +1,9 @@
+[gate-tail] start:  16:35:54 up  2:05,  0 user,  load average: 6.35, 3.97, 4.50 · cores: 4
+
+> settlementforge@1.0.0 typecheck:domain:strict
+> node scripts/check-domain-strict.mjs
+
+[domain-strict] ✓ no strict-type regressions (1113 errors, ceiling 1113).
+[gate-tail] end:  16:36:36 up  2:06,  0 user,  load average: 7.00, 4.41, 4.62
+[gate-tail] full log: /tmp/gate-tail.14243.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)

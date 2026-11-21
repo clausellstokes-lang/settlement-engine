@@ -14,7 +14,7 @@ import { law1c, law1d, PROSPERITY_UP } from '../helpers/pageLaws/law1.mjs';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
-import { npcInteriority } from '../../src/domain/display/npcInteriorityRead.js';
+import { cardStandingLine } from '../../src/domain/display/cardStandingRead.js';
 import { NO_PATROL_LINE, NO_FORCE_LINE, forceLineOf } from '../../src/generators/power/militaryForceLine.js';
 import { DOSSIER_STATE_PROSE_POWER } from '../../src/data/dossierStateProse/power.generated.js';
 import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/economy.generated.js';
@@ -35,11 +35,12 @@ function born(seed) {
 }
 
 /** The record's own printed lines for 1c and 1d (the Power tab's descriptions; each card, its header first, as the People tab
- * prints it: the detector reads a card's standing up to the next header). @param {any} s */
+ * prints it: the detector reads a card's standing up to the next header). PAGE-1 CARD (F4, 2026-11-20): the card's Standing
+ * row is the record's fact (cardStandingRead.js), no longer the `influence` band's word. @param {any} s */
 function recordTabs(s) {
   const power = (s?.powerStructure?.factions || []).map((/** @type {any} */ f) => String(f?.desc || ''));
   const people = (s?.npcs || []).flatMap((/** @type {any} */ n) => {
-    const standing = npcInteriority({ npc: n })?.standing;
+    const standing = cardStandingLine(n, s);
     return [`${n.name} ●`, String(n.structuralPosition || ''), ...(standing ? [`Standing ${standing}`] : [])];
   });
   return { 'Systems/Power': power, 'Summary/People': people };

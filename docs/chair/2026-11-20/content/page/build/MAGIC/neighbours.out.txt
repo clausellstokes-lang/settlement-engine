@@ -1,0 +1,42 @@
+    635|     ).toEqual([]);
+       |       ^
+    636|   });
+    637|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/7]⎯
+
+ FAIL  tests/components/smallPlaceTierNoun.test.jsx > the screen calls a small place by its own noun > no rendered tab calls a thorp, hamlet or village a town (outside a kept comparison)
+Error: Test timed out in 20000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/components/smallPlaceTierNoun.test.jsx:116:3
+    114|   });
+    115|
+    116|   test('no rendered tab calls a thorp, hamlet or village a town (outsi…
+       |   ^
+    117|     const offenders = [];
+    118|     for (const { s, pages } of PLACES) {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/7]⎯
+
+ FAIL  tests/components/statBandsOverDigits.test.jsx > No rendered row says "None" beside a bar that has width > over a generated corpus, neither tab ever pairs the word with a width
+Error: Test timed out in 90000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/components/statBandsOverDigits.test.jsx:563:3
+    561|   });
+    562|
+    563|   test('over a generated corpus, neither tab ever pairs the word with …
+       |   ^
+    564|     const offenders = [];
+    565|     let nones = 0;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/7]⎯
+
+
+ Test Files  7 failed | 48 passed (55)
+      Tests  6 failed | 1121 passed | 35 skipped (1162)
+   Start at  11:42:56
+   Duration  1630.10s (transform 44.77s, setup 9.28s, import 318.27s, tests 4081.39s, environment 130.75s)
+
+[gate-tail] end:  12:10:08 up  1:15,  0 user,  load average: 13.86, 14.81, 13.58
+[gate-tail] full log: /tmp/gate-tail.15338.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
