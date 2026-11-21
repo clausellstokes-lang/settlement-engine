@@ -1,5 +1,14 @@
 # SEAT-7 — HAND-BACK (kept current at every push; last written 2026-11-20T21:49:00Z, read from `date -u`; HANDED OVER to SEAT-8 at this commit's push)
 
+## SAVED AT THE STOP (2026-11-21; written 2026-11-21T02:10:26Z; the lane was handed to SEAT-8 at `b2845bafc` on 2026-11-20 21:55Z)
+
+- **Branches and tips (all on origin, each equal to its worktree):** `lane/seat-7-2026-11-20` `b2845bafc` (this file; SEAT-8's starting point) · `lane/seat-7-2026-11-20-saved` `6f55ae4ca` (BSV, merged) · `lane/seat-7-2026-11-20-uk-cure-wip` `452e6f639` (BUC) · `lane/seat-7-2026-11-20-flip-wip` `7f6745442` (BFL). SEAT-6's builders: `lane/seat-2026-11-20-u5-cure2` `3909902fa` (merged), `lane/seat-2026-11-20-uk` `fad107fcc`.
+- **Merged on the lane:** U5-CURE2 (`ff07bb815`, registers `db2dcdd14`), SAVED-SEAT (`a1436f04c`, census `13fbb458e`); U5-LAWOUT dropped (item 75).
+- **Built, NOT merged:** UK (`fad107fcc`) + UK-CURE (`452e6f639`): merge together, then the `roleCategory.test.js` re-point, the wiring census (1439 → 1440) and lighting census doors, `tests/lint` whole (item 79).
+- **In flight when stopped:** FLIP-CENSUS (BFL, stopped by the account's weekly limit): (A) the owner's plain table DONE (`5bbdc9b0a`); (B) partial census at the 2-hour ceiling (`30ad93f94`: 1,203/3,710 files, 33 reds, the ten dark pins all red) and flipped shard 1 of 2 (`7f6745442`: 309 files, 4 red in 3 files, 18 min); NOT done: shard 2, the unflipped control over the 793, the four lists. The scratch flipped copy (`wt-flip-lit`, the two dial lines) was deliberately NOT committed (no seat flips a default); `census.sh` on the branch reproduces it. Also owed: `tests/lint` whole at `db2dcdd14` (2 files unrun).
+- **Next step:** merge UK + UK-CURE per item 79, then finish FLIP-CENSUS (B) per items 76 and 78.
+
+
 **For the next owner of this lane: this file, `SEAT-6-HANDBACK.md` (items 53 to 68, §4 to §6), `SEAT-6-TO-LIGHT.md`, `SEAT-5-HANDBACK.md` §1 (items 1 to 52) and `briefs/` are all you need.** Every ruling in force: SEAT-5's 1 to 52, SEAT-6's 53 to 68, this file's 69 on.
 
 Branch `lane/seat-7-2026-11-20` (origin), fast-forwarded to `ce9462b55`: the chair said "THE LANE IS YOURS at ce9462b55" (19:54Z; SEAT-6's final tip; last green code tip `c9e6ce45b`, U5 + U5-CURE, `tests/lint` whole 220/220). SEAT-7 is session_019yED1P7Zp441ctXNjL8Kqf.
