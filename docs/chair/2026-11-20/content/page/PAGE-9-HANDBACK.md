@@ -1,5 +1,26 @@
 # PAGE-9's hand-back (the display lane after PAGE-4)
 
+## SAVED AT THE STOP (2026-11-21)
+
+Written 02:26 UTC 2026-11-21 (`date -u`), on the owner's order relayed by the chair. UNVERIFIED past the receipts named.
+- BRANCHES: `lane/page-9-2026-11-20` at the commit carrying this note (on `bbcc6f3bb`); `lane/page-9-2026-11-20-sides-2-wip`
+  = `d77bc0b29` (SIDES `ce6bb774e` + its receipts and CAUSES-WIRING's census, parity measure and PARITY-SORT); the older
+  `lane/page-9-2026-11-20-sides-wip` = `60555500f` (superseded, never merge it).
+- MERGED ON THE LANE: PAGE-4's tip `4f8695c10` (landed on the line as point 86); CAUSES `3411c9c83`; FIRSTPAINT `afacca8a6`;
+  the line's tip `a64619510` (`2c6263208`; lighting `7d1b03651`); SIDES (`bbcc6f3bb`: wiring census by its door; the reader
+  pin re-taken in two steps: the line merge had moved ~300 towns unrecorded, SIDES moves exactly 89 towns x 5 surfaces).
+- NOT YET RUN AT `bbcc6f3bb`: the lighting census refreeze for SIDES' new test file (`tests/domain/display/tensionShown.test.js`
+  reds the lighting walker by one: refreeze by its door on a clean tree), then the six gates, both pins, the build and
+  the two lazy tests (SIDES' own tip read: first paint 1,178,011 raw, 0 over the cured base; ratchet 167, strict 1113,
+  lint 0, pins green). The observed-shape baseline merged clean: confirm by its walker.
+- IN FLIGHT, NOT BUILT: CAUSES-WIRING. It stays unwired until PAGE-10's "PAGE-TROUBLE <commit>" cures parity: the three
+  plain-toPublicSafe pairs (force_unpaid_or_cut reads `npcs[].settlementCondition`, never served) and the PARITY-SORT faults
+  (black_market 60, assassins 20, underground 18, whisper_market 12; criminal_power 4 SIGNATURE pairs). Then merge it,
+  re-measure (a hiding-nothing read: owner == served, 0; each veiled pair traced to a declared atom), and wire per
+  `briefs/CAUSES-WIRING.md` with the chair's 20:44 condition (the cause sentence REPLACES the description). THIN waits on
+  "DAILY <commit>".
+- NEXT STEP: refreeze the lighting census at the lane tip, run the gates, pins and build there, then wait for PAGE-TROUBLE.
+
 Last written 20:07 UTC 2026-11-20 (`date -u`). A successor needs THIS FILE, `PAGE-4-HANDBACK.md` (its rulings 9-19, THE LANE'S RULES AT
 EVERY MERGE, the security reader's list: all still in force) and the briefs under `briefs/`. Prompt:
 `git show origin/lane/chair-2026-11-08:docs/chair/2026-11-20/seventh/prompts/PAGE-9.txt`.
