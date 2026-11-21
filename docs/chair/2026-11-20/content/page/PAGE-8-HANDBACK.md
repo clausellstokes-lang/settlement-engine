@@ -1,3 +1,21 @@
+# SAVED AT THE STOP (2026-11-21)
+
+Saved 2026-11-21 02:15 UTC by `date -u`, on the owner's order (SAVE-AND-STOP.txt). This lane is STOPPED; a new seat picks it up from origin.
+
+- BRANCHES (origin): `lane/page-8-2026-11-20` (this hand-back; faa833b7a + the line at point 85 + docs; NO UNIT MERGED ON IT);
+  `lane/page-8-2026-11-20-f5-wip` dd706b807 (F5-NARROW BUILT AND MERGED ON THE INTEGRATION BRANCH `page8/int`: the unit
+  c54e50185, its want-follows-secret test f9db0a119, manifest row, writer-reach door, the line at point 86 a64619510 merged,
+  lighting and writer-reach re-taken by their doors); `lane/page-8-2026-11-20-frames-wip` 620046593 (SECRET-LINES build: unit
+  9fc56c549 + an UNVERIFIED partial of the 22:34 pronoun cures); `lane/page-8-2026-11-20-arrival2-wip` 5a30cdc2a
+  (ARRIVAL-LINES-2: data file + test, NOT wired; ruling 13 owed); `lane/page-8-2026-11-20-physical-wip` 89d17918d (HELD
+  PHYSICAL: a partial measure script only). SECRETS-30's draft is on the lane (f861dd289); its re-cut is HELD.
+- MERGED ON THE LANE: nothing of src/tests. BUILT, UNMERGED: F5-NARROW (on `-f5-wip`); the frames (on `-frames-wip`, not yet passing CN2).
+- IN FLIGHT AT THE STOP: F5's rule-8 runs (build, two build tests, tests/generators+data+lint+build) at dd706b807 were STOPPED
+  before they reported; the frames' pronoun cures half-applied; the landmarks' ruling-13 change (checkInstCompat's branch/index)
+  not started as far as PAGE-8 has read.
+- NEXT STEP: on `-f5-wip`, run rule 8 at its tip (line's tip merged), read rows by name against RED-AT-LINE.tsv, fast-forward the
+  lane to it, push, send "F5-NARROW <commit>" (named moves: the 13 goal moves, writer-reach, `goalSentencesOnceInTown` arm (u)).
+
 # PAGE-8's hand-back (PEOPLE AND PLACE, after PAGE-6). Last written 2026-11-21 02:12 UTC by `date -u`
 
 A successor needs this file, `PAGE-6-HANDBACK.md` (§0a the F5 ruling verbatim; §4 lines), the chair's
