@@ -1,5 +1,14 @@
 # PAGE-10's hand-back: THE TROUBLE HALF (kept current at every push; last written 2026-11-21 02:19 UTC by `date -u`)
 
+## SAVED AT THE STOP (2026-11-21)
+Written 2026-11-21 02:35 UTC by `date -u`, on the owner's order (SAVE-AND-STOP.txt, part A). PAGE-10 has stopped for good.
+- BRANCHES: `lane/page-10-2026-11-20` (the lane; this push), `lane/page-10-2026-11-20-cures-wip` = 1da4c7c56, `lane/page-10-2026-11-20-parity-wip` = 6a1120efd. The hooks builder's branch (7d9a43638) and the themes builder's branch (5a88385f7) are wholly merged into the lane, so neither is pushed separately.
+- MERGED ON THE LANE: the causes (3411c9c83); the first-paint pin (afacca8a6); HOOKS (81076db2d, the chair's rulings: 317 non-string differences, all plotHooks array lengths); the themes draft with the chair's 21:12 ruling (docs only); the working line 062504aa8 (12c643ff7), then HOOKS-CURES A (one home) and B (the packed line) (12c211dc9), then the working line a64619510 (point 86; 6f84deba7). Every register re-taken by its own door after each merge (pool-dominance, writer-reach, wiring census, lighting census 9cde0e95d).
+- NOT VERIFIED: tests/lint whole on the lane after the a64619510 merge was KILLED unfinished at the stop. The last whole green was 220/220 after the 062504aa8 merge and writer-reach (2f6f12f14). The build and rule 8's directory run have NOT been taken.
+- BUILT BUT UNMERGED (§1b below): HOOKS-CURES C, the mixed key: unproven wip 1da4c7c56 on -cures-wip (red seen, the leaf mid-change). CAUSES-PARITY: M merged nowhere yet (3a953c6d3: payCut NOT EXACT, 14/900, all served-only); B's red arm is unproven wip 6a1120efd on -parity-wip. PAGE-10 granted leave for `tensionCauseHolds.js :: forceUnpaidOrCut` (vetoable). W and F are not begun.
+- NEXT STEP: finish parity B, W and F and cures C on their -wip branches, read each once and merge; run tests/lint whole and the build plus rule 8's directory run; then the closing measure (`briefs/CLOSE-MEASURE.md`, with the kinds table) and "PAGE-TROUBLE <commit>".
+
+
 A successor reads THIS, then the briefs it names. PAGE-10 integrates; builders build (the Agent tool), each briefed by a
 committed file; a diff is read once, at the merge.
 
