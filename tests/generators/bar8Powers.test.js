@@ -77,7 +77,9 @@ const copiedOneBody = (town) => {
 const BORN = new Map();
 beforeAll(async () => {
   const boundary = await import('../../src/domain/density/densityCreateBoundary.js');
-  const { generateSettlementPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
+  const { generateSettlementPipeline: bornVoiced } = await import('../../src/generators/generateSettlementPipeline.js');
+  const { todayOf } = await import('./power/powerLinesToday.js'); // PEOPLE-2 B2: re-keyed by identity, each voiced power line read back to the line it voices
+  /** @param {Parameters<typeof bornVoiced>} a */ const generateSettlementPipeline = (...a) => todayOf(bornVoiced(...a));
   const { DEFAULT_CONFIG } = await import('../../src/store/configSlice.js');
   await boundary.loadGenerationLawPayloads();
   for (const seed of Object.keys(TOWNS)) BORN.set(seed, generateSettlementPipeline(boundary.birthConfig({ ...DEFAULT_CONFIG, ...configOf(seed) }), null, { seed, customContent: {} }));

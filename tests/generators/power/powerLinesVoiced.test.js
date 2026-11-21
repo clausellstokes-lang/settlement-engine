@@ -25,6 +25,11 @@
  *    computed `level`, `factionStanding.js :: standingLevelOf`) arcaneInShadow's line and its wordings 2 and 3, and
  *    noblesAhead's line, never print; no struck clause appears in any new wording.
  * 4. THE HIDEABLE RULE: no wording needs a house `cardVeil.js :: isHideableHouse` marks, nor a fact about crime.
+ * 5. THE TEXT KEYS (the chair's ruling of 20:50 UTC: the openings keyed by their exact text, the codas by their `re:`, kept
+ *    under two tests): (a) every key meets a line the writers print today, over the sample (a key with no line is drift);
+ *    (b) TOTALITY the other way: every opening, and every standing sentence the writer prints (`factionStanding.js ::
+ *    annotateFactionStanding`, re-run on each born roster as `rosterText.js` re-runs it), that prints in more than 20% of a
+ *    size's places has a key, or stands in KEY_EXEMPT with its reason.
  */
 import { readFileSync } from 'node:fs';
 import { beforeAll, describe, expect, it } from 'vitest';
@@ -36,7 +41,8 @@ import { declarationAdmits, declarationOf, parseAtom, atomHolds } from '../../..
 import { withPresumptionLedger } from '../../../src/domain/facts/presumptionLedger.js';
 import { isHideableHouse } from '../../../src/domain/people/cardVeil.js';
 import { institutionalCatalog } from '../../../src/data/institutionalCatalog.js';
-import { standingLevelOf } from '../../../src/generators/power/factionStanding.js';
+import { annotateFactionStanding, standingLevelOf } from '../../../src/generators/power/factionStanding.js';
+import { standingForceOf, standingRosterOf } from '../../../src/generators/power/rosterText.js';
 
 const SIZES = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 const N = 150;
@@ -45,6 +51,8 @@ const PRIEST_LINE = 'The village priest is the most educated person for miles; m
 const CLOSING_GAP = 'The merchants are closing the gap, and the noble families are using every law and every social tie they have to slow them down.';
 /** the named survivor (the chair, 18:14): the metropolis's four standings, by the coda that says each */
 const SURVIVOR_CODAS = new Set(['arcaneInShadow', 'bodiesMinds', 'atTable', 'clergyAhead']);
+/** (5b) the lines over 20% of a size's places with no key, each with its reason (none today) */
+const KEY_EXEMPT = Object.freeze({});
 const STRUCK = ['quietly resented', 'neither likes it', 'resent it', 'on purpose', 'by choice', 'worth having', 'know it', 'catching up', 'closing on'];
 const CRIME_WORDS = /crim|thie|smuggl|black market|gang|outlaw|rings|crime/i;
 
@@ -60,6 +68,8 @@ const patternOf = (text, anchored) => new RegExp(`${anchored ? '^' : ''}${esc(te
 
 /** @type {any} */ let V;
 /** @type {Record<string, any>} */ const SAMPLE = {};
+/** (5a) every key met, by pool id: today's text printed, or the pass noted the pool (the key matched) */
+const KEYS_MET = new Set();
 
 beforeAll(async () => {
   V = await import('../../../src/data/powerLineVariants.js');
@@ -68,6 +78,7 @@ beforeAll(async () => {
   const codaPatterns = V.CODA_POOLS.flatMap((c) => c.rows.map((row) => ({ coda: c.id, row, re: patternOf(row.text, false) })));
   for (const size of SIZES) {
     const openings = new Map(); const codas = new Map(); const relations = new Map();
+    const unkeyed = new Map();
     const misses = []; const ledgerMisses = []; const priestMisses = []; const truthMisses = []; const codaOf = new Map();
     let ledgerNotes = 0; let voicedPlaces = 0;
     const add = (m, s, i) => { let st = m.get(s); if (!st) { st = new Set(); m.set(s, st); } st.add(i); };
@@ -77,6 +88,7 @@ beforeAll(async () => {
       for (const e of ledger) {
         if (!String(e.pool).startsWith('powerLineVariants:')) continue;
         ledgerNotes++;
+        KEYS_MET.add(String(e.pool).replace(/^powerLineVariants:/, ''));
         if (e.resolvedBy !== 'drawn') ledgerMisses.push(`${seed} ${e.pool} ${e.lineId} ${e.resolvedBy}`);
       }
       const names = new Set();
@@ -88,9 +100,19 @@ beforeAll(async () => {
       const facts = factsOf(t);
       const admits = (row) => declarationAdmits(declarationOf(row), facts).admitted;
       let voiced = false;
+      // (5b) the standing writer re-run on the born roster, as rosterText.js re-runs it: each sentence it prints, keyed or not
+      const seats = standingRosterOf(t.powerStructure?.factions || []).map((f) => ({ ...f, desc: '' }));
+      annotateFactionStanding(seats, standingForceOf(t.institutions), { publicLegitimacy: t.powerStructure?.publicLegitimacy });
+      for (const seat of seats) {
+        let rest = String(seat.desc || '');
+        for (const c of V.CODA_POOLS) { const m = c.re.exec(rest); if (m) { KEYS_MET.add(`CODA_POOLS.${c.id}`); rest = rest.replace(m[0], ''); } }
+        for (const s2 of sentencesOf(rest)) if (s2.trim()) add(unkeyed, `coda: ${mask(s2)}`, i);
+      }
       for (const f of t.powerStructure?.factions || []) {
         const desc = typeof f.desc === 'string' ? f.desc : '';
         if (desc.startsWith(PRIEST_LINE) && atomHolds('priest', facts) !== true) priestMisses.push(`${seed} ${f.faction}`);
+        if (!V.openingOf(desc) && !Object.values(V.DESC_POOLS).some((pool) => pool.rows.some((w) => desc === w.text || desc.startsWith(`${w.text} `)))) add(unkeyed, `opening: ${mask(sentencesOf(desc)[0] || '')}`, i);
+        if (V.openingOf(desc)) KEYS_MET.add(`DESC_POOLS.${V.DESC_POOLS[V.openingOf(desc)].id}`);
         for (const [open, pool] of Object.entries(V.DESC_POOLS)) {
           const printed = [{ text: open, needs: pool.todayNeeds }, ...pool.rows].find((w) => desc === w.text || desc.startsWith(`${w.text} `));
           if (!printed) continue;
@@ -137,6 +159,7 @@ beforeAll(async () => {
       survivors: [...codas].filter(([sentence, st]) => st.size / N > BAR && size === 'metropolis' && SURVIVOR_CODAS.has(codaOf.get(sentence))).map(([sentence, st]) => `${st.size}/${N} ${sentence}`),
       codasOverHalf: [...codas].filter(([, st]) => st.size / N > 0.5).map(([s, st]) => `${st.size}/${N} ${s}`),
       misses, ledgerMisses, priestMisses, truthMisses, ledgerNotes, voicedPlaces,
+      unkeyedOver: [...unkeyed].filter(([k, st]) => st.size / N > BAR && !Object.hasOwn(KEY_EXEMPT, k)).map(([k, st]) => `${st.size}/${N} ${k}`),
     };
     // the codas are measured, not pinned: printed for the hand-back
     if (SAMPLE[size].survivors.length) console.log(`B2 ${size}: the named survivor over the bar: ${SAMPLE[size].survivors.join(' | ')}`);
@@ -170,6 +193,16 @@ describe('every printed wording holds its declaration (through the declared draw
   });
   it('the pass voices lines at every size that prints a pooled line', () => {
     for (const s of ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']) expect(SAMPLE[s].voicedPlaces).toBeGreaterThan(N / 2);
+  });
+});
+
+describe('the text keys (the chair\'s ruling of 20:50 UTC)', () => {
+  it('(a) every opening key and every coda key meets a line the writers print today', () => {
+    const keys = [...Object.values(V.DESC_POOLS).map((p) => `DESC_POOLS.${p.id}`), ...V.CODA_POOLS.map((c) => `CODA_POOLS.${c.id}`)];
+    expect(keys.filter((k) => !KEYS_MET.has(k))).toEqual([]);
+  });
+  it('(b) totality: no opening and no standing sentence the writers print in more than 20% of a size\'s places stands without a key (or a named exemption)', () => {
+    expect(SIZES.flatMap((s) => SAMPLE[s].unkeyedOver.map((x) => `${s} ${x}`))).toEqual([]);
   });
 });
 

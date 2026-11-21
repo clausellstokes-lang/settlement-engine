@@ -9,7 +9,9 @@
  * RED AT THE BASE (40238d3ab): every refused pair; KEEP pairs (the same line under a council) green before and after.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
-import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
+import { generateSettlementPipeline as bornVoiced } from '../../../src/generators/generateSettlementPipeline.js';
+import { todayOf } from './powerLinesToday.js'; // PEOPLE-2 B2: re-keyed by identity, each voiced power line read back to the line it voices
+/** @param {Parameters<typeof bornVoiced>} a */ const generateSettlementPipeline = (...a) => todayOf(bornVoiced(...a));
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
 import { settleClaimsToLabel } from '../../../src/generators/power/claimStanding.js';

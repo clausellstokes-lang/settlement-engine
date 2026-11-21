@@ -3,7 +3,9 @@
  * maritime capability law as institutions, resources, and arrival prose.
  */
 import { describe, expect, test } from 'vitest';
-import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { generateSettlementPipeline as bornVoiced } from '../../src/generators/generateSettlementPipeline.js';
+import { todayOf } from '../generators/power/powerLinesToday.js'; // PEOPLE-2 B2: re-keyed by identity, each voiced power line read back to the line it voices
+/** @param {Parameters<typeof bornVoiced>} a */ const generateSettlementPipeline = (...a) => todayOf(bornVoiced(...a));
 
 const generate = (config, seed) =>
   generateSettlementPipeline(config, null, {

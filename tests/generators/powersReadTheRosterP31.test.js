@@ -12,7 +12,9 @@
  * RED AT THE BASE (cce57ff35): every refused pair; KEEP pairs green before and after.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
-import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { generateSettlementPipeline as bornVoiced } from '../../src/generators/generateSettlementPipeline.js';
+import { todayOf } from '../generators/power/powerLinesToday.js'; // PEOPLE-2 B2: re-keyed by identity, each voiced power line read back to the line it voices
+/** @param {Parameters<typeof bornVoiced>} a */ const generateSettlementPipeline = (...a) => todayOf(bornVoiced(...a));
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
