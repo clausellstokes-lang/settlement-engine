@@ -40,6 +40,9 @@ import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
 import { isSeatVacant, keeperFormOf, seatKeeperOf } from '../people/seatKeeper.js';
 import { castTroubleFrame } from '../tension/troubleCast.js';
 import { isOfficeStandIn } from '../dossier/seatHolder.js';
+import { chainPrintName } from '../display/chainPrintName.js';
+import { chainSourceOf } from '../display/chainHouses.js';
+import { chainCauseOf } from '../display/chainCauseShown.js';
 
 /**
  * THE ONE COPY CONSTANT for the sheet, on every surface that prints it.
@@ -64,6 +67,10 @@ export const TONIGHT_COPY = Object.freeze({
   trouble: 'The trouble',
   sides: 'Its three sides',
   nobody: 'No one here is named for it.',
+  // FRAME-8 · F3 (the chair's ruling 45 and its words of 22:02 UTC): the framed W3 sheet's Facts row, and the count of the
+  // rest of its impaired chains
+  supply: 'Supply',
+  moreImpaired: 'more impaired',
 });
 
 /**
@@ -283,7 +290,7 @@ const HOOK_COUNT = 3;
  * @property {string} sourcePath
  *
  * @typedef {Object} TonightFact
- * @property {'food'|'defence'} id
+ * @property {'food'|'defence'|'supply'} id  `supply` on the owner's framed W3 sheet only (FRAME-8 · F3)
  * @property {string} label
  * @property {string} text
  * @property {string} sourcePath
@@ -359,7 +366,7 @@ const HOOK_COUNT = 3;
  * @property {TonightStress | TonightStress[] | null} [stress]
  * @property {unknown} [pressureSentence]
  * @property {TonightNpc[]} [npcs]
- * @property {{ foodSecurity?: { foodRecord?: { band?: unknown, storageMonths?: unknown, hasGranary?: unknown } | null } | null }} [economicState]
+ * @property {{ foodSecurity?: { foodRecord?: { band?: unknown, storageMonths?: unknown, hasGranary?: unknown } | null } | null, activeChains?: unknown }} [economicState]
  */
 
 /**
@@ -389,15 +396,18 @@ export function composeTonightSheet(settlement, options) {
   const source = settlement && typeof settlement === 'object' ? settlement : {};
   const forOwner = !!options && typeof options === 'object' && options.audience === TONIGHT_AUDIENCES.owner;
   const crisis = crisisOf(source);
-  const frame = crisis || !forOwner ? null : frameOf(source);
+  const cast = crisis || !forOwner ? null : castTroubleFrame(/** @type {Parameters<typeof castTroubleFrame>[0]} */ (source));
+  const frame = cast ? frameOf(source, cast) : null;
   const seat = frame ? frameSeatOf(source, frame) : null;
+  // FRAME-8 · F3: the framed sheet's own Facts row, read on its strain (the cast's, derived; the frame does not carry it)
+  const strainFact = cast && cast.strain === 'W3' ? supplyFact(source) : null;
   return {
     crisis,
     ...(frame ? { frame } : {}),
     ...(seat ? { seat } : {}),
     opening: crisis ? crisis.line : frame ? sentence(frame.line) : sentence(clean(source.pressureSentence)),
     people: frame ? framePeopleOf(frame) : peopleOf(source),
-    facts: [foodFact(source), defenceFact(source)].filter(/** @returns {f is TonightFact} */ (f) => f !== null),
+    facts: [foodFact(source), defenceFact(source), strainFact].filter(/** @returns {f is TonightFact} */ (f) => f !== null),
     hooks: frame ? frameHooksOf(source, frame) : hooksOf(source),
   };
 }
@@ -408,11 +418,10 @@ export function composeTonightSheet(settlement, options) {
  * sides (tension/troubleCast.js: derived at render, nothing stored). Each face is voiced as every person on the sheet
  * is (`voicedLineOf`: their own goal, else their secret, else their temperament). An outsider is never named: the side
  * prints its words and the person it is reached through; a side no rule fills prints its words and no one.
- * @param {TonightSource} source @returns {TonightFrame | null}
+ * @param {TonightSource} source @param {import('../tension/troubleCast.js').TroubleFrame} cast the town's cast trouble
+ * @returns {TonightFrame}
  */
-function frameOf(source) {
-  const cast = castTroubleFrame(/** @type {Parameters<typeof castTroubleFrame>[0]} */ (source));
-  if (!cast) return null;
+function frameOf(source, cast) {
   const npcs = Array.isArray(source.npcs) ? source.npcs : [];
   /** @type {TonightSide[]} */
   const sides = cast.sides.map((side) => {
@@ -909,6 +918,34 @@ function foodFact(source) {
   const bandText = band ? `${band.label}.` : '';
   const text = [bandText, foodStoresWords(record, factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (source)).crisis)].filter(Boolean).join(' ');
   return text ? { id: 'food', label: TONIGHT_COPY.food, text, sourcePath: 'economicState.foodSecurity.foodRecord' } : null;
+}
+
+/**
+ * WHAT IS SHORT (FRAME-8 · F3; the chair's ruling 45 of 2026-11-20, 17:12 UTC, and its words of 22:02 UTC, each vetoable by
+ * the owner): on the owner's framed sheet whose trouble weighs on a material strain (W3), the Facts row "Supply" names the
+ * FIRST impaired chain in the record's own order (`economicState.activeChains`, as the chain model sorts it; no draw) that
+ * has a source and a cause: its printed name (`chainPrintName`), its source (`chainSourceOf`) and its cause in the record's
+ * own word (`chainCauseOf`), as the Economics card prints them ("Leather & Hides: Hunting grounds (depleted)."). Where more
+ * chains are impaired, the row ends with the count of the rest, in digits ("; 4 more impaired."). Null where no impaired
+ * chain has a source and a cause. A criminal chain draws on no ground (its catalogue `resource` is null), so it is never
+ * the row's chain; the row names no house.
+ * @param {TonightSource} source @returns {TonightFact | null}
+ */
+function supplyFact(source) {
+  const listed = source.economicState?.activeChains;
+  const chains = /** @type {unknown[]} */ (Array.isArray(listed) ? listed : []);
+  const impaired = chains.filter((c) => !!c && typeof c === 'object' && /** @type {{ status?: unknown }} */ (c).status === 'impaired');
+  for (const chain of impaired) {
+    const cause = chainCauseOf(chain);
+    const printed = chainPrintName(/** @type {Parameters<typeof chainPrintName>[0]} */ (chain), /** @type {Parameters<typeof chainPrintName>[1]} */ (source));
+    const from = cause ? chainSourceOf(chain, printed) : null;
+    const name = clean(printed.label);
+    if (!cause || !from || !name) continue;
+    const rest = impaired.length - 1;
+    const tail = rest > 0 ? `; ${rest} ${TONIGHT_COPY.moreImpaired}` : '';
+    return { id: 'supply', label: TONIGHT_COPY.supply, text: `${name}: ${from} (${cause})${tail}.`, sourcePath: `economicState.activeChains[${chains.indexOf(chain)}]` };
+  }
+  return null;
 }
 
 /** @param {TonightSource} source @returns {TonightFact} */
