@@ -1,3 +1,6 @@
+**SAVED AT THE STOP** (2026-11-21T02:06Z by `date -u`; the chair's order of 2026-11-21 02:06 UTC: the owner ordered a save and a stop for every lane;
+nothing started after it; "DEPTH <commit>" was NOT sent: the directory run below found nine reds of the lane's own to cure first).
+
 # DEPTH-4 hand-back (kept current at every push; last written 2026-11-20T21:58Z by `date -u`)
 
 Branch `lane/depth-4-2026-11-20`, started at c153237e0 (DEPTH-3's tip). Prompt: origin/lane/chair-2026-11-08
@@ -83,8 +86,35 @@ A6 callers at the tip (`themes/a6-callers.out.txt`): rareSecrets.js 31; economyF
 relationshipArchetypes.js 6; foodways.js 3; conflicts.js 2; `src/domain/facts/drawDeclared.js :: freshAdmitted` 1 (the one over the line's 54).
 
 ## State
-- 2026-11-20T21:58Z: themes + textKey merged; the line merged; censuses re-taken. RUNNING: two-tree 1aa8badba -> 7903a242d. NEXT: the build (three
-  figures + worker, beside the line's 1,177,668 / 374,670 / 314,580, worker 2,631,236); the directory run (rule 17); "DEPTH <commit>".
+- 2026-11-20T22:03Z: themes + textKey merged; the line merged; censuses re-taken. TWO-TREE 1aa8badba -> 7903a242d (the themes merge): golden 525/525 and
+  census 720/720 IDENTICAL (0 non-string, 0 strings). THE BUILD at c0b610d96 (fresh `npm run build`; my closure script beside the test's,
+  `VERIFY_DIST=1` vendorPdfLazy + generationWorkerLazy 64 passed | 2 failed): FIRST PAINT 1,159,253 raw / 369,491 gzip / 310,057 Brotli (8 files)
+  against the line's 1,177,668 / 374,670 / 314,580 (-18,415 / -5,179 / -4,523): the three budgets (1,175,492 / 373,999 / 313,994) now PASS.
+  The worker 2,629,406 (line 2,631,236; ceiling 2,579,708: red, the line's); the engine chunk 926,618 (line 925,898; ceiling 909,928: red, the
+  line's). No NPC_FACTION_LOYALTY line in any first-paint file (0 of 270). `textKey`'s cost in first paint: a few dozen bytes, a ruled
+  exception, not isolated by its own build. The directory run DONE (below): nine lane reds open.
+
+## THE DIRECTORY RUN (rule 17), at c0b610d96, 22:03:17 -> 22:42:01 UTC (39 wall minutes)
+`VERIFY_DIST=1` vitest over tests/generators, tests/data, tests/domain/facts, tests/kernel, tests/lint, tests/build, and
+tests/domain/{hookThemeAnswersHeld,hookRetention}.test.js (tests/domain/generation holds none): 884 files (23 failed), 8,127 tests:
+35 failed | 8,086 passed | 6 skipped. Read BY NAME against RED-AT-LINE.tsv (53 rows at 062504aa8): 26 ON the list, 9 NOT (the line's own
+tests/lint was 220/220 green, so these are the LANE'S, owed before "DEPTH <commit>"; none was cured before the stop):
+1. `tests/generators/generationForkCensus.test.js` A3e: GENERATION_TIER1 row `generatePower|powerStructure` keyMoves declared 0, measured 47;
+   class "pure" -> "label". PLAUSIBLY the conflict unit (red at a097ee662 too, whose base 2582075ed holds it). "label" may mean the quarrel
+   pick's key reads a display label: INVESTIGATE before re-taking the register by its door (a stored figure, named; or a real red).
+2. `tests/lint/declaredLineShape.test.js`: `src/data/powerSiblings.js :: QUARREL_POOLS.GRAZING[1]` is null (the conflict unit's no-grazing twin).
+3-4. `tests/lint/drawDeclaredKeys.walker.test.js` (two tests): `src/generators/power/quarrelPick.js` calls drawDeclared with NO key.
+5. `tests/lint/moduleScopeCwdRatchet.test.js` A4: tests/lint 19 module-scope cwd roots, banked 17: `hookTextOneHome.walker.test.js`
+   (`const ROOT = process.cwd()`) and `hookThemeTotality.walker.test.js` (re-pointed by the themes unit): cure by the TOOL-31 shape
+   `join(dirname(fileURLToPath(import.meta.url)), '../..')`; the ceiling is never raised.
+6. `tests/lint/mutationCoverageManifest.test.js`: no entry for `tests/generators/depthHooksAppended.test.js` and
+   `tests/generators/power/conflictQuarrelPick.test.js` (a planted regression in scripts/mutation-sweep.sh, or a rationale row).
+7-8. `tests/lint/seedLoopTotality.walker.test.js` (two tests): `conflictQuarrelPick.test.js` has 3 bare seed loops (collect, then assert once).
+9. `tests/lint/styleLaw.walker.test.js`: struck phrase "a stranger" 1 -> 2 in `src/data/npcData.js`: the hook "A stranger has taken lodging
+   nearby and is far too interested in their old stories." (DEPTH-2 hooks tranche 1, 6a6b5f814; chair-approved). A WORDING: the chair rules
+   the new words (COMMON-RULES 6: never banked around). Rewording a hook moves its fold: the themes digest by its door, the answers fixture.
+NEXT FOR A SUCCESSOR: one cure brief for 2-8 (conflict unit + themes walkers, no draw moved: two-tree 0 non-string), the chair's words for 9,
+the A3e investigation; re-run the directory run; then "DEPTH <commit>" with the build figures above (re-build if src moved).
 
 ## Stored figures moved by this lane's units (named, signed by none)
 - generatorGoldenMaster: 525 rows red at a097ee662 and at the tip alike (the lane's hooks/conflict wording; not re-recorded).
