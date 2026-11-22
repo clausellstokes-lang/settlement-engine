@@ -4,6 +4,21 @@ A successor needs THIS FILE, `PAGE-9-HANDBACK.md`, `PAGE-4-HANDBACK.md` (rulings
 the security reader's list) and the briefs under `briefs/`. Prompt:
 `git show origin/lane/chair-2026-11-08:docs/chair/2026-11-21/eighth/prompts/PAGE-13.txt` (+ `COMMON-EIGHTH.txt`).
 
+## PARKED (the chair, 09:08 UTC 2026-11-22: the owner's six-seat limit; resume only on "GO PAGE-13")
+1. DONE AND PROVEN: units 1, 2 (READER-DIFF, 60 towns) and unit 3's merge: lane `lane/page-13-2026-11-22` = 9e3ee1860
+   (the base 66645bd59 = stack-96 + cc2f43aee with registers by their doors, then the line at 2486d1301; no conflict).
+2. IN THE AIR, PUSHED: `lane/page-13-2026-11-22-sides-decl-wip` = b22458705, WIP GREEN (arm 25/25 with tensionShown;
+   reds seen (a) power name, (b) "Lawbreakers"; 4 states pinned: "Criminal organisations" at its two places under both
+   default-veil projections; walker (a)-(d) written, 19 reds quieted, 8 house rows listed; tests/lint 4 red = the line's 3
+   + the lighting census by its new file; `npm run lint`, typecheck:ratchet NOT run; full hand-back NOT written).
+3. `lane/page-13-2026-11-22-wiring-wip` = 285b6b1a7, WIP: parity measure PASSES (8,745 pairs, 294 differ, 290 traced,
+   FAULT 0, 4 the LISTED criminal_power row); NOTHING WIRED; tests written, never run; the wiring staged as
+   `build/CAUSES-WIRING-2/wire.py`. First paint at the base 1,180,086 / 375,346 / 314,897; worker 2,682,827.
+4. STOPPED UNFINISHED: rule 8 at 9e3ee1860 (only the build ran, exit 0); the two-tree proof, owner-vs-served and the six
+   places' pages (`scratchpad/proofs.sh`, never started past the mutex). A stale gate lock of dead PID 31347 may stand.
+5. NEXT STEP ON "GO": read b22458705's diff whole, re-run its red/green, merge it, refreeze lighting, lint + ratchet,
+   tests/lint whole; then rule 8 at that tip and "PAGE-SIDES <commit>". Mark ~300k (own).
+
 ## WHERE THE LANE STANDS (brought current at the READER-DIFF merge, 2026-11-22; hours in the commits)
 - BRANCH `lane/page-13-2026-11-22`, cut at PAGE-9's saved tip `1cf317f5f` (verified equal to
   `origin/lane/page-9-2026-11-20`). PAGE-9's branches stay as the save left them. Builder branch (local, merged, not
