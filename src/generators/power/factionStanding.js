@@ -70,6 +70,27 @@ const merchantAheadSaid = (rival) => arcaneAheadSaid(rival);
 /** The number of level powers, as the standing line says it (TAIL-POWERS-B-4, P31 (4)); past six, "Many". */
 const LEVEL_COUNT_WORDS = Object.freeze(['', '', '', 'Three', 'Four', 'Five', 'Six', 'Many']);
 
+/**
+ * THE STANDING LADDER'S RANK LINES (rank 1, rank 2, the last rank), lifted from `annotateFactionStanding` BYTE-IDENTICAL
+ * (SEAT-10 U6, the chair's E70 (a)): each row is its sentence's fixed parts, a name or a word between each pair. The ladder
+ * writes from them and the final-record pass (`settleSeatHolderToRecord`) reads them (`RANK_STANDINGS`), so the two can
+ * never drift: a reworded line is reworded for both. `level`'s first part is the count word the ladder sets ("Three"…"Many").
+ * @enforced-by tests/generators/seat/seatHolderLines.test.js (the ladder's totality arm)
+ */
+export const LADDER = Object.freeze({
+  gapNarrow: Object.freeze(['The gap between them and ', ' is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions.']),
+  noOneLeads: Object.freeze(['No one clearly leads here; one scandal or one lost ally could change who does.']),
+  contested: Object.freeze([SEAT_CONTESTED_STANDING]),
+  shadow: Object.freeze(['They operate in the shadow of ', ', close enough to matter and too far behind to lead.']),
+  resist: Object.freeze(['They are strong enough to resist those above them, but too far behind to risk an open fight.']),
+  behind: Object.freeze(['Behind ', ' by too much to challenge openly, so they get their way through petitions and procedure instead.']),
+  settled: Object.freeze(['The order is settled for now; they are busy holding on to second place and make no move on first.']),
+  level: Object.freeze(['Three', ' powers stand almost level here, and no one leads; every ', ' has to be bargained for.']),
+  atTable: Object.freeze(['They are always at the table, but cannot set their own terms.']),
+  worthBuying: Object.freeze(['Close enough to the two above that their support is worth buying; they play ', ' and ', ' against each other when they can.']),
+  fewMatters: Object.freeze(['They have a say on only a few matters; on everything else they side with whoever will deal with them that week.']),
+});
+
 export const annotateFactionStanding = (factions, force = { body: 'garrison' }, seat = null) => { // F1: `force` is `defenseFacts.js :: forceWordsOf`, the garrison's words by default
       var factionNames = factions.map(function (f) {
           return f.faction;
@@ -130,42 +151,42 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }, 
               ? (standing = holderStanding)
               : topTwoGap <= 6
               ? (standing = topFactionName
-                  ? 'The gap between them and ' +
+                  ? LADDER.gapNarrow[0] +
                     (topFactionName && factions[0].isGoverning && topFactionName.toLowerCase().includes('council') ? 'the governing council' : topSaid) +
-                    ' is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions.'
-                  : 'No one clearly leads here; one scandal or one lost ally could change who does.')
+                    LADDER.gapNarrow[1]
+                  : LADDER.noOneLeads[0])
               : contestedBy && factionName === contestedBy && factions[0] && factions[0].isGoverning
-                ? (standing = SEAT_CONTESTED_STANDING)
+                ? (standing = LADDER.contested[0])
               : topTwoGap <= 14
                 ? (standing = topFactionName
-                    ? 'They operate in the shadow of ' +
+                    ? LADDER.shadow[0] +
                       (topFactionName && factions[0].isGoverning && topFactionName.toLowerCase().includes('council') ? 'the governing council' : topSaid) +
-                      ', close enough to matter and too far behind to lead.' // BAR3-POWERS (C45570): no grudge the pair's relation row may deny ("symbiotic, stable")
-                    : 'They are strong enough to resist those above them, but too far behind to risk an open fight.')
+                      LADDER.shadow[1] // BAR3-POWERS (C45570): no grudge the pair's relation row may deny ("symbiotic, stable")
+                    : LADDER.resist[0])
                 : (standing = topFactionName
-                    ? 'Behind ' +
+                    ? LADDER.behind[0] +
                       (topFactionName && factions[0].isGoverning && topFactionName.toLowerCase().includes('council') ? 'the governing council' : topSaid) +
-                      ' by too much to challenge openly, so they get their way through petitions and procedure instead.'
-                    : 'The order is settled for now; they are busy holding on to second place and make no move on first.')),
+                      LADDER.behind[1]
+                    : LADDER.settled[0])),
           rank === 2 &&
             (gapAbove <= 5 && gapBelow <= 5
               ? (standing = topTwoGap <= 5 && levelCount >= 3
-                  ? `Three powers stand almost level here, and no one leads; every ${seatIsCouncil(factions.find((x) => x.isGoverning)?.faction) ? 'council vote' : 'decision'} has to be bargained for.`.replace(/^Three/, LEVEL_COUNT_WORDS[Math.min(levelCount, LEVEL_COUNT_WORDS.length - 1)]) // TAIL-POWERS-B: a vote only where a council sits; TAIL-POWERS-B-4: their number
-                  : 'They are always at the table, but cannot set their own terms.')
+                  ? `${LADDER.level[0]}${LADDER.level[1]}${seatIsCouncil(factions.find((x) => x.isGoverning)?.faction) ? 'council vote' : 'decision'}${LADDER.level[2]}`.replace(/^Three/, LEVEL_COUNT_WORDS[Math.min(levelCount, LEVEL_COUNT_WORDS.length - 1)]) // TAIL-POWERS-B: a vote only where a council sits; TAIL-POWERS-B-4: their number
+                  : LADDER.atTable[0])
               : gapAbove <= 10
                 ? (standing =
-                    'Close enough to the two above that their support is worth buying; they play ' +
+                    LADDER.worthBuying[0] +
                     (higherNeighbor ? powerNameWithArticle(higherNeighbor.faction) : 'the second power') +
-                    ' and ' +
+                    LADDER.worthBuying[1] +
                     (factions[0] ? powerNameWithArticle(factions[0].faction) : 'the leading power') +
-                    ' against each other when they can.')
+                    LADDER.worthBuying[2])
                 : (standing =
-                    'They are always at the table, but cannot set their own terms.')),
+                    LADDER.atTable[0])),
           rank === factions.length - 1 &&
             power < 7 &&
             gapAbove >= 5 &&
             (standing =
-              'They have a say on only a few matters; on everything else they side with whoever will deal with them that week.'),
+              LADDER.fewMatters[0]),
           hasMerchant && hasCraftGuild)
         ) {
           if (nameLower.includes('merchant')) {
@@ -343,23 +364,15 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }, 
 };
 
 /**
- * THE RANK LINES the standing ladder above writes (rank 1, rank 2, the last rank), read back on the final record: a holder's
- * row says it holds the seat in place of whichever of them it carries (SEAT-10 U6, the chair's E65 (2): W3 at ANY rank). Read,
- * never written: the words are the ladder's own, above.
+ * THE RANK LINES the standing ladder above writes (rank 1, rank 2, the last rank), read back on the final record from the
+ * ladder's own table (`LADDER`; the chair's E70 (a)): a holder's row says it holds the seat in place of whichever of them it
+ * carries (E65 (2): W3 at ANY rank). A name or a word sits between each pair of fixed parts, never across a sentence's end.
  */
-const RANK_STANDINGS = Object.freeze([
-  /The gap between them and .+? is narrow\. A single shift in patronage, scandal, or armed muscle could swap their positions\./,
-  /No one clearly leads here; one scandal or one lost ally could change who does\./,
-  new RegExp(SEAT_CONTESTED_STANDING.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')),
-  /They operate in the shadow of .+?, close enough to matter and too far behind to lead\./,
-  /They are strong enough to resist those above them, but too far behind to risk an open fight\./,
-  /Behind .+? by too much to challenge openly, so they get their way through petitions and procedure instead\./,
-  /The order is settled for now; they are busy holding on to second place and make no move on first\./,
-  /\w+ powers stand almost level here, and no one leads; every (?:council vote|decision) has to be bargained for\./,
-  /They are always at the table, but cannot set their own terms\./,
-  /Close enough to the two above that their support is worth buying; they play .+? and .+? against each other when they can\./,
-  /They have a say on only a few matters; on everything else they side with whoever will deal with them that week\./,
-]);
+const escapeText = (/** @type {string} */ t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+/** `level`'s first part is itself the count word, so its pattern opens on a word; every other slot is a name (no full stop in it). */
+export const RANK_STANDINGS = Object.freeze(Object.entries(LADDER).map(([key, parts]) => new RegExp(key === 'level'
+  ? `\\b\\w+${parts.slice(1).map(escapeText).join('[^.]+?')}`
+  : parts.map(escapeText).join('[^.]+?'))));
 
 /**
  * THE FINAL-RECORD PASS (SEAT-10 U6, the chair's E65 of 2026-11-22): where the holder is known only on the final record (R2,
