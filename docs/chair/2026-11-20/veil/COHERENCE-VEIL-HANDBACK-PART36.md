@@ -54,6 +54,25 @@ ASKED AND NOTHING OF R4-IDS IS MERGED INTO THE TIP (the chair's order at the sto
   two projections under ONE salt); PLAUSIBLY also the cause of `criminalSwitchHandReach`'s 12 reds. (S2) `gallery.test.js` "a share
   marked with a veil" is red already at b983c16b6 (the server side): cause not read.
 
+### (2b) THE CHAIR'S RULINGS ON THE TWO STOPS (E136, 22:27 UTC 2026-11-22), FOR THE SUCCESSOR
+- (S1) `src/domain/display/criminalVeilSwitch.js :: offeredAddressesOf`: ONE SALT FOR THE SWITCH'S TWO PROJECTIONS (a salt passed in
+  on the OWNER'S OWN PAGE only; THE SERVER NEVER TAKES A SALT FROM A CALLER); an arm shows the switch offers exactly what it offered
+  before the re-key, on the pool. NOT "modulo the bijection".
+- (S2) `gallery.test.js` "a share marked with a veil renders through it: the defaults hide, a delta shows", red already at b983c16b6:
+  READ BY CAUSE FIRST; cured inside R4-IDS if the re-key caused it, else named to the chair.
+### (2c) NOT DONE, THE LIST (each for R4I-PAGE-2; the files on `lane/veil-35-2026-11-22-r4ids-wip` at fd7163ba6, `out/v35/r4ipage/`)
+- THE VR46 GUARDS: NOT RE-STATED. 16 reds in 6 of the 34 non-security files that call `galleryPayloadFor` / `applyVeil` /
+  `projectShareVeil` / `get_gallery_dossier` / `get_unlisted_dossier`, titles in `b-guards-other.txt` (all id pins but 2; S2's title
+  is one of the 16).
+- `tests/security`: the run KILLED at 22:22 after 167 tests, 41 reds UNCLASSIFIED (`b-guards-security-partial.txt`; among them
+  galleryServerVeil 11, galleryVeilHandRows 14, galleryRosterChoices 2, criminalSwitchHandReach 12: PLAUSIBLY S1). Command:
+  `sh scripts/gate-tail.sh npx vitest run tests/security --maxWorkers=1`.
+- `tests/lint` WHOLE on the cured tree: NOT RUN (killed). `sh scripts/gate-tail.sh npx vitest run tests/lint` (the ledger ref fetched).
+- THE BUILD: NOT RUN. `npm run build`, then `VERIFY_DIST=1 npx vitest run tests/build/vendorPdfLazy.test.js tests/build/generationWorkerLazy.test.js`.
+- THE STORED ARM (E134, 36.6): NOT RUN beyond its instruments (c7a50cd10); only part one's two born towns with stored-shape prose
+  were searched (0 stored person ids served: CONFIRMED for those two only). Commands in `R4IPAGE-HANDBACK.md`.
+- A SEAT'S READ of R4I-PAGE's diff (08081ffdc..fd7163ba6 beyond b983c16b6): NOT DONE.
+
 ### (3) NEXT, IN ORDER
 1. A seat reads R4I-PAGE's diff (08081ffdc..fd7163ba6, src and tests) ONCE, and its hand-back; the chair rules S1.
 2. A fresh builder (R4I-PAGE-2, the twin's manifest: never 212, the rollback or the registry) from the hand-back: S1's cure as ruled;
