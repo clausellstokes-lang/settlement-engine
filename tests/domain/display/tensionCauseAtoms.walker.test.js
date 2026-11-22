@@ -79,7 +79,7 @@ const FACT_FIELDS = {
   failedSource: { served: 'the food sources' },
   prosperity: { served: "the economy's prosperity label" },
   legitimacyCrisis: { served: 'the public legitimacy band' },
-  monsterFrontier: { served: 'the country around' },
+  monsterFrontier: { served: 'monsterFrontier.js: the beasts of its country' },
   entrepot: { served: "the economy's stored mark (entrepot.js)" },
 };
 

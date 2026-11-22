@@ -261,3 +261,45 @@ describe('force_unpaid_or_cut holds on its served arms alone (CAUSES-PARITY B)',
     });
   });
 });
+
+// CAUSES-PARITY-2 F (PAGE-12; the first brief's F, the chair's (3)): THE LAW ON A BORN PLACE. hxd-city-138 (born as
+// measures/page-7/sim.mjs births it) holds crime_wave by its black market alone, and the black market is its one hideable
+// house. On the gallery's hiding read (toPublicSafe, then the veil's default set) the house is gone and the served page prints
+// what the same place born WITHOUT the house (its twin: the record with the black market removed) prints; the owner's page
+// keeps the black market's own wording.
+describe('a hidden house prints what the place without it prints (CAUSES-PARITY-2 F)', () => {
+  it('hxd-city-138: served == the house-free twin; the owner keeps the black market\'s wording', async () => {
+    const { generateSettlementPipeline } = await import('../../../src/generators/generateSettlementPipeline.js');
+    const { birthConfig, loadGenerationLawPayloads } = await import('../../../src/domain/density/densityCreateBoundary.js');
+    const { DEFAULT_CONFIG } = await import('../../../src/store/configSlice.js');
+    const { applyVeil, defaultVeilFor, resolveVeil } = await import('../../../src/domain/display/galleryVeil.js');
+    const { isHideableHouse } = await import('../../../src/domain/people/cardVeil.js');
+    const { CAUSE_HOUSES } = await import('../../../src/domain/facts/causeHouses.js');
+    const { atomHolds } = await import('../../../src/domain/facts/factVocabulary.js');
+    await loadGenerationLawPayloads();
+    const doc = /** @type {any} */ (generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: 'city' }), null, { seed: 'hxd-city-138', customContent: {} }));
+    const hide = (/** @type {any} */ r) => { const pub = toPublicSafe(r); return applyVeil(pub, resolveVeil(defaultVeilFor(pub), null)); };
+    const isBlackMarket = (/** @type {any} */ i) => CAUSE_HOUSES.blackMarket.has(String(i?.name ?? '').trim().toLowerCase());
+    const row = /** @type {any} */ (TENSION_CAUSES.crime_wave.causes.find((c) => c.id === 'black_market'));
+    const t = doc.history.currentTensions.find((/** @type {any} */ x) => x.type === 'crime_wave');
+    expect(t).toBeTruthy();
+    // the place: its one hideable house is the black market, and the owner prints the black market's wording
+    expect(doc.institutions.filter((/** @type {any} */ i) => isHideableHouse(i)).map((/** @type {any} */ i) => isBlackMarket(i))).toEqual([true]);
+    expect(row.wordings.map((/** @type {any} */ w) => w.text)).toContain(tensionCauseSentenceOf(doc, t));
+    expect(atomHolds('house: black_market', /** @type {any} */ (factsOf(doc)))).toBe(true);
+    // the hiding read: the house is gone, the row does not hold, its declared atom reads no
+    const served = hide(doc);
+    const t2 = served.history.currentTensions.find((/** @type {any} */ x) => x.type === 'crime_wave');
+    expect(served.institutions.some(isBlackMarket)).toBe(false);
+    expect(TENSION_CAUSE_HOLDS[row.holds](served, factsOf(served))).toBe(false);
+    expect(atomHolds('house: black_market', /** @type {any} */ (factsOf(served)))).toBe(false);
+    // the twin: the same place with the house removed
+    const twin = structuredClone(doc);
+    twin.institutions = twin.institutions.filter((/** @type {any} */ i) => !isBlackMarket(i));
+    expect(twin.institutions.length).toBe(doc.institutions.length - 1);
+    const plain = tensionCauseSentenceOf(twin, t);
+    expect(tensionCauseSentenceOf(served, t2)).toBe(plain);
+    expect(tensionCauseSentenceOf(hide(twin), t2)).toBe(plain);
+    expect(tensionCauseSentenceOf(doc, t)).not.toBe(plain);
+  }, 120000);
+});
