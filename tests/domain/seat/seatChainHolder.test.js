@@ -67,6 +67,7 @@ import { holderOf } from '../../../src/domain/seat/holderOfSeat.js';
 import { rankIn } from '../../../src/domain/people/membership.js';
 import { derivePowerStrata, deciderOf, outrankingRivalOf, rulingChainOf } from '../../../src/domain/dossier/powerStrata.js';
 import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
 
 await loadGenerationLawPayloads();
 
@@ -145,48 +146,49 @@ const veiled = (s, holder, mark) => ({
   },
 });
 
-/** THE SIX (the probe's kept-form transfers whose chain named the old house's person), every word a literal. */
-const SIX = [
-  { settType: 'town', seed: 'u7p-town-8', form: 'Town Mayor', oldHouse: 'Craft Guilds', oldPerson: 'Judith Weber', person: 'Felix Naumann' },
-  { settType: 'metropolis', seed: 'u7p-metropolis-15', form: 'Democratic assembly', oldHouse: 'The Merchant Bloc', oldPerson: 'Dietrich Engel', person: 'Josefine Wolf' },
-  { settType: 'metropolis', seed: 'u7p-metropolis-21', form: 'Grand Council', oldHouse: 'The Trade Compact', oldPerson: 'Dietmar Uhl', person: 'Christine Jäger' },
-  { settType: 'metropolis', seed: 'u7p-metropolis-26', form: 'Grand Council', oldHouse: 'The Commercial Circle', oldPerson: 'Brunhild Steiner', person: 'Gertrude Moser' },
-  { settType: 'metropolis', seed: 'u7p-metropolis-27', form: 'Grand Council', oldHouse: 'The Guild Alliance', oldPerson: 'Conrad Brandt', person: 'Katharina Rosenfeld' },
-  { settType: 'metropolis', seed: 'u7p-metropolis-28', form: 'Grand Council', oldHouse: 'The Trade Compact', oldPerson: 'Josef Frank', person: 'Notburga Weber' },
-];
-
 describe('1. RED FIRST: the probe\'s six kept-form transfers name the holder\'s person', () => {
-  it.each(SIX)('$seed: $form kept, the seat from $oldHouse to Merchant Guilds; the chain names $person', ({ settType, seed, form, oldHouse, oldPerson, person }) => {
+  // THE SIX (the probe's kept-form transfers whose chain named the old house's person), every word a literal. One plain
+  // test runs every row through collectSeedFailures (the lighting walker parks a row-parameter `each`; seedLoopTotality)
+  it('the six: each form kept, the seat passed to Merchant Guilds, the chain names the holder\'s first by name', () => {
     build(true);
-    const born = bear(settType, seed);
-    expect(seatLaw.resolveSeatLawVersion(born), `${seed}: born under the seat law`).toBe(2);
-    expect(holderOf(born, OWNER).holderName, `${seed}: the holder before the transfer`).toBe(oldHouse);
-    const after = dmTransfer(born, seed, TAKER);
-    // the kept form: the governing row stays, the holder moves
-    expect(governingFactionOf(after)?.faction, `${seed}: the form is kept`).toBe(form);
-    expect(holderOf(after, OWNER).holderName, `${seed}: the holder after the transfer (owner)`).toBe(TAKER);
-    expect(holderOf(after, READER).holderName, `${seed}: the holder after the transfer (reader)`).toBe(TAKER);
+    expectNoSeedFailures(collectSeedFailures([
+      { settType: 'town', seed: 'u7p-town-8', form: 'Town Mayor', oldHouse: 'Craft Guilds', oldPerson: 'Judith Weber', person: 'Felix Naumann' },
+      { settType: 'metropolis', seed: 'u7p-metropolis-15', form: 'Democratic assembly', oldHouse: 'The Merchant Bloc', oldPerson: 'Dietrich Engel', person: 'Josefine Wolf' },
+      { settType: 'metropolis', seed: 'u7p-metropolis-21', form: 'Grand Council', oldHouse: 'The Trade Compact', oldPerson: 'Dietmar Uhl', person: 'Christine Jäger' },
+      { settType: 'metropolis', seed: 'u7p-metropolis-26', form: 'Grand Council', oldHouse: 'The Commercial Circle', oldPerson: 'Brunhild Steiner', person: 'Gertrude Moser' },
+      { settType: 'metropolis', seed: 'u7p-metropolis-27', form: 'Grand Council', oldHouse: 'The Guild Alliance', oldPerson: 'Conrad Brandt', person: 'Katharina Rosenfeld' },
+      { settType: 'metropolis', seed: 'u7p-metropolis-28', form: 'Grand Council', oldHouse: 'The Trade Compact', oldPerson: 'Josef Frank', person: 'Notburga Weber' },
+    ], ({ settType, seed, form, oldHouse, oldPerson, person }) => {
+      const born = bear(settType, seed);
+      expect(seatLaw.resolveSeatLawVersion(born), `${seed}: born under the seat law`).toBe(2);
+      expect(holderOf(born, OWNER).holderName, `${seed}: the holder before the transfer`).toBe(oldHouse);
+      const after = dmTransfer(born, seed, TAKER);
+      // the kept form: the governing row stays, the holder moves
+      expect(governingFactionOf(after)?.faction, `${seed}: the form is kept`).toBe(form);
+      expect(holderOf(after, OWNER).holderName, `${seed}: the holder after the transfer (owner)`).toBe(TAKER);
+      expect(holderOf(after, READER).holderName, `${seed}: the holder after the transfer (reader)`).toBe(TAKER);
 
-    // today's chain: the old house's person, of the old house and not of the holder's
-    const was = today(() => rulingChainOf(after));
-    expect(was.npc?.name, `${seed}: today's chain names the old house's person`).toBe(oldPerson);
-    expect(housesOf(after, oldPerson), `${seed}: today's person is of the old house`).toContain(oldHouse);
-    expectAbsentWithAnchor(housesOf(after, oldPerson), TAKER, oldHouse, `${seed}: today's person holds no place in the holder's house`);
+      // today's chain: the old house's person, of the old house and not of the holder's
+      const was = today(() => rulingChainOf(after));
+      expect(was.npc?.name, `${seed}: today's chain names the old house's person`).toBe(oldPerson);
+      expect(housesOf(after, oldPerson), `${seed}: today's person is of the old house`).toContain(oldHouse);
+      expectAbsentWithAnchor(housesOf(after, oldPerson), TAKER, oldHouse, `${seed}: today's person holds no place in the holder's house`);
 
-    // the cure: the form stays the power; the holder is the faction; its person is the holder's, by a literal
-    const chain = rulingChainOf(after);
-    expect(chain.npc?.name, `${seed}: the chain names the holder's person`).toBe(person);
-    expect(chain.power?.name, `${seed}: the chain's power is the form (the office)`).toBe(form);
-    expect(chain.faction?.name, `${seed}: the chain's faction is the holder`).toBe(TAKER);
-    expect(housesOf(after, person), `${seed}: the person is of the holder's house`).toContain(TAKER);
-    expect(rankIn((after.npcs || []).find((n) => n?.name === person), TAKER), `${seed}: the person is the holder's first`).toBe(1);
-    // anchored: today's chain names the old person (asserted above), so the before list holds it
-    expectPresentThenAbsent([was.npc?.name], [chain.npc?.name], oldPerson, `${seed}: the old house's person leaves the chain`);
-    // the owner's own document reads the same holder here
-    expect(rulingChainOf(after, OWNER).npc?.name, `${seed}: the owner's chain`).toBe(person);
-    // THE POWERS: the ruler entry is the holder
-    expect(derivePowerStrata(after).powers.find((p) => p.role === 'ruler')?.name, `${seed}: the ruler entry is the holder`).toBe(TAKER);
-  }, 60_000);
+      // the cure: the form stays the power; the holder is the faction; its person is the holder's, by a literal
+      const chain = rulingChainOf(after);
+      expect(chain.npc?.name, `${seed}: the chain names the holder's person`).toBe(person);
+      expect(chain.power?.name, `${seed}: the chain's power is the form (the office)`).toBe(form);
+      expect(chain.faction?.name, `${seed}: the chain's faction is the holder`).toBe(TAKER);
+      expect(housesOf(after, person), `${seed}: the person is of the holder's house`).toContain(TAKER);
+      expect(rankIn((after.npcs || []).find((n) => n?.name === person), TAKER), `${seed}: the person is the holder's first`).toBe(1);
+      // anchored: today's chain names the old person (asserted above), so the before list holds it
+      expectPresentThenAbsent([was.npc?.name], [chain.npc?.name], oldPerson, `${seed}: the old house's person leaves the chain`);
+      // the owner's own document reads the same holder here
+      expect(rulingChainOf(after, OWNER).npc?.name, `${seed}: the owner's chain`).toBe(person);
+      // THE POWERS: the ruler entry is the holder
+      expect(derivePowerStrata(after).powers.find((p) => p.role === 'ruler')?.name, `${seed}: the ruler entry is the holder`).toBe(TAKER);
+    }), 'the six kept-form transfers');
+  }, 300_000);
 });
 
 describe('1b. the seat\'s own person stays where no old house holds them (BU7\'s reading, for the chair)', () => {
@@ -204,41 +206,52 @@ describe('1b. the seat\'s own person stays where no old house holds them (BU7\'s
 });
 
 describe('2. a veiled holder: the reads to a reader are today\'s', () => {
-  it.each([
-    { kind: 'hidden', mark: { hidden: true } },
-    { kind: 'criminal', mark: { category: 'criminal' } },
-  ])('u7p-town-8, the Merchant Guilds $kind: the reader reads today\'s chain, Judith Weber', ({ kind, mark }) => {
+  it('u7p-town-8, the Merchant Guilds hidden, then criminal: the reader reads today\'s chain, Judith Weber', () => {
     build(true);
     const after = dmTransfer(bear('town', 'u7p-town-8'), 'u7p-town-8', TAKER);
-    const town = veiled(after, TAKER, mark);
-    expect(holderOf(town, OWNER).holderName, `${kind}: the owner still reads the holder`).toBe(TAKER);
-    expect(holderOf(town, READER).holderName, `${kind}: the reader is refused the holder`).toBeNull();
-    expect(reads(town), `${kind}: the reader's four reads are today's`).toBe(today(() => reads(town)));
-    expect(reads(town, READER), `${kind}: the reader's, named`).toBe(today(() => reads(town, READER)));
-    expect(rulingChainOf(town).npc?.name, `${kind}: the reader's chain`).toBe('Judith Weber');
-    expect(rulingChainOf(town).faction?.name, `${kind}: the reader's faction`).toBe('Town Mayor');
-    // anchored: the owner's chain names the holder (the before list), so the reader's lacking it is the veil's work
-    expectPresentThenAbsent([rulingChainOf(town, OWNER).faction?.name], [rulingChainOf(town).faction?.name], TAKER, `${kind}: the reader is never told the veiled holder`);
-    expect(rulingChainOf(town, OWNER).npc?.name, `${kind}: the owner's chain names the holder's person`).toBe('Felix Naumann');
+    expectNoSeedFailures(collectSeedFailures([
+      { kind: 'hidden', mark: { hidden: true } },
+      { kind: 'criminal', mark: { category: 'criminal' } },
+    ], ({ kind, mark }) => {
+      const town = veiled(after, TAKER, mark);
+      expect(holderOf(town, OWNER).holderName, `${kind}: the owner still reads the holder`).toBe(TAKER);
+      expect(holderOf(town, READER).holderName, `${kind}: the reader is refused the holder`).toBeNull();
+      expect(reads(town), `${kind}: the reader's four reads are today's`).toBe(today(() => reads(town)));
+      expect(reads(town, READER), `${kind}: the reader's, named`).toBe(today(() => reads(town, READER)));
+      expect(rulingChainOf(town).npc?.name, `${kind}: the reader's chain`).toBe('Judith Weber');
+      expect(rulingChainOf(town).faction?.name, `${kind}: the reader's faction`).toBe('Town Mayor');
+      // anchored: the owner's chain names the holder (the before list), so the reader's lacking it is the veil's work
+      expectPresentThenAbsent([rulingChainOf(town, OWNER).faction?.name], [rulingChainOf(town).faction?.name], TAKER, `${kind}: the reader is never told the veiled holder`);
+      expect(rulingChainOf(town, OWNER).npc?.name, `${kind}: the owner's chain names the holder's person`).toBe('Felix Naumann');
+    }), 'the veiled holder, both veils');
   }, 60_000);
 });
 
 describe('3. law 1: byte-identical, the holder unread', () => {
-  it.each(SIX)('$seed born dark, after the same transfer: the reads with the holder read equal the reads without it', ({ settType, seed }) => {
+  it('the six born dark, after the same transfer: the reads with the holder read equal the reads without it', () => {
     build(false);
-    const born = bear(settType, seed);
-    expect(seatLaw.resolveSeatLawVersion(born), `${seed}: born dark`).toBe(1);
-    const after = dmTransfer(born, seed, TAKER);
-    // the holder is there to read (holderOf does not gate on the law), so the stand-down is the law's
-    const owned = holderOf(after, OWNER).holderName;
-    expect(owned === null ? [] : [owned], `${seed}: a holder stands apart on the law-1 record`).toHaveLength(1);
-    expect(reads(after), `${seed}: law 1, the reader's`).toBe(today(() => reads(after)));
-    expect(reads(after, OWNER), `${seed}: law 1, the owner's`).toBe(today(() => reads(after, OWNER)));
-    // the control: the same record under the seat law, and the seam moves the reads
-    const lit = withLaw(after, 2);
-    expect(seatLaw.resolveSeatLawVersion(lit), `${seed}: the control is law 2`).toBe(2);
-    expect(reads(lit, OWNER), `${seed}: the control moves (the differential can see)`).not.toBe(today(() => reads(lit, OWNER))); // anchored: the same seam on the law-2 twin moves the reads, so the law-1 equality above is not vacuous
-  }, 60_000);
+    expectNoSeedFailures(collectSeedFailures([
+      { settType: 'town', seed: 'u7p-town-8' },
+      { settType: 'metropolis', seed: 'u7p-metropolis-15' },
+      { settType: 'metropolis', seed: 'u7p-metropolis-21' },
+      { settType: 'metropolis', seed: 'u7p-metropolis-26' },
+      { settType: 'metropolis', seed: 'u7p-metropolis-27' },
+      { settType: 'metropolis', seed: 'u7p-metropolis-28' },
+    ], ({ settType, seed }) => {
+      const born = bear(settType, seed);
+      expect(seatLaw.resolveSeatLawVersion(born), `${seed}: born dark`).toBe(1);
+      const after = dmTransfer(born, seed, TAKER);
+      // the holder is there to read (holderOf does not gate on the law), so the stand-down is the law's
+      const owned = holderOf(after, OWNER).holderName;
+      expect(owned === null ? [] : [owned], `${seed}: a holder stands apart on the law-1 record`).toHaveLength(1);
+      expect(reads(after), `${seed}: law 1, the reader's`).toBe(today(() => reads(after)));
+      expect(reads(after, OWNER), `${seed}: law 1, the owner's`).toBe(today(() => reads(after, OWNER)));
+      // the control: the same record under the seat law, and the seam moves the reads
+      const lit = withLaw(after, 2);
+      expect(seatLaw.resolveSeatLawVersion(lit), `${seed}: the control is law 2`).toBe(2);
+      expect(reads(lit, OWNER), `${seed}: the control moves (the differential can see)`).not.toBe(today(() => reads(lit, OWNER))); // anchored: the same seam on the law-2 twin moves the reads, so the law-1 equality above is not vacuous
+    }), 'law 1 on the six');
+  }, 300_000);
 });
 
 describe('4. the holder is the form\'s own row: unchanged', () => {
