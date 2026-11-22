@@ -392,7 +392,10 @@ export function governanceAccountOf(settlement, opts = {}) {
       });
       /** @type {Record<string, string>} */
       const meritSlots = { event, place, seat: ruler, ...band };
-      if (line) { sentences.push(textOf(line).replace(/\{(\w+)\}/g, (_m, k) => meritSlots[k] ?? '')); meritPrinted = true; }
+      if (line) {
+        sentences.push(textOf(line).replace(/\{(\w+)\}/g, (_m, k) => meritSlots[k] ?? ''));
+        meritPrinted = true;
+      }
     }
     // THE LASTING REASON (FORTUNE U7b; the chair's words E57 and E57 amended, 2026-11-22, vetoable by the owner): where
     // `meritsOf` credits 'lasting', the place's age is named after the standing and after the first merit's sentence. The
