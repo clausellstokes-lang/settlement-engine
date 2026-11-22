@@ -1,6 +1,6 @@
 # U7-PAGE REPORT (CS13): under the seat law, the chain names the holder and its person. Builder BU7, for SEAT-10.
 
-Written 2026-11-22T09:12:32Z (`date -u`). Branch `u7` in the scratch clone, cut at `46339e5c7`. The work is in `3060cb1ee` and `8634e9d9d`. This report is the commit after them; its sha is in the final message.
+Written 2026-11-22T09:12:32Z (`date -u`). Branch `u7` in the scratch clone, cut at `46339e5c7`. The work is in `3060cb1ee`, `8634e9d9d` and `9b32160b0`. This report is the commit after them; its sha is in the final message.
 
 Every claim is labelled: **CONFIRMED** (run) or **PLAUSIBLE** (read).
 
@@ -48,8 +48,10 @@ I read "the HOLDER's person: `holderOf(…).person` where the record names one" 
 | `u7p-metropolis-27` | Grand Council | The Guild Alliance → Merchant Guilds | Conrad Brandt | **Katharina Rosenfeld** |
 | `u7p-metropolis-28` | Grand Council | The Trade Compact → Merchant Guilds | Josef Frank | **Notburga Weber** |
 
-- **Red first** (on the unchanged source): 8 failed, 7 passed. Each of the six failed on `expected '<old person>' to be '<holder's person>'`. Arm 2's two cases failed on the owner's read. CONFIRMED.
-- **Green:** 16 of 16. CONFIRMED.
+- **Red first, as first written** (`it.each`, 07:56:53Z–07:57:05Z, unchanged source): 8 failed, 7 passed. Each of the six failed on `expected '<old person>' to be '<holder's person>'`. Arm 2's two cases failed on the owner's read. CONFIRMED.
+- **Red first again, in the final shape** (`9b32160b0`'s test against `46339e5c7`'s `powerStrata.js`, in the flipped copy, 09:40:50Z–09:41:31Z): arm 1 reported "6 of 6 case(s) failed", each on its person by name. Arms 1b and 2 were red, arms 3 and 4 green. CONFIRMED.
+- **Why the shape changed:** the tables first ran as `it.each` with a row parameter. `sovereigntyLightingContract.walker` parks such a file, so its each-family count rose past the ceiling of 106. Arms 1, 2 and 3 are now one parameterless test each, with every row run through `collectSeedFailures`. The assertions are unchanged.
+- **Green:** 5 of 5 tests (all 6 + 1 + 2 + 6 + 1 cases). CONFIRMED.
 - **What each case asserts:**
   - the six are listed by name; the probe's report gave only some of them (`bu7work/seeds.mjs`, run 07:49:16Z–07:49:57Z);
   - each cured person is a literal, a member of `Merchant Guilds` at rank 1;
@@ -97,22 +99,44 @@ The non-call rows are PLAUSIBLE (grep and read). No caller is the owner's own do
 
 **For the chair (outside the manifest, not touched): `coherence/seatHolderFindings.js :: seatHolderFindings`.** On the six, it now raises `seat_outside_governing_faction` ("Felix Naumann is not of Town Mayor"), because it checks the chain's person against the FORM's members. CONFIRMED: 6 of the 10 kept-form transfers, 0 births. It is wired into no gate. Under the seat law it should read the holder's house. That is a reader change for a later unit.
 
-## GREEN, WITH COUNTS (clone, at `8634e9d9d`, shared tier, `--maxWorkers=2`, run 09:05:37Z–09:10:42Z) — CONFIRMED
+## GREEN, WITH COUNTS (clone, at `9b32160b0`'s files, shared tier, `--maxWorkers=2`, run 09:42:36Z–09:48:32Z) — CONFIRMED
 
-- **`tests/domain/seat/` whole:** 6 files, 182 tests, all green.
-  - `holderOfSeat` 51, `seatChainHolder` 16, `seatContest` 25, `seatLawSavedTown` 6, `seatTable` 45, `seatTransfer` 39.
+- **`tests/domain/seat/` whole:** 6 files, 171 tests, all green.
+  - `holderOfSeat` 51, `seatChainHolder` 5, `seatContest` 25, `seatLawSavedTown` 6, `seatTable` 45, `seatTransfer` 39.
 - **Every other test file under `tests/` that names `powerStrata`** (outside `tests/lint`): 21 files, 160 tests, all green, none RED-AT-LINE.
   - `architecture/engineCoreLazyEdge` 3;
   - `components/powerSeatRender` 5, `powerStrata` 8, `powerTabSupport` 19, `seatHolderOnThePage` 3, `seatWordsOnce` 8;
   - `domain/editPools` 17, `ladderTopRungLeader` 3, `powerProseNameInSentences` 12, `dossier/seatHolder` 13, `people/dualHatReaders` 5, `people/seatKeeper` 4;
   - `generators/bar3PeoplePowers` 5, `terrainPoolsSeat` 2, `people/castDerived` 6, `people/nobleFaces` 3, `people/seatHolderCard` 6, `people/seatKeeperContender` 3, `people/successionClaimants` 6, `power/bar2PeoplePowers` 11;
   - `pdf/pdfParityFixes` 18.
-- **Combined run:** 27 files, 342 tests, 0 failed. The same set was green at `3060cb1ee` too (08:18:51Z–08:24:18Z).
+- **Combined run:** 27 files, 331 tests, 0 failed. The same set was green at `3060cb1ee` (08:18:51Z–08:24:18Z) and at `8634e9d9d`, with 342 tests there because the old shape counted cases as tests (09:05:37Z–09:10:42Z).
+- **eslint** on both files at `9b32160b0`: exit 0.
 - **The two `tests/lint` files that name `powerStrata`** (`settlementMapSurfaceAllowlist.walker`, and `styleLaw.walker` through its baseline) ran in the whole run below.
 
 ## `tests/lint` WHOLE
 
-LINT-RESULT-PLACEHOLDER
+Run once at the final tree (`9b32160b0`'s files, shared tier, `--maxWorkers=2`, 09:52:02Z–10:15:52Z). CONFIRMED.
+
+**Totals:** 223 files (219 passed, 4 failed), 3,352 tests (3,348 passed, 4 failed).
+
+**The line's own reds** (RED-AT-LINE rows, unmoved; neither file reads `powerStrata`):
+- `proseComposed.walker` :: "A0b … THE SHIPPED CORPUS READING, printed and held SHRINK-ONLY" (2322 against 2103);
+- `proseCorpusBytes` :: "RAW is EXACT: above fails, below demands the row be lowered";
+- `proseCorpusBytes` :: "GZIP sits inside the 1 % band around its committed figure".
+
+**The clone's environment:**
+- `ledgerCitationIntegrity.test.js` fails to load: `git ls-tree … refs/heads/review-fixes-2026-07-08` finds no such ref in the scratch clone.
+- I did not fetch it: the clone's source is the read-only checkout.
+
+**Mine, and NOT cured here (outside the manifest; STOPPED by symbol):**
+- **The red:** `sovereigntyLightingContract.walker` :: "THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed": "the estate's file count moved … expected 3749 to be 3748".
+- **Why:** the brief's one new test file adds one file to the lighting census.
+- **The cure:** re-freeze `tests/lint/.lighting-census-baseline.json` by its door (`LIGHTING_CENSUS_REFREEZE=… npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js`, on a clean committed tree), as `a94f7d097` did for SAVED-SEAT-REDERIVE. That file is the integrator's to write.
+
+**Mine, and cured here:**
+- **The red:** an earlier whole run (09:13:36Z–09:38:14Z, at `010de1a62`) also failed "⛔ THE EACH-FAMILY PARK DEBT ONLY SHRINKS". The cause was the test's row-parameter `it.each`.
+- **The cure:** `9b32160b0` reshapes the tests, and that arm is green above.
+- **Checked beside it** (09:40:12Z–09:40:25Z): `seedLoopTotality.walker` 9/9 and `negativeAssertionAnchor.walker` 9/9.
 
 ## THE FLIPPED COPY
 
@@ -125,8 +149,8 @@ src/domain/seat/seatLaw.js:77            NEW_SETTLEMENT_SEAT_LAW_VERSION = DEFAU
 src/domain/seat/seatCircumstances.js:50  SEAT_CONTEST_LIT = false  ->  true
 ```
 
-- **Run at `8634e9d9d`'s files** (09:10:52Z–09:11:16Z): `tests/domain/seat/`, 6 files, 179 passed and 3 failed. CONFIRMED.
-  - **The new file:** 16 of 16 green.
+- **Run at `9b32160b0`'s files** (09:41:39Z–09:42:29Z): `tests/domain/seat/`, 6 files, 168 passed and 3 failed. CONFIRMED. At `8634e9d9d`, the same run gave 179 passed and 3 failed.
+  - **The new file:** 5 of 5 green.
   - **The three reds** are all in `seatContest.test.js`, the dial's own dark pins:
     - "(5) … the dial is dark and every factor of the registered table reads 1";
     - "(5) … under the law, dark: the kind read is today's";
@@ -153,4 +177,4 @@ Two surfaces are left without a word that ties the form to the holder. These dra
 
 ## SHA
 
-The work: `3060cb1ee`, `8634e9d9d`. The report: the commit after them, named in the final message. Not pushed.
+The work: `3060cb1ee`, `8634e9d9d`, `9b32160b0`. The report: the commit after them, named in the final message. Not pushed.
