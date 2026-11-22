@@ -1,0 +1,32 @@
++   "server gallery g:011 dm=true: relation [\"Town Council\",\"Fishers\"] captureState \"equilibrium\"",
++   "twin gallery g:011 dm=true: power Town Council captureState \"equilibrium\"",
++   "twin gallery g:011 dm=true: relation [\"Town Council\",\"Fishers\"] captureState \"equilibrium\"",
++   "server gallery g:101 dm=true: power Town Council captureState \"equilibrium\"",
++   "server gallery g:101 dm=true: relation [\"Town Council\",\"Fishers\"] captureState \"equilibrium\"",
++   "twin gallery g:101 dm=true: power Town Council captureState \"equilibrium\"",
++   "twin gallery g:101 dm=true: relation [\"Town Council\",\"Fishers\"] captureState \"equilibrium\"",
++   "server gallery allOpen dm=true: power Town Council captureState \"equilibrium\"",
++   "server gallery allOpen dm=true: relation [\"Town Council\",\"Fishers\"] captureState \"equilibrium\"",
++   "twin gallery allOpen dm=true: power Town Council captureState \"equilibrium\"",
++   "twin gallery allOpen dm=true: relation [\"Town Council\",\"Fishers\"] captureState \"equilibrium\"",
++ ]
+
+ ❯ tests/security/galleryVeilTell5.pglite.test.js:202:17
+    200|     expect(keptServed).toBeGreaterThan(0);
+    201|     expect(tooth).toEqual([]);
+    202|     expect(bad).toEqual([]);
+       |                 ^
+    203|   }, ARM_TIMEOUT_MS);
+    204| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 1 skipped (2)
+   Start at  02:45:56
+   Duration  5.92s (transform 1.00s, setup 49ms, import 73ms, tests 5.66s, environment 0ms)
+
+[gate-tail] end:  02:46:02 up  3:32,  0 user,  load average: 1.80, 4.22, 3.76
+[gate-tail] full log: /tmp/gate-tail.15470.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
