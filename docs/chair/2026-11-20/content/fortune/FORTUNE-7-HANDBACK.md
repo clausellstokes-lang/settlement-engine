@@ -11,18 +11,19 @@ BESIDE FORTUNE-6, which still finishes "FORTUNE <commit>" on `lane/fortune-6-202
 | branch | tip | state |
 |---|---|---|
 | `lane/fortune-7-2026-11-22` | b333c9b2c (merge of 8cc9212fd, FORTUNE-6's landed tip, point 98) + docs | this lane, WHOLE since 08:27 UTC |
-| `lane/fortune-7-2026-11-22-u7` | (the builder's, worktree /home/user/wt-u7; pushed as `-u7-wip` if cut short) | U7's builder, from b333c9b2c |
+| `lane/fortune-7-2026-11-22-u7` | 659bf4528 (local, MERGED at 3950570e8) | U7's builder branch |
+| `lane/fortune-7-2026-11-22-u7b` | (the builder's, worktree /home/user/wt-u7b; pushed as `-u7b-wip` if cut short) | U7b's builder, from 3950570e8 |
 
 | unit | state |
 |---|---|
 | 0(a) the six p90 ages | DONE, `measures/lasting/AGES.md`: all six equal E32's, dark and lit; the law moves no age |
 | 0(b) the veil as a measure | DONE, `measures/lasting/VEIL.md`: `history.age` served unchanged on 11 of 11 shared projections, 156 of 156 births; the SQL twin by read |
 | 0(c) the sentence draft | RULED (E57): the chair's three lines; re-cut for its eye as `measures/sentences/LASTING-RULED.md` (nine paragraphs, the 36 pairs judged: one sits badly, first merit B then LASTING B) |
-| 1 U7 LASTING | BUILDER CUT 08:3x UTC on b333c9b2c (prompt: scratchpad `U7-builder-prompt.txt`, the brief `briefs/U7-LASTING.md`) |
-| 2 U7b the sentence | BRIEFED on E57 (in the brief verbatim); cut when the chair names the commit, AFTER U7 merged (shared registers) |
+| 1 U7 LASTING | MERGED 3950570e8, the diff read whole. Commits 8f816eb50 (the veil proof), 2ba21ccd5 (the merit: `MERIT_NAMES` + `lasting`, `lastingSizeOf`, `hasLasted`; `FORTUNE_LAW_TUNING.standing.lastingAgeBySize` DRAFT), 3712c4ed7 (OUTSIDE the manifest, TAKEN: two U5 test files that read `MERIT_NAMES` as one merit, each kept to its own meaning), 0e6221b5a / d57f3abf5 / 659bf4528 (the tuning register's DRAFT row, the tuning inventory, the lighting census, by their doors). RE-RUN BY ME: RED at b333c9b2c with the tip's tests, 6 U7 titles; the veil test green there and red under a plant (`delete history.age` on the WIDEST projection), then restored. GREEN at the merge: the 4 files 50/50; `tests/lint` WHOLE 4 failed / 3358 passed: the line's three (`proseComposed` A0b, `proseCorpusBytes` RAW and GZIP) and writer-reach `settType on _config` gaining `foundry` (FOR THE CHAIR, rule 9). The builder's: D = BANDS.md's D byte for byte (76 merited: 43 lasting only, 3 both); confinement 525/525, 720/720; first paint raw +0, gzip -16, Brotli +17 (hash entropy, files byte-identical normalised); WORKER +431 (2,676,534 -> 2,676,965); no rung 47 (no new key) |
+| 2 U7b the sentence | BUILDER CUT on 3950570e8 (prompt: scratchpad `U7b-builder-prompt.txt`) |
 | 3 the lit re-measure, 4 the line + rule 8 + the flip census | NOT STARTED |
 
-NEXT STEP: read U7's diff whole at its return, re-run its red and green, merge; then cut U7b (prompt ready).
+NEXT STEP: read U7b's diff whole at its return, re-run its red and green, merge; the chair's ruling on writer-reach; then unit 3.
 
 ## 2. Rulings in force
 
@@ -46,6 +47,14 @@ FORTUNE-6's section 2, items 1 to 10, stand. Added since:
 - LASTING's input is `history.age` (VEIL.md). The draft sentence reads `name`, `history.age` and the governing power's
   sentence name, which chooses no wording.
 - No vocabulary or class-table row is asked.
+
+## 3b. FOR THE OWNER'S SIGNING (the lane's DRAFT tables and size rises)
+
+- `FORTUNE_LAW_TUNING.standing.lastingAgeBySize`: thorp 269, hamlet 108, village 225, town 276, city 441, metropolis 731
+  (years; each size's p90 of `history.age`; AGES.md). In plain words: a hamlet's lasting age (108) is below a thorp's (269)
+  because the age table draws a hamlet's age from 30 to 120 years and a thorp's from 15 to 300 (`AGE_BY_TIER`). That is a
+  property of the age's generator, told to the chair, not cured.
+- The worker, U7: +431 bytes (the merit's code; the worker runs the birth).
 
 ## 4. Hazards
 
