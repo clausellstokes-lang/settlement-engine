@@ -1375,6 +1375,23 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   lasting effect: reported, read at that GO. PAGE-12 IS PARKED AGAIN. VEIL-34 SEATED AT 16:11 UTC
   (session_01ACmDYZ5m4beq8gsAMyMoZd; `prompts/VEIL-34.txt` as sent). THE NEXT PLACE IS STACK-99's: point 99
   CLOSE-FIXTURE, point 100 FORTUNE-B, point 101 PAGE-BAR7, point 102 SEAT-B when it comes.
+- E103 · "SEAT-B 9e3feca9f" ACCEPTED; STACK-99 SEATED WITH FOUR LANES UNDER ONE GATE (2026-11-22 16:23 UTC). SEAT-10's line: `lane/seat-10-2026-11-21` at 9e3feca9f05bfd1d175decf11c727e6e78b4441b (its code is
+  c61571627's: U6, U7 with E81's tests, U5-STALE, the line at point 98 merged at 8a40fdbd3); two register
+  conflicts at that merge (the lighting census; `HAND_CEILING` 76); THE DARK PROOF c110dd85b to c61571627 EQUAL
+  (07873739…, 1,245 births); rule 8 under E90: 699 files, 9,648 tests, 18 red, all on the 63 rows; first paint
+  1,184,741 / 376,992 / 316,535 (+670 / +236 / +111: U5-STALE's +661 named), the worker 2,708,894 (+4,577), the
+  engine chunk 932,367 (+2,695): for the owner, signed by nobody; its paper flip list (`FLIP-LIST.md`: the census's
+  10 pins and 12 born rows; about 10 files for U6's lines, 9 for U7's card and chain); FOR THE OWNER'S EYE:
+  `briefs/U7-OWNER-VIEW.md` (u7p-town-8 and u7p-town-2 at birth, u7p-metropolis-15 after a transfer: the ruler card
+  and the governance paragraph, dark beside lit) and `bar/BAR.md`'s two tables (the holder's standing line is one of
+  five in nearly every city). Its count about 575,000: it is done unless a red of its own shows at the gate.
+  THE CHAIR TRIAL-MERGED THE FOUR LANES ON ITS OWN MACHINE (`git merge-tree`, commits by `commit-tree`, no ref
+  moved): the only conflicts are the lighting census at every point and, at SEAT-B, `HAND_CEILING` (77 with
+  fortune's row). STACK-99 SEATED AT 16:22 UTC (session_01ACmDYWhdEXf7vcmpySd5Yw; `prompts/STACK-99.txt` as sent)
+  on the line's tip c110dd85b: POINT 99 the close's fixture cure (6f579f0e7), POINT 100 FORTUNE-B (effdb3480e),
+  POINT 101 PAGE-BAR7 (b6aa8cb78: it cures the red list's rows 63 and 64), POINT 102 SEAT-B (9e3feca9f); "GATE"
+  given in the prompt. THE SIX NOW: VEIL-33, VEIL-34, FORTUNE-7 (U8's cure), DAILY-3, CLOSE-1, STACK-99. PARKED:
+  PAGE-12 again, and the nine others. SEAT-10 done.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -1939,3 +1956,4 @@ LIFE PAGE stand unless he changes them (a saved AI account stays visible; the se
 | TRAD-6 | session_01ACmDYYaZ8cU8ZYJb7BBw95 | `lane/trad-5-2026-11-20` b97fd16f7 | `lane/trad-6-2026-11-22` | the traditions lane: unit 13's failures named, the 292 bytes itemized, "TRAD"; it merges NOTHING of the line |
 | STACK-98 | session_01ACmDYZ114b3MB1JeLNpvhH | `lane/stack-97-wip-2026-11-22` (its base is STACK-97's tip WITH its register commits: the chair sends "BASE <commit>") | `lane/stack-98-wip-2026-11-22` | A LANDING ON ITS OWN MACHINE: fortune at 8cc9212fd as point 98; E53's conflict classes as amended by E61. DONE (E85): tip 7c03296d8, joined to the line by 4799b293f; no further run |
 | VEIL-34 | session_01ACmDYZ5m4beq8gsAMyMoZd | `lane/veil-33-2026-11-22` as it stood at 16:11 UTC on 2026-11-22 (beside VEIL-33) | `lane/veil-34-2026-11-22` | the share veil's next writer (E89, E92, E102): reads in, re-makes the pool, prepares R5-DESC and R4-IDS; the one writer of 212 from VEIL-33's hand-over line: R5-DESC, R4-IDS, (iv), (v), (vi), IMPORT-DOOR, "R3" |
+| STACK-99 | session_01ACmDYWhdEXf7vcmpySd5Yw | the working line `lane/join-2026-11-14` at c110dd85b (point 98) | `lane/stack-99-wip-2026-11-22` | A LANDING ON ITS OWN MACHINE (E103): points 99 to 102 under one gate: the close's fixture cure, FORTUNE-B, PAGE-BAR7, SEAT-B; the chair alone moves the line |
