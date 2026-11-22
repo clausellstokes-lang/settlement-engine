@@ -65,7 +65,8 @@ This sitting: unit (viii), steps 2 and 3 assigned. **NO RED AND NO CURE WRITTEN*
   converse 1 passed); tests/lint WHOLE after the reds (08:04:23; `lint-whole-reds.txt`): 18 files / 26 tests failed: the
   sixteen standing (the seat's 3cca025b8 list, 22 tests), mine crimeTypesReaders (3, red by design) and
   netCurrentExtractorAnchor (1: my walker's unanchored SQL lookup, cured <this commit>, both re-run: 7 passed, the 3
-  red by design); CURE part 1 (212 + the twin + the registry row) <this commit>; the reader and the arm to come.
+  red by design); CURE part 1 (212 + the twin + the registry row) 5c727f4b3; CURE part 2 (the ONE reader, the import's save,
+  the evidence row) <this commit>; the arm, the pglite green, the build, lint whole, typecheck, eslint to come.
 
 ## RECEIPTS
 - 212 unchanged: `8688ddb6148e84baaeee6f9cdcd89fec40a382c390f44133affa15ae66cc5a3a`. No template made, no database touched, no

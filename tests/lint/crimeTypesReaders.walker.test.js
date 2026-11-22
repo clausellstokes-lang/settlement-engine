@@ -43,7 +43,7 @@ const PDF_WHY = 'the PDF view model and its sections run on the viewer\'s OWN sa
 
 /** @type {Readonly<Record<string, { n: number, verdict: 'one-reader' | 'veil' | 'page-copy' | 'own-record' | 'owner-only' | 'not-a-read', why?: string }>>} */
 const REGISTER = Object.freeze({
-  'src/domain/veil/pageRederive.js :: rederiveCrimeTypes': { n: 3, verdict: 'one-reader' },
+  'src/domain/veil/pageRederive.js :: rederiveCrimeTypes': { n: 4, verdict: 'one-reader' },
   'src/domain/display/galleryWithholdAlways.js :: withholdAlways': { n: 1, verdict: 'veil', why: 'withholds the key on every non-owner read (registry: safety.crimeTypes)' },
   'src/domain/display/galleryVeil.js :: GROUPING_REMOVERS': { n: 1, verdict: 'veil', why: 'the types\' grouping\'s remover (the server\'s _gallery_veil_grouping deletes the same key)' },
   'src/domain/display/galleryRosterChoices.js :: applyRosterChoices': { n: 1, verdict: 'veil', why: 'the services rule reads `pub`\'s list (the projection the veil ran on) by CRIME_TYPE_RAISERS: the owner\'s input to the veil, never sent' },

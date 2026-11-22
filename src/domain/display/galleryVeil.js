@@ -861,11 +861,14 @@ export function veilGroupingsOf(settlement) {
  * @type {Readonly<Record<string, (s: Rec) => boolean>>}
  */
 export const GROUPING_OPEN_EVIDENCE = Object.freeze({
-  // GROUPING_REMOVERS['block:defense.criminalStructure'] deletes these two keys (211 deletes the same pair);
-  // generators/safetyProfile.js returns both, arrays, on every town.
+  // GROUPING_REMOVERS['block:defense.criminalStructure'] deletes the operations list with the crime list (211 deletes the
+  // same pair); generators/safetyProfile.js returns it, an array, on every town (VR29 keeps it one on every read). R3-TELL-8:
+  // the crime list is withheld on every read (212 :: _gallery_veil_withhold_always), so the evidence is the operations list
+  // alone: open exactly where it is an array, on 6,528 of 6,528 measured pages (TELL8 1e); the page's ONE reader re-derives
+  // the crime list only there (pageRederive.js :: rederiveCrimeTypes).
   'block:defense.criminalStructure': (s) => {
     const sp = recAt(recAt(s, 'economicState') || {}, 'safetyProfile');
-    return !!sp && Array.isArray(sp.criminalInstitutions) && Array.isArray(sp.crimeTypes);
+    return !!sp && Array.isArray(sp.criminalInstitutions);
   },
 });
 
