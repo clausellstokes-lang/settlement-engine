@@ -1,0 +1,35 @@
+     × V7-2 THE PRESSURE SENTENCE, which the record ties to no one tie: it goes by the two ends it names; where no stress and no recentConflict accounts for it; and by the words, current and stored, in both directions. The stress's line, recentConflict and the open tension itself stay 2173ms
+ FAIL  tests/security/galleryVeilHandRows.pglite.test.js > COHERENCE-VEIL-10: the veil's design on rows written by hand (REVIEW-VEIL-7, V7-1 to V7-10) > V7-2 THE PRESSURE SENTENCE, which the record ties to no one tie: it goes by the two ends it names; where no stress and no recentConflict accounts for it; and by the words, current and stored, in both directions. The stress's line, recentConflict a
+ Test Files  1 failed | 2 passed (3)
+      Tests  1 failed | 79 passed (80)
+- []
++ [
++   "STAYS: the power structure's recentConflict, veil/gallery: the sentence is undefined",
++   "STAYS: the power structure's recentConflict, veil/link: the sentence is undefined",
++   "STAYS: the power structure's recentConflict, veil/import: the sentence is undefined",
++   "STAYS: the power structure's recentConflict, veil/client: the sentence is undefined",
++   "STAYS: the power structure's recentConflict, dm/gallery: the sentence is undefined",
++   "STAYS: the power structure's recentConflict, dm/link: the sentence is undefined",
++   "STAYS: the power structure's recentConflict, dm/import: the sentence is undefined",
++   "STAYS: the power structure's recentConflict, dm/client: the sentence is undefined",
++ ]
+
+ ❯ tests/security/galleryVeilHandRows.pglite.test.js:945:17
+    943|       }
+    944|     }
+    945|     expect(bad).toEqual([]);
+       |                 ^
+    946|     expect(differs).toEqual([]);
+    947|   }, ARM_TIMEOUT_MS);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 2 passed (3)
+      Tests  1 failed | 79 passed (80)
+   Start at  21:48:26
+   Duration  2024.94s (transform 4.35s, setup 72ms, import 639ms, tests 2023.86s, environment 0ms)
+
+[gate-tail] end:  22:22:11 up  1:26,  0 user,  load average: 2.25, 1.80, 2.25
+[gate-tail] full log: /tmp/gate-tail.11633.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
