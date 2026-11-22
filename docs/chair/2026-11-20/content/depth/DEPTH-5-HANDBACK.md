@@ -18,6 +18,14 @@ Branch `lane/depth-5-2026-11-22`, started at 96e193785 (DEPTH-4's saved tip, ver
   `tests/lint/presumptionClasses.register.json`. Tables: `factVocabulary.js :: FACT_DIMENSIONS` (union: the line's three rows, then
   ours three); `registeredWords.js`: the line's `HOUSE_FAMILY_KINDS` and our `HOUSE_FAMILY_ATOMS`, disjoint keys: both kept, the
   house entry's `atoms` the two concatenated and its `leaf` the line's where a kind answers, ours where an atom does (to the chair).
+- UNIT 2 PREPARED (the line's tip for it: 2486d1301, the chair's 08:54): trial merge re-done at 2486d1301 (eight conflicts, all
+  both-add unions or registers; resolutions RECORDED BY RERERE in the shared .git: rerere.enabled is set in the trial worktree's
+  config only, so enable it on the main checkout before the real merge). My walkers read nothing of the trouble pool (15/15 green).
+  THE TROUBLE THEMES: RULED E63 (09:02): TYPE ALL 85, on four conditions: (1) the step file names each of the 22 STORED lines with
+  `untyped` -> its theme, cause E54 + E63; (2) the fixture proves nothing else moved (typed answers equal; only `untyped` -> theme,
+  this pool alone; one plant shown red); (3) said (09:1x): nothing a reader sees moves (retention is dark; the pick reads no theme);
+  (4) the table `trouble/TROUBLE-THEMES-DRAFT.tsv` (922897c25) is with the chair, who answers with the rows it changes. Alignment:
+  to the COMPOSED pool (`troubleHookPool`); PAGE-12's 24 appended lines are typed by whichever of us lands later.
 - NEXT: read each builder's diff whole, re-run red/green, merge; the digest door; the fork register by its door; two-tree; tests/lint whole.
 
 ## RED 1, A3e, INVESTIGATED (2026-11-22, DEPTH-5)
