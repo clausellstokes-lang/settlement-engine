@@ -1,4 +1,4 @@
-# PAGE-12's hand-back: THE TROUBLE HALF (the eighth chair's seat; kept current at every push; last written 2026-11-21 23:43 UTC by `date -u`)
+# PAGE-12's hand-back: THE TROUBLE HALF (the eighth chair's seat; kept current at every push; last written 2026-11-22 01:18 UTC by `date -u`)
 
 A successor reads THIS, then the briefs it names (under `briefs/`), then `PAGE-10-HANDBACK.md` only where this file sends it.
 PAGE-12 integrates; builders build (the Agent tool, the seat's own tier); a diff is read once, at the merge.
@@ -9,15 +9,16 @@ PAGE-12 integrates; builders build (the Agent tool, the seat's own tier); a diff
 - MERGED (PAGE-10's, unproven at the tip until unit 1): causes 3411c9c83; first-paint pin afacca8a6; hooks 81076db2d; HOOKS-CURES A+B 12c211dc9; line a64619510 at 6f84deba7.
 - BUILT, UNMERGED: CAUSES-PARITY M 3a953c6d3 + B-wip 6a1120efd (`lane/page-10-2026-11-20-parity-wip`); HOOKS-CURES C-wip 1da4c7c56 (`lane/page-10-2026-11-20-cures-wip`).
 - UNIT 1 PROVEN: `tests/lint` whole at cbbe87154 GREEN, 220 of 220 files, 3271 of 3271 tests (23:35 UTC; log `/home/user/page12-logs/lint-tip.log`).
-- IN FLIGHT: unit 2, the parity builder (brief `briefs/CAUSES-PARITY-2.md`), worktree `/home/user/wt-parity12`, branch `lane/page-12-2026-11-21-parity` = M cherry-picked (f1b55a3ae) on 3f17bb3a8 + PAGE-10's arm uncommitted; B first; H's leave GRANTED by the chair 23:39 with conditions (ruling 8), relayed to the builder.
-- NEXT: read the parity diff once, red/green re-run, merge; ONE line to the chair; then unit 3 (cure C).
+- UNIT 2 MERGED: the parity (B 76540c08f, H fdba43c84, W 08315200e, F 88b75c298, on M f1b55a3ae) merged at b79dc3735; diff read whole once; red re-run by PAGE-12 on f1b55a3ae's tree with the tip's three test files: 10 failed | 35 passed; green at 88b75c298: 45/45 (logs `/home/user/page12-logs/parity-red.log`, `parity-green.log`). The lighting census refrozen by its own door at 62c0fdb9d (files 3730 -> 3731, parked 476 -> 477, titles 31396 -> 31400, suiteTitles 8702 -> 8705; verified 34/34); the wiring censuses green.
+- A LANE RED FOUND (ruling 13): `tests/domain/bar6CrimeOneReading.test.js` (c), red on the lane before the parity, green at the line a64619510, NOT on RED-AT-LINE.tsv: cured on the lane after cure C (the C2 builder's step 6).
+- NEXT: unit 3 (cure C, brief `briefs/HOOKS-CURES-C2.md`, worktree `/home/user/wt-cures12` from the lane's tip).
 
 ## 2. Units (the eighth chair's order, PAGE-12.txt)
 | # | unit | state | commit | next |
 |---|---|---|---|---|
 | 1 | PROVE THE TIP (`tests/lint` whole) | GREEN 220/220, 3271/3271 | cbbe87154 | done |
-| 2 | THE PARITY (B, H the five house rows, W, F) | BUILDER OUT 23:3x | `-parity` from 3f17bb3a8 | read once, merge |
-| 3 | CURE C (the mixed key) | not dispatched | 1da4c7c56 wip | fresh builder from 13ba319e0 |
+| 2 | THE PARITY (B, H the five house rows, W, F) | MERGED, red 10 / green 45 re-run by PAGE-12 | b79dc3735 (census 62c0fdb9d) | done |
+| 3 | CURE C (the mixed key) + the bar6 (c) reseat | dispatching | 1da4c7c56 wip | builder from the lane's tip |
 | 4 | THE THEMES' ROWS | WAITS: PAGE-10's hand-back §2 row (3): built ONLY after the depth lane's themes unit is on the working line (the chair names the commit); at a64619510 `src/domain/hookThemes.js` is not yet re-keyed by `textKey` | draft 5a88385f7, ruling 636d5f68a | the chair's commit (the chair 23:39: NOT owed before "PAGE-TROUBLE") |
 | 5 | CLOSING MEASURE + OWNER'S PLAIN FILE | brief `briefs/CLOSE-MEASURE.md` | | after 2 and 3 |
 | 6 | THE LINE AGAIN, RULE 8, "PAGE-TROUBLE" | | | last |
@@ -35,9 +36,14 @@ PAGE-12 integrates; builders build (the Agent tool, the seat's own tier); a diff
 9. criminal_power's four SIGNATURES (r2r-city-56 and r2s-religious_conversion-metropolis-0, each under default-veil `toPublicSafe` and `toPublicSafe` full) are LISTED, NOT CURED (the chair, 23:39, AGREED). Why served equals its twin: the default veil hides what makes one criminal organisation rule, so the served document holds rival rings with none ruling. A place born without that ruling organisation holds the same facts and prints the same `rival_rings` sentence, and that sentence reveals nothing the veil hides. The security reader judges it at the join.
 10. BEFORE THE NEXT MERGE OF THE LINE (the chair, 23:39): point 87 put `tests/lint/samenessHideable.walker.test.js` on the line; it reads declared needs. This lane's rows stand there by DECLARED EXEMPTION only, each with the line of code that withholds it, never banked. A merge of the line is ASKED, NEVER REQUIRED: if my own check refuses it, I say so in one line and the chair makes it (COMMON-EIGHTH 10).
 11. COMMON-EIGHTH 7 corrected (the chair, 23:39): only git's REPOSITORY variables are the hazard, not the machine's own `GIT_*`. The wrapper strips all of them, which is harmless.
+12. THE MARK (the chair, 00:12 UTC 2026-11-22): the hand-over mark is 700,000 used tokens (raised from 450,000); at about 620,000 the chair says to finish the unit in hand and bring this file current. Every hour written is read from `date -u` in the same command.
+13. bar6 (c)'s THORP CONTROL MOVED BY THE LANE'S HOOKS (PAGE-12, 01:18 UTC 2026-11-22): `tests/domain/bar6CrimeOneReading.test.js` arm (c) expects `bar0-thorp-calm-rand-34` to store the coordinated hook (`lawBand.js :: COORDINATED_WAVE_HOOK`, C154050, HK1). The lane's pool (`troubleHooks.js`, the chair's ruled lines) makes that hook the template's line 0 among fourteen, drawn by key, no longer first on every crime_wave; so the control's seed moved (red on the lane, green at a64619510). The page stays coherent (the diffuse note reads the stored hooks). CURE, after the mixed key moves the hooks again: the control is reseated on a born seed where the structure is diffuse AND the stored hooks hold the coordinated line, found by search, its expectations unchanged; the move NAMED. For the owner: HK1's premise ("every crime_wave row draws it first", `lawBand.js`'s comment) no longer holds; the comment is the depth lane's or the chair's to reword, not this lane's.
+14. THE HOUSE ATOMS IN `registeredWords.js` (ruling 8 (b)): NONE ADDED. No wording of the five rows says a registered house word (the families hold `assassins' guild`, `outlaw shelter`, `bandit affiliate`; no `black market`, `whisper market` or tunnel word is registered), so there is no word row an atom could sit on, and no test asked. The join list carries `factVocabulary.js`'s five keys and its `HOUSE_KEY_GROUPS` table only.
 
 ## 4. For the joins
 - The veil reader: PAGE-10-HANDBACK §2 hooks row (5 withheld, 6 listed) stands; additions here as they land.
-- The class tables / vocabulary: PAGE-10-HANDBACK rulings 10, 21, 22 stand; ruling 8 here adds five `house` keys (`factVocabulary.js`) and five inline atoms (`registeredWords.js`) when the parity lands.
-- The veil reader: criminal_power's four signatures (ruling 9).
-- Stored figures and goldens moved: PAGE-10-HANDBACK §2 (goldens 422 of 525, plotHooks only: the owner's); additions here.
+- The class tables / vocabulary: PAGE-10-HANDBACK rulings 10, 21, 22 stand; LANDED at b79dc3735: `factVocabulary.js :: house` keys `black_market`, `assassins`, `underground`, `whisper_market`, `outlaws` and the table `HOUSE_KEY_GROUPS` (all eight keys to their `causeHouses` group); `registeredWords.js` untouched (ruling 14).
+- The veil reader, by row (ruling 8 (c)): `crime_wave` rows `black_market` (`house: black_market`), `assassins` (`house: assassins`), `underground` (`house: underground`), `whisper_market` (`house: whisper_market`), `outlaws_near` (`house: outlaws`): each declares a hideable house, each proven by `tests/domain/display/tensionCauseAtoms.walker.test.js` (the law arm per row) and, on a born place, `tests/domain/display/tensionCause.test.js :: a hidden house prints what the place without it prints (CAUSES-PARITY-2 F)` (hxd-city-138). PARITY-SORT re-run at the tip: 294 pairs, FAULT 0 for every row.
+- The veil reader: criminal_power's four signatures (ruling 9); the walker's EXEMPTION list (exact): `crime_wave:criminal_power`, `guild_conflict:guilds_rule`, `outside_debt:merchants_rule` (each reads the powers' roster; no atom answers it; the latter two have no PARITY-SORT pair: the sort covers crime_wave only).
+- force_unpaid_or_cut (B): payCut dropped from the row; on the 900, 0 owner-side sentences moved; two-tree 900 identical. THE GAP for after the deploy: `src/domain/display/guardLineUnderTheLaw.js` still reads `orderForceOf(record).payCut` (PAY_CUT_TWINS).
+- Stored figures and goldens moved: PAGE-10-HANDBACK §2 (goldens 422 of 525, plotHooks only: the owner's); the parity: `tests/domain/tensionCauses.test.js :: DECLARED` (the declarations' pin) 47a99aefd046293b -> 433acc1d899a989a; the lighting census register (62c0fdb9d); no stored record field moved (two-tree, 900 identical).

@@ -25,8 +25,16 @@ to a log, read by its count lines, never through a pipe. Set the ledger ref firs
    `docs/chair/2026-11-20/content/page/measures/page-12/` if it needs a change): top share and second-place share by size,
    before and after, beside PAGE-7's 14.0% city / 14.7% metropolis; name the city's top hook sentence and its share.
 5. NAME every stored fingerprint or golden that moves (test file and title), signing none.
+6. (PAGE-12, added 2026-11-22 01:19 UTC; the hand-back's ruling 13) THE bar6 (c) RESEAT, a SECOND commit after C's:
+   `tests/domain/bar6CrimeOneReading.test.js` arm (c) is red on the lane (green at the line a64619510): its control
+   `bar0-thorp-calm-rand-34` no longer stores the coordinated hook (`lawBand.js :: COORDINATED_WAVE_HOOK`), because the lane's
+   pool draws that line by key among fourteen. AFTER C (the mixed key moves the hooks again), and in that file alone, in arm
+   (c)'s C154050 block alone: reseat the control on a born seed (birthed as the file's own `town()` births it) where
+   `criminalStructureKeyOf` is `'diffuse'` AND `crimeWaveCoordinated` holds, found by a search you show (the seeds tried, the
+   one chosen); the three expectations stay as they are. If no seed of a fair search (say 600) holds both, STOP and report
+   it: do not weaken the arm. Touch no `src` file for it. Name the move in the commit (the old seed, the new, why).
 
-GREEN: BUILDER-RULES rule 5 whole (the lighting census and the wiring census are PAGE-12's: report their reds by name). ONE
-commit by explicit paths with the receipts, ending with the attribution lines your seating message gives; never push, merge,
+GREEN: BUILDER-RULES rule 5 whole (the lighting census and the wiring census are PAGE-12's: report their reds by name). C's
+commit, then step 6's, each by explicit paths with the receipts, ending with the attribution lines your seating message gives; never push, merge,
 amend another's commit or open a pull request. Reply at most 250 words: commit; red seen and green; the confinement figures by
 field; the bar before/after; goldens moved by name; every judgment the briefs did not settle.
