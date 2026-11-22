@@ -127,3 +127,22 @@ contest (b) reports `namesHidden` on 4 places whose text the probe did not keep:
 211 byte-frozen; 212 and the twin together; red first; all databases local; VR27; read 212 and the registry WHOLE before editing
 either; `tests/lint` whole after any test change; the seat's re-runs add `node scripts/check-full-typecheck.mjs`; never `--no-verify`,
 never a pull request.
+
+## THE CHAIR'S RULING E93 (15:29 UTC, on R5C2's STOP ac809527e): R1, READER B. GOVERNS OVER E92 (4) WHERE THEY DIFFER
+BUILD READER B: `powerStructure.recentConflict` withheld ALWAYS on every shared read (E92 (1), unchanged); ONE page reader
+re-derives it by `generatePowerStructure` over the served page (it calls the engine's own writer, `buildGovernanceLabels`), wired
+where `rederiveCrimeTypes` is, on (viii)'s pattern. CONDITIONS:
+1. THE FIDELITY ARM PINS THE CLASS, NOT A COUNT: every nothing-hidden page reproduces the stored sentence EXCEPT a page whose
+   record shows a house added by a coherence repair AFTER the power step; those are LISTED BY NAME with that cause (today one:
+   `r5c2-m3-hamlet-8`, the Citizen militia); a miss with ANY OTHER cause reds.
+2. THE PROOF OF THE UNIT IS THE DIFFERENTIAL: a hiding read's page sentence equals the page sentence of the same place with the
+   power never there (by construction of B; SHOWN on the seat's pool, both doors, Reveal off and dm); the plant green by the
+   field's ABSENCE from every served payload, both engines; the composed-hosts walker's row green.
+3. TRANSFERS ARE NOT IN THIS UNIT: where the stored sentence is a transfer's, the page prints B's baseline sentence (pre-ruled).
+   "R5-RECENT-T" (a transfer's sentence composed where the served page carries its parts AND the winner's row is served) is the
+   successor's, placed by CLOSE-1's lit count.
+4. The registry's writer for `power.recentConflict` corrected to the two true writers (`governanceNarrative.js ::
+   buildGovernanceLabels` via `generatePowerStructure`, and `rulingPower.js :: transferRulingPower`), not `generateConflicts`.
+5. NO new 212 helper; the rollback untouched (no VR27 question).
+The rest of E92's section stands (red first; 212 and the registry read WHOLE before the first edit; `tests/lint` whole; first
+paint +0 by VERIFY_DIST on vendorPdfLazy and generationWorkerLazy; typecheck, eslint; all databases local; 211 byte-frozen).
