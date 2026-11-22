@@ -13,7 +13,12 @@ branch (never the reverse) and E116's five steps before the "TIP?".
   the chair 19:32.
 - (0) THE INSTRUMENTS AND THE POOL: `/var/tmp/v18/out/v35/chain0.sh` (VEIL-32's `out/v32/chain0.sh`, v35 names, pool
   `/var/tmp/v18/t2/pool-v35`) launched 19:29 in the background; chain1 (the green chain, VEIL-34's shape + Tell8, template `v35tpl`)
-  after it. Figures: PENDING.
+  after it (`/var/tmp/v18/out/v35/after0.sh` -> `chain1.sh`, to `/var/tmp/v18/out/v35/g/done.txt`). Instruments rc=0 19:35
+  (acceptance 40 PASS; the R3 gate HIGHER 0 / EQUAL 79 / LOWER 13 every engine and Reveal). POOL 19:36-19:57, every shard rc=0;
+  verify 45 / 0 differ. AT 3712b2469 (src, supabase, tests = 632968087): GATE-1 4 of 92 at every gated setting, both reads, twin =
+  server (4/4, raw 11/11), controls 0, 7 LOWER BY RULE (the same seven); GATE-2 20 of 40; against the rule 0: EQUAL to PART 35.
+  Typecheck 167/167, eslint 0, walkers + manifest 0, arms Tell3+4+5+8 0, --check 0. Sent to the chair 20:09. (`gates rc=1` is the
+  gate's own RED exit: 4 of 92 remain by design until R3.) The chain's rest: PENDING.
 - (1) R4-IDS: part one (the measure + the red-first `tests/security/galleryVeilIds.pglite.test.js`) is VEIL-34's builder's, on
   `lane/veil-34-2026-11-22-r4ids-wip` (commit from the chair: PENDING). Part two (the cure's brief, two builders R4I-SQL then
   R4I-PAGE): PENDING the measure. The a4b89bf9d family's names (`lane/veil-22-r4-2026-11-20`, NOT GREEN there): server
