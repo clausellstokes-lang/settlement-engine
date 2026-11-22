@@ -95,7 +95,14 @@ f. Then ONE run of the lanes' own test directories, the UNION over every landed 
    lane that touches `src/data/dossierStateProse/` that is every `tests/domain/*StateProse*.test.js`,
    `tests/domain/corpus*Guards*.test.js` and their kin. List the files you added by this rule in your scratch
    directory (`governing-files.txt`). `--maxWorkers=3`, `timeout 7200`.
-g. CLASSIFY EVERY FAILING TEST of d, e and f BY NAME: (1) on `RED-AT-LINE.tsv` (file and title); (2) on the chair's
+f2. THEN EVERYTHING ELSE UNDER `tests/` (added 2026-11-22 10:02 UTC, after CI failed five tests at points 94 to 96 that no gate had run: two
+   whole-tree ratchets in `tests/copy` and `tests/store`, two tests directly under `tests/domain`, one distribution
+   test: a ratchet that scans all of `src` is "touched" by every lane and named by none): list the test files your
+   runs d, e and f ran (from their JSON reports), take the complement of `tests/**/*.test.js` and
+   `tests/**/*.test.jsx`, and run it whole, in the background, through the mutex, with the JSON reporter (in two
+   runs if it is over about 700 files). From this step on THE LANDING GATE RUNS THE WHOLE SUITE, in parts, as CI
+   does: "never the whole suite" in the seventh brief is ended for a landing on its own machine.
+g. CLASSIFY EVERY FAILING TEST of d, e, f and f2 BY NAME: (1) on `RED-AT-LINE.tsv` (file and title); (2) on the chair's
    message's list of reds it has already ruled; (3) a register cured by its door above; (4) ANYTHING ELSE: do not
    cure it; record the file, the full title, the first two lines of its message, and WHICH LANDED LANE touches the
    file or the module it names (`git log --oneline <base>..HEAD -- <path>` tells you).

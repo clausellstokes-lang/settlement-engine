@@ -884,6 +884,25 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   one of the six and does NOT hold the first deploy: it is built after the veil's R3; it ships with the first
   deploy only if it is proven before the security reader starts; else with the second. The owner was told so and
   may say otherwise.
+- E67 · CI ON THE LINE AT POINT 96, AND THE LANDING GATE WIDENED TO THE WHOLE SUITE (2026-11-22 10:02 UTC). CI's run 45004864966 at 2486d1301: 64
+  failing tests: ALL 59 LISTED ROWS (none cured, none missing) AND FIVE NEW, all in the ratchet's job, none run by
+  any landing gate: (1) `tests/copy/voiceMechanics.test.js`: `DailyLifeTab.jsx` holds ONE em dash (the tab's empty
+  marker as a literal): point 95, the chair's own builder; (2) `tests/store/deadOperationRatchet.test.js`:
+  `requestDailyLife` has no consumer since the button went: point 95; BOTH OWED BY DAILY-3's UNIT 4b, first (the
+  literal leaves the file; the operation is retired; neither register widened); (3, 4)
+  `tests/domain/bar7OrderUnderTheLaw.test.js` arms (d) and (f): a PREMISE MOVED at point 96: five of the 17 audit
+  towns and the planted Collapsed town now hold a party on the record (`familiesHeld` true): OWED BY PAGE-12, its
+  first unit at its return (the cause named, the towns re-keyed by cause, the guard line re-proven; never
+  re-recorded blind): IT MUST BE CURED BEFORE THE FIRST DEPLOY, so PAGE-12 comes back for that one unit before the
+  close; (5) `tests/domain/distribution.test.js` ("at least half of chains are stable"): red in CI, GREEN in the
+  chair's container at the same commit: watched; investigated if red twice. The chair ran the four files itself at
+  the line's tip (78 tests, 4 red: the first four above). THE RED LIST: 64 rows. THE CLASS: a ratchet that scans all
+  of `src` is touched by every lane and named by none: the governing-suites rule could not see it. SO THE LANDING
+  GATE NOW RUNS THE WHOLE SUITE, IN PARTS (the brief's new step f2: the complement of what d, e and f ran): a
+  landing on its own machine can afford what CI runs; "never the whole suite" is ended for it. STACK-97 was told to
+  add f2 before its report; STACK-98 gets it with its base. A seat's rule 8 also runs `tests/copy`, `tests/store`,
+  `tests/architecture`, `tests/docs` and the files directly under `tests/domain/` whole (told to DAILY-3; to each
+  other seat at its GO).
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -1316,13 +1335,21 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
    priority that joins a running turn). OF THE SIX: VEIL-33 matched the lane's gates on its own pool (GATE-1 4 of 92,
    GATE-2 20 of 40) and starts the probe's pass 1; SEAT-10's U6 returned (E65); STACK-97 had read its second lint
    whole after the doors (3 red of 3,354) at 08:51 and has not yet sent its "DOORS" line.
+- 2026-11-22 10:02 UTC · NET 10. ALL ELEVEN PARKED (PAGE-14 74a935e2d and FRAME-9 7ecee99f5 confirmed after the last entry: FRAME-9's lint whole at its
+   tip finished green, 3,271 of 3,271; its P1 lines await a ruling at its GO). THE SIX: VEIL-32 475,946 by its record
+   (waiting on unit (viii)'s builder, then the pool); VEIL-33 in the probe's pass 1; SEAT-10 on U6's final-record
+   pass (E65); FORTUNE-7 reading U7's diff before its merge; DAILY-3 reading its merged tip's run, with two cures
+   added to 4b (E67); STACK-97 in step f (139 of about 1,190 files at 09:40), told to add f2. STACK-98 and
+   REVIEW-VEIL-15 idle by design. No session failed. CI ON THE LINE read by name (E67). THE OWNER'S TWO WORDS OF THE
+   HOUR are in section 1 (six children at a time; the shared page's empty sections: E64, E66). NET 11 armed for 10:55.
 
 
 ## 4. The order of the lanes still to seat, and what each waits on
 
 (Rewritten 2026-11-22 09:09 UTC after E64.) SIX CHILDREN WORK AT A TIME, BY THE OWNER'S WORD: VEIL-32, VEIL-33, SEAT-10, FORTUNE-7, DAILY-3,
 and ONE landing (STACK-97, then STACK-98). ELEVEN ARE PARKED and come back one for each place that frees, in E64's
-order: CLOSE-1, PAGE-13, PAGE-12, PLACE-3, PEOPLE-3, PROSE-5, PAGE-14, DEPTH-5, GOALS-5, FRAME-9, TRAD-6: a parked
+order AS AMENDED BY E67 (PAGE-12 comes back early for ONE unit, the two reds of point 96 on the line): CLOSE-1, PAGE-12
+(that one unit), PAGE-13, PAGE-12 (the rest), PLACE-3, PEOPLE-3, PROSE-5, PAGE-14, DEPTH-5, GOALS-5, FRAME-9, TRAD-6: a parked
 seat is woken by ONE line, "GO <seat>", with the line's tip then; it goes on from its own hand-back. WHAT EACH OF
 THE SIX WAITS ON FROM THE CHAIR: STACK-98: "BASE <commit>" when STACK-97's gate has reported · SEAT-10: the word to
 merge U6 and U7, after "SEAT" is on the line · FORTUNE-7: the line's tip with point 98 on it, for its landing check ·
