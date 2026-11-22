@@ -93,12 +93,19 @@ verified by ls-remote).
     shared PDF through the ONE reader; the arm's two halves; A FRESH BUILDER that reads 212 and the registry WHOLE before it
     edits either; the seat reads its diff whole once with both beside it. AFTER THE MERGE: both gates on the new pool, one line
     with both counts and which unit the seat could hand over after. (The seat's record: 425,311 at 06:12 by the chair's read.)
+89. THE CHAIR, 07:35 then 07:46 UTC: the weekly-limit warning (commit and push at every standing step; builders' work as
+    `-wip`) STANDS; "spend little" is WITHDRAWN by THE OWNER'S WORD (verbatim: "Nope ignore that you are only at 27% go wild
+    until you run out"): FULL PACE. The chair's decision E45: UP TO TWO BUILDERS AT ONCE where their manifests do not touch,
+    each in its own worktree on its own -wip branch; heavy runs ONE at a time through the gate mutex; every diff read whole
+    before a merge. THE JOIN PROBE may be cut as a second builder (a scratch branch, never the lane) the moment who rules and
+    fortune sit on one ref (the chair names it). THE FRESH SECURITY READER is seated the hour the seat names 212's final text.
 
 ## 3. Log (every hour from `date -u`)
 - 05:21 seated; tip verified (385067da2). Read CLAUDE.md, the standard, COMMON-EIGHTH, COMMON-RULES, VEIL-29, VEIL-30, PART 32, PART 30, TELL7-HANDBACK.
 - 05:22 chain0 launched (npm ci 0; ledger 0); after0 waits to run chain1. First message to the chair.
 - 05:27 the (viii) builder seated; 05:3x the chair's two messages (VEIL-31's 9fd3623c5) read after the first push: merged (docs only), rulings renumbered 86; pushed 3cca025b8.
 - 05:56 the pool stands. 06:04 the gates at the tip reproduced; 06:05 the line to the chair.
+- 07:46 ruling 89 read; the probe's needs and the count sent.
 - 07:2x R3-TELL-8b stopped after the read-whole (212, the registry, galleryRosterChoices.js whole: four fifths of its 250,000 mark; 85a8c6562, docs only: edit points listed); RESUMED with its mark raised to 600,000 (it holds the three reads; a fresh builder would spend them again): sitting A (the reds) then B (the cure).
 - 07:22 the chair's 07:19 ruling (88) read; the brief amended with it; R3-TELL-8b seated.
 - 07:1x R3-TELL-8 returned (STOP after step 1); -wip pushed; merged 6cd5b4fe3; the two STOPS to the chair; the brief amended.
