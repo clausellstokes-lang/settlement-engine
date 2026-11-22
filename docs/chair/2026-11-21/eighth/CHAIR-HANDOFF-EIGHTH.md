@@ -1200,6 +1200,22 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   counting them (1,150). THE NET FOR WHAT A SEAT NO LONGER RUNS: the landing's step f on the stack and CI's whole
   suite, read by name within the hour of each push; a lane's red that first shows there holds the stack and is
   cured on top. Sent to SEAT-10 (interrupting: it had started the shards twice) and FORTUNE-7.
+- E91 · A SECOND (d) OF THE FLIPPED RUN: THE POWERS LEAF BREAKS ITS LAYER UNDER THE LIT SEAT CONTEST; CURED BY ONE ROW, IN THE FLIP'S OWN COMMIT (2026-11-22 15:14 UTC; CLOSE-1's
+  15:12, CONFIRMED by run on four trees: dark clean, fortune alone clean, the seat alone red, both red).
+  `tests/lint/factLayers.walker.test.js`, two titles ("every leaf declares exactly the strata it touches, and every
+  stored field it reads is placed"; "nothing reads at or above its own layer (shrink-only) LEAVES: the tree reads
+  exactly the register"): the leaf `powersList` (`domain/dossier/powerStrata.js :: derivePowerStrata`, layer 3,
+  reads powerStructure, config, _config) touches, lit, economicState, npcs, stress, stressors and tier as well; npcs
+  is stratum 3, the leaf's own layer: a break (PLAUSIBLY through `rulingPowerCoup.js :: coupContenders`). THE
+  CHAIR'S READING OF `factLayers.js` AT THE LINE'S TIP: tier, stress, stressors, config 0; economicState 1;
+  powerStructure 2; npcs 3; LAYER 4, "over the cast", exists (`sovereign` reads npcs there). RULED: THE LIT CONTEST
+  IS MEANT TO READ THE CIRCUMSTANCES AND THE CAST; the row is re-declared and re-layered (layer 4; reads the eight
+  fields) BY THE CHAIR'S LEAVE (COMMON-RULES 6, one row), AND BECAUSE THE WALKER WANTS A ROW TO DECLARE EXACTLY
+  WHAT THE LEAF TOUCHES (dark: three), IT MOVES IN THE FLIP'S OWN COMMIT WITH THE DIALS: a step of the recipe, an
+  EXPECTED move of the census. ASKED OF CLOSE-1 on its lit scratch, as a measure: the path confirmed by probe; the
+  one row applied and the walker whole (both titles green; no knock-on; who reads `powersList`); if a knock-on
+  exists, its cure (1) returns (the contest's cast-reading part settled at birth and stored), the seat lane's.
+  FOR THE VEIL: the contenders list read from the cast on a shared read is row 18 of the reader's list.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
