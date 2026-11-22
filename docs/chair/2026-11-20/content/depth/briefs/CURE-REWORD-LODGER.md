@@ -48,3 +48,17 @@ Show the walker red at your base (its failing title and figure, quoted), then gr
   `hookThemeTotality` digest freshness; the sibling's reds 2-8 in `declaredLineShape`, `drawDeclaredKeys`, `moduleScopeCwdRatchet`,
   `mutationCoverageManifest`, `seedLoopTotality`; the line's `proseCorpusBytes`/`proseComposed` if present);
 - the old and new hash; your commits (sha, one line each).
+
+## ADDENDUM 1 (DEPTH-5's ruling, 2026-11-22T08:31Z by `date -u`, on the builder's stop report e467cd425)
+(a) THE STEP RETIRES THE OLD HASH IN EVERY PART THAT HOLDS IT (`pools`, `golden`, `hxd`; `legacy` does not hold it: confirm), and adds
+the new hash with the same answer in each part where the live corpus now yields it (`pools`; `golden`/`hxd` only if your step is
+read as a set there: births are matched, so an ADD is not required where a part is matched, not frozen). Why this is safe: hooks
+tranche 1 has never shipped (the depth lane has not landed), so no stored town holds the old text; the cause line says so.
+(b) ONE HOME FOR THE COMPOSITION: a new helper `tests/helpers/hookThemeAnswers.js` (not a test file: no manifest row) reads the base
+and the steps and returns the composed parts; BOTH `tests/domain/hookThemeAnswersHeld.test.js` AND
+`tests/lint/hookThemeTotality.walker.test.js` read the fixture through it, and neither reads the base file directly any more. You
+may now EDIT `tests/lint/hookThemeTotality.walker.test.js` for that one change; leave its module-scope `ROOT`/`process.cwd()` line
+EXACTLY as it is (the sibling re-points it; the integrator resolves the merge). Every existing claim of both files is kept.
+(c) YOU MAY RUN THE DIGEST DOOR: `node scripts/hook-theme-digest.mjs` (it writes only the block in `src/domain/hookThemes.js`), as its
+OWN commit after the rewording, then `--check` exits 0. That file is added to your EDIT list for the door's block only.
+(d) Then the rest of the brief stands: red/green, `tests/lint` whole, the report (amend it; at most 200 words + one table).
