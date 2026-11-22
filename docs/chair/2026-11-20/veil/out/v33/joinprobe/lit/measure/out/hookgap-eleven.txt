@@ -1,0 +1,33 @@
+THE NAMED ELEVEN, as the composed pools hold them:
+  crime_wave 2 WITHHELD needs ["watch","organised crime"] excludes []: A guard captain is on the payroll of the criminal network
+  crime_wave 9 LISTED needs ["watch"] excludes []: A watchman afraid of the night round is looking for someone to walk it with him, and will pay from his own purse
+  crime_wave 10 WITHHELD needs ["organised crime"] excludes []: A shopkeeper has been told to close by the end of the week, by people who did not give their names
+  crime_wave 11 WITHHELD needs ["rival rings"] excludes []: Two crews have been seen arguing over the same ground, and a fight between them looks a night away
+  crime_wave 12 WITHHELD needs ["law: ≤ critical"] excludes []: A thief caught in the act is being held in a cellar by the household that caught him, and nobody knows what to do with him next
+  guild_conflict 12 WITHHELD needs ["organised crime"] excludes []: A trader outside the guild has been offered protection by people outside the law, and is tempted
+  external_threat 8 LISTED needs ["guardPresence"] excludes []: Those who keep order are calling for volunteers, and the first to come forward is the last one anyone expected
+  succession_crisis 1 LISTED needs ["ruler: lord"] excludes []: A would-be heir approaches outsiders to investigate a rival's past
+  succession_crisis 2 LISTED needs [] excludes ["ruler: council","ruler: elder","crisis: succession_void"]: The ailing ruler wants a final errand completed before naming a successor
+  succession_crisis 3 LISTED needs [] excludes ["ruler: council","ruler: elder","crisis: succession_void"]: Someone is poisoning the ruler slowly, and someone in the household knows
+  succession_crisis 8 LISTED needs ["ruler: council"] excludes []: A council member has not yet said whom they back, and their house was broken into last night
+
+served hooks (twin) 456; of the named eleven served: twin 17, server 17; on a place whose read hides a house or withholds a power: twin 17, server 17
+twin by row: guild_conflict 12 (WITHHELD): 10; succession_crisis 8 (LISTED): 4; external_threat 8 (LISTED): 2; succession_crisis 3 (LISTED): 1
+server by row: guild_conflict 12 (WITHHELD): 10; succession_crisis 8 (LISTED): 4; external_threat 8 (LISTED): 2; succession_crisis 3 (LISTED): 1
+  jp5-city-0: guild_conflict 12 WITHHELD (hidden houses 5, withheld powers 0)
+  jp5-city-12: guild_conflict 12 WITHHELD (hidden houses 5, withheld powers 0)
+  jp5-city-24: succession_crisis 8 LISTED (hidden houses 1, withheld powers 0)
+  jp5-metropolis-12: succession_crisis 8 LISTED (hidden houses 6, withheld powers 0)
+  jp5-metropolis-24: succession_crisis 8 LISTED (hidden houses 6, withheld powers 0)
+  jp5-town-5: guild_conflict 12 WITHHELD (hidden houses 1, withheld powers 0)
+  jp5-town-5: external_threat 8 LISTED (hidden houses 1, withheld powers 0)
+  jp5-city-13: guild_conflict 12 WITHHELD (hidden houses 3, withheld powers 0)
+  jp5-city-21: succession_crisis 8 LISTED (hidden houses 4, withheld powers 0)
+  jp5-city-29: external_threat 8 LISTED (hidden houses 6, withheld powers 0)
+  jp5-metropolis-17: guild_conflict 12 WITHHELD (hidden houses 7, withheld powers 0)
+  jp5-town-6: guild_conflict 12 WITHHELD (hidden houses 1, withheld powers 0)
+  jp5-metropolis-10: guild_conflict 12 WITHHELD (hidden houses 6, withheld powers 0)
+  jp5-metropolis-38: succession_crisis 3 LISTED (hidden houses 6, withheld powers 0)
+  jp5-metropolis-23: guild_conflict 12 WITHHELD (hidden houses 6, withheld powers 0)
+  jp5-metropolis-27: guild_conflict 12 WITHHELD (hidden houses 8, withheld powers 0)
+  jp5-metropolis-39: guild_conflict 12 WITHHELD (hidden houses 8, withheld powers 0)

@@ -1,0 +1,30 @@
+THE ELEVEN (composed pools, a need of class crime or hideable): 4
+  crime_wave 2 [organised crime]: A guard captain is on the payroll of the criminal network
+  crime_wave 10 [organised crime]: A shopkeeper has been told to close by the end of the week, by people who did not give their names
+  crime_wave 11 [rival rings]: Two crews have been seen arguing over the same ground, and a fight between them looks a night away
+  guild_conflict 12 [organised crime]: A trader outside the guild has been offered protection by people outside the law, and is tempted
+
+size        births troubled+hideable(places) serving-any  served-hooks  gap(needing-a-hidden-house)  naming-hidden   [server = twin per place]
+thorp           40                          4            0             0                            0              0   server: 0/0/0/0; places differing 0
+hamlet          40                          3            1             3                            0              0   server: 1/3/0/0; places differing 0
+village         40                          2            2             6                            0              0   server: 2/6/0/0; places differing 0
+town            40                         11            9            44                            2              0   server: 9/44/2/0; places differing 0
+city            40                         34           34           182                            3              0   server: 34/182/3/0; places differing 0
+metropolis      40                         37           37           221                            5              0   server: 37/221/5/0; places differing 0
+ALL            240                         91           83           456                           10              0   places where server != twin: 0
+
+THE GAP, each hook by place (twin; server identical unless marked):
+  jp5-city-0: guild_conflict 12 [organised crime] hidden houses {Black market | Front businesses | Multiple criminal factions | Smuggling network | Whisper market} withheld powers {}: "A trader outside the guild has been offered protection by people outside the law, and is tempted"
+  jp5-city-12: guild_conflict 12 [organised crime] hidden houses {Black market | Contract killer | Front businesses | Multiple criminal factions | Smuggling network} withheld powers {}: "A trader outside the guild has been offered protection by people outside the law, and is tempted"
+  jp5-town-5: guild_conflict 12 [organised crime] hidden houses {Smuggling operation} withheld powers {}: "A trader outside the guild has been offered protection by people outside the law, and is tempted"
+  jp5-city-13: guild_conflict 12 [organised crime] hidden houses {Front businesses | Multiple criminal factions | Smuggling network} withheld powers {}: "A trader outside the guild has been offered protection by people outside the law, and is tempted"
+  jp5-metropolis-17: guild_conflict 12 [organised crime] hidden houses {Assassins' guild | Front businesses | Smuggling network | Thieves' guild (powerful) | Underground city | Underground network | Whisper market} withheld powers {}: "A trader outside the guild has been offered protection by people outside the law, and is tempted"
+  jp5-town-6: guild_conflict 12 [organised crime] hidden houses {Smuggling operation} withheld powers {}: "A trader outside the guild has been offered protection by people outside the law, and is tempted"
+  jp5-metropolis-10: guild_conflict 12 [organised crime] hidden houses {Assassins' guild | Front businesses | Multiple criminal factions | Smuggling network | Underground city | Whisper market} withheld powers {}: "A trader outside the guild has been offered protection by people outside the law, and is tempted"
+  jp5-metropolis-23: guild_conflict 12 [organised crime] hidden houses {Black market bazaar | Contract killer | Front businesses | Multiple criminal factions | Smuggling network | Whisper market} withheld powers {}: "A trader outside the guild has been offered protection by people outside the law, and is tempted"
+  jp5-metropolis-27: guild_conflict 12 [organised crime] hidden houses {Assassins' guild | Black market bazaar | Front businesses | Multiple criminal factions | Smuggling network | Underground city | Underground network | Whisper market} withheld powers {}: "A trader outside the guild has been offered protection by people outside the law, and is tempted"
+  jp5-metropolis-39: guild_conflict 12 [organised crime] hidden houses {Assassins' guild | Black market bazaar | Front businesses | Multiple criminal factions | Smuggling network | Underground city | Underground network | Whisper market} withheld powers {}: "A trader outside the guild has been offered protection by people outside the law, and is tempted"
+
+SERVED HOOKS NAMING A HIDDEN HOUSE OR A WITHHELD POWER (the lane's fold, buildNameSearch):
+
+HOOKGAP 10/456 (served hooks needing a hidden house / served hooks); naming 0; server=twin YES

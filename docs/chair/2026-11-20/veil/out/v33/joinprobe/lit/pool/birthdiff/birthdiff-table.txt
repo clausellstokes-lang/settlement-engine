@@ -1,0 +1,60 @@
+births 1808 (each born LIT and DARK on this tree); law stamps lit ["[2,2]"], dark ["[null,null]"]
+
+part size        births | powers moved (names,power,category,governing) | holder moved | contest moved | score moved | label moved | breakdown moved | merits>0 lit (dark) | rung moved | prosperity moved | hideable houses moved
+A    village    300 | 165 | 1 | 64 | 300 | 173 | 300 | 4 (0) | 1 | 176 | 0
+A    town       300 | 60 | 2 | 193 | 223 | 59 | 233 | 7 (0) | 1 | 65 | 0
+A    city       300 | 210 | 10 | 232 | 297 | 202 | 300 | 10 (0) | 0 | 189 | 0
+A    metropolis 300 | 182 | 6 | 205 | 296 | 181 | 300 | 9 (0) | 0 | 181 | 0
+B    village    152 | 82 | 1 | 32 | 152 | 83 | 152 | 2 (0) | 3 | 87 | 0
+B    town       152 | 29 | 0 | 85 | 105 | 26 | 112 | 2 (0) | 1 | 41 | 2
+B    city       152 | 89 | 4 | 116 | 151 | 89 | 152 | 2 (0) | 17 | 63 | 7
+B    metropolis 152 | 112 | 1 | 100 | 149 | 109 | 152 | 4 (0) | 8 | 78 | 3
+
+the holder's rule (holderOf, owner), lit vs dark, by size:
+  village    lit {"R4":357,"R2":65,"R3":5,"R5":25}  dark {"R4":359,"R2":63,"R3":5,"R5":25}
+  town       lit {"R4":181,"R2":107,"R3":156,"R5":8}  dark {"R4":181,"R2":108,"R3":156,"R5":7}
+  city       lit {"R3":244,"R4":85,"R2":94,"R5":29}  dark {"R3":250,"R4":78,"R2":98,"R5":26}
+  metropolis lit {"R2":226,"R3":140,"R4":69,"R5":17}  dark {"R2":226,"R3":142,"R4":67,"R5":17}
+
+the standing's label, lit vs dark, by size:
+  village    lit {"Contested":135,"Legitimacy Crisis":159,"Tolerated":90,"Approved":58,"Endorsed":10}  dark {"Legitimacy Crisis":318,"Tolerated":55,"Contested":67,"Approved":11,"Endorsed":1}
+  town       lit {"Contested":132,"Endorsed":20,"Approved":50,"Tolerated":100,"Legitimacy Crisis":150}  dark {"Contested":150,"Endorsed":23,"Approved":49,"Tolerated":93,"Legitimacy Crisis":137}
+  city       lit {"Endorsed":34,"Contested":106,"Legitimacy Crisis":178,"Approved":53,"Tolerated":81}  dark {"Endorsed":92,"Tolerated":176,"Approved":54,"Contested":74,"Legitimacy Crisis":56}
+  metropolis lit {"Contested":110,"Endorsed":52,"Approved":50,"Tolerated":84,"Legitimacy Crisis":156}  dark {"Tolerated":193,"Endorsed":117,"Approved":46,"Contested":40,"Legitimacy Crisis":56}
+
+breakdown.merits (points), lit, by size: 
+  village    {"10":6,"null":446}
+  town       {"10":9,"null":443}
+  city       {"10":12,"null":440}
+  metropolis {"10":13,"null":439}
+
+the capture rung, lit vs dark, by size:
+  village    lit {"none":430,"equilibrium":16,"corrupted":6}  dark {"none":426,"equilibrium":19,"corrupted":7}
+  town       lit {"none":344,"equilibrium":35,"corrupted":66,"adversarial":7}  dark {"none":343,"adversarial":8,"corrupted":66,"equilibrium":35}
+  city       lit {"none":384,"adversarial":11,"equilibrium":39,"corrupted":17,"capture":1}  dark {"none":397,"adversarial":8,"corrupted":15,"equilibrium":31,"capture":1}
+  metropolis lit {"none":372,"equilibrium":44,"adversarial":11,"corrupted":24,"capture":1}  dark {"none":376,"equilibrium":39,"adversarial":12,"corrupted":24,"capture":1}
+
+which law moves it (births where the field differs from DARK): seat alone | fortune alone | both lit
+  village    powers 0|247|247  holder 0|2|2  contest 81|23|96  score 0|452|452  label 0|256|256  breakdown 0|452|452  merits 0|6|6  rung 0|4|4  prosperity 0|263|263  held 0|0|0
+  town       powers 0|89|89  holder 0|2|2  contest 271|18|278  score 0|328|328  label 0|85|85  breakdown 0|345|345  merits 0|9|9  rung 0|2|2  prosperity 0|106|106  held 0|2|2
+  city       powers 0|299|299  holder 0|14|14  contest 326|73|348  score 0|448|448  label 0|291|291  breakdown 0|452|452  merits 0|12|12  rung 0|17|17  prosperity 0|252|252  held 0|7|7
+  metropolis powers 0|294|294  holder 2|5|7  contest 280|67|305  score 0|445|445  label 0|290|290  breakdown 0|452|452  merits 0|13|13  rung 0|8|8  prosperity 0|259|259  held 0|3|3
+
+example powers moved t2p-village-none-0:
+  dark Elder Council|70|government|G; Military Party|30|military|
+  lit  Elder Council|77|government|G; Military Party|23|military|
+
+example powers moved t2p-village-none-32:
+  dark Elder Council|53|government|G; The Inquiry|47|other|
+  lit  Elder Council|65|government|G; The Inquiry|35|other|
+
+example powers moved t2p-village-none-52:
+  dark Elder Council|55|government|G; Religious Authorities|45|religious|
+  lit  Elder Council|62|government|G; Religious Authorities|38|religious|
+example houses moved t2b-town-none-316: dark [Front businesses, Rookery, Street gang] lit [Front businesses, Street gang]
+example houses moved t2b-metropolis-none-40: dark [Contract killer, Front businesses, Rookery, Smuggling network, Underground city, Underground network] lit [Front businesses, Multiple criminal factions, Rookery, Smuggling network, Thieves' guild (powerful), Underground city, Underground network]
+example houses moved t2b-city-none-162: dark [Black market, Front businesses, Whisper market] lit [Black market, Front businesses, Smuggling network, Whisper market]
+example houses moved t2b-city-politically_fractured-139: dark [Black market, Front businesses, Rookery, Underground network] lit [Black market, Front businesses, Rookery, Smuggling network, Underground network]
+example houses moved t2b-city-indebted-155: dark [Black market, Whisper market] lit [Black market, Smuggling network, Whisper market]
+
+BIRTHDIFF 1808 births: powers moved 929, holder 25, contest 1027, score 1673, merits>0 40, hideable houses 12
