@@ -1440,6 +1440,20 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   one door (the lighting census: 3,771 to 3,774 files); the wiring census's check green; no other register red;
   its step e running. THE NEXT STACK STANDS ON 04c270eae. THE SIX: VEIL-33, VEIL-34, FORTUNE-7, DAILY-3, STACK-99,
   CLOSE-2. CLOSE-1 done.
+- E107 · THE PUSH HAZARD IS WIDER THAN "NOTHING TO SEND"; L12 NEEDS THE STEWARD'S OWN HOUSE (2026-11-22 17:46 UTC; DAILY-3's 17:42, told at once). (1) Its push `git push origin d86192a6b:refs/heads/lane/daily-3-2026-11-22-l8-wip`
+  (a raw sha on the left; the remote held a non-ancestor) RAN THE WHOLE CHECK (`test:ratchet`) until its own
+  twenty-minute timeout; the push did not land; its tree clean, no Fixture commit, the remote refs unmoved. THE
+  HOOK JUDGES THE LOCAL SIDE: a raw sha or `HEAD` is not a lane branch's name. COMMON-EIGHTH item 15: a push
+  always names a LOCAL lane branch by its own name; after any whole check in a repository, the shared config
+  (`core.bare`, `user.name`, `user.email`, `commit.gpgsign`) is read before the next commit: asked of DAILY-3 now.
+  (2) From L8's builder: on four steward thorps (hxd-thorp-52, -59, -93, -140) the governance line reads "Saba
+  al-Din, the reeve, holds the seat of the Feudal Stewardship" (the house on the roster is "Lord's reeve"; no
+  steward's house, no steward): E95's condition (2) FAILS there as the chair worded it: L12 would assert a second
+  officer. RULED: L12 gains `house: lord's steward` as a need beside `office: lord's steward` and `sovereign` (it
+  prints only where a steward's house stands); the steward's answering row is NOT added (two rows: headman,
+  reeve); its share re-measured; if that is more than a few lines, L12 is cut from this landing and named for
+  after the first deploy: the seat's count decides. The governance line's own title there is the seat lane's:
+  `intake/AFTER-FIRST-DEPLOY.md` item 6.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 

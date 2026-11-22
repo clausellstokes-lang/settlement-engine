@@ -50,3 +50,12 @@ may still ship with the first deploy if it lands in time.
 ## 5. The players' page: an owner's stored switch for the empty-section cut (E84)
 
 One typed line in the veil's served allowlist (`211 :: _gallery_veil_served`): a migration of the owner's hand. Not built unless he asks.
+
+## 6. A Feudal Stewardship whose seat is held by "the reeve" (E107)
+
+FOUND by the Daily Life lane's builder (DAILY-3, 2026-11-22 17:46 UTC): on four steward thorps (hxd-thorp-52, -59, -93, -140) the governance line reads "Saba
+al-Din, the reeve, holds the seat of the Feudal Stewardship": the only such house on the roster is "Lord's reeve"; no steward's house and no
+steward stand there. The Daily Life line L12 ("The lord's steward…") was therefore given the house's own atom as a need (it prints only where a
+steward's house stands). WHAT IS LEFT, the seat lane's: whether a stewardship's holder should be titled by his house's role ("the reeve") or by the
+office he holds ("the lord's steward"), and whether the two words on one page read as two officers. No false line today.
+
