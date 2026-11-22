@@ -621,25 +621,37 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   diff is read, it is merged on top of point 94 as point 95 and ONE gate runs for both (a fresh helper, the stack
   brief with its new step c2); then the push, the list and `LINE-NOW.md`. The chair's branch holds the brief and
   these entries locally (6a909ade9 and after) and is pushed next.
+- 2026-11-22 04:50 UTC · THE OWNER ANSWERED THE FIVE (section 1; E25 to E30) AND TWO SEATS ARE OPENED: DAILY-3 (session_01ACmDYYZpEdm9Ag2ikDGTf9;
+  source the working line; branch `lane/daily-3-2026-11-22`) and PAGE-13 (session_01ACmDYaxzZSfZegkESM65Zb; source
+  `lane/page-9-2026-11-20`; branch `lane/page-13-2026-11-22`), both created 04:49, the middle tier at high effort,
+  each started by the same short message as the first four (its prompt read from the chair's branch at bebdb15cb or
+  later). SIX SEATS RUN. FORTUNE-6 is told of the second merit (E29). The chair's branch is on origin at bebdb15cb
+  (04:49 by the push's log). THE DAILY LIFE PAGE'S BUILDER: red first shown (3 of 4 failing on the untouched tree);
+  the page and the handler changed; its green runs in hand. Point 94 still stands merged and unpushed in the line's
+  worktree, to be gated with point 95.
 
-## 4. The order of the lanes still to seat (after the first four), and what each waits on
+## 4. The order of the lanes still to seat, and what each waits on
 
-(Rewritten 2026-11-22 04:06 UTC.) DISPLAY (`prompts/PAGE-13.txt`, written: THE NEXT FREE SEAT; source `lane/page-9-2026-11-20`
-1cf317f5f, branch `lane/page-13-2026-11-22`) · PLACE (the trade note's cure: `PLACE-3.txt` as amended; source and
-branch `lane/place-3-2026-11-21`) · PEOPLE (the second half, B3 then B2: `PEOPLE-3.txt` as amended; source and branch
-`lane/people-3-2026-11-21`) · GOALS AND TIES (27 failures to name; TIES-HOLD) · DEPTH (two rulings owed by this
-chair; its tie pairs after TIES-HOLD) · PEOPLE AND PLACE (frames, landmarks, F5-NARROW; arm (u) owed a ruling) ·
-SESSION SHEET (six lint failures left by SR1's merge) · STATE SENTENCES (the next units: SEAT-TOWN) · DAILY LIFE (the
-other five slots and the owner-only line: worded and ruled, NOT built) · TRADITIONS (unit 13) · TROUBLES LAW (dark;
-K3; ONLY ON THE OWNER'S YES). The last eight have no eighth-chair prompt yet: each is written from the pickup's
-paragraph for its lane, its hand-back's first section and the form of `PAGE-13.txt`.
+(Rewritten 2026-11-22 04:50 UTC after E26 and E30.) SIX SEATS RUN (section 6); six is the ceiling until a landing frees one. THE
+FINISH LINE (E30) orders what comes next: AS A SEAT FREES: PLACE (the trade note's cure: `prompts/PLACE-3.txt` as
+amended; source and branch `lane/place-3-2026-11-21`) · PEOPLE (the second half, B3 then B2: `prompts/PEOPLE-3.txt`
+as amended; source and branch `lane/people-3-2026-11-21`) · then, by what an owner reads on a page: STATE SENTENCES
+(the next units: SEAT-TOWN) · GOALS AND TIES (27 failures to name; TIES-HOLD) · PEOPLE AND PLACE (frames, landmarks,
+F5-NARROW; arm (u) owed a ruling) · DEPTH (two rulings owed by this chair; its tie pairs after TIES-HOLD) · SESSION
+SHEET (six lint failures left by SR1's merge) · TRADITIONS (unit 13). NOT SEATED: THE TROUBLES LAW (E28: not in this
+deploy). A SUCCESSOR FOR A RUNNING SEAT (VEIL-31 near 07:00; FORTUNE-6 if the second merit does not fit) takes that
+seat's own place, not a new one. The lanes after PEOPLE have no eighth-chair prompt yet: each is written from the
+pickup's paragraph for its lane, its hand-back's first section and the form of `PAGE-13.txt`. NONE OF THEM HOLDS THE
+FIRST DEPLOY: what has not landed when the veil, the two laws and the Daily Life page are done goes in the second.
 
-## 5. Waiting on the owner (carried from the pickup; none blocks a seat today)
+## 5. Waiting on the owner
 
-(1) May the veil ship "not shown" before "not inferable"? (the seventh chair advised no; until he answers the bar is
-GATE-2 at 0 red). (2) The troubles law: yes or no at the close. (3) Fortune at middle sliders: leave it (advised) or
-build the second merit. (4) The seventh chair's last advice, unanswered: set a finish line and ship (against his
-standing "all of it predeploy"). (5) At the close: the signing list; the merge, the deploy and both migrations.
+(Rewritten 2026-11-22 04:50 UTC.) NOTHING BLOCKS A SEAT. The five questions are answered (section 1; E25 to E30). STILL HIS AND
+ONLY HIS, at the close: the signing list (goldens, references, tuning tables, size rises: each lane names what it
+moved); the pull request's merge; the deploy; migration 212 and any other; production credentials (the server's AI
+daily-life function and its pricing row are listed for him: E24). ASKED OF HIM, NO ANSWER NEEDED TO GO ON: to say if
+he wants the pace slowed (the chair cannot see what is left of the weekly allowance). HIS THREE DEFAULTS ON THE DAILY
+LIFE PAGE stand unless he changes them (a saved AI account stays visible; the server untouched; the PDF second).
 
 ## 6. The seats of this chair (session ids as each is seated)
 
@@ -649,3 +661,5 @@ standing "all of it predeploy"). (5) At the close: the signing list; the merge, 
 | SEAT-10 | session_01ACmDYZoxpJMkpMsJCjQacb | `lane/seat-9-2026-11-20` 3e8e2e37d | `lane/seat-10-2026-11-21` | who rules: the line merged in, the key question, the flip's census, rule 8, "SEAT" |
 | FORTUNE-6 | session_01ACmDYXeXjV24x7VbZV1x8a | `lane/fortune-5-2026-11-20` 321081ea9 | `lane/fortune-6-2026-11-21` | fortune: the detector row, the legacy-config helper, the merit's sentence, the lit re-measure, "FORTUNE" |
 | PAGE-12 | session_01ACmDYXpfBBiCkJJuRZps9f | `lane/page-10-2026-11-20` cbbe87154 | `lane/page-12-2026-11-21` | the trouble half: the tip proved, the causes' parity, the mixed key, the closing measure, "PAGE-TROUBLE" |
+| DAILY-3 | session_01ACmDYYZpEdm9Ag2ikDGTf9 | the working line `lane/join-2026-11-14` (f5295e425 at its seating) | `lane/daily-3-2026-11-22` | Daily Life's second half: B3 (the owner-only slot; `commoner_resentments`, `food_culture`; `outsider_impressions`, `unspoken_topics`, `recent_changes`), the sameness door, the page's block, "DAILY-B" |
+| PAGE-13 | session_01ACmDYaxzZSfZegkESM65Zb | `lane/page-9-2026-11-20` 1cf317f5f | `lane/page-13-2026-11-22` | the display lane: the tip proved, the safety pages' test re-made, the line merged AFTER the trouble lane is landed, "PAGE-SIDES"; then the causes' wiring, "PAGE-DISPLAY" |
