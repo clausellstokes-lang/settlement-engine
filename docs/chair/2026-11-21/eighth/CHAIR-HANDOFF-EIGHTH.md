@@ -560,6 +560,21 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   of the SENTENCE KEYS arm (63 of the table's 138 keys run to five words), its keys read by the key-word list
   whatever their length; nothing else of the walker moves. (4) RULE 2 READS `presumes` AS NEEDS for that table (five
   houses listed). THE CHAIR READS THIS WALKER'S DIFF WHOLE BEFORE "PAGE-SIDES" LANDS, as it did the trouble lane's.
+- E41 · THE VEIL'S UNIT (viii): THE MEASURE HOLDS "THE OTHER WAY"; TWO STOPS RULED (2026-11-22 07:19 UTC; VEIL-32's step 1, ebdeb3f30, documents
+  only; both engines; 6,528 pages: 140 births by every setting, both shapes, Reveal off and DM). EXECUTED: the reader
+  is seedless and reproduces the stored list wherever nothing is hidden (140 of 140; 368 of 368); the writer's
+  inputs survive the projection; no dependent of the stored list ships on a gated read; the merchant-army hook's row
+  is served-derivable and is corrected in both engines; the grouping is open exactly where `criminalInstitutions` is
+  an array. THE RED TODAY: 25 of 92 by type; 32 of 92 by type and description: SEVEN MORE TOWNS serve debt evasion
+  "using criminal networks" with no served network: the reader cures them. RULED: (1) after the cure the pool is
+  re-made on the cured tree in a new directory before the gates are read (its served signatures are cached). (2) THE
+  READER'S LIST GOVERNS where an owner has shut a grouping: a control town (services and underside shut, structure
+  open) stores a "Survival crime" line that speaks of a network read from the shut groupings: the served list is
+  written from served facts alone ("desperation theft", no network): toward withholding; the unit's report counts
+  the pages this ruling alone changes, by setting. FOR THE CURE: `GROUPING_OPEN_EVIDENCE` narrowed to
+  `criminalInstitutions` with its red first and its converse (no shut grouping opens by it); the shared PDF from the
+  re-derived copy through the one reader; a FRESH builder that reads 212 and the registry WHOLE before editing
+  either. VEIL-32 read 425,311 at 06:12.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
