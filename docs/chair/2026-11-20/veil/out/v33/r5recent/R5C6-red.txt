@@ -1,0 +1,42 @@
+R5C6 RED-FIRST run at 8784dd91f's tests over bbad923a5's src (the reader absent): the summary and every failed test (from R5C6-red.full.log, ignored by .gitignore)
+⎯⎯⎯⎯⎯⎯ Failed Tests 30 ⎯⎯⎯⎯⎯⎯⎯
+ Test Files  3 failed (3)
+      Tests  30 failed | 19 passed (49)
+     × THE FIDELITY ARM (E93 (1); the tooth re-stated): on every nothing-hidden born page the page's re-derived sentence equals the stored one, both engines, both doors, Reveal DM off and on, EXCEPT 
+     × THE DIFFERENTIAL (E92 (5), E93 (2)): a HIDING read's page sentence equals the page sentence of the same place with the withheld powers and houses NEVER THERE, each engine, both doors, Reveal D
+     × every site is registered with its count; none is stale; each owner-only, own-record, veil and not-a-read site gives its reason
+     × THE ONE READER exists, runs the engine's own writer, never re-fills pressureSentence, and is wired at every door: rederiveForPage (the gallery page, the party link, the map's member) and the i
+     × power.desc: its server and twin hosts are declared and exist (not PLANNED)
+     × power.label: its server and twin hosts are declared and exist (not PLANNED)
+     × power.relation.dmNote: its server and twin hosts are declared and exist (not PLANNED)
+     × prose.posture.posture: its server and twin hosts are declared and exist (not PLANNED)
+     × prose.posture.prize: its server and twin hosts are declared and exist (not PLANNED)
+     × prose.posture.terrain: its server and twin hosts are declared and exist (not PLANNED)
+     × prose.state.firstSurvey: its server and twin hosts are declared and exist (not PLANNED)
+     × prose.state.publicOrder.field: its server and twin hosts are declared and exist (not PLANNED)
+     × prose.state.publicOrder.beside: its server and twin hosts are declared and exist (not PLANNED)
+     × prose.state.publicOrder.rung.sentence: its server and twin hosts are declared and exist (not PLANNED)
+     × prose.state.publicOrder.rung.glance: its server and twin hosts are declared and exist (not PLANNED)
+     × prose.threat.economic: its server and twin hosts are declared and exist (not PLANNED)
+     × prose.wall.rationale: its server and twin hosts are declared and exist (not PLANNED)
+     × prose.shadowEconomy: its server and twin hosts are declared and exist (not PLANNED)
+     × prose.incomeMix: its server and twin hosts are declared and exist (not PLANNED)
+     × prose.prosperityHeader.detail: its server and twin hosts are declared and exist (not PLANNED)
+     × prose.prosperity.sentence: its server and twin hosts are declared and exist (not PLANNED)
+     × prose.legacyLines.a: its server and twin hosts are declared and exist (not PLANNED)
+     × prose.legacyLines.b: its server and twin hosts are declared and exist (not PLANNED)
+     × prose.legitimacyBanner: its server and twin hosts are declared and exist (not PLANNED)
+     × prose.legitimacyLens: its server and twin hosts are declared and exist (not PLANNED)
+     × prose.stabilityHeader: its server and twin hosts are declared and exist (not PLANNED)
+     × prose.structureFlag: its server and twin hosts are declared and exist (not PLANNED)
+     × prose.successionRisk: its server and twin hosts are declared and exist (not PLANNED)
+     × prose.conditionSeverity: its server and twin hosts are declared and exist (not PLANNED)
+     × prose.templeFraud: its server and twin hosts are declared and exist (not PLANNED)
+
+--- the readers' walker's faults at red:
++     "src/domain/veil/pageRederive.js :: rederiveRecentConflict: registered, not found",
++   "importRederive.js :: rederiveInPlace does not call rederiveRecentConflict(s, { authoritative: true })",
++   "importRederive.js does not import rederiveRecentConflict from ./pageRederive.js",
++   "pageRederive.js :: rederiveRecentConflict: no such top-level declaration",
++   "pageRederive.js does not import generatePowerStructure from the engine's own module",
++   "rederiveForPage does not call rederiveRecentConflict",

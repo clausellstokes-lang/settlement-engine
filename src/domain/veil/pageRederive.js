@@ -42,6 +42,20 @@
  * and the page model is not marked with the grouping shut. Where it cannot be sure it draws no list (VR17). The import's save
  * calls the same reader (importRederive.js). No seed: the writer's list is the record's on every nothing-hidden reading (TELL8 1c).
  *
+ * THE RECENT-CONFLICT SENTENCE (R5-RECENT; the chair's rulings E92 (1)-(2), E93 and E97 (1) of 2026-11-22, THE OTHER WAY):
+ *   powerStructure.recentConflict                    generatePowerStructure(tier, the served economy, the adversarial
+ *                                                    neighbour, config, the served houses, { the served stress entries })
+ *                                                    .recentConflict: the engine's own writer (buildGovernanceLabels)
+ * withheld on every non-owner read of every place since R5-RECENT (212 :: _gallery_veil_withhold_always, the twin
+ * galleryWithholdAlways.js :: withholdAlways), it is drawn by the Summary's danger line, the governance account's vignette,
+ * the stability lens and the guard line. THE ONE READER (rederiveRecentConflict, below: reader B, E93) puts it back on the
+ * page's own copy FROM THE SERVED DOCUMENT ALONE, so it names only what the served town implies: a power the read withholds
+ * is never there to be named. Where the stored sentence was a TRANSFER's (rulingPower.js :: transferRulingPower), the page
+ * prints the baseline sentence over the served powers (E93 (3), pre-ruled). A page whose record holds a house a coherence
+ * repair added after the power step reads that house as born (E93 (1): listed by name in the plant's fidelity arm). The
+ * top-level `pressureSentence`, withheld wherever it copied the sentence, is NOT re-filled (E97 (1)). The import's save
+ * calls the same reader (importRederive.js), authoritative.
+ *
  * NOTHING HERE RUNS ON AN OWNER'S OWN RECORD: it is called on a non-owner page's served document alone
  * (src/lib/gallery.js :: fetchPublicDossier, fetchGalleryMap). Pure in its input's values; works in place on the page's
  * own copy and returns it.
@@ -53,6 +67,9 @@ import { defaultSeverityForBand } from '../activeConditions.js';
 import { generateSafetyProfile, settleCrimeLinesToSignal } from '../../generators/safetyProfile.js';
 import { veilGroupingsOf } from '../display/galleryVeil.js';
 import { READINESS_BANDS } from '../../data/bandLadders.js';
+import { generatePowerStructure } from '../../generators/power/rulingStructure.js';
+import { isAdversarialRelationship } from '../relationships/canonicalRelationship.js';
+import { deepClone } from '../clone.js';
 
 /** @typedef {Record<string, unknown>} Doc */
 
@@ -140,6 +157,41 @@ export function rederiveCrimeTypes(doc, { authoritative = false } = {}) {
 }
 
 /**
+ * THE ONE READER OF THE RECENT-CONFLICT SENTENCE (R5-RECENT, reader B): the sentence the served document implies, by the
+ * engine's own writer over the served tier, economy, neighbour, config, houses and stress entries (on copies: the writer is
+ * handed nothing of the page's own), put back on the document in hand (in place) where its power structure was served and
+ * holds no sentence. A document the engine cannot read, or one with no config, draws nothing. It never names
+ * `pressureSentence` (E97 (1)).
+ * @template T @param {T} doc
+ * @param {{ authoritative?: boolean }} [opts] `authoritative` (the import's save): the sentence is ALWAYS the reader's,
+ *   whatever the document held (the share sends none), and none where the reader draws none
+ * @returns {T}
+ */
+export function rederiveRecentConflict(doc, { authoritative = false } = {}) {
+  if (!isRec(doc)) return doc;
+  const s = /** @type {Doc} */ (doc);
+  const ps = recOf(s.powerStructure);
+  if (!ps) return doc;
+  if (authoritative) delete ps.recentConflict;
+  else if ('recentConflict' in ps) return doc;
+  const config = recOf(s.config);
+  if (!config) return doc;
+  try {
+    const entries = listOf(s.stressors).length ? listOf(s.stressors) : isRec(s.stress) ? [s.stress] : listOf(s.stress);
+    const nb = s.neighborRelationship ?? config.neighborRelationship;
+    const neighbour = isRec(nb) && typeof nb.relationshipType === 'string' && isAdversarialRelationship(nb.relationshipType) ? nb : null;
+    const projection = { stressEntries: deepClone(entries) };
+    const fresh = generatePowerStructure(s.tier, deepClone(recOf(s.economicState) ?? {}), deepClone(neighbour), deepClone(config),
+      deepClone(listOf(s.institutions).filter(isRec)), projection);
+    const v = recOf(fresh)?.recentConflict;
+    if (typeof v === 'string') ps.recentConflict = v;
+  } catch {
+    // a document the engine cannot read: the page draws no sentence
+  }
+  return doc;
+}
+
+/**
  * The served document with each drawn, withheld-on-every-read value put back from the served document alone (in place).
  * @template T @param {T} doc
  * @param {{ unveiled?: boolean }} [opts] `unveiled`: the caller KNOWS the share carries no veil (an unmarked share's own
@@ -180,6 +232,7 @@ export function rederiveForPage(doc, { unveiled = false } = {}) {
     }
   }
   rederiveCrimeTypes(s);
+  rederiveRecentConflict(s);
   for (const c of listOf(s.activeConditions)) {
     const cond = recOf(c);
     if (cond && !('severity' in cond) && typeof cond.severityBand === 'string' && BANDS.includes(cond.severityBand)) {

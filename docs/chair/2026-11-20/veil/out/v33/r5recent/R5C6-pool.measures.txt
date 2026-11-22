@@ -1,0 +1,18 @@
+R5R plant (a) r5-taker: reads 54 | gated reads (engine x read) 100 | own engine-reads withholding the target 28 | of them gated 28 | faults 0 
+R5R plant (b) r5-owner: reads 54 | gated reads (engine x read) 60 | own engine-reads withholding the target 20 | of them gated 20 | faults 0 
+R5R plant (c) r5-bare: reads 54 | gated reads (engine x read) 100 | own engine-reads withholding the target 28 | of them gated 28 | faults 0 
+R5R plant (c) r5-possessive: reads 54 | gated reads (engine x read) 100 | own engine-reads withholding the target 28 | of them gated 28 | faults 0 
+R5R plant (c) r5-lower: reads 54 | gated reads (engine x read) 100 | own engine-reads withholding the target 28 | of them gated 28 | faults 0 
+R5R plant (c) r5-owner-lower: reads 54 | gated reads (engine x read) 60 | own engine-reads withholding the target 20 | of them gated 20 | faults 0 
+R5R tooth r5-served: engine-reads 108 | beside a withheld power 100 | faults 0 
+R5R tooth r5-owner-served: engine-reads 108 | beside a withheld power 60 | faults 0 
+R5R tooth hides-nothing: the open town's engine-reads 108 | other towns' reads that hide nothing 52 | faults 0 
+R5C6 fidelity (full pool): births 480 | nothing-hidden 287 | engine-door-reads 2296 | reproduced 2288 | missed places ["r5c2-m3-hamlet-8 (8 reads; cause [\"Citizen militia\"])"] | faults 0 
+R5C6 differential (full shard 2/4 pool): hiding places 39 | hiding reads (place x Reveal DM) 78 | engine-door-reads 312 | equal 312 | faults 0 
+R5C6 differential (full shard 1/4 pool): hiding places 50 | hiding reads (place x Reveal DM) 100 | engine-door-reads 400 | equal 400 | faults 0 
+R5C6 differential (full shard 3/4 pool): hiding places 51 | hiding reads (place x Reveal DM) 101 | engine-door-reads 404 | equal 404 | faults 0 
+R5C6 differential (full shard 0/4 pool): hiding places 53 | hiding reads (place x Reveal DM) 106 | engine-door-reads 424 | equal 424 | faults 0 
+R5C6 count (full shard 2/4 pool): births 120 | a 77 | b 25 | b on places that hide 10 | engine-reads 440 | c server 0 | c twin 0 | hit reads server 0 | twin 0 
+R5C6 count (full shard 1/4 pool): births 120 | a 82 | b 16 | b on places that hide 12 | engine-reads 528 | c server 0 | c twin 0 | hit reads server 0 | twin 0 
+R5C6 count (full shard 3/4 pool): births 120 | a 84 | b 22 | b on places that hide 16 | engine-reads 704 | c server 0 | c twin 0 | hit reads server 0 | twin 0 
+R5C6 count (full shard 0/4 pool): births 120 | a 83 | b 27 | b on places that hide 19 | engine-reads 836 | c server 0 | c twin 0 | hit reads server 0 | twin 0 

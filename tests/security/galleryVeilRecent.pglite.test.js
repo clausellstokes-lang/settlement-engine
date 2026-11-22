@@ -136,11 +136,14 @@ const SIZES = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metr
 const REPAIR_LISTED = Object.freeze({ 'r5c2-m3-hamlet-8': 'Citizen militia' });
 /** The standing slice: the first prefix, the first STANDING_N of each size, and every listed place. */
 const STANDING_N = 6;
+/** `R5C6_SHARD=<i>/<k>` (the full pool only): this run walks the places whose index is i modulo k, so k runs side by side
+ * under one gate cover the 480 (each boots its own chain); the figures are the shards' sum. */
+const SHARD = /^(\d+)\/(\d+)$/.exec(process.env.R5C6_SHARD || '');
 function poolSeeds() {
   const out = [];
   for (const prefix of POOL_FULL ? ['r5c2-m3', 'r5c2-m3b'] : ['r5c2-m3']) for (const size of SIZES) for (let i = 0; i < (POOL_FULL ? 40 : STANDING_N); i += 1) out.push({ seed: `${prefix}-${size}-${i}`, size });
   for (const seed of Object.keys(REPAIR_LISTED)) if (!out.some((x) => x.seed === seed)) out.push({ seed, size: seed.split('-').slice(-2, -1)[0] });
-  return out;
+  return POOL_FULL && SHARD ? out.filter((_x, i) => i % Number(SHARD[2]) === Number(SHARD[1])) : out;
 }
 /** The sentence a document holds, or null. */
 const sentenceOf = (d) => (isRec(d?.powerStructure) && typeof d.powerStructure.recentConflict === 'string' ? d.powerStructure.recentConflict : null);
@@ -387,7 +390,7 @@ describe('R5-RECENT (E78 (1); cured by E92 (1), E93, E97 (1)): powerStructure.re
   };
   const hidesAny = (t) => arr(t.institutions).some((h) => isRec(h) && isHideableHouse(h)) || listsOf(t).some((f) => f.hidden === true);
   /** One read of a stored record at one setting: the server's gallery read and import read, and the twin's document. */
-  const readOne = async (stored, deltas, dm) => {
+  const readOne = async (stored, deltas, dm, { importToo = true } = {}) => {
     m += 1;
     const ov = veil.writeShareVeil({}, deltas, { mode: 'live', at });
     const id = `7e5c7000-0000-0000-0000-${String(m).padStart(12, '0')}`;
@@ -396,9 +399,12 @@ describe('R5-RECENT (E78 (1); cured by E92 (1), E93, E97 (1)): powerStructure.re
       values ($1,$2,$3,$4,$5::jsonb,true,$6,now(),$7,'unlisted',$8::jsonb,$9,true)`, [id, OWNER, String(stored.name), String(stored.tier), J(stored), slug, `${slug}-link`, J(ov), dm]);
     await db.exec(`set test.uid = '';`);
     const gallery = (await db.query('select to_jsonb(g.data) d from public.get_gallery_dossier($1) g', [slug])).rows[0]?.d;
-    await db.exec(`set test.uid = '${READER}';`);
-    const imported = (await db.query('select to_jsonb(g.data) d from public.import_gallery_dossier($1) g', [slug])).rows[0]?.d;
-    await db.exec(`set test.uid = '';`);
+    let imported = null;
+    if (importToo) {
+      await db.exec(`set test.uid = '${READER}';`);
+      imported = (await db.query('select to_jsonb(g.data) d from public.import_gallery_dossier($1) g', [slug])).rows[0]?.d;
+      await db.exec(`set test.uid = '';`);
+    }
     const twin = veil.projectShareVeil(veil.galleryPayloadFor(clone(stored), { shareDm: dm, memberOverrides: ov }), ov);
     return { server: { page: isRec(gallery) ? gallery : null, import: isRec(imported) ? imported : null }, twin: { page: twin, import: twin } };
   };
@@ -437,7 +443,7 @@ describe('R5-RECENT (E78 (1); cured by E92 (1), E93, E97 (1)): powerStructure.re
       if (ms.every((x) => x.cause) && REPAIR_LISTED[seed] !== ms[0].cause) faults.push(`${seed}: a coherence-repair miss (${ms[0].cause}) not LISTED BY NAME (REPAIR_LISTED)`);
     }
     for (const seed of listedHere) if (!misses.has(seed)) faults.push(`${seed}: LISTED, but its page reproduces the stored sentence now (re-take the list)`);
-    note(`R5C6 fidelity (${POOL_FULL ? 'full' : 'standing'} pool): births`, (await poolOf()).length, '| nothing-hidden', births.length, '| engine-door-reads', reads, '| reproduced', reproduced,
+    note(`R5C6 fidelity (${POOL_FULL ? `full${SHARD ? ` shard ${SHARD[0]}` : ''}` : 'standing'} pool): births`, (await poolOf()).length, '| nothing-hidden', births.length, '| engine-door-reads', reads, '| reproduced', reproduced,
       '| missed places', J([...misses].map(([k, ms]) => `${k} (${ms.length} reads; cause ${J([...new Set(ms.map((x) => x.cause))])})`)), '| faults', faults.length, faults.length ? `\n  ${faults.slice(0, 40).join('\n  ')}` : '');
     expect(births.length, 'the pool holds nothing-hidden places').toBeGreaterThan(0);
     expect(reads, 'both engines, both doors, Reveal DM off and on, every nothing-hidden place').toBe(births.length * 8);
@@ -478,7 +484,7 @@ describe('R5-RECENT (E78 (1); cured by E92 (1), E93, E97 (1)): powerStructure.re
         for (const door of ['page', 'import']) if (at2[`server ${door}`] !== at2[`twin ${door}`]) faults.push(`${seed} ${door} dm=${dm}: server ${J(at2[`server ${door}`]).slice(0, 100)} | twin ${J(at2[`twin ${door}`]).slice(0, 100)}`);
       }
     }
-    note(`R5C6 differential (${POOL_FULL ? 'full' : 'standing'} pool): hiding places`, births.length, '| hiding reads (place x Reveal DM)', hiding, '| engine-door-reads', reads, '| equal', equal, '| faults', faults.length, faults.length ? `\n  ${faults.slice(0, 40).join('\n  ')}` : '');
+    note(`R5C6 differential (${POOL_FULL ? `full${SHARD ? ` shard ${SHARD[0]}` : ''}` : 'standing'} pool): hiding places`, births.length, '| hiding reads (place x Reveal DM)', hiding, '| engine-door-reads', reads, '| equal', equal, '| faults', faults.length, faults.length ? `\n  ${faults.slice(0, 40).join('\n  ')}` : '');
     expect(hiding, 'the pool holds hiding reads').toBeGreaterThan(0);
     expect(reads, 'both engines, both doors, every hiding read').toBe(hiding * 4);
     // anchored: reads is asserted above, so an empty fault list is a judgment over every hiding read
@@ -499,7 +505,7 @@ describe('R5-RECENT (E78 (1); cured by E92 (1), E93, E97 (1)): powerStructure.re
       if (!hidesAny(t)) continue;
       bHiding += 1;
       for (const dm of [false, true]) for (const [setting, deltas] of Object.entries(settingsOf(t, dm))) {
-        const got = await readOne(t, deltas, dm);
+        const got = await readOne(t, deltas, dm, { importToo: false });
         for (const eng of ['server', 'twin']) {
           const d = got[eng].page;
           if (!isRec(d)) { faults.push(`${seed} ${eng} ${setting} dm=${dm}: no document`); continue; }
@@ -508,7 +514,7 @@ describe('R5-RECENT (E78 (1); cured by E92 (1), E93, E97 (1)): powerStructure.re
         }
       }
     }
-    note(`R5C6 count (${POOL_FULL ? 'full' : 'standing'} pool): births`, births.length, '| a', a, '| b', b, '| b on places that hide', bHiding, '| engine-reads', reads, '| c server', c.server.size, '| c twin', c.twin.size, '| hit reads server', hits.server.length, '| twin', hits.twin.length, hits.server.length ? `\n  ${hits.server.slice(0, 20).join('\n  ')}` : '');
+    note(`R5C6 count (${POOL_FULL ? `full${SHARD ? ` shard ${SHARD[0]}` : ''}` : 'standing'} pool): births`, births.length, '| a', a, '| b', b, '| b on places that hide', bHiding, '| engine-reads', reads, '| c server', c.server.size, '| c twin', c.twin.size, '| hit reads server', hits.server.length, '| twin', hits.twin.length, hits.server.length ? `\n  ${hits.server.slice(0, 20).join('\n  ')}` : '');
     expect(reads, 'every setting, Reveal DM off and on, both engines, on every place of (b) that hides').toBe(bHiding * 2 * 11 * 2);
     expect(faults).toEqual([]);
     // the figure is the hand-back's; the arm holds the two engines to one count, read for read

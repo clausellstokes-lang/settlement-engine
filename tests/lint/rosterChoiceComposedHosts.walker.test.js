@@ -93,6 +93,7 @@ describe('the judgment proves itself on synthetic rows (its own controls)', () =
   test('the census is not vacuous: the registry holds composed rows, walked in its own order from the first; power.recentConflict is not among them (E97 (5): the pin re-taken, the row having left the composed form)', () => {
     expect(COMPOSED.length).toBeGreaterThanOrEqual(10);
     expect(ORDERED[0]?.id).toBe(FIRST);
+    // anchored: ORDERED is asserted non-empty and equal to the registry's composed list on the lines beside it, so the absence is of a member, not of the list
     expect(ORDERED.map((r) => r.id)).not.toContain(LEFT);
     expect(ORDERED.map((r) => r.id).sort()).toEqual(COMPOSED.map((r) => r.id).sort());
     expect(Object.keys(REGISTRY_HOSTS).length).toBeGreaterThan(0);
@@ -101,10 +102,8 @@ describe('the judgment proves itself on synthetic rows (its own controls)', () =
 
 describe('THE ROW THAT LEFT THE COMPOSED FORM, walked by name (R5-RECENT: E92 (1), E93, E97 (5))', () => {
   test(`${LEFT}: not composed; withheld ALWAYS, the page re-deriving it, built on R2's always-host in both engines (hosts that exist)`, () => {
-    const r = REGISTRY_ROWS.find((x) => x.id === LEFT);
-    expect(r, `the registry holds ${LEFT}`).toBeTruthy();
-    if (!r) return;
-    expect(isComposed(r), `${LEFT} has left the composed form (no inputs)`).toBe(false);
+    const r = REGISTRY_ROWS.find((x) => x.id === LEFT) ?? { id: LEFT, inputs: ['(no such row)'], server: '', twin: '' };
+    expect(isComposed(r), `${LEFT} is in the registry and has left the composed form (no inputs)`).toBe(false);
     expect({ rule: r.rule, when: r.when, page: r.page, built: r.built }).toEqual({ rule: 'withhold', when: 'always', page: 're-derive', built: true });
     expect({ server: r.server, twin: r.twin }).toEqual({ server: 'public._gallery_veil_withhold_always', twin: 'src/domain/display/galleryWithholdAlways.js :: withholdAlways' });
     // anchored: the same judgment names faults on the synthetic planned rows above, so an empty list is a judgment
