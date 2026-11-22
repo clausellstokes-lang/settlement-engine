@@ -7,15 +7,16 @@ Seat DAILY-3 (session_01ACmDYYZpEdm9Ag2ikDGTf9), eighth chair session_01ACmDYY29
 ## 1. WHERE THE LANE STANDS (written 2026-11-22 08:03 UTC)
 - `lane/daily-3-2026-11-22` (pushed) = f5295e425 + E1 (merge 4c1a72892; cures 4a9ff22bf, 978968735) + E2 (merge of
   `-e2-wip` fceee55ea; the observed-shape readers by their door 3b0e62e44; the lighting census 771f1865f, 3,743 files) +
-  docs. `tests/lint` whole at 35a25ab11 (before E2): 3 red = the line's three. At E2's merge: `tests/lint` whole + 24
-  governing files RUNNING at this writing.
+  docs. `tests/lint` whole at 35a25ab11 (before E2): 3 red = the line's three. At E2's merge (771f1865f): `tests/lint` whole
+  + 24 governing files, 247 files, 8 red, ALL on RED-AT-LINE by name.
 - E2 (red on its base 11 of 14): food top sentence 9/9/9/7/9/8%, EMPTY 0; resentments top 17/11/13/7/10/14%, EMPTY
   19/9/7/35/34/26% (the calm rule); false 0; hand +2 (HAND_CEILING 76), house readings hand 378 -> 385; classes ceiling
   1779 -> 1775. NOT BUILT: food S10/A13 (millSource), T9/C5 + resentments F0 (grainHeld), L4 (legitimacyGrave), L8-L12
   (ruler labels); food A4/A12 struck by the style law ("rather than": the chair's rewording).
 - Builders: `-e1-wip` e0e5125c5 and `-e2-wip` fceee55ea MERGED (the remote `-e2-wip` holds the earlier snapshot
-  5151936b2, superseded); `-e3-wip` cut at 771f1865f, IN FLIGHT (`briefs/B3-E3-DAILY-3-DISPATCH.md`); U4c-M, the PDF
-  chapter's measure, IN FLIGHT read-only in `/home/user/wt-daily3-4c` at stack-96 b03a31560 (`briefs/U4C-MEASURE-PDF-CHAPTER.md`).
+  5151936b2, superseded); `-e3-wip` cut at 771f1865f, IN FLIGHT (`briefs/B3-E3-DAILY-3-DISPATCH.md`); `-f1-wip` cut at d2295da8a, IN FLIGHT
+  (`briefs/B3-F1-DAILY-3-DISPATCH.md`: the chair's ruled lines). U4c-M DONE (2026-11-22 08:25 UTC): `measures/U4C/REPORT.md` (the print
+  is the owner's record, dmView; one writer-reach row would move; no golden; three questions with the chair).
 - NEXT: E2's green read by name; E3's merge; E1b (rulings of 06:17: crime70 #4 reworded; E1's test to 5 a size); on
   the line's tip: the merge, 4b, the smugglers lines, 4 and 4c.
 
