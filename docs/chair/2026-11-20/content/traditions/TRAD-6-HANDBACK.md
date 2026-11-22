@@ -5,12 +5,18 @@ Seated 2026-11-22 08:17 UTC by the eighth chair (session_01ACmDYY29VRchM87v1yhL9
 FILE, that prompt and the briefs under `briefs/` only. Every ruling in force is TRAD-5-HANDBACK §1 (1 to 23), restated by
 reference, plus §2 below.
 
-## 1. WHERE THE LANE STANDS
-- Branch `lane/trad-6-2026-11-22`; started at `b97fd16f7` (= `lane/trad-5-2026-11-20`; code `cd6989657`).
-- LANDED: "TRAD cf5b24079" (units 5 to 12) = point 88.
-- MERGED ON THE LANE, NOT LANDED: unit 13 (`f6cb2d68d`; census `cd6989657`).
-- IN FLIGHT: unit 1 (unit 13's failures named), its gate batch at `cd6989657`.
-- NEXT: name the reds; cure the presumption walker's one hit by a builder; unit 2 (the 292 bytes); unit 3 (rule 8, "TRAD <commit>").
+## 1. WHERE THE LANE STANDS — PARKED by the chair 09:08 UTC 2026-11-22 (the owner's six-seat limit); wait for "GO TRAD-6"
+- DONE, PROVEN: unit 1, unit 13's failures named (§3): 4 red in the dirs, 13 in tests/build; all on the list but two, both explained.
+- Branch `lane/trad-6-2026-11-22` (code still `cd6989657`; docs only above it). Unit 13 merged, NOT landed; no request sent.
+- IN THE AIR: the presumption cure, GREEN, committed by the builder as `ed171f4b8` on LOCAL branch
+  `lane/trad-6-2026-11-22-u1-wip` (worktree `scratchpad/wt/u1`; one file: `line()` freezes array fields, the forge "also" row
+  `needs: ['institution: smith']`; walker 16/16, six traditionDescription files 167/167, `tests/lint` whole 221 files 3313/3313,
+  eslint 0, typechecks at ceiling). ITS PUSH WAS REFUSED by my permission check (09:2x): it lives only in this container.
+  Not yet read whole by TRAD-6, not merged.
+- UNIT 2 (the 292 bytes): NOT STARTED: three worktrees cut (cf5b24079, 89ab44e34, 5fca4362d in `scratchpad/wt/{c,a,b}`,
+  node_modules linked), script `scratchpad/u2/gate.sh`; stopped while queued on the mutex, no build ran.
+- NEXT AT "GO": read `ed171f4b8` whole, merge it, `tests/lint` whole; run `u2/gate.sh`; itemize by chunk; then unit 3.
+- Tokens ~140k (my estimate).
 
 ## 2. RULINGS ADDED SINCE TRAD-5 (the eighth chair's)
 24. E54: the lane merges nothing of the line for unit 13; rule 8 runs on the lane's own base; the chair's landing helper merges the tip.
