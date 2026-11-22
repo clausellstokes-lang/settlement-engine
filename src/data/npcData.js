@@ -1401,7 +1401,7 @@ export const NPC_FACTION_LOYALTY = {
     'They can read an old hand that nobody else nearby can, and have been asked to read something they wish they had not.',
     'They remember how a certain old agreement was really made, and are the last who do.',
     'They know why a certain door nearby is always kept shut, and change the subject whenever it comes up.',
-    'A stranger has taken lodging nearby and is far too interested in their old stories.',
+    'A new lodger nearby is far too interested in their old stories.',
     'They came here from elsewhere long ago, and some of their neighbours still lower their voices when they pass.',
     'They have taken a liking to a visitor nobody else trusts, and their neighbours have noticed.',
     'They go by a different name than the one they were born with, and someone has just called them by the old one.',

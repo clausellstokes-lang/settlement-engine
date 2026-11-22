@@ -48,7 +48,8 @@
  *   - hookThemes.js imports nothing from src/data/ (the reason the digest exists);
  *   - THE COLLISION WALK (C2) over what is cheap in a test: the live pools and the stored saves under
  *     tests/fixtures/legacy-saves/ (their texts, recomputed here), and the golden master's and the hxd births'
- *     folded texts' hashes as taken at the base (tests/fixtures/hookThemeAnswers.base.json): no stored text
+ *     folded texts' hashes as taken at the base (tests/fixtures/hookThemeAnswers.base.json, composed with its steps by
+ *     tests/helpers/hookThemeAnswers.js, the one reader of the base; CURE-REWORD-LODGER addendum 1): no stored text
  *     outside the pools hashes to a tagged line, and every typed one keeps its theme. The whole corpus (golden 525,
  *     census 720, hxd, legacy) is walked over its TEXTS by docs/chair/2026-11-20/content/depth/themes/
  *     corpus-scan.mjs --check, too slow for a test; this walker says so rather than pretend.
@@ -79,6 +80,7 @@ import {
   liveDigestBlock,
   readDigestBlock,
 } from '../../scripts/hook-theme-digest.mjs';
+import { composedAnswers } from '../helpers/hookThemeAnswers.js';
 
 const ROOT = process.cwd();
 /** Every authored loyalty template the generator can draw, in pool order (CENSUS-3e: a declared row is `{ text, needs }`; its text is the template). */
@@ -217,10 +219,10 @@ describe('HK-1 hook-theme vocabulary — totality against the live pools', () =>
     expect(shared, 'two distinct folded texts (pools + stored saves) share a hash').toEqual([]);
     expect(outside.filter((f) => digestTheme.has(digestKeyOf(f))), 'a stored text in no pool hashes to a tagged line').toEqual([]);
 
-    // the golden master's and the hxd births' folded texts' hashes, as taken at the base
-    const fixture = JSON.parse(readFileSync(join(ROOT, 'tests/fixtures/hookThemeAnswers.base.json'), 'utf8'));
+    // the golden master's and the hxd births' folded texts' hashes, as taken at the base and composed with its steps
+    const composed = composedAnswers();
     for (const part of ['golden', 'hxd', 'legacy']) {
-      const answers = /** @type {Record<string, string[]>} */ (fixture.parts[part]);
+      const answers = /** @type {Record<string, string[]>} */ (composed[part]);
       const untyped = answers[UNTYPED] || [];
       const typed = Object.entries(answers).filter(([a]) => a !== UNTYPED).flatMap(([a, hs]) => hs.map((h) => [h, a]));
       // anchored: each part holds both kinds

@@ -1,0 +1,23 @@
+{
+ "about": "The ordered STEPS composed over tests/fixtures/hookThemeAnswers.base.json (which is never edited) by tests/helpers/hookThemeAnswers.js. A later tranche or rewording APPENDS a step here; it never edits the base or an earlier step. Each step names one part, retires hashes that part held before it, and adds hashes it did not (answer -> base-36 fnv1a32(hookThemeKey(text))); no sentence is quoted.",
+ "steps": [
+  {
+   "cause": "DEPTH-5 E6 (c), ruled 2026-11-21 23:21 UTC: NPC_FACTION_LOYALTY.other[61] reworded (style law, struck phrase a-stranger); its theme stays outsider_suspicion. Hooks tranche 1 has never shipped, so no stored town holds the old text.",
+   "part": "pools",
+   "retire": ["1i5ftjy"],
+   "add": { "outsider_suspicion": ["1lereo9"] }
+  },
+  {
+   "cause": "DEPTH-5 E6 (c), ruled 2026-11-21 23:21 UTC: NPC_FACTION_LOYALTY.other[61] reworded; the golden births held the old line's hash at the base. Hooks tranche 1 has never shipped, so no stored town holds the old text; the part is matched, so nothing is added.",
+   "part": "golden",
+   "retire": ["1i5ftjy"],
+   "add": {}
+  },
+  {
+   "cause": "DEPTH-5 E6 (c), ruled 2026-11-21 23:21 UTC: NPC_FACTION_LOYALTY.other[61] reworded; the hxd births held the old line's hash at the base. Hooks tranche 1 has never shipped, so no stored town holds the old text; the part is matched, so nothing is added.",
+   "part": "hxd",
+   "retire": ["1i5ftjy"],
+   "add": {}
+  }
+ ]
+}

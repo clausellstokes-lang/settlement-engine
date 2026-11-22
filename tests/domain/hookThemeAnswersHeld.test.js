@@ -14,6 +14,12 @@
  *            text the fixture holds answers what it answered, and at least 50 of them do, typed and untyped both (a
  *            later tranche's appended line may move a birth's draws, so the births are matched, not frozen).
  * The whole corpus (golden 525, census 720, hxd, legacy) is held by the scan's --check, beside the script.
+ *
+ * THE STEPS (CURE-REWORD-LODGER, addendum 1, DEPTH-5, 2026-11-22). The base is never edited: a later tranche or rewording
+ * that moves a line's hash APPENDS a step to tests/fixtures/hookThemeAnswers.steps.json, and this file reads base ∘ steps
+ * through tests/helpers/hookThemeAnswers.js (the one home of the composition; the totality walker reads it too). The
+ * `steps` part below holds the composition itself: a step retires only hashes its part held, adds only hashes it did not,
+ * the composed pools hold 270, and every answer no step names is the base's.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
@@ -29,10 +35,11 @@ import { normalizeSettlement } from '../../src/domain/normalizeSettlement.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { answerByHash, composeAnswers, composedAnswers, readAnswersBase, readAnswersSteps } from '../helpers/hookThemeAnswers.js';
 
-const FIXTURE = JSON.parse(readFileSync(join(process.cwd(), 'tests/fixtures/hookThemeAnswers.base.json'), 'utf8'));
-/** @param {string} part @returns {Map<string, string>} hash -> answer at the base */
-const baseOf = (part) => new Map(Object.entries(FIXTURE.parts[part]).flatMap(([answer, hashes]) => hashes.map((h) => [h, answer])));
+const ANSWERS = composedAnswers();
+/** @param {string} part @returns {Map<string, string>} hash -> answer at the base, composed with its steps */
+const baseOf = (part) => answerByHash(ANSWERS[part]);
 /** @param {string} text */
 const hashOf = (text) => fnv1a32(hookThemeKey(text)).toString(36);
 
@@ -59,6 +66,36 @@ function answersNow(texts) {
 }
 
 describe('themeOfText answers what it answered at the base 2582075ed', () => {
+  it('steps: each retires only what its part held and adds only what it did not; the pools hold 270; every other answer is the base\'s', () => {
+    const base = readAnswersBase();
+    const steps = readAnswersSteps();
+    const { parts, faults } = composeAnswers(base, steps);
+    // anchored: the steps file is live and its first step moves the pools (CURE-REWORD-LODGER, E6 (c))
+    expect(steps.length).toBeGreaterThanOrEqual(1);
+    expect(steps[0].part).toBe('pools');
+    expect(faults).toEqual([]);
+    expect(answerByHash(parts.pools).size, 'the composed pool part').toBe(270);
+    expect(Object.keys(parts).sort()).toEqual(Object.keys(base.parts).sort());
+    for (const [name, part] of Object.entries(base.parts)) {
+      const named = new Set(steps.filter((s) => s.part === name).flatMap((s) => [...(s.retire || []), ...Object.values(s.add || {}).flat()]));
+      const was = answerByHash(part);
+      const now = answerByHash(parts[name]);
+      expect([...was].filter(([h, a]) => !named.has(h) && now.get(h) !== a), `${name}: an answer no step names moved`).toEqual([]);
+      expect([...now].filter(([h]) => !named.has(h) && !was.has(h)), `${name}: a hash no step names appeared`).toEqual([]);
+    }
+    // the composition's refusals, EXECUTED on planted steps: a retire of an unheld hash, an add of a held one, no cause
+    const [held] = [...answerByHash(base.parts.pools).keys()];
+    const planted = composeAnswers(base, [
+      { cause: 'planted', part: 'pools', retire: ['zzzzzzz'], add: { ambition: [held] } },
+      { cause: '', part: 'pools', retire: [], add: {} },
+    ]);
+    expect(planted.faults).toEqual([
+      'step 0 (pools): retires zzzzzzz, which the part did not hold',
+      `step 0 (pools): adds ${held}, which the part already held`,
+      'step 1 (pools): no cause',
+    ]);
+  });
+
   it('pools: every NPC_FACTION_LOYALTY line, exact set, every answer equal', () => {
     const base = baseOf('pools');
     const { now, split } = answersNow(Object.values(NPC_FACTION_LOYALTY).flat().map(lineText));
