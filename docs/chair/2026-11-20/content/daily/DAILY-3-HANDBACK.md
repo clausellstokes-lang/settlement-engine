@@ -21,11 +21,18 @@ Seat DAILY-3 (session_01ACmDYYZpEdm9Ag2ikDGTf9), eighth chair session_01ACmDYY29
      beside `office: lord's steward` and `sovereign`). Red first, `tests/lint` whole, the house readings by their reading,
      the lighting census by its door. Why: on hxd-thorp-52/-59/-93/-140 the page says "the reeve" holds the Feudal
      Stewardship's seat and no steward's house stands, so L12 asserted a second officer (E95 condition 2 failed).
+     L12 is CUT (E107, by DAILY-3's count), not built with the house need.
   2. 4c's MERGE on the chair's word: `lane/daily-3-2026-11-22-4c-wip` at 5c5ab5466 (pushed; built and red-first proved
      by its builder: red 2/2, green; tests/pdf + tests/architecture 966 passed; goldenViewModel HOLDS). LEFT RED BY RULE:
      `tests/lint/writerReach.walker` "the surfaceReach grammar round-trips…", `scripts/.writer-reach-baseline.json`
      row `yearsAgo on legacyAnnotations` dossier-pdf N->R (dailyLife.js enters the PDF's import set, 629 -> 644 files):
-     ASKED OF THE CHAIR at 17:4x (re-freeze by its door, or another shape). Read its diff once (its commit title says
+     RULED BY THE CHAIR'S E108 (17:49): RE-FREEZE `scripts/.writer-reach-baseline.json` BY ITS OWN DOOR for that row, in
+     the merge's register commit, on three conditions: (1) the door's report shows THAT ROW ALONE moving (no identity new,
+     nothing else widened); (2) the cause in the message: the PDF chapter derives its lines through `dailyLife.js ::
+     deriveDailyLifeSlot`, whose import closure holds the substrate's history reads (the PDF's import set 629 -> 644
+     files; the reach is by import; the chapter prints no age); (3) the PDF chunk's size BEFORE and AFTER (a build) in
+     this section (a rise is NAMED for the owner, signed by nobody). NOT BUILT NOW, named for after the first deploy: the
+     narrower shape (the chapter imports a leaf that derives only its slots, so the PDF's import set does not grow). Read its diff once (its commit title says
      "chapter 15": check it is the Daily Life chapter the chair calls "chapter 02"); re-run its red; merge; lighting.
   3. The line's merge, ONCE, at the tip the chair sends (point 102 expected), then RULE 8, the owner's file, "DAILY-B"
      (below).
