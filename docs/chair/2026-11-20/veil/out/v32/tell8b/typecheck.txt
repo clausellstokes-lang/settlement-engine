@@ -1,0 +1,1 @@
+[typecheck-ratchet] OK — no type regressions (167 error(s), ceiling 167).

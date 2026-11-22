@@ -1,0 +1,47 @@
+== tip b6b6b723e (git archive build)
+first paint: raw 1175552 gzip 374005 brotli 314230 (8 chunks)
+    5362    2610    2244 content-identity
+  154520   45525   37377 data
+  308130   99054   83544 engine-core
+  489017  155283  128987 index
+    4722    2501    2263 kernel
+    3579    1472    1319 vendor-icons
+  193176   60454   52076 vendor-react
+   17046    7106    6420 vendor-state
+== cure 977518282
+first paint: raw 1175552 gzip 374025 brotli 314125 (8 chunks)
+    5362    2610    2244 content-identity
+  154520   45525   37377 data
+  308130   99054   83544 engine-core
+  489017  155303  128882 index
+    4722    2501    2263 kernel
+    3579    1472    1319 vendor-icons
+  193176   60454   52076 vendor-react
+   17046    7106    6420 vendor-state
+== entry chunk (src="/assets/index-C1Bq8rmq.js) equals the tip's byte for byte once each lazy chunk's 8-character content hash is normalised (cmp: equal)
+== VERIFY_DIST=1 tip:
+     × the generation worker bundle stays under its measured ceiling (monotone-down; WORKER_BUNDLE_CEILING_BYTES) 15ms
+     × the engine chunk still exists (lazy) and remains large 22ms
+     × entry static closure raw bytes stay under the first-paint budget (1175492) 5ms
+     × entry static closure gzip bytes stay under 373999 2195ms
+     × entry static closure Brotli bytes stay under 313994 1ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+      Tests  5 failed | 61 passed (66)
+== VERIFY_DIST=1 cure:
+     × the generation worker bundle stays under its measured ceiling (monotone-down; WORKER_BUNDLE_CEILING_BYTES) 12ms
+     × the engine chunk still exists (lazy) and remains large 30ms
+     × entry static closure raw bytes stay under the first-paint budget (1175492) 5ms
+     × entry static closure gzip bytes stay under 373999 2341ms
+     × entry static closure Brotli bytes stay under 313994 1ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+      Tests  5 failed | 61 passed (66)
+tip AssertionError: generation worker bundle generation.worker-DgqQmyFW.js is 2579751 B; the ceiling is 2579708 B (re-recorded at the measured figure by the chair's ruling B3, 2026-11-15, the close of the round BAR3, as at the close of BAR2; before it WB1, ODQ §934.105). A RISE IS NEVER A LANE'S EDIT: buy the bytes back, or take the ruling.: expected 2579751 to be less than or equal to 2579708
+tip AssertionError: expected 910231 to be less than 909928
+tip AssertionError: first-paint static closure = 1175552 bytes (budget 1175492):
+tip AssertionError: first-paint gzip transfer = 374005 B (budget 373999):
+tip AssertionError: first-paint Brotli transfer = 314230 B (budget 313994):
+cure AssertionError: generation worker bundle generation.worker-DgqQmyFW.js is 2579751 B; the ceiling is 2579708 B (re-recorded at the measured figure by the chair's ruling B3, 2026-11-15, the close of the round BAR3, as at the close of BAR2; before it WB1, ODQ §934.105). A RISE IS NEVER A LANE'S EDIT: buy the bytes back, or take the ruling.: expected 2579751 to be less than or equal to 2579708
+cure AssertionError: expected 910247 to be less than 909928
+cure AssertionError: first-paint static closure = 1175552 bytes (budget 1175492):
+cure AssertionError: first-paint gzip transfer = 374025 B (budget 373999):
+cure AssertionError: first-paint Brotli transfer = 314125 B (budget 313994):
