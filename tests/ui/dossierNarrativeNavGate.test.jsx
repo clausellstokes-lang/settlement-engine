@@ -65,7 +65,6 @@ function freshStore() {
     regenSection: vi.fn(),
     // Default: a FAILED narration writes aiError and leaves no aiSettlement.
     requestNarrative: vi.fn(async () => { storeState.aiError = 'The narrative layer could not be generated. Try again.'; }),
-    requestDailyLife: vi.fn(),
     getCost: vi.fn(() => 0),
     creditBalance: 100,
     aiLoading: false,

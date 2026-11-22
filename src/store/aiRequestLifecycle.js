@@ -1,7 +1,7 @@
 /**
  * Shared AI request lifecycle policy and presentation copy.
  *
- * Narrative, Daily Life, and Progression each have different payloads but share
+ * Narrative and Progression each have different payloads but share
  * the same stale-request law: only the current request for the current save may
  * commit. A request whose view moved may release the loading lock; a superseded
  * request touches nothing.
@@ -20,14 +20,6 @@ export const NARRATIVE_FIELD_LABELS = Object.freeze({
   frictionPoints: 'Surfacing local grievances',
   connectionsMap: 'Mapping the political web',
   dmCompass: 'Drafting DM guidance',
-});
-
-export const DAILY_LIFE_FIELD_LABELS = Object.freeze({
-  dawn: 'Lighting the dawn',
-  morning: 'Opening the market',
-  midday: 'Gathering for midday',
-  evening: 'Filling the tavern',
-  night: 'Walking the night watch',
 });
 
 export const ROTATING_AI_PROGRESS = Object.freeze([

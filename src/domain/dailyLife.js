@@ -883,6 +883,7 @@ export function deriveDailyLifeSlot(key, settlement) {
   const ctx = buildContext(settlement);
   return DERIVERS[key](settlement, ctx);
 }
+export const DAILY_LIFE_EMPTY_SLOT_TEXT = /** @type {string} */ (deriveDailyLifeSlot(DAILY_LIFE_SLOTS[0], null)?.text); // the empty slot's marker, read from the one place that writes it (no second spelling)
 
 /**
  * Derive every canonical daily-life slot. Builds context once.

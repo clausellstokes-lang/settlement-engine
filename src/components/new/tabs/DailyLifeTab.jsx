@@ -5,11 +5,9 @@ import { sans } from '../Primitives';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { extractSettlementContext } from '../dailyLifeLogic';
-import { deriveDailyLifeSlot } from '../../../domain/dailyLife.js';
-import { textOf } from '../../../domain/facts/textOf.js'; // R-C (CENSUS-2e): a declared row gives back its text until its site is wired
+import { deriveDailyLifeSlot, DAILY_LIFE_EMPTY_SLOT_TEXT } from '../../../domain/dailyLife.js';
 import { useStore } from '../../../store/index.js';
 import { economyDeskRead } from '../economyDeskRead.js';
-import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
 import { DeskLines } from './EconomicsGlance.jsx'; // the shared position renderer (see its docblock)
 import { edged } from '../../../design/edgedBox.js';
 import { foodBandOf } from '../../../domain/summary/tonightSheet.js'; // the food label's one home (ROUND THREE item 2b)
@@ -67,7 +65,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, publicDossier = fal
     for (const key of ENGINE_SLOTS) {
       const slot = deriveDailyLifeSlot(key, r);
       const sentence = typeof slot?.text === 'string' ? slot.text.trim() : '';
-      if (sentence && sentence !== '—') out.push(sentence);
+      if (sentence && sentence !== DAILY_LIFE_EMPTY_SLOT_TEXT) out.push(sentence);
     }
     return out;
   }, [r]);
@@ -199,36 +197,6 @@ function formatDailyLifeResult(result) {
   return parts.join('\n\n');
 }
 
-function humanize(value) {
-  if (!value) return '';
-  return String(value)
-    .replace(/_/g, ' ')
-    .replace(/\b\w/g, ch => ch.toUpperCase());
-}
-
-function listText(items, fallback) {
-  const clean = (items || []).filter(Boolean);
-  if (!clean.length) return fallback;
-  if (clean.length === 1) return clean[0];
-  return `${clean.slice(0, -1).join(', ')} and ${clean.at(-1)}`;
-}
-
-/**
- * THE LOCAL NARRATIVE'S CELLS (CENSUS-2e unit 2; ledger docs/census/declarations/DAILY_LIFE_TAB.json,
- * the localNarrative pools). Inline T branches, carried through `textOf` (R-C) until the site is
- * wired: each cell declares what its text presumes. The food, order, stress and paragraph pools are
- * the ledger's `{crisis-scoped}` pools (flagged in DAILY_LIFE_LOCAL_CRISIS_SCOPED; a scoped pool's
- * calm line is silent, its crisis-sayable lines write `crisis: any`). The anchors fallback named a
- * market and a watch post, but it prints only when the place has NO institution in the eight listed
- * categories, so it was true of no place that reaches it: reworded to what it really presumes,
- * nothing (R-W). Paragraph [1]'s guards are the ledger's parked `guards` stop, now `guardPresence`
- * (its priests wait on a faith-presence atom: `priest` reads a senior cleric among the named people).
- * CENSUS-2g unit 3 (the chair's answer 3, block j): the priests declare `priest`, carried until the site
- * is wired; no reword.
- */
-// CENSUS-2f, R-AH: food, order and paragraphs write `crisis: any` on every line; only the stress pool holds a calm line.
-export const DAILY_LIFE_LOCAL_CRISIS_SCOPED = Object.freeze(['localNarrative.stress']);
-
 /**
  * The context with `hasSurplus`: the food record's band where the record has one, else the context's
  * own percent over its old cut (a record written before the band).
@@ -237,41 +205,6 @@ export const DAILY_LIFE_LOCAL_CRISIS_SCOPED = Object.freeze(['localNarrative.str
 function withRecordSurplus(ctx, r) {
   const band = r?.economicState?.foodSecurity?.foodRecord?.band;
   return { ...ctx, hasSurplus: typeof band === 'string' && band ? band === 'surplus' : ctx.foodSurplus > 10 };
-}
-
-function buildLocalDailyLifeNarrative(ctx) {
-  const terrain = humanize(ctx.terrain) || 'mixed terrain';
-  const trade = humanize(ctx.tradeRoute) || 'road access';
-  const culture = humanize(ctx.culture) || 'local custom';
-  const food = textOf(ctx.foodDeficit > 20
-    ? { text: 'bread is dear and the poorest households plan every meal carefully', crisis: ['any'] }
-    : ctx.foodDeficit > 0
-      ? { text: 'food is adequate for most families, though prices are watched closely', excludes: ['famine', 'crisis: famine'], crisis: ['any'] }
-      : ctx.hasSurplus
-        ? { text: 'granaries and kitchen gardens give the town a little breathing room', needs: ['institution: granary'], crisis: ['any'] }
-        : { text: 'the food supply is ordinary, practical, and never taken for granted', excludes: ['crisis: hunger'], crisis: ['any'] });
-
-  const order = textOf(ctx.safetyScore >= 70
-    ? { text: 'people move after dusk with confidence', excludes: ['crisis: threat', 'crisis: unrest'], crisis: ['any'] }
-    : ctx.safetyScore >= 45
-      ? { text: 'doors are barred early and strangers are studied before they are welcomed', crisis: ['any'] }
-      : { text: 'ordinary errands carry a careful awareness of who controls the street', crisis: ['any'] });
-
-  // §934.13 — these names land inside a SENTENCE the reader reads, so they take the seam
-  // like any other print. `keyInsts` holds raw catalogue keys (dailyLifeLogic pushes
-  // `i.name`), and nothing downstream matches on them.
-  const institutions = Object.values(ctx.keyInsts || {}).flat().map(institutionDisplayName).filter(Boolean).slice(0, 5);
-  const anchors = listText(institutions, 'the wells, the lanes, and the common ground');
-  const stress = ctx.stressTypes.length
-    ? `Most talk in the street comes back to the same trouble: ${listText(ctx.stressTypes.map(humanize), 'the current strain')}.`
-    : 'No single trouble hangs over the place just now. People keep to their routines and work around the small ones.';
-
-  return [
-    `Morning starts around ${anchors}. ${terrain} and ${trade} set the pace: carts, tools and news move only as fast as the ground and the roads allow, and ${culture} shapes even the smallest bargain.`,
-    textOf({ text: `${food}. Everyone knows their work without being told. Farmers, haulers, priests, guards, and tradespeople know which shortages they can live with and which will start a quarrel before sundown.`, needs: ['guardPresence', 'priest'], crisis: ['any'] }),
-    `Orders come from ${ctx.govFaction || 'whoever can make them stick this week'}. ${ctx.stability < 45 ? "People weigh every promise, since yesterday's bargain may not hold tomorrow." : textOf({ text: 'Most residents know whom to petition, and how to do it without drawing notice.', excludes: ['crisis: succession'], crisis: ['any'] })} ${order}.`,
-    `${stress} By evening the lamps are lit, families eat together, debts are remembered, and news goes from door to door. People stay because leaving would cost them more.`,
-  ].join('\n\n');
 }
 
 export default React.memo(DailyLifeTab);
