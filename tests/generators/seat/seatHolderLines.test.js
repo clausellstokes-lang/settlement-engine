@@ -88,9 +88,9 @@ vi.mock('../../../src/generators/npcGenerator.js', async (importOriginal) => {
 import * as seatLaw from '../../../src/domain/seat/seatLaw.js';
 import * as circ from '../../../src/domain/seat/seatCircumstances.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
-import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
+import { generateSettlementPipeline, regenNPCsPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { computeFactionRelationships } from '../../../src/generators/factionDynamics.js';
-import { settleSeatHolderToRecord } from '../../../src/generators/power/factionStanding.js';
+import { LADDER, RANK_STANDINGS, annotateFactionStanding, settleSeatHolderToRecord } from '../../../src/generators/power/factionStanding.js';
 import { holderOf } from '../../../src/domain/seat/holderOfSeat.js';
 import { coupContenders, coupRiskLabel } from '../../../src/domain/rulingPowerCoup.js';
 import { SEAT_HOLDER_LINES } from '../../../src/data/seatHolderLines.js';
@@ -291,5 +291,57 @@ describe('U6 (7): FAULT (b) GUARD (E65 (3)): the law\'s fold leaves raiseToOffic
     for (const settType of ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']) born(settType, `u6b-${settType}-0`);
     expect(sw.bandCalls.length, 'castPowers asked for office bands').toBeGreaterThan(0);
     expect(sw.bandCalls.filter((c) => c.band !== c.lawBand), 'no office band moves under the law\'s fold (fault (b) unreachable)').toEqual([]);
+  });
+});
+
+describe('U6 (8): THE LADDER\'S TOTALITY (E70 (a)): every rank line the ladder writes is one the pass recognises', () => {
+  it('a grid of rosters drives every branch of the rank ladder; each rank line it writes is matched whole by RANK_STANDINGS, and every LADDER row is reached', () => {
+    /** @type {Set<string>} */
+    const reached = new Set();
+    /** @type {string[]} */
+    const unread = [];
+    const keys = Object.keys(LADDER);
+    /** @param {Array<{ faction: string, power: number, isGoverning?: boolean }>} roster */
+    const drive = (roster) => {
+      const rows = roster.map((f) => ({ ...f, desc: '' }));
+      annotateFactionStanding(rows, { body: 'garrison' }, null);
+      rows.forEach((row, rank) => {
+        if (rank === 0 || !row.desc) return;
+        const at = RANK_STANDINGS.findIndex((re) => re.exec(row.desc)?.[0] === row.desc);
+        if (at < 0) unread.push(row.desc); else reached.add(keys[at]);
+      });
+    };
+    for (const top of ['Alpha Council', 'Alpha Hall']) for (const p1 of [38, 30, 20]) for (const d2 of [1, 4, 8, 12]) for (const p3 of [p1 - d2 - 1, 3]) {
+      drive([{ faction: top, power: 40, isGoverning: true }, { faction: 'Beta Band', power: p1 }, { faction: 'Gamma Band', power: p1 - d2 }, { faction: 'Delta Band', power: p3 }]);
+    }
+    // the unnamed head (the ladder's no-name branches), two rows so the second is also the last
+    for (const p1 of [38, 30, 20]) drive([{ faction: '', power: 40, isGoverning: true }, { faction: 'Beta Band', power: p1 }]);
+    expect(unread, 'a rank line the pass does not recognise (a reworded or a new ladder line)').toEqual([]);
+    // the contested line needs a coup reading to be written; it is the ladder's constant, and the pass reads it
+    expect(RANK_STANDINGS.some((re) => re.exec(LADDER.contested[0])?.[0] === LADDER.contested[0]), 'the contested line is recognised').toBe(true);
+    reached.add('contested');
+    expect([...reached].sort(), 'every LADDER row is reached by the grid').toEqual([...keys].sort());
+  });
+});
+
+describe('U6 (9): A NAMED GAP (E70 (b)): regenSection("npcs") re-runs no final-record pass', () => {
+  it('u6p-village-3 (a village, R2): the people regenerated, the holder stands, and its lines are the birth\'s, carried, not re-derived', () => {
+    build(true);
+    const birth = born('village', 'u6p-village-3');
+    sw.passCalls = [];
+    const { _preservation, ...parts } = /** @type {any} */ (regenNPCsPipeline(birth, birth.config, { seed: 'u6r-0' }));
+    const after = { ...birth, ...parts };
+    // THE GAP, NAMED: `generateSettlementPipeline.js :: regenNPCsPipeline` calls none of the final passes (keepOneDominant,
+    // settleClergyToFinalRoster, settleArcaneToPractitioners, settleSeatHolderToRecord); its power structure is the record's,
+    // carried. It is harmless while a regen cannot move the holder (measured: 0 moves in 201 regens of 67 lit R2 places); the
+    // day it can, this arm reds on the holder below, and the lines would name the old holder.
+    expect(sw.passCalls.length, 'the regen ran no final-record pass').toBe(0);
+    const held = holderOf(/** @type {any} */ (after), { audience: 'owner' });
+    expect([held.rule, held.holderName], 'the regenerated people seat the same holder').toEqual(['R2', 'Merchant Guilds']);
+    const row = (/** @type {any} */ s) => s.powerStructure.factionRelationships.find((/** @type {any} */ r) => r.pair.includes('Elder Council') && r.pair.includes('Merchant Guilds')).narrative;
+    const desc = (/** @type {any} */ s) => s.powerStructure.factions.find((/** @type {any} */ f) => f.faction === 'Merchant Guilds').desc;
+    expect(row(after), 'the form<->holder row is the birth\'s').toBe(row(birth));
+    expect(desc(after), 'the holder row is the birth\'s').toBe(desc(birth));
+    expect(desc(after), 'and it still says the holder holds the seat').toContain('They sit in the Elder Council themselves, and its rulings are their own.');
   });
 });
