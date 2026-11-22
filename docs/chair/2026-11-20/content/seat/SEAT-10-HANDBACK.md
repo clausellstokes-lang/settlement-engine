@@ -8,7 +8,7 @@ SEAT-10's assignment is `docs/chair/2026-11-21/eighth/prompts/SEAT-10.txt` on `o
 
 The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
 
-## 0. WHERE THE LANE STANDS (brought up at 2026-11-22T03:47:17Z, read from `date -u`)
+## 0. WHERE THE LANE STANDS (brought up at 2026-11-22T03:53:39Z, read from `date -u`)
 
 - **Lane tip:** `lane/seat-10-2026-11-21`, pushed with this file.
   - **The base:** fast-forwarded at 23:41:11Z (from the reflog) to the chair's base `3e6894120`, which is `3e8e2e37d` (SEAT-9's tip) plus the line `a64619510` (point 86) plus this seat's `f82c2a183` (item 88).
@@ -29,7 +29,9 @@ The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
   - The 24th known red is `seatLawSavedTown` arm 4. It is a lane red and is **cured by UK-LEGACY** (item 91).
 - **UK-LEGACY (the chair's order of 02:52Z, before "SEAT <commit>"): MERGED at `a4b3fff4a`.**
   - At the merged tip: `seatLawSavedTown`, `seatBandFold` and `roleCategory` pass 60/60 (03:46:04Z).
-  - **THE DARK PROOF** `confine-two.sh a64619510 a4b3fff4a` is RUNNING in the exclusive slot (launched 03:46Z).
+  - **THE DARK PROOF** `confine-two.sh a64619510 a4b3fff4a` is **EQUAL** (`all 49459c04…bc8ebc`, 1245 places; 03:52:31Z).
+  - **Accepted by the chair at 03:54Z** with unit 3. The sweep's five: (a) the bundle is the close's (the owner's rebuild); (b) and (c) go into U6's brief; (d) see item 91; (e) fixed in the tip's commit (comments only, `seatLaw.js` header and `npcGenerator.js :: generateNPCPowerLevel`'s call; no effective line moves; sizeBaseline, seatLawWiring and the densityCreateBoundary walker 26/26, eslint clean).
+- **THE LINE AGAIN (the chair's word of 03:54Z):** the line stands at `f5295e425` (points 87 to 93). This tip is sent to the chair, and NO COMMIT follows it until the chair pushes `lane/seat-10-base-2026-11-21` (f5295e425 merged into exactly this tip). Then: fast-forward, re-take the registers by their doors, run rule 8 with the tests that name the changed modules, and send "SEAT <commit>".
 - **UNIT 4 (rule 8, "SEAT <commit>"):** not started.
 - **OUT:** none. BKP and BUL are finished.
 - **The wip branch** `lane/seat-10-2026-11-21-wip` (`2b3489eef`) is superseded: everything on it is on the lane.
@@ -94,7 +96,7 @@ The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
      - (a) The hosted `engine-generate` runs the committed bundle `supabase/functions/_shared/engineBundle.js`, built from `d989d32` before the seat train; it holds no seat-law code at all. The cure reaches it only when the bundle is rebuilt, and that rebuild is the owner's. `tests/build/engineBundleReplay.test.js` is already red at the line, in RED-AT-LINE.
      - (b) `castPowers.js :: raiseToOfficeBand` calls `powerBandOfRole(officeRole)` with no config, so it always reads law 1, by its comment.
      - (c) `power/factionStanding.js :: annotateFactionStanding` is handed a partial seat with no `config` by `rulingStructure.js` at birth, so it reads law 1 (fail closed).
-     - (d) The re-derive road (`editSlice.js :: storedConfigFor`) reads the save row's stored config, never the form; the row config's provenance was not traced end to end (PLAUSIBLE).
+     - (d) The re-derive road (`editSlice.js :: storedConfigFor`) reads the save row's stored config, never the form. **The saved-place test does NOT execute that road:** none of its five arms drives `regenerateWithLayer` or `dmLayer.js :: rederive`. The row's `config` is the save caller's argument: `SaveToLibraryButton.jsx` passes `minted._config || null`, `SettlementsPanel.jsx` passes `minted._config || forkedConfig`, and `ConstructionPanel.jsx` passes `result.config`. On the shipped save paths that is the record's own echo (PLAUSIBLE, read). An arm that executes the road is owed.
      - (e) Comment drift in `seatLaw.js`'s header and `npcGenerator.js:128`.
 
 92. **THE FLIP'S CENSUS, RE-CUT (unit 3; CONFIRMED by run; the lists in `recut/CENSUS-LISTS.md`, the record in `recut/out/census.json`).**
@@ -119,7 +121,7 @@ The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
 | 1 THE LINE | `lane/seat-10-2026-11-21` (base `3e6894120`) | merged by the chair, fast-forwarded; doors done (items 88, 89); `tests/lint` whole 219/220 (the red taken by its door); confine-two EQUAL |
 | 2 THE KEY QUESTION | BKP (subagent; `keyprobe/`) | DONE at birth (87) and over play time (90) |
 | 3 FLIP CENSUS (re-cut) | `recut/recut.sh`; scratch clone `census-flip` at `ef5abf4da` | DONE (item 92; `recut/CENSUS-LISTS.md`) |
-| UK-LEGACY (the chair's order) | BUL (subagent; scratch clone `bul`, `d9133148d`) | MERGED `a4b3fff4a` (item 91); its dark proof running |
+| UK-LEGACY (the chair's order) | BUL (subagent; scratch clone `bul`, `d9133148d`) | MERGED `a4b3fff4a` (item 91); confine-two EQUAL; accepted 03:54Z |
 | 4 RULE 8 | — | not started |
 
 ## 3. STORED FIGURES THIS SEAT MOVED

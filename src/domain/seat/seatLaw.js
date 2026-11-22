@@ -43,8 +43,8 @@
  *
  * ⛔ IT IMPORTS NOTHING. It is the dependency-free leaf the living-content vocabulary is, for the
  * same two reasons: no cycle can form through it, and nothing rides behind it into whichever chunk
- * its importer lands in. Its one importer on the generation side is the create boundary
- * (`src/domain/density/densityCreateBoundary.js :: birthConfig`).
+ * its importer lands in. Its generation-side importers: the create boundary (`densityCreateBoundary.js :: birthConfig`),
+ * the band (`npc/powerBand.js`) and the two regen passes (`generateSettlementPipeline.js`, `withRecordSeatLaw`).
  *
  * Pure. No RNG, no store, no React, no wall clock, no module state.
  *

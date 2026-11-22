@@ -125,7 +125,7 @@ export const generateSingleNPC = ( // exported for people/representatives.js (th
   // hook is drawn by its birth seam on its own keyed fork, keyed by the face's title through the
   // pool map (people/representatives.js :: drawCardHooks), so that seam asks for none here.
   const plotHooks = options.hook === false ? [] : [drawPersonHook(category, config, hookRegistry, { worldLaw, institutions, tier })];
-  const powerLevel = generateNPCPowerLevel(role, config); // UK (a): the born config (every caller spreads it into its npcConfig) carries the seat law
+  const powerLevel = generateNPCPowerLevel(role, config); // UK (a): the born config (every caller spreads it into its npcConfig) carries the seat law; on a regen road, the record's (UK-LEGACY, `seatLaw.js :: withRecordSeatLaw`)
   const card = { // S9 (PAGE-6): the card's secret pool noted below for the town's post-pass (factionLeaderSecret.js :: settleMisfitSecrets); never stored
     id: null,
     name: fullName,
