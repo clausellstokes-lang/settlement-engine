@@ -108,3 +108,15 @@ Label each claim CONFIRMED (run) or PLAUSIBLE (read). Final message: at most 200
   - A saved place of law 1 is not touched (the dark control).
   - Where the holder's house has NO person to take the hat, the hat is worn by nobody and the page says the seat is unfilled: that case is true there. Say what the transfer does.
 - **THEN:** with U5-STALE in, is the page's fall-back ("else the holder house's first") needed at all? If the record's office person is always the right one, the page reads that one fact and the fall-back is REMOVED.
+
+## ADDENDUM 3 (written 2026-11-22T12:15:35Z by SEAT-10, on the chair's E77 of 12:01Z): BUILD
+
+- **The measure:** all 24 R3 births are bucket (i); four "nobody" cases (u7p-town-39, u7p-city-2, u7p-city-8, u7p-city-25).
+- **THE PAGE READS ONE FACT, THE RECORD'S HAT-WEARER** (`holderOf(…).person`, the person wearing the office hat). The fall-back "else the holder house's first" is REMOVED (`holderFaceOf`, and the ladder read for a holder apart). Where nobody wears the hat, today's absence line stands.
+- **U5-STALE:** in `src/domain/rulingPower.js :: transferRulingPower`'s kept-form branch, the old house's person loses the office hat and the holder's first takes it. The manifest widens to that function.
+  - A saved place of law 1 is not touched (the dark control).
+  - Where the holder's house has no person, nobody wears the hat and the page says the seat is unfilled.
+- **RED FIRST:**
+  - the six transfer cases, through U5-STALE: the chain, the tonight sheet's hook sources, the Institutions seat-house face and the card hat all name the holder's person;
+  - the four "nobody" cases name their office person again;
+  - the 24 R3 births do not move, as ONE differential.
