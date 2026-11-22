@@ -44,7 +44,7 @@ Dispatched only after R5D-SQL's commit is read whole by the seat.
    their origin commits): the walker never reads git. THE LEGACY ARM: places born by MASTER'S engine, stored, read through 212 and
    the twin: every legacy standing cut whole (count of count) and the differential on them. USE VEIL-33's INSTRUMENT, DO NOT BUILD A
    SECOND: the read-stored-documents mode (`RV9_MODE=stored` in `out/v33/legacy/legacy.probe.jsx`, with its dump mode run at
-   origin/master) on `lane/veil-33-2026-11-22-legacy-wip` (commit to follow: the chair sends it to the seat when it is pushed); each form the arm exercises named by its row's id, kind and source; if the seat has none to give at your
+   origin/master) on `lane/veil-33-2026-11-22-legacy-wip` (instruments at 4d03aaa0d; its measure at 216cb46d8 once pushed: `git fetch origin lane/veil-33-2026-11-22-legacy-wip`); each form the arm exercises named by its row's id, kind and source; if the seat has none to give at your
    turn, build everything else and STOP on this item with what you would run. Say the closed-branch count (descs served as base
    because no row matched) and what the 3 of 328 no-match descs that carry a tail are.
 5b. THE PRESENCE-PICKED BASES' ARM (E126): the 13 templates of `out/v34/r5d1/R5D1-MEASURE.md` (`lane/veil-34-2026-11-22-r5d1-wip`
@@ -54,6 +54,15 @@ Dispatched only after R5D-SQL's commit is read whole by the seat.
    withhold always). A house no owner's choice can hide: said in the arm's header with the rule that makes it so. Ruling 51 is
    untouched: `contestsNiche` stays withheld always (the arm does not ask the server to serve it). If the arm needs
    `rivalDescOf` or `reeveToRoster`, an export is allowed ONLY if no birth and no first-paint byte moves: say which, with the proof.
+5c. THE STORED ARM (the chair's E134, 21:31: THE UNIVERSE OF EVERY PROOF IS NOW THE STORED DOCUMENT). VEIL-33's legacy measure
+   found the stored document (as `saves.js` stores it) carries `publicProse`, whose blocks copy served fields word for word (338 of
+   440 stored documents hold the withheld `recentConflict` inside `publicProse.blocks.power:governance.text`); births carry none, so
+   every earlier proof missed it. SO: the plant (item 2), the fidelity arm (3) and the differential (4) EACH GAIN A STORED HALF: today-born
+   places stored AS SAVED, with their prose, by VEIL-33's `RV9_MODE=stored` (the branch above), read through 212 and the twin. AND
+   COUNT, do not cure: every `publicProse` block (by block key and field) that holds a power's description, its base or its standing
+   (stored or as cut), word for word or by the fold, on hiding reads and on nothing-hidden reads, per engine; the table goes in your
+   hand-back by block. THE STORED PROSE'S CURE IS CHAIN C's (VEIL-33), NOT YOURS: a stored-half red that is a `publicProse` copy is
+   COUNTED AND NAMED, never patched here; a stored-half red anywhere else is yours.
 6. THE PINS: E94 (c) (every label writer draws from a kind table; `densityAscension.js :: planSeatAscension` gaining a caller reds); the
    composed-hosts walker: `power.desc`, `power.relation.dmNote` built in their hosts, `power.label` off the composed form (its census, 0
    hits); a readers' walker for `rederiveStanding` on `crimeTypesReaders.walker`'s pattern; manifest rows (`{rationale, pglite-executed}`).
