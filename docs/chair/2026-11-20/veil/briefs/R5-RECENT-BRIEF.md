@@ -146,3 +146,24 @@ where `rederiveCrimeTypes` is, on (viii)'s pattern. CONDITIONS:
 5. NO new 212 helper; the rollback untouched (no VR27 question).
 The rest of E92's section stands (red first; 212 and the registry read WHOLE before the first edit; `tests/lint` whole; first
 paint +0 by VERIFY_DIST on vendorPdfLazy and generationWorkerLazy; typecheck, eslint; all databases local; 211 byte-frozen).
+
+## THE CHAIR'S RULING E97 (15:42 UTC, on R5C3's STOP 141831a1a: the second copy at `pressureSentence`). ADDS TO E93
+1. P1, IN THIS UNIT. The always-pass ALSO withholds `pressureSentence` wherever it EQUALS the stored `recentConflict`, on every
+   place, both engines. That condition is a fact of how the place was written (the generator's fallback,
+   `narrativeGenerator.js:879`), not of what is hidden, so the absence tells nothing of a hide. The page does NOT re-fill it in
+   this unit: it prints no pressure line there, as it prints none where the second-homes pass removed it. THE COST, NAMED: the
+   pressure line gone from 154 of 480 shared pages (32%) until R5-PRESSURE. NOT P2 (no new served key), NOT P3, NOT P4.
+2. R5-PRESSURE (the successor's): `pressureSentence` withheld always and re-derived on the page by `generatePressureSentence`
+   over the served document, replacing the second-homes pass's two special cases by construction. Its place in the order turns on
+   THE COUNT taken BEFORE THE FIRST EDIT, on the 480 births: (a) the stored `pressureSentence`s that do NOT equal
+   `recentConflict`; (b) how many of those NAME a power or a house by the lane's fold, by branch of the writer where the branch can
+   be told; (c) on hiding reads, how many of (b) name a WITHHELD one that neither engine's pass removes today. (c) > 0: R5-PRESSURE
+   goes directly after R5-DESC, before R4-IDS. (c) = 0: a product unit after R3. The build does not wait for the chair's answer.
+3. THE THIRD-COPY SCAN, before the first edit: every stored string of all 480 records searched for the stored `recentConflict`
+   as a SUBSTRING of any other field (not only the fields known). Any third copy: STOP with its paths.
+4. The registry registers `pressureSentence`'s fallback as a COPY of the row `power.recentConflict`, so a walker reds if a
+   third copy appears.
+5. The composed-hosts walker walks `power.recentConflict` BY NAME as a row that LEFT the composed form. Its census pin on
+   `ORDERED[0]` is re-taken with the reason. The 26 that stay red are R5-DESC's and are named as such.
+6. The registry's site map moves the row to `generatePowerStructure`; `registry.json` is regenerated (ARM E). The twin's path is
+   `src/domain/display/galleryWithholdAlways.js`.
