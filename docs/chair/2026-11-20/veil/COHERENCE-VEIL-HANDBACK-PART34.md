@@ -19,7 +19,9 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
   GATE-1 4 of 92 at every gated setting, both reads, twin = server, 7 LOWER BY RULE (the same seven); GATE-2 20 of 40 cells red;
   non-governing rows against the rule 0 (`/var/tmp/v18/out/v33/g/gates/tell2-table.txt`): EQUAL to the hand-back. Typecheck 0
   (167/167), eslint 0, walkers + manifest 0, arms Tell3+4+5 0, --check 0. Sent to the chair 09:15. The rest of chain1 (sv + hand
-  rows + born, harnesses, the R3 gate, acceptance, `tests/lint` whole) IN FLIGHT.
+  rows + born, harnesses, the R3 gate, acceptance, `tests/lint` whole) ENDED 09:47: sv + hand rows + born 0, harnesses 0, the R3
+  gate 0, acceptance 40 PASS; `tests/lint` WHOLE 16 files / 22 tests failed of 3,264 = THE SIXTEEN STANDING ONLY (PART 32 2b's
+  twelve + PART 30's four). (0) IS DONE.
 - (P) THE JOIN PROBE, PASS 1 (DARK): worktree `/home/user/wt/jp`, branch `lane/veil-33-2026-11-22-joinprobe-wip` (local), cut at
   ed027fca7, THE CHAIR'S PASS-1 REF (08:20 UTC) `lane/close-1-join-scratch-2026-11-22` AT THE COMMIT 4bba8781d (not its tip:
   CLOSE-1 adds register commits) merged in: the line f5295e425, stack-96 cc2f43aee, who rules as point 97 840020b9b, fortune's
@@ -62,3 +64,4 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
 - 08:20 the chair: the probe's two refs (pass 1 close-1-join-scratch 4bba8781d, pass 2 close-1-lit-scratch 5c4419815; the commits, not the tips); 08:21 the merge redone on 4bba8781d (the same eleven conflicts), the brief amended (dcc79a5a5), the builder told.
 - 08:42 the pool stood; chain1 launched. 08:50 both gates read (equal to the hand-back).
 - 09:15 the chair's 09:14 word read (ruling 93); the (0) line to the chair; the (Q) builder parked; its WIP pushed `-wip` unread.
+- 09:47 chain1 END (the sixteen standing only). 11:15 the chair's notice of its branch's broken tip 11:04-11:14 read: this seat fetched it only at 08:05; this repository clean (core.bare false, no Fixture commit on any of its three trees).
