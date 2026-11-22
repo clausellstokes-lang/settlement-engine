@@ -10,17 +10,18 @@
 - STOP 1 (1g) RESOLVED BY THE SEAT: the pool caches served signatures. YOU DO NOT READ GATE-1 / GATE-2 ON THE OLD POOL after the
   cure: the seat re-makes the pool on your cured tree in a new directory and reads both gates itself. Your gate receipt is the
   arm (both halves, all 92 + 48, both engines) and your committed test.
-- STOP 2 (1b): THE CHAIR'S RULING governs (the seat relays it; until it comes, build as recommended): the READER'S list over the
-  served page governs where a shut grouping removed an input of `settleCrimeLinesToSignal` (the services' criminal rows, the
+- STOP 2 (1b): RULED BY THE CHAIR 07:19 (ruling 88): the READER'S list over the served page governs (a served list is written
+  from served facts alone: where the owner has shut a grouping, nothing in it may speak through another that is open) where a shut grouping removed an input of `settleCrimeLinesToSignal` (the services' criminal rows, the
   criminal income rows): the page prints what the served facts imply (control `r3m-village-under_siege-0-8`, g:010). HALF 2's
-  reference on such a page is the writer over the SERVED page, never the stored list.
+  reference on such a page is the writer over the SERVED page, never the stored list. YOUR REPORT SAYS how many of the 6,528
+  pages change by this ruling alone, BY SETTING (for the security reader).
 - HALF 2 IS READ BY [type, desc] (32 of 92 red today: TELL7's 25 by type and 7 more by the `debt evasion` line that names
   criminal networks the page does not serve).
 - ADDED TO THE CURE'S MANIFEST: `src/domain/display/galleryVeil.js` (its `GROUPING_OPEN_EVIDENCE` row for
   `block:defense.criminalStructure` narrowed to `criminalInstitutions` being an array, the evidence proven on 6,528 of 6,528
-  pages; else DefenseTab's `crimeVeiled` shuts the block on every shared page), red first by a DefenseTab render on a shared
-  document; the shared PDF built from the re-derived copy (`src/pdf/lib/viewModelBodySlices.js`'s caller: trace it, PLAUSIBLE
-  today); the merchant-army hook's map row in both engines corrected to the served `merchantArmy` flag (1f: derivable).
+  pages; else DefenseTab's `crimeVeiled` shuts the block on every shared page), WITH ITS OWN RED FIRST (a page whose grouping
+  is open must not read as shut once the key is gone) AND ITS CONVERSE (a shut grouping stays shut: no page opens by it); the shared PDF built from the re-derived copy THROUGH THE ONE READER (`src/pdf/lib/viewModelBodySlices.js`'s caller: trace
+  it, PLAUSIBLE today); the merchant-army hook's map row in both engines corrected to the served `merchantArmy` flag (1f: derivable).
 - `tests/lint` WHOLE after ANY change to a test file, before the commit is called green (the chair's ruling 87).
 - YOUR MARK: about 250,000 tokens. If the cure outgrows it, commit the reds and what is built, hand-back current, end.
 
