@@ -117,3 +117,15 @@ records, the observed-shape baseline, the veil's registry row. Not before the fi
 
 `tests/generators/defenceParts.test.js` R13 stays listed red under the lit laws (v3build-village-3: the will 6.86 over the bound 6.8, one
 rounding unit): the bound is points-only and the will a score-by-score sum. The defence lane re-cuts the bound score by score.
+
+## 15. SECTIONS OF ONE PAGE THAT DISAGREE (the chair's own read of one town, E131; the state-sentence lane's)
+
+Read on one town (seed owner-read-1, Grímtun; the line at point 105, laws dark): (a) the overview's "The town pays wages for its defense as well
+as keeping its walls." beside the defence tab's "The people who would have to hold Grímtun through something know there is no money to pay them
+for it."; (b) the defence tab's "Grímtun's food trades are failing, and what they fail to put by is food the town would miss if it were cut off."
+beside the economy tab's "Nothing on Grímtun's tables suggests to a visitor that food is a worry here." Each desk speaks from its own fact; no
+test reads two desks together. PROPOSED: a census of sentence families that assert opposite things on one page (pairs by the facts they stand
+on, counted over 900 places), then a rule of precedence or a shared fact for each pair found common. Also read there: the stiff "Set Grímtun's
+trades against the help they draw on, and magic is not a thing any of them needs."; a number slip in "Nobody in Grímtun thinks of the town walls
+as ornament; the town knows what it is for and checks it."; "The steward governs in name" on a page whose office is "the lord's appointee".
+(The third pair read on that town, the empty seat beside its holder, is new with the flip and is cured before it: E131.)

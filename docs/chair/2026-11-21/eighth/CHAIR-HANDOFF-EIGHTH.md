@@ -147,6 +147,18 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   plain words (what each fix means; a few hours more on the Daily Life piece; the share veil still decides the
   date). CARRIED OUT AS E125. Item (3) of the list just below is thereby answered.
 
+- **THE OWNER'S TWO QUESTIONS OF THE EVENING (written 2026-11-22 21:11 UTC), verbatim:** "Are there any decisions waiting on me?" ANSWERED: none blocks; four open questions he may answer when he likes (the crisis's
+  own faction with the creditor's sentence; the contender's word; the hidden seat-holder; the players' page switch
+  and its two teaser tabs) and the list for his hand at the close. THEN: "So what are your holistic comprehensive
+  thoughts about the expected generated settlement and its utility after all of our work?" ANSWERED from one town
+  the chair generated and read whole on the line's tip, laws off and then on (seed owner-read-1, Grímtun): a good
+  product for its job (one trouble that runs through the whole page; people who point at each other; hooks ready to
+  use; plain prose; the two laws make the ruling picture make sense), with a layer of machine seams a reader sees
+  and the tests do not (sections that disagree: three pairs on that one town; power names that are labels; stiff or
+  samey sentences); its use to a DM a strong first draft in seconds, and the share link as much as the generator;
+  ADVISED: a standing step of reading a few whole pages before every deploy. ONE OF THE THREE PAIRS IS NEW WITH THE
+  FLIP: told to him with its count the same hour, and cured before the switch-on (E131).
+
 ## 2. Decisions of this chair (each vetoable by the owner)
 
 - E1 · FOUR SEATS AT A TIME (the standard's rule 2.1 and rule 35; the seventh chair's own last word: "too many lanes
@@ -1858,6 +1870,32 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   messaged again; THE LANDING'S PLACE IS FREE for the stack of "DAILY-B" and "PRONOUN". A STACK SEAT READS A RED
   AGAINST THE LIST BY CONTAINMENT (the list holds an `it` title without its `describe` prefix): written into
   LINE-NOW.md and owed to the stack prompt's form.
+- E131 · "NO ONE HOLDS THE SEAT" BESIDE "THEY SIT IN THE SEAT THEMSELVES": A CLASH NEW WITH THE FLIP, CURED BEFORE IT; CLOSE-3 SEATED; CLOSE-2 BUILDS NO FLIP (recorded 2026-11-22 21:11 UTC). FOUND BY THE CHAIR READING ONE TOWN WHOLE for the owner's question (seed owner-read-1, Grímtun, on the lit scratch ref c1128c8f6):
+  the governance account says "No one holds the seat at Grímtun." (`governanceAccount.js`, on
+  `chain.absence.kind === 'missing_seat'`) and the holder's own description carries the seat law's standing line
+  "They sit in the Feudal Appointee themselves, and its rulings are their own." (`data/seatHolderLines.js`, W3,
+  the chair's own wordings of 07:21 and 07:37). MEASURED BY THE CHAIR (`measures/VACANT-HOLDER.md` and its script;
+  600 lit births, 100 a size): 19 pages say the seat is empty; 10 of them carry a standing line: 1 of 100 towns, 3
+  of 100 cities, 6 of 100 metropolises; every one under `succession_void`; in towns and larger, 10 of the 12 pages
+  with an empty seat; DARK, NEVER (the lines are read only under the seat law). `coherence/seatHolderFindings.js`
+  returns early on a missing seat, which is why no finding caught it; the final census cannot catch it either (no
+  test is red). RULED: cured BEFORE the flip's anchors are pinned: unit "VACANT": at birth, where the seat is
+  missing by the SAME predicate the page reads (one definition, never a second copy), the holder's lines are drawn
+  from two new pools of the same table, the chair's wordings: `standingVacant`: "They held the {form's} seat, and
+  it stands empty now." / "They sat in the {form} until its seat fell empty." / "The {form} was theirs, and no
+  one sits in its seat today."; `relationVacant`: "The {form} is the office here, and the seat {holder} held in
+  it stands empty." / "{holder} sat in the {form} until its seat fell empty." / "The {form's} seat was filled
+  by {holder}, and no one fills it now."; red first on the measure's ten seeds; a census arm (no page says the
+  seat is empty while a description or a relation row carries a W1 or W3 line, and the reverse); the findings
+  module judges the vacant lines; the dark proof equal; one entry for the paper flip list. WHO: SEAT-10 is at
+  653,762 and is not woken. CLOSE-3 IS SEATED IN THE LANDING'S FREE PLACE (`prompts/CLOSE-3.txt`) WITH TWO UNITS:
+  "VACANT" first, then THE FLIP ITSELF from the recipe on "BUILD THE FLIP <tip>". SO CLOSE-2 BUILDS NO FLIP (E104
+  and E106 are amended): it runs and classes the final census, cures "PRONOUN", and hands its census report to
+  CLOSE-3 through the chair. THE OTHER TWO PAIRS READ ON THAT TOWN ARE ON THE LINE WITH THE LAWS DARK TOO (the
+  state sentences: "The town pays wages for its defense" beside "there is no money to pay them for it"; "food
+  trades are failing" beside "nothing suggests food is a worry here"): `intake/AFTER-FIRST-DEPLOY.md` 15, with a
+  census of contradicting sentence pairs proposed. THE SIXTH PLACE: the stack of "DAILY-B" now waits for the next
+  place that frees (VEIL-35's at its hand-over), VEIL-37 for the one after.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
