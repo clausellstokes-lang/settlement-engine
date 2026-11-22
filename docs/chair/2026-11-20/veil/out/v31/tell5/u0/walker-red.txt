@@ -1,0 +1,32 @@
+
+ FAIL  tests/lint/rosterChoiceRegistry.walker.test.js > ARMS C and D: every row is bound to the server and the twin > ARM D: a BUILT row's symbols exist and each rule names its row id
+AssertionError: expected [ …(2) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "people.allegiance: public._gallery_veil_roster_choices does not name it (-- registry: people.allegiance)",
++   "people.allegiance: src/domain/display/galleryRosterChoices.js :: applyRosterChoices does not name it (// registry: people.allegiance)",
++ ]
+
+ ❯ tests/lint/rosterChoiceRegistry.walker.test.js:242:17
+    240|       return out;
+    241|     });
+    242|     expect(bad).toEqual([]);
+       |                 ^
+    243|   });
+    244| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 10 passed (11)
+   Start at  00:13:01
+   Duration  1.95s (transform 75ms, setup 41ms, import 1.60s, tests 183ms, environment 0ms)
+
+[gate-tail] end:  00:13:03 up 59 min,  0 user,  load average: 2.75, 2.24, 2.97
+[gate-tail] full log: /tmp/gate-tail.10667.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
