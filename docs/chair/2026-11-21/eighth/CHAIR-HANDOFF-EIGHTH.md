@@ -1639,6 +1639,24 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   creditor is a power of the place): a person named in prose who has no card. RULED: not a blocker of the first
   deploy; it joins E112's proposal for the owner ("the crisis has a body"). THE CHAIR'S EARLIER WORD TO THE OWNER
   ("a false line if the count is above 0: fixed before the deploy") IS CORRECTED TO HIM BY NAME the same turn.
+- E119 · THE VEIL'S WRITER DOES NOT RETIRE AT ITS HAND-OVER: IT PREPARES THE JOIN; VEIL-35 SEATED (recorded 2026-11-22 19:28 UTC). VEIL-33's record is 235,439 (it was summarized at about 15:17; E109): far from the mark. At
+  "R5-RECENT MERGED" it hands the TIP to VEIL-34 as ruled (VEIL-34's unit (H) stays a REVIEW of its whole diff
+  first) and takes "JOIN-PREP" as a NON-writer of the tip: the join of the veil lane with the working line BUILT
+  NOW on `lane/veil-33-2026-11-22-join-wip` (the lane's tip with R5-RECENT, merged with the line's tip), then on
+  top, a commit each, red first: the roster-choice walker's unregistered sites (16 at its probe, E75; counted
+  again: who rules' second half, fortune's second merit and the old-families cure landed since); the line's
+  registers lost in the conflicts, by their doors; INV-LIT (E89); `seatHolderLines.js`'s row (the reader's list
+  row 20); unit (ix) (E75), its SQL by the two-builder split ON THE JOIN BRANCH ONLY; the trouble lane's arm (D)
+  re-stated. THE PROOF THERE: both gates dark AND lit; the lit-surfaces table. RULING (e) STANDS FOR THE LANE
+  ITSELF ("R3" is reached on the lane; the line is not merged into it): after "R3" the tip is merged INTO the join
+  branch by E116's five steps, and the join is a merge and one proof, not a build. It re-reads VEIL-34's digest
+  first. ASKED OF IT BEFORE IT STARTS: which part cannot be prepared before R3; what it needs of chains A and B;
+  what its probe refutes. WHY: the veil is the longest road to the first deploy, and the join (with (ix), INV-LIT
+  and the reader's lit table) sat wholly AFTER "R3". VEIL-35 SEATED at 19:27 in the place FORTUNE-7 freed
+  (`prompts/VEIL-35.txt`; "FORTUNE-C 9946de504" accepted: point 104 in STACK-100, its gate started). THE SIX:
+  VEIL-33 (the join's preparation), VEIL-34 (chain A), VEIL-35 (chain B), DAILY-4, CLOSE-2 (the pronoun cure in
+  its wait, then the final census), and the landing's place (STACK-100). IMPORT-DOOR stays VEIL-35's second unit;
+  it becomes a third chain's when DAILY-4's place frees.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -2178,23 +2196,25 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
 
 ## 4. The order of the lanes still to seat, and what each waits on
 
-(Rewritten 2026-11-22 14:31 UTC after E85.) SIX CHILDREN WORK AT A TIME, BY THE OWNER'S WORD: VEIL-33 (the veil's one writer:
-R5-RECENT, then (iv), (v), (vi), "R3"), SEAT-10 ("SEAT-B": the line's tip merged, rule 8), FORTUNE-7 ("FORTUNE-B": its
-unit 4 on the line's tip), DAILY-3 ("DAILY-B": L8 to L12 and 4c building; it hands over at 620,000), CLOSE-1 (the lit
-half of the flipped run; the laws' join cut from the line's tip), and PAGE-12 IN THE LANDING'S PLACE FOR ONE UNIT
-("PAGE-BAR7"). NINE ARE PARKED and come back one for each place that frees: PAGE-13 (its first unit at GO is
-`briefs/SHARE-EMPTY-CUT.md` only if "PAGE-SIDES" is done or blocked; else its own order), PAGE-12 (the rest: its two
-wip branches), PLACE-3, PEOPLE-3, PROSE-5, PAGE-14, DEPTH-5, GOALS-5, FRAME-9, TRAD-6: a parked seat is woken by ONE
-line, "GO <seat>", with the line's tip then, the red list's count, COMMON-EIGHTH 13, the push rule of E73 (a push only
-when origin lacks the local tip) and the widened rule 8. THE NEXT LANDING: `prompts/STACK-99.txt` (its base, stack and
-red count filled at seating), seated in the place the first of SEAT-10 and FORTUNE-7 frees: "CLOSE-FIXTURE 6f579f0e7"
-(point 99) and each landing line that has come. WHAT EACH OF THE SIX WAITS ON FROM THE CHAIR: nothing: each has the
-line's tip (c110dd85b, point 98) and its order. THE CHAIR OWES: CI's run on c110dd85b read by name; at "R3 <commit>"
-the reader's list (`veil/READERS-LIST.md`), the LOWER towns and JOINPROBE.md to REVIEW-VEIL-15, then ONE top-tier
-read-only review of 212's final text in a fresh context. THE FINISH LINE (E30) IS UNCHANGED: the share veil proven
-with its review; who rules and fortune (both merits) landed and flipped; the Daily Life page whole. BEFORE THE FIRST
-DEPLOY, NAMED SINCE: the veil's R5-RECENT (E78) and unit (ix) (E75); who rules' U5-STALE (E76); the close's fixture
-cure (E55) and the laws' join (E61); the trouble lane's two reds (E67, "PAGE-BAR7"); the Daily Life lane's two (4b).
+(Rewritten 2026-11-22 19:28 UTC after E119.) SIX CHILDREN WORK AT A TIME, BY THE OWNER'S WORD, AND ALL SIX ARE ON THE FINISH
+LINE'S THREE (E30): THE VEIL: VEIL-33 (finishing R5-RECENT; then "JOIN-PREP", E119), VEIL-34 (chain A: the review of
+R5-RECENT, R5-DESC by S (E115), (iv), (v); (vi) proved, riding with its next merge), VEIL-35 (chain B: R4-IDS, then
+IMPORT-DOOR); THE FLIP: CLOSE-2 (unit "PRONOUN" in its wait (E117); the final census on "THE LINE IS READY <tip>";
+"BUILD THE FLIP"; CLOSE-3 at about 560,000 of its record) and THE LANDING'S PLACE (STACK-100: points 103 and 104 in
+their gate; the next stack takes "DAILY-B" and "PRONOUN"); DAILY LIFE: DAILY-4 (the page's eight lines; the line
+merged once; rule 8; "DAILY-B"). WHAT THE CHAIR OWES NEXT: at STACK-100's final report the landing of points 103 and
+104 and "THE LINE IS READY" to CLOSE-2; the tip to VEIL-33's join and to DAILY-4; "TIP TO <seat>" on each "TIP?"; to
+VEIL-35 the commit of VEIL-34's R4-IDS measure and the lane's tip after R5-RECENT; CI on each new tip read by name;
+each hour every working seat's record read and told (E109); at "R3 <commit>" the reader's list (21 rows), the LOWER
+towns, JOINPROBE.md and the lit table to REVIEW-VEIL-15, then ONE top-tier read-only review of 212's final text in a
+fresh context. TEN ARE PARKED and come back one for each place that frees AFTER the finish line's three hold their
+places: PAGE-12 (next unit "BAR7-2": the same class left in `guardLineUnderTheLaw.js :: familiesHeldOf`, measure
+first), PAGE-13 (`briefs/SHARE-EMPTY-CUT.md`, E84), PLACE-3, PEOPLE-3, PROSE-5, GOALS-5, PAGE-14, DEPTH-5, FRAME-9,
+TRAD-6: a parked seat is woken by ONE line, "GO <seat>", with the line's tip then, the red list's count and
+COMMON-EIGHTH 13, 14 and 15. DONE AND NOT MESSAGED AGAIN: SEAT-10, FORTUNE-6, FORTUNE-7 (its hand-back's last commit
+is owed in one line), DAILY-3, CLOSE-1, VEIL-31, VEIL-32, the STACK seats before 100. BEFORE THE FIRST DEPLOY, NAMED
+SINCE E30: the veil's units above with unit (ix) and INV-LIT at the join; the laws' join (point 103); the pronoun
+fault (E117); the Daily Life page's eight (E110). NOT BEFORE IT (`intake/AFTER-FIRST-DEPLOY.md`): the rest.
 
 ## 5. Waiting on the owner
 
@@ -2235,3 +2255,4 @@ LIFE PAGE stand unless he changes them (a saved AI account stays visible; the se
 | CLOSE-2 | session_01ACmDYZKhD2ZTU9VKzNg4ZE | `lane/close-1-2026-11-22` at 935c3d633 (CLOSE-1's last commit; it is done) | `lane/close-2-2026-11-22` | the close's second seat (E104, E106): JOIN's re-runs and "JOIN <commit>"; GOLDEN-LIT read and proven; the final census on "THE LINE IS READY <tip>"; the flip's branch on "BUILD THE FLIP" |
 | DAILY-4 | session_01ACmDYaBKhNdEcUSm1G57q1 | `lane/daily-3-2026-11-22` at b1bcb067d (DAILY-3's hand-over; it is done) | `lane/daily-4-2026-11-22` | the Daily Life lane's last seat (E108): the L12 cut; the PDF chapter's merge; the line merged; the owner's file; rule 8; "DAILY-B" |
 | STACK-100 | session_01ACmDYZ2KgEXYCKokzKTjtk | the working line `lane/join-2026-11-14` at c1144ba18 (point 102) | `lane/stack-100-wip-2026-11-22` | A LANDING ON ITS OWN MACHINE (E114): point 103 "JOIN" a1319f388 (merged at e21c4032e) and point 104 "FORTUNE-C" by "ADD", both test only; "GATE" on the chair's word; then "THE LINE IS READY" to CLOSE-2 |
+| VEIL-35 | session_01ACmDYWVxmEvd73fKqhpnip | `lane/veil-34-2026-11-22` as it stood at its seating (19:27 UTC on 2026-11-22, in the place FORTUNE-7 freed) | `lane/veil-35-2026-11-22` (its unit's code on `lane/veil-35-2026-11-22-r4ids-wip`) | THE VEIL'S SECOND CHAIN (E116): the pool re-made; "R4-IDS" (part two, the cure, from VEIL-34's measure), then "IMPORT-DOOR"; the lane's tip only on "TIP TO VEIL-35" |

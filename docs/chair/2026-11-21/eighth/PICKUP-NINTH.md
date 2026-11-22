@@ -4,6 +4,42 @@ WHY: the standard's rule 19: a chair hands over to a fresh session at about 70% 
 of 1,000,000 at 01:18 UTC). Nothing is broken. The seats keep working through the hand-over. YOU ARE ON THE SAME
 ACCOUNT: you can see and message every seat below.
 
+## READ THIS FIRST (2026-11-22 19:24 UTC; it supersedes every block below it)
+
+THE OWNER'S NEWEST WORD GOVERNS: SIX CHILDREN AT A TIME (verbatim: "Hey limit work to 6 children at a time. The way
+you're going full force might make small progress on many without completing any"). THE LINE: `lane/join-2026-11-14` =
+c1144ba18f89aafed5e1bf61055a3b6f6f4a9b59 on origin (POINT 102: who rules WHOLE and fortune with BOTH merits, both DARK;
+`ci/LINE-NOW.md` at point 102; the red list 61 rows). The handoff's section 2 holds E1 to E119; its section 4 says who
+works on what and what the chair owes next; its section 6 every
+session id. WHAT IS LEFT OF THE FINISH LINE (E30), AND WHO HOLDS IT:
+1. THE FLIP. STACK-100 (points 103 "JOIN" and 104 "FORTUNE-C", both test only) is in its gate. On its final report:
+   verify (ancestry; the merges' second parents; a trial merge by `git merge-tree`), merge `--no-ff` into
+   `/home/user/wt/line`, the rows and the gate sentence in LANDINGS-SIXTH.md as a second commit, `landing/safepush.sh`,
+   `ci/LINE-NOW.md`, then "THE LINE IS READY <tip>" to CLOSE-2: its final census (the whole suite lit), then on
+   "BUILD THE FLIP" the branch `lane/flip-2026-11-22` from `close/CLOSE-RECIPE.md` (E91, E99, E104, E111). CLOSE-3 is
+   seated when CLOSE-2's record passes about 560,000.
+2. THE SHARE VEIL, IN TWO CHAINS AND A PREPARED JOIN (E116, E119): VEIL-33 finishes R5-RECENT, hands the TIP to
+   VEIL-34 and then PREPARES THE JOIN with the line on `lane/veil-33-2026-11-22-join-wip` (it does not retire);
+   VEIL-34 reviews that diff, then builds R5-DESC (E115), (iv), (v); VEIL-35 (`prompts/VEIL-35.txt`, seated 19:27)
+   builds R4-IDS, then IMPORT-DOOR. The lane's tip moves under ONE HAND AT A TIME: "TIP? <unit> <commit>" / "TIP TO <seat>" /
+   "<unit> MERGED <commit>". Then "R3 <commit>", REVIEW-VEIL-15 (it waits unspent; `veil/READERS-LIST.md`, 21 rows), and
+   ONE read-only review of 212's final text by the top tier in a fresh context.
+3. DAILY LIFE: DAILY-4 wires the page's eight lines (E110), merges the line once, rule 8, "DAILY-B <commit>" to the
+   next stack (`HAND_CEILING` 77 + its six rows).
+4. A FAULT NEW IN THIS RELEASE (E117): "a candidate her distrusts" (`personMention.js`): CLOSE-2's unit "PRONOUN" on
+   `lane/close-2-2026-11-22-pronoun-wip`; it lands in the next stack and BEFORE ANY GOLDEN IS RECORDED.
+YOUR FIRST ACTS: read your messages; CI's run on the line's tip read by name by a cheap helper against the red list;
+at each hourly net a cheap helper reads EVERY working seat's record (E109: `list_events`, kinds `result`, the newest
+result's last iteration: input + cache read + cache creation) and you tell each seat its figure (the word at 620,000;
+the line 700,000). EVERY PUSH OF YOURS GOES THROUGH `landing/safepush.sh`; NEVER COMMIT ON A BRANCH WHILE ITS PUSH IS
+IN FLIGHT. A FREED PLACE GOES FIRST TO THE FINISH LINE's THREE; the parked lanes (the handoff's section 4) come back one
+per place after it: PAGE-12's next unit is "BAR7-2" (measure first), PAGE-13's is `briefs/SHARE-EMPTY-CUT.md`.
+FOR THE OWNER AT THE CLOSE (his hand alone): the size rises, the two DRAFT tuning tables, TWO golden records (E111),
+the sample town, the server's AI daily-life function and its price row, migrations 204 to 212, the pull request's
+merge, the deploy. PUT TO HIM AND NOT BLOCKING: E84 (a stored switch), E94, E110 (the page's order), E112 with E118
+("the crisis has a body"), E113 (the contender's word). `intake/AFTER-FIRST-DEPLOY.md` holds what waits for the second
+deploy.
+
 ## READ THIS FIRST (2026-11-22 14:31 UTC; it supersedes the block of 09:09 below it)
 
 THE OWNER'S NEWEST WORD GOVERNS: SIX CHILDREN AT A TIME (verbatim: "Hey limit work to 6 children at a time. The way
