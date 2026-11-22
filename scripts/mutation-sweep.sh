@@ -153,6 +153,7 @@ MUTATED_FILES=(
   src/data/institutionDescVariants.js
   src/generators/servicesGenerator.js
   src/generators/npcGenerator.js
+  src/generators/power/quarrelPick.js
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -1841,6 +1842,14 @@ check_caught "faults-watch/the holding cells hold pending trial only where a cou
 #      restored byte-identically => 18 passed.
 perl -0pi -e 's/fillAgreement\(effect\.stakes, \{ power: govFaction \}\)/fillAgreement(effect.stakes, { faction: govFaction })/' src/generators/npcGenerator.js
 check_caught "names/a crisis stake's verb takes its power's number" src/generators/npcGenerator.js "npx vitest run tests/data/powerNumberAgreement.test.js --no-file-parallelism" "NAMES-4: the secrets as generateCrimeLevel deals them (its own \`{has}\`), in both numbers, differ only by number, the right way round"
+
+# 143. THE NO-GRAZING TWIN STANDS IN FOR GRAZING'S INDEX 0 ONLY (BUILD-CONFLICT, DEPTH-2, the merge read of da16f2f4b;
+#      planted by DEPTH-5 CURE-NINE red 6). The pick's last line loses its `poolName === 'GRAZING'` guard, so a LEVIES or
+#      MILITARY_COURT pick of index 0 prints the water dispute; tests/generators/power/conflictQuarrelPick.test.js must red.
+#      Measured in this checkout (CURE-NINE, 2026-11-22, the tree of 08616b323): clean => 9 passed; planted => 1 red, 8 passed,
+#      title_matches=1; restored byte-identically (cp from a backup, cmp) => 9 passed.
+perl -0pi -e 's/return poolName === \x27GRAZING\x27 && picked\.line === pool\[0\] && noGrazing \? noGrazing : text;/return picked.line === pool[0] && noGrazing ? noGrazing : text;/' src/generators/power/quarrelPick.js
+check_caught "depth-conflict/the no-grazing twin stands in for grazing's index 0 only" src/generators/power/quarrelPick.js "npx vitest run tests/generators/power/conflictQuarrelPick.test.js --no-file-parallelism" "(h) the no-grazing twin stands in for GRAZING's index 0 only: a LEVIES or MILITARY_COURT pick of index 0 prints its own line"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
