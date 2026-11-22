@@ -19,7 +19,10 @@ A successor needs this file, `PAGE-8-HANDBACK.md` (§4: the lane's rulings 1 to 
 - ARM (u) of `goalSentencesOnceInTown.test.js` MEASURED at dd706b807: TEN holdings fault, village 2 / town 1 / city 4 /
   metropolis 3 (thorp, hamlet 0); no mark on the record or the goal receipt; ALL TEN are cards whose secret the narrow call of
   `settleMisfitSecrets` changed (probe wrapping the pass). PROPOSED to the chair (08:27): test-only, the arm wraps the pass and
-  admits a moved holding iff its card is in the set the narrow call moved. Not built (waits for the base).
+  admits a moved holding iff its card is in the set the narrow call moved. RULED (E60, the chair 08:38): ACCEPTED, test-only,
+  no change to the pass's return shape, fixture d3937c3f8's, ON THREE CONDITIONS: the count pinned EXACT by size (village 2,
+  town 1, city 4, metropolis 3; thorp, hamlet 0) so an eleventh mover reds; a PLANT shown red (a moved holding whose card the
+  narrow call did not change); the arm's comment names the ten. Built on the SECOND base (the line merged), re-measured there.
 - BUILDERS IN FLIGHT: (unit 2, the frames) worktree `/home/user/wt-p14-sec`, branch `page14/secret-lines` from 620046593,
   brief `briefs/SECRET-LINES-BUILD.md` + ruling 14; (unit 3, the landmarks) worktree `/home/user/wt-p14-arr2`, branch
   `page14/arrival-lines-2` from 5a30cdc2a, brief `briefs/ARRIVAL-LINES-2-BUILD.md` + ruling 13 (first: prove 5a30cdc2a alone
