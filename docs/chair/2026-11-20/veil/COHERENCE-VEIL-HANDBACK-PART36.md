@@ -44,7 +44,16 @@ branch (never the reverse) and E116's five steps before the "TIP?".
   of it touches the re-key. `lane/veil-35-2026-11-22-r4ids-wip` cut there (worktree `/home/user/wt/r4i35`), part one merged
   (08081ffdc, no conflict), pushed. Part two re-stamped (f1b3726e1: the chair's resolve arm; chain A's overlap kept to ruling 53's six
   sites). BUILDER R4I-SQL SEATED after 20:43 (212, rollback, registry only; reads 212 and the registry whole first). R4I-PAGE after it.
-- NEXT STEP IN ONE LINE: R4I-SQL's diff read whole with 212 beside it; then R4I-PAGE; then the proofs and "TIP? R4-IDS <commit>".
+- R4I-SQL RETURNED: b983c16b6 on the -wip (LOCAL, not pushed while R4I-PAGE commits there). 212 `7a85dec3…10b5f3`, rollback
+  `b13c5be8…f141`, 211 unchanged. Its proofs (`out/v35/r4isql/proofs.txt`): 212 applies; 001..211 + 212 + down = 001..211 (480
+  functions a side, diff empty); 91 functions in 211 + 212 (84 + 7), ONE drawer (`_gallery_veil`), 0 of 29 closure members not
+  VOLATILE; 8 smoke reads (no id shared between two reads, no stored id served, every reference and marker key resolves; `npc.bo`
+  kept under its card's new id); `--check` 0; the part-one file 8 of 9 green, arm 1's 12 reds all twin-side (server 0; part one
+  had 72). THE DIFF READ ONCE BY THIS SEAT with 212 beside it: NO FAULT (the marker by the card; ruling 53's six sites only in
+  roster choices; nothing in withhold-always; the three reads stable -> volatile; seven helpers revoked by name and dropped by
+  signature). BUILDER R4I-PAGE SEATED after 21:2x: the twin, plants (e)/(f), the chair's resolve arm, ruling 53's walker, the
+  VR46 guards, and THE PROOFS with figures (the new pool `/var/tmp/v18/t2/pool-v35r4`, both gates, `tests/lint` whole, the build).
+- NEXT STEP IN ONE LINE: R4I-PAGE's diff read once and its figures; then "TIP? R4-IDS <commit>"; then HANDS OVER (36.5).
 
 ## 2. RULINGS SINCE PART 35 (chain B's, numbered 36.n so they never collide with chain A's; the eighth chair's; each vetoable by the owner)
 36.1 THE CHAIR, 19:32 UTC: DO NOT CUT FROM 5e0a584b6: R5-RECENT's second half (806217e88) is being proved by VEIL-33; the chair sends
