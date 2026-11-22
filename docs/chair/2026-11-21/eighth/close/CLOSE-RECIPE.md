@@ -70,7 +70,7 @@ every arm, not localized to (d) and (g); a later unit that touches the file adds
 ## 2. THE FLIP'S CENSUS (item (3); E90: THE CLOSE'S ALONE, run ONCE on the final tree): THE RECIPE THAT RE-RUNS IT
 REHEARSED on the lit scratch e987c3e36 (2026-11-22, 13:34 UTC onward); its classed tables are the reference
 (`census/lit-<part>-classed.tsv`); `FLIP-CENSUS.md` is its reading. THE FINAL RUN is on the line with SEAT-B, FORTUNE-B,
-JOIN and U8's cure landed, and step 1's three dials flipped (a scratch ref of the line, never the line itself).
+JOIN and FORTUNE-C (the fortune seat's test-only re-seat of the dual-hat guard's lit arm; it REPLACES "U8's cure", the chair's E112) landed, and step 1's three dials flipped (a scratch ref of the line, never the line itself).
 THE DARK LIST is `ci/RED-AT-LINE.tsv` on the chair's branch at that tip (CI's whole run on the line): no dark half is run.
 
 1. THE TREE: `git worktree add -b lane/<seat>-final-lit-scratch-<date> <dir> <the line's tip>`; `ln -s <main

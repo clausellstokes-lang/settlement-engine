@@ -24,6 +24,7 @@ neither lane ran). JOIN is what this census adds.
 | (b), (c) | 0 | 0 | 0 | 0 |
 
 ### (d) TRUE FAULT 1: FORTUNE LIT CUTS THE CRISIS'S OWN POWER IN A THORP (sent to the chair at once)
+**RECLASSED (the chair's E112, replacing E100; noted by CLOSE-2 2026-11-22 18:25 UTC): NOT A FAULT. On 900 births, DARK 509 places state a crisis with no power of it on the roster, LIT 508: the lit law changes which, not how often: the density law's norm. The guard's red is a PREMISE MOVE, class (a), re-seated by the fortune seat ("FORTUNE-C", test only). The change that would always seat a crisis's power is a proposal for the owner after the first deploy (`lane/fortune-7-2026-11-22-u8-wip`). `defenceParts` R13 lit stays RED AND LISTED, class (a). THE REHEARSAL'S FAULTS READ: ONE, the powers leaf (E91), cured by one row in the flip's own commit.**
 `tests/generators/people/dualHatPoliticalMass.test.js` › "a small place keeps the power the fold of the office's face
 into the leader's house cut". CONFIRMED by `census/dualhat-probe.mjs` on four trees: dark 8/8 hold; SEAT ALONE 8/8;
 FORTUNE ALONE and BOTH: 3 misses (rvf-slave_revolt-thorp-5 no Revolt Leadership; rvf-wartime-thorp-2 no War Council;

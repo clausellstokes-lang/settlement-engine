@@ -84,7 +84,13 @@ About 200 test values are pinned to what the old rules produced: a sentence on a
 because it once showed a case. Switching the rules moves them. They are re-recorded by their own tools with the
 reason written down. None of them is a golden or one of your numbers.
 
-## 7. Faults found by the rehearsal, fixed before the switch
-- Under fortune, three small places lost the group their own crisis is about (a slave revolt with no revolt leaders),
-  while the page still said the revolt was not contained. Sent to the fortune seat (its unit U8); it is cured before
-  the switch.
+## 7. Faults found by the rehearsal
+- **One fault, fixed inside the switch itself**: under the seat rule, a list of the town's powers read facts the
+  engine's ordering rules did not allow for that list; one line of that bookkeeping is changed in the same step as the
+  switch, so nothing on a page moves because of it.
+- **One worry that turned out not to be a fault, and a proposal for you to decide after the first deploy**: three small
+  places born under fortune had a crisis (a slave revolt, a war) with no group of that crisis among their powers. Measured
+  on 900 places, this happens just as often under the OLD rules (509 places old, 508 new): it is how the existing rule
+  for the number of powers a place keeps has always worked (a rule you signed); the new rule only changes which places.
+  The fortune seat has a built change that would always seat a crisis's own group; it alters that signed rule, so it is
+  **yours to decide, after the first deploy**, not part of the switch.
