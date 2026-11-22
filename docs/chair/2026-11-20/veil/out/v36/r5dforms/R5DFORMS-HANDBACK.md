@@ -70,7 +70,7 @@ guilds now have more say now: …" cuts as NM-more with "The merchant guilds now
   row takes `{LABEL}`, which holds every `{NAME}`). R5D-0's own expansion over the 64 sample labels: **4,671 / 4,671 literals cut
   whole to their row** (`proof-pg4.log`).
 - **(b)** every row expanded with the samples (every force word, every count word, both sides of every choice, 64 labels and
-  their 63 prose names, each value at least once): **1,166 / 1,166 cut WHOLE to their own row, JS**; `--check` re-proves it
+  their 64 prose names, each value at least once): **1,166 / 1,166 cut WHOLE to their own row, JS**; `--check` re-proves it
   and that each `re` matches its own template's samples.
 - **(c)** Postgres 16.15 on the local cluster, scratch database `r5dforms`, no migration: the printed literal loaded as
   `jsonb` (sha256 read back equal), the cut by `regexp_match` with the lazy base, looped in plpgsql: **the PG cut equals the JS
