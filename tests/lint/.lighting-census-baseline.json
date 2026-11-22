@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "149db6c591ccee80ce9fb8484bf51ca741b2d21f",
-  "measuredBy": "FORTUNE-7 U7b builder",
+  "measuredAtSha": "ff2da5aea70feeae2ce5a2715a937a7a25a2d70b",
+  "measuredBy": "FORTUNE-7 U7d builder",
   "date": "2026-11-22",
-  "note": "U7b: one new test file, tests/domain/fortuneLastingSentence.test.js (plain it(), nine titles)",
+  "note": "U7d: one new plain it() title in tests/domain/fortuneLastingSentence.test.js ((b), the planted empty event name)",
   "files": 3754,
   "parked": 482,
   "credited": 3272,
-  "titles": 31653,
+  "titles": 31654,
   "suiteTitles": 8777
 }
