@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "e6f2a42279571dc744aeac9b70c13884a556d071",
-  "measuredBy": "CLOSE-1",
+  "measuredAtSha": "b804659db1948d9378a5f7ca5fc3f4ba16903b3d",
+  "measuredBy": "STACK-98",
   "date": "2026-11-22",
-  "note": "the trial join 4bba8781d (point 97 + fortune f13f31820): the line side taken; SEAT_CIRCUMSTANCE_TUNING and FORTUNE_LAW_TUNING both registered DRAFT; no value moved",
+  "note": "point 98: lane/fortune-6-2026-11-21 at 8cc9212fd merged on the line at 1ec3e81d1; the merge took the line side of the inventory; the lane FORTUNE_LAW_TUNING row (draft) re-taken as the lane froze it, no value moved",
   "schemaVersion": 1,
   "trees": {
     "p1": [

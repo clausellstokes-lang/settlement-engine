@@ -297,6 +297,7 @@ export const PIPELINE_REACHERS = Object.freeze({
  * sits at the dormant default, so its mint is `{}` and deletes nothing: without its own
  * destructure, an imported seat-law world's configuration loaded through the Library and
  * regenerated would birth a NEW world under the seat law on a build whose dial is dark.
+ *
  * ⛔ THE FORTUNE LAW'S MARKER IS CLAMPED THE SAME WAY, FOR THE SAME REASON (FS5, FORTUNE-1 U1).
  * Its dial sits at the dormant default, so its mint is `{}` and deletes nothing: without its own
  * destructure, an imported fortune-law world's configuration loaded through the Library and

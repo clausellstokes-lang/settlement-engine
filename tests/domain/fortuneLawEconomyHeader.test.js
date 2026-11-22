@@ -15,8 +15,9 @@
  * THE ARMS:
  *   (a) LIT — every law-2 birth at a high rung whose complexity is the subsistence rung prints a header that names no
  *       complexity (the noun is read off `COMPLEXITY_NOUN`, never quoted), and still prints a header.
- *   (b) DARK — the same records with the marker taken off (law 1) print the header that names the noun in at least one,
- *       and a record carrying `_fortuneLawVersion: 1` prints exactly what the marker-less one prints.
+ *   (b) DARK — the same records with the marker taken off (law 1) keep the slot-naming variants ELIGIBLE (read through
+ *       the desk's seedless header, its eligible list's first variant, never a draw; U5d), and a record carrying
+ *       `_fortuneLawVersion: 1` prints exactly what the marker-less one prints.
  *   (c) UNTOUCHED — a law-2 birth at the middle rung on the subsistence rung still names it ("gets by on ... with a little
  *       left over" is true there).
  *
@@ -28,7 +29,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { buildPrintProse } from '../../src/domain/display/stateProse/printProse.js';
-import { COMPLEXITY_NOUN, prosperityHeaderPoolKey } from '../../src/domain/display/stateProse/economyStateProse.js';
+import { COMPLEXITY_NOUN, economyStateProse, prosperityHeaderPoolKey } from '../../src/domain/display/stateProse/economyStateProse.js';
 import { COMPLEXITY_LABEL } from '../../src/domain/display/labelBands.js';
 import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/economy.generated.js';
 import { prosperityRank } from '../../src/data/constants.js';
@@ -43,6 +44,8 @@ const MIDDLE_KEY = prosperityHeaderPoolKey(prosperityRank('Comfortable'), 'road'
 
 /** @param {any} s */
 const headerOf = (s) => String(buildPrintProse(s)?.economics?.['economics.prosperityHeader'] ?? '');
+/** The desk's own header read with no seed: its eligible list's first variant, no draw. @param {any} s */
+const seedlessHeaderOf = (s) => String(economyStateProse(s, {}, {})?.prosperityHeader?.sentence ?? '');
 /** The record as a law-1 world: the marker off its config and its echo. @param {any} s */
 const withoutMarker = (s) => {
   const strip = (/** @type {any} */ c) => (c && typeof c === 'object' ? Object.fromEntries(Object.entries(c).filter(([k]) => k !== FORTUNE_LAW_CONFIG_KEY)) : c);
@@ -88,7 +91,14 @@ describe('FS7 F1: the high rung never credits its money to a subsistence living 
 
   it('(b) DARK: the same records under law 1 print today\'s line, and an explicit 1 is the marker-less world', () => {
     const cases = born.filter((s) => onSubsistenceRung(s) && prosperityRank(s.economicState.prosperity) >= prosperityRank('Prosperous'));
-    expect(cases.some((s) => headerOf(withoutMarker(s)).includes(SUBSISTENCE_NOUN)), 'law 1 still fills the slot').toBe(true);
+    // U5d: the anchor reads ELIGIBILITY, not a draw. Seedless, the desk prints its eligible list's first variant (the
+    // kernel's canonical-at-zero), and the working-approach high pool's first variant names the slot: so a law-1 seedless
+    // header naming the noun is that variant eligible, the slot filled, which is exactly what law 2 withholds.
+    const working = cases.filter((s) => prosperityHeaderPoolKey(prosperityRank(s.economicState.prosperity), String(s.economicState.tradeAccess)) === HIGH_KEY);
+    expect(working.length, 'the anchor reads at least one working-approach high-rung birth').toBeGreaterThan(0);
+    expect(/** @type {any} */ (DOSSIER_STATE_PROSE_ECONOMY)['DS-ECO-1'].pools[HIGH_KEY][0].slots).toContain('complexity');
+    // anchored: arm (a) reads the noun absent from the same records' law-2 header
+    expect(working.every((s) => seedlessHeaderOf(withoutMarker(s)).includes(SUBSISTENCE_NOUN)), 'law 1 still fills the slot').toBe(true);
     for (const s of cases) expect(headerOf(withMarker(s, 1))).toBe(headerOf(withoutMarker(s)));
   });
 

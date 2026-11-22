@@ -239,14 +239,14 @@
  "digests": {
   "corpusMeta": "2fc0bed64cd75bee9bf307933c70806bddd7e3bca56bd43f6b10701001c26cf9",
   "inventory": "0f12dacdb70d4a6057e5e6b9f8672f026f7fa325c8d770bba6b9b14870eaf2ab",
-  "manifests": "70b2d18091881780d5d619bafdcda97165f5d218ab232c21de328f0dc4ba090b",
+  "manifests": "70500d2d7fd826dd763289c0dcaba09325c599fffa37fad1162d4385f5732687",
   "migrationReview": "e534f083e0e955fdb22847606961f18e4bda1cb8092c131f84b753bdd672cf4e",
   "rowTags": "d980efe88e9faed55dad533e43ccf6d4e3ea3dae24aa236375965207828d96f7",
   "scanStats": "7c6daaf60374148544b9fa0c84e09ed039c3c48dea50d37f3c2e9fbe9d775df5",
   "sentinel": "19cfb14de8c1a34e6de92345b8335a3cae89c17e93bd99ba1a75b0f264aa43d8"
  },
  "frozen": "2026-11-22",
- "frozenAtSha": "c2c2f6bad103317e0d5efc2b2ab6c30846c0c7fd",
+ "frozenAtSha": "93fca9a8faad8c8cc7ee09fd6c7dda0c97d17d81",
  "identities": 1553,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -2779,7 +2779,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "1daa78583be1099f11b6b564b332bb10062f4d31c776f8b2a161b1f94360258f",
+   "digest": "3c34f955df2e69671b6040b52dc2c1e32d059d63e5afe1d13b55d0e840cac92e",
    "entries": [
     {
      "mode": "100644",
@@ -9427,8 +9427,8 @@
     {
      "mode": "100644",
      "path": "src/domain/density/densityCreateBoundary.js",
-     "sha256": "5f1aa150fed363406536efff0da39b03cea83c0069ca5be1cff5096bebdd3812",
-     "size": 37987,
+     "sha256": "e1010e9c53a5d4c981cd629667a68b022bae2d11e45c7efcdbbe68fc6f2d2ad1",
+     "size": 37990,
      "type": "file"
     },
     {
@@ -21300,7 +21300,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "3ecd8b002ddde6e6ac1687e93a888c8ca7f2fc7568ee775a9d4006a6aa80d1a5",
+   "digest": "8e2e624df3667fd2036d537da0442cda90d3ebe90ea7610831611badad18d9bc",
    "entries": [
     {
      "mode": "100644",
@@ -27759,8 +27759,8 @@
     {
      "mode": "100644",
      "path": "src/domain/density/densityCreateBoundary.js",
-     "sha256": "5f1aa150fed363406536efff0da39b03cea83c0069ca5be1cff5096bebdd3812",
-     "size": 37987,
+     "sha256": "e1010e9c53a5d4c981cd629667a68b022bae2d11e45c7efcdbbe68fc6f2d2ad1",
+     "size": 37990,
      "type": "file"
     },
     {
@@ -39625,7 +39625,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "25ea11cd6cab2e708aefc8bcd58b1d4894b6a10e707f068373edb39f5690f14e",
+   "digest": "850608d12d61cae8550d550b1767f18e8a8e960f85c6b434d3fa6ae3767d138d",
    "entries": [
     {
      "mode": "100644",
@@ -46203,8 +46203,8 @@
     {
      "mode": "100644",
      "path": "src/domain/density/densityCreateBoundary.js",
-     "sha256": "5f1aa150fed363406536efff0da39b03cea83c0069ca5be1cff5096bebdd3812",
-     "size": 37987,
+     "sha256": "e1010e9c53a5d4c981cd629667a68b022bae2d11e45c7efcdbbe68fc6f2d2ad1",
+     "size": 37990,
      "type": "file"
     },
     {
@@ -58410,9 +58410,9 @@
  },
  "scannerProvenance": {
   "detectorDigest": "4510771aaad7171b24f7d28199255626c9dd37de9015d991904184b37a1fae76",
-  "executionTreeDigest": "1daa78583be1099f11b6b564b332bb10062f4d31c776f8b2a161b1f94360258f",
-  "scanTreeDigest": "3ecd8b002ddde6e6ac1687e93a888c8ca7f2fc7568ee775a9d4006a6aa80d1a5",
-  "sourceTreeDigest": "25ea11cd6cab2e708aefc8bcd58b1d4894b6a10e707f068373edb39f5690f14e",
+  "executionTreeDigest": "3c34f955df2e69671b6040b52dc2c1e32d059d63e5afe1d13b55d0e840cac92e",
+  "scanTreeDigest": "8e2e624df3667fd2036d537da0442cda90d3ebe90ea7610831611badad18d9bc",
+  "sourceTreeDigest": "850608d12d61cae8550d550b1767f18e8a8e960f85c6b434d3fa6ae3767d138d",
   "unscannedInputDigest": "b357666511eac940fedcc0ce7628d1e9b567ce28e79287a78c6cc5424817b1c6"
  },
  "schema": 46,
