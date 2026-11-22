@@ -1,17 +1,16 @@
-# CLOSE-1 — HAND-BACK (kept current at every push; last written 2026-11-22 09:17 UTC, read from `date -u`)
+# CLOSE-1 — HAND-BACK (kept current at every push; last written 2026-11-22 13:34 UTC, read from `date -u`)
 
 The seat that rehearses THE CLOSE on scratch refs (prompt: `docs/chair/2026-11-21/eighth/prompts/CLOSE-1.txt` on
 `lane/chair-2026-11-08`, from e75a95c6b). The chair: session_01ACmDYY29VRchM87v1yhL9Q (send_message).
 
-## 0. WHERE THE SEAT STANDS: PARKED (2026-11-22 09:17 UTC, the owner's six-seat word; wait for the chair's "GO CLOSE-1")
+## 0. WHERE THE SEAT STANDS (2026-11-22 13:34 UTC; back at work on the chair's "GO CLOSE-1" of 13:07 UTC)
 
-1. DONE, PROVEN: THE TRIAL JOIN `lane/close-1-join-scratch-2026-11-22` 4bba8781d (point 97 + fortune f13f31820; nine conflicts classed by E53/E61, `JOIN-CONFLICTS.md`), its doors on top to a349917e7 (wiring, observed-shape fortune's side + door, writer-reach, tuning inventory, lighting census, each proven).
-2. DONE, PROVEN: THE LIT REF `lane/close-1-lit-scratch-2026-11-22` 5c4419815 (three dials; lit birth; both saved-place tests 15/15), the doors merged on top at e987c3e36. VEIL-33 reads 4bba8781d and 5c4419815: never move or delete them.
-3. FAULT FOUND (class (d)): the home page's sample town is born off `birthConfig` (`measures/LANDING-FIXTURE-PROBE.md`). ITS CURE, CLOSE-FIXTURE (E55, lands): built, `lane/close-1-2026-11-22-fixture-wip` 72d412265 (07fbee2c3 cure + test, red 0/2 then green 2/2; lighting door); builder's `tests/lint` whole 3358/3364, the 6 = the line's 3 size rows + `ledgerCitationIntegrity` x3 from MY BOX'S WRONG LEDGER REF (fixed to 235efce1a at 08:58; NOT yet re-run: the mutex gave up). NOT YET READ BY ME: its diff, whole, once; its red/green re-run.
-4. JOIN brief APPROVED by E61 (`briefs/JOIN-LAWS.md`, with the arm table); not dispatched: waits for the chair's tip with both laws.
-5. IN THE AIR: nothing (every builder and run ended).
-6. NEXT, on "GO CLOSE-1": read CLOSE-FIXTURE's diff whole, re-run its red and green and `ledgerCitationIntegrity`; send "CLOSE-FIXTURE <commit>"; then unit 4 (`scratchpad/u4/run-parts.sh <tree> <tag>`, lit then join) and unit 6 (`plan900.json`, `sameness-census.mjs --measure --plan --text`).
-7. COUNT: about 300,000 by my own estimate.
+1. CLOSE-FIXTURE SENT FOR LANDING: "CLOSE-FIXTURE 6f579f0e7" (lane `lane/close-1-2026-11-22`: the line 1ec3e81d1 merged fb0ef3ebb; the cure 72d412265 merged bbc04eb80, its diff read whole; the lighting census by its door f6d764473). Red re-run 0/2, green 2/2; rule 8 widened: `tests/build` 15 red, `tests/lint` 3 red, copy/store/architecture/docs + two importers 2 red: every red on RED-AT-LINE (64 rows). Five figures equal the line's (1,183,904 / 376,718 / 316,242; worker 2,698,788; engine 927,681). The dark fixture under the cure: +57 bytes, 16 lines, the town's brief unchanged (realm lines only). Logs: scratchpad `cf/`.
+2. THE TRIAL JOIN a349917e7 and THE LIT REF e987c3e36: on origin, unchanged (VEIL-33 reads 4bba8781d and 5c4419815 beneath them).
+3. JOIN brief: APPROVED (E61), checked against stack-98 7c03296d8 (two arms more in the table). Its builder is cut only on the chair's tip with both laws.
+4. IN THE AIR: unit 4, THE LIT HALF ONLY (the chair: the dark list IS RED-AT-LINE), on the lit scratch e987c3e36: `scratchpad/u4/run-parts.sh /home/user/wt/lit lit` (parts gen, domain, build after one build, lint, ui, rest; progress in `u4/lit/progress.txt`; reds by name with `match.mjs <json> RED-AT-LINE.now.tsv`).
+5. NEXT: FLIP-CENSUS.md from the lit reds not on the list, in the four classes; a TRUE FAULT to the chair at once (one known: E78, `powerStructure.recentConflict` names a power the shared read withholds: the veil's writer cures it). Then units 5, 6, 7.
+6. A FAULT OF MINE, told: 6f579f0e7 was committed while the push of f6d764473 was in flight (COMMON-RULES 11); nothing lost.
 
 ## 1. RULINGS IN FORCE (numbered; the chair's)
 1. The troubles law is not in this deploy (E28): every item of it struck.
