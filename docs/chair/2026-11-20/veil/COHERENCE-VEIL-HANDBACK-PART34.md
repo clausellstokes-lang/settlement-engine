@@ -99,7 +99,23 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
   THE SEAT'S RECOMMENDATION to the chair 15:11: THE OTHER WAY ((viii)'s pattern): withheld ALWAYS on every shared read, both engines;
   ONE page reader re-derives it from the served document by the engine's own writer (`deriveBaselineConflict` over the served
   powers), MEASURED FIRST for fidelity on nothing-hidden pages; if seed-drawn, the page draws none, everywhere (the chair weighs the
-  loss). AWAITING THE RULING.
+  loss). RULED 15:16 (ruling 99, E92): THE OTHER WAY. THE CURE: a FRESH builder V33-R5C2 (same worktree and branch `v33-r5cure`; the
+  brief's E92 section 42640f37d): measure first by the two writers, then build as pre-ruled or STOP with figures; the plant green by
+  the key's absence, the differential (a hiding read's page sentence = the same place's with the power never there), a readers'
+  walker, the composed-hosts walker's row green (26 red), the registry's writer corrected, first paint +0.
+- THE HAND-OVER (ruling 99 (7)): VEIL-33 HANDS OVER AT R5-RECENT'S MERGE ("VEIL-33 HANDS OVER <commit>"), R5-DESC's brief written
+  (`briefs/R5-DESC-BRIEF.md`, widened by ruling 98 and the contenders, row 18) and its plant if it costs little. VEIL-34 (seated by
+  the chair on `prompts/VEIL-34.txt` within the hour) reads in beside; its units as writer: R5-DESC, R4-IDS, (iv), (v), (vi),
+  IMPORT-DOOR, "R3 <commit>".
+- OWED, NOT STARTED (for the successor, in the chair's order): (a) THE PER-LAW GATES of the lit pass (ruling 95 (4)): trees
+  `/home/user/wt/jpf` (`lane/veil-33-2026-11-22-joinprobe-lawf-wip`, fortune alone, d3c4da41f) and `/home/user/wt/jps`
+  (`…-laws-wip`, the seat alone, 44f9eef84), LOCAL ONLY, NOT PUSHED; the script `/var/tmp/v18/out/v33/perlaw/perlaw.sh` (re-point
+  its wait; one pool at a time, never beside the lane's); until then lit GATE-1's cause is PLAUSIBLE (fortune). (b) (ix)'s red-first
+  instrument on the probe branch (its brief `briefs/IX-TROUBLE-HOOKS-BRIEF.md` there, 5aa578028; the probe's hook-gap measure is
+  its red today). (c) E75 (b)-(d)'s worklist lines in the probe's `conflicts.md`: the 16 sites by file and point (JOINPROBE-PASS1
+  section 5 R-A has them); arm (D) re-stated at the join (the trouble lane's seat told); the line's lost registers with their doors
+  (conflicts.md items 1-11 hold them). (d) INV-LIT at the join, after R3, with the lit-surfaces table re-run after R5-RECENT,
+  R5-DESC and R4-IDS (ruling 98).
 - PER-LAW GATES (ruling 95 (4)): scratch trees `/home/user/wt/jpf` (`lane/veil-33-2026-11-22-joinprobe-lawf-wip` d3c4da41f:
   fortune's dial alone on 27c7e79dd) and `/home/user/wt/jps` (`…-laws-wip` 44f9eef84: the seat's two alone); pools `pool-jpf`,
   `pool-jps`, both gates each: `/var/tmp/v18/out/v33/perlaw/perlaw.sh` (log `perlaw.log`), queued on the mutex after pass 2's END.
@@ -178,6 +194,19 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
     writes nothing of 212, the twin or the registry until the hand-over line; R4-IDS its first unit). R5-DESC's SCOPE: EVERY
     composed sentence of a power's card that can carry another power's name or kind; the walker the proof; the seat's line says how
     many composed rows the registry holds and how many have a built host after R5-DESC (29; 6 after: section 1's R5-DESC brief).
+99. THE CHAIR TO VEIL-33, 15:16 UTC (E92), ON R5C's TWO STOPS: "THE OTHER WAY" FOR R5-RECENT: (1) `powerStructure.recentConflict`
+    WITHHELD ALWAYS on every shared read of every place, both engines; never a per-place form, never the hidden name in any host; (2)
+    ONE READER on the page re-derives it from the served document by the engine's own writer, wired where `rederiveCrimeTypes` is;
+    (3) MEASURE FIRST, split by the two writers (`buildGovernanceLabels` baseline: reproduced N of N?; `transferRulingPower`
+    transfers: how many, and what the served document carries); (4) PRE-RULED: (i) reproduced on all: BUILD; a transfer's
+    sentence that cannot be composed without a withheld name is NOT reconstructed: the page prints the baseline over the served
+    powers (a loss confined to transfer places, ACCEPTED, counted lit at the join by act K); (i) not reproduced: STOP with the
+    figures ("none, everywhere" the chair's last resort); (5) the plant green by the key's ABSENCE, plus THE DIFFERENTIAL (a hiding
+    read's page sentence equals the same place's with the power never there), the composed-hosts walker; (6) the registry's writer
+    corrected; (7) THE HAND-OVER AT R5-RECENT'S MERGE (the count passes 600,000 there), R5-DESC's brief and plant written if they
+    cost little; VEIL-34 seated within the hour beside. ONE QUESTION ANSWERED 15:17: the Power tab's contenders (row 18) WERE judged
+    within the probe's surface (b) (derivePowerStrata's output searched): hits on 4 places, in the strata, PLAUSIBLY the
+    descriptions: R5-DESC's scope.
 
 ## 3. Log (every hour from `date -u`)
 - 08:05 seated; the assignment read (853ccbfa2 ancestor of the fetched chair branch). 08:06 chain0 launched.
@@ -197,3 +226,4 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
 - 14:36 the chair's ruling 97 read; 14:38 answered; R5-DESC's brief drafted (its open question waits on R5C's).
 - 14:40 the chair's E89 (ruling 98) read 14:46; R5-DESC's brief widened to every power-card composed row (29 composed; 2 built today; 6 after R5-DESC).
 - 15:10 the gates at 83d236813 read (equal). R5C's STOP read; pushed `-wip`; 15:11 the (H) line and the STOP with the recommendation to the chair.
+- 15:13 push of 8a54f10d5. 15:16 the chair's E92 (ruling 99) read; 15:17 the contenders answered; the brief's E92 section 42640f37d; R5C2 seated; section 1 written for the hand-over.

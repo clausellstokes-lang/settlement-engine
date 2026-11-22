@@ -54,6 +54,12 @@ power-card row is left. Any OTHER served sentence of a power's card the registry
 cause, a contest line, the seat's train) that can carry another power's name is found by THE LANE'S SEARCH over every served
 string of the probe's 60 lit births and the lane's pool: a hit not on the list is a STOP with the path (a new registry row).
 
+THE POWER TAB'S CONTENDERS AND STRATA (the chair's readers' list row 18; `powerStrata.js :: derivePowerStrata`, which lit reads the
+cast and the circumstances, and `coupContenders`): the probe's surface (b) flagged a hidden name on 4 places (acts T and R, Reveal
+off: jp6-city-8, jp6-village-6 and two more) in the STRATA's output where the challengers list held none: PLAUSIBLY the same
+descriptions; R5-DESC's measure reads them one by one and its rule covers what the page derives from them (a page-side derivation
+that prints a served description prints what the veil served: the cure at the description is the cure there; prove it on the page).
+
 ## THE RED FIRST
 `tests/security/galleryVeilDesc.pglite.test.js` (R5-RECENT's plant's harness, both engines, both stored shapes, every setting, Reveal
 off and on): PLANTS (a) a shown power's description naming a power withheld BY RULE (power.entry under a hidden criminal house);
