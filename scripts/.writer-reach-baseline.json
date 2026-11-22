@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "438bb8bcdb56778e678f110b173cf253b903a3dd",
+ "frozenAtSha": "5341be78584243545df7692627e4104c28cb3b0c",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -23,8 +23,8 @@
   "transitionCount": 23097
  },
  "shapesDigest": "7350e7ffb6d149bfc3b096929fa308825524ee6eeac0237e95fd771444bf45f3",
- "detectorDigest": "5240d93609ff51bf3a11afb51e15982d22e3bf48b861241a98f72ca66ce8e85c",
- "verdictDigest": "d59805b01644a1128d1d73142573e0396add1c2b4c0623279c1bd2a032dea8df",
+ "detectorDigest": "ef804a6642b3a2a2045c233036156113bf391d135a8edd59ff81c061bde34893",
+ "verdictDigest": "409815fc604b89b37a68e3a170365bf3fe9054dc6595cb771439d12456ced60f",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -73,37 +73,37 @@
  ],
  "closureSizes": {
   "web-display": 799,
-  "web-transitive": 1073,
-  "dossier-pdf": 610,
-  "campaign-pdf": 208,
-  "world-book": 223,
-  "foundry": 506,
+  "web-transitive": 1077,
+  "dossier-pdf": 614,
+  "campaign-pdf": 212,
+  "world-book": 227,
+  "foundry": 510,
   "json-export": 12,
   "news": 29
  },
  "population": {
   "judged": 12726,
-  "lit": 700,
-  "litName": 10601,
-  "dark": 1425,
+  "lit": 701,
+  "litName": 10602,
+  "dark": 1423,
   "thinKeys": 16769,
   "thinShapes": 1203,
   "knownShapes": 545
  },
  "scanStats": {
-  "files": 1873,
-  "sites": 44453,
-  "propRead": 42187,
+  "files": 1877,
+  "sites": 44501,
+  "propRead": 42233,
   "elemRead": 2,
-  "destructure": 2244,
+  "destructure": 2246,
   "inOp": 20,
-  "rGrades": 7848,
-  "nGrades": 1880807,
-  "resolvedReceivers": 8757
+  "rGrades": 7881,
+  "nGrades": 1881661,
+  "resolvedReceivers": 8790
  },
  "registerDigest": "66919206e4d932964430d33786b44f7d6de17566cc52e83fc5ee83647e2cfbf5",
  "pendingSurfaceCeiling": 0,
- "reviewableDarkCount": 399,
+ "reviewableDarkCount": 397,
  "darkUnregistered": [
   {
    "identity": "Bulk grain and flour on reasons",
@@ -2278,12 +2278,6 @@
    "rows": 450
   },
   {
-   "identity": "isApproved on publicLegitimacy",
-   "key": "isApproved",
-   "shape": "publicLegitimacy",
-   "rows": 476
-  },
-  {
    "identity": "isDeficit on foodSecurity",
    "key": "isDeficit",
    "shape": "foodSecurity",
@@ -2299,12 +2293,6 @@
    "identity": "isSecure on foodSecurity",
    "key": "isSecure",
    "shape": "foodSecurity",
-   "rows": 476
-  },
-  {
-   "identity": "isTolerated on publicLegitimacy",
-   "key": "isTolerated",
-   "shape": "publicLegitimacy",
    "rows": 476
   },
   {
@@ -9480,7 +9468,7 @@
   "surplusPct on foodRecord": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
   "activeChains on foodSecurity": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "activeChainsCount on foodSecurity": "dossier-pdf=R web-display=R",
-  "bg on foodSecurity": "dossier-pdf=N web-display=N",
+  "bg on foodSecurity": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "chains on foodSecurity": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "color on foodSecurity": "campaign-pdf=N dossier-pdf=R foundry=R web-display=R web-transitive=N world-book=N",
   "dailyNeed on foodSecurity": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
@@ -9597,7 +9585,7 @@
   "lastingEffects on historicalEvents": "dossier-pdf=R foundry=R web-display=R web-transitive=R",
   "name on historicalEvents": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N news=R web-display=R web-transitive=R world-book=R",
   "plotHooks on historicalEvents": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
-  "severity on historicalEvents": "campaign-pdf=N dossier-pdf=R foundry=R news=N web-display=R web-transitive=R world-book=N",
+  "severity on historicalEvents": "campaign-pdf=R dossier-pdf=R foundry=R news=N web-display=R web-transitive=R world-book=R",
   "templateType on historicalEvents": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
   "type on historicalEvents": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N news=N web-display=R web-transitive=R world-book=R",
   "yearsAgo on historicalEvents": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
@@ -9794,11 +9782,11 @@
   "religious_authorities on leaderNpcIds": "",
   "thieves_guild on leaderNpcIds": "",
   "town_council on leaderNpcIds": "",
-  "annotation on legacyAnnotations": "dossier-pdf=R web-display=R web-transitive=R",
+  "annotation on legacyAnnotations": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "eventName on legacyAnnotations": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "eventType on legacyAnnotations": "web-display=N web-transitive=N",
   "severity on legacyAnnotations": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
-  "yearsAgo on legacyAnnotations": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=R world-book=N",
+  "yearsAgo on legacyAnnotations": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "desc on legal": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "institution on legal": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-display=N web-transitive=N world-book=N",
   "name on legal": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
@@ -20187,17 +20175,17 @@
   "receiptClass on provenance": "web-transitive=N",
   "tick on provenance": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "type on provenance": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
-  "bg on publicLegitimacy": "dossier-pdf=N web-display=N",
-  "breakdown on publicLegitimacy": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R world-book=R",
+  "bg on publicLegitimacy": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
+  "breakdown on publicLegitimacy": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "color on publicLegitimacy": "campaign-pdf=N dossier-pdf=N foundry=N web-display=R web-transitive=N world-book=N",
   "crimMultiplier on publicLegitimacy": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
   "govMultiplier on publicLegitimacy": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
-  "governanceFractured on publicLegitimacy": "dossier-pdf=R web-display=R",
-  "isApproved on publicLegitimacy": "",
+  "governanceFractured on publicLegitimacy": "campaign-pdf=N dossier-pdf=R foundry=N web-display=R web-transitive=N world-book=N",
+  "isApproved on publicLegitimacy": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
   "isContested on publicLegitimacy": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
   "isEndorsed on publicLegitimacy": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
   "isLegitimacyCrisis on publicLegitimacy": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
-  "isTolerated on publicLegitimacy": "",
+  "isTolerated on publicLegitimacy": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
   "label on publicLegitimacy": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N news=N web-display=R web-transitive=R world-book=R",
   "score on publicLegitimacy": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N news=N web-display=R web-transitive=R world-book=R",
   "applyMode on pulseHistory": "dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N",
