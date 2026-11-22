@@ -22,6 +22,12 @@
 -- VEIL-22 (R3): and _gallery_veil_roster_choices, called by the restated _gallery_veil, dropped there too.
 -- VEIL-24 (R3-CURE-2): and its helper _gallery_veil_power_named, dropped beside it.
 -- VEIL-25 (R3-CURE-4): and its two helpers _gallery_veil_copy_names and _gallery_veil_npc_copies, dropped beside it.
+-- VEIL-35 (R4-IDS, R4I-SQL; 212's (36)): 212 restates _gallery_veil VOLATILE (one salt a call) and the three reads
+-- stable -> volatile; section 1's statements put back 211's (_gallery_veil IMMUTABLE, the three reads STABLE), so their
+-- volatility goes back with them. And it creates seven helpers, dropped first in section 2 by signature: the six salt
+-- carriers (_gallery_veil_rekey_id, _rekey_ref, _rekey_at, _rekey_each, _rekey, _rekey_served) and _gallery_veil_id_text
+-- (ruling 53's fold). Rehearsed on a local chain: 001..211 + 212 + this file equals 001..211 (every public function's
+-- definition, volatility and grants; docs/chair/2026-11-20/veil/out/v35/r4isql/).
 --
 -- NOT reversed, because there is nothing to: no stored row was written by 212.
 
@@ -432,6 +438,14 @@ begin
 end $$;
 
 -- ── 2. the helpers 212 created, by signature (thirty-one: COHERENCE-VEIL-10 replaced the eighth seat's sweep, _folded_name, _names and _sweep, by the name search's fourteen, _name_* and _named; COHERENCE-VEIL-11 added _case_fold; COHERENCE-VEIL-12 added _name_bound and _name_pad, and _clauses, which VEIL-15 replaced by _runs; VEIL-16 added _name_json and _name_tokens, and _name_near takes a range of tokens) ──
+-- VEIL-35 (R4-IDS): the seven, callers first (the re-key and the marker, then the carriers they call, then the fold)
+drop function if exists public._gallery_veil_rekey_served(jsonb, jsonb, text);
+drop function if exists public._gallery_veil_rekey(jsonb, text);
+drop function if exists public._gallery_veil_rekey_each(jsonb, text[], text[], jsonb, text);
+drop function if exists public._gallery_veil_rekey_at(jsonb, text[], jsonb, text);
+drop function if exists public._gallery_veil_rekey_ref(jsonb, jsonb, text);
+drop function if exists public._gallery_veil_rekey_id(text, text, text);
+drop function if exists public._gallery_veil_id_text(jsonb);
 drop function if exists public._gallery_veil_roster_choices(jsonb, jsonb);
 drop function if exists public._gallery_veil_power_named(jsonb, text[], jsonb);
 drop function if exists public._gallery_veil_copy_names(text, jsonb, text[], jsonb);

@@ -1,0 +1,19 @@
+(c) SUMMARY. Functions 211 and 212 create or restate (by name, as the part-one arm reads them): 91.
+Of them, drawers (prosrc ~* random|gen_random_uuid|gen_random_bytes|uuid_generate_v4|setseed, called):
+_gallery_veil(jsonb,jsonb,boolean,boolean) provolatile v
+Of them, members of the randomness closure (c-catalogue-212.txt) and their provolatile:
+_gallery_veil(jsonb,jsonb,boolean,boolean) provolatile v
+get_gallery_dossier(text) provolatile v
+get_gallery_map(text) provolatile v
+get_unlisted_dossier(text) provolatile v
+import_gallery_dossier(text) provolatile v
+import_gallery_map created by 211/212: 0 (it is a caller of get_gallery_map from an earlier migration; VOLATILE, c-catalogue-212.txt)
+The six salt carriers and the fold (draw nothing, call no drawer; not in the closure):
+_gallery_veil_id_text(jsonb) provolatile i
+_gallery_veil_rekey(jsonb,text) provolatile v
+_gallery_veil_rekey_at(jsonb,text[],jsonb,text) provolatile v
+_gallery_veil_rekey_each(jsonb,text[],text[],jsonb,text) provolatile v
+_gallery_veil_rekey_id(text,text,text) provolatile v
+_gallery_veil_rekey_ref(jsonb,jsonb,text) provolatile v
+_gallery_veil_rekey_served(jsonb,jsonb,text) provolatile v
+Schema-wide (every public function, 001..211 + 212): drawers 15 (001..211: 14: the 14 outside the veil, slugs, account numbers, job claims, challenges), closure members 29 (001..211: 23), not VOLATILE: 0.

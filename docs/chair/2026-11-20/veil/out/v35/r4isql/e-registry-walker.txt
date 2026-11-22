@@ -1,0 +1,59 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 24050 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+ RUN  v4.1.8 /home/user/wt/r4i35
+
+ ❯ tests/lint/rosterChoiceRegistry.walker.test.js (11 tests | 2 failed) 108ms
+     × ARM C: a host declared as existing exists (a 212 function; a top-level declaration of its file) 29ms
+     × ARM D: a BUILT row's symbols exist and each rule names its row id 71ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/rosterChoiceRegistry.walker.test.js > ARMS C and D: every row is bound to the server and the twin > ARM C: a host declared as existing exists (a 212 function; a top-level declaration of its file)
+AssertionError: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/domain/display/galleryVeilPeople.js :: rekeyPeople",
++ ]
+
+ ❯ tests/lint/rosterChoiceRegistry.walker.test.js:226:17
+    224|       return existsSync(join(ROOT, file)) && twinDeclaration(file, nam…
+    225|     });
+    226|     expect(bad).toEqual([]);
+       |                 ^
+    227|   });
+    228|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/lint/rosterChoiceRegistry.walker.test.js > ARMS C and D: every row is bound to the server and the twin > ARM D: a BUILT row's symbols exist and each rule names its row id
+AssertionError: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "people.rekey: twin src/domain/display/galleryVeilPeople.js :: rekeyPeople is not a top-level declaration",
++ ]
+
+ ❯ tests/lint/rosterChoiceRegistry.walker.test.js:242:17
+    240|       return out;
+    241|     });
+    242|     expect(bad).toEqual([]);
+       |                 ^
+    243|   });
+    244| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 9 passed (11)
+   Start at  21:00:58
+   Duration  1.29s (transform 67ms, setup 33ms, import 1.01s, tests 108ms, environment 0ms)
+
+exit 1

@@ -1,0 +1,56 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 23612 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+ RUN  v4.1.8 /home/user/wt/r4i35
+
+ ✓ tests/security/galleryVeilIds.pglite.test.js > R4-IDS: VR10's person ids on every non-owner read (through the server; the twin beside it) — RED BY DESIGN at the seat's tip > the plant serves each case it plants (the instrument judges something): the withheld power, the hidden house, the number id and its card tie 2ms
+ × tests/security/galleryVeilIds.pglite.test.js > R4-IDS: VR10's person ids on every non-owner read (through the server; the twin beside it) — RED BY DESIGN at the seat's tip > (1) RED BY DESIGN: no served id, key or slug spells a withheld power or a house hidden whole, by search (ruling 28), on any read 93ms
+   → expected [ …(12) ] to deeply equal []
+ ✓ tests/security/galleryVeilIds.pglite.test.js > R4-IDS: VR10's person ids on every non-owner read (through the server; the twin beside it) — RED BY DESIGN at the seat's tip > (2) RED BY DESIGN: VR46's five teeth over every served read, the served payload against its reference (the gallery's twin; the link's second read) modulo the read's bijection (personIdBijection.shared.mjs) 4875ms
+ ✓ tests/security/galleryVeilIds.pglite.test.js > R4-IDS: VR10's person ids on every non-owner read (through the server; the twin beside it) — RED BY DESIGN at the seat's tip > (3) RED BY DESIGN, STOP 1: every person reference inside a card's own ties follows the re-key (no stored id; the twin's person by the bijection) 2ms
+ ✓ tests/security/galleryVeilIds.pglite.test.js > R4-IDS: VR10's person ids on every non-owner read (through the server; the twin beside it) — RED BY DESIGN at the seat's tip > (4) THE CATALOGUE (ruling 16): every function 211 and 212 create or restate that draws randomness, or calls one that does (the transitive closure), is VOLATILE 796ms
+ ✓ tests/security/galleryVeilIds.pglite.test.js > R4-IDS: VR10's person ids on every non-owner read (through the server; the twin beside it) — RED BY DESIGN at the seat's tip > (4) THE CATALOGUE CAN FAIL: a closure member declared STABLE on a scratch transaction reds 808ms
+ ✓ tests/security/galleryVeilIds.pglite.test.js > R4-IDS: VR10's person ids on every non-owner read (through the server; the twin beside it) — RED BY DESIGN at the seat's tip > TOOTH THAT PASSES TODAY: a read that hides nothing (every hideable house shown, Reveal DM on) serves the same people as its reference (the gallery's twin; the link's second read), modulo the bijection 29ms
+ ✓ tests/security/galleryVeilIds.pglite.test.js > R4-IDS: VR10's person ids on every non-owner read (through the server; the twin beside it) — RED BY DESIGN at the seat's tip > TOOTH THAT PASSES TODAY: arm (2)'s equality, ids aside: every person-bearing part (cards, ties, casts, trace, roster copies) is its reference's (the gallery's twin; the link's second read) modulo the bijection, on every read 484ms
+ ✓ tests/security/galleryVeilIds.pglite.test.js > R4-IDS: VR10's person ids on every non-owner read (through the server; the twin beside it) — RED BY DESIGN at the seat's tip > TOOTH THAT PASSES TODAY: a served person's every non-id byte is its reference's person's of the same canonical name (the gallery's twin; the link's second read), on every read 204ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryVeilIds.pglite.test.js > R4-IDS: VR10's person ids on every non-owner read (through the server; the twin beside it) — RED BY DESIGN at the seat's tip > (1) RED BY DESIGN: no served id, key or slug spells a withheld power or a house hidden whole, by search (ruling 28), on any read
+AssertionError: expected [ …(12) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "plant new marked dm=false twin: npcs[0].id = npc_power_thieves_guild",
++   "plant new marked dm=false twin: relationships[0].id = tie_npc_power_thieves_guild__npc.bo",
++   "plant new marked dm=false twin: relationships[0].from = npc_power_thieves_guild",
++   "plant new marked dm=true twin: npcs[0].id = npc_power_thieves_guild",
++   "plant new marked dm=true twin: relationships[0].id = tie_npc_power_thieves_guild__npc.bo",
++   "plant new marked dm=true twin: relationships[0].from = npc_power_thieves_guild",
++   "plant master marked dm=false twin: npcs[0].id = npc_power_thieves_guild",
++   "plant master marked dm=false twin: relationships[0].id = tie_npc_power_thieves_guild__npc.bo",
++   "plant master marked dm=false twin: relationships[0].from = npc_power_thieves_guild",
++   "plant master marked dm=true twin: npcs[0].id = npc_power_thieves_guild",
++   "plant master marked dm=true twin: relationships[0].id = tie_npc_power_thieves_guild__npc.bo",
++   "plant master marked dm=true twin: relationships[0].from = npc_power_thieves_guild",
++ ]
+
+ ❯ tests/security/galleryVeilIds.pglite.test.js:210:17
+    208|       }
+    209|     }
+    210|     expect(bad).toEqual([]);
+       |                 ^
+    211|   });
+    212|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 8 passed (9)
+   Start at  20:59:52
+   Duration  57.23s (transform 3.39s, setup 32ms, import 141ms, tests 56.96s, environment 0ms)
+
+exit 1

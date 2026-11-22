@@ -80,7 +80,7 @@ const H = Object.freeze({
   sPeople: 'public._gallery_veil_holders',
   tPeople: 'src/domain/display/gallerySecondHomes.js :: withholdHolders',
   sRekey: 'public._gallery_veil_rekey',
-  tRekey: 'src/domain/display/gallerySecondHomes.js :: rekeyPeople',
+  tRekey: 'src/domain/display/galleryVeilPeople.js :: rekeyPeople',
   sComposed: 'public._gallery_veil_composed',
   tComposed: 'src/domain/display/gallerySecondHomes.js :: withholdComposed',
   sHomes: 'public._gallery_veil_second_homes',
@@ -103,8 +103,8 @@ export const REGISTRY_HOSTS = Object.freeze({
   [H.tChoice]: { engine: 'twin', state: 'exists', stage: 'R3' },
   [H.sPeople]: { engine: 'server', state: 'planned', stage: 'R4 (VR9: the holder\'s card whole with its ties)' },
   [H.tPeople]: { engine: 'twin', state: 'planned', stage: 'R4' },
-  [H.sRekey]: { engine: 'server', state: 'planned', stage: 'R4 (VR10: every person\'s id re-keyed per read)' },
-  [H.tRekey]: { engine: 'twin', state: 'planned', stage: 'R4' },
+  [H.sRekey]: { engine: 'server', state: 'exists', stage: 'R4 (VR10: every person\'s id re-keyed per read), in 212 by VEIL-35\'s R4I-SQL (R4-IDS, 212 (36))' },
+  [H.tRekey]: { engine: 'twin', state: 'exists', stage: 'R4 (R4-IDS: its own module, E116; built by VEIL-35\'s R4I-PAGE after R4I-SQL)' },
   [H.sComposed]: { engine: 'server', state: 'planned', stage: 'R5 (VR12: every composed block by its inputs)' },
   [H.tComposed]: { engine: 'twin', state: 'planned', stage: 'R5' },
   [H.sHomes]: { engine: 'server', state: 'exists', stage: 'B, C (SUB-BRIEF-BCD, in 212 by VEIL-19)' },
@@ -485,6 +485,11 @@ const ROWS_SPEC = [
   holder({ id: 'people.ties', path: '^relationships\\[\\] \\(only in [AB]\\)$', re: true, writer: W.ties, house: P.holder, scope: 'a tie of a withheld card leaves whole (VR9, ruling (5)); every other tie is the roster\'s composition' }),
   holder({ id: 'people.prominentRelationship', path: '^prominentRelationship\\.(full|npc1|npc2|phrasing|tension|type)$', re: true, writer: W.ties, house: P.holder, scope: 'the copy of a withheld tie follows it whole (ruling (5))' }),
   holder({ id: 'people.pressureSentence', path: 'pressureSentence', writer: W.ties, house: P.holder, scope: 'where it names a withheld tie\'s two ends or holds its words (ruling (5))' }),
+  // VR10 (R4-IDS, VEIL-35; a4b89bf9d's row, its path widened by STOP 1): every person's id re-keyed on every non-owner read (one
+  // salt a call, never shipped), every reference following
+  row({ id: 'people.rekey', path: '^(npcs\\[\\]\\.(id|goal\\.intent\\.(short|long)\\.target\\.id|allegiance\\.handler|relationships\\[\\]\\.(from|to|id|npc1Id|npc2Id|targetId|npcId))|relationships\\[\\]\\.(from|to|id|npc1Id|npc2Id)|(stress|stressors)(\\[\\])?\\.cast\\.(roles\\[\\]\\.id|levers\\[\\]\\.holderId)|simulationTrace\\[\\]\\.(targetId|downstreamEffects\\[\\]\\.target)|(powerStructure\\.)?factions\\[\\]\\.members\\[\\]\\.id)$', re: true,
+    writer: W.roster, house: P.any, rule: 'recompose', when: 'always', drawn: 'yes', server: H.sRekey, twin: H.tRekey, built: true,
+    scope: 'VR10: a person\'s id spells its house or power (npc_<house slug>, npc_power_, npc_veiled_); re-keyed per read under a salt that never ships (212 :: _gallery_veil draws ONE gen_random_uuid() a call; the twin galleryVeilPeople.js :: readSalt one a projection call), consistent within the payload (the reference census of born towns, out/v21/r4/measure), so the id tells nothing. R4-IDS (VEIL-35, brief PART TWO items 3, 6): the sites are a4b89bf9d\'s plus STOP 1\'s, a card\'s OWN ties (npcs[].relationships[]: from, to, npc1Id, npc2Id, targetId, npcId, and the tie\'s own id, re-keyed whole); a value is re-keyed where it is a served card\'s id (a number by its text, ruling 48) or a string spelled npc_; the served marker\'s person keys follow by the CARD (212 :: _gallery_veil_rekey_served: a stored id re-keyed as its card\'s, a name key kept only for a served card with no id, every other key gone), never by the key\'s spelling' }),
 ];
 
 /**

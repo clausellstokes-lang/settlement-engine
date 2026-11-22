@@ -226,6 +226,24 @@
 --       save re-derive from the served document what they draw (pageRederive.js; importRederive.js). The owner's own
 --       reads never come here. Four helpers (_minus_at, _each_minus_at, _cast, _withhold_always), revoked by name.
 --       galleryWithholdAlways.js :: withholdAlways, called by galleryVeil.js :: applyVeil and projectShareVeil.
+--   (36) EVERY PERSON ID RE-KEYED PER READ (R4-IDS, VEIL-35's R4I-SQL; the chair's VR10, VR46, rulings 15, 16, 17, 48, 53;
+--       brief R4-IDS PART TWO, items 1-8; registry: people.rekey): a served person id spelled what made it (npc_veiled_,
+--       npc_power_<slug>, npc_<house slug>) and was served as stored, the same on every read. Now _gallery_veil (RESTATED
+--       VOLATILE) draws ONE salt a call (gen_random_uuid(), never shipped) and re-keys, on every body it returns (veiled
+--       and unmarked), after the roster choices and before withhold-always, every person card's id (npcs[], both roster
+--       copies) as `npc_` || 16 hex of sha256(salt '|' id), and every reference at a fixed path: a goal's two targets, an
+--       allegiance's handler, the ties' ends and a tie's own id (`tie_`, whole), a card's OWN ties (npcs[].relationships[]:
+--       from, to, npc1Id, npc2Id, targetId, npcId and the tie's id: STOP 1), the crisis cast's roles and levers, the trace's
+--       targets; a reference spelled `npc_` that names no served card is re-keyed too (no form survives); a number id by its
+--       text (ruling 48). The served marker's person keys follow with the same salt, DECIDED BY THE CARD (a4b89bf9d's
+--       `npc.`-prefix rule corrected): a stored id of a served card re-keyed as that card's id, the member key of a served card
+--       with no id kept, every other key gone. Ruling 53's fold: ONE helper, _gallery_veil_id_text, for the six inline "id as
+--       text" sites of _gallery_veil_roster_choices and the re-key. THE CATALOGUE (ruling 16): the one drawer and its callers'
+--       closure are VOLATILE (get_gallery_dossier, get_unlisted_dossier, import_gallery_dossier restated stable -> volatile;
+--       211's get_gallery_map VOLATILE already, by pg_proc); the six salt carriers are VOLATILE besides. Seven helpers
+--       (_gallery_veil_id_text, _rekey_id, _rekey_ref, _rekey_at, _rekey_each, _rekey, _rekey_served), revoked by name.
+--       Twin: src/domain/display/galleryVeilPeople.js :: readSalt, rekeyPeople (applyVeil, projectShareVeil);
+--       galleryRosterChoices.js :: idText.
 --   (10) A PERSON HIDDEN BY THE PER-PERSON SWITCH IS NOT SENT IN A ROSTER COPY EITHER (COHERENCE-VEIL-6; the fifth
 --       review's V5-4, ruled by the chair): _gallery_apply_member_overrides now reduces each roster copy
 --       (factions[].members[], powerStructure.factions[].members[]) of a person the share does not reveal to the
@@ -237,6 +255,10 @@
 --       Reveal-DM projection of the gallery read and the import, beside 211's decrees and dmLayer; before, every
 --       reader and every importer of such a share received both.
 --
+-- R4-IDS (VEIL-35, (36)): NEW, seven more (_gallery_veil_id_text, _rekey_id, _rekey_ref, _rekey_at, _rekey_each, _rekey,
+-- _rekey_served; all but _id_text VOLATILE); RESTATED VOLATILE (was immutable or stable): _gallery_veil, get_gallery_dossier,
+-- get_unlisted_dossier, import_gallery_dossier. 211's get_gallery_map is NOT restated: it is VOLATILE already.
+-- VEIL-22 (R3): NEW, four (_gallery_veil_roster_choices, _power_named, _copy_names, _npc_copies).
 -- VEIL-21 (R2): NEW, four more (_gallery_veil_minus_at, _each_minus_at, _cast, _withhold_always); RESTATED, _gallery_veil.
 -- NEW: thirty-one helpers (_gallery_veil_pieces, _runs, _embeds, _case_fold, _fold, _hidden_name, _sources, _tie_pieces,
 -- _second_homes, _member_revealed, _roster_members, _tie_roles, _roster_splice; and the name search's eighteen: _name_sep, _name_bound,
@@ -245,7 +267,8 @@
 -- _gallery_veil_card, _gallery_veil_apply, _gallery_apply_member_overrides, get_gallery_dossier, get_unlisted_dossier
 -- (VEIL-13, ruling (5): its apply's full town) and import_gallery_dossier (their grants restated as 211 states them).
 -- No helper of 211 changes its signature, so nothing 211 created is left behind. 211's section 7 is restated last: no _gallery_veil*
--- helper is callable by public, anon or authenticated (71 in all). NOT CHANGED: get_gallery_map and every
+-- helper is callable by public, anon or authenticated (86 in all since R4-IDS: 211's 40, R1's 31, R2's 4, R3's 4, R4-IDS's 7;
+-- its loop revokes every _gallery_veil%, the seven new among them). NOT CHANGED: get_gallery_map and every
 -- other function. No table, column, constraint, policy or row.
 --
 -- COUPLED CLIENT TWIN: src/domain/display/gallerySecondHomes.js (the second homes, (9); the name search, (19)), called
@@ -256,6 +279,8 @@
 --
 -- @rollback: supabase/rollback/212_share_veil_later_cures.down.sql, run FIRST, before 211's own: it recreates the
 --   six functions at 211's statements (the file at 333b33973, verbatim) and drops 212's helpers by signature.
+--   R4-IDS: and _gallery_veil with them (211's IMMUTABLE statement), the three reads back to STABLE, and the seven
+--   R4-IDS helpers dropped by signature.
 --   No row is written or lost either way. Rehearsed on local chains: 001..211 + 212 + this down file equals
 --   001..211; 203 + 211 + 212 + this down file equals 203 + 211.
 
@@ -2432,7 +2457,7 @@ begin
                    -- a person with no id, the empty string included, against every person of `pub`, where a naming goal holds it)
                    or exists (select 1 from jsonb_array_elements(case when jsonb_typeof(p -> 'npcs') = 'array' then p -> 'npcs' else '[]' end) pq
                                where jsonb_typeof(pq) = 'object' and public._gallery_veil_copy_names('goal', pq -> 'goal', wn_ids, hits)
-                                 and case when coalesce(case when jsonb_typeof(n -> 'id') in ('string', 'number', 'boolean') then n ->> 'id' end, '') <> '' then coalesce(case when jsonb_typeof(pq -> 'id') in ('string', 'number', 'boolean') then pq ->> 'id' end, '') = coalesce(case when jsonb_typeof(n -> 'id') in ('string', 'number', 'boolean') then n ->> 'id' end, '')
+                                 and case when public._gallery_veil_id_text(n -> 'id') <> '' then public._gallery_veil_id_text(pq -> 'id') = public._gallery_veil_id_text(n -> 'id')
                                           else (pq -> 'goal') @> (n -> 'goal') end))
                 then array['goal'] else '{}'::text[] end))
           || case when jsonb_typeof(n -> 'memberships') = 'array' then jsonb_build_object('memberships', (select coalesce(jsonb_agg(m order by mo), '[]')
@@ -2441,7 +2466,7 @@ begin
                          or (jsonb_typeof(m) = 'object'
                              and exists (select 1 from jsonb_array_elements(case when jsonb_typeof(p -> 'npcs') = 'array' then p -> 'npcs' else '[]' end) pq,
                                                        jsonb_array_elements(case when jsonb_typeof(pq -> 'memberships') = 'array' then pq -> 'memberships' else '[]' end) z
-                                          where jsonb_typeof(pq) = 'object' and (coalesce(case when jsonb_typeof(n -> 'id') in ('string', 'number', 'boolean') then n ->> 'id' end, '') = '' or coalesce(case when jsonb_typeof(pq -> 'id') in ('string', 'number', 'boolean') then pq ->> 'id' end, '') = coalesce(case when jsonb_typeof(n -> 'id') in ('string', 'number', 'boolean') then n ->> 'id' end, '')) and z @> m and public._gallery_veil_copy_names('member', z, wn_ids, hits)))))) else '{}'::jsonb end
+                                          where jsonb_typeof(pq) = 'object' and (public._gallery_veil_id_text(n -> 'id') = '' or public._gallery_veil_id_text(pq -> 'id') = public._gallery_veil_id_text(n -> 'id')) and z @> m and public._gallery_veil_copy_names('member', z, wn_ids, hits)))))) else '{}'::jsonb end
         end order by o), '[]') from jsonb_array_elements(s -> 'npcs') with ordinality x(n, o)));
     end if;
     -- R3-CURE-2 (found by the fold: "faction.thieves_guild" under Reveal DM): a simulation-trace entry a top-level string of
@@ -2695,14 +2720,206 @@ revoke execute on function public._gallery_veil_power_named(jsonb, text[], jsonb
 revoke execute on function public._gallery_veil_copy_names(text, jsonb, text[], jsonb) from public, anon, authenticated;
 revoke execute on function public._gallery_veil_npc_copies(jsonb) from public, anon, authenticated;
 
+-- ── R4-IDS: every person id re-keyed per read (VEIL-35, R4I-SQL; brief R4-IDS PART TWO, items 1-8; the chair's VR10, VR46,
+-- rulings 15, 16, 17, 48, 53, each vetoable by the owner) ─────────────────────────────────────────────────────────────
+-- A served person id spells what made it (npc_veiled_, npc_power_<slug>, npc_<house slug>) and was served as stored, byte
+-- stable across reads. Now _gallery_veil draws ONE salt a call (gen_random_uuid(), never shipped) and, on every body it
+-- returns (veiled or unmarked), re-keys every person's id and every reference to one at a FIXED PATH under it
+-- (_gallery_veil_rekey), after the roster choices (which compare the body's people with `pub`'s by stored id) and before
+-- withhold-always (whose cast pass matches a role to a person by id: both re-keyed, consistent); the served marker's person
+-- keys follow with the same salt (_gallery_veil_rekey_served). One call is one served document: a gallery read, a link
+-- read, an import, ONE map member (each its own salt). No text of the document is scanned (the cost law).
+-- THE CATALOGUE (ruling 16, arm 4): every function that draws, and the transitive closure of its callers, is VOLATILE.
+-- After this unit exactly one function draws (_gallery_veil, restated VOLATILE); its callers are get_gallery_dossier,
+-- get_unlisted_dossier, import_gallery_dossier (restated below, stable -> volatile) and 211's get_gallery_map (VOLATILE
+-- already: plpgsql with no marker, by pg_proc). The six salt CARRIERS (_gallery_veil_rekey_id, _rekey_ref, _rekey_at,
+-- _rekey_each, _rekey, _rekey_served) draw nothing and call no drawer; they are VOLATILE all the same (no plan may fold or
+-- cache a salt: toward withholding). Ruling 53's fold: ONE helper, _gallery_veil_id_text, the "id as text" of
+-- _gallery_veil_roster_choices's people pass (its six inline sites repointed) and of the re-key. Twin, rule for rule:
+-- src/domain/display/galleryVeilPeople.js :: readSalt, rekeyId .. rekeyPeople; galleryRosterChoices.js :: idText.
+
+-- [212: NEW] public._gallery_veil_id_text
+-- R4-IDS (ruling 53's fold, STOP 1's "one helper per engine"): a person's id AS TEXT, as the client's String() of it: a
+-- string as it is, a number by JavaScript's spelling (_gallery_veil_jsstr: 1.0 is '1'), a boolean 'true' or 'false';
+-- anything else (absent, null, an object, an array) ''. The one form in this file: _gallery_veil_roster_choices's six
+-- sites and the re-key ask nothing else. Twin: galleryRosterChoices.js :: idText.
+create or replace function public._gallery_veil_id_text(j jsonb)
+returns text language sql immutable as $$
+  select case when jsonb_typeof(j) in ('string', 'number', 'boolean') then public._gallery_veil_jsstr(j) else '' end
+$$;
+
+-- [212: NEW] public._gallery_veil_rekey_id
+-- R4-IDS (VR10): an id re-keyed under the read's salt: `prefix` and the first 16 hex of sha256(salt '|' id), the text as
+-- UTF-8. One salt a call: one id is one key within a payload, another on the next read; the salt never ships, so a key
+-- cannot be hashed back to the slug of a house or a power. galleryVeilPeople.js :: rekeyId.
+create or replace function public._gallery_veil_rekey_id(prefix text, v text, salt text)
+returns text language sql volatile as $$
+  select prefix || left(encode(sha256(convert_to(salt || '|' || v, 'UTF8')), 'hex'), 16)
+$$;
+
+-- [212: NEW] public._gallery_veil_rekey_ref
+-- R4-IDS (VR10): a reference to a person is re-keyed where it is a served card's id (`ids`, by its text: a NUMBER id is a
+-- person's id by its text, ruling 48) OR a string spelled `npc_` (a dangling reference: a person no longer served, so no
+-- form survives); anything else as it was. Empty text is no id. galleryVeilPeople.js :: rekeyRef.
+create or replace function public._gallery_veil_rekey_ref(v jsonb, ids jsonb, salt text)
+returns jsonb language sql volatile as $$
+  select case when jsonb_typeof(v) in ('string', 'number') and public._gallery_veil_id_text(v) <> ''
+                   and (ids ? public._gallery_veil_id_text(v) or (jsonb_typeof(v) = 'string' and left(v #>> '{}', 4) = 'npc_'))
+              then to_jsonb(public._gallery_veil_rekey_id('npc_', public._gallery_veil_id_text(v), salt)) else v end
+$$;
+
+-- [212: NEW] public._gallery_veil_rekey_at
+-- R4-IDS (VR10): the reference at each of `paths` (dot-separated fixed paths) inside `x` re-keyed; a path that does not
+-- hold a string or a number, and an `x` that is not an object, as it was.
+create or replace function public._gallery_veil_rekey_at(x jsonb, paths text[], ids jsonb, salt text)
+returns jsonb language plpgsql volatile as $$
+declare
+  s jsonb := x;
+  p text;
+begin
+  if jsonb_typeof(s) is distinct from 'object' then return x; end if;
+  foreach p in array paths loop
+    if jsonb_typeof(s #> string_to_array(p, '.')) in ('string', 'number') then
+      s := jsonb_set(s, string_to_array(p, '.'), public._gallery_veil_rekey_ref(s #> string_to_array(p, '.'), ids, salt), false);
+    end if;
+  end loop;
+  return s;
+end $$;
+
+-- [212: NEW] public._gallery_veil_rekey_each
+-- R4-IDS (VR10): each object of the array at `arr` with its references at `paths` re-keyed, in order (every other element
+-- as it was); anything that is not an array at `arr` as it was.
+create or replace function public._gallery_veil_rekey_each(s jsonb, arr text[], paths text[], ids jsonb, salt text)
+returns jsonb language sql volatile as $$
+  select case when jsonb_typeof(s #> arr) = 'array' then jsonb_set(s, arr, (
+      select coalesce(jsonb_agg(public._gallery_veil_rekey_at(e, paths, ids, salt) order by o), '[]')
+        from jsonb_array_elements(s #> arr) with ordinality x(e, o))) else s end
+$$;
+
+-- [212: NEW] public._gallery_veil_rekey
+-- R4-IDS (VR10, MEASURED: no non-owner view needs a person id stable across reads; an import is always a new save): every
+-- person's id re-keyed under `salt`, and every reference the served payload holds to a person follows, at fixed paths
+-- (a4b89bf9d's sites, the reference census of born towns, and STOP 1's): the cards' ids (npcs[], both roster copies); a
+-- goal's two target ids; an allegiance's handler; the ties' ends (from, to; master's npc1Id, npc2Id) and a tie's own id
+-- (`tie_`, re-keyed WHOLE: it spells its ends' ids); a card's OWN ties (npcs[].relationships[]: from, to, npc1Id, npc2Id,
+-- targetId, npcId, and that tie's own id, whole); the crisis cast's roles and lever holders (both copies, one crisis or
+-- a list); the simulation trace's targetId and its effects' target. The cards (`ids`): every person card of the body
+-- (_gallery_veil_cards 'npc': npcs[], factions[].members[], powerStructure.factions[].members[]) whose id is a string or
+-- a number with text (_gallery_veil_id_text). No stored id and no form (npc_veiled_, npc_power_, npc_<house slug>)
+-- survives at these paths. galleryVeilPeople.js :: rekeyPeople, rule for rule.
+create or replace function public._gallery_veil_rekey(doc jsonb, salt text)
+returns jsonb language plpgsql volatile as $$
+declare
+  s jsonb := doc;
+  ids jsonb;
+  k text;
+  pth text[];
+begin
+  if jsonb_typeof(s) is distinct from 'object' then return doc; end if;
+  ids := coalesce((select jsonb_object_agg(public._gallery_veil_id_text(c.card -> 'id'), true) from public._gallery_veil_cards(s, 'npc') c
+                    where jsonb_typeof(c.card -> 'id') in ('string', 'number') and public._gallery_veil_id_text(c.card -> 'id') <> ''), '{}');
+  -- registry: people.rekey (the cards: each id; a goal's two targets; the handler)
+  s := public._gallery_veil_rekey_each(s, '{npcs}', array['id', 'goal.intent.short.target.id', 'goal.intent.long.target.id', 'allegiance.handler'], ids, salt);
+  -- registry: people.rekey (STOP 1: a card's OWN ties, npcs[].relationships[]: their ends and references, and each tie's own
+  -- id re-keyed whole)
+  if jsonb_typeof(s -> 'npcs') = 'array' then
+    s := jsonb_set(s, '{npcs}', (select coalesce(jsonb_agg(case when jsonb_typeof(n) = 'object' and jsonb_typeof(n -> 'relationships') = 'array'
+        then jsonb_set(n, '{relationships}', (select coalesce(jsonb_agg(case when jsonb_typeof(r.r) = 'object' and jsonb_typeof(r.r -> 'id') in ('string', 'number')
+            then jsonb_set(r.r, '{id}', to_jsonb(public._gallery_veil_rekey_id('tie_', public._gallery_veil_id_text(r.r -> 'id'), salt))) else r.r end order by y.o2), '[]')
+          from jsonb_array_elements(n -> 'relationships') with ordinality y(t, o2),
+               lateral (select public._gallery_veil_rekey_at(y.t, array['from', 'to', 'npc1Id', 'npc2Id', 'targetId', 'npcId'], ids, salt) as r) r))
+        else n end order by o), '[]')
+      from jsonb_array_elements(s -> 'npcs') with ordinality x(n, o)));
+  end if;
+  -- registry: people.rekey (the ties: their ends, either shape; a tie's own id, which spells its ends', re-keyed whole)
+  s := public._gallery_veil_rekey_each(s, '{relationships}', array['from', 'to', 'npc1Id', 'npc2Id'], ids, salt);
+  if jsonb_typeof(s -> 'relationships') = 'array' then
+    s := jsonb_set(s, '{relationships}', (select coalesce(jsonb_agg(case when jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'id') in ('string', 'number')
+        then jsonb_set(e, '{id}', to_jsonb(public._gallery_veil_rekey_id('tie_', public._gallery_veil_id_text(e -> 'id'), salt))) else e end order by o), '[]')
+      from jsonb_array_elements(s -> 'relationships') with ordinality x(e, o)));
+  end if;
+  -- registry: people.rekey (the crisis cast, both copies, one crisis or a list: a role's person, a lever's holder)
+  foreach k in array array['stress', 'stressors'] loop
+    if jsonb_typeof(s -> k) = 'object' then
+      s := jsonb_set(s, array[k], public._gallery_veil_rekey_each(public._gallery_veil_rekey_each(s -> k, '{cast,roles}', array['id'], ids, salt), '{cast,levers}', array['holderId'], ids, salt));
+    elsif jsonb_typeof(s -> k) = 'array' then
+      s := jsonb_set(s, array[k], (select coalesce(jsonb_agg(case when jsonb_typeof(e) = 'object'
+          then public._gallery_veil_rekey_each(public._gallery_veil_rekey_each(e, '{cast,roles}', array['id'], ids, salt), '{cast,levers}', array['holderId'], ids, salt)
+          else e end order by o), '[]') from jsonb_array_elements(s -> k) with ordinality x(e, o)));
+    end if;
+  end loop;
+  -- registry: people.rekey (the simulation trace's targets, and each effect's)
+  s := public._gallery_veil_rekey_each(s, '{simulationTrace}', array['targetId'], ids, salt);
+  if jsonb_typeof(s -> 'simulationTrace') = 'array' then
+    s := jsonb_set(s, '{simulationTrace}', (select coalesce(jsonb_agg(case when jsonb_typeof(e) = 'object'
+        then public._gallery_veil_rekey_each(e, '{downstreamEffects}', array['target'], ids, salt) else e end order by o), '[]')
+      from jsonb_array_elements(s -> 'simulationTrace') with ordinality x(e, o)));
+  end if;
+  -- registry: people.rekey (master's roster copies: a power's member by id, either list)
+  foreach k in array array['factions', 'powerStructure.factions'] loop
+    pth := string_to_array(k, '.');
+    if jsonb_typeof(s #> pth) = 'array' then
+      s := jsonb_set(s, pth, (select coalesce(jsonb_agg(case when jsonb_typeof(f) = 'object'
+          then public._gallery_veil_rekey_each(f, '{members}', array['id'], ids, salt) else f end order by o), '[]')
+        from jsonb_array_elements(s #> pth) with ordinality x(f, o)));
+    end if;
+  end loop;
+  return s;
+end $$;
+
+-- [212: NEW] public._gallery_veil_rekey_served
+-- R4-IDS (VR10; item 6, A CORRECTION OF a4b89bf9d, which kept every `npc.` key as a name key, so a card whose stored id
+-- itself begins `npc.` lost its entry): the served marker's person entries (a person's own revealDm / allowImport, keyed
+-- by the person's member key, _gallery_veil_served) under the read's salt, DECIDED BY THE CARD, never by the key's
+-- spelling. `body` is the body as served BEFORE the re-key (the same cards: nothing after the re-key removes a person).
+-- `$veil` as it is; a key that is the STORED id of a person the body serves (a string or a number with text) is re-keyed
+-- exactly as that card's id is (_gallery_veil_rekey_id over _gallery_veil_id_text); a key that is the member key of a
+-- served card with NO such id (its name key npc.<slug>, or the text of an id the re-key leaves, as 211 spells it) is kept;
+-- every other key leaves (a withheld person's entry would name what the body does not). One key that is both (a card with
+-- stored id 'npc.bo', another with no id named Bo) gives both entries, so each card keeps the entry it had.
+-- galleryVeilPeople.js :: rekeyServed.
+create or replace function public._gallery_veil_rekey_served(served jsonb, body jsonb, salt text)
+returns jsonb language sql volatile as $$
+  -- registry: people.rekey (the served marker's person keys)
+  select case when jsonb_typeof(served) is distinct from 'object' then served else
+    coalesce((select jsonb_object_agg(q.k2, served -> q.k) from (
+        select distinct m.k, m.k2 from (
+          select '$veil' as k, '$veil' as k2
+          union all
+          select public._gallery_veil_npc_id(c.card),
+                 case when jsonb_typeof(c.card -> 'id') in ('string', 'number') and public._gallery_veil_id_text(c.card -> 'id') <> ''
+                      then public._gallery_veil_rekey_id('npc_', public._gallery_veil_id_text(c.card -> 'id'), salt)
+                      else public._gallery_veil_npc_id(c.card) end
+            from public._gallery_veil_cards(case when jsonb_typeof(body) = 'object' then body else '{}'::jsonb end, 'npc') c
+           where public._gallery_veil_npc_id(c.card) <> '$veil') m
+         where served ? m.k) q), '{}'::jsonb) end
+$$;
+
+-- R4-IDS: called only inside the definer reads (by _gallery_veil), revoked by name (section 7 revokes every _gallery_veil%
+-- again, last)
+revoke execute on function public._gallery_veil_id_text(jsonb) from public, anon, authenticated;
+revoke execute on function public._gallery_veil_rekey_id(text, text, text) from public, anon, authenticated;
+revoke execute on function public._gallery_veil_rekey_ref(jsonb, jsonb, text) from public, anon, authenticated;
+revoke execute on function public._gallery_veil_rekey_at(jsonb, text[], jsonb, text) from public, anon, authenticated;
+revoke execute on function public._gallery_veil_rekey_each(jsonb, text[], text[], jsonb, text) from public, anon, authenticated;
+revoke execute on function public._gallery_veil_rekey(jsonb, text) from public, anon, authenticated;
+revoke execute on function public._gallery_veil_rekey_served(jsonb, jsonb, text) from public, anon, authenticated;
+
 -- [212: RESTATED (211's statement, with the cure)] public._gallery_veil
 -- VEIL-21 (R2): 211's statement, and _gallery_veil_withhold_always run on every body it returns: last on the veiled body,
 -- and, where the share is unmarked (no veil: 211 returned no body and the reads served their projection as before), on
 -- that projection, returned as `body`, so the gallery read, the import and the campaign map's member (whose member
--- expression takes `body` before its projection) send it too. The served marker is unchanged. Twin:
+-- expression takes `body` before its projection) send it too. Twin:
 -- galleryVeil.js :: projectShareVeil (the unmarked path) and applyVeil (last).
+-- R4-IDS (VR10; brief R4-IDS PART TWO, items 1, 5, 6): RESTATED VOLATILE. ONE salt a call (gen_random_uuid(), never
+-- shipped), the only function of the lane that draws; every person id of the body it returns re-keyed under it
+-- (_gallery_veil_rekey) after the roster choices and before withhold-always, on the veiled body and on the unmarked one
+-- (withhold_always(rekey(roster_choices(pub, pub), salt))); the served marker's person keys re-keyed with the same salt,
+-- by the card (_gallery_veil_rekey_served, over the body as it stood before the re-key). Twin: galleryVeil.js ::
+-- applyVeil (after applyRosterChoices, before withholdAlways), projectShareVeil's unmarked path;
+-- galleryVeilPeople.js :: readSalt.
 create or replace function public._gallery_veil(pub jsonb, overrides jsonb, link boolean, copy boolean default false)
-returns jsonb language plpgsql immutable as $$
+returns jsonb language plpgsql volatile as $$
 declare
   -- the stored overrides, decompressed ONCE: every later look at them is in memory (a stored object
   -- of any size is read once per read, never once per operator)
@@ -2712,6 +2929,9 @@ declare
   people text[] := array(select distinct public._gallery_veil_npc_id(c.card) from public._gallery_veil_cards(doc, 'npc') c);
   res jsonb;
   body jsonb;
+  served jsonb;
+  -- R4-IDS (item 1): ONE salt a call, for the body AND the served marker of this call; never shipped
+  salt text := gen_random_uuid()::text;
 begin
   if jsonb_typeof(ov) <> 'object' then ov := '{}'; end if;
   res := public._gallery_veil_resolve(pub, ov, link, people);
@@ -2719,9 +2939,12 @@ begin
   -- non-owner read sends whatever the veil (_gallery_veil_withhold_always): the gallery read, the import and the campaign
   -- map's member (get_gallery_map serves `body` where there is one), each its own projection less those rows
   -- VEIL-22 (R3): and the roster choices before it (nothing is hidden whole there: VR31's shares alone can move)
+  -- R4-IDS (item 5): and every person id re-keyed between the two, the marker's person keys with it (registry: people.rekey)
   if res is null then
-    return jsonb_build_object('served', public._gallery_veil_served(ov, null, to_jsonb(people), copy))
-      || case when jsonb_typeof(pub) = 'object' then jsonb_build_object('body', public._gallery_veil_withhold_always(public._gallery_veil_roster_choices(pub, pub))) else '{}'::jsonb end;
+    body := case when jsonb_typeof(pub) = 'object' then public._gallery_veil_roster_choices(pub, pub) end;
+    served := public._gallery_veil_rekey_served(public._gallery_veil_served(ov, null, to_jsonb(people), copy), coalesce(body, '{}'::jsonb), salt);
+    return jsonb_build_object('served', served)
+      || case when body is not null then jsonb_build_object('body', public._gallery_veil_withhold_always(public._gallery_veil_rekey(body, salt))) else '{}'::jsonb end;
   end if;
   body := public._gallery_veil_apply(pub, res);
   -- a person card with neither a name nor a role is dropped, as the client's projection drops it
@@ -2732,12 +2955,16 @@ begin
   end if;
   -- VEIL-22 (R3): the drawn conditional rows (the roster choices), then R2's step
   body := public._gallery_veil_roster_choices(body, pub);
+  -- R4-IDS (items 5, 6): the served marker by the cards as they stand, then every person id re-keyed under the call's salt
+  -- (registry: people.rekey)
+  served := public._gallery_veil_rekey_served(public._gallery_veil_served(ov, res -> 'groupings', to_jsonb(people), copy), body, salt);
+  body := public._gallery_veil_rekey(body, salt);
   -- VEIL-21 (R2): last, what no non-owner read sends whatever the veil
   body := public._gallery_veil_withhold_always(body);
   return jsonb_build_object(
     'body', body,
     'groupings', res -> 'groupings',
-    'served', public._gallery_veil_served(ov, res -> 'groupings', to_jsonb(people), copy));
+    'served', served);
 end $$;
 
 -- VR27 (as amended): a helper this lane adds, called only inside the definer reads, is revoked by name
@@ -2941,6 +3168,7 @@ $$;
 -- [212: RESTATED (211's statement, with the cure)] public.get_gallery_dossier
 -- get_gallery_dossier: 147's body plus the veil, and the pg_temp pin a recreated definer takes
 -- (tests/lint/migrationSearchPathPin.test.js; its ledger row comes off)
+-- R4-IDS (ruling 16, the catalogue): VOLATILE, not stable: it calls _gallery_veil, which draws one salt a call.
 create or replace function public.get_gallery_dossier(dossier_slug text)
 returns table (
   id uuid,
@@ -2973,7 +3201,7 @@ returns table (
   aliveness integer
 )
 language sql
-stable
+volatile
 security definer
 set search_path = public, pg_temp
 as $$
@@ -3063,9 +3291,10 @@ grant execute on function public.get_gallery_dossier(text) to authenticated, ano
 -- one spelling, here as on the gallery read and the import. The splice still takes every person from the projection
 -- alone (it reads dm_full only for npcs[], and those are the projection's): the link widens nothing. A live town that is
 -- not an object hands the projection itself, as 211 did.
+-- R4-IDS (ruling 16, the catalogue): VOLATILE, not stable: it calls _gallery_veil, which draws one salt a call.
 create or replace function public.get_unlisted_dossier(p_slug text)
 returns jsonb
-language sql stable security definer set search_path = public, pg_temp
+language sql volatile security definer set search_path = public, pg_temp
 as $$
   select jsonb_build_object(
     'id', s.id,
@@ -3118,6 +3347,7 @@ grant execute on function public.get_unlisted_dossier(text) to authenticated, an
 -- read reads it (the second review's R1: in snapshot mode the import handed over the LIVE town, so
 -- everything written after the freeze reached the importer): the same lateral, the same bound (a
 -- refused copy is refused: no row), no copy served as the gallery serves it
+-- R4-IDS (ruling 16, the catalogue): VOLATILE, not stable: it calls _gallery_veil, which draws one salt a call.
 create or replace function public.import_gallery_dossier(dossier_slug text)
 returns table (
   id uuid,
@@ -3126,7 +3356,7 @@ returns table (
   data jsonb
 )
 language sql
-stable
+volatile
 security definer
 set search_path = public, pg_temp
 as $$
@@ -3184,6 +3414,8 @@ revoke execute on function public.import_gallery_dossier(text) from public;
 grant execute on function public.import_gallery_dossier(text) to authenticated;
 
 -- ── 7. THE HELPERS ARE CALLED ONLY INSIDE THE READS ─────────────────────────────────────────
+-- R4-IDS: this loop takes every _gallery_veil% function, so the seven R4-IDS helpers (revoked by name above) are revoked
+-- here again: 86 in all.
 do $do$
 declare f record;
 begin

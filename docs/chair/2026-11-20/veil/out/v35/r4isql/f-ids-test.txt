@@ -1,0 +1,48 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 20871 after 0 atomic poll(s) + 6 legacy poll(s) + 0 shared-drain poll(s).
+
+ RUN  v4.1.8 /home/user/wt/r4i35
+
+ ❯ tests/security/galleryVeilIds.pglite.test.js (9 tests | 1 failed) 56722ms
+     × (1) RED BY DESIGN: no served id, key or slug spells a withheld power or a house hidden whole, by search (ruling 28), on any read 87ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryVeilIds.pglite.test.js > R4-IDS: VR10's person ids on every non-owner read (through the server; the twin beside it) — RED BY DESIGN at the seat's tip > (1) RED BY DESIGN: no served id, key or slug spells a withheld power or a house hidden whole, by search (ruling 28), on any read
+AssertionError: expected [ …(12) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "plant new marked dm=false twin: npcs[0].id = npc_power_thieves_guild",
++   "plant new marked dm=false twin: relationships[0].id = tie_npc_power_thieves_guild__npc.bo",
++   "plant new marked dm=false twin: relationships[0].from = npc_power_thieves_guild",
++   "plant new marked dm=true twin: npcs[0].id = npc_power_thieves_guild",
++   "plant new marked dm=true twin: relationships[0].id = tie_npc_power_thieves_guild__npc.bo",
++   "plant new marked dm=true twin: relationships[0].from = npc_power_thieves_guild",
++   "plant master marked dm=false twin: npcs[0].id = npc_power_thieves_guild",
++   "plant master marked dm=false twin: relationships[0].id = tie_npc_power_thieves_guild__npc.bo",
++   "plant master marked dm=false twin: relationships[0].from = npc_power_thieves_guild",
++   "plant master marked dm=true twin: npcs[0].id = npc_power_thieves_guild",
++   "plant master marked dm=true twin: relationships[0].id = tie_npc_power_thieves_guild__npc.bo",
++   "plant master marked dm=true twin: relationships[0].from = npc_power_thieves_guild",
++ ]
+
+ ❯ tests/security/galleryVeilIds.pglite.test.js:210:17
+    208|       }
+    209|     }
+    210|     expect(bad).toEqual([]);
+       |                 ^
+    211|   });
+    212|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 8 passed (9)
+   Start at  20:58:41
+   Duration  57.02s (transform 3.51s, setup 37ms, import 114ms, tests 56.72s, environment 0ms)
+
+exit 1

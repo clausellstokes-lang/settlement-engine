@@ -1,0 +1,4 @@
+(b) THE ROLLBACK REHEARSAL: createdb -T v27x211 r4i35_b; 212 (exit 0); the down file (exit 0); catalogue dump (catalogue-dump.sql: every public function's signature, provolatile, proacl, pg_get_functiondef, sorted by signature) of r4i35_b against v27x211
+functions: v27x211 480, r4i35_b 480
+dump lines: 25988 / 25988; sha256 211 6e30b102d350bc13 after 6e30b102d350bc13
+diff exit 0, diff lines 0 (empty wanted)

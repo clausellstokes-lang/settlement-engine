@@ -1,0 +1,11 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 24587 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+ RUN  v4.1.8 /home/user/wt/r4i35
+
+
+ Test Files  4 passed (4)
+      Tests  18 passed (18)
+   Start at  21:01:23
+   Duration  2.09s (transform 772ms, setup 70ms, import 108ms, tests 1.47s, environment 0ms)
+
+exit 0

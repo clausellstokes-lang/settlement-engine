@@ -1,0 +1,1 @@
+(a) createdb -T v27x211 r4i35_a; psql -v ON_ERROR_STOP=1 -f supabase/migrations/212_share_veil_later_cures.sql: exit 0

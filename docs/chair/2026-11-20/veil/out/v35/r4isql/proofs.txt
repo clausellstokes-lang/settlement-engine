@@ -1,0 +1,25 @@
+R4I-SQL (VEIL-35, chain B; brief R4-IDS PART TWO items 1-8, server side). Branch lane/veil-35-2026-11-22-r4ids-wip from 08081ffdc.
+Every database LOCAL: the scratch PostgreSQL 16.15 at /var/tmp/rv7 (r4i35_a, r4i35_b, from template v27x211 = 001..211), and pglite.
+(a) 212 on a copy of 001..211: exit 0 (a-apply.txt).
+(b) THE ROLLBACK REHEARSAL: 001..211 + 212 + the down file, catalogue dump (catalogue-dump.sql: signature, provolatile, proacl,
+    pg_get_functiondef of every public function, sorted) against v27x211: 480 = 480 functions, 25,988 lines each, diff EMPTY (b-rehearsal.txt).
+(c) THE CATALOGUE (c-catalogue.sql, c-summary.txt): of the 91 functions 211 and 212 create or restate (part one's 84 + 7), ONE draws
+    (_gallery_veil, v); its callers' closure _gallery_veil, get_gallery_dossier, get_unlisted_dossier, import_gallery_dossier (restated
+    stable -> volatile) and 211's get_gallery_map (v by pg_proc on v27x211 and after 212: not restated), all 'v'. The six carriers 'v',
+    _gallery_veil_id_text 'i' (draws nothing, carries no salt). Schema-wide: 15 drawers (14 outside the veil in 001..211, all v), closure 29
+    members (23 before; + _gallery_veil, the three reads, get_gallery_map, and import_gallery_map, an earlier caller of the map), 0 not VOLATILE.
+(d) THE SMOKE READ (d-smoke.mjs, d-smoke.txt): one hand-written town (a npc_veiled_ and a npc_power_ card, a card whose stored id is npc.bo
+    with marker revealDm true, a number id, a no-id card, top-level and card-own ties, a cast, a trace, both roster copies), marked and
+    unmarked, Reveal DM off and on, get_gallery_dossier and get_unlisted_dossier each read twice: 8 reads GREEN: 0 person ids shared between
+    two reads, 0 stored ids served (substring, keys and marker included), every reference and every marker person key resolves to a served
+    card (a reference to an unserved npc_ re-keyed: no form survives), npc.bo's entry kept under its card's new id, npc.nameless_ned kept.
+(e) node scripts/veil/rosterChoiceRegistry.mjs --check: exit 0 (e-registry-check.txt). The registry walker (e-registry-walker.txt): 9 of 11,
+    the 2 reds TWIN-SIDE AND EXPECTED until R4I-PAGE: ARM C (the twin host galleryVeilPeople.js :: rekeyPeople, declared exists, absent) and
+    ARM D (people.rekey's twin symbol not a declaration). The server side binds (_gallery_veil_rekey names people.rekey).
+(f) tests/security/galleryVeilIds.pglite.test.js, once (f-ids-test.txt; verbose f-ids-test-verbose.txt): 8 of 9 green; arm (1) 12 reds,
+    ALL ON THE TWIN READ (plant, both shapes, marked, dm off and on: npcs[0].id, relationships[0].id, .from spelling npc_power_thieves_guild):
+    twin-side, expected until R4I-PAGE; the server's reads 0 (part one: 72 hits on 16 reads). Arm (2) green, arm (3) STOP 1 green, arm (4)
+    the catalogue green and its plant still reds (the CAN FAIL arm passes), the three teeth that passed still pass.
+    Also run: tests/lint migrationSearchPathPin, rosterChoicePools, crimeTypesReaders, recentConflictReaders walkers: 18 of 18 (lint-212-readers.txt).
+(g) sha256 (g-sha256.txt): 212 7a85dec31320dc6891be976458b285b0f49e463bf0a250e03dbc8636b010b5f3
+    rollback b13c5be88c6f91cb4f1300ca4837524c1f41cfaf5124077695a32c867a80f141; 211 unchanged eface6d0...0b01.

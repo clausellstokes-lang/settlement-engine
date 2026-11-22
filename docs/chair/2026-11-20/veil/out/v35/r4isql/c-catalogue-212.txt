@@ -1,0 +1,33 @@
+                                         sig                                         | provolatile |  role  |                   via                    
+-------------------------------------------------------------------------------------+-------------+--------+------------------------------------------
+ _saved_maps_world_snapshot_guard()                                                  | v           | caller | publish_map
+ apply_custom_content_command(uuid,text,text,jsonb)                                  | v           | caller | _apply_custom_content_command_authorable
+ get_gallery_dossier(text)                                                           | v           | caller | _gallery_veil
+ get_gallery_map(text)                                                               | v           | caller | _gallery_veil
+ get_unlisted_dossier(text)                                                          | v           | caller | _gallery_veil
+ handle_new_user()                                                                   | v           | caller | gen_account_number,gen_external_name
+ import_gallery_dossier(text)                                                        | v           | caller | _gallery_veil
+ import_gallery_map(text)                                                            | v           | caller | get_gallery_map
+ publish_map(uuid,text,text,text[],boolean,text,text,boolean,jsonb,jsonb,text,jsonb) | v           | caller | _make_public_slug
+ publish_settlement(uuid)                                                            | v           | caller | _make_public_slug
+ rotate_map_unlisted_slug(uuid)                                                      | v           | caller | _make_unlisted_slug
+ rotate_settlement_unlisted_slug(uuid)                                               | v           | caller | _make_unlisted_slug
+ share_map_unlisted(uuid)                                                            | v           | caller | _make_unlisted_slug
+ share_settlement_unlisted(uuid)                                                     | v           | caller | _make_unlisted_slug
+ _apply_custom_content_command_authorable(uuid,text,text,jsonb)                      | v           | DRAWS  | draws
+ _gallery_veil(jsonb,jsonb,boolean,boolean)                                          | v           | DRAWS  | draws
+ _make_public_slug()                                                                 | v           | DRAWS  | draws
+ _make_unlisted_slug()                                                               | v           | DRAWS  | draws
+ apply_reviewed_supply_chain_command(uuid,text,text,jsonb)                           | v           | DRAWS  | draws
+ claim_account_deletion_cleanup_jobs(integer,integer)                                | v           | DRAWS  | draws
+ claim_operator_message_delivery_jobs(integer,integer)                               | v           | DRAWS  | draws
+ claim_operator_message_recipient(uuid,uuid,uuid)                                    | v           | DRAWS  | draws
+ claim_payment_refund_obligations(integer,integer)                                   | v           | DRAWS  | draws
+ claim_stripe_webhook_event(text,text,integer)                                       | v           | DRAWS  | draws
+ gen_account_number()                                                                | v           | DRAWS  | draws
+ gen_external_name()                                                                 | v           | DRAWS  | draws
+ issue_buyback_challenge(uuid)                                                       | v           | DRAWS  | draws
+ issue_transfer_challenge(uuid,text,text)                                            | v           | DRAWS  | draws
+ pick_recovery_question(text)                                                        | v           | DRAWS  | draws
+(29 rows)
+
