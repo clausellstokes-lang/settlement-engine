@@ -73,6 +73,7 @@
   {"pool":"src/data/traditionDescriptionTable.js :: POWER_FRAMES","seat":"TRAD-5","branch":"lane/trad-5-2026-11-20","commit":"cf5b24079"},
   {"pool":"src/data/traditionDescriptionTable.js :: POWER_FRAME_VERBS","seat":"TRAD-5 (join point 88; a verb-form table (a frame verb slot, singular and plural), not a sentence pool)","branch":"lane/trad-5-2026-11-20","commit":"cf5b24079"},
   {"pool":"src/data/traditionProse.js :: TRAD_OUTCOME_PHRASE","seat":"join","branch":"lane/join-2026-11-14","commit":"43ab0f5eb"},
+  {"pool":"src/data/troubleHooks.js :: TROUBLE_HOOKS","seat":"PAGE-12","branch":"lane/page-12-2026-11-21","commit":"bdf40775c"},
   {"pool":"src/data/worldFactOptions.js :: CULTURES","seat":"join","branch":"lane/join-2026-11-14","commit":"43ab0f5eb"}
  ]
 }

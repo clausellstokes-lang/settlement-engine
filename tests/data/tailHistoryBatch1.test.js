@@ -48,7 +48,12 @@ describe('TAIL-HISTORY batch 1: the rows cured at the history group\'s tables', 
     }), 'no war hook in peace');
   }, 240_000);
   test('Y1 KEEP: the war hooks still print where a war is in force', () => {
-    expectNoSeedFailures(collectSeedFailures(['r2r-hamlet-5', 'r2r-metropolis-4'], (seed) => {
+    // RULE8-RESEAT (PAGE-12, 2026-11-22): reseated from r2r-hamlet-5 and r2r-metropolis-4, whose history no longer prints a war
+    // hook. The current tension's pool (troubleHooks.js) draws by key since HOOKS-BUILD, by the mixed key since cure C, and holds
+    // the reworded lines; the war words are the timeline template's (historyData.js, external_threat plotHooks 0-1, excluding
+    // `war: peace`). r2r-hamlet-413 and r2r-metropolis-136 are the first of r2r-<hamlet|metropolis>-0..599 that print one
+    // (hamlet 3 of 600: 413, 525, 527; metropolis 4 of 600: 136, 232, 366, 591).
+    expectNoSeedFailures(collectSeedFailures(['r2r-hamlet-413', 'r2r-metropolis-136'], (seed) => {
       const town = bornCensus(seed);
       expect(WAR_HOOKS.test(historyText(town)), `${seed} keeps a war hook`).toBe(true);
     }), 'the war hooks at war');

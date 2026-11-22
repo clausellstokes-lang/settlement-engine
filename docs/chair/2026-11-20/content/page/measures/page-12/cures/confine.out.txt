@@ -1,0 +1,2 @@
+## hxd: documents 900 · identical 257 · with a non-string difference 0 · differing strings 2339 · of them passing the word check (none) 2339 · other 0
+| history.currentTensions[].plotHooks[] | 2339 | 643 |
