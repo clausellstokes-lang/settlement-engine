@@ -49,6 +49,7 @@ import {
 // THE REAL PRODUCERS — the whole point of this file's fixtures.
 import { divineMandateStatus, ensureReligionState, projectReligionStateOntoSettlement } from '../../src/domain/worldPulse/religionState.js';
 import { faithPanelModel, trimFaithDeskToPanel } from '../../src/components/settlement/faithPanelModel.js';
+import { observancePhraseOf } from '../../src/domain/dossier/faithReading.js';
 import { settlementWarStatus, settlementWarExhaustion, warExhaustionBand } from '../../src/domain/display/warStatus.js';
 import { settlementMobilization } from '../../src/domain/display/mobilizationStatus.js';
 import { settlementOccupation, occupierHoldings } from '../../src/domain/display/occupationStatus.js';
@@ -165,7 +166,9 @@ describe('the warFaith corpus join is populated, or every claim below is free', 
     // 430 -> 433 at census-5b unit 3 (c00b30eb6, R-L): DS-WAR-1 warExhaustion rested and DS-FTH-3's
     // two uncontested/secure pools each gain one crisis-safe twin (measured 430 at its parent).
     // 433 -> 443 at W4 PEOPLE (2026-11-07): DS-FTH-4's five FLAG pools, two variants each.
-    expect(pools.reduce((n, pool) => n + pool.length, 0)).toBe(449); // W2-WRITE FTH-4 heresy without a church (2026-11-13): 443 -> 449
+    expect(pools.reduce((n, pool) => n + pool.length, 0)).toBe(455); // W2-WRITE FTH-4 heresy without a church (2026-11-13): 443 -> 449
+    // 449 -> 455 at point 89 (e7096fe96, BUILD-1 13c57d9f6 with its cure 588967385): DS-FTH-2 PRIVATE DOSSIER gains six
+    // appended observance members, v5..v10 (v1..v4 unchanged); measured 455 at 5fca4362d.
   });
 
   test('the producer-minted fixtures really carry the producer shapes', () => {
@@ -682,10 +685,10 @@ describe('⭐ THE PATRON-LESS TOWN — what the deity-free review corpus renders
     expect(line).toBeTruthy();
     expect(line.length).toBeGreaterThan(40);
     // ⛔ THE DEITY DOCTRINE: no pool of this block may name a creed, and there is none to
-    // name. Every one of the four authored variants is asserted, not just the drawn one,
+    // name. Every one of the pool's authored variants (ten since point 89) is asserted, not just the drawn one,
     // so a future corpus edit that slips a deity name in reds here.
     for (const variant of BLOCK('DS-FTH-2').pools['PRIVATE DOSSIER']) {
-      // anchored: the same four variants are asserted non-empty on the line below, so an emptied pool cannot pass this absence
+      // anchored: the same variants are asserted non-empty on the line below, so an emptied pool cannot pass this absence
       expect(variant.text).not.toMatch(/Vaelith|Orr|\{creed\}|\{rival_creed\}/);
       expect(variant.text.length).toBeGreaterThan(40);
     }
@@ -728,7 +731,8 @@ describe('⭐ THE PATRON-LESS TOWN — what the deity-free review corpus renders
       slots: { settlement: 'Kirkby', houses: 'a parish church', cleric: 'Village Priest',
         faction: 'Parish Council', observance: 'through the year' },
     });
-    expect(allowed, 'every member of the pool renders from the reading').toHaveLength(4);
+    // 4 -> 10 at point 89 (BUILD-1's six appended observance members, v5..v10): every member still renders from the reading.
+    expect(allowed, 'every member of the pool renders from the reading').toHaveLength(10);
     const drawn = new Set();
     for (const seed of ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l']) {
       const desk = warFaithStateProse(church, { faith: faithPanelModel(church), hasPatron: false },
@@ -737,12 +741,23 @@ describe('⭐ THE PATRON-LESS TOWN — what the deity-free review corpus renders
     }
     for (const line of drawn) expect(allowed).toContain(line);
     expect(drawn.size, 'one seed family draws more than one variant').toBeGreaterThan(1);
-    // The quietest town: no church, no cleric, no faction. Only the dial's variant is live.
+    // The quietest town: no church, no cleric, no faction. Only the dial's variants are live.
+    // RE-KEYED BY CAUSE (point 89, BUILD-1's appended members): the dial's variants are v4..v10 now, not v4 alone, and the
+    // draw is a hash over the eligible members, so the anchor is COMPUTED from the pool's own members filled with the
+    // quiet reading's facts alone (the town's name and the dial's observance phrase), never one member's wording.
     const quiet = patronLessTown();
+    const quietAllowed = poolMemberTexts({
+      leaf: 'warFaith', blockId: 'DS-FTH-2', poolKey: 'PRIVATE DOSSIER',
+      slots: { settlement: quiet.settlement.name, observance: observancePhraseOf(quiet.model.reading.dial) },
+    });
+    expect(quietAllowed, 'the dial\'s members, and no member that needs a church, a cleric or a faction').toHaveLength(7);
     const desk = warFaithStateProse(quiet.settlement, { faith: quiet.model, hasPatron: false },
       { seed: 'greyford', audience: 'player' });
-    expect(desk.faithTeaser.sentence).toMatch(/keep their observances/);
-    expect(desk.faithTeaser.sentence).not.toMatch(/church|cleric|faction|faith/i); // anchored: the line above proves the teaser is the live observances sentence
+    expect(quietAllowed).toContain(desk.faithTeaser.sentence);
+    // anchored: the line above proves the teaser is one of the live observances members; every member the quiet town can
+    // draw is held to the same absence, not only the drawn one
+    for (const line of quietAllowed) expect(line).not.toMatch(/church|cleric|faction|faith/i);
+    expect(desk.faithTeaser.sentence).not.toMatch(/church|cleric|faction|faith/i);
   });
 
   test('a town WITH a patron draws no teaser — the page cannot say both', () => {
