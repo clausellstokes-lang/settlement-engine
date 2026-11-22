@@ -1,0 +1,67 @@
+# SEAT-1 train 1 — what every builder reads first (the seventh chair; SEAT-1 integrates, you build)
+
+**Read whole before your own brief:** `CLAUDE.md`, `CONTRIBUTING.md`, `docs/OPERATING_STANDARD.md`; the chair's rulings in `docs/chair/2026-11-20/content/seat/SEAT-1-PROPOSAL.md` (and the chair's answer to it, where your brief cites one); the measure `SEAT-COUNT.md`, `SEAT-MAP.md`, `SEAT-KIN.md`, `SEAT-GATE.md` beside it. Every source file you change, you read WHOLE, once.
+
+**The owner's words this train serves (2026-11-20, verbatim):** "Every power group should be able to compete for leadership or the seat given the right circumstances." · "Shouldn't a guild council represent the seat that is led by the power of a merchant guild or craft guild? … the government type could be an autocracy but it is the merchant guilds who installed a king of their own on the thrown". · "A calm town should be as it currently is … Don't invent drama capitalize on what's already there if it's there." And the dual-hat law of 2026-11-11 (`src/generators/people/representatives.js :: dualHatHouseOf`).
+
+**The model:** the FORM of government (`powerStructure.government`), the HOLDER (the power that holds the seat), the PERSON in it. Three things, correlated, never one.
+
+## The laws of the train (they bind you whatever your brief says)
+
+1. **The gate.** Every behaviour you add runs only for a settlement whose `config._seatLawVersion` (or `_config`) reads the new law, through the one reader U1 lands (`src/domain/seat/seatLaw.js`). Absent or old law: byte-identical to today, proven by a test that runs the old path on the same fixture. No stored town, no golden row, no live campaign's next verdict moves.
+2. **No new stored key.** Nothing new under `powerStructure`, on `npcs`, or anywhere in the stored town (the one exception is U1's law key in `config`). The office keeps its own power figure: no share is re-dealt.
+3. **Nothing invented.** No circumstance, power, contender or history is minted to make a contest. A town whose record holds none keeps today's contest; a town with no contender stays one.
+4. **The security lane's files are not yours:** nothing under `supabase/`, `src/domain/veil/`, `tests/security/`, no `src/domain/display/gallery*.js`, not `src/domain/display/publicSafe.js`. A string you move still NAMES every power it speaks of in the same string (a pronoun or "its own council" is never the only reference).
+5. **Neighbours in flight:** FRAME-1 owns `src/domain/summary/tonightSheet.js`, `src/domain/crisis/`, `src/domain/tension/`; NAMES-1 owns the prose composers. Touch neither unless your brief names the file.
+6. **Constants:** no new top-level named numeric constant outside a registered tuning table (`tests/lint/.tuning-register.json`; read `tests/lint/tuningRegister.walker.test.js`). A new walker owes its row in `scripts/mutation-coverage-manifest.json`.
+7. **Prose:** a line a reader sees follows `docs/content/SOP_POOLS_AND_CONDITIONS.md`; a power in a sentence takes its prose form through `src/domain/display/governanceAccount.js :: powerNameInProse`.
+8. **Cite by symbol** (`path :: symbol`), never by line.
+
+## How you work
+
+- Your worktree is your own branch `lane/seat-2026-11-20-u<N>`, cut from the commit your brief names. Commit there by explicit paths (never `git add -A`), one commit per unit or per declared step, with the receipts in the message and the trailers:
+  `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>` and `Claude-Session: https://claude.ai/code/session_019yED1PyQxQZi2zHJeLhhLu`. Do NOT push; SEAT-1 reads your diff and pushes.
+- **Red first.** Write the arms your brief lists, run them, and record the failing titles BEFORE the code. Record the red count and the green count in your commit message.
+- **Gate reading.** Never read a gate through a pipe. Every run to a file, read by its count lines: `sh scripts/gate-tail.sh <command…> > <log> 2>&1`. Targeted Vitest only, through the mutex: `GATE_MUTEX_TIER=shared sh scripts/gate-mutex.sh --run -- npx vitest run --maxWorkers=2 <files>`. Never the whole suite. No test run with any of GIT_DIR, GIT_WORK_TREE, GIT_INDEX_FILE, GIT_COMMON_DIR, GIT_OBJECT_DIRECTORY or GIT_PREFIX set.
+- **Green before you hand back:** your arms; every test file of every module you changed (find them with `grep -rl <module basename> tests`); `tests/lint` WHOLE if you added or changed any test file; `tests/lint/densityCreateBoundary.walker.test.js`; `npm run typecheck:ratchet`, `npm run typecheck:domain:strict`, `npm run lint` (each through `scripts/gate-tail.sh`).
+- **Stop and report** on a mismatch with your brief, a red you did not cause, a register you would have to widen, or a ruling you lack. Never invent behaviour to get past it.
+- **Hand-back:** at most 300 words: the commit(s), red → green counts per arm, every register/pin/figure that moved (before → after, by file and title), what you did NOT do, CONFIRMED vs PLAUSIBLE.
+
+## SEAT-2's lane (from 2026-11-20T07:39Z, "THE LANE IS YOURS at a9923e761"; these lines govern where an earlier line above disagrees)
+
+- **Your integrator is SEAT-2** (session_019yED1NCD6QogcvC9xk79dP). Your commit trailers: `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>` and `Claude-Session: https://claude.ai/code/session_019yED1NCD6QogcvC9xk79dP`. Do NOT push; SEAT-2 reads your diff line by line, merges it and pushes your branch.
+- **Your branch:** in your worktree, `git checkout -b lane/seat-2026-11-20-u<N> <the commit your dispatch names>`. Install the hooks and modules there first: `npm ci`.
+- **THE TWO CENSUSES ARE NOT YOURS** (the chair's ruling of 07:39Z): `tests/lint` WHOLE must be green BUT FOR `sovereigntyLightingContract.walker`'s census arm ("THE CENSUS IS AN ASSERTION…") and `proseWiringCensus.walker`'s census arms (`docs/content/wiring-census.json`), whose delta you CONFIRM BY NAME is your own new files (list them in your report). Never re-record either, never run `scripts/wiring-census.mjs` without `--dry`, never put `tests/lint/.lighting-census-baseline.json` or `docs/content/wiring-census.json` in a commit: SEAT-2 re-takes both at the merge.
+- **A red that is not yours** (known at the base today: `negativeAssertionAnchor.walker` on `tests/build/ensurePlaywrightBrowsers.test.js`): name it and go on. `ledgerCitationIntegrity` needs the ledger ref: `git fetch --no-tags --depth=1 origin +refs/heads/review-fixes-2026-07-08:refs/heads/review-fixes-2026-07-08`.
+- **Your report:** write it to `docs/chair/2026-11-20/content/seat/briefs/U<N>-REPORT.md` in the same commit as your code or a second commit; the hand-back message to SEAT-2 is at most 300 words.
+- **THE LINE IS MERGED (BUILD-ON `e356c94f`, into the lane at `6ad3e03d1`), AND THE GOLDEN IS ALREADY RED ON IT** (the names work's stored figures, the owner's to sign at the close; you sign nothing and re-record none of them): `tests/property/generatorGoldenMaster.test.js` (521 of 525), `tests/generators/generationForkCensus.test.js` A1, the golden-corpus arms of `pipelinePinnedChoosers` A1, `rosterFinalUnderHeldRoster` A1 and `powerEconomyFreshness` A4, `tests/domain/worldFactRederive.test.js` A7, `tests/property/espionageDormancyFence.test.js` FENCE 1. Name each as not yours if you meet it.
+- **THE CONFINEMENT PROOF (the chair's, corrected 08:21Z: the names seat's key-by-key tools were never committed), for every unit:** because the golden is already red, your own movement of a born world is masked. While the law is dark you claim ZERO movement, and you prove it by ONE sha256 over the 1,245 born documents (the golden master's 525 and the census's 720, each tree born from its own archive) at YOUR BASE and at YOUR TIP: EQUAL. The script is `docs/chair/2026-11-20/content/seat/confine/confine-two.sh <base> <tip>` (brief `briefs/CONFINE.md`; SEAT-2 names its commit in your dispatch). Put both hashes in your report. DIFFER: stop and report it.
+- **Size:** at untouched settings, powers per town run 1.1, 1.2, 2.2, 4.2, 6.6, 8.1 (thorp to metropolis), and a seat born under no crisis reads Contested in 72% of villages and Endorsed in 92% of metropolises (the chair's 300-town measure, `docs/chair/2026-11-20/seventh/measures/holistic/` on the chair's branch). The contest bites at town size: every born test of yours carries a town-size case. Tune nothing for it.
+
+## SEAT-3's lane (from 2026-11-20T10:29:25Z; "THE LANE IS YOURS at 8c4beb844", the chair 10:21Z; these lines govern where an earlier line above disagrees)
+
+- **Your integrator is SEAT-3** (session_019yED1Sc68y5MpiArTSxJ24). Your commit trailers: `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>` and `Claude-Session: https://claude.ai/code/session_019yED1Sc68y5MpiArTSxJ24`. Do NOT push; SEAT-3 reads your diff line by line, re-runs your red and green, merges and pushes. Your hand-back goes to SEAT-3.
+- **RULINGS.md's Addendum 6** (CS21, CS22, the factionDynamics.js owner rule, FORTUNE-1's standing) binds you beside the rest.
+- **One more red that is not yours until U2-CURE2 lands:** `tests/data/cultureOfficeTitles.test.js` cannot load at `8c4beb844` (it imports `rulingPower.js :: GOVERNMENT_PREFERENCES`, which U2 removed; its cure is B2d's). Name it and go on.
+- **The confinement reference** for a dark unit: `all 36ee5bb0bea0bb3fcc6bd83f1e9e732b4dc643f09e0844545c64785798d8ce89 1245`.
+
+## SEAT-4's lane (from 2026-11-20T12:55:48Z; "THE LANE IS YOURS at 1cf452ac2", the chair; these lines govern where an earlier line above disagrees)
+
+- **Your integrator is SEAT-4** (session_019yED1RNL8TjjpR5HCcJ3yW). Your commit trailers: `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>` and `Claude-Session: https://claude.ai/code/session_019yED1RNL8TjjpR5HCcJ3yW`. Do NOT push; SEAT-4 reads your diff line by line, re-runs your red and green, merges and pushes. Your hand-back goes to SEAT-4.
+- **A known red that is not yours** (beside the list above): `tests/property/dmLayerGoldenIsolation.test.js` A7 ("a dormant layer is the committed golden on EVERY corpus row"), red at the lane's base (it reads the golden master the names work left red). Name it and go on.
+- **`writerReach.walker`'s frozen `surfaceReach` is the integrator's too**: a reach GAIN your new module causes (a new reader of a `hidden` or veiled field in a surface's closure) is NAMED in your report by row (surface, field, before → after); never re-recorded by you.
+- **Every rate you measure for the owner is UNDER TODAY'S STANDING** (FORTUNE-1 is dark and will move it) and says so beside the figure. If your measure reads a card's or a faction's `power` or `influence`, say so in your report: another unit on the line raises stored weights of guild masters, thieves' guild masters, council speakers and the wealthiest merchant in NEW towns.
+- **One more known red** (beside the list above): `tests/build/generationWorkerLazy.test.js` "the generation worker bundle stays under its measured ceiling" (2,585,176 B against 2,579,708 at `0d71eaa3b`; the owner's at the close). Report your own delta against 2,585,176; lower nothing, re-record nothing.
+
+## SEAT-6's lane (from 2026-11-20T16:44:39Z; "THE LANE IS YOURS at 8bfabc080", the chair 16:43Z; these lines govern where an earlier line above disagrees)
+
+- **Your integrator is SEAT-6** (session_019yED1R4mTVRuHKRPWJPt3f). Your commit trailers: `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>` and `Claude-Session: https://claude.ai/code/session_019yED1R4mTVRuHKRPWJPt3f`. Do NOT push; SEAT-6 reads your diff line by line once, re-runs your red and green, merges and pushes. Your hand-back goes to SEAT-6.
+- **The whole of SEAT-5's hand-back §1 (items 1 to 52) binds you**, the 15:17Z fail-closed rule (item 48) and the frozen list (item 47) above all: a wording you write or change is ADDED to `TRANSFER_WORDINGS` in its own sentence class, never replaces one.
+- **Not yours:** `src/generators/factionDynamics.js` (until the chair names its release), `power/rulingStructure.js` and `power/claimStanding.js` (PEOPLE-1's re-wording; say in one line if your unit would touch either), `factionRename.js` (a named survivor), every file of the security lane.
+
+## SEAT-7's lane (from 2026-11-20T19:54:46Z; "THE LANE IS YOURS at ce9462b55", the chair 19:54Z; these lines govern where an earlier line above disagrees)
+
+- **Your integrator is SEAT-7** (session_019yED1P7Zp441ctXNjL8Kqf). Your commit trailers: `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>` and `Claude-Session: https://claude.ai/code/session_019yED1P7Zp441ctXNjL8Kqf`. Do NOT push; SEAT-7 reads your diff once, re-runs your red and green, merges and pushes. Your hand-back goes to SEAT-7.
+- **Every ruling in force is SEAT-5-HANDBACK §1 (items 1 to 52) plus SEAT-6-HANDBACK items 53 to 68.** Item 67 above all: THE TRAIN SHIPS LIT. You still build with the law OFF BY DEFAULT, proved byte-identical dark; no seat flips a default; the headline of every measure is the LIT world (seat law on, contest at today's figures) on the VISITOR pool, dark the control.
+- **No unit raises the first-paint closure** (the chair, 19:28Z) unless the chair has ruled a surface needs it; `vite.config.js` is shared: append only, and list your lines.
+- **No packed lines** (the chair, 20:14Z): never pack statements onto a shared line to save a line (`tests/generators/powerStructure.test.js` F31 ratchets packed lines in `src/generators/power/` per file); a line ceiling in the way is cured by a leaf, never by packing.
