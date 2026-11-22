@@ -68,3 +68,27 @@ none of those) and the same "TIP?". "Where you work" above is SUPERSEDED: worktr
    unmarked, Reveal off and on; the tradition rows and the KEEPER_HOUSES plant are DROPPED (said in the file's header). After R4-IDS an
    import's person ids are a fresh read's: the pin compares MODULO THE READ'S PERSON-ID BIJECTION
    (`tests/security/personIdBijection.shared.mjs`), never by raw id.
+4. E124 (the chair, 20:15 UTC 2026-11-22, on VEIL-35's recommendation; PART 36 ruling 36.3): THIS UNIT TAKES DOORS-3's VEIL-DOORS
+   SECTION AS ITS BASE (the doors' merge pulled forward INTO it): each of `_gallery_public_tile_rows`, `get_gallery_map`,
+   `get_unlisted_map` is restated ONCE in 212's final text; `import_gallery_map` restated as units 2-3 say; the two one-line
+   `import_gallery_dossier` hunks (doors-3 hand-back s7) ride with it. ITS FOUR CONDITIONS ARE THIS UNIT'S FIRST ITEMS, in order:
+   (c1) BEFORE TAKING IT: the doors' section read WHOLE once against the tip, the six commits (04704a660, 297996d6a, eafece56a,
+        3a57e3a0c, 447809df0, 8af1cb703) as ONE diff (`git diff <their parent> 8af1cb703 -- supabase src tests` on
+        `lane/veil-doors-3-2026-11-20`), and EVERY place where a later ruling of the lane (76 on: PART 33 s2, PART 34 s2, PART 35 s3,
+        PART 36 s2; E115-E124) changes what a door must serve LISTED in this brief before any edit (at least: the withhold-always
+        rows a door's served body must carry, `crimeTypes` and `recentConflict` among them; the re-key: a map member, a world
+        snapshot and the import each a fresh read's ids under their own salt; VR44, VR41).
+   (c2) MEASURE FIRST: the doors' own arms as they stand at 3e1115c81 (which files, their recorded figures from the doors-3 hand-back
+        s9 and `doors/v3/out/`), then RE-RUN on the merged tree and NAMED in the unit's proof beside the import's; VR44 and VR41 named
+        in the registry rows they bind.
+   (c3) the eleven `_gallery_doors_*` helpers revoked by name in s7's loop and dropped by signature in the rollback; 001..211 + 212 +
+        down = 001..211 with them, rehearsed locally (a catalogue dump of every public function's definition, volatility and grants,
+        equal); the catalogue arm's new count said (`tests/security/galleryVeilIds.pglite.test.js` arm 4: one drawer, `_gallery_veil`,
+        its callers' closure VOLATILE: `get_gallery_map`, `get_unlisted_map` and `import_gallery_map` included wherever they reach it).
+   (c4) THE TWO-BUILDER SPLIT (above). IF THE PULLED-FORWARD PART CANNOT BE PROVED INSIDE THE UNIT (an arm red for a cause outside
+        it): it is CUT BACK OUT, this unit restates the three functions fresh on the lane's own 212, and the chair is told.
+5. IT NEVER MERGES BEFORE R4-IDS: its census (item 1) is re-run on the merged tip that carries "R4-IDS MERGED" before unit 1's walker is
+   written; which census rows the re-key moves is said (the three 212 reads stable -> volatile; no row added or removed by R4-IDS).
+6. THE SEAT'S PROOFS before "TIP? IMPORT-DOOR <commit>": every unit's red first and green after; (c2)'s arms; the part-one ids file
+   green (every new door's body re-keyed); 001..211 + 212 + down; `--check` 0; a NEW pool with both gates no worse than the merged
+   tip's; `tests/lint` whole; typecheck and eslint; E116's five steps if another unit merged into the tip since this unit's base.
