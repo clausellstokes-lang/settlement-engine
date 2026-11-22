@@ -1657,6 +1657,71 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   VEIL-33 (the join's preparation), VEIL-34 (chain A), VEIL-35 (chain B), DAILY-4, CLOSE-2 (the pronoun cure in
   its wait, then the final census), and the landing's place (STACK-100). IMPORT-DOOR stays VEIL-35's second unit;
   it becomes a third chain's when DAILY-4's place frees.
+- E120 · THE FINAL CENSUS STARTS AT THE LANDING'S DOORS COMMIT, NOT AT THE LINE'S MOVE (recorded 2026-11-22 20:01 UTC). Points 103 and 104 are test files and docs only (the chair verified both merges on `lane/stack-100-wip-2026-11-22` at
+  5f57b9cad: each differs from its trial merge only in the lighting census, the base's side; nothing under src/,
+  supabase/ or scripts/: every birth equals the line's). So at "STACK-100 DOORS <commit>" the chair sends CLOSE-2
+  "CENSUS AT <commit>": the lit ref is re-made there and the whole suite lit starts at once; "THE LINE IS READY
+  <tip>" follows as the flip's base. About an hour gained on the flip's road. If the gate forces a change after
+  DOORS, the chair says what moved and only what names it is re-run.
+- E121 · THE SERVER'S CUT OF THE STANDING IS A TABLE THAT ALSO HOLDS MASTER'S FORMS; THE VEIL IS MEASURED ON PLACES BORN BY MASTER'S ENGINE (recorded 2026-11-22 20:01 UTC). VEIL-34's R5D-0 (`lane/veil-34-2026-11-22-r5d0-wip` e1e5548cf;
+  `out/v34/r5d0/R5D0-MEASURE.md`; 6,528 pages, server = twin). Q1 `dmNote` on the DM door: 170 of 4,239 relation
+  rows carry a note (4.0%): an absent note is the common case: PER-ENTRY WITHHOLD STANDS. Q2: 0 served bases are
+  chosen by a withheld power IN THE POOL (13 presence-picked templates read only the seat, a density host or a
+  noble power); jp6-city-2's sentence is a STANDING, so S's cut removes it. Q3: every stored desc is exactly <base>
+  (328 of 754) or <base> <standing> (426); the standing is always the tail and is held at no other path; the table
+  has 44 forms (4,912 characters): 33 closed text, 11 take a value (7 a power's name: a pattern; 3 the force's
+  word; 1 a count); a walker holds it equal to the engine (19,489 of 19,489 engine standings cut whole). THE
+  CHAIR'S LEAN OF E116 IS WITHDRAWN: "no match: withheld whole" would blank 43% of cards (325 of the 328 no-match
+  descs have no standing at all). TAKEN AS VEIL-34 PROPOSES: (a) every tail that matches is cut; (b) a no-match
+  desc is served as it is; (c) after the cut, a desc whose base still names a withheld power by the lane's fold is
+  withheld whole (0 today). ON THE CHAIR'S THREE CONDITIONS: (i) LEGACY FORMS: production's stored places were born
+  by MASTER'S engine, and origin/master's `src/generators/power/factionStanding.js` (one version at that path, 254
+  lines, since 2026-11-06) appends standings in OTHER WORDS (about 35 forms; three take the force's word; one is two
+  sentences): against today's 44 they match no row, so (b) would serve them whole on every existing share: the
+  table holds master's forms too (and any older wording `git log -S` finds), and the proof is a LEGACY ARM (places
+  born by master's engine in a scratch worktree, stored, read through 212 and the twin: every legacy standing cut,
+  the differential on them); (ii) THE TABLE ONLY GROWS (the walker's red message: a new or changed form ships only
+  with a migration that adds it; old rows stay, because stored documents keep them); (iii) the closed-branch count
+  said, and what the other 3 of the 328 are. Q4 (the masked tension party, "The Independent Bloc", stamped hidden
+  by `stressFactions.js`'s infiltrator; 22 Reveal-off pages, all hiding): one always-pass line and its twin, INSIDE
+  R5-DESC. THE WIDER FINDING: the lane's digest holds NO RULING on documents born before this release (the nearest:
+  VR28 binds both stored SHAPES; ruling 58 (4) asks both gates on the old stored shape), and both gates run on
+  today's births only: "LEGACY-POOL", a MEASURE (both gates and the differential on a slice born by master's
+  engine, by rule of the registry; the page's re-deriving readers fed legacy documents), IS VEIL-33's FIRST UNIT
+  AFTER ITS MERGE, before JOIN-PREP; a legacy-only tell becomes a unit before "R3". FOR AFTER THE FIRST DEPLOY: the
+  standing stored as its own field at birth (`intake/AFTER-FIRST-DEPLOY.md` 13).
+- E122 · A BASE PICKED BY ANOTHER POWER'S PRESENCE IS WITHHELD ALWAYS, NEVER "WHERE" (recorded 2026-11-22 20:01 UTC). VEIL-34 on E121's question: YES, an owner can hide a power by hand (the join probe's lit act T: on jp6-city-8 the
+  owner-hidden power is Noble Families; a density host is an ordinary power row); the dark pool never hides a power
+  by hand, so the 13 presence-picked templates were not exercised. It proposed the other way for those bases
+  "where a template's pick reads a power the read does not serve". RULED: ALWAYS: a base withheld only on a hiding
+  read is itself the tell (the served document differs from the never-there place's by an absent base). A base
+  whose template is picked by another power's presence is withheld on EVERY shared read, both engines, and the page
+  re-derives it with the engine's own picker over the SERVED roster; on the server, for the power kinds whose base
+  is presence-picked, the WHOLE desc is withheld always (no cut there: the page re-derives the base by the picker
+  and the standing by S); for every other kind E121's table cut stands. THE MEASURE FIRST (builder V34-R5D1, brief
+  `briefs/R5D-1-BRIEF.md`): the 13 by path and symbol with the power each reads and the kinds whose cards they
+  write; the picker's FIDELITY on nothing-hidden pages (exact, or a named class: if a draw sits inside a
+  presence-picked base, the share of cards that would lose it, and the chair rules); the differential on
+  jp6-city-8 and on planted hand hides of a density host and of a noble power. VEIL-34's two cure briefs
+  (R5D-SQL, R5D-PAGE) stand written at dce1c261a; PART 35's section 1 current at 7d4c17572. ITS RECORD 559,887 at
+  19:42: it says "HANDS OVER" at R5-DESC's merge or at 660,000, whichever comes first; A SUCCESSOR FOR CHAIN A
+  (VEIL-36) IS SEATED BESIDE IT WHEN THE LANDING'S PLACE FREES.
+- E123 · CI ON POINT 102: THE 61 LISTED ROWS AND TWO NEW, BOTH TIMEOUTS OF TESTS WITH NO BUDGET OF THEIR OWN; CURED AS POINT 105 BY THE CHAIR (recorded 2026-11-22 20:01 UTC). Workflow "CI", run 45058186820 on c1144ba18: 63 failing rows (the test ratchet 39, build and dist 15, the coverage
+  floors 8, the golden master 1); all 61 of the list failed (the two `bar7OrderUnderTheLaw` rows are gone from the
+  list since point 101); TWO NEW, both in `tests/domain/distribution.test.js`: "every city carries an enforcement
+  institution" (20,418 ms) and "at least 80% of cities have a definingCrisis beat" (20,567 ms), each a TIMEOUT
+  against the default 20,000 ms. THE CHAIR'S OWN RUNS on its machine: the file at the tip 32 of 32 green (twice);
+  the two tests 14.6 s and 10.9 s at the tip against 13.0 s and 10.6 s at point 98 (one run each: births about a
+  tenth slower since the laws' second halves, dark). NOT A WRONG RESULT: the file builds 40 cities a test, three of
+  its tests carry their own budget since CI-FIT point 75, and fourteen more sit past three quarters of the default
+  on a runner by that pass's measured factor (1.84). THE CURE, test only, the chair's own (as its four test cures
+  at point 96): `lane/chair-cifit-2026-11-22`, cut from c1144ba18: those fourteen take the file's declared budget
+  (`120_000`), each with its measured figure in the comment form of CI-FIT point 75; nothing else moves. It joins
+  STACK-100 as POINT 105. The two rows are NOT added to the red list. A LESSON FOR THE CLOSE: the lit laws add
+  work to every birth: CLOSE-2's final census lists every test over 8 seconds lit that has no budget of its own
+  (a cure in one commit before the flip lands), and names every TIMEOUT apart from a wrong result. WHY THE GATE DID
+  NOT SEE IT: the stack's gate and the seats' narrowed rule 8 do not run `tests/domain/` flat (E71, E90); CI read
+  by name within the hour is the net that did.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -2193,6 +2258,18 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
    for "THE LINE IS READY"); the landing place: STACK-100, seated at this net. FIVE CORRECTIONS OF THE CHAIR'S OWN
    TO THE OWNER TODAY, each made the hour it was found: the veil seat's count; the Daily Life lines "built"; the
    crisis fault and its fix; the two ways on the hidden holder; the contender's cure condition.
+- 2026-11-22 20:01 UTC · NET 20 (its trigger fired at 19:58; most of its work was done in the hour before it). THE LINE IS AT POINT 102; STACK-100 holds points 103 and 104 merged (5f57b9cad; both merges verified by the
+   chair ahead of the gate) and is in step d; point 105 (E123) is being proved by the chair. THE RECORDS, READ BY A
+   HELPER AT 19:47 (E109): VEIL-33 264,505; VEIL-34 559,887; VEIL-35 no result yet (seated 19:27; its own count
+   about 190,000); DAILY-4 273,394 (its own count about 190,000); CLOSE-2 395,263 (at 19:32); STACK-100 129,902.
+   Each told its figure. DECISIONS OF THE HOUR: E115 to E123. THE SIX: VEIL-33 (re-running red/green before
+   R5-RECENT's merge; then LEGACY-POOL and JOIN-PREP), VEIL-34 (chain A: two cure briefs written; a measure of the
+   presence-picked bases running; waits on the hand-over line), VEIL-35 (chain B: read in, its pool building,
+   R4-IDS's part one passed to it at 24a6f7ef5), DAILY-4 (L12 cut and the PDF chapter merged; the page's eight in
+   build), CLOSE-2 (the old master's diff for the owner done; "PRONOUN" dispatched; waits for "CENSUS AT"),
+   STACK-100. DONE THIS HOUR: FORTUNE-7 (hand-back final at eaaa4c344). TWO MORE CORRECTIONS OF THE CHAIR'S OWN:
+   to the owner, the "false line" condition on the creditor's sentence (E118); to STACK-100, the lighting census's
+   expected figure (titles fell by three, JOIN having trimmed two files).
 
 ## 4. The order of the lanes still to seat, and what each waits on
 

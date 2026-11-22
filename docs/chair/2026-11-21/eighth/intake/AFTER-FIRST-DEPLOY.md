@@ -97,3 +97,21 @@ with its leader. Today 509 of 900 places state such a crisis with no power of it
 two and changes the density design he signed. Open points: the lifted ceiling; two-crisis places (17 left: the stated crisis gets the one body);
 the packed lines (unpacked if it lands). Also listed: `defenceParts` R13's bound re-cut score by score (the defence lane's).
 
+
+BESIDE IT (E118): the one printed sentence that names a crisis's power where none is on the roster: the governance paragraph's "The creditor's
+agent has blocked the money for repairs." in an indebted place with no creditor power (35 of 900 places, dark and lit alike). Master prints the
+same claim today in older words; a debt has a creditor; not a contradiction: a person named in prose who has no card. The owner's to decide with
+the proposal: seat the creditor (the proposal does), give the agent a card, or leave the sentence.
+
+## 13. THE STANDING SENTENCE STORED AS ITS OWN FIELD AT BIRTH (E121; the veil lane's, with the powers' generator)
+
+The share veil cuts a power's standing sentence off its stored description by a TABLE of the engine's sentence forms held in migration 212
+(today's 44 forms and master's older ones), kept equal to the engine by a walker: a changed sentence form needs a migration. THE BETTER SHAPE:
+`rosterText.js` writes the standing beside the description as its own field at birth (empty where the engine wrote none), the server cuts by
+the document's own field, and the table freezes at the forms already stored. It moves every birth (a new field on every power): the golden
+records, the observed-shape baseline, the veil's registry row. Not before the first deploy.
+
+## 14. THE DEFENCE BOUND R13 (E118 (4))
+
+`tests/generators/defenceParts.test.js` R13 stays listed red under the lit laws (v3build-village-3: the will 6.86 over the bound 6.8, one
+rounding unit): the bound is points-only and the will a score-by-score sum. The defence lane re-cuts the bound score by score.
