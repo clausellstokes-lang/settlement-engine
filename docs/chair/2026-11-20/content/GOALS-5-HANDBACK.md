@@ -4,10 +4,12 @@ Seat: GOALS-5, a seat of the eighth chair (session_01ACmDYY29VRchM87v1yhL9Q). Or
 
 ## WHERE THE LANE STANDS
 
-- `lane/goals-5-2026-11-22`: cut at 825ed351f (GOALS-4's saved tip; `lane/goals-4-2026-11-20` on origin, verified equal). Nothing merged by this seat yet.
-- Builders' branches (GOALS-4's, ancestors of the tip): `lane/goals-4-2026-11-20-b10-wip` d83633b9b, `lane/goals-4-2026-11-20-b11-wip` 3d1496328.
-- In flight: unit 1 (the 27 failures named): one fresh build, then ONE `VERIFY_DIST=1` run of `tests/generators tests/data tests/lint tests/build` through the mutex. Queued behind it: the arm (u) probe (a scratch test, never committed) counting the movers the "held-text knock-on" class admits, by size.
-- Next step: read unit 1's failing rows by name against `ci/RED-AT-LINE.tsv`, sort them, send the list to the chair before any cure.
+PARKED at 09:1x UTC on 2026-11-22 by the chair's order (the owner's six-seat limit). Nothing merged by this seat; no builder started.
+- DONE AND PROVEN: `lane/goals-5-2026-11-22` cut at 825ed351f (GOALS-4's tip, verified equal to origin); `npm ci`; a fresh `npm run build` at 825ed351f (exit 0); a trial merge of the line at 2486d1301 (scratch worktree, not committed): NO code conflict, only `scripts/.writer-reach-baseline.json` and `tests/lint/.lighting-census-baseline.json` (the line's side, then each by its door).
+- STOPPED IN THE AIR: unit 1's ONE run (`VERIFY_DIST=1`, `tests/generators tests/data tests/lint tests/build`) at 393 of 813 files; killed, its partial log kept in this seat's scratch (`unit1-run.PARTIAL-393of813.log`; the JSON writes only at the end, so none). 13 files red so far: `tests/build` vendorPdfLazy (4: first paint x3, engine chunk), generationWorkerLazy (1: the worker ceiling), engineBundleReplay (3), engineServiceStoreParity (4); `tests/generators` pipelinePinnedMode (3), generationForkCensus (A1), powerEconomyFreshness, pipelinePinnedChoosers, x46NpcBand, institutionBudgetPromise, rosterFinalUnderHeldRoster, nameHeldThroughAssembly (1 each: golden/digest identity rows); `tests/lint` mutationCoverageManifest (TOTALITY). NOT YET READ against the list.
+- NOT STARTED: the arm (u) knock-on probe (written, `zzArmUKnockOn.probe.test.js` in the scratch worktree `/home/user/wt-measure`, never committed).
+- NEXT STEP on "GO GOALS-5": re-run unit 1's one run whole (the mutex's stale lock from dead PID 899 is reclaimed by `--run`), read every row by name against the point-96 `ci/RED-AT-LINE.tsv`, then the probe.
+- Count: about 115,000 tokens (own estimate).
 
 ## Rulings added for this seat
 
