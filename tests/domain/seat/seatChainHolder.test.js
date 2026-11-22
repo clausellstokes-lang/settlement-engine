@@ -189,6 +189,20 @@ describe('1. RED FIRST: the probe\'s six kept-form transfers name the holder\'s 
   }, 60_000);
 });
 
+describe('1b. the seat\'s own person stays where no old house holds them (BU7\'s reading, for the chair)', () => {
+  it('u7p-town-2 born lit, the holder by kind (R3): the faction is the holder, the person is still the seat\'s, Beatrix Eisenberg', () => {
+    build(true);
+    const born = bear('town', 'u7p-town-2');
+    const held = holderOf(born, READER);
+    expect(held.rule, 'the holder by kind').toBe('R3');
+    expect(held.holderName, 'the holder').toBe(TAKER);
+    const chain = rulingChainOf(born);
+    expect(chain.faction?.name, 'the chain\'s faction is the holder').toBe(TAKER);
+    expect(chain.npc?.name, 'the chain keeps the seat\'s person').toBe('Beatrix Eisenberg');
+    expect(chain.npc?.name, 'today\'s person, unmoved').toBe(today(() => rulingChainOf(born)).npc?.name);
+  }, 60_000);
+});
+
 describe('2. a veiled holder: the reads to a reader are today\'s', () => {
   it.each([
     { kind: 'hidden', mark: { hidden: true } },
