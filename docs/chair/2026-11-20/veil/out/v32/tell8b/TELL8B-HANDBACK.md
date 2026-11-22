@@ -57,8 +57,10 @@ This sitting: unit (viii), steps 2 and 3 assigned. **NO RED AND NO CURE WRITTEN*
 
 ## PROGRESS
 - RESUMED by VEIL-32 (mark raised to 600,000; STOP 1 above is answered: sitting A then sitting B in this same session).
-- (viii) crimeTypes withheld always, the page re-derives, measure ebdeb3f30, reds: (iii) walker <this commit>; (i), (ii) to
-  come; cure not started.
+- (viii) crimeTypes withheld always, the page re-derives, measure ebdeb3f30, reds: (iii) walker c325d9e59; (i) the arm <this commit>
+  (tip: HALF 1 3,728/6,528 pages, HALF 2 644 pages = 32 gated towns by [type, desc], 25 by type, 1 control; hook 20
+  shortfall pages on metropolis-occupied-0-65; parity 0; ruling 88: 4 pages, all at g:010, village-under_siege-0-8;
+  `out/v32/tell8b/arm-tip/`, `gunzip -k` the shards before `node measure/arm-an.mjs arm-tip`); (ii) to come; cure not started.
 
 ## RECEIPTS
 - 212 unchanged: `8688ddb6148e84baaeee6f9cdcd89fec40a382c390f44133affa15ae66cc5a3a`. No template made, no database touched, no
