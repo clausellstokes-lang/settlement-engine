@@ -1,0 +1,89 @@
+# THE TROUBLE HOOKS' THEMES, DRAFTED BY DEPTH-5 FOR THE CHAIR (E54; not committed to src until ruled). Pool: `troubleHooksOf.js :: troubleHookPool(kind)`,
+# composed at the line 2486d1301 (85 lines). Columns: kind, at (index in the composed pool), theme (`hookThemes.js :: HOOK_THEMES`), why (one word),
+# held (STORED: the line is one of today's stored template hooks, answering `untyped` in the answers fixture's golden/hxd parts), text.
+kind	at	theme	why	held	text
+crime_wave	0	crime_ring	directed	STORED	The crime wave is coordinated. Someone is directing it to create a pretext
+crime_wave	1	corruption	payroll	STORED	A guard captain is on the payroll of the criminal network
+crime_wave	2	outsider_suspicion	scapegoat	STORED	Those who would take the law into their own hands have picked out a culprit on bad information
+crime_wave	3	crime_ring	burglars		A household woke to find its door forced and nothing taken, and wants to know what the thieves were looking for
+crime_wave	4	crime_ring	runner		A boy who runs errands for half the place has started carrying more coin than any errand pays
+crime_wave	5	looming_threat	mob		Those who talk of taking the law into their own hands meet tonight, and they want someone who can fight
+crime_wave	6	betrayal	inside		A household robbed in the night swears the robber knew which chest held the money
+crime_wave	7	blackmail	cowed		A stallholder at the market has stopped reporting thefts, and will not say why
+crime_wave	8	looming_threat	fear		A watchman afraid of the night round is looking for someone to walk it with him, and will pay from his own purse
+crime_wave	9	crime_ring	extortion		A shopkeeper has been told to close by the end of the week, by people who did not give their names
+crime_wave	10	rivalry	turf		Two crews have been seen arguing over the same ground, and a fight between them looks a night away
+crime_wave	11	crime_ring	captive		A thief caught in the act is being held in a cellar by the household that caught him, and nobody knows what to do with him next
+crime_wave	12	crime_ring	theft		A cart left loaded overnight was emptied before dawn, and the carter wants to know who was awake
+crime_wave	13	betrayal	kin		An old woman's savings have gone from under her floor, and only her family knew where they were kept
+crime_wave	14	smuggling	fence		A pedlar is selling goods cheap that several households swear were taken from them
+crime_wave	15	looming_threat	marked		Chalk marks have appeared on several doors overnight, and the households behind them are frightened
+guild_conflict	0	corruption	audit	STORED	A guild master's records have gone missing ahead of an audit
+guild_conflict	1	corruption	rigged	STORED	A journeyman denied mastership has proof the exam was rigged
+guild_conflict	2	ambition	third-party	STORED	Someone is sabotaging both sides to destabilize the market for a third party
+guild_conflict	3	rivalry	reprisal		A trader selling outside the rules has had a cart overturned in the night, and has a fair idea who did it
+guild_conflict	4	rivalry	defiance		A craftsman working from home has been told to stop selling, and means to carry on
+guild_conflict	5	rivalry	votes		Both sides of the quarrel over trade are counting heads before the next gathering, and each is a few short
+guild_conflict	6	divided_loyalty	pressed		A family that sells to both sides is being pressed to choose, and has asked for a few more days
+guild_conflict	7	rivalry	double-let		A stall at the market has been promised to two traders at once, and both will turn up at dawn
+guild_conflict	8	blackmail	threat		The guild is about to fine a member for buying from an outsider, and the member has threatened to name who else does it
+guild_conflict	9	rivalry	court		A trader turned away from selling is taking the matter to the court, and needs a witness who saw it
+guild_conflict	10	rivalry	cargo		A boat's cargo sits unloaded at the water's edge while the two sides argue over who may sell it
+guild_conflict	11	crime_ring	protection		A trader outside the guild has been offered protection by people outside the law, and is tempted
+guild_conflict	12	betrayal	defector		An apprentice has run from one side of the quarrel to the other, and taken a master's tools along
+guild_conflict	13	hidden_debt	unpaid		A craftsman has made goods for a trader who is not allowed to sell them, and wants paying regardless
+guild_conflict	14	looming_threat	crowd		A trader at the market has been selling under the agreed price, and a crowd is expected at the stall tomorrow
+guild_conflict	15	blackmail	seen		A guild master has quietly bought from a trader outside the guild, and someone saw it happen
+resource_scarcity	0	scarcity_pressure	hoard	STORED	A store of the scarce goods is being kept off the market on purpose
+resource_scarcity	1	ambition	engineered	STORED	The scarcity was engineered. Someone destroyed the competing supply route
+resource_scarcity	2	forbidden_knowledge	suppressed	STORED	An alternative source exists but the information is being suppressed
+resource_scarcity	3	scarcity_pressure	hoarding		A household caught hoarding is about to be turned out by its neighbours, and swears it was keeping the goods for others
+resource_scarcity	4	scarcity_pressure	fetch		A carter offers to fetch what is short from elsewhere, if someone will pay half the price before he sets out
+resource_scarcity	5	scarcity_pressure	want		A family that cannot pay the prices asked is selling its last good tools to buy what it needs
+resource_scarcity	6	scarcity_pressure	theft		With the place going hungry, a sack of food has gone missing from a household that had little to spare
+resource_scarcity	7	looming_threat	levy		A party sent to take supplies for the war is due tomorrow, and households are hiding what they can
+resource_scarcity	8	scarcity_pressure	price		A boat has come in loaded with what is short, and its master is asking twice what anyone here can pay
+external_threat	0	corruption	profiteer		The threat is being exaggerated by someone who profits from selling to the fearful
+external_threat	1	forbidden_knowledge	hidden		A way to come to terms exists, and those who want a fight are keeping it quiet
+external_threat	2	secret_identity	agent	STORED	The threat has an agent already inside the settlement
+external_threat	3	looming_threat	news		A rider brings fresh news of the danger tonight, and it does not match what the last one said
+external_threat	4	looming_threat	flight		A family is packing to leave before dawn, and the neighbours are trying to stop them spreading panic
+external_threat	5	outsider_suspicion	stranger		Someone nobody here knows has been asking about the paths in and out, and has asked for a bed for the night
+external_threat	6	looming_threat	wall		A stretch of the wall has been found crumbling, and mending it needs more hands than there are
+external_threat	7	secret_identity	unexpected		Those who keep order are calling for volunteers, and the first to come forward is the last one anyone expected
+external_threat	8	looming_threat	beasts		Tracks of the beasts that press on this place have been found beside a well-used path, closer than ever
+succession_crisis	0	succession	heir	STORED	A would-be heir approaches outsiders to investigate a rival's past
+succession_crisis	1	succession	errand	STORED	The ailing ruler wants a final errand completed before naming a successor
+succession_crisis	2	betrayal	poison	STORED	Someone is poisoning the ruler slowly, and someone in the household knows
+succession_crisis	3	succession	feast		One of the would-be successors is giving a feast tonight, and every guest will be counted
+succession_crisis	4	succession	watched		A would-be successor wants a rival's supporters watched, quietly, and is offering coin for it
+succession_crisis	5	forbidden_knowledge	letter		A letter meant for one would-be successor has reached another, and both now know what it says
+succession_crisis	6	divided_loyalty	neutral		A household that has backed no one is visited by each side in turn, and has asked for protection from both
+succession_crisis	7	divided_loyalty	undeclared		A council member has not yet said whom they back, and their house was broken into last night
+succession_crisis	8	succession	seal		With the seat empty, the seal used on the place's business has gone missing
+outside_debt	0	hidden_debt	clause	STORED	The original loan documents contain a clause that was never disclosed publicly
+outside_debt	1	hidden_debt	assessor	STORED	A creditor's agent is in town conducting a quiet assessment before enforcement
+outside_debt	2	hidden_debt	fraud	STORED	The debt could be voided, if someone can prove it was obtained through fraud
+outside_debt	3	vanished_person	missing		The one who kept the accounts of the loans has gone missing a week before the collectors are due
+outside_debt	4	hidden_debt	flight		A family that would bear the cost is quietly moving its goods out of the place, cart by cart
+outside_debt	5	looming_threat	collectors		The outside power has sent word of the day it will collect, and wants to know who will meet its people
+outside_debt	6	hidden_debt	seized		The creditors have taken a household's goods against the debt, and the household wants them back before they leave
+outside_debt	7	ambition	bargain		A wealthy household offers to pay the debt itself, in return for a say in how the place is run
+outside_debt	8	forbidden_knowledge	leak		A trader at the market is selling off stock cheap before the collectors arrive, and seems to know the day
+legitimacy_crisis	0	forbidden_knowledge	document	STORED	A document that would settle the question of legitimacy exists, and both sides would rather it stayed lost
+legitimacy_crisis	1	corruption	paid	STORED	Those in power are paying people to speak for them at the gatherings, because no one will do it for free
+legitimacy_crisis	2	ambition	leverage	STORED	A third party is keeping the question open on purpose, because an unsettled claim is easier to bargain with
+legitimacy_crisis	3	rivalry	challenge		Someone has painted a challenge to the authority's right to rule where everyone will see it at dawn, and those in charge want the hand found
+legitimacy_crisis	4	divided_loyalty	dissent		A speaker who questions the right to rule is due at a gathering tonight, and those in charge mean to stop the gathering
+legitimacy_crisis	5	divided_loyalty	offer		One of those who deny the mandate has been offered a post by those in charge, and has not yet answered
+legitimacy_crisis	6	vanished_person	keeper		Those risen against the authority have seized a store of supplies, and the keeper of it is missing
+legitimacy_crisis	7	faith_crisis	preacher		A preacher of the new faith is telling crowds that those in charge rule without blessing
+corruption_scandal	0	looming_threat	threat	STORED	The investigator who uncovered the corruption has received a death threat
+corruption_scandal	1	corruption	witness	STORED	A key witness can be found, but won't speak without protection
+corruption_scandal	2	betrayal	used	STORED	The corruption goes higher than anyone yet suspects; those pressing to expose it are being used
+corruption_scandal	3	forbidden_knowledge	forgery		A copy of the evidence is being passed from hand to hand, and one copy differs from the rest
+corruption_scandal	4	corruption	flight		An official named in the evidence is selling property in a hurry
+corruption_scandal	5	blackmail	evidence		Someone has offered to buy the evidence outright, for more than it seems worth
+corruption_scandal	6	corruption	silenced		The hearing on the evidence is set for next week, and the clerk who was to read it out has fallen ill
+corruption_scandal	7	secret_identity	alias		One of those who betrayed the place is named in the evidence, under another name
+corruption_scandal	8	blackmail	receipts		A trader who paid dues to the corrupt has kept every receipt, and is deciding whom to give them to
