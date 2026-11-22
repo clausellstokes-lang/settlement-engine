@@ -254,6 +254,23 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   the manifest the union, invariants 1,190); `tests/lint/proseWiringCensus.walker.test.js` auto-merged, both sides
   read (disjoint hunks); NOTHING RE-PINNED; the push's hook green (167, 1113, eslint 0 errors). THE LESSON OF THE FIRST
   BASE KEPT: the seat named its exact tip and added no commit until the base returned.
+- E21 · THE TROUBLE LANE AND THE SAMENESS DOOR'S HIDEABLE WALKER: THREE ASKS RULED WITH THE WALKER'S SOURCE AND THE THREE TABLES READ
+  (2026-11-22 04:19 UTC; it completes the rulings of 23:39 and 03:25 that the lane's rows stand "by declared exemption, each
+  with the line of code that withholds it"; the seat's builder had rightly stopped at the walker's source). (a) THE
+  LANE WRITES EXEMPT ENTRIES IN THE SOURCE for TWO tables, one entry a table, by the hand ref: `TENSION_CAUSES` (the
+  cause sentence reads only the document in hand; proof: the parity arm) and `TROUBLE_HOOKS` (kept off every shared
+  read; proof: an absence arm over every shared projection, written first if missing; if any shared read prints a
+  hook, no entry: reported). `provedBy` REQUIRED and total over the table; the "real pool" test gains one clause (a
+  table on the hand list); nothing else in EXEMPT, the bank or `NOT_LINE_KEYS` moves; every entry listed for the
+  security reader; THE CHAIR READS THE WALKER'S DIFF WHOLE BEFORE THE LANDING. `TENSION_SIDE_MEANINGS` GETS NO
+  EXEMPTION THERE: nothing on the trouble lane reads it (its reader, `tensionShown.js`, is the display lane's): a new
+  declared arm `UNREAD_ON_THIS_LINE` skips its row while no file of `src/` but its own imports it, and reds the day a
+  reader lands (self-expiring; the display lane then writes the real declaration). WHY NOT LEAVE IT RED: a red title
+  on the list hides a new red line of any later lane. (b) NO: it does not join `SENTENCE_KEYED` (that list is the
+  tables ALL of whose keys are sentences; this one is keyed by a side's own words). (c) The house readings' door is
+  the walker's own reading (a temporary, uncommitted dump; no script exists): the lane runs it for its own two tables
+  only, the diff's counts by table and by house in the commit. A CONSEQUENCE FOR THE DISPLAY LANE: its merge of the
+  line comes AFTER the trouble lane is landed (the walker's cures arrive with it); `PAGE-13.txt` says so.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
