@@ -167,6 +167,19 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   the garrison clause's siblings ("...too stretched, or too easily bought, to stop it."): no veto: they follow the
   place's safety rating and need no house but the garrison; FOR THE VEIL READER'S LIST: `safetyDesc` is now drawn from
   pools, so the veil's twin for it must be re-derived over those pools at the join.
+- E13 · THE LANDING GATE ALSO RUNS THE GOVERNING SUITES OF EVERY CHANGED MODULE (ruled 2026-11-22 02:23 UTC; the standard's rule 40
+  addendum (b), which the seventh chair's rule 8 held only as a clause and no seat applied). CI's run on 5fca4362d
+  (44971870515) failed all 62 listed rows AND 27 MORE, every one in the ratchet's job and none run by any gate: 26 in
+  five files directly under `tests/domain/` that read the state-sentence pools landed at point 89
+  (`corpusEcoTailGuards` 21: "a cured sentence is not drawn in the census town that made it false" and "a true
+  sibling still draws"; the economy, general, stressors and warFaith desks 5: two of them truth guards by their
+  titles: "never denies the town sells", "no crisis card denies its own crisis"), and one stale edge bundle
+  (`aiGroundingBundle`, re-made at the close). THE STATE-SENTENCE LANE'S OWN RULE-8 RUN NEVER RAN THEM EITHER (they
+  match no directory of what it touched). The stack's brief now orders, beside the directories, every test file
+  anywhere under `tests/` that names a changed module. THE 26 ARE BEING SORTED BY A HELPER, each into a stored figure
+  the landing moved, a premise moved, or a truth guard truly broken (a false sentence drawn): the last class is the
+  landing lane's first unit before anything else and decides whether the state-sentence lane takes a seat at once.
+  All 27 are on `ci/RED-AT-LINE.tsv` (89 rows) with that class.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -299,6 +312,14 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   STACK OF POINT 92 (one helper, started 01:43): the sameness door's join (656be9ea5), then the people lane's first
   half (930413518, with the ruled resolution), then the phone floor's row; one gate at the top. `PICKUP-NINTH.md` is
   written and on origin (529e9adce): the next chair session starts from it; the owner is given the command.
+- 2026-11-22 02:23 UTC · NET 3 (02:21): all four seats working. FORTUNE-6: U5b built; the 10 moved to the wording file (over the
+  line: +18 raw); writer-reach ruled twice: the door may write with three named movements (two identities leave the
+  dark cohort; `yearsAgo` on `legacyAnnotations` becomes a true read; five closures grow by the files the governance
+  paragraph pulls in); its lit re-measure is running; PAGES-BUILT.md comes with the merge for the chair's eye. CI's
+  run on 5fca4362d read by name: E13. The stack of point 92 is under its gate (started 01:43). The owner asked at
+  about 01:50 for the progress on everything and every step in order, as tables in plain words: ANSWERED IN FULL the
+  same turn (sixteen pieces; thirteen steps; no measured date, a rough sense of several days at four workers; six
+  things waiting on him). He has not yet started the next chair session nor answered on a fifth seat.
 
 ## 4. The order of the lanes still to seat (after the first four), and what each waits on
 

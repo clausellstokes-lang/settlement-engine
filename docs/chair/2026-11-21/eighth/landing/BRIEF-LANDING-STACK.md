@@ -64,7 +64,14 @@ f. Then ONE run of the lanes' own test directories, the UNION over every landed 
    for those. ALSO (added 2026-11-21 after the first stack showed the hole): EVERY TEST FILE A LANDED LANE ITSELF
    CHANGED OR ADDED, wherever it lives (`git diff --name-only <merge>^1...<merge>^2 -- tests`: each `*.test.js` or
    `*.test.jsx` not already inside a directory run whole), and, for a `src` file directly under `src/domain/` (no
-   sub-directory), the `tests/domain/*.test.js` files that name its module. `--maxWorkers=3`, `timeout 7200`.
+   sub-directory), the `tests/domain/*.test.js` files that name its module. AND THE GOVERNING SUITES OF EVERY
+   CHANGED MODULE (added 2026-11-22 after CI found 26 reds no gate had run; the standard's rule 40 addendum (b)):
+   for every `src` file a landed lane changed or added, every test file ANYWHERE under `tests/` (outside the
+   directories already run whole) that names that module's basename or imports from its directory's generated
+   leaves: `grep -rlE "<basename without extension>" tests --include='*.test.js' --include='*.test.jsx'`; for a
+   lane that touches `src/data/dossierStateProse/` that is every `tests/domain/*StateProse*.test.js`,
+   `tests/domain/corpus*Guards*.test.js` and their kin. List the files you added by this rule in your scratch
+   directory (`governing-files.txt`). `--maxWorkers=3`, `timeout 7200`.
 g. CLASSIFY EVERY FAILING TEST of d, e and f BY NAME: (1) on `RED-AT-LINE.tsv` (file and title); (2) on the chair's
    message's list of reds it has already ruled; (3) a register cured by its door above; (4) ANYTHING ELSE: do not
    cure it; record the file, the full title, the first two lines of its message, and WHICH LANDED LANE touches the
