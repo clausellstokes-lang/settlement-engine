@@ -30,12 +30,29 @@ cut at af708f2fd (worktree `/home/user/wt/r5desc`). No pull request.
       standings whole). THE SEAT'S CALLS, STANDING (the chair): the cut REPEATS; a same-span tie by the smaller id. Finding: R5D-0's
       NM-more expands to a sentence no engine writes; the engine's own is row NM-guilds. Postgres caches 32 compiled regexes: rows
       outermost.
-  (b) R5D-SQL DISPATCHED ~21:52 on the same branch from b30a9cdce (brief `briefs/R5D-SQL-BRIEF.md` at this branch's tip: the window
-      line; the GENERATED literal pasted between STANDING_FORMS markers in 212 and `galleryWithholdAlways.js`; the cut repeated; a
-      HIDDEN (`hidden: true`) OR MASKED (`faction`/`name` = `publicSafe.js :: HIDDEN_POWER_MASK`) row's own desc out; the belt; dmNote
-      per entry in R3's relations block; the masked tension party out; `power.label` off the composed form; the stale `power.conflicts`
-      scope; `registry.json` by its door; 212's header item; the cost law timed). Hand-back `out/v36/r5dsql/R5DSQL-HANDBACK.md`. NOT
-      RETURNED. ITS DIFF is read ONCE by this seat against the brief and 212 as read whole; what was checked goes here.
+  (b) R5D-SQL DONE, ACCEPTED BY THIS SEAT'S READ (its diff read ONCE against the brief and 212 as read whole): 051bae78e (the cure),
+      eeda6a126 (hand-back `out/v36/r5dsql/R5DSQL-HANDBACK.md`), PUSHED at eeda6a126. 212 `a9b0884eb41890fd265048ac4c9762d6520e7d4773703bec0a26eeddbee3b58b`;
+      the rollback `8cbd7d1c…`, 211 `eface6d0…`, 210 `9118c235…` UNCHANGED; no helper added, removed or re-signed. WHAT THE SEAT
+      CHECKED: 212's header items (35b) and (36); `_gallery_veil_withhold_always` (b) hidden (`hidden` true) or masked (`faction`/`name`
+      = the mask) row's desc out, both lists, then (a) the standing cut over both lists, rows outermost, a `~` test before the capture,
+      repeated, the base back in place; the masked tension party out (exact match), the tension kept; `_gallery_veil_roster_choices`
+      (d) dmNote per entry in the `withheld` block by the fold + ids (wider than the row's derived house-hidden: toward withholding),
+      (e) the belt in the `whole` block: the desc (not the row) leaves where its cut base still names a withheld power; the twin rule
+      for rule (`galleryWithholdAlways.js :: standingBase`, `withholdAlways`; `galleryRosterChoices.js :: withheldPowerNamer`, the belt,
+      the dmNote rule); the registry rows (`power.desc` withhold/always/re-derive in the always host; `power.label` diffuse;
+      `power.relation.dmNote` built in R3's host; `history.tension.maskedParty`; `power.conflicts`' stale scope cured). THE SEAT RE-RAN:
+      the sha256s; `rosterChoiceRegistry.mjs --check` 0; the literal in 212 (quotes undoubled) and in the twin each BYTE-EQUAL to
+      `standingForms.mjs --print`. The builder's own (its hand-back): registry walker 11/11, typechecks, eslint, 001..211 + 212 + down =
+      001..211 (480 functions), no helper callable by anon/authenticated, 212's cut = the reference on 6,009/6,009 and the twin's too,
+      server = twin on 108 reads of 70 towns, the cost law WITHIN (641.7 ms against 2 x 423.0 = 846.0; 0.99x the tip's 212).
+      THE BUILDER'S STEP NOT IN THE BRIEF (the seat's: ACCEPTED, vetoable): a row is asked only of a text ending in its pattern's
+      literal tail (the first build, as briefed, was OUTSIDE the cost law at 979.7 against 722.9 ms); no answer moved (the 6,009 re-run
+      after it). ITS CALLS: a desc that is all standing is served as ''; the belt only where a house is hidden whole; dmNote wherever a
+      power is withheld. ONE GAP, FOR THE CHAIR: A STANDING CARRYING THE MASK ("Behind an unseen interest by too much…", "the an unseen
+      interest") IS NOT CUT: the table's name slot is capital-led, so R5D-PAGE's plant (e) will red. PROPOSED CURE (one small SQL-side
+      builder before R5D-PAGE, or R5D-PAGE's red-first then that builder): the door's name slot takes the mask as a choice
+      (`an unseen interest`, and the engine's `the ` before it), the table regenerated (the same 117 ids; their `re` widened), the
+      literal re-pasted in 212 and the twin, the proof and --check re-run. NOT BUILT: the chair rules.
   (c) R5D-PAGE NOT DISPATCHED (the successor's): `briefs/R5D-PAGE-BRIEF.md` as corrected at this branch's tip: item 0 = E128 (the
       recentConflict reader on owner hand-hides; the rule for every page reader); 1 S; 2 the plants (d) hidden and (d2) masked both;
       3 fidelity; 4 the differential; 5 the table's walker (reads the data file and the tip's engine, never git; the table only grows;
@@ -54,7 +71,7 @@ cut at af708f2fd (worktree `/home/user/wt/r5desc`). No pull request.
   (a) the relation row withheld whole vs (b), on the two GATE-1 towns' powers.relations parts and pass 2's three lit cities; (iv) is
   built only after R5-DESC merges (one relations block).
 - BRANCHES: `lane/veil-36-2026-11-22` (this file; pushed at each commit), `lane/veil-36-2026-11-22-r5desc-wip` (pushed at b30a9cdce).
-- NEXT STEP IN ONE LINE: R5D-SQL returns -> its diff read once -> accepted or the fault -> "HANDS OVER <commit>" with this section current.
+- NEXT STEP IN ONE LINE (FOR THE SUCCESSOR): the chair's word on the mask-in-a-standing gap; then R5D-PAGE (its brief at this branch's tip) on `-r5desc-wip` at eeda6a126; then (d)'s proofs; then "TIP? R5-DESC <commit>". (iv)'s probe output (`/var/tmp/v18/out/v36/q/`) is in THIS container only: a successor in another container re-makes the pool and re-runs `q36-chain.sh`'s steps.
 
 ## 2. RULINGS SINCE PART 35 (numbered on from 104; the eighth chair's; each vetoable by the owner)
 (none yet)
@@ -62,3 +79,4 @@ cut at af708f2fd (worktree `/home/user/wt/r5desc`). No pull request.
 ## 3. Log (every hour from `date -u`)
 - 20:55 seated on 648ac3e10. 20:56 chain0 launched. ~21:01 R5D-FORMS dispatched. 21:02 first line to the chair. 21:03 PART 37 opened.
 - 21:34 pool END; 21:48 gates read; 21:5x (0)'s line to the chair. ~21:4x R5D-FORMS returned; read and re-run; ~21:52 R5D-SQL dispatched. 21:56 the chair's read 506,417.
+- R5D-SQL returned; its diff read once; ACCEPTED; pushed eeda6a126. VEIL-36 HANDS OVER at the commit carrying this line.
