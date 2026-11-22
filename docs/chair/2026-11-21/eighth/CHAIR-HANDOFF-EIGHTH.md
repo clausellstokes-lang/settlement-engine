@@ -1067,6 +1067,32 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   `rulerKindOf`'s label test files a reeve as a mayor (42 places) and a headman as an elder (82): the five lines
   never read it; DAILY-3 is asked for ONE grep (who reads it, and does any reader PRINT the kind's noun); if a
   reader prints a false office word on the line today, the chair routes the cure (it is not DAILY-3's).
+- E83 · DAILY-3's GREP ON `rulerKindOf`: NO FALSE LINE (2026-11-22 14:17 UTC). Its own note corrected: the grouping is `rulerKindLabel.js`'s design
+  ("elder: an elder council, a headman, a household council"; "mayor: a mayor or an elected reeve"); no reader
+  prints "the mayor"; "the elder" at a Headman's Authority place stands on the earlier ruling in
+  `institutionDescVariants`' comment (PLAUSIBLE: no births run for it). INTAKE, AFTER THE FIRST DEPLOY: once the
+  `office:` atoms are on the line, `dawnWork` W11 and B19 and `gatheringPlaces` P13 can be re-keyed from
+  `ruler: elder` to `office: elders`, so a headman's place never reads "the elder" beside "the headman". ASKED OF ITS
+  LANDING LINE: how often an `office: headman` line and W11, B19 or P13 print on the same page (900 births; a count,
+  no cure). ITS PLAN ACCEPTED: L8 to L12 and 4c now, two builders (manifests disjoint); at 620,000 it stops building
+  and says "DAILY-3 HANDS OVER <commit>" (a successor takes rule 8 and the owner's file; seated the same hour).
+- E84 · SHARE-EMPTY-CUT MEASURED AND RULED (2026-11-22 14:17 UTC; the owner's rule of E66; a read-only helper on the line at 1ec3e81d1, and the chair's own reading
+  of 211 and 212 on `lane/veil-33-2026-11-22` at 83d236813). MEASURED: the players' page is the owner's tree with
+  flags (`PartyLinkView` to `PublicDossierView` to `OutputContainer readOnly playerView`); nothing tells
+  `OutputContainer` "party link" today (one new prop); a share has no options column, and what of
+  `gallery_member_overrides` reaches a reader is an ALLOWLIST in the veil's SQL
+  (`211 :: _gallery_veil_served`: each person's `revealDm` and `allowImport`, and the marker
+  `{ v, mode, at, groupings }`: no other key). RULED: (1) the cut is ON BY DEFAULT on the PARTY LINK only (and on
+  the owner's preview of what players see, if there is one: `publicProseEquality` must hold); the owner's dossier and
+  the gallery page untouched; (2) it is a PURE FUNCTION OF THE SERVED DOCUMENT (one helper; never the owner's
+  record, never the marker's groupings): veiled-to-nothing and never-had are cut alike: the safety claim, proven by
+  a differential arm, red first; (3) Rumors and War, whose party-link page is only their launch teaser, count as
+  empty THERE (named to the owner for his veto; X-7a and X-7c stand elsewhere); (4) THE TOGGLE IS THE READER'S: a
+  "Show empty sections" control on the page, in the browser only: NO stored field, NO migration, NOTHING added to
+  212; (5) an OWNER'S stored switch is one typed line in the veil's allowlist: a migration of his hand: offered for
+  the second deploy, not built unless he asks. THE BRIEF: `briefs/SHARE-EMPTY-CUT.md` (PAGE-13's, at its GO; tab
+  level first; sections only where the same helper decides them). TOLD TO THE OWNER in plain words the same hour.
+  It does not hold the first deploy; it is on the security reader's list.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
