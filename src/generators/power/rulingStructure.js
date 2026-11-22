@@ -11,8 +11,7 @@ import {
   applyLegitimacyMultipliers,
   computeCriminalCaptureState,
   computeFactionRelationships, boycottReadsRelation, // BAR3-POWERS (C27440)
-  computePublicLegitimacy,
-  seatHolderApartOf, // SEAT-10 U6 (CS12): the holder apart from the form, under the seat law
+  computePublicLegitimacy, seatHolderApartOf, // SEAT-10 U6 (CS12): the holder apart from the form, under the seat law (one specifier list: F31's line ceiling)
 } from '../factionDynamics.js';
 import { inferFactionCategory } from './factionCategories.js';
 import { drawCouncilOfAKind } from './rulerKin.js'; // COHERENCE-POWERS 2B
