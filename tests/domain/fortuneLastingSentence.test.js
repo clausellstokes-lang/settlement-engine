@@ -296,6 +296,45 @@ describe('U7b (b): both merits, the fixed line; the "It" opening', () => {
     expectNoSeedFailures(failures, 'the "It" opening prints only after a standing that opens on the place');
     expect([onItSeen, onPlaceSeen]).toEqual([2, 2]);
   });
+
+  it('where both merits credit but the first merit\'s sentence did not print (its event\'s stored name empty), the place takes a drawn row, not the fixed one', () => {
+    expect(FIXED).toBeTruthy();
+    const { seed, record } = /** @type {{ seed: string, record: any }} */ (SIX.find((p) => p.seed === 'visitor-village-8'));
+    // the planted record: the weathered event's stored name emptied in a copy, the merits it credits unchanged
+    const planted = structuredClone(record);
+    const original = String(/** @type {any} */ (weatheredCatastrophe(record)).name).trim();
+    /** @type {any} */ (weatheredCatastrophe(planted)).name = '';
+    expect(String(/** @type {any} */ (weatheredCatastrophe(planted)).name), seed).toBe('');
+    expect(meritsOf(planted), seed).toEqual(['weathered', 'lasting']);
+    const merited = paragraphOf(planted);
+    const place = String(planted.name).trim();
+    const slots = slotsOf(planted);
+    // not the fixed row, in either opening
+    expect(merited.includes(fill(FIXED.text, slots)) || merited.includes(onIt(fill(FIXED.text, slots))), `${seed}: ${merited}`).toBe(false);
+    // exactly one drawn row, and it is the keyed pick
+    const said = DRAWN.flatMap((/** @type {any} */ l) => { const s = fill(l.text, slots); return [s, onIt(s)]; })
+      .filter((/** @type {string} */ s) => merited.includes(s));
+    const picked = fill(/** @type {any} */ (pickVariantMixed(DRAWN, `${place}::${planted.history.age}`)).text, slots);
+    expect(said, `${seed}: ${merited}`).toHaveLength(1);
+    expect([picked, onIt(picked)].includes(said[0]), `${seed}: ${merited}`).toBe(true);
+    // in the opening the file's own rule gives: "It" only after a standing whose last sentence opens on the place
+    const { without, bare } = placementOf(planted);
+    const at = merited.indexOf(` ${said[0]}`);
+    expect(at, seed).toBeGreaterThan(0);
+    expect(merited, seed).toBe(`${without.slice(0, at)} ${said[0]}${without.slice(at)}`);
+    const span = without.length - bare.length;
+    const standing = without.slice(at - span, at).trim();
+    expect(said[0], seed).toBe(lastSentenceOf(standing).startsWith(`${place} `) ? onIt(picked) : picked);
+    // and no first-merit sentence, under the planted name or the stored one, in either band of time words
+    for (const line of FORTUNE_MERIT_LINES) {
+      for (const band of Object.values(FORTUNE_MERIT_TIME_WORDS)) {
+        for (const event of ['', original]) {
+          const s = fill(line.text, { event, place, seat: slots.seat, ...band });
+          expect(merited.includes(s.trim()), `${seed} ${line.id}: ${s}`).toBe(false);
+        }
+      }
+    }
+  });
 });
 
 describe('U7b (c): no merit, no sentence', () => {

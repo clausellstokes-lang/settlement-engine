@@ -9,9 +9,11 @@
  * `{seat}` the governing power as the paragraph carries it mid-sentence (`powerNameInProse`).
  *
  * THE FOUR ROWS (E57 amended (1)): A, B and C (`when: 'alone'`) are DRAWN where LASTING credits alone; the fixed row
- * (`when: 'both'`) prints where both merits credit, with no draw, and opens on the name, not "It", because the sentence
- * before it has the event as its subject. E57 amended (2): where LASTING credits alone and the sentence directly before
- * is one of the bare standing lines that open on the place, the drawn row opens on "It" in place of `{place}`.
+ * (`when: 'both'`) prints where both merits credit AND the first merit's sentence printed in the paragraph (the chair's
+ * ruling of 12:28 UTC 2026-11-22), with no draw, and opens on the name, not "It", because the sentence before it has the
+ * event as its subject; where both credit but that sentence did not print, the drawn rows serve, as where LASTING is
+ * alone. E57 amended (2): where a drawn row prints and the sentence directly before is one of the bare standing lines
+ * that open on the place, the drawn row opens on "It" in place of `{place}`.
  *
  * THE TIME WORDS band the record's `history.age`, never a figure: under `FORTUNE_LASTING_CENTURIES_YEARS` reads
  * `generations`, otherwise `centuries`. Every row takes the one `{span}` slot. The cut-off is a WORDING threshold, not a

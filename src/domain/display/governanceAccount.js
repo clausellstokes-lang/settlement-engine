@@ -379,6 +379,7 @@ export function governanceAccountOf(settlement, opts = {}) {
     const band = yearsAgo === null ? null
       : yearsAgo <= FORTUNE_MERIT_RECENT_YEARS ? FORTUNE_MERIT_TIME_WORDS.recent
         : yearsAgo <= FORTUNE_LAW_TUNING.standing.weatheredWithinYears ? FORTUNE_MERIT_TIME_WORDS.generation : null;
+    let meritPrinted = false;
     if (event && band) {
       const identity = `${place}::${event}::${yearsAgo}`;
       const { line } = drawDeclared(FORTUNE_MERIT_LINES, {
@@ -391,17 +392,19 @@ export function governanceAccountOf(settlement, opts = {}) {
       });
       /** @type {Record<string, string>} */
       const meritSlots = { event, place, seat: ruler, ...band };
-      if (line) sentences.push(textOf(line).replace(/\{(\w+)\}/g, (_m, k) => meritSlots[k] ?? ''));
+      if (line) { sentences.push(textOf(line).replace(/\{(\w+)\}/g, (_m, k) => meritSlots[k] ?? '')); meritPrinted = true; }
     }
     // THE LASTING REASON (FORTUNE U7b; the chair's words E57 and E57 amended, 2026-11-22, vetoable by the owner): where
     // `meritsOf` credits 'lasting', the place's age is named after the standing and after the first merit's sentence. The
     // time words band `history.age` by the pool's own `FORTUNE_LASTING_CENTURIES_YEARS`, never a figure. Where LASTING
     // credits alone, the wording is the kernel's mixed keyed pick among the drawn rows through the one door, keyed on the
     // place's name and age (both served on every shared read); where both merits credit, the one fixed row, with no draw.
+    // The chair's ruling of 12:28 UTC 2026-11-22 (U7d): the fixed row prints only where the first merit's sentence PRINTED
+    // in this paragraph; where both credit but it did not (an event whose stored name is empty), the drawn rows, as alone.
     // E57 amended (2): a drawn row opens on "It" where the standing is a bare line that opens on the place.
     const age = meritRecord.history?.age;
     if (merits.includes('lasting') && typeof age === 'number') {
-      const both = merits.includes('weathered');
+      const both = meritPrinted;
       const identity = `${place}::${age}`;
       const lasting = both ? FORTUNE_LASTING_LINES.find((l) => l.when === 'both') : drawDeclared(FORTUNE_LASTING_LINES, {
         draw: (pool) => pickVariantMixed(pool.filter((l) => l.when === 'alone'), identity),
