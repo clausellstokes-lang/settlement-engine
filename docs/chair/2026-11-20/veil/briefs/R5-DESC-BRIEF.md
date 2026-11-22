@@ -60,6 +60,19 @@ off: jp6-city-8, jp6-village-6 and two more) in the STRATA's output where the ch
 descriptions; R5-DESC's measure reads them one by one and its rule covers what the page derives from them (a page-side derivation
 that prints a served description prints what the veil served: the cure at the description is the cure there; prove it on the page).
 
+THE GOVERNMENT'S LABEL (the chair's E94, 15:34 UTC, PART 34 ruling 101; the readers' list row 19): a government's label that
+names a criminal KIND ("Shadow Senate" on a read that withholds the Thieves' Guild) is NOT a fault by the lane's law (rulings 65,
+67: the holder's existence by the mask; VR42: the kind's wording). It stays not a fault only on three conditions, all in this order:
+(a) no sentence, description, id, key or slug names or spells the house (R5-RECENT, R5-DESC, R4-IDS);
+(b) the mask's own wording is clean (this unit);
+(c) A GOVERNMENT'S LABEL IS DRAWN FROM THE KIND'S TABLE AND NEVER COMPOSED FROM THE HOUSE'S OWN NAME. THIS UNIT'S MEASURE PROVES (c)
+    by the writers (`rulingPower.js` near line 173, `rulingStructure.js` near lines 208 and 258, and EVERY OTHER writer of
+    `governingName` / `government`, found by search), and a walker or a pin holds it. A label that embeds a withheld house's name is
+    withheld-class: STOP and send it to the chair.
+Also measured here and recorded in PART 34 for the reader: whether `previousGovernments`' cause, served on a hiding read IN PLAY
+(transfers exist only in play: CLOSE-1's 900 lit births hold none), NAMES the taker. If it does, it is a composed row of this
+class: say so, and the chair rules its unit (R5-RECENT-T follows R3).
+
 ## THE RED FIRST
 `tests/security/galleryVeilDesc.pglite.test.js` (R5-RECENT's plant's harness, both engines, both stored shapes, every setting, Reveal
 off and on): PLANTS (a) a shown power's description naming a power withheld BY RULE (power.entry under a hidden criminal house);

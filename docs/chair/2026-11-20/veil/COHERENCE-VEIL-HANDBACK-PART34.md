@@ -221,6 +221,18 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
     repair and never re-settled. VEIL-33's line 15:31: `governingName` "Shadow Senate" IS served on jp6-metropolis-0's hiding read
     (the governance sentence) and is the criminal taker's own label (`rulingPower.js:173`): a VR42 question, the chair's;
     `previousGovernments`' cause on that read NOT KNOWN.
+101. THE CHAIR TO VEIL-33, 15:34 UTC (E94), THE VR42 QUESTION UNDER THE LIT LAW, with CLOSE-1's count (900 lit births, 150 a
+    size: every stored `recentConflict` is the baseline's, none a transfer's; `previousGovernments` empty on all; no birth has a
+    criminal taker; a transfer, and act K's case, exist ONLY IN PLAY): (1) R5-RECENT-T FOLLOWS R3. (2) THE LABEL STANDS by the
+    lane's own law, nothing new built: a shared read discloses a hidden holder's EXISTENCE (the mask, rulings 65/67) and a
+    governing body's criminal KIND (VR42); the veil protects the house's IDENTITY. "Lincheng is governed by the Shadow Senate" on a
+    read withholding the Thieves' Guild is NOT a fault, ON THREE CONDITIONS: (a) nothing names or spells the house (R5-RECENT,
+    R5-DESC, R4-IDS); (b) the mask's wording clean (R5-DESC); (c) a government's label drawn from the kind's table and NEVER
+    composed from the house's own name: R5-DESC's measure proves it by every writer of `governingName`, a walker or pin holds it;
+    a label embedding a withheld house's name is withheld-class and goes back to the chair. (3) The two NOT KNOWNs stay on the
+    reader's list (row 19), this ruling beside them: the fold's hit on "The Shadow Compact"'s bare form; and `previousGovernments`'
+    cause on a hiding read in play (IF IT NAMES THE TAKER: a composed row of R5-DESC's class, for the successor). R5-DESC's brief
+    carries (c) and the cause question.
 
 ## 3. Log (every hour from `date -u`)
 - 08:05 seated; the assignment read (853ccbfa2 ancestor of the fetched chair branch). 08:06 chain0 launched.
@@ -242,3 +254,4 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
 - 15:10 the gates at 83d236813 read (equal). R5C's STOP read; pushed `-wip`; 15:11 the (H) line and the STOP with the recommendation to the chair.
 - 15:13 push of 8a54f10d5. 15:16 the chair's E92 (ruling 99) read; 15:17 the contenders answered; the brief's E92 section 42640f37d; R5C2 seated; section 1 written for the hand-over.
 - 15:19 push of de8959b0f landed. 15:28 R5C2's STOP read and sent; ac809527e pushed (-r5cure-wip). 15:29 E93 (ruling 100); 15:30 the brief's E93 section edf115e09; 15:31 R5C2 resumed; the chair's one line answered.
+- 15:32 R5C2 STOPPED at its own mark before the first edit (8d6643a10); V33-R5C3 seated fresh on v33-r5cure. 15:34 the chair's E94 (ruling 101); R5-DESC's brief gains (c) and the cause question.
