@@ -39,3 +39,32 @@ failure falls toward WITHHOLDING, never toward sending. Runs AFTER R3-CURE-8's m
 ## Your hand-back
 `docs/chair/2026-11-20/veil/out/v27/door/DOOR-HANDBACK.md`: STOPS first; units with red and green files; CONFIRMED vs
 PLAUSIBLE. Last line: commits, files, 212's sha256.
+
+## RE-STAMP (VEIL-35, chain B, E116; written 20:15 UTC 2026-11-22 at 3712b2469, 212 `0352a502…`; NOTHING of 212 written)
+THE ORDER: IMPORT-DOOR NEVER MERGES BEFORE R4-IDS (E116: its census must see the re-keyed body); it is BUILT after "R4-IDS MERGED",
+on its own -wip branch, by the two-builder split (one builder edits 212, the rollback, the registry by its door and the hashes and
+NOTHING ELSE, reading 212 and the registry WHOLE as its first act; a second builds the walker, the pins and the proofs and touches
+none of those) and the same "TIP?". "Where you work" above is SUPERSEDED: worktree and branch names come from the seat's brief.
+1. THE DOOR CENSUS AT TODAY'S 212: no `create or replace function`, `grant` or `revoke` line differs between decc8c9e7 (the census's
+   tree) and 632968087 in `supabase/` (126 changed lines, every one inside 212's helper bodies: R3-TELL-5b..8). `out/v27/imp/fn-census.txt`
+   STANDS AS THE LIST (28 definer rows; VEIL on `get_gallery_dossier`, `get_unlisted_dossier`, `import_gallery_dossier` (212) and
+   `get_gallery_map` (211); `get_unlisted_map` (168) and `import_gallery_map` (072) unveiled). R4-IDS restates the three 212 reads
+   VOLATILE (the salt): the census is re-run on the merged tip before unit 1's walker is written.
+2. THE DOORS-3 HUNKS (`lane/veil-doors-3-2026-11-20` at 3e1115c81; its 212 `8773ece9…`), ONE BY ONE. Its 212 restates THREE OF THIS UNIT'S
+   FOUR FUNCTIONS: `_gallery_public_tile_rows`, `get_gallery_map`, `get_unlisted_map`, with eleven helpers (`_gallery_doors_band`,
+   `_chronicle`, `_chronicle_classes`, `_closed`, `_names`, `_squeeze`, `_tile`, `_tiles`, `_time`, `_world`, `_world_sections`);
+   `import_gallery_map` is NOT in it. Its commits on 212's text: 04704a660 (VEIL-DOORS: the chronicle, the tiles, a map's member; V10-1,
+   V10-3, V10-4); 297996d6a (the one-row dossier read); eafece56a (the event-type table; the log's own unshown names); 3a57e3a0c
+   (snapshot mode: a frozen share's chronicle, name, tier and time); 447809df0 (VR40: a shared map's world sends no chronicle;
+   `get_unlisted_map` restated, `_doors_world`, `_doors_world_sections`; the rollback with it); 8af1cb703 (a crime's stressor withheld
+   by its label). And its hand-back section 7: TWO one-line hunks in `import_gallery_dossier` (`name`, `tier` from the frozen copy in
+   snapshot mode), left for the lane's owner. THE QUESTION (to the chair, not ruled here): this unit and the doors' merge would each
+   restate the same three functions.
+3. THE TRAD-4 PIN (14f16760b, `tests/security/traditionDescriptionSharedPage.test.js`, block "TRAD-4 UNIT 8", lines 937-1139): the file
+   is NOT on the lane, and the block imports three modules the lane lacks (`src/domain/traditions/traditionDescription.js`,
+   `shownTraditions.js`, `src/data/traditionDescriptionTable.js :: KEEPER_HOUSES`). THE RE-CUT takes only the round trip (pipeline,
+   save, the served read through PGlite 211 + 212, `src/store/galleryImportSettlement.js :: importGallerySettlementImpl` with
+   `src/lib/gallery.js :: fetchDossierForImport`, the clone) and the "clone rows equal the served rows" arm, as a NEW file, marked and
+   unmarked, Reveal off and on; the tradition rows and the KEEPER_HOUSES plant are DROPPED (said in the file's header). After R4-IDS an
+   import's person ids are a fresh read's: the pin compares MODULO THE READ'S PERSON-ID BIJECTION
+   (`tests/security/personIdBijection.shared.mjs`), never by raw id.
