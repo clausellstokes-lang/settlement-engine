@@ -282,7 +282,7 @@ export function chooseSeats(rng, ordered, factionCount, doubledNiches, limits = 
   // COHERENCE-POWERS-3: the crisis's own power stands second (rollDensityPlan's `crisisSeatKeys`)
   if (limits.crisisSeatKey) seat(ordered.find(p => p.key === limits.crisisSeatKey));
   if (rival.taken) seat(ordered.find(p => p.key === rival.candidateKey));
-  for (const p of ordered) seat(p); seatCrisisBodies(seated, taken, ordered, ruling, limits, Math.max(1 + (limits.crisisPowerGroups || []).length, Math.min(ceiling, Math.max(1, num(limits.bandSeatMax, cap))) - doubledBudget)); // U8 (E100): the room the ceiling and the band leave, never under the ruling power and one seat a crisis (at the file's end)
+  for (const p of ordered) seat(p); seatCrisisBodies(seated, taken, ordered, ruling, limits, Math.max(2, Math.min(ceiling, Math.max(1, num(limits.bandSeatMax, cap))) - doubledBudget)); // U8 (E100): the room the ceiling and the band leave, never under two, the ruling power and the crisis's (at the file's end)
 
   // Doubled niches (R4). Only powers already seated can have their niche
   // contested — a doubled niche is TWO claimants on ONE seat, not a back door
@@ -649,10 +649,11 @@ export function rollDensityPlan(input) {
  * planFor) and the seats the roll chose hold none of them, the strongest of that crisis's powers is seated BY RULE, not
  * by the draw: it takes the rival seat (after the ruling power and the crisis seat), whatever its rank beside the
  * ruling power. It takes a seat of its own where the mass ceiling and the band (its rival bonus seat included) leave
- * room (`room`, the distinct seats they allow, never under the ruling power and one seat a crisis: for one crisis the
- * floor of two the crisis seat's own mark already takes, so a one-card thorp in crisis shows its two); otherwise it takes the seat of
+ * room (`room`, the distinct seats they allow, never under two: the ruling power and the crisis's, the floor the
+ * crisis seat's own mark already takes, so a one-card thorp in crisis shows its two); otherwise it takes the seat of
  * the weakest drawn power that is neither the ruling power, the crisis seat, nor any crisis's own. A crisis already
- * holding a seat changes nothing.
+ * holding a seat changes nothing, and no crisis's body is unseated for another's: where every seat but the ruler's is
+ * already a crisis's, a second crisis takes none (a thorp's two hold one crisis).
  * ⛔ NO DRAW: it reads only the seats chosen and the powers' order, so every stream stays where it was.
  * Kept at the file's end so no cited line above it moves. Mutates `seated` and `taken`.
  * @param {DensityPower[]} seated @param {Set<string>} taken @param {DensityPower[]} ordered

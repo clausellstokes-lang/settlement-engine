@@ -659,8 +659,22 @@ export function isCrisisOwnPower(stress, seat) {
 }
 
 /**
- * The plan's crisis groups: one group of seat keys per active crisis (in the record's stress order) with a power of
- * its own on the roster, under the fortune law and outside re-derivation; else nothing. Pure.
+ * The order the page STATES a place's crises in: power/governanceNarrative.js :: applyStressStability's arms, so the
+ * stability line names the first of a record's crises on this list. Where the room holds one crisis's body and the
+ * place carries two, the crisis the page states is seated first. Mirrors those arms; the guard's pin reads the arms'
+ * order from the source and holds the two equal (tests/generators/people/dualHatPoliticalMass.test.js).
+ */
+export const STATED_CRISIS_ORDER = Object.freeze(['under_siege', 'occupied', 'politically_fractured', 'recently_betrayed', 'famine',
+  'plague_onset', 'succession_void', 'indebted', 'monster_pressure', 'insurgency', 'mass_migration', 'wartime',
+  'religious_conversion', 'slave_revolt', 'infiltrated']);
+
+/** @param {string} type @returns {number} the crisis's place in the stated order (an unknown crisis last) */
+const statedRank = (type) => { const at = STATED_CRISIS_ORDER.indexOf(type); return at < 0 ? STATED_CRISIS_ORDER.length : at; };
+
+/**
+ * The plan's crisis groups: one group of seat keys per active crisis (in the order the page states them,
+ * `STATED_CRISIS_ORDER`) with a power of its own on the roster, under the fortune law and outside re-derivation; else
+ * nothing. Pure.
  * @param {{ config?: Record<string, unknown>, stress?: unknown, powerStructure?: {factions?: Array<Record<string, unknown>>}|null }} input
  * @param {{ seatAll?: boolean }} mode
  * @returns {{ crisisPowerGroups?: string[][] }}
@@ -670,7 +684,7 @@ function crisisBodiesOf(input, mode) {
   if (!isSizeRelativeFortune(config) || mode.seatAll) return {};
   const seats = input.powerStructure?.factions || [];
   return {
-    crisisPowerGroups: stressTypesOf(config, input.stress)
+    crisisPowerGroups: [...stressTypesOf(config, input.stress)].sort((a, b) => statedRank(a) - statedRank(b))
       .map((type) => seats.filter((seat) => isCrisisOwnPower(type, seat)).map(seatKey))
       .filter((keys) => keys.length > 0),
   };

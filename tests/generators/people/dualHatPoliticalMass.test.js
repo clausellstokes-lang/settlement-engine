@@ -13,7 +13,8 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
 import { seatFacesFoldedByDualHat } from '../../../src/generators/people/representatives.js';
-import { isCrisisOwnPower } from '../../../src/generators/density/applyDensityLaw.js';
+import { readFileSync } from 'node:fs';
+import { STATED_CRISIS_ORDER, isCrisisOwnPower } from '../../../src/generators/density/applyDensityLaw.js';
 import { STRESS_POWER_FACES } from '../../../src/data/stressPowerFaces.js';
 import { membersByRank } from '../../../src/domain/people/membership.js';
 import { leaderlessLineOf } from '../../../src/domain/people/stressPowerFaces.js';
@@ -66,13 +67,20 @@ describe('COHERENCE-POWERS-3 F1 — the dual hat does not shrink a place\'s poli
     expect(misses).toEqual([]);
   }, 120_000);
 
-  // U8, THE PIN (c): under the fortune law every crisis a place states (its banner; the stability line names it) holds a
+  // U8, THE PIN (c): under the fortune law the crisis a place's stability line states (the first of its crises in
+  // power/governanceNarrative.js :: applyStressStability's order, applyDensityLaw.js :: STATED_CRISIS_ORDER) holds a
   // power of its own on the roster (applyDensityLaw.js :: isCrisisOwnPower), and that power its body in the cast: a card
   // of its own or its declared leaderless line (domain/people/stressPowerFaces.js :: leaderlessLineOf). RED FIRST at
   // 2689a1551: most small places in crisis held no power of it lit (measures/u8/crisis-body.mjs: 130 of 150 thorps). The
   // births are the measure's (`u8-<crisis>-<size>-<i>`, the crisis forced alone; the dials may add another), two a crisis
   // a size, on the law's explicit arm. Dark is not pinned: the rule is the fortune law's alone.
-  it('under the fortune law, every crisis a place states has a power of its own on the roster and a body in the cast (U8)', () => {
+  it('the stated order is the stability line\'s own: applyStressStability\'s arms, read from the source (U8)', () => {
+    const src = readFileSync(new URL('../../../src/generators/power/governanceNarrative.js', import.meta.url), 'utf8');
+    const body = src.slice(src.indexOf('const applyStressStability'), src.indexOf('const annotateMonsterThreat'));
+    expect([...body.matchAll(/hasStress\('([a-z_]+)'\)/g)].map((m) => m[1]).filter((t, i, all) => all.indexOf(t) === i)).toEqual([...STATED_CRISIS_ORDER]);
+  });
+
+  it('under the fortune law, the crisis a place states has a power of its own on the roster and a body in the cast (U8)', () => {
     const crises = [...new Set(STRESS_POWER_FACES.map((row) => row.stress)), 'indebted', 'recently_betrayed', 'infiltrated', 'mass_migration', 'slave_revolt'];
     const faults = [];
     let stated = 0;
@@ -83,7 +91,7 @@ describe('COHERENCE-POWERS-3 F1 — the dual hat does not shrink a place\'s poli
       const factions = s.powerStructure?.factions || [];
       const types = [...new Set((Array.isArray(s.stress) ? s.stress : [s.stress]).map((x) => x?.type).filter(Boolean))];
       if (typeof s.powerStructure?.stability !== 'string') faults.push(`${seed}: no stability line`);
-      for (const type of types) {
+      for (const type of STATED_CRISIS_ORDER.filter((t) => types.includes(t)).slice(0, 1)) {
         stated += 1;
         const own = factions.filter((f) => isCrisisOwnPower(type, f));
         if (!own.length) { faults.push(`${seed}: ${type} is stated ("${s.powerStructure?.stability}") with no power of it (${factions.map((f) => f.faction).join(', ')})`); continue; }
@@ -91,7 +99,7 @@ describe('COHERENCE-POWERS-3 F1 — the dual hat does not shrink a place\'s poli
       }
     }
     expect(faults).toEqual([]);
-    expect(stated, 'anchored: the corpus states its crises (fifteen crises, six sizes, two seeds)').toBeGreaterThanOrEqual(180);
+    expect(stated, 'anchored: every birth states a crisis (fifteen crises, six sizes, two seeds)').toBe(180);
   }, 300_000);
 
   it('the office and the house count as two where the cast folded them, once where it did not', () => {
