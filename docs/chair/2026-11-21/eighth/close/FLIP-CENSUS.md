@@ -115,3 +115,15 @@ bar then does not show the ruling power at all. By lane list: FORTUNE 6, JOIN 6,
 sentence (`governanceNarrative.js :: buildGovernanceLabels`); 0 store a transfer's (`rulingPower.js ::
 transferRulingPower`'s wordings, `holderOfSeat.js :: TRANSFER_WORDINGS`); `previousGovernments` is empty on all 900. So
 AT BIRTH no transfer sentence exists to withhold, criminal taker or not: a transfer's sentence is written only in play.
+
+### The veil's second count (15:3x UTC): of the 900 baseline sentences, 10 NAME a criminal-category power (town 8,
+metropolis 2): every one names the place's own governing "Corrupt Council" (`census/rc-count.mjs`).
+
+## THE SUMMARY'S POWER BAR (the chair's page question, three facts; `census/bar-count.mjs`, dark a349917e7 / lit e987c3e36)
+(c) `src/components/new/SummaryTab.jsx`: the tab's `allFactions = ps?.factions || []`, `FactionBar powers={allFactions.slice(0,5)}`
+(the STORED order, not a sort by power); the mark is `FactionBar`'s legend `mods` (the governing ROW's modifier words
+only; the holder is never marked). (a) r2r-city-56 lit: holder Merchant Guilds (R3) first, unmarked; the governing row
+(Merchant Guild Council) at index 6, out of the five. (b) over the 900 visitor births, lit (dark): governing row outside
+the five: city 2 (0), metropolis 2 (1); holder outside: city 2 (2), metropolis 21 (20); NEITHER in the five: city 1 (0),
+metropolis 1 (1); holder a different row from the governing row: hamlet 8 (8), village 37 (33), town 109 (110), city 124
+(124), metropolis 122 (122); every other cell 0.
