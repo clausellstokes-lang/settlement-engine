@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "348773a4f3a6fbf013f1659dceb9ffdef7569983",
+  "measuredAtSha": "99c9b5ff00aa22e7860aa716d6ecab8d4a553bcc",
   "measuredBy": "DAILY-3",
   "date": "2026-11-22",
-  "note": "DAILY-3's B3 F1: new test titles in dailyLifeFoodResentments and dailyLifeOwnerSlot",
-  "files": 3753,
-  "parked": 480,
+  "note": "DAILY-3's B3 E3: tests/domain/dailyLifeOutsiderUnspokenRecent.test.js added",
+  "files": 3754,
+  "parked": 481,
   "credited": 3273,
-  "titles": 31671,
+  "titles": 31672,
   "suiteTitles": 8785
 }
