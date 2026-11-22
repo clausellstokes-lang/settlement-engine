@@ -36,12 +36,8 @@ import { recordProposalProvenance } from './provenanceKernel.js';
 import { isStateOnlyOutcome, isSuppressionOnlyOutcome, proposalRequiresRecordModeSupersession, RECORD_MODE_PROPOSAL_VERSION } from './pulseHelpers.js';
 import { wallClockNow } from '../clock.js';
 import { isDriftOnlyOutcome, isMetronomeRepeat, newsEntryForOutcome, reconcileSupersededProposalNews, stateOnlyRumorSeedsFromHistory } from './worldPulseFeedCuration.js';
-import {
-  authorityTransferEpochFor,
-  governingFactionOf,
-  nameOf,
-  transferRulingPower,
-} from '../rulingPower.js';
+import { authorityTransferEpochFor, governingFactionOf, nameOf, transferRulingPower } from '../rulingPower.js';
+import { seatCircumstancesOf } from '../seat/seatCircumstances.js';
 import { isBilateralPeaceOffer, readWarPeaceDecision } from './warPeaceDecision.js';
 import { applyWarPeaceRefusal } from './warPeaceRefusal.js';
 import { applyWarDecisionPolitics, warDemandForInstaller } from './warPoliticalLoop.js';
@@ -179,10 +175,15 @@ function applyOutcomeToSettlement(/** @type {any} */ settlement, /** @type {any}
       // win the size ratchet banks rather than spends.
       next = withActiveCondition(next, conquestExtractionCondition(outcome.powerTransfer, outcome.severity, saveId));
     }
-    const result = transferRulingPower(liftOccupationAuthority(next, outcome.powerTransfer), outcome.powerTransfer.toPowerName, {
+    // U5-CURE2 (the chair 19:19Z/19:34Z): the seat's circumstances are handed in as a thunk of
+    // the settlement handed to the transfer, read only under the seat law and only for a
+    // licensed pair (`seat/seatCircumstances.js`). Hoisting it adds no outcome read.
+    const handed = liftOccupationAuthority(next, outcome.powerTransfer);
+    const result = transferRulingPower(handed, outcome.powerTransfer.toPowerName, {
       cause: outcome.powerTransfer.cause || 'coup',
       tick: outcome.powerTransfer.tick ?? null,
       losers: outcome.powerTransfer.losers || [],
+      seatCircumstances: () => seatCircumstancesOf(handed),
     });
     if (!result.error) next = result.settlement;
   }
