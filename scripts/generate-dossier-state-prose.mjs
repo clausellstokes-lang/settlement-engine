@@ -609,8 +609,13 @@ const WORD_CORRECTIONS = Object.freeze([
   { pool: 'DS-ECO-8 :: PROSPEROUS', vid: 7, from: '68d8269711c72f99fab0db5311cdcbfdebef5531c3bceca53d09c74aa9687ea0', to: 'a6db5e16c25ce8870a9a1699e8801e2d473be6f487d862e3740dde2204c74397', ruling: 'POINT89-CHAIR-2026-11-22' },
   { pool: 'DS-GEN-13 :: NO-MARKET', vid: 12, from: 'aa699fd8f0ba666bb491464d98ba96f23f8b4d68a80f0e4c0084933a5108b7d6', to: '895382b92022c26a53aaabed4b71ffd26279f589338925cf7e06199fc894dd25', ruling: 'POINT89-CHAIR-2026-11-22' },
   { pool: 'DS-GEN-13 :: NO-MARKET', vid: 9, from: 'ed9b87202d6238bfa3ea617f4cd0a3021c32b99fefc78f8cdd50588b12098cf1', to: 'a45295d9e4755046ed06108e8441ccf11d43ec2b14341d85babc74403d1db582', ruling: 'POINT89-CHAIR-2026-11-22' },
-  // POINT89-CHAIR-2026-11-22-V6 (the chair's ruling with v6's whole text in hand): DS-ECO-11 worked-out v6, the same plural-resource fault
-  { pool: 'DS-ECO-11 :: RESOURCE CONDITION: worked out, recovers in time', vid: 6, from: 'f745a2b64d58f148a15563dcdfdf61ca42ec3a4f2817aba09771fea9930fd8cc', to: '380eb0312783557f003986a31072e8bd7ea0566e8e4d343f00464e683cebdf29', ruling: 'POINT89-CHAIR-2026-11-22-V6' },
+  // POINT89-CHAIR-2026-11-22-V6 (the chair's ruling with v6's whole text in hand): DS-ECO-11 worked-out v6, the same plural-resource fault,
+  // projected at 9ae014014 (f745a2b6... -> 380eb031...). Then E60-CHAIR-2026-11-22 (the chair's ruling of 08:38 UTC): v6 re-read,
+  // "Nothing more can be taken from the {resource} at {settlement} until what was taken has had time to come back." One clause
+  // (OBJECT), so the pool has two grammars again and leaves THIN; no "; ..." afterthought, no bare future. The row's `from` is
+  // now the leaf's committed point-94 text (380eb031..., the row the projector's refusal printed, as 9ae014014 routed it), not
+  // the pre-point-94 f745a2b6...: the guard compares the committed leaf to the new words, and a kept `from` never matched.
+  { pool: 'DS-ECO-11 :: RESOURCE CONDITION: worked out, recovers in time', vid: 6, from: '380eb0312783557f003986a31072e8bd7ea0566e8e4d343f00464e683cebdf29', to: 'dbe3f72a346e9e0df829e01c2440e113d0cdc95612558fa17721d60b22433a23', ruling: 'E60-CHAIR-2026-11-22' },
 ]);
 
 async function readNumberingBaseline() {

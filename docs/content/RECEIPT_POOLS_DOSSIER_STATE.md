@@ -1780,7 +1780,7 @@ their surface does render.
 3. `[visitor · colour]` A visitor finds little being taken from the {resource} around {settlement}: what was there has been worked out.
 4. `[unfolding · colour]` Little is being taken from the {resource} at {settlement} now, and what was taken is coming back on its own, in its own time.
 5. `[counterforce · colour]` Nobody at {settlement} needs to spend labour or money to bring the {resource} back; left alone, it returns.
-6. `[threshold · colour]` Nothing more can be taken from the {resource} at {settlement} for the present, but not for good; given time, there will be something to take again.
+6. `[threshold · colour]` Nothing more can be taken from the {resource} at {settlement} until what was taken has had time to come back.
 
 **RESOURCE CONDITION: worked out, recovers only with work** *(condition `depleted`, recoveryMode `manual`)*
 1. `[ledger · colour]` {settlement} has worked out its {resource}, and it will not come back on its own: someone has to put labour and money into it before it yields again.
