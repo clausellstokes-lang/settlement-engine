@@ -1198,7 +1198,7 @@ export const HISTORICAL_EVENTS_DATA = [
     // TAIL-HISTORY Y13 (the chair's ruling, 2026-11-15: Y5 widened to every type; READ-ALL's aftermath shape): the words where the timeline holds no event of this type (historyGenerator.js :: tensionByMemory): a live quarrel, present tense, no past event (VETOABLE wording, the owner's)
     byMemory: { unanchored: { description: 'Guild and non-guild traders are fighting over who may sell what, and over a say in how the place is run',
         factions: ['Guild members', 'Those who would trade outside the guild', 'Non-guild workers'],
-        plotHooks: [{ text: "A guild master's records have gone missing ahead of an audit", needs: ['guild'] }, { text: 'A journeyman denied mastership has proof the exam was rigged', needs: ['guild'] }, { text: 'Someone is sabotaging both sides to destabilize the market for a third party', needs: ['market', 'guild'] }] } },
+      } }, // HOOKS-BUILD (PAGE-7, 2026-11-20): the hook copy went; a tension's hooks are the kind's pool (troubleHooks.js), line for line so no cited line moves
     severity: ['minor', 'major'],
   },
   {
@@ -1213,6 +1213,7 @@ export const HISTORICAL_EVENTS_DATA = [
       { text: 'The threat is being exaggerated by someone who profits from wartime contracts', excludes: ['war: peace'] }, // TAIL-HISTORY batch 1 (the chair's Y1; READ-ALL 22261, 02538, B02462): a war's words, where a war is in force
       { text: 'A diplomatic channel exists that the war party is suppressing', excludes: ['war: peace'] }, // TAIL-HISTORY batch 1 (the chair's Y1; READ-ALL 22261, 02538, B02462): a war's words, where a war is in force
       'The threat has an agent already inside the settlement',
+      'Someone has been testing how quickly the place answers an alarm, and nobody ordered a drill', // HOOKS-FINISH (the chair's ruling (i), 20:49 UTC 2026-11-20): ONE line the timeline's event can say at peace (pool dominance); the loop (generateEventNarrative) re-reads the list's length, so a fourth row adds no roll and a fifth would: no template's hook list grows past four rows
     ],
     // TAIL-HISTORY Y13 (the chair's ruling, 2026-11-15: Y5 widened to every type; READ-ALL's aftermath shape): the words where the timeline holds no event of this type (historyGenerator.js :: tensionByMemory): a live quarrel, present tense, no past event (VETOABLE wording, the owner's)
     byMemory: { unanchored: { description: 'News of approaching danger divides the community on how to respond' } },
@@ -1252,7 +1253,7 @@ export const HISTORICAL_EVENTS_DATA = [
     // TAIL-HISTORY Y13 (the chair's ruling, 2026-11-15: Y5 widened to every type; READ-ALL's aftermath shape): the words where the timeline holds no event of this type (historyGenerator.js :: tensionByMemory): a live quarrel, present tense, no past event (VETOABLE wording, the owner's)
     byMemory: { unanchored: { description: 'Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands',
         factions: ['Official guards', 'Those who would take the law into their own hands', 'Criminal organisations'],
-        plotHooks: ['The crime wave is coordinated. Someone is directing it to create a pretext', { text: 'A guard captain is on the payroll of the criminal network', needs: ['watch'] }, 'Those who would take the law into their own hands have picked out a culprit on bad information'] } },
+      } }, // HOOKS-BUILD (PAGE-7, 2026-11-20): the hook copy went; a tension's hooks are the kind's pool (troubleHooks.js), line for line so no cited line moves
     severity: ['minor', 'major'],
   },
   {
@@ -1758,6 +1759,27 @@ export const tensionDescription = (tension, config) => {
  * @param {string} type @returns {ReadonlyArray<string>}
  */
 export const historyDescVariantsOf = (type) => HISTORY_DESC_VARIANTS[type] || [];
+
+/**
+ * PAGE-2 T1 (2026-11-20; brief docs/chair/2026-11-20/content/page/briefs/T1.md): A TENSION'S SPARE WORDINGS, USED ALWAYS. A
+ * live tension's description (`tensionDescription`) where it is not its template's own canonical sentence (the memory
+ * words `historyGenerator.js :: tensionByMemory` set, a sentence the selection wrote for the town, a kind keyed by
+ * migration direction); where it IS the canonical, one of the canonical and its spares (historyDescVariants.js), chosen
+ * by `pickVariant` on `${config._seed}::tension::${type}`: ZERO draws, canonical-at-zero, a falsy seed keeps the
+ * canonical. The legitimacy tension keeps its canonical: the record reads that sentence against the seat by its words
+ * (`LEGITIMACY_HELD_TWINS`), and its spares have no twin. The chosen form takes the canonical's path after it
+ * (sizedHistoryText, substituteNames, renderHistoryTemplate, apartFromOwnEvent).
+ * @param {{type?: string, description: string, descriptionByDirection?: {arrivals: string, departures: string}}} tension
+ * @param {unknown} config @returns {string}
+ */
+export const tensionWording = (tension, config) => {
+  const said = tensionDescription(tension, config);
+  const type = String(tension?.type ?? '');
+  const canonical = HISTORICAL_EVENTS_DATA.find((e) => e.type === type)?.description;
+  const seed = /** @type {{_seed?: unknown} | null | undefined} */ (config)?._seed;
+  if (!seed || tension?.descriptionByDirection || said !== canonical || canonical in LEGITIMACY_HELD_TWINS) return said;
+  return pickVariant([canonical, ...historyDescVariantsOf(type)], `${seed}::tension::${type}`);
+};
 
 export const historyDescription = (eventTemplate, seed) => {
   const variants = HISTORY_DESC_VARIANTS[eventTemplate.type];

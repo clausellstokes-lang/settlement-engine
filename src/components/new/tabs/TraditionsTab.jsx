@@ -21,11 +21,10 @@
  */
 
 import { useMemo } from 'react';
-import { deriveFoundingTraditions, describeTraditionWindow, motifGlyph } from '../../../domain/traditions/genesis.js';
-import { mergeCustomFoundingTraditions } from '../../../domain/traditions/customFounding.js';
-import { TRADITION_ELEMENTS } from '../../../data/traditionCorpus.js';
-import { filterDeclared } from '../../../domain/facts/drawDeclared.js';
-import { factsOf } from '../../../domain/facts/factsOf.js';
+import { motifGlyph } from '../../../domain/traditions/genesis.js';
+import { shownTraditionsOf, sameWindowPlan, calendarLineOf, motifChipOf, descriptionSetOf } from '../../../domain/traditions/shownTraditions.js';
+import { describeTradition } from '../../../domain/traditions/traditionDescription.js';
+import { publicProseOf } from '../../../domain/display/publicProse.js';
 import { useStore } from '../../../store/index.js';
 import {
   BODY, BORDER, CARD, FS, GOLD, INK, MUTED, SECOND, sans,
@@ -39,42 +38,11 @@ const OUTCOME_LABEL = {
   troubled: 'a troubled year', failure: 'a failure', cancelled: 'set aside',
 };
 
-/** Humanize a motif id ("the-dead" → "The Dead", "long-sun" → "Long Sun"). */
-function humanizeMotif(id) {
-  return String(id || '')
-    .split('-')
-    .map((w) => (w ? w[0].toUpperCase() + w.slice(1) : w))
-    .join(' ');
-}
-
-/**
- * For each tradition whose window phrase an earlier one on the tab already printed: the NEAREST
- * earlier tradition's name in that window, keyed by the later one's id. Render order is the list's
- * order. Nearest, not first (RUNG-2 LANDING phase C unit 3, rung 2E's X-50 in soak1k-5255 and
- * -5441): with three in one window, naming the first printed the same sentence on the second and
- * the third card; each now names the one before it, so every line prints once and stays true.
- * @param {ReadonlyArray<any> | null | undefined} traditions @returns {Map<string, string>}
- */
-function sameWindowPlan(traditions) {
-  /** @type {Map<string, string>} */
-  const plan = new Map();
-  /** @type {Map<string, string>} */
-  const lastBy = new Map();
-  for (const rec of Array.isArray(traditions) ? traditions : []) {
-    const phrase = describeTraditionWindow(rec?.window);
-    const name = String(rec?.name ?? '');
-    const prev = lastBy.get(phrase);
-    if (prev) plan.set(rec.id, prev);
-    if (name || prev === undefined) lastBy.set(phrase, name);
-  }
-  return plan;
-}
-
 /** A tradition row: motif glyph, name, motif element, window phrase, and (engine mode
  *  only) owner, last outcome and provenance. Exported for the dossier search (W2-SEARCH U2).
  *  `sameWindowAs` (the tab's plan, X-50 F2 REPEAT-ONCE): the name of an earlier tradition on
  *  the tab kept in the same weeks; the calendar line then names it instead of repeating. */
-export function TraditionRow({ rec, preview, sameWindowAs = null }) {
+export function TraditionRow({ rec, preview, sameWindowAs = null, description = '', calendarLine = null }) {
   // THE PHONE PROSE FLOOR — the window phrase and the provenance line. The name,
   // the motif chip and the owner/outcome pair keep their own steps.
   const mobile = useIsMobile();
@@ -93,10 +61,8 @@ export function TraditionRow({ rec, preview, sameWindowAs = null }) {
     : ((preview && !rec.custom) ? null : (rec.expression?.epithet || null));
   // The motif chip names the ELEMENT; the act is printed only when the name does not
   // already end in it (every generated name does; an authored one may not).
-  const element = humanizeMotif(rec.coreMotif?.element);
-  const act = humanizeMotif(rec.coreMotif?.act);
-  const actInName = !act || String(rec.name || '').toLowerCase().includes(act.toLowerCase());
-  const motifChip = [element, actInName ? '' : act].filter(Boolean).join(' · ');
+  // A shared-page row (CTR9) carries its chip as the owner's save drew it.
+  const motifChip = typeof rec.chip === 'string' ? rec.chip : motifChipOf(rec);
   // Rule-framed plate (the composite kill-list reconciliation): the card and its
   // motif stamp fell to the flat idiom — radius struck, the gold tinted wash now a
   // gold-ruled ink stamp (the ResumeChip precedent). The motif tooltip is struck
@@ -124,10 +90,15 @@ export function TraditionRow({ rec, preview, sameWindowAs = null }) {
         </span>
       </div>
       <div style={{ marginTop: 5, color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5 }}>
-        {sameWindowAs
-          ? <>Kept in the same {(Number(rec.window?.weeks) || 1) >= 2 ? 'weeks' : 'week'} as {sameWindowAs}.</>
-          : <>Kept in {describeTraditionWindow(rec.window)}.</>}
+        {calendarLine ?? calendarLineOf(rec, sameWindowAs)}
       </div>
+      {/* THE DESCRIPTION (TRAD-1): two or three plain sentences from the town's own record
+          (domain/traditions/traditionDescription.js), composed for this page's audience. */}
+      {description && (
+        <p data-testid="tradition-description" style={{ margin: '5px 0 0', color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5 }}>
+          {description}
+        </p>
+      )}
       {!preview && (
         <div style={{ marginTop: 6, display: 'flex', gap: 14, flexWrap: 'wrap', color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 750 }}>
           <span>Owner: <MentionText text={owner} structural /></span>
@@ -143,63 +114,64 @@ export function TraditionRow({ rec, preview, sameWindowAs = null }) {
   );
 }
 
-/**
- * @param {{ settlement: any, saveId?: string|null }} props
- */
-/** element id → the facts it declares (`traditionCorpus.js :: TRADITION_ELEMENTS`' `needs`). */
-const ELEMENT_NEEDS = new Map(TRADITION_ELEMENTS.filter((e) => Array.isArray(e.needs) && e.needs.length).map((e) => [e.id, e.needs]));
-/**
- * act id → the facts it declares. A FAIR IS KEPT WHERE THERE IS A MARKET (NOLANE-2, BAR-169/170: 65 of 278 births printed
- * a "… Fair" tradition beside the Overview's own "No market or fair stands"): the act `fair` presumes the market the
- * Overview's market line reads (`market`, the vocabulary's market atom, facts/market.js), as the Market element does. Kind A,
- * display only: a filter over the list; genesis reads no declaration and the record is untouched.
- */
-const ACT_NEEDS = new Map([['fair', ['market']]]);
-/** the facts a generated tradition's motif declares: its element's, and its act's. */
-function motifNeeds(rec) {
-  return [...new Set([...(ELEMENT_NEEDS.get(rec?.coreMotif?.element) || []), ...(ACT_NEEDS.get(rec?.coreMotif?.act) || [])])];
+/** A row of the shared page (CTR9): the owner's save drew its chip, calendar line and the reader's description as text. */
+function SharedTraditionRow({ row }) {
+  const description = typeof row.text === 'string' ? row.text : '';
+  const calendarLine = typeof row.when === 'string' ? row.when : '';
+  return (
+    <TraditionRow rec={{ id: row.id, name: row.name, chip: row.chip, coreMotif: { element: row.element } }}
+      preview description={description} calendarLine={calendarLine} />
+  );
 }
 
-export default function TraditionsTab({ settlement }) {
+/** A row of the owner's page (or the owner's player view): the description is composed here for this page's audience,
+ *  over the audience's set (`descriptionSet`, TRAD-4 unit 10: no town prints the same sentence in two of its rites). */
+function OwnTraditionRow({ rec, preview, sameWindowAs, settlement, audience, descriptionSet }) {
+  const described = describeTradition(rec, settlement, { audience, set: descriptionSet });
+  return <TraditionRow rec={rec} preview={preview} sameWindowAs={sameWindowAs} description={described ? described.text : ''} />;
+}
+
+/**
+ * @param {{ settlement: any, saveId?: string|null, publicDossier?: boolean, playerView?: boolean }} props
+ *   `publicDossier` (a shared page: the record has no seed): the tab prints the traditions the OWNER's save drew as text
+ *   (`publicProse`, site `traditions`, CTR9) and never derives a set. `playerView`: the owner's own page read as the
+ *   players read it; the description is composed for the reader. Neither given: the owner's page.
+ */
+export default function TraditionsTab({ settlement, publicDossier = false, playerView = false }) {
   // THE PHONE PROSE FLOOR — the framing paragraph, the founding note and the
   // no-traditions line. Bound above the early return so the hook order is stable.
   const mobile = useIsMobile();
-  // ENGINE mirror when present (T-2 writes it); otherwise the pure founding preview.
-  const mirror = Array.isArray(settlement?.traditions) ? settlement.traditions : null;
-  const preview = !mirror || mirror.length === 0;
 
-  // WB-j genesis consumption — a DM's authored custom traditions merge into the
-  // PREVIEW founding set (empty ⇒ the pure leaf's bytes, untouched). Never merged
-  // into the engine mirror (the lit mirror is the tick mover's authored truth).
+  // WB-j genesis consumption — a DM's authored custom traditions merge into the PREVIEW founding set; the lit mirror
+  // is the tick mover's authored truth. The set, the admissible rows (CENSUS-3b unit 5) and the calendar plan are the
+  // one helper's (domain/traditions/shownTraditions.js), which the save-time composer of the shared page also reads.
   const customTraditions = useStore(s => s.customContent?.traditions);
-  const kept = useMemo(
-    () => (preview
-      ? mergeCustomFoundingTraditions(deriveFoundingTraditions(settlement), customTraditions)
-      : mirror),
-    [preview, mirror, settlement, customTraditions],
+  const shown = useMemo(
+    () => (publicDossier ? null : shownTraditionsOf(settlement, customTraditions)),
+    [publicDossier, settlement, customTraditions],
   );
-  // CENSUS-3b unit 5 (R6): the tab prints only ADMISSIBLE rows — a tradition whose motif element
-  // declares a fact the record does not hold (the Tide Fair on a dry road) is not printed. Kind A:
-  // a filter over the list, no weight and no roll moves (genesis's weights are CENSUS-1c's).
-  const traditions = useMemo(
-    () => (Array.isArray(kept)
-      // A DM's AUTHORED custom tradition (`customFounding.js`, id `custom:…`) is the DM's truth
-      // and is printed as authored; only a generated row is held to its element's declaration.
-      ? filterDeclared(kept.map((rec) => ({ text: String(rec?.name ?? ''), needs: String(rec?.id ?? '').startsWith('custom:') ? [] : motifNeeds(rec), rec })),
-        { facts: () => factsOf(settlement), poolId: 'traditions:tab', surface: 'traditions', drawKind: 'A' }).map((row) => row.rec)
-      : kept),
-    [kept, settlement],
+  // THE SHARED PAGE (CTR9): the owner's set and the reader's descriptions, as the owner's save drew them. A page saved
+  // before the traditions were drawn carries none, and prints no set the owner never saw.
+  const sharedRows = publicDossier ? publicProseOf(settlement, 'traditions') : null;
+  const preview = publicDossier ? true : !!shown?.preview;
+  const traditions = publicDossier ? (Array.isArray(sharedRows) ? sharedRows : []) : (shown?.recs || []);
+  const audience = playerView ? 'reader' : 'owner';
+  // THE SET THE DESCRIPTIONS ROTATE OVER (TRAD-4 unit 10; shownTraditions.js :: descriptionSetOf): the owner's set for the
+  // owner's page; in the player view the drawn set the shared page serves (CTR11), so the town reads the same on both.
+  const descriptionSet = useMemo(
+    () => (publicDossier ? null : descriptionSetOf(settlement, audience, customTraditions)),
+    [publicDossier, settlement, audience, customTraditions],
   );
 
   const name = settlement?.name || settlement?.identity?.name || 'this settlement';
   // ONE CALENDAR LINE PER WINDOW (X-50, F2 REPEAT-ONCE): two traditions kept in the same weeks
   // are two facts and both stand; the window prints once, on the first, and a later card names it.
-  const windowPlan = sameWindowPlan(traditions);
+  const windowPlan = publicDossier ? new Map() : sameWindowPlan(traditions);
 
   if (!traditions || traditions.length === 0) {
     return (
       <div data-testid="traditions-tab" style={{ padding: '12px 14px', fontFamily: sans, color: MUTED, fontSize: proseFontSize(FS.sm, mobile) }}>
-        No traditions are recorded for {name} yet.
+        {publicDossier ? <>No traditions are shared for {name}.</> : <>No traditions are recorded for {name} yet.</>}
       </div>
     );
   }
@@ -214,8 +186,9 @@ export default function TraditionsTab({ settlement }) {
         )}
       </p>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-        {traditions.map((rec) => (
-          <TraditionRow key={rec.id} rec={rec} preview={preview} sameWindowAs={windowPlan.get(rec.id) ?? null} />
+        {traditions.map((rec, i) => (publicDossier
+          ? <SharedTraditionRow key={rec.id || i} row={rec} />
+          : <OwnTraditionRow key={rec.id} rec={rec} preview={preview} sameWindowAs={windowPlan.get(rec.id) ?? null} settlement={settlement} audience={audience} descriptionSet={descriptionSet} />
         ))}
       </div>
     </div>

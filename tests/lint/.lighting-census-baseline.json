@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "8960e44b3b257a5c5274e8aabbad6dd76b40de3a",
-  "measuredBy": "PAGE-8",
-  "date": "2026-11-21",
-  "note": "F5-NARROW on the line at point 86: one new test file tests/generators/narrowVenalSecret.test.js",
-  "files": 3724,
-  "parked": 476,
-  "credited": 3248,
-  "titles": 31325,
-  "suiteTitles": 8683
+  "measuredAtSha": "c35847792822d1e8a74dffc6482df6bf60ba268b",
+  "measuredBy": "landing stack points 95 to 96",
+  "date": "2026-11-22",
+  "note": "points 95 (lane/daily-page-1 at 3947e3e6b) and 96 (lane/page-12 at ab9804585) landed on 9373b190d: their new and changed test files",
+  "files": 3751,
+  "parked": 479,
+  "credited": 3272,
+  "titles": 31660,
+  "suiteTitles": 8779
 }

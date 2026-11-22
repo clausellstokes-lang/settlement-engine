@@ -27,6 +27,8 @@ import {
   supportedDailyLifeSlots,
 } from '../../src/domain/dailyLife.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { DAWN_WORK } from '../../src/data/dailyLife/dawnWork.js';
+import { CHILD_WARNINGS } from '../../src/data/dailyLife/childWarnings.js';
 
 // ── Catalog ────────────────────────────────────────────────────────────
 
@@ -123,7 +125,10 @@ describe('dawn_work behavior', () => {
       ],
       config: { monsterThreat: 'plagued' },
     });
-    expect(besieged.text.toLowerCase()).toMatch(/(walls|watch musters|rounds)/);
+    // DAILY-2 B2 D1 (LINES-1 § dawn_work, ruling 8): the tone is the defence branch's (a plagued country is a real outside
+    // threat), but this record holds no walls and no watch, so it is told no walls, watch or rounds: the pin re-recorded to
+    // the meaning it guarded, the defence pool taken.
+    expect(DAWN_WORK.defence.map((l) => l.text)).toContain(besieged.text);
   });
 
   it('keys the guild flavor off craft faction power alone', () => {
@@ -138,7 +143,9 @@ describe('dawn_work behavior', () => {
         factions: [{ id: 'faction.artisans', faction: "Artisans' Guild", name: "Artisans' Guild", power: 60 }],
       },
     });
-    expect(guildTown.text.toLowerCase()).toMatch(/(smithy|guild-callers)/);
+    // DAILY-2 B2 D1 (LINES-1 § dawn_work): the craft branch by craft power alone; this record holds no smithy and no guild,
+    // so it is told neither: the pin re-recorded to the meaning it guarded, the craft pool taken.
+    expect(DAWN_WORK.craft.map((l) => l.text)).toContain(guildTown.text);
   });
 
   it('references the canonical food_production + defense lenses, never labor/craft', () => {
@@ -153,10 +160,12 @@ describe('dawn_work behavior', () => {
 
 describe('gathering_places behavior', () => {
   it('cites religious + trade + inn institutions when present', () => {
+    // DAILY-2 B1b C3 (LINES-1 § gathering_places, the chair's rulings 7 and 12): the trade house a line names is a
+    // live market row (`Weekly market`); a market square is the `{square}` of its own lines, not the `{market}`.
     const s = deriveDailyLifeSlot('gathering_places', {
       institutions: [
         { id: 'i1', name: 'Temple of Light' },
-        { id: 'i2', name: 'Market Square' },
+        { id: 'i2', name: 'Weekly market' },
         { id: 'i3', name: 'The Black Hart Inn' },
       ],
     });
@@ -165,9 +174,11 @@ describe('gathering_places behavior', () => {
     expect(s.references.length).toBeGreaterThanOrEqual(2);
   });
 
-  it('falls back gracefully when no recognized institutions present', () => {
+  it('prints the EMPTY string when no recognized institutions present (ruling 3: no true line, no filler)', () => {
+    // DAILY-2 B1b C3: today's fallback "the well, the bridge, the open square" was printed with none of them held; the
+    // chair's ruling 3 (2026-11-20 18:19) makes a slot with no true line EMPTY (the page hides it).
     const s = deriveDailyLifeSlot('gathering_places', { institutions: [] });
-    expect(s.text.length).toBeGreaterThan(0);
+    expect(s.text).toBe('');
   });
 });
 
@@ -176,7 +187,10 @@ describe('child_warnings behavior', () => {
     const s = deriveDailyLifeSlot('child_warnings', {
       config: { monsterThreat: 'plagued' },
     });
-    expect(s.text.toLowerCase()).toMatch(/(sundown|road|monster|woods|night)/);
+    // DAILY-2 B2 D2 (LINES-1 § child_warnings): the plagued country's warning is a line of the monster pool, picked among
+    // those the record holds (this nameless record holds no road, so not "the road past sundown"): the pin re-recorded to the
+    // meaning it guarded, the top threat said by its own kind's warning and cited.
+    expect(CHILD_WARNINGS.monster_pressure.map((l) => `Children are warned about ${l.text}.`)).toContain(s.text);
     expect(s.references.some(r => r.type === 'threat')).toBe(true);
   });
 
@@ -327,7 +341,10 @@ describe('deriveDailyLife()', () => {
       const s = life.slots[key];
       expect(s.key).toBe(key);
       expect(s.label).toBeTruthy();
-      expect(s.text.length).toBeGreaterThan(0);
+      // DAILY-2 B1b C3 (the chair's ruling 3, 2026-11-20 18:19): a slot with no true line is EMPTY. This record holds no
+      // house at all, so `gathering_places` has nothing true to say; every other slot still speaks.
+      if (key === 'gathering_places') expect(s.text).toBe('');
+      else expect(s.text.length).toBeGreaterThan(0);
       expect(typeof s.source).toBe('string');
       expect(Array.isArray(s.references)).toBe(true);
     }

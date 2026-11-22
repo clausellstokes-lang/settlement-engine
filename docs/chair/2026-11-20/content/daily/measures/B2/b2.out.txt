@@ -1,0 +1,91 @@
+RE-RUN: node docs/chair/2026-11-20/content/daily/measures/B2/measure.b2.mjs > docs/chair/2026-11-20/content/daily/measures/B2/b2.out.txt 2>&1
+births and slots: 900 (150 a size, M1's recipe) in 119s
+texts not traced to a pool line: 0
+
+════ dawn_work
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| top single text % of 150 | 9 | 7 | 11 | 9 | 9 | 13 |
+| distinct texts | 26 | 28 | 32 | 35 | 25 | 19 |
+| EMPTY (no true line) | 0 | 0 | 0 | 0 | 0 | 0 |
+| reach % / min eligible: food | 6 / 2 | 5 / 2 | 1 / 2 | 3 / 3 | 12 / 3 | 19 / 3 |
+| reach % / min eligible: defence | 64 / 7 | 47 / 7 | 46 / 7 | 17 / 7 | 0 / — | 0 / — |
+| reach % / min eligible: craft | 0 / — | 0 / — | 0 / — | 0 / — | 0 / — | 0 / — |
+| reach % / min eligible: merchant_siege | 0 / — | 0 / — | 0 / — | 0 / — | 0 / — | 0 / — |
+| reach % / min eligible: merchant | 1 / 2 | 2 / 4 | 11 / 4 | 27 / 4 | 11 / 6 | 1 / 7 |
+| reach % / min eligible: default | 29 / 7 | 46 / 8 | 41 / 9 | 53 / 6 | 77 / 8 | 80 / 10 |
+| ALL places as if default: min / median eligible | 7 / 9 | 8 / 11 | 9 / 12 | 6 / 9 | 8 / 12 | 9 / 12 |
+| FALSE the granary queue: no granary | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE The walls claim: no walls | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE the watch musters: no guard force | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE Smithy fires: no smithy | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE guild-callers: no guild | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE Merchant caravans roll: no trade route | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE queue at the warehouses: no warehouse | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE Bakers light their ovens: no bakery | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE then the smiths: no smithy | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE the watch changes: no guard force | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE as the gates open: no gate | 0 | 0 | 0 | 0 | 0 | 0 |
+| a named house not live or access-only | 0 | 0 | 0 | 0 | 0 | 0 |
+| a hideable house named (rule 6) | 0 | 0 | 0 | 0 | 0 | 0 |
+| a bracket printed (rule 4) | 0 | 0 | 0 | 0 | 0 | 0 |
+| the word "town" (rule 4) | 0 | 0 | 0 | 0 | 0 | 0 |
+| a named house without its article (rule 4) | 0 | 0 | 0 | 0 | 0 | 0 |
+  top thorp (13/150): "Everyone keeps within call of the houses in the first hours, and the farther work waits until later in the day."
+  top hamlet (11/150): "People go out to their work together at dawn, and no one strays far from the houses alone."
+  top village (16/150): "Everyone keeps within call of the houses in the first hours, and the farther work waits until later in the day."
+  top town (14/150): "The first grain of the day is carried to the mills at first light."
+  top city (13/150): "At the inns and taverns, breakfast is already being served to those who mean to set out early."
+  top metropolis (20/150): "The bakers have their ovens lit before first light, and the first bread is out as people wake."
+
+════ child_warnings
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| top single text % of 150 | 7 | 4 | 3 | 5 | 12 | 13 |
+| distinct texts | 92 | 111 | 110 | 92 | 33 | 35 |
+| EMPTY (no true line) | 0 | 0 | 0 | 0 | 0 | 0 |
+| reach % / min eligible: unrest | 28 / 7 | 35 / 7 | 63 / 7 | 81 / 9 | 7 / 11 | 7 / 11 |
+| reach % / min eligible: economic_collapse | 47 / 6 | 59 / 6 | 56 / 6 | 1 / 8 | 0 / — | 0 / — |
+| reach % / min eligible: monster_pressure | 66 / 5 | 53 / 5 | 44 / 5 | 67 / 5 | 67 / 6 | 68 / 6 |
+| reach % / min eligible: plague | 3 / 3 | 5 / 3 | 3 / 3 | 3 / 3 | 2 / 4 | 1 / 4 |
+| reach % / min eligible: siege | 1 / 1 | 0 / — | 0 / — | 0 / — | 1 / 3 | 3 / 3 |
+| reach % / min eligible: famine | 1 / 3 | 2 / 3 | 0 / — | 0 / — | 0 / — | 0 / — |
+| reach % / min eligible: bandit_raids | 0 / — | 0 / — | 0 / — | 0 / — | 0 / — | 0 / — |
+| reach % / min eligible: rival_neighbor | 0 / — | 0 / — | 0 / — | 0 / — | 0 / — | 0 / — |
+| reach % / min eligible: arcane_instability | 0 / — | 0 / — | 0 / — | 0 / — | 0 / — | 0 / — |
+| reach % / min eligible: default | 0 / — | 0 / — | 0 / — | 0 / — | 0 / — | 0 / — |
+| reach % / min eligible: none | 8 / 8 | 11 / 8 | 4 / 9 | 3 / 9 | 29 / 6 | 27 / 8 |
+| ALL places as if none: min / median eligible | 7 / 9 | 7 / 10 | 8 / 11 | 5 / 8 | 6 / 10 | 7 / 10 |
+| FALSE the deep well: no well | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE the woods at twilight: no timber | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE linger at the gates: no gate | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE the trade quarter: no quarters at all | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE the trade quarter: no trade-kind quarter | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE the empty stalls: no market | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE the sick-house: no hospital or healer | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE when the bells ring: no sacred house | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE the neighbour\b: no neighbour | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE officials: no appointed post | 0 | 0 | 0 | 0 | 0 | 0 |
+| a named house not live or access-only | 0 | 0 | 0 | 0 | 0 | 0 |
+| a hideable house named (rule 6) | 0 | 0 | 0 | 0 | 0 | 0 |
+| a bracket printed (rule 4) | 0 | 0 | 0 | 0 | 0 | 0 |
+| the word "town" (rule 4) | 0 | 0 | 0 | 0 | 0 | 0 |
+| a named house without its article (rule 4) | 0 | 0 | 0 | 0 | 0 | 0 |
+| "; " joining two warnings (child only; the join is ", and about ") | 0 | 0 | 0 | 0 | 0 | 0 |
+  top thorp (10/150): "Children are warned about going down for water alone after dark."
+  top hamlet (6/150): "Children are warned about going anywhere alone after dark."
+  top village (4/150): "Children are warned about getting mixed up in the grown-ups' quarrels."
+  top town (8/150): "Children are warned about wandering into other households while feelings are running high."
+  top city (18/150): "Children are warned about the road past sundown."
+  top metropolis (20/150): "Children are warned about going out to look for whatever is heard in the night."
+
+M1 FALSE-LINE TOTAL: 0
+HOUSE-RULE HITS TOTAL: 0
+
+── M1's named places ──
+hxd-thorp-0: dawn "Water is fetched at first light in company, never alone, and the day's work starts after." | child "Children are warned about straying out of sight of the houses once the light starts to go."
+hxd-hamlet-0: dawn "The merchants are up before anyone else, and their business is under way by first light." | child "Children are warned about going anywhere alone after dark."
+hxd-hamlet-7: dawn "The day begins with the walk out to the fields, and the work there runs on until midday." | child "Children are warned about the far edges of the fields after dark, and about wandering into other households while feelings are running high."
+hxd-metropolis-0: dawn "People are at the fish market before light, waiting to see what food comes in and what it will cost." | child "Children are warned about the road past sundown."
+
+done in 121s
