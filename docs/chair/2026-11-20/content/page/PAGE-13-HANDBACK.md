@@ -31,6 +31,16 @@ the security reader's list) and the briefs under `briefs/`. Prompt:
   `SAFETY_READER_BYTES_RECORD` left together. FOR THE LANDING LINE: the row `tests/ui/safetyReaderBytes.test.jsx` comes off
   `ci/RED-AT-LINE.tsv` (both its jobs) when this lands. `build/SIDES/pinCause.mjs` (a docs tool) still names the deleted
   file: a record of its day, not edited.
+- UNIT 2 AMENDED (the chair, 06:45: 280 s too dear): pool cut to ten a size, 60 towns, `066c1e87c`: red 180 moved, green 0,
+  58 s; tests/lint whole after it 3,271/3,271.
+- UNIT 3's DECLARATION PUT TO THE CHAIR ON PAPER (07:0x; awaiting its ruling): the probe ran page-12's walker functions
+  (`1b1b0eb2d`) over the table: 505 leaves, 138 keys, 63 of them five words or more; 19 reds, all "crime pool" by key word
+  ("Corrupt officials", "Criminal organisations", "the criminal network"); 0 houses (rows carry `presumes`, not `needs`).
+  Proposed: an EXEMPT entry, class 'trouble', withheldBy `tensionShown.js :: tensionSidesShown`, provedBy a new arm
+  `tests/domain/display/tensionSidesServed.test.js` (every row x every `at` slot, planted record and its house-free twin,
+  five projections; red first on the criminal fill); remove the UNREAD row; a `WORD_KEYED` list excluded from the SENTENCE
+  KEYS arm. OPEN RISK: a projection that drops the criminal power but leaves 'organised crime' answering yes prints
+  "Criminal organisations" where the twin prints "Lawbreakers".
 - UNIT 4's LISTS WRITTEN (the chair's 05:26 order): `build/SIDES-LISTS/LISTS.md` (`8c35fa909`): SIDES moves 89 of 300
   towns (thorp 16, hamlet 13, village 15, town 20, city 15, metropolis 10); the surfaces; ONE house reader,
   `tensionShown.js :: tensionSidesShown`, which by construction can choose a wording by the `organised crime` atom and by
