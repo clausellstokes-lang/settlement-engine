@@ -11,6 +11,12 @@
 // It prints, by size: the top sentence and its share for openings, codas and relations; the codas (by branch) that print in
 // more than half of the size's places, with their top sentence; and the governing seat's own atTable and worthBuying codas
 // (the chair's F2 of 18:14 UTC), counted over the 900 places.
+// F3 (PEOPLE-3 B2, the resumed brief's step 2): on a tree whose pipeline hands the pick a tie (`power/factionStanding.js ::
+// standingLevelOf`), every card that prints the arcaneInShadow or noblesAhead coda (as written or voiced) is read twice: the
+// tie the pass is handed (`standingLevelOf` on the record's own roster) and the tie the standing branch computes, its own
+// selection re-run on the final roster as `power/rosterText.js :: settleStandingToRoster` re-runs it (`standingRosterOf`,
+// the strongest first; the rival the first arcane power, the first `Merchant` power, there; level where its power equals the
+// card's). A card whose final roster would not print the coda at all (its rival above it) is counted apart.
 //
 // Usage: node b2-shares.mjs <checkout> [n per size = 150]   (prints count lines only)
 import { CODAS, maskerOf, pct, SIZES, sentencesOf } from './m6-common.mjs';
@@ -29,6 +35,14 @@ try {
   const esc = (x) => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   voiced = V.CODA_POOLS.flatMap((c) => c.rows.map((r) => ({ id: c.id, rx: new RegExp(esc(r.text).replace(/\\\$\d/g, '[^.;:]+?'), 'gi') })));
 } catch { /* the base: no voiced codas */ }
+/** F3: the tie the pass is handed, where the tree hands one; the standing roster, as rosterText.js reads it */
+let standingLevelOf = null;
+try {
+  ({ standingLevelOf } = await import(`${L}/src/generators/power/factionStanding.js`));
+} catch { /* none */ }
+const { standingRosterOf } = await import(`${L}/src/generators/power/rosterText.js`);
+const RIVAL_OF = { arcaneInShadow: (n) => n.toLowerCase().includes('arcane'), noblesAhead: (n) => n.includes('Merchant') };
+const F3 = { cards: 0, branchLevel: 0, passLevel: 0, differ: 0, stale: 0, unsorted: 0, differs: [] };
 const TODAY = CODAS.map((c) => ({ id: c.id, rx: new RegExp(c.re, 'g') }));
 const PATTERNS = [...TODAY, ...voiced];
 /** a description cut into its opening and its codas (M6's cut, with the tree's own coda wordings) */
@@ -59,8 +73,23 @@ for (const size of SIZES) {
     for (const f of t.powerStructure?.factions || []) { nm(f.name); nm(f.faction); }
     const mask = maskerOf(names);
     const factions = t.powerStructure?.factions || [];
+    if (factions.some((f, k) => k > 0 && Number(factions[k - 1].power) < Number(f.power))) F3.unsorted++;
     factions.forEach((f, rank) => {
       const { opening, codas } = cut(f.desc);
+      for (const c of codas) {
+        if (!RIVAL_OF[c.id] || typeof standingLevelOf !== 'function') continue;
+        const roster = standingRosterOf(factions);
+        const card = roster.find((x) => x.faction === f.faction);
+        const rival = roster.find((x) => RIVAL_OF[c.id](x.faction));
+        const branch = !!card && !!rival && rival.faction !== card.faction && rival.power === card.power;
+        const pass = standingLevelOf(factions, f, c.id) === true;
+        F3.cards++;
+        if (branch) F3.branchLevel++;
+        if (pass) F3.passLevel++;
+        if (!card || !rival || rival.power > card.power) F3.stale++;
+        if (branch !== pass) F3.differ++;
+        if (branch !== pass && F3.differs.length < 5) F3.differs.push(`hxd-${size}-${i} ${f.faction} ${c.id} branch ${branch} pass ${pass}`);
+      }
       for (const s of sentencesOf(opening)) add(open, mask(s), i);
       for (const c of codas) {
         add(codaPlaces, c.id, i);
@@ -83,5 +112,9 @@ for (const size of SIZES) {
     const [k, s] = top(codaTop.get(id));
     console.log(`OVER-HALF ${size} coda ${id}: places ${st.size}/${N} ${pct(st.size, N)} · its top sentence ${k}/${N} ${pct(k, N)} | ${s}`);
   }
+}
+if (typeof standingLevelOf === 'function') {
+  console.log(`F3 cards printing arcaneInShadow or noblesAhead: ${F3.cards} · level by the branch's own selection ${F3.branchLevel} · level as handed (standingLevelOf) ${F3.passLevel} · differ ${F3.differ} · the coda not the final roster's ${F3.stale} · places whose roster is not strongest-first ${F3.unsorted}`);
+  for (const d of F3.differs) console.log(`F3 DIFFERS ${d}`);
 }
 console.log(`SEAT the governing seat at rank 2: ${seatRank2} cards over ${SIZES.length * N} places · atTable ${seatAtTable} · worthBuying ${seatWorthBuying}`);
