@@ -9,8 +9,9 @@
  * shut). Read as a non-owner by the gallery read, the party link, the import and the campaign map's member. Each row of the
  * roster-choice registry whose server is 212 :: _gallery_veil_roster_choices holds there:
  *   VR39: no served crime type that no town of the hidden-free pool has (the counterfactual births with every hideable
- *     house taken out, and the born towns that hold none); a town whose criminal house the DM SHOWS keeps its types;
- *     VR29: crimeTypes stays an array, absent only where block:defense.criminalStructure is shut.
+ *     house taken out, and the born towns that hold none); a town whose criminal house the DM SHOWS keeps its types.
+ *     R3-TELL-8 (the eighth chair's ruling (b), superseding VR29 for crimeTypes alone): the KEY is on no read; VR39 and its
+ *     control are judged on the list the PAGE re-derives from the served document (pageRederive.js :: rederiveForPage).
  *   THE POWER OBSERVABLE / VR42: no served criminal power but the governing one; the governing row IS served.
  *   VR11 / VR31: the served shares sum to 100 wherever any power is withheld; no served relation names an unserved power.
  *   (a) economy.complexity: the engine's own ladder over the served rows; the gates tail and the foothold word as the
@@ -367,6 +368,8 @@ describe('R3: the drawn conditional rows where a house is hidden whole (through 
   let pool;
   let derive;
   let keyTowns;
+  /** R3-TELL-8: the page's own copy of a served document (pageRederive.js :: rederiveForPage), on a clone. */
+  let rederive;
 
   beforeAll(async () => {
     const db = new PGlite({ extensions: { pgcrypto } });
@@ -383,6 +386,8 @@ describe('R3: the drawn conditional rows where a house is hidden whole (through 
     const { criminalStructureKeyOf } = await import('../../src/domain/facts/criminalStructureKey.js');
     derive = { deriveEconomicComplexity, criminalStructureKeyOf };
     veil = await import('../../src/domain/display/galleryVeil.js');
+    const { rederiveForPage } = await import('../../src/domain/veil/pageRederive.js');
+    rederive = (d) => rederiveForPage(clone(d));
     await loadGenerationLawPayloads();
     const birth = (size, crisis, seed, drop) => {
       const cut = (list) => { if (!Array.isArray(list)) return; for (let i = list.length - 1; i >= 0; i -= 1) if (drop(list[i])) list.splice(i, 1); };
@@ -479,24 +484,32 @@ describe('R3: the drawn conditional rows where a house is hidden whole (through 
     expect(H.some((t) => (t.stored.institutions || []).some((h) => RIVAL_TEXTS.includes(h?.desc)))).toBe(true);
   });
 
-  it('VR39: no served crime type that no town of the hidden-free pool has; VR29: the key stays an array, absent only where its grouping is shut', () => {
+  it('VR39 (on the page\'s list): no crime type the page derives from the served document that no town of the hidden-free pool has; R3-TELL-8 (ruling (b)): the KEY is on no read, and where its grouping is shut the page derives no list', () => {
     const bad = [];
+    let printed = 0;
+    for (const r of reads) for (const [read, d] of docsOf(r)) if ('crimeTypes' in spOf(d)) bad.push(`${r.t.seed} ${r.kind} dm=${r.dm} ${read}: the read sent crimeTypes`);
     for (const r of hiddenReads()) for (const [read, d] of docsOf(r)) {
-      const ct = spOf(d).crimeTypes;
-      if (!Array.isArray(ct)) { bad.push(`${r.t.seed} dm=${r.dm} ${read}: crimeTypes ${J(ct)}`); continue; }
+      const ct = spOf(rederive(d)).crimeTypes;
+      if (!Array.isArray(ct)) { if (Array.isArray(spOf(d).criminalInstitutions) && isRec(d.config)) bad.push(`${r.t.seed} dm=${r.dm} ${read}: the open page derived no list`); continue; }
+      printed += 1;
       for (const c of ct) if (!pool.has(c?.type)) bad.push(`${r.t.seed} dm=${r.dm} ${read}: ${J(c?.type ?? c)}`);
     }
-    for (const r of reads.filter((x) => x.kind === 'default')) for (const [read, d] of docsOf(r)) if ('crimeTypes' in spOf(d)) bad.push(`${r.t.seed} default ${read}: the shut grouping sent crimeTypes`);
+    for (const r of reads.filter((x) => x.kind === 'default')) for (const [read, d] of docsOf(r)) if ('crimeTypes' in spOf(rederive(d))) bad.push(`${r.t.seed} default ${read}: the shut grouping's page derived a list`);
+    expect(printed).toBeGreaterThan(0);
     expect(bad).toEqual([]);
   });
 
-  it('VR39 CONTROL: a town whose criminal houses the DM SHOWS keeps its crime types, as stored', () => {
+  it('VR39 CONTROL: a town whose criminal houses the DM SHOWS keeps its crime types, as stored (on the page\'s list, R3-TELL-8)', () => {
     const bad = [];
-    for (const r of reads.filter((x) => x.kind === 'shown' && x.t.hideable.length)) {
+    // (a born town: its list is the writer's over its config, which the page re-runs; a hand plant carries no config, and its
+    // hand-written list no writer writes, so its page derives none: R3-CURE unit 3's arm judges it)
+    const rs = reads.filter((x) => x.kind === 'shown' && x.t.hideable.length && isRec(x.t.stored.config));
+    for (const r of rs) {
       const want = (spOf(r.t.stored).crimeTypes || []).map((c) => c?.type);
-      const got = (spOf(r.docs.gallery).crimeTypes || []).map((c) => c?.type);
+      const got = (spOf(rederive(r.docs.gallery)).crimeTypes || []).map((c) => c?.type);
       if (J(got) !== J(want)) bad.push(`${r.t.seed}: ${J(got)} != ${J(want)}`);
     }
+    expect(rs.length).toBeGreaterThan(0);
     expect(bad).toEqual([]);
   });
 
@@ -711,13 +724,15 @@ describe('R3: the drawn conditional rows where a house is hidden whole (through 
     expect(clean).not.toContain('overview.line');
   });
 
-  it('R3-CURE unit 3: a crime type no map holds FAILS CLOSED where a house is hidden whole (withheld), on every read, both shapes; a crisis type the engine writes stays', () => {
+  it('R3-CURE unit 3, AS R3-TELL-8 LEAVES IT: a crime type no map holds is on no read and on no page, both shapes (the list is withheld always; the hand town carries no config, so the page derives none)', () => {
     const bad = [];
+    let judged = 0;
     for (const r of cureReads().filter((x) => x.t.seed === 'hand-raised')) for (const [read, d] of docsOf(r)) {
-      const types = (spOf(d).crimeTypes || []).map((c) => c?.type);
-      if (types.includes('Planted unknown crime')) bad.push(`${r.kind} dm=${r.dm} ${read}: the unknown type served`);
-      if (!types.includes('debt evasion')) bad.push(`${r.kind} dm=${r.dm} ${read}: the crisis type lost`);
+      judged += 1;
+      if ('crimeTypes' in spOf(d)) bad.push(`${r.kind} dm=${r.dm} ${read}: the read sent crimeTypes`);
+      if ((spOf(rederive(d)).crimeTypes || []).some((c) => c?.type === 'Planted unknown crime')) bad.push(`${r.kind} dm=${r.dm} ${read}: the unknown type on the page`);
     }
+    expect(judged).toBeGreaterThan(0);
     expect(bad).toEqual([]);
   });
 
@@ -942,8 +957,9 @@ describe('R3: the drawn conditional rows where a house is hidden whole (through 
         told.push(`${t.seed} ${eng} dm=${dm}: served ${ka} | counterfactual ${kb} | ${cmp}${cause.length ? ` | cause: ${cause.join(', ')}` : ''}`);
         if (cmp === 'HIGHER') bad.push(`${t.seed} ${eng} dm=${dm}: served ${ka} above the counterfactual's ${kb} (${cause.join(', ') || 'no single field'})`);
         if (cmp === 'LOWER' && !cause.length) bad.push(`${t.seed} ${eng} dm=${dm}: served ${ka} below ${kb} with no cause named`);
-        const magic = (d) => (d?.economicState?.safetyProfile?.crimeTypes || []).some((c) => c?.type === 'Magical crime');
-        if (magic(a) && !magic(b)) bad.push(`${t.seed} ${eng} dm=${dm}: "Magical crime" served, not in the counterfactual`);
+        // (R3-TELL-8: the "Magical crime" against the counterfactual check LEFT: the list is on no read, and the page's list is
+        // the record's over the served facts, which may owe Magical crime the counterfactual draw lacks: the eighth chair's
+        // ruling (a), the twin is another draw, the witness, never the oracle; TELL7 cause (a), (b))
       }
     }
     note('R3-CURE-2 unit 2, the Defense key per town (open veil, gallery):', J(tally), `\n  ${told.join('\n  ')}`);
