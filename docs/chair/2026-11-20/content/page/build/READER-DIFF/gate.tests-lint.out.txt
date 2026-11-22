@@ -1,0 +1,63 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 16519 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+ ✓ tests/lint/pulseKernelLineAddress.walker.test.js (5 tests) 7ms
+ ✓ tests/lint/kindPoolFloors.walker.test.js (12 tests) 17ms
+ ✓ tests/lint/moduleScopeCwdRatchet.test.js (6 tests) 11ms
+ ✓ tests/lint/founderSeatsMigration.test.js (14 tests) 11ms
+ ✓ tests/lint/ledgerCitationIntegrity.test.js (10 tests) 11ms
+ ✓ tests/lint/hookThemeTotality.walker.test.js (7 tests) 7ms
+ ✓ tests/lint/spTermLiteral.walker.test.js (6 tests) 9ms
+ ✓ tests/lint/opGuardCoverage.walker.test.js (4 tests) 10ms
+ ✓ tests/lint/faithTeaserLicence.test.js (3 tests) 11ms
+ ✓ tests/lint/transientChooserRegistry.walker.test.js (3 tests) 11ms
+ ✓ tests/lint/nameListColumns.walker.test.js (6 tests) 7ms
+ ✓ tests/lint/autoresolveTwoMount.walker.test.js (6 tests) 7ms
+ ✓ tests/lint/drawDeclaredKeys.walker.test.js (3 tests) 4ms
+ ✓ tests/lint/libraryAdvancesNothing.walker.test.js (3 tests) 8ms
+ ✓ tests/lint/habitBandsReconciliation.walker.test.js (6 tests) 5ms
+ ✓ tests/lint/realmEntityWebNoFabrication.walker.test.js (2 tests) 6ms
+ ✓ tests/lint/transcendentalMathBaseline.test.js (10 tests) 5ms
+ ✓ tests/lint/migrationSearchPathPin.test.js (5 tests) 4ms
+ ✓ tests/lint/clampPrimitiveBaseline.test.js (3 tests) 5ms
+ ✓ tests/lint/copyKeyResolution.walker.test.js (3 tests) 7ms
+ ✓ tests/lint/forkedColorBaseline.test.js (2 tests) 3ms
+ ✓ tests/lint/styleShorthandLonghand.walker.test.js (4 tests) 5ms
+ ✓ tests/lint/census5dTablePools.test.js (2 tests) 4ms
+ ✓ tests/lint/townMapMassingSilhouette.walker.test.js (4 tests) 4ms
+ ✓ tests/lint/migrationGrantPosturePin.test.js (3 tests) 9ms
+ ✓ tests/lint/slugifyIdiomBaseline.test.js (2 tests) 5ms
+ ✓ tests/lint/rawButtonBaseline.test.js (2 tests) 4ms
+ ✓ tests/lint/analyticsTrackPropsPrivacy.test.js (2 tests) 9ms
+ ✓ tests/lint/errorCopyBaseline.test.js (2 tests) 3ms
+ ✓ tests/lint/sizeBaseline.test.js (3 tests) 5ms
+ ✓ tests/lint/poolDominance.walker.test.js (17 tests) 11ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/sovereigntyLightingContract.walker.test.js > the sovereignty lighting condition — a marker is EVIDENCE only in a live title > THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed
+AssertionError: the live TEST-title count moved from SP-C's measured 18,471 — this is the evidence layer, the exact figure two cuts in a row stated wrongly in prose, and the reason it is asserted rather than described: expected 31403 to be 31401 // Object.is equality
+
+- Expected
++ Received
+
+- 31401
++ 31403
+
+ ❯ tests/lint/sovereigntyLightingContract.walker.test.js:7562:10
+    7560|         + ' is the evidence layer, the exact figure two cuts in a row …
+    7561|         + ' the reason it is asserted rather than described')
+    7562|         .toBe(CENSUS.titles);
+       |          ^
+    7563|       // …AND THE SUITE LAYER IS COUNTED TOO, WHICH IS WHAT MAKES THE …
+    7564|       // that merged the two arrays again would leave `titles` at 23,6…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 219 passed (220)
+      Tests  1 failed | 3270 passed (3271)
+   Start at  05:51:31
+   Duration  1073.68s (transform 25.70s, setup 4.94s, import 951.49s, tests 956.68s, environment 20ms)
+
+[gate-tail] end:  06:09:26 up  1:25,  0 user,  load average: 1.08, 1.39, 1.70
+[gate-tail] full log: /tmp/gate-tail.16789.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

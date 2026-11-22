@@ -1,0 +1,43 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 14225 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
++   "hxd-metropolis-43 overview.gallery",
++   "hxd-metropolis-43 overview.revealShare",
++   "hxd-metropolis-43 overview.playerShare",
++   "hxd-metropolis-44 overview.gallery",
++   "hxd-metropolis-44 overview.revealShare",
++   "hxd-metropolis-44 overview.playerShare",
++   "hxd-metropolis-45 overview.gallery",
++   "hxd-metropolis-45 overview.revealShare",
++   "hxd-metropolis-45 overview.playerShare",
++   "hxd-metropolis-46 overview.gallery",
++   "hxd-metropolis-46 overview.revealShare",
++   "hxd-metropolis-46 overview.playerShare",
++   "hxd-metropolis-47 overview.gallery",
++   "hxd-metropolis-47 overview.revealShare",
++   "hxd-metropolis-47 overview.playerShare",
++   "hxd-metropolis-48 overview.gallery",
++   "hxd-metropolis-48 overview.revealShare",
++   "hxd-metropolis-48 overview.playerShare",
++   "hxd-metropolis-49 overview.gallery",
++   "hxd-metropolis-49 overview.revealShare",
++   "hxd-metropolis-49 overview.playerShare",
++ ]
+
+ ❯ tests/ui/safetyReaderBytes.test.jsx:212:30
+    210|   });
+    211|   test('(b) no reader surface ever holds the sentinel', () => {
+    212|     expect(sentinelOnReader).toEqual([]);
+       |                              ^
+    213|   });
+    214|   test('(c) the arm is not empty: each owner\'s surface holds the sent…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 2 passed (4)
+   Start at  05:36:17
+   Duration  274.89s (transform 5.55s, setup 92ms, import 8.40s, tests 263.98s, environment 2.20s)
+
+[gate-tail] end:  05:40:52 up 56 min,  0 user,  load average: 1.75, 1.56, 1.12
+[gate-tail] full log: /tmp/gate-tail.14501.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
