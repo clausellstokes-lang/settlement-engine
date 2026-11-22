@@ -1,0 +1,16 @@
+{
+  "_doc": "THE VACANT SEAT IS SAID FROM ITS FACT, ONE SIGNED SHIFT OF RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; a successor chair does not inherit this signature). THE CAUSE, ONE: LANDING-7 lane G's ruling R-G1 (commit 5d3f7b5cb, merged into the landing at 64ad4fe47): the vacant seat is read from the governing faction's `vacant` modifier (the record's vacancy fact), never from a claimant NAME (the Power tab's reading had matched a faction name containing 'claimant' since 6da7d3f64, so 20 of 1,000 thorps held a vacant seat and none said so), and the crisis cast FOLLOWS the vacancy: its target moves from the seated Elder to the governing house in every vacant birth. THE MOVER, FOUND BY STAGE: LANDING-8 measured every registered surface at every first-parent step since 3d8a74e4b; at the lane-G step 64ad4fe47 the espionage fence's driven corpus moves 8 of 360 rows (thorp 2, hamlet 1, village 2, town 2, metropolis 1: SUBw4-fence1-hamlet-road-011, -metropolis-crossroads-007, -thorp-crossroads-002, -thorp-isolated-002, -town-crossroads-007, -town-road-011, -village-isolated-014, -village-road-003) beyond the previous record's constant; inside the step, the showcase seed's commit c9be4d1f0 reverse-applied leaves the 8 moving, 5d3f7b5cb reverse-applied leaves 0. The generator golden master moves 0 of 525 and the dossier prose manifest 0 of 1,050 at this step. THE SOAK RECORDS (no committed surface; the soak corpus's first 60 births, scripts/audit/soak-review/corpus.mjs :: birth(0..59), the reading lane H's R-H4 gave, PLAUSIBLY the surface meant): re-measured by LANDING-8 at this stage against the previous record's stage, hashing each birth whole and without its stress/stressors: 4 of 60 move, exactly soak1k-8 (village), soak1k-21 (town), soak1k-41 (metropolis), soak1k-55 (hamlet), the four vacant births, and each only in its crisis cast. HOW: the staged-tree method: stage = the tree of 64ad4fe47 with the door paths carried from the branch (records 29 and 32 committed), and lane D's food floor bfd70d809 reverse-applied and committed in the scratch stage (its own cause, record 34). 360/360 hashes stay distinct.",
+  "ownerWords": "I also now give all permissions required now and in the future. I also defer all judgement to you.",
+  "ownerDate": "2026-11-06",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER; the owner's delegation of 2026-11-06 to the cloud chair, session 01FE9mEvGxnFx6WTBkEC6ie9)",
+  "cause": "LANDING-7 R-G1: the vacant seat is said from its fact and the crisis cast follows it (the governing faction's `vacant` modifier, never a claimant name; the cast's target is the governing house in a vacant birth; commit 5d3f7b5cb)",
+  "seat": "LANDING-8 (Opus 5.5) under the cloud chair (Fable 5.1), session 01FE9mEvGxnFx6WTBkEC6ie9, from the stage at 64ad4fe47 minus bfd70d809",
+  "surfaces": [
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    }
+  ]
+}

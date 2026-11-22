@@ -1,0 +1,17 @@
+{"id":"C15891","town":"bar0-hamlet-calm-rand-45","sev":"LOW","kind":"STATE","why":"endless line of laden carts from one quarry in a poor hamlet of 52; quarrying is 8% of income","other":""}
+{"id":"C16081","town":"bar0-hamlet-calm-rand-45","sev":"LOW","kind":"PAIR","why":"merchants leave with two or three things, but page says little that comes past stops there and nobody buys","other":"C16065"}
+{"id":"C16029","town":"bar0-hamlet-calm-rand-45","sev":"LOW","kind":"BROKEN","why":"'Healing' category holds only Burial and Weekly rite; no healing service in the town","other":""}
+{"id":"C16193","town":"bar0-hamlet-calm-rand-45","sev":"LOW","kind":"PAIR","why":"Thordis a third share and Liv a half share of a two-member Guard; shares do not add up","other":"C16187"}
+{"id":"C16401","town":"bar0-hamlet-calm-rand-45","sev":"LOW","kind":"STATE","why":"succession crisis legacy called a generation old; PAST gives The Succession Crisis 16 years ago","other":""}
+{"id":"C16543","town":"bar0-hamlet-calm-rand-46","sev":"LOW","kind":"BROKEN","why":"'Healing' category holds only Burial and Weekly rite; the hamlet has no healing service","other":""}
+{"id":"C16598","town":"bar0-hamlet-calm-rand-46","sev":"LOW","kind":"BROKEN","why":"'1 active' flows, yet Grain & Bread runs and Foraging also yields outputs; count matches issues, not active chains","other":""}
+{"id":"C16666","town":"bar0-hamlet-calm-rand-46","sev":"MED","kind":"PAIR","why":"business goes to 'the whole' Headman's Authority, slow to answer; the authority is one acknowledged headman deciding without ceremony","other":"C16513"}
+{"id":"C16668","town":"bar0-hamlet-calm-rand-46","sev":"MED","kind":"PAIR","why":"only grumbling, nobody to lead against the rulers; TENSIONS give a live popular uprising pressing those in charge","other":"C16458"}
+{"id":"C16764","town":"bar0-hamlet-calm-rand-46","sev":"LOW","kind":"STATE","why":"'nothing pressing' for the headman while a popular uprising grows louder (TENSIONS)","other":"C16458"}
+{"id":"C16848","town":"bar0-hamlet-calm-rand-47","sev":"LOW","kind":"STATE","why":"'history here is long' for a hamlet 45 years old whose Trade Collapse came 42 years ago","other":""}
+{"id":"C16854","town":"bar0-hamlet-calm-rand-47","sev":"LOW","kind":"STATE","why":"endless line of laden carts from one open-cast mine in a hamlet of 70; iron is 11% of income","other":""}
+{"id":"C16880","town":"bar0-hamlet-calm-rand-47","sev":"LOW","kind":"STATE","why":"'none has much put by' where STATE gives prosperity Comfortable","other":""}
+{"id":"HEADER","town":"bar0-hamlet-calm-rand-47","sev":"LOW","kind":"RECORD","why":"TRADE says metalwork and Education (basic) made here; HOUSES has no smith and no school in a hamlet of 70","other":""}
+{"id":"C17347","town":"bar0-hamlet-calm-rand-47","sev":"MED","kind":"STATE","why":"says the settlement was founded to serve a trade; FOUNDING gives a religious community, reason None","other":""}
+{"id":"DONE","lines":1604,"blocks":3,"flags":16}
+{"id":"DONE","lines":1604,"blocks":3,"flags":15}

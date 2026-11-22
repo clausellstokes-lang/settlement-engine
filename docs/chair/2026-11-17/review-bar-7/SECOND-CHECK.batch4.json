@@ -1,0 +1,187 @@
+[
+ {
+  "id": "C5157",
+  "town": "bar0-city-under_siege+famine-rand-47",
+  "section": "Summary/Overview",
+  "text": "Stalls sell reagents in stoppered jars, and the buyers know exactly what they want.",
+  "readers": "c+ab",
+  "kinds": [
+   "STATE"
+  ],
+  "whys": [
+   "c: ordinary market scene selling reagents under siege; reagents imported (ley node depleted) and siege stops trade; line carries no mark",
+   "(LOW by the first pair) a: stalls sell reagents with buyers as usual; siege stops all trade, reagents are imported (local ley node exhausted)",
+   "(LOW by the first pair) b: Ordinary market scene (stalls selling reagents, buyers choosing) unmarked under a siege that stops all trade and a reagent import cut off"
+  ]
+ },
+ {
+  "id": "C5296",
+  "town": "bar0-city-under_siege+famine-rand-47",
+  "section": "Summary/Plot Hooks",
+  "text": "They have evidence of price-fixing across the whole market.",
+  "readers": "c",
+  "kinds": [
+   "STATE"
+  ],
+  "whys": [
+   "c: hook gives garrison commander Meena Mishra competition and customers in the market; PEOPLE has her at the Garrison"
+  ]
+ },
+ {
+  "id": "C5328",
+  "town": "bar0-city-under_siege+famine-rand-47",
+  "section": "Summary/Plot Hooks",
+  "text": "A business rival has offered them a partnership with terms so good it must be a trap.",
+  "readers": "c",
+  "kinds": [
+   "STATE"
+  ],
+  "whys": [
+   "c: hook gives castellan Priya Reddy (Citadel) a business rival offering partnership; she holds a fortress office, not a business"
+  ]
+ },
+ {
+  "id": "C5358",
+  "town": "bar0-city-under_siege+famine-rand-47",
+  "section": "Summary/Plot Hooks",
+  "text": "A buyer has paid them in advance for a whole season of goods, far above the price, and will not say what the goods are for.",
+  "readers": "c",
+  "kinds": [
+   "STATE"
+  ],
+  "whys": [
+   "c: hook has watch commander Kiran Pandey paid in advance for a season of goods; she sells no goods; also no trade under siege"
+  ]
+ },
+ {
+  "id": "C5541",
+  "town": "bar0-city-under_siege+famine-rand-47",
+  "section": "Systems/Institutions",
+  "text": "Services · Fresh produce · General trade",
+  "readers": "c",
+  "kinds": [
+   "PAIR"
+  ],
+  "whys": [
+   "c: Daily markets row offers Fresh produce and General trade unmarked under siege and famine; Services tab marks General trade Impaired (other: C5688)"
+  ]
+ },
+ {
+  "id": "C5934",
+  "town": "bar0-city-under_siege+famine-rand-47",
+  "section": "Systems/Economics",
+  "text": "What it puts on the table itself is the mill's flour.",
+  "readers": "c",
+  "kinds": [
+   "PAIR"
+  ],
+  "whys": [
+   "c: says own table is the mill's flour; next lines say failed fishing took most of its own food (FOOD failed source fish) (other: C5936)"
+  ]
+ },
+ {
+  "id": "C6183",
+  "town": "bar0-city-under_siege+famine-rand-47",
+  "section": "Systems/Power",
+  "text": "handled by Durga Khanna, the gang boss (Rival gangs)",
+  "readers": "c",
+  "kinds": [
+   "STATE"
+  ],
+  "whys": [
+   "c: Black market handled by gang boss Durga Khanna, factions by black marketeer Rajani Balan; PEOPLE puts each at the other house (other: C6188)"
+  ]
+ },
+ {
+  "id": "C6290",
+  "town": "bar0-city-under_siege+famine-rand-47",
+  "section": "Systems/Defense",
+  "text": "Offenders at Vedatala are arrested, heard and held, and each case is written down, so people expect a hearing, not a beating.",
+  "readers": "c",
+  "kinds": [
+   "PAIR"
+  ],
+  "whys": [
+   "c: calm 'a hearing, not a beating' under Desperate safety; same tab says garrison keeps order more harshly, Law & order Critical (other: C6299)"
+  ]
+ },
+ {
+  "id": "C6738",
+  "town": "bar0-city-under_siege+famine-rand-47",
+  "section": "World/NPCs",
+  "text": "How they deal Will sell from the stores at the agreed price; wants it written down and paid in full.",
+  "readers": "c",
+  "kinds": [
+   "STATE"
+  ],
+  "whys": [
+   "c: granary master sells from the stores at the agreed price, card unmarked, in active famine where hoarders have quadrupled prices (other: C5405)"
+  ]
+ },
+ {
+  "id": "C6865",
+  "town": "bar0-city-under_siege+famine-rand-47",
+  "section": "World/NPCs",
+  "text": "Secret: Authorised an illegal sortie that failed.",
+  "readers": "c+a",
+  "kinds": [
+   "STATE"
+  ],
+  "whys": [
+   "c: scroll scribe Savita Prasad 'authorised' a sortie; PEOPLE gives her no seat on any power or military office",
+   "(LOW by the first pair) a: scroll scribe, in no power, said to have authorised a military sortie; no office or power makes that possible"
+  ]
+ },
+ {
+  "id": "C7107",
+  "town": "bar0-city-under_siege+famine-rand-47",
+  "section": "World/Daily Life",
+  "text": "Vedatala is short more often than not.",
+  "readers": "c",
+  "kinds": [
+   "PAIR"
+  ],
+  "whys": [
+   "c: ordinary-times 'short more often than not, some needs met' in active famine with 54% gap; page says most households go hungry (other: C5932)"
+  ]
+ },
+ {
+  "id": "C10970",
+  "town": "bar0-city-wartime-rand-46",
+  "section": "Systems/Resources",
+  "text": "✓ Fully exploited · Gemstones · very high value",
+  "readers": "c",
+  "kinds": [
+   "LACKS"
+  ],
+  "whys": [
+   "c: gemstones 'fully exploited' but HOUSES has no mine or gemcutter and TRADE exports and makes no gems"
+  ]
+ },
+ {
+  "id": "C17589",
+  "town": "bar0-hamlet-under_siege-rand-45",
+  "section": "Systems/Institutions",
+  "text": "Services · Grain milling (a day away)",
+  "readers": "c",
+  "kinds": [
+   "PAIR"
+  ],
+  "whys": [
+   "c: house marked Stopped by the siege, yet its own row Grain milling printed on offer with no mark (other: C17588)"
+  ]
+ },
+ {
+  "id": "C42813",
+  "town": "bar0-village-calm-rand-47",
+  "section": "Systems/Economics",
+  "text": "Needed, and not brought in: livestock.",
+  "readers": "c",
+  "kinds": [
+   "STATE"
+  ],
+  "whys": [
+   "c: livestock 'not brought in'; LAND gaps say Tannery runs on imported livestock, and Tannery works unmarked"
+  ]
+ }
+]

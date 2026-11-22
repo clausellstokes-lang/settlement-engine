@@ -1,0 +1,69 @@
+/**
+ * dossierLazyTabs.js — the dossier's lazy tab-component registry, extracted
+ * VERBATIM from OutputContainer (the DossierGroupTabStrip / SimulationRulesAxes
+ * sibling-leaf idiom, so OutputContainer stays under the max-lines ratchet as
+ * tabs accrue — STEP 3.5 added Rumors & News and tipped it over).
+ *
+ * Chunking is unchanged: `lazy(() => import(...))` here produces exactly the
+ * same per-tab dynamic chunks; OutputContainer (itself lazy) simply imports
+ * the registry. Each tab loads only when first viewed.
+ */
+import { lazy } from 'react';
+
+// The DM Summary tab is REMOVED (X-5, 2026-10-30, ODQ §934.101): its two lazy exports
+// (SummaryTab, SummaryTabV2) left with it. Both files stay in place; nothing in src
+// imports them now, and the composer they rendered lives on in Table View, Session Mode
+// and the PDF chapter.
+export const PlotHooksTab = lazy(() => import('../new/tabs/PlotHooksTab.jsx'));
+export const ChronicleTab = lazy(() => import('../new/tabs/ChronicleTab.jsx'));
+export const VersionsTab = lazy(() => import('../settlement/VersionsTab.jsx'));
+export const OverviewTab = lazy(() => import('../new/tabs/OverviewTab'));
+export const EconomicsTab = lazy(() => import('../new/tabs/EconomicsTab'));
+export const ServicesTab = lazy(() => import('../new/tabs/ServicesTab'));
+// T1-14 (2026-10-30): the roster house by house, each with its own service rows.
+export const InstitutionsTab = lazy(() => import('../new/tabs/InstitutionsTab.jsx'));
+// The crisis record's one page (docs/DESIGN_CRISIS_TAB.md), registered only in a crisis.
+export const CrisisTab = lazy(() => import('../new/tabs/CrisisTab.jsx'));
+export const PowerTab = lazy(() => import('../new/tabs/PowerTab'));
+// Phase 4 W-F6 — the FAITH surface (patron / pantheon ranks / piety arc /
+// legitimacy / cause chains), tier-gated inside. It now renders inside the
+// dedicated FAITH tab (§805 split, formerly WarFaithTab/W4e) rather than under
+// Power, so it's still lazy — loaded with the FaithTab chunk on first open
+// (ratchet: faith lazy).
+// Phase 5 W-C4 — the patron/cult ASSIGNMENT control (the write half of the
+// embed-on-assign bridge). Editable dossiers only; self-gates by tier inside
+// (premium write · lapsed read-only · free upsell). Lazy so the registry + copy
+// only load when a dossier is opened (ratchet: assignment lazy).
+export const DeityAssignmentPanel = lazy(() => import('../settlement/DeityAssignmentPanel.jsx'));
+export const DefenseTab = lazy(() => import('../new/tabs/DefenseTab'));
+export const NPCsTab = lazy(() => import('../new/tabs/NPCsTab'));
+export const HistoryTab = lazy(() => import('../new/tabs/HistoryTab'));
+export const ResourcesTab = lazy(() => import('../new/tabs/ResourcesTab'));
+export const ViabilityTab = lazy(() => import('../new/tabs/ViabilityTab'));
+export const DailyLifeTab = lazy(() => import('../new/tabs/DailyLifeTab'));
+export const RelationshipsTab = lazy(() => import('../new/tabs/RelationshipsTab'));
+export const DMCompassTab = lazy(() => import('../new/tabs/DMCompassTab'));
+export const NotesTab = lazy(() => import('../new/tabs/NotesTab.jsx'));
+// Phase 5 W4e — dossier depth. Each lazy so the causal / magic / war read-models
+// only load when the tab is first opened. new/tabs is NOT in the icon-split lazy
+// dir, so these strip entries reuse icons ALREADY imported by OutputContainer
+// (Cog / Sparkles / Swords) and add nothing to the first-paint vendor-icons chunk.
+export const SubstrateTab = lazy(() => import('../new/tabs/SubstrateTab.jsx'));
+export const MagicTab = lazy(() => import('../new/tabs/MagicTab.jsx'));
+// §805 — the WarFaithTab split into two WORLD-group tabs. WAR carries the
+// believed unit picture + staleness bands + the DM-truth divergence, the named
+// wars with typed casus, the muster/condition reads, and the treaties. FAITH
+// composes OUR gated FaithSection (the constitutional premium seam) — NEVER
+// THEIRS' ungated WarFaithSection / useSettlementLiveWorld (those leak the
+// live pantheon). Each stays lazy — loaded on first open.
+export const WarTab = lazy(() => import('../new/tabs/WarTab.jsx'));
+export const FaithTab = lazy(() => import('../new/tabs/FaithTab.jsx'));
+// Rumors & News (Phase 5.5 STEP 3.5) — what this settlement has HEARD of the
+// realm (the trade-carrier rumor ledger), player-scrubbed, with the DM-truth
+// reveal on the includeGroundTruth seam. Lazy; the tab is always registered (X-7a,
+// 2026-10-30) and shows its launch teaser where no rumor ledger exists.
+export const RumorsTab = lazy(() => import('../new/tabs/RumorsTab.jsx'));
+// THE TRADITIONS wave (Engine Lift #4, T-1) — the founding-traditions register
+// (World group, beside Daily Life). Lazy so the genesis leaf + tradition corpus
+// ride THIS chunk, never the first-paint graph (ratchet: traditions lazy).
+export const TraditionsTab = lazy(() => import('../new/tabs/TraditionsTab.jsx'));

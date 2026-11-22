@@ -1,0 +1,136 @@
+{
+  "_comment": "Pillar G — Hand-curated sample dossier used by the landing-page proof card (H-2), first-dossier callouts (O-2), and the workshop locked-state preview. Crafted around the canonical Hightower's Reach example the critique uses verbatim. Schema-compatible with a real generated settlement but tuned for teaching: NPC 0 carries the wall-fund corruption secret, the supply chain has a stated 11-day failure timeline, plot hook 0 is the missing-ledger arc. Update the script scripts/build-sample-dossier.mjs if regeneration is ever needed.",
+  "_seed": "hightowers-reach-2026-04-canon",
+  "_version": 1,
+  "schemaVersion": 1,
+  "simulationVersion": 1,
+  "generatorVersion": "0.9.0",
+  "id": "sample.hightowers-reach",
+  "name": "Hightower's Reach",
+  "tier": "town",
+  "population": 2847,
+  "culture": "germanic",
+  "config": {
+    "settType": "town",
+    "tradeRouteAccess": "salt road",
+    "terrainOverride": "hills",
+    "monsterThreat": "frontier",
+    "culture": "germanic"
+  },
+  "pressureSentence": "A walled border town that stopped pretending the salt-road still works.",
+  "arrivalScene": "Stone walls cap a low hill above the road. Salt-cured smoke from the smokehouses drifts north on the prevailing wind. Most travellers see the garrison first — the new wing is two seasons too new to weather honestly. Locals nod, then watch you walk past.",
+  "institutions": [
+    { "id": "garrison",       "name": "The Garrison",           "category": "military",  "size": "large",  "weight": 0.9 },
+    { "id": "sanctuary",      "name": "Sanctuary of the Lantern","category": "religious", "size": "medium", "weight": 0.7 },
+    { "id": "saltguild",      "name": "Salt Merchants' Guild",   "category": "economy",   "size": "medium", "weight": 0.8 },
+    { "id": "wallcorps",      "name": "Wall Maintenance Corps",  "category": "civic",     "size": "small",  "weight": 0.4 },
+    { "id": "greyhorse",      "name": "The Greyhorse Inn",       "category": "service",   "size": "medium", "weight": 0.5 },
+    { "id": "watchpost",      "name": "Whitestone Watch-post",   "category": "military",  "size": "small",  "weight": 0.3 }
+  ],
+  "npcs": [
+    {
+      "id": "npc.velda",
+      "name": "Captain Velda Marsh",
+      "role": "Garrison Captain",
+      "importance": "major",
+      "institutionId": "garrison",
+      "secret": "Skimming the wall-fund to pay for outer-watch patrols. Knows the wall will crumble inside three winters. Believes the alternative — monsters in the streets — is worse.",
+      "want": "Keep the lie alive six more months.",
+      "publicFace": "stern, respected, the woman who keeps the town safe"
+    },
+    {
+      "id": "npc.aldwin",
+      "name": "Brother Aldwin Vesh",
+      "role": "Sanctuary Archivist",
+      "importance": "major",
+      "institutionId": "sanctuary",
+      "secret": "Has the missing wall-fund ledger. Won't hand it over until someone asks the right question — wants the crisis to break on its own terms.",
+      "want": "For someone to make the choice he can't.",
+      "publicFace": "patient, scholarly, never volunteers an opinion"
+    },
+    {
+      "id": "npc.mira",
+      "name": "Mira Thorne",
+      "role": "Salt-merchant guildmaster",
+      "importance": "major",
+      "institutionId": "saltguild",
+      "secret": "Has spent her own coin three times to keep convoys moving. Her name is on the wreck the moment the route closes.",
+      "want": "A new route — through anywhere — before her name is on the wreck."
+    },
+    {
+      "id": "npc.han",
+      "name": "Old Han",
+      "role": "Stable-hand, Greyhorse Inn",
+      "importance": "minor",
+      "institutionId": "greyhorse",
+      "secret": "Was at the pass the night the last convoy was attacked. Knows the attacker wasn't a monster.",
+      "want": "To be left alone. Will talk for wine."
+    }
+  ],
+  "factions": [
+    { "id": "fac.garrison",  "faction": "The Garrison",          "category": "military",  "power": 78, "trend": "rising" },
+    { "id": "fac.saltguild", "faction": "Salt Merchants' Guild", "category": "economy",   "power": 62, "trend": "failing" },
+    { "id": "fac.sanctuary", "faction": "Sanctuary of the Lantern","category":"religious","power": 45, "trend": "stable" }
+  ],
+  "economicState": {
+    "prosperity": { "tier": "Comfortable", "label": "comfortable" },
+    "exports":   ["preserved salt-meat", "cured leather", "stone", "raw wool"],
+    "imports":   ["grain", "iron tools", "dyed cloth", "reagents"],
+    "criticalImports": ["grain"]
+  },
+  "stressors": [
+    { "id": "stress.famine",    "type": "famine_primed",   "label": "Famine Primed",   "severity": "high",   "tags": ["supply_chain", "grain"] },
+    { "id": "stress.corruption","type": "corruption",       "label": "Corruption",      "severity": "medium", "tags": ["wall_fund"] }
+  ],
+  "supplyChainState": {
+    "exports": [
+      { "good": "preserved salt-meat", "destination": "regional", "stability": 0.35 }
+    ],
+    "imports": [
+      { "good": "grain", "source": "Whitestone Pass", "stability": 0.20, "criticality": "high" }
+    ],
+    "failures": [
+      {
+        "good": "grain",
+        "at": "Whitestone Pass",
+        "timeline": "11 days",
+        "cascadeTo": ["preserved salt-meat"],
+        "reason": "The pass closes intermittently. Grain caravans turn back. Exports of preserved meat (which depend on the grain-fed livestock) collapse within the same window."
+      }
+    ]
+  },
+  "plotHooks": [
+    {
+      "id": "hook.ledger",
+      "tier": "A",
+      "title": "The missing ledger",
+      "body": "Wall-fund records have vanished from the Sanctuary's archive. The Captain blames the merchant guilds; the merchants blame the militia; the truth is sitting in plain sight on Brother Aldwin's desk.",
+      "connectsTo": ["npc.velda", "npc.aldwin", "npc.mira"]
+    },
+    {
+      "id": "hook.convoy",
+      "tier": "B",
+      "title": "Salt convoy three days late",
+      "body": "Players overhear two guildwives arguing about it at the Greyhorse. Mira pays good coin for outriders willing to ride to Whitestone Pass.",
+      "connectsTo": ["npc.mira"]
+    },
+    {
+      "id": "hook.funeral",
+      "tier": "C",
+      "title": "A funeral with no body",
+      "body": "Brother Aldwin holds a vigil for a stable-hand 'found at the pass.' Old Han knows the man is alive — and hiding.",
+      "connectsTo": ["npc.aldwin", "npc.han"]
+    }
+  ],
+  "history": {
+    "events": [
+      { "yearsAgo": 142, "type": "founded",      "title": "Founded as a salt-road waystation",      "summary": "Frontier outpost on the Whitestone trade route." },
+      { "yearsAgo": 1.5, "type": "trade_break",  "title": "The convoy attack at Whitestone Pass",   "summary": "Route closes intermittently. The wall-fund is first dipped to pay outriders." },
+      { "yearsAgo": 0.06,"type": "garrison_exp", "title": "Garrison expanded — wall-fund drained",  "summary": "Captain Marsh quietly begins the shakedowns of the merchant guilds." }
+    ]
+  },
+  "neighbourLinks": [
+    { "targetName": "Greymoor",   "tier": "city",   "relType": "rival",          "distance": "two days, salt road" },
+    { "targetName": "Stonebrook", "tier": "hamlet", "relType": "trade_partner",  "distance": "half a day, upriver" }
+  ]
+}

@@ -1,0 +1,780 @@
+[
+{
+"id": "15738",
+"sev": "HIGH",
+"n": 40,
+"town": "r2r-hamlet-0",
+"section": "PDF/Services",
+"fold": "Local food security is maintained but surplus flour cannot be exported: the mill toll takes any surplus.",
+"text": "Local food security is maintained but surplus flour cannot be exported: the mill toll takes any surplus.",
+"why": "claims local food security maintained; FOOD word Deficit, 61% gap, grown 39%, stores 1.4 months, siege",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "src/generators/computeActiveChains.js",
+"line": 351,
+"fn": "computeActiveChains"
+}
+},
+{
+"id": "21442",
+"sev": "MED",
+"n": 360,
+"town": "r2s-succession_void-thorp-1",
+"section": "PDF/EconomicsTrade",
+"fold": "Payments in kind or coin from tenant farmers; the primary revenue at this scale.",
+"text": "Payments in kind or coin from tenant farmers; the primary revenue at this scale.",
+"why": "revenue from tenant farmers; no manor or landlord in HOUSES, GOVERNMENT is Elder Council, pop 11, founded by one family",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/economy/economicState.js",
+"line": 73,
+"fn": "generateEconomicState"
+}
+},
+{
+"id": "29696",
+"sev": "MED",
+"n": 99,
+"town": "r2r-village-43",
+"section": "PDF/EconomicsTrade",
+"fold": "Untaxed trade, fencing and theft bring money in here, but it goes to the criminals who run them and the treasury sees none of it.",
+"text": "Untaxed trade, fencing and theft bring money in here, but it goes to the criminals who run them and the treasury sees none of it.",
+"why": "criminals running untaxed trade; GOVERNMENT lists no criminal power, trade access isolated, exports none, no market house; under siege",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/economy/economicState.js",
+"line": 366,
+"fn": "generateEconomicState"
+}
+},
+{
+"id": "10219",
+"sev": "MED",
+"n": 92,
+"town": "r2s-famine-city-0",
+"section": "PDF/EconomicsTrade",
+"fold": "Fish is sold here, fresh or preserved.",
+"text": "Fish is sold here, fresh or preserved.",
+"why": "fish is sold here fresh or preserved; famine's failed source is fish, Fishing & Seafood chain vulnerable",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/economy/incomeLineSiblings.js",
+"line": 63,
+"fn": "FISH_EXPORT_LINE"
+}
+},
+{
+"id": "20913",
+"sev": "MED",
+"n": 87,
+"town": "r2s-famine-town-1",
+"section": "PDF/EconomicsTrade",
+"fold": "Offerings, hospitality fees, relic sales, and incidental commerce from visiting pilgrims.",
+"text": "Offerings, hospitality fees, relic sales, and incidental commerce from visiting pilgrims.",
+"why": "income from visiting pilgrims and relic sales; LAND has no pilgrimage chain, TRADE no pilgrim trade, famine under way",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/economy/economicState.js",
+"line": 252,
+"fn": "generateEconomicState"
+}
+},
+{
+"id": "02882",
+"sev": "MED",
+"n": 83,
+"town": "r2s-under_siege-city-3",
+"section": "PDF/EconomicsTrade",
+"fold": "A busy market for spell services.",
+"text": "A busy market for spell services.",
+"why": "a busy market for spell services; LAND gives Spellcasting Services impaired, and Active Siege",
+"kinds": [
+"STATE",
+"TAG"
+],
+"writer": {
+"file": "src/generators/economy/economicState.js",
+"line": 298,
+"fn": "generateEconomicState"
+}
+},
+{
+"id": "03932",
+"sev": "MED",
+"n": 83,
+"town": "r2s-occupied-city-3",
+"section": "PDF/EconomicsTrade",
+"fold": "A thriving alchemical trade in reagents, preparations, and curative potions draws customers from surrounding settlements.",
+"text": "A thriving alchemical trade in reagents, preparations, and curative potions draws customers from surrounding settlements.",
+"why": "calls the alchemical trade thriving and drawing outside customers; prosperity is Poor, under Occupation Curfew",
+"kinds": [
+"STATE",
+"TAG"
+],
+"writer": {
+"file": "src/generators/economy/incomeLineSiblings.js",
+"line": 49,
+"fn": "ALCHEMY_TRADE_LINE"
+}
+},
+{
+"id": "29522",
+"sev": "MED",
+"n": 75,
+"town": "r2s-plague_onset-village-1",
+"section": "PDF/EconomicsTrade",
+"fold": "Transit duties, warehouse fees, and re-export premiums from goods passing through the crossroads.",
+"text": "Transit duties, warehouse fees, and re-export premiums from goods passing through the crossroads.",
+"why": "warehouse fees and transit duties; HOUSES has no warehouse, toll or customs house; plague bars through traffic",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/economy/tradeGoods.js",
+"line": 143,
+"fn": "generateTradeIncomeStreams"
+}
+},
+{
+"id": "13189",
+"sev": "MED",
+"n": 55,
+"town": "r2r-town-37",
+"section": "PDF/EconomicsTrade",
+"fold": "Import and export taxes, anchorage fees, and customs inspection on all cargo.",
+"text": "Import and export taxes, anchorage fees, and customs inspection on all cargo.",
+"why": "customs inspection on all cargo; HOUSES has no Customs house; plague conditions, shipping and cargo not as usual",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/economy/economicState.js",
+"line": 144,
+"fn": "generateEconomicState"
+}
+},
+{
+"id": "08786",
+"sev": "MED",
+"n": 49,
+"town": "r2s-plague_onset-city-3",
+"section": "PDF/EconomicsTrade",
+"fold": "Entry and exit tolls collected at the city gates from merchants and travellers.",
+"text": "Entry and exit tolls collected at the city gates from merchants and travellers.",
+"why": "entry and exit tolls from merchants and travellers as usual; plague conditions, Dangerous safety, travel not as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/economy/economicState.js",
+"line": 202,
+"fn": "generateEconomicState"
+}
+},
+{
+"id": "11365",
+"sev": "MED",
+"n": 40,
+"town": "r2s-plague_onset-thorp-2",
+"section": "PDF/Services",
+"fold": "Grain is processed at the lord's mill under feudal monopoly (banalité).",
+"text": "Grain is processed at the lord's mill under feudal monopoly (banalité).",
+"why": "grain milled at the lord's mill under feudal monopoly; GOVERNMENT lists no lord, only Elder Council; thorp of 9",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/computeActiveChains.js",
+"line": 350,
+"fn": "computeActiveChains"
+}
+},
+{
+"id": "31448",
+"sev": "MED",
+"n": 40,
+"town": "r2s-plague_onset-thorp-2",
+"section": "PDF/Services",
+"fold": "Without the lord's mill, there would be no flour at all.",
+"text": "Without the lord's mill, there would be no flour at all.",
+"why": "'without the lord's mill, no flour at all'; TRADE made here lists flour and baked goods, HOUSES only Access to external mill",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/computeActiveChains.js",
+"line": 352,
+"fn": "computeActiveChains"
+}
+},
+{
+"id": "15745",
+"sev": "MED",
+"n": 39,
+"town": "r2s-occupied-metropolis-2",
+"section": "PDF/EconomicsTrade",
+"fold": "Local quarry provides dressed stone to regional builders: reliable income with low transport overhead.",
+"text": "Local quarry provides dressed stone to regional builders: reliable income with low transport overhead.",
+"why": "dressed stone and 'reliable income'; LAND gap: stone limited to intermediate products, and quarried stone is taxed by occupation",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/economy/incomeLineSiblings.js",
+"line": 66,
+"fn": "QUARRY_LINE"
+}
+},
+{
+"id": "06426",
+"sev": "MED",
+"n": 38,
+"town": "r2r-hamlet-28",
+"section": "PDF/EconomicsTrade",
+"fold": "Catch landed and sold fresh or preserved; salt fish are a major regional export commodity.",
+"text": "Catch landed and sold fresh or preserved; salt fish are a major regional export commodity.",
+"why": "catch sold fresh and salt fish a major export under famine where fish is the failed source; pop 23",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/economy/incomeLineSiblings.js",
+"line": 63,
+"fn": "FISH_EXPORT_LINE"
+}
+},
+{
+"id": "06427",
+"sev": "MED",
+"n": 28,
+"town": "r2s-famine-hamlet-2",
+"section": "PDF/EconomicsTrade",
+"fold": "Catch landed here and sold fresh or preserved.",
+"text": "Catch landed here and sold fresh or preserved.",
+"why": "catch landed and sold fresh or preserved; famine's failed source is fish, TRADE exports none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/economy/incomeLineSiblings.js",
+"line": 64,
+"fn": "FISH_LANDED_LINE"
+}
+},
+{
+"id": "03597",
+"sev": "MED",
+"n": 26,
+"town": "r2s-under_siege-metropolis-3",
+"section": "Journal/Plot Hooks",
+"fold": "A part from the wizard's tower has gone missing, and the black market has it; the fence wants a price the wizard will not pay. (Safety & Crime)",
+"text": "A part from the wizard's tower has gone missing, and the black market has it; the fence wants a price the wizard will not pay. (Safety & Crime)",
+"why": "a part from 'the wizard's tower'; HOUSES (107, whole list) has Mages' district and Academy of magic but no wizard's tower",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 722,
+"fn": "generateSafetyProfile"
+}
+},
+{
+"id": "08232",
+"sev": "MED",
+"n": 24,
+"town": "r2s-plague_onset-town-1",
+"section": "PDF/Institutions",
+"fold": "Dispute adjudication: Hears civil pleas in the town court",
+"text": "Dispute adjudication: Hears civil pleas in the town court",
+"why": "hears civil pleas 'in the town court'; HOUSES has no court, only Town council and Town hall",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/display/defenseDisplay.js",
+"line": 849,
+"fn": "COURT_HOUSE"
+}
+},
+{
+"id": "24992",
+"sev": "MED",
+"n": 23,
+"town": "r2s-mass_migration-village-2",
+"section": "PDF/Services",
+"fold": "Stone quarry » Brickmaker » Quarried stone, Building materials",
+"text": "Stone quarry » Brickmaker » Quarried stone, Building materials",
+"why": "shows a Brickmaker turning out building materials; LAND gaps say the Brickmaker exists but lacks access to clay",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/resourceData.js",
+"line": 197,
+"fn": "RESOURCE_DATA.tradeGoods"
+}
+},
+{
+"id": "14622",
+"sev": "MED",
+"n": 16,
+"town": "r2s-occupied-hamlet-1",
+"section": "Journal/Resources & Production",
+"fold": "It sends out dried dates, date wine and water rights.",
+"text": "It sends out dried dates, date wine and water rights.",
+"why": "says it sends out dates, wine and water rights; TRADE exports none, access isolated, under famine and occupation",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "src/data/resourceData.js",
+"line": 291,
+"fn": "RESOURCE_DATA.oasis_water"
+}
+},
+{
+"id": "22711",
+"sev": "MED",
+"n": 15,
+"town": "r2s-under_siege-metropolis-1",
+"section": "PDF/EconomicsTrade",
+"fold": "Revenue from international trade: licensing fees, currency exchange, and commodity brokerage.",
+"text": "Revenue from international trade: licensing fees, currency exchange, and commodity brokerage.",
+"why": "states revenue from international trade (licensing, exchange, brokerage); town is under siege, nothing comes in or goes out",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/economy/tradeGoods.js",
+"line": 156,
+"fn": "generateTradeIncomeStreams"
+}
+},
+{
+"id": "11882",
+"sev": "MED",
+"n": 14,
+"town": "r2s-famine-metropolis-0",
+"section": "Journal/Institutions",
+"fold": "Harbour master's office: Regulates port and airship traffic, assigns berths, collects anchorage fees.",
+"text": "Harbour master's office: Regulates port and airship traffic, assigns berths, collects anchorage fees.",
+"why": "regulates port traffic, assigns berths and collects anchorage fees; trade access is road, terrain Mountain, HOUSES has no docks or port facilities",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/steps/cascadePass.js",
+"line": 125,
+"fn": "instId"
+}
+},
+{
+"id": "22820",
+"sev": "MED",
+"n": 11,
+"town": "r2s-famine-metropolis-1",
+"section": "PDF/Services",
+"fold": "River fisheries » Cooper + Merchant guilds » River fish, Freshwater catch, Salted fish",
+"text": "River fisheries » Cooper + Merchant guilds » River fish, Freshwater catch, Salted fish",
+"why": "offers River fish, Freshwater catch, Salted fish as yields; FOOD says failed source is fish, famine cut 65%: under famine no line offers the failed food",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/resourceData.js",
+"line": 100,
+"fn": "RESOURCE_DATA.tradeGoods"
+}
+},
+{
+"id": "10282",
+"sev": "MED",
+"n": 10,
+"town": "r2r-hamlet-28",
+"section": "PDF/Services",
+"fold": "Fishing grounds » Fisher's landing » Salted fish, Smoked seafood, Fish oil",
+"text": "Fishing grounds » Fisher's landing » Salted fish, Smoked seafood, Fish oil",
+"why": "offers salted fish, smoked seafood, fish oil; FOOD failed source is fish and the town is in famine",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/resourceData.js",
+"line": 20,
+"fn": "RESOURCE_DATA.tradeGoods"
+}
+},
+{
+"id": "22836",
+"sev": "MED",
+"n": 9,
+"town": "r2r-hamlet-16",
+"section": "PDF/Services",
+"fold": "River fisheries » Fisher's landing » River fish, Freshwater catch, Salted fish",
+"text": "River fisheries » Fisher's landing » River fish, Freshwater catch, Salted fish",
+"why": "fish and freshwater catch flow offered; famine's failed source is fish, Fishing & Seafood chain vulnerable",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/resourceData.js",
+"line": 100,
+"fn": "RESOURCE_DATA.tradeGoods"
+}
+},
+{
+"id": "22837",
+"sev": "MED",
+"n": 8,
+"town": "r2r-hamlet-16",
+"section": "PDF/Services",
+"fold": "River fisheries » Fisher's landing » Salted fish, Smoked seafood, Fish oil",
+"text": "River fisheries » Fisher's landing » Salted fish, Smoked seafood, Fish oil",
+"why": "fish products flow River fisheries to landing to salted fish; famine's failed source is fish, Fishing Grounds absent",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/resourceData.js",
+"line": 20,
+"fn": "RESOURCE_DATA.tradeGoods"
+}
+},
+{
+"id": "22847",
+"sev": "MED",
+"n": 3,
+"town": "r2s-famine-city-0",
+"section": "PDF/Services",
+"fold": "River fisheries » Merchant guilds » River fish, Freshwater catch, Salted fish",
+"text": "River fisheries » Merchant guilds » River fish, Freshwater catch, Salted fish",
+"why": "offers river fish, freshwater catch, salted fish; under famine the failed source is fish",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/resourceData.js",
+"line": 100,
+"fn": "RESOURCE_DATA.tradeGoods"
+}
+},
+{
+"id": "10284",
+"sev": "MED",
+"n": 3,
+"town": "r2r-city-44",
+"section": "PDF/Services",
+"fold": "Fishing grounds » Merchant guilds + Fish market » Salted fish, Smoked seafood, Fish oil",
+"text": "Fishing grounds » Merchant guilds + Fish market » Salted fish, Smoked seafood, Fish oil",
+"why": "offers salted fish, smoked seafood, fish oil; FOOD failed source is fish (Active Famine, famine cut 65%)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/resourceData.js",
+"line": 20,
+"fn": "RESOURCE_DATA.tradeGoods"
+}
+},
+{
+"id": "22821",
+"sev": "MED",
+"n": 2,
+"town": "r2s-famine-metropolis-1",
+"section": "PDF/Services",
+"fold": "River fisheries » Cooper + Salt works + Merchant guilds + Fish market » Salted fish, Smoked seafood, Fish oil",
+"text": "River fisheries » Cooper + Salt works + Merchant guilds + Fish market » Salted fish, Smoked seafood, Fish oil",
+"why": "offers salted fish, smoked seafood and fish oil from river fisheries; CRISIS Famine with FOOD failed source fish, famine cut 65%",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/resourceData.js",
+"line": 20,
+"fn": "RESOURCE_DATA.tradeGoods"
+}
+},
+{
+"id": "09012",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-village-1",
+"section": "Journal/Economics & Trade",
+"fold": "Exports: Freshwater catch, Reeds and thatch, Peat fuel, Waterfowl, Salted fish, Smoked seafood",
+"text": "Exports: Freshwater catch, Reeds and thatch, Peat fuel, Waterfowl, Salted fish, Smoked seafood",
+"why": "exports freshwater catch, salted and smoked fish; FOOD failed source is fish, famine, stores 0.1 months",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/resourceData.js",
+"line": 100,
+"fn": "RESOURCE_DATA.tradeGoods"
+}
+},
+{
+"id": "23808",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-24",
+"section": "PDF/EconomicsTrade",
+"fold": "Settlement requires ~# lbs of grain/day via road trade (#% of needs).",
+"text": "Settlement requires ~231 lbs of grain/day via road trade (42% of needs).",
+"why": "says road trade supplies 42% of needs; FOOD: brought in 24%, the 42% is the gap",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/economy/foodBalance.js",
+"line": 498,
+"fn": "deriveFoodBalanceAnalysis"
+}
+},
+{
+"id": "14131",
+"sev": "MED",
+"n": 1,
+"town": "r2s-wartime-village-2",
+"section": "Journal/Plot Hooks",
+"fold": "In the war, the adventurers' charter hall leads the defence: the defence of the place, with no # named to lead it. (Wartime)",
+"text": "In the war, the adventurers' charter hall leads the defence: the defence of the place, with no one named to lead it. (Wartime)",
+"why": "says no one is named to lead the charter-hall defence; PEOPLE names Tornikes Chortasmenos, the charter master @ Adventurers' charter hall",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/defenseDisplay.js",
+"line": 458,
+"fn": "deriveSupportingCapabilities"
+}
+},
+{
+"id": "16293",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-51",
+"section": "PDF/Services",
+"fold": "Marshlands » Fishmonger » Reeds and thatch, Peat fuel, Waterfowl",
+"text": "Marshlands » Fishmonger » Reeds and thatch, Peat fuel, Waterfowl",
+"why": "marshlands feed a Fishmonger yielding reeds, peat fuel and waterfowl; HOUSES has no peat cutter, reed-cutter or wildfowler",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/resourceData.js",
+"line": 284,
+"fn": "RESOURCE_DATA.tradeGoods"
+}
+},
+{
+"id": "22838",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-city-0",
+"section": "PDF/Services",
+"fold": "River fisheries » Merchant guilds + Fish market » Salted fish, Smoked seafood, Fish oil",
+"text": "River fisheries » Merchant guilds + Fish market » Salted fish, Smoked seafood, Fish oil",
+"why": "offers salted fish, smoked seafood, fish oil; FOOD failed source is fish (Active Famine), and Fishing & Seafood is vulnerable",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/resourceData.js",
+"line": 20,
+"fn": "RESOURCE_DATA.tradeGoods"
+}
+},
+{
+"id": "09013",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-metropolis-1",
+"section": "Journal/Economics & Trade",
+"fold": "Exports: Freshwater catch, Sacred wood, Ritual components, Game meat, Hunting trophies, Salted fish, Smoked seafood, Candles and wax, Spellcasting (minor), Financial services (letters of credit), Legal services (contracts, notarial), Pilgrimage & religious tourism, Educational services (degrees, training), Military contract services, Arcane services (identification, enchanting), Scholarly services (research access, rare texts)",
+"text": "Exports: Freshwater catch, Sacred wood, Ritual components, Game meat, Hunting trophies, Salted fish, Smoked seafood, Candles and wax, Spellcasting (minor), Financial services (letters of credit), Legal services (contracts, notarial), Pilgrimage & religious tourism, Educational services (degrees, training), Military contract services, Arcane services (identification, enchanting), Scholarly services (research access, rare texts)",
+"why": "exports freshwater catch, salted fish and smoked seafood; CRISIS Famine with FOOD failed source fish, famine cut 65%",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/computeActiveChains.js",
+"line": 928,
+"fn": "INSTITUTIONAL_SERVICE_MAP"
+}
+},
+{
+"id": "09282",
+"sev": "MED",
+"n": 1,
+"town": "r2s-plague_onset-metropolis-3",
+"section": "Journal/Economics & Trade",
+"fold": "Exports: Raw wool, Livestock, Healing waters (bottled), Pilgrim hospitality, Spellcasting (minor), Magical identification, Magical item market, Weapon enchantment, Extraplanar goods (transit), Planar travel information, News and information, Maps and charts, Financial services (letters of credit), Legal services (contracts, notarial), Pilgrimage & religious tourism, Educational services (degrees, training), Military contract services, Arcane services (identification, enchanting), Scholarly services (research access, rare texts)",
+"text": "Exports: Raw wool, Livestock, Healing waters (bottled), Pilgrim hospitality, Spellcasting (minor), Magical identification, Magical item market, Weapon enchantment, Extraplanar goods (transit), Planar travel information, News and information, Maps and charts, Financial services (letters of credit), Legal services (contracts, notarial), Pilgrimage & religious tourism, Educational services (degrees, training), Military contract services, Arcane services (identification, enchanting), Scholarly services (research access, rare texts)",
+"why": "exports pilgrim hospitality and pilgrimage tourism as trade; CRISIS is plague, people do not travel or gather as usual",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/computeActiveChains.js",
+"line": 928,
+"fn": "INSTITUTIONAL_SERVICE_MAP"
+}
+},
+{
+"id": "09511",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-44",
+"section": "Journal/Economics & Trade",
+"fold": "Exports: Spellcasting (minor), Magical identification, Magical item market, Weapon enchantment, News and information, Maps and charts, Financial services (letters of credit), Legal services (contracts, notarial), Pilgrimage & religious tourism, Educational services (degrees, training), Military contract services, Arcane services (identification, enchanting), Waterborne freight services (cargo, pilotage), Scholarly services (research access, rare texts)",
+"text": "Exports: Spellcasting (minor), Magical identification, Magical item market, Weapon enchantment, News and information, Maps and charts, Financial services (letters of credit), Legal services (contracts, notarial), Pilgrimage & religious tourism, Educational services (degrees, training), Military contract services, Arcane services (identification, enchanting), Waterborne freight services (cargo, pilotage), Scholarly services (research access, rare texts)",
+"why": "exports waterborne freight and pilgrimage tourism; trade access is isolated and raids close the roads, so nothing comes or goes",
+"kinds": [
+"RECORD"
+],
+"writer": {
+"file": "src/generators/computeActiveChains.js",
+"line": 928,
+"fn": "INSTITUTIONAL_SERVICE_MAP"
+}
+},
+{
+"id": "09148",
+"sev": "MED",
+"n": 1,
+"town": "r2s-monster_pressure-metropolis-2",
+"section": "Journal/Economics & Trade",
+"fold": "Exports: Milled flour, Coal, Precious metals, Spellcasting (minor), Magical identification, Magical item market, Weapon enchantment, Extraplanar goods (transit), Planar travel information, News and information, Legal services (contracts, notarial), Pilgrimage & religious tourism, Educational services (degrees, training), Military contract services, Arcane services (identification, enchanting), Waterborne freight services (cargo, pilotage), Scholarly services (research access, rare texts)",
+"text": "Exports: Milled flour, Coal, Precious metals, Spellcasting (minor), Magical identification, Magical item market, Weapon enchantment, Extraplanar goods (transit), Planar travel information, News and information, Legal services (contracts, notarial), Pilgrimage & religious tourism, Educational services (degrees, training), Military contract services, Arcane services (identification, enchanting), Waterborne freight services (cargo, pilotage), Scholarly services (research access, rare texts)",
+"why": "exports 'Waterborne freight services (cargo, pilotage)'; trade access is road on Hills terrain, no water route",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/computeActiveChains.js",
+"line": 968,
+"fn": "INSTITUTIONAL_SERVICE_MAP"
+}
+},
+{
+"id": "09208",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-51",
+"section": "Journal/Economics & Trade",
+"fold": "Exports: Milled timber, Sacred wood, Ritual components, Raw wool, Livestock, Milled flour, Bows and crossbows, Arrows (sheaf), Candles and wax, Spellcasting (minor), Financial services (letters of credit), Legal services (contracts, notarial), Pilgrimage & religious tourism, Educational services (degrees, training), Military contract services, Arcane services (identification, enchanting), Waterborne freight services (cargo, pilotage), Scholarly services (research access, rare texts)",
+"text": "Exports: Milled timber, Sacred wood, Ritual components, Raw wool, Livestock, Milled flour, Bows and crossbows, Arrows (sheaf), Candles and wax, Spellcasting (minor), Financial services (letters of credit), Legal services (contracts, notarial), Pilgrimage & religious tourism, Educational services (degrees, training), Military contract services, Arcane services (identification, enchanting), Waterborne freight services (cargo, pilotage), Scholarly services (research access, rare texts)",
+"why": "exports 'Waterborne freight services (cargo, pilotage)'; trade access is road on Hills terrain, no water route",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/computeActiveChains.js",
+"line": 928,
+"fn": "INSTITUTIONAL_SERVICE_MAP"
+}
+},
+{
+"id": "09296",
+"sev": "MED",
+"n": 1,
+"town": "r2s-politically_fractured-metropolis-1",
+"section": "Journal/Economics & Trade",
+"fold": "Exports: Raw wool, Livestock, Sacred wood, Ritual components, Coal, Candles and wax, Spellcasting (minor), Magical identification, Magical item market, Weapon enchantment, Financial services (letters of credit), Legal services (contracts, notarial), Pilgrimage & religious tourism, Educational services (degrees, training), Military contract services, Arcane services (identification, enchanting), Waterborne freight services (cargo, pilotage), Scholarly services (research access, rare texts)",
+"text": "Exports: Raw wool, Livestock, Sacred wood, Ritual components, Coal, Candles and wax, Spellcasting (minor), Magical identification, Magical item market, Weapon enchantment, Financial services (letters of credit), Legal services (contracts, notarial), Pilgrimage & religious tourism, Educational services (degrees, training), Military contract services, Arcane services (identification, enchanting), Waterborne freight services (cargo, pilotage), Scholarly services (research access, rare texts)",
+"why": "exports 'Waterborne freight services (cargo, pilotage)'; trade access is road on Hills terrain, no water route",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/computeActiveChains.js",
+"line": 928,
+"fn": "INSTITUTIONAL_SERVICE_MAP"
+}
+},
+{
+"id": "09508",
+"sev": "MED",
+"n": 1,
+"town": "r2s-succession_void-metropolis-2",
+"section": "Journal/Economics & Trade",
+"fold": "Exports: Spellcasting (minor), Magical identification, Luxury manufactured goods, Fine metalwork and jewelry, Rare spices and exotic dyes (transit), Magical item market, Weapon enchantment, Extraplanar goods (transit), Planar travel information, News and information, Financial services (letters of credit), Legal services (contracts, notarial), Pilgrimage & religious tourism, Military contract services, Arcane services (identification, enchanting), Waterborne freight services (cargo, pilotage), Scholarly services (research access, rare texts)",
+"text": "Exports: Spellcasting (minor), Magical identification, Luxury manufactured goods, Fine metalwork and jewelry, Rare spices and exotic dyes (transit), Magical item market, Weapon enchantment, Extraplanar goods (transit), Planar travel information, News and information, Financial services (letters of credit), Legal services (contracts, notarial), Pilgrimage & religious tourism, Military contract services, Arcane services (identification, enchanting), Waterborne freight services (cargo, pilotage), Scholarly services (research access, rare texts)",
+"why": "exports 'Waterborne freight services (cargo, pilotage)'; trade access is crossroads on Plains terrain, no water route",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/computeActiveChains.js",
+"line": 928,
+"fn": "INSTITUTIONAL_SERVICE_MAP"
+}
+},
+{
+"id": "28960",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-23",
+"section": "Journal/Defense & Security",
+"fold": "Thieves' Guild (<N>ful): Controls the criminal hierarchy.",
+"text": "Thieves' Guild (Powerful): Controls the criminal hierarchy.",
+"why": "labels Thieves' Guild Powerful and in control of the criminal hierarchy; GOVERNMENT lists Thieves' Guild as Suppressed, QUARRELS has it declining",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/defenseDisplay.js",
+"line": 142,
+"fn": "criminalOpNote"
+}
+},
+{
+"id": "09234",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-9",
+"section": "Journal/Economics & Trade",
+"fold": "Exports: Precious metals, Healing waters (bottled), Pilgrim hospitality, Spellcasting (minor), Magical identification, Magical item market, Weapon enchantment, News and information, Maps and charts, Luxury manufactured goods, Fine metalwork and jewelry, Legal services (contracts, notarial), Pilgrimage & religious tourism, Educational services (degrees, training), Military contract services, Arcane services (identification, enchanting), Waterborne freight services (cargo, pilotage), Scholarly services (research access, rare texts)",
+"text": "Exports: Precious metals, Healing waters (bottled), Pilgrim hospitality, Spellcasting (minor), Magical identification, Magical item market, Weapon enchantment, News and information, Maps and charts, Luxury manufactured goods, Fine metalwork and jewelry, Legal services (contracts, notarial), Pilgrimage & religious tourism, Educational services (degrees, training), Military contract services, Arcane services (identification, enchanting), Waterborne freight services (cargo, pilotage), Scholarly services (research access, rare texts)",
+"why": "exports waterborne freight (cargo, pilotage); header trade access is isolated and terrain Hills, so no water route",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/computeActiveChains.js",
+"line": 968,
+"fn": "INSTITUTIONAL_SERVICE_MAP"
+}
+},
+{
+"id": "09214",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-56",
+"section": "Journal/Economics & Trade",
+"fold": "Exports: Mineral salts, Alum, Sulfur, Healing waters (bottled), Pilgrim hospitality, Spellcasting (minor), Magical identification, Magical item market, Weapon enchantment, News and information, Financial services (letters of credit), Legal services (contracts, notarial), Pilgrimage & religious tourism, Educational services (degrees, training), Military contract services, Arcane services (identification, enchanting), Waterborne freight services (cargo, pilotage), Scholarly services (research access, rare texts)",
+"text": "Exports: Mineral salts, Alum, Sulfur, Healing waters (bottled), Pilgrim hospitality, Spellcasting (minor), Magical identification, Magical item market, Weapon enchantment, News and information, Financial services (letters of credit), Legal services (contracts, notarial), Pilgrimage & religious tourism, Educational services (degrees, training), Military contract services, Arcane services (identification, enchanting), Waterborne freight services (cargo, pilotage), Scholarly services (research access, rare texts)",
+"why": "exports waterborne freight (cargo, pilotage); header trade access isolated, Mountain terrain; no water route",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/computeActiveChains.js",
+"line": 928,
+"fn": "INSTITUTIONAL_SERVICE_MAP"
+}
+}
+]

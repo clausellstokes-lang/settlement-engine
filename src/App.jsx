@@ -1,0 +1,1025 @@
+/**
+ * App.jsx — Pure layout shell. Zero engine/domain state declarations.
+ *
+ * All state lives in the Zustand store (src/store/). This component handles
+ * navigation, header/footer chrome, and renders the active view via AppViews.
+ * Each view reads its own state from the store via selectors.
+ *
+ * Views:
+ *   home        — Welcome landing (marketing front door)
+ *   generate    — Settlement creation wizard
+ *   settlements — Saved settlements library
+ *   realm       — The Realm hub (World Map + Pulse / Chronicle / Pantheon)
+ *   compendium  — Rules & data compendium
+ *   about-what-this-is — About: the trust page (thesis, covenant, positioning)
+ *   about-guide — About: the Practical Guide (quick start → reference → FAQ)
+ *   howto       — retired pre-split About page; redirects into the two above
+ *   gallery     — Community gallery
+ *   terms/privacy/refunds — Legal / trust pages
+ *   account     — Full account page (post-auth)
+ *   admin       — Developer admin panel (elevated roles only)
+ */
+import { useState, useEffect, useRef, lazy, Suspense } from 'react';
+import { X } from 'lucide-react';
+import useIsMobile from './hooks/useIsMobile';
+import { chromeFontSize } from './design/proseScale.js';
+import useCustomContentCloudSync from './hooks/useCustomContentCloudSync.js';
+import useChromeInsets from './hooks/useChromeInsets.js';
+import { useStore } from './store/index.js';
+import { initOutbox } from './store/campaignSliceShared.js';
+import { useRoute, navigate, replacePath } from './hooks/useRoute.js';
+import { useFocusOnViewChange } from './hooks/useFocusOnViewChange.js';
+import { allowsFloatingFeedback, barNav, guardForView, redirectForView, viewToPath, NAV_FLOW } from './lib/routes.js';
+import { applyDocumentHead } from './lib/seo.js';
+import {
+  GOLD, GOLD_BG, INK, INK_DEEP, PARCH_100, BORDER, BODY, sans, SP, R, FS, swatch, CHROME, bottomClearance, aboveFooter, FOOTER_TUCKED_BOTTOM,
+  ARROW_HANG, BOTTOM_NAV_H, BOTTOM_NAV_ATTR, HEADER_H, aboveBottomNav,
+} from './components/theme.js';
+import { resolveViewBackground, paintsPageBackground } from './config/pageBackgrounds.js';
+import NavFlowArrow from './components/nav/NavFlowArrow.jsx';
+import ArrowHeader from './components/nav/ArrowHeader.jsx';
+import { FULL_MIN_VIEWPORT } from './components/nav/arrowGeometry.js';
+import LegalRibbonRow from './components/footer/LegalRibbonRow.jsx';
+import FeatureErrorBoundary from './components/FeatureErrorBoundary.jsx';
+import Button from './components/primitives/Button.jsx';
+import { purchasesOpen } from './lib/launchGate.js';
+import IconButton from './components/primitives/IconButton.jsx';
+// The route→component registry + shared Loading live in AppViews (extracted so
+// the shell stays legible; the view table has one home).
+import { AppViews, Loading } from './AppViews.jsx';
+import CommandPaletteHost from './components/CommandPaletteHost.jsx';
+
+// Modals stay in the shell (not view-switched): they overlay whatever view is up.
+const AuthModal     = lazy(() => import('./components/AuthModal.jsx'));
+const PurchaseModal = lazy(() => import('./components/PurchaseModal.jsx'));
+// The cloud-sync banner renders null unless a persist actually fails, so it is
+// never first-paint critical — lazy so its code + icons stay off the entry's
+// static closure (first-paint byte budget).
+const CampaignSyncBanner = lazy(() => import('./components/CampaignSyncBanner.jsx'));
+const SessionEvictedBanner = lazy(() => import('./components/SessionEvictedBanner.jsx'));
+
+// The post-generate coach hosts the guidance registry's single wizard-postgen
+// whisper (the "what's next" moves). It is mounted INSIDE <main>, keyed by the route
+// (ODQ §934.29: a pop-up belongs to its page of origin — leaving unmounts it, returning
+// mounts it fresh, and only the explicit close retires it). Lazy keeps it off first
+// paint (byte budget) and, just as importantly, keeps the guidance registry — a
+// zero-import lazy leaf — out of the entry closure, which is why the shell cannot hold
+// the origin table itself and the host asks the registry instead.
+const PostGenCoach = lazy(() => import('./components/PostGenCoach.jsx'));
+
+// The two DEV panels are always-mounted but NOT first-paint critical (they
+// render null in production). Lazy so their code + icon references stay off the
+// entry's static closure (first-paint byte budget — tests/build/vendorPdfLazy.test.js).
+const DevFlagPanel   = lazy(() => import('./components/dev/DevFlagPanel.jsx'));
+const DevEmailBanner = lazy(() => import('./components/dev/DevEmailBanner.jsx'));
+// Active pricing-moment card — inline, not a modal. Renders when a moment fires;
+// cooldown enforced by the moments library so it can't hammer the user.
+const PricingMomentCard = lazy(() => import('./components/pricing/PricingMomentCard.jsx'));
+// Global floating feedback affordance (files a support ticket, tagged with the
+// active generation-id spine). Always mounted, self-gating on `visible`, so lazy
+// keeps its code + icons off the entry's first-paint closure.
+// The global floating-widget cluster (feedback widget + Surveyor S1 analyst panel),
+// lazy so both stay off first paint; each self-gates on `visible`.
+const FloatingAffordances = lazy(() => import('./components/FloatingAffordances.jsx'));
+
+// The settlement editor's mode shell (EM-D1). LAZY, and the laziness is the whole price
+// of the wave: the eager first-paint graph walks STATIC edges only, so this one dynamic
+// edge keeps the shell, EM-A1's declaration table, EM-D0e's door and EM-C4a's store slice
+// out of the entry closure — the membership fact tests/build/vendorPdfLazy.test.js prices.
+// It is mounted only while the editor's transient mode preference is set, so a session
+// that never enters edit mode never fetches the chunk at all.
+const EditModeShell = lazy(() => import('./components/edit/EditModeShell.jsx'));
+
+// ⭐ THE BAR'S ITEMS COME FROM lib/routes.js `barNav`, WHICH IS THE PAINTING'S OWN ORDER
+// (owner, ODQ §934.26 + its addendum). The explicit MOBILE_NAV_PRIORITY array that used
+// to live here is retired with the Realm's phone seat: it existed only to choose which
+// tab the five-seat cap evicted, and with five destinations for five seats there is
+// nothing to evict. Its retirement is also what makes "one order everywhere" true —
+// the array had Gallery before Compendium while the painting has them the other way.
+// Welcome/home is reached via the painted arrow's home control.
+//
+// THE HAIRLINE (§934.26: "with a hairline after the working pair (Create, Library)
+// before the reference pages"). The bar's own top rule, written once and read twice, so
+// the divider is the same ink as the edge above it and the raw-colour budget is unmoved.
+const BAR_RULE = '1px solid rgba(160,118,42,0.25)';
+
+// Is there a persisted Supabase session token on this device? A member returning
+// to the bare root should wait for their session to restore (so they aren't
+// flashed the marketing landing before being routed to /create); a logged-out
+// visitor with no token can be routed immediately. supabase-js stores its token
+// under `sb-<project-ref>-auth-token`, so we scan for that shape rather than
+// depend on a client export.
+function hasStoredSession() {
+  try {
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k && k.startsWith('sb-') && k.includes('-auth-token')) return true;
+    }
+  } catch { /* private mode → treat as no stored session */ }
+  return false;
+}
+
+export default function App() {
+  const isMobile = useIsMobile();
+  // THE PAINTED ARROW'S SWITCH (owner orders 2026-09-16): from 1024 px the header is the
+  // full arrow with its six painted words; below, the compact arrow and the bottom bar.
+  const narrow = useIsMobile(FULL_MIN_VIEWPORT);
+  // Path-based routing. `useRoute` resolves window.location → { view, … } and
+  // re-renders on Back/Forward + programmatic navigation. `setView` aliases the
+  // imperative navigator so existing setView(viewId) call sites keep working —
+  // they just push a path now. `legacy`/`notFound` drive the URL-upgrade effect
+  // below; `params` carries route segments (e.g. /settlements/:id).
+  const { view, params, legacy, notFound } = useRoute();
+  const setView = navigate;
+  // A11y: move focus to <main> on every view change so keyboard / screen-reader
+  // users aren't stranded at the top of the DOM after navigating (WCAG 2.4.3).
+  // The skip-to-content link + main[tabIndex=-1] below are the target.
+  const mainRef = useRef(null);
+  useFocusOnViewChange(view, mainRef);
+  // The pinned footer (owner orders 2026-09-16) publishes its measured band and tuck as CSS
+  // variables; it pins only where the full arrow shows (the bottom bar holds the edge below).
+  const { footerRef } = useChromeInsets(!narrow);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const [showScrollBottom, setShowScrollBottom] = useState(false);
+  // Auth-modal visibility lives on the store's uiSlice (restoration #16) so the
+  // signup/unlock PricingMomentCard can open sign-in, not the buy-credits wall.
+  const authModalOpen = useStore(s => s.authModalOpen);
+  const setAuthModalOpen = useStore(s => s.setAuthModalOpen);
+
+  const authTier = useStore(s => s.auth.tier);
+  const displayName = useStore(s => s.auth.displayName);
+  const authUserId = useStore(s => s.auth.user?.id || null);
+  const authLoading = useStore(s => s.auth.loading);
+  const isElevated = useStore(s => s.isElevated());
+  // Drive the per-view painted background (and the generation-flow override).
+  const wizardMode = useStore(s => s.wizardMode);
+  // F40: resolveViewBackground only reads `settlement` for TRUTHINESS (it treats
+  // it as a boolean "flow active" flag). Subscribing to the whole settlement
+  // object re-rendered the entire App shell on every event apply / pending edit /
+  // pulse writeback / AI overlay mutation. Subscribe to the boolean instead so
+  // the shell only re-renders when the settlement toggles absent↔present.
+  const hasSettlement = useStore(s => !!s.settlement);
+  const initAuth = useStore(s => s.initAuth);
+  const onboardingNudge = useStore(s => s.onboardingNudge);
+  const clearOnboardingNudge = useStore(s => s.clearOnboardingNudge);
+  // ⛔ A REFUSAL BELONGS TO THE CLICK THAT RAISED IT (see the route effect below).
+  const clearRefusal = useStore(s => s.clearRefusal);
+  const purchaseModalOpen = useStore(s => s.purchaseModalOpen);
+  const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
+  const setCreditBalance = useStore(s => s.setCreditBalance);
+  const creditBalance = useStore(s => s.creditBalance);
+  const loadCampaigns = useStore(s => s.loadCampaigns);
+  const loadCustomContentFromCloud = useStore(s => s.loadCustomContentFromCloud);
+  const migrateLocalCustomContentToCloud = useStore(s => s.migrateLocalCustomContentToCloud);
+  const clearCloudCustomContent = useStore(s => s.clearCloudCustomContent);
+  const [checkoutToast, setCheckoutToast] = useState(null);
+  // Same-device dossier retro auto-upgrade confirmation (108): the silent
+  // post-save claim sets this; App renders it as one calm transient toast.
+  const dossierClaimToast = useStore(s => s.dossierClaimToast);
+  const setDossierClaimToast = useStore(s => s.setDossierClaimToast);
+  // ⛔ THE EDITOR'S MODE IS READ AS A BARE PREFERENCE HERE, NEVER THROUGH ITS SLICE
+  // (EM-D1). This shell is EAGER and the eager first-paint graph walks STATIC edges, so
+  // one `import … from './store/editSlice.js'` would drag the store slice, EM-A1's
+  // declaration table and EM-D0e's door into first paint and red the editor-train arm of
+  // tests/build/vendorPdfLazy.test.js. The key is `editSlice.js`'s own
+  // EDITOR_MODE_PREF_KEY, and tests/components/editModeShell.test.jsx pins THIS read
+  // against that export so the two spellings cannot drift apart.
+  const editorMode = useStore(s => s.userPrefs?.editorMode);
+
+  // ── Bare-root front door ──────────────────────────────────────────────────
+  // The bare root (settlementforge.com) canonicalizes for EVERYONE, but not to
+  // the same place: logged-out visitors go to /home (the marketing Welcome), and
+  // signed-in members go straight to /create (their workspace) — decision 7's
+  // member-redirect, so a returning member never lands on marketing. Deep links
+  // elsewhere are respected; only the bare root is rewritten. The guard waits for
+  // a stored session to restore so a member never flashes the landing first.
+  useEffect(() => {
+    // No stored token at all ⇒ definitely logged out ⇒ route immediately (no wait,
+    // no landing-then-app flash). Otherwise wait for the saved session to restore.
+    if (hasStoredSession() && authLoading) return;
+    try {
+      // Defer the bare-root redirect while a Stripe checkout return is in flight.
+      // The return URL is the bare origin '/?checkout=success&session_id=…', and
+      // this effect runs synchronously on mount — before the checkout handler's
+      // import().then() microtask below. Rewriting to /home here would strip the
+      // query string before the reconcile handler can read it, stranding an
+      // anonymous one-shot buyer's PAID dossier. The handler consumes + cleans the
+      // params, after which a later run of this effect redirects normally.
+      if (window.location.search.includes('checkout=')) return;
+      if (window.location.pathname === '/' || window.location.pathname === '') {
+        replacePath(authTier === 'anon' ? '/home' : '/create');
+      }
+    } catch { /* private mode → fall through to the default */ }
+  }, [authLoading, authTier, view]);
+
+  // ── Initialize auth + reconcile post-checkout ─────────────────────────────
+  // F23: we NEVER declare success from the ?checkout=success URL alone (spoofable
+  // + races the webhook). For account-bound products we verify the session
+  // server-side, then poll the real entitlement (credit balance / profile tier)
+  // until it lands — toasting success only then, a persistent "processing" notice
+  // on timeout, and a terminal notice on a verified failure.
+  useEffect(() => {
+    initAuth();
+    let cancelled = false;
+    import('./lib/stripe.js').then(async (stripeLib) => {
+      const { checkCheckoutResult, fetchCreditBalance } = stripeLib;
+      const result = checkCheckoutResult();
+
+      // Prime the balance on every mount (and capture it as the reconcile baseline).
+      const primed = await fetchCreditBalance().catch(() => 0);
+      if (!cancelled) setCreditBalance(primed);
+
+      if (!result) return;
+
+      if (result.status === 'success') {
+        if (result.product === 'single_dossier') {
+          const { attachPendingDossierCheckout, readPendingDossier } = await import('./lib/pendingDossier.js');
+          // Two single_dossier checkouts land on the SAME return URL. The ANON
+          // one-shot is fingerprinted by its dt token (or a pending-dossier stash
+          // written before the Stripe redirect) — NOT the live auth tier: a buyer
+          // who signed in DURING the round-trip is still an anonymous one-shot
+          // (no durable right was granted server-side, its PDF lives only in the
+          // stash). Keying on auth tier would strand their download.
+          const isAnonOneShot = !!(result.dossierToken || readPendingDossier());
+          if (!isAnonOneShot) {
+            // No token, no stash → a SIGNED-IN buyer of a SAVED dossier bought a
+            // DURABLE right (108), granted server-side by the webhook keyed to the
+            // saveId they picked. Drop the durable-rights read cache so the saved
+            // dossier refetches its (now true) right on next view, and confirm
+            // calmly — no landing page, no navigation.
+            useStore.getState().clearDossierEntitlements?.();
+            setCheckoutToast({ text: 'Your dossier PDF is unlocked. It stays yours while this settlement is saved.', persistent: false });
+            setTimeout(() => { if (!cancelled) setCheckoutToast(null); }, 4000);
+            return;
+          }
+          // Bind Stripe's session to THIS purchase's token (the dt param) so
+          // concurrent purchases never cross-contaminate (F21). Forward
+          // session_id + dt to the landing page so it can verify precisely its own
+          // paid session — even on a different device where no stash exists.
+          attachPendingDossierCheckout(result.sessionId, result.dossierToken || null);
+          // Arm the same-device retro-claim voucher with the paid session id (108),
+          // so a later sign-up + save of this settlement can silently attach the
+          // durable export right. Best-effort; a missing voucher just means the
+          // anonymous one-shot stays a one-shot.
+          try {
+            const { attachDossierClaimSession } = await import('./lib/dossierClaimStash.js');
+            attachDossierClaimSession(result.sessionId);
+          } catch { /* non-fatal */ }
+          const search = [
+            result.sessionId ? `session_id=${encodeURIComponent(result.sessionId)}` : '',
+            result.dossierToken ? `dt=${encodeURIComponent(result.dossierToken)}` : '',
+          ].filter(Boolean).join('&');
+          navigate('dossier-success', { replace: true, search: search ? `?${search}` : '' });
+          return;
+        }
+
+        // Account-bound product: reconcile the entitlement instead of the URL.
+        if (!cancelled) setCheckoutToast({ text: 'Confirming your purchase…', persistent: true });
+        const { reconcileCheckout, OUTCOME } = await import('./lib/checkoutReconcile.js');
+        const outcome = await reconcileCheckout(result, {
+          verifySession: (sid) => stripeLib.verifyCheckoutSession(sid),
+          fetchCreditBalance: stripeLib.fetchCreditBalance,
+          fetchTier: stripeLib.fetchProfileTier,
+          baselineBalance: primed,
+          onCreditBalance: (bal) => { if (!cancelled) setCreditBalance(bal); },
+          onEntitlement: () => initAuth(),   // land the fresh tier/credits in the store
+        });
+        if (cancelled) return;
+        if (outcome.outcome === OUTCOME.SUCCESS) {
+          // Paid-conversion funnel: fire ONLY on a server-verified success (never
+          // from the ?checkout=success URL alone). checkCheckoutResult() already
+          // consumed the URL params, so a remount can never double-fire.
+          stripeLib.trackCheckoutSuccess(result.product);
+          const msg = result.product === 'premium'
+            ? 'Cartographer activated.'
+            : result.product === 'founder_lifetime'
+              ? 'Welcome aboard, Founder.'
+              : 'Credits added.';
+          setCheckoutToast({ text: msg, persistent: false });
+          setTimeout(() => { if (!cancelled) setCheckoutToast(null); }, 4000);
+        } else if (outcome.outcome === OUTCOME.PROCESSING) {
+          const ref = (result.sessionId || '').slice(0, 12);
+          setCheckoutToast({
+            text: `Payment received. Your purchase is still processing. Refresh in a minute${ref ? ` (ref ${ref})` : ''}.`,
+            persistent: true,
+          });
+        } else {
+          setCheckoutToast({
+            text: 'We couldn’t confirm this purchase. If you were charged, contact support with your Stripe receipt.',
+            persistent: true,
+          });
+        }
+      } else if (result.status === 'cancelled') {
+        // Restore-on-cancel (F21): the buyer bailed out of Stripe. Their in-flight
+        // settlement lived only in the stash across the redirect; if the editor is
+        // empty, put it back so the artifact they were about to buy isn't lost.
+        const { readRestorablePendingDossier } = await import('./lib/pendingDossier.js');
+        const restorable = readRestorablePendingDossier();
+        if (!cancelled && restorable?.settlement && !useStore.getState().settlement) {
+          useStore.getState().setSettlement(restorable.settlement);
+          navigate('generate', { replace: true });
+          setCheckoutToast({ text: 'Restored the dossier you were about to buy.', persistent: false });
+          setTimeout(() => { if (!cancelled) setCheckoutToast(null); }, 5000);
+        }
+      }
+    });
+    return () => { cancelled = true; };
+  }, [initAuth, setCreditBalance]);
+
+  // Auto-dismiss the dossier retro-claim confirmation toast after a short read.
+  useEffect(() => {
+    if (!dossierClaimToast) return undefined;
+    const id = setTimeout(() => setDossierClaimToast(null), 6000);
+    return () => clearTimeout(id);
+  }, [dossierClaimToast, setDossierClaimToast]);
+
+  useEffect(() => {
+    if (authLoading) return;
+    // Replay only after auth resolves; initOutbox also detaches synchronously on
+    // sign-out/account changes so one owner's payload can never drain as another.
+    initOutbox(authUserId);
+    if (authTier !== 'anon') loadCampaigns();
+  }, [authLoading, authTier, authUserId, loadCampaigns]);
+
+  // Refresh the credit balance on auth transitions (in-session sign-in/out). The
+  // mount-only fetch above left a user who signed in after load with a stale
+  // balance — blocking AI actions and pushing the purchase modal despite credits.
+  useEffect(() => {
+    if (authLoading) return;
+    import('./lib/stripe.js').then(({ fetchCreditBalance }) =>
+      fetchCreditBalance().then(bal => setCreditBalance(bal)));
+  }, [authLoading, authUserId, setCreditBalance]);
+
+  // F23: refetch credits + tier on tab focus / visibility (throttled to once per
+  // 15s). If a purchase's webhook grant landed while the tab was backgrounded,
+  // this surfaces it without a manual reload — and upgrades the store tier the
+  // moment premium actually flips server-side.
+  useEffect(() => {
+    if (authLoading) return;
+    let last = 0;
+    const refetch = () => {
+      if (typeof document !== 'undefined' && document.visibilityState === 'hidden') return;
+      const now = Date.now();
+      if (now - last < 15000) return;
+      last = now;
+      import('./lib/stripe.js').then(async ({ fetchCreditBalance, fetchProfileTier }) => {
+        try { setCreditBalance(await fetchCreditBalance()); } catch { /* ignore */ }
+        // Only chase a tier flip for non-premium accounts (elevated/premium have
+        // nothing to gain, anon has no profile).
+        if (authTier !== 'anon' && authTier !== 'premium') {
+          try {
+            if ((await fetchProfileTier()) === 'premium') initAuth();
+          } catch { /* ignore */ }
+        }
+      }).catch(() => {});
+    };
+    window.addEventListener('focus', refetch);
+    document.addEventListener('visibilitychange', refetch);
+    return () => {
+      window.removeEventListener('focus', refetch);
+      document.removeEventListener('visibilitychange', refetch);
+    };
+  }, [authLoading, authTier, setCreditBalance, initAuth]);
+
+  // ── Auth guards ────────────────────────────────────────────────────────────
+  // 'auth' views bounce anonymous visitors to /signin carrying ?next= (so they
+  // return post-login). That redirect STAYS: it is a door, not a refusal — the
+  // reader is sent somewhere that can actually resolve their problem, and they
+  // land back where they were aiming.
+  //
+  // ⛔ 'elevated' VIEWS NO LONGER BOUNCE ANYONE (ODQ §934.24(c) + §934.28). This
+  // branch used to `navigate('generate', { replace: true })`, so a member — or
+  // anyone — who opened /admin was silently replaced onto /create: a refusal
+  // answered by navigating, with nothing said, which is the exact class
+  // lib/refusalReasons.js and primitives/RefusalNotice.jsx were built against.
+  // A staff role cannot be bought or signed up for, so there is nowhere useful
+  // to send them; the route says why instead, where the reader is (AppViews'
+  // admin branch renders <StaffOnlyPage/>). Nothing is loosened: AdminPanel
+  // still mounts only for `isElevated`, its own body re-checks the role, and
+  // every read and write it makes is role-gated and audited server-side.
+  //
+  // Waits on authLoading so we don't act during the initial session check.
+  useEffect(() => {
+    if (authLoading) return;
+    if (guardForView(view) === 'auth' && authTier === 'anon') {
+      navigate('signin', { replace: true, search: `?next=${encodeURIComponent(viewToPath(view))}` });
+    }
+  }, [view, authTier, authLoading]);
+
+  // ── A refusal does not travel ────────────────────────────────────────
+  // ⛔ IT LEAKED ACROSS PAGES (adversarial review of the second wave). `lastRefusal` is
+  // ONE record on the store and every surface renders it on MOUNT, but only the three
+  // surfaces that raise it clear it at click time. So refusing a city fork in the Library
+  // and then opening /create showed the reader a standing accusation about a click they
+  // made on another page — a sentence with no cause in front of them.
+  //
+  // Cleared HERE rather than scoped to the raising surface, because a refusal is a fact
+  // about a CLICK and a route change ends the click: scoping would mean stamping a route
+  // onto the record and teaching every renderer to compare it, which is four more places
+  // to keep in step for the same answer. `view` is the router's own signal (the auth
+  // guard, the head and the canonical-URL upgrade all key on it), so this runs exactly
+  // when the reader arrives somewhere new — including the first render, where there is
+  // nothing to clear and clearing is free.
+  useEffect(() => {
+    clearRefusal?.();
+  }, [view, clearRefusal]);
+
+  // ── Demoted destinations → redirect to their new homes ─────────────────────
+  // The Workshop, the standalone World Map, and (since THE ABOUT SPLIT) the
+  // whole pre-split About family keep their route entries so old links and SEO
+  // still resolve, then bounce here. WHERE each one lands — including the
+  // `/how-to?tab=` → section-anchor translation that keeps every old deep link
+  // pointing at the content that absorbed it — is decided by routes.js's
+  // `redirectForView`, beside the routing table it belongs to.
+  useEffect(() => {
+    const to = redirectForView(view, typeof window !== 'undefined' ? window.location.search : '');
+    if (to) navigate(to.view, { replace: true, hash: to.hash });
+  }, [view]);
+
+  // ── Canonical-URL upgrade ──────────────────────────────────────────────────
+  // Silently rewrite legacy ?view= links and unknown paths to their canonical
+  // path (replaceState, no scroll). Non-view query params (gallery slug, flag
+  // overrides) are preserved. The bare root ('/') is DELIBERATELY left to the
+  // front-door effect above, which owns it — so which rewrite wins is not a
+  // function of effect declaration order.
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    if (!legacy && !notFound) return;
+    const sp = new URLSearchParams(window.location.search);
+    sp.delete('view');
+    const preserved = sp.toString();
+    const canonical = viewToPath(view) + (preserved ? `?${preserved}` : '');
+    if (canonical !== window.location.pathname + window.location.search) {
+      replacePath(canonical);
+    }
+  }, [view, legacy, notFound]);
+
+  // ── Document head (title + description + canonical + OG + robots) ───────────
+  // Per-route refinement over the static index.html defaults. Compendium keeps
+  // its own per-tab head refinement on top of this base (see CompendiumPanel).
+  useEffect(() => {
+    applyDocumentHead(view, params);
+  }, [view, params]);
+
+  // HAS THE ROUTE SETTLED? The bare root resolves to DEFAULT_VIEW ('generate')
+  // and the front-door effect above rewrites it to /home or /create, so for one
+  // commit `view` is a placeholder the visitor is already leaving. Both the paint
+  // (`--page-bg` below) and the preload (next effect) read THIS ONE value, so the
+  // landing page can never fetch /create's painting through either door — it was
+  // fetching it through BOTH: the wrapper briefly carried `.page-bg`, whose
+  // `var(--page-bg)` pulled the image down before the class was dropped again.
+  // `viewToPath` is the router's own mapping, so no second notion of routing is
+  // invented here; a directly-loaded route agrees from its very first render and
+  // is never delayed.
+  const routeSettled = typeof location === 'undefined' || location.pathname.startsWith(viewToPath(view));
+
+  // ── Active-view background preload ─────────────────────────────────────────
+  // The .page-bg painting is a fixed CSS background, so the browser only
+  // discovers its URL after CSS applies — late enough to delay the first painted
+  // frame. Preload ONLY the current view's image (incl. the generation-flow
+  // scene) so its bytes are already in flight. One reused <link> (found by id) is
+  // repointed on every view/flow change, typed to the format the CSS will fetch
+  // (WebP where the engine decodes it, else JPEG — see config/pageBackgrounds.js),
+  // so preload and paint always agree and no image is fetched twice.
+  //
+  // THE LINK IS FULLY ATTRIBUTED BEFORE IT ENTERS THE HEAD. It used to be
+  // appended bare and then given its `type` and `href`, which cost every page in
+  // the app TWO console warnings at boot — "<link rel=preload> has an invalid
+  // `href` value" — even though all three preloads resolve 200. The engine
+  // validates a preload the moment it joins the document and again on each
+  // attribute write, so an href-less insertion warned once, and the `type = type`
+  // write that followed re-validated the still-href-less link and warned again.
+  // The `href` write that finally made it valid was never the complaint.
+  // Measured in a headless run: append→type→href warns twice, type→href→append
+  // warns zero times, and repointing an ALREADY-VALID link (the view-change path)
+  // has always been silent. So the fix is the ORDER, not the values — `pending`
+  // holds the new link out of the head until it is fully attributed, and the two
+  // attribute writes stay in the ONE place that serves both paths.
+  //
+  // AND ONLY FOR A VIEW THAT ACTUALLY PAINTS IT. resolveViewBackground answers
+  // every view with a real painting (it falls back to DEFAULT_BG), but the two
+  // painting classes below are what decide whether anything shows it —
+  // paintsPageBackground is that same decision, so the preload cannot drift from
+  // the paint. `home` fails it: its dark-hero rule is applied by no component, so
+  // the landing page was fetching a full-size image it never displays. A view that
+  // does not paint also DROPS a stale link rather than leaving the previous view's
+  // image in flight behind it.
+  //
+  // AND NOT UNTIL THE ROUTE HAS SETTLED (routeSettled, just above): the bare root
+  // resolves to DEFAULT_VIEW ('generate') for one commit before the front-door
+  // effect rewrites it, and preloading there fetched /create's painting for a
+  // visitor on their way to the landing page.
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+    const bg = resolveViewBackground({ view, wizardMode, settlement: hasSettlement });
+    const ID = 'page-bg-preload';
+    let link = document.getElementById(ID);
+    if (!routeSettled || !paintsPageBackground(bg) || !bg.href) { link?.remove(); return; }
+    const pending = !link;
+    if (pending) {
+      link = document.createElement('link');
+      link.id = ID;
+      link.rel = 'preload';
+      link.as = 'image';
+    }
+    link.type = bg.type;
+    link.href = bg.href;
+    if (pending) document.head.appendChild(link);
+  }, [view, wizardMode, hasSettlement, routeSettled]);
+
+  useCustomContentCloudSync({
+    authTier,
+    authUserId,
+    authLoading,
+    isElevated,
+    migrateLocalCustomContentToCloud,
+    loadCustomContentFromCloud,
+    clearCloudCustomContent,
+  });
+
+  // Auto-dismiss onboarding nudge after 8s
+  useEffect(() => {
+    if (!onboardingNudge) return;
+    const id = setTimeout(() => clearOnboardingNudge(), 8000);
+    return () => clearTimeout(id);
+  }, [onboardingNudge, clearOnboardingNudge]);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY;
+      const doc = document.documentElement;
+      setShowScrollTop(y > 400);
+      // Show the jump-to-bottom control while there's >400px of page left below.
+      setShowScrollBottom((window.innerHeight + y) < (doc.scrollHeight - 400));
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    onScroll();
+    return () => { window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll); };
+  }, []);
+
+  const handleNavClick = (id) => {
+    // Contextual re-click: clicking the ALREADY-ACTIVE Library tab closes any open
+    // detail by re-navigating to the base path. (The Create-page first-screen
+    // reset needs a store nonce that has not landed yet — a 4a follow-up — so a
+    // Create re-click falls through to a normal re-nav for now.)
+    if (id === view && id === 'settlements') { setView('settlements'); return; }
+    setView(id);
+    // Free wanderers clicking Realm see a Cartographer-upgrade pitch (cooldown 24h
+    // via the moments library; premium auto-skipped; anon is handled richer on the
+    // Realm landing itself, so we fire the lighter moment here only for free users).
+    if (id === 'realm' && authTier !== 'anon' && authTier !== 'premium') {
+      import('./lib/pricingMoments.js').then(({ triggerPricingMoment }) => {
+        const setActive = useStore.getState().setActivePricingMoment;
+        triggerPricingMoment('map_clicked', setActive, { tier: authTier });
+      }).catch(() => { /* never block navigation */ });
+    }
+  };
+
+  // Nav is derived wholesale from routes.js (each ROUTES entry with a `nav` block).
+  // Adding / relabelling / reordering a tab is a one-place edit in routes.js. On the
+  // phone the Realm leaves the bar (§934.26); the tablet keeps all six seats.
+  const mobileNav = barNav(isMobile);
+  // THE HAIRLINE'S SEAT, DERIVED AND NEVER COUNTED (§934.26: "a hairline after the
+  // working pair (Create, Library) before the reference pages"). The working run is the
+  // create flow, and NAV_FLOW already says what it is; the rule goes on the FIRST cell
+  // whose predecessor does not feed it. Writing `i === 2` would put the hairline in the
+  // wrong place the day a destination is added, which is the drift this bar just left.
+  const referenceFrom = mobileNav.findIndex((item, i) => i > 0 && NAV_FLOW[mobileNav[i - 1].id] !== item.id);
+
+  // Per-view painted background. On the Create page a generation flow blows up the
+  // chosen settlement scene; see src/config/pageBackgrounds.js + index.css.
+  const pageBg = resolveViewBackground({ view, wizardMode, settlement: hasSettlement });
+
+  return (
+    <>
+      {/* Skip-to-content: the first focusable element in the DOM. Visually hidden
+          until focused (.skip-link in index.css), it lets keyboard/SR users jump
+          past the header/nav straight to <main id="main-content">. */}
+      <a href="#main-content" className="skip-link">Skip to content</a>
+      <Suspense fallback={null}><CampaignSyncBanner /><SessionEvictedBanner /></Suspense>
+      <div
+        // Painted clean views (home/settlements/gallery/compendium/pricing/account/
+        // admin/howto/legal) get `.page-painted scrim-<profile>`: a flat-cream
+        // header band fading into the per-image painting. `home` is clean but NOT
+        // painted-below-header — its own dark hero owns the surface.
+        className={[
+          'parchment-bg',
+          pageBg.clean ? '' : 'page-bg',
+          pageBg.isFlow ? 'is-flow' : '',
+          pageBg.paintedBelowHeader ? `page-painted scrim-${pageBg.scrimProfile}` : '',
+        ].filter(Boolean).join(' ')}
+        // From 640 to 1023 px the fixed bottom bar holds the viewport's bottom edge above an
+        // in-flow footer, so the page ends BOTTOM_NAV_H lower (0px from 1024 up; phones keep
+        // their own main and footer clearances).
+        // `none` until the route settles (routeSettled above): `.page-bg` already
+        // falls back to none, so the gradient still paints and only the IMAGE waits.
+        style={{ '--page-bg': routeSettled ? pageBg.url : 'none', position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column', paddingBottom: isMobile ? undefined : BOTTOM_NAV_H }}
+      >
+
+        {/* ── The header: the owner's arrow painting (components/nav/ArrowHeader.jsx),
+            one mount for every width. It returns the sticky shaft band and, as its next
+            sibling, the zero-height layer the feather hangs from. */}
+        <ArrowHeader
+          view={view}
+          onNavClick={handleNavClick}
+          onHome={() => setView('home')}
+          account={{
+            isAnon: authTier === 'anon', displayName, isElevated, creditBalance,
+            showUpgrade: authTier === 'free', upgradeLocked: !purchasesOpen(),
+            onSignIn: () => setAuthModalOpen(true),
+            onAccount: () => setView('account'), onMessages: () => navigate('account', { search: '?section=messages' }),
+            onManageSubscription: () => setView('pricing'), onUpgrade: () => setView('pricing'), onAdmin: () => setView('admin'),
+          }}
+        />
+
+        {/* ── Bottom nav (below 1024 px, where the painted words leave the header) ──
+            The primary nav landmark there (the header's own nav shows only with the full
+            arrow, so there is one "Primary" nav at every width), placed right after the
+            header so the destinations come before the page in the Tab order, as the
+            header's nav did from 640 px before the painted arrow. Fixed, so its place in
+            the DOM does not move it on screen. */}
+        {/* BOTTOM_NAV_ATTR is the bar's stable hook (lib/chromeInsets.js), the sibling of
+            the footer links row's. It changes nothing about how the bar renders; it lets a
+            measurement tell the bar's own seats from the page's controls without guessing
+            at its markup, which is how the phone reachability walk came to convict the bar
+            of sitting under itself on every route. */}
+        {narrow && (
+          <nav aria-label="Primary" {...{ [BOTTOM_NAV_ATTR]: '' }} style={{
+            position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 100,
+            background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
+            borderTop: BAR_RULE,
+            display: 'flex',
+            boxShadow: '0 -4px 20px rgba(0,0,0,0.4)',
+            paddingBottom: 'env(safe-area-inset-bottom)',
+          }}>
+            {mobileNav.map(({ id, label }, i) => {
+              const active = view === id;
+              // Phone only: on the tablet the Realm is still part of the working run and
+              // the flow chevrons carry the same reading without a rule.
+              const opensReference = isMobile && i === referenceFrom;
+              return (
+                <button
+                  key={id}
+                  type="button"
+                  onClick={() => handleNavClick(id)}
+                  aria-current={active ? 'page' : undefined}
+                  style={{
+                    // ⭐ THE SEATS ARE SIZED BY THEIR WORDS, NOT BY EQUAL SHARE (ODQ §934.63
+                    // F8). This read `flex: 1`, which is `1 1 0%` — five identical columns.
+                    // At 375 px that is 75 px a seat, 71 px of content after the 2 px side
+                    // padding, and the review measured COMPENDIUM needing 82: it was the one
+                    // label of the owner's five that ellipsised, rendering "COMPEND…" on
+                    // every page of the phone (the other four fit exactly: 45, 49, 53, 42).
+                    // Equal share cannot hold a ten-character word in a fifth of a phone at
+                    // the 12 px floor, and the floor is not negotiable, so the share is what
+                    // gives. `1 1 auto` makes each seat's basis its own label and splits the
+                    // slack evenly: the bar still fills the width, the short seats stay well
+                    // over the 44 px target, and nothing is clipped.
+                    // ⚠ minWidth:0 and the ellipsis below STAY, as the last resort for a
+                    // label longer than a phone rather than as the everyday behaviour.
+                    // `relative` is the positioning context for the flow chevron.
+                    flex: '1 1 auto', minWidth: 0, position: 'relative',
+                    display: 'flex', flexDirection: 'column',
+                    alignItems: 'center', justifyContent: 'center', gap: SP.xs,
+                    minHeight: 44,
+                    padding: `${SP.sm + 2}px 2px`,
+                    background: active ? GOLD_BG : 'transparent',
+                    // LONGHANDS ONLY (design/edgedBox.js's law, ODQ §934.22 item 4a): the
+                    // retired `border: 'none'` sat beside a varying `borderTop`, and the
+                    // left edge now varies too. Four sides, each written once.
+                    borderTop: active ? `2px solid ${GOLD}` : '2px solid transparent',
+                    borderRight: 'none',
+                    borderBottom: 'none',
+                    borderLeft: opensReference ? BAR_RULE : 'none',
+                    cursor: 'pointer',
+                    color: active ? GOLD : PARCH_100,
+                    // ⭐ THE CHROME FLOOR REACHES THE PRIMARY NAV (ODQ §934.22 item 2).
+                    // Below 1024px the painted words leave the header and THIS bar is the
+                    // whole of the primary nav — and it drew its destinations at 10px, the
+                    // smallest chrome on the phone, on the one control every page depends on.
+                    // The floor law (design/proseScale.js) had only ever been applied inside
+                    // the dossier. Desktop is untouched: chromeFontSize is the identity above
+                    // the breakpoint.
+                    fontSize: chromeFontSize(FS.xxs, isMobile), fontWeight: active ? 700 : 500,
+                    fontFamily: sans,
+                    // The 0.02em tracking exists to open up 10px capitals. At the 12px floor
+                    // it is no longer earning its width, and the widest label (COMPENDIUM, ten
+                    // characters in a fifth of a 391px page) needs every pixel of the cell
+                    // before the ellipsis below takes it. Dropped on the phone only.
+                    letterSpacing: isMobile ? 'normal' : '0.02em', textTransform: 'uppercase',
+                  }}
+                >
+                  <span style={{ lineHeight: 1, maxWidth: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{label}</span>
+                  {/* Flow chevrons, by NAV_FLOW's adjacency guard: on the tablet Create
+                      feeds Library and Library feeds Realm, so both draw; on the phone the
+                      Realm is not a seat, so only the first draws and the hairline above
+                      says where the working pair ends. */}
+                  <NavFlowArrow from={id} to={mobileNav[i + 1]?.id} active={active} />
+                </button>
+              );
+            })}
+          </nav>
+        )}
+
+        {/* ── Main content ────────────────────────────────────── */}
+        {/* `main` must NOT establish its own scroll container: a stray overflow-y
+            makes it the nearest scroll-clipping ancestor, which silently breaks
+            `position: sticky` for descendants (e.g. the wizard toolbar). Default
+            `visible` keeps the window as the sole scroller and lets descendant
+            sticky bars pin. */}
+        {/* THE CONTENT RESERVE: the painted feather hangs ARROW_HANG below the header on a
+            sticky layer, so every view but the landing starts below it at scroll top. The
+            landing pulls its dark hero up under the transparent header instead. */}
+        <main id="main-content" ref={mainRef} tabIndex={-1} className="app-route-main" style={{
+          flex: 1, outline: 'none',
+          paddingTop: view === 'home' ? `${isMobile ? SP.md : SP.lg}px` : `calc(${ARROW_HANG} + ${isMobile ? SP.md : SP.lg}px)`,
+          paddingRight: `${isMobile ? SP.md : SP.xxl}px`,
+          // ⭐ THE PHONE'S LAST ELEMENT IS REACHABLE (the owner, 2026-09-19: "note how the
+          // See Cartographer and the button for instant generate settlements are cut off
+          // and can't be scrolled down to"). The reserve was the bare number
+          // CHROME.mainPadMobile (100) — enough today, but a constant that knows nothing
+          // about the bar it is clearing, so a taller bar or a device with a deeper home
+          // indicator would silently eat the page's last control. It is now the MAXIMUM of
+          // that reserve and the bar's own measured height plus its safe-area inset, so it
+          // can never be smaller than the chrome it clears and never shrinks from today.
+          paddingBottom: isMobile ? `max(${CHROME.mainPadMobile}px, ${BOTTOM_NAV_H})` : `${SP.lg}px`,
+          paddingLeft: `${isMobile ? SP.md : SP.xxl}px`,
+        }}>
+          {/* A lazy chunk-load failure (stale deploy, dropped connection) throws
+              from inside Suspense. Without a boundary here that throw escapes to the
+              root and white-screens the whole app. The boundary sits OUTSIDE
+              Suspense so it also catches a synchronous render throw from the
+              resolved view; resetKeys={[view]} clears the error on navigation. */}
+          <FeatureErrorBoundary
+            label="App.route"
+            kind="react.render.route"
+            resetKeys={[view]}
+            fallback={(error, retry) => (
+              <div
+                role="alert"
+                style={{ margin: SP.md, padding: SP.lg, border: `1px solid ${swatch.danger}`, borderRadius: R.lg, background: swatch.dangerBg, color: swatch.danger, fontSize: FS.sm, fontFamily: sans }}
+              >
+                <div style={{ fontWeight: 700, marginBottom: SP.xs }}>This page couldn&rsquo;t be loaded.</div>
+                <div style={{ marginBottom: SP.sm, color: swatch.mutedBrown }}>
+                  This can happen after an update. Reload to pull the latest, or try again.
+                </div>
+                <div style={{ display: 'flex', gap: SP.sm }}>
+                  <Button variant="danger" size="sm" onClick={() => window.location.reload()} style={{ minHeight: 44 }}>
+                    Reload
+                  </Button>
+                  <Button variant="ghost" size="sm" onClick={retry} style={{ minHeight: 44 }}>
+                    Try again
+                  </Button>
+                </div>
+              </div>
+            )}
+          >
+            <Suspense fallback={<Loading />}>
+              <AppViews
+                view={view}
+                isMobile={isMobile}
+                setView={setView}
+                setAuthModalOpen={setAuthModalOpen}
+                authTier={authTier}
+                isElevated={isElevated}
+                authLoading={authLoading}
+                params={params}
+              />
+              {/* ⭐ THE PAGE'S OWN HINT (ODQ §934.29). The post-generate coach is a fixed,
+                  movable corner card on the desktop (the owner, 2026-10-30) and lives in
+                  the page's content flow on phones, so there it sits inside what the reader
+                  is scrolling rather than over the bottom bar. `key={view}` makes the scoping STRUCTURAL: navigating away really
+                  unmounts it (its step position goes with it) and returning mounts it
+                  fresh, re-reading the dismissal. Which pages it may appear on is the
+                  registry's to say, not the shell's — the host asks. */}
+              <PostGenCoach key={view} />
+            </Suspense>
+          </FeatureErrorBoundary>
+        </main>
+
+        {/* ── Footer ──────────────────────────────────────────────
+            ONE FOOTER ON EVERY ROUTE, THE LANDING INCLUDED (owner order
+            2026-09-16, superseding LD-3's landing exemption): "the footer should
+            be the same way on every page", the way the header is. Its look and
+            content do not change. Where the full painted arrow shows (1024 px and up;
+            the chair's ruling on the arrow plan) it is sticky at the header's layer
+            (50, below the drawer scrim), and the owner's follow-up order floats
+            ONLY ITS LINKS ROW: the bottom offset is minus the tuck (the measured
+            height below the links row), so the rest hangs below the viewport edge
+            and shows when the page is scrolled all the way down, where the footer
+            reaches its natural spot. A tucked control with keyboard focus reveals
+            the whole footer (lib/chromeInsets.js). Below 1024 px it stays in normal
+            flow above the fixed bottom nav, which holds the bottom edge there
+            (a vetoable call, recorded in docs/FIRST_CONTACT_BACKLOG.md); it
+            is `relative` on z 2 there only to clear the landing's fixed film (z 0)
+            and its z-1 roots, which would otherwise paint over an unpositioned
+            footer. Z 2, not the header's 50, keeps the in-flow phone footer where
+            it was against every other layer: under the generation reveal (z 45)
+            and under the sticky header (z 50). Its tuck is 0px. The band reaches
+            the bottom-anchored layers through aboveFooter (useChromeInsets). */}
+        <footer ref={footerRef} style={{
+          background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
+          borderTop: '1px solid rgba(160,118,42,0.25)',
+          padding: isMobile ? `${SP.lg}px ${SP.xl}px 88px` : `${SP.lg}px ${SP.xxl}px`, position: narrow ? 'relative' : 'sticky', bottom: FOOTER_TUCKED_BOTTOM, zIndex: narrow ? 2 : 50,
+        }}>
+          <LegalRibbonRow isMobile={isMobile} onNavigate={setView} showHome />
+        </footer>
+      </div>
+
+      {/* ── Scroll-to-top / scroll-to-bottom stack ────────────── */}
+      {(showScrollTop || showScrollBottom) && (() => {
+        const btn = {
+          // 44×44 to meet the mobile touch-target floor (e2e mobile-pointer-targets).
+          width: 44, height: 44, minHeight: 44, borderRadius: R.lg,
+          background: 'rgba(28,20,9,0.82)',
+          border: '1px solid rgba(160,118,42,0.5)',
+          color: GOLD, fontSize: FS['16'],
+          boxShadow: '0 2px 12px rgba(0,0,0,0.4)',
+          backdropFilter: 'blur(4px)',
+          transition: 'opacity 0.2s',
+        };
+        return (
+          <div style={{
+            position: 'fixed', bottom: aboveFooter(isMobile ? bottomClearance(CHROME.fabLift + 56) : aboveBottomNav(SP.lg + 56)), right: SP.lg, zIndex: 200,
+            display: 'flex', flexDirection: 'column', gap: 8,
+          }}>
+            {showScrollTop && (
+              <Button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                title="Back to top" aria-label="Scroll to top" style={btn}>↑</Button>
+            )}
+            {/* THE PHONE FIX (the owner, 2026-11-01, ODQ §934.103): a phone has no margin for
+                a floating control, so the jump-to-bottom button sat on the content column
+                (over the identity strip's layout chip). Phones keep only the back-to-top
+                button, which appears after a scroll; a page end is one flick away there. */}
+            {showScrollBottom && !isMobile && (
+              <Button onClick={() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' })}
+                title="Jump to bottom" aria-label="Scroll to bottom" style={btn}>↓</Button>
+            )}
+          </div>
+        );
+      })()}
+
+      {/* ── Auth modal ──────────────────────────────────────────
+          Hard-gated to signed-out visitors: the modal is the sign-in door, and a
+          signup/unlock PricingMomentCard can fire setAuthModalOpen for an already-
+          signed-in user. Rather than surface a stale account card that duplicates
+          the AccountMenu's actions, an already-authed open is a no-op. */}
+      {authModalOpen && authTier === 'anon' && (
+        <Suspense fallback={null}>
+          <AuthModal
+            onClose={() => setAuthModalOpen(false)}
+            isMobile={isMobile}
+          />
+        </Suspense>
+      )}
+
+      {/* ── Purchase modal ───────────────────────────────────── */}
+      {purchaseModalOpen && (
+        <Suspense fallback={null}>
+          <PurchaseModal onClose={() => setPurchaseModalOpen(false)} />
+        </Suspense>
+      )}
+
+      {/* ── Edit mode (EM-D1) ────────────────────────────────────
+          The tome's register while the editor is on. The condition is a BARE
+          truthiness read: the authoritative reading of the stored word — and the
+          refusal for an account the gate does not admit — belong to the shell,
+          beside the slice that owns the vocabulary and the predicate.
+          ⛔ THE BOUNDARY IS NARRATED, NOT SILENT (the witnessed-wait ratchet): this
+          fallback really paints, for a real network round trip, the first time a DM
+          enters edit mode. The sentence's one home is `edit.shell.opening` in
+          src/copy/en.js; it is spelled as a LITERAL here because this file is EAGER
+          and reaching the registry through `t()` would pull copy/index.js and en.js
+          into the first-paint closure (measured: 270 -> 272 modules), which is the
+          rise the editor-train arm exists to refuse. editModeShell.test.jsx pins the
+          literal BYTE-EQUAL to the registry's own line. */}
+      {editorMode ? (
+        <Suspense fallback={(
+          <span role="status" style={{ display: 'block', padding: `${SP.md}px ${SP.lg}px`, color: BODY, fontFamily: sans, fontSize: FS.sm }}>
+            Opening the editor…
+          </span>
+        )}>
+          <EditModeShell />
+        </Suspense>
+      ) : null}
+
+      {/* ── Feedback widget (global floating affordance) ─────────
+          Off the auth/checkout chrome; self-contained (reads the store, owns its
+          open/submit state) so the mount is a one-liner. */}
+      <CommandPaletteHost />
+
+      <Suspense fallback={null}>
+        <FloatingAffordances visible={allowsFloatingFeedback(view)} />
+      </Suspense>
+
+      {/* ── Checkout result notice ────────────────────────────────
+          F23: `checkoutToast` is { text, persistent }. A confirmed success is a
+          brief green auto-dismiss toast; a "still processing" / failed-to-confirm
+          notice is a PERSISTENT, dismissible amber banner (never a false green
+          success) so a lagging/failed webhook can't leave the user misinformed. */}
+      {checkoutToast && (
+        <div style={{
+          position: 'fixed', top: `calc(${HEADER_H} + ${SP.sm}px)`, left: '50%', transform: 'translateX(-50%)',
+          zIndex: 2000, padding: `${SP.md}px ${SP.xl}px`,
+          maxWidth: 'min(92vw, 520px)',
+          background: checkoutToast.persistent
+            ? 'linear-gradient(135deg, #7a5a1a, #9a7a2a)'
+            : 'linear-gradient(135deg, #2a7a2a, #4a8a4a)',
+          color: swatch.white, borderRadius: R.xl,
+          fontSize: FS.md, fontWeight: 700, fontFamily: sans,
+          boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+          animation: 'fadeIn 0.3s ease-out',
+          display: 'flex', alignItems: 'center', gap: SP.md,
+        }}>
+          <span>{checkoutToast.text}</span>
+          {checkoutToast.persistent && (
+            <span style={{ marginLeft: 'auto', display: 'inline-flex' }}>
+              <IconButton
+                Icon={X}
+                label="Dismiss"
+                tone="inverse"
+                size="sm"
+                onClick={() => setCheckoutToast(null)}
+              />
+            </span>
+          )}
+        </div>
+      )}
+
+      {/* ── Dossier retro-claim confirmation ──────────────────────
+          A quiet, single confirmation that a durable PDF right silently attached
+          to a just-saved settlement bought before sign-up. Calm parchment styling
+          (not the green success gradient) — it is a gentle grace, not a purchase
+          receipt. role="status" so it is announced. */}
+      {dossierClaimToast && (
+        <div
+          role="status"
+          style={{
+            position: 'fixed', bottom: aboveFooter(isMobile ? SP.xxl : aboveBottomNav(SP.xxl)), left: '50%', transform: 'translateX(-50%)',
+            zIndex: 2000, maxWidth: 'min(92vw, 420px)',
+            padding: `${SP.md}px ${SP.lg}px`,
+            background: PARCH_100, color: BODY,
+            border: `1px solid ${BORDER}`, borderRadius: R.lg,
+            fontSize: FS.sm, fontWeight: 600, fontFamily: sans, lineHeight: 1.45,
+            boxShadow: '0 6px 24px rgba(0,0,0,0.18)',
+          }}
+        >
+          {dossierClaimToast}
+        </div>
+      )}
+
+      {/* ── Onboarding nudge toast (post-tour tips + intent toasts) ────
+          This channel is overloaded — authIntents.SAVE_SETTLEMENT uses it to
+          surface "Saved as {name}" after a signup-save flow, so it must survive. */}
+      {onboardingNudge && (
+        <div
+          role="button"
+          tabIndex={0}
+          onClick={clearOnboardingNudge}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); clearOnboardingNudge(); } }}
+          style={{
+            position: 'fixed',
+            bottom: aboveFooter(isMobile ? 92 : aboveBottomNav(SP.xxl)),
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: 2000,
+            maxWidth: 480,
+            padding: `${SP.md}px ${SP.lg}px`,
+            background: 'linear-gradient(135deg, #fef9ee 0%, #fdf3d8 100%)',
+            border: `1.5px solid ${GOLD}`,
+            borderLeft: `5px solid ${GOLD}`,
+            color: INK,
+            borderRadius: R.lg,
+            fontSize: FS.sm,
+            fontFamily: sans,
+            boxShadow: '0 4px 24px rgba(0,0,0,0.35)',
+            cursor: 'pointer',
+            lineHeight: 1.5,
+          }}
+        >
+          {onboardingNudge}
+        </div>
+      )}
+
+      {/* DEV-only panels: the feature-flag panel and the send-email
+          "unconfigured" banner. DEV-gated so their modules never enter the
+          production bundle at all (they already rendered null in prod). */}
+      {import.meta.env?.DEV && (
+        <Suspense fallback={null}>
+          <DevFlagPanel />
+          <DevEmailBanner />
+        </Suspense>
+      )}
+
+      {/* Active pricing moment card. Renders null when no moment is active.
+          Suppressed on the Pricing view: an upgrade nudge floating over the page
+          that already IS the upgrade surface is redundant chrome. */}
+      {view !== 'pricing' && (
+        <Suspense fallback={null}>
+          <PricingMomentCard />
+        </Suspense>
+      )}
+    </>
+  );
+}

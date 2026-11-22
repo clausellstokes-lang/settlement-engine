@@ -1,0 +1,73 @@
+/**
+ * components/auth/VerifyEmailPage.jsx — the dedicated /verify-email route.
+ *
+ * This is the landing page for the confirmation link in the sign-up email.
+ * The Supabase client parses the token from the URL on load (detectSessionInUrl)
+ * and establishes the session, which flips the store's auth tier via the
+ * onAuthStateChange listener wired in initAuth (App mounts that on start).
+ *
+ * So this page is a thin status surface over auth state:
+ *   - loading            → "Confirming your email…"
+ *   - signed in (≠ anon) → "Email confirmed!" then redirect to /create
+ *   - still anon         → link was invalid/expired; offer Sign In
+ *
+ * It establishes no session itself and reads no token — it only reflects the
+ * result, so there's nothing here to spoof or replay.
+ */
+import { useEffect } from 'react';
+import { useStore } from '../../store/index.js';
+import { navigate, navigatePath } from '../../hooks/useRoute.js';
+import { SECOND, FS, SP } from '../theme.js';
+import { AuthPageShell, Button, Alert } from './authUI.jsx';
+import { t } from '../../copy/index.js';
+
+export default function VerifyEmailPage() {
+  const authTier = useStore(s => s.auth.tier);
+  const authLoading = useStore(s => s.auth.loading);
+
+  const confirmed = !authLoading && authTier !== 'anon';
+
+  // Once confirmed, give the user a beat to read the success state, then
+  // drop them into the app. Replace (not push) so Back doesn't loop here.
+  useEffect(() => {
+    if (!confirmed) return undefined;
+    const id = setTimeout(() => navigatePath('/create', { replace: true }), 1600);
+    return () => clearTimeout(id);
+  }, [confirmed]);
+
+  return (
+    <AuthPageShell title={t('auth.verify.title')}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: SP.lg, textAlign: 'center' }}>
+        {authLoading ? (
+          <>
+            <p
+              role="status"
+              aria-live="polite"
+              style={{ fontSize: FS.md, color: SECOND, margin: 0, lineHeight: 1.5 }}
+            >
+              {t('auth.verify.confirming')}
+            </p>
+          </>
+        ) : confirmed ? (
+          <>
+            <Alert type="success">
+              {t('auth.verify.confirmed')}
+            </Alert>
+            <Button onClick={() => navigatePath('/create', { replace: true })}>
+              {t('auth.verify.continue')}
+            </Button>
+          </>
+        ) : (
+          <>
+            <Alert type="error">
+              {t('auth.verify.expired')}
+            </Alert>
+            <Button variant="ghost" onClick={() => navigate('signin')}>
+              {t('auth.verify.goSignIn')}
+            </Button>
+          </>
+        )}
+      </div>
+    </AuthPageShell>
+  );
+}

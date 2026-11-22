@@ -1,0 +1,146 @@
+/**
+ * BeliefDivergenceBand.jsx — the DM's "what they believe vs what is true" band
+ * (experience-product-fit-2). Wires the built-and-tested settlementBeliefs read-model
+ * (Phase 5.5 Wave A) — which had ZERO UI consumers — into the Realm Inspector's War &
+ * Diplomacy surface, so the fog of war becomes watchable: for each settlement that
+ * models the realm, what it believes about the others (their strength, war readiness,
+ * the bond between them, their faith), with a confidence + staleness band, and — when
+ * a ground-truth provider is supplied — exactly where that belief is WRONG.
+ *
+ * THE ASYMMETRY SEAM (mirrors RumorsTab / FaithSection). Beliefs are inherently DM
+ * knowledge. The read-model follows the includeGroundTruth convention: the PLAYER
+ * projection (the default, fail-closed) is EMPTY, and only the DM view passes
+ * includeGroundTruth:true. This band is rendered ONLY inside the DM's Realm Inspector
+ * (never a shared/public dossier or a PDF export), whose outer world-map gate carries
+ * the tier law — so a settlement's internal model of the world, and any deity name it
+ * carries, never reaches a player.
+ *
+ * Self-gates on hasBeliefMaps (a dormant / belief-inactive world carries no belief
+ * ledger ⇒ the band renders nothing ⇒ byte-identical UI). Lazy: mounted inside the
+ * already-lazy Realm Inspector chunk, so no first-paint bytes.
+ *
+ * DIVERGENCE JOIN (truthOf): a per-axis divergence needs the current ground truth,
+ * which is engine math (settlementStrength over the pressure index); v1 shipped without
+ * it rather than rebuild that math here (a two-writer hazard). FP IN-6 U3 closes it:
+ * domain/display/beliefTruthBands.js composes the engine's own snapshot, pressure and
+ * groundTruthBelief functions and hands this band only their BANDS (parity-pinned), so
+ * the DM sees in gold where a belief is wrong. Built only for the DM, on a live world.
+ */
+
+import { useMemo } from 'react';
+import { Eye } from 'lucide-react';
+
+import { settlementBeliefs, hasBeliefMaps } from '../../domain/display/settlementBeliefs.js';
+import { beliefTruthProvider } from '../../domain/display/beliefTruthBands.js';
+import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, GOLD_BG, INK, MUTED, SECOND, SP, sans } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
+
+const CONFIDENCE_LABEL = { certain: 'certain', confident: 'confident', uncertain: 'uncertain', vague: 'only a vague sense' };
+const STALENESS_LABEL = { current: 'current', aging: 'aging', stale: 'stale' };
+
+function Pill({ children, tone }) {
+  const mobile = useIsMobile();
+  return (
+    <span style={{
+      display: 'inline-flex', alignItems: 'center',
+      padding: '1px 7px', borderRadius: 999,
+      border: `1px solid ${tone === 'warn' ? GOLD : BORDER2}`,
+      background: tone === 'warn' ? GOLD_BG : CARD,
+      color: tone === 'warn' ? GOLD : SECOND,
+      fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, whiteSpace: 'nowrap',
+    }}>
+      {children}
+    </span>
+  );
+}
+
+function BeliefRow({ belief }) {
+  const mobile = useIsMobile();
+  const b = belief.believed || {};
+  const divergence = Array.isArray(belief.divergence) ? belief.divergence : [];
+  return (
+    <article style={{
+      border: `1px solid ${divergence.length ? GOLD : BORDER}`,
+      background: divergence.length ? GOLD_BG : CARD,
+      padding: '8px 10px',
+    }}>
+      <div style={{ display: 'flex', gap: 8, alignItems: 'baseline', flexWrap: 'wrap' }}>
+        <strong style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900, overflowWrap: 'anywhere' }}>
+          {belief.subjectName}
+        </strong>
+        <span style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700 }}>
+          believed {b.strengthWord}, {b.readinessWord}
+        </span>
+      </div>
+      <div style={{ marginTop: 5, display: 'flex', flexWrap: 'wrap', gap: 5 }}>
+        <Pill>{CONFIDENCE_LABEL[belief.confidence] || belief.confidence}</Pill>
+        <Pill>{STALENESS_LABEL[belief.staleness] || belief.staleness}{belief.agoTicks > 0 ? ` · ${belief.agoTicks}w ago` : ''}</Pill>
+        {b.allianceLabel && b.allianceLabel !== 'unknown' && <Pill>reads the bond as {String(b.allianceLabel).replace(/_/g, ' ')}</Pill>}
+        {b.faithLabel && <Pill>faith {b.faithLabel}</Pill>}
+      </div>
+      {divergence.length > 0 && (
+        <ul style={{ margin: '6px 0 0', paddingLeft: 15, color: SECOND, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.5 }}>
+          {divergence.map((line, i) => <li key={i} style={{ marginBottom: 2 }}>{line}</li>)}
+        </ul>
+      )}
+    </article>
+  );
+}
+
+/**
+ * @param {{ campaign: any, saves?: any[], nameById?: Map<string, string> }} props
+ */
+export default function BeliefDivergenceBand({ campaign, saves, nameById }) {
+  const mobile = useIsMobile();
+  // V1-map (the owner's tier law, 2026-11-09): the panel mounts only inside the world map's
+  // campaign Herald, whose outer gate carries law (6); the inner tier term mirrored it and is
+  // deleted. The data gate is the read's own (beliefs, ledgers) — no behaviour change.
+  const includeGroundTruth = true;
+
+  const nameFor = useMemo(() => (/** @type {any} */ id) => nameById?.get(String(id)) || String(id), [nameById]);
+  const worldState = campaign?.worldState || null;
+
+  const observers = useMemo(() => {
+    if (!includeGroundTruth || !hasBeliefMaps(worldState)) return [];
+    // FP IN-6 U3: the display-safe truth, built once per campaign + saves for the DM only.
+    const truthFor = beliefTruthProvider({ campaign, saves: saves || [], includeGroundTruth });
+    return (campaign?.settlementIds || [])
+      .map((/** @type {any} */ id) => ({
+        observerId: String(id),
+        name: nameFor(id),
+        beliefs: settlementBeliefs({
+          worldState, observerId: String(id), includeGroundTruth: true, nameFor,
+          truthOf: truthFor ? truthFor(String(id)) : null,
+        }),
+      }))
+      .filter((o) => o.beliefs.length > 0);
+  }, [campaign, saves, worldState, includeGroundTruth, nameFor]);
+
+  // Player projection / dormant world / no modelled beliefs ⇒ render nothing.
+  if (!includeGroundTruth || !hasBeliefMaps(worldState) || observers.length === 0) return null;
+
+  return (
+    <section data-testid="belief-divergence-band" style={{ display: 'grid', gap: SP.sm }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: GOLD, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900 }}>
+        <Eye size={13} /> What they believe
+      </div>
+      <p style={{ margin: 0, color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45 }}>
+        The fog of war, made watchable: each settlement&apos;s picture of the others, as it believes it.
+      </p>
+      {observers.map((o) => (
+        <div key={o.observerId} style={{
+          border: `1px solid ${BORDER}`, background: CARD_ALT, padding: '9px 11px',
+          display: 'grid', gap: 6,
+        }}>
+          <div style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900 }}>
+            {o.name} believes…
+          </div>
+          <div style={{ display: 'grid', gap: 6 }}>
+            {o.beliefs.map((b) => <BeliefRow key={b.subjectId} belief={b} />)}
+          </div>
+        </div>
+      ))}
+    </section>
+  );
+}

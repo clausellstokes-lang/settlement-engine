@@ -1,0 +1,28 @@
+{
+  "_doc": "RECORD 4 OF THE PEOPLE CAR'S LANDING (PEOPLE-LAND, second seat), ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; PEOPLE-RULINGS M-1: one record per lane-cause, signed once at the landing from the stage at the lane's first-parent point; M-3). THE CAUSE, ONE: lane 4, PEOPLE-4 TIES (docs/PEOPLE_4_TIES_2026-11-07.md): one outgoing tie per card on its own keyed fork (R-P7), directed (from, to, type), in-degree free (the owner's charter, PEOPLE-RULINGS §0); merged onto lanes 1+2+3 at c7d552370 (MERGE-234, one tie writer by the chair's ruling). THE MOVE, MEASURED before the write by scripts/audit/landing-stage.sh measure at the stage of 5697b3735 (record 3's post-state) and at the stage of c7d552370: the generator golden master 525 of 525 (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) rows, bad219f2.. -> 27de6ac3..; the espionage fence's driven corpus 351 of 360 (thorp 51, hamlet 60, village 60, town 60, city 60, metropolis 60), 465a1a70.. -> e59a30cd..; the herald desk 478 -> 478 keys (+0 -0, 0 moved); the dossier prose manifest 892 of 1,050 (thorp 24, hamlet 168, village 162, town 202, city 168, metropolis 168); the PDF view-model snapshot 0; the preset lighting witness 0. The stage of 5697b3735 equals the stage of 0f930ce95 (record 3's post-state) on all six surfaces: the three MERGE-234 register commits between them move no golden byte.",
+  "ownerWords": "for every appropriate institution, we generate one NPC … I think just one person per institution. They act as the face. We are not building all the citizens of a settlement. That's too granular and the DM can do that work themselves. We are simply making representatives.",
+  "ownerDate": "2026-11-07",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's people-model charter of 2026-11-07, PEOPLE-RULINGS §0; the owner's delegation of 2026-11-06 to the cloud chair, session 01FE9mEvGxnFx6WTBkEC6ie9; the people car's landing)",
+  "cause": "lane 4, PEOPLE-4 TIES (lane/people-4-ties-2026-11-07, 91fb07774, merged at c7d552370): one outgoing relationship per card, directed, the graph holding the rest",
+  "seat": "PEOPLE-LAND second seat (Opus 5.5) under the cloud chair (Fable 5.1), session 01FE9mEvGxnFx6WTBkEC6ie9, from the stage at c7d552370",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    },
+    {
+      "surface": "dossier-prose-manifest",
+      "action": "re-record",
+      "predictedRows": 2,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}

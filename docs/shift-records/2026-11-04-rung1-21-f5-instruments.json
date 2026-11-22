@@ -1,0 +1,22 @@
+{
+  "_doc": "F5 INSTRUMENTS, FIRST STEP (UNITS 1–5, AT D4DD26F0A), ONE SIGNED SHIFT OF RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation, vetoable; a successor chair does not inherit this signature). THE CAUSE, ONE: F5 INSTRUMENTS, first step (units 1–5): the hook pools' sea and dock lines are licensed on waterAccessKind (unit 4, the only unit that reaches the generator; units 1–3 are the soak's instruments). THE MOVER, NAMED: first-parent step 7e28a6331 of lane/landing-rung1-2026-11-04 (\"compose: lane/rung1b-f5-instruments-2026-11-04 (at d4dd26f0a) onto the window branch\") and nothing else. THE OWNER'S WORDS are quoted verbatim from docs/OWNER_DECISION_QUEUE.md line 562 (THE LADDER IS THE LANDING, the owner, 2026-11-04) and line 592 (THE SOAK LADDER, the owner, 2026-11-03), as §934.104 quotes them (the fix-window lanes' words; F5 is the rung-1B fix window's instruments lane). HOW (the staged-tree method, DOORS-2 ruling 1; LANDING-3's brief, ruling 1: one record per moving step, in first-parent order; LANDING-4 under the same brief and its addendum): this record's stage S21 is the tree of 7e28a6331 with the door paths (the freeze register, every registered manifest and suite, docs/shift-records/, scripts/prose-manifest-cells.mjs, the door helper, the freeze walker and scripts/audit/'s doors) carried from the branch, where the previous record's writes are committed, and CARTOGRAPHY_CALIBRATION's block carried with them (it is written by hand with every corpus re-record; scripts/audit/carry-calibration.mjs); no lane touched a door path inside the window, so the stage differs from 7e28a6331 by those writes alone (scripts/audit/landing-stage.sh build stops otherwise). MEASURED BEFORE THE WRITE (a dry pass of every act against a placeholder record in the same scratch stage, then the stage rebuilt, scripts/audit/landing-act.mjs figures; S20 -> S21): generator-golden-master 30 of 525 rows (village 12, town 18; thorp, hamlet, city, metropolis 0), the key set identical — LANDING-2's measured 30, the lane's own report of 0 notwithstanding (LANDING-3's brief, ruling 4); espionage-dormancy-fence 38 of 360 rows (village 2, town 17, city 11, metropolis 8; thorp, hamlet 0), 360/360 distinct, 4b80df04.. -> 205c0c40... The first-parent commit between record 20's step and this one (F7 a373129e) measures 0 rows on every registered surface (its stage swept). The lane's second step (ef152c0e, unit 6) measures 0 golden-master rows by the census and is swept at its own stage. A surface that does not move at this stage is not listed. W6 stays the one named red of the calibration suite (the corpus does not move at this stage), carried to record 27 by the chair's ruling 2 in LANDING-4's addendum. RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation, vetoable; a successor chair does not inherit this signature).",
+  "ownerWords": "well before we do the PRs, do the 1,000 again, the 10,000, the 100,000, and the 1 million with fixes where findings are found. PR in between each · after all of that, run 1000 generated settlements and review each in depth and in aggregate and tune",
+  "ownerDate": "2026-11-04",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
+  "cause": "F5 INSTRUMENTS, first step (units 1–5): the hook pools' sea and dock lines are licensed on waterAccessKind (unit 4, the only unit that reaches the generator; units 1–3 are the soak's instruments)",
+  "seat": "LANDING-4 (Opus 5.5) under the cloud chair (Fable 5.1), session 019yED1Rc3svZxTNcEJVRr77, from the stage at 7e28a6331",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    }
+  ]
+}

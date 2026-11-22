@@ -1,0 +1,22 @@
+{
+  "_doc": "CRISIS (LANE CRISIS, UNITS 1–7, DOCS/DESIGN_CRISIS_TAB.MD), ONE SIGNED SHIFT OF RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation, vetoable; a successor chair does not inherit this signature). THE CAUSE, ONE: CRISIS (lane crisis, units 1–7, docs/DESIGN_CRISIS_TAB.md): the crisis record carries its derived cast. THE MOVER, NAMED: first-parent step d3e072368 of lane/landing-rung1-2026-11-04 (\"compose: lane/crisis-2026-11-03 onto the window branch\") and nothing else. THE OWNER'S WORDS are quoted verbatim from docs/DESIGN_CRISIS_TAB.md line 9 (\"Then: \\\"Do it\\\".\", the owner, 2026-11-03, after the words quoted at line 7). HOW (the staged-tree method, DOORS-2 ruling 1; LANDING-3's brief, ruling 1: one record per moving step, in first-parent order): this record's stage S3 is the tree of d3e072368 with the door paths (the freeze register, every registered manifest and suite, docs/shift-records/, scripts/prose-manifest-cells.mjs and scripts/audit/'s doors) carried from the branch, where the previous record's writes are committed; no lane touched a door path inside the window, so the stage differs from d3e072368 by those writes alone. MEASURED BEFORE THE WRITE (scripts/audit/golden-master-stage.mjs, refence.mjs, herald-stage.mjs, witness-stage.mjs and the capture arms against a scratch record in a throwaway worktree at d3e072368, S2 -> S3): generator-golden-master 516 of 525 rows (thorp 84, hamlet 84, village 84, town 96, city 84, metropolis 84), the key set identical; espionage-dormancy-fence 103 of 360 rows (thorp 21, hamlet 24, village 16, town 11, city 15, metropolis 16), 360/360 distinct, 48e1248a.. -> 5103a51e... A surface that does not move at this stage is not listed. RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation, vetoable; a successor chair does not inherit this signature).",
+  "ownerWords": "Do it",
+  "ownerDate": "2026-11-03",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
+  "cause": "CRISIS (lane crisis, units 1–7, docs/DESIGN_CRISIS_TAB.md): the crisis record carries its derived cast",
+  "seat": "LANDING-3 (Opus 5.5) under the cloud chair (Fable 5.1), session 019yED1Rc3svZxTNcEJVRr77, from the stage at d3e072368",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    }
+  ]
+}

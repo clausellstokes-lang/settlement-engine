@@ -1,0 +1,6 @@
+{"id":"C42801","town":"bar0-village-calm-rand-47","sev":"MED","kind":"STATE","why":"says rites keep the catch coming, landed and sold here; LAND has fishing grounds depleted, landing short of fish, salted fish imported","other":"C42652"}
+{"id":"C42739","town":"bar0-village-calm-rand-47","sev":"LOW","kind":"PAIR","why":"Fish market row bare, fish sold daily from morning catch; the landing that supplies it is marked Short of fish","other":"C42652"}
+{"id":"C42868","town":"bar0-village-calm-rand-47","sev":"MED","kind":"STATE","why":"Fishing Grounds printed Abundant; LAND gives them depleted, and C42862, C42874 say worked out","other":"C42862"}
+{"id":"C42952","town":"bar0-village-calm-rand-47","sev":"LOW","kind":"LACKS","why":"'under noble oversight'; GOVERNMENT lists no noble power, only Religious Authorities and Elected Reeve","other":""}
+{"id":"C43835","town":"bar0-village-famine-rand-45","sev":"LOW","kind":"LACKS","why":"'under noble oversight'; GOVERNMENT lists no noble power (Religious Authorities, Elected Reeve, Grain Holders only)","other":""}
+{"id":"DONE","lines":1911,"blocks":2,"flags":5}

@@ -1,0 +1,16 @@
+{
+  "_doc": "A SHAPE TO COPY, NOT A SIGNATURE. Every provenance field below is blank, so tests/helpers/goldenRecordDoor.js REFUSES this file — and tests/lint/goldenFreeze.walker.test.js asserts that refusal on every gate run, so the template can never quietly become an authorization. Copy it, fill it, name it for its cause and date, and never edit a record after the fact: the register pins each one by hash, and a record that needs correcting is superseded by a new record that says so.",
+  "ownerWords": "",
+  "ownerDate": "",
+  "odqRow": "",
+  "cause": "",
+  "seat": "",
+  "surfaces": [
+    {
+      "surface": "",
+      "action": "re-record",
+      "predictedRows": 0,
+      "proofForm": "settlement-hash"
+    }
+  ]
+}

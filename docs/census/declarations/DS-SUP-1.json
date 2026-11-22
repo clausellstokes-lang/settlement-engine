@@ -1,0 +1,225 @@
+{
+  "id": "DS-SUP-1",
+  "source": "src/data/dossierStateProse/economy.generated.js",
+  "drawKind": "K",
+  "pools": [
+    {
+      "id": "DS-SUP-1::COMPLETE LINE, output exported",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: complete line, output exported",
+      "lines": [
+        {
+          "id": "DS-SUP-1::COMPLETE LINE, output exported::v1",
+          "text": "The line from {resource} to {good} is unbroken: the workings feed {institution}, {institut",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-SUP-1::COMPLETE LINE, output exported::v2",
+          "text": "Follow {resource} through {settlement} and it does not stop anywhere. It goes into {instit",
+          "needs": [
+            "gate"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"comes out of the gates\""
+        },
+        {
+          "id": "DS-SUP-1::COMPLETE LINE, output exported::v3",
+          "text": "This is the trade the town is known for. Every hand in the line between the {resource} and",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "presumes an overland road approach (route: road|crossroads; disjunction, not declared) — reads oddly on a river/port approach"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-SUP-1::A PROCESSING HOUSE MISSING FROM THE ROSTER",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: processing institution missing from roster",
+      "lines": [
+        {
+          "id": "DS-SUP-1::A PROCESSING HOUSE MISSING FROM THE ROSTER::v1",
+          "text": "{settlement} has the {resource} and not the {institution}. The line ends where the working",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-SUP-1::A PROCESSING HOUSE MISSING FROM THE ROSTER::v2",
+          "text": "A stranger looking for {institution} here will not find one. What the town takes out of th",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "unhomed: extractive resource (presumes {resource} comes out of the ground — mine/quarry — false for timber/fish/grain chains)"
+        },
+        {
+          "id": "DS-SUP-1::A PROCESSING HOUSE MISSING FROM THE ROSTER::v3",
+          "text": "The step that would make {resource} into {good} is not here. It has to be sent for, or don",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-SUP-1::UPSTREAM LINK COVERED BY AN IMPORT",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: upstream link covered by import",
+      "lines": [
+        {
+          "id": "DS-SUP-1::UPSTREAM LINK COVERED BY AN IMPORT::v1",
+          "text": "{settlement} does not raise the {resource} its {chain} runs on. It buys it, and the line w",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-SUP-1::UPSTREAM LINK COVERED BY AN IMPORT::v2",
+          "text": "The {chain} is whole on the town's side and borrowed on the far side; {institution} has ev",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-SUP-1::UPSTREAM LINK COVERED BY AN IMPORT::v3",
+          "text": "What goes into the {chain} comes from elsewhere. The work is local; the material is not.",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-SUP-1::RESOURCE DEPLETED",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: resource depleted",
+      "lines": [
+        {
+          "id": "DS-SUP-1::RESOURCE DEPLETED::v1",
+          "text": "The {resource} is worked out. The line above {institution} is still drawn on the rolls and",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-SUP-1::RESOURCE DEPLETED::v2",
+          "text": "‹needs a dated depletion› {settlement}'s {resource} gave out {timeband_since} and the town",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "author mark \"needs a dated depletion\" ({timeband_since}) — unhomed: depletion date; \"workings\" presumes extraction (unhomed: extractive resource (presumes {resource} comes out of the ground — mine/quarry — false for timber/fish/grain chains))"
+        },
+        {
+          "id": "DS-SUP-1::RESOURCE DEPLETED::v3",
+          "text": "What {institution} still works, it works on what is left. The {resource} is exhausted and ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-SUP-1::ENTREPÔT PASS-THROUGH (no workshop in the line)",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: entrepot pass-through",
+      "lines": [
+        {
+          "id": "DS-SUP-1::ENTREPÔT PASS-THROUGH (no workshop in the line)::v1",
+          "text": "Nothing in this {chain} begins or ends here. Goods arrive finished, are counted, and go on",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-SUP-1::ENTREPÔT PASS-THROUGH (no workshop in the line)::v2",
+          "text": "A stranger tracing {good} through {settlement} finds no workshop in the line at all: only ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-SUP-1::ENTREPÔT PASS-THROUGH (no workshop in the line)::v3",
+          "text": "The town does not make it and does not use it. The town moves it.",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-SUP-1::BLOCKED: nothing can be got away",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: chain blocked, nothing can be got away",
+      "lines": [
+        {
+          "id": "DS-SUP-1::BLOCKED: nothing can be got away::v1",
+          "text": "The {chain} is on the rolls and off the road. There is no way to move what it makes, so it",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-SUP-1::BLOCKED: nothing can be got away::v2",
+          "text": "The workings above {settlement} sit idle. It is not that there is nothing in them; it is t",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"The workings above {settlement}\" — unhomed: extractive resource (presumes {resource} comes out of the ground — mine/quarry — false for timber/fish/grain chains); also presumes upland workings"
+        },
+        {
+          "id": "DS-SUP-1::BLOCKED: nothing can be got away::v3",
+          "text": "The town has the {resource} and no use for it. Without a road out, the ground might as wel",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"the ground might as well be empty\" — unhomed: extractive resource (presumes {resource} comes out of the ground — mine/quarry — false for timber/fish/grain chains)"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    }
+  ]
+}

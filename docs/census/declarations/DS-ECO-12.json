@@ -1,0 +1,383 @@
+{
+  "id": "DS-ECO-12",
+  "source": "src/data/dossierStateProse/economy.generated.js",
+  "drawKind": "K",
+  "pools": [
+    {
+      "id": "DS-ECO-12::INCOME MIX: one source carries the town",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: income mix, one source dominant",
+      "lines": [
+        {
+          "id": "DS-ECO-12::INCOME MIX: one source carries the town::v1",
+          "text": "Well past half of what {settlement} earns comes from a single trade, and the accounts have",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-12::INCOME MIX: one source carries the town::v2",
+          "text": "There is one thing this town does for money, and everybody's living is downstream of it wh",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-12::INCOME MIX: one source carries the town::v3",
+          "text": "{settlement} rests on one earner. Nothing about that is failing; everything about the town",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-12::INCOME MIX: two or three sources between them",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: income mix, two or three sources",
+      "lines": [
+        {
+          "id": "DS-ECO-12::INCOME MIX: two or three sources between them::v1",
+          "text": "{settlement}'s earnings come from a handful of trades in roughly comparable portions, and ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-12::INCOME MIX: two or three sources between them::v2",
+          "text": "Ask what this town lives on and you will be given a short list rather than an answer.",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-12::INCOME MIX: two or three sources between them::v3",
+          "text": "No single trade at {settlement} is large enough to dictate to the hall, and the town's pol",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"dictate to the hall\" — unhomed: governing hall (≈ ruler: council|mayor, disjunction, not declared)"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-12::INCOME MIX: a broad spread, no leader",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: income mix, broad spread",
+      "lines": [
+        {
+          "id": "DS-ECO-12::INCOME MIX: a broad spread, no leader::v1",
+          "text": "Nothing {settlement} does earns a real portion of the whole; the town's income is a great ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-12::INCOME MIX: a broad spread, no leader::v2",
+          "text": "A stranger cannot say what {settlement} is for, and the reason is that the town is not for",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-12::INCOME MIX: a broad spread, no leader::v3",
+          "text": "{settlement} would barely notice losing any single trade and could not replace several, wh",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-12::INCOME MIX: a criminal line is present",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: a criminal income line present (incomeSources isCriminal); crime atom reader differs",
+      "lines": [
+        {
+          "id": "DS-ECO-12::INCOME MIX: a criminal line is present::v1",
+          "text": "A real portion of what {settlement} earns is earned by people who would not describe the e",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": "dm-only"
+        },
+        {
+          "id": "DS-ECO-12::INCOME MIX: a criminal line is present::v2",
+          "text": "Some of this town's money has no honest account of itself, and the town's ordinary trades ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": "dm-only"
+        },
+        {
+          "id": "DS-ECO-12::INCOME MIX: a criminal line is present::v3",
+          "text": "The unlawful earnings at {settlement} are real and contained: {faction} takes its portion ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": "dm-only; {faction} slot"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-12::INCOME MIX: the criminal line leads",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: criminal income line leads",
+      "lines": [
+        {
+          "id": "DS-ECO-12::INCOME MIX: the criminal line leads::v1",
+          "text": "The largest single earner at {settlement} is the one that is not written down, and every l",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": "dm-only"
+        },
+        {
+          "id": "DS-ECO-12::INCOME MIX: the criminal line leads::v2",
+          "text": "What keeps this town solvent is the part of it nobody will name, and the naming is what wo",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": "dm-only"
+        },
+        {
+          "id": "DS-ECO-12::INCOME MIX: the criminal line leads::v3",
+          "text": "A stranger doing honest business at {settlement} is competing with the town's principal in",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": "dm-only"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-12::TRADE PROFILE: exports and imports both present",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: exports and imports both present",
+      "lines": [
+        {
+          "id": "DS-ECO-12::TRADE PROFILE: exports and imports both present::v1",
+          "text": "{settlement} sends {good} out and takes other goods in, and the two columns are the whole ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-12::TRADE PROFILE: exports and imports both present::v2",
+          "text": "Everybody here knows what leaves and what arrives, because the same carts do both.",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": "\"the same carts do both\" — overland carts"
+        },
+        {
+          "id": "DS-ECO-12::TRADE PROFILE: exports and imports both present::v3",
+          "text": "The market at {settlement} carries the town's own goods and other towns' goods on the same",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"The market at {settlement}… on the same stalls\""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-12::TRADE PROFILE: no significant exports",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: no significant exports",
+      "lines": [
+        {
+          "id": "DS-ECO-12::TRADE PROFILE: no significant exports::v1",
+          "text": "{settlement} sends nothing out worth recording. What the town makes, the town uses, and th",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-12::TRADE PROFILE: no significant exports::v2",
+          "text": "Nothing leaves this town but people, and not many of those.",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": "\"Nothing leaves this town but people\" — weak emigration presumption (migration: out, not declared: \"not many of those\")"
+        },
+        {
+          "id": "DS-ECO-12::TRADE PROFILE: no significant exports::v3",
+          "text": "{settlement} produces enough to feed and clothe itself and sells none of it, which is a de",
+          "needs": [],
+          "excludes": [
+            "food: ≤ deficit"
+          ],
+          "colour": false,
+          "notes": "\"produces enough to feed and clothe itself\""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-12::TRADE PROFILE: imports only, nothing outward",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: imports only",
+      "lines": [
+        {
+          "id": "DS-ECO-12::TRADE PROFILE: imports only, nothing outward::v1",
+          "text": "More arrives at {settlement} than leaves it, and what pays for the difference is not in th",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-12::TRADE PROFILE: imports only, nothing outward::v2",
+          "text": "The town buys what it needs and sells almost nothing, and the arrangement holds exactly as",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-12::TRADE PROFILE: imports only, nothing outward::v3",
+          "text": "This town takes delivery and does not dispatch, and everybody here can name what the diffe",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-12::TRADE PROFILE: local production listed",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: localProduction listed",
+      "lines": [
+        {
+          "id": "DS-ECO-12::TRADE PROFILE: local production listed::v1",
+          "text": "A good portion of what {settlement} consumes is made inside its own walls, and never appea",
+          "needs": [
+            "walls"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "K mark walls"
+        },
+        {
+          "id": "DS-ECO-12::TRADE PROFILE: local production listed::v2",
+          "text": "Much of what a stranger will buy at {settlement} was made within sight of where it is sold",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-12::TRADE PROFILE: local production listed::v3",
+          "text": "The town makes its own ordinary things and buys its extraordinary ones, which is the arran",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-12::TRADE PROFILE: local production listed::v4",
+          "text": "A good portion of what {settlement} consumes is made within its own bounds, and never appe",
+          "needs": [],
+          "excludes": [
+            "walls"
+          ],
+          "colour": false,
+          "notes": "K mark no walls (twin of v1)"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-12::TRADE PROFILE: isEntrepot, transit goods marked among the exports",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: isEntrepot, transit goods among exports",
+      "lines": [
+        {
+          "id": "DS-ECO-12::TRADE PROFILE: isEntrepot, transit goods marked among the exports::v1",
+          "text": "Some of what leaves {settlement} as an export never belonged to the town. It arrived, was ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-12::TRADE PROFILE: isEntrepot, transit goods marked among the exports::v2",
+          "text": "The export list at {settlement} is longer than the town's own trades would explain, and th",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-12::TRADE PROFILE: isEntrepot, transit goods marked among the exports::v3",
+          "text": "Half of what goes out of this town came into it the same season, and the town's part of th",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"the yard and the road\" — presumes an overland road approach (route: road|crossroads; disjunction, not declared) — reads oddly on a river/port approach"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    }
+  ]
+}

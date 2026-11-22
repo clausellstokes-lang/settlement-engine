@@ -1,0 +1,5 @@
+{"id":"C19069","town":"bar0-hamlet-under_siege-rand-47","sev":"LOW","kind":"PAIR","why":"mill access card marked Stopped by the siege, yet its only service row 'Grain milling (a day away)' carries no stopped mark","other":"C19068"}
+{"id":"C19375","town":"bar0-hamlet-under_siege-rand-47","sev":"LOW","kind":"LACKS","why":"'changes by street' in a hamlet of 82 with 5-25 dwellings; no streets to speak of","other":""}
+{"id":"C19407","town":"bar0-hamlet-under_siege-rand-47","sev":"MED","kind":"PAIR","why":"magical food 'supplied by Access to a house of worship', which the page marks Stopped by the siege, yet magic still feeds 27%","other":"C19076"}
+{"id":"C19560","town":"bar0-hamlet-under_siege-rand-47","sev":"LOW","kind":"BROKEN","why":"filter says Leverage (1) but two Mutual Leverage ties are listed (Asuka Ma-Il Liu, Chen Wang-Fengyi Zhou)","other":""}
+{"id":"DONE","lines":890,"blocks":1,"flags":4}

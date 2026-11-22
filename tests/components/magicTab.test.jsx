@@ -1,0 +1,107 @@
+/** @vitest-environment jsdom */
+import { afterEach, describe, expect, test } from 'vitest';
+import { cleanup, render } from '@testing-library/react';
+
+import MagicTab from '../../src/components/new/tabs/MagicTab.jsx';
+import { deriveMagicPosture } from '../../src/domain/display/dossierViewModel.js';
+
+afterEach(cleanup);
+
+const liveMagicTown = {
+  id: 'm1',
+  name: 'Spireholt',
+  population: 4000,
+  config: { magicExists: true, magicLevel: 'high' },
+  institutions: [{ name: "Wizard's Tower", category: 'Magic' }],
+  powerStructure: { factions: [{ faction: 'Mages', archetype: 'arcane', power: 50 }] },
+  economicState: {},
+};
+
+const deadMagicTown = {
+  id: 'm2',
+  name: 'Dustfall',
+  population: 600,
+  config: { magicExists: false },
+  institutions: [],
+  powerStructure: { factions: [] },
+  economicState: {},
+};
+
+const majorDeityTown = {
+  ...liveMagicTown,
+  config: {
+    magicExists: true,
+    magicLevel: 'high',
+    primaryDeitySnapshot: { name: 'Orthos', rankAxis: 'major', alignmentAxis: 'evil', temperamentAxis: 'warlike' },
+  },
+};
+
+describe('MagicTab — the 10-facet magic profile', () => {
+  test('renders the 6 envelope facets and 4 role lines for a live-magic settlement', () => {
+    const { getByTestId, container } = render(<MagicTab settlement={liveMagicTown} />);
+    expect(getByTestId('magic-tab')).toBeTruthy();
+    // 6 envelope facets.
+    expect(container.querySelectorAll('[data-facet]')).toHaveLength(6);
+    // 4 role lines.
+    expect(container.querySelectorAll('[data-role-line]')).toHaveLength(4);
+    // The display string matches the read-model verbatim.
+    const posture = deriveMagicPosture(liveMagicTown);
+    expect(container.textContent).toContain(posture.display);
+  });
+
+  test('UX consolidation (T2-26): the headline is the posture word and does not restate the envelope', () => {
+    const { container } = render(<MagicTab settlement={liveMagicTown} />);
+    const posture = deriveMagicPosture(liveMagicTown);
+    const headline = container.querySelector('[data-testid="magic-tab"] > p');
+    expect(headline.textContent).toBe(posture.display);
+    expect(headline.textContent.split(/\s+/)).toHaveLength(1);
+    expect(container.querySelectorAll('[data-facet]')).toHaveLength(6);
+    expect(container.textContent).not.toMatch(/services, \w+ risk/); // anchored: the six facets are asserted on this render above
+  });
+
+  test('a dead-magic world says so and shows no envelope/roles', () => {
+    const { container } = render(<MagicTab settlement={deadMagicTown} />);
+    expect(container.textContent).toMatch(/Magic does not function/i);
+    expect(container.querySelectorAll('[data-facet]')).toHaveLength(0);
+  });
+
+  test('a MAJOR patron deity surfaces the deity⇄magic-legality coupling', () => {
+    const { getByTestId } = render(<MagicTab settlement={majorDeityTown} />);
+    const coupling = getByTestId('magic-deity-coupling');
+    expect(coupling.textContent).toMatch(/Orthos/);
+    expect(coupling.textContent).toMatch(/magic legality/i);
+  });
+
+  test('a minor/cult deity does NOT surface the coupling (only a major regulates)', () => {
+    const minorTown = { ...liveMagicTown, config: { ...liveMagicTown.config, primaryDeitySnapshot: { name: 'Faye', rankAxis: 'minor' } } };
+    const { queryByTestId } = render(<MagicTab settlement={minorTown} />);
+    expect(queryByTestId('magic-deity-coupling')).toBeNull();
+  });
+});
+
+describe('MagicTab — the dependence block arrives as the Roles framing (UX consolidation, T2-15; under them by the block law, X-16)', () => {
+  const dependentTown = {
+    ...liveMagicTown,
+    defenseProfile: { magicDependency: true },
+    economicState: { activeChains: [{ label: 'Grain', magicNote: 'Druids keep the blight off.' }] },
+  };
+
+  test('the frozen record, its chain notes and the first-survey stamp render BELOW the role lines', () => {
+    const { getByTestId, container } = render(<MagicTab settlement={dependentTown} publicDossier />);
+    const block = getByTestId('magic-dependence');
+    expect(block.textContent).toContain('Reliance on magic, as judged at the first survey');
+    expect(block.textContent).toContain('Grain: Druids keep the blight off.');
+    // Public: no corpus line, so the static explanation of the frozen record stands.
+    expect(block.textContent).toContain('This place leans on its spellcasters');
+    const roles = container.querySelector('[data-testid="magic-roles"]');
+    // BUILD-W2-BLOCKLAW U4: the facts (the role lines) come first, the passage that frames
+    // them after; prose never sits above the fact it explains.
+    expect(roles.compareDocumentPosition(block) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  });
+
+  test('a dead-magic world renders no dependence block', () => {
+    const { container } = render(<MagicTab settlement={{ ...deadMagicTown, defenseProfile: { magicDependency: true } }} />);
+    expect(container.textContent).toMatch(/Magic does not function/i);
+    expect(container.querySelector('[data-testid="magic-dependence"]')).toBeNull();
+  });
+});

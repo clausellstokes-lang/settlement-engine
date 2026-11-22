@@ -1,0 +1,16 @@
+{
+  "_doc": "THE VILLAGE WATCH'S ROTA PRESUMES NO GOVERNOR, ONE SIGNED SHIFT OF RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; a successor chair does not inherit this signature). THE CAUSE, ONE: LANDING-7 lane H's ruling R-H2 (commit 8e92c0440, merged at 18fd6b442), on the verifier's FIX-6 (CONFIRMED: 14 of soak1k-0..999's villages hold the watch and 7 of them are governed by something other than a headman): the catalogue desc and both desc variants of the Village watch name no office. THE WORDS, VERBATIM (the owner's veto class), old -> new: catalogue desc (institutionalCatalog.js, village/Defense) 'Householders who take turns walking the lanes after dark, keep a lantern at the crossroads, and raise the alarm. Unpaid; the headman keeps the rota.' -> '... Unpaid; the rota is their own.'; variant 1 (institutionDescVariants.js 'village|Defense|Village watch', PAIRS[332]) '... Nobody is paid, and the headman holds the rota.' -> '... Nobody is paid, and the households hold the rota.'; variant 2 '... Whose turn it is, the headman decides.' -> '... Whose turn it is, the rota decides.' (the identity one-liner of record 32 unchanged). THE MOVER, FOUND BY STAGE: inside lane H's step 18fd6b442, 66b1407bd (the food cause, record 34) reverse-applied leaves 4 fence rows moving and 8e92c0440 reverse-applied leaves 20 (record 34's); 5f6d243b2 (crown-3's firstDecade) moves nothing. THE MOVE, MEASURED before the write at the stage (the tree of 18fd6b442 with the door paths carried from the branch, records 29 and 32-34 committed; no cause reverse-applied, so the stage is the landing's own tree at that step): the espionage fence's driven corpus 4 of 360 rows (village 4: SUBw4-fence1-village-crossroads-001, -crossroads-004, -crossroads-010, -port-006; the last three are record 32's rows, whose variant text this cause re-words; crossroads-001 draws the catalogue desc); 360/360 distinct. The generator golden master moves 0 of 525 and the dossier prose manifest 0 of 1,050 (lane H measured both; LANDING-8 re-measured both at the stage: 0 and 0). The constant this act writes equals the one measured at the landing's tip.",
+  "ownerWords": "I also now give all permissions required now and in the future. I also defer all judgement to you.",
+  "ownerDate": "2026-11-06",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER; the owner's delegation of 2026-11-06 to the cloud chair, session 01FE9mEvGxnFx6WTBkEC6ie9)",
+  "cause": "LANDING-7 R-H2: the Village watch's rota presumes no governor — the catalogue desc and both desc variants re-worded so no line names a headman (commit 8e92c0440)",
+  "seat": "LANDING-8 (Opus 5.5) under the cloud chair (Fable 5.1), session 01FE9mEvGxnFx6WTBkEC6ie9, from the stage at 18fd6b442",
+  "surfaces": [
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    }
+  ]
+}

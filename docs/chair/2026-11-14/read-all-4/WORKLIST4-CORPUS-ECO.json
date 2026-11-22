@@ -1,0 +1,470 @@
+[
+{
+"id": "00897",
+"sev": "MED",
+"n": 119,
+"town": "r2r-thorp-10",
+"section": "Systems/Economics",
+"fold": "Some of the money in <N> is made outside the law, and the people who earn theirs honestly do not know who is making it.",
+"text": "Some of the money in Tihogorod is made outside the law, and the people who earn theirs honestly do not know who is making it.",
+"why": "money 'made outside the law' by someone; HOUSES has no fence, outlaw or criminal house, LAND no black market, TENSIONS no crime",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6153,
+"fn": "DS-ECO-12 › INCOME MIX: a criminal line is present · v2"
+}
+},
+{
+"id": "00665",
+"sev": "MED",
+"n": 19,
+"town": "r2s-under_siege-village-1",
+"section": "Systems/Economics",
+"fold": "Not enough of the luxury goods used at <N> comes from the country here; the village brings in the rest, or goes without.",
+"text": "Not enough of the luxury goods used at Neaddale comes from the country here; the village brings in the rest, or goes without.",
+"why": "'the village brings in the rest' under siege; imports cover None, nothing comes in by river",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6417,
+"fn": "DS-ECO-12 › CRITICAL IMPORT: the land cannot give it · v2"
+}
+},
+{
+"id": "00993",
+"sev": "MED",
+"n": 18,
+"town": "r2s-famine-thorp-3",
+"section": "Systems/Economics",
+"fold": "The country around <N> does not give the thorp enough luxury goods, so the thorp buys in what it needs.",
+"text": "The country around Monteminus does not give the thorp enough luxury goods, so the thorp buys in what it needs.",
+"why": "says thorp buys in luxury goods it lacks; TRADE imports only Salt and Grain, and a famine thorp of 16 buys no luxuries",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6405,
+"fn": "DS-ECO-12 › CRITICAL IMPORT: the land cannot give it · v1"
+}
+},
+{
+"id": "00676",
+"sev": "MED",
+"n": 15,
+"town": "r2r-hamlet-0",
+"section": "Systems/Economics",
+"fold": "Not enough of the timber used at <N> comes from the country here; the hamlet brings in the rest, or goes without.",
+"text": "Not enough of the timber used at Spitzsteig comes from the country here; the hamlet brings in the rest, or goes without.",
+"why": "'the hamlet brings in the rest' under siege; imports cover None, nothing comes in by road",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6417,
+"fn": "DS-ECO-12 › CRITICAL IMPORT: the land cannot give it · v2"
+}
+},
+{
+"id": "00987",
+"sev": "MED",
+"n": 15,
+"town": "r2s-insurgency-hamlet-2",
+"section": "Systems/Economics",
+"fold": "The country around <N> does not give the hamlet enough luxury goods, so the hamlet buys in what it needs.",
+"text": "The country around Farolitus does not give the hamlet enough luxury goods, so the hamlet buys in what it needs.",
+"why": "'the hamlet buys in what it needs'; trade access isolated, imports none, brought in 0%, famine",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6405,
+"fn": "DS-ECO-12 › CRITICAL IMPORT: the land cannot give it · v1"
+}
+},
+{
+"id": "00643",
+"sev": "MED",
+"n": 13,
+"town": "r2s-occupied-village-2",
+"section": "Summary/Overview",
+"fold": "No guild keeps a house at <N>'s market: the village's own hold on trade there is the stall fee.",
+"text": "No guild keeps a house at Erdenordu's market: the village's own hold on trade there is the stall fee.",
+"why": "'No guild keeps a house' at the market; Merchant Guilds is the Strongest power, boat-headman first of it, fishmonger and boatwright sit on it",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 9774,
+"fn": "DS-GEN-13 › COMMERCE: a market, no guild · v2"
+}
+},
+{
+"id": "00666",
+"sev": "MED",
+"n": 12,
+"town": "r2s-under_siege-hamlet-0",
+"section": "Systems/Economics",
+"fold": "Not enough of the metals used at <N> comes from the country here; the hamlet brings in the rest, or goes without.",
+"text": "Not enough of the metals used at Sanctaurbs comes from the country here; the hamlet brings in the rest, or goes without.",
+"why": "'the hamlet brings in the rest' under siege; imports cover None, nothing comes in by road",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6417,
+"fn": "DS-ECO-12 › CRITICAL IMPORT: the land cannot give it · v2"
+}
+},
+{
+"id": "00992",
+"sev": "MED",
+"n": 11,
+"town": "r2s-famine-hamlet-3",
+"section": "Systems/Economics",
+"fold": "The country around <N> does not give the hamlet enough timber, so the hamlet buys in what it needs.",
+"text": "The country around Malosk does not give the hamlet enough timber, so the hamlet buys in what it needs.",
+"why": "says hamlet buys in the timber it lacks; TRADE imports list Salt, Grain, Incense only, no timber",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6405,
+"fn": "DS-ECO-12 › CRITICAL IMPORT: the land cannot give it · v1"
+}
+},
+{
+"id": "01109",
+"sev": "MED",
+"n": 11,
+"town": "r2s-occupied-metropolis-1",
+"section": "Systems/Economics",
+"fold": "The trade here is in the moving of things, and the metropolis's yards are as busy as its workshops.",
+"text": "The trade here is in the moving of things, and the metropolis's yards are as busy as its workshops.",
+"why": "'yards as busy as its workshops' under occupation (vassal extraction, trade taxed, chains vulnerable); HOUSES has no yards, boatyard or docks",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 4593,
+"fn": "DS-ECO-10 › POSTURE: entrepot · v2"
+}
+},
+{
+"id": "01005",
+"sev": "MED",
+"n": 10,
+"town": "r2r-village-55",
+"section": "Systems/Economics",
+"fold": "The country around <N> does not give the village enough luxury goods, so the village buys in what it needs.",
+"text": "The country around Megaikon does not give the village enough luxury goods, so the village buys in what it needs.",
+"why": "'the village buys in what it needs' under siege; imports cover None, nothing comes in by road",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6405,
+"fn": "DS-ECO-12 › CRITICAL IMPORT: the land cannot give it · v1"
+}
+},
+{
+"id": "00667",
+"sev": "MED",
+"n": 9,
+"town": "r2s-under_siege-thorp-0",
+"section": "Systems/Economics",
+"fold": "Not enough of the metals used at <N> comes from the country here; the thorp brings in the rest, or goes without.",
+"text": "Not enough of the metals used at Qaradavan comes from the country here; the thorp brings in the rest, or goes without.",
+"why": "'the thorp brings in the rest' under siege; imports cover None, nothing comes in by road or ford",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6417,
+"fn": "DS-ECO-12 › CRITICAL IMPORT: the land cannot give it · v2"
+}
+},
+{
+"id": "00074",
+"sev": "MED",
+"n": 9,
+"town": "r2s-indebted-city-1",
+"section": "World/Daily Life",
+"fold": "<N> has money to spend, and spends it on the city's buildings and their upkeep.",
+"text": "Darhanordu has money to spend, and spends it on the city's buildings and their upkeep.",
+"why": "claims money to spend on buildings; CRISIS Indebted to Outside Power, stability Strained — the creditors have a say in every decision",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 2790,
+"fn": "DS-ECO-8 › PROSPEROUS · v1"
+}
+},
+{
+"id": "00995",
+"sev": "MED",
+"n": 8,
+"town": "r2r-thorp-45",
+"section": "Systems/Economics",
+"fold": "The country around <N> does not give the thorp enough metals, so the thorp buys in what it needs.",
+"text": "The country around Weißgasse does not give the thorp enough metals, so the thorp buys in what it needs.",
+"why": "'buys in what it needs' under siege; STATE imports cover None, nothing comes in by road or water",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6405,
+"fn": "DS-ECO-12 › CRITICAL IMPORT: the land cannot give it · v1"
+}
+},
+{
+"id": "01108",
+"sev": "MED",
+"n": 8,
+"town": "r2s-plague_onset-hamlet-0",
+"section": "Systems/Economics",
+"fold": "The trade here is in the moving of things, and the hamlet's yards are as busy as its workshops.",
+"text": "The trade here is in the moving of things, and the hamlet's yards are as busy as its workshops.",
+"why": "'yards' as busy as 'workshops'; HOUSES has no yard or workshop; plague conditions, not busy ordinary work",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 4593,
+"fn": "DS-ECO-10 › POSTURE: entrepot · v2"
+}
+},
+{
+"id": "00990",
+"sev": "MED",
+"n": 6,
+"town": "r2s-occupied-hamlet-2",
+"section": "Systems/Economics",
+"fold": "The country around <N> does not give the hamlet enough stone, so the hamlet buys in what it needs.",
+"text": "The country around Dunkelstift does not give the hamlet enough stone, so the hamlet buys in what it needs.",
+"why": "says hamlet buys in the stone it lacks; TRADE imports Salt, arms, incense only, no stone; occupation also taxes its trade",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6405,
+"fn": "DS-ECO-12 › CRITICAL IMPORT: the land cannot give it · v1"
+}
+},
+{
+"id": "01110",
+"sev": "MED",
+"n": 6,
+"town": "r2s-plague_onset-thorp-2",
+"section": "Systems/Economics",
+"fold": "The trade here is in the moving of things, and the thorp's yards are as busy as its workshops.",
+"text": "The trade here is in the moving of things, and the thorp's yards are as busy as its workshops.",
+"why": "'yards' and 'workshops' busy; HOUSES has none, thorp of 9; plague so busy transit and work is not ordinary",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 4593,
+"fn": "DS-ECO-10 › POSTURE: entrepot · v2"
+}
+},
+{
+"id": "00679",
+"sev": "MED",
+"n": 5,
+"town": "r2s-under_siege-village-3",
+"section": "Systems/Economics",
+"fold": "Not enough of the timber used at <N> comes from the country here; the village brings in the rest, or goes without.",
+"text": "Not enough of the timber used at Tenohuacan comes from the country here; the village brings in the rest, or goes without.",
+"why": "'the village brings in the rest' under siege; imports cover None, nothing comes in by river",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6417,
+"fn": "DS-ECO-12 › CRITICAL IMPORT: the land cannot give it · v2"
+}
+},
+{
+"id": "01001",
+"sev": "MED",
+"n": 5,
+"town": "r2s-under_siege-town-0",
+"section": "Systems/Economics",
+"fold": "The country around <N> does not give the town enough luxury goods, so the town buys in what it needs.",
+"text": "The country around Ulffoss does not give the town enough luxury goods, so the town buys in what it needs.",
+"why": "says the town buys in what it needs; under a siege (tag S) nothing comes in by road, gate or water",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6405,
+"fn": "DS-ECO-12 › CRITICAL IMPORT: the land cannot give it · v1"
+}
+},
+{
+"id": "00678",
+"sev": "MED",
+"n": 5,
+"town": "r2s-occupied-town-2",
+"section": "Systems/Economics",
+"fold": "Not enough of the timber used at <N> comes from the country here; the town brings in the rest, or goes without.",
+"text": "Not enough of the timber used at Khutulunbash comes from the country here; the town brings in the rest, or goes without.",
+"why": "presumes timber-using work and timber imports; HOUSES has no timber house, gaps none, imports list no timber",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6417,
+"fn": "DS-ECO-12 › CRITICAL IMPORT: the land cannot give it · v2"
+}
+},
+{
+"id": "01004",
+"sev": "MED",
+"n": 4,
+"town": "r2s-recently_betrayed-town-3",
+"section": "Systems/Economics",
+"fold": "The country around <N> does not give the town enough timber, so the town buys in what it needs.",
+"text": "The country around Milopol does not give the town enough timber, so the town buys in what it needs.",
+"why": "says the town buys in the timber it needs; TRADE imports list no timber, no house uses timber, gaps name only wool and hides",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6405,
+"fn": "DS-ECO-12 › CRITICAL IMPORT: the land cannot give it · v1"
+}
+},
+{
+"id": "01112",
+"sev": "MED",
+"n": 3,
+"town": "r2s-plague_onset-village-1",
+"section": "Systems/Economics",
+"fold": "The trade here is in the moving of things, and the village's yards are as busy as its workshops.",
+"text": "The trade here is in the moving of things, and the village's yards are as busy as its workshops.",
+"why": "'yards as busy as its workshops' under Plague Conditions; tag OP; people do not gather or travel as usual, and HOUSES has no yard, stable or caravan post",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 4593,
+"fn": "DS-ECO-10 › POSTURE: entrepot · v2"
+}
+},
+{
+"id": "00997",
+"sev": "MED",
+"n": 2,
+"town": "r2s-under_siege-thorp-3",
+"section": "Systems/Economics",
+"fold": "The country around <N> does not give the thorp enough stone, so the thorp buys in what it needs.",
+"text": "The country around Tailing does not give the thorp enough stone, so the thorp buys in what it needs.",
+"why": "'buys in what it needs' under siege; imports cover None; imports list has no stone",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6405,
+"fn": "DS-ECO-12 › CRITICAL IMPORT: the land cannot give it · v1"
+}
+},
+{
+"id": "00211",
+"sev": "MED",
+"n": 1,
+"town": "r2s-under_siege-town-0",
+"section": "Systems/Economics",
+"fold": "A good part of the trade here goes unrecorded, and merchants who pay their duties and guild fees are undersold by those who do not.",
+"text": "A good part of the trade here goes unrecorded, and merchants who pay their duties and guild fees are undersold by those who do not.",
+"why": "describes ordinary trade, duties and undercutting merchants under a siege where services and trade are printed stopped",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 2016,
+"fn": "DS-ECO-6 › TIER: significant off-book activity (≥15) · v0"
+}
+},
+{
+"id": "01003",
+"sev": "MED",
+"n": 1,
+"town": "r2r-town-10",
+"section": "Systems/Economics",
+"fold": "The country around <N> does not give the town enough stone, so the town buys in what it needs.",
+"text": "The country around Madinatchowk does not give the town enough stone, so the town buys in what it needs.",
+"why": "says the town buys in the stone it needs; TRADE imports list no stone, HOUSES has no stone-using house, LAND has no stone",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6405,
+"fn": "DS-ECO-12 › CRITICAL IMPORT: the land cannot give it · v1"
+}
+},
+{
+"id": "00441",
+"sev": "MED",
+"n": 1,
+"town": "r2s-under_siege-city-0",
+"section": "Systems/Economics",
+"fold": "Goods change hands at <N> without anyone writing them down, and the price a buyer is quoted depends on whether a duty is to be paid at all.",
+"text": "Goods change hands at Bellaurbs without anyone writing them down, and the price a buyer is quoted depends on whether a duty is to be paid at all.",
+"why": "goods change hands unrecorded, duty optional; HOUSES has Customs house, Harbour master's office, Chroniclers' exchange; no Black market or criminal faction; also under siege",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 2057,
+"fn": "DS-ECO-6 › TIER: significant off-book activity (≥15) · v4"
+}
+},
+{
+"id": "00985",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-51",
+"section": "Systems/Economics",
+"fold": "The country around <N> does not give the city enough luxury goods, so the city buys in what it needs.",
+"text": "The country around Benham does not give the city enough luxury goods, so the city buys in what it needs.",
+"why": "country gives too few luxury goods; LAND Luxury Goods chain running on available veins, and the town exports luxury manufactured goods and precious metals",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6405,
+"fn": "DS-ECO-12 › CRITICAL IMPORT: the land cannot give it · v1"
+}
+}
+]

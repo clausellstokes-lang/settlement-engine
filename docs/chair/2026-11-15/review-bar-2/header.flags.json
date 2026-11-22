@@ -1,0 +1,23 @@
+[
+{
+"packet": "bar2-03",
+"reader": "a",
+"town": "bar0-city-under_siege+famine-rand-5",
+"sev": "MED",
+"why": "FOUNDING: a merchant coalition that outgrew another town, yet the reason says it grew from a logging camp; the two cannot both be true"
+},
+{
+"packet": "bar2-03",
+"reader": "a",
+"town": "bar0-city-under_siege+famine-rand-5",
+"sev": "LOW",
+"why": "DEFENCE says hired: none, yet HOUSES lists Hired blades and PEOPLE names a blade captain of Hired blades"
+},
+{
+"packet": "bar2-11",
+"reader": "a",
+"town": "bar0-metropolis-calm-rand-5",
+"sev": "LOW",
+"why": "DEFENCE says hired: none, yet HOUSES lists Hired blades and PEOPLE names a blade captain of Hired blades"
+}
+]

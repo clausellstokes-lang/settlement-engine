@@ -1,0 +1,138 @@
+#!/usr/bin/env python3
+# READ-ALL: the readers' flags merged, joined to the inventory (how many towns print each sentence), ranked,
+# and the read's recall measured on the calibration pages against the bar's first read.
+# usage: merge_flags.py <packets dir (index.json, *.txt)> <repo with the readers' branches fetched> <bar list json> <bar dumps dir> <out dir>
+import io, re, os, sys, json, glob, subprocess, collections
+PK, REPO, BARLIST, BARDUMPS, OUT = sys.argv[1:6]
+os.makedirs(OUT, exist_ok=True)
+idx = json.load(io.open(PK + '/index.json', encoding='utf-8'))
+ids, cal = idx['ids'], idx['cal']
+SEV = {'HIGH': 3, 'MED': 2, 'MEDIUM': 2, 'LOW': 1}
+packets = sorted(os.path.basename(p)[:-4] for p in glob.glob(PK + '/*.txt'))
+# the text each id was shown with (as printed in the block's town)
+shown = {}
+for p in packets:
+    town = None
+    for line in io.open('%s/%s.txt' % (PK, p), encoding='utf-8'):
+        m = re.match(r'==== TOWN (\S+)', line)
+        if m: town = m.group(1); continue
+        m = re.match(r'(C?\d{4,5}) (?:\[[^\]]*\] )?(.*)$', line.rstrip('\n'))
+        if m: shown[(p, m.group(1))] = (town, m.group(2))
+flags = []; status = {}
+for p in packets:
+    # crisis-07's file is on the crisis-06 branch; SUFFIX=-s reads the next model down's calibration branches; FLAGS_DIR reads local files
+    # READ=2 reads the second read's branches and files (its short last packets are on the branch of the packet before)
+    RD = os.environ.get('READ', '1')   # READ=2 the second read; READ=3 the exports' read (ALIAS='{"main-20":"main-19"}' for packets that ride with another)
+    ALIAS = json.loads(os.environ['ALIAS']) if os.environ.get('ALIAS') else ({'main-18': 'main-17', 'crisis-08': 'crisis-07', 'cal-05': 'cal-04'} if RD == '2' else {'crisis-07': 'crisis-06'} if RD == '1' else {})
+    PREFIX = 'origin/lane/read-all-2026-11-14-' if RD == '1' else 'origin/lane/read-all-%s-2026-11-14-' % RD
+    FDIR = 'read-all' if RD == '1' else 'read-all-' + RD
+    br = PREFIX + ALIAS.get(p, p) + (os.environ.get('SUFFIX', '') if p.startswith('cal') else '')
+    try:
+        if os.environ.get('FLAGS_DIR'): txt = io.open('%s/%s.flags.jsonl' % (os.environ['FLAGS_DIR'], p), encoding='utf-8').read()
+        else: txt = subprocess.check_output(['git', '-C', REPO, 'show', '%s:docs/chair/2026-11-14/%s/%s.flags.jsonl' % (br, FDIR, p)], stderr=subprocess.DEVNULL).decode('utf-8')
+    except (subprocess.CalledProcessError, OSError):
+        status[p] = 'NO FILE'; continue
+    n = 0; bad = 0; done = ''
+    for line in txt.split('\n'):
+        line = line.strip()
+        if not line: continue
+        try: o = json.loads(line)
+        except Exception: bad += 1; continue
+        i = str(o.get('id', ''))
+        if i in ('DONE', 'STOPPED'): done = json.dumps(o); continue
+        o['packet'] = p; o['sev'] = str(o.get('sev', '')).upper().replace('MEDIUM', 'MED'); o['kind'] = str(o.get('kind', '')).upper()
+        t = shown.get((p, i))
+        o['text'] = t[1] if t else ''; o['block_town'] = t[0] if t else ''
+        o['known_id'] = bool(t) or i == 'HEADER'
+        # the packet builder's own fault (2026-11-14): it split a pill run at every lower-to-upper boundary BEFORE folding names, so a
+        # surname like "MacCarthy" was cut in two: a BROKEN flag on such a fragment is the instrument's artifact, not the page's
+        o['artifact'] = bool(o['kind'] == 'BROKEN' and (re.search(r"\bMac\b|\bMc\b|mid-name|mid name|surname|fragment|split (?:at|across|mid)|cut (?:at|mid|off)|truncat", str(o.get('why', '')), re.I) or re.search(r"\b(?:Mac|Mc)$", o['text'].strip())))
+        flags.append(o); n += 1
+    status[p] = '%d flags%s%s' % (n, (' · %d unparsed lines' % bad) if bad else '', ' · ' + done if done else ' · NOT DONE')
+json.dump(flags, io.open(OUT + '/flags.all.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
+print('PACKETS:'); [print('  %-10s %s' % (p, status[p])) for p in packets]
+# COVERAGE: where in its packet each reader's flags fall. A read that stopped early or skimmed its end shows as empty tenths:
+# a fast read is checked here before it is believed (2026-11-14: a 2,236-line packet came back in four and a half minutes).
+order = collections.defaultdict(list)
+for (p_, i_) in shown: order[p_].append(i_)
+print('COVERAGE (which tenths of each packet hold a flag; where the last flag falls):')
+for p in packets:
+    pos = {i_: k for k, i_ in enumerate(order[p])}; n_ = len(pos) or 1
+    fl = [pos[str(f['id'])] for f in flags if f['packet'] == p and str(f['id']) in pos]
+    if not fl: continue
+    tenths = sorted(set(min(9, x * 10 // n_) for x in fl))
+    print('  %-10s lines %5d · flags %4d · tenths %s%s · last flag at %d%%' % (p, n_, len(fl), ''.join(str(t) for t in tenths), '' if len(tenths) >= 8 else '  <-- THIN', max(fl) * 100 // n_))
+art = [f for f in flags if f['artifact']]
+print('ARTIFACTS OF THE PACKET BUILDER (BROKEN flags on a name it cut): %d, left out below' % len(art))
+flags = [f for f in flags if not f['artifact']]
+json.dump(art, io.open(OUT + '/artifacts.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
+# flags struck, or set apart, BY THE RECORD (verify3.py: a limit of the readers' header checked against the town's own record):
+# STRIKES / ECHOES name json lists of {packet, id, rwhy (the reader's reason, its first 80 characters)}
+drop = set()
+for env_ in ('STRIKES', 'ECHOES'):
+    if os.environ.get(env_):
+        for x in json.load(io.open(os.environ[env_], encoding='utf-8')): drop.add((x['packet'], str(x['id']), x.get('rwhy', '')))
+if drop:
+    n0 = len(flags); flags = [f for f in flags if (f['packet'], str(f['id']), str(f.get('why', ''))[:80]) not in drop]
+    print('STRUCK OR SET APART BY THE RECORD (verify3.py): %d flags, left out below' % (n0 - len(flags)))
+main = [f for f in flags if not f['packet'].startswith('cal')]
+print('FLAGS on the 720: %d · by severity %s · by kind %s · ids unknown %d' % (len(main), dict(collections.Counter(f['sev'] for f in main)), dict(collections.Counter(f['kind'] for f in main)), sum(1 for f in main if not f['known_id'])))
+# ---- one row a sentence
+rows = {}
+for f in main:
+    i = str(f['id'])
+    if i not in ids: continue
+    r = rows.setdefault(i, {'id': i, 'sev': 'LOW', 'kinds': set(), 'whys': [], 'packets': set(), 'text': f['text'], 'town': f.get('town') or f['block_town'], 'n': len(ids[i]['towns']), 'sections': ids[i]['sections'], 'fold': ids[i]['fold']})
+    if SEV.get(f['sev'], 0) > SEV.get(r['sev'], 0): r['sev'] = f['sev']
+    r['kinds'].add(f['kind']); r['whys'].append('%s: %s' % (f['packet'], f.get('why', ''))); r['packets'].add(f['packet'])
+R = sorted(rows.values(), key=lambda r: (-SEV.get(r['sev'], 0), -r['n']))
+for r in R: r['kinds'] = sorted(r['kinds']); r['packets'] = sorted(r['packets'])
+json.dump(R, io.open(OUT + '/flagged.sentences.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
+bysev = collections.Counter(r['sev'] for r in R)
+print('DISTINCT SENTENCES FLAGGED: %d of %d · %s · printing in towns (sum) %d' % (len(R), len(ids), dict(bysev), sum(r['n'] for r in R)))
+for sev in ('HIGH', 'MED'):
+    rs = [r for r in R if r['sev'] == sev]
+    print('  %s: %d sentences; in >=20 towns %d; in 5-19 %d; in 2-4 %d; in 1 %d' % (sev, len(rs), sum(1 for r in rs if r['n'] >= 20), sum(1 for r in rs if 5 <= r['n'] < 20), sum(1 for r in rs if 2 <= r['n'] < 5), sum(1 for r in rs if r['n'] == 1)))
+bysec = collections.Counter()
+for r in R:
+    if r['sev'] in ('HIGH', 'MED'):
+        for s in r['sections']: bysec[s] += 1
+print('  HIGH+MED by section:', ', '.join('%s %d' % kv for kv in bysec.most_common(14)))
+with io.open(OUT + '/TOP.md', 'w', encoding='utf-8') as fh:
+    fh.write('| sev | towns | id | sections | sentence (as shown) | why |\n|---|---|---|---|---|---|\n')
+    for r in sorted(R, key=lambda r: (-(r['sev'] in ('HIGH', 'MED')), -r['n']))[:400]:
+        fh.write('| %s | %d | %s | %s | %s | %s |\n' % (r['sev'], r['n'], r['id'], ', '.join(r['sections'])[:60], r['text'][:240].replace('|', '/'), r['whys'][0][:200].replace('|', '/')))
+# ---- calibration: the bar's rows that still print word for word, and whether a reader flagged them
+def norm(s): return re.sub(r'\s+', ' ', str(s).replace('‘', "'").replace('’', "'").replace('“', '"').replace('”', '"')).strip()
+def fig(s): return re.sub(r'\d[\d,.]*', '#', s)
+if not os.path.exists(BARLIST): print('NO CALIBRATION: no bar list for this read'); sys.exit(0)
+L = json.load(io.open(BARLIST, encoding='utf-8'))
+pages = {}
+def page(seed):
+    if seed not in pages:
+        try: pages[seed] = [fig(norm(l)) for l in io.open('%s/%s.txt' % (BARDUMPS, seed), encoding='utf-8').read().split('\n') if l and not l.startswith('== ') and not l.startswith('[STYLE]')]
+        except Exception: pages[seed] = None
+    return pages[seed]
+calflag = collections.defaultdict(list)      # town -> [(normalised text, flag)]
+for f in flags:
+    if f['packet'].startswith('cal') and str(f['id']) in cal:
+        c = cal[str(f['id'])]; calflag[c['town']].append((fig(norm(c['text'])), f))
+res = collections.Counter(); missed = []; hit_ids = set()
+for r in L:
+    if r.get('severity') not in ('HIGH', 'MED'): continue
+    p = page(r['town'])
+    if p is None: res['nopage'] += 1; continue
+    s = fig(norm(r['sentence']))
+    prints = any(s in l for l in p) if len(s) > 12 else any(l == s for l in p)
+    if not prints: res[r['severity'] + ' gone'] += 1; continue
+    # a reader caught the row if it flagged a calibration sentence that the row's sentence contains or is contained in
+    got = [f for (t, f) in calflag.get(r['town'], []) if len(t) > 12 and (t in s or s in t)]
+    if got: res[r['severity'] + ' printing, FLAGGED'] += 1; hit_ids.update(str(f['id']) for f in got)
+    else: res[r['severity'] + ' printing, missed'] += 1; missed.append(r)
+print('CALIBRATION (the bar\'s ten pages):', dict(res))
+calf = [f for f in flags if f['packet'].startswith('cal')]
+new = [f for f in calf if str(f['id']) not in hit_ids and f['sev'] in ('HIGH', 'MED')]
+print('  flags on the ten pages: %d (%s); HIGH/MED flags that match no bar row still printing: %d' % (len(calf), dict(collections.Counter(f['sev'] for f in calf)), len(new)))
+json.dump({'missed': missed, 'new': new}, io.open(OUT + '/calibration.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
+bk = collections.Counter((r.get('kind'), r.get('tab')) for r in missed)
+print('  missed rows by the bar\'s kind and tab:', ', '.join('%s/%s %d' % (k[0], k[1], v) for k, v in bk.most_common(12)))

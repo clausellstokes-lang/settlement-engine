@@ -1,0 +1,193 @@
+/**
+ * domain/summary/tonightAtTheTable.js — Pure composer for the right
+ * column of the magazine-spread Summary tab.
+ *
+ * Pulls the highest-leverage table-night entries from a settlement:
+ *   - Top NPC          (governing faction's primary or most-corrupt)
+ *   - Top hook         (Tier-A plot hook, or the first hook)
+ *   - Twist            (a legacyAnnotation linking past to present,
+ *                       or the secret on a major NPC)
+ *   - Red flag         (a "don't mention" beat derived from a
+ *                       failing supply chain)
+ *
+ * Pure — same input always yields the same output. The Summary tab
+ * (P129) calls this once per settlement and renders the cards.
+ *
+ * Returns an array of `{ kind, title, body }` entries, capped at 6 so
+ * the right column doesn't outgrow the left.
+ *
+ * ⛔ NO BODY IS CLIPPED (2026-09-18). Every body used to pass through a blind
+ * `truncate(text, n)` — an 80/120/160-character slice plus an ellipsis, taken
+ * with no regard for where a word ended. A cheat sheet a DM reads mid-sentence
+ * at the table is exactly the surface that must not end in "…the reeve has been
+ * selling the gra…": the reader cannot recover the rest, because these entries
+ * are the only place the thought is stated in this form. The cards carry the
+ * complete thought and the surfaces scroll instead (TableView's body is an
+ * overflow-auto column, SessionMode's and the Summary aside's likewise).
+ */
+
+import { collectPlotHooks } from '../dossier/plotHooks.js';
+import { deriveAllSupplyChainStates } from '../supplyChainState.js';
+
+/**
+ * The TOLERANT prosperity read (components-dossier-library-3). Both Summary
+ * surfaces (SummaryTabV2, TableView) already import THIS module, so the helper
+ * lives here to stay byte-inert (no new first-paint module node).
+ *
+ * `economicState.prosperity` is a STRING label from the generator
+ * (deriveProsperityLabel → 'Struggling'..'Wealthy'). The two surfaces read it as an
+ * OBJECT — `prosperity?.tier` — which is ALWAYS undefined for a string, so the
+ * prosperity + stressors block never rendered. This reads the label whatever shape
+ * it arrives in: a plain string, or a defensive `{ tier }` object.
+ * @param {unknown} prosperity @returns {string}
+ */
+export function prosperityLabel(prosperity) {
+  if (typeof prosperity === 'string') return prosperity.trim();
+  if (prosperity && typeof prosperity === 'object') {
+    const tier = /** @type {{ tier?: unknown }} */ (prosperity).tier;
+    if (typeof tier === 'string') return tier.trim();
+    if (typeof tier === 'number' && Number.isFinite(tier)) return String(tier);
+  }
+  return '';
+}
+
+const MAX_ENTRIES = 6;
+
+// Supply-chain statuses that represent a genuine, table-visible disruption
+// (vs. merely 'strained'/'substituted', which still function).
+const DISRUPTED_STATUSES = new Set(['blocked', 'collapsing', 'scarce', 'captured']);
+
+const INFLUENCE_RANK = { high: 0, moderate: 1, low: 2 };
+
+/**
+ * @typedef {Object} TableNpc
+ * @property {string} [name]
+ * @property {number} [power]
+ * @property {string} [influence]
+ * @property {string} [role]
+ * @property {string} [title]
+ * @property {string | { what?: string } | null} [secret]
+ * @property {{ short?: string }} [goal]
+ * @property {string} [want]
+ */
+
+/**
+ * @typedef {Object} TableSettlement
+ * @property {TableNpc[]} [npcs]
+ * @property {{ legacyAnnotations?: Array<{ annotation?: string, eventName?: string }> }} [history]
+ */
+
+/** Read an NPC secret regardless of shape — generators emit { what, stakes }.
+ * @param {TableNpc | null | undefined} npc
+ * @returns {string}
+ */
+function npcSecretText(npc) {
+  if (!npc?.secret) return '';
+  return typeof npc.secret === 'string' ? npc.secret : (npc.secret.what || '');
+}
+
+/** @typedef {{ kind: 'NPC'|'HOOK'|'TWIST'|'RED', title: string, body: string }} TableEntry */
+
+/**
+ * THE DISPLAY WORD FOR EACH KIND — beside the union it belongs to, and NOT in either
+ * renderer (ODQ §934.22 item 4).
+ *
+ * ⛔ WHY IT MOVED HERE. `TableView.jsx` held this map privately while `SessionMode.jsx`
+ * rendered the raw `row.kind`, so the same entry read 'Hook' on the cheat sheet and 'HOOK'
+ * on the session card — a literal ALL-CAPS string with no `textTransform` under it, which is
+ * the one thing the label ladder's rung-1 rule forbids: capitals come from the STYLE, never
+ * from the word, or nothing downstream can case the word again. The model TOKEN is untouched;
+ * `kind: 'RED'` is still 'RED' everywhere the engine reads it.
+ *
+ * 'NPC' keeps its letters because it is an initialism; 'RED' is spelled out because a bare
+ * 'Red' on an umber card reads as a colour rather than a red herring.
+ * @type {Readonly<Record<'NPC'|'HOOK'|'TWIST'|'RED', string>>}
+ */
+export const TABLE_KIND_LABEL = Object.freeze({
+  NPC: 'NPC', HOOK: 'Hook', TWIST: 'Twist', RED: 'Red herring',
+});
+
+/**
+ * @param {TableSettlement | null | undefined} settlement
+ * @returns {TableEntry[]}
+ */
+export function tonightAtTheTable(settlement) {
+  if (!settlement || typeof settlement !== 'object') return [];
+
+  /** @type {TableEntry[]} */
+  const out = [];
+
+  // ── Top NPCs ─────────────────────────────────────────────────────────
+  // Rank by the fields generators actually emit: power (desc), then
+  // influence band. The old `importance` vocabulary matched nothing.
+  const npcs = Array.isArray(settlement.npcs) ? settlement.npcs : [];
+  const ranked = [...npcs].sort((a, b) => {
+    const pw = (b.power || 0) - (a.power || 0);
+    if (pw !== 0) return pw;
+    return (INFLUENCE_RANK[/** @type {keyof typeof INFLUENCE_RANK} */ (a.influence)] ?? 3) - (INFLUENCE_RANK[/** @type {keyof typeof INFLUENCE_RANK} */ (b.influence)] ?? 3);
+  });
+  for (const npc of ranked.slice(0, 2)) {
+    const role = (npc.role || npc.title || '').toLowerCase();
+    const secret = npcSecretText(npc);
+    const want = npc.goal?.short || npc.want || '';
+    const trait = secret
+      ? `secret: ${secret}`
+      : (want ? `wants: ${want}` : (role || 'major NPC'));
+    out.push({
+      kind: 'NPC',
+      title: npc.name || 'Unnamed NPC',
+      body:  `${role}${role && trait ? ' · ' : ''}${trait}`,
+    });
+  }
+
+  // ── Top hooks ────────────────────────────────────────────────────────
+  // Source from the canonical plot-hook collector (the settlement carries no
+  // plotHooks/hooks array of its own) and rank by numeric priority desc.
+  const hooks = collectPlotHooks(settlement);
+  const rankedHooks = [...hooks].sort((a, b) => (b.priority || 0) - (a.priority || 0));
+  for (const hook of rankedHooks.slice(0, 2)) {
+    out.push({
+      kind: 'HOOK',
+      title: hook.source || hook.role || 'Plot hook',
+      body:  String(hook.text || ''),
+    });
+  }
+
+  // ── Twist ────────────────────────────────────────────────────────────
+  // A legacyAnnotation tying past to present, OR the secret on a major
+  // NPC we haven't already surfaced.
+  const annotations = settlement.history?.legacyAnnotations || [];
+  const annotation = annotations[0];
+  if (annotation?.annotation) {
+    out.push({
+      kind: 'TWIST',
+      title: annotation.eventName || 'The hidden thread',
+      body:  String(annotation.annotation),
+    });
+  } else if (ranked.length > 2 && npcSecretText(ranked[2])) {
+    out.push({
+      kind: 'TWIST',
+      title: /** @type {string} */ (ranked[2].name),
+      body:  npcSecretText(ranked[2]),
+    });
+  }
+
+  // ── Red flag ─────────────────────────────────────────────────────────
+  // A "don't mention" derived live from a disrupted supply chain — the
+  // settlement carries no supplyChainState.failures array of its own.
+  const disrupted = deriveAllSupplyChainStates(/** @type {import('../supplyChainState.js').ChainsSettlementSource} */ (settlement))
+    .filter(c => DISRUPTED_STATUSES.has(c.status));
+  if (disrupted.length > 0) {
+    const f = disrupted[0];
+    const good = f.needLabel || f.name || 'the supply';
+    const reason = typeof f.failureConsequences === 'string' ? f.failureConsequences.trim() : '';
+    out.push({
+      kind: 'RED',
+      title: `Don't mention ${good}`,
+      body:  reason ? `People go quiet mid-sentence when it comes up. ${reason}` : 'People go quiet mid-sentence when it comes up.',
+    });
+  }
+
+  return out.slice(0, MAX_ENTRIES);
+}
+

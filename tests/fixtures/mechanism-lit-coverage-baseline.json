@@ -1,0 +1,68 @@
+{
+  "comment": "E-H per-mechanism lit-walkthrough baseline — the CURRENT lit-coverage gap, SHRINK-ONLY. Each entry is a worldPulse mechanism (module) or simulation-rules flag with NO standing flag-ON lit proof (no direct-import lit test, no LIT_COVERED_BY registry reference in tests/property/mechanismLitCoverage.test.js). Strike entries as lit tests land; never add one except as a deliberate, vetoable burn-down decision. The walker fails on ANY drift in either direction.",
+  "reFrozen": {
+    "at": "af8815e9261977b8dfa3e7ee248cbe6989e522d6",
+    "on": "2026-08-07",
+    "by": "the walker-census lane (S12-W)",
+    "why": "⛔ A DELIBERATE, VETOABLE ADMISSION OF DEBT — NOT A WIN, AND NOT A SILENT ONE. Both RATCHET rows of tests/property/mechanismLitCoverage.test.js were sitting in scripts/.test-ratchet-baseline.json, where a failing row is TOLERATED. Each of those rows is ONE assertion over an OPEN, source-derived population (`expect(uncoveredMechanisms).toEqual(baseline.mechanisms)`), so tolerating the row tolerated the whole population: a 24th uncovered mechanism, or a second uncovered flag, would have produced the byte-identical failing verdict and reddened NOTHING. A failing TEST is debt; a failing WALKER is a DISABLED GUARD (CONTRIBUTING.md, 'The gate'). The census rows are gone and the gap is INVENTORIED here instead, by exact name and in the walker's own order, so a NEW uncovered mechanism or flag reds again while the 23 + 1 known ones stay green.",
+    "measurement": "MEASURED by this walker's own uncoveredMechanisms / uncoveredFlags computation inside an integrity-counted `git archive` of committed af8815e9 (6,196 tracked paths in, 6,196 out, `git status` clean) — never over the live shared tree, which holds an owner session's uncommitted work (THE ARCHIVE-CENSUS LAW). Names and ORDER are taken from the walker's own output, never transcribed from a review.",
+    "notBurnedDown": "The 23 modules and the one flag are INVENTORIED, not repaired. Writing their lit walkthroughs is a separate wave; this lane restores the guard, it does not clear the habitat. The list is SHRINK-ONLY: the walker reds if a name gains coverage and is not struck (an un-banked win) exactly as it reds if a new name appears.",
+    "introducedAt": "1137f935ee4c1d27ac1f515e2500ee82821e5cef"
+  },
+  "amended": {
+    "at": "22cedb1b0dcc00fbd217f5b3b6312b6394f2f767",
+    "on": "2026-08-15",
+    "by": "lane TE14, the IN-1C-A terminal, under OWNER_DECISION_QUEUE.md §85.2",
+    "what": "ONE entry added: informationReceiptPools. The list grows 23 -> 24, and this block is the reason that growth is a REGISTRATION rather than a silent re-record.",
+    "why": "⛔ A DELIBERATE, VETOABLE ADMISSION OF DEBT, RULED BY THE CHAIR RATHER THAN TAKEN BY THE LANE. IN-1c-a mints the estate's FIFTH phrased-kind registry family, and informationReceiptPools.js is its annex-verbatim pool leaf: nine mirror_standing_line variants, ZERO imports, and no standing flag-ON lit proof of its own. The module is genuinely DARK at this landing, reached through informationNews.js's registry rather than driven by a lit walkthrough, so an inventory row is the honest record and a coverage claim would be a false one. ⛔ It was NOT taken as an implementer's convenience: this file is named in IN-1C-A's INDEX keep-out cell AND in the packet's §14 STOP list, the terminal STOPPED on it, and §85.2 is the ruling that released it.",
+    "measurement": "MEASURED by this walker's own uncoveredMechanisms computation, never transcribed from a review: at base d5a6c009 the RATCHET (modules) arm is GREEN at 23 names; at I1 22cedb1b and at this terminal it reports those identical 23 PLUS informationReceiptPools. The name's spelling and its position between envoyInterceptionStage and lineageNews are taken from that output, which is the walker's own order.",
+    "notBurnedDown": "informationReceiptPools is INVENTORIED, not repaired. Writing its lit walkthrough is a separate wave and IN-1c-b is the natural home. The list stays SHRINK-ONLY: strike this name the moment a lit proof lands, in that same commit.",
+    "law": "⭐ THE FIRST PRICED INSTANCE OF THE REGISTRY-MINT TWO-OBLIGATION LAW (§85.4): a registry family that mints a seeded pick AND a pool module costs TWO estate-wide census rows, this one and a habitForkRegistry.js classification row (HBF-33). Neither was priced in IN-1C-A's packet, and both were found only by the full gate. A compiler prices both up front."
+  },
+  "shrunk": {
+    "on": "2026-09-24",
+    "by": "FP chair (session 87797a6a, Fable 5.1)",
+    "what": "STRUCK: mechanisms:peaceTermsGraph. The list shrinks 18 → 17 mechanisms and 1 → 1 flag(s) — the direction the walker exists to force, a BANKED WIN, no chair ruling needed. It succeeds the strike of 2026-09-24 by FP chair (session 87797a6a, Fable 5.1): STRUCK: mechanisms:peaceTermsAppraisal, mechanisms:peaceTermsPrimitives.",
+    "why": "FP batch landing 4: LIT-1b + two cures · WR-RECALL U1/U2 · the Herald lens U1/U2 + two cures · PEACE-2 U1/U2 · the seasons arm re-scoped (FP-32)",
+    "prior": {
+      "on": "2026-09-24",
+      "by": "FP chair (session 87797a6a, Fable 5.1)",
+      "what": "STRUCK: mechanisms:peaceTermsAppraisal, mechanisms:peaceTermsPrimitives. The list shrinks 20 → 18 mechanisms and 1 → 1 flag(s) — the direction the walker exists to force, a BANKED WIN, no chair ruling needed. It succeeds the strike of 2026-09-24 by FP lane FP-I2 (IN-4 commit 2, the road): ONE entry STRUCK: npcDmVerbRecords.",
+      "why": "FP batch landing 3: GR-5c · PEACE-1 x3 + R · IN-3's one-home cure · the witness re-record · IN-5/1 · IN-4/2 · §13 the seam family",
+      "prior": {
+        "on": "2026-09-24",
+        "by": "FP lane FP-I2 (IN-4 commit 2, the road)",
+        "what": "ONE entry STRUCK: npcDmVerbRecords. The list shrinks 23 → 22. The walker forced it: tests/domain/reputationRaceIn4.test.js imports the module and drives reputationRaceEnabled LIT, so AUTO credit arrived and the unstruck name redded THE RATCHET (modules) beside the base's own envoyInterceptionStage row, which is not this lane's and is left for its owner.",
+        "why": "⛔ READ THE CREDIT FOR WHAT IT IS. The acceptance file calls npcDmVerbRecords.assignmentNewsItem, the ONE writer of the assignment ruling the race joins for an exile's departure seat, so the race is proven lit THROUGH that writer's real item (the writer/reader spelling-drift discipline). That is a lit exercise of one export, not a walkthrough of the module's DM verbs; the strike banks what the walker measures and claims nothing more.",
+        "prior": {
+          "by": "the FP chair (session 87797a6a, Fable 5.1)",
+          "what": "STRUCK: mechanisms:envoyInterceptionStage, mechanisms:peaceTermsOverlay. The list shrinks 23 → 21 mechanisms and 1 → 1 flag(s) — the direction the walker exists to force, a BANKED WIN, no chair ruling needed. It succeeds the strike of 2026-08-31 by lane T4 · SEAT-B (W-SEAT SEAT-5, the liberation un-install): ONE entry STRUCK: applyWorldPulseOccupationAuthority.",
+          "why": "FP batch landing 1 at 253d14848: WF-0 + cure, TR-2's cures, LIT-1a (Owner-Signed §934.84), TR-3, IN-2 + two cures, GR-6, IN-4/1, GR-5b — the batch's declared deltas, re-measured once at the tip",
+          "note": "the FP chair's landing-1 strike (envoyInterceptionStage, peaceTermsOverlay), 23 → 21; IN-4/2's strike of npcDmVerbRecords is the newer, to 20 at the union"
+        }
+      }
+    }
+  },
+  "mechanisms": [
+    "applyWorldPulseBetrayal",
+    "applyWorldPulseFactionRoster",
+    "applyWorldPulsePrimitives",
+    "applyWorldPulseRelationshipGraph",
+    "applyWorldPulseStressorMerge",
+    "envoyErrandEncounterWriter",
+    "envoyErrandEvidence",
+    "envoyErrandParlay",
+    "informationReceiptPools",
+    "lineageNews",
+    "npcDmVerbAuthority",
+    "peaceTermsCarriedSheet",
+    "peaceTermsCoalition",
+    "peaceTermsDocument",
+    "secrecyTradeFactor",
+    "sovereigntyReceiptPools",
+    "warReceiptPools"
+  ],
+  "flags": [
+    "warEconomyEnabled"
+  ]
+}

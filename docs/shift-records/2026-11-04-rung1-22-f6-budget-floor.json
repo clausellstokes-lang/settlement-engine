@@ -1,0 +1,46 @@
+{
+  "_doc": "F6 BUDGET-FLOOR (UNITS 1–4, AT A8C1A8CE4), ONE SIGNED SHIFT OF RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation, vetoable; a successor chair does not inherit this signature). THE CAUSE, ONE: F6 BUDGET-FLOOR (units 1–4): the institution budget's target gives way — the density factor d answers anchor − R − X over the scalable rows, the realised table re-measured on the scalable definition. THE MOVER, NAMED: first-parent step 6d84aa834 of lane/landing-rung1-2026-11-04 (\"compose: lane/rung1b-f6-budget-floor-2026-11-04 (at a8c1a8ce4) onto the window branch\") and nothing else. THE OWNER'S WORDS are quoted verbatim from docs/OWNER_DECISION_QUEUE.md line 562 (THE LADDER IS THE LANDING, the owner, 2026-11-04) and line 592 (THE SOAK LADDER, the owner, 2026-11-03), as §934.104 quotes them (the fix-window lanes' words; F6 is the rung-1B fix window's budget-floor lane). HOW (the staged-tree method, DOORS-2 ruling 1; LANDING-3's brief, ruling 1: one record per moving step, in first-parent order; LANDING-4 under the same brief and its addendum): this record's stage S22 is the tree of 6d84aa834 with the door paths (the freeze register, every registered manifest and suite, docs/shift-records/, scripts/prose-manifest-cells.mjs, the door helper, the freeze walker and scripts/audit/'s doors) carried from the branch, where the previous record's writes are committed, and CARTOGRAPHY_CALIBRATION's block carried with them (it is written by hand with every corpus re-record; scripts/audit/carry-calibration.mjs); no lane touched a door path inside the window, so the stage differs from 6d84aa834 by those writes alone (scripts/audit/landing-stage.sh build stops otherwise). MEASURED BEFORE THE WRITE (a dry pass of every act against a placeholder record in the same scratch stage, then the stage rebuilt, scripts/audit/landing-act.mjs figures; S21 -> S22): generator-golden-master 513 of 525 rows (thorp 84, hamlet 72, village 84, town 105, city 84, metropolis 84), the key set identical — the measured 513, not the chair's 504 (LANDING-3's brief, item 21); herald-knowledge-desk-golden 2 of 434 rows, 18 added and 20 removed (436 -> 434); cartography-calibration-corpus 295 of 504 rows (thorp 40, hamlet 39, village 52, town 60, city 63, metropolis 41); dossier-prose-manifest 412 of 1050 rows (thorp 48, hamlet 48, village 22, town 96, city 94, metropolis 104); espionage-dormancy-fence 318 of 360 rows (thorp 38, hamlet 55, village 58, town 60, city 60, metropolis 47), 360/360 distinct, 205c0c40.. -> d1269dc0..; pdf-golden-view-model-snapshot, its one snapshot. A surface that does not move at this stage is not listed. CARTOGRAPHY_CALIBRATION.MAX_INSTITUTIONS 11/15/23/46/92/104 -> 11/16/23/46/90/104 by hand (W7), MAX_BUILDING_ROW_BYTES stays 447; the corpus re-captured at the new block in the dry pass is byte-identical to the capture at the old one (5e04f378 both; no cap bit). W6 stays the one named red of the calibration suite (2.3 at town, 20 -> 46, against the declared 1.6), carried to record 27 by the chair's ruling 2 in LANDING-4's addendum. RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation, vetoable; a successor chair does not inherit this signature).",
+  "ownerWords": "well before we do the PRs, do the 1,000 again, the 10,000, the 100,000, and the 1 million with fixes where findings are found. PR in between each · after all of that, run 1000 generated settlements and review each in depth and in aggregate and tune",
+  "ownerDate": "2026-11-04",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
+  "cause": "F6 BUDGET-FLOOR (units 1–4): the institution budget's target gives way — the density factor d answers anchor − R − X over the scalable rows, the realised table re-measured on the scalable definition",
+  "seat": "LANDING-4 (Opus 5.5) under the cloud chair (Fable 5.1), session 019yED1Rc3svZxTNcEJVRr77, from the stage at 6d84aa834",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "re-record",
+      "predictedRows": 434,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "cartography-calibration-corpus",
+      "action": "re-record",
+      "predictedRows": 504,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "dossier-prose-manifest",
+      "action": "re-record",
+      "predictedRows": 2,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    },
+    {
+      "surface": "pdf-golden-view-model-snapshot",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}

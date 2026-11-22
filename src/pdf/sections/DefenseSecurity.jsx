@@ -1,0 +1,374 @@
+/**
+ * DefenseSecurity — chapter 04. Threat detail + criminal architecture +
+ * supporting capabilities.
+ *
+ *   - Active military status override banner (siege/occupied/civil war)
+ *   - Readiness banner + score average
+ *   - Defense readiness rows (threat assessment reframed: label + bar + badge + prose)
+ *   - Armed forces & fortifications, grouped (fortifications/standing/contracted/charter/arcane)
+ *   - Criminal architecture: capture state, operations, criminal faction
+ *   - Supporting capabilities (legal/medical/logistics/naval)
+ *   - Vulnerabilities list
+ */
+import { View, Text } from '@react-pdf/renderer';
+import { PageChrome } from '../primitives/PageChrome.jsx';
+import {
+  ChapterBand, ChapterHeadline, StatStrip, BulletList, HairRule, Tag,
+} from '../primitives/Dense.jsx';
+import { defenseHeadline, defenseTone } from '../lib/headlines.js';
+import { Callout } from '../primitives/Callout.jsx';
+import { EditableProse } from '../primitives/Editable.jsx';
+import { type, palette, space, pt } from '../theme.js';
+import { statusCase, tokenCase } from '../../domain/display/labelCase.js';
+import { cap, smart, label } from '../lib/format.js';
+import { StateProse } from '../primitives/StateProse.jsx';
+import { scoreBand } from '../../domain/display/defenseScoreBands.js';
+import { foodEnduranceLine } from '../../domain/display/defenseDisplay.js';
+// ⛔ A SECOND `statusCase` import (from `components/new/labelLadder.js`) sat on THIS line: a duplicate of line 23, and `src/pdf` may not reach into `src/components`. Removed; the line is kept so the prose-numerics ratchet's frozen path:line identities below do not shift.
+
+// Armed-forces groups in render order, mirroring the web Defense tab.
+const FORCE_GROUPS = [
+  { key: 'fortifications', label: 'FORTIFICATIONS', accent: palette.muted },
+  { key: 'standing', label: 'STANDING FORCES', accent: palette.bad },
+  { key: 'contracted', label: 'CONTRACTED FORCES', accent: palette.gold },
+  { key: 'charter', label: 'MONSTER RESPONSE (CHARTER)', accent: palette.cool },
+  { key: 'arcane', label: 'ARCANE DEFENSE', accent: palette.ai },
+];
+
+export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
+  const d = vm.defense;
+  const foodEndurance = foodEnduranceLine(settlement);
+
+  // Criminal capture prints in Power Structure since the UX consolidation (T2-20 parity).
+
+  return (
+    <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
+      <ChapterBand
+        eyebrow="10"
+        title="Defense & Security"
+        accent={narrativeMode ? palette.ai : palette.gold}
+      />
+
+      <ChapterHeadline tone={defenseTone(d)}>
+        {defenseHeadline(d, vm.identity)}
+      </ChapterHeadline>
+
+      {/* ── The mounted state prose (the screen's ProseBlock positions) ── */}
+      <StateProse stateProse={stateProse} tab="defense" />
+
+      {/* ── Military status override ──────────────────────────────── */}
+      {d.militaryStress && (
+        <Callout tone="bad" kicker="ACTIVE MILITARY STATUS">
+          <Text style={{ ...type.body_em, color: palette.bad, fontSize: pt['11'] }}>
+            {d.militaryStress.label || cap(d.militaryStress.icon || 'Active')}
+          </Text>
+          {d.militaryStress.summary && (
+            <EditableProse
+              name="defense.militaryStress.summary"
+              defaultValue={d.militaryStress.summary}
+              lines={1}
+              style={{ ...type.body, fontSize: pt['9.5'] }}
+            />
+          )}
+        </Callout>
+      )}
+
+      {/* ── Readiness strip ──────────────────────────────────────── */}
+      <StatStrip
+        stats={[
+          // RUNG 3, BOTH SURFACES (ODQ §934.22 item 4): the screen's own badge is cased, and
+          // a page that prints 'Well-Defended' where the tab prints 'Well-defended' is the
+          // two-spellings defect this file's parity suite exists to refuse.
+          { label: 'Readiness', value: statusCase(d.readiness?.label) },
+          { label: 'Score avg', value: smart(d.scoreAvg), tone: scoreTone(d.scoreAvg) },
+          { label: 'Safety', value: statusCase(d.safetyLabel) },
+          { label: 'Watch to population', value: smart(d.safetyRatio) },
+          { label: 'Food resilience', value: smart(d.foodResilience) },
+        ]}
+      />
+
+      {/* ── Guard assessment ─────────────────────────────────────── */}
+      {d.guardAssessment && (
+        <View style={{ marginBottom: space.sm }} wrap={false}>
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
+            GUARD ASSESSMENT
+          </Text>
+          <EditableProse
+            name="defense.guardAssessment"
+            defaultValue={d.guardAssessment}
+            lines={2}
+            style={{ ...type.body, fontSize: pt['9.5'] }}
+          />
+        </View>
+      )}
+
+      {/* ── Defense readiness (threat assessment, reframed) ──────── */}
+      <Text style={{ ...type.label, color: palette.bad, fontSize: pt['8'], marginBottom: 1 }}>
+        THREAT ASSESSMENT
+      </Text>
+      <Text style={{ ...type.caption, fontSize: pt['7.5'], color: palette.muted, fontStyle: 'italic', marginBottom: 4 }}>
+        Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as the campaign advances. A longer bar is safer.
+      </Text>
+      {d.threatReadiness.map((row, i) => (
+        <View
+          key={`rd-${i}`}
+          wrap={false}
+          style={{
+            marginBottom: 4,
+            padding: 5,
+            backgroundColor: palette.card,
+            borderWidth: 0.4,
+            borderColor: palette.border,
+            borderLeftWidth: 3,
+            borderLeftColor: row.barColor,
+            borderRadius: 2,
+          }}
+        >
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 2 }}>
+            <Text style={{ ...type.body_em, fontSize: pt['10'], color: palette.ink, flex: 1, marginRight: 6 }}>
+              {row.label}
+            </Text>
+            <View style={{ width: 56, height: 4, backgroundColor: palette.border, borderRadius: 2, marginRight: 6, overflow: 'hidden' }}>
+              <View style={{ width: `${Math.max(0, Math.min(100, row.score))}%`, height: '100%', backgroundColor: row.barColor }} />
+            </View>
+            {/* `row.status` is `scoreBand(score)` — 'STRONG' / 'ADEQUATE' / 'WEAK' /
+                'CRITICAL', the frozen four that `defenseScoreBands.js` forbids extending.
+                Nothing here uppercased it: it arrives shouting from the vocabulary, which
+                is why this site has no `.toUpperCase()` to delete. The screen re-cases it
+                at the render rung (OverviewTab, DefenseTab) and leaves the constant alone;
+                so does this. */}
+            <Text style={{ ...type.pill, fontSize: pt['7.5'], color: row.statusColor }}>
+              {statusCase(row.status)}
+            </Text>
+          </View>
+          <Text style={{ ...type.body, fontSize: pt['9'], color: palette.second, lineHeight: 1.4 }}>
+            {row.assess}
+          </Text>
+        </View>
+      ))}
+
+      {/* ── Food endurance (X-52, lane DEFENSE-3): the screen's line, from the same leaf ── */}
+      {foodEndurance && (
+        <Text style={{ ...type.body, fontSize: pt['9'], color: palette.second, lineHeight: 1.4, marginBottom: 4 }}>
+          <Text style={{ ...type.body_em, color: palette.ink }}>{foodEndurance.label}:</Text> {foodEndurance.sentence}
+        </Text>
+      )}
+
+      {/* ── Armed forces & fortifications ────────────────────────── */}
+      <View style={{ marginTop: space.sm }}>
+        <HairRule />
+        <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
+          ARMED FORCES & FORTIFICATIONS
+        </Text>
+        {FORCE_GROUPS.map(group => {
+          const forces = d.armedForces?.[group.key] || [];
+          if (!forces.length) return null;
+          return (
+            <View key={group.key} style={{ marginBottom: 4 }}>
+              <Text style={{ ...type.label_plain, fontSize: pt['7.5'], color: group.accent, marginBottom: 2 }}>
+                {tokenCase(group.label)}
+              </Text>
+              {forces.map((force, i) => (
+                <View
+                  key={`f-${group.key}-${i}`}
+                  wrap={false}
+                  style={{
+                    marginBottom: 3,
+                    padding: 4,
+                    backgroundColor: palette.card,
+                    borderWidth: 0.4,
+                    borderColor: palette.border,
+                    borderLeftWidth: 2,
+                    borderLeftColor: group.accent,
+                    borderRadius: 2,
+                  }}
+                >
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Text style={{ ...type.body_em, fontSize: pt['9.5'], color: palette.ink, flex: 1, marginRight: 6 }}>
+                      {force.name}
+                    </Text>
+                    {force.source && force.source !== 'generated' && (
+                      <Tag tone="gold">{force.source === 'required' ? 'REQ' : 'FORCED'}</Tag>
+                    )}
+                  </View>
+                  {force.desc && (
+                    <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted, lineHeight: 1.35, marginTop: 1 }}>
+                      {force.desc}
+                    </Text>
+                  )}
+                </View>
+              ))}
+            </View>
+          );
+        })}
+        {!FORCE_GROUPS.some(g => (d.armedForces?.[g.key] || []).length) && (
+          <Text style={{ ...type.body, fontSize: pt['9'], color: palette.muted, fontStyle: 'italic' }}>
+            No organized defensive force. Defense relies on armed citizens.
+          </Text>
+        )}
+      </View>
+
+      {/* ── Criminal architecture ─────────────────────────────── */}
+      {(d.criminalStructure || d.criminalOps?.length > 0 || d.crimeTypes?.length > 0 || d.criminalFaction) && (
+        <View style={{ marginTop: space.sm }}>
+          <HairRule />
+          <Text style={{ ...type.label, color: palette.bad, fontSize: pt['8'], marginBottom: 3 }}>
+            CRIMINAL ARCHITECTURE
+          </Text>
+          {/* Criminal capture prints in Power Structure (UX consolidation 2026-10-30, RULINGS-T2
+              T2-20 print parity: Power owns capture, Defense owns the structure). */}
+          {d.criminalStructure && (
+            <View
+              wrap={false}
+              style={{
+                padding: 5,
+                marginBottom: 4,
+                backgroundColor: palette.card,
+                borderWidth: 0.4,
+                borderColor: palette.border,
+                borderLeftWidth: 3,
+                borderLeftColor: d.criminalStructure.color,
+                borderRadius: 2,
+              }}
+            >
+              {/* Parity with the screen's Defense tab, which cases the same classifier word
+                  at its own mount: one status, one spelling, both surfaces. */}
+              <Text style={{ ...type.label_plain, fontSize: pt['7.5'], color: palette.bad, marginBottom: 1 }}>
+                Criminal structure · {statusCase(d.criminalStructure.label)}
+              </Text>
+              <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted, lineHeight: 1.35 }}>
+                {d.criminalStructure.note}
+              </Text>
+            </View>
+          )}
+          {d.crimeTypes?.length > 0 && (
+            <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 3, marginBottom: 3 }}>
+              {d.crimeTypes.map((ct, i) => (
+                <Tag key={`crm-${i}`} tone="bad">{label(ct)}</Tag>
+              ))}
+            </View>
+          )}
+          {d.criminalOps?.length > 0 && (
+            <View style={{ marginBottom: 4 }}>
+              <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.muted, marginBottom: 2 }}>ACTIVE CRIMINAL OPERATIONS</Text>
+              {d.criminalOps.map((op, i) => (
+                <View
+                  key={`cop-${i}`}
+                  wrap={false}
+                  style={{
+                    marginBottom: 3,
+                    padding: 4,
+                    backgroundColor: palette.card,
+                    borderWidth: 0.4,
+                    borderColor: palette.border,
+                    borderLeftWidth: 2,
+                    borderLeftColor: palette.bad,
+                    borderRadius: 2,
+                  }}
+                >
+                  <Text style={{ ...type.body_em, fontSize: pt['9.5'], color: palette.bad, marginBottom: 1 }}>
+                    {label(op)}
+                  </Text>
+                  {op?.note && (
+                    <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted, lineHeight: 1.35 }}>
+                      {op.note}
+                    </Text>
+                  )}
+                </View>
+              ))}
+            </View>
+          )}
+          {d.criminalFaction && (
+            <View style={{ padding: 5, border: `0.4pt solid ${palette.bad}`, borderRadius: 2, marginBottom: 4 }}>
+              {/* T2-20: name and band only; the faction's description prints on its Power
+                  Structure card. */}
+              <Text style={{ ...type.body_em, fontSize: pt['10'], color: palette.bad }}>
+                Underworld: {d.criminalFaction.faction || d.criminalFaction.name}
+                {d.criminalFaction.powerLabel ? ` · ${d.criminalFaction.powerLabel}` : ''}
+              </Text>
+            </View>
+          )}
+          {/* Order hooks print in the Plot Hooks chapter (RULINGS-CROSS X-2). */}
+        </View>
+      )}
+
+      {/* ── Supporting capabilities ───────────────────────────── */}
+      {d.supportingCapabilities?.length > 0 && (
+        <View style={{ marginTop: space.sm }}>
+          <HairRule />
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
+            SUPPORTING CAPABILITIES
+          </Text>
+          {/* T2-23: Economic Backing restates the threat row Economic Survival; dropped as on screen. */}
+          {d.supportingCapabilities.filter((sc) => sc.label !== 'Economic Backing').map((sc, i) => (
+            <View
+              key={`sc-${i}`}
+              wrap={false}
+              style={{
+                flexDirection: 'row',
+                marginBottom: 3,
+                padding: 4,
+                backgroundColor: palette.card,
+                borderWidth: 0.4,
+                borderColor: palette.border,
+                borderLeftWidth: 2,
+                borderLeftColor: sc.color,
+                borderRadius: 2,
+                alignItems: 'flex-start',
+              }}
+            >
+              <View style={{ flex: 1 }}>
+                <View style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 1 }}>
+                  <Text style={{ ...type.body_em, fontSize: pt['9'], color: palette.ink, marginRight: 5 }}>
+                    {sc.label}
+                  </Text>
+                  <Text style={{ ...type.caption, fontSize: pt['8'], color: sc.color, fontWeight: 700 }}>
+                    {sc.status}
+                  </Text>
+                </View>
+                <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted, lineHeight: 1.35 }}>
+                  {sc.note}
+                </Text>
+              </View>
+              {/* ⛔ THE BAND WORD, NEVER THE DIGIT (R-5b item #20, applied here at last). This
+                  printed `Math.round(sc.score)` — a bare 0-100 — beside a row whose screen
+                  twin prints the band word from the shared ladder, so one number read as two
+                  verdicts across the two surfaces and the PDF was the one still speaking in
+                  digits. It now prints exactly what `DefenseTab` prints for the same score,
+                  through the same two functions, so the surfaces cannot drift by a word. */}
+              {sc.score != null && (
+                <Text style={{ ...type.caption, fontSize: pt['8'], color: sc.color, fontWeight: 700, marginLeft: 6 }}>
+                  {statusCase(scoreBand(Math.min(100, Math.max(0, sc.score))))}
+                </Text>
+              )}
+            </View>
+          ))}
+        </View>
+      )}
+
+      {/* ── Vulnerabilities ───────────────────────────────────── */}
+      {d.vulnerabilities?.length > 0 && (
+        <View style={{ marginTop: space.sm }}>
+          <HairRule />
+          <Text style={{ ...type.label, color: palette.warn, fontSize: pt['8'], marginBottom: 3 }}>
+            VULNERABILITIES
+          </Text>
+          <BulletList
+            items={d.vulnerabilities}
+            tone="warn"
+            itemRender={(v) => label(v) || (typeof v === 'string' ? v : '')}
+          />
+        </View>
+      )}
+    </PageChrome>
+  );
+}
+
+function scoreTone(v) {
+  if (v == null) return 'muted';
+  if (v >= 70) return 'good';
+  if (v >= 40) return 'warn';
+  return 'bad';
+}
+
+export default DefenseSecurity;

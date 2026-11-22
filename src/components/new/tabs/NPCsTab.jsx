@@ -1,0 +1,150 @@
+import InfoPill from '../../primitives/InfoPill.jsx';
+import { SECTION_HELP } from '../../../copy/sectionHelp.js';
+import React, { useState } from 'react';
+import { Search, X } from 'lucide-react';
+import { FS, swatch, MUTED } from '../../theme.js';
+import { serif, Empty } from '../Primitives';
+
+// THE TIES LIVE ON RELATIONSHIPS (chair ruling N8, 2026-10-30): this tab's old
+// "NPC Relationships" fold was a truncated copy of that page's list (same card, same
+// strings, 100% superset), so it is cut and every tie stays reachable there.
+import {NPCCategoryGroup} from '../npcComponents';
+import { groupCardsByFirstPower, powersOf, powerNameOf } from '../../../domain/people/cardPowers.js';
+
+import {NarrativeNote} from '../NarrativeNote';
+// W-H4 §6c — the LOCAL half of the wanderer register. A static child of this
+// already-lazy tab (HeraldBody's rule for small children of an open door), and it
+// self-hides entirely when the owning realm does not run the consequence economy.
+import UnaffiliatesSection from './UnaffiliatesSection.jsx';
+import Button from '../../primitives/Button.jsx';
+import IconButton from '../../primitives/IconButton.jsx';
+import { chromeFontSize } from '../../../design/proseScale.js';
+import useIsMobile from '../../../hooks/useIsMobile.js';
+import { FLUSH_RULED } from '../../../design/flush.js';
+
+export function NPCsTab({
+  npcs,
+  onRerollNPCs,
+  settlement,
+  narrativeNote,
+  pinnedIds,
+  onTogglePin,
+  canAuthorNpc = false,
+  saveId = null,
+  playerView = false,
+  publicDossier = false,
+}) {
+  const mobile = useIsMobile();
+  const [search, setSearch] = useState('');
+  const [impFilter, setImpFilter] = useState('all');
+  const pinnedCount = pinnedIds instanceof Set ? pinnedIds.size : 0;
+
+  // The unaffiliates are people the WORLD ledger holds against this place, not roster
+  // entries, so they survive an empty roster and are rendered beside the empty state
+  // rather than behind it.
+  const unaffiliates = (
+    <UnaffiliatesSection
+      saveId={saveId}
+      settlement={settlement}
+      playerView={playerView}
+      publicDossier={publicDossier}
+    />
+  );
+
+  if (!npcs?.length) {
+    return (
+      <div>
+        <Empty message="No key figures are recorded for this settlement."/>
+        {unaffiliates}
+      </div>
+    );
+  }
+
+  const highCount = npcs.filter(n=>n.influence==='high').length;
+  const modCount  = npcs.filter(n=>n.influence==='moderate').length;
+
+  // Group by FIRST-RANK power (PEOPLE-5A, M-1b): a card ranked in a power stands under its
+  // best-ranked power; the unranked members and the cards in no power get their own groups.
+  // Read from the memberships and the powers, never the shim's derived fields.
+  const factionCategory = {};
+  powersOf(settlement).forEach(f => { factionCategory[powerNameOf(f)] = f.category || 'other'; });
+  const groups = groupCardsByFirstPower(npcs, settlement);
+
+  const q = search.trim().toLowerCase();
+
+  return (
+    <div>
+      <NarrativeNote note={narrativeNote} />
+      {/* ── HEADER ──────────────────────────────────────────────────────── */}
+      <div style={{display:'flex',alignItems:'center',gap:10,flexWrap:'wrap',...FLUSH_RULED}}>
+        <div style={{flex:1}}>
+          <span style={{...serif,fontSize:FS.xl,fontWeight:600,color:swatch.inkMag}}>{npcs.length} Key Figures</span><InfoPill text={SECTION_HELP.npcs} />
+          <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED,marginLeft:8}}>
+            {highCount>0&&`${highCount} high influence · `}{modCount>0&&`${modCount} moderate`}
+          </span>
+        </div>
+        {pinnedCount > 0 && (
+          <span
+            title="Pinned NPCs are protected from AI rewrites. Their goal and secret won't be rewritten."
+            style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:800,color:swatch.ai,background:swatch['#F0EBFF'],border:'1px solid #c8a8e8',padding:'2px 10px',letterSpacing:'0.04em',flexShrink:0,cursor:'help',textTransform:'uppercase'}}>
+            {pinnedCount} pinned
+          </span>
+        )}
+        {/* THE PADLOCKS ARE GONE (owner order 2026-09-17, "remove the other padlocks").
+            This Reroll used to live inside LockControls beside "Keep these people", and
+            each roster row carried a padlock; both are removed, and a lock a save still
+            stores is not read (domain/locksPreservation.js normalizeLocks). The Reroll
+            itself stays, offered only to a viewer who may roll the roster. */}
+        {onRerollNPCs && (
+          <Button variant="gold" size="sm" onClick={onRerollNPCs} style={{flexShrink:0}}>
+            ↺ Reroll
+          </Button>
+        )}
+      </div>
+
+      {/* ── SEARCH + FILTER ─────────────────────────────────────────────── */}
+      <div style={{display:'flex',gap:8,flexWrap:'wrap',...FLUSH_RULED}}>
+        <div style={{position:'relative',flex:1,minWidth:140}}>
+          <span style={{position:'absolute',left:9,top:'50%',transform:'translateY(-50%)',display:'inline-flex',color:MUTED,pointerEvents:'none'}}><Search size={14}/></span>
+          <input value={search} onChange={e=>setSearch(e.target.value)}
+            aria-label="Filter by name, role, or power"
+            placeholder="Filter by name, role, or power…"
+            style={{width:'100%',padding:'7px 28px 7px 28px',border:'1px solid #c8b89a',fontSize:FS.sm,fontFamily:'Nunito,sans-serif',color:swatch.inkMag,background:swatch['#FAF8F4'],boxSizing:'border-box'}}/>
+          {search&&<span style={{position:'absolute',right:8,top:'50%',transform:'translateY(-50%)',display:'inline-flex'}}><IconButton Icon={X} label="Clear filter" onClick={()=>setSearch('')} tone="ghost" size="sm" /></span>}
+        </div>
+        {[
+          {key:'all',   label:'All'},
+          {key:'high',  label:'●●● High'},
+          {key:'moderate', label:'●● Moderate'},
+          {key:'low',   label:'● Low'},
+        ].map(f=>(
+          <Button key={f.key} onClick={()=>setImpFilter(f.key)}
+            variant={impFilter===f.key?'primary':'secondary'} size="sm"
+            aria-pressed={impFilter===f.key} style={{flexShrink:0}}>
+            {f.label}
+          </Button>
+        ))}
+      </div>
+
+      {/* ── NPC GROUPS by power faction ────────────────────────────────── */}
+      {groups.map(({ key, cards }) => (
+        <NPCCategoryGroup
+          key={key}
+          category={factionCategory[key] || 'other'}
+          label={key}
+          group={cards}
+          impFilter={impFilter}
+          search={q}
+          pinnedIds={pinnedIds}
+          onTogglePin={onTogglePin}
+          canAuthorNpc={canAuthorNpc}
+          settlement={settlement}
+        />
+      ))}
+
+      {unaffiliates}
+</div>
+  );
+}
+
+export default React.memo(NPCsTab);

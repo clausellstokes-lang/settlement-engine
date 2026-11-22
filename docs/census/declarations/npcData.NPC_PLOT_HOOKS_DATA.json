@@ -1,0 +1,48 @@
+{
+  "pool": {
+    "id": "npcData.NPC_PLOT_HOOKS_DATA",
+    "file": "src/data/npcData.js",
+    "drawKind": "T",
+    "drawSite": "npcGenerator.js:696 (by disposition)",
+    "colour": true,
+    "crisisScoped": false,
+    "keyDeclares": {},
+    "lines": 4,
+    "declaring": 0,
+    "note": "Behaviour by disposition; every line is colour."
+  },
+  "rows": [
+    {
+      "id": "welcoming",
+      "text": "Offers information freely; asks questions that seem like interest rather than interrogation.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "transactional",
+      "text": "Cooperative within clear limits; every exchange has an implicit value.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "cautious",
+      "text": "Answers questions without volunteering; watches who you talk to next.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "dismissive",
+      "text": "Polite but brief; makes clear their time is limited.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    }
+  ]
+}

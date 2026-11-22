@@ -1,0 +1,4353 @@
+[
+{
+"id": "11127",
+"sev": "MED",
+"n": 126,
+"town": "r2s-famine-village-3",
+"section": "World/NPCs",
+"fold": "How they deal Offers a seat, a meal and the gossip of the road before you have taken your coat off.",
+"text": "How they deal Offers a seat, a meal and the gossip of the road before you have taken your coat off.",
+"why": "offers a meal and road gossip at once; famine 58% deficit, trade access isolated",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 78,
+"fn": "ROWS"
+}
+},
+{
+"id": "11047",
+"sev": "MED",
+"n": 121,
+"town": "r2s-famine-city-0",
+"section": "World/NPCs",
+"fold": "How they deal Gives a room and a meal, and keeps an eye on who you sit with and how long you stay.",
+"text": "How they deal Gives a room and a meal, and keeps an eye on who you sit with and how long you stay.",
+"why": "gives a room and a meal; CRISIS famine, food deficit 15%",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 82,
+"fn": "ROWS"
+}
+},
+{
+"id": "12831",
+"sev": "MED",
+"n": 111,
+"town": "r2s-plague_onset-city-1",
+"section": "Systems/Power",
+"fold": "Mages and arcane practitioners hold real influence through monopoly on magical services and the latent fear their capabilities inspire.",
+"text": "Mages and arcane practitioners hold real influence through monopoly on magical services and the latent fear their capabilities inspire.",
+"why": "mages hold real influence; GOVERNMENT has Arcane Orders and The Arcane Circle both Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/claimStanding.js",
+"line": 79,
+"fn": "CLAIM_RUNGS"
+}
+},
+{
+"id": "21207",
+"sev": "MED",
+"n": 108,
+"town": "r2s-succession_void-thorp-1",
+"section": "Systems/Power",
+"fold": "The oldest heads of the community decide things together; people follow them out of respect and custom, not law.",
+"text": "The oldest heads of the community decide things together; people follow them out of respect and custom, not law.",
+"why": "people follow the elders out of respect; legitimacy is Crisis and few accept its right to rule",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/rulingStructure.js",
+"line": 405,
+"fn": "generatePowerStructure"
+}
+},
+{
+"id": "11229",
+"sev": "MED",
+"n": 94,
+"town": "r2s-famine-city-3",
+"section": "World/NPCs",
+"fold": "How they deal Sells what is baked; special orders by the day before, paid on collection.",
+"text": "How they deal Sells what is baked; special orders by the day before, paid on collection.",
+"why": "baker takes special orders as usual under Famine; grain is the failed food",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 350,
+"fn": "ROWS"
+}
+},
+{
+"id": "20360",
+"sev": "MED",
+"n": 94,
+"town": "r2s-plague_onset-city-0",
+"section": "Systems/Power",
+"fold": "The craft guilds are close behind, contesting every pricing and quality-standard decision they try to push through council.",
+"text": "The craft guilds are close behind, contesting every pricing and quality-standard decision they try to push through council.",
+"why": "craft guilds close behind, contesting every decision in council; GOVERNMENT lists Craft Guilds as Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/factionStanding.js",
+"line": 99,
+"fn": "annotateFactionStanding"
+}
+},
+{
+"id": "B10797",
+"sev": "MED",
+"n": 93,
+"town": "r2s-famine-city-1",
+"section": "World/NPCs",
+"fold": "How they deal Talks while working; shows how a pot is thrown and lets visitors try.",
+"text": "How they deal Talks while working; shows how a pot is thrown and lets visitors try.",
+"why": "potter shows visitors how a pot is thrown; LAND gaps say the Potter lacks access to clay",
+"kinds": [
+"STATE",
+"TAG"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 198,
+"fn": "ROWS"
+}
+},
+{
+"id": "11315",
+"sev": "MED",
+"n": 89,
+"town": "r2s-under_siege-town-3",
+"section": "World/NPCs",
+"fold": "How they deal Talks about the woods, the game and the best places to hunt; easy to fall into talk with.",
+"text": "How they deal Talks about the woods, the game and the best places to hunt; easy to fall into talk with.",
+"why": "talks of the best places to hunt; the other says hunting grounds are worked out, TRADE imports game; no hunter on HOUSES",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 172,
+"fn": "ROWS"
+}
+},
+{
+"id": "B10668",
+"sev": "MED",
+"n": 89,
+"town": "r2s-occupied-town-0",
+"section": "World/NPCs",
+"fold": "How they deal Sells by the # and the cart; quick to quote and slow to deliver.",
+"text": "How they deal Sells by the thousand and the cart; quick to quote and slow to deliver.",
+"why": "brickmaker sells bricks by the thousand and the cart; LAND gaps: Brickmaker lacks access to clay, and 'No clay reaches the brickmaker'",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 228,
+"fn": "ROWS"
+}
+},
+{
+"id": "B16523",
+"sev": "MED",
+"n": 88,
+"town": "r2r-city-44",
+"section": "World/NPCs",
+"fold": "Secret: Sells yesterday's fish as this morning's, washed and packed in fresh ice, and has made people sick more than once",
+"text": "Secret: Sells yesterday's fish as this morning's, washed and packed in fresh ice, and has made people sick more than once",
+"why": "fishmonger sells yesterday's fish packed in ice as fresh; FOOD failed source is fish, so a fish trade at ordinary volume is off",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 130,
+"fn": "ROWS"
+}
+},
+{
+"id": "20266",
+"sev": "MED",
+"n": 86,
+"town": "r2r-town-1",
+"section": "Systems/Power",
+"fold": "The clergy have more say in public affairs, so the arcane orders work around them and never challenge them openly.",
+"text": "The clergy have more say in public affairs, so the arcane orders work around them and never challenge them openly.",
+"why": "says the clergy have more say than the arcane orders; 20053 and 03354 say the arcane orders are ahead",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/power/factionStanding.js",
+"line": 229,
+"fn": "annotateFactionStanding"
+}
+},
+{
+"id": "B16083",
+"sev": "MED",
+"n": 85,
+"town": "r2s-famine-town-1",
+"section": "World/NPCs",
+"fold": "Secret: Has been digging clay from land that belongs to someone else and paying nothing for it",
+"text": "Secret: Has been digging clay from land that belongs to someone else and paying nothing for it",
+"why": "secret has the potter digging clay now; LAND gap and 13747 say no clay reaches the potter",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 192,
+"fn": "ROWS"
+}
+},
+{
+"id": "16773",
+"sev": "MED",
+"n": 84,
+"town": "r2s-plague_onset-city-0",
+"section": "Systems/Power",
+"fold": "Running close behind the merchant guilds in a sustained dispute over who sets the terms for finished goods.",
+"text": "Running close behind the merchant guilds in a sustained dispute over who sets the terms for finished goods.",
+"why": "craft guilds running close behind merchant guilds in a sustained dispute; Craft Guilds are Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/factionStanding.js",
+"line": 113,
+"fn": "annotateFactionStanding"
+}
+},
+{
+"id": "11327",
+"sev": "MED",
+"n": 83,
+"town": "r2s-famine-metropolis-3",
+"section": "World/NPCs",
+"fold": "How they deal Talks while serving; knows every household by the bread it buys.",
+"text": "How they deal Talks while serving; knows every household by the bread it buys.",
+"why": "baker knows every household by the bread it buys: ordinary bread trade under Famine",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 348,
+"fn": "ROWS"
+}
+},
+{
+"id": "12720",
+"sev": "MED",
+"n": 80,
+"town": "r2r-thorp-52",
+"section": "Summary/Overview",
+"fold": "Lightly defended",
+"text": "Lightly defended",
+"why": "'Lightly defended'; DEFENCE: no walls and no force of any kind",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 235,
+"fn": "EXPOSED_READINESS_LABELS"
+}
+},
+{
+"id": "13421",
+"sev": "MED",
+"n": 73,
+"town": "r2s-under_siege-town-3",
+"section": "Systems/Power",
+"fold": "Merchants with local reach; a consistent civic presence without yet being the dominant commercial voice.",
+"text": "Merchants with local reach; a consistent civic presence without yet being the dominant commercial voice.",
+"why": "'a consistent civic presence'; GOVERNMENT lists Merchant Guilds as Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/claimStanding.js",
+"line": 33,
+"fn": "LOCAL_MERCHANTS"
+}
+},
+{
+"id": "B16204",
+"sev": "MED",
+"n": 71,
+"town": "r2s-famine-city-3",
+"section": "World/NPCs",
+"fold": "Secret: Has been taking children to tread the clay for a few coppers a day, and # of them was hurt badly",
+"text": "Secret: Has been taking children to tread the clay for a few coppers a day, and one of them was hurt badly",
+"why": "secret has someone treading clay for pay now; LAND gaps say Brickmaker and Potter both lack access to clay",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 222,
+"fn": "ROWS"
+}
+},
+{
+"id": "11176",
+"sev": "MED",
+"n": 68,
+"town": "r2r-city-44",
+"section": "World/NPCs",
+"fold": "How they deal Pours a taste, talks about the year's grapes and suggests a cask.",
+"text": "How they deal Pours a taste, talks about the year's grapes and suggests a cask.",
+"why": "vintner talks about the year's grapes; no grapes reach the vintner",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 663,
+"fn": "ROWS"
+}
+},
+{
+"id": "16932",
+"sev": "MED",
+"n": 65,
+"town": "r2r-village-57",
+"section": "World/NPCs",
+"fold": "Secret: Buys grain that was meant for bread in the lean months, at a price the bakers cannot match",
+"text": "Secret: Buys grain that was meant for bread in the lean months, at a price the bakers cannot match",
+"why": "names the bakers; HOUSES has no baker (tag reaches villages)",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 267,
+"fn": "ROWS"
+}
+},
+{
+"id": "17190",
+"sev": "MED",
+"n": 61,
+"town": "r2s-plague_onset-city-0",
+"section": "World/NPCs",
+"fold": "Secret: Has let the walls go unrepaired and pocketed the money that was granted for the work",
+"text": "Secret: Has let the walls go unrepaired and pocketed the money that was granted for the work",
+"why": "walls left unrepaired, money pocketed; another line says fresh repairs show on the walls and gates",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 582,
+"fn": "ROWS"
+}
+},
+{
+"id": "11202",
+"sev": "MED",
+"n": 60,
+"town": "r2s-succession_void-town-2",
+"section": "World/NPCs",
+"fold": "How they deal Sells by the cask and the bottle; the better years cost much more.",
+"text": "How they deal Sells by the cask and the bottle; the better years cost much more.",
+"why": "vintner sells wine by cask and bottle; 14362 says grapes are needed and not brought in, TRADE makes no wine",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 665,
+"fn": "ROWS"
+}
+},
+{
+"id": "B15974",
+"sev": "MED",
+"n": 58,
+"town": "r2s-occupied-metropolis-2",
+"section": "World/NPCs",
+"fold": "Secret: Bought the vineyard by lending its old owner money at a rate that could never be paid back",
+"text": "Secret: Bought the vineyard by lending its old owner money at a rate that could never be paid back",
+"why": "vintner bought a vineyard by lending to its owner; LAND gaps: Vintner exists but lacks access to grapes, and no vineyard or grape resource is listed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 659,
+"fn": "ROWS"
+}
+},
+{
+"id": "17122",
+"sev": "MED",
+"n": 57,
+"town": "r2s-under_siege-city-1",
+"section": "World/NPCs",
+"fold": "Secret: Has been selling grain from the stores to merchants in another market and writing it down as spoiled",
+"text": "Secret: Has been selling grain from the stores to merchants in another market and writing it down as spoiled",
+"why": "sells grain from the stores to merchants in another market, under a siege with roads closed and an 82% food deficit",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 310,
+"fn": "ROWS"
+}
+},
+{
+"id": "B02464",
+"sev": "MED",
+"n": 57,
+"town": "r2s-infiltrated-thorp-3",
+"section": "Summary/Overview",
+"fold": "A dispute over grazing rights and water access has run for # seasons, and the families on each side no longer speak to # another.",
+"text": "A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.",
+"why": "a grazing and water dispute between families 'on each side'; QUARRELS none; thorp of 6, no grazing resource",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 509,
+"fn": "deriveBaselineConflict"
+}
+},
+{
+"id": "B10758",
+"sev": "MED",
+"n": 56,
+"town": "r2s-famine-metropolis-1",
+"section": "World/NPCs",
+"fold": "How they deal Talks about the common wines freely; the rare ones are for buyers they know.",
+"text": "How they deal Talks about the common wines freely; the rare ones are for buyers they know.",
+"why": "vintner talks of common and rare wines; GAPS: Vintner lacks access to grapes, and grapes are needed and not brought in",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 667,
+"fn": "ROWS"
+}
+},
+{
+"id": "06026",
+"sev": "MED",
+"n": 55,
+"town": "r2s-plague_onset-metropolis-1",
+"section": "Systems/Power",
+"fold": "Craft guilds regulating production and apprenticeships; a reliable secondary presence in civic life.",
+"text": "Craft guilds regulating production and apprenticeships; a reliable secondary presence in civic life.",
+"why": "craft guilds a reliable secondary presence in civic life; GOVERNMENT lists Craft Guilds as Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/rulingStructure.js",
+"line": 630,
+"fn": "generatePowerStructure"
+}
+},
+{
+"id": "17453",
+"sev": "MED",
+"n": 55,
+"town": "r2s-mass_migration-town-1",
+"section": "World/NPCs",
+"fold": "Secret: Sells cheap wine poured into the casks of a famous vintage",
+"text": "Secret: Sells cheap wine poured into the casks of a famous vintage",
+"why": "vintner sells wine from casks; 14238 says grapes are needed and not brought in",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 655,
+"fn": "ROWS"
+}
+},
+{
+"id": "22803",
+"sev": "MED",
+"n": 53,
+"town": "r2r-village-58",
+"section": "Systems/Power",
+"fold": "They operate in the shadow of the governing council but not comfortably: they are waiting for a chance to push back.",
+"text": "They operate in the shadow of the governing council but not comfortably: they are waiting for a chance to push back.",
+"why": "power working in the council's shadow; Grain Holders are Dominant, level with the Household Council",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/factionStanding.js",
+"line": 60,
+"fn": "annotateFactionStanding"
+}
+},
+{
+"id": "B10693",
+"sev": "MED",
+"n": 52,
+"town": "r2r-metropolis-14",
+"section": "World/NPCs",
+"fold": "How they deal Sells stone by the block and the cart; wants # paid before cutting begins.",
+"text": "How they deal Sells stone by the block and the cart; wants half paid before cutting begins.",
+"why": "quarry master sells stone by block and cart; Stone quarry is depleted, local quarry depleted per TRADE",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 858,
+"fn": "ROWS"
+}
+},
+{
+"id": "07269",
+"sev": "MED",
+"n": 51,
+"town": "r2s-under_siege-metropolis-3",
+"section": "Systems/Power",
+"fold": "Established merchant community; fund civic works and expect council access in return.",
+"text": "Established merchant community; fund civic works and expect council access in return.",
+"why": "merchants funding civic works expecting council access; Merchant Guilds and Merchant Bloc are Suppressed",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/rulingStructure.js",
+"line": 464,
+"fn": "generatePowerStructure"
+}
+},
+{
+"id": "28617",
+"sev": "MED",
+"n": 50,
+"town": "r2s-plague_onset-city-0",
+"section": "Systems/Power",
+"fold": "Well-organised craft guilds with established trade monopolies; a persistent civic voice that merchant houses must negotiate with, not ignore.",
+"text": "Well-organised craft guilds with established trade monopolies; a persistent civic voice that merchant houses must negotiate with, not ignore.",
+"why": "craft guilds a persistent civic voice merchants must negotiate with; GOVERNMENT has Craft Guilds Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/rulingStructure.js",
+"line": 627,
+"fn": "generatePowerStructure"
+}
+},
+{
+"id": "B10687",
+"sev": "MED",
+"n": 47,
+"town": "r2s-plague_onset-village-2",
+"section": "World/NPCs",
+"fold": "How they deal Sells leather to anyone; cash only.",
+"text": "How they deal Sells leather to anyone; cash only.",
+"why": "tanner 'sells leather to anyone'; LAND gaps: Tannery exists but lacks access to livestock and animal hides, so it has no input",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 920,
+"fn": "ROWS"
+}
+},
+{
+"id": "21791",
+"sev": "MED",
+"n": 45,
+"town": "r2s-famine-village-1",
+"section": "Systems/Power",
+"fold": "The ruling # of Headman's Authority",
+"text": "The ruling three of Headman's Authority",
+"why": "ruling three of Headman's Authority; a headman's authority is one headman",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 80,
+"fn": ""
+}
+},
+{
+"id": "13756",
+"sev": "MED",
+"n": 42,
+"town": "r2s-under_siege-metropolis-2",
+"section": "Systems/Power",
+"fold": "Minor landed families with limited political reach; present in civic life but rarely decisive.",
+"text": "Minor landed families with limited political reach; present in civic life but rarely decisive.",
+"why": "landed families 'present in civic life'; GOVERNMENT has Noble Houses and The Highborn Circle Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/claimStanding.js",
+"line": 32,
+"fn": "LESSER_LANDED"
+}
+},
+{
+"id": "B10676",
+"sev": "MED",
+"n": 40,
+"town": "r2s-occupied-metropolis-1",
+"section": "World/NPCs",
+"fold": "How they deal Sells charcoal by the sack to anyone who can carry it away.",
+"text": "How they deal Sells charcoal by the sack to anyone who can carry it away.",
+"why": "charcoal sold by the sack; LAND gaps: Charcoal burner lacks access to mountain_timber, and 13831 says no timber reaches it",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 680,
+"fn": "ROWS"
+}
+},
+{
+"id": "B10713",
+"sev": "MED",
+"n": 39,
+"town": "r2r-town-48",
+"section": "World/NPCs",
+"fold": "How they deal Shows off the training yard and invites you to the next games.",
+"text": "How they deal Shows off the training yard and invites you to the next games.",
+"why": "tag has S,O,P: inviting you to the next games presumes ordinary gatherings and arrivals, false under siege, occupation or plague",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 1042,
+"fn": "ROWS"
+}
+},
+{
+"id": "00339",
+"sev": "MED",
+"n": 37,
+"town": "r2s-under_siege-metropolis-3",
+"section": "Systems/Power",
+"fold": "# powers stand almost level here, and no # leads; every council vote has to be bargained for.",
+"text": "Three powers stand almost level here, and no one leads; every council vote has to be bargained for.",
+"why": "three powers level; GOVERNMENT has two Significant, rest Minor or Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/factionStanding.js",
+"line": 72,
+"fn": "annotateFactionStanding"
+}
+},
+{
+"id": "05049",
+"sev": "MED",
+"n": 37,
+"town": "r2s-politically_fractured-thorp-1",
+"section": "Systems/Power",
+"fold": "Claims legitimate authority through different means; controls a distinct district or institution.",
+"text": "Claims legitimate authority through different means; controls a distinct district or institution.",
+"why": "'controls a distinct district or institution'; tag reaches th, here a thorp of 10 with Dwellings (1-8)",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/generators/power/stressFactions.js",
+"line": 110,
+"fn": "applyStressEventFactions"
+}
+},
+{
+"id": "B19695",
+"sev": "MED",
+"n": 37,
+"town": "r2r-hamlet-5",
+"section": "Systems/Power",
+"fold": "The hall asks for the commander's agreement instead of giving orders, and less and less is decided without it.",
+"text": "The hall asks for the commander's agreement instead of giving orders, and less and less is decided without it.",
+"why": "names a commander whose agreement the hall seeks; 29842 says the War Council has no one captain and PEOPLE lists no commander",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 409,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "11289",
+"sev": "MED",
+"n": 36,
+"town": "r2s-famine-thorp-0",
+"section": "World/NPCs",
+"fold": "How they deal Talks about the catch, the weather and the boats; quick to offer a meal of fish.",
+"text": "How they deal Talks about the catch, the weather and the boats; quick to offer a meal of fish.",
+"why": "quick to offer a meal of fish; CRISIS famine, food deficit 26%",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 873,
+"fn": "ROWS"
+}
+},
+{
+"id": "14612",
+"sev": "MED",
+"n": 36,
+"town": "r2s-occupied-hamlet-3",
+"section": "Systems/Resources",
+"fold": "No livestock reaches the dairy farmer.",
+"text": "No livestock reaches the dairy farmer.",
+"why": "'no livestock reaches the dairy farmer', yet the farmer keeps cattle or goats and the hamlet has common grazing",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/faceHonorifics.js",
+"line": 40,
+"fn": "FACE_HONORIFICS.the dairy farmer"
+}
+},
+{
+"id": "B10741",
+"sev": "MED",
+"n": 36,
+"town": "r2s-under_siege-metropolis-2",
+"section": "World/NPCs",
+"fold": "How they deal Takes letters at the posted rate; urgent ones cost more and leave sooner.",
+"text": "How they deal Takes letters at the posted rate; urgent ones cost more and leave sooner.",
+"why": "takes letters at the posted rate that 'leave sooner'; tag has S: under siege no post leaves by road",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 1128,
+"fn": "ROWS"
+}
+},
+{
+"id": "10996",
+"sev": "MED",
+"n": 35,
+"town": "r2s-occupied-metropolis-0",
+"section": "World/NPCs",
+"fold": "How they deal Assigns berths for the posted fee; urgent berths cost more.",
+"text": "How they deal Assigns berths for the posted fee; urgent berths cost more.",
+"why": "Assigns berths to vessels; trade access is road only",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 1220,
+"fn": "ROWS"
+}
+},
+{
+"id": "23333",
+"sev": "MED",
+"n": 34,
+"town": "r2s-under_siege-metropolis-3",
+"section": "Systems/Power",
+"fold": "Undermanned and underfunded; unable to enforce law consistently and aware of it.",
+"text": "Undermanned and underfunded; unable to enforce law consistently and aware of it.",
+"why": "force undermanned, unable to enforce law; DEFENCE is Fortress, multiple garrisons, professional watch",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/rulingStructure.js",
+"line": 556,
+"fn": "generatePowerStructure"
+}
+},
+{
+"id": "03509",
+"sev": "MED",
+"n": 33,
+"town": "r2s-famine-town-3",
+"section": "Systems/Power",
+"fold": "An elected or appointed council governs; merchants, guilds, and prominent families compete for seats.",
+"text": "An elected or appointed council governs; merchants, guilds, and prominent families compete for seats.",
+"why": "merchants and guilds compete for council seats; GOVERNMENT is Arcane Council, no merchant power listed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/rulingStructure.js",
+"line": 341,
+"fn": "generatePowerStructure"
+}
+},
+{
+"id": "04923",
+"sev": "MED",
+"n": 32,
+"town": "r2s-famine-metropolis-3",
+"section": "Systems/Power",
+"fold": "Church institutions hold direct temporal power; tithes, land, and courts are all ecclesiastical.",
+"text": "Church institutions hold direct temporal power; tithes, land, and courts are all ecclesiastical.",
+"why": "courts and temporal power 'all ecclesiastical' while the crown governs here at first hand under Royal Authority",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/power/rulingStructure.js",
+"line": 599,
+"fn": "generatePowerStructure"
+}
+},
+{
+"id": "16581",
+"sev": "MED",
+"n": 31,
+"town": "r2s-plague_onset-thorp-0",
+"section": "Systems/Power",
+"fold": "Respected elders guide the community; authority is moral and traditional rather than formal.",
+"text": "Respected elders guide the community; authority is moral and traditional rather than formal.",
+"why": "'Respected elders guide the community'; legitimacy is in crisis, few accept the Elder Council's right to rule",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/power/rulingStructure.js",
+"line": 334,
+"fn": "generatePowerStructure"
+}
+},
+{
+"id": "05663",
+"sev": "MED",
+"n": 27,
+"town": "r2r-thorp-32",
+"section": "Systems/Power",
+"fold": "Conscription has taken the workers, and the farms and workshops are short-handed.",
+"text": "Conscription has taken the workers, and the farms and workshops are short-handed.",
+"why": "'farms and workshops are short-handed'; thorp of 8 whose HOUSES list no workshop",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/power/governingStressVignettes.js",
+"line": 49,
+"fn": "buildWartimeNarrative"
+}
+},
+{
+"id": "B01040",
+"sev": "MED",
+"n": 27,
+"town": "r2s-famine-metropolis-2",
+"section": "Summary/Overview",
+"fold": "<N> is praised in public for speaking out against crime.",
+"text": "Maeve MacGillivray is praised in public for speaking out against crime.",
+"why": "has Maeve MacGillivray praised for speaking out against crime; PEOPLE gives her as the potter, who holds no public office",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/handlerTieLines.js",
+"line": 94,
+"fn": "HANDLER_TIE_LINES"
+}
+},
+{
+"id": "B00562",
+"sev": "MED",
+"n": 27,
+"town": "r2s-famine-metropolis-2",
+"section": "Summary/Overview",
+"fold": "<N> finds it useful, and expects <N> to remember who chooses which criminals are caught.",
+"text": "Cara Forbes finds it useful, and expects Maeve MacGillivray to remember who chooses which criminals are caught.",
+"why": "says Maeve MacGillivray remembers who chooses which criminals are caught; PEOPLE has her as the potter, with no part in policing",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/handlerTieLines.js",
+"line": 94,
+"fn": "HANDLER_TIE_LINES"
+}
+},
+{
+"id": "16953",
+"sev": "MED",
+"n": 26,
+"town": "r2s-occupied-metropolis-0",
+"section": "World/NPCs",
+"fold": "Secret: Closed the harbour to a rival's ships for a week on a false report of sickness, for a fee",
+"text": "Secret: Closed the harbour to a rival's ships for a week on a false report of sickness, for a fee",
+"why": "Closed the harbour to ships; trade access is road only, no harbour route",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 1214,
+"fn": "ROWS"
+}
+},
+{
+"id": "21621",
+"sev": "MED",
+"n": 24,
+"town": "r2s-slave_revolt-thorp-2",
+"section": "Systems/Power",
+"fold": "The rebels' buildings are marked, and some streets are contested.",
+"text": "The rebels' buildings are marked, and some streets are contested.",
+"why": "'The rebels' buildings are marked, and some streets are contested'; tag reaches th, a thorp of 21 has no streets to divide",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 564,
+"fn": "buildSlaveRevoltNarrative"
+}
+},
+{
+"id": "20194",
+"sev": "MED",
+"n": 24,
+"town": "r2r-hamlet-41",
+"section": "Summary/Overview",
+"fold": "The church is demanding veto power over council appointments.",
+"text": "The church is demanding veto power over council appointments.",
+"why": "church demands veto over 'council appointments'; no church of its own, government is Headman's Authority",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 478,
+"fn": "deriveBaselineConflict"
+}
+},
+{
+"id": "21783",
+"sev": "MED",
+"n": 22,
+"town": "r2s-famine-hamlet-2",
+"section": "Systems/Power",
+"fold": "The ruling # of Feudal Stewardship",
+"text": "The ruling three of Feudal Stewardship",
+"why": "ruling three of Feudal Stewardship; a stewardship is one lord's steward",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 80,
+"fn": ""
+}
+},
+{
+"id": "22709",
+"sev": "MED",
+"n": 22,
+"town": "r2s-slave_revolt-village-0",
+"section": "Systems/Power",
+"fold": "They denounce the guild from the pulpit; the guild funds # charitable institutions and makes the denunciations look selective.",
+"text": "They denounce the guild from the pulpit; the guild funds two charitable institutions and makes the denunciations look selective.",
+"why": "guild funds two charitable institutions; HOUSES has none in a village of 386",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/power/factionStanding.js",
+"line": 243,
+"fn": "annotateFactionStanding"
+}
+},
+{
+"id": "15434",
+"sev": "MED",
+"n": 21,
+"town": "r2r-thorp-22",
+"section": "Systems/Power",
+"fold": "Pamphlets against those in charge pass from hand to hand, and # guild masters stayed away from the last assembly.",
+"text": "Pamphlets against those in charge pass from hand to hand, and two guild masters stayed away from the last assembly.",
+"why": "'two guild masters' stayed away: no guild in HOUSES, population 11",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/power/governingStressVignettes.js",
+"line": 21,
+"fn": "buildInsurgencyNarrative"
+}
+},
+{
+"id": "21802",
+"sev": "MED",
+"n": 20,
+"town": "r2s-famine-city-0",
+"section": "Systems/Power",
+"fold": "The ruling # of Royal Authority",
+"text": "The ruling three of Royal Authority",
+"why": "ruling three of Royal Authority; same page says the crown rules directly through the monarch Li Ma",
+"kinds": [
+"LACKS",
+"PAIR"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 80,
+"fn": ""
+}
+},
+{
+"id": "21800",
+"sev": "MED",
+"n": 20,
+"town": "r2s-famine-city-3",
+"section": "Systems/Power",
+"fold": "The ruling # of Noble Governorship",
+"text": "The ruling three of Noble Governorship",
+"why": "'ruling three' of a Noble Governorship whose seat one governor, Barlas Ba'arin, holds alone",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 80,
+"fn": ""
+}
+},
+{
+"id": "14478",
+"sev": "MED",
+"n": 20,
+"town": "r2s-wartime-town-3",
+"section": "Systems/Power",
+"fold": "Neither pushes the other hard enough to start a fight.",
+"text": "Neither pushes the other hard enough to start a fight.",
+"why": "says neither pushes hard enough to fight, under a Thieves' Guild~War Council rivalry marked escalating",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 289,
+"fn": "criminalMilitaryRelation"
+}
+},
+{
+"id": "B14921",
+"sev": "MED",
+"n": 20,
+"town": "r2r-thorp-23",
+"section": "Summary/Plot Hooks",
+"fold": "Popular Uprising",
+"text": "Popular Uprising",
+"why": "popular uprising/rebels; PAST lists Migration, Succession Crisis, Religious Conflict, no uprising",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/factionProfile.js",
+"line": 158,
+"fn": "ARCHETYPE_TEMPLATES"
+}
+},
+{
+"id": "B14924",
+"sev": "MED",
+"n": 20,
+"town": "r2r-thorp-23",
+"section": "World/History",
+"fold": "Popular uprising",
+"text": "Popular uprising",
+"why": "popular uprising/rebels; PAST lists Migration, Succession Crisis, Religious Conflict, no uprising",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/factionProfile.js",
+"line": 158,
+"fn": "ARCHETYPE_TEMPLATES"
+}
+},
+{
+"id": "B00397",
+"sev": "MED",
+"n": 20,
+"town": "r2s-politically_fractured-hamlet-3",
+"section": "Summary/Overview",
+"fold": "<N> and <N> are rivals in the same line of work.",
+"text": "Eirenaion Chrysoberges and Kallistrate Chomatenos are rivals in the same line of work.",
+"why": "rivals in same line of work; PEOPLE: one is the carpenter, the other the bloc's speaker",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/settlementNarrative.js",
+"line": 48,
+"fn": "TIE_GLOSS"
+}
+},
+{
+"id": "02622",
+"sev": "MED",
+"n": 18,
+"town": "r2s-under_siege-city-1",
+"section": "Systems/Power",
+"fold": "A full council governs the city: aldermen, guild masters and appointed officials see to its taxes, its laws and its streets.",
+"text": "A full council governs the city: aldermen, guild masters and appointed officials see to its taxes, its laws and its streets.",
+"why": "a full council of aldermen and guild masters governs; 19243 and GOVERNMENT say the Ecclesiastical Council governs",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/power/rulingStructure.js",
+"line": 343,
+"fn": "generatePowerStructure"
+}
+},
+{
+"id": "20053",
+"sev": "MED",
+"n": 17,
+"town": "r2s-under_siege-city-3",
+"section": "Systems/Power",
+"fold": "The arcane orders have more say right now, and the clergy cannot accept it.",
+"text": "The arcane orders have more say right now, and the clergy cannot accept it.",
+"why": "arcane orders have more say than the clergy; GOVERNMENT has Arcane Orders Minor, Religious Authorities Significant, and the other says the clergy have more say",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/power/factionStanding.js",
+"line": 217,
+"fn": "annotateFactionStanding"
+}
+},
+{
+"id": "02606",
+"sev": "MED",
+"n": 17,
+"town": "r2s-occupied-metropolis-0",
+"section": "Systems/Power",
+"fold": "A formal consortium of the metropolis's most powerful guild masters holds civic authority; membership in the consortium is itself a prize.",
+"text": "A formal consortium of the metropolis's most powerful guild masters holds civic authority; membership in the consortium is itself a prize.",
+"why": "Consortium holds civic authority; under Occupation the town's own rulers do not rule freely",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/rulingStructure.js",
+"line": 358,
+"fn": "generatePowerStructure"
+}
+},
+{
+"id": "02559",
+"sev": "MED",
+"n": 16,
+"town": "r2s-occupied-metropolis-2",
+"section": "Systems/Power",
+"fold": "A duke or duchess governs the metropolis by royal appointment; the city is the administrative capital of a large territory.",
+"text": "A duke or duchess governs the metropolis by royal appointment; the city is the administrative capital of a large territory.",
+"why": "Duke governs by royal appointment as a calm fact; town is Under Occupation, stability Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/rulingStructure.js",
+"line": 354,
+"fn": "generatePowerStructure"
+}
+},
+{
+"id": "20987",
+"sev": "MED",
+"n": 16,
+"town": "r2r-hamlet-11",
+"section": "Summary/Overview",
+"fold": "The merchant class is outbuying noble landholdings.",
+"text": "The merchant class is outbuying noble landholdings.",
+"why": "merchant class outbuying noble landholdings; hamlet of 46 has neither merchants nor nobles",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 464,
+"fn": "deriveBaselineConflict"
+}
+},
+{
+"id": "00170",
+"sev": "MED",
+"n": 16,
+"town": "r2r-hamlet-11",
+"section": "Summary/Overview",
+"fold": "# estates have changed hands in the last decade.",
+"text": "Three estates have changed hands in the last decade.",
+"why": "'Three estates have changed hands'; a hamlet of 46 in 5-25 dwellings holds no estates",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 464,
+"fn": "deriveBaselineConflict"
+}
+},
+{
+"id": "B16114",
+"sev": "MED",
+"n": 16,
+"town": "r2r-metropolis-14",
+"section": "World/NPCs",
+"fold": "Secret: Has been keeping back ore from the tally and selling it to a smelter elsewhere",
+"text": "Secret: Has been keeping back ore from the tally and selling it to a smelter elsewhere",
+"why": "mine captain selling ore to a smelter elsewhere; iron ore and coal depleted, siege shuts gates (imports cover None)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 1017,
+"fn": "ROWS"
+}
+},
+{
+"id": "B10584",
+"sev": "MED",
+"n": 16,
+"town": "r2s-under_siege-hamlet-3",
+"section": "World/NPCs",
+"fold": "How they deal Offers a cup and talk of the herd and the weather.",
+"text": "How they deal Offers a cup and talk of the herd and the weather.",
+"why": "dairy farmer's herd: LAND gap says Dairy farmer lacks access to livestock",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 1623,
+"fn": "ROWS"
+}
+},
+{
+"id": "B10633",
+"sev": "MED",
+"n": 15,
+"town": "r2s-under_siege-hamlet-1",
+"section": "World/NPCs",
+"fold": "How they deal Polite enough; keeps you away from the byre.",
+"text": "How they deal Polite enough; keeps you away from the byre.",
+"why": "'keeps you away from the byre': Dairy farmer has no livestock per LAND gap",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 1627,
+"fn": "ROWS"
+}
+},
+{
+"id": "18060",
+"sev": "MED",
+"n": 14,
+"town": "r2s-famine-village-1",
+"section": "Systems/Power",
+"fold": "Significant military force for this scale; the commander's opinion on civic matters carries institutional weight.",
+"text": "Significant military force for this scale; the commander's opinion on civic matters carries institutional weight.",
+"why": "significant military force with a commander; DEFENCE has no garrison, only a citizen militia",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/power/rulingStructure.js",
+"line": 551,
+"fn": "generatePowerStructure"
+}
+},
+{
+"id": "06725",
+"sev": "MED",
+"n": 14,
+"town": "r2r-hamlet-15",
+"section": "Systems/Power",
+"fold": "Dominant commercial class at a trade nexus; they set prices, control warehousing, and fund the council.",
+"text": "Dominant commercial class at a trade nexus; they set prices, control warehousing, and fund the council.",
+"why": "'control warehousing, and fund the council'; no warehouse in HOUSES, government is a Feudal Stewardship",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/power/claimStanding.js",
+"line": 52,
+"fn": "CLAIM_RUNGS"
+}
+},
+{
+"id": "20362",
+"sev": "MED",
+"n": 14,
+"town": "r2s-plague_onset-city-0",
+"section": "Systems/Power",
+"fold": "The craft guilds currently carry more weight than they do, and the merchants are working to change that.",
+"text": "The craft guilds currently carry more weight than they do, and the merchants are working to change that.",
+"why": "craft guilds 'carry more weight' than the merchants; GOVERNMENT has Craft Guilds Suppressed, Merchant Guilds Minor",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/factionStanding.js",
+"line": 97,
+"fn": "annotateFactionStanding"
+}
+},
+{
+"id": "18554",
+"sev": "MED",
+"n": 13,
+"town": "r2s-famine-metropolis-1",
+"section": "Systems/Power",
+"fold": "Standing army with genuine political weight; command appointments are patronage, and the council knows it.",
+"text": "Standing army with genuine political weight; command appointments are patronage, and the council knows it.",
+"why": "'the council knows it'; GOVERNMENT is a Ducal Governorship and lists no council",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/power/claimStanding.js",
+"line": 73,
+"fn": "CLAIM_RUNGS"
+}
+},
+{
+"id": "22121",
+"sev": "MED",
+"n": 13,
+"town": "r2s-religious_conversion-thorp-2",
+"section": "Systems/Power",
+"fold": "The split is now open: # priests, # congregations, # registers of births, deaths and marriages.",
+"text": "The split is now open: two priests, two congregations, two registers of births, deaths and marriages.",
+"why": "'two priests, two congregations, two registers' in a thorp of 21 whose HOUSES have only Access to parish church",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/power/governingStressVignettes.js",
+"line": 62,
+"fn": "buildReligiousConversionNarrative"
+}
+},
+{
+"id": "15215",
+"sev": "MED",
+"n": 13,
+"town": "r2s-insurgency-thorp-3",
+"section": "Systems/Power",
+"fold": "Officials drag their feet on orders, and taxes are collected but not handed over.",
+"text": "Officials drag their feet on orders, and taxes are collected but not handed over.",
+"why": "'Officials drag their feet... taxes are collected but not handed over'; tag reaches th, here no officials in a thorp of 16",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/generators/power/governingStressVignettes.js",
+"line": 25,
+"fn": "buildInsurgencyNarrative"
+}
+},
+{
+"id": "15278",
+"sev": "MED",
+"n": 13,
+"town": "r2r-village-49",
+"section": "Summary/Overview",
+"fold": "Ordered (strong military presence)",
+"text": "Ordered (strong military presence)",
+"why": "strong military presence; DEFENCE has no walls, garrison, militia or watch, only a charter hall",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 285,
+"fn": "deriveBaselineStability"
+}
+},
+{
+"id": "B00382",
+"sev": "MED",
+"n": 13,
+"town": "r2s-occupied-town-0",
+"section": "Summary/Overview",
+"fold": "<N> and <N> are allies of convenience.",
+"text": "Licinia Strabo and Decimia Tacitus are allies of convenience.",
+"why": "occupying governor and mine captain/mayor 'allies of convenience'; header has Town Council and Occupation Authority competitive, escalating, legitimacy crisis",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/settlementNarrative.js",
+"line": 51,
+"fn": "TIE_GLOSS"
+}
+},
+{
+"id": "B13714",
+"sev": "MED",
+"n": 13,
+"town": "r2s-succession_void-thorp-2",
+"section": "Systems/Power",
+"fold": "No # has stepped forward to take that role.",
+"text": "No one has stepped forward to take that role.",
+"why": "'no one has stepped forward'; PEOPLE lists the household elder in office and another sentence names her Acting Elder",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 623,
+"fn": "buildStressNarratives"
+}
+},
+{
+"id": "B21342",
+"sev": "MED",
+"n": 13,
+"town": "r2s-insurgency-thorp-3",
+"section": "Systems/Power",
+"fold": "The trouble is inside the government, not in the streets.",
+"text": "The trouble is inside the government, not in the streets.",
+"why": "trouble 'not in the streets'; safety Dangerous - Insurgency, households openly defy the government, and a thorp of 16 has no streets",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/power/governingStressVignettes.js",
+"line": 24,
+"fn": "buildInsurgencyNarrative"
+}
+},
+{
+"id": "03925",
+"sev": "MED",
+"n": 12,
+"town": "r2r-town-28",
+"section": "Systems/Power",
+"fold": "Artisan guilds maintaining standards in a thin economy; not politically weak by choice, but by circumstance.",
+"text": "Artisan guilds maintaining standards in a thin economy; not politically weak by choice, but by circumstance.",
+"why": "describes artisan guilds in 'a thin economy'; prosperity is Prosperous",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/rulingStructure.js",
+"line": 631,
+"fn": "generatePowerStructure"
+}
+},
+{
+"id": "B01698",
+"sev": "MED",
+"n": 12,
+"town": "r2s-famine-hamlet-0",
+"section": "Systems/Power",
+"fold": "<N>, the boat-headman and Elder, holds its seat.",
+"text": "Piso Caesar, the boat-headman and Elder, holds its seat.",
+"why": "seat held by 'Elder'; PEOPLE gives Piso Caesar only as boat-headman @ Fisher's landing; no elder office in roster",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 286,
+"fn": "governanceAccountOf"
+}
+},
+{
+"id": "10424",
+"sev": "MED",
+"n": 11,
+"town": "r2s-plague_onset-metropolis-0",
+"section": "Systems/Power",
+"fold": "Hereditary landowners whose land rights and military obligations are structurally embedded in governance here; the council works alongside them, not over them.",
+"text": "Hereditary landowners whose land rights and military obligations are structurally embedded in governance here; the council works alongside them, not over them.",
+"why": "'the council works alongside them'; GOVERNMENT is Royal Authority with no council among its powers",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/power/claimStanding.js",
+"line": 92,
+"fn": "CLAIM_RUNGS"
+}
+},
+{
+"id": "11810",
+"sev": "MED",
+"n": 11,
+"town": "r2r-hamlet-47",
+"section": "Systems/Power",
+"fold": "International merchant houses controlling port licences and import flows; their political leverage is structural, not merely financial.",
+"text": "International merchant houses controlling port licences and import flows; their political leverage is structural, not merely financial.",
+"why": "'International merchant houses controlling port licences'; tag reaches hamlets of 90 with no port authority",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/generators/power/rulingStructure.js",
+"line": 455,
+"fn": "generatePowerStructure"
+}
+},
+{
+"id": "B11535",
+"sev": "MED",
+"n": 10,
+"town": "r2s-slave_revolt-thorp-2",
+"section": "Systems/Power",
+"fold": "Its seat is held by <N>, the boat-headman and Elder.",
+"text": "Its seat is held by Tianmei Wu, the boat-headman and Elder.",
+"why": "title Elder for Tianmei Wu; roster gives boat-headman only and HOUSES has no elder house",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 288,
+"fn": "governanceAccountOf"
+}
+},
+{
+"id": "21190",
+"sev": "MED",
+"n": 9,
+"town": "r2s-religious_conversion-thorp-0",
+"section": "Systems/Power",
+"fold": "The old faith has the building, the records, the donations of generations, and a congregation that is quietly slipping away to the new #.",
+"text": "The old faith has the building, the records, the donations of generations, and a congregation that is quietly slipping away to the new one.",
+"why": "'The old faith has the building, the records, the donations'; HOUSES has no church, only Access to parish church",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/power/governingStressVignettes.js",
+"line": 58,
+"fn": "buildReligiousConversionNarrative"
+}
+},
+{
+"id": "17060",
+"sev": "MED",
+"n": 9,
+"town": "r2s-plague_onset-hamlet-0",
+"section": "World/NPCs",
+"fold": "Secret: Has been hunting on land that belongs to someone else and selling the game in the market",
+"text": "Secret: Has been hunting on land that belongs to someone else and selling the game in the market",
+"why": "sells the game in the market; HOUSES has no market",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 1645,
+"fn": "ROWS"
+}
+},
+{
+"id": "14875",
+"sev": "MED",
+"n": 9,
+"town": "r2s-infiltrated-town-1",
+"section": "Systems/Power",
+"fold": "Nobody at the head of Church Council answers to a criminal house, and no criminal power here is strong enough to push it.",
+"text": "Nobody at the head of Church Council answers to a criminal house, and no criminal power here is strong enough to push it.",
+"why": "says no criminal power can push the council; CRISIS Infiltrated, regional criminal pressure, decisions shaped from outside",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 210,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "04491",
+"sev": "MED",
+"n": 9,
+"town": "r2s-recently_betrayed-town-0",
+"section": "Summary/Plot Hooks",
+"fold": "Bread went up twice this month, and a baker says he was told to raise it.",
+"text": "Bread went up twice this month, and a baker says he was told to raise it.",
+"why": "names a baker raising bread prices; HOUSES has no bakers",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/power/conflictIssues.js",
+"line": 132,
+"fn": "BASE_ISSUES"
+}
+},
+{
+"id": "01132",
+"sev": "MED",
+"n": 9,
+"town": "r2r-city-2",
+"section": "Systems/Power",
+"fold": "<N> keeps order and collects the taxes; Religious Authorities tells people that both are right and ordained.",
+"text": "Arcane Council keeps order and collects the taxes; Religious Authorities tells people that both are right and ordained.",
+"why": "Religious Authorities blesses Arcane Council's rule as ordained; same block rates their tension High",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 475,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "B16106",
+"sev": "MED",
+"n": 9,
+"town": "r2s-under_siege-hamlet-3",
+"section": "World/NPCs",
+"fold": "Secret: Has been grazing the herd on a neighbour's land at night",
+"text": "Secret: Has been grazing the herd on a neighbour's land at night",
+"why": "dairy farmer's herd: LAND gap says Dairy farmer lacks access to livestock",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 1617,
+"fn": "ROWS"
+}
+},
+{
+"id": "B16648",
+"sev": "MED",
+"n": 9,
+"town": "r2s-indebted-hamlet-2",
+"section": "World/NPCs",
+"fold": "Secret: Waters the milk before it goes to market and has done so for years",
+"text": "Secret: Waters the milk before it goes to market and has done so for years",
+"why": "waters the milk before market; LAND gap says Dairy farmer lacks access to livestock, and HOUSES has no market",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 1615,
+"fn": "ROWS"
+}
+},
+{
+"id": "10164",
+"sev": "MED",
+"n": 8,
+"town": "r2s-occupied-town-2",
+"section": "Systems/Power",
+"fold": "Guild Council keeps order and collects the taxes; Religious Authorities tells people that both are right and ordained.",
+"text": "Guild Council keeps order and collects the taxes; Religious Authorities tells people that both are right and ordained.",
+"why": "Guild Council keeps order and collects taxes; under occupation the Occupation Authority extracts; also 'Religious Authorities tells' disagrees",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 475,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "17652",
+"sev": "MED",
+"n": 8,
+"town": "r2r-city-44",
+"section": "Systems/Power",
+"fold": "Senior clergy hold effective civic authority alongside elected aldermen; religious law shapes civil policy.",
+"text": "Senior clergy hold effective civic authority alongside elected aldermen; religious law shapes civil policy.",
+"why": "names elected aldermen; GOVERNMENT lists no aldermen or elected council, only clergy, guard and Ecclesiastical Council",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/power/rulingStructure.js",
+"line": 349,
+"fn": "generatePowerStructure"
+}
+},
+{
+"id": "B10689",
+"sev": "MED",
+"n": 8,
+"town": "r2s-religious_conversion-hamlet-1",
+"section": "World/NPCs",
+"fold": "How they deal Sells milk, butter and cheese at the posted price.",
+"text": "How they deal Sells milk, butter and cheese at the posted price.",
+"why": "dairy farmer sells milk, butter and cheese; LAND gap says Dairy farmer lacks access to livestock",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 1625,
+"fn": "ROWS"
+}
+},
+{
+"id": "03772",
+"sev": "MED",
+"n": 7,
+"town": "r2s-plague_onset-town-3",
+"section": "Systems/Power",
+"fold": "Arcane Council keeps order and collects the taxes; Religious Authorities tells people that both are right and ordained.",
+"text": "Arcane Council keeps order and collects the taxes; Religious Authorities tells people that both are right and ordained.",
+"why": "Arcane Council 'keeps order'; Plague Unrest, Anxious stability, Legitimacy Crisis; also 'Religious Authorities tells' disagrees in number",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 475,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "01218",
+"sev": "MED",
+"n": 7,
+"town": "r2s-succession_void-city-2",
+"section": "Systems/Power",
+"fold": "<N> needs the taxes and loans of Merchant Guilds, and Merchant Guilds needs <N> to enforce its contracts and keep the law.",
+"text": "Noble Governorship needs the taxes and loans of Merchant Guilds, and Merchant Guilds needs Noble Governorship to enforce its contracts and keep the law.",
+"why": "Noble Governorship and Merchant Guilds need each other, a stable bargain; same block rates their tension High",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 442,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "20273",
+"sev": "MED",
+"n": 7,
+"town": "r2r-city-18",
+"section": "Summary/Overview",
+"fold": "The commander-prelate has declared a heresy investigation into a rival settlement.",
+"text": "The commander-prelate has declared a heresy investigation into a rival settlement.",
+"why": "names a commander-prelate declaring heresy; GOVERNMENT is Royal Authority, Religious Authorities Minor, no such office",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 424,
+"fn": "deriveBaselineConflict"
+}
+},
+{
+"id": "B11586",
+"sev": "MED",
+"n": 7,
+"town": "r2s-famine-town-0",
+"section": "Systems/Power",
+"fold": "Its seat is held by <N>, the senior guild master and Alderman.",
+"text": "Its seat is held by Fastrada Wolf, the senior guild master and Alderman.",
+"why": "gives Fastrada Wolf (f) the title Alderman; PEOPLE lists her only as senior guild master of Merchant guilds",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 288,
+"fn": "governanceAccountOf"
+}
+},
+{
+"id": "B11562",
+"sev": "MED",
+"n": 7,
+"town": "r2r-thorp-25",
+"section": "Systems/Power",
+"fold": "Its seat is held by <N>, the head shepherd and Elder.",
+"text": "Its seat is held by Xoc Caan, the head shepherd and Elder.",
+"why": "title Elder for Xoc Caan; roster gives head shepherd only and HOUSES has no Household elder",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 288,
+"fn": "governanceAccountOf"
+}
+},
+{
+"id": "B19612",
+"sev": "MED",
+"n": 7,
+"town": "r2r-city-18",
+"section": "Summary/Overview",
+"fold": "The garrison is mobilizing.",
+"text": "The garrison is mobilizing.",
+"why": "'The garrison is mobilizing' but CRISIS none, safety Very Safe, no event of mobilisation recorded; claims an active alert the header does not hold",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 424,
+"fn": "deriveBaselineConflict"
+}
+},
+{
+"id": "B16543",
+"sev": "MED",
+"n": 6,
+"town": "r2s-politically_fractured-hamlet-0",
+"section": "World/NPCs",
+"fold": "Secret: Sold butter from a sick cow and a child fell ill",
+"text": "Secret: Sold butter from a sick cow and a child fell ill",
+"why": "sold butter from a sick cow; LAND gap says Dairy farmer lacks access to livestock",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 1619,
+"fn": "ROWS"
+}
+},
+{
+"id": "B02757",
+"sev": "MED",
+"n": 6,
+"town": "r2r-hamlet-51",
+"section": "Summary/Overview",
+"fold": "A monster incursion last season destroyed outlying farms.",
+"text": "A monster incursion last season destroyed outlying farms.",
+"why": "incursion last season destroyed outlying farms; STATE safety is Safe, food surplus 15%, PAST records no monster incursion",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 496,
+"fn": "deriveBaselineConflict"
+}
+},
+{
+"id": "13525",
+"sev": "MED",
+"n": 5,
+"town": "r2s-occupied-metropolis-1",
+"section": "Systems/Power",
+"fold": "Military commanders and their allies hold power; everything else waits on the needs of the army.",
+"text": "Military commanders and their allies hold power; everything else waits on the needs of the army.",
+"why": "military commanders hold power and all waits on the army; Grand Military Council Minor, Military/Guard Suppressed, Religious Authorities Strong",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/rulingStructure.js",
+"line": 374,
+"fn": "generatePowerStructure"
+}
+},
+{
+"id": "13550",
+"sev": "MED",
+"n": 5,
+"town": "r2s-mass_migration-town-3",
+"section": "Systems/Power",
+"fold": "Military/Guard and Thieves' Guild have a working arrangement.",
+"text": "Military/Guard and Thieves' Guild have a working arrangement.",
+"why": "says Military/Guard and Thieves' Guild have a working arrangement; 22929 marks them escalating and 03035 a slow war of arrests",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 286,
+"fn": "criminalMilitaryRelation"
+}
+},
+{
+"id": "16601",
+"sev": "MED",
+"n": 5,
+"town": "r2r-city-18",
+"section": "Summary/Overview",
+"fold": "Rigid (militant theocracy)",
+"text": "Rigid (militant theocracy)",
+"why": "calls the city a militant theocracy; GOVERNMENT is Royal Authority with Religious Authorities only Minor",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 258,
+"fn": "deriveBaselineStability"
+}
+},
+{
+"id": "20963",
+"sev": "MED",
+"n": 5,
+"town": "r2r-metropolis-3",
+"section": "Summary/Overview",
+"fold": "The mages' # is very quiet at the moment.",
+"text": "The mages' quarter is very quiet at the moment.",
+"why": "names a mages' quarter; HOUSES has no Mages' district, only a Wizard's tower",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 434,
+"fn": "deriveBaselineConflict"
+}
+},
+{
+"id": "B12633",
+"sev": "MED",
+"n": 5,
+"town": "r2s-famine-city-2",
+"section": "Systems/Power",
+"fold": "Merchant oligarchy keeps order and collects the taxes; Religious Authorities tells people that both are right and ordained.",
+"text": "Merchant oligarchy keeps order and collects the taxes; Religious Authorities tells people that both are right and ordained.",
+"why": "has Religious Authorities endorsing Merchant oligarchy's rule; QUARRELS has them in a high quarrel over public money",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 475,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "B10688",
+"sev": "MED",
+"n": 5,
+"town": "r2s-under_siege-hamlet-1",
+"section": "World/NPCs",
+"fold": "How they deal Sells malt to anyone who pays; brewers get a better price.",
+"text": "How they deal Sells malt to anyone who pays; brewers get a better price.",
+"why": "maltster 'sells malt to anyone who pays': under siege nobody arrives; FOOD Deficit, no grain to malt",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 1970,
+"fn": "ROWS"
+}
+},
+{
+"id": "B29842",
+"sev": "MED",
+"n": 5,
+"town": "r2r-hamlet-5",
+"section": "Systems/Power",
+"fold": "↳It has no # captain: the able-bodied householders sit on it by turns and decide together.",
+"text": "↳It has no one captain: the able-bodied householders sit on it by turns and decide together.",
+"why": "War Council sat by householders in turns; 05914 calls it a crown-appointed emergency body",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/stressPowerFaces.js",
+"line": 40,
+"fn": "STRESS_POWER_FACES"
+}
+},
+{
+"id": "B14785",
+"sev": "MED",
+"n": 5,
+"town": "r2s-under_siege-town-1",
+"section": "Systems/Power",
+"fold": "People take their marriages, inheritances and hard times to Religious Authorities, not to Guild Council, and the # keep quarrelling over who decides what.",
+"text": "People take their marriages, inheritances and hard times to Religious Authorities, not to Guild Council, and the two keep quarrelling over who decides what.",
+"why": "says the two powers keep quarrelling; QUARRELS is none, relation is tense but stable",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 472,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "B00338",
+"sev": "MED",
+"n": 5,
+"town": "r2r-town-46",
+"section": "Summary/Overview",
+"fold": "# rival guilds are contesting control of the main trade route.",
+"text": "Two rival guilds are contesting control of the main trade route.",
+"why": "'Two rival guilds are contesting control of the main trade route'; QUARRELS: none, CRISIS none, stability Stable, Approved",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 487,
+"fn": "deriveBaselineConflict"
+}
+},
+{
+"id": "18061",
+"sev": "MED",
+"n": 4,
+"town": "r2s-occupied-metropolis-1",
+"section": "Systems/Power",
+"fold": "Significant military presence; officers hold political influence disproportionate to formal civic rank.",
+"text": "Significant military presence; officers hold political influence disproportionate to formal civic rank.",
+"why": "officers hold outsized political influence; Military/Guard and Garrison Bloc are Suppressed, Grand Military Council Minor",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/rulingStructure.js",
+"line": 552,
+"fn": "generatePowerStructure"
+}
+},
+{
+"id": "10759",
+"sev": "MED",
+"n": 4,
+"town": "r2r-town-37",
+"section": "Systems/Power",
+"fold": "Holds the title; the decisions that matter are made by Thieves' Guild.",
+"text": "Holds the title; the decisions that matter are made by Thieves' Guild.",
+"why": "says Thieves' Guild makes the decisions; 14888 says nobody at the Appointee's head answers to it",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/domain/dossier/powerStrata.js",
+"line": 457,
+"fn": "crisisNoteFor"
+}
+},
+{
+"id": "13613",
+"sev": "MED",
+"n": 4,
+"town": "r2s-famine-city-3",
+"section": "Systems/Power",
+"fold": "Military/Guard is now about as strong as Noble Governorship.",
+"text": "Military/Guard is now about as strong as Noble Governorship.",
+"why": "Military/Guard 'about as strong as' Noble Governorship; GOVERNMENT has Military Significant, Governorship Minor; slash label as name",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 409,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "20626",
+"sev": "MED",
+"n": 4,
+"town": "r2s-wartime-city-1",
+"section": "Systems/Power",
+"fold": "The garrison has doubled and the crown pays its bills, so contracts for grain, leather and ironwork go to anyone who can fill them.",
+"text": "The garrison has doubled and the crown pays its bills, so contracts for grain, leather and ironwork go to anyone who can fill them.",
+"why": "'the crown pays its bills'; GOVERNMENT is a Merchant oligarchy, no royal power listed",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/power/governingStressVignettes.js",
+"line": 44,
+"fn": "buildWartimeNarrative"
+}
+},
+{
+"id": "13188",
+"sev": "MED",
+"n": 4,
+"town": "r2s-slave_revolt-city-3",
+"section": "Systems/Power",
+"fold": "Merchant Guild Council gives the orders and Military/Guard carries them out; each needs the other to stay strong.",
+"text": "Merchant Guild Council gives the orders and Military/Guard carries them out; each needs the other to stay strong.",
+"why": "says council and Military/Guard need each other, orders obeyed; same block rates their tension High; council is only Minor",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 406,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "13334",
+"sev": "MED",
+"n": 4,
+"town": "r2s-insurgency-city-0",
+"section": "Systems/Power",
+"fold": "Merchant Guilds works under the rules Noble Governorship sets, and pays for a hearing in the hall when it wants something.",
+"text": "Merchant Guilds works under the rules Noble Governorship sets, and pays for a hearing in the hall when it wants something.",
+"why": "Merchant Guilds quietly works under the governorship's rules; same block rates their tension High",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 445,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "09870",
+"sev": "MED",
+"n": 4,
+"town": "r2s-under_siege-metropolis-2",
+"section": "Systems/Power",
+"fold": "Grand Guild Consortium keeps order and collects the taxes; Religious Authorities tells people that both are right and ordained.",
+"text": "Grand Guild Consortium keeps order and collects the taxes; Religious Authorities tells people that both are right and ordained.",
+"why": "says the Consortium keeps order and collects taxes; 13629 says Military/Guard no longer takes its orders, stability Critical",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 475,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "10488",
+"sev": "MED",
+"n": 4,
+"town": "r2r-metropolis-14",
+"section": "Systems/Power",
+"fold": "High Theocratic Council gives the orders and Military/Guard carries them out; each needs the other to stay strong.",
+"text": "High Theocratic Council gives the orders and Military/Guard carries them out; each needs the other to stay strong.",
+"why": "council and Military/Guard work hand in glove; same page gives them High tension, escalating",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 406,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "B11564",
+"sev": "MED",
+"n": 4,
+"town": "r2s-politically_fractured-thorp-1",
+"section": "Systems/Power",
+"fold": "Its seat is held by <N>, the head shepherd and Household Elder.",
+"text": "Its seat is held by Citlali Caan, the head shepherd and Household Elder.",
+"why": "gives Citlali Caan the title Household Elder; roster gives head shepherd only and HOUSES has no Household elder",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 288,
+"fn": "governanceAccountOf"
+}
+},
+{
+"id": "B00215",
+"sev": "MED",
+"n": 4,
+"town": "r2s-religious_conversion-village-3",
+"section": "Systems/Power",
+"fold": "# of # rival sides claiming the legitimate succession: legal standing of their records is contested.",
+"text": "One of two rival sides claiming the legitimate succession: legal standing of their records is contested.",
+"why": "'two rival sides claiming the legitimate succession' in present tense; crisis is Religious Conversion; the only Succession Crisis is 30 years past, minor",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/stressFactions.js",
+"line": 370,
+"fn": "applyStressEventFactions"
+}
+},
+{
+"id": "B09621",
+"sev": "MED",
+"n": 4,
+"town": "r2s-recently_betrayed-town-0",
+"section": "Systems/Power",
+"fold": "Guild Council and Thieves' Guild leave each other alone.",
+"text": "Guild Council and Thieves' Guild leave each other alone.",
+"why": "'leave each other alone' while QUARRELS has Guild Council vs Thieves' Guild an open moderate quarrel and relation tense",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 227,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "B11589",
+"sev": "MED",
+"n": 4,
+"town": "r2s-slave_revolt-city-1",
+"section": "Systems/Power",
+"fold": "Its seat is held by <N>, the senior guild master and Lord Mayor.",
+"text": "Its seat is held by Paullus Moderatus, the senior guild master and Lord Mayor.",
+"why": "City Council's seat given to the Merchant Guilds' master; GOVERNMENT has Merchant Guilds Suppressed, in quarrel with City Council; 'Lord Mayor' unrostered",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 288,
+"fn": "governanceAccountOf"
+}
+},
+{
+"id": "20593",
+"sev": "MED",
+"n": 3,
+"town": "r2s-famine-city-2",
+"section": "Systems/Power",
+"fold": "The gap between them and Merchant oligarchy is narrow.",
+"text": "The gap between them and Merchant oligarchy is narrow.",
+"why": "gap to Merchant oligarchy 'narrow'; oligarchy is the only Significant power, every other power Minor",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/claimStanding.js",
+"line": 88,
+"fn": "CLAIM_RUNGS"
+}
+},
+{
+"id": "20600",
+"sev": "MED",
+"n": 3,
+"town": "r2s-famine-metropolis-0",
+"section": "Systems/Power",
+"fold": "The gap between them and Royal Authority is narrow.",
+"text": "The gap between them and Royal Authority is narrow.",
+"why": "gap to Royal Authority 'narrow'; Royal Authority is the only Significant power, all others Minor or Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/factionStanding.js",
+"line": 54,
+"fn": "annotateFactionStanding"
+}
+},
+{
+"id": "07631",
+"sev": "MED",
+"n": 3,
+"town": "r2r-town-37",
+"section": "Systems/Power",
+"fold": "Feudal Appointee keeps order and collects the taxes; Religious Authorities tells people that both are right and ordained.",
+"text": "Feudal Appointee keeps order and collects the taxes; Religious Authorities tells people that both are right and ordained.",
+"why": "Appointee 'keeps order'; Plague Unrest, Legitimacy Crisis, Thieves' Guild equally Significant; 'Religious Authorities tells' disagrees in number",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 475,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "14719",
+"sev": "MED",
+"n": 3,
+"town": "r2s-plague_onset-city-2",
+"section": "Systems/Power",
+"fold": "Noble Governorship gives the orders and Military/Guard carries them out; each needs the other to stay strong.",
+"text": "Noble Governorship gives the orders and Military/Guard carries them out; each needs the other to stay strong.",
+"why": "governorship and guard need each other, work in step; another line marks high tension between them",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 406,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "06303",
+"sev": "MED",
+"n": 3,
+"town": "r2s-occupied-village-2",
+"section": "Systems/Power",
+"fold": "Day-to-day trade here is run by Merchant Guilds more than by Household Council, and taxes are bargained over, not ordered.",
+"text": "Day-to-day trade here is run by Merchant Guilds more than by Household Council, and taxes are bargained over, not ordered.",
+"why": "says taxes are bargained, not ordered; CRISIS is occupation with vassal extraction, every export taxed by occupation",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 439,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "13160",
+"sev": "MED",
+"n": 3,
+"town": "r2r-town-3",
+"section": "Systems/Power",
+"fold": "Merchant Council and Thieves' Guild leave each other alone.",
+"text": "Merchant Council and Thieves' Guild leave each other alone.",
+"why": "says Merchant Council and Thieves' Guild leave each other alone; 13178 marks the pair escalating",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 227,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "14717",
+"sev": "MED",
+"n": 3,
+"town": "r2s-insurgency-city-2",
+"section": "Systems/Power",
+"fold": "Noble Governorship and Thieves' Guild leave each other alone.",
+"text": "Noble Governorship and Thieves' Guild leave each other alone.",
+"why": "Governorship and Thieves' Guild 'leave each other alone'; the pair is High tension and escalating, Thieves' Guild Strong and could take the hall",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 227,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "13330",
+"sev": "MED",
+"n": 3,
+"town": "r2s-slave_revolt-city-3",
+"section": "Systems/Power",
+"fold": "Merchant Guilds works under the rules Merchant Guild Council sets, and pays for a hearing in the hall when it wants something.",
+"text": "Merchant Guilds works under the rules Merchant Guild Council sets, and pays for a hearing in the hall when it wants something.",
+"why": "Merchant Guilds quietly works under council rules; block rates their tension High and GOVERNMENT has Merchant Guilds Suppressed",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 445,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "13195",
+"sev": "MED",
+"n": 3,
+"town": "r2r-city-56",
+"section": "Systems/Power",
+"fold": "Merchant Guild Council keeps order and collects the taxes; Religious Authorities tells people that both are right and ordained.",
+"text": "Merchant Guild Council keeps order and collects the taxes; Religious Authorities tells people that both are right and ordained.",
+"why": "says the council keeps order and collects taxes; stability Fractured, no stable governing authority",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 475,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "16697",
+"sev": "MED",
+"n": 3,
+"town": "r2s-famine-metropolis-3",
+"section": "Systems/Power",
+"fold": "Royal Authority and Thieves' Guild leave each other alone.",
+"text": "Royal Authority and Thieves' Guild leave each other alone.",
+"why": "leave each other alone; same page marks the relation escalating and seeks to keep the quarrel from open trouble",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 227,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "06241",
+"sev": "MED",
+"n": 3,
+"town": "r2s-wartime-metropolis-1",
+"section": "Systems/Power",
+"fold": "Currently functioning smoothly: the war is going well enough that its authority isn't contested.",
+"text": "Currently functioning smoothly: the war is going well enough that its authority isn't contested.",
+"why": "says War Council functions smoothly, authority uncontested; GOVERNMENT lists War Council Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/stressFactions.js",
+"line": 339,
+"fn": "applyStressEventFactions"
+}
+},
+{
+"id": "04979",
+"sev": "MED",
+"n": 3,
+"town": "r2r-city-52",
+"section": "Systems/Power",
+"fold": "City-State Council gives the orders and Military/Guard carries them out; each needs the other to stay strong.",
+"text": "City-State Council gives the orders and Military/Guard carries them out; each needs the other to stay strong.",
+"why": "slash-joined label 'Military/Guard' used as a name in prose",
+"kinds": [
+"BROKEN",
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 406,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "B12634",
+"sev": "MED",
+"n": 3,
+"town": "r2s-famine-city-2",
+"section": "Systems/Power",
+"fold": "Merchant oligarchy leaves Thieves' Guild alone because stamping it out would cost more than it saves.",
+"text": "Merchant oligarchy leaves Thieves' Guild alone because stamping it out would cost more than it saves.",
+"why": "says Merchant oligarchy tolerates Thieves' Guild; QUARRELS relation is tense, escalating",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 259,
+"fn": "govCriminalRelation"
+}
+},
+{
+"id": "B04763",
+"sev": "MED",
+"n": 3,
+"town": "r2s-famine-metropolis-2",
+"section": "Systems/Power",
+"fold": "City-State Council leaves Thieves' Guild alone because stamping it out would cost more than it saves.",
+"text": "City-State Council leaves Thieves' Guild alone because stamping it out would cost more than it saves.",
+"why": "says City-State Council leaves Thieves' Guild alone; QUARRELS relation is tense, escalating",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 259,
+"fn": "govCriminalRelation"
+}
+},
+{
+"id": "B01914",
+"sev": "MED",
+"n": 3,
+"town": "r2s-insurgency-thorp-1",
+"section": "Systems/Power",
+"fold": "<N>, the head shepherd and Household Elder, holds its seat.",
+"text": "Asgaut Olafsson, the head shepherd and Household Elder, holds its seat.",
+"why": "title Household Elder for Asgaut Olafsson; roster gives head shepherd only and HOUSES has no Household elder",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 286,
+"fn": "governanceAccountOf"
+}
+},
+{
+"id": "B13899",
+"sev": "MED",
+"n": 3,
+"town": "r2s-insurgency-city-2",
+"section": "Systems/Power",
+"fold": "Noble Governorship leaves Thieves' Guild alone because stamping it out would cost more than it saves.",
+"text": "Noble Governorship leaves Thieves' Guild alone because stamping it out would cost more than it saves.",
+"why": "says governorship leaves Thieves' Guild alone; QUARRELS has a high open conflict with it over legitimacy, relation tense and escalating",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 259,
+"fn": "govCriminalRelation"
+}
+},
+{
+"id": "B14087",
+"sev": "MED",
+"n": 3,
+"town": "r2s-insurgency-city-2",
+"section": "Systems/Power",
+"fold": "Nobody at the head of Noble Governorship answers to Thieves' Guild, and neither side pushes the other.",
+"text": "Nobody at the head of Noble Governorship answers to Thieves' Guild, and neither side pushes the other.",
+"why": "says neither side pushes the other; QUARRELS has Thieves' Guild vs Noble Governorship high and escalating, insurgency contesting authority",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 227,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "B14050",
+"sev": "MED",
+"n": 3,
+"town": "r2s-infiltrated-city-1",
+"section": "Systems/Power",
+"fold": "Nobody at the head of City Council answers to a criminal house, and no criminal power here is strong enough to push it.",
+"text": "Nobody at the head of City Council answers to a criminal house, and no criminal power here is strong enough to push it.",
+"why": "says no criminal power is strong enough to push the council; stability line says decisions are shaped from outside, crisis Infiltrated by regional criminal pressure",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 210,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "B02095",
+"sev": "MED",
+"n": 3,
+"town": "r2r-city-26",
+"section": "Systems/Power",
+"fold": "<N>, the senior guild master and First Councillor, holds its seat.",
+"text": "Uroš Andreyev, the senior guild master and First Councillor, holds its seat.",
+"why": "City-State Council's seat given to the Merchant Guilds' master; QUARRELS has City-State Council vs Merchant Guilds in high conflict",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 286,
+"fn": "governanceAccountOf"
+}
+},
+{
+"id": "03254",
+"sev": "MED",
+"n": 2,
+"town": "r2s-succession_void-thorp-1",
+"section": "Systems/Power",
+"fold": "Acting Elder <N> keeps the seat meanwhile.",
+"text": "Acting Elder Dominik Wagner keeps the seat meanwhile.",
+"why": "Acting Elder keeps the seat; other lines say the seat stands empty, no one holds it",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 296,
+"fn": "governanceAccountOf"
+}
+},
+{
+"id": "21564",
+"sev": "MED",
+"n": 2,
+"town": "r2r-hamlet-55",
+"section": "Summary/Overview",
+"fold": "The priest has summoned someone before the church court.",
+"text": "The priest has summoned someone before the church court.",
+"why": "priest and 'church court'; HOUSES has only Access to parish church, no church or court",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 437,
+"fn": "deriveBaselineConflict"
+}
+},
+{
+"id": "04348",
+"sev": "MED",
+"n": 2,
+"town": "r2r-hamlet-15",
+"section": "Systems/Power",
+"fold": "Behind Feudal Stewardship by too much to challenge openly, so they get their way through petitions and procedure instead.",
+"text": "Behind Feudal Stewardship by too much to challenge openly, so they get their way through petitions and procedure instead.",
+"why": "Merchant Guilds 'behind Feudal Stewardship by too much'; GOVERNMENT has both Dominant",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/factionStanding.js",
+"line": 67,
+"fn": "annotateFactionStanding"
+}
+},
+{
+"id": "20686",
+"sev": "MED",
+"n": 2,
+"town": "r2r-village-54",
+"section": "Systems/Power",
+"fold": "The guard deals with bodies and the clergy with minds, and each wishes the other would keep quieter.",
+"text": "The guard deals with bodies and the clergy with minds, and each wishes the other would keep quieter.",
+"why": "names the guard; DEFENCE has no garrison, watch or militia and GOVERNMENT no Guard power",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/power/factionStanding.js",
+"line": 253,
+"fn": "annotateFactionStanding"
+}
+},
+{
+"id": "10422",
+"sev": "MED",
+"n": 2,
+"town": "r2s-slave_revolt-city-0",
+"section": "Systems/Power",
+"fold": "Hereditary landowners behind the Noble Governorship; military levies, land rents, and judicial rights all flow through noble title.",
+"text": "Hereditary landowners behind the Noble Governorship; military levies, land rents, and judicial rights all flow through noble title.",
+"why": "puts hereditary landowners behind the Noble Governorship; 20722 says the hall is at odds with the Noble Families",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/power/rulingStructure.js",
+"line": 506,
+"fn": "generatePowerStructure"
+}
+},
+{
+"id": "21066",
+"sev": "MED",
+"n": 2,
+"town": "r2r-city-6",
+"section": "Systems/Power",
+"fold": "The military commanders are pushing for expanded authority over civilian courts, and Military City Council is losing ground.",
+"text": "The military commanders are pushing for expanded authority over civilian courts, and Military City Council is losing ground.",
+"why": "says military commanders gain on courts while Military City Council loses ground; the governing Military City Council is Dominant and is the military",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 469,
+"fn": "deriveBaselineConflict"
+}
+},
+{
+"id": "16602",
+"sev": "MED",
+"n": 2,
+"town": "r2r-metropolis-16",
+"section": "Summary/Overview",
+"fold": "Rigid (militant theocracy); monsters on the roads",
+"text": "Rigid (militant theocracy); monsters on the roads",
+"why": "prints 'militant theocracy'; GOVERNMENT is a Democratic assembly, Religious Authorities only Minor",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 258,
+"fn": "deriveBaselineStability"
+}
+},
+{
+"id": "22394",
+"sev": "MED",
+"n": 2,
+"town": "r2r-hamlet-55",
+"section": "Summary/Overview",
+"fold": "The village is divided on whether they deserved it.",
+"text": "The village is divided on whether they deserved it.",
+"why": "says 'The village'; town is a hamlet, tag reaches ha",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 437,
+"fn": "deriveBaselineConflict"
+}
+},
+{
+"id": "B11563",
+"sev": "MED",
+"n": 2,
+"town": "r2s-mass_migration-thorp-3",
+"section": "Systems/Power",
+"fold": "Its seat is held by <N>, the head shepherd and Headman.",
+"text": "Its seat is held by Fuad ibn Ahmed, the head shepherd and Headman.",
+"why": "gives Fuad ibn Ahmed the title Headman; PEOPLE roster gives only head shepherd at the Shepherd collective",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 288,
+"fn": "governanceAccountOf"
+}
+},
+{
+"id": "B01715",
+"sev": "MED",
+"n": 2,
+"town": "r2s-insurgency-thorp-2",
+"section": "Systems/Power",
+"fold": "<N>, the camp foreman and Elder, holds its seat.",
+"text": "Yohualli Balam, the camp foreman and Elder, holds its seat.",
+"why": "title Elder for Yohualli Balam; roster gives camp foreman only, and the Household elder house has nobody in it",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 286,
+"fn": "governanceAccountOf"
+}
+},
+{
+"id": "B11541",
+"sev": "MED",
+"n": 2,
+"town": "r2s-recently_betrayed-thorp-3",
+"section": "Systems/Power",
+"fold": "Its seat is held by <N>, the camp foreman and Household Elder.",
+"text": "Its seat is held by Cassius Aquila, the camp foreman and Household Elder.",
+"why": "title Household Elder for the camp foreman; HOUSES has no Household elder and roster gives camp foreman only",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 288,
+"fn": "governanceAccountOf"
+}
+},
+{
+"id": "B14789",
+"sev": "MED",
+"n": 2,
+"town": "r2s-famine-town-1",
+"section": "Systems/Power",
+"fold": "People take their marriages, inheritances and hard times to Religious Authorities, not to Merchant oligarchy, and the # keep quarrelling over who decides what.",
+"text": "People take their marriages, inheritances and hard times to Religious Authorities, not to Merchant oligarchy, and the two keep quarrelling over who decides what.",
+"why": "says Religious Authorities and Merchant oligarchy keep quarrelling; QUARRELS lists no such quarrel, relation is tense but stable",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 472,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "B07201",
+"sev": "MED",
+"n": 2,
+"town": "r2r-town-37",
+"section": "Systems/Power",
+"fold": "Feudal Appointee leaves Thieves' Guild alone because stamping it out would cost more than it saves.",
+"text": "Feudal Appointee leaves Thieves' Guild alone because stamping it out would cost more than it saves.",
+"why": "says Feudal Appointee leaves Thieves' Guild alone; QUARRELS has them tense and escalating",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 259,
+"fn": "govCriminalRelation"
+}
+},
+{
+"id": "B07194",
+"sev": "MED",
+"n": 2,
+"town": "r2r-town-37",
+"section": "Systems/Power",
+"fold": "Feudal Appointee and Thieves' Guild leave each other alone.",
+"text": "Feudal Appointee and Thieves' Guild leave each other alone.",
+"why": "says the two leave each other alone; relation is tense, escalating",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 227,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "B14061",
+"sev": "MED",
+"n": 2,
+"town": "r2r-town-37",
+"section": "Systems/Power",
+"fold": "Nobody at the head of Feudal Appointee answers to Thieves' Guild, and neither side pushes the other.",
+"text": "Nobody at the head of Feudal Appointee answers to Thieves' Guild, and neither side pushes the other.",
+"why": "says neither side pushes the other; relation is tense, escalating",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 227,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "B13657",
+"sev": "MED",
+"n": 2,
+"town": "r2r-town-46",
+"section": "Summary/Overview",
+"fold": "Neither side will back down and Merchant Council is avoiding the question.",
+"text": "Neither side will back down and Merchant Council is avoiding the question.",
+"why": "'Neither side will back down'; QUARRELS: none and stability Stable, legitimacy Approved",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 487,
+"fn": "deriveBaselineConflict"
+}
+},
+{
+"id": "B12464",
+"sev": "MED",
+"n": 2,
+"town": "r2s-famine-city-1",
+"section": "Systems/Power",
+"fold": "Merchant Guild Council leaves Thieves' Guild alone because stamping it out would cost more than it saves.",
+"text": "Merchant Guild Council leaves Thieves' Guild alone because stamping it out would cost more than it saves.",
+"why": "says council leaves Thieves' Guild alone; QUARRELS has them in a high open conflict over prices",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 259,
+"fn": "govCriminalRelation"
+}
+},
+{
+"id": "B00895",
+"sev": "MED",
+"n": 2,
+"town": "r2r-city-38",
+"section": "Systems/Power",
+"fold": "<N> is # in Ecclesiastical Council and holds a # share in Merchant Guilds, and carries Merchant Guilds' requests to the # above.",
+"text": "Metztli Uc is third in Ecclesiastical Council and holds a third share in Merchant Guilds, and carries Merchant Guilds' requests to the two above.",
+"why": "PEOPLE gives Metztli Uc only as master weaver, not third of Ecclesiastical Council or a Merchant Guilds shareholder",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 163,
+"fn": "cap"
+}
+},
+{
+"id": "B01606",
+"sev": "MED",
+"n": 2,
+"town": "r2r-city-38",
+"section": "Systems/Power",
+"fold": "<N>, # in Ecclesiastical Council, also holds a # share in Merchant Guilds, and that lends Merchant Guilds weight it would not have on its own.",
+"text": "Metztli Uc, third in Ecclesiastical Council, also holds a third share in Merchant Guilds, and that lends Merchant Guilds weight it would not have on its own.",
+"why": "PEOPLE gives Metztli Uc only as master weaver, not third of Ecclesiastical Council or a Merchant Guilds shareholder",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 187,
+"fn": "PATRONAGE_LINES"
+}
+},
+{
+"id": "B00888",
+"sev": "MED",
+"n": 2,
+"town": "r2r-city-28",
+"section": "Systems/Power",
+"fold": "<N> is # in Democratic assembly and holds a # share in The Guard, and carries The Guard's requests to the # above.",
+"text": "Ekaterini Chomatenos is third in Democratic assembly and holds a third share in The Guard, and carries The Guard's requests to the two above.",
+"why": "PEOPLE gives Ekaterini Chomatenos only as prison warden; 'The Guard' is no listed power",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 163,
+"fn": "cap"
+}
+},
+{
+"id": "B06497",
+"sev": "MED",
+"n": 2,
+"town": "r2s-occupied-metropolis-2",
+"section": "Systems/Power",
+"fold": "Ducal Governorship and Thieves' Guild leave each other alone.",
+"text": "Ducal Governorship and Thieves' Guild leave each other alone.",
+"why": "leave each other alone, but QUARRELS has an open moderate quarrel, relation tense; 00374 and 17354 have the guild at odds and holding proof",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 227,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "07095",
+"sev": "MED",
+"n": 1,
+"town": "r2s-plague_onset-village-3",
+"section": "Systems/Power",
+"fold": "Elder Council and Thieves' Guild leave each other alone.",
+"text": "Elder Council and Thieves' Guild leave each other alone.",
+"why": "says Elder Council and Thieves' Guild leave each other alone; 07132 marks them escalating and 20729 says at odds",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 227,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "10837",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-39",
+"section": "Systems/Power",
+"fold": "Household Council keeps order and collects the taxes; Conversion Enforcement Office tells people that both are right and ordained.",
+"text": "Household Council keeps order and collects the taxes; Conversion Enforcement Office tells people that both are right and ordained.",
+"why": "has the Conversion Enforcement Office blessing the council's rule as ordained; 10862 marks them escalating, and 07476 says it is an external verifying body",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 475,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "07105",
+"sev": "MED",
+"n": 1,
+"town": "r2s-religious_conversion-village-1",
+"section": "Systems/Power",
+"fold": "Elder Council keeps order and collects the taxes; Reform Congregation tells people that both are right and ordained.",
+"text": "Elder Council keeps order and collects the taxes; Reform Congregation tells people that both are right and ordained.",
+"why": "has the breakaway Reform Congregation blessing the council's rule as ordained; 07140 marks the two escalating",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 475,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "07154",
+"sev": "MED",
+"n": 1,
+"town": "r2s-slave_revolt-village-0",
+"section": "Systems/Power",
+"fold": "Elected Reeve and Thieves' Guild leave each other alone.",
+"text": "Elected Reeve and Thieves' Guild leave each other alone.",
+"why": "Reeve and Thieves' Guild leave each other alone; 07169 calls the relation escalating, 19894 at odds",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 227,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "14886",
+"sev": "MED",
+"n": 1,
+"town": "r2s-slave_revolt-village-0",
+"section": "Systems/Power",
+"fold": "Nobody at the head of Elected Reeve answers to Thieves' Guild, and neither side pushes the other.",
+"text": "Nobody at the head of Elected Reeve answers to Thieves' Guild, and neither side pushes the other.",
+"why": "neither side pushes the other; 07169 escalating and 23616 a Guild move against the Reeve",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 227,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "07155",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-45",
+"section": "Systems/Power",
+"fold": "Elected Reeve gives the orders and Military/Guard carries them out; each needs the other to stay strong.",
+"text": "Elected Reeve gives the orders and Military/Guard carries them out; each needs the other to stay strong.",
+"why": "Guard carries out the Reeve's orders, each needs the other; 10582 says High tension between them",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 406,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "23096",
+"sev": "MED",
+"n": 1,
+"town": "r2s-under_siege-town-0",
+"section": "Systems/Power",
+"fold": "Town Council gives the orders and War Council carries them out; each needs the other to stay strong.",
+"text": "Town Council gives the orders and War Council carries them out; each needs the other to stay strong.",
+"why": "War Council carries out the Council's orders, each needs the other; 23109 and 10688 give their tension as High",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 406,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "13601",
+"sev": "MED",
+"n": 1,
+"town": "r2r-town-57",
+"section": "Systems/Power",
+"fold": "Military/Guard is now about as strong as Church Council.",
+"text": "Military/Guard is now about as strong as Church Council.",
+"why": "says Military/Guard is about as strong as Church Council; GOVERNMENT has Military/Guard Minor, Church Council Significant",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 409,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "13600",
+"sev": "MED",
+"n": 1,
+"town": "r2r-town-11",
+"section": "Systems/Power",
+"fold": "Military/Guard is now about as strong as Arcane Council.",
+"text": "Military/Guard is now about as strong as Arcane Council.",
+"why": "says Military/Guard is about as strong as Arcane Council; GOVERNMENT has Military/Guard Minor, Arcane Council Significant",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 409,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "09619",
+"sev": "MED",
+"n": 1,
+"town": "r2s-wartime-town-0",
+"section": "Systems/Power",
+"fold": "Gentry families with local landholdings; active in civic politics but outpaced by merchant capital in raw financial leverage",
+"text": "Gentry families with local landholdings; active in civic politics but outpaced by merchant capital in raw financial leverage",
+"why": "gentry outpaced by merchant capital; GOVERNMENT lists no merchant power and HOUSES has no merchant guilds",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/power/claimStanding.js",
+"line": 42,
+"fn": "nobleMinorRung"
+}
+},
+{
+"id": "13607",
+"sev": "MED",
+"n": 1,
+"town": "r2s-wartime-town-2",
+"section": "Systems/Power",
+"fold": "Military/Guard is now about as strong as Feudal Appointee.",
+"text": "Military/Guard is now about as strong as Feudal Appointee.",
+"why": "says Military/Guard is about as strong as Feudal Appointee; GOVERNMENT has Military/Guard Minor, Feudal Appointee Significant",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 409,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "19016",
+"sev": "MED",
+"n": 1,
+"town": "r2r-town-23",
+"section": "Systems/Power",
+"fold": "The # of Town Council answers to Street gang, but the head does not.",
+"text": "The third of Town Council answers to Street gang, but the head does not.",
+"why": "a third of the council answers to Street gang; GOVERNMENT lists no Street gang power; 'The third of' reads wrong",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 226,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "18705",
+"sev": "MED",
+"n": 1,
+"town": "r2r-town-23",
+"section": "Systems/Power",
+"fold": "Street gang has a voice in Town Council, not the last word.",
+"text": "Street gang has a voice in Town Council, not the last word.",
+"why": "gives Street gang a voice in Town Council; GOVERNMENT powers list no Street gang",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 226,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "21057",
+"sev": "MED",
+"n": 1,
+"town": "r2r-town-16",
+"section": "Systems/Power",
+"fold": "The military commanders are pushing for expanded authority over civilian courts, and Church Council is losing ground.",
+"text": "The military commanders are pushing for expanded authority over civilian courts, and Church Council is losing ground.",
+"why": "commanders push for authority over civilian courts; HOUSES has no courthouse",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 469,
+"fn": "deriveBaselineConflict"
+}
+},
+{
+"id": "21060",
+"sev": "MED",
+"n": 1,
+"town": "r2r-town-59",
+"section": "Summary/Overview",
+"fold": "The military commanders are pushing for expanded authority over civilian courts, and Feudal Appointee is losing ground.",
+"text": "The military commanders are pushing for expanded authority over civilian courts, and Feudal Appointee is losing ground.",
+"why": "Feudal Appointee 'losing ground' to commanders, yet stability Stable, Endorsed, and 07637 says it outweighs everyone",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 469,
+"fn": "deriveBaselineConflict"
+}
+},
+{
+"id": "22864",
+"sev": "MED",
+"n": 1,
+"town": "r2r-town-40",
+"section": "Systems/Power",
+"fold": "Thieves' Guild decides the taxes, who gets arrested and who gets office; the hall keeps up appearances because that suits Thieves' Guild.",
+"text": "Thieves' Guild decides the taxes, who gets arrested and who gets office; the hall keeps up appearances because that suits Thieves' Guild.",
+"why": "Thieves' Guild decides taxes, arrests and offices with Town Mayor a front; GOVERNMENT has Town Mayor Dominant, Thieves' Guild Minor",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 253,
+"fn": "govCriminalRelation"
+}
+},
+{
+"id": "21063",
+"sev": "MED",
+"n": 1,
+"town": "r2r-town-15",
+"section": "Systems/Power",
+"fold": "The military commanders are pushing for expanded authority over civilian courts, and Guild Council is losing ground.",
+"text": "The military commanders are pushing for expanded authority over civilian courts, and Guild Council is losing ground.",
+"why": "commanders push for authority over civilian courts; HOUSES has no courthouse",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 469,
+"fn": "deriveBaselineConflict"
+}
+},
+{
+"id": "21067",
+"sev": "MED",
+"n": 1,
+"town": "r2r-town-28",
+"section": "Systems/Power",
+"fold": "The military commanders are pushing for expanded authority over civilian courts, and Military Council is losing ground.",
+"text": "The military commanders are pushing for expanded authority over civilian courts, and Military Council is losing ground.",
+"why": "commanders push against civilian courts and the Military Council 'loses ground' to them; the Military Council IS the military, and HOUSES has no courthouse",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 469,
+"fn": "deriveBaselineConflict"
+}
+},
+{
+"id": "14103",
+"sev": "MED",
+"n": 1,
+"town": "r2s-under_siege-city-3",
+"section": "Systems/Power",
+"fold": "Multiple criminal factions has a voice in Arcane Council, not the last word.",
+"text": "Multiple criminal factions has a voice in Arcane Council, not the last word.",
+"why": "Multiple criminal factions given a voice in Arcane Council (and 21940 its second); GOVERNMENT lists no criminal power; 'factions has' disagrees",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 226,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "10748",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-city-0",
+"section": "Systems/Power",
+"fold": "Holds the title; the decisions that matter are made by Noble Families.",
+"text": "Holds the title; the decisions that matter are made by Noble Families.",
+"why": "decisions made by Noble Families; GOVERNMENT names Royal Authority governing, both Significant",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/dossier/powerStrata.js",
+"line": 457,
+"fn": "crisisNoteFor"
+}
+},
+{
+"id": "21064",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-40",
+"section": "Systems/Power",
+"fold": "The military commanders are pushing for expanded authority over civilian courts, and Merchant Guild Council is losing ground.",
+"text": "The military commanders are pushing for expanded authority over civilian courts, and Merchant Guild Council is losing ground.",
+"why": "council 'losing ground' to the military; GOVERNMENT has council Strong, Military/Guard Minor; 13572 says the Guard carries out what the council decides",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 469,
+"fn": "deriveBaselineConflict"
+}
+},
+{
+"id": "07034",
+"sev": "MED",
+"n": 1,
+"town": "r2s-insurgency-city-1",
+"section": "Systems/Power",
+"fold": "Ecclesiastical Council gives the orders and Military/Guard carries them out; each needs the other to stay strong.",
+"text": "Ecclesiastical Council gives the orders and Military/Guard carries them out; each needs the other to stay strong.",
+"why": "council and Military/Guard need each other, orders obeyed; same block rates their tension High",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 406,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "04943",
+"sev": "MED",
+"n": 1,
+"town": "r2s-indebted-city-2",
+"section": "Systems/Power",
+"fold": "City Council needs the taxes and loans of Merchant Guilds, and Merchant Guilds needs City Council to enforce its contracts and keep the law.",
+"text": "City Council needs the taxes and loans of Merchant Guilds, and Merchant Guilds needs City Council to enforce its contracts and keep the law.",
+"why": "City Council and Merchant Guilds need each other, a stable bargain; same block rates their tension High",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 442,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "13602",
+"sev": "MED",
+"n": 1,
+"town": "r2s-wartime-city-2",
+"section": "Systems/Power",
+"fold": "Military/Guard is now about as strong as Corrupt City Council.",
+"text": "Military/Guard is now about as strong as Corrupt City Council.",
+"why": "says Military/Guard about as strong as the council; GOVERNMENT gives Military/Guard Significant, Corrupt City Council Minor",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 409,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "13187",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-56",
+"section": "Systems/Power",
+"fold": "Merchant Guild Council and Thieves' Guild leave each other alone.",
+"text": "Merchant Guild Council and Thieves' Guild leave each other alone.",
+"why": "says council and Thieves' Guild leave each other alone; 22902 lists Moderate tension and 26228 a quarrel between them",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 227,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "04940",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-31",
+"section": "Systems/Power",
+"fold": "City Council keeps order and collects the taxes; Religious Authorities tells people that both are right and ordained.",
+"text": "City Council keeps order and collects the taxes; Religious Authorities tells people that both are right and ordained.",
+"why": "says the council keeps order; 22499 says the watch is too thinly spread to maintain order, 06079 crime outrunning it",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 475,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "21065",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-34",
+"section": "Systems/Power",
+"fold": "The military commanders are pushing for expanded authority over civilian courts, and Merchant oligarchy is losing ground.",
+"text": "The military commanders are pushing for expanded authority over civilian courts, and Merchant oligarchy is losing ground.",
+"why": "says military commanders gain on courts and the oligarchy loses ground; oligarchy is Dominant and GOVERNMENT lists no Military/Guard power",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 469,
+"fn": "deriveBaselineConflict"
+}
+},
+{
+"id": "00382",
+"sev": "MED",
+"n": 1,
+"town": "r2s-occupied-metropolis-1",
+"section": "Systems/Power",
+"fold": "<N> Authority takes its orders no longer.",
+"text": "The Occupation Authority takes its orders no longer.",
+"why": "Occupation Authority 'takes its orders no longer' implies it once obeyed the council; it is the occupier",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 335,
+"fn": "governanceAccountOf"
+}
+},
+{
+"id": "19716",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-50",
+"section": "Systems/Power",
+"fold": "The Military/Guard and the Merchant Guilds take its orders no longer.",
+"text": "The Military/Guard and the Merchant Guilds take its orders no longer.",
+"why": "says Merchant Guilds take Grand Council's orders no longer; 09852 calls Grand Council×Merchant Guilds stable; also 'Military/Guard' slash label as name",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 335,
+"fn": "governanceAccountOf"
+}
+},
+{
+"id": "15394",
+"sev": "MED",
+"n": 1,
+"town": "r2s-monster_pressure-metropolis-2",
+"section": "Systems/Power",
+"fold": "Outside professionals brought in or passing through; temporarily powerful because they are useful.",
+"text": "Outside professionals brought in or passing through; temporarily powerful because they are useful.",
+"why": "calls Monster Hunters / Adventurers temporarily powerful; GOVERNMENT lists them Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/stressFactions.js",
+"line": 211,
+"fn": "applyStressEventFactions"
+}
+},
+{
+"id": "14783",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-39",
+"section": "Systems/Power",
+"fold": "Noble Houses live under the rule of Grand Council but keep enough rights of their own (land, courts, levies) to bargain, not simply obey.",
+"text": "Noble Houses live under the rule of Grand Council but keep enough rights of their own (land, courts, levies) to bargain, not simply obey.",
+"why": "says Noble Houses keep rights enough to bargain, not obey; GOVERNMENT lists Noble Houses Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 565,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "14787",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-2",
+"section": "Systems/Power",
+"fold": "Noble Houses live under the rule of High Theocratic Council but keep enough rights of their own (land, courts, levies) to bargain, not simply obey.",
+"text": "Noble Houses live under the rule of High Theocratic Council but keep enough rights of their own (land, courts, levies) to bargain, not simply obey.",
+"why": "says Noble Houses keep rights enough to bargain, not obey; GOVERNMENT lists Noble Houses Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 565,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "21062",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-53",
+"section": "Summary/Overview",
+"fold": "The military commanders are pushing for expanded authority over civilian courts, and Grand Military Council is losing ground.",
+"text": "The military commanders are pushing for expanded authority over civilian courts, and Grand Military Council is losing ground.",
+"why": "military commanders pushing against a Grand Military Council 'losing ground'; GOVERNMENT has it Dominant, Endorsed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 469,
+"fn": "deriveBaselineConflict"
+}
+},
+{
+"id": "21061",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-47",
+"section": "Systems/Power",
+"fold": "The military commanders are pushing for expanded authority over civilian courts, and Grand Merchant Oligarchy is losing ground.",
+"text": "The military commanders are pushing for expanded authority over civilian courts, and Grand Merchant Oligarchy is losing ground.",
+"why": "Grand Merchant Oligarchy 'losing ground' to military commanders; GOVERNMENT has it Strong, Endorsed, and Military/Guard only Minor",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 469,
+"fn": "deriveBaselineConflict"
+}
+},
+{
+"id": "19010",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-10",
+"section": "Systems/Power",
+"fold": "The # of Elder Council answers to Fence (word of mouth), but the head does not.",
+"text": "The third of Elder Council answers to Fence (word of mouth), but the head does not.",
+"why": "house label used as a name: 'answers to Fence (word of mouth)'",
+"kinds": [
+"BROKEN",
+"LACKS"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 226,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "07609",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-10",
+"section": "Systems/Power",
+"fold": "Fence (word of mouth) has a voice in Elder Council, not the last word.",
+"text": "Fence (word of mouth) has a voice in Elder Council, not the last word.",
+"why": "house label used as a name: 'Fence (word of mouth) has a voice'",
+"kinds": [
+"BROKEN",
+"LACKS"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 226,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "19011",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-4",
+"section": "Systems/Power",
+"fold": "The # of Elder Council answers to Smuggling waypoint, but the head does not.",
+"text": "The third of Elder Council answers to Smuggling waypoint, but the head does not.",
+"why": "house label used as a power: 'answers to Smuggling waypoint'; GOVERNMENT lists only Elder Council",
+"kinds": [
+"BROKEN",
+"LACKS"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 226,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "18181",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-4",
+"section": "Systems/Power",
+"fold": "Smuggling waypoint has a voice in Elder Council, not the last word.",
+"text": "Smuggling waypoint has a voice in Elder Council, not the last word.",
+"why": "house label used as a power: 'Smuggling waypoint has a voice in Elder Council'",
+"kinds": [
+"BROKEN",
+"LACKS"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 226,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "17541",
+"sev": "MED",
+"n": 1,
+"town": "r2r-town-54",
+"section": "World/NPCs",
+"fold": "Secret: Tells a band on the road which caravans carry gold and when they leave",
+"text": "Secret: Tells a band on the road which caravans carry gold and when they leave",
+"why": "tells a band on the road which caravans carry gold, but no road reaches the town and no camels reach it",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 1255,
+"fn": "ROWS"
+}
+},
+{
+"id": "B01720",
+"sev": "MED",
+"n": 1,
+"town": "r2s-religious_conversion-thorp-3",
+"section": "Systems/Power",
+"fold": "<N>, the camp foreman and Household Elder, holds its seat.",
+"text": "Calvus Corvinus, the camp foreman and Household Elder, holds its seat.",
+"why": "title Household Elder for the camp foreman; HOUSES has no Household elder and roster gives camp foreman only",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 286,
+"fn": "governanceAccountOf"
+}
+},
+{
+"id": "B16107",
+"sev": "MED",
+"n": 1,
+"town": "r2s-religious_conversion-hamlet-1",
+"section": "Table/Tonight sheet",
+"fold": "Secret: Has been grazing the herd on a neighbour's land at night.",
+"text": "Secret: Has been grazing the herd on a neighbour's land at night.",
+"why": "grazing the herd at night; LAND gap says the dairy farmer lacks access to livestock",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 1617,
+"fn": "ROWS"
+}
+},
+{
+"id": "B16461",
+"sev": "MED",
+"n": 1,
+"town": "r2s-insurgency-hamlet-3",
+"section": "Table/Tonight sheet",
+"fold": "Secret: Pays the cutters in tokens that buy only from the foreman's own store, at the foreman's prices.",
+"text": "Secret: Pays the cutters in tokens that buy only from the foreman's own store, at the foreman's prices.",
+"why": "tokens that buy only from the foreman's own store; HOUSES lists no store or shop",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 1664,
+"fn": "ROWS"
+}
+},
+{
+"id": "B22098",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-town-2",
+"section": "Systems/Power",
+"fold": "Town Mayor and Thieves' Guild leave each other alone.",
+"text": "Town Mayor and Thieves' Guild leave each other alone.",
+"why": "says Town Mayor and Thieves' Guild leave each other alone; QUARRELS has them tense and escalating",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 227,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "B14093",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-town-2",
+"section": "Systems/Power",
+"fold": "Nobody at the head of Town Mayor answers to Thieves' Guild, and neither side pushes the other.",
+"text": "Nobody at the head of Town Mayor answers to Thieves' Guild, and neither side pushes the other.",
+"why": "says neither side pushes the other; relation is tense, escalating",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 227,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "B22104",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-town-2",
+"section": "Systems/Power",
+"fold": "Town Mayor leaves Thieves' Guild alone because stamping it out would cost more than it saves.",
+"text": "Town Mayor leaves Thieves' Guild alone because stamping it out would cost more than it saves.",
+"why": "Mayor leaves Thieves' Guild alone; relation is tense, escalating",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 259,
+"fn": "govCriminalRelation"
+}
+},
+{
+"id": "B03654",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-town-3",
+"section": "Systems/Power",
+"fold": "Arcane Council leaves Thieves' Guild alone because stamping it out would cost more than it saves.",
+"text": "Arcane Council leaves Thieves' Guild alone because stamping it out would cost more than it saves.",
+"why": "says Arcane Council leaves Thieves' Guild alone; QUARRELS has an open moderate quarrel and a tense, escalating relation",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 259,
+"fn": "govCriminalRelation"
+}
+},
+{
+"id": "B03644",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-town-3",
+"section": "Systems/Power",
+"fold": "Arcane Council and Thieves' Guild leave each other alone.",
+"text": "Arcane Council and Thieves' Guild leave each other alone.",
+"why": "says the two leave each other alone; QUARRELS open moderate quarrel, tense and escalating",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 227,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "B14045",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-town-3",
+"section": "Systems/Power",
+"fold": "Nobody at the head of Arcane Council answers to Thieves' Guild, and neither side pushes the other.",
+"text": "Nobody at the head of Arcane Council answers to Thieves' Guild, and neither side pushes the other.",
+"why": "says neither side pushes the other; relation is tense, escalating, with an informer planted",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 227,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "B05808",
+"sev": "MED",
+"n": 1,
+"town": "r2s-insurgency-town-1",
+"section": "Systems/Power",
+"fold": "Crime and weak defences have left the Merchant oligarchy's right to rule contested in <N>.",
+"text": "Crime and weak defences have left the Merchant oligarchy's right to rule contested in Tzulxochitl.",
+"why": "blames crime for contested rule; no criminal power, house or chain in header; the contest comes from the insurgency (legitimacy score 36)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 133,
+"fn": "standingSentence"
+}
+},
+{
+"id": "B05816",
+"sev": "MED",
+"n": 1,
+"town": "r2s-succession_void-town-0",
+"section": "Systems/Power",
+"fold": "Crime has left the <N>'s right to rule contested in <N>.",
+"text": "Crime has left the Feudal Appointee's right to rule contested in Shivamandal.",
+"why": "blames crime for contested rule; header has no criminal power, house or chain; the contest is the leadership void and legitimacy score 38",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 133,
+"fn": "standingSentence"
+}
+},
+{
+"id": "B05822",
+"sev": "MED",
+"n": 1,
+"town": "r2r-town-13",
+"section": "Systems/Power",
+"fold": "Crime has left the Military Council's right to rule contested in <N>.",
+"text": "Crime has left the Military Council's right to rule contested in Vatankher.",
+"why": "blames crime for contested rule; header has no criminal power, house or chain; the contest follows the migration (stability 'people arriving')",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 133,
+"fn": "standingSentence"
+}
+},
+{
+"id": "B05802",
+"sev": "MED",
+"n": 1,
+"town": "r2r-town-57",
+"section": "Systems/Power",
+"fold": "Crime and weak defences have left the Church Council's right to rule contested in <N>.",
+"text": "Crime and weak defences have left the Church Council's right to rule contested in Pianoium.",
+"why": "blames crime for contested rule; header has no criminal power, house or chain; the contest follows the betrayal (stability 'nobody trusts those in charge')",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 133,
+"fn": "standingSentence"
+}
+},
+{
+"id": "B05801",
+"sev": "MED",
+"n": 1,
+"town": "r2s-wartime-town-1",
+"section": "Systems/Power",
+"fold": "Crime and weak defences have left the Arcane Council's right to rule contested in <N>.",
+"text": "Crime and weak defences have left the Arcane Council's right to rule contested in Stredpol.",
+"why": "blames crime for contested rule; header has no criminal power, house or chain; the strain is wartime requisition (stability) and legitimacy score 36",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 133,
+"fn": "standingSentence"
+}
+},
+{
+"id": "B05821",
+"sev": "MED",
+"n": 1,
+"town": "r2s-insurgency-town-3",
+"section": "Systems/Power",
+"fold": "Crime has left the Merchant Council's right to rule contested in <N>.",
+"text": "Crime has left the Merchant Council's right to rule contested in Langdorf.",
+"why": "'Crime has left the Merchant Council's right to rule contested'; GOVERNMENT lists no criminal power, LAND has no organised-crime chain; cause here is the insurgency",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 133,
+"fn": "standingSentence"
+}
+},
+{
+"id": "B04756",
+"sev": "MED",
+"n": 1,
+"town": "r2s-plague_onset-city-1",
+"section": "Systems/Power",
+"fold": "City-State Council and Thieves' Guild leave each other alone.",
+"text": "City-State Council and Thieves' Guild leave each other alone.",
+"why": "says council and Thieves' Guild leave each other alone; QUARRELS has an open moderate conflict over stolen goods sold openly, relation tense",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 227,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "B00896",
+"sev": "MED",
+"n": 1,
+"town": "r2s-insurgency-city-1",
+"section": "Systems/Power",
+"fold": "<N> is # in Ecclesiastical Council and holds a large share in The Guard, and carries The Guard's requests to the # above.",
+"text": "Otgontuya Besud is third in Ecclesiastical Council and holds a large share in The Guard, and carries The Guard's requests to the two above.",
+"why": "PEOPLE gives Otgontuya Besud only as watch commander; 'The Guard' is no listed power; a 'share' in a guard",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 163,
+"fn": "cap"
+}
+},
+{
+"id": "B00873",
+"sev": "MED",
+"n": 1,
+"town": "r2s-succession_void-city-0",
+"section": "Systems/Power",
+"fold": "<N> is # in <N> and holds a large share in Noble Families, and carries Noble Families' requests to the # above.",
+"text": "Oda Gruber is third in Ecclesiastical Council and holds a large share in Noble Families, and carries Noble Families' requests to the two above.",
+"why": "PEOPLE gives Oda Gruber only as Bardic college master, not third of Ecclesiastical Council or a Noble Families shareholder",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 163,
+"fn": "cap"
+}
+},
+{
+"id": "B01581",
+"sev": "MED",
+"n": 1,
+"town": "r2s-succession_void-city-0",
+"section": "Systems/Power",
+"fold": "<N>, # in <N>, also holds a large share in Noble Families, and that lends Noble Families weight it would not have on its own.",
+"text": "Oda Gruber, third in Ecclesiastical Council, also holds a large share in Noble Families, and that lends Noble Families weight it would not have on its own.",
+"why": "PEOPLE gives Oda Gruber only as Bardic college master, not third of Ecclesiastical Council or a Noble Families shareholder",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 187,
+"fn": "PATRONAGE_LINES"
+}
+},
+{
+"id": "B14081",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-56",
+"section": "Systems/Power",
+"fold": "Nobody at the head of Merchant Guild Council answers to Thieves' Guild, and neither side pushes the other.",
+"text": "Nobody at the head of Merchant Guild Council answers to Thieves' Guild, and neither side pushes the other.",
+"why": "'neither side pushes the other'; QUARRELS has Thieves' Guild vs Merchant Guild Council in moderate conflict",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 227,
+"fn": "CAPTURE_LINES"
+}
+},
+{
+"id": "B02087",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-31",
+"section": "Systems/Power",
+"fold": "<N>, the senior craft-guild master and Lord Mayor, holds its seat.",
+"text": "Vifil Eindriðason, the senior craft-guild master and Lord Mayor, holds its seat.",
+"why": "City Council's seat given to the Craft Guilds' master; QUARRELS has City Council vs Craft Guilds in moderate conflict",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/faceHonorifics.js",
+"line": 132,
+"fn": "FACE_HONORIFICS.the senior craft-guild master"
+}
+},
+{
+"id": "B00816",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-31",
+"section": "Systems/Power",
+"fold": "<N> heads City Council and also holds a full share in Craft Guilds, so what Craft Guilds wants from City Council goes straight to the top.",
+"text": "Vifil Eindriðason heads City Council and also holds a full share in Craft Guilds, so what Craft Guilds wants from City Council goes straight to the top.",
+"why": "Craft Guilds' wishes 'go straight to the top'; QUARRELS has City Council vs Craft Guilds in moderate conflict",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 161,
+"fn": "cap"
+}
+},
+{
+"id": "B01855",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-31",
+"section": "Systems/Power",
+"fold": "<N>, the head of City Council, also holds a full share in Craft Guilds, and that lends Craft Guilds weight it would not have on its own.",
+"text": "Vifil Eindriðason, the head of City Council, also holds a full share in Craft Guilds, and that lends Craft Guilds weight it would not have on its own.",
+"why": "City Council's head lends Craft Guilds weight; QUARRELS has City Council vs Craft Guilds in moderate conflict",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 187,
+"fn": "PATRONAGE_LINES"
+}
+},
+{
+"id": "B00875",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-45",
+"section": "Systems/Power",
+"fold": "<N> is # in Arcane Council and holds a # share in Arcane Orders, and carries Arcane Orders' requests to the # above.",
+"text": "Yesüi Naiman is third in Arcane Council and holds a third share in Arcane Orders, and carries Arcane Orders' requests to the two above.",
+"why": "PEOPLE gives Yesüi Naiman only as Bardic college master; Arcane Orders are Suppressed and in quarrel with Arcane Council",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 163,
+"fn": "cap"
+}
+},
+{
+"id": "B01584",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-45",
+"section": "Systems/Power",
+"fold": "<N>, # in Arcane Council, also holds a # share in Arcane Orders, and that lends Arcane Orders weight it would not have on its own.",
+"text": "Yesüi Naiman, third in Arcane Council, also holds a third share in Arcane Orders, and that lends Arcane Orders weight it would not have on its own.",
+"why": "PEOPLE gives Yesüi Naiman only as Bardic college master, not third of Arcane Council or an Arcane Orders shareholder",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 187,
+"fn": "PATRONAGE_LINES"
+}
+},
+{
+"id": "B00881",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-8",
+"section": "Systems/Power",
+"fold": "<N> is # in City Council and holds a large share in The Guard, and carries The Guard's requests to the # above.",
+"text": "Khutulun Merkit is third in City Council and holds a large share in The Guard, and carries The Guard's requests to the two above.",
+"why": "PEOPLE gives Khutulun Merkit only as castellan of the Citadel, not third of City Council; 'The Guard' is no listed power",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 163,
+"fn": "cap"
+}
+},
+{
+"id": "B00876",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-54",
+"section": "Systems/Power",
+"fold": "<N> is # in Arcane Council and holds a # share in The Guard, and carries The Guard's requests to the # above.",
+"text": "Valentinus Gratus is third in Arcane Council and holds a half share in The Guard, and carries The Guard's requests to the two above.",
+"why": "PEOPLE gives Valentinus Gratus only as mercenary company captain, not third of Arcane Council; 'The Guard' is no listed power",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 163,
+"fn": "cap"
+}
+},
+{
+"id": "B00919",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-13",
+"section": "Systems/Power",
+"fold": "<N> is # in Merchant Guild Council and holds a # share in Religious Authorities, and carries Religious Authorities' requests to the # above.",
+"text": "Rakesh Prasad is third in Merchant Guild Council and holds a third share in Religious Authorities, and carries Religious Authorities' requests to the two above.",
+"why": "PEOPLE gives Rakesh Prasad only as sage, not third of Merchant Guild Council or a Religious Authorities shareholder",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 163,
+"fn": "cap"
+}
+},
+{
+"id": "B01629",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-13",
+"section": "Systems/Power",
+"fold": "<N>, # in Merchant Guild Council, also holds a # share in Religious Authorities, and that lends Religious Authorities weight it would not have on its own.",
+"text": "Rakesh Prasad, third in Merchant Guild Council, also holds a third share in Religious Authorities, and that lends Religious Authorities weight it would not have on its own.",
+"why": "PEOPLE gives Rakesh Prasad only as sage, not third of Merchant Guild Council or a Religious Authorities shareholder",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 187,
+"fn": "PATRONAGE_LINES"
+}
+},
+{
+"id": "B00886",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-50",
+"section": "Systems/Power",
+"fold": "<N> is # in Corrupt City Council and holds a large share in Arcane Orders, and carries Arcane Orders' requests to the # above.",
+"text": "Caecilia Macer is third in Corrupt City Council and holds a large share in Arcane Orders, and carries Arcane Orders' requests to the two above.",
+"why": "PEOPLE gives Caecilia Macer only as circle-keeper of the Teleportation circle, not third of Corrupt City Council",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 163,
+"fn": "cap"
+}
+},
+{
+"id": "B01596",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-50",
+"section": "Systems/Power",
+"fold": "<N>, # in Corrupt City Council, also holds a large share in Arcane Orders, and that lends Arcane Orders weight it would not have on its own.",
+"text": "Caecilia Macer, third in Corrupt City Council, also holds a large share in Arcane Orders, and that lends Arcane Orders weight it would not have on its own.",
+"why": "PEOPLE gives Caecilia Macer only as circle-keeper of the Teleportation circle, not third of Corrupt City Council",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/dmPowerLines.js",
+"line": 187,
+"fn": "PATRONAGE_LINES"
+}
+},
+{
+"id": "B11591",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-17",
+"section": "Systems/Power",
+"fold": "Its seat is held by <N>, the senior guild master and Speaker of the Assembly.",
+"text": "Its seat is held by Samarkand Besud, the senior guild master and Speaker of the Assembly.",
+"why": "names Samarkand Besud 'Speaker' holding the Assembly seat; PEOPLE gives him only senior guild master, and Merchant Guilds are in HIGH quarrel with the Assembly",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/faceHonorifics.js",
+"line": 98,
+"fn": "FACE_HONORIFICS.the senior guild master"
+}
+},
+{
+"id": "B11556",
+"sev": "MED",
+"n": 1,
+"town": "r2s-insurgency-metropolis-0",
+"section": "Systems/Power",
+"fold": "Its seat is held by <N>, the exchange master and Lord Mayor.",
+"text": "Its seat is held by Nada al-Dawla, the exchange master and Lord Mayor.",
+"why": "Nada al-Dawla (f) is only the exchange master on PEOPLE; 'Lord Mayor' is no roster office and the title does not fit her sex",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 288,
+"fn": "governanceAccountOf"
+}
+},
+{
+"id": "B17765",
+"sev": "MED",
+"n": 1,
+"town": "r2s-recently_betrayed-metropolis-1",
+"section": "Systems/Power",
+"fold": "Strong defences and prosperity have earned the City-State Council the approval of <N>.",
+"text": "Strong defences and prosperity have earned the City-State Council the approval of Vatanserai.",
+"why": "Council said to have earned the town's approval; stability line says 'Shaken — nobody trusts those in charge' after a betrayal",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/governanceAccount.js",
+"line": 143,
+"fn": "standingSentence"
+}
+},
+{
+"id": "B09963",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-2",
+"section": "Systems/Power",
+"fold": "High Theocratic Council needs the taxes and loans of Merchant Guilds, and Merchant Guilds needs High Theocratic Council to enforce its contracts and keep the law.",
+"text": "High Theocratic Council needs the taxes and loans of Merchant Guilds, and Merchant Guilds needs High Theocratic Council to enforce its contracts and keep the law.",
+"why": "presents High Theocratic Council and Merchant Guilds as mutually needed partners; QUARRELS has them in high conflict over an unpaid debt",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 442,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "B09516",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-58",
+"section": "Systems/Power",
+"fold": "Grand Military Council needs the taxes and loans of Merchant Guilds, and Merchant Guilds needs Grand Military Council to enforce its contracts and keep the law.",
+"text": "Grand Military Council needs the taxes and loans of Merchant Guilds, and Merchant Guilds needs Grand Military Council to enforce its contracts and keep the law.",
+"why": "presents Grand Military Council and Merchant Guilds as mutually dependent; QUARRELS has them in high conflict over raw materials, relation declining",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 442,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "B20041",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-13",
+"section": "Systems/Power",
+"fold": "The military commanders are pushing for expanded authority over civilian courts, and City-State Council is losing ground.",
+"text": "The military commanders are pushing for expanded authority over civilian courts, and City-State Council is losing ground.",
+"why": "says City-State Council is losing ground to military commanders; GOVERNMENT has CSC Dominant, Military/Guard subordinate and stable; QUARRELS' dispute is about speaking for the place",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 469,
+"fn": "deriveBaselineConflict"
+}
+}
+]

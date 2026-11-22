@@ -1,0 +1,2149 @@
+[
+{
+"id": "30563",
+"sev": "HIGH",
+"n": 157,
+"town": "r2s-under_siege-village-1",
+"section": "PDF/HistoryFounding",
+"fold": "Watch towers and muster drills maintained since the alarm",
+"text": "Watch towers and muster drills maintained since the alarm",
+"why": "watch towers and muster drills maintained; DEFENCE watch none, militia none, walls none, Undefended",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1195,
+"fn": "HISTORICAL_EVENTS_DATA.lastingEffects"
+}
+},
+{
+"id": "15462",
+"sev": "HIGH",
+"n": 46,
+"town": "r2s-under_siege-village-0",
+"section": "Journal/Power",
+"fold": "Leadership Vacuum: The last strong leader died or left, and no # has yet consolidated their position",
+"text": "Leadership Vacuum: The last strong leader died or left, and no one has yet consolidated their position",
+"why": "last strong leader gone, no one consolidated; GOVERNMENT has Household Council Strong governing; PAST has only a succession crisis 104 years ago",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1386,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
+"id": "00839",
+"sev": "HIGH",
+"n": 8,
+"town": "r2s-occupied-hamlet-2",
+"section": "Journal/History & Founding",
+"fold": "<N> (# years ago): When the occupiers left, they left behind a hamlet of former collaborators and former resisters, none of it ever settled",
+"text": "The Occupation (6 years ago): When the occupiers left, they left behind a hamlet of former collaborators and former resisters, none of it ever settled",
+"why": "says the occupiers left, leaving a hamlet of former collaborators; CRISIS is Under Occupation now, Occupation Authority Dominant, curfew in force, stability Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyDescVariants.js",
+"line": 65,
+"fn": "HISTORY_DESC_VARIANTS.occupation_legacy"
+}
+},
+{
+"id": "07927",
+"sev": "MED",
+"n": 202,
+"town": "r2s-under_siege-hamlet-0",
+"section": "PDF/HistoryFounding",
+"fold": "Denunciation records from the panic remain sealed in the archive",
+"text": "Denunciation records from the panic remain sealed in the archive",
+"why": "records sealed in 'the archive'; HOUSES (10, whole list) has no archive or record house; hamlet of 48",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1334,
+"fn": "HISTORICAL_EVENTS_DATA.lastingEffects"
+}
+},
+{
+"id": "03878",
+"sev": "MED",
+"n": 184,
+"town": "r2s-succession_void-thorp-0",
+"section": "PDF/HistoryFounding",
+"fold": "A standing security office and informant network persist",
+"text": "A standing security office and informant network persist",
+"why": "a standing security office and informant network persist; thorp of 8, watch none, HOUSES has no such office",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1333,
+"fn": "HISTORICAL_EVENTS_DATA.lastingEffects"
+}
+},
+{
+"id": "07439",
+"sev": "MED",
+"n": 181,
+"town": "r2s-under_siege-town-2",
+"section": "Journal/Power",
+"fold": "Crime Wave: A surge in criminal activity overwhelmed the authorities; vigilantes began to form",
+"text": "Crime Wave: A surge in criminal activity overwhelmed the authorities; vigilantes began to form",
+"why": "crime wave overwhelmed authorities, vigilantes formed; PAST records no crime wave, no vigilantes in GOVERNMENT, Military/Guard Strong",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1222,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
+"id": "28368",
+"sev": "MED",
+"n": 181,
+"town": "r2s-under_siege-town-2",
+"section": "Journal/Plot Hooks",
+"fold": "The vigilantes have begun targeting innocents based on bad information (Crime Wave)",
+"text": "The vigilantes have begun targeting innocents based on bad information (Crime Wave)",
+"why": "vigilantes targeting innocents; no vigilantes in GOVERNMENT, no crime wave in PAST",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1231,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "24318",
+"sev": "MED",
+"n": 181,
+"town": "r2s-plague_onset-town-1",
+"section": "Journal/Plot Hooks",
+"fold": "Someone is directing it to create a pretext (Crime Wave)",
+"text": "Someone is directing it to create a pretext (Crime Wave)",
+"why": "hook about a crime wave created as a pretext; no crime-wave event in PAST",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1229,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "24253",
+"sev": "MED",
+"n": 165,
+"town": "r2s-succession_void-thorp-1",
+"section": "Journal/Plot Hooks",
+"fold": "Someone destroyed the competing supply route (Resource Scarcity)",
+"text": "Someone destroyed the competing supply route (Resource Scarcity)",
+"why": "someone destroyed the competing supply route; TRADE imports and exports none, isolated, no supply route exists",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1215,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "00590",
+"sev": "MED",
+"n": 136,
+"town": "r2s-plague_onset-thorp-2",
+"section": "PDF/HistoryFounding",
+"fold": "# rival congregations still divide the settlement's faithful",
+"text": "Two rival congregations still divide the settlement's faithful",
+"why": "'Two rival congregations' divide the faithful; population 9, HOUSES has only access to a neighbour's parish church",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1165,
+"fn": "HISTORICAL_EVENTS_DATA.lastingEffects"
+}
+},
+{
+"id": "24336",
+"sev": "MED",
+"n": 128,
+"town": "r2s-occupied-town-1",
+"section": "Journal/Plot Hooks",
+"fold": "Someone is sabotaging both guilds to destabilize the market for a # party (Guild Conflict)",
+"text": "Someone is sabotaging both guilds to destabilize the market for a third party (Guild Conflict)",
+"why": "hook says both guilds are being sabotaged; PAST and QUARRELS record no guild conflict",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1186,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "29930",
+"sev": "MED",
+"n": 112,
+"town": "r2s-under_siege-town-2",
+"section": "PDF/HistoryFounding",
+"fold": "Wage disputes settled by a standing arbitration council since founded",
+"text": "Wage disputes settled by a standing arbitration council since founded",
+"why": "standing arbitration council; HOUSES (29, whole list) and GOVERNMENT list no arbitration council",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1150,
+"fn": "HISTORICAL_EVENTS_DATA.lastingEffects"
+}
+},
+{
+"id": "27132",
+"sev": "MED",
+"n": 88,
+"town": "r2s-plague_onset-town-0",
+"section": "PDF/HistoryFounding",
+"fold": "The merchant # and the labourers' # remain walled apart",
+"text": "The merchant quarter and the labourers' quarter remain walled apart",
+"why": "merchant quarter and labourers' quarter walled apart; town of 830 with one wall circuit, no such quarters in header",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1151,
+"fn": "HISTORICAL_EVENTS_DATA.lastingEffects"
+}
+},
+{
+"id": "28237",
+"sev": "MED",
+"n": 83,
+"town": "r2s-plague_onset-town-0",
+"section": "Journal/Plot Hooks",
+"fold": "The threat has an agent already inside the settlement (External Threat)",
+"text": "The threat has an agent already inside the settlement (External Threat)",
+"why": "an external threat with an agent inside; header CRISIS is Plague only, QUARRELS none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1201,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "03890",
+"sev": "MED",
+"n": 81,
+"town": "r2s-occupied-village-2",
+"section": "Journal/Plot Hooks",
+"fold": "A store of the scarce goods is being kept off the market on purpose (Resource Scarcity)",
+"text": "A store of the scarce goods is being kept off the market on purpose (Resource Scarcity)",
+"why": "hook of scarce goods kept off the market; no scarcity: FOOD secure, River Fishing running, CRISIS is Occupation only",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1214,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "09529",
+"sev": "MED",
+"n": 78,
+"town": "r2s-occupied-metropolis-3",
+"section": "Journal/Power",
+"fold": "External Threat: News of approaching danger divided the community on how to respond",
+"text": "External Threat: News of approaching danger divided the community on how to respond",
+"why": "'News of approaching danger divided the community'; PAST records no such event; the town is already occupied",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1192,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
+"id": "03053",
+"sev": "MED",
+"n": 78,
+"town": "r2s-occupied-metropolis-3",
+"section": "Journal/Plot Hooks",
+"fold": "A diplomatic channel exists that the war party is suppressing (External Threat)",
+"text": "A diplomatic channel exists that the war party is suppressing (External Threat)",
+"why": "hook about a war party suppressing diplomacy; no war party or external threat in PAST or QUARRELS",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1200,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "03015",
+"sev": "MED",
+"n": 60,
+"town": "r2r-under_siege-thorp-1",
+"section": "Journal/Plot Hooks",
+"fold": "A creditor's agent is in town conducting a quiet assessment before enforcement (External Debt)",
+"text": "A creditor's agent is in town conducting a quiet assessment before enforcement (External Debt)",
+"why": "a creditor's agent is in town; under siege nothing comes in by road or water; no debt in CRISIS",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1294,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "21091",
+"sev": "MED",
+"n": 58,
+"town": "r2r-under_siege-thorp-1",
+"section": "Journal/Power",
+"fold": "Outside Debt: The settlement owed a significant debt to an external power that was preparing to collect",
+"text": "Outside Debt: The settlement owed a significant debt to an external power that was preparing to collect",
+"why": "a debt to an external power preparing to collect; CRISIS lists only the siege, no debt stress, QUARRELS none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1282,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
+"id": "03874",
+"sev": "MED",
+"n": 51,
+"town": "r2s-famine-metropolis-2",
+"section": "PDF/HistoryFounding",
+"fold": "A standing levy roster kept ready in the metropolis archive",
+"text": "A standing levy roster kept ready in the metropolis archive",
+"why": "standing levy roster kept in the metropolis archive; DEFENCE militia none and HOUSES has no archive",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1196,
+"fn": "HISTORICAL_EVENTS_DATA.lastingEffects"
+}
+},
+{
+"id": "27026",
+"sev": "MED",
+"n": 48,
+"town": "r2s-plague_onset-village-1",
+"section": "Journal/Plot Hooks",
+"fold": "The investigator who uncovered the corruption has received a death threat (Corruption Scandal)",
+"text": "The investigator who uncovered the corruption has received a death threat (Corruption Scandal)",
+"why": "hook about an investigator who uncovered corruption; no corruption scandal in PAST or QUARRELS",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1274,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "03260",
+"sev": "MED",
+"n": 48,
+"town": "r2s-plague_onset-village-1",
+"section": "Journal/Plot Hooks",
+"fold": "A key witness can be found, but won't speak without protection (Corruption Scandal)",
+"text": "A key witness can be found, but won't speak without protection (Corruption Scandal)",
+"why": "hook about a corruption witness needing protection; no corruption scandal in PAST or QUARRELS",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1275,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "26437",
+"sev": "MED",
+"n": 48,
+"town": "r2s-plague_onset-village-1",
+"section": "Journal/Plot Hooks",
+"fold": "The corruption goes higher than anyone yet suspects; the reformers are being used (Corruption Scandal)",
+"text": "The corruption goes higher than anyone yet suspects; the reformers are being used (Corruption Scandal)",
+"why": "hook says corruption goes higher and reformers are used; no corruption event or reformers in PAST or QUARRELS",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1276,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "26599",
+"sev": "MED",
+"n": 47,
+"town": "r2s-under_siege-village-0",
+"section": "Journal/Plot Hooks",
+"fold": "The departed leader left a sealed document designating a successor, and someone wants it destroyed before it's read (Leadership Vacuum)",
+"text": "The departed leader left a sealed document designating a successor, and someone wants it destroyed before it's read (Leadership Vacuum)",
+"why": "departed leader's sealed successor document; no leader's death in PAST, Household Council governs",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1397,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "00019",
+"sev": "MED",
+"n": 47,
+"town": "r2s-under_siege-village-0",
+"section": "Journal/Plot Hooks",
+"fold": "# claimant has manufactured evidence of a mandate they actually lack (Leadership Vacuum)",
+"text": "One claimant has manufactured evidence of a mandate they actually lack (Leadership Vacuum)",
+"why": "claimant fakes a mandate in a leadership vacuum; GOVERNMENT shows Household Council governing, PAST no vacuum",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1398,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "28364",
+"sev": "MED",
+"n": 47,
+"town": "r2s-under_siege-village-0",
+"section": "Journal/Plot Hooks",
+"fold": "The vacuum is being maintained deliberately by an outside power that benefits from the instability (Leadership Vacuum)",
+"text": "The vacuum is being maintained deliberately by an outside power that benefits from the instability (Leadership Vacuum)",
+"why": "vacuum kept by an outside power; GOVERNMENT shows standing Household Council, Active Siege; no vacuum in PAST",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1399,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "16960",
+"sev": "MED",
+"n": 47,
+"town": "r2s-under_siege-town-2",
+"section": "PDF/Overview",
+"fold": "Military/Guard / Vigilantes / the criminal network",
+"text": "Military/Guard / Vigilantes / the criminal network",
+"why": "slash-joined label 'Military/Guard / Vigilantes / the criminal network' as a name; Vigilantes is no power in GOVERNMENT",
+"kinds": [
+"BROKEN",
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1230,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "08729",
+"sev": "MED",
+"n": 46,
+"town": "r2s-succession_void-thorp-0",
+"section": "PDF/HistoryFounding",
+"fold": "Emergency grain reserves mandated by ordinance since the shortage",
+"text": "Emergency grain reserves mandated by ordinance since the shortage",
+"why": "emergency grain reserves mandated; FOOD granary False, stores 0.1 months",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1210,
+"fn": "HISTORICAL_EVENTS_DATA.lastingEffects"
+}
+},
+{
+"id": "07353",
+"sev": "MED",
+"n": 46,
+"town": "r2r-thorp-51",
+"section": "Journal/Power",
+"fold": "Corruption Scandal: Evidence of official corruption has surfaced but powerful figures resist investigation",
+"text": "Corruption Scandal: Evidence of official corruption has surfaced but powerful figures resist investigation",
+"why": "states a live corruption scandal; CRISIS is Recently Betrayed and PAST records no scandal; one-person roster, one power",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1267,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
+"id": "00840",
+"sev": "MED",
+"n": 39,
+"town": "r2s-occupied-metropolis-1",
+"section": "Journal/History & Founding",
+"fold": "<N> (# years ago): When the occupiers left, they left behind a metropolis of former collaborators and former resisters, none of it ever settled",
+"text": "The Occupation (283 years ago): When the occupiers left, they left behind a metropolis of former collaborators and former resisters, none of it ever settled",
+"why": "says 'when the occupiers left' with nothing ever settled; CRISIS says the town is under occupation now",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyDescVariants.js",
+"line": 65,
+"fn": "HISTORY_DESC_VARIANTS.occupation_legacy"
+}
+},
+{
+"id": "03872",
+"sev": "MED",
+"n": 32,
+"town": "r2s-famine-city-2",
+"section": "PDF/HistoryFounding",
+"fold": "A standing levy roster kept ready in the city archive",
+"text": "A standing levy roster kept ready in the city archive",
+"why": "standing levy roster kept in the city archive; DEFENCE militia none and HOUSES has no archive",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1196,
+"fn": "HISTORICAL_EVENTS_DATA.lastingEffects"
+}
+},
+{
+"id": "12740",
+"sev": "MED",
+"n": 31,
+"town": "r2s-succession_void-thorp-1",
+"section": "Journal/Overview",
+"fold": "Hook: # different powers have approached the players for support, each believing they represent the legitimate or best claim.",
+"text": "Hook: Three different powers have approached the players for support, each believing they represent the legitimate or best claim.",
+"why": "three different powers approach the players for support; GOVERNMENT lists only Elder Council; thorp of 11",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/stressTypes.js",
+"line": 113,
+"fn": "STRESS_TYPE_MAP.succession_void"
+}
+},
+{
+"id": "03675",
+"sev": "MED",
+"n": 30,
+"town": "r2s-under_siege-metropolis-0",
+"section": "PDF/HistoryFounding",
+"fold": "A regency council formed in the interim never fully dissolved",
+"text": "A regency council formed in the interim never fully dissolved",
+"why": "a regency council never fully dissolved; GOVERNMENT powers list no regency council, High Theocratic Council governs",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1394,
+"fn": "HISTORICAL_EVENTS_DATA.lastingEffects"
+}
+},
+{
+"id": "32565",
+"sev": "MED",
+"n": 30,
+"town": "r2s-occupied-hamlet-0",
+"section": "PDF/IdentityDailyLife",
+"fold": "storehouses and caravan yards mark the boundary between settlement and seasonal encampment",
+"text": "storehouses and caravan yards mark the boundary between settlement and seasonal encampment",
+"why": "storehouses and caravan yards mark the settlement edge; hamlet of 20, isolated, no storehouse or caravan house in HOUSES (7)",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/cultureProfiles.js",
+"line": 479,
+"fn": "CULTURE_PROFILES.architecturalDetails"
+}
+},
+{
+"id": "07361",
+"sev": "MED",
+"n": 29,
+"town": "r2r-hamlet-0",
+"section": "PDF/HistoryFounding",
+"fold": "Council seats now formally split between the old guard and the young",
+"text": "Council seats now formally split between the old guard and the young",
+"why": "council seats split; GOVERNMENT lists only Feudal Stewardship, roster of one (the steward), pop 22",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1255,
+"fn": "HISTORICAL_EVENTS_DATA.lastingEffects"
+}
+},
+{
+"id": "22748",
+"sev": "MED",
+"n": 28,
+"town": "r2s-wartime-thorp-1",
+"section": "PDF/HistoryFounding",
+"fold": "Rival claimants still hold competing partial authority",
+"text": "Rival claimants still hold competing partial authority",
+"why": "'rival claimants hold competing partial authority'; GOVERNMENT lists Elder Council (Strong) only; CRISIS is Wartime, Interregnum was 79 years ago",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1393,
+"fn": "HISTORICAL_EVENTS_DATA.lastingEffects"
+}
+},
+{
+"id": "22746",
+"sev": "MED",
+"n": 25,
+"town": "r2s-under_siege-village-3",
+"section": "PDF/HistoryFounding",
+"fold": "Rival charters over the land are both still lodged with the court",
+"text": "Rival charters over the land are both still lodged with the court",
+"why": "charters lodged with 'the court'; HOUSES (16, whole list) has no court; village of 123",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1354,
+"fn": "HISTORICAL_EVENTS_DATA.lastingEffects"
+}
+},
+{
+"id": "24255",
+"sev": "MED",
+"n": 25,
+"town": "r2r-thorp-38",
+"section": "Journal/Tonight",
+"fold": "Someone destroyed the competing supply route. (Resource Scarcity)",
+"text": "Someone destroyed the competing supply route. (Resource Scarcity)",
+"why": "someone destroyed the competing supply route; TRADE imports and exports none, isolated, no supply route exists",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1215,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "29792",
+"sev": "MED",
+"n": 25,
+"town": "r2s-occupied-town-3",
+"section": "PDF/Overview",
+"fold": "Vigilantes / the criminal network",
+"text": "Vigilantes / the criminal network",
+"why": "names vigilantes as a party; no vigilantes in HOUSES or DEFENCE, no crime wave in CRISIS, PAST or QUARRELS",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1230,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "21343",
+"sev": "MED",
+"n": 25,
+"town": "r2s-occupied-town-3",
+"section": "PDF/HistoryFounding",
+"fold": "Parties: Vigilantes vs the criminal network",
+"text": "Parties: Vigilantes vs the criminal network",
+"why": "names vigilantes as a party; no vigilantes in HOUSES or DEFENCE, no crime wave in CRISIS, PAST or QUARRELS",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1230,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "03876",
+"sev": "MED",
+"n": 25,
+"town": "r2r-town-37",
+"section": "PDF/HistoryFounding",
+"fold": "A standing levy roster kept ready in the town archive",
+"text": "A standing levy roster kept ready in the town archive",
+"why": "'standing levy roster kept ready in the town archive'; DEFENCE militia none and HOUSES has no archive",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1196,
+"fn": "HISTORICAL_EVENTS_DATA.lastingEffects"
+}
+},
+{
+"id": "00011",
+"sev": "MED",
+"n": 24,
+"town": "r2s-succession_void-thorp-1",
+"section": "PDF/IdentityDailyLife",
+"fold": "# broad street leading up to the hall organizes the settlement center",
+"text": "one broad street leading up to the hall organizes the settlement center",
+"why": "one broad street leading up to the hall; thorp of 11 with no hall or street in HOUSES (6)",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/cultureProfiles.js",
+"line": 93,
+"fn": "CULTURE_PROFILES.architecturalDetails"
+}
+},
+{
+"id": "31882",
+"sev": "MED",
+"n": 23,
+"town": "r2s-under_siege-hamlet-2",
+"section": "PDF/IdentityDailyLife",
+"fold": "carved stone and timber markers stand where roads meet the assembly ground",
+"text": "carved stone and timber markers stand where roads meet the assembly ground",
+"why": "markers where roads meet the assembly ground; trade access river, no assembly ground in HOUSES; siege shuts roads",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/cultureProfiles.js",
+"line": 178,
+"fn": "CULTURE_PROFILES.architecturalDetails"
+}
+},
+{
+"id": "03824",
+"sev": "MED",
+"n": 23,
+"town": "r2s-famine-city-3",
+"section": "PDF/IdentityDailyLife",
+"fold": "A small permanent guard relies on rapid reinforcement from a dispersed mounted population.",
+"text": "A small permanent guard relies on rapid reinforcement from a dispersed mounted population.",
+"why": "says a small permanent guard relies on reinforcement; DEFENCE has a Fortress with garrison, city watch and a mercenary quarter",
+"kinds": [
+"STATE",
+"TAG"
+],
+"writer": {
+"file": "src/data/cultureProfiles.js",
+"line": 471,
+"fn": "CULTURE_PROFILES.defensePattern"
+}
+},
+{
+"id": "10493",
+"sev": "MED",
+"n": 23,
+"town": "r2s-wartime-thorp-2",
+"section": "Journal/Identity & Daily Life",
+"fold": "Foodways: Water access and preservation skill determine the balance between local produce and caravan-borne staples.",
+"text": "Foodways: Water access and preservation skill determine the balance between local produce and caravan-borne staples.",
+"why": "balance with caravan-borne staples; imports none, trade access isolated",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/cultureProfiles.js",
+"line": 205,
+"fn": "CULTURE_PROFILES.foodways"
+}
+},
+{
+"id": "06578",
+"sev": "MED",
+"n": 22,
+"town": "r2s-under_siege-city-2",
+"section": "PDF/IdentityDailyLife",
+"fold": "Citizen or district levies provide defense; stone enclosures, towers, fortified heights, and naval assets where relevant follow as a place grows.",
+"text": "Citizen or district levies provide defense; stone enclosures, towers, fortified heights, and naval assets where relevant follow as a place grows.",
+"why": "levies provide defense, stone enclosures follow as a place grows; DEFENCE has city walls, Garrison, city watch, militia none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/cultureProfiles.js",
+"line": 513,
+"fn": "CULTURE_PROFILES.defensePattern"
+}
+},
+{
+"id": "11833",
+"sev": "MED",
+"n": 21,
+"town": "r2s-under_siege-city-3",
+"section": "PDF/IdentityDailyLife",
+"fold": "Guild-regulated craft production and overland fairs organize exchange.",
+"text": "Guild-regulated craft production and overland fairs organize exchange.",
+"why": "overland fairs organize exchange; HOUSES has no fair, Caravan & Overland Trade impaired, Active Siege",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/cultureProfiles.js",
+"line": 71,
+"fn": "CULTURE_PROFILES.exchangePattern"
+}
+},
+{
+"id": "03662",
+"sev": "MED",
+"n": 20,
+"town": "r2s-under_siege-hamlet-0",
+"section": "Journal/Plot Hooks",
+"fold": "A recent magical accident was covered up and the victims silenced (Magical Controversy)",
+"text": "A recent magical accident was covered up and the victims silenced (Magical Controversy)",
+"why": "'recent' magical accident; PAST gives Arcane Incident 69 years ago",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1244,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "00615",
+"sev": "MED",
+"n": 20,
+"town": "r2s-under_siege-hamlet-3",
+"section": "PDF/IdentityDailyLife",
+"fold": "#-timbered upper floors project above the busier lanes",
+"text": "half-timbered upper floors project above the busier lanes",
+"why": "'busier lanes' in a hamlet of 80; tag reaches thorps; no lanes or districts for a place this size",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/cultureProfiles.js",
+"line": 91,
+"fn": "CULTURE_PROFILES.architecturalDetails"
+}
+},
+{
+"id": "28360",
+"sev": "MED",
+"n": 20,
+"town": "r2s-plague_onset-city-3",
+"section": "Journal/Plot Hooks",
+"fold": "The uprising was funded by an outside hand that has come back to collect on the favour (Popular Uprising)",
+"text": "The uprising was funded by an outside hand that has come back to collect on the favour (Popular Uprising)",
+"why": "an uprising funded by an outside hand: PAST records no uprising",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1493,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "02983",
+"sev": "MED",
+"n": 20,
+"town": "r2s-plague_onset-city-3",
+"section": "Journal/Plot Hooks",
+"fold": "A concession won in the revolt is being quietly rolled back, and the old anger is stirring again (Popular Uprising)",
+"text": "A concession won in the revolt is being quietly rolled back, and the old anger is stirring again (Popular Uprising)",
+"why": "a concession won in the revolt: PAST records no revolt",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1494,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "15945",
+"sev": "MED",
+"n": 20,
+"town": "r2r-thorp-53",
+"section": "Journal/Power",
+"fold": "Magical Controversy: Debate over the role and regulation of magic divided the community",
+"text": "Magical Controversy: Debate over the role and regulation of magic divided the community",
+"why": "says debate over magic divided the community; PAST records only a Trade Collapse; no faction powers or quarrels exist",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1237,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
+"id": "00732",
+"sev": "MED",
+"n": 20,
+"town": "r2s-slave_revolt-hamlet-1",
+"section": "Journal/History & Founding",
+"fold": "<N> (# years ago): After years of disputed grain prices, the major farming families and the guilds negotiated a formal compact regulating grain sale and storage.",
+"text": "The Great Harvest Compact (21 years ago): After years of disputed grain prices, the major farming families and the guilds negotiated a formal compact regulating grain sale and storage.",
+"why": "'the major farming families and the guilds' in a hamlet of 36; no guild in HOUSES",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1723,
+"fn": "HISTORY_DESC_SIBLINGS"
+}
+},
+{
+"id": "27566",
+"sev": "MED",
+"n": 19,
+"town": "r2s-under_siege-village-0",
+"section": "Journal/Plot Hooks",
+"fold": "The plague pit holds a body that matches no # on the list of the dead (Plague Years)",
+"text": "The plague pit holds a body that matches no one on the list of the dead (Plague Years)",
+"why": "plague pit and list of the dead; PAST has no plague, only a flood and wild magic",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1449,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "27659",
+"sev": "MED",
+"n": 19,
+"town": "r2s-under_siege-village-0",
+"section": "Journal/Plot Hooks",
+"fold": "The quarantine was used to settle old scores, and the survivors remember exactly who (Plague Years)",
+"text": "The quarantine was used to settle old scores, and the survivors remember exactly who (Plague Years)",
+"why": "a quarantine used to settle scores; PAST records no plague or quarantine",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1450,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "21602",
+"sev": "MED",
+"n": 19,
+"town": "r2s-under_siege-village-0",
+"section": "Journal/Power",
+"fold": "Plague Years: A sickness moved through the settlement for # seasons, thinning families and testing every institution to its limit",
+"text": "Plague Years: A sickness moved through the settlement for three seasons, thinning families and testing every institution to its limit",
+"why": "a sickness moved through for three seasons; PAST lists no plague",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1445,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
+"id": "02942",
+"sev": "MED",
+"n": 19,
+"town": "r2s-occupied-town-1",
+"section": "Journal/Plot Hooks",
+"fold": "A clause in the compact entitles certain families to first refusal on grain sales, and the current shortage makes that clause valuable (Economic Event)",
+"text": "A clause in the compact entitles certain families to first refusal on grain sales, and the current shortage makes that clause valuable (Economic Event)",
+"why": "says the current shortage makes the clause valuable; FOOD band secure, gap 1%, stores 5.8 months with a granary, no shortage",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/historyGenerator.js",
+"line": 794,
+"fn": "generateRelationshipEvent"
+}
+},
+{
+"id": "07923",
+"sev": "MED",
+"n": 19,
+"town": "r2r-town-7",
+"section": "Journal/Identity & Daily Life",
+"fold": "Dense bazaar streets, occupational #, courtyard homes, shrines, tanks, and shaded arcades interlock.",
+"text": "Dense bazaar streets, occupational quarters, courtyard homes, shrines, tanks, and shaded arcades interlock.",
+"why": "'dense bazaar streets, occupational quarters' in a town of 723; HOUSES has only a weekly market and square, no bazaar or quarters",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/cultureProfiles.js",
+"line": 407,
+"fn": "CULTURE_PROFILES.builtForm"
+}
+},
+{
+"id": "06712",
+"sev": "MED",
+"n": 17,
+"town": "r2s-under_siege-metropolis-3",
+"section": "PDF/IdentityDailyLife",
+"fold": "Civic musters come first; paid guards are added only when a threat lasts and the town can pay.",
+"text": "Civic musters come first; paid guards are added only when a threat lasts and the town can pay.",
+"why": "civic musters come first, paid guards only added later; DEFENCE has Multiple garrisons, Professional city watch, massive walls, militia none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/cultureProfiles.js",
+"line": 514,
+"fn": "CULTURE_PROFILES.defensePattern"
+}
+},
+{
+"id": "05679",
+"sev": "MED",
+"n": 17,
+"town": "r2s-occupied-metropolis-3",
+"section": "PDF/IdentityDailyLife",
+"fold": "Bazaars, merchant houses, craft corporations, credit, pilgrimage, and caravan or maritime routes support exchange.",
+"text": "Bazaars, merchant houses, craft corporations, credit, pilgrimage, and caravan or maritime routes support exchange.",
+"why": "exchange supported by 'maritime routes'; trade access is crossroads in the hills and HOUSES has no docks or port",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/cultureProfiles.js",
+"line": 415,
+"fn": "CULTURE_PROFILES.exchangePattern"
+}
+},
+{
+"id": "22688",
+"sev": "MED",
+"n": 16,
+"town": "r2r-village-21",
+"section": "Journal/Power",
+"fold": "Resource Scarcity: Among the trades the place lives by, the fish trade is under strain.",
+"text": "Resource Scarcity: Among the trades the place lives by, the fish trade is under strain.",
+"why": "fish trade under strain / resource scarcity; LAND gives Fishing Grounds available and Fishing & Seafood running",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1813,
+"fn": "livelihoodLead"
+}
+},
+{
+"id": "03239",
+"sev": "MED",
+"n": 16,
+"town": "r2s-plague_onset-city-0",
+"section": "PDF/IdentityDailyLife",
+"fold": "A household levy is the common defense; a retinue stands beside it only where a lord can keep #.",
+"text": "A household levy is the common defense; a retinue stands beside it only where a lord can keep one.",
+"why": "a household levy is the common defense; DEFENCE has militia none, but a Garrison, Professional city watch and Mercenary quarter",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/cultureProfiles.js",
+"line": 299,
+"fn": "CULTURE_PROFILES.defensePattern"
+}
+},
+{
+"id": "21681",
+"sev": "MED",
+"n": 16,
+"town": "r2s-famine-town-1",
+"section": "Journal/Power",
+"fold": "Popular Uprising: The common people rose against the ruling powers over guild recognition and fair wages, and the settlement has never entirely closed the account",
+"text": "Popular Uprising: The common people rose against the ruling powers over guild recognition and fair wages, and the settlement has never entirely closed the account",
+"why": "a popular uprising the settlement never closed; PAST records no uprising, only Succession Crisis, Great Harvest Compact, Arcane Incident",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1489,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
+"id": "26274",
+"sev": "MED",
+"n": 15,
+"town": "r2s-under_siege-city-1",
+"section": "PDF/Overview",
+"fold": "The changed and their descendants / Those who fear them / Scholars studying the residue",
+"text": "The changed and their descendants / Those who fear them / Scholars studying the residue",
+"why": "'the changed and their descendants', 'the residue'; PAST has no magical event, magic low; also slash-joined party label as a name",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1513,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
+}
+},
+{
+"id": "02848",
+"sev": "MED",
+"n": 15,
+"town": "r2s-under_siege-city-1",
+"section": "Journal/Plot Hooks",
+"fold": "A bloodline touched by the surge is now manifesting something the family cannot conceal (Wild Magic)",
+"text": "A bloodline touched by the surge is now manifesting something the family cannot conceal (Wild Magic)",
+"why": "bloodline touched by the surge; PAST records no wild magic surge",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1516,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "19232",
+"sev": "MED",
+"n": 15,
+"town": "r2s-plague_onset-town-0",
+"section": "PDF/IdentityDailyLife",
+"fold": "Mounted patrols and household troops reinforce ward-based watches.",
+"text": "Mounted patrols and household troops reinforce ward-based watches.",
+"why": "mounted patrols, household troops and ward-based watches: DEFENCE garrison none, militia none, only a Town watch; wards in a town of 830",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/cultureProfiles.js",
+"line": 213,
+"fn": "CULTURE_PROFILES.defensePattern"
+}
+},
+{
+"id": "26624",
+"sev": "MED",
+"n": 15,
+"town": "r2s-occupied-thorp-2",
+"section": "Journal/Plot Hooks",
+"fold": "The evidence that convicted the heretic was fabricated, and a witness is finally willing to say so (Heresy Trial)",
+"text": "The evidence that convicted the heretic was fabricated, and a witness is finally willing to say so (Heresy Trial)",
+"why": "evidence that convicted the heretic; PAST records no heresy trial (Pilgrimage, Purge only)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1470,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "00788",
+"sev": "MED",
+"n": 15,
+"town": "r2s-wartime-thorp-1",
+"section": "Journal/History & Founding",
+"fold": "<N> (# years ago): The last strong leader died or left, and no # has yet consolidated their position",
+"text": "The Interregnum (79 years ago): The last strong leader died or left, and no one has yet consolidated their position",
+"why": "'no one has yet consolidated their position' for an event 79 years ago; GOVERNMENT has a Strong Elder Council and a named elder",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1386,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
+"id": "03877",
+"sev": "MED",
+"n": 14,
+"town": "r2s-occupied-village-3",
+"section": "PDF/HistoryFounding",
+"fold": "A standing levy roster kept ready in the village archive",
+"text": "A standing levy roster kept ready in the village archive",
+"why": "standing levy roster kept in the village archive; HOUSES has no archive and DEFENCE shows militia none, every force none",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1196,
+"fn": "HISTORICAL_EVENTS_DATA.lastingEffects"
+}
+},
+{
+"id": "03685",
+"sev": "MED",
+"n": 14,
+"town": "r2s-occupied-thorp-2",
+"section": "Journal/Plot Hooks",
+"fold": "A relic seized during the trial never reached the vault it was bound for (Heresy Trial)",
+"text": "A relic seized during the trial never reached the vault it was bound for (Heresy Trial)",
+"why": "relic seized during the trial; PAST records no heresy trial",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1472,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "10551",
+"sev": "MED",
+"n": 14,
+"town": "r2r-town-7",
+"section": "PDF/IdentityDailyLife",
+"fold": "Fortified precincts, gates, watch towers, protected tanks, and elephant or cavalry yards support strategic defense.",
+"text": "Fortified precincts, gates, watch towers, protected tanks, and elephant or cavalry yards support strategic defense.",
+"why": "'watch towers, elephant or cavalry yards, fortified precincts'; DEFENCE has only walls and a watch, garrison/militia none, defence Vulnerable",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/cultureProfiles.js",
+"line": 427,
+"fn": "CULTURE_PROFILES.defensePattern"
+}
+},
+{
+"id": "07926",
+"sev": "MED",
+"n": 14,
+"town": "r2r-town-57",
+"section": "Journal/Identity & Daily Life",
+"fold": "Dense street blocks open into arcades, fountains, markets, and reused monumental precincts.",
+"text": "Dense street blocks open into arcades, fountains, markets, and reused monumental precincts.",
+"why": "'dense street blocks', arcades, fountains and 'monumental precincts' in a town of 1,144; HOUSES has a market square and a citadel only",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/cultureProfiles.js",
+"line": 107,
+"fn": "CULTURE_PROFILES.builtForm"
+}
+},
+{
+"id": "03875",
+"sev": "MED",
+"n": 13,
+"town": "r2s-occupied-thorp-1",
+"section": "PDF/HistoryFounding",
+"fold": "A standing levy roster kept ready in the thorp archive",
+"text": "A standing levy roster kept ready in the thorp archive",
+"why": "standing levy roster kept in a thorp archive; HOUSES has no archive and DEFENCE shows no militia or force",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1196,
+"fn": "HISTORICAL_EVENTS_DATA.lastingEffects"
+}
+},
+{
+"id": "21685",
+"sev": "MED",
+"n": 13,
+"town": "r2s-infiltrated-thorp-0",
+"section": "Journal/Power",
+"fold": "Population Friction: A recently arrived group and the established population fell into sustained, low-level conflict",
+"text": "Population Friction: A recently arrived group and the established population fell into sustained, low-level conflict",
+"why": "says a recently arrived group is in sustained conflict; CRISIS is Infiltrated, QUARRELS none, only migration in PAST is 175 years ago",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1366,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
+"id": "26113",
+"sev": "MED",
+"n": 12,
+"town": "r2s-under_siege-city-1",
+"section": "Journal/Plot Hooks",
+"fold": "The affected district is slowly spreading its strangeness, and the authorities are pretending otherwise (Wild Magic)",
+"text": "The affected district is slowly spreading its strangeness, and the authorities are pretending otherwise (Wild Magic)",
+"why": "affected district spreading strangeness; PAST records no wild magic",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1517,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "22272",
+"sev": "MED",
+"n": 12,
+"town": "r2s-occupied-town-3",
+"section": "PDF/HistoryFounding",
+"fold": "Quarrymen's guild retains unusual civic influence",
+"text": "Quarrymen's guild retains unusual civic influence",
+"why": "says a quarrymen's guild retains civic influence; HOUSES has no such guild, GOVERNMENT lists none, LAND has the stone quarry depleted",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1719,
+"fn": "HISTORY_DESC_SIBLINGS"
+}
+},
+{
+"id": "16801",
+"sev": "MED",
+"n": 12,
+"town": "r2s-occupied-metropolis-0",
+"section": "PDF/Overview",
+"fold": "Merchants tied to the old partner / Those who want new partners / Authorities caught between them",
+"text": "Merchants tied to the old partner / Those who want new partners / Authorities caught between them",
+"why": "factions around an 'old partner' and 'new partners' presume a trade dispute; PAST and QUARRELS record none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1560,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
+}
+},
+{
+"id": "26610",
+"sev": "MED",
+"n": 12,
+"town": "r2s-occupied-metropolis-0",
+"section": "Journal/Plot Hooks",
+"fold": "The dispute is being kept alive by someone who profits from the uncertainty on both sides (Trade Dispute)",
+"text": "The dispute is being kept alive by someone who profits from the uncertainty on both sides (Trade Dispute)",
+"why": "hook about a trade dispute kept alive for profit; PAST and QUARRELS record no trade dispute",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1562,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "02995",
+"sev": "MED",
+"n": 12,
+"town": "r2s-occupied-metropolis-0",
+"section": "Journal/Plot Hooks",
+"fold": "A contract clause that could end the dispute has been deliberately misfiled (Trade Dispute)",
+"text": "A contract clause that could end the dispute has been deliberately misfiled (Trade Dispute)",
+"why": "hook about a misfiled contract clause ending 'the dispute'; no trade dispute in PAST or QUARRELS",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1563,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "27535",
+"sev": "MED",
+"n": 12,
+"town": "r2s-occupied-metropolis-0",
+"section": "Journal/Plot Hooks",
+"fold": "The partner settlement is applying pressure through a debt no # here wants to acknowledge (Trade Dispute)",
+"text": "The partner settlement is applying pressure through a debt no one here wants to acknowledge (Trade Dispute)",
+"why": "hook about a partner settlement pressing a debt; no partner dispute recorded in PAST or QUARRELS",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1564,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "25477",
+"sev": "MED",
+"n": 12,
+"town": "r2r-town-36",
+"section": "PDF/IdentityDailyLife",
+"fold": "Terraces, causeways, controlled approaches, fortified heights, and organized military orders shape defense.",
+"text": "Terraces, causeways, controlled approaches, fortified heights, and organized military orders shape defense.",
+"why": "'fortified heights, organized military orders' shape defense; DEFENCE shows only walls and a watch, garrison none, militia none",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/cultureProfiles.js",
+"line": 384,
+"fn": "CULTURE_PROFILES.defensePattern"
+}
+},
+{
+"id": "14168",
+"sev": "MED",
+"n": 11,
+"town": "r2s-under_siege-city-1",
+"section": "Journal/Power",
+"fold": "Infiltration Fear: Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations",
+"text": "Infiltration Fear: Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations",
+"why": "rumours of enemy agents caused denunciations; PAST records no purge or infiltration event",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1326,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
+"id": "21269",
+"sev": "MED",
+"n": 11,
+"town": "r2s-plague_onset-village-1",
+"section": "PDF/HistoryFounding",
+"fold": "Parties: Elder Council vs Reformers vs Complicit beneficiaries",
+"text": "Parties: Elder Council vs Reformers vs Complicit beneficiaries",
+"why": "Parties include Reformers and Complicit beneficiaries; QUARRELS is none, only Elder Council vs Religious Authorities tense",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1268,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
+}
+},
+{
+"id": "31884",
+"sev": "MED",
+"n": 11,
+"town": "r2r-village-43",
+"section": "PDF/IdentityDailyLife",
+"fold": "causeways and managed water divide the settlement into organized neighborhoods",
+"text": "causeways and managed water divide the settlement into organized neighborhoods",
+"why": "causeways and managed water dividing the settlement into organized neighborhoods; terrain is Hills, marshland depleted, village of 149 with nine houses",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/cultureProfiles.js",
+"line": 394,
+"fn": "CULTURE_PROFILES.architecturalDetails"
+}
+},
+{
+"id": "32800",
+"sev": "MED",
+"n": 11,
+"town": "r2s-religious_conversion-town-0",
+"section": "PDF/IdentityDailyLife",
+"fold": "ward gates, shop fronts, and planted courtyards divide public from household space",
+"text": "ward gates, shop fronts, and planted courtyards divide public from household space",
+"why": "'ward gates' presumes wards and gates; town of 474 has walls: none and HOUSES lists no wards",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/cultureProfiles.js",
+"line": 350,
+"fn": "CULTURE_PROFILES.architecturalDetails"
+}
+},
+{
+"id": "26687",
+"sev": "MED",
+"n": 10,
+"town": "r2s-plague_onset-city-0",
+"section": "Journal/Plot Hooks",
+"fold": "The flood uncovered an old foundation under the mud, and someone has been digging there at night (Great Flood)",
+"text": "The flood uncovered an old foundation under the mud, and someone has been digging there at night (Great Flood)",
+"why": "the flood uncovered an old foundation: PAST records no flood",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1461,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "27028",
+"sev": "MED",
+"n": 9,
+"town": "r2r-thorp-51",
+"section": "Journal/Tonight",
+"fold": "The investigator who uncovered the corruption has received a death threat. (Corruption Scandal)",
+"text": "The investigator who uncovered the corruption has received a death threat. (Corruption Scandal)",
+"why": "an investigator exists; roster of one has no investigator; CRISIS is Recently Betrayed, no corruption scandal in PAST",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1274,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "21238",
+"sev": "MED",
+"n": 9,
+"town": "r2s-succession_void-thorp-2",
+"section": "PDF/HistoryFounding",
+"fold": "Parties: <N> vs Popular candidate",
+"text": "Parties: Household Council vs Popular candidate",
+"why": "'Popular candidate' as a party vs Household Council; GOVERNMENT lists one power, roster of one",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1133,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
+}
+},
+{
+"id": "29579",
+"sev": "MED",
+"n": 9,
+"town": "r2r-thorp-20",
+"section": "Journal/Power",
+"fold": "Tyranny: A single figure seized power through legal maneuvering and ruled without check for a time, and the memory still shapes who is trusted with authority",
+"text": "Tyranny: A single figure seized power through legal maneuvering and ruled without check for a time, and the memory still shapes who is trusted with authority",
+"why": "a single figure seized power and ruled without check; PAST records only Succession Crisis and Migration",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1500,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
+"id": "08257",
+"sev": "MED",
+"n": 8,
+"town": "r2r-city-19",
+"section": "PDF/IdentityDailyLife",
+"fold": "Ditches and banks come first; heavier timber works follow only where a place can build and man them.",
+"text": "Ditches and banks come first; heavier timber works follow only where a place can build and man them.",
+"why": "defence is ditches and banks with timber works only later; town is a Fortress with City walls and gates, a Citadel and a Garrison",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "src/data/cultureProfiles.js",
+"line": 169,
+"fn": "CULTURE_PROFILES.defensePattern"
+}
+},
+{
+"id": "27668",
+"sev": "MED",
+"n": 8,
+"town": "r2s-under_siege-village-1",
+"section": "PDF/HistoryFounding",
+"fold": "The quarrymen's families retain unusual civic influence",
+"text": "The quarrymen's families retain unusual civic influence",
+"why": "'the quarrymen's families' hold civic influence; HOUSES has no quarry and LAND says the stone is a resource nobody works",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1721,
+"fn": "HISTORY_DESC_SIBLINGS"
+}
+},
+{
+"id": "03873",
+"sev": "MED",
+"n": 7,
+"town": "r2s-plague_onset-hamlet-2",
+"section": "PDF/HistoryFounding",
+"fold": "A standing levy roster kept ready in the hamlet archive",
+"text": "A standing levy roster kept ready in the hamlet archive",
+"why": "'standing levy roster kept ready in the hamlet archive'; DEFENCE militia none, nothing and no archive in HOUSES",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1196,
+"fn": "HISTORICAL_EVENTS_DATA.lastingEffects"
+}
+},
+{
+"id": "29429",
+"sev": "MED",
+"n": 7,
+"town": "r2r-thorp-26",
+"section": "Journal/Power",
+"fold": "Trade Collapse: The overland trade the settlement was built upon failed, and the wealth it once carried drained away within a few hard years",
+"text": "Trade Collapse: The overland trade the settlement was built upon failed, and the wealth it once carried drained away within a few hard years",
+"why": "states a trade collapse that failed overland trade; PAST records no trade collapse (Succession Crisis, Siege, Shortage only); CRISIS is Infiltrated",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1423,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
+"id": "00726",
+"sev": "MED",
+"n": 7,
+"town": "r2s-monster_pressure-city-0",
+"section": "Journal/History & Founding",
+"fold": "<N> (# years ago): A surge of magic no # could contain marked the temple district and everyone caught in it, and what it did has never entirely worn away",
+"text": "The Wild Magic (153 years ago): A surge of magic no one could contain marked the temple district and everyone caught in it, and what it did has never entirely worn away",
+"why": "names a 'temple district'; HOUSES has parish churches and monasteries, no temple district",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyDescVariants.js",
+"line": 120,
+"fn": "HISTORY_DESC_VARIANTS.wild_magic"
+}
+},
+{
+"id": "32584",
+"sev": "MED",
+"n": 5,
+"town": "r2s-succession_void-hamlet-1",
+"section": "PDF/IdentityDailyLife",
+"fold": "the assembly ground sits between the principal hall and the landing",
+"text": "the assembly ground sits between the principal hall and the landing",
+"why": "names a principal hall and a landing; HOUSES has neither (no hall, no fisher's landing)",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/cultureProfiles.js",
+"line": 265,
+"fn": "CULTURE_PROFILES.architecturalDetails"
+}
+},
+{
+"id": "21680",
+"sev": "MED",
+"n": 4,
+"town": "r2r-thorp-23",
+"section": "Journal/Power",
+"fold": "Popular Uprising: The common people rose against the ruling powers over better working conditions, and the settlement has never entirely closed the account",
+"text": "Popular Uprising: The common people rose against the ruling powers over better working conditions, and the settlement has never entirely closed the account",
+"why": "a popular uprising happened; PAST lists Migration, Succession Crisis, Religious Conflict only; CRISIS none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1489,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
+"id": "04949",
+"sev": "MED",
+"n": 4,
+"town": "r2s-monster_pressure-town-3",
+"section": "PDF/HistoryFounding",
+"fold": "Arcane regulatory body established with unusual local authority",
+"text": "Arcane regulatory body established with unusual local authority",
+"why": "claims an arcane regulatory body with local authority; GOVERNMENT lists no arcane power and HOUSES has no arcane house",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1735,
+"fn": "HISTORY_DESC_SIBLINGS"
+}
+},
+{
+"id": "00672",
+"sev": "MED",
+"n": 4,
+"town": "r2r-town-19",
+"section": "Journal/History & Founding",
+"fold": "<N> (# years ago): A fire out of the riverside # spread through barges, warehouses, and wharf infrastructure across entire districts before anyone could bring it under control",
+"text": "The Great Fire (68 years ago): A fire out of the riverside quarter spread through barges, warehouses, and wharf infrastructure across entire districts before anyone could bring it under control",
+"why": "fire spread through barges, warehouses, wharf works and entire districts; HOUSES has no docks or warehouses; town of 1590 holds no districts",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/historyGenerator.js",
+"line": 1268,
+"fn": "noteByTemplateRow"
+}
+},
+{
+"id": "03263",
+"sev": "MED",
+"n": 3,
+"town": "r2r-thorp-51",
+"section": "Journal/Tonight",
+"fold": "A key witness can be found, but won't speak without protection. (Corruption Scandal)",
+"text": "A key witness can be found, but won't speak without protection. (Corruption Scandal)",
+"why": "a key witness who needs protection; PEOPLE whole roster is one person; no corruption scandal in CRISIS or PAST",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1275,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "22499",
+"sev": "MED",
+"n": 3,
+"town": "r2s-plague_onset-city-3",
+"section": "PDF/Overview",
+"fold": "Religious Authorities / Poor workers / Moderate reformers",
+"text": "Religious Authorities / Poor workers / Moderate reformers",
+"why": "names parties 'Poor workers / Moderate reformers'; GOVERNMENT powers and QUARRELS (Council vs Hidden Hand) list no such powers; slash-joined",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1148,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
+}
+},
+{
+"id": "15946",
+"sev": "MED",
+"n": 3,
+"town": "r2r-city-14",
+"section": "Journal/Power",
+"fold": "Magical Controversy: The question of how far magic should be permitted or controlled split the settlement",
+"text": "Magical Controversy: The question of how far magic should be permitted or controlled split the settlement",
+"why": "says a magic controversy split the settlement; PAST records no such event, only a minor Arcane Incident 349 years ago; magic is low",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyDescVariants.js",
+"line": 48,
+"fn": "HISTORY_DESC_VARIANTS.magical_controversy"
+}
+},
+{
+"id": "09592",
+"sev": "MED",
+"n": 3,
+"town": "r2s-infiltrated-metropolis-2",
+"section": "PDF/Overview",
+"fold": "Families still seeking someone to blame / Rebuilders and profiteers / Those accused of setting it",
+"text": "Families still seeking someone to blame / Rebuilders and profiteers / Those accused of setting it",
+"why": "parties 'blame' and 'those accused of setting it' describe a fire; CRISIS is Infiltrated, and the Great Fire in PAST was 503 years ago",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1435,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
+}
+},
+{
+"id": "21279",
+"sev": "MED",
+"n": 2,
+"town": "r2s-occupied-hamlet-2",
+"section": "PDF/HistoryFounding",
+"fold": "Parties: Free Elder Council vs Reformers vs Complicit beneficiaries",
+"text": "Parties: Free Elder Council vs Reformers vs Complicit beneficiaries",
+"why": "Parties: Reformers and Complicit beneficiaries set against Free Elder Council; not powers in GOVERNMENT, omits Occupation Authority, QUARRELS none",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1268,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
+}
+},
+{
+"id": "00792",
+"sev": "MED",
+"n": 2,
+"town": "r2s-infiltrated-hamlet-3",
+"section": "Journal/History & Founding",
+"fold": "<N> (# years ago): The mountain trade the settlement was built upon failed, and the wealth it once carried drained away within a few hard years",
+"text": "The Trade Collapse (63 years ago): The mountain trade the settlement was built upon failed, and the wealth it once carried drained away within a few hard years",
+"why": "says 'the mountain trade' built the settlement; terrain is Forest and FOUNDING is a logging camp",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1423,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
+"id": "31195",
+"sev": "MED",
+"n": 2,
+"town": "r2r-hamlet-2",
+"section": "Journal/Power",
+"fold": "Wild Magic: An uncontrolled surge of magic left its mark on the low ground and on the people who were there, and the effects have never fully faded",
+"text": "Wild Magic: An uncontrolled surge of magic left its mark on the low ground and on the people who were there, and the effects have never fully faded",
+"why": "describes a past wild-magic surge whose effects never faded; PAST records only the Succession Crisis 9 years ago",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1512,
+"fn": "HISTORICAL_EVENTS_DATA.severity"
+}
+},
+{
+"id": "26135",
+"sev": "MED",
+"n": 2,
+"town": "r2s-famine-village-2",
+"section": "Journal/Plot Hooks",
+"fold": "The agents' handler is someone the village trusts, and the players have already met them (Infiltration Fear)",
+"text": "The agents' handler is someone the village trusts, and the players have already met them (Infiltration Fear)",
+"why": "infiltration story of an agents' handler; PAST records only an Economic Divide, no purge or infiltration",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1339,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "02985",
+"sev": "MED",
+"n": 1,
+"town": "r2r-thorp-50",
+"section": "Journal/Tonight",
+"fold": "A concession won in the revolt is being quietly rolled back, and the old anger is stirring again. (Popular Uprising)",
+"text": "A concession won in the revolt is being quietly rolled back, and the old anger is stirring again. (Popular Uprising)",
+"why": "refers to a revolt and its concession; PAST records only Occupation, Religious Conflict and Wild Magic, no uprising",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1494,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "04496",
+"sev": "MED",
+"n": 1,
+"town": "r2r-thorp-12",
+"section": "Journal/Tonight",
+"fold": "An innocent person has been identified as a spy and is about to be executed. (Infiltration Fear)",
+"text": "An innocent person has been identified as a spy and is about to be executed. (Infiltration Fear)",
+"why": "an innocent spy-accused is about to be executed; no infiltration event in PAST and safety is Safe",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1338,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "02944",
+"sev": "MED",
+"n": 1,
+"town": "r2r-hamlet-31",
+"section": "Journal/Tonight",
+"fold": "A clause in the compact entitles certain families to first refusal on grain sales, and the current shortage makes that clause valuable. (Economic Event)",
+"text": "A clause in the compact entitles certain families to first refusal on grain sales, and the current shortage makes that clause valuable. (Economic Event)",
+"why": "says 'the current shortage' makes the clause valuable; CRISIS none, FOOD Secure with 28% surplus, PAST records no present shortage",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/historyGenerator.js",
+"line": 794,
+"fn": "generateRelationshipEvent"
+}
+},
+{
+"id": "26384",
+"sev": "MED",
+"n": 1,
+"town": "r2r-hamlet-25",
+"section": "Journal/Plot Hooks",
+"fold": "The condemned doctrine is quietly practised still, by more of the hamlet's leaders than would admit it (Heresy Trial)",
+"text": "The condemned doctrine is quietly practised still, by more of the hamlet's leaders than would admit it (Heresy Trial)",
+"why": "heresy-trial story ('condemned doctrine'); PAST lists Purge, Pilgrimage, Siege, Arcane Incident and no heresy trial",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1471,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "00693",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-56",
+"section": "Journal/History & Founding",
+"fold": "<N> (# years ago): A period of ambitious stone building transformed the settlement's character, its walls and its larger houses raised from local quarry stone.",
+"text": "The Great Construction (17 years ago): A period of ambitious stone building transformed the settlement's character, its walls and its larger houses raised from local quarry stone.",
+"why": "says walls raised from quarry stone; DEFENCE walls are only a palisade or earthworks, and stone is imported as cut stone",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1712,
+"fn": "HISTORY_DESC_SIBLINGS"
+}
+},
+{
+"id": "03234",
+"sev": "MED",
+"n": 1,
+"town": "r2r-town-43",
+"section": "Journal/Tonight",
+"fold": "A hidden ledger documenting wage theft is circulating in the workers' #. (Economic Event)",
+"text": "A hidden ledger documenting wage theft is circulating in the workers' quarter. (Economic Event)",
+"why": "a ledger circulating in the workers' quarter; a quarter is a district a town of 366 (12 named people) cannot hold",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1155,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "21323",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-18",
+"section": "PDF/HistoryFounding",
+"fold": "Parties: Royal Authority vs Reformers vs Complicit beneficiaries",
+"text": "Parties: Royal Authority vs Reformers vs Complicit beneficiaries",
+"why": "names Reformers and Complicit beneficiaries as parties; GOVERNMENT lists neither as a power, and QUARRELS pairs Royal Authority with Merchant Guilds, Nobles, Religious",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1268,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
+}
+},
+{
+"id": "11518",
+"sev": "MED",
+"n": 1,
+"town": "r2s-under_siege-metropolis-1",
+"section": "PDF/Overview",
+"fold": "Grand Military Council / Vigilantes / the criminal network",
+"text": "Grand Military Council / Vigilantes / the criminal network",
+"why": "triad names Vigilantes and a criminal network as parties; GOVERNMENT lists neither as a power; slash-joined label used as a name",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1230,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "21283",
+"sev": "MED",
+"n": 1,
+"town": "r2s-under_siege-metropolis-1",
+"section": "PDF/HistoryFounding",
+"fold": "Parties: Grand Military Council vs Vigilantes vs the criminal network",
+"text": "Parties: Grand Military Council vs Vigilantes vs the criminal network",
+"why": "names Vigilantes and the criminal network as parties; GOVERNMENT and QUARRELS list neither; QUARRELS pairs Council with Military/Guard and Noble Houses",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1230,
+"fn": "HISTORICAL_EVENTS_DATA.plotHooks"
+}
+},
+{
+"id": "11385",
+"sev": "MED",
+"n": 1,
+"town": "r2s-plague_onset-metropolis-2",
+"section": "PDF/Overview",
+"fold": "Grand Council / Reformers / Complicit beneficiaries",
+"text": "Grand Council / Reformers / Complicit beneficiaries",
+"why": "triad names Reformers and Complicit beneficiaries as parties; GOVERNMENT lists neither as a power; slash-joined label used as a name",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1268,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
+}
+},
+{
+"id": "21280",
+"sev": "MED",
+"n": 1,
+"town": "r2s-plague_onset-metropolis-2",
+"section": "PDF/HistoryFounding",
+"fold": "Parties: Grand Council vs Reformers vs Complicit beneficiaries",
+"text": "Parties: Grand Council vs Reformers vs Complicit beneficiaries",
+"why": "names Reformers and Complicit beneficiaries as parties; GOVERNMENT lists neither as a power; QUARRELS has Council vs Craft Guilds, vs Religious Authorities",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1268,
+"fn": "HISTORICAL_EVENTS_DATA.factions"
+}
+},
+{
+"id": "22689",
+"sev": "MED",
+"n": 1,
+"town": "r2s-mass_migration-metropolis-3",
+"section": "Journal/Power",
+"fold": "Resource Scarcity: Among the trades the place lives by, the stone trade is under strain.",
+"text": "Resource Scarcity: Among the trades the place lives by, the stone trade is under strain.",
+"why": "says the stone trade is under strain; LAND gives Stone quarry available and Fortifications and Stone & Construction running",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyData.js",
+"line": 1813,
+"fn": "livelihoodLead"
+}
+},
+{
+"id": "00835",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-9",
+"section": "Journal/History & Founding",
+"fold": "<N> (# years ago): When the mountain trade the metropolis depended on failed, the wealth that had flowed through it dried up faster than anyone was prepared for",
+"text": "The Trade Collapse (665 years ago): When the mountain trade the metropolis depended on failed, the wealth that had flowed through it dried up faster than anyone was prepared for",
+"why": "says mountain trade flowed through the metropolis; header gives trade access isolated and Hills terrain",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/historyDescVariants.js",
+"line": 89,
+"fn": "HISTORY_DESC_VARIANTS.trade_collapse"
+}
+}
+]

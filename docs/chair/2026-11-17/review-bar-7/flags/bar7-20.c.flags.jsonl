@@ -1,0 +1,8 @@
+{"id":"C40919","town":"bar0-village-calm-rand-45","sev":"LOW","kind":"STATE","why":"Reliance on magic 'Relied upon' names nothing relied on; FOOD by magic 0%, DEFENCE magic none, Magical Capability Critical","other":""}
+{"id":"C41221","town":"bar0-village-calm-rand-45","sev":"LOW","kind":"STATE","why":"challenger 'could now take the hall'; GOVERNMENT stability Stable, Council Dominant, relation dependent and stable","other":"C41217"}
+{"id":"C41716","town":"bar0-village-calm-rand-46","sev":"MED","kind":"STATE","why":"Salt works printed producing salt with no mark; LAND Salt Flats depleted, TRADE imports salt '(local salt flats exhausted)'; ground-taker should be worked out","other":""}
+{"id":"C41720","town":"bar0-village-calm-rand-46","sev":"LOW","kind":"LACKS","why":"'Unlike the inn' presumes an inn; HOUSES lists none","other":""}
+{"id":"C42048","town":"bar0-village-calm-rand-46","sev":"LOW","kind":"LACKS","why":"'International merchant houses controlling port licences' in a village of 378 whose guild members are a fishmonger, dairy farmer, smith","other":""}
+{"id":"C42154","town":"bar0-village-calm-rand-46","sev":"MED","kind":"PAIR","why":"saltmaster's card, no mark, sells salt by the sack; Resources says nothing more can be taken from the salt flats, hands idle","other":"C41935"}
+{"id":"C42152","town":"bar0-village-calm-rand-46","sev":"LOW","kind":"BROKEN","why":"'Predrag Ivanov' unqualified; PEOPLE has two Predrag Ivanovs (cooper, ferryman)","other":""}
+{"id":"DONE","lines":1653,"blocks":2,"flags":7}

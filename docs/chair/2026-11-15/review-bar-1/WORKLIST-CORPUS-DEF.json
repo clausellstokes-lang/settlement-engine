@@ -1,0 +1,166 @@
+[
+{
+"id": "C8592",
+"sev": "MED",
+"n": 78,
+"town": "bar0-thorp-calm-rand-2",
+"section": "Systems/Defense",
+"fold": "<N> has no wall, and nothing has yet come against it that a wall would have stopped.",
+"text": "Beishan has no wall, and nothing has yet come against it that a wall would have stopped.",
+"why": "says nothing has yet come against it; PAST records The Purge, a major occupation-infiltration 205 years ago",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 9791,
+"fn": "DS-DEF-11 › UNWALLED-SMALL · v4"
+}
+},
+{
+"id": "C7391",
+"sev": "MED",
+"n": 64,
+"town": "bar0-metropolis-calm-rand-2",
+"section": "Systems/Defense",
+"fold": "Everyone entering <N> is counted at the gate by a soldier whose job it is, and counted again on the way out.",
+"text": "Everyone entering Khirbetziyarat is counted at the gate by a soldier whose job it is, and counted again on the way out.",
+"why": "'Everyone entering is counted at the gate'; underground passage and smuggling move people and goods beneath the walls unseen",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 4521,
+"fn": "DS-DEF-5 › garrison PRESENT · v3"
+}
+},
+{
+"id": "C4094",
+"sev": "MED",
+"n": 53,
+"town": "bar0-city-wartime-rand-2",
+"section": "Systems/Defense",
+"fold": "Criminal work at <N> is coordinated enough to hold routes and territories and not coordinated enough to have a head; several interests are running, and none of them is the # to talk to.",
+"text": "Criminal work at Khanserai is coordinated enough to hold routes and territories and not coordinated enough to have a head; several interests are running, and none of them is the one to talk to.",
+"why": "crime has 'no head, none is the one to talk to'; Thieves' Guild is a listed power led by rank-1 Vandansüren Taichiud",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 3811,
+"fn": "DS-DEF-4 › structure semi-organized · v1"
+}
+},
+{
+"id": "C5252",
+"sev": "MED",
+"n": 36,
+"town": "bar0-hamlet-calm-rand-2",
+"section": "Systems/Defense",
+"fold": "Nobody at <N> is paid to keep order, and for now the place keeps order well enough by itself.",
+"text": "Nobody at Polask is paid to keep order, and for now the place keeps order well enough by itself.",
+"why": "says the place keeps order well enough; Foundations prints Law & order Critical and the defence rows say nothing keeps order",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 2670,
+"fn": "DS-DEF-3 › Moderate · v5"
+}
+},
+{
+"id": "C12320",
+"sev": "MED",
+"n": 15,
+"town": "bar0-village-famine-rand-2",
+"section": "Systems/Defense",
+"fold": "<N>'s pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes.",
+"text": "Sübeteigol's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes.",
+"why": "defenders paid late or not at all, a pay book; DEFENCE has hired none, garrison none, watch none: only unpaid citizen militia",
+"kinds": [
+"LACKS",
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 1511,
+"fn": "DS-DEF-2 › Economic Survival: WEAK · v1"
+}
+},
+{
+"id": "C12343",
+"sev": "MED",
+"n": 13,
+"town": "bar0-village-famine-rand-2",
+"section": "Systems/Defense",
+"fold": "<N>'s defences are sound, and the only people who would stand on them are the village's own.",
+"text": "Sübeteigol's defences are sound, and the only people who would stand on them are the village's own.",
+"why": "calls the defences sound; STATE defence is Vulnerable and the same page says they could not survive a serious attack and are underfunded",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 9742,
+"fn": "DS-DEF-11 › WALLED-STRAINED · v7"
+}
+},
+{
+"id": "C12304",
+"sev": "MED",
+"n": 4,
+"town": "bar0-village-famine-rand-2",
+"section": "Systems/Defense",
+"fold": "The guards' rations at <N> are cut like everyone else's, and a hungry guard cannot be asked for much for long.",
+"text": "The guards' rations at Sübeteigol are cut like everyone else's, and a hungry guard cannot be asked for much for long.",
+"why": "speaks of the guards' rations; DEFENCE has garrison none, watch none, hired none: only a citizen militia",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 6978,
+"fn": "DS-DEF-8 › override: INTERNAL PRESSURE (famine) · v1"
+}
+},
+{
+"id": "C5213",
+"sev": "MED",
+"n": 2,
+"town": "bar0-hamlet-calm-rand-2",
+"section": "Systems/Power",
+"fold": "Nobody at <N> is in a position to take the Household Council's place: whatever the hamlet thinks of the Household Council, no contender stands ready to try.",
+"text": "Nobody at Polask is in a position to take the Household Council's place: whatever the hamlet thinks of the Household Council, no contender stands ready to try.",
+"why": "says no contender stands ready; TENSIONS has a live succession crisis with a Popular candidate and rivals maneuvering to take the seat",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 1517,
+"fn": "DS-POW-4 › riskLabel: Stable (no challengers) · v1"
+}
+},
+{
+"id": "C8586",
+"sev": "MED",
+"n": 0,
+"town": "bar0-thorp-calm-rand-2",
+"section": "Systems/Defense",
+"fold": "The thorp's record of crimes at <N> stays short: there is crime, but enforcement keeps it down and keeps it from growing.",
+"text": "The thorp's record of crimes at Beishan stays short: there is crime, but enforcement keeps it down and keeps it from growing.",
+"why": "says enforcement keeps crime down; DEFENCE has no watch, garrison or force and neighbours deal with wrongs themselves",
+"kinds": [
+"STATE",
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/defense.generated.js",
+"line": 2601,
+"fn": "DS-DEF-3 › Safe · v2"
+}
+}
+]

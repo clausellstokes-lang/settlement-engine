@@ -1,0 +1,781 @@
+/**
+ * generationWorkerLazy.test.js — THE CONTRACT OF THE GENERATION TRANSPORT'S
+ * LAZY BOUNDARY.
+ *
+ * The generation lane left the eager store slice so that the entry chunk stops
+ * carrying it, and the worker transport was built wire-lean so that the happy
+ * path never fetches the engine chunk on the main thread at all. Both are
+ * SOURCE-SHAPE properties that a single careless static import would undo
+ * silently, which is why they are pinned here rather than trusted:
+ *
+ *   1. the slice reaches the lane only through `import()`;
+ *   2. the lane, the client, the core and the protocol are all outside vite's
+ *      OWN derivation of the eager first-paint graph;
+ *   3. the client never imports the core, so the fallback (and only the
+ *      fallback) pays for the engine chunk;
+ *   4. nothing under `src/workers/` imports the store or a persistence service;
+ *   5. the protocol leaf really is import-free, which is what lets it be
+ *      co-located into every chunk that needs it at zero cost.
+ *
+ * ⭐⭐ AND THE PRODUCTION ARM BELOW NO LONGER SAYS "ONE CHUNK", BECAUSE THE BUILD
+ * SAID OTHERWISE (lane LIGHT, car 3b). It used to assert that the emitted worker
+ * carried NO `import(` at all, on the stated premise that "vite inlines a worker
+ * entry's dynamic imports". That premise was false for this repo the moment the
+ * worker's graph could reach one: `vite.config.js` sets `worker: { format: 'es' }`
+ * so a worker entry is a real ES build that CODE-SPLITS, and the client builds
+ * this worker with `{ type: 'module' }`, which is exactly what lets the emitted
+ * `import(` execute. Measured at `dd0b68c0d`: the worker emits
+ * `livingContentRoster-*.js` at 55,465 B beside a 1,404,493 B bundle.
+ *
+ * ⛔ THE OTHER HALF OF THAT PREMISE WAS FALSE TOO, AND IT IS WORTH WRITING DOWN
+ * RATHER THAN INHERITING: the split chunk is NOT shared with the main graph.
+ * Vite bundles every worker entry as its OWN rollup build, so the same source
+ * module is emitted three times in this dist under three hashes (the main graph's
+ * at 1,788 B via `engine-*.js`, this worker's at 55,465 B, the preview worker's
+ * at 1,094 B), and each is referenced by exactly one bundle. The sizes differ
+ * because each build carries whatever of the roster's closure its own bundle does
+ * not already hold. That is a duplicate on disk, it is what a per-entry worker
+ * build costs, and the arm below pins the shape rather than wishing it away.
+ *
+ * The dist arms are `describe.runIf(distExists)` in the estate's idiom: a stale
+ * or missing dist can only UNDER-report, and the post-build `VERIFY_DIST=1`
+ * re-run is what makes them binding. The unconditional anti-vacuity `it` below
+ * turns "VERIFY_DIST=1 with no dist" into a hard failure instead of a skip.
+ *
+ * ⭐ `WORKER_BUNDLE_CEILING_BYTES` — MINTED FROM A MEASURED BUILD at the §900 composition
+ * (Fable chair, `build-900-chair.log`, tree `f6545dcd9`): `dist/assets/generation.worker-*.js`
+ * measured 1,404,242 bytes. The ceiling is MONOTONE-DOWN: a rebuild that measures lower may
+ * lower it (with the log cited); a rise is a chair ruling with a reason, never a lane's edit.
+ * HORIZON-B2 refused to write this arm without a build — rightly (a pin with no receipt is the
+ * false-instrument class) — and the landing that built paid it.
+ *
+ * ⭐ RE-MINTED BY THE CHAIR AT THE §917 LANDING (Fable chair, 2026-09-09; the LIGHT lane's control
+ * builds at dd0b68c0d / f88d6bc54, receipt-light.md § CAR 3): 1,404,242 -> 1,404,493 bytes. The
+ * reason, measured and not argued: lighting the living-content dial puts an irreducible 245 B into
+ * this worker (the seam's loader, the emitted `import(`, the await) and the rest of §917 put 6 B in
+ * — a build with the lazy edge removed entirely still read 1,404,248 B, above the §900 ceiling — so
+ * no transport-side shave could clear it; the alternative (inlining the roster, +55,465 B) is the
+ * regression this ceiling exists to refuse. The capability is the owner's order ("land everything lit
+ * on"); the rise is declared here, in the ledger row, and is vetoable. The ceiling stays
+ * MONOTONE-DOWN from this value.
+ *
+ * ⭐ RE-MINTED DOWNWARD BY THE WORKER-HEADROOM CAR (Opus lane, 2026-09-18, branch
+ * `fix-worker-headroom-2026-09-18`): 1,404,493 -> 1,398,705 bytes, measured on
+ * `dist/assets/generation.worker-CXHCiqmL.js` from a worktree verified lockfile-clean
+ * (588 of 588 installed packages at their locked versions — the box-drift hazard makes
+ * a locally built figure worthless otherwise). This is a SHRINK and needs no ruling:
+ * the ceiling may always follow a lower measurement down.
+ *
+ * What bought the 6,439 B, both PROVEN INVISIBLE to generated output (the golden master
+ * and the espionage fence ran plain and green across the change):
+ *   • `src/domain/customContentSchema.js` — sixteen derived `_KEYS` constants took a
+ *     rollup PURE annotation. Five engine modules import that file for `passesTierGate`
+ *     and `tradeCategoryLabelOf` and nothing else; its authoring vocabulary (content
+ *     groups, criticality, economic weight, defense roles, power authorities, food
+ *     impact, satisfies, and the whole deity chart) has ZERO readers under
+ *     src/generators, src/workers, src/lib, src/kernel or src/data. It rode in anyway
+ *     because `Object.freeze(Y.map(f))` lets rollup drop the binding and KEEP the call.
+ *   • `src/generators/steps/stepMetadata.js` — the rail's 22 labels and 22 descriptions
+ *     moved to a sibling table on the same file, `STEP_PRESENTATION`, read only by
+ *     src/components/PipelineRail.jsx. The worker's `metaForStep` reads `summary` alone
+ *     and the packet on the wire is `{ id, index, summary }`, so the words were paying
+ *     rent in this bundle to be read by nobody.
+ *
+ * ⚠ THE HEADROOM IS IN THE BUNDLE, NOT IN THE CEILING. Re-minting at the exact
+ * measurement is what monotone-down means, so this arm is again at 0 B slack by
+ * construction; the 6,439 B of room bought here is room in the WORKER, spent by the next
+ * car that adds authored content, and it is measured before it is spent.
+ *
+ * ⭐ RE-MINTED UPWARD BY THE CHAIR AT THE 2026-09-18 FIXES CONSIST (Fable chair, ODQ §934.19; the
+ * consist's final tip 2b0322992, lockfile-clean; a control build at the worker-headroom car's own
+ * consist position 96cfd7e17 reproduced its mint to the byte — 1,398,705, generation.worker-CXHCiqmL.js):
+ * 1,398,705 -> 1,399,318 bytes. The 613 B are the cars composed after that car, and they are the
+ * owner's content cures, counted in the bundle: the parish-church text cure (§934.13) puts twelve
+ * "house of worship" strings here where there were none; the food writer publishes the split it
+ * carries (§934.15; `importCoverage` 1 -> 4); the article decided by sound; the label ladder in its
+ * shared home; the verdict reading `viable` alone; the hook-framing table. Nothing eager re-merged
+ * and no authoring vocabulary rode along (the two finds above are still out); lanes 22–24 added 0 B.
+ * The capability is the owner's order ("impliment every fix"); the rise is declared here, in the
+ * ledger row, in the report and the pull request, and is vetoable — a veto returns the constant and
+ * takes a headroom hunt (a shrink) in its place. The ceiling stays MONOTONE-DOWN from this value.
+ *
+ * ⭐ RE-MINTED UPWARD BY THE CHAIR AT THE 2026-10-31 UX CONSOLIDATION (Fable chair, ODQ §934.101; the
+ * integration tip 3dcb3c6f, measured by the full gate's own build, generation.worker-DumDp2-f.js):
+ * 1,438,517 -> 1,480,690 bytes. The 42,173 B are the owner's ordered generator content, counted in the
+ * bundle: GS-1 tension variety (180 authored tie lines, eight per archetype, relationshipArchetypes.js
+ * +392 lines with its draw), GS-2 one faction set (factions and conflicts built from the power set in
+ * assembleSettlement), GS-4 the world-law gate on the arcane governance line, the arrival scene's
+ * no-market pool and the service-category tables (every catalog name registered). No eager module
+ * re-merged (the lazy edge below still holds). The rise is declared here, in the ledger row and in the
+ * owner's report, and is vetoable: a veto returns the constant and takes a headroom hunt (a shrink) in
+ * its place. The ceiling stays MONOTONE-DOWN from this value.
+ *
+ * @enforced-by this test
+ */
+
+import { describe, expect, it } from 'vitest';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
+import { join, relative, resolve } from 'node:path';
+
+import { EAGER_FIRST_PAINT_MODULES } from '../../vite.config.js';
+
+const ROOT = resolve(process.cwd());
+const DIST = join(ROOT, 'dist');
+const ASSETS = join(DIST, 'assets');
+const DIST_EXISTS = existsSync(DIST) && existsSync(ASSETS);
+const REQUIRE_DIST = process.env.VERIFY_DIST === '1';
+const SENTINEL = 'settlementforge:generation:worker-v1';
+/** Measured 1,399,318 B by the chair at the 2026-09-18 fixes consist's final tip (2b0322992,
+ *  generation.worker-DNFpfUQI.js, lockfile-clean; ODQ §934.19); monotone-down — see the docblock
+ *  for what the bytes are. */
+// 1,399,318 → 1,399,946 (2026-09-19, the chair, ODQ §934.19 addendum): +628 B minified,
+// ATTRIBUTED PER MODULE by a control build at the previous mint (d17f171b0) against the tip —
+// exactly ONE module moved: src/generators/spatialGenerator.js, 14,050 → 17,359 rendered bytes,
+// the §934.22 sacred-house derivation (every layout line derives the house the settlement
+// holds instead of saying 'church'). A buy-back inside that file is the named alternative;
+// the rise is offered for the owner's ratification like the mint it follows.
+// 1,399,946 → 1,401,128 (2026-09-19, the chair, ODQ §934.19 addendum 2): +1,182 B minified,
+// ATTRIBUTED PER MODULE by a control build at train EM-T1's green terminal (ed9d99295)
+// against the EM-T2 cure tip (023eda2ec) — exactly TWO modules moved, and they are EM-P0's
+// two: src/generators/pipeline.js, 9,843 → 12,548 rendered bytes, and
+// src/generators/steps/generatePopulation.js, 6,864 → 9,702 rendered bytes. Nothing else in
+// the whole build moved a rendered byte. The bytes are EM-P0's pipeline seam (ODQ §934.47,
+// the owner's editor program): the runner hands `pins` to every step and refuses a partial
+// pin, and generatePopulation consults a pin at each of its four choosers (npcs,
+// relationships, factions, conflicts) on its ONE stream. That is generation code in the
+// generation worker, where it belongs; nothing eager re-merged. A buy-back inside those two
+// files is the named alternative; the rise is offered for the owner's ratification like the
+// mints it follows. The ceiling stays MONOTONE-DOWN from this value.
+// 1,401,128 → 1,401,208 (2026-09-19, EM-P3's build lane, under the standing conditional ruling of
+// ODQ §934.19 addendum 2 and the EDIT-MODE-TRAIN charter's amendment of 2026-09-19): +80 B minified,
+// ATTRIBUTED PER MODULE by a control build on this packet's own base tree (af36a626d, whose src/ and
+// tests/ are byte-identical to the verified base 4928be0ab — the one commit between them is the
+// docs-only promotion) against this tip, both built with `npm run build`. A whole-build sweep over
+// all 545 emitted chunks finds exactly THREE modules whose rendered length moved ANYWHERE, and all
+// three are EM-P3's own manifest paths: src/generators/steps/resolveConfig.js 14,417 → 14,304 (the
+// two literals left it), src/data/worldFactOptions.js new → 2,500 (they arrived), and
+// src/components/gallery/galleryUtils.js 4,987 → 4,990 in the gallery's own lazy chunk, which is not
+// in this bundle at all. This worker: 230 → 231 modules, nothing left it. The bytes are EM-P3's two
+// world-fact option lists (TERRAIN_WEIGHTS and CULTURES) moving to their one home, which the
+// generator still reads — generation data in the generation worker, where it belongs.
+// ⭐ THE CURE WAS THE PLACEMENT BEFORE IT WAS THE CEILING. The citation index WORLD_FACT_SOURCES is
+// an index of OTHER modules' addresses that this worker never reads, so it was placed in the
+// domain-reachable leaf src/domain/worldFactOptions.js instead: measured, that leaf and
+// galleryUtils.js appear nowhere in this bundle, and the alternative (the map beside the lists)
+// priced 428 B more into a zero-slack ceiling for bytes the worker would never execute. Nothing
+// eager re-merged: the eager first-paint set is byte-identical at 268 modules and engine-core's
+// chunk hash did not move; the lazy engine SHRANK 678,131 → 677,935 B. A buy-back inside
+// resolveConfig.js is the named alternative; the rise is offered for the owner's ratification like
+// the mints it follows. The ceiling stays MONOTONE-DOWN from this value.
+// 1,401,208 → 1,396,015 (2026-09-22, the chair, judgment 160): train EM-T12 read +565 B at its
+// terminal, ATTRIBUTED PER MODULE by the chair's control build at efd0eb448 against the cured tip
+// bfca6b7d6 — 231 modules both sides, nothing entered or left, and exactly TWO moved:
+// src/generators/steps/assembleInstitutions.js 31,117 → 32,656 rendered bytes and
+// src/generators/steps/generatePower.js 6,656 → 7,820, which are EM-B2a3's two pin-seam consults. A
+// shave inside those consults was measured INFEASIBLE (the rise is the whole minified size of the
+// addition, so no shave that keeps the mechanism — two gated consults with clones over five keys —
+// reaches zero), so the bytes were BOUGHT BACK where the ceiling's own message says to buy them:
+// src/kernel/prng.js now imports seedrandom's ARC4 core alone instead of the package's umbrella
+// index, and six generators this estate never names (alea, xor128, xorwow, xorshift7, xor4096,
+// tychei) leave every bundle that reaches it. THE DRAWS ARE BYTE-IDENTICAL, measured, not argued:
+// the umbrella IS the core object (index.js hangs the six off it and re-exports it), and 150,000
+// draws — 30,000 over each of five seeds — plus int32(), quick() and double() agree exactly on both
+// sides. The worker 1,401,773 → 1,396,015 (−5,758 B); the other chunks that carried them:
+// advanceInterval.worker 2,657,906 → 2,652,094 (−5,812 B); pdfRender.worker 2,303,451 → 2,297,639
+// (−5,812 B); customContentPreview.worker 1,628,487 → 1,622,729 (−5,758 B); kernel 10,465 → 4,722
+// (−5,743 B). The ceiling follows the measurement DOWN and stays MONOTONE-DOWN from this value; the
+// buy-back is offered for the owner's ratification like the mints it follows (vetoable: the
+// umbrella import returns and the ceiling re-mints upward, which is his).
+// 1,396,015 → 1,395,972 (2026-09-22, the chair, judgment 187): train EM-T13's terminal read +12 B
+// at the composed tip 335aa3367 — a control build there measured generation.worker-B0dgeHYd.js at
+// 1,396,027 B — and the 12 B are EM-B2a4's entry forwarding of `pins`
+// (generateSettlementPipeline.js :: generateSettlementPipeline hands `{ onStep, pins }` to
+// runPipeline; minified `,pins:o.pins`), exactly BUY-BACK-LEDGER row 5's predicted cost. That
+// forwarding is EM-B2a4's mechanism and stays byte-for-byte, so the bytes were BOUGHT BACK by row
+// 2's shave instead: EM-B2a3's two unpinned-sentinel Symbol descriptions are removed
+// (generatePower.js, assembleInstitutions.js). They are identity-compared, never read — measured,
+// not argued: neither literal occurs anywhere else in the tracked tree, `chooseOrPin` returns its
+// argument untouched, and no test, fixture or walker reads a Symbol description. The worker
+// 1,396,027 → 1,395,972 (−55 B) on a real `npm run build` in the cure lane. Across all 552 emitted
+// chunks exactly TWO OTHERS moved, both by the same −55 B and for the same two literals: engine
+// 643,798 → 643,743 and customContentPreview.worker 1,622,741 → 1,622,686; nothing entered or left
+// a bundle, and the other worker bundles did not move at all. The ceiling follows the measurement
+// DOWN and stays MONOTONE-DOWN from this value.
+// EM-R0d, 2026-09-22 (the band ladders get one home; train EM-T14): THE CEILING IS NOT MOVED HERE.
+// Four modules of this member sit in the generation worker's static closure: src/data/bandLadders.js
+// is NEW (+6,722 B rendered) and the three producers SHED bytes (factionDynamics.js -503,
+// defenseGenerator.js -576, foodGenerator.js -642 rendered): +5,001 B rendered net, judgment 198e's
+// attribution build at the composed tip. Two measurements, each true of its OWN tree (judgment 198):
+// at the stacked base 0b9d3ec8d the measurement seat's control read 1,396,015 B (that base's ceiling,
+// zero slack) and 1,397,370 B with this member — +1,355 B; the buy-back lane's control at the EM-T14
+// base 35a031ac7 read 1,395,972 B (after judgment 187's -55 B), so the same member reads +1,398 B
+// against it. A rise is the OWNER's (EM-PREAMBLE §P11.2), so the bytes were BOUGHT BACK AHEAD of
+// this member (judgment 191; the cure 006aa3442 in this train's base): repeated string literals in
+// three src/data tables hoisted once to named module-local consts, 1,395,972 -> 1,392,071 B at the
+// landed tip (-3,901 B; the nine exported tables byte-identical). The ledger's row 4
+// (resolveConfig.js, 8,198 B) is REFUTED as a buy-back: a live registered step. This constant is
+// LOWERED at train EM-T14's terminal to the composed measurement -- never here, never upward.
+// 1,395,972 -> 1,393,432 (2026-09-22, the chair, judgment 194): train EM-T14's terminal read the worker at its composed tip
+// c69d16a5d on a fresh build in consist (queue window 63). Against the placement base dc2e52d6f (with the hoist:
+// 1,392,071 B) the composed tip is +1,361 B, and judgment 198e's attribution build names EXACTLY SIX moved modules in
+// two members: EM-R0d's four (bandLadders.js new; the three producers shed) and EM-R0f's two (src/data/economyFingerprint.js
+// NEW in the closure, +2,218 B rendered; economyReconciliation.js -1,027 rendered) -- EM-R0f's "+0" at build was a
+// MEMBERSHIP fact, its bytes are real; EM-R6 moved nothing in the closure. The holder's sum (judgment 160d) is this
+// attribution, not the members' membership claims. The ceiling follows the measurement DOWN to the byte and stays
+// MONOTONE-DOWN from this value; no member of the train read a rise against it (the buy-back landed first).
+// 1,393,432 -> 1,392,364 (2026-09-22, the chair, judgment 194 (the T15 reading)): train EM-T15's terminal read the worker at its composed tip
+// c7d472ec2 on a fresh build in consist: EM-R1's merge clone and its retired step clones, EM-R2's roster consult and EM-R5's
+// pure leaf (outside the worker) measured TOGETHER at the composed tip. The ceiling follows the measurement DOWN to the byte and stays MONOTONE-DOWN from
+// this value; no member of the train read a rise against it (the buy-back landed first).
+// 1,392,364 -> 1,391,327 (2026-09-23, the chair, judgment 194 (the T16 reading)): train EM-T16's terminal read the worker at its composed tip
+// 36d82a469 on a fresh build in consist: EM-R2's roster consult (+161 B by CI), EM-R1b's nineteen-key declaration, EM-R3's and EM-R4's
+// consults and the early buy-back's eleven literal hoists (-1,916 B) measured TOGETHER at the composed tip. The ceiling follows the measurement DOWN to the byte
+// and stays MONOTONE-DOWN from this value; every rise of the train was bought back before this reading (BUY-BACK-LEDGER row 9).
+// 1,391,327 -> 1,391,256 (2026-09-23, the buy-back cure seat, BUY-BACK-LEDGER row 10): the train tip's real build
+// read the worker at 1,391,472 B against this zero-slack ceiling — +145 B, EM-B2b2's resolveResources.js, and a rise
+// is never a lane's edit — so the bytes were BOUGHT BACK by row 7's literal-hoist shape on two modules of the
+// worker's own static closure and the ceiling follows the composed measurement DOWN:
+// src/generators/structuralValidator.js (5 consts of 33 over 14 sites) and
+// src/generators/generationReceiptJudgments.js (4 of 10 over 8 sites, folded into ONE statement so the F31 800-line
+// ratchet is unmoved). ⛔ THE OTHER 28 AND 6 ARE NOT A CHOICE: a const planted at a file's END is in its TEMPORAL
+// DEAD ZONE for any site evaluated at MODULE TOP LEVEL — `import()` of the unpruned variant threw
+// `ReferenceError: Cannot access 'MULTIPLE_MARKET_SQUARES' before initialization` at SPATIAL_FEATURES — so each was
+// pruned BY EXECUTION until the module imported clean. Both blocks ARE planted at their file's end, which is what
+// keeps every `path:line` citation true: the prose-numerics baseline's rows at structuralValidator.js:679/686/694 and
+// the record-register walker's cite to generationReceiptJudgments.js:654-660 still name the same bytes (every
+// original line asserted byte-identical IN PLACE; only literal->identifier substitutions moved). The emitted values
+// cannot move — JS strings are immutable primitives — and each file round-trips to its previous blob BYTE FOR BYTE
+// when the identifiers are put back.
+// ⛔ AND THE PLAN'S THIRD MODULE IS REFUSED BY MEASUREMENT, WHICH IS WHY THIS BUYS -216 B AND NOT -1,132 B.
+// src/generators/power/rulingStructure.js prices -766 B and its hoist is clean (19 consts, 61 sites, TDZ-free,
+// round-trip identical), but the file is 800 raw lines against `MODULE_LINE_CEILING = 800` in
+// tests/generators/powerStructure.test.js — ZERO slack on a SECOND ceiling the buy-back's own measurement did not
+// read (it read eslint's effective-line room, 732 of 800, and the size baseline, which has no row). One added line
+// reds that arm ("rulingStructure.js: 821 lines"), and a hoist cannot add none; raising a size ratchet is not a
+// cure seat's edit, so the bytes stay unbought and the ledger keeps them.
+// Measured, not argued: a CONTROL build at the base 56b085fc5 reproduced 1,391,472 B
+// (generation.worker-MbKUCYhb.js), CI run 35892227226's figure to the byte and the chunk name; the cured build reads
+// 1,391,256 B (generation.worker-DusCNPis.js) = -216 B, and esbuild's per-module pricing predicted -212 B. The
+// ceiling follows the measurement DOWN and stays MONOTONE-DOWN from this value.
+// 1,391,256 -> 1,423,431 (2026-10-01, the urban-band chair UNDER THE OWNER'S WORD, ODQ §934.86): A RISE, AND IT
+// IS THE OWNER'S, TAKEN BY THE OWNER'S OWN WORD IN CHAT (2026-09-30, "I defer all judgment to you", given in answer to this
+// exact question) — never a lane's edit. The cause is the content the owner approved: the institution catalog became
+// a registry of 179 families and 518 tier entries (215 new tier entries, 28 new descriptions with their variants), plus
+// MF-CH2B's licence reads and the window's cure (J19-J24, the verifier's fixes). Every byte that could go WAS BOUGHT
+// BACK FIRST (4fccffd60: each repeated description and each variant pair spelled once, every derived structure
+// fingerprint-identical): the combined tip read 1,475,470 B, the buy-back 1,422,127 B, and the window's final source
+// 1,423,431 B on a fresh `vite build` (generation.worker-DCUBvpYr.js). The ceiling follows that measurement to the byte
+// and stays MONOTONE-DOWN from here.
+// 1,423,431 -> 1,423,648 (2026-10-01, the urban-band chair, UNDER THE SAME WORD, ODQ §934.86 addendum 2): A RISE OF 217 B, and
+// its cause is the content the owner ordered in this chat ("druid is magic" … "Warden's Lodge stays defense, not druid"): J30's
+// druid faith role, its chokepoint stamp and its chain idle, and J32's world-law read and the wardens' mundane term. The owner's
+// "I defer all judgment to you" was given in answer to this exact question (J29), and the rise is taken under it, VETOABLE.
+// Measured: a control build at 4b86da68a reproduced 1,423,431 B (generation.worker-DCUBvpYr.js); J30–J32 read 1,423,786 B;
+// the buy-back (731e19597: one world-law resolution, J30's redundant gate folded) and J33's seven list trims bought 138 B back;
+// the window's final source reads 1,423,648 B (generation.worker-TUOc-4XJ.js) on a fresh `vite build`. MONOTONE-DOWN from here.
+// 1,423,648 -> 1,423,600 (2026-10-01, the urban-band chair): DOWN 48 B, the monotone-down rule followed. FIX-G1 (4f4747a2b)
+// counts the published dependency list at one site; a fresh `vite build` reads 1,423,600 B (generation.worker-BXVm63G5.js).
+// 1,423,600 -> 1,416,569 (2026-10-01, the urban-band chair): DOWN 7,031 B, the monotone-down rule followed, and the owner's
+// rise above now funds only bytes still spent. The registry's first-paint buy-back (each value spelled once; every export
+// identical across its 518 rows; tests/build/vendorPdfLazy.test.js) shrinks the worker with it: a fresh `vite build` reads
+// 1,416,569 B (generation.worker-BZWdxs0z.js).
+// 1,416,569 -> 1,438,517 (2026-10-02, the Voice Program chair UNDER THE OWNER'S WORD, ODQ §934.88): A RISE OF 21,948 B, AND IT
+// IS THE OWNER'S, given in chat through the question tool in answer to this exact question ("Raise it by ~22 KB
+// (Recommended)"), never a lane's edit. The cause is the content the owner asked for ("each variant should insight
+// something regarding either senses, culture, about the people …"): the arrival scene's authored pools
+// (src/data/arrivalProse.js, 20,964 B minified) and its composer (src/generators/narrative/arrivalScene.js), less the
+// retired tier template and addon pools. The Herald's deed register is not in this bundle. What could be bought back inside
+// that content was priced at about 1 KB (lines as plain strings rather than functions) and offered against the raise. A
+// fresh `vite build` at c39ce8640 reads 1,438,517 B (generation.worker-aM8fOsDp.js), the second gate's figure to the byte.
+// MONOTONE-DOWN from here.
+// 1,480,690 -> 1,480,698 (2026-11-02, THE FIFTH ROUND, ODQ §934.103): A RISE OF 8 B, THE CHAIR'S RULING WITH ITS
+// REASON (as this file's header requires of a rise), VETOABLE BY THE OWNER. The whole 8 B are the owner's X-45
+// registration: `backs` joins EDITABLE_FIELDS.institution in src/domain/userEdits.js (minified `,"backs"`, exactly 8 B),
+// reached by the worker through generators/generateSettlementPipeline.js -> domain/historyPreservation.js ->
+// domain/userEdits.js. MEASURED by in-memory production builds of integrity-counted archives with per-module
+// attribution through hidden sourcemaps: ee2d961ae (the last green verify:dist) 1,480,690 B
+// (generation.worker-DumDp2-f.js), 9e66e658c 1,480,698 B (generation.worker-XUebZ5Kh.js), userEdits.js 800 -> 808 B
+// and no other module moved. Buying eight bytes back by golfing unrelated code was refused as worse engineering than
+// recording the truth. Placed beside the constant so the cited lines above do not move. MONOTONE-DOWN from here.
+// 1,480,698 -> 1,491,801 (2026-11-04, the coherence window's composed tip, REGISTERS-5 door 12): A RISE OF 11,103 B, THE
+// CHAIR'S RULING (ODQ §934.104, recorded in briefs/REGISTERS.md item 12), VETOABLE BY THE OWNER. Every byte is new feature
+// code from the window. Nothing in it is dead or duplicated; the one pre-existing ~150 B duplicate in foodBalance.js is left
+// alone. MEASURED by a fresh `vite build` of a git archive at each first-parent compose point; the worker bytes are the
+// file's size:
+//   c0ef42c13 base 1,480,698 -> 1169b3cd5 1,486,662 (+5,964, per FIRSTPAINT's bisect: FOOD +4,025 over its two composes,
+//     DEFENSE-2 +1,404, the SIZE compose +462, MAGIC +46, WIRING-1 +21, the chair's X-52 wiring +6);
+//   1169b3cd5 = FIRSTPAINT 7469cd0a6 = SOAK-1000 25653a3f9 = TIPFIX 4edc4917f = 1,486,662 (0);
+//   the DOORS compose 8cd65978e 1,491,801 (+5,139). Its per-module minified pricing sums to +5,654:
+//     - SIZE ruling 2 (5eda29d5c, 8c76cf743), the tier noun in generated story text: historyGenerator.js,
+//       narrativeText.js and arrivalScene.js import speakTierNoun and tierNounFor. That brings stateProseKernel.js
+//       (+4,481) and weaveBlock.js (+96) into the worker, plus +690, +117 and +55 in the three importers.
+//     - SIZE-3 (43f9c0dcc), the small-place guild needs a real market: rulingStructure.js imports
+//       hasMarketInstitution, so viability.js +306 and rulingStructure.js -91.
+//   Nothing moves after the DOORS compose (60ae4c909 and the lane tip 80d485c7e: 1,491,801, generation.worker-BV-oj6mh.js).
+// The ceiling is recorded AT the measured figure, never above it. MONOTONE-DOWN from here.
+// 1,491,801 -> 1,491,837 (2026-11-04, the landing of PR #72, door 12 taken again by the chair, ODQ §934.104): A RISE OF
+// 36 B, VETOABLE BY THE OWNER. The one mover is REGISTERS-7 F5 (fff75ce35): factionRoles.js :: ensureFactionStructuralNpcs
+// now skips a seat whose ref is in the DM layer's `dm:` namespace (a DM-added faction is the DM's row; the appender had
+// been seating two placeholder office-holders for it). The namespace is spelled as a literal because importing
+// dmLayer.js :: DM_ID_NS pulls the editor module into the first-paint closure (whose raw budget has no margin); the
+// shared leaf module for DM_ID_NS is filed for the next window. MEASURED by a fresh `vite build` at the composed tip
+// abf9338af (generation.worker-DRWBjLQU.js, 1,491,837 B) against a git archive of the lane's previous commit 2e95daeb8.
+// MONOTONE-DOWN from here.
+// 1,491,837 -> 1,573,556 (2026-11-04, THE RUNG-1 LANDING, door 12 taken by the landing seat under the chair's brief LANDING-1
+// item 11, "re-record ONLY at the measured figure with every byte attributed to a lane"): A RISE OF 81,719 B, VETOABLE BY
+// THE OWNER. MEASURED by a fresh `vite build` of a git archive at EVERY src-moving first-parent step of the rung-1 window
+// (39038801b..bf263a78d), the worker bytes being the file's size; the window base 39038801b builds 1,491,801 and the
+// window tip 54daafda3 1,573,520, and the merge with the integration tip adds only its own attributed +36:
+//   CRISIS compose d3e072368 +131,205 (crisis3 9738e6d21 -132) · SELF-VOUCH compose 0be13b5cb -73,482 ·
+//   F1 defence words 5e9ffb220 +3,862 · F10 walls word 54daafda3 +3,061 · x46-3 budget 90dc22f18 +2,726 ·
+//   terrain-pools ac09ea83b +2,421 · F4 crime signal ba9fde402 +1,788 · rung1-truth ff4448d2e +1,737 (final 844acaccc -20) ·
+//   F6 budget floor 6d84aa834 +1,385 · tier-noun-pools a9982e3b9 +1,211 · F3 food words db8ce5da8 +1,137 ·
+//   Register VII lit 3420d01e3 +646 · F5 instruments 7e28a6331 +605 (unit 6 +8) · R6 place-not-tier 6129c300d +555 ·
+//   the receipt's kind 7 cdc949867 +551 · food-exports 63bb72785 +397 · x46-1b 79c442330 +344, final fb0341b93 +395 ·
+//   x46-4 c7d068169 +373 · rung1-pins 37b1e746d +309, final 11467ed57 +32 · rung1-n1 513e1bf11 +230, final 4fb9cc5e6 +274 ·
+//   x46-train 1264a8152 +100 · x46-2 d4bf6431c -15 · T1/T2 fe56bddd4 +10 · F2 272af44f3 +6 (with the test-only steps
+//   before it) · every other step 0 (soak2, hooks-under-stress, quarters-off, services-once, faith-pools, F7, F8, F9,
+//   READER-INSTRUMENTS, the docs and test steps). The sum closes exactly: 1,491,801 + 81,719 = 1,573,520, and the merge's +36 makes 1,573,556.
+//   The landed tip measures 1,573,556 B (generation.worker-BNd8BSQT.js). The ceiling is recorded AT the measured figure.
+// MONOTONE-DOWN from here.
+// 1,573,556 -> 1,574,838 (2026-11-06, THE RUNG-1 LANDING'S PROOF, LANDING-8 under the chair's brief LANDING-8 unit 4,
+// "the ceiling moves ONLY to the measured figure with every byte attributed by first-parent step"): A RISE OF 1,282 B,
+// VETOABLE BY THE OWNER. MEASURED by a fresh `vite build` of a git archive at every src-moving first-parent step from the
+// last re-record 5dd0f323a (1,573,556, reproduced) to the landing base 3d8a74e4b, and of the staged tree at every
+// src-moving step of LANDING-7 (3d8a74e4b..18fd6b442), the worker bytes being the file's size:
+//   before LANDING-7 (+492, the base already over): the Village watch's category 9cff32dd9 +56 · hasMarketInstitution and the
+//   role catalogue to domain 3b93b9057 +6 · the pre-chain trade lists dbd17ae05 +238 · the V-SUMMARY-HOOKS cure c1cf38bbb
+//   +192 · every other step 0 (the calibration re-records, c5c7454a7, bc2a64000, FIRSTPAINT-2 970adf01d, 69a7d7000,
+//   the types step 3d8a74e4b) — 1,574,048 at the base;
+//   LANDING-7 (+790): lane D b37bbf395 +230 · lane F's first merge 3da1104da +402 · lane G 64ad4fe47 +116 · lane H
+//   18fd6b442 +42 (each a merge of several commits; the bytes are attributed to the step, not inside it) · lanes B, C, G3, F2-4, A, E 0.
+//   The sum closes exactly: 1,573,556 + 492 + 790 = 1,574,838, the tip's generation.worker-MaAIxfqL.js.
+// The ceiling is recorded AT the measured figure. MONOTONE-DOWN from here.
+// 1,574,838 -> 1,576,641 (2026-11-07, WIRING-W0-CLOSE, "the chair's ruling: trim then re-record at the measured figure"):
+// A RISE OF 1,803 B, VETOABLE BY THE OWNER. TRIMMED FIRST (no output byte moved), then MEASURED by a fresh `vite build` of a
+// git archive at every src-moving first-parent step of lane/wiring-w0-2026-11-07 from its base 76febf9b0 (1,574,838, this
+// ceiling exactly), the worker bytes being the file's size:
+//   343bd4eec (the migration direction declared once) +1,944 · adae99a10 0 · c99531cf9 (one import share) +135 ·
+//   3d1df12d7 (one food-source count) -223 · b893dcda1 (annotations dated) +139 · 02b8da4b3 0 · b79dfa98b (the asOf field
+//   withdrawn) -29 · f26949e69 0 · 848dd7dc1 (the projection re-spelled for the observed-shape gate 0) +17 ·
+//   THE TRIMS: eb4c508e1 (viability halves cut from one note, `directionOf`, the spine) -156 · 97209d8fc (the viability
+//   note's one fallback) -24. The sum closes exactly: 1,574,838 + 1,803 = 1,576,641. Recorded AT the measured figure.
+// MONOTONE-DOWN from here.
+// 1,574,838 -> 1,690,414 (2026-11-07, THE RUNG-2 LANDING, LANDING-R2 under the chair's ruling of 10:1x UTC, ODQ §934.105:
+// "RE-RECORD the generation-worker ceiling at the measured 1,690,414 with your attribution in minified figures"): A RISE OF
+// 115,576 B, VETOABLE BY THE OWNER. MEASURED by a fresh `vite build` of a git archive of each tree, the worker bytes being the
+// file's size: rung 1's final tree 1bff51c6d 1,574,838 (this ceiling, reproduced); the pool census's base f28689600 1,578,876;
+// the rung-2 line's tip before rung 1 f5dc50c6b 1,688,885; this landing's tip 1,690,414. So:
+//   THE RUNG-2 LINE (the census lanes 1b-5, the reader lanes, the compose, phases A-E) +110,009 — by module, minified estimates
+//   (Rollup's rendered lengths scaled ~0.30, so they do not close to the byte): the fact homes src/domain/facts/* ~30.7 KB
+//   (factVocabulary, drawDeclared, crisisKind, factsOf the largest) · the faction-rename cascade ~20.7 KB (factionRename.js
+//   ~17.1 + userEdits ~2.7 + userEditLines ~0.9, pulled in by generators/power/factionLabelClose.js, census-1i R-AW ba7887862 —
+//   tree-shaken already to applyFactionRenameToSettlement and what it reaches; a NAMED BUY-BACK of ~20 KB, the relabel at birth
+//   without the cascade, a census design change left for the register consolidation after the deploy) · the generators
+//   ~24 KB · the data tables ~21 KB (npcData, institutionDescVariants, powerSiblings) · domain/display ~7 KB · roles/roleClass ~4 KB;
+//   THE MERGE WITH RUNG 1 AND THIS LANDING'S CURES +5,567 (the two lineages' interaction, the module splits, the chunk cure).
+//   The sum closes exactly on the measured figures: 1,574,838 + 110,009 + 5,567 = 1,690,414.
+// 1,690,414 -> 1,695,569 (2026-11-07, MERGE-R2, the integration merge of the rung-2 landing; the chair's standing ruling
+// "trim where no output byte moves, then re-record at the measured figure", under the owner's delegation of 2026-11-06):
+// A RISE OF 5,155 B, VETOABLE BY THE OWNER. No trim that moves no output byte was found in this seat. MEASURED by a fresh
+// `vite build` of a git archive of each tree, the worker bytes being the file's size. The merge 10b8f09b4 has two parents:
+//   FIRST PARENT a8daff92c (the integration branch) 1,579,636: from the shared base 76febf9b0 (1,574,838) its W0 lane
+//     +1,803 (recorded above) and the review-intake / engine-merge lines after W0-CLOSE +2,995 = +4,798 (its own ceiling
+//     1,576,641 was deferred, docs/chair/2026-11-07/BUILD-CHECK-2026-11-07.md §2);
+//   SECOND PARENT fc4cb0b9f (the rung-2 landing) 1,690,414, reproduced to the byte (+115,576, attributed above);
+//   THE MERGE ITSELF (both lines composed: the migration direction, the held refusal inside drawDeclared, the water and
+//     market detectors) +357 of interaction. Every commit after the merge moves no src byte.
+//   The sum closes exactly: 1,574,838 + 4,798 + 115,576 + 357 = 1,695,569. Recorded AT the measured figure; monotone-down.
+// 1,574,838 -> 1,603,564 (2026-11-07, THE PEOPLE CAR'S LANDING, PEOPLE-LAND second seat under the chair's brief step 5,
+// "re-recorded at the measured figures with every byte attributed by first-parent step"; ODQ §934.105, VETOABLE BY THE
+// OWNER): A RISE OF 28,726 B. MEASURED by a fresh `vite build` at every first-parent point of the car's stack, each with
+// the landing's two build cures applied (6c8369071, the backing relation's leaf; f7bb28ef6, powerSupport pinned to
+// coherence-lazy -- without them lane 1 also drags the goods chains and the prose corpus into the worker and first paint),
+// the worker bytes being the file's size:
+//   the integration base 262e8b255: 1,579,660 (+4,822 over the ceiling before the car: the integration merges of
+//   2026-11-07, the review-intake lane and W0 among them; not split further here) ·
+//   lane 1 PEOPLE-1 CAST dc655f712 +17,607 (the cast: castPowers, representatives, the mints) · lane 2 3aa160a70 +420 ·
+//   lane 3 0f930ce95 +3,214 (one hook per card) · lane 4 c7d552370 +327 · 5A 053283dfd -568 · 5B a725df7e4 +4,645
+//   (the v1 -> v2 save migration) · the landing's step 1 2981f23f6 -1,738 (the shim and the grouping out) · L0, the links
+//   lane 147fa6c3f 0 · the landing's cures and records to the tip -3 (6851c4c89, an em dash). The sum closes exactly:
+//   1,574,838 + 4,822 + 17,607 + 420 + 3,214 + 327 - 568 + 4,645 - 1,738 - 3 = 1,603,564, the tip's worker bundle.
+// The ceiling is recorded AT the measured figure. MONOTONE-DOWN from here.
+// 1,603,564 (the car's) / 1,695,569 (MERGE-R2's) -> 1,735,881 (2026-11-08, MERGE-CAR, the integration landing; the chair's standing ruling "trim where no output byte moves,
+// then re-record at the measured figure", under the owner's delegation of 2026-11-06; VETOABLE BY THE OWNER). No trim
+// that moves no output byte was attempted in this seat. MEASURED by a fresh `vite build` of a git archive of each tree,
+// the five figures read exactly as this file's arms read them (the tip at the merged checkout):
+//   the shared base 262e8b255 1,579,660 · the integration parent 7b3ffb6ee 1,695,569 (+115,909: the rung-2 landing, W0, the
+//   review intake — MERGE-R2's attribution above) · the car 373a2947b 1,603,564 (+23,904: PEOPLE-LAND's attribution above) ·
+//   the merge 8dff691f3 1,735,669 (+16,196 of interaction: the two lines composed — the census's declared draws inside the
+//   car's hook and tie writers, the ported R3 rule, the reader's membership port) · 4c39885fc 0 · the composition cure
+//   b19740ab3 + the display fix 9fd906c23 +212. The sum closes exactly: 1,579,660 + 115,909 + 23,904 + 16,196 + 212 =
+//   1,735,881, the tip's worker bundle. Recorded AT the measured figure; MONOTONE-DOWN from here.
+// 1,735,881 -> 1,746,551 (2026-11-09, MERGE-WAVE step 4, the ten lanes merged; the chair's standing ruling "trim where no
+// output byte moves, then re-record at the measured figure", under the owner's delegation of 2026-11-06; VETOABLE BY THE
+// OWNER): A RISE OF 10,670 B. No trim that moves no output byte was attempted in this seat. MEASURED by a fresh
+// `npm run build` of a git archive of every first-parent point that touches a build input, read by this file's own arm;
+// the checkout at the final tip reads the same 1,746,551:
+//   the wave's base 7b86cd07a 1,735,881 (equal to the ceiling) · W1 ECO ea0e269a9 +50 · W2 DEF 82a4e2856 -1,495 ·
+//   W3 POW 1a160d599 -2,376 · W4 PEOPLE 66c23bfea -3,500 · W5 HIS e510409b1 -860 · W1-A0b 9c2724ecb 0 ·
+//   W7 HOOKS 501c97412 +13,069 (the hook pools, the receipt, npcData and the title pools) · FIX-FOOD-ISOLATION c6e8a4ad6
+//   +1,151 · EXPORT-KEYS c6c733d23 0 · FIX-PUBLIC-VEIL 7e65c7bec +4,626 (the veil bit stamped at birth, the veiled re-deal)
+//   · 140b8f333, GREEN-BASE ee663bd9f, 59d723a37, FIX-ARROW-SECTIONS 2c76c6177, 5c14aac4a, 642f1796c 0 each ·
+//   the docks read bcf3e7f8a +5. The sum closes exactly: 1,735,881 + 50 - 1,495 - 2,376 - 3,500 - 860 + 13,069 + 1,151
+//   + 4,626 + 5 = 1,746,551, the tip's worker bundle. Recorded AT the measured figure; MONOTONE-DOWN from here.
+// 1,746,551 -> 1,976,655 (2026-11-09, MERGE-TRAIN, the allegiance train's nine merge points; the W0-CLOSE idiom, the chair's
+// ruling of 2026-11-08 20:4x and of 2026-11-09 09:2x — the ceiling re-recorded ONCE at the final tip at the measured figure,
+// every byte attributed by car, NO buy-back and NO lazy seam (car 4 measured its two tables as synchronous reads); VETOABLE BY
+// THE OWNER): A RISE OF 230,104 B. MEASURED by a fresh `npm run build` of a git archive of every merge point's tip, read by
+// this file's own arm; the train's base 2053a809c reads 1,746,551 (the ceiling, exactly):
+//   ALLEGIANCE-CAR1 e5f88930b +21,787 (the tie lines +12,830, allegiance.js +6,390, the v3 migration +1,939, the catalog +903,
+//   the renames +490, archetypes +338, corruptionPass retired -1,835 — car 1's record §8) · CAR2 f51058995 +7,124 (hallCapture.js,
+//   the guild's push, the capture rows) · CAR3 c6ded8e3a +74 · WRITE-TITLES-14 0 · OWNER-WORDS-DOSSIER -4 · FIX-HOOK-OBJECT +40 ·
+//   FIX-BUY-BUTTON 0 · FIX-ARROW-PLAQUE 0 · CAR4 824a8ce2f +201,083 — THE OWNER'S CONTENT: the two writers' tables
+//   (src/data/people/goalFamilies.js, WRITE-GOALS 82796628e, and src/data/people/titleSecretsPresentations.js, WRITE-PEOPLE-3
+//   5ee39a56c; ~60 KB of the car's gzip rise) and people/goals.js's dealer · the boundary cure, the landing fixture, the floor
+//   and type fixes 0. The sum closes exactly: 1,746,551 + 21,787 + 7,124 + 74 - 4 + 40 + 201,083 = 1,976,655, the final tip's
+//   worker bundle. Recorded AT the measured figure; MONOTONE-DOWN from here.
+// 1,976,655 -> 2,008,268 (2026-11-11, STYLE-2-MERGE-7, THE STYLE WAVE'S CLOSING ACT 7; the W0-CLOSE idiom, the chair's ruling (B3) —
+// the ceiling re-recorded ONCE at the final tip at the measured figure, every byte attributed by merge point, NO buy-back;
+// VETOABLE BY THE OWNER): A RISE OF 31,613 B. MEASURED by a fresh production build of every first-parent merge point's tree; the
+// base bd07005b9 reads 1,976,655 (the ceiling, exactly). By point (every point not named: 0):
+//   SW-1 CAUSE-CONJUNCTION (2) -1 · SW-2 INSTITUTIONS (3) -321 · SW-3 REALM-PROSE (4) +12 · SW-4 HOOKS-CONNECTIVE (5)
+//            +11 · SW-5 CRISIS-VANTAGES (6) +36 · SW-B2 FIRST-IMPRESSIONS (7) +557 · SW-B5 FRAMES (9) +2,298 · SW-B6
+//            ECO-DEF-BLOCKS (10) +760 · SW-9 ODD-ROWS (15) +23 · SW-7 POWER-SIDE (16) +4,823 · SW-B1 CONTRADICTIONS
+//            (17) +826 · SW-10 HOOKS (19) +25,794 · FIX-SECTION-REGEN (21) +127 · SW-6 CRISIS-SURFACES (22) -5,697 ·
+//            SW-8 RENAME-POWERS (24) +32 · URBAN-FIX (25) +1,440 · SW-9b-B (27) +306 · GREEN-TIP (36) +69 · GEN-SPEED
+//            (39) +518
+//   The sum closes exactly at the final tip's worker bundle. The largest: SW-10 HOOKS +25,794 (the hook pools), SW-7 POWER-SIDE
+//   +4,823, SW-B5 FRAMES +2,298, URBAN-FIX +1,440; SW-6 CRISIS-SURFACES -5,697. Recorded AT the measured figure; MONOTONE-DOWN from here.
+export const WORKER_BUNDLE_CEILING_BYTES = 2008268;
+
+const source = (path) => readFileSync(join(ROOT, path), 'utf8');
+
+/**
+ * ⭐ THE WORKER'S DECLARED LAZY EDGES — the FROZEN table the production arm holds
+ * the emitted bundle to (lane LIGHT, car 3b).
+ *
+ * `module` is the SOURCE module's basename as it survives into the emitted
+ * specifier (`./livingContentRoster-CE43XTKG.js`), so the row is stable across
+ * content hashes and names the thing a reader can actually find in `src/`.
+ * `payloadSentinel` is an export name of that module which minification keeps:
+ * it must be present in the split chunk and ABSENT from the worker bundle, which
+ * is how "split out" is told apart from "split out AND inlined as well", the byte
+ * regression the retired single-chunk arm existed to catch.
+ *
+ * Adding a row is a byte decision, not a formality: every row is one more cold
+ * fetch sitting inside the user's generation wait.
+ *
+ * @type {ReadonlyArray<{module: string, payloadSentinel: string, why: string}>}
+ */
+const WORKER_LAZY_EDGES = Object.freeze([
+  Object.freeze({
+    module: 'livingContentRoster',
+    payloadSentinel: 'LIVING_CONTENT_ROSTER_SCHEMA_VERSION',
+    why: 'the living-content roster rides `livingContentSeam.js`\'s dynamic import, and the '
+      + 'worker shell awaits the seam\'s loader before it runs a request because a Web Worker '
+      + 'evaluates its own copy of the graph and a main-thread load does not arm this seam. '
+      + 'The edge cannot become static: the seam is what keeps the roster and its whole '
+      + 'content-manifest closure out of eager engine-core on the MAIN thread.',
+  }),
+]);
+
+/** Every dynamic import a bundle carries, opaque ones included (`import(name)`). */
+const dynamicImportOpenings = (code) => code.match(/\bimport\s*\(/g) || [];
+
+/** The literal `./chunk-HASH.js` specifiers a bundle imports dynamically. */
+function dynamicImportTargets(code) {
+  const out = [];
+  const re = /\bimport\s*\(\s*["']\.\/([^"']+)["']\s*\)/g;
+  let match;
+  while ((match = re.exec(code)) !== null) out.push(match[1]);
+  return out;
+}
+
+/** `livingContentRoster-CE43XTKG.js` → `livingContentRoster`. */
+const sourceModuleOf = (chunkFile) => chunkFile.replace(/-[A-Za-z0-9_-]+\.js$/, '');
+
+/**
+ * The client must build this worker as a MODULE worker. A classic worker cannot
+ * execute the `import(` the arm above permits, so this is not style: it is the
+ * runtime precondition of the declared lazy edge.
+ */
+const MODULE_WORKER_CONSTRUCTION =
+  /new Worker\(\s*new URL\(\s*['"]\.\.\/workers\/generation\.worker\.js['"],\s*import\.meta\.url\s*\),\s*\{\s*type:\s*['"]module['"]\s*\}\s*\)/;
+
+/** Relative-specifier static imports, the customContentPreviewLazy idiom. */
+function staticImports(code) {
+  const out = new Set();
+  const from = /\bfrom\s*["'](\.[^"']+\.js)["']/g;
+  const bare = /(?:^|[;}])import\s*["'](\.[^"']+\.js)["']/g;
+  let match;
+  while ((match = from.exec(code)) !== null) out.add(match[1]);
+  while ((match = bare.exec(code)) !== null) out.add(match[1]);
+  return [...out];
+}
+
+function entryClosure() {
+  const html = readFileSync(join(DIST, 'index.html'), 'utf8');
+  const entry = html.match(/<script[^>]*type="module"[^>]*src="\/assets\/([^"]+)"/)?.[1];
+  if (!entry) throw new Error('Production entry chunk was not found.');
+  const seen = new Set([entry]);
+  const queue = [entry];
+  while (queue.length > 0) {
+    const file = queue.shift();
+    const code = readFileSync(join(ASSETS, file), 'utf8');
+    for (const dependency of staticImports(code)) {
+      const name = dependency.replace(/^\.\//, '');
+      if (!seen.has(name)) {
+        seen.add(name);
+        queue.push(name);
+      }
+    }
+  }
+  return [...seen];
+}
+
+const eagerRelative = () => new Set(
+  [...EAGER_FIRST_PAINT_MODULES].map(abs => relative(ROOT, abs).split('\\').join('/')),
+);
+
+describe('generation worker — source boundary', () => {
+  it('the slice reaches the generation lane only through import(), never a static import', () => {
+    const slice = source('src/store/settlementSlice.js');
+    expect(slice).toMatch(/import\(['"]\.\/settlementGenerateAction\.js['"]\)/);
+    // anchored: the positive toMatch on the line above proves the specifier is present in this file, so a drift that renamed or removed the lane would red there first rather than vacate this negative.
+    expect(slice).not.toMatch(/^import\s[^;]*settlementGenerateAction/m);
+  });
+
+  it('the generation lane, the client, the core and the protocol are outside vite\'s own eager first-paint graph', () => {
+    const eager = eagerRelative();
+    // Non-vacuity first: the derivation must actually have produced a graph, or
+    // "absent from the eager set" is true of every string in the world.
+    expect(eager.size).toBeGreaterThan(50);
+    expect(eager.has('src/store/settlementSlice.js')).toBe(true);
+
+    const shouldBeLazy = [
+      'src/store/settlementGenerateAction.js',
+      'src/lib/generationClient.js',
+      'src/lib/generationProtocol.js',
+      'src/workers/generationRequest.js',
+      'src/workers/generation.worker.js',
+      'src/store/settlementContentRuntime.js',
+      'src/lib/anonGenCounter.js',
+    ];
+    const leaked = shouldBeLazy.filter(rel => eager.has(rel));
+    expect(
+      leaked,
+      `these modules are reachable from vite's EAGER first-paint graph and must not be: ${leaked.join(', ')}`,
+    ).toEqual([]);
+  });
+
+  it('the client constructs the worker from its URL and never statically imports the core (the wire-lean law)', () => {
+    // ENGINE-3 unit 1 (the protection step): the worker's `new Worker(new URL(...))` moved
+    // into the local engine's one seam, the module a VITE_ENGINE_REMOTE build leaves out,
+    // because Vite emits a worker bundle for that pattern at transform time. The client
+    // reaches it through the seam's `createGenerationWorker`, still synchronously.
+    const client = source('src/lib/generationClient.js');
+    const seam = source('src/lib/localEngine.js');
+    expect(seam).toMatch(/new Worker\(new URL\(['"]\.\.\/workers\/generation\.worker\.js['"], import\.meta\.url\), \{ type: 'module' \}\)/);
+    expect(client).toMatch(/return createGenerationWorker\(\);/);
+    expect(staticImports(client)).toEqual(['./generationProtocol.js', './localEngine.js']);
+    expect(staticImports(seam)).toEqual([]);
+    // anchored: staticImports(client) is asserted to be exactly two entries above, so this file's import list is proven non-empty and readable before the absence below is read.
+    expect(client).not.toMatch(/generationRequest/);
+  });
+
+  it('the worker shell statically imports the core, the protocol and the lazy seam, and nothing under src/workers imports the store, saves or a DOM global', () => {
+    const shell = source('src/workers/generation.worker.js');
+    // ⭐ THE THIRD EDGE IS THE LAZY PAYLOAD'S LOADER, AND IT IS TRANSPORT WORK
+    // (lane LIGHT, car 1a). A generation law can be obeyed by a module behind a
+    // lazy seam — the living-content roster is — and the pipeline THROWS rather
+    // than degrading when that payload is unloaded. The main thread's lane arms
+    // it too, and that is not a duplicate: a Web Worker evaluates its OWN copy of
+    // the module graph, so the seam's registry here is a different slot and a
+    // main-thread load does not arm it.
+    //
+    // ⛔ IT IS THE SEAM'S `loadLivingContentRoster`, NOT THE CREATE BOUNDARY'S
+    // `loadGenerationLawPayloads`, AND THE REASON IS MEASURED (car 3a). The
+    // boundary module is otherwise absent from this worker's graph while the seam
+    // is already in it, so routing through the aggregate cost the bundle 31 B for
+    // nothing under a monotone-down ceiling. The main-thread reachers keep the
+    // aggregate. `tests/lint/densityCreateBoundary.walker.test.js` declares the two
+    // worker rows and reds if the aggregate ever grows a payload they would miss.
+    //
+    // The list stays EXACT rather than becoming a `toContain`, because the whole
+    // point of this arm is that the shell's static surface is small and every
+    // addition is argued; the seam is itself outside vite's eager first-paint
+    // graph (the arm above pins the lane and the core the same way).
+    expect(staticImports(shell).sort()).toEqual([
+      '../domain/content/livingContentSeam.js',
+      '../lib/generationProtocol.js',
+      './generationRequest.js',
+    ]);
+
+    const workerFiles = readdirSync(join(ROOT, 'src/workers')).filter(f => /\.js$/.test(f));
+    expect(workerFiles.length).toBeGreaterThanOrEqual(5); // the scan is not vacuous
+    const offenders = [];
+    for (const file of workerFiles) {
+      const code = source(`src/workers/${file}`);
+      for (const banned of ['store/index.js', 'savesService', 'localStorage', 'sessionStorage']) {
+        if (code.includes(banned)) offenders.push(`src/workers/${file}: ${banned}`);
+      }
+    }
+    expect(
+      offenders,
+      `a worker module reached for the store, a persistence service or browser storage: ${offenders.join(', ')}`,
+    ).toEqual([]);
+  });
+
+  it('the protocol leaf has no imports', () => {
+    const protocol = source('src/lib/generationProtocol.js');
+    expect(staticImports(protocol)).toEqual([]);
+    // anchored: the assertion above proves the parser ran over a real file whose import list is empty; this line pins that no dynamic import was added either, and the file is read by path so it cannot silently vanish.
+    expect(protocol).not.toMatch(/\bimport\s*\(/);
+    expect(protocol).toContain(SENTINEL);
+  });
+
+  it('when VERIFY_DIST=1, dist/ + dist/assets exist (post-build must verify, not skip)', () => {
+    expect(
+      !REQUIRE_DIST || DIST_EXISTS,
+      'VERIFY_DIST=1 but dist/assets is absent — a skipped post-build chunk contract is green-on-nothing; run `npm run build` first',
+    ).toBe(true);
+  });
+});
+
+describe.runIf(DIST_EXISTS)('generation worker — production boundary', () => {
+  it('the worker contract sentinel is absent from the entry static closure', () => {
+    const closure = entryClosure();
+    expect(closure.length).toBeGreaterThan(1); // the BFS actually walked
+    const carriers = closure.filter(file => readFileSync(join(ASSETS, file), 'utf8').includes(SENTINEL));
+    expect(
+      carriers,
+      `first-paint chunks carrying the generation worker contract: ${carriers.join(', ')}`,
+    ).toEqual([]);
+  });
+
+  it('exactly one generation.worker bundle is emitted, and it carries exactly the lazy edges WORKER_LAZY_EDGES declares', () => {
+    const bundles = readdirSync(ASSETS).filter(f => /^generation\.worker-.*\.js$/.test(f));
+    expect(bundles.length).toBe(1);
+    const code = readFileSync(join(ASSETS, bundles[0]), 'utf8');
+
+    // ── NON-VACUITY, ON BOTH SCANNERS, BEFORE ANYTHING IS COUNTED ────────────
+    // A count-shaped arm whose scanner cannot see a dynamic import reports every
+    // bundle clean, and a table-shaped arm whose table is empty asserts nothing.
+    expect(WORKER_LAZY_EDGES.length).toBeGreaterThan(0);
+    const PLANT_ONE = 'const a=1;import("./livingContentRoster-AAAAAAAA.js");';
+    const PLANT_TWO = `${PLANT_ONE}import("./somethingElse-BBBBBBBB.js");`;
+    const PLANT_NONE = 'const a=1;reimport(x);const b="./livingContentRoster-AAAAAAAA.js";';
+    expect(dynamicImportTargets(PLANT_ONE)).toEqual(['livingContentRoster-AAAAAAAA.js']);
+    expect(dynamicImportTargets(PLANT_TWO).length).toBe(2);
+    expect(dynamicImportOpenings(PLANT_NONE)).toEqual([]);
+    expect(dynamicImportTargets(PLANT_NONE)).toEqual([]);
+    expect(sourceModuleOf('livingContentRoster-AAAAAAAA.js')).toBe('livingContentRoster');
+
+    // ── (a) THE COUNT EQUALS THE TABLE ───────────────────────────────────────
+    // Openings are counted with the LOOSE form so an `import(someName)` whose
+    // specifier is computed cannot slip past a literal-only scanner; the second
+    // assertion is what makes the loose count readable, by requiring every
+    // opening to have resolved to a literal chunk specifier.
+    const openings = dynamicImportOpenings(code);
+    const targets = dynamicImportTargets(code);
+    expect(
+      openings.length,
+      `the worker bundle carries ${openings.length} dynamic import(s); WORKER_LAZY_EDGES `
+      + `declares ${WORKER_LAZY_EDGES.length}. Every one of them is a cold fetch inside the `
+      + 'user\'s generation wait: declare it with its reason, or take it out.',
+    ).toBe(WORKER_LAZY_EDGES.length);
+    expect(
+      targets.length,
+      'a dynamic import in the worker bundle has no literal chunk specifier, so this arm '
+      + 'cannot tell which chunk it fetches',
+    ).toBe(openings.length);
+    expect(
+      targets.map(sourceModuleOf).sort(),
+      `the worker's lazy edges are ${targets.join(', ')}`,
+    ).toEqual(WORKER_LAZY_EDGES.map(edge => edge.module).sort());
+    // The worker entry is still a leaf in the STATIC graph: an emitted static
+    // edge would be a chunk the browser fetches before the worker can run at all.
+    expect(staticImports(code)).toEqual([]);
+
+    // ── (b) EACH TARGET IS A REAL CHUNK, AND IT IS NOT ALSO INLINED ──────────
+    for (const edge of WORKER_LAZY_EDGES) {
+      const target = targets.find(file => sourceModuleOf(file) === edge.module);
+      expect(target, `no emitted chunk for declared edge ${edge.module}`).toBeTruthy();
+      expect(
+        existsSync(join(ASSETS, target)),
+        `the worker imports ${target}, which is not in dist/assets: the fetch would 404 `
+        + 'inside the user\'s wait',
+      ).toBe(true);
+      const chunk = readFileSync(join(ASSETS, target), 'utf8');
+      // Anchored: the sentinel is proved present in the chunk it names FIRST, so
+      // the absence below is a fact about the worker bundle and not about a
+      // needle that stopped matching anything anywhere.
+      expect(
+        chunk.includes(edge.payloadSentinel),
+        `${edge.payloadSentinel} is not in ${target} — the sentinel is stale, and the `
+        + 'duplication check under it proves nothing',
+      ).toBe(true);
+      expect(
+        code.includes(edge.payloadSentinel),
+        `${edge.module} is split into ${target} AND inlined into the worker bundle: the `
+        + 'bytes are paid twice and the split buys nothing',
+      ).toBe(false);
+      // Measured at dd0b68c0d and pinned because it is the shape, not a wish: a
+      // worker entry is its own rollup build, so this chunk belongs to this
+      // worker alone. The main graph carries its own copy under another hash.
+      const referrers = readdirSync(ASSETS)
+        .filter(file => file.endsWith('.js') && file !== target)
+        .filter(file => readFileSync(join(ASSETS, file), 'utf8').includes(target));
+      expect(
+        referrers,
+        `${target} is referenced by ${referrers.join(', ') || 'nothing'} — this chunk is the `
+        + 'worker build\'s own and only the worker bundle should name it',
+      ).toEqual([bundles[0]]);
+    }
+  });
+
+  it('the client builds this worker with { type: \'module\' }, which is what lets the declared lazy edge run', () => {
+    // ENGINE-3 unit 1: the construction lives in the local engine's seam, which the client calls.
+    const client = source('src/lib/localEngine.js');
+    // Anchored both ways: the pattern must match the shipped construction, and
+    // must NOT match a classic worker, or "module" would be true of every string.
+    expect(
+      MODULE_WORKER_CONSTRUCTION.test(client),
+      'localEngine.js no longer constructs generation.worker.js with { type: \'module\' }. '
+      + 'A classic worker cannot execute the import( the bundle now carries, so every generation '
+      + 'would die on the seam load rather than on anything the user did.',
+    ).toBe(true);
+    expect(
+      MODULE_WORKER_CONSTRUCTION.test(
+        'new Worker(new URL(\'../workers/generation.worker.js\', import.meta.url))',
+      ),
+      'the pattern matches a CLASSIC worker construction, so it proves nothing about the type',
+    ).toBe(false);
+  });
+
+  it('the sentinel ships outside first paint, in the generation lane\'s chunk and in the worker bundle', () => {
+    const eagerSet = new Set(entryClosure());
+    const carriers = readdirSync(ASSETS)
+      .filter(f => f.endsWith('.js') && !eagerSet.has(f))
+      .filter(f => readFileSync(join(ASSETS, f), 'utf8').includes(SENTINEL));
+    expect(
+      carriers.length,
+      `chunks outside first paint carrying the contract: ${carriers.join(', ')}`,
+    ).toBeGreaterThanOrEqual(2);
+  });
+  it('the generation worker bundle stays under its measured ceiling (monotone-down; WORKER_BUNDLE_CEILING_BYTES)', () => {
+    const assets = readdirSync(join(ROOT, 'dist', 'assets'));
+    const workers = assets.filter((f) => /^generation\.worker-[A-Za-z0-9_-]+\.js$/.test(f));
+    expect(workers, 'exactly one generation worker bundle in dist/assets').toHaveLength(1);
+    const bytes = readFileSync(join(ROOT, 'dist', 'assets', workers[0])).length;
+    // Read the measured figure from the failure, never compute the ceiling from the tree.
+    expect(
+      bytes,
+      `generation worker bundle ${workers[0]} is ${bytes} B; the ceiling is `
+      + `${WORKER_BUNDLE_CEILING_BYTES} B (re-recorded at the measured figure by the chair's ruling, 2026-11-07, MERGE-R2, ODQ §934.105). `
+      + 'A RISE IS NEVER A LANE\'S EDIT: buy the bytes back, or take the ruling.',
+    ).toBeLessThanOrEqual(WORKER_BUNDLE_CEILING_BYTES);
+  });
+
+});

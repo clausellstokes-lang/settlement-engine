@@ -1,0 +1,225 @@
+import { useState, useMemo } from 'react';
+import ControlsStrip from './ControlsStrip.jsx';
+import { GOLD, INK, MUTED, SECOND, BORDER, sans, FS, swatch, CARD_ALT } from './theme.js';
+import { useStore } from '../store/index.js';
+import { selectTierForGrid } from '../store/selectors.js';
+import {GOODS_MODIFIERS_BY_TIER} from '../data/tradeGoodsData';
+import {TIER_ORDER} from '../generators/helpers';
+
+const CAT_COLORS = {
+  agricultural:  { bg:'#f0faf2', text:'#1a5a28', label:'Agricultural' },
+  raw_materials: { bg:'#faf4e8', text:'#7a5010', label:'Raw Material'  },
+  manufactured:  { bg:'#f0f4ff', text:'#1a2a8a', label:'Manufactured'  },
+  luxury:        { bg:'#faf0ff', text:'#6a1a8a', label:'Luxury'         },
+  services:      { bg:'#f0f8ff', text:'#1a5a8a', label:'Service'        },
+  food_processed:{ bg:'#fff4e8', text:'#8a4010', label:'Processed'      },
+};
+
+function catColor(cat) {
+  return CAT_COLORS[String(cat||'').toLowerCase()] || { bg:'#f7f0e4', text:SECOND, label:'' };
+}
+
+function getGoodsForTier(tier) {
+  if (!tier) return [];
+  if (tier === 'all') {
+    const seen = new Set(), out = [];
+    (TIER_ORDER||[]).forEach(t => {
+      const data = GOODS_MODIFIERS_BY_TIER[t] || {};
+      Object.entries(data).forEach(([name,def]) => {
+        if (!seen.has(name)) { seen.add(name); out.push({name,...def,_tier:t}); }
+      });
+    });
+    return out;
+  }
+  const data = GOODS_MODIFIERS_BY_TIER[tier] || {};
+  return Object.entries(data).map(([name,def]) => ({name,...def}));
+}
+
+function goodKey(tier, goodName) { return `${tier}_good_${goodName}`; }
+
+// Card-click cycle: allow → force → exclude → allow
+function GoodCard({ good, state, onCycle }) {
+  const { _allow, force, forceExclude } = state;
+  const cc          = catColor(good.category);
+  const isForced    = force && !forceExclude;
+  const isExcluded  = forceExclude;
+  const _isAllowed   = !isForced && !isExcluded;
+
+  const bg         = isForced ? '#efe8d0' : '#faf6ef';
+  const borderLeft = `3px solid ${isForced ? GOLD : 'transparent'}`;
+  const labelText  = isForced ? ' Forced' : isExcluded ? '✕ Excluded' : '○ Allow';
+  const labelColor = isForced ? GOLD : MUTED;
+
+  return (
+    <div onClick={onCycle} role="button" tabIndex={0} onKeyDown={(e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); onCycle(); } }} style={{
+      display:'flex', alignItems:'flex-start', gap:8,
+      padding:'6px 12px 6px 10px',
+      background:bg, borderLeft, borderBottom:'1px solid #f0e8d8',
+      cursor:'pointer', userSelect:'none', WebkitTapHighlightColor:'transparent',
+       transition:'background 0.1s',
+    }}>
+      <div style={{flex:1, minWidth:0}}>
+        <div style={{display:'flex', alignItems:'baseline', gap:6, flexWrap:'wrap'}}>
+          <span style={{fontWeight:600, fontSize:FS.sm, color:isExcluded?MUTED:INK, textDecoration:isExcluded?'line-through':'none'}}>{good.name}</span>
+          {cc.label && <span style={{fontSize:FS.xxs, fontWeight:700, color:cc.text, background:cc.bg, padding:'0 4px'}}>{cc.label}</span>}
+          {good.requiredInstitution && <span style={{fontSize:FS.xxs, color:MUTED, fontStyle:'italic'}}>needs {good.requiredInstitution}</span>}
+        </div>
+        {good.desc && <p style={{fontSize:FS.xs, color:SECOND, lineHeight:1.3, marginTop:1, marginBottom:0}}>{good.desc}</p>}
+      </div>
+      <span style={{fontSize:FS.micro, fontWeight:700, color:labelColor, flexShrink:0, marginTop:2, letterSpacing:'0.03em'}}>{labelText}</span>
+    </div>
+  );
+}
+
+function SectionHeader({ label, forced, allowed, _total, isOpen, onToggle }) {
+  return (
+    <button type="button" onClick={onToggle} style={{
+      width:'100%', display:'flex', alignItems:'center', gap:8, padding:'7px 12px',
+      background: isOpen ? '#f0ead8' : '#faf4e8',
+      border:'none', borderTop:'1px solid #e0d0b0',
+      cursor:'pointer', textAlign:'left', fontFamily:sans,
+      WebkitTapHighlightColor:'transparent',
+    }}>
+      <span style={{flex:1, display:'flex', alignItems:'center', gap:6}}>
+        <span style={{fontSize:FS.sm, fontWeight:700, color:INK, fontFamily:"'Crimson Text', Georgia, serif"}}>{label}</span>
+        {forced>0 && <span style={{fontSize:FS.micro, fontWeight:800, color:GOLD, background:`${GOLD}20`, padding:'1px 5px'}}>{forced} forced</span>}
+      </span>
+      {forced===0 && <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], padding:'1px 5px'}}>{allowed} allowed</span>}
+      {forced>0 && <>
+        <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], padding:'1px 5px'}}>{allowed} allowed</span>
+        <span style={{fontSize:FS.micro, fontWeight:700, color:GOLD, background:`${GOLD}20`, padding:'1px 5px'}}>{forced} forced</span>
+      </>}
+      <span style={{fontSize:FS.xxs, color:MUTED, marginLeft:4}}>{isOpen ? '▲' : '▼'}</span>
+    </button>
+  );
+}
+
+function GoodsPanel() {
+  const tier = useStore(selectTierForGrid);
+  const goodsToggles = useStore(s => s.goodsToggles);
+  const onGoodsToggle = useStore(s => s.toggleGood);
+  const bulkSetGoods = useStore(s => s.bulkSetGoods);
+  const [showExport, setShowExport] = useState(false);
+  const [showImport, setShowImport] = useState(false);
+  const [search, setSearch] = useState('');
+  const [filterMode, setFilterMode] = useState('all');
+
+  const goods = useMemo(() => {
+    if (tier === 'all') {
+      const seen = new Set(), out = [];
+      (TIER_ORDER||[]).forEach(t => {
+        getGoodsForTier(t).forEach(g => { if (!seen.has(g.name)) { seen.add(g.name); out.push({...g,_tier:t}); } });
+      });
+      return out;
+    }
+    return getGoodsForTier(tier);
+  }, [tier]);
+
+  const getKey = name => {
+    if (tier === 'all') {
+      for (const t of (TIER_ORDER||[])) {
+        if (getGoodsForTier(t).find(g=>g.name===name)) return goodKey(t, name);
+      }
+    }
+    return goodKey(tier, name);
+  };
+
+  const getState = good => {
+    const val = goodsToggles[getKey(good.name)];
+    if (val==null) return { allow: good.on!==false, force: false, forceExclude: false };
+    if (typeof val==='object') return { allow: val.allow??true, force: val.force??false, forceExclude: val.forceExclude??false };
+    return { allow:!!val, force:false, forceExclude:false };
+  };
+
+  // Cycle: allow → force → exclude → allow
+  const cycleGood = good => {
+    const cur = getState(good);
+    let next;
+    if (cur.forceExclude)   next = { allow:true,  force:false, forceExclude:false }; // exclude → allow
+    else if (cur.force)     next = { allow:false, force:false, forceExclude:true  }; // force   → exclude
+    else                    next = { allow:true,  force:true,  forceExclude:false }; // allow   → force
+    onGoodsToggle(getKey(good.name), next);
+  };
+
+  // Bulk operations — one store action owns the write for the whole grid, the way
+  // InstitutionalGrid routes its strip through bulkSetInstitutions. bulkSetGoods
+  // builds `${tier}_good_${name}` per tier it is given, so the goods are grouped by
+  // the tier their key ALREADY resolves to (getKey's own rule: the visible tier, or
+  // under 'All tiers' the first tier that carries the good). That keeps a bulk press
+  // and a card click writing the same entries, and never reaches a tier the grid is
+  // not showing.
+  const bulkTierData = useMemo(() => {
+    const byTier = {};
+    for (const g of goods) {
+      const t = tier === 'all' ? g._tier : tier;
+      if (!byTier[t]) byTier[t] = {};
+      byTier[t][g.name] = g;
+    }
+    return byTier;
+  }, [goods, tier]);
+  const bulkForce   = () => bulkSetGoods('force', bulkTierData);
+  const bulkExclude = () => bulkSetGoods('exclude', bulkTierData);
+
+  const filtered = search
+    ? goods.filter(g => g.name.toLowerCase().includes(search.toLowerCase()) || (g.desc||'').toLowerCase().includes(search.toLowerCase()) || (g.category||'').toLowerCase().includes(search.toLowerCase()))
+    : goods;
+
+  const sortedAll = [...filtered].sort((a,b) => a.name.localeCompare(b.name));
+  const sorted = filterMode==='all' ? sortedAll
+    : filterMode==='forced' ? sortedAll.filter(g => { const s=getState(g); return s.force&&!s.forceExclude; })
+    : sortedAll.filter(g => getState(g).forceExclude);
+  const excludedCount = goods.filter(g => getState(g).forceExclude).length;
+  const forcedCount   = goods.filter(g => { const s=getState(g); return s.force&&!s.forceExclude; }).length;
+  const allowedCount  = goods.filter(g => { const s=getState(g); return !s.force&&!s.forceExclude; }).length;
+
+  return (
+    <div style={{border:`1px solid ${BORDER}`, borderRadius:0, borderTop:'none'}}>
+      <ControlsStrip
+        search={search}
+        setSearch={setSearch}
+        placeholder="Search goods…"
+        onForceAll={bulkForce}
+        onReset={() => bulkSetGoods('reset')}
+        onExcludeAll={bulkExclude}
+        onExpandAll={() => { setShowExport(true); setShowImport(true); }}
+        onCollapseAll={() => { setShowExport(false); setShowImport(false); }}
+        forcedCount={forcedCount}
+        excludedCount={excludedCount}
+        filterMode={filterMode}
+        setFilterMode={setFilterMode}
+        tier={tier}
+      />
+
+      <SectionHeader label="Export Goods" forced={forcedCount} allowed={allowedCount+forcedCount} total={goods.length} isOpen={showExport} onToggle={()=>setShowExport(v=>!v)}/>
+      {showExport && (
+        <div style={{maxHeight:360, overflowY:'auto', background:CARD_ALT}}>
+          {sorted.length===0 && search
+            ? <div style={{padding:12, textAlign:'center', color:MUTED, fontSize:FS.sm, fontStyle:'italic'}}>No goods match "{search}"</div>
+            : sorted.map(g => <GoodCard key={g.name} good={g} state={getState(g)} onCycle={()=>cycleGood(g)}/>)
+          }
+        </div>
+      )}
+
+      <SectionHeader label="Import Goods" forced={0} allowed={allowedCount+forcedCount} total={goods.length} isOpen={showImport} onToggle={()=>setShowImport(v=>!v)}/>
+      {showImport && (
+        <div style={{maxHeight:360, overflowY:'auto', background:CARD_ALT}}>
+          {sorted.length===0 && search
+            ? <div style={{padding:12, textAlign:'center', color:MUTED, fontSize:FS.sm, fontStyle:'italic'}}>No goods match "{search}"</div>
+            : sorted.map(g => <GoodCard key={g.name} good={g} state={getState(g)} onCycle={()=>cycleGood(g)}/>)
+          }
+        </div>
+      )}
+    </div>
+  );
+}
+
+// TradeDynamicsPanel mounts inside LayeredConfigurationPanel's Deep-constraints
+// Disclosure, which already supplies the "Trade Dynamics" title, collapse
+// affordance, and the wizard_step_viewed funnel fire. The component's own outer
+// collapsible was a redundant disclosure-inside-disclosure (box-soup); it (and
+// its leftover "Step 4" linear-wizard label and dead icon slot) is removed so
+// there is exactly one disclosure layer. GoodsPanel renders directly. (Restores
+// master's flattening — base of record; the double-disclosure was the merge regression.)
+export default function TradeDynamicsPanel() {
+  return <GoodsPanel />;
+}

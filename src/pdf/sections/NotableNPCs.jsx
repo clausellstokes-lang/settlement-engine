@@ -1,0 +1,411 @@
+/**
+ * NotableNPCs — chapter 09. Full NPC sheets with motivation and secrets; their plot hooks
+ * print in the Plot Hooks chapter (X-2, VERIFIER N6).
+ *
+ * Tiered relative to the cast (so a low-power-mostly settlement still gets
+ * full-card treatment for its three top figures):
+ *   - Major figures: top 3 by power → full editable card, all fields
+ *   - Notable figures: next 4 → compact card with summary + motivation
+ *   - Other names of note: remainder → one-line listing
+ *
+ * If absolute power is high enough (≥80) we still pull the figure into the
+ * top tier even past the 3-cap, so a settlement with eight 90+ power players
+ * isn't artificially trimmed.
+ *
+ * Every content text field is editable so the DM can adjust personalities,
+ * and motivations per session.
+ */
+import { View, Text } from '@react-pdf/renderer';
+import { PageChrome } from '../primitives/PageChrome.jsx';
+import { ChapterBand, ChapterHeadline, KeyValRow, HairRule, Tag } from '../primitives/Dense.jsx';
+import { npcsHeadline } from '../lib/headlines.js';
+import { Pill } from '../primitives/Pill.jsx';
+import { type, palette, space, pt } from '../theme.js';
+import { label, humanize, safe } from '../lib/format.js';
+import { EntityRef, anchorTarget } from '../primitives/EntityRef.jsx';
+import { ProseText } from '../primitives/ProseText.jsx';
+import { tokenCase } from '../../domain/display/labelCase.js';
+
+/**
+ * TextRow — Label · prose value pair, but the value is rendered as plain
+ * text so PDF text extractors (and screen readers) see it. The previous
+ * FieldRow primitive wrapped the value in a TextInput form field, which
+ * displayed correctly but was invisible to pdftotext, leaving DMs with
+ * "blank" sections when they grep'd the file.
+ */
+function TextRow({ label: l, value, multiline = false, labelWidth = 90, marginBottom = 3, index = null }) {
+  if (value == null || value === '') return null;
+  return (
+    <View style={{ flexDirection: 'row', marginBottom, alignItems: 'flex-start' }}>
+      <Text
+        style={{
+          ...type.label_plain,
+          color: palette.muted,
+          fontSize: pt['7.5'],
+          width: labelWidth,
+          paddingTop: 2,
+        }}
+      >
+        {tokenCase(String(l || ''))}
+      </Text>
+      <Text style={{ ...type.body, fontSize: pt['9.5'], flex: 1, lineHeight: multiline ? 1.4 : 1.3 }}>
+        {/* When an entity index is supplied, the value may carry ⟦entity:…⟧
+            tokens (NPC goal prose) — render through ProseText so they become
+            inline EntityRef links; otherwise it's plain text. */}
+        {index ? <ProseText text={String(value)} index={index} /> : safe(value)}
+      </Text>
+    </View>
+  );
+}
+
+export function NotableNPCs({ settlement, narrativeMode, vm }) {
+  const all = vm.npcs.sorted; // already sorted desc by power
+  const index = vm.entityIndex; // Phase-D: id»card resolver (anchors + links)
+  // Relative tiering: top 3 (or any with power ≥ 8) → major; next 4 → notable.
+  // NPC power is a 1-10 scale (npcGenerator: high 8-10, mid 4-7, low 1-3); the
+  // old 80 threshold was 0-100 and could never promote anyone.
+  const majorMin = 3;
+  const notableMin = 4;
+  const HIGH_POWER = 8;
+  const major = [];
+  const notable = [];
+  const other = [];
+  for (const npc of all) {
+    const p = npc.power || 0;
+    if (major.length < majorMin || p >= HIGH_POWER) {
+      major.push(npc);
+    } else if (notable.length < notableMin) {
+      notable.push(npc);
+    } else {
+      other.push(npc);
+    }
+  }
+
+  return (
+    <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
+      <ChapterBand
+        eyebrow="13"
+        title="Notable NPCs"
+        accent={narrativeMode ? palette.ai : palette.gold}
+        sub={`${all.length} figure${all.length === 1 ? '' : 's'}`}
+      />
+
+      <ChapterHeadline tone="gold">
+        {npcsHeadline(vm.npcs)}
+      </ChapterHeadline>
+
+      {all.length === 0 && (
+        <Text style={{ ...type.body, color: palette.muted, fontStyle: 'italic' }}>
+          No NPCs detailed for this settlement.
+        </Text>
+      )}
+
+      {major.length > 0 && (
+        <View style={{ marginBottom: space.sm }}>
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
+            MAJOR FIGURES
+          </Text>
+          {major.map((npc, i) => (
+            <FullCard key={`maj-${i}`} npc={npc} index={index} />
+          ))}
+        </View>
+      )}
+
+      {notable.length > 0 && (
+        <View style={{ marginBottom: space.sm }}>
+          <HairRule />
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
+            NOTABLE FIGURES
+          </Text>
+          <CompactGrid items={notable} index={index} />
+        </View>
+      )}
+
+      {other.length > 0 && (
+        <View>
+          <HairRule />
+          <Text style={{ ...type.label, color: palette.muted, fontSize: pt['8'], marginBottom: 3 }}>
+            OTHER NAMES OF NOTE
+          </Text>
+          <OtherNamesGrid items={other} index={index} />
+        </View>
+      )}
+    </PageChrome>
+  );
+}
+
+function FullCard({ npc, index }) {
+  const name = safe(npc.name || 'Unnamed');
+  const title = safe(npc.title || '');
+  // Phase-D: this card is the anchor TARGET for any npc.id reference.
+  const anchor = anchorTarget(index, npc.id);
+  // The faction affiliation links to the faction card when it resolves in-doc.
+  const factionLinks = !!(index && npc.factionLink && index.resolve?.(npc.factionLink));
+  return (
+    <View
+      id={anchor}
+      style={{
+        marginBottom: 8,
+        padding: 8,
+        border: `0.4pt solid ${palette.border}`,
+        borderLeft: `2pt solid ${palette.gold}`,
+        borderRadius: 2,
+        backgroundColor: palette.card,
+      }}
+      // Was wrap={false}: for a top-power NPC with a long AI blurb + several
+      // secrets (and, before X-2, plot hooks), the (unbounded) card exceeds a full page, and react-pdf
+      // cannot split a no-wrap block — so it CLIPPED the overflow tail, silently
+      // dropping secrets/hooks on the settlement's most important NPC. Allowing the
+      // card to wrap breaks it across a page boundary instead: never lossy. The
+      // occasional split card is an acceptable cost vs. dropping DM-critical content.
+      wrap
+    >
+      <View style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 3 }}>
+        <View style={{ flex: 1 }}>
+          <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['12'] }}>
+            {name}
+          </Text>
+          {title && (
+            <Text style={{ ...type.italic, color: palette.muted, fontSize: pt['9.5'] }}>
+              {title}
+            </Text>
+          )}
+        </View>
+        <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
+          {npc.factionLabel && (
+            <Pill tone="cool">
+              {factionLinks
+                ? <EntityRef id={npc.factionLink} index={index} type="faction" fallback={npc.factionLabel} />
+                : npc.factionLabel}
+            </Pill>
+          )}
+          <View style={{ width: 4 }} />
+          <Pill tone="gold">PWR {npc.power}</Pill>
+        </View>
+      </View>
+
+      {/* Identity meta line */}
+      <KeyValRow
+        pairs={[
+          npc.race ? { label: 'Race', value: humanize(npc.race) } : null,
+          npc.gender ? { label: 'Sex', value: humanize(npc.gender) } : null,
+          npc.age ? { label: 'Age', value: npc.age } : null,
+          // 'INFL' is SPELLED OUT rather than re-cased: tokenCase('INFL') is 'Infl',
+          // which is not a word, and an abbreviation that reads as a typo in sentence
+          // case has to become the word it abbreviates or stay an abbreviation.
+          npc.influenceLabel ? { label: 'Influence', value: npc.influenceLabel } : null,
+        ].filter(Boolean)}
+      />
+
+      {npc.influenceDescription && (
+        <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginTop: 2, fontStyle: 'italic' }}>
+          {safe(npc.influenceDescription)}
+        </Text>
+      )}
+
+      {/* PEOPLE-5A (M-1b): the card's house and its standing in each power by rank. */}
+      {(npc.house || npc.powerLine) && (
+        <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginTop: 2 }}>
+          {safe([npc.house, npc.powerLine].filter(Boolean).join(' · '))}
+        </Text>
+      )}
+
+      {/* Description / blurb */}
+      {npc.blurb && (
+        <View style={{ marginTop: 4 }}>
+          <Text style={{ ...type.body, fontSize: pt['9.5'], lineHeight: 1.4 }}>
+            {safe(npc.blurb)}
+          </Text>
+        </View>
+      )}
+
+      {/* Personality and motivation — labeled prose blocks. X-48: no look, voice or tell. */}
+      <View style={{ marginTop: 4 }}>
+        <TextRow label="PERSONALITY" value={npc.personality} multiline />
+        <TextRow label="MOTIVATION"  value={npc.motivation}  multiline index={index} />
+        <TextRow label="HOW THEY DEAL" value={npc.dealing} multiline />
+      </View>
+
+      {/* Secrets */}
+      {npc.secrets?.length > 0 && (
+        <View style={{ marginTop: 3 }}>
+          <Text style={{ ...type.label, color: palette.bad, fontSize: pt['7.5'], marginBottom: 1 }}>
+            SECRETS
+          </Text>
+          {npc.secrets.map((s, si) => {
+            // Mirror cleanSecrets' admittance criteria (viewModel.js): object secrets
+            // can carry only what/stakes/label. The old text||description-only read
+            // dropped those even though the slice deliberately preserved them.
+            const t = typeof s === 'string'
+              ? s
+              : (s?.text || s?.description ||
+                 (s?.what ? (s.stakes ? `${s.what}: ${s.stakes}` : s.what) : '') ||
+                 s?.stakes || s?.label || '');
+            if (!t) return null;
+            return (
+              <View key={`sec-${si}`} style={{ flexDirection: 'row', marginBottom: 1, alignItems: 'flex-start' }}>
+                <Text style={{ color: palette.bad, marginRight: 4, fontSize: pt['9'] }}>·</Text>
+                <Text style={{ ...type.body, fontSize: pt['9'], flex: 1 }}>{safe(t)}</Text>
+              </View>
+            );
+          })}
+        </View>
+      )}
+
+      {/* VERIFIER N6 (X-2): an NPC's plot hooks print in the Plot Hooks chapter only. */}
+
+      {/* Relationships */}
+      {npc.relationships?.length > 0 && (
+        <View style={{ marginTop: 3 }}>
+          <Text style={{ ...type.label, color: palette.muted, fontSize: pt['7.5'], marginBottom: 1 }}>
+            RELATIONSHIPS
+          </Text>
+          {/* ⛔ B4 (2026-11-09): the tie's sentence prints once, in Relationships (14); the card names the person and the tie. */}
+          {npc.relationships.map((r, ri) => (
+            <Text key={`rel-${ri}`} style={{ ...type.caption, color: palette.second, fontSize: pt['8'] }}>
+              · {label(r?.with || r?.target || r?.name)}
+              {r?.type ? safe(` - ${r.type}`) : ''}
+            </Text>
+          ))}
+        </View>
+      )}
+    </View>
+  );
+}
+
+/**
+ * OtherNamesGrid — 2-col tight list for the long-tail "also exists" tier.
+ * Each row is a single line: name · title · faction · PWR.
+ */
+function OtherNamesGrid({ items, index }) {
+  const rows = [];
+  for (let i = 0; i < items.length; i += 2) {
+    rows.push([items[i], items[i + 1] || null]);
+  }
+  return (
+    <View>
+      {rows.map((pair, ri) => (
+        <View key={`og-${ri}`} style={{ flexDirection: 'row', marginBottom: 1 }}>
+          <View style={{ flex: 1, marginRight: 6 }}>
+            {pair[0] && <OtherNameRow npc={pair[0]} index={index} />}
+          </View>
+          <View style={{ flex: 1 }}>
+            {pair[1] && <OtherNameRow npc={pair[1]} index={index} />}
+          </View>
+        </View>
+      ))}
+    </View>
+  );
+}
+
+function OtherNameRow({ npc, index }) {
+  const anchor = anchorTarget(index, npc.id);
+  return (
+    <View
+      id={anchor}
+      style={{
+        flexDirection: 'row',
+        alignItems: 'baseline',
+        paddingVertical: 2,
+        borderBottom: `0.3pt solid ${palette.border}`,
+      }}
+      wrap={false}
+    >
+      <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['9'] }}>
+        {safe(npc.name || 'Unnamed')}
+      </Text>
+      {npc.title && (
+        <Text style={{ ...type.body, color: palette.second, fontSize: pt['8.5'], marginLeft: 4, flex: 1 }}>
+          · {safe(npc.title)}
+        </Text>
+      )}
+      {!npc.title && <View style={{ flex: 1 }} />}
+      {npc.factionLabel && (
+        <Text style={{ ...type.caption, color: palette.cool, fontSize: pt['7.5'], marginLeft: 4 }}>
+          {safe(npc.factionLabel)}
+        </Text>
+      )}
+      <Text style={{ ...type.label, color: palette.muted, marginLeft: 5, fontSize: pt['7'] }}>
+        {npc.power}
+      </Text>
+    </View>
+  );
+}
+
+/**
+ * CompactGrid — 2-col layout for the Notable Figures tier. Halves the
+ * vertical footprint so the chapter fits more characters per page without
+ * crowding the Major Figures cards.
+ */
+function CompactGrid({ items, index }) {
+  const rows = [];
+  for (let i = 0; i < items.length; i += 2) {
+    rows.push([items[i], items[i + 1] || null]);
+  }
+  return (
+    <View>
+      {rows.map((pair, ri) => (
+        <View key={`cg-${ri}`} style={{ flexDirection: 'row', marginBottom: 4 }}>
+          <View style={{ flex: 1, marginRight: 5 }}>
+            {pair[0] && <CompactCard npc={pair[0]} index={index} />}
+          </View>
+          <View style={{ flex: 1 }}>
+            {pair[1] && <CompactCard npc={pair[1]} index={index} />}
+          </View>
+        </View>
+      ))}
+    </View>
+  );
+}
+
+function CompactCard({ npc, index }) {
+  const name = safe(npc.name || 'Unnamed');
+  const title = safe(npc.title || '');
+  const anchor = anchorTarget(index, npc.id);
+  const factionLinks = !!(index && npc.factionLink && index.resolve?.(npc.factionLink));
+  return (
+    <View
+      id={anchor}
+      style={{
+        padding: 6,
+        border: `0.4pt solid ${palette.border}`,
+        borderRadius: 2,
+        backgroundColor: palette.card,
+        minHeight: 60,
+      }}
+      wrap={false}
+    >
+      <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
+        <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10'], flex: 1 }}>
+          {name}
+        </Text>
+        <Pill tone="gold">PWR {npc.power}</Pill>
+      </View>
+      {(title || npc.factionLabel) && (
+        <View style={{ flexDirection: 'row', alignItems: 'baseline', marginTop: 1 }}>
+          {title && (
+            <Text style={{ ...type.italic, color: palette.muted, fontSize: pt['8.5'], flex: 1 }}>
+              {title}
+            </Text>
+          )}
+          {npc.factionLabel && (
+            <Tag tone="cool">
+              {factionLinks
+                ? <EntityRef id={npc.factionLink} index={index} type="faction" fallback={npc.factionLabel} />
+                : npc.factionLabel}
+            </Tag>
+          )}
+        </View>
+      )}
+      {npc.motivation && (
+        <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted, marginTop: 2, lineHeight: 1.3 }}>
+          <Text style={{ color: palette.faint }}>Motive: </Text>
+          {safe(npc.motivation)}
+        </Text>
+      )}
+      {/* VERIFIER N6 (X-2): the compact card's two hooks print in the Plot Hooks chapter only. */}
+    </View>
+  );
+}
+
+export default NotableNPCs;

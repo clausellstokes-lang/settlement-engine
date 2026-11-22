@@ -1,0 +1,394 @@
+/**
+ * WarFaithDesk.jsx — THE WAR & FAITH DESK'S ONE CALL SITE, its ONE public-dossier gate,
+ * and the seven positions the mount registry routes across two tabs.
+ *
+ * ── WHY THIS FILE EXISTS, AND IT IS NOT TIDINESS ─────────────────────────────────────
+ * `warFaith` is ONE corpus leaf, so it is one `desk` value in every mount row — and the
+ * mount walker's ARM 2 admits EXACTLY ONE component file that calls `<desk>StateProse(`:
+ *
+ *   "Exactly one caller is what keeps the gate auditable: two call sites are two places
+ *    to forget, and would also break the one-position reading the registry assumes."
+ *
+ * The war tab and the faith tab are two tabs. If each called the desk itself there would
+ * be two callers and two hand-placed `publicDossier` gates — which is precisely the shape
+ * that guard exists to refuse, and precisely how the leak shipped twice before it
+ * (economics by hand, then power by hand). So the desk is called HERE, once, behind ONE
+ * gate, and both tabs render the components below. That is stricter than the economy and
+ * power precedent rather than a workaround for it.
+ *
+ * ── THE PAID SURFACE (O2GATE, §885.3) ────────────────────────────────────────────────
+ * `publicDossier` is `readOnly && !saveId` — a shared gallery dossier with no owning save,
+ * i.e. a FREE, ANONYMOUS viewer — and §885.3 rules dossier corpus prose a PAID surface. The
+ * gate is the ternary in `warFaithDeskRungs` below: public ⇒ every rung null ⇒
+ * `drawnAtMount` answers null at all seven positions ⇒ no corpus sentence renders anywhere
+ * on either tab. Every DATUM is untouched: the war block's own lines, the treaty rows, the
+ * patron seat, the niche rows and both honest-absence messages never read the desk.
+ *
+ * ⛔ THE GATE DEFAULTS CLOSED. `publicDossier = true` is the parameter default, so a future
+ * caller that forgets the prop draws NOTHING rather than leaking. That is the kernel's own
+ * law 2 reasoning one layer up — the restrictive read is the safe one when the caller is
+ * wrong.
+ *
+ * ⛔ AND THE OTHER HALF OF THAT DEFAULT IS UNPROVED, SAID HERE RATHER THAN CLAIMED AWAY.
+ * A default-closed gate has two failure directions: it can LEAK (the prop is forgotten and
+ * the desk draws for a free viewer) and it can go SILENTLY DARK (the prop is forgotten and
+ * a paying reader is shown nothing, which no red anywhere would report). This header used
+ * to say "the UI flow tests are what keep the default from being a silent dark: both tabs
+ * are proved to SPEAK with the prop passed and to fall silent without it", and named
+ * `tests/ui/warTabFlow.test.js` and `tests/ui/faithTabFlow.test.js` as its enforcers.
+ * NEITHER FILE HAS EVER EXISTED, and no test in the estate names this component at all —
+ * measured, not inferred. `tests/domain/warFaithStateProseDesk.test.js` proves the CORPUS
+ * and the pools; it carries no `publicDossier` read. So the leak direction is covered by
+ * the registry walker below, and the silent-dark direction is covered by nothing. The
+ * claim is withdrawn rather than repointed at a test that does not make it.
+ *
+ * ── THE ROUTER READ, AND WHY EVERY POSITION HERE IS A REAL DRAW ──────────────────────
+ * Every position asks `drawnAtMount(id, rung)` what it may show. THE COMPONENT DOES NOT
+ * DECIDE ITS OWN DEPTH — the registry does. Flip `faith.nicheRow` from `glance` to
+ * `sentence` in dossierMounts.js and that row starts speaking with no edit here. The
+ * walker's reachability arm can only see that each literal appears once under
+ * src/components; the honesty of this file is what stands between the registry and a table
+ * of citations that cite nothing.
+ *
+ * @enforced-by tests/lint/dossierMountRegistry.walker.test.js
+ * @enforced-by tests/domain/warFaithStateProseDesk.test.js
+ */
+import { warFaithStateProse } from '../../../domain/display/stateProse/warFaithStateProse.js';
+import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
+import { tierNounFor } from '../../../domain/display/stateProse/weaveBlock.js';
+import { publicProseOf } from '../../../domain/display/publicProse.js';
+import { FALL_SENTENCE, faithPanelModel } from '../../settlement/faithPanelModel.js';
+import { BODY, BORDER, CARD, FS, MUTED, sans } from '../../theme.js';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
+import useIsMobile from '../../../hooks/useIsMobile.js';
+import ProseBlock from '../ProseBlock.jsx'; // the shared one-paragraph renderer (see DeskLines)
+
+/** The war tab's three positions. Bound once so the reachability arm counts one literal. */
+const STANDING_MOUNT = 'war.standing';
+const TREATIES_MOUNT = 'war.treaties';
+const DORMANT_MOUNT = 'war.dormantNote';
+/** The faith tab's four. `faith.nicheRow` is the leaf's only GLANCE row. */
+const PATRON_SEAT_MOUNT = 'faith.patronSeat';
+const TEASER_MOUNT = 'faith.teaser';
+const CREED_STANDING_MOUNT = 'faith.creedStanding';
+const NICHE_ROW_MOUNT = 'faith.nicheRow';
+/** DS-FTH-4's generation lens (W4 PEOPLE, 2026-11-07). */
+const TEMPLE_GROUND_MOUNT = 'faith.templeGround';
+
+/** Every key `warFaithStateProse` returns, nulled — the public dossier's whole answer. */
+const SILENT = Object.freeze({
+  warStatus: null, warExhaustion: null, warMobilization: null, warOccupation: null,
+  warHoldings: null, treatyTerm: null, treatyFraying: null, treatyDocument: null,
+  dormantNote: null, patronRank: null, patronCults: null, devotion: null, pietyArc: null,
+  standings: null, sink: null, mandate: null, faithDark: null, faithTeaser: null,
+  creedStanding: null, creedLegitimacy: null, creedNiche: null, creedFall: null,
+  nicheRow: null, templeCrusader: null, templeHeresy: null, templeFraud: null,
+  templeMageTheocracy: null,
+});
+
+/**
+ * THE ONE DESK CALL, and the one gate on it.
+ *
+ * THE AUDIENCE is the PowerTab and EconomicsTab term exactly (`playerView ? 'player' :
+ * 'dm'`). Three warFaith pools are `dm-only` — DS-WAR-1's covert mobilization, DS-WAR-2's
+ * strained sovereignty clause and DS-FTH-3's covert congregation — so a desk called without
+ * an audience could never reach them and those pools would ship mounted over a lens no
+ * world could draw. The default matches the two landed tabs' rather than inventing a third:
+ * two tabs disagreeing about who is reading would be the real defect.
+ *
+ * THE SEED is the settlement's own stable identity, so THE PROMISE holds: same seed + same
+ * state ⇒ same sentence, forever.
+ *
+ * @param {object} args
+ * @param {any} args.settlement
+ * @param {object} [args.readings] the canonical war / faith readings, as their owners
+ *   return them — this desk derives none of them.
+ * @param {boolean} [args.publicDossier] DEFAULTS CLOSED; see the docblock.
+ * @param {boolean} [args.playerView]
+ * @param {string|null} [args.publicSite] the call site's key in the public prose projection
+ * @returns {Record<string, any>}
+ */
+export function warFaithDeskRungs({
+  settlement, readings = {}, publicDossier = true, playerView = false, publicSite = null,
+}) {
+  const audience = playerView ? 'player' : 'dm';
+  // ⭐ THE PUBLIC BRANCH (STYLE-RULINGS-2 B10(a), SW-B7b): a shared page prints the desk the
+  // owner's player view drew at this call site (`publicSite`, e.g. `warFaith:faith`), shipped
+  // as text at the owner's save; no site (WarTab: campaign-only, owner-only) or an unstamped
+  // record is the SILENT desk, never a re-draw. Still IN the read's own statement (ARM 3).
+  return publicDossier
+    ? publicWarFaithDesk(settlement, publicSite)
+    : warFaithStateProse(settlement, readings, {
+      seed: String(settlement?._seed ?? settlement?.id ?? ''), audience,
+      tierNoun: tierNounFor(settlement?.tier),
+    });
+}
+
+/**
+ * The shipped desk at one site, every key the SILENT desk names and nothing else.
+ * @param {any} settlement @param {unknown} site @returns {Record<string, any>}
+ */
+function publicWarFaithDesk(settlement, site) {
+  const shipped = typeof site === 'string' ? publicProseOf(settlement, site) : null;
+  if (!shipped || typeof shipped !== 'object') return SILENT;
+  const rungs = /** @type {Record<string, unknown>} */ (shipped);
+  return Object.freeze(Object.fromEntries(Object.keys(SILENT).map((key) => [key, rungs[key] ?? null])));
+}
+
+/**
+ * THE FAITH TAB'S DESK READINGS, EXTRACTED (one derivation for FaithTab and the public prose
+ * composer). The panel model is the ONLY reading handed over: the faith tab holds no worldState
+ * by §805's constitution, so the war half of the leaf is absent and every war rung is null.
+ *
+ * `patronFallCause` is the TYPED cause of a seat that changed hands, recovered by inverting the
+ * producer's OWN exported map (whose keys are exactly `PATRON_FALL_CAUSES`), never by reading
+ * `config.faithProfile.patronFall.cause` (the reader-with-no-writer walker's observation corpus
+ * is deity-free). DS-FTH-4's generation lens reads the birth-time stress flags.
+ * @param {any} settlement @param {any} [model] the tab's memoised `faithPanelModel(settlement)`
+ * @returns {Record<string, unknown>}
+ */
+export function faithDeskReadings(settlement, model = faithPanelModel(settlement)) {
+  return {
+    faith: model,
+    hasPatron: !!model.hasEmbed,
+    patronFallCause: model.patronFallSentence
+      ? Object.keys(FALL_SENTENCE).find((c) => FALL_SENTENCE[c] === model.patronFallSentence)
+      : undefined,
+    faithFlags: settlement?.economicState?.safetyProfile?.flags || null,
+  };
+}
+
+/**
+ * One mounted position drawn as prose: every lens the desk built for it, in order, each
+ * routed through the registry. Renders NOTHING when the registry says glance, when the
+ * corpus was silent, or when the desk was not called — which is R-DST-K, and is why there
+ * is no empty-state branch here.
+ *
+ * The shape is `EconomicsGlance.DeskLines` deliberately: one idiom for "a position that is
+ * a paragraph", so a reader who has met one has met both.
+ * @param {{mount: string, rungs: ReadonlyArray<object|null>, testId?: string,
+ *   settlementName?: unknown, tier?: unknown, lead?: ReadonlyArray<string>}} props `settlementName` and `tier` are the
+ *   town's own `name` and `tier`; without them the sentences still join and no opening name
+ *   is stood down, so a call site that has not caught up cannot break.
+ */
+export function DeskLines({ mount, rungs, testId, settlementName, tier, lead = [] }) {
+  const mobile = useIsMobile();
+  // `lead`: already-composed sentences that open the paragraph before the drawn lenses (the
+  // faith line at `faith.teaser`, lane FAITH). Woven exactly as the print desk weaves them.
+  const lines = [
+    ...(lead || []).filter(Boolean),
+    ...(rungs || []).map((rung) => drawnAtMount(mount, rung)?.sentence).filter(Boolean),
+  ];
+  if (lines.length === 0) return null;
+  // ⭐ ONE PARAGRAPH, THROUGH THE SHARED RENDERER (owner finding 2026-09-18) — the same move
+  // as `EconomicsGlance.DeskLines`, in the same shape, because the two renderers are
+  // deliberately one idiom. It matters most HERE: `faith.patronSeat` reads EIGHT lenses of
+  // DS-FTH-1 at one position, so this file's worst case was an eight-paragraph column about
+  // one patron. The mount+position keying is gone with the list — one paragraph needs no
+  // keys, and two lenses drawing the same line now simply both appear in it rather than
+  // colliding.
+  //
+  // ⭐ THE NAME NOW REACHES HERE, through one `settlement` prop on each wrapper below. It was
+  // deferred at the weave's first landing because the wrappers are called from WarTab.jsx and
+  // FaithTab.jsx, which belonged to other lanes.
+  //
+  // ⚠ THE TWO PROPS ARE OPTIONAL ON *THIS* COMPONENT AND REQUIRED ON THE WRAPPERS, and the
+  // asymmetry is deliberate (review 12). Here they stay optional because a position that
+  // genuinely has no settlement — a fixture driving the renderer directly — should get the
+  // join and no stand-down rather than an error. The WRAPPERS have no such caller: every one
+  // of them is mounted by a host tab that is holding the settlement, so there a missing prop
+  // is always a mistake, and `requireSettlement` below says so out loud in a dev build.
+  return (
+    <div data-testid={testId} style={{ margin: '0 0 12px' }}>
+      <ProseBlock lines={lines} settlementName={settlementName} tier={tier} style={{
+        color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.6,
+        margin: '0 0 6px', fontStyle: 'italic',
+      }}/>
+    </div>
+  );
+}
+
+/**
+ * ⛔⛔ `settlement` IS REQUIRED, AND A DEFAULT IS EXACTLY WHAT MADE IT OPTIONAL (review 12).
+ *
+ * The five wrappers below took `settlement = null`, so a host tab that dropped
+ * `settlement={settlement}` at its call site kept rendering: the paragraph still appeared,
+ * every sentence was still in it, and only the opening word of the second sentence was
+ * wrong. That is the whole defect class this thread exists to close, reintroduced one level
+ * ABOVE the place the suites were watching — the arms render the WRAPPERS, so they stayed
+ * green while the page lost the stand-down. A default that silently disables the feature is
+ * not a courtesy to callers; it is the hole.
+ *
+ * So the prop is required by contract, and the contract is ENFORCED rather than declared:
+ * in a dev or test build a wrapper called without one THROWS, by name, with the reason. The
+ * gate is `import.meta.env.DEV`, which Vite replaces with the literal `false` in a
+ * production build, so the branch is dead code for a reader — a shipped page can never be
+ * taken down by this, and it degrades to exactly the behaviour the default used to give.
+ * Vitest runs in DEV, so every render in the suite is checked.
+ *
+ * @param {unknown} settlement the settlement the host tab holds
+ * @param {string} wrapper the wrapper's own name, for the message
+ * @returns {void}
+ */
+function requireSettlement(settlement, wrapper) {
+  const isDev = !!(typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.DEV);
+  if (isDev && (settlement === null || settlement === undefined)) {
+    throw new Error(
+      `${wrapper}: the \`settlement\` prop is required. Without it \`DeskLines\` has no name`
+      + ` and no tier, so a position that draws more than one lens prints the settlement's name`
+      + ` at the head of every sentence instead of standing the repeats down to the tier noun.`
+      + ` That is a page which is subtly wrong rather than one that fails. Pass the host tab's own`
+      + ` settlement (WarTab.jsx / FaithTab.jsx already hold it).`,
+    );
+  }
+}
+
+/**
+ * The war tab's standing paragraph — DS-WAR-1's five lenses at one position.
+ * @param {{desk: Record<string, any>, settlement: object}} props `settlement` is REQUIRED —
+ *   see `requireSettlement`; without it the stand-down silently stops firing on the page.
+ */
+export function WarStandingLines({ desk, settlement }) {
+  requireSettlement(settlement, 'WarStandingLines');
+  return <DeskLines mount={STANDING_MOUNT} testId="war-desk-standing"
+    settlementName={settlement?.name} tier={settlement?.tier} rungs={[
+      desk.warStatus, desk.warExhaustion, desk.warMobilization, desk.warOccupation,
+      desk.warHoldings,
+    ]} />;
+}
+
+/**
+ * The war tab's treaty paragraph — DS-WAR-2's clause, fraying and document lenses.
+ * @param {{desk: Record<string, any>, settlement: object}} props `settlement` is REQUIRED.
+ */
+export function WarTreatyLines({ desk, settlement }) {
+  requireSettlement(settlement, 'WarTreatyLines');
+  // ONE LINE (chair ruling W9, 2026-10-30): the treaty card already prints each term's strain
+  // and the fraying seam, so the fraying lens is not drawn and the clause lens speaks only when
+  // the document lens is silent.
+  return <DeskLines mount={TREATIES_MOUNT} testId="war-desk-treaties"
+    settlementName={settlement?.name} tier={settlement?.tier} rungs={[
+      desk.treatyDocument || desk.treatyTerm,
+    ]} />;
+}
+
+/**
+ * The war tab's dormant note — the WHOLE PAGE-SET at rest.
+ *
+ * IT REPLACES the tab's plain empty-state line rather than standing under it. Both say
+ * "this settlement is at peace"; printing them an inch apart is the page saying one thing
+ * twice, which is the `shadowEconomy` ruling on the economy desk applied here. The plain
+ * line remains the standing text for every reader the desk does not draw for — a public
+ * dossier, or a town whose faith is not hidden — so nothing is ever lost.
+ * @param {{desk: Record<string, any>, fallback?: string|null}} props `fallback` is omitted, not
+ *   passed as a null literal: a `fallback={null}` prop reads as a silent Suspense boundary to
+ *   loadingNarrationRatchet, and an absent fallback already prints nothing.
+ */
+export function WarDormantNote({ desk, fallback }) {
+  const drawn = drawnAtMount(DORMANT_MOUNT, desk.dormantNote);
+  // With no corpus line and no fallback (the War tab's launch teaser stands above it, X-7b),
+  // the position prints nothing rather than an empty box.
+  if (!drawn?.sentence && !fallback) return null;
+  return (
+    <div data-testid="war-dormant" style={{
+      padding: 24, textAlign: 'center', color: MUTED, fontFamily: sans,
+      fontSize: FS.sm, lineHeight: 1.6,
+    }}>
+      {drawn?.sentence || fallback}
+    </div>
+  );
+}
+
+/**
+ * The faith tab's patron-seat paragraph — DS-FTH-1's seven lenses at one position.
+ * @param {{desk: Record<string, any>, settlement: object}} props `settlement` is REQUIRED.
+ */
+export function FaithSeatLines({ desk, settlement }) {
+  requireSettlement(settlement, 'FaithSeatLines');
+  return <DeskLines mount={PATRON_SEAT_MOUNT} testId="faith-desk-seat"
+    settlementName={settlement?.name} tier={settlement?.tier} rungs={[
+      desk.patronRank, desk.patronCults, desk.devotion, desk.pietyArc, desk.standings,
+      desk.sink, desk.mandate, desk.faithDark,
+    ]} />;
+}
+
+/**
+ * The faith tab's creed-standing paragraph — DS-FTH-3's four lenses at one position.
+ * Rendered beside the niche rows, which is where the standing and legitimacy words the
+ * corpus is talking about already appear.
+ * @param {{desk: Record<string, any>, settlement: object}} props `settlement` is REQUIRED.
+ */
+export function FaithCreedLines({ desk, settlement }) {
+  requireSettlement(settlement, 'FaithCreedLines');
+  return <DeskLines mount={CREED_STANDING_MOUNT} testId="faith-desk-creed"
+    settlementName={settlement?.name} tier={settlement?.tier} rungs={[
+      desk.creedStanding, desk.creedLegitimacy, desk.creedNiche, desk.creedFall,
+    ]} />;
+}
+
+/**
+ * The faith tab's temple-ground paragraph — DS-FTH-4's generation lens (W4 PEOPLE,
+ * 2026-11-07): the church beside the garrison, the court, the thieves or the mages, as the
+ * birth-time stress flags record it. Every settlement carries the flags, so this position
+ * speaks on the deity-free town as well as under a patron; no variant names a creed.
+ * @param {{desk: Record<string, any>, settlement: object}} props `settlement` is REQUIRED.
+ */
+export function FaithGroundLines({ desk, settlement }) {
+  requireSettlement(settlement, 'FaithGroundLines');
+  return <DeskLines mount={TEMPLE_GROUND_MOUNT} testId="faith-desk-ground"
+    settlementName={settlement?.name} tier={settlement?.tier} rungs={[
+      desk.templeCrusader, desk.templeHeresy, desk.templeFraud, desk.templeMageTheocracy,
+    ]} />;
+}
+
+/**
+ * ⭐ THE PATRON-LESS TOWN'S OWN VOICE — DS-FTH-2, and the position that matters most on
+ * the corpus the review actually runs against.
+ *
+ * A settlement with no `config.primaryDeitySnapshot` is the COMMON case, not the edge: every
+ * generated settlement is deity-free (the gods are the DM's custom content). LANE FAITH
+ * (2026-11-03): the tab's standing message above this position is now the FAITH LINE
+ * (faithPanelModel's `line`, from the ONE FAITH READING), which describes the church that
+ * exists. DS-FTH-2's one reachable pool (PRIVATE DOSSIER) reads the same reading (lane
+ * FAITH-POOLS, 2026-11-04: the houses, the senior cleric, the religious faction, the dial),
+ * so each variant restates a fact the line prints, and on a patron-less town
+ * `trimFaithDeskToPanel` stands the lens down and this position carries the line alone
+ * (X-50, every fact once). No variant names a creed or a god.
+ *
+ * `lead` is the faith line itself, which opens this paragraph: the print desk puts the same
+ * line at the same position (printProse.js :: buildPrintProse), so the screen and the PDF
+ * weave one paragraph from one reading.
+ * @param {{desk: Record<string, any>, settlement: object, lead?: ReadonlyArray<string>}} props
+ *   `settlement` is REQUIRED.
+ */
+export function FaithTeaserLines({ desk, settlement, lead = [] }) {
+  requireSettlement(settlement, 'FaithTeaserLines');
+  return <DeskLines mount={TEASER_MOUNT} testId="faith-desk-teaser" lead={lead}
+    settlementName={settlement?.name} tier={settlement?.tier} rungs={[desk.faithTeaser]} />;
+}
+
+/**
+ * The niche block's GLANCE row — the leaf's one glance position.
+ *
+ * WHAT A GLANCE ROW RENDERS FROM THE CORPUS IS: NOTHING. `drawnAtMount` strips the sentence
+ * AND the provenance for a `glance` row, so this prints the band word the rung carries and
+ * no corpus line. That is the point of the rung rather than a limitation of it: the record
+ * appears at this position, the page already shows its band, and DS-FTH-3 speaks ONCE — at
+ * `faith.creedStanding`, a few inches up. Flip the registry row to `sentence` and this
+ * position starts speaking with no edit here.
+ * @param {{desk: Record<string, any>}} props
+ */
+export function FaithNicheGlance({ desk }) {
+  const mobile = useIsMobile();
+  const drawn = drawnAtMount(NICHE_ROW_MOUNT, desk.nicheRow);
+  if (!drawn?.glance) return null;
+  return (
+    <div data-testid="faith-desk-niche-glance" style={{
+      border: `1px solid ${BORDER}`, background: CARD, padding: '6px 10px', marginBottom: 6,
+      color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.pico, mobile), fontWeight: 700,
+    }}>
+      {`The patron's standing · ${drawn.glance}`}
+      {drawn.sentence && <span style={{ color: BODY, fontWeight: 400, textTransform: 'none' }}>{`: ${drawn.sentence}`}</span>}
+    </div>
+  );
+}

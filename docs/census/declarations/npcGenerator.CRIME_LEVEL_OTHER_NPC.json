@@ -1,0 +1,84 @@
+{
+  "pool": {
+    "id": "npcGenerator.CRIME_LEVEL_OTHER_NPC",
+    "file": "src/generators/npcGenerator.js",
+    "drawKind": "R",
+    "drawSite": "npcGenerator.js:756 pickRandom2 (only when allNpcs.length>1; {otherNpc.name} is a second roster NPC)",
+    "colour": false,
+    "crisisScoped": false,
+    "keyDeclares": {
+      "*": [
+        "other npc"
+      ]
+    },
+    "lines": 8,
+    "declaring": 0,
+    "note": "No key; the draw site's own guard (allNpcs.length > 1, otherNpc picked from the roster minus the speaker) guarantees the other NPC for every line, so other-npc sits in keyDeclares under '*' and on no line. #2.what presumes both hold a 'current position' (no atom)."
+  },
+  "rows": [
+    {
+      "id": "#0.what",
+      "text": "Knows something about {otherNpc.name} that {otherNpc.name} believes no one else knows, and has been deciding for months whether to use it",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "#0.stakes",
+      "text": "{otherNpc.name} would move against them immediately if they suspected",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "#1.what",
+      "text": "Was present when {otherNpc.name} did something they've never accounted for publicly. Neither has acknowledged the other was there",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "#1.stakes",
+      "text": "The situation they're both ignoring is becoming relevant again",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "#2.what",
+      "text": "Owes {otherNpc.name} a debt from before either of them held their current position: one that {otherNpc.name} has never formally called in",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "#2.stakes",
+      "text": "The silence feels like patience rather than forgiveness",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "#3.what",
+      "text": "Has been reading {otherNpc.name}'s correspondence through an intermediary. Nothing damaging yet. But they keep looking",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "#3.stakes",
+      "text": "The intermediary has recently started asking for more money",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    }
+  ]
+}

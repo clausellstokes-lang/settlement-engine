@@ -1,0 +1,92 @@
+[
+{
+"id": "00207",
+"sev": "MED",
+"n": 18,
+"town": "r2r-hamlet-28",
+"section": "Summary/Overview",
+"fold": "Barrels of salt fish stand stacked by the water, and the gulls have opinions about every #.",
+"text": "Barrels of salt fish stand stacked by the water, and the gulls have opinions about every one.",
+"why": "Stacked barrels of salt fish by the water in a famine whose failed food source is fish; stores are about one month.",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 143,
+"fn": "ARRIVAL_SENSES.dominant"
+}
+},
+{
+"id": "00420",
+"sev": "MED",
+"n": 4,
+"town": "r2s-famine-thorp-0",
+"section": "Summary/Overview",
+"fold": "Nets hang drying on poles, and the smell of the catch follows you.",
+"text": "Nets hang drying on poles, and the smell of the catch follows you.",
+"why": "offers the smell of the catch and drying nets under a famine whose failed source is fish; the line offers the food that failed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 135,
+"fn": "ARRIVAL_SENSES.lines"
+}
+},
+{
+"id": "00336",
+"sev": "MED",
+"n": 1,
+"town": "r2s-plague_onset-village-0",
+"section": "Summary/Overview",
+"fold": "Horse traders show their animals at the edge of the settlement, where herders and townsfolk meet.",
+"text": "Horse traders show their animals at the edge of the settlement, where herders and townsfolk meet.",
+"why": "herders and townsfolk meet to trade horses; safety is Quarantined (plague), and HOUSES has no pack-animal trader or market",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 349,
+"fn": "ARRIVAL_PEOPLE.steppe"
+}
+},
+{
+"id": "00211",
+"sev": "MED",
+"n": 1,
+"town": "r2s-infiltrated-town-1",
+"section": "Summary/Overview",
+"fold": "Bolts of cloth and bales of wool fill the carts waiting on the road out.",
+"text": "Bolts of cloth and bales of wool fill the carts waiting on the road out.",
+"why": "carts of cloth and wool going out; TRADE exports and made-here list no cloth or wool (only fish, herbs, honey, iron, spices, transit)",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 156,
+"fn": "ARRIVAL_SENSES.dominant"
+}
+},
+{
+"id": "00544",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-city-1",
+"section": "Summary/Overview",
+"fold": "Stalls sell reagents in stoppered jars, and the buyers know exactly what they want.",
+"text": "Stalls sell reagents in stoppered jars, and the buyers know exactly what they want.",
+"why": "stalls selling reagents: HOUSES has no alchemist or apothecary, and TRADE and INCOME name no reagent trade",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 282,
+"fn": "ARRIVAL_SENSES.dominant"
+}
+}
+]

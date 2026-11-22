@@ -1,0 +1,242 @@
+{
+ "measuredAt": "bf3d1258 (src); script at this commit",
+ "command": "X46_FORCE_D=1 node --import ./scripts/audit/institution-budget-force-d.mjs scripts/audit/institution-budget-measure.mjs --calibrate 200 --tiers <tier>",
+ "definition": "realised_scalable(d): mean count of rows drawn at a scaled chance (source generated, cascade, faction_boost) that are not required, fabric or density-exempt",
+ "calibrate": 200,
+ "calibration": {
+  "thorp": {
+   "midpoint": 12,
+   "seeds": 200,
+   "R": 2,
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     0.25,
+     0.855
+    ],
+    [
+     0.5,
+     1.475
+    ],
+    [
+     1,
+     2.355
+    ],
+    [
+     1.5,
+     2.995
+    ],
+    [
+     2,
+     3.5
+    ],
+    [
+     3,
+     4.155
+    ],
+    [
+     4,
+     4.535
+    ]
+   ]
+  },
+  "hamlet": {
+   "midpoint": 45,
+   "seeds": 200,
+   "R": 3,
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     0.25,
+     2.55
+    ],
+    [
+     0.5,
+     5.075
+    ],
+    [
+     1,
+     8.77
+    ],
+    [
+     1.5,
+     11.405
+    ],
+    [
+     2,
+     13.175
+    ],
+    [
+     3,
+     15.025
+    ],
+    [
+     4,
+     16.26
+    ]
+   ]
+  },
+  "village": {
+   "midpoint": 173,
+   "seeds": 200,
+   "R": 6,
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     0.25,
+     7.175
+    ],
+    [
+     0.5,
+     14.285
+    ],
+    [
+     1,
+     24.29
+    ],
+    [
+     1.5,
+     31.08
+    ],
+    [
+     2,
+     35.335
+    ],
+    [
+     3,
+     40.345
+    ],
+    [
+     4,
+     42.895
+    ]
+   ]
+  },
+  "town": {
+   "midpoint": 866,
+   "seeds": 200,
+   "R": 11,
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     0.25,
+     14.58
+    ],
+    [
+     0.5,
+     27.54
+    ],
+    [
+     1,
+     44.62
+    ],
+    [
+     1.5,
+     54.875
+    ],
+    [
+     2,
+     61.375
+    ],
+    [
+     3,
+     67.08
+    ],
+    [
+     4,
+     69.475
+    ]
+   ]
+  },
+  "city": {
+   "midpoint": 5477,
+   "seeds": 200,
+   "R": 15,
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     0.25,
+     18.09
+    ],
+    [
+     0.5,
+     32.025
+    ],
+    [
+     1,
+     49.975
+    ],
+    [
+     1.5,
+     59.165
+    ],
+    [
+     2,
+     64.54
+    ],
+    [
+     3,
+     68.065
+    ],
+    [
+     4,
+     68.81
+    ]
+   ]
+  },
+  "metropolis": {
+   "midpoint": 27386,
+   "seeds": 200,
+   "R": 15,
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     0.25,
+     21.35
+    ],
+    [
+     0.5,
+     37.74
+    ],
+    [
+     1,
+     57.04
+    ],
+    [
+     1.5,
+     66.965
+    ],
+    [
+     2,
+     71.62
+    ],
+    [
+     3,
+     74.82
+    ],
+    [
+     4,
+     75.545
+    ]
+   ]
+  }
+ }
+}

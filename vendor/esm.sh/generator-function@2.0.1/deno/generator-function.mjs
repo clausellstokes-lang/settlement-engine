@@ -1,0 +1,3 @@
+/* esm.sh - generator-function@2.0.1 */
+var a=Object.create;var n=Object.defineProperty;var f=Object.getOwnPropertyDescriptor;var p=Object.getOwnPropertyNames;var d=Object.getPrototypeOf,m=Object.prototype.hasOwnProperty;var x=(o,t)=>()=>(t||o((t={exports:{}}).exports,t),t.exports);var g=(o,t,r,e)=>{if(t&&typeof t=="object"||typeof t=="function")for(let c of p(t))!m.call(o,c)&&c!==r&&n(o,c,{get:()=>t[c],enumerable:!(e=f(t,c))||e.enumerable});return o};var h=(o,t,r)=>(r=o!=null?a(d(o)):{},g(t||!o||!o.__esModule?n(r,"default",{value:o,enumerable:!0}):r,o));var u=x((G,s)=>{"use strict";var l=function*(){}.constructor;s.exports=()=>l});var i=h(u(),1),b=i.default;export{b as default};
+//# sourceMappingURL=generator-function.mjs.map

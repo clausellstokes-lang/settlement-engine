@@ -1,0 +1,763 @@
+[
+  {
+    "importer": "src/domain/spatial/commodityFlow.js",
+    "imported": "src/domain/spatial/embattlement.js",
+    "direction": "WAR→TRADE"
+  },
+  {
+    "importer": "src/domain/spatial/dispatchEV.js",
+    "imported": "src/domain/worldPulse/beliefMap.js",
+    "direction": "INFO→TRADE"
+  },
+  {
+    "importer": "src/domain/spatial/entrepots.js",
+    "imported": "src/domain/spatial/embattlement.js",
+    "direction": "WAR→TRADE"
+  },
+  {
+    "importer": "src/domain/spatial/intelActs.js",
+    "imported": "src/domain/worldPulse/relationshipState.js",
+    "direction": "INTERIOR→INFO"
+  },
+  {
+    "importer": "src/domain/spatial/migrationRumors.js",
+    "imported": "src/domain/spatial/armyTransit.js",
+    "direction": "WAR→POP"
+  },
+  {
+    "importer": "src/domain/spatial/migrationRumors.js",
+    "imported": "src/domain/spatial/rumorNetwork.js",
+    "direction": "INFO→POP"
+  },
+  {
+    "importer": "src/domain/spatial/supplyShipments.js",
+    "imported": "src/domain/spatial/embattlement.js",
+    "direction": "WAR→TRADE"
+  },
+  {
+    "importer": "src/domain/worldPulse/beliefMap.js",
+    "imported": "src/domain/spatial/embattlement.js",
+    "direction": "WAR→INFO"
+  },
+  {
+    "importer": "src/domain/worldPulse/beliefMap.js",
+    "imported": "src/domain/worldPulse/relationshipEvolution.js",
+    "direction": "INTERIOR→INFO"
+  },
+  {
+    "importer": "src/domain/worldPulse/brokerageFidelity.js",
+    "imported": "src/domain/spatial/embattlement.js",
+    "direction": "WAR→INFO"
+  },
+  {
+    "importer": "src/domain/worldPulse/conquestDoctrineStage.js",
+    "imported": "src/domain/worldPulse/beliefMap.js",
+    "direction": "INFO→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/conquestDoctrineStage.js",
+    "imported": "src/domain/worldPulse/deityAxes.js",
+    "direction": "FAITH→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/conquestDoctrineStage.js",
+    "imported": "src/domain/worldPulse/dispositionLedger.js",
+    "direction": "INTERIOR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/conquestDoctrineStage.js",
+    "imported": "src/domain/worldPulse/foodStockpile.js",
+    "direction": "TRADE→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/conquestDoctrineStage.js",
+    "imported": "src/domain/worldPulse/relationshipEvolution.js",
+    "direction": "INTERIOR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/conquestDoctrineStage.js",
+    "imported": "src/domain/worldPulse/relationshipRuleHelpers.js",
+    "direction": "INTERIOR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/conquestFeeds.js",
+    "imported": "src/domain/worldPulse/deityAxes.js",
+    "direction": "FAITH→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/demographicsMigration.js",
+    "imported": "src/domain/worldPulse/routeNetworkConsumers.js",
+    "direction": "TRADE→POP"
+  },
+  {
+    "importer": "src/domain/worldPulse/demographicsMigration.js",
+    "imported": "src/domain/worldPulse/routeNetworkConsumersTransit.js",
+    "direction": "TRADE→POP"
+  },
+  {
+    "importer": "src/domain/worldPulse/demographicsPushPull.js",
+    "imported": "src/domain/worldPulse/foodStockpile.js",
+    "direction": "TRADE→POP"
+  },
+  {
+    "importer": "src/domain/worldPulse/demographicsRates.js",
+    "imported": "src/domain/worldPulse/routeNetworkConsumersInterdiction.js",
+    "direction": "TRADE→POP"
+  },
+  {
+    "importer": "src/domain/worldPulse/demographicsRates.js",
+    "imported": "src/domain/worldPulse/routeNetworkLedger.js",
+    "direction": "TRADE→POP"
+  },
+  {
+    "importer": "src/domain/worldPulse/demographicsWar.js",
+    "imported": "src/domain/worldPulse/beliefMap.js",
+    "direction": "INFO→POP"
+  },
+  {
+    "importer": "src/domain/worldPulse/deploymentReturn.js",
+    "imported": "src/domain/worldPulse/relationshipEvolution.js",
+    "direction": "INTERIOR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/disposition.js",
+    "imported": "src/domain/worldPulse/deityAxes.js",
+    "direction": "FAITH→INTERIOR"
+  },
+  {
+    "importer": "src/domain/worldPulse/disposition.js",
+    "imported": "src/domain/worldPulse/piety.js",
+    "direction": "FAITH→INTERIOR"
+  },
+  {
+    "importer": "src/domain/worldPulse/dispositionChannels.js",
+    "imported": "src/domain/worldPulse/peaceTerms.js",
+    "direction": "GRAMMAR→INTERIOR"
+  },
+  {
+    "importer": "src/domain/worldPulse/envoyDiplomacy.js",
+    "imported": "src/domain/worldPulse/beliefMap.js",
+    "direction": "INFO→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/envoyDiplomacy.js",
+    "imported": "src/domain/worldPulse/relationshipEvolution.js",
+    "direction": "INTERIOR→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/envoyDiplomacy.js",
+    "imported": "src/domain/worldPulse/routeNetworkConsumersTransit.js",
+    "direction": "TRADE→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/envoyEncounter.js",
+    "imported": "src/domain/worldPulse/warCoalitionLedger.js",
+    "direction": "WAR→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/envoyInterceptionStage.js",
+    "imported": "src/domain/spatial/armyTransit.js",
+    "direction": "WAR→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/envoyInterceptionStage.js",
+    "imported": "src/domain/worldPulse/brokerageServicesPlant.js",
+    "direction": "INFO→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/envoyInterceptionStage.js",
+    "imported": "src/domain/worldPulse/relationshipState.js",
+    "direction": "INTERIOR→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/envoyInterceptionStage.js",
+    "imported": "src/domain/worldPulse/warSeatBooks.js",
+    "direction": "WAR→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/envoyNegotiationPictureBuilder.js",
+    "imported": "src/domain/worldPulse/beliefMap.js",
+    "direction": "INFO→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/envoyNegotiationPictureBuilder.js",
+    "imported": "src/domain/worldPulse/relationshipEvolution.js",
+    "direction": "INTERIOR→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/envoyNegotiationPictureBuilder.js",
+    "imported": "src/domain/worldPulse/warSeatBooks.js",
+    "direction": "WAR→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/envoyNegotiationPictureBuilder.js",
+    "imported": "src/domain/worldPulse/warTermination.js",
+    "direction": "WAR→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/envoyPulse.js",
+    "imported": "src/domain/worldPulse/beliefMap.js",
+    "direction": "INFO→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/factionCapture.js",
+    "imported": "src/domain/worldPulse/piety.js",
+    "direction": "FAITH→INTERIOR"
+  },
+  {
+    "importer": "src/domain/worldPulse/factionCompetition.js",
+    "imported": "src/domain/worldPulse/beliefMap.js",
+    "direction": "INFO→INTERIOR"
+  },
+  {
+    "importer": "src/domain/worldPulse/generosityKernel.js",
+    "imported": "src/domain/spatial/intelActs.js",
+    "direction": "INFO→INTERIOR"
+  },
+  {
+    "importer": "src/domain/worldPulse/generosityKernel.js",
+    "imported": "src/domain/worldPulse/beliefMap.js",
+    "direction": "INFO→INTERIOR"
+  },
+  {
+    "importer": "src/domain/worldPulse/generosityKernel.js",
+    "imported": "src/domain/worldPulse/deityAxes.js",
+    "direction": "FAITH→INTERIOR"
+  },
+  {
+    "importer": "src/domain/worldPulse/generosityKernel.js",
+    "imported": "src/domain/worldPulse/foodStockpile.js",
+    "direction": "TRADE→INTERIOR"
+  },
+  {
+    "importer": "src/domain/worldPulse/generosityKernel.js",
+    "imported": "src/domain/worldPulse/mobilization.js",
+    "direction": "WAR→INTERIOR"
+  },
+  {
+    "importer": "src/domain/worldPulse/generosityKernel.js",
+    "imported": "src/domain/worldPulse/settlementLifecycleFirstClass.js",
+    "direction": "POP→INTERIOR"
+  },
+  {
+    "importer": "src/domain/worldPulse/generosityKernel.js",
+    "imported": "src/domain/worldPulse/warFrontReads.js",
+    "direction": "WAR→INTERIOR"
+  },
+  {
+    "importer": "src/domain/worldPulse/generosityUpdates.js",
+    "imported": "src/domain/worldPulse/foodStockpile.js",
+    "direction": "TRADE→INTERIOR"
+  },
+  {
+    "importer": "src/domain/worldPulse/informationStatecraft.js",
+    "imported": "src/domain/worldPulse/relationshipEvolution.js",
+    "direction": "INTERIOR→INFO"
+  },
+  {
+    "importer": "src/domain/worldPulse/informationStatecraft.js",
+    "imported": "src/domain/worldPulse/relationshipState.js",
+    "direction": "INTERIOR→INFO"
+  },
+  {
+    "importer": "src/domain/worldPulse/institutionLifecycle.js",
+    "imported": "src/domain/spatial/entrepots.js",
+    "direction": "TRADE→INTERIOR"
+  },
+  {
+    "importer": "src/domain/worldPulse/institutionLifecycle.js",
+    "imported": "src/domain/worldPulse/conquestFeeds.js",
+    "direction": "WAR→INTERIOR"
+  },
+  {
+    "importer": "src/domain/worldPulse/institutionTolerance.js",
+    "imported": "src/domain/worldPulse/deityAxes.js",
+    "direction": "FAITH→INTERIOR"
+  },
+  {
+    "importer": "src/domain/worldPulse/institutionTolerance.js",
+    "imported": "src/domain/worldPulse/religionState.js",
+    "direction": "FAITH→INTERIOR"
+  },
+  {
+    "importer": "src/domain/worldPulse/lineageClaim.js",
+    "imported": "src/domain/worldPulse/relationshipState.js",
+    "direction": "INTERIOR→POP"
+  },
+  {
+    "importer": "src/domain/worldPulse/mobilization.js",
+    "imported": "src/domain/worldPulse/disposition.js",
+    "direction": "INTERIOR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/mobilization.js",
+    "imported": "src/domain/worldPulse/treatyEnforcement.js",
+    "direction": "GRAMMAR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/mobilizationEffects.js",
+    "imported": "src/domain/worldPulse/relationshipEvolution.js",
+    "direction": "INTERIOR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/mobilizationReactions.js",
+    "imported": "src/domain/worldPulse/disposition.js",
+    "direction": "INTERIOR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/mobilizationReactions.js",
+    "imported": "src/domain/worldPulse/relationshipEvolution.js",
+    "direction": "INTERIOR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/npcLadderCoherence.js",
+    "imported": "src/domain/worldPulse/deityAxes.js",
+    "direction": "FAITH→INTERIOR"
+  },
+  {
+    "importer": "src/domain/worldPulse/occupation.js",
+    "imported": "src/domain/worldPulse/foodStockpile.js",
+    "direction": "TRADE→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/occupation.js",
+    "imported": "src/domain/worldPulse/relationshipEvolution.js",
+    "direction": "INTERIOR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/occupation.js",
+    "imported": "src/domain/worldPulse/treatyEnforcement.js",
+    "direction": "GRAMMAR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/peaceReasons.js",
+    "imported": "src/domain/spatial/navalLayer.js",
+    "direction": "WAR→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/peaceReasons.js",
+    "imported": "src/domain/worldPulse/beliefMap.js",
+    "direction": "INFO→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/peaceReasons.js",
+    "imported": "src/domain/worldPulse/lineageClaim.js",
+    "direction": "POP→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/peaceReasons.js",
+    "imported": "src/domain/worldPulse/relationshipEvolution.js",
+    "direction": "INTERIOR→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/peaceReasons.js",
+    "imported": "src/domain/worldPulse/sacredClaim.js",
+    "direction": "FAITH→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/peaceReasons.js",
+    "imported": "src/domain/worldPulse/warCoalitionLedger.js",
+    "direction": "WAR→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/peaceReasons.js",
+    "imported": "src/domain/worldPulse/warFrontReads.js",
+    "direction": "WAR→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/peaceReasons.js",
+    "imported": "src/domain/worldPulse/warReasons.js",
+    "direction": "WAR→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/peaceTerms.js",
+    "imported": "src/domain/worldPulse/beliefMap.js",
+    "direction": "INFO→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/peaceTerms.js",
+    "imported": "src/domain/worldPulse/dispositionProfile.js",
+    "direction": "INTERIOR→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/peaceTerms.js",
+    "imported": "src/domain/worldPulse/relationshipEvolution.js",
+    "direction": "INTERIOR→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/peaceTerms.js",
+    "imported": "src/domain/worldPulse/relationshipState.js",
+    "direction": "INTERIOR→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/peaceTerms.js",
+    "imported": "src/domain/worldPulse/sacredClaim.js",
+    "direction": "FAITH→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/peaceTerms.js",
+    "imported": "src/domain/worldPulse/warCoalitionExpenditure.js",
+    "direction": "WAR→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/peaceTerms.js",
+    "imported": "src/domain/worldPulse/warCoalitionLedger.js",
+    "direction": "WAR→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/peaceTerms.js",
+    "imported": "src/domain/worldPulse/warCoalitionSettlement.js",
+    "direction": "WAR→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/peaceTerms.js",
+    "imported": "src/domain/worldPulse/warReasons.js",
+    "direction": "WAR→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/peaceTermsAppraisal.js",
+    "imported": "src/domain/worldPulse/beliefMap.js",
+    "direction": "INFO→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/peaceTermsAppraisal.js",
+    "imported": "src/domain/worldPulse/deityAxes.js",
+    "direction": "FAITH→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/peaceTermsCoalition.js",
+    "imported": "src/domain/worldPulse/dispositionProfile.js",
+    "direction": "INTERIOR→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/peaceTermsCoalition.js",
+    "imported": "src/domain/worldPulse/warCoalitionExpenditure.js",
+    "direction": "WAR→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/peaceTermsCoalition.js",
+    "imported": "src/domain/worldPulse/warCoalitionLedger.js",
+    "direction": "WAR→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/peaceTermsCoalition.js",
+    "imported": "src/domain/worldPulse/warCoalitionSettlement.js",
+    "direction": "WAR→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/peaceTermsCoalition.js",
+    "imported": "src/domain/worldPulse/warSeatBooks.js",
+    "direction": "WAR→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/peaceTermsGraph.js",
+    "imported": "src/domain/worldPulse/relationshipState.js",
+    "direction": "INTERIOR→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/peaceTermsGraph.js",
+    "imported": "src/domain/worldPulse/sacredClaim.js",
+    "direction": "FAITH→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/peaceTermsOverlay.js",
+    "imported": "src/domain/worldPulse/relationshipEvolution.js",
+    "direction": "INTERIOR→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/peaceTermsOverlay.js",
+    "imported": "src/domain/worldPulse/relationshipState.js",
+    "direction": "INTERIOR→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/peaceTermsPrimitives.js",
+    "imported": "src/domain/worldPulse/warReasonTaxonomy.js",
+    "direction": "WAR→GRAMMAR",
+    "note": "RETARGETED 2026-08-07, count-neutral. This entry read warReasons.js until 67f8a58e moved the two-line `reasonPairKey` template DOWN into the zero-import warReasonTaxonomy.js to cut a 39-module cycle. Same importer, same direction, same symbol, same legacy debt — a smaller provider, so it is recorded as a MOVE rather than banked-and-re-minted. NOT licensed: `${a}>${b}` has no receipt, no desk and no counterforce, so a registry row would be a false claim of designed coupling. The debt itself is UNDISSOLVED and deferred: peaceTermsPrimitives could inline the template under corruptionWeb.js's drift-guard precedent and bank this line outright, which is a chair call because it would mint a third copy of a spelling three ledgers must share."
+  },
+  {
+    "importer": "src/domain/worldPulse/razingExecution.js",
+    "imported": "src/domain/worldPulse/institutionStatusModel.js",
+    "direction": "INTERIOR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/razingExecution.js",
+    "imported": "src/domain/worldPulse/relationshipEvolution.js",
+    "direction": "INTERIOR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/razingExecution.js",
+    "imported": "src/domain/worldPulse/relationshipState.js",
+    "direction": "INTERIOR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/relationshipEvolution.js",
+    "imported": "src/domain/worldPulse/warCoalitionLedger.js",
+    "direction": "WAR→INTERIOR"
+  },
+  {
+    "importer": "src/domain/worldPulse/relationshipRulesAdversarial.js",
+    "imported": "src/domain/worldPulse/deityAxes.js",
+    "direction": "FAITH→INTERIOR"
+  },
+  {
+    "importer": "src/domain/worldPulse/religionLegitimacy.js",
+    "imported": "src/domain/worldPulse/npcLadderState.js",
+    "direction": "INTERIOR→FAITH"
+  },
+  {
+    "importer": "src/domain/worldPulse/religionState.js",
+    "imported": "src/domain/worldPulse/relationshipState.js",
+    "direction": "INTERIOR→FAITH"
+  },
+  {
+    "importer": "src/domain/worldPulse/routeNetworkCharterBypass.js",
+    "imported": "src/domain/spatial/embattlement.js",
+    "direction": "WAR→TRADE"
+  },
+  {
+    "importer": "src/domain/worldPulse/routeNetworkCharterDanger.js",
+    "imported": "src/domain/spatial/embattlement.js",
+    "direction": "WAR→TRADE"
+  },
+  {
+    "importer": "src/domain/worldPulse/routeNetworkConsumersStrategic.js",
+    "imported": "src/domain/worldPulse/warFrontReads.js",
+    "direction": "WAR→TRADE"
+  },
+  {
+    "importer": "src/domain/worldPulse/tradeWar.js",
+    "imported": "src/domain/worldPulse/institutionTolerance.js",
+    "direction": "INTERIOR→TRADE"
+  },
+  {
+    "importer": "src/domain/worldPulse/tradeWar.js",
+    "imported": "src/domain/worldPulse/relationshipEdgeSeed.js",
+    "direction": "INTERIOR→TRADE"
+  },
+  {
+    "importer": "src/domain/worldPulse/tradeWar.js",
+    "imported": "src/domain/worldPulse/relationshipEvolution.js",
+    "direction": "INTERIOR→TRADE"
+  },
+  {
+    "importer": "src/domain/worldPulse/treatyBreach.js",
+    "imported": "src/domain/worldPulse/dispositionLedger.js",
+    "direction": "INTERIOR→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/treatyBreach.js",
+    "imported": "src/domain/worldPulse/warReasons.js",
+    "direction": "WAR→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/treatyTransfer.js",
+    "imported": "src/domain/worldPulse/foodStockpile.js",
+    "direction": "TRADE→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/treatyTransfer.js",
+    "imported": "src/domain/worldPulse/generosityUpdates.js",
+    "direction": "INTERIOR→GRAMMAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warAllianceRisk.js",
+    "imported": "src/domain/worldPulse/beliefMap.js",
+    "direction": "INFO→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warAllianceRisk.js",
+    "imported": "src/domain/worldPulse/relationshipState.js",
+    "direction": "INTERIOR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warCapacityReads.js",
+    "imported": "src/domain/worldPulse/relationshipEvolution.js",
+    "direction": "INTERIOR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warCoalitionDecision.js",
+    "imported": "src/domain/worldPulse/dispositionProfile.js",
+    "direction": "INTERIOR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warCoalitionDecision.js",
+    "imported": "src/domain/worldPulse/relationshipState.js",
+    "direction": "INTERIOR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warCoalitionGraph.js",
+    "imported": "src/domain/worldPulse/relationshipState.js",
+    "direction": "INTERIOR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warCoalitionRefusal.js",
+    "imported": "src/domain/worldPulse/dispositionProfile.js",
+    "direction": "INTERIOR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warCoalitionSettlement.js",
+    "imported": "src/domain/worldPulse/relationshipEvolution.js",
+    "direction": "INTERIOR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warCoalitionSettlement.js",
+    "imported": "src/domain/worldPulse/treatyDisposition.js",
+    "direction": "GRAMMAR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warCoalitionSettlement.js",
+    "imported": "src/domain/worldPulse/treatyTransfer.js",
+    "direction": "GRAMMAR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warCosts.js",
+    "imported": "src/domain/worldPulse/foodStockpile.js",
+    "direction": "TRADE→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warCosts.js",
+    "imported": "src/domain/worldPulse/institutionStatusModel.js",
+    "direction": "INTERIOR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warCosts.js",
+    "imported": "src/domain/worldPulse/relationshipState.js",
+    "direction": "INTERIOR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warCosts.js",
+    "imported": "src/domain/worldPulse/routeNetworkLedger.js",
+    "direction": "TRADE→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warDeployment.js",
+    "imported": "src/domain/spatial/supplyShipments.js",
+    "direction": "TRADE→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warDeployment.js",
+    "imported": "src/domain/worldPulse/foodStockpile.js",
+    "direction": "TRADE→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warHomeCosts.js",
+    "imported": "src/domain/worldPulse/foodStockpile.js",
+    "direction": "TRADE→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warHomeCosts.js",
+    "imported": "src/domain/worldPulse/relationshipEvolution.js",
+    "direction": "INTERIOR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warIntent.js",
+    "imported": "src/domain/worldPulse/relationshipEvolution.js",
+    "direction": "INTERIOR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warIntent.js",
+    "imported": "src/domain/worldPulse/treatyEnforcement.js",
+    "direction": "GRAMMAR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warPeaceDecision.js",
+    "imported": "src/domain/worldPulse/npcLadderState.js",
+    "direction": "INTERIOR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warPeaceDecision.js",
+    "imported": "src/domain/worldPulse/relationshipState.js",
+    "direction": "INTERIOR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warPeaceRefusal.js",
+    "imported": "src/domain/worldPulse/relationshipEvolution.js",
+    "direction": "INTERIOR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warPoliticalLoop.js",
+    "imported": "src/domain/worldPulse/factionCompetition.js",
+    "direction": "INTERIOR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warPoliticalLoop.js",
+    "imported": "src/domain/worldPulse/factionPairLedger.js",
+    "direction": "INTERIOR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warPoliticalLoop.js",
+    "imported": "src/domain/worldPulse/relationshipEvolution.js",
+    "direction": "INTERIOR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warReasons.js",
+    "imported": "src/domain/worldPulse/demographicsObservation.js",
+    "direction": "POP→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warReasons.js",
+    "imported": "src/domain/worldPulse/demographicsRates.js",
+    "direction": "POP→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warReasons.js",
+    "imported": "src/domain/worldPulse/demographicsWar.js",
+    "direction": "POP→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warReasons.js",
+    "imported": "src/domain/worldPulse/informationStatecraft.js",
+    "direction": "INFO→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warReasons.js",
+    "imported": "src/domain/worldPulse/lineageClaim.js",
+    "direction": "POP→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warReasons.js",
+    "imported": "src/domain/worldPulse/relationshipEvolution.js",
+    "direction": "INTERIOR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warReasons.js",
+    "imported": "src/domain/worldPulse/relationshipState.js",
+    "direction": "INTERIOR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warReasons.js",
+    "imported": "src/domain/worldPulse/sacredClaim.js",
+    "direction": "FAITH→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warReasons.js",
+    "imported": "src/domain/worldPulse/treatyEnforcement.js",
+    "direction": "GRAMMAR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warSeatBooks.js",
+    "imported": "src/domain/worldPulse/npcLadderState.js",
+    "direction": "INTERIOR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warTermination.js",
+    "imported": "src/domain/worldPulse/dispositionProfile.js",
+    "direction": "INTERIOR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warTermination.js",
+    "imported": "src/domain/worldPulse/peaceTerms.js",
+    "direction": "GRAMMAR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warTermination.js",
+    "imported": "src/domain/worldPulse/relationshipEvolution.js",
+    "direction": "INTERIOR→WAR"
+  },
+  {
+    "importer": "src/domain/worldPulse/warTermination.js",
+    "imported": "src/domain/worldPulse/sacredClaim.js",
+    "direction": "FAITH→WAR"
+  }
+]

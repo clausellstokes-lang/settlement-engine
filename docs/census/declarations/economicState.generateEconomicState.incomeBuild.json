@@ -1,0 +1,629 @@
+{
+  "id": "economicState.generateEconomicState.incomeBuild",
+  "source": "src/generators/economy/economicState.js :: generateEconomicState (incomeBuild desc/source lines, :67–:531)",
+  "drawKind": "T",
+  "pool": {
+    "declares": [],
+    "crisisScoped": true,
+    "colour": false,
+    "notes": "INCOME rows. Branches read institution NAMES by private substring (hasInst/hasInstNamed) and the raw roster (getInstFlags, stamped once — the ⛔ note at :52), so presumptions are declared with the vocabulary reader. Crisis-scoped because \"Grain Sales\" (local) and \"Pilgrim Trade\" assert surplus/traffic and are gated on no crisis; every other row declares \"any\". Entrepot/International Commerce bonus rows live in tradeGoods.deriveIsEntrepot.json.",
+    "needs": [],
+    "excludes": []
+  },
+  "rows": [
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::agri_rents.small",
+      "text": "Payments in kind or coin from tenant farmers; the primary revenue at this scale.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "Branch tier thorp|hamlet|village. unhomed: tenant farming (no farmland atom; food-source: grain|livestock disjunction)."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::agri_rents.town",
+      "text": "Rural hinterland rents remain significant without large market infrastructure.",
+      "needs": [],
+      "excludes": [
+        "market"
+      ],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "Branch tier town AND no 'market square'/'weekly market'/'daily market' by name (private; factsOf(r).market should answer)."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::market_taxes.district",
+      "text": "District-level duties on specialized goods; a major civic revenue stream across the urban ",
+      "needs": [
+        "market"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "Branch 'district market'/'multiple market'. Source label becomes \"Magical Trade Revenue\" when isolatedMagicTrade (route isolated + teleportation infra). — and this desc is NOT swapped, so \"Magical Trade Revenue\" prints beside a district-market desc. unhomed: districts."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::market_taxes.daily.magic",
+      "text": "Trade flowing through teleportation channels generates modest fees and arcane duties.",
+      "needs": [
+        "magic",
+        "route: isolated"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "unhomed: teleportation infrastructure (hasTeleportationInfra)."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::market_taxes.daily",
+      "text": "Daily market tolls, stall fees, and weights-and-measures inspections.",
+      "needs": [
+        "market"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": ""
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::market_taxes.weekly.magic",
+      "text": "Magical trade conduits generate modest fees and arcane duties on transported goods.",
+      "needs": [
+        "magic",
+        "route: isolated"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": ""
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::market_taxes.weekly",
+      "text": "Market day stall fees and toll collection on goods entering the market.",
+      "needs": [
+        "market"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "Branch also passes on 'annual fair'."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::market_taxes.source.magic",
+      "text": "Magical Trade Revenue",
+      "needs": [
+        "magic",
+        "route: isolated"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": ""
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::guild_licensing",
+      "text": "Charter fees, quality inspection levies, and licensing of all trades and crafts.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "unhomed: guild (craft/merchant guild names)."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::guild_fees",
+      "text": "Annual licensing fees and fines levied by guild oversight.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "unhomed: guild."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::port_duties",
+      "text": "Import and export taxes, anchorage fees, and customs inspection on all cargo.",
+      "needs": [
+        "coast",
+        "institution: docks"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "Branch worldLaw.supportsMaritime() + docks/port, harbour master, shipyard by name. Blockade-blind: prints under under_siege."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::river_tolls",
+      "text": "Tolls on river traffic, dock fees, and ferry rights.",
+      "needs": [
+        "river",
+        "institution: docks"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "unhomed: ferry."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::financial_services",
+      "text": "Civic taxes on banking operations, letters of credit, and financial transaction fees.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "unhomed: banking district / stock exchange."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::banking_fees",
+      "text": "Interest income, currency exchange commissions, and safe deposit charges.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "unhomed: banking house / money changer."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::property_rents.walls",
+      "text": "Ground rents on civic-owned buildings, stalls, and residential plots within the walls.",
+      "needs": [
+        "walls"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "TWIN pair (F1): defenseFactsOf({institutions}).hasWalls — the defence reader behind factsOf(r).defence.walls, but over the RAW institutions arg, not the live roster. Branch getTradeRouteFeatures(tier) (town+)."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::property_rents.tier",
+      "text": "Ground rents on civic-owned buildings, stalls, and residential plots in the ${tier}.",
+      "needs": [],
+      "excludes": [
+        "walls"
+      ],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "TWIN of property_rents.walls."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::court_fees",
+      "text": "Filing fees, fines levied on offenders, and fees for notarial and legal certification serv",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "unhomed: courthouse ('courthouse','multiple court','city hall')."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::toll_revenue",
+      "text": "Passage tolls on all roads and bridges serving the crossroads position.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "Branch route crossroads (same reader; noted). unhomed: bridge. Correct HOME for the crossroads_position \"Toll revenue\" category error."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::gate_tolls",
+      "text": "Entry and exit tolls collected at the town gates from merchants and travellers.",
+      "needs": [
+        "gate"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "Branch route road AND name 'gate'|'town wall'|'city wall' (private): a WALL without a gate passes. Tier noun spoken (speakTierNoun)."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::military_extraction",
+      "text": "Forced contributions and confiscations collected by the garrison, not formally a tax.",
+      "needs": [
+        "garrison"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "Branch garrison/'professional guard' by name + military > 55 + stateCrime flag. unhomed: state crime (getStressFlags.stateCrime)."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::military_levy",
+      "text": "Emergency and standing levies on the population to fund garrison upkeep.",
+      "needs": [
+        "garrison"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": ""
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::church_tithes_rents",
+      "text": "Mandatory tithes plus rent income from church-owned land dominating the local economy.",
+      "needs": [
+        "institution: temple"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "hasReligiousInst admits monastery/friary/GRAVEYARD — a graveyard-only place reads church-owned land. unhomed: theocraticEconomy flag."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::church_tithes",
+      "text": "Tithes, offerings, and fees for burial and sacramental services collected by resident cler",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "presumes temple OR monastery (disjunction; undeclared). Graveyard-only passes the branch."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::pilgrim_trade",
+      "text": "Offerings, hospitality fees, relic sales, and incidental commerce from visiting pilgrims.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "calm",
+      "colour": false,
+      "kind": "income",
+      "notes": "Asserts visiting traffic; prints under siege/plague. Branch route crossroads|road + religionInfluence > 68."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::herbalist_apothecary",
+      "text": "Herbal remedies, minor alchemical preparations, and potion sales. The local alchemist supp",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "Branch hasAlch admits herbalist/apothecary/hedge wizard — a herbalist-only place reads 'the local alchemist'. unhomed: alchemist. magPri 15–34, tier >= village."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::apothecary_alchemy",
+      "text": "A thriving alchemical trade in reagents, preparations, and curative potions draws customer",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "magPri >= 35. \"draws customers from surrounding settlements\" presumes open routes."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::spellcasting.low",
+      "text": "Fees for identification, minor enchanting, and divination. Adventurers and merchants both ",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "magPri 35–59, tier >= town."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::spellcasting.high",
+      "text": "A busy market for spell services. Identification, augury, message sending, and contract-gr",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": ""
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::arcane_economy",
+      "text": "Magic has absorbed functions normally provided by conventional trade, government, and reli",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "unhomed: magicFillsVoid flag. tier >= city."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::arcane_industry",
+      "text": "Enchanting contracts, magical research commissions, and the licensing of spellcasting prac",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "unhomed: mages' guild (named in the line)."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::enchanted_goods",
+      "text": "Weapons, armour, and jewellery command a premium once enchanted. The local arcanists incre",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "presumes craft EXPORTS (unhomed: exports presence); armourer/weaponsmith/jewel by name."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::security_contracts",
+      "text": "Guild-funded private security surcharges: effectively a privatised protection tax on trade",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "unhomed: merchantArmy stress flag; unhomed: guild."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::criminal.label.syndicate",
+      "text": "Criminal Syndicate Revenue",
+      "needs": [
+        "organised crime"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "safetyProfile.blackMarketCapture > 10 (a different reader from deriveCriminalStructure; declared crime)."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::criminal.label.thieves_guild",
+      "text": "Thieves' Guild Revenue",
+      "needs": [
+        "organised crime"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": ""
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::criminal.label.smuggling",
+      "text": "Smuggling Network Revenue",
+      "needs": [
+        "organised crime"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": ""
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::criminal.label.shadow",
+      "text": "Shadow Economy (untaxed)",
+      "needs": [
+        "organised crime"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": ""
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::criminal.label.black_market",
+      "text": "Black Market Revenue",
+      "needs": [
+        "organised crime"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": ""
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::criminal.desc",
+      "text": "An estimated ${bmc}% of economic activity flows through unofficial channels: ${...}. This ",
+      "needs": [
+        "organised crime"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "Three inner variants (guild-organised fencing… / smuggling margins… / untaxed trade…); same declaration."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::subsistence",
+      "text": "Barter and in-kind exchange; no significant monetary income. Survival is the economy.",
+      "needs": [],
+      "excludes": [
+        "market"
+      ],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "Fires when incomeBuild is empty (no market by name, among others)."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::grain_sales.local",
+      "text": "Surplus from local harvest sold to nearby settlements and passing merchants: steady income",
+      "needs": [
+        "grain"
+      ],
+      "excludes": [],
+      "crisis": "calm",
+      "colour": false,
+      "kind": "income",
+      "notes": "ASSERTS A SURPLUS but is gated on resource grain_field/fertile_flood, NOT foodRecord.growsMoreThanEats (foodSurplus.js :: offersFoodSurplus) — prints under famine. Narrower home: the food-surplus rule."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::grain_sales.bought",
+      "text": "Grain purchased from farming regions and resold or processed locally; margin depends on st",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": ""
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::wool.local",
+      "text": "Local flocks provide raw wool; weavers and fullers convert it to cloth sold across the reg",
+      "needs": [
+        "livestock"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "unhomed: weaver/fuller (branch weav/fuller/cloth by name). Branch for this variant: grazing_land resource."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::wool.bought",
+      "text": "Wool bought from pastoral regions and processed locally: value-add trade dependent on cons",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": ""
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::iron.local",
+      "text": "Local ore feeds the smithy directly. Metalwork income is not trade-route dependent.",
+      "needs": [
+        "institution: smith"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "Branch arm hasNearbyResource(iron_deposit|coal_deposit|precious_metal) does NOT require a smith, and coal alone is not ore. unhomed: ore deposit."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::iron.imported",
+      "text": "Iron imported from mining regions and worked locally; this income stream is vulnerable to ",
+      "needs": [
+        "institution: smith"
+      ],
+      "excludes": [
+        "institution: mine"
+      ],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": ""
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::timber.local",
+      "text": "Local forest provides sustainable timber revenue; managed felling and sawmilling keep prod",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "unhomed: woodland, sawmill. The desc branch also passes on 'hunting_ground' (a hunting ground is read as a managed forest)."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::timber.distant",
+      "text": "Timber sourced from more distant forests and resold or processed locally: trade route depe",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": ""
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::fish.source.maritime",
+      "text": "Fish & Maritime Produce",
+      "needs": [
+        "coast",
+        "fish"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": ""
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::fish.source.preserved",
+      "text": "Fish & Preserved Produce",
+      "needs": [
+        "fish"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": ""
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::fish.desc",
+      "text": "Catch landed and sold fresh or preserved; salt fish are a major regional export commodity.",
+      "needs": [
+        "fish"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "Branch admits localProduction 'salt' (no fish) when portKind != none or a fish-named water institution: a salt place reads 'catch landed'."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::stone.local",
+      "text": "Local quarry provides dressed stone to regional builders: reliable income with low transpo",
+      "needs": [
+        "institution: quarry"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "Branch resource stone_quarry OR 'gemstone' (a gem deposit reads 'local quarry')."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::stone.imported",
+      "text": "Stone masons work imported material; the quarrying income notation reflects processing mar",
+      "needs": [],
+      "excludes": [
+        "institution: quarry"
+      ],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "unhomed: mason."
+    },
+    {
+      "id": "economicState.generateEconomicState.incomeBuild::custom_toggle",
+      "text": "Revenue from locally produced ${goodName} sold to merchants and neighboring settlements.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "DM force-toggle template."
+    }
+  ]
+}

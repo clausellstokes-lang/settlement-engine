@@ -1,0 +1,263 @@
+{
+  "id": "DS-ECO-5",
+  "source": "src/data/dossierStateProse/economy.generated.js",
+  "drawKind": "K",
+  "pools": [
+    {
+      "id": "DS-ECO-5::IMPAIRED (canonical scarce), with a named dependency",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: chain impaired with named dependency",
+      "lines": [
+        {
+          "id": "DS-ECO-5::IMPAIRED (canonical scarce), with a named dependency::v1",
+          "text": "The {chain} is running below what it should. It wants {resource} the town cannot supply, a",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-5::IMPAIRED (canonical scarce), with a named dependency::v2",
+          "text": "{institution} is still open and still short. What it needs has not been coming, and the wo",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-5::IMPAIRED (canonical scarce), with a named dependency::v3",
+          "text": "{settlement}'s {chain} produces less with every turn it goes without {resource}, and the t",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-5::VULNERABLE (canonical strained)",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: chain strained",
+      "lines": [
+        {
+          "id": "DS-ECO-5::VULNERABLE (canonical strained)::v1",
+          "text": "The {chain} runs, and it runs on no margin. Every input it needs is arriving and none of i",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-5::VULNERABLE (canonical strained)::v2",
+          "text": "The {chain} is intact and exposed at once. It works while everything holds and has nothing",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-5::VULNERABLE (canonical strained)::v3",
+          "text": "The people working the {chain} are not idle and are not comfortable. One bad month upstrea",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-5::RUNNING (canonical stable): draw only with the note fields empty (R-DST-F)",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: chain stable, note fields empty",
+      "lines": [
+        {
+          "id": "DS-ECO-5::RUNNING (canonical stable): draw only with the note fields empty (R-DST-F)::v1",
+          "text": "The {chain} runs whole. {institution} has what it needs, the outputs come off as expected,",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-5::RUNNING (canonical stable): draw only with the note fields empty (R-DST-F)::v2",
+          "text": "A stranger watching {settlement}'s {chain} sees the ordinary version of it: {resource} in ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-5::RUNNING (canonical stable): draw only with the note fields empty (R-DST-F)::v3",
+          "text": "Nobody talks about the {chain}. It works, it has worked, and the town's attention is elsew",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-5::ENTREPÔT",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: entrepot chain",
+      "lines": [
+        {
+          "id": "DS-ECO-5::ENTREPÔT::v1",
+          "text": "{settlement} does not make {good}; it handles it. The goods enter, change hands and leave,",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-5::ENTREPÔT::v2",
+          "text": "What passes through here does not stay long enough to be made into anything. The warehouse",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "unhomed: warehouses"
+        },
+        {
+          "id": "DS-ECO-5::ENTREPÔT::v3",
+          "text": "The trade belongs to other places. {settlement}'s part of it is the road, the yard and the",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "unhomed: canal (\"the cut\"); presumes an overland road approach (route: road|crossroads; disjunction, not declared) — reads oddly on a river/port approach"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-5::MAGICALLY SUSTAINED: a small prop (low magicRecovery)",
+      "pool": true,
+      "declares": [
+        "magic"
+      ],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: magically sustained, low magicRecovery (magic functions present)",
+      "lines": [
+        {
+          "id": "DS-ECO-5::MAGICALLY SUSTAINED: a small prop (low magicRecovery)::v1",
+          "text": "The {chain} is held up by a working rather than by its own supply, and the working covers ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-5::MAGICALLY SUSTAINED: a small prop (low magicRecovery)::v2",
+          "text": "The {chain} is standing on a prop. The prop is real and it is small. Most of what the line",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-5::MAGICALLY SUSTAINED: a small prop (low magicRecovery)::v3",
+          "text": "The {chain} runs on {institution}'s craft and everyone knows the craft is not enough. It b",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-5::MAGICALLY SUSTAINED: a large prop (high magicRecovery)",
+      "pool": true,
+      "declares": [
+        "magic"
+      ],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: magically sustained, high magicRecovery",
+      "lines": [
+        {
+          "id": "DS-ECO-5::MAGICALLY SUSTAINED: a large prop (high magicRecovery)::v1",
+          "text": "The {chain} runs almost whole on a working. The books show the output nearly where it belo",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-5::MAGICALLY SUSTAINED: a large prop (high magicRecovery)::v2",
+          "text": "A stranger would see nothing wrong with this {chain}. What is wrong is that the thing carr",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-5::MAGICALLY SUSTAINED: a large prop (high magicRecovery)::v3",
+          "text": "The {chain} should have failed and has not. What it lost is being made good by a working s",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-5::OPERATIONAL: the service economy (no line of supply behind it)",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: service economy, no supply line",
+      "lines": [
+        {
+          "id": "DS-ECO-5::OPERATIONAL: the service economy (no line of supply behind it)::v1",
+          "text": "{institution} sells work rather than goods. There is no line of supply to break. The servi",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-5::OPERATIONAL: the service economy (no line of supply behind it)::v2",
+          "text": "What {institution} offers, {settlement} has. It is not a trade with a road attached.",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-5::OPERATIONAL: the service economy (no line of supply behind it)::v3",
+          "text": "Some of what this town earns has no cargo at all. {institution} answers people, and people",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    }
+  ]
+}

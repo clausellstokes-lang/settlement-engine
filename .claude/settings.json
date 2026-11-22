@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Write(docs/tuning-signatures/*)",
+      "Edit(tests/lint/tuningRegister.walker.test.js)",
+      "Bash(TUNING_INVENTORY_REFREEZE=*)",
+      "Bash(git push --no-verify *)"
+    ]
+  }
+}

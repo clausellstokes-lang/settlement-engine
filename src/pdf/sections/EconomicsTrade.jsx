@@ -1,0 +1,589 @@
+/**
+ * EconomicsTrade — chapter 03. Full economy parity with EconomicsTab.
+ *
+ *   - 4 stat tiles: prosperity / complexity / output / trade access
+ *   - Income sources bars
+ *   - 3-column trade flows + entrepôt callout + necessity imports flag
+ *   - Food security balance bar with full breakdown
+ *   - Economic Flows (chains) with status badges + processing → outputs
+ *   - Institutional services breakdown
+ *   - (resource exploitation prints in Resources & Production since 2026-10-30)
+ *   - Shadow economy: capture rate + operations + criminal chains + crime types
+ *   - Active economic issues with descriptions, priorities, suggested fixes
+ */
+import { View, Text } from '@react-pdf/renderer';
+import { PageChrome } from '../primitives/PageChrome.jsx';
+import {
+  ChapterBand, ChapterHeadline, StatStrip, ThreeCol, BulletList, HairRule, Tag,
+} from '../primitives/Dense.jsx';
+import { economicsHeadline, economicsTone } from '../lib/headlines.js';
+import { StatusCard } from '../primitives/Visuals.jsx';
+import { BarMeter } from '../primitives/BarMeter.jsx';
+import { Pill } from '../primitives/Pill.jsx';
+import { EditableText, EditableProse } from '../primitives/Editable.jsx';
+import { type, palette, space, pt, swatch } from '../theme.js';
+import { cap, num, smart, label, finite, safePct } from '../lib/format.js';
+import { flag } from '../../lib/flags.js';
+import {
+  tradeLabelOwnership,
+} from '../../domain/content/customTradeLabelOwnership.js';
+import { statusCase } from '../../domain/display/labelCase.js';
+import { resourceDisplayName } from '../../domain/display/resourceDisplayName.js'; // §934.22 item 2 — the EXPORTS/IMPORTS lists
+import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js'; // §934.22 item 1(b) — the PROC row
+import { SupplyChainFlow } from './SupplyChainFlow.jsx';
+import { StateProse } from '../primitives/StateProse.jsx';
+import { revenuesOffTheLists } from '../../domain/display/tradeListDisplay.js'; // CENSUS-3c R-P 2 — the revenues that left the trade lists
+
+function renderedTradeLabel(economy, direction, item) {
+  // §934.22 item 2 — A PRINT GOES THROUGH THE SEAM, A MATCH NEVER DOES. The ownership read
+  // below stays on the RAW `item`, because `tradeLabelOwnership` matches custom endpoints
+  // against the persisted string; only the words a reader sees are resolved. Resolving here
+  // rather than at each `itemRender` call site is what keeps that split in ONE place, and it
+  // is the shape tests/lint/resourceLabelSeam.census.test.js's owed row named.
+  const ownership = tradeLabelOwnership(economy, direction, item);
+  const shown = label(resourceDisplayName(item));
+  if (ownership.customOnly) {
+    const members = ownership.members.length
+      ? ` (incl. ${ownership.members.join(', ')})`
+      : '';
+    return `${shown}${members}  *`;
+  }
+  if (ownership.mixed) {
+    const customPart = ownership.members.length
+      ? `incl. ${ownership.members.join(', ')}`
+      : 'also an exact custom endpoint';
+    return `${shown} (${customPart} *)`;
+  }
+  return shown;
+}
+
+export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
+  const e = vm.economics;
+
+  return (
+    <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
+      <ChapterBand
+        eyebrow="07"
+        title="Economics & Trade"
+        accent={narrativeMode ? palette.ai : palette.gold}
+      />
+
+      <ChapterHeadline tone={economicsTone(e)}>
+        {economicsHeadline(e)}
+      </ChapterHeadline>
+
+      {/* ── The mounted state prose (the screen's ProseBlock positions) ── */}
+      <StateProse stateProse={stateProse} tab="economics" />
+
+      <StatStrip
+        stats={[
+          { label: 'Prosperity', value: cap(e.prosperity) || '–' },
+          { label: 'Complexity', value: cap(e.economicComplexity) || '–' },
+          { label: 'Output', value: smart(e.economyOutput) },
+          { label: 'Trade', value: cap(e.tradeAccess) || '–' },
+        ]}
+      />
+
+      {/* ── Income sources ─────────────────────────────────────── */}
+      {e.incomeSources?.length > 0 && (
+        <View style={{ marginBottom: space.sm }}>
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
+            INCOME SOURCES
+          </Text>
+          {e.incomeSources.map((s, i) => (
+            <View key={`inc-${i}`} style={{ marginBottom: 3 }} wrap={false}>
+              <BarMeter
+                label={cap(s.source || s.name || 'Source')}
+                value={s.percentage || 0}
+                sublabel={`${num(s.percentage || 0)}%`}
+                tone={s.isCriminal ? 'bad' : 'gold'}
+                height={3}
+              />
+              {s.desc && (
+                <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginTop: -2, marginLeft: 6 }}>
+                  {s.desc}
+                </Text>
+              )}
+            </View>
+          ))}
+        </View>
+      )}
+
+      {/* CENSUS-3c (R-P 2): the revenues that left the trade lists, where the record holds the
+          fact behind them — printed unmeasured, because the record holds no share for them. */}
+      {(() => {
+        const off = revenuesOffTheLists(settlement);
+        return off.length > 0 ? (
+          <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginBottom: space.sm }}>
+            {`Also earned, with no share recorded: ${off.map((r) => `${r.text}, ${r.desc}`).join(' ')}`}
+          </Text>
+        ) : null;
+      })()}
+
+      {/* ── Trade flows ───────────────────────────────────────── */}
+      {(e.primaryExports?.length > 0 || e.primaryImports?.length > 0 || e.localProduction?.length > 0) && (
+        <>
+      <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
+        TRADE FLOWS
+      </Text>
+      <ThreeCol
+        a={
+          <View>
+            <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.good }}>EXPORTS</Text>
+            <BulletList
+              items={e.primaryExports}
+              tone="good"
+              emptyText="None significant"
+              itemRender={(item) => renderedTradeLabel(e, 'exports', item)}
+            />
+          </View>
+        }
+        b={
+          <View>
+            <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.warn }}>IMPORTS</Text>
+            <BulletList
+              items={e.primaryImports}
+              tone="warn"
+              emptyText="None significant"
+              itemRender={(item) => renderedTradeLabel(e, 'imports', item)}
+            />
+          </View>
+        }
+        c={
+          <View>
+            <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.muted }}>LOCAL PRODUCTION</Text>
+            <BulletList
+              items={e.localProduction}
+              tone="muted"
+              emptyText="None recorded"
+              itemRender={(item) => label(item)}
+            />
+          </View>
+        }
+      />
+        </>
+      )}
+
+      {/* Entrepôt + necessity flags */}
+      {(e.isEntrepot || e.necessityImports) && (
+        <View style={{ flexDirection: 'row', gap: 6, marginTop: 4, marginBottom: space.sm }}>
+          {e.isEntrepot && <Tag tone="cool">ENTREPÔT</Tag>}
+          {e.necessityImports && <Tag tone="bad">NECESSITY IMPORTS</Tag>}
+        </View>
+      )}
+
+      {/* §14 Phase 3b — cross-settlement trade with the neighbour */}
+      {e.tradeLinks?.length > 0 && (
+        <View style={{ marginBottom: space.sm }} wrap={false}>
+          <Text style={{ ...type.label, color: palette.cool, fontSize: pt['8'], marginBottom: 3 }}>
+            TRADE WITH NEIGHBOURS
+          </Text>
+          {Object.entries(
+            e.tradeLinks.reduce((acc, l) => {
+              const b = acc[l.partner] = acc[l.partner] || { imports: [], exports: [] };
+              (l.direction === 'import' ? b.imports : b.exports).push(l.good);
+              return acc;
+            }, {}),
+          ).map(([partner, g], i) => (
+            <Text key={`tl-${i}`} style={{ ...type.caption, fontSize: pt['8'], color: palette.second, marginBottom: 1 }}>
+              <Text style={{ ...type.body_em, color: palette.ink }}>{partner}</Text>
+              {g.imports.length > 0 ? `   <- ${g.imports.map(label).join(', ')}` : ''}
+              {g.exports.length > 0 ? `   -> ${g.exports.map(label).join(', ')}` : ''}
+            </Text>
+          ))}
+          <Text style={{ ...type.caption, fontSize: pt['7.5'], color: palette.faint, fontStyle: 'italic', marginTop: 1 }}>
+            {'<- imported from · -> exported to'}
+          </Text>
+        </View>
+      )}
+
+      {/* Critical trade dependencies */}
+      {(e.tradeDependencies?.length > 0 || e.criticalImports?.length > 0) && (
+        <View style={{ marginBottom: space.sm }}>
+          <Text style={{ ...type.label, color: palette.bad, fontSize: pt['8'], marginBottom: 3 }}>
+            CRITICAL DEPENDENCIES
+          </Text>
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 4 }}>
+            {[...(e.tradeDependencies || []), ...(e.criticalImports || [])].map((d, i) => (
+              <Tag key={`dep-${i}`} tone="bad">{label(d)}</Tag>
+            ))}
+          </View>
+        </View>
+      )}
+
+      {hasFoodData(e.foodBalance) && (
+        <>
+          <HairRule />
+          {/* ── Food security ─────────────────────────────────────── */}
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
+            FOOD SECURITY
+          </Text>
+          <FoodBalanceBlock fb={e.foodBalance} />
+        </>
+      )}
+
+      {/* ── Economic flows / chains ───────────────────────────── */}
+      {e.chains?.length > 0 && (
+        <View style={{ marginTop: space.sm }}>
+          <HairRule />
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
+            ECONOMIC FLOWS · {e.chains.length} CHAIN{e.chains.length === 1 ? '' : 'S'}
+          </Text>
+          {flag('pdfVisualChains') ? (
+            <SupplyChainFlow
+              chains={settlement?.economicState?.activeChains}
+              instNames={(settlement?.institutions || []).map((inst) => inst.name || '')}
+              primaryExports={settlement?.economicState?.primaryExports || []}
+              tier={settlement?.tier} town={settlement}
+            />
+          ) : e.chains.map((c, i) => (
+            <StatusCard
+              key={`ch-${i}`}
+              compact
+              name={c.name}
+              status={c.status}
+              statusLabel={cap(c.status)}
+              meta={[
+                c.processingInstitutions?.length ? { label: 'PROC', value: c.processingInstitutions.map((n) => label(institutionDisplayName(n))).filter(Boolean).join(', ') } : null,
+                c.outputs?.length ? { label: chainYieldRefused(settlement?.economicState?.activeChains?.[i]) ? NORMALLY_YIELDS.toUpperCase() : 'OUT', value: c.outputs.map(label).filter(Boolean).join(', ') } : null,
+                c.dependency ? { label: 'DEP', value: depText(c.dependency) } : null,
+                c.incomeContribution != null ? { label: 'INC', value: smart(c.incomeContribution) } : null,
+              ].filter(b => b && b.value)}
+              description={c.description || null}
+              /* UX consolidation 2026-10-30 (RULINGS-CROSS X-2): a chain's hooks print in the
+                 Plot Hooks chapter, not under the chain card. */
+            />
+          ))}
+        </View>
+      )}
+
+      {/* ── Custom supply chains (§14 — user-confirmed in the Compendium) ─── */}
+      {e.customChains?.length > 0 && (
+        <View style={{ marginTop: space.sm }}>
+          <HairRule />
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
+            CUSTOM SUPPLY CHAINS · {e.customChains.length}
+          </Text>
+          {e.customChains.map((c, i) => {
+            const flow = [c.resource, ...(c.processingInstitutions || []), ...(c.outputs || [])]
+              .filter(Boolean)
+              .map((n) => label(institutionDisplayName(n) || n) || String(n))
+              .join(' » ');
+            const activationColor = c.activationState === 'active'
+              ? palette.good
+              : c.activationState === 'blocked'
+                ? palette.warn
+                : palette.muted;
+            const visibleReasons = (c.activationReasons || []).slice(0, 3);
+            const activationNote = visibleReasons.length
+              ? visibleReasons.join(' ')
+              : c.activationSummary;
+            return (
+              <View
+                key={`cc-${i}`}
+                style={{
+                  marginBottom: 3, padding: 5,
+                  backgroundColor: palette.goldBg,
+                  border: `0.5pt solid ${activationColor}`,
+                  borderRadius: 2,
+                }}
+                wrap={false}
+              >
+                <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: flow ? 2 : 0 }}>
+                  <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['9'] }}>{c.name}</Text>
+                  <Text style={{ color: palette.gold, fontSize: pt['8'], marginLeft: 3 }}>*</Text>
+                  <Text style={{
+                    ...type.label_plain,
+                    color: activationColor,
+                    fontSize: pt['7.5'],
+                    marginLeft: 5,
+                  }}>
+                    {statusCase(String(c.activationLabel || 'Needs reevaluation'))}
+                  </Text>
+                </View>
+                {flow ? (
+                  <Text style={{
+                    ...type.caption,
+                    fontSize: pt['8'],
+                    color: c.activationState === 'active' ? palette.second : palette.muted,
+                  }}>
+                    {flow}
+                  </Text>
+                ) : null}
+                {activationNote ? (
+                  <Text style={{
+                    ...type.caption,
+                    fontSize: pt['7.5'],
+                    color: activationColor,
+                    marginTop: 2,
+                  }}>
+                    {activationNote}
+                    {(c.activationReasons || []).length > visibleReasons.length
+                      ? ` +${c.activationReasons.length - visibleReasons.length} more.`
+                      : ''}
+                  </Text>
+                ) : null}
+              </View>
+            );
+          })}
+        </View>
+      )}
+
+      {/* Resource exploitation prints once, in Resources & Production (RULINGS-T2 T2-7,
+          T2-9 PDF parity: the same exploitation lists were printed in both chapters). */}
+
+      {/* ── Shadow economy ─────────────────────────────────────── */}
+      {(e.shadowEconomy.captureRate != null || e.shadowEconomy.crimeTypes?.length > 0) && (
+        <View style={{ marginTop: space.sm }}>
+          <HairRule />
+          <Text style={{ ...type.label, color: palette.bad, fontSize: pt['8'], marginBottom: 3 }}>
+            SHADOW ECONOMY
+          </Text>
+          {e.shadowEconomy.captureRate != null && (
+            <Text style={{ ...type.body, fontSize: pt['9'], color: palette.bad, marginBottom: 3 }}>
+              Black market capture: <Text style={{ fontWeight: 700 }}>{smart(e.shadowEconomy.captureRate)}%</Text> of economy
+            </Text>
+          )}
+          {e.shadowEconomy.crimeTypes?.length > 0 && (
+            <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 3, marginBottom: 4 }}>
+              {e.shadowEconomy.crimeTypes.map((ct, i) => (
+                <Tag key={`crm-${i}`} tone="bad">{label(ct)}</Tag>
+              ))}
+            </View>
+          )}
+          {/* The criminal operations list prints in Defense & Security (T2-7/T2-20 parity);
+              this chapter keeps the capture share. */}
+          {e.shadowEconomy.criminalChains?.length > 0 && (
+            <View>
+              <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.muted, marginTop: 2 }}>CRIMINAL SUPPLY CHAINS</Text>
+              <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 3, marginTop: 2 }}>
+                {e.shadowEconomy.criminalChains.map((c, i) => (
+                  <Tag key={`cc-${i}`} tone="bad">{label(c)}</Tag>
+                ))}
+              </View>
+            </View>
+          )}
+        </View>
+      )}
+
+      {/* ── Economic issues + suggested fixes ─────────────────── */}
+      {e.viabilityIssues?.length > 0 && (
+        <View style={{ marginTop: space.sm }}>
+          <HairRule />
+          <Text style={{ ...type.label, color: palette.warn, fontSize: pt['8'], marginBottom: 3 }}>
+            ACTIVE ECONOMIC ISSUES
+          </Text>
+          {e.viabilityIssues.map((iss, i) => (
+            <View key={`iss-${i}`} style={{ marginBottom: 4 }} wrap={false}>
+              <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
+                {iss.severity && <Pill tone={severityTone(iss.severity)}>{iss.severity}</Pill>}
+                <Text style={{ ...type.body_em, fontSize: pt['9'], color: palette.ink, marginLeft: 4, flex: 1 }}>
+                  {iss.title}
+                </Text>
+                {iss.institution && (
+                  <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'] }}>
+                    {iss.institution}
+                  </Text>
+                )}
+              </View>
+              {iss.description && (
+                <EditableProse
+                  name={`economics.issue.${i}.description`}
+                  defaultValue={iss.description}
+                  lines={1}
+                  style={{ ...type.body, fontSize: pt['9'] }}
+                />
+              )}
+              {iss.priorityNote && (
+                <Text style={{ ...type.caption, color: palette.warn, fontSize: pt['8'], fontStyle: 'italic' }}>
+                  {iss.priorityNote}
+                </Text>
+              )}
+              {iss.suggestedFixes?.length > 0 && (
+                <View style={{ marginTop: 1, marginLeft: 6 }}>
+                  <Text style={{ ...type.label, color: palette.good, fontSize: pt['7'] }}>SUGGESTED FIXES</Text>
+                  {iss.suggestedFixes.map((fix, fi) => (
+                    <View key={`fix-${i}-${fi}`} style={{ flexDirection: 'row' }}>
+                      <Text style={{ color: palette.good, marginRight: 3, fontSize: pt['8'] }}>+</Text>
+                      <EditableText
+                        name={`economics.issue.${i}.fix.${fi}`}
+                        defaultValue={typeof fix === 'string' ? fix : (fix?.text || fix?.description || '')}
+                        style={{ ...type.body, fontSize: pt['8.5'], flex: 1 }}
+                      />
+                    </View>
+                  ))}
+                </View>
+              )}
+            </View>
+          ))}
+        </View>
+      )}
+
+      {/* Economic and order hooks print in the Plot Hooks chapter (RULINGS-CROSS X-2). */}
+    </PageChrome>
+  );
+}
+
+function FoodBalanceBlock({ fb }) {
+  if (!fb) return null;
+  const prod = finite(fb.production, 0);
+  const need = finite(fb.need, 0);
+  // §1c — produced/needed are only meaningful if at least one is non-zero.
+  // Both zero + a deficit/surplus means the engine didn't compute them; show
+  // "Not calculated" rather than the misleading "PRODUCED 0 / NEEDED 0".
+  const rawKnown = prod > 0 || need > 0;
+  const max = Math.max(prod, need, 1);
+  const prodPct = safePct((prod / max) * 100);
+  const needPct = safePct((need / max) * 100);
+  return (
+    <View style={{ marginBottom: space.sm }} wrap={false}>
+      <View style={{ flexDirection: 'row', gap: 6 }}>
+        {rawKnown ? (<>
+        <View style={{ flex: 1 }}>
+          <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted }}>PRODUCED</Text>
+          <View style={{ height: 5, backgroundColor: swatch['#F0E8D8'], borderRadius: 1, marginTop: 1 }}>
+            <View style={{ width: `${prodPct}%`, height: '100%', backgroundColor: palette.good }} />
+          </View>
+          <Text style={{ ...type.caption, fontSize: pt['8'], marginTop: 1 }}>{smart(prod)}</Text>
+        </View>
+        <View style={{ flex: 1 }}>
+          <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted }}>NEEDED</Text>
+          <View style={{ height: 5, backgroundColor: swatch['#F0E8D8'], borderRadius: 1, marginTop: 1 }}>
+            <View style={{ width: `${needPct}%`, height: '100%', backgroundColor: palette.bad }} />
+          </View>
+          <Text style={{ ...type.caption, fontSize: pt['8'], marginTop: 1 }}>{smart(need)}</Text>
+        </View>
+        </>) : (
+        <View style={{ flex: 2 }}>
+          <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted }}>PRODUCED / NEEDED</Text>
+          <Text style={{ ...type.caption, fontSize: pt['9'], color: palette.muted, fontStyle: 'italic', marginTop: 2 }}>Not calculated</Text>
+        </View>
+        )}
+        {/* ⛔ THE CHANNEL IS CREDITED WHETHER OR NOT A GAP SURVIVES IT (adversarial
+            review of the second wave). This column used to be gated on `deficit > 0`
+            with the magic line INSIDE it — but domain/foodBalance.js subtracts the
+            offset when it computes the deficit, so the better the provision, the more
+            certainly the print hid it: a town whose shortfall magic closes ENTIRELY
+            reaches deficit 0 and printed no word of the channel that fed it, while the
+            screen credited it in the production row all along. The gate is now "there
+            is something to say", and the deficit half keeps its own gate, so a
+            settlement WITH a deficit prints exactly what it printed before. */}
+        {(fb.deficit > 0 || fb.magicOffset != null) && (
+          <View style={{ flex: 1 }}>
+            {fb.deficit > 0 && (<>
+            <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.bad }}>DEFICIT</Text>
+            <Text style={{ ...type.numeric, fontSize: pt['13'], color: palette.bad }}>{smart(fb.deficit)}</Text>
+            {fb.deficitPct != null && (
+              <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted }}>
+                {fb.deficitPct}% of need
+              </Text>
+            )}
+            {fb.coveragePct != null && (
+              <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted }}>
+                imports cover {fb.coveragePct}% of gap
+              </Text>
+            )}
+            </>)}
+            {/* ODQ §934.20 — THE THIRD CHANNEL. The two lines above account for the
+                gap by trade alone, so on a settlement whose shortfall is partly closed
+                by druidic, divine or arcane provision the printed deficit and the
+                printed coverage did not add up and nothing on the page said why. The
+                offset is the writer's own published field (foodBalance.magicFoodOffset)
+                carried through foodCore, in the same lb/day idiom as the DEFICIT figure
+                above it; the screen names the same channel in the same words. */}
+            {fb.magicOffset != null && (
+              <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted }}>
+                {fb.magicChannel} provision covers {smart(fb.magicOffset)}
+              </Text>
+            )}
+          </View>
+        )}
+        {fb.surplus > 0 && (
+          <View style={{ flex: 1 }}>
+            <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.good }}>Surplus</Text>
+            <Text style={{ ...type.numeric, fontSize: pt['13'], color: palette.good }}>{smart(fb.surplus)}</Text>
+          </View>
+        )}
+      </View>
+      {(fb.agricultureModifier != null || fb.stressModifier != null) && (
+        <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted, marginTop: 3 }}>
+          {[farmlandWords(fb.agricultureModifier), crisisYieldWords(fb.stressModifier)].filter(Boolean).join(' ')}
+          {/* The two multipliers in words (the owner's style law of 2026-11-07); no dangling "·". */}
+        </Text>
+      )}
+      {fb.summary && (
+        <EditableProse
+          name="economics.foodBalance.summary"
+          defaultValue={fb.summary}
+          lines={1}
+          style={{ ...type.italic, fontSize: pt['9'], color: palette.second, marginTop: 3 }}
+        />
+      )}
+    </View>
+  );
+}
+
+function severityTone(s) {
+  const k = String(s || '').toLowerCase();
+  if (k === 'critical' || k === 'high' || k === 'severe') return 'bad';
+  if (k === 'medium' || k === 'moderate' || k === 'warning') return 'warn';
+  return 'muted';
+}
+
+// foodBalance has data worth showing if any of production/need/deficit/surplus
+// is non-zero. Empty engine output should not produce an empty section header.
+function hasFoodData(fb) {
+  if (!fb) return false;
+  return [fb.production, fb.need, fb.deficit, fb.surplus]
+    .some(n => n != null && Number(n) > 0);
+}
+
+// Chain dependency may be a string ("imports/iron") or an object
+// ({ resource, type, critical }) — coerce to a presentable string.
+function depText(d) {
+  if (!d) return '';
+  if (typeof d === 'string') return d;
+  if (typeof d === 'object') {
+    const parts = [];
+    if (d.resource) parts.push(label(d.resource));
+    else if (d.name) parts.push(label(d.name));
+    else if (d.type) parts.push(label(d.type));
+    if (d.scope) parts.push(`(${d.scope})`);
+    if (d.critical) parts.push('critical');
+    return parts.filter(Boolean).join(' ');
+  }
+  return String(d);
+}
+
+export default EconomicsTrade;
+
+/**
+ * The farmland multiplier in words (W7 HOOKS, the owner's style law of 2026-11-07): "Ag mod 0.4" was
+ * machinery. The number stays the engine's; the page says what it means for the fields.
+ * @param {number|null|undefined} mod @returns {string|null}
+ */
+function farmlandWords(mod) {
+  if (mod == null || !Number.isFinite(mod)) return null;
+  if (mod < 0.6) return 'Poor farmland: the fields yield well under the usual.';
+  if (mod < 0.9) return 'Thin farmland: the fields yield a little under the usual.';
+  if (mod <= 1.1) return 'Ordinary farmland.';
+  if (mod <= 1.4) return 'Good farmland: the fields yield more than the usual.';
+  return 'Rich farmland: the fields yield well over the usual.';
+}
+
+/**
+ * The crisis multiplier on local food in words: the share of the usual production the crisis leaves.
+ * @param {number|null|undefined} mod @returns {string|null}
+ */
+function crisisYieldWords(mod) {
+  if (mod == null || !Number.isFinite(mod)) return null;
+  if (mod >= 1) return 'The crisis has not cut local food production.';
+  if (mod >= 0.9) return 'The crisis has cut local food production a little.';
+  if (mod >= 0.6) return 'The crisis has left most of the usual local food production.';
+  if (mod >= 0.4) return 'The crisis has left about half of the usual local food production.';
+  if (mod >= 0.25) return 'The crisis has left about a third of the usual local food production.';
+  return 'The crisis has left little of the usual local food production.';
+}
+
+// COHERENCE-AGREE-4 (item 3′): at the end of the file so no line-keyed register row above it moves.
+import { NORMALLY_YIELDS, chainYieldRefused } from '../../domain/chainYield.js';

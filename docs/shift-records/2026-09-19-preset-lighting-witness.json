@@ -1,0 +1,11 @@
+{
+  "_doc": "THE RECORD OF THE PRESET-LIGHTING-WITNESS RE-STAMP, written after the act it authorizes was taken by hand: the witness fixture was re-recorded at 9e900cb1c through the manifest's own RE-RECORD RECIPE with its cause stated in docs/GOLDEN_SHIFT_LEDGER.md (2026-09-19, 'two rows, one field, the food writer's cause'), and that entry believed the golden-freeze register's row 'stays null as the freeze discipline requires' — it does not: the row was frozen at the genesis with sha256 b89d4f7a…, so the walker's byte arm reads the re-recorded fixture (7f67ee8e…) as drift. This record authorizes the ONE act still owed: re-stamping that register row to the bytes already committed. The fixture does not move again; the bytes it stamps are the bytes 9e900cb1c committed.",
+  "ownerWords": "make sure that the food deficit math and the band visual are correct",
+  "ownerDate": "2026-09-19",
+  "odqRow": "§934.15",
+  "cause": "THE FOOD WRITER PUBLISHED THE SPLIT IT CARRIES AND THE PULSE MOVED WITH IT. generateFoodSecurity now publishes rawDeficit, importCoverage, magicOffset and deficit as fields of the record (§934.15, lane 21), and those fields ride in the settlement updates the world pulse emits; dramatic_campaign and full_simulation moved in settlementUpdatesSha256 only, every other row and field byte-identical, distinctWorldStateHashes 8, the roster and the birth-successor constant unchanged (the ledger entry names the diff field by field). The fixture was re-recorded in the same commit as that ledger entry; the register row was not, by a mistaken belief that it was null.",
+  "seat": "the chair (Fable 5.1, session 923472dc), executing the register act from the committed tree; the fixture bytes are 9e900cb1c's",
+  "surfaces": [
+    { "surface": "preset-lighting-witness", "action": "re-record", "predictedRows": 15, "proofForm": "derived-artefact" }
+  ]
+}

@@ -1,0 +1,164 @@
+[
+{
+"id": "C11391",
+"sev": "MED",
+"n": 316,
+"town": "bar0-city-wartime-rand-5",
+"section": "Systems/Magic",
+"fold": "Moderate",
+"text": "Moderate",
+"why": "Magic tab says Moderate, availability moderate; TOWN header gives magic low, and the Overview calls Magical Capability Weak",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C17170",
+"sev": "MED",
+"n": 316,
+"town": "bar0-metropolis-calm-rand-3",
+"section": "Systems/Magic",
+"fold": "Moderate",
+"text": "Moderate",
+"why": "Magic prints 'Moderate' (availability moderate); the record's magic is low",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C22429",
+"sev": "MED",
+"n": 316,
+"town": "bar0-metropolis-calm-rand-5",
+"section": "Systems/Magic",
+"fold": "Moderate",
+"text": "Moderate",
+"why": "Magic tab prints Moderate; header says magic low, and C20951 prints Magical Capability Weak",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C17182",
+"sev": "MED",
+"n": 184,
+"town": "bar0-metropolis-calm-rand-3",
+"section": "Systems/Magic",
+"fold": "Military role: absent",
+"text": "Military role: absent",
+"why": "magic's military role 'absent'; DEFENCE lists magic (Academy of magic, Mages' district, Scroll scribe) and the page says some defence is magic",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/components/new/tabs/MagicTab.jsx",
+"line": 26,
+"fn": ""
+}
+},
+{
+"id": "C25208",
+"sev": "MED",
+"n": 118,
+"town": "bar0-town-calm-rand-3",
+"section": "Systems/Magic",
+"fold": "Economic role: absent",
+"text": "Economic role: absent",
+"why": "all four magic roles 'absent' while the page says magic is relied upon and Divine & Magical Healing runs on Spellcasting (minor)",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/components/new/tabs/MagicTab.jsx",
+"line": 25,
+"fn": ""
+}
+},
+{
+"id": "C26982",
+"sev": "MED",
+"n": 22,
+"town": "bar0-town-calm-rand-5",
+"section": "Systems/Economics",
+"fold": "Meals, ale and lodging here depend on grain brought in, which a siege, a closed road or a blockade would cut off.",
+"text": "Meals, ale and lodging here depend on grain brought in, which a siege, a closed road or a blockade would cut off.",
+"why": "says taverns' meals depend on grain brought in; FOOD grown 100%, brought in 0%, imports cover None",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/display/chainNeedShown.js",
+"line": 95,
+"fn": "chainNeedLine"
+}
+},
+{
+"id": "C23858",
+"sev": "MED",
+"n": 18,
+"town": "bar0-thorp-calm-rand-4",
+"section": "Systems/Economics",
+"fold": "The table rests on salted fish.",
+"text": "The table rests on salted fish.",
+"why": "table rests on salted fish; LAND gives Fishing Grounds as depleted",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C2572",
+"sev": "MED",
+"n": 15,
+"town": "bar0-city-under_siege+famine-rand-4",
+"section": "Systems/Resources",
+"fold": "✓ Fully exploitedMedicinal herbsvery high value",
+"text": "✓ Fully exploitedMedicinal herbsvery high value",
+"why": "Medicinal herbs 'Fully exploited', drawing on herb gathering areas; LAND gives Wild Foraging Areas depleted and Herbalism chain vulnerable on that resource",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C23849",
+"sev": "MED",
+"n": 0,
+"town": "bar0-thorp-calm-rand-4",
+"section": "Systems/Economics",
+"fold": "<N> lives on a subsistence living and ends each year with money to spare, and the traffic on its port keeps it that way.",
+"text": "Mironick lives on a subsistence living and ends each year with money to spare, and the traffic on its port keeps it that way.",
+"why": "port traffic keeps it prosperous; TRADE has no exports or imports and INCOME is Harvest 100%",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+}
+]

@@ -1,0 +1,5 @@
+{"id":"C0750","town":"bar0-city-under_siege+famine-rand-45","sev":"LOW","kind":"BROKEN","why":"Heading says Legal & financial (18) but only 17 items are listed under it (Crime reporting through Vessel clearance)","other":""}
+{"id":"C0893","town":"bar0-city-under_siege+famine-rand-45","sev":"LOW","kind":"PAIR","why":"Says iron ore is needed and not brought in, but LAND gap says Smelter runs on imported iron ore and TRADE imports iron","other":"C0357"}
+{"id":"C0882","town":"bar0-city-under_siege+famine-rand-45","sev":"LOW","kind":"PAIR","why":"Timber Trade printed as ordinary revenue with no siege mark, yet Resources says the siege means Ringheath can no longer send out its timber","other":"C1074"}
+{"id":"C1238","town":"bar0-city-under_siege+famine-rand-45","sev":"LOW","kind":"PAIR","why":"Hired swords back the garrison, yet Mercenary hire is Stopped by the siege; ordinary-times line under siege","other":"C0569"}
+{"id":"DONE","lines":2371,"blocks":1,"flags":4}

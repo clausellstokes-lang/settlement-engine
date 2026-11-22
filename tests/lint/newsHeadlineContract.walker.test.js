@@ -1,0 +1,292 @@
+import { readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { beforeAll, describe, expect, it } from 'vitest';
+
+import { buildObservedCorpus, OBSERVED_SCALAR_FIELDS } from '../../scripts/lib/observed-shape-corpus.mjs';
+import {
+  KNOWN_INERT_HEADLINE_REWRITES,
+  analyzeHeadlineRewriteLiveness,
+  addressRowsSha256,
+  compareHeadlineRewriteRows,
+  compareNewsAddressRows,
+  deriveNewsAddressRows,
+  measureHeadlineRewriteLiveness,
+  rawHeadlineLivenessOf,
+  selectPersistedHeadlineRows,
+  validateNewsHeadlineBaseline,
+} from '../../scripts/lib/news-headline-contract.mjs';
+import { PROSE_FAMILY_PROTECTED_SUBSTRATE } from '../../scripts/lib/prose-family-contract.mjs';
+import { NEWS_VOICE_PROTECTED_SUBSTRATE, reconstructWizardNewsIntroductions } from '../../scripts/lib/news-voice-contract.mjs';
+import { PREDICATES, makeContext } from '../../scripts/lib/premortem-triggers.mjs';
+import { FACTION_VERB_PHRASES } from '../../src/domain/worldPulse/factionCompetition.js';
+import {
+  APPLIED_HEADLINE_REWRITES,
+  newsEntryForOutcome,
+} from '../../src/domain/worldPulse/worldPulseFeedCuration.js';
+import { mechanicalPulseRecordFields, partitionPulseOutcomeLanes } from '../../src/domain/worldPulse/pulseOutcomePartition.js';
+import { isPublicOutcome, isStateOnlyOutcome, isSuppressionOnlyOutcome } from '../../src/domain/worldPulse/pulseHelpers.js';
+
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
+const BASELINE_PATH = join(ROOT, 'tests/lint/.news-headline-contract-baseline.json');
+const clone = (value) => JSON.parse(JSON.stringify(value));
+const codepoint = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
+const sortAddressRows = (rows) => rows.sort((left, right) => codepoint(`${left.home}|${left.field}|${left.voiceClass}`, `${right.home}|${right.field}|${right.voiceClass}`));
+const sortInertRows = (rows) => rows.sort((left, right) => codepoint(`${left.source}|${left.flags}|${left.replacement}`, `${right.source}|${right.flags}|${right.replacement}`));
+const outcome = (extra = {}) => ({
+  id: 'candidate.faction.challenge',
+  type: 'faction',
+  candidateType: 'faction_government_challenge',
+  applyMode: 'auto',
+  severity: 0.55,
+  headline: 'Military/Guard may press a challenge to the government',
+  appliedHeadline: 'Military/Guard presses a challenge to the government',
+  summary: 'Military/Guard sees an opening to press military order interests.',
+  reasons: ['A faction sees an opening.'],
+  targetSaveId: 'alpha',
+  proposalPayload: { kind: 'government_change' },
+  ...extra,
+});
+// THE PLANTED CHALLENGE (2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair)): the re-dealt year no
+// longer reaches a government challenge (queued|faction_government_challenge left the corpus, and its rewrite rule is now
+// known-inert), so the gap A4 and A6 prove is PLANTED in pulse 2's selected lane (its old witness was 2/selectedOutcomes/0),
+// in the producer's own spelling.
+const CHALLENGE_HEADLINE = 'Military/Guard may press a challenge to the government';
+const plantedChallenge = (rows) => {
+  // APPENDED at the end of pulse 2's selected lane, so every corpus row stays exactly as measured and no other rule
+  // loses an occurrence; returns the rows and the planted row's location.
+  const planted = clone(rows);
+  const lane = planted.filter((row) => row.pulseIndex === 2 && row.field === 'selectedOutcomes');
+  if (lane.length === 0 || lane.length >= 24) throw new Error('the planted challenge has no room in pulse 2\'s selected lane');
+  planted.splice(planted.indexOf(lane.at(-1)) + 1, 0,
+    { rootOrdinal: lane[0].rootOrdinal, pulseIndex: 2, field: 'selectedOutcomes', outcomeIndex: lane.length, headline: CHALLENGE_HEADLINE });
+  return { rows: planted, location: `2/selectedOutcomes/${lane.length}` };
+};
+const addressEntry = (impactKind = 'ordinary') => ({ fields: { kind: 'applied', impactKind, headline: 'The deed is done.', summary: 'The deed now stands.' } });
+
+let baseline;
+let scalarRows;
+let reconstruction;
+let secondReconstruction;
+let addressRows;
+let rawRows;
+let rawTelemetry;
+let finalLiveness;
+
+describe('complete Wizard News address and headline rewrite contract', () => {
+  beforeAll(async () => {
+    baseline = validateNewsHeadlineBaseline(JSON.parse(readFileSync(BASELINE_PATH, 'utf8')));
+    const corpus = await buildObservedCorpus({ scalarFields: OBSERVED_SCALAR_FIELDS });
+    scalarRows = corpus.scalarObservations;
+    reconstruction = reconstructWizardNewsIntroductions(scalarRows);
+    secondReconstruction = reconstructWizardNewsIntroductions(scalarRows);
+    addressRows = deriveNewsAddressRows(reconstruction.entries);
+    rawRows = selectPersistedHeadlineRows(scalarRows);
+    rawTelemetry = rawHeadlineLivenessOf(rawRows);
+    finalLiveness = analyzeHeadlineRewriteLiveness(rawRows, APPLIED_HEADLINE_REWRITES);
+  }, 900_000);
+
+  it('A1 reconstructs once and proves the persisted public and mechanical partition law', () => {
+    expect(secondReconstruction).toEqual(reconstruction);
+    expect({ pulseRoots: reconstruction.pulseRoots, introductions: reconstruction.introductions, retirements: reconstruction.retirements, finalEntries: reconstruction.finalEntries, homes: reconstruction.homes }).toEqual(baseline.corpus);
+    expect(reconstruction.introductions - reconstruction.retirements).toBe(reconstruction.finalEntries);
+    const publicControl = outcome({ id: 'public.control' });
+    const mechanicalControl = outcome({ id: 'mechanical.control', recordMode: 'state_only' });
+    const suppressionControl = outcome({ id: 'suppression.control', recordMode: 'suppression_only' });
+    const partition = partitionPulseOutcomeLanes({ structuralCandidates: [suppressionControl], selected: [publicControl, mechanicalControl] });
+    expect(partition.selectedForApply.map((row) => row.id)).toEqual(['public.control', 'mechanical.control']);
+    expect(partition.publicSelectedOutcomes.map((row) => row.id)).toEqual(['public.control']);
+    const laneFields = mechanicalPulseRecordFields({ applied: { autoApplied: [publicControl, mechanicalControl, suppressionControl], rumorSeedEntries: [] }, selectedForApply: partition.selectedForApply });
+    expect(laneFields.mechanicalOutcomes.map((row) => row.id)).toEqual(['mechanical.control']);
+    expect([...partition.publicSelectedOutcomes, ...laneFields.mechanicalOutcomes].some((row) => row.id === 'suppression.control')).toBe(false);
+    expect(isPublicOutcome(publicControl) && isStateOnlyOutcome(mechanicalControl) && isSuppressionOnlyOutcome(suppressionControl)).toBe(true);
+
+    const publicRows = Array.from({ length: 30 }, (_, index) => outcome({ id: `public.${index}` }));
+    const publicPersisted = partitionPulseOutcomeLanes({ selected: publicRows }).publicSelectedOutcomes.slice(0, 24);
+    expect(publicPersisted.map((row) => row.id)).toEqual(publicRows.slice(0, 24).map((row) => row.id));
+    const mechanicalRows = Array.from({ length: 30 }, (_, index) => outcome({ id: `mechanical.${index}`, recordMode: 'state_only' }));
+    const mechanicalPersisted = mechanicalPulseRecordFields({ applied: { autoApplied: mechanicalRows, rumorSeedEntries: [] }, selectedForApply: mechanicalRows }).mechanicalOutcomes;
+    expect(mechanicalPersisted.map((row) => row.id)).toEqual(mechanicalRows.slice(0, 8).map((row) => row.id));
+
+    const interleaved = publicRows.flatMap((row, index) => [row, mechanicalRows[index]]);
+    const overlapFields = mechanicalPulseRecordFields({ applied: { autoApplied: mechanicalRows, rumorSeedEntries: [] }, selectedForApply: interleaved });
+    expect(overlapFields.consequenceOutcomes).toHaveLength(24);
+    expect(overlapFields.consequenceOutcomes.filter(isPublicOutcome)).toHaveLength(12);
+    expect(overlapFields.consequenceOutcomes.filter(isStateOnlyOutcome)).toHaveLength(12);
+  });
+
+  it('A2 freezes all 80 address rows and their canonical digest', () => {
+    expect(compareNewsAddressRows(addressRows, baseline.addressTotality.rows)).toBe(true);
+    expect(addressRowsSha256(addressRows)).toBe(baseline.addressTotality.rowsSha256);
+    // T8 · SHIFT (§858 + §860): 106 → 102 identities over 53 → 51 homes. The two homes that leave
+    // are `applied|cause_lifecycle` and `queued|npc_exploit`, each surrendering its headline and
+    // summary row; the provenance is recorded once, at news-headline-contract.mjs's ADDRESS_TOTALS.
+    // WAR LANDING (§876): 102 → 100 over 51 → 50 homes. ONE home leaves this time,
+    // `applied|stressor_escalate_insurgency`, and it is `5a529f100`'s occupied insurgency arm —
+    // which the car REPLACES rather than stacks, because 2.0 × 1.5 already saturates GATE_MULT_MAX.
+    // ⭐ `distinctValues` HOLDS AT 393 THROUGH ALL OF THAT while occurrences rise 536 → 544: the
+    // vocabulary is the same size, dealt to different homes. Provenance and the five-arm control
+    // are recorded once, at news-headline-contract.mjs's ADDRESS_TOTALS.
+    // FP BATCH 3 (2026-09-24): 50/2/100/12/88/393/544 → 51/2/102/13/89/395/546 — one new home (a new address, prospective),
+    // ATTRIBUTED BY BISECT to CURE-PEACE-1 U1 (c9b24fe51); see scripts/lib/news-headline-contract.mjs's RE-RECORDED block.
+    // 2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair): 51/2/102/13/89/395/546 → 44/2/88/14/74/385/530,
+    // eleven homes out and four in, named at news-voice-contract.mjs's RE-RECORDED block.
+    // 2026-10-02 (THE VOICE PROGRAM wave 1): every prospective identity turns indicative; homes, fields and identities hold.
+    // 2026-11-04 (REGISTERS-4, the chair's ruling C5; FOOD-1 T1, FOOD-2 T2, SIZE-3 S5, traced by stage): 44/2/88/0/88/392/530 → 45/2/90/0/90/385/522;
+    // the homes that leave and arrive are named at news-voice-contract.mjs's RE-RECORDED block. Every row stays indicative.
+    // 2026-11-04 (LANDING-2b, the chair's ruling 5; the rung-1 window 05897b88d..5dd0f323a, by first-parent sample point): 45/2/90/0/90/385/522 →
+    // 42/2/84/0/84/365/506; ten homes out and seven in, named at news-voice-contract.mjs's RE-RECORDED block. Every row stays indicative.
+    // 2026-11-06 (LANDING-7 R-E10, the density ceilings re-derived from the stamp bands, 20c0139c5 alone): 42/2/84/0/84/365/506 →
+    // 44/2/88/0/88/372/540; one home out and three in, named at news-voice-contract.mjs's RE-RECORDED block. Every row stays indicative.
+    // 2026-11-07 (LANDING-R2 seat D2, the chair's 02:36 ruling, §934.105; re-taken at the tip 3d03dc723): 44/2/88/0/88/372/540 →
+    // 43/2/86/0/86/356/524; queued|npc_suppress leaves at census-1i unit 3 (597866207, inside rung 2's census-1b merge 0856c09d3),
+    // distinct/occurrences by step d35532850 −6/−6, 950b75014 −4/−4, 597866207 −4/−4, and −2/−2 interaction with rung 1, at
+    // news-headline-contract.mjs's ADDRESS_TOTALS. Every row stays indicative.
+    // 2026-11-07 (MERGE-R2, the integration merge of the rung-2 landing into lane/integration-2026-11-07; re-keyed by identity with
+    // its cause, measured at the merged tip 6c3e25661): 43/2/86/0/86/356/524 → 44/2/88/0/88/364/532; queued|npc_sabotage ARRIVES and
+    // no home leaves; applied|roads 41/41 → 45/45 and queued|strategy_sue_for_peace 2/2 → 1/1 (both fields), at
+    // news-headline-contract.mjs's ADDRESS_TOTALS. PLAUSIBLE (census steps × WIRING-W0 / REVIEW-INTAKE), not bisected. Every row stays indicative.
+    // 2026-11-07 (the people car's landing, PEOPLE-LAND second seat, §934.105; by first-parent point: lane 1 dc655f712 39/2/78/0/78/596/758,
+    // lane 2 3aa160a70 as now, lane 5B a725df7e4 four rows' counts and the digest only): 44/2/88/0/88/372/540 → 40/2/80/0/80/596/800; net seven homes
+    // out and three in, named at news-voice-contract.mjs's RE-RECORDED block. Every row stays indicative.
+    // 2026-11-08 (MERGE-CAR, the people car merged into the integration branch, 8dff691f3; re-keyed by identity with its cause, measured at
+    // the working tree, byte-equal to the merge): 40/2/80/0/80/596/800 → 40/2/80/0/80/588/792; no home in or out; applied|tradition 22/22 →
+    // 18/18 (both fields, the integration parent's own count), at news-headline-contract.mjs's ADDRESS_TOTALS. PLAUSIBLE, not bisected. Every row stays indicative.
+    // 2026-11-08 (MERGE-WAVE at the FIX-PUBLIC-VEIL merge, the veiled re-deal's year, at news-headline-contract.mjs's ADDRESS_TOTALS): one home arrives.
+    // 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR1 merge, e5f88930b; car 1's re-dealt year — the hidden allegiance 5902f1a4a, then J-19 d131ab158 —
+    // at news-headline-contract.mjs's ADDRESS_TOTALS): 41/2/82/0/82/596/782 → 43/2/86/0/86/606/792; four homes in and two out. Every row stays indicative.
+    // 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR2 merge, f51058995; the guild's push bbb1a4abc re-dealing the year, at news-headline-contract.mjs's
+    // ADDRESS_TOTALS): 43/2/86/0/86/606/792 → 44/2/88/0/88/606/792; applied|resource_depletion returns, none leaves. Every row stays indicative.
+    // 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR3 merge, c6ded8e3a; e9070d614's organized-crime rate 0.10 → 0.05 re-dealing the year, at
+    // news-headline-contract.mjs's ADDRESS_TOTALS): 44/2/88/0/88/606/792 → 43/2/86/0/86/602/790; one home in, two out. Every row stays indicative.
+    // 43/86/602/790 → 44/88/623/790 at the style wave's final tip (STYLE-2-MERGE-7, closing act 4; the causes at news-headline-contract.mjs).
+    expect(baseline.addressTotality.totals).toEqual({ homes: 44, fields: 2, identities: 88, prospectiveIdentities: 0, indicativeIdentities: 88, distinctValues: 623, occurrences: 790 });
+  });
+
+  it('A3 freezes both raw lanes and all 26 exact rewrite counts', () => {
+    expect(rawTelemetry).toEqual(baseline.rewriteLiveness.raw);
+    expect(finalLiveness.totals).toEqual(baseline.rewriteLiveness.totals);
+    expect(compareHeadlineRewriteRows(finalLiveness.rows, baseline.rewriteLiveness.rows)).toBe(true);
+    expect(finalLiveness.gaps).toEqual([]);
+    expect(finalLiveness.overlaps).toEqual([]);
+    expect(finalLiveness.indicativeMatches).toEqual([]);
+    expect(rawRows.map((row) => row.pulseIndex)).toEqual([...rawRows.map((row) => row.pulseIndex)].sort((a, b) => a - b));
+  });
+
+  it('A4 rejects malformed envelopes and address identities including null collisions', () => {
+    const nullable = [addressEntry(null), addressEntry(null), addressEntry('ordinary')];
+    expect(deriveNewsAddressRows(nullable).map((row) => row.home)).toEqual([
+      'applied|null', 'applied|null', 'applied|ordinary', 'applied|ordinary',
+    ]);
+    // 2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair): the corpus's null-impactKind entries were the
+    // eight web-war campaign beats (minted 4, complete 4), and the re-dealt year mints no web-war campaign, so the corpus carries
+    // NONE. The null-collision law stays pinned by the constructed `nullable` rows just above.
+    const nullEntries = reconstruction.entries.filter((entry) => entry.fields.impactKind === null);
+    expect(nullEntries).toHaveLength(0);
+    expect(() => deriveNewsAddressRows([])).toThrow();
+    expect(() => deriveNewsAddressRows([addressEntry(), { ...addressEntry(), fields: { ...addressEntry().fields, headline: 'The deed may happen.' } }])).toThrow(/mixed voice/);
+    for (const impactKind of [undefined, '', '   ', 3, true, [], {}, 'null', 'bad|token']) {
+      expect(() => deriveNewsAddressRows([{ fields: { kind: 'applied', impactKind, headline: 'H', summary: 'S' } }])).toThrow();
+    }
+    expect(() => deriveNewsAddressRows([{ fields: { kind: 'applied', headline: 'H', summary: 'S' } }])).toThrow();
+    expect(() => deriveNewsAddressRows([{ fields: { kind: 'bad|kind', impactKind: 'ok', headline: 'H', summary: 'S' } }])).toThrow();
+    for (const mutate of [
+      (value) => { value.extra = true; },
+      (value) => { value.addressTotality.rows.push(clone(value.addressTotality.rows[0])); },
+      (value) => { value.rewriteLiveness.totals.activeRules += 1; },
+      (value) => { value.corpus.introductions = 0; },
+    ]) {
+      const value = clone(baseline); mutate(value); expect(() => validateNewsHeadlineBaseline(value)).toThrow();
+    }
+    expect(() => compareNewsAddressRows([], baseline.addressTotality.rows)).toThrow();
+    for (const mutate of [
+      (rows) => rows.push({ ...rows.at(-1), home: 'queued|new' }),
+      (rows) => { rows[0].occurrences += 1; },
+      (rows) => { rows.find((row) => row.occurrences > row.distinctValues).occurrences -= 1; },
+      (rows) => rows.shift(),
+      (rows) => { rows[0].voiceClass = rows[0].voiceClass === 'indicative' ? 'prospective' : 'indicative'; },
+    ]) {
+      const rows = clone(baseline.addressTotality.rows); mutate(rows); sortAddressRows(rows); expect(() => compareNewsAddressRows(rows, baseline.addressTotality.rows)).toThrow();
+    }
+    // Since the Voice Program wave 1 (2026-10-02) every rule is inert, so the moved count is CONSTRUCTED on the first
+    // row (a valid 1/1 liveness, so the refusal below is the comparison's, not the row validator's).
+    const rewriteRows = clone(baseline.rewriteLiveness.rows); rewriteRows[0].occurrences += 1; rewriteRows[0].distinctValues = Math.max(1, rewriteRows[0].distinctValues);
+    expect(() => compareHeadlineRewriteRows(rewriteRows, baseline.rewriteLiveness.rows)).toThrow();
+    const withoutChallenge = APPLIED_HEADLINE_REWRITES.filter(([pattern]) => pattern.source !== '\\bmay press a challenge to the government\\b');
+    const challenge = plantedChallenge(rawRows);
+    expect(() => measureHeadlineRewriteLiveness(challenge.rows, withoutChallenge)).toThrow(`uncovered ${challenge.location}: ${CHALLENGE_HEADLINE}`);
+    const capBreach = clone(rawRows); const selectedIndex = capBreach.findLastIndex((row) => row.field === 'selectedOutcomes' && row.pulseIndex === 0); capBreach[selectedIndex].outcomeIndex = 24;
+    expect(() => rawHeadlineLivenessOf(capBreach)).toThrow(/cap 24/);
+  });
+
+  it('A5 keeps a scoped written reason on exactly the zero-count rules (all 26 since the Voice Program wave 1)', () => {
+    expect(baseline.rewriteLiveness.knownInert).toEqual(KNOWN_INERT_HEADLINE_REWRITES);
+    expect(finalLiveness.rows.filter((row) => row.occurrences === 0).map((row) => `${row.source}|${row.flags}|${row.replacement}`)).toEqual(KNOWN_INERT_HEADLINE_REWRITES.map((row) => `${row.source}|${row.flags}|${row.replacement}`));
+    const moved = clone(baseline); moved.rewriteLiveness.knownInert[0].reason += ' changed'; expect(() => validateNewsHeadlineBaseline(moved)).toThrow();
+    const blank = clone(baseline); blank.rewriteLiveness.knownInert[0].reason = ' '; expect(() => validateNewsHeadlineBaseline(blank)).toThrow();
+    const missing = clone(baseline); missing.rewriteLiveness.knownInert.pop(); expect(() => validateNewsHeadlineBaseline(missing)).toThrow();
+    // Since the Voice Program wave 1 (2026-10-02) no rule is active in the corpus, so the active rule is CONSTRUCTED: the
+    // challenge rule made live exactly as the planted challenge row makes it, while it stays in quarantine.
+    const quarantined = clone(baseline);
+    const live = quarantined.rewriteLiveness.rows.find((row) => row.source === '\\bmay press a challenge to the government\\b');
+    live.occurrences = 1; live.distinctValues = 1;
+    expect(quarantined.rewriteLiveness.knownInert.some((row) => row.source === live.source), 'the constructed active rule must still sit in quarantine').toBe(true);
+    expect(() => validateNewsHeadlineBaseline(quarantined)).toThrow();
+    const added = clone(baseline); added.rewriteLiveness.knownInert.push({ source: 'new', flags: '', replacement: 'new', reason: 'New inert rows require authority.' }); sortInertRows(added.rewriteLiveness.knownInert); expect(() => validateNewsHeadlineBaseline(added)).toThrow();
+  });
+
+  it('A6 closes the sole live challenge gap with the exact producer twin', () => {
+    const withoutChallenge = APPLIED_HEADLINE_REWRITES.filter(([pattern]) => pattern.source !== '\\bmay press a challenge to the government\\b');
+    const planted = plantedChallenge(rawRows);
+    const pre = analyzeHeadlineRewriteLiveness(planted.rows, withoutChallenge);
+    // TE36 (ODQ §271): 16/9 → 15/10, carrying A3's single crossing through this derived
+    // 25-rule scenario. `rules` stays 25 and the gap below is unchanged, so the challenge
+    // rule this arm exists to isolate is untouched — only `may fall` moved sides, exactly
+    // once, in both the full registry and this one-rule-short twin.
+    // 2026-10-02 (THE VOICE PROGRAM wave 1): 25/15/10 → 25/0/25. No live producer authors a "may" headline, so the
+    // derived 25-rule twin is all inert too; the planted challenge below is what keeps this arm non-vacuous.
+    expect({ rules: pre.totals.rules, activeRules: pre.totals.activeRules, inertRules: pre.totals.inertRules, overlaps: pre.overlaps.length, indicativeMatches: pre.indicativeMatches.length }).toEqual({ rules: 25, activeRules: 0, inertRules: 25, overlaps: 0, indicativeMatches: 0 });
+    expect(pre.gaps).toEqual([{ location: planted.location, headline: CHALLENGE_HEADLINE }]);
+    // and the full registry closes it: the twin is the rule that covers the planted spelling, and nothing else does.
+    expect(analyzeHeadlineRewriteLiveness(planted.rows, APPLIED_HEADLINE_REWRITES).gaps).toEqual([]);
+    const did = FACTION_VERB_PHRASES.faction_government_challenge.did;
+    expect(APPLIED_HEADLINE_REWRITES.find(([pattern]) => pattern.source === '\\bmay press a challenge to the government\\b')?.[1]).toBe(did);
+    expect(newsEntryForOutcome(outcome(), 7, 'proposal').headline).toBe(outcome().headline);
+    expect(newsEntryForOutcome(outcome(), 7, 'applied').headline).toBe(outcome().appliedHeadline);
+    expect(newsEntryForOutcome(outcome({ appliedHeadline: undefined }), 7, 'applied').headline).toBe(`Military/Guard ${did}`);
+  });
+
+  it('A7 leaves unrelated prose and every non-headline feed field byte-identical', () => {
+    const input = outcome({ appliedHeadline: undefined }); const before = clone(input);
+    const actual = newsEntryForOutcome(input, 7, 'applied');
+    expect(input).toEqual(before);
+    const unrelated = newsEntryForOutcome(outcome({ headline: 'Military/Guard already acts', appliedHeadline: undefined }), 7, 'applied');
+    expect(unrelated.headline).toBe('Military/Guard already acts');
+    const explicit = newsEntryForOutcome(outcome(), 7, 'applied');
+    expect({ ...actual, headline: explicit.headline }).toEqual(explicit);
+    expect(actual.summary).toBe(input.summary);
+    expect(actual.reasons).toBe(input.reasons);
+
+    const hazard = JSON.parse(readFileSync(join(ROOT, 'scripts/hazard-registry.json'), 'utf8')).classes.find((row) => row.id === 'HZ-CROSSHOME');
+    expect({ status: hazard.status, acceptedReason: hazard.acceptedReason, instances: hazard.instances, inChain: hazard.enforcer.inChain }).toEqual({ status: 'MACHINERY', acceptedReason: null, instances: 53, inChain: true });
+    expect(hazard.enforcer.paths).toEqual(expect.arrayContaining(['tests/lint/newsHeadlineContract.walker.test.js', 'scripts/lib/news-headline-contract.mjs', 'tests/lint/.news-headline-contract-baseline.json']));
+    const preMortem = PREDICATES.find((row) => row.id === 'cross-home-voice-substrate-touched'); const context = makeContext({ root: ROOT, rev: null });
+    expect(preMortem.population(context).items).toEqual([...new Set([
+      ...NEWS_VOICE_PROTECTED_SUBSTRATE, ...PROSE_FAMILY_PROTECTED_SUBSTRATE,
+    ])].sort(codepoint));
+    expect(preMortem.run(context, { changes: [{ status: 'A', path: 'scripts/lib/news-headline-contract.mjs', oldPath: null }] })).toHaveLength(1);
+    const mutation = JSON.parse(readFileSync(join(ROOT, 'scripts/mutation-coverage-manifest.json'), 'utf8')).invariants['tests/lint/newsHeadlineContract.walker.test.js'];
+    expect(mutation).toMatchObject({ kind: 'mutation', label: 'corpus-coverage/headline rewrite row deleted' });
+    expect(readFileSync(join(ROOT, 'tests/lint/sovereigntyLightingContract.walker.test.js'), 'utf8')).toContain('files: 2412, parked: 365, credited: 2047, titles: 19984, suiteTitles: 5638');
+  });
+
+  it('A8 fails closed on duplicate, overlapping, indicative, and third-lane inputs', () => {
+    expect(() => measureHeadlineRewriteLiveness(rawRows, [...APPLIED_HEADLINE_REWRITES, APPLIED_HEADLINE_REWRITES[0]])).toThrow(/duplicate/);
+    // Since the Voice Program wave 1 no corpus headline says "may", so the overlap is shown on the PLANTED challenge row,
+    // which both the challenge rule and the bare /may/ rule match.
+    expect(() => measureHeadlineRewriteLiveness(plantedChallenge(rawRows).rows, [...APPLIED_HEADLINE_REWRITES, [/\bmay\b/, 'acts']])).toThrow(/overlap/);
+    const indicative = clone(rawRows); indicative[0].headline = 'mayless'; expect(() => measureHeadlineRewriteLiveness(indicative, [[/mayless/, 'x']])).toThrow(/indicative/);
+    const third = clone(rawRows); third[0].field = 'consequenceOutcomes'; expect(() => rawHeadlineLivenessOf(third)).toThrow(/persisted liveness lane/);
+    const duplicate = clone(rawRows); duplicate.splice(1, 0, clone(duplicate[0])); expect(() => rawHeadlineLivenessOf(duplicate)).toThrow();
+  });
+});

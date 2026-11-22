@@ -1,0 +1,78 @@
+{
+  "id": "foodways.FRAMES",
+  "source": "src/domain/foodways.js :: FRAMES (+ the no-source fallback in composeFoodwaysLine)",
+  "drawKind": "H",
+  "pool": {
+    "declares": [],
+    "crisisScoped": true,
+    "colour": false,
+    "notes": "Frames keyed by source COUNT (one/two/more); FNV offset modulus. Under famine generateFoodSecurity sets failedSource = foodSources[0] yet passes ALL sources to composeFoodwaysLine, so slot {A} is the FAILED source: \"Most meals start from bread from the home fields\" prints in a place whose grain harvest failed. Declared calm per the ruling; the precise form is \"excludes famine\" (or drop failedSource from the sources passed). Season/winter/lean-months words: no atom (ruled).",
+    "needs": [],
+    "excludes": []
+  },
+  "rows": [
+    {
+      "id": "foodways.FRAMES::one.0",
+      "text": "Most meals start from {A}.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "calm",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodways.FRAMES::one.1",
+      "text": "The table rests on {A}.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "calm",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodways.FRAMES::two.0",
+      "text": "{A} and {B} anchor the table.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "calm",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodways.FRAMES::two.1",
+      "text": "The table is {A}, with {B} beside it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "calm",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodways.FRAMES::more.0",
+      "text": "{A} and {B} anchor the table; {C} fills the winter.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "calm",
+      "colour": false,
+      "notes": "winter: season, no atom."
+    },
+    {
+      "id": "foodways.FRAMES::more.1",
+      "text": "The table is {A} and {B}, and {C} carries it through the lean months.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "calm",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodways.FRAMES::fallback",
+      "text": "Meals follow the season and what the household has put by.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": "No-source fallback (composeFoodwaysLine :79). Culture lines (cultureProfiles.js foodways) are filtered by SOURCE_WORDS, not annotated here."
+    }
+  ]
+}

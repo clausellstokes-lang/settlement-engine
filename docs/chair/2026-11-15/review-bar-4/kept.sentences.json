@@ -1,0 +1,1659 @@
+[
+{
+"id": "C0300",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"b: Butchers row offers Fresh meat with no mark under famine (93% deficit) and siege, while Bakers and Mills rows are marked scarce"
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "Fresh meat",
+"town": "bar0-city-under_siege+famine-rand-21",
+"sections": [
+"Systems/Institutions"
+],
+"fold": "Fresh meat",
+"n": 216
+},
+{
+"id": "C0341",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"b: Smelter row offers Iron refining unmarked; LAND says it runs on imported iron ore and the siege stops all imports (Blacksmiths' iron rows are Impaired)"
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "ServicesIron refining",
+"town": "bar0-city-under_siege+famine-rand-21",
+"sections": [
+"Systems/Institutions"
+],
+"fold": "ServicesIron refining",
+"n": 235
+},
+{
+"id": "C0543",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: Iron refining offered unmarked; LAND: Smelter runs on imported iron ore, siege stops all imports; blacksmith rows needing iron are marked Impaired"
+],
+"packets": [
+"bar1"
+],
+"readers": "a",
+"text": "Iron refining",
+"town": "bar0-city-under_siege+famine-rand-21",
+"sections": [
+"Systems/Services"
+],
+"fold": "Iron refining",
+"n": 238
+},
+{
+"id": "C10322",
+"sev": "MED",
+"kinds": [
+"LACKS"
+],
+"whys": [
+"a: names 'Crown supply carts'; GOVERNMENT lists no crown or royal power above the Military City Council"
+],
+"packets": [
+"bar1"
+],
+"readers": "a",
+"text": "Crown supply carts take what they need first, and local needs come second.",
+"town": "bar0-city-wartime-rand-21",
+"sections": [
+"Systems/Power"
+],
+"fold": "Crown supply carts take what they need first, and local needs come second.",
+"n": 27
+},
+{
+"id": "C13374",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"b: says food is 'not a subject anyone raises' though STATE word is Pressured (3% gap) and C12509 has a grain importer who quadrupled the price, locals arguing"
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "It is not a subject anyone raises unprompted.",
+"town": "bar0-city-wartime-rand-22",
+"sections": [
+"Systems/Economics"
+],
+"fold": "It is not a subject anyone raises unprompted.",
+"n": 191
+},
+{
+"id": "C1438",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"b: Hidden cache that could feed the settlement two more weeks; FOOD ledger holds 0.1 months in stores (about three days) and C1161 says what is in store is all there is"
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "Secret: Controls a hidden cache of grain reserves that could feed the settlement for two more weeks",
+"town": "bar0-city-under_siege+famine-rand-21",
+"sections": [
+"World/NPCs"
+],
+"fold": "Secret: Controls a hidden cache of grain reserves that could feed the settlement for # more weeks",
+"n": 12
+},
+{
+"id": "C15779",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"a: timber carts 'stopped coming' presumes timber is brought in; C16197 says timber and building wood are needed and not brought in; TRADE imports no timber",
+"b: 'timber carts stopped coming' presumes timber is brought in; Settlement necessity says timber and building wood are needed and not brought in; TRADE imports no timber"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "The timber carts stopped coming a month ago, and the builders are bidding against each other for what is left in the yards.",
+"town": "bar0-city-wartime-rand-23",
+"sections": [
+"Summary/Plot Hooks"
+],
+"fold": "The timber carts stopped coming a month ago, and the builders are bidding against each other for what is left in the yards.",
+"n": 30
+},
+{
+"id": "C16539",
+"sev": "MED",
+"kinds": [
+"STATE",
+"PAIR"
+],
+"whys": [
+"a: says the walls are asked little now, but CRISIS is Wartime, military status is war footing and the page says soldiers hold the walls",
+"b: says the city asks little of its walls and gates; CRISIS is Wartime and the war footing has soldiers on the walls"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Langkirche's accounts show little spent on its city walls and gates now that it asks little of it, since built work needs little upkeep.",
+"town": "bar0-city-wartime-rand-23",
+"sections": [
+"Systems/Defense"
+],
+"fold": "<N>'s accounts show little spent on its city walls and gates now that it asks little of it, since built work needs little upkeep.",
+"n": 14
+},
+{
+"id": "C17793",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"b: steward receives food shipments by a covert route; FOOD brought in 0%, imports cover None, TRADE imports none, 'No food comes into Lidosinum by trade'"
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "Secret: Is receiving food shipments through a covert route and selling them at triple the official price after dark",
+"town": "bar0-hamlet-calm-rand-21",
+"sections": [
+"World/NPCs"
+],
+"fold": "Secret: Is receiving food shipments through a covert route and selling them at triple the official price after dark",
+"n": 4
+},
+{
+"id": "C17926",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: Free Elder Council is the only power, Stable/Approved, 'none rules alone'; a militia household deciding for everyone, unasked, contradicts that",
+"b: an armed household making decisions for all; GOVERNMENT lists only Free Elder Council (Dominant), Stable, Approved; militia is a house under the council, no such quarrel in TENSIONS"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "The strongest armed household has started making decisions on everyone's behalf without asking.",
+"town": "bar0-hamlet-calm-rand-22",
+"sections": [
+"Summary/Overview"
+],
+"fold": "The strongest armed household has started making decisions on everyone's behalf without asking.",
+"n": 3
+},
+{
+"id": "C18744",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"b: 'nothing threatens it now'; TENSIONS gives a live external threat, approaching danger dividing the community, with an agent already inside"
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "Ribatchowk has no wall, and nothing threatens it now that a wall would keep out.",
+"town": "bar0-hamlet-calm-rand-23",
+"sections": [
+"Systems/Defense"
+],
+"fold": "<N> has no wall, and nothing threatens it now that a wall would keep out.",
+"n": 0
+},
+{
+"id": "C18802",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: 'Landlord' is a sex-named personal trade title; Latifa al-Amin is (f) per PEOPLE",
+"b: personal trade title 'Landlord' (male-form) for Latifa al-Amin, who is (f) per PEOPLE"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Landlord",
+"town": "bar0-hamlet-calm-rand-23",
+"sections": [
+"World/NPCs"
+],
+"fold": "Landlord",
+"n": 247
+},
+{
+"id": "C18833",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"a: Latifa 'has not spoken to Alaa since' a case ten years ago, yet Alaa's 'devoted' mentor who vouched for them; also corrected in public last month",
+"b: says Latifa has not spoken to Alaa in ten years; the other card has Latifa vouching for Alaa, a devoted mentor who gave Alaa a first post"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Latifa al-Amin lost a fortune and has not spoken to Alaa ibn Khalid since.",
+"town": "bar0-hamlet-calm-rand-23",
+"sections": [
+"World/Relationships"
+],
+"fold": "<N> lost a fortune and has not spoken to <N> since.",
+"n": 123
+},
+{
+"id": "C19130",
+"sev": "MED",
+"kinds": [
+"STATE",
+"PAIR"
+],
+"whys": [
+"a: claims a poor year does not empty tables, but FOOD is Deficit (gap 63%, grown 38%) under siege; contradicts 'hunger is already here'",
+"b: claims food from several sources so a poor year spares the tables, grain harvest first; FOOD is Deficit (grown 38%, gap 63%), hunger already here, grain chain vulnerable"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Balcombe's food comes from more than one source, the grain harvest most of all, so a poor year in one does not empty the hamlet's tables.",
+"town": "bar0-hamlet-under_siege-rand-21",
+"sections": [
+"Systems/Economics"
+],
+"fold": "<N>'s food comes from more than # source, the grain harvest most of all, so a poor year in # does not empty the hamlet's tables.",
+"n": 2
+},
+{
+"id": "C19472",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: ordinary carts of rock moving as usual under Under Siege where no cart has reached the town in weeks and trade has stopped",
+"b: carts of rock grind past as ordinary traffic; CRISIS Under Siege has road trade stopped and lanes barricaded"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Carts of rock grind past, their axles complaining.",
+"town": "bar0-hamlet-under_siege-rand-22",
+"sections": [
+"Summary/Overview"
+],
+"fold": "Carts of rock grind past, their axles complaining.",
+"n": 0
+},
+{
+"id": "C19497",
+"sev": "MED",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"whys": [
+"a: says buying and selling is done at the market, but the Periodic market is Stopped by the siege and trade by road, gate and water has stopped",
+"b: presents buying and selling at the market as ongoing, unmarked; CRISIS Under Siege has trade and market days stopped"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Buying and selling at Saltocastra is done face to face at the market with no guild between seller and buyer.",
+"town": "bar0-hamlet-under_siege-rand-22",
+"sections": [
+"Summary/Overview"
+],
+"fold": "Buying and selling at <N> is done face to face at the market with no guild between seller and buyer.",
+"n": 10
+},
+{
+"id": "C19517",
+"sev": "MED",
+"kinds": [
+"LACKS"
+],
+"whys": [
+"a: 'leads the military' presumes a military; DEFENCE gives no garrison, militia, watch or mercenaries, only a charter hall"
+],
+"packets": [
+"bar1"
+],
+"readers": "a",
+"text": "leads the military",
+"town": "bar0-hamlet-under_siege-rand-22",
+"sections": [
+"Summary/Crisis"
+],
+"fold": "leads the military",
+"n": 30
+},
+{
+"id": "C19622",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: 'Armed escort' through dangerous territory and dungeon clearance printed on offer unmarked under siege, where nothing goes out by road or gate"
+],
+"packets": [
+"bar1"
+],
+"readers": "a",
+"text": "Armed escort",
+"town": "bar0-hamlet-under_siege-rand-22",
+"sections": [
+"Systems/Institutions"
+],
+"fold": "Armed escort",
+"n": 286
+},
+{
+"id": "C19810",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: 'Market vendors' distribute food, but the Periodic market is Stopped by the siege and the town is in food deficit",
+"b: 'Market vendors' make food distribution visibly civic, unmarked; the Periodic market is 'Stopped by the siege' and trade has stopped"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Market vendors and shared dining customs make food distribution visibly civic.",
+"town": "bar0-hamlet-under_siege-rand-22",
+"sections": [
+"Systems/Economics"
+],
+"fold": "Market vendors and shared dining customs make food distribution visibly civic.",
+"n": 0
+},
+{
+"id": "C2007",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"b: A two-season sickness is printed under The Siege (disaster, major); it belongs to the Plague Years, whose heading is missing though PAST records it"
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "For 2 seasons a sickness worked through the settlement, emptying households and straining every institution past what it was built to bear",
+"town": "bar0-city-under_siege+famine-rand-21",
+"sections": [
+"World/History"
+],
+"fold": "For # seasons a sickness worked through the settlement, emptying households and straining every institution past what it was built to bear",
+"n": 23
+},
+{
+"id": "C2020",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"a: Says besiegers 'have not moved'; Summary says they draw closer each week"
+],
+"packets": [
+"bar1"
+],
+"readers": "a",
+"text": "The besiegers around Qingkou have not moved, and the lookouts wait for the night they do.",
+"town": "bar0-city-under_siege+famine-rand-21",
+"sections": [
+"Table/Tonight sheet"
+],
+"fold": "The besiegers around <N> have not moved, and the lookouts wait for the night they do.",
+"n": 10
+},
+{
+"id": "C2056",
+"sev": "MED",
+"kinds": [
+"LACKS",
+"PAIR"
+],
+"whys": [
+"a: enchanting/identification trade by the hour; magic low, DEFENCE magic none, reliance None, C3949 says no arcane practitioners, no enchanter on HOUSES",
+"b: says magic is a trade like any other with enchanting for hire; header magic low, no magic house, reliance on magic None"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Magic is a trade in Madinatfort like any other: signs offer enchanting and identification by the hour.",
+"town": "bar0-city-under_siege+famine-rand-22",
+"sections": [
+"Summary/Overview"
+],
+"fold": "Magic is a trade in <N> like any other: signs offer enchanting and identification by the hour.",
+"n": 13
+},
+{
+"id": "C20588",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"b: claims a poor year in one source does not empty the tables; FOOD is Deficit, gap 39%, hunger already here, no trade"
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "Its food comes from more than one source, the herds most of all, so a poor year in one does not empty the hamlet's tables.",
+"town": "bar0-hamlet-under_siege-rand-23",
+"sections": [
+"Systems/Economics"
+],
+"fold": "Its food comes from more than # source, the herds most of all, so a poor year in # does not empty the hamlet's tables.",
+"n": 0
+},
+{
+"id": "C20892",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"b: says the besiegers have not moved; the overview says they draw closer each week and the lookouts count more of them"
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "The besiegers around Darhankul have not moved, and the lookouts wait for the night they do.",
+"town": "bar0-hamlet-under_siege-rand-23",
+"sections": [
+"Table/Tonight sheet"
+],
+"fold": "The besiegers around <N> have not moved, and the lookouts wait for the night they do.",
+"n": 10
+},
+{
+"id": "C22108",
+"sev": "MED",
+"kinds": [
+"LACKS"
+],
+"whys": [
+"a: longshoremen shifting goods between 'ship and shore'; terrain Mountain, trade access road only: no water, no ships",
+"b: longshoremen and cranes shifting goods between ship and shore; terrain Mountain, trade access road only, no water route"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Longshoremen and crane equipment for shifting goods between ship and shore.",
+"town": "bar0-metropolis-calm-rand-21",
+"sections": [
+"Systems/Services"
+],
+"fold": "Longshoremen and crane equipment for shifting goods between ship and shore.",
+"n": 110
+},
+{
+"id": "C22254",
+"sev": "MED",
+"kinds": [
+"LACKS"
+],
+"whys": [
+"a: pilots 'through harbour approaches'; Mountain town, trade access road only: no harbour or water route"
+],
+"packets": [
+"bar1"
+],
+"readers": "a",
+"text": "Pilot to guide through harbour approaches.",
+"town": "bar0-metropolis-calm-rand-21",
+"sections": [
+"Systems/Services"
+],
+"fold": "Pilot to guide through harbour approaches.",
+"n": 68
+},
+{
+"id": "C23720",
+"sev": "MED",
+"kinds": [
+"LACKS"
+],
+"whys": [
+"a: wharfinger 'a good ear on the waterfront', talks of ships; terrain Mountain, trade access road only: no waterfront, no ships",
+"b: talks of ships and a good ear on the waterfront; terrain Mountain, trade access road only, no water"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "How they deal Talks about the ships, the weather and the cargoes; a good ear on the waterfront.",
+"town": "bar0-metropolis-calm-rand-21",
+"sections": [
+"World/NPCs"
+],
+"fold": "How they deal Talks about the ships, the weather and the cargoes; a good ear on the waterfront.",
+"n": 32
+},
+{
+"id": "C24951",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"a: the Wild Magic surge is said to have marked the temple district; elsewhere the same event marks the merchants' quarter",
+"b: Wild Magic surge marked the temple district; other lines say it marked the merchants' quarter"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "A surge of magic no one could contain marked the temple district and everyone caught in it, and what it did has never entirely worn away",
+"town": "bar0-metropolis-calm-rand-21",
+"sections": [
+"World/History"
+],
+"fold": "A surge of magic no # could contain marked the temple district and everyone caught in it, and what it did has never entirely worn away",
+"n": 7
+},
+{
+"id": "C26403",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: says the metropolis leans first on its fishing for food; LAND gives River Fisheries depleted, River Fishing vulnerable, fish market short of fish; 54% grown, 46% imported",
+"b: Says the town leans first on its fishing for food; LAND has River Fisheries depleted, River Fishing vulnerable, Fish market short of fish; 54% grown elsewhere"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "The metropolis leans first on its fishing for its food, so a bad season for the fishing is felt at every table.",
+"town": "bar0-metropolis-calm-rand-22",
+"sections": [
+"Systems/Economics"
+],
+"fold": "The metropolis leans first on its fishing for its food, so a bad season for the fishing is felt at every table.",
+"n": 0
+},
+{
+"id": "C26840",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"a: says GGC is winning against Thieves' Guild; stability Unstable (pervasive organized crime); crime 'rising faster than those in charge can answer it'",
+"b: Says the Consortium 'is winning' against the Thieves' Guild; the page's crime tension says crime rises faster than those in charge can answer, stability 'pervasive organized crime'"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Thieves' Guild works against Grand Guild Consortium, and Grand Guild Consortium is winning.",
+"town": "bar0-metropolis-calm-rand-22",
+"sections": [
+"Systems/Power"
+],
+"fold": "Thieves' Guild works against Grand Guild Consortium, and Grand Guild Consortium is winning.",
+"n": 2
+},
+{
+"id": "C26984",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: says food trades are failing; FOOD word Secure, stores 14.8 months, failed source None, gap 0%",
+"b: Says food trades 'are failing'; FOOD word Secure, failed source None, famine cut 0%, 14.8 months in store; LAND has the food chains vulnerable only"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Uaxacatl's food trades are failing, and what they fail to put by is food the metropolis would miss if it were cut off.",
+"town": "bar0-metropolis-calm-rand-22",
+"sections": [
+"Systems/Defense"
+],
+"fold": "<N>'s food trades are failing, and what they fail to put by is food the metropolis would miss if it were cut off.",
+"n": 0
+},
+{
+"id": "C2708",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: sex-named title 'Landlord' for Khulood al-Misri, PEOPLE says (f)"
+],
+"packets": [
+"bar1"
+],
+"readers": "a",
+"text": "Connection: Landlord Khulood al-Misri",
+"town": "bar0-city-under_siege+famine-rand-22",
+"sections": [
+"Systems/Institutions"
+],
+"fold": "Connection: Landlord <N>",
+"n": 245
+},
+{
+"id": "C27089",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: says the baked-goods trade would yield less if magic failed; FOOD by magic 0%, reliance row names only enchanting, herbalism, spellcasting; Bakers not supplied by magic"
+],
+"packets": [
+"bar1"
+],
+"readers": "a",
+"text": "If the help beyond ordinary work failed at Uaxacatl, the trade that makes its baked goods would yield less than it does now.",
+"town": "bar0-metropolis-calm-rand-22",
+"sections": [
+"Systems/Magic"
+],
+"fold": "If the help beyond ordinary work failed at <N>, the trade that makes its baked goods would yield less than it does now.",
+"n": 0
+},
+{
+"id": "C29106",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: Sends anyone new needing a meal or bed to the monks; HOUSES has Inns and taverns (district), 'multiple inn districts' for travellers"
+],
+"packets": [
+"bar1"
+],
+"readers": "a",
+"text": "Anyone new to Tzulcoatl who needs a meal or a bed is sent to the monks.",
+"town": "bar0-metropolis-calm-rand-23",
+"sections": [
+"Summary/Overview"
+],
+"fold": "Anyone new to <N> who needs a meal or a bed is sent to the monks.",
+"n": 29
+},
+{
+"id": "C30469",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: Says the town leans first on fishing for food; LAND has Fishing Grounds depleted, fish imported salted, 52% of food grown on farms",
+"b: says the metropolis leans first on fishing for food; LAND has Fishing Grounds depleted, food grown 52% and imported 48%, fishery fished out"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "The metropolis leans first on its fishing for its food, so a bad season for the fishing is felt at every table.",
+"town": "bar0-metropolis-calm-rand-23",
+"sections": [
+"Systems/Economics"
+],
+"fold": "The metropolis leans first on its fishing for its food, so a bad season for the fishing is felt at every table.",
+"n": 0
+},
+{
+"id": "C30692",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"b: calls the shadow trade small; Criminal Syndicate Revenue is 11% (third source) and C30831 says the unrecorded share 'is not small'"
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "The shadow trade at Tzulcoatl is small, but it is not casual: somebody organises it.",
+"town": "bar0-metropolis-calm-rand-23",
+"sections": [
+"Systems/Economics"
+],
+"fold": "The shadow trade at <N> is small, but it is not casual: somebody organises it.",
+"n": 69
+},
+{
+"id": "C31074",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: Says the town's trade 'makes its salted fish'; the town imports salted fish (fisheries exhausted) and the magic row names only Spellcasting and Magical Items",
+"b: says local trade makes salted fish and would yield less; Fishing Grounds depleted, TRADE imports salted fish ('fish sold now is salted and bought in')"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "If the help beyond ordinary work failed at Tzulcoatl, the trade that makes its salted fish would yield less than it does now.",
+"town": "bar0-metropolis-calm-rand-23",
+"sections": [
+"Systems/Magic"
+],
+"fold": "If the help beyond ordinary work failed at <N>, the trade that makes its salted fish would yield less than it does now.",
+"n": 0
+},
+{
+"id": "C33207",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"a: 'Its own food is game from the woods' contradicts C33132 (each family tills a holding, all for the table) and Harvest 100% income"
+],
+"packets": [
+"bar1"
+],
+"readers": "a",
+"text": "Its own food is game from the woods.",
+"town": "bar0-thorp-calm-rand-21",
+"sections": [
+"Systems/Economics"
+],
+"fold": "Its own food is game from the woods.",
+"n": 0
+},
+{
+"id": "C33209",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"a: says the thorp leans first on hunting for food; C33132 and Harvest 100% give it farming smallholdings; LAND says foraging areas absent"
+],
+"packets": [
+"bar1"
+],
+"readers": "a",
+"text": "Quirigche leans first on its hunting for its food, so a bad season for the hunting is felt at every table.",
+"town": "bar0-thorp-calm-rand-21",
+"sections": [
+"Systems/Economics"
+],
+"fold": "<N> leans first on its hunting for its food, so a bad season for the hunting is felt at every table.",
+"n": 0
+},
+{
+"id": "C34105",
+"sev": "MED",
+"kinds": [
+"STATE",
+"PAIR"
+],
+"whys": [
+"a: defence 'short of money for years', 'each lean season'; STATE prosperity is Wealthy, with farm surplus (C33975) and economic capacity Surplus (C33901)",
+"b: defence 'short of money for years' beside prosperity Wealthy, Economic capacity Surplus and 'the place is doing well'"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Sanctavilla's defence has been short of money for years, and each lean season leaves less to spend on it when a real crisis comes.",
+"town": "bar0-thorp-calm-rand-23",
+"sections": [
+"Systems/Defense"
+],
+"fold": "<N>'s defence has been short of money for years, and each lean season leaves less to spend on it when a real crisis comes.",
+"n": 0
+},
+{
+"id": "C34417",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"b: one importer brings in ALL the grain at quadrupled price; FOOD: grown 80%, imports 20%, Secure, no gap, no CRISIS"
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.",
+"town": "bar0-town-calm-rand-21",
+"sections": [
+"Summary/Plot Hooks"
+],
+"fold": "# importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another supplier, or take the grain.",
+"n": 60
+},
+{
+"id": "C34791",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"b: says copper ore comes from elsewhere and its absence idles work; TRADE imports no copper, C34812 says copper ore is needed and not brought in"
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "A good part of the copper ore Niederhain's work uses must come from elsewhere; when none comes, that work stands idle.",
+"town": "bar0-town-calm-rand-21",
+"sections": [
+"Systems/Economics"
+],
+"fold": "A good part of the copper ore <N>'s work uses must come from elsewhere; when none comes, that work stands idle.",
+"n": 4
+},
+{
+"id": "C34945",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"b: says little of the ground's worth stays in town, powers around it take it; STATE Wealthy, no crisis, income all local, C34776 money to spare"
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "A newcomer to Niederhain soon hears what its ground is worth to the powers around it, and how little of that worth stays in the town.",
+"town": "bar0-town-calm-rand-21",
+"sections": [
+"Systems/Resources"
+],
+"fold": "A newcomer to <N> soon hears what its ground is worth to the powers around it, and how little of that worth stays in the town.",
+"n": 25
+},
+{
+"id": "C34977",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"b: two guilds contest the main trade route; QUARRELS has Guild Council vs Craft Guilds over a defied ruling and Merchant/Craft only tense, no route contest"
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "Two rival guilds are contesting control of the main trade route.",
+"town": "bar0-town-calm-rand-21",
+"sections": [
+"Systems/Power"
+],
+"fold": "# rival guilds are contesting control of the main trade route.",
+"n": 5
+},
+{
+"id": "C34978",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"b: says Guild Council avoids the question; QUARRELS has the Council itself a party, against Craft Guilds, in a moderate dispute over a defied ruling"
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "Neither side will back down and Guild Council is avoiding the question.",
+"town": "bar0-town-calm-rand-21",
+"sections": [
+"Systems/Power"
+],
+"fold": "Neither side will back down and Guild Council is avoiding the question.",
+"n": 2
+},
+{
+"id": "C36862",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"a: 'nothing it lives by would stop without [magic]' contradicts grain/timber/iron 'brought in by magic' dependence rows and 'magical transit' viability line",
+"b: says nothing the town lives by would stop without magic; other rows say timber, iron, grain and patrol work depend on goods brought in by magic"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Whatever magic reaches Madinatserai, the town does not rest on it: nothing it lives by would stop without it.",
+"town": "bar0-town-calm-rand-22",
+"sections": [
+"Systems/Magic"
+],
+"fold": "Whatever magic reaches <N>, the town does not rest on it: nothing it lives by would stop without it.",
+"n": 16
+},
+{
+"id": "C37293",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"b: says the magistrate Bashir governs; GOVERNMENT gives the Feudal Appointee, seat held by Abir ibn Sina; Bashir is only an unranked member"
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "Bashir al-Jabbar governs on Imad al-Andalusi's credit.",
+"town": "bar0-town-calm-rand-22",
+"sections": [
+"World/Relationships"
+],
+"fold": "<N> governs on <N>'s credit.",
+"n": 20
+},
+{
+"id": "C37943",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: town crier printed 'he'/'His employer'; PEOPLE gives the crier Ghalia al-Din (f)",
+"b: house text says 'he stands... His employer' but the crier Ghalia al-Din is (f) in PEOPLE"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "At fixed times he stands in the market square and calls out the proclamations, the prices, and the news.",
+"town": "bar0-town-calm-rand-23",
+"sections": [
+"Systems/Institutions"
+],
+"fold": "At fixed times he stands in the market square and calls out the proclamations, the prices, and the news.",
+"n": 3
+},
+{
+"id": "C38142",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: potion brewing offered with no 'short of' mark; LAND gaps: Alchemist shop lacks access to medicinal herbs"
+],
+"packets": [
+"bar1"
+],
+"readers": "a",
+"text": "Potion brewing Vulnerable",
+"town": "bar0-town-calm-rand-23",
+"sections": [
+"Systems/Services"
+],
+"fold": "Potion brewing Vulnerable",
+"n": 6
+},
+{
+"id": "C38176",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: 'thriving alchemical trade'; LAND gaps say the Alchemist shop lacks medicinal herbs (and C38179 says that work stops without them)",
+"b: claims a 'thriving' alchemical trade; LAND gaps say the Alchemist shop lacks access to medicinal herbs and mineral hot springs, its potion brewing marked Vulnerable"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Apothecary & Alchemy A thriving alchemical trade in reagents, preparations, and curative potions draws customers from surrounding settlements.",
+"town": "bar0-town-calm-rand-23",
+"sections": [
+"Systems/Economics"
+],
+"fold": "Apothecary & Alchemy A thriving alchemical trade in reagents, preparations, and curative potions draws customers from surrounding settlements.",
+"n": 83
+},
+{
+"id": "C39560",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"a: Town council 'answers to no one in particular' under Occupation: officials take the occupiers' orders, offices work under their eye"
+],
+"packets": [
+"bar1"
+],
+"readers": "a",
+"text": "It answers to no one in particular, but the work gets done.",
+"town": "bar0-town-occupied-rand-21",
+"sections": [
+"Systems/Institutions"
+],
+"fold": "It answers to no # in particular, but the work gets done.",
+"n": 0
+},
+{
+"id": "C40012",
+"sev": "MED",
+"kinds": [
+"LACKS"
+],
+"whys": [
+"a: 'Rival crews fighting over who runs the streets' presumes several gangs; HOUSES has one Street gang, 'Ten to thirty strong', working together"
+],
+"packets": [
+"bar1"
+],
+"readers": "a",
+"text": "Rival crews at Divoburg are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling.",
+"town": "bar0-town-occupied-rand-21",
+"sections": [
+"Systems/Defense"
+],
+"fold": "Rival crews at <N> are fighting over who runs the streets, and until # wins, people pay both the cut and the brawling.",
+"n": 60
+},
+{
+"id": "C40032",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"a: 'Walking late is watched, not stopped' contradicts the occupation curfew enforced at checkpoints and travellers being stopped"
+],
+"packets": [
+"bar1"
+],
+"readers": "a",
+"text": "Anyone walking Divoburg late is watched, not stopped, and the watchmen make sure you know it.",
+"town": "bar0-town-occupied-rand-21",
+"sections": [
+"Systems/Defense"
+],
+"fold": "Anyone walking <N> late is watched, not stopped, and the watchmen make sure you know it.",
+"n": 46
+},
+{
+"id": "C4061",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: hidden grain cache to feed city two weeks; FOOD ledger stores 0.1 months, 'already in store are all there will be' (C3983)",
+"b: hidden grain cache to feed the town two more weeks; FOOD ledger holds stores 0.1 months (about three days) and C3983 says store is all there will be"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Secret: Controls a hidden cache of grain reserves that could feed the settlement for two more weeks",
+"town": "bar0-city-under_siege+famine-rand-22",
+"sections": [
+"World/NPCs"
+],
+"fold": "Secret: Controls a hidden cache of grain reserves that could feed the settlement for # more weeks",
+"n": 12
+},
+{
+"id": "C40862",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: 'A town with timber to hand supplies the region's building work'; LAND gives Managed Woodland depleted, Timber & Lumber impaired, and TRADE imports timber",
+"b: 'A town with timber to hand supplies the region's building work': managed woodland depleted, timber imported, exports list no lumber; Timber & Lumber impaired"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "A town with timber to hand supplies the region's building work, and keeps a standing crew to do it.",
+"town": "bar0-town-occupied-rand-22",
+"sections": [
+"Systems/Institutions"
+],
+"fold": "A town with timber to hand supplies the region's building work, and keeps a standing crew to do it.",
+"n": 9
+},
+{
+"id": "C41801",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"b: Bing 'named Wei as successor' (mentor) contradicts the same pair as bitter professional rivals with an exact tally; both edges print for Wei and Bing"
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "Bing Shimizu named Wei Kimura as successor in front of witnesses.",
+"town": "bar0-town-occupied-rand-22",
+"sections": [
+"World/Relationships"
+],
+"fold": "<N> named <N> as successor in front of witnesses.",
+"n": 310
+},
+{
+"id": "C42033",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"b: says collaborators include someone the players will recognise; the crisis card says collaborates: no one is named, no local power gains"
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "The occupation's local collaborators include someone the players will recognise.",
+"town": "bar0-town-occupied-rand-23",
+"sections": [
+"Summary/Crisis"
+],
+"fold": "The occupation's local collaborators include someone the players will recognise.",
+"n": 23
+},
+{
+"id": "C43556",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"b: pasture grazed in common offered; LAND gives grazing land absent (Leatherworking chain) and C43693 says the country gives too little livestock"
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "Pasture the whole village grazes in common, lying beside the open fields.",
+"town": "bar0-village-calm-rand-21",
+"sections": [
+"Systems/Institutions"
+],
+"fold": "Pasture the whole village grazes in common, lying beside the open fields.",
+"n": 32
+},
+{
+"id": "C43690",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"b: says the village lives on one trade whose bad year sinks it; INCOME gives Harvest 71%, Tithes 20%, the coal stream 9%"
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "Miloka lives on one trade.",
+"town": "bar0-village-calm-rand-21",
+"sections": [
+"Systems/Economics"
+],
+"fold": "<N> lives on # trade.",
+"n": 23
+},
+{
+"id": "C4412",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: vintner owns a vineyard; LAND lists no grapes or vineyard land and the gaps say no grapes reach the vintner",
+"b: Jassim al-Tusi's secret says he bought the vineyard; LAND lists no vineyard or grapes resource and C3578 says no grapes reach the vintner"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Secret: Bought the vineyard by lending its old owner money at a rate that could never be paid back",
+"town": "bar0-city-under_siege+famine-rand-22",
+"sections": [
+"World/NPCs"
+],
+"fold": "Secret: Bought the vineyard by lending its old owner money at a rate that could never be paid back",
+"n": 58
+},
+{
+"id": "C44762",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"b: Salt works listed under Elder Council 'held under this authority', but its own card backs Merchant Guilds"
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "Salt works",
+"town": "bar0-village-calm-rand-22",
+"sections": [
+"Systems/Power"
+],
+"fold": "Salt works",
+"n": 94
+},
+{
+"id": "C44796",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"a: guard assessment says the watch has 'irregular pay'; the Village watch is unpaid household rota, nobody paid",
+"b: watch has 'irregular pay' but the Village watch says nobody is paid and households hold the rota"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "The local watch is disciplined but resource-constrained: motivated with inadequate equipment and irregular pay.",
+"town": "bar0-village-calm-rand-22",
+"sections": [
+"Systems/Defense"
+],
+"fold": "The local watch is disciplined but resource-constrained: motivated with inadequate equipment and irregular pay.",
+"n": 0
+},
+{
+"id": "C45429",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"a: priest offers 'divine healing magic' service; Magic tab says medical role absent, reliance on magic none, nothing structural depends on arcane work",
+"b: priest offers divine healing magic for the sick, but Magic tab gives Medical role: absent and Reliance on magic: None"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Divine healing magic for the sick and injured.",
+"town": "bar0-village-calm-rand-23",
+"sections": [
+"Systems/Services"
+],
+"fold": "Divine healing magic for the sick and injured.",
+"n": 37
+},
+{
+"id": "C45642",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"a: says nothing threatens the village that a wall would keep out; TENSIONS gives a live external threat, 'news of approaching danger'",
+"b: says nothing threatens the village now, but TENSIONS gives a live external threat: approaching danger and an agent already inside"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Gankhuubulag has no wall, and nothing threatens it now that a wall would keep out.",
+"town": "bar0-village-calm-rand-23",
+"sections": [
+"Systems/Defense"
+],
+"fold": "<N> has no wall, and nothing threatens it now that a wall would keep out.",
+"n": 0
+},
+{
+"id": "C45961",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: smell of sawn timber and sawdust 'everywhere'; LAND gaps say the Sawmill lacks access to timber, and the mill failed in the famine",
+"b: sawn timber and sawdust 'everywhere', but LAND gaps say the Sawmill lacks access to timber (and mountain_timber): it has no logs to saw"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "The smell of sawn timber is everywhere in Harthafen, and so is the sawdust.",
+"town": "bar0-village-famine-rand-21",
+"sections": [
+"Summary/Overview"
+],
+"fold": "The smell of sawn timber is everywhere in <N>, and so is the sawdust.",
+"n": 7
+},
+{
+"id": "C46104",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: Sawmill row 'Lumber milling' on offer with no mark (also C46158); LAND gaps say the Sawmill lacks access to timber, so it cannot be at work",
+"b: Sawmill row 'Lumber milling' printed on offer with no 'short' mark, though LAND gaps say it lacks timber; Dairy beside it is marked Short"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "ServicesLumber milling",
+"town": "bar0-village-famine-rand-21",
+"sections": [
+"Systems/Institutions"
+],
+"fold": "ServicesLumber milling",
+"n": 237
+},
+{
+"id": "C46445",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"b: says crime is unorganized, 'no criminal infrastructure'; INCOME has Black Market Revenue 18%, with a Fencing service and organised crime named"
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "Theft driven by economic desperation rather than organization.",
+"town": "bar0-village-famine-rand-21",
+"sections": [
+"Systems/Defense"
+],
+"fold": "Theft driven by economic desperation rather than organization.",
+"n": 6
+},
+{
+"id": "C46446",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"a: says no criminal infrastructure; INCOME has Black Market Revenue 18%, a shadow economy and fencing service, and C46449 lists black market food through unofficial channels"
+],
+"packets": [
+"bar1"
+],
+"readers": "a",
+"text": "No criminal infrastructure: just too many people with too little, doing what they must to survive.",
+"town": "bar0-village-famine-rand-21",
+"sections": [
+"Systems/Defense"
+],
+"fold": "No criminal infrastructure: just too many people with too little, doing what they must to survive.",
+"n": 6
+},
+{
+"id": "C46725",
+"sev": "MED",
+"kinds": [
+"STATE",
+"PAIR"
+],
+"whys": [
+"a: drovers push herds along the road as ordinary trade under Famine whose failed source is livestock; herds failed per C46856",
+"b: Drovers push herds, place smells of pens; FOOD says livestock source failed (famine cut 65%) and C46856 says the herds failed."
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Drovers push their herds along the road, and the whole place smells of the pens.",
+"town": "bar0-village-famine-rand-22",
+"sections": [
+"Summary/Overview"
+],
+"fold": "Drovers push their herds along the road, and the whole place smells of the pens.",
+"n": 7
+},
+{
+"id": "C47050",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"a: says drying and pickling stretch the harvest through winter; FOOD stores 0.1 months, no granary, active famine",
+"b: Says preserving stretches the harvest through winter; FOOD gives stores 0.1 months, no granary, active famine, grown 45% of need."
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Fermentation, pickling, and drying stretch the harvest through winter.",
+"town": "bar0-village-famine-rand-22",
+"sections": [
+"Systems/Economics"
+],
+"fold": "Fermentation, pickling, and drying stretch the harvest through winter.",
+"n": 0
+},
+{
+"id": "C48079",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"a: says drying and pickling stretch the harvest through winter; the grain harvest failed, stores about one month, no granary, active famine",
+"b: Says preserving stretches the harvest through winter; the harvest failed (famine cut 50%, failed source grain) and stores are 1 month, no granary."
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Fermentation, pickling, and drying stretch the harvest through winter.",
+"town": "bar0-village-famine-rand-23",
+"sections": [
+"Systems/Economics"
+],
+"fold": "Fermentation, pickling, and drying stretch the harvest through winter.",
+"n": 0
+},
+{
+"id": "C6022",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"b: hook says the guard has not been paid this month; Defense says garrison and city watch are well paid and well equipped"
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "The guard has not been paid this month, and some of them have started taking payment in kind.",
+"town": "bar0-city-under_siege+famine-rand-23",
+"sections": [
+"Summary/Plot Hooks"
+],
+"fold": "The guard has not been paid this month, and some of them have started taking payment in kind.",
+"n": 2
+},
+{
+"id": "C6091",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"b: Bakers row unmarked, 'Fresh bread', though Services marks Fresh bread Impaired/Needs Grain and LAND says Bakers runs on imported grain under a siege that stops imports"
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "Every ward has its bakehouses, with weights and prices set by the guild.",
+"town": "bar0-city-under_siege+famine-rand-23",
+"sections": [
+"Systems/Institutions"
+],
+"fold": "Every ward has its bakehouses, with weights and prices set by the guild.",
+"n": 73
+},
+{
+"id": "C6093",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"a: Bakers row offers Fresh bread unmarked, but bakers run on imported grain, imports stopped, and Crisis lists Bakers as touched"
+],
+"packets": [
+"bar1"
+],
+"readers": "a",
+"text": "ServicesFresh bread",
+"town": "bar0-city-under_siege+famine-rand-23",
+"sections": [
+"Systems/Institutions"
+],
+"fold": "ServicesFresh bread",
+"n": 117
+},
+{
+"id": "C6632",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"b: Street food 'pies, stews, roasted meats' offered unmarked; FOOD failed source is livestock, 94% famine deficit, Butchers marked scarce"
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "Street food",
+"town": "bar0-city-under_siege+famine-rand-23",
+"sections": [
+"Systems/Services"
+],
+"fold": "Street food",
+"n": 51
+},
+{
+"id": "C6795",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"a: Stone Quarrying income unmarked, though the quarry is Stopped by the siege and other siege-hit incomes are marked stopped",
+"b: Stone Quarrying income carries no mark while the Stone quarry house and Cut stone are 'Stopped by the siege'"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "Stone Quarrying",
+"town": "bar0-city-under_siege+famine-rand-23",
+"sections": [
+"Systems/Economics"
+],
+"fold": "Stone Quarrying",
+"n": 2
+},
+{
+"id": "C7336",
+"sev": "MED",
+"kinds": [
+"PAIR"
+],
+"whys": [
+"a: says garrison and city watch are well paid, but the Military/Guard hook says the guard has not been paid this month"
+],
+"packets": [
+"bar1"
+],
+"readers": "a",
+"text": "The garrison and city watch are well paid and well equipped, but are held for the defence, and few patrols can be spared from it.",
+"town": "bar0-city-under_siege+famine-rand-23",
+"sections": [
+"Systems/Defense"
+],
+"fold": "The garrison and city watch are well paid and well equipped, but are held for the defence, and few patrols can be spared from it.",
+"n": 0
+}
+]

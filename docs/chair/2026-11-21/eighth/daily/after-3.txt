@@ -1,0 +1,61 @@
+
+== hxd-thorp-3 · Padmanagar · thorp · stress: none
+  food_culture          Hearty grain bread and turnip-and-onion stews dominate the table; meat appears at festivals and on the wealthier streets.
+  dawn_work             Some go out at first light to cut and carry wood, and the rest turn to the day's other work.
+  gathering_places      Of an evening people sit out by their doors and talk across to their neighbours.
+  child_warnings        Children are warned about picking quarrels of their own while their elders have quarrels enough.
+  commoner_resentments  Commoners voice the small grievances of any town: the gate fee, the rain on market day, the council's favorite tavern.
+  outsider_impressions  Outsiders notice Household Council's mark is on every door that matters; civic stability at risk is the obvious unspoken weight; several civic services run short. Visitors notice missing watch, slow service, or shuttered shops.
+  unspoken_topics       Locals will not openly discuss the matter referenced as "the wound".
+  recent_changes        Civic stability at risk has come to a head.
+
+== hxd-hamlet-3 · Breitwiese · hamlet · stress: none
+  food_culture          Hearty grain bread and turnip-and-onion stews dominate the table; meat appears at festivals and on the wealthier streets.
+  dawn_work             Before anyone goes out to work, each household looks to its own door and sees that all is as it was left.
+  gathering_places      People gather at one another's doors in the evening, and by day where the water is drawn.
+  child_warnings        Children are warned about carrying tales from one household to another, and about straying out of sight of the houses once the light starts to go.
+  commoner_resentments  Commoners resent the council's indifference to ordinary complaints.
+  outsider_impressions  Outsiders notice Elder Council's mark is on every door that matters; civic stability at risk is the obvious unspoken weight; several civic services run short. Visitors notice missing watch, slow service, or shuttered shops.
+  unspoken_topics       Locals will not openly discuss the matter referenced as "the wound".
+  recent_changes        As of the founding survey, the Arcane Incident (18 years ago) left trouble that has never been put right: the mages and the settlement's rulers have never settled which of them has the say. What it left behind (the site of the disputed working remains cordoned and warded) is still part of the place.; civic stability at risk has come to a head.
+
+== hxd-village-3 · Yutian · village · stress: none
+  food_culture          Bread, broth, and Baked goods are plentiful; markets close their stalls without empty crates.
+  dawn_work             Everyone keeps within call of the houses in the first hours, and the farther work waits until later in the day.
+  gathering_places      People meet while they wait their turn at the mill, and again by the house of worship.
+  child_warnings        Children are warned about taking sides in arguments that are not theirs, and about straying out of sight of the houses once the light starts to go.
+  commoner_resentments  Commoners resent the council's indifference to ordinary complaints.
+  outsider_impressions  Outsiders notice Religious Authorities' mark is on every door that matters; civic stability at risk is the obvious unspoken weight; several civic services run short. Visitors notice missing watch, slow service, or shuttered shops.
+  unspoken_topics       Locals will not openly discuss the matter referenced as "the wound".
+  recent_changes        As of the founding survey, the Shortage (43 years ago) set up ways of doing things that have since changed: the merchants lost the place they held then, and have never won it back. What it left behind (emergency grain reserves mandated by ordinance since the shortage) is still part of the place.; civic stability at risk has come to a head.
+
+== hxd-town-3 · Qaraüüd · town · stress: none
+  food_culture          Loaves shrink each month; grain & bread is strained, and householders stretch what arrives.
+  dawn_work             Before any other work, someone walks the length of the walls at first light and looks for gaps.
+  gathering_places      People cross the market square on their way to the houses of worship, and many stop to talk on the way.
+  child_warnings        Children are warned about the road past sundown, and about carrying tales from one household to another.
+  commoner_resentments  Commoners resent rising bread prices and merchants who claim they cannot help it.
+  outsider_impressions  Outsiders notice Merchant oligarchy's mark is on every door that matters; frontier monster pressure is the obvious unspoken weight; several civic services run short. Visitors notice missing watch, slow service, or shuttered shops.
+  unspoken_topics       Locals will not openly discuss the matter referenced as "the wound".
+  recent_changes        The last few seasons have run their usual course. No notable shifts in the rhythm of the place.
+
+== hxd-city-3 · Knockholme · city · stress: none
+  food_culture          Rations are tight: livestock & dairy is scarce, and the poor eat watered stew.
+  dawn_work             People are at the daily markets before light, waiting to see what food comes in and what it will cost.
+  gathering_places      People meet where the water is drawn by day, and at the inns and taverns in the evening.
+  child_warnings        Children are warned about the usual things: going into the woods alone, and being out after dark.
+  commoner_resentments  Commoners resent rising bread prices and merchants who claim they cannot help it.
+  outsider_impressions  Outsiders notice City Council's mark is on every door that matters; several civic services run short. Visitors notice missing watch, slow service, or shuttered shops.
+  unspoken_topics       Locals will not openly discuss the matter referenced as "the wound".
+  recent_changes        The last few seasons have run their usual course. No notable shifts in the rhythm of the place.
+
+== hxd-metropolis-3 · Bellaplenum · metropolis · stress: none
+  food_culture          Loaves shrink each month; grain & bread is substituted, and householders stretch what arrives.
+  dawn_work             Bakers light their ovens first, then the smiths; the watch changes as the gates open.
+  gathering_places      Of an evening people sit out at their doors, and by day they meet by the great cathedral.
+  child_warnings        Children are warned about going out to look for whatever is heard in the night.
+  commoner_resentments  Commoners resent rising bread prices and merchants who claim they cannot help it.
+  outsider_impressions  Outsiders notice Ducal Governorship's mark is on every door that matters; frontier monster pressure is the obvious unspoken weight.
+  unspoken_topics       Locals will not openly discuss the matter referenced as "the wound".
+  recent_changes        The Purge (29 years ago) is still being felt: Talk of enemy agents in the settlement, some of it true, spread suspicion and turned neighbours to informing on one another.
+exit=0

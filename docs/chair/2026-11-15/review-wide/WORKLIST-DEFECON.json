@@ -1,0 +1,146 @@
+[
+{
+"id": "C20434",
+"sev": "MED",
+"n": 43,
+"town": "bar0-city-under_siege+famine-rand-19",
+"section": "Summary/Overview",
+"fold": "Settlement cannot cover ~# lbs of food per day (#% of needs) and has no dependable trade route.",
+"text": "Settlement cannot cover ~3512 lbs of food per day (46% of needs) and has no dependable trade route.",
+"why": "Gives shortfall ~3512 lbs (46%), which counts 2151 imports; the Food Security panel says no food comes in by trade and short is 5,663",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/economy/foodBalance.js",
+"line": 457,
+"fn": "deriveFoodBalanceAnalysis"
+}
+},
+{
+"id": "C10009",
+"sev": "MED",
+"n": 31,
+"town": "bar0-city-under_siege+famine-rand-14",
+"section": "Systems/Outlook",
+"fold": "What is already in store is all there will be until it lifts.",
+"text": "What is already in store is all there will be until it lifts.",
+"why": "'stored food is all there will be'; FOOD shows 8% grown and 28% made by magic, and C9893 says what is still harvested stretches stores",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/economy/foodBalance.js",
+"line": 227,
+"fn": "deriveFoodBalanceAnalysis"
+}
+},
+{
+"id": "C19458",
+"sev": "MED",
+"n": 31,
+"town": "bar0-city-under_siege+famine-rand-18",
+"section": "Systems/Outlook",
+"fold": "What is already in store is all there will be until it lifts.",
+"text": "What is already in store is all there will be until it lifts.",
+"why": "\"What is in store is all there will be\": FOOD has 14% grown and 56% by magic daily (12,596 lbs/day); C19352 says what is harvested stretches the store",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/economy/foodBalance.js",
+"line": 227,
+"fn": "deriveFoodBalanceAnalysis"
+}
+},
+{
+"id": "C12387",
+"sev": "MED",
+"n": 29,
+"town": "bar0-city-under_siege+famine-rand-15",
+"section": "Systems/Defense",
+"fold": "No single dominant organisation: just the steady pressure of too many people with too little, and too few consequences for taking.",
+"text": "No single dominant organisation: just the steady pressure of too many people with too little, and too few consequences for taking.",
+"why": "says 'no single dominant organisation' in crime; page says one syndicate controls the criminal hierarchy and decides what crime is allowed",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/safetyLineTruth.js",
+"line": 161,
+"fn": "NO_DOMINANT"
+}
+},
+{
+"id": "C30841",
+"sev": "MED",
+"n": 28,
+"town": "bar0-city-wartime-rand-11",
+"section": "Systems/Defense",
+"fold": "A court exists, though there is nowhere to hold the guilty.",
+"text": "A court exists, though there is nowhere to hold the guilty.",
+"why": "'nowhere to hold the guilty' (also C30860, C30935) vs Commander's secret of a prisoner who died 'in the cells'",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 993,
+"fn": "COURT_NO_PRISON"
+}
+},
+{
+"id": "C30870",
+"sev": "MED",
+"n": 26,
+"town": "bar0-city-wartime-rand-11",
+"section": "Systems/Defense",
+"fold": "Ask who runs crime here and the answer is # ring.",
+"text": "Ask who runs crime here and the answer is one ring.",
+"why": "'the answer is one ring' (one syndicate) but HOUSES has Multiple criminal factions and Rival gangs 'several gangs at odds'",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/domain/display/defenseDisplay.js",
+"line": 652,
+"fn": "ORGANIZED_RING_NOTES"
+}
+},
+{
+"id": "C55188",
+"sev": "MED",
+"n": 13,
+"town": "bar0-hamlet-calm-rand-12",
+"section": "Systems/Defense",
+"fold": "The constant monster threat keeps the guard exceptionally well-drilled and alert.",
+"text": "The constant monster threat keeps the guard exceptionally well-drilled and alert.",
+"why": "calls the guard exceptionally well-drilled; the citizen militia is part-time volunteers with no training or command",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 311,
+"fn": "generateSafetyProfile"
+}
+},
+{
+"id": "C55187",
+"sev": "MED",
+"n": 8,
+"town": "bar0-hamlet-calm-rand-12",
+"section": "Systems/Defense",
+"fold": "The walls leave few ways in, and the guard watches them.",
+"text": "The walls leave few ways in, and the guard watches them.",
+"why": "says the guard watches the ways in; DEFENCE watch none, garrison none, only a citizen militia; C55201 says the palisade has no gate",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/safetyProfile.js",
+"line": 382,
+"fn": "generateSafetyProfile"
+}
+}
+]

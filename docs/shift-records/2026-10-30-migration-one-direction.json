@@ -1,0 +1,16 @@
+{
+  "_doc": "THE DOSSIER CONSOLIDATION PROGRAM's migration-direction fix (ODQ §934.101, the chair's ruling 2 of 2026-10-30), one signed shift. The mass-migration crisis card says the town is receiving more people than it was built for; the weak-economy arm of the pressure pool (narrativeText.js :: PRESSURE_SENTENCES.mass_migration) and two arrival vignettes (narrativeData.js :: STRESS_DESCS.mass_migration) told a departure, and since BUILD-T1 U2 the pressure sentence is the card's own last line. On the v2 sample 20 of 29 mass-migration towns carried the contradiction, 0 after. The five lines now tell the arrival; pool sizes are unchanged, so no draw moves. MEASURED BEFORE THE WRITE on the committed tip 8bc953c7 (claude/ux-T1 rebased on claude/ux-consolidation-2026-10-30 @ 2acd0206): generator-golden-master 0 of 525 rows move (no golden configuration draws a changed line; not re-recorded); dossier-prose-manifest unmoved; espionage-dormancy-fence PRE_COUPLING_CORPUS_SHA e90e078f... (the arrival market gate's value, recorded the act before) -> 607ea755..., 6 of 360 corpus rows, zero residue outside arrivalScene and pressureSentence, 360/360 distinct. The chair signs under the owner's delegation quoted below (vetoable); a successor chair does not inherit this signature.",
+  "ownerWords": "I also now defer and give all judgment to you that is required now or in the future.",
+  "ownerDate": "2026-10-30",
+  "odqRow": "§934.101 of docs/OWNER_DECISION_QUEUE.md (THE DOSSIER CONSOLIDATION PROGRAM, recorded 2026-10-30 on claude/ux-consolidation-2026-10-30 at 46109419)",
+  "cause": "the migration crisis names one direction across card, pressure line and arrival scene",
+  "seat": "BUILD LANE T1 under the cloud chair, session 01FE9mEwG1m6iRqUDCrMCQPc (Opus 5.5), executing the door write from the committed tree of claude/ux-T1 rebased on claude/ux-consolidation-2026-10-30 @ 2acd0206",
+  "surfaces": [
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    }
+  ]
+}

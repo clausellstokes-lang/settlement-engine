@@ -1,0 +1,148 @@
+/**
+ * rawButtonBaseline.test.js — A+ enforcement.5 ratchet pin.
+ *
+ * scripts/.raw-button-baseline.json grandfathers the files that still use the raw
+ * `<button>` JSX element instead of the Button/IconButton primitive. The
+ * jsx-hygiene/no-raw-button lint rule exempts exactly those files (plus the
+ * primitives themselves). This pin keeps the baseline HONEST and MONOTONE:
+ *   - it must equal the set of files that actually still contain a raw <button>
+ *     (no new violator escapes via the baseline; no stale entry lingers after a
+ *     file is migrated onto the primitive);
+ *   - the total raw-button DEBT can never grow.
+ *
+ * Debt is measured as the COUNT of raw <button> occurrences, not the number of
+ * files. File count is not split-invariant — decomposing a god-component
+ * relocates its existing buttons into new sibling files (Track C), which would
+ * trip a file-count ceiling even though no NEW button was written. Occurrence
+ * count IS split-invariant: it only drops when a button is migrated onto the
+ * Button/IconButton primitive (design-a11y.3). New raw buttons are still blocked
+ * two ways — a new non-baselined file errors under no-raw-button, and adding a
+ * button to a baselined file pushes the occurrence count over the ceiling here.
+ *
+ * The detector regex `/<button[\s/>]/` is verified to match exactly the same file
+ * set the AST rule flags (multi-line opening tags included).
+ *
+ * ⛔ THE DETECTOR READS CODE, NOT PROSE — SINCE 2026-09-20 (FIX-T2). The habitat cure this
+ * file's own history asked for THREE TIMES ("TWICE NOW the detector has counted prose",
+ * below) is taken here: both arms read `commentsOnly(source)`. The AST rule this detector
+ * exists to mirror has never seen a comment, so every prose match was a divergence between
+ * the two — and the ratchet convicted the author who explained a raw button rather than the
+ * one who wrote one.
+ * ⛔ `commentsOnly`, NEVER the sibling `codeOnly`: `<button` is JSX, and `codeOnly` blanks
+ * string and template contents. It would leave this detector reading 0 and the BELOW arm
+ * would invite you to bank that as a total migration.
+ */
+import { readFileSync, readdirSync, statSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join, relative } from 'node:path';
+import { describe, expect, test } from 'vitest';
+
+import { commentsOnly } from '../helpers/codeOnlySource.js';
+
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
+// Committed max raw-button occurrence count — lower it as buttons migrate onto
+// the primitive; never raise it. (Splitting files does NOT change this number.)
+// SB5 (2026-07-21): tightened 50 → 45, the count MEASURED on this tree — the
+// slack banked by earlier migrations is now locked so no new raw button can
+// spend it. Migrating the 45 grandfathered buttons themselves is a burn-down
+// lane (each swap changes rendered chrome — border/minHeight/padding — so it
+// is per-surface craft work, not a mechanical sweep).
+// LANE VT (2026-08-03): tightened 45 → 44, and NOT by a migration. The detector
+// is a source match, so it had been counting a DOCSTRING — NavRibbon.jsx's note
+// about why the focus ring survives the clip wrote the JSX tag out longhand and
+// spent the last unit of the budget. The sentence now says it in prose, and the
+// unit it was holding is locked here rather than left as headroom a genuinely new
+// raw button could quietly spend. (This is the ratchet's own honesty rule read in
+// the direction it is usually read the other way round: the ceiling follows the
+// MEASURED count, whichever way the measurement moved.)
+// LANE PW (2026-08-03): tightened 44 → 42 on a CENSUS TRUE-UP, not a budget
+// change — two rows had drifted in OPPOSITE directions and cancelled in the file
+// count while leaving the exact-set test red:
+//   · src/components/HowToUse.jsx left the baseline. Its two raw buttons were
+//     migrated onto the primitive at d6c5af8e (the About page split); the file has
+//     read ZERO ever since, so the entry was a STALE grandfather — exactly the
+//     second mismatch direction the test above names. Debt effect: none (0 → 0).
+//   · src/components/founders/ChairPlate.jsx did NOT enter the baseline, because
+//     it does not offend. It arrived at 531a8488 (the Founders' Hall) already
+//     built on the Button primitive, and its two detector hits were both PROSE —
+//     a docstring sentence and a JSX comment, each spelling the tag longhand to
+//     argue that the primitive is mandatory here. Baselining it would have
+//     grandfathered a NON-violator and, because eslint-plugin-jsx-hygiene reads
+//     this very JSON to build its exemption set, would have switched
+//     jsx-hygiene/no-raw-button OFF for the Hall's most formal control — a
+//     genuinely new raw button could then have landed there unflagged. So the two
+//     sentences were reworded instead (the LANE VT cure directly above, applied a
+//     second time), the file left the detector's set, and the 2 units it was
+//     holding are LOCKED here rather than left as spendable headroom.
+// Attribution note: the drift was first reported against aaa6f3a4, but that
+// commit is not the cause — HowToUse.jsx already measured 0 at aaa6f3a4^.
+// The two causing commits are d6c5af8e and 531a8488, both 2026-08-03.
+// TWICE NOW the detector has counted prose (NavRibbon at LANE VT, ChairPlate
+// here). The habitat cure — teaching the detector to strip comments, which is
+// what the AST rule it claims to mirror already does — is chair-gated and
+// reported, not taken here: it would move the measurement basis for 3 further
+// files that carry prose mentions ALONGSIDE real raw buttons.
+// THE PAINTED ARROW HEADER (owner orders 2026-09-16): tightened 42 → 39, the count
+// MEASURED on this tree. The header became the owner's arrow painting with its controls
+// on the Button primitive, so three raw buttons left with the retired chrome: NavRibbon's
+// cell (its file and its baseline row are gone), App.jsx's desktop brand button and
+// App.jsx's credits badge (the balance is a row of the plate's menu now). App.jsx stays in
+// the set for the bottom bar's seats. The three units are locked here, not left as headroom.
+// FIX-T2 (2026-09-20): tightened 39 → 36, and the habitat is gone rather than worked
+// around. The detector now reads comment-stripped source, so the THREE prose matches it was
+// still counting left the census on their own: HomeHero.jsx:57, AuthPanel.jsx:80 and
+// PricingTierCards.jsx:244, each a sentence ABOUT a raw button. The budget stood at 39 with
+// the measured count at exactly 39 — no headroom at all, three units of it sentences — so a
+// genuine new raw button and a single explanatory comment were indistinguishable to the
+// gate. The third prose sighting is what finally bought the cure the two earlier ones asked
+// for and were refused.
+// CURE LANE T10 (2026-10-30): tightened 36 → 35 and OverviewTab.jsx leaves the baseline, by
+// a RULED cut. Owner addendum T1-14 / T1-15 (RULINGS-T1; ODQ §934.101), landed by T1's
+// 9de14b94, moved the institution roster to its own Institutions tab and cut the Overview's
+// collapsible with it; its header toggle was the file's one raw button, so the file reads
+// zero and its row was a stale grandfather (which would also have kept
+// jsx-hygiene/no-raw-button OFF for the Overview). The unit is locked, not left as headroom.
+const BUTTON_BUDGET = 35;
+
+const BUTTON_FILE_RE = /<button[\s/>]/;
+const BUTTON_OCC_RE = /<button[\s/>]/g;
+const isPrimitive = (rel) => /^src\/components\/primitives\//.test(rel);
+
+function walk(dir, out = []) {
+  for (const e of readdirSync(dir)) {
+    const p = join(dir, e);
+    if (statSync(p).isDirectory()) walk(p, out);
+    else if (/\.jsx$/.test(e)) out.push(p);
+  }
+  return out;
+}
+
+const srcFiles = walk(join(ROOT, 'src'))
+  .map(p => relative(ROOT, p).replace(/\\/g, '/'))
+  .filter(rel => !isPrimitive(rel));
+
+/** Comments blanked, JSX and every literal intact — see this file's header. */
+const readCode = (rel) => commentsOnly(readFileSync(join(ROOT, rel), 'utf8'));
+
+const currentRawButtonFiles = srcFiles
+  .filter(rel => BUTTON_FILE_RE.test(readCode(rel)))
+  .sort();
+
+const currentButtonCount = srcFiles.reduce((n, rel) => {
+  const m = readCode(rel).match(BUTTON_OCC_RE);
+  return n + (m ? m.length : 0);
+}, 0);
+
+const baseline = JSON.parse(readFileSync(join(ROOT, 'scripts/.raw-button-baseline.json'), 'utf8')).sort();
+
+describe('raw-button baseline ratchet (A+ enforcement.5)', () => {
+  test('baseline exactly matches the files that still use a raw <button>', () => {
+    // Mismatch directions: a NEW violator missing from the baseline (lint also
+    // catches it), or a STALE baseline entry whose file was migrated (remove it).
+    expect(baseline).toEqual(currentRawButtonFiles);
+  });
+
+  test('total raw-button debt never grows past its committed budget', () => {
+    expect(currentButtonCount).toBeLessThanOrEqual(BUTTON_BUDGET);
+  });
+});

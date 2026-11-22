@@ -1,0 +1,5 @@
+{"id":"C38039","town":"bar0-town-occupied-rand-46","sev":"MED","kind":"STATE","why":"forges idle for want of iron, but TRADE imports iron ore (mines exhausted) and no siege shuts the town","other":""}
+{"id":"C38200","town":"bar0-town-occupied-rand-46","sev":"MED","kind":"STATE","why":"Blacksmiths marked Short of iron while TRADE imports iron ore; occupation, not siege: story 2 says smiths work unmarked","other":""}
+{"id":"C38183","town":"bar0-town-occupied-rand-46","sev":"LOW","kind":"STATE","why":"says war takes the iron; no war in CRISIS, QUARRELS, TENSIONS or PAST, and TRADE imports iron ore","other":""}
+{"id":"C39124","town":"bar0-town-occupied-rand-46","sev":"MED","kind":"PAIR","why":"'every essential is accounted for' in a town with a food gap and stone needed but not brought in","other":"C38487"}
+{"id":"DONE","lines":1221,"blocks":1,"flags":4}

@@ -1,0 +1,52 @@
+{
+  "_doc": "THE SHIFT RECORD OF THE URBAN BAND (2026-09-30). The owner ruled, in chat in session 93391427, the institution catalog's rebuild into a registry of families with two cumulative laws and complete tier blocks, and folded MF-CH2B's magic-licence gates into the SAME window so the estate's seeds move once (ODQ §934.86, which knowingly overrides, for this change, §764.3's sentence naming TE-TRANS-1 the last same-seed-moving wave). Every source change of the window is committed BEFORE any write through this door: the registry (6efa6be61), MF-CH2B (94e40b900, fd9845dc5), the byte buy-back (4fccffd60, output-identical), the cure commits J19-J24 (df9ff1a36, 032ad390d, 42b63ae43, 7031914ec, c9bf28ca8) and the one verifier seat's two FIX rows (e5b1bdb38), with the seed and measurement re-pins after them (475ecfd27). Judgments J1-J26 and open items are recorded in docs/URBAN_BAND_INSTITUTIONS.md on the branch. The owner's later words in the same chat, 'I defer all judgment to you' and 'like i said, i defer all judgement to you', delegate the judgment calls of this window; they are not a separate signature and this record cites them only as the authority for those calls. A successor chair does not inherit this signature: it re-confirms in its own chat.",
+  "ownerWords": "\"Urban-band rebuild (Recommended)\" · \"Approve + fold in MF-CH2B (Recommended)\" · \"i think of towns as simply small cities intuitively rather than a slightly larger village. it is where society and civizliation actually start to coalesce\" · \"make sure this also remains true from hamlet to village in terms of cumulative\"",
+  "ownerDate": "2026-09-30",
+  "odqRow": "§934.86 of docs/OWNER_DECISION_QUEUE.md (THE URBAN BAND, recorded by the urban-band chair 2026-09-30 on the ledger branch review-fixes-2026-07-08 at 9d3b518de)",
+  "cause": "ONE CAUSE: THE URBAN BAND. src/data/institutionalCatalog.js became a registry of 179 families and 518 tier entries with the owner's two cumulative laws (hamlet -> village; town -> city -> metropolis), every tier block complete, exclusive groups resolved as one weighted seat and row guards honoured at the roll, and MF-CH2B's gates read the declared magic licence rather than the display shelf (folded in by the owner). The registry re-orders the catalog draws, so 1,188 of 1,200 same-seed rosters move at every tier, thorp included; every downstream golden moves with them. The window's cure commits are consequences of the same cause, each a latent defect the new rosters made reachable (named in docs/URBAN_BAND_INSTITUTIONS.md §4c), and ride this record rather than a second one.",
+  "seat": "the urban-band chair, session 93391427 (Opus 5.5), executing every door write itself from the committed tree of feat/urban-band-institutions-2026-09-30, one surface per commit",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    },
+    {
+      "surface": "cartography-calibration-corpus",
+      "action": "re-record",
+      "predictedRows": 504,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "re-record",
+      "predictedRows": 367,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "dossier-prose-manifest",
+      "action": "re-record",
+      "predictedRows": 2,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "preset-lighting-witness",
+      "action": "re-record",
+      "predictedRows": 15,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "pdf-golden-view-model-snapshot",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}

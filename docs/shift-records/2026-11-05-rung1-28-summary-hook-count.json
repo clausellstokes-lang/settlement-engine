@@ -1,0 +1,22 @@
+{
+  "_doc": "THE V-SUMMARY-HOOKS CURE, ONE SIGNED SHIFT OF RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation, vetoable; a successor chair does not inherit this signature). THE CAUSE, ONE: the viability summary's \"N plot hooks available\" is re-derived from the hooks that survive the truth filter. THE DEFECT CURED is TRUTH's (7eb0bf0ba, composed at ff4448d2e): hookTruthRecord.js :: withoutFalseHooks dropped a false viability hook and left the summary at the pre-filter count, so 18 of the 63 stride towns broke the record invariant V-SUMMARY-HOOKS at the landed tip (\"2 plot hooks available\" over 1 stored on village|germanic|coastal|port; LANDING-5 found it through editCorpusRatchet A8). THE MOVER, NAMED: commit c1cf38bbb on lane/landing-rung1-2026-11-04 (\"fix(viability): the summary's plot-hook count follows the hooks that survive the truth filter ...\": buildViabilitySummary moved, body unchanged, to src/domain/viabilitySummary.js, and withoutFalseHooks re-derives the summary from the surviving hooks and the record's own published issues, dependencies and food balance) and nothing else; the chair ruled it in LANDING-6's brief, ruling 2 (\"cure it under a new signed record (record 28) ... the count follows the surviving hooks (the summary re-derived after the filter, never the pre-filter count), red-first on one of the 18 towns\"). THE OWNER'S WORDS are quoted verbatim from docs/OWNER_DECISION_QUEUE.md line 562 (THE LADDER IS THE LANDING, the owner, 2026-11-04) and line 592 (THE SOAK LADDER, the owner, 2026-11-03), as §934.104 quotes them, the words every fix of the rung carries. HOW: written at the branch tip itself (no later step follows it, so the tip is the stage), the tree clean apart from the register, the surface written and this record, one surface per act. WHAT MOVES, measured at the tip with and without the cure before the write (every registered suite plus the freeze walker run with the cure: 2 red of 52 files, the two below; every other registered golden green and unlisted): the generator golden master 183 of 525 rows (village 36, town 63, city 24, metropolis 60; scripts/audit/golden-master-stage.mjs), the espionage dormancy fence's driven corpus 44 of 360 rows (village 8, town 13, city 13, metropolis 10; scripts/audit/refence.mjs, the spelling proven by reproducing the fence's own constant dc33f86a.. at d7b0442c3).",
+  "ownerWords": "well before we do the PRs, do the 1,000 again, the 10,000, the 100,000, and the 1 million with fixes where findings are found. PR in between each · after all of that, run 1000 generated settlements and review each in depth and in aggregate and tune",
+  "ownerDate": "2026-11-04",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
+  "cause": "THE V-SUMMARY-HOOKS CURE: the viability summary's plot-hook count is re-derived from the hooks that survive the truth filter (hookTruthRecord.js :: withoutFalseHooks, cure c1cf38bbb), never left at the pre-filter count TRUTH 7eb0bf0ba left it at",
+  "seat": "LANDING-6 (Opus 5.5) under the cloud chair (Fable 5.1), session 019yED1Rc3svZxTNcEJVRr77, at the branch tip c1cf38bbb",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    }
+  ]
+}

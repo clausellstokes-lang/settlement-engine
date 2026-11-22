@@ -1,0 +1,4666 @@
+#!/usr/bin/env node
+/**
+ * Governed observed-reader baseline migrations.
+ *
+ * TWO MIGRATION FAMILIES LIVE HERE, and their target rungs are explicit:
+ *
+ *   schema 2 -> 3  (RETIRED) `migrationReport`. Pairs the governed heuristic
+ *     detector against the EXACT detector site-by-site, so the target inventory
+ *     is a NEW alphabet and every paired site needs its own reviewed row.
+ *
+ *   schema 2 -> 4  (RETIRED) `heuristicMigrationReport`. CR-OSR-FREEZE-3-R1: the
+ *     heuristic leaf identity becomes its own schema, so the target inventory is
+ *     the heuristic artifact's OWN inventory — the SAME alphabet the schema-2
+ *     predecessor is spelled in. There is no cross-detector pairing to review,
+ *     and therefore no `rows`: the whole reconciliation is the predecessorRows
+ *     ledger that already exists. It needs NO exact artifact, which is the point
+ *     — the exact detector cannot complete a full-tree scan.
+ *
+ *   schema 4 -> 5  (RETIRED) the SAME function with a different target. The
+ *     alphabet did not move again — schema 5 is schema 4's identity with the
+ *     detector's output NARROWED by two declared post-filters — so the whole
+ *     review is once more `predecessorRows`, and the code path is genuinely the
+ *     same argument rather than a copy of it. The only two things that differ
+ *     are which schema the predecessor envelope must be, and which number the
+ *     target claims; both are parameters, and `LEAF_MIGRATION_PREDECESSOR`
+ *     is the one table that binds them so no caller can pair 5 with a schema-2
+ *     predecessor or 4 with a schema-4 one.
+ *
+ *   schema 5 -> 6  (RETIRED) the same function, a third target, and NOT ONE new
+ *     branch. Schema 6 adds two further post-filters (M11 DOM-global receiver,
+ *     M12 language-surface residual) to the same byte-frozen detector, so the
+ *     alphabet is unchanged for the third time running and the reconciliation
+ *     is once more `predecessorRows`. That this migration needed only a row in
+ *     `LEAF_MIGRATION_PREDECESSOR` and an entry in the predecessor-validator
+ *     table is the evidence that the 4→5 generalisation was the right shape.
+ *
+ *   schema 6 -> 7  (RETIRED) the same numeric reconciliation, re-admitting
+ *     explained-writer rows and binding their governance in sparse rowTags.
+ *
+ *   schema 7 -> 8  (RETIRED) the same tagged numeric reconciliation after the
+ *     governed corpus builder gains an opt-in scalar second consumer. Its
+ *     default topology bytes stay stable; the frozen artifact remains topology.
+ *
+ *   schema 8 -> 9  (LIVE)    the same tagged numeric reconciliation, re-governing
+ *     the instrument to inputs that moved UNDER it: the corpus's dark
+ *     `advanceEpochEnabled` decision, two added `package.json` scripts, and one
+ *     changed generated (subject-but-UNSCANNED) source file. Two things make it
+ *     the first target that is not a straight repeat of its predecessor: the
+ *     delta is FIVE governed paths rather than four, and the unscanned input
+ *     digest MOVED — recorded for review by named path instead of refused,
+ *     because refusing it would leave the instrument permanently dark. Its
+ *     reconciliation is NOT constrained to same-only rows (see
+ *     `assertCorpusCoverageInventoryInvariant`, which is schema 8's alone):
+ *     the mint is cut at a later tip than the one it was measured at.
+ *
+ *   schema 10 -> 11 (LIVE)   the same tagged numeric reconciliation, re-governing the
+ *     instrument to a DETECTOR THAT GENUINELY CHANGED (TE-OSHAPE-1's provenance-drift
+ *     classifier and its fourth door) and growing the explained-writer bank by ONE, the
+ *     ninth identity under the new `conditional-generator-branch` mechanism. It is also
+ *     THE RUNG THAT COULD NOT RUN, and the reason is recorded here rather than in a
+ *     lane note: every rung before it migrated from a predecessor that still sat at its
+ *     own mint, so `frozenAtSha === migrationReview.subjectSha` held by accident and was
+ *     mistaken for a law. A lawful shrink had since re-frozen the schema-10 baseline
+ *     (`12b3aa53` -> `4f42be70`), and the instrument became permanently unmigratable.
+ *     ⛔ CHAIR RULING ODQ §784.2 replaced that equality with the bind that always
+ *     carried custody — see `assertPredecessorCustody`. BIND BY DIGEST, NEVER BY
+ *     GENESIS; this is the third recorded instance of that family law.
+ *
+ *   ⚠ RUNGS 11 -> 12 THROUGH 14 -> 15 KEEP THEIR RATIONALE BESIDE THEIR OWN TARGET
+ *     CONSTANTS rather than in this list, and that is where to read them. This note
+ *     exists because the list above stops at 10 -> 11 and a reader could otherwise
+ *     take that for the newest rung; it is not.
+ *
+ *   schema 15 -> 16 (LIVE)   the same tagged numeric reconciliation, re-governing the
+ *     instrument to a DOOR whose VALIDATOR changed while its DETECTOR did not. The
+ *     virtual-dormant-writer door's clause 1 became SHAPE-SCOPED and its clause 2 now
+ *     accepts a gate in a row-declared COMPANION file. Two things make it not a straight
+ *     repeat of its predecessor:
+ *       - THE DRIFT IS A CLOSED VALIDATOR HOLE, NOT A NEW DETECTION. Clause 1 accepted a
+ *         READ SITE as a write shape (measured: an argument-list token as `shorthand`, a
+ *         re-emission onto another shape as `property`), so a row could name a pure
+ *         reader as its writer and pass for two of three keys. Which reads are FOUND did
+ *         not change; only which explanations are ACCEPTED.
+ *       - THE ALPHABET IS UNCHANGED AND THAT WAS PROVED BY A PASSING ARM, not argued: the
+ *         walker's inventory triple reproduces five figures frozen under the PREVIOUS
+ *         detector, which a different alphabet could not do. So the reconciliation is
+ *         `predecessorRows` with row delta ZERO.
+ *     Its delta is THREE instrument paths, MEASURED against the predecessor's own
+ *     manifest and re-measured after the set was written — a fixed point, because writing
+ *     the set changes a file that is itself in it. See
+ *     `COMPANION_GATE_SCANNER_DELTA_PATHS`.
+ *     ⭐ AND IT IS RE-RUNNABLE, DEMONSTRATED RATHER THAN ASSUMED, because 10 -> 11's
+ *     disaster was not a bad migration but one that left the instrument unable to move
+ *     again: `assertPredecessorCustody` was executed against a predecessor whose
+ *     `frozenAtSha` had been advanced past its `subjectSha` and it ACCEPTED, while still
+ *     refusing a review edited under its own digest. Nothing this rung adds reads that
+ *     equality, and a 16 -> 17 needs the same four data rows this one added.
+ *
+ *   schema 16 -> 17 (LIVE)   the same tagged numeric reconciliation, and THE FIRST RUNG
+ *     SINCE 8 WHOSE SUBJECT IS THE CORPUS BUILDER RATHER THAN THE DOOR. Two things
+ *     follow from that, and neither is a repeat of 16:
+ *       - IT MOVES ROWS, AND THAT IS THE POINT. Rungs 13, 14, 15 and 16 were
+ *         verdict-only and had to report a row delta of ZERO. This one clears TWELVE
+ *         frozen rows and adds NONE, because the corpus can now observe writers it
+ *         never could. `predecessorGone` is therefore expected to be 12 and
+ *         `predecessorNew`/`predecessorIncreased` must still be 0 — a single NEW row
+ *         means the corpus grew its judgement rather than its observation, and the mint
+ *         STOPS. (The report raises issues for `new` and `increased` only; `gone` is a
+ *         lawful shrink and needs no discharge, which is precisely why the zero on the
+ *         other two is the fence that matters.)
+ *       - THE CORPUS'S EXECUTION IDENTITY DOES NOT MOVE. `seeds`, `configs`,
+ *         `generations` and `pulseIntervals` are `corpusCompatibilityOf`'s EXECUTION
+ *         keys and must match the predecessor exactly; the three OBSERVATION keys
+ *         (`simulationFlagsLit`, `steadingsMinted`, `shapeCount`) are recorded rather
+ *         than refused, and here they do not move either. That is not luck: the stress
+ *         pass enters `roots` and NOT `generated`, so producer 2's pulse — every save,
+ *         every steading, every shape it mints — is untouched. Feeding the same
+ *         settlements through `generated` instead moves four execution keys and would
+ *         be refused by that function before any review could see it.
+ *     Its delta is FOUR instrument paths — the corpus builder as SUBJECT plus the three
+ *     bookkeeping files every rung moves — MEASURED against the predecessor's own
+ *     recorded manifest and re-measured after the set was written, because writing it
+ *     changes `migrate-observed-shape-readers.mjs`, which is itself a member. See
+ *     `STRESS_TOPOLOGY_SCANNER_DELTA_PATHS`.
+ *
+ *   schema 17 -> 18 (LIVE)   the same tagged numeric reconciliation, and THE FIRST RUNG
+ *     WHOSE SUBJECT IS THE RECEIPT'S OWN PROVENANCE RATHER THAN THE DETECTOR OR THE
+ *     CORPUS. Nothing about what the instrument SEES moves; what moves is where its
+ *     receipt can be READ FROM.
+ *       - WHY A RUNG IS THE ONLY ROAD. `validateBaselineHistory` requires
+ *         `migrationReview.subjectSha` to be a committed ancestor of HEAD and then
+ *         reconstructs the whole receipt — predecessor baseline text, scan/source/
+ *         detector/execution tree digests — FROM THAT COMMIT'S TREE. Schema 17's genesis
+ *         was taken in its lane's own dock and CHERRY-PICKED into the composed lineage,
+ *         so its subject sha is reachable as an object but is not an ancestor of any
+ *         commit that carries the register. The receipt cannot reconstruct from anything
+ *         in this lineage, and the validator therefore refuses the ORDINARY GATE and
+ *         every `--write` alike — it runs before the scan, so the instrument returns 1
+ *         in zero seconds without looking at a single file. ⛔ A hand-edited `subjectSha`
+ *         would not reconstruct either; it would only make the receipt a lie. The
+ *         governed migration path is the one door that does not consult history, because
+ *         it BRINGS its own predecessor bytes in the bundle, so a rung is the only lawful
+ *         re-anchoring and this is it.
+ *       - IT MOVES NO ROW, AND THAT IS THE FENCE. Rung 17 cleared twelve; this one is
+ *         verdict-only like 13, 14, 15 and 16, and its reconciliation must be EMPTY —
+ *         `predecessorGone`, `predecessorNew`, `predecessorIncreased` and
+ *         `predecessorDecreased` are ALL required to be 0. Measured before the rung was
+ *         cut: the tip's live scan reproduces the frozen register exactly (1,972 findings
+ *         / 1,397 identities / 386 files, zero rows gone, new or count-moved), so any
+ *         movement at all would mean this rung's own bookkeeping changed a verdict, which
+ *         a re-anchoring may not do.
+ *       - THE ONE FIGURE THAT DOES MOVE IS AN OBSERVATION KEY.
+ *         `corpusMeta.simulationFlagsLit` goes 80 -> 81, because the register was frozen
+ *         before SEAT-78 minted `irregularForceEnabled` and the corpus lights every
+ *         simulation flag it can see. That is a `CORPUS_OBSERVATION_KEYS` member —
+ *         RECORDED by `corpusCompatibilityOf`, never refused — while all four
+ *         EXECUTION keys (seeds 4, configs 4, generations 16, pulseIntervals 12) are
+ *         measured unmoved, which is what makes the two sides the same experiment.
+ *     Its delta is THREE instrument paths, the bookkeeping set every verdict-only rung
+ *     moves, MEASURED against the predecessor's own recorded manifest — at which all
+ *     ELEVEN detector inputs were byte-identical before this rung was written. See
+ *     `LINEAGE_REANCHOR_SCANNER_DELTA_PATHS`.
+ *
+ *   schema 18 -> 19 (RETIRED) the same tagged numeric reconciliation, re-governing the
+ *     register to a declared M8/M9 bank of EIGHT after the owner's 2026-09-17 order
+ *     deleted the writer of `factions on locks`. It moves six rows, every one an estate
+ *     shrink. Its full rationale lives beside `EXEMPTION_RETIREMENT_TARGET_SCHEMA`.
+ *
+ *   schema 19 -> 20 (RETIRED) the same tagged numeric reconciliation, and THE FIRST RUNG
+ *     WHOSE SUBJECT IS THE WRITE: a register whose bank the walker's hand-owned literal
+ *     module does not already state is REFUSED before a byte moves, and a migration write
+ *     is refused unless the rung's own declared post-bank (`DECLARED_BANK_BY_TARGET`)
+ *     agrees with the measurement. It moves NO row. Its full rationale — the third stale
+ *     twin, and why nothing short of the write can fence it — lives beside
+ *     `BANK_FENCE_TARGET_SCHEMA`.
+ *
+ *   schema 20 -> 21 (RETIRED) the same tagged numeric reconciliation, and THE FIRST RUNG
+ *     WHOSE SUBJECT IS A PRODUCT SURFACE rather than the instrument: the paid PDF's
+ *     `relationships.network` position was mounted and starved, and lighting it put a list
+ *     assembler under `src/components/new/` that reads three SAVE-TIME keys the generation
+ *     corpus can never observe a writer for. It ADMITS THREE ROWS, all in that one new
+ *     file, and it is the first rung to GROW the bank (60/39 -> 61/40) — the bank fence's
+ *     first real exercise, since 20's own re-freeze moved nothing. Its full rationale lives
+ *     beside `RELATIONSHIPS_MOUNT_TARGET_SCHEMA`.
+ *
+ *   schema 24 -> 25 (RETIRED) the same tagged numeric reconciliation, and THE SECOND RUNG DRIVEN BY
+ *     A DEPENDENCY RATHER THAN THE DETECTOR OR THE INVENTORY — the schema-13 dead-dependency rung's
+ *     shape, cut for a lockfile-only security bump (dompurify 3.4.17, fflate 0.8.3, the 2026-10
+ *     advisories). It moves NO row, declares nothing, and leaves the roster and the bank where they
+ *     stood. Its full rationale lives beside `ADVISORY_LOCKFILE_TARGET_SCHEMA`.
+ *
+ *   schema 26 -> 27 (LIVE)   the same tagged numeric reconciliation, and THE FIRST RUNG CUT FOR A
+ *     LANDING WINDOW rather than one lane: the CRISIS car and the rung-1 fix lanes, composed. It
+ *     moves the shape-family theta one step (0.80 -> 0.76, the crisis `cast` on `stressors`), adds
+ *     a corpus TOPOLOGY pass (producer 1d) that cures two instrument erosions the window caused
+ *     (`facets`, `issues`), DECLARES the crisis cast's temporary person (three identities, the
+ *     roster 10 -> 13, the bank 69/45 -> 76/50), and ADMITS the window's other rows with
+ *     attribution. Its full rationale lives beside `WINDOW_RUNG1_TARGET_SCHEMA` (RETIRED).
+ *
+ *   schema 41 -> 42 (LIVE)   THE AGREEMENT LANE'S TIER SEED (STYLE-2-MERGE point 47, the chair's ruling on STOP
+ *     47a): one rung, one cause — producer 2b's tier seed re-searched by its own rule (osr-tier-14 -> osr-tier-19)
+ *     after COHERENCE-AGREE moved osr-tier-14's town out of the overlap; topology, tag law, roster and bank
+ *     (78/52) unchanged. Its full rationale lives beside `AGREE_TIER_SEED_TARGET_SCHEMA`.
+ *
+ *   schema 40 -> 41 (RETIRED) THE PLAYED-WORLDS WRITER'S ADMISSION (STYLE-2-MERGE closing act 5, the chair's FINAL
+ *     RULING of 2026-11-09 21:2x): one rung, one cause — a NEW writer class, `played-worlds-writer` (a writer that
+ *     runs only in campaign time and is dormant in the birth corpus), and its first declaration, `outcome on
+ *     outcome` (writer worldPulse/convergence.js), its one row tagged; the roster 15 -> 16, the bank 77/51 ->
+ *     78/52. Its full rationale lives beside `PLAYED_WORLDS_TARGET_SCHEMA`.
+ *
+ *   schema 39 -> 40 (RETIRED) THE PUBLIC PROSE WRITER'S ADMISSION (lane SW-B7b PROJECTION, the chair's grant of
+ *     2026-11-09 13:5x): one rung, one cause — ONE save-time-writer declaration, `publicProse on settlement`
+ *     (writer lib/saves.js), its one row admitted tagged; the roster 14 -> 15, the bank 76/50 -> 77/51. Its
+ *     full rationale lives beside `PUBLIC_PROSE_TARGET_SCHEMA`.
+ *
+ *   schema 38 -> 39 (RETIRED) MERGE-TRAIN AT THE ALLEGIANCE-CAR4 MERGE (824a8ce2f): one rung, two causes — the
+ *     goals rebuilt (03ff59084: 7 admitted, 4 repaired, 16 uncured instrument erosion) and the fingerprint
+ *     re-based (0a18ff311: 1 admitted); none declared, the bank 76/50. Its full rationale lives beside
+ *     `TRAIN_CAR4_TARGET_SCHEMA`.
+ *
+ *   schema 37 -> 38 (RETIRED) MERGE-TRAIN AT THE ALLEGIANCE-CAR3 MERGE (c6ded8e3a): one rung, two causes — the
+ *     dial e9070d614 re-deals the year (13 admitted, 5 gone) and the bought watch a63effa93 (1 gone); none
+ *     declared, the bank 76/50. Its full rationale lives beside `TRAIN_CAR3_TARGET_SCHEMA`.
+ *
+ *   schema 36 -> 37 (RETIRED) MERGE-TRAIN AT THE ALLEGIANCE-CAR2 MERGE (f51058995): one rung, one cause — the
+ *     guild's push (bbb1a4abc, A3) re-deals the year: 13 gone, none new; none declared, the bank 76/50. Its full
+ *     rationale lives beside `TRAIN_CAR2_TARGET_SCHEMA`.
+ *
+ *   schema 35 -> 36 (RETIRED) MERGE-TRAIN AT THE ALLEGIANCE-CAR1 MERGE (e5f88930b; the chair's ruling, the
+ *     option-B idiom): one rung, two causes — the hidden allegiance (5902f1a4a: 11 admitted, 17 gone, 1
+ *     increased) and the J-19 re-deal (d131ab158: 13 admitted); the car's own 33 (the veil merge) is 35
+ *     here and is not re-minted; none declared, the bank 76/50. Its full rationale lives beside
+ *     `TRAIN_CAR1_TARGET_SCHEMA`.
+ *
+ *   schema 34 -> 35 (RETIRED) MERGE-WAVE AT THE FIX-PUBLIC-VEIL MERGE (7e65c7bec; the chair's option B): one rung,
+ *     two causes — the corpus builder's producer 1b′ (no row moves) and the veiled re-deal (4 admitted, 13
+ *     gone); none declared, the bank 76/50. Its full rationale lives beside `WAVE_VEIL_TARGET_SCHEMA`.
+ *
+ *   schema 33 -> 34 (RETIRED) the same tagged numeric reconciliation, and MERGE-WAVE AT THE FIX-FOOD-ISOLATION
+ *     MERGE (c6e8a4ad6; one rung per cause): ONE row ADMITTED by cause, `nearbyResourcesState on config` at
+ *     foodGenerator.js (its own existing read, newly observed on the receipt's call path); nothing goes,
+ *     none declared, the bank 76/50. Its full rationale lives beside `WAVE_FOOD_TARGET_SCHEMA`.
+ *
+ *   schema 32 -> 33 (RETIRED) the same tagged numeric reconciliation, and MERGE-WAVE AT THE W2 DEF MERGE
+ *     (82a4e2856; the chair's ruling of 2026-11-08: one rung per cause): ONE row ADMITTED by cause,
+ *     `direction on stress` at migrationDirection.js (grounded by the W2 composition; the writer is
+ *     W0-1's draw); nothing goes, none declared, the bank 76/50. Its full rationale lives beside
+ *     `WAVE_W2_TARGET_SCHEMA`.
+ *
+ *   schema 31 -> 32 (RETIRED) the same tagged numeric reconciliation, and MERGE-CAR: the people car
+ *     merged into the integration branch over the rung-2 landing (the chair's brief, 2026-11-08). The
+ *     car's genesis at 31 STANDS; the integration side's schema-30 reads (R2's census readers) are
+ *     ADMITTED at this rung by cause, the rows they retired go with cause: 15 new, 12 gone, none
+ *     declared; the bank 77/51 -> 76/50 (the census readers' `stresses on settlement` erosion). Its
+ *     full rationale lives beside `CAR_MERGE_TARGET_SCHEMA`.
+ *
+ *   schema 30 -> 31 (RETIRED) the same tagged numeric reconciliation, and THE PEOPLE CAR'S LANDING
+ *     (ODQ §934.105; the landing seat PEOPLE-LAND, 2026-11-07): the NPC grouping and the per-NPC
+ *     faction fields leave the record at the v2 boundary (M-2, M-7). A NEW GENESIS from a restored
+ *     consistent schema-30 predecessor. 90 new rows ADMITTED with attribution by lane cause, 9 go,
+ *     2 decrease; nothing is declared and the bank holds at 77/51. Its full rationale lives beside
+ *     `PEOPLE_LANDING_TARGET_SCHEMA`.
+ *
+ *   schema 29 -> 30 (RETIRED) the same tagged numeric reconciliation, and THE PEOPLE CAR'S CAST (the
+ *     owner's charter, ODQ §934.105; lane PEOPLE-1 CAST, 2026-11-07): one face per face-bearing house
+ *     with house-keyed ids, `institution`, `title`, `memberships` and a rank-placed `importance`, the
+ *     named roster and the rung stamps retired from birth. The corpus's year over the new cast fires
+ *     different simulation branches, so 19 ordinary rows are ADMITTED with attribution (the
+ *     schema-24 shape), 0 go; nothing is declared and the bank holds at 77/51. Its full
+ *     rationale lives beside `PEOPLE_CAST_TARGET_SCHEMA`.
+ *
+ *   schema 28 -> 29 (RETIRED) the same tagged numeric reconciliation, and ONE DECLARATION of the fifth
+ *     class (the chair's ruling of 2026-11-07 03:55 UTC, ODQ §934.105, lane WIRING-W0): the migration
+ *     direction's config projection, `migrationDirection on config` (writer
+ *     generators/steps/stressConfirmPass.js), whose writer never runs in the corpus because no corpus
+ *     world draws a `mass_migration`. The roster 13 -> 14, the bank 76/50 -> 77/51, the one new row
+ *     admitted tagged. Its full rationale lives beside `MIGRATION_DIRECTION_TARGET_SCHEMA`.
+ *
+ *   schema 27 -> 28 (RETIRED) the same tagged numeric reconciliation, and THE SECOND CORPUS-COVERAGE
+ *     RUNG CUT FOR A PULSE SHAPE: R-B1 (2168ffdba, the promotion window reads the stamp cut) left
+ *     producer 2's pulse no tier candidate, so the corpus builder gains producer 2b (its own one-save
+ *     pulse over `osr-tier-14`, a town generated over the city cut; a bounded view of its tier
+ *     candidates, roots only). Verdict-only like 25: the reconciliation is EMPTY, nothing is declared,
+ *     the bank holds at 76/50. Its full rationale lives beside `TIER_COVERAGE_TARGET_SCHEMA` (RETIRED).
+ *
+ *   schema 25 -> 26 (RETIRED) the same tagged numeric reconciliation, and THE FIRST RUNG THAT IS BOTH
+ *     OF ITS PRECEDENTS AT ONCE: the schema-17 corpus-coverage shape (a famine TOPOLOGY pass that
+ *     brings the thinned `issues` shape back over MIN_ROWS and creates nothing) and the schema-24
+ *     admission shape (22 ordinary rows the fed worlds of FOOD-1/FOOD-2 no longer resolve, each
+ *     under its review note). Four rows go and two shrink; nothing is declared; the bank holds.
+ *     Its full rationale lives beside `FED_WORLD_TARGET_SCHEMA`.
+ *
+ *   schema 23 -> 24 (RETIRED) the same tagged numeric reconciliation, and THE FIRST RUNG CUT FOR
+ *     A SAME-SEED SHIFT THAT GREW THE REGISTER. Every earlier shift moved figures DOWN; the urban
+ *     band's re-deal of the AO-0 year (ODQ §934.86 and its addendum 2) ADMITS 53 ordinary rows and
+ *     shrinks one, declares nothing, and leaves the roster and the bank where they stood. Its full
+ *     rationale lives beside `CORPUS_REDEAL_TARGET_SCHEMA`.
+ *
+ *   schema 22 -> 23 (RETIRED) the same tagged numeric reconciliation, and THE FIRST RUNG WHOSE
+ *     SUBJECT IS THE EDIT MODE. It ADMITS FOUR ROWS at two identities — `kind on settlement`
+ *     and `decrees on settlement` — and DECLARES BOTH, which makes it the first rung since 11
+ *     to GROW the roster and the first ever to grow it by two. Its full rationale lives beside
+ *     `EDIT_MODE_READERS_TARGET_SCHEMA`.
+ *
+ *   schema 21 -> 22 (RETIRED) the same tagged numeric reconciliation, and THE FIRST RUNG THAT
+ *     EXISTS TO UNDO AN ARRANGEMENT ITS PREDECESSOR BANKED. 21 admitted the assembler's rows
+ *     where they happened to land — under `src/components/` — and the file's own header then
+ *     wrote that location down as a law, on the true measurement that a domain reader would
+ *     mint new identities. The owner ruled the other way (ODQ §934.16): a domain-side reader
+ *     of the relationship keys is bought with a governed register migration, not refused by
+ *     one. So the assembler moved to `src/domain/display/stateProse/`, ODQ §934.18 made the
+ *     printed Relationships block derive its engagements instead of reading a key nothing
+ *     writes, and this rung is what pays for both. It is a PURE SHRINK plus two address
+ *     moves: no row is added to any file that did not already carry it, the identity
+ *     `crossSettlementConflicts on settlement` leaves the register at zero addresses, and
+ *     the BANK DOES NOT MOVE — which is the fence's second exercise and the first proving
+ *     that a MOVE is not a growth. Its full rationale lives beside
+ *     `DOMAIN_READER_TARGET_SCHEMA`.
+ *
+ * In every family, the predecessor baseline and scan artifacts are
+ * canonical, content-addressed inputs sharing one committed source, execution
+ * tree, executed corpus and scan configuration. The legacy detector is the
+ * governed 6e7acc4d algorithm with one semantic-neutral addition:
+ * `pos: node.name.getStart(sf)`. That lets the retired path pair by an exact
+ * source address; text and nearest-line guesses are deliberately forbidden
+ * because repeated reads make either ambiguous.
+ */
+import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
+import { dirname, join, relative } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+import {
+  parseExactFlags,
+  planExternalArtifactOutputs,
+  publishJsonExclusive,
+} from './lib/governed-artifact-io.mjs';
+import {
+  canonicalJson,
+  digestOf,
+  LEGACY_ALGORITHM_BASE_SHA,
+  LEGACY_ALGORITHM_BLOB_SHA,
+  LEGACY_ALGORITHM_ENRICHMENT,
+  validateScanArtifact,
+} from './lib/observed-shape-governance.mjs';
+import {
+  RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA,
+  RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
+  RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
+  RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
+  validateSchema4Baseline,
+  validateSchema5Baseline,
+  validateSchema6Baseline,
+  validateSchema7Baseline,
+  validateSchema8Baseline,
+  validateSchema9Baseline,
+  validateSchema10Baseline,
+  validateSchema14Baseline,
+  validateSchema15Baseline,
+  validateSchema16Baseline,
+  validateSchema17Baseline,
+  validateSchema18Baseline,
+  validateSchema19Baseline,
+  validateSchema20Baseline,
+  validateSchema21Baseline,
+  validateSchema22Baseline,
+  validateSchema23Baseline,
+  validateSchema24Baseline,
+  validateSchema25Baseline,
+  validateSchema26Baseline,
+  validateSchema27Baseline,
+  validateSchema28Baseline,
+  validateSchema29Baseline,
+  validateSchema30Baseline,
+  validateSchema31Baseline,
+  validateSchema32Baseline,
+  validateSchema33Baseline,
+  validateSchema34Baseline,
+  validateSchema35Baseline,
+  validateSchema36Baseline,
+  validateSchema37Baseline,
+  validateSchema38Baseline,
+  validateSchema39Baseline,
+  validateSchema40Baseline,
+  validateSchema41Baseline,
+} from './lib/observed-shape-baseline.mjs';
+
+export const MIGRATION_REPORT_SCHEMA = 2;
+export const MIGRATION_REVIEW_SCHEMA = 2;
+export const MIGRATION_BUNDLE_SCHEMA = 2;
+
+/** The RETIRED exact target. Named rather than hand-keyed so the two target
+ *  schemas can never be confused at a call site, and so a reader grepping for
+ *  "3" finds a definition instead of a literal. */
+export const RETIRED_EXACT_TARGET_SCHEMA = 3;
+/** The RETIRED UNFILTERED heuristic-leaf target. */
+export const HEURISTIC_TARGET_SCHEMA = 4;
+/** The RETIRED M6-and-M8/M9-only filtered heuristic-leaf target. */
+export const FILTERED_TARGET_SCHEMA = 5;
+/** The RETIRED surface-filtered heuristic-leaf target (M6 + M11 + M12 plus
+ *  clear-outright M8/M9). */
+export const SURFACE_FILTERED_TARGET_SCHEMA = 6;
+/** The RETIRED bank-by-rule target. */
+export const BANKED_EXPLAINED_WRITER_TARGET_SCHEMA = 7;
+/** The RETIRED corpus-coverage target: schema 7's tagged topology inventory
+ *  after the governed builder gains its opt-in scalar second consumer. */
+export const CORPUS_COVERAGE_TARGET_SCHEMA = 8;
+/** The RETIRED epoch-dark target: schema 8's tagged topology inventory
+ *  re-governed to the landed post-EP-1 detector and unscanned inputs, with the
+ *  explained-writer bank grown by the four declared eventLog identities. */
+export const EPOCH_DARK_CORPUS_TARGET_SCHEMA = 9;
+/** The LIVE target: schema 9's tagged topology inventory and its eight-identity
+ *  bank, unchanged, re-governed to two regenerated subject-but-unscanned prose
+ *  leaves and one added package.json lint-staged binding. An ENVELOPE
+ *  RE-RECONCILIATION and nothing else — no declaration, no threshold, no
+ *  filter, no bank growth. */
+export const PROSE_REGEN_TARGET_SCHEMA = 10;
+/** The LIVE target: schema 10's tagged topology inventory re-governed to a
+ *  DETECTOR THAT GENUINELY CHANGED — which is what separates this rung from 9
+ *  and 10, both of which were envelope re-reconciliations that declared nothing.
+ *  TE-OSHAPE-1 repaired the provenance gate (per-path drift classification, so a
+ *  regenerated artifact can no longer brick the shrink-only re-freeze) and gave
+ *  the walker its fourth door. This mint binds that repair and grows the
+ *  explained-writer bank by ONE: the ninth identity, `isCriminal on
+ *  incomeSources`, under the new `conditional-generator-branch` mechanism
+ *  (ODQ §771.2). Its unscanned movement is reviewable for the same reason 8→9's
+ *  was, and the 8→9 header says it best: refusing it would leave the instrument
+ *  permanently dark. */
+export const TREASURY_ADMISSION_TARGET_SCHEMA = 11;
+/** The LIVE target: schema 11's tagged topology inventory re-governed to a SUBJECT
+ *  TREE THAT GREW A NEW READER, and this rung is a third kind again. 9 and 10 were
+ *  envelope re-reconciliations that declared nothing; 11 bound a detector that
+ *  genuinely changed. This one changes NO detector semantics whatever — its whole
+ *  reason for existing is that the shrink-only `--write` cannot express INVENTORY
+ *  GROWTH, and refuses it in those words ("growth or an identity swap cannot be
+ *  re-frozen"). That refusal is the instrument working; a migration is the only
+ *  thing that can express the other side of it.
+ *
+ *  WHAT GREW. The T5 GENESIS train landed `src/domain/instantWorld/genesisDiplomacy.js`
+ *  (POLIS-2), the materializer that turns a plan's slot-addressed founding ties into
+ *  neighbour links on the composed members. It reads three keys the GENERATION corpus
+ *  never observes, and all three have real writers one lifecycle step out from
+ *  generation:
+ *    • `_slot on save`  — written at `composeInstantWorld.js:344` (`_slot: site.slot`)
+ *    • `tier on save`   — written at `composeInstantWorld.js:329`
+ *    • `neighbourNetwork on settlement` — the DECLARED M9 save-time identity, which
+ *      this module now also writes at compose time; it is tagged BY RULE here, as its
+ *      24 siblings already are.
+ *  Chair ruling ODQ §819 admits all three. ⛔ NO mechanism is added and NO exemption
+ *  is declared: bank-by-rule tags a row from the EXISTING declaration, so the bank's
+ *  nine declared identities are untouched and only the tagged ROW COUNT moves. */
+export const GENESIS_TIES_TARGET_SCHEMA = 12;
+/** The LIVE target: schema 12's tagged topology inventory re-governed to a DEPENDENCY
+ *  THAT LEFT — the first rung whose delta is driven by neither the detector nor the
+ *  inventory. E-STRIP4-4 (chair order TE-MINT-1, ODQ §783.3/§788.2(d)/§821) drops
+ *  `three@0.185.1`, a PRODUCTION dependency with zero importers under every module
+ *  syntax; the portrait 3D view layer it once served is gone, and
+ *  `tests/architecture/archViewWall.test.js` already asserts its total absence from
+ *  shipped source while deferring the package.json byte to "STRIP-6's sweep". This is
+ *  that sweep.
+ *
+ *  ⭐ WHY A RUNG AT ALL FOR A DEAD DEPENDENCY. `package.json` and `package-lock.json`
+ *  are DELIBERATE governed detector inputs — check-observed-shape-readers.mjs says why
+ *  in its own words, "a dependency bump can move the parser" — so the shrink-only
+ *  `--write` refuses them by design and only a migration can bind the new bytes.
+ *
+ *  ⛔ AND THE RECONCILIATION MUST BE EMPTY, which is this rung's whole claim. Removing
+ *  a package nothing imports cannot change what the scanner FINDS, so any moved row
+ *  would mean the drop was not inert and the mint must STOP rather than bank it.
+ *  Measured: predecessorSame 1413, new/decreased/gone/increased ALL ZERO. */
+export const DEAD_DEPENDENCY_TARGET_SCHEMA = 13;
+
+/** The schema-14 leaf target — THE WIDENED CLAUSE 4 (E-T2-7, lane T9).
+ *
+ *  ⭐ WHAT MOVED, AND WHY IT NEEDED A RUNG. Clause 4 of the virtual-dormant-writer
+ *  door retires a row whose flag has stopped being dark. It read only a WINDOW of the
+ *  flag manifest — the slice between the `DEFAULT_SIMULATION_RULES` and
+ *  `ENGINE_GATED_VIRTUAL_RULE_KEYS` declarations — and the entire preset table sits
+ *  beyond it: 41 of the manifest's 52 `<x>Enabled: true` lights are outside the window,
+ *  11 inside. A preset override spread is how every virtual flag in this estate is
+ *  actually lit, so the clause could not fire for the one path it was written to watch.
+ *  It is now 4a (the defaults, byte-unchanged) plus 4b, which reads the WHOLE executed
+ *  manifest, leaving no boundary to drift.
+ *
+ *  ⭐ WHY A RUNG FOR A CHANGE THAT CONVICTS NOTHING NEW TODAY. The widening lands in
+ *  `check-observed-shape-readers.mjs`, a governed detector source, and the shrink-only
+ *  `--write` refuses a moved detector BY DESIGN — frozen numbers taken under one
+ *  detector do not mean the same thing under another even when they are numerically
+ *  equal. That refusal is the instrument working, and a rung is the only lawful way
+ *  past it.
+ *
+ *  ⛔ AND THE RECONCILIATION MUST BE EMPTY, which is this rung's whole claim. 4b
+ *  convicts only a flag lit `true` OUTSIDE the defaults, and every flag carrying a
+ *  dormant-writer row is dark in the live manifest — the clause is armed and silent.
+ *  So any moved row would mean the widening was not inert and the mint must STOP
+ *  rather than bank it. */
+export const PRESET_LIGHT_TARGET_SCHEMA = 14;
+
+/** The schema-15 leaf target — THE CHURN RULE GIVEN A STABLE-CORE GUARD (R-T8-OSR,
+ *  chair ruling option C, lane T8).
+ *
+ *  ⭐ WHAT MOVED, AND WHY IT NEEDED A RUNG. The corpus builder collapses a node into
+ *  an id-keyed map on three independent branches. Two of them quantify over EVERY
+ *  key — `exactIdKeys` proves key ≡ value.id, and `allObject`/`allArray` require the
+ *  whole node to be homogeneous — but the third, the CHURN branch, judged a node by a
+ *  CORNER of it: two traversable keys seen on under 80 % of its instances were enough,
+ *  whatever the rest of the node did. A fixed record carrying two optional ledgers was
+ *  therefore classified as a map. The branch now states the guarantee its two siblings
+ *  already had: a node at least `SCHEMA_PRESENCE` of whose keys are schema keys is a
+ *  RECORD WITH OPTIONAL FIELDS, and no number of coming-and-going traversable fields
+ *  can reclassify it. ONE constant governs the key-level reading and the node-level one
+ *  so the two can never drift apart.
+ *
+ *  ⭐ WHY A RUNG FOR A CHANGE THAT IS PURE CLASSIFICATION. The cure lands in
+ *  `scripts/lib/observed-shape-corpus.mjs`, a governed detector source, and the
+ *  shrink-only `--write` refuses a moved detector BY DESIGN — frozen numbers taken
+ *  under one detector do not mean the same thing under another even when they are
+ *  numerically equal. That refusal is the instrument working, and a rung is the only
+ *  lawful way past it.
+ *
+ *  ⛔ AND THE RECONCILIATION MUST BE EMPTY, which is this rung's whole claim. The cure
+ *  is CLASSIFICATION-ONLY — it removes a mislabel and the `/dynamic` facet the mislabel
+ *  minted — so the live inventory at the cured tip reproduces the schema-14 predecessor
+ *  ROW FOR ROW. Measured in advance: 1,999 reads / 1,412 identities / 388 files,
+ *  violations 0 and stale 0, which is the frozen register exactly. The mint must
+ *  therefore report predecessorSame 1412 with new, gone, increased and decreased ALL
+ *  ZERO; any moved row means the cure was not classification-only and the mint STOPS
+ *  rather than banking it. */
+export const STABLE_CORE_TARGET_SCHEMA = 15;
+
+/* ⭐⭐ THE SCHEMA 15 → 16 RUNG — THE COMPANION-GATE MINT (ENC-3, ruled §893.4).
+ *
+ *  WHAT MOVED, AND IT IS THE DOOR'S VALIDATOR RATHER THAN THE DETECTOR. The
+ *  virtual-dormant-writer door (M13) gained two corrections in one act:
+ *    · CLAUSE 1 IS NOW SHAPE-SCOPED. It asked whether a file wrote the key ANYWHERE
+ *      while the door's identities are `"<key> on <shape>"` — a shape it then ignored.
+ *      MEASURED on a pure READER of a `grievance`: `fromSid` passed as `shorthand` off
+ *      an argument list, `incidentType` as `property` off a re-emission onto another
+ *      shape, and `toSid` not at all. So a row naming the reader as its writer passed
+ *      for two of three keys on the strength of its own READ SITE. A door that convicts
+ *      for the wrong reason is worse than one that refuses, because it blesses the next
+ *      case silently.
+ *    · CLAUSE 2 ACCEPTS A GATE IN A ROW-DECLARED COMPANION. It required the gate in the
+ *      writer, assuming one file both writes the key and reads the flag. A better-built
+ *      subsystem splits them: ENCOUNTERS has a PURE leaf that computes receipts and a
+ *      STAGE that owns the ONE gate read. The old clause's only route was to spell the
+ *      flag inside the pure leaf — degrading the product to satisfy the tool, and
+ *      reddening that subsystem's own polarity census, which pins the gate at EXACTLY
+ *      ONE site. Two instruments in tension means one has the narrower premise.
+ *
+ *  ⭐ THE ALPHABET DID NOT MOVE, AND THAT IS WHY THIS IS THE LIGHT FAMILY. The door is
+ *  a POST-FILTER: it narrows the VERDICT, it does not change what the detector DETECTS.
+ *  PROVED BY A PASSING ARM rather than by argument — the walker's inventory triple
+ *  reproduces `reads`/`identities`/`files`/`bankedReads`/`taggedRows` against literals
+ *  frozen under the PREVIOUS detector, and a detector with a different alphabet could
+ *  not reproduce five predecessor figures. So the reconciliation is `predecessorRows`
+ *  and the mint must report predecessorSame 1409 with new, gone, increased and decreased
+ *  ALL ZERO; any moved row means the change was not verdict-only and the mint STOPS.
+ *
+ *  ⚠ THE DRIFT CAME FROM CLOSING A VALIDATOR HOLE, NOT FROM A NEW DETECTION — the
+ *  distinction this rung exists to record. The detector source moved, so `--write`
+ *  refuses BY DESIGN (executed, not inferred: it throws and leaves the baseline
+ *  untouched); but nothing about which reads are FOUND has changed, only which
+ *  explanations are ACCEPTED. */
+export const COMPANION_GATE_TARGET_SCHEMA = 16;
+
+/* ⭐⭐ THE SCHEMA 16 → 17 RUNG — THE STRESS-TOPOLOGY CORPUS MINT (lane OSR-SCHEMA17).
+ *
+ *  WHAT MOVED, AND IT IS THE CORPUS BUILDER RATHER THAN THE DOOR — the first rung since
+ *  7 → 8 whose subject is `observed-shape-corpus.mjs`. `buildObservedCorpus` gained a
+ *  STRESS-LOADED TOPOLOGY PASS: one config × the four seeds under `insurgency` + `famine`,
+ *  pushed into `roots` and DELIBERATELY NOT into `generated`.
+ *
+ *  ⭐ WHY THE INSTRUMENT NEEDED IT. The reader-with-no-writer ratchet reports its
+ *  CORPUS'S REACH, not the code's truth. `economicState.js:349` writes `isCriminal` onto
+ *  an `incomeSources` row only inside `if (safetyProfile.blackMarketCapture > 10)`, and
+ *  that capture is `baseShadowPercent + stressShadowBonus` with the bonus EXACTLY ZERO
+ *  when no stress flag is set. The four unstressed configs could therefore never observe
+ *  the key, and three shipped readers of a working lens were all reported dead. The same
+ *  blindness hid `power/stressFactions.js`'s `modifiers`, `power/rulingStructure.js`'s
+ *  `captureState`, and the whole `issues` shape written by `economy/foodBalance.js` under
+ *  `if (stressNotes.length > 0)`.
+ *
+ *  ⛔ THIS RUNG MOVES ROWS AND MUST — the difference from 13, 14, 15 and 16, which were
+ *  verdict-only and had to report a row delta of zero. Measured before the rung was cut,
+ *  through the gate's own declared post-scan chain reproduced out of band (the gate
+ *  refuses to scan a moved detector source, so there is no in-band way to look first):
+ *
+ *      identities 1409 → 1397 · findings 1993 → 1972 · files 388 → 386
+ *      GONE 12 · NEW 0 · RAISED 0 · LOWERED 0
+ *
+ *  Five keys entering three shapes account for every cleared row with nothing left over.
+ *  A row here can only vanish by its writer becoming OBSERVABLE: the pass adds roots and
+ *  removes none, so no shape can lose rows and none can fall back under `MIN_ROWS`.
+ *
+ *  ⛔ THE ONE THING THAT WOULD FALSIFY THIS RUNG IS A SINGLE ADDED IDENTITY. Adding the
+ *  same settlements to `generated` instead was measured to clear 33 rows and MINT 20, by
+ *  re-rolling producer 2's pulse until thin shapes crossed `MIN_ROWS` into being
+ *  judgeable. Topology without pulse is a pure shrink; topology WITH pulse is a new
+ *  baseline wearing a shrink's clothes. */
+export const STRESS_TOPOLOGY_TARGET_SCHEMA = 17;
+
+/* ⭐⭐ THE SCHEMA 17 → 18 RUNG — THE LINEAGE RE-ANCHORING (lane OSR-SCHEMA18).
+ *
+ *  WHAT MOVED, AND IT IS NEITHER THE DETECTOR NOR THE CORPUS — the first rung whose
+ *  subject is the RECEIPT'S OWN PROVENANCE. Every filter, every threshold, every declared
+ *  bank entry and the whole executed corpus definition are byte-for-byte what schema 17
+ *  governed. What changed is which commit the receipt can be reconstructed FROM.
+ *
+ *  ⭐ WHY THE INSTRUMENT NEEDED IT. `validateBaselineHistory` demands that
+ *  `migrationReview.subjectSha` be a committed ancestor of HEAD and then rebuilds the
+ *  receipt from that commit's tree. Schema 17's genesis was executed in lane
+ *  OSR-SCHEMA17's own dock (subject `0742f8ff5`) and CHERRY-PICKED into the composed
+ *  desk lineage as a different sha, so the subject commit is reachable as a git OBJECT
+ *  but is an ancestor of nothing that carries the register. The validator runs BEFORE
+ *  the scan, so the whole instrument — the ordinary gate, `--report` and every `--write`
+ *  — returned 1 in zero seconds without reading one source file, and
+ *  `base-state-capsule.mjs`, which shells out to it, could not regenerate either.
+ *  ⛔ THE ONE CURE THAT IS NOT AVAILABLE IS EDITING `subjectSha`: the digests would not
+ *  reconstruct from the substituted commit, so the receipt would stop being checkable
+ *  and start being a claim. The governed migration path is the only door that does not
+ *  consult history — it carries its own predecessor bytes inside the reviewed bundle —
+ *  which is exactly why a rung, and only a rung, can re-anchor a register.
+ *
+ *  ⛔ THIS RUNG MOVES NO ROW AND MUST NOT — the difference from 17, which cleared twelve,
+ *  and the same discipline 13, 14, 15 and 16 kept. Measured before the rung was cut, via
+ *  `--scan-only --scan-mode=legacy-leaf`, which reaches a real scan because it never
+ *  enters the gate branch that validates history:
+ *
+ *      identities 1397 → 1397 · findings 1972 → 1972 · files 386 → 386
+ *      GONE 0 · NEW 0 · RAISED 0 · LOWERED 0
+ *
+ *  ⛔ THE FENCE IS THE ZERO ON ALL FOUR, not merely on `new`/`increased` as at rung 17.
+ *  A shrink is lawful when the corpus's reach genuinely grew; here it did not grow, so a
+ *  vanished row could only mean this rung's own bookkeeping changed a verdict — and a
+ *  re-anchoring that moves a verdict is not a re-anchoring.
+ *
+ *  ⚠ ONE OBSERVATION KEY MOVES: `corpusMeta.simulationFlagsLit` 80 → 81. The register was
+ *  frozen before SEAT-78 minted `irregularForceEnabled`, and the corpus lights every
+ *  simulation flag it can see. `corpusCompatibilityOf` RECORDS the three observation keys
+ *  and REFUSES only the four execution keys, all of which are measured unmoved. That one
+ *  figure is also the whole of the writer-reach walker's declared debt against this
+ *  register: two banked ratchet rows read `expected 81 to be 80` until this write. */
+export const LINEAGE_REANCHOR_TARGET_SCHEMA = 18;
+
+/* ⭐⭐ THE SCHEMA 18 → 19 RUNG — THE EXEMPTION RETIREMENT (owner order, 2026-09-17).
+ *
+ *  WHAT MOVED, AND IT IS THE DECLARED BANK'S MEMBERSHIP — the first rung since 11 to
+ *  change the roster of `EXPLAINED_WRITER_EXEMPTIONS`, and the FIRST EVER to SHRINK it.
+ *  11 grew the bank by one; this one retires one, and the direction matters because a
+ *  retirement RESTORES enforcement rather than reducing it.
+ *
+ *  ⭐ WHY THE INSTRUMENT NEEDED IT, AND WHY NOTHING SMALLER WOULD DO. The owner ordered
+ *  every lock control out of the dossier ("I approve and remove the other padlocks and
+ *  fix the remaining contradictions as well") and `src/components/dossier/LockControls.jsx`
+ *  was deleted with them. That file was the entire basis of the `factions on locks`
+ *  exemption: it held the only `WORLD_LOCKS` declaration and the only `setLock` writer of
+ *  the key. Gate 0 reads each entry's named writer from the scanned tree on EVERY scan, so
+ *  the deletion did not leave a stale row — it raised "names a writer that cannot be read"
+ *  and refused the whole instrument. Gate 0's own message names the remedy: *"the key
+ *  genuinely lost its writer, in which case the reads are real findings again and the
+ *  exemption must be DELETED, not repaired."*
+ *  ⛔ AND DELETING IT IS EXACTLY WHAT THE SHRINK-ONLY `--write` CANNOT ABSORB. The entry's
+ *  two committed row tags outlive the declaration by one act, and `assertExplainedWriterRowTags`
+ *  — run against the PREDECESSOR baseline before any scan — classes a tagged inventory
+ *  address with no declaration as a FORGED tag and throws. The register cannot drop the
+ *  tags without a write, and no ordinary write can start while they are there. Only a rung
+ *  breaks that circle, and `check-observed-shape-readers.mjs` says so in its own words:
+ *  "A declaration membership or ruling change alters tag authenticity and requires a
+ *  governed instrument migration; it is not ordinary maintenance."
+ *
+ *  ⛔ THIS RUNG MOVES ROWS AND MUST — like 17, and unlike 13 through 16 and 18. But the
+ *  cause is the opposite of 17's and that distinction is the fence. 17 moved rows because
+ *  the INSTRUMENT's reach grew; this one moves them because the ESTATE shrank, and the
+ *  instrument's reach is byte-for-byte what schema 18 governed. Measured before the rung
+ *  was cut, via `--scan-only --scan-mode=legacy-leaf` at the committed retirement:
+ *
+ *      identities 1397 → 1392 · findings 1972 → 1966 · files 386 → 386
+ *      GONE 5 · DECREASED 1 · NEW 0 · RAISED 0
+ *
+ *  The six are all on the `locks` shape and all in two files: `factions`, `geography`,
+ *  `history` and `identity on locks` GONE from `src/domain/locksPreservation.js`,
+ *  `npcs on locks` LOWERED there 3 → 2, and `factions on locks` GONE from
+ *  `src/domain/worldPulse/coup.js`. Every one is a read that left the estate with the lock
+ *  controls.
+ *  ⛔ THE FENCE IS THE ZERO ON NEW AND INCREASED. A deletion cannot mint a reader, so a
+ *  single added row would mean this rung's own bookkeeping changed a verdict — and a
+ *  retirement that convicts something new is not a retirement. `files` holding at 386 is
+ *  the other half: neither file lost all of its rows, so no file may leave the register.
+ *
+ *  ⚠ THE BANK'S FIGURES MOVE WITH THE ROSTER, AND BOTH HALVES ARE RECORDED: the declared
+ *  roster goes 9 → 8, and the banked reads go 62 → 60 across 41 → 39 tagged addresses.
+ *  The two banked rows are the same two `factions on locks` addresses that this rung's
+ *  reconciliation reports GONE — they stopped being banked and stopped existing in the
+ *  same act, which is why no tagged row survives undeclared.
+ *
+ *  Its delta is THREE instrument paths, the bookkeeping set every rung moves. MEASURED,
+ *  NEVER LISTED: each of the ELEVEN governed detector inputs was hashed against the
+ *  PREDECESSOR'S OWN RECORDED MANIFEST before a byte of this rung was written, and exactly
+ *  ONE came back moved — `check-observed-shape-readers.mjs`, carrying the committed
+ *  retirement itself — with `package.json` and `package-lock.json` measured byte-SAME
+ *  rather than assumed, because any `package.json` byte is itself a mint trigger. The set
+ *  was re-measured after it was written, because writing it changes
+ *  `migrate-observed-shape-readers.mjs`, which is itself a member. See
+ *  `EXEMPTION_RETIREMENT_SCANNER_DELTA_PATHS`. */
+export const EXEMPTION_RETIREMENT_TARGET_SCHEMA = 19;
+
+/* ⭐⭐ THE SCHEMA 19 → 20 RUNG — THE BANK FENCE (2026-09-18).
+ *
+ *  WHAT MOVED, AND IT IS THE WRITE — the first rung whose subject is neither the detector
+ *  (11, 13–16), the corpus (17), the receipt (18) nor the declared roster (9, 11, 19) but
+ *  the act that lands a register: `check-observed-shape-readers.mjs --write`, in every
+ *  mode, now REFUSES to freeze a bank the walker's hand-owned literal does not already
+ *  state, and a `--migrate-schema` write additionally refuses unless the rung's own
+ *  declared post-bank agrees. See `assertBankTwins` there and `DECLARED_BANK_BY_TARGET`
+ *  below.
+ *
+ *  ⭐ WHY THE INSTRUMENT NEEDED IT. The walker keeps the register's bank as a LITERAL by
+ *  ruling — a derived re-freeze may never RAISE the bank, so a hand-written figure is the
+ *  right instrument and a red on it is the governed event announcing itself. That literal
+ *  went stale at the very rung before this one: `fe021a487` re-froze the register at
+ *  schema 19 and took the bank 62/41 → 60/39, touching exactly ONE file, and the walker's
+ *  twin stayed at 62/41 — RED AT THE TIP ITSELF, before any later lane's first car, until
+ *  three lanes had independently reproduced it against a pristine archive (`1637f85d1`).
+ *  It was the THIRD stale twin in that file's history (TE-INSTR-1; the WAR landing
+ *  `18df1bb3d`), and the first two were cured by reading the triple from the register — a
+ *  cure the bank cannot take without becoming a self-comparison. The structural cause is
+ *  that the figure's three homes — the rung's docblock (prose), the walker's literal (a
+ *  test file) and the register (a tool's output) — had no edge between them. This rung
+ *  draws the edges: the docblock's figure becomes DATA the write checks, and the literal
+ *  becomes a MODULE the write reads. Both are still hand-written; neither is derived.
+ *
+ *  ⛔ NOTHING SHORT OF THE WRITE FIRES AT THE MOMENT OF THE ACT. A pre-commit hook was
+ *  weighed and refused with evidence: husky's shim resolves `.husky/pre-commit` from the
+ *  MAIN checkout for every worktree (`$(dirname "$(dirname "$0")")/$n`), so a hook fence
+ *  would be governed by whichever branch the main checkout happens to be on. A test-time
+ *  assertion fires at the next tip, which is the failure this rung exists to prevent. And
+ *  the write is a detector source, so the fence costs exactly this rung — a no-row rung of
+ *  rung 18's shape.
+ *
+ *  ⛔ THIS RUNG MOVES NO ROW, AND THAT IS ITS FENCE. Like 13–16 and 18, and unlike 17 and
+ *  19, its reconciliation must be EMPTY — `predecessorGone`, `predecessorNew`,
+ *  `predecessorIncreased` and `predecessorDecreased` all 0 — and the bank it declares below
+ *  is the bank schema 19 froze, so `inventory` and `rowTags` come out byte-identical. The
+ *  write proves that itself: this rung's re-freeze is the fence's first live exercise.
+ *
+ *  Its delta is THREE instrument paths, the bookkeeping set every verdict-only rung moves:
+ *  the checker (the fence, its live-validator binding, its `_doc` and schema index), the
+ *  baseline library (the 19 → 20 bump, the retired-19 constant and its re-bound validator)
+ *  and this rung. MEASURED against the predecessor's own recorded manifest and re-measured
+ *  after the set was written, because writing it changes this file, which is itself a
+ *  member. See `BANK_FENCE_SCANNER_DELTA_PATHS`. */
+export const BANK_FENCE_TARGET_SCHEMA = 20;
+
+/**
+ * ⭐⭐ THE DECLARED POST-BANK — what a rung's docblock used to say in a sentence, as data
+ * the write can refuse against. From 19 onward every rung states the bank its re-freeze
+ * must land: banked reads across tagged addresses. `check-observed-shape-readers.mjs`
+ * refuses a `--migrate-schema` write whose freshly derived bank disagrees with the live
+ * target's entry, so a figure PREDICTED FROM THE DELTA rather than measured stops the mint
+ * instead of landing as a stale sentence.
+ *
+ * ⚠ ONLY MEASURED FIGURES ENTER. 19's pair is read off the register `fe021a487` froze
+ * (60 banked reads across 39 tagged addresses, over seven of eight declared identities);
+ * 20 moves no row and declares the same. Rungs before 19 recorded no data figure and none
+ * is transcribed from their prose here — a backfilled number nobody measured would be the
+ * stale-numeral class this table exists to refuse. A rung that moves the bank adds its own
+ * entry; a rung that does not carries its predecessor's figure forward BY HAND, so the
+ * declaration is always a statement and never a default.
+ */
+/* ⭐⭐ THE SCHEMA 20 → 21 RUNG — THE RELATIONSHIPS MOUNT (ODQ §934.9, 2026-09-18).
+ *
+ *  WHAT MOVED, AND IT IS THE ESTATE RATHER THAN THE INSTRUMENT. The owner's "do these as
+ *  well" ordered the paid PDF's `relationships.network` position lit. It had been MOUNTED
+ *  AND STARVED: `printProse.js` put the position, the chapter rendered it, and the two
+ *  lists the DS-REL-1 desk draws from were assembled inside `RelationshipsTab.jsx`, where
+ *  a headless builder cannot reach them. The cure is the one the builder's own seam note
+ *  prescribed — `src/components/new/relationshipsDeskRead.js`, holding that merge, called
+ *  by the tab AND by the builder. That assembler reads `neighbourNetwork`,
+ *  `interSettlementRelationships` and `crossSettlementConflicts`.
+ *
+ *  ⛔ AND THE SCAN IS RIGHT ABOUT ALL THREE. Every one is written when a world is SAVED,
+ *  LINKED or IMPORTED — `src/lib/saves.js`, the neighbour back-link, the link / undo /
+ *  import paths — and never by the generation pipeline this instrument executes, so no
+ *  corpus world carries one and every reader of them is convicted. The reads are real and
+ *  the position they light is real; what the register owes them is ADMISSION, not a
+ *  silenced detector. THREE NEW ROWS, one read each, all in that one file; nothing moves
+ *  anywhere else, and no filter, door, mechanism or declaration is touched.
+ *
+ *  ⭐ THE BANK GROWS, AND THAT IS THE FENCE'S FIRST REAL EXERCISE. `neighbourNetwork on
+ *  settlement` is a DECLARED identity, so `rowTagsOf` tags its new address exactly as it
+ *  tags all 25 of its siblings — there is no choice in it, and `assertExplainedWriterRowTags`
+ *  throws on a declared address that lacks its tag. The bank therefore goes 60 -> 61 banked
+ *  reads across 39 -> 40 tagged addresses, the first growth since `assertBankTwins` existed,
+ *  and the write refuses unless BOTH hand-owned twins already say so: the literal module and
+ *  `DECLARED_BANK_BY_TARGET[21]` below. Rung 20 declared the same pair as 19 and proved
+ *  nothing about a MOVE; this one does.
+ *
+ *  ⛔ THE OTHER TWO STAY ORDINARY ROWS, AND THE ALTERNATIVE IS REFUSED ON EVIDENCE rather
+ *  than on taste. Declaring them would make them M8/M9 bank entries — and:
+ *    • `crossSettlementConflicts on settlement` CANNOT BE DECLARED AT ALL. Gate 0 re-proves
+ *      on every scan that a declaration's named writer still writes the key in one of the
+ *      four measured write shapes, and NOTHING in `src/` writes this key: the deterministic
+ *      generator that mints those rows writes them into `interSettlementRelationships`
+ *      (`domain/relationships/neighbourBackLink.js:144,149`), and
+ *      `tests/lint/writerReach.walker.test.js` already lists the key in its own `unwritten`
+ *      roster. An entry naming any writer would be a false one, and gate 0 would refuse it.
+ *    • `interSettlementRelationships on settlement` COULD be declared — it has real
+ *      save-time writers — but the roster is keyed by IDENTITY, not by address, so adding
+ *      it would auto-tag the SEVEN ordinary rows the estate has carried for it since schema
+ *      4 and move them into the enforced bank. That is a change of enforcement posture over
+ *      rows this rung did not cause, and it is not a lane's to make on the way to mounting a
+ *      paragraph. An ordinary row here matches what those seven siblings already are.
+ *
+ *  Its delta is THREE instrument paths, the bookkeeping set every rung moves: the checker
+ *  (the live-validator binding, its `_doc` and its schema index), the baseline library (the
+ *  20 -> 21 bump, the retired-20 constant and its re-bound validator) and this rung.
+ *  MEASURED against the predecessor's own recorded manifest and re-measured after the set
+ *  was written, because writing it changes this file, which is itself a member. See
+ *  `RELATIONSHIPS_MOUNT_SCANNER_DELTA_PATHS`.
+ *
+ *  ⚠ THE SUBJECT COMMIT IS RATCHET-RED BY CONSTRUCTION, for one commit, and that is the
+ *  recorded CR-OSR-FREEZE-4 pair: the register may only move from a CLEAN COMMITTED tree, so
+ *  the reader lands first and this rung's re-freeze lands after it. */
+export const RELATIONSHIPS_MOUNT_TARGET_SCHEMA = 21;
+
+/* ⭐⭐ THE SCHEMA 21 → 22 RUNG — THE DOMAIN READER (ODQ §934.16 + §934.18, 2026-09-19).
+ *
+ *  WHAT MOVED, AND IT IS AN ARRANGEMENT RATHER THAN A READING. Rung 21 admitted three rows
+ *  for DS-REL-1's list assembler at `src/components/new/relationshipsDeskRead.js`. Nothing
+ *  about those reads was wrong. What was wrong was WHERE THEY LIVED: `printProse.js` is a
+ *  `src/domain` module and it imported that assembler, so the paid export path carried a
+ *  domain → components layer inversion, and the assembler's own header wrote the
+ *  arrangement down as a law ("⛔ WHY IT LIVES UNDER src/components AND MAY NOT MOVE TO
+ *  src/domain") on the true measurement that a domain reader mints new identities. THE
+ *  REGISTER WAS HOLDING THE INVERSION IN PLACE. The owner ruled the other way:
+ *
+ *      "If a future car wants a domain-side reader of the relationship keys, it is a
+ *       governed register migration."
+ *
+ *  This is that migration. The assembler is now
+ *  `src/domain/display/stateProse/relationshipsDeskRead.js`; the component file is deleted
+ *  and all three importers re-pointed.
+ *
+ *  ⭐ AND THE SECOND HALF IS A DEFECT THE FIRST HALF UNCOVERED (ODQ §934.18).
+ *  `pdf/lib/viewModel.js` fed the printed "Cross-settlement conflicts" block from the
+ *  PERSISTED `settlement.crossSettlementConflicts`. NO WRITER IN `src/` PRODUCES THAT KEY —
+ *  the deterministic generator that mints those rows writes them into
+ *  `interSettlementRelationships` (`domain/relationships/neighbourBackLink.js:144,149`), and
+ *  `tests/lint/writerReach.walker.test.js` carries it in its own `unwritten` roster. So on
+ *  every LINKED world the screen drew the derived engagements and the paid document drew
+ *  nothing, while a record carrying the pre-merge fossil printed rows the screen had stopped
+ *  drawing. Both surfaces now derive from the one assembler, and that read is gone.
+ *
+ *  ⛔ THE RECONCILIATION IS A SHRINK AND TWO ADDRESS MOVES, AND NOT ONE ADDED ROW.
+ *    • `neighbourNetwork on settlement` and `interSettlementRelationships on settlement`
+ *      leave `src/components/new/relationshipsDeskRead.js` and appear at the domain path,
+ *      one read each, same spelling, same identities.
+ *    • `crossSettlementConflicts on settlement` is DELETED TWICE — at the component
+ *      assembler, which no longer merges the key, and at `src/pdf/lib/viewModel.js`. It
+ *      therefore reaches ZERO addresses and LEAVES THE REGISTER ENTIRELY. That is the
+ *      strongest outcome this ratchet has: the reader-with-no-writer class it named is now
+ *      unreachable rather than banked.
+ *  `predecessorNew` and `predecessorIncreased` must be 0 at the domain path's own identities
+ *  only in the sense that no identity is new to the ESTATE; the two moved rows are new to
+ *  their FILE, which is exactly what a governed rung exists to admit and what the ordinary
+ *  shrink-only write refuses.
+ *
+ *  ⛔ THE ROSTER DOES NOT MOVE, AND THE ALTERNATIVE IS REFUSED ON THE PRECEDENT rather than
+ *  on taste. `interSettlementRelationships on settlement` COULD be declared — unlike its
+ *  sibling it has a real in-src property writer — but the roster is keyed by IDENTITY, not
+ *  by address, so declaring it would auto-tag the SEVEN ordinary rows the estate has carried
+ *  since schema 4 and move them into the enforced bank. Rung 21 refused exactly that as "a
+ *  change of enforcement posture over rows this rung did not cause", and the refusal STANDS:
+ *  the moved row is ORDINARY, like its siblings. `crossSettlementConflicts on settlement`
+ *  could never have been declared at all, and now needs no answer — gate 0 refuses an entry
+ *  whose named writer does not write, and the identity no longer exists.
+ *
+ *  ⭐ THE BANK DOES NOT MOVE, AND THAT IS THE FENCE'S SECOND EXERCISE. 21 proved the fence
+ *  catches a GROWTH; this proves it does not mistake a MOVE for one. `neighbourNetwork on
+ *  settlement` changes address and not count, so the pair stays 61 banked reads across 40
+ *  tagged addresses and `tests/lint/observedShapeBank.literal.js` stands still. A rung that
+ *  had guessed at "one address left, one arrived, therefore +0" without measuring would have
+ *  been right by luck; `declaredBankOf(22)` below is MEASURED off the live scan.
+ *
+ *  Its delta is THREE instrument paths, the bookkeeping set every rung moves: the checker
+ *  (the live-validator binding, its `_doc` and its schema index), the baseline library (the
+ *  21 -> 22 bump, the retired-21 constant and its re-bound validator) and this rung. The
+ *  moved reader and the view model are SUBJECT files — scanned, not scanning — so they are
+ *  deliberately NOT in it; they move `sourceTreeDigest` and `scanTreeDigest`, which the
+ *  transition records on its own.
+ *
+ *  ⚠ THE SUBJECT COMMIT IS RATCHET-RED BY CONSTRUCTION, for one commit, and that is the
+ *  recorded CR-OSR-FREEZE-4 pair: the register may only move from a CLEAN COMMITTED tree, so
+ *  the reader lands first and this rung's re-freeze lands after it. */
+export const DOMAIN_READER_TARGET_SCHEMA = 22;
+
+/* ⭐⭐ THE SCHEMA 22 → 23 RUNG — THE EDIT MODE'S SAVE-TIME READERS
+ *  (EM-C4b / EM-E1 / EM-F1, judgment 273, under ODQ §934.16; design
+ *  `docs/DESIGN_EDIT_MODE_AND_DECREES.md` §2.8's build notes name this door).
+ *
+ *  WHAT MOVED, AND IT IS THE ESTATE RATHER THAN THE INSTRUMENT — the same shape as 21, and
+ *  the opposite of 22, which moved rows an earlier rung had already admitted. The edit mode
+ *  landed FOUR READERS of TWO persisted keys, and the generation corpus can never observe a
+ *  writer for either one:
+ *    • `kind on settlement` — the phantom counterparty's discriminant. A phantom is a MINIMAL
+ *      SAVE whose blob IS the record `mintPhantom` writes (`src/domain/edit/phantoms.js`), and
+ *      that blob rides the `data` column WHOLE, so the save path stamps no key of its own and
+ *      the mint is the only writer gate 0 can name. Read once at the mint's own shelf
+ *      predicate (EM-F1) and once at `src/lib/saveAccess.js`, which excludes a hidden phantom
+ *      from the quota count (EM-F1b).
+ *    • `decrees on settlement` — the decree registry, assigned by `commitRegistry` in
+ *      `src/store/editSlice.js` (EM-C4b) when a DM stages, reorders, withdraws, reopens, marks
+ *      or reverts a decree against an ACTIVE SAVE. Read four times by
+ *      `src/domain/worldPulse/decreeHook.js` (EM-E1) and once by
+ *      `src/domain/worldPulse/pulseKernel.js` (EM-E4b).
+ *
+ *  ⛔ AND THE SCAN IS RIGHT ABOUT ALL FOUR, which is why the register owes them ADMISSION
+ *  rather than a silenced detector. The owner's ruling is the SAME one rung 22 spent — "a
+ *  domain-side reader … is bought with a governed register migration, not refused by one" —
+ *  and it is the whole authority here: the reads are real, the keys are real, and the corpus
+ *  executes generation plus the domain pulse and no store.
+ *
+ *  ⭐⭐ THE ROSTER GROWS BY TWO, AND THAT IS THIS RUNG'S DISTINGUISHING ACT. 11 grew it by
+ *  one, 19 shrank it by one, and 21 and 22 both refused to touch it. Both new identities are
+ *  DECLARED under the existing `save-time-writer` mechanism, so no mechanism, filter, door or
+ *  threshold moves; what moves is the roster, from EIGHT to TEN.
+ *
+ *  ⚠ DECLARING IS KEYED BY IDENTITY, NOT BY ADDRESS, AND THE PRICE IS PAID EXPLICITLY.
+ *  `decrees on settlement` already had ONE ordinary row in the estate —
+ *  `src/domain/ai/personaSlicer.js` ×1, frozen long before the editor existed — and the
+ *  declaration tags it along with the four new addresses. Rungs 21 and 22 REFUSED exactly that
+ *  for `interSettlementRelationships on settlement`, as "a change of enforcement posture over
+ *  rows this rung did not cause", and the refusal still stands for that key: there the seven
+ *  ordinary rows read a key whose writers had nothing to do with the rung, while here the one
+ *  ordinary row reads the SAME registry `commitRegistry` writes, by the SAME lifecycle
+ *  argument. The posture it moves into is the posture this rung is buying.
+ *  ⛔ AND THE ALTERNATIVE IS NOT EXPRESSIBLE, measured rather than argued: an entry whose
+ *  estate address is untagged throws `explained-writer inventory address lacks its row tag:
+ *  src/domain/ai/personaSlicer.js / decrees on settlement` out of
+ *  `assertExplainedWriterRowTags`, before any scan. "Declare the identity and leave that row
+ *  ordinary" is a thing the instrument refuses to represent.
+ *
+ *  ⛔ THE RECONCILIATION IS FOUR NEW ROWS AND NOTHING ELSE, and that is the fence. MEASURED
+ *  at ⟨BASE⟩ 8e8f70182 through `--scan-only --scan-mode=legacy-leaf`, against the committed
+ *  schema-22 register:
+ *
+ *      reads 1,964 → 1,971 · identities 1,390 → 1,394 · files 387 → 389
+ *      NEW 4 · GONE 0 · INCREASED 0 · DECREASED 0 · SAME 1,390
+ *
+ *  `predecessorNew` must be exactly `phantoms.js`/`kind` ×1, `saveAccess.js`/`kind` ×1,
+ *  `decreeHook.js`/`decrees` ×4 and `pulseKernel.js`/`decrees` ×1. A fifth new row means a
+ *  reader this rung was not cut for rode in with it; a GONE or DECREASED row means the tip
+ *  moved under the measurement. Either way the mint STOPS rather than banking it.
+ *
+ *  ⭐ THE BANK GROWS 61/40 → 69/45, MEASURED OFF THE LIVE SCAN AND NEVER PREDICTED. The four
+ *  new addresses carry 7 reads; the personaSlicer row carries 1 more; 61 + 8 = 69 across
+ *  40 + 5 = 45. The arithmetic is written down here because it is checkable, not because it
+ *  is the source: `declaredBankOf(23)` below is read off the scan, and `assertBankTwins`
+ *  refuses the write if the measurement disagrees with it OR with
+ *  `tests/lint/observedShapeBank.literal.js`. This is the fence's THIRD exercise and its
+ *  first over a ROSTER growth — 21 grew the tagged row count under a fixed roster, 22 moved
+ *  an address under a fixed roster, and this one moves the roster itself.
+ *
+ *  Its delta is THREE instrument paths, the bookkeeping set every rung moves: the checker (the
+ *  two declarations, the live-validator binding, its `_doc` and its schema index), the baseline
+ *  library (the 22 → 23 bump, the retired-22 constant and its re-bound validator) and this
+ *  rung. ⛔ THE FOUR READERS ARE NOT IN IT, for the reason rungs 21 and 22 both spelled: they
+ *  are SUBJECT files, scanned rather than scanning, and they move `sourceTreeDigest` and
+ *  `scanTreeDigest`, which the transition records on its own. See
+ *  `EDIT_MODE_READERS_SCANNER_DELTA_PATHS`.
+ *
+ *  ⚠ THE SUBJECT COMMIT IS RATCHET-RED BY CONSTRUCTION, for one commit, and that is the
+ *  recorded CR-OSR-FREEZE-4 pair: the register may only move from a CLEAN COMMITTED tree, so
+ *  the readers land first, this rung lands second, and its re-freeze lands third. */
+export const EDIT_MODE_READERS_TARGET_SCHEMA = 23;
+
+/* ⭐⭐ THE SCHEMA 23 → 24 RUNG — THE URBAN BAND'S CORPUS RE-DEAL
+ *  (ODQ §934.86, the urban band, and its addendum 2, the druid rulings; the urban-band chair,
+ *  session 93391427, under the owner's "do it all and i leave it to your best judgement").
+ *
+ *  WHAT MOVED, AND IT IS NEITHER THE DETECTOR NOR THE CORPUS DEFINITION — the AO-0 corpus's
+ *  own CONTENT. The corpus executes four seeds × four configs and a twelve-pulse campaign over
+ *  them, and both are byte-unchanged; what changed is the world those inputs generate. The
+ *  institution registry rebuilt every roster and the druid rulings moved the Warden's Lodge
+ *  towns, so the same seeds deal a different year: no web war, no insurgency birth, no
+ *  government challenge. The heuristic therefore OBSERVES shapes it bound differently before,
+ *  and reads of keys those shapes lack become findings.
+ *
+ *  ⭐ THIS IS THE FIRST SHIFT THAT GREW THE REGISTER. TE36 and T8 both moved every figure
+ *  DOWN ("fewer observed shapes can only ever mean fewer resolvable reads"); that sentence
+ *  holds for a corpus that LOSES shapes, and this one GAINED partial ones. A shape observed
+ *  for the first time, or under a same-named record, can convict reads that were unresolved
+ *  before, and that is what 53 rows are.
+ *
+ *  ⛔ THE ROWS ARE ADMITTED AS ORDINARY DEBT, NOT DECLARED, and the distinction is the rung.
+ *  Two classes, each row's class in its own review note:
+ *    • NAME COLLISIONS — a read binds to a same-named record the corpus does observe: `inst` is
+ *      the institution-FLAGS object while `assembleInstitutions` reads catalog ROWS through a
+ *      local of the same name; `facets` is the undercity's {clandestine, subterranean} while the
+ *      war code reads capacity and alignment facets; `stressors` while the map panel reads an
+ *      outcome's optional faction name.
+ *    • RARE-BRANCH WRITERS — keys a real producer writes on a branch this year does not take:
+ *      a partial `originContext` (stressorDynamics' former sponsor), `proposalPayload` and
+ *      `outcome` (factionCompetition's challenge and applied headline), `tierChange`
+ *      (tierResourceDynamics' density band).
+ *  Declaring them under `conditional-generator-branch` was weighed and refused: that class is a
+ *  one-off admission whose typed door is TE-GUARDS-1's question, and ~35 declarations would be
+ *  the posture change its note anticipates. Ordinary admission keeps every row VISIBLE as
+ *  ratchet debt that may only shrink, which is the honest status of a heuristic finding the
+ *  corpus happens to expose.
+ *  ⛔ THE ONE GENUINE READER-WITH-NO-WRITER THE RE-DEAL EXPOSED WAS CURED, NOT ADMITTED: the
+ *  world-pulse panel's coalition branch read `primaryInstigatorId` and `supporterIds`, which no
+ *  producer in src/ ever wrote (`git log -S` finds only the reader's own introduction), and it
+ *  was removed in its own commit before this rung.
+ *
+ *  ⛔ THE RECONCILIATION, MEASURED at ⟨BASE⟩ 57d3a7f0e through `--scan-only
+ *  --scan-mode=legacy-leaf`, against the committed schema-23 register:
+ *
+ *      reads 1,970 → 2,041 · identities 1,393 → 1,446 · files 388 → 394
+ *      NEW 53 · GONE 0 · INCREASED 0 · DECREASED 1 · SAME 1,392
+ *
+ *  The decreased row is `magicExists on config` at src/generators/defenseGenerator.js, 2 → 1:
+ *  the defence generator now resolves the world law once (J32 and its buy-back, 731e19597).
+ *  A GONE or INCREASED row, or a 54th new one, means the tip moved under the measurement and the
+ *  mint STOPS.
+ *
+ *  ⭐ THE BANK DOES NOT MOVE: 69 banked reads across 45 tagged addresses, measured off the live
+ *  scan (no new row is on a declared identity), so the literal module stands still.
+ *
+ *  ⚠ TWO GOVERNED EXECUTION INPUTS MOVED WITH THE SHIFT, and the transition records them:
+ *  src/domain/compendium/generated/compendiumData.generated.js and
+ *  src/domain/data/intentAtlas.distillate.json were regenerated by their documented commands
+ *  in this window. They are data the corpus executes, not detector sources.
+ *
+ *  Its delta is the THREE bookkeeping paths every rung moves. See
+ *  `CORPUS_REDEAL_SCANNER_DELTA_PATHS`. The commit pair holds as at every rung: this rung lands
+ *  ratchet-red, and its re-freeze lands next. */
+export const CORPUS_REDEAL_TARGET_SCHEMA = 24;
+
+/* ⭐⭐ THE SCHEMA 24 → 25 RUNG — THE 2026-10 ADVISORY LOCKFILE BUMP
+ *  (the chair's ruling of 2026-10-23 on the fix lane's STOP, by delegation under the owner's
+ *  "I leave all decisions and judgement to you", vetoable: "CHARTER THE SCHEMA-25 MIGRATION,
+ *  following the schema-13 precedent step for step". The precedent is `DEAD_DEPENDENCY_TARGET_SCHEMA`
+ *  above — the dropped `three`, chair order TE-MINT-1, ODQ §783.3/§788.2(d)/§821, discharged §825.)
+ *
+ *  WHAT MOVED, AND IT IS NEITHER THE DETECTOR NOR THE INVENTORY — a LOCKFILE. CI's
+ *  `Gate / validation` job starts with `npm audit --audit-level=high --omit=dev`, and advisories
+ *  published after master's last green run turned it red on master and on every PR:
+ *    • `dompurify` <= 3.4.16 — CRITICAL: GHSA-55q2-fjhq-7xh7 and four related XSS advisories
+ *      (GHSA-6688-9rhm-gjv2, GHSA-cg2g-xh64-v4q7, GHSA-mrv2-3pqr-j5jr, GHSA-c6gr-qvv4-5v3f);
+ *      the lock held 3.4.12 under package.json's "^3.4.8";
+ *    • `fflate` 0.8.0–0.8.2 — moderate: GHSA-px8p-9vwx-vf98; a transitive dependency (jspdf and
+ *      @react-pdf's png-js) the lock held at 0.8.2.
+ *  `npm update dompurify fflate --package-lock-only` moves exactly two lock records — dompurify
+ *  3.4.12 -> 3.4.17 and fflate 0.8.2 -> 0.8.3, their `version`, `resolved` and `integrity` and
+ *  NOTHING ELSE (6 insertions, 6 deletions) — and `package.json` stays BYTE-IDENTICAL, so the
+ *  estate's any-byte mint trigger on the manifest (ODQ §349.2) does not fire; only the lockfile's
+ *  does.
+ *
+ *  ⭐ WHY A RUNG AT ALL FOR A LOCKFILE BUMP — the schema-13 reason, verbatim in substance.
+ *  `package-lock.json` is a DELIBERATE governed detector source — the checker says why in its own
+ *  words, "a dependency bump can move the parser" — so the drift classifier refuses the ordinary
+ *  gate ("DETECTOR SOURCE changed … (package-lock.json)"), the shrink-only `--write` refuses it by
+ *  design, and the walker's live-estate arm reds on it. Only a migration can bind the new bytes.
+ *  Neither bumped package is on the scan's own path, by grep rather than by assumption: dompurify
+ *  has ONE importer in the repository (src/lib/sanitizeGalleryHtml.js, the gallery's sanitizer)
+ *  and fflate NONE (it arrives only under jspdf and @react-pdf's png-js); the scan parses with
+ *  `typescript`, unbumped, and the corpus executes the generation producers, which import neither.
+ *
+ *  ⛔ AND THE RECONCILIATION MUST BE EMPTY, which is this rung's whole claim, exactly as it was
+ *  13's. A lockfile bump changes no source the readers scan, so ANY moved row, ceiling or
+ *  identity would mean the bump was not inert and the mint must STOP rather than bank it.
+ *  MEASURED before this rung was cut, on the bumped tree: the walker's shrink-only arm reported
+ *  violations 0 / stale 0 against the committed schema-24 register, and its live-estate drift arm
+ *  named `package-lock.json` as the ONLY moved detector input.
+ *
+ *  ⭐ THE BANK DOES NOT MOVE: 69 banked reads across 45 tagged addresses, measured off the
+ *  committed register; no row moves, so the literal module stands still.
+ *
+ *  Its delta is the lockfile (the subject) plus the THREE bookkeeping paths every rung moves. See
+ *  `ADVISORY_LOCKFILE_SCANNER_DELTA_PATHS`. The commit pair holds as at every rung: this rung lands
+ *  ratchet-red with the lockfile, and its re-freeze lands next. */
+export const ADVISORY_LOCKFILE_TARGET_SCHEMA = 25;
+
+/* ⭐⭐ THE SCHEMA 25 → 26 RUNG — THE FED WORLD
+ *  (the chair's ruling (i) on lane OSR-RUNG's STOP, 2026-11-03, recorded in ODQ §934.104 by the
+ *  chair, under the owner's deferral of judgement; vetoable. The precedents are
+ *  `STRESS_TOPOLOGY_TARGET_SCHEMA` (CR-OSR-SCHEMA-17, the corpus-coverage shape) and
+ *  `CORPUS_REDEAL_TARGET_SCHEMA` (the admission shape). The trace is OSR-TRIAGE's, at every
+ *  first-parent compose point; the execution is OSR-RUNG's.)
+ *
+ *  WHAT MOVED, AND IT IS THE CORPUS'S WORLD RATHER THAN THE DETECTOR. FOOD-1 (b2aa5f5fa: the food
+ *  cut-offs, prosperity 5/15/40, viability 40/15, the deficit flag 20 -> 15) and FOOD-2
+ *  (a7f13fef4: the base numbers), composed at dd3158aab, made the corpus's sample worlds feed
+ *  themselves. Two consequences reached this instrument, and they take the two precedents' two
+ *  shapes:
+ *
+ *  ⭐ 1 · THE `issues` SHAPE THINNED UNDER MIN_ROWS — CURED BY TOPOLOGY (the schema-17 shape).
+ *  `economy/foodBalance.js` writes its `issues` rows only when a settlement is short, so the shape
+ *  fell from 186 rows to 30, under MIN_ROWS (40), and the detector stopped judging it:
+ *  `institution on issues` (pdf/lib/viewModel.js, viewModelBodySlices.js) read as GONE while both
+ *  reads still stood — the erasure guard's INSTRUMENT EROSION. `buildObservedCorpus` gains producer
+ *  1c: famine on configs 1–3 x the four seeds, pushed into `roots` and NOT `generated`, exactly as
+ *  1b was. MEASURED: `issues` 30 -> 49 rows, both rows back, NOTHING new — and the corpus meta does
+ *  not move at all (seeds 4, configs 4, generations 16, pulseIntervals 12, flags 92, steadings 12,
+ *  shapes 1322), nor does the scalar stream (regional log 77 unique, wizard news 1541).
+ *
+ *  ⭐ 2 · THE PULSE STOPPED REACHING FIVE WRITERS — ADMITTED AS DEBT (the schema-24 shape).
+ *  The main pulse no longer reaches tier drift, resource depletion or `resourceHistory`, so 22 reads
+ *  in 17 files lost the shapes that resolved them: `tierChange on outcome` (9 reads, 6 files),
+ *  `nearbyResourcesState on config` (17 reads, 10 files), `resourceHistory on settlement` (5 reads,
+ *  3 files), `fromTier`/`toTier`/`direction on proposalPayload` (WorldPulseData.js), and
+ *  `formerSponsorSettlementId on originContext` (applyWorldPulseBetrayal.js). EVERY WRITER STILL
+ *  EXISTS IN SOURCE (tierResourceDynamics.js, pulseHelpers.js, resourceDynamicsKernel.js,
+ *  mutateWorld.js, stressorDynamics.js), and `git log -S` shows no source change to any of these
+ *  keys since 396933ae9. `formerSponsorSettlementId` was NEVER observed, even before FOOD: its row is
+ *  `originContext` growth (48 -> 80 rows), not a lost writer.
+ *  ⛔ WHY ADMITTED, NOT REACHED. Lane OSR-RUNG measured every stimulus the corpus config takes: a
+ *  second pulse over stressed saves, and famine on the main pulse's configs. Each one that reaches
+ *  the pulse writers RE-DEALS 13–197 rows (`covert on impairments`, the whole `chain` family,
+ *  `institutionPatch on outcome`, …), and NOT ONE reaches `outcome.tierChange` or the former
+ *  sponsor; the canon `DEPLETE_RESOURCE` door is not server-authoritative. The cure is an engine
+ *  lane's in the next wave (a stimulus that creates no re-deal, or the reads retired). Until then
+ *  each row stays VISIBLE as ordinary ratchet debt that may only shrink.
+ *  ⭐ ONE FROZEN ROW MOVES UP ITS OWN CHAIN: `densityBandCrossed on tierChange` (tierOutcomeApply.js)
+ *  goes because `tierChange` is no longer observed, and the same read is now counted at
+ *  `tierChange on outcome` in the same file. The debt is not lost; it is re-addressed.
+ *
+ *  ⛔ THE RECONCILIATION, MEASURED at ⟨BASE⟩ cd3f05778 plus this rung, through the walker's own chain
+ *  reproduced out of band, against the committed schema-25 register:
+ *
+ *      NEW 22 (17 files) · GONE 4 · DECREASED 2 · INCREASED 0
+ *
+ *  The four GONE rows and the two DECREASED rows are the lawful shrinks the shrink-only `--write`
+ *  could not reach while the 22 stood: `appearance on npcs` (pdf/lib/viewModel.js, TRIM 3aa271e23's
+ *  repair); `id on chains` 3 -> 2 and `label on chains` 4 -> 1 (generators/computeActiveChains.js,
+ *  MAGIC 69dbadeb1's repair, which the defense compose 396933ae9 had regressed in the register);
+ *  `factionPatch on outcome` x2 (applyWorldPulse.js, factionCompetition.js: now cleared by the
+ *  shape-family post-filter as `outcome` grew from 50 to 76 keys); and the re-addressed
+ *  `densityBandCrossed` above. A 23rd new row, or any INCREASED row, means the tip moved under the
+ *  measurement and the mint STOPS.
+ *
+ *  ⭐ THE BANK DOES NOT MOVE: 69 banked reads across 45 tagged addresses. No row that moves sits on a
+ *  declared identity, so the literal module stands still.
+ *
+ *  ⚠ ONE GOVERNED EXECUTION INPUT MOVED BEFORE THE RUNG, and the transition records it:
+ *  src/data/dossierStateProse/defense.generated.js, regenerated by DS-DEF-6 (593e643ca) and present
+ *  since the 396933ae9 compose. It is data the corpus executes, not a detector source.
+ *
+ *  Its delta is the corpus builder (the subject) plus the THREE bookkeeping paths every rung moves.
+ *  See `FED_WORLD_SCANNER_DELTA_PATHS`. The commit pair holds as at every rung: this rung lands
+ *  ratchet-red, and its re-freeze lands next. */
+export const FED_WORLD_TARGET_SCHEMA = 26;
+
+/* ⭐⭐ THE SCHEMA 26 → 27 RUNG — THE RUNG-1 WINDOW
+ *  (the chair's rulings 1–6 on lane LANDING-2b's STOP, 2026-11-04, under the owner's delegation of
+ *  every open question to the chair; vetoable. The precedents: `FED_WORLD_TARGET_SCHEMA` (a corpus
+ *  topology pass and attributed admissions in one rung) and `EDIT_MODE_READERS_TARGET_SCHEMA` (a
+ *  roster growth). LANDING-1 measured the refusal; LANDING-2b wrote the rung.)
+ *
+ *  THE SUBJECT IS A WINDOW, NOT A LANE: everything the landing lands between the register's
+ *  freeze (05897b88d) and ⟨BASE⟩ 5dd0f323a — the CRISIS car (docs/DESIGN_CRISIS_TAB.md) and the
+ *  rung-1 fix lanes. At 0.80 the shrink-only `--write` refused 39 new rows (23 on `stressors`), 7
+ *  grown rows and a 44-row INSTRUMENT EROSION. Four acts answer it:
+ *
+ *  ⭐ 1 · THE SHAPE-FAMILY THETA 0.80 → 0.76 (ruling 1). The crisis car's derived `cast` on every
+ *  stress entry grew `stressors` 35 → 36 own keys; its proposal-clone siblings (`autoApplied`,
+ *  `candidates`, `selected`) cover 28: 0.8000 before, 0.7778 after, so the whole family fell out
+ *  and 72 sibling-carried reads surfaced. 0.76 is the lowest two-decimal value in
+ *  (0.7500, 0.7778]: it restores exactly that family and keeps `resolvedStressors`/`stressor`
+ *  (27/36 = 0.7500) out. MEASURED: between 0.80 and 0.76 the verdict moves on `stressors` alone.
+ *  The full numbers live beside `SHAPE_FAMILY_FILTER`.
+ *  ⚠ The other crisis fields — `cast`, `summary`, `crisisHook`, `viabilityNote`, `addedByEventId`
+ *  — surface NO row: they are keys of the OBSERVED `stressors`/`stress` shapes (the corpus runs
+ *  the step that writes them), so their reads resolve; only reads of UNOBSERVED keys are findings.
+ *
+ *  ⭐ 2 · THE EROSION, CURED BY TOPOLOGY (ruling 4; the schema-17/26 shape). ONE first-parent step
+ *  causes all of it, bisected with the corpus builder itself over the window's 78 first-parent
+ *  commits: 90dc22f18, the compose of lane/x46-3-budget (X-46 car 3, the density factor 47829c070
+ *  and its pins). At 79c442330 the corpus still observes `facets` (54 rows), `issues` (48), a
+ *  stressor-outcome proposal (25 origins) and `leverage` on `relationshipPatch`; at 90dc22f18 all
+ *  four are gone. The density factor re-deals the generated worlds: no corpus settlement rolls
+ *  'Underground network' (the one carrier of `facets`), none is short in the pulse (half of
+ *  `issues`). Producer 1d (`observed-shape-corpus.mjs`) — famine and the row forced through the
+ *  shipped `_institutionToggles` `require` door, ten seeds × four configs, roots only — brings
+ *  `facets` back at 40 rows and `issues` at 78 and creates NOTHING new: 31 of the 44 eroded rows
+ *  return (29 `facets`, 2 `institution on issues`).
+ *  ⭐ ELEVEN OF THE 44 WERE NEVER EROSION: the `proposalPayload` rows (`direction`, `fromTier`,
+ *  `toTier`, `factionId` ×3 files, `settlementId` ×2, `governmentPreference`, `legitimacyBand`,
+ *  `preserveInstitutions`) left the RAW detector because their keys are now OBSERVED on a
+ *  1,326-row `proposalPayload` — a writer the corpus now runs, the lawful shrink the erasure
+ *  guard's textual probe cannot tell from erosion.
+ *  ⛔ TWO ROWS ARE NOT CURED, AND THEY ARE RECORDED AS EROSION, NOT AS A REPAIR:
+ *  `formerSponsorSettlementId on originContext` (WorldPulseData.js ×3, applyWorldPulseBetrayal.js
+ *  ×1). The same 90dc22f18 re-deal left the pulse with no stressor-outcome proposal, which is the
+ *  only path the detector grounded those `stressor.originContext` reads through (bisected to the
+ *  `outcome` shape: the frozen one carried `originContext`, the live one does not). Reaching it
+ *  again needs a PULSE stimulus, and every pulse stimulus re-deals 13–197 rows (lane OSR-RUNG,
+ *  2026-11-03) — the `generated`-list law forbids it here. Both reads still stand and the key is
+ *  still never observed; an engine lane owns the cure (ruling 4's "STOP that part").
+ *
+ *  ⭐ 3 · THE CRISIS SET, AS MEASURED (ruling 2): four identities on six rows. THREE are DECLARED —
+ *  `temporary`, `temporaryKind`, `crisisIds on npcs`, the cast step's vacant-lever branch
+ *  (generators/steps/resolveCrisisCast.js; crisis units 1 2c47674a5, 2 aaa4ba493, 6 77b022183),
+ *  the fifth class — so the roster goes 10 → 13. The fourth, `_userEdits on stress`
+ *  (src/domain/userEdits.js; crisis unit 3 98796c866), is ADMITTED as ordinary debt: its writer is
+ *  a member assignment gate 0 cannot see, and its sibling `_userEdits on settlement` has always
+ *  been ordinary.
+ *
+ *  ⭐ 4 · THE WINDOW'S OTHER ROWS, ADMITTED WITH ATTRIBUTION (ruling 3; the fed-world precedent —
+ *  "visible as ordinary ratchet debt that may only shrink"). Each names its introducing commit:
+ *    `contestsNiche on factions` — reader unit 11 0a6e79d58 (coherence/readerBattery.js);
+ *    `labelNeeds`/`labelOtherwise on chains` ×2 each — F1 unit 2 2906232d1, and
+ *    `outputsRequiringProcessor on chains` — A-05 d4871ca7a (generators/computeActiveChains.js,
+ *      composed through the rung1b window);
+ *    `magicExists on config` — RUNG1B-F9 unit 2 c803628b4 (domain/magicReliance.js);
+ *    `text on plotHooks` ×2 — the rung-1 hook-truth record 7eb0bf0ba, moved by SELF-VOUCH 08b02acc5
+ *      (coherence/hookTruthRecord.js);
+ *    `isCustom on institutions` — X-46 car 3 U2 d0a3202b5 (data/institutionalCatalog.js);
+ *    `search on personality` and SIX grown rows in pdf/lib/viewModel.js (`blurb`/`race on npcs`,
+ *      `dominantRace`/`governmentType`/`race`/`terrain on settlement`, +1 read each) —
+ *      HOOKS-UNDER-STRESS unit 5 8c5cc7e11, which passes the settlement into `crisisHookFor`; no
+ *      read was added, the detector now grounds existing ones (MEASURED: the same estate with that
+ *      file alone at 8c5cc7e11^ reproduces the frozen counts exactly);
+ *    `baseChance on inst` 1 → 3 — X-46 car 3 U3 47829c070 and RUNG1B-F6 unit 2 bf3d1258e
+ *      (generators/steps/assembleInstitutions.js, two `.baseChance` reads added);
+ *    `leverage on relationshipPatch` — a re-deal, not an edit: relationshipEvolution.js is
+ *      untouched in the window; the 90dc22f18 bisect above stops the pulse writing `leverage`.
+ *
+ *  ⛔ THE RECONCILIATION, MEASURED at ⟨BASE⟩ 5dd0f323a plus this rung, against the committed
+ *  schema-26 register:
+ *
+ *      NEW 15 (11 files) · INCREASED 7 · GONE 24 · DECREASED 1
+ *
+ *  GONE: the 11 observed `proposalPayload` rows; `tierChange on outcome` ×6 files (a sibling of
+ *  `outcome` now carries the key — the re-dealt pulse reaches tier drift again); the family's own
+ *  `factionName on stressors` and `archetype on stressors` (the live `selected` now carries both);
+ *  the two uncured `formerSponsorSettlementId` rows above; and three rows producer 1d's stimulus
+ *  itself writes (`_institutionToggles on config` ×2, `forcedByToggle on institutions`). The
+ *  DECREASED row is `_userEdits on settlement` 3 → 2 (userEdits.js). Any further row, or any other
+ *  INCREASED one, means the tip moved under the measurement and the mint STOPS.
+ *
+ *  ⭐ THE CORPUS AND THE SCALAR STREAM MOVED UNDER THE WINDOW, and the register records them as
+ *  measured (ruling 5): shapes 1294 → 1261 and origins 9065 → 8486 (observation keys; the four
+ *  EXECUTION keys — seeds 4, configs 4, generations 16, pulseIntervals 12 — do not move); the
+ *  scalar stream, which producer 1d cannot touch, reads regional log 75 / 74 unique and wizard
+ *  news 1529 accumulated / 253 final / 253 unique, against 77/77 and 1521/260/261 at the freeze.
+ *
+ *  ⭐ THE BANK MOVES 69/45 → 76/50, MEASURED: the three declarations reach five addresses and
+ *  seven reads; no other moving row sits on a declared identity.
+ *
+ *  Its delta is the checker and the corpus builder (the two subjects) plus the two bookkeeping
+ *  paths. See `WINDOW_RUNG1_SCANNER_DELTA_PATHS`. The commit pair holds as at every rung: this rung
+ *  lands ratchet-red, and its re-freeze lands next. */
+export const WINDOW_RUNG1_TARGET_SCHEMA = 27;
+
+/* ⭐⭐ THE SCHEMA 27 → 28 RUNG — THE TIER-CHANGE COVERAGE PASS
+ *
+ *  The chair's ruling of 2026-11-06 on LANDING-8's record (under the owner's full delegation of
+ *  2026-11-06, vetoable): a CORPUS-COVERAGE rung, the militia precedent (LANDING-7 A, R-A2′,
+ *  cd30f7004) — the executed corpus gains a seed that crosses a stamp cut under the stamp law; the
+ *  eroded identities are NEVER admitted.
+ *
+ *  THE EROSION, MEASURED. Through ⟨BASE⟩ 3d8a74e4b producer 2's pulse minted a town -> city tier
+ *  candidate for osr001 and osr013 (towns of 2,168) at every interval from 5 to 12, and those
+ *  `pulseResult.candidates[]` rows were the corpus's only observation of `tierChange` and of
+ *  `fromTier`/`toTier`/`direction` on `proposalPayload`. LANDING-7 lane B's R-B1 (2168ffdba, the
+ *  first-parent step 103b1db81) made the promotion window read the next tier's STAMP CUT; lit
+ *  (demographics), the window is the whole cut (2,250), and no corpus population moves within the
+ *  twelve intervals (measured: every one of the sixteen saves ends at its generated head count), so
+ *  the pulse mints no tier candidate at any interval and SEVEN reader identities — `tierChange on
+ *  outcome` in six files, `direction`/`fromTier`/`toTier on proposalPayload` — read as findings
+ *  while every reader still stands. The shrink-only `--write` correctly refuses to add them.
+ *
+ *  THE SEED, SEARCHED. `osr-tier-0..39` on the four CONFIGS, each generated settlement whose head
+ *  count already stands at or above the next tier's cut pulsed alone under the corpus's own lit rules
+ *  for twelve intervals: under configs 0 and 3 the towns osr-tier-14 (2,414), -19 (2,477) and -28
+ *  (2,282) mint at interval 5 (-25, 2,394, mints under config 3 at 12 and under config 0 never);
+ *  the villages over the town cut under config 2 (368–397) never mint within twelve. osr-tier-14
+ *  under CONFIGS[0] is taken.
+ *
+ *  ⭐ PRODUCER 2b, THE 1b/1c/1d LAW CARRIED TO A PULSE. It runs ITS OWN one-save campaign, pushes
+ *  nothing into `generated`, and enters `roots` only as a BOUNDED VIEW of its tier candidates
+ *  under their real relative path (`pulseResult.candidates[]`, the F4 bounded-view precedent), so
+ *  producer 2's pulse, its saves, its steadings, the scalar stream and the four EXECUTION keys
+ *  (seeds 4, configs 4, generations 16, pulseIntervals 12) are byte-for-byte untouched. It throws
+ *  if the seed ever stops minting, so the coverage cannot erode silently.
+ *
+ *  ⛔ AND THE RECONCILIATION MUST BE EMPTY, which is this rung's claim: MEASURED before the rung
+ *  was cut, with producer 2b in the builder, the walker's 47 arms read 46 green — every growth,
+ *  erasure and inventory arm — and the one red was the live-estate drift arm naming
+ *  `scripts/lib/observed-shape-corpus.mjs` as the only moved detector source. Any moved row,
+ *  ceiling or identity at the mint means the pass was not pure coverage and the mint STOPS.
+ *
+ *  ⭐ THE BANK DOES NOT MOVE: 76 banked reads across 50 tagged addresses, the committed register's
+ *  and the walker's literal; no row moves, so the literal module stands still.
+ *
+ *  Its delta is the corpus builder (the subject) plus the three bookkeeping paths. See
+ *  `TIER_COVERAGE_SCANNER_DELTA_PATHS`. The commit pair holds as at every rung: this rung lands
+ *  ratchet-red, and its re-freeze lands next. */
+export const TIER_COVERAGE_TARGET_SCHEMA = 28;
+
+/* ⭐⭐ THE SCHEMA 28 → 29 RUNG — THE MIGRATION-DIRECTION DECLARATION
+ *
+ *  The chair's ruling of 2026-11-07 03:55 UTC (ODQ §934.105) on lane WIRING-W0's record (under the
+ *  owner's full delegation of 2026-11-06, vetoable): "the observed-shape walker's two arms on
+ *  `migrationDirection on config` are cured by the instrument's own remedy — the explained-writer
+ *  exemption of the declared fifth class `conditional-generator-branch` — a governed instrument
+ *  migration, the chair's act, hereby ruled; the reason: no corpus world draws a `mass_migration`,
+ *  so the writer `stressConfirmPass.js` never runs in the corpus and the read has no observed writer
+ *  by construction, not by defect."
+ *
+ *  THE ROW, MEASURED. WIRING-W0's cause 1 (R-W7 (e), 343bd4eec) declared a mass migration's
+ *  direction once, on `stress[].direction`, and projects it onto the resolved config in
+ *  `generators/steps/stressConfirmPass.js` beside `config.stressTypes`, for the economy and power
+ *  readers that hold only the config. Their one shared accessor, `migrationDirectionOfConfig` in
+ *  `src/domain/migrationDirection.js`, makes ONE guarded read of `config.migrationDirection`. At
+ *  4f7ac80a9 the checker reported exactly one NEW row — `migrationDirection on config`, 1 read, in
+ *  that file — and nothing else: the projection is stamped only when a `mass_migration` entry
+ *  survives the confirm pass, and no corpus world draws one.
+ *
+ *  ⭐ THE DECLARATION, AND GATE 0. One entry of the fifth class, writer stressConfirmPass.js. The
+ *  writer as first spelled (`effectiveConfig.migrationDirection = migrationDirection`) is a member
+ *  assignment gate 0's four spellings do not see — the blindness that kept `_userEdits on stress`
+ *  ordinary at schema 27 — so this rung re-spells it, behaviour-identical, as
+ *  `Object.assign(effectiveConfig, { migrationDirection })`: the probe now finds the real write
+ *  (shorthand), not a comment or a type. Gate 1 (`git log --all -S"migrationDirection:" -- src/`)
+ *  returns one commit, 343bd4eec itself (narrativeGenerator.js's context literal), so an
+ *  authored-input story is not refuted; none is claimed — the class is the generator branch.
+ *
+ *  ⭐ THE BANK MOVES 76/50 → 77/51: the one declared identity reaches one address and one read.
+ *  ⛔ AND THE RECONCILIATION IS EXACTLY THAT ONE ROW: New 1 (tagged), Gone 0, Increased 0,
+ *  Decreased 0. Any other moved row at the mint means the declaration was not the whole cause and
+ *  the mint STOPS.
+ *
+ *  Its delta is the three bookkeeping paths (the declaration lives in the checker). The writer's
+ *  re-spelling is a SUBJECT file, scanned rather than scanning. See
+ *  `MIGRATION_DIRECTION_SCANNER_DELTA_PATHS`. The commit pair holds as at every rung: this rung
+ *  lands ratchet-red, and its re-freeze lands next. */
+export const MIGRATION_DIRECTION_TARGET_SCHEMA = 29;
+
+/* ⭐⭐ THE SCHEMA 29 → 30 RUNG — THE PEOPLE CAR'S CAST
+ *
+ *  The owner's charter (ODQ §934.105; the people car, lane PEOPLE-1 CAST, 2026-11-07,
+ *  docs/PEOPLE_1_CAST_2026-11-07.md): "for every appropriate institution, we generate one NPC …
+ *  They act as the face. We are not building all the citizens of a settlement … We are simply
+ *  making representatives." The cast is the roster's faces now (one card per face-bearing house,
+ *  the seat always faced, the powers' first, second and third from the backing catalogue), with
+ *  ids keyed by the house (`npc_<house slug>`), `institution`, `title` and `memberships` on every
+ *  card, and `importance` placed from the rank. The named-NPC roster and the density law's rung
+ *  stamps are retired from birth; `densityRungRole`, `factionGoal` and `linkedFactionIds` are no
+ *  longer written by the generator (the shim derives the two affiliation fields from the ranks).
+ *
+ *  WHAT MOVED, AND IT IS THE CORPUS'S OWN CONTENT, NOT THE DETECTOR OR THE CORPUS DEFINITION (the
+ *  schema-24 shape): the same seeds, configs and twelve pulses generate a different world — a
+ *  cast of a different size and shape, so the simulation's year over it fires different branches
+ *  (its proposals, its impairments, its stressor outcomes), and the heuristic observes shapes it
+ *  bound differently before. Reads of keys those shapes lack become findings.
+ *
+ *  ⛔ THE ROWS ARE ADMITTED AS ORDINARY DEBT, NOT DECLARED (the schema-24 posture), each row's
+ *  class in its own review note:
+ *    • RARE-BRANCH WRITERS of the simulation (FPZ's, M-6: nothing under worldPulse/ is rewritten
+ *      by the car): `proposalPayload` and `outcome` keys the challenge and faction-roster passes
+ *      write on a branch this year does not take, `covert` on the impairments the corruption
+ *      pass writes, `factionName`/`archetype` on stressor outcomes;
+ *    • THE RETIRED GENERATOR'S TRANSIENT CONFIG: `generateNPCGoal`'s reads of `config._dominantFaction`,
+ *      `config._tradeCommodity` and `config.tradeCommodity` — the goal pools' tokens, written on the
+ *      transient `npcConfig` the representative generator builds (people/representatives.js and
+ *      people/castPowers.js, the same object-literal spelling `generateNPCs` used) and never on a
+ *      record the corpus histograms; the retired roster's run was the corpus's observation of them.
+ *  Declaring ~19 identities under `conditional-generator-branch` was refused for the reason
+ *  schema 24 gave: that class is a one-off admission whose typed door is TE-GUARDS-1's question.
+ *  The one reader-with-no-writer the car itself introduced (`settlement.culture` in castPowers.js)
+ *  was CURED, not admitted, at 8d45d8308.
+ *
+ *  ⛔ THE RECONCILIATION, MEASURED at ⟨BASE⟩ 8fbe270a1 through `--scan-only
+ *  --scan-mode=legacy-leaf`, against the committed schema-29 register:
+ *
+ *      reads 2,045 → 2,068 · identities 1,451 → 1,470 · files 401 → 403
+ *      NEW 19 · GONE 0 · INCREASED 0 · DECREASED 0 · SAME 1,451
+ *
+ *  A different figure at the mint means the tip moved under the measurement and the mint STOPS.
+ *
+ *  ⭐ THE BANK DOES NOT MOVE: 77 banked reads across 51 tagged addresses, measured off the live
+ *  scan (no moving row is on a declared identity), so the literal module stands still.
+ *
+ *  Its delta is the THREE bookkeeping paths every rung moves. See `PEOPLE_CAST_SCANNER_DELTA_PATHS`.
+ *  The commit pair holds as at every rung: this rung lands ratchet-red, and its re-freeze lands
+ *  next. */
+export const PEOPLE_CAST_TARGET_SCHEMA = 30;
+
+/* ⭐⭐ THE SCHEMA 30 → 31 RUNG — THE PEOPLE CAR'S LANDING
+ *
+ *  The owner's charter (ODQ §934.105, quoted in PEOPLE-RULINGS §0): "removing factions entirely" —
+ *  the NPC grouping `settlement.factions` and the per-NPC faction fields go; the POWERS
+ *  (`powerStructure.factions`) stay. Lanes 2-5B of the people car landed on lane 1's cast; lane 5B's
+ *  v2 boundary (`normalizeSettlement`, schema 2, M-7) strips the grouping and `factionAffiliation`,
+ *  `secondaryAffiliation`, `linkedFactionIds`, `factionGoal`, `densityRungRole` from every returned
+ *  record, and its migration moves a v1 save's fields once.
+ *
+ *  ⛔ WHY A NEW GENESIS AND NOT A SCHEMA-30 RE-FREEZE (MERGE-5AB's STOP, ruled by the chair):
+ *  MERGE-234's final merge (c7d552370) resolved the register textually and it was never re-derived;
+ *  `validateBaselineHistory` re-validates every committed schema-30 register on the ancestry path,
+ *  and c7d552370's fails `assertManifest` (executionTree manifest digest mismatch). Only a rung
+ *  escapes: its walk reads schema-31 descendants of its own genesis. The predecessor is the last
+ *  register written through the door, 8dd30106b's bytes, restored and committed first (db5dbb001).
+ *
+ *  WHAT MOVED: the corpus's record shape (the grouping's items, which carried `name` and `members`,
+ *  and the shim's fields no longer observed), so reads of those keys elsewhere become findings.
+ *  MEASURED, at the subject, through `--scan-only --scan-mode=legacy-leaf` against the predecessor:
+ *
+ *      reads 2,068 → 2,200 · identities 1,470 → 1,551 · files 403 → 426
+ *      NEW 90 · GONE 9 · INCREASED 0 · DECREASED 2 · SAME 1,459
+ *
+ *  Scanned at the lane tips (the 234 tip c7d552370, 5A 3d76fb058, 5B f24623a9f): 86 of the 90 rows
+ *  first appear at 5B's tip (the v2 boundary), 2 at 5A's (its display reads), 2 only in the union.
+ *
+ *  ⛔ THE ROWS ARE ADMITTED WITH ATTRIBUTION BY LANE CAUSE (the schema-24 posture), not declared:
+ *    • FPZ's (M-6, broken by design): the simulation's readers of the grouping and the five fields,
+ *      each attributed to `fpz-list.json`'s reason; they read nothing on a v2 record;
+ *    • v1-migration-reads (ONE class): "the migration reads the five legacy fields once, by design,
+ *      to move them" — `settlementMigrations.js`, 5B's;
+ *    • lane 1 (the card's `institution`, `title`, `memberships`); lane 3 (the hook parties);
+ *      5A (the display reads); 5B (the edit layer, and the grouping's builders, retired by M-2);
+ *    • lanes 2 and 4: none measured.
+ *  The 9 GONE and 2 DECREASED are the grouping's readers the boundary and 5A's re-points retired.
+ *
+ *  ⭐ THE BANK DOES NOT MOVE: 77 banked reads across 51 tagged addresses (no moving row is on a
+ *  declared identity). Its delta is the THREE bookkeeping paths every rung moves. This rung lands
+ *  ratchet-red; its re-freeze lands next. */
+export const PEOPLE_LANDING_TARGET_SCHEMA = 31;
+
+/* ⭐⭐ THE SCHEMA 31 → 32 RUNG — MERGE-CAR: THE PEOPLE CAR MERGED INTO THE INTEGRATION BRANCH
+ *
+ *  The merge commit 8dff691f3 merged the people car (lane/people-land-2026-11-07, 373a2947b) into
+ *  the integration branch (7b3ffb6ee). Both sides had cut their own rung: the car its NEW GENESIS
+ *  at 31 (PEOPLE-LAND, aaa15f224 / b61029f4d), the integration side its 30, THE CENSUS READERS
+ *  (MERGE-R2, f7bc53623 / a709af16d). At the merge the car's side of the tooling, suites and
+ *  register was taken. THE CHAIR'S BRIEF (MERGE-CAR, 2026-11-08): "the car's genesis at schema 31
+ *  STANDS; the integration side's schema-30 reads — R2's census readers — admitted at a new rung by
+ *  cause, none declared". This is that rung.
+ *
+ *  THE REFUSAL, MEASURED at the merged tip c12c28af0 through `--scan-only --scan-mode=legacy-leaf`
+ *  against the car's schema-31 register (frozen at 147fa6c3f):
+ *
+ *      findings 2,193 → 2,202 · identities 1,545 → 1,548
+ *      NEW 15 · GONE 12 · INCREASED 0 · DECREASED 0 · SAME 1,533
+ *
+ *  The scanner transition modifies exactly the three bookkeeping paths; the unscanned movement is
+ *  the eight regenerated execution inputs (src/data/dossierConnectives.generated.js, the six
+ *  src/data/dossierStateProse/*.generated.js, src/domain/data/intentAtlas.distillate.json), changed
+ *  since the car's freeze and verified fresh at this tree (`gen:dossier-prose --check` green):
+ *  regenerated inputs the write absorbs, not detector sources.
+ *
+ *  THE MIGRATION REVIEW — every moved row, its cause, its disposition:
+ *   (A) R2'S CENSUS READERS (the rung-2 landing; MERGE-R2's schema-30 review is the source of every
+ *       cause), the same 21 rows R2 measured, row for row:
+ *     NEW (10 rows), each ADMITTED as ordinary debt:
+ *      • display/tradeListDisplay.js `name on incomeSources` x1 — 9e4283eb5 (census-3c R-P 2).
+ *      • facts/drawDeclared.js `id` x3, `text` x2, `twinOf` x2 `on merchant` — 8d5b704a9, surfaced
+ *        at f739d37c6 (census-1e unit 2: the `merchant` override's binding carried into it);
+ *        `colour on merchant` x1 — d59b8a37a (census compose, R-AO).
+ *      • facts/factVocabulary.js `crisis`, `excludes`, `needs` x1, `tags` x2 `on merchant` —
+ *        c84bd6a29, surfaced at f739d37c6 by the same binding.
+ *      • roles/roleClass.js `contestsNiche on factions` x1 — A MOVE: 596cb8b1b (census-4 R3) re-homed
+ *        `seatFactions` from coherence/readerBattery.js.
+ *     GONE (11 rows), each RETIRED with its cause:
+ *      • coherence/readerBattery.js `contestsNiche on factions` x1 — moved by 596cb8b1b.
+ *      • generators/npcGenerator.js `note` x2, `short` x1 `on merchant` — f739d37c6 (the binding
+ *        moved into drawDeclared.js / factVocabulary.js).
+ *      • domain/canonicalAccessors.js `stresses on settlement` x1 (a BANKED row: the bank 77/51 ->
+ *        76/50) and domain/magicLedger.js `magicLevel on settlement` x1 — 7af3c6797 (census-3b(3)):
+ *        UNCURED INSTRUMENT EROSION, recorded as such, not as a repair.
+ *      • pdf/lib/viewModel.js `criticalIssues` x1, `structuralSuggestions` x1, `stressConsequences`
+ *        x2 `on economicViability`; pdf/lib/viewModelBodySlices.js `priorityNotes on
+ *        economicViability` x1, `structuralGaps on resourceAnalysis` x1, `structuralGaps on
+ *        settlement` x1 — d3b9280f6 (reader-r1 unit 2): the reads are gone, a lawful repair.
+ *   (B) THE CENSUS READERS UNDER THE CAR'S RECORD (the composition): the rung-2 landing's readers of
+ *       the powers keep a `f.faction ?? f.name` fallback; on the integration side the corpus's
+ *       `factions` shape still carried the NPC grouping's `name`, and at the car's v2 boundary (M-2,
+ *       M-7) the observed `factions` shape is the powers alone, named by `faction`. The fallback
+ *       becomes a finding — a dead fallback, not a lost writer. NEW (4 rows), ADMITTED:
+ *      • roles/roleClass.js `name on factions` x2 — A MOVE: `seatFactions`, re-homed by 596cb8b1b
+ *        from coherence/readerBattery.js, whose `name on factions` x2 the car's register held
+ *        (GONE below; readerBattery's faction-role-fit now reads memberships via people/membership.js,
+ *        MERGE-CAR, M-1b, and moves no row).
+ *      • coherence/crisisFactFindings.js `name on factions` x2 — the rung-2 crisis-cast reader
+ *        (`governing?.name`, `x?.name`); MERGE-CAR's composition there (memberships) moves no row.
+ *      • generators/power/factionLabelClose.js `name on factions` x1 — the rung-2 close-label pass.
+ *      • facts/guild.js `name on factions` x1 — MERGE-CAR's composition: `guildOf` reads the powers
+ *        alone now that the grouping is no longer built (M-2); its `f?.name` fallback is on the powers.
+ *     GONE (1 row), RETIRED: coherence/readerBattery.js `name on factions` x2 — moved by 596cb8b1b.
+ *   (C) THE CENSUS READERS UNDER THE CAR'S CORPUS: generators/npcGenerator.js `_government on
+ *       config` x3 (NEW, ADMITTED) — CENSUS-1i unit 6 / CENSUS-4d's `birthFactsOf` reads of
+ *       `config._government` (the integration side). Its writer is the npcConfig literal in the same
+ *       file; the car's corpus does not ground that derived config, so the read joins the car's own
+ *       admitted siblings `_dominantFaction on config` / `_tradeCommodity on config` there.
+ *  MEASURED, NOT EXPECTED: no row moves at people/ties.js, people/representatives.js or in
+ *  readerBattery's faction-role-fit — the composition's reads there are grounded.
+ *
+ *  Nothing is declared (the roster stays fourteen; thirteen bank). The identity rows move by exactly
+ *  the review's delta, 1545 + 15 - 12 = 1548. ⛔ The reconciliation must be EXACTLY those 27 rows;
+ *  any other moved row at the mint means the review was not the whole cause and the mint STOPS.
+ *  Its delta is the three bookkeeping paths; see `CAR_MERGE_SCANNER_DELTA_PATHS`. The commit pair
+ *  holds as at every rung: this rung lands ratchet-red, and its re-freeze lands next. */
+export const CAR_MERGE_TARGET_SCHEMA = 32;
+
+/* ⭐⭐ THE SCHEMA 32 → 33 RUNG — MERGE-WAVE AT THE W2 DEF MERGE (one rung per cause)
+ *
+ *  The merge commit 82a4e2856 merged lane/w2-def-2026-11-07 (091b23bb3, cut at ee3b7a168, before the
+ *  car) into the integration branch after W1 ECO's merge. THE CHAIR'S BRIEF (MERGE-WAVE §1): "the
+ *  registers through their doors AFTER the merge commit (observed-shape `--write` admitting the lane's
+ *  reads by cause, none declared)"; THE CHAIR'S RULING (2026-11-08): one rung per cause. This is
+ *  W2 DEF's rung.
+ *
+ *  THE REFUSAL, MEASURED at the merged tip (ded92e94e's content, the W2 merge point's registers in)
+ *  through `--write` (shrink-only) and `--scan-only --scan-mode=legacy-leaf` against the schema-32
+ *  register re-frozen at the W1 ECO merge point (18a3daf5b):
+ *
+ *      NEW 1 · GONE 0 · INCREASED 0 · DECREASED 0
+ *
+ *  THE ROW: src/domain/migrationDirection.js `direction on stress` x1 (`row.direction`, the reader
+ *  under the one direction fact). The file is unchanged since W0 (343bd4eec / eb4c508e1). At the W1
+ *  ECO merge point the same scan leaves that receiver ungrounded (no finding); at the W2 composition
+ *  the receiver grounds to the `stress` shape — W2 DEF's stress-type desks (DS-DEF-3/-8) read
+ *  settlement.stress entries inline. The WRITER IS REAL: W0-1 (343bd4eec) writes stress[].direction
+ *  on the mass_migration entry at the draw; no osr corpus seed draws a mass migration (the corpus's
+ *  `stress` shape: 138 rows, no `direction`, measured at both points). ADMITTED as ordinary debt
+ *  with this attribution; a corpus stimulus that draws a migration would retire it.
+ *
+ *  Nothing is declared (the roster stays fourteen; thirteen bank, 76/50). ⛔ The reconciliation must
+ *  be EXACTLY that one row; any other moved row at the mint means the review was not the whole cause
+ *  and the mint STOPS. Its delta is the three bookkeeping paths; see `WAVE_W2_SCANNER_DELTA_PATHS`.
+ *  The commit pair holds as at every rung: this rung lands ratchet-red, and its re-freeze lands next. */
+export const WAVE_W2_TARGET_SCHEMA = 33;
+
+/* ⭐⭐ THE SCHEMA 33 → 34 RUNG — MERGE-WAVE AT THE FIX-FOOD-ISOLATION MERGE (one rung per cause)
+ *
+ *  The merge commit c6e8a4ad6 merged lane/fix-food-isolation-2026-11-07 (7b489f21e, cut at a3d3c31b6) into
+ *  the integration branch after W7. THE CHAIR'S BRIEF (MERGE-WAVE §0.6): "at its merge point your
+ *  observed-shape rung ADMITS the one row its §S4 names — `nearbyResourcesState on config`,
+ *  foodGenerator.js, one read — with the §S4 sentence as the cause, none declared, nothing exempted";
+ *  THE CHAIR'S RULING (2026-11-08): its OWN rung, never folded with another cause. This is that rung.
+ *
+ *  THE REFUSAL, MEASURED at the merged tip through `--write` (shrink-only) against the schema-33 register:
+ *
+ *      NEW 1 · GONE 0 · INCREASED 0 · DECREASED 0
+ *
+ *  THE ROW AND ITS CAUSE, the lane's §S4 sentence verbatim: "FIX-FOOD-ISOLATION: the receipt reads the
+ *  land through foodLandOf; the depletion arm's read of the effective config is foodGenerator's own,
+ *  observed on the receipt's call path." — src/generators/foodGenerator.js `nearbyResourcesState on
+ *  config` x1 (`Object.entries(config.nearbyResourcesState || {})`), ADMITTED with that attribution.
+ *
+ *  Nothing is declared (the roster stays fourteen; thirteen bank, 76/50). ⛔ The reconciliation must be
+ *  EXACTLY that one row; any other moved row at the mint means the review was not the whole cause and the
+ *  mint STOPS. Its delta is the three bookkeeping paths; see `WAVE_FOOD_SCANNER_DELTA_PATHS`. */
+export const WAVE_FOOD_TARGET_SCHEMA = 34;
+
+/* ⭐⭐ THE SCHEMA 34 → 35 RUNG — MERGE-WAVE AT THE FIX-PUBLIC-VEIL MERGE (one rung, two causes: the chair's
+ *  option B of 2026-11-08)
+ *
+ *  The merge commit 7e65c7bec merged lane/fix-public-veil-2026-11-07 (eb18cb458, cut from the car branch)
+ *  into the integration branch. The lane carried two rungs of its own: its 32 (the corpus's infiltrated
+ *  topology, producer 1b′ in scripts/lib/observed-shape-corpus.mjs) and its 33 (the veiled re-deal). The
+ *  corpus builder auto-merged; at the merged tip both causes stand in one tree, so the ritual cannot
+ *  measure them apart. THE CHAIR'S RULING (option B): ONE rung on the merged tip, predecessor 34, its
+ *  transition carrying the corpus builder path as CAUSE 1 and its review attributing every moved row to
+ *  CAUSE 2, both causes named per row; every row has exactly one cause.
+ *
+ *  CAUSE 1 — the corpus definition: producer 1b′, CONFIGS[0] × the four seeds with stressTypes
+ *  ['infiltrated'], entering `roots` (topology only). It moves NO row: the lane's own rung-32
+ *  measurement, NEW 0 · GONE 0 · SAME 1,545, is the evidence (docs/FIX_PUBLIC_VEIL_2026-11-07.md §2).
+ *  CAUSE 2 — the veiled re-deal (the lane's 48bcc1f3e: a veiled face's opaque id keys its forks), MEASURED
+ *  at the merged tip against the schema-34 register: NEW 4 · GONE 13 · INCREASED 0 · DECREASED 0.
+ *    NEW, ADMITTED with attribution — `covert on impairments` x1 in src/domain/corruption.js,
+ *      src/domain/worldPulse/beliefMap.js, src/domain/entities/status.js and
+ *      src/domain/worldPulse/institutionStatusLifecycle.js (the re-dealt year no longer reaches the
+ *      covert-corruption writer; the lane's rung-33 rows).
+ *    GONE, retired with that cause — `nearbyResourcesState on config` in affordanceManifest.js,
+ *      mutateWorld.js (4), targetRosters.js, resourceSemantics.js, deriveSystemState.js,
+ *      institutionLifecycleResourceRead.js, resourceDynamicsKernel.js, tierResourceDynamics.js (2),
+ *      foodGenerator.js (FIX-FOOD-ISOLATION's row admitted at 34) and resolveResources.js (3);
+ *      `resourceHistory on settlement` in rosterProvenance.js, resourceDynamicsKernel.js (2) and
+ *      tierResourceDynamics.js (2): the re-dealt year now observes both keys.
+ *
+ *  Nothing is declared (the roster stays fourteen; thirteen bank, 76/50). ⛔ The reconciliation must be
+ *  EXACTLY those seventeen rows; any other moved row means the review was not the whole cause and the
+ *  mint STOPS. The delta is FOUR paths: the corpus builder (cause 1) and the three bookkeeping paths. */
+export const WAVE_VEIL_TARGET_SCHEMA = 35;
+
+/* ⭐⭐ THE SCHEMA 35 → 36 RUNG — MERGE-TRAIN AT THE ALLEGIANCE-CAR1 MERGE (one rung, two causes: the chair's
+ *  ruling of 2026-11-09, the public-veil option-B idiom)
+ *
+ *  The merge commit e5f88930b merged lane/allegiance-car1-2026-11-08 (7395b5dab) into the integration
+ *  branch. After schema 32 the car minted three rungs of its own: its 33 (the veil merge), its 34 (the
+ *  hidden allegiance, cause commit 5902f1a4a) and its 35 (the J-19 cure, cause commit d131ab158), while this
+ *  line minted 33 (W2 DEF), 34 (FIX-FOOD-ISOLATION) and 35 (FIX-PUBLIC-VEIL). At the merge commit this
+ *  line's tooling, register and suites were taken whole. THE CHAIR'S RULING: the car's 33 IS the veil merge
+ *  this line already minted as 35 — it is NOT re-minted. The car's 34 and 35 are re-minted as ONE rung on
+ *  the merged tip, predecessor 35, two causes, every moved row assigned to exactly one; the review names
+ *  each row's cause. The corpus DEFINITION is unchanged (no corpus-builder path in the delta).
+ *
+ *  MEASURED at the merged tip against the schema-35 register (scan vs inventory): NEW 24 · GONE 17 ·
+ *  INCREASED 1 · DECREASED 0 · SAME 1,523.
+ *  CAUSE 1 — the hidden allegiance (5902f1a4a; the car's rung-34 review,
+ *    docs/allegiance/osr-rung34-allegiance-review.json, classes A/B/C): 29 rows.
+ *    NEW, ADMITTED with attribution (11) — class A, the allegiance's simulation sub-fields read on the
+ *      allegiance: `conspiracy` / `criminalInstitution` / `foreignPatron` / `leash on allegiance` in
+ *      src/domain/corruptionLeash.js, `leash on allegiance` in src/domain/people/allegiance.js; class B, the
+ *      retired mark's readers: `corruptTies on npcs` in corruptionLeash.js, settlementMigrations.js,
+ *      worldPulse/causeLifecycle.js, worldPulse/clergyTraitPlane.js and worldPulse/npcAgency.js, and
+ *      `ousted on npcs` in settlementMigrations.js.
+ *    GONE, retired with that cause (17) — class A, the same sub-fields on corruptTies: `conspiracy` /
+ *      `foreignPatron` / `leash on corruptTies` in corruptionLeash.js, `leash on corruptTies` in npcAgency.js,
+ *      `revealed on corruptTies` in causeLifecycle.js, clergyTraitPlane.js and npcGrowthKernel.js; class C,
+ *      the year over the new cast: `factionAffiliation on npcs` in corruption.js, density/factionLifecycle.js,
+ *      events/registry.js, settlementMigrations.js, worldPulse/houseLedger.js and worldPulse/successorNpc.js,
+ *      `factionLink` / `institutionId on npcs` in corruption.js and successorNpc.js.
+ *    INCREASED (1) — class B: `migrationReports on settlement` in settlementMigrations.js, 2 -> 4 (the v2 -> v3
+ *      migration's report).
+ *    The car's other class-C rows (the proposalPayload / outcome / stressors rows its rung 34 retired) do
+ *      NOT move here: its rung 35 re-admitted them and this line's register already holds them.
+ *  CAUSE 2 — the J-19 cure (d131ab158: npcAgency.js :: ensureNpcStates no longer re-rolls a v3 card's
+ *    corruption, so the corpus's year re-deals; the car's rung-35 review,
+ *    docs/allegiance/osr-rung35-j19-pulse-review.json, class J): 13 rows, all NEW, ADMITTED with
+ *    attribution — `nearbyResourcesState on config` in events/affordanceManifest.js, events/mutateWorld.js
+ *    (4), events/targetRosters.js, resourceSemantics.js, state/deriveSystemState.js,
+ *    worldPulse/institutionLifecycleResourceRead.js, worldPulse/resourceDynamicsKernel.js,
+ *    worldPulse/tierResourceDynamics.js (2), generators/steps/resolveResources.js (3) and
+ *    generators/foodGenerator.js; `resourceHistory on settlement` in provenance/rosterProvenance.js,
+ *    resourceDynamicsKernel.js (2) and tierResourceDynamics.js (2). The foodGenerator.js row is the one row
+ *    the car's review does not name (FIX-FOOD-ISOLATION's row, admitted at 34 on this line, retired at 35 by
+ *    the veiled re-deal); it is plainly the same re-dealt-year class (the same key, the same writer no longer
+ *    reached) and is assigned to cause 2 by that class.
+ *
+ *  Nothing is declared (the roster stays fourteen; thirteen bank, 76/50). ⛔ The reconciliation must be
+ *  EXACTLY those forty-two rows; any other moved row means the review was not the whole cause and the mint
+ *  STOPS. The delta is the THREE bookkeeping paths; see `TRAIN_CAR1_SCANNER_DELTA_PATHS`. */
+export const TRAIN_CAR1_TARGET_SCHEMA = 36;
+
+/* ⭐⭐ THE SCHEMA 36 → 37 RUNG — MERGE-TRAIN AT THE ALLEGIANCE-CAR2 MERGE (one rung, one cause: the chair's
+ *  ruling of 2026-11-09)
+ *
+ *  The merge commit f51058995 merged lane/allegiance-car2-2026-11-08 (46715e751, cut from car 1's 7395b5dab)
+ *  into the integration branch; this line's observed-shape tooling, register and suites were taken whole
+ *  (rung 36 live). The car minted ONE rung of its own after car 1's 35 — its 36 (7017f5096 / 45c9e64c6, review
+ *  docs/allegiance/osr-rung36-guild-push-review.json): NEW 0 · GONE 12, all bisected to the guild's push
+ *  bbb1a4abc (A3: generators/people/castPowers.js weights hidden agents in the rank deal, so the corpus's
+ *  simulated year re-deals); A6 (ce90cf16e, the hall-capture state) measured on the lane to equal bbb1a4abc
+ *  exactly, and the capture rows (aca93cbc5, after the lane's rung) left the car's register unchanged to its
+ *  tip. It is re-minted here as rung 37 on the merged tip, predecessor 36, ONE cause. The corpus DEFINITION is unchanged (no corpus-builder path in the delta).
+ *
+ *  MEASURED at the merged tip against the schema-36 register (scan vs inventory): NEW 0 · GONE 13 ·
+ *  INCREASED 0 · DECREASED 0 · SAME 1,535. Every GONE row is the re-dealt year reaching its writer again,
+ *  RETIRED WITH CAUSE (class G): `nearbyResourcesState on config` in events/affordanceManifest.js,
+ *  events/mutateWorld.js (4), events/targetRosters.js, resourceSemantics.js, state/deriveSystemState.js,
+ *  worldPulse/institutionLifecycleResourceRead.js, worldPulse/resourceDynamicsKernel.js,
+ *  worldPulse/tierResourceDynamics.js (2), generators/steps/resolveResources.js (3) and
+ *  generators/foodGenerator.js; `resourceHistory on settlement` in provenance/rosterProvenance.js,
+ *  resourceDynamicsKernel.js (2) and tierResourceDynamics.js (2). Twelve are the car's own rung-36 rows; the
+ *  thirteenth, foodGenerator.js, the car's review cannot name (FIX-FOOD-ISOLATION's row on this line, which
+ *  rung 36 admitted by class with J-19's): it is plainly the same re-dealt-year class (the same key, the same
+ *  writer reached again) and is assigned to this cause by that class. Neither A6 nor the capture rows are
+ *  needed as a second cause.
+ *
+ *  Nothing is declared (the roster stays fourteen; thirteen bank, 76/50). ⛔ The reconciliation must be
+ *  EXACTLY those thirteen rows; any other moved row means the review was not the whole cause and the mint
+ *  STOPS. The delta is the THREE bookkeeping paths; see `TRAIN_CAR2_SCANNER_DELTA_PATHS`. */
+export const TRAIN_CAR2_TARGET_SCHEMA = 37;
+
+/* ⭐⭐ THE SCHEMA 37 → 38 RUNG — MERGE-TRAIN AT THE ALLEGIANCE-CAR3 MERGE (one rung, two causes, every moved
+ *  row with exactly one: the chair's ruling of 2026-11-09)
+ *
+ *  The merge commit c6ded8e3a merged lane/allegiance-car3-2026-11-08 (6ea8fb318, cut from car 1's 7395b5dab)
+ *  into the integration branch; this line's observed-shape tooling, register and walker were taken whole
+ *  (rung 37 live). The car took NO rung on its lane: a governed --write shrink (1a522aaf4: 2,203 / 1,546 ->
+ *  2,194 / 1,540, six identities gone) and the walker's pins re-keyed (18a315ee2), its year re-dealt by its
+ *  generator causes (e9070d614, 8567f490d, 2f89aaeef; the split there PLAUSIBLE, not bisected). Minted here
+ *  as rung 38 on the merged tip, predecessor 37. The corpus DEFINITION is unchanged.
+ *
+ *  MEASURED at the merged tip against the schema-37 register (scan vs inventory): NEW 13 · GONE 6 ·
+ *  INCREASED 0 · DECREASED 0 · SAME 1,529.
+ *  CAUSE 1 — the dial e9070d614 (ALLEGIANCE_TUNING.organizedCrime 0.10 -> 0.05: fewer agents dealt on
+ *    their keyed forks, so the corpus's year re-deals): 18 rows. BISECTED, CONFIRMED: a scratch tree of the
+ *    merged tip with that one constant reverted to 0.10 scans NEW 0 · GONE 1 against the schema-37 register
+ *    (only cause 2's row moves) and its corpus year equals the rung-37 pins, so 8567f490d and 2f89aaeef
+ *    (fence-only) move no row here.
+ *    NEW, ADMITTED with attribution (13) — the re-dealt year no longer reaches the writers rung 37 saw:
+ *      `nearbyResourcesState on config` in events/affordanceManifest.js, events/mutateWorld.js (4),
+ *      events/targetRosters.js, resourceSemantics.js, state/deriveSystemState.js,
+ *      worldPulse/institutionLifecycleResourceRead.js, worldPulse/resourceDynamicsKernel.js,
+ *      worldPulse/tierResourceDynamics.js (2), generators/steps/resolveResources.js (3) and
+ *      generators/foodGenerator.js; `resourceHistory on settlement` in provenance/rosterProvenance.js,
+ *      resourceDynamicsKernel.js (2) and tierResourceDynamics.js (2).
+ *    GONE, retired with that cause (5) — the re-dealt year reaches their writers (the car's own shrink rows):
+ *      `factionName on stressors` (4) and `settlementIds on stressors` in components/map/WorldPulseData.js,
+ *      `targetId on outcome` in worldPulse/proposalAdmission.js, `attackerId` / `targetId on outcome` in
+ *      worldPulse/warCoalitionEvidence.js.
+ *  CAUSE 2 — the bought watch a63effa93: 1 row GONE, `ousted on npcs` in src/domain/corruption.js — the read
+ *    left the file (the person arm now reads it through corruptionLeash.js :: isOustedNpc, where the
+ *    detector binds no npcs shape); it moves with the dial reverted too.
+ *
+ *  Nothing is declared (the roster stays fourteen; thirteen bank, 76/50). ⛔ The reconciliation must be
+ *  EXACTLY those nineteen rows; any other moved row means the review was not the whole cause and the mint
+ *  STOPS. The delta is the THREE bookkeeping paths; see `TRAIN_CAR3_SCANNER_DELTA_PATHS`. */
+export const TRAIN_CAR3_TARGET_SCHEMA = 38;
+
+/* ⭐⭐ THE SCHEMA 38 → 39 RUNG — MERGE-TRAIN AT THE ALLEGIANCE-CAR4 MERGE (one rung, two causes, every moved
+ *  row with exactly one cause and its class: the chair's ruling of 2026-11-09)
+ *
+ *  The merge commit 824a8ce2f merged lane/allegiance-car4-2026-11-08 (ea012f42d; cut from car 2's 46715e751,
+ *  write-goals 82796628e and write-people-3 5ee39a56c merged first) into the integration branch, after points
+ *  4–8; this line's observed-shape tooling, register and walker were taken whole (rung 38 live). The car minted
+ *  its own rung 37 (ce9b067ca / 622f80120, review docs/allegiance/osr-rung37-goals-review.json): New 8, Gone 19,
+ *  Decreased 1. It is re-minted here as rung 39 on the merged tip, predecessor 38. The corpus DEFINITION is
+ *  unchanged. Item 15 (eabc93dfe, the title-secret draw) is not needed: the car's scan at it equals 03ff59084.
+ *
+ *  MEASURED at the merged tip against the schema-38 register (scan vs inventory): NEW 8 · GONE 19 ·
+ *  INCREASED 0 · DECREASED 1 · SAME 1,522 — every row the car's review names, by file and identity.
+ *  CAUSE 1 — the goals rebuilt (03ff59084, A9: goals by families at the seam's end, the keyed intent): 27 rows.
+ *    class I, ADMITTED with attribution (7) — the envoy encounter's own intent record now grounds by the
+ *      name's single home to the card's goal intent: `intentId` / `kind` / `privateGoal on intent` (3 each),
+ *      `plantEligible` / `plantLineageId` / `plantTargetErrandId on intent` (2 each), `privateGoals on intent`
+ *      (4), all in src/domain/worldPulse/envoyEncounter.js.
+ *    class R, retired by REPAIR (4) — npcGenerator.js's goal draw leaves the birth record: `_dominantFaction`,
+ *      `_tradeCommodity`, `tradeCommodity on config` gone; `_government on config` DECREASED 3 -> 1 (the census
+ *      birth-facts read stands).
+ *    class E, GONE AS UNCURED INSTRUMENT EROSION (16), recorded as such, NOT a repair (the rung-32 precedent,
+ *      ACCEPTED by the chair): the reads still stand in source; the bindings that grounded them are re-homed
+ *      and the byte-frozen detector no longer resolves them — `good` / `law` / `lawfulness` / `lawfulness01` /
+ *      `malice` / `malice01` / `morality` / `order on facets` in worldPulse/warSeatBooks.js; `colour` / `id` /
+ *      `text` / `twinOf on merchant` in facts/drawDeclared.js; `crisis` / `excludes` / `needs` / `tags on
+ *      merchant` in facts/factVocabulary.js. ⚠ `text on merchant` was 2 on the car's side; FIX-HOOK-OBJECT's
+ *      governed --write (34ec91fea, drawDeclared.js :: lineText) already lowered it to 1 on this line, so it
+ *      goes 1 -> 0 here. A cure is a corpus-topology or detector act, not this rung.
+ *  CAUSE 2 — the structural fingerprint re-based (0a18ff311: intentFamilyDist reads
+ *    `n?.goal?.intent?.[v]?.family`): 1 row, class I, ADMITTED — `family on intent` in
+ *    src/lib/structuralFingerprint.js.
+ *
+ *  Nothing is declared (the roster stays fourteen; thirteen bank, 76/50). ⛔ The reconciliation must be
+ *  EXACTLY those twenty-eight rows; any other moved row means the review was not the whole cause and the mint
+ *  STOPS. The delta is the THREE bookkeeping paths; see `TRAIN_CAR4_SCANNER_DELTA_PATHS`. */
+export const TRAIN_CAR4_TARGET_SCHEMA = 39;
+
+/* ⭐⭐ THE SCHEMA 39 → 40 RUNG — THE PUBLIC PROSE WRITER'S ADMISSION (lane SW-B7b PROJECTION, STYLE-RULINGS-2
+ *  B10(a); the chair's grant of 2026-11-09 13:5x on the lane's STOP 2: "the M9 save-time-writer admission,
+ *  through the GOVERNED door only: the OSR migration in two acts")
+ *
+ *  The shared dossier (the gallery page, the players' link) prints the owner's player-view desk text, which
+ *  the save path composes owner-side and stamps onto the record as `data.publicProse` (src/lib/saves.js ::
+ *  withPublicProse, inside mutationRow and supabaseSave; docs/chair/2026-11-09/STYLE-2-PROJECTION-2026-11-09.md
+ *  §1, §6, §7). The leaf src/domain/display/publicProse.js :: publicProseOf reads `settlement?.publicProse`
+ *  once. The corpus executes generation and the domain pulse and never the save path, so no generated world
+ *  carries the key: the save-time-writer class, the `decrees on settlement` precedent (EM-C4b).
+ *
+ *  MEASURED at the subject against the schema-39 register (scan vs inventory): NEW 1 · GONE 0 · INCREASED 0 ·
+ *  DECREASED 0 — the one row `publicProse on settlement` at src/domain/display/publicProse.js (1 read).
+ *  CAUSE 1 (the only one) — the leaf's read, ADMITTED TAGGED under ONE declaration (the roster 14 -> 15).
+ *
+ *  ⭐ THE BANK MOVES 76/50 → 77/51, MEASURED: the one declaration reaches one address and one read.
+ *  ⛔ The reconciliation must be EXACTLY that one row; any other moved row means the tip moved under the
+ *  measurement and the mint STOPS. The delta is the THREE bookkeeping paths; see
+ *  `PUBLIC_PROSE_SCANNER_DELTA_PATHS`. The commit pair holds as at every rung: this rung lands
+ *  walker-red, and its re-freeze lands next. */
+export const PUBLIC_PROSE_TARGET_SCHEMA = 40;
+
+/* ⭐⭐ THE SCHEMA 40 → 41 RUNG — THE PLAYED-WORLDS WRITER'S ADMISSION (STYLE-2-MERGE closing act 5; the chair's
+ *  FINAL RULING of 2026-11-09 21:2x: "a TRUE schema change, admitted by the ONE rung at the final tip. Schema 40
+ *  → 41 admits a new writer class, "played-worlds writer" (a writer that runs only in campaign time and is
+ *  dormant in the birth corpus). Its first entry is convergence.js:1101's minted-proposal `outcome`, as the
+ *  writer behind `newsBody.js :: itemSettlementIds`'s read of `item.outcome?.affectedSettlementIds`. Gate-0
+ *  evidence: the shorthand spelling probe."; docs/INTEGRATION_STYLE_2_2026-11-09.md §3 and §2d act 5)
+ *
+ *  SW-11's leaf src/domain/display/newsBody.js :: itemSettlementIds (969077590, STYLE-2-MERGE point 12) reads
+ *  `item.outcome?.affectedSettlementIds` once; the writer is the proposal record src/domain/worldPulse/
+ *  convergence.js mints behind interventionActive (`mintedProposals.push({ … outcome, … })`, now at :1104-1107),
+ *  which runs only in campaign time. Point 17 measured the remedies the chair ruled before this one: the
+ *  detector cure (20:5x) does not apply (the live scan walks executed run objects by container name and the
+ *  reader scanner is byte-frozen); the virtual-dormant door (21:0x) is shape-scoped (`writeShapesOnShapeIn`: the
+ *  key inside an `outcome = {` / `outcome: {` literal) and the push literal is neither, so it is UNVERIFIABLE.
+ *  The class is therefore NEW: not a save-time writer (the corpus runs the domain pulse), not a conditional
+ *  generator branch (the writer is no generator step), and its declaration carries the chair's own words.
+ *
+ *  MEASURED at the subject against the schema-40 register (re-minted at d8d7ceee4, where the row was admitted
+ *  ordinary): SAME everywhere — the one row `outcome on outcome` at src/domain/display/newsBody.js (1 read)
+ *  keeps its count and gains its tag. CAUSE 1 (the only one) — the declaration (the roster 15 -> 16).
+ *
+ *  ⭐ THE BANK MOVES 77/51 → 78/52, MEASURED: the one declaration reaches one address and one read.
+ *  ⛔ The reconciliation must be ALL SAME; any moved row means the tip moved under the measurement and the mint
+ *  STOPS. The delta is the THREE bookkeeping paths; see `PLAYED_WORLDS_SCANNER_DELTA_PATHS`. The commit pair
+ *  holds as at every rung: this rung lands walker-red, and its re-freeze lands next. */
+export const PLAYED_WORLDS_TARGET_SCHEMA = 41;
+
+/* ⭐⭐ THE SCHEMA 41 → 42 RUNG — THE AGREEMENT LANE'S TIER SEED (STYLE-2-MERGE point 47, COHERENCE-AGREE; the
+ *  chair's ruling on STOP 47a, 2026-11-13 10:20 UTC: "(B), MIGRATE NOW", one package, a row and not a branch).
+ *
+ *  THE CAUSE: the agreement lane's generation moved the tier seed's town out of the overlap. Producer 2b's
+ *  `osr-tier-14` under CONFIGS[0] no longer lands in the town/city overlap, so its pulse minted no tier candidate
+ *  in twelve intervals and the corpus builder THREW (observedShapeReaders, writerReach and proseFamilyContract
+ *  failed at load). Re-searched by producer 2b's own rule over `osr-tier-0..39` under CONFIGS[0]: the minters are
+ *  osr-tier-19 (pop 2477, interval 5), -25 (2394) and -28 (2282); the lowest, osr-tier-19, is taken. The corpus
+ *  builder is a DETECTOR SOURCE, so the seed is re-governed here: schema 41's topology, tag law, roster and bank
+ *  UNCHANGED; the reconciliation (every moved row classed WITNESSED / BINDING LOST, read by the chair before the
+ *  re-freeze) is recorded in the re-freeze commit. The delta is FOUR paths — the corpus builder and the three
+ *  bookkeeping paths; see `AGREE_TIER_SEED_SCANNER_DELTA_PATHS`. The commit pair holds as at every rung: this
+ *  rung lands walker-red, and its re-freeze lands next. */
+export const AGREE_TIER_SEED_TARGET_SCHEMA = 42;
+
+export const DECLARED_BANK_BY_TARGET = Object.freeze({
+  [EXEMPTION_RETIREMENT_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
+  [BANK_FENCE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
+  // MEASURED, never predicted from the delta: `bankOf` over the committed schema-20
+  // register derives 60/39, and the one new address this rung admits is a DECLARED
+  // identity, so the post-move pair is 61/40 with `neighbourNetwork on settlement` at
+  // 39 reads across 26 addresses. The write refuses if the measurement disagrees.
+  [RELATIONSHIPS_MOUNT_TARGET_SCHEMA]: Object.freeze({ bankedReads: 61, taggedRows: 40 }),
+  // MEASURED off the live scan at the subject commit, never inferred from the delta: the one
+  // declared-identity row this rung touches CHANGES ADDRESS and not count, so the pair does
+  // not move. `bankOf` over the committed schema-21 register derives 61/40, the live scan at
+  // the subject derives 61/40, and the literal module already states it.
+  [DOMAIN_READER_TARGET_SCHEMA]: Object.freeze({ bankedReads: 61, taggedRows: 40 }),
+  // MEASURED off the live scan at ⟨BASE⟩ 8e8f70182, never predicted from the delta: the two
+  // identities this rung DECLARES reach five addresses between them in the live inventory —
+  // `kind on settlement` at phantoms.js ×1 and saveAccess.js ×1, `decrees on settlement` at
+  // decreeHook.js ×4, pulseKernel.js ×1 and the ordinary row the estate already carried at
+  // personaSlicer.js ×1 — so `bankOf` derives 69 banked reads across 45 tagged addresses
+  // where the committed schema-22 register derives 61/40. The write refuses if the
+  // measurement disagrees with this pair or with the walker's hand-owned literal.
+  [EDIT_MODE_READERS_TARGET_SCHEMA]: Object.freeze({ bankedReads: 69, taggedRows: 45 }),
+  // MEASURED off the live scan at ⟨BASE⟩ 57d3a7f0e: none of the 53 admitted rows sits on a declared
+  // identity, so `bankOf` derives the same 69 banked reads across 45 tagged addresses the
+  // committed schema-23 register derives. A re-deal that ADDS rows and leaves the bank alone is
+  // the fence's fourth exercise and its first over ordinary growth.
+  [CORPUS_REDEAL_TARGET_SCHEMA]: Object.freeze({ bankedReads: 69, taggedRows: 45 }),
+  // MEASURED off the committed schema-24 register (`bankOf` → 69 reads across 45 addresses), and
+  // a verdict-only rung moves no row, so the pair cannot move. The write refuses if the live
+  // measurement disagrees with this pair or with the walker's hand-owned literal.
+  [ADVISORY_LOCKFILE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 69, taggedRows: 45 }),
+  // MEASURED off the committed schema-25 register (`bankOf` → 69 reads across 45 addresses) and
+  // the live scan at the subject: none of the 22 admitted rows, the four gone or the two shrunk is
+  // on a declared identity, so the pair cannot move. The write refuses if the measurement disagrees.
+  [FED_WORLD_TARGET_SCHEMA]: Object.freeze({ bankedReads: 69, taggedRows: 45 }),
+  // MEASURED off the live scan at the subject, never predicted from the delta: `bankOf` over the
+  // committed schema-26 register derives 69 reads across 45 addresses, and the three identities
+  // this rung DECLARES reach five addresses and seven reads in the live inventory — `temporary on
+  // npcs` ×1 at each of crisis/crisisCast.js, crisisLifecycle.js and coherence/crisisCastFindings.js,
+  // `temporaryKind on npcs` ×2 at crisis/crisisCast.js, `crisisIds on npcs` ×2 at
+  // crisisLifecycle.js. No other moving row sits on a declared identity. The write refuses if the
+  // measurement disagrees with this pair or with the walker's hand-owned literal.
+  [WINDOW_RUNG1_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
+  // MEASURED off the committed schema-27 register (`bankOf` → 76 reads across 50 addresses, the
+  // walker's literal), and a verdict-only rung moves no row, so the pair cannot move. The write
+  // refuses if the live measurement disagrees with this pair or with the walker's hand-owned literal.
+  [TIER_COVERAGE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
+  // MEASURED off the live scan at the subject, never predicted from the delta: `bankOf` over the
+  // committed schema-28 register derives 76 reads across 50 addresses, and the one identity this
+  // rung DECLARES reaches one address and one read (`migrationDirection on config` x1 at
+  // src/domain/migrationDirection.js). The write refuses if the measurement disagrees with this pair
+  // or with the walker's hand-owned literal.
+  [MIGRATION_DIRECTION_TARGET_SCHEMA]: Object.freeze({ bankedReads: 77, taggedRows: 51 }),
+  // MEASURED off the committed schema-29 register (`bankOf` → 77 reads across 51 addresses) and the
+  // live scan at the subject: none of the admitted or gone rows is on a declared identity, so the
+  // pair cannot move. The write refuses if the measurement disagrees with this pair or with the
+  // walker's hand-owned literal.
+  [PEOPLE_CAST_TARGET_SCHEMA]: Object.freeze({ bankedReads: 77, taggedRows: 51 }),
+  // MEASURED off the restored schema-30 predecessor and the live scan at the subject: no admitted,
+  // gone or decreased row is on a declared identity, so the pair cannot move.
+  [PEOPLE_LANDING_TARGET_SCHEMA]: Object.freeze({ bankedReads: 77, taggedRows: 51 }),
+  // MEASURED off the car's schema-31 register (77/51) and the live scan at the merged tip (76 reads
+  // across 13 of 14 declared identities): ONE gone row is on a declared identity — the census
+  // readers' `stresses on settlement` at canonicalAccessors.js (uncured erosion, 7af3c6797) — so the
+  // pair moves 77/51 -> 76/50, the integration side's schema-30 figure. The bank does not grow.
+  [CAR_MERGE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
+  // HELD at 33 (MERGE-WAVE, W2 DEF): the one admitted row is ordinary debt, on no declared identity.
+  [WAVE_W2_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
+  // HELD at 34 (MERGE-WAVE, FIX-FOOD-ISOLATION): the one admitted row is ordinary debt, on no declared identity.
+  [WAVE_FOOD_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
+  // HELD at 35 (MERGE-WAVE, FIX-PUBLIC-VEIL): no moved row is on a declared identity.
+  [WAVE_VEIL_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
+  // HELD at 36 (MERGE-TRAIN, ALLEGIANCE-CAR1): no moved row is on a declared identity.
+  [TRAIN_CAR1_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
+  // HELD at 37 (MERGE-TRAIN, ALLEGIANCE-CAR2): no moved row is on a declared identity.
+  [TRAIN_CAR2_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
+  // HELD at 38 (MERGE-TRAIN, ALLEGIANCE-CAR3): no moved row is on a declared identity.
+  [TRAIN_CAR3_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
+  // HELD at 39 (MERGE-TRAIN, ALLEGIANCE-CAR4): no moved row is on a declared identity.
+  [TRAIN_CAR4_TARGET_SCHEMA]: Object.freeze({ bankedReads: 76, taggedRows: 50 }),
+  // GROWN at 40 (SW-B7b): one declaration, `publicProse on settlement`, one address and one read.
+  [PUBLIC_PROSE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 77, taggedRows: 51 }),
+  // GROWN at 41 (STYLE-2-MERGE closing act 5, 21:2x): one declaration of the new played-worlds-writer class,
+  // `outcome on outcome`, one address (newsBody.js) and one read.
+  [PLAYED_WORLDS_TARGET_SCHEMA]: Object.freeze({ bankedReads: 78, taggedRows: 52 }),
+  [AGREE_TIER_SEED_TARGET_SCHEMA]: Object.freeze({ bankedReads: 78, taggedRows: 52 }),
+});
+
+/** The declared post-bank of a target, or `null` for a rung that predates the law. */
+export function declaredBankOf(targetSchema) {
+  return DECLARED_BANK_BY_TARGET[targetSchema] ?? null;
+}
+
+/**
+ * The complete, reviewed detector transition admitted by the retired 6→7 mint.
+ *
+ * `package.json` is inherited from GTR-1; the other three paths are H26's own
+ * scanner implementation. Keeping the set as exported data makes the packet's
+ * provenance ruling executable and gives the review ledger one closed subject
+ * to accept. A fifth path, or one of these four remaining byte-identical, is a
+ * different migration and therefore fails closed.
+ */
+export const BANKED_EXPLAINED_WRITER_SCANNER_DELTA_PATHS = Object.freeze([
+  'package.json',
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/** The exact scanner inputs changed by the schema 7→8 corpus-coverage mint. */
+export const CORPUS_COVERAGE_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/lib/observed-shape-corpus.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/**
+ * The exact scanner inputs changed by the schema 8→9 epoch-dark mint — FIVE,
+ * not four, and that is why the retained-count law below had to stop being a
+ * hard-coded seven. `package.json` moved on its own (two added npm scripts, the
+ * lockfile untouched) and `observed-shape-corpus.mjs` moved for EP-1, both
+ * BEFORE this mint was cut; the three instrument files are the mint's own.
+ */
+export const EPOCH_DARK_CORPUS_SCANNER_DELTA_PATHS = Object.freeze([
+  'package.json',
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/lib/observed-shape-corpus.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/**
+ * The exact scanner inputs changed by the schema 9→10 prose-regen mint — FOUR.
+ * `package.json` moved on its own before this mint was cut (one added
+ * lint-staged binding, the lockfile untouched); the three instrument files are
+ * the mint's own schema rung. `observed-shape-corpus.mjs` is NOT here: this mint
+ * changes no corpus decision, which is why the inventory is expected to
+ * reconcile all-same.
+ *
+ * ⚠ DELIBERATELY ITS OWN CONSTANT even though the schema 6→7 delta happens to
+ * name the same four paths today. These are two different recorded transitions,
+ * and aliasing them would let an edit made for one silently redefine the other's
+ * governed provenance. Each target owns its own closed subject to accept.
+ */
+export const PROSE_REGEN_SCANNER_DELTA_PATHS = Object.freeze([
+  'package.json',
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/**
+ * The schema-10 → 11 detector delta, and every path is this lane's own work:
+ *   • check-observed-shape-readers.mjs — TE-OSHAPE-1's drift classifier + fourth
+ *     door, and the ninth explained-writer declaration;
+ *   • observed-shape-baseline.mjs — the schema bump and the retired-10 validator;
+ *   • migrate-observed-shape-readers.mjs — this rung;
+ *   • tests/fixtures/spatialPackFixtures.js — the corpus FIXTURE, which had
+ *     already drifted before this lane began (1 of 11 stale at the pristine base)
+ *     and is exactly the input whose refusal darkened the instrument. It is
+ *     carried here as a DELTA rather than waved through, because the ritual's
+ *     law is that modified paths equal the declared set exactly.
+ * ⛔ `package.json` and the lockfile are NOT in this set and must not be: this
+ * lane changed no dependency and no script.
+ */
+export const TREASURY_ADMISSION_SCANNER_DELTA_PATHS = Object.freeze([
+  // ⚠ THE FIFTH PATH IS NOT THIS LANE'S WORK, AND IT IS DECLARED RATHER THAN RECLASSIFIED.
+  // The strip-finish train removed the dead `gen:atlas-samples` script, so `package.json`
+  // differs from the schema-10 predecessor at the tree this rung is minted against. No
+  // parser moved and the temptation to call it an input is real — but package.json sits on
+  // the DETECTOR side by explicit estate law (any package.json byte is a mint trigger) and
+  // by this instrument's own classifier, so the lawful response is to name it in the
+  // governed delta and let the review accept it, never to widen the classifier the first
+  // time it inconveniences its author. The 8→9 rung did exactly this for two ADDED scripts,
+  // which is the precedent this row follows.
+  'package.json',
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+  'tests/fixtures/spatialPackFixtures.js',
+]);
+
+/**
+ * The schema-11 → 12 detector delta — THREE paths, and every one of them is the schema
+ * rung itself rather than a change of detector semantics:
+ *   • observed-shape-baseline.mjs — the bump and the retired-11 validator;
+ *   • migrate-observed-shape-readers.mjs — this rung;
+ *   • check-observed-shape-readers.mjs — the LIVE-VALIDATOR BINDING and nothing else.
+ *     `runtime.validateBaseline` names the live validator BY NAME, so a rung that renames
+ *     it (each one does, so the retired validators keep their own numbers) necessarily
+ *     moves this file too. It is three identical `validateSchema11Baseline` →
+ *     `validateSchema12Baseline` token replacements: the import, the row-tag assertion's
+ *     envelope check, and the runtime binding. No filter, no door, no declaration.
+ *
+ * ⚠ THE FIRST DRAFT OF THIS CONSTANT DECLARED TWO PATHS AND WAS WRONG, which is recorded
+ * because the instrument is what caught it rather than review: dropping the checker made
+ * `run()` validate a schema-12 baseline with the schema-11 validator and six sentinel arms
+ * reddened with "baseline is not schema 11". `governedScannerTransitionOf` would then have
+ * refused the mint anyway — modified paths must EQUAL the declared set — so the delta and
+ * the code cannot silently disagree in either direction.
+ *
+ * ⛔ `package.json` and the lockfile are NOT in this set and must not be. The 10→11 rung
+ * had to declare package.json because the strip-finish train had moved it; nothing has
+ * moved it since, this lane changed no dependency and no script, and any package.json
+ * byte is a mint trigger under estate law.
+ */
+export const GENESIS_TIES_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/**
+ * The schema-12 → 13 detector delta — FIVE paths, in two groups that must not be
+ * confused with one another:
+ *   • package.json + package-lock.json — THE SUBJECT OF THIS RUNG. `three@0.185.1`
+ *     and its single lock record leave; the diff is 8 deletions and ZERO insertions,
+ *     with no registry-metadata churn. These two sit on the DETECTOR side by explicit
+ *     estate law (any package.json byte is a mint trigger) and by this instrument's own
+ *     classifier, so the lawful response is to name them in the governed delta and let
+ *     the review accept them — the 8→9 and 10→11 rungs each did exactly this.
+ *   • the three instrument files — the bump and retired-12 validator, this rung, and
+ *     the checker's live-validator binding. Bookkeeping, carried for the same reason
+ *     the 11→12 rung carried them, and no detector semantics move.
+ *
+ * ⛔ NOTHING ELSE MOVED, and that is verified rather than assumed: a recorded-vs-computed
+ * sweep over all eleven governed inputs at the schema-12 freeze reported exactly these
+ * two package files MOVED and the other nine SAME — including
+ * `tests/fixtures/spatialPackFixtures.js`, whose owed digest (§783.3) the schema-12
+ * freeze had already absorbed.
+ */
+export const DEAD_DEPENDENCY_SCANNER_DELTA_PATHS = Object.freeze([
+  'package-lock.json',
+  'package.json',
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/**
+ * The schema-13 → 14 delta: THREE instrument paths and nothing else.
+ *
+ * The subject of this rung IS one of the instrument files, which is what makes its
+ * delta smaller than every rung since 10: there is no separate subject to declare.
+ *   - `check-observed-shape-readers.mjs` — clause 4b itself, plus the live-validator
+ *     binding moving from `validateSchema13Baseline` to `validateSchema14Baseline`;
+ *   - `observed-shape-baseline.mjs` — the 13 → 14 bump, the retired-13 constant and
+ *     its re-bound validator;
+ *   - `migrate-observed-shape-readers.mjs` — this rung.
+ *
+ * ⛔ NO package file is in this delta and none may be: lane T9 changed no dependency
+ * and no script, and any `package.json` byte is itself a mint trigger.
+ */
+export const PRESET_LIGHT_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/**
+ * The schema-14 → 15 delta: FOUR paths, every one of them an instrument file.
+ *   - `observed-shape-corpus.mjs` — THE SUBJECT: the churn rule's stable-core guard;
+ *   - `check-observed-shape-readers.mjs` — the live-validator binding moving from
+ *     `validateSchema14Baseline` to `validateSchema15Baseline`;
+ *   - `observed-shape-baseline.mjs` — the 14 → 15 bump, the retired-14 constant and
+ *     its re-bound validator;
+ *   - `migrate-observed-shape-readers.mjs` — this rung.
+ *
+ * ⭐ THE SUBJECT IS ITSELF A DETECTOR SOURCE, as it was at the 7→8 corpus-coverage
+ * rung — the only other rung whose subject was this same file — so the set is four
+ * instrument paths rather than a subject plus its bookkeeping.
+ *
+ * ⛔ NO package file is in this delta and none may be, and here that is MEASURED
+ * rather than asserted: a recorded-vs-computed sweep of all eleven governed inputs
+ * against the schema-14 freeze reported `package.json` and `package-lock.json`
+ * byte-SAME, with `observed-shape-corpus.mjs` the ONLY moved entry before this rung
+ * was written. Any `package.json` byte is itself a mint trigger, so an extra path
+ * here — or one of these four remaining byte-identical — is a different migration and
+ * fails closed.
+ */
+export const STABLE_CORE_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/lib/observed-shape-corpus.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/**
+ * The schema-15 → 16 delta: THREE instrument paths and nothing else.
+ *
+ * ⛔ MEASURED, NEVER LISTED (chair condition, §893.4). The set below was derived by
+ * observing what minting this rung actually changed — `git diff --name-only` over the
+ * eleven governed inputs at the minted tip — and then re-measured after the set was
+ * written, because writing it changes `migrate-observed-shape-readers.mjs`, which is
+ * itself a member. The declared set is therefore a FIXED POINT of its own measurement.
+ * A mis-declared delta set is how rung 10 → 11 became permanently unmigratable.
+ *
+ * The subject of this rung IS one of the instrument files, as at 13 → 14, which is what
+ * makes its delta three rather than a subject plus its bookkeeping:
+ *   - `check-observed-shape-readers.mjs` — THE SUBJECT: the door's shape-scoped clause 1,
+ *     its companion-gate clause 2 and the three ENCOUNTERS rows, plus the live-validator
+ *     binding moving from `validateSchema15Baseline` to `validateSchema16Baseline`;
+ *   - `observed-shape-baseline.mjs` — the 15 → 16 bump, the retired-15 constant and its
+ *     re-bound validator;
+ *   - `migrate-observed-shape-readers.mjs` — this rung.
+ *
+ * ⛔ NO package file is in this delta and none may be: this rung changes no dependency
+ * and no script, and any `package.json` byte is itself a mint trigger. An extra path
+ * here — or one of these three remaining byte-identical — is a different migration and
+ * fails closed.
+ */
+export const COMPANION_GATE_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/**
+ * The schema-16 → 17 delta: FOUR paths — a SUBJECT plus the three bookkeeping files.
+ *
+ * ⛔ MEASURED, NEVER LISTED. Derived by hashing each of the ELEVEN governed detector
+ * inputs against the PREDECESSOR'S OWN RECORDED MANIFEST — not against HEAD, and not by
+ * reasoning about which files this lane touched. At the corpus car the measurement named
+ * exactly one moved path (`observed-shape-corpus.mjs`); the other three are this rung's
+ * own bookkeeping and were re-measured after the set was written, because writing it
+ * changes `migrate-observed-shape-readers.mjs`, which is itself a member. The declared
+ * set is a FIXED POINT of its own measurement. A mis-declared delta set is how rung
+ * 10 → 11 became permanently unmigratable.
+ *
+ *   - `observed-shape-corpus.mjs` — THE SUBJECT: the stress-loaded topology pass;
+ *   - `check-observed-shape-readers.mjs` — the live-validator binding moving from
+ *     `validateSchema16Baseline` to `validateSchema17Baseline`;
+ *   - `observed-shape-baseline.mjs` — the 16 → 17 bump, the retired-16 constant and its
+ *     re-bound validator;
+ *   - `migrate-observed-shape-readers.mjs` — this rung.
+ *
+ * ⛔ NO package file is in this delta and none may be: this rung changes no dependency
+ * and no script, and any `package.json` byte is itself a mint trigger. An extra path
+ * here — or one of these four remaining byte-identical — is a different migration and
+ * fails closed. This is the FIRST four-path delta since 14 → 15, and it is four rather
+ * than three because the subject is a detector input that is NOT one of the three files
+ * every rung already moves.
+ */
+export const STRESS_TOPOLOGY_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/lib/observed-shape-corpus.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/**
+ * The schema-17 → 18 delta: THREE paths — the bookkeeping set and nothing else.
+ *
+ * ⛔ MEASURED, NEVER LISTED, and this rung's measurement has an unusually clean shape.
+ * Each of the ELEVEN governed detector inputs was hashed against the PREDECESSOR'S OWN
+ * RECORDED MANIFEST at the composed tip BEFORE a byte of this rung was written, and ALL
+ * ELEVEN came back byte-identical — including `package.json` and `package-lock.json`,
+ * measured rather than asserted, because any `package.json` byte is itself a mint
+ * trigger. The delta is therefore exactly the set this rung goes on to touch, and it was
+ * re-measured after the set was written, because writing it changes
+ * `migrate-observed-shape-readers.mjs`, which is itself a member. The declared set is a
+ * FIXED POINT of its own measurement. A mis-declared delta set is how rung 10 → 11 became
+ * permanently unmigratable.
+ *
+ *   - `check-observed-shape-readers.mjs` — the live-validator binding moving from
+ *     `validateSchema17Baseline` to `validateSchema18Baseline`, and the register's `_doc`
+ *     header, which had described SCHEMA 10 and an eight-identity bank through eight
+ *     rungs of drift;
+ *   - `observed-shape-baseline.mjs` — the 17 → 18 bump, the retired-17 constant and its
+ *     re-bound validator;
+ *   - `migrate-observed-shape-readers.mjs` — this rung.
+ *
+ * ⛔ THREE RATHER THAN FOUR, and the missing one is the point: 16 → 17 carried a fourth
+ * path because its SUBJECT was `observed-shape-corpus.mjs`, a detector input outside the
+ * bookkeeping set. This rung's subject is not a file at all — it is the receipt's
+ * provenance — so it moves nothing beyond the three files every verdict-only rung moves.
+ * An extra path here, or one of these three remaining byte-identical, is a different
+ * migration and fails closed.
+ */
+export const LINEAGE_REANCHOR_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/**
+ * The schema-18 → 19 delta: THREE paths — the bookkeeping set and nothing else.
+ *
+ * ⛔ MEASURED, NEVER LISTED. Each of the ELEVEN governed detector inputs was hashed
+ * against the PREDECESSOR'S OWN RECORDED MANIFEST at the committed retirement BEFORE a
+ * byte of this rung was written. Exactly one came back MOVED —
+ * `check-observed-shape-readers.mjs`, which carries the retirement itself — and the other
+ * ten byte-identical, `package.json` and `package-lock.json` among them, measured rather
+ * than asserted because any `package.json` byte is itself a mint trigger. The other two
+ * paths below are this rung's own bookkeeping, and the set was re-measured after it was
+ * written, because writing it changes `migrate-observed-shape-readers.mjs`, which is
+ * itself a member. The declared set is a FIXED POINT of its own measurement. A
+ * mis-declared delta set is how rung 10 → 11 became permanently unmigratable.
+ *
+ *   - `check-observed-shape-readers.mjs` — THE SUBJECT: the retired entry itself, the
+ *     re-triage docblock that now records both of the row's moves, the register's `_doc`
+ *     header, and the live-validator binding moving from `validateSchema18Baseline` to
+ *     `validateSchema19Baseline`;
+ *   - `observed-shape-baseline.mjs` — the 18 → 19 bump, the retired-18 constant and its
+ *     re-bound validator;
+ *   - `migrate-observed-shape-readers.mjs` — this rung.
+ *
+ * ⛔ THREE RATHER THAN FOUR, for the same reason 15 → 16 and 17 → 18 were three: the
+ * subject is one of the bookkeeping files. An extra path here, or one of these three
+ * remaining byte-identical, is a different migration and fails closed.
+ */
+export const EXEMPTION_RETIREMENT_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/**
+ * The 19 → 20 delta — the bookkeeping set, THREE paths:
+ *   - `check-observed-shape-readers.mjs` — the bank fence (`bankOf`, `assertBankTwins`,
+ *     the write reading the literal module), the live-validator binding moving from
+ *     `validateSchema19Baseline` to `validateSchema20Baseline`, the register's `_doc`
+ *     header and the schema index;
+ *   - `observed-shape-baseline.mjs` — the 19 → 20 bump, the retired-19 constant and its
+ *     re-bound validator;
+ *   - `migrate-observed-shape-readers.mjs` — this rung and `DECLARED_BANK_BY_TARGET`.
+ *
+ * ⛔ THREE RATHER THAN FOUR, as 15 → 16, 17 → 18 and 18 → 19 were three: the subject is
+ * the write, which lives in a bookkeeping file. The literal module the write reads is a
+ * test-side file and NOT a governed input, by design (a bank shrink must stay a hand
+ * edit, not a rung). An extra path here, or one of these three remaining byte-identical,
+ * is a different migration and fails closed.
+ */
+export const BANK_FENCE_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/**
+ * The 20 → 21 delta — the same bookkeeping set, THREE paths:
+ *   - `check-observed-shape-readers.mjs` — the live-validator binding moving from
+ *     `validateSchema20Baseline` to `validateSchema21Baseline`, the register's `_doc`
+ *     header (which now states what the rung admits and why the other two rows stay
+ *     ordinary) and the schema index;
+ *   - `observed-shape-baseline.mjs` — the 20 → 21 bump, the retired-20 constant and its
+ *     re-bound validator;
+ *   - `migrate-observed-shape-readers.mjs` — this rung and its declared post-bank.
+ *
+ * ⛔ THE NEW READER IS NOT IN THIS SET, and that is the whole point of it being a SUBJECT
+ * file rather than a detector one: `src/components/new/relationshipsDeskRead.js` is scanned,
+ * not scanning. It moves `sourceTreeDigest` and `scanTreeDigest`, which the transition
+ * records on its own; the DETECTOR delta is these three and no more.
+ */
+export const RELATIONSHIPS_MOUNT_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/**
+ * The 21 → 22 delta — the same bookkeeping set, THREE paths:
+ *   - `check-observed-shape-readers.mjs` — the live-validator binding moving from
+ *     `validateSchema21Baseline` to `validateSchema22Baseline`, the register's `_doc`
+ *     header (which now states what the rung moves, what it deletes, and why the roster
+ *     does not move with it) and the schema index;
+ *   - `observed-shape-baseline.mjs` — the 21 → 22 bump, the retired-21 constant and its
+ *     re-bound validator;
+ *   - `migrate-observed-shape-readers.mjs` — this rung and its declared post-bank.
+ *
+ * ⛔ THE MOVED READER AND THE VIEW MODEL ARE NOT IN THIS SET, for the reason rung 21 spelled
+ * for the reader's first home: `src/domain/display/stateProse/relationshipsDeskRead.js` and
+ * `src/pdf/lib/viewModel.js` are SUBJECT files, scanned rather than scanning. They move
+ * `sourceTreeDigest` and `scanTreeDigest`, which the transition records on its own; the
+ * DETECTOR delta is these three and no more.
+ */
+export const DOMAIN_READER_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/**
+ * The 22 → 23 delta — the same bookkeeping set, THREE paths:
+ *   - `check-observed-shape-readers.mjs` — THE SUBJECT as well as the bookkeeping: the two new
+ *     `EXPLAINED_WRITER_EXEMPTIONS` declarations, the live-validator binding moving from
+ *     `validateSchema22Baseline` to `validateSchema23Baseline`, the register's `_doc` header
+ *     and the schema index;
+ *   - `observed-shape-baseline.mjs` — the 22 → 23 bump, the retired-22 constant and its
+ *     re-bound validator;
+ *   - `migrate-observed-shape-readers.mjs` — this rung and its declared post-bank.
+ *
+ * ⛔ MEASURED, NEVER LISTED, and this rung's measurement has rung 18's clean shape: each of the
+ * ELEVEN governed detector inputs was hashed against the PREDECESSOR'S OWN RECORDED MANIFEST at
+ * ⟨BASE⟩ before a byte of this rung was written, and ALL ELEVEN came back byte-identical —
+ * `package.json` and `package-lock.json` measured rather than asserted, because any
+ * `package.json` byte is itself a mint trigger. The set was re-measured after it was written,
+ * because writing it changes this file, which is itself a member; the declared set is a FIXED
+ * POINT of its own measurement. A mis-declared delta set is how rung 10 → 11 became permanently
+ * unmigratable.
+ *
+ * ⛔ THE FOUR READERS AND `src/domain/edit/recordRegister.js` ARE NOT IN THIS SET, for the
+ * reason rungs 21 and 22 both spelled for theirs: they are SUBJECT files, scanned rather than
+ * scanning. They move `sourceTreeDigest` and `scanTreeDigest`, which the transition records on
+ * its own; the DETECTOR delta is these three and no more. The walkers and the bank literal are
+ * test-side and are not governed inputs at all, by the design note beside `BANK_LITERAL_MODULE`.
+ */
+export const EDIT_MODE_READERS_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/**
+ * The 23 → 24 delta — the same bookkeeping set, THREE paths:
+ *   - `check-observed-shape-readers.mjs` — the live-validator binding moving from
+ *     `validateSchema23Baseline` to `validateSchema24Baseline`, the register's `_doc` header and
+ *     the schema index; NO declaration (the roster stays ten);
+ *   - `observed-shape-baseline.mjs` — the 23 → 24 bump, the retired-23 constant and its re-bound
+ *     validator;
+ *   - `migrate-observed-shape-readers.mjs` — this rung and its declared post-bank.
+ * ⛔ THE SUBJECT FILES THE RE-DEAL MOVED ARE NOT IN IT: they are scanned rather than scanning, and
+ * they move `sourceTreeDigest` and `scanTreeDigest`, which the transition records on its own.
+ */
+export const CORPUS_REDEAL_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/**
+ * The schema-24 → 25 detector delta — FOUR paths, in the same two groups the schema-13
+ * delta (`DEAD_DEPENDENCY_SCANNER_DELTA_PATHS`) drew, which must not be confused:
+ *   • `package-lock.json` — THE SUBJECT OF THIS RUNG. Two lock records move (dompurify
+ *     3.4.12 -> 3.4.17, fflate 0.8.2 -> 0.8.3; version, resolved, integrity; 6 insertions,
+ *     6 deletions). It sits on the DETECTOR side by explicit estate law and by this
+ *     instrument's own classifier, so the lawful response is to name it in the governed
+ *     delta and let the review accept it, exactly as 13 named both package files.
+ *     ⛔ `package.json` is NOT in this delta and may not be: it is byte-identical, and the
+ *     transition refuses a declared path whose content did not change.
+ *   • the three instrument files — the 24 → 25 bump and the retired-24 validator, this rung
+ *     and its declared post-bank, and the checker's live-validator binding, `_doc` and schema
+ *     index. Bookkeeping, carried for the reason every rung carries them; no detector
+ *     semantics move.
+ * ⛔ NOTHING ELSE MOVED, verified rather than assumed: a recorded-vs-computed sweep over all
+ * eleven governed detector inputs against the committed schema-24 register, on the bumped
+ * tree before this rung was written, reported `package-lock.json` MOVED and the other ten SAME.
+ */
+export const ADVISORY_LOCKFILE_SCANNER_DELTA_PATHS = Object.freeze([
+  'package-lock.json',
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/**
+ * The schema-25 → 26 detector delta — FOUR paths, in the schema-17 rung's shape
+ * (`STRESS_TOPOLOGY_SCANNER_DELTA_PATHS`), because the subject is again the corpus builder:
+ *   • `scripts/lib/observed-shape-corpus.mjs` — THE SUBJECT: producer 1c, the famine topology pass;
+ *   • the three instrument files — the 25 → 26 bump and the retired-25 validator, this rung and its
+ *     declared post-bank, and the checker's live-validator binding, `_doc` and schema index.
+ * ⛔ NOTHING ELSE MOVED, measured rather than assumed: a recorded-vs-computed sweep over all eleven
+ * governed detector inputs against the committed schema-25 register's own manifest reported all
+ * eleven SAME at ⟨BASE⟩ cd3f05778, and exactly these four MOVED once the rung was written.
+ */
+export const FED_WORLD_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/lib/observed-shape-corpus.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/**
+ * The schema-26 → 27 detector delta — FOUR paths, the fed-world rung's set:
+ *   • `scripts/check-observed-shape-readers.mjs` — a SUBJECT: the shape-family theta 0.80 → 0.76
+ *     and the three crisis declarations, plus the live-validator binding, `_doc` and schema index;
+ *   • `scripts/lib/observed-shape-corpus.mjs` — a SUBJECT: producer 1d, the window topology pass;
+ *   • the two bookkeeping files — the 26 → 27 bump and the retired-26 validator, and this rung and
+ *     its declared post-bank.
+ * ⛔ NOTHING ELSE MOVED among the eleven governed detector inputs, measured rather than assumed:
+ * the scanner transition the migration reports names exactly these four MOVED and seven retained.
+ */
+export const WINDOW_RUNG1_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/lib/observed-shape-corpus.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/**
+ * The schema-27 → 28 detector delta — FOUR paths, the fed-world rung's set:
+ *   • `scripts/lib/observed-shape-corpus.mjs` — THE SUBJECT: producer 2b, the tier-change coverage
+ *     pulse;
+ *   • the three instrument files — the 27 → 28 bump and the retired-27 validator, this rung and its
+ *     declared post-bank, and the checker's live-validator binding, `_doc` and schema index.
+ * ⛔ NOTHING ELSE MOVED among the eleven governed detector inputs, measured rather than assumed: the
+ * walker's live-estate drift arm named the corpus builder as the ONLY moved detector source before
+ * the three instrument files were touched.
+ */
+export const TIER_COVERAGE_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/lib/observed-shape-corpus.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/**
+ * The schema-28 → 29 delta — the bookkeeping set, THREE paths (the schema-23 shape, the last rung
+ * that declared without a corpus move):
+ *   • `scripts/check-observed-shape-readers.mjs` — THE SUBJECT: the one declaration, plus the
+ *     live-validator binding, `_doc` and schema index;
+ *   • `scripts/lib/observed-shape-baseline.mjs` — the 28 → 29 bump and the retired-28 validator;
+ *   • `scripts/migrate-observed-shape-readers.mjs` — this rung and its declared post-bank.
+ * ⛔ THE CORPUS BUILDER DID NOT MOVE. `src/generators/steps/stressConfirmPass.js` (the writer's
+ * re-spelling) is a SUBJECT file, scanned rather than scanning; it moves `sourceTreeDigest` and
+ * `scanTreeDigest`, which the transition records on its own. The bank literal is test-side.
+ */
+export const MIGRATION_DIRECTION_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/**
+ * The schema-29 → 30 delta — the same bookkeeping set, THREE paths:
+ *   • `scripts/check-observed-shape-readers.mjs` — the live-validator binding moving from
+ *     `validateSchema29Baseline` to `validateSchema30Baseline`, the register's `_doc` header and
+ *     the schema index; NO declaration (the roster stays fourteen);
+ *   • `scripts/lib/observed-shape-baseline.mjs` — the 29 → 30 bump, the retired-29 constant and its
+ *     re-bound validator;
+ *   • `scripts/migrate-observed-shape-readers.mjs` — this rung and its declared post-bank.
+ * ⛔ THE SUBJECT FILES THE CAST MOVED ARE NOT IN IT: the people car's generator files are scanned,
+ * not scanning, and they move `sourceTreeDigest` and `scanTreeDigest`, which the transition records
+ * on its own.
+ */
+export const PEOPLE_CAST_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/** The schema-30 → 31 delta: the same THREE bookkeeping paths (the live validator moving to
+ *  `validateSchema31Baseline`, the 30 → 31 bump with the retired-30 constant, this rung). */
+export const PEOPLE_LANDING_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/** The schema-31 → 32 delta: the same THREE bookkeeping paths (the live validator moving to
+ *  `validateSchema32Baseline`, the 31 → 32 bump with the retired-31 constant, this rung). */
+export const CAR_MERGE_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/** The schema-32 → 33 delta: the same THREE bookkeeping paths (the live validator moving to
+ *  `validateSchema33Baseline`, the 32 → 33 bump with the retired-32 constant, this rung). */
+export const WAVE_W2_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/** The schema-33 → 34 delta: the same THREE bookkeeping paths. */
+export const WAVE_FOOD_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/** The schema-34 → 35 delta: FOUR paths — the corpus builder (cause 1, producer 1b′) and the three
+ *  bookkeeping paths. */
+export const WAVE_VEIL_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/lib/observed-shape-corpus.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/** The schema-35 → 36 delta: the THREE bookkeeping paths (the corpus definition is unchanged; both causes
+ *  move the corpus's year, not its builder). */
+export const TRAIN_CAR1_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/** The schema-36 → 37 delta: the THREE bookkeeping paths (the corpus definition is unchanged; the guild's
+ *  push moves the corpus's year, not its builder). */
+export const TRAIN_CAR2_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/** The schema-37 → 38 delta: the THREE bookkeeping paths (the corpus definition is unchanged; car 3's dial
+ *  moves the corpus's year, not its builder). */
+export const TRAIN_CAR3_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/** The schema-38 → 39 delta: the THREE bookkeeping paths (the corpus definition is unchanged). */
+export const TRAIN_CAR4_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/** The schema-39 → 40 delta: the THREE bookkeeping paths (the corpus definition is unchanged) and, MEASURED
+ *  at the style wave's final tip (STYLE-2-MERGE closing act 5, 2026-11-11), `package.json`: CI-FIT's
+ *  001fc7e00 (merged at STYLE-2-MERGE point 40, 4ca5cee57) gave `build` its own heap — a build-script edit
+ *  that moves no scanned or executed source — while the register's ordinary `--write` stood refused on the
+ *  `outcome on outcome` row (point 12), so the drift reached this rung un-absorbed. Act 2 was cut at the
+ *  SW-B7b tip with three paths; at the final tip the transition is these four, or the door refuses. */
+export const PUBLIC_PROSE_SCANNER_DELTA_PATHS = Object.freeze([
+  'package.json',
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/** The schema-40 → 41 delta: the THREE bookkeeping paths (the corpus definition is unchanged; package.json and
+ *  the eight generated execution inputs were absorbed by rung 40's act 2 at d8d7ceee4). */
+export const PLAYED_WORLDS_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/** The schema-41 → 42 delta: FOUR paths — the corpus builder (producer 2b's tier seed) and the three bookkeeping paths. */
+export const AGREE_TIER_SEED_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/lib/observed-shape-corpus.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
+  'package-lock.json',
+  'package.json',
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/governed-artifact-io.mjs',
+  'scripts/lib/legacy-reader-shape-scan.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/lib/observed-shape-corpus.mjs',
+  'scripts/lib/observed-shape-governance.mjs',
+  'scripts/lib/reader-shape-scan.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+  'tests/fixtures/spatialPackFixtures.js',
+]);
+
+const BANKED_EXPLAINED_WRITER_SCANNER_TRANSITION_POLICY =
+  'schema-6-to-7-exact-scanner-transition-v1';
+const TREASURY_ADMISSION_SCANNER_TRANSITION_POLICY =
+  'schema-10-to-11-exact-scanner-transition-v1';
+const GENESIS_TIES_SCANNER_TRANSITION_POLICY =
+  'schema-11-to-12-exact-scanner-transition-v1';
+const DEAD_DEPENDENCY_SCANNER_TRANSITION_POLICY =
+  'schema-12-to-13-exact-scanner-transition-v1';
+const PRESET_LIGHT_SCANNER_TRANSITION_POLICY =
+  'schema-13-to-14-exact-scanner-transition-v1';
+const STABLE_CORE_SCANNER_TRANSITION_POLICY =
+  'schema-14-to-15-exact-scanner-transition-v1';
+const COMPANION_GATE_SCANNER_TRANSITION_POLICY =
+  'schema-15-to-16-exact-scanner-transition-v1';
+const STRESS_TOPOLOGY_SCANNER_TRANSITION_POLICY =
+  'schema-16-to-17-exact-scanner-transition-v1';
+const LINEAGE_REANCHOR_SCANNER_TRANSITION_POLICY =
+  'schema-17-to-18-exact-scanner-transition-v1';
+const EXEMPTION_RETIREMENT_SCANNER_TRANSITION_POLICY =
+  'schema-18-to-19-exact-scanner-transition-v1';
+const BANK_FENCE_SCANNER_TRANSITION_POLICY =
+  'schema-19-to-20-exact-scanner-transition-v1';
+const RELATIONSHIPS_MOUNT_SCANNER_TRANSITION_POLICY =
+  'schema-20-to-21-exact-scanner-transition-v1';
+const DOMAIN_READER_SCANNER_TRANSITION_POLICY =
+  'schema-21-to-22-exact-scanner-transition-v1';
+const EDIT_MODE_READERS_SCANNER_TRANSITION_POLICY =
+  'schema-22-to-23-exact-scanner-transition-v1';
+const CORPUS_REDEAL_SCANNER_TRANSITION_POLICY =
+  'schema-23-to-24-exact-scanner-transition-v1';
+const ADVISORY_LOCKFILE_SCANNER_TRANSITION_POLICY =
+  'schema-24-to-25-exact-scanner-transition-v1';
+const FED_WORLD_SCANNER_TRANSITION_POLICY =
+  'schema-25-to-26-exact-scanner-transition-v1';
+const WINDOW_RUNG1_SCANNER_TRANSITION_POLICY =
+  'schema-26-to-27-exact-scanner-transition-v1';
+const TIER_COVERAGE_SCANNER_TRANSITION_POLICY =
+  'schema-27-to-28-exact-scanner-transition-v1';
+const MIGRATION_DIRECTION_SCANNER_TRANSITION_POLICY =
+  'schema-28-to-29-exact-scanner-transition-v1';
+const PEOPLE_CAST_SCANNER_TRANSITION_POLICY =
+  'schema-29-to-30-exact-scanner-transition-v1';
+const PEOPLE_LANDING_SCANNER_TRANSITION_POLICY =
+  'schema-30-to-31-exact-scanner-transition-v1';
+const CAR_MERGE_SCANNER_TRANSITION_POLICY =
+  'schema-31-to-32-exact-scanner-transition-v1';
+const WAVE_W2_SCANNER_TRANSITION_POLICY =
+  'schema-32-to-33-exact-scanner-transition-v1';
+const WAVE_FOOD_SCANNER_TRANSITION_POLICY =
+  'schema-33-to-34-exact-scanner-transition-v1';
+const WAVE_VEIL_SCANNER_TRANSITION_POLICY =
+  'schema-34-to-35-infiltrated-topology-and-veiled-redeal-v1';
+const TRAIN_CAR1_SCANNER_TRANSITION_POLICY =
+  'schema-35-to-36-hidden-allegiance-and-j19-redeal-v1';
+const TRAIN_CAR2_SCANNER_TRANSITION_POLICY =
+  'schema-36-to-37-guild-push-redeal-v1';
+const TRAIN_CAR3_SCANNER_TRANSITION_POLICY =
+  'schema-37-to-38-car3-redeal-v1';
+const TRAIN_CAR4_SCANNER_TRANSITION_POLICY =
+  'schema-38-to-39-goals-v1';
+const PUBLIC_PROSE_SCANNER_TRANSITION_POLICY =
+  'schema-39-to-40-public-prose-writer-v1';
+const PLAYED_WORLDS_SCANNER_TRANSITION_POLICY =
+  'schema-40-to-41-played-worlds-writer-v1';
+const AGREE_TIER_SEED_SCANNER_TRANSITION_POLICY =
+  'schema-41-to-42-tier-seed-v1';
+const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
+  'schema-7-to-8-exact-scanner-transition-v1';
+const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
+  'schema-8-to-9-exact-scanner-transition-v1';
+const PROSE_REGEN_SCANNER_TRANSITION_POLICY =
+  'schema-9-to-10-exact-scanner-transition-v1';
+
+/**
+ * ⭐⭐ THE ONE TABLE THAT PAIRS A LEAF TARGET WITH ITS PREDECESSOR SCHEMA.
+ *
+ * All five leaf migrations run the same reconciliation, so the only way to keep
+ * them from being confusable is to make the pairing DATA that every entry point
+ * reads — never hand-written literals at separate call sites. A caller cannot
+ * migrate a schema-2 baseline to schema 6, nor re-run a retired pairing against
+ * the wrong predecessor, because no such pairing exists here.
+ *
+ * ⚠ THE CHAIN IS STRICT AND SINGLE-STEP BY CONSTRUCTION: each target's value is
+ * written as the CONSTANT for its predecessor rather than as a literal, so a
+ * skipped rung (2 → 6) is not expressible.
+ */
+export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
+  [HEURISTIC_TARGET_SCHEMA]: 2,
+  [FILTERED_TARGET_SCHEMA]: HEURISTIC_TARGET_SCHEMA,
+  [SURFACE_FILTERED_TARGET_SCHEMA]: FILTERED_TARGET_SCHEMA,
+  [BANKED_EXPLAINED_WRITER_TARGET_SCHEMA]: SURFACE_FILTERED_TARGET_SCHEMA,
+  [CORPUS_COVERAGE_TARGET_SCHEMA]: BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
+  [EPOCH_DARK_CORPUS_TARGET_SCHEMA]: CORPUS_COVERAGE_TARGET_SCHEMA,
+  [PROSE_REGEN_TARGET_SCHEMA]: EPOCH_DARK_CORPUS_TARGET_SCHEMA,
+  [TREASURY_ADMISSION_TARGET_SCHEMA]: PROSE_REGEN_TARGET_SCHEMA,
+  [GENESIS_TIES_TARGET_SCHEMA]: TREASURY_ADMISSION_TARGET_SCHEMA,
+  [DEAD_DEPENDENCY_TARGET_SCHEMA]: GENESIS_TIES_TARGET_SCHEMA,
+  [PRESET_LIGHT_TARGET_SCHEMA]: DEAD_DEPENDENCY_TARGET_SCHEMA,
+  [STABLE_CORE_TARGET_SCHEMA]: PRESET_LIGHT_TARGET_SCHEMA,
+  [COMPANION_GATE_TARGET_SCHEMA]: STABLE_CORE_TARGET_SCHEMA,
+  [STRESS_TOPOLOGY_TARGET_SCHEMA]: COMPANION_GATE_TARGET_SCHEMA,
+  [LINEAGE_REANCHOR_TARGET_SCHEMA]: STRESS_TOPOLOGY_TARGET_SCHEMA,
+  [EXEMPTION_RETIREMENT_TARGET_SCHEMA]: LINEAGE_REANCHOR_TARGET_SCHEMA,
+  [BANK_FENCE_TARGET_SCHEMA]: EXEMPTION_RETIREMENT_TARGET_SCHEMA,
+  [RELATIONSHIPS_MOUNT_TARGET_SCHEMA]: BANK_FENCE_TARGET_SCHEMA,
+  [DOMAIN_READER_TARGET_SCHEMA]: RELATIONSHIPS_MOUNT_TARGET_SCHEMA,
+  [EDIT_MODE_READERS_TARGET_SCHEMA]: DOMAIN_READER_TARGET_SCHEMA,
+  [CORPUS_REDEAL_TARGET_SCHEMA]: EDIT_MODE_READERS_TARGET_SCHEMA,
+  [ADVISORY_LOCKFILE_TARGET_SCHEMA]: CORPUS_REDEAL_TARGET_SCHEMA,
+  [FED_WORLD_TARGET_SCHEMA]: ADVISORY_LOCKFILE_TARGET_SCHEMA,
+  [WINDOW_RUNG1_TARGET_SCHEMA]: FED_WORLD_TARGET_SCHEMA,
+  [TIER_COVERAGE_TARGET_SCHEMA]: WINDOW_RUNG1_TARGET_SCHEMA,
+  [MIGRATION_DIRECTION_TARGET_SCHEMA]: TIER_COVERAGE_TARGET_SCHEMA,
+  [PEOPLE_CAST_TARGET_SCHEMA]: MIGRATION_DIRECTION_TARGET_SCHEMA,
+  [PEOPLE_LANDING_TARGET_SCHEMA]: PEOPLE_CAST_TARGET_SCHEMA,
+  [CAR_MERGE_TARGET_SCHEMA]: PEOPLE_LANDING_TARGET_SCHEMA,
+  [WAVE_W2_TARGET_SCHEMA]: CAR_MERGE_TARGET_SCHEMA,
+  [WAVE_FOOD_TARGET_SCHEMA]: WAVE_W2_TARGET_SCHEMA,
+  [WAVE_VEIL_TARGET_SCHEMA]: WAVE_FOOD_TARGET_SCHEMA,
+  [TRAIN_CAR1_TARGET_SCHEMA]: WAVE_VEIL_TARGET_SCHEMA,
+  [TRAIN_CAR2_TARGET_SCHEMA]: TRAIN_CAR1_TARGET_SCHEMA,
+  [TRAIN_CAR3_TARGET_SCHEMA]: TRAIN_CAR2_TARGET_SCHEMA,
+  [TRAIN_CAR4_TARGET_SCHEMA]: TRAIN_CAR3_TARGET_SCHEMA,
+  [PUBLIC_PROSE_TARGET_SCHEMA]: TRAIN_CAR4_TARGET_SCHEMA,
+  [PLAYED_WORLDS_TARGET_SCHEMA]: PUBLIC_PROSE_TARGET_SCHEMA,
+  [AGREE_TIER_SEED_TARGET_SCHEMA]: PLAYED_WORLDS_TARGET_SCHEMA,
+});
+
+/**
+ * ⭐ THE ONE TABLE THAT NAMES EACH LEAF PREDECESSOR'S GOVERNED ENVELOPE LAW.
+ * Sibling to the pairing above and kept beside it for the same reason: a
+ * `if (schema === 4) … else if (schema === 5) …` chain is two places to forget
+ * a rung. Schema 2 has no entry because it is the UNGOVERNED predecessor and
+ * has no validator of its own — the structural checks below are its law.
+ *
+ * ⚠ THE TABLE IS NOT DENSE, AND THE HOLE IS OLDER THAN THIS RUNG: schemas 11, 12
+ * and 13 have no entry, so a predecessor at one of those numbers is admitted on
+ * the structural checks alone rather than on its own governed envelope law. That
+ * is the three rungs 11→12, 12→13 and 13→14 each not extending this table, not a
+ * ruling that those envelopes are unguarded; the 14 entry below is this rung
+ * paying its own way rather than adding a fourth omission. ⚠ Filling 11–13 would
+ * change what three RETIRED pairings accept and is deliberately NOT done here —
+ * documented so it is not re-found as a mystery.
+ */
+const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
+  [RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA]: validateSchema4Baseline,
+  [RETIRED_FILTERED_LEAF_BASELINE_SCHEMA]: validateSchema5Baseline,
+  [RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA]: validateSchema6Baseline,
+  [RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA]: validateSchema7Baseline,
+  [CORPUS_COVERAGE_TARGET_SCHEMA]: validateSchema8Baseline,
+  [EPOCH_DARK_CORPUS_TARGET_SCHEMA]: validateSchema9Baseline,
+  [PROSE_REGEN_TARGET_SCHEMA]: validateSchema10Baseline,
+  // The schema-15 rung's own predecessor. `validateSchema14Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 14
+  // as schema 14 after the live number moves past it.
+  [PRESET_LIGHT_TARGET_SCHEMA]: validateSchema14Baseline,
+  // The schema-16 rung's own predecessor. `validateSchema15Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 15
+  // as schema 15 after the live number moves past it.
+  [STABLE_CORE_TARGET_SCHEMA]: validateSchema15Baseline,
+  // The schema-17 rung's own predecessor. `validateSchema16Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 16
+  // as schema 16 after the live number moves past it.
+  [COMPANION_GATE_TARGET_SCHEMA]: validateSchema16Baseline,
+  // The schema-18 rung's own predecessor. `validateSchema17Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 17
+  // as schema 17 after the live number moves past it.
+  [STRESS_TOPOLOGY_TARGET_SCHEMA]: validateSchema17Baseline,
+  // The schema-19 rung's own predecessor. `validateSchema18Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 18
+  // as schema 18 after the live number moves past it.
+  [LINEAGE_REANCHOR_TARGET_SCHEMA]: validateSchema18Baseline,
+  // The schema-20 rung's own predecessor. `validateSchema19Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 19
+  // as schema 19 after the live number moves past it.
+  [EXEMPTION_RETIREMENT_TARGET_SCHEMA]: validateSchema19Baseline,
+  // The schema-21 rung's own predecessor. `validateSchema20Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 20
+  // as schema 20 after the live number moves past it.
+  [BANK_FENCE_TARGET_SCHEMA]: validateSchema20Baseline,
+  // The schema-22 rung's own predecessor. `validateSchema21Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 21
+  // as schema 21 after the live number moves past it.
+  [RELATIONSHIPS_MOUNT_TARGET_SCHEMA]: validateSchema21Baseline,
+  // The schema-23 rung's own predecessor. `validateSchema22Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 22
+  // as schema 22 after the live number moves past it.
+  [DOMAIN_READER_TARGET_SCHEMA]: validateSchema22Baseline,
+  // The schema-24 rung's own predecessor. `validateSchema23Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 23
+  // as schema 23 after the live number moves past it.
+  [EDIT_MODE_READERS_TARGET_SCHEMA]: validateSchema23Baseline,
+  // The schema-25 rung's own predecessor. `validateSchema24Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 24
+  // as schema 24 after the live number moves past it.
+  [CORPUS_REDEAL_TARGET_SCHEMA]: validateSchema24Baseline,
+  // The schema-26 rung's own predecessor. `validateSchema25Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 25
+  // as schema 25 after the live number moves past it.
+  [ADVISORY_LOCKFILE_TARGET_SCHEMA]: validateSchema25Baseline,
+  // The schema-27 rung's own predecessor. `validateSchema26Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 26
+  // as schema 26 after the live number moves past it.
+  [FED_WORLD_TARGET_SCHEMA]: validateSchema26Baseline,
+  // The schema-28 rung's own predecessor. `validateSchema27Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 27
+  // as schema 27 after the live number moves past it.
+  [WINDOW_RUNG1_TARGET_SCHEMA]: validateSchema27Baseline,
+  // The schema-29 rung's own predecessor. `validateSchema28Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 28
+  // as schema 28 after the live number moves past it.
+  [TIER_COVERAGE_TARGET_SCHEMA]: validateSchema28Baseline,
+  // The schema-30 rung's own predecessor. `validateSchema29Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 29
+  // as schema 29 after the live number moves past it.
+  [MIGRATION_DIRECTION_TARGET_SCHEMA]: validateSchema29Baseline,
+  // The schema-31 rung's own predecessor, validated as schema 30 by its retired literal.
+  [PEOPLE_CAST_TARGET_SCHEMA]: validateSchema30Baseline,
+  // The schema-32 rung's own predecessor (the car's genesis), validated as schema 31 by its
+  // retired literal.
+  [PEOPLE_LANDING_TARGET_SCHEMA]: validateSchema31Baseline,
+  // The schema-33 rung's own predecessor (MERGE-CAR), validated as schema 32 by its retired literal.
+  [CAR_MERGE_TARGET_SCHEMA]: validateSchema32Baseline,
+  // The schema-34 rung's own predecessor (MERGE-WAVE, W2 DEF), validated as schema 33 by its retired literal.
+  [WAVE_W2_TARGET_SCHEMA]: validateSchema33Baseline,
+  // The schema-35 rung's own predecessor (MERGE-WAVE, FIX-FOOD-ISOLATION), validated as schema 34.
+  [WAVE_FOOD_TARGET_SCHEMA]: validateSchema34Baseline,
+  // The schema-36 rung's own predecessor (MERGE-WAVE, FIX-PUBLIC-VEIL), validated as schema 35.
+  [WAVE_VEIL_TARGET_SCHEMA]: validateSchema35Baseline,
+  // The schema-37 rung's own predecessor (MERGE-TRAIN, ALLEGIANCE-CAR1), validated as schema 36.
+  [TRAIN_CAR1_TARGET_SCHEMA]: validateSchema36Baseline,
+  // The schema-38 rung's own predecessor (MERGE-TRAIN, ALLEGIANCE-CAR2), validated as schema 37.
+  [TRAIN_CAR2_TARGET_SCHEMA]: validateSchema37Baseline,
+  // The schema-39 rung's own predecessor (MERGE-TRAIN, ALLEGIANCE-CAR3), validated as schema 38.
+  [TRAIN_CAR3_TARGET_SCHEMA]: validateSchema38Baseline,
+  // The schema-40 rung's own predecessor (MERGE-TRAIN, ALLEGIANCE-CAR4), validated as schema 39.
+  [TRAIN_CAR4_TARGET_SCHEMA]: validateSchema39Baseline,
+  // The schema-41 rung's own predecessor (SW-B7b, the public prose writer), validated as schema 40.
+  [PUBLIC_PROSE_TARGET_SCHEMA]: validateSchema40Baseline,
+  [PLAYED_WORLDS_TARGET_SCHEMA]: validateSchema41Baseline,
+});
+
+const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
+const leafMigrationKindOf = (targetSchema) => (
+  `observed-shape-schema-${LEAF_MIGRATION_PREDECESSOR[targetSchema]}-to-${targetSchema}-migration`
+);
+
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
+
+export const GOVERNED_LEGACY_ALGORITHM = Object.freeze({
+  baseSha: LEGACY_ALGORITHM_BASE_SHA,
+  sourceBlobSha: LEGACY_ALGORITHM_BLOB_SHA,
+  enrichment: LEGACY_ALGORITHM_ENRICHMENT,
+});
+
+const ABBREVIATED_GIT_SHA = /^[0-9a-f]{7,40}$/;
+const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
+
+const normalizedText = (value) => String(value || '').replace(/\s+/g, ' ').trim();
+const sortedUnique = (values) => [...new Set(values)].sort();
+const equalArrays = (a, b) => a.length === b.length && a.every((value, i) => value === b[i]);
+const exactAddress = (finding) => [finding.file, finding.pos, finding.key].join('\u0000');
+const predecessorAddress = (file, identity) => [file, identity].join('\u0000');
+const isRecord = (value) => value != null && typeof value === 'object'
+  && !Array.isArray(value) && Object.getPrototypeOf(value) === Object.prototype;
+
+function positiveSafeInteger(value, label) {
+  if (!Number.isSafeInteger(value) || value < 1) {
+    throw new Error(`schema-2 predecessor ${label} must be a positive safe integer; received ${JSON.stringify(value)}`);
+  }
+  return value;
+}
+
+function nonNegativeSafeInteger(value, label) {
+  if (!Number.isSafeInteger(value) || value < 0) {
+    throw new Error(`schema-2 predecessor ${label} must be a non-negative safe integer; received ${JSON.stringify(value)}`);
+  }
+  return value;
+}
+
+function canonicalPredecessorBaseline(predecessorBaseline, predecessorSchema = 2) {
+  if (!isRecord(predecessorBaseline) || predecessorBaseline.schema !== predecessorSchema) {
+    throw new Error(`observed-shape predecessor baseline must be a schema-${predecessorSchema} object`);
+  }
+  // ⭐ A LEAF PREDECESSOR IS VALIDATED BY ITS OWN GOVERNED ENVELOPE LAW, not by
+  // the loose structural checks below, which exist because the schema-2
+  // predecessor was UNGOVERNED and had no validator of its own. Re-deriving a
+  // second, weaker definition of an envelope that already has a governed one is
+  // the doubled-law shape; this defers to the real law and then continues with
+  // the shared structural checks, which the governed envelope also satisfies.
+  LEAF_PREDECESSOR_VALIDATOR[predecessorSchema]?.(predecessorBaseline);
+  // Canonicalization is itself part of validation: it refuses cycles,
+  // undefined values and non-finite numbers before any digest is authoritative.
+  const canonical = JSON.parse(canonicalJson(predecessorBaseline));
+  if (!ISO_DATE.test(canonical.frozen || '')) {
+    throw new Error('schema-2 predecessor frozen date must use YYYY-MM-DD');
+  }
+  if (canonical.frozenAtSha !== null
+    && !ABBREVIATED_GIT_SHA.test(canonical.frozenAtSha || '')) {
+    throw new Error('schema-2 predecessor frozenAtSha must be null or a 7-40 character lowercase Git SHA');
+  }
+  positiveSafeInteger(canonical.minRows, 'minRows');
+  if (!isRecord(canonical.inventory) || Object.keys(canonical.inventory).length === 0) {
+    throw new Error('schema-2 predecessor inventory must be a nonempty object');
+  }
+
+  let total = 0;
+  let identities = 0;
+  for (const [file, row] of Object.entries(canonical.inventory)) {
+    if (!file.startsWith('src/') || file.includes('\\') || file.includes('\u0000')
+      || file.split('/').some((part) => !part || part === '.' || part === '..')) {
+      throw new Error(`schema-2 predecessor inventory has an unsafe file path: ${JSON.stringify(file)}`);
+    }
+    if (!isRecord(row) || Object.keys(row).length === 0) {
+      throw new Error(`schema-2 predecessor inventory row is empty or malformed: ${file}`);
+    }
+    for (const [identity, count] of Object.entries(row)) {
+      if (!identity || identity.includes('\u0000')) {
+        throw new Error(`schema-2 predecessor inventory has an invalid identity in ${file}`);
+      }
+      positiveSafeInteger(count, `inventory[${JSON.stringify(file)}][${JSON.stringify(identity)}]`);
+      total += count;
+      identities += 1;
+      if (!Number.isSafeInteger(total) || !Number.isSafeInteger(identities)) {
+        throw new Error('schema-2 predecessor inventory totals exceed safe integer range');
+      }
+    }
+  }
+  positiveSafeInteger(canonical.total, 'total');
+  positiveSafeInteger(canonical.identities, 'identities');
+  if (canonical.total !== total || canonical.identities !== identities) {
+    throw new Error(`schema-2 predecessor totals disagree with inventory: ${JSON.stringify({
+      declaredTotal: canonical.total,
+      measuredTotal: total,
+      declaredIdentities: canonical.identities,
+      measuredIdentities: identities,
+    })}`);
+  }
+
+  if (!isRecord(canonical.scanStats)) {
+    throw new Error('schema-2 predecessor scanStats must be an object');
+  }
+  for (const key of ['files', 'reads', 'resolved']) {
+    positiveSafeInteger(canonical.scanStats[key], `scanStats.${key}`);
+  }
+  nonNegativeSafeInteger(canonical.scanStats.unresolved, 'scanStats.unresolved');
+  if (canonical.scanStats.reads
+    !== canonical.scanStats.resolved + canonical.scanStats.unresolved) {
+    throw new Error('schema-2 predecessor scanStats reads do not conserve resolved plus unresolved');
+  }
+
+  if (!isRecord(canonical.sentinel)) {
+    throw new Error('schema-2 predecessor sentinel must be an object');
+  }
+  for (const key of ['usableShapes', 'totalKeys', 'resolvedReads']) {
+    positiveSafeInteger(canonical.sentinel[key], `sentinel.${key}`);
+  }
+  if (canonical.sentinel.resolvedReads !== canonical.scanStats.resolved) {
+    throw new Error('schema-2 predecessor sentinel does not match scanStats.resolved');
+  }
+
+  if (!isRecord(canonical.corpusMeta)) {
+    throw new Error('schema-2 predecessor corpusMeta must be an object');
+  }
+  for (const key of ['seeds', 'configs', 'generations', 'pulseIntervals', 'shapeCount']) {
+    positiveSafeInteger(canonical.corpusMeta[key], `corpusMeta.${key}`);
+  }
+  for (const key of ['simulationFlagsLit', 'steadingsMinted']) {
+    nonNegativeSafeInteger(canonical.corpusMeta[key], `corpusMeta.${key}`);
+  }
+  return canonical;
+}
+
+export function validatePredecessorBaseline(predecessorBaseline, predecessorSchema = 2) {
+  return canonicalPredecessorBaseline(predecessorBaseline, predecessorSchema);
+}
+
+function predecessorInputOf(predecessorBaseline, predecessorBaselineText, predecessorSchema = 2) {
+  const predecessor = canonicalPredecessorBaseline(predecessorBaseline, predecessorSchema);
+  if (typeof predecessorBaselineText !== 'string' || !predecessorBaselineText) {
+    throw new Error('observed-shape migration requires the exact predecessor baseline text');
+  }
+  let parsed;
+  try {
+    parsed = JSON.parse(predecessorBaselineText);
+  } catch (error) {
+    throw new Error(
+      `observed-shape predecessor baseline text is not valid JSON: ${error.message}`,
+      { cause: error },
+    );
+  }
+  const parsedPredecessor = canonicalPredecessorBaseline(parsed, predecessorSchema);
+  if (canonicalJson(parsedPredecessor) !== canonicalJson(predecessor)) {
+    throw new Error('observed-shape predecessor baseline object does not match its exact input text');
+  }
+  return {
+    predecessor,
+    predecessorBaselineTextSha256: createHash('sha256')
+      .update(Buffer.from(predecessorBaselineText, 'utf8'))
+      .digest('hex'),
+  };
+}
+
+function assertLegacyFinding(finding) {
+  if (!finding || typeof finding !== 'object'
+    || typeof finding.file !== 'string' || !finding.file || finding.file.includes('\\')
+    || !Number.isInteger(finding.line) || finding.line < 1
+    || !Number.isInteger(finding.pos) || finding.pos < 0
+    || typeof finding.key !== 'string'
+    || !Array.isArray(finding.shapes) || finding.shapes.length !== 1
+    || typeof finding.shapes[0] !== 'string'
+    || typeof finding.text !== 'string') {
+    throw new Error(`legacy observed-shape finding lacks exact pos/leaf provenance: ${JSON.stringify(finding)}`);
+  }
+}
+
+/**
+ * ONE HOME for "this is the governed heuristic detector's own artifact". Both
+ * migration targets need exactly this claim — the retired path as the LEGACY
+ * half of a pair, the live path as the WHOLE authority — and a second copy of a
+ * detector-governance check is the doubled-law shape.
+ */
+function assertGovernedLegacyArtifact(legacy) {
+  validateScanArtifact(legacy);
+  if (legacy.scanMode !== 'legacy-leaf' || legacy.baselineSchema !== 2) {
+    throw new Error('legacy migration input must be a validated legacy-leaf/schema-2 scan artifact');
+  }
+  if (legacy.posEnrichment !== 'node-name-start-v1') {
+    throw new Error('legacy migration input must record the governed node-name-start-v1 position enrichment');
+  }
+  if (legacy.legacyAlgorithm?.baseSha !== GOVERNED_LEGACY_ALGORITHM.baseSha
+    || legacy.legacyAlgorithm?.sourceBlobSha !== GOVERNED_LEGACY_ALGORITHM.sourceBlobSha
+    || legacy.legacyAlgorithm?.enrichment !== GOVERNED_LEGACY_ALGORITHM.enrichment
+    || legacy.legacyAlgorithm?.modulePath !== 'scripts/lib/legacy-reader-shape-scan.mjs') {
+    throw new Error('legacy migration input is not the governed 6e7acc4d detector with the sole node-name-start-v1 enrichment');
+  }
+  for (const finding of legacy.findings) assertLegacyFinding(finding);
+  return legacy;
+}
+
+function assertArtifactPair(legacy, current) {
+  assertGovernedLegacyArtifact(legacy);
+  validateScanArtifact(current);
+  if (current.scanMode !== 'exact-origin'
+    || current.baselineSchema !== RETIRED_EXACT_TARGET_SCHEMA) {
+    throw new Error('current migration input must be a validated exact-origin/schema-3 scan artifact');
+  }
+  if (legacy.provenance.subjectSha !== current.provenance.subjectSha) {
+    throw new Error(`migration artifacts describe different subject commits: ${legacy.provenance.subjectSha} != ${current.provenance.subjectSha}`);
+  }
+  if (legacy.provenance.sourceTreeDigest !== current.provenance.sourceTreeDigest
+    || canonicalJson(legacy.sourceTree) !== canonicalJson(current.sourceTree)) {
+    throw new Error('migration artifacts do not describe the exact same source tree');
+  }
+  for (const [label, field] of [
+    ['scan tree', 'scanTree'],
+    ['detector tree', 'detectorTree'],
+    ['execution tree', 'executionTree'],
+  ]) {
+    if (canonicalJson(legacy[field]) !== canonicalJson(current[field])) {
+      throw new Error(`migration artifacts do not describe the exact same ${label}`);
+    }
+  }
+  if (legacy.provenance.scannerSha !== current.provenance.scannerSha) {
+    throw new Error('migration artifacts were not emitted by the same committed scanner toolchain');
+  }
+  if (legacy.digests.corpus !== current.digests.corpus
+    || canonicalJson(legacy.corpus) !== canonicalJson(current.corpus)) {
+    throw new Error('migration artifacts do not bind the exact same canonical executed corpus');
+  }
+  if (canonicalJson(legacy.scanConfig) !== canonicalJson(current.scanConfig)) {
+    throw new Error('migration artifacts do not bind the exact same thresholds and scan configuration');
+  }
+}
+
+/**
+ * The corpus keys that define the EXPERIMENT. A change here means the two sides
+ * observed different worlds, so no reconciliation between them is meaningful.
+ */
+const CORPUS_EXECUTION_KEYS = ['seeds', 'configs', 'generations', 'pulseIntervals'];
+
+/**
+ * The corpus keys that describe WHAT THE EXPERIMENT SAW. These legitimately move
+ * when the corpus BUILDER gains reach without the corpus DEFINITION changing —
+ * which is exactly what happened, and exactly what nothing recorded.
+ */
+const CORPUS_OBSERVATION_KEYS = ['simulationFlagsLit', 'steadingsMinted', 'shapeCount'];
+
+/**
+ * ⚠⚠ THE CORPUS DEFINITION MOVED UNDER THE RECONCILIATION AND NOTHING SAW IT.
+ * The first spelling compared four keys — seeds/configs/generations/pulseIntervals
+ * — and never `shapeCount`. Between the schema-2 freeze and HEAD the corpus
+ * builder gained the graph-schema-2 origins and `shapeCount` went 305 -> 1,321,
+ * which grows `known`/`singleHome`/`rootShapes` and therefore re-grounds receivers
+ * that previously resolved to nothing. That is the measured driver of the growth
+ * rows the freeze had to review, and the compatibility check was BLIND to it.
+ *
+ * ⚠ AND THE HOLE WAS WORSE THAN AN OMITTED KEY: nothing validates an artifact's
+ * `corpus.meta` at all, so a key that is simply ABSENT compared `undefined` and
+ * the migration accepted a corpus that never declared its own definition. Presence
+ * is now REQUIRED for every key on both sides.
+ *
+ * Execution keys must MATCH. Observation keys are RECORDED, not refused — a
+ * genesis is entitled to bank a corpus that saw more, but never silently.
+ */
+function corpusCompatibilityOf(predecessor, legacyArtifact) {
+  const current = legacyArtifact.corpus?.meta;
+  if (!isRecord(current)) {
+    throw new Error('observed-shape migration artifact corpus does not declare its executed meta record');
+  }
+  const keys = {};
+  for (const key of [...CORPUS_EXECUTION_KEYS, ...CORPUS_OBSERVATION_KEYS]) {
+    const before = predecessor.corpusMeta[key];
+    const after = current[key];
+    nonNegativeSafeInteger(before, `corpusMeta.${key}`);
+    if (!Number.isSafeInteger(after) || after < 0) {
+      throw new Error(`observed-shape migration artifact corpus meta ${key} is missing or not a non-negative safe integer; received ${JSON.stringify(after)}`);
+    }
+    keys[key] = { predecessor: before, current: after, moved: before !== after };
+  }
+  for (const key of CORPUS_EXECUTION_KEYS) {
+    if (keys[key].moved) {
+      throw new Error(`schema-2 predecessor corpus configuration ${key} does not match the legacy artifact`);
+    }
+  }
+  return {
+    executionKeys: [...CORPUS_EXECUTION_KEYS],
+    observationKeys: [...CORPUS_OBSERVATION_KEYS],
+    keys,
+    moved: Object.entries(keys)
+      .filter(([, value]) => value.moved)
+      .map(([key, value]) => `${key}: ${value.predecessor} -> ${value.current}`),
+  };
+}
+
+function assertPredecessorExecutionCompatibility(predecessor, legacyArtifact) {
+  if (predecessor.minRows !== legacyArtifact.scanConfig.minRows) {
+    throw new Error(`schema-2 predecessor minRows ${predecessor.minRows} does not match the legacy artifact threshold ${legacyArtifact.scanConfig.minRows}`);
+  }
+  return corpusCompatibilityOf(predecessor, legacyArtifact);
+}
+
+const manifestEntriesByPath = (manifest) => new Map(
+  manifest.entries.map((entry) => [entry.path, entry]),
+);
+
+/** The SUBJECT inputs the scan does not read — generated JS and JSON. Bound by
+ *  the envelope, never parsed, and therefore the one governed surface that can
+ *  move without any detector or scanned source moving with it. */
+function unscannedEntriesOf({ sourceTree, scanTree }) {
+  const scannedPaths = new Set(scanTree.entries.map((entry) => entry.path));
+  return sourceTree.entries.filter((entry) => !scannedPaths.has(entry.path));
+}
+
+function unscannedInputDigestOf(trees) {
+  return digestOf(unscannedEntriesOf(trees));
+}
+
+/**
+ * ⭐ THE MOVED UNSCANNED INPUTS, BY NAME. A digest inequality says only "these
+ * two sets differ", which is not something a reviewer can accept or refuse. This
+ * derives the actual paths from the two manifests, so the review decision is
+ * taken over named files.
+ */
+function unscannedMovementOf(predecessor, legacyArtifact) {
+  const before = new Map(unscannedEntriesOf(predecessor.manifests)
+    .map((entry) => [entry.path, entry]));
+  const after = new Map(unscannedEntriesOf(legacyArtifact)
+    .map((entry) => [entry.path, entry]));
+  const added = [...after.keys()].filter((path) => !before.has(path)).sort();
+  const removed = [...before.keys()].filter((path) => !after.has(path)).sort();
+  const modified = [...before.keys()]
+    .filter((path) => after.has(path)
+      && canonicalJson(before.get(path)) !== canonicalJson(after.get(path)))
+    .sort();
+  return {
+    added,
+    removed,
+    modified,
+    changedPaths: sortedUnique([...added, ...removed, ...modified]),
+  };
+}
+
+/**
+ * ⚠⚠ `reviewableUnscannedMovement` IS PER-TARGET AND NEVER RETROACTIVE. Targets
+ * 7 and 8 keep unscanned-input EQUALITY as a hard refusal, because that is the
+ * law each of them was actually governed under and a retroactive relaxation
+ * would falsify their recorded transitions. Targets 9 and 10 each declare the
+ * movement REVIEWABLE — separately, in their own entries, never by a shared
+ * default — because in each case its cause is a landed generated-source
+ * re-record, and the alternative — refusing it — leaves the instrument
+ * permanently un-mintable and therefore permanently dark. ⭐ Target 10 is the
+ * evidence that this was the right law rather than a one-off accommodation: the
+ * class RECURRED within nine commits of the schema-9 freeze, and the target-9
+ * apparatus carried it with no new law. Reviewable is not silent: the movement is recorded
+ * by NAMED PATH in the transition record, travels into the report's issue list,
+ * and needs the same accepted, noted decision every other governed row needs.
+ * The STANDING gate arm is untouched: `check-observed-shape-readers.mjs` still
+ * returns 1 the moment the live unscanned digest leaves the frozen one.
+ */
+const SCANNER_TRANSITION_BY_TARGET = new Map([
+  [BANKED_EXPLAINED_WRITER_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: BANKED_EXPLAINED_WRITER_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: BANKED_EXPLAINED_WRITER_SCANNER_TRANSITION_POLICY,
+    reviewableUnscannedMovement: false,
+  })],
+  [CORPUS_COVERAGE_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: CORPUS_COVERAGE_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY,
+    reviewableUnscannedMovement: false,
+  })],
+  [EPOCH_DARK_CORPUS_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: EPOCH_DARK_CORPUS_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY,
+    reviewableUnscannedMovement: true,
+  })],
+  [PROSE_REGEN_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: PROSE_REGEN_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: PROSE_REGEN_SCANNER_TRANSITION_POLICY,
+    reviewableUnscannedMovement: true,
+  })],
+  [TREASURY_ADMISSION_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: TREASURY_ADMISSION_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: TREASURY_ADMISSION_SCANNER_TRANSITION_POLICY,
+    reviewableUnscannedMovement: true,
+  })],
+  [GENESIS_TIES_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: GENESIS_TIES_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: GENESIS_TIES_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching 8→9, 9→10 and 10→11: the flag is PER-TARGET and never retroactive,
+    // and setting it false would make this rung refuse an unscanned movement that is
+    // lawful and reviewable — which is precisely what left this instrument dark once
+    // already. ⭐ MEASURED AT THIS MINT, THOUGH, NOTHING MOVED: the report's
+    // `unscannedMovement` is null. `unscannedInputDigestOf` is the SUBJECT tree minus the
+    // SCAN tree, and the subject tree is `src/**` — so the T5 train's regenerated
+    // artifacts (the two AI edge-shared bundles under `supabase/functions/_shared/`) are
+    // not subject paths at all and cannot move this digest. The permission is carried
+    // because the class is lawful, not because this rung exercises it.
+    reviewableUnscannedMovement: true,
+  })],
+  [DEAD_DEPENDENCY_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: DEAD_DEPENDENCY_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: DEAD_DEPENDENCY_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9. MEASURED at this mint: nothing moved. The
+    // subject tree is `src/**` and this rung touches only the two package files at the
+    // root, so the unscanned digest cannot move and the report's `unscannedMovement`
+    // is null. The permission is carried because the class is lawful, not exercised.
+    reviewableUnscannedMovement: true,
+  })],
+  [PRESET_LIGHT_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: PRESET_LIGHT_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: PRESET_LIGHT_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9 — the flag is PER-TARGET and never
+    // retroactive. MEASURED at this mint: nothing moved. `unscannedInputDigestOf` is
+    // the SUBJECT tree minus the SCAN tree, and this rung touches only three files
+    // under `scripts/`, which are not subject paths at all, so the digest cannot move
+    // and the report's `unscannedMovement` is null. The permission is carried because
+    // the class is lawful, not because this rung exercises it.
+    reviewableUnscannedMovement: true,
+  })],
+  [LINEAGE_REANCHOR_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: LINEAGE_REANCHOR_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: LINEAGE_REANCHOR_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9 — the flag is PER-TARGET and never
+    // retroactive. `unscannedInputDigestOf` is the SUBJECT tree minus the SCAN tree,
+    // and the subject tree is `src/**`; this rung touches three files under `scripts/`,
+    // which are not subject paths at all, so the digest cannot move BY THIS RUNG. It is
+    // carried because this rung is cut TWENTY-FIVE CARS later than its predecessor's
+    // freeze — the widest gap any rung has spanned — and a landed generated-source
+    // re-record anywhere in that span is exactly the movement targets 9 and 10 declared
+    // reviewable. Refusing it here would refuse the re-anchoring for a movement that
+    // belongs to the lineage rather than to the instrument.
+    reviewableUnscannedMovement: true,
+  })],
+  [STRESS_TOPOLOGY_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: STRESS_TOPOLOGY_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: STRESS_TOPOLOGY_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9 — the flag is PER-TARGET and never
+    // retroactive. `unscannedInputDigestOf` is the SUBJECT tree minus the SCAN tree,
+    // and the subject tree is `src/**`; this rung touches four files under `scripts/`,
+    // which are not subject paths at all, so the digest cannot move BY THIS RUNG. The
+    // permission is carried because the class is lawful and because this rung is cut at
+    // a later tip than its predecessor's freeze — a landed generated-source re-record
+    // between the two is exactly the movement targets 9 and 10 declared reviewable.
+    reviewableUnscannedMovement: true,
+  })],
+  [COMPANION_GATE_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: COMPANION_GATE_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: COMPANION_GATE_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9 — the flag is PER-TARGET and never
+    // retroactive. `unscannedInputDigestOf` is the SUBJECT tree minus the SCAN tree,
+    // and the subject tree is `src/**`; this rung touches three files under `scripts/`,
+    // which are not subject paths at all, so the digest cannot move and the report's
+    // `unscannedMovement` is null. The permission is carried because the class is
+    // lawful, not because this rung exercises it.
+    reviewableUnscannedMovement: true,
+  })],
+  [EXEMPTION_RETIREMENT_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: EXEMPTION_RETIREMENT_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: EXEMPTION_RETIREMENT_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9 — the flag is PER-TARGET and never
+    // retroactive. `unscannedInputDigestOf` is the SUBJECT tree minus the SCAN tree, and
+    // the subject tree is `src/**`; this rung touches three files under `scripts/`, which
+    // are not subject paths at all, so the digest cannot move BY THIS RUNG. It is carried
+    // because the ESTATE moved under this rung in the very act that caused it — the lock
+    // controls were deleted from `src/components/` — and a generated or data leaf
+    // re-recorded anywhere in that same landing is exactly the movement targets 9 and 10
+    // declared reviewable. Refusing it would refuse the retirement for a movement that
+    // belongs to the owner's change rather than to the instrument.
+    reviewableUnscannedMovement: true,
+  })],
+  [BANK_FENCE_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: BANK_FENCE_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: BANK_FENCE_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9 — the flag is PER-TARGET and never
+    // retroactive. `unscannedInputDigestOf` is the SUBJECT tree minus the SCAN tree, and
+    // the subject tree is `src/**`; this rung touches three files under `scripts/` and a
+    // test-side literal module, none of them subject paths, so the digest cannot move BY
+    // THIS RUNG. The permission is carried because the class is lawful, not because this
+    // rung exercises it.
+    reviewableUnscannedMovement: true,
+  })],
+  [CORPUS_REDEAL_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: CORPUS_REDEAL_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: CORPUS_REDEAL_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9 — and THIS rung exercises it: the window regenerated two
+    // governed execution inputs (the compendium data and the intent-atlas distillate) by their
+    // documented commands, and the report records that movement for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [ADVISORY_LOCKFILE_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: ADVISORY_LOCKFILE_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: ADVISORY_LOCKFILE_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9 — the flag is PER-TARGET and never retroactive, and
+    // 13 carried it the same way. The subject tree is `src/**` and this rung touches only the
+    // lockfile at the root and three files under `scripts/`, none of them subject paths, so the
+    // unscanned digest cannot move BY THIS RUNG and the report's `unscannedMovement` is expected
+    // null. The permission is carried because the class is lawful, not because it is exercised.
+    reviewableUnscannedMovement: true,
+  })],
+  [WINDOW_RUNG1_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: WINDOW_RUNG1_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: WINDOW_RUNG1_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9 — and THIS rung exercises it: the window regenerated
+    // governed execution inputs (the dossier-state prose, the institution service keys, the prose
+    // norms, …) by their documented commands after the predecessor was frozen, and the report
+    // records that movement for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [AGREE_TIER_SEED_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: AGREE_TIER_SEED_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: AGREE_TIER_SEED_SCANNER_TRANSITION_POLICY,
+    reviewableUnscannedMovement: true,
+  })],
+  [PLAYED_WORLDS_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: PLAYED_WORLDS_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: PLAYED_WORLDS_SCANNER_TRANSITION_POLICY,
+    reviewableUnscannedMovement: true,
+  })],
+  [PUBLIC_PROSE_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: PUBLIC_PROSE_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: PUBLIC_PROSE_SCANNER_TRANSITION_POLICY,
+    reviewableUnscannedMovement: true,
+  })],
+  [TRAIN_CAR4_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: TRAIN_CAR4_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: TRAIN_CAR4_SCANNER_TRANSITION_POLICY,
+    reviewableUnscannedMovement: true,
+  })],
+  [TRAIN_CAR3_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: TRAIN_CAR3_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: TRAIN_CAR3_SCANNER_TRANSITION_POLICY,
+    reviewableUnscannedMovement: true,
+  })],
+  [TRAIN_CAR2_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: TRAIN_CAR2_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: TRAIN_CAR2_SCANNER_TRANSITION_POLICY,
+    reviewableUnscannedMovement: true,
+  })],
+  [TRAIN_CAR1_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: TRAIN_CAR1_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: TRAIN_CAR1_SCANNER_TRANSITION_POLICY,
+    reviewableUnscannedMovement: true,
+  })],
+  [WAVE_VEIL_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: WAVE_VEIL_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: WAVE_VEIL_SCANNER_TRANSITION_POLICY,
+    reviewableUnscannedMovement: true,
+  })],
+  [WAVE_FOOD_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: WAVE_FOOD_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: WAVE_FOOD_SCANNER_TRANSITION_POLICY,
+    reviewableUnscannedMovement: true,
+  })],
+  [WAVE_W2_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: WAVE_W2_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: WAVE_W2_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9: the dossier-prose leaves regenerated by their documented
+    // command since the schema-32 freeze are recorded for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [CAR_MERGE_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: CAR_MERGE_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: CAR_MERGE_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9 — and THIS rung exercises it: the eight dossier-prose /
+    // intent-atlas execution inputs were regenerated by their documented commands since the
+    // schema-31 freeze, and the report records that movement for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [PEOPLE_LANDING_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: PEOPLE_LANDING_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: PEOPLE_LANDING_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9: any governed execution input regenerated by its
+    // documented command since the schema-30 freeze is recorded for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [PEOPLE_CAST_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: PEOPLE_CAST_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: PEOPLE_CAST_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9: any governed execution input regenerated by its
+    // documented command since the schema-29 freeze is recorded for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [MIGRATION_DIRECTION_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: MIGRATION_DIRECTION_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: MIGRATION_DIRECTION_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9: any governed execution input regenerated by its
+    // documented command since the schema-28 freeze is recorded for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [TIER_COVERAGE_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: TIER_COVERAGE_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: TIER_COVERAGE_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9 — and THIS rung exercises it: the landing regenerated
+    // governed execution inputs (the dossier-state prose, the compendium data) by their documented
+    // commands after the schema-27 register was last re-frozen, and the report records that
+    // movement for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [FED_WORLD_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: FED_WORLD_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: FED_WORLD_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9 — and THIS rung exercises it: DS-DEF-6 (593e643ca)
+    // regenerated src/data/dossierStateProse/defense.generated.js by its documented command after
+    // the predecessor was frozen, and the report records that movement for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [EDIT_MODE_READERS_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: EDIT_MODE_READERS_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: EDIT_MODE_READERS_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9 — the flag is PER-TARGET and never retroactive.
+    // `unscannedInputDigestOf` is the SUBJECT tree minus the SCAN tree; this rung touches
+    // three files under `scripts/`, none of them subject paths, and the five source files it
+    // was cut for are plain `.js` modules the scan READS, so they enter the scan tree rather
+    // than the unscanned remainder. ⭐ MEASURED AT ⟨BASE⟩, THOUGH, NOTHING MOVED: the live
+    // unscanned digest reproduces the schema-22 register's recorded one exactly (17 entries
+    // both sides, none added, removed or modified), so the report's `unscannedMovement` is
+    // null. The permission is carried because the class is lawful, not because this rung
+    // exercises it.
+    reviewableUnscannedMovement: true,
+  })],
+  [DOMAIN_READER_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: DOMAIN_READER_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: DOMAIN_READER_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9 — the flag is PER-TARGET and never retroactive.
+    // `unscannedInputDigestOf` is the SUBJECT tree minus the SCAN tree; this rung touches
+    // three files under `scripts/`, none of them subject paths, and the two source files it
+    // was cut for are plain `.js` modules the scan READS, so they enter the scan tree rather
+    // than the unscanned remainder. The permission is carried because the class is lawful,
+    // not because this rung exercises it.
+    reviewableUnscannedMovement: true,
+  })],
+  [RELATIONSHIPS_MOUNT_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: RELATIONSHIPS_MOUNT_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: RELATIONSHIPS_MOUNT_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9 — the flag is PER-TARGET and never retroactive.
+    // `unscannedInputDigestOf` is the SUBJECT tree minus the SCAN tree; this rung touches
+    // three files under `scripts/`, none of them subject paths, and the source file it was
+    // cut for is a plain `.js` module that the scan READS, so it enters the scan tree rather
+    // than the unscanned remainder. The permission is carried because the class is lawful,
+    // not because this rung exercises it.
+    reviewableUnscannedMovement: true,
+  })],
+  [STABLE_CORE_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: STABLE_CORE_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: STABLE_CORE_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9 — the flag is PER-TARGET and never
+    // retroactive. `unscannedInputDigestOf` is the SUBJECT tree minus the SCAN tree,
+    // and the subject tree is `src/**`; this rung touches four files under `scripts/`,
+    // which are not subject paths at all, so the digest cannot move and the report's
+    // `unscannedMovement` is null. The permission is carried because the class is
+    // lawful, not because this rung exercises it.
+    reviewableUnscannedMovement: true,
+  })],
+]);
+
+/**
+ * The four governed detector-tree transitions (6→7, 7→8, 8→9 and 9→10) share one
+ * fail-closed proof. Inventory reconciliation alone cannot distinguish a ruled
+ * scanner edit from an arbitrary detector rewrite, so each target supplies an
+ * exact predecessor, input universe and delta-path set.
+ */
+/**
+ * ⭐⭐ CUSTODY IS THE DIGEST BIND, NEVER GENESIS (chair ruling ODQ §784.2, 2026-08-30).
+ *
+ * ── THE DEFECT THIS REPLACES, AND HOW IT WAS FOUND ──────────────────────────
+ * This function used to open with
+ *
+ *     predecessor.frozenAtSha !== predecessor.migrationReview.subjectSha
+ *       => "requires the immutable schema-N migration genesis as predecessor"
+ *
+ * — i.e. a migration could only ever run from a baseline that had NEVER been ordinarily
+ * re-frozen. That held by accident for every rung up to 9→10, because each predecessor
+ * happened to still sit at its own mint. It stopped holding the moment a lane took a
+ * lawful shrink: MEASURED at the 10→11 attempt, the live baseline was minted at
+ * `12b3aa53` and re-frozen at `4f42be70`, so the schema could never advance again.
+ *
+ * ⛔ THE SHAPE IS A RECORDED FAMILY LAW, AND THIS IS ITS THIRD INSTANCE. TE-OSHAPE-1
+ * cured a gate that darkened `--write` after ordinary INPUT churn. This one darkened
+ * `--migrate` after ordinary `--write` churn. Both said, in effect, "the instrument may
+ * not move once ordinary maintenance has happened" — which inverts the point of having
+ * ordinary maintenance at all. BIND BY DIGEST, NEVER BY GENESIS.
+ *
+ * ── WHAT ACTUALLY CARRIES CUSTODY, AND IT ALWAYS DID ────────────────────────
+ * The chain of custody was never the genesis equality; it is the DIGEST BIND, enforced
+ * in three places that the relaxation does not touch:
+ *   1. the predecessor's own envelope — `validateLeafBaseline` (run by this report's
+ *      predecessor validator BEFORE this function) binds every internal digest,
+ *      `migrationReview` included, so a validly-frozen predecessor is a self-consistent
+ *      one by definition;
+ *   2. this assertion, which re-states that bind at the transition so a tampered
+ *      predecessor is refused HERE and not merely upstream;
+ *   3. the write itself, where `--migrate-schema` refuses unless
+ *      `digestOf(baseline) === receipt.predecessorBaselineDigest`, the canonical JSON
+ *      matches the bundle's own copy, AND the baseline TEXT sha matches.
+ * A forged predecessor fails all three. A lawfully re-frozen one fails none — and that
+ * is exactly the case the old rule refused.
+ *
+ * @param {any} predecessor @param {string} transitionLabel
+ */
+export function assertPredecessorCustody(predecessor, transitionLabel) {
+  const review = predecessor?.migrationReview;
+  if (!review || typeof review !== 'object' || Array.isArray(review)) {
+    throw new Error(`observed-shape ${transitionLabel} scanner transition requires a predecessor carrying its own migration review`);
+  }
+  if (!SHA1_RE.test(String(review.subjectSha || ''))) {
+    throw new Error(`observed-shape ${transitionLabel} scanner transition requires a predecessor whose migration review names the sha it was minted at`);
+  }
+  if (!SHA1_RE.test(String(predecessor.frozenAtSha || ''))) {
+    throw new Error(`observed-shape ${transitionLabel} scanner transition requires a predecessor frozen at a named sha`);
+  }
+  // THE BIND. `frozenAtSha` may legitimately have advanced past `subjectSha` — that is an
+  // ordinary re-freeze and is precisely what this ruling admits — but the review it claims
+  // to have been minted under must still be the one its own digest addresses.
+  if (digestOf(review) !== predecessor?.digests?.migrationReview) {
+    throw new Error(`observed-shape ${transitionLabel} scanner transition predecessor migration review does not match its own digest;`
+      + ' custody is the digest bind, so a predecessor whose review has been edited under its digest is refused');
+  }
+  return predecessor;
+}
+
+const SHA1_RE = /^[0-9a-f]{40}$/;
+
+function governedScannerTransitionOf(predecessor, legacyArtifact, targetSchema) {
+  const transition = SCANNER_TRANSITION_BY_TARGET.get(targetSchema);
+  const predecessorSchema = LEAF_MIGRATION_PREDECESSOR[targetSchema];
+  if (!transition) {
+    throw new Error(`observed-shape schema-${predecessorSchema}-to-${targetSchema} migration has no governed scanner-transition law`);
+  }
+  const transitionLabel = `schema-${predecessorSchema} to schema-${targetSchema}`;
+  assertPredecessorCustody(predecessor, transitionLabel);
+  const beforeByPath = manifestEntriesByPath(predecessor.manifests.detectorTree);
+  const afterByPath = manifestEntriesByPath(legacyArtifact.detectorTree);
+  const beforePaths = [...beforeByPath.keys()].sort();
+  const afterPaths = [...afterByPath.keys()].sort();
+  if (!equalArrays(beforePaths, transition.inputPaths)
+    || !equalArrays(afterPaths, transition.inputPaths)) {
+    throw new Error(`observed-shape ${transitionLabel} scanner transition must bind the exact governed 11-input detector universe:`
+      + ` predecessor=${JSON.stringify(beforePaths)} current=${JSON.stringify(afterPaths)}`);
+  }
+  const addedPaths = afterPaths.filter((path) => !beforeByPath.has(path));
+  const removedPaths = beforePaths.filter((path) => !afterByPath.has(path));
+  if (addedPaths.length || removedPaths.length) {
+    throw new Error(`observed-shape ${transitionLabel} scanner transition changes the governed detector path set:`
+      + ` added=${JSON.stringify(addedPaths)} removed=${JSON.stringify(removedPaths)}`);
+  }
+
+  const modifiedPaths = beforePaths.filter((path) => (
+    canonicalJson(beforeByPath.get(path)) !== canonicalJson(afterByPath.get(path))
+  ));
+  if (!equalArrays(modifiedPaths, transition.deltaPaths)) {
+    throw new Error(`observed-shape ${transitionLabel} scanner transition must modify exactly `
+      + `${JSON.stringify(transition.deltaPaths)}; received ${JSON.stringify(modifiedPaths)}`);
+  }
+
+  const changes = modifiedPaths.map((path) => {
+    const predecessorEntry = beforeByPath.get(path);
+    const currentEntry = afterByPath.get(path);
+    if (predecessorEntry.type !== currentEntry.type
+      || predecessorEntry.mode !== currentEntry.mode) {
+      throw new Error(`observed-shape ${transitionLabel} scanner transition changes file type or mode at ${path}`);
+    }
+    if (predecessorEntry.sha256 === currentEntry.sha256) {
+      throw new Error(`observed-shape ${transitionLabel} scanner transition does not change content at ${path}`);
+    }
+    return { path, predecessor: predecessorEntry, current: currentEntry };
+  });
+  // ⚠⚠ THE RETAINED COUNT IS DERIVED FROM THIS TARGET'S OWN LAW, NEVER A
+  // LITERAL. It used to be a hard-coded `!== 7`, which silently assumed every
+  // future mint changes exactly four of the eleven governed inputs — an
+  // assumption the 8→9 five-path delta falsifies. The arithmetic is identical
+  // for targets 7 and 8 (11 − 4 = 7), so this is a generalisation and not a
+  // relaxation; the count is still EXACT and still fails closed.
+  const retainedPaths = transition.inputPaths.length - transition.deltaPaths.length;
+  const unchangedPaths = beforePaths.filter((path) => !modifiedPaths.includes(path));
+  if (unchangedPaths.length !== retainedPaths) {
+    throw new Error(`observed-shape ${transitionLabel} scanner transition must retain exactly ${retainedPaths} byte-identical detector inputs; received ${unchangedPaths.length}`);
+  }
+
+  const predecessorUnscannedInputDigest = predecessor.scannerProvenance.unscannedInputDigest;
+  const currentUnscannedInputDigest = unscannedInputDigestOf(legacyArtifact);
+  let unscannedMovement = null;
+  if (predecessorUnscannedInputDigest !== currentUnscannedInputDigest) {
+    if (!transition.reviewableUnscannedMovement) {
+      throw new Error(`observed-shape ${transitionLabel} scanner transition changes unscanned governed source inputs:`
+        + ` ${predecessorUnscannedInputDigest} != ${currentUnscannedInputDigest}`);
+    }
+    unscannedMovement = unscannedMovementOf(predecessor, legacyArtifact);
+    // Anti-vacuity: a moved digest that names no path would be a review over
+    // nothing, and the accepted decision would mean nothing.
+    if (!unscannedMovement.changedPaths.length) {
+      throw new Error(`observed-shape ${transitionLabel} scanner transition reports a moved unscanned input digest that names no changed path`);
+    }
+  }
+  if (predecessor.migrationReview.scanConfigDigest !== legacyArtifact.digests.scanConfig) {
+    throw new Error(`observed-shape ${transitionLabel} scanner transition changes the governed scan configuration`);
+  }
+  if (legacyArtifact.provenance.subjectSha !== legacyArtifact.provenance.scannerSha) {
+    throw new Error(`observed-shape schema-${targetSchema} migration artifact subject and scanner SHAs must name one committed code half`);
+  }
+  if (legacyArtifact.provenance.scannerSha === predecessor.migrationReview.currentScannerSha) {
+    throw new Error(`observed-shape ${transitionLabel} scanner transition must advance to a fresh committed scanner SHA`);
+  }
+
+  return {
+    policy: transition.policy,
+    predecessorSchema,
+    targetSchema,
+    predecessor: {
+      scannerSha: predecessor.migrationReview.currentScannerSha,
+      detectorTreeDigest: predecessor.manifests.detectorTree.digest,
+      scannerToolDigest: predecessor.migrationReview.currentScannerToolDigest,
+      unscannedInputDigest: predecessorUnscannedInputDigest,
+    },
+    current: {
+      scannerSha: legacyArtifact.provenance.scannerSha,
+      detectorTreeDigest: legacyArtifact.detectorTree.digest,
+      scannerToolDigest: legacyArtifact.provenance.scannerToolDigest,
+      unscannedInputDigest: currentUnscannedInputDigest,
+    },
+    modifiedPaths,
+    unchangedPaths,
+    changes,
+    ...(unscannedMovement ? { unscannedMovement } : {}),
+  };
+}
+
+const scannerTransitionRowIdOf = (scannerTransition) => (
+  `osr-scanner-transition-v1:${digestOf(scannerTransition)}`
+);
+
+function legacySitesOf(findings) {
+  const sites = new Map();
+  for (const finding of findings) {
+    const address = exactAddress(finding);
+    if (sites.has(address)) {
+      throw new Error(`legacy migration input repeats exact site ${finding.file}:${finding.pos}:${finding.key}`);
+    }
+    sites.set(address, finding);
+  }
+  return sites;
+}
+
+function currentSitesOf(findings) {
+  const sites = new Map();
+  const exactRows = new Set();
+  for (const finding of findings) {
+    const origin = finding.origins?.[0];
+    const rowAddress = [finding.file, finding.site, finding.key, origin].join('\u0000');
+    if (exactRows.has(rowAddress)) {
+      throw new Error(`current migration input repeats site/origin ${finding.file} | ${finding.site} | ${finding.key} | ${origin}`);
+    }
+    exactRows.add(rowAddress);
+    const address = exactAddress(finding);
+    let site = sites.get(address);
+    if (!site) {
+      site = {
+        file: finding.file,
+        line: finding.line,
+        pos: finding.pos,
+        key: finding.key,
+        site: finding.site,
+        text: normalizedText(finding.text),
+        rows: [],
+      };
+      sites.set(address, site);
+    } else if (site.site !== finding.site || site.line !== finding.line
+      || site.text !== normalizedText(finding.text)) {
+      throw new Error(`current migration rows disagree at exact site ${finding.file}:${finding.pos}:${finding.key}`);
+    }
+    site.rows.push(finding);
+  }
+  for (const site of sites.values()) {
+    site.rows.sort((a, b) => a.origins[0].localeCompare(b.origins[0]));
+  }
+  return sites;
+}
+
+function predecessorRowsOf(predecessorBaseline, legacyInventory) {
+  const addresses = new Map();
+  const add = (file, identity) => {
+    const address = predecessorAddress(file, identity);
+    if (!addresses.has(address)) addresses.set(address, { file, identity });
+  };
+  for (const [file, row] of Object.entries(predecessorBaseline.inventory)) {
+    for (const identity of Object.keys(row)) add(file, identity);
+  }
+  for (const [file, row] of Object.entries(legacyInventory)) {
+    for (const identity of Object.keys(row)) add(file, identity);
+  }
+  return [...addresses.values()]
+    .sort((a, b) => a.file.localeCompare(b.file) || a.identity.localeCompare(b.identity))
+    .map(({ file, identity }) => {
+      const predecessorCount = predecessorBaseline.inventory[file]?.[identity] || 0;
+      const legacyCount = legacyInventory[file]?.[identity] || 0;
+      const reconciliation = predecessorCount === legacyCount
+        ? 'same'
+        : predecessorCount === 0
+          ? 'new'
+          : legacyCount === 0
+            ? 'gone'
+            : legacyCount < predecessorCount ? 'decreased' : 'increased';
+      const core = {
+        address: { file, identity },
+        predecessorCount,
+        legacyCount,
+        delta: legacyCount - predecessorCount,
+        reconciliation,
+      };
+      return { rowId: `osr-predecessor-row-v1:${digestOf(core)}`, ...core };
+    });
+}
+
+/**
+ * Schema 8 adds an opt-in scalar second consumer; it does not widen or narrow
+ * the topology inventory that the heuristic detector freezes. The scanner
+ * transition is reviewable, but an inventory motion is not part of this mint:
+ * accepting one here would silently turn a corpus-coverage proof into a new
+ * topology baseline. Keep both statements executable — identical canonical
+ * bytes and a same-only reconciliation — so neither representation can drift
+ * away from the other during a later refactor.
+ *
+ * ⚠⚠ THIS INVARIANT IS SCHEMA 8'S ALONE, AND ITS ABSENCE ELSEWHERE IS DECLARED
+ * RATHER THAN FORGOTTEN. Schema 9 deliberately does NOT get one: that mint is
+ * cut at a later tip than the one its inventory was measured at, so a landed
+ * repair may legitimately move a row, and a hard same-only rule would force the
+ * executor to choose between a false claim and an un-mintable instrument.
+ * Schema 9 reconciles every non-'same' row through its own reviewed, accepted,
+ * noted decision instead — which is strictly more information than this
+ * invariant carries, and never a bulk accept.
+ */
+function assertCorpusCoverageInventoryInvariant(
+  predecessor,
+  legacyInventory,
+  predecessorRows,
+  targetSchema,
+) {
+  if (targetSchema !== CORPUS_COVERAGE_TARGET_SCHEMA) return;
+  const motions = predecessorRows.filter((row) => row.reconciliation !== 'same');
+  if (canonicalJson(predecessor.inventory) !== canonicalJson(legacyInventory)
+    || motions.length !== 0) {
+    const counts = Object.fromEntries(
+      ['same', 'new', 'increased', 'decreased', 'gone'].map((kind) => [
+        kind,
+        predecessorRows.filter((row) => row.reconciliation === kind).length,
+      ]),
+    );
+    throw new Error('observed-shape schema-7 to schema-8 migration requires a byte-identical, same-only topology inventory; '
+      + `received ${JSON.stringify(counts)}`);
+  }
+}
+
+function legacyView(finding) {
+  if (!finding) return null;
+  return {
+    line: finding.line,
+    shapes: sortedUnique(finding.shapes),
+    text: normalizedText(finding.text),
+  };
+}
+
+function currentView(site) {
+  if (!site) return null;
+  return {
+    line: site.line,
+    site: site.site,
+    text: site.text,
+    origins: site.rows.map((finding) => ({
+      origin: finding.origins[0],
+      shape: finding.shapes[0],
+    })),
+  };
+}
+
+function rowOf(address, legacy, current) {
+  const [file, rawPos, key] = address.split('\u0000');
+  const legacyShapes = legacy ? sortedUnique(legacy.shapes) : [];
+  const currentShapes = current
+    ? sortedUnique(current.rows.map((finding) => finding.shapes[0]))
+    : [];
+  if (legacy && current && (legacy.line !== current.line
+    || normalizedText(legacy.text) !== current.text)) {
+    throw new Error(`same-source migration text/line mismatch at ${file}:${rawPos}:${key}`);
+  }
+  const core = {
+    address: { file, pos: Number(rawPos), key },
+    legacy: legacyView(legacy),
+    current: currentView(current),
+    facets: {
+      presence: legacy && current ? 'paired' : (legacy ? 'legacy-only' : 'current-only'),
+      exactOrigins: !current ? 'none' : (current.rows.length === 1 ? 'single' : 'split'),
+      leafShapes: !legacy || !current
+        ? 'not-comparable'
+        : (equalArrays(legacyShapes, currentShapes) ? 'same' : 'corrected'),
+    },
+  };
+  return { rowId: `osr-migration-row-v1:${digestOf(core)}`, ...core };
+}
+
+function assertConservation(report) {
+  const c = report.conservation;
+  if (c.legacySitesCovered !== c.legacyFindings
+    || c.currentSitesCovered !== c.currentSites
+    || c.currentFindingsCovered !== c.currentFindings
+    || c.paired + c.legacyOnly !== c.legacyFindings
+    || c.paired + c.currentOnly !== c.currentSites
+    || c.predecessorIdentitiesCovered !== c.predecessorIdentities
+    || c.predecessorCountsCovered !== c.predecessorCount
+    || c.legacyInventoryIdentitiesCovered !== c.legacyInventoryIdentities
+    || c.legacyInventoryCountsCovered !== c.legacyInventoryCount
+    || c.legacyInventoryCount !== c.legacyFindings
+    || c.predecessorRows !== report.predecessorRows.length) {
+    throw new Error(`observed-shape migration conservation failed: ${JSON.stringify(c)}`);
+  }
+  const allRows = [...report.predecessorRows, ...report.rows];
+  const rowIds = new Set(allRows.map((row) => row.rowId));
+  if (rowIds.size !== allRows.length) {
+    throw new Error('observed-shape migration produced duplicate row IDs');
+  }
+}
+
+/** Build the canonical report. Both artifacts are validated before any pairing. */
+export function migrationReport(
+  predecessorBaseline,
+  legacyArtifact,
+  currentArtifact,
+  predecessorBaselineText,
+) {
+  const { predecessor, predecessorBaselineTextSha256 } = predecessorInputOf(
+    predecessorBaseline,
+    predecessorBaselineText,
+  );
+  assertArtifactPair(legacyArtifact, currentArtifact);
+  const corpusCompatibility = assertPredecessorExecutionCompatibility(predecessor, legacyArtifact);
+  const legacySites = legacySitesOf(legacyArtifact.findings);
+  const currentSites = currentSitesOf(currentArtifact.findings);
+  const addresses = sortedUnique([...legacySites.keys(), ...currentSites.keys()])
+    .sort((a, b) => {
+      const aa = a.split('\u0000');
+      const bb = b.split('\u0000');
+      return aa[0].localeCompare(bb[0]) || Number(aa[1]) - Number(bb[1]) || aa[2].localeCompare(bb[2]);
+    });
+  const rows = addresses.map((address) => rowOf(
+    address,
+    legacySites.get(address),
+    currentSites.get(address),
+  ));
+  const predecessorRows = predecessorRowsOf(predecessor, legacyArtifact.inventory);
+  const count = (facet, value) => rows.filter((row) => row.facets[facet] === value).length;
+  const predecessorCount = (value) => predecessorRows
+    .filter((row) => row.reconciliation === value).length;
+  const legacyInventoryIdentities = Object.values(legacyArtifact.inventory)
+    .reduce((n, row) => n + Object.keys(row).length, 0);
+  const legacyInventoryCount = Object.values(legacyArtifact.inventory)
+    .reduce((n, row) => n + Object.values(row).reduce((sum, value) => sum + value, 0), 0);
+  // ⚠⚠ AN ISSUE CARRIES ITS ROW ID BECAUSE AN ISSUE IS DISCHARGEABLE BY REVIEW.
+  // The first spelling emitted bare strings, and `validateReviewLedger` threw on
+  // any of them BEFORE reading a single decision (the check sat above the
+  // decisions loop). That made the review ledger unable to mean what the freeze
+  // ruling assumed it meant: a COMPLETE, fully-accepted ledger with a real note on
+  // every row still threw while any growth row existed — control-proven, both
+  // directions, by the refusal lane. Carrying `rowId` lets the SAME issue be
+  // discharged by the SAME row's reviewed decision, and by nothing else.
+  const predecessorIssues = predecessorRows
+    .filter((row) => row.reconciliation === 'new' || row.reconciliation === 'increased')
+    .map((row) => ({
+      rowId: row.rowId,
+      file: row.address.file,
+      identity: row.address.identity,
+      reconciliation: row.reconciliation,
+      predecessorCount: row.predecessorCount,
+      legacyCount: row.legacyCount,
+      message: `${row.address.file}: ${JSON.stringify(row.address.identity)} is ${row.reconciliation}`
+        + ` against the schema-2 predecessor (${row.predecessorCount} -> ${row.legacyCount})`,
+    }));
+  const report = {
+    reportSchema: MIGRATION_REPORT_SCHEMA,
+    kind: RETIRED_EXACT_MIGRATION_KIND,
+    inputs: {
+      subjectSha: currentArtifact.provenance.subjectSha,
+      predecessorBaselineDigest: digestOf(predecessor),
+      predecessorBaselineTextSha256,
+      predecessorInventoryDigest: digestOf(predecessor.inventory),
+      predecessorFrozenAtSha: predecessor.frozenAtSha,
+      sourceTreeDigest: currentArtifact.provenance.sourceTreeDigest,
+      scanTreeDigest: currentArtifact.scanTree.digest,
+      detectorTreeDigest: currentArtifact.detectorTree.digest,
+      executionTreeDigest: currentArtifact.executionTree.digest,
+      corpusDigest: currentArtifact.digests.corpus,
+      scanConfigDigest: digestOf(currentArtifact.scanConfig),
+      legacyArtifactDigest: digestOf(legacyArtifact),
+      legacyAlgorithm: legacyArtifact.legacyAlgorithm,
+      legacyAlgorithmDigest: digestOf(legacyArtifact.legacyAlgorithm),
+      currentArtifactDigest: digestOf(currentArtifact),
+      legacyFindingsDigest: legacyArtifact.digests.findings,
+      currentFindingsDigest: currentArtifact.digests.findings,
+      legacyScannerSha: legacyArtifact.provenance.scannerSha,
+      legacyDetectorDigest: legacyArtifact.provenance.detectorDigest,
+      legacyScannerToolDigest: legacyArtifact.provenance.scannerToolDigest,
+      currentScannerSha: currentArtifact.provenance.scannerSha,
+      currentDetectorDigest: currentArtifact.provenance.detectorDigest,
+      currentScannerToolDigest: currentArtifact.provenance.scannerToolDigest,
+    },
+    target: {
+      baselineSchema: RETIRED_EXACT_TARGET_SCHEMA,
+      inventoryDigest: currentArtifact.digests.inventory,
+      findingsDigest: currentArtifact.digests.findings,
+    },
+    predecessorRows,
+    rows,
+    summary: {
+      paired: count('presence', 'paired'),
+      legacyOnly: count('presence', 'legacy-only'),
+      currentOnly: count('presence', 'current-only'),
+      singleOrigin: count('exactOrigins', 'single'),
+      splitOrigin: count('exactOrigins', 'split'),
+      sameLeafShape: count('leafShapes', 'same'),
+      correctedLeafShape: count('leafShapes', 'corrected'),
+      predecessorSame: predecessorCount('same'),
+      predecessorDecreased: predecessorCount('decreased'),
+      predecessorGone: predecessorCount('gone'),
+      predecessorIncreased: predecessorCount('increased'),
+      predecessorNew: predecessorCount('new'),
+    },
+    conservation: {
+      predecessorIdentities: predecessor.identities,
+      predecessorCount: predecessor.total,
+      legacyInventoryIdentities,
+      legacyInventoryCount,
+      predecessorRows: predecessorRows.length,
+      predecessorIdentitiesCovered: predecessorRows
+        .filter((row) => row.predecessorCount > 0).length,
+      predecessorCountsCovered: predecessorRows
+        .reduce((n, row) => n + row.predecessorCount, 0),
+      legacyInventoryIdentitiesCovered: predecessorRows
+        .filter((row) => row.legacyCount > 0).length,
+      legacyInventoryCountsCovered: predecessorRows
+        .reduce((n, row) => n + row.legacyCount, 0),
+      legacyFindings: legacyArtifact.findings.length,
+      currentFindings: currentArtifact.findings.length,
+      currentSites: currentSites.size,
+      legacySitesCovered: rows.filter((row) => row.legacy).length,
+      currentSitesCovered: rows.filter((row) => row.current).length,
+      currentFindingsCovered: rows.reduce((n, row) => n + (row.current?.origins.length || 0), 0),
+      paired: count('presence', 'paired'),
+      legacyOnly: count('presence', 'legacy-only'),
+      currentOnly: count('presence', 'current-only'),
+    },
+    corpusCompatibility,
+    issues: predecessorIssues,
+  };
+  assertConservation(report);
+  return report;
+}
+
+export function migrationReportDigest(report) {
+  return digestOf(report);
+}
+
+export function validateMigrationReport(
+  report,
+  predecessorBaseline,
+  legacyArtifact,
+  currentArtifact,
+  predecessorBaselineText,
+) {
+  const expected = migrationReport(
+    predecessorBaseline,
+    legacyArtifact,
+    currentArtifact,
+    predecessorBaselineText,
+  );
+  if (canonicalJson(report) !== canonicalJson(expected)) {
+    throw new Error('observed-shape migration report is not the canonical report for its bound inputs');
+  }
+  assertConservation(report);
+  return report;
+}
+
+/* ══ SCHEMA 2 -> 4 — THE LIVE HEURISTIC MIGRATION ══════════════════════════ */
+
+/**
+ * ⚠⚠ THE SCHEMA-4 REPORT CARRIES NO SITE-MIGRATION ROWS, AND THAT IS THE WHOLE
+ * SHAPE OF THE ARGUMENT — not an omission.
+ *
+ * `rows` exists in the retired 2->3 report because that migration RE-SPELLS every
+ * finding: a legacy leaf identity becomes an exact per-site identity, so each
+ * pairing is a fresh claim a reviewer has to accept. Schema 4 does not re-spell
+ * anything. The target inventory IS the heuristic artifact's own inventory, in
+ * the SAME alphabet the schema-2 predecessor is written in, so the only thing
+ * that moved is which reads the detector found — which is exactly what
+ * `predecessorRows` reconciles, row by row, with `new`/`increased` rows raised as
+ * `issues` that a reviewed decision must discharge.
+ *
+ * `assertHeuristicConservation` therefore PINS `rows.length === 0` rather than
+ * leaving it implied: an empty array that nobody asserts is empty is one refactor
+ * away from becoming an unreviewed row set, and `validateReviewLedger` derives
+ * its expected row list from `predecessorRows.concat(rows)`.
+ */
+function assertHeuristicConservation(report) {
+  const c = report.conservation;
+  if (report.rows.length !== 0) {
+    throw new Error(`observed-shape heuristic migration carries site-migration rows; the schema-${report.target?.baselineSchema} target is`
+      + ' the heuristic inventory itself and has no cross-detector pairing to review');
+  }
+  if (c.predecessorIdentitiesCovered !== c.predecessorIdentities
+    || c.predecessorCountsCovered !== c.predecessorCount
+    || c.legacyInventoryIdentitiesCovered !== c.legacyInventoryIdentities
+    || c.legacyInventoryCountsCovered !== c.legacyInventoryCount
+    || c.legacyInventoryCount !== c.legacyFindings
+    || c.targetIdentities !== c.legacyInventoryIdentities
+    || c.targetCount !== c.legacyInventoryCount
+    || c.predecessorRows !== report.predecessorRows.length) {
+    throw new Error(`observed-shape heuristic migration conservation failed: ${JSON.stringify(c)}`);
+  }
+  const governedRows = [
+    ...report.predecessorRows,
+    ...(report.scannerTransition
+      ? [{ rowId: scannerTransitionRowIdOf(report.scannerTransition) }]
+      : []),
+  ];
+  const rowIds = new Set(governedRows.map((row) => row.rowId));
+  if (rowIds.size !== governedRows.length) {
+    throw new Error('observed-shape migration produced duplicate row IDs');
+  }
+}
+
+/** Build the canonical leaf migration report — retired 2→4 through 6→7, or
+ *  live 7→8 — chosen by required `targetSchema` so no caller can fall into the
+ *  wrong rung by omission. ONE artifact is validated before reconciliation. */
+export function heuristicMigrationReport(
+  predecessorBaseline,
+  legacyArtifact,
+  predecessorBaselineText,
+  targetSchema,
+) {
+  const predecessorSchema = LEAF_MIGRATION_PREDECESSOR[targetSchema];
+  if (predecessorSchema === undefined) {
+    throw new Error(`observed-shape leaf migration target must be ${Object.keys(LEAF_MIGRATION_PREDECESSOR).join(' or ')};`
+      + ` received ${JSON.stringify(targetSchema)}`);
+  }
+  const { predecessor, predecessorBaselineTextSha256 } = predecessorInputOf(
+    predecessorBaseline,
+    predecessorBaselineText,
+    predecessorSchema,
+  );
+  assertGovernedLegacyArtifact(legacyArtifact);
+  const corpusCompatibility = assertPredecessorExecutionCompatibility(predecessor, legacyArtifact);
+  const scannerTransition = SCANNER_TRANSITION_BY_TARGET.has(targetSchema)
+    ? governedScannerTransitionOf(predecessor, legacyArtifact, targetSchema)
+    : null;
+  const predecessorRows = predecessorRowsOf(predecessor, legacyArtifact.inventory);
+  assertCorpusCoverageInventoryInvariant(
+    predecessor,
+    legacyArtifact.inventory,
+    predecessorRows,
+    targetSchema,
+  );
+  const predecessorCount = (value) => predecessorRows
+    .filter((row) => row.reconciliation === value).length;
+  const legacyInventoryIdentities = Object.values(legacyArtifact.inventory)
+    .reduce((n, row) => n + Object.keys(row).length, 0);
+  const legacyInventoryCount = Object.values(legacyArtifact.inventory)
+    .reduce((n, row) => n + Object.values(row).reduce((sum, value) => sum + value, 0), 0);
+  const artifactDigest = digestOf(legacyArtifact);
+  // An issue carries its row id because an issue is DISCHARGEABLE BY REVIEW —
+  // see the identical note on the retired path; the mechanism is shared because
+  // the ledger it feeds is shared.
+  const predecessorIssues = predecessorRows
+    .filter((row) => row.reconciliation === 'new' || row.reconciliation === 'increased')
+    .map((row) => ({
+      rowId: row.rowId,
+      file: row.address.file,
+      identity: row.address.identity,
+      reconciliation: row.reconciliation,
+      predecessorCount: row.predecessorCount,
+      legacyCount: row.legacyCount,
+      message: `${row.address.file}: ${JSON.stringify(row.address.identity)} is ${row.reconciliation}`
+        + ` against the schema-${predecessorSchema} predecessor (${row.predecessorCount} -> ${row.legacyCount})`,
+    }));
+  const report = {
+    reportSchema: MIGRATION_REPORT_SCHEMA,
+    kind: leafMigrationKindOf(targetSchema),
+    inputs: {
+      subjectSha: legacyArtifact.provenance.subjectSha,
+      predecessorBaselineDigest: digestOf(predecessor),
+      predecessorBaselineTextSha256,
+      predecessorInventoryDigest: digestOf(predecessor.inventory),
+      predecessorFrozenAtSha: predecessor.frozenAtSha,
+      sourceTreeDigest: legacyArtifact.provenance.sourceTreeDigest,
+      scanTreeDigest: legacyArtifact.scanTree.digest,
+      detectorTreeDigest: legacyArtifact.detectorTree.digest,
+      executionTreeDigest: legacyArtifact.executionTree.digest,
+      corpusDigest: legacyArtifact.digests.corpus,
+      scanConfigDigest: digestOf(legacyArtifact.scanConfig),
+      legacyArtifactDigest: artifactDigest,
+      legacyAlgorithm: legacyArtifact.legacyAlgorithm,
+      legacyAlgorithmDigest: digestOf(legacyArtifact.legacyAlgorithm),
+      // ⭐ current* === legacy* THROUGHOUT. Schema 4 has one detector, and the
+      // receipt says so in every field rather than leaving "current" undefined —
+      // an absent binding cannot be checked, an equal one can.
+      currentArtifactDigest: artifactDigest,
+      legacyFindingsDigest: legacyArtifact.digests.findings,
+      currentFindingsDigest: legacyArtifact.digests.findings,
+      legacyScannerSha: legacyArtifact.provenance.scannerSha,
+      legacyDetectorDigest: legacyArtifact.provenance.detectorDigest,
+      legacyScannerToolDigest: legacyArtifact.provenance.scannerToolDigest,
+      currentScannerSha: legacyArtifact.provenance.scannerSha,
+      currentDetectorDigest: legacyArtifact.provenance.detectorDigest,
+      currentScannerToolDigest: legacyArtifact.provenance.scannerToolDigest,
+      ...(scannerTransition ? { scannerTransitionDigest: digestOf(scannerTransition) } : {}),
+    },
+    target: {
+      baselineSchema: targetSchema,
+      inventoryDigest: legacyArtifact.digests.inventory,
+      findingsDigest: legacyArtifact.digests.findings,
+    },
+    predecessorRows,
+    rows: [],
+    summary: {
+      predecessorSame: predecessorCount('same'),
+      predecessorDecreased: predecessorCount('decreased'),
+      predecessorGone: predecessorCount('gone'),
+      predecessorIncreased: predecessorCount('increased'),
+      predecessorNew: predecessorCount('new'),
+    },
+    conservation: {
+      predecessorIdentities: predecessor.identities,
+      predecessorCount: predecessor.total,
+      legacyInventoryIdentities,
+      legacyInventoryCount,
+      targetIdentities: legacyInventoryIdentities,
+      targetCount: legacyInventoryCount,
+      predecessorRows: predecessorRows.length,
+      predecessorIdentitiesCovered: predecessorRows
+        .filter((row) => row.predecessorCount > 0).length,
+      predecessorCountsCovered: predecessorRows
+        .reduce((n, row) => n + row.predecessorCount, 0),
+      legacyInventoryIdentitiesCovered: predecessorRows
+        .filter((row) => row.legacyCount > 0).length,
+      legacyInventoryCountsCovered: predecessorRows
+        .reduce((n, row) => n + row.legacyCount, 0),
+      legacyFindings: legacyArtifact.findings.length,
+    },
+    corpusCompatibility,
+    ...(scannerTransition ? { scannerTransition } : {}),
+    issues: [
+      ...predecessorIssues,
+      ...(scannerTransition ? [{
+        rowId: scannerTransitionRowIdOf(scannerTransition),
+        reconciliation: 'scanner-transition',
+        modifiedPaths: scannerTransition.modifiedPaths,
+        ...(scannerTransition.unscannedMovement
+          ? { unscannedPaths: scannerTransition.unscannedMovement.changedPaths }
+          : {}),
+        message: `schema-${predecessorSchema} to schema-${targetSchema} governed scanner transition requires one accepted review decision: `
+          + scannerTransition.modifiedPaths.join(', ')
+          + (scannerTransition.unscannedMovement
+            ? '; UNSCANNED governed source inputs moved and are RECORDED for the same decision: '
+              + scannerTransition.unscannedMovement.changedPaths.join(', ')
+            : ''),
+      }] : []),
+    ],
+  };
+  assertHeuristicConservation(report);
+  return report;
+}
+
+export function validateHeuristicMigrationReport(
+  report,
+  predecessorBaseline,
+  legacyArtifact,
+  predecessorBaselineText,
+  targetSchema,
+) {
+  const expected = heuristicMigrationReport(
+    predecessorBaseline,
+    legacyArtifact,
+    predecessorBaselineText,
+    targetSchema,
+  );
+  if (canonicalJson(report) !== canonicalJson(expected)) {
+    throw new Error('observed-shape migration report is not the canonical report for its bound inputs');
+  }
+  assertHeuristicConservation(report);
+  return report;
+}
+
+/** The schema-4 authorization. Same receipt KEY SET as the retired path so the
+ *  baseline envelope needs no new shape; every `current*` field is bound to the
+ *  one governed heuristic artifact. */
+function validateGovernedHeuristicMigration({
+  predecessorBaseline,
+  predecessorBaselineText,
+  legacyArtifact,
+  currentArtifact,
+  report,
+  review,
+  targetSchema,
+}) {
+  const { predecessor, predecessorBaselineTextSha256 } = predecessorInputOf(
+    predecessorBaseline,
+    predecessorBaselineText,
+    LEAF_MIGRATION_PREDECESSOR[targetSchema],
+  );
+  // ⛔ A leaf bundle that carries a DIFFERENT "current" artifact is refused
+  // outright rather than quietly ignored: the bundle keeps both fields so the
+  // consumer needs no branch, and this is what stops that convenience from
+  // becoming a hole through which an unreviewed second artifact travels.
+  if (currentArtifact !== undefined
+    && canonicalJson(currentArtifact) !== canonicalJson(legacyArtifact)) {
+    throw new Error(`observed-shape schema-${targetSchema} migration bundle carries a current artifact that is not`
+      + ' the governed heuristic artifact itself');
+  }
+  validateHeuristicMigrationReport(
+    report,
+    predecessor,
+    legacyArtifact,
+    predecessorBaselineText,
+    targetSchema,
+  );
+  return {
+    ...validateReviewLedger(review, report),
+    predecessorBaselineDigest: digestOf(predecessor),
+    predecessorBaselineTextSha256,
+    predecessorInventoryDigest: digestOf(predecessor.inventory),
+    legacyArtifactDigest: report.inputs.legacyArtifactDigest,
+    currentArtifactDigest: report.inputs.currentArtifactDigest,
+    legacyScannerSha: legacyArtifact.provenance.scannerSha,
+    legacyAlgorithmBaseSha: legacyArtifact.legacyAlgorithm.baseSha,
+    legacyDetectorDigest: legacyArtifact.provenance.detectorDigest,
+    legacyScannerToolDigest: legacyArtifact.provenance.scannerToolDigest,
+    currentFindingsDigest: legacyArtifact.digests.findings,
+    currentScannerSha: legacyArtifact.provenance.scannerSha,
+    currentDetectorDigest: legacyArtifact.provenance.detectorDigest,
+    currentScannerToolDigest: legacyArtifact.provenance.scannerToolDigest,
+  };
+}
+
+export function reviewTemplateOf(report) {
+  if (!report || report.reportSchema !== MIGRATION_REPORT_SCHEMA
+    || !Array.isArray(report.predecessorRows) || !Array.isArray(report.rows)) {
+    throw new Error('cannot create a review template for a malformed migration report');
+  }
+  return {
+    reviewSchema: MIGRATION_REVIEW_SCHEMA,
+    kind: 'observed-shape-migration-review',
+    bindings: {
+      reportDigest: migrationReportDigest(report),
+      subjectSha: report.inputs.subjectSha,
+      predecessorBaselineDigest: report.inputs.predecessorBaselineDigest,
+      predecessorBaselineTextSha256: report.inputs.predecessorBaselineTextSha256,
+      predecessorInventoryDigest: report.inputs.predecessorInventoryDigest,
+      sourceTreeDigest: report.inputs.sourceTreeDigest,
+      scanTreeDigest: report.inputs.scanTreeDigest,
+      detectorTreeDigest: report.inputs.detectorTreeDigest,
+      executionTreeDigest: report.inputs.executionTreeDigest,
+      corpusDigest: report.inputs.corpusDigest,
+      scanConfigDigest: report.inputs.scanConfigDigest,
+      targetInventoryDigest: report.target.inventoryDigest,
+      ...(report.scannerTransition
+        ? { scannerTransitionDigest: report.inputs.scannerTransitionDigest }
+        : {}),
+    },
+    decisions: [
+      ...report.predecessorRows.map((row) => ({
+        rowId: row.rowId,
+        subject: 'predecessor-reconciliation',
+        decision: 'pending',
+        note: '',
+      })),
+      ...report.rows.map((row) => ({
+        rowId: row.rowId,
+        subject: 'site-migration',
+        decision: 'pending',
+        note: '',
+      })),
+      ...(report.scannerTransition ? [{
+        rowId: scannerTransitionRowIdOf(report.scannerTransition),
+        subject: 'scanner-transition',
+        decision: 'pending',
+        note: '',
+      }] : []),
+    ],
+  };
+}
+
+export function validateReviewLedger(review, report) {
+  if (!review || review.reviewSchema !== MIGRATION_REVIEW_SCHEMA
+    || review.kind !== 'observed-shape-migration-review') {
+    throw new Error('observed-shape migration review has an unsupported schema');
+  }
+  const expectedBindings = reviewTemplateOf(report).bindings;
+  if (canonicalJson(review.bindings) !== canonicalJson(expectedBindings)) {
+    throw new Error('observed-shape migration review is not bound to this report and target inventory');
+  }
+  if (!Array.isArray(review.decisions)) throw new Error('observed-shape migration review decisions are missing');
+  const expectedRows = [
+    ...report.predecessorRows.map((row) => [row.rowId, 'predecessor-reconciliation']),
+    ...report.rows.map((row) => [row.rowId, 'site-migration']),
+    ...(report.scannerTransition
+      ? [[scannerTransitionRowIdOf(report.scannerTransition), 'scanner-transition']]
+      : []),
+  ];
+  const expectedIds = new Map(expectedRows);
+  const seen = new Set();
+  for (const decision of review.decisions) {
+    if (!decision || !expectedIds.has(decision.rowId)) {
+      throw new Error(`observed-shape migration review contains an unknown row: ${JSON.stringify(decision?.rowId)}`);
+    }
+    if (seen.has(decision.rowId)) throw new Error(`observed-shape migration review repeats ${decision.rowId}`);
+    seen.add(decision.rowId);
+    if (decision.subject !== expectedIds.get(decision.rowId)) {
+      throw new Error(`observed-shape migration row ${decision.rowId} has the wrong review subject`);
+    }
+    if (decision.decision !== 'accept') {
+      throw new Error(`observed-shape migration row ${decision.rowId} is ${JSON.stringify(decision.decision)}, not accepted`);
+    }
+    if (typeof decision.note !== 'string' || !decision.note.trim()) {
+      throw new Error(`observed-shape migration row ${decision.rowId} lacks a review note`);
+    }
+  }
+  const missing = [...expectedIds.keys()].filter((rowId) => !seen.has(rowId));
+  if (missing.length) throw new Error(`observed-shape migration review is missing ${missing.length} row(s)`);
+
+  // ⚠⚠ THE ISSUE GATE RUNS *AFTER* THE DECISIONS, AND THAT ORDER IS THE FIX.
+  // `issues` used to mean "the reconciliation is not CLEAN"; it now means "the
+  // reconciliation is not REVIEWED". Say that out loud rather than let a later
+  // reader conclude the gate weakened by accident: it did not weaken, it moved
+  // its authority from a mechanical filter over the reconciliation to the
+  // reviewed disposition of the SAME rows. Every growth row must still be
+  // dispositioned by an ACCEPTED decision carrying a note; an issue whose row is
+  // missing, pending, or rejected still FAILS CLOSED here — and the loop above
+  // has already refused any decision that is not `accept` with a real note, so
+  // reaching this line at all means every enumerated row was reviewed.
+  const accepted = new Set(review.decisions
+    .filter((decision) => decision.decision === 'accept')
+    .map((decision) => decision.rowId));
+  const undispositioned = (report.issues || []).filter((issue) => !accepted.has(issue?.rowId));
+  if (undispositioned.length) {
+    throw new Error('observed-shape migration report has unresolved issues: '
+      + undispositioned.map((issue) => issue?.message || JSON.stringify(issue)).join('; '));
+  }
+  return {
+    reportDigest: expectedBindings.reportDigest,
+    reviewDigest: digestOf(review),
+    subjectSha: expectedBindings.subjectSha,
+    predecessorBaselineDigest: expectedBindings.predecessorBaselineDigest,
+    predecessorBaselineTextSha256: expectedBindings.predecessorBaselineTextSha256,
+    predecessorInventoryDigest: expectedBindings.predecessorInventoryDigest,
+    sourceTreeDigest: expectedBindings.sourceTreeDigest,
+    scanTreeDigest: expectedBindings.scanTreeDigest,
+    detectorTreeDigest: expectedBindings.detectorTreeDigest,
+    executionTreeDigest: expectedBindings.executionTreeDigest,
+    corpusDigest: expectedBindings.corpusDigest,
+    scanConfigDigest: expectedBindings.scanConfigDigest,
+    targetInventoryDigest: expectedBindings.targetInventoryDigest,
+  };
+}
+
+/**
+ * The check gate consumes this authorization before writing a governed baseline.
+ *
+ * ⚠ THE TARGET SCHEMA IS READ FROM THE REPORT, NEVER FROM A FLAG THE CALLER
+ * PASSES. The report is the digest-bound artifact; a caller-supplied target
+ * would be the one input in this whole chain nothing content-addresses, and it
+ * would decide which validator runs.
+ */
+export function validateGovernedMigration({
+  predecessorBaseline,
+  predecessorBaselineText,
+  legacyArtifact,
+  currentArtifact,
+  report,
+  review,
+}) {
+  if (LEAF_MIGRATION_PREDECESSOR[report?.target?.baselineSchema] !== undefined) {
+    return validateGovernedHeuristicMigration({
+      predecessorBaseline,
+      predecessorBaselineText,
+      legacyArtifact,
+      currentArtifact,
+      report,
+      review,
+      targetSchema: report.target.baselineSchema,
+    });
+  }
+  const { predecessor, predecessorBaselineTextSha256 } = predecessorInputOf(
+    predecessorBaseline,
+    predecessorBaselineText,
+  );
+  validateMigrationReport(
+    report,
+    predecessor,
+    legacyArtifact,
+    currentArtifact,
+    predecessorBaselineText,
+  );
+  return {
+    ...validateReviewLedger(review, report),
+    predecessorBaselineDigest: digestOf(predecessor),
+    predecessorBaselineTextSha256,
+    predecessorInventoryDigest: digestOf(predecessor.inventory),
+    legacyArtifactDigest: report.inputs.legacyArtifactDigest,
+    currentArtifactDigest: report.inputs.currentArtifactDigest,
+    legacyScannerSha: legacyArtifact.provenance.scannerSha,
+    legacyAlgorithmBaseSha: legacyArtifact.legacyAlgorithm.baseSha,
+    legacyDetectorDigest: legacyArtifact.provenance.detectorDigest,
+    legacyScannerToolDigest: legacyArtifact.provenance.scannerToolDigest,
+    currentFindingsDigest: currentArtifact.digests.findings,
+    currentScannerSha: currentArtifact.provenance.scannerSha,
+    currentDetectorDigest: currentArtifact.provenance.detectorDigest,
+    currentScannerToolDigest: currentArtifact.provenance.scannerToolDigest,
+  };
+}
+
+/** One self-contained file is the only migration authority the freeze gate accepts. */
+export function migrationBundleOf({
+  predecessorBaseline,
+  predecessorBaselineText,
+  legacyArtifact,
+  currentArtifact,
+  report,
+  review,
+}) {
+  const { predecessor, predecessorBaselineTextSha256 } = predecessorInputOf(
+    predecessorBaseline,
+    predecessorBaselineText,
+    LEAF_MIGRATION_PREDECESSOR[report?.target?.baselineSchema] ?? 2,
+  );
+  validateGovernedMigration({
+    predecessorBaseline: predecessor,
+    predecessorBaselineText,
+    legacyArtifact,
+    currentArtifact,
+    report,
+    review,
+  });
+  const payload = {
+    predecessorBaseline: predecessor,
+    predecessorBaselineText,
+    predecessorBaselineTextSha256,
+    legacyArtifact,
+    currentArtifact,
+    report,
+    review,
+  };
+  return {
+    bundleSchema: MIGRATION_BUNDLE_SCHEMA,
+    kind: 'observed-shape-migration-review-bundle',
+    bundleDigest: digestOf(payload),
+    ...payload,
+  };
+}
+
+export function validateMigrationBundle(bundle) {
+  if (!bundle || bundle.bundleSchema !== MIGRATION_BUNDLE_SCHEMA
+    || bundle.kind !== 'observed-shape-migration-review-bundle'
+    || bundle.bundleDigest !== digestOf({
+      predecessorBaseline: bundle.predecessorBaseline,
+      predecessorBaselineText: bundle.predecessorBaselineText,
+      predecessorBaselineTextSha256: bundle.predecessorBaselineTextSha256,
+      legacyArtifact: bundle.legacyArtifact,
+      currentArtifact: bundle.currentArtifact,
+      report: bundle.report,
+      review: bundle.review,
+    })) {
+    throw new Error('observed-shape migration review bundle has an unsupported schema');
+  }
+  const authorization = validateGovernedMigration(bundle);
+  if (bundle.predecessorBaselineTextSha256 !== authorization.predecessorBaselineTextSha256) {
+    throw new Error('observed-shape migration bundle predecessor text digest mismatch');
+  }
+  return { ...authorization, bundleDigest: bundle.bundleDigest };
+}
+
+export function run(argv = process.argv.slice(2)) {
+  const command = parseExactFlags(argv, {
+    '--predecessor': { kind: 'value', name: 'predecessorPath' },
+    '--legacy': { kind: 'value', name: 'legacyPath' },
+    '--current': { kind: 'value', name: 'currentPath' },
+    '--target-schema': { kind: 'value', name: 'targetSchema' },
+    '--json': { kind: 'value', name: 'jsonPath' },
+    '--review-template': { kind: 'value', name: 'templatePath' },
+    '--review': { kind: 'value', name: 'reviewPath' },
+    '--bundle': { kind: 'value', name: 'bundlePath' },
+  });
+  const { predecessorPath, legacyPath, currentPath } = command;
+  // The target is DERIVED FROM THE INPUTS unless stated: an exact `--current`
+  // artifact can only mean the retired 2->3 pairing, and its absence can only
+  // mean the LIVE leaf re-freeze. `--target-schema` makes it explicit and turns
+  // any mismatch into a refusal rather than a silent mode switch.
+  const targetSchema = command.targetSchema
+    ? Number(command.targetSchema)
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : AGREE_TIER_SEED_TARGET_SCHEMA);
+  if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
+    SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
+    CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
+    PROSE_REGEN_TARGET_SCHEMA, TREASURY_ADMISSION_TARGET_SCHEMA,
+    GENESIS_TIES_TARGET_SCHEMA, DEAD_DEPENDENCY_TARGET_SCHEMA,
+    PRESET_LIGHT_TARGET_SCHEMA, STABLE_CORE_TARGET_SCHEMA,
+    COMPANION_GATE_TARGET_SCHEMA, STRESS_TOPOLOGY_TARGET_SCHEMA,
+    LINEAGE_REANCHOR_TARGET_SCHEMA, EXEMPTION_RETIREMENT_TARGET_SCHEMA,
+    BANK_FENCE_TARGET_SCHEMA, RELATIONSHIPS_MOUNT_TARGET_SCHEMA,
+    DOMAIN_READER_TARGET_SCHEMA, EDIT_MODE_READERS_TARGET_SCHEMA,
+    CORPUS_REDEAL_TARGET_SCHEMA, ADVISORY_LOCKFILE_TARGET_SCHEMA,
+    FED_WORLD_TARGET_SCHEMA, WINDOW_RUNG1_TARGET_SCHEMA, TIER_COVERAGE_TARGET_SCHEMA,
+    MIGRATION_DIRECTION_TARGET_SCHEMA, PEOPLE_CAST_TARGET_SCHEMA,
+    PEOPLE_LANDING_TARGET_SCHEMA, CAR_MERGE_TARGET_SCHEMA, WAVE_W2_TARGET_SCHEMA, WAVE_FOOD_TARGET_SCHEMA, WAVE_VEIL_TARGET_SCHEMA,
+    TRAIN_CAR1_TARGET_SCHEMA, TRAIN_CAR2_TARGET_SCHEMA, TRAIN_CAR3_TARGET_SCHEMA,
+    TRAIN_CAR4_TARGET_SCHEMA, PUBLIC_PROSE_TARGET_SCHEMA, PLAYED_WORLDS_TARGET_SCHEMA,
+    AGREE_TIER_SEED_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${AGREE_TIER_SEED_TARGET_SCHEMA} (live tier-seed leaf),`
+      + ` ${PLAYED_WORLDS_TARGET_SCHEMA} (retired played-worlds leaf),`
+      + ` ${PUBLIC_PROSE_TARGET_SCHEMA} (retired public-prose leaf),`
+      + ` ${TRAIN_CAR4_TARGET_SCHEMA} (retired allegiance-car4 leaf),`
+      + ` ${TRAIN_CAR3_TARGET_SCHEMA} (retired allegiance-car3 leaf),`
+      + ` ${TRAIN_CAR2_TARGET_SCHEMA} (retired allegiance-car2 leaf),`
+      + ` ${TRAIN_CAR1_TARGET_SCHEMA} (retired allegiance-car1 leaf),`
+      + ` ${WAVE_VEIL_TARGET_SCHEMA} (retired public-veil leaf),`
+      + ` ${WAVE_FOOD_TARGET_SCHEMA} (retired food-isolation leaf),`
+      + ` ${WAVE_W2_TARGET_SCHEMA} (retired W2-merge leaf),`
+      + ` ${CAR_MERGE_TARGET_SCHEMA} (retired car-merge leaf),`
+      + ` ${PEOPLE_LANDING_TARGET_SCHEMA} (retired people-landing leaf),`
+      + ` ${PEOPLE_CAST_TARGET_SCHEMA} (retired people-cast leaf),`
+      + ` ${MIGRATION_DIRECTION_TARGET_SCHEMA} (retired migration-direction leaf),`
+      + ` ${TIER_COVERAGE_TARGET_SCHEMA} (retired tier-coverage leaf),`
+      + ` ${WINDOW_RUNG1_TARGET_SCHEMA} (retired rung-1-window leaf),`
+      + ` ${FED_WORLD_TARGET_SCHEMA} (retired fed-world leaf),`
+      + ` ${ADVISORY_LOCKFILE_TARGET_SCHEMA} (retired advisory-lockfile leaf),`
+      + ` ${CORPUS_REDEAL_TARGET_SCHEMA} (retired corpus-redeal leaf),`
+      + ` ${EDIT_MODE_READERS_TARGET_SCHEMA} (retired edit-mode-readers leaf),`
+      + ` ${DOMAIN_READER_TARGET_SCHEMA} (retired domain-reader leaf),`
+      + ` ${RELATIONSHIPS_MOUNT_TARGET_SCHEMA} (retired relationships-mount leaf),`
+      + ` ${BANK_FENCE_TARGET_SCHEMA} (retired bank-fence leaf),`
+      + ` ${EXEMPTION_RETIREMENT_TARGET_SCHEMA} (retired exemption-retirement leaf),`
+      + ` ${LINEAGE_REANCHOR_TARGET_SCHEMA} (retired lineage-reanchor leaf),`
+      + ` ${STRESS_TOPOLOGY_TARGET_SCHEMA} (retired stress-topology leaf),`
+      + ` ${COMPANION_GATE_TARGET_SCHEMA} (retired companion-gate leaf),`
+      + ` ${STABLE_CORE_TARGET_SCHEMA} (retired stable-core leaf),`
+      + ` ${PRESET_LIGHT_TARGET_SCHEMA} (retired preset-light leaf),`
+      + ` ${DEAD_DEPENDENCY_TARGET_SCHEMA} (retired dead-dependency leaf),`
+      + ` ${GENESIS_TIES_TARGET_SCHEMA} (retired genesis-ties leaf),`
+      + ` ${TREASURY_ADMISSION_TARGET_SCHEMA} (retired treasury-admission leaf),`
+      + ` ${PROSE_REGEN_TARGET_SCHEMA} (retired prose-regen leaf),`
+      + ` ${EPOCH_DARK_CORPUS_TARGET_SCHEMA} (retired epoch-dark leaf),`
+      + ` ${CORPUS_COVERAGE_TARGET_SCHEMA} (retired corpus-coverage leaf),`
+      + ` ${BANKED_EXPLAINED_WRITER_TARGET_SCHEMA} (retired banked explained-writer leaf),`
+      + ` ${SURFACE_FILTERED_TARGET_SCHEMA} (retired surface-filtered leaf),`
+      + ` ${FILTERED_TARGET_SCHEMA} (retired M6/M8-only filtered leaf),`
+      + ` ${HEURISTIC_TARGET_SCHEMA} (retired unfiltered leaf)`
+      + ` or ${RETIRED_EXACT_TARGET_SCHEMA} (retired exact); received ${JSON.stringify(command.targetSchema)}`);
+  }
+  const heuristicTarget = LEAF_MIGRATION_PREDECESSOR[targetSchema] !== undefined;
+  if (!predecessorPath || !legacyPath || (!heuristicTarget && !currentPath)) {
+    throw new Error('usage: migrate-observed-shape-readers.mjs --predecessor=<predecessor-baseline.json> --legacy=<legacy-artifact.json> [--target-schema=10] [--current=<exact-artifact.json> --target-schema=3] [--json=<report.json>] [--review-template=<review.json>] [--review=<completed-review.json> --bundle=<governed-review.json>]');
+  }
+  if (heuristicTarget && currentPath) {
+    throw new Error(`observed-shape --current is only valid for the retired --target-schema=${RETIRED_EXACT_TARGET_SCHEMA} pairing;`
+      + ` the schema-${targetSchema} target IS the governed heuristic artifact`);
+  }
+  if (command.bundlePath && !command.reviewPath) {
+    throw new Error('--bundle requires a completed --review ledger');
+  }
+  if (command.templatePath && command.reviewPath) {
+    throw new Error('--review-template and --review are conflicting phases');
+  }
+  const outputEntries = [
+    ['json', command.jsonPath],
+    ['template', command.templatePath],
+    ['bundle', command.bundlePath],
+  ].filter(([, path]) => path);
+  const plans = outputEntries.length ? planExternalArtifactOutputs({
+    root: ROOT,
+    outputs: outputEntries.map(([, path]) => path),
+    inputs: [
+      predecessorPath,
+      legacyPath,
+      ...(currentPath ? [currentPath] : []),
+      ...(command.reviewPath ? [command.reviewPath] : []),
+    ],
+  }) : [];
+  const planByName = new Map(outputEntries.map(([name], index) => [name, plans[index]]));
+  const predecessorBaselineText = readFileSync(predecessorPath, 'utf8');
+  const predecessorBaseline = JSON.parse(predecessorBaselineText);
+  const legacy = JSON.parse(readFileSync(legacyPath, 'utf8'));
+  // Under the heuristic target the governed heuristic artifact IS the current
+  // authority, so it fills both roles rather than a second artifact being read.
+  const current = currentPath ? JSON.parse(readFileSync(currentPath, 'utf8')) : legacy;
+  const report = heuristicTarget
+    ? heuristicMigrationReport(predecessorBaseline, legacy, predecessorBaselineText, targetSchema)
+    : migrationReport(predecessorBaseline, legacy, current, predecessorBaselineText);
+  const template = command.templatePath ? reviewTemplateOf(report) : null;
+  const review = command.reviewPath
+    ? JSON.parse(readFileSync(command.reviewPath, 'utf8'))
+    : null;
+  if (review) validateReviewLedger(review, report);
+  let governedBundle = null;
+  if (command.bundlePath) {
+    governedBundle = migrationBundleOf({
+      predecessorBaseline,
+      predecessorBaselineText,
+      legacyArtifact: legacy,
+      currentArtifact: current,
+      report,
+      review,
+    });
+  }
+  if (command.jsonPath) publishJsonExclusive(planByName.get('json'), report, {
+    stringify: (value) => canonicalJson(value, 2),
+  });
+  if (command.templatePath) publishJsonExclusive(planByName.get('template'), template, {
+    stringify: (value) => canonicalJson(value, 2),
+  });
+  if (command.bundlePath) {
+    publishJsonExclusive(planByName.get('bundle'), governedBundle, {
+      stringify: (value) => canonicalJson(value, 2),
+    });
+  }
+  console.log(canonicalJson(report.summary, 2));
+  return report;
+}
+
+const invokedDirectly = process.argv[1]
+  && relative(process.argv[1], fileURLToPath(import.meta.url)) === '';
+if (invokedDirectly) run();

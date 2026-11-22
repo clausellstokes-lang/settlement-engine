@@ -1,0 +1,168 @@
+/**
+ * @vitest-environment jsdom
+ *
+ * tests/components/seatWordsOnce.test.jsx — COHERENCE-POWERS-5 (REVIEW-POWERS-2 at e86d069be, N5–N7; the chair's
+ * ruling to the fifth seat): the words the seat's rows print, read on the rendered page.
+ *
+ * N5 — the DM block's title "The ruling three of X" reads the number of names it heads, at its print site (the
+ * review: "The ruling three of Household Council / Head · Philippos Bryennios" and nothing else; the census row 16a).
+ *
+ * N6 — the holder's own house's Connection row names the office the holder holds, as the seat row does (the review:
+ * "Connection: Headman Cosij Chan" on the Fishing community, "Elder Cosij Chan, the boat-headman" two rows down).
+ *
+ * N7 — the seat row never doubles an office word ("the boat-headman and Headman", "the priest and Elder Priest"); and the
+ * keeper of an empty seat has one title on the tab: the DM block's label is the seat row's caretaker form ("Acting
+ * Household Elder Asuka Yang … keeps the seat meanwhile" beside "Steward · Asuka Yang").
+ *
+ * Births through birthConfig with the census's dials (DEFAULT_CONFIG and the browser's random dials, the review's own
+ * seeds); the Power tab rendered as the DM reads it.
+ */
+import { beforeAll, afterEach, describe, expect, it } from 'vitest';
+import { render, cleanup } from '@testing-library/react';
+import PowerTab from '../../src/components/new/tabs/PowerTab.jsx';
+import InstitutionsTab from '../../src/components/new/tabs/InstitutionsTab.jsx';
+import { rulingChainOf } from '../../src/domain/dossier/powerStrata.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
+import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+
+afterEach(cleanup);
+
+const DIALS = Object.freeze({
+  tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat',
+  nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true,
+  magicExists: true, contentProfile: 'grounded',
+});
+const TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
+const CRISES = Object.freeze(['under_siege', 'famine', 'occupied', 'politically_fractured', 'indebted', 'recently_betrayed',
+  'infiltrated', 'plague_onset', 'succession_void', 'monster_pressure', 'insurgency', 'religious_conversion',
+  'slave_revolt', 'wartime', 'mass_migration']);
+
+/** The census's cfgFor (docs/chair/2026-11-12/probes/SECOND-WAVE-CENSUS/births.mjs), so a review town is the review's. */
+function born(seed) {
+  let m = seed.match(/^r2r-(\w+)-(\d+)$/);
+  const cfg = m
+    ? birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: m[1] })
+    : (m = seed.match(/^r2s-(\w+)-(thorp|hamlet|village|town|city|metropolis)-(\d+)$/))
+      && birthConfig({ ...DEFAULT_CONFIG, ...DIALS, selectedStresses: [m[1]], selectedStressesRandom: false, settType: m[2] });
+  if (!cfg) throw new Error(seed);
+  return generateSettlementPipeline(cfg, null, { seed, customContent: {} });
+}
+
+/** The Power tab as the DM reads it. @param {any} s */
+const powerTab = (s) => render(<PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />).container;
+
+/** The count word each heading must carry for its names, literals. */
+const COUNT_WORDS = Object.freeze({ 3: /^The ruling three of /, 2: /^The ruling two of /, 1: /^Who leads /, 0: /^No one stands at the head of / });
+
+/** N5's misses on one rendered tab. @param {any} s @param {string} key */
+function n5MissesOf(s, key) {
+  const c = powerTab(s);
+  const panel = c.querySelector('[data-testid="who-runs-this-town"]');
+  cleanup();
+  if (!panel) return [];
+  const names = panel.querySelectorAll('[data-testid="dm-ruling-face"]').length;
+  const head = panel.querySelector('[data-testid="dm-ruling-head"]')?.textContent
+    || [...panel.querySelectorAll('div')].map((d) => d.textContent).find((t) => /^The ruling three of /.test(t || '')) || '';
+  return COUNT_WORDS[names]?.test(head) ? [] : [`${key}: "${head}" heads ${names} name(s)`];
+}
+
+/** N6's misses on one rendered Institutions tab: every Connection row naming the holder opens on the office held. */
+function n6MissesOf(s, key) {
+  const name = rulingChainOf(s).npc?.name;
+  const holder = name ? (s.npcs || []).find((c) => c.name === name) : null;
+  const office = holder && holder.institution?.kind === 'house' && holder.role !== holder.title ? holder.role : null;
+  if (!office) return [];
+  const c = render(<InstitutionsTab settlement={s} />).container;
+  const rows = [...c.querySelectorAll('[data-testid="institution-face"]')].map((r) => r.textContent || '').filter((t) => t.includes(name));
+  cleanup();
+  return rows.filter((t) => !t.startsWith(`Connection: ${office} ${name}`)).map((t) => `${key}: "${t}" (the seat: ${office})`);
+}
+
+/** N7's doubled word: the house title's last word is the office's last word. @param {string} words "the T and O" */
+const doubled = (words) => {
+  const m = String(words).match(/^(the .+?) and (.+)$/);
+  return !!m && m[1].toLowerCase().split(/[\s-]+/).pop() === m[2].toLowerCase().split(/\s+/).pop();
+};
+/** N7's misses on one rendered Power tab: the seat row the page prints. */
+function n7MissesOf(s, key) {
+  const npc = rulingChainOf(s).npc;
+  if (!npc) return [];
+  const text = powerTab(s).textContent || '';
+  cleanup();
+  const out = [];
+  if (!text.includes(`${npc.name}, ${npc.role}`)) out.push(`${key}: the seat row does not print "${npc.name}, ${npc.role}"`);
+  if (doubled(npc.role)) out.push(`${key}: the seat row doubles an office word: "${npc.name}, ${npc.role}"`);
+  return out;
+}
+
+/** N7's keeper: the DM block labels the keeper with the words the seat row prints before the keeper's name. */
+function keeperMissesOf(s, key) {
+  const line = rulingChainOf(s).absence?.line || '';
+  const m = line.match(/(?:\.|^) ?([^.]*?) keeps the seat meanwhile\.$/);
+  if (!m) return [];
+  const c = powerTab(s);
+  const rows = [...c.querySelectorAll('[data-testid="dm-ruling-face"]')].map((r) => (r.textContent || '').trim());
+  cleanup();
+  const row = rows.find((t) => /^[^·]+ · /.test(t) && m[1].includes(t.split(' · ')[1].split(',')[0]));
+  if (!row) return [`${key}: no DM row for the keeper of "${m[1]}"`];
+  const label = row.split(' · ')[0];
+  return m[1].startsWith(`${label} `) ? [] : [`${key}: the DM block labels the keeper "${label}", the seat row "${m[1]}"`];
+}
+
+describe('COHERENCE-POWERS-5 — the seat\'s words on the page (REVIEW-POWERS-2 N5–N7)', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); }, 60_000);
+
+  it('N5: the review\'s town — the title over one name says who leads, not "the ruling three"', () => {
+    expect(n5MissesOf(born('r2s-famine-thorp-0'), 'r2s-famine-thorp-0')).toEqual([]);
+  }, 120_000);
+
+  it('N5: at every size, random and under every crisis — the title reads the number of names it heads', () => {
+    const misses = [];
+    for (const t of TIERS) {
+      for (let i = 0; i < 4; i++) misses.push(...n5MissesOf(born(`r2r-${t}-${i}`), `r2r-${t}-${i}`));
+      for (const x of CRISES) misses.push(...n5MissesOf(born(`r2s-${x}-${t}-0`), `r2s-${x}-${t}-0`));
+    }
+    expect(misses).toEqual([]);
+  }, 900_000);
+
+  it('N6: the review\'s town — the holder\'s own house names the office held, not another office word', () => {
+    expect(n6MissesOf(born('r2r-thorp-0'), 'r2r-thorp-0')).toEqual([]);
+  }, 120_000);
+
+  it('N6: at every size, random and under every crisis — every Connection row naming the holder opens on the office held', () => {
+    const misses = [];
+    for (const t of TIERS) {
+      for (let i = 0; i < 4; i++) misses.push(...n6MissesOf(born(`r2r-${t}-${i}`), `r2r-${t}-${i}`));
+      for (const x of CRISES) misses.push(...n6MissesOf(born(`r2s-${x}-${t}-0`), `r2s-${x}-${t}-0`));
+    }
+    expect(misses).toEqual([]);
+  }, 900_000);
+
+  it('N7: the review\'s towns — the seat row prints each office word once', () => {
+    const misses = [];
+    for (const seed of ['r2r-hamlet-1', 'r2r-hamlet-13', 'r2r-hamlet-4']) misses.push(...n7MissesOf(born(seed), seed));
+    expect(misses).toEqual([]);
+  }, 120_000);
+
+  it('N7: at every size, random and under every crisis — the seat row never doubles an office word', () => {
+    const misses = [];
+    for (const t of TIERS) {
+      for (let i = 0; i < 8; i++) misses.push(...n7MissesOf(born(`r2r-${t}-${i}`), `r2r-${t}-${i}`));
+      for (const x of CRISES) misses.push(...n7MissesOf(born(`r2s-${x}-${t}-0`), `r2s-${x}-${t}-0`));
+    }
+    expect(misses).toEqual([]);
+  }, 900_000);
+
+  it('N7: the review\'s towns — the keeper of the empty seat has one title on the tab', () => {
+    const misses = [];
+    for (const seed of ['r2s-succession_void-thorp-0', 'r2s-succession_void-town-0', 'r2r-village-56']) misses.push(...keeperMissesOf(born(seed), seed));
+    expect(misses).toEqual([]);
+  }, 120_000);
+
+  it('N7: every succession at every size — the DM block labels the keeper in the seat row\'s caretaker form', () => {
+    const misses = [];
+    for (const t of TIERS) for (let i = 0; i < 4; i++) misses.push(...keeperMissesOf(born(`r2s-succession_void-${t}-${i}`), `r2s-succession_void-${t}-${i}`));
+    expect(misses).toEqual([]);
+  }, 900_000);
+});

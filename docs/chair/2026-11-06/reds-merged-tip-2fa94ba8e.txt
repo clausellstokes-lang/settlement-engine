@@ -1,0 +1,87 @@
+tests/domain/beliefAxisSubjects.test.js :: SP-B reachability — every band edge is produced by a REAL world every CONDITIONS rung of every key is reachable
+tests/domain/composeStateProse.test.js :: ⭐ THE BASE-SIDE SYNTHESIS — every recorded cell, against the composer's own rule ⭐ THE CELL ARM CAN NOW TELL `vid` FROM `index`: the blind spot closed a
+tests/domain/demographicsFloor.test.js :: 3. THE DESCENT — the floored-six shape walks the ladder to the terminal lane DARK (the control): the same fixture stalls at hamlet at exactly 300 people, fo
+tests/domain/demographicsFloor.test.js :: 3. THE DESCENT — the floored-six shape walks the ladder to the terminal lane LIT: a settlement whose GRANARY fails walks the ladder down and the terminal ca
+tests/domain/demographicsFloor.test.js :: 4. THE LABEL LAG — a tier label that cannot follow its census LIT: the same settlement is thorp-scale in fact, and it reaches the terminal lane
+tests/domain/demographicsFloor.test.js :: 4. THE LABEL LAG — a tier label that cannot follow its census the writer honours the stamp and nothing else: an unstamped patch still refuses
+tests/domain/demographicsFloor.test.js :: 5. PROMOTION — law 4 on both arms DARK: the legacy mint is intact, and a golden depends on it
+tests/domain/demographicsFloor.test.js :: 5. PROMOTION — law 4 on both arms LIT: at the full floor it promotes, conserving exactly, and stamps the law it rose under
+tests/domain/demographicsFloor.test.js :: 5. PROMOTION — law 4 on both arms LIT: earned ascension refuses the same promotion outright, so nobody is invented
+tests/domain/demographicsFloor.test.js :: 5. PROMOTION — law 4 on both arms THE APPLIER, both arms on ONE settlement: the stamp is the whole difference
+tests/domain/demographicsFloor.test.js :: 8. THE DARK FENCE — measured against HEAD, not recorded from the new code dark, all three lanes are byte-identical to HEAD at every pressure regime
+tests/domain/demographicsKernel.test.js :: DORMANCY — dark is a no-op by OBJECT IDENTITY, not by deep equality THE FENCED DORMANCY GOLDEN: eight ticks of the LIT lifecycle lane with demographics DAR
+tests/domain/demographicsRates.test.js :: the authored tables are TOTAL over the tier and terrain vocabularies P5a: 0.55 is the minimal two-decimal desert factor; the 0.54 mutant stays locked
+tests/domain/demographicsRates.test.js :: the authored tables are TOTAL over the tier and terrain vocabularies P5a: the interlock is real — mountain locks without works and desert needs the cap
+tests/domain/demographicsWorldsHand.test.js :: P4.4 THE VIABILITY LADDER — five rungs, and a mover it actually stops THE GATE: the ladder refuses a founding no existing predicate refused
+tests/domain/faithMass.test.js :: faithMass falls back to population band when tier is absent, else a neutral default
+tests/domain/highWater.test.js :: MF-T2R — the high-water evidence read, and the channels proven whole channel 1 reads both arms in declared precedence: the peakTier stamp leads and the tier disagre
+tests/domain/highWater.test.js :: MF-T2R — the high-water evidence read, and the channels proven whole the §434 gap is TYPED, never silent: a demoted settlement with no stamp reports understated an
+tests/domain/modeSpeedsWy1.test.js :: WY-1 A5 — dark by ABSENT DATA: the digest and the pulse record are byte-identical to the base ABSENT datum: four pulse records hash to the base
+tests/domain/npcProfile.test.js :: the criminal institution vocabulary (TE-CH-7) the catalog the pin is measured over is the live one, not a fixture
+tests/domain/razingWr8.test.js :: WR-8 R / CR-WR8-F — the razing forces no tier; the tier reads the new truth ARM A — the tier FALLS when the truth falls: a heavy sack demotes through the real cho
+tests/domain/recordInvariants.test.js :: EM-R0b — recordInvariants: the town's own invariants as a module EM-R0b A1 — the control over the declared stride: every plain generated record is clean, a
+tests/domain/recordInvariants.test.js :: EM-R0b — recordInvariants: the town's own invariants as a module EM-R0b A3 — guard the guard: every check has a mutation that convicts it and nothing else
+tests/domain/recordMerge.test.js :: EM-R0c — the merge: the consequence of an edit is the difference of two re-derivations A6 · the order rule has two arms on economicState.activeChains
+tests/domain/religionLegitimacyFactionKey.test.js :: rulerLens reads the canonical governing seat reads the weak elected seat, not the faction that out-powers it
+tests/domain/settlementLifecycleFirstClass.test.js :: geometry survives death (the digest is untouched across a die-and-resettle cycle) a lit spatial pulse with a dying thorp never rewrites spatialDig
+tests/domain/settlementLifecycleKernel.test.js :: seeding (§1: §H-loaded, integrator + cooldown, conserved at birth) caps by parent tier are enforced and DEFERRAL-VISIBLE when armed at cap
+tests/domain/settlementLifecycleKernel.test.js :: seeding (§1: §H-loaded, integrator + cooldown, conserved at birth) the founding never drags the parent below its own tier floor
+tests/domain/settlementLifecycleVerbs.test.js :: FORCE_FOUND_STEADING (force ≡ organic through the ONE mint) the walls HOLD under force: tier cap, sub-town parent, and headroom all REFUSE (never sil
+tests/domain/shiftTier.test.js :: SHIFT_TIER handler leaves an already in-band population unchanged
+tests/domain/shiftTier.test.js :: SHIFT_TIER handler promotion moves up one tier and rebands population into the new band
+tests/domain/tierResourceDynamics.test.js :: applyTierOutcomeToSettlement — apply-time tier re-verify resolves an implicit tier from population before comparing
+tests/domain/tierResourceDynamics.test.js :: applyTierOutcomeToSettlement — apply-time tier re-verify the anti-churn promotion floor bump leaves a populationHistory breadcrumb
+tests/domain/tierResourceDynamics.test.js :: evaluateTierResourceDynamics — pending tier proposal dedupe describes demotion in both halves too, people and trade, with the streak in the receipt
+tests/domain/tracePartition.test.js :: EM-R5 — the generation trace partitioned by every step about a held key A4 — the step order and the subject register are total against their producers, both 
+tests/domain/undercityConnectivity.test.js :: MF-UC5 — the undercity connectivity graph ISOLATION IS A FIRST-CLASS VISIBLE FACT, AND IT SAYS WHY: on a town whose criminal share sits between UC-2’s
+tests/domain/undercityMonotoneComponents.test.js :: MF-UC2 — the undercity monotone components THE SMUGGLER SUBSET NEEDS BOTH FACTS: a gate alone licenses it, a waterfront alone licenses it, neither
+tests/domain/undercitySewerDerivation.test.js :: MF-UC1 — the undercity sanitation ladder and its wells WELLS AND CISTERNS (§311.8.2(c)): the extent is tier-scaled and never shrinks up the tier ord
+tests/domain/undercitySewerDerivation.test.js :: MF-UC1 — the undercity sanitation ladder and its wells the HONEST FOUNDING arm (§441.2): the NO_TYPED_HOME slot sits at zero weight and perturbing i
+tests/domain/undercitySewerDerivation.test.js :: MF-UC1 — the undercity sanitation ladder and its wells the owner's own example: a FLAT DRY town honestly gets cesspits — the gradient/outfall cause
+tests/domain/worldFactRederive.test.js :: EM-B2b — world facts by consequence: the route, the refusals and the stated radius A7 — THE GOLDENS CANNOT SEE ANY OF IT: both fixtures are byte-identical
+tests/generation.test.js :: snapshot shape village_riverside_river structure is stable
+tests/generators/captureBirthScale.test.js :: birth-scale distribution sweep overwhelming criminal presence reads contested/influenced at birth
+tests/generators/customFoodImpact.integration.test.js :: custom foodImpact — canonical generation and tick integration carries the generated food difference into the real stockpile tick
+tests/generators/effectReachability.coverage.test.js :: authored effect reachability fires every registered effect at least once across the pinned corpus
+tests/generators/generationCertificationCorpus.test.js :: seeded generation certification cohort pins the advisory record_coherence_battery failures BY IDENTITY
+tests/generators/generationContracts.test.js :: final settlement generation contracts persists data receipts while keeping function-bearing world law transient
+tests/generators/generationForkCensus.test.js :: EM-P2 — generation census by execution: the instrument, the classification, both channels A4 — both landing triples re-executed: the six varies row
+tests/generators/institutionBudgetPromise.test.js :: X-46 car 3 — the promise: the factor at 1.0 is the tip before the budget every one of sixty seeds is byte-identical with the density factor force
+tests/generators/nameHeldThroughAssembly.test.js :: EM-R4 — the settlement name is held through assembly A1 — EM-R4: inert with no pins: the golden corpus and an empty bag leave every byte where i
+tests/generators/pipelinePinnedChoosers.test.js :: EM-B2a3 — the institution and power choosers consult the pin seam A1 — the null change: an unpinned run and pins {} leave the golden corpus byte-
+tests/generators/pipelinePinnedMode.test.js :: EM-B2a2 — the pin primitive has ONE exported home: chooseOrPin lives on the runner A2 — the lift moves nothing: the golden corpus, the draw count and
+tests/generators/pipelinePinnedMode.test.js :: EM-P0 — the pipeline seam: pins are consulted per chooser, on one stream A1 — the null change: no pins and pins {} leave the golden corpus byte-ident
+tests/generators/pipelinePinnedMode.test.js :: EM-R1b — a recordPath-less chooser is not counted against a record-built bag A5 — EM-R1b: a supplied transient chooser is still handed back, and the 
+tests/generators/powerEconomyFreshness.test.js :: EM-R3 — the power structure is final under a held pin A1 — the replay does not run under a held structure: the DM roster survives a changed world
+tests/generators/powerEconomyFreshness.test.js :: EM-R3 — the power structure is final under a held pin A3 — the freshness assert is pin-aware at its three call sites
+tests/generators/powerEconomyFreshness.test.js :: EM-R3 — the power structure is final under a held pin A4 — the golden is unmoved by construction, and a held bag does move it
+tests/generators/powerEconomyFreshness.test.js :: EM-R3 — the power structure is final under a held pin A6 — the receipt stays the record's and the trace refresher is a measured no-op
+tests/generators/powerEconomyFreshness.test.js :: bounded final economy -> power reconciliation econ-power-freshness-349 consumes Moderate, not provisional Comfortable
+tests/generators/rosterFinalUnderHeldRoster.test.js :: EM-R2 — the roster is final inside enrichNpcCoherence under a held roster A1 — inert with no pins: the golden corpus and the coherence tail a
+tests/generators/smallPlaceMarket.test.js :: isCityScale — the city cuts read the tier agrees with the old population > 5000 cut at every band edge of today's ranges
+tests/joins/ordering.test.js :: faction-pulled institutions join services / chains / income known seeds still produce faction_boost institutions (full catalog defs, traced)
+tests/lint/observedShapeReaders.walker.test.js :: reader-with-no-writer ratchet: the live scan A1/A7: schema-7 filters narrow ordinary noise while explained writers stay banked live
+tests/lint/observedShapeReaders.walker.test.js :: reader-with-no-writer ratchet: the live scan SHRINK-ONLY: no file exceeds its frozen ceiling, and no row has vanished
+tests/lint/observedShapeReaders.walker.test.js :: reader-with-no-writer ratchet: the live scan the UNREVIEWED-UI cohort is ENFORCED, banked, and exactly its measured size
+tests/lint/observedShapeReaders.walker.test.js :: reader-with-no-writer ratchet: the live scan the provenance drift classifier separates a detector change from an input change THE LIVE ESTATE INSTANCE
+tests/lint/proseCorpusBytes.test.js :: the prose byte ratchet — the roster and the measurement (ARCH §10) RAW is EXACT: above fails, below demands the row be lowered
+tests/lint/proseMoveGrammar.walker.test.js :: the PROVENANCE detector cites the twelve holder kinds and nothing wider (SITTING §R c-16) U5 — the reading does not depend on the row's PRIORITY POSITI
+tests/lint/proseMoveGrammar.walker.test.js :: the PROVENANCE detector cites the twelve holder kinds and nothing wider (SITTING §R c-16) splits the shipped citations as THREE INTEGERS beside the total
+tests/lint/sourceCitationIntegrity.walker.test.js :: source citation integrity — the live estate the archival exclusion is still the set this walker documents
+tests/lint/sovereigntyLightingContract.walker.test.js :: the sovereignty lighting condition — a marker is EVIDENCE only in a live title THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated fi
+tests/lint/tuningRegister.walker.test.js :: tuning register — the signature is a record, not a word the three signature records read unsigned while their tables are draft
+tests/lint/writerReach.walker.test.js :: writer-with-no-reader ratchet: the EXECUTED corpus and the closures the producers ran and the write population is not empty
+tests/lint/writerReach.walker.test.js :: writer-with-no-reader ratchet: the MUTANTS THE GROWTH LAW IS EXECUTED: a live-derived register is green and ONE planted dark identity reds
+tests/lint/writerReach.walker.test.js :: writer-with-no-reader ratchet: the MUTANTS THE SWAP MUTANT: a new dark identity at constant count reds with its identity named
+tests/lint/writerReach.walker.test.js :: writer-with-no-reader ratchet: the frozen register the frozen shapesDigest EQUALS the in-process digest of corpus.shapes — two executions of one builder are 
+tests/lint/writerReach.walker.test.js :: writer-with-no-reader ratchet: the frozen register the surfaceReach grammar round-trips: parse(format(reach)) equals reach for every LIT identity
+tests/lint/writerReach.walker.test.js :: writer-with-no-reader ratchet: the lit-dial arm the lit arm changes no draw: the walker corpus is byte-identical beside the lit one, and the dials are passed o
+tests/lint/writerReach.walker.test.js :: writer-with-no-reader ratchet: the live judgment the banked cohort is exact — a member now LIT or no longer written is stale, never silently spent
+tests/property/demographicsLifecycleGolden.test.js :: demographics + settlement lifecycle — the dedicated both-flags golden covers the whole seed family and reproduces every exact projection
+tests/property/dmLayerGoldenIsolation.test.js :: EM-B2a4 — the DM layer, its pin bag and the golden isolation property A7 — THE ISOLATION PROPERTY: a dormant layer is the committed golden on EVERY
+tests/property/dossierProseManifest.test.js :: the composed-prose manifest — the DRIFT corpus, both audiences ⭐ THE DRIFT ARM: no row added, no row removed, no row moved
+tests/property/editCorpusRatchet.test.js :: the edit corpus ratchet: the re-entry seam and the merge over the 63-row corpus A5 a chain is deterministic, undo then re-edit reproduces the town, and the 
+tests/property/editCorpusRatchet.test.js :: the edit corpus ratchet: the re-entry seam and the merge over the 63-row corpus A8 the family declared instruments hold at this seam
+tests/property/espionageDormancyFence.test.js :: FENCE 1 (REPLACED) — the driven byte-identity golden, and the chain that terminates THE DRIVEN GOLDEN: 360 settlements at this tip hash to the PRE-CO
+tests/property/generatorGoldenMaster.test.js :: generator golden master (cross-build output stability) every config produces byte-identical output to the golden master
+tests/simulation/presetLightingWitness.test.js :: preset lighting witness — the per-preset new-campaign bit witness every witnessed row matches the recorded witness, and the diff names which moved

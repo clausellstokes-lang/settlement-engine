@@ -1,0 +1,16 @@
+[
+{
+"packet": "bar5-08",
+"reader": "b",
+"town": "bar0-hamlet-under_siege-rand-25",
+"sev": "LOW",
+"why": "hamlet of 80 with a part-time smith makes advanced weapons and armor and basic education; no school or armourer house on HOUSES"
+},
+{
+"packet": "bar5-12",
+"reader": "b",
+"town": "bar0-thorp-calm-rand-25",
+"sev": "LOW",
+"why": "thorp of 29 lists Education (basic) and Religious services as made here; HOUSES has no school, shrine unstaffed, church is an access"
+}
+]

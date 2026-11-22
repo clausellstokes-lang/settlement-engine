@@ -1,0 +1,64 @@
+born 300+150 in 59s
+
+===== UNTOUCHED (300 towns) =====
+tier        pop(med)  houses people ties powers events tensions conflictsHIGH  underStress  legit<45
+thorp            16     8.0    1.3  0.3    1.1    2.4      1.0      0.0        26%        42%
+hamlet           64    10.9    3.4  3.0    1.2    2.4      1.1      0.0        40%        66%
+village         216    14.4    7.7  7.7    2.2    3.6      1.4      0.0        28%        80%
+town           1394    31.6   23.9 23.9    4.2    4.3      1.7      0.3        30%        30%
+city           9653    68.3   60.0 60.0    6.6    7.6      2.5      1.1        30%         0%
+metropolis    39317    92.9   83.8 83.8    8.1   10.4      2.6      1.3        28%         2%
+under a stress at birth: 91/300; kinds: politically_fractured 13% · succession_void 10% · plague_onset 9% · wartime 9% · monster_pressure 8% · infiltrated 8%
+legitimacy label: Tolerated 30% · Contested 21% · Approved 17% · Endorsed 17% · Legitimacy Crisis 16%
+prosperity: Prosperous 33% · Moderate 22% · Poor 17% · Comfortable 17% · Struggling 12%
+government names: 21 distinct; top: Elder Council 33% · Grand Council 5% · Headman's Authority 5% · Town Mayor 5% · Town Council 5% · City Council 5% · Guild Council 4% · Noble Governorship 4%
+governing power's kind: government 75% · economy 16% · other 7% · noble 1%
+culture: 11 distinct; top: slavic 11% · celtic 11% · germanic 11% · mesoamerican 10%
+criminal capture rung: none 92% · equilibrium 6% · corrupted 2%
+
+SAMENESS (names masked): pool · draws · distinct · the commonest line's share · share of draws that are a line seen 5+ times
+person: short goal               8996    913    2.3%   87%   e.g. "Take on the work in § that no one else wants, and do it without complaint."
+person: long goal                8996    894    2.3%   87%   e.g. "Be given the secrets of § to keep, as well as its errands to run."
+person: secret                   8996   1319    1.0%   87%   e.g. "Secretly receives what they believe are genuine divine visions, which terrifies them"
+person: own hook                 8996    292    1.6%   98%   e.g. "Someone keeps paying off their small debts around the place before they can, and has left no name."
+tie: description                 8944    211    2.5%   98%   e.g. "§ and § deal with each other slowly and politely, each knowing one slip could ruin them both."
+tie: tension                     8944    189    2.5%   99%   e.g. "A document § and § each believed only they possessed has turned up in someone else's hands."
+tension: description              515     89   15.0%   83%   e.g. "Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hand"
+history event: description       1540    195    3.8%   86%   e.g. "A newly arrived community and the old population fell into steady friction, rarely violent and never resolved"
+arrival scene (1st sentence)      300     77    9.7%   69%   e.g. "§ is neither impressive nor disappointing from the approach."
+pressure sentence                 300    138    8.7%   35%   e.g. "§ has been debating market levies for three months. The merchants have argued against every one of them, and n"
+towns where two people hold the same short goal (names masked): 149/300; the same secret twice: 0/300
+towns where a tension of today is of the same kind as an event of their own past: 82/300
+rough proxy: secrets about "their product/customers/shop/goods" held by people not of a trading kind: 70/8996
+
+===== EVERYDIALRANDOM (150 towns) =====
+tier        pop(med)  houses people ties powers events tensions conflictsHIGH  underStress  legit<45
+thorp            19     8.7    1.3  0.5    1.0    2.0      1.0      0.0        28%        64%
+hamlet           54    10.3    3.0  2.5    1.2    2.4      1.0      0.0        40%        72%
+village         227    14.8    8.0  8.0    2.2    3.2      1.4      0.0        32%        76%
+town           1201    30.2   23.4 23.4    3.6    4.9      1.8      0.3        36%        52%
+city           7748    63.3   55.2 55.2    6.2    7.5      2.4      0.9        48%        32%
+metropolis    39341    89.2   79.9 79.9    7.0   10.4      2.6      1.2        36%        12%
+under a stress at birth: 55/150; kinds: recently_betrayed 11% · mass_migration 11% · plague_onset 9% · famine 9% · insurgency 9% · politically_fractured 9%
+legitimacy label: Contested 26% · Legitimacy Crisis 25% · Tolerated 20% · Endorsed 15% · Approved 13%
+prosperity: Poor 31% · Struggling 20% · Prosperous 15% · Moderate 14% · Comfortable 13% · Wealthy 6%
+government names: 32 distinct; top: Elder Council 22% · Household Council 11% · Free Elder Council 7% · Elected Reeve 5% · Noble Governorship 5% · Ducal Governorship 5% · Church Council 3% · Merchant oligarchy 3%
+governing power's kind: government 63% · economy 9% · other 7% · religious 7% · military 5% · magic 4% · criminal 3% · noble 2%
+culture: 11 distinct; top: greek 13% · south_asian 13% · norse 11% · east_asian 10%
+criminal capture rung: none 84% · adversarial 6% · equilibrium 6% · corrupted 4%
+
+SAMENESS (names masked): pool · draws · distinct · the commonest line's share · share of draws that are a line seen 5+ times
+person: short goal               4262    708    2.1%   80%   e.g. "Bring § a piece of news before anyone else does."
+person: long goal                4262    634    2.2%   83%   e.g. "Be given the secrets of § to keep, as well as its errands to run."
+person: secret                   4262    923    1.3%   78%   e.g. "Secretly receives what they believe are genuine divine visions, which terrifies them"
+person: own hook                 4262    268    1.7%   95%   e.g. "Someone keeps paying off their small debts around the place before they can, and has left no name."
+tie: description                 4235    227    2.5%   95%   e.g. "§ and § trade favours on a strict count. Neither has ever been more than one favour ahead."
+tie: tension                     4235    211    2.6%   95%   e.g. "A document § and § each believed only they possessed has turned up in someone else's hands."
+tension: description              255     68   15.3%   62%   e.g. "Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hand"
+history event: description        761    150    4.3%   71%   e.g. "Talk of enemy agents in the settlement, some of it true, spread suspicion and turned neighbours to informing o"
+arrival scene (1st sentence)      150     61    8.0%   41%   e.g. "§ is neither impressive nor disappointing from the approach."
+pressure sentence                 150     93    9.3%   17%   e.g. "The most devout households want a say over who may trade and when, and not everyone here agrees."
+towns where two people hold the same short goal (names masked): 80/150; the same secret twice: 0/150
+towns where a tension of today is of the same kind as an event of their own past: 40/150
+rough proxy: secrets about "their product/customers/shop/goods" held by people not of a trading kind: 38/4262
+exit 0

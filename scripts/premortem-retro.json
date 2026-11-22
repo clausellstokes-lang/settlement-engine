@@ -1,0 +1,88 @@
+{
+  "_doc": [
+    "PRE-MORTEM RETRO ACCEPTANCE CORPUS — the commits we KNOW tripped a recorded",
+    "hazard class, with the classes the instrument must name from the changeset",
+    "ALONE. This is the same shape that made the reader-with-no-writer walker real:",
+    "a guard is not credible until it is run against the thing it claims to catch.",
+    "",
+    "⭐ THE EXPECTATIONS WERE AUTHORED BEFORE THE FIRST RUN, from the commit",
+    "messages and the recorded memory — not read back off the instrument's own",
+    "output. Fitting expectations to observed output would make the hit rate a",
+    "tautology, which is the exact vacuity class this estate keeps recording.",
+    "",
+    "`expectAbsentPredicates` is the NEGATIVE CONTROL. Without it a predicate that",
+    "fired on every changeset would post a perfect hit rate carrying no information.",
+    "",
+    "Each case is replayed with `--sha`, so every artifact (bundle metas, size and",
+    "tsc baselines, the mutation manifest) is read at the commit's PARENT — the",
+    "world as it was when the author was about to make the mistake. Reading today's",
+    "artifacts against a commit from last week would prove nothing.",
+    "",
+    "Run: npm run premortem:retro    (add -- --strict to make a miss exit non-zero)"
+  ],
+  "cases": [
+    {
+      "sha": "67f8a58e1e199ba7e7cf81d46e9609a07c3e8701",
+      "name": "Layering repair: git mv of a bundled input + two new un-baselined source files",
+      "groundTruth": [
+        "GIT-mv'd src/generators/hookThemes.js -> src/domain/hookThemes.js. Zero bytes of",
+        "the module changed. It was a build input of aiGroundingBundle, so all five edge",
+        "bundles went stale and three freshness tests broke; the artifact half had to land",
+        "separately at ed8de5c2. The recorded memory names this exact bite: 'the chair",
+        "broke it by reading touching bundled inputs as not covering a pure git mv.'",
+        "It ALSO added src/domain/spatial/spatialLedgerAccess.js and",
+        "src/domain/worldPulse/negotiationEvaluation.js. f16de756's message is the",
+        "receipt for the second class: 'the net was ZERO and the ratchet still caught it",
+        "— full-config total was 177 before and 177 after; the per-file zero-ceiling law",
+        "for un-baselined files is the only reason it reds.'"
+      ],
+      "expectClasses": ["HZ-EDGEBUNDLE", "HZ-NEWFILECEILING"],
+      "expectPredicates": [
+        "edge-bundle-input-renamed",
+        "edge-bundle-input-touched",
+        "new-source-zero-ceiling",
+        "renamed-path-still-addressed"
+      ]
+    },
+    {
+      "sha": "9ecec2a2bf61fde58fb1035498bea182242ad245",
+      "name": "TCD-1: the pin corpus built through the config slot",
+      "groundTruth": [
+        "Added tests/domain/warSeatBooksFactionAddress.test.js, whose corpus builder",
+        "called generateSettlementPipeline({ tier }, seed) — tier in the config slot and",
+        "the seed in the importedNeighbour slot. Both spellings were silently ignored;",
+        "the corpus was single-tier and unseeded while asserting seed-stable behaviour.",
+        "Repaired at 65ed49fd (PIN-1) and now refused at the door by",
+        "tests/generators/pipelineSeedSlotContract.test.js."
+      ],
+      "expectClasses": ["HZ-CONFIGSLOT"],
+      "expectPredicates": ["config-slot-misuse"]
+    },
+    {
+      "sha": "1d3cdf73672f7b17af327284840cdbbaf7cf8da9",
+      "name": "SP-F: a new tests/lint walker lands",
+      "groundTruth": [
+        "Added tests/lint/observedShapeReaders.walker.test.js. Any new tests/ file owes",
+        "three things at once: the lighting census counts test files and reds on an",
+        "addition, an enumerated invariant owes a mutation-coverage-manifest row, and a",
+        "new lint/contract test must be proven non-vacuous."
+      ],
+      "expectClasses": ["HZ-TESTVACUITY", "HZ-MUTANTNOOP"],
+      "expectPredicates": ["new-test-file", "mutation-manifest-row-owed"]
+    },
+    {
+      "sha": "ed8de5c200520007389a924c6af9418d38d2b014",
+      "name": "NEGATIVE CONTROL — the honest full rebuild, all five bundles in one run",
+      "groundTruth": [
+        "The artifact half of 67f8a58e: `npm run build:edge-shared` run once, rewriting",
+        "all five metas. Only three of the five emitted .js files moved, because the",
+        "other two bundles' code was byte-identical — which is exactly why the META set,",
+        "not the .js set, is the tell. A partial-rebuild warning here would be a FALSE",
+        "POSITIVE, and a noisy advisory instrument gets disabled."
+      ],
+      "expectClasses": [],
+      "expectPredicates": [],
+      "expectAbsentPredicates": ["edge-bundle-partial-rebuild", "new-source-zero-ceiling", "new-test-file"]
+    }
+  ]
+}

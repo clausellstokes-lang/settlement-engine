@@ -1,0 +1,34 @@
+{
+  "_doc": "PINS, SECOND STEP (UNITS 6–7, AT ITS FINAL TIP 79D02D8D9), ONE SIGNED SHIFT OF RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation, vetoable; a successor chair does not inherit this signature). THE CAUSE, ONE: PINS, second step (units 6–7): the rows whose own text calls them rare carry the rarity mark, and availableServices.criminal[].name is a service label, declared NON_CASCADED. THE MOVER, NAMED: first-parent step 11467ed57 of lane/landing-rung1-2026-11-04 (\"compose: lane/rung1-pins-2026-11-04 (final tip 79d02d8d9) onto the window branch\") and nothing else. THE OWNER'S WORDS are quoted verbatim from docs/OWNER_DECISION_QUEUE.md line 562 (THE LADDER IS THE LANDING, the owner, 2026-11-04) and line 592 (THE SOAK LADDER, the owner, 2026-11-03), as §934.104 quotes them (the fix-window lanes' words; the lane is rung 1's pins under the chair's addendum). HOW (the staged-tree method, DOORS-2 ruling 1; LANDING-3's brief, ruling 1: one record per moving step, in first-parent order; LANDING-4 under the same brief and its addendum): this record's stage S20 is the tree of 11467ed57 with the door paths (the freeze register, every registered manifest and suite, docs/shift-records/, scripts/prose-manifest-cells.mjs, the door helper, the freeze walker and scripts/audit/'s doors) carried from the branch, where the previous record's writes are committed, and CARTOGRAPHY_CALIBRATION's block carried with them (it is written by hand with every corpus re-record; scripts/audit/carry-calibration.mjs); no lane touched a door path inside the window, so the stage differs from 11467ed57 by those writes alone (scripts/audit/landing-stage.sh build stops otherwise). MEASURED BEFORE THE WRITE (a dry pass of every act against a placeholder record in the same scratch stage, then the stage rebuilt, scripts/audit/landing-act.mjs figures; S19 -> S20): generator-golden-master 99 of 525 rows (village 39, city 24, metropolis 36; thorp, hamlet, town 0), the key set identical; cartography-calibration-corpus 63 of 504 rows (village 18, city 16, metropolis 29); dossier-prose-manifest 72 of 1050 rows (village 72); espionage-dormancy-fence 95 of 360 rows (village 11, city 30, metropolis 54; thorp, hamlet, town 0), 360/360 distinct, 3f686283.. -> 4b80df04... The four first-parent commits between record 19's step and this one (050bcffa, ca0fe373, f9ce225c, and F2 272af44f) measure 0 rows on every registered surface: the first three touch no source, and F2's own stage was swept (the 52 registered suites; the only reds W6 and the lifecycle anti-vacuity arm). A surface that does not move at this stage is not listed. CARTOGRAPHY_CALIBRATION.MAX_INSTITUTIONS 11/15/22/46/92/105 -> 11/15/23/46/92/104 by hand (W7), MAX_BUILDING_ROW_BYTES stays 447; the corpus re-captured at the new block in the dry pass is byte-identical to the capture at the old one (de2f851b both; no cap bit). W6 stays the one named red of the calibration suite (2.3 at town, 20 -> 46, against the declared 1.6), carried to record 27 by the chair's ruling 2 in LANDING-4's addendum. RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation, vetoable; a successor chair does not inherit this signature).",
+  "ownerWords": "well before we do the PRs, do the 1,000 again, the 10,000, the 100,000, and the 1 million with fixes where findings are found. PR in between each · after all of that, run 1000 generated settlements and review each in depth and in aggregate and tune",
+  "ownerDate": "2026-11-04",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
+  "cause": "PINS, second step (units 6–7): the rows whose own text calls them rare carry the rarity mark, and availableServices.criminal[].name is a service label, declared NON_CASCADED",
+  "seat": "LANDING-4 (Opus 5.5) under the cloud chair (Fable 5.1), session 019yED1Rc3svZxTNcEJVRr77, from the stage at 11467ed57",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "cartography-calibration-corpus",
+      "action": "re-record",
+      "predictedRows": 504,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "dossier-prose-manifest",
+      "action": "re-record",
+      "predictedRows": 2,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    }
+  ]
+}

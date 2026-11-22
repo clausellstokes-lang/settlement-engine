@@ -1,0 +1,1515 @@
+[
+{
+"id": "10566",
+"sev": "MED",
+"n": 372,
+"town": "r2r-village-43",
+"section": "Journal/History & Founding",
+"fold": "Founded # years ago, with # events on record and # tensions still unresolved.",
+"text": "Founded 45 years ago, with two events on record and two tensions still unresolved.",
+"why": "two tensions still unresolved; QUARRELS none, one power relation only",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "04298",
+"sev": "MED",
+"n": 360,
+"town": "r2r-thorp-58",
+"section": "Journal/Economics & Trade",
+"fold": "Agricultural Rents: #%",
+"text": "Agricultural Rents: 89%",
+"why": "89% of income from agricultural rents; thorp of 7 subsistence farming, no landlord power, each household farms for itself",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "10565",
+"sev": "MED",
+"n": 257,
+"town": "r2s-succession_void-thorp-1",
+"section": "Journal/History & Founding",
+"fold": "Founded # years ago, with # events on record and # tension still unresolved.",
+"text": "Founded 174 years ago, with two events on record and one tension still unresolved.",
+"why": "one tension still unresolved; QUARRELS none, relations between powers none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "11319",
+"sev": "MED",
+"n": 194,
+"town": "r2s-famine-town-1",
+"section": "Journal/Economics & Trade",
+"fold": "Grain Sales: #%",
+"text": "Grain Sales: 4%",
+"why": "Grain Sales 4% of income; FOOD failed source is grain under Active Famine",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "29767",
+"sev": "MED",
+"n": 159,
+"town": "r2s-mass_migration-village-1",
+"section": "Journal/Viability Assessment",
+"fold": "Viable, as long as the # trade routes it depends on stay open.",
+"text": "Viable, as long as the two trade routes it depends on stay open.",
+"why": "'two trade routes it depends on'; trade access is river only, food 106% grown with 0% brought in, imports only incense",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "35544",
+"sev": "MED",
+"n": 127,
+"town": "r2r-hamlet-28",
+"section": "Journal/Resources & Production",
+"fold": "| Fish | full | — | — |",
+"text": "| Fish | full | — | — |",
+"why": "Fish shown full; FOOD gives fish as the failed source of a famine",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "29234",
+"sev": "MED",
+"n": 115,
+"town": "r2r-under_siege-thorp-0",
+"section": "Journal/Economics & Trade",
+"fold": "Toll Revenue: #%",
+"text": "Toll Revenue: 22%",
+"why": "22% of income from tolls; Active Siege, roads cut, nothing comes in or goes out, exports none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "35551",
+"sev": "MED",
+"n": 102,
+"town": "r2s-famine-village-0",
+"section": "Journal/Resources & Production",
+"fold": "| Grain | full | — | — |",
+"text": "| Grain | full | — | — |",
+"why": "Grain shown full; FOOD gives grain as the failed source with stores 0.1 months and a 30% gap",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "35555",
+"sev": "MED",
+"n": 95,
+"town": "r2s-famine-thorp-1",
+"section": "Journal/Resources & Production",
+"fold": "| Livestock | full | — | — |",
+"text": "| Livestock | full | — | — |",
+"why": "livestock listed full; FOOD failed source is livestock and herds failed, famine cut 65%",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "10563",
+"sev": "MED",
+"n": 68,
+"town": "r2s-under_siege-hamlet-1",
+"section": "Journal/History & Founding",
+"fold": "Founded # years ago, with # event on record and # tension still unresolved.",
+"text": "Founded 39 years ago, with one event on record and one tension still unresolved.",
+"why": "one tension still unresolved; QUARRELS none, relations between powers none, one power only",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "25494",
+"sev": "MED",
+"n": 67,
+"town": "r2r-village-55",
+"section": "Journal/Economics & Trade",
+"fold": "Textiles & Cloth (impaired)",
+"text": "Textiles & Cloth (impaired)",
+"why": "says Textiles & Cloth is impaired; LAND gives that chain as running, its grazing land available",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14328",
+"sev": "MED",
+"n": 62,
+"town": "r2s-under_siege-hamlet-3",
+"section": "Journal/Economics & Trade",
+"fold": "Iron & Metalwork (impaired)",
+"text": "Iron & Metalwork (impaired)",
+"why": "prints Iron & Metalwork as impaired; LAND gives the chain as running on available iron ore",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "00874",
+"sev": "MED",
+"n": 60,
+"town": "r2s-mass_migration-thorp-3",
+"section": "Journal/Tonight",
+"fold": "<N> (Headman",
+"text": "Fuad ibn Ahmed (Headman",
+"why": "Fuad titled Headman; PEOPLE title is head shepherd, no headman house",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "10751",
+"sev": "MED",
+"n": 59,
+"town": "r2s-under_siege-hamlet-3",
+"section": "Journal/Economics & Trade",
+"fold": "Furs & Pelts (impaired)",
+"text": "Furs & Pelts (impaired)",
+"why": "prints Furs & Pelts as impaired; LAND gives the chain as running on available hunting grounds",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14629",
+"sev": "MED",
+"n": 38,
+"town": "r2s-occupied-village-1",
+"section": "Journal/Resources & Production",
+"fold": "It sends out lumber and planks.",
+"text": "It sends out lumber and planks.",
+"why": "says it sends out lumber and planks; TRADE exports none, trade access isolated, under occupation",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "00882",
+"sev": "MED",
+"n": 32,
+"town": "r2s-under_siege-metropolis-2",
+"section": "Journal/Tonight",
+"fold": "<N> (Master of the Guilds",
+"text": "Waad al-Karimi (Master of the Guilds",
+"why": "bracket '(Master of the Guilds' never closed; title differs from PEOPLE's exchange master, no power bracket",
+"kinds": [
+"BROKEN"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "22442",
+"sev": "MED",
+"n": 30,
+"town": "r2s-under_siege-town-3",
+"section": "Journal/Economics & Trade",
+"fold": "Reed & Marsh Harvest (impaired)",
+"text": "Reed & Marsh Harvest (impaired)",
+"why": "Reed & Marsh Harvest (impaired); LAND gives the chain running, Marshlands available",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "11307",
+"sev": "MED",
+"n": 24,
+"town": "r2r-hamlet-0",
+"section": "Journal/Economics & Trade",
+"fold": "Grain & Bread (impaired)",
+"text": "Grain & Bread (impaired)",
+"why": "prints Grain & Bread as impaired; LAND gives the chain as running on available grain fields",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "33591",
+"sev": "MED",
+"n": 19,
+"town": "r2s-famine-city-2",
+"section": "Journal/NPC Quick Reference",
+"fold": "| <N> | the district madam | Merchant Guilds | # |",
+"text": "| Ügedei Ba'arin | the district madam | Merchant Guilds | 2 |",
+"why": "Ügedei Ba'arin is (m) per PEOPLE but titled 'the district madam'; the title does not fit the person's sex",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "34594",
+"sev": "MED",
+"n": 17,
+"town": "r2s-under_siege-metropolis-2",
+"section": "Journal/NPC Quick Reference",
+"fold": "| <N> | the miller | The Highborn Circle | # |",
+"text": "| Emad al-Libi | the miller | The Highborn Circle | 3 |",
+"why": "miller placed in The Highborn Circle; PEOPLE shows him only at Mills; Circle's lord is Halima ibn Ali",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "15703",
+"sev": "MED",
+"n": 16,
+"town": "r2s-under_siege-hamlet-0",
+"section": "Journal/Economics & Trade",
+"fold": "Livestock & Dairy (impaired)",
+"text": "Livestock & Dairy (impaired)",
+"why": "prints Livestock & Dairy as impaired; LAND gives the chain as running on available grazing land",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "10241",
+"sev": "MED",
+"n": 16,
+"town": "r2r-hamlet-28",
+"section": "Journal/Economics & Trade",
+"fold": "Fishing & Seafood (impaired)",
+"text": "Fishing & Seafood (impaired)",
+"why": "prints Fishing & Seafood as impaired; LAND gives the chain as running on available fishing grounds",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14617",
+"sev": "MED",
+"n": 16,
+"town": "r2r-hamlet-48",
+"section": "Journal/Resources & Production",
+"fold": "It sends out cloth and dyed fabric.",
+"text": "It sends out cloth and dyed fabric.",
+"why": "'sends out cloth and dyed fabric'; TRADE exports no cloth and LAND gaps say wool cannot produce final goods, only intermediates",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "13079",
+"sev": "MED",
+"n": 15,
+"town": "r2s-under_siege-hamlet-3",
+"section": "Journal/Economics & Trade",
+"fold": "Hunting & Trapping (impaired)",
+"text": "Hunting & Trapping (impaired)",
+"why": "prints Hunting & Trapping as impaired; LAND gives the chain as running on available hunting grounds",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "05991",
+"sev": "MED",
+"n": 15,
+"town": "r2s-famine-village-2",
+"section": "Journal/Economics & Trade",
+"fold": "Brewing & Malting (impaired)",
+"text": "Brewing & Malting (impaired)",
+"why": "says Brewing & Malting is impaired; LAND gives that chain as running, grain fields available",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "22764",
+"sev": "MED",
+"n": 13,
+"town": "r2s-under_siege-hamlet-0",
+"section": "Journal/Economics & Trade",
+"fold": "River Fishing (impaired)",
+"text": "River Fishing (impaired)",
+"why": "prints River Fishing as impaired; LAND gives the chain as running on available river fisheries",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14728",
+"sev": "MED",
+"n": 11,
+"town": "r2s-famine-town-1",
+"section": "Journal/Economics & Trade",
+"fold": "Its income rests on milled flour; it grows less food than it eats, and imports make up most of the gap.",
+"text": "Its income rests on milled flour; it grows less food than it eats, and imports make up most of the gap.",
+"why": "income rests on milled flour; under a famine whose failed source is grain, deficit with stores of grain short",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "05776",
+"sev": "MED",
+"n": 11,
+"town": "r2s-under_siege-village-2",
+"section": "Journal/Economics & Trade",
+"fold": "Beekeeping & Wax (impaired)",
+"text": "Beekeeping & Wax (impaired)",
+"why": "says Beekeeping & Wax is impaired; LAND gives that chain as running, wild foraging available",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14621",
+"sev": "MED",
+"n": 10,
+"town": "r2r-hamlet-16",
+"section": "Journal/Resources & Production",
+"fold": "It sends out cut stone and stone blocks.",
+"text": "It sends out cut stone and stone blocks.",
+"why": "'sends out cut stone and stone blocks'; TRADE imports cut stone and exports none; LAND gap: stone cannot produce final goods",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "05600",
+"sev": "MED",
+"n": 10,
+"town": "r2s-under_siege-town-3",
+"section": "Journal/Institutions",
+"fold": "Bakers: The town's bread.",
+"text": "Bakers: The town's bread.",
+"why": "bakers supply the town's bread; LAND gap says bakers run on imported grain, FOOD imports None, siege",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14639",
+"sev": "MED",
+"n": 8,
+"town": "r2s-under_siege-city-1",
+"section": "Journal/Resources & Production",
+"fold": "It sends out potions and tinctures.",
+"text": "It sends out potions and tinctures.",
+"why": "sends out potions and tinctures; TRADE exports are finance, legal and military contracts only, and Active Siege",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "00880",
+"sev": "MED",
+"n": 8,
+"town": "r2s-under_siege-city-1",
+"section": "Journal/Tonight",
+"fold": "<N> (Lord Warden",
+"text": "Clodia Dentatus (Lord Warden",
+"why": "gives Clodia Dentatus (Lord Warden) the seat; PEOPLE gives only dean @ Parish churches, no council bracket",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "34201",
+"sev": "MED",
+"n": 8,
+"town": "r2s-under_siege-city-2",
+"section": "Journal/NPC Quick Reference",
+"fold": "| <N> | the madam | Noble Governorship | # |",
+"text": "| Isaakios Photeinopoulos | the madam | Noble Governorship | 1 |",
+"why": "Isaakios Photeinopoulos is (m) per PEOPLE but titled 'the madam'; the title does not fit the person's sex",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "33595",
+"sev": "MED",
+"n": 8,
+"town": "r2s-under_siege-city-0",
+"section": "Journal/NPC Quick Reference",
+"fold": "| <N> | the district madam | Royal Authority | # |",
+"text": "| Pacuvius Tubertus | the district madam | Royal Authority | 1 |",
+"why": "Pacuvius Tubertus is (m) per PEOPLE but titled 'the district madam'; the title does not fit the person's sex",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "33594",
+"sev": "MED",
+"n": 8,
+"town": "r2s-slave_revolt-city-2",
+"section": "Journal/NPC Quick Reference",
+"fold": "| <N> | the district madam | Noble Governorship | # |",
+"text": "| Anand Sinha | the district madam | Noble Governorship | 3 |",
+"why": "Anand Sinha is (m) in PEOPLE but printed with the female title 'district madam'",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "33574",
+"sev": "MED",
+"n": 8,
+"town": "r2r-city-2",
+"section": "Journal/NPC Quick Reference",
+"fold": "| <N> | the district madam | <N> | # |",
+"text": "| Dong Wu | the district madam | Arcane Council | 2 |",
+"why": "Dong Wu is (m) in PEOPLE but printed with the female title 'the district madam'",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14638",
+"sev": "MED",
+"n": 7,
+"town": "r2s-under_siege-village-0",
+"section": "Journal/Resources & Production",
+"fold": "It sends out pig iron and iron bars.",
+"text": "It sends out pig iron and iron bars.",
+"why": "sends out pig iron and bars; TRADE exports none, Active Siege shuts roads, no ironworks house",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14613",
+"sev": "MED",
+"n": 7,
+"town": "r2s-occupied-metropolis-2",
+"section": "Journal/Resources & Production",
+"fold": "It sends out bread, beer, animal feed and cut stone.",
+"text": "It sends out bread, beer, animal feed and cut stone.",
+"why": "says it sends out 'cut stone'; the gap says stone cannot make final goods; TRADE exports quarried stone",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14642",
+"sev": "MED",
+"n": 7,
+"town": "r2s-under_siege-city-3",
+"section": "Journal/Resources & Production",
+"fold": "It sends out tools, weapons, armor and nails.",
+"text": "It sends out tools, weapons, armor and nails.",
+"why": "'sends out tools, weapons, armor' as present; under siege nothing goes out by road, gate or water",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "33590",
+"sev": "MED",
+"n": 7,
+"town": "r2s-slave_revolt-city-3",
+"section": "Journal/NPC Quick Reference",
+"fold": "| <N> | the district madam | Merchant Guild Council | # |",
+"text": "| Naoise MacCulloch | the district madam | Merchant Guild Council | 3 |",
+"why": "Naoise MacCulloch is (m) in PEOPLE but printed with the female title 'district madam'",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "24868",
+"sev": "MED",
+"n": 6,
+"town": "r2s-under_siege-village-2",
+"section": "Journal/NPC 1",
+"fold": "Standing: member of Headman's Authority",
+"text": "Standing: member of Headman's Authority",
+"why": "member of Headman's Authority; PEOPLE brackets show no one sitting on any power",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "24847",
+"sev": "MED",
+"n": 6,
+"town": "r2s-under_siege-city-3",
+"section": "Journal/NPC 1",
+"fold": "Standing: member of Arcane Council",
+"text": "Standing: member of Arcane Council",
+"why": "member of Arcane Council; PEOPLE brackets show no person on Arcane Council",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14751",
+"sev": "MED",
+"n": 6,
+"town": "r2r-hamlet-28",
+"section": "Journal/Economics & Trade",
+"fold": "Its income rests on salted fish; it grows less food than it eats, and imports make up most of the gap.",
+"text": "Its income rests on salted fish; it grows less food than it eats, and imports make up most of the gap.",
+"why": "income rests on salted fish; famine's failed source is fish, so the line offers the food that failed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "10492",
+"sev": "MED",
+"n": 6,
+"town": "r2s-monster_pressure-village-3",
+"section": "Journal/Identity & Daily Life",
+"fold": "Foodways: The table rests on the mill's flour.",
+"text": "Foodways: The table rests on the mill's flour.",
+"why": "'The table rests on the mill's flour' prints in famine towns (tag F) where the grain failed; true here, false where flour is the food that failed",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14041",
+"sev": "MED",
+"n": 6,
+"town": "r2s-monster_pressure-town-3",
+"section": "Journal/Plot Hooks",
+"fold": "In the raids, <N> of Military/Guard takes the worst of it: its people stand on the walls. (Beast & Raider Threat)",
+"text": "In the raids, Renate Lange of Military/Guard takes the worst of it: its people stand on the walls. (Beast & Raider Threat)",
+"why": "its people stand on the walls; true here (Town walls) but tag spans towns whose DEFENCE says walls: none",
+"kinds": [
+"TAG"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14628",
+"sev": "MED",
+"n": 6,
+"town": "r2s-occupied-city-0",
+"section": "Journal/Resources & Production",
+"fold": "It sends out leather.",
+"text": "It sends out leather.",
+"why": "'It sends out leather'; TRADE exports list no leather or hides (only taxed herbs, honey, reagents, services)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "23236",
+"sev": "MED",
+"n": 5,
+"town": "r2s-under_siege-village-3",
+"section": "Journal/Economics & Trade",
+"fold": "Salt & Preservation (impaired)",
+"text": "Salt & Preservation (impaired)",
+"why": "says Salt & Preservation is impaired; LAND gives that chain as entrepot, salt works run on imported salt",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "24555",
+"sev": "MED",
+"n": 5,
+"town": "r2s-under_siege-town-0",
+"section": "Journal/Economics & Trade",
+"fold": "Spices & Dyes (impaired)",
+"text": "Spices & Dyes (impaired)",
+"why": "Spices & Dyes printed impaired; LAND gives this chain as running",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "33593",
+"sev": "MED",
+"n": 5,
+"town": "r2s-occupied-city-0",
+"section": "Journal/NPC Quick Reference",
+"fold": "| <N> | the district madam | Military City Council | # |",
+"text": "| Johann Schenk | the district madam | Military City Council | 1 |",
+"why": "Johann Schenk is (m) per PEOPLE but titled 'the district madam'; the title does not fit the person's sex",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "34196",
+"sev": "MED",
+"n": 5,
+"town": "r2s-religious_conversion-city-1",
+"section": "Journal/NPC Quick Reference",
+"fold": "| <N> | the madam | Merchant Guild Council | # |",
+"text": "| Ivo Zaytsev | the madam | Merchant Guild Council | 1 |",
+"why": "Ivo Zaytsev is (m) in PEOPLE but printed with the female title 'the madam'",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14612",
+"sev": "MED",
+"n": 5,
+"town": "r2s-insurgency-city-1",
+"section": "Journal/Resources & Production",
+"fold": "It sends out bread, beer, animal feed and cloth.",
+"text": "It sends out bread, beer, animal feed and cloth.",
+"why": "says it sends out bread, beer, animal feed and cloth; TRADE exports list none of them (raw wool, livestock, milled flour, stone, coal, services)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "01056",
+"sev": "MED",
+"n": 4,
+"town": "r2r-town-34",
+"section": "Journal/Economics & Trade",
+"fold": "<N> Trade: #%",
+"text": "Pilgrim Trade: 5%",
+"why": "shows a Pilgrim Trade share of 5%; TRADE lists no pilgrimage or pilgrim trade and LAND has no pilgrimage chain",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "31379",
+"sev": "MED",
+"n": 4,
+"town": "r2s-under_siege-city-0",
+"section": "Journal/Economics & Trade",
+"fold": "Wine & Spirits (impaired)",
+"text": "Wine & Spirits (impaired)",
+"why": "Wine & Spirits printed 'impaired'; LAND gives the Wine & Spirits chain as entrepot",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "24870",
+"sev": "MED",
+"n": 3,
+"town": "r2s-under_siege-village-0",
+"section": "Journal/NPC 1",
+"fold": "Standing: member of Household Council",
+"text": "Standing: member of Household Council",
+"why": "member of Household Council; no person in PEOPLE has a council bracket",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14727",
+"sev": "MED",
+"n": 3,
+"town": "r2s-famine-village-0",
+"section": "Journal/Economics & Trade",
+"fold": "Its income rests on milled flour; it grows less food than it eats, and imports make up about # of the gap.",
+"text": "Its income rests on milled flour; it grows less food than it eats, and imports make up about half of the gap.",
+"why": "'income rests on milled flour'; FOOD failed source is grain, famine cut 65%, stores 0.1 months; no line should offer the food that failed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "30724",
+"sev": "MED",
+"n": 3,
+"town": "r2s-under_siege-town-2",
+"section": "Journal/Defense & Security",
+"fold": "Well-defended: no walls; the barracks is all that stands guard.",
+"text": "Well-defended: no walls; the barracks is all that stands guard.",
+"why": "says the barracks is all that stands guard; DEFENCE also lists a Town watch",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "29778",
+"sev": "MED",
+"n": 3,
+"town": "r2r-town-12",
+"section": "Journal/Viability Assessment",
+"fold": "Viable, but it cannot feed itself: most of the food it lacks comes in by teleportation circle.",
+"text": "Viable, but it cannot feed itself: most of the food it lacks comes in by teleportation circle.",
+"why": "most missing food comes by teleportation circle; FOOD has magic 3% against 22% brought in, so the circle is a small share",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14616",
+"sev": "MED",
+"n": 3,
+"town": "r2r-city-47",
+"section": "Journal/Resources & Production",
+"fold": "It sends out bread, beer, animal feed and tools.",
+"text": "It sends out bread, beer, animal feed and tools.",
+"why": "says it sends out bread, beer, animal feed and tools; TRADE exports list none of bread, beer or animal feed, and the raids close the roads",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14750",
+"sev": "MED",
+"n": 2,
+"town": "r2r-city-44",
+"section": "Journal/Economics & Trade",
+"fold": "Its income rests on salted fish; it grows less food than it eats, and imports make up about # of the gap.",
+"text": "Its income rests on salted fish; it grows less food than it eats, and imports make up about half of the gap.",
+"why": "income rests on salted fish; famine's failed source is fish, so the line offers the food that failed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14620",
+"sev": "MED",
+"n": 2,
+"town": "r2s-infiltrated-hamlet-1",
+"section": "Journal/Resources & Production",
+"fold": "It sends out cut gems.",
+"text": "It sends out cut gems.",
+"why": "says it sends out cut gems; LAND gaps say gemstones limited to intermediate products, and TRADE exports list no gems",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "24861",
+"sev": "MED",
+"n": 2,
+"town": "r2s-wartime-hamlet-0",
+"section": "Journal/NPC 2",
+"fold": "Standing: member of Free Elder Council",
+"text": "Standing: member of Free Elder Council",
+"why": "'member of Free Elder Council' for a person whose PEOPLE brackets show no power seat",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14631",
+"sev": "MED",
+"n": 2,
+"town": "r2r-village-8",
+"section": "Journal/Resources & Production",
+"fold": "It sends out lumber, planks, potions and tinctures.",
+"text": "It sends out lumber, planks, potions and tinctures.",
+"why": "says it sends out lumber, planks, potions and tinctures; TRADE exports none and trade access isolated",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "25032",
+"sev": "MED",
+"n": 2,
+"town": "r2s-under_siege-town-0",
+"section": "Journal/Economics & Trade",
+"fold": "Storage & Logistics (impaired)",
+"text": "Storage & Logistics (impaired)",
+"why": "Storage & Logistics printed impaired; LAND gives this chain as running",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "06251",
+"sev": "MED",
+"n": 2,
+"town": "r2s-under_siege-town-0",
+"section": "Journal/Economics & Trade",
+"fold": "Camel Caravan Trade (impaired)",
+"text": "Camel Caravan Trade (impaired)",
+"why": "Camel Caravan Trade printed impaired; LAND gives it as entrepot",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "15673",
+"sev": "MED",
+"n": 2,
+"town": "r2r-town-44",
+"section": "Journal/Defense & Security",
+"fold": "Lightly defended: no walls; the barracks is all that stands guard.",
+"text": "Lightly defended: no walls; the barracks is all that stands guard.",
+"why": "says the barracks is all that stands guard; DEFENCE also lists a Town watch",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14724",
+"sev": "MED",
+"n": 2,
+"town": "r2s-under_siege-city-2",
+"section": "Journal/Economics & Trade",
+"fold": "Its income rests on legal services; it grows less food than it eats, and imports make up some of the gap.",
+"text": "Its income rests on legal services; it grows less food than it eats, and imports make up some of the gap.",
+"why": "'imports make up some of the gap'; FOOD brought in 0%, gap 76%, and under siege nothing comes in",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "33582",
+"sev": "MED",
+"n": 2,
+"town": "r2s-famine-city-3",
+"section": "Journal/NPC Quick Reference",
+"fold": "| <N> | the district madam | Grain Holders | # |",
+"text": "| Güchlüg Suldus | the district madam | Grain Holders | 2 |",
+"why": "Güchlüg Suldus is (m) per PEOPLE but titled 'the district madam'; the title does not fit the person's sex",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "33599",
+"sev": "MED",
+"n": 2,
+"town": "r2r-city-33",
+"section": "Journal/NPC Quick Reference",
+"fold": "| <N> | the district madam | The Underground | # |",
+"text": "| Kukulcan Uoc | the district madam | The Underground | 1 |",
+"why": "Kukulcan Uoc is (m) in PEOPLE but printed with the female title 'the district madam'",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14619",
+"sev": "MED",
+"n": 2,
+"town": "r2s-indebted-city-2",
+"section": "Journal/Resources & Production",
+"fold": "It sends out cloth, dyed fabric, cut stone and stone blocks.",
+"text": "It sends out cloth, dyed fabric, cut stone and stone blocks.",
+"why": "says it sends out cloth, dyed fabric, cut stone, stone blocks; exports are raw wool, livestock, quarried stone; HOUSES has no Dyer; stone gap: cannot produce final goods",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "34194",
+"sev": "MED",
+"n": 2,
+"town": "r2s-infiltrated-city-0",
+"section": "Journal/NPC Quick Reference",
+"fold": "| <N> | the madam | Merchant City Council | # |",
+"text": "| Aischylos Gregoraios | the madam | Merchant City Council | 3 |",
+"why": "PEOPLE gives Aischylos Gregoraios as (m) yet the title is 'the madam'; title does not fit the person's sex",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "34516",
+"sev": "MED",
+"n": 2,
+"town": "r2s-indebted-city-2",
+"section": "Journal/NPC Quick Reference",
+"fold": "| <N> | the midwife | City Council | # |",
+"text": "| Idunn Andersson | the midwife | City Council | 2 |",
+"why": "PEOPLE gives Idunn Andersson as (m) yet the title is 'the midwife'; title does not fit the person's sex",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "34521",
+"sev": "MED",
+"n": 2,
+"town": "r2s-recently_betrayed-city-2",
+"section": "Journal/NPC Quick Reference",
+"fold": "| <N> | the midwife | Democratic assembly | # |",
+"text": "| Eanán O'Neill | the midwife | Democratic assembly | 3 |",
+"why": "PEOPLE gives Eanán O'Neill as (m) yet the title is 'the midwife'; title does not fit the person's sex",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "34181",
+"sev": "MED",
+"n": 1,
+"town": "r2s-recently_betrayed-town-2",
+"section": "Journal/NPC Quick Reference",
+"fold": "| <N> | the madam | Corrupt Council | # |",
+"text": "| Omkara Mehta | the madam | Corrupt Council | 2 |",
+"why": "Omkara Mehta is male (PEOPLE) but titled 'the madam'; title does not fit sex",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "33732",
+"sev": "MED",
+"n": 1,
+"town": "r2s-occupied-city-0",
+"section": "Journal/NPC Quick Reference",
+"fold": "| <N> | the foundling-mother | Military City Council | # |",
+"text": "| Ulrich Pfaff | the foundling-mother | Military City Council | 3 |",
+"why": "Ulrich Pfaff is (m) per PEOPLE but titled 'the foundling-mother'; the title does not fit the person's sex",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "33729",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-51",
+"section": "Journal/NPC Quick Reference",
+"fold": "| <N> | the foundling-mother | Arcane Council | # |",
+"text": "| Teague Treacy | the foundling-mother | Arcane Council | 2 |",
+"why": "Teague Treacy is (m) but titled 'the foundling-mother' in PEOPLE",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "33578",
+"sev": "MED",
+"n": 1,
+"town": "r2s-religious_conversion-city-3",
+"section": "Journal/NPC Quick Reference",
+"fold": "| <N> | the district madam | Corrupt City Council | # |",
+"text": "| Torghil Jirgin | the district madam | Corrupt City Council | 3 |",
+"why": "Torghil Jirgin is (m) in PEOPLE but printed with the female title 'the district madam'",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "33734",
+"sev": "MED",
+"n": 1,
+"town": "r2s-slave_revolt-city-0",
+"section": "Journal/NPC Quick Reference",
+"fold": "| <N> | the foundling-mother | Noble Governorship | # |",
+"text": "| Volker Krause | the foundling-mother | Noble Governorship | 1 |",
+"why": "Volker Krause is (m) in PEOPLE but printed with the female title 'the foundling-mother'",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14607",
+"sev": "MED",
+"n": 1,
+"town": "r2s-monster_pressure-city-0",
+"section": "Journal/Resources & Production",
+"fold": "It sends out bread, animal feed and leather.",
+"text": "It sends out bread, animal feed and leather.",
+"why": "says it sends out bread, animal feed and leather; TRADE exports list none of them; leather chain vulnerable, grazing land absent",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "33740",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-3",
+"section": "Journal/NPC Quick Reference",
+"fold": "| <N> | the foundling-mother | The Holy Compact | # |",
+"text": "| Emmanuel Chrysoberges | the foundling-mother | The Holy Compact | 3 |",
+"why": "PEOPLE gives Emmanuel Chrysoberges as (m) yet the title is 'the foundling-mother'; title does not fit the person's sex",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "33589",
+"sev": "MED",
+"n": 1,
+"town": "r2s-monster_pressure-city-3",
+"section": "Journal/NPC Quick Reference",
+"fold": "| <N> | the district madam | Merchant City Council | # |",
+"text": "| Crispus Metellus | the district madam | Merchant City Council | 1 |",
+"why": "PEOPLE gives Crispus Metellus as (m) yet the title is 'the district madam'; title does not fit the person's sex",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "34515",
+"sev": "MED",
+"n": 1,
+"town": "r2s-politically_fractured-city-1",
+"section": "Journal/NPC Quick Reference",
+"fold": "| <N> | the midwife | Arcane Council | # |",
+"text": "| Noboru Watanabe | the midwife | Arcane Council | 1 |",
+"why": "PEOPLE gives Noboru Watanabe as (m) yet the title is 'the midwife'; title does not fit the person's sex",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14609",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-24",
+"section": "Journal/Resources & Production",
+"fold": "It sends out bread, animal feed, cut stone and stone blocks.",
+"text": "It sends out bread, animal feed, cut stone and stone blocks.",
+"why": "says it sends out bread, animal feed, cut stone, stone blocks; TRADE exports only flour and quarried stone; gaps say stone leaves half-finished",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "14615",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-50",
+"section": "Journal/Resources & Production",
+"fold": "It sends out bread, beer, animal feed and lumber.",
+"text": "It sends out bread, beer, animal feed and lumber.",
+"why": "says it sends out bread, beer, animal feed and lumber; TRADE exports list flour and milled timber, no bread, beer or animal feed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "33736",
+"sev": "MED",
+"n": 1,
+"town": "r2r-metropolis-22",
+"section": "Journal/NPC Quick Reference",
+"fold": "| <N> | the foundling-mother | Royal Authority | # |",
+"text": "| Abu Said Bukhara | the foundling-mother | Royal Authority | 2 |",
+"why": "gives Abu Said Bukhara the title foundling-mother; PEOPLE has Abu Said Bukhara as (m)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+}
+]

@@ -1,0 +1,40 @@
+{
+  "_doc": "F1 DEFENCE-WORDS, FIRST STEP (UNITS 1–5, AT C08415B0B), ONE SIGNED SHIFT OF RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation, vetoable; a successor chair does not inherit this signature). THE CAUSE, ONE: F1 DEFENCE-WORDS, first step (units 1–5): every defence claim writer reads defenseFactsOf, the standing and siege-pressure lines read the record, a hired company is not called a garrison, and a Village watch row stands below town. THE MOVER, NAMED: first-parent step 5e9ffb220 of lane/landing-rung1-2026-11-04 (\"compose: lane/rung1b-f1-defence-words-2026-11-04 (at c08415b0b; npcGenerator.js imports unioned) onto the window branch\") and nothing else. THE OWNER'S WORDS are quoted verbatim from docs/OWNER_DECISION_QUEUE.md line 562 (THE LADDER IS THE LANDING, the owner, 2026-11-04) and line 592 (THE SOAK LADDER, the owner, 2026-11-03), as §934.104 quotes them (the fix-window lanes' words; F1 is the rung-1B fix window's coh:defense-words lane). HOW (the staged-tree method, DOORS-2 ruling 1; LANDING-3's brief, ruling 1: one record per moving step, in first-parent order; LANDING-4 under the same brief and its addendum): this record's stage S23 is the tree of 5e9ffb220 with the door paths (the freeze register, every registered manifest and suite, docs/shift-records/, scripts/prose-manifest-cells.mjs, the door helper, the freeze walker and scripts/audit/'s doors) carried from the branch, where the previous record's writes are committed, and CARTOGRAPHY_CALIBRATION's block carried with them (it is written by hand with every corpus re-record; scripts/audit/carry-calibration.mjs); no lane touched a door path inside the window, so the stage differs from 5e9ffb220 by those writes alone (scripts/audit/landing-stage.sh build stops otherwise). MEASURED BEFORE THE WRITE (a dry pass of every act against a placeholder record in the same scratch stage, then the stage rebuilt, scripts/audit/landing-act.mjs figures; S22 -> S23): generator-golden-master 309 of 525 rows (thorp 48, hamlet 72, village 72, town 105, city 12; metropolis 0), the key set identical; herald-knowledge-desk-golden 2 of 435 rows, 7 added and 6 removed (434 -> 435); cartography-calibration-corpus 32 of 504 rows (village 32); dossier-prose-manifest 34 of 1050 rows (town 34); espionage-dormancy-fence 146 of 360 rows (thorp 5, hamlet 19, village 37, town 56, city 28, metropolis 1), 360/360 distinct, d1269dc0.. -> c2261133... The first-parent commit between record 22's step and this one (a2943e01, a test re-seed) touches no source and measures 0. The lane's second step (53cc1864, unit 6, a test) measures 0 golden-master rows by the census and is swept at its own stage. A surface that does not move at this stage is not listed. CARTOGRAPHY_CALIBRATION.MAX_INSTITUTIONS 11/16/23/46/90/104 -> 11/16/24/46/90/104 by hand (W7; the Village watch row joins the village roster), MAX_BUILDING_ROW_BYTES stays 447; the corpus re-captured at the new block in the dry pass is byte-identical to the capture at the old one (e8170418 both; no cap bit). W6 stays the one named red of the calibration suite (2.3 at town, 20 -> 46, against the declared 1.6), carried to record 27 by the chair's ruling 2 in LANDING-4's addendum. RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation, vetoable; a successor chair does not inherit this signature).",
+  "ownerWords": "well before we do the PRs, do the 1,000 again, the 10,000, the 100,000, and the 1 million with fixes where findings are found. PR in between each · after all of that, run 1000 generated settlements and review each in depth and in aggregate and tune",
+  "ownerDate": "2026-11-04",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
+  "cause": "F1 DEFENCE-WORDS, first step (units 1–5): every defence claim writer reads defenseFactsOf, the standing and siege-pressure lines read the record, a hired company is not called a garrison, and a Village watch row stands below town",
+  "seat": "LANDING-4 (Opus 5.5) under the cloud chair (Fable 5.1), session 019yED1Rc3svZxTNcEJVRr77, from the stage at 5e9ffb220",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "re-record",
+      "predictedRows": 435,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "cartography-calibration-corpus",
+      "action": "re-record",
+      "predictedRows": 504,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "dossier-prose-manifest",
+      "action": "re-record",
+      "predictedRows": 2,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    }
+  ]
+}

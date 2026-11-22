@@ -1,0 +1,519 @@
+/**
+ * domain/events/undoEvent.js — scrub an undone event's durable artifacts
+ * off the settlement.
+ *
+ * undoLastEvent (settlementSlice) restores systemState from the log entry
+ * and strips causeEventId-tagged impairments — but events ALSO promote
+ * activeConditions and write authored records into settlement.config +
+ * settlement._config (eventConditions / resourceEdits / customTradeGoods /
+ * stressorEdits / _cutRoutes / the annotation ledgers). Before config.eventConditions
+ * existed those ghosts were transient — the next regeneration dropped them;
+ * now the records are deliberately re-applied by EVERY regeneration
+ * (reapplyEventConditions, resolveResources' overlay, generateEconomy's
+ * customTradeGoods pass), so an undone event haunted the settlement
+ * permanently. This module is the undo-side mirror of mutate.js:
+ *
+ *   - everything mutate writes WITH provenance (condition causes, stress
+ *     entries' addedByEventId, the annotation ledgers' atEventId, the
+ *     destruction stamps) is scrubbed by that provenance — works for log
+ *     entries persisted long before this module existed;
+ *   - the records whose writes are not exactly reversible from provenance
+ *     (resourceEdits / customTradeGoods, consumed as plain keys by the
+ *     generators, plus their live outputs; stressorEdits, whose handlers
+ *     cross-write the added/resolved lists) are restored from the pre-event
+ *     snapshot applyEvent stamps onto the log entry
+ *     (captureEventUndoSnapshot). A legacy entry without the snapshot
+ *     degrades to today's behavior: the record stays.
+ *
+ * Pure functions — no store, no React, no I/O.
+ */
+
+import { deriveActiveCondition, withEventConditionsSynced } from '../activeConditions.js';
+import { deepClone } from '../clone.js';
+
+// Schemaless open objects at this layer (see mutateEntities.js). Aliases document
+// intent while centralizing the pure-`any` reality of the mutation surface.
+/** @typedef {any} MutSettlement */
+/** @typedef {any} MutEntity */
+/** @typedef {any} MutateEvent */
+
+// ── Pre-event snapshot (applyEvent stamps it onto logEntry.undo) ─────────
+
+// Live resolved outputs + the authored delta record the resource events
+// write (mutate.js withResourceEdits). The live keys are snapshotted
+// alongside the record so the undo is honest NOW, not only after the next
+// regeneration re-resolves them.
+const RESOURCE_CONFIG_KEYS = Object.freeze([
+  'resourceEdits',
+  'nearbyResources',
+  'nearbyResourcesNative',
+  'nearbyResourcesNativeDepleted',
+  'nearbyResourceDefinitions',
+  'nearbyResourceDefinitionsDepleted',
+  'nearbyResourcesState',
+  'nearbyResourcesDepleted',
+  'nearbyResourcesCustom',
+]);
+
+// Every list a trade-good label can sit in (mutate.js removeTradeGood's
+// sweep), so the live strip/append reverts exactly.
+const TRADE_ECONOMIC_KEYS = Object.freeze([
+  'primaryExports', 'primaryImports', 'transit', 'exports', 'imports',
+]);
+
+const SNAPSHOT_CONFIG_KEYS = Object.freeze({
+  DEPLETE_RESOURCE:   RESOURCE_CONFIG_KEYS,
+  RECOVERED_RESOURCE: RESOURCE_CONFIG_KEYS,
+  ADD_RESOURCE:       RESOURCE_CONFIG_KEYS,
+  REMOVE_RESOURCE:    RESOURCE_CONFIG_KEYS,
+  ADD_TRADE_GOOD:     Object.freeze(['customTradeGoods']),
+  REMOVE_TRADE_GOOD:  Object.freeze(['customTradeGoods']),
+  // stressorEdits' added entries DO carry addedByEventId, but the record's
+  // cross-writes (an APPLY clears the type's `resolved` suppression, a
+  // RESOLVE strikes the type's `added` entry) are only exactly reversible
+  // from the pre-event copy — undoing a RESOLVE must bring the struck
+  // authored entry back, and undoing an APPLY must restore the suppression
+  // it cleared.
+  APPLY_STRESSOR:     Object.freeze(['stressorEdits']),
+  RESOLVE_STRESSOR:   Object.freeze(['stressorEdits']),
+  // REMOVED_THREAT now ALSO writes a stressorEdits.resolved suppression record
+  // (mutateWorld.removedThreat) so a party-removed threat can't resurrect on
+  // regeneration — snapshot stressorEdits so undo restores the pre-event
+  // suppression exactly (it already snapshots the live stressor containers via
+  // SNAPSHOT_SETTLEMENT_KEYS; captureEventUndoSnapshot reads both maps).
+  // [domain-events-region-2]
+  REMOVED_THREAT:     Object.freeze(['stressorEdits']),
+  // SET_PRIMARY_DEITY writes config.primaryDeityRef +
+  // primaryDeitySnapshot (or deletes them on a clear). Snapshotting both keys
+  // makes undo a true inverse — restoreKeys deletes a key that was absent
+  // pre-event and restores a key (and its exact value) that was present, so an
+  // undone assignment returns the settlement to its prior dormancy/deity.
+  SET_PRIMARY_DEITY:  Object.freeze(['primaryDeityRef', 'primaryDeitySnapshot']),
+  // IMPOSE_CULT writes (or deletes, when emptied) config.cultDeitySnapshots — the
+  // single array key holds every cult, so snapshotting it makes undo a true inverse.
+  IMPOSE_CULT:        Object.freeze(['cultDeitySnapshots']),
+  // SHIFT_TIER rewrites config.tier + config.settType to the new tier (alongside the
+  // top-level tier/population/institutions/history captured in SNAPSHOT_SETTLEMENT_KEYS).
+  SHIFT_TIER:         Object.freeze(['tier', 'settType']),
+});
+
+const SNAPSHOT_ECONOMIC_KEYS = Object.freeze({
+  ADD_TRADE_GOOD:    TRADE_ECONOMIC_KEYS,
+  REMOVE_TRADE_GOOD: TRADE_ECONOMIC_KEYS,
+});
+
+// Top-level settlement subtrees whose event writes are NOT exactly reversible
+// from provenance, so the pre-event copy is the only way back:
+//  - CHANGE_RULING_POWER rewrites the whole powerStructure (factions,
+//    publicLegitimacy, governingName/government, relationships); scrubbing only
+//    the condition left the entire government transfer in place.
+//  - The relationship events overwrite a neighbourNetwork link's relationshipType
+//    (the _relationshipEventId stamp they wrote was read nowhere), so undo never
+//    reverted them.
+// The NPC/institution/faction graph an event can rewrite without leaving a
+// scrubbable provenance trail. Factions live on powerStructure.factions but
+// replaceFaction falls back to the legacy s.factions, so both are snapshotted.
+const ENTITY_GRAPH_KEYS = Object.freeze(['npcs', 'institutions', 'powerStructure', 'factions']);
+// RESTORE_INSTITUTION / ADD_INSTITUTION also DELETE the settlement-level
+// food_anchor_lost activeCondition when the (re)activated institution is the food
+// anchor — so undo must restore the pre-event activeConditions too, else the famine
+// condition the anchor's loss raised stays gone after the institution is re-removed.
+const ENTITY_GRAPH_PLUS_CONDITIONS = Object.freeze([...ENTITY_GRAPH_KEYS, 'activeConditions']);
+// Roster-only events that mutate NPC records in place (no impairment
+// propagation, no condition) — only the npcs subtree needs the pre-event copy.
+const NPC_ROSTER_KEYS = Object.freeze(['npcs']);
+// Every container a stressor can sit in (mutate.js removedThreat's sweep +
+// crisisResolve). REMOVED_THREAT and RESOLVE_STRESSOR strike a live stressor
+// entry with no provenance stamp, so the pre-event copy is the only way back.
+const STRESS_CONTAINER_KEYS = Object.freeze(['stressors', 'stress', 'stresses']);
+
+const SNAPSHOT_SETTLEMENT_KEYS = Object.freeze({
+  CHANGE_RULING_POWER: Object.freeze(['powerStructure']),
+  BROKERED_ALLIANCE:   Object.freeze(['neighbourNetwork']),
+  SETTLEMENT_DISPUTE:  Object.freeze(['neighbourNetwork']),
+  OPENED_TRADE_ROUTE:  Object.freeze(['neighbourNetwork']),
+  // APPLY_STRESSOR ALSO rewrites neighbourNetwork: a war/infiltration stressor
+  // sours the named instigator's relationshipType (mutateWorld.js applyStressor).
+  // Same un-restorable class as the relationship events above — the
+  // _relationshipEventId stamp is read nowhere — so the soured edge survived its
+  // own undo. Snapshotting neighbourNetwork makes undo a true inverse. (Its
+  // separate config.stressorEdits snapshot lives in SNAPSHOT_CONFIG_KEYS;
+  // captureEventUndoSnapshot reads both maps, so the two coexist.)
+  APPLY_STRESSOR:      Object.freeze(['neighbourNetwork']),
+  // EXPOSE_CORRUPTION irreversibly swaps in a successor NPC and impairs the tied
+  // institution/faction with SYNTHETIC causeEventIds the impairment-strip can't
+  // reach — snapshot the affected subtrees so undo restores them exactly.
+  EXPOSE_CORRUPTION:   ENTITY_GRAPH_KEYS,
+  // The rest of the NPC/corruption family had the SAME gap — they write durable
+  // entity state with neither provenance nor a snapshot, so undo left it in
+  // place and the divergence compounded through world-pulse on later ticks:
+  //  - IMPOSE_CORRUPTION turns a clean NPC (corrupt/corruptionVector/corruptTies);
+  //  - PROMOTE_NPC / DEMOTE_NPC swap two NPCs' standing (importance/influence/
+  //    structuralRank) and stamp factionId — all in-place npc edits;
+  //  - KILL_NPC / KILL_LEADER mark the NPC dead and propagate staffing
+  //    impairments onto linked institutions and factions;
+  //  - REMOVE_INSTITUTION closes the institution AND severs the corruption ties
+  //    (corrupt:false / ousted) of NPCs bound to it, plus propagates impairments.
+  // killNpc/removeInstitution stamp removedByEventId but nothing un-deads/
+  // un-removes by it, and status 'dead'/'removed' is not the 'impaired' the
+  // strip resets — so the snapshot is the only exact way back.
+  IMPOSE_CORRUPTION:   NPC_ROSTER_KEYS,
+  PROMOTE_NPC:         NPC_ROSTER_KEYS,
+  DEMOTE_NPC:          NPC_ROSTER_KEYS,
+  KILL_NPC:            ENTITY_GRAPH_KEYS,
+  KILL_LEADER:         ENTITY_GRAPH_KEYS,
+  REMOVE_INSTITUTION:  ENTITY_GRAPH_KEYS,
+  // Same in-place-edit-without-provenance gap, found by the whole-registry undo
+  // round-trip pin (A+ domain.5):
+  //  - ASSIGN_NPC_TO_ROLE rewrites an NPC's role/quality/standing in place and
+  //    clears prior staffing impairments on the linked institution;
+  //  - RESTORE_INSTITUTION / RESTORE_FACTION DELETE impairments from the entity,
+  //    so undo (which only strips impairments tagged with ITS own id) cannot put
+  //    the cleared impairment back — the pre-event copy is the only way back.
+  ASSIGN_NPC_TO_ROLE:  ENTITY_GRAPH_KEYS,
+  RESTORE_INSTITUTION: ENTITY_GRAPH_PLUS_CONDITIONS,
+  RESTORE_FACTION:     ENTITY_GRAPH_KEYS,
+  // ADD_INSTITUTION / ADD_FACTION / ADD_NPC: withoutEventCreations drops the
+  // record an ADD CREATED (it carries createdByEventId), but the idempotent
+  // un-remove branch (addInstitution/addFaction re-activating an existing
+  // entity to status 'active' + impairments:[]) writes NO createdByEventId, so
+  // provenance alone cannot restore the entity's prior removed/impaired state —
+  // it stays resurrected. Snapshotting the entity graph restores the exact
+  // pre-event subtree in BOTH cases (created → entity gone again; un-removed →
+  // back to its removed/impaired state). restoreSnapshottedRecords runs AFTER
+  // withoutEventCreations in scrubUndoneEvent, so the pre-event copy is the
+  // final word and the two paths converge.
+  ADD_INSTITUTION:     ENTITY_GRAPH_PLUS_CONDITIONS,
+  ADD_FACTION:         ENTITY_GRAPH_KEYS,
+  ADD_NPC:             ENTITY_GRAPH_KEYS,
+  // REMOVED_THREAT strikes a live stressor entry from the stressors/stress/
+  // stresses containers with a plain array splice — no provenance stamp — so the
+  // pre-event copy of the containers is the only way back for the live entry.
+  // It ALSO now writes a stressorEdits.resolved suppression record (so the threat
+  // stays gone across regeneration, not just this tick); that record is reverted
+  // on undo via SNAPSHOT_CONFIG_KEYS['stressorEdits'] above — the two snapshots
+  // coexist. (RESOLVE_STRESSOR deliberately does NOT snapshot these containers:
+  // it routes through the crisis lifecycle, which restores the stressorEdits
+  // record so the live entry returns on the next regeneration — a documented
+  // limitation pinned by tests/joins/crisisTripleSync.test.js. Resurrecting the
+  // live entry directly there would double-count against that regeneration path,
+  // so RESOLVE_STRESSOR's live-entry residue is expected.)
+  REMOVED_THREAT:      STRESS_CONTAINER_KEYS,
+  // SHIFT_TIER rewrites the top-level tier + population and performs institution roster
+  // surgery (promotion adds/reactivates; demotion deactivates over-tier institutions into
+  // ruined remnants), appending to tierHistory + institutionHistory. None of that is
+  // exactly reversible from provenance, so the pre-event copy of these subtrees is the
+  // only true inverse. (config.tier/settType are restored via SNAPSHOT_CONFIG_KEYS.)
+  SHIFT_TIER:          Object.freeze(['tier', 'population', 'institutions', 'tierHistory', 'institutionHistory']),
+  // The generosity verbs (FP-G3) debit foodSecurity.storageMonths in place (no
+  // provenance on a number) and FORCE_RELIEF nudges publicLegitimacy.score — the
+  // pre-event copies are the only exact way back. Their _forcedRelief/_offeredCredit
+  // annotation entries carry atEventId and are scrubbed by provenance instead
+  // (scrubConfigAnnotations below).
+  FORCE_RELIEF:        Object.freeze(['economicState', 'powerStructure']),
+  OFFER_CREDIT:        Object.freeze(['economicState']),
+});
+
+// The dual-written record keys mirrored into the raw _config. The handlers
+// write config and _config in lockstep, so the pre-event config copy IS the
+// pre-event _config copy — one snapshot restores both.
+const MIRRORED_RECORD_KEYS = Object.freeze(['resourceEdits', 'customTradeGoods', 'stressorEdits']);
+
+const clone = (/** @type {MutEntity} */ v) => deepClone(v);
+
+/** { keys: every key audited, values: only the keys present (cloned) } —
+ *  presence matters: a key the event GREW must be deleted on undo, not
+ *  emptied, so an undone settlement stays byte-identical to one that never
+ *  saw the event. */
+function snapshotKeys(/** @type {MutEntity} */ source, /** @type {MutEntity} */ keys) {
+  /** @type {MutEntity} */
+  const values = {};
+  if (source && typeof source === 'object') {
+    for (const k of keys) {
+      if (k in source) values[k] = clone(source[k]);
+    }
+  }
+  return { keys: [...keys], values };
+}
+
+/**
+ * Capture the pre-event values of the provenance-free authored records the
+ * event is about to write. Returns null for every event type whose writes
+ * are provenance-scrubable (the common case) — only the resource/trade-good
+ * family needs a snapshot.
+ *
+ * @param {MutSettlement} settlement  the BEFORE settlement
+ * @param {MutateEvent} event
+ * @returns {MutEntity}
+ */
+export function captureEventUndoSnapshot(settlement, event) {
+  if (!settlement) return null;
+  const configKeys = /** @type {MutEntity} */ (SNAPSHOT_CONFIG_KEYS)[event?.type];
+  const settlementKeys = /** @type {MutEntity} */ (SNAPSHOT_SETTLEMENT_KEYS)[event?.type];
+  if (!configKeys && !settlementKeys) return null;
+  /** @type {MutEntity} */
+  const snapshot = {};
+  if (configKeys) snapshot.config = snapshotKeys(settlement.config, configKeys);
+  const economicKeys = /** @type {MutEntity} */ (SNAPSHOT_ECONOMIC_KEYS)[event?.type];
+  if (economicKeys) snapshot.economicState = snapshotKeys(settlement.economicState, economicKeys);
+  if (settlementKeys) snapshot.settlement = snapshotKeys(settlement, settlementKeys);
+  return snapshot;
+}
+
+function restoreKeys(/** @type {MutEntity} */ target, /** @type {MutEntity} */ snap) {
+  /** @type {MutEntity} */
+  const next = { ...(target || {}) };
+  for (const k of snap?.keys || []) {
+    if (snap.values && k in snap.values) next[k] = clone(snap.values[k]);
+    else delete next[k];
+  }
+  return next;
+}
+
+function restoreSnapshottedRecords(/** @type {MutSettlement} */ s, /** @type {MutEntity} */ snapshot) {
+  if (!snapshot || typeof snapshot !== 'object') return s;
+  let next = s;
+  if (snapshot.config) {
+    next = { ...next, config: restoreKeys(next.config, snapshot.config) };
+    if (next._config && typeof next._config === 'object') {
+      const mirrored = (snapshot.config.keys || []).filter((/** @type {MutEntity} */ k) => MIRRORED_RECORD_KEYS.includes(k));
+      if (mirrored.length) {
+        next = {
+          ...next,
+          _config: restoreKeys(next._config, {
+            keys: mirrored,
+            values: Object.fromEntries(mirrored
+              .filter((/** @type {MutEntity} */ k) => snapshot.config.values && k in snapshot.config.values)
+              .map((/** @type {MutEntity} */ k) => [k, snapshot.config.values[k]])),
+          }),
+        };
+      }
+    }
+  }
+  if (snapshot.economicState) {
+    next = { ...next, economicState: restoreKeys(next.economicState, snapshot.economicState) };
+  }
+  if (snapshot.settlement) {
+    // Restore top-level subtrees (powerStructure / neighbourNetwork) to their
+    // exact pre-event copy. restoreKeys deletes a key absent pre-event and
+    // restores a present one, so an undone settlement matches one that never
+    // saw the event.
+    next = restoreKeys(next, snapshot.settlement);
+  }
+  return next;
+}
+
+// ── Provenance scrubs ─────────────────────────────────────────────────────
+
+/**
+ * The only path that APPENDS an event cause to a surviving condition is the
+ * RESOLVE_STRESSOR wind-down (status → 'easing', expiry clamped to
+ * elapsed+2), so stripping such a cause must also un-ease. Status and expiry
+ * return to the archetype template defaults — exact in practice, because
+ * every event/generation onset takes the template's cap (no producer passes
+ * a custom duration) and ticking never moves it. Status is the one judgment
+ * call: a condition that had ALREADY drifted to 'easing' on its own comes
+ * back at the template default, and the next tick's pre-expiry window
+ * re-eases it — the drift self-corrects.
+ */
+function unEase(/** @type {MutEntity} */ condition, /** @type {MutEntity} */ strippedCauses) {
+  const restored = /** @type {MutEntity} */ (deriveActiveCondition({
+    ...condition,
+    status: undefined,
+    duration: { ...(condition.duration || {}), expiresAtTicks: undefined },
+    causes: strippedCauses,
+  }));
+  // Never IMMORTALIZE via undo: a template-less archetype derives a null
+  // cap — keep the wind-down's clamped cap instead.
+  if (restored.duration.expiresAtTicks === null
+    && typeof condition?.duration?.expiresAtTicks === 'number') {
+    return {
+      ...restored,
+      duration: { ...restored.duration, expiresAtTicks: condition.duration.expiresAtTicks },
+    };
+  }
+  return restored;
+}
+
+/**
+ * Drop conditions the event PROMOTED (their ONSET cause — causes[0], the
+ * provenance discipline mutate.js and conditionPromotion.js share — names
+ * this event) and strip the event's appended receipts from survivors.
+ * Campaign-owned conditions (channel / world_pulse origins) never match:
+ * their causes carry no event ids from this settlement's timeline.
+ *
+ * Known limitation, mirrored from withActiveCondition's replace-by-id: a
+ * second onset of the same archetype+target OVERWROTE the first event's
+ * condition, so undoing the second cannot restore the first's copy — the
+ * crisis drops entirely. Same class as re-authoring a stressor then undoing.
+ */
+function withoutEventConditions(/** @type {MutSettlement} */ s, /** @type {MutEntity} */ eventId) {
+  const list = Array.isArray(s.activeConditions) ? s.activeConditions : [];
+  if (!list.length) return s;
+  let changed = false;
+  const kept = [];
+  for (const c of list) {
+    const causes = Array.isArray(c?.causes) ? c.causes : [];
+    if (causes[0]?.source === 'event' && causes[0]?.eventId === eventId) {
+      changed = true;
+      continue;
+    }
+    const stripped = causes.filter((/** @type {MutEntity} */ cause, /** @type {MutEntity} */ i) =>
+      i === 0 || cause?.source !== 'event' || cause?.eventId !== eventId);
+    if (stripped.length === causes.length) {
+      kept.push(c);
+      continue;
+    }
+    changed = true;
+    kept.push(unEase(c, stripped));
+  }
+  return changed ? { ...s, activeConditions: kept } : s;
+}
+
+/**
+ * APPLY_STRESSOR stamps addedByEventId on the entry it upserts — drop it.
+ * (When it UPDATED a pre-existing entry the stamp was overwritten, so undo
+ * drops the whole entry; a generation-rolled one returns on the next
+ * regeneration, and an earlier event's entry via the restored
+ * stressorEdits record.) RESOLVE_STRESSOR's live removal is NOT restored —
+ * the un-eased condition above is the engine truth NOW, and the restored
+ * stressorEdits.added record brings the authored entry back on the next
+ * regeneration.
+ */
+function withoutEventStressEntries(/** @type {MutSettlement} */ s, /** @type {MutEntity} */ eventId) {
+  let next = s;
+  for (const key of ['stressors', 'stress', 'stresses']) {
+    const arr = next[key];
+    if (!Array.isArray(arr)) continue;
+    const filtered = arr.filter((/** @type {MutEntity} */ st) => st?.addedByEventId !== eventId);
+    if (filtered.length !== arr.length) next = { ...next, [key]: filtered };
+  }
+  return next;
+}
+
+/**
+ * The append-only config annotation ledgers, every entry of which carries
+ * its atEventId. _cutRoutes is dual-written to _config (deriveRegionalState
+ * reads it across regenerations) — the same scrub runs on both copies; the
+ * others live on config only. _activePlague is last-writer-takes-all, so it
+ * clears only when the popped event wrote it (an earlier plague's
+ * overwritten annotation is unrecoverable — same overwrite class as the
+ * condition limitation above).
+ */
+function scrubConfigAnnotations(/** @type {MutEntity} */ config, /** @type {MutEntity} */ eventId) {
+  if (!config || typeof config !== 'object') return config;
+  let next = config;
+  // _forcedRelief/_offeredCredit (the FP-G3 generosity verbs) follow the _cutRoutes
+  // discipline exactly: append-only, atEventId-stamped, dual-written to _config
+  // (withoutEventAnnotations runs this scrub on both copies).
+  for (const key of ['_cutRoutes', '_userRoutes', '_refugeeWaves', '_raidHistory', '_forcedRelief', '_offeredCredit']) {
+    const arr = next[key];
+    if (!Array.isArray(arr)) continue;
+    const filtered = arr.filter((/** @type {MutEntity} */ e) => e?.atEventId !== eventId);
+    if (filtered.length !== arr.length) next = { ...next, [key]: filtered };
+  }
+  if (next._activePlague?.atEventId === eventId) {
+    const { _activePlague, ...rest } = next;
+    next = rest;
+  }
+  return next;
+}
+
+function withoutEventAnnotations(/** @type {MutSettlement} */ s, /** @type {MutEntity} */ eventId) {
+  let next = s;
+  // A user route leaves TWO marks on a settlement: the _userRoutes ledger row
+  // (atEventId-stamped, scrubbed by provenance below) and a neighbourNetwork entry
+  // that carries the route identity in its linkId and no event stamp of its own.
+  // Read the ledger for the identities this event chartered BEFORE the scrub
+  // removes the only record that connects them to it.
+  const chartered = new Set();
+  for (const home of [s?.config, s?._config]) {
+    const rows = Array.isArray(home?._userRoutes) ? home._userRoutes : [];
+    for (const row of rows) {
+      if (row?.atEventId === eventId && row?.routeId) chartered.add(String(row.routeId));
+    }
+  }
+  const config = scrubConfigAnnotations(s.config, eventId);
+  if (config !== s.config) next = { ...next, config };
+  const raw = scrubConfigAnnotations(s._config, eventId);
+  if (raw !== s._config) next = { ...next, _config: raw };
+  if (chartered.size && Array.isArray(next.neighbourNetwork)) {
+    const kept = next.neighbourNetwork.filter(
+      (/** @type {MutEntity} */ n) => !chartered.has(String(n?.linkId || '')),
+    );
+    if (kept.length !== next.neighbourNetwork.length) {
+      next = { ...next, neighbourNetwork: kept };
+    }
+  }
+  return next;
+}
+
+/**
+ * DESTROY_SETTLEMENT stamps its event id on both the settlement and the
+ * config flag, so the revival is exact. Status restores to 'active' —
+ * destruction is the only settlement-level status writer.
+ */
+function withoutEventDestruction(/** @type {MutEntity} */ s, /** @type {MutEntity} */ eventId) {
+  if (s.destroyedByEventId !== eventId) return s;
+  const { destroyedAt: _a, destroyedByEventId: _b, destroyedCause: _c, destroyedReason: _d, ...rest } = s;
+  let next = { ...rest, status: 'active' };
+  if (next.config?._destroyedByEventId === eventId) {
+    const { _destroyed, _destroyedByEventId, ...cfg } = next.config;
+    next = { ...next, config: cfg };
+  }
+  return next;
+}
+
+/**
+ * Drop entities the popped event CREATED — ADD_NPC / ADD_INSTITUTION /
+ * ADD_FACTION stamp createdByEventId on the new record (mirroring the
+ * destroyedByEventId/removedByEventId idiom). Without this, an added entity
+ * survived its own undo. Re-add of a pre-existing entity (the idempotent
+ * un-remove branch) carries no createdByEventId, so it is left intact.
+ */
+function withoutEventCreations(/** @type {MutSettlement} */ s, /** @type {MutEntity} */ eventId) {
+  let next = s;
+  const dropCreated = (/** @type {MutEntity} */ arr) => arr.filter((/** @type {MutEntity} */ e) => e?.createdByEventId !== eventId);
+  if (Array.isArray(next.npcs) && next.npcs.some((/** @type {MutEntity} */ n) => n?.createdByEventId === eventId)) {
+    next = { ...next, npcs: dropCreated(next.npcs) };
+  }
+  if (Array.isArray(next.institutions) && next.institutions.some((/** @type {MutEntity} */ i) => i?.createdByEventId === eventId)) {
+    next = { ...next, institutions: dropCreated(next.institutions) };
+  }
+  const psFactions = next.powerStructure?.factions;
+  if (Array.isArray(psFactions) && psFactions.some((/** @type {MutEntity} */ f) => f?.createdByEventId === eventId)) {
+    next = { ...next, powerStructure: { ...next.powerStructure, factions: dropCreated(psFactions) } };
+  }
+  if (Array.isArray(next.factions) && next.factions.some((/** @type {MutEntity} */ f) => f?.createdByEventId === eventId)) {
+    next = { ...next, factions: dropCreated(next.factions) };
+  }
+  return next;
+}
+
+// ── Entry point ───────────────────────────────────────────────────────────
+
+/**
+ * Scrub everything the popped event wrote that outlives its systemState
+ * delta: promoted conditions, appended condition receipts, stress entries,
+ * annotation ledgers, destruction stamps, created entities, and the
+ * snapshotted records.
+ * Finishes with withEventConditionsSynced so config.eventConditions (and
+ * its _config mirror) stops naming the undone event — without that re-sync,
+ * reapplyEventConditions re-promoted the ghost on every regeneration.
+ *
+ * @param {Object} settlement  the settlement AFTER the impairment strip
+ * @param {import('../types.js').EventLogEntry} logEntry  the popped entry
+ * @returns {Object} new settlement (or the input when nothing matched)
+ */
+export function scrubUndoneEvent(settlement, logEntry) {
+  const eventId = logEntry?.event?.id;
+  if (!settlement || !eventId) return settlement;
+  let next = settlement;
+  next = withoutEventConditions(next, eventId);
+  next = withoutEventStressEntries(next, eventId);
+  next = withoutEventAnnotations(next, eventId);
+  next = withoutEventDestruction(next, eventId);
+  next = withoutEventCreations(next, eventId);
+  next = restoreSnapshottedRecords(next, logEntry.undo);
+  return withEventConditionsSynced(next);
+}

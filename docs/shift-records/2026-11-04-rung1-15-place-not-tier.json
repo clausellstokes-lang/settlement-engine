@@ -1,0 +1,40 @@
+{
+  "_doc": "PLACE-NOT-TIER (R6, UNITS 1–2), ONE SIGNED SHIFT OF RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation, vetoable; a successor chair does not inherit this signature). THE CAUSE, ONE: PLACE-NOT-TIER (R6, units 1–2): the soldiers line, the Guard Captain and \"The garrison\" read the place's forces, not the tier; a thorp, hamlet or village seats no guild power without a market. THE MOVER, NAMED: first-parent step 6129c300d of lane/landing-rung1-2026-11-04 (\"compose: lane/rung1-place-not-tier-2026-11-04 onto the window branch\") and nothing else. THE OWNER'S WORDS are quoted verbatim from docs/OWNER_DECISION_QUEUE.md line 562 (THE LADDER IS THE LANDING, the owner, 2026-11-04) and line 592 (THE SOAK LADDER, the owner, 2026-11-03), as §934.104 quotes them (the fix-window lanes' words; the lane's commission is rung 1's kinds 4 and 8, A-14). HOW (the staged-tree method, DOORS-2 ruling 1; LANDING-3's brief, ruling 1: one record per moving step, in first-parent order; LANDING-4 under the same brief and its addendum): this record's stage S15 is the tree of 6129c300d with the door paths (the freeze register, every registered manifest and suite, docs/shift-records/, scripts/prose-manifest-cells.mjs, the door helper, the freeze walker and scripts/audit/'s doors) carried from the branch, where the previous record's writes are committed, and CARTOGRAPHY_CALIBRATION's block carried with them (it is written by hand with every corpus re-record; scripts/audit/carry-calibration.mjs); no lane touched a door path inside the window, so the stage differs from 6129c300d by those writes alone (scripts/audit/landing-stage.sh build stops otherwise). MEASURED BEFORE THE WRITE (a dry pass of every act against a placeholder record in the same scratch stage, then the stage rebuilt, scripts/audit/landing-act.mjs figures; S14 -> S15): generator-golden-master 180 of 525 rows (hamlet 72, village 84, town 24; thorp, city, metropolis 0), the key set identical; herald-knowledge-desk-golden 2 of 400 rows, 8 added and 3 removed (395 -> 400); cartography-calibration-corpus 15 of 504 rows (village 15); dossier-prose-manifest 48 of 1050 rows (village 48); espionage-dormancy-fence 105 of 360 rows (thorp 3, hamlet 35, village 53, town 14; city, metropolis 0), 360/360 distinct, a126db33.. -> 1362f4ce... The six first-parent commits between record 14's step and this one (425b7a72, ad961809, 09fe09b8, N1 513e1bf1, fcd2f3b7, N1 4fb9cc5e) measure 0 golden-master rows (the census at every step, f0c7321d at each); the lane's report commit bb1f257f1 is the compose's own tip. A surface that does not move at this stage is not listed. CARTOGRAPHY_CALIBRATION does not move (the per-tier maximum roster still reads 11/14/22/47/92/106). W6 stays the one named red of the calibration suite, carried to record 27 by the chair's ruling 2 in LANDING-4's addendum. RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation, vetoable; a successor chair does not inherit this signature).",
+  "ownerWords": "well before we do the PRs, do the 1,000 again, the 10,000, the 100,000, and the 1 million with fixes where findings are found. PR in between each · after all of that, run 1000 generated settlements and review each in depth and in aggregate and tune",
+  "ownerDate": "2026-11-04",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
+  "cause": "PLACE-NOT-TIER (R6, units 1–2): the soldiers line, the Guard Captain and \"The garrison\" read the place's forces, not the tier; a thorp, hamlet or village seats no guild power without a market",
+  "seat": "LANDING-4 (Opus 5.5) under the cloud chair (Fable 5.1), session 019yED1Rc3svZxTNcEJVRr77, from the stage at 6129c300d",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "re-record",
+      "predictedRows": 400,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "cartography-calibration-corpus",
+      "action": "re-record",
+      "predictedRows": 504,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "dossier-prose-manifest",
+      "action": "re-record",
+      "predictedRows": 2,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    }
+  ]
+}

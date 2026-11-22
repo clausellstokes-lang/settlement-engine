@@ -1,0 +1,170 @@
+You are BAR4-PEOPLE, a builder seat of the settlement-engine integration program (your parent, the chair, is session_01ACmDYZrFEVXyZEUg1NDxxC). Your checkout is the branch of the close of the round before yours (lane/bar3-close-doors-2-2026-11-16); its tip must read 8aef8e7d46, or a later tip that differs from it in documents only (say which in your first line). Your own and only branch is lane/bar4-people-2026-11-16, CUT FROM 8aef8e7d46. THAT TREE IS THE CLOSED TREE OF THE ROUND BEFORE YOURS: every stored figure re-taken, the reference refreshed on the owner's own word; it lands on the joined line as you start. THE CHAIR'S WHOLE CHECK OF IT ENDS ABOUT 08:25 UTC: it is green whole, or the chair sends you its red files by name in one line; until that line, a file red at 8aef8e7d46 and at your tip with the same message is named, not chased.
+
+YOUR ASSIGNMENT IS THIS FILE (the round's brief, your own section of it and your worklist follow below, whole) AND TWO MORE FILES on the chair's lane. Before anything else:
+  git fetch origin lane/chair-2026-11-08
+  git show origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-BAR2.md
+  git show origin/lane/chair-2026-11-08:docs/chair/2026-11-14/briefs/BRIEF-BAR3.md
+BRIEF-BAR2 is THE METHOD: read it whole. Of BRIEF-BAR3 read ONLY its section "The amendments to BRIEF-BAR2" (find it with `grep -n '^#'`, print it with `sed -n`). THE BRIEF BELOW (BRIEF-BAR4) IS THIS ROUND: it wins where the three differ. (It also stands on the chair's lane by itself as docs/chair/2026-11-14/briefs/BRIEF-BAR4.md, with your worklist as docs/chair/2026-11-15/review-bar-4/WORKLIST-BAR4-PEOPLE.md and .json: the same text as here; the .json carries each row's evidence as data.) AND, from your own checkout, ONLY TWO SECTIONS of the hand-backs of the seats that held your ground last round, under docs/chair/2026-11-15/bar3/: `BAR3-PEOPLE-2-HANDBACK.md`'s "How the instruments are re-made" (how the census, the inventory diff and its measures are re-made) and `BAR3-PEOPLE-2-HANDBACK.md`'s "What is left, IN ORDER (for a successor: read this and nothing else)" (what it left: your worklist already carries the rows that are yours): find their line numbers with `grep -n '^#'` and print those two by `sed -n`, never a whole file. NOTHING ELSE: do not open the older briefs, other hand-backs or the chair's handoffs: your context is your budget.
+
+THE ROUND'S LAW (Amendment K below), in one breath: FOR EACH KIND IN YOUR SECTION: (1) A DETECTOR FIRST: a pure function over a town's record and its printed lines that finds EVERY instance of the kind, not the one sentence a reader met; (2) ITS COUNT over the census's 720 AND over the fresh 300, sent to the chair in ONE LINE before any cure; (3) the cure at the cause until it reads 0 in both; (4) the detector kept as a guard with a positive control. YOUR KINDS AND ROWS: P1 the pair's ties (C18833, C41801), P2 a sex-named everyday title (C2708, C18802), singles (C4412, C37293, C23720). YOUR FILES, yours alone: src/data/npcData.js, src/data/people/titleSecretsPresentations.js, src/data/faceHonorifics.js, src/data/holderTitleForms.js. You change those files and tests, and nothing else under src/ but what amendment 5b allows: a row whose cure needs another file is NAMED for its seat (the eight: BAR4-SERVICES, BAR4-SCENES, BAR4-HOUSES, BAR4-CORPUS-ECO, BAR4-CORPUS-DEF, BAR4-SAFETY, BAR4-PEOPLE, BAR4-HISTORY), with the leaf or the fact it needs, in one line to the chair.
+
+THE FRESH SAMPLE'S SEEDS (Amendment K2): docs/chair/2026-11-14/probes/READ-ALL/packets11/seeds.fresh300.txt on the chair's lane (`git show` it to a file outside every tree); its rule, should you need to re-make it: one seed a line, 300 lines: for each n from 101 to 130, the ten shapes: bar0-thorp-calm-rand-<n>, bar0-hamlet-calm-rand-<n>, bar0-hamlet-under_siege-rand-<n>, bar0-village-famine-rand-<n>, bar0-village-calm-rand-<n>, bar0-town-calm-rand-<n>, bar0-town-occupied-rand-<n>, bar0-city-under_siege+famine-rand-<n>, bar0-city-wartime-rand-<n>, bar0-metropolis-calm-rand-<n> (the form of docs/chair/2026-11-14/probes/READ-ALL/packets10/seeds.bar4.txt on the chair's lane, which holds the thirty READ towns: rand-21 to rand-23).
+
+==================== THE ROUND'S BRIEF (BRIEF-BAR4), whole but for the other seats' sections ====================
+
+# BRIEF · BAR4 · the real contradictions of the bar's fourth read (REVIEW-BAR-4), closed BY KIND: a detector first
+
+You are a BUILDER seat of the settlement-engine integration program. THE METHOD IS THE FILE `docs/chair/2026-11-14/briefs/BRIEF-BAR2.md` ON THIS LANE: READ IT WHOLE. Of `docs/chair/2026-11-14/briefs/BRIEF-BAR3.md` read ONLY its section "The amendments to BRIEF-BAR2" (find it with `grep -n '^#'`, print it with `sed -n`): its amendments 2 to 9, 11 and 12 bind you as written, with YOUR base in place of theirs; its amendments 1 and 10 are replaced by amendment 1 below. THIS FILE'S AMENDMENTS WIN where the three differ. Then read YOUR SECTION below (one a seat) and your worklist. Nothing else: your context is your budget.
+
+## What was measured, and why this round changes the method
+
+On 2026-11-16 at 00:10 UTC the bar's measure was taken a fourth time, at the joined tree after the round before yours: thirty fresh towns, two readers each: NO HIGH (none in the last 119 towns read); 75 MED kept after the chair's check. THEN, FOR THE FIRST TIME, A STRICT SECOND CHECK: every kept flag was checked against the town's own record, dump and packet by an independent checker told to hunt for what in the town makes the sentence true and equally not to explain a real contradiction away. Of the 75: 40 STAND (1.33 a town), 12 are WEAK (one loose word), 23 were explained by the town's own facts or were artifacts of the reading copy. The same check of the read before (97 kept): 63 STAND (2.10 a town). THE BAR (thirty fresh towns with no medium false sentence) IS NOT MET, and a round of rows takes about a third off: AT THAT RATE ROUNDS OF ROWS NEVER REACH ZERO. None of the 40 is a sentence the last round cured: each is another member of a KIND the rounds keep meeting: two lines of one page that give one fact two values (15); a calm-times line printed in a crisis (9); a row or a scene at work with its supply cut (7); a food line that names a spent source (4); a person's sex (3); a thing the town lacks (2).
+
+SO THIS ROUND'S UNIT IS THE KIND, AND ITS FIRST PRODUCT IS A DETECTOR (amendment K). The owner asked in the chair's chat on 2026-11-16 why the work was closing "especially since we aren't at 0 yet": this round is the answer.
+
+## Your worklist
+
+One a seat, on this lane: `docs/chair/2026-11-15/review-bar-4/WORKLIST-BAR4-<SEAT>.md` and `.json`: each row with its class (STANDS, WEAK, LEFT-BY-BAR3), its town, its sentence, the checker's reason and evidence, and the writer the chair traced. THE READ TOWNS ARE NOT AMONG THE CENSUS'S 720: bear one alone to see its record (`births.mjs` with a seeds file: `docs/chair/2026-11-14/probes/READ-ALL/packets10/seeds.bar4.txt`). THE FRESH SAMPLE (amendment K2): `docs/chair/2026-11-14/probes/READ-ALL/packets11/seeds.fresh300.txt`: 300 towns outside the 720 and outside every read (the bar's ten shapes, seeds rand-101 to rand-130). (If that file is not on the lane yet when you start, the chair's message gives its rule: write it yourself.)
+
+## Amendment K · A DETECTOR FIRST (the round's law)
+
+For EACH KIND named in your section:
+
+K1. THE DETECTOR. A pure function over a town's RECORD and its PRINTED LINES (the census's dump: the inventory's own instruments, as your predecessor's hand-back re-makes them) that returns EVERY instance of the kind: the STATE that makes a line false, and the line printing in it. It reads the settled facts, not the words of the one sentence a reader met: a detector that greps a flagged sentence is not a detector. Where the kind is "a line presumes X", the lines DECLARE what they presume (in the pool's own declaration form where it has one: read the file's header and its tests first; else a small table beside the pool), and the detector reads the declarations against the record. Where the kind is "one fact, two values", every line that speaks of the fact is listed, and the detector asks that all of them read ONE settled fact (a module under `src/domain/facts/` in that folder's own form where none exists yet: BRIEF-BAR3's amendment 12 on the lazy edge applies to every new module).
+
+K2. THE COUNT BEFORE ANY CURE. Run the detector over the census's 720 AND over the fresh sample's 300 (bear and render them once at your base: `sh census3.sh <tree> <out> 4 --seeds <the fresh file> --count-only`, about half the cost of a census run; keep the output outside every tree; if your archived `census3.sh` knows no `--seeds`, tell the chair in one line and bear them with `births.mjs`). Send the chair ONE LINE before you cure: the kind; instances and towns in each population; the three commonest lines. WHY TWO POPULATIONS: the bar is measured on fresh seeds, never on the 720, and a line cured on the 720 alone has come back in a fresh town before.
+
+K3. THE CURE AT THE CAUSE, until the detector reads 0 in BOTH populations: the line's gate reads the settled fact; or the writer reads the one fact its sibling reads; or the row takes its mark; or the line says what is true of that state (a town in want is not told its tables never empty; it may be told what it still has). NEVER by deleting a line that is true elsewhere, never by a hedge that makes a line say nothing. What the detector still finds and you judge TRUE is excluded IN THE DETECTOR by a NAMED exclusion with its reason, never left as noise and never by narrowing the detector until it is quiet.
+
+K4. THE DETECTOR STAYS, AS A GUARD: a test in the corpus's own form over the 720 (the totality helper: BRIEF-BAR3's amendment 11), with (a) the zero and (b) A POSITIVE CONTROL: a named or constructed record on which the detector MUST fire, so that it cannot go blind. The fresh sample is your measure, not a test: say its two counts (before, after) in your hand-back.
+
+K5. A ROW WITH NO KIND (one sentence, one pair of people): cure it as BRIEF-BAR2 says: measure on the 720 the state that makes it false; cure the line for that state wherever it prints; read its siblings in the same pool.
+
+K6. A SPLIT IN THE RECORD ITSELF (two fields of one town that disagree: a food ledger that names a ground the resource state calls spent; a chain "running" beside a gap that says it has no input) is the CAUSE of several rows: report it in your K2 line with its count; cure it where the writer of one of the two fields is your file; otherwise it is ONE LINE to the chair with the two leaves (`src/generators/steps/assembleSettlement.js` is no seat's; NO NEW FIELD ON THE SAVED RECORD: the record's shape is the owner's own surface).
+
+## The measure's own rules (cure what will be counted; do not chase what will not)
+
+The strict second check judges by these, and the next read will be judged by them:
+1. A page that prints X and not-X STANDS as a fault even where the record explains both.
+2. A secret, a hook, a rumour or a recent-conflict line states its own fact: it stands as true unless the page or the record denies it.
+3. A calm-times reassurance printed in a town in want STANDS as a fault; a caveat elsewhere on the tab ("the descriptions here are of ordinary times") does not save a line the crisis plainly touches and that carries no mark.
+4. A title ending in "-master" fits either sex and an office's title is the office's; an everyday sex-named word with an ordinary pair (Landlord and Landlady; "he" for a woman) is a fault.
+5. A row is judged WITH ITS MARK: a marked row is not a fault; the same service marked on one tab and bare on another is.
+6. A WEAK row is one loose word: cure it where one word reading its figure settles it; never rewrite a true line to chase a tone.
+
+## The amendments
+
+1. YOUR BASE: 8aef8e7d46: the CLOSED tree of the round before yours (the tip of `lane/bar3-close-doors-2-2026-11-16`; it lands on the joined line `lane/join-2026-11-14` as you start): every stored figure re-taken through its door and the reference refreshed on the owner's own word. The chair's whole check of it ends about 08:25 UTC on 2026-11-16: it is GREEN WHOLE, or the chair sends you its red files by name in one line. So THE SECOND TREE OF YOUR BOOKS is 8aef8e7d46, and every red at your tip that is not red at 8aef8e7d46 with the same message IS YOURS.
+2. THE NET YOU CLOSE BY, WIDENED (the last round's close found NINE test files red that no seat's books had named, and a loop between two chunks of the built app that only the build saw: the close cost a night). Beyond BRIEF-BAR3's amendment 2 (your own guards; the seventeen law suites and the three it adds), run EACH ALONE at your final tip, to a file through `sh scripts/gate-tail.sh`: `tests/domain/customContentPresentationClaims.test.js` (a display name custom content may rewrite must never reach a draw, a gate or a seed: key on identity and figures); `tests/generators/regenDerivedState.test.js` (a section regeneration derives what the full generation derives); `tests/lint/styleLaw.walker.test.js` (no struck phrase, no retired word in a new line); `tests/design/deepCraftKillList.test.js` (no new tinted callout or other struck structure); `tests/generators/economicStructure.test.js` (the cohesion ceilings: a file over its ceiling moves ONE cohesive block to a leaf beside it, byte for byte); `tests/lint/proseCorpusBytes.test.js` (a row BELOW its figure is lowered by you, as the file demands; a row ABOVE is a ceiling: do not raise it: name it with the bytes and their commits); `tests/generators/stressSecretDeclared.test.js` and `tests/generators/tieProseDeclared.test.js` (the declared counts: a new declaring entry is spelled in the file's own form with its commit); `tests/domain/defensePostureAgainstItsFacts.test.js`; `tests/domain/corpusEcoTailGuards.test.js` (an anchor your cure moves is re-keyed by identity with a dated note; a line left mute in every town is a STOP). THEN ONE `npm run build` and `npm run verify:dist` at your final tip (its boot smoke must PASS at every stage; it may refuse only on stored figures you name), and remove the build output (a built `dist/` folder reds `chainPrintSites`).
+3. THE REFERENCE IS NOT YOURS: say how many of the 525 reference configurations your cures move against 8aef8e7d46 and in which field families; you re-take none. Its next refresh needs a NEW word of the owner.
+4. THE ANNEX IS ONE FILE HELD BY BLOCK THIS ROUND (`docs/content/RECEIPT_POOLS_DOSSIER_STATE.md`): BAR4-CORPUS-ECO holds the economy desk (the DS-ECO and DS-SUP blocks) and the power desk (DS-POW); BAR4-CORPUS-DEF the defence desk (DS-DEF); BAR4-SCENES the general desk (DS-GEN, DS-REL, DS-POP, DS-HK); BAR4-SAFETY the stressor desk (DS-STR, DS-CND); the war and faith desk (DS-WAR, DS-FTH) is no seat's (a row there is one line to the chair). You change ONLY your blocks' lines; you regenerate (`npm run gen:dossier-prose`) and commit ONLY your desk's generated file: `git status` must show the other desks unchanged. The annex's shared stored files (`docs/content/wiring-census.json`, the pool census's files) are NAMED in "the books my cures move", NOT re-taken: four seats re-taking one JSON would conflict at the join; the close re-takes them once.
+5. YOUR FILES are named in your section and are yours alone; a row whose cure needs another seat's file is NAMED for that seat (the eight: BAR4-SERVICES, BAR4-SCENES, BAR4-HOUSES, BAR4-CORPUS-ECO, BAR4-CORPUS-DEF, BAR4-SAFETY, BAR4-PEOPLE, BAR4-HISTORY) with the leaf or the fact it needs, in one line to the chair. A fact module two seats need is made by the seat whose section names the fact; the other reads it after the join or names its row.
+5b. THE FACTS' VOCABULARY IS SHARED (`src/domain/facts/factVocabulary.js`, `factsOf.js`, `factLayers.js`): it is the estate's own form for what a line presumes (its `needs`, its marks, its dimensions and their readers): USE IT before you invent a table. You may ADD a dimension or an atom there: place it BESIDE ITS OWN FAMILY (never at the end of a list: two seats appending at one place collide at the join); never change, rename or re-order an existing one: a change to an existing one is ONE LINE to the chair first. A new fact with a body of its own is a NEW module under `src/domain/facts/`, yours alone.
+6. YOUR BUDGET: hand back by file at 300,000 of your count (if the meter reads 0, by time: about ninety minutes). WHEN YOU HAND BACK YOU PUSH NOTHING MORE. A hand-back says what is left IN ORDER so that a successor reads it and nothing else.
+7. YOUR HAND-BACK: `docs/chair/2026-11-16/bar4/BAR4-<SEAT>-HANDBACK.md` on your branch, current in every push, in BRIEF-BAR2's form, WITH ONE TABLE FIRST, "THE KINDS": the kind; the detector (file and function); instances and towns BEFORE and AFTER in the 720 and in the fresh 300; the named exclusions with their reasons; the guard and its positive control. And, as before: every new or changed line on THE VETO LIST with three towns it is read in; the books my cures move; registrations owed; what is left in order; how the instruments are re-made.
+
+## THE SEATS (each row is a DIRECTION TO BE MEASURED FIRST: where your measure shows a premise false, say so in one line and follow the record)
+
+### BAR4-PEOPLE · two ties that cannot both hold; a title against its holder's sex; a secret against the town
+
+YOUR FILES: `src/data/npcData.js`, `src/data/people/titleSecretsPresentations.js`, `src/data/faceHonorifics.js`, `src/data/holderTitleForms.js`.
+- KIND P1 · THE PAIR'S TIES. "X lost a fortune and has not spoken to Y since" beside a current, devoted mentor-and-successor tie between the same two, the only two seats of a hamlet's council (C18833); "X named Y as successor in front of witnesses" beside "bitter rivals who keep their distance" for the same two, and across trades: a tanner names a carpenter (C41801). THE DETECTOR: for every pair of people that carries two or more ties: the ties' temper (warm, cold, broken) and each tie's own conditions (a successor in the same house or trade).
+- KIND P2 · A SEX-NAMED EVERYDAY TITLE. "Landlord" for a woman who keeps an inn (C2708, C18802). By the chair's ruling TM1 a title ending in "-master" fits either sex and an office's title is the office's; an everyday word with an ordinary pair takes its holder's form (Landlady). THE DETECTOR: every sex-paired title in your two tables against its holder's sex, in both populations.
+- SINGLES: C4412 (the secret "bought the vineyard by lending its old owner money at a rate that could never be paid back" for a vintner the record says has no grapes, in a town with no vineyard: a secret states its own fact UNLESS THE RECORD DENIES IT: here it does: the secret's presumption is a holding the town has); C37293 (WEAK: "X governs on Y's credit" for an unranked member while another holds the seat); C23720 (WEAK: "a good ear on the waterfront" at the sky docks of a mountain city: the presentation reads the port's kind).
+
+==================== YOUR WORKLIST ====================
+
+# WORKLIST · BAR4-PEOPLE
+
+7 rows: 5 STANDS, 2 WEAK.
+
+STANDS: a real contradiction by the strict second check (the page against its own town). WEAK: one loose word (cure where one word settles it; never rewrite a true line to chase a tone). LEFT-BY-BAR3: a row the round before left, with where its measure is. A FLAG IS STILL A CANDIDATE: verify each row by the record before you cure it. The read towns are NOT among the 720: bear one alone to see its record (`docs/chair/2026-11-14/probes/READ-ALL/packets10/seeds.bar4.txt`). The writers below were traced by the chair with `grep -F` of the fixed words under `src/` at 640266f64: check each.
+
+## C18833 · STANDS · bar0-hamlet-calm-rand-23 · World/Relationships
+
+> Latifa al-Amin lost a fortune and has not spoken to Alaa ibn Khalid since.
+
+WHY: In a hamlet of 44, the same two people are given a current, 'devoted' mentor-and-successor tie on one card, and ten years of not speaking on the other. They are also the only two seats of a two-person Elder Council. The vouching could predate the case, but a 'devoted' mentorship now and ten years of silence cannot both hold. The two cards contradict each other.
+- evidence: Latifa al-Amin lost a fortune and has not spoken to Alaa ibn Khalid since. — cal-07.txt C18833 (the 'ten years ago' case, C18832)
+- evidence: Mentor and Successor / devoted — cal-07.txt C18817-C18820
+- evidence: Latifa al-Amin vouched for Alaa ibn Khalid when nobody else would. / Alaa ibn Khalid's first post came from that word. — cal-07.txt C18823-C18824
+- evidence: Alaa ibn Khalid corrected Latifa al-Amin in public last month — cal-07.txt C18825
+- evidence: Latifa al-Amin ... [Elder Council (rank 1)]; Alaa ibn Khalid ... [Elder Council (rank 2)] — header PEOPLE
+- writer (the words "lost a fortune and has not spoken"): src/data/npcData.js
+
+## C41801 · STANDS · bar0-town-occupied-rand-22 · World/Relationships
+
+> Bing Shimizu named Wei Kimura as successor in front of witnesses.
+
+WHY: The same pair carries two edges: bitter rivals who keep their distance, and a formally named successor. On top of that, a tanner names a carpenter of another trade as her successor. Nothing on the page links or explains the two edges.
+- evidence: Bing Shimizu named Wei Kimura as successor in front of witnesses. — cal-16 C41801 (relationships tie_npc_tanner_established, mentor_student, 'formal')
+- evidence: Professional Rivalry ... bitter / Every friend Wei Kimura wins is one Bing Shimizu lost ... The two keep a polite distance and an exact tally. — cal-16 C41785-C41792 (tie_npc_carpenters_5_15, rival)
+- evidence: Wei Kimura (m), the master carpenter; Bing Shimizu (f), the master tanner — header PEOPLE
+- writer (the words "as successor in front of witnesses"): src/data/npcData.js
+
+## C2708 · STANDS · bar0-city-under_siege+famine-rand-22 · Systems/Institutions
+
+> Connection: Landlord Khulood al-Misri
+
+WHY: 'Landlord' for an innkeeper is a personal trade title that names a sex (the female form is landlady), and Khulood is (f). The rules count this kind of title as a fault ('Dairyman', 'Beemaster' for a woman).
+- evidence: Connection: Landlord Khulood al-Misri — cal-02.txt C2708
+- evidence: Khulood al-Misri (f), the innkeeper @ Inns and taverns (district) — header PEOPLE
+- evidence: Alewife Slavica / Alewife Klara — other bar4 dumps (the product does give female trade titles elsewhere)
+- writer (the words "Landlord"): src/data/faceHonorifics.js
+
+## C18802 · STANDS · bar0-hamlet-calm-rand-23 · World/NPCs
+
+> Landlord
+
+WHY: 'Landlord' is a personal trade title (an innkeeper's) in its male form, and Latifa is (f). By the rules' 'Dairyman / Beemaster for a woman' ruling, this is a fault.
+- evidence: Latifa al-Amin● / Wayside inn / Elder, first of Elder Council / Landlord — cal-07.txt C18799-C18802
+- evidence: Latifa al-Amin (f), the innkeeper @ Wayside inn — header PEOPLE
+- writer (the words "Landlord"): src/data/faceHonorifics.js
+
+## C4412 · STANDS · bar0-city-under_siege+famine-rand-22 · World/NPCs
+
+> Secret: Bought the vineyard by lending its old owner money at a rate that could never be paid back
+
+WHY: The record says, in ordinary times and not only under the siege, that the vintner has no access to grapes and that none are brought in, and LAND lists no vineyard. A vintner who owns 'the vineyard' would have grapes, so the secret contradicts the town's own gaps.
+- evidence: Secret: Bought the vineyard by lending its old owner money — cal-02.txt C4412 (Jassim al-Tusi, Master Vintner)
+- evidence: No grapes reach the vintner. — cal-02.txt C3578
+- evidence: Vintner: Vintner exists but lacks access to grapes — header LAND gaps
+- evidence: Needed, and not brought in: grapes, iron ore, copper ore, clay. — cal-02.txt C3312
+- evidence: resources: Fishing Grounds; Marshlands; Ancient Grove; Coal or Peat Deposits; Open Grazing Land; Hunting Grounds — header LAND (no vineyard)
+- writer (the words "Bought the vineyard"): src/data/people/titleSecretsPresentations.js
+
+## C37293 · WEAK · bar0-town-calm-rand-22 · World/Relationships
+
+> Bashir al-Jabbar governs on Imad al-Andalusi's credit.
+
+WHY: Bashir does sit on the governing power (as an unranked member), so 'governs' is loose, not plainly false. But it, and the grain-stores choice after it, cast him as the town's governor when Abir ibn Sina holds the seat. One overstated word; the record casts the magistrate in the government's role in four debt ties.
+- evidence: Bashir al-Jabbar (m), the magistrate @ Courthouse [sits on: Feudal Appointee (a member, no rank)] — header PEOPLE
+- evidence: Abir ibn Sina (f), the lord's appointee [sits on: Landed Gentry (rank 1); Feudal Appointee (rank 1)] — header PEOPLE
+- evidence: archetypeKey 'gov_econ_dependence', description 'Bashir al-Jabbar governs on Imad al-Andalusi's credit.' — record s.relationships (tie_npc_mine)
+- writer (the words "governs on"): src/data/npcData.js src/data/dossierStateProse/power.generated.js src/domain/worldPulse/eventProse.js src/domain/coherence/crisisFactFindings.js
+
+## C23720 · WEAK · bar0-metropolis-calm-rand-21 · World/NPCs
+
+> How they deal Talks about the ships, the weather and the cargoes; a good ear on the waterfront.
+
+WHY: THE CHAIR: told to the owner as one loose word ('waterfront' at the sky docks): kept as WEAK, not struck || the checker (EXPLAINED): This is the brief's own example town. The wharfinger works the airship docks, and the 'ships', 'cargoes' and 'weather' she talks about are airships, their freight and their flying weather. 'Waterfront' is a loose word for the dock front, the same looseness as the 'ship and shore' flag already found wrong in this town.
+- evidence: Airship docking (high magic); ... Docks/port facilities; Harbour master's office — header HOUSES
+- evidence: Airship-era dock facilities handling both aerial and surface freight. — cal-09.txt C21507 (Docks/port facilities, connection Wharfinger Saba al-Masri)
+- evidence: Regulates airship traffic, assigns mooring berths, collects anchorage fees. — cal-09.txt C21518
+- evidence: Airship freight services (cargo, mooring) — header TRADE exports
+- evidence: Secret: Assigns the best berths to ships that pay a little extra — cal-09.txt C23721
+- writer (the words "a good ear on the waterfront"): src/data/people/titleSecretsPresentations.js
+
+==================== THE CORE ====================
+
+WHO IS ASKING. The chair is the Claude Code session session_01ACmDYZrFEVXyZEUg1NDxxC (your parent). In the chair's chat the owner wrote, on 2026-11-14: "Continue with the pending work! ... I defer all decisions to you and give you all permissions you may require."; on 2026-11-15: "then prioritize content rounds always"; on 2026-11-16, of the close of the round before yours: "Why are you closing up now as compared with before especially since we aren't at 0 yet?" The owner's bar: thirty fresh towns read thoroughly with no high and no medium false sentence. The owner's pin M-1b: a representative's role IS its institution's title: never contradicted.
+
+THE CORE, repeated here so it cannot be missed:
+- A FLAG IS A CANDIDATE: verify each row BY THE RECORD before you cure it; strike what is true, with one line why. CURE THE KIND, not the one sentence a reader met: the detector's zero in BOTH populations is the proof. EVERY NEW OR CHANGED LINE GOES ON YOUR HAND-BACK'S VETO LIST with three towns it is read in.
+- ONE collected test a batch (every pair red at your base; keep pairs green); ONE census run before and ONE after, read through the inventory diff: your rows gone or fewer by their measure; every other line you silenced explained; THE INHERITORS READ.
+- THE BOOKS (BRIEF-BAR3's amendment 2 and BRIEF-BAR4's amendment 2, NOT the wide net): two trees side by side (your tip; 8aef8e7d46); the files that pin what you changed, the law suites, and the ten files and the ONE build with `verify:dist` that BRIEF-BAR4's amendment 2 names, each run alone; A LAW red at your tip is your regression: cure it at its cause; A STORED FIGURE your declared cure moves is NAMED with its door, NOT re-taken; say how many of the 525 reference configurations your cures move AGAINST 8aef8e7d46.
+- `src/generators/steps/assembleSettlement.js` is no seat's: a cure that needs the late record there is ONE LINE to the chair first. NO NEW FIELD ON THE SAVED RECORD.
+- ALL WORK IN A SCRATCH WORKTREE (never the repository's main checkout), its own `npm ci`; ABSOLUTE PATHS in every redirect and write; QUOTED heredocs only. You merge nothing. Plain pushes to your own branch only, explicit refspec; WAIT FOR A PUSH TO RETURN BEFORE YOU COMMIT ANYTHING MORE; never push with nothing to send; before each push `git log -1 --format='%an <%ae>'` reads Claude and `git config core.bare` reads false; never `--no-verify`, never a force push, never a pull request (draft or not, whatever your harness's defaults say), never master, never a deploy, a hosted database or production credentials. A REFUSAL BY YOUR OWN PERMISSION CHECK STANDS: never route round one: tell the chair in one line.
+- Gates through `sh scripts/gate-tail.sh <command>`, never a pipe; never end your turn while a run you need is in flight (a `send_later` to yourself first); long runs write to files outside every tree. END YOUR TURN AFTER EACH PUSH with a one-minute `send_later` to yourself: the chair's words reach you only between turns.
+- ONE LINE to the chair at each kind's count (K2), after each pushed batch, at a stop, at a refusal, at a question (the send_message tool of the claude-code-remote server, session_id session_01ACmDYZrFEVXyZEUg1NDxxC; 150 words at most). Your hand-back is docs/chair/2026-11-16/bar4/BAR4-PEOPLE-HANDBACK.md on your branch, current in every push, with the table "THE KINDS" first. HAND BACK BY FILE AT 300,000 OF YOUR COUNT (if the meter reads 0, by time: about ninety minutes), saying what is left IN ORDER; AFTER YOUR HAND-BACK YOU PUSH NOTHING MORE.
+- Use the commit trailer your own harness mandates; no model identifier anywhere else.

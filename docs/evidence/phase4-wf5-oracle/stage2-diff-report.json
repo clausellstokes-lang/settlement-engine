@@ -1,0 +1,24 @@
+{
+  "configs": 187,
+  "changedConfigs": 187,
+  "latentPantheonConfigs": 187,
+  "corruptionTraceConfigs": 34,
+  "unexplained": {},
+  "proseDrift": [],
+  "latencyLeaks": [],
+  "boundednessViolations": [],
+  "traceNotAppendOnly": [],
+  "pathClassTally": {
+    "latent-pantheon": 374,
+    "corruption-trace": 34
+  },
+  "verdict": {
+    "everyConfigShifted": true,
+    "everyConfigHasLatentClass": true,
+    "unexplainedPathCount": 0,
+    "proseByteStable": true,
+    "zeroLatencyLeaks": true,
+    "boundednessClean": true,
+    "tracesInsertOnlyCorruptionReceipts": true
+  }
+}

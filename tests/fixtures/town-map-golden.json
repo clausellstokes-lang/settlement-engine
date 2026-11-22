@@ -1,0 +1,16 @@
+{
+  "bytes": 83404,
+  "configs": 18,
+  "distinctTerrains": 7,
+  "distinctTiers": 6,
+  "hash": "fda792a94b4bf0c8ae48033fa0acd99e1b46ce0a7600b68f133c5060c99b47fe",
+  "layoutLawVersion": 1,
+  "overlayVersion": 1,
+  "totalBuildings": 207,
+  "totalDistricts": 112,
+  "townMapGeometryVersion": 1,
+  "walledFalse": 8,
+  "walledTrue": 10,
+  "waterFalse": 12,
+  "waterTrue": 6
+}

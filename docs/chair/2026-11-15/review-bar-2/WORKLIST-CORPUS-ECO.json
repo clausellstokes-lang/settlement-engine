@@ -1,0 +1,200 @@
+[
+{
+"id": "C8653",
+"sev": "MED",
+"n": 140,
+"town": "bar0-city-wartime-rand-4",
+"section": "Systems/Economics",
+"fold": "<N> is fed, but what it keeps put by is not deep: a run of poor harvests would reach its tables.",
+"text": "Schwarzturm is fed, but what it keeps put by is not deep: a run of poor harvests would reach its tables.",
+"why": "says what it keeps put by is not deep; FOOD gives a granary and 8.7 months in store, and C7794 says about nine months",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 3291,
+"fn": "DS-ECO-9 › SECURE · v3"
+}
+},
+{
+"id": "C4528",
+"sev": "MED",
+"n": 125,
+"town": "bar0-city-under_siege+famine-rand-5",
+"section": "Systems/Resources",
+"fold": "The people of <N> know what their ground is worth to others, and know they could not keep it against anyone who came for it.",
+"text": "The people of Hochberg know what their ground is worth to others, and know they could not keep it against anyone who came for it.",
+"why": "Says the people could not keep their ground against anyone who came for it; STATE gives defence Well-Defended (walls, garrison, watch, mages).",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 5490,
+"fn": "DS-ECO-11 › STRATEGIC VALUE: the generator's assessment, framed · v3"
+}
+},
+{
+"id": "C33095",
+"sev": "MED",
+"n": 82,
+"town": "bar0-village-famine-rand-3",
+"section": "Systems/Economics",
+"fold": "Buyers from outside come to <N> for more than # thing.",
+"text": "Buyers from outside come to Montenovum for more than one thing.",
+"why": "Says outside buyers come for more than one thing, yet the same tab prints 'No significant exports'; also famine, with fishing failed and nothing sold",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 4753,
+"fn": "DS-ECO-10 › POSTURE: established · v5"
+}
+},
+{
+"id": "C7740",
+"sev": "MED",
+"n": 80,
+"town": "bar0-city-wartime-rand-4",
+"section": "Summary/Overview",
+"fold": "<N>'s market lives off through-traffic.",
+"text": "Schwarzturm's market lives off through-traffic.",
+"why": "market 'lives off through-traffic' but C7710 says not a market city's traffic and Foundations print Trade connectivity Collapsed under wartime",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 9418,
+"fn": "DS-GEN-13 › MARKET-OPEN · v2"
+}
+},
+{
+"id": "C27645",
+"sev": "MED",
+"n": 58,
+"town": "bar0-town-calm-rand-5",
+"section": "World/Daily Life",
+"fold": "<N>'s treasury takes in a little more than it pays out each year.",
+"text": "Staroin's treasury takes in a little more than it pays out each year.",
+"why": "treasury takes in more than it pays out; GOVERNMENT stability says 'militarised, chronically underfunded'",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 2748,
+"fn": "DS-ECO-8 › MODERATE · v1"
+}
+},
+{
+"id": "C2273",
+"sev": "MED",
+"n": 18,
+"town": "bar0-city-under_siege+famine-rand-4",
+"section": "Systems/Services",
+"fold": "Everything a traveller expects at <N> is here but #.",
+"text": "Everything a traveller expects at Nikephlathra is here but one.",
+"why": "'Everything a traveller expects is here but one' under siege: gates stopped (C2181), inns 'Stopped by the siege' (C2213), roads closed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6839,
+"fn": "DS-SUP-3 › ONE EXPECTED CATEGORY MISSING · v2"
+}
+},
+{
+"id": "C25594",
+"sev": "MED",
+"n": 12,
+"town": "bar0-town-calm-rand-4",
+"section": "Summary/Overview",
+"fold": "A buyer at <N> deals with each craft guild on its own, with no merchant guild above them.",
+"text": "A buyer at Cerrourbs deals with each craft guild on its own, with no merchant guild above them.",
+"why": "says no merchant guild above the craft guilds; GOVERNMENT lists Merchant Guilds (Suppressed) as a power and Zenobia is its rank 1",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 9718,
+"fn": "DS-GEN-13 › COMMERCE: craft guilds, no merchant guild · v1"
+}
+},
+{
+"id": "C14631",
+"sev": "MED",
+"n": 0,
+"town": "bar0-hamlet-under_siege-rand-4",
+"section": "Systems/Economics",
+"fold": "If any of <N>'s trade is done out of sight, it is too little to change what the hamlet is.",
+"text": "If any of Khanörtöö's trade is done out of sight, it is too little to change what the hamlet is.",
+"why": "says any hidden trade is too little to matter; INCOME has Black Market Revenue 14% and Shadow Economy 14% unrecorded",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 2148,
+"fn": "DS-ECO-6 › TIER: minor shadow activity (≥3) · v1"
+}
+},
+{
+"id": "C23226",
+"sev": "MED",
+"n": 0,
+"town": "bar0-metropolis-calm-rand-5",
+"section": "World/Daily Life",
+"fold": "The metropolis supports itself and has a little in hand.",
+"text": "The metropolis supports itself and has a little in hand.",
+"why": "'supports itself and has a little in hand' but FOOD: grows 47%, imports 52%, surplus 0%, word Pressured; stores are 13.9 months",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 2768,
+"fn": "DS-ECO-8 › MODERATE · v3"
+}
+},
+{
+"id": "C23861",
+"sev": "MED",
+"n": 0,
+"town": "bar0-thorp-calm-rand-4",
+"section": "Systems/Economics",
+"fold": "Of the food <N> raises for itself, its fishing comes first, and after a poor season for the fishing there is less to go round.",
+"text": "Of the food Mironick raises for itself, its fishing comes first, and after a poor season for the fishing there is less to go round.",
+"why": "says fishing comes first among food it raises, but LAND gives Fishing Grounds as depleted",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 3770,
+"fn": "DS-ECO-9 › FOOD SOURCES: one source · v2"
+}
+},
+{
+"id": "C8655",
+"sev": "MED",
+"n": 0,
+"town": "bar0-city-wartime-rand-4",
+"section": "Systems/Economics",
+"fold": "Of the food <N> raises for itself, its fishing comes first, and after a poor season for the fishing there is less to go round.",
+"text": "Of the food Schwarzturm raises for itself, its fishing comes first, and after a poor season for the fishing there is less to go round.",
+"why": "says fishing is the first of the food it raises; LAND gives Fishing Grounds depleted and C8598 says the fishery is fished out",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 3770,
+"fn": "DS-ECO-9 › FOOD SOURCES: one source · v2"
+}
+}
+]

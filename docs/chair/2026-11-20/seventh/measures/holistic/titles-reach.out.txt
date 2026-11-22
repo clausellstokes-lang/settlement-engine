@@ -1,0 +1,29 @@
+towns 300; a form with no family in the table: 0
+THE CULTURE CHANGES THE RULER'S WORD: 166/300 (55%)
+  thorp       20/50 (40%)
+  hamlet      23/50 (46%)
+  village     28/50 (56%)
+  town        33/50 (66%)
+  city        31/50 (62%)
+  metropolis  31/50 (62%)
+by culture: slavic 88% · arabic 81% · steppe 78% · south_asian 67% · celtic 47% · mesoamerican 47% · greek 46% · latin 45% · norse 43% · germanic 41% · east_asian 32%
+EXAMPLES (today -> with the table):
+  south_asian thorp, Household Council: Household Elder -> Sarpanch
+  slavic thorp, Elder Council: Elder -> Starosta
+  arabic thorp, Elder Council: Elder -> Sheikh
+  mesoamerican thorp, Elder Council: Elder -> Huehue
+  steppe thorp, Household Council: Household Elder -> Biy
+  germanic hamlet, Headman's Authority: Headman -> Bauermeister
+  greek hamlet, Headman's Authority: Headman -> Komarch
+  arabic hamlet, Elder Council: Elder -> Sheikh
+  steppe hamlet, Free Elder Council: Elder -> Biy
+  south_asian hamlet, Free Elder Council: Elder -> Sarpanch
+  slavic hamlet, Free Elder Council: Elder -> Starosta
+  latin hamlet, Feudal Stewardship: Steward -> Vilicus
+  celtic hamlet, Headman's Authority: Headman -> Pencenedl
+  arabic hamlet, Headman's Authority: Headman -> Mukhtar
+  slavic hamlet, Headman's Authority: Headman -> Starosta
+  east_asian hamlet, Headman's Authority: Headman -> Nanushi
+  slavic village, Headman's Authority: Headman -> Starosta
+  east_asian village, Feudal Stewardship: Steward -> Daikan
+unchanged towns by family: elders 73 · merchant 28 · appointed 9 · guild 9 · council 8 · assembly 4 · headman 3

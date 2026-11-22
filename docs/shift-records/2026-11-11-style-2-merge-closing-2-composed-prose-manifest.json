@@ -1,0 +1,16 @@
+{
+  "_doc": "CLOSING ACT 2 OF THE STYLE WAVE'S MERGE (STYLE-2-MERGE, carried by its seventh seat STYLE-2-MERGE-7), ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; a successor chair does not inherit this signature). THE LAW OF THE CHAIN (BRIEF-MERGE-CAR §0; BRIEF-STYLE-2-WAVE §3): the integration branch's first-parent line is the golden chain; prose movement is signed ONCE at the final tip, every row attributed to its merge point. Written from the stage at a3ea0d325 (the final tip 2cbe72ca1 with closing act 1's bundles).",
+  "ownerWords": "I also now give all permissions required now and in the future. I also defer all judgement to you. · I leave all judgement now and in the future to you.",
+  "ownerDate": "2026-11-06",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair; the style wave's merge STYLE-2-MERGE, 2026-11-09)",
+  "cause": "THE COMPOSED-PROSE MANIFEST AT THE STYLE WAVE'S FINAL TIP, SIGNED ONCE (BRIEF-STYLE-2-WAVE; the integration record docs/INTEGRATION_STYLE_2_2026-11-09.md §2d, closing act 2): each first-parent merge point's cells, measured point to point by scripts/prose-manifest-cells.mjs --out at the tree of every merge commit AND of its first parent (86 trees, base bd07005b9 to 4ca5cee57, each through its own helpers; the base tree reproduces the committed manifest exactly; NO cell moves between merge points), rows of 1,050 and cells of 74,659 moved at each point: SW-B5 FRAMES point 9 (46e0121c2) 1,050 rows, 2,950 cells (the vantage variants); SW-B6 ECO-DEF-BLOCKS point 10 (8de6c4a1a) 1,050 rows, 5,164 cells (the economy and defense block rewrites); SW-7 POWER-SIDE point 16 (a3062d919) 1,050 rows, 1,175 cells (the power leaf's prose); SW-B1 CONTRADICTIONS point 17 (0f2cb865c) 72 rows, 72 cells REMOVED (a contradicting cell no longer composes); SW-8 RENAME-POWERS point 24 (56f3b2df7) 1,038 rows, 1,038 cells (the minted power renamed, wording only); every other merge point of the forty-one 0 rows, 0 cells, FOUNDING-WORLDS point 41 included (stage m39 -> m41 prose 0). Base -> final tip: 1,050 of 1,050 rows move, 0 added, 0 removed; 10,399 cells moved (the five points' sum: no cell moved twice), 0 added, 72 removed; 74,659 cells become 74,587. Saved worlds are untouched.",
+  "seat": "STYLE-2-MERGE-7 under the cloud chair, session session_01FbPLbejcfwX5nii12VM673, from the stage at a3ea0d325",
+  "surfaces": [
+    {
+      "surface": "dossier-prose-manifest",
+      "action": "re-record",
+      "predictedRows": 2,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}

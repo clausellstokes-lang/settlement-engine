@@ -1,0 +1,484 @@
+import { createHash } from 'node:crypto';
+
+const ADDRESS_KEYS = Object.freeze(['home', 'field', 'voiceClass', 'distinctValues', 'occurrences']);
+const REWRITE_KEYS = Object.freeze(['source', 'flags', 'replacement', 'distinctValues', 'occurrences']);
+const INERT_KEYS = Object.freeze(['source', 'flags', 'replacement', 'reason']);
+const RAW_KEYS = Object.freeze(['rootOrdinal', 'pulseIndex', 'field', 'outcomeIndex', 'headline']);
+const LANES = Object.freeze({ mechanicalOutcomes: 8, selectedOutcomes: 24 });
+// ── RE-RECORDED 2026-09-01 BY T8 · SHIFT (ODQ §858 + §860) — THE SECOND COPY OF THE SAME TUPLE.
+// This literal and `scripts/lib/news-voice-contract.mjs`'s must agree byte for byte: the headline
+// walker reconstructs through the VOICE contract's `reconstructWizardNewsIntroductions`, so a
+// tuple updated in one home and not the other reds here with the other file's message. The
+// provenance and the single-variable control are recorded once, at the voice contract's copy.
+// ── RE-RECORDED 2026-09-01 BY THE WAR LANDING (§876) — STILL THE SECOND COPY OF THE SAME TUPLE.
+// 268/28/51 → 272/32/50. The provenance, the five-arm single-variable control and the falsified
+// dispatch causes are recorded once, at the voice contract's copy, exactly as before.
+// ── RE-RECORDED 2026-09-24 BY FP BATCH LANDING 4 (the FP chair, session 87797a6a), IN THE SAME ACT AS THE NEWS-VOICE
+// CONTRACT, THE PROSE-FAMILY CONTRACT AND THE OSR WALKER'S PINS ─────────────────────────────────────────────────────
+// CORPUS 273/33/240/51 → 273/1/272/51 (retirements and finalEntries only). ADDRESS_TOTALS,
+// RAW_LIVENESS and REWRITE_TOTALS HOLD: the addresses are minted at INTRODUCTION and the raw headline rows are the persisted
+// pulse records, neither of which the retention window touches. ONE CAUSE: the Herald lens U2 (32315e384, FP-31 = P1), the
+// 52-week window under the 240 cap; attributed by equality with the U2 seat's own measurement at its base.
+// ── RE-RECORDED 2026-09-24 BY FP BATCH LANDING 3 (the FP chair, session 87797a6a), IN THE SAME ACT AS THE NEWS-VOICE
+// CONTRACT, THE PROSE-FAMILY CONTRACT AND THE OSR WALKER'S PIN ───────────────────────────────────────────────
+// CORPUS 272/32/240/50 → 273/33/240/51; ADDRESS_TOTALS 50/2/100/12/88/393/544 → 51/2/102/13/89/395/546;
+// REWRITE_TOTALS occurrences 144 → 145 (rules 26, active 16, inert 10, distinct 63 HOLD); RAW_LIVENESS: the selectedOutcomes lane
+// gains one headline occurrence and the mechanical lane holds. ONE CAUSE, ATTRIBUTED BY BISECT (the corpus builder run per
+// sha over the fourteen commits since landing 2, then these walkers at the culprit): CURE-PEACE-1 U1 (c9b24fe51) — a
+// peacetime suit retires when a war opens against its court, and the feed's reconcile of the superseded proposal mints
+// ONE new wizard-news id with a home of its own (a new address, prospective voice, one spelling). Every figure here was
+// derived by the walkers' own functions from one corpus build and cross-checked at c9b24fe51 and at the landing tip.
+// ── RE-RECORDED 2026-10-01 BY THE URBAN-BAND CHAIR (session 93391427), IN THE SAME ACT AS THE NEWS-VOICE CONTRACT, THE
+// PROSE-FAMILY CONTRACT AND THE OSR WALKER'S PINS: CORPUS 273/1/272/51 → 265/1/264/44 (the provenance and the named homes
+// are recorded once, at the voice contract's copy); ADDRESS_TOTALS, RAW_LIVENESS and REWRITE_TOTALS below, each noted.
+// ── RE-RECORDED 2026-11-04 BY THE REGISTERS-4 SEAT (the chair's ruling C5), IN THE SAME ACT AS THE NEWS-VOICE CONTRACT, THE
+// PROSE-FAMILY CONTRACT AND THE OSR WALKER'S PRODUCERS ARM: CORPUS 265/1/264/44 → 261/1/260/45 (FOOD-1, FOOD-2 and SIZE-3,
+// the stage trace and the named homes recorded once, at the voice contract's copy); ADDRESS_TOTALS and RAW_LIVENESS below,
+// each noted. REWRITE_TOTALS holds (every rule stays inert).
+// ── RE-RECORDED 2026-11-04 BY THE LANDING-2b SEAT (the chair's ruling 5), IN THE SAME ACT AS THE NEWS-VOICE CONTRACT (the
+// 3d50676bb door): CORPUS 261/1/260/45 → 253/0/253/42, moved under the rung-1 window (05897b88d..5dd0f323a; the sample
+// points and the named homes recorded once, at the voice contract's copy); ADDRESS_TOTALS and RAW_LIVENESS below, each noted.
+// REWRITE_TOTALS and KNOWN_INERT_HEADLINE_REWRITES hold (every rule stays inert; the live zero-count set is the declared 26).
+// ── RE-RECORDED 2026-11-06 BY LANDING-7 LANE E (the chair's ruling R-E10, §934.105), IN THE SAME ACT AS THE NEWS-VOICE
+// CONTRACT (the 3d50676bb door): CORPUS 253/0/253/42 → 270/0/270/44, ONE CAUSE, the density ceilings re-derived from the stamp
+// bands (R-E8, 20c0139c5; the single-variable control and the named homes recorded once, at the voice contract's copy);
+// ADDRESS_TOTALS and RAW_LIVENESS below, each noted. REWRITE_TOTALS and KNOWN_INERT_HEADLINE_REWRITES hold (all 26 inert).
+// ── RE-RECORDED 2026-11-07 BY LANDING-R2 (helper seat D2, the chair's ruling of 02:36 UTC, §934.105), IN THE SAME ACT AS THE
+// NEWS-VOICE CONTRACT (the 3d50676bb door): CORPUS 270/0/270/44 → 262/0/262/43, re-taken at the tip 3d03dc723 and attributed by
+// step (rung 2's census-1b merge 0856c09d3: d35532850, 950b75014, 597866207) plus −1 introduction of interaction with rung 1; the
+// steps and the home that leaves (queued|npc_suppress) are recorded once, at the voice contract's copy. ADDRESS_TOTALS and
+// RAW_LIVENESS below, each noted. REWRITE_TOTALS and KNOWN_INERT_HEADLINE_REWRITES hold (all 26 inert).
+// ── RE-RECORDED 2026-11-07 BY MERGE-R2 (2026-11-07, the integration merge of the rung-2 landing into lane/integration-2026-11-07;
+// re-keyed by identity with its cause), IN THE SAME ACT AS THE NEWS-VOICE CONTRACT (the 3d50676bb door): CORPUS 262/0/262/43 →
+// 266/0/266/44, measured at the merged tip 6c3e25661 (the census steps composed with the integration side's WIRING-W0 /
+// REVIEW-INTAKE lines; +4 introductions and queued|npc_sabotage arriving against the rung-2 pin, recorded once at the voice
+// contract's copy; PLAUSIBLE, not bisected). ADDRESS_TOTALS below, noted. RAW_LIVENESS HOLDS (46/21, 166/82, 212/82, measured);
+// REWRITE_TOTALS and KNOWN_INERT_HEADLINE_REWRITES hold (all 26 inert).
+// ── RE-RECORDED 2026-11-07 AT THE PEOPLE CAR'S LANDING (PEOPLE-LAND second seat, §934.105), IN THE SAME ACT AS THE NEWS-VOICE
+// CONTRACT (the 4e010ec54 door): CORPUS 270/0/270/44 → 400/1/399/40, ONE CAUSE, the people car re-dealing the AO-0 year (the
+// first-parent points and the named homes recorded once, at the voice contract's copy); ADDRESS_TOTALS and RAW_LIVENESS
+// below, each noted. REWRITE_TOTALS and KNOWN_INERT_HEADLINE_REWRITES hold (all 26 inert).
+// ── RE-RECORDED 2026-11-08 AT MERGE-CAR (the people car merged into the integration branch, 8dff691f3; re-keyed by identity with
+// its cause), IN THE SAME ACT AS THE NEWS-VOICE CONTRACT (the 3d50676bb / 4e010ec54 door): CORPUS 400/1/399/40 → 396/1/395/40,
+// measured at the working tree (75a9da9bc, byte-equal to the merge 8dff691f3); the parents reproduce their own pins (373a2947b
+// 400/1/399/40, 7b3ffb6ee 266/0/266/44). −4 introductions, all applied|tradition, no home in or out (recorded once, at the voice
+// contract's copy; PLAUSIBLE, not bisected). ADDRESS_TOTALS below, noted. RAW_LIVENESS HOLDS (49/26, 165/96, 214/96, measured);
+// REWRITE_TOTALS and KNOWN_INERT_HEADLINE_REWRITES hold (all 26 inert; no gap, overlap or indicative match).
+// ── RE-RECORDED 2026-11-08 AT MERGE-WAVE's FIX-PUBLIC-VEIL MERGE POINT (7e65c7bec; the brief §0.6: the news family re-recorded in
+// ONE act, PEOPLE-1's precedent), the cause the veil lane's own: a veiled face's opaque id re-deals its keyed forks, which moves
+// the corpus's AO-0 year (the lane left these walkers red for this act). ONE corpus build at the merged tip, each library's own
+// functions (the voice throw disabled in an untracked scratch copy only). CORPUS 396/1/395/40 → 391/1/390/41: one home ARRIVES, applied|resource_depletion
+// (1/1 headline and summary); conservation 391 − 1 = 390.
+// ── RE-RECORDED 2026-11-09 AT MERGE-TRAIN's ALLEGIANCE-CAR1 MERGE POINT (e5f88930b, car 1 = lane/allegiance-car1-2026-11-08 at
+// 7395b5dab; the news family re-recorded in ONE act, MERGE-WAVE's 460b1b0d9 form), the cause car 1's own generator moves re-dealing
+// the corpus's AO-0 year: the hidden allegiance (5902f1a4a, dealt at the seam on its own keyed forks) and chiefly J-19 (d131ab158:
+// ensureNpcStates reads the hidden allegiance, so the lit pulse's knowledge desk changes; herald 443 → 450 on its lane). ONE corpus
+// build at the merged tip, each library's own functions (the voice throw disabled in an untracked scratch copy only).
+// CORPUS 391/1/390/41 → 396/0/396/43 (equal to the observed-shape walker's rung-36 pin 396/2525/396): four homes ARRIVE
+// (applied|commons_gathering, applied|npc_verdict, queued|npc_sabotage, queued|trade_pressure) and two LEAVE
+// (applied|resource_depletion, queued|npc_reform); the one retirement is gone; conservation 396 − 0 = 396.
+// ── RE-RECORDED 2026-11-09 AT MERGE-TRAIN's ALLEGIANCE-CAR2 MERGE POINT (f51058995, car 2 = lane/allegiance-car2-2026-11-08 at
+// 46715e751; record 2, rung 37; the news family re-recorded in ONE act, 460b1b0d9's form), the cause car 2's own: the guild's push
+// (bbb1a4abc, GUILD_PUSH_TUNING / guildPushOf, the one draw line in rankPowers) re-deals the corpus's AO-0 year, with A6 the hall
+// (ce90cf16e) and the capture rows read from the one state (aca93cbc5) beside it (docs/allegiance/ALLEGIANCE_CAR2_2026-11-08.md §4).
+// ONE corpus build at the merged tip (562582982), each library's own functions (the voice throw disabled in an untracked scratch copy only).
+// CORPUS 396/0/396/43 → 396/0/396/44 (the observed-shape walker's rung-37 pin 396/2535/396/81): applied|resource_depletion
+// RETURNS (1/1 headline and summary) and no home leaves; conservation 396 − 0 = 396.
+// ── RE-RECORDED 2026-11-09 AT MERGE-TRAIN's ALLEGIANCE-CAR3 MERGE POINT (c6ded8e3a, car 3 = lane/allegiance-car3-2026-11-08 at
+// 6ea8fb318; record 3, rung 38; the news family re-recorded in ONE act, 460b1b0d9's form), the cause car 3's own: e9070d614
+// ALLEGIANCE_TUNING.organizedCrime 0.10 → 0.05 re-deals the corpus's AO-0 year (bisected by the OSR seat as the one generator cause;
+// 8567f490d and 2f89aaeef are fence-only; docs/allegiance/ALLEGIANCE_CAR3_2026-11-08.md §8). ONE corpus build at the merged tip
+// (5f8f76238), each library's own functions (the voice throw disabled in an untracked scratch copy only).
+// CORPUS 396/0/396/44 → 395/1/394/43 (the observed-shape walker's rung-38 pin 394/2525/395/81): queued|npc_reform ARRIVES and two
+// homes LEAVE (applied|resource_depletion, queued|trade_pressure); one retirement returns; conservation 395 − 1 = 394.
+// ── RE-DECLARED 2026-11-10 BY THE RESIDUE SEAT AT THE SIMULATION BATCH (STYLE-2-MERGE point 36), IN THE SAME ACT AS THE NEWS-VOICE
+// CONTRACT (the cause, the bisect and the named home recorded once, at the voice contract's copy): CORPUS 395/1/394/43 →
+// 395/1/394/44 — applied|npc_expose ARRIVES by GREEN-TIP ae6693ccb (the pulse seats an NPC by its first-rank membership); no home
+// leaves; conservation 395 − 1 = 394. ADDRESS_TOTALS and RAW_LIVENESS are NOT moved here: the content-totality rows are the merge
+// seat's closing act.
+const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 395, retirements: 1, finalEntries: 394, homes: 44 });
+// ── RE-RECORDED 2026-09-01 BY T8 · SHIFT (ODQ §858 + §860) ─────────────────────────────────────
+// 53/106/14/92/400/544 → 51/102/12/90/393/536. `fields` holds at 2, as it must: the address grammar
+// is still headline-and-summary and nothing was added to it.
+// ⭐ THE HOMES DELTA IS NOT A COUNT, IT IS TWO NAMES, AND NAMING THEM IS THE WHOLE PROVENANCE:
+// `applied|cause_lifecycle` and `queued|npc_exploit` VANISH, each taking its headline row and its
+// summary row (2 homes × 2 fields = the 4 identities). That is car 1's corruption-onset shift
+// (§858: first corrupt NPC ~9 → ~33 ticks) read directly off the news layer — a 12-interval corpus
+// no longer reaches a cause-lifecycle beat, and no NPC is corrupt enough to be queued to exploit.
+// The single-variable control agrees: with car 1's two src files restored to the landing base, the
+// whole tuple reads its FROZEN value, cars 2 and 3 notwithstanding.
+// ── RE-RECORDED 2026-09-01 BY THE WAR LANDING (§876) ───────────────────────────────────────────
+// 51/2/102/12/90/393/536 → 50/2/100/12/88/393/544. `fields` holds at 2 for the third re-record
+// running, as it must, and `prospectiveIdentities` holds at 12: nothing was added to the address
+// grammar and no prospective home was touched.
+// ⭐⭐ `distinctValues` HOLDS AT 393 EXACTLY WHILE `occurrences` RISES 8 AND A HOME LEAVES, AND
+// THAT COINCIDENCE IS THE FINDING RATHER THAN AN ACCIDENT. Decomposed row by row: ONE home
+// vanishes, `applied|stressor_escalate_insurgency`, taking its headline and its summary row
+// (−2 identities, −2 distinct, −4 occurrences); the surviving rows move +2 distinct / +12
+// occurrences. The two sums cancel on distinct and do not on occurrences. `5a529f100` (T4
+// SEAT-2b) declares its legitimacy-sensitivity table a REDISTRIBUTION and not an inflation —
+// "it can only move WHICH seats are fragile WHEN" — and a vocabulary that holds its size while
+// its homes are re-dealt is that claim measured from outside the car.
+// THE SEVEN HOMES THAT MOVE, NAMED, because a count is not a provenance: down —
+// `applied|npc_exploit` 3/3 → 2/2 and `applied|npc_suppress` 6/9 → 5/8 on both fields; up —
+// `applied|stressor_aftermath` and `applied|stressor_residual` 1/1 → 2/3, the two
+// `applied|stressor_birth_*` homes, and `applied|trade_pressure` +1 occurrence on both fields.
+// The single-variable control and the two falsified dispatch causes are recorded once, at
+// `scripts/lib/news-voice-contract.mjs`.
+// 2026-10-01 (the urban band + the druid rulings): 51/2/102/13/89/395/546 → 44/2/88/14/74/385/530. `fields` holds at 2.
+// Eleven homes leave with their 22 rows and four arrive with 8 (five of them prospective); no surviving row flips its voice.
+// 2026-10-02 (THE VOICE PROGRAM wave 1, the owner: "Updates like these need to reflect actions not to potential"): 44/2/88/14/74/385/530 → 44/2/88/0/88/392/530.
+// The corpus does not move (12/265/1/264/44); every address keeps its home and field and EVERY prospective row turns
+// indicative, because each producer now writes its pending proposal UNDER WAY and its applied twin DONE (heraldDeeds.js).
+// 2026-11-04 (REGISTERS-4, the chair's ruling C5): 44/2/88/0/88/392/530 → 45/2/90/0/90/385/522, by stage: FOOD-1 (T1)
+// 42/2/84/0/84/380/516, FOOD-2 (T2) 45/2/90/0/90/395/530, SIZE-3 (S5) 45/2/90/0/90/385/522. Every row stays indicative.
+// 2026-11-04 (LANDING-2b, the chair's ruling 5; the rung-1 window): 45/2/90/0/90/385/522 → 42/2/84/0/84/365/506, by sample
+// point: 3420d01e3 46/2/92/0/92/399/532, fe56bddd4 46/2/92/0/92/397/546, 90dc22f18 (X-46 car 3) 42/2/84/0/84/350/492,
+// f9ce225c5 41/2/82/0/82/351/486, 64aeda874 (rung-1B) as now. Ten homes out and seven in, named at the voice contract's
+// copy; every row stays indicative.
+// 2026-11-06 (LANDING-7 R-E10; the density ceilings, 20c0139c5 alone): 42/2/84/0/84/365/506 → 44/2/88/0/88/372/540. One home out
+// and three in, named at the voice contract's copy; 32 surviving rows move a count; every row stays indicative.
+// 2026-11-07 (LANDING-R2 seat D2, the chair's 02:36 ruling; re-taken at the tip 3d03dc723): 44/2/88/0/88/372/540 → 43/2/86/0/86/356/524.
+// By step on rung 2 (census base f28689600 42/2/84/0/84/363/504): d35532850 distinct/occurrences −6/−6, 950b75014 −4/−4,
+// 597866207 −4/−4 and queued|npc_suppress leaves with its two rows (41/2/82/0/82/349/490 at f5dc50c6b); −2/−2 is INTERACTION with
+// rung 1. 8 surviving rows move a count; every row stays indicative.
+// 2026-11-07 (MERGE-R2, the integration merge of the rung-2 landing into lane/integration-2026-11-07; re-keyed by identity with its
+// cause, measured at the merged tip 6c3e25661): 43/2/86/0/86/356/524 → 44/2/88/0/88/364/532. ONE HOME ARRIVES, queued|npc_sabotage
+// (headline and summary rows, 1/1 each), and none leaves; 4 surviving rows move a count: applied|roads headline and summary 41/41 →
+// 45/45, queued|strategy_sue_for_peace headline and summary 2/2 → 1/1. Every row stays indicative; the address digest
+// re-derived with the rows in the baseline. PLAUSIBLE (census steps × WIRING-W0 / REVIEW-INTAKE), not bisected.
+// 2026-11-07 (the people car's landing, §934.105; by first-parent point): 44/2/88/0/88/372/540 → 40/2/80/0/80/596/800. Lane 1
+// dc655f712 39/2/78/0/78/596/758 (eight homes out, three in); lane 2 3aa160a70 40/2/80/0/80/596/800 (applied|trade_pressure
+// returns), digest 5b0965a9; lanes 3, 4, 5A hold; lane 5B a725df7e4 holds every total and moves four rows' counts (digest
+// 5b0965a9 → 77f91347); 2981f23f6 and the tip as now. Net seven homes out and three in, named at the voice contract's copy;
+// 28 surviving rows move a count; every row stays indicative.
+// 2026-11-08 (MERGE-CAR, the people car merged into the integration branch, 8dff691f3; re-keyed by identity with its cause, measured
+// at the working tree, byte-equal to the merge): 40/2/80/0/80/596/800 → 40/2/80/0/80/588/792. NO HOME ARRIVES OR LEAVES; 2 rows move
+// a count: applied|tradition headline and summary 22/22 → 18/18 (the integration parent 7b3ffb6ee's own 18/18; the car parent
+// 373a2947b reproduces 596/800 and digest 77f91347 exactly). Every row stays indicative; digest 77f91347 → c62116c2, re-derived
+// with the rows in the baseline. PLAUSIBLE (the car's re-dealt cast × the rung-2 landing's pool census), not bisected.
+// 2026-11-08 (MERGE-WAVE at the FIX-PUBLIC-VEIL merge, the veiled re-deal's year): 40/2/80/0/80/588/792 → 41/2/82/0/82/596/782 —
+// applied|resource_depletion arrives (2 rows 1/1); roads 101 → 103, npc_contest 39/49 dv 69 → 40/50 dv 62 occ, npc_reform 24 → 23,
+// cause_lifecycle 4 → 5, rival_sabotage 3 → 2 occ. Every row stays indicative.
+// 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR1 merge, car 1's re-dealt year — the hidden allegiance, then J-19): 41/2/82/0/82/596/782 →
+// 43/2/86/0/86/606/792 — four homes arrive (applied|commons_gathering 1/1, applied|npc_verdict 3/3 and 1/3, queued|npc_sabotage 1/1,
+// queued|trade_pressure 1/1) and two leave (applied|resource_depletion 1/1, queued|npc_reform 2/2); cause_lifecycle 5 → 9 occ,
+// commons_petition 8 → 5, conflict_pressure 9 → 8, npc_protect 17 → 18, npc_reform 23 → 25, queued|neutral_to_rival 1 → 2,
+// queued|npc_seek_promotion 5 → 4, queued|strategy_sue_for_peace 4 → 3 (both fields). Every row stays indicative.
+// 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR2 merge, the guild's push's year): 43/2/86/0/86/606/792 → 44/2/88/0/88/606/792 —
+// applied|resource_depletion returns (2 rows 1/1); applied|npc_reform 25/25 → 24/24 (both fields). Every row stays indicative.
+// 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR3 merge, e9070d614's organized-crime rate's year): 44/2/88/0/88/606/792 →
+// 43/2/86/0/86/602/790 — queued|npc_reform arrives (1/1), applied|resource_depletion and queued|trade_pressure leave (1/1 each);
+// cause_lifecycle 8/9 → 6/7, conflict_pressure 3/8 → 3/9, queued|npc_seek_promotion 4 → 3, queued|strategy_sue_for_peace 3 → 5
+// (both fields). Every row stays indicative.
+// 2026-11-11 (STYLE-2-MERGE-7, closing act 4: the content-totality contracts re-keyed ONCE at the style wave's final tip, by
+// measurement, each figure attributed by the walker's own functions at four trees: 3ce63ccc6 = the frozen value, 8acfc52f1, 90774f2fa,
+// 2cbe72ca1): 43/2/86/0/86/602/790 → 44/2/88/0/88/623/790. ONE HOME ARRIVES, applied|npc_expose (2 rows 1/1; RESIDUE's 44th home), none
+// leaves. SIX rows at STYLE-2-MERGE point 18 (SW-12 PULSE-LINES, 8acfc52f1; the stressor and realm lines given their own tellings):
+// cause_lifecycle summary 6/7 → 7/7, strategy_deploy summary 2/4 → 4/4, stressor_aftermath headline 3/9 → 7/9, stressor_residual
+// headline and summary 3/9 → 9/9, realm_insurgency summary 2/3 → 3/3; nothing from 8acfc52f1 to 90774f2fa; NINE at point 36 (the
+// simulation batch; GREEN-TIP ae6693ccb seats an NPC by its first-rank membership: npc_exploit 2/2 → 1/1, npc_reform 24/24 → 25/25,
+// npc_suppress 6/6 → 5/5, both fields each, and the npc_expose pair; PULSE-SITES' prefixes 1–4: npc_verdict summary 1/3 → 2/3),
+// the RESIDUE seat's bisect; nothing after. Every row stays indicative; digest re-derived with the rows in the baseline.
+const ADDRESS_TOTALS = Object.freeze({ homes: 44, fields: 2, identities: 88, prospectiveIdentities: 0, indicativeIdentities: 88, distinctValues: 623, occurrences: 790 });
+const RAW_LIVENESS = Object.freeze({
+  pulseRecords: 12,
+  lanes: Object.freeze([
+    // TE36 (ODQ §271, chair-authorized): 77/24/73/23 → 56/29/52/28. WAVE P4 retired the bare
+    // `population_decline` candidate under `demographicsEnabled`, which this corpus lights
+    // along with every other flag, so the MECHANICAL lane loses 21 "population may fall"
+    // headlines. Its distinct-value count RISES (24 → 29) because the retired family was
+    // repetitive: removing 21 occurrences of a handful of spellings leaves a shorter, more
+    // varied lane. The selectedOutcomes lane is UNCHANGED — ordinary population drift was
+    // already `state_only` and never a Chronicle beat.
+    // T8 · SHIFT (§858 + §860): 56/29/52/28 → 54/28/50/27. TWO mechanical headlines leave, and the
+    // distinct count follows them down by one — the opposite of TE36's rise, because this time the
+    // departing records are NOT a repetitive family but two ordinary one-off beats.
+    // WAR LANDING (§876): 54/28/50/27/4/1 → 53/28/49/27/4/1. ONE mechanical headline leaves and it
+    // was prospective; both distinct counts and the whole indicative half hold, so the departing
+    // record was a duplicate spelling of one already in the lane.
+    // 2026-10-01 (the urban band + the druid rulings): 53/28/49/27/4/1 → 49/22/44/21/5/1, the re-dealt year's mechanical beats.
+    // 2026-10-02 (THE VOICE PROGRAM wave 1): every persisted headline in this lane is now a deed; its prospective half is zero.
+    // 2026-11-04 (REGISTERS-4, the chair's ruling C5): mechanical 49/22 → 41/18, selected 155/84 → 160/81, union 204/84 →
+    // 201/81, by stage: FOOD-1 (T1) 44/20, 158/82, 202/82; FOOD-2 (T2) 47/20, 160/84, 207/84; SIZE-3 (S5) as now. All indicative.
+    // 2026-11-04 (LANDING-2b, the chair's ruling 5; the rung-1 window): mechanical 41/18 → 53/24, selected 160/81 HOLDS,
+    // union 201/81 → 213/81, by sample point: 3420d01e3 48/21, 160/87, 208/87; fe56bddd4 41/18, 167/85, 208/85; 90dc22f18
+    // 50/25, 160/82, 210/82; f9ce225c5 50/24, 160/83, 210/83; 64aeda874 as now. All indicative; the union's distinct count
+    // still equals the selected lane's (81 = 81).
+    // 2026-11-06 (LANDING-7 R-E10; the density ceilings, 20c0139c5 alone): mechanical 53/24 → 45/21, selected 160/81 → 166/82,
+    // union 213/81 → 211/82. All indicative; the union's distinct count still equals the selected lane's (82 = 82).
+    // 2026-11-07 (LANDING-R2 seat D2, the chair's 02:36 ruling; re-taken at the tip 3d03dc723): mechanical 45/21 → 46/21, selected
+    // HOLDS at 166/82, union 211/82 → 212/82. By step on rung 2: 597866207 (census-1i unit 3) mechanical 53/24 → 52/23 and union
+    // 213 → 212, nothing else on the line; +2/+1 mechanical (+2 union) is INTERACTION with rung 1. All indicative; the union's
+    // distinct count still equals the selected lane's (82 = 82).
+    // 2026-11-07 (the people car's landing, §934.105; by first-parent point): mechanical 45/21 → 49/26, selected 166/82 →
+    // 165/96, union 211/82 → 214/96. Lane 1 dc655f712 49/26, 165/96, 214/96; lane 2 3aa160a70 mechanical 50/27, union 215/96;
+    // lanes 3, 4, 5A hold; lane 5B a725df7e4 mechanical 49/26, union 214/96; 2981f23f6 and the tip as now. All indicative; the
+    // union's distinct count still equals the selected lane's (96 = 96).
+    // 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR1 merge, car 1's re-dealt year): mechanical 50/26 → 50/25, selected 164/96 →
+    // 164/97, union 214/96 → 214/97. All indicative; the union's distinct count still equals the selected lane's (97 = 97).
+    // 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR2 merge, the guild's push's year): mechanical 50/25 → 52/26, selected HOLDS at
+    // 164/97, union 214/97 → 216/97. All indicative; the union's distinct count still equals the selected lane's (97 = 97).
+    // 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR3 merge, e9070d614's year): mechanical 52/26 → 50/25, selected 164/97 → 165/97,
+    // union 216/97 → 215/97. All indicative; the union's distinct count still equals the selected lane's (97 = 97).
+    // 2026-11-11 (STYLE-2-MERGE-7, closing act 4): mechanical 50/25 → 51/26, at point 36 (the simulation batch); nothing at point 18.
+    Object.freeze({ field: 'mechanicalOutcomes', capPerPulse: 8, headlineOccurrences: 51, distinctValues: 26, prospectiveOccurrences: 0, prospectiveDistinctValues: 0, indicativeOccurrences: 51, indicativeDistinctValues: 26 }),
+    // ⭐ THE CONTROL THAT HELD FOR TWO RE-RECORDS NOW MOVES, AND THAT IS THE POINT OF KEEPING IT.
+    // T8 recorded this lane byte-identical twice running because the corruption work never authors
+    // into it. WAR LANDING (§876): 151/80/95/66/56/14 → 153/78/95/63/58/15, and the shape names the
+    // new cause without ambiguity. `prospectiveOccurrences` HOLDS AT 95 while prospective distinct
+    // falls 66 → 63 and the indicative half rises 56/14 → 58/15: the public lane authors the same
+    // number of "may" beats in FEWER spellings and two more settled ones. That is `5a529f100`'s
+    // upheaval gates re-dealing which seats are fragile when — a lane the corruption work could not
+    // reach, and the first cause in three re-records that does.
+    // 2026-10-01 (the urban band + the druid rulings): 154/78/96/63/58/15 → 155/75/93/59/62/16.
+    // 2026-10-02 (THE VOICE PROGRAM wave 1): every persisted headline in this lane is now a deed; its prospective half is zero.
+    // 2026-11-11 (STYLE-2-MERGE-7, closing act 4): selected 165/97 → 165/103, at point 18 (SW-12 PULSE-LINES, 8acfc52f1); nothing after.
+    Object.freeze({ field: 'selectedOutcomes', capPerPulse: 24, headlineOccurrences: 165, distinctValues: 103, prospectiveOccurrences: 0, prospectiveDistinctValues: 0, indicativeOccurrences: 165, indicativeDistinctValues: 103 }),
+  ]),
+  // TE36: the union follows the mechanical lane alone — 228 → 207 (−21, the same 21),
+  // 83 → 80 distinct, 168 → 147 prospective. The indicative halves do not move at all.
+  // T8 · SHIFT: the union follows the mechanical lane alone AGAIN — 207 → 205 and 147 → 145, the
+  // same two. `distinctValues` holds at 80 and both indicative halves hold, so the arithmetic says
+  // the two departed headlines were prospective and already spelled elsewhere in the union.
+  // WAR LANDING (§876): the union no longer follows one lane — BOTH move, in opposite directions
+  // on occurrences (mechanical −1, selected +2), so 205 → 206 and 145 → 144 and 60 → 62.
+  // ⭐ THE STRUCTURAL FACT THAT SURVIVES ALL THREE RE-RECORDS: `union.distinctValues` equals the
+  // SELECTED lane's exactly — 80 = 80 before, 78 = 78 now — so the mechanical lane's 28 spellings
+  // are still a strict subset of the public lane's. That is what makes the union's distinct half
+  // an honest check on the lanes rather than a restatement of them.
+  // FP BATCH 3 (2026-09-24): the union follows the selectedOutcomes lane — 206/144 → 207/145; the distinct and indicative halves hold.
+  // 2026-10-01 (the urban band + the druid rulings): 207/78/145/63/62/15 → 204/75/137/59/67/16, and THE STRUCTURAL FACT SURVIVES:
+  // union.distinctValues equals the selected lane's (75 = 75), so the mechanical spellings are still a subset of the public lane's.
+  // 2026-10-02 (THE VOICE PROGRAM wave 1): the union's prospective half is zero for the first time.
+  // 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR1 merge): 214/96 → 214/97, following the selected lane's distinct count (97 = 97).
+  // 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR2 merge): 214/97 → 216/97, following the mechanical lane's +2.
+  // 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR3 merge): 216/97 → 215/97 (mechanical −2, selected +1).
+  // 2026-11-11 (STYLE-2-MERGE-7, closing act 4): 215/97 → 216/103 (selected +6 distinct at point 18; mechanical +1 occurrence at point 36);
+  // the union's distinct count still equals the selected lane's (103 = 103).
+  union: Object.freeze({ headlineOccurrences: 216, distinctValues: 103, prospectiveOccurrences: 0, prospectiveDistinctValues: 0, indicativeOccurrences: 216, indicativeDistinctValues: 103 }),
+});
+// TE36 (ODQ §271): 17/9 → 16/10 and 69/168 → 66/147. THE RULE COUNT IS UNCHANGED AT 26 —
+// no rewrite rule was added or deleted; one CROSSED from active to inert because the corpus
+// stopped producing its headline. That is the whole shape of this re-record.
+// T8 · SHIFT (§858 + §860): 147 → 145 occurrences, and NOTHING ELSE MOVES — rules 26, active 16,
+// inert 10, distinctValues 66 all hold. ⭐ No rule crossed in either direction, so
+// KNOWN_INERT_HEADLINE_REWRITES needs no new row and this re-record required NO new inert-row
+// authority ("New inert rows require authority" — none is claimed here). Verified by deriving the
+// live zero-count identity set and comparing it to the declared one: identical, 10 of 10.
+// WAR LANDING (§876): 66 → 63 distinct and 145 → 144 occurrences, and again NOTHING ELSE MOVES —
+// rules 26, active 16, inert 10 all hold. ⭐ NO RULE CROSSED IN EITHER DIRECTION for the second
+// re-record running, so `KNOWN_INERT_HEADLINE_REWRITES` needs no new row and NO NEW INERT-ROW
+// AUTHORITY IS CLAIMED HERE. Verified the way T8 verified it, by deriving the live zero-count
+// identity set and comparing it to the declared one: identical, 10 of 10.
+// SIX OF THE 26 RULES MOVED, NAMED: `may emerge` 3/4 → 3/7, `may exploit` 3/6 → 2/5,
+// `may intensify` 2/4 → 1/2, `may reform` 23/50 → 23/49, `may suppress` 6/12 → 5/11, `may take
+// hold` 5/18 → 5/19. The three that lose a spelling are the −3 distinct; the occurrences net to
+// −1. Every one of them is an upheaval-adjacent verb, which is `5a529f100` read off the registry.
+// 2026-10-01 (the urban band + the druid rulings): 26/16/10/63/145 → 26/15/11/59/137. THREE RULES CROSS, NAMED, and the chair
+// claims the inert-row authority ("New inert rows require authority", ODQ §271) under the owner's "I defer all judgment to
+// you": `may intensify` and `may press a challenge to the government` go INERT (their homes left the re-dealt year), and
+// `may fall` goes ACTIVE through a second seam, a TIER DEMOTION headline ("Llanton may fall to hamlet", tier_change), not the
+// population decline WAVE P4 gated, so its known-inert row leaves the list below.
+// 2026-10-02 (THE VOICE PROGRAM wave 1): 26/15/11/59/137 → 26/0/26/0/0. EVERY RULE IS INERT, and by construction rather
+// than by the corpus's luck: each live producer writes its own applied twin, so the de-hedger reaches only proposals
+// persisted before the program. The rules are KEPT for exactly those (THE PROMISE). The chair claims the inert-row
+// authority ("New inert rows require authority", ODQ §271) under the owner's "I leave all judgment to you", and every
+// row's reason below is re-written to name its producer's deed form.
+const REWRITE_TOTALS = Object.freeze({ rules: 26, activeRules: 0, inertRules: 26, distinctValues: 0, occurrences: 0 });
+
+export const KNOWN_INERT_HEADLINE_REWRITES = Object.freeze([
+  { source: '\\bmay bargain\\b', flags: '', replacement: 'bargains', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): npcAgency.js::candidateForAction (heraldDeeds.js UNTARGETED_NPC_DEEDS) writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may bargain\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay be depleted\\b', flags: '', replacement: 'depleted', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): tierResourceDynamics.js's resource-depletion candidate writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may be depleted\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay become\\b', flags: '', replacement: 'becomes', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): relationshipRuleHelpers.js::candidateBase (heraldDeeds.js RELATIONSHIP_TURNS) writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may become\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay close its doors\\b', flags: '', replacement: 'closes its doors', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): institutionLifecycle.js's institution-closure candidate writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may close its doors\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay defect\\b', flags: '', replacement: 'defects', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): npcAgency.js::candidateForAction (heraldDeeds.js UNTARGETED_NPC_DEEDS) writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may defect\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay emerge\\b', flags: '', replacement: 'emerges', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): stressors.js's stressor-birth candidate writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may emerge\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay exploit\\b', flags: '', replacement: 'exploits', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): npcAgency.js::candidateForAction (heraldDeeds.js UNTARGETED_NPC_DEEDS) writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may exploit\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay expose\\b', flags: '', replacement: 'exposes', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): npcAgency.js::candidateForAction (heraldDeeds.js TARGETED_NPC_DEEDS / UNTARGETED_NPC_DEEDS) writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may expose\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay fall\\b', flags: '', replacement: 'falls', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): tierResourceDynamics.js::tierCandidate and populationDynamics.js::populationCandidate writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may fall\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay grow\\b', flags: '', replacement: 'grows', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): populationDynamics.js::populationCandidate writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may grow\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay hoard\\b', flags: '', replacement: 'hoards', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): npcAgency.js::candidateForAction (heraldDeeds.js UNTARGETED_NPC_DEEDS) writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may hoard\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay intensify\\b', flags: '', replacement: 'intensifies', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): stressors.js's stressor-escalation candidate writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may intensify\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay mobilize\\b', flags: '', replacement: 'mobilizes', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): npcAgency.js::candidateForAction (heraldDeeds.js UNTARGETED_NPC_DEEDS) writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may mobilize\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay press a challenge to the government\\b', flags: '', replacement: 'presses a challenge to the government', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): factionCompetition.js FACTION_VERB_PHRASES.faction_government_challenge writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may press a challenge to the government\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay protect\\b', flags: '', replacement: 'protects', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): npcAgency.js::candidateForAction (heraldDeeds.js UNTARGETED_NPC_DEEDS) writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may protect\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay raise a\\b', flags: '', replacement: 'raises a', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): institutionLifecycle.js's institution-build candidate writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may raise a\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay recover\\b', flags: '', replacement: 'recovering', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): tierResourceDynamics.js's resource-recovery candidate writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may recover\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay reform\\b', flags: '', replacement: 'reforms', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): npcAgency.js::candidateForAction (heraldDeeds.js UNTARGETED_NPC_DEEDS) writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may reform\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay rise\\b', flags: '', replacement: 'rises', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): tierResourceDynamics.js::tierCandidate and relationshipRulesCore.js's vassal-rebellion candidate writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may rise\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay sabotage\\b', flags: '', replacement: 'sabotages', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): npcAgency.js::candidateForAction (heraldDeeds.js TARGETED_NPC_DEEDS / UNTARGETED_NPC_DEEDS) writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may sabotage\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay seek promotion\\b', flags: '', replacement: 'seeks promotion', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): npcAgency.js::candidateForAction (heraldDeeds.js UNTARGETED_NPC_DEEDS) writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may seek promotion\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay shift\\b', flags: '', replacement: 'shifts', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): relationshipRuleHelpers.js::candidateBase (heraldDeeds.js RELATIONS_MOVE) writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may shift\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay spread\\b', flags: '', replacement: 'spreads', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): stressors.js's stressor-spread candidate writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may spread\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay suppress\\b', flags: '', replacement: 'suppresses', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): npcAgency.js::candidateForAction (heraldDeeds.js TARGETED_NPC_DEEDS / UNTARGETED_NPC_DEEDS) writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may suppress\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay take hold\\b', flags: '', replacement: 'takes hold', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): candidateEvents.js::pressureConditionCandidate (heraldDeeds.js CONDITION_DEEDS) writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may take hold\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+  { source: '\\bmay undermine\\b', flags: '', replacement: 'undermines', reason: "THE HERALD SPEAKS IN DEEDS (the owner, 2026-10-02; the Voice Program wave 1): npcAgency.js::candidateForAction (heraldDeeds.js TARGETED_NPC_DEEDS / UNTARGETED_NPC_DEEDS) writes its own under-way headline and its applied twin, so no new outcome reaches this rule; it is KEPT for proposals persisted before the program, whose \"may undermine\" headline still needs its applied twin (THE PROMISE: lived history is immutable)." },
+].map((row) => Object.freeze(row)));
+
+const codepoint = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
+const same = (left, right) => JSON.stringify(left) === JSON.stringify(right);
+const exactKeys = (value, keys, label) => {
+  if (!value || typeof value !== 'object' || Array.isArray(value)
+      || !same(Object.keys(value).sort(codepoint), [...keys].sort(codepoint))) throw new Error(`${label} must have exactly keys ${keys.join(', ')}`);
+  return value;
+};
+const nonblank = (value, label, mustBeTrimmed = false) => {
+  if (typeof value !== 'string' || !value.trim() || (mustBeTrimmed && value !== value.trim())) throw new Error(`${label} must be a nonblank${mustBeTrimmed ? ' trimmed' : ''} string`);
+  return value;
+};
+const safeCount = (value, label) => {
+  if (!Number.isSafeInteger(value) || value < 0) throw new Error(`${label} must be a non-negative safe integer`);
+  return value;
+};
+const addressIdentity = (row) => `${row.home}|${row.field}|${row.voiceClass}`;
+const rewriteIdentity = (row) => `${row.source}|${row.flags}|${row.replacement}`;
+const rawAddress = (row) => `${row.rootOrdinal}|${row.pulseIndex}|${row.field}|${row.outcomeIndex}`;
+const compareRaw = (left, right) => left.pulseIndex - right.pulseIndex || codepoint(left.field, right.field)
+  || left.outcomeIndex - right.outcomeIndex || codepoint(left.headline, right.headline);
+
+function validateRows(rows, keys, identityOf, label, validate) {
+  if (!Array.isArray(rows)) throw new Error(`${label} must be an array`);
+  let previous = null;
+  return rows.map((raw, index) => {
+    const row = exactKeys(raw, keys, `${label}[${index}]`); validate(row, `${label}[${index}]`);
+    const identity = identityOf(row);
+    if (previous !== null && codepoint(previous, identity) >= 0) throw new Error(`${label} identities must be unique and codepoint-sorted: ${identity}`);
+    previous = identity; return row;
+  });
+}
+const validateAddressRows = (rows, label = 'address rows') => validateRows(rows, ADDRESS_KEYS, addressIdentity, label, (row, at) => {
+  for (const key of ADDRESS_KEYS.slice(0, 3)) nonblank(row[key], `${at}.${key}`, true);
+  if (!['headline', 'summary'].includes(row.field) || !['indicative', 'prospective'].includes(row.voiceClass)) throw new Error(`${at} is outside the closed address vocabulary`);
+  if (safeCount(row.distinctValues, `${at}.distinctValues`) < 1 || safeCount(row.occurrences, `${at}.occurrences`) < row.distinctValues) throw new Error(`${at} carries impossible address counts`);
+});
+const validateRewriteRows = (rows, label = 'rewrite rows') => validateRows(rows, REWRITE_KEYS, rewriteIdentity, label, (row, at) => {
+  nonblank(row.source, `${at}.source`, true); nonblank(row.replacement, `${at}.replacement`, true);
+  if (row.flags !== '') throw new Error(`${at}.flags must be empty`);
+  safeCount(row.distinctValues, `${at}.distinctValues`); safeCount(row.occurrences, `${at}.occurrences`);
+  if ((row.distinctValues === 0) !== (row.occurrences === 0) || row.occurrences < row.distinctValues) throw new Error(`${at} carries split or impossible liveness counts`);
+});
+const validateInertRows = (rows, label = 'knownInert') => validateRows(rows, INERT_KEYS, rewriteIdentity, label, (row, at) => {
+  nonblank(row.source, `${at}.source`, true); nonblank(row.replacement, `${at}.replacement`, true); nonblank(row.reason, `${at}.reason`, true);
+  if (row.flags !== '') throw new Error(`${at}.flags must be empty`);
+});
+
+export function deriveNewsAddressRows(introductions) {
+  if (!Array.isArray(introductions) || introductions.length === 0) throw new Error('introduced entries must be a nonempty array');
+  const buckets = new Map();
+  for (const [index, entry] of introductions.entries()) {
+    const fields = entry?.fields;
+    if (!fields || typeof fields !== 'object') throw new Error(`introduction ${index} has no fields`);
+    for (const key of ['kind', 'headline', 'summary']) nonblank(fields[key], `introduction ${index}.${key}`);
+    if (!Object.hasOwn(fields, 'impactKind') || fields.impactKind === undefined) throw new Error(`introduction ${index}.impactKind must be present`);
+    const impactToken = fields.impactKind === null ? 'null' : nonblank(fields.impactKind, `introduction ${index}.impactKind`);
+    if (fields.kind.includes('|') || impactToken.includes('|') || fields.impactKind === 'null') throw new Error(`introduction ${index} has a colliding home token`);
+    const home = `${fields.kind}|${impactToken}`;
+    for (const field of ['headline', 'summary']) {
+      const value = fields[field]; const voiceClass = (field === 'headline' ? /\bmay\b/ : /\bcan advance through\b/).test(value) ? 'prospective' : 'indicative'; const key = `${home}|${field}`;
+      if (!buckets.has(key)) buckets.set(key, { home, field, voiceClass, values: new Set(), occurrences: 0 });
+      const bucket = buckets.get(key); if (bucket.voiceClass !== voiceClass) throw new Error(`mixed voice classes at ${key}: ${bucket.voiceClass} and ${voiceClass}`);
+      bucket.values.add(value); bucket.occurrences += 1;
+    }
+  }
+  const rows = [...buckets.values()].map((bucket) => ({ home: bucket.home, field: bucket.field, voiceClass: bucket.voiceClass, distinctValues: bucket.values.size, occurrences: bucket.occurrences }))
+    .sort((left, right) => codepoint(addressIdentity(left), addressIdentity(right)));
+  return validateAddressRows(rows);
+}
+
+export function addressRowsSha256(rows) {
+  return createHash('sha256').update(JSON.stringify(validateAddressRows(rows))).digest('hex');
+}
+
+function validateRawRows(rows, label = 'persisted headline rows') {
+  if (!Array.isArray(rows)) throw new Error(`${label} must be an array`);
+  const addresses = new Set(); let previous = null;
+  return rows.map((raw, index) => {
+    const row = exactKeys(raw, RAW_KEYS, `${label}[${index}]`);
+    safeCount(row.rootOrdinal, `${label}[${index}].rootOrdinal`); safeCount(row.pulseIndex, `${label}[${index}].pulseIndex`); safeCount(row.outcomeIndex, `${label}[${index}].outcomeIndex`); nonblank(row.headline, `${label}[${index}].headline`);
+    if (!Object.hasOwn(LANES, row.field)) throw new Error(`${label}[${index}].field is not a persisted liveness lane`);
+    if (row.outcomeIndex >= LANES[row.field]) throw new Error(`${label}[${index}] breaches the ${row.field} cap ${LANES[row.field]}`);
+    if (previous && compareRaw(previous, row) >= 0) throw new Error(`${label} must use numeric pulse/field/outcome/headline order`);
+    const address = rawAddress(row); if (addresses.has(address)) throw new Error(`${label} repeats typed address ${address}`);
+    addresses.add(address); previous = row; return row;
+  });
+}
+
+export function selectPersistedHeadlineRows(scalarRows) {
+  if (!Array.isArray(scalarRows)) throw new Error('scalar observations must be an array');
+  const selected = scalarRows.filter((row) => row?.root === 'worldState' && row.path?.length === 5
+    && row.path[0]?.kind === 'field' && row.path[0].value === 'pulseHistory' && row.path[1]?.kind === 'index'
+    && row.path[2]?.kind === 'field' && Object.hasOwn(LANES, row.path[2].value) && row.path[3]?.kind === 'index'
+    && row.path[4]?.kind === 'field' && row.path[4].value === 'headline');
+  if (selected.length === 0) throw new Error('persisted headline scalar set is empty');
+  const rows = selected.map((row, index) => {
+    if (!Number.isSafeInteger(row.rootOrdinal) || row.rootOrdinal < 0 || !Number.isSafeInteger(row.path[1].value) || row.path[1].value < 0 || !Number.isSafeInteger(row.path[3].value) || row.path[3].value < 0) throw new Error(`malformed persisted headline row ${index}: ${JSON.stringify(row)}`);
+    nonblank(row.value, `persisted headline row ${index}.value`);
+    return { rootOrdinal: row.rootOrdinal, pulseIndex: row.path[1].value, field: row.path[2].value, outcomeIndex: row.path[3].value, headline: row.value };
+  }).sort(compareRaw);
+  const roots = [...new Set(rows.map((row) => row.rootOrdinal))]; const pulses = [...new Set(rows.map((row) => row.pulseIndex))].sort((a, b) => a - b);
+  if (roots.length !== 1 || !same(pulses, [...Array(CORPUS.pulseRoots).keys()])) throw new Error(`persisted headline roots/pulses drifted: roots=${JSON.stringify(roots)} pulses=${JSON.stringify(pulses)}`);
+  for (const field of Object.keys(LANES)) for (const pulse of pulses) {
+    const indexes = rows.filter((row) => row.field === field && row.pulseIndex === pulse).map((row) => row.outcomeIndex);
+    if (indexes.length > LANES[field] || !same(indexes, [...Array(indexes.length).keys()])) throw new Error(`${field} pulse ${pulse} violates contiguity or cap ${LANES[field]}`);
+  }
+  return validateRawRows(rows);
+}
+
+function validateRegistry(registry) {
+  if (!Array.isArray(registry) || registry.length === 0) throw new Error('headline rewrite registry must be a nonempty array');
+  const seen = new Map();
+  return registry.map((entry, index) => {
+    if (!Array.isArray(entry) || entry.length !== 2 || !(entry[0] instanceof RegExp)) throw new Error(`headline rewrite ${index} must be [RegExp, string]`);
+    const [pattern, replacement] = entry; nonblank(replacement, `headline rewrite ${index} replacement`, true);
+    if (pattern.flags !== '') throw new Error(`headline rewrite ${index} flags must be empty`);
+    const sourceKey = `${pattern.source}|${pattern.flags}`; if (seen.has(sourceKey)) throw new Error(`duplicate or conflicting headline rewrite source ${sourceKey}: ${seen.get(sourceKey)} / ${replacement}`);
+    seen.set(sourceKey, replacement); return { pattern, source: pattern.source, flags: pattern.flags, replacement, values: new Set(), occurrences: 0 };
+  });
+}
+
+export function rawHeadlineLivenessOf(rawRows) {
+  const rows = validateRawRows(rawRows); const metrics = (subset) => {
+    const prospective = subset.filter((row) => /\bmay\b/.test(row.headline)); const indicative = subset.filter((row) => !/\bmay\b/.test(row.headline));
+    return { headlineOccurrences: subset.length, distinctValues: new Set(subset.map((row) => row.headline)).size, prospectiveOccurrences: prospective.length, prospectiveDistinctValues: new Set(prospective.map((row) => row.headline)).size, indicativeOccurrences: indicative.length, indicativeDistinctValues: new Set(indicative.map((row) => row.headline)).size };
+  };
+  return { pulseRecords: new Set(rows.map((row) => row.pulseIndex)).size, lanes: Object.keys(LANES).map((field) => ({ field, capPerPulse: LANES[field], ...metrics(rows.filter((row) => row.field === field)) })), union: metrics(rows) };
+}
+
+export function analyzeHeadlineRewriteLiveness(rawRows, registry) {
+  const rows = validateRawRows(rawRows); const rules = validateRegistry(registry); const gaps = []; const overlaps = []; const indicativeMatches = [];
+  for (const row of rows) {
+    const matches = rules.filter((rule) => rule.pattern.test(row.headline)); const location = `${row.pulseIndex}/${row.field}/${row.outcomeIndex}`;
+    if (!/\bmay\b/.test(row.headline)) { if (matches.length) indicativeMatches.push({ location, headline: row.headline, matches: matches.map(rewriteIdentity) }); continue; }
+    if (matches.length === 0) gaps.push({ location, headline: row.headline }); if (matches.length > 1) overlaps.push({ location, headline: row.headline, matches: matches.map(rewriteIdentity) });
+    if (matches.length === 1) { matches[0].values.add(row.headline); matches[0].occurrences += 1; }
+  }
+  const measured = rules.map((rule) => ({ source: rule.source, flags: rule.flags, replacement: rule.replacement, distinctValues: rule.values.size, occurrences: rule.occurrences }))
+    .sort((left, right) => codepoint(rewriteIdentity(left), rewriteIdentity(right))); const activeRules = measured.filter((row) => row.occurrences > 0).length;
+  return { rows: validateRewriteRows(measured), totals: { rules: measured.length, activeRules, inertRules: measured.length - activeRules, distinctValues: measured.reduce((sum, row) => sum + row.distinctValues, 0), occurrences: measured.reduce((sum, row) => sum + row.occurrences, 0) }, gaps, overlaps, indicativeMatches };
+}
+
+export function measureHeadlineRewriteLiveness(rawRows, registry) {
+  const result = analyzeHeadlineRewriteLiveness(rawRows, registry); const failures = [...result.gaps.map((row) => `uncovered ${row.location}: ${row.headline}`), ...result.overlaps.map((row) => `overlap ${row.location}: ${row.headline}`), ...result.indicativeMatches.map((row) => `indicative match ${row.location}: ${row.headline}`)];
+  if (failures.length) throw new Error(`headline rewrite liveness failed:\n${failures.join('\n')}`); return result;
+}
+
+const addressTotalsOf = (rows) => ({ homes: new Set(rows.map((row) => row.home)).size, fields: new Set(rows.map((row) => row.field)).size, identities: rows.length, prospectiveIdentities: rows.filter((row) => row.voiceClass === 'prospective').length, indicativeIdentities: rows.filter((row) => row.voiceClass === 'indicative').length, distinctValues: rows.reduce((sum, row) => sum + row.distinctValues, 0), occurrences: rows.reduce((sum, row) => sum + row.occurrences, 0) });
+export function validateNewsHeadlineBaseline(value) {
+  exactKeys(value, ['schemaVersion', 'corpus', 'addressTotality', 'rewriteLiveness'], 'baseline'); if (value.schemaVersion !== 1) throw new Error('baseline.schemaVersion must equal 1');
+  exactKeys(value.corpus, Object.keys(CORPUS), 'baseline.corpus'); if (!same(value.corpus, CORPUS) || value.corpus.introductions - value.corpus.retirements !== value.corpus.finalEntries) throw new Error('baseline corpus drifted or failed conservation');
+  exactKeys(value.addressTotality, ['rows', 'rowsSha256', 'totals'], 'baseline.addressTotality'); const addresses = validateAddressRows(value.addressTotality.rows, 'baseline.addressTotality.rows'); nonblank(value.addressTotality.rowsSha256, 'baseline.addressTotality.rowsSha256', true);
+  if (value.addressTotality.rowsSha256 !== addressRowsSha256(addresses) || !same(value.addressTotality.totals, ADDRESS_TOTALS) || !same(addressTotalsOf(addresses), ADDRESS_TOTALS)) throw new Error('baseline address digest or totals drifted');
+  exactKeys(value.rewriteLiveness, ['raw', 'rows', 'totals', 'knownInert'], 'baseline.rewriteLiveness'); if (!same(value.rewriteLiveness.raw, RAW_LIVENESS)) throw new Error('baseline raw liveness denominator drifted');
+  const rewrites = validateRewriteRows(value.rewriteLiveness.rows, 'baseline.rewriteLiveness.rows'); const activeRules = rewrites.filter((row) => row.occurrences > 0).length; const totals = { rules: rewrites.length, activeRules, inertRules: rewrites.length - activeRules, distinctValues: rewrites.reduce((sum, row) => sum + row.distinctValues, 0), occurrences: rewrites.reduce((sum, row) => sum + row.occurrences, 0) };
+  if (!same(value.rewriteLiveness.totals, REWRITE_TOTALS) || !same(totals, REWRITE_TOTALS)) throw new Error('baseline rewrite totals drifted'); const inert = validateInertRows(value.rewriteLiveness.knownInert, 'baseline.rewriteLiveness.knownInert');
+  if (!same(inert, KNOWN_INERT_HEADLINE_REWRITES) || !same(inert.map(rewriteIdentity), rewrites.filter((row) => row.occurrences === 0).map(rewriteIdentity))) throw new Error('known-inert reasons disagree with zero-count rewrite identities'); return value;
+}
+
+function compareRows(liveRows, frozenRows, validate, identityOf, label) {
+  const live = validate(liveRows, `live ${label}`); const frozen = validate(frozenRows, `frozen ${label}`); const left = new Map(live.map((row) => [identityOf(row), row])); const right = new Map(frozen.map((row) => [identityOf(row), row])); const failures = [];
+  for (const id of new Set([...left.keys(), ...right.keys()])) if (!right.has(id)) failures.push(`new ${label} ${id}: ${JSON.stringify(left.get(id))}`); else if (!left.has(id)) failures.push(`vanished ${label} ${id}: ${JSON.stringify(right.get(id))}`); else if (!same(left.get(id), right.get(id))) failures.push(`changed ${label} ${id}: live=${JSON.stringify(left.get(id))} frozen=${JSON.stringify(right.get(id))}`);
+  if (failures.length) throw new Error(`${label} moved:\n${failures.sort(codepoint).join('\n')}`); return true;
+}
+export const compareNewsAddressRows = (live, frozen) => compareRows(live, frozen, validateAddressRows, addressIdentity, 'address row');
+export const compareHeadlineRewriteRows = (live, frozen) => compareRows(live, frozen, validateRewriteRows, rewriteIdentity, 'rewrite row');

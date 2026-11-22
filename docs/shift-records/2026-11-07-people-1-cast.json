@@ -1,0 +1,40 @@
+{
+  "_doc": "RECORD 1 OF THE PEOPLE CAR'S LANDING (PEOPLE-LAND, second seat), ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; PEOPLE-RULINGS M-1: one record per lane-cause, signed once at the landing from a stage at the lane's first-parent point; M-3: no lane re-recorded). THE CAUSE, ONE LANE: lane 1, PEOPLE-1 CAST (docs/PEOPLE_1_CAST_2026-11-07.md): R-P1 (the census's faces), R-P2 (the seat mint), R-P3 (doubled niches dealt), R-P4 (the other powers' mint), R-P5 (up to three), M-1b (roles are titles), the importance band from the rank and the card's house and powers lit on the PDF view row. Its first-parent chain 262e8b255..7ba40a37b, the MERGE-234 seat's record 589e46323 and the merge of the lane's final tip bbe4a02ab (dc655f712) are one lane-cause. THE MOVE, MEASURED before the write by scripts/audit/landing-stage.sh measure at the stage of the base 262e8b255 (equal on all six surfaces to the stage of fc834a6bd, record 0b's post-state: the three register commits between them move no golden byte) and at the stage of dc655f712: the generator golden master 525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84), 6b0d226e.. -> 58fb2164..; the espionage fence's driven corpus 360 of 360 (60 per tier), 360/360 distinct, f1aa52d8.. -> 03a5a47e..; the herald desk 435 -> 479 keys (222 added, 178 removed, 2 moved: the wizard news over the cast's year); the dossier prose manifest 762 of 1,050 rows (thorp 24, hamlet 24, village 168, town 210, city 168, metropolis 168); the PDF view-model snapshot one line (headcounts.npcs 10 -> 36); the preset lighting witness 0. The door counts the herald's keys (479), the prose manifest's two top-level keys and the fence's one constant.",
+  "ownerWords": "for every appropriate institution, we generate one NPC … I think just one person per institution. They act as the face. We are not building all the citizens of a settlement. That's too granular and the DM can do that work themselves. We are simply making representatives.",
+  "ownerDate": "2026-11-07",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's people-model charter of 2026-11-07, PEOPLE-RULINGS §0; the owner's delegation of 2026-11-06 to the cloud chair, session 01FE9mEvGxnFx6WTBkEC6ie9; the people car's landing)",
+  "cause": "PEOPLE-1 CAST — one face per face-bearing house, the seat always faced, memberships from the backing catalogue, each power's first, second and third, the late-born powers' faces minted at the seam (lane/people-1-cast-2026-11-07, 262e8b255..bbe4a02ab, on the first parent at dc655f712)",
+  "seat": "PEOPLE-LAND second seat (Opus 5.5) under the cloud chair (Fable 5.1), session 01FE9mEvGxnFx6WTBkEC6ie9, from the stage at dc655f712",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    },
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "re-record",
+      "predictedRows": 479,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "dossier-prose-manifest",
+      "action": "re-record",
+      "predictedRows": 2,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "pdf-golden-view-model-snapshot",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}

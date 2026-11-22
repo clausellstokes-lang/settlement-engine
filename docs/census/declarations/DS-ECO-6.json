@@ -1,0 +1,143 @@
+{
+  "id": "DS-ECO-6",
+  "source": "src/data/dossierStateProse/economy.generated.js",
+  "drawKind": "K",
+  "pools": [
+    {
+      "id": "DS-ECO-6::TIER: a large share off the books (≥30)",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: blackMarketCapture >= 30 (safetyProfile). The crime atom (deriveCriminalStructure) is a different reader; not declared as guaranteed.",
+      "lines": [
+        {
+          "id": "DS-ECO-6::TIER: a large share off the books (≥30)::v1",
+          "text": "A large share of what {settlement} earns never reaches a ledger. The duties collected fall",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": "dm-only"
+        },
+        {
+          "id": "DS-ECO-6::TIER: a large share off the books (≥30)::v2",
+          "text": "Half the business of this town is done in the ordinary way and the rest is done quietly. T",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": "dm-only"
+        },
+        {
+          "id": "DS-ECO-6::TIER: a large share off the books (≥30)::v3",
+          "text": "A stranger who trades honestly here will be undersold and will not immediately understand ",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "dm-only; {faction} slot presumes a criminal faction exists (slot-filled)"
+        },
+        {
+          "id": "DS-ECO-6::TIER: a large share off the books (≥30)::v4",
+          "text": "The guilds are losing their grip a little further each season. Anyone can undercut a guild",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "dm-only; unhomed: guild"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-6::TIER: significant off-book activity (≥15)",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: blackMarketCapture >= 15",
+      "lines": [
+        {
+          "id": "DS-ECO-6::TIER: significant off-book activity (≥15)::v0",
+          "text": "Significant off-book activity. Merchants operating in the shadow economy have a cost advan",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "unhomed: guild (\"guild fees\")"
+        },
+        {
+          "id": "DS-ECO-6::TIER: significant off-book activity (≥15)::v1",
+          "text": "A real portion of {settlement}'s trade sits outside the rolls, enough that the men who do ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": "dm-only"
+        },
+        {
+          "id": "DS-ECO-6::TIER: significant off-book activity (≥15)::v2",
+          "text": "There is a cheaper way to do most things here, and most people know somebody who knows it.",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": "dm-only"
+        },
+        {
+          "id": "DS-ECO-6::TIER: significant off-book activity (≥15)::v3",
+          "text": "The prices in this market do not quite add up for a stranger who assumes everyone is payin",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "dm-only"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-6::TIER: minor shadow activity (≥3)",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: blackMarketCapture >= 3",
+      "lines": [
+        {
+          "id": "DS-ECO-6::TIER: minor shadow activity (≥3)::v0",
+          "text": "Minor shadow activity. Petty theft and small-scale unlicensed trade. An inconvenience, not",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-6::TIER: minor shadow activity (≥3)::v1",
+          "text": "A little of {settlement}'s trade goes unrecorded, small enough to annoy the clerks and too",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": "dm-only"
+        },
+        {
+          "id": "DS-ECO-6::TIER: minor shadow activity (≥3)::v2",
+          "text": "There is some thieving and some selling without a licence. Every town this size has both.",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": "dm-only; word: \"town\" used as the generic referent (tier not declared)"
+        },
+        {
+          "id": "DS-ECO-6::TIER: minor shadow activity (≥3)::v3",
+          "text": "What passes for a shadow economy here has never grown into one. There is unlicensed trade ",
+          "needs": [],
+          "excludes": [
+            "organised crime"
+          ],
+          "colour": false,
+          "notes": "dm-only; \"nothing organised behind it\" — false when deriveCriminalStructure is non-null"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    }
+  ]
+}

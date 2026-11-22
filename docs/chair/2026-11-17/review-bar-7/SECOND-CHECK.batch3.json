@@ -1,0 +1,123 @@
+[
+ {
+  "id": "C7246",
+  "town": "bar0-city-wartime-rand-45",
+  "section": "Summary/Overview",
+  "text": "Being on the right side of it keeps the forges of Eisenmark running day and night on the army's contracts, and the place now needs the war to go on to pay for what the war has already cost it.",
+  "readers": "ab",
+  "kinds": [
+   "PAIR"
+  ],
+  "whys": [
+   "a: forges run day and night on army contracts, but Blacksmiths row is Curtailed by the war with all services curtailed",
+   "b: forges run day and night on army contracts; blacksmiths, smelter, metalworkers are marked curtailed by the war and smiths have no iron"
+  ]
+ },
+ {
+  "id": "C7477",
+  "town": "bar0-city-wartime-rand-45",
+  "section": "Summary/Plot Hooks",
+  "text": "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with.",
+  "readers": "a",
+  "kinds": [
+   "PAIR"
+  ],
+  "whys": [
+   "a: smiths have nothing to mend tools with, but forges run day and night and new ironwork stands outside workshops"
+  ]
+ },
+ {
+  "id": "C16460",
+  "town": "bar0-hamlet-calm-rand-46",
+  "section": "Summary/Overview",
+  "text": "A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.",
+  "readers": "b",
+  "kinds": [
+   "STATE"
+  ],
+  "whys": [
+   "b: a two-season dispute over grazing and water, families not speaking; QUARRELS none, TENSIONS only popular uprising, PAST has no such event"
+  ]
+ },
+ {
+  "id": "C16854",
+  "town": "bar0-hamlet-calm-rand-47",
+  "section": "Summary/Overview",
+  "text": "Laden carts from the workings grind along the road in a line that never seems to end.",
+  "readers": "ab",
+  "kinds": [
+   "LACKS"
+  ],
+  "whys": [
+   "a: an endless line of laden carts is more traffic than a hamlet of 70 with one open-cast mine and no market can hold",
+   "b: endless line of laden carts in a hamlet of 70 with one open-cast mine; no crowds of traffic at this size"
+  ]
+ },
+ {
+  "id": "C16877",
+  "town": "bar0-hamlet-calm-rand-47",
+  "section": "Summary/Overview",
+  "text": "A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.",
+  "readers": "b",
+  "kinds": [
+   "STATE"
+  ],
+  "whys": [
+   "b: two-season grazing and water dispute; QUARRELS none, TENSIONS only generational divide, PAST only Trade Collapse"
+  ]
+ },
+ {
+  "id": "C31732",
+  "town": "bar0-thorp-calm-rand-47",
+  "section": "Summary/Overview",
+  "text": "A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.",
+  "readers": "ab",
+  "kinds": [
+   "STATE"
+  ],
+  "whys": [
+   "a: grazing-rights and water dispute is in none of TENSIONS (population friction), QUARRELS or PAST; no grazing resource on LAND",
+   "b: Open grazing/water dispute, sides not speaking; QUARRELS none, TENSIONS lists only population friction, PAST has no such event, stability Stable."
+  ]
+ },
+ {
+  "id": "C37224",
+  "town": "bar0-town-occupied-rand-45",
+  "section": "Systems/Resources",
+  "text": "Abundant",
+  "readers": "a",
+  "kinds": [
+   "PAIR"
+  ],
+  "whys": [
+   "a: River Fisheries printed Abundant; LAND gives it depleted and C37219 says little is left"
+  ]
+ },
+ {
+  "id": "C37891",
+  "town": "bar0-town-occupied-rand-45",
+  "section": "World/Relationships",
+  "text": "An old friend of Xenophon Gregoraios's is held by the watch, and Ariadne Chrysoberges is the one who keeps that friend fed and safe inside.",
+  "readers": "a",
+  "kinds": [
+   "PAIR"
+  ],
+  "whys": [
+   "a: a friend is held inside by the watch, but the Defense tab says the town has nowhere to hold an offender"
+  ]
+ },
+ {
+  "id": "C42053",
+  "town": "bar0-village-calm-rand-46",
+  "section": "Systems/Defense",
+  "text": "You will see the local watch on the rounds most hours of the day; it catches the careless and misses the careful.",
+  "readers": "ab",
+  "kinds": [
+   "PAIR"
+  ],
+  "whys": [
+   "a: watch seen on rounds most hours of the day; the watch is an unpaid household rota walking the lanes after dark",
+   "b: says the watch is on rounds most hours of the day; the Village watch only walks the lanes after dark, unpaid, by household rota"
+  ]
+ }
+]

@@ -1,0 +1,22 @@
+{
+  "_doc": "TIER-NOUN-POOLS (UNITS 1–6), ONE SIGNED SHIFT OF RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation, vetoable; a successor chair does not inherit this signature). THE CAUSE, ONE: TIER-NOUN-POOLS (units 1–6): a city's drawn institution description and its Gate Tolls line speak the place's own tier noun. THE MOVER, NAMED: first-parent step a9982e3b9 of lane/landing-rung1-2026-11-04 (\"compose: lane/tier-noun-pools-2026-11-04 onto the window branch\") and nothing else. THE OWNER'S WORDS are quoted verbatim from docs/OWNER_DECISION_QUEUE.md line 562 (THE LADDER IS THE LANDING, the owner, 2026-11-04) and line 592 (THE SOAK LADDER, the owner, 2026-11-03), as §934.104 quotes them. HOW (the staged-tree method, DOORS-2 ruling 1; LANDING-3's brief, ruling 1: one record per moving step, in first-parent order): this record's stage S5 is the tree of a9982e3b9 with the door paths (the freeze register, every registered manifest and suite, docs/shift-records/, scripts/prose-manifest-cells.mjs and scripts/audit/'s doors) carried from the branch, where the previous record's writes are committed; no lane touched a door path inside the window, so the stage differs from a9982e3b9 by those writes alone. MEASURED BEFORE THE WRITE (scripts/audit/golden-master-stage.mjs, refence.mjs, herald-stage.mjs, witness-stage.mjs and the capture arms against a scratch record in a throwaway worktree at a9982e3b9, S4 -> S5): generator-golden-master 48 of 525 rows (city 48; thorp, hamlet, village, town, metropolis 0), the key set identical; espionage-dormancy-fence 76 of 360 rows (city 40, metropolis 36; thorp, hamlet, village, town 0), 360/360 distinct, 5103a51e.. -> 8ef28c7f... A surface that does not move at this stage is not listed. RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation, vetoable; a successor chair does not inherit this signature).",
+  "ownerWords": "well before we do the PRs, do the 1,000 again, the 10,000, the 100,000, and the 1 million with fixes where findings are found. PR in between each · after all of that, run 1000 generated settlements and review each in depth and in aggregate and tune",
+  "ownerDate": "2026-11-04",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
+  "cause": "TIER-NOUN-POOLS (units 1–6): a city's drawn institution description and its Gate Tolls line speak the place's own tier noun",
+  "seat": "LANDING-3 (Opus 5.5) under the cloud chair (Fable 5.1), session 019yED1Rc3svZxTNcEJVRr77, from the stage at a9982e3b9",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    }
+  ]
+}

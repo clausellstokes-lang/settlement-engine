@@ -1,0 +1,916 @@
+name: CI
+
+on:
+  # Run on every branch push (not just master/main) so feature branches — where
+  # the work actually happens — get the same gate before they ever reach a PR
+  # (finding F35: CI was advisory to feature branches). F35's purpose is UNCHANGED
+  # by the one exclusion below: every CODE branch still gets the whole gate on every
+  # push, before it reaches a PR.
+  #
+  # THE ONE EXCLUSION is `review-fixes-2026-07-08`, the LEDGER branch — the charter,
+  # the decision queue and the docs. Its `src/` is a FOSSIL by design (no code commit
+  # on it since 08-11), so a CI run there can only fail, and it only spends runner
+  # minutes: measured 2026-09-20, that branch's push (run 35534817791) reddened
+  # build-and-dist, the Deno edge tests and the browser suite, and had its two long
+  # jobs killed at their caps. Syntax, from GitHub's filter-pattern rules: a matching
+  # NEGATIVE pattern placed AFTER a positive one excludes the ref, so the order here
+  # is load-bearing, and at least one positive pattern must remain or the event would
+  # stop triggering altogether.
+  #
+  # CAUTION, and it bounds what this line can do: a push run uses the workflow file
+  # AT THE PUSHED REF. So this exclusion suppresses ledger runs only once the LEDGER
+  # branch's own copy of this file carries it. That same run is the proof — its two
+  # long jobs were cut at 30 and 10 minutes, which are the FOSSIL's caps on that
+  # branch, not this file's.
+  #
+  # CAUTION, second: this is the TRIGGER only. The "Fetch the ledger branch" step in
+  # check-tests and coverage-floors still fetches that ref from origin, because two
+  # suites read the ledger by ref, and it is deliberately untouched here.
+  #
+  # 2026-11-04 (CI-TRIGGERS, the rung-1 landing, LANDING-1 item 12): the push trigger is NARROWED to
+  # `master` and the `claude/**` branches. `lane/**` branches are TRANSPORT (operating standard rule 24a):
+  # their gate runs in the seats' containers before the push, and again here when the chair's PR opens,
+  # because `pull_request` below is unchanged. The ledger exclusion above is kept by construction: the
+  # ledger branch matches neither pattern. F35's purpose holds for every branch that becomes a PR.
+  push:
+    branches: [master, 'claude/**']
+  pull_request:
+    branches: [master, main]
+  # Manual trigger + weekly cron drive the opt-in mutation-sweep job below (it is
+  # gated to these events only). Per-push/PR runs are unaffected — the sweep runs
+  # a gate step once per injected mutation and is too slow for the hot path.
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * 1'   # Mondays 06:00 UTC
+
+jobs:
+  check-validation:  # deploy-gate: optional — required transitively by the `check` aggregate
+    name: Gate / validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - run: npm ci
+      - name: Audit production dependencies
+        run: npm audit --audit-level=high --omit=dev
+      - name: Audit dev dependencies (non-blocking visibility)
+        run: npm audit --audit-level=high
+        continue-on-error: true
+      - run: npm run validate:hazard-registry
+      - run: npm run validate:premortem
+      - run: npm run validate:packets
+      - run: npm run validate:data
+      - run: npm run validate:custom-content-manifest
+      - run: npm run validate:migration-head
+      - run: npm run validate:edge
+      - run: npm run validate:map
+      - run: npm run validate:tuning-bands
+      - run: npm run validate:foundry-module
+      - run: npm run validate:mcp-server
+
+  check-types:  # deploy-gate: optional — required transitively by the `check` aggregate
+    name: Gate / type ratchets
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck:ratchet
+      - run: npm run typecheck:domain:strict
+
+  check-lint:  # deploy-gate: optional — required transitively by the `check` aggregate
+    name: Gate / lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+
+  check-tests:  # deploy-gate: optional — required transitively by the `check` aggregate
+    name: Gate / test ratchet
+    runs-on: ubuntu-latest
+    # The ratchet executes the real full suite, and this cap follows that suite. The previous
+    # cap, 90, was set on 2026-09-20 when NO run had concluded in this era — both of PR #53's
+    # first runs were cut at 45 (push 35534822592 and pull_request 35534903945, 45m17s each,
+    # "The operation was canceled"), so 90 was twice the longest run that had concluded back on
+    # 2026-09-17 plus five hundred commits of growth, and its own comment promised to TIGHTEN it
+    # to measured-plus-headroom the moment a real figure arrived.
+    # THE REAL FIGURES ARRIVED. Both runs at f76ddf0ab CONCLUDED GREEN and are measured here:
+    #   push         35541172706  22:16:42Z → 23:19:19Z  62m37s  success
+    #   pull_request 35541276693  22:18:49Z → 23:40:57Z  82m08s  success
+    # The SAME commit, a TWENTY-MINUTE spread between two runners, and 82m08s is 91% of the
+    # 90-minute cap — so 90 was not loose at all, it was one slow runner away from cutting a
+    # passing run. THE RULE THIS CAP NOW FOLLOWS: the longest CONCLUDED run × 1.5, rounded UP
+    # to the next 15. 82m08s × 1.5 = 123m12s → 135. A cut run is never the input — a timeout
+    # measures the cap, not the suite.
+    # A timeout is not a test verdict, and a cap that cuts a passing run blocks the production
+    # deploy (the `e2e` job below says the same thing one job over; keep the two comments
+    # consistent). For reference the same ratchet takes 17m41s locally over 33,770 tests, which
+    # puts this runner at 3.5× to 4.6× the local box. The runner size a PRIVATE repository is
+    # given has not been measured here, so no core count is assumed.
+    # ⛔ THE NEXT MOVE IS NOT ANOTHER CAP: an 82-minute serial job is close to the point where
+    # headroom stops being the answer and sharding is, and the spread says runner variance
+    # alone can swing this job by 20 minutes. Sharding must keep the ratchet's known-failures
+    # baseline and its scope sentinel exact, so it is a deliberate change of the gate's shape,
+    # not a cap repair.
+    timeout-minutes: 135
+    env:
+      CUSTOM_CONTENT_CONCURRENCY_DATABASE_URL: >-
+        postgresql://postgres:postgres@127.0.0.1:5432/postgres
+      # ── THE CENSUS SWITCH (STASIS S6, rule 38, 2026-09-23) ────────────────────
+      # tests/lint/sovereigntyLightingContract.walker.test.js asserts a FROZEN
+      # five-figure tuple against the live estate, and EVERY member that adds a
+      # test title moves that tuple. The refreeze is a train's TERMINAL act, so
+      # the register is stale for the whole train by construction and this
+      # BLOCKING job was red on every lane branch — the chair separated the
+      # declared red from a real one by hand each time, which is exactly the
+      # reading a permanently red gate destroys. Under the switch that arm still
+      # RUNS and PASSES (never `.skip`: check-test-ratchet.mjs charges a non-run
+      # row to a shrink-only `skippedCeiling`) and PRINTS the live tuple and its
+      # delta instead of asserting the frozen equality. The equality itself lives
+      # on the `census-stasis` job below, weekly and on demand, without this var.
+      # REMOVED by the unfreeze train of 2026-09-23 (STASIS-REGISTER row S6, act 1): the two
+      # census walkers assert their frozen tuples on this blocking job again. The weekly
+      # `census-stasis` job below keeps the var for its own observation run.
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      # Two suites read the LEDGER BRANCH by its local ref (scripts/audit/ledger-citations.mjs and
+      # provenance-map.mjs: `refs/heads/review-fixes-2026-07-08`; the provenance walk is one
+      # `git log -U0` over the ledger file's whole history). actions/checkout is a depth-1,
+      # single-branch clone, so on the runner the ref never existed and both suites failed at
+      # collection; the ratchet's scope sentinel then refused the run (never green in this era,
+      # measured 2026-09-16). Fetch that branch with its history (about 200 MB of objects),
+      # unless it IS the branch under test.
+      - name: Fetch the ledger branch (two suites read it by ref)
+        shell: bash
+        run: |
+          if [ "$(git rev-parse --abbrev-ref HEAD)" != "review-fixes-2026-07-08" ]; then
+            git fetch --no-tags origin +refs/heads/review-fixes-2026-07-08:refs/heads/review-fixes-2026-07-08
+          fi
+          git rev-parse --short refs/heads/review-fixes-2026-07-08
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - run: npm ci
+      # The ratchet's red (which rows regressed, which failure class, the census verdict) is
+      # otherwise visible only to a signed-in viewer of the raw log; the estate reads its own CI
+      # anonymously and by receipt. Tee the run; on failure hand the verdict and every failed test
+      # over as annotations and into the job summary (the build-and-dist receipt's idiom).
+      - name: Run the test ratchet
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run test:ratchet 2>&1 | tee test-ratchet.log
+      - name: Failure receipt (test ratchet)
+        if: failure()
+        shell: bash
+        run: |
+          {
+            echo '## test ratchet — the verdict, verbatim (last 200 lines)'
+            echo '```'
+            tail -n 200 test-ratchet.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          node - <<'EOF'
+          const fs = require('node:fs');
+          const os = require('node:os');
+          const path = require('node:path');
+          const enc = (s) => String(s).replace(/%/g, '%25').replace(/\r/g, '%0D').replace(/\n/g, '%0A');
+          const log = fs.existsSync('test-ratchet.log') ? fs.readFileSync('test-ratchet.log', 'utf8') : '(no test-ratchet.log)';
+          console.log(`::error title=test-ratchet verdict (last 60 KB)::${enc(log.slice(-60000))}`);
+          // The ratchet copies the runner's JSON report of the LAST red to a stable path outside the tree.
+          const stable = path.join(os.tmpdir(), 'test-ratchet-last-red.json');
+          if (!fs.existsSync(stable)) {
+            console.log(`::warning title=test-ratchet report::no ${stable}; the red came before the runner report, or the run was cut by the job timeout`);
+            process.exit(0);
+          }
+          const report = JSON.parse(fs.readFileSync(stable, 'utf8'));
+          const rows = [];
+          for (const file of report.testResults || []) {
+            for (const t of file.assertionResults || []) {
+              if (t.status !== 'failed') continue;
+              const lines = String((t.failureMessages || [])[0] || '').replace(/\u001b\[[0-9;]*m/g, '').split('\n').filter((l) => l.trim());
+              const msg = lines.length ? lines.slice(0, 15).map((l) => l.slice(0, 400)).join('\n    ') : '(no message)';
+              rows.push(`${path.relative(process.cwd(), file.name || '')} :: ${t.fullName || t.title}  [${t.duration ?? '?'} ms]\n    ${msg}`);
+            }
+          }
+          const totals = { tests: report.numTotalTests, failed: report.numFailedTests, passed: report.numPassedTests, pending: report.numPendingTests, files: report.numTotalTestSuites, failedFiles: report.numFailedTestSuites };
+          const body = [`${rows.length} failed test(s); runner totals ${JSON.stringify(totals)}`, ...rows].join('\n');
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, '## failed tests from the runner report\n\n```\n' + body + '\n```\n');
+          console.log(`::error title=test-ratchet failed tests::${enc(body.slice(0, 60000))}`);
+          EOF
+
+  check-build:  # deploy-gate: optional — required transitively by the `check` aggregate
+    name: Gate / build and dist
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      # The failure text of this gate is otherwise visible only to a signed-in viewer of the raw
+      # log; the estate reads its own CI anonymously and by receipt, so the step tees its output and
+      # the failure step below writes the red lines into the job summary and as annotations.
+      - name: verify:dist
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run verify:dist 2>&1 | tee verify-dist.log
+      - name: Failure receipt (verify:dist)
+        if: failure()
+        shell: bash
+        run: |
+          {
+            echo '## verify:dist — the red, verbatim (last 160 lines)'
+            echo '```'
+            tail -n 160 verify-dist.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          grep -E '×|FAIL |Error:|AssertionError|boot-smoke:' verify-dist.log | head -20 | sed 's/^/::error::/' || true
+          # The ratchet runner captures vitest as JSON into a temp dir, so the boot-smoke's own report (which
+          # stage failed, which chunk, the error) never reaches stdout. Re-run the one boot suite plainly
+          # against the dist that is still on disk and hand its WHOLE output over as one annotation
+          # (newlines encoded as %0A — the annotation is the only surface a signed-out reader gets).
+          VERIFY_DIST=1 npx vitest run tests/build/bootSmoke.test.js --reporter=verbose > boot-smoke.log 2>&1 || true
+          { echo '## boot-smoke, re-run alone (verbatim)'; echo '```'; tail -n 200 boot-smoke.log; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          node -e "const t=require('fs').readFileSync('boot-smoke.log','utf8').slice(-60000).replace(/%/g,'%25').replace(/\r/g,'%0D').replace(/\n/g,'%0A'); console.log('::error title=boot-smoke report::'+t)"
+
+  check:
+    name: Validate, test, build
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [check-validation, check-types, check-lint, check-tests, check-build]
+    steps:
+      - name: Require every parallel gate group
+        env:
+          VALIDATION_RESULT: ${{ needs.check-validation.result }}
+          TYPES_RESULT: ${{ needs.check-types.result }}
+          LINT_RESULT: ${{ needs.check-lint.result }}
+          TESTS_RESULT: ${{ needs.check-tests.result }}
+          BUILD_RESULT: ${{ needs.check-build.result }}
+        run: |
+          for result in "$VALIDATION_RESULT" "$TYPES_RESULT" "$LINT_RESULT" "$TESTS_RESULT" "$BUILD_RESULT"; do
+            test "$result" = success || exit 1
+          done
+
+  e2e:
+    name: Chromium end-to-end
+    # PINNED to ubuntu-24.04, NOT ubuntu-latest (CI-FIT, 2026-11-10). GitHub moved `ubuntu-latest` to Ubuntu 26.04,
+    # and the pinned Playwright 1.60.0 cannot install a browser there: master's scheduled run 42635256465
+    # (2026-11-09 14:30 UTC, commit db832c892, the same commit green on 2026-11-07) failed this job in under a
+    # second at `npx playwright install --with-deps chromium webkit` with "Cannot install dependencies for
+    # ubuntu26.04-x64 with Playwright 1.60.0! / Error: ERROR: Playwright does not support chromium on
+    # ubuntu26.04-x64". The chair ruled a runner pin, NOT a Playwright bump: the seats' containers carry a
+    # pre-installed browser matched to 1.60.0. Lift the pin with the Playwright bump that supports 26.04.
+    runs-on: ubuntu-24.04
+    # This job's suite MORE THAN DOUBLED on this branch and its cap was never revisited:
+    # 8 -> 14 chromium spec files and 39 -> 81 `test(` declarations (measured at this tip
+    # against master b9c494afe, excluding e2e/performance/** which playwright.config.js
+    # testIgnores and the performance job owns). It took 5.2 minutes on master's last run
+    # (35127725833) with the OLD suite. The branch also adds a 120s and a 60s per-test
+    # budget, taking the explicitly-budgeted total from 1155s to 1335s — and `retries: 1`
+    # in CI means a single flaky retry of the 420s auth/checkout test can spend 14 minutes
+    # by itself. 25 is the measured figure with headroom for runner variance; a timeout is
+    # not a test verdict. The same master run's coverage-floors job was CUT at its
+    # 45-minute cap, which skipped both deploy jobs and has left production un-deployed
+    # since 2026-09-16 (raised to 60 in 743779742); a cap that cuts a passing run blocks
+    # the production deploy, and this is that failure mode one job over.
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Install BOTH engines the e2e projects use. The `mobile-safari` project
+      # (playwright.config.js) is the iPhone 13 device profile, whose
+      # defaultBrowserType is WEBKIT — so the mobile-pointer-targets step below
+      # launches webkit, not chromium. Installing chromium alone (the prior bug)
+      # left that step trying to launch a browser that was never installed
+      # ("Executable doesn't exist … webkit"); the anti-vacuity guards below now
+      # also make an all-skipped mobile run a hard failure instead of green-on-
+      # nothing, so the missing engine can no longer hide.
+      - name: Install Playwright browsers (chromium + webkit)
+        run: npx playwright install --with-deps chromium webkit
+
+      # Static anti-vacuity guard: prove the project actually enumerates specs
+      # BEFORE running (a renamed/typo'd project would list zero tests and exit 0).
+      - name: Guard chromium e2e is not vacuous (static)
+        run: node scripts/check-e2e-not-vacuous.mjs --projects chromium
+
+      - name: Run Chromium E2E
+        shell: bash
+        run: |
+          set -o pipefail
+          npx playwright test --project=chromium --reporter=github,json 2>&1 | tee e2e-chromium.log
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_NAME: playwright-chromium.json
+
+      # Runtime anti-vacuity guard: prove the run actually EXECUTED tests (not
+      # all-skipped-but-exit-0). Reads Playwright's JSON result.
+      - name: Guard chromium e2e executed (runtime)
+        run: node scripts/check-e2e-not-vacuous.mjs --results playwright-chromium.json
+
+      - name: Guard mobile e2e is not vacuous (static)
+        run: node scripts/check-e2e-not-vacuous.mjs --projects mobile-safari
+
+      - name: Audit mobile pointer targets
+        shell: bash
+        run: |
+          set -o pipefail
+          npx playwright test e2e/mobile-pointer-targets.spec.js --project=mobile-safari --reporter=github,json 2>&1 | tee e2e-mobile.log
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_NAME: playwright-mobile.json
+
+      - name: Guard mobile e2e executed (runtime)
+        run: node scripts/check-e2e-not-vacuous.mjs --results playwright-mobile.json
+      # Readable without sign-in: every failing spec with its error, and the tails of both logs.
+      - name: Failure receipt (e2e)
+        if: failure()
+        shell: bash
+        run: |
+          node - <<'EOF' >> "$GITHUB_STEP_SUMMARY"
+          const fs = require('node:fs');
+          for (const f of ['playwright-chromium.json', 'playwright-mobile.json']) {
+            if (!fs.existsSync(f)) continue;
+            const d = JSON.parse(fs.readFileSync(f, 'utf8'));
+            console.log(`## ${f} — stats ${JSON.stringify(d.stats)}`);
+            const walk = (suites) => { for (const su of suites || []) { for (const sp of su.specs || []) for (const t of sp.tests || []) {
+              if (!['expected', 'skipped'].includes(t.status)) { console.log(`- **${sp.file}** :: ${sp.title} — ${t.status}`);
+                for (const r of t.results || []) if (r.error) console.log('  ```\n  ' + String(r.error.message || '').replace(/\u001b\[[0-9;]*m/g, '').split('\n').slice(0, 12).join('\n  ') + '\n  ```'); } }
+              walk(su.suites); } };
+            walk(d.suites);
+          }
+          EOF
+          for f in e2e-chromium.log e2e-mobile.log; do [ -f "$f" ] && { echo "## $f (last 80 lines)"; echo '```'; tail -n 80 "$f"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"; done
+
+  performance:
+    name: Production-build browser performance
+    # PINNED to ubuntu-24.04 for the same cause as the e2e job above (CI-FIT, 2026-11-10): on Ubuntu 26.04
+    # (`ubuntu-latest` since the image moved) Playwright 1.60.0's `npx playwright install --with-deps chromium`
+    # fails ("Playwright does not support chromium on ubuntu26.04-x64"), measured on master's scheduled run
+    # 42635256465 (2026-11-09, commit db832c892). Lift it with the Playwright bump that supports 26.04.
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Build the local-data production artifact
+        run: npm run build -- --mode e2e
+
+      - name: Guard performance discovery is not vacuous
+        run: node scripts/check-e2e-not-vacuous.mjs --config playwright.perf.config.js --projects performance-chromium,performance-mobile-chromium
+
+      - name: Measure desktop and lower-end mobile production profiles
+        run: npx playwright test --config playwright.perf.config.js --reporter=github,json
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_NAME: playwright-performance.json
+          SF_PERFORMANCE_RECEIPT: artifacts/performance/browser-synthetic.json
+
+      - name: Guard performance execution is not vacuous
+        run: node scripts/check-e2e-not-vacuous.mjs --results playwright-performance.json
+
+      - name: Retain browser-performance evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-performance-evidence
+          path: |
+            artifacts/performance/browser-synthetic.*.json
+            playwright-performance.json
+            playwright-report/
+            test-results/
+          if-no-files-found: warn
+          retention-days: 30
+
+  # Execution tests for the Supabase edge functions (Deno runtime, not vitest).
+  # The money-path trust boundaries (stripe-webhook signature verification; later
+  # the generate-narrative refund decision) are RUN here against forged vs. signed
+  # requests — the regex-over-source contracts in vitest can't prove behavior.
+  coverage-floors:
+    # Coverage floors for the money / security modules — a regression RATCHET
+    # on the highest-consequence files (spend/refund via aiSlice+creditsSlice,
+    # saves, checkout reconcile, credit ledger, stripe, pending dossier). Runs
+    # THE TESTS THAT CAN REACH those seven files under v8 coverage and fails if
+    # any floored file drops more than ~5pts below its measured baseline (floors
+    # in vite.config.js coverage.thresholds, and the re-scope below did not move
+    # one of those figures; a deleted money-path test is exactly the regression
+    # this catches). Parallel to `check` so the ratchet never doubles the
+    # critical path's wall-clock.
+    #
+    # WHY RUNNING FEWER TESTS IS A SUFFICIENT PROOF AND NOT A WEAKENING (2026-09-20).
+    # The step below ran the WHOLE suite (33,771 tests) under coverage and was killed
+    # at four successive caps without ever reporting a floor. It now runs
+    # `vitest related <the seven> --run --coverage` with the SAME seven
+    # --coverage.include rows, so vitest's own import graph selects every test file
+    # that loads one of the seven. A file's coverage can only come from a test
+    # process that LOADS it, and running fewer tests can only LOWER a percentage,
+    # never raise it — the denominators are the file's own statement/branch/
+    # function/line counts and do not depend on which tests run. So
+    # scoped >= floor IMPLIES whole-suite >= floor: a green scoped run proves
+    # everything the whole-suite run proved, and the error direction is the safe
+    # one — a test the import graph cannot see (a runtime-computed import) costs
+    # that file coverage and can only produce a FALSE RED, never a false green.
+    # The `related` subcommand also turns passWithNoTests on, so "nothing was
+    # selected" cannot red by itself; --coverage.include naming the seven is what
+    # closes that hole, because an unreached floored file is still REPORTED, at
+    # ~0, and still reds its own floor by name. Both halves were measured on this
+    # branch before the change landed.
+    # MEASURED at f76ddf0ab: the scoped run selects 488 test files / 4,284 tests
+    # and is green, with three of the seven reporting byte-identical numbers to the
+    # 2026-07-09 whole-suite baseline recorded in vite.config.js and the other four
+    # reporting HIGHER (coverage grew since July). No floor is near.
+    # ⭐ THE EXHAUSTIVE FORM IS NOT RETIRED: the package.json script
+    # `test:coverage:floors` still runs the WHOLE suite under coverage and is
+    # unchanged, byte for byte. It is the local form to reach for when the question
+    # is "does anything anywhere touch these files", and it is what this scoped job
+    # is a sufficient proof OF.
+    # ⛔ THE SEVEN PATHS NOW LIVE IN THREE PLACES — vite.config.js thresholds, the
+    # npm script's include rows, and the array below. tests/build/ciGateHardening.js
+    # asserts all three are the SAME SET, both directions, so a rename cannot drop a
+    # floor silently.
+    name: Coverage floors (money / security)
+    runs-on: ubuntu-latest
+    # THE CAP FOLLOWS THE MEASURED RUN, and this is the first cap set against a run
+    # whose size is bounded by the seven files' import graph rather than by the whole
+    # suite's growth. Measured 2026-09-20 on the chair's box: the scoped command takes
+    # 5m35s (335s) wall. That box runs about four times a GitHub runner on the same
+    # work — the ratchet is 17m41s there against 62m37s and 82m08s here, a ratio of
+    # 3.54x and 4.64x — so 335s x 4 = 22m20s expected on a runner, x 1.5 headroom =
+    # 33m30s, rounded UP to the next 15 = 45. At the WORST observed ratio (4.64x) the
+    # job is 25m54s, which 45 still clears by 74%; the runner's fixed overhead
+    # (checkout, the ~200 MB ledger fetch, npm ci) is already inside that multiplier,
+    # because it was measured from job totals and not from step times.
+    # THE FOUR CAPS THIS JOB OUTGREW, kept as history because every one of them was
+    # set the old way — against the whole suite: 10 cut it on every run since 08-15;
+    # 45 cut it on master's merge commit b9c494afe on 09-16 (raised to 60 in
+    # 743779742); 60 cut both of PR #53's first runs (35534822592, 60m15s and
+    # 35534903945, 60m16s); and 100 cut both of its second runs at f76ddf0ab
+    # (35541172706, 22:16:43Z → 23:56:59Z and 35541276693, 22:18:48Z → 23:59:04Z,
+    # 100m16s each, "cancelled", with no floor ever reported failing). The last runs
+    # that CONCLUDED were on 2026-09-17, all three green and all on the whole suite:
+    # 51m52s (35184404284), 52m46s (35168257017) and 53m41s (35230176250).
+    # A timeout is not a coverage verdict, and the Vercel build gate
+    # (scripts/vercel-ignore-build.mjs) requires this job green, so a cap that cuts a
+    # passing run blocks the production deploy — which is why production has not
+    # deployed since 09-16.
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      # Two suites read the LEDGER BRANCH by its local ref (scripts/audit/ledger-citations.mjs and
+      # provenance-map.mjs: `refs/heads/review-fixes-2026-07-08`; the provenance walk is one
+      # `git log -U0` over the ledger file's whole history). actions/checkout is a depth-1,
+      # single-branch clone, so on the runner the ref never existed and both suites failed at
+      # collection; the ratchet's scope sentinel then refused the run (never green in this era,
+      # measured 2026-09-16). Fetch that branch with its history (about 200 MB of objects),
+      # unless it IS the branch under test.
+      - name: Fetch the ledger branch (two suites read it by ref)
+        shell: bash
+        run: |
+          if [ "$(git rev-parse --abbrev-ref HEAD)" != "review-fixes-2026-07-08" ]; then
+            git fetch --no-tags origin +refs/heads/review-fixes-2026-07-08:refs/heads/review-fixes-2026-07-08
+          fi
+          git rev-parse --short refs/heads/review-fixes-2026-07-08
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - run: npm ci
+      # THE SEVEN PATHS ARE SPELLED ONCE, in FLOORED, and BOTH uses read that one
+      # array: the `related` positionals and the --coverage.include rows. They cannot
+      # drift from each other because there is only one list. Every expansion is
+      # quoted (`"${FLOORED[@]}"`), so a path containing a space could never be split
+      # into two arguments. The mutex is spelled here rather than reached through the
+      # npm script because that script is the exhaustive whole-suite form and stays
+      # that way; this job is the scoped proof of it.
+      - name: Coverage floors (scoped to the tests that can reach the seven floored files)
+        shell: bash
+        run: |
+          FLOORED=(
+            src/lib/stripe.js
+            src/lib/creditLedger.js
+            src/lib/checkoutReconcile.js
+            src/lib/pendingDossier.js
+            src/lib/saves.js
+            src/store/aiSlice.js
+            src/store/creditsSlice.js
+          )
+          include=()
+          for floored_file in "${FLOORED[@]}"; do
+            include+=("--coverage.include=$floored_file")
+          done
+          sh scripts/gate-mutex.sh --run -- npx vitest related "${FLOORED[@]}" \
+            --run --coverage --coverage.reporter=text "${include[@]}"
+
+  deno-tests:
+    name: Edge function execution tests (Deno)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      # Deno resolves npm:@types/node from the repository's manual node_modules
+      # tree. Keep this an npm-ci install from the committed lockfile: relying on
+      # an incidental/transitive package or a developer's parent node_modules
+      # made the production type gate fail before it could check any source.
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+
+      - name: Install locked Node type dependencies
+        run: npm ci --ignore-scripts
+
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      # This must remain a blocking step BEFORE the --no-check execution suite.
+      # test:edge's deliberately structural mocks cannot stand in for checking
+      # the production auth/money entrypoints and their transitive imports.
+      - name: Type-check edge-function production sources
+        run: deno task check:edge
+
+      - name: Run edge-function Deno tests
+        run: deno task test:edge
+
+  # ── Golden master under a hostile locale + timezone ──────────────────────────
+  # The `check` job runs the suite in CI's default C.UTF-8/UTC environment — the
+  # same class of environment the golden manifest was captured in, so a locale-
+  # dependent formatting or collation leak (toLocaleString rendering `8000` as
+  # "8.000", ICU collation reordering a sort) can sit green there forever and
+  # still break same-seed replay on a user's machine. This leg re-runs ONLY the
+  # golden/determinism suites (cheap — seconds of test time, not the full gate)
+  # under tr_TR.UTF-8 (the Turkish-I locale that breaks the most latent i18n
+  # assumptions; Node's ICU reads LANG/LC_ALL directly, so no locale-gen setup
+  # is needed) and a non-UTC, odd-offset timezone (Chatham, +12:45/+13:45). If
+  # any hash in the 155-config manifest depends on the host locale or clock,
+  # this job reds while `check` stays green — the exact leak the eslint
+  # locale-formatting ban and tests/lint/localeFormatGuard.test.js guard at
+  # edit time, proven end-to-end here.
+  determinism-hostile-locale:
+    name: Golden master under tr_TR + Chatham TZ
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      LANG: tr_TR.UTF-8
+      LC_ALL: tr_TR.UTF-8
+      TZ: Pacific/Chatham
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Golden + determinism suites (hostile locale/TZ)
+        run: >
+          npx vitest run
+          tests/property/generatorGoldenMaster.test.js
+          tests/pdf/goldenViewModel.test.js
+          tests/domain/determinismLeaks.test.js
+          tests/generators/customContentDeterminism.test.js
+          tests/domain/formatNumber.test.js
+          tests/kernel/rngContextFailClosed.test.js
+          tests/lint/localeFormatGuard.test.js
+          tests/lint/localeCompareGuard.test.js
+
+  # ── Enforcement-spine mutation sweep (opt-in) ───────────────────────────────
+  # Injects a deliberate regression per enforced invariant and asserts the gate
+  # catches each one (scripts/mutation-sweep.sh). It runs a gate step PER mutation
+  # (slow), so it is kept OFF the per-push/PR hot path: only the weekly cron and a
+  # manual workflow_dispatch trigger it. The fresh checkout is clean, so the
+  # script's dirty-tree guard is a no-op here; a MISSED regression (a gate that
+  # stayed green under a planted bug) exits nonzero and fails this job.
+  mutation-sweep:  # deploy-gate: optional — weekly/manual, never reports on a push
+    name: Enforcement mutation sweep (weekly / manual)
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run mutation sweep
+        run: bash scripts/mutation-sweep.sh
+
+  # ── Religion-balance soak lane (opt-in) ─────────────────────────────────────
+  # The scripts/audit/religion-*.mjs probes drive the faith subsystem across many
+  # seeded trials (patron-contest hold rates, schism drift, divine-mandate → coup
+  # coupling, growth↔legitimacy balance) and emit distribution tables the owner
+  # reads when TUNING the constants. THESE THREE religion probes are DIAGNOSTIC:
+  # they log surfaces and never assert a threshold, so they exit 0 by design — this
+  # lane produces log artifacts for human review, it is not a pass/fail gate (a
+  # balance drift shows up as a shifted distribution in the log, not a red build).
+  # NB (scripts-build-ci-3): "diagnostic-only" is NOT the framing for the whole soak
+  # surface — the separate `world-soak` lane below runs whole-world-soak.mjs, a
+  # genuine PASS/FAIL watchdog (composed-kernel same-seed byte-identity + population/
+  # cost envelopes, `process.exit(failures.length ? 1 : 0)`). Kept OFF the
+  # per-push/PR hot path (each soak runs thousands of seeded pulse ticks) — only
+  # the weekly cron and a manual workflow_dispatch trigger it, exactly like the
+  # mutation sweep above.
+  #
+  # Approx runtime at the iteration counts below (ubuntu-latest, in-memory, no I/O):
+  #   religion-balance     (--seeds 300 --ticks 80)  ~5-10s   (pure domain fns)
+  #   religion-soak        (--seeds 40  --ticks 60)  ~10-30s  (advanceReligionStates)
+  #   religion-coup-soak   (--seeds 10  --ticks 100) ~1-3min  (3k full-kernel pulses)
+  # The 20-minute timeout is generous headroom over the ~4-minute total.
+  religion-soak:  # deploy-gate: optional — weekly/manual, never reports on a push
+    name: Religion balance soak (weekly / manual)
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Religion balance surfaces
+        run: node scripts/audit/religion-balance.mjs --seeds 300 --ticks 80
+
+      - name: Religion live-loop soak
+        run: node scripts/audit/religion-soak.mjs --seeds 40 --ticks 60
+
+      - name: Divine-mandate → coup coupling soak
+        run: node scripts/audit/religion-coup-soak.mjs --seeds 10 --ticks 100
+
+  # ── Generation semantic certification (opt-in, assertive) ───────────────────
+  # The ordinary test suite keeps a small named generation cohort on the hot
+  # path. This weekly/manual lane crosses the complete live tier, culture,
+  # terrain, route, threat, content-profile, and magic vocabularies at larger
+  # scale. It fails on `needs_review`, receipt findings, broken final-dossier
+  # references, percentage-conservation errors, non-finite values, missing
+  # dimension coverage, or same-seed replay drift. Unlike the exploratory
+  # simulate-generations report, this is a real pass/fail contract.
+  generation-certification:  # deploy-gate: optional — weekly/manual, never reports on a push
+    name: Generation semantic certification (weekly / manual)
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Certify 1,200 generated settlements
+        run: >
+          npm run certify:generation --
+          --count 1200
+          --output artifacts/generation/certification.json
+
+      - name: Upload generation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: generation-certification-${{ github.sha }}
+          path: artifacts/generation/certification.json
+          if-no-files-found: error
+          retention-days: 90
+
+  # ── Whole-world soak lane (opt-in) — composed-kernel + scale evidence ────────
+  # The weekly profile runs the same assertive composed soak at 4, 12, 24, and
+  # 30 settlements for 30 years. Each cell repeats the primary seed byte-for-byte
+  # and also runs a divergent seed. The wrapper binds receipts to both HEAD and a
+  # working-tree source fingerprint, so evidence from a dirty manual run cannot
+  # masquerade as evidence for the commit alone.
+  #
+  # The five wave soaks (cause-lifecycle / conquest-market / war-cluster /
+  # institution-ecology / religion-plane) run alongside as DIAGNOSTIC log-artifact
+  # steps — they have no process.exit, only log distribution tables for human review
+  # (same contract as the religion probes above), so they never gate this job; only
+  # the whole-world watchdog does. Kept OFF the per-push/PR hot path — weekly cron +
+  # manual workflow_dispatch only, like the mutation sweep and religion lanes.
+  #
+  # This is intentionally not a deploy gate. Release certification uses the
+  # larger manual `npm run soak:release` matrix; the 300-year attractor study is
+  # a separate research profile. See docs/SOAK_PLAN_R2.md.
+  world-soak:  # deploy-gate: optional — weekly/manual, never reports on a push
+    name: Whole-world soak (weekly / manual)
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Thirty-year realm-scale matrix (PASS/FAIL)
+        run: npm run soak:weekly -- --output artifacts/soak/weekly.json
+
+      # THE TRIPWIRE REGISTRY'S CALLER (SOAKCHAIN Car 2). Until this step the registry
+      # had none: nothing in any committed pipeline evaluated population_collapse,
+      # negative_stock, unbounded_growth or memory_watermark. `if: always()` because a
+      # soak that FAILED is exactly the run whose findings a reader wants named.
+      - name: Tripwire registry over the weekly evidence
+        if: always()
+        run: node scripts/soak/evaluate-receipt.mjs --aggregate artifacts/soak/weekly.json
+
+      # DIAGNOSTIC log-artifact steps (no process.exit — they only print tables).
+      - name: Cause-lifecycle soak surfaces
+        run: node scripts/audit/cause-lifecycle-soak.mjs
+
+      - name: Conquest-market soak surfaces
+        run: node scripts/audit/conquest-market-soak.mjs
+
+      - name: War-cluster soak surfaces
+        run: node scripts/audit/war-cluster-soak.mjs
+
+      - name: Institution-ecology soak surfaces
+        run: node scripts/audit/institution-ecology-soak.mjs
+
+      - name: Religion-plane soak surfaces
+        run: node scripts/audit/religion-plane-soak.mjs --seeds 24 --ticks 120
+
+      - name: Upload commit-bound soak evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: realm-scale-evidence-${{ github.sha }}
+          path: artifacts/soak/
+          if-no-files-found: warn
+          retention-days: 90
+
+  # ── The census walkers, frozen registers asserted (opt-in) ──────────────────
+  # STASIS S6 (rule 38, 2026-09-23). The two census walkers red BY DESIGN on every
+  # member: the lighting walker asserts the frozen five-figure tuple in
+  # tests/lint/.lighting-census-baseline.json against the live estate, and the
+  # wiring walker pins docs/content/wiring-census.json byte-identical to a fresh
+  # build. Both registers are regenerated ONCE, at a train's terminal, so on the
+  # BLOCKING `Gate / test ratchet` job above they reported a declared delta rather
+  # than a defect — and a gate that is red on every branch hides the reds it exists
+  # to show. That job ran with CENSUS_STASIS=1 during the stasis and asserts again since the unfreeze of 2026-09-23 (799103301); THIS job is where the real
+  # assertion is observed, on the weekly cron and on demand, with no switch set.
+  # Its red is the observation STASIS-REGISTER row S6 promises, and the unfreeze
+  # train refreezes both registers once and moves the two files back onto the
+  # blocking job.
+  #
+  # NO LEDGER FETCH, and the absence is measured (2026-09-23): the ratchet job
+  # fetches refs/heads/review-fixes-2026-07-08 because two OTHER suites read it by
+  # ref. Neither census walker does — the lighting walker's only `git` call is the
+  # refreeze path's `git status --porcelain`, and the wiring walker shells out to no
+  # git at all. A ~200 MB fetch for a job that never reads the ref would be cargo.
+  census-stasis:  # deploy-gate: optional — weekly/manual, never reports on a push
+    name: Census stasis (weekly / manual)
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    # MEASURED on this lane's box, 2026-09-23, each walker alone through the gate
+    # mutex: the lighting walker 5-7s (34 tests), the wiring walker 10s (78 tests) —
+    # about 17s for the pair. The `check-tests` job's own comment puts this runner at
+    # 3.5x to 4.6x the local box, so the step is well under two minutes and npm ci
+    # dominates the job. 20 is what the three sibling weekly jobs carry, and a cap is
+    # raised with a fresh measurement, never lowered to match a run that was cut.
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # ⛔ CENSUS_STASIS IS DELIBERATELY UNSET HERE. That absence is the whole job.
+      - name: The census walkers with their registers asserted
+        run: >
+          sh scripts/gate-mutex.sh --run --
+          npx vitest run --pool=threads --maxWorkers=2
+          tests/lint/sovereigntyLightingContract.walker.test.js
+          tests/lint/proseWiringCensus.walker.test.js
+
+  # ── Production deploy gated on the full green gate (finding F35) ─────────────
+  # "The gate is the product": production must advance only through CI. This job
+  # runs ONLY after every required code/browser/performance/Deno gate passes,
+  # ONLY on master. It is a safe
+  # no-op until the operator finishes the dashboard half — set the VERCEL_TOKEN
+  # secret AND turn OFF Vercel's push auto-deploy (see docs/DEPLOY.md). Until
+  # then it logs and skips (green), so adding it can't break the current flow;
+  # once configured, CI becomes the ONLY path to production.
+  deploy:  # deploy-gate: optional — this job IS the deploy action, not a gate on it
+    name: Deploy to production (gated)
+    needs: [check, e2e, performance, deno-tests, coverage-floors, determinism-hostile-locale]
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Resolve deploy readiness
+        id: guard
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          if [ -n "$VERCEL_TOKEN" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "VERCEL_TOKEN not set — skipping CI deploy. Vercel push auto-deploy (if still enabled) handles production. See docs/DEPLOY.md to make CI the only path."
+          fi
+      - name: Deploy to Vercel (production)
+        if: steps.guard.outputs.ready == 'true'
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: npx vercel deploy --prod --token "$VERCEL_TOKEN" --yes
+
+  # ── Post-CI Vercel Deploy-Hook retrigger (composes with the fail-closed gate) ──
+  # The vercel.json `ignoreCommand` (scripts/vercel-ignore-build.mjs) is fail-
+  # CLOSED: a push-triggered Vercel build runs seconds after the push, long before
+  # CI can report, so that build is ALWAYS skipped ("checks not yet reported") and
+  # Vercel never re-evaluates on its own. This job closes the loop: on a master
+  # push, AFTER the same gating jobs the CI-native `deploy` job needs, it POSTs the
+  # Vercel Deploy Hook so a FRESH deployment runs with CI now green and the gate
+  # PROCEEDS. Opt-in via the VERCEL_DEPLOY_HOOK_URL secret — a no-op when unset, so
+  # nothing regresses for an operator who redeploys manually. This is the "Vercel-
+  # drives-the-deploy" half; the `deploy` job above is the "CI-drives-the-deploy"
+  # half — defense-in-depth, and either can ship once its secret is configured.
+  redeploy:  # deploy-gate: optional — the retrigger runs AFTER the gates; it must not gate itself
+    name: Retrigger Vercel deploy (post-CI)
+    needs: [check, e2e, performance, deno-tests, coverage-floors, determinism-hostile-locale]
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: POST the Vercel Deploy Hook (opt-in; no-op when the secret is unset)
+        env:
+          VERCEL_DEPLOY_HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -z "$VERCEL_DEPLOY_HOOK_URL" ]; then
+            echo "VERCEL_DEPLOY_HOOK_URL not set — skipping redeploy hook (manual/dashboard redeploy still works)."
+            exit 0
+          fi
+          curl -fsS -X POST "$VERCEL_DEPLOY_HOOK_URL"

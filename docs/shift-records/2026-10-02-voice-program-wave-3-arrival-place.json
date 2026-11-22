@@ -1,0 +1,22 @@
+{
+  "_doc": "THE THIRD RECORD OF THE VOICE PROGRAM (ODQ §934.88), for wave 3 alone: the arrival scene rebuilt as a place (d2dfd88b5). One cause, two surfaces, one surface per commit. The fact-neutrality receipt: over all 525 golden-master rows against 765af37e2, every top-level settlement key except arrivalScene and pressureSentence hashes identically, and pressureSentence itself does not move. The chair signs under the owner's \"build it all\" and \"I leave all judgment to you\" (VP-J5, vetoable). A successor chair does not inherit this signature.",
+  "ownerWords": "\"if you read the introductory paragraph to settlement. It's always bland.\" · \"each variant should insight something regarding either senses, culture, about the people, it should reference things like their trade dynamics, recent history or events, the economic makeup in the sense of if a big part of their output is in making military weapons. I want to have a sentence that says you hear the hammering echo throughout the city or if there's bread, then the smell of bread hits you as you walk through the gates. If there's corruption some visible sign.\" · \"I leave all judgment to you\" · \"build it all\"",
+  "ownerDate": "2026-10-02",
+  "odqRow": "§934.88 of docs/OWNER_DECISION_QUEUE.md (THE VOICE PROGRAM, recorded 2026-10-02 on the ledger branch review-fixes-2026-07-08 at 757c928ff)",
+  "cause": "ONE CAUSE: THE ARRIVAL SCENE IS A PLACE. Its tier template, slider-keyed magic line and restating addon retire; its beats speak the sound or smell of a trade the settlement practises, its people, and one visible truth, each drawn only where its fact is present. Only arrivalScene moves.",
+  "seat": "the Voice Program chair, session 93391427 (Opus 5.5), executing every door write itself from the committed tree of feat/herald-voice-2026-10-02, one surface per commit",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    }
+  ]
+}

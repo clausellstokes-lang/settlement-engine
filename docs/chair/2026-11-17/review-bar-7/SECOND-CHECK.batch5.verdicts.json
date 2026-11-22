@@ -1,0 +1,165 @@
+[
+ {
+  "id": "C0423",
+  "town": "bar0-city-under_siege+famine-rand-45",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "Daily markets · Economy · Impaired — pk/bar7-01.txt C0420 (the card carries the mark)",
+   "Fresh produce Impaired / Whatever the kitchen gardens still give, sold early and gone by mid-morning. / Daily markets — dump Systems/Services",
+   "Supply route severed. Operating at minimal capacity or shut down. — record economicState.tradeDependencies[Daily markets]"
+  ],
+  "note": "The chip stands under a card marked Impaired, and the Services tab marks the same service Impaired with a crisis-shaped description (what the kitchen gardens still give, gone by mid-morning), which fits grown 7%; no tab prints it bare under an unmarked house."
+ },
+ {
+  "id": "C0453",
+  "town": "bar0-city-under_siege+famine-rand-45",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "Multiple market squares · Economy · Impaired — pk/bar7-01.txt C0450",
+   "District trading Impaired / Each district has its own market square serving local needs. — dump Systems/Services",
+   "Trade by road, gate and water has stopped — dump Summary/Crisis"
+  ],
+  "note": "The house's card carries Impaired and the Services tab marks District trading Impaired; district squares inside the walls are not trade by road, gate or water. Same shape as C0423."
+ },
+ {
+  "id": "C0893",
+  "town": "bar0-city-under_siege+famine-rand-45",
+  "verdict": "STANDS",
+  "evidence": [
+   "Needed, and not brought in: iron ore, copper ore, gold and silver ore. — pk/bar7-01.txt C0893 (Economics tab, under 'The descriptions here are of ordinary times')",
+   "Smelter runs on imported iron ore — record resourceAnalysis.gaps[chain=iron ore, kind=imported]; header LAND gaps",
+   "Curtailed by the siege. Converts raw ore ... whenever ore can be had. / Services · Iron refining (curtailed) — dump Systems/Institutions, Smelter card",
+   "Iron & Metalwork Curtailed by the siege. Metal is smelted or worked here. — pk/bar7-01.txt C0876-C0877"
+  ],
+  "note": "The page has the smelter buying ore in ordinary times and cut off by the siege (Curtailed, not Short of iron ore; record gap 'runs on imported iron ore'), while this ordinary-times trade line says iron ore is never brought in: one house, two supply stories. The siege does not reconcile it, because the line sets iron ore apart from the imports (grain, salt) that the siege has also cut. The record's own primaryImports name only 'Iron (weapons)' and 'Chariot fittings and iron', not ore, so the record disagrees with itself here."
+ },
+ {
+  "id": "C0902",
+  "town": "bar0-city-under_siege+famine-rand-45",
+  "verdict": "WEAK",
+  "evidence": [
+   "Meals follow the season and what the household has put by. — pk/bar7-01.txt C0902 (record foodSecurity.foodRecord foodwaysLine)",
+   "Most households go short, and hunger is already here. / Stores: a granary, about three days of grain — pk/bar7-01.txt C0900-C0901",
+   "stores 0.1 months (granary True) — header FOOD"
+  ],
+  "note": "The reader's figure is correct (0.1 months). But the line is a neutral foodways habit, not a claim of plenty. Living on what was put by is what a famine forces, and the lines next to it state the hunger plainly. All that is off is the calm, ordinary-times tone ('follow the season') in a besieged city in famine."
+ },
+ {
+  "id": "C2821",
+  "town": "bar0-city-under_siege+famine-rand-46",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "Daily markets · Economy · Impaired — pk/bar7-02.txt C2818",
+   "Fresh produce Impaired / Whatever the kitchen gardens still give, sold early and gone by mid-morning. — dump Systems/Services",
+   "General trade Impaired / Household goods, small crafts, and everyday items. — dump Systems/Services",
+   "by magic 61% — header FOOD"
+  ],
+  "note": "The card carries Impaired and both services are marked Impaired on the Services tab, Fresh produce with a crisis-shaped description; no tab prints them bare under an unmarked house. Same shape as C0423 in the other city."
+ },
+ {
+  "id": "C2853",
+  "town": "bar0-city-under_siege+famine-rand-46",
+  "verdict": "STANDS",
+  "evidence": [
+   "Mint (official) · Economy / ... Services · Coin production — pk/bar7-02.txt C2849-C2853 (no mark on the card or the chip)",
+   "Coin production / Strike official coinage from bullion. ... / Mint (official) — dump Systems/Services (no Impaired, unlike Deposit accounts Impaired at Banking houses)",
+   "Mining & Coinage · Raw materials & fuel · Impaired / From Precious metal veins (depleted) / Normally yields Precious metals · Coin minting ... depend on metal ore from outside, which the siege has cut off. — dump Systems/Economics, Economic Flows",
+   "Precious metals (local gold and silver veins exhausted) — header TRADE imports; Smelter: Curtailed by the siege — pk/bar7-02.txt C2734"
+  ],
+  "note": "The mint strikes coin from bullion that, by TRADE, is bought in (the veins are exhausted). The page's own chain says coin minting depends on metal from outside, which the siege has cut off. Yet the mint and its chip carry no mark on either tab, which the brief's rule (1) counts as a real mismatch. The record has no trade dependency for the Mint, which is why it went unmarked."
+ },
+ {
+  "id": "C3863",
+  "town": "bar0-city-under_siege+famine-rand-46",
+  "verdict": "STANDS",
+  "evidence": [
+   "Whatever crime is organised at Svetoko has no rival, and no crew is contesting the streets with it. — pk/bar7-02.txt C3863",
+   "Criminal activity is coordinated enough to maintain routes and territories but lacks a single controlling authority. — pk/bar7-02.txt C3850",
+   "Several gangs may be competing. / Less predictable than a guild — pk/bar7-02.txt C3851-C3852"
+  ],
+  "note": "The same Defense section first says crime here has no single controlling authority, with routes and territories held and several gangs that may compete, and then flatly says it has no rival and no crew contests it. The 'may' hedge on C3851 does not save it: C3850 is flat and C3863 denies even the possibility, so the page prints X and not-X (second-check rule 1)."
+ },
+ {
+  "id": "C19407",
+  "town": "bar0-hamlet-under_siege-rand-47",
+  "verdict": "STANDS",
+  "evidence": [
+   "Reliance on magic: Relied upon · for food (magical provision) · supplied by Access to a house of worship — pk/bar7-09.txt C19407",
+   "Stopped by the siege. The nearest house of worship is the village's, usually a few miles off. — pk/bar7-09.txt C19076",
+   "Production: 54 lbs/day+ 44 by magical provision ... Magical provision makes up about a quarter of what it needs. — dump Systems/Economics, Food Security",
+   "The siege has cut every road in — dump Systems/Outlook"
+  ],
+  "note": "The only supplier the page names for the hamlet's magical food is a house a few miles off that the page marks Stopped by the siege, with every road cut. Yet the food ledger has magic feeding a quarter of the hamlet now. One of the two lines must be false. The hamlet has no arcane house of its own to fill the gap (DEFENCE magic none; 'No arcane practitioners on the rolls', C19391)."
+ },
+ {
+  "id": "C36585",
+  "town": "bar0-town-occupied-rand-45",
+  "verdict": "STANDS",
+  "evidence": [
+   "\"The Succession Crisis aside, the history here is long and steady, and travellers remember the place kindly\" — pk/bar7-17.txt C36585 (record history.historicalCharacter)",
+   "held, for now, by another power — pk/bar7-17.txt C36584; The occupiers ... are the same faces as last season — C36594",
+   "The settlement always made its own decisions, or believed it did. Under occupation, it no longer does. — record history.founding.stressNote",
+   "CRISIS: Under Occupation · stability: Suppressed (under occupation: resistance simmers) — header"
+  ],
+  "note": "The epigraph names the Succession Crisis as the one break in a steady history and leaves out an occupation that has held the town since at least last season. That is a calm-times reassurance printed with no mark under a live crisis (second-check rule 3). PAST lacks the occupation only because it is current, and nothing in the town makes the history 'steady'."
+ },
+ {
+  "id": "C36591",
+  "town": "bar0-town-occupied-rand-45",
+  "verdict": "STANDS",
+  "evidence": [
+   "Racks of drying fish line the way in, and the smell of salt and catch is everywhere. — pk/bar7-17.txt C36591",
+   "Fish & Preserved Produce The fishery here is fished out; the fish sold now is salted and bought in. — pk/bar7-17.txt C37093",
+   "River Fisheries (depleted); imports: Salted fish (local river fishery exhausted) — header LAND, TRADE; config.nearbyResourcesDepleted",
+   "Little is left worth taking from the river fisheries at Agiichorio this year — dump Systems/Resources"
+  ],
+  "note": "The arrival scene shows a local catch being cured on racks along the way in, yet the town has no fisher's house, its fishery is worked out, and the page says the fish now sold is salted and bought in. Fish bought in already salted is not hung to dry, and the fish market's card hedges 'whenever fish can be had', which does not reconcile the scene. Same fault as C36970."
+ },
+ {
+  "id": "C36970",
+  "town": "bar0-town-occupied-rand-45",
+  "verdict": "STANDS",
+  "evidence": [
+   "Fresh fish retail / Fish sold daily from the morning catch. / Selection varies by season. / Fish market — pk/bar7-17.txt C36969-C36972 (no mark; not Vulnerable like the rows around it)",
+   "The fishery here is fished out; the fish sold now is salted and bought in. — pk/bar7-17.txt C37093",
+   "River Fishing · Food security · Impaired / River fisheries (depleted) — dump Systems/Economics"
+  ],
+  "note": "Story (2) of the brief would allow the fish market to sell bought-in salted fish unmarked, but this row flatly says fresh fish from the morning catch, sold daily, which the Economics tab denies on the same page (rule 1, PAIR). Same fault as C36591."
+ },
+ {
+  "id": "C43392",
+  "town": "bar0-village-famine-rand-45",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "failed source fish — header FOOD; record economicState.foodSecurity.foodRecord.foodSources ['fish'], chains 'Fishing & water': true, 'Grain & agriculture': false",
+   "Fish market · Economy / Scarce in the famine. An open-air stall ... where the day's catch is sold. — dump Systems/Institutions",
+   "Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats. — dump, River boatyard card; trade access river — header TOWN",
+   "Secret: Buys fish from boats that fished where they are forbidden to — dump World/NPCs, Master Fishmonger"
+  ],
+  "note": "The reader's premise ('no fishing') is wrong on this town's facts. The village sits on a river and has a fish market selling the day's catch, a boatyard building fishing boats and fishing boats in its fishmonger's secret. The record names fish as its only food source, and that is the source that failed. The Harvest 52% figure the reader cites is a money share, not a food ledger."
+ },
+ {
+  "id": "C43737",
+  "town": "bar0-village-famine-rand-45",
+  "verdict": "EXPLAINED",
+  "evidence": [
+   "Of the food Vedamala raises for itself, its fishing comes first — pk/bar7-21.txt C43737",
+   "foodSources: ['fish'], failedSource: 'fish'; chains: 'Fishing & water': true, 'Grain & agriculture': false — record economicState.foodSecurity",
+   "Fish market ... where the day's catch is sold / Services · Fresh fish retail (scarce) — dump Systems/Institutions",
+   "Harvest What the households grow and raise on their holdings; the main living at this scale. — dump Systems/Economics (income, not food)"
+  ],
+  "note": "Same ground as C43392: the record's food ledger puts fishing first (its only food source), and the page shows river fishing through the fish market, the boatyard's fishing boats and the river access. The Farmland premise rests on an income share, which ranks money, not food."
+ },
+ {
+  "id": "C44634",
+  "town": "bar0-village-famine-rand-46",
+  "verdict": "STANDS",
+  "evidence": [
+   "A reeve elected from the peasantry manages labour and mediates disputes under noble oversight. — pk/bar7-22.txt C44634 (record powerStructure.factions[Elected Reeve].desc)",
+   "GOVERNMENT: Elected Reeve ... powers: Elected Reeve (Dominant); Grain Holders (Strong) — header",
+   "HOUSES (9, the whole list): Farmland; Common grazing land; Mill; Parish church; Graveyard; Priest (resident); Village reeve; Dwellings (15-100); Multiple water sources — header; trade access isolated",
+   "PEOPLE (2): Ogmund Thorsson (m), the miller ...; Unn Ragnarsson (f), the priest — header"
+  ],
+  "note": "The town has no noble anywhere: no noble power, no lord's steward or manor, no noble in PEOPLE, and no neighbour relationship (record neighborRelationship null). 'Noble' appears in the whole record only in this one stock description, so the line presumes an overseeing power the town does not have."
+ }
+]

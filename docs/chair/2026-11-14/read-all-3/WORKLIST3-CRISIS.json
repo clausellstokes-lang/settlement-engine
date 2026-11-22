@@ -1,0 +1,525 @@
+[
+{
+"id": "16606",
+"sev": "MED",
+"n": 89,
+"town": "r2s-famine-town-1",
+"section": "Journal/Crisis",
+"fold": "Merchant Guilds no stake yet: it could side with either camp.",
+"text": "Merchant Guilds no stake yet: it could side with either camp.",
+"why": "says Merchant Guilds has no stake yet; QUARRELS has Merchant oligarchy vs Merchant Guilds at high intensity",
+"kinds": [
+"BROKEN",
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisCast.js",
+"line": 240,
+"fn": "STAKE_REASONS"
+}
+},
+{
+"id": "20361",
+"sev": "MED",
+"n": 41,
+"town": "r2s-plague_onset-metropolis-0",
+"section": "Journal/Crisis",
+"fold": "Noble Houses no stake yet: it could side with either camp.",
+"text": "Noble Houses no stake yet: it could side with either camp.",
+"why": "Noble Houses 'no stake yet'; QUARRELS has Royal Authority vs Noble Houses (moderate, broken promise of support)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisCast.js",
+"line": 240,
+"fn": "STAKE_REASONS"
+}
+},
+{
+"id": "27937",
+"sev": "MED",
+"n": 24,
+"town": "r2r-thorp-58",
+"section": "Journal/Plot Hooks",
+"fold": "The settlement is starving, and its hungriest are turning to banditry. (Survival Crisis)",
+"text": "The settlement is starving, and its hungriest are turning to banditry. (Survival Crisis)",
+"why": "'starving', hungriest turning to banditry; stores 1.9 months, thorp of 7 with one named person; header crisis is siege only",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/economy/outlookHookSiblings.js",
+"line": 93,
+"fn": "OUTLOOK_HOOK_SIBLINGS"
+}
+},
+{
+"id": "20281",
+"sev": "MED",
+"n": 22,
+"town": "r2s-famine-city-0",
+"section": "Journal/Crisis",
+"fold": "Noble Families no stake yet: it could side with either camp.",
+"text": "Noble Families no stake yet: it could side with either camp.",
+"why": "Noble Families has no stake yet; QUARRELS has Noble Families vs Royal Authority moderate, relation tense and declining",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisCast.js",
+"line": 240,
+"fn": "STAKE_REASONS"
+}
+},
+{
+"id": "01755",
+"sev": "MED",
+"n": 14,
+"town": "r2r-thorp-52",
+"section": "PDF/Cover",
+"fold": "<N> looks calm, but its offices are # empty and orders go unanswered; # of its strongest powers has turned against those in charge.",
+"text": "Fjordaker looks calm, but its offices are half empty and orders go unanswered; one of its strongest powers has turned against those in charge.",
+"why": "'looks calm' and 'one of its strongest powers has turned': safety is Dangerous, GOVERNMENT lists one power only; roster of one",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisSummaryVantage.js",
+"line": 332,
+"fn": "CRISIS_SUMMARY_POOLS"
+}
+},
+{
+"id": "10399",
+"sev": "MED",
+"n": 12,
+"town": "r2s-mass_migration-thorp-3",
+"section": "PDF/Overview",
+"fold": "Food in <N> is running short with so many more to feed, and there is not work enough for the newcomers.",
+"text": "Food in Qal'atqala is running short with so many more to feed, and there is not work enough for the newcomers.",
+"why": "says food is running short; FOOD word Secure, grown 106%, gap 0%, surplus 6%",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisSummaryVantage.js",
+"line": 444,
+"fn": "CRISIS_SUMMARY_POOLS"
+}
+},
+{
+"id": "16309",
+"sev": "MED",
+"n": 12,
+"town": "r2s-mass_migration-thorp-3",
+"section": "Journal/Overview",
+"fold": "Mass Migration: Food in <N> is running short with so many more to feed, and there is not work enough for the newcomers.",
+"text": "Mass Migration: Food in Qal'atqala is running short with so many more to feed, and there is not work enough for the newcomers.",
+"why": "says food is running short; FOOD word Secure, grown 106%, gap 0%, surplus 6%",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisSummaryVantage.js",
+"line": 444,
+"fn": "CRISIS_SUMMARY_POOLS"
+}
+},
+{
+"id": "13667",
+"sev": "MED",
+"n": 11,
+"town": "r2s-wartime-thorp-2",
+"section": "PDF/Cover",
+"fold": "In <N> the food stores are guarded day and night, and nobody carrying a sack goes unquestioned.",
+"text": "In Hadithaoasis the food stores are guarded day and night, and nobody carrying a sack goes unquestioned.",
+"why": "food stores guarded day and night; granary False, stores 0.1 months, DEFENCE watch, garrison and militia none, thorp of 9",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/crisis/crisisSummaryVantage.js",
+"line": 101,
+"fn": "CRISIS_SUMMARY_POOLS"
+}
+},
+{
+"id": "01620",
+"sev": "MED",
+"n": 9,
+"town": "r2s-wartime-thorp-2",
+"section": "PDF/Cover",
+"fold": "<N> is in a kingdom at war: army carts pass through, and the war is all anyone talks about.",
+"text": "Hadithaoasis is in a kingdom at war: army carts pass through, and the war is all anyone talks about.",
+"why": "army carts pass through; trade access isolated, exports and imports none, thorp of 9",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisSummaryVantage.js",
+"line": 410,
+"fn": "CRISIS_SUMMARY_POOLS"
+}
+},
+{
+"id": "28443",
+"sev": "MED",
+"n": 9,
+"town": "r2s-wartime-thorp-2",
+"section": "PDF/Overview",
+"fold": "The war is far from <N>, but it touches every household: the prices, the news, the carts going by.",
+"text": "The war is far from Hadithaoasis, but it touches every household: the prices, the news, the carts going by.",
+"why": "carts going by touch every household; trade access isolated, no imports or exports",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisSummaryVantage.js",
+"line": 416,
+"fn": "CRISIS_SUMMARY_POOLS"
+}
+},
+{
+"id": "30535",
+"sev": "MED",
+"n": 9,
+"town": "r2s-wartime-thorp-2",
+"section": "Journal/Overview",
+"fold": "Wartime: The war is far from <N>, but it touches every household: the prices, the news, the carts going by.",
+"text": "Wartime: The war is far from Hadithaoasis, but it touches every household: the prices, the news, the carts going by.",
+"why": "carts going by; trade access isolated, no imports or exports",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisSummaryVantage.js",
+"line": 416,
+"fn": "CRISIS_SUMMARY_POOLS"
+}
+},
+{
+"id": "09896",
+"sev": "MED",
+"n": 9,
+"town": "r2s-plague_onset-thorp-0",
+"section": "PDF/Cover",
+"fold": "Fewer people come to market in <N> since the sickness began, and some goods have stopped arriving altogether.",
+"text": "Fewer people come to market in Huzhou since the sickness began, and some goods have stopped arriving altogether.",
+"why": "fewer people come to market; HOUSES has no market, thorp of 14",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/crisis/crisisSummaryVantage.js",
+"line": 256,
+"fn": "CRISIS_SUMMARY_POOLS"
+}
+},
+{
+"id": "15776",
+"sev": "MED",
+"n": 9,
+"town": "r2s-monster_pressure-thorp-3",
+"section": "PDF/Cover",
+"fold": "Lookouts around <N> watch the roads and the edges of the fields, and nobody lingers outside once the light goes.",
+"text": "Lookouts around Chalmul watch the roads and the edges of the fields, and nobody lingers outside once the light goes.",
+"why": "lookouts watch the roads; DEFENCE shows watch none and no one under arms; population 10",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/crisis/crisisSummaryVantage.js",
+"line": 309,
+"fn": "CRISIS_SUMMARY_POOLS"
+}
+},
+{
+"id": "22263",
+"sev": "MED",
+"n": 9,
+"town": "r2s-plague_onset-town-1",
+"section": "Journal/Crisis",
+"fold": "Quarantine Council no stake yet: it could side with either camp.",
+"text": "Quarantine Council no stake yet: it could side with either camp.",
+"why": "Quarantine Council has no stake yet; QUARRELS has Corrupt Council vs Quarantine Council in high conflict over a levy",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/domain/crisis/crisisCast.js",
+"line": 240,
+"fn": "STAKE_REASONS"
+}
+},
+{
+"id": "29529",
+"sev": "MED",
+"n": 8,
+"town": "r2s-plague_onset-thorp-2",
+"section": "PDF/Overview",
+"fold": "Travel is discouraged in <N>, fewer come to market, and the goods the carts used to bring run short.",
+"text": "Travel is discouraged in Miropol, fewer come to market, and the goods the carts used to bring run short.",
+"why": "fewer come to market; HOUSES has no market, thorp of 9",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/crisis/crisisSummaryVantage.js",
+"line": 261,
+"fn": "CRISIS_SUMMARY_POOLS"
+}
+},
+{
+"id": "08228",
+"sev": "MED",
+"n": 8,
+"town": "r2s-plague_onset-thorp-2",
+"section": "Journal/Overview",
+"fold": "Disease Outbreak: Travel is discouraged in <N>, fewer come to market, and the goods the carts used to bring run short.",
+"text": "Disease Outbreak: Travel is discouraged in Miropol, fewer come to market, and the goods the carts used to bring run short.",
+"why": "fewer come to market; HOUSES has no market, thorp of 9",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/domain/crisis/crisisSummaryVantage.js",
+"line": 261,
+"fn": "CRISIS_SUMMARY_POOLS"
+}
+},
+{
+"id": "22718",
+"sev": "MED",
+"n": 8,
+"town": "r2s-slave_revolt-town-0",
+"section": "Journal/Crisis",
+"fold": "Revolt Leadership no stake yet: it could side with either camp.",
+"text": "Revolt Leadership no stake yet: it could side with either camp.",
+"why": "says Revolt Leadership has no stake and could side with either camp; CRISIS is the Slave Revolt and PEOPLE name its leader, so it leads the revolt",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisCast.js",
+"line": 240,
+"fn": "STAKE_REASONS"
+}
+},
+{
+"id": "25559",
+"sev": "MED",
+"n": 7,
+"town": "r2s-famine-metropolis-2",
+"section": "Journal/Crisis",
+"fold": "The Arcane Circle no stake yet: it could side with either camp.",
+"text": "The Arcane Circle no stake yet: it could side with either camp.",
+"why": "The Arcane Circle has no stake yet; QUARRELS has City-State Council vs The Arcane Circle at high intensity (an unpaid debt)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisCast.js",
+"line": 240,
+"fn": "STAKE_REASONS"
+}
+},
+{
+"id": "31407",
+"sev": "MED",
+"n": 5,
+"town": "r2s-mass_migration-thorp-2",
+"section": "PDF/Cover",
+"fold": "With so many new mouths in <N>, food is running short and there is not work for everyone who wants it.",
+"text": "With so many new mouths in Malopol, food is running short and there is not work for everyone who wants it.",
+"why": "says food is running short; FOOD word Secure, grown 107%, gap 0%, surplus 8%",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisSummaryVantage.js",
+"line": 439,
+"fn": "CRISIS_SUMMARY_POOLS"
+}
+},
+{
+"id": "26048",
+"sev": "MED",
+"n": 3,
+"town": "r2s-plague_onset-metropolis-0",
+"section": "Journal/Crisis",
+"fold": "The Shield Compact no stake yet: it could side with either camp.",
+"text": "The Shield Compact no stake yet: it could side with either camp.",
+"why": "The Shield Compact 'no stake yet'; QUARRELS has Royal Authority vs The Shield Compact (a ruling one power refuses to obey)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisCast.js",
+"line": 240,
+"fn": "STAKE_REASONS"
+}
+},
+{
+"id": "20882",
+"sev": "MED",
+"n": 3,
+"town": "r2s-occupied-thorp-1",
+"section": "Journal/Crisis",
+"fold": "Occupation Authority gains: the military gains in a vacuum of governance.",
+"text": "Occupation Authority gains: the military gains in a vacuum of governance.",
+"why": "occupier gains in a vacuum of governance; Elder Council is governing, CRISIS is occupation and famine, no leadership void",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisCast.js",
+"line": 229,
+"fn": "STAKE_REASONS"
+}
+},
+{
+"id": "13909",
+"sev": "MED",
+"n": 3,
+"town": "r2s-indebted-town-1",
+"section": "Journal/Plot Hooks",
+"fold": "In the debt crisis, <N> of Merchant Guilds is the # who would come to terms: a member of the merchants' power, with the seat itself in dispute. (Indebted to Outside Power)",
+"text": "In the debt crisis, Reiko Inoue of Merchant Guilds is the one who would come to terms: a member of the merchants' power, with the seat itself in dispute. (Indebted to Outside Power)",
+"why": "'the seat itself in dispute': crisis is debt, Corrupt Council governs, QUARRELS none; Reiko Inoue is craft-guild master, no council seat shown",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisHooks.js",
+"line": 89,
+"fn": "LINE_ROLE_CLAUSE"
+}
+},
+{
+"id": "07387",
+"sev": "MED",
+"n": 2,
+"town": "r2r-metropolis-29",
+"section": "Journal/Crisis",
+"fold": "Craft Guilds gains: the merchants gain while the seat is endorsed.",
+"text": "Craft Guilds gains: the merchants gain while the seat is endorsed.",
+"why": "says Craft Guilds gain because 'the merchants gain'; Craft Guilds are Suppressed and in escalating competition with Merchant Guilds, a high quarrel with the council",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisCast.js",
+"line": 231,
+"fn": "STAKE_REASONS"
+}
+},
+{
+"id": "13939",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-58",
+"section": "Journal/Plot Hooks",
+"fold": "In the famine, <N> of Household Council takes the worst of it: # of the house the crisis hits; next in line, the first choice already holding a role that contradicts this #. (Famine)",
+"text": "In the famine, Anuradha Bhatt of Household Council takes the worst of it: one of the house the crisis hits; next in line, the first choice already holding a role that contradicts this one. (Famine)",
+"why": "garbled: 'one of the house the crisis hits; next in line, the first choice already holding a role that contradicts this one'",
+"kinds": [
+"BROKEN"
+],
+"writer": {
+"file": "src/domain/crisis/crisisCast.js",
+"line": 205,
+"fn": "CAST_REASONS"
+}
+},
+{
+"id": "13943",
+"sev": "MED",
+"n": 1,
+"town": "r2s-famine-village-1",
+"section": "Journal/Plot Hooks",
+"fold": "In the famine, <N> of Military/Guard takes the worst of it: # of the house the crisis hits; next in line, the first choice already holding a role that contradicts this #. (Famine)",
+"text": "In the famine, Emiko Guo of Military/Guard takes the worst of it: one of the house the crisis hits; next in line, the first choice already holding a role that contradicts this one. (Famine)",
+"why": "garbled 'one of the house the crisis hits; next in line, the first choice already holding a role that contradicts this one'; also prints 'Military/Guard'",
+"kinds": [
+"BROKEN"
+],
+"writer": {
+"file": "src/domain/crisis/crisisCast.js",
+"line": 205,
+"fn": "CAST_REASONS"
+}
+},
+{
+"id": "13999",
+"sev": "MED",
+"n": 1,
+"town": "r2s-mass_migration-village-0",
+"section": "Journal/Plot Hooks",
+"fold": "In the migration, <N> of Religious Authorities takes the worst of it: # of the house the crisis hits; next in line, the first choice already holding a role that contradicts this #. (Mass Migration)",
+"text": "In the migration, Kavya Kapoor of Religious Authorities takes the worst of it: one of the house the crisis hits; next in line, the first choice already holding a role that contradicts this one. (Mass Migration)",
+"why": "garbled clause: 'one of the house the crisis hits; next in line, the first choice already holding a role that contradicts this one'",
+"kinds": [
+"BROKEN"
+],
+"writer": {
+"file": "src/domain/crisis/crisisCast.js",
+"line": 205,
+"fn": "CAST_REASONS"
+}
+},
+{
+"id": "27012",
+"sev": "MED",
+"n": 1,
+"town": "r2s-insurgency-town-0",
+"section": "Journal/Plot Hooks",
+"fold": "The insurgency turns on the town hall, run by <N>: if it gives way, Military/Guard loses most, because its own people feel the crisis first. (Insurgency)",
+"text": "The insurgency turns on the town hall, run by Ghazi al-Rumi: if it gives way, Military/Guard loses most, because its own people feel the crisis first. (Insurgency)",
+"why": "town hall is run by the dean; Military/Guard is a Suppressed power, so naming it as the power that loses most contradicts the clergy-led hall under Church Council",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisCast.js",
+"line": 237,
+"fn": "STAKE_REASONS"
+}
+},
+{
+"id": "14045",
+"sev": "MED",
+"n": 1,
+"town": "r2s-monster_pressure-city-2",
+"section": "Journal/Plot Hooks",
+"fold": "In the raids, <N> of The Merchant Bloc takes the worst of it: # of the house the crisis hits; next in line, the first choice already holding a role that contradicts this #. (Beast & Raider Threat)",
+"text": "In the raids, Gangamma Kulkarni of The Merchant Bloc takes the worst of it: one of the house the crisis hits; next in line, the first choice already holding a role that contradicts this one. (Beast & Raider Threat)",
+"why": "'one of the house the crisis hits; next in line, the first choice already holding a role that contradicts this one' is unfilled template text, not a sentence",
+"kinds": [
+"BROKEN"
+],
+"writer": {
+"file": "src/domain/crisis/crisisCast.js",
+"line": 205,
+"fn": "CAST_REASONS"
+}
+},
+{
+"id": "14043",
+"sev": "MED",
+"n": 1,
+"town": "r2s-monster_pressure-metropolis-1",
+"section": "Journal/Plot Hooks",
+"fold": "In the raids, <N> of Military/Guard takes the worst of it: its people stand on the walls; next in line, the first choice already holding a role that contradicts this #. (Beast & Raider Threat)",
+"text": "In the raids, Bera Torvaldsson of Military/Guard takes the worst of it: its people stand on the walls; next in line, the first choice already holding a role that contradicts this one. (Beast & Raider Threat)",
+"why": "ends 'next in line, the first choice already holding a role that contradicts this one': an unfilled slot leaking template text",
+"kinds": [
+"BROKEN"
+],
+"writer": {
+"file": "src/domain/crisis/crisisCast.js",
+"line": 205,
+"fn": "CAST_REASONS"
+}
+}
+]

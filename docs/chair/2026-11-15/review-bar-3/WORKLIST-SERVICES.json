@@ -1,0 +1,147 @@
+[
+{
+"id": "C22221",
+"sev": "MED",
+"n": 142,
+"town": "bar0-metropolis-calm-rand-8",
+"section": "Systems/Services",
+"fold": "Fish sold daily from the morning catch.",
+"text": "Fish sold daily from the morning catch.",
+"why": "fish sold daily from the morning catch, no short mark; LAND has River Fisheries depleted, fishery exhausted, imports salted fish",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 952,
+"fn": "INSTITUTION_SERVICES.Fresh fish retail"
+}
+},
+{
+"id": "C5102",
+"sev": "MED",
+"n": 89,
+"town": "bar0-city-under_siege+famine-rand-8",
+"section": "Systems/Services",
+"fold": "Search the archive that cross-checks # road's report against another's.",
+"text": "Search the archive that cross-checks one road's report against another's.",
+"why": "Chroniclers' exchange services (archive, claim grading against every road) print unmarked and on offer, while the house row says Stopped by the siege",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/institutionServices.js",
+"line": 1707,
+"fn": "INSTITUTION_SERVICES.Archive consultation"
+}
+},
+{
+"id": "C14664",
+"sev": "MED",
+"n": 31,
+"town": "bar0-hamlet-under_siege-rand-7",
+"section": "Systems/Services",
+"fold": "Formal church forgiveness, delivered by clergy with flexible interpretations of canon.",
+"text": "Formal church forgiveness, delivered by clergy with flexible interpretations of canon.",
+"why": "Church forgiveness delivered by clergy; HOUSES has only Access to parish church, no church or clergy here",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/servicesGenerator.js",
+"line": 252,
+"fn": "generateAvailableServices"
+}
+},
+{
+"id": "C33899",
+"sev": "MED",
+"n": 31,
+"town": "bar0-village-calm-rand-7",
+"section": "Systems/Institutions",
+"fold": "Connection: Dairyman <N>",
+"text": "Connection: Dairyman Kyriake Gabalas",
+"why": "title 'Dairyman' for Kyriake Gabalas, who is female in PEOPLE",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C24313",
+"sev": "MED",
+"n": 13,
+"town": "bar0-thorp-calm-rand-6",
+"section": "Systems/Institutions",
+"fold": "No office, no title, no vote.",
+"text": "No office, no title, no vote.",
+"why": "'No office, no title, no vote' but PEOPLE: Zoran Popov is first (rank 1) of Elder Council, the governing power",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C13905",
+"sev": "MED",
+"n": 10,
+"town": "bar0-hamlet-under_siege-rand-6",
+"section": "Systems/Institutions",
+"fold": "Periodic marketEconomy",
+"text": "Periodic marketEconomy",
+"why": "Periodic market row has no siege mark and lists price discovery and trade facilitation as working; under the siege trade has stopped",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C14652",
+"sev": "MED",
+"n": 4,
+"town": "bar0-hamlet-under_siege-rand-7",
+"section": "Systems/Services",
+"fold": "The organization decides what flows through here.",
+"text": "The organization decides what flows through here.",
+"why": "Says an organization decides what flows and removes rivals; GOVERNMENT lists only Elder Council, HOUSES has no criminal power, only a waypoint",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/servicesGenerator.js",
+"line": 210,
+"fn": "generateAvailableServices"
+}
+},
+{
+"id": "C14655",
+"sev": "MED",
+"n": 4,
+"town": "bar0-hamlet-under_siege-rand-7",
+"section": "Systems/Services",
+"fold": "The guild adjudicates conflicts.",
+"text": "The guild adjudicates conflicts.",
+"why": "A guild adjudicates conflicts with final judgment; HOUSES has no guild and GOVERNMENT lists no such power",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/servicesGenerator.js",
+"line": 202,
+"fn": "generateAvailableServices"
+}
+}
+]

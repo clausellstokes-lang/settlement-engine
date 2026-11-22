@@ -1,0 +1,22 @@
+{
+  "_doc": "THE SECOND RECORD OF THE VOICE PROGRAM (ODQ §934.88), for wave 2 alone: the arrival scene and the pressure sentence each draw on their own named assembly substream (ed3768dc1), so the rebuilt arrival scene of wave 3 can change its draw count without moving a fact. One cause, two surfaces, one surface per commit. The fact-neutrality receipt: over all 525 golden-master rows every top-level settlement key except arrivalScene and pressureSentence hashes identically before and after. The chair signs under the owner's \"build it all\" and \"I leave all judgment to you\" (VP-J5, vetoable). A successor chair does not inherit this signature.",
+  "ownerWords": "\"if you read the introductory paragraph to settlement. It's always bland.\" · \"definetely research teh system for how we both select, choose, and join prose and pools. this is a complex system so i don't want ot break anything and keep everything consistent.\" · \"I leave all judgment to you\" · \"build it all\"",
+  "ownerDate": "2026-10-02",
+  "odqRow": "§934.88 of docs/OWNER_DECISION_QUEUE.md (THE VOICE PROGRAM, recorded 2026-10-02 on the ledger branch review-fixes-2026-07-08 at 757c928ff)",
+  "cause": "ONE CAUSE: THE ARRIVAL SCENE AND THE PRESSURE SENTENCE LEAVE THE SHARED STREAM. Each now reads a child stream keyed on its own label, so the same seed draws them from a different position and prints different words; no other key of the settlement moves.",
+  "seat": "the Voice Program chair, session 93391427 (Opus 5.5), executing every door write itself from the committed tree of feat/herald-voice-2026-10-02, one surface per commit",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    }
+  ]
+}

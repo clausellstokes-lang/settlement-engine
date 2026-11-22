@@ -1,0 +1,1059 @@
+{
+ "before120": {
+  "n": 120,
+  "crisisTowns": 81,
+  "crises": 137,
+  "etaCrisisCount": 0.358,
+  "etaAnyCrisis": 0.183,
+  "etaWithinTier": 0.027,
+  "hooksPerCrisisTown": 24.84,
+  "hooksPerCalmTown": 20.56,
+  "recordFindings": 93,
+  "pageFindings": 0,
+  "crisisHooksOnRecord": 0,
+  "byTier": [
+   {
+    "tier": "thorp",
+    "calm": 9.91,
+    "nCalm": 11,
+    "crisis": 9.89,
+    "nCrisis": 9
+   },
+   {
+    "tier": "hamlet",
+    "calm": null,
+    "nCalm": 0,
+    "crisis": 13.85,
+    "nCrisis": 20
+   },
+   {
+    "tier": "village",
+    "calm": 18.33,
+    "nCalm": 15,
+    "crisis": 17.4,
+    "nCrisis": 5
+   },
+   {
+    "tier": "town",
+    "calm": null,
+    "nCalm": 0,
+    "crisis": 26.2,
+    "nCrisis": 20
+   },
+   {
+    "tier": "city",
+    "calm": 32.15,
+    "nCalm": 13,
+    "crisis": 33.43,
+    "nCrisis": 7
+   },
+   {
+    "tier": "metropolis",
+    "calm": null,
+    "nCalm": 0,
+    "crisis": 40.05,
+    "nCrisis": 20
+   }
+  ]
+ },
+ "after120": {
+  "n": 120,
+  "crisisTowns": 81,
+  "crises": 137,
+  "etaCrisisCount": 0.463,
+  "etaAnyCrisis": 0.293,
+  "etaWithinTier": 0.161,
+  "hooksPerCrisisTown": 27.91,
+  "hooksPerCalmTown": 20.56,
+  "recordFindings": 93,
+  "pageFindings": 0,
+  "crisisHooksOnRecord": 249,
+  "byTier": [
+   {
+    "tier": "thorp",
+    "calm": 9.91,
+    "nCalm": 11,
+    "crisis": 11,
+    "nCrisis": 9
+   },
+   {
+    "tier": "hamlet",
+    "calm": null,
+    "nCalm": 0,
+    "crisis": 16.95,
+    "nCrisis": 20
+   },
+   {
+    "tier": "village",
+    "calm": 18.33,
+    "nCalm": 15,
+    "crisis": 18.8,
+    "nCrisis": 5
+   },
+   {
+    "tier": "town",
+    "calm": null,
+    "nCalm": 0,
+    "crisis": 30,
+    "nCrisis": 20
+   },
+   {
+    "tier": "city",
+    "calm": 32.15,
+    "nCalm": 13,
+    "crisis": 35.43,
+    "nCrisis": 7
+   },
+   {
+    "tier": "metropolis",
+    "calm": null,
+    "nCalm": 0,
+    "crisis": 44.05,
+    "nCrisis": 20
+   }
+  ]
+ },
+ "soakBefore600": {
+  "n": 600,
+  "crisisTowns": 554,
+  "crises": 655,
+  "etaC4c": 0.081,
+  "etaAnyCrisis": 0.009,
+  "etaWithinTier": 0.241,
+  "hooksPerCrisisTown": 23.12,
+  "hooksPerCalmTown": 22.76,
+  "addedHooks": 0,
+  "addedRecordFindings": 0,
+  "recordFindings": 210,
+  "pageFindings": 0,
+  "byTier": [
+   {
+    "tier": "thorp",
+    "calm": 10,
+    "crisis": 11.27
+   },
+   {
+    "tier": "hamlet",
+    "calm": 11.5,
+    "crisis": 14.28
+   },
+   {
+    "tier": "village",
+    "calm": 16.71,
+    "crisis": 18.25
+   },
+   {
+    "tier": "town",
+    "calm": 22.88,
+    "crisis": 24.66
+   },
+   {
+    "tier": "city",
+    "calm": 35.43,
+    "crisis": 32.9
+   },
+   {
+    "tier": "metropolis",
+    "calm": 40.88,
+    "crisis": 37.27
+   }
+  ]
+ },
+ "soakAfter600": {
+  "n": 600,
+  "crisisTowns": 554,
+  "crises": 655,
+  "etaC4c": 0.111,
+  "etaAnyCrisis": 0.059,
+  "etaWithinTier": 0.309,
+  "hooksPerCrisisTown": 25.12,
+  "hooksPerCalmTown": 22.76,
+  "addedHooks": 1111,
+  "addedRecordFindings": 0,
+  "recordFindings": 210,
+  "pageFindings": 0,
+  "byTier": [
+   {
+    "tier": "thorp",
+    "calm": 10,
+    "crisis": 12.74
+   },
+   {
+    "tier": "hamlet",
+    "calm": 11.5,
+    "crisis": 16.11
+   },
+   {
+    "tier": "village",
+    "calm": 16.71,
+    "crisis": 20.13
+   },
+   {
+    "tier": "town",
+    "calm": 22.88,
+    "crisis": 26.93
+   },
+   {
+    "tier": "city",
+    "calm": 35.43,
+    "crisis": 35.22
+   },
+   {
+    "tier": "metropolis",
+    "calm": 40.88,
+    "crisis": 39.54
+   }
+  ]
+ },
+ "calm": {
+  "before": [
+   {
+    "seed": "calm-hooks-0",
+    "tier": "thorp",
+    "record": "aac57f17aec1f82038b0e29dfea295bb3062485ca0ea8145e68ecb8f39752526",
+    "hooks": "1935098079a5abf593edf788374b9afa2d1652b9d83d750f36d054eb0f6e8849",
+    "n": 11
+   },
+   {
+    "seed": "calm-hooks-1",
+    "tier": "hamlet",
+    "record": "7ca3b8a1df24d4480f9ac0c30a8bebdb223ba10418b16e89eb6c348f4e12619d",
+    "hooks": "32f4fee979c5f2f354f5cc7f37b139d9904f063bc40323fe7d4fd71b8977303c",
+    "n": 14
+   },
+   {
+    "seed": "calm-hooks-2",
+    "tier": "village",
+    "record": "8048363fc481ddc989bf0ee9d0a5d6518f042c2331ae6253d3836238fc9fd8c6",
+    "hooks": "def757a608b904a2b7c5afb2545a0af9573aae2f1c5971a6ac3731429f6a791e",
+    "n": 17
+   },
+   {
+    "seed": "calm-hooks-3",
+    "tier": "town",
+    "record": "458b56cb0f04aef60c7fddc16358deffb29e5dcb759f059d61d231625722b2cf",
+    "hooks": "88a8fd4ddc62eef1f7b5f4fef72f51718b523547f4d2427c4dbe6488c6cb2f92",
+    "n": 25
+   },
+   {
+    "seed": "calm-hooks-4",
+    "tier": "city",
+    "record": "12a9b5708df214a2b4a0ba548c83d6206eada0da909488ab4068264349c4571e",
+    "hooks": "9315a0d7b396d622179aad8997893c2baafc8280147e5cc8de53ff333ae6f1da",
+    "n": 24
+   },
+   {
+    "seed": "calm-hooks-5",
+    "tier": "metropolis",
+    "record": "9bf1248d8e7115f9de7bdd745d3994edcdb0961e1a75aa6581e5c560a52b2f5b",
+    "hooks": "ba7288eefc8069b33b74e4fa92bcdf931d795eb4779ef836820943ac00c883c5",
+    "n": 39
+   },
+   {
+    "seed": "calm-hooks-6",
+    "tier": "thorp",
+    "record": "08638b460bee1e7bd5c5014e66cc6b613f83e0b330ded5919d501d863e7c7426",
+    "hooks": "3364196cff229401332ed629b6ad78306fe4e9e22bfa9de021674fee50bc4954",
+    "n": 11
+   },
+   {
+    "seed": "calm-hooks-7",
+    "tier": "hamlet",
+    "record": "0471a0be9c157f170a8721cc092584f88c8b2d0e16bd8f23810d053249b2b71d",
+    "hooks": "22b6ff74587e9fe0962d894d2abec0659f6e329a2a4c876f7e864164309aa0dd",
+    "n": 14
+   },
+   {
+    "seed": "calm-hooks-8",
+    "tier": "village",
+    "record": "bd44e958b712ca068ea47049a6355006227bb5e53f6f5476c03a0f9e459f6c4a",
+    "hooks": "10d2043aaa565abde8a0c27af97f8844f964e2b01ff7cd6a4a1fbc559f01609e",
+    "n": 20
+   },
+   {
+    "seed": "calm-hooks-9",
+    "tier": "town",
+    "record": "679f63718e46cf6851b6f8bd8eda832e7332c87bbc54fee639b0b5e63e77ab35",
+    "hooks": "1b95c1a3917b6991212587811a8e9076abd313a2cc6af13dc51467125ea951f3",
+    "n": 21
+   },
+   {
+    "seed": "calm-hooks-10",
+    "tier": "city",
+    "record": "8a63d3d8b575064ee38ec45b375d7fc5b5c8a73338a8747d1ae85f77c9c6fc8c",
+    "hooks": "1598bf9cd5a363454ad39028ed294e8f72e78b6303ec8f877fb871f61316f136",
+    "n": 32
+   },
+   {
+    "seed": "calm-hooks-11",
+    "tier": "metropolis",
+    "record": "751e1c56e04b5fd09d56da7c2e250d74b4581abe2716e703205768d2b6b4a12f",
+    "hooks": "f8591609e285c079a36828cd27eaa9e727180bff160e433cadc2c9d690482b3d",
+    "n": 43
+   },
+   {
+    "seed": "calm-hooks-12",
+    "tier": "thorp",
+    "record": "a5f3ffce5140252a24355c13494ef64c3d3d0b098401ad17eb1a073451dcb7b2",
+    "hooks": "ac0b77fb3f07a162a01863170112a7f3054ba25842e0bbdc733f7007da08e9b6",
+    "n": 7
+   },
+   {
+    "seed": "calm-hooks-13",
+    "tier": "hamlet",
+    "record": "184e53bf86d30b9cd60aaec6148cd571bb85102e3e11d79e23ad969616ba7efd",
+    "hooks": "5905165f9dde4bc07a5fc1129904e7bc73169d633b427a99540f5a19b0747dfa",
+    "n": 11
+   },
+   {
+    "seed": "calm-hooks-14",
+    "tier": "village",
+    "record": "4ac2b2cc46dc4d20c765419b7a773410e1473a6bd2269d470f777835166b4dd3",
+    "hooks": "e1a2072f926e43f5d8b96c3eebfbde3792b43d16f7209d39b649a16882b2e04f",
+    "n": 11
+   },
+   {
+    "seed": "calm-hooks-15",
+    "tier": "town",
+    "record": "6fd266add2875cce425901b950bdb47b00b1f1e4d43b4a168a881a3b0056c070",
+    "hooks": "1dca5cab0c4bb516b351256d9d334f9c33ad930c35523cfff06a6bc33d9f47d4",
+    "n": 19
+   },
+   {
+    "seed": "calm-hooks-16",
+    "tier": "city",
+    "record": "80015164993ed3dde498005453c8e94336136e099f291d40a0406c13033f5e69",
+    "hooks": "e17d504bf3e88d88d4d52a741979e11c126ee46bfbb407416d665ef545daea1e",
+    "n": 32
+   },
+   {
+    "seed": "calm-hooks-17",
+    "tier": "metropolis",
+    "record": "d5868e6a6c75bab1d8c115ef1570f5dfcaadbcd06194bf33bd18d96c40caa35e",
+    "hooks": "412615c23f3309614459dc1c25050a2bf842d307d65d3a328fba997fb90ccc5b",
+    "n": 47
+   },
+   {
+    "seed": "calm-hooks-18",
+    "tier": "thorp",
+    "record": "ffd7ef9d8aee0668c7499ea4c6c8d25803244fe1ff7a87d8c58d4977caaf1d9e",
+    "hooks": "82b54ee073b00445681f92d8c32edac553de2cad03d41043313264d4f60aef03",
+    "n": 14
+   },
+   {
+    "seed": "calm-hooks-19",
+    "tier": "hamlet",
+    "record": "3d340598f43513df1b98baf3ef1d2d4dfb9e8065b05b48c5c953366b70f4db4f",
+    "hooks": "4b8db37bbfdb3368bc413187ef7ccf024743de09273eac1d54214b1e4a7a1b2a",
+    "n": 14
+   },
+   {
+    "seed": "calm-hooks-20",
+    "tier": "village",
+    "record": "ba82bda47dd8e2b12d169d21ffb1bb73ac15386f58872fa6b04d9bd966b986f9",
+    "hooks": "1958e173413f801e2f36b82d5f877e49c12734226c6e81199c868d594a0b1aed",
+    "n": 19
+   },
+   {
+    "seed": "calm-hooks-21",
+    "tier": "town",
+    "record": "d38c25076df46cd66146ba42e370c87e1286c0f577c6ced0c0f0a4b98d9e9962",
+    "hooks": "7cb4432ccd8747955070ef2309c05d81defb3c5c4f8086025abf7e76ad6392da",
+    "n": 21
+   },
+   {
+    "seed": "calm-hooks-22",
+    "tier": "city",
+    "record": "834d889d06459b0111d896cfc354cb8d14150d78a8bb66d3c5e09e48affb54ed",
+    "hooks": "705edae5ca266fe63b835d748d4aa99937ab6b095fa6d897db23e8fce742ccc6",
+    "n": 33
+   },
+   {
+    "seed": "calm-hooks-23",
+    "tier": "metropolis",
+    "record": "283985e79f6c310af34f24929b0c94d267a122248dce0e19a78d00a3790513bc",
+    "hooks": "43d7db3be8a7596e14d66b1baeb9d5ff104ce426052fd94796ff967ea82e5a20",
+    "n": 37
+   },
+   {
+    "seed": "calm-hooks-24",
+    "tier": "thorp",
+    "record": "cd5329e5221db7415d6323fbed79c06764bba915396479cfcd27780d6a0fb930",
+    "hooks": "6474aca4ae275160a460a43d7914c667d9812dc8b99b34dac3e05a32a5bbda0e",
+    "n": 13
+   },
+   {
+    "seed": "calm-hooks-25",
+    "tier": "hamlet",
+    "record": "5bb4f8b4c46e58e4bc9fc418b6e9264066f789a9df0a1cf8010c44a59d4bff88",
+    "hooks": "35653e7116b36bc04de8b83e902a0d280febccb45080d7926d1c5be1968abf58",
+    "n": 12
+   },
+   {
+    "seed": "calm-hooks-26",
+    "tier": "village",
+    "record": "af64161b100375149a9578cadec7fe616851c402df2766783a46f56273a6103f",
+    "hooks": "bce170bf5da1d2c3c57c4767db8067882a2eaf3aa4f3401c96ccf86bc007afcf",
+    "n": 16
+   },
+   {
+    "seed": "calm-hooks-27",
+    "tier": "town",
+    "record": "cd6442123166df973f27998dab97eff405253b92158ec328cb0bbbed8afb1d2a",
+    "hooks": "2a6c3e5272d21d577b8eac2bb99c3da0204285ba9701f375cf0e36887c6fb317",
+    "n": 21
+   },
+   {
+    "seed": "calm-hooks-28",
+    "tier": "city",
+    "record": "df9feab45836132d98bfdc3acef946913a095e22abf1fb224a2010f45087ae32",
+    "hooks": "dc85adb73341303cac69025116d5607296591fded19d71753b06046744f12365",
+    "n": 30
+   },
+   {
+    "seed": "calm-hooks-29",
+    "tier": "metropolis",
+    "record": "1c3ebf055b0f97753fafb977919ab34ab8b4b0676688c24c12785d06f184d0a8",
+    "hooks": "22123942ff7eb5c8063bb8c8b04584c676207702865eaf5cb5e05eea9cf42fc2",
+    "n": 45
+   },
+   {
+    "seed": "calm-hooks-30",
+    "tier": "thorp",
+    "record": "da43ff3651ea1dd4cbd45713e146dff4767e76c6aa0926c6decc1cce4318eb88",
+    "hooks": "1cc0742e5abd25701b49ef02f13af162810bd18a60361a9ef5165af6ec3747c6",
+    "n": 8
+   },
+   {
+    "seed": "calm-hooks-31",
+    "tier": "hamlet",
+    "record": "be1eaaec6a7c60af683030905acd81ca095fb8973eadd2de2687157104c210db",
+    "hooks": "bf552da1c6f0297f8d9076e13cca57a6fbe95af48259090a1a19a8763da43dbb",
+    "n": 15
+   },
+   {
+    "seed": "calm-hooks-32",
+    "tier": "village",
+    "record": "247a0bb4b15bb4a3f2303c0677e3d67f80554617f807af0a69ce72370b79a370",
+    "hooks": "869407de9ee37e7ea97100031eab94d6e9e2a730e514b1907082aab399e5ae37",
+    "n": 13
+   },
+   {
+    "seed": "calm-hooks-33",
+    "tier": "town",
+    "record": "d66938db10d3c0bcd36f543db857a7c73c9d53e9e461ce6d8c2df9b4c92d5ff7",
+    "hooks": "524a8c2e4c2fc483db9c9394b4212a0cd14947589d26485e06d23b56553f5150",
+    "n": 20
+   },
+   {
+    "seed": "calm-hooks-34",
+    "tier": "city",
+    "record": "1aedac79ea1af580ec10841c78c3b1ae403a44b5e1250c26d85d71dbd59c15ab",
+    "hooks": "2a1abd99d5168e15a922dbfaed22582df6e7352baf39871f7423dd036e6ac3bb",
+    "n": 37
+   },
+   {
+    "seed": "calm-hooks-35",
+    "tier": "metropolis",
+    "record": "5eb9fca1eb9cb583eb99243f60930f164c26e6c277f6cf218a138c396eeb8596",
+    "hooks": "c10f1a43805b5ab20e071f64f963d109148eb6acf7f8237b3a7166895f63b6da",
+    "n": 38
+   },
+   {
+    "seed": "calm-hooks-36",
+    "tier": "thorp",
+    "record": "f93187490b4d2d78ed42eb7fccc3f0c4d49594e4f8f176dc69c6758287a52dfa",
+    "hooks": "08f6b5b9afd1ac9db006b5d694c1a6e46a303ba521f43e1a54fe451c23c47f0c",
+    "n": 12
+   },
+   {
+    "seed": "calm-hooks-37",
+    "tier": "hamlet",
+    "record": "1cc8a8b9f4b49cf904d317f68eeca7e71144387059215e0a3d56805b97b03624",
+    "hooks": "a7e1bb98e66cd1e222ee17f7a0cef541047f36dd3459bd8be54692dc33d42b3f",
+    "n": 11
+   },
+   {
+    "seed": "calm-hooks-38",
+    "tier": "village",
+    "record": "298feec703b05104d2aab1723e412ec0d82d6f898ffb4ff89e207d3b6dc89bc1",
+    "hooks": "e9d05fc63708eb6d38252b3177a77310bfd21050193c1a0464e3fd6966aac761",
+    "n": 17
+   },
+   {
+    "seed": "calm-hooks-39",
+    "tier": "town",
+    "record": "6c9f4d74ed81eb07ae03da9b8478159ebc4add6ce2e0065e70d5d4bb1f754af6",
+    "hooks": "ffbad63651ec996c1ac2792171ed3dfc1ed9aaf2466546ba3adabd7df00d9184",
+    "n": 23
+   },
+   {
+    "seed": "calm-hooks-40",
+    "tier": "city",
+    "record": "7dbcd35522000d25037f4c78e0ce76a4badeba085ad848c88b1fb15e4e2ada92",
+    "hooks": "8866f8e7d33ae0b68370382d03d25bdd2a3a886d97785818af061926e5e7443d",
+    "n": 32
+   },
+   {
+    "seed": "calm-hooks-41",
+    "tier": "metropolis",
+    "record": "ab1658cd826c55df7293363cecac3b5dc45bc82aa730e03f389a051add18164d",
+    "hooks": "d711e03437ef5567d84640873cb33223b693e7214879c62d39498c243998089e",
+    "n": 39
+   },
+   {
+    "seed": "calm-hooks-42",
+    "tier": "thorp",
+    "record": "312dc8a5882a2c14f9ea65828f96f64d9b393db79c80a4228195ec3101b3150a",
+    "hooks": "e216a57be820eefa78fbae6dc947f2b3741b70f0305e7763c38a3c4741fa3715",
+    "n": 7
+   },
+   {
+    "seed": "calm-hooks-43",
+    "tier": "hamlet",
+    "record": "58a22e8251642f475407fdeed1e130a946cc8751c5fbb23bbb09eeb52693031f",
+    "hooks": "29cb2bfb150c4e91ef82ff738061190965e9341662b49c011c54eb25720139a4",
+    "n": 15
+   },
+   {
+    "seed": "calm-hooks-44",
+    "tier": "village",
+    "record": "32d5f2082f7628eb192607a72e89a84190c4ec485594cd66c195cac8869dcce0",
+    "hooks": "f3762533bbbe16eff0f1b8de8877a3e60fc3fe3ed4a53b8105e968a5379b56b4",
+    "n": 24
+   },
+   {
+    "seed": "calm-hooks-45",
+    "tier": "town",
+    "record": "5b1d5577ab62d83cd7c77011e123671a2cf1da22ccd36a6a9184bbe365ed13a9",
+    "hooks": "4f37ab93bf5cb693eb0dabdb802c192c599978a052d5a7372c6976a311534776",
+    "n": 16
+   },
+   {
+    "seed": "calm-hooks-46",
+    "tier": "city",
+    "record": "23c5f547ca5bfc96926b9279d6300024005f02122195e851a4c023744ab9b8b1",
+    "hooks": "effc707cbad4325cfc4617252c38c50b267b7c8ac3a943f2ab10f906252cb524",
+    "n": 32
+   },
+   {
+    "seed": "calm-hooks-47",
+    "tier": "metropolis",
+    "record": "44a0eded737036b4ef6deb1fd79369fd5783718da6cc6ed98e0ba7ed5c9f5b4d",
+    "hooks": "1746762912137abfd598052d5c367b080cb54f6004c8a067edb323494ad3d924",
+    "n": 42
+   },
+   {
+    "seed": "calm-hooks-48",
+    "tier": "thorp",
+    "record": "552fb2257d3fbfa89b29cabf09076d88da471571d516d8fc89aa91b7988002b7",
+    "hooks": "4755be195187f64057ebb3347e103d53ebfb9020da7276a1666cfe60686dca0b",
+    "n": 10
+   },
+   {
+    "seed": "calm-hooks-49",
+    "tier": "hamlet",
+    "record": "28315f223206f325d4331517aa60c83320602da11683f04be386f97ba10a0175",
+    "hooks": "c144692dd9cac8b2b675d0a06089b4e5de2c5ec2b5f07f01e6f23266db69d991",
+    "n": 14
+   },
+   {
+    "seed": "calm-hooks-50",
+    "tier": "village",
+    "record": "ec81eb71628d084fefcc3c65efdd450ea894865dfe53992993c0be0650ef7d00",
+    "hooks": "d2a6ea61710fdd25d533e4b689713b42545f7aa8fedf15b1eb7e315700d1a599",
+    "n": 19
+   },
+   {
+    "seed": "calm-hooks-51",
+    "tier": "town",
+    "record": "ff0c8aa9fdd65d60c7b8f6cc5098705a1379009b2aa6e989616219eb1965127c",
+    "hooks": "23c90414ed2dbd541d5686bc7f6b416fd1bfc2df89a0289b38e9c0f90fc00666",
+    "n": 25
+   },
+   {
+    "seed": "calm-hooks-52",
+    "tier": "city",
+    "record": "feefe6b1e480c5d937ff692a33719c81256c9d2c28888f7b391a3f8a9f7850ee",
+    "hooks": "cb67fe29f63b78a02ac7fb12b463ead4c8d5ad49f5e270345bb46739180f25e9",
+    "n": 37
+   },
+   {
+    "seed": "calm-hooks-53",
+    "tier": "metropolis",
+    "record": "57fda25ae184bf4a2452dfb4c6ca0d2067018d736d7c7aa0d2fcae2d49797846",
+    "hooks": "4797c82a0a6b34848abe368d78e9669208b992d989f08edc2a8d8771d5c14640",
+    "n": 34
+   },
+   {
+    "seed": "calm-hooks-54",
+    "tier": "thorp",
+    "record": "3d223ecca4ac312b9a72a5ff628a0cf5fcdcc34f99e70e3e420784f6e941edd1",
+    "hooks": "1fc14c963c830decb0b66c49381152f6c31f30e426354e634565d692d903fb68",
+    "n": 8
+   },
+   {
+    "seed": "calm-hooks-55",
+    "tier": "hamlet",
+    "record": "24056990319a3445fa8876735c25fbb5913f8f0ddea81020d8808aeeca4cc6bc",
+    "hooks": "a89c72599c912e8385a4d9fefeb6d8f50ebb32a076ed7b76ea7cc814cdeb634f",
+    "n": 13
+   },
+   {
+    "seed": "calm-hooks-56",
+    "tier": "village",
+    "record": "a02a1935cd8c081d09d0bedafd131f6b06e7b8e944e4edc58a416b40dff09994",
+    "hooks": "aa537a015565daa19d896db7f087bc672c3de899596fae7ffbfe3444fe8321e3",
+    "n": 13
+   },
+   {
+    "seed": "calm-hooks-57",
+    "tier": "town",
+    "record": "d5c0aaac407da2e7d79f3a55c89effc65898ea0a64195a779ca4f8b7a550cc35",
+    "hooks": "97e6fa5feb354eacaa95620c32448f17e90b0a2458e3b735f1481810ba613f3b",
+    "n": 22
+   },
+   {
+    "seed": "calm-hooks-58",
+    "tier": "city",
+    "record": "7257fe258f294e09feedb36d48b0c3b4e6fb5529332fa122699e1438f3cf11f0",
+    "hooks": "127875929a65fa8c9fccbd93e62497a3e4d156a5e02fbebc0f7c52f6b3c51cde",
+    "n": 34
+   },
+   {
+    "seed": "calm-hooks-59",
+    "tier": "metropolis",
+    "record": "eaebca5bb5da565275ad16deb43abe327dca54995205762344c50b0ff970ed50",
+    "hooks": "07511c10ba361d17105170c97fd61959bb7d3fc0e2b88a65b43aba5d7ff76dcb",
+    "n": 37
+   }
+  ],
+  "after": [
+   {
+    "seed": "calm-hooks-0",
+    "tier": "thorp",
+    "record": "aac57f17aec1f82038b0e29dfea295bb3062485ca0ea8145e68ecb8f39752526",
+    "hooks": "1935098079a5abf593edf788374b9afa2d1652b9d83d750f36d054eb0f6e8849",
+    "n": 11
+   },
+   {
+    "seed": "calm-hooks-1",
+    "tier": "hamlet",
+    "record": "7ca3b8a1df24d4480f9ac0c30a8bebdb223ba10418b16e89eb6c348f4e12619d",
+    "hooks": "32f4fee979c5f2f354f5cc7f37b139d9904f063bc40323fe7d4fd71b8977303c",
+    "n": 14
+   },
+   {
+    "seed": "calm-hooks-2",
+    "tier": "village",
+    "record": "8048363fc481ddc989bf0ee9d0a5d6518f042c2331ae6253d3836238fc9fd8c6",
+    "hooks": "def757a608b904a2b7c5afb2545a0af9573aae2f1c5971a6ac3731429f6a791e",
+    "n": 17
+   },
+   {
+    "seed": "calm-hooks-3",
+    "tier": "town",
+    "record": "458b56cb0f04aef60c7fddc16358deffb29e5dcb759f059d61d231625722b2cf",
+    "hooks": "88a8fd4ddc62eef1f7b5f4fef72f51718b523547f4d2427c4dbe6488c6cb2f92",
+    "n": 25
+   },
+   {
+    "seed": "calm-hooks-4",
+    "tier": "city",
+    "record": "12a9b5708df214a2b4a0ba548c83d6206eada0da909488ab4068264349c4571e",
+    "hooks": "9315a0d7b396d622179aad8997893c2baafc8280147e5cc8de53ff333ae6f1da",
+    "n": 24
+   },
+   {
+    "seed": "calm-hooks-5",
+    "tier": "metropolis",
+    "record": "9bf1248d8e7115f9de7bdd745d3994edcdb0961e1a75aa6581e5c560a52b2f5b",
+    "hooks": "ba7288eefc8069b33b74e4fa92bcdf931d795eb4779ef836820943ac00c883c5",
+    "n": 39
+   },
+   {
+    "seed": "calm-hooks-6",
+    "tier": "thorp",
+    "record": "08638b460bee1e7bd5c5014e66cc6b613f83e0b330ded5919d501d863e7c7426",
+    "hooks": "3364196cff229401332ed629b6ad78306fe4e9e22bfa9de021674fee50bc4954",
+    "n": 11
+   },
+   {
+    "seed": "calm-hooks-7",
+    "tier": "hamlet",
+    "record": "0471a0be9c157f170a8721cc092584f88c8b2d0e16bd8f23810d053249b2b71d",
+    "hooks": "22b6ff74587e9fe0962d894d2abec0659f6e329a2a4c876f7e864164309aa0dd",
+    "n": 14
+   },
+   {
+    "seed": "calm-hooks-8",
+    "tier": "village",
+    "record": "bd44e958b712ca068ea47049a6355006227bb5e53f6f5476c03a0f9e459f6c4a",
+    "hooks": "10d2043aaa565abde8a0c27af97f8844f964e2b01ff7cd6a4a1fbc559f01609e",
+    "n": 20
+   },
+   {
+    "seed": "calm-hooks-9",
+    "tier": "town",
+    "record": "679f63718e46cf6851b6f8bd8eda832e7332c87bbc54fee639b0b5e63e77ab35",
+    "hooks": "1b95c1a3917b6991212587811a8e9076abd313a2cc6af13dc51467125ea951f3",
+    "n": 21
+   },
+   {
+    "seed": "calm-hooks-10",
+    "tier": "city",
+    "record": "8a63d3d8b575064ee38ec45b375d7fc5b5c8a73338a8747d1ae85f77c9c6fc8c",
+    "hooks": "1598bf9cd5a363454ad39028ed294e8f72e78b6303ec8f877fb871f61316f136",
+    "n": 32
+   },
+   {
+    "seed": "calm-hooks-11",
+    "tier": "metropolis",
+    "record": "751e1c56e04b5fd09d56da7c2e250d74b4581abe2716e703205768d2b6b4a12f",
+    "hooks": "f8591609e285c079a36828cd27eaa9e727180bff160e433cadc2c9d690482b3d",
+    "n": 43
+   },
+   {
+    "seed": "calm-hooks-12",
+    "tier": "thorp",
+    "record": "a5f3ffce5140252a24355c13494ef64c3d3d0b098401ad17eb1a073451dcb7b2",
+    "hooks": "ac0b77fb3f07a162a01863170112a7f3054ba25842e0bbdc733f7007da08e9b6",
+    "n": 7
+   },
+   {
+    "seed": "calm-hooks-13",
+    "tier": "hamlet",
+    "record": "184e53bf86d30b9cd60aaec6148cd571bb85102e3e11d79e23ad969616ba7efd",
+    "hooks": "5905165f9dde4bc07a5fc1129904e7bc73169d633b427a99540f5a19b0747dfa",
+    "n": 11
+   },
+   {
+    "seed": "calm-hooks-14",
+    "tier": "village",
+    "record": "4ac2b2cc46dc4d20c765419b7a773410e1473a6bd2269d470f777835166b4dd3",
+    "hooks": "e1a2072f926e43f5d8b96c3eebfbde3792b43d16f7209d39b649a16882b2e04f",
+    "n": 11
+   },
+   {
+    "seed": "calm-hooks-15",
+    "tier": "town",
+    "record": "6fd266add2875cce425901b950bdb47b00b1f1e4d43b4a168a881a3b0056c070",
+    "hooks": "1dca5cab0c4bb516b351256d9d334f9c33ad930c35523cfff06a6bc33d9f47d4",
+    "n": 19
+   },
+   {
+    "seed": "calm-hooks-16",
+    "tier": "city",
+    "record": "80015164993ed3dde498005453c8e94336136e099f291d40a0406c13033f5e69",
+    "hooks": "e17d504bf3e88d88d4d52a741979e11c126ee46bfbb407416d665ef545daea1e",
+    "n": 32
+   },
+   {
+    "seed": "calm-hooks-17",
+    "tier": "metropolis",
+    "record": "d5868e6a6c75bab1d8c115ef1570f5dfcaadbcd06194bf33bd18d96c40caa35e",
+    "hooks": "412615c23f3309614459dc1c25050a2bf842d307d65d3a328fba997fb90ccc5b",
+    "n": 47
+   },
+   {
+    "seed": "calm-hooks-18",
+    "tier": "thorp",
+    "record": "ffd7ef9d8aee0668c7499ea4c6c8d25803244fe1ff7a87d8c58d4977caaf1d9e",
+    "hooks": "82b54ee073b00445681f92d8c32edac553de2cad03d41043313264d4f60aef03",
+    "n": 14
+   },
+   {
+    "seed": "calm-hooks-19",
+    "tier": "hamlet",
+    "record": "3d340598f43513df1b98baf3ef1d2d4dfb9e8065b05b48c5c953366b70f4db4f",
+    "hooks": "4b8db37bbfdb3368bc413187ef7ccf024743de09273eac1d54214b1e4a7a1b2a",
+    "n": 14
+   },
+   {
+    "seed": "calm-hooks-20",
+    "tier": "village",
+    "record": "ba82bda47dd8e2b12d169d21ffb1bb73ac15386f58872fa6b04d9bd966b986f9",
+    "hooks": "1958e173413f801e2f36b82d5f877e49c12734226c6e81199c868d594a0b1aed",
+    "n": 19
+   },
+   {
+    "seed": "calm-hooks-21",
+    "tier": "town",
+    "record": "d38c25076df46cd66146ba42e370c87e1286c0f577c6ced0c0f0a4b98d9e9962",
+    "hooks": "7cb4432ccd8747955070ef2309c05d81defb3c5c4f8086025abf7e76ad6392da",
+    "n": 21
+   },
+   {
+    "seed": "calm-hooks-22",
+    "tier": "city",
+    "record": "834d889d06459b0111d896cfc354cb8d14150d78a8bb66d3c5e09e48affb54ed",
+    "hooks": "705edae5ca266fe63b835d748d4aa99937ab6b095fa6d897db23e8fce742ccc6",
+    "n": 33
+   },
+   {
+    "seed": "calm-hooks-23",
+    "tier": "metropolis",
+    "record": "283985e79f6c310af34f24929b0c94d267a122248dce0e19a78d00a3790513bc",
+    "hooks": "43d7db3be8a7596e14d66b1baeb9d5ff104ce426052fd94796ff967ea82e5a20",
+    "n": 37
+   },
+   {
+    "seed": "calm-hooks-24",
+    "tier": "thorp",
+    "record": "cd5329e5221db7415d6323fbed79c06764bba915396479cfcd27780d6a0fb930",
+    "hooks": "6474aca4ae275160a460a43d7914c667d9812dc8b99b34dac3e05a32a5bbda0e",
+    "n": 13
+   },
+   {
+    "seed": "calm-hooks-25",
+    "tier": "hamlet",
+    "record": "5bb4f8b4c46e58e4bc9fc418b6e9264066f789a9df0a1cf8010c44a59d4bff88",
+    "hooks": "35653e7116b36bc04de8b83e902a0d280febccb45080d7926d1c5be1968abf58",
+    "n": 12
+   },
+   {
+    "seed": "calm-hooks-26",
+    "tier": "village",
+    "record": "af64161b100375149a9578cadec7fe616851c402df2766783a46f56273a6103f",
+    "hooks": "bce170bf5da1d2c3c57c4767db8067882a2eaf3aa4f3401c96ccf86bc007afcf",
+    "n": 16
+   },
+   {
+    "seed": "calm-hooks-27",
+    "tier": "town",
+    "record": "cd6442123166df973f27998dab97eff405253b92158ec328cb0bbbed8afb1d2a",
+    "hooks": "2a6c3e5272d21d577b8eac2bb99c3da0204285ba9701f375cf0e36887c6fb317",
+    "n": 21
+   },
+   {
+    "seed": "calm-hooks-28",
+    "tier": "city",
+    "record": "df9feab45836132d98bfdc3acef946913a095e22abf1fb224a2010f45087ae32",
+    "hooks": "dc85adb73341303cac69025116d5607296591fded19d71753b06046744f12365",
+    "n": 30
+   },
+   {
+    "seed": "calm-hooks-29",
+    "tier": "metropolis",
+    "record": "1c3ebf055b0f97753fafb977919ab34ab8b4b0676688c24c12785d06f184d0a8",
+    "hooks": "22123942ff7eb5c8063bb8c8b04584c676207702865eaf5cb5e05eea9cf42fc2",
+    "n": 45
+   },
+   {
+    "seed": "calm-hooks-30",
+    "tier": "thorp",
+    "record": "da43ff3651ea1dd4cbd45713e146dff4767e76c6aa0926c6decc1cce4318eb88",
+    "hooks": "1cc0742e5abd25701b49ef02f13af162810bd18a60361a9ef5165af6ec3747c6",
+    "n": 8
+   },
+   {
+    "seed": "calm-hooks-31",
+    "tier": "hamlet",
+    "record": "be1eaaec6a7c60af683030905acd81ca095fb8973eadd2de2687157104c210db",
+    "hooks": "bf552da1c6f0297f8d9076e13cca57a6fbe95af48259090a1a19a8763da43dbb",
+    "n": 15
+   },
+   {
+    "seed": "calm-hooks-32",
+    "tier": "village",
+    "record": "247a0bb4b15bb4a3f2303c0677e3d67f80554617f807af0a69ce72370b79a370",
+    "hooks": "869407de9ee37e7ea97100031eab94d6e9e2a730e514b1907082aab399e5ae37",
+    "n": 13
+   },
+   {
+    "seed": "calm-hooks-33",
+    "tier": "town",
+    "record": "d66938db10d3c0bcd36f543db857a7c73c9d53e9e461ce6d8c2df9b4c92d5ff7",
+    "hooks": "524a8c2e4c2fc483db9c9394b4212a0cd14947589d26485e06d23b56553f5150",
+    "n": 20
+   },
+   {
+    "seed": "calm-hooks-34",
+    "tier": "city",
+    "record": "1aedac79ea1af580ec10841c78c3b1ae403a44b5e1250c26d85d71dbd59c15ab",
+    "hooks": "2a1abd99d5168e15a922dbfaed22582df6e7352baf39871f7423dd036e6ac3bb",
+    "n": 37
+   },
+   {
+    "seed": "calm-hooks-35",
+    "tier": "metropolis",
+    "record": "5eb9fca1eb9cb583eb99243f60930f164c26e6c277f6cf218a138c396eeb8596",
+    "hooks": "c10f1a43805b5ab20e071f64f963d109148eb6acf7f8237b3a7166895f63b6da",
+    "n": 38
+   },
+   {
+    "seed": "calm-hooks-36",
+    "tier": "thorp",
+    "record": "f93187490b4d2d78ed42eb7fccc3f0c4d49594e4f8f176dc69c6758287a52dfa",
+    "hooks": "08f6b5b9afd1ac9db006b5d694c1a6e46a303ba521f43e1a54fe451c23c47f0c",
+    "n": 12
+   },
+   {
+    "seed": "calm-hooks-37",
+    "tier": "hamlet",
+    "record": "1cc8a8b9f4b49cf904d317f68eeca7e71144387059215e0a3d56805b97b03624",
+    "hooks": "a7e1bb98e66cd1e222ee17f7a0cef541047f36dd3459bd8be54692dc33d42b3f",
+    "n": 11
+   },
+   {
+    "seed": "calm-hooks-38",
+    "tier": "village",
+    "record": "298feec703b05104d2aab1723e412ec0d82d6f898ffb4ff89e207d3b6dc89bc1",
+    "hooks": "e9d05fc63708eb6d38252b3177a77310bfd21050193c1a0464e3fd6966aac761",
+    "n": 17
+   },
+   {
+    "seed": "calm-hooks-39",
+    "tier": "town",
+    "record": "6c9f4d74ed81eb07ae03da9b8478159ebc4add6ce2e0065e70d5d4bb1f754af6",
+    "hooks": "ffbad63651ec996c1ac2792171ed3dfc1ed9aaf2466546ba3adabd7df00d9184",
+    "n": 23
+   },
+   {
+    "seed": "calm-hooks-40",
+    "tier": "city",
+    "record": "7dbcd35522000d25037f4c78e0ce76a4badeba085ad848c88b1fb15e4e2ada92",
+    "hooks": "8866f8e7d33ae0b68370382d03d25bdd2a3a886d97785818af061926e5e7443d",
+    "n": 32
+   },
+   {
+    "seed": "calm-hooks-41",
+    "tier": "metropolis",
+    "record": "ab1658cd826c55df7293363cecac3b5dc45bc82aa730e03f389a051add18164d",
+    "hooks": "d711e03437ef5567d84640873cb33223b693e7214879c62d39498c243998089e",
+    "n": 39
+   },
+   {
+    "seed": "calm-hooks-42",
+    "tier": "thorp",
+    "record": "312dc8a5882a2c14f9ea65828f96f64d9b393db79c80a4228195ec3101b3150a",
+    "hooks": "e216a57be820eefa78fbae6dc947f2b3741b70f0305e7763c38a3c4741fa3715",
+    "n": 7
+   },
+   {
+    "seed": "calm-hooks-43",
+    "tier": "hamlet",
+    "record": "58a22e8251642f475407fdeed1e130a946cc8751c5fbb23bbb09eeb52693031f",
+    "hooks": "29cb2bfb150c4e91ef82ff738061190965e9341662b49c011c54eb25720139a4",
+    "n": 15
+   },
+   {
+    "seed": "calm-hooks-44",
+    "tier": "village",
+    "record": "32d5f2082f7628eb192607a72e89a84190c4ec485594cd66c195cac8869dcce0",
+    "hooks": "f3762533bbbe16eff0f1b8de8877a3e60fc3fe3ed4a53b8105e968a5379b56b4",
+    "n": 24
+   },
+   {
+    "seed": "calm-hooks-45",
+    "tier": "town",
+    "record": "5b1d5577ab62d83cd7c77011e123671a2cf1da22ccd36a6a9184bbe365ed13a9",
+    "hooks": "4f37ab93bf5cb693eb0dabdb802c192c599978a052d5a7372c6976a311534776",
+    "n": 16
+   },
+   {
+    "seed": "calm-hooks-46",
+    "tier": "city",
+    "record": "23c5f547ca5bfc96926b9279d6300024005f02122195e851a4c023744ab9b8b1",
+    "hooks": "effc707cbad4325cfc4617252c38c50b267b7c8ac3a943f2ab10f906252cb524",
+    "n": 32
+   },
+   {
+    "seed": "calm-hooks-47",
+    "tier": "metropolis",
+    "record": "44a0eded737036b4ef6deb1fd79369fd5783718da6cc6ed98e0ba7ed5c9f5b4d",
+    "hooks": "1746762912137abfd598052d5c367b080cb54f6004c8a067edb323494ad3d924",
+    "n": 42
+   },
+   {
+    "seed": "calm-hooks-48",
+    "tier": "thorp",
+    "record": "552fb2257d3fbfa89b29cabf09076d88da471571d516d8fc89aa91b7988002b7",
+    "hooks": "4755be195187f64057ebb3347e103d53ebfb9020da7276a1666cfe60686dca0b",
+    "n": 10
+   },
+   {
+    "seed": "calm-hooks-49",
+    "tier": "hamlet",
+    "record": "28315f223206f325d4331517aa60c83320602da11683f04be386f97ba10a0175",
+    "hooks": "c144692dd9cac8b2b675d0a06089b4e5de2c5ec2b5f07f01e6f23266db69d991",
+    "n": 14
+   },
+   {
+    "seed": "calm-hooks-50",
+    "tier": "village",
+    "record": "ec81eb71628d084fefcc3c65efdd450ea894865dfe53992993c0be0650ef7d00",
+    "hooks": "d2a6ea61710fdd25d533e4b689713b42545f7aa8fedf15b1eb7e315700d1a599",
+    "n": 19
+   },
+   {
+    "seed": "calm-hooks-51",
+    "tier": "town",
+    "record": "ff0c8aa9fdd65d60c7b8f6cc5098705a1379009b2aa6e989616219eb1965127c",
+    "hooks": "23c90414ed2dbd541d5686bc7f6b416fd1bfc2df89a0289b38e9c0f90fc00666",
+    "n": 25
+   },
+   {
+    "seed": "calm-hooks-52",
+    "tier": "city",
+    "record": "feefe6b1e480c5d937ff692a33719c81256c9d2c28888f7b391a3f8a9f7850ee",
+    "hooks": "cb67fe29f63b78a02ac7fb12b463ead4c8d5ad49f5e270345bb46739180f25e9",
+    "n": 37
+   },
+   {
+    "seed": "calm-hooks-53",
+    "tier": "metropolis",
+    "record": "57fda25ae184bf4a2452dfb4c6ca0d2067018d736d7c7aa0d2fcae2d49797846",
+    "hooks": "4797c82a0a6b34848abe368d78e9669208b992d989f08edc2a8d8771d5c14640",
+    "n": 34
+   },
+   {
+    "seed": "calm-hooks-54",
+    "tier": "thorp",
+    "record": "3d223ecca4ac312b9a72a5ff628a0cf5fcdcc34f99e70e3e420784f6e941edd1",
+    "hooks": "1fc14c963c830decb0b66c49381152f6c31f30e426354e634565d692d903fb68",
+    "n": 8
+   },
+   {
+    "seed": "calm-hooks-55",
+    "tier": "hamlet",
+    "record": "24056990319a3445fa8876735c25fbb5913f8f0ddea81020d8808aeeca4cc6bc",
+    "hooks": "a89c72599c912e8385a4d9fefeb6d8f50ebb32a076ed7b76ea7cc814cdeb634f",
+    "n": 13
+   },
+   {
+    "seed": "calm-hooks-56",
+    "tier": "village",
+    "record": "a02a1935cd8c081d09d0bedafd131f6b06e7b8e944e4edc58a416b40dff09994",
+    "hooks": "aa537a015565daa19d896db7f087bc672c3de899596fae7ffbfe3444fe8321e3",
+    "n": 13
+   },
+   {
+    "seed": "calm-hooks-57",
+    "tier": "town",
+    "record": "d5c0aaac407da2e7d79f3a55c89effc65898ea0a64195a779ca4f8b7a550cc35",
+    "hooks": "97e6fa5feb354eacaa95620c32448f17e90b0a2458e3b735f1481810ba613f3b",
+    "n": 22
+   },
+   {
+    "seed": "calm-hooks-58",
+    "tier": "city",
+    "record": "7257fe258f294e09feedb36d48b0c3b4e6fb5529332fa122699e1438f3cf11f0",
+    "hooks": "127875929a65fa8c9fccbd93e62497a3e4d156a5e02fbebc0f7c52f6b3c51cde",
+    "n": 34
+   },
+   {
+    "seed": "calm-hooks-59",
+    "tier": "metropolis",
+    "record": "eaebca5bb5da565275ad16deb43abe327dca54995205762344c50b0ff970ed50",
+    "hooks": "07511c10ba361d17105170c97fd61959bb7d3fc0e2b88a65b43aba5d7ff76dcb",
+    "n": 37
+   }
+  ]
+ },
+ "calmIdentity": {
+  "seeds": 60,
+  "recordsIdentical": 60,
+  "hookListsIdentical": 60
+ }
+}

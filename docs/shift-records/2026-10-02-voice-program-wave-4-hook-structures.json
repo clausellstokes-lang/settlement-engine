@@ -1,0 +1,22 @@
+{
+  "_doc": "THE FOURTH RECORD OF THE VOICE PROGRAM (ODQ §934.88), for wave 4 block 1 alone: the arrival hook draws only stress vignettes whose named structures the settlement holds, and eleven structure-free vignettes join the pool (e76ea7f3c). One cause, two surfaces, one surface per commit. The fact-neutrality receipt: over all 525 golden-master rows against 5c12d56ee, every top-level settlement key except arrivalScene and pressureSentence hashes identically, and pressureSentence does not move. The chair signs under the owner's \"build it all\" and \"I leave all judgment to you\" (VP-J5, vetoable). A successor chair does not inherit this signature.",
+  "ownerWords": "\"we can have pools that speak to what's in the dossier and simply not contradicted rather than treat it as the only source of truth\" · \"definetely research teh system for how we both select, choose, and join prose and pools. this is a complex system so i don't want ot break anything and keep everything consistent.\" · \"I leave all judgment to you\" · \"build it all\"",
+  "ownerDate": "2026-10-02",
+  "odqRow": "§934.88 of docs/OWNER_DECISION_QUEUE.md (THE VOICE PROGRAM, recorded 2026-10-02 on the ledger branch review-fixes-2026-07-08 at 757c928ff)",
+  "cause": "ONE CAUSE: THE ARRIVAL HOOK NAMES ONLY WHAT THE SETTLEMENT HOLDS. A stress vignette that names a wall, gate, market, guard, granary or temple is drawn only where the settlement holds it, so the same seed draws from a narrower or wider pool. Only arrivalScene moves.",
+  "seat": "the Voice Program chair, session 93391427 (Opus 5.5), executing every door write itself from the committed tree of feat/herald-voice-2026-10-02, one surface per commit",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+# ── THE RESEARCH SOAK (SOAKCHAIN Car 4; DESIGN_HORIZON §4.1) ────────────────────
+# Tier 2: the three-hundred-year lit curve the tuning sitting signs against — "the re-run
+# must plateau, not explode slower". It is the ONE soak, flag-varied, on a schedule; not a
+# second soak script.
+#
+# ⛔ WHY THIS IS ITS OWN FILE AND NOT A SECOND CRON IN ci.yml. Every weekly job in ci.yml
+# gates on `github.event_name == 'schedule'` ALONE, so a second cron there would also fire
+# the mutation sweep, the religion soak, the generation certification and the 30-year
+# watchdog on THIS cadence. The file sits outside `ciCheckParity` by construction and
+# outside the deploy gate; the one ci.yml-only pin it escapes (setup-node reads .nvmrc) is
+# re-asserted in tests/soak-harness/soakRegister.test.js.
+#
+# ⛔ CI NEVER WRITES THE REGISTER. It runs `--compare … --propose` and uploads the proposal;
+# the chair mints on a clean tree. The first clean run is the freeze act.
+#
+# ⚠ THE RUNNER SEAM. `research-lit` (300 y × 12 s) is ~7 h before superlinearity and does
+# NOT fit a hosted runner's six-hour cap; `research-lit-4s` (300 y × 4 s) does. Owner row
+# SOAK-1 is RESOLVED to MANUAL — the repository is PUBLIC (measured, HTTP 200 anonymous), so
+# GitHub's own guidance refuses a self-hosted runner for it — and `vars.SOAK_RESEARCH_RUNNER`
+# is left as the seam should the owner ever provision a private one. Owner row SOAK-2 prices
+# the minutes (~2.5–3 h/week); SOAK-3 sets the cadence.
+name: Soak research (scheduled)  # deploy-gate: optional — scheduled/manual, never reports on a push
+
+on:
+  schedule:
+    - cron: '0 2 * * 6'
+  workflow_dispatch:
+    inputs:
+      profile:
+        description: 'Realm-scale profile to run (research-lit-4s fits a hosted runner; research-lit does not)'
+        required: false
+        default: 'research-lit-4s'
+
+jobs:
+  research-soak:
+    name: Three-hundred-year lit research soak
+    runs-on: ${{ vars.SOAK_RESEARCH_RUNNER || 'ubuntu-latest' }}
+    timeout-minutes: 360
+    env:
+      SOAK_PROFILE: ${{ inputs.profile || vars.SOAK_RESEARCH_PROFILE || 'research-lit-4s' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # The plan first, so a misconfigured profile is a five-second failure and not a
+      # six-hour one. It writes a `realm_scale_plan` receipt and executes no simulation.
+      - name: Plan the research matrix
+        run: node scripts/audit/realm-scale-certification.mjs --profile "$SOAK_PROFILE" --dry-run --output artifacts/soak/research-plan.json
+
+      - name: Three-hundred-year lit soak
+        run: node --max-old-space-size=6144 scripts/audit/realm-scale-certification.mjs --profile "$SOAK_PROFILE" --output artifacts/soak/research.json
+
+      # `if: always()` on both readers: a soak that FAILED is exactly the run whose findings
+      # and whose register comparison a reader wants, and skipping them would lose the report
+      # at the only moment it matters.
+      - name: Tripwire registry over the research evidence
+        if: always()
+        run: node scripts/soak/evaluate-receipt.mjs --aggregate artifacts/soak/research.json
+
+      # The case receipt is resolved FROM the aggregate, never spelled by hand, so a profile
+      # change cannot leave this step silently comparing nothing.
+      - name: Compare against the soak register and PROPOSE
+        if: always()
+        run: node scripts/soak/soak-register.mjs --compare --aggregate artifacts/soak/research.json --propose artifacts/soak/soak-register.proposed.json
+
+      - name: Upload research soak evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: soak-research-${{ github.sha }}
+          path: artifacts/soak/
+          if-no-files-found: warn
+          retention-days: 90

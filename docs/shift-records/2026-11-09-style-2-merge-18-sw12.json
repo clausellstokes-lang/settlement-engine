@@ -1,0 +1,22 @@
+{
+  "_doc": "RECORD 18 OF THE STYLE WAVE'S MERGE (STYLE-2-MERGE, carried by its second seat STYLE-2-MERGE-2), ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; a successor chair does not inherit this signature). THE LAW OF THE CHAIN (BRIEF-MERGE-CAR §0; BRIEF-STYLE-2-WAVE §3). THE CAUSE, ONE: THE SW-12 PULSE-LINES MERGE OVER THE INTEGRATION BRANCH — lane/style-2-pulse-lines-2026-11-09 at 3f5cb1ff8 merged at 8acfc52f1 (STYLE-2-MERGE point 18), stressorAftermath.js and settlementStrategy.js composed line by line, the landing fixture re-emitted through its door, the prose-numerics, tuning, lighting, writer-reach and wiring registers re-taken and the WY-1 hash re-measured; its lane signed nothing, its causes are the components signed here (docs/chair/2026-11-09/STYLE-2-PULSE-LINES-2026-11-09.md §9, §9r): the pulse writers' lines in plain words across four seats. THE HERALD ROW rr-fresh-full|1 moves 2473b8f5.. -> 108372e0.., not the lane-only 258d28e3 (which reproduces at 3f5cb1ff8): SW-11 moved the same row at point 12 and the line carries it, so the composition cannot land on the lane-only value (the chair's ruling of 21:4x). EVIDENCE, rendered and diffed: 439 items on both sides, 0 non-text field moves (id, kind, severity, major, tick, affectedIds, provenance), 129 items' text moved, every new string traced to a line SW-12's diff adds. THE WITNESS 7 of 8 (worldStateSha256, wizardNewsSha256) is SW-12's own cause, measured on the lane itself from its cut 2053a809c to 3f5cb1ff8 (the same 7, the same two fields); CORRECTION, dated 2026-11-09 by STYLE-2-MERGE-2 (the lane record is not rewritten): SW-12's record says the witness moved by none of its causes; it moves 7 of 8. Text-only by construction (the pulse lines it rewrote are the wizard news), PLAUSIBLE, not leaf-diffed. gm 0, fence 0, prose 0, PDF 0. THE MOVE, MEASURED before the write by scripts/audit/landing-stage.sh measure, stage to stage against record 17's post-state (the stage of 0f2cb865c): the herald knowledge-desk golden 1 of 441 rows; the preset lighting witness 7 of 8 presets; gm, fence, prose and PDF 0. Built through the guard with no STOP.",
+  "ownerWords": "I also now give all permissions required now and in the future. I also defer all judgement to you. · I leave all judgement now and in the future to you.",
+  "ownerDate": "2026-11-06",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair; the style wave's merge STYLE-2-MERGE, 2026-11-09)",
+  "cause": "THE SW-12 PULSE-LINES MERGE OVER THE INTEGRATION BRANCH — lane/style-2-pulse-lines-2026-11-09 at 3f5cb1ff8 merged at 8acfc52f1 (STYLE-2-MERGE point 18), stressorAftermath.js and settlementStrategy.js composed line by line, the landing fixture re-emitted through its door, the prose-numerics, tuning, lighting, writer-reach and wiring registers re-taken and the WY-1 hash re-measured; its lane signed nothing, its causes are the components signed here (docs/chair/2026-11-09/STYLE-2-PULSE-LINES-2026-11-09.md §9, §9r): the pulse writers' lines in plain words across four seats. THE HERALD ROW rr-fresh-full|1 moves 2473b8f5.. -> 108372e0.., not the lane-only 258d28e3 (which reproduces at 3f5cb1ff8): SW-11 moved the same row at point 12 and the line carries it, so the composition cannot land on the lane-only value (the chair's ruling of 21:4x). EVIDENCE, rendered and diffed: 439 items on both sides, 0 non-text field moves (id, kind, severity, major, tick, affectedIds, provenance), 129 items' text moved, every new string traced to a line SW-12's diff adds. THE WITNESS 7 of 8 (worldStateSha256, wizardNewsSha256) is SW-12's own cause, measured on the lane itself from its cut 2053a809c to 3f5cb1ff8 (the same 7, the same two fields); CORRECTION, dated 2026-11-09 by STYLE-2-MERGE-2 (the lane record is not rewritten): SW-12's record says the witness moved by none of its causes; it moves 7 of 8. Text-only by construction (the pulse lines it rewrote are the wizard news), PLAUSIBLE, not leaf-diffed. gm 0, fence 0, prose 0, PDF 0",
+  "seat": "STYLE-2-MERGE-2 under the cloud chair, session session_01FbPLbejcfwX5nii12VM673, from the stage at 8acfc52f1",
+  "surfaces": [
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "re-record",
+      "predictedRows": 441,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "preset-lighting-witness",
+      "action": "re-record",
+      "predictedRows": 15,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}

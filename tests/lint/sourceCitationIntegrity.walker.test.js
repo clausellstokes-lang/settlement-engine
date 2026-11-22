@@ -1,0 +1,742 @@
+// @vitest-environment node
+/**
+ * sourceCitationIntegrity.walker.test.js — A CITED LINE NUMBER IS A CLAIM, AND
+ * NOTHING IN THIS ESTATE HAD EVER CHECKED ONE (FIX-C2, ODQ §934.47 addendum 44).
+ *
+ * ── THE CLASS ────────────────────────────────────────────────────────────────
+ * The estate carries 14,604 `<path>:<line>` citations across 471 files. Measured
+ * 2026-09-20, ZERO of them were truth-guarded and 64 were form-guarded: the
+ * prose-wiring census asserts only that a `cite:` field CONTAINS a colon, and the
+ * three baselines that hold line numbers REGENERATE them rather than assert them
+ * (their own headers record "88 pure line moves" and "re-addresses 238 → 373" as
+ * routine). So an address is written once, is true for a day, and then an
+ * unrelated insertion six lines above it silently makes it false — eleven
+ * citations of one `Primitives.jsx` address rotted together that way, all by
+ * exactly six.
+ *
+ * The sharpest case is not a comment. `subsystemRowsWar.js` carried SEVEN
+ * citations past the end of `warDeployment.js` (a 1,338-line file cited as far
+ * as 2,133), TWO of them inside executable strings that ship as the `other:`
+ * evidence prose of certification rows. The file had been decomposed into
+ * `warHomeCosts.js` and `warSiegeVerdict.js`; the evidence kept naming the old
+ * module at the old line.
+ *
+ * Even the instrument that measures the estate's tuning had rotted: of the three
+ * hand-written `realHome` addresses in `scripts/count-tuning-inventory.mjs`, one
+ * was off by 11 and one was off by one INTO THE WRONG SEMANTIC ARM.
+ *
+ * ── ARM 1 · THE EOF ARM, OVER LIVE CODE (GATE-WIRED, NO BASELINE) ────────────
+ * A citation whose line is past the end of the file it addresses cannot be right,
+ * whatever it meant to name. No symbol, no heuristic, no judgment. Measured over
+ * the whole live-code corpus it has ZERO false positives and reaches 100% of
+ * RESOLVABLE citations, where the symbol arm reaches 5.6%. `src/`, `tests/` and
+ * `scripts/` carry NO baseline: past-EOF there is always red.
+ *
+ * ── ARM 2 · THE EOF ARM, OVER LIVE DOCS (SHRINK-ONLY BASELINE) ───────────────
+ * The same objective test over `docs/`, against .source-citation-baseline.json —
+ * the prose-numerics idiom. A NEW past-EOF citation reds; a baselined row that
+ * has cleared also reds, with "delete its entry", so the set can only fall. The
+ * baseline holds the SET (citing file × address), never counts, because a count
+ * assertion would red every time a document legitimately restates an address it
+ * already carries, and a gate that reds on correct behaviour gets turned off.
+ *
+ * ⚠ THE ARCHIVAL EXCLUSION, MEASURED AND LISTED. 35 documents are frozen records
+ * of their day, and re-addressing them to today's tree would FALSIFY a record
+ * rather than repair it — `docs/review-r2/VERIFY_SUBSYSTEMS_RESULTS.json` pins a
+ * sha and states that all its cited lines matched AT THAT SHA. They carry 382 (377 -> 382 at MERGE-CAR, the sha-pin move)
+ * past-EOF citations this gate deliberately does not see. FOUR rules select them,
+ * each checkable, and the full roster is committed in the baseline's
+ * `archivalExclusionAtFreeze.files`:
+ *   tree (180)   docs/review-r2/**, docs/shift-records/** (2026-11-13, STYLE-2-MERGE record 47, the COHERENCE-AGREE merge, 179 -> 180: docs/shift-records/2026-11-13-style-2-merge-47-coherence-agree.json; 2026-11-12, STYLE-2-MERGE record 46, the COHERENCE-POWERS merge, 178 -> 179: docs/shift-records/2026-11-13-style-2-merge-46-coherence-powers.json; 2026-11-12, STYLE-2-MERGE record 44, the VISIBLE-BUGS merge, 177 -> 178: docs/shift-records/2026-11-12-style-2-merge-44-visible-bugs.json; 2026-11-12, STYLE-2-MERGE record 43, the COHERENCE-PRESUME merge, 176 -> 177: docs/shift-records/2026-11-12-style-2-merge-43-coherence-presume.json; 2026-11-12, STYLE-2-MERGE record 42, the COHERENCE-QUARREL merge, 175 -> 176: docs/shift-records/2026-11-12-style-2-merge-42-coherence-quarrel.json; 2026-11-11, STYLE-2-MERGE record closing-2, the CLOSING ACT 2 (the composed-prose manifest) merge, 174 -> 175: docs/shift-records/2026-11-11-style-2-merge-closing-2-composed-prose-manifest.json; 2026-11-11, STYLE-2-MERGE record 38, the RESIDUE merge, 173 -> 174: docs/shift-records/2026-11-11-style-2-merge-38-residue-herald.json; 2026-11-09, STYLE-2-MERGE record 27, the SW-9b-B merge, 172 -> 173: docs/shift-records/2026-11-10-style-2-merge-27-sw9b-b.json; 2026-11-09, STYLE-2-MERGE record 25, the URBAN-FIX merge, 171 -> 172: docs/shift-records/2026-11-10-style-2-merge-25-urban-fix.json; 2026-11-10, STYLE-2-MERGE record 24b, the SW-8 merge, 170 -> 171: docs/shift-records/2026-11-10-style-2-merge-24b-sw8-herald.json; 2026-11-10, STYLE-2-MERGE record 24, the SW-8 merge, 169 -> 170: docs/shift-records/2026-11-10-style-2-merge-24-sw8.json; 2026-11-09, STYLE-2-MERGE record 22, the SW-6 CRISIS-SURFACES merge, 168 -> 169: docs/shift-records/2026-11-09-style-2-merge-22-sw6.json; 2026-11-09, STYLE-2-MERGE record 20, the PULSE-FOLLOW-UP merge, 167 -> 168: docs/shift-records/2026-11-09-style-2-merge-20-pulse-followup.json; 2026-11-09, STYLE-2-MERGE record 19, the SW-10 HOOKS merge, 166 -> 167: docs/shift-records/2026-11-09-style-2-merge-19-sw10.json; 2026-11-09, STYLE-2-MERGE record 18, the SW-12 PULSE-LINES merge, 165 -> 166: docs/shift-records/2026-11-09-style-2-merge-18-sw12.json; 2026-11-09, STYLE-2-MERGE record 17, the SW-B1 CONTRADICTIONS merge, 164 -> 165: docs/shift-records/2026-11-09-style-2-merge-17-swb1.json; 2026-11-09, STYLE-2-MERGE record 16, the SW-7 POWER-SIDE merge, 163 -> 164: docs/shift-records/2026-11-09-style-2-merge-16-sw7.json; 2026-11-09, STYLE-2-MERGE record 12, the SW-11 PULSE-CARD merge, 162 -> 163: docs/shift-records/2026-11-09-style-2-merge-12-sw11.json; 2026-11-09, STYLE-2-MERGE record 10, the SW-B6 ECO-DEF-BLOCKS merge, 161 -> 162: docs/shift-records/2026-11-09-style-2-merge-10-swb6.json; 2026-11-09, STYLE-2-MERGE record 9, the SW-B5 FRAMES merge, 160 -> 161: docs/shift-records/2026-11-09-style-2-merge-9-swb5.json; 2026-11-09, STYLE-2-MERGE record 7, the SW-B2 FIRST-IMPRESSIONS merge, 159 -> 160: docs/shift-records/2026-11-09-style-2-merge-7-swb2.json; 2026-11-09, STYLE-2-MERGE record 6, the SW-5 CRISIS-VANTAGES merge, 158 -> 159: docs/shift-records/2026-11-09-style-2-merge-6-sw5.json; 2026-11-09, STYLE-2-MERGE record 4, the SW-3 REALM-PROSE merge, 157 -> 158: docs/shift-records/2026-11-09-style-2-merge-4-sw3.json; 2026-11-09, STYLE-2-MERGE record 3, the SW-2 INSTITUTIONS merge, 156 -> 157: docs/shift-records/2026-11-09-style-2-merge-3-sw2.json; 2026-11-09, STYLE-2-MERGE record 1, the chair's words at SW-0's point, 155 -> 156: docs/shift-records/2026-11-09-style-2-merge-1-sw0.json; 2026-11-09, MERGE-TRAIN record 10, the composed-prose manifest, 154 -> 155: docs/shift-records/2026-11-09-merge-train-10-composed-prose-manifest.json; 2026-11-09, MERGE-TRAIN record 9, the ALLEGIANCE-CAR4 merge, 153 -> 154: docs/shift-records/2026-11-09-merge-train-9-car4.json; 2026-11-09, MERGE-TRAIN record 5, the OWNER-WORDS-DOSSIER merge, 152 -> 153: docs/shift-records/2026-11-09-merge-train-5-owner-words.json; 2026-11-09, MERGE-TRAIN record 3, the ALLEGIANCE-CAR3 merge, 151 -> 152: docs/shift-records/2026-11-09-merge-train-3-car3.json; 2026-11-09, MERGE-TRAIN record 2, the ALLEGIANCE-CAR2 merge, 150 -> 151: docs/shift-records/2026-11-09-merge-train-2-car2.json; 2026-11-09, MERGE-TRAIN record 1, the ALLEGIANCE-CAR1 merge, 149 -> 150: docs/shift-records/2026-11-09-merge-train-1-car1.json; 2026-11-09, MERGE-WAVE record 10, the docks read, 148 -> 149: docs/shift-records/2026-11-08-merge-wave-10-docks-read.json; 2026-11-09, MERGE-WAVE step 3, the manifest once, 147 -> 148: record 9, docs/shift-records/2026-11-08-merge-wave-9-composed-prose-manifest.json; 2026-11-09, MERGE-WAVE step 2, the chain, 139 -> 147: the wave's eight signed chain records docs/shift-records/2026-11-08-merge-wave-1..8, born into the tree class; 2026-11-08, MERGE-WAVE at the W5 HIS merge, 135 -> 139: W5 HIS's four signed records w5-01..w5-04, components of the W5 composition (its side's 109 -> 114 also counted MERGE-CAR's record A, already here); 2026-11-08, MERGE-WAVE at the W4 PEOPLE merge, 133 -> 135 measured: W4 PEOPLE's three records w4-01..w4-03 come in, the count moves by two; 2026-11-08, MERGE-WAVE at the W3 POW merge, 124 -> 133: W3 POW's eight signed lane records w3-01..w3-08 and its tree note, components of the W3 composition; 2026-11-08, MERGE-WAVE at the W1 ECO merge, 112 -> 124: W1 ECO's twelve signed lane records docs/shift-records/2026-11-07-w1-01..w1-12, components of the W1 composition; 2026-11-08, MERGE-CAR, 109 -> 112: the landing's records A, B, C,
+ *                born into the tree class; 0 past-EOF of their own)
+ *                (2026-11-07, MERGE-CAR: the union, 95 + 5 + 9 = 109 — both
+ *                sides' records composed, no document changed class)
+ *                (2026-11-07, LANDING-R2 seat E, 90 -> 95: the rung-2 landing's five signed records rung2-01..-05,
+ *                the census-composed surfaces; GROWTHS that hid nothing, 0 past-EOF of their own.)
+ *                (2026-11-07, PEOPLE-LAND second seat, 95 -> 104: the people car's
+ *                nine signed shift records, docs/shift-records/2026-11-07-people-land-0a/0b, people-1..people-5b and
+ *                people-land-shim-out, born into the tree class; the header read 84 while the baseline held 95)
+ *                (2026-11-06, LANDING-8, 84 -> 90: the day's six signed records rung1-29, -30, -32..-35;
+ *                GROWTHS that hid nothing, 0 past-EOF of their own.)
+ *                (2026-11-06, the rung-1 landing, 56 -> 84: the landing's twenty-eight signed records
+ *                rung1-01..28 of 2026-11-04/05; GROWTHS that hid nothing, 0 past-EOF of their own.)
+ *                (2026-11-04, the composed tip of the coherence window, 46 -> 56: the DOORS lane's ten signed records of
+ *                2026-11-03 for FOOD-1/2/3, FOOD-print, SIZE-2/3, DEFENSE-2 x3 and X-49; GROWTHS that hid nothing.)
+ *                (2026-10-31, the generator seams, 44 -> 46: G2's one-faction-set and G3's tension-variety records;
+ *                GROWTHS that hid nothing, each a signature with no path:line citation of its own.)
+ *                (2026-10-30, the dossier consolidation, 40 -> 44: BUILD-S's service-category-fidelity record and
+ *                BUILD-T1's arrival-market-gate, no-market-pool and migration-one-direction records; GROWTHS
+ *                that hid nothing, each a signature with no path:line citation of its own.)
+ *                (2026-10-02-statecraft-band-u1-exposure-band.json joined 2026-10-02, 39 -> 40: cure lane
+ *                STATECRAFT-BAND's record for U1, FPQ-74, the spy-exposure band; a GROWTH that hid nothing.)
+ *                (2026-10-02-pact-compliance-u2-stream-carry.json joined 2026-10-02, 38 -> 39: cure lane
+ *                PACT-COMPLIANCE's record for U2, FPQ-75, clauses that deliver; a GROWTH that hid nothing.)
+ *                (2026-10-02-pact-compliance-u1-strain-band.json joined 2026-10-02, 37 -> 38: cure lane
+ *                PACT-COMPLIANCE's record for U1, FP-44, the pact strain band; a GROWTH that hid nothing.)
+ *                (2026-10-02-pact-answer-fp42-herald-desk.json joined 2026-10-02, 36 -> 37: cure lane PACT-ANSWER's
+ *                record for U1, FP-42, the unlearned appetite read neutral; a GROWTH that hid nothing.)
+ *                (2026-10-02-pact-reask-herald-desk.json joined 2026-10-02, 35 -> 36: cure lane PACT-REASK's
+ *                record for U1, FPQ-72, the held-clause re-ask; a GROWTH that hid nothing.)
+ *                (2026-10-02-voice-program-wave-1-pair-order.json joined 2026-10-02, 34 -> 35: the Voice
+ *                Program's record for the wave 1 pair-order cure; a GROWTH that hid nothing.)
+ *                (2026-10-02-voice-program-wave-4-hook-structures.json joined 2026-10-02, 33 -> 34: the Voice
+ *                Program's record for wave 4 block 1, the arrival hook's structures; a GROWTH that hid nothing.)
+ *                (2026-10-02-voice-program-wave-3-arrival-place.json joined 2026-10-02, 32 -> 33: the Voice
+ *                Program's record for wave 3, the arrival scene as a place; a GROWTH that hid nothing.)
+ *                (2026-10-02-voice-program-wave-2-substreams.json joined 2026-10-02, 31 -> 32: the Voice
+ *                Program's record for wave 2, the arrival and pressure draws on their own streams; a GROWTH that hid nothing.)
+ *                (2026-10-02-voice-program-wave-1-herald-deeds.json joined 2026-10-02, 30 -> 31: the Voice
+ *                Program's record for wave 1, the Herald in deeds; a GROWTH that hid nothing.)
+ *                (2026-10-01-urban-band-druid-faith.json joined 2026-10-01, 27 -> 28: the record for the
+ *                owner's druid rulings; a GROWTH that hid nothing.)
+ *                (2026-10-01-urban-band-warden-census.json joined 2026-10-01, 28 -> 29: the record for J33,
+ *                the Warden's Lodge census under the same rulings; a GROWTH that hid nothing.)
+ *                (2026-10-01-urban-band-warden-census-herald.json joined 2026-10-01, 29 -> 30: the herald
+ *                desk's superseding prediction under J33's record; a GROWTH that hid nothing.)
+ *                (2026-09-30-urban-band-institutions.json and 2026-10-01-urban-band-herald-rows.json
+ *                joined 2026-10-01, 25 -> 27: the urban band's signed record and the record superseding
+ *                its one herald prediction; a GROWTH that hid nothing, zero past-EOF of their own.)
+ *                (2026-09-24-fp-lighting-2.json joined 2026-09-24, 24 -> 25 at the pick onto
+ *                fp/integration (23 -> 24 at its base): LIT-2's signed record of the preset-lighting-witness
+ *                re-record for mediation, born inside docs/shift-records/; a GROWTH that hid nothing.)
+ *                (2026-09-24-treaty-voice-desk-default-beat.json joined 2026-09-24, 23 -> 24: the chair's
+ *                signed re-record of the herald-knowledge-desk golden at the treaty-voice pick (FP-28,
+ *                once per cause); a GROWTH that hid nothing, zero past-EOF of its own.)
+ *                (2026-09-24-herald-lens-u2-desk-window.json joined 2026-09-24, 22 -> 23: the chair's
+ *                signed re-record of the herald-knowledge-desk golden at the Herald lens U2's pick
+ *                (FP-31, once per cause); a GROWTH that hid nothing, zero past-EOF of its own.)
+ *                (2026-09-24-lit1b-herald-desk-belief-lit.json joined 2026-09-24, 21 -> 22: the chair's
+ *                signed re-record of the herald-knowledge-desk golden at LIT-1b's pick (FP-28), born
+ *                inside docs/shift-records/ with the re-record; a GROWTH that hid nothing, zero
+ *                past-EOF of its own.)
+ *                (2026-09-24-fp-lighting-1b.json joined 2026-09-24, 20 -> 21 at the pick onto
+ *                fp/integration (18 -> 19 at its base): LIT-1b's signed record of the
+ *                preset-lighting-witness re-record, born inside docs/shift-records/; a
+ *                GROWTH that hid nothing, zero past-EOF of its own.)
+ *                (2026-09-24-in5-herald-knowledge-desk.json joined 2026-09-24, 19 -> 20: IN-5's
+ *                signed ENROLL record of the herald-knowledge-desk golden, born inside
+ *                docs/shift-records/ at 6cf6920d4; the roster row owed by the lane, cured at FP
+ *                batch landing 3; a GROWTH that hid nothing, zero past-EOF of its own.)
+ *                (2026-09-24-fp-witness-prose-cure-p1.json joined 2026-09-24, 18 -> 19: the
+ *                witness re-record for CURE-P1 U3's prose cause; a GROWTH that hid nothing.)
+ *                (2026-09-24-fp-lighting-1a.json joined 2026-09-24, 17 -> 18: LIT-1a's
+ *                signed record of the preset-lighting-witness re-record, born inside
+ *                docs/shift-records/; a GROWTH that hid nothing, zero past-EOF of its own.)
+ *                (2026-09-20-cure-j-provenance.json joined 2026-09-20, 16 -> 17:
+ *                CURE-J's provenance-only re-record of the prose manifest golden,
+ *                born inside docs/shift-records/ at 0d0598a75. A GROWTH, not a
+ *                class move — no live document left the gated corpus — and it hid
+ *                nothing: the excluded past-EOF count stayed 377 and ARM 2 stayed
+ *                0 on both sides.)
+ *   banner (9)   a blockquote status banner naming HISTORICAL in the opening ten
+ *                lines — the estate's OWN marker (docs/README.md §"HISTORICAL —
+ *                point-in-time audit / plan / status exhaust (not maintained)"):
+ *                A_PLUS_ROADMAP, CAPABILITY_REMEDIATION_PLAN, GAME_GRADE_AUDIT,
+ *                GENERATION_COHERENCE_AUDIT, LANDING_HANDOFF_AMENDMENTS,
+ *                SIMULATION_LOGIC_AUDIT, SOL_QUEUE, START_HERE, UIUX_AUDIT_AND_PLAN
+ *                (START_HERE joined 2026-10-23, 8 -> 9: P10 carried the successor
+ *                bootstrap from the docs ledger onto master, born into the roster;
+ *                a GROWTH that hid nothing, zero past-EOF of its own.)
+ *                (GAME_GRADE_AUDIT joined 2026-09-20, FIX-C2b: a 2026-07-24 audit
+ *                pinning composite-r4 @ 69b7a8d3 whose citations address a town-map
+ *                surface deleted at 43c3ac3805. It hid nothing — the excluded
+ *                past-EOF count stayed 377 and ARM 2 was 0 on both sides.)
+ *   dated (298)  an ISO date in the filename (2026-11-14, the chair, the chair's lane takes the integration line by merge at 9e57f5023, the union of both rosters, 219 and 237 over the common 158 -> 298, measured on the merged tree; 2026-11-13, the chair, the fresh security read of migration 212 at 377cc61d born dated, 218 -> 219: docs/chair/2026-11-13/REVIEW-VEIL-212-FINAL-2026-11-13.md; 2026-11-13, the chair, the stage read of the powers lane, 714381934 to 96a6ced46 born dated, 217 -> 218: docs/chair/2026-11-13/REVIEW-POWERS-96a6ced46-2026-11-13.md; 2026-11-13, the chair, the fourth read of the instrument lane and of point 49's cures born dated, 216 -> 217: docs/chair/2026-11-13/REVIEW-W2B-9f83ffbb2-2026-11-13.md; 2026-11-13, the chair, the read of two later stages born dated, 215 -> 216: docs/chair/2026-11-13/REVIEW-R3-STAGES-2026-11-13.md; 2026-11-13, the chair, the measuring seat's census of eight kinds of false line born dated, 214 -> 215: docs/chair/2026-11-13/CENSUS-2-2026-11-13.md; 2026-11-13, the chair, the second read of the data lane born dated, 213 -> 214: docs/chair/2026-11-13/REVIEW-W2-FIX-DATA-34520a697-2026-11-13.md; 2026-11-13, the chair, the security read of the share veil's cures and of the split of migration 211 born dated, 212 -> 213: docs/chair/2026-11-13/REVIEW-VEIL-212-28f52b1e4-2026-11-13.md; 2026-11-13, the chair, the round-three cut's increment over two newer cold lists born dated, 211 -> 212: docs/chair/2026-11-13/ROUND-3-CUT-INCREMENT-2026-11-13.md; 2026-11-13, the chair, the cold read of the corpus lane born dated, 210 -> 211: docs/chair/2026-11-13/REVIEW-W2-WRITE-b5206acd3-2026-11-13.md; 2026-11-13, the chair, the third read of the instrument lane born dated, 209 -> 210: docs/chair/2026-11-13/REVIEW-W2B-c3913f999-2026-11-13.md; 2026-11-13, the chair, round three's cut born dated, 208 -> 209: docs/chair/2026-11-13/ROUND-3-CUT-2026-11-13.md; 2026-11-13, the chair, the defence lane's fourth read born dated, 207 -> 208: docs/chair/2026-11-13/REVIEW-UPKEEP-0a07f98c7-2026-11-13.md; 2026-11-13, the chair, the cold read of the powers follow-up born dated, 206 -> 207: docs/chair/2026-11-13/REVIEW-POWERS-FU-714381934-2026-11-13.md; 2026-11-13, the chair, the read of three round-two stages born dated, 205 -> 206: docs/chair/2026-11-13/REVIEW-R2-STAGES-2026-11-13.md; 2026-11-13, the chair, the security review of the share veil born dated, 204 -> 205: docs/chair/2026-11-13/REVIEW-VEIL-211-333b33973-2026-11-13.md; 2026-11-13, the chair, the defence reader's third read born dated, 203 -> 204: docs/chair/2026-11-13/REVIEW-UPKEEP-65cb03ef1-2026-11-13.md; 2026-11-13, the chair, the third review of the first leaves lane born dated, 202 -> 203: docs/chair/2026-11-13/REVIEW-W2A-817980b33-2026-11-13.md; 2026-11-13, the chair, the defence reader's second read born dated, 201 -> 202: docs/chair/2026-11-13/REVIEW-UPKEEP-9fccbd8ed-2026-11-13.md; 2026-11-13, the chair, the second review of the upkeep lane born dated, 200 -> 201: docs/chair/2026-11-13/REVIEW-UPKEEP-73b1304de-2026-11-13.md; 2026-11-13, the chair, the cold read of the data lane born dated, 199 -> 200: docs/chair/2026-11-13/REVIEW-W2-FIX-DATA-4114cf5a6-2026-11-13.md; 2026-11-13, the chair, its handoff to the next chair born dated, 198 -> 199: docs/chair/2026-11-13/CHAIR-HANDOFF-2026-11-13.md; 2026-11-13, the chair, the second read of the instrument lane born dated, 197 -> 198: docs/chair/2026-11-13/REVIEW-W2B-1fb15980d-2026-11-13.md; 2026-11-13, the chair, the agreement lane's review at its cures born dated, 196 -> 197: docs/chair/2026-11-13/REVIEW-AGREE-69b53decd-2026-11-13.md; 2026-11-13, the chair, two reviewers' second files born dated, 194 -> 196: docs/chair/2026-11-12/REVIEW-POWERS-313c67e2b-2026-11-13.md and docs/chair/2026-11-12/REVIEW-VEIL-211-master-client-2026-11-13.md; 2026-11-13, the chair, the first review of the upkeep lane born dated, 193 -> 194: docs/chair/2026-11-13/REVIEW-UPKEEP-419de26cb-2026-11-13.md; 2026-11-13, the chair, the reading of the veil lane's last diff born dated, 192 -> 193: docs/chair/2026-11-12/REVIEW-VEIL-211-5a2399cf9-2026-11-13.md; 2026-11-13, the chair, the third review of the agreement lane born dated, 191 -> 192: docs/chair/2026-11-13/REVIEW-AGREE-faa20bc6c-2026-11-13.md; 2026-11-13, the chair, the review of W2-A-LEAVES born dated, 190 -> 191: docs/chair/2026-11-12/REVIEW-W2A-2c6435650-2026-11-12.md; 2026-11-13, the chair, the review of W2-B-DECLARE's first stage born dated, 189 -> 190: docs/chair/2026-11-13/REVIEW-W2B-9d5d6e091-2026-11-13.md; 2026-11-13, the chair, the second review of the powers lane born dated, 188 -> 189: docs/chair/2026-11-12/REVIEW-POWERS-e86d069be-2026-11-12.md; 2026-11-12, the chair, the third security review of the share veil lane born dated, 187 -> 188: docs/chair/2026-11-12/REVIEW-VEIL-211-f07db8760-2026-11-12.md; 2026-11-12, the chair, the procedure for writing a pool and its conditions born dated, 186 -> 187: docs/chair/2026-11-12/SOP-POOLS-AND-CONDITIONS-2026-11-12.md; 2026-11-12, the chair, the second wave's charters born dated, 185 -> 186: docs/chair/2026-11-12/CHARTERS-SECOND-WAVE-2026-11-12.md; 2026-11-12, the chair, the second wave's census born dated, 184 -> 185: docs/chair/2026-11-12/SECOND-WAVE-CENSUS-2026-11-12.md; 2026-11-12, the chair, the second security review of migration 211 born dated, 183 -> 184: docs/chair/2026-11-12/REVIEW-VEIL-211-c4d78c907-2026-11-12.md; 2026-11-12, the chair, the second review of the coherence lane AGREE born dated, 182 -> 183: docs/chair/2026-11-12/REVIEW-AGREE-8866a0ddd-2026-11-12.md; 2026-11-12, the chair, the review of the coherence lane POWERS born dated, 181 -> 182: docs/chair/2026-11-12/REVIEW-POWERS-1a32c200a-2026-11-12.md; 2026-11-12, the chair, the security review of migration 211 born dated, 180 -> 181: docs/chair/2026-11-12/REVIEW-VEIL-211-ad17ec005-2026-11-12.md; 2026-11-12, the chair, the review of the coherence lane AGREE born dated, 179 -> 180: docs/chair/2026-11-12/REVIEW-AGREE-65ce74ce6-2026-11-12.md; 2026-11-11, the chair, the coherence charters born dated, 178 -> 179: docs/chair/2026-11-11/CHARTERS-COHERENCE-2026-11-11.md; 2026-11-11, the chair, the gen-speed review born dated, 177 -> 178: docs/chair/2026-11-10/REVIEW-GEN-SPEED-5efe58416-2026-11-10.md; 2026-11-10, the chair, the remote-path review born dated, 176 -> 177: docs/chair/2026-11-10/REVIEW-REMOTE-PATH-c18f23a61-2026-11-10.md; 2026-11-10, the chair, the green-tip seam review born dated, 175 -> 176: docs/chair/2026-11-10/REVIEW-GREEN-TIP-SEAM-6eeb5f82c-2026-11-10.md; 2026-11-10, the chair, the pulse-sites review born dated, 174 -> 175: docs/chair/2026-11-10/REVIEW-PULSE-SITES-dbaa54418-2026-11-10.md; 2026-11-10, the chair, the veil-fix second re-review born dated, 173 -> 174: docs/chair/2026-11-10/REVIEW-VEIL-FIX-662056a29-2026-11-10.md; 2026-11-10, the chair, the veil-fix re-review born dated, 172 -> 173: docs/chair/2026-11-10/REVIEW-VEIL-FIX-0cd3c7fc0-2026-11-10.md; 2026-11-10, the chair, the pre-deploy migration review born dated, 171 -> 172: docs/chair/2026-11-10/REVIEW-MIGRATIONS-204-210-2026-11-10.md; 2026-11-09, the chair on lane/chair-2026-11-08, 170 -> 171: BRIEF-TIER-PARITY-FIX-2026-11-09 under docs/chair/2026-11-09/, born dated on the tier-parity census's hand-back, 0 past-EOF; 2026-11-09, the chair on lane/chair-2026-11-08, 168 -> 170: STYLE-RULINGS-2-2026-11-09 and BRIEF-STYLE-2-WAVE-2026-11-09 under docs/chair/2026-11-09/, born dated on the sources audit's hand-back, 0 past-EOF; 2026-11-09, the chair on lane/chair-2026-11-08, 167 -> 168: BRIEF-FIX-HOOK-OBJECT-2026-11-09 under docs/chair/2026-11-09/, born dated on a defect the surfaces audit found, 0 past-EOF; 2026-11-09, the chair on lane/chair-2026-11-08, 166 -> 167: BRIEF-MERGE-TRAIN-2026-11-09 under docs/chair/2026-11-09/, born dated in the quiet before the train's gate, 0 past-EOF; 2026-11-09, the chair on lane/chair-2026-11-08, 165 -> 166: BRIEF-STYLE-2-AUDIT-2026-11-09 under docs/chair/2026-11-09/, born dated on the owner's word on the style law's reach, 0 past-EOF; 2026-11-09, the chair on lane/chair-2026-11-08, 164 -> 165: BRIEF-OWNER-WORDS-DOSSIER-2026-11-09 under docs/chair/2026-11-09/, born dated on the owner's words, 0 past-EOF; 2026-11-08, the chair on lane/chair-2026-11-08, 163 -> 164: BRIEF-ALLEGIANCE-CAR4-2026-11-08 under docs/allegiance/, the goals car's brief, born dated, 0 past-EOF; 2026-11-08, the chair on lane/chair-2026-11-08, 162 -> 163: DEPLOY-STEP-2026-11-08 under docs/chair/2026-11-08/, the owner's deploy step with the engine service on, born dated, 0 past-EOF; 2026-11-08, the chair on lane/chair-2026-11-08, 160 -> 162: BRIEF-WRITE-TITLES-14-2026-11-08 and BRIEF-WRITE-PEOPLE-3-2026-11-08 under docs/chair/2026-11-08/, born dated on the owner's word, 0 past-EOF; 2026-11-08, the chair on lane/chair-2026-11-08, 159 -> 160: BRIEF-W1-A0B-2026-11-08 under docs/chair/2026-11-08/, born dated, 0 past-EOF; 2026-11-08, the chair on lane/chair-2026-11-08, 158 -> 159: FP-REBASE-2026-11-08 under docs/chair/2026-11-08/, the chair's record of the FP re-base, born dated, 0 past-EOF; 2026-11-11, FOUNDING-WORLDS at the line merge, 236 -> 237: the union with the lane's record docs/chair/2026-11-10/FOUNDING-WORLDS-2026-11-10.md; 2026-11-11, STYLE-2-MERGE-7 at the GEN-SPEED merge, 235 -> 236: the union with the lane's record docs/chair/2026-11-10/GEN-SPEED-2026-11-10.md; 2026-11-11, STYLE-2-MERGE-7 at the RESIDUE merge, 234 -> 235: the union with the lane's record docs/chair/2026-11-10/RESIDUE-2026-11-10.md; 2026-11-10, STYLE-2-MERGE-6 at the REMOTE-PATH merge, 233 -> 234: the union with the lane's record docs/REMOTE_PATH_2026-11-10.md; 2026-11-10, STYLE-2-MERGE-6 at the PULSE-SITES merge, 232 -> 233: the union with the lane's record docs/chair/2026-11-10/PULSE-SITES-2026-11-10.md; 2026-11-10, STYLE-2-MERGE-6 at the GREEN-TIP merge, 231 -> 232: the union with the lane's record docs/chair/2026-11-10/GREEN-TIP-2026-11-10.md; 2026-11-10, STYLE-2-MERGE-6 at the LIBRARY-SIMPLE merge, 230 -> 231: the union with the lane's record docs/chair/2026-11-10/LIBRARY-SIMPLE-2026-11-10.md; 2026-11-10, STYLE-2-MERGE-6 at the COMPENDIUM-INSTITUTIONS merge, 227 -> 230: the union with the lane's three records docs/chair/2026-11-10/COMPENDIUM-INSTITUTIONS-2026-11-10.md, COMPENDIUM-LANDING-TRIM-2026-11-10.md, COMPENDIUM-INSTITUTIONS-2-2026-11-10.md; 2026-11-10, STYLE-2-MERGE-6 at the CONFIG-HEADERS merge, 226 -> 227: the union with the lane's record docs/chair/2026-11-10/CONFIG-HEADERS-2026-11-10.md; 2026-11-10, STYLE-2-MERGE-6 at the DIST-FLAGGED merge, 225 -> 226: the union with the lane's record docs/chair/2026-11-10/DIST-FLAGGED-2026-11-10.md; 2026-11-10, STYLE-2-MERGE-6 at the VEIL-FIX merge, 224 -> 225: the union with the lane's record docs/chair/2026-11-10/VEIL-FIX-2026-11-10.md; 2026-11-10, STYLE-2-MERGE-6 at the BRAND-MINT merge, 223 -> 224: the union with the lane's record docs/chair/2026-11-10/BRAND-MINT-2026-11-10.md; 2026-11-10, STYLE-2-MERGE-6 at the BUILD-HEAP merge, 222 -> 223: the union with the lane's record docs/chair/2026-11-10/BUILD-HEAP-2026-11-10.md; 2026-11-10, STYLE-2-MERGE-6 at the BOOT-TIP merge, 221 -> 222: the union with the lane's record docs/chair/2026-11-10/BOOT-TIP-2026-11-10.md; 2026-11-10, STYLE-2-MERGE-6 at the CI-TIP merge, 220 -> 221: the union with the lane's record docs/chair/2026-11-10/CI-TIP-2026-11-10.md; 2026-11-10, STYLE-2-MERGE-6 at the STRICT-TIP merge, 219 -> 220: the union with the lane's record docs/chair/2026-11-10/STRICT-TIP-2026-11-10.md; 2026-11-10, STYLE-2-MERGE-6 at the COMPENDIUM-HUB merge, 218 -> 219: the union with the lane's record docs/chair/2026-11-10/COMPENDIUM-HUB-2026-11-10.md; 2026-11-10, STYLE-2-MERGE-6 at the ABOUT-CURRENT merge, 217 -> 218: the union with the lane's record docs/chair/2026-11-10/ABOUT-CURRENT-2026-11-10.md; 2026-11-09, STYLE-2-MERGE-5 at the SW-9b-B merge, 216 -> 217: the union with the lane's record docs/chair/2026-11-09/STYLE-2-SW9B-B-2026-11-09.md; 2026-11-09, STYLE-2-MERGE-5 at the SW-9b-A merge, 215 -> 216: the union with the lane's record docs/chair/2026-11-09/STYLE-2-SW9B-A-2026-11-09.md; 2026-11-09, STYLE-2-MERGE-5 at the URBAN-FIX merge, 214 -> 215: the union with the lane's record docs/chair/2026-11-09/URBAN-FIX-2026-11-09.md; 2026-11-09, STYLE-2-MERGE-2 at the SW-8 merge, 213 -> 214: the union with the lane's record docs/chair/2026-11-09/STYLE-2-RENAME-POWERS-2026-11-09.md; 2026-11-09, STYLE-2-MERGE-2 at the SW-B7b merge, 212 -> 213: the union with the lane's record docs/chair/2026-11-09/STYLE-2-PROJECTION-2026-11-09.md; 2026-11-09, STYLE-2-MERGE-3 at the SW-6 CRISIS-SURFACES merge, 211 -> 212: the union with the lane's record docs/chair/2026-11-09/STYLE-2-CRISIS-SURFACES-2026-11-09.md; 2026-11-09, STYLE-2-MERGE-3 at the FIX-SECTION-REGEN merge, 210 -> 211: the union with the lane's record docs/chair/2026-11-09/FIX-SECTION-REGEN-2026-11-09.md; 2026-11-09, STYLE-2-MERGE-3 at the PULSE-FOLLOW-UP merge, 209 -> 210: the union with the lane's record docs/chair/2026-11-09/STYLE-2-PULSE-FOLLOWUP-2026-11-09.md; 2026-11-09, STYLE-2-MERGE-3 at the SW-10 HOOKS merge, 208 -> 209: the union with the lane's record docs/chair/2026-11-09/STYLE-2-HOOKS-2026-11-09.md; 2026-11-09, STYLE-2-MERGE-2 at the SW-12 PULSE-LINES merge, 207 -> 208: the union with the lane's record docs/chair/2026-11-09/STYLE-2-PULSE-LINES-2026-11-09.md; 2026-11-09, STYLE-2-MERGE-2 at the SW-B1 CONTRADICTIONS merge, 206 -> 207: the union with the lane's record docs/chair/2026-11-09/STYLE-2-CONTRADICTIONS-2026-11-09.md; 2026-11-09, STYLE-2-MERGE hand-back, 205 -> 206: docs/INTEGRATION_STYLE_2_2026-11-09.md, the merge record, born dated; 2026-11-09, STYLE-2-MERGE at the SW-7 POWER-SIDE merge, 204 -> 205: the union with the lane's one dated record (docs/chair/2026-11-09/STYLE-2-POWER-SIDE-2026-11-09.md, born dated); ; 2026-11-09, STYLE-2-MERGE at the SW-9 ODD-ROWS merge, 203 -> 204: the union with the lane's one dated record (docs/chair/2026-11-09/STYLE-2-ODD-ROWS-2026-11-09.md, born dated), both sides' notes kept; 2026-11-09, STYLE-2-MERGE at the TIER-PARITY-FIX merge, 202 -> 203: the union with the lane's one dated record (docs/chair/2026-11-09/TIER-PARITY-FIX-2026-11-09.md, born dated), both sides' notes kept; 2026-11-09, STYLE-2-MERGE at the FIX-PULSE-DEFECTS merge, 201 -> 202: the union with the lane's one dated record (docs/chair/2026-11-09/FIX-PULSE-DEFECTS-2026-11-09.md, born dated), both sides' notes kept; 2026-11-09, STYLE-2-MERGE at the SW-11 PULSE-CARD merge, 200 -> 201: the union with the lane's one dated record (docs/chair/2026-11-09/STYLE-2-PULSE-CARD-2026-11-09.md, born dated), both sides' notes kept; 2026-11-09, STYLE-2-MERGE at the SW-B7a PARTY-LINK merge, 199 -> 200: the union with the lane's one dated record (docs/chair/2026-11-09/STYLE-2-PARTY-LINK-2026-11-09.md, born dated), both sides' notes kept; 2026-11-09, STYLE-2-MERGE at the SW-B6 ECO-DEF-BLOCKS merge, 198 -> 199: the union with the lane's one dated record (docs/chair/2026-11-09/STYLE-2-ECO-DEF-BLOCKS-2026-11-09.md, born dated), both sides' notes kept; 2026-11-09, STYLE-2-MERGE at the SW-B5 FRAMES merge, 197 -> 198: the union with the lane's one dated record (docs/chair/2026-11-09/STYLE-2-FRAMES-2026-11-09.md, born dated), both sides' notes kept; 2026-11-09, STYLE-2-MERGE at the SW-B4 PDF-FOUNDRY merge, 196 -> 197: the union with the lane's one dated record (docs/chair/2026-11-09/STYLE-2-PDF-FOUNDRY-2026-11-09.md, born dated), both sides' notes kept; 2026-11-09, STYLE-2-MERGE at the SW-B2 FIRST-IMPRESSIONS merge, 195 -> 196: the union with the lane's one dated record (docs/chair/2026-11-09/STYLE-2-FIRST-IMPRESSIONS-2026-11-09.md, born dated), both sides' notes kept; 2026-11-09, STYLE-2-MERGE at the SW-5 CRISIS-VANTAGES merge, 194 -> 195: the union with the lane's one dated record (docs/chair/2026-11-09/STYLE-2-CRISIS-VANTAGES-2026-11-09.md, born dated), both sides' notes kept; 2026-11-09, STYLE-2-MERGE at the SW-4 HOOKS-CONNECTIVE merge, 193 -> 194: the union with the lane's one dated record (docs/chair/2026-11-09/STYLE-2-HOOKS-CONNECTIVE-2026-11-09.md, born dated), both sides' notes kept; 2026-11-09, STYLE-2-MERGE at the SW-3 REALM-PROSE merge, 192 -> 193: the union with the lane's one dated record (docs/chair/2026-11-09/STYLE-2-REALM-PROSE-2026-11-09.md, born dated), both sides' notes kept; 2026-11-09, STYLE-2-MERGE at the SW-2 INSTITUTIONS merge, 191 -> 192: the union with the lane's one dated record (docs/chair/2026-11-09/STYLE-2-INSTITUTIONS-2026-11-09.md, born dated), both sides' notes kept; 2026-11-09, STYLE-2-MERGE at the SW-1 CAUSE-CONJUNCTION merge, 190 -> 191: the union with the lane's one dated record (docs/chair/2026-11-09/STYLE-2-CAUSE-CONJUNCTION-2026-11-09.md, born dated), both sides' notes kept; 2026-11-09, STYLE-2-MERGE at the SW-0 STYLE-WALKER merge, 189 -> 190: the union with the lane's one dated record (docs/chair/2026-11-09/STYLE-2-WALKER-2026-11-09.md, born dated, 0 past-EOF), both sides' notes kept; 2026-11-09, MERGE-TRAIN's record, 188 -> 189: docs/INTEGRATION_MERGE_TRAIN_2026-11-09.md, born dated; 2026-11-09, MERGE-TRAIN at the ALLEGIANCE-CAR4 merge, 185 -> 188: car 4's record and its two components' records, each born dated; 2026-11-09, MERGE-TRAIN at the FIX-ARROW-PLAQUE merge, 184 -> 185: the lane's record, born dated; 2026-11-09, MERGE-TRAIN at the FIX-BUY-BUTTON merge, 183 -> 184: the lane's record, born dated; 2026-11-09, MERGE-TRAIN at the FIX-HOOK-OBJECT merge, 182 -> 183: the lane's record, born dated; 2026-11-09, MERGE-TRAIN at the OWNER-WORDS-DOSSIER merge, 180 -> 182: the lane's record and the train's points 4-5 record, both born dated; 2026-11-09, MERGE-TRAIN at the ALLEGIANCE-CAR3 merge, 177 -> 180: car 3's lane record, WRITE-PEOPLE's record and the train's point-3 record, each born dated; 2026-11-09, MERGE-TRAIN at the ALLEGIANCE-CAR2 merge, 175 -> 177: car 2's lane record and the train's point-2 record, both born dated; 2026-11-09, MERGE-TRAIN point 1's record, 174 -> 175: docs/chair/2026-11-09/MERGE-TRAIN-CAR1-2026-11-09.md, born dated; 2026-11-09, MERGE-TRAIN at the ALLEGIANCE-CAR1 merge, 168 -> 174: the union with car 1's six dated documents (its record, the allegiance design and rulings, the car-1, write-goals and write-people briefs), both sides' notes kept; 2026-11-08, MERGE-WAVE at the FIX-ARROW-SECTIONS merge, 167 -> 168: the union with the lane's one dated record (docs/chair/2026-11-08/FIX-ARROW-SECTIONS-RECORD-2026-11-08.md, born dated), both sides' notes kept; 2026-11-08, MERGE-WAVE at the GREEN-BASE merge, 166 -> 167: the union with the lane's one dated record (docs/GREEN_BASE_2026-11-08.md, born dated, 0 past-EOF), both sides' notes kept; 2026-11-08, MERGE-WAVE at the FIX-PUBLIC-VEIL merge, 165 -> 166: the union with the fix lane's one dated record (docs/FIX_PUBLIC_VEIL_2026-11-07.md, born dated), both sides' notes kept; 2026-11-08, MERGE-WAVE at the FIX-EXPORT-KEYS merge, 164 -> 165: the union with the fix lane's one dated record (docs/FIX_EXPORT_KEYS_2026-11-07.md, born dated), both sides' notes kept; 2026-11-08, MERGE-WAVE at the FIX-FOOD-ISOLATION merge, 163 -> 164: the union with the fix lane's one dated record (docs/FIX_FOOD_ISOLATION_2026-11-07.md, born dated, 0 past-EOF), both sides' notes kept; 2026-11-08, MERGE-WAVE at the W7 HOOKS merge, 162 -> 163: the union with W7 HOOKS's one dated record (docs/WIRING_W7_2026-11-07.md, born dated, 0 past-EOF), both sides' notes kept; 2026-11-08, MERGE-WAVE at the W5 HIS merge, 161 -> 162: the union with W5 HIS's one dated record (docs/WIRING_W5_2026-11-07.md, born dated, 0 past-EOF), both sides' notes kept; 2026-11-08, MERGE-WAVE at the W4 PEOPLE merge, 160 -> 161: docs/WIRING_W4_2026-11-07.md, W4 PEOPLE's record, born dated on its lane with no roster row of its own (its side never bumped), counted here once, 0 past-EOF; 2026-11-08, MERGE-WAVE at the W3 POW merge, 159 -> 160: the union with W3 POW's one dated record (docs/WIRING_W3_2026-11-07.md, born dated, 0 past-EOF), both sides' notes kept; 2026-11-08, MERGE-WAVE at the W2 DEF merge, 158 -> 159: the union with W2 DEF's one dated record (docs/WIRING_W2_2026-11-07.md, born dated, 0 past-EOF), both sides' notes kept; 2026-11-08, MERGE-WAVE at the W1 ECO merge, 157 -> 158: the union with W1 ECO's one dated record (131 -> 132 on that side: docs/WIRING_W1_2026-11-07.md, born dated, 0 past-EOF), both sides' notes kept; 2026-11-08, MERGE-WAVE, 156 -> 157: docs/INTEGRATION_MERGE_WAVE_2026-11-07.md, the merge seat's record, born dated at step 0, 0 past-EOF; 2026-11-08, the chair, 155 -> 156: BRIEF-FP-REBASE-VERIFY-2026-11-08 under docs/chair/2026-11-08/, born dated, 0 past-EOF; 2026-11-08, the chair, 154 -> 155: BRIEF-FIX-ARROW-SECTIONS-2026-11-08 under docs/chair/2026-11-08/, born dated, 0 past-EOF; 2026-11-08, the chair, 153 -> 154: BRIEF-FP-REBASE-2026-11-08 under docs/chair/2026-11-08/, born dated, 0 past-EOF; 2026-11-08, the chair, 152 -> 153: FP-REBASE-CENSUS-2026-11-08 under docs/chair/2026-11-08/, born dated, 0 past-EOF; 2026-11-08, the chair, 150 -> 152: BRIEF-ALLEGIANCE-CAR2-2026-11-08 and BRIEF-ALLEGIANCE-CAR3-2026-11-08 under docs/allegiance/, born dated, 0 past-EOF; 2026-11-08, the chair at the account-switch pickup, 148 -> 150: BRIEF-MERGE-CAR-2-2026-11-08 and BRIEF-GREEN-BASE-2026-11-08 under docs/chair/2026-11-08/, born dated, 0 past-EOF; 2026-11-07, MERGE-CAR: the union, 93 + 44 (the integration side) + 11 (the car) = 148, both sides' notes kept; 2026-11-07, the chair, 136 -> 137: BRIEF-FIX-PUBLIC-VEIL, born dated, 0 past-EOF; 2026-11-07, the chair, 134 -> 136: BRIEF-FIX-EXPORT-KEYS and BRIEF-FIX-FOOD-ISOLATION, born dated on the owner's word, 0 past-EOF; 2026-11-07, the chair, 131 -> 134: BRIEF-MERGE-CAR, BRIEF-MERGE-WAVE and ODQ-934.105-DRAFT, born dated for the account-switch handoff, 0 past-EOF; 2026-11-07, the chair, 130 -> 131: WAVE-RULINGS, born dated, 0 past-EOF; 2026-11-07, MERGE-R2 at the integration merge of the rung-2 landing, 107 -> 130: the union with LANDING-R2 seat E's twenty-two dated records (76 -> 98 on that side: the six CENSUS lane reports, the four docs/census/ rulings and records, the rung-2 base's eleven lane and soak records and the chair's BRIEF-LANDING-R2) and docs/INTEGRATION_MERGE_R2_2026-11-07.md, this seat's record, born dated, 0 past-EOF; 2026-11-07, the chair, 106 -> 107: BRIEF-PEOPLE-LAND, born dated, 0 past-EOF; 2026-11-07, the chair, 104 -> 106: the PEOPLE-5A and 5B briefs, born dated, 0 past-EOF; 2026-11-07, the chair at the merge of five seats, 100 -> 104: the PEOPLE-5-PREP, BUILD-CHECK, WAVE-PREP records and REVIEW_INTAKE_PLANTS, born dated, 0 past-EOF; 2026-11-07, the chair, 99 -> 100: PEOPLE-FACE-CENSUS-2026-11-07.md, born dated, 0 past-EOF; 2026-11-07, the chair on the integration branch, 96 -> 99: three measure-only seats' briefs (PEOPLE-5-PREP, BUILD-CHECK, WAVE-PREP) under docs/chair/2026-11-07/, born dated, 0 past-EOF; 2026-11-07, the chair on the integration branch, 93 -> 96: the people car's three middle-lane briefs under docs/chair/2026-11-07/, born dated, 0 past-EOF; 2026-11-07, the chair at the integration merge, 78 -> 93: fifteen dated records and chair briefs of the merged lanes (the engine merge, the review intake, W6, SOAK-MERGE, PEOPLE-0, the wiring inventory, the style audit, W0, the people car rulings), born dated, 0 past-EOF; 2026-11-07, REVIEW-INTAKE-LAND, 78 -> 80 (at the integration merge): docs/REVIEW_INTAKE_2026-11-06.md and docs/REVIEW_INTAKE_LAND_2026-11-07.md, the review-intake lane's record and its landing record, born dated; 2026-11-07, ENGINE-MERGE-2, 76 -> 78: docs/ENGINE_PR_2026-11-06.md and docs/ENGINE_MERGE2_2026-11-07.md, the two engine merge records, born dated, 0 past-EOF; 2026-11-07, the chair at the LANDING-9 merge, 72 -> 76: docs/LANDING9_EDGE_2026-11-06.md, docs/LANDING9_DISTILLER_2026-11-06.md, docs/LANDING9_DIGESTS_2026-11-06.md, docs/LANDING9_POWER_2026-11-06.md, the four lanes' records, born dated, 0 past-EOF; 2026-11-06, LANDING-9 corpus lane, 71 -> 72: docs/LANDING9_CORPUS_2026-11-06.md, the lane's record, born dated, 0 past-EOF; 2026-11-06, LANDING-8, 70 -> 71: docs/tuning-signatures/2026-11-06-v1.json, the owner's Register VII record, born dated, 0 past-EOF; 2026-11-06, LANDING-8, 29 -> 70: the nine LANDING-7 records, LANDING8_2026-11-06 and the thirty-one dated chair briefs of docs/chair/2026-11-06/, born dated, one past-EOF between them, LANDING7_A's line 20 into the economy viability writer, a record of its day; 2026-11-06, LANDING-7, 28 -> 29: SOAK_1000_RUNG1E_2026-11-04, the rung 1E soak re-run at the landed tip, born dated, 0 past-EOF; 2026-11-04, the rung-1 landing, 9 -> 28: nineteen lane reports and soak records of the rung-1 window, born dated, 0 path:line citations each; 2026-10-30: docs/UX_CONSOLIDATION_2026-10-30.md joined, 5 -> 6): the three COMPREHENSIVE_REVIEWs,
+ *                (2026-11-07, PEOPLE-LAND second seat at L0, 103 -> 104: the PEOPLE-6 LINKS merge brings docs/PEOPLE_6_LINKS_2026-11-07.md into the landing, both lanes' growth kept; 2026-11-07, PEOPLE-6 LINKS, 101 -> 102: docs/PEOPLE_6_LINKS_2026-11-07.md, the lane's record, born dated; 2026-11-07, PEOPLE-LAND, 101 -> 103: docs/PEOPLE_LAND_2026-11-07.md, the landing seat's record, and docs/tuning-signatures/2026-11-07-v2.json, Register VII v2's record, born dated; 2026-11-07, MERGE-5AB, 99 -> 101 at the union of lanes 5A and 5B: docs/PEOPLE_5B_EDIT_2026-11-07.md, lane 5B's record, and docs/PEOPLE_5AB_MERGE_2026-11-07.md, the merge seat's record, born dated; 2026-11-07, PEOPLE-5A DISPLAY, 96 -> 99: docs/PEOPLE_3_HOOKS_2026-11-07.md and docs/PEOPLE_4_TIES_2026-11-07.md, merged at the base uncounted, and docs/PEOPLE_5A_DISPLAY_2026-11-07.md, the lane's record, born dated; 2026-11-07, MERGE-234, 94 -> 96 at the union of lanes 1 and 2: docs/PEOPLE_2_CAST_2026-11-07.md, lane 2's record, and docs/PEOPLE_234_MERGE_2026-11-07.md, the merge seat's record, born dated, 0 past-EOF; 2026-11-07, PEOPLE-1 CAST, 93 -> 94: docs/PEOPLE_1_CAST_2026-11-07.md, the lane's record, born dated; 2026-11-07, the chair at the integration merge, 78 -> 93: fifteen dated records and chair briefs of the merged lanes (the engine merge, the review intake, W6, SOAK-MERGE, PEOPLE-0, the wiring inventory, the style audit, W0, the people car rulings), born dated, 0 past-EOF; 2026-11-07, REVIEW-INTAKE-LAND, 78 -> 80 (at the integration merge): docs/REVIEW_INTAKE_2026-11-06.md and docs/REVIEW_INTAKE_LAND_2026-11-07.md, the review-intake lane's record and its landing record, born dated; 2026-11-07, ENGINE-MERGE-2, 76 -> 78: docs/ENGINE_PR_2026-11-06.md and docs/ENGINE_MERGE2_2026-11-07.md, the two engine merge records, born dated, 0 past-EOF; 2026-11-07, the chair at the LANDING-9 merge, 72 -> 76: docs/LANDING9_EDGE_2026-11-06.md, docs/LANDING9_DISTILLER_2026-11-06.md, docs/LANDING9_DIGESTS_2026-11-06.md, docs/LANDING9_POWER_2026-11-06.md, the four lanes' records, born dated, 0 past-EOF; 2026-11-06, LANDING-9 corpus lane, 71 -> 72: docs/LANDING9_CORPUS_2026-11-06.md, the lane's record, born dated, 0 past-EOF; 2026-11-06, LANDING-8, 70 -> 71: docs/tuning-signatures/2026-11-06-v1.json, the owner's Register VII record, born dated, 0 past-EOF; 2026-11-06, LANDING-8, 29 -> 70: the nine LANDING-7 records, LANDING8_2026-11-06 and the thirty-one dated chair briefs of docs/chair/2026-11-06/, born dated, one past-EOF between them, LANDING7_A's line 20 into the economy viability writer, a record of its day; 2026-11-06, LANDING-7, 28 -> 29: SOAK_1000_RUNG1E_2026-11-04, the rung 1E soak re-run at the landed tip, born dated, 0 past-EOF; 2026-11-04, the rung-1 landing, 9 -> 28: nineteen lane reports and soak records of the rung-1 window, born dated, 0 path:line citations each; 2026-10-30: docs/UX_CONSOLIDATION_2026-10-30.md joined, 5 -> 6): the three COMPREHENSIVE_REVIEWs,
+ *                HANDOFF_2026-08-01_PAUSE, SIM-SEALS-SURVEY-2026-09-19,
+ *                GENERATION_COHERENCE_AUDIT_2026-11-02 and GENERATION_ROOT_CAUSES_2026-11-02
+ *                (both joined 2026-11-02, 6 -> 8 as measured at the merge over master,
+ *                born into the roster at the owner's word to save the audit and its
+ *                root-cause trace; their citations address c0ef42c13; a GROWTH that hid nothing)
+ *                and SOAK_1000_2026-11-03 (joined 2026-11-03, 8 -> 9, born into the roster
+ *                as the SOAK-1000 dry-run report; its citations address 1169b3cd5; a GROWTH
+ *                that hid nothing)
+ *   sha-pin (2)  a header that pins the tree it describes (`**Snapshot base:**`):
+ *                SETTLEMENT_CAPABILITY_ATLAS; docs/chair/2026-11-07/people-5-prep/walker-draft-at-base.txt (2026-11-08, MERGE-CAR,
+ *                the chair's ruling: a listing frozen at 1031233a4 that the people car's shorter files put past EOF;
+ *                377 -> 382 excluded, no row re-addressed)
+ * The BLOCKQUOTE is required, not decoration: docs/README.md discusses the word
+ * HISTORICAL in body prose while being the most live document in the tree, and a
+ * bare word match excluded it. A first pass tried "any hex sha in the header"
+ * instead and swallowed 269 of 493 documents including live design specs — the
+ * measurement is in the lane report. The bias is deliberate and one-directional:
+ * a live document wrongly baselined costs one row, a frozen one wrongly excluded
+ * costs a permanent blind spot, so anything not provably frozen is INCLUDED.
+ *
+ * ── ARM 3 · THE SYMBOL ARM (REPORT-ONLY, LIVE CODE + LIVE DOCS) ──────────────
+ * A citation whose adjacent backticked symbol is not on the cited line. It never
+ * fails the gate, and the reason is arithmetic rather than caution: a citation is
+ * symbol-checkable only when the name and the number sit on the SAME line, which
+ * is true of 5.6% of live-code citations. The charter's own example is invisible
+ * to it — `bearerSituation` is named on the line ABOVE its address. Widening the
+ * window to a paragraph pushed the measured finding count from 38 to 8,120, on
+ * common nouns ("tabs", "source", "settlement") read as symbols. Precision and
+ * coverage trade directly, and this arm keeps the precision and prints what it
+ * sees, exactly as proseWiringCensus gates three identities and reports the rest.
+ *
+ * ⭐ IT REACHED ONLY `CODE_TREES` UNTIL FIX-C2c (2026-09-20), WHICH IS WHERE IT IS
+ * WORST. Measured at `578272a99` the two halves are almost mirror images:
+ *   live code   4 findings, THREE of them confirmed false positives
+ *   live docs 223 findings on a sample-of-twenty lead-validity of 19/20
+ *             (209 after FIX-C2c's own twenty cures)
+ * The structural cause is where each corpus writes its citations. Code writes them
+ * inside dense, backtick-rich comments where a NEIGHBOURING symbol steals the
+ * attribution; docs write "`symbol` at `path:line`" in prose and tables, where the
+ * adjacent backtick IS the address's subject. The three standing code false
+ * positives are `scripts/wiring-census.mjs:349` (the documented case below),
+ * `tests/domain/roadsParticipation.test.js`'s `npcVerdictPulse.js:133` (TRUE: the
+ * `replaceOustedNpcs(` call whose base argument sits at `:134`) and
+ * `tests/lint/dossierMountRegistry.walker.test.js`'s `Primitives.jsx:120` (TRUE:
+ * that line IS `{open && <div>{children}</div>}`; the sentence attaches
+ * `Collapsible` to the BARE `:89`, which is the same construct inside it).
+ *
+ * ⛔ THE LANDED-PACKET RULE, AND WHY THE DOCS HALF NEEDS ONE. 192 of the
+ * manifest's 194 packets are LANDED, and a landed packet is a frozen record in
+ * exactly the sense a `docs/review-r2/` result is — it names the base it was
+ * verified at and its own header says "do not redispatch". Without the rule the
+ * widened arm prints 443 findings; with it, 223. The excluded 220 are the
+ * packets' own frozen evidence, among them three stale `implementation-packets.mjs`
+ * addresses in HB-2, WF-1D and SCW-0. The five in-range stale addresses FIX-C2b
+ * recorded (in GR-3B-ORIENT, GR-4A, GR-4B, IN-0C, IN-1A, TC-5B-II, ES-DA and
+ * DCS-1) are covered by the same rule — every one of those packets is LANDED — but
+ * this arm never printed them and does not now: they carry no adjacent backticked
+ * declared symbol, which is the 5.6% ceiling above, not the exclusion.
+ * The rule reads `PACKET_MANIFEST.json`'s
+ * `status` (`landedPacketPaths`) and never a hand list, so a packet that changes
+ * status moves the corpus with it; READY, SUPERSEDED and a packet file the
+ * manifest does not list at all stay LIVE. (443 and 223 are both measured BEFORE
+ * this lane's own twenty cures, so the pair compares the rule against itself on
+ * one tree state.)
+ *
+ * ⚠ A LEAD IS NOT A CURE INSTRUCTION, AND THE SAMPLE SAYS SO TWICE. On the same
+ * twenty, lead validity was 19/20 but SYMBOL ATTRIBUTION was only 16/20: the arm
+ * pointed at the right citation by the wrong name four times. The sharpest is
+ * `tests/components/handbookVoice.test.jsx`'s "AppViews.jsx:46 renders
+ * `<HowToUse />`" — `declaredAt` says `:47` (the lazy() DECLARATION) and the
+ * sentence's verb says `:182` (the only place it RENDERS). Cure by reading the
+ * sentence; a cure driven by `declaredAt` writes a new wrong address.
+ *
+ * ⛔ AND IT HAS A MEASURED FALSE POSITIVE, WHICH IS WHY IT MUST NEVER GATE. Of the
+ * 31 findings in its first run, ONE was wrong, and it was wrong in the way this
+ * arm is structurally able to be wrong: a NEIGHBOURING backtick wins the
+ * attribution. `scripts/wiring-census.mjs` cites `defenseGenerator.js :: computeDefenseScores`
+ * for a `milUpkeepMult` derivation, with `economicGates.military` backticked
+ * beside it; the arm attributed `economicGates` (declared far below) to the span
+ * and convicted a citation that was TRUE. It was caught only by reading the
+ * re-address diff line by line — the automated cure had already broken the
+ * correct address. Two survivors of the same audit went the other way
+ * (`EconomicsTab.jsx:251-257`, `OverviewTab.jsx:120-134` were genuinely stale),
+ * so the class is not "ranges are safe": it is that a SPAN addresses what its
+ * sentence says it addresses, and only a reader knows which name that is.
+ * TREAT EVERY LINE THIS ARM PRINTS AS A LEAD, NEVER AS A VERDICT.
+ *
+ * ── WHAT THIS WALKER CANNOT SEE (measured, not guessed) ──────────────────────
+ * An UNRESOLVABLE citation is SKIPPED, never convicted: this gate judges only an
+ * address it can read, which is also what makes the synthetic `fixture.ts:1`
+ * inside a test assertion a non-event rather than an allowlist entry. Measured at
+ * `578272a99` (FIX-C2c): 14,834 citations seen, 14,244 resolved, 166 ambiguous
+ * (12 distinct basenames — now READ by ARM 5 below) and 424 absent (143 tokens).
+ *
+ * ⭐ THE ABSENT SET IS NOT ONE THING, AND CALLING IT "absent" HID FOUR CLASSES.
+ * Classified against the WHOLE history path set (one `git log --all --name-only`
+ * pass; a per-token pathspec glob under-matched four of them by anchoring on the
+ * token's own leading segment):
+ *   DELETED-or-RENAMED (307)  the token suffix-matches a path in history.
+ *                             Dominated by the town-map strip — TE-STRIP-1
+ *                             (43c3ac3805), -2 (f02289efec), -3, -4.
+ *   SYNTHETIC (32)            the walkers' own planted fixtures and illustrations.
+ *   MISPATHED (13)            the file is LIVE but the citation names a wrong
+ *                             directory — `src/domain/spatialSubstrateRead.js` is
+ *                             `src/domain/spatial/spatialSubstrateRead.js`.
+ *   VENDORED                  a `node_modules` build named without its prefix
+ *                             (`jspdf.es.js`, `react-pdf.js`, lint-staged's own
+ *                             `gitWorkflow.js`, vitest's `tasks.d-*.d.ts`).
+ *   ABBREVIATED               a LIVE file exists whose basename ENDS with the
+ *                             token: `packets.mjs` is
+ *                             `scripts/implementation-packets.mjs`, `session.mjs`
+ *                             is `implementation-session.mjs`, `schema.js` is
+ *                             `settlement.schema.js`. True as prose, false as an
+ *                             address, and invisible to a suffix index.
+ *   PINNED-UNCOMMITTED        THE FOURTH SUB-CLASS, named by FIX-C2c. TWO tests,
+ *                             both checkable: the token suffix-matches NOTHING in
+ *                             `git log --all`, AND the citing document records a
+ *                             tree hash or a date. The proof case is FIX-C2b's:
+ *                             `writers.js` x27 in the sha-pinned
+ *                             SETTLEMENT_CAPABILITY_ATLAS, whose own front matter
+ *                             says several mapped systems "exist only as untracked
+ *                             files". It is NOT deletion and NOT a rename — the
+ *                             target never entered history on this line, so no
+ *                             commit can ever be cited for its going.
+ * ⚠ THE MEASURED CONSEQUENCE, and it is why the class needs naming rather than
+ * curing: every PINNED-UNCOMMITTED citation already sits inside an archival
+ * document or a LANDED packet, EXCEPT ONE — `docs/DESIGN_REALM_MAGIC_TOGGLE.md`'s
+ * `WorldMap.js:758-770`, struck by FIX-C2c with its reason. There is nothing to
+ * re-address, because there is no file to re-address to.
+ *
+ *   · a stale address that still lands inside the file (ARM 3 reads for this, and
+ *     reports rather than convicts).
+ *
+ * ── ARM 4 · THE BARE `:NNN` ARM (REPORT-ONLY, LIVE CODE + LIVE DOCS) ─────────
+ * A line address with no path in front of it, inheriting its file from a citation
+ * earlier in the same SENTENCE, as in `peaceTerms.js:213, :269` — both true here
+ * on purpose, because this arm reads its own header and an illustrative address
+ * that is false would be a finding the walker itself planted.
+ * The CITATION regex requires a path token, so ARMS 1-3 are blind to the whole
+ * form. MEASURED 2026-09-20: 661 of them — 59 in live code, 602 in live docs, more
+ * than four times ARM 1's entire live-code reach — and 12 address a line past the
+ * end of the file their sentence names.
+ *
+ * ⛔ IT NEVER GATES, and like ARM 3 the reason is arithmetic. A bare number can
+ * inherit a path the sentence names WITHOUT a line, which this reader cannot see:
+ * MF-UC1.md:178 cites `resolveTerrain.js:57` and then lists seven TERRAIN_DATA
+ * classes as `:51`…`:623`, which belong to a `geographyData.js` named two clauses
+ * later as a grep argument. SIX of the twelve findings are that one sentence, and
+ * restricting the arm to single-path sentences does not remove them (measured).
+ * There is no precision knob that makes it gateable, so it prints and the reader
+ * judges — the same contract ARM 3 earns for the same measured reason.
+ *
+ * ⛔ AND IT HAD A BLIND SPOT OF ITS OWN, FOUND BY MEASUREMENT (FIX-C2b, 2026-09-20).
+ * `SKIP_DIRS` carried a bare `build`, and `collectFiles` matches a bare name at EVERY
+ * depth, so the entry meant for a repo-root build output hid `tests/build/` — 59 test
+ * files — from the walk and from the target index. Both halves of the estate paid: the
+ * 7 citations written inside those files were read by no arm, and 44 citations
+ * elsewhere that NAMED one of them (`vendorPdfLazy.test.js` x18, `townMapLazy.test.js`
+ * x6, …) resolved to nothing and were skipped as unreadable rather than checked — which
+ * is why they surfaced as "absent target paths" in FIX-C2's recon when the files were
+ * there all along. PROVED by planting a past-EOF citation inside `tests/build/`: the
+ * pre-cure walk saw 5,208 files and ZERO findings, the cured walk 5,268 and the plant.
+ * Re-admitting the directory added no past-EOF finding (ARM 1 stays 0); ARM 3 went 2→3.
+ * THE LAW: a skip list matched by bare name is matched at every depth, so every entry
+ * must be a name that can never be a source directory.
+ *
+ * ── ARM 5 · THE AMBIGUOUS-BASENAME ARM (REPORT-ONLY, ALL CORPORA) ────────────
+ * A citation whose token matches 2+ files. Until FIX-C2c every arm dropped it
+ * WITHOUT A WORD — `buildTargetIndex` returned null and all four arms `continue`
+ * on a null target — so 166 citations across 12 basenames were the estate's
+ * largest remaining blind spot after `tests/build/`. The biggest are `en.js` (67,
+ * two candidates: `src/copy/en.js` and a vendored tinymce i18n file), `index.js`
+ * (21, THIRTEEN candidates) and `index.ts` (13, THIRTY-TWO supabase entrypoints).
+ *
+ * It resolves what the sentence actually says — one objective filter (`extent`: a
+ * candidate too short to hold the address cannot be meant) and three kinds of
+ * evidence (a discriminating directory segment in the sentence, an import in the
+ * citing file, a backticked symbol exactly one candidate declares) — and NAMES the
+ * rest with their candidates. Measured at this tip: 98 of 169 resolved
+ * (`extent` 86, `directory` 7, `symbol` 5), 71 left open and printed. The estate's
+ * own population is 166; the other three are this walker's and the shared module's
+ * illustrative citations, which are TRUE and which the arm resolves, exactly as
+ * ARM 4's header carries real addresses rather than invented ones.
+ *
+ * ⛔ AND IT MUST NEVER FEED ARMS 1 AND 2, which is a stronger rule than "it must
+ * never gate". `buildTargetIndex`'s null for an ambiguous token is the only thing
+ * keeping those addresses out of the gating arms, and teaching IT to guess would
+ * hand ARM 1 (live code, no baseline) and ARM 2 (live docs, a ratchet AT ZERO) a
+ * set nobody has ever checked — `docs/FIRST_CONTACT_BACKLOG.md:2830` alone cites
+ * `en.js:1549`. The disambiguation therefore lives in `disambiguateToken`, is
+ * consumed only here, and leaves the gate's resolver byte-identical.
+ *
+ * ⚠ IT READS FROM DISK, DELIBERATELY. `git grep` without a rev reads the INDEX,
+ * and the mutation sweep proves this gate by PLANTING an untracked file, so an
+ * index-based walk would be blind to its own mutant.
+ *
+ * ⛔⛔ THREE FILES ARE READ BY THIS GATE BUT MUST NOT BE CURED FROM IT. The prose
+ * manifest golden pins its RECORDER by the RAW SHA of three files —
+ * `tests/helpers/dossierManifest.js`, `tests/helpers/goldenMasterCorpus.js` and
+ * `scripts/prose-rate-corpus.mjs` (`MANIFEST_RECORDER_FILES`,
+ * `tests/helpers/dossierManifest.js:335`). A raw-byte pin cannot tell a comment
+ * from a behaviour change, so re-addressing a CITATION inside one of them breaks
+ * the fixture's provenance and `tests/property/dossierProseManifest.test.js`
+ * REFUSES it. It has already happened once: FIX-C2's one-line docblock re-address
+ * in `scripts/prose-rate-corpus.mjs` (`EconomicsTab.jsx:251-257` -> `:272`) moved
+ * that file's sha with ZERO of the golden's 1,050 rows moved, and reddened run 21
+ * (ODQ §934.47 addendum 84). MEASURED at this tip: two of the three recorder shas
+ * still MATCH the fixture and only `prose-rate-corpus.mjs` diverges.
+ * ⇒ IF AN ARM EVER PRINTS A FINDING WHOSE CITING FILE IS ONE OF THOSE THREE, DO
+ * NOT CURE IT. Record it "left — recorder file" and hand it to the lane that owns
+ * the recorder identity (CURE-J), because the cure costs a golden re-record that a
+ * citation lane may not perform. Measured 2026-09-20: ARMS 1, 3 and 4 each report
+ * ZERO findings inside the three, so there is no bait TODAY — this note exists for
+ * the day an address in one of them rots.
+ *
+ * ⚠ ONE FILE IS EXCLUDED BY NAME: .source-citation-baseline.json, which is a
+ * register of convicted addresses and would otherwise convict this gate of its
+ * own findings. Nothing else is exempt, including this file — its own citations
+ * are written to be true.
+ *
+ * @enforced-by scripts/mutation-sweep.sh ("citations/past-EOF citation planted")
+ */
+import { describe, expect, test } from 'vitest';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+
+import {
+  BASELINE_REL,
+  CODE_TREES,
+  ambiguousFindings,
+  archivalReason,
+  bareFindings,
+  buildCandidateIndex,
+  buildTargetIndex,
+  citationsIn,
+  citedLines,
+  collectFiles,
+  createReader,
+  disambiguateToken,
+  eofFindings,
+  landedPacketPaths,
+  partitionDocs,
+  rowKey,
+  sentenceSpans,
+  symbolFindings,
+} from './sourceCitationIntegrity.shared.mjs';
+
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
+
+const read = createReader(ROOT);
+const resolve = buildTargetIndex(ROOT);
+const candidatesFor = buildCandidateIndex(ROOT);
+const codeFiles = CODE_TREES.flatMap((tree) => collectFiles(ROOT, tree));
+const docs = partitionDocs(ROOT, read);
+/** The frozen-record rule for packet bodies, read from the manifest's own status. */
+const landedPackets = landedPacketPaths(ROOT);
+/** ARM 3's corpus: live code plus every live document that is not a LANDED packet. */
+const symbolCorpus = [...codeFiles, ...docs.live.filter((p) => !landedPackets.has(p))];
+const stats = { seen: 0, resolvable: 0 };
+const codeEof = eofFindings({ files: codeFiles, resolve, read, stats });
+const docsEof = eofFindings({ files: docs.live, resolve, read });
+
+const baseline = JSON.parse(readFileSync(join(ROOT, BASELINE_REL), 'utf8'));
+const baselinedRows = new Set(baseline.rows.map(rowKey));
+
+/** One finding, as a line a reader can act on without opening the tree. */
+const fmt = (r) => `  ${r.from}:${r.line}  cites ${r.cite}  but ${r.target} has ${r.targetLines} lines`;
+
+describe('source citation integrity — the controls (each proves an arm can RED)', () => {
+  /** A synthetic estate: three files, no disk. */
+  const files = { 'a/one.js': ['line1', 'line2', 'line3'], 'b/two.md': [] };
+  const fakeRead = (rel) => files[rel] ?? null;
+  const fakeResolve = (token) => (token === 'one.js' || token === 'a/one.js' ? 'a/one.js' : null);
+  const cite = (text) => {
+    files['b/two.md'] = [text];
+    return eofFindings({ files: ['b/two.md'], resolve: fakeResolve, read: fakeRead });
+  };
+
+  test('CONTROL: a citation past the end of its target is convicted', () => {
+    const found = cite('see `one.js:9` for the roster');
+    expect(found.map((r) => r.cite)).toEqual(['one.js:9']);
+    expect(found[0].targetLines).toBe(3);
+  });
+
+  test('CONTROL: the same citation acquits the moment it lands inside the file', () => {
+    expect(cite('see `one.js:3` for the roster')).toEqual([]);
+    expect(cite('see `one.js:1` for the roster')).toEqual([]);
+  });
+
+  test('CONTROL: an unresolvable target is SKIPPED, never convicted', () => {
+    // A vendored build, an absent file, an ambiguous basename and the synthetic
+    // `fixture.ts:1` inside a test assertion all land here. Convicting them would
+    // make the gate a liar about files it cannot read.
+    expect(cite('see `nowhere.js:9999` for the roster')).toEqual([]);
+  });
+
+  test('CONTROL: ranges and lists are parsed, and a range is an INTERVAL', () => {
+    // A naive split(':') sees neither form. And endpoints-only reading called a
+    // true citation stale: `tuningRegister.walker.test.js:75-91` names a constant
+    // declared at :84.
+    expect(citationsIn('`one.js:1-17` and `one.js:211,229`').map((c) => c.spec)).toEqual(['1-17', '211,229']);
+    expect([...citedLines('75-91')]).toContain(84);
+    expect([...citedLines('4,9')].sort((a, b) => a - b)).toEqual([4, 9]);
+    // The last number of a range is checked too, not only its opening.
+    expect(cite('see `one.js:1-9` for the roster').length).toBe(0);
+    expect(cite('see `one.js:8-9` for the roster').length).toBe(1);
+  });
+
+  test('CONTROL: the symbol arm convicts a moved symbol and acquits a present one', () => {
+    files['a/one.js'] = ['const alpha = 1;', 'const beta = 2;', 'const gammaRay = 3;'];
+    const stale = { 'b/two.md': ['`gammaRay` lives at `one.js:1`'] };
+    const fresh = { 'b/two.md': ['`gammaRay` lives at `one.js:3`'] };
+    const readOf = (bank) => (rel) => (rel === 'a/one.js' ? files['a/one.js'] : bank[rel] ?? null);
+    expect(symbolFindings({ files: ['b/two.md'], resolve: fakeResolve, read: readOf(stale) })
+      .map((r) => r.symbol)).toEqual(['gammaRay']);
+    expect(symbolFindings({ files: ['b/two.md'], resolve: fakeResolve, read: readOf(fresh) })).toEqual([]);
+    files['a/one.js'] = ['line1', 'line2', 'line3'];
+  });
+
+  test('CONTROL: a bare `:NNN` inherits the NEAREST PRECEDING path, and is convicted past EOF', () => {
+    // `one.js` has three lines. The bare `:9` belongs to it and is past its end.
+    const bare = (text) => {
+      files['b/two.md'] = [text];
+      return bareFindings({ files: ['b/two.md'], resolve: fakeResolve, read: fakeRead });
+    };
+    expect(bare('`one.js:1`, and also :9').map((r) => r.bare)).toEqual([':9']);
+    expect(bare('`one.js:1`, and also :2')).toEqual([]);
+    // ⛔ NEAREST PRECEDING, never the sentence's LAST: a later path must not steal
+    // a bare address written before it. `one.js:1 … :9 … nowhere.js:4` — the `:9`
+    // is one.js's, and reading the last anchor would attribute it to an
+    // unresolvable target and silently drop a real finding.
+    expect(bare('`one.js:1` then :9 then `nowhere.js:4`').map((r) => r.target)).toEqual(['a/one.js']);
+    // A bare address with NO preceding citation in its sentence is not a citation.
+    expect(bare('the ratio is :9 by itself')).toEqual([]);
+    // The anchor's OWN line number is never re-counted as a bare address.
+    expect(bare('`one.js:9`').map((r) => r.bare)).toEqual([]);
+    // A sentence boundary ends inheritance: `one.js` cannot reach past the stop.
+    expect(bare('`one.js:1` is the roster. And :9 is something else.')).toEqual([]);
+  });
+
+  test('CONTROL: sentenceSpans splits on stops and cells, but not inside a number', () => {
+    expect(sentenceSpans('a. b').map((s) => s.text)).toEqual(['a.', ' b']);
+    expect(sentenceSpans('| a | b').map((s) => s.text)).toEqual(['|', ' a |', ' b']);
+    // A digit before the stop is a version or a range end, never a sentence end.
+    expect(sentenceSpans('v1.2 holds').map((s) => s.text)).toEqual(['v1.2 holds']);
+  });
+
+  test('CONTROL: the LANDED rule excludes a landed packet and KEEPS a ready one', () => {
+    // A synthetic manifest, because the live one has no READY row to read: EM-R0a
+    // was placed READY at 680eacb8d, a DESCENDANT of the base this control was
+    // written at. A rule that cannot be shown to keep a READY packet would be a
+    // rule nobody could trust the day one exists.
+    const dir = mkdtempSync(join(tmpdir(), 'packet-status-'));
+    try {
+      mkdirSync(join(dir, 'docs/implementation'), { recursive: true });
+      writeFileSync(join(dir, 'docs/implementation/PACKET_MANIFEST.json'), JSON.stringify({
+        packets: [
+          { id: 'L-1', status: 'LANDED', packetPath: 'docs/implementation/packets/x/L-1.md' },
+          { id: 'R-1', status: 'READY', packetPath: 'docs/implementation/packets/x/R-1.md' },
+          { id: 'S-1', status: 'SUPERSEDED', packetPath: 'docs/implementation/packets/x/S-1.md' },
+        ],
+      }));
+      const landed = landedPacketPaths(dir);
+      expect([...landed]).toEqual(['docs/implementation/packets/x/L-1.md']);
+      // READY and SUPERSEDED are LIVE, and so is a packet file the manifest never lists.
+      expect(landed.has('docs/implementation/packets/x/R-1.md'), 'a READY packet is live').toBe(false);
+      expect(landed.has('docs/implementation/packets/x/S-1.md'), 'a SUPERSEDED packet is live').toBe(false);
+      expect(landed.has('docs/implementation/packets/x/UNLISTED.md'), 'unknown status is not frozen status').toBe(false);
+      // A missing or malformed manifest excludes NOTHING rather than guessing.
+      writeFileSync(join(dir, 'docs/implementation/PACKET_MANIFEST.json'), '{ not json');
+      expect(landedPacketPaths(dir).size, 'a malformed manifest excludes nothing').toBe(0);
+      expect(landedPacketPaths(join(dir, 'no-such-root')).size, 'an absent manifest excludes nothing').toBe(0);
+    } finally { rmSync(dir, { recursive: true, force: true }); }
+  });
+
+  test('CONTROL: the ambiguity reader resolves on evidence and REFUSES without it', () => {
+    // synthetic-citation-names: `__c2cCopy.js` and `__c2cTheme.js` name NO file in this
+    // tree, deliberately. A first draft of this control used `en.js` and `theme.js` —
+    // both of which are REAL ambiguous basenames here — and ARM 5 read six of the
+    // control's own string literals as live citations, inflating its population from
+    // 168 to 174. A fixture shaped like a real artifact name is read by the walkers
+    // that govern its directory (the CURE-I fixture law, run 19); an absent name is
+    // skipped by every arm, which is what makes this control inert.
+    const bank = {
+      'src/copy/__c2cCopy.js': Array.from({ length: 400 }, (_, i) => (i === 41 ? 'const bannerTitle = 1;' : '')),
+      'vendor/i18n/__c2cCopy.js': ['short', 'file'],
+      'src/a/__c2cTheme.js': ['a', 'b', 'c'],
+      'src/b/__c2cTheme.js': ['a', 'b', 'c'],
+      'src/importer.js': ["import { x } from './a/__c2cTheme.js';"],
+    };
+    const r = (rel) => bank[rel] ?? null;
+    const copies = ['src/copy/__c2cCopy.js', 'vendor/i18n/__c2cCopy.js'];
+    const themes = ['src/a/__c2cTheme.js', 'src/b/__c2cTheme.js'];
+    const ask = (token, candidates, sentence, citingFile, cites) => disambiguateToken({
+      token, candidates, sentence, citingFile, read: r, cites,
+    });
+    // extent: a two-line file cannot hold line 300, so only one candidate can be meant.
+    expect(ask('__c2cCopy.js', copies, 'see the copy table at 300', 'docs/D.md', 300))
+      .toEqual({ path: 'src/copy/__c2cCopy.js', by: 'extent' });
+    // directory: a discriminating segment written in the sentence.
+    expect(ask('__c2cCopy.js', copies, 'see vendor/i18n/ line 1', 'docs/D.md', 1))
+      .toEqual({ path: 'vendor/i18n/__c2cCopy.js', by: 'directory' });
+    // import: the citing file's own module graph settles it.
+    expect(ask('__c2cTheme.js', themes, 'the theme at 1', 'src/importer.js', 1))
+      .toEqual({ path: 'src/a/__c2cTheme.js', by: 'import' });
+    // symbol: exactly one candidate declares the backticked name.
+    expect(ask('__c2cCopy.js', copies, '`bannerTitle` at line 1', 'docs/D.md', 1))
+      .toEqual({ path: 'src/copy/__c2cCopy.js', by: 'symbol' });
+    // ⛔ AND IT REFUSES. No extent split, no directory, no import, no symbol.
+    expect(ask('__c2cTheme.js', themes, 'the theme at 2', 'docs/D.md', 2)).toBeNull();
+    // An address NO candidate can hold leaves the bucket whole rather than re-homing
+    // a merely-stale citation onto the longest file that happens to survive.
+    expect(ask('__c2cTheme.js', themes, 'the theme at 9999', 'docs/D.md', 9999)).toBeNull();
+  });
+
+  test('CONTROL: the archival rule DISCRIMINATES — it is four checkable predicates, not a hunch', () => {
+    const bank = {
+      'docs/LIVE.md': ['# live', 'body'],
+      'docs/BANNERED.md': ['# t', '', '> **⚠️ HISTORICAL (audit snapshot) — do NOT read as current state.**'],
+      'docs/PROSE.md': ['# t', '', '**HISTORICAL** docs are point-in-time exhaust, unlike this index.'],
+      'docs/PINNED.md': ['# t', '', '**Snapshot base:** `composite-r4 @ 8033ddbe`'],
+      'docs/SNAP_2026-07-13.md': ['# t'],
+      'docs/review-r2/RESULTS.json': ['{}'],
+    };
+    const r = (rel) => bank[rel] ?? null;
+    expect(archivalReason('docs/review-r2/RESULTS.json', r)).toBe('tree');
+    expect(archivalReason('docs/SNAP_2026-07-13.md', r)).toBe('dated');
+    expect(archivalReason('docs/BANNERED.md', r)).toBe('banner');
+    expect(archivalReason('docs/PINNED.md', r)).toBe('sha-pin');
+    expect(archivalReason('docs/LIVE.md', r)).toBeNull();
+    // The blockquote is load-bearing: docs/README.md names HISTORICAL in body
+    // prose and is the most live document in the tree.
+    expect(archivalReason('docs/PROSE.md', r)).toBeNull();
+  });
+});
+
+describe('source citation integrity — the live estate', () => {
+  test('guard-the-guard: the walk reached the corpus and resolved real targets', () => {
+    // Every arm below would pass vacuously on an empty walk. Floors are measured
+    // against this tree and TIGHTEN toward reality; they are never lowered to
+    // admit a shrinking scan.
+    expect(codeFiles.length, 'the src/tests/scripts walk collapsed').toBeGreaterThanOrEqual(5000);
+    expect(docs.all.length, 'the docs walk collapsed').toBeGreaterThanOrEqual(480);
+    expect(docs.live.length, 'the live-docs corpus collapsed').toBeGreaterThanOrEqual(450);
+    expect(stats.seen, 'the citation parser matched nothing').toBeGreaterThanOrEqual(700);
+    expect(stats.resolvable, 'the target index resolved nothing').toBeGreaterThanOrEqual(600);
+    expect(resolve('sourceCitationIntegrity.shared.mjs')).toBe('tests/lint/sourceCitationIntegrity.shared.mjs');
+    // ⛔ THE GATE'S RESOLVER STILL REFUSES A COIN FLIP. ARM 5 resolves ambiguity for a
+    // READER; this null is what keeps those addresses out of ARM 1 and ARM 2.
+    expect(resolve('index.js')).toBeNull();
+    expect(candidatesFor('index.js').length, 'the candidate index keeps the whole bucket').toBeGreaterThan(1);
+    expect(candidatesFor('no-such-file-anywhere.js'), 'an absent token has no candidates').toEqual([]);
+
+    // The LANDED rule is DERIVED from the manifest, never transcribed, so a packet
+    // that changes status moves the corpus with it instead of drifting past a list.
+    const manifest = JSON.parse(readFileSync(join(ROOT, 'docs/implementation/PACKET_MANIFEST.json'), 'utf8'));
+    const landedRows = manifest.packets.filter((p) => p.status === 'LANDED');
+    expect(landedPackets.size, 'every LANDED manifest row is excluded, and nothing else is').toBe(landedRows.length);
+    expect(landedPackets.size, 'the frozen-packet set collapsed').toBeGreaterThanOrEqual(150);
+    for (const row of manifest.packets.filter((p) => p.status !== 'LANDED')) {
+      expect(landedPackets.has(row.packetPath), `${row.id} is ${row.status} and must stay LIVE`).toBe(false);
+    }
+    expect(symbolCorpus.filter((p) => landedPackets.has(p)), 'ARM 3 still reads a frozen packet body').toEqual([]);
+    expect(symbolCorpus.length, 'ARM 3\'s corpus collapsed').toBeGreaterThanOrEqual(5000);
+    expect(symbolCorpus.length - codeFiles.length, 'ARM 3 reaches no live document').toBeGreaterThanOrEqual(200);
+  });
+
+  test('ARM 1 — NO citation in src/, tests/ or scripts/ points past the end of its target', () => {
+    expect(
+      codeEof.map(fmt),
+      '\nA live-code citation addresses a line that does not exist. The file it names was'
+      + ' decomposed, truncated or replaced, and the address was never re-verified — the'
+      + ' subsystemRowsWar class (ODQ §934.47 addendum 44). Open the citing line, find the'
+      + ' symbol its sentence NAMES, locate that symbol in the target, and write its true'
+      + ' line. There is no baseline for live code and there will not be one.\n',
+    ).toEqual([]);
+  });
+
+  test('ARM 2 — ONLY-SHRINKS: no NEW past-EOF citation in a live document', () => {
+    const novel = docsEof.filter((r) => !baselinedRows.has(rowKey(r)));
+    expect(
+      novel.map(fmt),
+      `\nNEW past-EOF citation(s) in live documentation, against ${BASELINE_REL}.`
+      + ' Re-address the citation to the symbol its sentence names. This baseline never'
+      + ' grows: a new row is a red, not an entry. If the document is a frozen record of'
+      + ' its day, give it the estate\'s own HISTORICAL banner rather than editing this'
+      + ' gate — the archival rules are listed in this file\'s header.\n',
+    ).toEqual([]);
+  });
+
+  test('ARM 2 — ONLY-SHRINKS: every baselined row is still live — delete it when it clears', () => {
+    const live = new Set(docsEof.map(rowKey));
+    const cleared = [...baselinedRows].filter((k) => !live.has(k)).sort();
+    expect(
+      cleared,
+      `\n${cleared.length} baselined past-EOF citation(s) no longer exist. The ratchet only`
+      + ` shrinks, so the win is banked by DELETING these rows from ${BASELINE_REL}`
+      + ' (the "rows" array; leave frozenAt alone).\n',
+    ).toEqual([]);
+  });
+
+  test('ARM 3 — REPORT-ONLY: citations whose named symbol has moved, over live code AND live docs', () => {
+    const findings = symbolFindings({ files: symbolCorpus, resolve, read });
+    // Never an assertion on the count: this arm exists to be READ, and a ratchet
+    // over a 5.6%-coverage heuristic would freeze the heuristic, not the estate.
+    const inCode = findings.filter((r) => !r.from.startsWith('docs/')).length;
+    const lines = findings.map(
+      (r) => `  ${r.from}:${r.line}  cites ${r.cite}  but \`${r.symbol}\` is declared at `
+        + `${r.declaredAt.slice(0, 4).join(', ')} in ${r.target}`,
+    );
+    // ⚠ process.stdout.write, NOT console.log, and this is measured rather than
+    // stylistic. Under vitest 4.1.8's DEFAULT reporter a passing test's
+    // console.log is DROPPED — probed on this tree 2026-09-20, both channels in
+    // one passing test: process.stdout survived the default reporter and
+    // --reporter=verbose, console.log only the latter. A report-only arm whose
+    // report nobody can read is a false instrument, and this walker exists
+    // because false instruments are the class.
+    process.stdout.write(
+      `\nSYMBOL ARM (report-only): ${findings.length} citation(s) whose named symbol is not on the cited line`
+      + ` — ${inCode} in live code, ${findings.length - inCode} in live docs, over ${symbolCorpus.length} files`
+      + ` (${landedPackets.size} LANDED packet bodies excluded as frozen records).\n`
+      + '  ⚠ EVERY LINE IS A LEAD, NEVER A VERDICT. Measured 2026-09-20 on a systematic sample of\n'
+      + '  twenty docs findings: 19/20 led to a citation that genuinely needed re-addressing, but only\n'
+      + '  16/20 named the right symbol — so cure by reading the SENTENCE, never by `declaredAt`.\n'
+      + `${lines.join('\n')}\n\n`,
+    );
+    expect(Array.isArray(findings)).toBe(true);
+  });
+
+  test('ARM 5 — REPORT-ONLY: citations whose basename matches more than one file', () => {
+    const stats5 = { seen: 0, resolved: 0 };
+    const findings = ambiguousFindings({
+      files: [...codeFiles, ...docs.all], candidatesFor, read, stats: stats5,
+    });
+    const byRule = {};
+    for (const r of findings) if (r.by) byRule[r.by] = (byRule[r.by] ?? 0) + 1;
+    const open = findings.filter((r) => !r.resolved);
+    const byToken = new Map();
+    for (const r of findings) {
+      const e = byToken.get(r.token) ?? { seen: 0, resolved: 0, candidates: r.candidates.length };
+      e.seen += 1;
+      if (r.resolved) e.resolved += 1;
+      byToken.set(r.token, e);
+    }
+    const ledger = [...byToken.entries()]
+      .sort((a, b) => b[1].seen - a[1].seen)
+      .map(([token, e]) => `  ${String(e.resolved).padStart(3)}/${String(e.seen).padEnd(4)} resolved  ${token}`
+        + `  (${e.candidates} candidates)`);
+    process.stdout.write(
+      `\nAMBIGUOUS-BASENAME ARM (report-only): ${stats5.seen} citation(s) whose token matches 2+ files;`
+      + ` ${stats5.resolved} resolved by path evidence, ${open.length} left open.\n`
+      + `  by rule: ${JSON.stringify(byRule)}\n${ledger.join('\n')}\n`
+      + `${open.map((r) => `  OPEN  ${r.from}:${r.line}  ${r.cite}  ->  ${r.candidates.slice(0, 4).join(' | ')}`
+        + `${r.candidates.length > 4 ? ` | …${r.candidates.length - 4} more` : ''}`).join('\n')}\n\n`,
+    );
+    // A population floor, exactly as ARM 4 carries: a walk that stops finding the
+    // form entirely has broken, and that is worth a red even in a report-only arm.
+    expect(stats5.seen, 'the ambiguity reader matched nothing — 2+-candidate tokens cannot have vanished')
+      .toBeGreaterThanOrEqual(100);
+  });
+
+  test('ARM 4 — REPORT-ONLY: bare `:NNN` addresses past the end of the file their sentence names', () => {
+    const stats4 = { seen: 0 };
+    const findings = bareFindings({ files: [...codeFiles, ...docs.live], resolve, read, stats: stats4 });
+    // No assertion on the count, for ARM 3's reason: the attribution is not sound
+    // (a bare address can inherit a path named without a line), so a ratchet here
+    // would freeze a heuristic rather than the estate. It prints leads.
+    const lines = findings.map(
+      (r) => `  ${r.from}:${r.line}  ${r.bare} inherits ${r.inherits} -> ${r.target} (${r.targetLines} lines)`,
+    );
+    process.stdout.write(
+      `\nBARE-ADDRESS ARM (report-only): ${stats4.seen} bare \`:NNN\` address(es) read; `
+      + `${findings.length} point past the end of the file their sentence names.\n`
+      + `${lines.join('\n')}\n\n`,
+    );
+    // The population itself is a floor, not a ratchet: a walk that stops finding
+    // the form entirely has broken, and that is worth a red even here.
+    expect(stats4.seen, 'the bare-address reader matched nothing — the form cannot have vanished')
+      .toBeGreaterThanOrEqual(400);
+  });
+
+  test('the archival exclusion is still the set this walker documents', () => {
+    // An exclusion nobody counts is an exclusion nobody audits. If a document
+    // acquires or loses its frozen-record marks, the header above and the
+    // committed roster must move WITH it, deliberately.
+    const byRule = {};
+    for (const { reason } of docs.archival) byRule[reason] = (byRule[reason] ?? 0) + 1;
+    expect(
+      byRule,
+      'the archival roster moved. Re-measure, update archivalExclusionAtFreeze in '
+      + `${BASELINE_REL} and the header of this file, and say in the commit which `
+      + 'document changed class and why.',
+    ).toEqual(baseline.archivalExclusionAtFreeze.byRule);
+  });
+});

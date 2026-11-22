@@ -1,0 +1,57 @@
+// Measure: eta(stress, page hook count), hooks by tier calm vs crisis, record/page truth findings.
+// Usage: node measure.mjs <repoRoot> <out.json>
+import { createHash } from 'node:crypto';
+import { writeFileSync } from 'node:fs';
+const root = process.argv[2];
+const out = process.argv[3];
+const imp = (p) => import(`${root}/${p}`);
+const { generateSettlementPipeline } = await imp('src/generators/generateSettlementPipeline.js');
+const { collectPlotHooks } = await imp('src/domain/dossier/plotHooks.js');
+const { hookTruthFindings, renderedHookTruthFindings } = await imp('src/domain/coherence/hookTruthFindings.js');
+const { STRESS_TYPE_MAP } = await imp('src/data/stressTypes.js');
+const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
+const KINDS = Object.keys(STRESS_TYPE_MAP);
+const entriesOf = (s) => (Array.isArray(s.stress) ? s.stress : [s.stress]).filter(Boolean);
+const rows = [];
+for (let i = 0; i < 120; i += 1) {
+  const seed = `tonight-cast-${i}`;
+  const s = i % 2 === 0
+    ? generateSettlementPipeline({ settType: TIERS[i % TIERS.length] }, null, { seed, customContent: {} })
+    : generateSettlementPipeline({ settType: TIERS[i % TIERS.length], stressTypes: [KINDS[i % KINDS.length], KINDS[(i * 5 + 2) % KINDS.length]].filter((k, j, a) => a.indexOf(k) === j) }, null, { seed, customContent: {} });
+  const hooks = collectPlotHooks(s);
+  const entries = entriesOf(s);
+  const stressScore = entries.length;
+  rows.push({ seed, tier: s.tier || TIERS[i % TIERS.length], crises: entries.length, hooks: hooks.length,
+    record: hookTruthFindings(s).length, page: renderedHookTruthFindings(s).length,
+    crisisHookRecord: collectPlotHooks(s).filter((h) => h.crisis).length,
+    hooksHash: createHash('sha256').update(JSON.stringify(hooks)).digest('hex').slice(0, 16),
+    crisisHookText: entries.map((e) => e.crisisHook),
+  });
+}
+// eta: correlation ratio of hook count across stress groups (0,1,2 crises), within tier? report both overall and pooled-within-tier.
+function eta(groups) {
+  const all = groups.flat(); const m = all.reduce((a, b) => a + b, 0) / all.length;
+  const sst = all.reduce((a, x) => a + (x - m) ** 2, 0);
+  const ssb = groups.reduce((a, g) => g.length ? a + g.length * ((g.reduce((x, y) => x + y, 0) / g.length) - m) ** 2 : a, 0);
+  return sst ? Math.sqrt(ssb / sst) : 0;
+}
+const byCrises = [0, 1, 2].map((k) => rows.filter((r) => r.crises === k).map((r) => r.hooks));
+// within-tier: residualize hooks by tier mean, then eta on residuals
+const tierMean = Object.fromEntries(TIERS.map((t) => { const v = rows.filter((r) => r.tier === t).map((r) => r.hooks); return [t, v.reduce((a, b) => a + b, 0) / v.length]; }));
+const resid = [0, 1, 2].map((k) => rows.filter((r) => r.crises === k).map((r) => r.hooks - tierMean[r.tier]));
+const anyCrisis = [rows.filter((r) => r.crises === 0).map((r) => r.hooks), rows.filter((r) => r.crises > 0).map((r) => r.hooks)];
+const mean = (v) => v.length ? +(v.reduce((a, b) => a + b, 0) / v.length).toFixed(2) : null;
+const byTier = TIERS.map((t) => ({ tier: t,
+  calm: mean(rows.filter((r) => r.tier === t && r.crises === 0).map((r) => r.hooks)), nCalm: rows.filter((r) => r.tier === t && r.crises === 0).length,
+  crisis: mean(rows.filter((r) => r.tier === t && r.crises > 0).map((r) => r.hooks)), nCrisis: rows.filter((r) => r.tier === t && r.crises > 0).length }));
+const crisisRows = rows.filter((r) => r.crises > 0);
+const summary = {
+  n: rows.length, crisisTowns: crisisRows.length, crises: rows.reduce((a, r) => a + r.crises, 0),
+  etaCrisisCount: +eta(byCrises).toFixed(3), etaAnyCrisis: +eta(anyCrisis).toFixed(3), etaWithinTier: +eta(resid).toFixed(3),
+  hooksPerCrisisTown: mean(crisisRows.map((r) => r.hooks)), hooksPerCalmTown: mean(rows.filter((r) => r.crises === 0).map((r) => r.hooks)),
+  recordFindings: rows.reduce((a, r) => a + r.record, 0), pageFindings: rows.reduce((a, r) => a + r.page, 0),
+  crisisHooksOnRecord: rows.reduce((a, r) => a + r.crisisHookRecord, 0),
+  byTier,
+};
+writeFileSync(out, JSON.stringify({ summary, rows }, null, 1));
+console.log(JSON.stringify(summary));

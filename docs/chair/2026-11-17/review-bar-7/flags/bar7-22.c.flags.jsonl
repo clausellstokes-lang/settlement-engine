@@ -1,0 +1,10 @@
+{"id":"C44353","town":"bar0-village-famine-rand-46","sev":"LOW","kind":"BROKEN","why":"'next in line, the first choice already holding a role that contradicts this one' is an incoherent fragment; no successor named","other":""}
+{"id":"C44471","town":"bar0-village-famine-rand-46","sev":"LOW","kind":"BROKEN","why":"'Healing (3)' heading holds Burial, Life ceremonies, Religious services: none is healing","other":""}
+{"id":"C44634","town":"bar0-village-famine-rand-46","sev":"MED","kind":"LACKS","why":"reeve 'under noble oversight'; GOVERNMENT lists only Elected Reeve and Grain Holders, no noble power","other":""}
+{"id":"C44870","town":"bar0-village-famine-rand-46","sev":"LOW","kind":"PAIR","why":"few keep the rites beyond weddings and burials, yet the church is 'central to everything' with obligatory tithe","other":"C44440"}
+{"id":"C44903","town":"bar0-village-famine-rand-47","sev":"LOW","kind":"STATE","why":"warm oven smell greeting the visitor is a calm-times scene in active famine, chimney smoke thin; no mark","other":""}
+{"id":"C44944","town":"bar0-village-famine-rand-47","sev":"LOW","kind":"BROKEN","why":"'next in line, the first choice already holding a role that contradicts this one' is an incoherent fragment (repeated C44991)","other":""}
+{"id":"C45056","town":"bar0-village-famine-rand-47","sev":"LOW","kind":"BROKEN","why":"'Healing (3)' heading holds Burial, Life ceremonies, Religious services: none is healing","other":""}
+{"id":"C45128","town":"bar0-village-famine-rand-47","sev":"LOW","kind":"PAIR","why":"Hunting Grounds listed under Abundant, but the next block prints Hunting Grounds (failed); FOOD failed source is game","other":"C45130"}
+{"id":"C45173","town":"bar0-village-famine-rand-47","sev":"LOW","kind":"LACKS","why":"'the streets stay badly guarded' in a village of 80 with no watch or guard of any kind","other":""}
+{"id":"DONE","lines":1192,"blocks":2,"flags":9}

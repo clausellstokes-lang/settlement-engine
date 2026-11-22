@@ -1,0 +1,311 @@
+/**
+ * settlementLifecycleHelpers.js — the module-level helpers of settlementSlice.js
+ * that live OUTSIDE the slice literal, moved out verbatim by THE DECOMPOSITION
+ * WAVE (lane D).
+ *
+ * Four unrelated-looking pieces that share one property: none of them closes over
+ * `set` or `get` from the slice factory, so relocating them cannot change a single
+ * store behaviour.
+ *
+ *   - _dimsSummary — the coarse SystemState before/after slice for an ActionResult.
+ *   - DERIVED_CONFIG_KEYS / stripDerivedConfigKeys — the derived-config strip.
+ *   - rippleEventThroughWorld — the world half of applyEvent.
+ *   - activateFaithIfEntitled — W-F6, the store side of the premium faith gate.
+ *   - resetSettlementIdentity — THE single chokepoint for clearing session-only
+ *     identity residue on any active-settlement swap.
+ *
+ * DERIVED_CONFIG_KEYS and stripDerivedConfigKeys are re-exported from
+ * settlementSlice.js, which stays the public import site for their consumers.
+ */
+import { activateLatentPantheon } from '../domain/worldPulse/latentPantheon.js';
+import { propagateRegionalEvent } from '../domain/region/index.js';
+import { mapEventToPartyImpact } from '../domain/events/partyEventLinkage.js';
+import { canonRelationshipTargetFor } from '../domain/events/canonRelationshipLinkage.js';
+import { twinDirectiveForEvent } from '../domain/crisisLifecycle.js';
+import { saveEnvelopeFor, visibleSettlementIdsForCampaign } from './settlementSliceHelpers.js';
+import { draftIdentity } from './persistProjection.js';
+
+/**
+ * Coarse SystemState summary for an ActionResult before/after slice — the four
+ * dimension values (or null), never a clone. Tolerant of a null/partial state.
+ * @param {*} ss
+ * @returns {{resilience:number|null, volatility:number|null, externalThreat:number|null, resourcePressure:number|null}|null}
+ */
+export function _dimsSummary(ss) {
+  if (!ss || typeof ss !== 'object') return null;
+  const pick = (d) => (d && typeof d.value === 'number' ? d.value : null);
+  return {
+    resilience:       pick(ss.resilience),
+    volatility:       pick(ss.volatility),
+    externalThreat:   pick(ss.externalThreat),
+    resourcePressure: pick(ss.resourcePressure),
+  };
+}
+
+// ── Derived-config strip ────────────────────────────────────────────────
+// settlement.config is the RESOLVED effectiveConfig snapshot: pipeline steps
+// write purely-derived keys onto it (resolveStress → stressType/stressTypes/
+// intendedStressTypes/_population; stressConfirmPass → migrationDirection, the
+// projection of stress[].direction (WIRING-W0); isolationGenerator → _magicTradeOnly;
+// generateEconomy → _neighbourEconBias; resolveConfig → tier/magicLevel/
+// terrainType; resolveNeighbour → neighborRelationship). Display and sim
+// consumers read those keys from
+// settlement.config, so they must stay there — but they must NOT re-enter
+// the pipeline as user input: emergent stress would be re-rolled as
+// user-forced stress (with a false "selected by user config" receipt) and
+// stale isolation/economy flags would outlive their causes.
+// settlement._config (the raw pre-resolution config) is the preferred
+// regeneration input; this strip protects the fallback for settlements
+// persisted before _config existed. Overwritten-in-place keys (floored
+// priorityMilitary, magicExists-zeroed priorityMagic, resolved route/threat/
+// culture) are NOT stripped here — their raw values are unrecoverable from
+// the snapshot and are restored via the _config path instead.
+export const DERIVED_CONFIG_KEYS = Object.freeze([
+  'stressType', 'stressTypes', 'intendedStressTypes', 'migrationDirection',
+  '_magicTradeOnly', '_neighbourEconBias', '_neighbourEconMode', '_isolationInfraType',
+  '_population',
+  'tier', 'magicLevel', 'terrainType',
+  'neighborRelationship',
+]);
+
+export function stripDerivedConfigKeys(config) {
+  if (!config || typeof config !== 'object') return config;
+  const out = { ...config };
+  for (const key of DERIVED_CONFIG_KEYS) delete out[key];
+  return out;
+}
+
+/**
+ * The world-ripple half of applyEvent: AFTER the settlement event has committed
+ * and persisted, propagate it into the campaign's world engine. Three best-
+ * effort, canon-only consumers (campaign is set only in canon), each guarded so
+ * a linkage failure can never undo the settlement event that already applied:
+ *   1. Regional propagation — the change ripples to visible neighbours.
+ *   2. Crisis lifecycle — the DOMAIN names the transition (twinDirectiveForEvent:
+ *      'inject' on onset/escalate so the pulse ages the crisis; 'resolve' on
+ *      resolution so the pulse stops aging one the DM already ended). This is the
+ *      ONE place the store obeys it, so a new crisis event type cannot forget its
+ *      twin — the directive lands here by construction, not in a per-event bridge.
+ *   3. Party impact — a party-caused event with a world-scale analog also ripples
+ *      through the party-impact pipeline (active conditions, faction/NPC world
+ *      state, regional propagation, Wizard News).
+ * Timestamps reuse this apply's editedAt stamp so propagation stamps no
+ * wall-clock time of its own (replay is byte-identical — same args, same graph).
+ */
+export function rippleEventThroughWorld({ afterState, campaign, event, beforeEnvelope, beforeSave, activeSaveId, afterCampaignState }) {
+  if (campaign && beforeEnvelope && typeof afterState.setCampaignRegionalGraph === 'function') {
+    const afterEnvelope = saveEnvelopeFor(
+      activeSaveId,
+      beforeSave,
+      afterState.settlement,
+      afterCampaignState || beforeSave?.campaignState,
+    );
+    const result = propagateRegionalEvent({
+      graph: campaign.regionalGraph,
+      beforeSettlement: beforeEnvelope,
+      afterSettlement: afterEnvelope,
+      event,
+      activeSettlementId: activeSaveId,
+      visibleSettlementIds: visibleSettlementIdsForCampaign(afterState, campaign),
+      maxDepth: 2,
+      waveDecay: 0.45,
+      now: afterState.editedAt,
+    });
+    if (result.impacts.length > 0) {
+      afterState.setCampaignRegionalGraph(campaign.id, result.graph);
+      // The canon-edit cross-settlement propagation moment — this path fired NO
+      // analytics. result is a plain domain return; emit the redacted summary.
+      Promise.all([
+        import('../lib/analytics.js'),
+        import('../lib/regionalFingerprint.js'),
+      ]).then(([{ track, EVENTS }, { extractRegionalPropagation }]) => {
+        const p = extractRegionalPropagation({
+          impacts: result.impacts, changes: result.localDelta?.changes,
+          genesis: 'canon_edit', maxDepth: 2,
+        });
+        if (p) track(EVENTS.REGIONAL_PROPAGATION_APPLIED, p);
+      }).catch(() => {});
+    }
+  }
+
+  const twinDirective = campaign ? twinDirectiveForEvent(event) : null;
+  if (twinDirective) {
+    try {
+      if (twinDirective.action === 'inject'
+        && typeof afterState.injectCampaignStressor === 'function') {
+        afterState.injectCampaignStressor(campaign.id, {
+          ...twinDirective.stressor,
+          originSettlementId: String(activeSaveId),
+          affectedSettlementIds: [String(activeSaveId)],
+        });
+      } else if (twinDirective.action === 'resolve'
+        && typeof afterState.resolveCampaignStressor === 'function') {
+        afterState.resolveCampaignStressor(campaign.id, {
+          type: twinDirective.type,
+          settlementId: String(activeSaveId),
+          now: afterState.editedAt,
+        });
+      }
+    } catch { /* the world half is best-effort */ }
+  }
+
+  if (event?.partyCaused && campaign) {
+    try {
+      const action = mapEventToPartyImpact(event, activeSaveId);
+      const record = afterState.recordPartyImpact;
+      if (action && typeof record === 'function') {
+        Promise.resolve(record(campaign.id, action)).catch(() => { /* world ripple is best-effort */ });
+      }
+    } catch { /* linkage is best-effort */ }
+  }
+
+  // Lane 2 (domain-events-region-1): a NON-party DM canon relationship event
+  // (BROKERED_ALLIANCE / SETTLEMENT_DISPUTE / OPENED_TRADE_ROUTE, or an
+  // APPLY_STRESSOR carrying an instigator) ALSO ripples to the campaign's pulse
+  // relationship edge — the worldState.relationshipStates the war layer reads +
+  // the regionalGraph edge label — mirroring the settlement-level neighbourNetwork
+  // mutation into the world engine. The light mapping gate avoids the lazy engine
+  // load for every non-relationship event; the undo snapshot was captured in
+  // applyEvent (logEntry.undo.relationshipRipple) and is reversed synchronously by
+  // reverseCanonRelationshipRipple, so this async ripple is never awaited for undo.
+  if (campaign && !event?.partyCaused) {
+    try {
+      const relRipple = afterState.recordCanonRelationshipRipple;
+      if (typeof relRipple === 'function' && canonRelationshipTargetFor(event, activeSaveId)) {
+        Promise.resolve(relRipple(campaign.id, { event, homeId: activeSaveId }))
+          .catch(() => { /* world ripple is best-effort */ });
+      }
+    } catch { /* linkage is best-effort */ }
+  }
+}
+
+/**
+ * W-F6 THE PREMIUM GATE — the store-side half of the latent-pantheon activation
+ * seam (owner 2026-07-10; PHASE4_FAITH_DELTA). Generation creates NO gods: since
+ * 2026-07-28 (5f8dc7830, the T4 ONE-REGEN batch) a deity is custom content only,
+ * the DM's to add, and generation builds churches, not a pantheon. Only saves
+ * written before that batch still carry a latent pantheon (config.latentPantheon);
+ * tier never touches generation. This is where the key turns for those saves:
+ * EVERY owner's save activates on generation-complete / save-open (the owner's tier
+ * law, 2026-11-09; the chair's ruling V5: premade gods are engine content, not custom
+ * content, law (3)), copying the latent patron + cults into the LIVE embeds via the
+ * pure, rng-free, idempotent activateLatentPantheon (a no-op when no latent record
+ * exists — every save written since T4). The latent record stays stripped from every
+ * public projection (publicSafe.js / migration 128). Defensive: any failure ⇒ the
+ * settlement unchanged. The name and the `get` parameter are kept so the callers
+ * stay byte-identical; nothing is read from the store.
+ * @template T
+ * @param {T} settlement
+ * @param {() => any} [_get]  the store getter, unread since V5 (kept for the callers)
+ * @returns {T}
+ */
+export function activateFaithIfEntitled(settlement, _get) {
+  try {
+    return activateLatentPantheon(settlement);
+  } catch {
+    return settlement;
+  }
+}
+
+/**
+ * The identity of the world in the editor RIGHT NOW, for a door to capture BEFORE
+ * it replaces or removes it. Resolved to a string here rather than passed as an
+ * object so the caller never hands the chokepoint an immer draft whose parent
+ * property it is about to reassign.
+ *
+ * @param {*} state the Immer store draft
+ * @returns {string|null} the identity, or null when the editor holds nothing nameable
+ */
+export function retiringDraftOf(state) {
+  return draftIdentity(state?.settlement, state?.lastSeed);
+}
+
+/**
+ * resetSettlementIdentity — THE single chokepoint for clearing a settlement's
+ * session-only identity residue on ANY active-settlement swap: generateSettlement,
+ * hydrateFromSave (open a save), setSettlement, clearSettlement. Every field reset
+ * here is session-scoped (never persisted). Save-scoped pending intents are the
+ * one optional exception: their stable owner/target envelopes can remain in the
+ * session while projections hide them from every other save, so returning to the
+ * original save recovers reviewed work. Fresh generation/set/clear paths still
+ * discard them. Every other field must NOT survive an identity change, or the new
+ * settlement inherits the previous one's in-flight state — the exact cross-
+ * identity leak class the slice documents (F17/F19):
+ *   • a stale successor prompt fires on the wrong lineage;
+ *   • B renders A's draft version timeline;
+ *   • the pipeline rail renders A's "how this was simulated" receipts against B's
+ *     dossier (components-dossier-5);
+ *   • a stale regen-delta card describes the prior settlement.
+ * Structural prevention (state-lifecycle-3 / store-5): the ONE writer for this
+ * class, so a NEW load path cannot re-open the leak by hand-maintaining its own
+ * partial reset list — every entry point routes through here.
+ *
+ * NOTE: the LIFECYCLE slots that DIFFER by path (settlement / activeSaveId / phase /
+ * eventLog / locks / canonizedAt / systemState / generatedAt / editedAt /
+ * lastExportAt / aiSettlement) are deliberately NOT reset here — each caller sets
+ * them itself: hydrateFromSave from the save's persisted campaignState; generate /
+ * set / clear to their own DRAFT defaults.
+ *
+ * @param {*} state the Immer store draft
+ * @param {{ preservePendingEdits?:boolean, retiring?:string|null }} [options]
+ *   retiring: the identity of the world this swap is TAKING OUT of the editor, as
+ *   `retiringDraftOf(state)` read it BEFORE the door replaced it. Defaults to null,
+ *   which claims nothing — a door that forgets to pass it leaves the device's slot
+ *   alone rather than retiring a draft on a guess.
+ */
+export function resetSettlementIdentity(state, { preservePendingEdits = false, retiring = null } = {}) {
+  if (!preservePendingEdits) {
+    state.pendingEditsQueue   = [];
+    state.pendingEditsClock   = 0;
+    state.pendingEditReceipts = [];
+  } else {
+    // Only save-owned work is recoverable by later navigation. Draft-owned and
+    // ownerless legacy records cannot prove a durable destination; drop them at
+    // the saved-identity boundary rather than projecting them into the next save.
+    state.pendingEditsQueue = (state.pendingEditsQueue || [])
+      .filter((intent) => intent?.ownerRef?.scope === 'save');
+    state.pendingEditReceipts = (state.pendingEditReceipts || [])
+      .filter((receipt) => receipt?.ownerRef?.scope === 'save');
+    if (state.pendingEditsQueue.length === 0) state.pendingEditsClock = 0;
+  }
+  state.pendingSuccession     = null;
+  state.canonEventCommandFence = null;
+  state.draftVersionHistory   = [];
+  // WHOSE SESSION PUT THE WORLD IN THE EDITOR (store/persistProjection.js reads it
+  // to decide whether this device keeps the draft). A swap installs a DIFFERENT
+  // world, so the previous answer is stale by definition — and nulling it here
+  // rather than re-answering it is what makes the rule fail CLOSED: `null` is not
+  // 'anon', so a door that installs a world and answers nothing persists nothing.
+  // The three doors that DO answer (generate, the rehydrate merge, and
+  // claimSettlementForAccount at save/bind/hydrate/canon) each write it after this
+  // chokepoint has run. Two session CLAIMS used to be retracted here instead
+  // (`restoredAnonDraft`, `signedInWorld`); this is the one fact that replaced them.
+  state.draftOrigin           = null;
+  // ⭐ THE WORLD THIS SWAP IS RETIRING (2026-09-19), as an identity string, so the
+  // persist projection can retire the device's slot when the slot held THAT world.
+  // A clear ends with an EMPTY editor, so at the moment of the write there is no
+  // live world to compare and the slot would otherwise stand: a visitor who cleared
+  // their own draft got it back on the next reload. This is the one fact that makes
+  // a clear able to speak for the world it just removed.
+  //
+  // ⛔ IT IS SESSION STATE AND IT IS NOT PERSISTED (registered SESSION-ONLY in
+  // tests/store/lifecycleRoundTrip). It is RE-STAMPED HERE ON EVERY SWAP — to an
+  // identity, or to the `retiring = null` default a door that claims nothing gets —
+  // and the projection READS it only while the editor is empty. Between them the
+  // claim cannot outlive the window it was raised for, which is why there is no
+  // separate consumption step to forget to run.
+  state.retiringDraftIdentity = retiring;
+  // The generation-id spine is per-generation identity: a loaded/new settlement
+  // must never inherit the prior generation's id (a save re-derives its own from
+  // seed + generatedAt; a fresh generate mints one after the pipeline).
+  state.generationId          = null;
+  // The pipeline rail + reveal overlay are per-run receipts (components-dossier-5).
+  state.pipelineHistory       = [];
+  state.pipelineRevealActive  = false;
+  // A stale regenerate-delta card must not describe an unrelated settlement.
+  state.lastRegenerationDelta = null;
+  // Any pending single/batch event preview — and any staged composer intent —
+  // belongs to the prior identity.
+  state.pendingPreview        = null;
+  state.composerIntent        = null;
+}

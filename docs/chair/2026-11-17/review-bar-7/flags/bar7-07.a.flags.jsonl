@@ -1,0 +1,5 @@
+{"id":"C15891","town":"bar0-hamlet-calm-rand-45","sev":"MED","kind":"PAIR","why":"endless line of laden carts in a poor hamlet of 52 with one small quarry; contradicts Poor, 'nobody buys anything new'","other":"C15893"}
+{"id":"C16222","town":"bar0-hamlet-calm-rand-45","sev":"MED","kind":"PAIR","why":"'no wrong done is written down' contradicts 'records are kept carefully and disputes settled by precedent' and 'record of crimes is not short'","other":"C15884"}
+{"id":"C16854","town":"bar0-hamlet-calm-rand-47","sev":"LOW","kind":"LACKS","why":"an endless line of laden carts is more traffic than a hamlet of 70 with one open-cast mine and no market can hold","other":""}
+{"id":"C17323","town":"bar0-hamlet-calm-rand-47","sev":"LOW","kind":"PAIR","why":"'money laid by behind it' contradicts 'none has much put by' and 'what it keeps put by would not outlast poor harvests'","other":"C16880"}
+{"id":"DONE","lines":1604,"blocks":3,"flags":5}

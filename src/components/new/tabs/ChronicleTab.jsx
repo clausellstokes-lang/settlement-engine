@@ -1,0 +1,132 @@
+/**
+ * ChronicleTab.jsx — the settlement's living-history Chronicle (spec §8 M3c).
+ *
+ * Relocated under Notes (third sub-tab). One chronological feed of every event
+ * affecting the settlement — manual changes, party-caused actions, and
+ * world-pulse effects — newest first, each entry timed relative to campaign
+ * canonization ("Day N", starting at zero) and tagged by source so it's clear
+ * who drove it and which events are recent vs. earlier.
+ *
+ * The merge/normalize/classify/sort/relative-timing all live in the pure,
+ * tested domain/dossier/chronicleFeed helper; this is presentation only.
+ */
+import { Empty } from '../Primitives';
+import { FS } from '../../theme.js';
+import useIsMobile from '../../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
+import { INK as OINK } from '../../../design/organic/ink.js';
+import { RUBRIC } from '../../../design/organic/rubrication.js';
+import { entityAnchor } from '../../../domain/dossier/entityLinks.js';
+import { humanizeIfToken } from '../../../domain/display/humanizeEngineTokens.js';
+import { AddressChain, AffectedSettlements } from '../../map/AddressChain.jsx';
+
+// The Chronicle reads as ANNALS (Deep Craft — the dossier's register voice): a
+// ruled chronological column on parchment, not cool rounded cards. Each entry's
+// SOURCE is a left margin rule + a small-caps stamp in its own tone — the party's
+// hand in the apparatus oxblood, a change you authored in the gold entry mark, the
+// wider world in the neutral sepia ink. All three are the organic ramp's
+// contrast-pinned steps (tests/design/contrast.test.js), so the register is AA on
+// every parchment ground with no new tint to prove.
+const PARTY = RUBRIC.rubric;    // the party's hand — apparatus oxblood
+const SRC_EDIT = RUBRIC.entry;  // a change you authored — the gold entry mark
+const WORLD = OINK.secondary;   // the wider world — neutral sepia ink
+const RULE = OINK.hairline;     // the feint annal ruling (decorative)
+
+// A source stamp: small-caps in the source's tone inside a square hairline tag —
+// no rounded card chrome. Colour is never the sole channel; the stamp text
+// (Party / Edit / World) and the row title both carry the source.
+function stamp(color, mobile) {
+  return { fontSize: chromeFontSize(FS.micro, mobile), color, border: `1px solid ${color}`, padding: '0 5px', fontWeight: 800};
+}
+
+/**
+ * The DOM anchor a chronicle row exposes as a link TARGET, matching the dossier
+ * entity index's event anchors (entityAnchor('event', { id })). Returns null
+ * when the entry has no id, so a row without a stable id simply isn't a target
+ * (no orphan/dead anchor) rather than minting an index-derived one.
+ *
+ * Event TITLES in the feed stay plain text — an event linking to itself is
+ * meaningless, and the chronicle's normalized rows carry no structured actor
+ * (npc/faction) references to render as link sources.
+ *
+ * @param {{ id?: string }} event  A chronicle feed entry.
+ * @returns {string|null}
+ */
+function chronicleAnchor(event) {
+  return event?.id ? entityAnchor('event', { id: event.id }) : undefined;
+}
+
+export default function ChronicleTab({ entries = [] }) {
+  // THE PHONE PROSE FLOOR — an entry's summary, the only passage in the annal.
+  // Bound above the empty-state early return so the hook order is stable; the
+  // day stamp, the title and the source tag keep their own steps.
+  const mobile = useIsMobile();
+  if (!entries.length) {
+    return (
+      // One plain sentence (chair ruling 2026-10-30): the fact, without the pitch.
+      <Empty message="No chronicle yet." />
+    );
+  }
+  return (
+    // No "Chronicle (n)" title under a tab already named Chronicle (chair ruling R6).
+    <div style={{ padding: '16px 18px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {entries.map((event, i) => {
+            const accent = event.source === 'party' ? PARTY : event.source === 'manual' ? SRC_EDIT : WORLD;
+            return (
+              <div key={event.id || i} id={chronicleAnchor(event)} style={{ borderLeft: `3px solid ${accent}`, borderBottom: `1px solid ${RULE}`, padding: '10px 12px' }}>
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap', marginBottom: event.summary ? 4 : 0 }}>
+                  {event.relativeLabel && (
+                    <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: WORLD, fontVariantNumeric: 'tabular-nums' }}>{event.relativeLabel}</span>
+                  )}
+                  <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, color: accent }}>
+                    {humanizeIfToken(event.title, 'Event')}
+                  </span>
+                  {event.partyCaused
+                    ? <span title="Caused by the party" style={stamp(PARTY, mobile)}>Party</span>
+                    : event.source === 'manual'
+                      ? <span title="A change you authored" style={stamp(SRC_EDIT, mobile)}>Edit</span>
+                      : <span title="Driven by the wider world" style={stamp(WORLD, mobile)}>World</span>}
+                </div>
+                {event.summary && <p style={{ fontSize: proseFontSize(FS.sm, mobile), color: OINK.body, lineHeight: 1.5, margin: 0 }}>{event.summary}</p>}
+                {/* THE NEWS ADDRESS LAW (2026-07-22): a world entry states, beside its
+                    verbatim headline (subject + action), the subject's LINKED address
+                    chain (settlement › power › faction › npc — INSPECTOR-ADDRESS-WEB
+                    follow-on), the AFFECTED SETTLEMENTS by name (now LINKED) and the
+                    recorded REASON. Only rendered when the address block carries one,
+                    so manual/party/recent rows are unchanged. Levels the record does
+                    not identify are dropped — never fabricated. */}
+                {event.address?.subject && (
+                  <div style={{ marginTop: 5 }}>
+                    <AddressChain descriptor={event.address.subject} />
+                  </div>
+                )}
+                {event.address && (
+                  (Array.isArray(event.address.affectedSettlementIds) && event.address.affectedSettlementIds.length > 0) ||
+                  (Array.isArray(event.address.affectedSettlements) && event.address.affectedSettlements.length > 0) ||
+                  event.address.reason
+                ) && (
+                  <div style={{ marginTop: 5, display: 'flex', flexDirection: 'column', gap: 2 }}>
+                    {Array.isArray(event.address.affectedSettlementIds) && event.address.affectedSettlementIds.length > 0 ? (
+                      <AffectedSettlements ids={event.address.affectedSettlementIds} />
+                    ) : Array.isArray(event.address.affectedSettlements) && event.address.affectedSettlements.length > 0 ? (
+                      <div style={{ fontSize: proseFontSize(FS.micro, mobile), color: WORLD, lineHeight: 1.4 }}>
+                        <span style={{ fontWeight: 800 }}>Affects </span>
+                        {event.address.affectedSettlements.join(', ')}
+                      </div>
+                    ) : null}
+                    {event.address.reason && (
+                      <div style={{ fontSize: proseFontSize(FS.micro, mobile), color: WORLD, lineHeight: 1.4 }}>
+                        <span style={{ fontWeight: 800 }}>Because </span>
+                        {String(event.address.reason).replace(/_/g, ' ')}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+    </div>
+  );
+}

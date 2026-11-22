@@ -1,0 +1,148 @@
+[
+{
+"id": "00607",
+"sev": "HIGH",
+"n": 111,
+"town": "r2s-under_siege-city-3",
+"section": "Systems/Power",
+"fold": "Magical practitioners are consulted but not formally empowered.",
+"text": "Magical practitioners are consulted but not formally empowered.",
+"why": "practitioners 'not formally empowered', but the Arcane Council governs (archmage first of it) and Arcane Orders is a power",
+"kinds": [
+"STATE",
+"TAG"
+],
+"writer": {
+"file": "src/generators/power/claimStanding.js",
+"line": 41,
+"fn": "ARCANE_ADVISORY"
+}
+},
+{
+"id": "01128",
+"sev": "MED",
+"n": 111,
+"town": "r2s-under_siege-city-3",
+"section": "Systems/Power",
+"fold": "Their influence is advisory, transactional, and quietly resented.",
+"text": "Their influence is advisory, transactional, and quietly resented.",
+"why": "mages' influence 'advisory… resented'; Arcane Council is the governing power, Mages' guild head sits rank 1",
+"kinds": [
+"STATE",
+"TAG"
+],
+"writer": {
+"file": "src/generators/power/claimStanding.js",
+"line": 41,
+"fn": "ARCANE_ADVISORY"
+}
+},
+{
+"id": "00615",
+"sev": "MED",
+"n": 3,
+"town": "r2r-village-50",
+"section": "Systems/Power",
+"fold": "Military/Guard is now about as strong as Elder Council.",
+"text": "Military/Guard is now about as strong as Elder Council.",
+"why": "slash-joined power name 'Military/Guard' used as the subject of a sentence",
+"kinds": [
+"BROKEN"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 409,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "00616",
+"sev": "MED",
+"n": 3,
+"town": "r2s-famine-village-1",
+"section": "Systems/Power",
+"fold": "Military/Guard no longer takes orders from Elder Council.",
+"text": "Military/Guard no longer takes orders from Elder Council.",
+"why": "slash-joined label 'Military/Guard' used as one power's name as a sentence subject",
+"kinds": [
+"BROKEN"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 415,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "00370",
+"sev": "MED",
+"n": 3,
+"town": "r2s-famine-village-1",
+"section": "Systems/Power",
+"fold": "Elder Council keeps the title; Military/Guard makes the decisions that matter.",
+"text": "Elder Council keeps the title; Military/Guard makes the decisions that matter.",
+"why": "slash-joined label 'Military/Guard' used as one power's name as a sentence subject",
+"kinds": [
+"BROKEN"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 412,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "00363",
+"sev": "MED",
+"n": 2,
+"town": "r2r-hamlet-41",
+"section": "Systems/Power",
+"fold": "Elder Council gives the orders and Military/Guard carries them out; each needs the other to stay strong.",
+"text": "Elder Council gives the orders and Military/Guard carries them out; each needs the other to stay strong.",
+"why": "slash-joined label 'Military/Guard' used as one power's name beside a verb: 'Military/Guard carries them out'",
+"kinds": [
+"BROKEN"
+],
+"writer": {
+"file": "src/generators/factionDynamics.js",
+"line": 406,
+"fn": "computeFactionRelationships"
+}
+},
+{
+"id": "00368",
+"sev": "MED",
+"n": 1,
+"town": "r2s-mass_migration-thorp-3",
+"section": "Systems/Power",
+"fold": "Elder Council is being asked to do something about it and cannot agree what.",
+"text": "Elder Council is being asked to do something about it and cannot agree what.",
+"why": "'cannot agree what': PEOPLE seats one person on Elder Council, no quarrels listed, thorp of 7",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/governingStressVignettes.js",
+"line": 85,
+"fn": "buildMigrationNarrative"
+}
+},
+{
+"id": "01053",
+"sev": "MED",
+"n": 1,
+"town": "r2s-infiltrated-village-3",
+"section": "Systems/Power",
+"fold": "The militia is stretched thin and Elder Council cannot agree on whether to raise a levy or hire mercenaries.",
+"text": "The militia is stretched thin and Elder Council cannot agree on whether to raise a levy or hire mercenaries.",
+"why": "militia 'stretched thin', weighing a levy or mercenaries; STATE safety is Very Safe and DEFENCE shows hired none",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 496,
+"fn": "deriveBaselineConflict"
+}
+}
+]

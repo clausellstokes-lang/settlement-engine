@@ -1,0 +1,16 @@
+{
+  "_doc": "SIGNED 2026-09-24 by the FP chair (session 87797a6a, Fable 5.1) under the owner's delegation, quoted verbatim in `ownerWords`: the signature is the chair's execution of this re-record at the Herald lens U2's pick onto fp/integration-2026-09-23, which names this file, its one cause and its seat. THE SHIFT RECORD FOR ONE FEED-WINDOW CAUSE: the Herald lens U2 (32315e384 on fp/cure-herald-lens, ruling FP-31 = P1) makes the news feed keep every entry of its newest 52 weeks and apply the 240 cap with its major-arc rescue only beyond that window, so the knowledge desk's year-one Herald (rr-fresh-full|1) carries the entries the bare cap used to drop; the desk golden's contentSha256 moves for that one reason (the seat measured d3513ef1… → c79b0f29… at its base; at the pick the chain starts from LIT-1b's a69c75ab…, so the produced hash is measured with the projection helper BEFORE the door and written here before the write, as is predictedRows). A behaviour shift of the engine's memory, stated, never silent: no band, weight or threshold moves; the same-seed feed keeps more of its year. A successor chair does not inherit this signature: it re-confirms in its own chat.",
+  "ownerWords": "\"no just build it all shipped lit\" · \"then do everything else\" · \"alright do everything according to your judgement.\" (2026-09-23, ODQ §934.84) · \"Again, I leave all judgment to you\" (2026-09-24)",
+  "ownerDate": "2026-09-24",
+  "odqRow": "§934.84 (the FP lighting signature) and §934.47 addendum 133 (goldens re-record with their cause stated); ruling FP-31 on the FP kit's board; the trailer cites §934.84",
+  "cause": "ONE CAUSE: 32315e384, the Herald lens U2 (P1: the 52-week window under the 240 cap) — the year-one desk keeps the entries the bare cap dropped; contentSha256 and itemCount move, the row count is measured before the door",
+  "seat": "the FP chair (session 87797a6a, Fable 5.1) executes the re-record at the pick; the Herald lens seat (Opus 5.5, lane fp/cure-herald-lens) measured the move at its base and reported it as the declared arm; judgments FP-28 (once per cause) and FP-31 rule the re-record",
+  "surfaces": [
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "re-record",
+      "predictedRows": 366,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+/* esm.sh - async-function@1.0.0 */
+var a=Object.create;var s=Object.defineProperty;var f=Object.getOwnPropertyDescriptor;var p=Object.getOwnPropertyNames;var d=Object.getPrototypeOf,m=Object.prototype.hasOwnProperty;var x=(c,t)=>()=>(t||c((t={exports:{}}).exports,t),t.exports);var y=(c,t,o,r)=>{if(t&&typeof t=="object"||typeof t=="function")for(let n of p(t))!m.call(c,n)&&n!==o&&s(c,n,{get:()=>t[n],enumerable:!(r=f(t,n))||r.enumerable});return c};var g=(c,t,o)=>(o=c!=null?a(d(c)):{},y(t||!c||!c.__esModule?s(o,"default",{value:c,enumerable:!0}):o,c));var u=x((A,e)=>{"use strict";var h=async function(){}.constructor;e.exports=()=>h});var i=g(u(),1),F=i.default;export{F as default};
+//# sourceMappingURL=async-function.mjs.map

@@ -1,0 +1,55 @@
+{
+  "id": "tradeGoods.deriveNecessityImports",
+  "source": "src/generators/economy/tradeGoods.js :: deriveNecessityImports",
+  "drawKind": "T",
+  "pool": {
+    "declares": [],
+    "crisisScoped": false,
+    "colour": false,
+    "notes": "Inline branches; each label is an IMPORT. Pool-wide guarantee: route != isolated (early return). The branches read institution NAMES by private substring (smith/metalwork/farm/granar/carpenter/sawmill), not factsOf(r).hasInstitution, so the institution presumption is declared on the row. Merged into economicState.necessityImports, then into deriveImportsFromChains (survives the stage-7 override).",
+    "needs": [],
+    "excludes": []
+  },
+  "rows": [
+    {
+      "id": "tradeGoods.deriveNecessityImports::Salt",
+      "text": "Salt",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "Branch: no local salt commodity, route not port/river (same route reader: noted), no salt_* resource. producer: unhomed: salt source."
+    },
+    {
+      "id": "tradeGoods.deriveNecessityImports::Iron",
+      "text": "Iron",
+      "needs": [],
+      "excludes": [
+        "institution: smith"
+      ],
+      "colour": false,
+      "kind": "import",
+      "notes": "Branch: tier city|metropolis (guaranteed), no local iron, no smith/metalwork by name (private regex; declared). producer elsewhere: institution: mine."
+    },
+    {
+      "id": "tradeGoods.deriveNecessityImports::Grain",
+      "text": "Grain",
+      "needs": [],
+      "excludes": [
+        "grain"
+      ],
+      "colour": false,
+      "kind": "import",
+      "notes": "Branch: no local grain commodity AND (port OR city+) AND no farm/granary by name. The granary exclusion is odd (a granary stores imports); not declared. producer: food-source: grain (elsewhere)."
+    },
+    {
+      "id": "tradeGoods.deriveNecessityImports::Timber",
+      "text": "Timber",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "Branch: tier city+ (guaranteed), no carpenter/sawmill by name. unhomed: sawmill/carpenter (no institution kind)."
+    }
+  ]
+}

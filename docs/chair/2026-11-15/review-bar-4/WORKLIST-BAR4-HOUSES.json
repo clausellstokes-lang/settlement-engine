@@ -1,0 +1,145 @@
+[
+ {
+  "id": "C37943",
+  "read": "REVIEW-BAR-4",
+  "cls": "STANDS",
+  "town": "bar0-town-calm-rand-23",
+  "section": "Systems/Institutions",
+  "text": "At fixed times he stands in the market square and calls out the proclamations, the prices, and the news.",
+  "why": "The card says 'he' and 'His' and then names a female crier as its connection. The pronouns come from the catalogue's stock description (record institutions Town crier desc), but on the page they misgender the named holder. Nothing reconciles them.",
+  "evidence": [
+   "At fixed times he stands in the market square ... His employer is the town, or else a guild. — cal-15.txt C37943-C37944",
+   "Connection: Crier Ghalia al-Din — cal-15.txt C37945",
+   "Ghalia al-Din (f), the crier @ Town crier — cal-15.txt PEOPLE; record npcs gender \"female\""
+  ],
+  "writers": [
+   {
+    "words": "At fixed times he stands",
+    "files": "src/data/institutionDescVariants.js"
+   }
+  ]
+ },
+ {
+  "id": "C40862",
+  "read": "REVIEW-BAR-4",
+  "cls": "STANDS",
+  "town": "bar0-town-occupied-rand-22",
+  "section": "Systems/Institutions",
+  "text": "A town with timber to hand supplies the region's building work, and keeps a standing crew to do it.",
+  "why": "The town's woodland is cleared, it imports timber, and it exports no lumber, so it neither has timber to hand nor supplies the region's building. The Forest terrain and the Ancient Grove do not help, because the grove's wood is exported as 'Sacred wood', not building timber.",
+  "evidence": [
+   "A town with timber to hand supplies the region's building work — cal-16 C40862",
+   "Managed Woodland (depleted); Timber & Lumber [impaired; its resource Managed woodland depleted] — header LAND",
+   "imports: ... Timber (local managed woodland cleared) — header TRADE; exports list no lumber"
+  ],
+  "writers": [
+   {
+    "words": "A town with timber to hand",
+    "files": "src/data/institutionDescVariants.js src/data/institutionDescColour.js"
+   }
+  ]
+ },
+ {
+  "id": "C39560",
+  "read": "REVIEW-BAR-4",
+  "cls": "STANDS",
+  "town": "bar0-town-occupied-rand-21",
+  "section": "Systems/Institutions",
+  "text": "It answers to no one in particular, but the work gets done.",
+  "why": "The town council, headed by the Church Council's own head, is said to answer to no one, while the page repeatedly says the council answers to the occupiers. This town's Institutions tab carries no 'ordinary times' disclaimer.",
+  "evidence": [
+   "The forces of another power hold Divoburg, and its own officials take their orders. — cal-16.txt C39323",
+   "The Church Council answers to the occupiers of Divoburg. — cal-16.txt C39840",
+   "Nothing large is settled in the hall until the occupiers have approved it. — cal-16.txt C39845",
+   "Connection: Warden of the Council Luba Kuznetsov, the dean — cal-16.txt C39561 (head of Church Council)"
+  ],
+  "writers": [
+   {
+    "words": "answers to no one in particular",
+    "files": "src/data/institutionDescVariants.js"
+   }
+  ]
+ },
+ {
+  "id": "C19810",
+  "read": "REVIEW-BAR-4",
+  "cls": "STANDS",
+  "town": "bar0-hamlet-under_siege-rand-22",
+  "section": "Systems/Economics",
+  "text": "Market vendors and shared dining customs make food distribution visibly civic.",
+  "why": "The Economics tab does carry the caveat 'The descriptions here are of ordinary times. While the siege lasts, a row it touches is marked.' The market is plainly touched (Stopped), though, and this line about market vendors handing out food carries no mark, so it contradicts the page's own Stopped market.",
+  "evidence": [
+   "Market vendors and shared dining customs make food distribution visibly civic. — cal-07.txt C19810 (Systems/Economics, Food Security, no mark)",
+   "Stopped by the siege. Monthly or seasonal trading day. — cal-07.txt C19659 (Periodic market)",
+   "No food comes into Saltocastra by trade. ... hunger is already here. — cal-07.txt C19805-C19807"
+  ],
+  "writers": [
+   {
+    "words": "shared dining customs",
+    "files": "src/data/cultureProfiles.js src/domain/foodways.js"
+   }
+  ]
+ },
+ {
+  "id": "C47050",
+  "read": "REVIEW-BAR-4",
+  "cls": "STANDS",
+  "town": "bar0-village-famine-rand-22",
+  "section": "Systems/Economics",
+  "text": "Fermentation, pickling, and drying stretch the harvest through winter.",
+  "why": "The line says preserving carries the harvest through winter, but the village has about three days of food, no granary, and hunger already. 'Preserved foods' among the goods made here does not make that true now.",
+  "evidence": [
+   "Fermentation, pickling, and drying stretch the harvest through winter. — cal-19 C47050",
+   "No granary; about three days in the larder. — cal-19 C47049; stores 0.1 months (granary False) — header FOOD",
+   "Many households go short, and hunger is already here. — cal-19 C47048"
+  ],
+  "writers": [
+   {
+    "words": "Fermentation, pickling, and drying",
+    "files": "src/data/cultureProfiles.js"
+   }
+  ]
+ },
+ {
+  "id": "C48079",
+  "read": "REVIEW-BAR-4",
+  "cls": "STANDS",
+  "town": "bar0-village-famine-rand-23",
+  "section": "Systems/Economics",
+  "text": "Fermentation, pickling, and drying stretch the harvest through winter.",
+  "why": "Under an active famine whose failed source is the grain harvest, this unmarked line says preserving stretches 'the harvest' through winter. The page itself says the harvest was lost for a second season, about a month is in store, and the winter ahead will be hungry. Its other harvest rows carry 'Scarce in the famine'; this one does not.",
+  "evidence": [
+   "Fermentation, pickling, and drying stretch the harvest through winter. — cal-19.txt C48079 (Systems/Economics, Food Security, no mark)",
+   "Ravengrad has lost its harvest for a second season. — cal-19.txt C47723",
+   "The grain harvest failed this year ... The winter ahead will be hungry. — cal-19.txt C48381-C48382",
+   "Harvest Scarce in the famine. — cal-19.txt C48038",
+   "stores 1 months (granary False) · failed source grain · famine cut 50% — header FOOD"
+  ],
+  "writers": [
+   {
+    "words": "Fermentation, pickling, and drying",
+    "files": "src/data/cultureProfiles.js"
+   }
+  ]
+ },
+ {
+  "id": "C33207",
+  "read": "REVIEW-BAR-4",
+  "cls": "STANDS",
+  "town": "bar0-thorp-calm-rand-21",
+  "section": "Systems/Economics",
+  "text": "Its own food is game from the woods.",
+  "why": "THE CHAIR: the same page has every family tilling a holding 'all for the table' (C33132): 'its own food is game' contradicts it || the checker (WEAK): Game is the record's only food source, and the hunting grounds are available, so the sentence matches the record. But the same page has every family tilling a holding for the table, and 'its own food is game' leaves that out. It is a mismatch of emphasis between two true facts, not a flat falsehood.",
+  "evidence": [
+   "\"foodSources\": [\"game\"], \"foodwaysLine\": \"Its own food is game from the woods.\", activeChains [\"Hunting & foraging\"] — record s.economicState.foodSecurity",
+   "Hunting Grounds (available) — cal-12.txt LAND",
+   "Each family tills a small holding, all of it for the table. — cal-12.txt C33132 (Subsistence farming)"
+  ],
+  "writers": [
+   {
+    "words": "Its own food is",
+    "files": "src/domain/foodways.js"
+   }
+  ]
+ }
+]

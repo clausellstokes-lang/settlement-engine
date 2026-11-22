@@ -1,0 +1,21 @@
+# LANDING-7 LANE G, THIRD SEAT — THE SYNOPSIS AS A PROVEN CHAIN (2026-11-06)
+
+Read `/tmp/claude-0/-home-user-settlement-engine/91098d1e-536b-53ea-a385-88e9fe415a85/scratchpad/BRIEF-L7-COMMON-2026-11-06.md` first, whole; then `BRIEF-L7-G2-2026-11-06.md` beside it; then the record `docs/LANDING7_G_2026-11-06.md` on the branch, whole (the second seat's R-G2 section: `crown-3`, the synopsis, the claims, the receipts). Worktree `/home/user/se-l7g`, branch `lane/landing7-l7g-2026-11-06` at `71fe21f46` (pushed; the chair has merged it into the landing; your commits are merged again after you hand back). Append your section to the same record.
+
+## The owner's word (2026-11-06, verbatim), on the new synopsis
+
+"Still feels very disconnected to itself. How do we fix that?"
+
+The chair's reading: the synopsis lists six true facts and never says which caused which — a reader feels a list, a place feels like a chain. The seat could prove each FACT against the forged town but did not know which LINKS are true, so it stated none. The fix is a synopsis whose every connective is a proven link, read from what the engine records about cause.
+
+## The ruling (vetoable by the owner)
+
+**R-G3 — the synopsis is rewritten as a CHAIN in cause order, and the claims-parity test proves the LINKS as well as the facts.**
+
+1. Read whole: `src/data/foundingSeeds*.js` (the synopsis, its claims and how `tests/data/foundingSeeds.probe.test.js` proves them), the probe test, and the engine's cause-bearing fields for a birth — the stress record and its consequences (`stressors[]`, the `stress` block: what each stressor caused), the crisis cast's reasons ("the rule that fired"), the history events' consequences, the power structure's legitimacy reading and its contributors, the economy's causal contributors (`economicState` and the viability's causal lines), and the generation trace (`docs/GENERATION_CONTRACTS.md` names what is recorded; `src/domain/edit/tracePartition.js` partitions it). List, for `crown-3`, every causal link the record HOLDS between the six facts (poor harvests; plague; the quarantine council sworn; the guild council's title no longer honoured; the thieves' guild outweighing it; the master writing authority into ink / the coup as paperwork): a link is held when a record field names one fact as the cause, trigger, consequence or reason of another. Print that list (fact → fact, the field that holds it) in your record. Links the record does NOT hold are not written — a connective ("because", "so", "and now", "which") may join two facts only on a held link; otherwise the facts stand beside each other with no causal word.
+2. Rewrite the synopsis as a chain in cause order over the held links, in the house voice (knowing, dry, concrete, cause-first; the register of the old synopsis kept; the last two sentences — "The coup here is not a rumour. It is a matter of paperwork." — kept if the chain earns them). The chair's draft of the SHAPE (every clause of it must be proven or cut): "Two bad harvests weakened the town, and the plague that followed emptied its streets; a quarantine council was sworn to hold them. The guild council still holds the title, but the quarantine council now gives the orders, and the thieves' guild already outweighs it. Its master is writing that weight into charters and seals. The coup here is not a rumour. It is a matter of paperwork." Cut any clause the record cannot back; name in the record each clause you cut and why.
+3. Extend the probe test: beside the fact claims, LINK claims — each connective in the synopsis is a row (cause fact, effect fact, the record field that proves it), proven by the forged world like the facts; red-first: the old synopsis's implied links fail where the record holds no link (print which), the new synopsis's links all pass (6/6 facts and N/N links from the test's own run). The links are data beside the claims, so a future seed's synopsis cannot imply a link the town does not have.
+4. LIST VERBATIM in your record: the old synopsis, the new one, the link table, the cut clauses — the owner vetoes the wording.
+5. Births unchanged (data and test only); run the probe test and the registry's own tests; eslint 0 on the touched files.
+
+One cause, one or two commits; push (`git push -u origin lane/landing7-l7g-2026-11-06`).

@@ -1,0 +1,16 @@
+{
+  "_doc": "THE PROMOTION WINDOW READS THE STAMP, ONE SIGNED SHIFT OF RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; a successor chair does not inherit this signature). THE CAUSE, ONE: LANDING-7 lane B's ruling R-B1 (commit 2168ffdba, merged into the landing at 103b1db81): src/domain/worldPulse/tierResourceDynamics.js :: tierEligibility promotes at 0.92 x TIER_STAMP_CUTS[nextTier] instead of 0.92 x POPULATION_RANGES[nextTier].min, X-46 car 2's law (every population comparison reads the stamp cut), which the car missed at this comparison. THE MOVER, FOUND BY STAGE: LANDING-8 measured every registered surface at every first-parent step since 3d8a74e4b (scripts/audit/landing-stage.sh build, the door paths carried from the branch at a8018110b); the preset lighting witness moves at the lane-B step 103b1db81 and at no other step (its produced bytes identical at every later stage). Inside the step, the other cause reverse-applied in the scratch stage (R-B3, 1f2a8504e, the in-orbit ladder): the witness still moves 6 of 8 rows; R-B1 (2168ffdba) reverse-applied: 0 of 8. So R-B1 alone moves it. THE MOVE, MEASURED before the write (scripts/audit/witness-stage.mjs, the suite's own measureWitness, at the stage): 6 of 8 witnessed rows (__birth_default__, quiet_local, realistic_regional, dramatic_campaign, living_realm, full_simulation; one simulated year's world state, and on three rows the wizard news, the settlement updates or the regional graph, follow the promotions the stamp cut now times); the two others hold; distinctWorldStateHashes 8 -> 8. Every other registered surface moves 0 at this step (the generator golden master 0 of 525, the espionage fence 0 of 360, the dossier prose manifest 0 of 1,050). HOW: the staged-tree method (DOORS-2 ruling 1): stage = the tree of 103b1db81 with the door paths carried from the branch at a8018110b; the door run inside the stage; the produced bytes copied to the branch with this record.",
+  "ownerWords": "I also now give all permissions required now and in the future. I also defer all judgement to you.",
+  "ownerDate": "2026-11-06",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER; the owner's delegation of 2026-11-06 to the cloud chair, session 01FE9mEvGxnFx6WTBkEC6ie9)",
+  "cause": "LANDING-7 R-B1: the promotion window reads the next tier's stamp cut (tierResourceDynamics.js :: tierEligibility promotes at 0.92 x TIER_STAMP_CUTS[nextTier], not 0.92 x the next tier's roll-band minimum; commit 2168ffdba)",
+  "seat": "LANDING-8 (Opus 5.5) under the cloud chair (Fable 5.1), session 01FE9mEvGxnFx6WTBkEC6ie9, from the stage at 103b1db81",
+  "surfaces": [
+    {
+      "surface": "preset-lighting-witness",
+      "action": "re-record",
+      "predictedRows": 15,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}

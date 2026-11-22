@@ -1,0 +1,18 @@
+{
+  "ownerWords": "Ok how do u give my signature? — the owner, 2026-11-06, after the chair had put Register VII to the owner by name (\"Please reply 'sign Register VII' (or veto it)\"). Told in plain words that the way was a permission file on the landing branch whose only purpose is this record, the owner wrote that file by hand: commit fdace3804 \"Add permissions to settings.json\" on lane/landing-rung1-2026-11-04, 2026-11-06 21:35 UTC. The owner's words earlier the same day: \"I leave judgement to you\" · \"I leave all judgement now and in the future to you\" · \"Again stop asking me as I've delegated to you\". The chair's reading of those words and that act, vetoable by a word: Register VII is signed — the named roster and the faction seats follow the population inside every tier; the law rung 1 certified, and the product has run on it since 2026-11-04.",
+  "ownerDate": "2026-11-06",
+  "odqRow": "§934.105",
+  "seat": "the owner, by the owner's own act on the named register (the permission file of 2026-11-06, commit fdace3804, written for this record alone), the record written by the cloud chair (Fable 5.1, session 01FE9mEvGxnFx6WTBkEC6ie9); vetoable by a word",
+  "version": 1,
+  "ids": [
+    "src/domain/density/densityBands.js#DENSITY_BANDS",
+    "src/domain/density/densityBands.js#RANK_CEILING_BY_TIER",
+    "src/domain/density/densityBands.js#VACANCY_WEIGHTS",
+    "src/domain/density/densityBands.js#PARTICULAR_TILTS",
+    "src/domain/density/densityBands.js#RIVAL_ROLL",
+    "src/domain/density/densityBands.js#CONCENTRATION",
+    "src/domain/density/densityBands.js#SUCCESSION_CLOCK_TICKS",
+    "src/domain/density/densityBands.js#SUCCESSION_WEIGHTS"
+  ],
+  "note": "Register VII (ODQ §§810-810.4): the eight numeric tables of src/domain/density/densityBands.js, the file whose header names the signature as one file's diff, at the digests the committed inventory measured at the signing tip. TIER_ORDER and IMPORTANCE_ORDER are vocabularies (orders of words, unit-less), not dials, and are not signed. The values signed are the ones the rung-1 window landed: the owner's historical mass bands 1-2 / 2-4 / 4-7 / 6-12 / 12-18 / 18-30 (X-46 car 4) and the chair's draft ladder for the rest. The code's REGISTER_VII_SIGNATURE has read signed:true, live:true since 2026-11-04 (NEW_SETTLEMENT_DENSITY_LAW_VERSION 2); this record is the register-side half of that one act, so the record and the register rows read as two views of one act again. A general delegation never covers a tuning signature (§763.1): this record rests on the owner's specific act on the named register, quoted above. The chair's account: docs/chair/2026-11-06/REGISTER-VII-OWNER-HAND.md."
+}

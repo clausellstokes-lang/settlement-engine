@@ -1,0 +1,147 @@
+[
+ {
+  "id": "C18833",
+  "read": "REVIEW-BAR-4",
+  "cls": "STANDS",
+  "town": "bar0-hamlet-calm-rand-23",
+  "section": "World/Relationships",
+  "text": "Latifa al-Amin lost a fortune and has not spoken to Alaa ibn Khalid since.",
+  "why": "In a hamlet of 44, the same two people are given a current, 'devoted' mentor-and-successor tie on one card, and ten years of not speaking on the other. They are also the only two seats of a two-person Elder Council. The vouching could predate the case, but a 'devoted' mentorship now and ten years of silence cannot both hold. The two cards contradict each other.",
+  "evidence": [
+   "Latifa al-Amin lost a fortune and has not spoken to Alaa ibn Khalid since. — cal-07.txt C18833 (the 'ten years ago' case, C18832)",
+   "Mentor and Successor / devoted — cal-07.txt C18817-C18820",
+   "Latifa al-Amin vouched for Alaa ibn Khalid when nobody else would. / Alaa ibn Khalid's first post came from that word. — cal-07.txt C18823-C18824",
+   "Alaa ibn Khalid corrected Latifa al-Amin in public last month — cal-07.txt C18825",
+   "Latifa al-Amin ... [Elder Council (rank 1)]; Alaa ibn Khalid ... [Elder Council (rank 2)] — header PEOPLE"
+  ],
+  "writers": [
+   {
+    "words": "lost a fortune and has not spoken",
+    "files": "src/data/npcData.js"
+   }
+  ]
+ },
+ {
+  "id": "C41801",
+  "read": "REVIEW-BAR-4",
+  "cls": "STANDS",
+  "town": "bar0-town-occupied-rand-22",
+  "section": "World/Relationships",
+  "text": "Bing Shimizu named Wei Kimura as successor in front of witnesses.",
+  "why": "The same pair carries two edges: bitter rivals who keep their distance, and a formally named successor. On top of that, a tanner names a carpenter of another trade as her successor. Nothing on the page links or explains the two edges.",
+  "evidence": [
+   "Bing Shimizu named Wei Kimura as successor in front of witnesses. — cal-16 C41801 (relationships tie_npc_tanner_established, mentor_student, 'formal')",
+   "Professional Rivalry ... bitter / Every friend Wei Kimura wins is one Bing Shimizu lost ... The two keep a polite distance and an exact tally. — cal-16 C41785-C41792 (tie_npc_carpenters_5_15, rival)",
+   "Wei Kimura (m), the master carpenter; Bing Shimizu (f), the master tanner — header PEOPLE"
+  ],
+  "writers": [
+   {
+    "words": "as successor in front of witnesses",
+    "files": "src/data/npcData.js"
+   }
+  ]
+ },
+ {
+  "id": "C2708",
+  "read": "REVIEW-BAR-4",
+  "cls": "STANDS",
+  "town": "bar0-city-under_siege+famine-rand-22",
+  "section": "Systems/Institutions",
+  "text": "Connection: Landlord Khulood al-Misri",
+  "why": "'Landlord' for an innkeeper is a personal trade title that names a sex (the female form is landlady), and Khulood is (f). The rules count this kind of title as a fault ('Dairyman', 'Beemaster' for a woman).",
+  "evidence": [
+   "Connection: Landlord Khulood al-Misri — cal-02.txt C2708",
+   "Khulood al-Misri (f), the innkeeper @ Inns and taverns (district) — header PEOPLE",
+   "Alewife Slavica / Alewife Klara — other bar4 dumps (the product does give female trade titles elsewhere)"
+  ],
+  "writers": [
+   {
+    "words": "Landlord",
+    "files": "src/data/faceHonorifics.js"
+   }
+  ]
+ },
+ {
+  "id": "C18802",
+  "read": "REVIEW-BAR-4",
+  "cls": "STANDS",
+  "town": "bar0-hamlet-calm-rand-23",
+  "section": "World/NPCs",
+  "text": "Landlord",
+  "why": "'Landlord' is a personal trade title (an innkeeper's) in its male form, and Latifa is (f). By the rules' 'Dairyman / Beemaster for a woman' ruling, this is a fault.",
+  "evidence": [
+   "Latifa al-Amin● / Wayside inn / Elder, first of Elder Council / Landlord — cal-07.txt C18799-C18802",
+   "Latifa al-Amin (f), the innkeeper @ Wayside inn — header PEOPLE"
+  ],
+  "writers": [
+   {
+    "words": "Landlord",
+    "files": "src/data/faceHonorifics.js"
+   }
+  ]
+ },
+ {
+  "id": "C4412",
+  "read": "REVIEW-BAR-4",
+  "cls": "STANDS",
+  "town": "bar0-city-under_siege+famine-rand-22",
+  "section": "World/NPCs",
+  "text": "Secret: Bought the vineyard by lending its old owner money at a rate that could never be paid back",
+  "why": "The record says, in ordinary times and not only under the siege, that the vintner has no access to grapes and that none are brought in, and LAND lists no vineyard. A vintner who owns 'the vineyard' would have grapes, so the secret contradicts the town's own gaps.",
+  "evidence": [
+   "Secret: Bought the vineyard by lending its old owner money — cal-02.txt C4412 (Jassim al-Tusi, Master Vintner)",
+   "No grapes reach the vintner. — cal-02.txt C3578",
+   "Vintner: Vintner exists but lacks access to grapes — header LAND gaps",
+   "Needed, and not brought in: grapes, iron ore, copper ore, clay. — cal-02.txt C3312",
+   "resources: Fishing Grounds; Marshlands; Ancient Grove; Coal or Peat Deposits; Open Grazing Land; Hunting Grounds — header LAND (no vineyard)"
+  ],
+  "writers": [
+   {
+    "words": "Bought the vineyard",
+    "files": "src/data/people/titleSecretsPresentations.js"
+   }
+  ]
+ },
+ {
+  "id": "C37293",
+  "read": "REVIEW-BAR-4",
+  "cls": "WEAK",
+  "town": "bar0-town-calm-rand-22",
+  "section": "World/Relationships",
+  "text": "Bashir al-Jabbar governs on Imad al-Andalusi's credit.",
+  "why": "Bashir does sit on the governing power (as an unranked member), so 'governs' is loose, not plainly false. But it, and the grain-stores choice after it, cast him as the town's governor when Abir ibn Sina holds the seat. One overstated word; the record casts the magistrate in the government's role in four debt ties.",
+  "evidence": [
+   "Bashir al-Jabbar (m), the magistrate @ Courthouse [sits on: Feudal Appointee (a member, no rank)] — header PEOPLE",
+   "Abir ibn Sina (f), the lord's appointee [sits on: Landed Gentry (rank 1); Feudal Appointee (rank 1)] — header PEOPLE",
+   "archetypeKey 'gov_econ_dependence', description 'Bashir al-Jabbar governs on Imad al-Andalusi's credit.' — record s.relationships (tie_npc_mine)"
+  ],
+  "writers": [
+   {
+    "words": "governs on",
+    "files": "src/data/npcData.js src/data/dossierStateProse/power.generated.js src/domain/worldPulse/eventProse.js src/domain/coherence/crisisFactFindings.js"
+   }
+  ]
+ },
+ {
+  "id": "C23720",
+  "read": "REVIEW-BAR-4",
+  "cls": "WEAK",
+  "town": "bar0-metropolis-calm-rand-21",
+  "section": "World/NPCs",
+  "text": "How they deal Talks about the ships, the weather and the cargoes; a good ear on the waterfront.",
+  "why": "THE CHAIR: told to the owner as one loose word ('waterfront' at the sky docks): kept as WEAK, not struck || the checker (EXPLAINED): This is the brief's own example town. The wharfinger works the airship docks, and the 'ships', 'cargoes' and 'weather' she talks about are airships, their freight and their flying weather. 'Waterfront' is a loose word for the dock front, the same looseness as the 'ship and shore' flag already found wrong in this town.",
+  "evidence": [
+   "Airship docking (high magic); ... Docks/port facilities; Harbour master's office — header HOUSES",
+   "Airship-era dock facilities handling both aerial and surface freight. — cal-09.txt C21507 (Docks/port facilities, connection Wharfinger Saba al-Masri)",
+   "Regulates airship traffic, assigns mooring berths, collects anchorage fees. — cal-09.txt C21518",
+   "Airship freight services (cargo, mooring) — header TRADE exports",
+   "Secret: Assigns the best berths to ships that pay a little extra — cal-09.txt C23721"
+  ],
+  "writers": [
+   {
+    "words": "a good ear on the waterfront",
+    "files": "src/data/people/titleSecretsPresentations.js"
+   }
+  ]
+ }
+]

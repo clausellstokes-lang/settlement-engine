@@ -1,0 +1,955 @@
+/**
+ * authSlice — Authentication state, role-based access, and tier-based permission gates.
+ *
+ * Tiers (subscription-based, controls feature access):
+ *   'anon'    – no account, can generate up to TOWN size, no saves (the
+ *               funnel strategy raised the anon ceiling from village to
+ *               town so first-time visitors get a meaningful artifact
+ *               worth signing up to save).
+ *   'free'    – account, all sizes, 3 saves (Wanderer / Free tier),
+ *               no neighbour/export/map-chains.
+ *   'premium' – Cartographer: unlimited saves, neighbour system,
+ *               PDF/JSON export, map supply chains.
+ *
+ * Roles (orthogonal to tier, controls administrative privileges):
+ *   'user'      – default, no admin access
+ *   'developer' – full bypass of all tier restrictions, admin panel access
+ *   'admin'     – admin panel access, user management
+ *
+ * Developers/admins bypass ALL tier gates automatically — WHILE THE UNLOCK STANDS.
+ * AI features are gated by credits (creditsSlice), not tier — except developers get unlimited.
+ *
+ * ⛔ THE STAFF BYPASS IS THE OWNER'S TEMPORARY ORDER, NOT A PROPERTY OF THE ROLE
+ * (ODQ §934.28: "enable all paid for features (for right now) to all developers
+ * and admin for testing purposes"). It is spelled ONCE, in
+ * src/lib/staffEntitlements.js, behind STAFF_UNLOCK_ALL_PAID. Flip that constant
+ * to false and every gate below reverts to TIER_GATE for staff too; nothing in
+ * this file needs editing. Read that module's header for exactly what the switch
+ * reaches and what it deliberately does not.
+ *
+ * ⛔ AND THERE IS A DEV-ONLY PREVIEW PERSONA (ODQ §934.35): `VITE_PREVIEW_ROLE`
+ * in the dev server's `.env.local` seats 'admin' or 'developer' as the ROLE every
+ * writer below resolves through, so a local preview renders the admin surface
+ * with NO account, NO password and NO claim to the server — the session stays
+ * whatever it really is and the server keeps every one of its own gates. It is
+ * `import.meta.env.DEV`-guarded, so a production build eliminates it entirely.
+ * Full rationale at `previewPersonaRole()` below; operator instructions in
+ * docs/DEPLOY.md ("Local preview — the DEV-only admin persona").
+ */
+
+import { auth as authService } from '../lib/auth.js';
+import { isStaffRole, staffUnlocksPaidFeatures } from '../lib/staffEntitlements.js';
+import { DEFAULT_MODEL_PREFERENCE } from '../config/pricing.js';
+import { activateOutboxOwner } from './outbox.js';
+import { normalizeSavedSettlementsOwnerId } from './savedSettlementsHydration.js';
+
+// Source of truth for tier ceilings is src/config/pricing.js — TIERS.{key}.maxSize.
+// This map mirrors those ceilings so the auth-gating layer never drifts:
+//   wanderer/free    → capital    (a free account unlocks every size)
+//   cartographer/    → capital
+//   founder lifetime → capital
+//
+// Anonymous ALONE is capped at town: the no-account funnel previews up to Town,
+// and signing up for a free account unlocks the full size ladder (the landing's
+// locked City/Metropolis pills are the sign-in conversion hook).
+// Exported so the derived tier-facts DISPLAY module (src/config/tierFacts.js)
+// can pin its per-tier claims to this ENFORCEMENT map — one source, one contract
+// test, no drift across the conversion surfaces.
+//
+// PDF export (owner ruling 2026-07-13): only premium gets UNLIMITED free export
+// (`export: true`). The free tier's `export` is false — it does NOT export freely;
+// it buys a durable per-dossier PDF right ($2.99, the single-dossier ladder). The
+// export surfaces read `canExport()` and route a non-exporting tier to the
+// entitlement/purchase rung (BuyThisDossier). Anon has always been false (the anon
+// one-shot buy path). This flip activates the built-but-dormant $2.99 ladder.
+//
+// ⛔ THE ANONYMOUS ROW IS A RANGE AND A LOCK, NOT ONE CEILING (the owner, §934.34: "only
+// hamlet, village, and town can be accessed without signing in and only with everything
+// on random"). Two fields carry it, and both are ENFORCEMENT — the display layer derives
+// from them (config/tierFacts.js ANON_SIZES / PRE_GEN_OPTIONS, held equal by
+// tests/config/tierFacts.contract.test.js):
+//
+//   `minTier`        THE FLOOR. A ceiling alone could never express this rule: thorp is
+//                    RANK 0, so `maxTier: 'town'` admitted it, and an anonymous visitor
+//                    could forge a thorpe the product does not offer them. A thorpe now
+//                    requires an account, like a city and a metropolis.
+//   `preGenOptions`  THE PRE-GENERATION CONFIGURATION — name, terrain, culture,
+//                    priorities, magic, the constraint grids. False for anon: they pick a
+//                    size and forge with everything else on random. NOT the same gate as
+//                    `customContent`, which is the Compendium's authored content and stays
+//                    a Cartographer capability; the two are deliberately separate fields
+//                    because the owner ruled them on opposite sides.
+export const TIER_GATE = {
+  anon:    { minTier: 'town',   maxTier: 'town',    maxSaves: 0,        neighbour: false, export: false, mapChains: false, customContent: false, settlementEditor: false, preGenOptions: false },
+  free:    { minTier: 'thorp',  maxTier: 'capital', maxSaves: 3,        neighbour: false, export: false, mapChains: false, customContent: false, settlementEditor: false, preGenOptions: true  },
+  premium: { minTier: 'thorp',  maxTier: 'capital', maxSaves: Infinity, neighbour: true,  export: true,  mapChains: true,  customContent: true,  settlementEditor: true,  preGenOptions: true  },
+};
+
+// `capital` is the legacy tier name that lines up with pricing.js's maxSize
+// values; `metropolis` is the engine-side tier rank (city/capital both fall
+// inside it for size scaling purposes). The cap above limits the wizard's
+// settType selector; the engine itself can still produce metropolis-scaled
+// output internally for elevated roles.
+const TIER_RANK = { thorp: 0, hamlet: 1, village: 2, town: 3, city: 4, capital: 5, metropolis: 5 };
+
+// Sentinel settType values that are not concrete tiers: they resolve to a real
+// tier during generation, and the post-resolution re-gate (settlementSlice)
+// checks the RESOLVED tier. Allowing them here keeps Random/Custom selectable
+// for every account tier (ported master fix).
+const ALLOWED_UNRANKED_TIERS = new Set(['random', 'custom']);
+
+// ⛔ THE ROLE QUESTION HAS ONE HOME: src/lib/staffEntitlements.js. This slice used
+// to keep its own `ELEVATED_ROLES = ['developer','admin']` and ten call sites
+// spelling `ELEVATED_ROLES.includes(...)`, while eight other modules hand-copied
+// the same disjunction — the drift class the premium-gate census exists against,
+// and with no single line anyone could flip to take a temporary unlock back.
+// ODQ §934.28 made the unlock temporary by the owner's own words ("for right
+// now"), so the two questions now come from the one module:
+//   isStaffRole(role)             IDENTITY — is this account staff? Never switched.
+//   staffUnlocksPaidFeatures(role) ENTITLEMENT — does staff get the paid surface?
+//                                  Governed by STAFF_UNLOCK_ALL_PAID.
+
+// An UNLOCKED staff account (admin / developer) carries a perpetual Cartographer
+// (premium) status: they never pay, and their account reads as Cartographer
+// everywhere `auth.tier` is consulted. Whatever billing tier the profile reports
+// is overridden to 'premium' for those roles. With the unlock revoked this
+// returns the account's real billing tier, so every gate below answers from
+// TIER_GATE exactly as it does for a member.
+function resolveTier(tier, role) {
+  return staffUnlocksPaidFeatures(role) ? 'premium' : (tier || 'free');
+}
+
+/**
+ * ⛔ THE DEV-ONLY PREVIEW PERSONA (ODQ §934.35). The owner asked for "a dummy
+ * admin account for our preview purposes only". NOBODY CREATES AN ACCOUNT HERE —
+ * this is a VIEW, not an identity. It supplies the ROLE that the client's own
+ * gates read, so a preview session renders the admin surface (the Developer
+ * Admin Panel row, /admin, every tier gate open) while the SESSION stays exactly
+ * what it really is: anonymous, or whoever is genuinely signed in.
+ *
+ * ⛔ NOTHING IS CLAIMED TO THE SERVER, AND THAT IS THE WHOLE SAFETY ARGUMENT.
+ * The persona is read HERE and nowhere else. No request header, no body field,
+ * no JWT claim and no profiles write carries it; the Supabase client is
+ * constructed from the anon key alone and is never handed a persona. So every
+ * server gate — RLS, current_user_is_privileged(), the audited admin-actions
+ * function, has_surveyor_entitlement() — answers for the REAL caller and refuses
+ * a persona exactly as it refuses any stranger. A preview admin can SEE the
+ * admin chrome; it cannot read or write one row it was not already entitled to.
+ * That asymmetry is deliberate: it is what makes a dummy admin safe to have.
+ *
+ * ⛔ IT CANNOT EXIST IN PRODUCTION. The branch is `import.meta.env.DEV && …`,
+ * and Vite replaces `import.meta.env.DEV` with the literal `false` in a
+ * production build, so Rollup eliminates the whole body as dead code — the
+ * shipped bundle contains neither this mechanism nor the variable's name.
+ * tests/build/previewPersonaAbsent.test.js proves that against the real dist,
+ * and tests/store/previewPersona.test.js proves the predicate is inert with DEV
+ * false and that nothing injects it into a request.
+ *
+ * SET IT in the preview worktree's `.env.local` (gitignored, .gitignore:5),
+ * which the dev server loads by Vite's default env handling:
+ *     VITE_PREVIEW_ROLE=admin      # or: developer
+ * Any other value — including a plausible one like 'owner' or 'staff' — is
+ * REFUSED by isStaffRole and reads as no persona at all (fail-closed).
+ *
+ * The account menu shows "PREVIEW PERSONA · admin" while it is active, so no one
+ * can mistake the preview for a real session.
+ *
+ * @returns {string|null} 'admin' | 'developer' while previewing, else null
+ */
+function previewPersonaRole() {
+  // MODE !== 'test': a vitest run also reports DEV, and the preview worktree's .env.local
+  // would otherwise seat every anonymous test visitor as staff (measured 2026-09-19).
+  if (import.meta.env.DEV && import.meta.env.MODE !== 'test' && import.meta.env.VITE_PREVIEW_ROLE) {
+    const asked = String(import.meta.env.VITE_PREVIEW_ROLE).trim();
+    return isStaffRole(asked) ? asked : null;
+  }
+  return null;
+}
+
+/**
+ * THE ONE PLACE A ROLE IS DECIDED for client-side state. Every auth writer below
+ * goes through it, so the persona cannot be honoured on one path and forgotten
+ * on another — the bug shape §934.28 had just cured on the TIER path, where
+ * authSignIn alone skipped resolveTier.
+ *
+ * With no persona this is exactly the `role || 'user'` every writer used before.
+ *
+ * @param {string|null|undefined} role the role from the authenticated profile
+ * @returns {string}
+ */
+function resolveRole(role) {
+  return previewPersonaRole() || role || 'user';
+}
+let authUnsubscribe = null;
+// M-9d — teardown for the single-session validation loop (focus/visibility + interval).
+let sessionValidationCleanup = null;
+
+function alignSavedSettlementsOwner(get, nextOwnerId, { invalidate = false } = {}) {
+  const state = get();
+  const next = normalizeSavedSettlementsOwnerId(nextOwnerId);
+  const authOwner = normalizeSavedSettlementsOwnerId(state.auth?.user?.id);
+  const cacheOwner = normalizeSavedSettlementsOwnerId(state.savedSettlementsOwnerId);
+  if (invalidate || authOwner !== next || cacheOwner !== next) {
+    state.clearSavedSettlements?.(next);
+  }
+}
+
+function alignCampaignAuthBoundary(get, user, session, { forceSession = false } = {}) {
+  const state = get();
+  const previousOwnerId = state.auth?.user?.id ?? null;
+  const nextOwnerId = user?.id ?? null;
+  if (String(previousOwnerId || '') !== String(nextOwnerId || '')) {
+    state.clearCampaigns?.({ ownerBoundary: true, nextOwnerId });
+  } else if (forceSession || state.auth?.session !== session) {
+    state.invalidateCampaignSession?.();
+  }
+}
+
+export const createAuthSlice = (set, get) => ({
+  // ── State ──────────────────────────────────────────────────────────────────
+  auth: {
+    user: null,           // Supabase user object (null = anonymous)
+    session: null,        // Supabase session
+    // §934.35: a DEV preview persona seats its role (and therefore its tier)
+    // from the first frame, before any auth resolves. With no persona both
+    // resolvers are the identity they always were ('anon' / 'user').
+    tier: resolveTier('anon', resolveRole(null)),   // 'anon' | 'free' | 'premium'
+    role: resolveRole(null),                        // 'user' | 'developer' | 'admin'
+    displayName: null,    // custom display name (from profiles table)
+    isFounder: false,     // founder lifetime grant (from profiles table)
+    avatarUrl: null,      // optional profile avatar URL
+    emailNotifications: true,
+    modelPreference: DEFAULT_MODEL_PREFERENCE,
+    loading: true,        // true while checking initial session
+    error: null,          // last auth error message
+  },
+
+  // Durable single-dossier export rights (migration 108), cached per SAVED
+  // settlement id so the export surfaces don't re-hit has_dossier_entitlement on
+  // every render. A map of { [saveId]: boolean }. The server is authoritative;
+  // this is a read cache only — refreshed on demand (after a purchase success,
+  // after a retro auto-upgrade) and cleared on sign-out.
+  dossierEntitlements: {},
+
+  // Single-session eviction banner flag (§7.3, M-9d). TOP-LEVEL (not inside `auth`),
+  // so clearAuth's auth-reset leaves it standing — the banner survives the sign-out
+  // it announces. NOT persisted (absent from the partialize), so a fresh load is never
+  // pre-evicted. Cleared on the next SIGNED_IN.
+  sessionEvicted: false,
+
+  // ── Core setters ──────────────────────────────────────────────────────────
+  setAuth: (
+    user,
+    session,
+    tier,
+    role,
+    displayName,
+    isFounder = false,
+    avatarUrl = null,
+    emailNotifications = true,
+    modelPreference = DEFAULT_MODEL_PREFERENCE,
+  ) => {
+    alignCampaignAuthBoundary(get, user, session);
+    alignSavedSettlementsOwner(get, user?.id);
+    activateOutboxOwner(user?.id);
+    set(state => {
+      state.auth = {
+        user,
+        session,
+        tier: resolveTier(tier, resolveRole(role)),
+        role: resolveRole(role),
+        displayName: displayName || null,
+        isFounder: Boolean(isFounder),
+        avatarUrl: avatarUrl || null,
+        emailNotifications: emailNotifications !== false,
+        modelPreference: modelPreference || DEFAULT_MODEL_PREFERENCE,
+        loading: false,
+        error: null,
+      };
+    });
+    // Re-publish after auth commits: the pre-commit activation is the security
+    // detach, while this same-owner refresh is the reporter/UI handoff.
+    activateOutboxOwner(user?.id);
+  },
+
+  /**
+   * Patch ONLY the profile image pointer (DESIGN_PROFILE_IMAGE.md §4).
+   *
+   * The avatar pipeline writes profiles.avatar_url directly and then calls this
+   * so the surfaces already reading auth.avatarUrl (the account circle, the nav
+   * menu) update without a reload. Deliberately NOT folded into setAuth: that
+   * action rebuilds the whole auth object from a session read, and threading one
+   * field through its nine positional parameters at every call site — for a
+   * value the very next session refresh re-reads from the profile anyway — would
+   * buy nothing and drop the field wherever a caller forgot it.
+   *
+   * The store is a CACHE of the profile here; the row is authoritative.
+   *
+   * ⚠️ The public-identity OPT-IN is deliberately absent from this store. It is
+   * owned locally by AccountIdentitySection (the FounderCreditToggle pattern),
+   * because setAuth's full-object rebuild would silently reset any consent flag
+   * held in `auth` on every session refresh — a consent switch that quietly
+   * flips itself back is worse than one that lives in one place.
+   *
+   * @param {string|null} avatarUrl
+   */
+  setAvatarUrl: (avatarUrl) => {
+    set(state => {
+      state.auth.avatarUrl = avatarUrl || null;
+    });
+  },
+
+  clearAuth: () => {
+    // Detach synchronously so no scheduled retry can cross an account boundary.
+    // The old owner's pending writes remain in that owner's durable mirror.
+    activateOutboxOwner(null);
+    // Always invalidate on sign-out, even if the same account signs straight
+    // back in: a response from the prior session must not certify the new cache.
+    alignSavedSettlementsOwner(get, null, { invalidate: true });
+    try {
+      // Clear owner-scoped campaign errors/status before publishing anon auth so
+      // no subscriber can observe A's warning under the anonymous session.
+      get().clearCampaigns?.({ ownerBoundary: true, nextOwnerId: null });
+    } catch {
+      // Other slices may not be present in isolated unit tests.
+    }
+    set(state => {
+      // ⛔ SIGN-OUT LEAVES THE EDITOR'S WORLD STANDING, deliberately: eviction
+      // routes through here and must NEVER destroy unsaved work (see
+      // evictSession). It used to need a companion bar — a `signedInWorld` claim
+      // raised here — because the persist projection gated the anonymous-draft
+      // envelope on the TIER, and sign-out sets tier 'anon', so the very next
+      // store write stashed the departing account's loaded world (possibly one of
+      // their SAVES) into this device's localStorage. The projection now reads
+      // `state.draftOrigin` — whose session put the world in the editor, a
+      // transient root field, never a key on the world — and an account's world
+      // answers 'account' whoever is signed in a moment later, so there is no bar
+      // to raise here and nothing to retract anywhere. ⚠ THAT ONLY HOLDS WHILE
+      // EVERY DOOR THAT MAKES A WORLD AN ACCOUNT'S SAYS SO: the post-signup
+      // SAVE_SETTLEMENT intent did not, and left exactly this leak open (cured at
+      // its handler in store/index.js).
+      state.auth = { user: null, session: null, tier: resolveTier('anon', resolveRole(null)), role: resolveRole(null), displayName: null, isFounder: false, avatarUrl: null, emailNotifications: true, modelPreference: DEFAULT_MODEL_PREFERENCE, loading: false, error: null };
+      // Durable-rights cache is per-user — drop it on sign-out so a later user on
+      // the same device never reads the previous account's entitlements.
+      state.dossierEntitlements = {};
+    });
+    activateOutboxOwner(null);
+    try {
+      get().clearCloudCustomContent?.();
+    } catch {
+      // Other slices may not be present in isolated unit tests.
+    }
+  },
+
+  /**
+   * THE EVICTION (§7.3, M-9d) — this session was superseded by a sign-in on another
+   * device. THE NON-NEGOTIABLE LIFECYCLE REQUIREMENT: eviction must NEVER destroy
+   * unsaved local work. So this does the MINIMUM:
+   *   (1) raise the banner flag (sessionEvicted — top-level, survives clearAuth),
+   *   (2) sign out ONLY this device's session (LOCAL scope; the other device is the
+   *       legitimate winner). The SIGNED_OUT event then transitions auth to anon
+   *       exactly as a normal sign-out does. That later SIGNED_OUT handler
+   *       intentionally clears owner-scoped caches, while the persist partialize
+   *       (config + toggles) remains untouched so unsaved edits survive re-auth.
+   * evictSession itself never calls reset/clear actions synchronously — that is the
+   * narrower wall THE LIFECYCLE PIN guards. Supersession DEDUPES: the first eviction
+   * wins; later ones no-op (no error-toast storm from N in-flight paid calls all
+   * 401-ing).
+   */
+  evictSession: () => {
+    if (get().sessionEvicted) return;                 // dedupe — first supersession wins
+    set(state => { state.sessionEvicted = true; });
+    // Local-scope sign-out (lazy authSecurity). Fire-and-forget: the banner is already
+    // up, and the SIGNED_OUT transition follows on its own. NEVER a global sign-out.
+    Promise.resolve(authService.signOutLocalSession?.()).catch(() => { /* banner already shown */ });
+  },
+
+  setAuthLoading: (loading) =>
+    set(state => { state.auth.loading = loading; }),
+
+  setAuthError: (error) =>
+    set(state => { state.auth.error = error; }),
+
+  // ── Durable single-dossier export rights cache (migration 108) ─────────────
+  /** Synchronous read of the cached durable-right flag for a saved settlement.
+   *  Unknown (never fetched) reads false — the export surface then offers the
+   *  purchase path rather than a free export it cannot prove. */
+  hasCachedDossierEntitlement: (saveId) => {
+    if (!saveId) return false;
+    return get().dossierEntitlements[saveId] === true;
+  },
+
+  // RETIRED (R-5b, owner queue #21): `setDossierEntitlement`. Its docstring named
+  // a caller — "right after a successful retro auto-upgrade" — that never
+  // materialized. The live shape is the opposite and is the right one for a PAID
+  // right: purchases INVALIDATE the cache (clearDossierEntitlements below) and the
+  // authority re-reads it from the server (refreshDossierEntitlement), so the
+  // client never optimistically grants itself a durable entitlement it has not
+  // been told it holds. Removing the optimistic writer removes the only way that
+  // invariant could have been broken.
+
+  /** Drop the whole durable-rights read cache so every saved dossier refetches
+   *  its right on next view. Called after a durable purchase completes (the
+   *  webhook granted a new right server-side; the buyer's stale `false` must not
+   *  linger). */
+  clearDossierEntitlements: () =>
+    set(state => { state.dossierEntitlements = {}; }),
+
+  /** Refresh the cached durable-right flag for one saved settlement from the
+   *  server (has_dossier_entitlement). Fire-and-forget-safe: never throws, and
+   *  a transient failure caches false (fail-closed). Resolves to the boolean. */
+  refreshDossierEntitlement: async (saveId) => {
+    if (!saveId) return false;
+    const { fetchHasDossierEntitlement } = await import('../lib/dossierEntitlements.js');
+    const held = await fetchHasDossierEntitlement(saveId);
+    set(state => { state.dossierEntitlements[saveId] = held; });
+    return held;
+  },
+
+  // ── Role queries (IDENTITY — never governed by the paid-unlock switch) ────
+  // These answer "is this account staff", which the admin panel, the account
+  // menu's Developer row and the elevated route guard ask. Revoking a testing
+  // convenience must never lock the owner out of the admin panel, so the kill
+  // switch deliberately does not reach them.
+  isDeveloper: () => get().auth.role === 'developer',
+  isAdmin: () => isStaffRole(get().auth.role),
+  isElevated: () => isStaffRole(get().auth.role),
+  /** Whether the user's account tier grants premium benefits (unlimited
+   *  chronicle history, supply chains, custom content, etc.). Orthogonal to
+   *  role — an elevated role is checked separately via isElevated(). */
+  isPremium: () => get().auth.tier === 'premium',
+  /** Whether the user holds a Founder Lifetime grant. The profiles row is
+   *  the source of truth; user_metadata is only a compatibility mirror. */
+  isFounder: () => Boolean(get().auth.isFounder),
+
+  // ── Auth actions (async, call Supabase or mock) ───────────────────────────
+
+  /** Initialize session on app mount. Call once from App.jsx useEffect. */
+  initAuth: async () => {
+    set(state => { state.auth.loading = true; });
+    try {
+      const result = await authService.getSession();
+      if (result) {
+        alignCampaignAuthBoundary(get, result.user, result.session);
+        alignSavedSettlementsOwner(get, result.user?.id);
+        activateOutboxOwner(result.user?.id);
+        set(state => {
+          state.auth = {
+            user: result.user, session: result.session,
+            tier: resolveTier(result.tier, resolveRole(result.role)), role: resolveRole(result.role),
+            displayName: result.displayName || null,
+            isFounder: Boolean(result.isFounder),
+            avatarUrl: result.avatarUrl || null,
+            emailNotifications: result.emailNotifications !== false,
+            modelPreference: result.modelPreference || DEFAULT_MODEL_PREFERENCE,
+            loading: false, error: null,
+          };
+        });
+        activateOutboxOwner(result.user?.id);
+      } else {
+        // initAuth is HMR/remount-safe and may rerun on a live signed-in store.
+        // A null authoritative session is a full sign-out boundary, not merely
+        // the end of loading; reuse the same atomic cache/outbox transition.
+        get().clearAuth();
+      }
+    } catch (e) {
+      console.error('Auth init error:', e);
+      set(state => { state.auth.loading = false; state.auth.error = e.message; });
+    }
+
+    // ⛔ NOTHING IS SPENT HERE ANY MORE, and the absence is the design. This
+    // resolution used to settle the anonymous-draft claim a rehydrate had raised
+    // — dropping the adopted draft whenever the session turned out to be signed
+    // in — and every edge of that drop was wrong in turn: a sign-in racing a slow
+    // getSession() spent it early, a redirect door could not retract it in state
+    // at all, and the drop had to reach past `settlement` into systemState, the
+    // event log and the draft timeline to be whole. A device's anonymous draft
+    // now simply belongs to the device (store/persistProjection.js), so there is
+    // no gate at the boot answer and no draft is ever taken off the screen.
+
+    // Listen for auth state changes (token refresh, sign out from another tab).
+    // initAuth can run more than once under HMR/remounts, so keep exactly one
+    // active subscription.
+    if (authUnsubscribe) {
+      authUnsubscribe();
+      authUnsubscribe = null;
+    }
+    authUnsubscribe = authService.onAuthChange((event, user, session, tier, role, displayName, isFounder, avatarUrl, emailNotifications, modelPreference) => {
+      if (event === 'SIGNED_OUT') {
+        get().clearAuth();
+      } else if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
+        activateOutboxOwner(user?.id);
+        const previousUserId = get().auth?.user?.id;
+        alignSavedSettlementsOwner(get, user?.id);
+        if (event === 'SIGNED_IN') {
+          alignCampaignAuthBoundary(get, user, session, { forceSession: true });
+        }
+        if (previousUserId && user?.id && previousUserId !== user.id) {
+          get().clearCloudCustomContent?.();
+        }
+        set(state => {
+          state.auth = {
+            user, session, tier: resolveTier(tier, resolveRole(role)),
+            role: resolveRole(role),
+            displayName: displayName || null,
+            isFounder: Boolean(isFounder),
+            avatarUrl: avatarUrl || null,
+            emailNotifications: emailNotifications !== false,
+            modelPreference: modelPreference || DEFAULT_MODEL_PREFERENCE,
+            loading: false, error: null,
+          };
+          // A fresh sign-in clears any prior eviction banner (§7.3): re-auth returns
+          // the user to their (persisted) work with a clean slate.
+          state.sessionEvicted = false;
+        });
+        activateOutboxOwner(user?.id);
+
+        // M-9d — claim this account to THE CURRENT session (last-login-wins, §7.1).
+        // Fire-and-forget via the LAZY sessionClient (off the first-paint closure). Only
+        // on a real SIGNED_IN — a TOKEN_REFRESHED keeps the same session_id.
+        if (event === 'SIGNED_IN' && user?.id) {
+          import('../lib/sessionClient.js').then((m) => m.claimSession()).catch(() => { /* never block auth */ });
+        }
+
+        // CONSENT RECONCILE — a telemetry opt-out recorded on the account beats this
+        // device's local record (opt-out wins; it never re-grants). Lazy + fire-and-forget
+        // like the claim above: consent is already enforced locally, so this only narrows.
+        if (event === 'SIGNED_IN' && user?.id) {
+          import('../lib/consentSync.js')
+            .then((m) => m.reconcileTelemetryConsent())
+            .catch(() => { /* never block auth; the local record stands */ });
+        }
+
+        // Tier 8.5 — fire the welcome email once per account. We mark a
+        // localStorage flag keyed by user id so we don't double-send on
+        // SIGNED_IN events (e.g. after a token refresh or a sign-out +
+        // sign-in cycle on the same browser). The send is
+        // fire-and-forget — emails never block the auth flow, and an
+        // unconfigured RESEND_API_KEY returns a soft 200 from the edge
+        // function so this path is silent in dev.
+        if (event === 'SIGNED_IN' && user?.id) {
+          const flag = `sf_welcomed_${user.id}`;
+          try {
+            if (typeof localStorage !== 'undefined' && !localStorage.getItem(flag)) {
+              localStorage.setItem(flag, '1');
+              // Lazy-import the lifecycle helper to avoid pulling
+              // emailLifecycle into the critical auth bundle.
+              import('../lib/emailLifecycle.js').then(({ notifyWelcome }) => {
+                notifyWelcome({ displayName: displayName || 'there' });
+              }).catch(() => { /* swallow — never block auth */ });
+
+              // Tier 8.8 — fire SIGNUP_COMPLETED + (if applicable)
+              // SIGNUP_AFTER_ANON. We piggyback on the same first-
+              // signin-per-user flag so this fires once per account.
+              import('../lib/analytics.js').then(({ Funnel }) => {
+                Funnel.signupCompleted({ userId: user.id });
+              }).catch(() => { /* never block auth */ });
+            }
+          } catch { /* localStorage unavailable; skip */ }
+        }
+
+        // P101 / X-3 — Auth intent fulfillment. If the user clicked
+        // "Save this town — free account" before signing in, the
+        // authIntents registry has a pending SAVE_SETTLEMENT entry. Now
+        // that auth is real, dispatch it. The handler is registered at
+        // module init time in store/index.js (see registerSaveIntent).
+        if (event === 'SIGNED_IN' && user?.id) {
+          import('../lib/authIntents.js').then(({ consume }) => {
+            consume({ user, tier, role, displayName, isFounder, avatarUrl, emailNotifications, modelPreference });
+          }).catch((e) => {
+            console.warn('[authSlice] authIntents.consume failed:', e);
+          });
+        }
+      }
+    });
+
+    // M-9d — session validation (focus/visibility + 5-min interval). LAZILY loaded so
+    // the listener/interval machinery stays OFF the first-paint closure (LAW 4); its
+    // teardown is captured for cleanup once the module resolves.
+    if (sessionValidationCleanup) { sessionValidationCleanup(); sessionValidationCleanup = null; }
+    import('../lib/sessionClient.js')
+      .then(({ startValidation }) => { sessionValidationCleanup = startValidation(get); })
+      .catch(() => { /* validation is a convenience; the request gate is the enforcement */ });
+
+    // Combined teardown: unsubscribe onAuthChange AND tear down the validation loop.
+    return () => {
+      if (authUnsubscribe) { authUnsubscribe(); authUnsubscribe = null; }
+      if (sessionValidationCleanup) { sessionValidationCleanup(); sessionValidationCleanup = null; }
+    };
+  },
+
+  /** Sign up with email + password. Returns { needsVerification } or throws. */
+  authSignUp: async (email, password, captchaToken) => {
+    set(state => { state.auth.loading = true; state.auth.error = null; });
+    try {
+      // captchaToken is ADDITIVE (Wave-D perimeter): undefined unless the
+      // perimeterCaptcha flag is on and the widget produced a token.
+      const result = /** @type {any} */ (await authService.signUp(email, password, captchaToken));
+      if (result.session) {
+        // Auto-confirmed (dev mode or mock)
+        alignCampaignAuthBoundary(get, result.user, result.session);
+        alignSavedSettlementsOwner(get, result.user?.id);
+        activateOutboxOwner(result.user?.id);
+        set(state => {
+          state.auth = {
+            user: result.user, session: result.session,
+            tier: resolveTier(result.tier, resolveRole(result.role)), role: resolveRole(result.role),
+            displayName: result.displayName || null,
+            isFounder: Boolean(result.isFounder),
+            avatarUrl: result.avatarUrl || null,
+            emailNotifications: result.emailNotifications !== false,
+            modelPreference: result.modelPreference || DEFAULT_MODEL_PREFERENCE,
+            loading: false, error: null,
+          };
+        });
+        activateOutboxOwner(result.user?.id);
+      } else {
+        // No session yet: the account needs email verification. Nothing is stashed
+        // for the return trip — the draft on screen is persisted as the device's
+        // own and the fresh boot adopts it, so there is no claim to carry.
+        set(state => { state.auth.loading = false; });
+      }
+      return { needsVerification: result.needsVerification, existingAccount: result.existingAccount };
+    } catch (e) {
+      set(state => { state.auth.loading = false; state.auth.error = e.message; });
+      throw e;
+    }
+  },
+
+  /** Sign in with email + password. rememberMe controls session persistence. */
+  authSignIn: async (email, password, rememberMe = true, captchaToken) => {
+    set(state => { state.auth.loading = true; state.auth.error = null; });
+    try {
+      const result = await authService.signIn(email, password, rememberMe, captchaToken);
+      alignCampaignAuthBoundary(get, result.user, result.session);
+      alignSavedSettlementsOwner(get, result.user?.id);
+      activateOutboxOwner(result.user?.id);
+      set(state => {
+        state.auth = {
+          user: result.user, session: result.session,
+          // ⛔ THE ONE PATH THAT DID NOT RESOLVE THE TIER (found in the §934.28
+          // recon). Every other writer — setAuth, initAuth, authSignUp and the
+          // onAuthChange SIGNED_IN/TOKEN_REFRESHED handler — passes the profile
+          // tier through resolveTier, so a staff account reads 'premium'. This
+          // one wrote `result.tier` raw, so a developer/admin signing in with a
+          // password briefly held their REAL billing tier ('free') and every
+          // TIER_GATE read refused them until the auth-state listener happened
+          // to land and repair it. A race decided whether staff saw the paid
+          // surface. It resolves here now, like its four siblings.
+          tier: resolveTier(result.tier, resolveRole(result.role)), role: resolveRole(result.role),
+          displayName: result.displayName || null,
+          isFounder: Boolean(result.isFounder),
+          avatarUrl: result.avatarUrl || null,
+          emailNotifications: result.emailNotifications !== false,
+          modelPreference: result.modelPreference || DEFAULT_MODEL_PREFERENCE,
+          loading: false, error: null,
+        };
+      });
+      activateOutboxOwner(result.user?.id);
+    } catch (e) {
+      set(state => { state.auth.loading = false; state.auth.error = e.message; });
+      throw e;
+    }
+  },
+
+  /** Sign out. */
+  authSignOut: async () => {
+    try {
+      await authService.signOut();
+    } catch (e) {
+      console.error('Sign out error:', e);
+    }
+    get().clearAuth();
+  },
+
+  /** Send password reset email. */
+  authResetPassword: async (email, captchaToken) => {
+    try {
+      await authService.resetPassword(email, captchaToken);
+    } catch (e) {
+      set(state => { state.auth.error = e.message; });
+      throw e;
+    }
+  },
+
+  /**
+   * Persist the two security answers captured at sign-up. Thin pass-through to
+   * the auth service's set_my_security_answers RPC wrapper — the RPC needs a
+   * live session (auth.uid()), so the caller fires this only AFTER a session
+   * exists (i.e. once the post-signup polling auto-login succeeds). The raw
+   * answers are hashed server-side; nothing sensitive lands in the store.
+   *
+   * @param {{ q1: string, a1: string, q2: string, a2: string }} answers
+   */
+  authSetSecurityAnswers: async (answers) => {
+    await authService.setSecurityAnswers(answers);
+  },
+
+  /**
+   * Read which of the caller's two security-question slots are currently set,
+   * so the account page can show "set / not set" status. Thin pass-through to
+   * the auth service's get_my_security_question_ids RPC wrapper — it returns
+   * only the {slot, questionId} pairs (never the answer hash) and needs a live
+   * session. Degrades to an empty array on any failure.
+   *
+   * @returns {Promise<Array<{ slot: number, questionId: string }>>}
+   */
+  authGetSecurityQuestionIds: async () => {
+    return authService.getSecurityQuestionIds();
+  },
+
+  /**
+   * Forgot-password challenge — step 1. Look up an email through the
+   * `auth-recovery` edge function and get ONE random security question. The raw
+   * answer hash never reaches the client; this returns only
+   * { exists, slot, questionId }. A rate-limit / outage throws a coded Error
+   * (e.code, see RECOVERY_RATE_LIMITED) so the UI can back off rather than treat
+   * it as a missing account. Thin pass-through; nothing lands in state.
+   *
+   * @param {string} email
+   * @returns {Promise<{ exists: boolean, slot: number|null, questionId: string|null }>}
+   */
+  authRecoveryLookup: async (email) => {
+    return authService.recoveryLookup(email);
+  },
+
+  /**
+   * Forgot-password challenge — step 2. Submit the answer for the question
+   * chosen in step 1. On a correct answer the edge function mails the reset link
+   * and this resolves { ok: true }; a wrong answer resolves { ok: false }. A
+   * rate-limit / outage throws a coded Error. The answer is sent straight to the
+   * function and never persisted in the store.
+   *
+   * @param {{ email: string, slot: number, answer: string }} args
+   * @returns {Promise<{ ok: boolean }>}
+   */
+  authRecoveryVerify: async ({ email, slot, answer }) => {
+    return authService.recoveryVerify({ email, slot, answer });
+  },
+
+  /**
+   * Set a new password for the CURRENT session. Used by the set-new-password
+   * page once a recovery session is active (the recovery link established it).
+   * Unlike a signed-in password change this has no current-password re-auth gate
+   * — the recovery session IS the proof of identity. The auth-state listener
+   * picks up the now-fully-authed session; failures (e.g. expired link) surface
+   * to the caller.
+   *
+   * @param {string} newPassword
+   */
+  authUpdatePassword: async (newPassword) => {
+    try {
+      await authService.updatePassword(newPassword);
+    } catch (e) {
+      set(state => { state.auth.error = e.message; });
+      throw e;
+    }
+  },
+
+  /**
+   * Send magic-link / OTP sign-in email. WCAG 2.2 SC 3.3.8 (Accessible
+   * Authentication, Minimum) prefers this path over password recall.
+   * Resolution happens via the auth-state listener on link click — no
+   * follow-up call needed here.
+   */
+  authMagicLink: async (email) => {
+    try {
+      const result = await authService.signInWithMagicLink(email);
+      return result;  // { sentTo: email }
+    } catch (e) {
+      set(state => { state.auth.error = e.message; });
+      throw e;
+    }
+  },
+
+  /**
+   * Begin an OAuth sign-in flow. Supabase navigates the browser to the
+   * provider; we never resolve to a session here. The session is
+   * established when the user lands back on our origin and the
+   * onAuthStateChange listener fires SIGNED_IN.
+   *
+   * ⛔ THE REDIRECT NEEDS NO DEVICE-LOCAL RESCUE ANY MORE. This door used to stash
+   * the anonymous-draft claim in sessionStorage before navigating away, because a
+   * door that leaves the page cannot retract a store flag and the return was a
+   * fresh boot whose resolution would have dropped the very draft the visitor
+   * left to go and claim. The draft is now simply the device's until someone
+   * clears it, so the return boot adopts it like any other boot.
+   *
+   * @param {'google' | 'discord' | 'github'} provider
+   */
+  authOAuth: async (provider) => {
+    set(state => { state.auth.loading = true; state.auth.error = null; });
+    try {
+      const result = /** @type {any} */ (await authService.signInWithOAuth(provider));
+      // Mock-mode short-circuit: there's no real redirect, so report
+      // back to the caller instead of leaving the UI in a loading state.
+      if (result?.mock) {
+        set(state => { state.auth.loading = false; });
+      }
+      // In real mode the browser is navigating away; no UI update needed.
+      return result;
+    } catch (e) {
+      // Prefer the safe, non-leaky userMessage set by describeOAuthError in
+      // lib/auth.js (e.g. a not-yet-enabled provider). Rethrow the original
+      // error object so the caller can also read `e.userMessage`.
+      const safe = e.userMessage || e.message;
+      set(state => { state.auth.loading = false; state.auth.error = safe; });
+      throw e;
+    }
+  },
+
+  // ── Permission queries (elevated roles bypass all gates) ──────────────────
+  canSave: () => {
+    // The staff unlock opens every PAID gate, but a save needs a real session as
+    // well: the server refuses an unauthenticated insert, and under the dev-only
+    // preview persona (a role with no user) the client would otherwise offer a
+    // door it knows cannot open, then say nothing loud enough (browser pass 3,
+    // 2026-09-19). With no session the anonymous save door renders — the truth.
+    const { role, user, tier } = get().auth;
+    if (staffUnlocksPaidFeatures(role)) return Boolean(user);
+    return TIER_GATE[tier]?.maxSaves > 0;
+  },
+
+  canUseNeighbour: () => {
+    if (staffUnlocksPaidFeatures(get().auth.role)) return true;
+    const { tier } = get().auth;
+    return TIER_GATE[tier]?.neighbour === true;
+  },
+
+  canExport: () => {
+    if (staffUnlocksPaidFeatures(get().auth.role)) return true;
+    const { tier } = get().auth;
+    return TIER_GATE[tier]?.export === true;
+  },
+
+  // ENFORCED (Owner Ruling #5, 2026-07-17 — "enforce mapChains", flipping the
+  // reconciliation-#4 as-shipped-free judgment at its recorded veto handle).
+  // Consumers: the <ChainEdges/> render in components/MapOverlay.jsx + the
+  // LayersPanel 'Supply chains' toggle + the RoutesToolbar 'Chains' toggle —
+  // the gate wraps the AFFORDANCES; the derivation (lib/computeMapChains.js /
+  // lib/supplyChains.js) stays tier-blind. Locked toggles stay visible and
+  // fire the map_realm_teaser pricing moment. The stored layers.chains default
+  // is untouched, so an upgrade restores the layer without re-toggling.
+  canUseMapChains: () => {
+    if (staffUnlocksPaidFeatures(get().auth.role)) return true;
+    const { tier } = get().auth;
+    return TIER_GATE[tier]?.mapChains === true;
+  },
+
+  /** Whether the user can create/edit custom Compendium content (premium gate). */
+  canUseCustomContent: () => {
+    if (staffUnlocksPaidFeatures(get().auth.role)) return true;
+    const { tier } = get().auth;
+    return TIER_GATE[tier]?.customContent === true;
+  },
+
+  /**
+   * ⛔⛔ DARK BY DESIGN. Whether this account may open the settlement editor (design §20.4).
+   *
+   * THIS PREDICATE INVERTS THE SHAPE OF EVERY OTHER GATE IN THIS SLICE ON PURPOSE. The others
+   * open for staff first and then read the tier; this one reads the tier AND requires staff,
+   * because `resolveTier` writes a staff account in as tier 'premium', so the tier gate alone
+   * would open the editor to every paying Cartographer the day it lands — and design §20.4 says
+   * "⛔ VISIBILITY IS THE OWNER'S".
+   *
+   * ⭐ `&& isStaffRole(role)` IS THE ONE LINE TO DELETE WHEN THE OWNER OPENS THE DOOR — and that
+   * deletion is ONE OWNER-SIGNED ACT with two inseparable companions: the entitlementLadder row
+   * and the flow-b-auth-credits-ai browser spec. Deleting it makes this predicate the house shape
+   * and nothing else in this file has to change. Until then the audience is staff and the DEV-only
+   * preview persona, which supplies a role `isStaffRole` accepts and which cannot exist in a
+   * production build.
+   *
+   * ⛔ `isStaffRole`, NOT `staffUnlocksPaidFeatures`: the second is governed by the
+   * STAFF_UNLOCK_ALL_PAID kill switch, and revoking the paid-feature unlock must not take the
+   * unbuilt editor away from the people building it.
+   */
+  canEditSettlement: () => {
+    const { tier, role } = get().auth;
+    return TIER_GATE[tier]?.settlementEditor === true && isStaffRole(role);
+  },
+
+  maxAllowedTier: () => {
+    if (staffUnlocksPaidFeatures(get().auth.role)) return 'metropolis';
+    const { tier } = get().auth;
+    return TIER_GATE[tier]?.maxTier || 'village';
+  },
+
+  /**
+   * The SMALLEST size this account may forge. Only the anonymous row has a floor above
+   * the ladder's first rung (§934.34: a thorpe requires an account); every other tier
+   * reaches the whole ladder, and staff (behind STAFF_UNLOCK_ALL_PAID, §934.28) bypass both bounds.
+   */
+  minAllowedTier: () => {
+    if (staffUnlocksPaidFeatures(get().auth.role)) return 'thorp';
+    const { tier } = get().auth;
+    return TIER_GATE[tier]?.minTier || 'thorp';
+  },
+
+  /**
+   * Whether this account may CONFIGURE a generation before forging it — the wizard's
+   * pre-generation options (name, terrain, culture, priorities, magic, the constraint
+   * grids). Anonymous visitors pick a size and forge with everything else on random
+   * (the owner, §934.34). Distinct from `canUseCustomContent`, which gates the
+   * Compendium's authored content and stays premium.
+   */
+  canCustomizePreGeneration: () => {
+    if (staffUnlocksPaidFeatures(get().auth.role)) return true;
+    const { tier } = get().auth;
+    return TIER_GATE[tier]?.preGenOptions === true;
+  },
+
+  maxSaves: () => {
+    if (staffUnlocksPaidFeatures(get().auth.role)) return Infinity;
+    const { tier } = get().auth;
+    return TIER_GATE[tier]?.maxSaves ?? 0;
+  },
+
+  isTierAllowed: (settlementTier) => {
+    if (staffUnlocksPaidFeatures(get().auth.role)) return true;
+    // Sentinels resolve to a concrete tier at generation; the post-resolution
+    // re-gate checks that. Unknown non-sentinel tiers FAIL CLOSED.
+    if (ALLOWED_UNRANKED_TIERS.has(settlementTier)) return true;
+    const rank = TIER_RANK[settlementTier];
+    if (rank === undefined) return false;
+    const maxRank = TIER_RANK[get().maxAllowedTier()];
+    if (maxRank === undefined) return false;
+    // ⛔ BOTH BOUNDS. The floor is why this is a RANGE: an anonymous visitor reaches
+    // hamlet through town, and a thorpe — rank 0, which every ceiling admits — requires
+    // an account (§934.34). An unknown floor FAILS CLOSED like an unknown ceiling.
+    const minRank = TIER_RANK[get().minAllowedTier()];
+    if (minRank === undefined) return false;
+    return rank >= minRank && rank <= maxRank;
+  },
+
+  /**
+   * ⛔ WHICH BOUND REFUSED — because the two owe the reader OPPOSITE sentences.
+   * `isTierAllowed` answers one boolean over a RANGE, so the gate that read it could
+   * only raise the CEILING's refusal, and on the one rung with a floor above it that
+   * sentence was false: an anonymous visitor asking for a thorpe was told "A Thorpe is
+   * past what this account forges; it reaches up to a Town". This answers the other
+   * half, and it lives HERE rather than at the gate because TIER_RANK is this slice's
+   * table and nothing outside it should learn to rank a size.
+   *
+   * Asked only about a size already refused, and FAIL-CLOSED in the same direction as
+   * `isTierAllowed`: a sentinel, an unknown token or an unknown floor answers `false`,
+   * which leaves the ceiling's sentence exactly where it stood before this existed.
+   *
+   * @param {string} settlementTier
+   * @returns {boolean} true only when the size is under this account's floor
+   */
+  isTierBelowFloor: (settlementTier) => {
+    if (staffUnlocksPaidFeatures(get().auth.role)) return false;
+    if (ALLOWED_UNRANKED_TIERS.has(settlementTier)) return false;
+    const rank = TIER_RANK[settlementTier];
+    if (rank === undefined) return false;
+    const minRank = TIER_RANK[get().minAllowedTier()];
+    if (minRank === undefined) return false;
+    return rank < minRank;
+  },
+
+  /** Whether the user can afford AI features (developers get unlimited) */
+  canAffordAI: (feature) => {
+    if (staffUnlocksPaidFeatures(get().auth.role)) return true;
+    return get().canAfford(feature);
+  },
+});

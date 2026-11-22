@@ -1,0 +1,128 @@
+[
+{
+"id": "C26954",
+"sev": "MED",
+"n": 64,
+"town": "bar0-town-calm-rand-5",
+"section": "Systems/Economics",
+"fold": "Fermentation, pickling, drying, and shared ovens stretch the harvest through winter.",
+"text": "Fermentation, pickling, drying, and shared ovens stretch the harvest through winter.",
+"why": "names shared ovens; none on HOUSES (no bakery or oven house)",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/cultureProfiles.js",
+"line": 291,
+"fn": "CULTURE_PROFILES.foodways"
+}
+},
+{
+"id": "C25910",
+"sev": "MED",
+"n": 32,
+"town": "bar0-town-calm-rand-4",
+"section": "Systems/Economics",
+"fold": "Public ovens, market vendors, and shared dining customs make food distribution visibly civic.",
+"text": "Public ovens, market vendors, and shared dining customs make food distribution visibly civic.",
+"why": "names public ovens; none on HOUSES (no bakery or oven house)",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/cultureProfiles.js",
+"line": 119,
+"fn": "CULTURE_PROFILES.foodways"
+}
+},
+{
+"id": "C14917",
+"sev": "MED",
+"n": 20,
+"town": "bar0-hamlet-under_siege-rand-5",
+"section": "Summary/Overview",
+"fold": "# citizens argue a point of law loudly enough for a crowd to gather.",
+"text": "Two citizens argue a point of law loudly enough for a crowd to gather.",
+"why": "a crowd gathers over a point of law; population 29, under siege, no court in HOUSES",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 367,
+"fn": "ARRIVAL_PEOPLE.greek"
+}
+},
+{
+"id": "C23710",
+"sev": "MED",
+"n": 14,
+"town": "bar0-thorp-calm-rand-4",
+"section": "Summary/Overview",
+"fold": "Well-fed children run errands through a busy street.",
+"text": "Well-fed children run errands through a busy street.",
+"why": "a busy street in a thorp of 21 people; no streets or crowds can be held",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 414,
+"fn": "ARRIVAL_TENSIONS.prosperous"
+}
+},
+{
+"id": "C3297",
+"sev": "MED",
+"n": 7,
+"town": "bar0-city-under_siege+famine-rand-5",
+"section": "Summary/Overview",
+"fold": "The hammering echoes throughout <N>, and most of it is the sound of blades being made.",
+"text": "The hammering echoes throughout Hochberg, and most of it is the sound of blades being made.",
+"why": "Says blades are being forged by hammering; C3553 says the siege took the iron and the smiths have nothing to work with.",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 79,
+"fn": "ARRIVAL_SENSES.dominant"
+}
+},
+{
+"id": "C10029",
+"sev": "MED",
+"n": 5,
+"town": "bar0-city-wartime-rand-5",
+"section": "Summary/Overview",
+"fold": "Ore carts and stone carts grind along the road in a line that never seems to end.",
+"text": "Ore carts and stone carts grind along the road in a line that never seems to end.",
+"why": "ore carts in an endless line; LAND gives iron ore deposits absent, mining chain vulnerable, iron is imported",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 208,
+"fn": "ARRIVAL_SENSES.dominant"
+}
+},
+{
+"id": "C34242",
+"sev": "MED",
+"n": 2,
+"town": "bar0-village-famine-rand-5",
+"section": "Summary/Overview",
+"fold": "Curls of shavings blow across the lane from a carpenter's bench.",
+"text": "Curls of shavings blow across the lane from a carpenter's bench.",
+"why": "a carpenter's bench; HOUSES lists no carpenter or joiner (only woodcutter's camp, thatcher)",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/arrivalProse.js",
+"line": 217,
+"fn": "ARRIVAL_SENSES.lines"
+}
+}
+]

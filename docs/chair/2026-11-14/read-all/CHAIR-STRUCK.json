@@ -1,0 +1,124 @@
+[
+{
+"id": "B08807",
+"sev": "HIGH",
+"kinds": [
+"STATE"
+],
+"whys": [
+"main-01: prints Food Security 'Pressured'; FOOD word is Secure (grown 88%, gap 4%)"
+],
+"packets": [
+"main-01"
+],
+"text": "Food SecurityPressured",
+"town": "r2r-thorp-24",
+"n": 191,
+"sections": [
+"Summary/Overview"
+],
+"fold": "Food SecurityPressured",
+"read": [
+"2"
+],
+"struck": "the second read's header gave the record's OLD food label as 'the food word'; since the food word's cure every surface prints one word from the food record's band: 'Pressured' beside a label 'Secure' is the header's fault, not the page's"
+},
+{
+"id": "B08865",
+"sev": "HIGH",
+"kinds": [
+"STATE"
+],
+"whys": [
+"main-01: Foundations 'Food Pressured'; FOOD word is Secure"
+],
+"packets": [
+"main-01"
+],
+"text": "FoodPressured",
+"town": "r2r-thorp-24",
+"n": 191,
+"sections": [
+"Summary/Foundations"
+],
+"fold": "FoodPressured",
+"read": [
+"2"
+],
+"struck": "the second read's header gave the record's OLD food label as 'the food word'; since the food word's cure every surface prints one word from the food record's band: 'Pressured' beside a label 'Secure' is the header's fault, not the page's"
+},
+{
+"id": "B15069",
+"sev": "HIGH",
+"kinds": [
+"STATE"
+],
+"whys": [
+"main-01: Daily Life food word 'Pressured'; FOOD word is Secure"
+],
+"packets": [
+"main-01"
+],
+"text": "Pressured",
+"town": "r2r-thorp-24",
+"n": 191,
+"sections": [
+"Summary/Plot Hooks",
+"Table/Tonight sheet",
+"World/Daily Life"
+],
+"fold": "Pressured",
+"read": [
+"2"
+],
+"struck": "the second read's header gave the record's OLD food label as 'the food word'; since the food word's cure every surface prints one word from the food record's band: 'Pressured' beside a label 'Secure' is the header's fault, not the page's"
+},
+{
+"id": "B08799",
+"sev": "HIGH",
+"kinds": [
+"STATE"
+],
+"whys": [
+"main-01: Tonight sheet 'Food Pressured.'; FOOD word is Secure"
+],
+"packets": [
+"main-01"
+],
+"text": "Food Pressured.",
+"town": "r2r-thorp-24",
+"n": 191,
+"sections": [
+"Table/Tonight sheet"
+],
+"fold": "Food Pressured.",
+"read": [
+"2"
+],
+"struck": "the second read's header gave the record's OLD food label as 'the food word'; since the food word's cure every surface prints one word from the food record's band: 'Pressured' beside a label 'Secure' is the header's fault, not the page's"
+},
+{
+"id": "B08860",
+"sev": "HIGH",
+"kinds": [
+"STATE"
+],
+"whys": [
+"main-01: 'Food: Pressured.'; FOOD word is Secure"
+],
+"packets": [
+"main-01"
+],
+"text": "Food: Pressured.",
+"town": "r2r-thorp-24",
+"n": 148,
+"sections": [
+"Summary/Crisis"
+],
+"fold": "Food: Pressured.",
+"read": [
+"2"
+],
+"struck": "the second read's header gave the record's OLD food label as 'the food word'; since the food word's cure every surface prints one word from the food record's band: 'Pressured' beside a label 'Secure' is the header's fault, not the page's"
+}
+]

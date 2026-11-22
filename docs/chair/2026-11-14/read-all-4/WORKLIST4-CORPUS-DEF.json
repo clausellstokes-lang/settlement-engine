@@ -1,0 +1,56 @@
+[
+{
+"id": "00950",
+"sev": "MED",
+"n": 14,
+"town": "r2s-famine-thorp-1",
+"section": "Systems/Power",
+"fold": "The Elder Council at <N> has left obvious decisions untaken because its members cannot agree on them.",
+"text": "The Elder Council at Purinagar has left obvious decisions untaken because its members cannot agree on them.",
+"why": "'its members cannot agree': PEOPLE shows one person seated on Elder Council, no quarrels listed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 2099,
+"fn": "DS-POW-5 › council · v4"
+}
+},
+{
+"id": "00681",
+"sev": "MED",
+"n": 2,
+"town": "r2s-famine-village-1",
+"section": "Systems/Power",
+"fold": "Nothing the Elder Council orders at <N> goes ahead if Military/Guard refuses it, and whoever can win Military/Guard over can steer the place.",
+"text": "Nothing the Elder Council orders at Humen goes ahead if Military/Guard refuses it, and whoever can win Military/Guard over can steer the place.",
+"why": "slash-joined label 'Military/Guard' used twice as one power's name beside verbs",
+"kinds": [
+"BROKEN"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 3539,
+"fn": "DS-POW-6 › GM ADVISORY: the commander is a political actor · v4"
+}
+},
+{
+"id": "00614",
+"sev": "MED",
+"n": 1,
+"town": "r2s-slave_revolt-village-3",
+"section": "Systems/Power",
+"fold": "Military/Guard answers to the Elder Council at <N> in name only: whatever the Elder Council plans needs its consent, and that consent is bargained for.",
+"text": "Military/Guard answers to the Elder Council at Beloka in name only: whatever the Elder Council plans needs its consent, and that consent is bargained for.",
+"why": "slash-joined label 'Military/Guard' used as one power's name as a sentence subject",
+"kinds": [
+"BROKEN"
+],
+"writer": {
+"file": "src/data/dossierStateProse/power.generated.js",
+"line": 3525,
+"fn": "DS-POW-6 › GM ADVISORY: the commander is a political actor · v3"
+}
+}
+]

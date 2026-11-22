@@ -1,0 +1,48 @@
+{
+  "meta": {
+    "seeds": 24,
+    "ticks": 120
+  },
+  "cohorts": {
+    "stable": {
+      "lawful": {
+        "seizeRate": 0,
+        "endSeatRate": 0,
+        "flipsPerCamp": 0
+      },
+      "chaotic": {
+        "seizeRate": 0,
+        "endSeatRate": 0,
+        "flipsPerCamp": 0
+      }
+    },
+    "marginal": {
+      "lawful": {
+        "seizeRate": 1,
+        "endSeatRate": 1,
+        "flipsPerCamp": 1
+      },
+      "chaotic": {
+        "seizeRate": 1,
+        "endSeatRate": 1,
+        "flipsPerCamp": 1
+      }
+    },
+    "crisis": {
+      "lawful": {
+        "seizeRate": 1,
+        "endSeatRate": 1,
+        "flipsPerCamp": 1
+      },
+      "chaotic": {
+        "seizeRate": 1,
+        "endSeatRate": 1,
+        "flipsPerCamp": 1
+      }
+    }
+  },
+  "marginalGap": 0,
+  "crisisGap": 0,
+  "chaosGap": 0,
+  "stableSeize": 0
+}

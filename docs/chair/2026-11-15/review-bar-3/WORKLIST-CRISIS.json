@@ -1,0 +1,38 @@
+[
+{
+"id": "C9952",
+"sev": "MED",
+"n": 11,
+"town": "bar0-city-wartime-rand-7",
+"section": "Systems/Defense",
+"fold": "On the roads near <N> you meet army carts and the crown's officers, and give way to both.",
+"text": "On the roads near Bjornnes you meet army carts and the crown's officers, and give way to both.",
+"why": "the crown's officers on the roads; the city-state answers to no higher lord and holds no external charter",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/domain/crisis/crisisSummaryVantage.js",
+"line": 425,
+"fn": "CRISIS_SUMMARY_POOLS"
+}
+},
+{
+"id": "C8717",
+"sev": "MED",
+"n": 4,
+"town": "bar0-city-wartime-rand-7",
+"section": "Summary/Crisis",
+"fold": "<N> is in a kingdom at war and doing well out of it: army contracts pay, prices are high, and merchants with the right friends are getting rich.",
+"text": "Bjornnes is in a kingdom at war and doing well out of it: army contracts pay, prices are high, and merchants with the right friends are getting rich.",
+"why": "says Bjornnes is in a kingdom; the city-state answers to no higher lord and holds no external charter",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/stressNarrative.js",
+"line": 326,
+"fn": "WARTIME_VARIANTS"
+}
+}
+]

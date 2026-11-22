@@ -1,0 +1,8 @@
+{
+  "_doc": "PDF_FIELD_MANIFEST (Cycle-3 Wave 6). Every writable form-field name the settlement dossier PDF ships. tests/pdf/pdfFieldManifest.walker.test.js renders the real SettlementPDF viewmodel tree (no PDF bytes), collects every react-pdf TextInput field name, and asserts the discovered set EXACTLY equals `fields` AND that no field name matches `randomNameSymptom` (the M21 `f_<random-suffix>` class). A new writable PDF field must be registered here in review.",
+  "fields": [
+    "cover.campaign",
+    "tonight.scratch"
+  ],
+  "randomNameSymptom": "^f_"
+}

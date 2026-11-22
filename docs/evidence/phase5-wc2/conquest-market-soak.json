@@ -1,0 +1,175 @@
+{
+  "meta": {
+    "cohort": 4000,
+    "ABOLITION_FLOOR": 0.6,
+    "LOOT_DECAY": 0.09,
+    "CAPTIVE_DECAY": 0.06,
+    "SUPPLEMENT_MAX": 0.35,
+    "COST_MAX": 0.3,
+    "FIDELITY_MAX": 0.3,
+    "TOTAL_MAX": 0.75
+  },
+  "A": {
+    "lawful-good": {
+      "abolitionRead": 0.9,
+      "permitted": false,
+      "captive": 0,
+      "loot": 0.7
+    },
+    "neutral-good": {
+      "abolitionRead": 0.9,
+      "permitted": false,
+      "captive": 0,
+      "loot": 0.7
+    },
+    "chaotic-good": {
+      "abolitionRead": 0.9,
+      "permitted": false,
+      "captive": 0,
+      "loot": 0.7
+    },
+    "true-neutral": {
+      "abolitionRead": 0,
+      "permitted": true,
+      "captive": 0.92,
+      "loot": 0.7
+    },
+    "lawful-evil": {
+      "abolitionRead": 0,
+      "permitted": true,
+      "captive": 0.92,
+      "loot": 0.7
+    },
+    "chaotic-evil": {
+      "abolitionRead": 0,
+      "permitted": true,
+      "captive": 0.92,
+      "loot": 0.7
+    },
+    "(deity-free)": {
+      "abolitionRead": 0,
+      "permitted": true,
+      "captive": 0.92,
+      "loot": 0.7
+    },
+    "tier:thorp": 0.32,
+    "tier:village": 0.56,
+    "tier:town": 0.68,
+    "tier:city": 0.8,
+    "tier:metropolis": 0.92
+  },
+  "B": {
+    "peak": 0.6,
+    "samples": {
+      "wk0": {
+        "loot": 0.6,
+        "lift": 0.21
+      },
+      "wk4": {
+        "loot": 0.4114,
+        "lift": 0.144
+      },
+      "wk13": {
+        "loot": 0.1761,
+        "lift": 0.0616
+      },
+      "wk26": {
+        "loot": 0.0517,
+        "lift": 0.0181
+      }
+    },
+    "halfLifeWk": 8,
+    "clearedWk": 51
+  },
+  "C": {
+    "s0.25:p0.5": {
+      "activity": 0.125,
+      "supplement": 0.044,
+      "cost": 0.037,
+      "fidelity": 0.037
+    },
+    "s0.25:p1": {
+      "activity": 0.25,
+      "supplement": 0.087,
+      "cost": 0.075,
+      "fidelity": 0.075
+    },
+    "s0.5:p0.5": {
+      "activity": 0.25,
+      "supplement": 0.087,
+      "cost": 0.075,
+      "fidelity": 0.075
+    },
+    "s0.5:p1": {
+      "activity": 0.5,
+      "supplement": 0.175,
+      "cost": 0.15,
+      "fidelity": 0.15
+    },
+    "s0.75:p0.5": {
+      "activity": 0.375,
+      "supplement": 0.131,
+      "cost": 0.112,
+      "fidelity": 0.112
+    },
+    "s0.75:p1": {
+      "activity": 0.75,
+      "supplement": 0.262,
+      "cost": 0.225,
+      "fidelity": 0.225
+    },
+    "s1:p0.5": {
+      "activity": 0.5,
+      "supplement": 0.175,
+      "cost": 0.15,
+      "fidelity": 0.15
+    },
+    "s1:p1": {
+      "activity": 1,
+      "supplement": 0.35,
+      "cost": 0.3,
+      "fidelity": 0.3
+    },
+    "scen:menaced+engaged, unready, floor-kit": {
+      "exposure": 1,
+      "capability": 0,
+      "shortfall": 1
+    },
+    "scen:menaced border, half-ready, half-kit": {
+      "exposure": 0.7,
+      "capability": 0.522,
+      "shortfall": 0.178
+    },
+    "scen:engaged, seasoned, well-supplied": {
+      "exposure": 0.95,
+      "capability": 0.94,
+      "shortfall": 0.01
+    }
+  },
+  "D": {
+    "seasoned:merc0.00": {
+      "meanAbs": 0,
+      "max": 0
+    },
+    "seasoned:merc0.15": {
+      "meanAbs": 0.075,
+      "max": 0.15
+    },
+    "seasoned:merc0.30": {
+      "meanAbs": 0.148,
+      "max": 0.3
+    },
+    "rusty:merc0.00": {
+      "meanAbs": 0.094,
+      "max": 0.19
+    },
+    "rusty:merc0.15": {
+      "meanAbs": 0.171,
+      "max": 0.34
+    },
+    "rusty:merc0.30": {
+      "meanAbs": 0.248,
+      "max": 0.49
+    }
+  }
+}

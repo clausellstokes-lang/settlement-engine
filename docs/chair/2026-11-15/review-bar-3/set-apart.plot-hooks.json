@@ -1,0 +1,66 @@
+[
+{
+"id": "C13868",
+"sev": "MED",
+"kinds": [
+"LACKS"
+],
+"whys": [
+"a: Names both guilds being sabotaged; HOUSES lists no guild, and C13783 says no guild's leave is needed"
+],
+"packets": [
+"bar1"
+],
+"readers": "a",
+"text": "Someone is sabotaging both guilds to destabilize the market for a third party",
+"town": "bar0-hamlet-under_siege-rand-6",
+"sections": [
+"Summary/Plot Hooks"
+],
+"fold": "Someone is sabotaging both guilds to destabilize the market for a # party",
+"n": 128
+},
+{
+"id": "C33211",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"a: hook on Eochaidh Walsh, a stable keeper on the Elder Council, gives him a church hierarchy and a theology; PEOPLE has no clergy title for him",
+"b: hook for Eochaidh Walsh (stable keeper, head of Elder Council) gives him a church hierarchy and 'their own theology'; the priest is Uilliam Quinn"
+],
+"packets": [
+"bar1"
+],
+"readers": "ab",
+"text": "They received a directive from the hierarchy that contradicts their own theology.",
+"town": "bar0-village-calm-rand-6",
+"sections": [
+"Summary/Plot Hooks"
+],
+"fold": "They received a directive from the hierarchy that contradicts their own theology.",
+"n": 85
+},
+{
+"id": "C33841",
+"sev": "MED",
+"kinds": [
+"STATE"
+],
+"whys": [
+"b: hook has Diogenes (mine captain, Merchant Guilds head) leading weekly prayers; the priest is Dionysios Exazenos"
+],
+"packets": [
+"bar1"
+],
+"readers": "b",
+"text": "They have stopped believing, have told no one, and still lead the prayers every week.",
+"town": "bar0-village-calm-rand-7",
+"sections": [
+"Summary/Plot Hooks"
+],
+"fold": "They have stopped believing, have told no #, and still lead the prayers every week.",
+"n": 61
+}
+]

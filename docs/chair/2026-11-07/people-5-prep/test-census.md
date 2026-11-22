@@ -1,0 +1,160 @@
+# PEOPLE-5-PREP — the test census (2026-11-07, base 1031233a4)
+
+Every test file under `tests/` that reads the NPC grouping or one of the six per-NPC fields (or the three helpers), by the syntax-tree pass (`census.mjs`). Subjects are what the file reads; the class is census.mjs :: classifyTest (a path-and-import rule: PLAUSIBLE per file, see the record §2).
+
+## pins a field by identity → re-key (34)
+
+- `tests/domain/assignNpcPreservesSheet.test.js` — linkedFactionIds, factionAffiliation
+- `tests/domain/coherence/readerBattery.test.js` — factionAffiliation
+- `tests/domain/crisisCastFindings.test.js` — factionAffiliation
+- `tests/domain/customContentTierGates.test.js` — factions
+- `tests/domain/distribution.test.js` — factionAffiliation
+- `tests/domain/entities.test.js` — linkedFactionIds, factions
+- `tests/domain/explanation.test.js` — factionAffiliation
+- `tests/domain/institutionFactionFallback.test.js` — factions
+- `tests/domain/institutionRemoval.test.js` — secondaryAffiliation
+- `tests/domain/neighbourBackLink.test.js` — dominantCategory
+- `tests/domain/npc/npcOps.test.js` — factionAffiliation
+- `tests/domain/npcRename.test.js` — factions
+- `tests/domain/personaSlicer.test.js` — factionAffiliation
+- `tests/domain/personaSlicerFactionRoster.test.js` — factions
+- `tests/domain/recordMerge.test.js` — factions
+- `tests/domain/successors.test.js` — linkedFactionIds
+- `tests/generators/assemblyCoherenceRngIsolation.test.js` — factions
+- `tests/generators/crossSettlementConflicts.test.js` — dominantCategory
+- `tests/generators/densityPowerConservation.test.js` — factionAffiliation, densityRungRole
+- `tests/generators/densityTrimRelationships.test.js` — factions
+- `tests/generators/factionStructuralOfficeCoverage.test.js` — factionAffiliation, linkedFactionIds
+- `tests/generators/generationCertificationSoak.test.js` — factionAffiliation
+- `tests/generators/generationReceiptJudgments.test.js` — factions
+- `tests/generators/neighbourFactionRenorm.test.js` — factions
+- `tests/generators/npcCrimeSignalWriters.test.js` — secondaryAffiliation
+- `tests/generators/regenNpcEnrichment.test.js` — factionAffiliation
+- `tests/generators/regenPreservesUserCanon.test.js` — factions
+- `tests/generators/stressFactionNames.test.js` — factions, factionAffiliation
+- `tests/generators/x46NpcBand.test.js` — factionAffiliation
+- `tests/lib/instantWorld/factionDedup.test.js` — dominantCategory
+- `tests/lib/structuralFingerprint.test.js` — factionAffiliation
+- `tests/lint/recordRegisterTotality.walker.test.js` — factions
+- `tests/property/npcs.property.test.js` — linkedFactionIds
+- `tests/store/factionRenameConvergence.test.js` — factionAffiliation, dominantCategory, factions
+
+## asserts a surface → rewire (21)
+
+- `tests/components/editNamesFactionRoster.test.jsx` — dominantCategory, factionAffiliation
+- `tests/components/npcAuthoringScope.test.jsx` — factionAffiliation
+- `tests/components/npcRowLockToggle.test.jsx` — factionAffiliation
+- `tests/components/powerStrata.test.jsx` — factionAffiliation
+- `tests/components/powerTabSupport.test.jsx` — factionAffiliation
+- `tests/components/realmAddressChainNav.test.jsx` — factionAffiliation
+- `tests/components/settlementWorkbench.test.jsx` — factionAffiliation
+- `tests/data/foundingSeeds.probe.test.js` — factionAffiliation, structuralRank
+- `tests/domain/aiGrounding.test.js` — structuralRank
+- `tests/domain/display/publicSafe.test.js` — factionAffiliation, secondaryAffiliation
+- `tests/domain/dossier/entityIndex.test.js` — factionAffiliation
+- `tests/domain/dossier/seatHolder.test.js` — factionAffiliation
+- `tests/domain/npcProfile.test.js` — factionAffiliation, structuralRank
+- `tests/joins/conflictsSeam.test.js` — factions, factionAffiliation, dominantCategory
+- `tests/lint/realmEntityWebNoFabrication.walker.test.js` — factionAffiliation
+- `tests/lint/writerReach.walker.test.js` — densityRungRole
+- `tests/security/factionMemberPublicParity.pglite.test.js` — factionAffiliation, secondaryAffiliation, dominantCategory, factions
+- `tests/security/gallerySanitizer.pglite.test.js` — factionAffiliation, secondaryAffiliation
+- `tests/store/regenPreservation.test.js` — factions
+- `tests/ui/dossierEntityLink.test.jsx` — factionAffiliation
+- `tests/ui/relationshipsTab.determinism.test.js` — dominantCategory
+
+## FPZ's → list (63)
+
+- `tests/domain/advanceNpcCorruption.test.js` — factionAffiliation
+- `tests/domain/clergyTraitPlane.test.js` — linkedFactionIds
+- `tests/domain/contestBluffCharge.test.js` — factionAffiliation
+- `tests/domain/deityStanceLane.test.js` — linkedFactionIds
+- `tests/domain/dossier/realmEntityWeb.test.js` — factionAffiliation
+- `tests/domain/editorRosterEvents.test.js` — factionAffiliation, structuralRank
+- `tests/domain/espionageCareerCredit.test.js` — structuralRank, factionAffiliation
+- `tests/domain/eventPipeline.test.js` — factionAffiliation
+- `tests/domain/events.test.js` — factions
+- `tests/domain/events/composerDocketRoundTrip.test.js` — factionAffiliation
+- `tests/domain/events/exposeCorruptionNpc.test.js` — factionAffiliation
+- `tests/domain/events/imposeCorruption.test.js` — factionAffiliation
+- `tests/domain/events/killNpcDoubleImpair.test.js` — linkedFactionIds
+- `tests/domain/events/undoRoundTrip.test.js` — factions, structuralRank, factionAffiliation
+- `tests/domain/events/undoSnapshotSubtree.test.js` — structuralRank, factionAffiliation
+- `tests/domain/events/vetoChannel.test.js` — factionAffiliation
+- `tests/domain/events/wave2Producers.test.js` — factionAffiliation
+- `tests/domain/eventsSubsystemFixes.test.js` — structuralRank, factionAffiliation
+- `tests/domain/factionNamePrecedence.test.js` — linkedFactionIds, factionAffiliation
+- `tests/domain/factionRefContract.test.js` — npcInFaction, linkedFactionIds, factionAffiliation
+- `tests/domain/faithSpreadGate.test.js` — linkedFactionIds
+- `tests/domain/gratitudeBonds.test.js` — structuralRank, factionAffiliation
+- `tests/domain/npc/characterConsumers.test.js` — linkedFactionIds
+- `tests/domain/npc/knownCharacter.test.js` — linkedFactionIds
+- `tests/domain/npcCredibilityLadderHook.test.js` — factionAffiliation
+- `tests/domain/npcCredibilityLitWalkthrough.test.js` — structuralRank, factionAffiliation
+- `tests/domain/npcLadderFactionKey.test.js` — npcInFaction, factionAffiliation, structuralRank, factions
+- `tests/domain/npcLadderHeirs.test.js` — structuralRank, factionAffiliation, factions
+- `tests/domain/npcLadderSeatTransitions.test.js` — structuralRank, factionAffiliation, factions
+- `tests/domain/npcLedgerState.test.js` — factionAffiliation
+- `tests/domain/npcVerdictApply.test.js` — structuralRank, factionAffiliation, linkedFactionIds, factions
+- `tests/domain/npcVerdictTable.test.js` — factionAffiliation
+- `tests/domain/oathHolderGr1.test.js` — factionAffiliation
+- `tests/domain/pactRenegotiationGr5c.test.js` — factionAffiliation
+- `tests/domain/pactRenegotiationNegotiated.test.js` — factionAffiliation
+- `tests/domain/pactRenewalGr5b.test.js` — factionAffiliation
+- `tests/domain/pactRenewalOrganic.test.js` — factionAffiliation
+- `tests/domain/promoteDemoteMerge.test.js` — factionAffiliation, structuralRank
+- `tests/domain/religionCorruption.test.js` — factionAffiliation
+- `tests/domain/religionLegitimacy.test.js` — linkedFactionIds
+- `tests/domain/religionLegitimacyFactionKey.test.js` — factionAffiliation
+- `tests/domain/roadsParticipation.test.js` — factionAffiliation, structuralRank, factionRosterOf
+- `tests/domain/rulingPower.test.js` — factionAffiliation
+- `tests/domain/settlementLifecycleKernel.test.js` — factions
+- `tests/domain/settlementStrategy.test.js` — factionAffiliation
+- `tests/domain/sovereigntyIntentWr10.test.js` — factionAffiliation
+- `tests/domain/successorNpc.test.js` — factionAffiliation
+- `tests/domain/treatySuccessionApproval.test.js` — structuralRank, factionAffiliation
+- `tests/domain/treatySuccessionOpeningVoice.test.js` — structuralRank, factionAffiliation
+- `tests/domain/warCoalitionSettlement.test.js` — factionAffiliation
+- `tests/domain/warCoalitionWr6.test.js` — factionAffiliation
+- `tests/domain/warH2VerdictComposition.test.js` — structuralRank, factionAffiliation, linkedFactionIds
+- `tests/domain/warPeaceDecision.test.js` — factionAffiliation
+- `tests/domain/warSeatBooks.test.js` — factionAffiliation
+- `tests/domain/warSeatBooksPartition.test.js` — factionAffiliation
+- `tests/domain/warSeatTermination.test.js` — factionAffiliation
+- `tests/domain/worldPulseFactionSeating.test.js` — factionAffiliation
+- `tests/generators/densityLaw.test.js` — factionRosterOf, factionAffiliation, densityRungRole, linkedFactionIds
+- `tests/lib/instantWorld/mundaneRealmAcceptance.test.js` — factions
+- `tests/lint/seatVocabularyUnification.walker.test.js` — factionAffiliation
+- `tests/property/mutate.property.test.js` — linkedFactionIds, factions
+- `tests/property/propagate.property.test.js` — factions
+- `tests/simulation/feedDistribution.test.js` — factionAffiliation
+
+## golden door's → bank (27)
+
+- `tests/domain/corruptionWebPins.test.js` — factionAffiliation
+- `tests/domain/crisisCast.test.js` — factionAffiliation
+- `tests/domain/crisisHooks.test.js` — factionAffiliation
+- `tests/domain/envoyChanceMeetingLedger.test.js` — structuralRank, factionAffiliation, factions
+- `tests/domain/envoyChanceMeetingStage.test.js` — structuralRank
+- `tests/domain/factionRename.test.js` — factionAffiliation, secondaryAffiliation, linkedFactionIds, factionGoal, factions
+- `tests/domain/houseLedgerTr2.test.js` — factionAffiliation
+- `tests/domain/institutionRename.test.js` — secondaryAffiliation
+- `tests/domain/irreversibleRawRoster.contract.test.js` — factionAffiliation
+- `tests/domain/npcLadderKernel.test.js` — structuralRank, factionAffiliation, factions
+- `tests/domain/pactConversionGr5d.test.js` — factionAffiliation
+- `tests/domain/plotHooks.test.js` — factionAffiliation
+- `tests/domain/worldPulseSoak.test.js` — factionAffiliation
+- `tests/generators/generationCertificationCorpus.test.js` — factionAffiliation, factions
+- `tests/generators/powerEconomyFreshness.test.js` — factions
+- `tests/generators/rosterFinalUnderHeldRoster.test.js` — factions, factionAffiliation
+- `tests/lint/statusUnionTotality.walker.test.js` — factionAffiliation
+- `tests/property/contestedGoalsDormancyGolden.test.js` — factionAffiliation, structuralRank, factions
+- `tests/property/espionageCareerCreditDormancy.test.js` — structuralRank, factionAffiliation
+- `tests/property/espionageLeakDormancy.test.js` — structuralRank, factionAffiliation
+- `tests/property/mechanismLitCoverage.test.js` — npcInFaction
+- `tests/property/npcCredibilityDormancyGolden.test.js` — structuralRank, factionAffiliation
+- `tests/property/npcLadderDormancyGolden.test.js` — factionAffiliation, structuralRank
+- `tests/property/npcLedgerDormancyGolden.test.js` — structuralRank, factionAffiliation
+- `tests/property/oathHolderDormancyFence.test.js` — factionAffiliation
+- `tests/property/settlementPoliticsDormancyGolden.test.js` — factionAffiliation
+- `tests/store/editSlice.test.js` — factions

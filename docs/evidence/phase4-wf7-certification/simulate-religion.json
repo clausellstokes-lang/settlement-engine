@@ -1,0 +1,336 @@
+{
+  "meta": {
+    "reps": 3,
+    "ticks": 30
+  },
+  "cells": {
+    "one_week": {
+      "ranTicks": 90,
+      "conversions": 33,
+      "fractures": 87,
+      "authorityChannelsPeak": 52,
+      "deityTierChanges": 18,
+      "deityPromotions": 12,
+      "deityDemotions": 6,
+      "winsTotal": 33,
+      "lossesTotal": 33,
+      "seatsMoved": 0,
+      "distinctFaithsStart": 11,
+      "distinctFaithsEnd": 2,
+      "pantheonFinal": {
+        "custom:lu_aurum": {
+          "wins": 11,
+          "losses": 0,
+          "seats": 13,
+          "tier": "major"
+        },
+        "custom:lu_faded10": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 0,
+          "tier": "cult"
+        },
+        "custom:lu_faded11": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 0,
+          "tier": "cult"
+        },
+        "custom:lu_faded12": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 0,
+          "tier": "cult"
+        },
+        "custom:lu_faded13": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 0,
+          "tier": "cult"
+        },
+        "custom:lu_faded6": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 0,
+          "tier": "cult"
+        },
+        "custom:lu_faded7": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 0,
+          "tier": "cult"
+        },
+        "custom:lu_faded8": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 0,
+          "tier": "cult"
+        },
+        "custom:lu_faded9": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 0,
+          "tier": "cult"
+        },
+        "custom:lu_korl": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 1,
+          "tier": "cult"
+        },
+        "custom:lu_vael": {
+          "wins": 0,
+          "losses": 2,
+          "seats": 0,
+          "tier": "cult"
+        }
+      }
+    },
+    "one_month": {
+      "ranTicks": 90,
+      "conversions": 32,
+      "fractures": 79,
+      "authorityChannelsPeak": 52,
+      "deityTierChanges": 17,
+      "deityPromotions": 12,
+      "deityDemotions": 5,
+      "winsTotal": 32,
+      "lossesTotal": 32,
+      "seatsMoved": 0,
+      "distinctFaithsStart": 11,
+      "distinctFaithsEnd": 2,
+      "pantheonFinal": {
+        "custom:lu_aurum": {
+          "wins": 10,
+          "losses": 0,
+          "seats": 12,
+          "tier": "major"
+        },
+        "custom:lu_faded10": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 0,
+          "tier": "cult"
+        },
+        "custom:lu_faded11": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 0,
+          "tier": "cult"
+        },
+        "custom:lu_faded12": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 0,
+          "tier": "cult"
+        },
+        "custom:lu_faded13": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 0,
+          "tier": "cult"
+        },
+        "custom:lu_faded6": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 0,
+          "tier": "cult"
+        },
+        "custom:lu_faded7": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 0,
+          "tier": "cult"
+        },
+        "custom:lu_faded8": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 0,
+          "tier": "cult"
+        },
+        "custom:lu_faded9": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 0,
+          "tier": "cult"
+        },
+        "custom:lu_korl": {
+          "wins": 0,
+          "losses": 0,
+          "seats": 2,
+          "tier": "minor"
+        },
+        "custom:lu_vael": {
+          "wins": 0,
+          "losses": 2,
+          "seats": 0,
+          "tier": "cult"
+        }
+      }
+    },
+    "one_season": {
+      "ranTicks": 90,
+      "conversions": 33,
+      "fractures": 86,
+      "authorityChannelsPeak": 52,
+      "deityTierChanges": 18,
+      "deityPromotions": 12,
+      "deityDemotions": 6,
+      "winsTotal": 33,
+      "lossesTotal": 33,
+      "seatsMoved": 0,
+      "distinctFaithsStart": 11,
+      "distinctFaithsEnd": 2,
+      "pantheonFinal": {
+        "custom:lu_aurum": {
+          "wins": 11,
+          "losses": 0,
+          "seats": 13,
+          "tier": "major"
+        },
+        "custom:lu_faded10": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 0,
+          "tier": "cult"
+        },
+        "custom:lu_faded11": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 0,
+          "tier": "cult"
+        },
+        "custom:lu_faded12": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 0,
+          "tier": "cult"
+        },
+        "custom:lu_faded13": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 0,
+          "tier": "cult"
+        },
+        "custom:lu_faded6": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 0,
+          "tier": "cult"
+        },
+        "custom:lu_faded7": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 0,
+          "tier": "cult"
+        },
+        "custom:lu_faded8": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 0,
+          "tier": "cult"
+        },
+        "custom:lu_faded9": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 0,
+          "tier": "cult"
+        },
+        "custom:lu_korl": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 1,
+          "tier": "cult"
+        },
+        "custom:lu_vael": {
+          "wins": 0,
+          "losses": 2,
+          "seats": 0,
+          "tier": "cult"
+        }
+      }
+    },
+    "one_year": {
+      "ranTicks": 90,
+      "conversions": 31,
+      "fractures": 71,
+      "authorityChannelsPeak": 52,
+      "deityTierChanges": 17,
+      "deityPromotions": 12,
+      "deityDemotions": 5,
+      "winsTotal": 31,
+      "lossesTotal": 31,
+      "seatsMoved": 0,
+      "distinctFaithsStart": 11,
+      "distinctFaithsEnd": 2,
+      "pantheonFinal": {
+        "custom:lu_aurum": {
+          "wins": 11,
+          "losses": 0,
+          "seats": 13,
+          "tier": "major"
+        },
+        "custom:lu_faded10": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 0,
+          "tier": "cult"
+        },
+        "custom:lu_faded11": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 0,
+          "tier": "cult"
+        },
+        "custom:lu_faded12": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 0,
+          "tier": "cult"
+        },
+        "custom:lu_faded13": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 0,
+          "tier": "cult"
+        },
+        "custom:lu_faded6": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 0,
+          "tier": "cult"
+        },
+        "custom:lu_faded7": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 0,
+          "tier": "cult"
+        },
+        "custom:lu_faded8": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 0,
+          "tier": "cult"
+        },
+        "custom:lu_faded9": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 0,
+          "tier": "cult"
+        },
+        "custom:lu_korl": {
+          "wins": 0,
+          "losses": 1,
+          "seats": 1,
+          "tier": "cult"
+        },
+        "custom:lu_vael": {
+          "wins": 0,
+          "losses": 2,
+          "seats": 0,
+          "tier": "cult"
+        }
+      }
+    }
+  }
+}

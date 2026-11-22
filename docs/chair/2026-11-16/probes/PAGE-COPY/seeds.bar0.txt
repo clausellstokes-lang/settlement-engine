@@ -1,0 +1,10 @@
+bar0-thorp-calm-rand-1
+bar0-hamlet-calm-rand-1
+bar0-hamlet-under_siege-rand-1
+bar0-village-famine-rand-1
+bar0-village-calm-rand-1
+bar0-town-occupied-rand-1
+bar0-town-calm-rand-1
+bar0-city-under_siege+famine-rand-1
+bar0-city-wartime-rand-1
+bar0-metropolis-calm-rand-1

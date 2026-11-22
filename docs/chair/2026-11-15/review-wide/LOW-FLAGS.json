@@ -1,0 +1,842 @@
+[
+{
+"packet": "wide",
+"id": "C0320",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: Butchers row offers 'Fresh meat' unmarked, yet the siege list names Butchers critically impaired; Bakers and Brewery rows carry famine marks",
+"text": "Fresh meat",
+"town": "bar0-city-under_siege+famine-rand-10",
+"block_town": "bar0-city-under_siege+famine-rand-10"
+},
+{
+"packet": "wide",
+"id": "C0967",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: says religious houses' take is 'a large part of the city's business'; INCOME gives Church Tithes 4% and Pilgrim Trade 2% against Smuggling 60%",
+"text": "What the religious houses take in and spend is a large part of the city's business.",
+"town": "bar0-city-under_siege+famine-rand-10",
+"block_town": "bar0-city-under_siege+famine-rand-10"
+},
+{
+"packet": "wide",
+"id": "C10005",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: says 'the crops failed'; FOOD gives failed source None, and C10008 says the siege took the fields",
+"text": "The crops failed, and only about a third of the usual harvest will come in.",
+"town": "bar0-city-under_siege+famine-rand-14",
+"block_town": "bar0-city-under_siege+famine-rand-14"
+},
+{
+"packet": "wide",
+"id": "C10695",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: Shobha Patil is the smelt master (PEOPLE); the judge is Chandra Sharma, chief magistrate, yet Patil is 'appointed to judge a case'",
+"text": "Shobha Patil has been appointed to judge a case in which Kailash Sinha is a party.",
+"town": "bar0-city-under_siege+famine-rand-14",
+"block_town": "bar0-city-under_siege+famine-rand-14"
+},
+{
+"packet": "wide",
+"id": "C11008",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: fishmonger Dietrich Engel 'has food' to sell under famine; FOOD gives fish as the failed source and stores 0.1 months",
+"text": "Dietrich Engel has food, enough to matter.",
+"town": "bar0-city-under_siege+famine-rand-15",
+"block_town": "bar0-city-under_siege+famine-rand-15"
+},
+{
+"packet": "wide",
+"id": "C11041",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: hook has garrison commander Ingrid Steinberg (PEOPLE: garrison commander, War Council) leading weekly prayers; no clerical title",
+"text": "They have stopped believing, have told no one, and still lead the prayers every week.",
+"town": "bar0-city-under_siege+famine-rand-15",
+"block_town": "bar0-city-under_siege+famine-rand-15"
+},
+{
+"packet": "wide",
+"id": "C12334",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: says there is 'little room to hold' offenders; the page elsewhere says courts have no detention, fines and exile only",
+"text": "Offenders the garrison and city watch catches go before the court; there is little room to hold them after.",
+"town": "bar0-city-under_siege+famine-rand-15",
+"block_town": "bar0-city-under_siege+famine-rand-15"
+},
+{
+"packet": "wide",
+"id": "C13264",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: calls the succession crisis's legacy 'a decade old'; PAST gives The Succession Crisis as 15 years ago",
+"text": "Nobody in Waldmoor has finished putting right the legacy the succession crisis left, and that legacy is a decade old.",
+"town": "bar0-city-under_siege+famine-rand-15",
+"block_town": "bar0-city-under_siege+famine-rand-15"
+},
+{
+"packet": "wide",
+"id": "C13539",
+"sev": "LOW",
+"kind": "BROKEN",
+"why": "a: 'the city granaries ... if it gives way': plural house name takes singular pronoun/verb (repeats at C13542, C15681)",
+"text": "The siege turns on the city granaries, run by Konstantina Comnenus: if it gives way, Merchant Guild Council loses most, because its own people feel the crisis first.",
+"town": "bar0-city-under_siege+famine-rand-16",
+"block_town": "bar0-city-under_siege+famine-rand-16"
+},
+{
+"packet": "wide",
+"id": "C16510",
+"sev": "LOW",
+"kind": "BROKEN",
+"why": "a: subject-verb disagreement: 'its herds comes first' (plural subject, singular verb)",
+"text": "Of the food Goldgasse raises for itself, its herds comes first, and after a poor season for the herds there is less to go round.",
+"town": "bar0-city-under_siege+famine-rand-17",
+"block_town": "bar0-city-under_siege+famine-rand-17"
+},
+{
+"packet": "wide",
+"id": "C17217",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: toll-keeper 'takes the toll and lifts the gate; heavy carts pay more' as ordinary work, though the siege has closed the roads and no tolls are gathered",
+"text": "How they deal Takes the toll and lifts the gate; heavy carts pay more, and so do people in a hurry.",
+"town": "bar0-city-under_siege+famine-rand-17",
+"block_town": "bar0-city-under_siege+famine-rand-17"
+},
+{
+"packet": "wide",
+"id": "C17692",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: \"clang of iron from the smithies\" in the siege; C17965 says the smiths have nothing to mend tools with, and the Blacksmiths row is Impaired",
+"text": "The clang of iron from the smithies carries down the lanes of Ringdale.",
+"town": "bar0-city-under_siege+famine-rand-18",
+"block_town": "bar0-city-under_siege+famine-rand-18"
+},
+{
+"packet": "wide",
+"id": "C1819",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: master baker Minjung Lin sits only on Ecclesiastical Council (member, no rank), not War Council; 'authorised an illegal sortie' fits no office she holds",
+"text": "Secret: Authorised an illegal sortie that failed.",
+"town": "bar0-city-under_siege+famine-rand-10",
+"block_town": "bar0-city-under_siege+famine-rand-10"
+},
+{
+"packet": "wide",
+"id": "C18429",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: Entertainment service (live music at venues nightly) carries no mark, though its house, Inns and taverns, is marked stopped by the siege",
+"text": "Performers, games, and live music at multiple venues nightly.",
+"town": "bar0-city-under_siege+famine-rand-18",
+"block_town": "bar0-city-under_siege+famine-rand-18"
+},
+{
+"packet": "wide",
+"id": "C18643",
+"sev": "LOW",
+"kind": "BROKEN",
+"why": "a: \"Ringdale's Banking houses is open\": plural subject with singular verb",
+"text": "Ringdale's Banking houses is open but short of supplies, and it can do less than it used to.",
+"town": "bar0-city-under_siege+famine-rand-18",
+"block_town": "bar0-city-under_siege+famine-rand-18"
+},
+{
+"packet": "wide",
+"id": "C18805",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: \"Faith carries real weight in the money / a large part of the city's business\" but INCOME gives Church Tithes only 4%; pilgrimage stopped by siege",
+"text": "Faith carries real weight in Ringdale's money.",
+"town": "bar0-city-under_siege+famine-rand-18",
+"block_town": "bar0-city-under_siege+famine-rand-18"
+},
+{
+"packet": "wide",
+"id": "C19128",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: \"No one here works the stone\" beside Stone & Construction and Fortifications chains printed with quarried stone as output (LAND gives them running)",
+"text": "No one here works the stone near Ringdale.",
+"town": "bar0-city-under_siege+famine-rand-18",
+"block_town": "bar0-city-under_siege+famine-rand-18"
+},
+{
+"packet": "wide",
+"id": "C20367",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: \"lives on what it has stored\": FOOD gives 56% made by magic and 14% grown each day, stores only the reserve behind them",
+"text": "With the roads cut, Ringdale lives on what it has stored, and whoever holds food can name their price.",
+"town": "bar0-city-under_siege+famine-rand-18",
+"block_town": "bar0-city-under_siege+famine-rand-18"
+},
+{
+"packet": "wide",
+"id": "C20394",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: 'Outsiders see a busy market' from the road; CRISIS is a siege that has closed the road and trade",
+"text": "\"More complicated than it looks from the road.",
+"town": "bar0-city-under_siege+famine-rand-19",
+"block_town": "bar0-city-under_siege+famine-rand-19"
+},
+{
+"packet": "wide",
+"id": "C20425",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: Economic Resilience 'Adequate' beside Economic capacity 'Critical' and prosperity Struggling",
+"text": "Economic ResilienceAdequate",
+"town": "bar0-city-under_siege+famine-rand-19",
+"block_town": "bar0-city-under_siege+famine-rand-19"
+},
+{
+"packet": "wide",
+"id": "C20450",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: 'Grew along its verge' as the road's roadside settlement; FOUNDING says founded by royal decree and a century of forced investment",
+"text": "The settlement grew along its verge, and its news has always come on somebody else's cart.",
+"town": "bar0-city-under_siege+famine-rand-19",
+"block_town": "bar0-city-under_siege+famine-rand-19"
+},
+{
+"packet": "wide",
+"id": "C20532",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: Defense readiness 'Adequate' where STATE and Systems Health give defence Well-Defended",
+"text": "Defense readinessAdequate",
+"town": "bar0-city-under_siege+famine-rand-19",
+"block_town": "bar0-city-under_siege+famine-rand-19"
+},
+{
+"packet": "wide",
+"id": "C20545",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: customers and goods under 'their mark' hooked to a company captain at the Mercenary quarter; title and house do not fit",
+"text": "Someone has been selling cheaper and worse goods under their mark, and customers are blaming them.",
+"town": "bar0-city-under_siege+famine-rand-19",
+"block_town": "bar0-city-under_siege+famine-rand-19"
+},
+{
+"packet": "wide",
+"id": "C20809",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: 'Significant ongoing revenue via seigniorage' but INCOME lists no mint or seigniorage source, and the siege cuts regional trade",
+"text": "Significant ongoing revenue via seigniorage.",
+"town": "bar0-city-under_siege+famine-rand-19",
+"block_town": "bar0-city-under_siege+famine-rand-19"
+},
+{
+"packet": "wide",
+"id": "C21172",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: 'fewer revenue streams than scale suggests' beside INCOME listing fourteen sources",
+"text": "Concentrated — fewer revenue streams than scale suggests",
+"town": "bar0-city-under_siege+famine-rand-19",
+"block_town": "bar0-city-under_siege+famine-rand-19"
+},
+{
+"packet": "wide",
+"id": "C21728",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: 'What is already in store is all there will be' while FOOD shows 20% of need made by magic every day",
+"text": "What is already in store is all there will be until it lifts.",
+"town": "bar0-city-under_siege+famine-rand-19",
+"block_town": "bar0-city-under_siege+famine-rand-19"
+},
+{
+"packet": "wide",
+"id": "C22923",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: Vintner row lists Table wine/Wine wholesale with no short mark; LAND gaps say Vintner lacks access to grapes (Potter, Brickmaker, Smelter rows carry the mark)",
+"text": "Table wine",
+"town": "bar0-city-under_siege+famine-rand-20",
+"block_town": "bar0-city-under_siege+famine-rand-20"
+},
+{
+"packet": "wide",
+"id": "C23130",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: 'No overlord above it, no charter granted from outside' beside FOUNDING 'by royal decree'; a decree is a charter from a crown",
+"text": "No overlord above it, no charter granted from outside.",
+"town": "bar0-city-under_siege+famine-rand-20",
+"block_town": "bar0-city-under_siege+famine-rand-20"
+},
+{
+"packet": "wide",
+"id": "C23631",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: 'Most meals start from salted fish' but FOOD ledger: 11% grown, 36% by magic, 0 brought in; fish market and fresh fish retail are stopped",
+"text": "Most meals start from salted fish.",
+"town": "bar0-city-under_siege+famine-rand-20",
+"block_town": "bar0-city-under_siege+famine-rand-20"
+},
+{
+"packet": "wide",
+"id": "C24498",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: Auctioneer's secret has grain shipments arriving by a covert route; siege cuts every road and gate, and no food comes in by trade",
+"text": "Secret: Is receiving grain shipments through a covert route and selling them at triple the official price after dark",
+"town": "bar0-city-under_siege+famine-rand-20",
+"block_town": "bar0-city-under_siege+famine-rand-20"
+},
+{
+"packet": "wide",
+"id": "C24562",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: Secret about 'goods they sell as locally produced' is on Koharu Ito, the chief magistrate of the courthouses, who sells no goods",
+"text": "Secret: The goods they sell as locally produced are sourced from somewhere with exploitative labour practices",
+"town": "bar0-city-under_siege+famine-rand-20",
+"block_town": "bar0-city-under_siege+famine-rand-20"
+},
+{
+"packet": "wide",
+"id": "C25421",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: Butchers row unmarked and offers fresh meat as ordinary; C26464 lists Butchers among 12 institutions critically impaired by siege; page says touched rows are marked",
+"text": "Butchers",
+"town": "bar0-city-under_siege+famine-rand-9",
+"block_town": "bar0-city-under_siege+famine-rand-9"
+},
+{
+"packet": "wide",
+"id": "C25426",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: Carpenters row unmarked, furniture and cart work as ordinary; C26464 lists Carpenters critically impaired by siege and Services marks Furniture making Impaired",
+"text": "Carpenters",
+"town": "bar0-city-under_siege+famine-rand-9",
+"block_town": "bar0-city-under_siege+famine-rand-9"
+},
+{
+"packet": "wide",
+"id": "C25479",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: Printing house row unmarked; C26464 lists it critically impaired by siege and Services marks Document printing Impaired (no timber or rags from outside)",
+"text": "Printing house",
+"town": "bar0-city-under_siege+famine-rand-9",
+"block_town": "bar0-city-under_siege+famine-rand-9"
+},
+{
+"packet": "wide",
+"id": "C25504",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: Weavers row unmarked; C26464 lists Weavers critically impaired by siege and Services marks Cloth production Impaired (needs wool or flax)",
+"text": "Weavers/Textile workers",
+"town": "bar0-city-under_siege+famine-rand-9",
+"block_town": "bar0-city-under_siege+famine-rand-9"
+},
+{
+"packet": "wide",
+"id": "C25550",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: City granaries row unmarked, 'distribute food across the city'; C26464 lists it impaired, Services marks Grain storage Impaired, C25219 says hall will not open it",
+"text": "City granaries",
+"town": "bar0-city-under_siege+famine-rand-9",
+"block_town": "bar0-city-under_siege+famine-rand-9"
+},
+{
+"packet": "wide",
+"id": "C26419",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: 'No arcane practitioners on the rolls' beside Elder Grove Council of druids and 60% of food made by druidic provision, magic medium",
+"text": "No arcane practitioners on the rolls.",
+"town": "bar0-city-under_siege+famine-rand-9",
+"block_town": "bar0-city-under_siege+famine-rand-9"
+},
+{
+"packet": "wide",
+"id": "C26623",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: Secret has the brickmaker authorising an illegal sortie; PEOPLE gives Mohini Shastri no military seat or command, only an unranked assembly seat",
+"text": "Secret: Authorised an illegal sortie that failed.",
+"town": "bar0-city-under_siege+famine-rand-9",
+"block_town": "bar0-city-under_siege+famine-rand-9"
+},
+{
+"packet": "wide",
+"id": "C27080",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: Lakshmi Sharma asks Kavya Mehta (pawnbroker) for a vote; PEOPLE gives Kavya Mehta no seat on any power",
+"text": "Lakshmi Sharma has asked Kavya Mehta for a vote against Kavya Mehta's own interests.",
+"town": "bar0-city-under_siege+famine-rand-9",
+"block_town": "bar0-city-under_siege+famine-rand-9"
+},
+{
+"packet": "wide",
+"id": "C27329",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: hook says the governing power must still decide whether to comply with the crown's requisition; C28424 says those in charge already signed the list",
+"text": "The governing power must decide whether to comply, negotiate, or find a third option.",
+"town": "bar0-city-wartime-rand-10",
+"block_town": "bar0-city-wartime-rand-10"
+},
+{
+"packet": "wide",
+"id": "C28406",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: lists salt as a commodity available from the fishing grounds; LAND gives Salt Flats depleted and TRADE imports salt (flats exhausted); C28396 says nothing more can be taken",
+"text": "Fishing Groundsfishsalt",
+"town": "bar0-city-wartime-rand-10",
+"block_town": "bar0-city-wartime-rand-10"
+},
+{
+"packet": "wide",
+"id": "C29501",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: says the crisis has not reached the city's accounts; C28663 says the city pays for the war from money put by, C28628 says requisition hurts the bottom line",
+"text": "Grímhammer's accounts still balance, and that is the one thing about the city the crisis has not yet reached.",
+"town": "bar0-city-wartime-rand-10",
+"block_town": "bar0-city-wartime-rand-10"
+},
+{
+"packet": "wide",
+"id": "C29627",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: 'Relied upon' beside Food (C29714) though FOOD by magic 0% and magic low/rare, capability Weak; may be the alchemist role only",
+"text": "Reliance on magic",
+"town": "bar0-city-wartime-rand-11",
+"block_town": "bar0-city-wartime-rand-11"
+},
+{
+"packet": "wide",
+"id": "C33520",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: Granary master wants grain bought 'while the price is still fair'; the town's grain price has been quadrupled by one importer and prices keep rising",
+"text": "Wants Buy grain at the market in bulk this season, while the price is still fair.",
+"town": "bar0-city-wartime-rand-12",
+"block_town": "bar0-city-wartime-rand-12"
+},
+{
+"packet": "wide",
+"id": "C33987",
+"sev": "LOW",
+"kind": "LACKS",
+"why": "a: Names a 'temple district'; HOUSES lists Parish churches and Multiple monasteries but no temple or temple district",
+"text": "Magic broke loose over the temple district and the people who lived there, and the traces it left have lingered ever since",
+"town": "bar0-city-wartime-rand-12",
+"block_town": "bar0-city-wartime-rand-12"
+},
+{
+"packet": "wide",
+"id": "C34383",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: title Merchant Prince for Brunhild Jäger, who is female (f) in PEOPLE",
+"text": "Connection: Merchant Prince Brunhild Jäger",
+"town": "bar0-city-wartime-rand-13",
+"block_town": "bar0-city-wartime-rand-13"
+},
+{
+"packet": "wide",
+"id": "C34862",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: offers salt production with no short mark; LAND has Salt Flats depleted and imports list salt as local flats exhausted (TRADE also says salt made here)",
+"text": "Salt production",
+"town": "bar0-city-wartime-rand-13",
+"block_town": "bar0-city-wartime-rand-13"
+},
+{
+"packet": "wide",
+"id": "C35123",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: says religious houses' take is a large part of the city's business; INCOME gives Church Tithes only 5%",
+"text": "Faith carries real weight in Rundplatz's money.",
+"town": "bar0-city-wartime-rand-13",
+"block_town": "bar0-city-wartime-rand-13"
+},
+{
+"packet": "wide",
+"id": "C3553",
+"sev": "LOW",
+"kind": "LACKS",
+"why": "a: 'alongside elected aldermen'; GOVERNMENT lists no aldermen or elected body, and PEOPLE names none",
+"text": "Senior clergy hold effective civic authority alongside elected aldermen; religious law shapes civil policy.",
+"town": "bar0-city-under_siege+famine-rand-11",
+"block_town": "bar0-city-under_siege+famine-rand-11"
+},
+{
+"packet": "wide",
+"id": "C3572",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: 'whether there will be a place left to defend' against the page's 'they trust the city's defences to hold' and 'people believe the city could be held'",
+"text": "The talk now is whether there will be a place left to defend.",
+"town": "bar0-city-under_siege+famine-rand-11",
+"block_town": "bar0-city-under_siege+famine-rand-11"
+},
+{
+"packet": "wide",
+"id": "C37915",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: 'two or three trades' carry its living, against 'Diversified — broad institutional economic base' and 'broad base of trades'; income lists thirteen sources",
+"text": "Skálhammer earns most of its living from two or three trades, and none of them could carry the place alone.",
+"town": "bar0-city-wartime-rand-14",
+"block_town": "bar0-city-wartime-rand-14"
+},
+{
+"packet": "wide",
+"id": "C38317",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: 'holds a third share in Noble Families' misreads rank 3 (PEOPLE: Noble Families rank 3; C38316 'also third in'); a rank is not a share",
+"text": "Myrkjartan Raudsson heads Royal Authority and also holds a third share in Noble Families, so what Noble Families wants from Royal Authority goes straight to the top.",
+"town": "bar0-city-wartime-rand-14",
+"block_town": "bar0-city-wartime-rand-14"
+},
+{
+"packet": "wide",
+"id": "C38445",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: 'food trades are failing' beside Food Security Secure, 8.5 months stored, failed source None, famine cut 0%, Economic Resilience Strong",
+"text": "Skálhammer's food trades are failing, and each season they fail the city has less put by to fall back on if it is cut off.",
+"town": "bar0-city-wartime-rand-14",
+"block_town": "bar0-city-wartime-rand-14"
+},
+{
+"packet": "wide",
+"id": "C38489",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: 'Visitors are not robbed' beside the crime-wave tension: crime rising faster than those in charge can answer it",
+"text": "Visitors at Skálhammer are not robbed; someone quietly explains how things are run here and who runs them.",
+"town": "bar0-city-wartime-rand-14",
+"block_town": "bar0-city-wartime-rand-14"
+},
+{
+"packet": "wide",
+"id": "C38499",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: walls 'ask little of it' and little spent on them, under wartime and Well-Defended, against 'the works are repaired' and 'kept up'",
+"text": "Skálhammer's accounts show little spent on its city walls and gates now that it asks little of it, since built work needs little upkeep.",
+"town": "bar0-city-wartime-rand-14",
+"block_town": "bar0-city-wartime-rand-14"
+},
+{
+"packet": "wide",
+"id": "C38622",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: title 'Jarl' for Ísgerðr Finsson, a woman whose PEOPLE title is 'the lady'; 'Jarl' is a male title",
+"text": "Jarl",
+"town": "bar0-city-wartime-rand-14",
+"block_town": "bar0-city-wartime-rand-14"
+},
+{
+"packet": "wide",
+"id": "C39627",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: Defense readiness Adequate, but STATE and the page's own Defense line give the defence word as Fortress",
+"text": "Defense readinessAdequate",
+"town": "bar0-city-wartime-rand-15",
+"block_town": "bar0-city-wartime-rand-15"
+},
+{
+"packet": "wide",
+"id": "C43674",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: vintner bought a vineyard, yet the page says the terrain cannot produce grapes ('needed, and not brought in: grapes')",
+"text": "Secret: Bought the vineyard by lending its old owner money at a rate that could never be paid back",
+"town": "bar0-city-wartime-rand-16",
+"block_town": "bar0-city-wartime-rand-16"
+},
+{
+"packet": "wide",
+"id": "C44363",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: Forges' hammering echoes through the city, yet iron ore is depleted and smiths 'have nothing to mend tools with'",
+"text": "The hammering of the forges echoes through all of Chichxochitl.",
+"town": "bar0-city-wartime-rand-17",
+"block_town": "bar0-city-wartime-rand-17"
+},
+{
+"packet": "wide",
+"id": "C44722",
+"sev": "LOW",
+"kind": "LACKS",
+"why": "a: Garrison offers 'Mercenary hire' service; DEFENCE says hired: none",
+"text": "Mercenary hire",
+"town": "bar0-city-wartime-rand-17",
+"block_town": "bar0-city-wartime-rand-17"
+},
+{
+"packet": "wide",
+"id": "C45561",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: Merchant oligarchy 'hurting the bottom line' from the war; Crisis tab says merchants are getting rich and doing well out of it",
+"text": "Trade disruption and requisition are hurting the bottom line.",
+"town": "bar0-city-wartime-rand-17",
+"block_town": "bar0-city-wartime-rand-17"
+},
+{
+"packet": "wide",
+"id": "C49059",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: says the city buys grapes from outside; TRADE imports list no grapes and C49080 says grapes are needed and not brought in",
+"text": "Some of Gankhuubash's work cannot go on without grapes, and the country around the city does not give enough of it, so the city buys from outside or that work stops.",
+"town": "bar0-city-wartime-rand-19",
+"block_town": "bar0-city-wartime-rand-19"
+},
+{
+"packet": "wide",
+"id": "C49434",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: food trades 'struggling', less put by than ought; FOOD says Secure, no gap, 9 months in a granary (C49437 'nine months')",
+"text": "The food trades at Gankhuubash are struggling to keep up, and less is being put by against the city being cut off than ought to be.",
+"town": "bar0-city-wartime-rand-19",
+"block_town": "bar0-city-wartime-rand-19"
+},
+{
+"packet": "wide",
+"id": "C49683",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: says war contracts 'made the settlement rich'; STATE gives prosperity Comfortable, and C49418 says the war takes most of the money",
+"text": "Secret: Took a private share of the war contracts that made the settlement rich, routed through a merchant house that does not exist on paper",
+"town": "bar0-city-wartime-rand-19",
+"block_town": "bar0-city-wartime-rand-19"
+},
+{
+"packet": "wide",
+"id": "C51278",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: Garrison and watch are 'properly equipped'; the Invasion & War line says the supply of defenders runs short and the defence is weaker.",
+"text": "The garrison and city watch are disciplined, paid in full and properly equipped.",
+"town": "bar0-city-wartime-rand-20",
+"block_town": "bar0-city-wartime-rand-20"
+},
+{
+"packet": "wide",
+"id": "C51313",
+"sev": "LOW",
+"kind": "LACKS",
+"why": "a: 'Unofficial landing points' presumes water landings; trade access is road only and the smuggling line calls it overland.",
+"text": "Corrupt officials, unofficial landing points, and false manifests.",
+"town": "bar0-city-wartime-rand-20",
+"block_town": "bar0-city-wartime-rand-20"
+},
+{
+"packet": "wide",
+"id": "C52372",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: title 'Merchant Prince' given to Gratidia Scipio, who is f in PEOPLE",
+"text": "Connection: Merchant Prince Gratidia Scipio",
+"town": "bar0-city-wartime-rand-9",
+"block_town": "bar0-city-wartime-rand-9"
+},
+{
+"packet": "wide",
+"id": "C54045",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: 'old families keep the peace' as a standing fact, but Law & order reads Collapsed and stability is Desperate with order eroding",
+"text": "The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; when the families fall out among themselves, nobody keeps it.",
+"town": "bar0-hamlet-calm-rand-10",
+"block_town": "bar0-hamlet-calm-rand-10"
+},
+{
+"packet": "wide",
+"id": "C54111",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: 'Medical role: common' for magic, but no arcane practitioners, Reliance on magic None, no healer kept in a hamlet of 80",
+"text": "Medical role: common",
+"town": "bar0-hamlet-calm-rand-10",
+"block_town": "bar0-hamlet-calm-rand-10"
+},
+{
+"packet": "wide",
+"id": "C55363",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: dates the Heresy Trials 'Last century'; PAST gives 43 years ago in a hamlet 48 years old",
+"text": "Last century",
+"town": "bar0-hamlet-calm-rand-12",
+"block_town": "bar0-hamlet-calm-rand-12"
+},
+{
+"packet": "wide",
+"id": "C6779",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: Mercenary hire unmarked and 'available for escort' under a siege; Escort is 'Stopped by the siege', and DEFENCE gives hired: none",
+"text": "Off-duty soldiers available for escort",
+"town": "bar0-city-under_siege+famine-rand-13",
+"block_town": "bar0-city-under_siege+famine-rand-13"
+},
+{
+"packet": "wide",
+"id": "C7004",
+"sev": "LOW",
+"kind": "BROKEN",
+"why": "a: subject and verb disagree: \"Banking houses is open\" (plural house name, singular verb)",
+"text": "Edznaxochitl's Banking houses is open but short of supplies, and it can do less than it used to.",
+"town": "bar0-city-under_siege+famine-rand-13",
+"block_town": "bar0-city-under_siege+famine-rand-13"
+},
+{
+"packet": "wide",
+"id": "C7589",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: 'what is still harvested stretches it further' while the page says field work has stopped and the siege took the outlying fields",
+"text": "Food endurance: The siege has taken the outlying fields; the granary carries the city for about six days at full rations, about two weeks on half, and what is still harvested stretches it further.",
+"town": "bar0-city-under_siege+famine-rand-13",
+"block_town": "bar0-city-under_siege+famine-rand-13"
+},
+{
+"packet": "wide",
+"id": "C7592",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: 'The garrison keeps order' beside Law & order 'Collapsed' and Internal Security 'Critical' (no detention); the page both has and lacks order",
+"text": "The garrison keeps order, and more harshly as the food runs down.",
+"town": "bar0-city-under_siege+famine-rand-13",
+"block_town": "bar0-city-under_siege+famine-rand-13"
+},
+{
+"packet": "wide",
+"id": "C7734",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: card titles Chan Uc (f) 'Lord Mayor': male title and no mayor in GOVERNMENT; PEOPLE gives only 'senior guild master'",
+"text": "Lord Mayor, first of City Council",
+"town": "bar0-city-under_siege+famine-rand-13",
+"block_town": "bar0-city-under_siege+famine-rand-13"
+},
+{
+"packet": "wide",
+"id": "C7814",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: Kaban Acalan is f; 'Merchant Prince' is a male title (PEOPLE: 'the luxury merchant'). Repeats at C06468",
+"text": "Merchant Prince",
+"town": "bar0-city-under_siege+famine-rand-13",
+"block_town": "bar0-city-under_siege+famine-rand-13"
+},
+{
+"packet": "wide",
+"id": "C7980",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: the master miller (Pixan Chan, council member no rank, no military seat) is said to have authorised a sortie; the sortie is War Council's, led by the watch commander",
+"text": "Secret: Authorised an illegal sortie that failed.",
+"town": "bar0-city-under_siege+famine-rand-13",
+"block_town": "bar0-city-under_siege+famine-rand-13"
+},
+{
+"packet": "wide",
+"id": "C8125",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: card for Harbour master's office titles its holder 'Wharfinger'; PEOPLE has Water Lily Uc as the harbour master there, and the wharfinger is Xochitecatl Yam @ Docks",
+"text": "Wharfinger",
+"town": "bar0-city-under_siege+famine-rand-13",
+"block_town": "bar0-city-under_siege+famine-rand-13"
+},
+{
+"packet": "wide",
+"id": "C9153",
+"sev": "LOW",
+"kind": "LACKS",
+"why": "a: prints a house 'Houses of worship'; HOUSES lists only 'Parish churches (10-30)' and 'Multiple monasteries'",
+"text": "Houses of worshipReligious",
+"town": "bar0-city-under_siege+famine-rand-14",
+"block_town": "bar0-city-under_siege+famine-rand-14"
+},
+{
+"packet": "wide",
+"id": "C9380",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: Archive consultation row carries no stop mark though its house, Chroniclers' exchange, is 'Stopped by the siege' (C9018); Services says touched rows are marked",
+"text": "Search the archive that cross-checks one road's report against another's.",
+"town": "bar0-city-under_siege+famine-rand-14",
+"block_town": "bar0-city-under_siege+famine-rand-14"
+},
+{
+"packet": "wide",
+"id": "C9505",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: 'two or three trades' carry the living, against C9483 'Diversified — broad institutional economic base' and eleven income sources",
+"text": "Chandrabari earns most of its living from two or three trades, and none of them could carry the place alone.",
+"town": "bar0-city-under_siege+famine-rand-14",
+"block_town": "bar0-city-under_siege+famine-rand-14"
+},
+{
+"packet": "wide",
+"id": "C9507",
+"sev": "LOW",
+"kind": "STATE",
+"why": "a: says gold/silver ore used to reach the city; TRADE imports list no ore, and C9513 says it was 'not brought in'",
+"text": "Since the siege closed the roads, none of the gold/silver ore that Chandrabari's work needs has reached it, and that work has stopped or soon will.",
+"town": "bar0-city-under_siege+famine-rand-14",
+"block_town": "bar0-city-under_siege+famine-rand-14"
+},
+{
+"packet": "wide",
+"id": "C9544",
+"sev": "LOW",
+"kind": "PAIR",
+"why": "a: calls arcane food 'minor supplement'; FOOD ledger gives 28% made by magic and C9522 says about a quarter of need",
+"text": "Arcane quickening of growth provides minor food supplement",
+"town": "bar0-city-under_siege+famine-rand-14",
+"block_town": "bar0-city-under_siege+famine-rand-14"
+},
+{
+"packet": "wide",
+"id": "C9975",
+"sev": "LOW",
+"kind": "LACKS",
+"why": "a: Medical Readiness 'Infirmary': HOUSES has no infirmary or hospital; C9977 itself says no beds to contain an outbreak",
+"text": "Medical ReadinessInfirmary",
+"town": "bar0-city-under_siege+famine-rand-14",
+"block_town": "bar0-city-under_siege+famine-rand-14"
+}
+]

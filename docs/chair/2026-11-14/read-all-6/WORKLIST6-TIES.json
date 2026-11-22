@@ -1,0 +1,20 @@
+[
+{
+"id": "00477",
+"sev": "MED",
+"n": 4,
+"town": "r2s-under_siege-village-0",
+"section": "World/Relationships",
+"fold": "Refusing would cost the alliance its majority.",
+"text": "Refusing would cost the alliance its majority.",
+"why": "gives Balam Ku (smith) a deciding vote on 'the alliance's majority'; PEOPLE brackets show Balam Ku sits on no power",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/npcData.js",
+"line": 2164,
+"fn": "STRESS_ECONOMIC_EFFECTS.wary_alliance"
+}
+}
+]

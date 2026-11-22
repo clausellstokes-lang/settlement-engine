@@ -1,0 +1,110 @@
+[
+{
+"id": "C3145",
+"sev": "MED",
+"n": 91,
+"town": "bar0-city-under_siege+famine-rand-7",
+"section": "Systems/Economics",
+"fold": "Faith carries real weight in <N>'s money.",
+"text": "Faith carries real weight in Andronnea's money.",
+"why": "says religious houses' money is a large part of the city's business; INCOME gives Church Tithes 4% and Pilgrim Trade 2% (stopped), Smuggling 60%",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6488,
+"fn": "DS-ECO-12 › INCOME WEIGHT: the religious houses · v1"
+}
+},
+{
+"id": "C0943",
+"sev": "MED",
+"n": 39,
+"town": "bar0-city-under_siege+famine-rand-6",
+"section": "Systems/Economics",
+"fold": "Magic carries real weight in <N>'s money.",
+"text": "Magic carries real weight in Hartgrund's money.",
+"why": "magic is a large part of its money; INCOME gives Arcane Industry 2%, Spellcasting 2%, Apothecary 1% against Smuggling 60%",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 6537,
+"fn": "DS-ECO-12 › INCOME WEIGHT: the practice of magic · v1"
+}
+},
+{
+"id": "C31881",
+"sev": "MED",
+"n": 24,
+"town": "bar0-town-occupied-rand-8",
+"section": "Summary/Overview",
+"fold": "Its merchant guild sets the terms of trade and its members carry the town's dealings outward.",
+"text": "Its merchant guild sets the terms of trade and its members carry the town's dealings outward.",
+"why": "merchant guilds 'set the terms of trade' but QUARRELS has them subordinate to the Corrupt Council and trade is taxed by the occupation; also singular guild vs Merchant guilds (3-8)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 9685,
+"fn": "DS-GEN-13 › COMMERCE: a merchant guild, no bank · v2"
+}
+},
+{
+"id": "C35244",
+"sev": "MED",
+"n": 23,
+"town": "bar0-village-famine-rand-6",
+"section": "Summary/Overview",
+"fold": "Market day is when <N> fills: the roads bring buyers.",
+"text": "Market day is when Xochitun fills: the roads bring buyers.",
+"why": "market day 'fills' and roads bring buyers under an active famine, and Hunger has made the village quiet",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 9406,
+"fn": "DS-GEN-13 › MARKET-OPEN · v1"
+}
+},
+{
+"id": "C13783",
+"sev": "MED",
+"n": 12,
+"town": "bar0-hamlet-under_siege-rand-6",
+"section": "Summary/Overview",
+"fold": "Anyone with goods and the stall fee can sell at <N>'s market without a guild's leave.",
+"text": "Anyone with goods and the stall fee can sell at Satyapeth's market without a guild's leave.",
+"why": "Says anyone can sell at the market as ordinary; under the siege trade has stopped and nothing comes in by road",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/general.generated.js",
+"line": 9766,
+"fn": "DS-GEN-13 › COMMERCE: a market, no guild · v1"
+}
+},
+{
+"id": "C25445",
+"sev": "MED",
+"n": 11,
+"town": "bar0-thorp-calm-rand-8",
+"section": "World/Daily Life",
+"fold": "Things are fine.",
+"text": "Things are fine.",
+"why": "'Things are fine... not tight' but safety Dangerous, stability Tense, Legitimacy Crisis, food Pressured, Law & order Critical",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/dossierStateProse/economy.generated.js",
+"line": 2755,
+"fn": "DS-ECO-8 › MODERATE · v2"
+}
+}
+]

@@ -1,0 +1,164 @@
+[
+{
+"id": "00410",
+"sev": "MED",
+"n": 35,
+"town": "r2s-plague_onset-city-0",
+"section": "Summary/Crisis",
+"fold": "Military/Guard has no stake yet",
+"text": "Military/Guard has no stake yet",
+"why": "slash label 'Military/Guard' used as a name beside a verb ('has no stake yet')",
+"kinds": [
+"BROKEN"
+],
+"writer": {
+"file": "src/domain/crisis/crisisPage.js",
+"line": 68,
+"fn": "CRISIS_PAGE_COPY"
+}
+},
+{
+"id": "00392",
+"sev": "MED",
+"n": 29,
+"town": "r2s-occupied-village-2",
+"section": "Summary/Crisis",
+"fold": "Merchant Guilds have no stake yet",
+"text": "Merchant Guilds have no stake yet",
+"why": "Merchant Guilds (Strong, set prices, fund the council) 'have no stake yet' under an occupation that taxes all the town's trade",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisPage.js",
+"line": 68,
+"fn": "CRISIS_PAGE_COPY"
+}
+},
+{
+"id": "00576",
+"sev": "MED",
+"n": 29,
+"town": "r2r-village-25",
+"section": "Summary/Crisis",
+"fold": "The Independent Bloc has no stake yet",
+"text": "The Independent Bloc has no stake yet",
+"why": "The Independent Bloc is one of the three powers whose split is the Politically Fractured crisis; 'no stake yet' is false",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisPage.js",
+"line": 68,
+"fn": "CRISIS_PAGE_COPY"
+}
+},
+{
+"id": "00411",
+"sev": "MED",
+"n": 26,
+"town": "r2s-plague_onset-city-1",
+"section": "Summary/Crisis",
+"fold": "Military/Guard is already at odds",
+"text": "Military/Guard is already at odds",
+"why": "slash label 'Military/Guard' used as a name beside a verb ('is already at odds')",
+"kinds": [
+"BROKEN"
+],
+"writer": {
+"file": "src/domain/crisis/crisisPage.js",
+"line": 69,
+"fn": "CRISIS_PAGE_COPY"
+}
+},
+{
+"id": "00246",
+"sev": "MED",
+"n": 19,
+"town": "r2r-hamlet-32",
+"section": "Summary/Crisis",
+"fold": "Creditor's Representative has no stake yet",
+"text": "Creditor's Representative has no stake yet",
+"why": "says the Creditor's Representative (Strong power, the creditor) has no stake in an Indebted to Outside Power crisis; it is the creditor",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisPage.js",
+"line": 68,
+"fn": "CRISIS_PAGE_COPY"
+}
+},
+{
+"id": "00574",
+"sev": "MED",
+"n": 18,
+"town": "r2s-succession_void-village-3",
+"section": "Summary/Crisis",
+"fold": "The Highborn Circle has no stake yet",
+"text": "The Highborn Circle has no stake yet",
+"why": "says Highborn Circle has no stake in the succession void; TENSIONS names The Highborn Circle a party to the succession crisis and it is a Significant power",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisPage.js",
+"line": 68,
+"fn": "CRISIS_PAGE_COPY"
+}
+},
+{
+"id": "00472",
+"sev": "MED",
+"n": 8,
+"town": "r2r-town-37",
+"section": "Summary/Crisis",
+"fold": "Quarantine Council has no stake yet",
+"text": "Quarantine Council has no stake yet",
+"why": "says Quarantine Council has no stake yet; it is a listed power, its granary reeve ranks first on it, and the crisis is the plague",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisPage.js",
+"line": 68,
+"fn": "CRISIS_PAGE_COPY"
+}
+},
+{
+"id": "00421",
+"sev": "MED",
+"n": 5,
+"town": "r2s-mass_migration-hamlet-0",
+"section": "Summary/Crisis",
+"fold": "Newcomers' Settlement has no stake yet",
+"text": "Newcomers' Settlement has no stake yet",
+"why": "Newcomers' Settlement is a Strong power and the arriving people themselves; Mass Migration is its crisis, 'no stake yet' is false",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisPage.js",
+"line": 68,
+"fn": "CRISIS_PAGE_COPY"
+}
+},
+{
+"id": "00319",
+"sev": "MED",
+"n": 5,
+"town": "r2r-village-58",
+"section": "Summary/Crisis",
+"fold": "Grain Holders have no stake yet",
+"text": "Grain Holders have no stake yet",
+"why": "Grain Holders (a Strong power) 'have no stake yet' in a Famine whose crisis is about grain; false for the holders of the grain",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/domain/crisis/crisisPage.js",
+"line": 68,
+"fn": "CRISIS_PAGE_COPY"
+}
+}
+]

@@ -1,0 +1,274 @@
+/**
+ * AccountSubscriptionSection.jsx — Subscription, credits, saves, billing
+ * portal, inline credit-pack purchase, and the Founder tile for the Account
+ * page.
+ *
+ * Extracted verbatim from AccountPage.jsx during decomposition. Purely
+ * presentational: all state, handlers, and store access stay in AccountPage
+ * and arrive via props.
+ */
+import { lazy as _lazy, Suspense as _Suspense } from 'react';
+import { getTierDisplayName, getActivePacks } from '../../config/pricing.js';
+import { isConfigured } from '../../lib/supabase.js';
+import { t } from '../../copy/index.js';
+import { GOLD, GOLD_BG, INK, MUTED, SECOND, CARD, sans, serif_, SP, FS, swatch, AMBER, launchSkin } from '../theme.js';
+import Section from './AccountSection.jsx';
+import Button from '../primitives/Button.jsx';
+import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
+import { purchasesOpen } from '../../lib/launchGate.js';
+import { useFounderTileEligible } from '../../hooks/useFounderTileEligible.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
+// P116 / X-8 — Founder Lifetime tile, audience-gated to worldbuilder
+// behavior. Self-gates inside; renders null for non-worldbuilder users.
+const FounderTile = _lazy(() => import('../pricing/FounderTile.jsx'));
+
+export default function AccountSubscriptionSection({
+  auth,
+  isElevated,
+  creditBalance,
+  activeSaves,
+  inactiveSaves,
+  maxSaves,
+  portalBusy,
+  handleManageBilling,
+  purchaseError,
+  purchasing,
+  handlePurchase,
+  onNavigatePricing,
+}) {
+  const mobile = useIsMobile();
+  const isFree = !isElevated && auth.tier !== 'premium';
+  // ⛔ THE HYDRATION GATE (LD-6 item 2, second half). `auth.tier` reads 'anon'/
+  // 'free' until the session resolves, so mid-hydration a paying Cartographer is
+  // shown the free-user surface. The conversion CTA below is this region's entry
+  // to the purchase path, so it is BLOCKED under its own label until the tier is
+  // known. Two things are deliberately NOT gated: the 'Manage subscription'
+  // button (a subscriber must always be able to reach billing, and it is already
+  // correct-by-default here — it renders only for a KNOWN premium tier, never
+  // for an unknown one), and the inline credit-pack tiles (a pack is not a
+  // subscription).
+  const authLoading = Boolean(auth?.loading);
+  // P8 — one primary per region. When the audience-earned Founder tile is
+  // eligible it renders its OWN solid-gold "Claim seat" primary lower in this
+  // section; the generic upgrade CTA below then drops to secondary so exactly
+  // one focal click survives (Founder is the higher-intent action).
+  const founderTileShowing = useFounderTileEligible();
+  // THE LAUNCH GATE (lib/launchGate.js). Until launch the upgrade CTA and the
+  // credit-pack tiles render disabled and wear the "Available at launch" pill.
+  // 'Manage subscription' is not gated: billing stays reachable.
+  const purchasesAreOpen = purchasesOpen();
+  return (
+    <Section title={t('account.subscriptionHeading')} tone="feature">
+      <div style={{ display: 'flex', gap: SP.lg, flexWrap: 'wrap' }}>
+        {/* Tier card — P125 / AC-1 grows an "unlock" footer for free users. */}
+        <div style={{
+          flex: '1 1 180px',
+          background: GOLD_BG,
+          border: `1px solid rgba(160,118,42,0.2)`,
+          overflow: 'hidden',
+        }}>
+          <div style={{ padding: SP.lg, textAlign: 'center' }}>
+            <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs }}>
+              {t('account.cardCurrentTier')}
+            </div>
+            <div style={{
+              fontSize: FS.xxl, fontWeight: 700, fontFamily: serif_,
+              color: isElevated ? '#7c3aed' : auth.tier === 'premium' ? '#2a7a2a' : GOLD,
+              textTransform: 'uppercase',
+            }}>
+              {isElevated ? t('account.fullAccess') : getTierDisplayName(auth.tier)}
+            </div>
+          </div>
+          {!isElevated && auth.tier !== 'premium' && (
+            <div style={{
+              padding: `${SP.sm}px ${SP.md}px`,
+              background: 'rgba(124,58,237,0.06)',
+              borderTop: '1px solid rgba(124,58,237,0.20)',
+              fontSize: proseFontSize(FS.xs, mobile), color: swatch['#3A2F18'], lineHeight: 1.5,
+            }}>
+              <b style={{ color: swatch['#7C3AED'] }}>Cartographer unlocks:</b> unlimited saves,
+              neighbours, custom content, and unlimited PDF/JSON export.
+            </div>
+          )}
+        </div>
+
+        {/* Credits card — grows "try Narrate" footer when balance is 0. */}
+        <div style={{
+          flex: '1 1 180px',
+          background: 'rgba(124,58,237,0.06)',
+          border: '1px solid rgba(124,58,237,0.15)',
+          overflow: 'hidden',
+        }}>
+          <div style={{ padding: SP.lg, textAlign: 'center' }}>
+            <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs }}>
+              {t('account.cardCredits')}
+            </div>
+            <div style={{ fontSize: FS.xxl, fontWeight: 700, color: swatch['#7C3AED'] }}>
+              {isElevated ? '\u221E' : creditBalance}
+            </div>
+          </div>
+          {!isElevated && creditBalance === 0 && (
+            <div style={{
+              padding: `${SP.sm}px ${SP.md}px`,
+              background: 'rgba(124,58,237,0.10)',
+              borderTop: '1px solid rgba(124,58,237,0.25)',
+              fontSize: proseFontSize(FS.xs, mobile), color: swatch['#3A2F18'], lineHeight: 1.5,
+            }}>
+              <b style={{ color: swatch['#7C3AED'] }}>Try Narrate.</b> Turn this town's data
+              into table-ready prose.{' '}
+              <span style={{ color: swatch['#2A7A2A'], fontWeight: 700 }}>First credit free.</span>
+            </div>
+          )}
+        </div>
+
+        {/* Saves card — grows "one save left" / "saves full" footer. */}
+        <div style={{
+          flex: '1 1 180px',
+          background: 'rgba(42,122,42,0.06)',
+          border: '1px solid rgba(42,122,42,0.15)',
+          overflow: 'hidden',
+        }}>
+          <div style={{ padding: SP.lg, textAlign: 'center' }}>
+            <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs }}>
+              {t('account.cardSaves')}
+            </div>
+            <div style={{ fontSize: FS.xxl, fontWeight: 700, color: swatch['#2A7A2A'] }}>
+              {activeSaves} / {maxSaves === Infinity ? '\u221E' : maxSaves}
+            </div>
+            {inactiveSaves > 0 && (
+              <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, marginTop: SP.xs }}>
+                {inactiveSaves} inactive retained
+              </div>
+            )}
+          </div>
+          {!isElevated && maxSaves !== Infinity && activeSaves >= maxSaves - 1 && (
+            <div style={{
+              padding: `${SP.sm}px ${SP.md}px`,
+              background: 'rgba(208,128,32,0.10)',
+              borderTop: '1px solid rgba(208,128,32,0.30)',
+              fontSize: proseFontSize(FS.xs, mobile), color: swatch['#3A2F18'], lineHeight: 1.5,
+            }}>
+              <b style={{ color: AMBER }}>
+                {activeSaves >= maxSaves ? 'Saves full.' : 'One save left.'}
+              </b>{' '}
+              {/* "cloud sync" struck (TIER-PARITY-FIX V6's rule, routed to SW-9): free saves are server
+                  rows too (migrations 014/024/033), so sync is no Cartographer difference. */}
+              Cartographer = unlimited saves.
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Conversion CTA — the one high-emphasis primary action of this region.
+          Free users get an obvious first click to Pricing; the per-tile upsell
+          footers above all point here. Navigation-only — never a purchase. */}
+      {isFree && (
+        <div style={{ marginTop: SP.lg }}>
+          <Button
+            variant={founderTileShowing ? 'secondary' : 'primary'}
+            size="lg"
+            onClick={onNavigatePricing}
+            disabled={!purchasesAreOpen || authLoading}
+            style={purchasesAreOpen ? undefined : { flexWrap: 'wrap' }}
+          >
+            See Cartographer
+            {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
+          </Button>
+        </div>
+      )}
+
+      {auth.tier === 'premium' && !isElevated && (
+        <div style={{ marginTop: SP.lg }}>
+          <Button
+            variant="secondary"
+            size="md"
+            onClick={handleManageBilling}
+            disabled={portalBusy || !isConfigured}
+          >
+            {portalBusy ? 'Opening portal...' : 'Manage subscription'}
+          </Button>
+        </div>
+      )}
+
+      {/* Purchase credits (inline) */}
+      {!isElevated && (
+        <div style={{ marginTop: SP.lg }}>
+          <div style={{
+            display: 'flex', alignItems: 'center', gap: SP.sm, marginBottom: SP.md,
+            fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: SECOND,
+            textTransform: 'uppercase', letterSpacing: '0.06em',
+          }}>
+            {t('account.purchaseCreditsLabel')}
+          </div>
+
+          {purchaseError && (
+            <div style={{
+              padding: `${SP.sm}px ${SP.md}px`, marginBottom: SP.md,
+              background: swatch.dangerBg, border: '1px solid #e8b0b0',
+              fontSize: FS.sm, color: swatch.danger,
+            }}>
+              {purchaseError}
+            </div>
+          )}
+
+          <div style={{ display: 'flex', gap: SP.sm, ...(purchasesAreOpen ? null : { flexWrap: 'wrap' }) }}>
+            {/* P125 / AC-2 — Read packs from getActivePacks() so the
+                `packsRepriced` flag wins. Hardcoded list was bypassing
+                the flag and showing legacy 5/15/40 even when the new
+                25/60/150 catalog was active. The pack record carries
+                its own `tier` ('starter' | 'value' | 'best') — use
+                that for accent color so a future repricing doesn't
+                need a UI update. */}
+            {Object.values(getActivePacks()).map(p => {
+              const key = p.key;
+              const accent = p.tier === 'best'
+                ? '#2a7a2a'
+                : p.tier === 'value' ? GOLD : SECOND;
+              return (
+                <button key={key} type="button" onClick={() => handlePurchase(key)}
+                  disabled={!purchasesAreOpen || purchasing || !isConfigured}
+                  data-skin={purchasesAreOpen ? undefined : 'launch'}
+                  // THE LAUNCH SKIN (X-39): a raw purchase tile wears the regal ground and the
+                  // gold inks while locked, as every Button carrying the pill does.
+                  style={{
+                    flex: 1, padding: `${SP.md}px ${SP.sm}px`,
+                    background: purchasesAreOpen ? CARD : launchSkin.ground,
+                    border: purchasesAreOpen ? `2px solid ${accent}20` : `1px solid ${launchSkin.border}`,
+                    cursor: purchasesAreOpen ? 'pointer' : 'not-allowed', fontFamily: sans,
+                    display: 'flex', flexDirection: 'column', alignItems: 'center', gap: SP.xs,
+                    opacity: purchasing ? 0.6 : 1, position: 'relative',
+                  }}>
+                  {p.discount && (
+                    <span style={{
+                      position: 'absolute', top: -8, right: -4,
+                      padding: '2px 6px', background: accent,
+                      color: swatch.white, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800,
+                    }}>{p.discount}</span>
+                  )}
+                  <span style={{ fontSize: FS.lg, fontWeight: 700, ...(purchasesAreOpen ? { color: INK } : launchSkin.shimmer) }}>{p.credits}</span>
+                  <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: purchasesAreOpen ? MUTED : launchSkin.ink }}>credits</span>
+                  <span style={{ fontSize: FS.md, fontWeight: 700, color: purchasesAreOpen ? accent : launchSkin.ink }}>{p.price}</span>
+                  <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: purchasesAreOpen ? MUTED : launchSkin.ink }}>{purchasing === key ? 'Redirecting...' : p.perCredit + '/ea'}</span>
+                  {/* The pill wraps inside the tile with narrower side padding, so three
+                      tiles still share a 375px phone row; narrower screens wrap the row. */}
+                  {!purchasesAreOpen && (
+                    <AvailableAtLaunchPill style={{ whiteSpace: 'normal', textAlign: 'center', justifyContent: 'center', padding: '2px 4px' }} />
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* P116 / X-8 — Founder Lifetime tile. Self-gates on
+          audience='worldbuilder' + flag + seats-remaining > 0.
+          Renders null for everyone else, so this is safe to mount
+          unconditionally here. */}
+      <_Suspense fallback={null}>
+        <FounderTile />
+      </_Suspense>
+    </Section>
+  );
+}

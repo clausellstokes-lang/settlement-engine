@@ -1,0 +1,16 @@
+{
+  "_doc": "SUPERSEDES ONE PREDICTION of docs/shift-records/2026-09-30-urban-band-institutions.json and nothing else. That record's act on 'herald-knowledge-desk-golden' was REFUSED by the door (PREDICTION_MISS: predicted 367 rows, produced 400; NOTHING was written), and a record is never edited after its first act, so this one carries the corrected prediction under the SAME owner signature, row and cause. The prediction was wrong, not the change too large: the knowledge desk files one row per item the settlement layer feeds it, and the urban band's fuller rosters (every tier block complete) feed it 33 more. Every other surface of the window stays under the first record.",
+  "ownerWords": "\"Urban-band rebuild (Recommended)\" · \"Approve + fold in MF-CH2B (Recommended)\" · \"i think of towns as simply small cities intuitively rather than a slightly larger village. it is where society and civizliation actually start to coalesce\" · \"make sure this also remains true from hamlet to village in terms of cumulative\"",
+  "ownerDate": "2026-09-30",
+  "odqRow": "§934.86 of docs/OWNER_DECISION_QUEUE.md (THE URBAN BAND, recorded by the urban-band chair 2026-09-30 on the ledger branch review-fixes-2026-07-08 at 9d3b518de)",
+  "cause": "ONE CAUSE: THE URBAN BAND. src/data/institutionalCatalog.js became a registry of 179 families and 518 tier entries with the owner's two cumulative laws (hamlet -> village; town -> city -> metropolis), every tier block complete, exclusive groups resolved as one weighted seat and row guards honoured at the roll, and MF-CH2B's gates read the declared magic licence rather than the display shelf (folded in by the owner). The registry re-orders the catalog draws, so 1,188 of 1,200 same-seed rosters move at every tier, thorp included; every downstream golden moves with them. The window's cure commits are consequences of the same cause, each a latent defect the new rosters made reachable (named in docs/URBAN_BAND_INSTITUTIONS.md §4c), and ride this record rather than a second one.",
+  "seat": "the urban-band chair, session 93391427 (Opus 5.5), executing every door write itself from the committed tree of feat/urban-band-institutions-2026-09-30, one surface per commit",
+  "surfaces": [
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "re-record",
+      "predictedRows": 400,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}

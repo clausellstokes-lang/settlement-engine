@@ -1,0 +1,273 @@
+[
+{
+"id": "C7315",
+"sev": "MED",
+"n": 720,
+"town": "bar0-metropolis-calm-rand-2",
+"section": "Systems/Defense",
+"fold": "Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as the campaign advances.",
+"text": "Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as the campaign advances.",
+"why": "'re-judged as the campaign advances'; CRISIS is none, no campaign exists (same fault as C6001)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/components/new/tabs/DefenseTab.jsx",
+"line": 413,
+"fn": "DefenseTab"
+}
+},
+{
+"id": "C8329",
+"sev": "MED",
+"n": 720,
+"town": "bar0-thorp-calm-rand-2",
+"section": "Summary/Overview",
+"fold": "Reliance on magic",
+"text": "Reliance on magic",
+"why": "Reliance on magic None; FOOD shows 1% made by magic (and C8460 says food came by spell or prayer)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/components/new/tabs/OverviewTab.jsx",
+"line": 399,
+"fn": "OverviewTab"
+}
+},
+{
+"id": "C10657",
+"sev": "MED",
+"n": 446,
+"town": "bar0-town-occupied-rand-2",
+"section": "Systems/Power",
+"fold": "Strong▼",
+"text": "Strong▼",
+"why": "power card over Barracks (Occupation Authority) reads Strong; GOVERNMENT gives Occupation Authority Significant, Merchant Guilds Strong",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C5770",
+"sev": "MED",
+"n": 446,
+"town": "bar0-hamlet-under_siege-rand-2",
+"section": "Systems/Defense",
+"fold": "Strong▼",
+"text": "Strong▼",
+"why": "rates Invasion & War Strong and says it would see off a raid; STATE defence is Vulnerable, Defense readiness Critical, one part-time militia, under siege",
+"kinds": [
+"PAIR",
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C8330",
+"sev": "MED",
+"n": 366,
+"town": "bar0-thorp-calm-rand-2",
+"section": "Summary/Overview",
+"fold": "None",
+"text": "None",
+"why": "'Reliance on magic: None' but FOOD shows 1% made by magic",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C0038",
+"sev": "MED",
+"n": 314,
+"town": "bar0-city-under_siege+famine-rand-2",
+"section": "Summary/Overview",
+"fold": "Economic ResilienceStrong",
+"text": "Economic ResilienceStrong",
+"why": "Economic Resilience Strong contradicts Prosperity Struggling, viable False, and Economic capacity Strained (C0149)",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C2782",
+"sev": "MED",
+"n": 314,
+"town": "bar0-city-wartime-rand-2",
+"section": "Summary/Overview",
+"fold": "Economic ResilienceStrong",
+"text": "Economic ResilienceStrong",
+"why": "Economic Resilience Strong; prosperity Poor, wartime war takes most of the money, Foundations print Economic capacity Strained",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C9990",
+"sev": "MED",
+"n": 314,
+"town": "bar0-town-occupied-rand-2",
+"section": "Summary/Overview",
+"fold": "Economic ResilienceStrong",
+"text": "Economic ResilienceStrong",
+"why": "Economic Resilience 'Strong' while prosperity is Poor and Economic capacity reads Strained",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C10727",
+"sev": "MED",
+"n": 198,
+"town": "bar0-town-occupied-rand-2",
+"section": "Systems/Defense",
+"fold": "Legal InfrastructureCourt + Prison",
+"text": "Legal InfrastructureCourt + Prison",
+"why": "'Court + Prison, full enforcement chain, prosecute'; HOUSES has no court, only Town hall, Town council and Small prison/stocks",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C1764",
+"sev": "MED",
+"n": 27,
+"town": "bar0-city-under_siege+famine-rand-2",
+"section": "Systems/Outlook",
+"fold": "Settlement cannot cover ~# lbs of food per day (#% of needs) and its trade route is cut.",
+"text": "Settlement cannot cover ~6640 lbs of food per day (32% of needs) and its trade route is cut.",
+"why": "food shortfall given as ~6640 lbs/day (32%); the Food Security ledger gives Short: 6,742 lbs/day (need 20,750 minus 14,008 supplied)",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/domain/display/validationOnPage.js",
+"line": 605,
+"fn": "viabilityIssueText"
+}
+},
+{
+"id": "C0087",
+"sev": "MED",
+"n": 24,
+"town": "bar0-city-under_siege+famine-rand-2",
+"section": "Summary/Crisis",
+"fold": "Military/Guard split",
+"text": "Military/Guard split",
+"why": "slash label 'Military/Guard' used as a power's name beside a verb ('split')",
+"kinds": [
+"BROKEN"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C0122",
+"sev": "MED",
+"n": 21,
+"town": "bar0-city-under_siege+famine-rand-2",
+"section": "Summary/Crisis",
+"fold": "Military/Guard gains",
+"text": "Military/Guard gains",
+"why": "slash label 'Military/Guard' used as a power's name beside a verb ('gains')",
+"kinds": [
+"BROKEN"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C10021",
+"sev": "MED",
+"n": 21,
+"town": "bar0-town-occupied-rand-2",
+"section": "Summary/Crisis",
+"fold": "profits: <N>",
+"text": "profits: Charis Glabas (the watch captain)",
+"why": "Charis Glabas is only rank 3 of Occupation Authority; Eudokia Chrysoberges is rank 1, so she is the strongest figure",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C9437",
+"sev": "MED",
+"n": 9,
+"town": "bar0-town-calm-rand-2",
+"section": "Systems/Defense",
+"fold": "The town watch exists on paper.",
+"text": "The town watch exists on paper.",
+"why": "watch exists only on paper; DEFENCE lists a Town watch, a captain sits in PEOPLE, and the page says it walks night rounds",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+},
+{
+"id": "C12458",
+"sev": "MED",
+"n": 3,
+"town": "bar0-village-famine-rand-2",
+"section": "World/NPCs",
+"fold": "Flaw: volatile Temperament: incorruptible",
+"text": "Flaw: volatile Temperament: incorruptible",
+"why": "Saikhan Ongut is printed temperament/disposition incorruptible, yet his secret is secretly directing a fencing operation",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "(untraced)",
+"line": null,
+"fn": ""
+}
+}
+]

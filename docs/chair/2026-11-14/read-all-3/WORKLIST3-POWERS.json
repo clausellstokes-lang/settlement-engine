@@ -1,0 +1,580 @@
+[
+{
+"id": "25356",
+"sev": "HIGH",
+"n": 32,
+"town": "r2s-famine-thorp-0",
+"section": "PDF/NotableNPCs",
+"fold": "Talks about the catch, the weather and the boats; quick to offer a meal of fish.",
+"text": "Talks about the catch, the weather and the boats; quick to offer a meal of fish.",
+"why": "quick to offer a meal of fish; Active Famine, failed source is fish, stores 0.1 months",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 873,
+"fn": "ROWS"
+}
+},
+{
+"id": "04922",
+"sev": "MED",
+"n": 111,
+"town": "r2s-plague_onset-city-1",
+"section": "Journal/Power",
+"fold": "Arcane Orders: Mages and arcane practitioners hold real influence through monopoly on magical services and the latent fear their capabilities inspire.",
+"text": "Arcane Orders: Mages and arcane practitioners hold real influence through monopoly on magical services and the latent fear their capabilities inspire.",
+"why": "Arcane Orders hold real influence through monopoly; GOVERNMENT lists Arcane Orders Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/claimStanding.js",
+"line": 79,
+"fn": "CLAIM_RUNGS"
+}
+},
+{
+"id": "07413",
+"sev": "MED",
+"n": 50,
+"town": "r2s-plague_onset-city-0",
+"section": "Journal/Power",
+"fold": "Craft Guilds: Well-organised craft guilds with established trade monopolies; a persistent civic voice that merchant houses must negotiate with, not ignore.",
+"text": "Craft Guilds: Well-organised craft guilds with established trade monopolies; a persistent civic voice that merchant houses must negotiate with, not ignore.",
+"why": "Craft Guilds called a persistent civic voice merchants must negotiate with; GOVERNMENT lists Craft Guilds Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/rulingStructure.js",
+"line": 627,
+"fn": "generatePowerStructure"
+}
+},
+{
+"id": "25870",
+"sev": "MED",
+"n": 37,
+"town": "r2s-politically_fractured-thorp-1",
+"section": "Journal/Power",
+"fold": "The Independent Bloc: Claims legitimate authority through different means; controls a distinct district or institution.",
+"text": "The Independent Bloc: Claims legitimate authority through different means; controls a distinct district or institution.",
+"why": "'controls a distinct district or institution': population 10 cannot hold a district; HOUSES lists no institution for the Bloc",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/power/stressFactions.js",
+"line": 110,
+"fn": "applyStressEventFactions"
+}
+},
+{
+"id": "22578",
+"sev": "MED",
+"n": 32,
+"town": "r2s-plague_onset-city-1",
+"section": "Journal/Power",
+"fold": "Religious Authorities: Church institutions hold direct temporal power; tithes, land, and courts are all ecclesiastical.",
+"text": "Religious Authorities: Church institutions hold direct temporal power; tithes, land, and courts are all ecclesiastical.",
+"why": "church holds direct temporal power, courts all ecclesiastical; the City-State Council governs and Multiple courthouses are commercial, criminal and church",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/rulingStructure.js",
+"line": 599,
+"fn": "generatePowerStructure"
+}
+},
+{
+"id": "29025",
+"sev": "MED",
+"n": 28,
+"town": "r2s-under_siege-town-0",
+"section": "Journal/Power",
+"fold": "Thieves' Guild: Criminal network operating in shadows; controls illicit trade and profits from the gap between law and enforcement.",
+"text": "Thieves' Guild: Criminal network operating in shadows; controls illicit trade and profits from the gap between law and enforcement.",
+"why": "Thieves' Guild controls illicit trade; GOVERNMENT lists it as Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/claimStanding.js",
+"line": 88,
+"fn": "CLAIM_RUNGS"
+}
+},
+{
+"id": "15253",
+"sev": "MED",
+"n": 22,
+"town": "r2s-famine-thorp-0",
+"section": "Journal/NPC 1",
+"fold": "Keeps the best fishing waters for their own family's boats by telling the others they are fished out: The other boats are starting to notice how full # family's nets come back",
+"text": "Keeps the best fishing waters for their own family's boats by telling the others they are fished out: The other boats are starting to notice how full one family's nets come back",
+"why": "one family's nets come back full; FOOD failed source is fish, fishing failed, famine cut 65%",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 865,
+"fn": "ROWS"
+}
+},
+{
+"id": "17038",
+"sev": "MED",
+"n": 14,
+"town": "r2s-famine-village-1",
+"section": "Journal/Power",
+"fold": "Military/Guard: Significant military force for this scale; the commander's opinion on civic matters carries institutional weight.",
+"text": "Military/Guard: Significant military force for this scale; the commander's opinion on civic matters carries institutional weight.",
+"why": "calls Military/Guard Significant; GOVERNMENT has it Dominant; DEFENCE shows only a citizen militia and no garrison, defence Vulnerable",
+"kinds": [
+"BROKEN",
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/rulingStructure.js",
+"line": 551,
+"fn": "generatePowerStructure"
+}
+},
+{
+"id": "15267",
+"sev": "MED",
+"n": 14,
+"town": "r2r-thorp-40",
+"section": "Journal/NPC 1",
+"fold": "Knows of a path over the hills that no # else uses, and guides people across it for a fee: The people who cross that way are not people who want to be seen, and someone is looking for them",
+"text": "Knows of a path over the hills that no one else uses, and guides people across it for a fee: The people who cross that way are not people who want to be seen, and someone is looking for them",
+"why": "a path over the hills; terrain is Plains",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 1559,
+"fn": "ROWS"
+}
+},
+{
+"id": "16694",
+"sev": "MED",
+"n": 14,
+"town": "r2s-occupied-village-2",
+"section": "Journal/Power",
+"fold": "Merchant Guilds: Dominant commercial class at a trade nexus; they set prices, control warehousing, and fund the council.",
+"text": "Merchant Guilds: Dominant commercial class at a trade nexus; they set prices, control warehousing, and fund the council.",
+"why": "says Merchant Guilds control warehousing and fund the council; HOUSES has no warehouse and no guild house, and the council is under occupation",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/power/claimStanding.js",
+"line": 52,
+"fn": "CLAIM_RUNGS"
+}
+},
+{
+"id": "24575",
+"sev": "MED",
+"n": 13,
+"town": "r2r-village-49",
+"section": "Journal/Power",
+"fold": "Stability: Ordered (strong military presence)",
+"text": "Stability: Ordered (strong military presence)",
+"why": "'Ordered (strong military presence)'; DEFENCE has no garrison, militia, watch or hired force, only an adventurers' charter hall",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/governanceNarrative.js",
+"line": 285,
+"fn": "deriveBaselineStability"
+}
+},
+{
+"id": "29028",
+"sev": "MED",
+"n": 13,
+"town": "r2s-under_siege-town-3",
+"section": "Journal/Power",
+"fold": "Thieves' Guild: Underworld effectively controls vice, smuggling, and key officials; the nominal government tolerates this because it cannot currently change it.",
+"text": "Thieves' Guild: Underworld effectively controls vice, smuggling, and key officials; the nominal government tolerates this because it cannot currently change it.",
+"why": "underworld controls key officials, government merely nominal; Thieves' Guild is only Significant and Guild Council is a Strong governing power",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/claimStanding.js",
+"line": 81,
+"fn": "CLAIM_RUNGS"
+}
+},
+{
+"id": "16925",
+"sev": "MED",
+"n": 9,
+"town": "r2s-recently_betrayed-hamlet-0",
+"section": "Journal/Power",
+"fold": "Military Party: Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical.",
+"text": "Military Party: Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical.",
+"why": "describes an armed patrol of residents; DEFENCE shows militia none, watch none, garrison none",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/power/rulingStructure.js",
+"line": 558,
+"fn": "generatePowerStructure"
+}
+},
+{
+"id": "12246",
+"sev": "MED",
+"n": 6,
+"town": "r2s-infiltrated-metropolis-3",
+"section": "Journal/Power",
+"fold": "High Theocratic Council (governing): A grand council of senior officials, guild masters, and appointed magnates governs the metropolis; the council is always split into camps, and real power shifts between blocs.",
+"text": "High Theocratic Council (governing): A grand council of senior officials, guild masters, and appointed magnates governs the metropolis; the council is always split into camps, and real power shifts between blocs.",
+"why": "High Theocratic Council is Dominant yet described as a council of guild masters and magnates 'always split into camps'; legitimacy Approved",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/rulingStructure.js",
+"line": 345,
+"fn": "generatePowerStructure"
+}
+},
+{
+"id": "11934",
+"sev": "MED",
+"n": 5,
+"town": "r2s-plague_onset-hamlet-0",
+"section": "Journal/NPC 1",
+"fold": "Has been hunting on land that belongs to someone else and selling the game in the market: The landowner has found the snares and is asking who set them",
+"text": "Has been hunting on land that belongs to someone else and selling the game in the market: The landowner has found the snares and is asking who set them",
+"why": "game sold 'in the market'; HOUSES has no market and the town is under plague",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 1645,
+"fn": "ROWS"
+}
+},
+{
+"id": "25617",
+"sev": "MED",
+"n": 5,
+"town": "r2r-city-43",
+"section": "Journal/Power",
+"fold": "The Commercial Circle: Craft guilds regulating production and apprenticeships; a reliable secondary presence in civic life.",
+"text": "The Commercial Circle: Craft guilds regulating production and apprenticeships; a reliable secondary presence in civic life.",
+"why": "describes The Commercial Circle as craft guilds, a reliable secondary presence; Craft Guilds is its own power in QUARRELS, in high conflict with it, and the Circle is Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/rulingStructure.js",
+"line": 630,
+"fn": "generatePowerStructure"
+}
+},
+{
+"id": "17039",
+"sev": "MED",
+"n": 4,
+"town": "r2s-occupied-metropolis-1",
+"section": "Journal/Power",
+"fold": "Military/Guard: Significant military presence; officers hold political influence disproportionate to formal civic rank.",
+"text": "Military/Guard: Significant military presence; officers hold political influence disproportionate to formal civic rank.",
+"why": "Military/Guard 'significant presence', officers hold influence; GOVERNMENT lists Military/Guard as Suppressed under occupation",
+"kinds": [
+"BROKEN",
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/rulingStructure.js",
+"line": 552,
+"fn": "generatePowerStructure"
+}
+},
+{
+"id": "25916",
+"sev": "MED",
+"n": 4,
+"town": "r2r-city-23",
+"section": "Journal/Power",
+"fold": "The Merchant Bloc: Craft guilds regulating production and apprenticeships; a reliable secondary presence in civic life.",
+"text": "The Merchant Bloc: Craft guilds regulating production and apprenticeships; a reliable secondary presence in civic life.",
+"why": "describes The Merchant Bloc as craft guilds regulating apprenticeships, a reliable secondary presence; GOVERNMENT lists Craft Guilds separately and The Merchant Bloc as Suppressed",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/rulingStructure.js",
+"line": 630,
+"fn": "generatePowerStructure"
+}
+},
+{
+"id": "21444",
+"sev": "MED",
+"n": 2,
+"town": "r2r-hamlet-18",
+"section": "Journal/NPC 2",
+"fold": "Pays the people who collect the salt tax to count fewer sacks than leave the works: When the counts are checked, the salt master and the collectors will go down together",
+"text": "Pays the people who collect the salt tax to count fewer sacks than leave the works: When the counts are checked, the salt master and the collectors will go down together",
+"why": "sacks of salt leaving the works are counted; LAND gaps say the salt works lacks its salt input (salt flats absent)",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 1094,
+"fn": "ROWS"
+}
+},
+{
+"id": "25719",
+"sev": "MED",
+"n": 2,
+"town": "r2r-city-25",
+"section": "Journal/Power",
+"fold": "The Free Alliance: Resident agent of the external creditor; formally an observer, in practice a veto on fiscal decisions.",
+"text": "The Free Alliance: Resident agent of the external creditor; formally an observer, in practice a veto on fiscal decisions.",
+"why": "describes The Free Alliance as the creditor's resident agent; GOVERNMENT lists a separate Creditor's Representative, and the Alliance has its own convenor",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/stressFactions.js",
+"line": 127,
+"fn": "applyStressEventFactions"
+}
+},
+{
+"id": "00956",
+"sev": "MED",
+"n": 2,
+"town": "r2s-indebted-city-3",
+"section": "Journal/Tonight",
+"fold": "<N> (the foundling-mother",
+"text": "Franz Lehmann (the foundling-mother",
+"why": "Franz Lehmann is (m) in PEOPLE but printed with the female title 'the foundling-mother'",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/faceHonorifics.js",
+"line": 138,
+"fn": "FACE_HONORIFICS.the foundling-mother"
+}
+},
+{
+"id": "12380",
+"sev": "MED",
+"n": 1,
+"town": "r2s-insurgency-thorp-1",
+"section": "Journal/Tonight",
+"fold": "Holds the seat): Secret: Knows of a path over the hills that no # else uses, and guides people across it for a fee.",
+"text": "Holds the seat): Secret: Knows of a path over the hills that no one else uses, and guides people across it for a fee.",
+"why": "'a path over the hills': terrain is Plains; LAND lists no hills or pass",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 1559,
+"fn": "ROWS"
+}
+},
+{
+"id": "23580",
+"sev": "MED",
+"n": 1,
+"town": "r2s-plague_onset-village-2",
+"section": "PDF/NotableNPCs",
+"fold": "Sells leather to anyone; cash only.",
+"text": "Sells leather to anyone; cash only.",
+"why": "tanner 'sells leather'; LAND gaps say the tannery lacks access to livestock and to animal hides",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 920,
+"fn": "ROWS"
+}
+},
+{
+"id": "23594",
+"sev": "MED",
+"n": 1,
+"town": "r2s-plague_onset-village-2",
+"section": "Journal/NPC 3",
+"fold": "Sells thin leather as thick by stretching it on the frame and selling it by the hide: The cobblers and saddlers who bought it would know the moment it wore through",
+"text": "Sells thin leather as thick by stretching it on the frame and selling it by the hide: The cobblers and saddlers who bought it would know the moment it wore through",
+"why": "tanner sells thin leather by the hide; LAND gaps say the tannery lacks livestock and animal hides, so it has no leather to sell",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 914,
+"fn": "ROWS"
+}
+},
+{
+"id": "11991",
+"sev": "MED",
+"n": 1,
+"town": "r2s-mass_migration-village-2",
+"section": "Journal/NPC 3",
+"fold": "Has been taking children to tread the clay for a few coppers a day, and # of them was hurt badly: The child's family took the money to keep quiet, and the money has run out",
+"text": "Has been taking children to tread the clay for a few coppers a day, and one of them was hurt badly: The child's family took the money to keep quiet, and the money has run out",
+"why": "children treading clay for the brickmaker; LAND gaps give the Brickmaker no access to clay",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 222,
+"fn": "ROWS"
+}
+},
+{
+"id": "10879",
+"sev": "MED",
+"n": 1,
+"town": "r2r-village-16",
+"section": "PDF/NotableNPCs",
+"fold": "Generous with a cup and with talk; hears everything the taverns say.",
+"text": "Generous with a cup and with talk; hears everything the taverns say.",
+"why": "'hears everything the taverns say'; HOUSES has no ale house, tavern or inn",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/data/people/titleSecretsPresentations.js",
+"line": 273,
+"fn": "ROWS"
+}
+},
+{
+"id": "05973",
+"sev": "MED",
+"n": 1,
+"town": "r2s-recently_betrayed-town-0",
+"section": "Journal/Plot Hooks",
+"fold": "Bread went up twice this month, and a baker says he was told to raise it. (Religious Authorities vs Craft Guilds)",
+"text": "Bread went up twice this month, and a baker says he was told to raise it. (Religious Authorities vs Craft Guilds)",
+"why": "a baker is told to raise bread prices; HOUSES has no Bakers",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/power/conflictIssues.js",
+"line": 132,
+"fn": "BASE_ISSUES"
+}
+},
+{
+"id": "05970",
+"sev": "MED",
+"n": 1,
+"town": "r2r-town-10",
+"section": "Journal/Plot Hooks",
+"fold": "Bread went up twice this month, and a baker says he was told to raise it. (Merchant Guilds vs Military/Guard)",
+"text": "Bread went up twice this month, and a baker says he was told to raise it. (Merchant Guilds vs Military/Guard)",
+"why": "a baker raises bread; HOUSES has no bakers or bakery (butchers, mills only)",
+"kinds": [
+"LACKS"
+],
+"writer": {
+"file": "src/generators/power/conflictIssues.js",
+"line": 132,
+"fn": "BASE_ISSUES"
+}
+},
+{
+"id": "20049",
+"sev": "MED",
+"n": 1,
+"town": "r2r-city-19",
+"section": "Journal/Plot Hooks",
+"fold": "Neither has refused yet. (Religious Authorities vs Royal Authority)",
+"text": "Neither has refused yet. (Religious Authorities vs Royal Authority)",
+"why": "'Neither has refused yet' for Religious vs Royal; QUARRELS and 22559 say rites are already refused to the other power's members",
+"kinds": [
+"PAIR"
+],
+"writer": {
+"file": "src/generators/power/conflicts.js",
+"line": 43,
+"fn": "buildConflictPlotHooks"
+}
+},
+{
+"id": "25733",
+"sev": "MED",
+"n": 1,
+"town": "r2s-occupied-metropolis-3",
+"section": "Journal/Power",
+"fold": "The Garrison Bloc: External administrative body; all significant decisions require approval or reversal.",
+"text": "The Garrison Bloc: External administrative body; all significant decisions require approval or reversal.",
+"why": "describes The Garrison Bloc as an external administrative body whose approval is needed; GOVERNMENT lists it as a local Minor power, the Occupation Authority being the outside one",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/stressFactions.js",
+"line": 90,
+"fn": "applyStressEventFactions"
+}
+},
+{
+"id": "25872",
+"sev": "MED",
+"n": 1,
+"town": "r2s-indebted-metropolis-0",
+"section": "Journal/Power",
+"fold": "The Independent Bloc: Resident agent of the external creditor; formally an observer, in practice a veto on fiscal decisions.",
+"text": "The Independent Bloc: Resident agent of the external creditor; formally an observer, in practice a veto on fiscal decisions.",
+"why": "calls The Independent Bloc the creditor's resident agent; PEOPLE gives that role to Creditor's Representative, while the Bloc has its own speaker",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/stressFactions.js",
+"line": 127,
+"fn": "applyStressEventFactions"
+}
+},
+{
+"id": "25630",
+"sev": "MED",
+"n": 1,
+"town": "r2s-indebted-metropolis-2",
+"section": "Journal/Power",
+"fold": "The Common Interest: Resident agent of the external creditor; formally an observer, in practice a veto on fiscal decisions.",
+"text": "The Common Interest: Resident agent of the external creditor; formally an observer, in practice a veto on fiscal decisions.",
+"why": "calls The Common Interest the creditor's resident agent; PEOPLE gives that role to Creditor's Representative, the Common Interest has a commoners' tribune",
+"kinds": [
+"STATE"
+],
+"writer": {
+"file": "src/generators/power/stressFactions.js",
+"line": 127,
+"fn": "applyStressEventFactions"
+}
+}
+]

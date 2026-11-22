@@ -1,0 +1,41 @@
+{
+  "background_color": "#fff",
+  "display": "standalone",
+  "orientation": "any",
+  "name": "SettlementForge Map",
+  "short_name": "SettlementForge Map",
+  "description": "Interactive fantasy map generator for SettlementForge",
+  "scope": "/map/",
+  "start_url": "/map/",
+  "icons": [
+    {
+      "src": "images/icons/icon_x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "images/icons/maskable_icon_x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "images/icons/maskable_icon_x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "images/icons/maskable_icon_x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "images/icons/maskable_icon_x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

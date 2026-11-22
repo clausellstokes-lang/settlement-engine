@@ -1,0 +1,160 @@
+{
+  "pool": {
+    "id": "npcData.NPC_PRESENTATION_MODES",
+    "file": "src/data/npcData.js",
+    "drawKind": "R",
+    "drawSite": "npcGenerator.js:844-846 pickRandom2",
+    "colour": true,
+    "crisisScoped": false,
+    "keyDeclares": {},
+    "lines": 18,
+    "declaring": 0,
+    "note": "Surface presentation impressions/behaviours; every line is colour."
+  },
+  "rows": [
+    {
+      "id": "dangerous_presents_safe#0.impression",
+      "text": "Genuinely helpful, or indistinguishable from it. Knowledgeable, generous with information, nothing that raises concern.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "dangerous_presents_safe#0.behaviour",
+      "text": "Volunteers information before you ask. Seems invested in your success here.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "dangerous_presents_safe#1.impression",
+      "text": "Friendly and community-minded. The kind of person other residents speak well of.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "dangerous_presents_safe#1.behaviour",
+      "text": "Knows everyone, introduces you to people, seems like the natural first contact for newcomers.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "dangerous_presents_safe#2.impression",
+      "text": "Warm, a little effusive. The first person to make you feel you've arrived somewhere safe.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "dangerous_presents_safe#2.behaviour",
+      "text": "Asks good questions about your journey. Remembers the answers.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "compromised_presents_professional#0.impression",
+      "text": "Efficient and correct in every interaction. The manner of someone following procedure.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "compromised_presents_professional#0.behaviour",
+      "text": "Processes requests quickly. Doesn't ask about things that aren't their business.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "compromised_presents_professional#1.impression",
+      "text": "Reserved. Appropriately cautious with strangers. You would be too, in their position.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "compromised_presents_professional#1.behaviour",
+      "text": "Asks reasonable questions. Gives reasonable answers. Nothing out of the ordinary.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "compromised_presents_professional#2.impression",
+      "text": "Busy. The impression of someone with real responsibilities who is giving you an appropriate portion of their attention.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "compromised_presents_professional#2.behaviour",
+      "text": "Helpful within the limits of their role. Refers you to others for anything outside it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "significant_presents_ordinary#0.impression",
+      "text": "Unremarkable. The particular invisible quality of someone who has spent years not being noticed.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "significant_presents_ordinary#0.behaviour",
+      "text": "Answers questions. Asks nothing. Remembers more than they show.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "significant_presents_ordinary#1.impression",
+      "text": "Tired and ordinary. The manner of someone who is carrying less than they are.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "significant_presents_ordinary#1.behaviour",
+      "text": "Cooperative. Unassuming. Easy to overlook.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "significant_presents_ordinary#2.impression",
+      "text": "Quiet, neighbourly. The impression of someone with a small life and modest concerns.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "significant_presents_ordinary#2.behaviour",
+      "text": "Helpful in the small practical ways that don't invite scrutiny.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    }
+  ]
+}

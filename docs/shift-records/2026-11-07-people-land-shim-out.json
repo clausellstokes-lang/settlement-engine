@@ -1,0 +1,28 @@
+{
+  "_doc": "RECORD 6 OF THE PEOPLE CAR'S LANDING (PEOPLE-LAND, second seat), ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; PEOPLE-RULINGS M-1: one record per lane-cause, signed once at the landing from the stage at the lane's first-parent point; M-3). THE CAUSE, ONE: the landing's step 1, PEOPLE-LAND SHIM OUT (docs/PEOPLE_LAND_2026-11-07.md §3; commit 2981f23f6): shimLegacyFactionFields, generateFactions and relinkFactionMembers deleted, mergeNPCLists' field writes gone, factionRoles.js (the pre-law office path) ranking the powers alone with coverage by first-rank membership. Measured on four moved rows the only differing path is npcs[].memberships (the pre-law office path's ranks); the grouping and the five fields had already left the record at record 5B's v2 boundary. THE MOVE, MEASURED before the write by scripts/audit/landing-stage.sh measure at the stage of 1adf403e4 (record 5b's post-state) and at the stage of 2981f23f6: the generator golden master 180 of 525 (thorp 12, hamlet 84, village 72, city 12) rows, 8dc527fd.. -> c7c11b0b..; the espionage fence's driven corpus 98 of 360 (thorp 13, hamlet 52, village 25, city 8), 973c37d9.. -> 407609f4..; the herald desk 470 -> 470 keys (+0 -0, 0 moved); the dossier prose manifest 312 of 1,050 (hamlet 168, village 144); the PDF view-model snapshot 0; the preset lighting witness 0. The landing's later commits (da2a8f967..1994a2ef5: registers, Register VII v2 with densityBands.js byte-identical, the record) and the L0 merge of PEOPLE-6 LINKS (display-only, proven 525/525 unmoved) move no golden byte: the stage of 1994a2ef5 equals this one on all six surfaces.",
+  "ownerWords": "for every appropriate institution, we generate one NPC … I think just one person per institution. They act as the face. We are not building all the citizens of a settlement. That's too granular and the DM can do that work themselves. We are simply making representatives.",
+  "ownerDate": "2026-11-07",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's people-model charter of 2026-11-07, PEOPLE-RULINGS §0; the owner's delegation of 2026-11-06 to the cloud chair, session 01FE9mEvGxnFx6WTBkEC6ie9; the people car's landing)",
+  "cause": "the landing's step 1, PEOPLE-LAND SHIM OUT (2981f23f6): the shim deleted (M-2's end), the grouping's generator and the relink gone, the pre-law office path ranking the powers alone",
+  "seat": "PEOPLE-LAND second seat (Opus 5.5) under the cloud chair (Fable 5.1), session 01FE9mEvGxnFx6WTBkEC6ie9, from the stage at 2981f23f6",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    },
+    {
+      "surface": "dossier-prose-manifest",
+      "action": "re-record",
+      "predictedRows": 2,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}
