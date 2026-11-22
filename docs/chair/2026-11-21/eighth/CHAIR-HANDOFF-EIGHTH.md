@@ -283,6 +283,24 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   named ceiling or budget that moved; it judges nothing; THE CHAIR READS IT BEFORE IT PUSHES THE LINE. Run over this
   chair's own landings (a64619510 to f5295e425, points 87 to 93): census counts, scan statistics, pool line counts
   and the ruled `HAND_CEILING` only: nothing raised unread.
+- E23 · E21's TWO PROOFS, RULED ON THE SEAT'S FINDINGS (2026-11-22 04:27 UTC; the chair read `publicSafe.js :: toPublicSafe` on the lane's tip).
+  THE CAUSES: no arm runs every kind and cause served against a possible world; the exemption stands on the STATIC
+  walker, `tests/domain/display/tensionCauseAtoms.walker.test.js` ("no row reads a withholdable fact without an atom
+  answering it on every wording, but those on the exemption list"): total over rows by count, red on a new row; a
+  born served run only samples. The reader reads only the document in hand, so what is left to prove is that no
+  predicate reaches a withholdable fact past the vocabulary. The entry's reason NAMES the three rows that are LISTED
+  and not parity-held (criminal_power and the two power-read rows: the seventh chair's ruling 9): the security
+  reader rules them at the join. THE HOOKS: THE OWNER'S REVEAL SHARE PRINTS THEM (`toPublicSafe` with `full`, the
+  gallery's `gallery_share_dm`); the default read strips them (`PRIVATE_KEY_RE`). NO THIRD CLASS: the header's own
+  class 'trouble' says "its hooks are dropped on a public page". WHAT MAKES THE REVEAL SHARE HARMLESS IS THAT IT
+  VEILS NOTHING (the full branch is the owner's whole record less a few private blobs; `publicVeilPass` runs only in
+  the default branch): no read both prints a hook and hides a house. THE PROOF REQUIRED, one new arm, red first, both
+  halves: (A) every shared projection but the full reveal carries no hook of a trouble; (B) the full reveal holds a
+  veiled card's house and a hidden power's name exactly as the owner's record does. (B) is the half that matters: the
+  day anyone veils the full read it reds and the exemption falls with it. If (B) is false in any respect: no entry,
+  and the seat says what is withheld. FOR THE SECURITY READER'S LIST AT THE JOIN: the three listed cause rows; the
+  hideable hooks; whether any hook template names a person (a per-member override in full mode reduces that member's
+  card only).
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
