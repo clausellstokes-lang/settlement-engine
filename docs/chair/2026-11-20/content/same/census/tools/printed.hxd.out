@@ -1,0 +1,21 @@
+# SUPERSEDED by printed2.hxd.out (containment); this word-for-word reading missed label-prefixed lines.
+economicState.safetyProfile.safetyDesc	PRINTED	t:50/50 top72% h:50/50 top60% v:50/50 top72% t:50/50 top72% c:50/50 top66% mm:50/50 top74%	Systems/Defense
+economicState.safetyProfile.economicDragDesc	PRINTED	t:0/3 h:1/8 top100% v:0/8 t:3/28 top67% c:7/46 top57% mm:5/50 top60%	Systems/Economics
+economicViability.dependencies[].title	NOT PRINTED	t:0/0 h:0/0 v:0/9 t:0/10 c:0/50 mm:0/50	
+economicViability.dependencies[].description	NOT PRINTED	t:0/0 h:0/5 v:0/30 t:0/32 c:0/50 mm:0/50	
+economicViability.dependencies[].impact	NOT PRINTED	t:0/0 h:0/5 v:0/30 t:0/32 c:0/50 mm:0/50	
+economicViability.dependencies[].suggestedFixes	NOT PRINTED	t:0/0 h:0/5 v:0/30 t:0/32 c:0/50 mm:0/50	
+economicViability.warnings[].description	NOT PRINTED	t:0/0 h:0/0 v:0/0 t:0/45 c:0/50 mm:0/49	
+economicState.tradeDependencies[].impact	PRINTED	t:0/0 h:2/16 top100% v:0/5 t:3/50 top100% c:2/50 top100% mm:4/50 top75%	Systems/Services
+economicState.activeChains[].entrepotNote	PRINTED	t:1/1 top100% h:8/8 top75% v:10/10 top60% t:26/26 top69% c:44/44 top91% mm:45/45 top89%	Systems/Economics,pdf
+npcs[].activeConstraint	NOT PRINTED	t:0/49 h:0/48 v:0/50 t:0/48 c:0/37 mm:0/40	
+npcs[].structuralPosition	PRINTED	t:50/50 top56% h:49/49 top39% v:50/50 top42% t:50/50 top66% c:46/46 top76% mm:46/46 top74%	World/NPCs
+spatialLayout.quarters[].desc	NOT PRINTED	t:0/44 h:0/50 v:0/50 t:0/50 c:0/50 mm:0/50	
+settlementReason[]	PRINTED	t:50/50 top36% h:50/50 top24% v:50/50 top14% t:50/50 top14% c:50/50 top100% mm:50/50 top98%	Summary/Overview,pdf
+history.founding.foundedBy	PRINTED	t:50/50 top36% h:50/50 top44% v:50/50 top28% t:50/50 top30% c:50/50 top34% mm:50/50 top46%	pdf
+history.founding.overcoming	PRINTED	t:46/46 top35% h:44/44 top30% v:44/44 top30% t:50/50 top32% c:49/49 top39% mm:50/50 top30%	pdf
+powerStructure.factionRelationships[].narrative	PRINTED	t:1/1 top100% h:7/7 top29% v:50/50 top66% t:50/50 top76% c:50/50 top76% mm:50/50 top98%	Systems/Power
+powerStructure.factions[].desc	PRINTED	t:50/50 top54% h:50/50 top34% v:50/50 top82% t:50/50 top80% c:50/50 top82% mm:50/50 top100%	Systems/Power,pdf
+history.currentTensions[].plotHooks[]	PRINTED	t:50/50 top12% h:49/50 top20% v:50/50 top14% t:50/50 top30% c:50/50 top54% mm:50/50 top54%	Summary/Plot Hooks,pdf,session
+history.currentTensions[].lastingEffects[]	PRINTED	t:6/34 top50% h:7/37 top29% v:12/31 top17% t:7/47 top29% c:17/47 top12% mm:27/50 top15%	pdf
+stress.cast.stakes[].reason	NOT PRINTED	t:0/11 h:0/19 v:0/14 t:0/15 c:0/14 mm:0/14	

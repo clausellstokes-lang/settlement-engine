@@ -65,9 +65,12 @@ export const TENSION_CAUSE_HOLDS = Object.freeze({
   lawCriticalOrCollapsed: (record, facts) => facts.lawBand === 'critical' || facts.lawBand === 'collapsed',
   rivalRings: (record, facts) => facts.rivalRings === true,
   noForceKept: (record, facts) => !facts.orderForce.kept,
+  // CAUSES-PARITY B (PAGE-12, the brief CAUSES-PARITY-2): its SERVED arms alone. `orderForce.payCut` reads
+  // `npcs[].settlementCondition`, which no shared read serves, and its served restatement is not exact (measure M: 14 of
+  // 900), so the cut is no arm of this row; `orderForce.js` is left as it is.
   forceUnpaidOrCut: (record, facts) => {
     const force = facts.orderForce;
-    return force.kept && (force.volunteers || force.payCut || force.pay === 'short' || force.pay === 'unpaid');
+    return force.kept && (force.volunteers || force.pay === 'short' || force.pay === 'unpaid');
   },
   militiaNoGarrison: (record, facts) => facts.defence.militia && !facts.defence.garrison,
   // ── the houses (the live roster) ──

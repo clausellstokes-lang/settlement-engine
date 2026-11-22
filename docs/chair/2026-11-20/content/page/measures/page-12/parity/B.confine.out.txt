@@ -1,0 +1,1 @@
+## hxd: documents 900 · identical 900 · with a non-string difference 0 · differing strings 0 · of them passing the word check (none) 0 · other 0

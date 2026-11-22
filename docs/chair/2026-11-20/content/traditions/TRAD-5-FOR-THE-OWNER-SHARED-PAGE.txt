@@ -1,0 +1,21 @@
+WHAT MOVED SINCE THE FIRST CUT. One: no town now prints the same sentence in two of its traditions (before, 94
+of 432 towns did). A later tradition takes the next wording (141 descriptions moved); a keeper's fourth or fifth
+tradition reads "too" (8 times); where the wordings about income run out, the income is left out (11 times). Two:
+no opening sentence says "kept" or "keeps" twice (before, 13 rites). Three: all 387 founding sentences now end on
+who founded the place. Four: the wordings are spread more evenly; "A common feast" was picked for 55 percent of
+feasts, now 24 percent. Nothing new was invented: every sentence still states only what the town's record holds.
+
+WHAT A SHARED PAGE'S TRADITION DESCRIPTIONS NO LONGER SAY (for the owner; TRAD-5's re-cut of TRAD-4's page, written 2026-11-20 19:37 UTC)
+
+Your own page still says, in every description, everything the town's record holds. A page you share (the public view or the party link) shows the same traditions, but each one's description is written so
+that nothing you might hide later can slip out through it, so it leaves out three things. It never says who founded the
+town: where your page reads, for example, "It has been kept since the town was founded, 276 years ago, by the river
+guild.", the shared page reads "It has been kept since the town was founded, 276 years ago." It never gives a remembered
+disaster its own name: where your page says, for example, "in memory of the Burning of Lowgate", the shared page says
+"in memory of the great fire" (likewise "the siege", "the flood", "the years of sickness"). And it leaves off a
+tradition that stands only on a market or other house whose use you set yourself, or on a house of a kind you can hide
+whole (a criminal or clandestine one): the shared page lists only the traditions it can stand behind without them. The
+first cut counted, in the 432 sample towns the engine makes on its own, 0 towns showing a shorter list of traditions on
+the shared page than on yours. That count was NOT RE-RUN for this cut: no measuring tool of this lane counts it town by
+town. What was re-taken: across the 432 towns, the shared page shows 1,232 traditions and your page 1,232. The rule only
+bites on a town you have edited by hand.

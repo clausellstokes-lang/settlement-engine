@@ -88,24 +88,24 @@ export const TENSION_CAUSES = Object.freeze({
         Object.freeze({ text: 'Smugglers ply their trade here, boats can reach the place by water, and crime is rising.', needs: ['house: smuggling', 'navigable'] }),
       ]) }),
       Object.freeze({ id: 'underground', rank: 2, holds: 'undergroundHouse', hideable: true, wordings: Object.freeze([
-        Object.freeze({ text: 'Crime is rising, and tunnels beneath the place give it somewhere to hide.' }),
-        Object.freeze({ text: 'Those outside the law have tunnels beneath this place, and crime is rising.' }),
+        Object.freeze({ text: 'Crime is rising, and tunnels beneath the place give it somewhere to hide.', needs: ['house: underground'] }),
+        Object.freeze({ text: 'Those outside the law have tunnels beneath this place, and crime is rising.', needs: ['house: underground'] }),
       ]) }),
       Object.freeze({ id: 'assassins', rank: 2, holds: 'assassinsHouse', hideable: true, wordings: Object.freeze([
-        Object.freeze({ text: 'Crime is rising, and killing can be bought here.' }),
-        Object.freeze({ text: 'In this place a killer can be hired, and crime is rising.' }),
+        Object.freeze({ text: 'Crime is rising, and killing can be bought here.', needs: ['house: assassins'] }),
+        Object.freeze({ text: 'In this place a killer can be hired, and crime is rising.', needs: ['house: assassins'] }),
       ]) }),
       Object.freeze({ id: 'black_market', rank: 2, holds: 'blackMarketHouse', hideable: true, wordings: Object.freeze([
-        Object.freeze({ text: 'Crime is rising, and there is a black market here.' }),
-        Object.freeze({ text: 'Illicit goods change hands at a black market in this place, and crime is rising.' }),
+        Object.freeze({ text: 'Crime is rising, and there is a black market here.', needs: ['house: black_market'] }),
+        Object.freeze({ text: 'Illicit goods change hands at a black market in this place, and crime is rising.', needs: ['house: black_market'] }),
       ]) }),
       Object.freeze({ id: 'whisper_market', rank: 2, holds: 'whisperMarketHouse', hideable: true, wordings: Object.freeze([
-        Object.freeze({ text: 'Crime is rising, and a whisper market here buys and sells what people know.' }),
-        Object.freeze({ text: 'There is a whisper market in this place, and crime is rising.' }),
+        Object.freeze({ text: 'Crime is rising, and a whisper market here buys and sells what people know.', needs: ['house: whisper_market'] }),
+        Object.freeze({ text: 'There is a whisper market in this place, and crime is rising.', needs: ['house: whisper_market'] }),
       ]) }),
       Object.freeze({ id: 'outlaws_near', rank: 2, holds: 'outlawsHouse', hideable: true, wordings: Object.freeze([
-        Object.freeze({ text: 'Crime is rising, and someone here deals with thieves or outlaws.' }),
-        Object.freeze({ text: 'Those outside the law have a contact or a hiding place here, and crime is rising.' }),
+        Object.freeze({ text: 'Crime is rising, and someone here deals with thieves or outlaws.', needs: ['house: outlaws'] }),
+        Object.freeze({ text: 'Those outside the law have a contact or a hiding place here, and crime is rising.', needs: ['house: outlaws'] }),
       ]) }),
     ]),
     plain: Object.freeze([

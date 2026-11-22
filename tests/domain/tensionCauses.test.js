@@ -63,7 +63,9 @@ crime_wave: [28, 'de7d5b90d47f4378'],
 });
 
 /** THE DECLARATIONS' PIN (addendum 3): the first 16 hex of the sha256 of every line's [needs, excludes, crisis], in order. */
-const DECLARED = '47a99aefd046293b';
+// PAGE-12 (CAUSES-PARITY-2 H, the chair's leave of 23:39 UTC 2026-11-21): the five house rows' wordings declare their house
+// (`house: underground`, `assassins`, `black_market`, `whisper_market`, `outlaws`): 47a99aefd046293b -> 433acc1d899a989a
+const DECLARED = '433acc1d899a989a';
 const kinds = Object.keys(TENSION_CAUSES);
 const allCauses = kinds.flatMap((k) => TENSION_CAUSES[k].causes.map((c) => ({ kind: k, ...c })));
 /** @param {ReadonlyArray<{ text: string }>} lines */

@@ -65,7 +65,7 @@ const LICENSED = new Set([
   // the facts, as the faith line words them
   'faith', 'keeps', 'keep', 'kept', 'at', 'people', 'folk', 'observances', 'rites',
   'church', 'churches', 'cleric', 'senior', 'rank', 'clergy', 'holds',
-  'powers', 'speaks', 'party', 'affairs',
+  'powers', 'speaks', 'party', 'affairs', 'are', 'marks', 'turn', 'gather', // the chair's ruling of 2026-11-20 17:38 UTC (the faith teaser)
 ]);
 
 const BLOCK = DOSSIER_STATE_PROSE_WAR_FAITH['DS-FTH-2'];
