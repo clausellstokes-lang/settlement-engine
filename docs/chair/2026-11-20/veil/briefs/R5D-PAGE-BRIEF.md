@@ -3,6 +3,19 @@
 By VEIL-34 on E115, E116, E121 (vetoable by the owner). Dispatched only after R5D-SQL's commit is read whole by the seat.
 
 ## WHAT YOU BUILD
+0. FIRST, THE GAP IN R5-RECENT (the chair's E128, from VEIL-34's review (H); one writer on `pageRederive.js`, no line of 212).
+   `pageRederive.js :: rederiveRecentConflict` (reader B) builds the sentence by `generatePowerStructure` from the served HOUSES and
+   config, never from the served powers. Its differential and name check (`galleryVeilRecent.pglite.test.js`, THE DIFFERENTIAL) ran on
+   house hides only. So a power an owner hid BY HAND is never judged on the page, and B is known to re-create a withheld power
+   (R5DESC-MEASURE: 930 of 1,410 hiding pages).
+   (a) RED FIRST: extend the differential and the name check to plant (b) `r5-owner`, to act T's jp6-city-8, and to planted hand hides
+   of a density host and of a noble power on born towns; say what reds.
+   (b) THE RULE FOR EVERY PAGE READER, not only this one: a page reader prints NO power's name and NO kind word of a power that the SERVED
+   roster does not carry. What B (or any reader) builds is cut to the served roster's rows before a sentence is drawn: the hidden rows
+   out, as if never there. A sentence that still needs a cut power is NOT DRAWN (toward withholding, never a mask).
+   (c) THE ARM, over the pool, the plants and act T, both engines: every string a page reader writes (`recentConflict`, the standing by
+   S, the crime lists, the picked bases of item 5b) names only served rows.
+   If (a) does not red, (b) and (c) are still built: the arm holds the class.
 1. THE PAGE READER S: `pageRederive.js :: rederiveStanding(doc, {authoritative})`: each served power's standing re-derived by the engine's
    own writer (`rosterText.js :: standingRosterOf` / `factionStanding.js :: annotateFactionStanding`, as R5DESC-MEASURE's S) over the
    SERVED roster with every `hidden: true` row OUT (as if never there), appended to the served base. Wired where `rederiveCrimeTypes` and
