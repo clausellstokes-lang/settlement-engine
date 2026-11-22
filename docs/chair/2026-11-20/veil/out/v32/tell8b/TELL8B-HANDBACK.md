@@ -71,7 +71,8 @@ This sitting: unit (viii), steps 2 and 3 assigned. **NO RED AND NO CURE WRITTEN*
   hook served on 24 of 24 pool reads of 0-65); the build's figures, typecheck and eslint <this commit>
   (first paint raw 1,175,552 at tip and cure, +0; gzip +20 and Brotli -105 from the entry's references to re-hashed lazy
   chunk names only (cmp equal once normalised); worker 2,579,751 +0; the five VERIFY_DIST reds are the tip's own;
-  typecheck 167/167 exit 0; eslint 0 on the nine touched files); tests/lint whole to come.
+  typecheck 167/167 exit 0; eslint 0 on the nine touched files); c676a1048; tests/lint WHOLE at the cure <this commit>
+  (08:43:42): 16 files / 22 tests failed of 3,267, EXACTLY the sixteen standing (the seat's 3cca025b8 list); mine 0.
 
 ## RECEIPTS
 - 212 unchanged: `8688ddb6148e84baaeee6f9cdcd89fec40a382c390f44133affa15ae66cc5a3a`. No template made, no database touched, no
