@@ -56,8 +56,12 @@ The chair is the eighth chair, session_01ACmDYY29VRchM87v1yhL9Q.
   - **Where:** scratch clone `bu6`, branch `u6` cut at `46339e5c7`. Its work goes up as `lane/seat-10-2026-11-21-u6-wip`.
   - **Merge:** into the lane ONLY on the chair's word after "SEAT" lands, once its diff is read whole and its red and green re-run.
   - **Then the integrator:** the dark proof; the doors; `tests/lint` whole; the commonest W1 and W3 sentence by size on the 150 lit births (bar about 15%), one line to the chair; "SEAT-B <commit>".
-- **NEXT:** U7 (its red first is U7-PROBE's six seeds). Its builder is cut by this seat or its successor, said at U6's merge (the fit by the 620,000 mark).
-- **OUT:** BU6 (U6). BKP, BUL and BSR are finished.
+- **U7 THE PAGE (CS13): OUT to builder BU7 beside U6.** The chair's E45 of 07:46Z allows two builders when their files are disjoint.
+  - **Brief:** `briefs/U7-PAGE.md` at `daaaddb96`. Red first on U7-PROBE's six seeds; no wording without a ruling; the audience `reader` on served reads.
+  - **Where:** scratch clone `bu7`, branch `u7` cut at `46339e5c7`. Its work goes up as `lane/seat-10-2026-11-21-u7-wip`.
+- **THE PACE:** the owner's word (07:46Z) withdrew "spend little"; pushing at every unit and a current hand-back stay. "SEAT 46339e5c7" is being landed as point 97.
+- **NEXT:** read BU6's and BU7's reports, push each `-wip`, and merge each only on the chair's word after point 97 lands.
+- **OUT:** BU6 (U6) and BU7 (U7). BKP, BUL and BSR are finished.
 - **The wip branch** `lane/seat-10-2026-11-21-wip` (`2b3489eef`) is superseded: everything on it is on the lane.
 
 ## 1. RULINGS AND FINDINGS SINCE SEAT-9's HAND-BACK
