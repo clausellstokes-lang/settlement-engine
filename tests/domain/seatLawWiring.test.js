@@ -9,8 +9,8 @@
  * light is a later unit (U8), on the owner's word.
  *
  * THE ARMS, in the brief's order:
- *   1. CREATE (dark, the product path) — no `_seatLawVersion` on a birth, and `birthConfig(null)`
- *      byte-equal to the value `tests/domain/livingContentLawWiring.test.js` pins for it.
+ *   1. CREATE (dark, the product path) — no `_seatLawVersion` on a birth (its own key only: the one
+ *      pin of `birthConfig(null)` is `tests/domain/generationLawsSavedPlace.test.js` (g), E61 (5)).
  *   2. CREATE/CLAMP — an incoming `_seatLawVersion: 2` (the Library-Load hop, walked) is clamped
  *      away: an imported marker never decides a birth.
  *   3. READ — the closed membership read, from a config, a settlement's `config` and a
@@ -39,11 +39,6 @@ import {
   resolveSeatLawVersion,
   seatsByHolder,
 } from '../../src/domain/seat/seatLaw.js';
-import {
-  LIVING_CONTENT_LAW_CONFIG_KEY,
-  ROSTER_LIVING_CONTENT_LAW_VERSION,
-} from '../../src/domain/content/livingContentLawVersion.js';
-import { newSettlementDensityLaw } from '../../src/domain/density/densityLaw.js';
 import { isAllowedConfigKey } from '../../src/store/configSlice.js';
 // The Library's Load runs a saved `settlement._config` through this before `updateConfig`; the
 // clamp arm walks that hop rather than asserting about it (the living-content clamp arm's shape).
@@ -91,24 +86,17 @@ describe('the seat law (CS10) is WIRED and lands DARK', () => {
   });
 
   // ── 1. CREATE (dark) ─────────────────────────────────────────────────────────
-  it('1. CREATE (dark): birthConfig carries no _seatLawVersion, and birthConfig(null) is byte-equal to its pinned value', () => {
+  it('1. CREATE (dark): birthConfig carries no _seatLawVersion — its own key only, on a config, null and undefined', () => {
     const born = birthConfig({ ...CONFIG });
     expect(Object.hasOwn(born, SEAT_LAW_CONFIG_KEY)).toBe(false);
     expect(born[SEAT_LAW_CONFIG_KEY]).toBeUndefined();
     expect(seatsByHolder(born)).toBe(false);
-    // The value `livingContentLawWiring.test.js` ("CREATE (LIT, the product path)") pins for
-    // `birthConfig(null)`, copied from that arm's own expression and not re-derived: the density
-    // mint's marker, then the living-content law's one key. Compared as BYTES as well as by
-    // deep equality, so a key the seat law added (or a key order it moved) reds here.
-    const pinned = {
-      ...newSettlementDensityLaw(),
-      [LIVING_CONTENT_LAW_CONFIG_KEY]: ROSTER_LIVING_CONTENT_LAW_VERSION,
-    };
-    expect(birthConfig(null)).toEqual(pinned);
-    expect(JSON.stringify(birthConfig(null))).toBe(JSON.stringify(pinned));
-    expect(JSON.stringify(birthConfig(undefined))).toBe(JSON.stringify(pinned));
-    // …and a real config is carried byte for byte, the seat law adding nothing to it.
-    expect(JSON.stringify(born)).toBe(JSON.stringify({ ...CONFIG, ...pinned }));
+    // ⭐ THE WHOLE VALUE OF `birthConfig(null)` IS PINNED ONCE, NOT HERE (CLOSE-1 JOIN, the chair's E61 (5),
+    // COMMON-RULES 14 (c)): `tests/domain/generationLawsSavedPlace.test.js` (g) pins it from every register row's own
+    // mint, dark and lit. This arm keeps the seat law's own key: absent on every birth while its dial is dark.
+    for (const empty of [null, undefined]) {
+      expect(Object.hasOwn(birthConfig(empty), SEAT_LAW_CONFIG_KEY), `birthConfig(${empty})`).toBe(false);
+    }
   });
 
   // ── 2. CREATE/CLAMP ──────────────────────────────────────────────────────────
