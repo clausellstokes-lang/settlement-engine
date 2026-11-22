@@ -41,11 +41,19 @@ name, until you sign: never a silent pass.
 
 **Signing 1: the OLD set (`generator-golden-master`), re-signed.** It births places the old way (without the new rules),
 so switching the rules on does not move it; it stays as the proof that saved places come out the same.
-- What moved: born today, NONE of its 525 places matches the fingerprints recorded on 2026-11-19, on the working line as
-  it stands, before any switch. The line's own work since that day moved them (it is the one golden row already red on
-  the line). The stored file keeps only fingerprints, so what changed inside each place cannot be read from it; the
-  chair can have a seat birth the same places at the 2026-11-19 record's commit and today, and read three out for you,
-  before you sign.
+- What moved (measured by a seat: births at the record's commit a7a25bd39 of 2026-11-19 reproduce all 525; today's line,
+  0 of 525): **only words, no facts.** In every one of the 525 places the name, size, population, wealth, the powers and
+  their strength, who governs, the number of people and the crisis are the same; 10 of the record's 40 parts read
+  differently, all of them text: the arrival scene (517 places), the people (501), the safety line (489), the pressure
+  line (487), the ties between people (468), the powers' descriptions (465), the conflicts (443), the history (422).
+  The causes, by what landed: powers now take "the" and a person's second mention becomes "he", "she" or a role
+  (point 77); verb agreement in goals (82); the arrival scene, goals, ties and secrets (83 to 85); the defence notes
+  (89); the safety line (91); people's position lines (93); the history's trouble hooks (96). The full table and three
+  places read out then and now: `close/close-2/oldmaster/OLD-MASTER-DIFF.md`.
+- **BEFORE YOU SIGN, A FAULT THIS SHOWED:** some sentences now put "her" or "him" where "she" or "he" belongs: "Haruto
+  Chen has asked Akemi Yang to back a candidate **her** distrusts". At the 2026-11-19 record there were none; today a
+  rough scan finds them in up to 237 of the 525 places. It comes from the change that turns a second mention of a
+  person into a pronoun (point 77). It is sent to the chair to be cured; signing the old set with it in would record it.
 - Its row in `tests/fixtures/.golden-freeze-register.json` exists already; your act re-writes its fingerprint and names
   your word.
 - The command, after your shift record exists (about a minute here):
