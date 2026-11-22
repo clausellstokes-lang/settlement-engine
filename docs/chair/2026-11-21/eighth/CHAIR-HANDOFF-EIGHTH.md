@@ -575,6 +575,19 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   `criminalInstitutions` with its red first and its converse (no shut grouping opens by it); the shared PDF from the
   re-derived copy through the one reader; a FRESH builder that reads 212 and the registry WHOLE before editing
   either. VEIL-32 read 425,311 at 06:12.
+- E42 · WHO RULES: WHAT THE LIT LAW NEEDS BEFORE THE FIRST DEPLOY, AND WHAT GOES TO THE SECOND (2026-11-22 07:21 UTC; E30's finish line applied to
+  the lane's own list, which SEAT-10 gave from SEAT-5 item 20 and SEAT-7's section 0). BEFORE THE FIRST DEPLOY: U6,
+  THE PROSE (CS12: `factionDynamics`' relation lines, `factionStanding`'s `contestedBy`, `castPowers`' contender
+  lines under the law; it cures two birth faults the sweep found: the law-1 `contestedBy` and `raiseToOfficeBand`);
+  and U7, THE PAGE (CS13: the ruling chain's naming on `PowerStrata.jsx`, `powerDeskRead`, `printProse`) ONLY IF ITS
+  TWENTY-MINUTE PROBE SHOWS A FAULT (after a kept-form transfer the chain may name the old house as ruler). SECOND
+  DEPLOY: U9 (a second card: a criminal ruler), U10 and U11 (the ordinary and the principal front), U12 (titles),
+  train 2 (U13, U14, CS21 with CS22 (b)). U8 IS THE FLIP: the chair's, at the close. THE SEAT'S PROMPT IS CHANGED IN
+  ONE RESPECT: U6 STARTS NOW on `lane/seat-10-2026-11-21-u6-wip` (cut from 46339e5c7), not after the landing: the
+  lane's own branch takes no commit under `src/` or `tests/` until "SEAT" is landed, and U6 is merged only then, on
+  the chair's word; its authored wordings come to the chair as a draft first; it lands as "SEAT-B <commit>". The
+  seat's record stands at about 360,000 by its own estimate: U6 and U7 must end under the word, or a successor is
+  seated between them.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
