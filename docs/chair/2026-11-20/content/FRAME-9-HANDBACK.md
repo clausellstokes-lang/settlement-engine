@@ -1,20 +1,24 @@
 # FRAME-9 — hand-back (the session sheet's lane, the owner after FRAME-8)
 
-Last written 2026-11-22T08:51:20Z (`date -u`) by FRAME-9 on `lane/frame-9-2026-11-22`. Seated by the eighth chair (session_01ACmDYY29VRchM87v1yhL9Q); the prompt is `docs/chair/2026-11-21/eighth/prompts/FRAME-9.txt` on `origin/lane/chair-2026-11-08` (9d7a3c1dd). A successor needs this file, that prompt and the briefs named here.
+Last written 2026-11-22T09:22:46Z (`date -u`) by FRAME-9 on `lane/frame-9-2026-11-22`. Seated by the eighth chair (session_01ACmDYY29VRchM87v1yhL9Q); prompt `docs/chair/2026-11-21/eighth/prompts/FRAME-9.txt` on `origin/lane/chair-2026-11-08` (9d7a3c1dd). A successor needs this file, that prompt and the briefs named here.
 
-## WHERE THE LANE STANDS
+## WHERE THE LANE STANDS (PARKED at the owner's word, relayed by the chair 09:08 UTC; resume only on "GO FRAME-9")
 
-- **The lane:** `lane/frame-9-2026-11-22`, pushed at `28cf667e0`, cut from FRAME-8's saved tip `b2dee95f5` (verified equal to origin `lane/frame-8-2026-11-20`; its code is `7e86f4d8c`).
-- **Unit 1, SR1's merge finished: IN FLIGHT.** The six `tests/lint` failures at `b2dee95f5` (4 files, 3,265 passed of 3,271: exactly FRAME-8's six) are cured, each by its door as its own commit:
-  - `a019eae28`: presumptionClasses, three rows re-keyed by hand, because the door has no move mode (`frame9/tools/rekey-moved-rows.mjs classes`).
-  - `ea7d49a8a`: the presumedThings widened register, three rows re-keyed by the same script with `widened`.
-  - `4af89997c`: the lighting census by its door (3,723 → 3,724 files, titles 31,348 → 31,359); the ordinary run reads 34 of 34.
-  - `28cf667e0`: the tuning inventory by its door. Dependents moved, no value; `FRAME_TUNING` measured in for the first time, unsigned. The ordinary run reads 76 of 76.
-  - RUNNING: `tests/lint` whole at `28cf667e0`; then, chained one at a time through the mutex, proof (c) the confinement (af2fc858f → 28cf667e0), ruling 69's first-paint proof (`frame9/tools/firstpaint-index.sh`), and proof (b)'s 2,592 against 2,541 (`frame9/tools/proofb-explain.sh`: FRAME-8's scripts run on SR1's own pair 334f9fb68 → 4eea702d8; SR1's own `proofB.mjs` was never committed).
-- **Unit 2, F3+F4: BUILDER OUT** (an Agent worktree on FRAME-9's box, branch `frame9-f3f4` from `ffd084a45`; brief `frame9/F3F4-BUILD-2.md`; it starts from the saved `9d494fc5e`).
-- **Unit 3, P1: BUILDER OUT** (an Agent worktree, branch `frame9-p1` from `28cf667e0`; brief `frame9/P1-BUILD.md`; it stops at `frame9/P1-LINES.txt` if a new wording is needed).
-- **NOT STARTED:** unit 4 (the line's merge as the chair sends it; then the mixed-pick commit and its re-measure); unit 5 (rule 8's run, "FRAME <commit>", the six sheets); unit 6 (F6, P2, P3a, P3b, P4b, SR2, as the chair releases them).
-- **NEXT STEP:** read the lint count line and the three proofs; commit their results to `frame9/SR1-FINISH-RESULTS.md`; report unit 1 to the chair.
+1. LANE `lane/frame-9-2026-11-22` at this commit (on FRAME-8's `b2dee95f5`, code `7e86f4d8c`). DONE AND PROVEN: the six re-keyed rows, by hand, because neither door can move a row (`a019eae28` classes, `ea7d49a8a` widened; proof `d40add0d5`: three rows re-keyed in each register, 0 other rows differ, 1785/4632 rows unchanged).
+2. The two doors are DONE AND PROVEN: lighting census `4af89997c` (3,723 → 3,724; 34/34) and tuning inventory `28cf667e0` (76/76; FRAME_TUNING measured in, unsigned).
+3. `tests/lint` WHOLE at `28cf667e0`: GREEN, 220/220 files, 3,271/3,271 tests.
+4. UNIT 1 STILL OWES THREE PROOFS, all UNRUN (the chain was stopped at the park, before it started):
+   - (c) confinement: `trees.mjs af2fc858f <tip> <dir> --words=none`;
+   - first paint: `frame9/tools/firstpaint-index.sh af2fc858f <tip> <dir>`;
+   - (b) 2,592 vs 2,541: `frame9/tools/proofb-explain.sh <dir>`.
+   Each runs through `scripts/gate-mutex.sh --run`.
+5. F3+F4 (unit 2): `lane/frame-9-2026-11-22-f3f4-wip` at `7625a3cf1`.
+   - F3 is built and GREEN where run: red first 4 titles; 118 files, 1,055 passed, 1 expected fail; W3 sheets naming the resource 0 → 26 of 26; stranger 330/330; calm owner 267/267.
+   - UNRUN: both typechecks, `tests/lint` whole, the lit-law measure (`frame8/tools/F3F4/litHall.mjs`).
+   - F4: NOT STARTED. Not yet read by FRAME-9.
+6. P1 (unit 3): `lane/frame-9-2026-11-22-p1-wip` at `5b3c4d3c3`. `frame9/P1-LINES.txt` (49 lines) is written and awaits the CHAIR'S RULING: the new face reasons; the hook's colon form, which needs `crisisHooks.js`, outside the manifest; and three cross-crisis links that move by construction. Nothing under `src/`; the pre-measure and proofs are unrun.
+7. NEXT STEP AT "GO": run the three proofs of item 4; then read 7625a3cf1 whole and resume the F3F4 builder (typechecks, `tests/lint`, F4); send P1-LINES.txt to the chair. Unit 4 then takes the line tip `git ls-remote` shows (2486d1301 at 08:54).
+8. My count: about 165k tokens used (own estimate).
 
 ## RULINGS IN FORCE (one list)
 
