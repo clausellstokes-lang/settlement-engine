@@ -15,7 +15,11 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
   `/var/tmp/v18/out/v33/chain1.sh` (VEIL-32's chain1 re-pointed: typecheck, eslint, walkers + manifest, arms Tell3+4+5, --check,
   verify, both gates, sv + hand rows + born, harnesses, the R3 gate, acceptance, `tests/lint` whole) to
   `/var/tmp/v18/out/v33/g/done.txt`. Copies of the scripts are VEIL-32's `out/v32/chain0.sh`, `after0.sh`, `chain1.sh` with
-  v32 -> v33. IN FLIGHT.
+  v32 -> v33. THE POOL STANDS (08:14-08:42, every shard rc=0; verify 45 / 0 differ). AT a2a2cb325 (src/supabase/tests = 3cca025b8):
+  GATE-1 4 of 92 at every gated setting, both reads, twin = server, 7 LOWER BY RULE (the same seven); GATE-2 20 of 40 cells red;
+  non-governing rows against the rule 0 (`/var/tmp/v18/out/v33/g/gates/tell2-table.txt`): EQUAL to the hand-back. Typecheck 0
+  (167/167), eslint 0, walkers + manifest 0, arms Tell3+4+5 0, --check 0. Sent to the chair 09:15. The rest of chain1 (sv + hand
+  rows + born, harnesses, the R3 gate, acceptance, `tests/lint` whole) IN FLIGHT.
 - (P) THE JOIN PROBE, PASS 1 (DARK): worktree `/home/user/wt/jp`, branch `lane/veil-33-2026-11-22-joinprobe-wip` (local), cut at
   ed027fca7, THE CHAIR'S PASS-1 REF (08:20 UTC) `lane/close-1-join-scratch-2026-11-22` AT THE COMMIT 4bba8781d (not its tip:
   CLOSE-1 adds register commits) merged in: the line f5295e425, stack-96 cc2f43aee, who rules as point 97 840020b9b, fortune's
@@ -25,19 +29,36 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
   neither); every one resolved toward the line (six tests, five registers): `out/v33/joinprobe/conflicts.md` on that branch. Five
   of the eleven are ruling 69's fixture-git files. Builder V33-JOINPROBE (brief `briefs/V33-JOINPROBE-BRIEF.md`) seated 08:1x to
   commit the merge, re-make the pool THERE (`/var/tmp/v18/t2/pool-jp1`), read both gates, run the green chain, measure E35's hook
-  gap, attribute every red. Pass 2 (lit) waits for CLOSE-1's lit scratch ref, which the chair names.
+  gap, attribute every red; its heavy runs wait for chain1's END. Pass 2 (lit) on 5c4419815 after pass 1, one pool at a time.
+  CLOSE-1 IS PARKED (the chair, 09:14): its register commits a349917e7 (over the dark join) and e987c3e36 (over the lit) are NOT
+  used: the probe takes the two commits the chair named.
 - (Q) UNITS (iv), (v), (vi) PREPARED: builder V33-Q (brief `briefs/V33-Q-BRIEF.md`), worktree `/home/user/wt/q`, branch `v33-q`
   (local, cut at 76fa9431b): measures on this seat's pool, red-first instruments (tests only; a new
-  `tests/security/galleryVeilTell6.pglite.test.js` for (iv)/(v); the tooth edits for (vi)). Pushed as `-wip` when it returns.
+  `tests/security/galleryVeilTell6.pglite.test.js` for (iv)/(v); the tooth edits for (vi)). PARKED 09:1x by the chair's order of
+  09:14 (THE OWNER'S WORD, verbatim: "Hey limit work to 6 children at a time. The way you're going full force might make small
+  progress on many without completing any"; the order: (0), pass 1, pass 2, then (Q), nothing beside it): its unrun work committed
+  at 96a4c4994 (WIP 85584d03d + `out/v33/q/Q-HANDBACK.md`'s PARKED section) and pushed UNREAD as
+  `lane/veil-33-2026-11-22-q-wip`: (iv) probe + analyzer written, never run; (v) probe modes written, Tell6 a skeleton (fails at
+  load); (vi) both teeth edited, never run. Resumed after pass 2 by a FRESH builder from that branch (the first spent ~348,000).
 - THE MACHINE: one heavy run at a time; the builders' heavy runs wait for the green chain's END and then go through
   `scripts/gate-mutex.sh --run`.
-- NEXT STEP IN ONE LINE: at chain1's gates, the one line to the chair (GATE-1 / GATE-2 at this tip against 4/92, 20/40); then
-  read each builder's return once and push its branch as `-wip`; at the chair's word of VEIL-32's hand-over, (H).
+- NEXT STEP IN ONE LINE: chain1's END; pass 1 (the builder's report read once, its branch pushed `-wip`); pass 2; (Q) from
+  `lane/veil-33-2026-11-22-q-wip` with a fresh builder, (iv) first; at the chair's word of VEIL-32's hand-over, (H).
 
-## 2. RULINGS SINCE PART 33 (none yet: this seat's rulings are PART 33's 86-91 and the chair's to come)
+## 2. RULINGS SINCE PART 33 (numbered on from 91, PART 33's last; the eighth chair's; each vetoable by the owner)
+92. THE CHAIR TO VEIL-33, 08:20 UTC: the probe's two refs are CLOSE-1's scratch refs, READ-ONLY, merged into the probe branch only:
+    PASS 1 `lane/close-1-join-scratch-2026-11-22` at 4bba8781d (points 94-96 + the chair's four test cures, who rules as point 97,
+    fortune's lane f13f31820 as a trial: both laws dark); PASS 2 `lane/close-1-lit-scratch-2026-11-22` at 5c4419815 (the same join,
+    the three dials flipped and nothing else; proven lit: `birthConfig` mints `_seatLawVersion` 2 and `_fortuneLawVersion` 2). The
+    commits, not the tips. Order: (0), pass 1, pass 2; one pool at a time. The mark: 700,000 by the chair's read.
+93. THE CHAIR TO VEIL-33, 09:14 UTC, THE OWNER'S WORD (verbatim above, section 1 (Q)): at most six children at work; the veil holds
+    two places. THIS SEAT, IN THIS ORDER AND NOTHING BESIDE IT: (0), pass 1 on 4bba8781d, pass 2 on 5c4419815, then (Q) with (iv)
+    first. CLOSE-1 is PARKED; its register commits a349917e7 / e987c3e36 are not the probe's refs (or JOINPROBE.md says why).
 
 ## 3. Log (every hour from `date -u`)
 - 08:05 seated; the assignment read (853ccbfa2 ancestor of the fetched chair branch). 08:06 chain0 launched.
 - 08:08 the reading-in done; the first message to the chair.
 - 08:09-08:14 the checkout unshallowed (needed for the merge); the probe's merge made and resolved (11 conflicts); the briefs written and committed (76fa9431b); both builders seated.
 - 08:20 the chair: the probe's two refs (pass 1 close-1-join-scratch 4bba8781d, pass 2 close-1-lit-scratch 5c4419815; the commits, not the tips); 08:21 the merge redone on 4bba8781d (the same eleven conflicts), the brief amended (dcc79a5a5), the builder told.
+- 08:42 the pool stood; chain1 launched. 08:50 both gates read (equal to the hand-back).
+- 09:15 the chair's 09:14 word read (ruling 93); the (0) line to the chair; the (Q) builder parked; its WIP pushed `-wip` unread.
