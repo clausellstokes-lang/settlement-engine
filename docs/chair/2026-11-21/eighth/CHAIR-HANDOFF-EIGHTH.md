@@ -1454,6 +1454,19 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   reeve); its share re-measured; if that is more than a few lines, L12 is cut from this landing and named for
   after the first deploy: the seat's count decides. The governance line's own title there is the seat lane's:
   `intake/AFTER-FIRST-DEPLOY.md` item 6.
+- E108 · THE DAILY LIFE LANE CHANGES SEATS WITH ITS LINES MERGED; ONE REGISTER RE-FROZEN BY ITS DOOR; L12 CUT (2026-11-22 17:57 UTC). DAILY-3: L8 MERGED at 44fbfba38 (the five office atoms in a lazy leaf; E95's
+  rows; the wiring stamp and the lighting census by their doors); the shared config read after its whole check:
+  nothing wrong. L12 IS CUT FROM THIS LANDING by its count (E107's other branch): L8 to L11 land; the steward's
+  answering row goes with it (`intake/AFTER-FIRST-DEPLOY.md` item 7). 4c (the PDF chapter) BUILT AND PROVED on
+  `lane/daily-3-2026-11-22-4c-wip` at 5c5ab5466 (red 2 of 2 then green; `tests/pdf` and `tests/architecture` whole
+  966 passed; the goldenViewModel snapshot holds); ONE STORED REGISTER MOVES: `scripts/.writer-reach-baseline.json`
+  row `yearsAgo on legacyAnnotations`, dossier-pdf N to R (`dailyLife.js :: deriveDailyLifeSlot` enters the PDF's
+  import set, 629 to 644 files; the chapter prints no age): RULED on E74's pattern: re-frozen BY ITS OWN DOOR, the
+  door's report showing that row alone, the cause in the commit, the PDF chunk's size before and after said; the
+  narrower import is a tidy-up after the first deploy (item 8). "DAILY-3 HANDS OVER b1bcb067d" at 17:56 (about
+  600,000). DAILY-4 SEATED AT 17:57 UTC (session_01ACmDYaBKhNdEcUSm1G57q1; `prompts/DAILY-4.txt`): the L12 cut;
+  4c's merge under this ruling; `tests/lint` whole at the tip; the line merged at the tip the chair names
+  (`HAND_CEILING` 77 and the lane's six: 83); the owner's file by `owner/owner-file.mjs`; rule 8; "DAILY-B".
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -1973,6 +1986,14 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
    asked for three lines. CLOSE-1: handed over (E104): its two builders finishing; CLOSE-2 at "CLOSE-1 DONE".
    THE SIX: VEIL-33, VEIL-34, FORTUNE-7, DAILY-3, CLOSE-1 (retiring), STACK-99. THE OWNER ASKED FOR PROGRESS IN
    PERCENT AND WAS ANSWERED (section 1). The chair's branch: origin equals local before this commit (9b9a7f47f).
+- 2026-11-22 17:57 UTC · NET 18. THE LANDING: "STACK-99 DOORS 04c270eae" at 17:07 (E106); its step e and f running; no final report yet. THE SIX: VEIL-33 (R5C5-SQL in; R5C6 building;
+   no line since 15:57: its count near its mark: asked at this net); VEIL-34 (its own pool equal to PART 34's; its
+   measures running); FORTUNE-7 (U8's cure in build; "FORTUNE-C" its own under E105); DAILY-4 (seated 17:57:
+   E108); STACK-99; CLOSE-2 (seated 17:42; read in for about 110,000; JOIN's re-runs running; GOLDEN-LIT next).
+   DONE AND QUIET: SEAT-10, CLOSE-1, DAILY-3, STACK-98, PAGE-12 (parked with "BAR7-2" named). THE NEXT STACK
+   (STACK-100) stands on 04c270eae and takes "JOIN", "FORTUNE-C" and "DAILY-B" as they come: it needs a place: the
+   one VEIL-33 frees at its hand-over. COMMON-EIGHTH 15 (a push names a local lane branch) sent to every working
+   seat. The chair's branch: origin equals local before this commit (23cf48191).
 
 ## 4. The order of the lanes still to seat, and what each waits on
 
@@ -2031,3 +2052,4 @@ LIFE PAGE stand unless he changes them (a saved AI account stays visible; the se
 | VEIL-34 | session_01ACmDYZ5m4beq8gsAMyMoZd | `lane/veil-33-2026-11-22` as it stood at 16:11 UTC on 2026-11-22 (beside VEIL-33) | `lane/veil-34-2026-11-22` | the share veil's next writer (E89, E92, E102): reads in, re-makes the pool, prepares R5-DESC and R4-IDS; the one writer of 212 from VEIL-33's hand-over line: R5-DESC, R4-IDS, (iv), (v), (vi), IMPORT-DOOR, "R3" |
 | STACK-99 | session_01ACmDYWhdEXf7vcmpySd5Yw | the working line `lane/join-2026-11-14` at c110dd85b (point 98) | `lane/stack-99-wip-2026-11-22` | A LANDING ON ITS OWN MACHINE (E103): points 99 to 102 under one gate: the close's fixture cure, FORTUNE-B, PAGE-BAR7, SEAT-B; the chair alone moves the line |
 | CLOSE-2 | session_01ACmDYZKhD2ZTU9VKzNg4ZE | `lane/close-1-2026-11-22` at 935c3d633 (CLOSE-1's last commit; it is done) | `lane/close-2-2026-11-22` | the close's second seat (E104, E106): JOIN's re-runs and "JOIN <commit>"; GOLDEN-LIT read and proven; the final census on "THE LINE IS READY <tip>"; the flip's branch on "BUILD THE FLIP" |
+| DAILY-4 | session_01ACmDYaBKhNdEcUSm1G57q1 | `lane/daily-3-2026-11-22` at b1bcb067d (DAILY-3's hand-over; it is done) | `lane/daily-4-2026-11-22` | the Daily Life lane's last seat (E108): the L12 cut; the PDF chapter's merge; the line merged; the owner's file; rule 8; "DAILY-B" |

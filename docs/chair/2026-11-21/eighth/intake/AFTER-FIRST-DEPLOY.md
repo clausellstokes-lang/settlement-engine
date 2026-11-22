@@ -59,3 +59,15 @@ steward stand there. The Daily Life line L12 ("The lord's steward…") was there
 steward's house stands). WHAT IS LEFT, the seat lane's: whether a stewardship's holder should be titled by his house's role ("the reeve") or by the
 office he holds ("the lord's steward"), and whether the two words on one page read as two officers. No false line today.
 
+## 7. Daily Life: the line L12 ("The lord's steward…") (E107)
+
+Built by DAILY-3, CUT from the landing by its count. Its ruled shape: needs `house: lord's steward` beside `office: lord's steward` and
+`sovereign` (it prints only where a steward's house stands); the steward's answering row in `registeredWords.js :: HOUSE_FAMILIES` goes with it.
+
+## 8. Daily Life's three leftovers (DAILY-3's hand-over, 2026-11-22)
+
+(a) The PDF chapter imports `dailyLife.js :: deriveDailyLifeSlot` whole, so the PDF's import set grew from 629 to 644 files and one writer-reach
+row widened (`yearsAgo on legacyAnnotations`, dossier-pdf N to R: E108): a leaf that derives only the chapter's slots would undo it. (b) The
+sameness census's stale "Narrative refinement" row: its door refused on a rise outside the Daily Life lane. (c) `en.js` holds `ai.dailyLife.*`
+keys with no reader since the button went. Also the owner's: the server's AI daily-life function and its price row are his to retire.
+
