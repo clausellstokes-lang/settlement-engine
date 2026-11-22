@@ -1176,6 +1176,20 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   filled at seating; it reads in beside the writer and prepares R4-IDS; it writes nothing of 212, the twin or the
   registry until the hand-over). A SEAT OF THIS LANE SPENDS ABOUT 400,000 READING IN: a successor is seated one
   unit EARLY, never at the mark.
+- E90 · A SEAT'S RULE 8 IS NARROWED WHERE ITS DARK PROOF IS EQUAL; NO LANE RUNS A FLIPPED CENSUS (2026-11-22 15:04 UTC; SEAT-10's 15:02: its tip c61571627 with U7's follow-up
+  merged at 2891e03f2 and point 98 at 8a40fdbd3; the dark proof c110dd85b to c61571627 EQUAL (07873739…, 1,245
+  births); U5-STALE's own first-paint cost +661 raw / +219 gzip / −32 Brotli, named for the owner beside 3,818; ITS
+  WIDENED RULE 8 CAME TO 2,860 OF 3,771 FILES, five to six hours in four shards, then a flipped census over 810: and
+  its count stood at about 540,000). RULED: that run is made AGAIN by the landing's gate on the stacked tree and
+  then whole by CI: A SEAT RUNS `tests/lint` whole, its own files, every test that NAMES a module it changed (by
+  grep), `tests/components` and `tests/pdf` only if a component or PDF builder moved, the four ratchet directories
+  and the files directly under `tests/domain/`, and one build with the five figures; the whole directories of
+  births (`tests/generators`, `tests/data`, `tests/property`) are the landing's and CI's WHERE THE DARK PROOF IS
+  EQUAL; where it is not, the seat says what moved and owes the directories for it. THE FLIP'S CENSUS IS THE
+  CLOSE'S ALONE (once, on the line with both second halves landed); a lane sends its FLIP LIST ON PAPER. THE RISK
+  TAKEN, NAMED: a lane's red may first show at the landing's gate and hold a stack; the dark proof and the lane's
+  full run at its first landing are the evidence against it. `prompts/COMMON-EIGHTH.txt` item 14; sent to SEAT-10
+  and FORTUNE-7 at once (priority next), to the others with their next line.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
