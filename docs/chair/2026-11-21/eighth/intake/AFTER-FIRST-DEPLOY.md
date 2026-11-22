@@ -120,6 +120,8 @@ rounding unit): the bound is points-only and the will a score-by-score sum. The 
 
 ## 15. SECTIONS OF ONE PAGE THAT DISAGREE (the chair's own read of one town, E131; the state-sentence lane's)
 
+**PAIRS (a) AND (b) BELOW ARE MOVED BEFORE THE FIRST DEPLOY BY THE OWNER'S ORDER ("Can you fix these:", 2026-11-22; recorded 21:23 UTC): PROSE-5's unit "DISAGREE" (E132). What stays here: the wider census of other pairs, the stiff sentence, the number slip and "the steward".**
+
 Read on one town (seed owner-read-1, Grímtun; the line at point 105, laws dark): (a) the overview's "The town pays wages for its defense as well
 as keeping its walls." beside the defence tab's "The people who would have to hold Grímtun through something know there is no money to pay them
 for it."; (b) the defence tab's "Grímtun's food trades are failing, and what they fail to put by is food the town would miss if it were cut off."

@@ -159,6 +159,14 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   ADVISED: a standing step of reading a few whole pages before every deploy. ONE OF THE THREE PAIRS IS NEW WITH THE
   FLIP: told to him with its count the same hour, and cured before the switch-on (E131).
 
+- **THE OWNER'S ORDER ON THE THREE PAIRS THAT DISAGREE (written 2026-11-22 21:23 UTC; it came at about 21:17 by the session's record), verbatim:** "Can you fix these:", followed by the chair's own three bullets quoted back (the town pays wages for its defence
+  beside "there is no money to pay them"; "food trades are failing" beside "food is not a worry here"; with the
+  laws on, "No one holds the seat" beside "They sit in the seat themselves"). READ AS: ALL THREE ARE FIXED BEFORE
+  THE FIRST DEPLOY. Answered the same turn: the third is already CLOSE-3's unit (E131); the first two are moved up
+  from the after-deploy list and measured at once (E132). PUT TO HIM, ONE DECISION, NOT YET ANSWERED: all six
+  places work; the fix of the first two and the landing of "DAILY-B" each wait for a place (about an hour and a
+  half) unless he allows two short-lived extra workers.
+
 ## 2. Decisions of this chair (each vetoable by the owner)
 
 - E1 · FOUR SEATS AT A TIME (the standard's rule 2.1 and rule 35; the seventh chair's own last word: "too many lanes
@@ -1896,6 +1904,21 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   trades are failing" beside "nothing suggests food is a worry here"): `intake/AFTER-FIRST-DEPLOY.md` 15, with a
   census of contradicting sentence pairs proposed. THE SIXTH PLACE: the stack of "DAILY-B" now waits for the next
   place that frees (VEIL-35's at its hand-over), VEIL-37 for the one after.
+- E132 · THE OWNER'S "CAN YOU FIX THESE": THE TWO PAIRS OF THE STATE SENTENCES ARE MEASURED AND GIVEN TO THE STATE-SENTENCE LANE, BEFORE THE FIRST DEPLOY (recorded 2026-11-22 21:23 UTC; his words in section 1). THE CHAIR'S MEASURE (`measures/DISAGREE.md` and its script; 600 births on the line's tip, 100 a size): (FOOD) the defence desk's
+  DS-DEF-2 pool [CHAIN: food trades failing] meets the economy desk's DS-ECO-9 pool [SECURE] on 18 pages: 16 of 100
+  METROPOLISES, 1 town, 1 city; (WAGES) the general desk's DS-GEN-17 pool [GARRISONED] meets DS-DEF-2's pool
+  [Economic Survival: WEAK] on 2 pages, both towns. Each sentence is true to its own cell; no variant of either
+  reads the other's fact. RULED: unit "DISAGREE" for PROSE-5 (parked since 09:29; its record 255,123), AHEAD of
+  its other units, on `lane/prose-5-2026-11-22-disagree-wip` cut from the line's tip: (1) it says first what each
+  of the four cells reads, and whether the two facts of a pair can both be true in the engine (if not: a fault of
+  the facts, named; the prose is cured all the same); (2) the cure in the pools doc: each cell gains variants,
+  marked by the other cell's fact with the grammar's own marks, that say BOTH truths; the flat variants are marked
+  never to be drawn where the other fact holds; (3) the tooth: a census arm with a small REGISTERED table of
+  opposite pairs (a new pair is one row); (4) measure only: the other pairs of cells across desks that read one
+  fact family, with their co-occurrence, as a table for the owner. Its landing line: "PROSE-D <commit>". THE GO
+  MESSAGE IS WRITTEN (`prompts/GO-PROSE-5-DISAGREE.txt`) AND IS SENT WHEN A PLACE FREES, or at once if the owner
+  allows the extra worker. `intake/AFTER-FIRST-DEPLOY.md` 15 keeps only what he did not ask for (the stiff
+  sentence, the number slip, "the steward" beside an appointee, and the wider census's findings).
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -2523,3 +2546,4 @@ LIFE PAGE stand unless he changes them (a saved AI account stays visible; the se
 | STACK-100 | session_01ACmDYZ2KgEXYCKokzKTjtk | the working line `lane/join-2026-11-14` at c1144ba18 (point 102) | `lane/stack-100-wip-2026-11-22` | A LANDING ON ITS OWN MACHINE (E114): point 103 "JOIN" a1319f388 (merged at e21c4032e) and point 104 "FORTUNE-C" by "ADD", both test only; "GATE" on the chair's word; then "THE LINE IS READY" to CLOSE-2 |
 | VEIL-35 | session_01ACmDYWVxmEvd73fKqhpnip | `lane/veil-34-2026-11-22` as it stood at its seating (19:27 UTC on 2026-11-22, in the place FORTUNE-7 freed) | `lane/veil-35-2026-11-22` (its unit's code on `lane/veil-35-2026-11-22-r4ids-wip`) | THE VEIL'S SECOND CHAIN (E116): the pool re-made; "R4-IDS" (part two, the cure, from VEIL-34's measure), then "IMPORT-DOOR"; the lane's tip only on "TIP TO VEIL-35" |
 | VEIL-36 | session_01ACmDYWsz5JrdWj5MFAo6K4 | `lane/veil-34-2026-11-22` at 648ac3e10 (VEIL-34's hand-over; seated 20:55 UTC on 2026-11-22 in the place VEIL-34 freed) | `lane/veil-36-2026-11-22` (its unit's code on `lane/veil-36-2026-11-22-r5desc-wip`) | THE VEIL'S CHAIN A, its writer (E129): the pool re-made; "R5-DESC" (the STANDING_FORMS list drafted first; R5D-SQL dispatched afresh; R5D-PAGE with E128's item 0), then (iv) and (v); the lane's tip only on "TIP TO VEIL-36" |
+| CLOSE-3 | session_01ACmDYXko1NBg813xkNuPeU | `lane/close-2-2026-11-22` as it stood at its seating (21:15 UTC on 2026-11-22, in the landing's free place) | `lane/close-3-2026-11-22` (unit (1) on `lane/close-3-2026-11-22-vacant-wip` from the line's tip 244fa84ef; the flip on `lane/flip-2026-11-22`) | THE CLOSE'S THIRD SEAT (E131): "VACANT" (the empty seat beside its holder: a clash new with the flip), then THE FLIP from the recipe on "BUILD THE FLIP <tip>"; CLOSE-2 keeps the final census, its classing and "PRONOUN" |
