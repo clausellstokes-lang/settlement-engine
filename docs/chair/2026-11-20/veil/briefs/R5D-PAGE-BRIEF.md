@@ -1,6 +1,9 @@
-# R5D-PAGE — R5-DESC's cure, the SECOND builder (the page reader, the walkers and every proof; NEVER 212 or the registry). READ WHOLE: this brief; `src/domain/veil/pageRederive.js`; `src/domain/veil/importRederive.js`; `src/generators/power/rosterText.js`; `src/generators/power/factionStanding.js` (tip and origin/master); R5D-SQL's hand-back's first section; every test file you change. READ NOTHING ELSE WHOLE (212 and the registry by grep only: if you must change either, STOP).
+# R5D-PAGE — R5-DESC's cure, the SECOND builder (the page reader, the walkers and every proof; NEVER 212 or the registry). READ WHOLE: this brief; `src/domain/veil/pageRederive.js`; `src/domain/veil/importRederive.js`; `src/generators/power/rosterText.js`; `src/generators/power/factionStanding.js` (the tip's; master's forms are in R5D-FORMS's data file, not to be read again); the header of `scripts/veil/standingForms.data.json` and `scripts/veil/standingForms.mjs` (R5D-FORMS); R5D-SQL's hand-back's first section; every test file you change. READ NOTHING ELSE WHOLE (212 and the registry by grep only: if you must change either, STOP). YOUR WINDOW IS THIS SEAT'S TIER'S: 1,000,000 tokens (compaction forced at 784,000); YOUR BUDGET: about 400,000 (the measures' instruments are read by their headers and run, never read whole).
 
-By VEIL-34 on E115, E116, E121 (vetoable by the owner). Dispatched only after R5D-SQL's commit is read whole by the seat.
+By VEIL-34 on E115, E116, E121 (vetoable by the owner), item 0 on E128 (VEIL-34's last act, 648ac3e10); CORRECTED by VEIL-36 on
+E126 and E129 before its dispatch: the first line (the window), item 5 (the walker reads R5D-FORMS's data file, never git at test
+time; THE LEGACY ARM on VEIL-33's read-stored instrument, never a second one), item 5b (ruling 51 untouched) and the LAWS (paths).
+Dispatched only after R5D-SQL's commit is read whole by the seat.
 
 ## WHAT YOU BUILD
 0. FIRST, THE GAP IN R5-RECENT (the chair's E128, from VEIL-34's review (H); one writer on `pageRederive.js`, no line of 212).
@@ -29,17 +32,27 @@ By VEIL-34 on E115, E116, E121 (vetoable by the owner). Dispatched only after R5
    standing carries the seat-contest line (R5DESC-MEASURE's 382), LISTED as that class with its cause; a miss of any other cause reds.
 4. THE DIFFERENTIAL, both engines: a hiding read's page desc equals that of the same place with the power never there (the pool's
    births by R5DESC-MEASURE's instrument), both doors, Reveal off and DM; and the same for the masked tension party.
-5. THE TABLE'S WALKER (E121 (i), (ii)): derives every standing form from the engine's source at the tip AND at master (and master's
-   `git log -S` history of the file) and reds on any difference with 212's and the twin's `STANDING_FORMS` literal; its red message says:
-   a new or changed standing form ships only WITH a migration that adds it, the old rows kept. THE LEGACY ARM: places born by MASTER'S
-   engine (a scratch worktree at origin/master, the pool's seeds), stored, read through 212 and the twin: every legacy standing cut whole
-   (count of count) and the differential on them. Say the closed-branch count (descs served as base because no row matched) and what the 3
-   of 328 no-match descs that carry a tail are.
+5. THE TABLE'S WALKER (E121 (i), (ii); E129: ONE source for the table): a `tests/lint` walker (its basename from the mutation
+   manifest's pattern list, with its manifest row) that (a) derives the standing forms from the TIP's `factionStanding.js` by the
+   door's own derivation (`scripts/veil/standingForms.mjs`, `--derive`) and reds on any derived form that is not a row of
+   `scripts/veil/standingForms.data.json`; (b) reds unless the door's printed literal equals, byte for byte, the text between the
+   `STANDING_FORMS begin/end` markers in 212 AND in the twin; (c) THE TABLE ONLY GROWS: a frozen list of the table's row ids in the
+   walker reds on any id that leaves (a new row is added to the list in the same commit as its migration); its red message says: a
+   new or changed standing form ships only WITH a migration that adds it, the old rows kept (stored documents keep them); (d) BY
+   EXECUTION: every standing `annotateFactionStanding` writes over the rosters of a born sample (R5D-0's instrument's shape: 19,489
+   of 19,489 on its pool) cuts WHOLE by the table in both engines. Master's and older forms are FROZEN rows of the data file (with
+   their origin commits): the walker never reads git. THE LEGACY ARM: places born by MASTER'S engine, stored, read through 212 and
+   the twin: every legacy standing cut whole (count of count) and the differential on them. USE VEIL-33's INSTRUMENT, DO NOT BUILD A
+   SECOND: the read-stored-documents mode (`RV9_MODE=stored` in `out/v33/legacy/legacy.probe.jsx`, with its dump mode run at
+   origin/master) on `lane/veil-33-2026-11-22-legacy-wip` at the commit the seat gives you; if the seat has none to give at your
+   turn, build everything else and STOP on this item with what you would run. Say the closed-branch count (descs served as base
+   because no row matched) and what the 3 of 328 no-match descs that carry a tail are.
 5b. THE PRESENCE-PICKED BASES' ARM (E126): the 13 templates of `out/v34/r5d1/R5D1-MEASURE.md` (`lane/veil-34-2026-11-22-r5d1-wip`
    ee2dbda33). PLANTS hide BY HAND every input a pick reads that an owner CAN hide: a power row (a density host, a noble power) AND a house
    the pick reads (a house of the seat's own, a noble house), on born towns and on act T's lit pages: the STORED base served equals the
    base picked over the SERVED document, both engines; a difference reds and NAMES its template (that template is then the chair's to
-   withhold always). A house no owner's choice can hide: said in the arm's header with the rule that makes it so. If the arm needs
+   withhold always). A house no owner's choice can hide: said in the arm's header with the rule that makes it so. Ruling 51 is
+   untouched: `contestsNiche` stays withheld always (the arm does not ask the server to serve it). If the arm needs
    `rivalDescOf` or `reeveToRoster`, an export is allowed ONLY if no birth and no first-paint byte moves: say which, with the proof.
 6. THE PINS: E94 (c) (every label writer draws from a kind table; `densityAscension.js :: planSeatAscension` gaining a caller reds); the
    composed-hosts walker: `power.desc`, `power.relation.dmNote` built in their hosts, `power.label` off the composed form (its census, 0
@@ -49,5 +62,6 @@ By VEIL-34 on E115, E116, E121 (vetoable by the owner). Dispatched only after R5
    `VERIFY_DIST=1` on `tests/build/vendorPdfLazy.test.js` and `generationWorkerLazy.test.js` (first paint +0).
 
 ## LAWS
-As R5D-SQL's; worktree `/home/user/wt/r5dpage` on `v34-r5dpage`, cut from R5D-SQL's commit; never push; a give-up (exit 3) of the mutex
-is waited out, never routed round. STOP rather than invent. Hand-back `out/v34/r5dpage/R5DPAGE-HANDBACK.md`; last message 15 lines.
+As R5D-SQL's; worktree `/home/user/wt/r5desc` on `lane/veil-36-2026-11-22-r5desc-wip`, at R5D-SQL's commit; never push; a give-up
+(exit 3) of the mutex is waited out, never routed round. STOP rather than invent. Hand-back
+`docs/chair/2026-11-20/veil/out/v36/r5dpage/R5DPAGE-HANDBACK.md`; last message 15 lines.
