@@ -376,6 +376,28 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   list, the home page's sample re-emitted once, the known failing tests cured or signed, CI's run read by name).
   ORDER OF SEATS AS THEY FREE: the lanes nearest a landing first (the place lane's trade note, the people lane's
   second half), then by what the owner reads on a page.
+- E31 · FORTUNE'S FIRST-PAINT CURE: THE MERITS IN A CHUNK OF THEIR OWN (E18's cure changed on the seat's finding; 2026-11-22 04:52 UTC). Pinned
+  into `fortune-law` as first ruled, the merits cleared first paint (1,179,596 / 375,213 / 315,094 beside the line's
+  1,179,511 / 375,172 / 315,169) BUT gave the law's chunk a static edge to `data-lazy` (through `bandLadders.js` and
+  `legacyUnresolvedWordings.js`): `densityCreateBoundary`'s closure 701,978 to 2,642,547; `settlementGenerateAction`'s
+  1,221,832 to 3,162,133; U6's own arm red. RULED: the same excision, the merits pinned into `fortune-merits`; the
+  seat commits without waiting IF: the law's chunk imports nothing (U6's arm green, its meaning unchanged, its one
+  comment line to the chair's eye); the two closures not above the line's; the four files at 0 in every first-paint
+  chunk; a guard for the merits' chunk in U6's form; `tests/build` whole by name. WHAT IS LEFT OVER THE LINE IN
+  `index` IS SAID BY ITS CAUSE, IN BYTES (a new chunk's name in the entry's dependency map is a real cost: named so,
+  and put on the owner's size-signing list; "churn" is not a cause).
+- E32 · THE SECOND MERIT'S SHAPE, AND WHO BUILDS IT (2026-11-22 04:52 UTC; E29 is the owner's decision to build). LASTING, as FORTUNE-4
+  measured it (BANDS.md, state D): `history.age` at or above the p90 of its own size (thorp 269, hamlet 108, village
+  225, town 276, city 441, metropolis 731), through the same `meritsOf` gates and points; two merits count as two
+  reasons at the Endorsed guard. WHAT IT MOVES on the visitor's pool: Endorsed share by size 4, 13, 8, 21, 22, 22 to
+  8, 16, 10, 22, 26, 23; newly Endorsed against no merits 11 to 26, newly Approved 16 to 28; places merited 33 to 76
+  of 900; no base score moves. FOR THE OWNER'S SIGNING: one DRAFT table, the six ages, with THE HAMLET'S 108 UNDER THE
+  THORP'S 269 said in plain words (a fault of the age's own generator is told to the chair, not cured in this lane).
+  ITS SENTENCE: a second pool through the same door, after the standing; the wordings to the chair as a draft first.
+  THE VEIL: `history.age` on every shared projection and under the widest veil is the unit's red-first. BUILT BY
+  FORTUNE-7, seated ON FORTUNE-6's hand-back the hour "FORTUNE <commit>" comes (the seat's own advice: about 400,000
+  now by its estimate, and the second merit would end near 620,000): FORTUNE-6 commits the two briefs
+  (`briefs/U7-LASTING.md`, `briefs/U7b-LASTING-SENTENCE.md`) with this ruling in them.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -629,6 +651,23 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   (04:49 by the push's log). THE DAILY LIFE PAGE'S BUILDER: red first shown (3 of 4 failing on the untouched tree);
   the page and the handler changed; its green runs in hand. Point 94 still stands merged and unpushed in the line's
   worktree, to be gated with point 95.
+- 2026-11-22 04:52 UTC · SEAT-10: THE OWED ARM IS MERGED (b7a373480; the lane at b6bb6bdcd): arm 6 of `seatLawSavedTown` drives the re-derive
+  road (`editSlice.js :: applyRosterDecreesAtTick`) on a dark-born saved place with the form lit, with guards that
+  the road ran: the place reads law 1 on the live view and the library row; its people's level and band equal the
+  same road with the marker stripped; red first by a planted fault; THE CLEAN TREE GREEN: NO FINDING (E20's sweep
+  closed). The lighting census by its door (titles 31,664 to 31,665). RULE 8's SHARDS (reading (A), 1,387 files)
+  RUNNING SINCE 04:34 on the tree a94f7d097, the line at f5295e425. Its landing lists are written: no house, no
+  class-table row, no pool table; eight registers moved, each by its door, NONE RAISED; the flip's 10 pins and 12
+  born rows by file; `SEAT_CIRCUMSTANCE_TUNING` in DRAFT for the owner. FORTUNE-6: E31 and E32; its table of
+  registers against the line is committed (c906b2a94): nothing above the line's but the ruled movements and
+  `HAND_CEILING` 74.
+- 2026-11-22 04:54 UTC · DAILY-3's FIRST MESSAGE (queued 04:51): it stands on f5295e425 on `lane/daily-3-2026-11-22`; read in as its prompt lists;
+  E1 FIRST (the owner-only slot's gate, which fails closed: the smallest unit and the security one, and E2's public
+  `commoner_resentments` needs it). Its three readings confirmed: B2's commit message stands for the absent
+  `measures/B2/REPORT.md`; the sameness door's registration is its own unit 3 (no SAME seat exists to tell); the old
+  whole ratchet is superseded by rule 8 as re-ruled. Told: the line moves to point 95 within about two hours; it
+  merges the line only at its unit 4, on the chair's word. The chair's branch is on origin at e0f70a406 (04:54 by the
+  push's log).
 
 ## 4. The order of the lanes still to seat, and what each waits on
 
