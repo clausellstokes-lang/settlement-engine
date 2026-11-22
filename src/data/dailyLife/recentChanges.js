@@ -343,3 +343,19 @@ export const RECENT_CHANGES = Object.freeze({
     { id: 'C7', text: 'Nothing new has disturbed the ordinary run of things.', needs: [] },
   ]),
 });
+
+/**
+ * THE DECLARATION (D4C-1, the chair's E133 (1)), one a BRANCH (every line of a branch does the same): what the branch's
+ * line DOES on the page. `{ states: '<condition key>' }` it states a condition (the key as D4C's measure, table 1,
+ * names it: `threat:<kind>`, `food:want`, `defence:want`, …); `{ consequence: true }` it says what a condition makes
+ * people do, or the quiet as they live it; `{ names: true }` it only names a house or a place. `domain/dailyLife.js`
+ * reads the declaration, never the line's words: the outsider line yields a part whose condition another printed slot
+ * states (`tests/domain/dailyLifeNoRepeat.test.js`).
+ */
+/** `threat.<kind>.<form>.<stage>` states `threat:<kind>` (a threat's arrival); `condition.<archetype>` states
+ * `condition:<archetype>`; `beat` states `event:recent_disruption`; `calm` is the quiet as people live it.
+ * @param {string} b @returns {{ states: string } | { consequence: true }} */
+const recentDoes = (b) => (b.startsWith('threat.') ? { states: `threat:${b.split('.')[1]}` }
+  : b.startsWith('condition.') ? { states: `condition:${b.slice('condition.'.length)}` }
+  : b === 'beat' ? { states: 'event:recent_disruption' } : { consequence: true });
+export const RECENT_CHANGES_DOES = Object.freeze(Object.fromEntries(Object.keys(RECENT_CHANGES).map((b) => [b, Object.freeze(recentDoes(b))])));

@@ -17,7 +17,9 @@
  *   (d) THE ROUTE (ruling 11): every printed sentence is its branch's keyed pick (`pickVariantMixed` keyed
  *       `<record.name>::dailyLife.<slot>::<branch>`) of the slot's own pool (`src/data/dailyLife/outsiderImpressions.js`,
  *       `unspokenTopics.js`, `recentChanges.js`), admitted by its declared atoms (`facts/drawDeclared.js ::
- *       filterDeclared`); a slot with no true line is the EMPTY string.
+ *       filterDeclared`); a slot with no true line is the EMPTY string. D4C-1 (the chair's E133 (1)): the outsider line
+ *       yields a part whose condition another printed slot STATES (by the branches' declarations) and takes its next part
+ *       by its own ranking, never emptied (`dailyLifeNoRepeat.test.js`); the oracle below does the same.
  */
 import { describe, it, expect, beforeAll } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
@@ -137,7 +139,7 @@ const formOf = (t, rec) => {
 
 /**
  * @param {any} rec
- * @param {{ OUTSIDER_IMPRESSIONS: any, UNSPOKEN_TOPICS: any, RECENT_CHANGES: any }} P
+ * @param {{ OUTSIDER_IMPRESSIONS: any, UNSPOKEN_TOPICS: any, RECENT_CHANGES: any, [k: string]: any }} P
  */
 function expected(rec, P) {
   const facts = factsOf(rec);
@@ -149,27 +151,6 @@ function expected(rec, P) {
   const threats = deriveAllThreatProfiles(rec);
   const caps = deriveAllCapacities(rec);
   const gov = String(rec.powerStructure?.government ?? '');
-
-  // outsider_impressions
-  const out = [];
-  const top = deriveAllFactionProfiles(rec).slice().sort((a, b) => (b.power || 0) - (a.power || 0))[0];
-  const row = top && (rec.powerStructure?.factions || []).find((/** @type {any} */ f) => f.faction === top.name);
-  if (top && !isVeiledPower(row) && top.archetype !== 'criminal') {
-    const lead = leaderLeadOfRecord(rec).leadOverSecond;
-    out.push(say('outsider_impressions', P.OUTSIDER_IMPRESSIONS, lead === null || lead > 6 ? 'power' : 'power.level', (t) => fillPower(t, top.name)));
-  }
-  const open = threats.filter((t) => t.visibility === 'open' && !isRating(t)).sort((a, b) => b.severity - a.severity)[0];
-  let real = false;
-  if (open && open.severityBand !== 'low') {
-    const said = say('outsider_impressions', P.OUTSIDER_IMPRESSIONS, `threat.${open.type}.${formOf(open, rec)}`);
-    if (said) { out.push(said); real = true; }
-  }
-  const lenses = VISIBLE_CAPACITY_LENSES.filter((n) => BAD.includes(caps.bands[n])).map((n) => `services.${n}`);
-  const strained = CAPACITY_NAMES.filter((n) => BAD.includes(caps.bands[n])).length;
-  const options = (real ? (strained >= 3 ? lenses : []) : [...lenses, 'ordinary'])
-    .filter((b) => filterDeclared(P.OUTSIDER_IMPRESSIONS[b], { facts }).length > 0);
-  const second = pickVariantMixed(options, `${rec.name}::dailyLife.outsider_impressions::second`);
-  if (second) out.push(say('outsider_impressions', P.OUTSIDER_IMPRESSIONS, second, (t) => fillGov(t, gov)));
 
   // unspoken_topics
   const history = deriveHistoryBeats(rec);
@@ -193,6 +174,54 @@ function expected(rec, P) {
   const anySource = !!beat || fresh.length > 0 || threats.some(acuteOf);
   if (!rc.length && !anySource) rc.push({ b: 'calm', t: say('recent_changes', P.RECENT_CHANGES, 'calm') });
 
+  // outsider_impressions, LAST (D4C-1, the chair's E133 (1)): the conditions the other slots STATE, read from their
+  // branches' declarations (`<POOL>_DOES`; dawn, gathering, child warnings and the grievances declare none); the line
+  // yields a part whose condition one of them states, takes its next part by its own ranking, and is never emptied
+  const stated = new Set();
+  /** @param {any} does @param {string} branch */
+  const statedBy = (does, branch) => { const k = does?.[branch]?.states; if (k) stated.add(k); };
+  for (const p of rc) if (p.t) statedBy(P.RECENT_CHANGES_DOES, p.b);
+  if (unspoken) statedBy(P.UNSPOKEN_TOPICS_DOES, `wound.${type}`);
+  const band = caps.capacities.food_production.band;
+  const foodBranch = band === 'surplus' ? (threats.some((t) => t.type === 'famine' || t.type === 'siege') ? 'surplus.wanting' : 'surplus')
+    : ['adequate', 'strained', 'critical'].includes(band) ? band : 'collapsed';
+  if (say('food_culture', P.FOOD_CULTURE, foodBranch)) statedBy(P.FOOD_CULTURE_DOES, foodBranch);
+  /** @param {string} branch @param {Set<string>} st */
+  const yields = (branch, st) => st.has(P.OUTSIDER_IMPRESSIONS_DOES?.[branch]?.states);
+  const top = deriveAllFactionProfiles(rec).slice().sort((a, b) => (b.power || 0) - (a.power || 0))[0];
+  const row = top && (rec.powerStructure?.factions || []).find((/** @type {any} */ f) => f.faction === top.name);
+  const lenses = VISIBLE_CAPACITY_LENSES.filter((n) => BAD.includes(caps.bands[n])).map((n) => `services.${n}`);
+  const strained = CAPACITY_NAMES.filter((n) => BAD.includes(caps.bands[n])).length;
+  /** @param {Set<string>} st @returns {{ parts: string[], real: boolean }} */
+  const outsiderWith = (st) => {
+    const out = [];
+    if (top && !isVeiledPower(row) && top.archetype !== 'criminal') {
+      const lead = leaderLeadOfRecord(rec).leadOverSecond;
+      const b = lead === null || lead > 6 ? 'power' : 'power.level';
+      if (!yields(b, st)) out.push(say('outsider_impressions', P.OUTSIDER_IMPRESSIONS, b, (t) => fillPower(t, top.name)));
+    }
+    let real = false;
+    for (const open of threats.filter((t) => t.visibility === 'open' && !isRating(t)).sort((a, b) => b.severity - a.severity)) {
+      if (open.severityBand === 'low') break;
+      const b = `threat.${open.type}.${formOf(open, rec)}`;
+      const said = say('outsider_impressions', P.OUTSIDER_IMPRESSIONS, b);
+      if (!said) break;
+      real = true;
+      if (yields(b, st)) continue;
+      out.push(said);
+      break;
+    }
+    const options = (real ? (strained >= 3 ? lenses : []) : [...lenses, 'ordinary'])
+      .filter((b) => filterDeclared(P.OUTSIDER_IMPRESSIONS[b], { facts }).length > 0);
+    let second = pickVariantMixed(options, `${rec.name}::dailyLife.outsider_impressions::second`);
+    if (second && yields(second, st)) second = pickVariantMixed(options.filter((b) => !yields(b, st)), `${rec.name}::dailyLife.outsider_impressions::second`);
+    if (second) out.push(say('outsider_impressions', P.OUTSIDER_IMPRESSIONS, second, (t) => fillGov(t, gov)));
+    return { parts: out.filter(Boolean), real };
+  };
+  const ruled = outsiderWith(stated);
+  const out = ruled.parts.length ? ruled.parts : outsiderWith(new Set()).parts.slice(0, 1);
+  const real = ruled.real;
+
   return {
     outsider: out.filter(Boolean).join(' '), unspoken, recent: rc.map((p) => p.t).filter(Boolean).join(' '),
     real, lensDefence: lenses.includes('services.defense'),
@@ -200,13 +229,14 @@ function expected(rec, P) {
 }
 
 describe('the route and the calm rule, from the slots\' own pools (b, d)', () => {
-  /** @type {{ OUTSIDER_IMPRESSIONS: any, UNSPOKEN_TOPICS: any, RECENT_CHANGES: any }} */
+  /** @type {{ OUTSIDER_IMPRESSIONS: any, UNSPOKEN_TOPICS: any, RECENT_CHANGES: any, [k: string]: any }} */
   let P;
   beforeAll(async () => {
     P = {
       ...(await import('../../src/data/dailyLife/outsiderImpressions.js')),
       ...(await import('../../src/data/dailyLife/unspokenTopics.js')),
       ...(await import('../../src/data/dailyLife/recentChanges.js')),
+      ...(await import('../../src/data/dailyLife/foodCulture.js')),
     };
   });
 

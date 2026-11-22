@@ -201,3 +201,21 @@ export const OUTSIDER_IMPRESSIONS = Object.freeze({
     { id: 'O3', text: 'A visitor finds nothing much to remark on, which suits the people here.', needs: [] },
   ]),
 });
+
+/**
+ * THE DECLARATION (D4C-1, the chair's E133 (1)), one a BRANCH (every line of a branch does the same): what the branch's
+ * line DOES on the page. `{ states: '<condition key>' }` it states a condition (the key as D4C's measure, table 1,
+ * names it: `threat:<kind>`, `food:want`, `defence:want`, …); `{ consequence: true }` it says what a condition makes
+ * people do, or the quiet as they live it; `{ names: true }` it only names a house or a place. `domain/dailyLife.js`
+ * reads the declaration, never the line's words: the outsider line yields a part whose condition another printed slot
+ * states (`tests/domain/dailyLifeNoRepeat.test.js`).
+ * Here: the power part states the lead (`power:lead`, `power:no-clear-lead`); `threat.<kind>.<form>` states
+ * `threat:<kind>`; `services.food_production` `food:want`, `services.defense` `defence:want`, any other
+ * `services.<lens>` `cap:<lens>:want`; `ordinary` is the quiet as a visitor finds it.
+ */
+/** @param {string} b @returns {{ states: string } | { consequence: true }} */
+const outsiderDoes = (b) => (b === 'power' ? { states: 'power:lead' } : b === 'power.level' ? { states: 'power:no-clear-lead' }
+  : b.startsWith('threat.') ? { states: `threat:${b.split('.')[1]}` }
+  : b === 'services.food_production' ? { states: 'food:want' } : b === 'services.defense' ? { states: 'defence:want' }
+  : b.startsWith('services.') ? { states: `cap:${b.slice('services.'.length)}:want` } : { consequence: true });
+export const OUTSIDER_IMPRESSIONS_DOES = Object.freeze(Object.fromEntries(Object.keys(OUTSIDER_IMPRESSIONS).map((b) => [b, Object.freeze(outsiderDoes(b))])));
