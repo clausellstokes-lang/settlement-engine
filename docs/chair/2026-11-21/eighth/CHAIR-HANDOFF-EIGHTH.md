@@ -140,6 +140,33 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   amended. THE COST SEEN AT NET 1 (the records' own `cost_usd`, fifty-one minutes, four seats): 6.68, 13.50, 6.50,
   10.61: about 44 an hour for the four; the chair's own context is the dearest single item (rule 19 of the standard:
   a fresh chair at about 70%).
+- E11 · `tests/ui/safetyReaderBytes.test.jsx` IS STALE PINS, NOT A LEAK, AND IS RE-MADE, NOT RE-RECORDED (ruled 2026-11-22 01:39 UTC; found by
+  CI's run on point 87, attributed by a helper at four commits). It pins hashes of 11 reader surfaces for 300 towns
+  (the Overview and Defense tabs for the gallery, the reveal share and the player share; the print model and three
+  chapters; the Foundry pages). RED SINCE POINT 86, which brought the test in with pins recorded on a lane that did
+  not hold point 85: 1,546 of 3,300 surfaces differ: 300 are the PDF cover, WHICH PRINTS TODAY'S DATE (the pin goes
+  stale every day; putting the recording day's date back reproduces the pinned hash exactly); 1,246 are point 85's
+  arrival prose, the same change for every audience (two towns read line by line: nothing of the owner's, nothing of
+  safety). A STORED HASH OF WHOLE PAGES IS A GOLDEN, AND A LANE ADDS NONE (COMMON-RULES 14 (c), which the seventh chair
+  wrote for the law lanes: the same reasoning): every content landing would move it. SO: NOT re-recorded by its door
+  as it stands. IT IS THE DISPLAY LANE'S FIRST UNIT: the test re-made as a differential in ONE tree (each shared and
+  public surface rendered with the owner's line and without it is the same bytes; no stored hash), the clock passed
+  in. Until then it is on the list by name with this ruling. THE HOLE IT SHOWED is closed by practice: CI's run is
+  read by name after every push of the line.
+- E12 · THE SAMENESS DOOR'S JOIN UNIT IS ACCEPTED, ITS RAISED CEILING WITH IT (ruled 2026-11-22 01:39 UTC; `lane/same-3-2026-11-22` at
+  656be9ea5, a chair's builder; the walker 2 red to 29 of 29). 27 rows on the hand list (traditions 14, six of them
+  recorded as key lists or tables and not sentence pools; the safety line 9; Daily Life 4); the house readings 409 to
+  413 (four `gate` readings of DS-DEF-5) and the hand readings 137 to 344 (Daily Life 149, the safety line 52,
+  traditions 6; the commonest houses market, water, garrison, dwellings, watch: all for the security reader at the
+  join); THE BANK UNMOVED (251), no exemption added, no rule red. `HAND_CEILING` 44 TO 71: the walker's header says the
+  ceiling "only falls"; the seventh chair's own ruling of 18:55 on 2026-11-20 sent pools outside the dossier's state
+  prose TO the hand list, and the join of point 84 raised it by the two rows it brought. READ SO: the ceiling falls
+  from each join's level; a join raises it by exactly the rows it brings, each lane named in the line's comment, and by
+  nothing else. THE WATCH's four new lines READ BY THE CHAIR: the safety line's Unsafe openings ("Crime here is common,
+  and nobody pretends otherwise." and its two siblings beside the old "Crime is a persistent and visible problem.") and
+  the garrison clause's siblings ("...too stretched, or too easily bought, to stop it."): no veto: they follow the
+  place's safety rating and need no house but the garrison; FOR THE VEIL READER'S LIST: `safetyDesc` is now drawn from
+  pools, so the veil's twin for it must be re-derived over those pools at the join.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -265,6 +292,13 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   the seat cures it after cure C. FORTUNE-6: CURE-2 units 1 and 2 merged (a157bd930; `tests/lint` 220 of 220; flipped
   reds 38 to 4); U5b's builder out since 00:18. NET 2 (01:18): all four seats working; VEIL-31 426,535; THE CHAIR'S
   OWN CONTEXT 664,740 OF 1,000,000 (66%): the hand-over to a fresh chair session is due at this milestone.
+- 2026-11-22 01:39 UTC · THREE HELPERS REPORTED AND THE NEXT STACK IS RUNNING. The phone floor: BISECTED: green at 89ab44e34, red from
+  f26e934c6 (point 88): a count, not a breach (one more line through the font-size floor on three routes: the
+  traditions card's description line): its own door re-records the row with the cause: ordered at the top of the
+  next stack. The safety pages' pins: E11. The sameness door's join: E12 (pushed as `lane/same-3-2026-11-22`). THE
+  STACK OF POINT 92 (one helper, started 01:43): the sameness door's join (656be9ea5), then the people lane's first
+  half (930413518, with the ruled resolution), then the phone floor's row; one gate at the top. `PICKUP-NINTH.md` is
+  written and on origin (529e9adce): the next chair session starts from it; the owner is given the command.
 
 ## 4. The order of the lanes still to seat (after the first four), and what each waits on
 
