@@ -233,6 +233,38 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   a64619510 to its tip EQUAL (the seat's reading; the chair's "against 3e8e2e37d" was loose). THE STACK: its first
   `tests/lint` run was killed and restarted at 23:54 after the chair's message to the helper moved the running
   command to the background: A LESSON: a running helper is messaged only between its runs.
+- 2026-11-22 01:32 UTC · POINTS 88 TO 91 ARE LANDED AND PUSHED (01:31; THE LINE'S TIP IS 5fca4362d): the first stack under one gate.
+  88 the traditions card's descriptions (cf5b24079; merge f26e934c6; five conflicts: three registers at the line's
+  side, the manifest as the union, the phone-floor test's dated notes both kept); 89 the state sentences (merge
+  e7096fe96); 90 Daily Life (merge d50e8c0e9); 91 the place lane's safety line (merge 822d514b6). Registers by their
+  doors, once: writer-reach f8114b332 (cohort 1,385 to 1,368), the wiring census 19476c59c, the lighting census
+  c12a9cbb3 (3,725 to 3,736 files); the rows 5fca4362d. THE GATE AT THE TOP: `tests/lint` 223 files, 3,362 tests, 5 red,
+  ALL NAMED (the owner's three size signings from the state sentences: `proseCorpusBytes` RAW six leaves and GZIP
+  four, `proseComposed` A0b 2,322 against 2,103; the sameness door's hideable walker twice: 27 pool tables of the
+  landed lanes not on its hand list, four `gate` readings not on its committed list); type ratchet 167, strict 1113,
+  eslint 0 errors, build clean; `tests/build` whole 15 red, all on the list; the lanes' directories with their own
+  test files 1,150 files, 8,755 tests, 16 red: 14 on the list, `selfVouchReceipt` soak1k-8 (ruled, E6), and ONE REAL
+  RED NOBODY HAD SEEN: `tests/components/phoneChromeFloor.census.test.js`: /create, /settlements and /gallery each one
+  more under the phone floor, a shrink-only registry: attributed to the traditions lane (PLAUSIBLE, bisection owed);
+  NAMED ON THE LIST AS THE LANDING LANE'S FIRST UNIT, cured by content. SIZES: first paint 1,178,923 / 375,029 /
+  314,961 (+1,237 raw: 945 ruled for Daily Life, 292 not yet itemized); worker 2,645,030; engine chunk 924,058.
+  `ci/RED-AT-LINE.tsv` is 62 rows (nine added, each with who owes it); `ci/LINE-NOW.md` at point 91. THE STACK TOOK
+  ABOUT 110 MINUTES for four lanes (a quarter hour of it lost to the chair's message to the running helper).
+- 2026-11-22 01:32 UTC · CI's RUN ON 89ab44e34 (point 87) READ BY NAME (44962726346; a cheap helper; its extraction
+  `scratchpad/ci/run-44962726346.tsv`): failure in the same four jobs; 55 failing rows; 53 are the list, every one
+  red again; THE OTHER TWO ARE ONE TEST IN TWO JOBS, NOT ON THE LIST: `tests/ui/safetyReaderBytes.test.jsx` ("every
+  reader, shared and public path prints the bytes it printed before the owner's line"). Point 87 holds no `src`
+  change, so it is OLDER: no landing gate ran `tests/ui`, and point 86's run was never read by name. IT PINS WHAT
+  SHARED AND PUBLIC PAGES PRINT: a helper is attributing it now (the test at four commits; the changed lines quoted;
+  leak or stale pin). NOT TO BE RE-RECORDED before the chair rules. A HOLE THIS SHOWS: the landing gate never runs
+  `tests/ui`, `tests/security` or `tests/property` unless a lane changed a file there: CI is the only reader of
+  those, so CI's run is read by name AFTER EVERY PUSH OF THE LINE, the same hour.
+- 2026-11-22 01:32 UTC · PAGE-12: THE CAUSES' PARITY IS MERGED on `lane/page-12-2026-11-21` at b79dc3735 (B, H, W and F; FAULT 0 on
+  every row of the display lane's sort; 0 owner sentences moved on the 900; red 10, green 45 of 45): what the display
+  lane's wiring of the cause sentence waited on. `bar6CrimeOneReading (c)` is red on that lane by a moved premise;
+  the seat cures it after cure C. FORTUNE-6: CURE-2 units 1 and 2 merged (a157bd930; `tests/lint` 220 of 220; flipped
+  reds 38 to 4); U5b's builder out since 00:18. NET 2 (01:18): all four seats working; VEIL-31 426,535; THE CHAIR'S
+  OWN CONTEXT 664,740 OF 1,000,000 (66%): the hand-over to a fresh chair session is due at this milestone.
 
 ## 4. The order of the lanes still to seat (after the first four), and what each waits on
 
