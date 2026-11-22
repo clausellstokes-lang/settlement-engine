@@ -1,0 +1,62 @@
+# U7 FOR THE OWNER'S EYE: three lit places, the Power tab's ruler card and the governance paragraph, dark beside lit
+
+Written 2026-11-22 by BU7, on the chair's E70, item 1.
+
+## How this was read (CONFIRMED by run)
+
+- **The readers:**
+  - the ruler card is `PowerStrata.jsx :: ThePowers`, rendered over `derivePowerStrata`'s ruler entry, as text;
+  - the paragraph is `powerDeskRead.js :: governanceAccountRead`, the DM's view, which calls `governanceAccountOf`;
+  - the chain is `rulingChainOf`, which feeds the "Who runs this place?" block.
+- **The two trees:**
+  - DARK: a scratch copy of the clone at `6aadcb7fe`; births are law 1. Read 10:39:55Z–10:40:05Z.
+  - LIT: the flipped copy, which is the same files plus the two dials; births are law 2. Read 10:40:05Z–10:40:16Z.
+- **The births:** each is `birthConfig({ settType, culture: 'germanic' })` with the seed named.
+- **The scratch reader:** `scratchpad/bu7work/scratchtest/zzU7OwnerViewScratch.test.js`, never committed. Its output is in `bu7work/ownerview-dark.json` and `bu7work/ownerview-flipped.json`.
+- The card text below drops the section's own heading and caption ("The Seat … Open a power to see the institutions behind it.").
+
+## 1. `u7p-town-8`, a town at birth: the Craft Guilds hold the Town Mayor (R2, the dual hat)
+
+| | DARK (law 1) | LIT (law 2) |
+|---|---|---|
+| ruler card | Ruler · **Town Mayor** · Other · Strong · Contested | Ruler · **Craft Guilds** · Merchant · Minor · Contested · *Holds the seat of the Town Mayor.* |
+| chain | power Town Mayor; faction Town Mayor; Judith Weber, the smelt master and Mayor | power Town Mayor; faction **Craft Guilds**; Judith Weber, the smelt master and Mayor |
+
+**The paragraph** is the same on both trees: "Flachplatz is governed by the Town Mayor. Judith Weber, the smelt master and Mayor, holds its seat. Flachplatz tolerates the Town Mayor and no more. Weak defences are the reason. …"
+
+**What moved:** the ruler is now the house that holds the seat. Judith Weber is that house's first, so she stays. The caption ties the house to the office.
+
+## 2. `u7p-town-2`, a town at birth: the Merchant Guilds hold a Merchant oligarchy by kind (R3)
+
+| | DARK (law 1) | LIT (law 2) |
+|---|---|---|
+| ruler card | Ruler · **Merchant oligarchy** · Merchant · Minor · Contested | Ruler · **Merchant Guilds** · Merchant · Minor · Contested · *Holds the seat of the Merchant oligarchy.* |
+| chain | faction Merchant oligarchy; Beatrix Eisenberg, the senior guild master and First Magnate | faction **Merchant Guilds**; **Ulrike Goldstein, the warehouse factor** |
+
+**The paragraph:**
+- dark: "The Merchant oligarchy governs Rothafen. Its seat is held by **Beatrix Eisenberg, the senior guild master and First Magnate**. Insecurity and poverty have cost the Merchant oligarchy its standing. …"
+- lit: "The Merchant oligarchy governs Rothafen. Its seat is held by **Ulrike Goldstein, the warehouse factor**. Insecurity and poverty have cost the Merchant oligarchy its standing. …"
+
+**What moved:** the chair's person rule (E70, item 2) makes the seat's person the holder's first. So the oligarchy's First Magnate gives way to the Merchant Guilds' first, a warehouse factor.
+
+**For the owner's eye:** the paragraph now says a warehouse factor holds the seat, while the First Magnate, the office's own titled head, is unnamed.
+
+## 3. `u7p-metropolis-15`, a metropolis after the DM passes the seat to the Merchant Guilds (`CHANGE_RULING_POWER`)
+
+| | DARK (law 1) | LIT (law 2) |
+|---|---|---|
+| ruler card | Ruler · **Grand Merchant Senate** · Merchant · Strong · Contested | Ruler · **Merchant Guilds** · Merchant · Minor · Contested · *Holds the seat of the Democratic assembly.* |
+| chain | power Grand Merchant Senate; no named seat-holder | power Democratic assembly (the form kept); faction **Merchant Guilds**; **Josefine Wolf, the senior guild master** |
+
+**The paragraph:**
+- dark: "Weißgate is governed by the Grand Merchant Senate. No one is named to its seat. The Grand Merchant Senate's right to rule is contested in Weißgate. Merchant Guilds overthrew the democratic assembly and reshaped the government as a grand merchant senate."
+- lit: "The Democratic assembly governs Weißgate. Its seat is held by **Josefine Wolf, the senior guild master**. The Democratic assembly's right to rule is contested in Weißgate. Merchant Guilds seized the democratic assembly and left the government as it stood."
+
+**What moved:**
+- Under law 1 the transfer reshapes the form. Under law 2 it keeps the form, and the Merchant Guilds hold it.
+- Before U7 the lit chain named the old house's person, Dietrich Engel of The Merchant Bloc. Now it names the holder's first.
+
+## Two things the owner may want to see
+
+1. **The card shows the holder's own figures.** The ruler card prints the HOLDER's own archetype and power band, while its coup-risk chip ("Contested") is the seat's. So a "Minor" power can now be the Ruler (places 1 and 3), and a Craft Guilds reads "Merchant" by the roster's archetype label.
+2. **The paragraph never names the holder.** "<Form> governs <place>" stands, and the caption on the card is the one place the holder is tied to the form. The paragraph's own holder sentence was dropped by the chair's E70 (second deploy).
