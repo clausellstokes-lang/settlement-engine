@@ -32,6 +32,17 @@ Seat DAILY-3 (session_01ACmDYYZpEdm9Ag2ikDGTf9), eighth chair session_01ACmDYY29
    after; (3) E1's test cut to 5 a size (30 births, every size), the 900 kept in the measure with "900 of 900" in the
    test's header and `measures/B3/` (unit E1b). At the line's merge `HAND_CEILING` = the line's figure + exactly this
    lane's rows, both comments kept.
+5. THE CHAIR'S E56 (08:20 UTC) on E2: food 11/9/9/12/9/8% accepted (a builder's figure is read before it is
+   relayed). Thorp resentments 17% (25/150, "Talk among neighbours turns, sooner or later, to what the Elder Council has
+   got wrong lately.") accepted with its cure OWED HERE: L8 (the elders line) at unit 4 on who rules' label atom (point
+   97, `lane/stack-97-wip-2026-11-22` 840020b9b); re-measure thorp after L8 and send it (at or under the bar, or what else
+   it needs). Food adequate #4 BUILT AS: "Food is steady here, if not generous, and every household has enough with little
+   left over."; #12 BUILT AS: "The grain is bought in, not grown here, so bread is never wasted." (needs `grain imported`).
+   L8 to L12: this lane's at unit 4 on point 97. grainHeld lines T9, C5, F0 BUILT on `grain` ALONE, on two conditions:
+   false lines 0 for the three, and the three verbatim to the chair with the share of places printing each.
+   OWED TO THE SECOND DEPLOY: millSource (atom: the food record's mill key, `factsOf(r).foodSources` mill; blocked by the
+   fact-layer walker's READERS arm, shrink-only); legitimacyGrave (atom: a fact home for the causal band
+   `deriveCausalState().bands.public_legitimacy` critical or collapsed).
 
 ## 3. Houses, class rows, stored figures, worker bytes
 None yet (written at each merge).
