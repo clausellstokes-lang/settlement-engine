@@ -1,0 +1,34 @@
+RE-RUN: node docs/chair/2026-11-20/content/daily/measures/B1/measure.b1.mjs > docs/chair/2026-11-20/content/daily/measures/B1/b1.out.txt 2>&1
+births and slots: 900 (150 a size, M1's recipe) in 118s
+
+| row | thorp | hamlet | village | town | city | metropolis |
+|---|---:|---:|---:|---:|---:|---:|
+| top single text % of 150 | 11 | 7 | 12 | 8 | 8 | 9 |
+| distinct texts | 17 | 34 | 25 | 26 | 32 | 24 |
+| EMPTY (no true line) | 0 | 0 | 0 | 0 | 0 | 0 |
+| named branch (cites a house) | 28 | 68 | 150 | 150 | 150 | 150 |
+| FALSE "the well": no well/water source (M1) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE "the bridge": no bridge (M1) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE "the open square": no square (M1) | 0 | 0 | 0 | 0 | 0 | 0 |
+| FALSE a named house: not live or access-only (M1: isLiveInstitution / ACCESS_ONLY) | 0 | 0 | 0 | 0 | 0 | 0 |
+| a hideable house named (rule 6) | 0 | 0 | 0 | 0 | 0 | 0 |
+| a bracket printed (rule 4) | 0 | 0 | 0 | 0 | 0 | 0 |
+| the word "town" (rule 4) | 0 | 0 | 0 | 0 | 0 | 0 |
+| a named house without its article (rule 4) | 0 | 0 | 0 | 0 | 0 | 0 |
+
+M1 FALSE-LINE TOTAL: 0
+HOUSE-RULE HITS TOTAL: 0
+
+── the top text of each size ──
+thorp: 16/150 "People gather at one another's doors in the evening, and by day where the water is drawn."
+hamlet: 11/150 "Of an evening people sit out by their doors and talk across to their neighbours."
+village: 18/150 "People meet where the water is drawn and again by the house of worship, and most news passes between them."
+town: 12/150 "People cross the market square on their way to the houses of worship, and many stop to talk on the way."
+city: 12/150 "People gather at the fish market as much to talk as to buy."
+metropolis: 13/150 "People stop to talk on the toll bridge and at the fish market, where most comings and goings pass."
+
+── the named thorp M1 names (hxd-thorp-0) and a metropolis (hxd-metropolis-0) ──
+hxd-thorp-0: "Where the water is drawn is where people meet and pass on their news."
+hxd-metropolis-0: "People gather on the steps of the great cathedral, where there is always someone to talk to."
+
+done in 118s

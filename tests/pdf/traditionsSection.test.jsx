@@ -11,7 +11,9 @@
  */
 import { describe, it, expect } from 'vitest';
 import { Traditions } from '../../src/pdf/sections/Traditions.jsx';
-import { describeTraditionWindow } from '../../src/domain/traditions/genesis.js';
+import { describeTraditionWindow, deriveFoundingTraditions } from '../../src/domain/traditions/genesis.js';
+import { describeTradition } from '../../src/domain/traditions/traditionDescription.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 function collectText(node, out = []) {
@@ -63,5 +65,35 @@ describe('PDF Traditions section (07B) — mirror-only, self-gating', () => {
     const bareText = collectText(Traditions({ settlement: { name: 'Ashford', traditions: bare } })).join(' | ');
     expectAbsentWithAnchor(bareText, 'Owner:', anchor, 'owner placeholder');
     expectAbsentWithAnchor(bareText, 'Last held:', anchor, 'outcome placeholder');
+  });
+});
+
+describe('PDF Traditions section (07B) — the description under each tradition (TRAD-4 unit 5 item 6; CTR4)', () => {
+  it('a born town with a lit mirror prints each rite\'s description, composed by the one leaf for the owner (describeTradition), no wording of its own', () => {
+    const born = generateSettlementPipeline(
+      { settType: 'town', culture: 'germanic', terrainOverride: 'auto', tradeRouteAccess: 'random_trade', monsterThreat: 'civilized' },
+      null, { seed: 'trad4-u5-pdf', customContent: {} },
+    );
+    // the mirror the traditions mover projects at a lit preset: the town's founding set (genesis), on the town
+    const settlement = { ...born, traditions: deriveFoundingTraditions(born) };
+    expect(settlement.traditions.length).toBeGreaterThan(0);
+    const texts = collectText(Traditions({ settlement }));
+    let described = 0;
+    for (const rec of settlement.traditions) {
+      const d = describeTradition(rec, settlement, { audience: 'owner' });
+      if (!d) continue;
+      described += 1;
+      expect(texts, rec.name).toContain(d.text);
+    }
+    expect(described).toBeGreaterThan(0);
+  });
+
+  it('a mirror row the leaf composes nothing for (a DM\'s custom tradition) prints no description line and no placeholder', () => {
+    const custom = [{ ...MIRROR[0], id: 'custom:abc' }];
+    const texts = collectText(Traditions({ settlement: { name: 'Ashford', traditions: custom } }));
+    expect(describeTradition(custom[0], { name: 'Ashford', traditions: custom }, { audience: 'owner' })).toBeNull();
+    // anchored: the register row itself still prints (its name), only the description is absent
+    expect(texts).toContain('The Founders’ Feast');
+    expect(texts.filter((x) => /\b(undefined|null)\b|\[object Object\]/.test(x))).toEqual([]);
   });
 });

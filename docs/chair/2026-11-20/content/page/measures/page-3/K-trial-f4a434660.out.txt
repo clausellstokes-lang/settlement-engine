@@ -1,0 +1,144 @@
+## golden: documents 525 · identical 36 · corrected cards 864
+| class | leaves | towns |
+|---|---|---|
+| 1 | 1729 | 489 |
+| 2 | 8394 | 263 |
+| 3 | 12647 | 262 |
+| 4 | 6 | 3 |
+| 5 | 82 | 31 |
+| OTHER | 353 | 44 |
+OTHER FIELD powerStructure.conflicts[].parties[]: 42 leaves, 27 towns; first town|germanic|forest|isolated|civilized|golden-master-v3 powerStructure.conflicts[1].parties[0]: "Military/Guard" -> "Guild Council"
+OTHER FIELD conflicts[].parties[]: 42 leaves, 27 towns; first town|germanic|forest|isolated|civilized|golden-master-v3 conflicts[1].parties[0]: "Military/Guard" -> "Guild Council"
+OTHER FIELD powerStructure.conflicts[].desc: 27 leaves, 27 towns; first town|germanic|forest|isolated|civilized|golden-master-v3 powerStructure.conflicts[1].desc: "The Guard and the Craft Guilds are in moderate conflict over a broken promise of support. The stakes are trust." -> "The Guild Council and the Craft Guilds are in moderate conflict over a broken promise of support. The stakes are trust."
+OTHER FIELD conflicts[].desc: 27 leaves, 27 towns; first town|germanic|forest|isolated|civilized|golden-master-v3 conflicts[1].desc: "The Guard and the Craft Guilds are in moderate conflict over a broken promise of support. The stakes are trust." -> "The Guild Council and the Craft Guilds are in moderate conflict over a broken promise of support. The stakes are trust."
+OTHER FIELD powerStructure.conflicts[].plotHooks[]: 22 leaves, 22 towns; first town|germanic|forest|isolated|civilized|golden-master-v3 powerStructure.conflicts[1].plotHooks[0]: "The promise was made in writing, and the paper is now in the hands of someone who wants a price for it." -> "The man who made the promise says he was told to break it, and will not say by whom."
+OTHER FIELD conflicts[].plotHooks[]: 22 leaves, 22 towns; first town|germanic|forest|isolated|civilized|golden-master-v3 conflicts[1].plotHooks[0]: "The promise was made in writing, and the paper is now in the hands of someone who wants a price for it." -> "The man who made the promise says he was told to break it, and will not say by whom."
+OTHER FIELD powerStructure.conflicts#length: 16 leaves, 16 towns; first town|latin|plains|road|civilized|golden-master-v3 powerStructure.conflicts#length: 1 -> 0
+OTHER FIELD powerStructure.conflicts[]: 16 leaves, 16 towns; first town|latin|plains|road|civilized|golden-master-v3 powerStructure.conflicts[0]: {"parties":["Merchant Guilds","Craft Guilds"],"issue":"A broken promise of support","stakes":"Trust","intensity":"moderate","desc":"The Merchant Guilds and t... -> undefined
+OTHER FIELD conflicts#length: 16 leaves, 16 towns; first town|latin|plains|road|civilized|golden-master-v3 conflicts#length: 1 -> 0
+OTHER FIELD conflicts[]: 16 leaves, 16 towns; first town|latin|plains|road|civilized|golden-master-v3 conflicts[0]: {"parties":["Merchant Guilds","Craft Guilds"],"issue":"A broken promise of support","stakes":"Trust","intensity":"moderate","desc":"The Merchant Guilds and t... -> undefined
+OTHER FIELD generationCoherenceReceipt.judgments[].evidence#length: 16 leaves, 16 towns; first town|latin|plains|road|civilized|golden-master-v3 generationCoherenceReceipt.judgments[4].evidence#length: 3 -> 2
+OTHER FIELD generationCoherenceReceipt.judgments[].evidence[]: 16 leaves, 16 towns; first town|latin|plains|road|civilized|golden-master-v3 generationCoherenceReceipt.judgments[4].evidence[2]: {"path":"conflicts[0]","detail":"Dramatic pressure is explained by the final dossier.","evidence":"Conflict 1"} -> undefined
+OTHER FIELD powerStructure.factionRelationships[].narrative: 13 leaves, 12 towns; first town|latin|plains|road|civilized|golden-master-v3 powerStructure.factionRelationships[3].narrative: "The Merchant Guilds and the Craft Guilds are at odds over a broken promise of support, and fight over who keeps the profit of the trade." -> "The Merchant Guilds and the Craft Guilds vote together against the Landed Gentry, then fight over who keeps the profit."
+OTHER FIELD powerStructure.conflicts[].issue: 11 leaves, 11 towns; first city|celtic|hills|road|civilized|golden-master-v3 powerStructure.conflicts[1].issue: "A broken promise of support" -> "Members leaving one power for the other"
+OTHER FIELD powerStructure.conflicts[].stakes: 11 leaves, 11 towns; first city|celtic|hills|road|civilized|golden-master-v3 powerStructure.conflicts[1].stakes: "Trust" -> "Loyalty and numbers"
+OTHER FIELD conflicts[].issue: 11 leaves, 11 towns; first city|celtic|hills|road|civilized|golden-master-v3 conflicts[1].issue: "A broken promise of support" -> "Members leaving one power for the other"
+OTHER FIELD conflicts[].stakes: 11 leaves, 11 towns; first city|celtic|hills|road|civilized|golden-master-v3 conflicts[1].stakes: "Trust" -> "Loyalty and numbers"
+OTHER FIELD powerStructure.conflicts[].intensity: 5 leaves, 5 towns; first metropolis|latin|riverside|river|civilized|golden-master-v3 powerStructure.conflicts[1].intensity: "high" -> "moderate"
+OTHER FIELD conflicts[].intensity: 5 leaves, 5 towns; first metropolis|latin|riverside|river|civilized|golden-master-v3 conflicts[1].intensity: "high" -> "moderate"
+OTHER FIELD pressureSentence: 2 leaves, 2 towns; first town|germanic|auto|random_trade|civilized|gm-seed-a pressureSentence: "Burkhard Schubert and Liutgar Huber are teacher and heir. A third party has asked Burkhard Schubert, quietly, whether Liutgar Huber can be trusted. The answ... -> "Burkhard Schubert and Liutgar Huber are teacher and heir. Liutgar Huber has taken on a client Burkhard Schubert turned away on principle."
+OTHER FIELD generationCoherenceReceipt.judgments[].evidence[].path: 1 leaves, 1 towns; first town|greek|forest|isolated|civilized|golden-master-v3 generationCoherenceReceipt.judgments[4].evidence[3].path: "authoredTensions[0]" -> "conflicts[1]"
+OTHER FIELD generationCoherenceReceipt.judgments[].evidence[].evidence: 1 leaves, 1 towns; first town|greek|forest|isolated|civilized|golden-master-v3 generationCoherenceReceipt.judgments[4].evidence[3].evidence: "Town Settlement" -> "Conflict 2"
+OTHER FIELD relationships[].type: 1 leaves, 1 towns; first town|germanic|plains|isolated|civilized|golden-master-v3 relationships[14].type: "respect" -> "rival"
+OTHER FIELD relationships[].typeName: 1 leaves, 1 towns; first town|germanic|plains|isolated|civilized|golden-master-v3 relationships[14].typeName: "Genuine Respect" -> "Professional Rivalry"
+OTHER FIELD relationships[].strength: 1 leaves, 1 towns; first town|germanic|plains|isolated|civilized|golden-master-v3 relationships[14].strength: "genuine" -> "bitter"
+OTHER FIELD relationships[].archetypeKey: 1 leaves, 1 towns; first town|germanic|plains|isolated|civilized|golden-master-v3 relationships[14].archetypeKey: "genuine_respect" -> "peer_rivalry"
+OTHER town|germanic|forest|isolated|civilized|golden-master-v3 powerStructure.conflicts[1].parties[0]
+    before: "Military/Guard"
+    after:  "Guild Council"
+OTHER town|germanic|forest|isolated|civilized|golden-master-v3 powerStructure.conflicts[1].desc
+    before: "The Guard and the Craft Guilds are in moderate conflict over a broken promise of support. The stakes are trust."
+    after:  "The Guild Council and the Craft Guilds are in moderate conflict over a broken promise of support. The stakes are trust."
+OTHER town|germanic|forest|isolated|civilized|golden-master-v3 powerStructure.conflicts[1].plotHooks[0]
+    before: "The promise was made in writing, and the paper is now in the hands of someone who wants a price for it."
+    after:  "The man who made the promise says he was told to break it, and will not say by whom."
+OTHER town|germanic|forest|isolated|civilized|golden-master-v3 conflicts[1].parties[0]
+    before: "Military/Guard"
+    after:  "Guild Council"
+OTHER town|germanic|forest|isolated|civilized|golden-master-v3 conflicts[1].desc
+    before: "The Guard and the Craft Guilds are in moderate conflict over a broken promise of support. The stakes are trust."
+    after:  "The Guild Council and the Craft Guilds are in moderate conflict over a broken promise of support. The stakes are trust."
+OTHER town|germanic|forest|isolated|civilized|golden-master-v3 conflicts[1].plotHooks[0]
+    before: "The promise was made in writing, and the paper is now in the hands of someone who wants a price for it."
+    after:  "The man who made the promise says he was told to break it, and will not say by whom."
+OTHER town|latin|plains|road|civilized|golden-master-v3 powerStructure.factionRelationships[3].narrative
+    before: "The Merchant Guilds and the Craft Guilds are at odds over a broken promise of support, and fight over who keeps the profit of the trade."
+    after:  "The Merchant Guilds and the Craft Guilds vote together against the Landed Gentry, then fight over who keeps the profit."
+OTHER town|latin|plains|road|civilized|golden-master-v3 powerStructure.conflicts#length
+    before: 1
+    after:  0
+OTHER town|latin|plains|road|civilized|golden-master-v3 powerStructure.conflicts[0]
+    before: {"parties":["Merchant Guilds","Craft Guilds"],"issue":"A broken promise of support","stakes":"Trust","intensity":"moderate","desc":"The Merchant Guilds and t...
+    after:  undefined
+OTHER town|latin|plains|road|civilized|golden-master-v3 conflicts#length
+    before: 1
+    after:  0
+## census: documents 720 · identical 337 · corrected cards 702
+| class | leaves | towns |
+|---|---|---|
+| 1 | 1436 | 383 |
+| 2 | 11082 | 361 |
+| 3 | 18284 | 353 |
+| 4 | 22 | 11 |
+| 5 | 235 | 59 |
+| OTHER | 686 | 89 |
+OTHER FIELD powerStructure.conflicts[].parties[]: 59 leaves, 28 towns; first r2r-town-11 powerStructure.conflicts[0].parties[1]: "Military/Guard" -> "Reform Movement"
+OTHER FIELD conflicts[].parties[]: 59 leaves, 28 towns; first r2r-town-11 conflicts[0].parties[1]: "Military/Guard" -> "Reform Movement"
+OTHER FIELD powerStructure.conflicts[].desc: 45 leaves, 32 towns; first r2r-town-11 powerStructure.conflicts[0].desc: "The Arcane Council and the Guard are in moderate conflict over a ruling that one power refuses to obey. The stakes are authority." -> "The Arcane Council and the Reform Movement are in moderate conflict over a ruling that one power refuses to obey. The stakes are authority."
+OTHER FIELD conflicts[].desc: 45 leaves, 32 towns; first r2r-town-11 conflicts[0].desc: "The Arcane Council and the Guard are in moderate conflict over a ruling that one power refuses to obey. The stakes are authority." -> "The Arcane Council and the Reform Movement are in moderate conflict over a ruling that one power refuses to obey. The stakes are authority."
+OTHER FIELD powerStructure.conflicts[].plotHooks[]: 32 leaves, 25 towns; first r2r-town-11 powerStructure.conflicts[0].plotHooks[0]: "The ruling was given in writing, and the copy that was posted is not the one that was signed." -> "A man sent to enforce the ruling was turned away, and has asked for others to go with him."
+OTHER FIELD conflicts[].plotHooks[]: 32 leaves, 25 towns; first r2r-town-11 conflicts[0].plotHooks[0]: "The ruling was given in writing, and the copy that was posted is not the one that was signed." -> "A man sent to enforce the ruling was turned away, and has asked for others to go with him."
+OTHER FIELD npcs[].goal.long: 29 leaves, 25 towns; first r2r-town-0 npcs[6].goal.long: "Never end up in Sabinus Crispus's shadow." -> "Settle, once and for all, what they and Sabinus Crispus owe each other."
+OTHER FIELD powerStructure.conflicts[].issue: 28 leaves, 22 towns; first r2r-town-25 powerStructure.conflicts[0].issue: "Military conscription of guild apprentices" -> "Control of the dock taxation authority"
+OTHER FIELD powerStructure.conflicts[].stakes: 28 leaves, 22 towns; first r2r-town-25 powerStructure.conflicts[0].stakes: "Labor control" -> "Port revenue"
+OTHER FIELD conflicts[].issue: 28 leaves, 22 towns; first r2r-town-25 conflicts[0].issue: "Military conscription of guild apprentices" -> "Control of the dock taxation authority"
+OTHER FIELD conflicts[].stakes: 28 leaves, 22 towns; first r2r-town-25 conflicts[0].stakes: "Labor control" -> "Port revenue"
+OTHER FIELD pressureSentence: 24 leaves, 24 towns; first r2r-town-2 pressureSentence: "Photeine Kamytzes has taken a precaution against Akakisa Argyros that the magistrate was not meant to discover. Akakisa Argyros has discovered it." -> "Photeine Kamytzes has taken a new apprentice, and Akakisa Argyros has heard the apprentice is being taught things the magistrate never was."
+OTHER FIELD powerStructure.factionRelationships[].narrative: 20 leaves, 16 towns; first r2r-town-34 powerStructure.factionRelationships[2].narrative: "The Guild Council holds the seat and collects the taxes; the Religious Authorities tell people that the Guild Council's rule is right and ordained. Each pro... -> "The Guild Council holds the seat and collects the taxes; the Religious Authorities have long told people that the Guild Council's rule is right and ordained...
+OTHER FIELD powerStructure.conflicts[]: 19 leaves, 18 towns; first r2r-village-30 powerStructure.conflicts[0]: {"parties":["The Independent Bloc","Elected Reeve"],"issue":"Precedence at public gatherings","stakes":"Standing","intensity":"moderate","desc":"The Independ... -> undefined
+OTHER FIELD conflicts[]: 19 leaves, 18 towns; first r2r-village-30 conflicts[0]: {"parties":["The Independent Bloc","Elected Reeve"],"issue":"Precedence at public gatherings","stakes":"Standing","intensity":"moderate","desc":"The Independ... -> undefined
+OTHER FIELD generationCoherenceReceipt.judgments[].evidence[]: 19 leaves, 18 towns; first r2r-village-30 generationCoherenceReceipt.judgments[4].evidence[2]: {"path":"conflicts[0]","detail":"Dramatic pressure is explained by the final dossier.","evidence":"Conflict 1"} -> undefined
+OTHER FIELD powerStructure.conflicts#length: 18 leaves, 18 towns; first r2r-village-30 powerStructure.conflicts#length: 1 -> 0
+OTHER FIELD conflicts#length: 18 leaves, 18 towns; first r2r-village-30 conflicts#length: 1 -> 0
+OTHER FIELD generationCoherenceReceipt.judgments[].evidence#length: 18 leaves, 18 towns; first r2r-village-30 generationCoherenceReceipt.judgments[4].evidence#length: 3 -> 2
+OTHER FIELD powerStructure.conflicts[].intensity: 16 leaves, 16 towns; first r2r-town-25 powerStructure.conflicts[0].intensity: "high" -> "moderate"
+OTHER FIELD conflicts[].intensity: 16 leaves, 16 towns; first r2r-town-25 conflicts[0].intensity: "high" -> "moderate"
+OTHER FIELD npcs[].goal.intent.long.kind: 15 leaves, 15 towns; first r2r-town-12 npcs[5].goal.intent.long.kind: "charter" -> "solvency"
+OTHER FIELD npcs[].goal.intent.long.key: 14 leaves, 14 towns; first r2r-town-25 npcs[10].goal.intent.long.key: "indulge_trait" -> "secure_office"
+OTHER FIELD npcs[].goal.short: 13 leaves, 13 towns; first r2r-town-12 npcs[5].goal.short: "Stand by Razan al-Yamani in their next quarrel, whoever it is with." -> "Keep the friendship with Razan al-Yamani quiet, where it does the most good."
+OTHER FIELD npcs[].goal.intent.long.target.id: 10 leaves, 10 towns; first r2r-town-53 npcs[2].goal.intent.long.target.id: "npc_ropemaker" -> "Merchant Guilds"
+OTHER FIELD npcs[].goal.intent.long.family: 7 leaves, 7 towns; first r2r-town-25 npcs[10].goal.intent.long.family: "PERSONALITY" -> "RANK"
+OTHER FIELD npcs[].goal.intent.short.target.id: 6 leaves, 6 towns; first r2r-metropolis-13 npcs[56].goal.intent.short.target.id: "npc_opera_house" -> "npc_professional_city_watch"
+OTHER FIELD npcs[].goal.intent.short.kind: 5 leaves, 5 towns; first r2r-metropolis-13 npcs[56].goal.intent.short.kind: "creditor" -> "rival_enemy"
+OTHER FIELD npcs[].goal.intent.short.key: 5 leaves, 5 towns; first r2r-metropolis-13 npcs[56].goal.intent.short.key: "collect_debt" -> "settle_rivalry"
+OTHER FIELD npcs[].goal.intent.long.target: 4 leaves, 4 towns; first r2r-town-25 npcs[10].goal.intent.long.target: null -> {"kind":"npc","id":"npc_merchant_guilds_3_8"}
+OTHER FIELD powerStructure.factionRelationships[].direction: 4 leaves, 4 towns; first r2r-metropolis-6 powerStructure.factionRelationships[0].direction: "escalating" -> "stable"
+OTHER FIELD npcs[].goal.intent.long.target.kind: 3 leaves, 3 towns; first r2r-town-53 npcs[2].goal.intent.long.target.kind: "npc" -> "power"
+OTHER r2r-village-30 powerStructure.conflicts#length
+    before: 1
+    after:  0
+OTHER r2r-village-30 powerStructure.conflicts[0]
+    before: {"parties":["The Independent Bloc","Elected Reeve"],"issue":"Precedence at public gatherings","stakes":"Standing","intensity":"moderate","desc":"The Independ...
+    after:  undefined
+OTHER r2r-village-30 conflicts#length
+    before: 1
+    after:  0
+OTHER r2r-village-30 conflicts[0]
+    before: {"parties":["The Independent Bloc","Elected Reeve"],"issue":"Precedence at public gatherings","stakes":"Standing","intensity":"moderate","desc":"The Independ...
+    after:  undefined
+OTHER r2r-village-30 generationCoherenceReceipt.judgments[4].evidence#length
+    before: 3
+    after:  2
+OTHER r2r-village-30 generationCoherenceReceipt.judgments[4].evidence[2]
+    before: {"path":"conflicts[0]","detail":"Dramatic pressure is explained by the final dossier.","evidence":"Conflict 1"}
+    after:  undefined
+OTHER r2r-town-0 npcs[6].goal.long
+    before: "Never end up in Sabinus Crispus's shadow."
+    after:  "Settle, once and for all, what they and Sabinus Crispus owe each other."
+OTHER r2r-town-2 pressureSentence
+    before: "Photeine Kamytzes has taken a precaution against Akakisa Argyros that the magistrate was not meant to discover. Akakisa Argyros has discovered it."
+    after:  "Photeine Kamytzes has taken a new apprentice, and Akakisa Argyros has heard the apprentice is being taught things the magistrate never was."
+OTHER r2r-town-3 powerStructure.conflicts#length
+    before: 1
+    after:  0
+OTHER r2r-town-3 powerStructure.conflicts[0]
+    before: {"parties":["Merchant Guilds","Merchant Council"],"issue":"Goods sold below the agreed price","stakes":"Market share","intensity":"moderate","desc":"The Merc...
+    after:  undefined
+## both corpora
+cards by band, before: low 31320 · moderate 1576 · high 2562
+cards by band, after:  low 29754 · moderate 2129 · high 3575
+powers 5710: first card (rank 1) reads 'low' before 2631, after 1572
+  e.g. golden thorp|germanic|plains|road|civilized|golden-master-v3: The Independent Bloc's first card Thomas Schmidt (the bloc's speaker) low -> moderate
+  e.g. golden thorp|germanic|hills|road|civilized|golden-master-v3: The Independent Bloc's first card Thomas Schmidt (the bloc's speaker) low -> moderate
+  e.g. golden thorp|germanic|riverside|river|civilized|golden-master-v3: The Independent Bloc's first card Thomas Schmidt (the bloc's speaker) low -> moderate
+towns where a crisis role changes hands: 0 (class 4 towns, any cast leaf: 14)

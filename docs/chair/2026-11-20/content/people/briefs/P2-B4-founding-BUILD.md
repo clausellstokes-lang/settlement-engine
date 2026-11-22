@@ -47,3 +47,7 @@ Commits on your branch (red first, then the cure), by explicit paths, ending:
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 Claude-Session: https://claude.ai/code/session_019yED1QfbBhtLaDuWfGxc42
 Never push, never a pull request, never `--no-verify`. Final message at most 250 words: the commits; the wrapping call and every line touched in `founder.js` / `foundingRowAdmits.js`; the 13 comma wordings as built; the shares before and after; the house list; every red and whose it is.
+
+## The chair's common rule 2 (20:36 UTC): A LITERAL HAS ONE HOME
+"An existing line is never copied into a pool file as its index 0: the pool handed to the door is composed at the call site as [the existing line, ...the new siblings]."
+INTEGRATOR'S READING FOR THIS UNIT: `foundingVariants.js` never retypes a row of `FOUNDERS_BY_TIER` or `OVERCOMING_BY_PROSPERITY`, neither as a row, nor as a map key, nor as a map value. Each variant names its canonical row BY REFERENCE (tier and index, or table, kind and index, into the imported table), and the canonical map is BUILT from the imported table at module load, so a reworded table row moves with it. The pick composes `[the drawn row, ...eligible]` at the call. A test asserts that no string literal in `foundingVariants.js` equals a row of either table. If the shape will not hold this, stop and report.

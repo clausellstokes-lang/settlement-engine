@@ -1,0 +1,180 @@
+/**
+ * traditionDescriptionFrames.walker.test.js — TRAD-1 (the seventh chair, 2026-11-20; rulings CTR2 and CTR6).
+ *
+ * THE CLOSED SET. A tradition's description (`domain/traditions/traditionDescription.js`) is composed ONLY from the
+ * frames and fit rows of `data/traditionDescriptionTable.js`. This walker holds that set four ways:
+ *   1. THE COUNT: every authored template string is enumerated and the count is pinned; a new frame moves the pin
+ *      on purpose or reds.
+ *   2. THE CAUSE LAW (CTR2): a word that asserts a cause ("since", "because", "in memory of", "founded", "after",
+ *      "to mark") stands only in a CAUSE frame; every other authored string is scanned for it.
+ *   3. THE LEVEL LAW (CTR6, the owner's calm rule): no authored string dramatises; a closed lexicon of drama words is
+ *      scanned over every frame, gloss, lead and prose form.
+ *   4. THE BORN POOL: every sentence the leaf composes for 24 born towns (four a tier, six cultures) matches one of
+ *      the frames, and no composed sentence carries a drama word once the record's own names are masked.
+ * Plus: THE TABLE HOLDS NO HIDEABLE HOUSE (no rite is ever given to a house the gallery veil may hide whole).
+ *
+ * RED FIRST, IN MEMORY: each law's predicate is driven over a PLANTED string and must name it (a drama word in a
+ * lead; a cause word in a keeper frame; a sentence no frame produces), so no arm can pass by refusing nothing.
+ */
+import { describe, it, expect } from 'vitest';
+import {
+  ELEMENT_GLOSS, ACT_FRAMES, HOUSE_FRAMES, POWER_FRAMES, OWNER_FRAMES, CAUSE_FRAMES, ECONOMY_FRAMES,
+  ECONOMY_ONLY_FRAMES, KEEPER_HOUSES, ECONOMY_FIT,
+} from '../../src/data/traditionDescriptionTable.js';
+import { describeTradition } from '../../src/domain/traditions/traditionDescription.js';
+import { deriveFoundingTraditions } from '../../src/domain/traditions/genesis.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
+import { isHideableHouse } from '../../src/domain/people/cardVeil.js';
+
+const CAUSE_WORDS = /\b(since|because|in memory of|founded|founding by|after|to mark|owing to|thanks to)\b/i;
+const DRAMA_WORDS = /\b(blood\w*|grim\w*|dread\w*|fear\w*|feud\w*|war\b|wars|curse\w*|doom\w*|troubl\w*|strife|terror\w*|haunt\w*|vengeance|bitter\w*|dark\w*|sinister|violen\w*|massacre\w*|slaughter\w*|tragic\w*|tragedy|sorrow\w*|grief|griev\w*|desperat\w*|ruin\w*|menac\w*|ominous|uneasy|tension\w*|secret\w*|rival\w*)\b/i;
+
+/** Every authored template string, by its home. */
+function templates() {
+  /** @type {Array<{ home: string, text: string, cause: boolean }>} */
+  const out = [];
+  const add = (home, text, cause = false) => out.push({ home, text, cause });
+  for (const [el, pair] of Object.entries(ELEMENT_GLOSS)) pair.forEach((g, i) => add(`gloss.${el}.${i}`, g));
+  for (const [act, list] of Object.entries(ACT_FRAMES)) list.forEach((f, i) => add(`act.${act}.${i}`, f.lead));
+  for (const [k, list] of Object.entries(HOUSE_FRAMES)) list.forEach((t, i) => add(`house.${k}.${i}`, t));
+  for (const [k, list] of Object.entries(POWER_FRAMES)) list.forEach((t, i) => add(`power.${k}.${i}`, t));
+  OWNER_FRAMES.forEach((t, i) => add(`owner.${i}`, t));
+  for (const [k, list] of Object.entries(CAUSE_FRAMES)) list.forEach((t, i) => add(`cause.${k}.${i}`, t, true));
+  ECONOMY_FRAMES.forEach((t, i) => add(`economy.${i}`, t));
+  ECONOMY_ONLY_FRAMES.forEach((t, i) => add(`economy.only.${i}`, t));
+  return out;
+}
+
+/** Every authored prose FORM a frame's slot may take from the table itself (house and income prose). */
+function proseForms() {
+  const out = [];
+  for (const rows of [...Object.values(KEEPER_HOUSES.element), ...Object.values(KEEPER_HOUSES.act)]) {
+    for (const r of rows) if (r.prose) out.push(r.prose);
+  }
+  for (const rows of Object.values(ECONOMY_FIT)) for (const r of rows) out.push(r.prose);
+  return out;
+}
+
+/** The cause law's predicate: the homes of non-cause strings carrying a cause word. */
+const causeViolations = (list) => list.filter((t) => !t.cause && CAUSE_WORDS.test(t.text)).map((t) => t.home);
+/** The level law's predicate. */
+const dramaViolations = (strings) => strings.filter((s) => DRAMA_WORDS.test(s));
+
+/** A frame as a whole-sentence matcher: each {slot} matches any run of text. */
+const frameRe = (t) => new RegExp(`^${t.replace(/[.*+?^$()|[\]\\]/g, '\\$&').replace(/\{\w+\}/g, '.+?')}$`);
+
+/** Every sentence shape the leaf may produce: S1 (lead × gloss) and every S2/S3 frame. */
+function sentenceMatchers() {
+  const res = [];
+  for (const list of Object.values(ACT_FRAMES)) {
+    for (const f of list) for (const pair of Object.values(ELEMENT_GLOSS)) res.push(frameRe(`${f.lead} that ${pair[f.plural ? 1 : 0]}.`));
+  }
+  for (const t of templates()) if (!t.home.startsWith('gloss.') && !t.home.startsWith('act.')) res.push(frameRe(t.text));
+  return res;
+}
+/** The sentences of a composed text no frame produces. */
+const strayIn = (text, matchers) => text.split(/(?<=\.)\s+(?=[A-Z])/).filter((s) => s && !matchers.some((re) => re.test(s)));
+
+describe('traditionDescriptionFrames — the closed set', () => {
+  it('THE COUNT: the authored template strings number exactly the pin (a new frame moves it on purpose)', () => {
+    expect(templates().length).toBe(73);
+  });
+
+  it('every frame slot is one of the slots the leaf fills', () => {
+    const SLOTS = new Set(['house', 'person', 'title', 'power', 'owner', 'town', 'Town', 'age', 'foundedBy', 'event', 'when', 'Income', 'is', 'rank']);
+    for (const t of templates()) for (const m of t.text.matchAll(/\{(\w+)\}/g)) expect(SLOTS.has(m[1]), `${t.home}: {${m[1]}}`).toBe(true);
+  });
+});
+
+describe('traditionDescriptionFrames — the cause law (CTR2)', () => {
+  it('a cause word stands only in a CAUSE frame', () => {
+    expect(causeViolations(templates())).toEqual([]);
+  });
+
+  it('every CAUSE frame does assert its cause (the law cannot pass on an empty cause set)', () => {
+    const causes = templates().filter((t) => t.cause);
+    expect(causes.length).toBeGreaterThan(0);
+    for (const t of causes) expect(CAUSE_WORDS.test(t.text), t.home).toBe(true);
+  });
+
+  it('RED FIRST: a cause word planted in a keeper frame is named', () => {
+    const planted = [...templates(), { home: 'house.body.planted', text: 'It is kept by {house} because of {event}.', cause: false }];
+    expect(causeViolations(planted)).toEqual(['house.body.planted']);
+  });
+});
+
+describe('traditionDescriptionFrames — the level law (CTR6, the owner\'s calm rule)', () => {
+  it('no authored frame, gloss, lead or prose form dramatises', () => {
+    expect(dramaViolations([...templates().map((t) => t.text), ...proseForms()])).toEqual([]);
+  });
+
+  it('RED FIRST: a drama word planted in a lead is named', () => {
+    expect(dramaViolations(['A common feast', 'A grim feast', 'A vigil'])).toEqual(['A grim feast']);
+  });
+});
+
+describe('traditionDescriptionFrames — the table holds no hideable house', () => {
+  it('no keeper row matches any catalogue house the gallery veil may hide whole (criminal, clandestine, illegal brokerage)', () => {
+    const hideable = [];
+    for (const [tier, cats] of Object.entries(institutionalCatalog)) {
+      for (const [category, rows] of Object.entries(cats)) {
+        for (const [name, row] of Object.entries(rows)) {
+          if (isHideableHouse({ name, category, ...row })) hideable.push(`${tier}:${name}`);
+        }
+      }
+    }
+    expect(hideable.length).toBeGreaterThan(0); // the scan reads a real catalogue
+    const rows = [...Object.values(KEEPER_HOUSES.element), ...Object.values(KEEPER_HOUSES.act)].flat();
+    const hits = hideable.filter((h) => rows.some((r) => new RegExp(r.match, 'i').test(h.split(':').slice(1).join(':'))));
+    expect(hits).toEqual([]);
+  });
+});
+
+describe('traditionDescriptionFrames — the born pool: every composed sentence is a frame', () => {
+  const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
+  const CULTURES = ['germanic', 'norse', 'latin', 'arabic', 'east_asian', 'south_asian'];
+  const towns = TIERS.flatMap((settType, i) => [0, 1, 2, 3].map((j) => generateSettlementPipeline(
+    { settType, culture: CULTURES[(i + j) % CULTURES.length], terrainOverride: 'auto', tradeRouteAccess: 'random_trade', monsterThreat: 'civilized' },
+    null, { seed: `trad-walker-${settType}-${j}`, customContent: {} },
+  )));
+  const matchers = sentenceMatchers();
+
+  it('24 born towns: every sentence of every description, for the owner and for the reader, is one of the frames', () => {
+    let described = 0;
+    const stray = [];
+    for (const t of towns) {
+      for (const rec of deriveFoundingTraditions(t)) {
+        for (const audience of ['owner', 'reader']) {
+          const d = describeTradition(rec, t, { audience });
+          if (!d) continue;
+          described += 1;
+          stray.push(...strayIn(d.text, matchers).map((s) => `${t.name} (${audience}): ${s}`));
+        }
+      }
+    }
+    expect(described).toBeGreaterThan(100);
+    expect(stray).toEqual([]);
+  }, 60000);
+
+  it('no composed description dramatises, once the record\'s own names are masked', () => {
+    const loud = [];
+    for (const t of towns) {
+      for (const rec of deriveFoundingTraditions(t)) {
+        const d = describeTradition(rec, t, { audience: 'owner' });
+        if (!d) continue;
+        let text = d.text.split(String(t.name)).join('');
+        for (const n of [...d.named.houses, ...d.named.persons, ...d.named.powers, ...d.named.events]) text = text.split(n).join('');
+        const fd = t.history?.founding?.foundedBy;
+        if (typeof fd === 'string') text = text.split(fd).join('');
+        if (DRAMA_WORDS.test(text)) loud.push(`${t.name}: ${d.text}`);
+      }
+    }
+    expect(loud).toEqual([]);
+  }, 60000);
+
+  it('RED FIRST: a sentence no frame produces is named stray', () => {
+    expect(strayIn('A common feast that honours the river. The river runs red with old grudges.', matchers))
+      .toEqual(['The river runs red with old grudges.']);
+  });
+});

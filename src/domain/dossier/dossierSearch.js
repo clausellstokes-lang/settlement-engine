@@ -44,8 +44,8 @@ import { toPublicSafe } from '../display/publicSafe.js';
 import { institutionDisplayName } from '../display/institutionDisplayName.js';
 import { resourceDisplayName } from '../display/resourceDisplayName.js';
 import { relationshipsDeskLists } from '../display/stateProse/relationshipsDeskRead.js';
-import { deriveFoundingTraditions } from '../traditions/genesis.js';
-import { mergeCustomFoundingTraditions } from '../traditions/customFounding.js';
+import { shownTraditionsOf, descriptionSetOf } from '../traditions/shownTraditions.js';
+import { describeTradition } from '../traditions/traditionDescription.js';
 import { compareCodepoint } from '../deterministicSort.js';
 import { cardPowerNames, cardHouseOf } from '../people/cardPowers.js';
 
@@ -198,21 +198,21 @@ function serviceRows(availableServices) {
 }
 
 /**
- * The traditions the Traditions tab shows: the lit mirror when the engine wrote one, else the
- * founding preview with the DM's custom traditions merged in (TraditionsTab's own rule).
- * @param {Record<string, unknown>} settlement
- * @param {unknown} customTraditions
- * @returns {{ preview: boolean, recs: unknown[] }}
+ * THE TRADITIONS A SEARCH FINDS, composed with the view's own audience (TRAD-2 unit 2; CTR9, CTR11): what the Traditions
+ * tab prints for this view. A shared page (`publicDossier`) reads ONLY the rows the owner's save drew (`publicProse`, site
+ * `traditions`: sharedTraditionsOf, below) and never derives a set from `id`; with none drawn, none. The owner's views read
+ * the tab's one set rule (shownTraditions.js) over the OWNER's record (a player view's projection carries no seed), each described for the view's audience over its set (descriptionSetOf, TRAD-4 unit 10), as the tab does.
+ * @param {Record<string, unknown>} source  the owner's record @param {Record<string, unknown>} view  the enumerated view
+ * @param {SearchViewer} viewer @param {unknown} customTraditions @returns {FoundTradition[]}
  */
-function traditionsOf(settlement, customTraditions) {
-  const mirror = Array.isArray(settlement.traditions) ? settlement.traditions : null;
-  const preview = !mirror || mirror.length === 0;
-  if (!preview) return { preview, recs: /** @type {unknown[]} */ (mirror) };
-  const founding = deriveFoundingTraditions(
-    /** @type {Parameters<typeof deriveFoundingTraditions>[0]} */ (/** @type {unknown} */ (settlement)));
-  const custom = /** @type {Parameters<typeof mergeCustomFoundingTraditions>[1]} */ (
-    Array.isArray(customTraditions) ? customTraditions : []);
-  return { preview, recs: mergeCustomFoundingTraditions(founding, custom) };
+function traditionsOf(source, view, viewer, customTraditions) {
+  if (viewer.publicDossier === true) return sharedTraditionsOf(view);
+  const { preview, recs } = shownTraditionsOf(/** @type {Parameters<typeof shownTraditionsOf>[0]} */ (source), customTraditions);
+  const audience = viewer.playerView === true ? 'reader' : 'owner';
+  const set = descriptionSetOf(/** @type {Parameters<typeof descriptionSetOf>[0]} */ (source), audience, customTraditions);
+  return recs.map((rec) => { // composed whole by the leaf, its pools drawn through drawDeclared inside it, as the tab does
+    const described = describeTradition(rec, source, { audience, set });
+    return { rec, preview, shared: false, description: described ? described.text : '', calendarLine: null }; });
 }
 
 /**
@@ -396,18 +396,18 @@ export function enumerateDossierObjects(settlement, viewer = {}, options = {}) {
     });
   });
 
-  // TRADITIONS — the register the Traditions tab shows (mirror, or the founding preview).
-  const { preview, recs } = traditionsOf(view, options.customTraditions);
-  recs.forEach((r, i) => {
-    const rec = asRecord(r);
-    if (!rec) return;
+  // TRADITIONS — what the Traditions tab prints for this view (traditionsOf): on a shared page the rows the owner's save
+  // drew, by their name, chip and text alone; on the owner's views the tab's set, with the description for the audience.
+  traditionsOf(source, view, viewer, options.customTraditions).forEach((found, i) => {
+    const { rec, description } = found;
     const motif = asRecord(rec.coreMotif) || {};
     push({
       type: 'tradition', key: `tradition:${asText(rec.id) || i}:${i}`, tab: 'traditions', id: null,
       names: [rec.name],
-      text: [tokenWords(motif.element), tokenWords(motif.act), asRecord(rec.expression)?.epithet],
+      text: found.shared ? [rec.chip, description]
+        : [tokenWords(motif.element), tokenWords(motif.act), asRecord(rec.expression)?.epithet, description],
       prominence: 0,
-      raw: rec, meta: { preview },
+      raw: rec, meta: { preview: found.preview, description, calendarLine: found.calendarLine },
     });
   });
 
@@ -477,6 +477,27 @@ export function enumerateDossierObjects(settlement, viewer = {}, options = {}) {
 // FPZ list keys this file's reads by LINE, and a line added above them would move every key.
 // An import declaration is hoisted wherever it sits at the top level.
 import { publicProseOf } from '../display/publicProse.js';
+
+/**
+ * One tradition as the search mounts it: the record TraditionRow renders, and the description and calendar line the
+ * view prints under it (`calendarLine` null: the row computes its own from the record's window).
+ * @typedef {{ rec: Record<string, unknown>, preview: boolean, shared: boolean, description: string, calendarLine: string|null }} FoundTradition
+ */
+
+/**
+ * The shared page's traditions (CTR9): the rows the owner's save drew, as the tab's SharedTraditionRow mounts them (the
+ * record's name, chip and element; the drawn calendar line and the reader's description as text). No row, no tradition.
+ * @param {Record<string, unknown>} view @returns {FoundTradition[]}
+ */
+function sharedTraditionsOf(view) {
+  const rows = publicProseOf(/** @type {Parameters<typeof publicProseOf>[0]} */ (view), 'traditions');
+  return asList(rows).flatMap((r) => {
+    const row = asRecord(r);
+    if (!row) return [];
+    const rec = { id: asText(row.id), name: asText(row.name), chip: asText(row.chip), coreMotif: { element: asText(row.element) } };
+    return [{ rec, preview: true, shared: true, description: asText(row.text), calendarLine: asText(row.when) }];
+  });
+}
 
 /**
  * The tab that prints each shipped site (the hosts of `publicProseCompose.js :: PUBLIC_PROSE_SITES`).

@@ -18,6 +18,15 @@ import { todayOf } from '../generators/power/powerLinesToday.js'; // PEOPLE-2 B2
 /** @param {Parameters<typeof bornVoiced>} a */ const generateSettlementPipeline = (...a) => todayOf(bornVoiced(...a));
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { CONSTRAINT_VARIANTS, POSITION_VARIANTS } from '../../src/data/npcStructureVariants.js';
+import { readFileSync } from 'node:fs';
+
+// PEOPLE-1 B1c (the chair's ruling of 20:30 UTC): a pool's index 0 is the writer's own `T` row, its one home; read from the
+// writer's table, SLICED FROM ITS FILE and evaluated (`npcPositionPools.test.js`'s method; never retyped)
+const WRITER = readFileSync(new URL('../../src/generators/npcStructure.js', import.meta.url), 'utf8');
+const cutT = (/** @type {string} */ from, /** @type {string} */ to) => { const a = WRITER.indexOf(from); const b = WRITER.indexOf(to, a); if (a < 0 || b < 0) throw new Error(`slice ${from}`); return WRITER.slice(a, b); };
+/** @type {Record<string, { position: string, constraint: string }>} */
+const { T } = await import(/* @vite-ignore */ `data:text/javascript;base64,${Buffer.from([cutT('const GOVERNANCE_FRACTURED', 'function getPrimaryCondition'), cutT('const T = {};', '// ── Score NPCs'), 'export { T };'].join('\n')).toString('base64')}`);
 
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** the census's 720 shape (r2r-) @param {string} seed */
@@ -33,8 +42,12 @@ function born(seed) {
 /** [town, the line that must not print, what prints in its place] */
 const ROWS = /** @type {Array<[string, string, string]>} */ ([
   ['r2r-hamlet-48', 'have been placed on the same council committee.', 'have been handed the same dispute to settle together. The first meeting is next week.'],
-  ['r2r-village-13', 'Leads the faith in quiet times, at peace with the seat beside it.', 'Leads the faith in quiet times, whatever it thinks of the seat beside it.'],
-  ['r2r-village-46', 'With nothing threatening, it is hard to win the coin and the say that would be needed if trouble came.', 'It is hard to win the coin and the say that would be needed if worse trouble came.'],
+  // RE-KEYED BY IDENTITY (PEOPLE-1 B1, 2026-11-20, the chair's ruling of 16:41 UTC): the faith's calm row is pooled
+  // (`data/npcStructureVariants.js`); what prints in its slot is the member of its pool the town prints ('@<pool>')
+  ['r2r-village-13', 'Leads the faith in quiet times, at peace with the seat beside it.', '@religious__stable__dominant'],
+  // RE-KEYED BY IDENTITY (PEOPLE-1 B1b, 2026-11-20, the chair's ruling of 16:51 UTC): the armed calm constraint is pooled
+  // ('@c:<pool>': the member of the constraint pool the town prints)
+  ['r2r-village-46', 'With nothing threatening, it is hard to win the coin and the say that would be needed if trouble came.', '@c:military__stable__dominant'],
   // PP4 (C13193's town, Weihu: Tian Ma and Xiao Gao "disagree often and trust completely")
   ['bar0-hamlet-calm-rand-4', 'They cooperate efficiently and neither trusts the other at all.', 'Tian Ma and Xiao Gao trade favours on a strict count.'],
   // PP6 (a coordinated crime wave beside it)
@@ -42,8 +55,8 @@ const ROWS = /** @type {Array<[string, string, string]>} */ ([
 ]);
 /** KEEP: [town, a true sibling of the same row that must still print] */
 const KEEP = /** @type {Array<[string, string]>} */ ([
-  ['r2r-village-46', 'Commands those under arms in quiet times; the work is keeping trouble from starting.'],
-  ['r2r-village-13', 'With nothing pressing, it is easy to grow comfortable and hard to argue for growing.'],
+  ['r2r-village-46', '@military__stable__dominant'], // RE-KEYED BY IDENTITY (PEOPLE-1 B1): the armed calm row's pool, a member of which prints
+  ['r2r-village-13', '@c:religious__stable__dominant'], // RE-KEYED BY IDENTITY (PEOPLE-1 B1b): the faith's calm constraint is pooled
   ['bar0-hamlet-calm-rand-4', 'Xiao Gao and Tian Ma disagree often and trust completely.'], // the pair's first trust line stands
 ]);
 
@@ -57,16 +70,28 @@ beforeAll(async () => {
   }
 }, 600000);
 
+/** PEOPLE-1 B1: '@<pool>' names a pooled row by identity: the town's printed position that is a member of it (a `{slot}` reads
+ * as any fill); '@c:<pool>' the same of the printed constraint (B1b); any other value is itself. @param {string} seed @param {string} line */
+const resolved = (seed, line) => {
+  if (!line.startsWith('@')) return line;
+  const field = line.startsWith('@c:') ? 'activeConstraint' : 'structuralPosition';
+  const key = line.replace(/^@(?:c:)?/, '');
+  // the pool as the writer composes it (B1c): [the T row's own line, ...the data pool]
+  const pool = [{ text: T[key][field === 'activeConstraint' ? 'constraint' : 'position'] }, ...(field === 'activeConstraint' ? CONSTRAINT_VARIANTS : POSITION_VARIANTS)[key]].map((r) => new RegExp(`^${r.text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\\\{(?:house|export|import)\\\}/g, '.+')}$`));
+  const printed = JSON.parse(towns[seed]).npcs.map((/** @type {any} */ n) => String(n[field] || ''));
+  return printed.find((/** @type {string} */ p) => pool.some((re) => re.test(p))) ?? `(no member of ${key} prints)`;
+};
+
 describe('BAR2-PEOPLE batch B · the ties and the seats claim what every town bears (PP4, PP6, PP7)', () => {
   for (const [seed, refused, instead] of ROWS) {
     it(`${seed}: not "${refused.slice(0, 48)}…"; the reworded line prints`, () => {
-      expectAbsentWithAnchor(towns[seed], refused, instead, `${seed}: the refused line; its rewording in the same slot`);
-      expect(towns[seed]).toContain(instead);
+      expectAbsentWithAnchor(towns[seed], refused, resolved(seed, instead), `${seed}: the refused line; its rewording in the same slot`);
+      expect(towns[seed]).toContain(resolved(seed, instead));
     });
   }
   for (const [seed, kept] of KEEP) {
     it(`KEEP ${seed}: "${kept.slice(0, 48)}…" still prints`, () => {
-      expect(towns[seed]).toContain(kept);
+      expect(towns[seed]).toContain(resolved(seed, kept));
     });
   }
 });

@@ -1,0 +1,42 @@
+  institution.class
+  institution.state
+  npc.role
+  npc.status
+  power.holder
+  tier
+  worldFact.culture
+  worldFact.monsterThreat
+  worldFact.resources
+  worldFact.stressors
+  worldFact.terrain
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/sovereigntyLightingContract.walker.test.js > the sovereignty lighting condition — a marker is EVIDENCE only in a live title > THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed
+AssertionError: the live TEST-title count moved from SP-C's measured 18,471 — this is the evidence layer, the exact figure two cuts in a row stated wrongly in prose, and the reason it is asserted rather than described: expected 31228 to be 31225 // Object.is equality
+
+- Expected
++ Received
+
+- 31225
++ 31228
+
+ ❯ tests/lint/sovereigntyLightingContract.walker.test.js:7562:10
+    7560|         + ' is the evidence layer, the exact figure two cuts in a row …
+    7561|         + ' the reason it is asserted rather than described')
+    7562|         .toBe(CENSUS.titles);
+       |          ^
+    7563|       // …AND THE SUITE LAYER IS COUNTED TOO, WHICH IS WHAT MAKES THE …
+    7564|       // that merged the two arrays again would leave `titles` at 23,6…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 219 passed (220)
+      Tests  1 failed | 3270 passed (3271)
+   Start at  16:35:04
+   Duration  1162.35s (transform 29.03s, setup 5.70s, import 934.67s, tests 1413.86s, environment 25ms)
+
+[gate-tail] end:  16:54:26 up  2:24,  0 user,  load average: 1.15, 2.39, 4.06
+[gate-tail] full log: /tmp/gate-tail.14114.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "438bb8bcdb56778e678f110b173cf253b903a3dd",
+ "frozenAtSha": "822d514b6a1cfbc91139d040fbc7907ed342c8a7",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -22,9 +22,9 @@
   "originCount": 15106,
   "transitionCount": 23097
  },
- "shapesDigest": "7350e7ffb6d149bfc3b096929fa308825524ee6eeac0237e95fd771444bf45f3",
+ "shapesDigest": "08f7da56b2160301febc02295cbbbfe5d550cc5531df11bfbd41a373d77bf584",
  "detectorDigest": "5240d93609ff51bf3a11afb51e15982d22e3bf48b861241a98f72ca66ce8e85c",
- "verdictDigest": "d59805b01644a1128d1d73142573e0396add1c2b4c0623279c1bd2a032dea8df",
+ "verdictDigest": "1c4ee22292bcd2d7032e96be43f39654b662a5bbe5bc14750b406346d7859b3d",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -72,38 +72,38 @@
   "json-export"
  ],
  "closureSizes": {
-  "web-display": 799,
-  "web-transitive": 1073,
-  "dossier-pdf": 610,
+  "web-display": 803,
+  "web-transitive": 1079,
+  "dossier-pdf": 621,
   "campaign-pdf": 208,
   "world-book": 223,
-  "foundry": 506,
+  "foundry": 509,
   "json-export": 12,
   "news": 29
  },
  "population": {
   "judged": 12726,
-  "lit": 700,
-  "litName": 10601,
-  "dark": 1425,
+  "lit": 703,
+  "litName": 10615,
+  "dark": 1408,
   "thinKeys": 16769,
   "thinShapes": 1203,
   "knownShapes": 545
  },
  "scanStats": {
-  "files": 1873,
-  "sites": 44453,
-  "propRead": 42187,
+  "files": 1883,
+  "sites": 44561,
+  "propRead": 42290,
   "elemRead": 2,
-  "destructure": 2244,
+  "destructure": 2249,
   "inOp": 20,
-  "rGrades": 7848,
-  "nGrades": 1880807,
-  "resolvedReceivers": 8757
+  "rGrades": 7885,
+  "nGrades": 1887384,
+  "resolvedReceivers": 8794
  },
  "registerDigest": "66919206e4d932964430d33786b44f7d6de17566cc52e83fc5ee83647e2cfbf5",
  "pendingSurfaceCeiling": 0,
- "reviewableDarkCount": 399,
+ "reviewableDarkCount": 398,
  "darkUnregistered": [
   {
    "identity": "Bulk grain and flour on reasons",
@@ -4960,108 +4960,6 @@
    "rows": 400
   },
   {
-   "identity": "ownerKind on osr000",
-   "key": "ownerKind",
-   "shape": "osr000",
-   "rows": 379
-  },
-  {
-   "identity": "ownerKind on osr001",
-   "key": "ownerKind",
-   "shape": "osr001",
-   "rows": 323
-  },
-  {
-   "identity": "ownerKind on osr002",
-   "key": "ownerKind",
-   "shape": "osr002",
-   "rows": 416
-  },
-  {
-   "identity": "ownerKind on osr003",
-   "key": "ownerKind",
-   "shape": "osr003",
-   "rows": 391
-  },
-  {
-   "identity": "ownerKind on osr004",
-   "key": "ownerKind",
-   "shape": "osr004",
-   "rows": 464
-  },
-  {
-   "identity": "ownerKind on osr005",
-   "key": "ownerKind",
-   "shape": "osr005",
-   "rows": 467
-  },
-  {
-   "identity": "ownerKind on osr006",
-   "key": "ownerKind",
-   "shape": "osr006",
-   "rows": 522
-  },
-  {
-   "identity": "ownerKind on osr007",
-   "key": "ownerKind",
-   "shape": "osr007",
-   "rows": 439
-  },
-  {
-   "identity": "ownerKind on osr008",
-   "key": "ownerKind",
-   "shape": "osr008",
-   "rows": 248
-  },
-  {
-   "identity": "ownerKind on osr009",
-   "key": "ownerKind",
-   "shape": "osr009",
-   "rows": 268
-  },
-  {
-   "identity": "ownerKind on osr010",
-   "key": "ownerKind",
-   "shape": "osr010",
-   "rows": 245
-  },
-  {
-   "identity": "ownerKind on osr011",
-   "key": "ownerKind",
-   "shape": "osr011",
-   "rows": 242
-  },
-  {
-   "identity": "ownerKind on osr012",
-   "key": "ownerKind",
-   "shape": "osr012",
-   "rows": 375
-  },
-  {
-   "identity": "ownerKind on osr013",
-   "key": "ownerKind",
-   "shape": "osr013",
-   "rows": 351
-  },
-  {
-   "identity": "ownerKind on osr014",
-   "key": "ownerKind",
-   "shape": "osr014",
-   "rows": 348
-  },
-  {
-   "identity": "ownerKind on osr015",
-   "key": "ownerKind",
-   "shape": "osr015",
-   "rows": 349
-  },
-  {
-   "identity": "ownerKind on traditions",
-   "key": "ownerKind",
-   "shape": "traditions",
-   "rows": 2802
-  },
-  {
    "identity": "peakTier on _config",
    "key": "peakTier",
    "shape": "_config",
@@ -8840,7 +8738,7 @@
   "inst on compound": "campaign-pdf=N dossier-pdf=R foundry=R web-display=R web-transitive=N world-book=N",
   "magicInfluence on compound": "dossier-pdf=R web-display=R",
   "militaryEffective on compound": "dossier-pdf=R web-display=R",
-  "raw on compound": "campaign-pdf=N dossier-pdf=R foundry=N json-export=N web-display=R web-transitive=N world-book=N",
+  "raw on compound": "campaign-pdf=N dossier-pdf=R foundry=R json-export=N web-display=R web-transitive=N world-book=N",
   "religionInfluence on compound": "dossier-pdf=R web-display=R",
   "ageBand on compromiseLifecycle": "web-display=R web-transitive=R",
   "causeClass on compromiseLifecycle": "dossier-pdf=N foundry=N web-display=R web-transitive=R",
@@ -9086,7 +8984,7 @@
   "outcome on contests": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "resolvedWeek on contests": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "signalVar on contests": "dossier-pdf=N foundry=N web-transitive=N",
-  "act on coreMotif": "dossier-pdf=R foundry=N web-display=R web-transitive=N",
+  "act on coreMotif": "dossier-pdf=R foundry=N web-display=R web-transitive=R",
   "element on coreMotif": "dossier-pdf=R foundry=R web-display=R web-transitive=R",
   "criminalInstitution on corruptionEvents": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "homeInstitution on corruptionEvents": "web-transitive=N",
@@ -9516,7 +9414,7 @@
   "last on foreign": "web-display=N web-transitive=N",
   "since on foreign": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "v on foreign": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
-  "age on founding": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=R world-book=N",
+  "age on founding": "campaign-pdf=N dossier-pdf=R foundry=N web-display=N web-transitive=R world-book=N",
   "foundedBy on founding": "dossier-pdf=R foundry=R web-display=R web-transitive=R",
   "initialChallenge on founding": "dossier-pdf=R foundry=R web-display=R web-transitive=R",
   "overcoming on founding": "dossier-pdf=R foundry=R web-display=R web-transitive=R",
@@ -10268,7 +10166,7 @@
   "osr015 on osr000": "",
   "out on osr000": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "ownerKey on osr000": "dossier-pdf=N web-display=N web-transitive=N",
-  "ownerKind on osr000": "web-transitive=N",
+  "ownerKind on osr000": "dossier-pdf=N web-transitive=N",
   "ownerLabel on osr000": "dossier-pdf=N web-display=N web-transitive=N",
   "path on osr000": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "phase on osr000": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
@@ -10840,7 +10738,7 @@
   "osr015 on osr001": "",
   "out on osr001": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "ownerKey on osr001": "dossier-pdf=N web-display=N web-transitive=N",
-  "ownerKind on osr001": "web-transitive=N",
+  "ownerKind on osr001": "dossier-pdf=N web-transitive=N",
   "ownerLabel on osr001": "dossier-pdf=N web-display=N web-transitive=N",
   "plan on osr001": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "presence on osr001": "dossier-pdf=N foundry=N web-display=N",
@@ -11484,7 +11382,7 @@
   "osr015 on osr002": "",
   "out on osr002": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "ownerKey on osr002": "dossier-pdf=N web-display=N web-transitive=N",
-  "ownerKind on osr002": "web-transitive=N",
+  "ownerKind on osr002": "dossier-pdf=N web-transitive=N",
   "ownerLabel on osr002": "dossier-pdf=N web-display=N web-transitive=N",
   "phase on osr002": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "plan on osr002": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
@@ -12179,7 +12077,7 @@
   "osr015 on osr003": "",
   "out on osr003": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "ownerKey on osr003": "dossier-pdf=N web-display=N web-transitive=N",
-  "ownerKind on osr003": "web-transitive=N",
+  "ownerKind on osr003": "dossier-pdf=N web-transitive=N",
   "ownerLabel on osr003": "dossier-pdf=N web-display=N web-transitive=N",
   "phase on osr003": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "plan on osr003": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
@@ -12736,7 +12634,7 @@
   "osr015 on osr004": "",
   "out on osr004": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "ownerKey on osr004": "dossier-pdf=N web-display=N web-transitive=N",
-  "ownerKind on osr004": "web-transitive=N",
+  "ownerKind on osr004": "dossier-pdf=N web-transitive=N",
   "ownerLabel on osr004": "dossier-pdf=N web-display=N web-transitive=N",
   "phase on osr004": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "plan on osr004": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
@@ -13747,7 +13645,7 @@
   "osr015 on osr005": "",
   "out on osr005": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "ownerKey on osr005": "dossier-pdf=N web-display=N web-transitive=N",
-  "ownerKind on osr005": "web-transitive=N",
+  "ownerKind on osr005": "dossier-pdf=N web-transitive=N",
   "ownerLabel on osr005": "dossier-pdf=N web-display=N web-transitive=N",
   "phase on osr005": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "plan on osr005": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
@@ -14910,7 +14808,7 @@
   "osr015 on osr006": "",
   "out on osr006": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "ownerKey on osr006": "dossier-pdf=N web-display=N web-transitive=N",
-  "ownerKind on osr006": "web-transitive=N",
+  "ownerKind on osr006": "dossier-pdf=N web-transitive=N",
   "ownerLabel on osr006": "dossier-pdf=N web-display=N web-transitive=N",
   "path on osr006": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "plan on osr006": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
@@ -15962,7 +15860,7 @@
   "osr015 on osr007": "",
   "out on osr007": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "ownerKey on osr007": "dossier-pdf=N web-display=N web-transitive=N",
-  "ownerKind on osr007": "web-transitive=N",
+  "ownerKind on osr007": "dossier-pdf=N web-transitive=N",
   "ownerLabel on osr007": "dossier-pdf=N web-display=N web-transitive=N",
   "phase on osr007": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "plan on osr007": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
@@ -16823,7 +16721,7 @@
   "osr014 on osr008": "",
   "osr015 on osr008": "",
   "ownerKey on osr008": "dossier-pdf=N web-display=N web-transitive=N",
-  "ownerKind on osr008": "web-transitive=N",
+  "ownerKind on osr008": "dossier-pdf=N web-transitive=N",
   "ownerLabel on osr008": "dossier-pdf=N web-display=N web-transitive=N",
   "plan on osr008": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "rebirths on osr008": "web-transitive=N",
@@ -17065,7 +16963,7 @@
   "osr014 on osr009": "",
   "osr015 on osr009": "",
   "ownerKey on osr009": "dossier-pdf=N web-display=N web-transitive=N",
-  "ownerKind on osr009": "web-transitive=N",
+  "ownerKind on osr009": "dossier-pdf=N web-transitive=N",
   "ownerLabel on osr009": "dossier-pdf=N web-display=N web-transitive=N",
   "phase on osr009": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "plan on osr009": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
@@ -17272,7 +17170,7 @@
   "osr014 on osr010": "",
   "osr015 on osr010": "",
   "ownerKey on osr010": "dossier-pdf=N web-display=N web-transitive=N",
-  "ownerKind on osr010": "web-transitive=N",
+  "ownerKind on osr010": "dossier-pdf=N web-transitive=N",
   "ownerLabel on osr010": "dossier-pdf=N web-display=N web-transitive=N",
   "plan on osr010": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "rebirths on osr010": "web-transitive=N",
@@ -17475,7 +17373,7 @@
   "osr014 on osr011": "",
   "osr015 on osr011": "",
   "ownerKey on osr011": "dossier-pdf=N web-display=N web-transitive=N",
-  "ownerKind on osr011": "web-transitive=N",
+  "ownerKind on osr011": "dossier-pdf=N web-transitive=N",
   "ownerLabel on osr011": "dossier-pdf=N web-display=N web-transitive=N",
   "plan on osr011": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "rebirths on osr011": "web-transitive=N",
@@ -17689,7 +17587,7 @@
   "osr015 on osr012": "",
   "out on osr012": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "ownerKey on osr012": "dossier-pdf=N web-display=N web-transitive=N",
-  "ownerKind on osr012": "web-transitive=N",
+  "ownerKind on osr012": "dossier-pdf=N web-transitive=N",
   "ownerLabel on osr012": "dossier-pdf=N web-display=N web-transitive=N",
   "plan on osr012": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "progress on osr012": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
@@ -18319,7 +18217,7 @@
   "osr015 on osr013": "",
   "out on osr013": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "ownerKey on osr013": "dossier-pdf=N web-display=N web-transitive=N",
-  "ownerKind on osr013": "web-transitive=N",
+  "ownerKind on osr013": "dossier-pdf=N web-transitive=N",
   "ownerLabel on osr013": "dossier-pdf=N web-display=N web-transitive=N",
   "plan on osr013": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "presence on osr013": "dossier-pdf=N foundry=N web-display=N",
@@ -18914,7 +18812,7 @@
   "osr015 on osr014": "",
   "out on osr014": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "ownerKey on osr014": "dossier-pdf=N web-display=N web-transitive=N",
-  "ownerKind on osr014": "web-transitive=N",
+  "ownerKind on osr014": "dossier-pdf=N web-transitive=N",
   "ownerLabel on osr014": "dossier-pdf=N web-display=N web-transitive=N",
   "plan on osr014": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "presence on osr014": "dossier-pdf=N foundry=N web-display=N",
@@ -19515,7 +19413,7 @@
   "osr014 on osr015": "",
   "out on osr015": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "ownerKey on osr015": "dossier-pdf=N web-display=N web-transitive=N",
-  "ownerKind on osr015": "web-transitive=N",
+  "ownerKind on osr015": "dossier-pdf=N web-transitive=N",
   "ownerLabel on osr015": "dossier-pdf=N web-display=N web-transitive=N",
   "plan on osr015": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "progress on osr015": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
@@ -20314,7 +20212,7 @@
   "location on quarters": "dossier-pdf=N foundry=N web-display=N web-transitive=R",
   "name on quarters": "campaign-pdf=N dossier-pdf=R foundry=R json-export=N news=N web-display=R web-transitive=R world-book=N",
   "criminal on raw": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
-  "economy on raw": "campaign-pdf=N dossier-pdf=R foundry=N web-display=R web-transitive=N world-book=N",
+  "economy on raw": "campaign-pdf=N dossier-pdf=R foundry=R web-display=R web-transitive=N world-book=N",
   "magic on raw": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "military on raw": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "religion on raw": "",
@@ -20995,7 +20893,7 @@
   "deityRef on traditions": "campaign-pdf=N dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=N",
   "expression on traditions": "dossier-pdf=R web-display=R web-transitive=N",
   "fabricLed on traditions": "web-transitive=N",
-  "foundedYear on traditions": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
+  "foundedYear on traditions": "dossier-pdf=R foundry=N web-display=N web-transitive=R",
   "hasAlchemy on traditions": "dossier-pdf=N web-display=N",
   "hasArcane on traditions": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "hasArcaneGuild on traditions": "dossier-pdf=N web-display=N",
@@ -21007,8 +20905,8 @@
   "mutationLog on traditions": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "name on traditions": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N news=N web-display=R web-transitive=R world-book=R",
   "ownerKey on traditions": "dossier-pdf=R web-display=R web-transitive=N",
-  "ownerKind on traditions": "web-transitive=N",
-  "ownerLabel on traditions": "dossier-pdf=R web-display=R web-transitive=N",
+  "ownerKind on traditions": "dossier-pdf=R web-transitive=R",
+  "ownerLabel on traditions": "dossier-pdf=R web-display=R web-transitive=R",
   "scaleBand on traditions": "campaign-pdf=N dossier-pdf=R foundry=R web-transitive=R world-book=N",
   "suppressedBy on traditions": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "window on traditions": "dossier-pdf=R news=N web-display=R web-transitive=N",

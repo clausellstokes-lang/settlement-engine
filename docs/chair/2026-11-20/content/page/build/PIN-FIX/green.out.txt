@@ -1,0 +1,11 @@
+tree: ab01d4cc5 + the cure + the three pins re-taken
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 20126 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+ RUN  v4.1.8 /home/user/settlement-engine/.claude/worktrees/agent-a73c735c63d168c2c
+
+
+ Test Files  3 passed (3)
+      Tests  13 passed (13)
+   Start at  18:04:42
+   Duration  129.96s (transform 9.87s, setup 134ms, import 18.64s, tests 141.03s, environment 1.22s)
+

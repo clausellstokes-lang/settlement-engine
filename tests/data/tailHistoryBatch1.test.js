@@ -83,7 +83,9 @@ describe('TAIL-HISTORY batch 1: the rows cured at the history group\'s tables', 
     }), 'no traffic or offered food under the siege or the famine');
   }, 600_000);
   test('Y4 KEEP: the same lines still print where no siege or famine stands', () => {
-    expectNoSeedFailures(collectSeedFailures(['r2r-metropolis-16', 'r2r-city-16', 'r2r-city-13', 'r2r-hamlet-17'], (seed) => {
+    // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): r2r-metropolis-16, r2r-city-13 and r2r-hamlet-17 draw
+    // other lines now; r2r-metropolis-34, r2r-city-9 and r2r-hamlet-2 (the census's own, same tiers, no siege and no famine) print one
+    expectNoSeedFailures(collectSeedFailures(['r2r-metropolis-34', 'r2r-city-16', 'r2r-city-9', 'r2r-hamlet-2'], (seed) => {
       const town = bornCensus(seed);
       expect(/notice of the next fair|Porters bent under loaded frames|handed out to anyone who asks|stacked by the water/.test(arrivalText(town)), `${seed} keeps its arrival line`).toBe(true);
     }), 'the arrival lines in peace');

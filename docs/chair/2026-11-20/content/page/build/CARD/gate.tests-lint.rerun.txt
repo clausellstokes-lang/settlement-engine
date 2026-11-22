@@ -1,0 +1,93 @@
+
+ RUN  v4.1.8 /home/user/settlement-engine/.claude/worktrees/agent-a14e0a85d3b9f8873
+
+[vitest-pool]: Timeout terminating forks worker for test files /home/user/settlement-engine/.claude/worktrees/agent-a14e0a85d3b9f8873/tests/lint/presumedThings.walker.test.js.
+stdout | tests/lint/exportTokenCoverage.test.js > export-token coverage census (Wave 0 — predicate liveness, never correctness) > the corpus vocabulary is live and the census is not measuring an empty set
+[scw-0] distinct export vocabulary at this HEAD: 145 strings
+
+ ❯ tests/lint/exportTokenCoverage.test.js (5 tests | 1 failed) 546452ms
+     × the corpus vocabulary is live and the census is not measuring an empty set 546413ms
+ ❯ tests/lint/noLegacyFactionReaders.walker.test.js (4 tests | 1 failed) 40925ms
+     × every read outside the FPZ list is red; zero at the landing 25881ms
+ ❯ tests/lint/siteCoherenceRatchet.test.js (9 tests | 1 failed) 801104ms
+     × C5 anti-vacuity — the corpus is exactly 462 settlements with zero generation errors 571142ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/exportTokenCoverage.test.js > export-token coverage census (Wave 0 — predicate liveness, never correctness) > the corpus vocabulary is live and the census is not measuring an empty set
+Error: Test timed out in 180000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/lint/exportTokenCoverage.test.js:229:5
+    227|   });
+    228|
+    229|   it('the corpus vocabulary is live and the census is not measuring an…
+       |     ^
+    230|     const { vocabulary: vocab, size } = vocabulary();
+    231|     expect(size, 'the corpus size moved — the axes are frozen literals…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/lint/noLegacyFactionReaders.walker.test.js > no legacy faction readers outside FPZ (PEOPLE-5, M-2; landed by PEOPLE-LAND) > every read outside the FPZ list is red; zero at the landing
+AssertionError: expected [ …(3) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/pdf/lib/viewModel.js:353 factions",
++   "src/pdf/lib/viewModel.js:516 factions",
++   "src/pdf/lib/viewModel.js:710 factions",
++ ]
+
+ ❯ tests/lint/noLegacyFactionReaders.walker.test.js:49:68
+     47|     expect(scanned).toBeGreaterThan(2000); // liveness: the walk reach…
+     48|     expect(fpz).toBe(38); // PEOPLE-5-PREP's 35 + the landing's three …
+     49|     expect(violations.map((v) => `${v.file}:${v.line} ${v.name}`)).toE…
+       |                                                                    ^
+     50|   });
+     51| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/lint/siteCoherenceRatchet.test.js > site-coherence contradiction ratchet (Wave 0 — inventory freezing, never correctness) > C5 anti-vacuity — the corpus is exactly 462 settlements with zero generation errors
+Error: Test timed out in 240000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/lint/siteCoherenceRatchet.test.js:391:5
+    389|   }, CORPUS_BUDGET_MS);
+    390|
+    391|   it('C5 anti-vacuity — the corpus is exactly 462 settlements with zer…
+       |     ^
+    392|     const scan = corpus();
+    393|     expect(scan.errors, 'the corpus must build clean; a generation err…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯
+
+Vitest caught 1 unhandled error during the test run.
+This might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.
+
+⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯
+Error: [vitest-pool]: Worker forks emitted error.
+ ❯ EventEmitter.<anonymous> node_modules/vitest/dist/chunks/cli-api.BfdDOPPI.js:3446:22
+ ❯ EventEmitter.emit node:events:519:28
+ ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BfdDOPPI.js:3013:22
+ ❯ ChildProcess.emit node:events:519:28
+ ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12
+
+Caused by: Error: Worker exited unexpectedly
+ ❯ ChildProcess.emitUnexpectedExit node_modules/vitest/dist/chunks/cli-api.BfdDOPPI.js:3012:33
+ ❯ ChildProcess.emit node:events:519:28
+ ❯ Process.ChildProcess._handle.onexit node:internal/child_process:293:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+
+
+ Test Files  3 failed | 7 passed (11)
+      Tests  3 failed | 260 passed (278)
+     Errors  1 error
+   Start at  13:16:26
+   Duration  876.68s (transform 38.66s, setup 1.90s, import 515.33s, tests 1789.24s, environment 5ms)
+
+exit 1

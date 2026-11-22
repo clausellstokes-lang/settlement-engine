@@ -1,0 +1,8 @@
+PAGE-4 PIN-FIX — the hash proof (BUILD.md, the common law: render only, no stored field of a born town moves).
+Script: ../CARD/bornHash.mjs (sha256 of JSON.stringify of each born document; the chair's 300 and the census's 720).
+base: ab01d4cc5, archived read-only into a scratch tree   -> bornHash.base.txt
+tip:  this worktree with the PIN-FIX change              -> bornHash.tip.txt
+Each file's first line is gate-mutex's lock notice (the run went through the gate slot); every other line is the script's.
+hxd300    base 300 documents, tip 300 documents, list digest 61e0cfb1ef2dee06341ba0729c05cc1fd518dbf460ece57b4bece09bbd43acf2 at both
+census720 base 720 documents, tip 720 documents, list digest 877943f2a62be509605188658b3204d1afb0fec7ec9aa2eb6e387e306e1df88d at both
+The two files, the lock notice set aside, are identical: 0 documents differ (the same digests CARD recorded at ff51769f7).
