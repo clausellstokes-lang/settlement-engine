@@ -40,7 +40,7 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
   2322 against 2103 (fortune or point 89, PLAUSIBLE). E35's HOOK GAP: 240 births, 92 places with a trouble and a hideable house;
   server = twin; 462 hooks served, 11 needing a house the read hides (all guild_conflict 12, "organised crime"), 0 naming one.
   Proposed for 212's writer: a served trouble hook whose declared need is a house the read hides leaves (both engines); the 16
-  sites registered. Told the chair 11:2x. PASS 2 (lit, 5c4419815): a FRESH builder V33-JOINPROBE-2 seated (the brief's PASS 2
+  sites registered. Told the chair (sent just before 11:28, the clock's read after it). PASS 2 (lit, 5c4419815): a FRESH builder V33-JOINPROBE-2 seated (the brief's PASS 2
   section, f05637681), pool `/var/tmp/v18/t2/pool-jp2`; it writes the product `out/v33/joinprobe/JOINPROBE.md`.
   CLOSE-1 IS PARKED (the chair, 09:14): its register commits a349917e7 (over the dark join) and e987c3e36 (over the lit) are NOT
   used: the probe takes the two commits the chair named.
@@ -66,6 +66,19 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
 93. THE CHAIR TO VEIL-33, 09:14 UTC, THE OWNER'S WORD (verbatim above, section 1 (Q)): at most six children at work; the veil holds
     two places. THIS SEAT, IN THIS ORDER AND NOTHING BESIDE IT: (0), pass 1 on 4bba8781d, pass 2 on 5c4419815, then (Q) with (iv)
     first. CLOSE-1 is PARKED; its register commits a349917e7 / e987c3e36 are not the probe's refs (or JOINPROBE.md says why).
+94. THE CHAIR TO VEIL-33, 11:29 UTC (E75), ON PASS 1: read as sent: dark, the join changes no birth and neither gate; the veil holds
+    on the joined tree as on the lane. (a) THE HOOK GAP IS A UNIT OF THE JOIN, "(ix)": a served trouble hook whose DECLARED NEED is a
+    house the read hides leaves the served document, both engines; its red-first is this seat's measure (11 of 462 on 92 places,
+    all the one line needing organised crime); its arm: 0 served hooks need a hidden house at every setting of the owner's switches,
+    twin = server. NOT BUILDABLE ON THE LANE (the trouble lane is on the line; ruling (e)): THIS SEAT PREPARES IT (the committed brief
+    and the red-first instrument on the PROBE branch; not one line of 212 or the twin); the writer writes it at the join. (b) THE 16
+    UNREGISTERED SITES: by file and landed point in the join's worklist (14 point 88, one each 84, 85); registered by the writer at
+    the join. (c) `troubleHooksShared.test.js` arm (D) reds at the join BY DESIGN once the veil takes that hook: the worklist says it
+    is then re-stated the other way (the hook NOT served) by the join's writer, the trouble lane's seat told. (d) The line's registers
+    lost in the conflicts (tuningRegister, ruinFilterRoster, fixtureGitIsolation): in the worklist with each one's door. PASS 2: the
+    same table and what the LIT laws add: the sanitizer's arm for who rules' surfaces (a hidden taker, a hidden retired holder) and
+    fortune's (the merit's sentence), each served surface by name (relayed to the pass 2 builder 11:29). One line when pass 2's gates
+    are read. JOINPROBE-PASS1.md goes to the security reader with R3, as a lead.
 
 ## 3. Log (every hour from `date -u`)
 - 08:05 seated; the assignment read (853ccbfa2 ancestor of the fetched chair branch). 08:06 chain0 launched.
@@ -75,4 +88,5 @@ FETCH_HEAD containing 853ccbfa2) with `COMMON-EIGHTH.txt` items 1-12. Seated 08:
 - 08:42 the pool stood; chain1 launched. 08:50 both gates read (equal to the hand-back).
 - 09:15 the chair's 09:14 word read (ruling 93); the (0) line to the chair; the (Q) builder parked; its WIP pushed `-wip` unread.
 - 09:47 chain1 END (the sixteen standing only). 11:15 the chair's notice of its branch's broken tip 11:04-11:14 read: this seat fetched it only at 08:05; this repository clean (core.bare false, no Fixture commit on any of its three trees).
-- 11:1x pass 1 returned (44c2007ab); its gates and hook table re-read; the probe branch pushed `-wip`; the line to the chair; pass 2's builder seated.
+- (before 11:28, not clocked) pass 1 returned (44c2007ab); its gates and hook table re-read; the probe branch pushed `-wip`; the line to the chair; pass 2's builder seated.
+- 11:29 the chair's E75 (ruling 94) read; its pass-2 addition relayed to the builder. (ix) and the worklist (b)-(d): after pass 2, on the probe branch.
