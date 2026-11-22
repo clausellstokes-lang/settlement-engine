@@ -1,0 +1,160 @@
+# B1b fill list (100 places a size, hxd seeds): every distinct filled sentence carrying {house}, {export} or {import}; places
+
+## activeConstraint: 53 distinct filled sentences
+fill activeConstraint | economy__stable__dominant#2 | 1 | Lives on the place's trade in furs and pelts; whatever cuts that trade cuts this house first.
+fill activeConstraint | economy__stable__dominant#2 | 1 | Lives on the place's trade in game meat; whatever cuts that trade cuts this house first.
+fill activeConstraint | economy__stable__dominant#2 | 1 | Lives on the place's trade in healing waters; whatever cuts that trade cuts this house first.
+fill activeConstraint | economy__stable__dominant#2 | 1 | Lives on the place's trade in medicinal herbs; whatever cuts that trade cuts this house first.
+fill activeConstraint | economy__stable__dominant#2 | 2 | Lives on the place's trade in milled flour; whatever cuts that trade cuts this house first.
+fill activeConstraint | economy__stable__dominant#2 | 2 | Lives on the place's trade in mineral salts; whatever cuts that trade cuts this house first.
+fill activeConstraint | economy__stable__dominant#2 | 1 | Lives on the place's trade in raw wool; whatever cuts that trade cuts this house first.
+fill activeConstraint | economy__stable__dominant#2 | 1 | Lives on the place's trade in river fish; whatever cuts that trade cuts this house first.
+fill activeConstraint | economy__stable__dominant#2 | 1 | Lives on the place's trade in sacred wood; whatever cuts that trade cuts this house first.
+fill activeConstraint | economy__stable__dominant#2 | 1 | Lives on the place's trade in sea salt; whatever cuts that trade cuts this house first.
+fill activeConstraint | economy__stable__dominant#2 | 1 | Lives on the place's trade in shipbuilding timber; whatever cuts that trade cuts this house first.
+fill activeConstraint | economy__stable__dominant#3 | 1 | Must buy in bulk grain like everyone else, at prices set somewhere else.
+fill activeConstraint | economy__stable__dominant#3 | 1 | Must buy in dressed stone like everyone else, at prices set somewhere else.
+fill activeConstraint | economy__stable__dominant#3 | 2 | Must buy in grain like everyone else, at prices set somewhere else.
+fill activeConstraint | economy__stable__dominant#3 | 1 | Must buy in iron like everyone else, at prices set somewhere else.
+fill activeConstraint | economy__stable__dominant#3 | 2 | Must buy in precious metals like everyone else, at prices set somewhere else.
+fill activeConstraint | economy__stable__dominant#3 | 1 | Must buy in shipbuilding timber like everyone else, at prices set somewhere else.
+fill activeConstraint | economy__stable__subordinate#1 | 15 | What the craft guilds can take on is limited to what the leading house leaves alone.
+fill activeConstraint | economy__stable__subordinate#1 | 1 | What the merchant guilds can take on is limited to what the leading house leaves alone.
+fill activeConstraint | economy__stable__subordinate#1 | 1 | What the merchant warehouses can take on is limited to what the leading house leaves alone.
+fill activeConstraint | economy__stable__subordinate#2 | 1 | The best of the date harvest trade is already spoken for; the smaller houses take what is left.
+fill activeConstraint | economy__stable__subordinate#2 | 1 | The best of the medicinal herbs trade is already spoken for; the smaller houses take what is left.
+fill activeConstraint | economy__stable__subordinate#2 | 2 | The best of the milled flour trade is already spoken for; the smaller houses take what is left.
+fill activeConstraint | economy__stable__subordinate#2 | 1 | The best of the milled timber trade is already spoken for; the smaller houses take what is left.
+fill activeConstraint | economy__stable__subordinate#2 | 1 | The best of the mineral salts trade is already spoken for; the smaller houses take what is left.
+fill activeConstraint | economy__stable__subordinate#2 | 1 | The best of the pine planks trade is already spoken for; the smaller houses take what is left.
+fill activeConstraint | economy__stable__subordinate#2 | 1 | The best of the raw gemstones trade is already spoken for; the smaller houses take what is left.
+fill activeConstraint | economy__stable__subordinate#2 | 1 | The best of the raw wool trade is already spoken for; the smaller houses take what is left.
+fill activeConstraint | economy__stable__subordinate#2 | 3 | The best of the reeds and thatch trade is already spoken for; the smaller houses take what is left.
+fill activeConstraint | economy__stable__subordinate#2 | 1 | The best of the river fish trade is already spoken for; the smaller houses take what is left.
+fill activeConstraint | economy__stable__subordinate#2 | 1 | The best of the sacred wood trade is already spoken for; the smaller houses take what is left.
+fill activeConstraint | economy__stable__subordinate#2 | 1 | The best of the sea salt trade is already spoken for; the smaller houses take what is left.
+fill activeConstraint | government__economic_stress__dominant#3 | 5 | Must still buy in incense and votive candles, and that comes first, before any repair or relief.
+fill activeConstraint | government__economic_stress__dominant#3 | 1 | Must still buy in iron ore, and that comes first, before any repair or relief.
+fill activeConstraint | government__economic_stress__dominant#3 | 1 | Must still buy in iron, and that comes first, before any repair or relief.
+fill activeConstraint | government__economic_stress__dominant#3 | 3 | Must still buy in replacement arms and basic equipment, and that comes first, before any repair or relief.
+fill activeConstraint | government__economic_stress__dominant#3 | 10 | Must still buy in salt, and that comes first, before any repair or relief.
+fill activeConstraint | government__stable__subordinate#1 | 1 | Runs the customs house on what the seat allots it, and must ask before spending more.
+fill activeConstraint | government__stable__subordinate#1 | 1 | Runs the harbour master's office on what the seat allots it, and must ask before spending more.
+fill activeConstraint | government__stable__subordinate#1 | 1 | Runs the mint on what the seat allots it, and must ask before spending more.
+fill activeConstraint | government__stable__subordinate#1 | 5 | Runs the town granary on what the seat allots it, and must ask before spending more.
+fill activeConstraint | magic__stable__dominant#1 | 5 | Must keep the academy of magic paid for out of fees and patrons, and patrons want a say in the work.
+fill activeConstraint | magic__stable__dominant#1 | 1 | Must keep the alchemist quarter paid for out of fees and patrons, and patrons want a say in the work.
+fill activeConstraint | magic__stable__dominant#1 | 6 | Must keep the mages' district paid for out of fees and patrons, and patrons want a say in the work.
+fill activeConstraint | magic__stable__dominant#1 | 1 | Must keep the mages' guild paid for out of fees and patrons, and patrons want a say in the work.
+fill activeConstraint | military__stable__dominant#2 | 3 | Must keep the barracks fed and paid out of what the seat allows, and the seat allows what quiet years seem to need.
+fill activeConstraint | military__stable__dominant#2 | 2 | Must keep the garrison fed and paid out of what the seat allows, and the seat allows what quiet years seem to need.
+fill activeConstraint | military__stable__dominant#2 | 9 | Must keep the garrisons fed and paid out of what the seat allows, and the seat allows what quiet years seem to need.
+fill activeConstraint | military__stable__dominant#2 | 2 | Must keep the professional city watch fed and paid out of what the seat allows, and the seat allows what quiet years seem to need.
+fill activeConstraint | military__stable__dominant#2 | 5 | Must keep the town watch fed and paid out of what the seat allows, and the seat allows what quiet years seem to need.
+fill activeConstraint | religious__economic_stress__dominant#1 | 6 | Keeping the house of worship in repair and feeding the poor draw on the same thin purse.
+fill activeConstraint | religious__stable__dominant#1 | 3 | Keeping the house of worship in repair takes alms, and alms come slowly when nothing troubles people.
+fill activeConstraint | religious__stable__dominant#1 | 23 | Keeping the houses of worship in repair takes alms, and alms come slowly when nothing troubles people.
+
+## structuralPosition: 85 distinct filled sentences
+fill structuralPosition | economy__stable__dominant#1 | 1 | Heads the barge and river transport company, the leading house in the trade, in a steady season.
+fill structuralPosition | economy__stable__dominant#1 | 1 | Heads the craft guilds, the leading house in the trade, in a steady season.
+fill structuralPosition | economy__stable__dominant#1 | 6 | Heads the merchant guilds, the leading house in the trade, in a steady season.
+fill structuralPosition | economy__stable__dominant#2 | 1 | Heads the leading house in a trade that sends furs and pelts out of the place.
+fill structuralPosition | economy__stable__dominant#2 | 1 | Heads the leading house in a trade that sends game meat out of the place.
+fill structuralPosition | economy__stable__dominant#2 | 1 | Heads the leading house in a trade that sends luxury manufactured goods out of the place.
+fill structuralPosition | economy__stable__dominant#2 | 1 | Heads the leading house in a trade that sends milled flour out of the place.
+fill structuralPosition | economy__stable__dominant#2 | 2 | Heads the leading house in a trade that sends mineral salts out of the place.
+fill structuralPosition | economy__stable__dominant#2 | 1 | Heads the leading house in a trade that sends potions and elixirs out of the place.
+fill structuralPosition | economy__stable__dominant#2 | 1 | Heads the leading house in a trade that sends river fish out of the place.
+fill structuralPosition | economy__stable__dominant#2 | 1 | Heads the leading house in a trade that sends sacred wood out of the place.
+fill structuralPosition | economy__stable__dominant#2 | 1 | Heads the leading house in a trade that sends salted fish out of the place.
+fill structuralPosition | economy__stable__subordinate#1 | 1 | Keeps the caravanserai going in quiet times, a smaller house behind the leading one in the trade.
+fill structuralPosition | economy__stable__subordinate#1 | 1 | Keeps the city granaries going in quiet times, a smaller house behind the leading one in the trade.
+fill structuralPosition | economy__stable__subordinate#1 | 11 | Keeps the craft guilds going in quiet times, a smaller house behind the leading one in the trade.
+fill structuralPosition | economy__stable__subordinate#1 | 1 | Keeps the merchant guilds going in quiet times, a smaller house behind the leading one in the trade.
+fill structuralPosition | economy__stable__subordinate#1 | 1 | Keeps the merchant warehouses going in quiet times, a smaller house behind the leading one in the trade.
+fill structuralPosition | economy__stable__subordinate#1 | 1 | Keeps the warehouse district going in quiet times, a smaller house behind the leading one in the trade.
+fill structuralPosition | economy__stable__subordinate#2 | 1 | Runs a smaller house behind the leading one, in a place that sends out charcoal.
+fill structuralPosition | economy__stable__subordinate#2 | 1 | Runs a smaller house behind the leading one, in a place that sends out date harvest.
+fill structuralPosition | economy__stable__subordinate#2 | 1 | Runs a smaller house behind the leading one, in a place that sends out draft camels.
+fill structuralPosition | economy__stable__subordinate#2 | 1 | Runs a smaller house behind the leading one, in a place that sends out furs and pelts.
+fill structuralPosition | economy__stable__subordinate#2 | 1 | Runs a smaller house behind the leading one, in a place that sends out game meat.
+fill structuralPosition | economy__stable__subordinate#2 | 1 | Runs a smaller house behind the leading one, in a place that sends out healing waters.
+fill structuralPosition | economy__stable__subordinate#2 | 1 | Runs a smaller house behind the leading one, in a place that sends out iron ore.
+fill structuralPosition | economy__stable__subordinate#2 | 1 | Runs a smaller house behind the leading one, in a place that sends out luxury manufactured goods.
+fill structuralPosition | economy__stable__subordinate#2 | 3 | Runs a smaller house behind the leading one, in a place that sends out medicinal herbs.
+fill structuralPosition | economy__stable__subordinate#2 | 3 | Runs a smaller house behind the leading one, in a place that sends out milled flour.
+fill structuralPosition | economy__stable__subordinate#2 | 1 | Runs a smaller house behind the leading one, in a place that sends out milled timber.
+fill structuralPosition | economy__stable__subordinate#2 | 1 | Runs a smaller house behind the leading one, in a place that sends out mineral salts.
+fill structuralPosition | economy__stable__subordinate#2 | 1 | Runs a smaller house behind the leading one, in a place that sends out potions and elixirs.
+fill structuralPosition | economy__stable__subordinate#2 | 1 | Runs a smaller house behind the leading one, in a place that sends out raw gemstones.
+fill structuralPosition | economy__stable__subordinate#2 | 2 | Runs a smaller house behind the leading one, in a place that sends out recovered artefacts.
+fill structuralPosition | economy__stable__subordinate#2 | 1 | Runs a smaller house behind the leading one, in a place that sends out rock salt.
+fill structuralPosition | economy__stable__subordinate#2 | 3 | Runs a smaller house behind the leading one, in a place that sends out sacred wood.
+fill structuralPosition | economy__stable__subordinate#2 | 1 | Runs a smaller house behind the leading one, in a place that sends out salted fish.
+fill structuralPosition | government__economic_stress__dominant#1 | 1 | Holds the seat while money is short, in a place that lives on what it gets for its medicinal herbs.
+fill structuralPosition | government__economic_stress__dominant#1 | 1 | Holds the seat while money is short, in a place that lives on what it gets for its raw wool.
+fill structuralPosition | government__economic_stress__dominant#1 | 2 | Holds the seat while money is short, in a place that lives on what it gets for its river fish.
+fill structuralPosition | government__economic_stress__dominant#2 | 2 | Holds the seat while money is short, and incense and votive candles must still be bought in at whatever it costs.
+fill structuralPosition | government__economic_stress__dominant#2 | 1 | Holds the seat while money is short, and iron must still be bought in at whatever it costs.
+fill structuralPosition | government__economic_stress__dominant#2 | 1 | Holds the seat while money is short, and iron ore must still be bought in at whatever it costs.
+fill structuralPosition | government__economic_stress__dominant#2 | 4 | Holds the seat while money is short, and replacement arms and basic equipment must still be bought in at whatever it costs.
+fill structuralPosition | government__economic_stress__dominant#2 | 7 | Holds the seat while money is short, and salt must still be bought in at whatever it costs.
+fill structuralPosition | government__stable__dominant#7 | 1 | Holds the seat while the place sends out barrels and containers and coin comes back; there is room to act.
+fill structuralPosition | government__stable__dominant#7 | 1 | Holds the seat while the place sends out coal and coin comes back; there is room to act.
+fill structuralPosition | government__stable__dominant#7 | 2 | Holds the seat while the place sends out furs and pelts and coin comes back; there is room to act.
+fill structuralPosition | government__stable__dominant#7 | 1 | Holds the seat while the place sends out game meat and coin comes back; there is room to act.
+fill structuralPosition | government__stable__dominant#7 | 2 | Holds the seat while the place sends out grain surplus and coin comes back; there is room to act.
+fill structuralPosition | government__stable__dominant#7 | 2 | Holds the seat while the place sends out hardwood beams and coin comes back; there is room to act.
+fill structuralPosition | government__stable__dominant#7 | 3 | Holds the seat while the place sends out healing waters and coin comes back; there is room to act.
+fill structuralPosition | government__stable__dominant#7 | 1 | Holds the seat while the place sends out iron ore and coin comes back; there is room to act.
+fill structuralPosition | government__stable__dominant#7 | 1 | Holds the seat while the place sends out luxury manufactured goods and coin comes back; there is room to act.
+fill structuralPosition | government__stable__dominant#7 | 5 | Holds the seat while the place sends out medicinal herbs and coin comes back; there is room to act.
+fill structuralPosition | government__stable__dominant#7 | 4 | Holds the seat while the place sends out milled flour and coin comes back; there is room to act.
+fill structuralPosition | government__stable__dominant#7 | 1 | Holds the seat while the place sends out mineral salts and coin comes back; there is room to act.
+fill structuralPosition | government__stable__dominant#7 | 1 | Holds the seat while the place sends out quarried stone and coin comes back; there is room to act.
+fill structuralPosition | government__stable__dominant#7 | 1 | Holds the seat while the place sends out rare spices and exotic dyes and coin comes back; there is room to act.
+fill structuralPosition | government__stable__dominant#7 | 5 | Holds the seat while the place sends out raw wool and coin comes back; there is room to act.
+fill structuralPosition | government__stable__dominant#7 | 5 | Holds the seat while the place sends out river fish and coin comes back; there is room to act.
+fill structuralPosition | government__stable__dominant#7 | 7 | Holds the seat while the place sends out sacred wood and coin comes back; there is room to act.
+fill structuralPosition | government__stable__dominant#7 | 3 | Holds the seat while the place sends out salted fish and coin comes back; there is room to act.
+fill structuralPosition | government__stable__dominant#7 | 2 | Holds the seat while the place sends out sea salt and coin comes back; there is room to act.
+fill structuralPosition | government__stable__subordinate#1 | 1 | Keeps the courthouse for the seat, day to day, with no crisis to answer.
+fill structuralPosition | government__stable__subordinate#1 | 1 | Keeps the courthouses for the seat, day to day, with no crisis to answer.
+fill structuralPosition | government__stable__subordinate#1 | 1 | Keeps the mint for the seat, day to day, with no crisis to answer.
+fill structuralPosition | government__stable__subordinate#1 | 5 | Keeps the town granary for the seat, day to day, with no crisis to answer.
+fill structuralPosition | magic__stable__dominant#1 | 3 | Heads the academy of magic in quiet times; the work is the ordinary run of spellwork.
+fill structuralPosition | magic__stable__dominant#1 | 6 | Heads the mages' district in quiet times; the work is the ordinary run of spellwork.
+fill structuralPosition | magic__stable__dominant#1 | 4 | Heads the mages' guild in quiet times; the work is the ordinary run of spellwork.
+fill structuralPosition | magic__stable__dominant#1 | 2 | Heads the wizard's tower in quiet times; the work is the ordinary run of spellwork.
+fill structuralPosition | military__stable__dominant#1 | 1 | Commands the barracks in quiet times: the drill, the roster and the gear kept ready.
+fill structuralPosition | military__stable__dominant#1 | 1 | Commands the citizen militia in quiet times: the drill, the roster and the gear kept ready.
+fill structuralPosition | military__stable__dominant#1 | 8 | Commands the garrison in quiet times: the drill, the roster and the gear kept ready.
+fill structuralPosition | military__stable__dominant#1 | 7 | Commands the garrisons in quiet times: the drill, the roster and the gear kept ready.
+fill structuralPosition | military__stable__dominant#1 | 3 | Commands the professional city watch in quiet times: the drill, the roster and the gear kept ready.
+fill structuralPosition | military__stable__dominant#1 | 4 | Commands the town watch in quiet times: the drill, the roster and the gear kept ready.
+fill structuralPosition | religious__contested__dominant#1 | 2 | Leads the faith from the house of worship while many doubt the seat's right; both sides listen for what is said there.
+fill structuralPosition | religious__contested__dominant#1 | 5 | Leads the faith from the houses of worship while many doubt the seat's right; both sides listen for what is said there.
+fill structuralPosition | religious__economic_stress__dominant#1 | 11 | Leads the faith from the house of worship while money is short, and more people come to its door for alms.
+fill structuralPosition | religious__economic_stress__dominant#1 | 1 | Leads the faith from the houses of worship while money is short, and more people come to its door for alms.
+fill structuralPosition | religious__governance_fractured__dominant#1 | 6 | Leads the faith while the seat fails; more disputes now end at the house of worship than at the seat's door.
+fill structuralPosition | religious__governance_fractured__dominant#1 | 3 | Leads the faith while the seat fails; more disputes now end at the houses of worship than at the seat's door.
+fill structuralPosition | religious__stable__dominant#1 | 2 | Leads the faith from the house of worship; in quiet times the work is the services, the feast days and the burials.
+fill structuralPosition | religious__stable__dominant#1 | 25 | Leads the faith from the houses of worship; in quiet times the work is the services, the feast days and the burials.
+
+# (e)(2): every house a wording names, pool by pool (none is of a hideable kind: the `own house` atom answers only for a house stamped public at birth)
+house activeConstraint | economy__stable__subordinate#1 | the craft guilds (15) · the merchant guilds (1) · the merchant warehouses (1)
+house activeConstraint | government__stable__subordinate#1 | the customs house (1) · the harbour master's office (1) · the mint (1) · the town granary (5)
+house activeConstraint | magic__stable__dominant#1 | the academy of magic (5) · the alchemist quarter (1) · the mages' district (6) · the mages' guild (1)
+house activeConstraint | military__stable__dominant#2 | the barracks (3) · the garrison (2) · the garrisons (9) · the professional city watch (2) · the town watch (5)
+house activeConstraint | religious__economic_stress__dominant#1 | the house of worship (6)
+house activeConstraint | religious__stable__dominant#1 | the house of worship (3) · the houses of worship (23)
+house structuralPosition | economy__stable__dominant#1 | the barge and river transport company (1) · the craft guilds (1) · the merchant guilds (6)
+house structuralPosition | economy__stable__subordinate#1 | the caravanserai (1) · the city granaries (1) · the craft guilds (11) · the merchant guilds (1) · the merchant warehouses (1) · the warehouse district (1)
+house structuralPosition | government__stable__subordinate#1 | the courthouse (1) · the courthouses (1) · the mint (1) · the town granary (5)
+house structuralPosition | magic__stable__dominant#1 | the academy of magic (3) · the mages' district (6) · the mages' guild (4) · the wizard's tower (2)
+house structuralPosition | military__stable__dominant#1 | the barracks (1) · the citizen militia (1) · the garrison (8) · the garrisons (7) · the professional city watch (3) · the town watch (4)
+house structuralPosition | religious__contested__dominant#1 | the house of worship (2) · the houses of worship (5)
+house structuralPosition | religious__economic_stress__dominant#1 | the house of worship (11) · the houses of worship (1)
+house structuralPosition | religious__governance_fractured__dominant#1 | the house of worship (6) · the houses of worship (3)
+house structuralPosition | religious__stable__dominant#1 | the house of worship (2) · the houses of worship (25)

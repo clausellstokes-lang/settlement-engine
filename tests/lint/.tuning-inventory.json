@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "ff07bb81526a7383071ca1035e345ee06bed53d0",
-  "measuredBy": "SEAT-7",
+  "measuredAtSha": "b0f759b3cf46f37b54f7daaf6dc9758edf4f56ed",
+  "measuredBy": "PEOPLE-1 (lane/people-1-2026-11-20)",
   "date": "2026-11-20",
-  "note": "U5-CURE2 (3909902fa): SEAT_CIRCUMSTANCE_TUNING dependents gain src/domain/worldPulse/applyWorldPulse.js (the coup path wired); no value moved",
+  "note": "dependents moved, no value moved: npcStructure.js imports the goals fillers (fillLine, houseFill, resourceFill)",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1846,38 +1846,6 @@
         "src/domain/worldPulse/warSeatBooks.js"
       ],
       "namedDependents": []
-    },
-    "src/domain/seat/seatCircumstances.js#SEAT_CIRCUMSTANCE_TUNING": {
-      "exported": true,
-      "idiom": "literal",
-      "keys": 3,
-      "line": 56,
-      "spanDigest": "cbaa10baa9430e21bb6e367aeb21455a4b954031537e392b7e3cb82978d510e4",
-      "leaves": {
-        "factors.craft_led.craft": 1,
-        "factors.trade_wealth.merchant": 1,
-        "factors.strong_faith.religious": 1,
-        "factors.martial_pressure.noble": 1,
-        "factors.hunger.labor": 1,
-        "factors.mandate.noble": 1,
-        "factors.mandate.craft": 1,
-        "factors.outside_debt.outsider": 1,
-        "factors.outside_debt.merchant": 1,
-        "factors.occupation.outsider": 1,
-        "productCeiling": 1.6,
-        "cuts.craftOfMerchant": 0.8,
-        "cuts.guildIncomeFrom": 25,
-        "cuts.priorityFrom": 70
-      },
-      "dependents": [
-        "src/domain/rulingPowerCoup.js",
-        "src/domain/worldPulse/applyWorldPulse.js",
-        "src/domain/worldPulse/applyWorldPulseFactionRoster.js",
-        "src/domain/worldPulse/stressorDynamics.js"
-      ],
-      "namedDependents": [
-        "src/domain/rulingPowerCoup.js"
-      ]
     },
     "src/domain/spatial/armyTransit.js#ARMY_TRANSIT_TUNING": {
       "exported": true,
@@ -4765,7 +4733,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 4,
-      "line": 452,
+      "line": 457,
       "spanDigest": "bfb9f3afad0fbf5a97b4267b6097e8e11f95abf8950fc1e2b5ff9ad9cc7133ec",
       "leaves": {
         "YEAR_WEEKS": 52,
@@ -8631,7 +8599,8 @@
       },
       "dependents": [
         "src/generators/generateSettlementPipeline.js",
-        "src/generators/narrativeGenerator.js"
+        "src/generators/narrativeGenerator.js",
+        "src/generators/npcStructure.js"
       ],
       "namedDependents": []
     },
@@ -8665,7 +8634,8 @@
       },
       "dependents": [
         "src/generators/generateSettlementPipeline.js",
-        "src/generators/narrativeGenerator.js"
+        "src/generators/narrativeGenerator.js",
+        "src/generators/npcStructure.js"
       ],
       "namedDependents": []
     },
@@ -9316,8 +9286,8 @@
   },
   "unclosed": [],
   "totals": {
-    "tables": 281,
-    "keys": 2296,
+    "tables": 280,
+    "keys": 2293,
     "unregisteredNamed": 541,
     "bareDecimals": 6877,
     "zeroDependentTables": 10,

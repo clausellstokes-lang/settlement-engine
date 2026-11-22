@@ -1,0 +1,9 @@
+# PEOPLE-1's read of M3's proposals (settlementReason; founding), written 2026-11-20T16:52Z
+
+**settlementReason** (`PROPOSAL-settlementReason.md`). It PRINTS on the Overview's "Settlement Origin", the Summary tab, the PDF Overview, the campaign PDF and the Foundry journal. Today → projected top share, thorp to metropolis: 28/25/17/15/100/96% → 13/11/7/9/12/14%. No new atom is needed. I read all 77 new wordings and propose them as written, with one fix and three positions:
+1. FIX: "Grain from outside is ground here alongside its own; …" also needs `grain` (the place's own grain), so the line never says "its own" where no grain is grown.
+2. The build is a new data file (`src/data/settlementReasonVariants.js`) plus ONE call line in `narrativeGenerator.js :: generateSettlementReason` (its closing `return lines;` becomes `return variedReasonLines(lines, { … });`). It also needs ONE handed argument in `steps/generateNarratives.js`, because the writer holds no facts. That second file is not the goals lane's. I propose accepting it. Without it, every variant is refused and today's lines stand.
+3. The power-of-two law of `settlementOriginProse.js` was written for fixed pools. I propose NOT extending it to the per-place eligible lists: the measure finds no aliasing on this seed family, and dropping a wording to dodge a length costs variety.
+4. The new pool ids need rows in the dominance register: a re-base, which is the chair's to rule. The golden master moves (signed by none of us). The seeded tests (`originRowsRefused`, `bar5WorldLines` KEEP, `tailNarrativeRows`) are re-keyed by identity or widened to the variant pool in the same change.
+
+**founding** (`PROPOSAL-founding.md`; PDF only, last in the chair's order). Not sent yet. M3 found that the noble and crown founders print where no lord rules (25 of 26 villages, 21 of 24 towns, 19 of 26 cities). I will put that with its lines when the earlier fields are built.

@@ -1607,12 +1607,6 @@
     "1ab073b6dd2be7ef"
    ],
    [
-    "house: bathhouse",
-    "family",
-    "a communal green, bathhouse, and well bind several household compounds together",
-    "7f35d000c5d0a1d2"
-   ],
-   [
     "streets",
     "family",
     "Walled compounds, tiled roofs, axial streets, shop houses, and garden courts organize distinct wards.",
@@ -11658,30 +11652,6 @@
     "6923bddae426422f"
    ],
    [
-    "granary",
-    "root",
-    "Dawn work is the search for food. Foragers leave before light, and the granary queue forms before the ovens are warm.",
-    "018b94e7ae7c0e7a"
-   ],
-   [
-    "walls",
-    "root",
-    "The walls claim the first hours: the watch musters thin at first light, and ordinary work waits until the rounds are wal",
-    "17d46740c0be13f0"
-   ],
-   [
-    "watch",
-    "root",
-    "The walls claim the first hours: the watch musters thin at first light, and ordinary work waits until the rounds are wal",
-    "17d46740c0be13f0"
-   ],
-   [
-    "watch",
-    "root",
-    "Bakers light their ovens first, then the smiths; the watch changes as the gates open.",
-    "f34ca39293e997b2"
-   ],
-   [
     "watch",
     "root",
     "the watch turning a blind eye to the right pockets",
@@ -11704,30 +11674,6 @@
     "family",
     "Hearty grain bread and turnip-and-onion stews dominate the table; meat appears at festivals and on the wealthier streets",
     "fa6645f2f6d70043"
-   ],
-   [
-    "smith",
-    "family",
-    "Smithy fires light before sunrise; guild-callers move from shop to shop, and apprentices haul water before the bell.",
-    "a8fe95422acb08d0"
-   ],
-   [
-    "house: warehouse",
-    "family",
-    "Merchant caravans roll before light; porters and apprentices queue at the warehouses, and dawn brings the smell of woods",
-    "4fe7d5c42492ef75"
-   ],
-   [
-    "house: baker",
-    "family",
-    "Bakers light their ovens first, then the smiths; the watch changes as the gates open.",
-    "f34ca39293e997b2"
-   ],
-   [
-    "smith",
-    "family",
-    "Bakers light their ovens first, then the smiths; the watch changes as the gates open.",
-    "f34ca39293e997b2"
    ],
    [
     "house: tavern",

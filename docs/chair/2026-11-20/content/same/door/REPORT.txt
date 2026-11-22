@@ -1,0 +1,26 @@
+SAME-1 BRIEF 2, THE SAMENESS DOOR: REPORT (measured at 23893d8d4; register c531b5b49)
+
+SLOT: surface | printed position (React fiber path on the web, element path on the PDF, a keyed list item `*`;
+the session sheet's key path). Stored paths are attribution, found word for word or by containment.
+
+IDENTITY PROOF (slots with 2+ holders in one corpus, none in the other):
+before, brief 1's key: 81 at 50 a size, 39 from identity; 38 and 10 at 150.
+after: 66 at 50, 55 at 150; path flips 0. Seven at 150 sit one index from where the other corpus prints that path:
+ViabilityTab's are distinct static sections; four PDF pairs unproven; each holds 3 places or fewer.
+Containment moved 528 slots from COMPOSED to a path.
+DS-DEF-5, thorp: before four slots (arcane 47/47, charter 37/37, "100%"); after one, 150/150 holders,
+shareAll 0.36, SEEN 0.24 (4.2 lines a place, so SEEN reads it).
+
+MIN_PLACES 5: at 150 a size no one-corpus slot holds 5 places (2+: 55, 3+: 24, 4+: 6, 5+: 0).
+NOISE_SE 4: one corpus against the other's ceilings puts 19 and 32 of 3150 rows over 3 SE, 5 and 2 over 4
+(SEEN runs wider than binomial); over on both readings at 4 SE, about 0.008 false reds a re-dealt tree.
+
+RUN TIMES, 4 forks, 900 places: --check 16.5 min; with one confirmation 33.1 min.
+
+FLAKE PROOF: two checks at one tree: 900 rows byte-identical, the same verdict (0 red, 18 loose).
+A fresh sample (hxw, judged with hxu): 0 rises, but 83 UNREGISTERED reds at 5 to 10 places (crisis, issue
+and power layouts). Two corpora agreeing does not bound a third: law 1 at MIN_PLACES 5 flakes on a re-dealt
+tree. The chair's call: confirm law 1 on hxu, or raise MIN_PLACES.
+
+REGISTER: 642 rows. CATALOGUE 81, LABEL 79, STATE 68, NARRATIVE 60; 354 carry `?` (LABEL? 253,
+NARRATIVE? 51, STATE? 47, CATALOGUE? 3).
