@@ -4,21 +4,35 @@ Seat DAILY-3 (session_01ACmDYYZpEdm9Ag2ikDGTf9), eighth chair session_01ACmDYY29
 `origin/lane/chair-2026-11-08:docs/chair/2026-11-21/eighth/prompts/DAILY-3.txt` (bebdb15cb). Predecessor's record:
 `DAILY-2-HANDBACK.md` (its section 3, every ruling in force, binds; this file governs where it says more).
 
-## 1. WHERE THE LANE STANDS (written 2026-11-22 14:15 UTC)
-- `lane/daily-3-2026-11-22` (pushed) = the working line 1ec3e81d1 (point 97, merged f2c2ffb6a; lighting 2f22ed041) +
-  E1 + E2 + F1 + E3 (merge 99c9b5ff0) + F2 (merge 067e13fcb; lighting 03f67a396) + OFFICE-M (measures/OFFICE) + docs.
-  HAND_CEILING 80 (the line's 74 + this lane's 6). Green at 5a1cac48f (E3): 284 files, 8 red, all on the list; the
-  green at 03f67a396 (F2) IN FLIGHT at this writing.
-- MERGED, ALL FIVE SLOTS BUILT: food, resentments (+F1's lines), outsider, unspoken, recent; the owner-only slot with its
-  gate and crime55's smugglers lines (house: smuggling, lawful in the owner-only table; arm (c)'s one exception).
-- IN FLIGHT: 4b on `-4b-wip` (remote d7d814b71 = the two cures A em-dash + B requestDailyLife, committed; the removal
-  commit in progress; worktree `/home/user/wt-daily3-4b`); L8 on `-l8-wip` (cut 03f67a396; the five `office:` atoms in a
-  lazy facts leaf, E82; legitimacy L8..L12; + the chair's co-print count of L9 beside W11/B19/P13).
-- NEXT: 4c (`briefs/U4C-BUILD-PDF-CHAPTER.md`) after 4b's merge; the line's merge at point 98 (fortune) on the chair's
-  tip, ONCE, before rule 8; rule 8 WIDENED; the owner's file; "DAILY-B".
-- HAND-OVER: at 620,000 (the chair's read) this seat stops building, pushes, says "DAILY-3 HANDS OVER <commit>"; the
-  successor takes rule 8 and the owner's file (and any unit not merged) from this file. Count at 14:01: 458,645.
-- AFTER THE FIRST DEPLOY (the chair's intake, not this lane): W11, B19, P13 re-keyed `ruler: elder` -> `office: elders`.
+## 1. WHERE THE LANE STANDS (written 2026-11-22 16:57 UTC)
+- `lane/daily-3-2026-11-22` (pushed, c28d5779c and on) = the line at 1ec3e81d1 (point 97) + E1, E2, F1, E3, F2, U4b (merge
+  fcf8a7aef: the chair's two cures + the dead local narrative's removal; lighting 0640cb9da) + docs. HAND_CEILING 80 (the
+  line's 74 at 97 + this lane's 6). GREEN at c28d5779c: `tests/lint`, `tests/copy`, `tests/store` + every file naming
+  dailyLife: 461 files, 8 red, all on the list (voiceMechanics and the dead-operation ratchet now GREEN: 4b's cures).
+- IN FLIGHT (two builders): L8 on `-l8-wip` (remote 79b18643e = a SNAPSHOT before the chair's E95 rows; worktree
+  `/home/user/wt-daily3-l8`; brief `briefs/B3-L8-OFFICE-LINES.md` + E95's three rows in `registeredWords.js ::
+  HOUSE_FAMILIES` (headman/reeve/lord's steward answered by their `office:` atoms, the office-holder's reading, not a
+  building) + L12 needs `sovereign`); 4c on `-4c-wip` (cut 0640cb9da; worktree `/home/user/wt-daily3-4c2`; brief
+  `briefs/U4C-BUILD-PDF-CHAPTER.md` with its dispatch ruling: the slot order's one home is `dailyLife.js ::
+  DAILY_LIFE_PAGE_SLOTS`).
+- AT EACH MERGE: read the diff once; re-run the red on its base (scratch worktree `/home/user/wt-daily3-red`); merge;
+  re-take the lighting census by its door on a clean tree; the observed-shape readers' door (`node scripts/check-observed-
+  shape-readers.mjs`, `--write` if stale; history is deep); `tests/lint` whole + the governing files.
+- A SUCCESSOR TAKES (the chair's plan at 620,000): (a) whatever of L8 and 4c is not merged; (b) THE LINE'S MERGE at the tip
+  the chair sends (point 102 expected), ONCE, before rule 8: registers at the line's side, then each by its door;
+  HAND_CEILING = the line's figure + this lane's 6 rows, every comment kept; (c) RULE 8 by COMMON-EIGHTH 14 as amended at
+  15:11 (fetch the chair's branch fresh): the dark proof first (births byte-identical vs the line: hash and count; the
+  slots are derived at read, never stored), then `tests/lint` whole, this lane's test files, every file naming a changed
+  module (the list saved, its count said), the Daily Life tab's and the PDF chapter's own tests whole + the three
+  tab-rendering walkers, `tests/copy`, `tests/store`, `tests/architecture`, `tests/docs`, ONE build with the five
+  figures + VERIFY_DIST=1 `tests/build`; reds by name against the chair's fresh `ci/RED-AT-LINE.tsv`; (d) THE OWNER'S
+  FILE (six places, one a size, the Daily Life page before and after as it prints, plain words; every house a wording
+  needs; the class-table and vocabulary rows for the join; the stored figures moved; tuning tables: none); (e) "DAILY-B
+  <commit>" to the chair with the veil reader's line (the office atoms are NOT hideable: a faction card's floor keeps its
+  name and isGoverning; the one writer of `hidden: true` is the infiltrator in `generators/power/stressFactions.js`).
+- FOR THE CHAIR (open): the sameness census's stale row "Generate Daily Life: Narrative refinement" (its door refused on a
+  rise outside this lane: hamlet NPCsTab InfoPill shareAll 1.00 > 0.7); `src/copy/en.js` `ai.dailyLife.*` keys with no
+  reader (the owner's AI copy, left).
 
 ## 2. RULINGS OF THIS SEAT (vetoable by the chair)
 1. B3's split: the dm pool file `commonerResentmentsDm.js` is E1's (the gate and its content land together); E2 builds
@@ -58,5 +72,16 @@ Seat DAILY-3 (session_01ACmDYYZpEdm9Ag2ikDGTf9), eighth chair session_01ACmDYY29
    infiltrator in `generators/power/stressFactions.js`): say so in the landing line for the veil's reader.
    E59 for 4c (derive in the chapter; no owner-only slot in the PDF). 4b's two cures first (10:02). The six-children cap.
 
-## 3. Houses, class rows, stored figures, worker bytes
-None yet (written at each merge).
+## 3. Houses, class rows, stored figures, worker bytes (for the join and the veil reader; details in each merge's commit)
+- HOUSES each slot's wordings need: food (market; sacred house + church for X0; route open); resentments (market F6-F8,
+  F0; ruling body L0/L13; government named); owner-only dm (watch, guard presence; crime55 smugglers: house: smuggling
+  (hideable, lawful in the owner-only table, named in DM_BY_CONSTRUCTION's notes), gate, market, route open); outsider
+  (watch, sick house, market, sacred house, guard presence, magic); unspoken (guild, market); recent (sick house,
+  route open, sovereign, magic).
+- CLASS / VOCABULARY ROWS: `office: elders|headman|mayor|reeve|lord's steward` (L8, E82: home seatTable.js :: formKindOf
+  via a lazy facts leaf) and E95's three HOUSE_FAMILIES answers (L8, when merged); `NEED_ATOMS.smuggling` mapped (F2).
+- REGISTERS MOVED BY THEIR DOORS: presumption-classes ceiling 1781 -> 1774 (E1 -2, E2 -4, E3 -1); presumed-things widened
+  rows shrunk (E1, E2, E3); observed-shape readers (E2's 7 chain reads); sameness hand list +6 (HAND_CEILING), house
+  readings by the walker's reading; DM_BY_CONSTRUCTION's one row (E1, notes F2); the lighting census by its door at
+  every merge; compendium op count 159 -> 158 (4b, `gen:compendium-data`); DAILY_LIFE_TAB.json deleted (4b).
+- FIRST PAINT: E1's build = the line's to the byte raw; later units add pools in lazy data files only (re-measure at rule 8).
