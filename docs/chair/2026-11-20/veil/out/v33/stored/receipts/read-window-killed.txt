@@ -1,0 +1,2 @@
+start 2026-11-22T22:07:45Z tree /home/user/wt/lp at 216cb46d85de4a5be96f786fb012b0d693d4e2b7 stored /var/tmp/v18/stored/today/docs
+killed 2026-11-22T22:21Z on the hand-off order; no shard finished, nothing written
