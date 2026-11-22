@@ -418,8 +418,71 @@ export const MERCHANT_CRAFT_VOTE = Object.freeze({
  * HIGH twin (withConflictRelations). */
 const ORDAINED_SEAT = /^(.+ holds the seat(?: and collects the taxes)?); (.+) (tells|tell) people that (.+) rule is right and ordained\. Each props up the other\.$/;
 
-export function computeFactionRelationships(factions, tier, instFlags, publicLeg, stressTypes = [], defenseFacts = null, courtSits = null) { // FAULTS-WATCH FR25 (c): `courtSits`, the roster's court (`defence.js :: courtHoldersOf`, `court sits` at the draw); false strikes "courts" from the standing's rights; null keeps the line
+import { SEAT_HOLDER_LINES } from '../data/seatHolderLines.js'; // SEAT-10 U6 (CS12): the holder's lines, the chair's wordings; these imports sit here, below the lines the holder census cites by number (tests/lint/proseWiringCensus.walker.test.js)
+import { fillAgreement } from '../data/people/powerSentenceName.js';
+import { pickVariantMixed } from '../kernel/proseHash.js';
+import { getActiveRng } from '../kernel/rngContext.js';
+import { seatsByHolder } from '../domain/seat/seatLaw.js';
+import { holderOf } from '../domain/seat/holderOfSeat.js';
+import { isVeiledRow, pairLicense } from '../domain/seat/seatTable.js';
+
+/**
+ * THE HOLDER APART (SEAT-10 U6, CS12; the chair's rulings of 2026-11-22): the power that holds the seat, read off the
+ * roster as the seat law reads it (`holderOf`, the owner's audience), where the world was born under the seat law
+ * (`seatsByHolder`, off the born config), that power stands APART from the form (the governing row), and it is not
+ * veiled (`isVeiledRow`). Else null, and every line stays as it is: a hidden or criminal holder exposes nothing, and
+ * under law 1 this answers null before it reads anything else.
+ * @param {ReadonlyArray<Record<string, any>>} factions @param {unknown} config the born config
+ * @param {unknown} [record] the final record (the final-record pass, `power/factionStanding.js :: settleSeatHolderToRecord`), else the roster alone
+ * @returns {{ form: Record<string, any>, holder: Record<string, any>, licensed: boolean } | null}
+ */
+export function seatHolderApartOf(factions, config, record = null) {
+  if (!seatsByHolder(config) || !Array.isArray(factions)) return null;
+  const form = factions.find((f) => f?.isGoverning) || null;
+  if (!form) return null;
+  // the power step reads the roster alone (no one is cast yet); the final-record pass hands the record, so R2 (the person's first power) reads too
+  const held = holderOf(/** @type {any} */ (record || { powerStructure: { factions }, config }), { audience: 'owner' });
+  const holder = /** @type {Record<string, any> | null} */ (held.holder);
+  if (!holder || holder === form || holder.faction === form.faction || isVeiledRow(holder)) return null;
+  return { form, holder, licensed: pairLicense(String(held.kind || ''), form.faction).pair === 'licensed' };
+}
+
+/**
+ * One of the holder's lines (`data/seatHolderLines.js`), drawn through the kernel's mixed key from what every read
+ * serves (the record's seed and the two names), its slots filled: the form after its article, the holder with its
+ * article, the verb in the holder's number. A sentence that opens on the holder opens "The" (`opening`).
+ * @param {'relation' | 'standing'} pool @param {{ form: Record<string, any>, holder: Record<string, any> }} apart
+ * @param {unknown} [seed] the record's seed: the birth's stream seed at the power step, the record's `_seed` on the final record
+ * @returns {string}
+ */
+export function seatHolderLineOf(pool, apart, seed = getActiveRng()?.seed) {
+  const key = seed ? `${seed}::seatHolder:${pool}:${apart.form.faction}:${apart.holder.faction}` : null;
+  return seatHolderFill(String(pickVariantMixed(SEAT_HOLDER_LINES[pool], key) ?? SEAT_HOLDER_LINES[pool][0]), apart);
+}
+
+/** Every line of a pool, filled for this pair (no draw): what the final-record pass finds already written. @param {'relation' | 'standing'} pool @param {{ form: Record<string, any>, holder: Record<string, any> }} apart @returns {string[]} */
+export function seatHolderLinesOf(pool, apart) {
+  return SEAT_HOLDER_LINES[pool].map((line) => seatHolderFill(line, apart));
+}
+
+/** @param {string} line @param {{ form: Record<string, any>, holder: Record<string, any> }} apart @returns {string} */
+function seatHolderFill(line, apart) {
+  const form = powerNameAfterArticle(apart.form.faction);
+  return opening(fillAgreement(line, { holder: say(apart.holder) })
+    .replace(/\{form's\}/g, powerPossessive(form))
+    .replace(/\{form\}/g, form)
+    .replace(/\{holder\}/g, say(apart.holder)));
+}
+
+/** W1, and W2 after it on a licensed pair: the form<->holder row's line. @param {{ form: Record<string, any>, holder: Record<string, any>, licensed: boolean }} apart @param {unknown} [seed] @returns {string} */
+export function seatHolderRelationLineOf(apart, seed = getActiveRng()?.seed) {
+  return `${seatHolderLineOf('relation', apart, seed)}${apart.licensed ? ` ${SEAT_HOLDER_LINES.licensed[0]}` : ''}`;
+}
+
+export function computeFactionRelationships(factions, tier, instFlags, publicLeg, stressTypes = [], defenseFacts = null, courtSits = null, seatConfig = null) { // FAULTS-WATCH FR25 (c): `courtSits`, the roster's court (`defence.js :: courtHoldersOf`, `court sits` at the draw); false strikes "courts" from the standing's rights; null keeps the line; SEAT-10 U6: `seatConfig`, the born config (the seat law's), absent the old law
   const rels = [];
+  // SEAT-10 U6 (CS12, W1 and W2): the form<->holder row says the holder holds the office, never that it works under it
+  const apart = seatHolderApartOf(factions, seatConfig);
   const stressed = t => stressTypes.includes(t);
 
   // Helper: find faction by category or name keywords (EXCLUDING the governing faction
@@ -439,7 +502,9 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
   // Guard: skip if pair would be self-referential
   const addRel = (obj) => {
     if (obj.pair?.[0] === obj.pair?.[1]) return; // skip self-relationships
-    rels.push({ ...obj, narrative: opening(obj.narrative) }); // NAMES-1 (CN1): a sentence that opens on a power opens "The …"
+    const held = apart && obj.pair?.includes(apart.form.faction) && obj.pair?.includes(apart.holder.faction);
+    const narrative = held ? seatHolderRelationLineOf(apart) : obj.narrative;
+    rels.push({ ...obj, narrative: opening(narrative) }); // NAMES-1 (CN1): a sentence that opens on a power opens "The …"
   };
 
   const gov  = factions.find(f => f.isGoverning);
