@@ -1,0 +1,7 @@
+births thorp [0, 150): places 150 · powers 163 · relation rows 5
+births hamlet [0, 150): places 150 · powers 186 · relation rows 25
+births village [0, 150): places 150 · powers 342 · relation rows 183
+births town [0, 150): places 150 · powers 610 · relation rows 552
+births city [0, 150): places 150 · powers 974 · relation rows 582
+births metropolis [0, 150): places 150 · powers 1209 · relation rows 691
+written one cache file a size (a local cache, not committed; reproduce: M6_BASE=686d62e9d node m6-births.mjs <checkout> <size> 0 150 <cacheDir>/<size>.json, the six sizes as six processes)

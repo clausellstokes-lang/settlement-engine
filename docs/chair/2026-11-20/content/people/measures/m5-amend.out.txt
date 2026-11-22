@@ -1,0 +1,70 @@
+AMEND: 20 wordings replaced; M3 texts not found 0
+GUARDS on the amended wordings: misses 0
+PROJECTION with the amended pool: the picked index equals M3's on 600/600 places
+  thorp: foundedBy projected 13/100 13% :: a discharged soldier who liked the view and had nowhere better to be || rite sentence projected 6/78 8% :: It has been kept since # was founded by a discharged soldier who liked the view and had nowhere better to be, 0 years ago.
+  hamlet: foundedBy projected 11/100 11% :: a household that settled first and found others following it in || rite sentence projected 4/84 5% :: # has kept it since its founding by a household that settled first and found others following it in, 0 years ago.
+  village: foundedBy projected 13/100 13% :: refugees fleeing war or persecution who found the location defensible || rite sentence projected 4/85 5% :: It goes back to the founding of # by a noble granted lands in the forest by the crown and obligated to populate them, 0 years ago, and has been kept since.
+  town: foundedBy projected 10/100 10% :: a merchant consortium that needed a waypoint and decided to own it || rite sentence projected 7/100 7% :: It goes back to the founding of # by a merchant consortium that needed a waypoint and decided to own it, 0 years ago, and has been kept since.
+  city: foundedBy projected 11/100 11% :: a powerful noble house that needed a commercial base independent of rivals || rite sentence projected 6/100 6% :: # has kept it since its founding by royal decree and a century of forced investment in walls and markets, 0 years ago.
+  metropolis: foundedBy projected 11/100 11% :: the slow accretion of three smaller settlements around a shared market that eventually merged under a single administration || rite sentence projected 8/100 8% :: # has kept it since its founding by a great trade house whose banking outgrew every other settlement in the region, 0 years ago.
+THE AMENDED WORDINGS IN THE THREE FOUNDING FRAMES ({ground} read as "in the hills"; the town #, the age 0):
+  It has been kept since # was founded by a discharged soldier with nowhere better to be who settled in the hills and stayed, 0 years ago.
+  # has kept it since its founding by a discharged soldier with nowhere better to be who settled in the hills and stayed, 0 years ago.
+  It goes back to the founding of # by a discharged soldier with nowhere better to be who settled in the hills and stayed, 0 years ago, and has been kept since.
+  It has been kept since # was founded by a group of settlers who looked for land of their own and found it in the hills, 0 years ago.
+  # has kept it since its founding by a group of settlers who looked for land of their own and found it in the hills, 0 years ago.
+  It goes back to the founding of # by a group of settlers who looked for land of their own and found it in the hills, 0 years ago, and has been kept since.
+  It has been kept since # was founded by escaped serfs who hid in the hills beyond the reach of their former masters, 0 years ago.
+  # has kept it since its founding by escaped serfs who hid in the hills beyond the reach of their former masters, 0 years ago.
+  It goes back to the founding of # by escaped serfs who hid in the hills beyond the reach of their former masters, 0 years ago, and has been kept since.
+  It has been kept since # was founded by a merchant coalition that outgrew the place it started in and set up again in the hills, 0 years ago.
+  # has kept it since its founding by a merchant coalition that outgrew the place it started in and set up again in the hills, 0 years ago.
+  It goes back to the founding of # by a merchant coalition that outgrew the place it started in and set up again in the hills, 0 years ago, and has been kept since.
+  It has been kept since # was founded by a retired tradesperson who settled in the hills and whose skills drew others to follow, 0 years ago.
+  # has kept it since its founding by a retired tradesperson who settled in the hills and whose skills drew others to follow, 0 years ago.
+  It goes back to the founding of # by a retired tradesperson who settled in the hills and whose skills drew others to follow, 0 years ago, and has been kept since.
+  It has been kept since # was founded by a retired tradesperson who set up by the road and whose skills drew others to settle nearby, 0 years ago.
+  # has kept it since its founding by a retired tradesperson who set up by the road and whose skills drew others to settle nearby, 0 years ago.
+  It goes back to the founding of # by a retired tradesperson who set up by the road and whose skills drew others to settle nearby, 0 years ago, and has been kept since.
+  It has been kept since # was founded by a retired tradesperson who set up where the roads cross and whose skills drew others to settle nearby, 0 years ago.
+  # has kept it since its founding by a retired tradesperson who set up where the roads cross and whose skills drew others to settle nearby, 0 years ago.
+  It goes back to the founding of # by a retired tradesperson who set up where the roads cross and whose skills drew others to settle nearby, 0 years ago, and has been kept since.
+  It has been kept since # was founded by a healer who stopped at the crossroads to treat a traveller and stayed where every road brought more, 0 years ago.
+  # has kept it since its founding by a healer who stopped at the crossroads to treat a traveller and stayed where every road brought more, 0 years ago.
+  It goes back to the founding of # by a healer who stopped at the crossroads to treat a traveller and stayed where every road brought more, 0 years ago, and has been kept since.
+  It has been kept since # was founded by royal decree and a century of forced investment in walls and markets, 0 years ago.
+  # has kept it since its founding by royal decree and a century of forced investment in walls and markets, 0 years ago.
+  It goes back to the founding of # by royal decree and a century of forced investment in walls and markets, 0 years ago, and has been kept since.
+  It has been kept since # was founded by royal decree to build a city in the hills and a century of forced investment, 0 years ago.
+  # has kept it since its founding by royal decree to build a city in the hills and a century of forced investment, 0 years ago.
+  It goes back to the founding of # by royal decree to build a city in the hills and a century of forced investment, 0 years ago, and has been kept since.
+  It has been kept since # was founded by royal decree to hold the river and a century of forced investment, 0 years ago.
+  # has kept it since its founding by royal decree to hold the river and a century of forced investment, 0 years ago.
+  It goes back to the founding of # by royal decree to hold the river and a century of forced investment, 0 years ago, and has been kept since.
+  It has been kept since # was founded by royal decree to hold the crossing of the roads and a century of forced investment, 0 years ago.
+  # has kept it since its founding by royal decree to hold the crossing of the roads and a century of forced investment, 0 years ago.
+  It goes back to the founding of # by royal decree to hold the crossing of the roads and a century of forced investment, 0 years ago, and has been kept since.
+  It has been kept since # was founded by imperial decree and the forced settling of skilled people in the hills, 0 years ago.
+  # has kept it since its founding by imperial decree and the forced settling of skilled people in the hills, 0 years ago.
+  It goes back to the founding of # by imperial decree and the forced settling of skilled people in the hills, 0 years ago, and has been kept since.
+  It has been kept since # was founded by imperial decree to hold the river and the forced relocation of skilled populations, 0 years ago.
+  # has kept it since its founding by imperial decree to hold the river and the forced relocation of skilled populations, 0 years ago.
+  It goes back to the founding of # by imperial decree to hold the river and the forced relocation of skilled populations, 0 years ago, and has been kept since.
+  It has been kept since # was founded by imperial decree to hold the road and the forced relocation of skilled populations, 0 years ago.
+  # has kept it since its founding by imperial decree to hold the road and the forced relocation of skilled populations, 0 years ago.
+  It goes back to the founding of # by imperial decree to hold the road and the forced relocation of skilled populations, 0 years ago, and has been kept since.
+  It has been kept since # was founded by the slow accretion of three smaller settlements around a shared market that eventually merged under a single administration, 0 years ago.
+  # has kept it since its founding by the slow accretion of three smaller settlements around a shared market that eventually merged under a single administration, 0 years ago.
+  It goes back to the founding of # by the slow accretion of three smaller settlements around a shared market that eventually merged under a single administration, 0 years ago, and has been kept since.
+  It has been kept since # was founded by a small religious community that settled in the hills and whose members drifted into secular life over the next two generations, 0 years ago.
+  # has kept it since its founding by a small religious community that settled in the hills and whose members drifted into secular life over the next two generations, 0 years ago.
+  It goes back to the founding of # by a small religious community that settled in the hills and whose members drifted into secular life over the next two generations, 0 years ago, and has been kept since.
+  It has been kept since # was founded by a small religious community that built the first temple here and whose members drifted into secular life over the next two generations, 0 years ago.
+  # has kept it since its founding by a small religious community that built the first temple here and whose members drifted into secular life over the next two generations, 0 years ago.
+  It goes back to the founding of # by a small religious community that built the first temple here and whose members drifted into secular life over the next two generations, 0 years ago, and has been kept since.
+  It has been kept since # was founded by a discharged soldier who stopped here on the road home and never went on, 0 years ago.
+  # has kept it since its founding by a discharged soldier who stopped here on the road home and never went on, 0 years ago.
+  It goes back to the founding of # by a discharged soldier who stopped here on the road home and never went on, 0 years ago, and has been kept since.
+  It has been kept since # was founded by a pair of siblings who stopped where the roads cross because they could not agree which road to take, 0 years ago.
+  # has kept it since its founding by a pair of siblings who stopped where the roads cross because they could not agree which road to take, 0 years ago.
+  It goes back to the founding of # by a pair of siblings who stopped where the roads cross because they could not agree which road to take, 0 years ago, and has been kept since.

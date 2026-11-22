@@ -1,0 +1,74 @@
+# PEOPLE-2 builder B2: the powers' descriptions and the relations between them, built (first tranche, as ruled) (written 2026-11-20T17:30Z)
+
+Fields: `powerStructure.factions[].desc` (openings, step A, and the standing codas, step B) and `powerStructure.factionRelationships[].narrative`. ONE unit: one data file, one pass.
+
+READ WHOLE FIRST: `docs/chair/2026-11-20/content/people/PROPOSAL-factions-desc.md`, `PROPOSAL-factionRelationships-narrative.md`, `READ-M4-powers.md`, `measures/m4-pools.mjs` (the wordings, with needs and excludes, AS WRITTEN THERE), then each source file you change, whole.
+
+## The chair's verdict (17:21 UTC, verbatim where quoted; it governs where the proposals or the read differ)
+1. "NO NEW VARIANT CARRIES A FEELING OR A SCHEME ITS BRANCH DOES NOT COMPUTE. Strike: the arcane advisory pool 1 to 8 ("quietly resented"); MR.dep 1 to 11 ("and neither likes it": each ends "Each needs the other."); MR.tense 4 ("and {M} resent it"); coda bodiesMinds 1 to 3 (each ends at the fact: who keeps order, and how); coda worthBuying 1 ("Third in weight, close enough to $1 and $2 that their support is worth having.") and 2 (it ends "...and both $1 and $2 know it."); coda closingGap 1 ("Merchant money is catching up with the noble families, and the gap between them narrows.") and 2 ("The merchants are closing on the noble families, who still stand ahead."); coda arcaneInShadow 2 and 3 (strike "on purpose" and "by choice"). TODAY'S INDEX 0 STAYS ELIGIBLE EVERYWHERE (the owner: a calm town should be as it currently is), with ONE exception: the village priest's line takes its priest as a NEED (no cleric stands in 74 of 100 villages that print it)."
+   READ: "Strike" on a pool's numbered rows means those wordings are LEFT OUT where the chair gives no replacement; where the chair gives the replacement's end in quotes, the row is written with that ending (the clause struck, the fact kept). The village priest's index 0 is refused where `priest` is false; the pool's other eligible wordings speak there; if none is eligible, the line is returned as it came.
+2. "REWORDINGS: the elders' pool 4: "The oldest heads of the community decide things together, large and small; people follow them by custom and out of respect, not by law."; clergy at the margins 1: "The clergy are respected in their own sphere, but in the business of governing they count for little."; 7: "The court, not the clergy, settles the place's disputes; the clergy's authority is moral, and their political leverage limited."; minor landed families 2: "Old landed families of limited reach; they take part in civic affairs, but are seldom the ones who settle them.""
+3. "THE BAR IS BY THE SENTENCE, OVER ALL PLACES OF A SIZE (about 15%; 150 places a size; a top to 20% passes as sampling). Step B (the codas) ships with step A." (The second tranche, M6's, is a LATER unit: do not write it.)
+4. "THE BUILD: `src/data/powerLineVariants.js` …; the ONE pipeline line after `withConflictRelations`; … one line in `factionDynamics.js`, named to me before the merge (outside `computePublicLegitimacy`). THE PICK is `pickVariantMixed` … over the combined list wherever a new wording is eligible; where none is eligible the lines are returned as they came, byte for byte. … New pool-dominance rows by the register's own door. Seeded text tests are re-keyed by identity or widened to the variant pool. Two-tree: 0 non-string differences."
+5. "THE HIDEABLE RULE …: no wording may NEED a house of a hideable kind (`src/domain/people/cardVeil.js :: isHideableHouse`) or any fact about crime; every OTHER house a wording needs is LISTED in your hand-back, pool by pool, for the security reader at the join."
+Also from the chair (17:13): the one `factionDynamics.js` line is for the cast regen's vote matcher, outside `computePublicLegitimacy` AND outside the who-rules lane's transfer unit. (17:32): the fortune lane's hunk is fixed at 1cd2e6d93 on `lane/fortune-3-2026-11-20` (a line of `computePublicLegitimacy` replaced in place; a helper `sizeRelativeSafetyContrib` added below the size-relative standing block): your line goes nowhere near either (check with `git show 1cd2e6d93 -- src/generators/factionDynamics.js`). (17:32): the power-of-two law is NOT extended and no wording is dropped to dodge a list's length.
+
+## Files you own (nothing else)
+- `src/data/powerLineVariants.js` (NEW): `DESC_POOLS`, `CODA_POOLS`, `RELATION_POOLS` (each row `{ text, needs, excludes }`, the house's declared-line shape; today's line is NOT stored as a row: it is the head of the combined list at the pick) and `voicePowerLines(record)` as the proposals' §6 describe: reads `record._seed`; picks with `pickVariantMixed([todayLine, ...eligible], '<_seed>::<field>::<stable key>')` (the keys as the proposals name them); admits through `src/domain/facts/drawDeclared.js` against `factsOf(record)`; a falsy seed returns every line as it came; the not-pooled lines (the occupier line, the capture rows, the conflict twins) are never touched.
+- `src/generators/generateSettlementPipeline.js`: ONE line, directly after the `withConflictRelations` statement: `voicePowerLines(finalCtx.settlement);` (with its import line). Put the line, as written, in your final message.
+- `src/generators/factionDynamics.js`: ONE line for the cast regen's vote matcher so a stored variant is known (the proposal's §3, `withConflictRelations`); outside `computePublicLegitimacy` and the who-rules lane's transfer unit. Name its function and the line, as written, in your final message.
+- The census declaration file for the new pools (beside the files under `docs/census/declarations/`, one row a wording with `needs` and `excludes`); the new data file's row in `tests/lint/presumedThings.shared.mjs`; the pool-dominance register's NEW rows written through the register's own door (find its refreeze command; existing rows only shrink; the cause in your commit). Walkers green BY DECLARATION, never by an exemption.
+- The seeded text tests that key on a line your change moves (the proposals' §3), re-keyed BY IDENTITY or widened to the variant pool, each named in your commit; `law14K` (14a) named for the integrator. Any other red naming these fields: stop and report.
+- Your new test file(s) under `tests/generators/power/` (basename avoiding census|scan|baseline|ratchet|walker|killlist|parity|coverage|governance|freshness|integrity|exhaustiveness|roundtrip|golden|contract|pin).
+
+NOT YOURS: `src/kernel/proseHash.js` (it arrives by the integrator's MERGE of `lane/kernel-mix-2026-11-20`, already in your base); `src/domain/facts/factVocabulary.js` (no atom is asked; if you find one needed, stop and report); `power/rulingStructure.js`, `power/claimStanding.js` and every other line of `factionDynamics.js`; `npcStructure.js`, `src/data/npcStructureVariants.js` (PEOPLE-1's); `narrativeGenerator.js`; `npcData.js`, `historyData.js`, `historyGenerator.js`; anything under `supabase/`, `src/domain/veil/`, `tests/security/`; `package.json`, `package-lock.json`; every register beyond the pool-dominance rows above.
+
+## Red first, then green
+1. RED before your change, GREEN after (commit the test first or show its red): on 150 places a size (`hxd-<size>-0..149`), no POOLED opening and no POOLED relation sentence (the not-pooled lines excepted, named in the test) prints in more than 20% of a size's places, by the sentence, names masked. The codas are MEASURED and reported by size (not pinned: their second tranche is a later unit).
+2. A seedless record: `voicePowerLines` changes no byte.
+3. Every printed wording over the 900 places: its `needs` hold and its `excludes` do not (through `drawDeclared`); the village priest's index 0 never prints where `priest` is false; no struck clause ("quietly resented", "neither likes it", "resent it", "on purpose", "by choice", "worth having", "know it", "catching up", "closing on") appears in any NEW wording.
+4. THE HIDEABLE RULE as a test: no row's `needs` names a house for which `isHideableHouse` is true, nor a crime fact.
+5. The random stream untouched: `node docs/chair/2026-11-20/content/tools/confinement/trees.mjs <base> <your tip> <workdir>`: 0 non-string differences; list the strings that move.
+6. THE SHARES ON THE BUILT TREE: the top sentence share by size (150 places a size, names masked, by the sentence over ALL places of the size) for openings, codas and relations, before (your base) and after (your tip), in your commit message. Measure it with a script of your own under `docs/chair/2026-11-20/content/people/measures/b2-shares.mjs` (start from `m4-measure.mjs`; the births through the real pipeline, not a projection), its output beside it as `.out.txt`. Also count the codas that print in more than half of a size's places, before and after.
+
+GREEN at your last commit, every run through `sh scripts/gate-mutex.sh --run -- <command>`, read by `sh scripts/gate-tail.sh` (never through a pipe): your tests; every test file that names `factionDynamics`, `rulingStructure`, `claimStanding`, `factionRelationships` or `generateSettlementPipeline`; `tests/lint` WHOLE; `npm run typecheck:ratchet`; `npm run typecheck:domain:strict`; `npm run lint`. Never the whole suite; never a census. The generator's golden master (`tests/property/generatorGoldenMaster.test.js`) moves: say which rows, sign none.
+
+## Hand-back
+Commits on your branch (the red test first, then the cure), by explicit paths, the cure's message carrying its receipts (red, green, trees, shares) and ending:
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_019yED1QfbBhtLaDuWfGxc42
+Never push, never a pull request, never `--no-verify`. Final message at most 250 words: the commits; the pipeline line and the factionDynamics line as written (with the function); the shares before and after; the house list of item 5 by pool (or the file it is in); every red you saw and whose it is.
+
+## HELD OUT (the integrator, 17:58 UTC, on M6's §F in `LINES-power-tranche2.md`)
+Do NOT write these five ruled wordings until the integrator relays the chair's ruling to you by message: `closingGap` 1 and 2 (false where they print: the merchants already stand above), `arcaneInShadow` 2 and 3 (false at a tie), `clergyAhead` 2 ("quietly"). Build everything else. If the ruling reaches you before your cure commit, apply it in that commit; otherwise list the five as held in your final message.
+
+## THE CHAIR'S RULING OF 18:14 UTC ON M6 (verbatim; it REPLACES the HELD OUT section and WIDENS B2)
+"LINES power-tranche2 (6a137f274): READ WHOLE, all 78, against `factionStanding.js` (lines 141-154, 167-172, 248-253, 289-292, 301-304, 325-327). APPROVED FOR B2 WITH THE CHANGES BELOW. Your four faults are right; my ruled lines are withdrawn where false.
+
+F1 closingGap (the merchants ABOVE by 1 to 12: line 251). Today's index 0 and my ruled 1 and 2 are NOT ELIGIBLE anywhere (truth outranks canonical-at-zero; a seedless record takes the first eligible). No degree word: 12 is not "a little". The pool, the card's own power said as "they" (the card is any of five names, line 238):
+1 "The merchants stand ahead of them in influence here."
+2 "In influence here the merchants come before them."
+3 "They count here, but the merchants count for more."
+4 "They stand behind the merchants in influence here."
+5 "Trade counts here for more than birth and land."
+6 [market] "They carry less weight here than the merchants of the market."
+7 [population: large] "In a place this large the merchants stand ahead of them in influence."
+F2 atTable ON THE SEAT: the writer's cure, in B2, red first: at rank 2 the GOVERNING seat prints neither `atTable` nor `worthBuying`; the "...powers stand almost level" line STAYS (it speaks of the place). No new sentence. Give me worthBuying's count on the seat, and list every line of `factionStanding.js` B2 touches (the who-rules lane's join).
+F3 TIES: the caller passes the branch's own computed `level` as an eligibility flag (not a vocabulary atom). arcaneInShadow index 0, ruled 2 and 3 EXCLUDE level; noblesAhead index 0 EXCLUDES level.
+F4 clergyAhead 2: STRUCK.
+
+THE 78 AS WRITTEN, EXCEPT:
+- noblesAhead says "they", never "the noble families": 1 "For all the merchants' money, they have not been overtaken here." 2 "The merchants have not overtaken them in influence here." 3 "Land and birth count here for no less than trade." 4 "They are at least the merchants' equal in influence here." 5 "They have no less say here than the merchants who trade at the market." 6 "They have no less say here than the merchants who handle what the place sends out." 7 "They hold land and name here, and in influence the merchants have not passed them." 8 "Well off as the place is, the merchants have not overtaken them in influence."
+- arcaneInShadow 11: if the monastery atom holds for a friary: "With a church here and a house of monks or friars besides, the faith stands no lower than the arcane orders."
+- clergyAhead 5: "In public matters the clergy come before the arcane orders here."
+- outpaced 6: "The craft guilds are present, but the merchants have the larger say, and the prices are theirs to set." (a Suppressed guild has no say)
+- LOCAL_MERCHANTS 6: STRUCK (local reach against the place's exports).
+- landed outpaced: 1 "...; they keep their land, but money carries more weight here." 2 "Landed families in a place where merchant capital counts for more than land." 7 "In a place this large, the landed families are outpaced by merchant capital, though they keep their land." (no "old", no "titles")
+- noble competitive 3 ends "...; in civic politics they compete with merchant money."
+The four facts in 83-96% of metropolises: a named survivor (the dark laws')."
+
+INTEGRATOR'S READING FOR THE BUILDER:
+- B2 now builds the SECOND TRANCHE too: every wording of `LINES-power-tranche2.md` §D (with needs and excludes as written there; M6's scripts `measures/m6-*.mjs` hold them as data), with the changes above, in the same data file and pass. Pick it up with `git -C <your worktree> cherry-pick -x 6a137f274` if your base lacks it (your base a37dde2ce has it).
+- `src/generators/power/factionStanding.js` is ADDED to your files, for F2 (the governing seat at rank 2 prints neither `atTable` nor `worthBuying`; red first) and F3 (the computed `level` handed as an eligibility flag to the pick) ONLY. List every line you touch there, as written, in your final message, and worthBuying's count on the seat (before your cure, over the 900 places).
+- "the four facts ... a named survivor": the metropolis codas' sameness is not yours to cure; name it in your test as a survivor where your shares test meets it.
+- Your red test #1 now also covers the codas: no POOLED coda sentence in more than 20% of a size's places (150 a size), M6 projected 0/5/7/17/13/17%.

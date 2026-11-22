@@ -1,0 +1,204 @@
+pick check: m6-common.mjs :: pickVariantMixed against bd42d63c7's own, 20000 keys x pools of 1..15: misses 0
+FEELING WORD (tranche 1) coda clergyAhead: The arcane orders defer to the clergy in public and pursue their own business quietly.
+guards: first tranche as ruled 225 wordings (33 amended), second tranche 78; season / machinery / >45 words misses 0; feeling or scheme words 1; crime atoms 0
+descriptions with text after a coda that no coda pattern matched: 0
+
+=== A. THE TOP SENTENCE BY SIZE (places printing it / ALL places of the size) ===
+A TODAY thorp openings: 57/150 38% | The oldest heads of the community decide things together; people follow them out of respect and custom, not law.
+A TODAY thorp codas: 0/150 0% | null
+A TODAY thorp relations: 3/150 2% | The # carries out what the # decides.
+A RULED thorp openings: 14/150 9% | Respected elders guide the community; authority is moral and traditional rather than formal.
+A RULED thorp codas: 0/150 0% | null
+A RULED thorp relations: 3/150 2% | The # carries out what the # decides.
+A T2 thorp openings: 14/150 9% | Respected elders guide the community; authority is moral and traditional rather than formal.
+A T2 thorp codas: 0/150 0% | null
+A T2 thorp relations: 3/150 2% | The # carries out what the # decides.
+A TODAY hamlet openings: 53/150 35% | The oldest heads of the community decide things together; people follow them out of respect and custom, not law.
+A TODAY hamlet codas: 7/150 5% [behindBy] | Behind the # by too much to challenge openly, so they get their way through petitions and procedure instead.
+A TODAY hamlet relations: 6/150 4% | The # carries out what the # decides.
+A RULED hamlet openings: 17/150 11% | A lord's steward administers the settlement; authority flows downward from the noble, not upward from residents.
+A RULED hamlet codas: 7/150 5% [behindBy] | Behind the # by too much to challenge openly, so they get their way through petitions and procedure instead.
+A RULED hamlet relations: 5/150 3% | The # carries out what the # decides.
+A T2 hamlet openings: 17/150 11% | A lord's steward administers the settlement; authority flows downward from the noble, not upward from residents.
+A T2 hamlet codas: 7/150 5% [behindBy] | Behind the # by too much to challenge openly, so they get their way through petitions and procedure instead.
+A T2 hamlet relations: 5/150 3% | The # carries out what the # decides.
+A TODAY village openings: 107/150 71% | The village priest is the most educated person for miles; moral authority and practical influence are inseparable at this scale.
+A TODAY village codas: 38/150 25% [narrowGap] | A single shift in patronage, scandal, or armed muscle could swap their positions.
+A TODAY village relations: 90/150 60% | People take their marriages, inheritances and hard times to the #, not to the #, and the two do not agree on who decides what.
+A RULED village openings: 20/150 13% | People here look to the church for guidance on worldly matters as well as faith; at this scale its moral authority is practical influence too.
+A RULED village codas: 11/150 7% [worthBuying] | Their support is worth buying, and both the # and the # know it.
+A RULED village relations: 16/150 11% | When times are hard, people here go to the # for help, not to the #; the two do not agree on who decides what.
+A T2 village openings: 20/150 13% | People here look to the church for guidance on worldly matters as well as faith; at this scale its moral authority is practical influence too.
+A T2 village codas: 11/150 7% [worthBuying] | Their support is worth buying, and both the # and the # know it.
+A T2 village relations: 16/150 11% | When times are hard, people here go to the # for help, not to the #; the two do not agree on who decides what.
+A TODAY town openings: 123/150 82% | Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential.
+A TODAY town codas: 77/150 51% [bodiesMinds] | They and the religious authorities both keep people in line.
+A TODAY town relations: 95/150 63% | The # holds the seat and collects the taxes; the # tell people that the #'s rule is right and ordained. Each props up the other.
+A RULED town openings: 26/150 17% | Anyone seeking an office or a change in the law here soon learns to ask the church first; its opinion is usually influential.
+A RULED town codas: 26/150 17% [worthBuying] | Third in weight, close enough to the # and the # that their support is worth having.
+A RULED town relations: 25/150 17% | The # makes the law, and the # tell people it is right to keep it. Each props up the other.
+A T2 town openings: 26/150 17% | Anyone seeking an office or a change in the law here soon learns to ask the church first; its opinion is usually influential.
+A T2 town codas: 26/150 17% [worthBuying] | Third in weight, close enough to the # and the # that their support is worth having.
+A T2 town relations: 25/150 17% | The # makes the law, and the # tell people it is right to keep it. Each props up the other.
+A TODAY city openings: 121/150 81% | Clergy are present but operate at the margins of civic life; their moral authority is real but their political leverage is limited.
+A TODAY city codas: 109/150 73% [bodiesMinds] | They and the religious authorities both keep people in line.
+A TODAY city relations: 105/150 70% | The money of the # pays for the charity of the #, and the charity keeps the poor quiet. Each needs the other, and neither likes it.
+A RULED city openings: 43/150 29% | Merchants with local reach; a consistent civic presence without yet being the dominant commercial voice.
+A RULED city codas: 34/150 23% [bodiesMinds] | They and the religious authorities both keep people in line.
+A RULED city relations: 16/150 11% | In a place this large the faith's charity costs more than the faith has, and the # make up the rest; the poor stay quiet. Each needs the other.
+A T2 city openings: 23/150 15% | Wealthy merchants hold exclusive power; political office is effectively purchased through commercial success.
+A T2 city codas: 19/150 13% [outvoted] | Outvoted on prices and on the terms of work, the craft masters fight their corner in the small print of each deal.
+A T2 city relations: 16/150 11% | In a place this large the faith's charity costs more than the faith has, and the # make up the rest; the poor stay quiet. Each needs the other.
+A TODAY metropolis openings: 145/150 97% | Magical practitioners are consulted but not formally empowered.
+A TODAY metropolis codas: 144/150 96% [arcaneInShadow] | The arcane orders are present but operate in the clergy's shadow.
+A TODAY metropolis relations: 136/150 91% | The money of the # pays for the charity of the #, and the charity keeps the poor quiet. Each needs the other, and neither likes it.
+A RULED metropolis openings: 32/150 21% | Noble families with hereditary land rights and traditional privileges; active in civic politics and competitive with merchant capital.
+A RULED metropolis codas: 40/150 27% [arcaneInShadow] | The arcane orders are present but operate in the clergy's shadow.
+A RULED metropolis relations: 22/150 15% | In a place this size the Guard has many streets to keep, and keeps them on the #'s orders, not its own; the soldiers enforce the law, they do not make…
+A T2 metropolis openings: 25/150 17% | People go to the practitioners for what only magic can do and pay their price, but give them no say beyond it.
+A T2 metropolis codas: 26/150 17% [closingGap] | Merchant money is catching up with the noble families, and the gap between them narrows.
+A T2 metropolis relations: 22/150 15% | In a place this size the Guard has many streets to keep, and keeps them on the #'s orders, not its own; the soldiers enforce the law, they do not make…
+  over 15% RULED town open: 26/150 17% [pooled] | Anyone seeking an office or a change in the law here soon learns to ask the church first; its opinion is usually influential.
+  over 15% RULED town open: 24/150 16% [pooled] | The church is woven into civic life here; on appointments, taxes and the law its opinion is asked for and usually heeded.
+  over 15% RULED town coda: 26/150 17% [coda worthBuying] | Third in weight, close enough to the # and the # that their support is worth having.
+  over 15% RULED town rel: 25/150 17% | The # makes the law, and the # tell people it is right to keep it. Each props up the other.
+  over 15% RULED city open: 43/150 29% | Merchants with local reach; a consistent civic presence without yet being the dominant commercial voice.
+  over 15% RULED city open: 32/150 21% | Landed families increasingly outpaced by merchant capital; they compete for council seats, marriage alliances, and royal appointme…
+  over 15% RULED city open: 24/150 16% | Noble families with hereditary land rights and traditional privileges; active in civic politics and competitive with merchant capi…
+  over 15% RULED city open: 23/150 15% | Wealthy merchants hold exclusive power; political office is effectively purchased through commercial success.
+  over 15% RULED city coda: 34/150 23% [coda bodiesMinds] | They and the religious authorities both keep people in line.
+  over 15% RULED city coda: 34/150 23% [coda bodiesMinds] | The garrison deals with bodies and the clergy with minds, and each wishes the other would keep quieter.
+  over 15% RULED city coda: 29/150 19% [coda atTable] | They are always consulted, and seldom get their own way.
+  over 15% RULED city coda: 28/150 19% [coda bodiesMinds] | The garrison keeps order with its hands and the clergy with their sermons.
+  over 15% RULED city coda: 27/150 18% [coda atTable] | They are always at the table, but cannot set their own terms.
+  over 15% RULED city coda: 25/150 17% [coda bodiesMinds] | Between them, the garrison and the religious authorities keep people in line, the one by force and the other by conscience.
+  over 15% RULED metropolis open: 32/150 21% | Noble families with hereditary land rights and traditional privileges; active in civic politics and competitive with merchant capi…
+  over 15% RULED metropolis open: 28/150 19% | The richest merchant houses of the metropolis sit as its senate, so the houses that control the trade also make the law.
+  over 15% RULED metropolis open: 25/150 17% [pooled] | People go to the practitioners for what only magic can do and pay their price, but give them no say beyond it.
+  over 15% RULED metropolis open: 24/150 16% [pooled] | In a place this large there is steady work for magical practitioners, but no office; their influence is advisory and paid for.
+  over 15% RULED metropolis open: 24/150 16% [pooled] | Old landed families of limited reach; they take part in civic affairs, but are seldom the ones who settle them.
+  over 15% RULED metropolis open: 23/150 15% | A duke or duchess governs the metropolis by royal appointment; the city is the administrative capital of a large territory.
+  over 15% RULED metropolis open: 23/150 15% [pooled] | The clergy have the people's respect but little of the hall's ear; their political leverage is limited.
+  over 15% RULED metropolis open: 23/150 15% | Market merchants who profit from the settlement's position; buy from one direction, sell to another, lobby for both.
+  over 15% RULED metropolis coda: 40/150 27% [coda arcaneInShadow] | The arcane orders are present but operate in the clergy's shadow.
+  over 15% RULED metropolis coda: 40/150 27% [coda arcaneInShadow] | Questions of what is sanctioned magic and what is heresy remain deliberately unresolved.
+  over 15% RULED metropolis coda: 37/150 25% [coda arcaneInShadow] | The clergy stand above the arcane orders here; what counts as permitted magic and what as heresy is left unsaid.
+  over 15% RULED metropolis coda: 37/150 25% [coda bodiesMinds] | The garrison keeps order with its hands and the clergy with their sermons.
+  over 15% RULED metropolis coda: 37/150 25% [coda bodiesMinds] | Between them, the garrison and the religious authorities keep people in line, the one by force and the other by conscience.
+  over 15% RULED metropolis coda: 36/150 24% [coda noblesAhead] | Still ahead of merchant interests in real influence, for now.
+  over 15% RULED metropolis coda: 36/150 24% [coda noblesAhead] | They know the gap is narrowing and are arranging marriages accordingly.
+  over 15% RULED metropolis coda: 35/150 23% [coda arcaneInShadow] | The arcane orders work in the clergy's shadow here, and no one has settled which magic the faith allows and which it does not.
+  over 15% RULED metropolis coda: 34/150 23% [coda atTable] | They are always at the table, but cannot set their own terms.
+  over 15% RULED metropolis coda: 33/150 22% [coda clergyAhead] | The arcane orders defer to the clergy in public and pursue their own business quietly.
+  over 15% RULED metropolis coda: 33/150 22% [coda clergyAhead] | With the clergy ahead of them in public affairs, the arcane orders keep out of their way and never cross them openly.
+  over 15% RULED metropolis coda: 33/150 22% [coda bodiesMinds] | They and the clergy both keep order, one in the streets and one in people's heads.
+  over 15% RULED metropolis coda: 32/150 21% [coda atTable] | They are always consulted, and seldom get their own way.
+  over 15% RULED metropolis coda: 32/150 21% [coda clergyAhead] | Where the church speaks on public matters, the arcane orders keep silent and go their own way around it.
+  over 15% RULED metropolis coda: 32/150 21% [coda arcaneInShadow] | The church outweighs the arcane orders here, and leaves the line between sanctioned magic and heresy undrawn.
+  over 15% RULED metropolis coda: 31/150 21% [coda bodiesMinds] | They and the religious authorities both keep people in line.
+  over 15% RULED metropolis coda: 31/150 21% [coda bodiesMinds] | The garrison deals with bodies and the clergy with minds, and each wishes the other would keep quieter.
+  over 15% RULED metropolis coda: 31/150 21% [coda outpaced] | The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants win more often than not.
+  over 15% RULED metropolis coda: 29/150 19% [coda clergyAhead] | The clergy have more say in public affairs, so the arcane orders work around them and never challenge them openly.
+  over 15% RULED metropolis coda: 26/150 17% [coda atTable] | They always have a voice when the council bargains, but never the deciding one.
+  over 15% RULED metropolis coda: 26/150 17% [coda closingGap] | Merchant money is catching up with the noble families, and the gap between them narrows.
+  over 15% RULED metropolis coda: 25/150 17% [coda outpaced] | At the market the merchants set the prices, the craft masters object, and the merchants win more often than not.
+  over 15% RULED metropolis coda: 25/150 17% [coda outvoted] | On prices and labour the merchants outvote them every time, so the craft masters bargain for what they can, deal by deal.
+  over 15% RULED metropolis coda: 24/150 16% [coda atTable] | Nothing is settled without them in the room, and nothing on their terms alone.
+  over 15% RULED metropolis coda: 24/150 16% [coda outpaced] | The craft guilds have a voice, but a smaller one: the merchants set prices, the craft masters object, and the merchants usually pr…
+  over 15% RULED metropolis coda: 23/150 15% [coda outvoted] | The merchants decide the prices at the market and the terms of work; the craft masters win what they can by adding conditions to e…
+  over 15% RULED metropolis coda: 23/150 15% [coda arcaneAheadOfClergy] | Ahead of the religious authorities in current influence, which they hold carefully: too much visible power invites accusations tha…
+  over 15% T2 town open: 26/150 17% [pooled] | Anyone seeking an office or a change in the law here soon learns to ask the church first; its opinion is usually influential.
+  over 15% T2 town open: 24/150 16% [pooled] | The church is woven into civic life here; on appointments, taxes and the law its opinion is asked for and usually heeded.
+  over 15% T2 town coda: 26/150 17% [coda worthBuying] | Third in weight, close enough to the # and the # that their support is worth having.
+  over 15% T2 town rel: 25/150 17% | The # makes the law, and the # tell people it is right to keep it. Each props up the other.
+  over 15% T2 city open: 23/150 15% | Wealthy merchants hold exclusive power; political office is effectively purchased through commercial success.
+  over 15% T2 metropolis open: 25/150 17% [pooled] | People go to the practitioners for what only magic can do and pay their price, but give them no say beyond it.
+  over 15% T2 metropolis open: 24/150 16% [pooled] | In a place this large there is steady work for magical practitioners, but no office; their influence is advisory and paid for.
+  over 15% T2 metropolis open: 24/150 16% [pooled] | Old landed families of limited reach; they take part in civic affairs, but are seldom the ones who settle them.
+  over 15% T2 metropolis open: 23/150 15% | A duke or duchess governs the metropolis by royal appointment; the city is the administrative capital of a large territory.
+  over 15% T2 metropolis open: 23/150 15% [pooled] | The clergy have the people's respect but little of the hall's ear; their political leverage is limited.
+  over 15% T2 metropolis open: 23/150 15% | Market merchants who profit from the settlement's position; buy from one direction, sell to another, lobby for both.
+  over 15% T2 metropolis coda: 26/150 17% [coda closingGap] | Merchant money is catching up with the noble families, and the gap between them narrows.
+  over 15% T2 metropolis coda: 25/150 17% [coda outvoted] | On prices and labour the merchants outvote them every time, so the craft masters bargain for what they can, deal by deal.
+  over 15% T2 metropolis coda: 23/150 15% [coda outvoted] | The merchants decide the prices at the market and the terms of work; the craft masters win what they can by adding conditions to e…
+  over 15% T2 metropolis coda: 23/150 15% [coda arcaneAheadOfClergy] | Ahead of the religious authorities in current influence, which they hold carefully: too much visible power invites accusations tha…
+
+=== B. CODAS IN MORE THAN HALF OF A SIZE'S PLACES TODAY ===
+B town inShadow: prints in 95/150 63% · its top sentence today 33% · as ruled 15/150 10% · with T2 10% | They operate in the shadow of the #, close enough to matter and too far behind to lead.
+B town bodiesMinds: prints in 77/150 51% · its top sentence today 51% · as ruled 18/150 12% · with T2 5% | The watch keeps order with its hands and the clergy with their sermons.
+B town worthBuying: prints in 77/150 51% · its top sentence today 46% · as ruled 26/150 17% · with T2 17% | Third in weight, close enough to the # and the # that their support is worth having.
+B city bodiesMinds: prints in 109/150 73% · its top sentence today 73% · as ruled 34/150 23% ABOVE 20% · with T2 10% | They and the religious authorities both keep people in line.
+B city atTable: prints in 109/150 73% · its top sentence today 73% · as ruled 29/150 19% · with T2 9% | They are always consulted, and seldom get their own way.
+B city inShadow: prints in 86/150 57% · its top sentence today 36% · as ruled 16/150 11% · with T2 11% | Close enough to the governing council to matter, not close enough to lead.
+B metropolis arcaneInShadow: prints in 144/150 96% · its top sentence today 96% · as ruled 40/150 27% ABOVE 20% · with T2 11% | The arcane orders are present but operate in the clergy's shadow.
+B metropolis bodiesMinds: prints in 138/150 92% · its top sentence today 92% · as ruled 37/150 25% ABOVE 20% · with T2 11% | The garrison keeps order with its hands and the clergy with their sermons.
+B metropolis atTable: prints in 138/150 92% · its top sentence today 92% · as ruled 34/150 23% ABOVE 20% · with T2 9% | They are always at the table, but cannot set their own terms.
+B metropolis clergyAhead: prints in 125/150 83% · its top sentence today 83% · as ruled 33/150 22% ABOVE 20% · with T2 10% | The arcane orders defer to the clergy in public and pursue their own business quietly.
+B metropolis inShadow: prints in 93/150 62% · its top sentence today 41% · as ruled 18/150 12% · with T2 12% | They count for something here, but the # counts for more, and the gap is too wide to close.
+B metropolis outpaced: prints in 86/150 57% · its top sentence today 53% · as ruled 31/150 21% ABOVE 20% · with T2 10% | The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants win more …
+B metropolis outvoted: prints in 86/150 57% · its top sentence today 55% · as ruled 25/150 17% · with T2 17% | On prices and labour the merchants outvote them every time, so the craft masters bargain for what they can, de…
+
+=== C. CODAS BY THEIR HEAVIEST SENTENCE AS RULED (max over sizes) ===
+C arcaneInShadow (pooled in tranche 1): 27% at metropolis | The arcane orders are present but operate in the clergy's shadow.
+C bodiesMinds (pooled in tranche 1): 25% at metropolis | The garrison keeps order with its hands and the clergy with their sermons.
+C noblesAhead: 24% at metropolis | Still ahead of merchant interests in real influence, for now.
+C atTable (pooled in tranche 1): 23% at metropolis | They are always at the table, but cannot set their own terms.
+C clergyAhead (pooled in tranche 1): 22% at metropolis | The arcane orders defer to the clergy in public and pursue their own business quietly.
+C outpaced (pooled in tranche 1): 21% at metropolis | The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants win more often than…
+C worthBuying (pooled in tranche 1): 17% at town | Third in weight, close enough to the # and the # that their support is worth having.
+C closingGap (pooled in tranche 1): 17% at metropolis | Merchant money is catching up with the noble families, and the gap between them narrows.
+C outvoted (pooled in tranche 1): 17% at metropolis | On prices and labour the merchants outvote them every time, so the craft masters bargain for what they can, deal by deal…
+C arcaneAheadOfClergy: 15% at metropolis | Ahead of the religious authorities in current influence, which they hold carefully: too much visible power invites accus…
+C merchantsMoreSay: 13% at metropolis | The # has more say now: the noble families keep their titles, their land and their precedence, but the money has moved.
+C inShadow (pooled in tranche 1): 12% at metropolis | They count for something here, but the # counts for more, and the gap is too wide to close.
+C behindBy: 7% at city | Behind the governing council by too much to challenge openly, so they get their way through petitions and procedure inst…
+C craftAheadOfMerchant: 7% at metropolis | The craft guilds currently carry more weight than they do, and the merchants are working to change that.
+
+=== D. THE SECOND TRANCHE, POOL BY POOL (its commonest sentence, by size where the line prints) ===
+D opening town "Merchants with local reach; a consistent civic presence with…": opens in 2/150 · as ruled its first sentence 1% · with T2 top 3/150 2% | Trade disruption and requisition are hurting the bottom line.
+D opening city "Merchants with local reach; a consistent civic presence with…": opens in 43/150 · as ruled its first sentence 29% · with T2 top 12/150 8% | Merchants whose trade is mostly local; a steady presence in civic life, though not the leading comme…
+D opening city "Landed families increasingly outpaced by merchant capital; t…": opens in 32/150 · as ruled its first sentence 21% · with T2 top 7/150 5% | Old landed families in a place where merchant capital counts for more than land.
+D opening metropolis "Landed families increasingly outpaced by merchant capital; t…": opens in 5/150 · as ruled its first sentence 3% · with T2 top 2/150 1% | Landed families outpaced by the merchants who handle what the place sends out.
+D opening city "Noble families with hereditary land rights and traditional p…": opens in 24/150 · as ruled its first sentence 16% · with T2 top 7/150 5% | Noble families holding hereditary land rights and old privileges; they take part in civic politics a…
+D opening metropolis "Noble families with hereditary land rights and traditional p…": opens in 32/150 · as ruled its first sentence 21% · with T2 top 9/150 6% | Old noble families, hereditary landholders with traditional privileges; active in civic politics, an…
+D opening metropolis "The richest merchant houses of the metropolis sit as its sen…": opens in 29/150 · as ruled its first sentence 19% · with T2 top 6/150 4% | The metropolis is governed by a senate of its richest merchant houses; those who control its trade a…
+D coda city arcaneInShadow: prints in 60/150 · as ruled top 12% · with T2 top 7/150 5% | The arcane orders are heard here, but no more than the clergy are.
+D coda metropolis arcaneInShadow: prints in 144/150 · as ruled top 27% · with T2 top 17/150 11% | The clergy hold their standing here; the arcane orders, though present, do not stand above them.
+D coda village bodiesMinds: prints in 4/150 · as ruled top 1% · with T2 top 2/150 1% | Order here is kept two ways: by the militia with force, and by the clergy with teaching.
+D coda town bodiesMinds: prints in 77/150 · as ruled top 12% · with T2 top 8/150 5% | They and the religious authorities both keep people in line.
+D coda city bodiesMinds: prints in 109/150 · as ruled top 23% · with T2 top 15/150 10% | Between them, the garrison and the religious authorities keep people in line, the one by force and t…
+D coda metropolis bodiesMinds: prints in 138/150 · as ruled top 25% · with T2 top 16/150 11% | Inside the walls the garrison keeps order by force, and the clergy keep it by conscience.
+D coda town noblesAhead: prints in 7/150 · as ruled top 5% · with T2 top 3/150 2% | The noble families are at least the merchants' equal in influence here.
+D coda city noblesAhead: prints in 18/150 · as ruled top 12% · with T2 top 4/150 3% | Land and title count here for no less than trade: the noble families stand level with the merchants …
+D coda metropolis noblesAhead: prints in 36/150 · as ruled top 24% · with T2 top 6/150 4% | The noble families are at least the merchants' equal in influence here.
+D coda village atTable: prints in 13/150 · as ruled top 3% · with T2 top 2/150 1% | They are consulted on everything that matters, and settle none of it on their own terms.
+D coda town atTable: prints in 68/150 · as ruled top 14% · with T2 top 9/150 6% | Third in weight here, they are always heard, but the terms are set by others.
+D coda city atTable: prints in 109/150 · as ruled top 19% · with T2 top 14/150 9% | Third in weight here, they are always heard, but the terms are set by others.
+D coda metropolis atTable: prints in 138/150 · as ruled top 23% · with T2 top 14/150 9% | Third in weight here, they are always heard, but the terms are set by others.
+D coda city clergyAhead: prints in 56/150 · as ruled top 13% · with T2 top 8/150 5% | With the clergy ahead of them in public affairs, the arcane orders keep out of their way and never c…
+D coda metropolis clergyAhead: prints in 125/150 · as ruled top 22% · with T2 top 15/150 10% | The clergy have more say in public affairs, so the arcane orders work around them and never challeng…
+D coda town outpaced: prints in 57/150 · as ruled top 11% · with T2 top 9/150 6% | What the workshops make, the merchants price; the craft guilds are present but outpaced.
+D coda city outpaced: prints in 43/150 · as ruled top 11% · with T2 top 9/150 6% | The craft guilds are here, but outpaced: the merchants set the prices.
+D coda metropolis outpaced: prints in 86/150 · as ruled top 21% · with T2 top 15/150 10% | The craft guilds are present but outpaced; merchants set prices, craft masters object, and merchants…
+
+SUMMARY (the top sentence, places / all places of the size; openings · codas · relations)
+SUMMARY TODAY thorp: openings 57/150 38% · codas 0/150 0% · relations 3/150 2%
+SUMMARY TODAY hamlet: openings 53/150 35% · codas 7/150 5% · relations 6/150 4%
+SUMMARY TODAY village: openings 107/150 71% · codas 38/150 25% · relations 90/150 60%
+SUMMARY TODAY town: openings 123/150 82% · codas 77/150 51% · relations 95/150 63%
+SUMMARY TODAY city: openings 121/150 81% · codas 109/150 73% · relations 105/150 70%
+SUMMARY TODAY metropolis: openings 145/150 97% · codas 144/150 96% · relations 136/150 91%
+SUMMARY RULED thorp: openings 14/150 9% · codas 0/150 0% · relations 3/150 2%
+SUMMARY RULED hamlet: openings 17/150 11% · codas 7/150 5% · relations 5/150 3%
+SUMMARY RULED village: openings 20/150 13% · codas 11/150 7% · relations 16/150 11%
+SUMMARY RULED town: openings 26/150 17% · codas 26/150 17% · relations 25/150 17%
+SUMMARY RULED city: openings 43/150 29% · codas 34/150 23% · relations 16/150 11%
+SUMMARY RULED metropolis: openings 32/150 21% · codas 40/150 27% · relations 22/150 15%
+SUMMARY T2 thorp: openings 14/150 9% · codas 0/150 0% · relations 3/150 2%
+SUMMARY T2 hamlet: openings 17/150 11% · codas 7/150 5% · relations 5/150 3%
+SUMMARY T2 village: openings 20/150 13% · codas 11/150 7% · relations 16/150 11%
+SUMMARY T2 town: openings 26/150 17% · codas 26/150 17% · relations 25/150 17%
+SUMMARY T2 city: openings 23/150 15% · codas 19/150 13% · relations 16/150 11%
+SUMMARY T2 metropolis: openings 25/150 17% · codas 26/150 17% · relations 22/150 15%
+
+APPROXIMATIONS: as M4 (its notes 1-4: facts on the FINAL record; atoms by m6-common.mjs :: atomHolds over cached facts; a relation's branch read off its sentence shape; ~3 places a size is noise, here 150 a size, ~2%). M6 adds: (5) a description is cut by the codas' own words (m6-common.mjs :: CODAS); text a stress event joins to an opening stays with the opening. (6) A sentence is split at . ! ? followed by a space or the end. (7) A coda variant is keyed <seed>::powerStructure.factions.desc::<power>::<coda id>, as M4 keyed it; an opening <seed>::powerStructure.factions.desc::<power>.
