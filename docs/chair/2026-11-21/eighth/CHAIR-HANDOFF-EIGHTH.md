@@ -127,6 +127,19 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   and PEOPLE's first half (`lane/people-3-2026-11-21` 930413518: PEOPLE-1's own written cure 07e737596 applied:
   `npcStructure.js :: NOT_A_GOOD` exported after the census extractor's slice: `faultsTools` red, then 3 files and 21
   tests green). The seats PLACE-3 and PEOPLE-3, when seated, start from those branches.
+- E10 · EVERY SEAT'S MARK IS 700,000 BY THE CHAIR'S READ, NOT 450,000 (ruled 2026-11-22 00:11 UTC, on net 1's measure). The seventh
+  chair set 450,000 when a reading-in cost 150,000 to 240,000. Tonight VEIL-31 read 400,910 FIFTY MINUTES AFTER ITS
+  SEATING, before its first unit (the lane's running document, the two prompts, and soon 212 and the registry whole):
+  a hand-over at 450,000 would buy fifty thousand tokens of work for four hundred thousand of reading, and the veil
+  lane did exactly that eleven times on 2026-11-20. A seat's window is 1,000,000 and the harness compacts at 784,000
+  (enforced): a seat hands over BEFORE compaction. By the records' own prices (a call costs its whole context in cache
+  reads; a reading-in is paid in cache writes at about twelve reads a token) carrying a seat from 450,000 to 700,000
+  costs about what a successor costs for the same work on a light lane and clearly less on the veil; it loses no
+  knowledge and no half hour. At about 620,000 the chair orders the unit in hand finished and the hand-back made
+  current; the successor is seated ON the hand-back, never beside (an overlap pays two contexts). COMMON-EIGHTH 8
+  amended. THE COST SEEN AT NET 1 (the records' own `cost_usd`, fifty-one minutes, four seats): 6.68, 13.50, 6.50,
+  10.61: about 44 an hour for the four; the chair's own context is the dearest single item (rule 19 of the standard:
+  a fresh chair at about 70%).
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -206,6 +219,20 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   factions` reaching the campaign PDF above all). (3) PAGE-12 passed the vocabulary ruling to its builder word for word
   and wrote cure C's brief (finish 1da4c7c56, not drop it). (4) CI's run on 89ab44e34 is 44962726346 (started 23:37);
   read by name when it ends.
+- 2026-11-22 00:11 UTC · NET 1 (the records at 00:10, used tokens by the chair's read; all four running, none failed): VEIL-31 400,910;
+  SEAT-10 309,690; FORTUNE-6 199,171; PAGE-12 206,147. Each was sent its read and the new mark (E10). WHAT THEY
+  REPORTED SINCE 23:54: VEIL-31 PROVED THE MERGE at 5818130c4 on its own re-made pool (A 1,200 and B 608, every shard
+  rc 0): GATE-1 4 of 92 with 7 lower by rule (87 of 92 like for like at 2437ffea0), GATE-2 34 of 40 cells red (the
+  same; people.allegiance out of it: 74 to 46 pages), server = twin in every cell; R3-TELL-3's red and R3-TELL-4's
+  red reproduced, both arms green at the tip; it reads 212 and the registry whole and staffs unit (ii), the marker
+  commit first. SEAT-10: writer-reach re-taken by its door at 70e4e1945 on the three-way proof (12,726 rows: 12,720
+  the same at all three trees, 4 the lane's, 2 the line's, 0 neither; cohort 1,385 to 1,385; the walker 52 of 52);
+  the play-time probe: no key path under law 2 that law 1 never writes (30 pairs; the pulse's own road not exercised,
+  the coup road standing in); `hidden on factions` reaches the campaign PDF through `seatTable.js :: isVeiledRow`,
+  read FOR exclusion: PLAUSIBLE, its traced chain ordered before "SEAT"; the lane's dark proof after the merge is
+  a64619510 to its tip EQUAL (the seat's reading; the chair's "against 3e8e2e37d" was loose). THE STACK: its first
+  `tests/lint` run was killed and restarted at 23:54 after the chair's message to the helper moved the running
+  command to the background: A LESSON: a running helper is messaged only between its runs.
 
 ## 4. The order of the lanes still to seat (after the first four), and what each waits on
 
