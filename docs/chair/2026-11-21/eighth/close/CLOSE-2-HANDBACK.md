@@ -38,7 +38,7 @@ The working line at the stop: `lane/join-2026-11-14` at 244fa84ef (point 105), b
   pronoun fault before he signs, E112's reclass.
 
 ### (2) HALF DONE, EXACTLY WHERE
-- THE CENSUS'S PARTS 5 AND 6: PART 5 ENDED 22:35:15 UTC: 8,489 tests, 14 red, 2 listed, 12 new, the SAME 12 BY NAME as the rehearsal (all (a) there), 0 timeouts. PART 6 (the rest) STARTED 22:35 UTC: its state at the stop is in the last line of this section. A successor runs ONLY a part not marked ended
+- THE CENSUS'S PARTS 5 AND 6: PART 5 ENDED 22:35:15 UTC: 8,489 tests, 14 red, 2 listed, 12 new, the SAME 12 BY NAME as the rehearsal (all (a) there), 0 timeouts. PART 6 ENDED 22:47:50 UTC: 5,957 tests, 9 red, all 9 listed, 0 new, 0 timeouts. THE CENSUS IS WHOLE: no part is owed. ALL SIX: 42,229 tests, 205 red, 52 listed, 153 new, ALL (a), NO (d), NO TIMEOUT (the rehearsal: 204 / 54 / 150). Only its report's reading by the chair remains. A successor runs ONLY a part not marked ended
   here, on c1128c8f6, and classes it like parts 1 and 2 (the rehearsal's tables `census/lit-ui-classed.tsv`; part 6 had no
   new reds in the rehearsal).
 - PRONOUN (`close/briefs/PRONOUN.md`; the builder's own report in the -wip at
@@ -52,7 +52,7 @@ The working line at the stop: `lane/join-2026-11-14` at 244fa84ef (point 105), b
 ### (3) NEXT, IN ORDER
 1. PRONOUN: read 2904f0475..f5fa6316a whole; re-run its red first and its gate (the brief's); run the two typechecks and one
    build with the five figures; then "PRONOUN <commit>" to the chair.
-2. The census's parts not ended (above), then the report (`CENSUS-FINAL.md`) to the chair for the flip's builder (CLOSE-3,
+2. The census's report (`CENSUS-FINAL.md`) to the chair for the flip's builder (CLOSE-3,
    E131: the flip is CLOSE-3's, not this seat's).
 3. The flip's hand anchors in the word-pinning files are re-pinned after PRONOUN and DAILY-B land.
 

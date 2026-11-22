@@ -20,9 +20,10 @@ against the rehearsal's `census/lit-<part>-classed.tsv`; `close-2/census/slow.mj
 | 3 tests/build (VERIFY_DIST=1) | 21:45:32 | 623 | 15 | 15 | 0 | | 0 | 15 / 15 / 0 |
 | 4 tests/lint whole | 22:01:17 | 3,364 | 3 | 3 | 0 | (the powers leaf's row holds: rehearsal fault 2 gone) | 0 | 5 / 3 / 2 |
 | 5 components, ui, pdf, store, lib | 22:35:15 | 8,489 | 14 | 2 | 12 | the SAME 12 BY NAME as the rehearsal (`ui-diff-names.txt`: 0 new, 0 gone): (a) there (premise 4, born anchor 4, stored pin 3 incl. `pageCensus.walker`, 1 (d?) verified not (d)); not re-classed | 0 | 14 / 2 / 12 |
-| 6 the rest | see section 0 of the hand-back | | | | | | | 9 / 9 / 0 |
+| 6 the rest | 22:47:50 | 5,957 | 9 | 9 | 0 | | 0 | 9 / 9 / 0 |
+| ALL SIX | | 42,229 tests | 205 | 52 | 153 | ALL (a); NO (d) | 0 | 204 / 54 / 150 |
 
-NO (d) IN PARTS 1 TO 4. Files: `<part>-match.tsv` (ON/NEW), `<part>-new.md` (each NEW red's first lines),
+THE CENSUS IS WHOLE (all six parts ran). NO (d) IN ANY PART; NO TIMEOUT IN ANY PART. Files: `<part>-match.tsv` (ON/NEW), `<part>-new.md` (each NEW red's first lines),
 `<part>-classed.tsv` (7 columns), `<part>-diff.txt` (against the rehearsal), `<part>-slow.tsv`.
 
 ## AGAINST THE REHEARSAL (`diff-classed.mjs`)

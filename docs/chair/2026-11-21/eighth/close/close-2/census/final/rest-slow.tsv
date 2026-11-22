@@ -1,0 +1,26 @@
+## FAILURES BY KIND
+kind	file	title	ms
+WRONG RESULT	tests/copy/voiceMechanics.test.js	E-E voiceMechanics JSX extension — src/**/*.jsx component ratchet (shrink-only) per-file JSX debt exactly matches the baseline (grew ⇒ rewri	12
+WRONG RESULT	tests/edgeFunctions/aiCharterBundle.freshness.test.js	aiCharter bundle is fresh the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)	25
+WRONG RESULT	tests/edgeFunctions/aiGroundingBundle.freshness.test.js	Tier 6.8 — aiGrounding bundle is fresh the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)	22
+WRONG RESULT	tests/edgeFunctions/aiGroundingBundle.freshness.test.js	Tier 6.8 — runtime smoke: the bundle is loadable and behaves like the source buildAiGroundingPayload from the bundle agrees with the source 	378
+WRONG RESULT	tests/edgeFunctions/aiOutputSchemaBundle.freshness.test.js	aiOutputSchema bundle is fresh the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)	20
+WRONG RESULT	tests/edgeFunctions/edgeSharedBundleReproducibility.test.js	edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) aiGroundingBundle.meta.json the recorded sourceHash equals the b	58
+WRONG RESULT	tests/edgeFunctions/edgeSharedBundleReproducibility.test.js	edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) aiCharterBundle.meta.json the recorded sourceHash equals the bui	33
+WRONG RESULT	tests/edgeFunctions/edgeSharedBundleReproducibility.test.js	edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) aiOutputSchemaBundle.meta.json the recorded sourceHash equals th	46
+WRONG RESULT	tests/edgeFunctions/edgeSharedBundleReproducibility.test.js	edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) engineBundle.meta.json the recorded sourceHash equals the builde	98
+
+## OVER 8000 MS
+file	title	ms	budget
+tests/simulation/centuryLegSoak.test.js	Tier 1 — the century leg on a light hand-authored realm the SHIPPED decade replay is element-wise identical to the century first ten years	255698	own
+tests/simulation/centuryLegSoak.test.js	Tier 1 — the century leg on a light hand-authored realm the second seed drives the same arms: finite, alive, bytes, liveness	236095	own
+tests/simulation/centuryLegSoak.test.js	Tier 1 — the century leg on a light hand-authored realm the SHIPPED century advances the whole horizon at the product grain	177224	own
+tests/scripts/readerCorpusManifest.test.js	the reader corpus is composed from the golden key the whole document set renders twice with identical hashes, and the run id is not inside o	40598	own
+tests/simulation/emergentArcSoak.test.js	THE EMERGENT-ARC SOAK — 15y everything-on, arcs measured over RECORDED cause-edges DETERMINISM: an identical everything-on soak records the 	27749	own
+tests/joins/ordering.test.js	stressConfirmPass — walls suppress sieges, forced stress survives a walled town suppresses sieges measurably vs an unwalled one (120 paired 	25272	own
+tests/copy/composedProseSeams.test.js	composed prose seams - generator-output shrink-only ratchet the corpus actually produced generator prose (did not silently go empty)	20889	own
+tests/simulation/narrativeParity.test.js	THE NARRATIVE-PARITY WALKER — one 10y decade, one story, every reader surface DETERMINISM: an identical seeded decade yields the identical c	20782	own
+tests/scripts/readerCorpusManifest.test.js	the reader corpus is composed from the golden key the dossier records the entitlement it was read at, and no surface document carries the tu	19316	own
+tests/copy/composedProseSeams.test.js	composed prose seams - generator-output shrink-only ratchet generation is deterministic: a second scan yields identical counts (same seed)	18661	own
+tests/ops/infoLitDarkDifferential.test.js	THE FILE — the instrument writes its receipt and never the console the CLI writes --out and prints nothing	12965	none
+tests/ops/infoLitDarkDifferential.test.js	THE ENGINE — one real year through the reader corpus loop the race is HELD_DARK by its named arms, and not one receipt moves	12757	none
