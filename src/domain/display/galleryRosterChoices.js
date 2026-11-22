@@ -221,7 +221,8 @@ export function applyRosterChoices(s, pub, idOf) {
   // out of it): no served house accounts for it. 212 withheld it already, by its own statement of this rule
   const svc = recAt(s, 'availableServices');
   if (svc && Array.isArray(svc.criminal)) {
-    svc.criminal = svc.criminal.filter(x => !(isRec(x) && (!Object.prototype.hasOwnProperty.call(x, 'institution') || x.institution === COVERT)));
+    /** @type {unknown[]} */
+    const crim = svc.criminal.filter(x => !(isRec(x) && (!Object.prototype.hasOwnProperty.call(x, 'institution') || x.institution === COVERT)));
     // R3-TELL-5 unit (ii) (the chair's ruling 73 (2); ruling 74 (ii)): (e) BY POSITIVE ACCOUNT, a criminal services row stays
     // only where its `institution` is the name of a house this read lists, or the tag of a crime type a shown house or a
     // crisis raises (SERVICE_TYPE_TAGS), the type kept by VR39's attribution over `pub`'s own list (the grouping that shuts
@@ -231,7 +232,7 @@ export function applyRosterChoices(s, pub, idOf) {
     const accTypes = new Set(types0.filter(c => typeof c.type === 'string' && Object.prototype.hasOwnProperty.call(CRIME_TYPE_RAISERS, c.type)
       && !CRIME_TYPE_RAISERS[c.type].some(f => raised[f])).map(c => /** @type {string} */ (c.type)));
     const listedNames = new Set(houses.map(h => str(h.name)).filter(v => v !== ''));
-    svc.criminal = svc.criminal.filter(x => isRec(x) && typeof x.institution === 'string' && (listedNames.has(x.institution)
+    svc.criminal = crim.filter(x => isRec(x) && typeof x.institution === 'string' && (listedNames.has(x.institution)
       || (Object.prototype.hasOwnProperty.call(SERVICE_TYPE_TAGS, x.institution) && SERVICE_TYPE_TAGS[x.institution].some(t => accTypes.has(t)))));
   }
   // R3-TELL-3 unit 4b (ruling 60, R3-CURE-8's STOP 1; the chair's word of 20:03 UTC): (d) A NON-CRIMINAL SERVICES ROW WHOSE
