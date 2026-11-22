@@ -32,5 +32,7 @@ checked by `diff`)
   LIT)", "⛔ CREATE (THE CLAMP)". The rehearsal's lit census had TEN dial pins in these files; the tenth,
   livingContentLawWiring "⭐ CREATE (LIT, the product path)", is GREEN lit now (its `birthConfig(null)` pin moved to
   arm (g)). JOIN ADDS NO LIT RED. The new file and both trimmed saved-town files: green lit.
-- `tests/lint` whole on a1319f388: (pending)
-- eslint on the six files: (pending)
+- `tests/lint` whole on a1319f388 (dark; ledger ref local): 223 files, 3,364 tests, 3 RED, exactly the line's three (RED-AT-LINE: `proseComposed` A0b, `proseCorpusBytes` RAW and GZIP, the owner's size signings); the lighting census walker GREEN at the door's re-take (a1319f388: files 3,770, parked 485, credited 3,285, titles 31,815, suite titles 8,825). Ended 18:05:46 UTC.
+- eslint on the six files: exit 0.
+
+CONFIRMED by run: every plant red; dark 44/44; lit 35/44 with the nine reds exactly step 1a's dial pins (JOIN adds no lit red and turns one green); `tests/lint` 3 red, the line's; nothing under `src/`.
