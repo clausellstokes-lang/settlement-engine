@@ -2436,6 +2436,7 @@ begin
   -- 47: no husk). A husk the name sweep left (its `house` taken) names no listed house, so it leaves (stated, not left to
   -- SQL's null: an absent `house` makes the test null, which would keep the husk). Twin:
   -- galleryRosterChoices.js :: applyRosterChoices, the same rule
+  -- registry: people.allegiance
   if jsonb_typeof(s -> 'npcs') = 'array' then
     s := jsonb_set(s, '{npcs}', (select coalesce(jsonb_agg(case when jsonb_typeof(n) = 'object' and n ? 'allegiance'
         and not coalesce(jsonb_typeof(n -> 'allegiance') = 'object' and jsonb_typeof(n #> '{allegiance,house}') = 'string'

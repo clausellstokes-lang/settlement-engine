@@ -168,6 +168,7 @@ export function applyRosterChoices(s, pub, idOf) {
   // WOULD SERVE IT). registry: people.allegiance. A served person's `allegiance` stays only BY POSITIVE ACCOUNT: its `house` a
   // house this read lists, its `power` null, absent or a power this read serves (both served lists); else THE KEY leaves, the
   // open place's form (ruling 47: no husk; a husk the sweep left names no listed house). SQL twin: 212, the same rule
+  // registry: people.allegiance
   if (Array.isArray(s.npcs)) {
     const listed = new Set(houses.map(h => str(h.name)).filter(v => v !== ''));
     const powersServed = new Set([...objectsOf(ps?.factions), ...objectsOf(s.factions)].flatMap(powerNamesOf));
