@@ -1836,6 +1836,28 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   2566872c5); R4-IDS's part one (`-r4ids-wip` 24a6f7ef5, chain B's); (vi) proved (`-vi-wip` 953b7d19c); the
   review of R5-RECENT (E128). It is not messaged again. A LESSON FOR EVERY BRIEF OF THIS LANE: a builder's brief
   states the builder's WINDOW in figures, beside what it reads whole.
+- E130 · POINTS 103 TO 105 LANDED UNDER ONE GATE; THE LINE IS READY (recorded 2026-11-22 21:01 UTC). "STACK-100 FINAL" at 20:52: tip 80b41eef7; the three merges at exactly their named commits (point 103 `lane/close-1-2026-11-22-join-wip`
+  at a1319f388 as e21c4032e; point 104 `lane/fortune-7-2026-11-22` at 9946de504 as 5f57b9cad; point 105
+  `lane/chair-cifit-2026-11-22` at 89041ef67 as 80b41eef7); one register by its door (the lighting census
+  383e752d5: files 3,774 to 3,775; titles 31,868 to 31,865, the join having trimmed two files). THE CHAIR'S
+  CHECKS: origin's stack tip is 80b41eef7; the line's tip its ancestor; the first-parent chain and each merge's
+  second parent as named; the first two merges differ from the chair's trial merges in the lighting census only,
+  the third equals its trial merge; NOTHING under src/, supabase/ or scripts/ differs from c1144ba18 (the src tree
+  is 02c066303… at every point). THE GATE (its sentence is in LANDINGS-SIXTH.md): `tests/lint` whole 3 red of
+  3,364 (the list's three); the type ratchet 167 of 167; the strict check 1113 of 1113; eslint 0 errors; the build
+  clean, its five figures EQUAL to point 102's; `tests/build` 15 red, all listed; the lanes' files and what names
+  them 480 of 480; `distribution.test.js` whole 32 of 32; the four ratchet directories 2 red, both listed. No red
+  outside the list; no row cured. JOINED by 7a9431320 (its tree the gated tip's own), the rows and the gate's
+  sentence in 244fa84ef (docs only against the gated tip); PUSHED through `landing/safepush.sh`: origin's
+  `lane/join-2026-11-14` = 244fa84ef6e3f8bf773b64b87d9def7c854d4f0a (exit 0 at 21:00:20 by the push log; no whole
+  check started). `ci/LINE-NOW.md` at point 105; the red list unchanged at 61 rows. SENT: "THE LINE IS READY
+  244fa84ef" to CLOSE-2 (its census, started at the doors commit 383e752d5, stands as the census of the line's tip
+  but for point 105's one file; the flip's base is named at "BUILD THE FLIP"; it says whether any hand anchor of
+  the flip pins a sentence that PRONOUN or the Daily Life page changes); the tip to DAILY-4 (it does not merge it:
+  the stack re-takes the lighting census) and to VEIL-33 (the line's tip for its join). STACK-100 is done and not
+  messaged again; THE LANDING'S PLACE IS FREE for the stack of "DAILY-B" and "PRONOUN". A STACK SEAT READS A RED
+  AGAINST THE LIST BY CONTAINMENT (the list holds an `it` title without its `describe` prefix): written into
+  LINE-NOW.md and owed to the stack prompt's form.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -2384,6 +2406,21 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
    STACK-100. DONE THIS HOUR: FORTUNE-7 (hand-back final at eaaa4c344). TWO MORE CORRECTIONS OF THE CHAIR'S OWN:
    to the owner, the "false line" condition on the creditor's sentence (E118); to STACK-100, the lighting census's
    expected figure (titles fell by three, JOIN having trimmed two files).
+- 2026-11-22 21:02 UTC · NET 21 (its trigger fired at 20:58, in the middle of the landing). THE LINE IS AT POINT 105 (E130: 244fa84ef on origin, pushed 21:00:20). THE RECORDS, READ BY A HELPER AT 21:01
+   (E109): VEIL-33 305,800; VEIL-35 501,913 (at 20:49; ITS OWN COUNT WAS ABOUT 190,000: told at once: it carries
+   R4-IDS to its merge and no further; IMPORT-DOOR goes to a successor, VEIL-37, when a place frees); VEIL-36 no
+   result yet (seated 20:55); DAILY-4 275,605 (a stale figure: its last finished turn was at 19:53; it is inside
+   its rule 8); CLOSE-2 417,418; VEIL-34 661,471 at its hand-over (20:53: retired; E129). DECISIONS OF THE HOUR:
+   E124 to E130, and the owner's order "Fix all" (section 1; E125). THE SIX: VEIL-33 (LEGACY-POOL's builder: the
+   read-stored mode works; then JOIN-PREP), VEIL-35 (chain B: R4I-SQL building on the tip af708f2fd), VEIL-36
+   (chain A: reading in; R5-DESC has no line built: E129), DAILY-4 (the page's eight merged on its lane with the
+   line at point 102; rule 8 running; then "DAILY-B", then the owner's three as "DAILY-C"), CLOSE-2 (the final
+   census running since about 20:10; "PRONOUN" paused under it), and THE LANDING'S PLACE, FREE. THE OWNER ASKED
+   "Are there any decisions waiting on me?": answered: none blocks; four open questions (the crisis's own
+   faction with the creditor's sentence; the contender's word; the hidden seat-holder; the players' page switch
+   and its two teaser tabs) and the list for his hand at the close. ARMED: CI on point 105 for 21:55; net 22 for
+   21:58. THE ORDER OF THE FREE PLACE: the stack of "DAILY-B" (with "PRONOUN" if it stands), then VEIL-37
+   (IMPORT-DOOR), then CLOSE-3 when CLOSE-2 passes about 560,000.
 
 ## 4. The order of the lanes still to seat, and what each waits on
 
@@ -2447,3 +2484,4 @@ LIFE PAGE stand unless he changes them (a saved AI account stays visible; the se
 | DAILY-4 | session_01ACmDYaBKhNdEcUSm1G57q1 | `lane/daily-3-2026-11-22` at b1bcb067d (DAILY-3's hand-over; it is done) | `lane/daily-4-2026-11-22` | the Daily Life lane's last seat (E108): the L12 cut; the PDF chapter's merge; the line merged; the owner's file; rule 8; "DAILY-B" |
 | STACK-100 | session_01ACmDYZ2KgEXYCKokzKTjtk | the working line `lane/join-2026-11-14` at c1144ba18 (point 102) | `lane/stack-100-wip-2026-11-22` | A LANDING ON ITS OWN MACHINE (E114): point 103 "JOIN" a1319f388 (merged at e21c4032e) and point 104 "FORTUNE-C" by "ADD", both test only; "GATE" on the chair's word; then "THE LINE IS READY" to CLOSE-2 |
 | VEIL-35 | session_01ACmDYWVxmEvd73fKqhpnip | `lane/veil-34-2026-11-22` as it stood at its seating (19:27 UTC on 2026-11-22, in the place FORTUNE-7 freed) | `lane/veil-35-2026-11-22` (its unit's code on `lane/veil-35-2026-11-22-r4ids-wip`) | THE VEIL'S SECOND CHAIN (E116): the pool re-made; "R4-IDS" (part two, the cure, from VEIL-34's measure), then "IMPORT-DOOR"; the lane's tip only on "TIP TO VEIL-35" |
+| VEIL-36 | session_01ACmDYWsz5JrdWj5MFAo6K4 | `lane/veil-34-2026-11-22` at 648ac3e10 (VEIL-34's hand-over; seated 20:55 UTC on 2026-11-22 in the place VEIL-34 freed) | `lane/veil-36-2026-11-22` (its unit's code on `lane/veil-36-2026-11-22-r5desc-wip`) | THE VEIL'S CHAIN A, its writer (E129): the pool re-made; "R5-DESC" (the STANDING_FORMS list drafted first; R5D-SQL dispatched afresh; R5D-PAGE with E128's item 0), then (iv) and (v); the lane's tip only on "TIP TO VEIL-36" |
