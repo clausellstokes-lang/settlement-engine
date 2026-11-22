@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "b7f38114c0ab9e5eb16b8ca1ffb34c1a69bbcced",
+ "frozenAtSha": "0b613c949ffd0f5b057c63aed8e9d7787cde6534",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "08f7da56b2160301febc02295cbbbfe5d550cc5531df11bfbd41a373d77bf584",
  "detectorDigest": "ef804a6642b3a2a2045c233036156113bf391d135a8edd59ff81c061bde34893",
- "verdictDigest": "dfec34342f6d1bc9e445e30b44664da322fba656e7126c7921f8613919280ed8",
+ "verdictDigest": "fa0d46fdb65847e3542b3af9e475d69d26eba91e8eec09f956789aecf627be39",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -73,11 +73,11 @@
  ],
  "closureSizes": {
   "web-display": 803,
-  "web-transitive": 1090,
-  "dossier-pdf": 633,
-  "campaign-pdf": 220,
-  "world-book": 235,
-  "foundry": 521,
+  "web-transitive": 1091,
+  "dossier-pdf": 634,
+  "campaign-pdf": 221,
+  "world-book": 236,
+  "foundry": 522,
   "json-export": 12,
   "news": 29
  },
@@ -91,15 +91,15 @@
   "knownShapes": 545
  },
  "scanStats": {
-  "files": 1894,
-  "sites": 44702,
-  "propRead": 42420,
+  "files": 1895,
+  "sites": 44707,
+  "propRead": 42425,
   "elemRead": 2,
   "destructure": 2260,
   "inOp": 20,
-  "rGrades": 7971,
-  "nGrades": 1889014,
-  "resolvedReceivers": 8880
+  "rGrades": 7976,
+  "nGrades": 1889049,
+  "resolvedReceivers": 8885
  },
  "registerDigest": "66919206e4d932964430d33786b44f7d6de17566cc52e83fc5ee83647e2cfbf5",
  "pendingSurfaceCeiling": 0,
@@ -9487,7 +9487,7 @@
   "templateType on historicalEvents": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
   "type on historicalEvents": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N news=N web-display=R web-transitive=R world-book=R",
   "yearsAgo on historicalEvents": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
-  "age on history": "campaign-pdf=N dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=N",
+  "age on history": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "currentTensions on history": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "eventsTimeline on history": "dossier-pdf=R foundry=R web-display=R web-transitive=R",
   "founding on history": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
