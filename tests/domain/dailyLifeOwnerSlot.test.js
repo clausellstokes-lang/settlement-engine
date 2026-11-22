@@ -168,6 +168,7 @@ describe('the call sites that never receive the owner-only slot', () => {
   it('src/domain/regenerationDelta.js :: deriveRegenerationDelta and src/domain/aiGrounding.js :: buildAiGroundingPayload pass no audience', () => {
     expect(src('src/domain/regenerationDelta.js')).toContain('compareDailyLife(deriveDailyLife(before), deriveDailyLife(after))');
     expect(src('src/domain/aiGrounding.js')).toContain('dailyLife:       deriveDailyLife(settlement),');
+    // anchored: the two toContain above pin each file's own deriveDailyLife call text, so the source read is live
     for (const rel of ['src/domain/regenerationDelta.js', 'src/domain/aiGrounding.js']) expect(src(rel), rel).not.toMatch(/audience/);
   });
 
