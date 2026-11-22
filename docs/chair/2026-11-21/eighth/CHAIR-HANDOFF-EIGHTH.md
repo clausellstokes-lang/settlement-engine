@@ -180,6 +180,50 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   the landing moved, a premise moved, or a truth guard truly broken (a false sentence drawn): the last class is the
   landing lane's first unit before anything else and decides whether the state-sentence lane takes a seat at once.
   All 27 are on `ci/RED-AT-LINE.tsv` (89 rows) with that class.
+- E14 · THE STATE-SENTENCE LANDING'S 26 REDS, SORTED AND RULED (ruled 2026-11-22 03:20 UTC; a sorter helper ran the five files before and
+  after; a builder then built). BUILD-1 appended 122 members to the state-sentence pools (3,054 to 3,176; none removed,
+  renumbered or re-marked); the draw is a rendezvous hash over the eligible members, so an appended member takes the
+  draw in some guarded towns. THE SORT: 21 tail-guard rows and the FTH-2 anchor are PREMISES MOVED; three are counts
+  (DESK-7's eligibility; 449 to 455 variants); the stressors arm is a DETECTOR that missed two new members; the
+  NO-MARKET arm is a word list two new lines trip. PART 1 (tests only, `lane/prose-4-2026-11-22` at cb4a47963): 25 of
+  26 green: 13 GONE rows keep their town and their teeth; 8 KEEP rows moved to a town where the kept member draws (each
+  old town named); the counts re-recorded with the cause; the anchor computed from the pool; the detector widened (3 of
+  5 to 5 of 5, no crisis card matching). SIX APPENDED LINES ARE REWORDED BY THE CHAIR (PART 2, building): DS-GEN-13
+  NO-MARKET v9 "{settlement} keeps no market and no market day; goods change hands whenever one neighbour has
+  something another wants." and v12 "{settlement} has no market, and trades in a small way: a sack here, a bundle
+  there, carried between neighbours." (the builder's words, approved); DS-ECO-8 PROSPEROUS v7 "Money keeps going into
+  what {settlement} has built, and the upkeep never waits on it." (it presumed halls and defences; eligible at a thorp
+  with neither); DS-ECO-11 v4 "Little is being taken from the {resource} at {settlement} now, and what was taken is
+  coming back on its own, in its own time." and v6 "Nothing more can be taken from the {resource} at {settlement} for
+  the present; given time, there will be something to take again." (the plural-resource fault an earlier batch had
+  cured; the chair's words); DS-ECO-12 CRITICAL IMPORT v4 "A visitor who asks at {settlement} about {good} is told
+  that the country around never yields enough." (the chair's words: "sees little sign of the {good}" WAS DRAWN in two
+  guarded towns whose land lists the good or its source: an absence claim the record contradicts; the sorter had not
+  classed it false because it says "little"). `selfVouchReceipt` soak1k-8: its anchor computed from the contradiction
+  pool's members. A WRONG WORD OF THE CHAIR'S, CORRECTED TO THE OWNER BY NAME: it had told him none of the weak lines
+  was drawn in the test towns.
+- E15 · FORTUNE'S MERIT SENTENCE: READ ON THREE PAGES AND RULED (2026-11-22 03:20 UTC). PAGES-BUILT.md at 48cbca5cf: Bailton's owner and
+  shared paragraphs the same string; the sentence after the standing sentence. ONE RULING: wordings A and C say
+  "{event} hit {place}": true of an event that strikes (a flood, a plague, a siege, a shortage), wrong of one that is
+  lived under ("The Tyranny hit Cobamal"): A and C are eligible only for kinds that strike; B for every kind; declared
+  by the event's `templateType` through the one door. The seat sends its sort of the kinds first. EARLIER THE SAME
+  NIGHT: the kernel's 231 is not a new rise (on the line since point 90); `weatheredCatastrophe`'s 18 accepted; the
+  wording threshold 10 moved out of the law's table into the wording file (not a number the owner signs); writer-reach
+  by its door with three named movements. THE LIT RE-MEASURE: the three states byte-identical to FORTUNE-4's; 33 of 900
+  merited, 11 newly Endorsed, 16 newly Approved.
+- E16 · THE VEIL, THREE RULINGS (2026-11-22 03:20 UTC; PART 32 holds them as its rulings 78 on). (a) Two values left by unit (ii) STAY
+  because the house-free twin shows them (the siege's own "black market food"; a served Gambling Den's label in the
+  ops): LOWER BY RULE, listed in "R3" with the twins. (b) A NEW FAULT FOUND BY THOSE TWINS: a served list that LACKS
+  what the twin shows ("Survival crime" under a siege; the fallback "Background crime" where the one type was withheld
+  and nothing put back): an absence no open place shows: UNIT (vii), after (iii), before "R3": measured first on all
+  92 for `crimeTypes`, `sp.ops` and every list with a fallback; and the seat says whether GATE-1 can see the class: if
+  not, the gate gains the arm. (c) The lane's twelve standing lint reds: one cure unit after "R3", sorted first into
+  the lane's own and the old base's.
+- E17 · WHO RULES: A LANE RED FOUND BY THE CENSUS'S CONTROL AND ORDERED CURED BEFORE "SEAT" (2026-11-22 03:20 UTC): UK-LEGACY:
+  `npc/powerBand.js :: powerBandOfRole` read the seat law off the config it was HANDED; a legacy save regenerated
+  under a lit world's form config kept law 1 but re-made its people under law 2's band
+  (`tests/domain/seat/seatLawSavedTown.test.js` arm 4, red since the UK merge, never run by SEAT-9). The law is read
+  off the RECORD being regenerated; a sweep of every other reader on the regenerate, re-derive, clone and load roads.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -320,6 +364,20 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   about 01:50 for the progress on everything and every step in order, as tables in plain words: ANSWERED IN FULL the
   same turn (sixteen pieces; thirteen steps; no measured date, a rough sense of several days at four workers; six
   things waiting on him). He has not yet started the next chair session nor answered on a fifth seat.
+- 2026-11-22 03:20 UTC · POINTS 92 AND 93 ARE LANDED AND PUSHED (03:20; THE LINE'S TIP IS f5295e425). 92 the sameness door's join
+  (merge 2482e40e3); 93 the people lane's first half (merge bd7933433; the ruled resolution in
+  `bar5PowersStanding.test.js`; pool dominance and the lighting census at the line's side: THE THIRTY ROWS PEOPLE-1's
+  DOOR HAD TIGHTENED ARE NOT ON THE LINE: re-tightened once at the close); the phone floor's rows by its door
+  6d581ce5b; the lighting census 6197c4c72; the rows 2fe514628; then f5295e425, the people lane's two pool tables on
+  the hand list (the walker 29 of 29; `HAND_CEILING` 73). THE GATE: `tests/lint` 3 red, the owner's signings only;
+  type ratchet 167, strict 1113, eslint 0; build clean; `tests/build` 15 red, listed; directories, own files and 43
+  governing suites: 630 files, 4,915 tests, 20 red, ALL ON THE LIST; class (4): none. SIZES: first paint 1,179,511 /
+  375,172 / 315,169 (+588 raw, the people lane's, not itemized); worker 2,671,005; engine chunk 926,608.
+  `ci/RED-AT-LINE.tsv` is 86 rows (three left it); `ci/LINE-NOW.md` at point 93. SEVEN LANES' WORK JOINED SINCE THE
+  TAKEOVER (points 87 to 93). IN FLIGHT: the state-sentence cures' part 2 (a builder); CI on f5295e425. SEATS AT
+  03:20: VEIL-31 on unit (iii) with a fresh builder (GATE-2 26 of 40); SEAT-10's census flipped 46 reds in 26 files,
+  its control finishing, UK-LEGACY building; FORTUNE-6 on the line's merge and the event-kind split; PAGE-12 on its
+  closing measure (cure C merged; the bar 16.0% and 15.3%, inside the sampling band).
 
 ## 4. The order of the lanes still to seat (after the first four), and what each waits on
 
