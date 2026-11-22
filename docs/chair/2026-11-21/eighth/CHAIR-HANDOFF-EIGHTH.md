@@ -650,6 +650,28 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   by his word: NINE seats and the landing machines. THE CHAIR'S OWN CONTEXT IS NOW THE LIMIT: the handoff and the
   pickup are kept current so that a compaction or a successor loses nothing. (5) UNCHANGED AND SAID AGAIN: the pull
   request's merge, the deploy, every migration, production credentials and every signing are the owner's hand.
+- E46 · THE TROUBLE LANE'S TWO OWED GAPS RULED (2026-11-22 07:57 UTC; PAGE-12 asked). THE GUARD LINE (`guardLineUnderTheLaw.js` reads
+  `orderForceOf(record).payCut` to swap a "well paid" phrase for its pay-cut twin): (a), KEPT: the owner's page shows
+  the cut; on a shared read `npcs[].settlementCondition` is not served, so the page prints the line a place with no
+  cut prints: not inferable. ON CONDITION: pinned as a differential (shared read of a cut place == the same place
+  with the cut removed; the owner's read prints the twin) if no test does so; listed for the security reader as an
+  owner-only twin. (b) (drop the swap) would make the owner's own page say "well paid" over a cut. HK1's STALE COMMENT
+  in `src/domain/facts/lawBand.js` (the depth lane's file): LEAVE GIVEN for the comment alone, named in the landing
+  line. The second tranche lands as "PAGE-TROUBLE-B <commit>".
+- E47 · THE VEIL'S JOIN PROBE: HOW IT MERGES AND WHAT TREE IT READS (2026-11-22 07:57 UTC; VEIL-32 asked three things). THE MERGE AS IT
+  FALLS: conflicts toward the line in tests, toward the lane in 212 and the twin, every one listed (the list is the
+  join step's worklist at the close). THE LIT TREE IS NOT DERIVED BY THE VEIL'S SEAT: CLOSE-1 pushes ONE lit scratch
+  ref (both laws merged, the three dials flipped, proven lit on a birth) and the probe is cut from it. THE PROBE ALSO
+  MEASURES E35's HOOK GAP. Its pool runs after unit (viii)'s pool, never beside it (one pool fills the seat's four
+  cores for about 35 minutes).
+- E48 · A SEAT FOR THE CLOSE'S REHEARSAL: CLOSE-1 (2026-11-22 07:57 UTC; `prompts/CLOSE-1.txt`). The close's worklist (the seventh
+  chair's entry of 21:36 on 2026-11-20, items (0) to (8), as amended by E28, E30, E32 and E42) was a tail the chair
+  would walk alone at the very end. IT IS WALKED NOW ON SCRATCH REFS: a trial join of the two laws; a lit scratch ref;
+  the flipped whole run as a difference of two lists, every red BY NAME in four classes (a door's re-record; the
+  owner's signing; a size figure; a TRUE FAULT, sent to the chair at once with its lane); the close's recipe as
+  rehearsed commands; the joint measure (900 births lit); the owner's signing list in plain words as a draft. ONE
+  UNIT OF IT LANDS: the laws' join (the worklist's item (1)), "JOIN <commit>", built on the line once both laws are
+  on it. THE FLIP ITSELF STAYS THE CHAIR'S; every signing stays the owner's.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -1036,6 +1058,19 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
    "(b) DARK": a test anchored on a draw that the line's content moved), being cured in the test only by the brief
    `U5d-ECO-ANCHOR`; "FORTUNE <commit>" comes after it. THE CHAIR READS THAT CURE AT THE LANDING: a re-anchored test
    must be shown red by plant. THE OWNER HAS NOT ANSWERED THE 07:35 MESSAGE. NET 9 ARMED FOR ABOUT AN HOUR ON.
+- 2026-11-22 07:57 UTC · FULL PACE, THE FIRST HALF HOUR (the owner's word in section 1; E45 to E48). DONE: six seats told and the two
+   holds lifted; the four test cures committed as cc2f43aee on the stack's tip and pushed (the wip ref); STACK-97
+   seated (who rules as point 97 on its own machine); FORTUNE-7, PLACE-3 and PEOPLE-3 seated (section 6);
+   COMMON-EIGHTH 12 and the new prompts pushed (960331cff). THE SEATS' ANSWERS: VEIL-32: unit (viii) step 1 merged,
+   its builder R3-TELL-8b on the three reds and then the cure, 212 NOT final ((viii), (iv), (v) each change it), its
+   own guess about 500,000. SEAT-10: U6's builder cut on the chair's wordings (E44) and U7's beside it (file-disjoint:
+   `powerStrata.js`, six display files, one new test), lane at 8e11f55ce, about 425,000. PAGE-12: the pool's builder
+   cut (24 lines: 16, 6, 2 held); its two gaps ruled (E46). FORTUNE-6: U5d is a test-only cure of its ONE own red
+   (`fortuneLawEconomyHeader`, "(b) DARK": the anchor needed a law-1 DRAW that names "subsistence living", and point
+   89's regenerated DS-ECO-1 pools left none among its 60 births; re-anchored on the ELIGIBILITY of the slot-naming
+   variants, with a plant): accepted in form, read at the landing; FORTUNE-7's read-in commit is f13f31820 (the
+   hand-back's section 6 is written for it). THE LOCAL GATE OF POINTS 94 TO 96: run A green (523 files, 3,960 tests),
+   run B (the governing files) still going at 07:55. THIS CONTAINER HAS 4 CORES: no second gate here.
 
 
 ## 4. The order of the lanes still to seat, and what each waits on
@@ -1072,3 +1107,7 @@ LIFE PAGE stand unless he changes them (a saved AI account stays visible; the se
 | PAGE-12 | session_01ACmDYXpfBBiCkJJuRZps9f | `lane/page-10-2026-11-20` cbbe87154 | `lane/page-12-2026-11-21` | the trouble half: the tip proved, the causes' parity, the mixed key, the closing measure, "PAGE-TROUBLE" |
 | DAILY-3 | session_01ACmDYYZpEdm9Ag2ikDGTf9 | the working line `lane/join-2026-11-14` (f5295e425 at its seating) | `lane/daily-3-2026-11-22` | Daily Life's second half: B3 (the owner-only slot; `commoner_resentments`, `food_culture`; `outsider_impressions`, `unspoken_topics`, `recent_changes`), the sameness door, the page's block, "DAILY-B" |
 | PAGE-13 | session_01ACmDYaxzZSfZegkESM65Zb | `lane/page-9-2026-11-20` 1cf317f5f | `lane/page-13-2026-11-22` | the display lane: the tip proved, the safety pages' test re-made, the line merged AFTER the trouble lane is landed, "PAGE-SIDES"; then the causes' wiring, "PAGE-DISPLAY" |
+| FORTUNE-7 | session_01ACmDYYX2Z8B8GBa3noRzqN | `lane/fortune-6-2026-11-21` (seated beside FORTUNE-6; its read-in commit is f13f31820) | `lane/fortune-7-2026-11-22` | fortune's second merit, LASTING (E32): unit 0 at once (the six ages re-measured, the veil as a measure, the sentence pool's draft); builds when the chair names "FORTUNE <commit>" to it; "FORTUNE-B" |
+| PLACE-3 | session_01ACmDYao9UsWJpsH3xFbHKj | `lane/place-3-2026-11-21` 3dccb0069 | the same branch | the place lane: the trade note's cure, "PLACE-NOTE"; what is owed from unit 1 |
+| PEOPLE-3 | session_01ACmDYabE8Q8QFDT9ZPVoDe | `lane/people-3-2026-11-21` 930413518 | the same branch | the people lane's second half: B3 (the "why here" sentence), then B2 with B2b; "PEOPLE-B" |
+| STACK-97 | session_01ACmDYWhzK8coXeB7BokWRC | `lane/stack-96-wip-2026-11-22` cc2f43aee | `lane/stack-97-wip-2026-11-22` | A LANDING ON ITS OWN MACHINE (E45): who rules at 46339e5c7 as point 97: the merge and the whole gate; the chair alone moves the line |
