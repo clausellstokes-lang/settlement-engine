@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "840020b9b661709bc3e678b4dd0db38cf69f9a17",
-  "measuredBy": "STACK-97",
+  "measuredAtSha": "3113d621be9a256595f74aa0cda5c273bd356235",
+  "measuredBy": "SEAT-10",
   "date": "2026-11-22",
-  "note": "point 97 (lane/seat-10-2026-11-21 at 46339e5c7, the law of the seat) on points 94 to 96: the lane adds its seat-law modules and tests",
-  "files": 3758,
+  "note": "U6's merge (674148b9c): tests/generators/seat/seatHolderLines.test.js",
+  "files": 3759,
   "parked": 481,
-  "credited": 3277,
-  "titles": 31755,
-  "suiteTitles": 8805
+  "credited": 3278,
+  "titles": 31768,
+  "suiteTitles": 8814
 }
