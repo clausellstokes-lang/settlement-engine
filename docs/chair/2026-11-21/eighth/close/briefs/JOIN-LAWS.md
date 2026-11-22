@@ -58,6 +58,11 @@ and corrects this table where a title differs, in its report)
 | livingContentLawWiring "CREATE (LIT, the product path)": the `birthConfig(null)` value | the new file (g), THE ONE PIN (E61 (5)); the arm keeps its own key only |
 | seatLawWiring 1. CREATE (dark): `birthConfig(null)` byte-equal | the new file (g); the arm keeps `_seatLawVersion` present/absent only |
 | fortuneLawWiring 1. CREATE (dark): `birthConfig(null)` byte-equal | the new file (g); the arm keeps `_fortuneLawVersion` present/absent only |
+| livingContentLawWiring "⛔ a PERSISTED law-1 world survives load, section regen and the clone seam unstamped" | STAYS (the living-content law's own wiring file); the new file's (a) covers the same steps for EVERY row, living content included: the builder says in its report whether the arm is then a duplicate, and the chair rules its removal |
+| fortuneLawWiring 7. "the leaf's header says the fortune law is never lit before the seat's law" | STAYS (a text pin of the lighting ORDER, not of darkness); it holds at the flip because both dials flip in one unit |
+
+CHECKED AGAINST `lane/stack-98-wip-2026-11-22` at 7c03296d8 (2026-11-22 13:13 UTC, read-only): every title above is the same there;
+`densityCreateBoundary.js` differs from the trial join 4bba8781d by one comment line (` *`), so the union is as measured.
 
 ## Files the builder owns
 NEW `tests/domain/generationLawsSavedPlace.test.js`; `tests/domain/seat/seatLawSavedTown.test.js`;

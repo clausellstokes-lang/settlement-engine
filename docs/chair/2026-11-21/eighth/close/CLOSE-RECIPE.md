@@ -29,6 +29,10 @@ Printed: 3 files changed, 3 insertions(+), 3 deletions(-). Proof: `birthConfig({
 | `tests/domain/seatLawWiring.test.js` arm 4 "GENERATION_LAWS.seat is a WIRED row that says the dial is dark, and why" | pins the why's darkness | re-pinned to the lit why |
 | `tests/domain/fortuneLawWiring.test.js` arm 4 (the same for fortune) | the same | the same |
 | `tests/domain/seat/seatContest.test.js` (5) "the dial lands dark: every factor 1 …" / "the dial is dark and every factor of the registered table reads 1" | pins `SEAT_CONTEST_LIT === false` | re-pinned (the factors stay 1: the table is untouched) |
+| `tests/domain/seatLawWiring.test.js` "the vocabulary: one key, two versions, the dial at the default" | pins `NEW_SETTLEMENT_SEAT_LAW_VERSION === DEFAULT` | re-pinned to the holder version |
+| `tests/domain/fortuneLawWiring.test.js` "the vocabulary: one key, two versions, the dial at the default" | pins `NEW_SETTLEMENT_FORTUNE_LAW_VERSION === DEFAULT` and the mint `{}` | re-pinned to the size-relative version |
+| `tests/domain/seatLawWiring.test.js` 1 and `fortuneLawWiring.test.js` 1 "CREATE (dark): birthConfig carries no _<law>LawVersion …" | pins the absent marker | after JOIN, each arm keeps only its own key: re-pinned present |
+| `tests/domain/fortuneLawWiring.test.js` 7 "the leaf's header says the fortune law is never lit before the seat's law" | an ORDER pin, not darkness | holds: both dials flip in ONE unit |
 | comments: `densityCreateBoundary.js` (the clamp's two paragraphs, "a build whose dial is dark"), `fortuneLaw.js` header property 3, `seatLaw.js` header | prose only | read once at the flip; the flipped run (unit 4) names every test that pins one |
 (The flipped run's class (a) list is the complete set: see `FLIP-CENSUS.md` when written.)
 
