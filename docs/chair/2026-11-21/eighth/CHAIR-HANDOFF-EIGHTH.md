@@ -725,6 +725,20 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   PAGE-12 53.40 (VEIL-31's last read was 57.49 at 04:15). THE DAILY LIFE PAGE'S BUILDER is on its fourth green run
   after the type checks and eslint; no commit yet. Point 94 stands merged and unpushed, waiting for it. The chair's
   branch is on origin at 8bd2b4883 (05:25 by the push's log). NET 7 is set for about 06:27.
+- 2026-11-22 05:27 UTC · THREE SEATS' FIRST WORDS. PAGE-13 (the display lane): its checkout verified (1cf317f5f); UNIT 1 DONE AND ACCEPTED: the
+  lighting census by its door (3,729 to 3,730 files); the shrink-only each-park ceiling that SIDES' `it.each` had
+  passed (107 against 106) CURED, not raised (19b3cfa9a); `tests/lint` whole 2 red of 3,271, both the lane's
+  (`seedLoopTotality`; `sourceCitationIntegrity`, a dated file of PAGE-9's), cured (dcec26dff); type ratchet 167,
+  strict 1113, eslint 0, the floor pin 2 of 2, the observed-shape walker green, the wiring census 0; its build
+  1,178,011 / 374,764 / 314,572, worker 2,633,049, engine chunk 924,013 (the lane has not the line's later points);
+  the reader pin's 300 of 3,300 are the PDF cover's date. UNIT 2's DESIGN ACCEPTED (brief READER-DIFF.md): one tree,
+  two renders; `safetyShown.js` mocked by a switch so that the owner's line is a SENTINEL while the audience gate is
+  the real one; every reader surface the same bytes with and without, the sentinel never there; the owner's surfaces
+  hold it; the cover given a fixed clock; no stored hash; red first by planting 'owner' on the Overview. Unit 3 waits
+  for the trouble lane to be a point of the line. VEIL-31's LAST TIP IS 9fd3623c5 (PART 32 with its ruling 85: the
+  cure's five steps and the join probe in its section 1; its own estimate 560,000). VEIL-32: stands on 385067da2,
+  told to fast-forward to 9fd3623c5 (documents only); its documents read; 212 and the registry being read whole; the
+  pool and the green chain running since 05:22; next from it: the two gates at the tip.
 
 ## 4. The order of the lanes still to seat, and what each waits on
 
