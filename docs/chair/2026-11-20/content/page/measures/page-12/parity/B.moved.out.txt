@@ -1,0 +1,8 @@
+sentences: before 873, after 873; keys equal true
+MOVED 0 owner-side sentences; by size: thorp 0 hamlet 0 village 0 town 0 city 0 metropolis 0
+AFTER FAULT r2r-city-19 owner rival_rings served rival_rings same
+AFTER FAULT r2s-religious_conversion-city-0 owner criminal_power served criminal_power same
+AFTER FAULT r2s-wartime-metropolis-2 owner criminal_power served criminal_power same
+BEFORE FAULT r2r-city-19 owner criminal_power served rival_rings DIFFERENT
+BEFORE FAULT r2s-religious_conversion-city-0 owner rival_rings served criminal_power DIFFERENT
+BEFORE FAULT r2s-wartime-metropolis-2 owner force_unpaid_or_cut served criminal_power DIFFERENT

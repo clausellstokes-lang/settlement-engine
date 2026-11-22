@@ -511,7 +511,9 @@ const HOUSE_FAMILIES = (() => {
       kind: 'thing', layer: 'P', leaf: kind
         ? `institutions.js :: liveInstitutionNames, or a power of the name (a house named ${key}); answered by \`institution: ${kind}\` (DAILY-2, the chair's ruling of 2026-11-20 19:41)`
         : `institutions.js :: liveInstitutionNames, or a power of the name (a house named ${key}); its atom \`house: ${key}\` waits for a factsOf getter`,
-      words: re, atoms: kind ? [`institution: ${kind}`] : [], absent: (_f, rosterNames, record) => !rosterHas(rosterNames, stem) && !powerNames(record).some((n) => stem.test(n)),
+      // PAGE-7 (CAUSES-DATA addendum 4, item 1): `thieves' guild` and `smuggling` are answered by `causeHouses.js` (no kind of the two)
+      words: re, atoms: kind ? [`institution: ${kind}`] : key === "thieves' guild" ? ['house: thieves_guild'] : key === 'smuggling' ? ['house: smuggling'] : [],
+      absent: (_f, rosterNames, record) => !rosterHas(rosterNames, stem) && !powerNames(record).some((n) => stem.test(n)),
       pageWithdrawn: PAGE_WITHDRAWN.house,
     };
   }

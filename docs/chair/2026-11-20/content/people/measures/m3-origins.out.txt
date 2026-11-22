@@ -1,0 +1,121 @@
+COUNTS: founder wordings 108 over 26 rows; overcoming wordings 36; settlementReason wordings 62
+base 01351d72d · n 100 a size · sizes thorp, hamlet, village, town, city, metropolis
+PRINTING SURFACES (read in the code; SAME-1's render of 300 places, per the chair at 16:30 UTC, saw settlementReason on the Overview and in the PDF, and the founding rows in the PDF only):
+  settlementReason[]: web Overview "Settlement Origin" (src/components/new/tabs/OverviewTab.jsx, every line), Summary tab (src/components/new/SummaryTab.jsx, every line), PDF Overview (src/pdf/lib/viewModel.js -> src/pdf/sections/Overview.jsx), campaign PDF (src/utils/generateCampaignPDF.js), Foundry journal (src/foundry/journalPages.js "## Settlement Origin"); line [0] alone: the spine (src/domain/simulationSpine.js :: deriveExistsBecause), the quick guide (src/domain/summary/settlementQuickGuide.js :: composeFoundationTruth), the AI grounding payload (supabase/functions/_shared/aiGroundingBundle.js)
+  history.founding.foundedBy / .overcoming: PDF chapter 08 (src/pdf/sections/HistoryFounding.jsx, via src/pdf/lib/viewModel.js); the code also holds the web History tab's Founding collapsible (src/components/new/tabs/HistoryTab.jsx) and the Foundry journal (src/foundry/journalPages.js), and composes from both in src/domain/historyBeats.js (foundingCause: "founded by <foundedBy>"; firstProsperitySource: "Prosperity came slowly, <overcoming>.", only where no top export)
+VALIDATION: line 0 arm re-derived = arm read from the line: 600/600; line 0 reproduced from pool+key+onward walk: 600/600; line 1 reproduced: 400/400; foundedBy a FOUNDER_KIND row: 600/600; overcoming a table row: 600/600
+GUARDS: 206 new wordings checked; misses 0
+
+=== thorp
+branch settlementReason[0] (arm): road 40 · river 21 · crossroads 13 · ground 12 · isolated.unsupplied 7 · isolated.sustained 7  (entries: 200 lines on 100 places)
+branch settlementReason[1] (tier line): small-place 100
+branch foundedBy (resolved row): 38 "a discharged soldier who liked the view and had nowhere better to be" · 26 "a single extended family who came and never left" · 22 "a pair of siblings who disagreed about which direction to keep walking" · 14 "a healer who stopped to treat a traveller and found the location too useful to leave"
+branch overcoming (table·challenge kind): Moderate·rival 22 · Moderate·threat 16 · Moderate·lords 10 · Poor·lords 8 · Poor·rival 8 · Moderate·water 7 · Moderate·land 7 · Poor·threat 7 · Moderate·sickness 6 · Poor·land 5 · Poor·water 2 · Prosperous·sickness 1 · Prosperous·threat 1
+noble/crown-grant founders 0, of them where the ruler is not a lord 0
+eligible pool length (mean): sr[0] 6.5 · sr[1] 12.8 · foundedBy 3.1 · overcoming 3.0 · settlementReason lists of a power-of-two length 12
+TOP settlementReason today 28/100 28% distinct 33 :: Everyone here knows every household by name, and none has much put by.
+TOP settlementReason projected 13/100 13% distinct 69 :: What little the place grows or makes is mostly used at home; there is not much left to sell.
+  next projected: 11 Everyone here knows every household by name, and none has much put by. | 11 Sited on a route already worn deep before anyone built here; a road that old is not soon a | 10 Every household here has its work, and there is little to spare.
+TOP foundedBy today 38/100 38% distinct 4 :: a discharged soldier who liked the view and had nowhere better to be
+TOP foundedBy projected 13/100 13% distinct 40 :: a discharged soldier who liked the view and had nowhere better to be
+  next projected: 7 a single extended family who came and never left | 7 a pair of siblings who disagreed about which direction to keep walking | 6 a healer who stopped to treat a traveller and found the location too useful to leave
+TOP overcoming today 24/100 24% distinct 8 :: with help from external allies at a critical moment
+TOP overcoming projected 10/100 10% distinct 28 :: by striking a bargain with the other side that both could live with
+  next projected: 8 with help from external allies at a critical moment | 7 by making enough right decisions to survive the wrong ones | 6 by keeping watch together until the attacks stopped
+
+=== hamlet
+branch settlementReason[0] (arm): road 32 · river 20 · crossroads 19 · ground 12 · isolated.unsupplied 9 · isolated.sustained 8  (entries: 200 lines on 100 places)
+branch settlementReason[1] (tier line): small-place 100
+branch foundedBy (resolved row): 41 "three or four families who agreed to try wintering together and never stopped" · 27 "a retired tradesperson whose skills attracted dependents" · 23 "a household that settled first and found others following it in" · 9 "a small religious community whose members drifted into secular life over two generations"
+branch overcoming (table·challenge kind): Moderate·rival 15 · Moderate·threat 13 · Moderate·land 12 · Moderate·lords 12 · Poor·rival 10 · Poor·land 9 · Poor·threat 7 · Moderate·water 6 · Poor·water 6 · Moderate·sickness 5 · Poor·lords 3 · Poor·sickness 2
+noble/crown-grant founders 0, of them where the ruler is not a lord 0
+eligible pool length (mean): sr[0] 6.8 · sr[1] 12.7 · foundedBy 3.2 · overcoming 3.0 · settlementReason lists of a power-of-two length 19
+TOP settlementReason today 25/100 25% distinct 33 :: A handful of houses; you could greet everyone in it before noon.
+TOP settlementReason projected 11/100 11% distinct 68 :: Every household here has its work, and there is little to spare.
+  next projected: 11 What little the place grows or makes is mostly used at home; there is not much left to sel | 10 What the place has to sell is taken elsewhere to market. | 9 A handful of houses; you could greet everyone in it before noon.
+TOP foundedBy today 41/100 41% distinct 4 :: three or four families who agreed to try wintering together and never stopped
+TOP foundedBy projected 11/100 11% distinct 36 :: a household that settled first and found others following it in
+  next projected: 9 three or four families who agreed to try wintering together and never stopped | 6 a retired tradesperson whose skills attracted dependents | 5 three or four families who wintered together by the road and never moved on
+TOP overcoming today 22/100 22% distinct 6 :: with help from external allies at a critical moment
+TOP overcoming projected 8/100 8% distinct 26 :: with help from external allies at a critical moment
+  next projected: 8 through determination and cooperation | 7 by making enough right decisions to survive the wrong ones | 7 by giving up more than the founders intended
+
+=== village
+branch settlementReason[0] (arm): road 34 · river 24 · crossroads 16 · ground 11 · isolated.deficit 9 · isolated.sustained 6  (entries: 100 lines on 100 places)
+branch settlementReason[1] (tier line): none (no tier line at this size)
+branch foundedBy (resolved row): 26 "a noble granted lands by the crown and obligated to populate them" · 21 "a group of settlers seeking new opportunities" · 19 "a community of tradespeople who left a larger settlement under contested circumstances" · 19 "refugees fleeing war or persecution who found the location defensible" · 15 "escaped serfs seeking a place beyond the reach of their former masters"
+branch overcoming (table·challenge kind): Moderate·rival 14 · Moderate·threat 14 · Poor·threat 13 · Poor·rival 10 · Poor·land 9 · Moderate·water 8 · Poor·water 8 · Moderate·land 7 · Poor·sickness 5 · Poor·lords 5 · Moderate·sickness 3 · Moderate·lords 3 · Prosperous·lords 1
+noble/crown-grant founders 26, of them where the ruler is not a lord 25
+eligible pool length (mean): sr[0] 7.3 · sr[1] - · foundedBy 2.5 · overcoming 3.0 · settlementReason lists of a power-of-two length 18
+TOP settlementReason today 17/100 17% distinct 28 :: Sited on a route already worn deep before anyone built here; a road that old is not soon abandoned.
+TOP settlementReason projected 7/100 7% distinct 46 :: It stands on the bank, and the current does the hauling; every trade here is priced against what the water carries for nothing.
+  next projected: 6 Sited on a route already worn deep before anyone built here; a road that old is not soon a | 5 A road settlement: other people's journeys pass its doors, and some of them stop for a mea | 5 Established along a road route. Trade flows in, goods flow out, people pass through.
+TOP foundedBy today 26/100 26% distinct 5 :: a noble granted lands by the crown and obligated to populate them
+TOP foundedBy projected 13/100 13% distinct 34 :: refugees fleeing war or persecution who found the location defensible
+  next projected: 11 a community of tradespeople who left a larger settlement under contested circumstances | 9 a group of settlers seeking new opportunities | 7 a noble granted lands by the crown and obligated to populate them
+TOP overcoming today 22/100 22% distinct 7 :: through determination and cooperation
+TOP overcoming projected 10/100 10% distinct 27 :: though the founding was harder than anyone admitted at the time
+  next projected: 7 by holding to their claim until the other side gave it up | 6 by keeping watch together until the attacks stopped | 6 by banding together whenever trouble came, until it came less often
+
+=== town
+branch settlementReason[0] (arm): road 57 · river 16 · crossroads 16 · port.coastal 11  (entries: 100 lines on 100 places)
+branch settlementReason[1] (tier line): none (no tier line at this size)
+branch foundedBy (resolved row): 26 "a merchant consortium that needed a waypoint and decided to own it" · 24 "a noble granted lands by the crown with the resources to develop them" · 20 "merchants recognising economic potential before anyone else did" · 15 "military veterans given land grants who brought their skills with them" · 15 "religious authorities who wanted a centre for their regional operations"
+branch overcoming (table·challenge kind): Moderate·rival 22 · Moderate·lords 17 · Moderate·threat 16 · Prosperous·rival 9 · Moderate·land 6 · Moderate·water 5 · Prosperous·lords 4 · Prosperous·water 4 · Poor·rival 4 · Prosperous·threat 4 · Moderate·sickness 2 · Prosperous·land 2 · Poor·lords 1 · Poor·threat 1 · Prosperous·sickness 1 · Poor·water 1 · Poor·land 1
+noble/crown-grant founders 24, of them where the ruler is not a lord 21
+eligible pool length (mean): sr[0] 8.8 · sr[1] - · foundedBy 2.9 · overcoming 3.0 · settlementReason lists of a power-of-two length 33
+TOP settlementReason today 15/100 15% distinct 20 :: Sited on a route already worn deep before anyone built here; a road that old is not soon abandoned.
+TOP settlementReason projected 9/100 9% distinct 42 :: It stands roadside, where the day is measured in traffic: what arrives before noon, what leaves before dusk, and what stops for the night.
+  next projected: 8 A road settlement with a market of its own, where goods that come along the road are bough | 5 Sited on a route already worn deep before anyone built here; a road that old is not soon a | 5 The road was here first. The settlement grew along its verge, and its news has always come
+TOP foundedBy today 26/100 26% distinct 5 :: a merchant consortium that needed a waypoint and decided to own it
+TOP foundedBy projected 10/100 10% distinct 34 :: a merchant consortium that needed a waypoint and decided to own it
+  next projected: 8 a noble granted lands by the crown, with the resources to build the first mill and market | 7 merchants recognising economic potential before anyone else did | 7 a noble granted lands by the crown with the resources to develop them
+TOP overcoming today 27/100 27% distinct 9 :: with help from external allies at a critical moment
+TOP overcoming projected 11/100 11% distinct 30 :: by striking a bargain with the other side that both could live with
+  next projected: 9 with help from external allies at a critical moment | 7 by sending gifts and envoys until the pressure eased | 7 through determination and cooperation
+
+=== city
+branch settlementReason[0] (arm): road 34 · river 30 · crossroads 20 · port.coastal 16  (entries: 200 lines on 100 places)
+branch settlementReason[1] (tier line): city-deficit 100
+branch foundedBy (resolved row): 29 "royal decree and a century of forced investment" · 26 "a powerful noble house that needed a commercial base independent of rivals" · 23 "a merchant coalition that grew too large for the town they started in" · 22 "a military command that built fortifications and found civilians followed"
+branch overcoming (table·challenge kind): Prosperous·threat 20 · Prosperous·rival 19 · Prosperous·water 16 · Prosperous·lords 11 · Prosperous·land 7 · Moderate·rival 6 · Prosperous·sickness 5 · Moderate·threat 5 · Moderate·water 5 · Moderate·land 2 · Moderate·lords 2 · Poor·threat 1 · Moderate·sickness 1
+noble/crown-grant founders 26, of them where the ruler is not a lord 19
+eligible pool length (mean): sr[0] 8.3 · sr[1] 11.8 · foundedBy 3.0 · overcoming 2.9 · settlementReason lists of a power-of-two length 38
+TOP settlementReason today 100/100 100% distinct 20 :: Large enough that its appetites outrun its fields. What the city consumes, it cannot fully produce.
+TOP settlementReason projected 12/100 12% distinct 60 :: A city of this many people eats more than its own fields can grow.
+  next projected: 11 Carts of food come in at its gates; its own fields cannot feed it. | 10 Grain from outside is ground here alongside its own; the city's fields cannot feed it. | 9 Part of what the city eats is bought at its market, not grown by its own people.
+TOP foundedBy today 29/100 29% distinct 4 :: royal decree and a century of forced investment
+TOP foundedBy projected 11/100 11% distinct 33 :: a powerful noble house that needed a commercial base independent of rivals
+  next projected: 10 royal decree, and a century of forced investment in its walls and markets | 10 a merchant coalition that grew too large for the town they started in | 7 a military command that built fortifications and found civilians followed
+TOP overcoming today 35/100 35% distinct 7 :: through good fortune and good decisions in roughly equal measure
+TOP overcoming projected 13/100 13% distinct 26 :: by attracting the right people at the right time
+  next projected: 11 through good fortune and good decisions in roughly equal measure | 9 by paying for guards early, before the attacks could take hold | 7 by settling the dispute early and on good terms
+
+=== metropolis
+branch settlementReason[0] (arm): road 52 · river 26 · port.coastal 14 · crossroads 8  (entries: 200 lines on 100 places)
+branch settlementReason[1] (tier line): metropolis 96 · metropolis-siege 4
+branch foundedBy (resolved row): 37 "the slow accretion of three smaller settlements that eventually merged under a single administration" · 33 "a great trade house that outgrew every other settlement in the region" · 28 "imperial decree and the systematic forced relocation of skilled populations" · 2 "a dynastic decision that this crossroads would anchor the realm"
+branch overcoming (table·challenge kind): Prosperous·rival 26 · Prosperous·threat 19 · Prosperous·water 11 · Prosperous·lords 9 · Prosperous·land 8 · Moderate·threat 7 · Moderate·rival 6 · Moderate·water 5 · Moderate·lords 4 · Prosperous·sickness 2 · Moderate·land 2 · Moderate·sickness 1
+noble/crown-grant founders 0, of them where the ruler is not a lord 0
+eligible pool length (mean): sr[0] 8.1 · sr[1] 11.4 · foundedBy 3.6 · overcoming 3.0 · settlementReason lists of a power-of-two length 39
+TOP settlementReason today 96/100 96% distinct 21 :: Everything in the region is bought, sold or decided here.
+TOP settlementReason projected 14/100 14% distinct 55 :: Contracts for the region's trade are drawn up and sealed here.
+  next projected: 10 Established along a road route. Trade flows in, goods flow out, people pass through. | 9 People from across the region come here to be treated. | 9 Sited on a route already worn deep before anyone built here; a road that old is not soon a
+TOP foundedBy today 37/100 37% distinct 5 :: the slow accretion of three smaller settlements that eventually merged under a single administration
+TOP foundedBy projected 11/100 11% distinct 27 :: the slow accretion of three smaller settlements around a shared market, eventually merged under a single administration
+  next projected: 11 imperial decree and the systematic forced relocation of skilled populations | 10 a great trade house whose banking outgrew every other settlement in the region | 8 the slow accretion of three smaller settlements along the road that eventually merged unde
+TOP overcoming today 27/100 27% distinct 6 :: through good fortune and good decisions in roughly equal measure
+TOP overcoming projected 10/100 10% distinct 25 :: through good fortune and good decisions in roughly equal measure
+  next projected: 9 through sustained effort and reliable governance | 9 by settling the dispute early and on good terms | 9 by paying for guards early, before the attacks could take hold
+
+SUMMARY (top share by size, today -> projected)
+settlementReason: thorp 28/100 28% -> 13/100 13% · hamlet 25/100 25% -> 11/100 11% · village 17/100 17% -> 7/100 7% · town 15/100 15% -> 9/100 9% · city 100/100 100% -> 12/100 12% · metropolis 96/100 96% -> 14/100 14%
+foundedBy: thorp 38/100 38% -> 13/100 13% · hamlet 41/100 41% -> 11/100 11% · village 26/100 26% -> 13/100 13% · town 26/100 26% -> 10/100 10% · city 29/100 29% -> 11/100 11% · metropolis 37/100 37% -> 11/100 11%
+overcoming: thorp 24/100 24% -> 10/100 10% · hamlet 22/100 22% -> 8/100 8% · village 22/100 22% -> 10/100 10% · town 27/100 27% -> 11/100 11% · city 35/100 35% -> 13/100 13% · metropolis 27/100 27% -> 10/100 10%
+
+APPROXIMATIONS (where the projection is not the code path):
+1. settlementReason atoms are read on the FINAL record (factsOf). The writer runs at generateNarratives, after generatePopulation and economyReconcilePass: the economy, the roster, the government and the cast are in hand there, and the builder must hand them to factsOf at the step; a later pass that changes a read fact would differ. FOOD_IMPORT reads the writer's own input (economicViability.metrics.foodBalance.importCoverage > 0, its `hasFoodImport`).
+2. foundedBy and overcoming atoms are read through birthFactsOf over the FINAL roster and config (the founding state's own view); only birth-settled atoms are used (terrain, route, water, houses, walls, palisade, healer, market), each equal at birth and final on these 600 (m3-births cache, measured).
+3. The variant selection filters first and hashes over the eligible list (as M1 proposed), where today's origin pool hashes then walks onward from a refused row; the onward walk is what lifts road row 4 today (row 3, refused without an inn and in every city and metropolis, lands on it).
+4. 100 places a size: a swing of about 3 places is noise; a figure at 12-15% sits at the bar, not under it by a margin.
+5. The eligible lists vary in length per place, so some land on a power of two (counted above). On this seed family (hxd-<size>-<i>, the seed once in each key) fnv1a32 mod 2, 4 and 8 split 100 keys evenly (50/50, 25x4, 12-14x8: measured), so the projection is, if anything, kinder at those lengths than random seeds would be; the static pool law (settlementOriginProse.js law 3) is the chair's to extend to computed lists or not.

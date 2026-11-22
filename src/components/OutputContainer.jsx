@@ -226,7 +226,6 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const _clearAiSettlement = useStore(s => s.clearAiSettlement);
   const storeRegenerate = useStore(s => s.regenSection);
   const requestNarrative = useStore(s => s.requestNarrative);
-  const requestDailyLife = useStore(s => s.requestDailyLife);
   const getCost = useLiveAiCostResolver();
   const _creditBalance = useStore(s => s.creditBalance);
   const storeAiLoading = useStore(s => s.aiLoading);
@@ -372,11 +371,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // under Notes (spec §8 M3c relocation).
   const recentEvents = chronicle.slice(0, 8);
 
-  const executeAiAction = async (kind) => {
-    if (kind === 'dailyLife') {
-      if (isConfigured) await requestDailyLife(saveId);
-      return;
-    }
+  const executeAiAction = async (_kind) => {
     if (isConfigured) {
       await requestNarrative(saveId);
     } else {
@@ -701,7 +696,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       case 'plot_hooks': return <PlotHooksTab settlement={s} publicDossier={publicDossier} playerView={playerView} />;
       case 'chronicle':  return <ChronicleTab entries={chronicle} />;
       case 'versions':   return <VersionsTab save={liveSaveEntry} />;
-      case 'daily_life': return <DailyLifeTab settlement={s} aiSettlement={aiSettlement} saveId={saveId} onRequestDailyLife={() => requestAiAction('dailyLife')} publicDossier={publicDossier} playerView={playerView} />;
+      case 'daily_life': return <DailyLifeTab settlement={s} aiSettlement={aiSettlement} publicDossier={publicDossier} playerView={playerView} />;
       // Traditions — the founding-traditions register (THE TRADITIONS wave, T-1).
       // Preview mode (view-time deriveFoundingTraditions) until the T-2 mover writes
       // the settlement.traditions mirror; then this same tab renders the live state.

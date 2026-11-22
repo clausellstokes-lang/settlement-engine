@@ -1,0 +1,59 @@
+DECLARED LINES: 19613 checks (every wording of every cause that holds, every town); REFUSED 0
+TOWNS 900 · CHECKS 48600 (every town × every built cause) · IN-KIND CHECKS 7152 (towns whose live tensions hold the kind)
+NOT BUILT (sim.mjs rows with no built cause): crime_wave:old_crime_wave
+  crime_wave:criminal_power            all towns: sim  18 built  18 disagree   0 · in kind: sim  12 built  12 disagree   0
+  crime_wave:law_thin                  all towns: sim 173 built 173 disagree   0 · in kind: sim  34 built  34 disagree   0
+  crime_wave:rival_rings               all towns: sim 134 built 134 disagree   0 · in kind: sim  71 built  71 disagree   0
+  crime_wave:no_force                  all towns: sim 348 built 348 disagree   0 · in kind: sim  30 built  30 disagree   0
+  crime_wave:force_unpaid_or_cut       all towns: sim 143 built 143 disagree   0 · in kind: sim  20 built  20 disagree   0
+  crime_wave:thieves_house             all towns: sim  99 built  99 disagree   0 · in kind: sim  48 built  48 disagree   0
+  crime_wave:contraband_water          all towns: sim 108 built 108 disagree   0 · in kind: sim  57 built  57 disagree   0
+  crime_wave:underground               all towns: sim 129 built 129 disagree   0 · in kind: sim  68 built  68 disagree   0
+  crime_wave:assassins                 all towns: sim 141 built 141 disagree   0 · in kind: sim  74 built  74 disagree   0
+  crime_wave:black_market              all towns: sim 203 built 203 disagree   0 · in kind: sim 114 built 114 disagree   0
+  crime_wave:whisper_market            all towns: sim 167 built 167 disagree   0 · in kind: sim  85 built  85 disagree   0
+  crime_wave:outlaws_near              all towns: sim  52 built  52 disagree   0 · in kind: sim  40 built  40 disagree   0
+  guild_conflict:old_guild_war         all towns: sim  63 built  63 disagree   0 · in kind: sim  30 built  30 disagree   0
+  guild_conflict:guilds_rule           all towns: sim 151 built 151 disagree   0 · in kind: sim  73 built  73 disagree   0
+  guild_conflict:rival_power           all towns: sim 390 built 390 disagree   0 · in kind: sim  69 built  69 disagree   0
+  guild_conflict:caravans              all towns: sim 161 built 161 disagree   0 · in kind: sim  71 built  71 disagree   0
+  guild_conflict:ships                 all towns: sim 157 built 157 disagree   0 · in kind: sim  70 built  70 disagree   0
+  guild_conflict:crossroads            all towns: sim 159 built 159 disagree   0 · in kind: sim  38 built  38 disagree   0
+  guild_conflict:fair                  all towns: sim 322 built 322 disagree   0 · in kind: sim 166 built 166 disagree   0
+  guild_conflict:trade_center          all towns: sim 218 built 218 disagree   0 · in kind: sim 118 built 118 disagree   0
+  guild_conflict:luxury_quarter        all towns: sim 272 built 272 disagree   0 · in kind: sim 152 built 152 disagree   0
+  resource_scarcity:famine             all towns: sim  21 built  21 disagree   0 · in kind: sim  21 built  21 disagree   0
+  resource_scarcity:sickness           all towns: sim  29 built  29 disagree   0 · in kind: sim  28 built  28 disagree   0
+  resource_scarcity:war_levy           all towns: sim  51 built  51 disagree   0 · in kind: sim  30 built  30 disagree   0
+  resource_scarcity:source_spent       all towns: sim  64 built  64 disagree   0 · in kind: sim   8 built   8 disagree   0
+  resource_scarcity:old_scarcity       all towns: sim 157 built 157 disagree   0 · in kind: sim  15 built  15 disagree   0
+  resource_scarcity:isolated           all towns: sim  64 built  64 disagree   0 · in kind: sim  19 built  19 disagree   0
+  external_threat:war                  all towns: sim  51 built  51 disagree   0 · in kind: sim  26 built  26 disagree   0
+  external_threat:beasts_pressing      all towns: sim  19 built  19 disagree   0 · in kind: sim  19 built  19 disagree   0
+  external_threat:old_threat           all towns: sim 329 built 329 disagree   0 · in kind: sim  35 built  35 disagree   0
+  external_threat:militia_only         all towns: sim  97 built  97 disagree   0 · in kind: sim  17 built  17 disagree   0
+  external_threat:open_road            all towns: sim 159 built 159 disagree   0 · in kind: sim  16 built  16 disagree   0
+  external_threat:beasts_frontier      all towns: sim 420 built 420 disagree   0 · in kind: sim  45 built  45 disagree   0
+  succession_crisis:void               all towns: sim  29 built  29 disagree   0 · in kind: sim  28 built  28 disagree   0
+  succession_crisis:heir_house         all towns: sim 117 built 117 disagree   0 · in kind: sim   7 built   7 disagree   0
+  succession_crisis:outranked          all towns: sim 181 built 181 disagree   0 · in kind: sim  16 built  16 disagree   0
+  succession_crisis:rival_power        all towns: sim 390 built 390 disagree   0 · in kind: sim  30 built  30 disagree   0
+  succession_crisis:contested          all towns: sim 187 built 187 disagree   0 · in kind: sim  25 built  25 disagree   0
+  succession_crisis:old_succession     all towns: sim 383 built 383 disagree   0 · in kind: sim  31 built  31 disagree   0
+  outside_debt:creditors_sit           all towns: sim  30 built  30 disagree   0 · in kind: sim  28 built  28 disagree   0
+  outside_debt:old_crash               all towns: sim 160 built 160 disagree   0 · in kind: sim  17 built  17 disagree   0
+  outside_debt:hard_up                 all towns: sim 282 built 282 disagree   0 · in kind: sim  14 built  14 disagree   0
+  outside_debt:merchants_rule          all towns: sim 151 built 151 disagree   0 · in kind: sim  13 built  13 disagree   0
+  outside_debt:old_debt                all towns: sim  82 built  82 disagree   0 · in kind: sim  13 built  13 disagree   0
+  outside_debt:through_trade           all towns: sim 200 built 200 disagree   0 · in kind: sim  17 built  17 disagree   0
+  great_flood:old_flood                all towns: sim  88 built  88 disagree   0 · in kind: sim   6 built   6 disagree   0
+  great_flood:coast                    all towns: sim 131 built 131 disagree   0 · in kind: sim   4 built   4 disagree   0
+  great_flood:river                    all towns: sim 233 built 233 disagree   0 · in kind: sim  12 built  12 disagree   0
+  legitimacy_crisis:insurgency         all towns: sim  22 built  22 disagree   0 · in kind: sim  19 built  19 disagree   0
+  legitimacy_crisis:creed              all towns: sim  10 built  10 disagree   0 · in kind: sim   9 built   9 disagree   0
+  legitimacy_crisis:crisis_band        all towns: sim 152 built 152 disagree   0 · in kind: sim  17 built  17 disagree   0
+  legitimacy_crisis:outranked          all towns: sim 181 built 181 disagree   0 · in kind: sim  14 built  14 disagree   0
+  legitimacy_crisis:lord               all towns: sim 117 built 117 disagree   0 · in kind: sim  12 built  12 disagree   0
+  legitimacy_crisis:rival_power        all towns: sim 390 built 390 disagree   0 · in kind: sim  27 built  27 disagree   0
+DISAGREEMENTS 0 (in kind 0) · LIVE ROSTER 0 · NOT CATALOGUE 0 · OTHER 0 · NO SIM ROW 0
+exit 0

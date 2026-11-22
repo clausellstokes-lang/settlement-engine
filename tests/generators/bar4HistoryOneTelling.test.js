@@ -6,7 +6,9 @@
  *     districts; a legacy note that dates an event at an age the timeline does not give it; two events each called the one
  *     that made the town), so the detector cannot go blind.
  * (b) THE READ TOWN (C24951, bar0-metropolis-calm-rand-21): red at the base (8aef8e7d46): its wild-magic tension placed the
- *     surge in the merchants' quarter beside its past event's temple district; now both say the temple district.
+ *     surge in the merchants' quarter beside its past event's temple district; now both say the temple district. Since
+ *     PAGE-2 T1 (2026-11-20) the tension's form is one of the canonical and its spares (historyData.js :: tensionWording),
+ *     so its sentence is computed through that module with the event's own place, never quoted (still red at that base).
  * (c) THE ZERO on the record arms (PLACE, DATE) over the census's towns the detector fired in at the base and a stride of
  *     the 720 (every 24th seed), born as the census bears them (CENSUS-3 seedcfg.mjs). The census itself (corpus + dumps,
  *     the SHAPE arm with the page's lines) is the measure over the whole 720 and the fresh 300 (the hand-back's table).
@@ -24,7 +26,8 @@ import { generateSettlementPipeline, regenHistoryPipeline } from '../../src/gene
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { CAPTURE_LINES } from '../../src/data/people/dmPowerLines.js';
-import { LEGITIMACY_HELD_TWINS } from '../../src/data/historyData.js';
+import { HISTORICAL_EVENTS_DATA, LEGITIMACY_HELD_TWINS, historyDescVariantsOf, ownEventPlace, tensionWording } from '../../src/data/historyData.js';
+import { renderHistoryTemplate } from '../../src/generators/historyTemplate.js';
 import { shapeYieldingKey } from '../../src/domain/facts/shapingEvent.js';
 import { generalDeskLines } from '../../src/components/new/generalDeskRead.js';
 import { SEAT_CONTESTED_STANDING } from '../../src/generators/power/factionStanding.js';
@@ -80,7 +83,18 @@ describe('BAR4-HISTORY T1: one past event, one telling', () => {
     const ev = h.historicalEvents.find((/** @type {any} */ e) => e.templateType === 'wild_magic');
     const tn = h.currentTensions.find((/** @type {any} */ t) => t.type === 'wild_magic');
     expect(ev.description).toMatch(/marked the temple district/); // KEEP: the past event's own place
-    expect(tn.description).toBe('An uncontrolled surge of magic left its mark on the temple district and on the people who were there, and the effects have never fully faded');
+    // the surge placed ONCE, in the temple district, and not its own past event's sentence
+    expect(tn.description).toContain('the temple district');
+    expect(tn.description).not.toContain("the merchants' quarter"); // anchored: the same sentence holds 'the temple district' (line above) and is pinned whole by the toBe below
+    expect(tn.description).not.toBe(ev.description);
+    // PAGE-2 T1: the sentence itself, computed through the module: its form on the town's seed, placed where its event was,
+    // and, where that form is the event's own sentence (as here), the first spare that differs (COHERENCE-PRESUME)
+    const place = ownEventPlace('wild_magic', h.historicalEvents);
+    expect(place).toBe('the temple district');
+    const render = (/** @type {string} */ form) => renderHistoryTemplate(form, { '{quarter}': place });
+    const canonical = HISTORICAL_EVENTS_DATA.find((e) => e.type === 'wild_magic')?.description;
+    const chosen = render(tensionWording({ type: 'wild_magic', description: String(canonical) }, { _seed: 'bar0-metropolis-calm-rand-21' }));
+    expect(tn.description).toBe(chosen === ev.description ? historyDescVariantsOf('wild_magic').map(render).find((t) => t !== ev.description) : chosen);
     expect(oneEventOneTellingInstances(born('bar0-metropolis-calm-rand-21'))).toEqual([]);
   });
 

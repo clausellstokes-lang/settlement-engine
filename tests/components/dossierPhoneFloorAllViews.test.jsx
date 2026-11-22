@@ -130,10 +130,10 @@ const EMPTY_VIEWS = Object.freeze({
   // The fixture has no save and no campaign, so it has no chronicle; the empty state is the
   // ruled 17-character sentence (SHORT_PANELS above), below the 45-character measuring bound.
   'Notes/Chronicle': 'no events: a fresh unsaved city, empty state ruled to one fact (BUILD-T3 U4)',
-  // MERGE-WAVE at the GREEN-BASE point (2026-11-08), born at the W4 PEOPLE merge point (measured in clean worktrees: present at
-  // 95f31f192, empty from 0b967e6b3): WAVE-RULINGS #37 (W4's 86a30fdf2) made the daily-life offer the button's CAPTION, not a
-  // body paragraph, and this fixture city has no generated daily life, so the view's one body line left with the ruling.
-  'World/Daily Life': 'no daily life generated: a fresh city whose only line, the offer, is the button caption since WAVE-RULINGS #37 (W4 86a30fdf2)',
+  // 'World/Daily Life' LEFT this list (DAILY-PAGE-1, 2026-11-22, the owner's order: the button goes, the engine's own lines
+  // print by themselves): the view now holds the three engine lines on every walk (its baselines read 4 below), so a Daily
+  // Life page that prints nothing is a silent view again and reds here. (It had stood here since the GREEN-BASE point of
+  // 2026-11-08: WAVE-RULINGS #37 had made the offer the button's caption and the fixture city had no generated account.)
   // 'Systems/Magic' LEFT this list (lane MAGIC, 2026-11-03): the dependence block now draws on the
   // one reliance reading, which this fixture city reads as relied upon, so its stamped title and its
   // static explanation render on the public walk (the DS-DEF-9 corpus line stays gated, §885.3).
@@ -719,7 +719,9 @@ const DESKTOP_BASELINE = Object.freeze({
   // line longer in the fixture; no token moved.
   "World/Relationships": { measured: 176, sub14: 174 },
   "World/Faith":         { measured: 2, sub14: 2 },
-  "World/Daily Life":    { measured: 1, sub14: 1 },
+  // RE-MEASURED 2026-11-22 (DAILY-PAGE-1, the owner's order: the button goes, the engine's lines print): World/Daily Life
+  // measured/sub14 1 -> 4, the three engine lines (dawn work, gathering places, child warnings) at the narrative's FS 13.5.
+  "World/Daily Life":    { measured: 4, sub14: 4 },
   "World/Rumors & News": { measured: 1, sub14: 1 }, // X-7a launch teaser (BUILD-T1 registers it always)
   "World/War":           { measured: 1, sub14: 1 }, // X-7a launch teaser, same
   "World/Traditions":    { measured: 5, sub14: 5 },
@@ -899,7 +901,9 @@ const MOBILE_BASELINE = Object.freeze({
   "World/NPCs":          { prose: 292, chrome: 1, sub14: 0, sub12: 0 },
   "World/Relationships": { prose: 140, chrome: 36, sub14: 36, sub12: 0 },
   "World/Faith":         { prose: 2, chrome: 0, sub14: 0, sub12: 0 },
-  "World/Daily Life":    { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
+  // RE-MEASURED 2026-11-22 (DAILY-PAGE-1): World/Daily Life prose 1 -> 4, the three engine lines at proseFontSize (sub14 0,
+  // sub12 0: every new line clears the floor).
+  "World/Daily Life":    { prose: 4, chrome: 0, sub14: 0, sub12: 0 },
   "World/Rumors & News": { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
   "World/War":           { prose: 1, chrome: 0, sub14: 0, sub12: 0 },
   "World/Traditions":    { prose: 5, chrome: 0, sub14: 0, sub12: 0 },

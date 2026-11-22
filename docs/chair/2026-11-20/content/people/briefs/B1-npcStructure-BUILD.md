@@ -1,0 +1,39 @@
+# PEOPLE-1 builder B1: the person's place in the order (`npcs[].structuralPosition`), built
+
+THE CHAIR'S RULING (16:41 UTC, verbatim): "PEOPLE-LINES structuralPosition (01351d72d): I HAVE READ EVERY WORDING OF `PROPOSAL-structuralPosition.md` and your read of it. APPROVED TO BUILD, with your own strikes and rewrites (the faith's count of houses; the blessing custom struck; the house's agreement) AND FOUR RULINGS OF MINE:
+1. A WORDING MAY NOT SAY THE SEAT IS ACCEPTED OR UNPRESSED UNLESS THE RECORD SAYS SO. In a calm place the standing can still read Contested and the seat's risk Contested (my joint measure today: one calm village and one calm city in six). So in the holder's pools strike the claim and keep the fact: "…and people accept it; the market days run and few complain of the dues." becomes "Holds the seat; the market days run and the dues come in."; "…and people accept it; quarrels that need judging go to the court." becomes "Holds the seat; quarrels that need judging go to the court."; "…and people accept it; there is enough coin for the everyday work, if little over." becomes "Holds the seat; there is enough coin for the everyday work, if little over."; "…and nobody is pressing to take it; there is time to act." becomes "Holds the seat in a quiet season; there is time to act."; "…the place is comfortable, and few begrudge what the seat costs." becomes "Holds the seat in good years; the place is comfortable, and the seat's costs are met."; "…in quiet times the place lets them get on with it." becomes "Holds the seat with the council beside it; in quiet times the work is the ordinary business."; "Holds the seat in lean years; people are patient with it, but they keep count." becomes "Holds the seat in lean years, and every cost it asks is counted."
+2. The old family "whose name is older than the seat itself" claims a history the record does not hold: "Heads an old family whose name still opens doors here."
+3. The casters' "there is steady work for every caster who wants it" becomes "Heads {house} in quiet times; the work is the ordinary run of spellwork."
+4. THE THREE ATOMS ARE ALLOWED (facts the record holds): the card's own house (answered by the card's own `institution`), the export good (`goodExported.js` through the canonical exports), the import good (`criticalImportBroughtIn.js`); appended; send me the three lines as added.
+The pick key (the birth's seed, the field, the card's id; stored at birth), HOLDS_THE_SEAT left bare, every pooled row in scope, the pool id unchanged: all as you propose. BUILD structuralPosition NOW; re-measure"
+
+SCOPE: `structuralPosition` ONLY. `activeConstraint` is NOT built (the chair has not ruled it): leave its write exactly as it is, and build the data file so a later constraint pool can sit beside yours.
+
+THE THREE ATOMS: you append them to `src/domain/facts/factVocabulary.js`, at the END of the list they belong to, touching nothing else in that file (the chair resolves the join), each read from its home (the card's own `institution`; `goodExported.js` / the canonical exports; `criticalImportBroughtIn.js`). Put the three added lines, verbatim, in your final message.
+
+## What you build
+The pools of `PROPOSAL-structuralPosition.md` §4 (in `docs/chair/2026-11-20/content/people/`), AS AMENDED by `READ-M1-npcStructure.md` and the ruling above (where the two disagree, the ruling governs): struck lines stay struck, rewritten lines are written as the read says, wordings needing an atom the chair has not granted are LEFT OUT (listed in your hand-back), never written against a stand-in.
+
+## Files you own (nothing else)
+- `src/data/npcStructureVariants.js` (NEW: `POSITION_VARIANTS`, keyed by the T key; each row `{ text, needs, excludes }` in the house's declared-line shape; index 0 of every pool is today's exact line).
+- `src/generators/npcStructure.js` (read WHOLE first): the `structuralPosition` write in `enrichNPCsWithStructure` chooses through `pickVariant` (`src/kernel/proseHash.js`) over the eligible rows (resolved by `src/domain/facts/drawDeclared.js` against `factsOf(settlement)`, as the template rows are), keyed `'<settlement _seed>::npcStructure.structuralPosition::<card id>'`. A falsy seed takes index 0. No new random draw: the stream is untouched. `holderHouseLineOf`, `HOLDS_THE_SEAT`, `positionForStanding` and every refusal keep their law (the low-standing twin stays bound to index 0).
+- The census declaration file for the new pools (beside `docs/census/declarations/npcStructure.T.json`, one row per wording with its `needs` and `excludes`), and the new data file's row in `tests/lint/presumedThings.shared.mjs`: the presumption walkers green BY DECLARATION, never by an exemption.
+- The seeded text tests that key on a line your change moves, re-keyed BY IDENTITY (the house practice), each named in your commit: `npcStructureBody.test.js` (rpf-town-calm-13), `bar2PeopleTies.test.js` (r2r-village-13, r2r-village-46), `tailTies3Batch1.test.js` (three rows), `bar5PowersStanding.test.js` (bar0-metropolis-calm-rand-21). Any other red that names your field: stop and report.
+- Your new test file(s) under `tests/generators/people/` (basename avoiding the mutation manifest's pattern: census|scan|baseline|ratchet|walker|killlist|parity|coverage|governance|freshness|integrity|exhaustiveness|roundtrip|golden|contract|pin).
+
+NOT YOURS: `src/domain/facts/factVocabulary.js` beyond the three appended atoms above; the `activeConstraint` write; `npcData.js`, anything under `src/generators/power/`, `supabase/`, `src/domain/veil/`, `tests/security/`, `package.json`, `package-lock.json`, every register and census baseline (the integrator re-takes them).
+
+## Red first, then green
+1. RED before your change, GREEN after (commit the test first or show its red in your message): of 30 calm cities (`hxd-city-0..29`), no position sentence on more than 6 of them (today: the calm defaults on most).
+2. A seedless call of `enrichNPCsWithStructure` prints index 0 on every row (canonical-at-zero).
+3. Every printed wording on 100 born places a size: its `needs` hold and its `excludes` do not (read through `drawDeclared`); no calm row's wording appears in a crisis place; the two word guards (`npcStructureSeatPlain`'s MACHINERY and DEFENCE_WORDS; `seatHolderOnThePage`'s SUBORDINATE on the holder) pass over every wording in the data file.
+4. The random stream untouched: `node docs/chair/2026-11-20/content/tools/confinement/trees.mjs <base> <your tip> <workdir>` reads 0 non-string differences; list the strings that move (these two fields and whatever quotes them, e.g. `npcProfile.js :: publicReputation`).
+5. Re-run `docs/chair/2026-11-20/content/people/measures/m1-npcStructure.mjs` against your tree: the top share by size, before and after, in your commit message.
+
+GREEN at your last commit, every run through `sh scripts/gate-mutex.sh --run -- <command>`, read by `sh scripts/gate-tail.sh` (never through a pipe): your tests; every test file that names `npcStructure` or `factVocabulary`; `tests/lint` WHOLE; `npm run typecheck:ratchet`; `npm run typecheck:domain:strict`; `npm run lint`. Never the whole suite; never a census. Reds that are not yours: the generator's golden master (`tests/property/generatorGoldenMaster.test.js`) moves: say which rows, sign none.
+
+## Hand-back
+Commits on `lane/people-1-b1-2026-11-20` (the red test first, then the cure), by explicit paths, the cure's message carrying its receipts (red, green, trees, shares) and ending:
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_019yED1Rzt4qD1sri7MHNbHp
+Never push, never a pull request, never `--no-verify`. Final message at most 250 words: the commits, the shares before and after, the strings that moved, every red you saw and whose it is.
