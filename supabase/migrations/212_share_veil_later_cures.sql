@@ -2020,6 +2020,20 @@ begin
   end if;
   -- registry: power.fingerprint
   s := public._gallery_veil_minus_at(s, '{powerStructure}', array['economyInputFingerprint']);
+  -- registry: power.recentConflict
+  -- registry: power.recentConflict.pressureSentence
+  -- (R5-RECENT; the chair's rulings E92 (1), E93 and E97 (1) of 2026-11-22, THE OTHER WAY, unit (viii)'s pattern for
+  -- safety.crimeTypes: the key itself on no shared read of any place, marked or not, both stored shapes, every door, Reveal
+  -- DM off and on, so its absence tells nothing; the page re-derives the sentence from the served document by the engine's
+  -- own writer, pageRederive.js :: rederiveRecentConflict. And its copy: the top-level pressureSentence wherever it EQUALS
+  -- the stored recentConflict (the generator's fallback, narrativeGenerator.js :: generatePressureSentence), judged on the
+  -- document as passed in, before the key leaves; a fact of how the place was written, not of what is hidden; the page
+  -- does not re-fill it in this unit)
+  if jsonb_typeof(doc -> 'powerStructure') = 'object' and jsonb_typeof(doc #> '{powerStructure,recentConflict}') = 'string'
+     and jsonb_typeof(s -> 'pressureSentence') = 'string' and (s -> 'pressureSentence') = (doc #> '{powerStructure,recentConflict}') then
+    s := s - 'pressureSentence';
+  end if;
+  s := public._gallery_veil_minus_at(s, '{powerStructure}', array['recentConflict']);
   -- registry: power.contestsNiche
   -- registry: power.rawPower
   -- registry: power.factions.legitimacyCrisis

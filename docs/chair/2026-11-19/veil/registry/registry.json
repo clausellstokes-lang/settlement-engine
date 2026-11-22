@@ -310,6 +310,11 @@
     "by": "src/generators/factionDynamics.js :: computePublicLegitimacy"
   },
   {
+    "path": "^powerStructure\\.recentConflict$",
+    "rule": "withhold",
+    "by": "src/generators/power/governanceNarrative.js :: buildGovernanceLabels"
+  },
+  {
     "path": "^powerStructure\\.stability$",
     "rule": "recompose",
     "by": "src/generators/power/governanceNarrative.js :: deriveBaselineStability"
