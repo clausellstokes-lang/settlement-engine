@@ -148,3 +148,9 @@ it; the lit law only moves shares. NOT the lit law's; not the holder put first.
 | ALL | 3,765 | 43,183 | 204 | 54 | 150 | 146 | 1 | 2 |
 NO GOLDEN AND NO REFERENCE among the 150: the golden master's rows are red at the line already (RED-AT-LINE, the
 owner's), and stay red lit; THE LIT GOLDEN CORPUS (births through `birthConfig`, beside the old) is not yet made.
+
+## EXPECTED MOVES ADDED AFTER THE REHEARSAL (CLOSE-2)
+- (2026-11-22 18:39 UTC, the chair's E113) THE SEAT'S CONTENDER TIED TO THE RULER: the lit laws lift the pages whose FIRST
+  printed contender is the ruler's dependent or symbiotic partner (the web's own bargain kinds) from 280 to 378 of 900
+  (with subordinate: 408 to 438); pages printing a contender 640 to 622. EXPECTED, NOT A SURPRISE: the page's habit since
+  PR #72 (fddb437de), the owner's question after the first deploy (`close-2/contender/CONTENDER-MEASURE.md`).
