@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "5383c309f4476597fc4f881b22a1c31cd2d31c65",
-  "measuredBy": "LASTCLOSE-DOORS",
-  "date": "2026-11-19",
-  "note": "LASTCLOSE-DOORS (2026-11-19, the last close), at the base cc11c9504's landings: the dependents moved, no tuning value: src/domain/people/allegiance.js#ALLEGIANCE_TUNING gains src/generators/power/factionStanding.js (K-POWERS, points 48/49/57, ed176ed08)",
+  "measuredAtSha": "b0f759b3cf46f37b54f7daaf6dc9758edf4f56ed",
+  "measuredBy": "PEOPLE-1 (lane/people-1-2026-11-20)",
+  "date": "2026-11-20",
+  "note": "dependents moved, no value moved: npcStructure.js imports the goals fillers (fillLine, houseFill, resourceFill)",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1291,7 +1291,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 385,
+      "line": 400,
       "spanDigest": "861a71e24fdda07cea9d8f740fbe51ca1685d27dfd0a9f822f579ea609747fe2",
       "leaves": {
         "value": 0.15
@@ -1306,7 +1306,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 616,
+      "line": 631,
       "spanDigest": "d8c363dde6af24802c24ec308fde1963fd20f88ef9f80765dbeb6bd7c6899e55",
       "leaves": {
         "value": 3
@@ -1321,7 +1321,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 618,
+      "line": 633,
       "spanDigest": "61090f7451b7f2aadae1709fa76edc9f360ae61664c9f8fd48b677a1e8ecfa07",
       "leaves": {
         "value": 0.35
@@ -1336,7 +1336,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 620,
+      "line": 635,
       "spanDigest": "0b8b01d51be797cd0143574956002d9faabb6345790cafa0a91e78f63118f528",
       "leaves": {
         "value": 0.08
@@ -1351,7 +1351,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 622,
+      "line": 637,
       "spanDigest": "013116d8a083862271257454b6e161900d075e0a05df61a52dfd7e61938389e3",
       "leaves": {
         "value": 0.15
@@ -8569,7 +8569,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 3,
-      "line": 69,
+      "line": 70,
       "spanDigest": "9ce244b1dbb17502d5534d5ea33f9f9bafe8cec4c191d4f934be6e6673dbba1e",
       "leaves": {
         "base.RANK": 1,
@@ -8599,7 +8599,8 @@
       },
       "dependents": [
         "src/generators/generateSettlementPipeline.js",
-        "src/generators/narrativeGenerator.js"
+        "src/generators/narrativeGenerator.js",
+        "src/generators/npcStructure.js"
       ],
       "namedDependents": []
     },
@@ -8607,7 +8608,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 5,
-      "line": 94,
+      "line": 95,
       "spanDigest": "9959eec349933f6bf2320b936780466dfea07d1f4bedbbed8da671fd806ce7ab",
       "leaves": {
         "strengthFull": 30,
@@ -8633,7 +8634,8 @@
       },
       "dependents": [
         "src/generators/generateSettlementPipeline.js",
-        "src/generators/narrativeGenerator.js"
+        "src/generators/narrativeGenerator.js",
+        "src/generators/npcStructure.js"
       ],
       "namedDependents": []
     },

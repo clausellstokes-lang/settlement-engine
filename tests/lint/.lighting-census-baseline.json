@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "9e0c2816f8b6f9011ab7cb29dccdb5e2862f3ed0",
-  "measuredBy": "PAGE-12",
+  "measuredAtSha": "6d581ce5b33c1dcd2bd5968f14258294f3707398",
+  "measuredBy": "landing-stack-92",
   "date": "2026-11-22",
-  "note": "the working line 5fca4362d (point 91) merged into the trouble lane (06609c703)",
-  "files": 3744,
-  "parked": 479,
-  "credited": 3265,
-  "titles": 31637,
-  "suiteTitles": 8768
+  "note": "points 92 and 93: the sameness join and the people lane's first half landed (their test files), and the phone chrome floor's re-record",
+  "files": 3741,
+  "parked": 478,
+  "credited": 3263,
+  "titles": 31570,
+  "suiteTitles": 8751
 }

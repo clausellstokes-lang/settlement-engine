@@ -1,0 +1,665 @@
+{
+  "pool": {
+    "id": "npcStructureVariants.POSITION_VARIANTS",
+    "file": "src/data/npcStructureVariants.js",
+    "drawKind": "H",
+    "drawSite": "npcStructure.js :: pooledLineOf — filterDeclared over POSITION_VARIANTS[<T key>] (ledger pool id NPC_STRUCTURE.<T key>), then kernel/proseHash.js pickVariantMixed over [index 0, ...admitted rows whose slots fill], keyed `<_seed>::npcStructure.structuralPosition::<card id>`",
+    "colour": false,
+    "crisisScoped": false,
+    "keyDeclares": {},
+    "aliases": {
+      "crafts__stable__dominant": "economy__stable__dominant",
+      "crafts__stable__subordinate": "economy__stable__subordinate",
+      "other__corruption__dominant": "other__stable__dominant",
+      "other__food_crisis__dominant": "other__stable__dominant",
+      "other__economic_stress__dominant": "other__stable__dominant",
+      "other__contested__dominant": "other__stable__dominant"
+    },
+    "lines": 59,
+    "declaring": 53,
+    "note": "PEOPLE-1 B1 (2026-11-20; the chair's ruling of 16:41 UTC on PROPOSAL-structuralPosition.md, as amended by READ-M1-npcStructure.md). Index 0 of every pool is the writer's own T position line, and its one home is the writer's table (npcStructure.T.json `<key>.position`): PEOPLE-1 B1c (the chair's ruling of 20:30 UTC) took it out of the data pools, and pooledLineOf composes [the T row, ...the pool] for every key, so this ledger holds the siblings only, each keeping its composed index in its id. `own house`, `export good`, `import good` are the three atoms of the chair's ruling 4. Rows id `<T key>.position.<index>`; the aliases are T keys that read another key's pool."
+  },
+  "rows": [
+    {
+      "id": "government__stable__dominant.position.1",
+      "text": "Holds the seat with the council beside it; in quiet times the work is the ordinary business.",
+      "needs": [
+        "ruling body"
+      ],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__stable__dominant.position.2",
+      "text": "Holds the seat; the market days run and the dues come in.",
+      "needs": [
+        "market"
+      ],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__stable__dominant.position.3",
+      "text": "Holds the seat; quarrels that need judging go to the court.",
+      "needs": [
+        "court sits"
+      ],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__stable__dominant.position.4",
+      "text": "Holds the seat, and in a place this small everyone knows it; most quarrels end at its door.",
+      "needs": [
+        "population: small"
+      ],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__stable__dominant.position.5",
+      "text": "Holds the seat in good years; the place is comfortable, and the seat's costs are met.",
+      "needs": [
+        "prosperity: ≥ comfortable"
+      ],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__stable__dominant.position.6",
+      "text": "Holds the seat; there is enough coin for the everyday work, if little over.",
+      "needs": [
+        "prosperity: moderate"
+      ],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__stable__dominant.position.7",
+      "text": "Holds the seat while the place sends out {export} and coin comes back; there is room to act.",
+      "needs": [
+        "export good"
+      ],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__stable__dominant.position.8",
+      "text": "Holds the seat in a quiet season; there is time to act.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__stable__dominant.position.1",
+      "text": "Commands {house} in quiet times: the drill, the roster and the gear kept ready.",
+      "needs": [
+        "own house"
+      ],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__stable__dominant.position.2",
+      "text": "Commands those under arms in quiet times; the walls are walked, and little more is asked.",
+      "needs": [
+        "walls"
+      ],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__stable__dominant.position.3",
+      "text": "Commands those under arms in quiet times; most days the work is the market crowds and the odd brawl.",
+      "needs": [
+        "market"
+      ],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__stable__dominant.position.4",
+      "text": "Commands those under arms in a large place at peace; the work is many small quarrels, not one big one.",
+      "needs": [
+        "population: large"
+      ],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__stable__dominant.position.5",
+      "text": "Keeps those under arms ready in a quiet season; nothing calls on them but routine.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__stable__dominant.position.6",
+      "text": "Commands those under arms while the place is quiet; the work is the rounds, the roll and the pay.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "military__stable__dominant.position.7",
+      "text": "Commands those under arms in quiet times; the hard part is keeping idle hands sharp.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__stable__dominant.position.1",
+      "text": "Leads the faith from {house}; in quiet times the work is the services, the feast days and the burials.",
+      "needs": [
+        "own house"
+      ],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__stable__dominant.position.2",
+      "text": "Leads the faith across a large place, where its people are too many for one priest to know.",
+      "needs": [
+        "population: large",
+        "church"
+      ],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__stable__dominant.position.3",
+      "text": "Leads the faith in a small place, where the priest knows every family by name.",
+      "needs": [
+        "population: small",
+        "church"
+      ],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__stable__dominant.position.4",
+      "text": "Leads the faith in an ordinary year: services, feast days, weddings and burials.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__stable__dominant.position.5",
+      "text": "Leads the faith while the place is at peace; the work is the round of services and the needs of the poor.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__stable__dominant.position.6",
+      "text": "Leads the faith in a settled season, with no crisis to call the faithful together.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__stable__subordinate.position.1",
+      "text": "Keeps {house} going in quiet times, a smaller house behind the leading one in the trade.",
+      "needs": [
+        "own house"
+      ],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__stable__subordinate.position.2",
+      "text": "Runs a smaller house behind the leading one, in a place that sends out {export}.",
+      "needs": [
+        "export good"
+      ],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__stable__subordinate.position.3",
+      "text": "Runs a smaller house in the trade, second to the leading one, in a steady season.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__stable__subordinate.position.4",
+      "text": "Runs one of the many smaller houses of a large place, behind the leading one in the trade.",
+      "needs": [
+        "population: large"
+      ],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__stable__subordinate.position.5",
+      "text": "Runs a smaller house behind the leading one; it keeps its own regulars on market days.",
+      "needs": [
+        "market"
+      ],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__stable__subordinate.position.6",
+      "text": "Runs a smaller house in the guild, behind the leading one, in a steady season.",
+      "needs": [
+        "guild"
+      ],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__stable__dominant.position.1",
+      "text": "Heads {house}, the leading house in the trade, in a steady season.",
+      "needs": [
+        "own house"
+      ],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__stable__dominant.position.2",
+      "text": "Heads the leading house in a trade that sends {export} out of the place.",
+      "needs": [
+        "export good"
+      ],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__stable__dominant.position.3",
+      "text": "Heads the leading house in the trade of a large place, with many smaller houses behind it.",
+      "needs": [
+        "population: large"
+      ],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "economy__stable__dominant.position.4",
+      "text": "Heads the leading house in the trade while business is steady and no one presses it.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__stable__subordinate.position.1",
+      "text": "Keeps {house} for the seat, day to day, with no crisis to answer.",
+      "needs": [
+        "own house"
+      ],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__stable__subordinate.position.2",
+      "text": "Holds a post under the council; the work is the daily round, and the round is quiet.",
+      "needs": [
+        "ruling body"
+      ],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__stable__subordinate.position.3",
+      "text": "Holds a small post of the seat and does its daily work; nothing out of the ordinary is asked of it.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__stable__subordinate.position.4",
+      "text": "Holds a post of the seat whose busiest days are market days.",
+      "needs": [
+        "market"
+      ],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__stable__subordinate.position.5",
+      "text": "Holds a post of the seat in good years, when the work is steady and the purse sound.",
+      "needs": [
+        "prosperity: ≥ comfortable"
+      ],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__stable__dominant.position.1",
+      "text": "Heads {house} in quiet times; the work is the ordinary run of spellwork.",
+      "needs": [
+        "own house"
+      ],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__stable__dominant.position.2",
+      "text": "Heads the casters of a large place, where there is call for spells every day.",
+      "needs": [
+        "population: large"
+      ],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__stable__dominant.position.3",
+      "text": "Heads the casters in good years, when people can afford to pay for spellwork.",
+      "needs": [
+        "prosperity: ≥ comfortable"
+      ],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "magic__stable__dominant.position.4",
+      "text": "Heads the casters in a quiet season; the work is the ordinary run of charms and wards.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__stable__dominant.position.1",
+      "text": "Heads an old family whose name still opens doors here.",
+      "needs": [],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "other__stable__dominant.position.2",
+      "text": "Heads an old family among many in a large place, where an old name opens doors but does not rule.",
+      "needs": [
+        "population: large"
+      ],
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__governance_fractured__dominant.position.1",
+      "text": "Holds the seat, but the council no longer moves when it asks, and some orders go unanswered.",
+      "needs": [
+        "ruling body"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__governance_fractured__dominant.position.2",
+      "text": "Holds the seat in name; in a place this small everyone sees who no longer comes when called.",
+      "needs": [
+        "population: small"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__governance_fractured__dominant.position.3",
+      "text": "Holds the seat in name; when it calls the neighbours out, fewer come than used to.",
+      "needs": [
+        "militia"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__governance_fractured__dominant.position.4",
+      "text": "Holds the seat, but its word now carries only as far as people choose to let it.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__economic_stress__dominant.position.1",
+      "text": "Holds the seat while money is short, in a place that lives on what it gets for its {export}.",
+      "needs": [
+        "export good"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__economic_stress__dominant.position.2",
+      "text": "Holds the seat while money is short, and {import} must still be bought in at whatever it costs.",
+      "needs": [
+        "import good"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__economic_stress__dominant.position.3",
+      "text": "Holds the seat in a small place gone short of coin, where everyone knows what has gone unpaid.",
+      "needs": [
+        "population: small"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__economic_stress__dominant.position.4",
+      "text": "Holds the seat while money is short, and every council meeting comes back to the same few coins.",
+      "needs": [
+        "ruling body"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__economic_stress__dominant.position.5",
+      "text": "Holds the seat in lean years, and every cost it asks is counted.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__economic_stress__dominant.position.1",
+      "text": "Leads the faith from {house} while money is short, and more people come to its door for alms.",
+      "needs": [
+        "own house"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__economic_stress__dominant.position.2",
+      "text": "Leads the faith in a small place gone short of coin, where the priest knows which households are going without.",
+      "needs": [
+        "population: small",
+        "church"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__economic_stress__dominant.position.3",
+      "text": "Leads the faith through lean years, when people lean on it more and give it less.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__governance_fractured__dominant.position.1",
+      "text": "Leads the faith while the seat fails; more disputes now end at {house} than at the seat's door.",
+      "needs": [
+        "own house"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__governance_fractured__dominant.position.2",
+      "text": "Leads the faith while fewer heed the seat, and more ask the faith to settle what the seat once did.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__contested__dominant.position.1",
+      "text": "Leads the faith from {house} while many doubt the seat's right; both sides listen for what is said there.",
+      "needs": [
+        "own house"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "religious__contested__dominant.position.2",
+      "text": "Leads the faith while the seat's right is in doubt, and people wait to hear which way it leans.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "government__contested__dominant.position.1",
+      "text": "Holds the seat while many question its right, and the questions are asked openly.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    }
+  ]
+}
