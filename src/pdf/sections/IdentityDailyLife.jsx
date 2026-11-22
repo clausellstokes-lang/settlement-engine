@@ -28,6 +28,7 @@ import { architecturalDetailRefused, resolveCultureProfileKey } from '../../data
 import { foodWordShown } from '../../domain/display/foodWordShown.js';
 import { cultureOnPage } from '../lib/cultureOnPage.js';
 import { cultureScopeLine } from '../../domain/summary/settlementQuickGuide.js';
+import { deriveDailyLifeSlot, DAILY_LIFE_EMPTY_SLOT_TEXT, DAILY_LIFE_PAGE_SLOTS } from '../../domain/dailyLife.js';
 
 export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse }) {
   const id = vm.identity;
@@ -40,6 +41,7 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
   // generated notes in a town or larger only, each held to its declarations; the user's own notes always).
   const cultureBlock = cultureOnPage(settlement, a.culturalNotes);
   const scopeLine = cultureScopeLine(settlement); // the Overview's identity line (ruling (i)), never the profile's raw scope
+  const dailyLines = dailyLifeLinesOf(settlement); // the Daily Life tab's own lines (DAILY-3 U4c, the chair's E59)
 
   const founded = foundingLabel(id.founding);
   const idRows = [
@@ -231,12 +233,17 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
           plat to read; no text surface prints a quarter's name. tests/pdf/quartersNotPrinted.test.jsx */}
 
       {/* ── Daily Life ───────────────────────────────────────── */}
-      {(d.hasPassages || d.foodBalance) && (
+      {(dailyLines.length > 0 || d.hasPassages || d.foodBalance) && (
         <View style={{ marginTop: space.sm }}>
           <HairRule />
           <Text style={{ ...type.label, color: accent, fontSize: pt['8'], marginBottom: 3 }}>
             DAILY LIFE
           </Text>
+          {dailyLines.map((line, i) => (
+            <Text key={`dl-${i}`} style={{ ...type.prose, fontSize: pt['9.5'], marginBottom: space.xs }}>
+              {line}
+            </Text>
+          ))}
           {d.hasPassages ? (
             d.passages.map((p, i) => (
               <View key={`p-${i}`} style={{ marginBottom: space.sm }} wrap={false}>
@@ -287,6 +294,25 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
 }
 
 // ── Sub-components ─────────────────────────────────────────────
+
+/**
+ * THE DAILY LIFE TAB'S OWN LINES (DAILY-3 U4c, the chair's E59 of 2026-11-22): the page's public slots in the page's
+ * order (`domain/dailyLife.js :: DAILY_LIFE_PAGE_SLOTS`, the one home the tab reads too), each from the one derivation
+ * (`deriveDailyLifeSlot`), derived HERE from the record the chapter is handed and never in `lib/viewModel.js`. NO
+ * audience is passed: the owner-only `commoner_resentments_dm` never prints in this document. A slot whose text is
+ * empty or the empty marker prints nothing (the tab's own rule). tests/pdf/dailyLifeChapterLines.test.jsx
+ * @param {any} settlement @returns {string[]}
+ */
+function dailyLifeLinesOf(settlement) {
+  /** @type {string[]} */ const out = [];
+  if (!settlement) return out;
+  for (const key of DAILY_LIFE_PAGE_SLOTS) {
+    const slot = deriveDailyLifeSlot(key, settlement);
+    const sentence = typeof slot?.text === 'string' ? slot.text.trim() : '';
+    if (sentence && sentence !== DAILY_LIFE_EMPTY_SLOT_TEXT) out.push(sentence);
+  }
+  return out;
+}
 
 // The foodways sentence has ONE home: the food record's line, read through the one reader
 // (domain/foodways.js :: foodwaysLineOf, FOOD-4). The culture's authored line is printed only

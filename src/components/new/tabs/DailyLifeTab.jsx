@@ -5,7 +5,7 @@ import { sans } from '../Primitives';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { extractSettlementContext } from '../dailyLifeLogic';
-import { deriveDailyLifeSlot, DAILY_LIFE_EMPTY_SLOT_TEXT } from '../../../domain/dailyLife.js';
+import { deriveDailyLifeSlot, DAILY_LIFE_EMPTY_SLOT_TEXT, DAILY_LIFE_PAGE_SLOTS } from '../../../domain/dailyLife.js';
 import { useStore } from '../../../store/index.js';
 import { economyDeskRead } from '../economyDeskRead.js';
 import { DeskLines } from './EconomicsGlance.jsx'; // the shared position renderer (see its docblock)
@@ -52,7 +52,7 @@ const STRESS_LABELS = {
  * automatically"): the engine's own Daily Life lines, in the order the page prints them. The other five slots join when
  * built.
  */
-const ENGINE_SLOTS = ['dawn_work', 'gathering_places', 'child_warnings'];
+const ENGINE_SLOTS = DAILY_LIFE_PAGE_SLOTS; // the one home of the order (domain/dailyLife.js), read by the PDF's chapter too
 
 export function DailyLifeTab({ settlement: r, _aiSettlement, publicDossier = false, playerView = false }) {
   const mobile = useIsMobile();
