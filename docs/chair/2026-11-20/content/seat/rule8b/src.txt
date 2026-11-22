@@ -1,0 +1,10 @@
+src/components/new/tabs/power/PowerStrata.jsx
+src/data/seatHolderLines.js
+src/domain/coherence/seatHolderFindings.js
+src/domain/dossier/powerStrata.js
+src/domain/rulingPower.js
+src/generators/factionDynamics.js
+src/generators/generateSettlementPipeline.js
+src/generators/power/claimStanding.js
+src/generators/power/factionStanding.js
+src/generators/power/rulingStructure.js

@@ -39,6 +39,7 @@ import { leaderlessLineOf } from '../../../../domain/people/stressPowerFaces.js'
 import { RANK_WORD } from '../../../../domain/people/cardPowers.js';
 import { entityIdFor } from '../../../../domain/dossier/entityLinks.js';
 import { chromeFontSize, proseFontSize } from '../../../../design/proseScale.js';
+import { powerNameInProse } from '../../../../domain/display/governanceAccount.js';
 
 // The parchment seam between flush cards. Imported (never a re-declared hex) so
 // it tracks the design token — the forked-color rule.
@@ -191,6 +192,13 @@ export function ThePowers({ settlement, powers, factionSupport, showCoupChip = t
                     ORDER the weight decides; they no longer get the weight. */}
                 {hasSupport && <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, flexShrink: 0 }}>{isExp ? '▲' : '▼'}</span>}
               </div>
+              {/* U7 (the chair's E70, item 4, the chair's wording): the holder's card names the form whose seat it holds,
+                  only where the holder stands apart from the form (`seatOf`; never for a holder veiled to the reader) */}
+              {isRuler && p.seatOf && (
+                <div data-testid="power-seat-of" style={{ fontSize: proseFontSize(FS.xxs, mobile), color: MUTED, padding: '0 10px 8px 13px', lineHeight: 1.4 }}>
+                  {`Holds the seat of ${powerNameInProse(p.seatOf)}.`}
+                </div>
+              )}
 
               {isExp && hasSupport && (
                 <div id={`power-card-${i}-detail`} style={{ padding: '2px 12px 10px 14px', background: swatch['#FAF8F4'] }}>

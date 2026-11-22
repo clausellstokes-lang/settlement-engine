@@ -11,7 +11,12 @@
  *
  *   seat_unfilled                  a governing faction, no claimant vacancy, and
  *                                  nobody seated.
- *   seat_outside_governing_faction the seated person is filed under another faction.
+ *   seat_outside_governing_faction the seated person is filed under another faction. UNDER THE SEAT LAW (U7, the
+ *                                  chair's E70 item 3, read with E77), where the chain's faction is a holder
+ *                                  apart from the form (`rulingChainOf`), the person may be of the HOLDER or
+ *                                  of the form: the chain names the record's hat-wearer, who holds the form's
+ *                                  first place (at a birth held by kind, the form's own; after a transfer, the
+ *                                  holder's first, `rulingPower.js :: transferRulingPower`).
  *   seat_stand_in                  the seated person, or a seat-titled member of the
  *                                  governing faction, is an unnamed office stand-in.
  *   seat_contested                 a second named member of the governing faction
@@ -26,6 +31,7 @@ import { rulingChainOf, liveSeatCandidatesOf } from '../dossier/powerStrata.js';
 import { seatTitleRankOf, isOfficeStandIn } from '../dossier/seatHolder.js';
 import { npcInFaction, ladderFactionKey } from '../worldPulse/npcLadderFactionMembership.js';
 import { rankIn } from '../people/membership.js';
+import { seatsByHolder } from '../seat/seatLaw.js';
 
 /** @typedef {import('../dossier/seatHolder.js').SeatSettlement} SeatSettlement */
 /** @typedef {import('../dossier/seatHolder.js').SeatNpc} SeatNpc */
@@ -71,8 +77,14 @@ export function seatHolderFindings(settlement) {
   }
   const seatName = chain.npc.name;
   const seated = rows.find(({ npc }) => npc.name === seatName);
-  if (seated && !inGov(seated.row)) {
-    findings.push({ code: 'seat_outside_governing_faction', detail: `${seatName} is not of ${govName}` });
+  // U7: under the seat law the seat's house is the chain's faction where it is a holder apart from the form
+  const holder = seatsByHolder(settlement) && chain.faction && chain.faction.name !== govName
+    ? factions.find((f) => !!f && f !== governing && nameOf(f) === chain.faction?.name) || null : null;
+  const inHouse = holder
+    ? (/** @type {Record<string, unknown>} */ row) => inGov(row) || npcInFaction(row, holder, ladderFactionKey(holder), factions)
+    : inGov;
+  if (seated && !inHouse(seated.row)) {
+    findings.push({ code: 'seat_outside_governing_faction', detail: `${seatName} is not of ${holder ? nameOf(holder) : govName}` });
   }
   if (seated && isOfficeStandIn(seated.npc) && !findings.some((f) => f.code === 'seat_stand_in')) {
     findings.push({ code: 'seat_stand_in', detail: `${seatName} is an office stand-in` });
