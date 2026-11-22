@@ -39,16 +39,24 @@ verified by ls-remote).
   chair 07:1x: (1) the pool caches served signatures: the seat re-makes it on the cured tree in a NEW directory before the
   gates (recommended: accept); (2) one control (village-under_siege-0-8, g:010): the stored list carries two shut groupings'
   content; recommended: the reader's list over the served page governs. BOTH RULED 07:19 (ruling 88).
-- THE BRIEF AMENDED for a FRESH builder R3-TELL-8b (steps 2 and 3; `briefs/R3-TELL-8-BRIEF.md` head; galleryVeil.js's
-  GROUPING_OPEN_EVIDENCE and the shared PDF added to the manifest): worktree `/home/user/wt/r3tell8b`, branch `v32-r3tell8b`;
-  IN FLIGHT (resumed 07:2x, mark 600,000; committing at every standing step): its work is pushed as
-  `lane/veil-32-2026-11-22-r3tell8b-wip` (at 85a8c6562 at 07:36: its read-whole STOP note only; a successor fetches the
-  worktree branch `v32-r3tell8b` from that name). If this seat stops, the latest commits go up there unread.
+- UNIT (viii) BUILT by R3-TELL-8b (resumed with its mark at 600,000; it read 212, the registry and galleryRosterChoices.js
+  WHOLE): `lane/veil-32-2026-11-22-r3tell8b-wip` at e716c84d6 (worktree `/home/user/wt/r3tell8b`, branch `v32-r3tell8b`).
+  Reds c325d9e59 + bb8de9df3 (the census walker), dcf6f4514 (the arm, `out/v32/tell8b/measure/arm.sh`), dc4ec187a
+  (`galleryVeilTell8.pglite`), 576e1123a (the evidence and its converse); cure 5c727f4b3 (212 + twin: crimeTypes withheld
+  always, the R3 attribution block gone, the merchant-army hook by `merchantArmy`), 977518282 (the ONE reader
+  `pageRederive.js :: rederiveCrimeTypes`, wired in rederiveForPage and importRederive; GROUPING_OPEN_EVIDENCE narrowed to
+  criminalInstitutions), dbdf45ac0 (two neighbouring suites read ruling (b), not VR29). Builder's figures: arm 0/92 (HALF 1
+  0/6,528, HALF 2 0, controls 0/48, hook 0); ruling 88 moves 4 of 6,528 pages (all g:010); tests/lint whole = the sixteen;
+  typecheck 167/167; first paint raw unchanged, gzip +20 / Brotli -105 by re-hashed lazy-chunk names (ASKED of the chair
+  10:2x, recommended: no rise). THE SEAT READ THE DIFF WHOLE ONCE with 212 and the registry beside it: no fault. NOT YET
+  MERGED: the seat's re-runs (`/var/tmp/v18/out/v32/u8/chain8.sh`: the reds at bb8de9df3, the greens, the arm, the build,
+  the NEW POOL `/var/tmp/v18/t2/pool-t2sig-3` re-read from pool-t2sig-2's births on the cured tree, both gates, the R3 gate,
+  tests/lint whole) running from 10:2x. 212 at the cure: changed (sha256 in `out/v32/u8/sha256.txt` when the chain ends).
 - VEIL-33 (ruling 91) is seated beside this seat: the join probe and the preparation of (iv), (v), (vi) are its; 212, the twin
   and the registry are written by THIS seat alone until "HAND-OVER <commit>". 212 LAST CHANGED at 8807cde93 (unit (iii), the
   capture key where the served crime signal is false): `8688ddb6…5a3a`; no change by this seat yet.
-- NEXT STEP IN ONE LINE (A SUCCESSOR STARTS HERE): R3-TELL-8b seated on the amended brief (steps 2-3);
-  at its return: diff read once with 212 and the registry, reds and greens re-run, the pool RE-MADE on the cured tree in a NEW
+- NEXT STEP IN ONE LINE (A SUCCESSOR STARTS HERE): chain8's done.txt read; if every figure holds, merge `v32-r3tell8b` (--no-ff),
+  re-run the pool RE-MADE on the cured tree in a NEW
   directory (the old kept until the new counts are in), both gates, one line to the chair; then (iv), (v), (vi) per R3-TELL-5's
   brief; then "R3 <commit>".
 
@@ -124,6 +132,7 @@ verified by ls-remote).
 - 05:22 chain0 launched (npm ci 0; ledger 0); after0 waits to run chain1. First message to the chair.
 - 05:27 the (viii) builder seated; 05:3x the chair's two messages (VEIL-31's 9fd3623c5) read after the first push: merged (docs only), rulings renumbered 86; pushed 3cca025b8.
 - 05:56 the pool stands. 06:04 the gates at the tip reproduced; 06:05 the line to the chair.
+- 10:1x R3-TELL-8b returned (unit (viii) built); its diff read whole once; chain8 launched (a glob that matched nothing would have run the whole suite: the chain stopped at 10:17 before that line and was relaunched without it); the first-paint question to the chair.
 - 07:46 ruling 89 read; the probe's needs and the count sent.
 - 07:2x R3-TELL-8b stopped after the read-whole (212, the registry, galleryRosterChoices.js whole: four fifths of its 250,000 mark; 85a8c6562, docs only: edit points listed); RESUMED with its mark raised to 600,000 (it holds the three reads; a fresh builder would spend them again): sitting A (the reds) then B (the cure).
 - 07:22 the chair's 07:19 ruling (88) read; the brief amended with it; R3-TELL-8b seated.
