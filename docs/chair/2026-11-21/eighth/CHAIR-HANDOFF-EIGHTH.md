@@ -686,6 +686,33 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   four seats to spend little was not: it cost PAGE-12 and PAGE-13 about forty minutes each. The owner had to say it
   again. Rule 1 as amended on 2026-11-08 18:01 also answers the count of seats: "any number", "bounded by work that
   lands without rework". Told to the owner by name in the chair's next message.
+- E51 · THE HOOK POOL'S SECOND TRANCHE: FIVE LINES RE-RULED AT THE BUILDER'S STOP, AND ARM 1c (2026-11-22 08:05 UTC; it amends E37). PAGE-12's
+  builder stopped before its first commit: measured on the births, `crime_wave` is born from THORP (13 of 150) and
+  `guild_conflict` from HAMLET, and four lines named a thing such a place does not hold (a smith: 0 of 30 thorps; a
+  shop: 0 of 30; "two masters"; a workshop) and one reds the presumption walker ("A traveller has come"). RULED:
+  guild 3: "A labourer out of work has offered himself to whichever side pays better, and both sides are bidding" ·
+  guild 4: "A household that sided with neither has had its door marked in the night, and wants to know by whom" ·
+  crime 8: "A family's coin box grows lighter a little at a time, and they suspect one of the three people who come
+  and go from the house" (the seat's three, as proposed) · guild 1, THE CHAIR'S (the seat proposed "the same carter":
+  a carter is a trade a hamlet may not hold): "Both sides of the quarrel have asked to borrow the same cart for the
+  same morning, and its owner will not say whom he promised first" · crime 2, THE CHAIR'S (the seat proposed house
+  keys, which presume locks in a thorp): "Things taken without asking keep coming back a day later, and one household
+  has started to wonder what they were used for". guild 9 RELEASED AS WRITTEN: THE POOL IS 24 OF 24, NONE HELD. ON
+  CONDITION: the five through the walkers and the seat's noun check at each kind's smallest size; the other nineteen
+  through the same noun check. ARM 1c OF `troubleHooksPools.test.js`: ASSENT: each composed pool BEGINS with its
+  7903d6bb7 pool, element for element, and what follows are the table's last rows in order (append-only); its title
+  re-worded; two plants red (a line spliced among the old ids; an old line removed). The landing line names what
+  the grown pools move in stored outputs (the owner's to sign).
+- E52 · THE SECURITY READER IS SEATED EARLY, FOR ITS INSTRUMENTS ONLY: REVIEW-VEIL-15 (2026-11-22 08:05 UTC; `prompts/REVIEW-VEIL-15.txt`).
+  REVIEW-VEIL-14 was written for the earlier account and never pushed (no branch on origin). The seventh chair's
+  own order for a reader was (a) build the chain and prove ONE probe bites, (b) WAIT unspent for "R3 <commit>": (a)
+  is done NOW so that it is off the tail; nothing of the lane is read before R3 (the reader stays fresh). WITH R3
+  THE CHAIR SENDS: the LOWER towns by name; THE READER'S LIST (every "for the security reader" item of this file's
+  section 2 as one table: the three listed cause rows; the Daily Life page's three derived lines; the eleven hook
+  rows and E35's pinned gap; the owner-only table of E38; E46's pay-cut twin; the six rows of the sides table); the
+  join probe's report as a lead. AFTER ITS CLEARANCE, by the standard's rule 1 (the amendment of 2026-11-10): ONE
+  read-only review of migration 212's final text in a fresh context on the chair's own tier, before the owner is
+  asked to apply it.
 
 ## 3. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -1126,3 +1153,4 @@ LIFE PAGE stand unless he changes them (a saved AI account stays visible; the se
 | PEOPLE-3 | session_01ACmDYabE8Q8QFDT9ZPVoDe | `lane/people-3-2026-11-21` 930413518 | the same branch | the people lane's second half: B3 (the "why here" sentence), then B2 with B2b; "PEOPLE-B" |
 | STACK-97 | session_01ACmDYWhzK8coXeB7BokWRC | `lane/stack-96-wip-2026-11-22` cc2f43aee | `lane/stack-97-wip-2026-11-22` | A LANDING ON ITS OWN MACHINE (E45): who rules at 46339e5c7 as point 97: the merge and the whole gate; the chair alone moves the line |
 | CLOSE-1 | session_01ACmDYYk4tUS8QsZcpVWX3h | `lane/stack-96-wip-2026-11-22` cc2f43aee | `lane/close-1-2026-11-22` (and two scratch refs it pushes for others to read) | THE CLOSE REHEARSED (E48): a trial join of the two laws; the lit scratch ref; the flipped run's census by name; the recipe; the joint measure; the signing list's draft; ONE unit that lands: the laws' join, "JOIN" |
+| VEIL-33 | session_01ACmDYYeP5WWiLi6bmykSME | `lane/veil-32-2026-11-22` as it stood at 08:01 (beside VEIL-32) | `lane/veil-33-2026-11-22` | the share veil's second seat (E49): the join probe on its own machine (dark, then lit on CLOSE-1's ref); (iv), (v), (vi) prepared; NOT a writer of 212 until VEIL-32 hands over |
