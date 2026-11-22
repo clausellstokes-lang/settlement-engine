@@ -30,6 +30,8 @@ import {
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { DAWN_WORK } from '../../src/data/dailyLife/dawnWork.js';
 import { CHILD_WARNINGS } from '../../src/data/dailyLife/childWarnings.js';
+import { UNSPOKEN_TOPICS } from '../../src/data/dailyLife/unspokenTopics.js';
+import { RECENT_CHANGES } from '../../src/data/dailyLife/recentChanges.js';
 
 // ── Catalog ────────────────────────────────────────────────────────────
 
@@ -280,35 +282,46 @@ describe('outsider_impressions behavior', () => {
 });
 
 describe('unspoken_topics behavior', () => {
-  it('cites unresolved history wound when present', () => {
+  // DAILY-3 B3 E3 (LINES-2 § 4, LINES-2b § 2, ruling 7): the wound is said BY WHAT IT IS (its tension type's pool), never
+  // as "the matter referenced as \"the wound\""; the pin keeps its meaning (the wound, when held, is said and cited).
+  it('cites unresolved history wound when present, and says it by its tension type', () => {
     const s = deriveDailyLifeSlot('unspoken_topics', {
       history: {
-        historicalEvents: [{
-          name: 'The Occupation',
-          severity: 'major',
-          summary: 'A devastating occupation that ended badly.',
-          yearsAgo: 8,
-          legacyAnnotations: [
-            { text: 'Collaborators and resisters still live side by side.', tags: ['unresolved'] },
-          ],
-        }],
+        currentTensions: [{ type: 'religious_tension', description: 'Different faiths compete for influence and converts.' }],
       },
     });
-    if (s.references.some(r => r.type === 'history_beat')) {
-      expect(s.text.toLowerCase()).toMatch(/wound/);
-    }
+    expect(s.references.some(r => r.type === 'history_beat')).toBe(true);
+    expect(s.text).toBe(UNSPOKEN_TOPICS['wound.religious_tension'][0].text);
   });
 
-  it('cites hidden / rumored threats', () => {
+  it('a crime wound falls to the next tension the record holds (ruling 7)', () => {
+    const s = deriveDailyLifeSlot('unspoken_topics', {
+      history: {
+        currentTensions: [
+          { type: 'crime_wave', description: 'Crime is rising faster than those in charge can answer it.' },
+          { type: 'tyranny', description: 'One figure is gathering power to themselves.' },
+        ],
+      },
+    });
+    expect(s.text).toBe(UNSPOKEN_TOPICS['wound.tyranny'][0].text);
+    expect(s.references).toEqual([]);
+  });
+
+  // DAILY-3 B3 E3 (ruling 7): a hidden or rumoured threat is the DM's and said by no shared slot. Re-read from "cites
+  // hidden / rumored threats": it is neither said nor cited.
+  it('says and cites no hidden / rumored threat', () => {
     const s = deriveDailyLifeSlot('unspoken_topics', {
       defenseProfile: { threats: [{ name: 'Hidden cult', visibility: 'hidden', severity: 0.6 }] },
     });
-    expect(s.references.some(r => r.type === 'threat')).toBe(true);
+    expect(s.references.some(r => r.type === 'threat')).toBe(false);
+    expect(s.text).toBe('');
   });
 
-  it('falls back when no unspoken topics', () => {
+  // DAILY-3 B3 E3 (the calm rule, ruling 3): no wound held, nothing said (the EMPTY string), never an invented topic.
+  it('says nothing when no unspoken topics', () => {
     const s = deriveDailyLifeSlot('unspoken_topics', { population: 1000 });
-    expect(s.text.length).toBeGreaterThan(0);
+    expect(s.text).toBe('');
+    expect(s.references).toEqual([]);
   });
 });
 
@@ -324,14 +337,18 @@ describe('recent_changes behavior', () => {
     const s = deriveDailyLifeSlot('recent_changes', {
       defenseProfile: { threats: [{ name: 'Siege', severity: 0.95, type: 'siege' }] },
     });
+    // DAILY-3 B3 E3 (LINES-2 § 5): the realized siege is said from its own pool (no "has come to a head" over a label);
+    // the pin keeps its meaning (a cited threat is the one said). "Under siege" needs a siege in force, so this planted
+    // record (no crisis record) says the pool's other line.
     if (s.references.some(r => r.type === 'threat')) {
-      expect(s.text.toLowerCase()).toMatch(/(siege|head)/);
+      expect(RECENT_CHANGES['threat.siege.any.realized'].map((l) => l.text)).toContain(s.text);
     }
   });
 
+  // DAILY-3 B3 E3 (LINES-2 § 5, ruling 14: the calm index-0 time word dropped): the fallback is the calm pool's line.
   it('falls back when no recent disruptions', () => {
     const s = deriveDailyLifeSlot('recent_changes', { population: 1000 });
-    expect(s.text.toLowerCase()).toMatch(/(usual|no notable|rhythm)/);
+    expect(RECENT_CHANGES.calm.map((l) => l.text)).toContain(s.text);
   });
 });
 
@@ -353,8 +370,9 @@ describe('deriveDailyLife()', () => {
       expect(s.key).toBe(key);
       expect(s.label).toBeTruthy();
       // DAILY-2 B1b C3 (the chair's ruling 3, 2026-11-20 18:19): a slot with no true line is EMPTY. This record holds no
-      // house at all, so `gathering_places` has nothing true to say; every other slot still speaks.
-      if (key === 'gathering_places') expect(s.text).toBe('');
+      // house at all, so `gathering_places` has nothing true to say; DAILY-3 B3 E3: it holds no wound, so
+      // `unspoken_topics` says nothing (the calm rule); every other slot still speaks.
+      if (key === 'gathering_places' || key === 'unspoken_topics') expect(s.text).toBe('');
       else expect(s.text.length).toBeGreaterThan(0);
       expect(typeof s.source).toBe('string');
       expect(Array.isArray(s.references)).toBe(true);

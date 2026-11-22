@@ -39,16 +39,19 @@ import { deriveAllSupplyChainStates } from './supplyChainState.js';
 import { deriveAllFactionProfiles } from './factionProfile.js';
 import { deriveAllActiveConditions } from './activeConditions.js';
 import { deriveAllThreatProfiles } from './threatProfile.js';
-import { deriveAllCapacities, CAPACITY_NAMES } from './capacityModel.js';
+import { deriveAllCapacities, CAPACITY_NAMES, VISIBLE_CAPACITY_LENSES } from './capacityModel.js';
 import { deriveHistoryBeats } from './historyBeats.js';
 import { deriveCausalState } from './causalState.js';
-import { fillAgreement, powerNameWithArticle, powerPossessive } from './display/powerSentenceName.js';
+import { fillAgreement, powerNameAfterArticle, powerNameWithArticle, powerPossessive } from './display/powerSentenceName.js';
 import { GATHERING_NAMED, GATHERING_PLAIN } from '../data/dailyLife/gatheringPlaces.js';
 import { DAWN_WORK } from '../data/dailyLife/dawnWork.js';
 import { CHILD_WARNINGS } from '../data/dailyLife/childWarnings.js';
 import { COMMONER_RESENTMENTS_DM } from '../data/dailyLife/commonerResentmentsDm.js';
 import { COMMONER_RESENTMENTS } from '../data/dailyLife/commonerResentments.js';
 import { FOOD_CULTURE } from '../data/dailyLife/foodCulture.js';
+import { OUTSIDER_IMPRESSIONS } from '../data/dailyLife/outsiderImpressions.js';
+import { UNSPOKEN_TOPICS } from '../data/dailyLife/unspokenTopics.js';
+import { RECENT_CHANGES } from '../data/dailyLife/recentChanges.js';
 import { filterDeclared } from './facts/drawDeclared.js';
 import { atomHolds } from './facts/factVocabulary.js';
 import { factsOf } from './facts/factsOf.js';
@@ -56,7 +59,8 @@ import { INSTITUTION_KIND_PATTERNS, ACCESS_ONLY } from './facts/institutions.js'
 import { isMarketInstitution } from './facts/market.js';
 import { liveInstitutions } from './institutions/institutionRoster.js';
 import { nativeSemanticName } from './content/customContentSemanticAuthority.js';
-import { isHideableHouse } from './people/cardVeil.js';
+import { isHideableHouse, isVeiledPower } from './people/cardVeil.js';
+import { leaderLeadOfRecord } from './facts/leaderLead.js';
 import { institutionSentenceNoun } from './display/institutionSentenceNoun.js';
 import { pickVariantMixed } from '../kernel/proseHash.js';
 
@@ -101,7 +105,7 @@ import { pickVariantMixed } from '../kernel/proseHash.js';
 
 /**
  * History-beat fields this module reads (historyBeats.js is still untyped).
- * @typedef {{key: string, label: string, text: string, source: string}} HistoryBeatLike
+ * @typedef {{key: string, label: string, text: string, source: string, references?: { eventName?: unknown } | null}} HistoryBeatLike
  */
 
 /**
@@ -538,40 +542,160 @@ function deriveCommonerResentmentsDm(s, ctx) {
   return slot(OWNER_ONLY_DAILY_LIFE_SLOT, text, 'criminal_opportunity (owner only)', refs);
 }
 
+// ── outsider_impressions (DAILY-1 LINES-2 § 3 and LINES-2b § 3 and § 4, as the chair ruled at 18:47, 18:56 and 19:03;
+// DAILY-3 B3 E3) ──
+//
+// Up to three parts, each its own sentence, joined by a space. THE POWER PART: the top power, never a veiled one
+// (`people/cardVeil.js :: isVeiledPower`, or a criminal power: nothing is said, ruling 7); where it clearly leads
+// (`facts/leaderLead.js :: leaderLeadOfRecord(r).leadOverSecond` over 6, the `topTwoGap <= 6` cut of
+// `generators/power/factionStanding.js`, or no second power) the branch `power`, named; else `power.level` (ruling 15).
+// THE THREAT PART: the most severe OPEN threat above low that is not a defence RATING (ruling 8: the order and supply
+// ratings are no threat), by its kind and form. THE SECOND PART: at a place with no real threat said, the keyed pick
+// ('<name>::dailyLife.outsider_impressions::second') among the strained VISIBLE lenses (`capacityModel.js ::
+// VISIBLE_CAPACITY_LENSES`, `services.<lens>`; the order lines live in `services.defense`) and `ordinary`; at a place
+// with one, a strained visible lens where three or more of the nine are strained, without `ordinary`. Each branch's pool
+// (`data/dailyLife/outsiderImpressions.js`) goes by THE ROUTE (`pickNameable`). No line true: the EMPTY string (ruling 3).
+
+/** The bands of a strained capacity. */
+const STRAINED_BANDS = Object.freeze(['strained', 'critical', 'collapsed']);
+/** Ruling 8: the defence's ratings (`threatProfile.js` step 2, `defenseProfile.scores`) are no threat in any slot. */
+const RATING_KINDS = Object.freeze(['unrest', 'economic_collapse']);
+/** @param {ThreatProfile} t @returns {boolean} the order or supply rating ("Civic stability at risk", "Economic fragility") */
+const isRating = (t) => t.originSurface === RATING_SURFACE && RATING_KINDS.includes(t.type);
+/** @param {ThreatProfile} t @returns {boolean} imminent or realized */
+const isAcute = (t) => t.currentStage === 'imminent' || t.currentStage === 'realized';
+/** @param {ThreatProfile} a @param {ThreatProfile} b */
+const bySeverity = (a, b) => b.severity - a.severity;
+/** LINES-2 § 3: a threat's FORM by the surface that raised it, for the kinds split by form (else `any`). @type {Readonly<Record<string, Readonly<Record<string, string>>>>} */
+const THREAT_FORMS = Object.freeze({
+  unrest: Object.freeze({ activeConditions: 'void' }),
+  economic_collapse: Object.freeze({ activeConditions: 'route' }),
+  monster_pressure: Object.freeze({ config: 'config' }),
+});
+/** The monster form of `config.monsterThreat` (`threatProfile.js` step 1). @type {Readonly<Record<string, string>>} */
+const MONSTER_CONFIG_FORMS = Object.freeze({ plagued: 'overrun', frontier: 'frontier' });
+
+/**
+ * @param {ThreatProfile} t @param {DailyLifeSettlement} s
+ * @returns {string} the form a threat is said in: a kind split by form takes its surface's form, else `stressor`
+ */
+function threatForm(t, s) {
+  const forms = THREAT_FORMS[t.type];
+  if (!forms) return 'any';
+  const form = forms[t.originSurface] ?? 'stressor';
+  return form === 'config' ? (MONSTER_CONFIG_FORMS[String(s.config?.monsterThreat ?? '')] ?? 'frontier') : form;
+}
+
+/** @param {DailyLifeSettlement} s @param {string} slotKey @param {string} branch @returns {string|null} the pick's key */
+const pickKey = (s, slotKey, branch) => {
+  const name = /** @type {{ name?: unknown }} */ (s).name;
+  return typeof name === 'string' && name ? `${name}::dailyLife.${slotKey}::${branch}` : null;
+};
+
+/**
+ * Each line's `{power}` and kin said: the name with its article, `{Power}` at a sentence's head, `{power's}` its
+ * possessive after "the", `{power|one|many}` in the name's number (`display/powerSentenceName.js`).
+ * @template {{ text: string }} T
+ * @param {ReadonlyArray<T>} lines @param {string} name @returns {T[]}
+ */
+function withPower(lines, name) {
+  return lines.map((l) => ({ ...l, text: fillAgreement(l.text, { power: name })
+    .replace(/\{power's\}/g, `the ${powerPossessive(powerNameAfterArticle(name))}`)
+    .replace(/\{Power\}/g, powerNameWithArticle(name, true)).replace(/\{power\}/g, powerNameWithArticle(name)) }));
+}
+
+/** @param {string} branch @returns {keyof typeof OUTSIDER_IMPRESSIONS | null} the branch, where the slot has its pool */
+const outsiderBranch = (branch) => (Object.hasOwn(OUTSIDER_IMPRESSIONS, branch) ? /** @type {keyof typeof OUTSIDER_IMPRESSIONS} */ (branch) : null);
+
 /**
  * @param {DailyLifeSettlement} s
  * @param {DailyLifeContext} ctx
  * @returns {DailyLifeSlot}
  */
 function deriveOutsiderImpressions(s, ctx) {
+  /** @type {SlotReference[]} */
   const refs = [];
-  const top = [...ctx.threats].sort((a, b) => b.severity - a.severity)[0];
-  const dominantFaction = ctx.profiles
-    .slice()
-    .sort((a, b) => (b.power || 0) - (a.power || 0))[0];
-  const strainedCaps = CAPACITY_NAMES
-    .filter(n => ['strained', 'critical', 'collapsed'].includes(ctx.capacities.bands[n]));
-
+  const facts = factsFor(s);
+  const house = houseFinder(s);
+  /** @param {keyof typeof OUTSIDER_IMPRESSIONS} branch @returns {ReadonlyArray<{ id: string, text: string }>} the branch's admitted lines */
+  const admitted = (branch) => filterDeclared(OUTSIDER_IMPRESSIONS[branch], { facts, poolId: `dailyLife.outsider_impressions.${branch}`, surface: 'dailyLife' });
+  /** @param {keyof typeof OUTSIDER_IMPRESSIONS} branch @param {ReadonlyArray<{ id: string, text: string }>} lines */
+  const say = (branch, lines) => sayDeclared(pickNameable(s, lines, 'outsider_impressions', branch, house), house, refs);
   const parts = [];
-  if (dominantFaction) {
-    // R3-CODE-C (the chair's C-L4): the possessive through the one leaf that forms a power's ("Merchant Guilds's" → "Merchant Guilds'").
-    parts.push(`${powerPossessive(dominantFaction.name)} mark is on every door that matters`);
-    refs.push({ id: dominantFaction.id, label: dominantFaction.name, type: 'faction' });
-  }
-  if (top && top.severityBand !== 'low') {
-    parts.push(`${top.label.toLowerCase()} is the obvious unspoken weight`);
-    refs.push({ id: top.id, label: top.label, type: 'threat' });
-  }
-  if (strainedCaps.length >= 3) {
-    parts.push('several civic services run short. Visitors notice missing watch, slow service, or shuttered shops');
+
+  const top = [...ctx.profiles].sort((a, b) => (b.power || 0) - (a.power || 0))[0];
+  const factions = /** @type {{ powerStructure?: { factions?: unknown } | null }} */ (s)?.powerStructure?.factions;
+  const row = top && Array.isArray(factions)
+    ? factions.find((f) => /** @type {{ faction?: unknown }} */ (f)?.faction === top.name)
+    : undefined;
+  if (top && !isVeiledPower(row) && top.archetype !== 'criminal') {
+    const lead = leaderLeadOfRecord(s).leadOverSecond;
+    // the `topTwoGap <= 6` cut: a lead over the second power of 6 or less is no clear lead
+    const branch = lead === null || lead > 6 ? 'power' : 'power.level';
+    const said = say(branch, withPower(admitted(branch), String(top.name ?? '')));
+    if (said) {
+      refs.push({ id: top.id, label: top.name, type: 'faction' });
+      parts.push(said);
+    }
   }
 
-  const text = parts.length
-    ? `Outsiders notice ${parts.join('; ')}.`
-    : 'The settlement reads to outsiders as ordinary. Quiet streets, predictable bells, faces that don\'t yet know yours.';
+  const open = ctx.threats.filter((t) => t.visibility === 'open' && !isRating(t)).sort(bySeverity)[0];
+  let real = false;
+  if (open && open.severityBand !== 'low') {
+    const branch = outsiderBranch(`threat.${open.type}.${threatForm(open, s)}`);
+    const said = branch ? say(branch, admitted(branch)) : '';
+    if (said) {
+      real = true;
+      refs.push({ id: open.id, label: open.label, type: 'threat' });
+      parts.push(said);
+    }
+  }
 
-  return slot('outsider_impressions', text, 'dominant faction + top threat + strained capacities', refs);
+  const lenses = VISIBLE_CAPACITY_LENSES.filter((n) => STRAINED_BANDS.includes(ctx.capacities.bands[n]));
+  const strained = CAPACITY_NAMES.filter((n) => STRAINED_BANDS.includes(ctx.capacities.bands[n])).length;
+  /** @type {Array<{ branch: keyof typeof OUTSIDER_IMPRESSIONS, lens: string|null, lines: ReadonlyArray<{ id: string, text: string }> }>} */
+  const options = [];
+  for (const lens of real && strained < 3 ? [] : lenses) {
+    const branch = outsiderBranch(`services.${lens}`);
+    // `{gov}` (the administrative lens) is the government's label with its article
+    if (branch) options.push({ branch, lens, lines: withGovernment(admitted(branch), s) });
+  }
+  if (!real) options.push({ branch: 'ordinary', lens: null, lines: admitted('ordinary') });
+  const second = pickVariantMixed(options.filter((o) => o.lines.length > 0), pickKey(s, 'outsider_impressions', 'second'));
+  if (second) {
+    const said = say(second.branch, second.lines);
+    if (said && second.lens) {
+      const cap = ctx.capacities.capacities[second.lens];
+      refs.push({ id: `capacity.${second.lens}`, label: String(/** @type {{ label?: unknown }} */ (cap)?.label ?? second.lens), type: 'capacity' });
+    }
+    if (said) parts.push(said);
+  }
+
+  return slot('outsider_impressions', parts.join(' '), 'dominant faction + top open threat + strained visible capacities, by the lines\' declared atoms (LINES-2)', refs);
 }
+
+// ── unspoken_topics (DAILY-1 LINES-2 § 4 and LINES-2b § 2, as the chair ruled at 18:47 and 18:56; DAILY-3 B3 E3) ──
+//
+// THE WOUND (`historyBeats.js :: deriveUnresolvedWound`, the record's first tension) said BY WHAT IT IS: its tension
+// type's pool (`data/dailyLife/unspokenTopics.js`), by THE ROUTE (`pickNameable`), keyed
+// `<name>::dailyLife.unspoken_topics::wound.<type>`. RULING 7: a crime wound falls to the first LATER tension the record
+// holds whose type has a pool; no hidden or rumoured threat is said; no corruption clause. THE CALM RULE: a wound with no
+// pool, a crime wound with no sayable tension after it, or no wound: the EMPTY string (ruling 3).
+
+/** Rule 6: the crime wounds (no pool; they fall through). */
+const CRIME_WOUNDS = Object.freeze(['crime_wave', 'corruption_scandal']);
+
+/** @param {DailyLifeSettlement} s @returns {Array<string|undefined>} each tension's type, by position */
+function tensionTypesAt(s) {
+  const t = /** @type {{ history?: { currentTensions?: unknown } | null }} */ (s)?.history?.currentTensions;
+  return (Array.isArray(t) ? t : []).map((e) => {
+    const type = e && typeof e === 'object' ? /** @type {{ type?: unknown }} */ (e).type : undefined;
+    return typeof type === 'string' ? type : undefined;
+  });
+}
+
+/** @param {string|undefined} type @returns {keyof typeof UNSPOKEN_TOPICS | null} */
+const woundBranch = (type) => (type && Object.hasOwn(UNSPOKEN_TOPICS, `wound.${type}`) ? /** @type {keyof typeof UNSPOKEN_TOPICS} */ (`wound.${type}`) : null);
 
 /**
  * @param {DailyLifeSettlement} s
@@ -579,37 +703,53 @@ function deriveOutsiderImpressions(s, ctx) {
  * @returns {DailyLifeSlot}
  */
 function deriveUnspokenTopics(s, ctx) {
+  /** @type {SlotReference[]} */
   const refs = [];
-  const topics = [];
-
-  // Hidden / rumored threats
-  const hidden = ctx.threats.filter(t => t.visibility === 'hidden' || t.visibility === 'rumored');
-  for (const t of hidden.slice(0, 2)) {
-    topics.push(t.label.toLowerCase());
-    refs.push({ id: t.id, label: t.label, type: 'threat' });
-  }
-
-  // Unresolved wound from history
   const wound = ctx.history.unresolvedWound;
-  if (wound) {
-    topics.push('the matter referenced as "the wound"');
-    refs.push({ id: 'history.unresolvedWound', label: wound.label, type: 'history_beat' });
+  const types = tensionTypesAt(s);
+  const at = !wound ? -1
+    : types[0] !== undefined && CRIME_WOUNDS.includes(types[0])
+      ? types.findIndex((x, i) => i > 0 && x !== undefined && !CRIME_WOUNDS.includes(x) && woundBranch(x) !== null)
+      : 0;
+  const branch = at >= 0 ? woundBranch(types[at]) : null;
+  let text = '';
+  if (wound && branch) {
+    const house = houseFinder(s);
+    const eligible = filterDeclared(UNSPOKEN_TOPICS[branch], { facts: factsFor(s), poolId: `dailyLife.unspoken_topics.${branch}`, surface: 'dailyLife' });
+    text = sayDeclared(pickNameable(s, eligible, 'unspoken_topics', branch, house), house, refs);
+    // the wound beat is cited where it is the tension said (a fallen crime wound is not cited: rule 6)
+    if (text && at === 0) refs.push({ id: 'history.unresolvedWound', label: wound.label, type: 'history_beat' });
   }
 
-  // Recently exposed corruption
-  const corruption = ctx.conditions.find(c => c.archetype === 'corruption_exposed');
-  if (corruption) {
-    topics.push('the names spoken half-whispered in market stalls');
-    refs.push({ id: corruption.id, label: corruption.label, type: 'condition' });
-  }
-
-  const said = [...new Set(topics)]; // R3-CODE-C (C-L4): a topic said once
-  const text = said.length
-    ? `Locals will not openly discuss ${said.join('; or ')}.`
-    : 'Locals are happy to discuss most things; the usual private subjects stay private.';
-
-  return slot('unspoken_topics', text, 'hidden threats + unresolved history wound + active corruption', refs);
+  return slot('unspoken_topics', text, 'history.unresolvedWound by its tension type (a crime wound falls through), by the lines\' declared atoms (LINES-2)', refs);
 }
+
+// ── recent_changes (DAILY-1 LINES-2 § 5 and LINES-2b § 1, § 3 and § 8, as the chair ruled at 18:47 and 18:56; DAILY-3
+// B3 E3) ──
+//
+// Each its own sentence, joined by a space: `beat`, the recent-disruption beat BY ITS EVENT'S NAME (no age, no "founding
+// survey"; an event of a crime or corruption kind not said); `condition.<archetype>`,
+// a condition new this turn (`elapsedTicks < 2`, the first two); `threat.<kind>.<form>.<stage>`, an acute OPEN threat that
+// is not a defence RATING (ruling 8), the first two by severity. `calm` only where none of the three sources is held at
+// all; a source held but none sayable: the EMPTY string (ruling 3). Each branch's pool (`data/dailyLife/recentChanges.js`)
+// goes by THE ROUTE (`pickNameable`), keyed `<name>::dailyLife.recent_changes::<branch>`.
+
+/**
+ * Rule 6 (LINES-2b § 1): is the beat's event of a crime or corruption kind? The record's own event of that name
+ * (`history.historicalEvents[]`, the rows both of the beat's sources name) is read by its template's kind
+ * (`templateType`, the kinds `data/historyData.js` names "The Crime Wave" and "The Scandal"), the same two kinds as the
+ * crime wounds. An event the record does not hold by that name is not said (fails closed).
+ * @param {DailyLifeSettlement} s @param {string} name @returns {boolean} true where the beat may be said
+ */
+function beatSayable(s, name) {
+  const events = /** @type {{ history?: { historicalEvents?: unknown } | null }} */ (s)?.history?.historicalEvents;
+  const row = Array.isArray(events) ? events.find((e) => /** @type {{ name?: unknown }} */ (e)?.name === name) : undefined;
+  const kind = /** @type {{ templateType?: unknown } | undefined} */ (row)?.templateType;
+  return !!row && !(typeof kind === 'string' && CRIME_WOUNDS.includes(kind));
+}
+
+/** @param {string} branch @returns {keyof typeof RECENT_CHANGES | null} the branch, where the slot has its pool */
+const recentBranch = (branch) => (Object.hasOwn(RECENT_CHANGES, branch) ? /** @type {keyof typeof RECENT_CHANGES} */ (branch) : null);
 
 /**
  * @param {DailyLifeSettlement} s
@@ -617,40 +757,60 @@ function deriveUnspokenTopics(s, ctx) {
  * @returns {DailyLifeSlot}
  */
 function deriveRecentChanges(s, ctx) {
+  /** @type {SlotReference[]} */
   const refs = [];
-  const changes = [];
+  const facts = factsFor(s);
+  const house = houseFinder(s);
+  /** @type {string[]} */
+  const said = [];
+  /** @type {string[]} */
+  const taken = [];
+  /** @param {keyof typeof RECENT_CHANGES} branch @param {(t: string) => string} [fill] @returns {string} */
+  const say = (branch, fill = (t) => t) => {
+    taken.push(branch);
+    const eligible = filterDeclared(RECENT_CHANGES[branch], { facts, poolId: `dailyLife.recent_changes.${branch}`, surface: 'dailyLife' })
+      .map((l) => ({ ...l, text: fill(l.text) }));
+    return sayDeclared(pickNameable(s, eligible, 'recent_changes', branch, house), house, refs);
+  };
 
-  // Recent disruption from history beats
-  const recent = ctx.history.recentDisruption;
-  if (recent) {
-    changes.push(recent.text);
-    refs.push({ id: 'history.recentDisruption', label: recent.label, type: 'history_beat' });
+  const beat = ctx.history.recentDisruption;
+  const event = String(beat?.references?.eventName ?? '');
+  if (beat && event && beatSayable(s, event)) {
+    const bare = event.replace(/^the\s+/i, '');
+    const text = say('beat', (t) => t.replace(/\{Event\}/g, `The ${bare}`).replace(/\{event\}/g, `the ${bare}`));
+    if (text) {
+      refs.push({ id: 'history.recentDisruption', label: beat.label, type: 'history_beat' });
+      said.push(text);
+    }
   }
 
-  // Newly-active conditions (elapsedTicks < 2)
-  const newConditions = ctx.conditions.filter(c => (c.duration?.elapsedTicks ?? 0) < 2);
-  for (const c of newConditions.slice(0, 2)) {
-    changes.push(`${c.label.toLowerCase()} is the new shape of things`);
+  const fresh = ctx.conditions.filter((c) => (c.duration?.elapsedTicks ?? 0) < 2);
+  for (const c of fresh.slice(0, 2)) {
+    const branch = recentBranch(`condition.${c.archetype}`);
+    if (!branch || taken.includes(branch)) continue;
+    const text = say(branch);
+    if (!text) continue;
     refs.push({ id: c.id, label: c.label, type: 'condition' });
+    said.push(text);
   }
 
-  // High-severity, near-realized threats
-  const acute = ctx.threats
-    .filter(t => t.currentStage === 'imminent' || t.currentStage === 'realized')
-    .slice(0, 2);
-  for (const t of acute) {
-    changes.push(`${t.label.toLowerCase()} has come to a head`);
+  const acute = ctx.threats.filter((t) => t.visibility === 'open' && !isRating(t) && isAcute(t)).sort(bySeverity);
+  for (const t of acute.slice(0, 2)) {
+    const branch = recentBranch(`threat.${t.type}.${threatForm(t, s)}.${t.currentStage}`);
+    if (!branch || taken.includes(branch)) continue;
+    const text = say(branch);
+    if (!text) continue;
     refs.push({ id: t.id, label: t.label, type: 'threat' });
+    said.push(text);
   }
 
-  // R3-CODE-C (the chair's C-L4): the slot's label is "Recent changes" and every reader prints it beside the text
-  // ("Recent changes: Recent changes: …"), so the text does not repeat it; a change is said once.
-  const said = [...new Set(changes)].join('; ');
-  const text = said
-    ? `${said[0].toUpperCase()}${said.slice(1)}.`
-    : 'The last few seasons have run their usual course. No notable shifts in the rhythm of the place.';
+  const anySource = !!beat || fresh.length > 0 || ctx.threats.some((t) => !isRating(t) && isAcute(t));
+  if (!said.length && !anySource) {
+    const text = say('calm');
+    if (text) said.push(text);
+  }
 
-  return slot('recent_changes', text, 'history.recentDisruption + new conditions + acute threats', refs);
+  return slot('recent_changes', said.join(' '), 'history.recentDisruption by its event\'s name + new conditions + acute open threats, by the lines\' declared atoms (LINES-2)', refs);
 }
 
 // ── Slot helper ──────────────────────────────────────────────────────────

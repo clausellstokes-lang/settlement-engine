@@ -83,9 +83,15 @@ describe('daily life reads no person of its own (the dead call removed)', () => 
       // DAILY-3 B3 E1 moved `commoner_resentments` by design on the places whose text carried a crime clause (ruling 6:
       // the clauses are the owner-only `commoner_resentments_dm`'s, held by `dailyLifeOwnerSlot.test.js`), and B3 E2
       // moved it and `food_culture` by design on every place (LINES-2 § 1 and § 2 as ruled; held by
-      // `dailyLifeFoodResentments.test.js`): the parity of C1's removal holds on the other three slots.
-      const { gathering_places: _moved, dawn_work: _movedDawn, child_warnings: _movedChild, commoner_resentments: _movedResent, food_culture: _movedFood, ...kept } = BEFORE[seed];
-      const { gathering_places: _now, dawn_work: _nowDawn, child_warnings: _nowChild, commoner_resentments: _nowResent, food_culture: _nowFood, ...nowKept } = now;
+      // `dailyLifeFoodResentments.test.js`). DAILY-3 B3 E3 moved the last three, `outsider_impressions`,
+      // `unspoken_topics` and `recent_changes`, by design on every place (LINES-2 § 3 to § 5 as ruled; held by
+      // `dailyLifeOutsiderUnspokenRecent.test.js`): every slot has now moved by design, so the before/after arm holds no
+      // slot (asserted, so a ninth public slot would return to it); the owner-vs-public parity below holds on all eight.
+      const { gathering_places: _moved, dawn_work: _movedDawn, child_warnings: _movedChild, commoner_resentments: _movedResent, food_culture: _movedFood,
+        outsider_impressions: _movedOutsider, unspoken_topics: _movedUnspoken, recent_changes: _movedRecent, ...kept } = BEFORE[seed];
+      const { gathering_places: _now, dawn_work: _nowDawn, child_warnings: _nowChild, commoner_resentments: _nowResent, food_culture: _nowFood,
+        outsider_impressions: _nowOutsider, unspoken_topics: _nowUnspoken, recent_changes: _nowRecent, ...nowKept } = now;
+      expect(Object.keys(kept), `${seed}: no slot left unmoved`).toEqual([]);
       expect(nowKept, `${seed}: before vs after`).toEqual(kept);
       expect(textsOf(toPublicSafe(rec)), `${seed}: owner vs toPublicSafe`).toEqual(now);
     });

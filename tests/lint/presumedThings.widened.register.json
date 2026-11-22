@@ -11638,20 +11638,6 @@
     "ec9b1399f8aea49f"
    ]
   ],
-  "src/domain/dailyLife.js": [
-   [
-    "market",
-    "root",
-    "the names spoken half-whispered in market stalls",
-    "56b7e14249f68d52"
-   ],
-   [
-    "streets",
-    "family",
-    "The settlement reads to outsiders as ordinary. Quiet streets, predictable bells, faces that don't yet know yours.",
-    "8aff309556f30e3e"
-   ]
-  ],
   "src/domain/density/densityCreateBoundary.js": [
    [
     "house: library",
