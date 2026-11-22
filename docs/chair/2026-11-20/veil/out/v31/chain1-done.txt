@@ -8,3 +8,12 @@ gates rc=1 23:56:23
 tiptpl rc=0
 tip-gates(old analyzer) rc=1 00:01:28
 tip-restated rc=1
+sv+handrows rc=0
+harnesses rc=0
+walkers rc=1
+registry-check rc=0
+eslint rc=0
+r3gate rc=0
+born rc=0
+acceptance rc=0 40 PASS
+END 00:40:22

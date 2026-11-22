@@ -27,7 +27,17 @@ verified by ls-remote).
   REDS RE-RUN: R3-TELL-3 at 95f2ddfb8 2 failed / 1 passed (units 2, 4b); R3-TELL-4 at fff96514a 1 failed of 1 (unit 1). GREEN: both
   arms (galleryVeilTell3 + galleryVeilTell4) 4 of 4 at the tip. Instruments: --check 0, harnesses 0, acceptance 40 PASS, the R3
   gate HIGHER 0 / EQUAL 79 / LOWER 13 every engine and Reveal; walker 1 (the ARM D red, ruling 77).
-- IN FLIGHT: chain1's green chain, then `tests/lint` whole at the tip (ruling 77). BUILDER R3-TELL-5 (an Agent subagent of this seat,
+- THE GREEN CHAIN at 5818130c4 (`out/v31/chain1-done.txt`): galleryServerVeil + hand rows 0, harnesses 0, `--check` 0, eslint 0,
+  the R3 gate 0, born 0, acceptance 40 PASS; walkers 1 = ARM D alone (ruling 77).
+- `tests/lint` WHOLE at 5818130c4 (ruling 77; `out/v31/lint-whole-5818130c4-summary.txt`): 24 failed tests in 18 files. ARM D (77);
+  PART 30's known four (observedShapeReaders: ruling 27; presumedThings, presumptionClasses, writerReach: ruling 34, stage L);
+  TWELVE ALREADY RED AT 2437ffea0, same counts, re-run there (chainPrintSites 1, domainAnyCastBaseline 4, factLayers 1,
+  moduleScopeCwdRatchet 1, negativeAssertionAnchor 1, noLegacyFactionReaders 2, proseDrawnAnchors 1, proseWiringCensus 2,
+  seedLoopTotality 1, slugifyIdiomBaseline 1, sovereigntyLightingContract 1, styleLaw 1): none on RED-AT-LINE.tsv; NOT the merges';
+  FOR THE JOIN, cured by no one on this lane unless the chair rules. ONE MORE THE MERGES CARRIED: `mutationCoverageManifest`
+  TOTALITY names `galleryVeilTell3`/`galleryVeilTell4.pglite.test.js` (no manifest entry; green at 2437ffea0): given to the builder
+  as UNIT 0b (its own commit; the lane's precedent entry `{kind: rationale, ref: pglite-executed}`); told the chair (vetoable).
+- IN FLIGHT: BUILDER R3-TELL-5 (an Agent subagent of this seat,
   the seat's own tier) seated ~00:11 on worktree `/home/user/wt/r3tell5`, branch `v31-r3tell5` (local, cut at f22bb8324): unit 0
   (ruling 77's marker) then unit (ii); it waits for the seat's chain before any heavy run. If this seat stops, its work goes up
   as `lane/veil-31-2026-11-21-r3tell5-wip` unread.
@@ -62,3 +72,4 @@ verified by ls-remote).
 - 23:26 the chair's two messages read: rulings 76 and 77.
 - 23:49 the pool stands. 23:50 chain1. 00:01 the gates read (section 1). 00:02 the line to the chair (unit (1)).
 - 00:10 the chair: ruling 78 (merge accepted; mark 700,000). 00:10 the unit (ii) builder seated (section 1).
+- 00:40 the green chain ended; 00:53 tests/lint whole read; the 13 re-run at 2437ffea0 (12 red there). 00:56 unit 0b to the builder; the line to the chair.
