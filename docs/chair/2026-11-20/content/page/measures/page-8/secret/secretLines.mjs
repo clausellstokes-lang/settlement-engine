@@ -80,7 +80,7 @@ export const FAMILIES = [
     ["Owes # a debt for a word put in at the right moment, and they have never asked for anything in return", 'A favour of that size is bound to be asked for one day'],
     ["Owes # a debt for keeping quiet about a mistake, and they have never said what it will cost", 'They have begun to dread the day # names a price'],
     ["Owes # a debt from a bad year. # carried them through it and has never asked for it back", 'Others have noticed how readily they side with # on every question'],
-    ["Owes # a debt on a promise made in a hard hour. # has never held them to it", 'A promise left lying that long is only waiting for its moment'],
+    ["Owes # a debt on a promise made in a hard hour, and they have never held them to it", 'A promise left lying that long is only waiting for its moment'],
     ["Owes # a debt that neither of them ever wrote down. # has never once raised it", 'With nothing written, # may ask for whatever they please'],
     ["Owes # a debt for a loan made in friendship, and they have never asked for it back", 'The friendship has cooled, and the loan has not been forgotten'],
     ["Owes # a debt for taking their side when no one else would. # has never said so aloud", 'If # ever needs someone to stand up for them, they will be expected to'],

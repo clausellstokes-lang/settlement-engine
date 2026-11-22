@@ -177,7 +177,7 @@ It also checks that no sentence is shared by two lines. Result: 40 lines, 0 fail
 | 2 | Owes # a debt for a word put in at the right moment, and they have never asked for anything in return **[CN2, the chair 22:34: was "Owes # a debt for a word put in at the right moment, and # has never asked for anything in return"]** | A favour of that size is bound to be asked for one day |
 | 3 | Owes # a debt for keeping quiet about a mistake, and they have never said what it will cost **[CN2, the chair 22:34: was "Owes # a debt for keeping quiet about a mistake, and # has never said what it will cost"]** | They have begun to dread the day # names a price |
 | 4 | Owes # a debt from a bad year. # carried them through it and has never asked for it back **[CURE 2: "a bad year", not "season"]** **[CN2, the chair 22:34: was "Owes # a debt from a bad year, when # carried them through, and # has never asked for it back"]** | Others have noticed how readily they side with # on every question |
-| 5 | Owes # a debt on a promise made in a hard hour. # has never held them to it **[CURE 3, the chair 20:02: no echo]** **[CN2, the chair 22:34: was "Owes # a debt on a promise made in a hard hour, and # has never held them to it"]** | A promise left lying that long is only waiting for its moment |
+| 5 | Owes # a debt on a promise made in a hard hour, and they have never held them to it **[CURE 3, the chair 20:02: no echo]** **[CN2, the chair 22:34: was "Owes # a debt on a promise made in a hard hour, and # has never held them to it"]** | A promise left lying that long is only waiting for its moment |
 | 6 | Owes # a debt that neither of them ever wrote down. # has never once raised it **[CN2, the chair 22:34: was "Owes # a debt that neither of them ever wrote down, and that # has never once raised"]** | With nothing written, # may ask for whatever they please |
 | 7 | Owes # a debt for a loan made in friendship, and they have never asked for it back **[CN2, the chair 22:34: was "Owes # a debt for a loan made in friendship, and # has never asked for it back"]** | The friendship has cooled, and the loan has not been forgotten |
 | 8 | Owes # a debt for taking their side when no one else would. # has never said so aloud **[CN2, the chair 22:34: was "Owes # a debt for taking their side when no one else would, and # has never said so aloud"]** | If # ever needs someone to stand up for them, they will be expected to |
@@ -267,3 +267,34 @@ The records changed this way:
 - Every other secret sentence is as it was. §3d's counts outside the four frames are equal on both caches, except at
   metropolis: what 259 → 260 and stakes 256 → 257. That one extra is the K0 sibling above, which §3d does not count as
   a frame sentence.
+
+## 9. RULING 14 (the chair, 22:34: the pronoun rule), BUILT (PAGE-14's builder, on the predecessor's WIP 620046593)
+
+The rule: "the second mention of the SAME person in one sentence becomes they/them/their where no other person or group
+stands between; else recast so the name stands once". Each cure is marked **[CN2, the chair 22:34: was "…"]** in §5
+(21 lines: K0 1, 4, 6, 7; K1 1, 2, 6, 7, 10; K2 1–10; K3 7, 10). The WIP's cures are kept where they meet the rule
+exactly. ONE is re-done: K2-5. Nothing stands between its two mentions, so the pronoun is owed, not the WIP's split
+("Owes # a debt on a promise made in a hard hour. # has never held them to it").
+
+- **Pronoun (nothing stands between):** K0 4, K0 7; K1 1, K1 7, K1 10; K2 2, 3, 5, 7, 9; K3 7.
+- **Recast (a person or group stands between):** K0 1 ("everyone"), K0 6 ("whom"), K1 2 ("someone"), K1 6 ("someone"),
+  K3 10 ("whom"); K2 1, 8, 10 ("they"/"their", the holder); K2 6 ("neither of them"); K2 4 (a third mention after
+  "them"). A K2 recast keeps the opening "Owes # a debt" (condition 3).
+- **THE TWO EXISTING FRAMES, NOT CHANGED (for a second batch):** K0 "Knows something about # that # believes no one
+  else knows, and has been deciding for months whether to use it"; K2 "Owes # a debt from before either of them held
+  their current position: one that # has never formally called in".
+- **What `namesInSentences` CN2 misses:** `tests/helpers/namesInSentences.mjs :: isProse` admits a string only if it ends
+  on . ! ? or carries ". [A-Z]". A secret has no closing stop, so CN2 reads only the secrets with an internal full stop:
+  every single-sentence secret, the two frames above among them, is unread (for widening after the deploy).
+- **The commonest frame sentence on 18.0% of metropolises (K0 10, 27/150): NOISE, not thinness.** K0 has 10 siblings, as
+  K1–K3 do. It is drawn on 149/150 metropolises (K1 149, K2 146, K3 148), never twice in a place, on 1.18% of a
+  metropolis's cards (K1 1.18%, K2 1.16%, K3 1.18%). One wording's expectation is 9.0% (13.5/150, sd 3.5). Simulating
+  44 uniform wordings over 149 places a family gives a top of median 14.7%, 95th 16.7%, 99th 18.0%, P(≥ 27) = 1.7%. The
+  same lump shows on the 300 (10/50 = 20.0%; K1–K3's top there 16.0%) and on the 900 (27/150; K1–K3's top 13.3%). K0's
+  top is 12.7% in cities and 12.0% in towns. The wording is keyed by the card's index, never by its text, so ruling 14
+  moves no pick: the 900's figures equal 9fc56c549's.
+- **Measured on the cured tree (150 a size): what, before / projected (§6) / MEASURED:** thorp 4.0 / 1.3 / 1.3%; hamlet
+  22.0 / 4.7 / 3.3%; village 50.7 / 8.0 / 8.0%; town 88.7 / 11.3 / 12.0%; city 100 / 12.7 / 12.7%; metropolis 99.3 / 13.3
+  / 18.0% (the stakes ride with them). Siblings on the record: 16 / 102 / 265 / 476 / 544 / 549.
+- **Two-tree on the 300 (f2d187ab8 → the cure):** only `npcs[].secret.what` and `npcs[].secret.stakes` differ, on 645
+  cards in 219 places, with 0 non-string differences.

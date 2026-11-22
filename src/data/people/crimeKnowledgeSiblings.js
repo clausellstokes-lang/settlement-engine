@@ -70,7 +70,7 @@ export const CRIME_KNOWLEDGE_WORDINGS = Object.freeze([
     Object.freeze({ what: 'Owes {npc} a debt for a word put in at the right moment, and they have never asked for anything in return', stakes: 'A favour of that size is bound to be asked for one day' }),
     Object.freeze({ what: 'Owes {npc} a debt for keeping quiet about a mistake, and they have never said what it will cost', stakes: 'They have begun to dread the day {npc} names a price' }),
     Object.freeze({ what: 'Owes {npc} a debt from a bad year. {npc} carried them through it and has never asked for it back', stakes: 'Others have noticed how readily they side with {npc} on every question' }),
-    Object.freeze({ what: 'Owes {npc} a debt on a promise made in a hard hour. {npc} has never held them to it', stakes: 'A promise left lying that long is only waiting for its moment' }),
+    Object.freeze({ what: 'Owes {npc} a debt on a promise made in a hard hour, and they have never held them to it', stakes: 'A promise left lying that long is only waiting for its moment' }),
     Object.freeze({ what: 'Owes {npc} a debt that neither of them ever wrote down. {npc} has never once raised it', stakes: 'With nothing written, {npc} may ask for whatever they please' }),
     Object.freeze({ what: 'Owes {npc} a debt for a loan made in friendship, and they have never asked for it back', stakes: 'The friendship has cooled, and the loan has not been forgotten' }),
     Object.freeze({ what: 'Owes {npc} a debt for taking their side when no one else would. {npc} has never said so aloud', stakes: 'If {npc} ever needs someone to stand up for them, they will be expected to' }),
