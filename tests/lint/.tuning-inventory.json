@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "eee2fe0ceee95a96a94db890bd7a6925df299f9a",
-  "measuredBy": "FORTUNE-6",
+  "measuredAtSha": "0e6221b5aa95056db24e0f5bb0a20267ad14a2a1",
+  "measuredBy": "FORTUNE-7 U7 builder",
   "date": "2026-11-22",
-  "note": "the working line's tip f5295e425 merged into lane/fortune-6-2026-11-21 (eee2fe0ce): GOAL_FAMILY_TUNING and LAW_PURSUIT_TUNING (people/goals.js) dependents moved, no value moved",
+  "note": "FORTUNE U7 LASTING: FORTUNE_LAW_TUNING gains the DRAFT row standing.lastingAgeBySize (six sizes), the chair decision E32",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1464,8 +1464,8 @@
       "exported": true,
       "idiom": "literal",
       "keys": 4,
-      "line": 122,
-      "spanDigest": "342f99a7279e4accad12dc6ed4af096384327e0abb649f923021b7c9fdfba7e0",
+      "line": 129,
+      "spanDigest": "880df847520e76c7de543596b5629b0be561182050c554c92652b9d7944ca5f9",
       "leaves": {
         "developmentFigure": 1,
         "magicScale": 0.6,
@@ -1516,6 +1516,12 @@
         "standing.meritPoints": 10,
         "standing.weatheredWithinYears": 40,
         "standing.endorsedMinReasons": 2,
+        "standing.lastingAgeBySize.thorp": 269,
+        "standing.lastingAgeBySize.hamlet": 108,
+        "standing.lastingAgeBySize.village": 225,
+        "standing.lastingAgeBySize.town": 276,
+        "standing.lastingAgeBySize.city": 441,
+        "standing.lastingAgeBySize.metropolis": 731,
         "standing.weatheredSeverity": "catastrophic",
         "standing.rulerTroubleKinds.0": "succession_crisis",
         "standing.rulerTroubleKinds.1": "corruption_scandal",
