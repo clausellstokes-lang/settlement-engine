@@ -97,3 +97,21 @@ read the circumstances and the cast; the leaf's row moves to layer 4 with its ei
 (`CLOSE-RECIPE.md` step 1b). The path is CONFIRMED by `census/path-probe.mjs`; the row change REHEARSED in a copy of the
 lit tree by `census/all-leaves.mjs`: no knock-on. For the veil (the chair carries it): the contenders list read from
 the cast on a shared read goes on the security reader's list.
+
+## PART 5: tests/components, tests/ui, tests/pdf, tests/store, tests/lib (lit, ended 15:29 UTC)
+1,057 files, 8,489 tests: 14 red; 2 on RED-AT-LINE; 12 NEW, ALL class (a) after verification (`census/lit-ui-classed.tsv`):
+PREMISE 4, BORN ANCHOR 4, STORED PIN 3 (one is `pageCensus.walker`: the rendered dossier LOSES one banked finding,
+P16three, and gains none; its door `scripts/census/page-census.register.json`), and one the helper marked (d?), VERIFIED
+NOT (d) by CLOSE-1 (`census/mod-probe.mjs`): `tests/components/governingModifierSurfaces.test.jsx` › "r2r-city-56
+(arcane-advised): every surface prints 'mage counsel' and none prints the key": lit, the governing Merchant Guild
+Council falls from 3rd to 8th by power, so the Summary's power bar (`SummaryTab.jsx`: `allFactions.slice(0,5)`) does not
+list it, and its chip with it; the Power tab and the PDF still print "mage counsel". A premise that moved (class (a)).
+A PAGE QUESTION FOR THE CHAIR, not a fault: under the lit laws a ruler can rank below fifth by power, and the Summary's
+bar then does not show the ruling power at all. By lane list: FORTUNE 6, JOIN 6, SEAT 0.
+
+## FOR THE VEIL (the chair's 15:29 question): `powerStructure.recentConflict` at birth, lit
+`census/rc-count.mjs` over the 900 visitor births (`visitor-<size>-0..149`, 150 a size, the plan of unit 6; born through
+`birthConfig` WITHOUT the store's custom-content runtime) on the lit scratch: EVERY ONE of the 900 stores the BASELINE's
+sentence (`governanceNarrative.js :: buildGovernanceLabels`); 0 store a transfer's (`rulingPower.js ::
+transferRulingPower`'s wordings, `holderOfSeat.js :: TRANSFER_WORDINGS`); `previousGovernments` is empty on all 900. So
+AT BIRTH no transfer sentence exists to withhold, criminal taker or not: a transfer's sentence is written only in play.

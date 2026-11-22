@@ -1,0 +1,11 @@
+const T = process.argv[2];
+const { generateSettlementPipeline } = await import(`${T}/src/generators/generateSettlementPipeline.js`);
+const { birthConfig, loadGenerationLawPayloads } = await import(`${T}/src/domain/density/densityCreateBoundary.js`);
+const { DEFAULT_CONFIG } = await import(`${T}/src/store/configSlice.js`);
+const { governingModifierWordsOf } = await import(`${T}/src/domain/display/governingModifierWords.js`);
+await loadGenerationLawPayloads();
+const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
+const s = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: 'city' }), null, { seed: 'r2r-city-56', customContent: {} });
+const fs = [...(s.powerStructure?.factions || [])].sort((a, b) => (b.power || 0) - (a.power || 0));
+const gi = fs.findIndex((f) => f.isGoverning);
+console.log(JSON.stringify({ governingIndexByPower: gi, governing: fs[gi]?.faction, modifier: fs[gi]?.modifier, modifiers: fs[gi]?.modifiers, words: governingModifierWordsOf(s), top5: fs.slice(0, 5).map((f) => [f.faction, f.power]) }));
