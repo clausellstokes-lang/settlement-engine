@@ -1,5 +1,41 @@
 # R5-RECENT — brief for THE LANE'S WRITER (VEIL-32, or VEIL-33 if it holds the lane at the hand-over): THE WRITER'S NEXT UNIT AFTER (viii), BEFORE (iv) (the chair's E78, 2026-11-22 12:21 UTC; vetoable by the owner)
 
+## THE CURE BUILDER (added by VEIL-33, the lane's writer from 13:07 UTC; WHERE THIS DIFFERS FROM BELOW, THIS GOVERNS)
+- WHERE YOU WORK: worktree `/home/user/wt/r5c`, branch `v33-r5cure` (local): the lane's tip 2e0cfa1be (unit (viii) merged; 212
+  `0352a5028544cce0…`) with the instruments merged (f8d8ea6e3, from `lane/veil-33-2026-11-22-r5recent-wip` at 69ccb5498: the plant
+  `tests/security/galleryVeilRecent.pglite.test.js`, the walker `tests/lint/rosterChoiceComposedHosts.walker.test.js`, their manifest
+  rows; their builder's hand-back `out/v33/r5recent/R5R-HANDBACK.md`: READ IT WHOLE). node_modules linked.
+- THE READ-WHOLE LAW, NO DEVIATION: BEFORE YOUR FIRST EDIT, 212 (`supabase/migrations/212_share_veil_later_cures.sql`) WHOLE, the
+  generated character tables included; the registry `src/domain/veil/rosterChoiceRegistry.js` WHOLE; the twin
+  `src/domain/display/galleryRosterChoices.js` WHOLE; every other file you change, WHOLE.
+- THE HOST, RULED BY THE WRITER (supersedes "THE HOST" below): the rule lives in R3's EXISTING host, `public._gallery_veil_roster_choices`
+  and `galleryRosterChoices.js :: applyRosterChoices` (where `wn` / `wn_ids`, the withheld powers, and the lane's name search are
+  already built); the registry row `power.recentConflict` moves to `server: H.sChoice, twin: H.tChoice, built: true` with its own
+  rule (no longer derived as composed on R5's host), ARM D's marker `-- registry: power.recentConflict` / `// registry:
+  power.recentConflict` on a line of its own in both engines. R5's planned host `_gallery_veil_composed` STAYS PLANNED: marking it
+  'exists' would green the composed-hosts walker for 26 rows no engine builds (a false assurance, ruling 59). Say in the registry
+  row's scope why the row left the composed form.
+- MEASURE FIRST: (1) both instruments RED at f8d8ea6e3 (the plant 6 of 6 plants, the walker 27 rows), titles recorded; (2) the
+  OPEN FORM: on nothing-hidden born pages of every size (40 births a size, the generator, your own small probe), how often
+  `powerStructure.recentConflict` is present, a string, null, '' or absent: the withheld form is the one nothing-hidden pages show
+  (ruling 62 (2)); a key no open page lacks is never deleted. STOP with the table if no form an open page shows is available.
+- THE OWNER-HIDDEN PLANTS ((b), and (c) r5-owner-lower): by the time the veil runs, the projection has dropped an owner-hidden
+  power's row on a player read and masked its name ("an unseen interest") case-sensitively. If meeting (b) and (c)-owner-lower
+  needs the hidden power's NAME (which `pub` no longer holds) or a change to 210's or 211's sanitizer: STOP to the seat with the
+  options and their cost (e.g. withhold the sentence wherever it carries the mask; withhold it wherever the stored record holds any
+  `hidden: true` power, read where the full town is in hand). Change nothing in 210 or 211.
+- RED AND GREEN: per unit a RED commit (none needed: the instruments are red at your cut, say so) and a CURE commit; the plant
+  GREEN 9 of 9; the composed-hosts walker GREEN on `power.recentConflict` and RED on the other 26 exactly (the rows named);
+  `tests/lint/rosterChoiceRegistry.walker.test.js` and `rosterChoicePools.walker.test.js` green; `node scripts/veil/rosterChoiceRegistry.mjs
+  --check` 0; `galleryRosterChoices.pglite`, `galleryServerVeil`, `galleryVeilHandRows`, Tell3+4+5+8 green; `node
+  scripts/check-full-typecheck.mjs` 0; eslint on touched files; `tests/lint` WHOLE (the sixteen standing + the walker's 26
+  designed rows only); 212's and the rollback's sha256 (the rollback untouched unless you add a helper: VR27). The GATES are the
+  seat's (a new pool on your tip).
+- THE MACHINE: the seat's pool and gates hold the gate mutex until `/var/tmp/v18/out/v33/h/g2/done.txt` shows END; every heavy run
+  of yours inside `sh scripts/gate-mutex.sh --run -- <command>`, `--maxWorkers=1`, GIT_* repository variables unset, through
+  `sh scripts/gate-tail.sh`, to a log, never through a pipe. ALL DATABASES LOCAL (PGHOST=/var/tmp/rv7, PGUSER=postgres); no
+  hosted database, no `supabase` command, no deploy. Never `--no-verify`; never push; never a pull request.
+
 PREPARED BY VEIL-33: this brief, the red-first instruments (tests only) on `lane/veil-33-2026-11-22-r5recent-wip`, and the lit
 witness on the probe branch. NOT ONE LINE of 212, the twin or the registry is written by the preparer.
 
