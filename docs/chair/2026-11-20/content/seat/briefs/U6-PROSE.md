@@ -80,3 +80,22 @@ Under the LIT law, 78 of 150 births seat the holder (`seat/holderOfSeat.js :: ho
 - your commit sha.
 
 Label each claim CONFIRMED (run) or PLAUSIBLE (read). Final message: at most 200 words, the sha first.
+
+## ADDENDUM (written 2026-11-22T09:19:34Z by SEAT-10, on the chair's E65 of 09:14Z): THE FINAL-RECORD PASS
+
+**(1) THE MANIFEST WIDENS** to `src/generators/generateSettlementPipeline.js`: ONE final-record pass beside `claimStanding.js :: settleArcaneToPractitioners`. It applies W1, W2 and W3 where the holder is known only on the final record (R2: the person's first power, cast after the power step). It binds on five conditions:
+- (a) **It draws NOTHING from the stream.** Keyed picks only, as built.
+  - The dark control: two trees, with the law's key absent, give 0 differences of any kind.
+  - The integrator runs confine-two; you run the in-tree differential.
+- (b) **Under the lit law,** on the 150 births of `u6probe`:
+  - how many of the 63 form↔holder rows now print W1 (name each that does not, and why);
+  - how many places print W2.
+- (c) **THE BAR:** the commonest W1 and the commonest W3 sentence by size, against about 15% of a size's places.
+- (d) **The pass is NAMED** wherever the pipeline's settle passes are listed or pinned. Name every stored fingerprint or census it moves, and say which of those rows are already red on RED-AT-LINE (`docs/chair/2026-11-20/seventh/ci/RED-AT-LINE.tsv` on `origin/lane/chair-2026-11-08`).
+- (e) **ONE ORDERING PROOF:** it runs after the people are cast and before anything that reads the relation rows it rewrites.
+
+**(2) W3 FOR A HOLDER OF ANY RANK,** in the same pass: one row a seat, the same gate (`!isVeiledRow`). "always at the table" stays for a rank-2 power that does NOT hold.
+
+**(3) FAULT (b) IS CLOSED: unreachable at birth, named, not cured** (600 lit births, 526 calls, 0 differ). Stop searching.
+- KEEP ONE SMALL GUARD: a test over a seeded sample (as many births as run in a few seconds) that the fold leaves `raiseToOfficeBand` unchanged, so it reds the day the fault becomes reachable.
+- Say its size.
