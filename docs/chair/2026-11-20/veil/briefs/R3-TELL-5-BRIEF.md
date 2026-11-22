@@ -23,6 +23,11 @@
   ruling 27's known reds or yours to cure.
 - THIS SITTING: unit 0 THEN unit (ii) (with its step 0), then END YOUR TURN per the PROGRESS format.
 - NOTHING IS PUSHED BY YOU and no pull request is opened by anyone (ruling 76).
+- ADDED 02:26 UTC 2026-11-22 (after unit (ii)): UNITS 0, 0b AND (ii) ARE MERGED (the lane at 15ea183c9; 212 `64453e56…b4b9`). A
+  FRESH builder takes UNIT (iii) from the lane's tip: worktree `/home/user/wt/r3tell5b`, branch `v31-r3tell5b`. Read, beside
+  the list below, your predecessor's hand-back `out/v31/tell5/TELL5-HANDBACK.md` WHOLE (its STOPS, its measures, its forms).
+  EVERY UNIT'S RECEIPTS ADD `node scripts/check-full-typecheck.mjs` (exit 0; GIT_* unset) and eslint on every touched file:
+  the pre-push ratchet refused unit (ii)'s merge for one TS error. THIS SITTING: unit (iii) alone, then END YOUR TURN.
 
 
 You are a BUILDER for the share veil's lane. You build; the seat reads your diff line by line, re-runs your red and green,
