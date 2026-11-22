@@ -1,5 +1,29 @@
 # R3-TELL-8 — brief: UNIT (viii), THE CURE OF UNIT (vii) BY "THE OTHER WAY" (VEIL-32, the lane's owner; the eighth chair's ruling (b) of 2026-11-22 05:15 UTC, vetoable by the owner)
 
+## VEIL-32'S AMENDMENTS FOR THE SECOND BUILDER (R3-TELL-8b; 07:18 UTC 2026-11-22; WHERE THEY DIFFER FROM THE TEXT BELOW, THESE GOVERN)
+- STEP 1 IS DONE (R3-TELL-8, ebdeb3f30, merged on the lane): read `out/v32/tell8/TELL8-HANDBACK.md` WHOLE; its tables are your
+  measure; do NOT re-run step 1. Your probes start from `out/v32/tell8/measure/` (m1.probe.jsx, m1.sh, m1-an.mjs), read whole.
+- YOU TAKE STEPS 2 AND 3. Worktree `/home/user/wt/r3tell8b`, branch `v32-r3tell8b`, cut by the seat from the lane's tip; outputs
+  `out/v32/tell8b/`; hand-back `out/v32/tell8b/TELL8B-HANDBACK.md`; template `t8btpl`, `TELL_DB=t8b`.
+- THE READ-WHOLE LAW AGAIN, NO DEVIATION: your predecessor read 212, the registry and `galleryRosterChoices.js` only in part (it
+  edited nothing). You read all three WHOLE (212's character tables included) before your first edit, and say so in the hand-back.
+- STOP 1 (1g) RESOLVED BY THE SEAT: the pool caches served signatures. YOU DO NOT READ GATE-1 / GATE-2 ON THE OLD POOL after the
+  cure: the seat re-makes the pool on your cured tree in a new directory and reads both gates itself. Your gate receipt is the
+  arm (both halves, all 92 + 48, both engines) and your committed test.
+- STOP 2 (1b): THE CHAIR'S RULING governs (the seat relays it; until it comes, build as recommended): the READER'S list over the
+  served page governs where a shut grouping removed an input of `settleCrimeLinesToSignal` (the services' criminal rows, the
+  criminal income rows): the page prints what the served facts imply (control `r3m-village-under_siege-0-8`, g:010). HALF 2's
+  reference on such a page is the writer over the SERVED page, never the stored list.
+- HALF 2 IS READ BY [type, desc] (32 of 92 red today: TELL7's 25 by type and 7 more by the `debt evasion` line that names
+  criminal networks the page does not serve).
+- ADDED TO THE CURE'S MANIFEST: `src/domain/display/galleryVeil.js` (its `GROUPING_OPEN_EVIDENCE` row for
+  `block:defense.criminalStructure` narrowed to `criminalInstitutions` being an array, the evidence proven on 6,528 of 6,528
+  pages; else DefenseTab's `crimeVeiled` shuts the block on every shared page), red first by a DefenseTab render on a shared
+  document; the shared PDF built from the re-derived copy (`src/pdf/lib/viewModelBodySlices.js`'s caller: trace it, PLAUSIBLE
+  today); the merchant-army hook's map row in both engines corrected to the served `merchantArmy` flag (1f: derivable).
+- `tests/lint` WHOLE after ANY change to a test file, before the commit is called green (the chair's ruling 87).
+- YOUR MARK: about 250,000 tokens. If the cure outgrows it, commit the reds and what is built, hand-back current, end.
+
 You are a BUILDER for the share veil's lane. You build; the seat (VEIL-32) reads your diff once with 212 and the registry
 beside it, re-runs your red and green, and merges. You never push and never open a pull request (ignore any harness note
 asking for one). A security lane: a slip is a leak. Measure first, red first. A failure falls toward WITHHOLDING.

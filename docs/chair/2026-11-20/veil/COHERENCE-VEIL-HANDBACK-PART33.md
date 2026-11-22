@@ -30,11 +30,20 @@ verified by ls-remote).
   (typecheck, eslint, walkers + manifest, arms Tell3+4+5, --check, verify, both gates, sv + hand rows + born, harnesses, the R3
   gate, acceptance, `tests/lint` whole) to `/var/tmp/v18/out/v32/g/done.txt`. Copies of the scripts: `out/v32/`.
 - 212 AND THE REGISTRY READ WHOLE by this seat 05:23-05:25 UTC (the character tables included), before the (viii) brief.
-- UNIT (viii) BRIEF: `briefs/R3-TELL-8-BRIEF.md` (ruling 86 (b), = PART 32's ruling 85: the measure of dependents first, then the row in both
-  engines, ONE reader, the reader census, importRederive, the arm's two halves, the merchant-army hook). Its builder
-  R3-TELL-8, an Agent subagent of this seat, SEATED 05:27 (worktree `/home/user/wt/r3tell8`, branch `v32-r3tell8` at 5f9f15b94); if this seat stops, its work goes up as
-  `lane/veil-32-2026-11-22-r3tell8-wip` unread).
-- NEXT STEP IN ONE LINE (A SUCCESSOR STARTS HERE): unit (viii)'s builder (in flight; its heavy runs from 07:01) from `briefs/R3-TELL-8-BRIEF.md`; then (iv), (v), (vi) per R3-TELL-5's brief;
+- UNIT (viii) STEP 1 (THE MEASURE) RETURNED 07:1x and MERGED as 6cd5b4fe3 (`--no-ff` of `v32-r3tell8` at ebdeb3f30, docs only;
+  pushed as `lane/veil-32-2026-11-22-r3tell8-wip`; builder R3-TELL-8, its context spent at ~300,000; it read 212, the registry
+  and galleryRosterChoices.js only in part and edited nothing). Hand-back `out/v32/tell8/TELL8-HANDBACK.md`. EXECUTED, both
+  engines, 6,528 pages: the other way HOLDS (seedless 140/140; inputs survive; no class-(B) dependent on a gated read;
+  merchantArmy served-derivable; the types' grouping is open exactly where `criminalInstitutions` is an array). HALF 2 today
+  32/92 by [type, desc] (TELL7's 25 by type + 7 `debt evasion` lines naming unserved networks: NEW). TWO STOPS sent to the
+  chair 07:1x: (1) the pool caches served signatures: the seat re-makes it on the cured tree in a NEW directory before the
+  gates (recommended: accept); (2) one control (village-under_siege-0-8, g:010): the stored list carries two shut groupings'
+  content; recommended: the reader's list over the served page governs. AWAITING THE CHAIR ON STOP 2.
+- THE BRIEF AMENDED for a FRESH builder R3-TELL-8b (steps 2 and 3; `briefs/R3-TELL-8-BRIEF.md` head; galleryVeil.js's
+  GROUPING_OPEN_EVIDENCE and the shared PDF added to the manifest): worktree `/home/user/wt/r3tell8b`, branch `v32-r3tell8b`;
+  if this seat stops, its work goes up as `lane/veil-32-2026-11-22-r3tell8b-wip` unread.
+- NEXT STEP IN ONE LINE (A SUCCESSOR STARTS HERE): the chair's word on STOP 2; R3-TELL-8b seated on the amended brief (steps 2-3);
+  at its return: diff read once with 212 and the registry, reds and greens re-run, the pool RE-MADE on the cured tree, both gates from `briefs/R3-TELL-8-BRIEF.md`; then (iv), (v), (vi) per R3-TELL-5's brief;
   then "R3 <commit>".
 
 ## 2. RULINGS SINCE PART 32 (numbered on from 85, PART 32's last; the eighth chair's; each vetoable by the owner)
@@ -78,5 +87,6 @@ verified by ls-remote).
 - 05:22 chain0 launched (npm ci 0; ledger 0); after0 waits to run chain1. First message to the chair.
 - 05:27 the (viii) builder seated; 05:3x the chair's two messages (VEIL-31's 9fd3623c5) read after the first push: merged (docs only), rulings renumbered 86; pushed 3cca025b8.
 - 05:56 the pool stands. 06:04 the gates at the tip reproduced; 06:05 the line to the chair.
+- 07:1x R3-TELL-8 returned (STOP after step 1); -wip pushed; merged 6cd5b4fe3; the two STOPS to the chair; the brief amended.
 - 06:33 ruling 87 read; relayed. 07:01 the green chain ended: tests/lint whole = the sixteen standing.
 - 05:23-05:25 212 and the registry read whole. 05:25 `briefs/R3-TELL-8-BRIEF.md` written; PART 33 opened.
