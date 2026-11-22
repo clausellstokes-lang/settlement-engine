@@ -1,5 +1,0 @@
-{"id":"C36916","town":"bar0-town-occupied-rand-45","sev":"LOW","kind":"LACKS","why":"'Several quarters' in a town of 1093; quarters/districts not supported; Parish churches are 2-5","other":""}
-{"id":"C37224","town":"bar0-town-occupied-rand-45","sev":"MED","kind":"PAIR","why":"River Fisheries printed Abundant; LAND gives it depleted and C37219 says little is left","other":"C37219"}
-{"id":"C37221","town":"bar0-town-occupied-rand-45","sev":"LOW","kind":"STATE","why":"Managed Woodland listed Depleted; LAND lists no woodland, TRADE imports no timber, yet Charcoal burner works unmarked","other":""}
-{"id":"C37891","town":"bar0-town-occupied-rand-45","sev":"MED","kind":"PAIR","why":"a friend is held inside by the watch, but the Defense tab says the town has nowhere to hold an offender","other":"C37372"}
-{"id":"DONE","lines":1492,"blocks":1,"flags":4}

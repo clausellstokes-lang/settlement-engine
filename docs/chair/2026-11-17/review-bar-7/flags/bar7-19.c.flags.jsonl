@@ -1,7 +1,0 @@
-{"id":"C39513","town":"bar0-town-occupied-rand-47","sev":"MED","kind":"STATE","why":"Charcoal burner at work, Charcoal supply offered unmarked; LAND has no woodland and TRADE imports no timber or wood","other":""}
-{"id":"C39519","town":"bar0-town-occupied-rand-47","sev":"LOW","kind":"STATE","why":"fish come in by cart; TRADE imports no fish and LAND has no fishery in this hill town","other":""}
-{"id":"C39565","town":"bar0-town-occupied-rand-47","sev":"LOW","kind":"BROKEN","why":"'told by Deception': capitalised skill key in prose","other":""}
-{"id":"C39616","town":"bar0-town-occupied-rand-47","sev":"MED","kind":"PAIR","why":"'The court sits and the gaol holds'; HOUSES has no court and the page says no court sits here","other":"C39245"}
-{"id":"C40154","town":"bar0-town-occupied-rand-47","sev":"MED","kind":"STATE","why":"calm-times 'heard, written down, expect a hearing' under occupation curfew; no court on HOUSES, page says no court sits","other":"C39245"}
-{"id":"C40806","town":"bar0-town-occupied-rand-47","sev":"MED","kind":"PAIR","why":"'nothing new goes up' while the brickmaker's card says she knows every new wall going up","other":"C40294"}
-{"id":"DONE","lines":1730,"blocks":1,"flags":6}

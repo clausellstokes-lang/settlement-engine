@@ -1,6 +1,0 @@
-{"id":"C39280","town":"bar0-town-occupied-rand-47","sev":"LOW","kind":"PAIR","why":"hook says occupier has local collaborators; crisis line says collaborates: no one is named, no local power gains","other":"C39262"}
-{"id":"C39616","town":"bar0-town-occupied-rand-47","sev":"MED","kind":"PAIR","why":"says the court sits; HOUSES has no court and the page elsewhere says no court sits here","other":"C39245"}
-{"id":"C39998","town":"bar0-town-occupied-rand-47","sev":"MED","kind":"STATE","why":"Managed Woodland listed (Depleted) as a nearby resource; LAND has no managed woodland at all","other":""}
-{"id":"C40000","town":"bar0-town-occupied-rand-47","sev":"MED","kind":"PAIR","why":"Coal or Peat and Open Grazing Land read as Abundant; LAND and C39996 give both as depleted","other":"C39996"}
-{"id":"C40154","town":"bar0-town-occupied-rand-47","sev":"MED","kind":"PAIR","why":"says offenders are heard and expect a hearing; Defense tab says legal infrastructure is detention without process, arbitrary enforcement","other":"C40198"}
-{"id":"DONE","lines":1730,"blocks":1,"flags":5}

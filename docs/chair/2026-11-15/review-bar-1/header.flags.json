@@ -1,9 +1,0 @@
-[
-{
-"packet": "bar-05",
-"reader": "b",
-"town": "bar0-thorp-calm-rand-2",
-"sev": "LOW",
-"why": "TRADE says glass and flour made here, but HOUSES has no glassblower or mill and LAND gaps say glass sand is not processed"
-}
-]

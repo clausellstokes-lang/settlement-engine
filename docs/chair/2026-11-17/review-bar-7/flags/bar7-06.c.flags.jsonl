@@ -1,7 +1,0 @@
-{"id":"C13012","town":"bar0-city-wartime-rand-47","sev":"LOW","kind":"STATE","why":"Fresh fish retail, morning's catch; LAND gives River Fisheries depleted and TRADE imports only salted fish","other":""}
-{"id":"C13716","town":"bar0-city-wartime-rand-47","sev":"LOW","kind":"PAIR","why":"says copper ore comes from elsewhere; TRADE imports no copper and the page itself says copper is not brought in","other":"C13723"}
-{"id":"C13721","town":"bar0-city-wartime-rand-47","sev":"LOW","kind":"BROKEN","why":"imports list prints 'Precious metal veins' (a ground name); TRADE imports 'Precious metals'","other":""}
-{"id":"C13730","town":"bar0-city-wartime-rand-47","sev":"LOW","kind":"STATE","why":"'less than a fifth' for divine provision; FOOD gives magic 1%, a loose degree","other":""}
-{"id":"C14226","town":"bar0-city-wartime-rand-47","sev":"MED","kind":"PAIR","why":"Martial Alliance card given the War Council's description (crown-appointed emergency body over requisition and conscription); two powers, one text","other":"C14088"}
-{"id":"C14434","town":"bar0-city-wartime-rand-47","sev":"LOW","kind":"PAIR","why":"secret has the dean of Parish churches suppressing a finding about 'their product'; the card's own house sells no product","other":"C14424"}
-{"id":"DONE","lines":3538,"blocks":1,"flags":6}

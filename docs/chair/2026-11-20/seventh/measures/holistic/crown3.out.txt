@@ -1,5 +1,0 @@
-  not the crown's own by a rough read: Tikalhuitz city ["Occupation Authority"] ["occupied","occupied"]
-large places 150; royal seats 12 {"city":6,"metropolis":6}; monarch belongs to one power only: 1; rough count with no occupier, governor or war beside the crown: 11
-  1 Royal Authority 1
-  5 Royal Authority 0.6 + Noble Families 0.4
-  6 Royal Authority 0.6 + Noble Houses 0.4

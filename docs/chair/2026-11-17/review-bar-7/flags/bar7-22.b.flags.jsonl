@@ -1,3 +1,0 @@
-{"id":"C44903","town":"bar0-village-famine-rand-47","sev":"LOW","kind":"STATE","why":"Warm oven-smell reaching you first is an ordinary-times scene in a famine village with 0.1 months of stores; no famine qualifier, unlike the thin-smell variant.","other":"C44901"}
-{"id":"C45081","town":"bar0-village-famine-rand-47","sev":"LOW","kind":"PAIR","why":"Output 5/100 disagrees with the food ledger: grown 37% (59 of 160 lbs/day), the figure printed beside it.","other":"C45104"}
-{"id":"DONE","lines":1192,"blocks":2,"flags":2}

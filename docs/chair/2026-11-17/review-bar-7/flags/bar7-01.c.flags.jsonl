@@ -1,8 +1,0 @@
-{"id":"C0423","town":"bar0-city-under_siege+famine-rand-45","sev":"MED","kind":"STATE","why":"Fresh produce offered with no mark under siege and famine (grown 7%, deficit 93%) while street food on the same row is stopped","other":""}
-{"id":"C0453","town":"bar0-city-under_siege+famine-rand-45","sev":"MED","kind":"STATE","why":"District trading at market squares printed unmarked under the siege, which stops trade by road, gate and water","other":""}
-{"id":"C0893","town":"bar0-city-under_siege+famine-rand-45","sev":"MED","kind":"STATE","why":"says iron ore is not brought in; LAND gaps record Smelter runs on imported iron ore, and its card is only curtailed by siege","other":""}
-{"id":"C0902","town":"bar0-city-under_siege+famine-rand-45","sev":"MED","kind":"STATE","why":"calm-times line (meals follow the season, what households put by) in a famine with 93% deficit and 0.1 months' stores","other":""}
-{"id":"C0860","town":"bar0-city-under_siege+famine-rand-45","sev":"LOW","kind":"STATE","why":"Market Taxes row unmarked under the siege while Port Duties is marked stopped and market street food stopped","other":""}
-{"id":"C0882","town":"bar0-city-under_siege+famine-rand-45","sev":"LOW","kind":"PAIR","why":"Timber Trade revenue row unmarked under siege; C1074 says the siege stops timber going out","other":"C1074"}
-{"id":"C0907","town":"bar0-city-under_siege+famine-rand-45","sev":"LOW","kind":"BROKEN","why":"Entrepôt (5) but only three entrepôt flows are listed (Spices & Dyes, Silk, Harbour Dues)","other":""}
-{"id":"DONE","lines":2371,"blocks":1,"flags":7}

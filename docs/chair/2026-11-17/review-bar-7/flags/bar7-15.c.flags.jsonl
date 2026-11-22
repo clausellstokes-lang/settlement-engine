@@ -1,6 +1,0 @@
-{"id":"C33490","town":"bar0-town-calm-rand-46","sev":"LOW","kind":"BROKEN","why":"slot filled with the subject's full name again: 'as Muirenn Kelly's own' instead of 'her own'","other":""}
-{"id":"C34102","town":"bar0-town-calm-rand-46","sev":"MED","kind":"PAIR","why":"says clay must come from elsewhere and sometimes comes; Potter is a failed venture: no clay near and none brought in","other":"C33701"}
-{"id":"C34109","town":"bar0-town-calm-rand-46","sev":"MED","kind":"PAIR","why":"livestock for meat 'not brought in' and terrain cannot produce it, yet Butchers sell beef, pork, mutton with no short mark","other":"C33960"}
-{"id":"C34395","town":"bar0-town-calm-rand-46","sev":"MED","kind":"PAIR","why":"offenders 'heard' and expect a hearing; page says no court sits here to try anyone, and justice is purchasable","other":"C33476"}
-{"id":"C34585","town":"bar0-town-calm-rand-46","sev":"LOW","kind":"PAIR","why":"secret has her sell fresh fish on ice; the desert town's fish market sells only carted barrels of salt fish","other":"C33779"}
-{"id":"DONE","lines":1814,"blocks":1,"flags":5}
