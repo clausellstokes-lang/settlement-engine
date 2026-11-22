@@ -61,8 +61,18 @@ the seating). UNTIL THE HAND-OVER THIS SEAT WRITES NOTHING IN 212, ITS TWIN OR T
   `lane/veil-34-2026-11-22-r5dsql-wip`, brief `briefs/R5D-SQL-BRIEF.md` (final, 2566872c5). R5D-PAGE (`briefs/R5D-PAGE-BRIEF.md`) waits on
   its commit, which is read whole first. BY THE CHAIR'S ORDER: if this seat's record is past 640,000 when R5D-SQL returns, this seat
   pushes the branch by its name and says "HANDS OVER"; VEIL-36 reads the diff whole and dispatches R5D-PAGE.
-- NEXT STEP IN ONE LINE (FOR VEIL-36 if this seat has handed over): R5D-SQL's diff read whole with 212 and the registry beside it, then
-  R5D-PAGE, then the gates on a new pool, then "TIP? R5-DESC <commit>" with (vi) riding; also answer the chair on the (H) gap's cure.
+- R5D-SQL STOPPED BEFORE ITS FIRST EDIT (the brief's own STOP): it judged that 212 whole (about 121k tokens by its Read tool), the
+  registry (about 20k) and factionStanding.js at both trees (about 10k) left no room for the edits IN A 200k WINDOW. Nothing was edited,
+  committed or pushed. Its worktree `/home/user/wt/r5dsql` is clean at af708f2fd, and 212 is unchanged (ff20ed89…). ITS PREMISE IS
+  DOUBTFUL: R5C5-SQL read 212 and the registry whole and built in one sitting (E98), so a seat's builder window is not 200k: PLAUSIBLE.
+  TWO WAYS for the next writer (the chair rules): (1) re-dispatch a FRESH R5D-SQL with one line added, "your window is the seat's
+  tier's; R5C5-SQL read 212 whole and built; budget about 350,000"; (2) the builder's own split, offered: one builder for 212 and the
+  registry, a second for the twin's two files, with the STANDING_FORMS literal drafted first. A by-symbol read of 212 is NOT advised
+  (it breaks the READ-WHOLE law).
+- THIS SEAT HANDS OVER at the commit carrying this line (the chair's order: past 640,000 by its read at R5D-SQL's return).
+- NEXT STEP IN ONE LINE (FOR VEIL-36): the chair's word on R5D-SQL's way (1) or (2); then R5D-SQL, its diff read whole with 212 and the
+  registry beside it; then R5D-PAGE; then a new pool and both gates; then "TIP? R5-DESC <commit>" with (vi) riding. Also: the (H) gap's
+  cure (the differential extended to the owner-hidden plant (b) and act T: one commit on the tip, the chair's word).
 
 ## 2. THE DIGEST OF PARTS 30 AND 32 (the chair's question of 18:02 UTC; written by VEIL-34 from its whole reads of both at 16:12-16:14). A SUCCESSOR READS THIS IN PLACE OF PART 30 s1 AND PART 32 s2, opening either only where a line sends it. One line per ruling: what still binds, and where. "SUPERSEDED" names what replaced it. Rulings 86-103 are NOT digested: read PART 33 s2 and PART 34 s2 themselves (short). PART 30 s4 (the pool's recipe), s5 (the owner's paragraph) and s8 (the list after R3) stay to be read where needed.
 - 1 The seat integrates, builders build (committed brief, own worktree; the seat reads each diff whole, re-runs red and green). ONE builder on 212 at a time.
