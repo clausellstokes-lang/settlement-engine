@@ -37,3 +37,21 @@ is from this lane's own measures (`measures/bands/BANDS-BOTH.md`, `measures/last
   the chair measured is the flip's, not LASTING's.
 - U8 (crisis powers lost lit) is NOT LASTING's: it is the size-relative standing's (law 2 as landed at point 98). It is
   diagnosed beside this landing.
+
+## 4. AMENDED FOR FORTUNE-C (the chair's E112, 2026-11-22 18:19 UTC)
+- `tests/generators/people/dualHatPoliticalMass.test.js` > "a small place keeps the power the fold of the office's face
+  into the leader's house cut": the DARK arm is unchanged and green dark. Lit, three of its eight seeds stop meeting the
+  premise (the density law's rival roll reads the size-relative standing: `measures/u8/DIAGNOSIS.md`). Those three are
+  rvf-slave_revolt-thorp-5 (Revolt Leadership), rvf-wartime-thorp-2 (War Council) and rvw-thorp-86 (The Highborn Circle).
+  This is class (a), a premise move. If the dark arm is ever run lit (at the flip), those three are EXPECTED red. The LIT
+  ARM (FORTUNE-C) carries the premise-meeting seeds rvf-slave_revolt-thorp-53, rvf-wartime-thorp-52 and rvw-thorp-148.
+- `tests/generators/defenceParts.test.js` > "the martial will (R13, R14) > R13: where something is built or standing, the
+  will counts no more than the armed bodies that carry it": EXPECTED RED LIT, class (a), A LISTED ROW. On
+  v3build-village-3 lit, the will is 6.86 (printed 6.9) against the bound 6.8 (armed 5.1 + 0.1 x 17 parts). The X4 floor
+  is 5.8 and does not explain it. The bound is points-only, while the will is a score-by-score sum; the overshoot is one
+  rounding unit (0.1). Dark, the birth sits exactly on the bound. The defence lane re-cuts the bound score by score after
+  the first deploy.
+- THE CRISIS WITH NO BODY (not the flip's, an OLD fault; E112). On 900 births, 509 dark and 511 lit places state a crisis
+  with no power of it on the roster: the law changes WHICH places, not how often. 35 dark and 35 lit print a sentence
+  naming the absent power: "The creditor's agent has blocked the money for repairs." in an indebted place with no
+  creditor power (u8-indebted-thorp-0, u8-indebted-village-0, u8-indebted-town-0; `measures/u8/crisis-printed.mjs`).
