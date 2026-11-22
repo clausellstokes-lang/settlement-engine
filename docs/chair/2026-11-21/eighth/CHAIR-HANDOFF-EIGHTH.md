@@ -803,11 +803,11 @@ owner's words, and in section 5 the entries "21:36 UTC · THE CLOSE's WORKLIST" 
   held). A GAP IT NAMES: `guardLineUnderTheLaw.js` still reads `payCut`; HK1's comment is stale. THE CHAIR'S READ OF
   THE WALKER'S DIFF: E35: one cure ordered (tests and words), then a new "PAGE-TROUBLE <commit>". IT LANDS AS POINT
   96, stacked with points 94 and 95 if the Daily Life page's builder has reported by then.
-- 2026-11-22 05:53 UTC · THE DAILY LIFE PAGE'S BUILDER REPORTED (05:5x) AND ITS DIFF IS READ: E36. The lane stands at 3947e3e6b and is being
+- 2026-11-22 05:53 UTC · THE DAILY LIFE PAGE'S BUILDER REPORTED (some minutes before this entry) AND ITS DIFF IS READ: E36. The lane stands at 3947e3e6b and is being
   pushed. THE NEXT STACK: point 94 (already merged in the line's worktree), point 95 (the Daily Life page) and, if
   its re-worded commit comes within minutes, point 96 (the trouble lane): ONE gate. If it does not come, 94 and 95 go
   alone and the trouble lane is stacked with "SEAT" and "FORTUNE".
-- 2026-11-22 05:58 UTC · THE STACK OF POINTS 94, 95 AND 96 IS LAUNCHED (one helper, 05:59; scratch `landing/stack-96/`; the stack stands on
+- 2026-11-22 05:58 UTC · THE STACK OF POINTS 94, 95 AND 96 IS LAUNCHED (one helper, at this entry's hour; scratch `landing/stack-96/`; the stack stands on
   f5295e425). 94: the state-sentence cures, already merged in the line's worktree (66c46de37, with 718aaddbd and
   9373b190d). 95: the Daily Life page, `lane/daily-page-1-2026-11-22` at 3947e3e6b (on origin 05:56; its push's hook
   green: 167, 1113, eslint 0 errors). 96: THE TROUBLE LANE, `lane/page-12-2026-11-21` at ab9804585: PAGE-12's cure of
