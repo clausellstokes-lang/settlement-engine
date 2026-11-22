@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "5383c309f4476597fc4f881b22a1c31cd2d31c65",
-  "measuredBy": "LASTCLOSE-DOORS",
-  "date": "2026-11-19",
-  "note": "LASTCLOSE-DOORS (2026-11-19, the last close), at the base cc11c9504's landings: the dependents moved, no tuning value: src/domain/people/allegiance.js#ALLEGIANCE_TUNING gains src/generators/power/factionStanding.js (K-POWERS, points 48/49/57, ed176ed08)",
+  "measuredAtSha": "4af89997c60d01ff7f2b76d7f35934f92350cec3",
+  "measuredBy": "FRAME-9",
+  "date": "2026-11-22",
+  "note": "SR1: dependents moved, no value; and src/domain/tension/sideArchetypes.js#FRAME_TUNING (FRAME-1, a DRAFT row of the register, unsigned) measured into the inventory with its values as they stand (ruling 67: the three tuning rows by this door)",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -867,7 +867,7 @@
       "exported": true,
       "idiom": "mixed",
       "keys": 2,
-      "line": 51,
+      "line": 52,
       "spanDigest": "6b3d0a1b34604e0b09ffa63b1642dffa44a7552fa114d2ca602253156c8db98e",
       "leaves": {
         "rates.exploiter": {
@@ -898,6 +898,7 @@
         "src/domain/crisis/crisisPage.js",
         "src/domain/dossier/plotHooks.js",
         "src/domain/summary/tonightSheet.js",
+        "src/domain/tension/troubleCast.js",
         "src/generators/steps/resolveCrisisCast.js"
       ],
       "namedDependents": [
@@ -1291,7 +1292,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 385,
+      "line": 400,
       "spanDigest": "861a71e24fdda07cea9d8f740fbe51ca1685d27dfd0a9f822f579ea609747fe2",
       "leaves": {
         "value": 0.15
@@ -1306,7 +1307,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 616,
+      "line": 631,
       "spanDigest": "d8c363dde6af24802c24ec308fde1963fd20f88ef9f80765dbeb6bd7c6899e55",
       "leaves": {
         "value": 3
@@ -1321,7 +1322,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 618,
+      "line": 633,
       "spanDigest": "61090f7451b7f2aadae1709fa76edc9f360ae61664c9f8fd48b677a1e8ecfa07",
       "leaves": {
         "value": 0.35
@@ -1336,7 +1337,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 620,
+      "line": 635,
       "spanDigest": "0b8b01d51be797cd0143574956002d9faabb6345790cafa0a91e78f63118f528",
       "leaves": {
         "value": 0.08
@@ -1351,7 +1352,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 622,
+      "line": 637,
       "spanDigest": "013116d8a083862271257454b6e161900d075e0a05df61a52dfd7e61938389e3",
       "leaves": {
         "value": 0.15
@@ -2576,7 +2577,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 1,
-      "line": 193,
+      "line": 199,
       "spanDigest": "00c0e1f99fc53d650cd628cdac047d1e9e3d7d94218abe8ed2eed18c7a49b8ea",
       "leaves": {
         "value": 18
@@ -2595,9 +2596,66 @@
         "src/domain/summary/settlementQuickGuide.js",
         "src/foundry/journalPages.js",
         "src/pdf/SettlementPDF.jsx",
+        "src/pdf/sections/CrisisSections.jsx",
         "src/pdf/sections/TonightAtTheTable.jsx"
       ],
       "namedDependents": []
+    },
+    "src/domain/tension/sideArchetypes.js#FRAME_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 5,
+      "line": 313,
+      "spanDigest": "cf6e927397dee51f911514d7eee7dbf1e8c6552db8e8c74bc29c91c75f79b049",
+      "leaves": {
+        "rates.authority.office": 0.5,
+        "rates.authority.tie": 0.8,
+        "rates.authority.trade": 0.5,
+        "rates.establishment.office": 0.4,
+        "rates.establishment.trade": 0.6,
+        "rates.establishment.tie": 0.8,
+        "rates.challenger.tie": 0.7,
+        "rates.challenger.trade": 0.5,
+        "rates.challenger.office": 0.5,
+        "rates.reformer.tie": 0.6,
+        "rates.reformer.trade": 0.5,
+        "rates.reformer.office": 0.4,
+        "rates.payer.tie": 0.8,
+        "rates.payer.trade": 0.7,
+        "rates.blamed.tie": 0.7,
+        "rates.blamed.trade": 0.6,
+        "rates.profiteer.criminal": 0.4,
+        "rates.profiteer.tie": 0.7,
+        "rates.profiteer.trade": 0.6,
+        "rates.profiteer.office": 0.5,
+        "rates.creditor.outsider": 0.6,
+        "rates.creditor.criminal": 0.5,
+        "rates.creditor.tie": 0.8,
+        "rates.enforcer.office": 0.4,
+        "rates.enforcer.tie": 0.7,
+        "rates.enforcer.trade": 0.5,
+        "rates.faithful.office": 0.4,
+        "rates.faithful.trade": 0.6,
+        "rates.faithful.tie": 0.7,
+        "rates.outsider.outsider": 0.7,
+        "rates.outsider.criminal": 0.4,
+        "rates.outsider.tie": 0.7,
+        "rates.criminal.criminal": 1,
+        "rates.criminal.outsider": 1,
+        "rates.middle.tie": 0.6,
+        "rates.middle.trade": 0.6,
+        "criminalMinPower": 5,
+        "officeSidesMax": 1,
+        "seatSidesMax": 1,
+        "hookCount": 3
+      },
+      "dependents": [
+        "src/domain/crisis/crisisPage.js",
+        "src/domain/tension/troubleCast.js"
+      ],
+      "namedDependents": [
+        "src/domain/tension/troubleCast.js"
+      ]
     },
     "src/domain/townCartography/cartographyTuning.js#TOWN_CARTOGRAPHY_TUNING": {
       "exported": true,
@@ -8569,7 +8627,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 3,
-      "line": 69,
+      "line": 70,
       "spanDigest": "9ce244b1dbb17502d5534d5ea33f9f9bafe8cec4c191d4f934be6e6673dbba1e",
       "leaves": {
         "base.RANK": 1,
@@ -8607,7 +8665,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 5,
-      "line": 94,
+      "line": 95,
       "spanDigest": "9959eec349933f6bf2320b936780466dfea07d1f4bedbbed8da671fd806ce7ab",
       "leaves": {
         "strengthFull": 30,
@@ -9284,8 +9342,8 @@
   },
   "unclosed": [],
   "totals": {
-    "tables": 280,
-    "keys": 2293,
+    "tables": 281,
+    "keys": 2298,
     "unregisteredNamed": 541,
     "bareDecimals": 6877,
     "zeroDependentTables": 10,
